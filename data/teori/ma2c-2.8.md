@@ -82,7 +82,7 @@ $$
 9x = 16 - 8x + x^2
 $$
 
-Vi modifierar ekvationen och löser den sedan med pq-formeln:
+Vi modifierar ekvationen och löser den sedan med *pq*-formeln:
 
 $$
 x^2 - 17x + 16 = 0
@@ -132,7 +132,7 @@ $$
 t^2 + 3t - 4 = 0
 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$
 t = -1{,}5 \pm \sqrt{1{,}5^2 + 4} = -1{,}5 \pm \sqrt{6{,}25} = -1{,}5 \pm 2{,}5

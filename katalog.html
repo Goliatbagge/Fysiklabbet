@@ -283,7 +283,9 @@
                     stack.push(type.toLowerCase());
                     out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
                     if (title) {
-                        out.push('<div class="lab-block-title">' + escapeHtml(title) + '</div>');
+                        // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
+                        const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                        out.push('<div class="lab-block-title">' + t + '</div>');
                     }
                     out.push('');
                 } else if (close && stack.length > 0) {
@@ -343,7 +345,22 @@
             return code ? code + '-' + num : null;
         }
 
+        // Kursiverade variabler i titlar/beskrivningar: '*pq*-formeln' →
+        // ['', <em>pq</em>, '-formeln']. Variabler i sammansättningar (pq-
+        // formeln, x-axeln, k-värde) skrivs '*pq*-formeln' i katalog.js och
+        // md-frontmatter; den här helpern renderar asteriskerna som <em>.
+        function emTitle(s) {
+            if (!s || s.indexOf('*') === -1) return s;
+            return s.split(/\*([^*]+)\*/g).map((part, i) =>
+                i % 2 ? <em key={i}>{part}</em> : part);
+        }
+        // Ren textform (för title-/aria-attribut och sökindex).
+        function plainTitle(s) {
+            return s ? s.replace(/\*/g, '') : s;
+        }
+
         const normalize = (text) => text.toLowerCase()
+            .replace(/\*/g, '')
             .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
             .replace(/é/g, 'e').replace(/è/g, 'e');
 
@@ -508,9 +525,9 @@
                                         <span className="lab-search-result-kind">
                                             {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
                                         </span>
-                                        {sim.title}
+                                        {emTitle(sim.title)}
                                     </div>
-                                    <div className="lab-search-result-desc">{sim.description}</div>
+                                    <div className="lab-search-result-desc">{emTitle(sim.description)}</div>
                                 </div>
                                 <div className="lab-search-result-meta">
                                     {sim.course.toUpperCase()}<br />{sim.num}
@@ -542,7 +559,7 @@
                         <p className="lab-course-intro-tagline">{intro.tagline}</p>
                     )}
                     {intro?.paragraphs?.map((p, i) => (
-                        <p key={i} className="lab-course-intro-text">{p}</p>
+                        <p key={i} className="lab-course-intro-text">{emTitle(p)}</p>
                     ))}
                     {intro?.bullets?.length > 0 && (
                         <ul className="lab-course-intro-bullets">
@@ -1046,7 +1063,7 @@
                 <div className={'lab-pres' + (chrome ? ' chrome-on' : '')
                         + (step === 0 ? ' at-title' : '') + (ready ? ' is-ready' : '')}
                     ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
-                    role="dialog" aria-label={'Presentationsläge: ' + title}>
+                    role="dialog" aria-label={'Presentationsläge: ' + plainTitle(title)}>
                     <div className="lab-pres-progress" aria-hidden="true">
                         <div style={{ width: (total > 0 ? (step / total) * 100 : 0) + '%' }} />
                     </div>
@@ -1055,7 +1072,7 @@
                             <span className="lab-mono-label">
                                 {(course || '').toUpperCase()} · KAPITEL {chapterNumber} — {(chapter || '').toUpperCase()} · AVSNITT {num}
                             </span>
-                            <h1>{title}</h1>
+                            <h1>{emTitle(title)}</h1>
                             <span className="lab-pres-rule" aria-hidden="true" />
                             <div className="lab-pres-hint">
                                 Klicka — eller tryck <kbd>→</kbd> — för nästa stycke · <kbd>Esc</kbd> avslutar
@@ -1725,7 +1742,7 @@
                                                 className={'lab-section-item' + (section === s.num ? ' active' : '')}
                                                 onClick={() => setState({ ...state, section: s.num, view: 'teori' })}>
                                                 <span className="lab-section-item-num">{s.num}</span>
-                                                <span className="lab-section-item-title">{s.title}</span>
+                                                <span className="lab-section-item-title">{emTitle(s.title)}</span>
                                                 <span className="lab-section-item-arrow">
                                                     {section === s.num ? '●' : '→'}
                                                 </span>
@@ -1747,7 +1764,7 @@
                                                 </div>
                                                 <h2 className="lab-section-title">
                                                     <span className="lab-section-title-num">{activeSection.num}</span>
-                                                    {activeSection.title}
+                                                    {emTitle(activeSection.title)}
                                                 </h2>
 
                                                 <div className="lab-section-cards">
@@ -1916,7 +1933,7 @@
                                                 <h2 className="lab-section-title">{chapter}</h2>
                                                 {subjectData.courses[course]?.chapters[chapter]?.intro && (
                                                     <p className="lab-chapter-intro-text">
-                                                        {subjectData.courses[course].chapters[chapter].intro}
+                                                        {emTitle(subjectData.courses[course].chapters[chapter].intro)}
                                                     </p>
                                                 )}
                                                 <p className="lab-chapter-intro-hint">

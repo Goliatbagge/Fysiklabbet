@@ -21,8 +21,8 @@ Studera nedanstående vektor $\overrightarrow{AB}$:
 Kom ihåg: Sträckan av vektorn $\overrightarrow{AB}$ skrivs
 $|\overrightarrow{AB}|$ och utläses "absolutbeloppet av AB".
 
-Om varje ruta motsvarar 1 l.e. gäller att kateten i x-led är 8 l.e. och
-att kateten i y-led är 4 l.e. Så sträckan $|\overrightarrow{AB}|$
+Om varje ruta motsvarar 1 l.e. gäller att kateten i *x*-led är 8 l.e. och
+att kateten i *y*-led är 4 l.e. Så sträckan $|\overrightarrow{AB}|$
 beräknas med Pythagoras sats enligt
 
 $$

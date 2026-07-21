@@ -20660,7 +20660,7 @@ Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, me
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Vad kallas skärningspunkten mellan x-axeln och y-axeln?`,
+            question: `Vad kallas skärningspunkten mellan *x*-axeln och *y*-axeln?`,
             choices: [
                 `Origo`,
                 `Koordinat`,
@@ -20682,7 +20682,7 @@ Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, me
                 `Fjärde`,
             ],
             correct: 1,
-            solution: `x-koordinaten är negativ och y-koordinaten positiv — punkten ligger uppe till vänster. Kvadranterna numreras moturs från övre högra hörnet: första (+, +), **andra (−, +)**, tredje (−, −), fjärde (+, −).
+            solution: `*x*-koordinaten är negativ och *y*-koordinaten positiv — punkten ligger uppe till vänster. Kvadranterna numreras moturs från övre högra hörnet: första (+, +), **andra (−, +)**, tredje (−, −), fjärde (+, −).
 
 **Svar:** Andra kvadranten`,
         },
@@ -20719,7 +20719,7 @@ $$ y = 30 + 5x $$
         },
         {
             level: 2,
-            question: `Gör en värdetabell för $y = 200 + 150x$. Vilket y-värde hör till $x = 6$?`,
+            question: `Gör en värdetabell för $y = 200 + 150x$. Vilket *y*-värde hör till $x = 6$?`,
             answer: { value: 1100, unit: '' },
             solution: `Sätt in $x = 6$ i formeln:
 
@@ -20846,7 +20846,7 @@ $$ y = 20 + 10 \\cdot 8 = 100\\ \\mathrm{kr} $$
 
 — inte 120 kr. Amandas dubbling skulle även dubbla startavgiften, men den betalas bara en gång.
 
-Kontrollera kvoterna: $\\frac{60}{4} = 15$ kr/km men $\\frac{100}{8} = 12{,}5$ kr/km — kvoten $\\frac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär y-axeln i 20, inte i origo.
+Kontrollera kvoterna: $\\frac{60}{4} = 15$ kr/km men $\\frac{100}{8} = 12{,}5$ kr/km — kvoten $\\frac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär *y*-axeln i 20, inte i origo.
 
 **Svar:** 100 kr
 
@@ -20858,7 +20858,7 @@ Kontrollera kvoterna: $\\frac{60}{4} = 15$ kr/km men $\\frac{100}{8} = 12{,}5$ k
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Du ska rita grafen till $y = -2x + 3$ och gör en värdetabell. Vilket y-värde hör till $x = -2$?`,
+            question: `Du ska rita grafen till $y = -2x + 3$ och gör en värdetabell. Vilket *y*-värde hör till $x = -2$?`,
             answer: { value: 7, unit: '' },
             solution: `Sätt in $x = -2$ (tänk på teckenreglerna):
 
@@ -20878,7 +20878,7 @@ Raden ger koordinaten (−2, 7).
                 `$(-4, -5)$`,
             ],
             correct: 0,
-            solution: `Varje rad i värdetabellen är en koordinat med x-värdet först och y-värdet sist: (4, −5).
+            solution: `Varje rad i värdetabellen är en koordinat med *x*-värdet först och *y*-värdet sist: (4, −5).
 
 **Svar:** $(4, -5)$`,
         },
@@ -20901,15 +20901,15 @@ Raden ger koordinaten (−2, 7).
             level: 2,
             question: `Du ska rita grafen till $y = 3x - 4$ för $x$ från −2 till 2. Vilka intervall måste axlarna minst täcka?`,
             choices: [
-                `x-axeln −2 till 2 och y-axeln −10 till 2`,
-                `x-axeln −2 till 2 och y-axeln −4 till 4`,
-                `x-axeln 0 till 2 och y-axeln 0 till 2`,
-                `x-axeln −10 till 10 och y-axeln −10 till 10`,
+                `*x*-axeln −2 till 2 och *y*-axeln −10 till 2`,
+                `*x*-axeln −2 till 2 och *y*-axeln −4 till 4`,
+                `*x*-axeln 0 till 2 och *y*-axeln 0 till 2`,
+                `*x*-axeln −10 till 10 och *y*-axeln −10 till 10`,
             ],
             correct: 0,
             solution: `Beräkna ändpunkterna: $x = -2$ ger $y = 3 \\cdot (-2) - 4 = -10$ och $x = 2$ ger $y = 3 \\cdot 2 - 4 = 2$. Axlarna måste täcka minsta och största värdena: x från −2 till 2, y från −10 till 2.
 
-**Svar:** x-axeln −2 till 2 och y-axeln −10 till 2.`,
+**Svar:** *x*-axeln −2 till 2 och *y*-axeln −10 till 2.`,
         },
         {
             level: 2,
@@ -20954,19 +20954,19 @@ Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och pa
             level: 1,
             question: `Vad motsvarar $m$-värdet i räta linjens ekvation $y = kx + m$?`,
             choices: [
-                `Linjens skärning med y-axeln`,
+                `Linjens skärning med *y*-axeln`,
                 `Linjens lutning`,
-                `Linjens skärning med x-axeln`,
+                `Linjens skärning med *x*-axeln`,
                 `Linjens längd`,
             ],
             correct: 0,
-            solution: `$m$-värdet är linjens skärning med y-axeln (y-intercept) — i linjära modeller "startvärdet". Lutningen är $k$-värdet.
+            solution: `$m$-värdet är linjens skärning med *y*-axeln (*y*-intercept) — i linjära modeller "startvärdet". Lutningen är $k$-värdet.
 
-**Svar:** Linjens skärning med y-axeln.`,
+**Svar:** Linjens skärning med *y*-axeln.`,
         },
         {
             level: 1,
-            question: `En linje har lutningen 4 och skär y-axeln i (0, −2). Vilken är linjens ekvation?`,
+            question: `En linje har lutningen 4 och skär *y*-axeln i (0, −2). Vilken är linjens ekvation?`,
             choices: [
                 `$y = 4x - 2$`,
                 `$y = -2x + 4$`,
@@ -21007,9 +21007,9 @@ Linjen lutar nedåt — negativt $k$-värde.
         },
         {
             level: 2,
-            question: `En rät linje har ekvationen $y = kx + m$. Linjen går genom (0, 7) och har lutningen $-\\dfrac{1}{2}$. Vilket y-värde har linjen vid $x = 8$?`,
+            question: `En rät linje har ekvationen $y = kx + m$. Linjen går genom (0, 7) och har lutningen $-\\dfrac{1}{2}$. Vilket *y*-värde har linjen vid $x = 8$?`,
             answer: { value: 3, unit: '' },
-            solution: `Skärningen med y-axeln ger $m = 7$, och $k = -\\frac{1}{2}$:
+            solution: `Skärningen med *y*-axeln ger $m = 7$, och $k = -\\frac{1}{2}$:
 
 $$ y = -\\frac{1}{2}x + 7 $$
 
@@ -21030,7 +21030,7 @@ $$ y = -\\frac{1}{2} \\cdot 8 + 7 = -4 + 7 = 3 $$
                 `$y = 2x + 1$`,
             ],
             correct: 0,
-            solution: `**Insikten:** när ingen av punkterna ligger på y-axeln fås $m$ inte direkt ur grafen — det måste räknas fram ur $k$ och en känd punkt.
+            solution: `**Insikten:** när ingen av punkterna ligger på *y*-axeln fås $m$ inte direkt ur grafen — det måste räknas fram ur $k$ och en känd punkt.
 
 **Steg 1 — bestäm $k$** med trappstegsmetoden:
 
@@ -21072,7 +21072,7 @@ $$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{14 - 2}{5 - 1} = \\frac{12}{4} = 3 
 
 $$ k = 5 $$
 
-(−7 är $m$-värdet, skärningen med y-axeln.)
+(−7 är $m$-värdet, skärningen med *y*-axeln.)
 
 **Svar:** $k = 5$`,
         },
@@ -21086,7 +21086,7 @@ $$ k = 5 $$
                 `$k = (y_2 - y_1)(x_2 - x_1)$`,
             ],
             correct: 0,
-            solution: `Riktningskoefficienten är förändringen i y-led delat med förändringen i x-led:
+            solution: `Riktningskoefficienten är förändringen i *y*-led delat med förändringen i *x*-led:
 
 $$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1} $$
 
@@ -21170,7 +21170,7 @@ Kontroll med andra punkten: $y = -3 \\cdot 4 + 3 = -9$ — stämmer!
         },
         {
             level: 1,
-            question: `Vilken ekvation beskriver en vertikal (lodrät) linje som ligger vid 5 i x-led?`,
+            question: `Vilken ekvation beskriver en vertikal (lodrät) linje som ligger vid 5 i *x*-led?`,
             choices: [
                 `$x = 5$`,
                 `$y = 5$`,
@@ -21178,7 +21178,7 @@ Kontroll med andra punkten: $y = -3 \\cdot 4 + 3 = -9$ — stämmer!
                 `$x = 5y$`,
             ],
             correct: 0,
-            solution: `Vertikala linjer kan inte skrivas i k-form — de beskrivs av sitt läge i x-led:
+            solution: `Vertikala linjer kan inte skrivas i k-form — de beskrivs av sitt läge i *x*-led:
 
 $$ x = 5 $$
 
@@ -21342,17 +21342,17 @@ $$ f(5) - f(3) = 21 - 13 = 8 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Sambandet $x = y^2$ ritas upp som en liggande parabel. Ali säger: "Det är en funktion, för varje y-värde ger exakt ett x-värde." Vad är rätt om vi som vanligt betraktar $y$ som funktion av $x$?`,
+            question: `Sambandet $x = y^2$ ritas upp som en liggande parabel. Ali säger: "Det är en funktion, för varje *y*-värde ger exakt ett *x*-värde." Vad är rätt om vi som vanligt betraktar $y$ som funktion av $x$?`,
             choices: [
-                `Ingen funktion — t.ex. ger $x = 4$ två y-värden (2 och −2), så penntestet misslyckas`,
+                `Ingen funktion — t.ex. ger $x = 4$ två *y*-värden (2 och −2), så penntestet misslyckas`,
                 `En funktion — Alis motivering håller`,
                 `En funktion — parabler är alltid funktioner`,
                 `Ingen funktion — parabeln går inte genom origo`,
             ],
             correct: 0,
-            solution: `**Insikten:** funktionsbegreppet har en riktning — det är X-värdena som ska ge entydiga y-värden, inte tvärtom.
+            solution: `**Insikten:** funktionsbegreppet har en riktning — det är X-värdena som ska ge entydiga *y*-värden, inte tvärtom.
 
-Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet x-värde ger EXAKT ETT y-värde. Men $x = 4$ ger $y^2 = 4$, dvs. både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
+Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet *x*-värde ger EXAKT ETT *y*-värde. Men $x = 4$ ger $y^2 = 4$, dvs. både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
 
 Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en funktion av $y$. Men det är en annan fråga än den vanliga.
 
@@ -21368,21 +21368,21 @@ Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en fu
             level: 1,
             question: `Vid grafisk lösning av ekvationen $2x - 1 = x + 4$ ritas två linjer. Vad ger lösningen?`,
             choices: [
-                `Skärningspunktens x-koordinat`,
-                `Skärningspunktens y-koordinat`,
-                `Linjernas k-värden`,
+                `Skärningspunktens *x*-koordinat`,
+                `Skärningspunktens *y*-koordinat`,
+                `Linjernas *k*-värden`,
                 `Avståndet mellan linjerna`,
             ],
             correct: 0,
-            solution: `Rita $y = 2x - 1$ och $y = x + 4$; där graferna skär varandra är VL = HL. Lösningen är skärningspunktens **x-koordinat** (här $x = 5$; y-koordinaten 9 är bara ledens gemensamma värde).
+            solution: `Rita $y = 2x - 1$ och $y = x + 4$; där graferna skär varandra är VL = HL. Lösningen är skärningspunktens ***x*-koordinat** (här $x = 5$; *y*-koordinaten 9 är bara ledens gemensamma värde).
 
-**Svar:** Skärningspunktens x-koordinat`,
+**Svar:** Skärningspunktens *x*-koordinat`,
         },
         {
             level: 1,
             question: `Graferna till $y = 3x - 5$ och $y = -x + 3$ skär varandra i punkten (2, 1). Vilken är lösningen till ekvationen $3x - 5 = -x + 3$?`,
             answer: { value: 2, unit: '' },
-            solution: `Lösningen är skärningspunktens x-koordinat:
+            solution: `Lösningen är skärningspunktens *x*-koordinat:
 
 $$ x = 2 $$
 
@@ -21417,7 +21417,7 @@ Kontroll: $3 \\cdot 2 - 5 = 1$ och $-2 + 3 = 1$ — båda led lika.
             correct: 0,
             solution: `I grafiska lösningar förstår GeoGebra bara variablerna $x$ och $y$. Ekvationerna skrivs därför om: $t \\to x$ och $s \\to y$.
 
-(Lösningen blir sedan skärningspunktens x-koordinat: $90x - 30 = 60x + 45$ ger $x = 2{,}5$.)
+(Lösningen blir sedan skärningspunktens *x*-koordinat: $90x - 30 = 60x + 45$ ger $x = 2{,}5$.)
 
 **Svar:** Byta variablerna till x och y.`,
         },
@@ -21444,7 +21444,7 @@ $$ x < 3 $$
             level: 3,
             question: `Tim löser $4x - 2 = x + 7$ grafiskt och läser av skärningspunkten till (3, 10). Som svar skriver han "$x = 10$". Läraren ger honom fel. Vad blandade Tim ihop, och vad är rätt svar?`,
             choices: [
-                `Han svarade med y-koordinaten; lösningen är x-koordinaten, $x = 3$`,
+                `Han svarade med *y*-koordinaten; lösningen är *x*-koordinaten, $x = 3$`,
                 `Han läste av fel punkt; lösningen är $x = 10$`,
                 `Grafisk lösning fungerar inte på denna ekvation`,
                 `Båda koordinaterna är lösningar`,
@@ -21452,13 +21452,13 @@ $$ x < 3 $$
             correct: 0,
             solution: `**Insikten:** skärningspunkten innehåller TVÅ tal med olika betydelse — bara det ena är ekvationens lösning.
 
-x-koordinaten 3 är det värde på $x$ som gör VL = HL. y-koordinaten 10 är ledens gemensamma VÄRDE i den punkten: $4 \\cdot 3 - 2 = 10$ och $3 + 7 = 10$.
+*x*-koordinaten 3 är det värde på $x$ som gör VL = HL. *y*-koordinaten 10 är ledens gemensamma VÄRDE i den punkten: $4 \\cdot 3 - 2 = 10$ och $3 + 7 = 10$.
 
 Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. Tims "$x = 10$" ger $4 \\cdot 10 - 2 = 38 \\neq 17$ — fel.
 
-**Svar:** Tim svarade med y-koordinaten. Rätt svar är $x = 3$.
+**Svar:** Tim svarade med *y*-koordinaten. Rätt svar är $x = 3$.
 
-**Generell slutsats:** vid grafisk lösning är frågan alltid "för vilket $x$?" — läs av vågrätt läge (x-koordinaten), aldrig höjden.`,
+**Generell slutsats:** vid grafisk lösning är frågan alltid "för vilket $x$?" — läs av vågrätt läge (*x*-koordinaten), aldrig höjden.`,
         },
     ],
 
@@ -21474,7 +21474,7 @@ Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. 
                 `Intervall`,
             ],
             correct: 0,
-            solution: `Möjliga x-värden bildar **definitionsmängden**; möjliga y-värden bildar **värdemängden**.
+            solution: `Möjliga *x*-värden bildar **definitionsmängden**; möjliga *y*-värden bildar **värdemängden**.
 
 **Svar:** Definitionsmängd`,
         },
@@ -21502,7 +21502,7 @@ Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. 
                 `$0 < x < 20$`,
             ],
             correct: 0,
-            solution: `Definitionsmängden är de tillåtna x-värdena (antalet timmar): minst 0 och högst 8:
+            solution: `Definitionsmängden är de tillåtna *x*-värdena (antalet timmar): minst 0 och högst 8:
 
 $$ 0 \\leq x \\leq 8 $$
 
@@ -21521,7 +21521,7 @@ $$ 0 \\leq x \\leq 8 $$
                 `$y \\geq 0$`,
             ],
             correct: 0,
-            solution: `Minsta y-värdet fås vid $x = 0$: $y = 50 \\cdot 0 = 0$. Största vid $x = 12$: $y = 50 \\cdot 12 = 600$:
+            solution: `Minsta *y*-värdet fås vid $x = 0$: $y = 50 \\cdot 0 = 0$. Största vid $x = 12$: $y = 50 \\cdot 12 = 600$:
 
 $$ 0 \\leq y \\leq 600 $$
 
@@ -21668,7 +21668,7 @@ Kontroll: $4 \\cdot 2{,}5^2 = 4 \\cdot 6{,}25 = 25$ — stämmer! ($4 \\cdot 1{,
 
 **Svar:** $y = 4 \\cdot 2{,}5^x$
 
-**Generell slutsats:** samma teststrategi som i genomgången — skärningen med y-axeln ger $C$, en till punkt ger $a$ via en enkel potensekvation.`,
+**Generell slutsats:** samma teststrategi som i genomgången — skärningen med *y*-axeln ger $C$, en till punkt ger $a$ via en enkel potensekvation.`,
         },
     ],
 
@@ -22857,7 +22857,7 @@ $$ c = \\sqrt{100} = 10 $$
             level: 2,
             question: `Beräkna längden av sträckan mellan punkterna (1, 2) och (7, 10).`,
             answer: { value: 10, unit: 'l.e.' },
-            solution: `Katetrarna är skillnaderna i x- och y-led:
+            solution: `Katetrarna är skillnaderna i *x*- och *y*-led:
 
 $$ \\Delta x = 7 - 1 = 6 \\qquad \\Delta y = 10 - 2 = 8 $$
 
@@ -22869,7 +22869,7 @@ $$ c^2 = 6^2 + 8^2 = 100 \\qquad c = 10 $$
         },
         {
             level: 2,
-            question: `En sträcka dras från (0, 0) till (5, 3). Vilken vinkel bildar sträckan med x-axeln? Svara i grader, avrundat till heltal.`,
+            question: `En sträcka dras från (0, 0) till (5, 3). Vilken vinkel bildar sträckan med *x*-axeln? Svara i grader, avrundat till heltal.`,
             answer: { value: 31, unit: '°', tol: 0.02 },
             solution: `Motstående katet är 3 (höjden) och närliggande katet 5 (basen):
 
@@ -22886,7 +22886,7 @@ $$ v = \\tan^{-1}(0{,}6) = 30{,}96\\ldots° \\approx 31° $$
             answer: { value: 37, unit: '°', tol: 0.02 },
             solution: `**Insikten:** rita (eller skissa) triangeln — hörnkoordinaterna avslöjar katetrarna direkt.
 
-A och B har samma y-koordinat → AB är vågrät med längden $5 - (-3) = 8$. B och C har samma x-koordinat → BC är lodrät med längden $7 - 1 = 6$. Räta vinkeln ligger vid B.
+A och B har samma *y*-koordinat → AB är vågrät med längden $5 - (-3) = 8$. B och C har samma *x*-koordinat → BC är lodrät med längden $7 - 1 = 6$. Räta vinkeln ligger vid B.
 
 Vinkeln vid A har BC = 6 som motstående katet och AB = 8 som närliggande:
 
@@ -22896,7 +22896,7 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
 
 **Svar:** cirka 37°
 
-**Generell slutsats:** i koordinatsystem är katetrarna alltid skillnaderna i x- och y-led — samma 3-4-5-mönster (här skalat till 6-8-10) dyker upp överallt.`,
+**Generell slutsats:** i koordinatsystem är katetrarna alltid skillnaderna i *x*- och *y*-led — samma 3-4-5-mönster (här skalat till 6-8-10) dyker upp överallt.`,
         },
     ],
 
@@ -22994,7 +22994,7 @@ $\\vec{d}$: lutning $\\frac{2}{4} = \\frac{1}{2} \\neq \\frac{1}{4}$ — INTE pa
 
 **Svar:** $\\vec{a}$, $\\vec{b}$ och $\\vec{c}$ är parallella, men inte $\\vec{d}$.
 
-**Generell slutsats:** parallella vektorer är multiplar av varandra ($\\vec{c} = 2\\vec{a}$, $\\vec{b} = -1 \\cdot \\vec{a}$) — samma test som k-värdet för räta linjer.`,
+**Generell slutsats:** parallella vektorer är multiplar av varandra ($\\vec{c} = 2\\vec{a}$, $\\vec{b} = -1 \\cdot \\vec{a}$) — samma test som *k*-värdet för räta linjer.`,
         },
     ],
 
@@ -23226,7 +23226,7 @@ $$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
         },
         {
             level: 1,
-            question: `Vektorn $\\overrightarrow{AB}$ går 8 rutor i x-led och 4 rutor i y-led. Hur skrivs den i koordinatform?`,
+            question: `Vektorn $\\overrightarrow{AB}$ går 8 rutor i *x*-led och 4 rutor i *y*-led. Hur skrivs den i koordinatform?`,
             choices: [
                 `$\\overrightarrow{AB} = (8,\\ 4)$`,
                 `$\\overrightarrow{AB} = (4,\\ 8)$`,
@@ -23234,7 +23234,7 @@ $$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
                 `$\\overrightarrow{AB} = 8 + 4$`,
             ],
             correct: 0,
-            solution: `Koordinatformen anger förflyttningen i x-led först och y-led sist: $(8,\\ 4)$.
+            solution: `Koordinatformen anger förflyttningen i *x*-led först och *y*-led sist: $(8,\\ 4)$.
 
 ($\\sqrt{80}$ är vektorns LÄNGD, inte dess koordinatform.)
 
@@ -24292,7 +24292,7 @@ Den största är 4.
             level: 1,
             question: `Ekvationen $x^2 + 2x - 8 = 0$ har två lösningar. Ange den **största**.`,
             answer: { value: 2, unit: '' },
-            solution: `Identifiera $p = 2$ och $q = -8$. pq-formeln ger
+            solution: `Identifiera $p = 2$ och $q = -8$. *pq*-formeln ger
 
 $$ x = -1 \\pm \\sqrt{1^2 + 8} = -1 \\pm \\sqrt{9} = -1 \\pm 3 $$
 
@@ -24322,7 +24322,7 @@ $$ p = -6 \\qquad q = 8 $$
             level: 1,
             question: `Ekvationen $x^2 - 2x - 15 = 0$ har två lösningar. Ange den **största**.`,
             answer: { value: 5, unit: '' },
-            solution: `pq-formeln med $p = -2$ och $q = -15$:
+            solution: `*pq*-formeln med $p = -2$ och $q = -15$:
 
 $$ x = 1 \\pm \\sqrt{1^2 + 15} = 1 \\pm \\sqrt{16} = 1 \\pm 4 $$
 
@@ -24335,11 +24335,11 @@ $$ x_1 = -3 \\qquad x_2 = 5 $$
             level: 2,
             question: `Ekvationen $3x^2 - 15x + 18 = 0$ har två lösningar. Ange den **minsta**.`,
             answer: { value: 2, unit: '' },
-            solution: `pq-formeln kräver att koefficienten framför $x^2$-termen är 1 — dividera först båda led med 3:
+            solution: `*pq*-formeln kräver att koefficienten framför $x^2$-termen är 1 — dividera först båda led med 3:
 
 $$ x^2 - 5x + 6 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = \\frac{5}{2} \\pm \\sqrt{\\frac{25}{4} - 6} = \\frac{5}{2} \\pm \\sqrt{\\frac{1}{4}} = \\frac{5}{2} \\pm \\frac{1}{2} $$
 
@@ -24355,7 +24355,7 @@ $$ x_1 = 2 \\qquad x_2 = 3 $$
 
 $$ x^2 - 5x - 24 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = 2{,}5 \\pm \\sqrt{2{,}5^2 + 24} = 2{,}5 \\pm \\sqrt{30{,}25} = 2{,}5 \\pm 5{,}5 $$
 
@@ -24376,7 +24376,7 @@ $$ 2^2 + 2p + 12 = 0 $$
 
 $$ 4 + 2p + 12 = 0 \\iff 2p = -16 \\iff p = -8 $$
 
-Ekvationen är alltså $x^2 - 8x + 12 = 0$. pq-formeln ger
+Ekvationen är alltså $x^2 - 8x + 12 = 0$. *pq*-formeln ger
 
 $$ x = 4 \\pm \\sqrt{16 - 12} = 4 \\pm 2 $$
 
@@ -24414,7 +24414,7 @@ $$ a = 3, \\quad b = -5, \\quad c = 2 $$
         },
         {
             level: 1,
-            question: `Lös ekvationen $2x^2 - 6x + 4 = 0$ med abc-formeln och ange den **största** lösningen.`,
+            question: `Lös ekvationen $2x^2 - 6x + 4 = 0$ med *abc*-formeln och ange den **största** lösningen.`,
             answer: { value: 2, unit: '' },
             solution: `Med $a = 2$, $b = -6$ och $c = 4$:
 
@@ -24428,7 +24428,7 @@ $$ x_1 = 1 \\qquad x_2 = 2 $$
         },
         {
             level: 1,
-            question: `Vilken är fördelen med abc-formeln jämfört med pq-formeln?`,
+            question: `Vilken är fördelen med *abc*-formeln jämfört med *pq*-formeln?`,
             choices: [
                 `Koefficienten framför $x^2$-termen behöver inte divideras bort först`,
                 `Den ger fler lösningar`,
@@ -24436,7 +24436,7 @@ $$ x_1 = 1 \\qquad x_2 = 2 $$
                 `Den kräver ingen kvadratrot`,
             ],
             correct: 0,
-            solution: `abc-formeln är gjord för den allmänna formen $ax^2 + bx + c = 0$ — koefficienten $a$ ingår i formeln, så ingen division behövs innan. pq-formeln kräver att ekvationen först skrivs om till $x^2 + px + q = 0$.
+            solution: `*abc*-formeln är gjord för den allmänna formen $ax^2 + bx + c = 0$ — koefficienten $a$ ingår i formeln, så ingen division behövs innan. *pq*-formeln kräver att ekvationen först skrivs om till $x^2 + px + q = 0$.
 
 Båda formlerna ger samma lösningar och båda kräver att ena ledet är 0.
 
@@ -24445,7 +24445,7 @@ Båda formlerna ger samma lösningar och båda kräver att ena ledet är 0.
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Lös ekvationen $3x^2 + 5x - 2 = 0$ med abc-formeln och ange den **minsta** lösningen.`,
+            question: `Lös ekvationen $3x^2 + 5x - 2 = 0$ med *abc*-formeln och ange den **minsta** lösningen.`,
             answer: { value: -2, unit: '' },
             solution: `Med $a = 3$, $b = 5$ och $c = -2$:
 
@@ -24463,7 +24463,7 @@ $$ x_1 = \\frac{-5 - 7}{6} = -2 \\qquad x_2 = \\frac{-5 + 7}{6} = \\frac{1}{3} $
 
 $$ 5x^2 - 2x - 3 = 0 $$
 
-abc-formeln med $a = 5$, $b = -2$, $c = -3$:
+*abc*-formeln med $a = 5$, $b = -2$, $c = -3$:
 
 $$ x = \\frac{2}{10} \\pm \\frac{\\sqrt{4 + 60}}{10} = 0{,}2 \\pm \\frac{8}{10} = 0{,}2 \\pm 0{,}8 $$
 
@@ -24476,7 +24476,7 @@ $$ x_1 = -0{,}6 \\qquad x_2 = 1 $$
             level: 3,
             question: `För vilka värden på $c$ saknar ekvationen $2x^2 + 4x + c = 0$ lösningar? Ange det **minsta heltal** $c$ som gör att lösningar saknas.`,
             answer: { value: 3, unit: '' },
-            solution: `Nyckelinsikten: i abc-formeln avgör uttrycket under rottecknet, $b^2 - 4ac$, om lösningar finns. Lösningar saknas när det är **negativt**:
+            solution: `Nyckelinsikten: i *abc*-formeln avgör uttrycket under rottecknet, $b^2 - 4ac$, om lösningar finns. Lösningar saknas när det är **negativt**:
 
 $$ b^2 - 4ac < 0 $$
 
@@ -24504,7 +24504,7 @@ Ekvationen saknar alltså lösningar för alla $c > 2$. Det minsta heltalet stö
             level: 1,
             question: `Hur många lösningar har ekvationen $x^2 + 6x + 10 = 0$?`,
             answer: { value: 0, unit: '' },
-            solution: `pq-formeln ger
+            solution: `*pq*-formeln ger
 
 $$ x = -3 \\pm \\sqrt{3^2 - 10} = -3 \\pm \\sqrt{-1} $$
 
@@ -24516,7 +24516,7 @@ Diskriminanten är **negativ** (−1) — roten ur ett negativt tal saknar (reel
             level: 1,
             question: `Hur många lösningar har ekvationen $x^2 - 4x - 5 = 0$?`,
             answer: { value: 2, unit: '' },
-            solution: `pq-formeln ger
+            solution: `*pq*-formeln ger
 
 $$ x = 2 \\pm \\sqrt{2^2 + 5} = 2 \\pm \\sqrt{9} $$
 
@@ -24534,7 +24534,7 @@ Diskriminanten är **positiv** (9), så ekvationen har två lösningar ($x = -1$
                 `Ekvationen har lösningen $x = 0$`,
             ],
             correct: 0,
-            solution: `Med diskriminanten 0 blir pq-formeln $x = -\\frac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
+            solution: `Med diskriminanten 0 blir *pq*-formeln $x = -\\frac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
 
 Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-\\frac{p}{2}$.
 
@@ -24545,7 +24545,7 @@ Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-
             level: 2,
             question: `Hur många lösningar har ekvationen $2x^2 + 4x + 2 = 0$?`,
             answer: { value: 1, unit: '' },
-            solution: `Dividera båda led med 2 för att kunna använda pq-formeln:
+            solution: `Dividera båda led med 2 för att kunna använda *pq*-formeln:
 
 $$ x^2 + 2x + 1 = 0 $$
 
@@ -24559,7 +24559,7 @@ Diskriminanten är **noll** — ekvationen har exakt en lösning ($x = -1$, en d
             level: 2,
             question: `För vilket värde på $a$ har ekvationen $x^2 - 10x + a = 0$ en dubbelrot?`,
             answer: { value: 25, unit: '' },
-            solution: `pq-formeln ger
+            solution: `*pq*-formeln ger
 
 $$ x = 5 \\pm \\sqrt{5^2 - a} $$
 
@@ -24578,7 +24578,7 @@ $$ 25 - a = 0 \\iff a = 25 $$
             answer: { value: 8, unit: '' },
             solution: `Nyckelinsikten: "två lösningar" är ett villkor på diskriminantens **tecken**, inte ett enskilt värde — det ger en olikhet.
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = -3 \\pm \\sqrt{3^2 - q} = -3 \\pm \\sqrt{9 - q} $$
 
@@ -24610,7 +24610,7 @@ $$ x(x + 1) = 72 $$
 
 $$ x^2 + x - 72 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = -0{,}5 \\pm \\sqrt{0{,}25 + 72} = -0{,}5 \\pm 8{,}5 $$
 
@@ -24630,7 +24630,7 @@ $$ h(h + 5) = 84 $$
 
 $$ h^2 + 5h - 84 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ h = -2{,}5 \\pm \\sqrt{6{,}25 + 84} = -2{,}5 \\pm 9{,}5 $$
 
@@ -24676,7 +24676,7 @@ Substituera $y = x + 5$:
 
 $$ x(x + 5) = 84 \\iff x^2 + 5x - 84 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = -2{,}5 \\pm \\sqrt{6{,}25 + 84} = -2{,}5 \\pm 9{,}5 $$
 
@@ -24725,7 +24725,7 @@ $$ x(23 - x) = 120 $$
 
 $$ 23x - x^2 = 120 \\iff x^2 - 23x + 120 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = 11{,}5 \\pm \\sqrt{132{,}25 - 120} = 11{,}5 \\pm 3{,}5 $$
 
@@ -24780,7 +24780,7 @@ Kontroll: $\\sqrt{39 - 3} = \\sqrt{36} = 6$. Stämmer!
                 `Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen`,
                 `Rotekvationer saknar alltid lösningar`,
                 `Räknaren avrundar alltid fel vid rotdragning`,
-                `pq-formeln fungerar inte för rotekvationer`,
+                `*pq*-formeln fungerar inte för rotekvationer`,
             ],
             correct: 0,
             solution: `När båda led kvadreras kan extra rötter uppstå: ur $A = B$ följer $A^2 = B^2$, men $A^2 = B^2$ har även lösningen $A = -B$ — en falsk rot som inte uppfyller den ursprungliga ekvationen. Därför måste varje lösning sättas in i den ursprungliga ekvationen och kontrolleras.
@@ -24816,7 +24816,7 @@ Kontroll $x = 4$: $\\mathrm{VL} = \\sqrt{9} = 3$, $\\mathrm{HL} = 3$. Stämmer!
 
 $$ t^2 - t - 6 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ t = 0{,}5 \\pm \\sqrt{0{,}25 + 6} = 0{,}5 \\pm 2{,}5 $$
 
@@ -24843,7 +24843,7 @@ $$ x + 7 = 25 - 10x + x^2 $$
 
 $$ x^2 - 11x + 18 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = 5{,}5 \\pm \\sqrt{30{,}25 - 18} = 5{,}5 \\pm 3{,}5 $$
 
@@ -24917,7 +24917,7 @@ $$ x_s = \\frac{-2 + 6}{2} = \\frac{4}{2} = 2 $$
                 `Grafen har en maximipunkt, och funktionen har därmed ett största värde`,
                 `Grafen har en minimipunkt, eftersom konstanttermen är negativ`,
                 `Grafen saknar symmetrilinje`,
-                `Grafen har alltid två nollställen eftersom det finns en x-term`,
+                `Grafen har alltid två nollställen eftersom det finns en *x*-term`,
             ],
             correct: 0,
             solution: `Karaktären avgörs av tecknet framför $x^2$-termen: $-2x^2$ är negativ, vilket ger "sur mun" — en maximipunkt och därmed ett största värde.
@@ -24987,7 +24987,7 @@ $$ x_s = \\frac{2 + 4}{2} = 3 $$
             correct: 0,
             solution: `Extrempunkten ligger på symmetrilinjen. Symmetrilinjen ger extrempunktens $x$-koordinat, och funktionsuttryckets värde där ger $y$-koordinaten: $y = f(x_s)$.
 
-Konstanttermen är grafens skärning med y-axeln, medelvärdet av nollställena ger $x_s$ (inte $y$) och $f(x) = 0$ ger nollställena.
+Konstanttermen är grafens skärning med *y*-axeln, medelvärdet av nollställena ger $x_s$ (inte $y$) och $f(x) = 0$ ger nollställena.
 
 **Svar:** Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket.`,
         },
@@ -24996,7 +24996,7 @@ Konstanttermen är grafens skärning med y-axeln, medelvärdet av nollställena 
             level: 2,
             question: `Bestäm det **minsta värdet** av funktionen $f(x) = x^2 - 4x + 1$.`,
             answer: { value: -3, unit: '' },
-            solution: `Nollställena ur $x^2 - 4x + 1 = 0$ ger via pq-formeln $x = 2 \\pm \\sqrt{3}$ — symmetrilinjen är "talet framför rottecknet":
+            solution: `Nollställena ur $x^2 - 4x + 1 = 0$ ger via *pq*-formeln $x = 2 \\pm \\sqrt{3}$ — symmetrilinjen är "talet framför rottecknet":
 
 $$ x_s = 2 $$
 
@@ -25012,7 +25012,7 @@ $$ f(2) = 2^2 - 4 \\cdot 2 + 1 = 4 - 8 + 1 = -3 $$
             level: 2,
             question: `Funktionen $f(x) = x^2 + 8x + 20$ saknar nollställen. Bestäm ändå symmetrilinjens $x$-koordinat.`,
             answer: { value: -4, unit: '' },
-            solution: `Påbörja en lösning av $x^2 + 8x + 20 = 0$ med pq-formeln:
+            solution: `Påbörja en lösning av $x^2 + 8x + 20 = 0$ med *pq*-formeln:
 
 $$ x = -4 \\pm \\sqrt{16 - 20} = -4 \\pm \\sqrt{-4} $$
 
@@ -25167,15 +25167,15 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
             level: 1,
             question: `Ekvationen VL = HL ska lösas grafiskt. Man ritar $y = \\mathrm{VL}$ och $y = \\mathrm{HL}$. Var hittar man lösningarna?`,
             choices: [
-                `I skärningspunkternas x-koordinater`,
-                `I skärningspunkternas y-koordinater`,
-                `Där graferna skär y-axeln`,
+                `I skärningspunkternas *x*-koordinater`,
+                `I skärningspunkternas *y*-koordinater`,
+                `Där graferna skär *y*-axeln`,
                 `I grafernas extrempunkter`,
             ],
             correct: 0,
             solution: `I en skärningspunkt har båda leden samma värde — likheten är uppfylld. Lösningen är det $x$-värde där det sker, alltså skärningens $x$-koordinat.
 
-**Svar:** I skärningspunkternas x-koordinater.`,
+**Svar:** I skärningspunkternas *x*-koordinater.`,
         },
         {
             level: 1,
@@ -25195,7 +25195,7 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
                 `$(1, 3)$ och $(4, 6)$`,
             ],
             correct: 0,
-            solution: `Lösningarna är skärningarnas **x-koordinater**: $x_1 = 1$ och $x_2 = 4$. ($y$-koordinaterna 3 och 6 är ledens värden i skärningarna — inte lösningarna. En ekvation i en variabel har tal som lösningar, inte punkter.)
+            solution: `Lösningarna är skärningarnas ***x*-koordinater**: $x_1 = 1$ och $x_2 = 4$. ($y$-koordinaterna 3 och 6 är ledens värden i skärningarna — inte lösningarna. En ekvation i en variabel har tal som lösningar, inte punkter.)
 
 **Svar:** $x_1 = 1$ och $x_2 = 4$`,
         },
@@ -25241,7 +25241,7 @@ Den positiva gränsen är $x = 3$.
             correct: 0,
             solution: `Nyckelinsikten: lös först ekvationen $x^2 + 2x - 8 = 0$ för att hitta gränserna, och avgör sedan med parabelns form **var** olikheten gäller.
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ x = -1 \\pm \\sqrt{1 + 8} = -1 \\pm 3 $$
 
@@ -25297,7 +25297,7 @@ Grafiskt: verktyget *Extrempunkt* i Geogebra.
                 `Punkt på objekt`,
             ],
             correct: 0,
-            solution: `Största (eller minsta) värdet ligger i grafens extrempunkt — verktyget *Extrempunkt* markerar den och visar koordinaterna. *Nollställen* ger skärningar med x-axeln och *Skärning mellan två objekt* används när två grafer jämförs.
+            solution: `Största (eller minsta) värdet ligger i grafens extrempunkt — verktyget *Extrempunkt* markerar den och visar koordinaterna. *Nollställen* ger skärningar med *x*-axeln och *Skärning mellan två objekt* används när två grafer jämförs.
 
 **Svar:** Extrempunkt`,
         },
@@ -25314,7 +25314,7 @@ Dividera med −5 och ordna:
 
 $$ t^2 - 6t + 5 = 0 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$ t = 3 \\pm \\sqrt{9 - 5} = 3 \\pm 2 $$
 
@@ -33615,7 +33615,7 @@ $$
                 `$\\sin v$`,
             ],
             correct: 0,
-            solution: `Att lägga till $180^\\circ$ är ett halvt varv i enhetscirkeln — punkten hamnar rakt mitt emot och båda koordinaterna byter tecken. Cosinus (x-koordinaten) byter alltså tecken.
+            solution: `Att lägga till $180^\\circ$ är ett halvt varv i enhetscirkeln — punkten hamnar rakt mitt emot och båda koordinaterna byter tecken. Cosinus (*x*-koordinaten) byter alltså tecken.
 
 $$
 \\cos(v + 180^\\circ) = -\\cos v
@@ -34068,7 +34068,7 @@ $$
 1 - 2\\sin^2 x + \\sin x = 0 \\;\\Leftrightarrow\\; 2\\sin^2 x - \\sin x - 1 = 0
 $$
 
-Substituera $\\sin x = t$ och lös med pq-formeln (eller faktorisering):
+Substituera $\\sin x = t$ och lös med *pq*-formeln (eller faktorisering):
 
 $$
 2t^2 - t - 1 = 0 \\;\\Leftrightarrow\\; t = \\frac{1 \\pm \\sqrt{1 + 8}}{4} = \\frac{1 \\pm 3}{4}

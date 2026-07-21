@@ -61,7 +61,7 @@ b-uppgifterna visas i figuren nedan.
 :::
 
 **a) Rita ett spridningsdiagram över resultatet. Låt medeltemperaturen
-vara på x-axeln och glassförsäljningen på y-axeln.<br>b) Bestäm ekvationen för regressionslinjen.<br>c) Bestäm korrelationskoefficienten.<br>d) Uppskatta glassförsäljningen en vecka där medeltemperaturen är 30 °C utifrån din modell.**
+vara på *x*-axeln och glassförsäljningen på *y*-axeln.<br>b) Bestäm ekvationen för regressionslinjen.<br>c) Bestäm korrelationskoefficienten.<br>d) Uppskatta glassförsäljningen en vecka där medeltemperaturen är 30 °C utifrån din modell.**
 
 **a)** Starta Geogebra, växla till kalkylblad och skriv av värdena från
 tabellen. Markera värdena, klicka på "blå staplarna", välj

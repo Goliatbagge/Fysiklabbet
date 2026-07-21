@@ -15,7 +15,7 @@ genom att dra en rät linje mellan punkterna i intervallets ändpunkter. En
 linje mellan två punkter på en kurva kallas **sekant**.
 
 Sekantens lutning (**riktningskoefficient**, **ändringskvot** eller
-**k-värde**) beräknas på samma sätt som för vilken rät linje som helst. Vi
+***k*-värde**) beräknas på samma sätt som för vilken rät linje som helst. Vi
 läser av två punkter på linjen, $(x_1, y_1)$ och $(x_2, y_2)$, och sätter
 in koordinaterna i formeln för riktningskoefficienten $k$.
 

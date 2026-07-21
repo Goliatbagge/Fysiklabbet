@@ -96,7 +96,7 @@
                     const type = open[1].toLowerCase();
                     stack.push(type);
                     out.push('<div class="lab-block lab-block-' + type + '">');
-                    if (open[2]) out.push('<div class="lab-block-title">' + escapeHtml(open[2]) + '</div>');
+                    if (open[2]) out.push('<div class="lab-block-title">' + escapeHtml(open[2].replace(/\*/g, '')) + '</div>');
                     out.push('');
                 } else if (close && stack.length > 0) {
                     stack.pop();
@@ -188,7 +188,7 @@
             const segs = T.extractSegments(stage, { names: !/^ma/.test(id) });
             return {
                 id,
-                title: fm.title || id,
+                title: (fm.title || id).replace(/\*/g, ''),
                 course: fm.course || '',
                 segments: segs.map((s) => ({ t: s.text })),
             };

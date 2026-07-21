@@ -52,7 +52,7 @@ $$
 x(21 + x) = 1\,080
 $$
 
-Vi utvecklar VL och löser sedan ekvationen med pq-formeln:
+Vi utvecklar VL och löser sedan ekvationen med *pq*-formeln:
 
 $$
 21x + x^2 = 1\,080
@@ -126,7 +126,7 @@ $$
 x^2 - 18x - 1\,215 = 0
 $$
 
-pq-formeln ger
+*pq*-formeln ger
 
 $$
 x = 9 \pm \sqrt{9^2 + 1\,215} = 9 \pm \sqrt{1\,296} = 9 \pm 36

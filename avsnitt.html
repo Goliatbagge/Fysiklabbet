@@ -243,7 +243,9 @@
                     stack.push(type.toLowerCase());
                     out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
                     if (title) {
-                        out.push('<div class="lab-block-title">' + escapeHtml(title) + '</div>');
+                        // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
+                        const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                        out.push('<div class="lab-block-title">' + t + '</div>');
                     }
                     out.push('');
                 } else if (close && stack.length > 0) {
@@ -263,6 +265,13 @@
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;');
+        }
+
+        // Kursiverade variabler i titlar: '*pq*-formeln' → <em>pq</em>-formeln.
+        function emTitle(s) {
+            if (!s || s.indexOf('*') === -1) return s;
+            return s.split(/\*([^*]+)\*/g).map((part, i) =>
+                i % 2 ? <em key={i}>{part}</em> : part);
         }
 
         // Konfigurera marked
@@ -450,10 +459,10 @@
                         </div>
                         <h1 className="lab-article-title">
                             <span className="lab-article-title-num">{meta.num}</span>
-                            {meta.title}
+                            {emTitle(meta.title)}
                         </h1>
                         {meta.description && (
-                            <p className="lab-article-sub">{meta.description}</p>
+                            <p className="lab-article-sub">{emTitle(meta.description)}</p>
                         )}
                         {meta.href && (
                             <div className="lab-article-sim">
@@ -489,11 +498,11 @@
 
                     <h1 className="lab-article-title">
                         <span className="lab-article-title-num">{meta.num}</span>
-                        {fm.title || meta.title}
+                        {emTitle(fm.title || meta.title)}
                     </h1>
 
                     {meta.description && (
-                        <p className="lab-article-sub">{meta.description}</p>
+                        <p className="lab-article-sub">{emTitle(meta.description)}</p>
                     )}
 
                     {meta.href && (

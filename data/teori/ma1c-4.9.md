@@ -60,23 +60,23 @@ Så värdet på $y$ kan vara mellan 0 och 600 kr.
 :::
 
 Vi börjar med att bestämma definitionsmängden som står för tillåtna
-*x-värden*. Vi tittar var grafen börjar på x-axeln (håll t.ex. en penna
+*x*-värden. Vi tittar var grafen börjar på *x*-axeln (håll t.ex. en penna
 lodrätt och vandra från vänster till höger och stanna när du stöter på
 grafen). Grafen startar vid $x = -1$. Ringen är inte ifylld, vilket
 medför att $x > -1$.
 
-Titta sedan var grafen slutar på x-axeln (håll pennan lodrät och vandra
+Titta sedan var grafen slutar på *x*-axeln (håll pennan lodrät och vandra
 från höger till vänster och stanna när du stöter på grafen). Grafen
 slutar vid $x = 2$. Ringen är ifylld, vilket medför att $x \leq 2$.
 
 **Definitionsmängden är alltså $-1 < x \leq 2$.**
 
 Vi bestämmer nu värdemängden som står för tillåtna *y-värden*. Vi tittar
-var grafen börjar på y-axeln (håll pennan vågrätt och vandra nerifrån och
+var grafen börjar på *y*-axeln (håll pennan vågrätt och vandra nerifrån och
 upp och stanna när du stöter på grafen). Grafen startar vid $y = 0$.
 Punkten där är ifylld, vilket medför att $y \geq 0$.
 
-Titta var grafen slutar på y-axeln (håll pennan vågrät och vandra
+Titta var grafen slutar på *y*-axeln (håll pennan vågrät och vandra
 uppifrån och ned och stanna när du stöter på grafen). Grafen slutar vid
 $y = 4$ (toppen ligger på kurvan), vilket medför att $y \leq 4$.
 

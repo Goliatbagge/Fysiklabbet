@@ -310,6 +310,31 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
   strömmen *I*, resistansen *R*)? Då är det variabel → kursiv. Är det
   ett *namn* på ett objekt (Lampa, Amperemeter)? Då är det etikett → rakt.
 
+- **Variabler i sammansättningar (pq-formeln, x-axeln, k-värde) — kursiv
+  variabeldel, rakt efterled.** I ord som "*pq*-formeln", "*abc*-formeln",
+  "*x*-axeln", "*y*-led", "*k*-värde", "*m*-värdet", "*x*-koordinaten",
+  "*x*-termer" ska variabeldelen kursiveras och bindestreck + efterled stå
+  rakt (uttryckligt önskemål 2026-07-21). Gäller ÖVERALLT: rubriker,
+  brödtext, blocktitlar, katalogtitlar/beskrivningar, övningar och exit
+  tickets. Skrivsätt per kontext:
+  - **md-löptext, rubriker och `data/ovningar.js`/`data/exittickets.js`**:
+    markdown-kursiv — `*pq*-formeln`, `*x*-axeln`. Använd INTE math-block
+    (`$pq$-formeln`) — TTS-manuset läser det som "p q -formeln" medan
+    `*pq*` strippas till "pq-formeln"; markdown-formen ger alltså bättre
+    uppläsning och identiskt manus med råtext.
+  - **Fetstil**: nästla — `***pq*-formeln**` (kursiv variabel i fet fras).
+  - **`:::`-blocktitlar** (`::: formel "*pq*-formeln"`): samma
+    asterisk-form; renderarna i `katalog.html`/`avsnitt.html` gör om
+    `*…*` till `<em>` (och `export-manus.html` strippar till råtext).
+  - **Titlar i `data/katalog.js` och md-frontmatter** (`title:`): samma
+    asterisk-form (frontmatter-värdet citeras: `title: '*pq*-formeln'`).
+    Renderas via `emTitle()`-helpern i `katalog.html`/`avsnitt.html`;
+    `keywords:`-listorna hålls ASTERISK-FRIA (råtext för sökningen).
+  - **Rå HTML/JS-UI** (t.ex. visualiserings-moduler med `innerHTML`):
+    `<em>pq</em>-formeln`.
+  - **Kodkommentarer och GeoGebra-kommandonamn** (`` `IntegralMellan(från
+    x-värde, …)` ``): råtext — ingen kursivering i kod.
+
 - **Variabler i inline-SVG-figurer**: kursiveringen gäller även i
   `<text>`-element i SVG, inte bara i markdown och KaTeX. Bokstaven i
   ett SVG-tal som "*v*₁ = 3,0 m/s" eller "*λ*₂ = 8,0 m" måste vara

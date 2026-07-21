@@ -222,7 +222,7 @@
             4: 'Hörnet som fattas är en kvadrat med sidan <em>p</em>/2 och arean (<em>p</em>/2)². ' +
                'Fyll i den — och lägg till (<em>p</em>/2)² på BÅDA led av ekvationen ' +
                '<em>x</em>² + <em>px</em> + <em>q</em> = 0. Följ omskrivningen steg för steg, ' +
-               'fram till pq-formeln.',
+               'fram till <em>pq</em>-formeln.',
             5: 'Prova med konkreta tal. Välj ett exempel — eller ställ in <em>p</em> och ' +
                '<em>q</em> själv — och se hela kedjan fram till lösningarna på en gång.'
         };
@@ -716,7 +716,7 @@
                 } else {
                     var x1 = -h - sqrtD, x2 = -h + sqrtD;
                     epilogue.innerHTML = '<em>x</em>₁ = ' + fmtDisp(x1, 2) + '&emsp;<em>x</em>₂ = ' +
-                        fmtDisp(x2, 2) + ' — det här är pq-formeln, med talen isatta.';
+                        fmtDisp(x2, 2) + ' — det här är <em>pq</em>-formeln, med talen isatta.';
                 }
             } else {
                 epilogue.innerHTML = '';

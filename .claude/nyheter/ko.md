@@ -14,6 +14,38 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-21) — kan tas upp senare
+
+- **En ordinär laptop löste ett kvantfysikproblem som troddes kräva en
+  kvantdator** — Joseph Tindall (Flatiron Institute) m.fl. använde tensor-
+  nätverk för att komprimera vågfunktionen hos hundratals sammanflätade
+  qubits och simulerade så kallade spinnglas (kaotiskt orienterade atomära
+  magneter) på en vanlig persondator, med resultat som matchade både teori
+  och en riktig kvantdators simuleringar. Bra "aha"-vinkel (kvantdator vs.
+  klassisk dator) men vi har kört mycket kvantfysik/kvantdator-relaterat de
+  senaste veckorna, och ämnet (tensornätverk, sammanflätning) kräver rejäl
+  förenkling för gymnasienivå. Källa:
+  https://www.sciencedaily.com/releases/2026/07/260719040000.htm
+  (tillagd 2026-07-21)
+- **”Little Red Dots” kan vara klotformiga stjärnhopar under bildning, inte
+  svarta hål** — John Chisholm (University of Texas at Austin) m.fl.
+  föreslår i en ny hypotes att JWST:s gåtfulla, mycket kompakta ”Little Red
+  Dots” vid höga rödförskjutningar inte är ackreterande supermassiva svarta
+  hål (den ledande tolkningen) utan nyfödda klotformiga stjärnhopar, där en
+  enda supermassiv stjärna i hopens mitt ger det optiska ljuset. Häftig
+  astronomivinkel (stjärnbildning, spektroskopi) men spekulativt (en
+  konkurrerande hypotes, inte en bekräftad upptäckt) och vi har kört mycket
+  astronomi senaste veckorna (mörka kometen 07-20 m.fl.) — spara till
+  ämnet svalnat eller till hypotesen får starkare observationsstöd. Källa:
+  https://arxiv.org/abs/2602.15935 (tillagd 2026-07-21)
+- **OBS — phys.org/physicsworld/sciencedaily-förstasidorna eftersläpar ofta
+  1–2 dagar vid tidig morgonsökning (svensk tid)**: flera sökningar denna
+  dag gav bara artiklar t.o.m. 19–20 juli trots att phys.org:s egen
+  framsida (hämtad direkt, inte via sökmotor) redan hade färskare
+  nanoteknik-/astronominyheter märkta ”8–10 timmar sedan”. Hämta alltid
+  https://phys.org/ (startsidan, inte bara /physics-news/) direkt vid
+  nyhetstorka i sökresultaten. (tillagd 2026-07-21)
+
 ## Fynd som inte användes (2026-07-20) — kan tas upp senare
 
 - **150 år gammal gåta om Theta Eridani kan äntligen vara löst** — Idel Waisberg och

@@ -59,6 +59,32 @@ det är datans facit och kan användas i andra vyer.
   (accent = det sökta/motstående, blått = det kända/närliggande) och
   sätt små ordetiketter ("närliggande", "hypotenusa").
 
+## Lösningsformat i FYSIKPROV (gäller inte matteprov)
+
+Fastlagt av användaren 2026-07-21 (referensimpl: `fy2-vt2016.js`):
+
+1. **Mätvärdesklammer före varje insättning.** Innan värden sätts in i en
+   formel listas de i samma hakparentes-block som övningarnas
+   lösningsförslag: `$$\\left[ \\begin{array}{l} … \\end{array} \\right]$$`.
+   Klammern innehåller **alla** beteckningar som ingår i formeln:
+   - konstanter med `\\approx` och namn: `h \\approx 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}\\ \\text{(Plancks konstant)}`
+   - givna mätvärden med SI-omvandling i samma rad: `B_1 = 49\\ \\mathrm{mT} = 0{,}049\\ \\mathrm{T}`
+   - mellanresultat märkta `\\text{(beräknad ovan)}`
+   Rubrik ovanför blocket: "Mätvärden (efter omvandling till SI-enheter):"
+   när någon omvandling görs, annars "Mätvärden:" (eller "Med värdena
+   beräknade ovan:" om alla rader är mellanresultat). Andra enheter än SI
+   får användas när de väsentligen underlättar (t.ex. eV).
+   Pedagogisk poäng: rutinen SI-omvandling-i-klammern ⇒ eleven vet att
+   svaret kommer ut i sin SI-enhet.
+2. **`\\approx` på avrundade konstantvärden** ($h$, $c$, $g$, $q_e$, $\\sigma$,
+   $u$ …) — aldrig `=`. Frågestammar ("Räkna med $g = 9{,}82$…") behåller
+   dock `=` (de är stipulationer och ofta provets originaltext).
+3. **Förklaringen precis före sitt moment.** En `varfor`-text får aldrig
+   förklara något som händer i ett senare steg — dela steget i två i stället
+   (stegen är billiga: de renderas numera oboxade i ett sammanhängande
+   flöde utan "Steg N av M", så en delning syns bara som ett nytt
+   varför-block).
+
 ## Typografi
 
 - Följ CLAUDE.md: kommatecken som decimaltecken (`1{,}04`), `\\,` som

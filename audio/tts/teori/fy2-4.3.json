@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "c2d31dc2bed144895224034d6729644c161d64ae",
- "dur": 473.72,
+ "hash": "09ad154f7aff00f20351d499d366510fb0c15cce",
+ "dur": 472.65,
  "segments": [
   {
    "t": "Svartkroppsstrålning",
@@ -247,137 +247,137 @@
   {
    "t": "Vi ställer upp Stefan–Boltzmanns lag och löser ut temperaturen T.",
    "s": 253.64,
-   "e": 266.69
+   "e": 266.7
   },
   {
    "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4 vilket är ekvivalent med att T är lika med 4:e roten ur M delat med sigma",
    "s": 253.64,
-   "e": 266.69
+   "e": 266.7
   },
   {
-   "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m^2 \\cdot K^4)",
-   "s": 266.69,
-   "e": 283.57
+   "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är ungefär lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m^2 \\cdot K^4)",
+   "s": 266.7,
+   "e": 283.99
   },
   {
    "t": "periodtiden T är lika med 4:e roten ur 1 500 delat med 5,67 gånger 10 upphöjt till minus 8 som är lika med 403,298 kelvin som är ungefär lika med 403 kelvin som är ungefär lika med 403 minus 273 ^\\circ C som är lika med 130 ^\\circ C",
-   "s": 283.57,
-   "e": 309.31
+   "s": 283.99,
+   "e": 309.73
   },
   {
    "t": "Svar: 130 grader Celsius",
-   "s": 283.57,
-   "e": 309.31
+   "s": 283.99,
+   "e": 309.73
   },
   {
    "t": "Exempel 2 — Solens maximala våglängd",
-   "s": 309.31,
-   "e": 313.12
+   "s": 309.73,
+   "e": 313.52
   },
   {
    "t": "Solen kan ses som en svart kropp.",
-   "s": 313.12,
-   "e": 316.43
+   "s": 313.52,
+   "e": 316.8
   },
   {
    "t": "Temperaturen på solens yta är ca 5 800 kelvin.",
-   "s": 316.43,
-   "e": 323.18
+   "s": 316.92,
+   "e": 322.1
   },
   {
    "t": "a) Vid vilken våglängd har solen sin maximala intensitet?",
-   "s": 323.13,
-   "e": 328.22
+   "s": 322.05,
+   "e": 327.14
   },
   {
    "t": "b) Vilken typ av strålning motsvarar det?",
-   "s": 328.22,
-   "e": 332.15
+   "s": 327.14,
+   "e": 331.09
   },
   {
    "t": "a) Vi ställer upp Wiens förskjutningslag och löser ut våglängden.",
-   "s": 332.15,
-   "e": 337.09
+   "s": 331.09,
+   "e": 336.02
   },
   {
    "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 vilket är ekvivalent med att lambda m a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med T",
-   "s": 337.09,
-   "e": 356.06
+   "s": 336.02,
+   "e": 354.99
   },
   {
    "t": "periodtiden T är lika med 5 800 kelvin",
-   "s": 337.09,
-   "e": 356.06
+   "s": 336.02,
+   "e": 354.99
   },
   {
    "t": "våglängden lambda massan m accelerationen a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med 5 800 som är lika med 4,996 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 5,00 gånger 10 upphöjt till minus 7 meter som är lika med 500 nanometer",
-   "s": 356.06,
-   "e": 375.87
+   "s": 354.99,
+   "e": 374.8
   },
   {
    "t": "Svar: 500 nanometer",
-   "s": 375.87,
-   "e": 379.15
+   "s": 374.8,
+   "e": 378.09
   },
   {
    "t": "b) Vi läser av våglängden 500 nanometer i tabellen för det elektromagnetiska spektrumet (se avsnitt 4.1): 500 nanometer ligger på gränsen mellan blå (435–500 nanometer) och cyan (500–520 nanometer).",
-   "s": 379.15,
-   "e": 396.37
+   "s": 378.09,
+   "e": 395.3
   },
   {
    "t": "Svar: Blå/cyan (blågrönt ljus)",
-   "s": 396.37,
-   "e": 401.04
+   "s": 395.3,
+   "e": 399.97
   },
   {
    "t": "Solens färg",
-   "s": 401.04,
-   "e": 403.25
+   "s": 399.97,
+   "e": 402.19
   },
   {
    "t": "Solens maximala emittans sker alltså, enligt exemplet ovan, vid blågrönt ljus!",
-   "s": 403.25,
-   "e": 409.5
+   "s": 402.19,
+   "e": 408.44
   },
   {
    "t": "Varför ser solen då inte blågrön ut?",
-   "s": 409.5,
-   "e": 413.19
+   "s": 408.44,
+   "e": 412.12
   },
   {
    "t": "Jo, solen emitterar även våglängder kring blågrönt och dessa våglängder tillsammans bildar vit.",
-   "s": 413.19,
-   "e": 420.32
+   "s": 412.12,
+   "e": 419.25
   },
   {
    "t": "Varför ser solen då gul ut på himlen?",
-   "s": 420.32,
-   "e": 423.88
+   "s": 419.25,
+   "e": 422.81
   },
   {
    "t": "Det har att göra med hur solljuset bryts i vår atmosfär.",
-   "s": 423.88,
-   "e": 428.13
+   "s": 422.81,
+   "e": 427.06
   },
   {
    "t": "Den kan ju även se röd ut vid solnedgång när solljuset passerar en ännu större del av jordens atmosfär.",
-   "s": 428.13,
-   "e": 435.13
+   "s": 427.06,
+   "e": 434.06
   },
   {
    "t": "Men solen är alltså \"egentligen\" vit sedd utanför jordens atmosfär.",
-   "s": 435.13,
-   "e": 440.0
+   "s": 434.06,
+   "e": 438.94
   },
   {
    "t": "När solen står som högst upp på himlen ser den också mer vit ut.",
-   "s": 440.0,
-   "e": 444.61
+   "s": 438.94,
+   "e": 443.54
   },
   {
    "t": "Figur: tre bilder bredvid varandra. ekvation 1 Solen sedd från rymdstationen ISS — en bländande vit punkt mot rymdens svärta. ekvation 2 Solen högt över ett ökenlandskap — fortfarande nästan vit. ekvation 3 Tidsförlopp av månen som går ner över Maldiverna: månen ändrar färg från vit (högst upp) genom gul, orange och slutligen mörkröd (nära horisonten), eftersom ljuset passerar allt mer atmosfär.",
-   "s": 444.61,
-   "e": 473.72
+   "s": 443.54,
+   "e": 472.65
   }
  ]
 }

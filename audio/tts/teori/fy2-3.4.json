@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "f33801772f89f7493d8d3871ed0a6ce0b17522c9",
- "dur": 245.3,
+ "hash": "79d50fce422482fabbedb50e786c14a49a0164c3",
+ "dur": 245.65,
  "segments": [
   {
    "t": "Laddade partiklar i magnetfält",
@@ -172,52 +172,52 @@
   {
    "t": "Vi ställer upp formeln för magnetisk kraft på laddning.",
    "s": 171.74,
-   "e": 175.85
+   "e": 175.86
   },
   {
    "t": "kraften F är lika med q gånger hastigheten v gånger B",
-   "s": 175.85,
-   "e": 194.22
+   "s": 175.86,
+   "e": 194.59
   },
   {
-   "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb hastigheten v som är lika med 2,4 Mm per sekund som är lika med 2,4 gånger 10 upphöjt till 6 meter per sekund B som är lika med 0,080 tesla",
-   "s": 175.85,
-   "e": 194.22
+   "t": "q är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb hastigheten v som är lika med 2,4 Mm per sekund som är lika med 2,4 gånger 10 upphöjt till 6 meter per sekund B som är lika med 0,080 tesla",
+   "s": 175.86,
+   "e": 194.59
   },
   {
    "t": "kraften F är lika med 1,602 gånger 10 upphöjt till minus 19 gånger 2,4 gånger 10 upphöjt till 6 gånger 0,080 som är lika med 3,076 gånger 10 upphöjt till minus 14 newton som är ungefär lika med 3,1 gånger 10 upphöjt till minus 14 newton som är lika med 31 fN",
-   "s": 194.22,
-   "e": 213.39
+   "s": 194.59,
+   "e": 213.74
   },
   {
    "t": "Riktningen bestäms av högerhandsregeln.",
-   "s": 213.39,
-   "e": 216.85
+   "s": 213.74,
+   "e": 217.2
   },
   {
    "t": "Tummen är strömriktningen, pekfingret magnetfältets riktning, långfingret kraftens riktning.",
-   "s": 216.85,
-   "e": 223.65
+   "s": 217.2,
+   "e": 224.0
   },
   {
    "t": "Eftersom elektronen (negativ) åker nedåt är strömriktningen motriktad — uppåt.",
-   "s": 223.65,
-   "e": 229.9
+   "s": 224.0,
+   "e": 230.25
   },
   {
    "t": "Magnetfältets riktning är in i planet.",
-   "s": 229.9,
-   "e": 233.57
+   "s": 230.25,
+   "e": 233.93
   },
   {
    "t": "Högerhandsregeln ger då att kraften blir vänsterriktad.",
-   "s": 233.57,
-   "e": 237.86
+   "s": 233.93,
+   "e": 238.21
   },
   {
    "t": "Svar: 3,1 gånger 10 upphöjt till minus 14 newton (eller 31 fN) åt vänster.",
-   "s": 237.86,
-   "e": 245.3
+   "s": 238.21,
+   "e": 245.65
   }
  ]
 }

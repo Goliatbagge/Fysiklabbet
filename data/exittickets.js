@@ -4785,7 +4785,7 @@ window.EXITTICKETS = {
       'kWh används för stora energimängder (t.ex. hushållsel), inte för enskilda partiklars energier.',
       'Kalori används för värmeenergi i vardagliga sammanhang, inte för partikelfysik.',
       'u är en massenhet, inte en energienhet.',
-      'eV, elektronvolt, är en praktisk energienhet för mycket små energier: $1\\ \\mathrm{eV} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$.',
+      'eV, elektronvolt, är en praktisk energienhet för mycket små energier: $1\\ \\mathrm{eV} \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$.',
     ],
   },
   {

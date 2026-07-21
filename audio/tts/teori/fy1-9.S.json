@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.S",
  "voice": "sv-SE-SofieNeural",
- "hash": "33c3af75d48db70b8aa4f1f45ac11a0015f96b95",
- "dur": 535.37,
+ "hash": "36fecb67e31632e2dc3cb912cc9a569121e2622c",
+ "dur": 536.26,
  "segments": [
   {
    "t": "Sammanfattning — Kärnfysik",
@@ -185,264 +185,264 @@
    "e": 222.76
   },
   {
-   "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt",
+   "t": "1 elektronvolt är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt",
    "s": 222.76,
-   "e": 233.39
+   "e": 233.9
   },
   {
    "t": "α-sönderfall",
-   "s": 233.39,
-   "e": 235.41
+   "s": 233.9,
+   "e": 235.93
   },
   {
    "t": "Z upphöjt till arean A X går mot Z minus 2 upphöjt till A minus 4 Y plus två upphöjt till 4 He",
-   "s": 235.41,
-   "e": 243.46
+   "s": 235.93,
+   "e": 243.97
   },
   {
    "t": "β-sönderfall",
-   "s": 243.46,
-   "e": 245.47
+   "s": 243.97,
+   "e": 245.99
   },
   {
    "t": "Z upphöjt till arean A X går mot Z plus 1 upphöjt till A Y plus minus 1 upphöjt till 0 e plus ny (β⁻)",
-   "s": 245.47,
-   "e": 253.99
+   "s": 245.99,
+   "e": 254.5
   },
   {
    "t": "Z upphöjt till arean A X går mot Z minus 1 upphöjt till A Y plus ett upphöjt till 0 e plus ny (β⁺)",
-   "s": 253.99,
-   "e": 262.24
+   "s": 254.5,
+   "e": 262.75
   },
   {
    "t": "γ-sönderfall",
-   "s": 262.24,
-   "e": 264.26
+   "s": 262.75,
+   "e": 264.77
   },
   {
    "t": "Z upphöjt till arean A X upphöjt till * går mot Z upphöjt till A X plus gamma",
-   "s": 264.26,
-   "e": 271.6
+   "s": 264.77,
+   "e": 272.11
   },
   {
    "t": "Aktivitet",
-   "s": 271.6,
-   "e": 273.64
+   "s": 272.11,
+   "e": 274.15
   },
   {
    "t": "arean A är lika med våglängden lambda gånger N",
-   "s": 273.64,
-   "e": 278.34
+   "s": 274.15,
+   "e": 278.85
   },
   {
    "t": "där",
-   "s": 278.34,
-   "e": 279.81
+   "s": 278.85,
+   "e": 280.32
   },
   {
    "t": "A är lika med aktivitet (Bq)",
-   "s": 279.81,
-   "e": 283.34
+   "s": 280.32,
+   "e": 283.85
   },
   {
    "t": "λ är lika med sönderfallskonstant (1/s)",
-   "s": 283.34,
-   "e": 287.98
+   "s": 283.85,
+   "e": 288.49
   },
   {
    "t": "N är lika med antal atomkärnor",
-   "s": 287.98,
-   "e": 291.27
+   "s": 288.49,
+   "e": 291.79
   },
   {
    "t": "Sönderfallskonstanten",
-   "s": 291.27,
-   "e": 293.86
+   "s": 291.79,
+   "e": 294.38
   },
   {
    "t": "våglängden lambda är lika med naturliga logaritmen av 2 delat med T 1 delat med 2",
-   "s": 293.86,
-   "e": 300.31
+   "s": 294.38,
+   "e": 300.82
   },
   {
    "t": "Aktivitetslagen och sönderfallslagen",
-   "s": 300.31,
-   "e": 303.68
+   "s": 300.82,
+   "e": 304.19
   },
   {
    "t": "arean A är lika med A noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2 newton som är lika med N noll gånger 0,5 upphöjt till t delat med T 1 delat med 2",
-   "s": 303.68,
-   "e": 315.38
+   "s": 304.19,
+   "e": 315.89
   },
   {
    "t": "Absorberad dos",
-   "s": 315.38,
-   "e": 317.74
+   "s": 315.89,
+   "e": 318.25
   },
   {
    "t": "D är lika med energin E delat med massan m",
-   "s": 317.74,
-   "e": 321.91
+   "s": 318.25,
+   "e": 322.43
   },
   {
    "t": "där",
-   "s": 321.91,
-   "e": 323.41
+   "s": 322.43,
+   "e": 323.93
   },
   {
    "t": "D är lika med absorberad dos (Gy)",
-   "s": 323.41,
-   "e": 327.66
+   "s": 323.93,
+   "e": 328.18
   },
   {
    "t": "E är lika med strålningens energi (joule)",
-   "s": 327.66,
-   "e": 332.87
+   "s": 328.18,
+   "e": 333.85
   },
   {
    "t": "m är lika med bestrålad massa (kilogram)",
-   "s": 332.82,
-   "e": 336.87
+   "s": 333.8,
+   "e": 337.77
   },
   {
    "t": "Ekvivalent dos",
-   "s": 336.87,
-   "e": 339.27
+   "s": 337.77,
+   "e": 340.16
   },
   {
    "t": "H är lika med D gånger laddningen Q",
-   "s": 339.27,
-   "e": 343.28
+   "s": 340.16,
+   "e": 344.18
   },
   {
    "t": "där",
-   "s": 343.28,
-   "e": 344.79
+   "s": 344.18,
+   "e": 345.69
   },
   {
    "t": "H är lika med ekvivalent stråldos (Sv)",
-   "s": 344.79,
-   "e": 349.06
+   "s": 345.69,
+   "e": 349.95
   },
   {
    "t": "D är lika med absorberad dos (Gy)",
-   "s": 349.06,
-   "e": 353.34
+   "s": 349.95,
+   "e": 354.24
   },
   {
    "t": "Q är lika med kvalitetsfaktor (Q är lika med 20 för α, Q är lika med 1 för β och γ)",
-   "s": 353.34,
-   "e": 359.96
+   "s": 354.24,
+   "e": 360.85
   },
   {
    "t": "Viktiga samband och metoder",
-   "s": 359.96,
-   "e": 362.83
+   "s": 360.85,
+   "e": 363.73
   },
   {
    "t": "Massan hos en sammansatt kärna är alltid lägre än summan av massan hos dess beståndsdelar — mellanskillnaden (massdefekten) motsvarar bindningsenergin som håller ihop kärnan.",
-   "s": 362.83,
-   "e": 373.63
+   "s": 363.73,
+   "e": 374.52
   },
   {
    "t": "Vid β-sönderfall ändras antalet elektroner i nukliden, så elektronmassorna måste räknas bort ur nuklidmassorna på båda sidor om pilen.",
-   "s": 373.63,
-   "e": 382.72
+   "s": 374.52,
+   "e": 383.61
   },
   {
    "t": "Det behövs inte vid α- eller γ-sönderfall.",
-   "s": 382.72,
-   "e": 386.06
+   "s": 383.61,
+   "e": 386.95
   },
   {
    "t": "Sönderfallsformler balanseras som ekvationer: masstalen (överst) och atomnumren (nederst) ska summera till samma tal på båda sidor om pilen.",
-   "s": 386.06,
-   "e": 396.41
+   "s": 386.95,
+   "e": 397.3
   },
   {
    "t": "Kvalitetsfaktorn Q skiljer strålslagens skadlighet: samma absorberade dos D ger 20 gånger högre ekvivalent dos H för alfastrålning jämfört med beta- eller gammastrålning.",
-   "s": 396.41,
-   "e": 408.51
+   "s": 397.3,
+   "e": 409.4
   },
   {
    "t": "Genomträngligheten ökar α < β < γ, men den lokala skadeverkan (om strålningen når känslig vävnad) är störst för α och minst för γ — alfa är därför farligast innanför kroppen, gamma farligast utanför.",
-   "s": 408.51,
-   "e": 420.13
+   "s": 409.4,
+   "e": 421.02
   },
   {
    "t": "Aktiviteten och antalet kärnor avtar enligt exakt samma exponentiella samband (samma bas 0,5 upphöjt till tiden t delat med T 1 delat med 2 ) — sjunker det ena till hälften gör det andra det också.",
-   "s": 420.13,
-   "e": 432.58
+   "s": 421.02,
+   "e": 433.48
   },
   {
    "t": "Efter 10 halveringstider återstår ungefär en promille av ursprungsmängden ( 0,5 upphöjt till 10 är ungefär lika med 0,001 ) — det ger kol-14-metoden en övre gräns på omkring femtio tusen år.",
-   "s": 432.58,
-   "e": 445.73
+   "s": 433.48,
+   "e": 446.62
   },
   {
    "t": "Figurer värda att minnas",
-   "s": 445.73,
-   "e": 448.76
+   "s": 446.62,
+   "e": 449.65
   },
   {
    "t": "Atomens uppbyggnad — kärnan med protoner och neutroner, omgiven av elektroner i skal:",
-   "s": 448.76,
-   "e": 458.78
+   "s": 449.65,
+   "e": 459.68
   },
   {
    "t": "En heliumatom där elektronerna finns i ett elektronskal.",
-   "s": 448.76,
-   "e": 458.78
+   "s": 449.65,
+   "e": 459.68
   },
   {
    "t": "Inför provet",
-   "s": 458.78,
-   "e": 460.93
+   "s": 459.68,
+   "e": 461.82
   },
   {
    "t": "Kan du ange en atomkärnas sammansättning (antal protoner och neutroner) utifrån beteckningen Z upphöjt till arean A X ?",
-   "s": 460.93,
-   "e": 469.98
+   "s": 461.82,
+   "e": 470.88
   },
   {
    "t": "Vet du skillnaden mellan masstal, atomnummer och isotop?",
-   "s": 469.98,
-   "e": 474.86
+   "s": 470.88,
+   "e": 475.75
   },
   {
    "t": "Kan du beräkna massdefekt och bindningsenergi med energin E är lika med delta massan m gånger c i kvadrat , och växla mellan u, kg, J, eV och MeV?",
-   "s": 474.86,
-   "e": 485.87
+   "s": 475.75,
+   "e": 486.76
   },
   {
    "t": "Kan du skriva och balansera sönderfallsformler för α-, β upphöjt till minus -, β upphöjt till +- och γ-sönderfall?",
-   "s": 485.87,
-   "e": 493.14
+   "s": 486.76,
+   "e": 494.04
   },
   {
    "t": "Vet du vad en positron och en neutrino är, och varför de förekommer i β-sönderfall?",
-   "s": 493.14,
-   "e": 499.06
+   "s": 494.04,
+   "e": 499.95
   },
   {
    "t": "Kan du formeln för aktivitet ( arean A är lika med våglängden lambda gånger N ) och sambandet mellan sönderfallskonstant och halveringstid?",
-   "s": 499.06,
-   "e": 508.23
+   "s": 499.95,
+   "e": 509.12
   },
   {
    "t": "Kan du använda aktivitets- och sönderfallslagen för att beräkna hur mycket som återstår efter en given tid (t.ex. vid kol-14-datering)?",
-   "s": 508.23,
-   "e": 517.64
+   "s": 509.12,
+   "e": 518.54
   },
   {
    "t": "Känner du till alfa-, beta- och gammastrålningens genomträngningsförmåga och varför de är farliga på olika sätt?",
-   "s": 517.64,
-   "e": 524.71
+   "s": 518.54,
+   "e": 525.6
   },
   {
    "t": "Kan du räkna med absorberad dos ( D är lika med energin E delat med massan m ) och ekvivalent dos ( H är lika med D gånger laddningen Q )?",
-   "s": 524.71,
-   "e": 535.37
+   "s": 525.6,
+   "e": 536.26
   }
  ]
 }

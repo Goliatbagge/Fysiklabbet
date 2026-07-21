@@ -53,15 +53,19 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'Emittansen $M$ är den effekt planeten strålar ut per kvadratmeter av sin yta. ' +
                         'För en svart kropp bestäms emittansen helt av yttemperaturen $T$ genom ' +
                         'Stefan–Boltzmanns lag — känner vi $M$ kan vi alltså räkna baklänges till $T$.',
-                    text: '$$M = \\sigma \\cdot T^4$$\n\n' +
-                        'där $\\sigma = 5{,}67 \\cdot 10^{-8}\\ \\mathrm{W/(m^2 \\cdot K^4)}$ ' +
-                        '(Stefan–Boltzmanns konstant) och $M = 230\\ \\mathrm{W/m^2}$.',
+                    text: '$$M = \\sigma \\cdot T^4$$',
                 },
                 {
                     rubrik: 'Lös ut temperaturen',
                     varfor: 'Temperaturen står i fjärde potens, så vi delar med $\\sigma$ och drar ' +
-                        'fjärde roten (samma sak som att upphöja till $\\tfrac{1}{4}$).',
-                    text: '$$T = \\left( \\dfrac{M}{\\sigma} \\right)^{\\frac{1}{4}} = ' +
+                        'fjärde roten (samma sak som att upphöja till $\\tfrac{1}{4}$). Mätvärdena är ' +
+                        'redan i SI-enheter, så temperaturen kommer ut i kelvin.',
+                    text: 'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        '\\sigma \\approx 5{,}67 \\cdot 10^{-8}\\ \\mathrm{W/(m^2 \\cdot K^4)}\\ \\text{(Stefan–Boltzmanns konstant)} \\\\ ' +
+                        'M = 230\\ \\mathrm{W/m^2} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$T = \\left( \\dfrac{M}{\\sigma} \\right)^{\\frac{1}{4}} = ' +
                         '\\left( \\dfrac{230}{5{,}67 \\cdot 10^{-8}} \\right)^{\\frac{1}{4}}\\ \\mathrm{K} ' +
                         '\\approx 252{,}4\\ \\mathrm{K}$$',
                 },
@@ -328,8 +332,14 @@ window.NP_PROV['fy2-vt2016'] = {
                     del: 'b',
                     rubrik: 'Lös ut hastigheten i materialet',
                     varfor: 'Samma brytningslag ger hastigheten i materialet, eftersom vi nu känner båda ' +
-                        'vinklarna och ljushastigheten i luft ($v_2 = 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}$).',
-                    text: '$$v_1 = v_2 \\cdot \\dfrac{\\sin\\alpha_1}{\\sin\\alpha_2} = ' +
+                        'vinklarna och ljushastigheten i luft.',
+                    text: 'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'v_2 \\approx 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}\\ \\text{(ljusets hastighet i luft)} \\\\ ' +
+                        '\\alpha_1 = 26° \\\\ ' +
+                        '\\alpha_2 = 38{,}3° ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$v_1 = v_2 \\cdot \\dfrac{\\sin\\alpha_1}{\\sin\\alpha_2} = ' +
                         '3{,}00 \\cdot 10^8 \\cdot \\dfrac{\\sin 26°}{\\sin 38{,}3°}\\ \\mathrm{m/s} ' +
                         '\\approx 2{,}1 \\cdot 10^8\\ \\mathrm{m/s}$$',
                     delsvar: { del: 'b', text: 'Ljusets hastighet i det genomskinliga materialet är ' +
@@ -412,29 +422,44 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'Vid gränsvåglängden $\\lambda_0 = 300\\ \\mathrm{nm}$ räcker fotonens energi ' +
                         '*precis* till att lösgöra en elektron — all fotonenergi går åt till utträdesarbetet ' +
                         '$E_\\mathrm{U}$ och ingenting blir över till rörelseenergi.',
-                    text: '$$E_\\mathrm{U} = h f_0 = h \\cdot \\dfrac{c}{\\lambda_0}$$\n\n' +
-                        'där $h = 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}$ (Plancks konstant) och ' +
-                        '$c = 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}$.',
+                    text: '$$E_\\mathrm{U} = h f_0 = h \\cdot \\dfrac{c}{\\lambda_0}$$',
                 },
                 {
                     del: 'a',
-                    rubrik: 'Beräkna och gör om till elektronvolt',
+                    rubrik: 'Beräkna utträdesarbetet i joule',
+                    varfor: 'Våglängden är given i nanometer — innan vi sätter in den i formeln gör vi ' +
+                        'om den till SI-enheten meter. Då vet vi att energin kommer ut i SI-enheten joule.',
+                    text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'h \\approx 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}\\ \\text{(Plancks konstant)} \\\\ ' +
+                        'c \\approx 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}\\ \\text{(ljusets hastighet)} \\\\ ' +
+                        '\\lambda_0 = 300\\ \\mathrm{nm} = 300 \\cdot 10^{-9}\\ \\mathrm{m} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$E_\\mathrm{U} = \\dfrac{6{,}626 \\cdot 10^{-34} \\cdot 3{,}00 \\cdot 10^8}' +
+                        '{300 \\cdot 10^{-9}}\\ \\mathrm{J} \\approx 6{,}63 \\cdot 10^{-19}\\ \\mathrm{J}$$',
+                },
+                {
+                    del: 'a',
+                    rubrik: 'Gör om till elektronvolt',
                     varfor: 'Svaret efterfrågas i eV. En elektronvolt är energin ' +
-                        '$1\\ \\mathrm{eV} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$, så vi delar ' +
+                        '$1\\ \\mathrm{eV} \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$, så vi delar ' +
                         'joule-värdet med laddningen $e$.',
-                    text: '$$E_\\mathrm{U} = \\dfrac{6{,}626 \\cdot 10^{-34} \\cdot 3{,}00 \\cdot 10^8}' +
-                        '{300 \\cdot 10^{-9}}\\ \\mathrm{J} \\approx 6{,}63 \\cdot 10^{-19}\\ \\mathrm{J}$$\n\n' +
-                        '$$E_\\mathrm{U} = \\dfrac{6{,}63 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}}\\ ' +
+                    text: '$$E_\\mathrm{U} = \\dfrac{6{,}63 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}}\\ ' +
                         '\\mathrm{eV} \\approx 4{,}1\\ \\mathrm{eV}$$',
                     delsvar: { del: 'a', text: 'Utträdesarbetet är cirka $4{,}1\\ \\mathrm{eV}$.' },
                 },
                 {
                     del: 'b',
                     rubrik: 'Beräkna fotonens energi vid 200 nm',
-                    varfor: 'Kortare våglängd betyder mer energi per foton. Skillnaden mellan fotonens ' +
-                        'energi och utträdesarbetet blir elektronens rörelseenergi (Einsteins fotoelektriska ' +
-                        'ekvation).',
-                    text: '$$E_\\mathrm{foton} = h \\cdot \\dfrac{c}{\\lambda} = ' +
+                    varfor: 'Kortare våglängd betyder mer energi per foton. Även här gör vi först om ' +
+                        'våglängden till SI-enheten meter innan den sätts in i formeln.',
+                    text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'h \\approx 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}\\ \\text{(Plancks konstant)} \\\\ ' +
+                        'c \\approx 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}\\ \\text{(ljusets hastighet)} \\\\ ' +
+                        '\\lambda = 200\\ \\mathrm{nm} = 200 \\cdot 10^{-9}\\ \\mathrm{m} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$E_\\mathrm{foton} = h \\cdot \\dfrac{c}{\\lambda} = ' +
                         '\\dfrac{6{,}626 \\cdot 10^{-34} \\cdot 3{,}00 \\cdot 10^8}{200 \\cdot 10^{-9}}\\ ' +
                         '\\mathrm{J} \\approx 9{,}94 \\cdot 10^{-19}\\ \\mathrm{J}$$',
                     figur: 'u9-s1',
@@ -442,8 +467,9 @@ window.NP_PROV['fy2-vt2016'] = {
                 {
                     del: 'b',
                     rubrik: 'Dra av utträdesarbetet',
-                    varfor: 'Av fotonens energi går $E_\\mathrm{U}$ åt till att lösgöra elektronen — ' +
-                        'resten blir rörelseenergi.',
+                    varfor: 'Skillnaden mellan fotonens energi och utträdesarbetet blir elektronens ' +
+                        'rörelseenergi (Einsteins fotoelektriska ekvation): av fotonens energi går ' +
+                        '$E_\\mathrm{U}$ åt till att lösgöra elektronen — resten blir rörelseenergi.',
                     text: '$$E_\\mathrm{k} = E_\\mathrm{foton} - E_\\mathrm{U} = ' +
                         '(9{,}94 - 6{,}63) \\cdot 10^{-19}\\ \\mathrm{J} \\approx ' +
                         '3{,}3 \\cdot 10^{-19}\\ \\mathrm{J}$$',
@@ -482,8 +508,13 @@ window.NP_PROV['fy2-vt2016'] = {
                 {
                     del: 'a',
                     rubrik: 'Använd Wiens förskjutningslag',
-                    varfor: 'Med toppvåglängden känd ger Wiens lag temperaturen direkt.',
+                    varfor: 'Med toppvåglängden känd ger Wiens lag temperaturen direkt. Våglängden görs ' +
+                        'först om till SI-enheten meter — då kommer temperaturen ut i kelvin.',
                     text: '$$\\lambda_\\mathrm{max} \\cdot T = 2{,}898 \\cdot 10^{-3}\\ \\mathrm{m \\cdot K}$$\n\n' +
+                        'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        '\\lambda_\\mathrm{max} \\approx 500\\ \\mathrm{nm} = 500 \\cdot 10^{-9}\\ \\mathrm{m}\\ \\text{(avläst)} ' +
+                        '\\end{array} \\right]$$\n\n' +
                         '$$T = \\dfrac{2{,}898 \\cdot 10^{-3}}{500 \\cdot 10^{-9}}\\ \\mathrm{K} \\approx 5800\\ \\mathrm{K}$$',
                     delsvar: { del: 'a', text: 'Solens yttemperatur är cirka $5800\\ \\mathrm{K}$.' },
                 },
@@ -529,16 +560,27 @@ window.NP_PROV['fy2-vt2016'] = {
                         '$\\lambda = h/(mv)$. Vi vet vilken våglängd vi vill ha — då kan vi räkna ut ' +
                         'vilken hastighet elektronen måste få.',
                     text: '$$\\lambda = \\dfrac{h}{m \\cdot v} \\quad \\Longrightarrow \\quad ' +
-                        'v = \\dfrac{h}{m \\cdot \\lambda} = ' +
-                        '\\dfrac{6{,}626 \\cdot 10^{-34}}{9{,}11 \\cdot 10^{-31} \\cdot 1{,}65 \\cdot 10^{-10}}\\ ' +
+                        'v = \\dfrac{h}{m \\cdot \\lambda}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'h \\approx 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}\\ \\text{(Plancks konstant)} \\\\ ' +
+                        'm \\approx 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}\\ \\text{(elektronens massa)} \\\\ ' +
+                        '\\lambda = 1{,}65 \\cdot 10^{-10}\\ \\mathrm{m} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$v = \\dfrac{6{,}626 \\cdot 10^{-34}}{9{,}11 \\cdot 10^{-31} \\cdot 1{,}65 \\cdot 10^{-10}}\\ ' +
                         '\\mathrm{m/s} \\approx 4{,}41 \\cdot 10^6\\ \\mathrm{m/s}$$',
                 },
                 {
                     rubrik: 'Beräkna elektronens rörelseenergi',
                     varfor: 'Accelerationsspänningen ska ge elektronen precis den här rörelseenergin — ' +
                         'så vi räknar ut hur mycket energi hastigheten motsvarar.',
-                    text: '$$E_\\mathrm{k} = \\dfrac{m v^2}{2} = ' +
-                        '\\dfrac{9{,}11 \\cdot 10^{-31} \\cdot (4{,}41 \\cdot 10^6)^2}{2}\\ \\mathrm{J} ' +
+                    text: '$$E_\\mathrm{k} = \\dfrac{m v^2}{2}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'm \\approx 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}\\ \\text{(elektronens massa)} \\\\ ' +
+                        'v \\approx 4{,}41 \\cdot 10^6\\ \\mathrm{m/s}\\ \\text{(beräknad ovan)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$E_\\mathrm{k} = \\dfrac{9{,}11 \\cdot 10^{-31} \\cdot (4{,}41 \\cdot 10^6)^2}{2}\\ \\mathrm{J} ' +
                         '\\approx 8{,}85 \\cdot 10^{-18}\\ \\mathrm{J}$$',
                 },
                 {
@@ -546,7 +588,13 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'När en laddning $q$ accelereras genom spänningen $U$ får den energin ' +
                         '$E = qU$. Vi löser ut $U$.',
                     text: '$$E = q \\cdot U \\quad \\Longrightarrow \\quad ' +
-                        'U = \\dfrac{E}{q} = \\dfrac{8{,}85 \\cdot 10^{-18}}{1{,}602 \\cdot 10^{-19}}\\ ' +
+                        'U = \\dfrac{E}{q}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'E \\approx 8{,}85 \\cdot 10^{-18}\\ \\mathrm{J}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        'q \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}\\ \\text{(elementarladdningen)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$U = \\dfrac{8{,}85 \\cdot 10^{-18}}{1{,}602 \\cdot 10^{-19}}\\ ' +
                         '\\mathrm{V} \\approx 55\\ \\mathrm{V}$$',
                 },
             ],
@@ -582,14 +630,25 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'Falltiden beror bara på fallhöjden — den är densamma oavsett hur fort ' +
                         'hopparen rör sig i sidled. Det är nyckeln till hela uppgiften.',
                     text: '$$y = \\dfrac{g t^2}{2} \\quad \\Longrightarrow \\quad ' +
-                        't = \\sqrt{\\dfrac{2y}{g}} = \\sqrt{\\dfrac{2 \\cdot 5{,}0}{9{,}82}}\\ \\mathrm{s} ' +
+                        't = \\sqrt{\\dfrac{2y}{g}}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'y = 5{,}0\\ \\mathrm{m}\\ \\text{(fallhöjden)} \\\\ ' +
+                        'g \\approx 9{,}82\\ \\mathrm{m/s^2} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$t = \\sqrt{\\dfrac{2 \\cdot 5{,}0}{9{,}82}}\\ \\mathrm{s} ' +
                         '\\approx 1{,}0\\ \\mathrm{s}$$',
                 },
                 {
                     rubrik: 'Beräkna vilken fart som krävs i x-led',
                     varfor: 'För att nå andra sidan måste hopparen hinna $12\\ \\mathrm{m}$ i sidled på ' +
                         'den enda sekund fallet varar. Det ger den kritiska utgångsfarten.',
-                    text: '$$v = \\dfrac{s}{t} = \\dfrac{12}{1{,}009}\\ \\mathrm{m/s} \\approx 12\\ \\mathrm{m/s}$$',
+                    text: 'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        's = 12\\ \\mathrm{m}\\ \\text{(bassängens bredd)} \\\\ ' +
+                        't \\approx 1{,}009\\ \\mathrm{s}\\ \\text{(beräknad ovan)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$v = \\dfrac{s}{t} = \\dfrac{12}{1{,}009}\\ \\mathrm{m/s} \\approx 12\\ \\mathrm{m/s}$$',
                     figur: 'u12-s2',
                 },
                 {
@@ -634,7 +693,11 @@ window.NP_PROV['fy2-vt2016'] = {
                     rubrik: 'Bestäm våglängden på strängen',
                     varfor: 'En sträng är fast inspänd i båda ändar — grundsvängningen har nod i båda ' +
                         'ändarna och en buk på mitten, så strängen rymmer en *halv* våglängd.',
-                    text: '$$L_\\mathrm{sträng} = \\dfrac{\\lambda_\\mathrm{sträng}}{2} = 0{,}605\\ \\mathrm{m} ' +
+                    text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'L_\\mathrm{sträng} = 60{,}5\\ \\mathrm{cm} = 0{,}605\\ \\mathrm{m} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$L_\\mathrm{sträng} = \\dfrac{\\lambda_\\mathrm{sträng}}{2} = 0{,}605\\ \\mathrm{m} ' +
                         '\\quad \\Longrightarrow \\quad \\lambda_\\mathrm{sträng} = 1{,}21\\ \\mathrm{m}$$',
                     figur: 'u13-s2',
                 },
@@ -647,6 +710,12 @@ window.NP_PROV['fy2-vt2016'] = {
                     text: '$$f_\\mathrm{luft} = f_\\mathrm{sträng} \\quad \\Longrightarrow \\quad ' +
                         '\\dfrac{v_\\mathrm{luft}}{\\lambda_\\mathrm{luft}} = ' +
                         '\\dfrac{v_\\mathrm{sträng}}{\\lambda_\\mathrm{sträng}}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'v_\\mathrm{luft} \\approx 340\\ \\mathrm{m/s}\\ \\text{(ljudets hastighet i luft)} \\\\ ' +
+                        '\\lambda_\\mathrm{sträng} = 1{,}21\\ \\mathrm{m}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        '\\lambda_\\mathrm{luft} = 3{,}20\\ \\mathrm{m}\\ \\text{(beräknad ovan)} ' +
+                        '\\end{array} \\right]$$\n\n' +
                         '$$v_\\mathrm{sträng} = \\dfrac{v_\\mathrm{luft} \\cdot \\lambda_\\mathrm{sträng}}' +
                         '{\\lambda_\\mathrm{luft}} = \\dfrac{340 \\cdot 1{,}21}{3{,}20}\\ \\mathrm{m/s} ' +
                         '\\approx 130\\ \\mathrm{m/s}$$',
@@ -682,14 +751,19 @@ window.NP_PROV['fy2-vt2016'] = {
                         'ur valet av spolar.',
                     text: '$$\\dfrac{U_2}{U_1} = \\dfrac{N_2}{N_1} \\quad \\Longrightarrow \\quad ' +
                         'U_2 = U_1 \\cdot \\dfrac{N_2}{N_1}$$\n\n' +
-                        'med $U_1 = 230\\ \\mathrm{V}$ och kravet $4\\ \\mathrm{V} < U_2 < 12\\ \\mathrm{V}$.',
+                        'med kravet $4\\ \\mathrm{V} < U_2 < 12\\ \\mathrm{V}$.',
                 },
                 {
                     del: 'a',
                     rubrik: 'Pröva varvtalskombinationerna',
                     varfor: 'Kravet betyder att förhållandet $N_2/N_1$ måste ligga mellan $4/230 \\approx 0{,}017$ ' +
                         'och $12/230 \\approx 0{,}052$. Vi prövar kvoterna som går att bilda av spolarna.',
-                    text: 'Två kombinationer fungerar:\n\n' +
+                    text: 'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'U_1 = 230\\ \\mathrm{V} \\\\ ' +
+                        'N_1,\\ N_2\\ \\text{väljs bland}\\ 10,\\ 50,\\ 100,\\ 500,\\ 1000\\ \\text{varv} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        'Två kombinationer fungerar:\n\n' +
                         '$$N_1 = 500,\\ N_2 = 10: \\quad U_2 = 230 \\cdot \\dfrac{10}{500}\\ \\mathrm{V} = 4{,}6\\ \\mathrm{V}$$\n\n' +
                         '$$N_1 = 1000,\\ N_2 = 50: \\quad U_2 = 230 \\cdot \\dfrac{50}{1000}\\ \\mathrm{V} = 11{,}5\\ \\mathrm{V}$$\n\n' +
                         'Övriga kvoter hamnar utanför intervallet (t.ex. $10/1000$ ger $2{,}3\\ \\mathrm{V}$ — ' +
@@ -747,6 +821,12 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'Gitterformeln $n\\lambda = d \\sin v$ kopplar vinkeln till våglängden. ' +
                         'Ljuset observerades i *andra* ordningens spektrum, så $n = 2$.',
                     text: '$$\\lambda = \\dfrac{d \\cdot \\sin v}{2}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'd \\approx 1{,}667 \\cdot 10^{-6}\\ \\mathrm{m}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        'v = 30°,\\ 47°\\ \\text{respektive}\\ 51° \\\\ ' +
+                        'n = 2\\ \\text{(andra ordningen)} ' +
+                        '\\end{array} \\right]$$\n\n' +
                         '$$\\lambda_1 = \\dfrac{1{,}667 \\cdot 10^{-6} \\cdot \\sin 30°}{2} \\approx 417\\ \\mathrm{nm} \\approx 420\\ \\mathrm{nm}$$\n\n' +
                         '$$\\lambda_2 = \\dfrac{1{,}667 \\cdot 10^{-6} \\cdot \\sin 47°}{2} \\approx 609\\ \\mathrm{nm} \\approx 610\\ \\mathrm{nm}$$\n\n' +
                         '$$\\lambda_3 = \\dfrac{1{,}667 \\cdot 10^{-6} \\cdot \\sin 51°}{2} \\approx 648\\ \\mathrm{nm} \\approx 650\\ \\mathrm{nm}$$',
@@ -759,7 +839,15 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'De tre observerade våglängderna hör till övergångar rakt ner till ' +
                         'grundtillståndet. Fotonens energi $E = hc/\\lambda$ ger då de exciterade ' +
                         'nivåernas energi över grundtillståndet.',
-                    text: '$$E_1 = \\dfrac{hc}{\\lambda_1} \\approx 4{,}77 \\cdot 10^{-19}\\ \\mathrm{J}, \\quad ' +
+                    text: 'Mätvärden (våglängderna från a) omvandlade till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'h \\approx 6{,}626 \\cdot 10^{-34}\\ \\mathrm{Js}\\ \\text{(Plancks konstant)} \\\\ ' +
+                        'c \\approx 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}\\ \\text{(ljusets hastighet)} \\\\ ' +
+                        '\\lambda_1 \\approx 417\\ \\mathrm{nm} = 417 \\cdot 10^{-9}\\ \\mathrm{m} \\\\ ' +
+                        '\\lambda_2 \\approx 609\\ \\mathrm{nm} = 609 \\cdot 10^{-9}\\ \\mathrm{m} \\\\ ' +
+                        '\\lambda_3 \\approx 648\\ \\mathrm{nm} = 648 \\cdot 10^{-9}\\ \\mathrm{m} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$E_1 = \\dfrac{hc}{\\lambda_1} \\approx 4{,}77 \\cdot 10^{-19}\\ \\mathrm{J}, \\quad ' +
                         'E_2 = \\dfrac{hc}{\\lambda_2} \\approx 3{,}26 \\cdot 10^{-19}\\ \\mathrm{J}, \\quad ' +
                         'E_3 = \\dfrac{hc}{\\lambda_3} \\approx 3{,}07 \\cdot 10^{-19}\\ \\mathrm{J}$$',
                 },
@@ -888,8 +976,13 @@ window.NP_PROV['fy2-vt2016'] = {
                         'där krafterna precis balanserar går rakt fram genom filtret — det är så filtret ' +
                         '"väljer ut" en bestämd hastighet.',
                     text: 'Kraftjämvikt i filtret:\n\n$$F_B = F_E \\quad \\Longrightarrow \\quad ' +
-                        'Q v B_1 = Q E$$\n\n' +
-                        '$$v = \\dfrac{E}{B_1} = \\dfrac{25\\,000}{0{,}049}\\ \\mathrm{m/s} ' +
+                        'Q v B_1 = Q E \\quad \\Longrightarrow \\quad v = \\dfrac{E}{B_1}$$\n\n' +
+                        'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'E = 25\\ \\mathrm{kV/m} = 25\\,000\\ \\mathrm{V/m} \\\\ ' +
+                        'B_1 = 49\\ \\mathrm{mT} = 0{,}049\\ \\mathrm{T} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$v = \\dfrac{25\\,000}{0{,}049}\\ \\mathrm{m/s} ' +
                         '\\approx 5{,}1 \\cdot 10^5\\ \\mathrm{m/s}$$\n\n' +
                         'Alla joner som passerar filtret har alltså denna hastighet — oavsett massa.',
                     figur: 'u17-s2',
@@ -906,10 +999,19 @@ window.NP_PROV['fy2-vt2016'] = {
                 },
                 {
                     rubrik: 'Lös ut massan och identifiera isotopen',
-                    varfor: 'Med hastigheten från filtret och den uppmätta radien $r = 0{,}40\\ \\mathrm{m}$ ' +
-                        'kan massan beräknas. Delar vi med atommassenheten $u$ fås masstalet.',
-                    text: '$$m = \\dfrac{Q B_2 r}{v} = ' +
-                        '\\dfrac{1{,}602 \\cdot 10^{-19} \\cdot 0{,}50 \\cdot 0{,}40}{5{,}1 \\cdot 10^5}\\ ' +
+                    varfor: 'Med hastigheten från filtret och den uppmätta radien kan massan beräknas. ' +
+                        'Radien görs först om från decimeter till SI-enheten meter. Delar vi sedan massan ' +
+                        'med atommassenheten $u$ fås masstalet.',
+                    text: '$$\\dfrac{m v^2}{r} = Q v B_2 \\quad \\Longrightarrow \\quad m = \\dfrac{Q B_2 r}{v}$$\n\n' +
+                        'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'Q \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}\\ \\text{(elementarladdningen)} \\\\ ' +
+                        'B_2 = 0{,}50\\ \\mathrm{T} \\\\ ' +
+                        'r = 4{,}0\\ \\mathrm{dm} = 0{,}40\\ \\mathrm{m} \\\\ ' +
+                        'v \\approx 5{,}1 \\cdot 10^5\\ \\mathrm{m/s}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        'u \\approx 1{,}66 \\cdot 10^{-27}\\ \\mathrm{kg}\\ \\text{(atommassenheten)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$m = \\dfrac{1{,}602 \\cdot 10^{-19} \\cdot 0{,}50 \\cdot 0{,}40}{5{,}1 \\cdot 10^5}\\ ' +
                         '\\mathrm{kg} \\approx 6{,}28 \\cdot 10^{-26}\\ \\mathrm{kg}$$\n\n' +
                         '$$\\dfrac{m}{u} = \\dfrac{6{,}28 \\cdot 10^{-26}}{1{,}66 \\cdot 10^{-27}} \\approx 38$$',
                 },
@@ -947,7 +1049,12 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'I jämviktsläget bär fjädern precis kulans tyngd, $F = mg$. Jämviktskraften ' +
                         'ligger mitt emellan kurvans största och minsta värde.',
                     text: 'Kraften pendlar mellan $1{,}9\\ \\mathrm{N}$ och $3{,}3\\ \\mathrm{N}$, så i ' +
-                        'jämviktsläget är kraften $2{,}6\\ \\mathrm{N}$:\n\n' +
+                        'jämviktsläget är kraften $2{,}6\\ \\mathrm{N}$.\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'F = 2{,}6\\ \\mathrm{N}\\ \\text{(avläst jämviktskraft)} \\\\ ' +
+                        'g \\approx 9{,}82\\ \\mathrm{N/kg} ' +
+                        '\\end{array} \\right]$$\n\n' +
                         '$$m = \\dfrac{F}{g} = \\dfrac{2{,}6}{9{,}82}\\ \\mathrm{kg} \\approx 0{,}265\\ \\mathrm{kg}$$',
                     figur: 'u18-s2',
                 },
@@ -957,7 +1064,13 @@ window.NP_PROV['fy2-vt2016'] = {
                     varfor: 'För en fjädersvängning gäller $\\omega = \\sqrt{k/m}$ — med $\\omega$ och $m$ ' +
                         'kända kan $k$ lösas ut.',
                     text: '$$\\omega = \\sqrt{\\dfrac{k}{m}} \\quad \\Longrightarrow \\quad ' +
-                        'k = \\omega^2 \\cdot m = 4{,}654^2 \\cdot 0{,}265\\ \\mathrm{N/m} \\approx 5{,}7\\ \\mathrm{N/m}$$',
+                        'k = \\omega^2 \\cdot m$$\n\n' +
+                        'Med värdena beräknade ovan:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        '\\omega \\approx 4{,}654\\ \\mathrm{s^{-1}} \\\\ ' +
+                        'm \\approx 0{,}265\\ \\mathrm{kg} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$k = 4{,}654^2 \\cdot 0{,}265\\ \\mathrm{N/m} \\approx 5{,}7\\ \\mathrm{N/m}$$',
                     delsvar: { del: 'a', text: 'Fjäderkonstanten är cirka $5{,}7\\ \\mathrm{N/m}$.' },
                 },
                 {
@@ -978,8 +1091,14 @@ window.NP_PROV['fy2-vt2016'] = {
                         'precis en amplitud $A$ från jämviktsläget — därför dyker $A$ upp här.',
                     text: '$$F_\\mathrm{R} = m \\cdot a_\\mathrm{max} = m \\cdot \\omega^2 \\cdot A ' +
                         '\\quad \\Longrightarrow \\quad ' +
-                        'A = \\dfrac{F_\\mathrm{R}}{m \\cdot \\omega^2} = ' +
-                        '\\dfrac{0{,}70}{0{,}265 \\cdot 4{,}654^2}\\ \\mathrm{m} \\approx 0{,}12\\ \\mathrm{m}$$',
+                        'A = \\dfrac{F_\\mathrm{R}}{m \\cdot \\omega^2}$$\n\n' +
+                        'Med värdena beräknade ovan:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'F_\\mathrm{R} = 0{,}70\\ \\mathrm{N} \\\\ ' +
+                        'm \\approx 0{,}265\\ \\mathrm{kg} \\\\ ' +
+                        '\\omega \\approx 4{,}654\\ \\mathrm{s^{-1}} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$A = \\dfrac{0{,}70}{0{,}265 \\cdot 4{,}654^2}\\ \\mathrm{m} \\approx 0{,}12\\ \\mathrm{m}$$',
                     delsvar: { del: 'b', text: 'Amplituden är cirka $0{,}12\\ \\mathrm{m}$.' },
                 },
             ],
@@ -1011,7 +1130,12 @@ window.NP_PROV['fy2-vt2016'] = {
                         'håller konstant hastighet $v_x = 37\\ \\mathrm{Mm/s}$ genom det ' +
                         '$3{,}0\\ \\mathrm{cm}$ långa fältområdet. Tiden där inne styr hur länge fältet ' +
                         'hinner påverka elektronen.',
-                    text: '$$t = \\dfrac{s}{v_x} = \\dfrac{0{,}030}{37 \\cdot 10^6}\\ \\mathrm{s} ' +
+                    text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        's = 3{,}0\\ \\mathrm{cm} = 0{,}030\\ \\mathrm{m} \\\\ ' +
+                        'v_x = 37\\ \\mathrm{Mm/s} = 37 \\cdot 10^6\\ \\mathrm{m/s} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$t = \\dfrac{s}{v_x} = \\dfrac{0{,}030}{37 \\cdot 10^6}\\ \\mathrm{s} ' +
                         '\\approx 8{,}1 \\cdot 10^{-10}\\ \\mathrm{s}$$',
                     figur: 'u19-s1',
                 },
@@ -1021,7 +1145,12 @@ window.NP_PROV['fy2-vt2016'] = {
                         'och $v_y$. Avlänkningsvinkeln $30°$ ger förhållandet mellan dem — vi delar upp ' +
                         'hastigheten i komposanter.',
                     text: '$$\\tan 30° = \\dfrac{v_y}{v_x} \\quad \\Longrightarrow \\quad ' +
-                        'v_y = v_x \\cdot \\tan 30° = 37 \\cdot 10^6 \\cdot \\tan 30°\\ \\mathrm{m/s} ' +
+                        'v_y = v_x \\cdot \\tan 30°$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'v_x = 37 \\cdot 10^6\\ \\mathrm{m/s} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$v_y = 37 \\cdot 10^6 \\cdot \\tan 30°\\ \\mathrm{m/s} ' +
                         '\\approx 21{,}4 \\cdot 10^6\\ \\mathrm{m/s}$$',
                     figur: 'u19-s2',
                 },
@@ -1031,7 +1160,14 @@ window.NP_PROV['fy2-vt2016'] = {
                         'elektriska kraften verkar. Fältet är homogent, så kraften och accelerationen är ' +
                         'konstanta — elektronen dras mot den positiva plattan.',
                     text: '$$v_y = v_{0y} + at \\quad \\Longrightarrow \\quad ' +
-                        'a = \\dfrac{v_y - 0}{t} = \\dfrac{21{,}4 \\cdot 10^6}{8{,}1 \\cdot 10^{-10}}\\ ' +
+                        'a = \\dfrac{v_y - 0}{t}$$\n\n' +
+                        'Mätvärden:\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'v_y \\approx 21{,}4 \\cdot 10^6\\ \\mathrm{m/s}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        't \\approx 8{,}1 \\cdot 10^{-10}\\ \\mathrm{s}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        'm \\approx 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}\\ \\text{(elektronens massa)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$a = \\dfrac{21{,}4 \\cdot 10^6}{8{,}1 \\cdot 10^{-10}}\\ ' +
                         '\\mathrm{m/s^2} \\approx 2{,}6 \\cdot 10^{16}\\ \\mathrm{m/s^2}$$\n\n' +
                         '$$F = m \\cdot a = 9{,}11 \\cdot 10^{-31} \\cdot 2{,}6 \\cdot 10^{16}\\ \\mathrm{N} ' +
                         '\\approx 2{,}4 \\cdot 10^{-14}\\ \\mathrm{N}$$',
@@ -1043,8 +1179,14 @@ window.NP_PROV['fy2-vt2016'] = {
                         'mellan två plattor med avståndet $d$ är fältstyrkan $E = U/d$ — det ger ' +
                         'spänningen.',
                     text: '$$F = q \\cdot E = q \\cdot \\dfrac{U}{d} \\quad \\Longrightarrow \\quad ' +
-                        'U = \\dfrac{F \\cdot d}{q} = ' +
-                        '\\dfrac{2{,}4 \\cdot 10^{-14} \\cdot 0{,}040}{1{,}602 \\cdot 10^{-19}}\\ \\mathrm{V} ' +
+                        'U = \\dfrac{F \\cdot d}{q}$$\n\n' +
+                        'Mätvärden (efter omvandling till SI-enheter):\n\n' +
+                        '$$\\left[ \\begin{array}{l} ' +
+                        'F \\approx 2{,}4 \\cdot 10^{-14}\\ \\mathrm{N}\\ \\text{(beräknad ovan)} \\\\ ' +
+                        'd = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m} \\\\ ' +
+                        'q \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}\\ \\text{(elementarladdningen)} ' +
+                        '\\end{array} \\right]$$\n\n' +
+                        '$$U = \\dfrac{2{,}4 \\cdot 10^{-14} \\cdot 0{,}040}{1{,}602 \\cdot 10^{-19}}\\ \\mathrm{V} ' +
                         '\\approx 6{,}0\\ \\mathrm{kV}$$',
                 },
             ],

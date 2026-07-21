@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.14",
  "voice": "sv-SE-SofieNeural",
- "hash": "c45fafe54e45d9d8d3c746083200df009df45e48",
- "dur": 276.35,
+ "hash": "7ae64cfb4507c7d69e08cb07efc0dc32179b4301",
+ "dur": 276.68,
  "segments": [
   {
    "t": "Millikans oljedroppsförsök",
@@ -177,32 +177,32 @@
   {
    "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med energin E",
    "s": 211.86,
-   "e": 238.69
+   "e": 239.01
   },
   {
-   "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter",
+   "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter",
    "s": 211.86,
-   "e": 238.69
+   "e": 239.01
   },
   {
    "t": "laddningen Q är lika med 2,15 gånger 10 upphöjt till minus 14 gånger 9,82 delat med 440 000 som är lika med 4,798 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 238.69,
-   "e": 251.79
+   "s": 239.01,
+   "e": 252.11
   },
   {
    "t": "För att få antalet elektroner n dividerar vi denna totala laddning på oljedroppen Q med laddningen hos en elektron q e .",
-   "s": 251.79,
-   "e": 259.81
+   "s": 252.11,
+   "e": 260.14
   },
   {
    "t": "n är lika med laddningen Q delat med q e som är lika med 4,798 gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 2,995 som är ungefär lika med 3 st",
-   "s": 259.81,
-   "e": 276.35
+   "s": 260.14,
+   "e": 276.68
   },
   {
    "t": "Svar: 3 st",
-   "s": 259.81,
-   "e": 276.35
+   "s": 260.14,
+   "e": 276.68
   }
  ]
 }

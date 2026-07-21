@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "dd71a44d39f17e43f850681826db45bb89cd08f8",
- "dur": 269.76,
+ "hash": "5eb0f2a6f0b6ce5bf22d5d51f71cbf50d3aaab3a",
+ "dur": 270.65,
  "segments": [
   {
    "t": "Räkneexempel — Den fatala gungan",
@@ -102,97 +102,97 @@
   {
    "t": "Vi dividerar båda led med m och löser ut hastigheten v.",
    "s": 125.59,
-   "e": 130.2
+   "e": 130.21
   },
   {
    "t": "tyngdfaktorn g gånger höjden h är lika med hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v i kvadrat är lika med 2 gånger g gånger h vilket är ekvivalent med att v är lika med roten ur 2 gånger g gånger h",
-   "s": 130.2,
-   "e": 154.34
+   "s": 130.21,
+   "e": 154.59
   },
   {
-   "t": "Insättning av tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat och höjden h är lika med 1,0 meter (tyngdpunkten \"faller\" 1,0 meter) ger",
-   "s": 130.2,
-   "e": 154.34
+   "t": "Insättning av tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat och höjden h är lika med 1,0 meter (tyngdpunkten \"faller\" 1,0 meter) ger",
+   "s": 130.21,
+   "e": 154.59
   },
   {
    "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 1,0 som är lika med 4,431 meter per sekund",
-   "s": 154.34,
-   "e": 163.88
+   "s": 154.59,
+   "e": 164.12
   },
   {
    "t": "Nu kan vi beräkna spännkraften F S .",
-   "s": 163.88,
-   "e": 167.74
+   "s": 164.12,
+   "e": 168.0
   },
   {
-   "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
-   "s": 167.74,
-   "e": 180.97
+   "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat",
+   "s": 168.0,
+   "e": 181.57
   },
   {
    "t": "i ekvation 1 ger",
-   "s": 180.97,
-   "e": 183.78
+   "s": 181.57,
+   "e": 184.38
   },
   {
    "t": "F S är lika med 80 gånger 4,431 i kvadrat delat med 2,5 plus 80 gånger 9,82 som är lika med 1414,08 newton som är ungefär lika med 1 400 newton som är lika med 1,4 kilonewton",
-   "s": 183.78,
-   "e": 200.24
+   "s": 184.38,
+   "e": 200.84
   },
   {
    "t": "Svar: 1,4 kilonewton",
-   "s": 200.24,
-   "e": 203.72
+   "s": 200.84,
+   "e": 204.32
   },
   {
    "t": "b) Vi ritar krafterna i översta läget.",
-   "s": 203.72,
-   "e": 207.75
+   "s": 204.32,
+   "e": 208.35
   },
   {
    "t": "I gränsfallet när repet precis slaknar är spännkraften F S är lika med 0 och endast tyngdkraften F G verkar.",
-   "s": 207.75,
-   "e": 215.64
+   "s": 208.35,
+   "e": 216.24
   },
   {
    "t": "Centripetalkraften utgörs alltså endast av tyngdkraften.",
-   "s": 215.64,
-   "e": 220.29
+   "s": 216.24,
+   "e": 220.89
   },
   {
    "t": "Detta ger",
-   "s": 220.29,
-   "e": 222.26
+   "s": 220.89,
+   "e": 222.86
   },
   {
    "t": "F C är lika med F G vilket är ekvivalent med att massan m gånger hastigheten v i kvadrat delat med r är lika med m gånger tyngdfaktorn g",
-   "s": 222.26,
-   "e": 231.45
+   "s": 222.86,
+   "e": 232.05
   },
   {
    "t": "Vi dividerar båda led med m och löser ut hastigheten v.",
-   "s": 231.45,
-   "e": 236.06
+   "s": 232.05,
+   "e": 236.66
   },
   {
    "t": "hastigheten v i kvadrat delat med r är lika med tyngdfaktorn g vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r",
-   "s": 236.06,
-   "e": 254.06
+   "s": 236.66,
+   "e": 254.95
   },
   {
-   "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter",
-   "s": 236.06,
-   "e": 254.06
+   "t": "tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter",
+   "s": 236.66,
+   "e": 254.95
   },
   {
    "t": "hastigheten v är lika med roten ur 9,82 gånger 2,5 som är lika med 4,954 meter per sekund som är ungefär lika med 5,0 meter per sekund",
-   "s": 254.06,
-   "e": 266.0
+   "s": 254.95,
+   "e": 266.89
   },
   {
    "t": "Svar: 5,0 meter per sekund",
-   "s": 266.0,
-   "e": 269.76
+   "s": 266.89,
+   "e": 270.65
   }
  ]
 }

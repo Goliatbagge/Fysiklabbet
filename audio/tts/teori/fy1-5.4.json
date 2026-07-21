@@ -1,8 +1,8 @@
 {
- "id": "fy1-5.3",
+ "id": "fy1-5.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "29f8d8fb1291ff480cfe110f08b3b36dd90cfe95",
- "dur": 327.76,
+ "hash": "37874dc7e64126364f19469d8829fb010c2c66b6",
+ "dur": 326.96,
  "segments": [
   {
    "t": "Lufttryck och totalt tryck",
@@ -217,87 +217,87 @@
   {
    "t": "Bestäm på 3,0 meters djup a) vätsketrycket, b) det totala trycket, c) tryckkraften på din trumhinna om den har arean 80 millimeter i kvadrat.",
    "s": 192.76,
-   "e": 203.85
+   "e": 203.84
   },
   {
    "t": "a)",
-   "s": 203.85,
-   "e": 219.74
+   "s": 203.84,
+   "e": 220.09
   },
   {
    "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 203.85,
-   "e": 219.74
+   "s": 203.84,
+   "e": 220.09
   },
   {
-   "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
-   "s": 203.85,
-   "e": 219.74
+   "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
+   "s": 203.84,
+   "e": 220.09
   },
   {
    "t": "trycket p är lika med 998 gånger 9,82 gånger 3,0 som är lika med 29 401,08 pascal som är ungefär lika med 29 000 pascal som är lika med 29 kilopascal",
-   "s": 219.74,
-   "e": 233.68
+   "s": 220.09,
+   "e": 234.01
   },
   {
    "t": "Svar: 29 kilopascal",
-   "s": 233.68,
-   "e": 237.16
+   "s": 234.01,
+   "e": 237.5
   },
   {
    "t": "b)",
-   "s": 237.16,
-   "e": 244.19
+   "s": 237.5,
+   "e": 244.53
   },
   {
    "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 237.16,
-   "e": 244.19
+   "s": 237.5,
+   "e": 244.53
   },
   {
-   "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
-   "s": 244.19,
-   "e": 260.88
+   "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
+   "s": 244.53,
+   "e": 261.57
   },
   {
    "t": "trycket p är lika med 101 300 plus 998 gånger 9,82 gånger 3,0 som är lika med 130 701,08 pascal som är ungefär lika med 0,13 MPa",
-   "s": 260.88,
-   "e": 275.01
+   "s": 261.57,
+   "e": 275.71
   },
   {
    "t": "Svar: 0,13 MPa",
-   "s": 275.01,
-   "e": 278.48
+   "s": 275.71,
+   "e": 279.18
   },
   {
    "t": "c) Det tryck som kommer att ge en tryckkraft på din trumhinna är endast vätsketrycket.",
-   "s": 278.48,
-   "e": 284.38
+   "s": 279.18,
+   "e": 285.07
   },
   {
    "t": "Lufttrycket finns även inuti örat så det kommer att ta ut det yttre lufttrycket.",
-   "s": 284.38,
-   "e": 289.81
+   "s": 285.07,
+   "e": 290.51
   },
   {
    "t": "trycket p är lika med kraften F delat med arean A vilket är ekvivalent med att F är lika med p gånger A",
-   "s": 289.81,
-   "e": 310.1
+   "s": 290.51,
+   "e": 310.91
   },
   {
    "t": "trycket p är lika med 29 401,08 pascal parentesen vätsketrycket från a-uppgiften slut parentes arean A som är lika med 80 millimeter i kvadrat som är lika med 80 gånger 10 upphöjt till minus 6 kvadratmeter",
-   "s": 289.81,
-   "e": 310.1
+   "s": 290.51,
+   "e": 310.91
   },
   {
    "t": "kraften F är lika med 29 401,08 gånger 80 gånger 10 upphöjt till minus 6 som är lika med 2,352 newton som är ungefär lika med 2,4 newton",
-   "s": 310.1,
-   "e": 324.45
+   "s": 311.04,
+   "e": 323.68
   },
   {
    "t": "Svar: 2,4 newton",
-   "s": 324.4,
-   "e": 327.76
+   "s": 323.63,
+   "e": 326.96
   }
  ]
 }

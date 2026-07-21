@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "d47b8b20633dd763bba3c6cab510263bb7260099",
- "dur": 750.46,
+ "hash": "2abf175d0eb767aa0fa7b909c874aa546a333ca4",
+ "dur": 752.41,
  "segments": [
   {
    "t": "Kaströrelse",
@@ -392,232 +392,232 @@
   {
    "t": "Vi ställer upp formeln för hastigheten i y-led och löser ut tiden t.",
    "s": 407.38,
-   "e": 422.29
+   "e": 422.31
   },
   {
    "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t vilket är ekvivalent med att t är lika med v noll gånger sinus alfa minus v y delat med g",
    "s": 407.38,
-   "e": 422.29
+   "e": 422.31
   },
   {
-   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader v y som är lika med 0 tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
-   "s": 422.29,
-   "e": 433.22
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader v y som är lika med 0 tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat",
+   "s": 422.31,
+   "e": 433.53
   },
   {
    "t": "tiden t är lika med 15 gånger sinus 50 grader minus 0 delat med 9,82 som är lika med 1,170 sekund som är ungefär lika med 1,2 sekund",
-   "s": 433.22,
-   "e": 444.28
+   "s": 433.53,
+   "e": 444.61
   },
   {
    "t": "Svar: 1,2 sekunder",
-   "s": 444.28,
-   "e": 447.47
+   "s": 444.61,
+   "e": 447.79
   },
   {
    "t": "b) Vi använder formeln för stighöjd.",
-   "s": 447.47,
-   "e": 451.34
+   "s": 447.79,
+   "e": 451.67
   },
   {
    "t": "y \\max är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 tyngdfaktorn g",
-   "s": 451.34,
-   "e": 468.75
+   "s": 451.67,
+   "e": 469.39
   },
   {
-   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
-   "s": 451.34,
-   "e": 468.75
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat",
+   "s": 451.67,
+   "e": 469.39
   },
   {
    "t": "y \\max är lika med 15 i kvadrat gånger sinus i kvadrat parentesen 50 grader slut parentes delat med 2 gånger 9,82 som är lika med 6,722 meter som är ungefär lika med 6,7 meter",
-   "s": 468.75,
-   "e": 483.68
+   "s": 469.39,
+   "e": 484.32
   },
   {
    "t": "Svar: 6,7 meter",
-   "s": 483.68,
-   "e": 486.92
+   "s": 484.32,
+   "e": 487.56
   },
   {
    "t": "c) Eftersom bollen startar och slutar i samma horisontalplan, kan vi använda formeln för kastvidd.",
-   "s": 486.92,
-   "e": 493.95
+   "s": 487.56,
+   "e": 494.59
   },
   {
    "t": "x \\max är lika med v noll i kvadrat gånger sinus parentesen 2 alfa slut parentes delat med tyngdfaktorn g som är lika med 15 i kvadrat gånger sinus parentesen 2 gånger 50 grader slut parentes delat med 9,82 som är lika med 22,564 meter som är ungefär lika med 23 meter",
-   "s": 493.95,
-   "e": 513.72
+   "s": 494.59,
+   "e": 514.36
   },
   {
    "t": "Svar: 23 meter",
-   "s": 513.72,
-   "e": 516.68
+   "s": 514.36,
+   "e": 517.32
   },
   {
    "t": "d) Vi ställer upp formeln för fart i kaströrelse.",
-   "s": 516.68,
-   "e": 520.99
+   "s": 517.32,
+   "e": 521.63
   },
   {
    "t": "hastigheten v är lika med roten ur v x i kvadrat plus v y i kvadrat, ekvation 1",
-   "s": 520.99,
-   "e": 528.27
+   "s": 521.63,
+   "e": 528.9
   },
   {
    "t": "Eftersom bollen når sin högsta höjd efter 1,170… sekunder slår den i marken efter dubbla tiden, dvs. tiden t är lika med 2 gånger 1,170 som är lika med 2,340 sekunder.",
-   "s": 528.27,
-   "e": 541.71
+   "s": 528.9,
+   "e": 542.34
   },
   {
    "t": "Vi bestämmer v x och v y vid nedslaget.",
-   "s": 541.71,
-   "e": 546.0
+   "s": 542.34,
+   "e": 546.63
   },
   {
-   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat tiden t som är lika med 2,340 sekund",
-   "s": 546.0,
-   "e": 558.33
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat tiden t som är lika med 2,340 sekund",
+   "s": 546.63,
+   "e": 559.33
   },
   {
    "t": "v x är lika med v noll gånger cosinus alfa som är lika med 15 gånger cosinus 50 grader som är lika med 9,641 meter per sekund",
-   "s": 558.33,
-   "e": 568.64
+   "s": 559.33,
+   "e": 569.64
   },
   {
    "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t som är lika med 15 gånger sinus 50 grader minus 9,82 gånger 2,340 som är lika med minus 11,488 meter per sekund",
-   "s": 568.64,
-   "e": 584.18
+   "s": 569.64,
+   "e": 585.17
   },
   {
    "t": "Insättning i ekvation 1:",
-   "s": 584.18,
-   "e": 603.4
+   "s": 585.17,
+   "e": 604.39
   },
   {
    "t": "hastigheten v är lika med roten ur parentesen 9,641 slut parentes i kvadrat plus parentesen minus 11,488 slut parentes i kvadrat som är lika med 14,997 meter per sekund som är ungefär lika med 15 meter per sekund",
-   "s": 584.18,
-   "e": 603.4
+   "s": 585.17,
+   "e": 604.39
   },
   {
    "t": "Svar: 15 meter per sekund",
-   "s": 603.4,
-   "e": 606.84
+   "s": 604.39,
+   "e": 607.83
   },
   {
    "t": "Observation — symmetri kring kastparabeln",
-   "s": 606.84,
-   "e": 610.62
+   "s": 607.83,
+   "e": 611.61
   },
   {
    "t": "Bollen slår i marken med samma fart som den hade vid utkastet (15 meter per sekund).",
-   "s": 610.62,
-   "e": 616.86
+   "s": 611.61,
+   "e": 617.84
   },
   {
    "t": "När något startar och slutar i samma horisontalplan är sluthastigheten lika stor som starthastigheten.",
-   "s": 616.86,
-   "e": 623.86
+   "s": 617.84,
+   "e": 624.87
   },
   {
    "t": "Detta är värt att tänka på vid t.ex. \"ceremonial gunfires\" — skott som skjuts rakt upp i luften kommer att landa med samma fart som de avlossades.",
-   "s": 623.86,
-   "e": 632.42
+   "s": 624.87,
+   "e": 635.3
   },
   {
    "t": "Exempel 2 — Kast från höjd",
-   "s": 632.42,
-   "e": 636.95
+   "s": 635.25,
+   "e": 638.5
   },
   {
    "t": "En liten boll kastas med utgångshastigheten 25 meter per sekund och vinkeln 40 grader.",
-   "s": 636.9,
-   "e": 643.32
+   "s": 638.5,
+   "e": 644.89
   },
   {
    "t": "Bollen släpps vid höjden 1,6 meter.",
-   "s": 643.32,
-   "e": 647.1
+   "s": 644.89,
+   "e": 648.66
   },
   {
    "t": "Hur långt blir kastet?",
-   "s": 647.1,
-   "e": 649.8
+   "s": 648.66,
+   "e": 651.37
   },
   {
    "t": "Vi ställer upp formeln för läge i x-led.",
-   "s": 649.8,
-   "e": 653.37
+   "s": 651.37,
+   "e": 654.95
   },
   {
    "t": "x är lika med v noll gånger cosinus alfa gånger tiden t, ekvation 1",
-   "s": 653.37,
-   "e": 659.52
+   "s": 654.95,
+   "e": 661.1
   },
   {
    "t": "Vi behöver tiden det tar för bollen att landa.",
-   "s": 659.52,
-   "e": 663.31
+   "s": 661.1,
+   "e": 664.89
   },
   {
    "t": "Om vi sätter origo vid kastets utgångshöjd, slår bollen i marken då y är lika med −1,6 meter.",
-   "s": 663.31,
-   "e": 670.47
+   "s": 664.89,
+   "e": 672.05
   },
   {
    "t": "Vi ställer upp formeln för bollens läge i y-led och löser ekvationen.",
-   "s": 670.47,
-   "e": 675.45
+   "s": 672.05,
+   "e": 677.02
   },
   {
    "t": "y är lika med v noll gånger sinus alfa gånger tiden t minus tyngdfaktorn g gånger t i kvadrat delat med 2",
-   "s": 675.45,
-   "e": 683.47
+   "s": 677.02,
+   "e": 685.05
   },
   {
-   "t": "y är lika med minus 1,6 meter v noll som är lika med 25 meter per sekund alfa som är lika med 40 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
-   "s": 683.47,
-   "e": 695.3
+   "t": "y är lika med minus 1,6 meter v noll som är lika med 25 meter per sekund alfa som är lika med 40 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat",
+   "s": 685.05,
+   "e": 697.26
   },
   {
    "t": "minus 1,6 är lika med 25 gånger sinus 40 grader gånger tiden t minus 9,82 gånger t i kvadrat delat med 2",
-   "s": 695.3,
-   "e": 704.83
+   "s": 697.26,
+   "e": 706.79
   },
   {
    "t": "Detta är en andragradsekvation.",
-   "s": 704.83,
-   "e": 708.07
+   "s": 706.79,
+   "e": 710.02
   },
   {
    "t": "Vi kan lösa den med pq-formeln, men det går lika bra med ett tekniskt hjälpmedel (t.ex. Geogebras CAS-läge).",
-   "s": 708.07,
-   "e": 715.93
+   "s": 710.02,
+   "e": 717.89
   },
   {
    "t": "Lösningarna är tiden t är ungefär lika med minus 0,097 sekunder och tiden t är ungefär lika med 3,369 sekunder.",
-   "s": 715.93,
-   "e": 725.37
+   "s": 717.89,
+   "e": 727.32
   },
   {
    "t": "Vi bortser från den negativa lösningen.",
-   "s": 725.37,
-   "e": 728.87
+   "s": 727.32,
+   "e": 730.82
   },
   {
    "t": "Insättning av tiden t är lika med 3,369 sekunder i ekvation 1 ger",
-   "s": 728.87,
-   "e": 735.57
+   "s": 730.82,
+   "e": 737.52
   },
   {
    "t": "x är lika med 25 gånger cosinus 40 grader gånger 3,369 som är lika med 64,530 meter som är ungefär lika med 65 meter",
-   "s": 735.57,
-   "e": 747.23
+   "s": 737.52,
+   "e": 749.19
   },
   {
    "t": "Svar: 65 meter",
-   "s": 747.23,
-   "e": 750.46
+   "s": 749.19,
+   "e": 752.41
   }
  ]
 }

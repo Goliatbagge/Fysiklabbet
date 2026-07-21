@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "0f01412dede8de20426a12600923199a1a82f156",
- "dur": 352.18,
+ "hash": "99983216aa047c3e61a6ec1b5a5e89375adec6b0",
+ "dur": 351.1,
  "segments": [
   {
    "t": "Elektrisk ström",
@@ -262,67 +262,67 @@
   {
    "t": "n är lika med laddningen Q delat med q e",
    "s": 271.8,
-   "e": 282.8
+   "e": 283.16
   },
   {
-   "t": "laddningen Q är lika med 0,24 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
+   "t": "laddningen Q är lika med 0,24 coulomb q e som är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
    "s": 271.8,
-   "e": 282.8
+   "e": 283.16
   },
   {
    "t": "n är lika med 0,24 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,498 gånger 10 upphöjt till 18 st som är ungefär lika med 1,5 gånger 10 upphöjt till 18 st",
-   "s": 282.8,
-   "e": 301.84
+   "s": 283.16,
+   "e": 302.25
   },
   {
    "t": "Svar: 1,5 gånger 10 upphöjt till 18 st",
-   "s": 282.8,
-   "e": 301.84
+   "s": 283.16,
+   "e": 302.25
   },
   {
    "t": "Exempel 2 — Kirchhoffs första lag",
-   "s": 282.8,
-   "e": 301.84
+   "s": 283.16,
+   "e": 302.25
   },
   {
    "t": "Bestäm I två om I ett är lika med 0,25 ampere och I tre är lika med 0,08 ampere.",
-   "s": 301.84,
-   "e": 310.43
+   "s": 302.4,
+   "e": 309.34
   },
   {
    "t": "I ett in från vänster, I två ut åt höger, I tre ned i knutpunkten.",
-   "s": 310.38,
-   "e": 316.24
+   "s": 309.29,
+   "e": 315.18
   },
   {
    "t": "Summan av de ingående strömmarna till punkten ska vara lika med summan av de utgående strömmarna från punkten enligt Kirchhoffs första lag.",
-   "s": 316.24,
-   "e": 324.41
+   "s": 315.18,
+   "e": 323.33
   },
   {
    "t": "Vi ställer upp det sambandet och löser ut strömmen I två .",
-   "s": 324.41,
-   "e": 328.77
+   "s": 323.33,
+   "e": 327.69
   },
   {
    "t": "I ett är lika med I två plus I tre vilket är ekvivalent med att I två är lika med I ett minus I tre",
-   "s": 328.77,
-   "e": 335.82
+   "s": 327.69,
+   "e": 334.74
   },
   {
    "t": "I ett är lika med 0,25 ampere I tre som är lika med 0,08 ampere",
-   "s": 335.82,
-   "e": 342.14
+   "s": 334.74,
+   "e": 341.07
   },
   {
    "t": "I två är lika med 0,25 minus 0,08 som är lika med 0,17 ampere",
-   "s": 342.14,
-   "e": 348.81
+   "s": 341.07,
+   "e": 347.73
   },
   {
    "t": "Svar: 0,17 ampere",
-   "s": 348.81,
-   "e": 352.18
+   "s": 347.73,
+   "e": 351.1
   }
  ]
 }

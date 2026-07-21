@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "44a288fefa6a9ee5b4da9e8fc04dea1ebe898723",
- "dur": 227.2,
+ "hash": "d1cdfd4d41183ea3a4c170cbee1c575c8f3dced0",
+ "dur": 227.6,
  "segments": [
   {
    "t": "Lägesenergi",
@@ -197,22 +197,22 @@
   {
    "t": "arbetet W är lika med E trycket p som är lika med massan m gånger tyngdfaktorn g gånger höjden h",
    "s": 195.34,
-   "e": 210.18
+   "e": 210.57
   },
   {
-   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter",
+   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter",
    "s": 195.34,
-   "e": 210.18
+   "e": 210.57
   },
   {
    "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 som är lika med 785,6 Nm som är ungefär lika med 790 Nm som är lika med 0,79 kNm",
-   "s": 210.18,
-   "e": 223.18
+   "s": 210.57,
+   "e": 223.57
   },
   {
    "t": "Svar: 0,79 kilojoule",
-   "s": 223.18,
-   "e": 227.2
+   "s": 223.57,
+   "e": 227.6
   }
  ]
 }

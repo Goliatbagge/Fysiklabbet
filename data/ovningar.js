@@ -3801,7 +3801,7 @@ $$
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
 t = 3{,}0\\ \\mathrm{s}
 \\end{array} \\right]
 $$
@@ -3876,7 +3876,7 @@ $$
 \\left[ \\begin{array}{l}
 v_0 = +12\\ \\mathrm{m/s} \\\\
 v = 0 \\quad (\\text{i toppunkten}) \\\\
-a = -g = -9{,}82\\ \\mathrm{m/s^2}
+a = -g \\approx -9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -4482,7 +4482,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 s = 18{,}5\\ \\mathrm{cm} = 0{,}185\\ \\mathrm{m} \\\\
-g = 9{,}82\\ \\mathrm{m/s^2}
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -4745,7 +4745,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 s = 12\\ \\mathrm{m} \\\\
-g = 9{,}82\\ \\mathrm{m/s^2}
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -4793,7 +4793,7 @@ $$
 \\left[ \\begin{array}{l}
 v_0 = 18\\ \\mathrm{m/s} \\\\
 v = 0 \\\\
-a = -g = -9{,}82\\ \\mathrm{m/s^2}
+a = -g \\approx -9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -4823,7 +4823,7 @@ Vilken **fart** har bollen när den slår i marken?
             solution: `Vi väljer **uppåt som positiv riktning** och låter kastpunkten vara origo. Då är:
 
 - $v_0 = +15$ m/s (uppåt)
-- $a = -g = -9{,}82$ m/s² (riktad nedåt)
+- $a = -g \\approx -9{,}82$ m/s² (riktad nedåt)
 - Markens position är 2,0 m **under** origo, alltså är förflyttningen från kastpunkt till mark $s = -2{,}0$ m (nedåt = negativt).
 
 Torricellis ekvation:
@@ -6375,7 +6375,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 80\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 h = 25\\ \\mathrm{m} \\\\
 v = 18\\ \\mathrm{m/s}
 \\end{array} \\right]
@@ -7213,7 +7213,7 @@ ${makeFluidBeaker({ liquidLabel: 'ρ = 998 kg/m³', itemLabel: 'dykare', itemDe
 $$
 \\left[ \\begin{array}{l}
 \\rho = 998\\ \\mathrm{kg/m^3} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 h = 4{,}0\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -7258,7 +7258,7 @@ $$
 \\left[ \\begin{array}{l}
 p = 1{,}0\\ \\mathrm{MPa} = 1{,}0 \\cdot 10^{6}\\ \\mathrm{Pa} \\\\
 \\rho = 1\\,028\\ \\mathrm{kg/m^3} \\\\
-g = 9{,}82\\ \\mathrm{N/kg}
+g \\approx 9{,}82\\ \\mathrm{N/kg}
 \\end{array} \\right]
 $$
 
@@ -7422,7 +7422,7 @@ $$
 \\left[ \\begin{array}{l}
 p_0 = 101{,}3\\ \\mathrm{kPa} = 101\\,300\\ \\mathrm{Pa} \\\\
 \\rho = 998\\ \\mathrm{kg/m^3} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 h = 3{,}0\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -7513,7 +7513,7 @@ $$
 \\left[ \\begin{array}{l}
 p_0 = 101\\,000\\ \\mathrm{Pa} \\\\
 \\rho = 1\\,030\\ \\mathrm{kg/m^3} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 h = 11\\,000\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -7565,7 +7565,7 @@ $$
 $$
 \\left[ \\begin{array}{l}
 \\rho = 998\\ \\mathrm{kg/m^3} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 V = 5{,}0\\ \\mathrm{liter} = 5{,}0 \\cdot 10^{-3}\\ \\mathrm{m^3}
 \\end{array} \\right]
 $$
@@ -9210,7 +9210,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 Q = 4{,}0\\ \\mathrm{nC} = 4{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
-q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
 $$
 
@@ -9258,7 +9258,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 n = 3{,}0 \\cdot 10^{10}\\ \\text{st} \\\\
-q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
 $$
 
@@ -9612,7 +9612,7 @@ $$ n = \\frac{Q}{q_e} $$
 $$
 \\left[ \\begin{array}{l}
 Q = 0{,}50\\ \\mathrm{C} \\\\
-q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
 $$
 
@@ -9778,9 +9778,9 @@ $$ v = \\sqrt{\\frac{2 \\cdot Q \\cdot U}{m}} $$
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+Q \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
 U = 200\\ \\mathrm{V} \\\\
-m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}
+m \\approx 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}
 \\end{array} \\right]
 $$
 
@@ -9803,9 +9803,9 @@ $$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad U = \\frac{
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg} \\\\
+m \\approx 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg} \\\\
 v = 3{,}0 \\cdot 10^6\\ \\mathrm{m/s} \\\\
-Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+Q \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
 $$
 
@@ -11171,7 +11171,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 2{,}0 \\cdot 10^{-14}\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 \\mathbb{E} = 4{,}0 \\cdot 10^5\\ \\mathrm{V/m}
 \\end{array} \\right]
 $$
@@ -11214,7 +11214,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 1{,}8 \\cdot 10^{-14}\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 d = 4{,}0\\ \\mathrm{mm} = 4{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
 U = 1{,}5\\ \\mathrm{kV} = 1\\,500\\ \\mathrm{V}
 \\end{array} \\right]
@@ -11262,7 +11262,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 3{,}3 \\cdot 10^{-15}\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 d = 6{,}0\\ \\mathrm{mm} = 6{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
 Q = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
@@ -11502,7 +11502,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 Z = 26 \\\\
-q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
 \\end{array} \\right]
 $$
 
@@ -11526,7 +11526,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
-q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
 r = 2{,}0 \\cdot 10^{-15}\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -12440,7 +12440,7 @@ $$ mg - N = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad N = mg - \\frac{mv^2}{r
 Mätvärden ($v = 72\\ \\mathrm{km/h} = 20\\ \\mathrm{m/s}$):
 $$
 \\left[ \\begin{array}{l}
-m = 1\\,200\\ \\mathrm{kg},\\quad g = 9{,}82\\ \\mathrm{N/kg} \\\\
+m = 1\\,200\\ \\mathrm{kg},\\quad g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 v = 20\\ \\mathrm{m/s},\\quad r = 60\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -12516,7 +12516,7 @@ $$
 \\left[ \\begin{array}{l}
 l = 1{,}5\\ \\mathrm{m} \\\\
 \\alpha = 25^\\circ \\\\
-g = 9{,}82\\ \\mathrm{m/s^2}
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -12588,7 +12588,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} \\quad\\Leftrightarrow\\quad \\cos\
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
 T = 1{,}8\\ \\mathrm{s} \\\\
 l = 1{,}0\\ \\mathrm{m}
 \\end{array} \\right]
@@ -13058,7 +13058,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 320\\ \\mathrm{g} = 0{,}320\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 \\Delta l = 6{,}5\\ \\mathrm{cm} = 0{,}065\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -13128,7 +13128,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 0{,}50\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 \\Delta l_1 = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -13621,7 +13621,7 @@ $$ k = \\frac{m_1 \\cdot g}{\\Delta l} $$
 $$
 \\left[ \\begin{array}{l}
 m_1 = 200\\ \\mathrm{g} = 0{,}200\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 \\Delta l = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m}
 \\end{array} \\right]
 $$
@@ -13717,7 +13717,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 l = 2{,}0\\ \\mathrm{m} \\\\
-g = 9{,}82\\ \\mathrm{m/s^2}
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -13741,7 +13741,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 T = 1{,}50\\ \\mathrm{s} \\\\
-g = 9{,}82\\ \\mathrm{m/s^2}
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -13811,7 +13811,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 T_\\text{jord} = 2{,}00\\ \\mathrm{s} \\\\
-g_\\text{jord} = 9{,}82\\ \\mathrm{m/s^2} \\\\
+g_\\text{jord} \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
 g_\\text{Mars} = 3{,}71\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
@@ -13850,7 +13850,7 @@ $$
 \\left[ \\begin{array}{l}
 t_\\text{verklig} = 24{,}00\\ \\mathrm{h} \\\\
 t_\\text{klocka} = 14\\ \\mathrm{h}\\ 45\\ \\mathrm{min} = 14{,}75\\ \\mathrm{h} \\\\
-g_\\text{jord} = 9{,}82\\ \\mathrm{m/s^2}
+g_\\text{jord} \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
@@ -15806,7 +15806,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 5{,}0\\ \\mathrm{g} = 0{,}0050\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{N/kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
 I = 2{,}5\\ \\mathrm{A} \\\\
 l = 20\\ \\mathrm{cm} = 0{,}20\\ \\mathrm{m}
 \\end{array} \\right]
@@ -16169,7 +16169,7 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 m = 50\\ \\mathrm{g} = 0{,}050\\ \\mathrm{kg} \\\\
-g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
 R = 0{,}40\\ \\mathrm{\\Omega} \\\\
 B = 1{,}2\\ \\mathrm{T} \\\\
 l = 0{,}20\\ \\mathrm{m}

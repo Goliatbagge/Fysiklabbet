@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "f6e300df17a7d16b366dc5ace18b4790ec0566ec",
- "dur": 645.31,
+ "hash": "2d4feb4fec201bd1aeeca8da6c2383861b1e6ace",
+ "dur": 646.21,
  "segments": [
   {
    "t": "Våg-partikeldualitet och de Broglie-våglängd",
@@ -237,222 +237,222 @@
   {
    "t": "Elektronens hastighet beräknas genom omvandlingen från elektrisk energi till rörelseenergi",
    "s": 263.15,
-   "e": 269.6
+   "e": 269.59
   },
   {
    "t": "E e är lika med E k vilket är ekvivalent med att laddningen Q gånger spänningen U är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger Q gånger U delat med m",
-   "s": 269.6,
-   "e": 283.88
+   "s": 269.59,
+   "e": 283.86
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram",
-   "s": 283.88,
-   "e": 296.94
+   "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är ungefär lika med 9,11 gånger 10 upphöjt till minus 31 kilogram",
+   "s": 283.86,
+   "e": 297.61
   },
   {
    "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m som är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 coulomb gånger 200 volt delat med 9,11 gånger 10 upphöjt till minus 31 kilogram som är lika med 8,386 gånger 10 upphöjt till 6 meter per sekund",
-   "s": 296.89,
-   "e": 318.25
+   "s": 297.56,
+   "e": 319.19
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 318.25,
-   "e": 321.54
+   "s": 319.19,
+   "e": 322.49
   },
   {
    "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 9,11 gånger 10 upphöjt till minus 31 gånger 8,386 gånger 10 upphöjt till 6 som är lika med 8,672 gånger 10 upphöjt till minus 11 meter som är ungefär lika med 8,7 gånger 10 upphöjt till minus 11 meter som är lika med 87 pm",
-   "s": 321.54,
-   "e": 345.72
+   "s": 322.49,
+   "e": 346.68
   },
   {
    "t": "Svar: 87 pm",
-   "s": 345.72,
-   "e": 348.65
+   "s": 346.68,
+   "e": 349.6
   },
   {
    "t": "Exempel 2 — Tennisbollens vågegenskaper?",
-   "s": 348.65,
-   "e": 352.62
+   "s": 349.6,
+   "e": 353.58
   },
   {
    "t": "Du slår en tennisboll så att den får farten 108 kilometer i timmen.",
-   "s": 352.62,
-   "e": 358.0
+   "s": 353.58,
+   "e": 358.95
   },
   {
    "t": "En tennisboll har diametern 6,7 centimeter och väger 58 gram.",
-   "s": 358.0,
-   "e": 363.67
+   "s": 358.95,
+   "e": 364.63
   },
   {
    "t": "Kommer den att uppvisa vågegenskaper?",
-   "s": 363.67,
-   "e": 367.25
+   "s": 364.63,
+   "e": 368.2
   },
   {
    "t": "För märkbara vågegenskaper ska de Broglie-våglängden vara i samma storleksordning (eller större) som partikeln. \"Partikeln\" i detta fall är tennisbollen.",
-   "s": 367.25,
-   "e": 378.09
+   "s": 368.2,
+   "e": 379.04
   },
   {
    "t": "För att tennisbollen ska uppvisa vågegenskaper ska den alltså minst ha de Broglie-våglängden 6,7 centimeter.",
-   "s": 378.09,
-   "e": 385.35
+   "s": 379.04,
+   "e": 386.3
   },
   {
    "t": "Vi ställer upp formeln för de Broglie-våglängden.",
-   "s": 385.35,
-   "e": 389.09
+   "s": 386.3,
+   "e": 390.04
   },
   {
    "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v",
-   "s": 389.09,
-   "e": 394.96
+   "s": 390.04,
+   "e": 395.93
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 58 gram som är lika med 0,058 kilogram hastigheten v som är lika med 108 kilometer per timme som är lika med 108 delat med 3,6 meter per sekund som är lika med 30 meter per sekund",
-   "s": 394.96,
-   "e": 414.8
+   "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 58 gram som är lika med 0,058 kilogram hastigheten v som är lika med 108 kilometer per timme som är lika med 108 delat med 3,6 meter per sekund som är lika med 30 meter per sekund",
+   "s": 395.93,
+   "e": 416.03
   },
   {
    "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 0,058 gånger 30 som är lika med 3,808 gånger 10 upphöjt till minus 34 meter",
-   "s": 414.8,
-   "e": 428.72
+   "s": 416.03,
+   "e": 429.95
   },
   {
    "t": "Detta är MYCKET mindre än tennisbollens diameter 6,7 centimeter.",
-   "s": 428.72,
-   "e": 434.12
+   "s": 429.95,
+   "e": 435.35
   },
   {
    "t": "Svar: Nej, tennisbollen kommer inte att uppvisa vågegenskaper.",
-   "s": 434.12,
-   "e": 439.66
+   "s": 435.35,
+   "e": 440.89
   },
   {
    "t": "Vi ser i exemplet ovan att för makroskopiska objekt (objekt synliga för blotta ögat) är kvanteffekterna helt försumbara — därför fungerar klassisk mekanik så bra för bollar, bilar och bananer, men inte för fotoner och elektroner.",
-   "s": 439.66,
-   "e": 453.77
+   "s": 440.89,
+   "e": 455.0
   },
   {
    "t": "Köpenhamnstolkningen",
-   "s": 453.77,
-   "e": 456.32
+   "s": 455.0,
+   "e": 457.55
   },
   {
    "t": "Enligt Heisenbergs osäkerhetsprincip i kvantmekanik är det omöjligt att känna till en partikels exakta position och rörelsemängd (eller hastighet) samtidigt.",
-   "s": 456.32,
-   "e": 466.61
+   "s": 457.55,
+   "e": 467.84
   },
   {
    "t": "Det beror på att för att mäta en partikels position måste man använda en metod som påverkar dess rörelsemängd, och vice versa.",
-   "s": 466.61,
-   "e": 474.22
+   "s": 467.84,
+   "e": 475.45
   },
   {
    "t": "Om man till exempel skickar en foton mot en elektron för att mäta dess position, kommer fotonen att påverka elektronens rörelsemängd och ändra dess hastighet.",
-   "s": 474.22,
-   "e": 483.76
+   "s": 475.45,
+   "e": 484.99
   },
   {
    "t": "Ju mer exakt vi vet en av de två egenskaperna, desto mindre exakt kan vi veta den andra.",
-   "s": 483.76,
-   "e": 490.01
+   "s": 484.99,
+   "e": 491.24
   },
   {
    "t": "För att beskriva var en elektron befinner sig måste vi istället använda oss av en matematisk vågfunktion (som bestäms av Schrödingerekvationen, en differentialekvation) som representerar sannolikheten för att en partikel befinner sig på en viss position.",
-   "s": 490.01,
-   "e": 504.46
+   "s": 491.24,
+   "e": 505.69
   },
   {
    "t": "När man mäter en partikels position eller hastighet \"kollapsar\" vågfunktionen till en specifik position eller hastighet.",
-   "s": 504.46,
-   "e": 512.17
+   "s": 505.69,
+   "e": 513.4
   },
   {
    "t": "Detta innebär att partikeln inte hade en bestämd position eller hastighet innan mätningen, utan att mätningen själv påverkar partikeln och dess beteende.",
-   "s": 512.17,
-   "e": 521.39
+   "s": 513.4,
+   "e": 522.61
   },
   {
    "t": "Det innebär också att det inte finns någon \"objektiv verklighet\" på kvantnivå, utan endast möjligheter och sannolikheter.",
-   "s": 521.39,
-   "e": 528.85
+   "s": 522.61,
+   "e": 530.08
   },
   {
    "t": "Allt ovan är delar av Köpenhamnstolkningen som har fått sitt namn från Niels Bohr som verkade i Köpenhamn i början av 1900-talet.",
-   "s": 528.85,
-   "e": 537.15
+   "s": 530.08,
+   "e": 538.38
   },
   {
    "t": "Både Schrödingerekvationen och Heisenbergs osäkerhetsprincip är matematiska konstruktioner.",
-   "s": 537.15,
-   "e": 543.56
+   "s": 538.38,
+   "e": 544.79
   },
   {
    "t": "De ger dock inte en mental bild av vad som \"egentligen\" händer.",
-   "s": 543.56,
-   "e": 548.29
+   "s": 544.79,
+   "e": 549.51
   },
   {
    "t": "Mångvärldshypotesen (multiversum)",
-   "s": 548.29,
-   "e": 551.87
+   "s": 549.51,
+   "e": 553.1
   },
   {
    "t": "Mångvärldshypotesen är en alternativ tolkning av kvantmekanik som ställs i kontrast till Köpenhamnstolkningen.",
-   "s": 551.87,
-   "e": 559.04
+   "s": 553.1,
+   "e": 560.26
   },
   {
    "t": "Den föreslår att istället för att vågfunktionen kollapsar till en enda position eller hastighet vid mätning, så separeras universum till flera parallella verkligheter, var och en med en unik version av partikeln.",
-   "s": 559.04,
-   "e": 571.27
+   "s": 560.26,
+   "e": 574.19
   },
   {
    "t": "Den innebär också att allt som är möjligt på kvantnivå faktiskt händer i parallella universa.",
-   "s": 571.27,
-   "e": 579.17
+   "s": 574.14,
+   "e": 580.03
   },
   {
    "t": "Om det till exempel är möjligt för en partikel att vara på två olika positioner samtidigt, kommer det att finnas två parallella universa, en för varje position.",
-   "s": 579.12,
-   "e": 588.37
+   "s": 580.03,
+   "e": 589.28
   },
   {
    "t": "Väldigt små förändringar i universums begynnelse, till exempel en obetydlig ökning av utgångshastigheten vid Big bang skulle omöjliggöra för tyngdkraften att dra ihop lokala \"öar\" av materia för att bilda stjärnor och galaxer.",
-   "s": 588.37,
-   "e": 601.53
+   "s": 589.28,
+   "e": 602.43
   },
   {
    "t": "Vårt universum med stjärnor, planeter och liv är alltså otroligt osannolikt.",
-   "s": 601.53,
-   "e": 607.41
+   "s": 602.43,
+   "e": 608.31
   },
   {
    "t": "Mångvärldshypotesen skulle då kunna förklara, inte bara att ett sådant osannolikt universum kan finnas, utan också att det måste finnas, då alla kombinationer och kvanthändelser finns.",
-   "s": 607.41,
-   "e": 618.52
+   "s": 608.31,
+   "e": 619.42
   },
   {
    "t": "Det skulle alltså kunna finnas otroligt många fler universa i ett multiversum, där en otrolig majoritet inte innehåller några stjärnor, planeter eller liv alls.",
-   "s": 618.52,
-   "e": 628.51
+   "s": 619.42,
+   "e": 629.41
   },
   {
    "t": "Stephen Hawking stödjer denna hypotes som dock vållar debatt bland forskare.",
-   "s": 628.51,
-   "e": 633.68
+   "s": 629.41,
+   "e": 634.58
   },
   {
    "t": "De är oense om detta ens kan kallas en vetenskaplig hypotes då den inte är falsifierbar och därmed inte går att testa.",
-   "s": 633.68,
-   "e": 641.22
+   "s": 634.58,
+   "e": 642.12
   },
   {
    "t": "Vissa kallar den till och med för pseudovetenskap.",
-   "s": 641.22,
-   "e": 645.31
+   "s": 642.12,
+   "e": 646.21
   }
  ]
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +23,41 @@
         @media (max-width: 600px) {
             .ark-layout { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
             .ark-cols2 { grid-template-columns: 1fr !important; }
+        }
+
+        /* ── Växlare mellan avsnittets två simuleringar ── */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
         }
 
         /* ── Fullskärmsläge ── */
@@ -117,14 +152,25 @@
 
     <main class="container">
         <div class="breadcrumb">
-            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik nivå 1</a> / <span>Arkimedes Princip</span>
+            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik nivå 1</a> / <span>Arkimedes princip</span>
         </div>
 
         <section class="intro-section">
-            <h1 class="section-title">Arkimedes Princip</h1>
-            <p class="intro-text">
-                Utforska förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
-            </p>
+            <div class="intro-head">
+                <div>
+                    <h1 class="section-title">Arkimedes princip</h1>
+                    <p class="intro-text">
+                        Utforska förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
+                    </p>
+                </div>
+                <div class="sim-switch-wrap">
+                    <span class="sim-switch-label">Simulering</span>
+                    <div class="sim-switch">
+                        <a href="fysik1-flytkraft-app.html">Flytförmåga</a>
+                        <span class="sim-switch-active">Arkimedes princip</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <div id="root"></div>
@@ -367,7 +413,7 @@
             return (
                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                     <svg viewBox="0 -130 480 480" style={{ width: '100%', height: 'auto', display: 'block' }} aria-labelledby="sim-title" role="img">
-                        <title id="sim-title">Simulation av Arkimedes Princip - Dynamometer</title>
+                        <title id="sim-title">Simulering av Arkimedes princip - Dynamometer</title>
                         <DynamometerVisual calculations={dynamometerCalculations} state={dynamometerState} setDynamometerState={setDynamometerState}/>
                     </svg>
                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
@@ -531,7 +577,7 @@
         const Explanation = () => {
             return (
                 <div style={{ padding: '1.5rem', backgroundColor: 'var(--lab-bg)', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', marginTop: '2rem' }}>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--lab-ink)', borderBottom: '2px solid var(--lab-line-strong)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>Vad är Arkimedes Princip?</h2>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--lab-ink)', borderBottom: '2px solid var(--lab-line-strong)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>Vad är Arkimedes princip?</h2>
                     <p style={{ color: 'var(--lab-ink-soft)', marginBottom: '1rem' }}>
                         Arkimedes princip säger att <strong style={{ color: 'var(--lab-accent)' }}>den lyftkraft som verkar på ett föremål nedsänkt i en vätska är lika stor som tyngden av den vätska som föremålet tränger undan.</strong>
                     </p>

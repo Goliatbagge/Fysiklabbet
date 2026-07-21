@@ -55,6 +55,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-kraftmoment-app.html',
     'fysik2-brada-tva-stod-app.html',
     'fysik1-lutande-plan-app.html',
+    'fysik1-flytkraft-app.html',
     'fysik1-hastighet-tid-app.html',
     'fysik1-acceleration-tid-app.html',
     'fysik1-stracka-tid-app.html',

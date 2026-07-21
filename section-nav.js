@@ -31,7 +31,8 @@
             for (const chapKey in chapters) {
                 const sections = chapters[chapKey].sections || [];
                 for (const sec of sections) {
-                    if (sec.href && sec.href.toLowerCase() === file) {
+                    if ((sec.href && sec.href.toLowerCase() === file) ||
+                        (sec.href2 && sec.href2.toLowerCase() === file)) {
                         found = { courseKey, sec };
                         break;
                     }

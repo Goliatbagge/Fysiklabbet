@@ -33583,6 +33583,48 @@
     "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a"
    },
    {
+    "t": "Härledning — abc-formeln"
+   },
+   {
+    "t": "Vi utgår från ekvationen"
+   },
+   {
+    "t": "a x i kvadrat plus b x plus c är lika med 0"
+   },
+   {
+    "t": "där a är inte lika med 0 ."
+   },
+   {
+    "t": "Vi dividerar båda led med a så att ekvationen får den form som pq-formeln kräver:"
+   },
+   {
+    "t": "x i kvadrat plus b delat med a x plus c delat med a är lika med 0"
+   },
+   {
+    "t": "Nu kan vi använda pq-formeln (som vi härledde i förra avsnittet) med p är lika med b delat med a och q är lika med c delat med a :"
+   },
+   {
+    "t": "x är lika med minus b delat med 2 a plus minus roten ur parentesen b delat med 2 a slut parentes i kvadrat minus c delat med a"
+   },
+   {
+    "t": "Vi skriver om uttrycket under rottecknet med gemensam nämnare 4 a i kvadrat :"
+   },
+   {
+    "t": "parentesen b delat med 2 a slut parentes i kvadrat minus c delat med a är lika med b i kvadrat delat med 4 a i kvadrat minus 4 a c delat med 4 a i kvadrat som är lika med b i kvadrat minus 4 a c delat med 4 a i kvadrat"
+   },
+   {
+    "t": "Vi drar roten ur täljare och nämnare var för sig."
+   },
+   {
+    "t": "Eftersom roten ur 4 a i kvadrat är lika med 2 a (tecknet på a spelar ingen roll — det fångas av plus minus ) får vi"
+   },
+   {
+    "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
     "t": "Exempel 1 — Lös med abc-formeln"
    },
    {

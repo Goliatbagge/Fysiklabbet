@@ -1,8 +1,8 @@
 {
  "id": "ma2c-2.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "dfcd1891db58ba96462e289b2fc74e83d6b5fc2b",
- "dur": 114.04,
+ "hash": "b1738ea05d3270299f141a3d97236899ef8f3ce3",
+ "dur": 193.3,
  "segments": [
   {
    "t": "abc-formeln",
@@ -32,77 +32,147 @@
   {
    "t": "har lösningarna",
    "s": 28.69,
-   "e": 31.1
+   "e": 31.11
   },
   {
    "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
-   "s": 31.1,
-   "e": 41.24
+   "s": 31.11,
+   "e": 40.29
+  },
+  {
+   "t": "Härledning — abc-formeln",
+   "s": 31.11,
+   "e": 40.29
+  },
+  {
+   "t": "Vi utgår från ekvationen",
+   "s": 40.29,
+   "e": 43.33
+  },
+  {
+   "t": "a x i kvadrat plus b x plus c är lika med 0",
+   "s": 43.33,
+   "e": 48.38
+  },
+  {
+   "t": "där a är inte lika med 0 .",
+   "s": 48.38,
+   "e": 51.33
+  },
+  {
+   "t": "Vi dividerar båda led med a så att ekvationen får den form som pq-formeln kräver:",
+   "s": 51.33,
+   "e": 61.51
+  },
+  {
+   "t": "x i kvadrat plus b delat med a x plus c delat med a är lika med 0",
+   "s": 51.33,
+   "e": 61.51
+  },
+  {
+   "t": "Nu kan vi använda pq-formeln (som vi härledde i förra avsnittet) med p är lika med b delat med a och q är lika med c delat med a :",
+   "s": 61.51,
+   "e": 77.95
+  },
+  {
+   "t": "x är lika med minus b delat med 2 a plus minus roten ur parentesen b delat med 2 a slut parentes i kvadrat minus c delat med a",
+   "s": 61.51,
+   "e": 77.95
+  },
+  {
+   "t": "Vi skriver om uttrycket under rottecknet med gemensam nämnare 4 a i kvadrat :",
+   "s": 77.95,
+   "e": 97.71
+  },
+  {
+   "t": "parentesen b delat med 2 a slut parentes i kvadrat minus c delat med a är lika med b i kvadrat delat med 4 a i kvadrat minus 4 a c delat med 4 a i kvadrat som är lika med b i kvadrat minus 4 a c delat med 4 a i kvadrat",
+   "s": 77.95,
+   "e": 97.71
+  },
+  {
+   "t": "Vi drar roten ur täljare och nämnare var för sig.",
+   "s": 97.71,
+   "e": 101.78
+  },
+  {
+   "t": "Eftersom roten ur 4 a i kvadrat är lika med 2 a (tecknet på a spelar ingen roll — det fångas av plus minus ) får vi",
+   "s": 101.78,
+   "e": 109.91
+  },
+  {
+   "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
+   "s": 109.91,
+   "e": 120.47
+  },
+  {
+   "t": "v.s.b.",
+   "s": 109.91,
+   "e": 120.47
   },
   {
    "t": "Exempel 1 — Lös med abc-formeln",
-   "s": 31.1,
-   "e": 41.24
+   "s": 109.91,
+   "e": 120.47
   },
   {
    "t": "Lös ekvationen 2 x i kvadrat minus 8 x plus 6 är lika med 0 med abc-formeln.",
-   "s": 41.24,
-   "e": 48.27
+   "s": 120.47,
+   "e": 127.49
   },
   {
    "t": "Vi ställer upp abc-formeln:",
-   "s": 48.27,
-   "e": 57.85
+   "s": 127.49,
+   "e": 137.11
   },
   {
    "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
-   "s": 48.27,
-   "e": 57.85
+   "s": 127.49,
+   "e": 137.11
   },
   {
    "t": "Vi identifierar a , b och c och ser att a är lika med 2 , b är lika med minus 8 och c är lika med 6 .",
-   "s": 57.85,
-   "e": 65.59
+   "s": 137.11,
+   "e": 144.85
   },
   {
    "t": "Insättning i abc-formeln ger",
-   "s": 65.59,
-   "e": 69.01
+   "s": 144.85,
+   "e": 148.28
   },
   {
    "t": "x är lika med minus minus 8 delat med 2 gånger 2 plus minus roten ur parentesen minus 8 slut parentes i kvadrat minus 4 gånger 2 gånger 6 delat med 2 gånger 2",
-   "s": 69.01,
-   "e": 81.14
+   "s": 148.28,
+   "e": 160.4
   },
   {
    "t": "x är lika med 8 delat med 4 plus minus roten ur 64 minus 48 delat med 4",
-   "s": 81.14,
-   "e": 88.33
+   "s": 160.4,
+   "e": 167.59
   },
   {
    "t": "x är lika med 2 plus minus roten ur 16 delat med 4 som är lika med 2 plus minus 4 delat med 4 som är lika med 2 plus minus 1",
-   "s": 88.33,
-   "e": 98.09
+   "s": 167.59,
+   "e": 177.35
   },
   {
    "t": "Detta ger lösningarna",
-   "s": 98.09,
-   "e": 100.74
+   "s": 177.35,
+   "e": 180.0
   },
   {
    "t": "x ett är lika med 2 minus 1 som är lika med 1",
-   "s": 100.74,
-   "e": 105.28
+   "s": 180.0,
+   "e": 184.54
   },
   {
    "t": "x två är lika med 2 plus 1 som är lika med 3",
-   "s": 105.28,
-   "e": 109.44
+   "s": 184.54,
+   "e": 188.7
   },
   {
    "t": "Svar: x ett är lika med 1 och x två är lika med 3",
-   "s": 109.44,
-   "e": 114.04
+   "s": 188.7,
+   "e": 193.3
   }
  ]
 }

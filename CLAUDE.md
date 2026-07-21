@@ -334,6 +334,12 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
     `<em>pq</em>-formeln`.
   - **Kodkommentarer och GeoGebra-kommandonamn** (`` `IntegralMellan(från
     x-värde, …)` ``): råtext — ingen kursivering i kod.
+  - **Radbrytningsskydd (automatiskt)**: `restoreMath()` i
+    `katalog.html`/`avsnitt.html` wrappar `$x$-termen` och
+    `<em>pq</em>-formeln` i en `.var-compound`-nowrap-span (CSS i
+    `styles-laborans.css`) så att raden aldrig bryts efter bindestrecket —
+    **rör inte den regeln/klassen.** Suspenderat led ("*x*- och *y*-led")
+    får däremot brytas.
 
 - **Variabler i inline-SVG-figurer**: kursiveringen gäller även i
   `<text>`-element i SVG, inte bara i markdown och KaTeX. Bokstaven i

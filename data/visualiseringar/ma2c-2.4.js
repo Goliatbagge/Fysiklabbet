@@ -11,20 +11,33 @@
  * Startläget p = 6, q = -7 återger genomgångens Exempel 1a exakt
  * (x² + 6x - 7 = 0 ⇒ x₁ = -7, x₂ = 1) så eleven kan "spela upp" exemplet.
  *
- * Fyra steg:
+ * Fem steg:
  *   1. Uttrycket som areor — x²-kvadrat (fast ritstorlek, symboliserar det
  *      okända x) + px-remsa (bredd ∝ p) sida vid sida, måttsatta.
- *   2. Vik remsan — "Vik remsan"-knapp (rAF ~1,2 s): remsan klyvs i två
- *      p/2-halvor; den ena roterar 90° och flyttas till kvadratens
- *      underkant. Nästan en kvadrat med sidan x + p/2 — hörnet (p/2)²
- *      fattas (streckad, pulserande kontur).
- *   3. Fyll hörnet — och pq-formeln — knappen "Lägg till hörnet" fyller
- *      gapet och avslöjar härledningens steg i KaTeX, en i taget via
- *      "Nästa steg", fram till pq-formeln. Ett live diskriminant-omdöme
- *      ((p/2)² - q) och — om täljaren är negativ — en "inga reella
- *      lösningar"-notis.
- *   4. Prova med tal — två snabbknappar (genomgångens exempel + ett
+ *   2. Klyv remsan — när steget öppnas från steg 1 ANIMERAS klyvningen
+ *      (rAF ~0,7 s): en klipplinje ritas uppifrån och ner genom remsan,
+ *      varpå den delas i två p/2-halvor, båda måttsatta med dubbelpil-
+ *      måttlinjer "p/2" ovanför (staggrade i höjd vid små p så
+ *      etiketterna inte kolliderar).
+ *   3. Vik halvorna på plats — vikanimationen (rAF ~1,2 s) spelas
+ *      AUTOMATISKT när steget öppnas: ena halvan ligger kvar vid höger-
+ *      kanten, den andra roterar 90° ner till underkanten. Nästan en
+ *      kvadrat med sidan x + p/2 — hörnet lämnas HELT TOMT (bara
+ *      bakgrund), inget ritas i gapet. "Spela vikningen igen"-knapp för
+ *      repris; backar man till steg 2 spelas vikningen baklänges.
+ *   4. Fyll hörnet — och pq-formeln — den röda streckade (p/2)²-kvadraten
+ *      växer fram ur gapets inre hörn (rAF ~0,6 s, skala + fade); ram och
+ *      (x + p/2)-mått tänds när den vuxit klart. Härledningens steg
+ *      avslöjas i KaTeX en i taget via "Visa nästa rad", fram till
+ *      pq-formeln. Ett live diskriminant-omdöme ((p/2)² - q) och — om
+ *      täljaren är negativ — en "inga reella lösningar"-notis.
+ *   5. Prova med tal — två snabbknappar (genomgångens exempel + ett
  *      exempel utan reella lösningar) kör hela kedjan direkt.
+ *
+ * Navigering: steg-pillerna ELLER "← Föregående"/"Nästa →"-knapparna
+ * (inaktiverade vid ändlägena). Alla stegbyten går via gotoStep(), som
+ * triggar rätt animation; viloläges-regeln i update() snappar tweens till
+ * stegets slutläge så snart ingen animation kör.
  *
  * Ren vanilla-JS + SVG i Laborans-papperstemat (samma mönster som
  * ma2c-2.1.js och ma2c-2.6.js). API: window.VISUALISERINGAR['ma2c-2.4'] =
@@ -95,7 +108,9 @@
         var P_MIN = 1, P_MAX = 8, P_STEP = 0.5;
         var Q_MIN = -8, Q_MAX = 8, Q_STEP = 0.5;
         var EPS = 0.05;
-        var state = { p: 6, q: -7, step: 1, moveT: 0, algStep: 0 };
+        // cleaveT: klipplinjen som klyver remsan (steg 2), moveT: vikningen
+        // (steg 3), fillT: hörnkvadraten som växer fram (steg 4) — alla 0..1
+        var state = { p: 6, q: -7, step: 1, cleaveT: 0, moveT: 0, fillT: 0, algStep: 0 };
         var animId = null;
 
         // ── Geometri (pixel-rum) ───────────────────────────────────────
@@ -137,8 +152,9 @@
             'font-family': 'DM Sans, system-ui, sans-serif',
             role: 'img',
             'aria-label': 'Interaktiv figur: kvadraten x-kvadrat och remsan p gånger x ' +
-                'ritade som areor. Vik remsan runt hörnet för att nästan bilda kvadraten ' +
-                'x plus p halva i kvadrat — hörnet som fattas har arean p halva i kvadrat. ' +
+                'ritade som areor. Remsan klyvs i två halvor med bredden p halva, som viks ' +
+                'runt hörnet och nästan bildar kvadraten x plus p halva i kvadrat — hörnet ' +
+                'som fattas är en kvadrat med sidan p halva. ' +
                 'Dra i remsans kant eller p-glidaren för att ändra bredden.'
         });
         svg.classList.add('lab-graf-svg');
@@ -170,6 +186,10 @@
         actions.className = 'lab-vis-actions';
         card.appendChild(actions);
 
+        var navRow = document.createElement('div');
+        navRow.className = 'lab-vis-actions';
+        card.appendChild(navRow);
+
         var controls = document.createElement('div');
         controls.className = 'lab-graf-controls';
         card.appendChild(controls);
@@ -184,21 +204,26 @@
         // ── Steg-knappar ────────────────────────────────────────────────
         var STEPS = [
             { n: 1, label: '1 · Uttrycket som areor' },
-            { n: 2, label: '2 · Vik remsan' },
-            { n: 3, label: '3 · Fyll hörnet' },
-            { n: 4, label: '4 · Prova med tal' }
+            { n: 2, label: '2 · Klyv remsan' },
+            { n: 3, label: '3 · Vik halvorna på plats' },
+            { n: 4, label: '4 · Fyll hörnet' },
+            { n: 5, label: '5 · Prova med tal' }
         ];
         var INSTR = {
             1: 'Uttrycket <em>x</em>² + <em>px</em> ritat som två areor: en <em>x</em>²-kvadrat ' +
                'och en <em>p</em>·<em>x</em>-remsa bredvid. Sidan <em>x</em> är okänd (fast ' +
                'ritstorlek) — dra i remsans kant eller <em>p</em>-glidaren för att ändra bredden.',
-            2: 'Klyv remsan mitt itu och vik den ena halvan runt hörnet. Tryck på "Vik remsan": ' +
-               'de två halvorna hamnar längs kvadratens högra och undre kant. Nästan en kvadrat ' +
-               'med sidan <em>x</em> + <em>p</em>/2 — men hörnet fattas.',
-            3: 'Hörnet som fattas har arean (<em>p</em>/2)². Lägg till den på BÅDA led av ' +
-               'ekvationen <em>x</em>² + <em>px</em> + <em>q</em> = 0 och följ omskrivningen ' +
-               'steg för steg, fram till pq-formeln.',
-            4: 'Prova med konkreta tal. Välj ett exempel — eller ställ in <em>p</em> och ' +
+            2: 'Remsan klyvs mitt itu i två lika breda delar — var och en med den nya bredden ' +
+               '<em>p</em>/2, måttsatt ovanför. Dra i remsans kant eller <em>p</em>-glidaren ' +
+               'för att ändra bredden.',
+            3: 'Den ena halvan ligger kvar längs kvadratens högerkant; den andra viks ner till ' +
+               'underkanten. Nästan en kvadrat med sidan <em>x</em> + <em>p</em>/2 — men hörnet ' +
+               'fattas.',
+            4: 'Hörnet som fattas är en kvadrat med sidan <em>p</em>/2 och arean (<em>p</em>/2)². ' +
+               'Fyll i den — och lägg till (<em>p</em>/2)² på BÅDA led av ekvationen ' +
+               '<em>x</em>² + <em>px</em> + <em>q</em> = 0. Följ omskrivningen steg för steg, ' +
+               'fram till pq-formeln.',
+            5: 'Prova med konkreta tal. Välj ett exempel — eller ställ in <em>p</em> och ' +
                '<em>q</em> själv — och se hela kedjan fram till lösningarna på en gång.'
         };
         var stepBtns = [];
@@ -207,10 +232,40 @@
             b.type = 'button';
             b.className = 'lab-vis-step';
             b.textContent = s.label;
-            b.addEventListener('click', function () { state.step = s.n; update(); });
+            b.addEventListener('click', function () { gotoStep(s.n); });
             stepsRow.appendChild(b);
             stepBtns.push(b);
         });
+
+        // Stegbyte med animationer: 1→2 ritas klipplinjen, in i steg 3
+        // spelas vikningen framåt, tillbaka till steg 2 baklänges, in i
+        // steg 4 växer hörnkvadraten fram. Övriga hopp landar direkt i
+        // stegets viloläge (snap-regeln i update).
+        function gotoStep(n) {
+            n = clampNum(n, 1, STEPS.length);
+            var prev = state.step;
+            if (n === prev) return;
+            state.step = n;
+            if (n === 2 && prev === 1) {
+                state.cleaveT = 0;
+                startAnimTo('cleaveT', 1, 700);
+                return;
+            }
+            if (n === 3 && state.moveT < 1) {
+                state.cleaveT = 1;
+                startAnimTo('moveT', 1, 1200);
+                return;
+            }
+            if (n === 2 && state.moveT > 0) { startAnimTo('moveT', 0, 1200); return; }
+            if (n === 4 && prev < 4) {
+                stopAnim();
+                state.cleaveT = 1; state.moveT = 1; state.fillT = 0;
+                startAnimTo('fillT', 1, 600);
+                return;
+            }
+            stopAnim();
+            update();
+        }
 
         // ── Legend ────────────────────────────────────────────────────────
         function legendItem(color, html, dashed) {
@@ -228,15 +283,19 @@
         function buildLegend() {
             legend.innerHTML = '';
             legendItem(COL.xSq, '<em>x</em>²');
-            legendItem(COL.px, '<em>p</em> · <em>x</em>' + (state.step >= 2 ? ' (klyvs i två)' : ''));
-            if (state.step >= 2) legendItem(COL.corner, '(<em>p</em>/2)² — hörnet', true);
+            legendItem(COL.px, '<em>p</em> · <em>x</em>' + (state.step >= 2 ? ' (kluven i två)' : ''));
+            if (state.step >= 4) legendItem(COL.corner, '(<em>p</em>/2)² — hörnet', true);
         }
 
         // ── Knappar i actions-raden ──────────────────────────────────────
         var foldBtn = document.createElement('button');
         foldBtn.type = 'button';
         foldBtn.className = 'lab-btn';
-        foldBtn.addEventListener('click', function () { startFold(); });
+        foldBtn.addEventListener('click', function () {
+            stopAnim();
+            state.moveT = 0;
+            startAnimTo('moveT', 1, 1200);
+        });
         actions.appendChild(foldBtn);
 
         var stepAlgBtn = document.createElement('button');
@@ -254,7 +313,7 @@
             b.className = 'lab-btn';
             b.textContent = label;
             b.addEventListener('click', function () {
-                stopFoldAnim();
+                stopAnim();
                 state.p = p; state.q = q; state.moveT = 1;
                 rowP.sync(); rowQ.sync();
                 state.algStep = maxAlgStep();
@@ -265,6 +324,24 @@
         }
         exampleBtn('Exempel: p = 6, q = −7', 6, -7);
         exampleBtn('Exempel: p = 4, q = 6', 4, 6);
+
+        // ── Föregående/Nästa — stega genom visualiseringen ───────────────
+        function navBtn(label, delta) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'lab-btn';
+            b.textContent = label;
+            b.addEventListener('click', function () { gotoStep(state.step + delta); });
+            navRow.appendChild(b);
+            return b;
+        }
+        var prevBtn = navBtn('← Föregående', -1);
+        var nextBtn = navBtn('Nästa →', 1);
+        function setNavEnabled(btn, enabled) {
+            btn.disabled = !enabled;
+            btn.style.opacity = enabled ? '' : '0.35';
+            btn.style.cursor = enabled ? '' : 'default';
+        }
 
         // ── Glidare (p och q) ─────────────────────────────────────────────
         function makeRow(name, min, max, step, get, set) {
@@ -294,7 +371,7 @@
             }
             function apply(v, from) {
                 if (!isFinite(v)) return;
-                stopFoldAnim();
+                stopAnim();
                 set(clampNum(v, min, max));
                 if (from !== 'slider') slider.value = get();
                 if (from !== 'field') field.value = fmt(get(), decimals).replace(',', '.');
@@ -332,29 +409,33 @@
         reset.className = 'lab-graf-reset';
         reset.textContent = 'Återställ';
         reset.addEventListener('click', function () {
-            stopFoldAnim();
-            state.p = 6; state.q = -7; state.step = 1; state.moveT = 0; state.algStep = 0;
+            stopAnim();
+            state.p = 6; state.q = -7; state.step = 1; state.algStep = 0;
+            state.cleaveT = 0; state.moveT = 0; state.fillT = 0;
             rowP.sync(); rowQ.sync();
             update();
         });
         foot.appendChild(reset);
 
         // ── Animation: "Vik remsan" ─────────────────────────────────────
-        function stopFoldAnim() {
+        function stopAnim() {
             if (animId != null) { cancelAnimationFrame(animId); animId = null; }
         }
         function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
-        function startFold() {
-            stopFoldAnim();
-            var from = state.moveT, to = state.moveT >= 0.5 ? 0 : 1;
-            var t0 = null, DUR = 1200;
+        // Generisk animator: tweenar state[prop] till `to` under DUR ms.
+        // En animation i taget (animId) — en ny avbryter den föregående.
+        function startAnimTo(prop, to, DUR) {
+            stopAnim();
+            var from = state[prop];
+            if (Math.abs(to - from) < 0.001) { state[prop] = to; update(); return; }
+            var t0 = null;
             function frame(ts) {
                 if (t0 == null) t0 = ts;
                 var pr = clampNum((ts - t0) / DUR, 0, 1);
-                state.moveT = from + (to - from) * easeInOutCubic(pr);
+                state[prop] = from + (to - from) * easeInOutCubic(pr);
                 update();
                 if (pr < 1) animId = requestAnimationFrame(frame);
-                else { animId = null; state.moveT = to; update(); }
+                else { animId = null; state[prop] = to; update(); }
             }
             animId = requestAnimationFrame(frame);
         }
@@ -367,7 +448,7 @@
         }
         svg.addEventListener('pointermove', function (e) {
             if (!dragging) return;
-            stopFoldAnim();
+            stopAnim();
             var px = toSvgX(e.clientX);
             var newP = clampNum(Math.round(((px - (X0 + SQ)) / PXP) / P_STEP) * P_STEP, P_MIN, P_MAX);
             state.p = newP;
@@ -382,7 +463,7 @@
             var hit = svgEl('circle', { cx: cx, cy: cy, r: 16, fill: 'rgba(0,0,0,0)' });
             hit.style.cursor = 'grab';
             hit.addEventListener('pointerdown', function (e) {
-                stopFoldAnim();
+                stopAnim();
                 dragging = true;
                 try { svg.setPointerCapture(e.pointerId); } catch (err) { /* no-op */ }
                 e.preventDefault();
@@ -457,7 +538,13 @@
             while (svg.firstChild) svg.removeChild(svg.firstChild);
             var p = state.p, t = state.moveT;
             var hw = (p * PXP) / 2;
-            var filled = state.step >= 3 && state.algStep >= 2;
+            var filled = state.step >= 4;
+            // Under hörnfyllnadens tween visas fortfarande steg 3-måtten;
+            // ram + (x + p/2)-mått tänds först när kvadraten vuxit klart
+            var fullyFilled = filled && state.fillT > 0.98;
+            // Klyvningsläge (steg 2): remsan är fortfarande hel medan
+            // klipplinjen ritas uppifrån och ner
+            var cleaving = state.step === 2 && state.cleaveT < 1;
             var g = svgEl('g');
             svg.appendChild(g);
 
@@ -465,62 +552,73 @@
             fieldRect(g, X0, Y0, SQ, SQ, COL.xSqFill);
             fieldLabel(g, X0 + SQ / 2, Y0 + SQ / 2, SQ, SQ, ['*x', '²'], COL.xSq, 22);
 
-            // Halva A — ligger kvar mot kvadratens högerkant
-            fieldRect(g, X0 + SQ, Y0, hw, SQ, COL.pxFill);
-            fieldLabel(g, X0 + SQ + hw / 2, Y0 + SQ / 2, hw, SQ, ['(', '*p', '/2)', '*x'], COL.px, 13);
-
-            // Spökkontur: där halva B kom ifrån, medan den är på väg
-            if (t > 0.02 && t < 0.98) {
-                g.appendChild(svgEl('rect', {
-                    x: X0 + SQ + hw, y: Y0, width: hw, height: SQ,
-                    fill: 'none', stroke: COL.dash, 'stroke-width': 1.2, 'stroke-dasharray': '4 3'
-                }));
-            }
-
-            // Halva B — roterar och flyttas till kvadratens underkant
-            var startCx = X0 + SQ + hw + hw / 2, startCy = Y0 + SQ / 2;
-            var endCx = X0 + SQ / 2, endCy = Y0 + SQ + hw / 2;
-            var cx = startCx + (endCx - startCx) * t;
-            var cy = startCy + (endCy - startCy) * t;
-            var theta = 90 * t;
-            var mg = svgEl('g', {
-                transform: 'translate(' + cx.toFixed(2) + ',' + cy.toFixed(2) + ') rotate(' + theta.toFixed(2) + ')'
-            });
-            mg.appendChild(svgEl('rect', {
-                x: (-hw / 2).toFixed(2), y: (-SQ / 2).toFixed(2), width: hw, height: SQ,
-                fill: COL.pxFill, stroke: COL.ink, 'stroke-width': 1, 'stroke-opacity': 0.35
-            }));
-            if (hw >= 24 && SQ >= 24) {
-                var tg = svgEl('g', { transform: 'rotate(' + (-theta).toFixed(2) + ')' });
-                tg.appendChild(svgVarText(
-                    { x: 0, y: 5, 'font-size': 13, 'text-anchor': 'middle', fill: COL.px },
-                    ['(', '*p', '/2)', '*x']));
-                mg.appendChild(tg);
-            }
-            g.appendChild(mg);
-
-            // Hörnet (p/2)²: dashat/pulserande gap eller solitt fyllt
-            var ccX = X0 + SQ, ccY = Y0 + SQ, ccS = hw;
-            if (t > 0.98) {
-                if (filled) {
-                    fieldRect(g, ccX, ccY, ccS, ccS, COL.cornerFill, COL.corner);
-                    fieldLabel(g, ccX + ccS / 2, ccY + ccS / 2, ccS, ccS, ['+(', '*p', '/2)', '²'], COL.corner, 12, 54);
-                } else {
-                    var cornerRect = svgEl('rect', {
-                        x: ccX, y: ccY, width: ccS, height: ccS,
-                        fill: 'rgba(200,50,74,0.14)', stroke: COL.corner,
-                        'stroke-width': 1.8, 'stroke-dasharray': '5 4'
-                    });
-                    cornerRect.appendChild(svgEl('animate', {
-                        attributeName: 'opacity', values: '0.45;1;0.45', dur: '2.2s', repeatCount: 'indefinite'
+            if (cleaving) {
+                // Hel px-remsa (som i steg 1) + klipplinje som växer nedåt
+                fieldRect(g, X0 + SQ, Y0, 2 * hw, SQ, COL.pxFill);
+                fieldLabel(g, X0 + SQ + hw, Y0 + SQ / 2, 2 * hw, SQ, ['*p', '*x'], COL.px, 16);
+                var cutLen = SQ * state.cleaveT;
+                if (cutLen > 0.5) {
+                    g.appendChild(svgEl('line', {
+                        x1: X0 + SQ + hw, y1: Y0, x2: X0 + SQ + hw, y2: Y0 + cutLen,
+                        stroke: COL.ink, 'stroke-width': 2, 'stroke-linecap': 'butt'
                     }));
-                    g.appendChild(cornerRect);
-                    fieldLabel(g, ccX + ccS / 2, ccY + ccS / 2, ccS, ccS, ['(', '*p', '/2)', '²'], COL.corner, 12, 48);
                 }
+            } else {
+                // Halva A — ligger kvar mot kvadratens högerkant
+                fieldRect(g, X0 + SQ, Y0, hw, SQ, COL.pxFill);
+                fieldLabel(g, X0 + SQ + hw / 2, Y0 + SQ / 2, hw, SQ, ['(', '*p', '/2)', '*x'], COL.px, 13);
+
+                // Spökkontur: där halva B kom ifrån, medan den är på väg
+                if (t > 0.02 && t < 0.98) {
+                    g.appendChild(svgEl('rect', {
+                        x: X0 + SQ + hw, y: Y0, width: hw, height: SQ,
+                        fill: 'none', stroke: COL.dash, 'stroke-width': 1.2, 'stroke-dasharray': '4 3'
+                    }));
+                }
+
+                // Halva B — roterar och flyttas till kvadratens underkant
+                var startCx = X0 + SQ + hw + hw / 2, startCy = Y0 + SQ / 2;
+                var endCx = X0 + SQ / 2, endCy = Y0 + SQ + hw / 2;
+                var cx = startCx + (endCx - startCx) * t;
+                var cy = startCy + (endCy - startCy) * t;
+                var theta = 90 * t;
+                var mg = svgEl('g', {
+                    transform: 'translate(' + cx.toFixed(2) + ',' + cy.toFixed(2) + ') rotate(' + theta.toFixed(2) + ')'
+                });
+                mg.appendChild(svgEl('rect', {
+                    x: (-hw / 2).toFixed(2), y: (-SQ / 2).toFixed(2), width: hw, height: SQ,
+                    fill: COL.pxFill, stroke: COL.ink, 'stroke-width': 1, 'stroke-opacity': 0.35
+                }));
+                if (hw >= 24 && SQ >= 24) {
+                    var tg = svgEl('g', { transform: 'rotate(' + (-theta).toFixed(2) + ')' });
+                    tg.appendChild(svgVarText(
+                        { x: 0, y: 5, 'font-size': 13, 'text-anchor': 'middle', fill: COL.px },
+                        ['(', '*p', '/2)', '*x']));
+                    mg.appendChild(tg);
+                }
+                g.appendChild(mg);
+            }
+
+            // Hörnet (p/2)²: helt tomt gap i steg 3 — i steg 4 växer den
+            // röda streckade kvadraten fram från inre hörnet (skala + fade)
+            var ccX = X0 + SQ, ccY = Y0 + SQ, ccS = hw;
+            if (t > 0.98 && filled && state.fillT > 0.01) {
+                var f = clampNum(state.fillT, 0, 1);
+                var cg = svgEl('g', {
+                    transform: 'translate(' + ccX + ',' + ccY + ') scale(' + f.toFixed(3) + ')',
+                    opacity: f.toFixed(3)
+                });
+                cg.appendChild(svgEl('rect', {
+                    x: 0, y: 0, width: ccS, height: ccS,
+                    fill: COL.cornerFill, stroke: COL.corner,
+                    'stroke-width': 1.8, 'stroke-dasharray': '5 4'
+                }));
+                fieldLabel(cg, ccS / 2, ccS / 2, ccS, ccS, ['(', '*p', '/2)', '²'], COL.corner, 12, 48);
+                g.appendChild(cg);
             }
 
             // Måttlinjer + yttre ram
-            if (filled) {
+            if (fullyFilled) {
                 g.appendChild(svgEl('rect', {
                     x: X0, y: Y0, width: SQ + ccS, height: SQ + ccS,
                     fill: 'none', stroke: COL.ink, 'stroke-width': 2.4
@@ -530,6 +628,22 @@
             } else {
                 dimSegH(svg, X0, X0 + SQ, Y0 - 22, ['*x']);
                 dimSegV(svg, Y0, Y0 + SQ, X0 - 22, ['*x']);
+                if (cleaving) {
+                    // Remsan ännu hel: p-måttet över hela bredden (som steg 1)
+                    dimSegH(svg, X0 + SQ, X0 + SQ + 2 * hw, Y0 - 22, ['*p']);
+                } else {
+                    // p/2-mått ovanför halva A (ligger alltid kvar uppe till höger)
+                    dimSegH(svg, X0 + SQ, X0 + SQ + hw, Y0 - 22, ['*p', '/2']);
+                    if (t < 0.02) {
+                        // Halva B ovikt: eget p/2-mått bredvid — staggra i höjd
+                        // vid små p så etiketterna inte kolliderar
+                        var bDimY = hw < 30 ? Y0 - 44 : Y0 - 22;
+                        dimSegH(svg, X0 + SQ + hw, X0 + SQ + 2 * hw, bDimY, ['*p', '/2']);
+                    } else if (t > 0.98) {
+                        // Halva B nedvikt: p/2 är nu en höjd — lodrätt mått till vänster
+                        dimSegV(svg, Y0 + SQ, Y0 + SQ + hw, X0 - 22, ['*p', '/2']);
+                    }
+                }
             }
 
             // Draghandtag för p — bara innan vikningen börjat
@@ -553,7 +667,7 @@
 
         // ── Formler och texter (steg 3/4) ─────────────────────────────
         function updateFormulas() {
-            var showAlg = state.step >= 3;
+            var showAlg = state.step >= 4;
             lineDivs.forEach(function (d) { d.style.display = showAlg ? '' : 'none'; });
             statusNote.style.display = showAlg ? '' : 'none';
             epilogue.style.display = showAlg ? '' : 'none';
@@ -613,7 +727,7 @@
                 stepAlgBtn.style.display = 'none';
             } else {
                 stepAlgBtn.style.display = '';
-                stepAlgBtn.textContent = state.algStep === 1 ? 'Lägg till hörnet' : 'Nästa steg';
+                stepAlgBtn.textContent = 'Visa nästa rad';
             }
         }
 
@@ -622,8 +736,14 @@
             // Klampa algStep om q/p ändrats så diskriminanten bytt tecken
             var mAlg = maxAlgStep();
             if (state.algStep > mAlg) state.algStep = mAlg;
-            // Senare steg bygger vidare på vikningen — säkerställ den är klar
-            if (state.step >= 3 && state.moveT < 1) state.moveT = 1;
+            // Viloläge: utan pågående animation ligger alla tweens i
+            // stegets slutläge (kluven fr.o.m. steg 2, färdigvikt fr.o.m.
+            // steg 3, fyllt hörn fr.o.m. steg 4)
+            if (animId == null) {
+                state.cleaveT = state.step >= 2 ? 1 : 0;
+                state.moveT = state.step >= 3 ? 1 : 0;
+                state.fillT = state.step >= 4 ? 1 : 0;
+            }
 
             stepBtns.forEach(function (b, i) { b.classList.toggle('active', state.step === i + 1); });
             instr.innerHTML = INSTR[state.step];
@@ -631,16 +751,18 @@
 
             if (state.step === 1) drawAreasStep1(); else drawFoldScene();
 
-            actions.style.display = state.step >= 2 ? '' : 'none';
-            foldBtn.style.display = state.step === 2 ? '' : 'none';
-            foldBtn.textContent = state.moveT >= 0.5 ? 'Vik tillbaka' : 'Vik remsan';
-            stepAlgBtn.style.display = (state.step === 3 || state.step === 4) ? '' : 'none';
+            actions.style.display = state.step >= 3 ? '' : 'none';
+            foldBtn.style.display = state.step === 3 ? '' : 'none';
+            foldBtn.textContent = 'Spela vikningen igen';
+            setNavEnabled(prevBtn, state.step > 1);
+            setNavEnabled(nextBtn, state.step < STEPS.length);
+            stepAlgBtn.style.display = (state.step === 4 || state.step === 5) ? '' : 'none';
             var exBtns = actions.querySelectorAll('.lab-btn');
-            // exampleBtn-knapparna är de två sista i actions — visa bara steg 4
+            // exampleBtn-knapparna är de två sista i actions — visa bara steg 5
             for (var bi = 0; bi < exBtns.length; bi++) {
                 var btn = exBtns[bi];
                 if (btn === foldBtn || btn === stepAlgBtn) continue;
-                btn.style.display = state.step === 4 ? '' : 'none';
+                btn.style.display = state.step === 5 ? '' : 'none';
             }
 
             updateFormulas();
@@ -650,7 +772,7 @@
 
         return {
             destroy: function () {
-                stopFoldAnim();
+                stopAnim();
                 el.innerHTML = '';
             }
         };

@@ -34,6 +34,51 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-21-kolnanoror-kroppsvarme",
+    date: "2026-07-21",
+    title: "Forskare stoppar kolnanorören från att klumpa ihop sig — och slår rekord i att omvandla kroppsvärme till el",
+    deck: "Kolnanorör har i över tjugo år setts som en nästan perfekt byggsten för böjliga generatorer som omvandlar kroppsvärme direkt till elektricitet — lätta, ledande och tåliga. Ändå har nanorörens envisa tendens att klumpa ihop sig bromsat utvecklingen. Nu har forskare vid Queensland University of Technology i Australien konstruerat en molekyl som håller nanorören isär, satt ett nytt prestandarekord och byggt en böjlig generator som drivs av kroppsvärme.",
+    category: "Termodynamik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-21-kolnanoror-kroppsvarme.jpg",
+    imageAlt: "Sju forskare från QUT — bland dem Shanshan Zhou i rött längst fram och professor Zhi-Gang Chen till vänster om henne — står och ler tillsammans i ett laboratorium med vetenskaplig utrustning i bakgrunden.",
+    imageCredit: "Foto: Queensland University of Technology (QUT), pressbild",
+    tags: ["termodynamik", "ellära", "seebeck-effekten", "termoelektricitet", "materialfysik", "kolnanorör", "energiomvandling", "nanoteknik", "ledningsförmåga", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-molecules-carbon-nanotubes-clumping-electricity.html" },
+      { name: "Mirage News (referat av QUT:s pressmeddelande)", url: "https://www.miragenews.com/qut-breakthrough-shatters-carbon-nanotube-limits-1712607/" }
+    ],
+    research: { citation: "S. Zhou, X.-L. Shi, M. Li, W. Chen, T. Cao, N.-H. Li, M. Zhang, P. Sonar, Q. Liu, Z.-G. Chen, ”Radical-Mediated Dispersion Breaks Aggregation Limits in Carbon Thermoelectrics”, Angewandte Chemie International Edition (2026)", url: "https://doi.org/10.1002/anie.4937600" },
+    body: [
+      { type: "p", html: "Kolnanorör — cylindrar av kol bara några enstaka nanometer i diameter — har i över 20&nbsp;år setts som en nästan idealisk byggsten för böjliga generatorer som omvandlar värme direkt till el. De är lätta, mycket goda elektriska ledare och tåliga nog att böjas och vikas om och om igen. Ändå har den praktiska nyttan uteblivit, eftersom nanorören envist klumpar ihop sig till trassliga knippen så fort de bearbetas till ett fungerande material. Nu har forskare vid Queensland University of Technology (QUT) i Australien hittat ett sätt att hålla dem isär — och samtidigt satt ett nytt rekord för hur effektivt kolnanorör kan omvandla värme till elektricitet. Resultatet publicerades den 20&nbsp;juli i tidskriften <em>Angewandte Chemie International Edition</em>." },
+
+      { type: "h2", text: "Värme blir spänning" },
+      { type: "p", html: "Fenomenet bakom upptäckten kallas den termoelektriska effekten, eller Seebeck-effekten efter den tyske fysikern Thomas Johann Seebeck som upptäckte den redan 1821. Kopplas ena änden av en elektrisk ledare till något varmt och den andra till något svalt uppstår en spänningsskillnad mellan ändarna: laddningsbärarna vid den varma sidan rör sig i genomsnitt snabbare och diffunderar mot den kalla sidan, vilket bygger upp ett elektriskt fält längs ledaren. Ju bättre ett material leder både värme och elektricitet, desto mer spänning går att pressa ur en given temperaturskillnad. Kroppens egen hud, några grader varmare än luften omkring den, räcker i princip för att driva en sådan generator — helt utan batteri." },
+
+      { type: "h2", text: "Hindret som stått i vägen i tjugo år" },
+      { type: "p", html: "Enligt professor Zhi-Gang Chen, chef för QUT:s forskningsnav för nollutsläppselproduktion, har forskare länge sett kolnanorör som en nästan idealisk kandidat för böjliga, kroppsburna generatorer — men ett envist problem har stått i vägen." },
+      { type: "quote", html: "”Kolnanorör är lätta, böjliga och elektriskt ledande — i åratal har forskare sett dem som en nästan idealisk kandidat för kroppsburna termoelektriska enheter. Men deras tendens att klumpa ihop sig har kraftigt begränsat deras prestanda.”", cite: "Zhi-Gang Chen, professor och chef för ARC-forskningsnavet för nollutsläppselproduktion, QUT" },
+      { type: "p", html: "Problemet sitter i de svaga, klibbiga krafterna (van der Waals-krafter) mellan intilliggande nanorör, som får dem att fastna vid varandra i oregelbundna knippen så fort materialet ska formas. Varje skarv mellan två hopklumpade rör fungerar som en flaskhals för de elektroner som ska transportera strömmen vidare — ungefär som en trafikstockning vid varje påfart till en motorväg. Resultatet blir ett material med sämre elektrisk ledningsförmåga än de enskilda nanorören egentligen har, vilket i sin tur sänker hur mycket el som går att pressa ur en given temperaturskillnad." },
+
+      { type: "h2", text: "En molekyl som håller nanorören isär" },
+      { type: "p", html: "QUT-doktoranden Shanshan Zhou, försteförfattare till studien, och hennes kollegor löste problemet med en metod de kallar radikalmedierad dispersion. I stället för att justera befintliga tekniker konstruerade forskarna en ny molekyl, kallad OTN, som reagerar med nanorörens yta via extremt reaktionsbenägna molekylfragment, så kallade radikaler. Molekylerna lägger sig som ett tunt, jämnt skal runt varje enskilt nanorör och håller dem mekaniskt åtskilda — utan att störa det nätverk av kolatomer som gör nanoröret till en så god elektrisk ledare." },
+      { type: "quote", html: "”I stället för att förbättra befintliga metoder kom vi på ett helt nytt sätt att hindra kolnanorören från att fastna i varandra — ett problem som varit ett stort hinder för forskare i flera år.”", cite: "Shanshan Zhou, doktorand och försteförfattare, QUT" },
+      { type: "p", html: "Resultatet, skriver forskarna, är den bästa termoelektriska prestanda som någonsin uppmätts för ett material av kolnanorör — ett riktmärke fältet strävat efter i över 20&nbsp;år." },
+
+      { type: "h2", text: "Testad med kroppsvärme och upprepade vikningar" },
+      { type: "p", html: "För att visa att metoden fungerar i praktiken byggde forskargruppen en böjlig termoelektrisk generator av det nya materialet och lät den omvandla kroppsvärme till elektricitet. Prototypen höll måttet även efter upprepad böjning och vikning — en förutsättning för allt som ska sitta tätt mot en handled eller vävas in i ett klädesplagg." },
+      { type: "quote", html: "”Föreställ dig hälsoövervakande sensorer, smarta textilier eller andra kroppsburna elektroniska prylar som ständigt hämtar energi ur din egen kroppsvärme, i stället för att vara beroende av vanliga batterier.”", cite: "Zhi-Gang Chen, QUT" },
+      { type: "p", html: "Forskargruppen pekar också på tillämpningar bortom kläder: samma princip skulle kunna fånga upp spillvärme från industriprocesser eller driva sensorer i uppkopplade prylar (sakernas internet) — situationer där en liten, konstant temperaturskillnad annars bara går förlorad som outnyttjad värme." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Ett enskilt kolnanorör kan vara bara någon enstaka nanometer i diameter — omkring 50&nbsp;000 gånger smalare än ett människohår — men leder ändå ström anmärkningsvärt bra för sin vikt.",
+        "Seebeck-effekten upptäcktes 1821 när Thomas Johann Seebeck kopplade ihop två olika metaller i en sluten slinga och märkte att en kompassnål i närheten böjde av så fort skarvarna hade olika temperatur — han trodde först att han upptäckt en form av magnetism, inte elektricitet.",
+        "Människohudens yttemperatur ligger normalt runt 33&nbsp;°C, några grader varmare än rumstemperaturen omkring den — precis den lilla temperaturskillnaden en kroppsvärmedriven generator är tänkt att utnyttja."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-20-morka-kometen-1998sh2",
     date: "2026-07-20",
     title: "En ”asteroid” har i 27 år dolt att den egentligen är en komet med sin egen lilla raketmotor",

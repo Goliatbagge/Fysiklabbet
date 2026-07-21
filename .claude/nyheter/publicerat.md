@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-21 | `2026-07-21-kolnanoror-kroppsvarme` | Forskare stoppar kolnanorören från att klumpa ihop sig — och slår rekord i att omvandla kroppsvärme till el | Phys.org / Mirage News (referat av QUT:s pressmeddelande) / Angewandte Chemie International Edition (S. Zhou, X.-L. Shi, M. Li, W. Chen, T. Cao, N.-H. Li, M. Zhang, P. Sonar, Q. Liu, Z.-G. Chen, 2026) |
 | 2026-07-20 | `2026-07-20-morka-kometen-1998sh2` | En ”asteroid” har i 27 år dolt att den egentligen är en komet med sin egen lilla raketmotor | NASA/JPL (pressmeddelande) / Phys.org / Nature Astronomy (D. Farnocchia, O. R. Hainaut, D. Z. Seligman et al., 2026) |
 | 2026-07-19 | `2026-07-19-tour-de-france-aerodynamik` | Valet av följebil kan avgöra Tour de France — fysiker mäter den osynliga knuffen bakom cyklisten | Heriot-Watt University (pressmeddelande) / Phys.org / road.cc (B. Blocken, forskningsrapport, 2026) |
 | 2026-07-18 | `2026-07-18-radium-molekyler` | Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten | Caltech (pressmeddelande) / Phys.org / Science (C. J. Conn, N. R. Hutzler et al., 2026) |

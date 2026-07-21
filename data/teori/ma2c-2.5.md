@@ -27,6 +27,44 @@ x = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a}
 $$
 :::
 
+::: härledning "Härledning — abc-formeln"
+Vi utgår från ekvationen
+
+$$
+ax^2 + bx + c = 0
+$$
+
+där $a \neq 0$. Vi dividerar båda led med $a$ så att ekvationen får
+den form som pq-formeln kräver:
+
+$$
+x^2 + \frac{b}{a}x + \frac{c}{a} = 0
+$$
+
+Nu kan vi använda pq-formeln (som vi härledde i förra avsnittet) med
+$p = \dfrac{b}{a}$ och $q = \dfrac{c}{a}$:
+
+$$
+x = -\frac{b}{2a} \pm \sqrt{\left(\frac{b}{2a}\right)^2 - \frac{c}{a}}
+$$
+
+Vi skriver om uttrycket under rottecknet med gemensam nämnare $4a^2$:
+
+$$
+\left(\frac{b}{2a}\right)^2 - \frac{c}{a} = \frac{b^2}{4a^2} - \frac{4ac}{4a^2} = \frac{b^2 - 4ac}{4a^2}
+$$
+
+Vi drar roten ur täljare och nämnare var för sig. Eftersom
+$\sqrt{4a^2} = 2a$ (tecknet på $a$ spelar ingen roll — det fångas av
+$\pm$) får vi
+
+$$
+x = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a}
+$$
+
+v.s.b.
+:::
+
 ::: exempel "Exempel 1 — Lös med abc-formeln"
 **Lös ekvationen $2x^2 - 8x + 6 = 0$ med abc-formeln.**
 

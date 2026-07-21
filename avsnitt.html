@@ -54,7 +54,13 @@
             return { md, tokens };
         }
         function restoreMath(html, tokens) {
-            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            // Håll ihop variabel + bindestreck + efterled ("$x$-termen",
+            // "<em>pq</em>-formeln") — annars kan raden brytas efter
+            // bindestrecket eller mellan variabeln och bindestrecket.
+            html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
+                '<span class="var-compound">$1-$2</span>');
+            return html;
         }
 
         // --- Konvertera Unicode-superscript (⁻²⁷, ³⁰, …) till <sup>-27</sup>.

@@ -37,7 +37,10 @@ window.SIM_NAMES = {
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',
-  'fysik1-arkimedes.html': 'Arkimedes princip',
+  'fysik1-flytkraft-app.html': [
+    { name: 'Flyta eller sjunka', desc: 'Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.' },
+    { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Lyftkraft och undanträngt vatten med dynamometer.' },
+  ],
   'fysik1-tryck.html': 'Ideala gaslagen',
   'fysik1-varme-app.html': 'Uppvärmning och avsvalning',
   'fysik1-influens.html': 'Elektrisk influens',

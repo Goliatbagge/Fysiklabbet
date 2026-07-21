@@ -12,18 +12,18 @@ section: '4.6'
 ## Parallella och vertikala linjer
 
 Om två linjer har samma lutning kallas de **parallella**. Parallella
-linjer har alltså *samma k-värde*.
+linjer har alltså *samma* *k*-värde.
 
 En linje som är lodrät kallas **vertikal**. Vertikala linjer kan inte
 beskrivas med räta linjens ekvation i k-form, utan beskrivs utifrån var
-den ligger i x-led.
+den ligger i *x*-led.
 
 ::: formel "Vertikala linjens ekvation"
 $$
 x = a
 $$
 
-där $a$ är linjens läge i x-led.
+där $a$ är linjens läge i *x*-led.
 :::
 
 ## Räta linjens ekvation i allmän form
@@ -91,7 +91,7 @@ Vi skiftar VL och HL och sorterar termerna i "bokstavsordning".
 **Svar:** $3x - y - 5 = 0$
 :::
 
-::: exempel "Exempel 2 — k-värde ur allmän form"
+::: exempel "Exempel 2 — *k*-värde ur allmän form"
 **Ange $k$-värdet för linjen som beskrivs av $2x + 3y - 6 = 0$.**
 
 Vi skriver om ekvationen till k-form genom att *lösa ut y*, för att

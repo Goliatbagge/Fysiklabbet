@@ -76,7 +76,7 @@ beskriva radioaktivt sönderfall.
 :::
 
 Undersök själv hur $C$ och $a$ formar exponentialfunktionen. Den röda
-pricken visar skärningen med y-axeln — den ligger alltid i höjd med $C$,
+pricken visar skärningen med *y*-axeln — den ligger alltid i höjd med $C$,
 eftersom $y = C \cdot a^0 = C$ när $x = 0$. Prova värden på
 förändringsfaktorn $a$ både över och under 1.
 

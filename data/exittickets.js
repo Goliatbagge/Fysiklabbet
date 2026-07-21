@@ -520,7 +520,7 @@ window.EXITTICKETS = {
       'En sekants lutning mellan två punkter på en s-t-graf ger just medelhastigheten under det intervallet, $v_m = \\Delta s/\\Delta t$.',
       'Momentanhastigheten ges istället av tangentens lutning i en enskild punkt, inte av en sekant genom två punkter.',
       'Accelerationen avläses inte i ett s-t-diagram utan i ett v-t-diagram, där lutningen motsvarar hastighetsändringen per tid.',
-      'Sträckan är den totala väglängden och avläses direkt på y-axeln (om start är noll) — den beräknas inte som en lutning.',
+      'Sträckan är den totala väglängden och avläses direkt på *y*-axeln (om start är noll) — den beräknas inte som en lutning.',
     ],
   },
   {
@@ -531,7 +531,7 @@ window.EXITTICKETS = {
       'Medelhastigheten ges av en sekants lutning mellan två punkter, inte av tangenten i en enda punkt.',
       'Tangentens lutning i en punkt ger den exakta hastigheten just då — momentanhastigheten.',
       'Acceleration avläses i ett v-t-diagram, inte som en tangent i ett s-t-diagram.',
-      'Förflyttningen avläses direkt som ett värde på y-axeln (skillnaden i läge), inte som en lutning.',
+      'Förflyttningen avläses direkt som ett värde på *y*-axeln (skillnaden i läge), inte som en lutning.',
     ],
   },
   {
@@ -645,13 +645,13 @@ window.EXITTICKETS = {
 
 'fy1-2.5': [
   {
-    question: 'Vad kallas ett diagram med hastighet på y-axeln och tid på x-axeln?',
+    question: 'Vad kallas ett diagram med hastighet på *y*-axeln och tid på *x*-axeln?',
     choices: ['s-t-diagram', 'v-t-diagram', 'a-t-diagram', 'F-s-diagram'],
     correct: 1,
     why: [
-      'Ett s-t-diagram har istället läge (sträcka) på y-axeln, inte hastighet.',
-      'Ett diagram med hastighet på y-axeln och tid på x-axeln kallas hastighet-tid-diagram, eller v-t-diagram.',
-      'Ett a-t-diagram har acceleration på y-axeln, inte hastighet.',
+      'Ett s-t-diagram har istället läge (sträcka) på *y*-axeln, inte hastighet.',
+      'Ett diagram med hastighet på *y*-axeln och tid på *x*-axeln kallas hastighet-tid-diagram, eller v-t-diagram.',
+      'Ett a-t-diagram har acceleration på *y*-axeln, inte hastighet.',
       'F-s-diagram (kraft mot sträcka) förekommer inte i det här avsnittet — här är det hastighet mot tid som gäller.',
     ],
   },
@@ -667,12 +667,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad motsvarar arean mellan grafen och x-axeln i ett v-t-diagram?',
+    question: 'Vad motsvarar arean mellan grafen och *x*-axeln i ett v-t-diagram?',
     choices: ['Förflyttningen', 'Tiden', 'Accelerationen', 'Medelhastigheten'],
     correct: 0,
     why: [
-      'Arean mellan en v-t-graf och x-axeln motsvarar förflyttningen, eftersom $\\Delta s = v \\cdot \\Delta t$ precis som en area är bas gånger höjd.',
-      'Tiden avläses direkt på x-axeln — den beräknas inte som en area.',
+      'Arean mellan en v-t-graf och *x*-axeln motsvarar förflyttningen, eftersom $\\Delta s = v \\cdot \\Delta t$ precis som en area är bas gånger höjd.',
+      'Tiden avläses direkt på *x*-axeln — den beräknas inte som en area.',
       'Accelerationen motsvaras av grafens lutning, inte av arean under den.',
       'Medelhastigheten är en kvot ($\\Delta s/\\Delta t$), inte den area som direkt avläses i diagrammet.',
     ],
@@ -689,7 +689,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En graf i ett v-t-diagram ligger delvis över och delvis under x-axeln, med två lika stora areor (motsatt tecken). Vad gäller för föremålets rörelse?',
+    question: 'En graf i ett v-t-diagram ligger delvis över och delvis under *x*-axeln, med två lika stora areor (motsatt tecken). Vad gäller för föremålets rörelse?',
     choices: [
       'Både förflyttningen och sträckan är noll',
       'Förflyttningen är noll, men sträckan är större än noll',
@@ -708,36 +708,36 @@ window.EXITTICKETS = {
 
 'fy1-2.6': [
   {
-    question: 'Vad kallas ett diagram med acceleration på y-axeln och tid på x-axeln?',
+    question: 'Vad kallas ett diagram med acceleration på *y*-axeln och tid på *x*-axeln?',
     choices: ['v-t-diagram', 's-t-diagram', 'a-t-diagram', 'F-t-diagram'],
     correct: 2,
     why: [
-      'Ett v-t-diagram har istället hastighet på y-axeln, inte acceleration.',
-      'Ett s-t-diagram har läge (sträcka) på y-axeln — det är inte samma sak som ett diagram över acceleration.',
-      'Ett diagram med acceleration på y-axeln och tid på x-axeln kallas acceleration-tid-diagram, eller a-t-diagram.',
+      'Ett v-t-diagram har istället hastighet på *y*-axeln, inte acceleration.',
+      'Ett s-t-diagram har läge (sträcka) på *y*-axeln — det är inte samma sak som ett diagram över acceleration.',
+      'Ett diagram med acceleration på *y*-axeln och tid på *x*-axeln kallas acceleration-tid-diagram, eller a-t-diagram.',
       'Ett F-t-diagram (kraft mot tid) förekommer inte i det här avsnittet — här handlar det om acceleration mot tid.',
     ],
   },
   {
-    question: 'Vad motsvarar arean mellan grafen och x-axeln i ett a-t-diagram?',
+    question: 'Vad motsvarar arean mellan grafen och *x*-axeln i ett a-t-diagram?',
     choices: ['Hastighetsändringen', 'Förflyttningen', 'Sträckan', 'Accelerationsändringen'],
     correct: 0,
     why: [
-      'Arean mellan grafen och x-axeln i ett a-t-diagram motsvarar hastighetsändringen, eftersom $\\Delta v = a \\cdot \\Delta t$ precis som en area är bas gånger höjd.',
+      'Arean mellan grafen och *x*-axeln i ett a-t-diagram motsvarar hastighetsändringen, eftersom $\\Delta v = a \\cdot \\Delta t$ precis som en area är bas gånger höjd.',
       'Förflyttningen avläses som en area i ett v-t-diagram, inte i ett a-t-diagram.',
       'Sträckan avläses som en area i ett v-t-diagram (med alla areor räknade som positiva), inte i ett a-t-diagram.',
       'Det finns ingen storhet som heter "accelerationsändring" i det här sammanhanget — arean i ett a-t-diagram ger hastighetsändringen.',
     ],
   },
   {
-    question: 'En area under x-axeln (negativ area) i ett a-t-diagram tolkas som …',
+    question: 'En area under *x*-axeln (negativ area) i ett a-t-diagram tolkas som …',
     choices: ['En hastighetsökning', 'En positionsökning', 'Ingen förändring', 'En hastighetsminskning'],
     correct: 3,
     why: [
-      'En hastighetsökning svarar mot en positiv area (över x-axeln), inte en negativ.',
+      'En hastighetsökning svarar mot en positiv area (över *x*-axeln), inte en negativ.',
       'Positionsökning avläses inte som en area i ett a-t-diagram — arean där ger istället en hastighetsändring.',
       'En area skild från noll (oavsett tecken) motsvarar alltid en hastighetsändring — bara om arean är exakt noll sker ingen förändring.',
-      'En area under x-axeln räknas som negativ och tolkas som en hastighetsminskning.',
+      'En area under *x*-axeln räknas som negativ och tolkas som en hastighetsminskning.',
     ],
   },
   {
@@ -1025,7 +1025,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En kraft delas upp i två delkrafter med bestämda riktningar, till exempel längs x- och y-axeln. Vad kallas delkrafterna?',
+    question: 'En kraft delas upp i två delkrafter med bestämda riktningar, till exempel längs *x*- och *y*-axeln. Vad kallas delkrafterna?',
     choices: [
       'Motkrafter',
       'Jämviktskrafter',
@@ -5492,7 +5492,7 @@ window.EXITTICKETS = {
 
 'fy2-1.6': [
   {
-    question: 'Om luftmotstånd försummas, hur beter sig hastigheten och accelerationen i x-led under en kaströrelse?',
+    question: 'Om luftmotstånd försummas, hur beter sig hastigheten och accelerationen i *x*-led under en kaströrelse?',
     choices: [
       'Hastigheten är konstant och accelerationen är noll',
       'Hastigheten ökar linjärt och accelerationen är konstant lika med $g$',
@@ -5501,14 +5501,14 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Eftersom inga krafter verkar i x-led (utan luftmotstånd) är $a_\\mathrm{x} = 0$, vilket ger konstant hastighet $v_\\mathrm{x}$.',
-      'Detta beskriver istället y-ledens rörelse, där tyngdaccelerationen $g$ verkar.',
-      'Hastigheten i x-led varken minskar eller ökar — den är konstant genom hela kaströrelsen.',
-      'Föremålet rör sig faktiskt i x-led (annars vore det ingen kaströrelse) — hastigheten är konstant men inte noll.',
+      'Eftersom inga krafter verkar i *x*-led (utan luftmotstånd) är $a_\\mathrm{x} = 0$, vilket ger konstant hastighet $v_\\mathrm{x}$.',
+      'Detta beskriver istället *y*-ledens rörelse, där tyngdaccelerationen $g$ verkar.',
+      'Hastigheten i *x*-led varken minskar eller ökar — den är konstant genom hela kaströrelsen.',
+      'Föremålet rör sig faktiskt i *x*-led (annars vore det ingen kaströrelse) — hastigheten är konstant men inte noll.',
     ],
   },
   {
-    question: 'Vilket uttryck ger hastigheten i y-led, $v_\\mathrm{y}$, vid tiden $t$ i en kaströrelse med utgångshastighet $v_0$ och elevationsvinkel α?',
+    question: 'Vilket uttryck ger hastigheten i *y*-led, $v_\\mathrm{y}$, vid tiden $t$ i en kaströrelse med utgångshastighet $v_0$ och elevationsvinkel α?',
     choices: [
       '$v_\\mathrm{y} = v_0 \\cdot \\cos \\alpha$',
       '$v_\\mathrm{y} = v_0 \\cdot \\sin \\alpha - g \\cdot t$',
@@ -5517,8 +5517,8 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Detta uttryck saknar tidsberoendet och beskriver dessutom x-ledens (konstanta) hastighetskomposant, inte y-ledens.',
-      'Utgångshastigheten i y-led är $v_0 \\cdot \\sin \\alpha$, och eftersom $a_\\mathrm{y} = -g$ minskar hastigheten med $g \\cdot t$ över tiden.',
+      'Detta uttryck saknar tidsberoendet och beskriver dessutom *x*-ledens (konstanta) hastighetskomposant, inte *y*-ledens.',
+      'Utgångshastigheten i *y*-led är $v_0 \\cdot \\sin \\alpha$, och eftersom $a_\\mathrm{y} = -g$ minskar hastigheten med $g \\cdot t$ över tiden.',
       'Tecknet framför $g \\cdot t$ ska vara minus, inte plus, eftersom tyngdaccelerationen bromsar den uppåtriktade rörelsen.',
       'Detta uttryck saknar bidraget från utgångshastigheten $v_0 \\cdot \\sin \\alpha$.',
     ],
@@ -11364,8 +11364,8 @@ window.EXITTICKETS = {
   {
     question: 'Hur skrivs koordinaterna för en punkt?',
     choices: [
-      'Med x-koordinaten först och y-koordinaten sist: ($x$, $y$)',
-      'Med y-koordinaten först och x-koordinaten sist: ($y$, $x$)',
+      'Med *x*-koordinaten först och *y*-koordinaten sist: ($x$, $y$)',
+      'Med *y*-koordinaten först och *x*-koordinaten sist: ($y$, $x$)',
       'Ordningen spelar ingen roll',
       'Med ett likhetstecken mellan: $x = y$',
     ],
@@ -11378,7 +11378,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilken kvadrant har både positiva x-värden och positiva y-värden?',
+    question: 'Vilken kvadrant har både positiva *x*-värden och positiva *y*-värden?',
     choices: [
       'Första kvadranten',
       'Andra kvadranten',
@@ -11388,9 +11388,9 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Första kvadranten ligger uppe till höger, där båda koordinaterna är positiva — och numreringen fortsätter moturs.',
-      'Andra kvadranten (uppe till vänster) har negativa x-värden.',
+      'Andra kvadranten (uppe till vänster) har negativa *x*-värden.',
       'Tredje kvadranten (nere till vänster) har båda negativa.',
-      'Fjärde kvadranten (nere till höger) har negativa y-värden.',
+      'Fjärde kvadranten (nere till höger) har negativa *y*-värden.',
     ],
   },
   {
@@ -11405,7 +11405,7 @@ window.EXITTICKETS = {
     why: [
       'Jämn ändringstakt (t.ex. 400 kr per timme) ger en rät linje — därav namnet linjär.',
       'Fördubbling i varje steg är exponentiell tillväxt, inte linjär.',
-      'Linjen kan skära y-axeln var som helst — verkstadsmodellen $y = 500 + 400x$ startar på 500.',
+      'Linjen kan skära *y*-axeln var som helst — verkstadsmodellen $y = 500 + 400x$ startar på 500.',
       'Konstanttermen (t.ex. en fast avgift) är tillåten och vanlig.',
     ],
   },
@@ -11419,7 +11419,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Samma samband kan uttryckas som formeln $y = 500 + 400x$, som en tabell med x- och y-värden, eller som en rät linje i ett koordinatsystem.',
+      'Samma samband kan uttryckas som formeln $y = 500 + 400x$, som en tabell med *x*- och *y*-värden, eller som en rät linje i ett koordinatsystem.',
       'Formeln är bara ett av sätten — tabell och graf visar samma sak.',
       'Cirkel- och stapeldiagram används för helt andra slags data.',
       'Olikheter och rötter är andra verktyg — inte beskrivningsformer för en modell.',
@@ -11445,19 +11445,19 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Var skär grafen till en proportionalitet y-axeln?',
+    question: 'Var skär grafen till en proportionalitet *y*-axeln?',
     choices: [
       'I origo',
       'I punkten (0, $k$)',
       'I punkten (1, 0)',
-      'Den skär aldrig y-axeln',
+      'Den skär aldrig *y*-axeln',
     ],
     correct: 0,
     why: [
       'Med $x = 0$ ger $y = kx$ alltid $y = 0$ — grafen går genom origo.',
       '$k$ är lutningen, inte skärningspunkten — insättning av $x = 0$ ger $y = 0$.',
-      '(1, 0) ligger på x-axeln — proportionalitetens graf går där bara om $k = 0$.',
-      'Alla räta linjer av formen $y = kx$ skär (går genom) y-axeln i origo.',
+      '(1, 0) ligger på *x*-axeln — proportionalitetens graf går där bara om $k = 0$.',
+      'Alla räta linjer av formen $y = kx$ skär (går genom) *y*-axeln i origo.',
     ],
   },
   {
@@ -11477,7 +11477,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Grafen till ett samband är en rät linje som skär y-axeln i (0, 50). Är sambandet en proportionalitet?',
+    question: 'Grafen till ett samband är en rät linje som skär *y*-axeln i (0, 50). Är sambandet en proportionalitet?',
     choices: [
       'Nej — grafen går inte genom origo',
       'Ja — alla räta linjer är proportionaliteter',
@@ -11498,14 +11498,14 @@ window.EXITTICKETS = {
   {
     question: 'Vad är första steget när grafen till $y = -2x + 3$ ska ritas för hand?',
     choices: [
-      'Göra en värdetabell med några x-värden kring 0',
+      'Göra en värdetabell med några *x*-värden kring 0',
       'Dra en linje på måfå och justera efteråt',
       'Beräkna grafens lutning med gradskiva',
       'Rita av grafen från räknaren',
     ],
     correct: 0,
     why: [
-      'Värdetabellen ger koordinater att pricka in — en bra tumregel är några positiva och negativa x-värden kring 0.',
+      'Värdetabellen ger koordinater att pricka in — en bra tumregel är några positiva och negativa *x*-värden kring 0.',
       'Grafen ska byggas på beräknade punkter, inte gissningar.',
       'Lutningen syns när punkterna är inprickade — ingen gradskiva behövs.',
       'Poängen med handritning är att förstå vad de digitala verktygen gör.',
@@ -11521,7 +11521,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Varje rad är en koordinat: x-värdet först, y-värdet sist.',
+      'Varje rad är en koordinat: *x*-värdet först, *y*-värdet sist.',
       'Omkastad ordning ger en helt annan punkt.',
       'En rad ger EN punkt — linjen uppstår först när alla punkter förbinds.',
       'Raden anger ett läge, inte ett avstånd.',
@@ -11530,16 +11530,16 @@ window.EXITTICKETS = {
   {
     question: 'Hur väljer man lämpliga intervall för axlarna innan punkterna prickas in?',
     choices: [
-      'Axlarna måste täcka största och minsta x- respektive y-värdena i tabellen',
+      'Axlarna måste täcka största och minsta x- respektive *y*-värdena i tabellen',
       'Axlarna ska alltid gå från −10 till 10',
-      'x-axeln räcker från 0 och uppåt',
+      '*x*-axeln räcker från 0 och uppåt',
       'Intervallen spelar ingen roll',
     ],
     correct: 0,
     why: [
       'För $y = -2x + 3$ med x från −3 till 3 krävs y-axel från −3 till 9 — annars ryms inte alla punkter.',
       'Ett fast intervall passar ibland men slösar ofta plats eller klipper punkter.',
-      'Negativa x-värden hör till en bra värdetabell — axeln måste täcka dem.',
+      'Negativa *x*-värden hör till en bra värdetabell — axeln måste täcka dem.',
       'För små intervall gör att punkter hamnar utanför papperet.',
     ],
   },
@@ -11549,14 +11549,14 @@ window.EXITTICKETS = {
       'Alla punkter ska hamna på en och samma räta linje',
       'Punkterna bildar alltid en båge',
       'Bara två av punkterna ligger på linjen',
-      'Punkterna ska ligga symmetriskt kring y-axeln',
+      'Punkterna ska ligga symmetriskt kring *y*-axeln',
     ],
     correct: 0,
     why: [
       'Ligger en punkt utanför linjen är det ett räknefel i den raden av värdetabellen — grafen fungerar som kontroll.',
       'Bågar hör till andra funktionstyper — linjära ekvationer ger räta linjer.',
       'ALLA punkter från tabellen ligger på linjen — det är själva linjäriteten.',
-      'Symmetri kring y-axeln gäller t.ex. $y = x^2$, inte räta linjer i allmänhet.',
+      'Symmetri kring *y*-axeln gäller t.ex. $y = x^2$, inte räta linjer i allmänhet.',
     ],
   },
 ],
@@ -11582,23 +11582,23 @@ window.EXITTICKETS = {
     question: 'Vad motsvarar $k$-värdet i $y = kx + m$?',
     choices: [
       'Linjens lutning',
-      'Skärningen med y-axeln',
-      'Skärningen med x-axeln',
+      'Skärningen med *y*-axeln',
+      'Skärningen med *x*-axeln',
       'Linjens startvärde',
     ],
     correct: 0,
     why: [
       '$k$ är lutningen (riktningskoefficienten) — hur många steg linjen går uppåt per steg åt höger.',
-      'Skärningen med y-axeln är $m$-värdet.',
-      'Skärningen med x-axeln fås först när man löser $kx + m = 0$.',
+      'Skärningen med *y*-axeln är $m$-värdet.',
+      'Skärningen med *x*-axeln fås först när man löser $kx + m = 0$.',
       '"Startvärdet" i linjära modeller motsvarar $m$, inte $k$.',
     ],
   },
   {
     question: 'Hur beräknas $k$-värdet med trappstegsmetoden?',
     choices: [
-      '$k = \\dfrac{\\Delta y}{\\Delta x}$ — förändringen i y-led delat med förändringen i x-led',
-      '$k = \\dfrac{\\Delta x}{\\Delta y}$ — förändringen i x-led delat med förändringen i y-led',
+      '$k = \\dfrac{\\Delta y}{\\Delta x}$ — förändringen i *y*-led delat med förändringen i *x*-led',
+      '$k = \\dfrac{\\Delta x}{\\Delta y}$ — förändringen i *x*-led delat med förändringen i *y*-led',
       '$k = \\Delta y \\cdot \\Delta x$',
       '$k = \\Delta y - \\Delta x$',
     ],
@@ -11611,7 +11611,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En linje går 2 steg nedåt för varje steg åt höger och skär y-axeln i (0, 1). Vilken är ekvationen?',
+    question: 'En linje går 2 steg nedåt för varje steg åt höger och skär *y*-axeln i (0, 1). Vilken är ekvationen?',
     choices: [
       '$y = -2x + 1$',
       '$y = 2x + 1$',
@@ -11622,7 +11622,7 @@ window.EXITTICKETS = {
     why: [
       'Nedåt betyder negativ lutning: $k = -2$, och skärningen ger $m = 1$.',
       'Med $k = +2$ skulle linjen luta uppåt.',
-      '$m$ är skärningen med y-axeln, som är $+1$.',
+      '$m$ är skärningen med *y*-axeln, som är $+1$.',
       'Här har $k$ och $m$ bytt roller.',
     ],
   },
@@ -11632,14 +11632,14 @@ window.EXITTICKETS = {
       'Den lutar nedåt, sett från vänster till höger',
       'Den lutar uppåt',
       'Den blir vågrät',
-      'Den hamnar under x-axeln överallt',
+      'Den hamnar under *x*-axeln överallt',
     ],
     correct: 0,
     why: [
       'Negativt $k$ betyder att y minskar när x ökar — linjen faller åt höger, som $y = -2x + 1$.',
       'Uppåtlutning kräver positivt $k$.',
       'Vågrät linje har $k = 0$.',
-      'Linjen kan mycket väl ligga över x-axeln för små x — lutningen styr riktningen, inte läget.',
+      'Linjen kan mycket väl ligga över *x*-axeln för små x — lutningen styr riktningen, inte läget.',
     ],
   },
 ],
@@ -11671,9 +11671,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Förändringen i y-led är differensen mellan y-koordinaterna, i samma ordning som punkterna: $y_2 - y_1$.',
+      'Förändringen i *y*-led är differensen mellan *y*-koordinaterna, i samma ordning som punkterna: $y_2 - y_1$.',
       'En summa mäter ingen förändring.',
-      'Det är $\\Delta x$ — förändringen i x-led.',
+      'Det är $\\Delta x$ — förändringen i *x*-led.',
       'Ordningen följer punkternas numrering — huvudsaken är att $\\Delta y$ och $\\Delta x$ tar punkterna i SAMMA ordning.',
     ],
   },
@@ -11697,15 +11697,15 @@ window.EXITTICKETS = {
     question: 'En linje har $k = 2$ och går genom (4, −3). Hur bestäms $m$-värdet?',
     choices: [
       'Sätt in punktens koordinater i $y = 2x + m$ och lös ut $m$',
-      'Läs av var linjen skär x-axeln',
-      '$m$ är alltid y-koordinaten i den givna punkten',
+      'Läs av var linjen skär *x*-axeln',
+      '$m$ är alltid *y*-koordinaten i den givna punkten',
       '$m = k \\cdot 4$',
     ],
     correct: 0,
     why: [
       '$-3 = 2 \\cdot 4 + m$ ger $m = -11$ — punkten ligger på linjen, så koordinaterna uppfyller ekvationen.',
-      '$m$ är skärningen med y-axeln, inte x-axeln — och den kan inte läsas av utan graf.',
-      'Bara om punkten ligger PÅ y-axeln ($x = 0$) är y-koordinaten lika med $m$.',
+      '$m$ är skärningen med *y*-axeln, inte *x*-axeln — och den kan inte läsas av utan graf.',
+      'Bara om punkten ligger PÅ *y*-axeln ($x = 0$) är *y*-koordinaten lika med $m$.',
       '$k \\cdot 4$ är variabeltermens värde i punkten — $m$ är det som återstår upp till $y$.',
     ],
   },
@@ -11715,15 +11715,15 @@ window.EXITTICKETS = {
   {
     question: 'Vad kännetecknar två parallella linjer?',
     choices: [
-      'De har samma k-värde',
-      'De har samma m-värde',
+      'De har samma *k*-värde',
+      'De har samma *m*-värde',
       'De skär varandra i origo',
       'De har samma ekvation',
     ],
     correct: 0,
     why: [
-      'Samma lutning betyder att linjerna aldrig möts — k-värdena är lika men m-värdena olika.',
-      'Samma m-värde betyder att linjerna skär y-axeln i samma punkt — då korsar de varandra där.',
+      'Samma lutning betyder att linjerna aldrig möts — *k*-värdena är lika men *m*-värdena olika.',
+      'Samma *m*-värde betyder att linjerna skär *y*-axeln i samma punkt — då korsar de varandra där.',
       'Parallella linjer skär aldrig varandra alls.',
       'Samma ekvation vore samma linje, inte två parallella.',
     ],
@@ -11731,7 +11731,7 @@ window.EXITTICKETS = {
   {
     question: 'Varför kan en vertikal linje inte skrivas i k-form ($y = kx + m$)?',
     choices: [
-      'Lutningen skulle bli oändligt stor — det finns inget k-värde',
+      'Lutningen skulle bli oändligt stor — det finns inget *k*-värde',
       'Vertikala linjer saknar punkter',
       'Vertikala linjer är inga riktiga linjer',
       'Den kan visst skrivas i k-form',
@@ -11739,7 +11739,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Trappsteget har $\\Delta x = 0$ — kvoten $\\Delta y/\\Delta x$ är odefinierad. Vertikala linjer skrivs i stället $x = a$.',
-      'De har oändligt många punkter — alla med samma x-koordinat.',
+      'De har oändligt många punkter — alla med samma *x*-koordinat.',
       'De är fullvärdiga räta linjer, bara med ett annat skrivsätt.',
       'Ingen kombination av $k$ och $m$ ger en lodrät graf.',
     ],
@@ -11761,7 +11761,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilket k-värde har linjen $2x + 3y - 6 = 0$?',
+    question: 'Vilket *k*-värde har linjen $2x + 3y - 6 = 0$?',
     choices: [
       '$-\\dfrac{2}{3}$',
       '$2$',
@@ -11782,15 +11782,15 @@ window.EXITTICKETS = {
   {
     question: 'Vad krävs för att ett samband mellan $x$ och $y$ ska vara en **funktion**?',
     choices: [
-      'Varje tillåtet x-värde ger exakt ett y-värde',
-      'Varje y-värde ger exakt ett x-värde',
+      'Varje tillåtet *x*-värde ger exakt ett *y*-värde',
+      'Varje *y*-värde ger exakt ett *x*-värde',
       'Grafen är en rät linje',
       'Sambandet innehåller inga negativa tal',
     ],
     correct: 0,
     why: [
       'Det är funktionsdefinitionen — grafiskt: en lodrät penna skär grafen högst en gång.',
-      'Det är kravet åt fel håll — flera x-värden får gärna ge samma y-värde.',
+      'Det är kravet åt fel håll — flera *x*-värden får gärna ge samma *y*-värde.',
       'Även kurvor (t.ex. andragradsfunktioner) är funktioner — linjäritet krävs inte.',
       'Negativa tal är inga problem för funktioner.',
     ],
@@ -11840,11 +11840,11 @@ window.EXITTICKETS = {
       '$y$:s värde beror på vilket $x$ som stoppas in — därav "beroende".',
       'Den oberoende variabeln är $x$ — den väljs fritt.',
       'Koefficient är talet framför en variabel i ett uttryck.',
-      'Definitionsmängden är mängden tillåtna x-värden — ett begrepp som kommer i ett senare avsnitt.',
+      'Definitionsmängden är mängden tillåtna *x*-värden — ett begrepp som kommer i ett senare avsnitt.',
     ],
   },
   {
-    question: 'Grafen till $f$ skär x-axeln i $x = -1$, $x = 1$ och $x = 3$. Vad säger det?',
+    question: 'Grafen till $f$ skär *x*-axeln i $x = -1$, $x = 1$ och $x = 3$. Vad säger det?',
     choices: [
       'Ekvationen $f(x) = 0$ har lösningarna $x = -1$, $x = 1$ och $x = 3$',
       '$f(0) = -1$, $f(0) = 1$ och $f(0) = 3$',
@@ -11853,10 +11853,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Skärning med x-axeln betyder $y = 0$ — där är funktionsvärdet noll, alltså lösningarna till $f(x) = 0$.',
+      'Skärning med *x*-axeln betyder $y = 0$ — där är funktionsvärdet noll, alltså lösningarna till $f(x) = 0$.',
       '$f(0)$ är skärningen med Y-axeln — och en funktion kan bara ha ETT värde i $x = 0$.',
       'Tvärtom — funktionen är definierad och råkar vara exakt noll där.',
-      'Tre olika x-värden med varsitt y-värde bryter inte mot funktionskravet.',
+      'Tre olika *x*-värden med varsitt *y*-värde bryter inte mot funktionskravet.',
     ],
   },
 ],
@@ -11905,9 +11905,9 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Lösningen är skärningspunktens X-koordinat: vid $x = 2$ är båda leden lika (värdet 1).',
-      '1 är y-koordinaten — ledens gemensamma värde, inte lösningen.',
+      '1 är *y*-koordinaten — ledens gemensamma värde, inte lösningen.',
       'Summan av koordinaterna har ingen betydelse här.',
-      'Ekvationen har EN obekant — svaret är ett x-värde, inte en punkt.',
+      'Ekvationen har EN obekant — svaret är ett *x*-värde, inte en punkt.',
     ],
   },
   {
@@ -11939,7 +11939,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Möjliga y-värden bildar värdemängden.',
+      'Möjliga *y*-värden bildar värdemängden.',
       'Definitionsmängden är i stället de möjliga X-värdena.',
       '"Funktionsmängd" är inget vedertaget begrepp här.',
       'Koordinater är punkter — mängderna handlar om var sin variabel.',
@@ -12066,14 +12066,14 @@ window.EXITTICKETS = {
       'Beräkna några punkter (t.ex. x = 1) och testa vilka som ligger på kurvan',
       'Det går inte — kurvorna är identiska',
       'Mät kurvans lutning med linjal',
-      'Kolla var kurvan skär x-axeln',
+      'Kolla var kurvan skär *x*-axeln',
     ],
     correct: 0,
     why: [
       'Vid $x = 1$ ska $3^x$ ge 3 och $2^x$ ge 2 — punkttestet avgör direkt vilken kurva som är ritad.',
       'Kurvorna skiljer sig överallt utom i (0, 1).',
       'Lutningen ändras hela tiden på en exponentialkurva — punkttest är säkrare.',
-      'Exponentialkurvor skär aldrig x-axeln — de närmar sig den bara.',
+      'Exponentialkurvor skär aldrig *x*-axeln — de närmar sig den bara.',
     ],
   },
 ],
@@ -12114,7 +12114,7 @@ window.EXITTICKETS = {
   {
     question: 'Hur ser grafen till $y = x^2$ ut?',
     choices: [
-      'En parabel med botten i origo, symmetrisk kring y-axeln',
+      'En parabel med botten i origo, symmetrisk kring *y*-axeln',
       'En hyperbel med två grenar',
       'En rät linje',
       'En kurva som bara finns för positiva x',
@@ -13000,7 +13000,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur bestäms vinkeln mellan sträckan och x-axeln när katetrarna 3 (motstående) och 4 (närliggande) är kända?',
+    question: 'Hur bestäms vinkeln mellan sträckan och *x*-axeln när katetrarna 3 (motstående) och 4 (närliggande) är kända?',
     choices: [
       '$v = \\tan^{-1}\\left(\\dfrac{3}{4}\\right) \\approx 37°$',
       '$v = \\tan\\left(\\dfrac{3}{4}\\right)$',
@@ -13245,7 +13245,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Förflyttningen är 8 i x-led och 4 i y-led — precis katetrarna som går in i Pythagoras sats.',
+      'Förflyttningen är 8 i *x*-led och 4 i *y*-led — precis katetrarna som går in i Pythagoras sats.',
       'Vektorn kan starta var som helst — koordinaterna anger förflyttningen, inte en punkt.',
       'Längd och vinkel kan RÄKNAS UT ur koordinaterna, men det är inte de som står där.',
       'Det är EN vektor med två komponenter.',
@@ -13326,14 +13326,14 @@ window.EXITTICKETS = {
     question: 'Var i grafen hittar man lösningen till ett ekvationssystem?',
     choices: [
       'I skärningspunkten mellan linjerna',
-      'Där den ena linjen skär y-axeln',
-      'Där linjerna skär x-axeln',
+      'Där den ena linjen skär *y*-axeln',
+      'Där linjerna skär *x*-axeln',
       'I punkten där avståndet mellan linjerna är störst',
     ],
     correct: 0,
     why: [
       'Skärningspunkten ligger på båda linjerna samtidigt — dess koordinater uppfyller båda ekvationerna, vilket är precis vad en lösning är.',
-      'Skärningen med y-axeln ger linjens m-värde, inte systemets lösning.',
+      'Skärningen med *y*-axeln ger linjens *m*-värde, inte systemets lösning.',
       'Linjernas nollställen hör till varje linje för sig — lösningen kräver en punkt som ligger på båda.',
       'Lösningen är där linjerna möts, inte där de är som längst ifrån varandra.',
     ],
@@ -13348,10 +13348,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Skärningspunktens x-koordinat är lösningen till x och y-koordinaten är lösningen till y — punkten (3, 2) ger x = 3 och y = 2.',
-      'Ordningen i en punkt är (x, y) — första koordinaten är x-värdet, inte y-värdet.',
-      'Lösningen är ett talpar (ett x och ett y som hör ihop), inte två alternativa x-värden.',
-      '−4 och 5 är linjernas m-värden (skärningar med y-axeln), inte systemets lösning.',
+      'Skärningspunktens *x*-koordinat är lösningen till x och *y*-koordinaten är lösningen till y — punkten (3, 2) ger x = 3 och y = 2.',
+      'Ordningen i en punkt är (x, y) — första koordinaten är *x*-värdet, inte *y*-värdet.',
+      'Lösningen är ett talpar (ett x och ett y som hör ihop), inte två alternativa *x*-värden.',
+      '−4 och 5 är linjernas *m*-värden (skärningar med *y*-axeln), inte systemets lösning.',
     ],
   },
   {
@@ -13360,14 +13360,14 @@ window.EXITTICKETS = {
       'Inga lösningar',
       'Exakt en lösning',
       'Oändligt många lösningar',
-      'Det beror på m-värdenas storlek',
+      'Det beror på *m*-värdenas storlek',
     ],
     correct: 0,
     why: [
-      'Samma lutning men olika startpunkter på y-axeln gör linjerna parallella — de skär aldrig varandra, så det finns ingen gemensam lösning.',
-      'Exakt en lösning kräver att linjerna skär varandra, vilket förutsätter olika k-värden.',
+      'Samma lutning men olika startpunkter på *y*-axeln gör linjerna parallella — de skär aldrig varandra, så det finns ingen gemensam lösning.',
+      'Exakt en lösning kräver att linjerna skär varandra, vilket förutsätter olika *k*-värden.',
       'Oändligt många lösningar fås först när linjerna är identiska — samma k OCH samma m.',
-      'Så länge m-värdena är olika är linjerna parallella oavsett hur stora eller små värdena är.',
+      'Så länge *m*-värdena är olika är linjerna parallella oavsett hur stora eller små värdena är.',
     ],
   },
   {
@@ -13380,10 +13380,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Olika lutningar gör att linjerna alltid korsar varandra i exakt en punkt — m-värdena spelar då ingen roll.',
-      'Samma k-värde ger antingen parallella linjer (inga lösningar) eller samma linje (oändligt många) — aldrig exakt en.',
-      'Två olika linjer genom origo skär varandra där, men det är olika k-värden som är det allmänna villkoret — inte origo.',
-      'Villkoret räcker med olika k-värden — kravet på samma m-värde är onödigt (då vet man dessutom att skärningen sker på y-axeln).',
+      'Olika lutningar gör att linjerna alltid korsar varandra i exakt en punkt — *m*-värdena spelar då ingen roll.',
+      'Samma *k*-värde ger antingen parallella linjer (inga lösningar) eller samma linje (oändligt många) — aldrig exakt en.',
+      'Två olika linjer genom origo skär varandra där, men det är olika *k*-värden som är det allmänna villkoret — inte origo.',
+      'Villkoret räcker med olika *k*-värden — kravet på samma *m*-värde är onödigt (då vet man dessutom att skärningen sker på *y*-axeln).',
     ],
   },
 ],
@@ -13432,8 +13432,8 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Enligt den övre ekvationen är y lika med 3x — byt ut y mot 3x i den undre: $2x + 3x = 10$, dvs. $5x = 10$.',
-      'Substitutionen ska göras i den undre ekvationens y-term — inte genom att sätta ekvationernas led lika hur som helst.',
-      'Det är x-termen som fått fel ersättning — det är $y$ som ska bytas ut mot $3x$, inte $x$.',
+      'Substitutionen ska göras i den undre ekvationens *y*-term — inte genom att sätta ekvationernas led lika hur som helst.',
+      'Det är *x*-termen som fått fel ersättning — det är $y$ som ska bytas ut mot $3x$, inte $x$.',
       'Då har $2x$-termen tappats bort — hela den undre ekvationen ska behållas.',
     ],
   },
@@ -13499,8 +13499,8 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       '$-3x$ och $+3x$ tar ut varandra; $2y + 5y = 7y$ och $4 + 10 = 14$.',
-      'y-termerna ska adderas, inte subtraheras: $2y + 5y = 7y$.',
-      'x-termerna har olika tecken och elimineras — de blir inte $6x$.',
+      '*y*-termerna ska adderas, inte subtraheras: $2y + 5y = 7y$.',
+      '*x*-termerna har olika tecken och elimineras — de blir inte $6x$.',
       'Högerleden adderas: $4 + 10 = 14$, inte $4 \\cdot 10 = 40$.',
     ],
   },
@@ -13516,7 +13516,7 @@ window.EXITTICKETS = {
     why: [
       'Då blir den övre $4x + 2y = 14$ — termerna $+2y$ och $-2y$ har olika tecken och elimineras vid addition.',
       'Direkt addition ger $5x - y = 7$ — ingen variabel försvinner, man har bara fått en ny ekvation med två variabler.',
-      'Då blir den undre $6x - 4y = 0$, och y-termerna ($+y$ och $-4y$) matchar fortfarande inte.',
+      'Då blir den undre $6x - 4y = 0$, och *y*-termerna ($+y$ och $-4y$) matchar fortfarande inte.',
       'Det ändrar bara den övre ekvationens form — det skapar inga teckenmotsatta variabeltermer.',
     ],
   },
@@ -13831,7 +13831,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'När konstantterm saknas kan x brytas ut, och när vänsterledet är en produkt lika med 0 ger metoden lösningarna direkt.',
-      'Fullständiga andragradsekvationer (med konstantterm) kräver i stället pq-formeln.',
+      'Fullständiga andragradsekvationer (med konstantterm) kräver i stället *pq*-formeln.',
       'Metoden fungerar även på ofaktoriserade uttryck — faktoriseringen är ju steg 2 i metoden.',
       'Rotekvationer löses genom kvadrering, inte med nollproduktmetoden.',
     ],
@@ -13888,7 +13888,7 @@ window.EXITTICKETS = {
 
 'ma2c-2.4': [
   {
-    question: 'Vilken typ av ekvationer löses med pq-formeln?',
+    question: 'Vilken typ av ekvationer löses med *pq*-formeln?',
     choices: [
       'Fullständiga andragradsekvationer — med $x^2$-term, $x$-term och konstantterm',
       'Ekvationer med endast $x^2$-term och konstantterm',
@@ -13897,14 +13897,14 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'När alla tre termtyperna finns räcker varken den vanliga metoden eller nollproduktmetoden — då används pq-formeln.',
-      'Utan x-term räcker den vanliga metoden: lös ut $x^2$ och dra roten ur.',
+      'När alla tre termtyperna finns räcker varken den vanliga metoden eller nollproduktmetoden — då används *pq*-formeln.',
+      'Utan *x*-term räcker den vanliga metoden: lös ut $x^2$ och dra roten ur.',
       'Utan konstantterm är nollproduktmetoden (bryt ut x) enklare.',
-      'pq-formeln gäller andragradsekvationer med EN variabel.',
+      '*pq*-formeln gäller andragradsekvationer med EN variabel.',
     ],
   },
   {
-    question: 'Ekvationen $x^2 + px + q = 0$ har enligt pq-formeln lösningarna …',
+    question: 'Ekvationen $x^2 + px + q = 0$ har enligt *pq*-formeln lösningarna …',
     choices: [
       '$x = -\\dfrac{p}{2} \\pm \\sqrt{\\left(\\dfrac{p}{2}\\right)^2 - q}$',
       '$x = \\dfrac{p}{2} \\pm \\sqrt{\\left(\\dfrac{p}{2}\\right)^2 - q}$',
@@ -13920,25 +13920,25 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilka två krav måste vara uppfyllda innan pq-formeln används?',
+    question: 'Vilka två krav måste vara uppfyllda innan *pq*-formeln används?',
     choices: [
       'Ena ledet är 0 och koefficienten framför $x^2$-termen är 1',
       'Båda leden är positiva och ekvationen har två lösningar',
       'Ekvationen är faktoriserad och lika med 0',
-      'Konstanttermen är positiv och x-termen är negativ',
+      'Konstanttermen är positiv och *x*-termen är negativ',
     ],
     correct: 0,
     why: [
       'Formeln utgår från mallen $x^2 + px + q = 0$ — därför måste ledet göras till 0 och en eventuell koefficient framför $x^2$ divideras bort.',
       'Ledens tecken och antalet lösningar spelar ingen roll för att formeln ska få användas.',
-      'Faktorisering hör till nollproduktmetoden — pq-formeln används på den utvecklade formen.',
+      'Faktorisering hör till nollproduktmetoden — *pq*-formeln används på den utvecklade formen.',
       'p och q får ha vilka tecken som helst.',
     ],
   },
   {
-    question: 'Hur löses $2x^2 + 12x - 14 = 0$ med pq-formeln?',
+    question: 'Hur löses $2x^2 + 12x - 14 = 0$ med *pq*-formeln?',
     choices: [
-      'Dividera först båda led med 2, sedan pq-formeln på $x^2 + 6x - 7 = 0$',
+      'Dividera först båda led med 2, sedan *pq*-formeln på $x^2 + 6x - 7 = 0$',
       'Sätt $p = 12$ och $q = -14$ direkt i formeln',
       'Bryt ut 2x och använd nollproduktmetoden',
       'Subtrahera 2 från båda led så att koefficienten försvinner',
@@ -13971,7 +13971,7 @@ window.EXITTICKETS = {
 
 'ma2c-2.5': [
   {
-    question: 'För vilken form av andragradsekvation är abc-formeln gjord?',
+    question: 'För vilken form av andragradsekvation är *abc*-formeln gjord?',
     choices: [
       '$ax^2 + bx + c = 0$',
       '$x^2 + px + q = 0$',
@@ -13980,26 +13980,26 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'abc-formeln hanterar den allmänna formen där koefficienten a framför $x^2$ får vara vilket tal som helst.',
-      'Det är pq-formelns form — där måste koefficienten framför $x^2$ vara 1.',
-      'Kvadratform löses enklast genom rotdragning, inte abc-formeln.',
+      '*abc*-formeln hanterar den allmänna formen där koefficienten a framför $x^2$ får vara vilket tal som helst.',
+      'Det är *pq*-formelns form — där måste koefficienten framför $x^2$ vara 1.',
+      'Kvadratform löses enklast genom rotdragning, inte *abc*-formeln.',
       'Formeln kräver att ena ledet är 0.',
     ],
   },
   {
-    question: 'Vad skiljer abc-formeln från pq-formeln?',
+    question: 'Vad skiljer *abc*-formeln från *pq*-formeln?',
     choices: [
-      'Koefficienten framför $x^2$-termen behöver inte divideras bort innan abc-formeln används',
-      'abc-formeln ger fler lösningar än pq-formeln',
-      'abc-formeln kräver ingen kvadratrot',
-      'pq-formeln fungerar bara när q är positivt',
+      'Koefficienten framför $x^2$-termen behöver inte divideras bort innan *abc*-formeln används',
+      '*abc*-formeln ger fler lösningar än *pq*-formeln',
+      '*abc*-formeln kräver ingen kvadratrot',
+      '*pq*-formeln fungerar bara när q är positivt',
     ],
     correct: 0,
     why: [
-      'a ingår i abc-formeln, så ekvationen kan användas som den står — pq-formeln kräver först division så att koefficienten blir 1.',
+      'a ingår i *abc*-formeln, så ekvationen kan användas som den står — *pq*-formeln kräver först division så att koefficienten blir 1.',
       'Båda formlerna ger exakt samma lösningar — de är två vägar till samma mål.',
       'Båda formlerna innehåller en kvadratrot.',
-      'pq-formeln fungerar för alla tecken på q.',
+      '*pq*-formeln fungerar för alla tecken på q.',
     ],
   },
   {
@@ -14014,7 +14014,7 @@ window.EXITTICKETS = {
     why: [
       'Koefficienterna läses av med tecken: 5 framför $x^2$, −3 framför $x$ och konstanttermen −2.',
       'Tecknen måste följa med — b och c är negativa här.',
-      'a hör alltid till $x^2$-termen, b till x-termen.',
+      'a hör alltid till $x^2$-termen, b till *x*-termen.',
       'a, b och c är talen (koefficienterna), inte hela termerna.',
     ],
   },
@@ -14035,16 +14035,16 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ger pq-formeln och abc-formeln samma lösningar till en och samma ekvation?',
+    question: 'Ger *pq*-formeln och *abc*-formeln samma lösningar till en och samma ekvation?',
     choices: [
       'Ja — de är två likvärdiga metoder som ger exakt samma rötter',
-      'Nej — abc-formeln ger dubbelt så många lösningar',
+      'Nej — *abc*-formeln ger dubbelt så många lösningar',
       'Bara om koefficienten framför $x^2$ är 1',
       'Nej — de gäller olika typer av ekvationer',
     ],
     correct: 0,
     why: [
-      'Formlerna är algebraiskt ekvivalenta — abc-formeln blir pq-formeln om man dividerar ekvationen med a först.',
+      'Formlerna är algebraiskt ekvivalenta — *abc*-formeln blir *pq*-formeln om man dividerar ekvationen med a först.',
       'Antalet rötter bestäms av ekvationen (diskriminanten), inte av vilken formel som används.',
       'De ger samma svar för alla koefficienter — skillnaden är bara hur mycket förarbete som krävs.',
       'Båda löser samma sak: fullständiga andragradsekvationer lika med 0.',
@@ -14054,7 +14054,7 @@ window.EXITTICKETS = {
 
 'ma2c-2.6': [
   {
-    question: 'Vad kallas uttrycket under rottecknet i pq-formeln?',
+    question: 'Vad kallas uttrycket under rottecknet i *pq*-formeln?',
     choices: [
       'Diskriminant',
       'Koefficient',
@@ -14090,7 +14090,7 @@ window.EXITTICKETS = {
     choices: [
       'Kvadratroten ur ett negativt tal saknar (reellt) värde — inget tal i kvadrat blir negativt',
       'Negativa tal kan inte vara lösningar till ekvationer',
-      'pq-formeln fungerar bara för positiva tal',
+      '*pq*-formeln fungerar bara för positiva tal',
       'Ekvationen har då oändligt många lösningar i stället',
     ],
     correct: 0,
@@ -14111,7 +14111,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'pq-formeln ger $x = -2 \\pm \\sqrt{4 - 4} = -2 \\pm 0$ — diskriminanten är 0, så det finns exakt en lösning, x = −2.',
+      '*pq*-formeln ger $x = -2 \\pm \\sqrt{4 - 4} = -2 \\pm 0$ — diskriminanten är 0, så det finns exakt en lösning, x = −2.',
       'Två lösningar kräver positiv diskriminant, men $2^2 - 4 = 0$.',
       'Diskriminanten är inte negativ — den är exakt 0, vilket ger en rot.',
       'En andragradsekvation kan aldrig ha fler än två lösningar.',
@@ -14140,7 +14140,7 @@ window.EXITTICKETS = {
     question: 'Vad är det första steget i problemlösningsproceduren?',
     choices: [
       'Tolka problemet — definiera variabler och rita vid behov figur',
-      'Lösa ekvationen med pq-formeln',
+      'Lösa ekvationen med *pq*-formeln',
       'Kontrollera svaret',
       'Ställa upp ekvationen',
     ],
@@ -14194,7 +14194,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'När x multipliceras in i parentesen uppstår termen $x^2$: $21x + x^2 = 1\\,080$ — en andragradsekvation som löses med pq-formeln.',
+      'När x multipliceras in i parentesen uppstår termen $x^2$: $21x + x^2 = 1\\,080$ — en andragradsekvation som löses med *pq*-formeln.',
       'Högerledets storlek påverkar inte ekvationens gradtal.',
       'I linjära system (som kapitel 1) ger substitutionen linjära ekvationer — det är produktvillkoret som skapar $x^2$ här.',
       'Termen $x \\cdot x$ gör ekvationen till en andragradsekvation.',
@@ -14240,14 +14240,14 @@ window.EXITTICKETS = {
     choices: [
       'Lös ut rotuttrycket, kvadrera båda led och lös ekvationen — kontrollera sedan lösningarna',
       'Dra roten ur båda led',
-      'Använd pq-formeln direkt på ekvationen',
+      'Använd *pq*-formeln direkt på ekvationen',
       'Gissa och pröva olika värden',
     ],
     correct: 0,
     why: [
       'Kvadrering tar bort rottecknet — men den kan skapa falska rötter, så kontrollen är obligatorisk.',
       'Rotdragning skulle skapa ännu fler rotuttryck — det är kvadrering som tar BORT rottecken.',
-      'pq-formeln kräver en andragradsekvation utan rottecken — den kan bli aktuell först EFTER kvadreringen.',
+      '*pq*-formeln kräver en andragradsekvation utan rottecken — den kan bli aktuell först EFTER kvadreringen.',
       'Metoden är systematisk och algebraisk — ingen gissning behövs.',
     ],
   },
@@ -14277,7 +14277,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Med $t = \\sqrt{x}$ blir $x = t^2$, och ekvationen förvandlas till en vanlig andragradsekvation i t som pq-formeln löser.',
+      'Med $t = \\sqrt{x}$ blir $x = t^2$, och ekvationen förvandlas till en vanlig andragradsekvation i t som *pq*-formeln löser.',
       'Den substitutionen gör inte ekvationen enklare — rottecknet finns kvar.',
       'Med $t = 3\\sqrt{x}$ blir $x = t^2/9$ — koefficienterna blir krångligare, inte enklare.',
       'Substitutionen ska ersätta ROTUTTRYCKET så att ekvationen blir rotfri.',
@@ -14322,15 +14322,15 @@ window.EXITTICKETS = {
     question: 'Vad är en **extrempunkt**?',
     choices: [
       'Ett samlingsnamn för maximi- och minimipunkt',
-      'Den punkt där grafen skär y-axeln',
+      'Den punkt där grafen skär *y*-axeln',
       'Ett annat namn för nollställe',
       'Den punkt där grafen är som brantast',
     ],
     correct: 0,
     why: [
       'En extrempunkt är antingen en maximipunkt ("topp") eller en minimipunkt ("dal") — vilket av dem kallas punktens karaktär.',
-      'Skärningen med y-axeln är en annan sak — den ges av konstanttermen.',
-      'Nollställen är där grafen skär x-axeln, inte parabelns topp/dal.',
+      'Skärningen med *y*-axeln är en annan sak — den ges av konstanttermen.',
+      'Nollställen är där grafen skär *x*-axeln, inte parabelns topp/dal.',
       'I extrempunkten är grafen tvärtom som flackast — den vänder där.',
     ],
   },
@@ -14353,16 +14353,16 @@ window.EXITTICKETS = {
   {
     question: 'Vad gäller för symmetrilinjen till en parabel?',
     choices: [
-      'Den är lodrät, går genom extrempunkten och anges med sin x-koordinat',
+      'Den är lodrät, går genom extrempunkten och anges med sin *x*-koordinat',
       'Den är vågrät och går genom nollställena',
-      'Den sammanfaller alltid med y-axeln',
+      'Den sammanfaller alltid med *y*-axeln',
       'Den finns bara om parabeln har nollställen',
     ],
     correct: 0,
     why: [
       'Symmetrilinjen delar parabeln i två spegellika halvor; extrempunkten ligger alltid på den, och ekvationen skrivs t.ex. $x_s = 3$.',
       'Symmetrilinjen är lodrät — en vågrät linje kan inte dela parabeln i två spegellika halvor.',
-      'Bara parabler med extrempunkt på y-axeln har $x_s = 0$ — i allmänhet ligger den någon annanstans.',
+      'Bara parabler med extrempunkt på *y*-axeln har $x_s = 0$ — i allmänhet ligger den någon annanstans.',
       'Alla parabler har en symmetrilinje, oavsett om nollställen finns.',
     ],
   },
@@ -14376,10 +14376,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Parabeln kan skära x-axeln två gånger, nudda den en gång (dubbelrot) eller ligga helt ovanför/under den (inga nollställen).',
-      'En parabel som ligger helt ovanför x-axeln saknar nollställen, och en som nuddar har bara ett.',
-      'En parabel med minimipunkt ovanför x-axeln skär aldrig axeln.',
-      'En parabel kan aldrig skära x-axeln fler än två gånger.',
+      'Parabeln kan skära *x*-axeln två gånger, nudda den en gång (dubbelrot) eller ligga helt ovanför/under den (inga nollställen).',
+      'En parabel som ligger helt ovanför *x*-axeln saknar nollställen, och en som nuddar har bara ett.',
+      'En parabel med minimipunkt ovanför *x*-axeln skär aldrig axeln.',
+      'En parabel kan aldrig skära *x*-axeln fler än två gånger.',
     ],
   },
 ],
@@ -14395,8 +14395,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Nollställen är de x-värden där funktionens värde är 0 — ekvationen $f(x) = 0$ (t.ex. med pq-formeln) ger dem.',
-      '$x = 0$ ger skärningen med y-axeln, inte nollställena.',
+      'Nollställen är de *x*-värden där funktionens värde är 0 — ekvationen $f(x) = 0$ (t.ex. med *pq*-formeln) ger dem.',
+      '$x = 0$ ger skärningen med *y*-axeln, inte nollställena.',
       'Extrempunkten ligger mellan nollställena men ger dem inte direkt.',
       'Konstanttermen är funktionens värde vid $x = 0$.',
     ],
@@ -14420,14 +14420,14 @@ window.EXITTICKETS = {
   {
     question: 'En funktion saknar nollställen. Hur hittas symmetrilinjen ändå?',
     choices: [
-      'Som "talet framför rottecknet" i pq-formeln, dvs. $x_s = -\\frac{p}{2}$',
+      'Som "talet framför rottecknet" i *pq*-formeln, dvs. $x_s = -\\frac{p}{2}$',
       'Det går inte — utan nollställen finns ingen symmetrilinje',
       'Symmetrilinjen är då alltid $x_s = 0$',
       'Genom att läsa av konstanttermen q',
     ],
     correct: 0,
     why: [
-      'pq-formelns första term $-\\frac{p}{2}$ pekar ut symmetrilinjen även när uttrycket under roten är negativt.',
+      '*pq*-formelns första term $-\\frac{p}{2}$ pekar ut symmetrilinjen även när uttrycket under roten är negativt.',
       'Alla parabler har en symmetrilinje — det är bara nollställena som kan saknas.',
       'Symmetrilinjen ligger vid $-\\frac{p}{2}$, som sällan är 0.',
       'q påverkar grafens höjdläge och antalet nollställen — inte symmetrilinjens läge.',
@@ -14436,15 +14436,15 @@ window.EXITTICKETS = {
   {
     question: 'Hur bestäms extrempunktens fullständiga koordinater?',
     choices: [
-      'x-koordinaten är symmetrilinjens värde, y-koordinaten fås genom insättning i funktionen',
-      'Båda koordinaterna läses av i pq-formeln',
-      'x-koordinaten är ett nollställe, y-koordinaten är 0',
+      '*x*-koordinaten är symmetrilinjens värde, *y*-koordinaten fås genom insättning i funktionen',
+      'Båda koordinaterna läses av i *pq*-formeln',
+      '*x*-koordinaten är ett nollställe, *y*-koordinaten är 0',
       'x är konstanttermen och y är koefficienten framför x',
     ],
     correct: 0,
     why: [
-      'Extrempunkten ligger på symmetrilinjen ($x = x_s$), och funktionsvärdet där, $f(x_s)$, är extrempunktens y-koordinat.',
-      'pq-formeln ger nollställena och (via $-p/2$) symmetrilinjen — y-koordinaten kräver insättning i funktionen.',
+      'Extrempunkten ligger på symmetrilinjen ($x = x_s$), och funktionsvärdet där, $f(x_s)$, är extrempunktens *y*-koordinat.',
+      '*pq*-formeln ger nollställena och (via $-p/2$) symmetrilinjen — *y*-koordinaten kräver insättning i funktionen.',
       'Det beskriver ett nollställe, inte extrempunkten.',
       'Koefficienterna är inte koordinater.',
     ],
@@ -14459,9 +14459,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Symmetrilinjen är $x_s = 5$ och $f(5) = 25 - 50 + 21 = -4$ — minsta värdet är extrempunktens y-koordinat.',
-      '5 är symmetrilinjens x-värde — minsta VÄRDET är funktionens värde där, $f(5)$.',
-      '21 är funktionens värde vid $x = 0$ (skärningen med y-axeln).',
+      'Symmetrilinjen är $x_s = 5$ och $f(5) = 25 - 50 + 21 = -4$ — minsta värdet är extrempunktens *y*-koordinat.',
+      '5 är symmetrilinjens *x*-värde — minsta VÄRDET är funktionens värde där, $f(5)$.',
+      '21 är funktionens värde vid $x = 0$ (skärningen med *y*-axeln).',
       '0 är funktionens värde i nollställena — men minimipunkten ligger lägre, mellan dem.',
     ],
   },
@@ -14474,7 +14474,7 @@ window.EXITTICKETS = {
       'Funktionens nollställen',
       'Extrempunktens koordinater',
       'Två valfria punkter på grafen',
-      'Koefficienterna framför x-termerna',
+      'Koefficienterna framför *x*-termerna',
     ],
     correct: 0,
     why: [
@@ -14517,7 +14517,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad gäller i faktorformen om funktionen har en dubbelrot (grafen vänder på x-axeln)?',
+    question: 'Vad gäller i faktorformen om funktionen har en dubbelrot (grafen vänder på *x*-axeln)?',
     choices: [
       '$x_1 = x_2$ — samma faktor två gånger',
       'k måste vara 0',
@@ -14526,7 +14526,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Vid en dubbelrot nuddar parabeln x-axeln i en enda punkt: $f(x) = k(x - x_1)^2$.',
+      'Vid en dubbelrot nuddar parabeln *x*-axeln i en enda punkt: $f(x) = k(x - x_1)^2$.',
       'k = 0 skulle göra hela funktionen till 0 — k beskriver formen, inte antalet rötter.',
       'Faktorformen fungerar fint — faktorn upprepas bara.',
       'En andragradsfunktion kan aldrig ha fler än två nollställen.',
@@ -14561,7 +14561,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Metoden är VL och HL som varsin graf — skärningarnas x-koordinater är lösningarna.',
+      'Metoden är VL och HL som varsin graf — skärningarnas *x*-koordinater är lösningarna.',
       'Bara VL fungerar när HL är 0 (då används nollställena) — här är HL en linje.',
       'Ingen kvadrering ingår i den grafiska metoden.',
       'Symmetrilinjen hittar extrempunkten — inte lösningarna till en ekvation.',
@@ -14577,14 +14577,14 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'HL är 0, dvs. x-axeln — skärningarna med den är just grafens nollställen (verktyget "Nollställen" i Geogebra).',
+      'HL är 0, dvs. *x*-axeln — skärningarna med den är just grafens nollställen (verktyget "Nollställen" i Geogebra).',
       'Extrempunkten visar största/minsta värde — inte var funktionen är 0.',
-      '$y = 0$ ÄR x-axeln — en rät linje utan extrempunkt.',
+      '$y = 0$ ÄR *x*-axeln — en rät linje utan extrempunkt.',
       'Det går utmärkt — nollställena är lösningarna.',
     ],
   },
   {
-    question: 'Vad ger skärningspunkternas x-koordinater när en **olikhet** löses grafiskt?',
+    question: 'Vad ger skärningspunkternas *x*-koordinater när en **olikhet** löses grafiskt?',
     choices: [
       'Gränserna för lösningsintervallen',
       'Lösningarna direkt',
@@ -14593,7 +14593,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Skärningarna är där graferna byter ordning (över/under) — deras x-koordinater blir intervallens gränser, och sedan avgörs vilken sida som gäller.',
+      'Skärningarna är där graferna byter ordning (över/under) — deras *x*-koordinater blir intervallens gränser, och sedan avgörs vilken sida som gäller.',
       'Till skillnad från en ekvation är lösningen ett helt intervall, inte bara skärningspunkterna.',
       'Tecknet står i uppgiften — grafen visar VAR det är uppfyllt.',
       'Största värden hör till extrempunkter, inte olikhetslösning.',
@@ -14605,14 +14605,14 @@ window.EXITTICKETS = {
       'grafen till $f$ ligger över grafen till $g$',
       'grafen till $f$ ligger under grafen till $g$',
       'graferna skär varandra',
-      'grafen till $f$ ligger över x-axeln',
+      'grafen till $f$ ligger över *x*-axeln',
     ],
     correct: 0,
     why: [
       'Större funktionsvärde = högre upp i koordinatsystemet — f över g betyder $f(x) > g(x)$.',
       'Under-läget svarar mot $f(x) < g(x)$.',
       'I skärningarna är $f(x) = g(x)$ — likhet, inte olikhet.',
-      'x-axeln är bara referens när HL är 0 — här jämförs f med g.',
+      '*x*-axeln är bara referens när HL är 0 — här jämförs f med g.',
     ],
   },
   {
@@ -14639,30 +14639,30 @@ window.EXITTICKETS = {
     choices: [
       'Ta fram grafens nollställe längst till höger — där är höjden 0 igen',
       'Ta fram extrempunkten',
-      'Läsa av grafens skärning med y-axeln',
+      'Läsa av grafens skärning med *y*-axeln',
       'Rita hjälplinjen $y = 40$',
     ],
     correct: 0,
     why: [
       'Landning betyder $h(t) = 0$ — det högra nollstället ger landningstiden (det vänstra, $t = 0$, är starten).',
       'Extrempunkten ger högsta höjden, inte landningen.',
-      'Vid $t = 0$ startar raketen — skärningen med y-axeln är startögonblicket.',
+      'Vid $t = 0$ startar raketen — skärningen med *y*-axeln är startögonblicket.',
       '40 är koefficienten i funktionen, inte en höjd att sikta på.',
     ],
   },
   {
     question: 'Hur bestäms raketens **högsta höjd** grafiskt?',
     choices: [
-      'Med verktyget Extrempunkt — maximipunktens y-koordinat är svaret',
+      'Med verktyget Extrempunkt — maximipunktens *y*-koordinat är svaret',
       'Med verktyget Nollställen',
-      'Maximipunktens x-koordinat är svaret',
+      'Maximipunktens *x*-koordinat är svaret',
       'Genom att rita $y = 100$ och ta skärningarna',
     ],
     correct: 0,
     why: [
-      'Högsta höjden är det största funktionsvärdet — maximipunktens y-koordinat.',
+      'Högsta höjden är det största funktionsvärdet — maximipunktens *y*-koordinat.',
       'Nollställena visar när höjden är 0 — start och landning.',
-      'x-koordinaten säger NÄR raketen är som högst — höjden är y-koordinaten.',
+      '*x*-koordinaten säger NÄR raketen är som högst — höjden är *y*-koordinaten.',
       'En godtycklig hjälplinje visar när en viss höjd nås — inte den högsta.',
     ],
   },
@@ -14672,7 +14672,7 @@ window.EXITTICKETS = {
       'Rita hjälplinjen $y = 50$ och ta fram skärningarna med grafen',
       'Sätt in $t = 50$ i funktionen',
       'Ta fram nollställena',
-      'Läsa av y-koordinaten i extrempunkten',
+      'Läsa av *y*-koordinaten i extrempunkten',
     ],
     correct: 0,
     why: [
@@ -14708,8 +14708,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Maximipunktens x-koordinat är det värde på x som ger störst area, och y-koordinaten är själva arean. Måtten blir 13 m och $52 - 26 = 26$ m.',
-      'Koordinaterna har bytt plats — x-värdet är sidan, y-värdet arean.',
+      'Maximipunktens *x*-koordinat är det värde på x som ger störst area, och *y*-koordinaten är själva arean. Måtten blir 13 m och $52 - 26 = 26$ m.',
+      'Koordinaterna har bytt plats — *x*-värdet är sidan, *y*-värdet arean.',
       'Måtten är $x = 13$ m och $52 - 2x = 26$ m — 338 är arean, inte en sida.',
       'Parabeln visar just att arean VARIERAR med x — 338 är dess största värde.',
     ],
@@ -15142,7 +15142,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Formeln är Pythagoras sats på koordinatform: kateterna är skillnaderna i x- respektive y-led och d är hypotenusan.',
+      'Formeln är Pythagoras sats på koordinatform: kateterna är skillnaderna i x- respektive *y*-led och d är hypotenusan.',
       'Mittpunkten fås av medelvärdena, inte av rötter och kvadrater.',
       'Lutningen är kvoten Δy/Δx — utan kvadrater.',
       'Formeln ger en sträcka, inte en area.',
@@ -15158,9 +15158,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Mittpunkten ligger mitt emellan — medelvärdet av x-koordinaterna och medelvärdet av y-koordinaterna.',
+      'Mittpunkten ligger mitt emellan — medelvärdet av *x*-koordinaterna och medelvärdet av *y*-koordinaterna.',
       'Skillnaderna ger förflyttningen mellan punkterna, inte mitten.',
-      'x- och y-koordinater får inte blandas — medelvärdena tas ledvis.',
+      '*x*- och *y*-koordinater får inte blandas — medelvärdena tas ledvis.',
       'Multiplikation har inget med mittpunkter att göra.',
     ],
   },
@@ -16630,7 +16630,7 @@ window.EXITTICKETS = {
     question: 'Vad gör man när man utför en **linjär regression**?',
     choices: [
       'Tar fram ekvationen för den räta linje som bäst ansluter till punkterna',
-      'Beräknar medelvärdet av y-värdena',
+      'Beräknar medelvärdet av *y*-värdena',
       'Ritar ett lådagram',
       'Sorterar punkterna i storleksordning',
     ],
@@ -16833,14 +16833,14 @@ window.EXITTICKETS = {
       'Bryta ut gemensam faktor, kvadrerings-/konjugatregeln baklänges, och nollställen',
       'Addition, subtraktion och multiplikation',
       'Förkorta, förlänga och förenkla',
-      'pq-formeln, abc-formeln och gränsvärden',
+      '*pq*-formeln, *abc*-formeln och gränsvärden',
     ],
     correct: 0,
     why: [
       'Just dessa tre — och den tredje (nollställen) fungerar på vilket polynom som helst.',
       'Det är räknesätt, inte faktoriseringsmetoder.',
       'Det är vad vi gör med rationella uttryck, inte metoder att faktorisera med.',
-      'pq- och abc-formeln löser ekvationer; de används inom nollställesmetoden men är inte de tre metoderna i sig.',
+      'pq- och *abc*-formeln löser ekvationer; de används inom nollställesmetoden men är inte de tre metoderna i sig.',
     ],
   },
   {
@@ -17237,7 +17237,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — förändringen i y-led delat med förändringen i x-led.',
+      'Precis — förändringen i *y*-led delat med förändringen i *x*-led.',
       'Kvoten är omvänd här — täljare och nämnare har bytt plats.',
       'Lutningen fås genom division av differenserna, inte genom multiplikation.',
       'Formeln bygger på differenser (minus) mellan koordinaterna, inte summor (plus).',
@@ -17255,7 +17255,7 @@ window.EXITTICKETS = {
     why: [
       'Rätt — sekantens lutning motsvarar den genomsnittliga förändringen per enhet i det valda intervallet.',
       'Ett maximivärde är en extrempunkt på kurvan och har inget direkt samband med sekantens lutning.',
-      'Ett nollställe är där kurvan skär x-axeln — inte samma sak som en lutning.',
+      'Ett nollställe är där kurvan skär *x*-axeln — inte samma sak som en lutning.',
       'Amplitud beskriver svängningars utslag, inte en sekants lutning.',
     ],
   },
@@ -17270,8 +17270,8 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Rätt — $f(2) = 4$ och $f(4) = 16$ ger $k = \\dfrac{16 - 4}{4 - 2} = \\dfrac{12}{2} = 6$.',
-      '12 är skillnaden i funktionsvärde ($16 - 4$), men den måste också delas med skillnaden i x-värde ($4 - 2 = 2$).',
-      'Nämnaren är $4 - 2 = 2$, inte $4$ — kontrollera differensen i x-led igen.',
+      '12 är skillnaden i funktionsvärde ($16 - 4$), men den måste också delas med skillnaden i *x*-värde ($4 - 2 = 2$).',
+      'Nämnaren är $4 - 2 = 2$, inte $4$ — kontrollera differensen i *x*-led igen.',
       'Att addera funktionsvärdena ($16 + 4 = 20$) i stället för att beräkna differensen ger fel svar.',
     ],
   },
@@ -17465,7 +17465,7 @@ window.EXITTICKETS = {
     choices: [
       'Någon form av förändringshastighet vid en tidpunkt',
       'Funktionens värde vid en viss tidpunkt',
-      'Grafens skärningspunkt med x-axeln',
+      'Grafens skärningspunkt med *x*-axeln',
       'Medelvärdet av funktionen över ett intervall',
     ],
     correct: 0,
@@ -17638,7 +17638,7 @@ window.EXITTICKETS = {
     why: [
       'Precis — vi multiplicerar ned exponenten framför och minskar den sedan med 1.',
       'Exponenten ska minskas med 1 i svaret, inte lämnas oförändrad.',
-      'Exponenten $n$ ska också multipliceras ned framför x-termen, inte bara försvinna ur svaret.',
+      'Exponenten $n$ ska också multipliceras ned framför *x*-termen, inte bara försvinna ur svaret.',
       'Exponenten ska minskas med 1, inte ökas.',
     ],
   },
@@ -18543,7 +18543,7 @@ window.EXITTICKETS = {
     question: 'Vilket kommando använder man i Geogebra för att bestämma en primitiv funktion till en given funktion?',
     choices: [
       'Integral( Funktion )',
-      'Integral( Funktion, Från x-värde, Till x-värde )',
+      'Integral( Funktion, Från *x*-värde, Till *x*-värde )',
       'Derivata( Funktion )',
       'Lös( Funktion )',
     ],
@@ -18572,7 +18572,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Med kommandot Integral( Funktion, Från x-värde, Till x-värde ) i standardläget — vilken typ av svar får man?',
+    question: 'Med kommandot Integral( Funktion, Från *x*-värde, Till *x*-värde ) i standardläget — vilken typ av svar får man?',
     choices: [
       'Ett närmevärde (ett ungefärligt decimaltal)',
       'Ett exakt svar, t.ex. i bråkform',
@@ -18588,7 +18588,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Med samma kommando, Integral( Funktion, Från x-värde, Till x-värde ), fast i CAS-läget — vilken typ av svar får man?',
+    question: 'Med samma kommando, Integral( Funktion, Från *x*-värde, Till *x*-värde ), fast i CAS-läget — vilken typ av svar får man?',
     choices: [
       'Ett exakt svar, t.ex. i bråkform',
       'Ett närmevärde (ett ungefärligt decimaltal)',
@@ -18648,7 +18648,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — integralen av $f(x)$ ger arean mellan $f(x)$ och x-axeln, vilket omfattar arean under $g(x)$ också. Subtraherar man bort den kvarstår bara arean mellan kurvorna.',
+      'Precis — integralen av $f(x)$ ger arean mellan $f(x)$ och *x*-axeln, vilket omfattar arean under $g(x)$ också. Subtraherar man bort den kvarstår bara arean mellan kurvorna.',
       'Subtraktionen har en tydlig geometrisk tolkning: den övre arean minus den undre arean blir kvar som arean mellan kurvorna.',
       'Arean blir bara negativ om man råkar subtrahera i fel ordning (undre minus övre), inte som en följd av metoden i sig.',
       'Tvärtom — metoden bygger helt på att integrera båda funktionerna.',
@@ -18666,7 +18666,7 @@ window.EXITTICKETS = {
     why: [
       'Just det — där kurvorna skär varandra gäller $f(x) = g(x)$, och lösningarna till den ekvationen ger integrationsgränserna.',
       'Det ger i stället extrempunkter till differensfunktionen, inte skärningspunkterna mellan kurvorna.',
-      'Det ger kurvornas egna nollställen (var de skär x-axeln), inte var de skär varandra.',
+      'Det ger kurvornas egna nollställen (var de skär *x*-axeln), inte var de skär varandra.',
       'Gränserna måste vara skärningspunkterna — annars integreras ett område där kurvorna inte längre avgränsar varandra på det sättet.',
     ],
   },
@@ -21045,7 +21045,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Just det — bråket är odefinierat när nämnaren $\\cos x = 0$, och där sticker grafen av mot oändligheten.',
-      'När $\\sin x = 0$ är täljaren noll, då blir $\\tan x = 0$ (grafen skär x-axeln) — det ger ingen asymptot.',
+      'När $\\sin x = 0$ är täljaren noll, då blir $\\tan x = 0$ (grafen skär *x*-axeln) — det ger ingen asymptot.',
       'Tangens saknar amplitud. Att kurvan växer obegränsat beror på att nämnaren $\\cos x$ går mot $0$, inte på en amplitud.',
       'Teckenbyte i sig ger ingen asymptot. Asymptoterna uppstår just där $\\cos x = 0$ så att bråket blir odefinierat.',
     ],

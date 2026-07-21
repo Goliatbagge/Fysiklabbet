@@ -123,7 +123,7 @@ $y = ax^2 + bx + c$ formar parabeln. Startläget visar exemplets
 funktion $g(x) = -x^2 - 2x + 3$. Prova särskilt tecknet på $a$ — positiv
 $a$ ger "glad mun" (minimipunkt), negativ $a$ ger "sur mun"
 (maximipunkt). $c$ flyttar grafen i höjdled och är grafens skärning med
-y-axeln.
+*y*-axeln.
 
 ::: graf
 titel: y = ax^2 + bx + c

@@ -20,7 +20,7 @@ Algebraiskt bestäms en andragradsfunktions
   Lösningarna ger nollställena.
 - **symmetrilinje** genom medelvärdet av nollställena. Om nollställen
   saknas kan symmetrilinjen fås av "talet framför rottecknet" i
-  pq-formeln, dvs. $x_s = -\dfrac{p}{2}$.
+  *pq*-formeln, dvs. $x_s = -\dfrac{p}{2}$.
 - **extrempunkt** genom att sätta in symmetrilinjens $x$-koordinat i
   funktionsuttrycket. Symmetrilinjen ger extrempunktens $x$-koordinat
   och funktionsuttryckets värde ger extrempunktens $y$-koordinat.
@@ -36,7 +36,7 @@ $$
 3x^2 - 12x + 9 = 0
 $$
 
-Vi dividerar båda led med 3 och löser sedan ekvationen med pq-formeln:
+Vi dividerar båda led med 3 och löser sedan ekvationen med *pq*-formeln:
 
 $$
 x^2 - 4x + 3 = 0
@@ -113,7 +113,7 @@ saknar reella lösningar. Funktionen saknar alltså nollställen (grafiskt
 betyder det att hela grafen ligger ovanför eller under $x$-axeln).
 
 Vi kan ändå bestämma symmetrilinjens ekvation som "talet framför
-rottecknet" i pq-formeln. I detta fall är det −3. Alltså är
+rottecknet" i *pq*-formeln. I detta fall är det −3. Alltså är
 symmetrilinjens ekvation $x_s = -3$.
 
 **Svar:** $x_s = -3$

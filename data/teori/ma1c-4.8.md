@@ -17,7 +17,7 @@ Vi har en ekvation VL = HL.
 
 1. Rita upp ekvationerna $y = \mathrm{VL}$ och $y = \mathrm{HL}$ i
    GeoGebra.
-2. Ta fram skärningspunkten och läs av dess x-koordinat. Detta är
+2. Ta fram skärningspunkten och läs av dess *x*-koordinat. Detta är
    lösningen!
 :::
 
@@ -43,7 +43,7 @@ markeras och vi kan läsa av dess koordinater:
 <svg viewBox="-26 -20 219 204" width="219" height="204" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma linjer med skärningspunkten 2 komma 1 markerad: lösningen till ekvationen är x lika med 2."><line x1="3.0" y1="0.0" x2="3.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156.8" x2="171.0" y2="156.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="171.0" y2="128.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="100.8" x2="171.0" y2="100.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72.8" x2="171.0" y2="72.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="44.8" x2="171.0" y2="44.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.8" x2="171.0" y2="16.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="179.0" y2="128.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,128.8 177.0,124.3 177.0,133.3" fill="#1f2530"/><line x1="33.0" y1="173.6" x2="33.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="33.0,-16.0 28.5,-6.0 37.5,-6.0" fill="#1f2530"/><text x="185.0" y="146.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="42.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="63.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="93.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="123.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="153.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="27.0" y="160.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="27.0" y="104.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="27.0" y="76.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="27.0" y="48.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="27.0" y="20.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="67.0" y1="173.6" x2="129.0" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="0.0" y1="14.0" x2="171.0" y2="173.6" stroke="#c8324a" stroke-width="2"/><circle cx="93.0" cy="100.8" r="3.8" fill="#2563c9"/><text x="102.0" y="93.8" font-size="13" text-anchor="start" fill="#2563c9">(2, 1)</text></svg>
 :::
 
-Vi ser att skärningspunktens x-koordinat är 2, så lösningen är $x = 2$.
+Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.
 
 **Svar:** $x = 2$
 :::

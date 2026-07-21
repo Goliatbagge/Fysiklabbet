@@ -9,7 +9,7 @@ section: '2.6'
 
 # Antal lösningar till en andragradsekvation
 
-pq-formeln säger att ekvationen $x^2 + px + q = 0$ har lösningarna
+*pq*-formeln säger att ekvationen $x^2 + px + q = 0$ har lösningarna
 
 $$
 x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}
@@ -60,7 +60,7 @@ Vi sammanfattar undersökningen:
 ::: exempel "Exempel 1 — Ange antalet lösningar"
 **Ange antalet lösningar till<br>a) $x^2 + 12x - 13 = 0$&emsp;&emsp;b) $x^2 + 5x + 8 = 0$**
 
-**a)** pq-formeln ger
+**a)** *pq*-formeln ger
 
 $$
 x = -6 \pm \sqrt{6^2 + 13} = -6 \pm \sqrt{36 + 13} = -6 \pm \sqrt{49}
@@ -71,7 +71,7 @@ ekvationen **två lösningar**.
 
 **Svar:** 2
 
-**b)** pq-formeln ger
+**b)** *pq*-formeln ger
 
 $$
 x = -2{,}5 \pm \sqrt{2{,}5^2 - 8} = -2{,}5 \pm \sqrt{6{,}25 - 8} = -2{,}5 \pm \sqrt{-1{,}75}
@@ -87,7 +87,7 @@ Diskriminanten är **negativ**. Alltså **saknar** ekvationen lösningar.
 en enda lösning (en så kallad dubbelrot)?**
 
 För att ekvationen ska ha en enda lösning ska diskriminanten vara lika
-med 0. Vi påbörjar en lösning med pq-formeln:
+med 0. Vi påbörjar en lösning med *pq*-formeln:
 
 $$
 x = 4 \pm \sqrt{4^2 - a}

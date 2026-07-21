@@ -16,7 +16,7 @@ kallas **räta linjens ekvation**.
 Vi ska nu undersöka hur vi kan hitta värdena på $k$ och $m$ utifrån en
 graf.
 
-## Vad motsvarar m-värdet?
+## Vad motsvarar *m*-värdet?
 
 Vi börjar med att undersöka vad $m$-värdet motsvarar. Vi ritar upp
 graferna till $y = 2x - 1$, $y = 2x$ och $y = 2x + 1$ för att se
@@ -30,15 +30,15 @@ Grön linje: $y = 2x - 1$. Blå linje: $y = 2x$. Röd linje: $y = 2x + 1$.
 
 Vi ser att linjen
 
-- $y = 2x - 1$ skär y-axeln vid $y = -1$
-- $y = 2x$ skär y-axeln vid $y = 0$
-- $y = 2x + 1$ skär y-axeln vid $y = 1$
+- $y = 2x - 1$ skär *y*-axeln vid $y = -1$
+- $y = 2x$ skär *y*-axeln vid $y = 0$
+- $y = 2x + 1$ skär *y*-axeln vid $y = 1$
 
-$m$-värdet motsvarar alltså linjens **skärning med y-axeln**! Skärningen
-med y-axeln kallas också **y-intercept** och motsvarar i linjära modeller
+$m$-värdet motsvarar alltså linjens **skärning med *y*-axeln**! Skärningen
+med *y*-axeln kallas också ***y*-intercept** och motsvarar i linjära modeller
 "startvärdet".
 
-## Vad motsvarar k-värdet?
+## Vad motsvarar *k*-värdet?
 
 Vi studerar nu vad $k$-värdet motsvarar. Vi ritar upp graferna till
 $y = 2x + 1$, $y = 3x + 1$ och $y = -2x + 1$ för att se skillnaden:
@@ -47,7 +47,7 @@ $y = 2x + 1$, $y = 3x + 1$ och $y = -2x + 1$ för att se skillnaden:
 <svg viewBox="-26 -20 222 254" width="222" height="254" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Tre räta linjer som alla skär y-axeln i punkten 0 komma 1 men har olika lutning: 2, 3 och minus 2."><line x1="2.6" y1="0.0" x2="2.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="28.6" y1="0.0" x2="28.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="54.6" y1="0.0" x2="54.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="80.6" y1="0.0" x2="80.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="106.6" y1="0.0" x2="106.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132.6" y1="0.0" x2="132.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.6" y1="0.0" x2="158.6" y2="224.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="222.0" x2="174.2" y2="222.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="202.0" x2="174.2" y2="202.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="182.0" x2="174.2" y2="182.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="162.0" x2="174.2" y2="162.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="142.0" x2="174.2" y2="142.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="122.0" x2="174.2" y2="122.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="102.0" x2="174.2" y2="102.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="82.0" x2="174.2" y2="82.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="62.0" x2="174.2" y2="62.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="42.0" x2="174.2" y2="42.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="22.0" x2="174.2" y2="22.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="2.0" x2="174.2" y2="2.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="122.0" x2="182.2" y2="122.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="190.2,122.0 180.2,117.5 180.2,126.5" fill="#1f2530"/><line x1="80.6" y1="224.0" x2="80.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="80.6,-16.0 76.1,-6.0 85.1,-6.0" fill="#1f2530"/><text x="188.2" y="140.0" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="89.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="2.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="28.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="54.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="106.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="132.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="158.6" y="138.0" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="74.6" y="226.0" font-size="12" text-anchor="end" fill="#1f2530">−5</text><text x="74.6" y="206.0" font-size="12" text-anchor="end" fill="#1f2530">−4</text><text x="74.6" y="186.0" font-size="12" text-anchor="end" fill="#1f2530">−3</text><text x="74.6" y="166.0" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="74.6" y="146.0" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="74.6" y="106.0" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="74.6" y="86.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="74.6" y="66.0" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="74.6" y="46.0" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="74.6" y="26.0" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="74.6" y="6.0" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="1.3" y1="224.0" x2="146.9" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="27.7" y1="224.0" x2="124.8" y2="0.0" stroke="#2563c9" stroke-width="2"/><line x1="14.3" y1="0.0" x2="159.9" y2="224.0" stroke="#c8324a" stroke-width="2"/><circle cx="80.6" cy="102.0" r="3.2" fill="#1f2530"/></svg>
 
 Grön linje: $y = 2x + 1$. Blå linje: $y = 3x + 1$. Röd linje:
-$y = -2x + 1$. Alla tre skär y-axeln i (0, 1).
+$y = -2x + 1$. Alla tre skär *y*-axeln i (0, 1).
 :::
 
 Vi ser att linjen
@@ -68,18 +68,18 @@ y = kx + m
 $$
 
 där $k$ motsvarar linjens lutning och $m$ motsvarar linjens skärning med
-y-axeln.
+*y*-axeln.
 :::
 
 Ett positivt $k$-värde gör att linjen lutar uppåt (sett från vänster till
 höger) och ett negativt $k$-värde gör att linjen lutar nedåt. $k$-värdet
 kan beräknas med "trappstegsmetoden" där man ritar ett trappsteg mellan
 två valfria punkter på linjen och tänker att man går *åt höger*.
-Trappstegets höjd motsvarar då förändringen i y-led, vilket skrivs
-$\Delta y$, och trappstegets längd motsvarar förändringen i x-led, vilket
+Trappstegets höjd motsvarar då förändringen i *y*-led, vilket skrivs
+$\Delta y$, och trappstegets längd motsvarar förändringen i *x*-led, vilket
 skrivs $\Delta x$.
 
-::: formel "Beräkna linjens lutning (k-värde)"
+::: formel "Beräkna linjens lutning (*k*-värde)"
 $$
 k = \frac{\text{trappstegets höjd}}{\text{trappstegets längd}}
 = \frac{\text{förändring i } y\text{-led}}{\text{förändring i } x\text{-led}}
@@ -115,7 +115,7 @@ $m$-värde och sedan sätta in dem i räta linjens ekvation $y = kx + m$.
 
 $k = 2$ (linjen går upp två steg för varje steg vi går åt höger)
 
-$m = 3$ (linjens skärning med y-axeln)
+$m = 3$ (linjens skärning med *y*-axeln)
 
 Insättning av $k = 2$ och $m = 3$ i räta linjens ekvation ger
 $y = 2x + 3$.

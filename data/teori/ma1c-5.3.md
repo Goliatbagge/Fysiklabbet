@@ -18,8 +18,8 @@ lutning är korrelationen **positiv**. Om punkterna ligger kring en linje
 med negativ lutning är korrelationen **negativ**.
 
 Exempel: Värdena för 10 mammors respektive döttrars längd prickas in i
-ett spridningsdiagram. Döttrars längd i cm är markerade på y-axeln och
-mammors längd i cm är markerade på x-axeln:
+ett spridningsdiagram. Döttrars längd i cm är markerade på *y*-axeln och
+mammors längd i cm är markerade på *x*-axeln:
 
 ::: figur
 <svg viewBox="-34 -20 209 164" width="209" height="164" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Spridningsdiagram: tio punkter för mammors längd på x-axeln och döttrars längd på y-axeln. Punkterna är spridda men samlade kring en stigande linje."><line x1="18.2" y1="0.0" x2="18.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="44.2" y1="0.0" x2="44.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="70.2" y1="0.0" x2="70.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="96.2" y1="0.0" x2="96.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="122.2" y1="0.0" x2="122.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="148.2" y1="0.0" x2="148.2" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="114.4" x2="153.4" y2="114.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="88.4" x2="153.4" y2="88.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="62.4" x2="153.4" y2="62.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="36.4" x2="153.4" y2="36.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="10.4" x2="153.4" y2="10.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="119.6" x2="161.4" y2="119.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="169.4,119.6 159.4,115.1 159.4,124.1" fill="#1f2530"/><line x1="0.0" y1="119.6" x2="0.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="0.0,-16.0 -4.5,-6.0 4.5,-6.0" fill="#1f2530"/><text x="167.4" y="137.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="18.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">150</text><text x="44.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">160</text><text x="70.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">170</text><text x="96.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">180</text><text x="122.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">190</text><text x="148.2" y="135.6" font-size="11" text-anchor="middle" fill="#1f2530">200</text><text x="-31" y="118.4" font-size="11" text-anchor="start" fill="#1f2530">150</text><text x="-31" y="92.4" font-size="11" text-anchor="start" fill="#1f2530">160</text><text x="-31" y="66.4" font-size="11" text-anchor="start" fill="#1f2530">170</text><text x="-31" y="40.4" font-size="11" text-anchor="start" fill="#1f2530">180</text><text x="-31" y="14.4" font-size="11" text-anchor="start" fill="#1f2530">190</text><circle cx="18.2" cy="88.4" r="3" fill="#1f2530"/><circle cx="31.2" cy="101.4" r="3" fill="#1f2530"/><circle cx="36.4" cy="75.4" r="3" fill="#1f2530"/><circle cx="52.0" cy="72.8" r="3" fill="#1f2530"/><circle cx="57.2" cy="67.6" r="3" fill="#1f2530"/><circle cx="65.0" cy="83.2" r="3" fill="#1f2530"/><circle cx="70.2" cy="36.4" r="3" fill="#1f2530"/><circle cx="75.4" cy="52.0" r="3" fill="#1f2530"/><circle cx="96.2" cy="41.6" r="3" fill="#1f2530"/><circle cx="122.2" cy="31.2" r="3" fill="#1f2530"/></svg>
@@ -60,8 +60,8 @@ eftersom generna från mamman (delvis) avgör hur lång dottern blir. Alltså
 råder kausalitet.
 
 ::: exempel "Exempel 1 — Livslängd och internet"
-**Ett spridningsdiagram över medellivslängd (år, y-axeln) och tillgång
-till internet (%, x-axeln) för några olika länder visar punkter spridda
+**Ett spridningsdiagram över medellivslängd (år, *y*-axeln) och tillgång
+till internet (%, *x*-axeln) för några olika länder visar punkter spridda
 kring en stigande linje. Avgör om det råder<br>a) korrelation, och i så
 fall vilken typ&emsp;&emsp;b) kausalitet.**
 

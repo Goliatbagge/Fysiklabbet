@@ -85,7 +85,7 @@ Grafiskt motsvaras alltså en bestämd integral av arean mellan en
 funktions graf och $x$-axeln, avgränsad av $x = a$ och $x = b$.
 :::
 
-::: formel "Areor under x-axeln"
+::: formel "Areor under *x*-axeln"
 En bestämd integral kan få ett **negativt värde**, nämligen om arean
 under grafen ligger **under** $x$-axeln. En area kan däremot aldrig vara
 negativ. Ligger området under $x$-axeln är alltså integralens värde lika

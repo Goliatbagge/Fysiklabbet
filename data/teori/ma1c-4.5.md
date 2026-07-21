@@ -43,8 +43,8 @@ y: -6, 6
 
 Om vi vill beräkna $k$-värdet utifrån två punkter på linjen $(x_1, y_1)$
 och $(x_2, y_2)$ utan att rita upp den kan vi göra det med en annan
-formel. Förändringen i y-led $\Delta y$ fås av differensen mellan två
-y-koordinater, dvs.
+formel. Förändringen i *y*-led $\Delta y$ fås av differensen mellan två
+*y*-koordinater, dvs.
 
 $$
 \Delta y = y_2 - y_1

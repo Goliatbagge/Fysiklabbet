@@ -221,7 +221,8 @@
         // ── Fysikkonstanter ───────────────────────────────────────
         const G_ACC = 9.82;                 // tyngdfaktor, N/kg
         const PX = 470;                     // px per meter
-        const VB_W = 900, VB_H = 545;       // viewBox
+        const VB_W = 900, VB_H = 635;       // viewBox (extra höjd nedtill så att
+                                            // nedåtriktade F_G-pilar + etiketter alltid ryms)
         const GROUND_Y = 0.5;               // markytans höjd över bassängbotten (m)
         const PIT_BOTTOM_PY = 510;          // bassängbottens y i px
         const POOL_L = 304 / PX;            // bassängens inre vänsterkant (m)
@@ -694,14 +695,16 @@
             const renderScene = () => (
                 <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet"
                     role="img" aria-label="Bassäng nedsänkt i marken med block som kan dras, släppas och tryckas ner i vätskan">
-                    {/* Mark på båda sidor om bassängen */}
-                    <rect x="0" y="275" width="293" height="270" fill="#e3dac4" />
-                    <rect x="607" y="275" width="293" height="270" fill="#e3dac4" />
+                    {/* Mark på båda sidor om och under bassängen */}
+                    <rect x="0" y="275" width="293" height="360" fill="#e3dac4" />
+                    <rect x="607" y="275" width="293" height="360" fill="#e3dac4" />
+                    <rect x="293" y="521" width="314" height="114" fill="#e3dac4" />
                     <line x1="0" y1="275" x2="293" y2="275" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" />
                     <line x1="607" y1="275" x2="900" y2="275" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" />
 
-                    {/* Bassängens inre (bakgrund) */}
-                    <rect x="304" y="275" width="292" height="235" fill="#f4efe3" />
+                    {/* Bassängens inre (bakgrund) — bara under vattenytan, så att
+                        pappersrutorna fortsätter i luften ovanför ytan */}
+                    <path d={fluidPath} fill="#f4efe3" />
 
                     {/* Block (bakom vätske-överlägget så att nedsänkt del tonas) */}
                     {w.blocks.map(b => (

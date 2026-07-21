@@ -1,8 +1,8 @@
 {
- "id": "fy1-5.4",
+ "id": "fy1-5.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "87610b306f3b24b72a28992c46510c7fb4ed39de",
- "dur": 500.06,
+ "hash": "ff9be2d0dfc617475ce32100690e1acaab267d63",
+ "dur": 500.56,
  "segments": [
   {
    "t": "Lyftkraft och Arkimedes princip",
@@ -232,172 +232,172 @@
   {
    "t": "F L är lika med F G som är lika med massan m gånger tyngdfaktorn g",
    "s": 261.21,
-   "e": 272.52
+   "e": 272.93
   },
   {
-   "t": "massan m är lika med 450 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram",
+   "t": "massan m är lika med 450 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram",
    "s": 261.21,
-   "e": 272.52
+   "e": 272.93
   },
   {
    "t": "F L är lika med 450 gånger 9,82 som är lika med 4 419 newton som är ungefär lika med 4,4 kilonewton",
-   "s": 272.52,
-   "e": 282.4
+   "s": 272.93,
+   "e": 282.81
   },
   {
    "t": "Svar: 4,4 kilonewton",
-   "s": 282.4,
-   "e": 286.05
+   "s": 282.81,
+   "e": 286.46
   },
   {
    "t": "b) Vi löser ut volymen från Arkimedes princip.",
-   "s": 286.05,
-   "e": 290.77
+   "s": 286.46,
+   "e": 291.19
   },
   {
    "t": "F L är lika med densiteten rho gånger volymen V gånger tyngdfaktorn g vilket är ekvivalent med att V är lika med F L delat med rho gånger g",
-   "s": 290.77,
-   "e": 301.25
+   "s": 291.19,
+   "e": 301.18
   },
   {
-   "t": "F L är lika med 4 419 newton densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram",
-   "s": 290.77,
-   "e": 312.6
+   "t": "F L är lika med 4 419 newton densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram",
+   "s": 291.19,
+   "e": 313.1
   },
   {
    "t": "volymen V är lika med 4 419 delat med 998 gånger 9,82 som är lika med 0,450 kubikmeter som är ungefär lika med 0,45 kubikmeter",
-   "s": 312.55,
-   "e": 325.2
+   "s": 313.05,
+   "e": 325.71
   },
   {
    "t": "Svar: 0,45 meter i kubik (450 liter)",
-   "s": 325.2,
-   "e": 331.0
+   "s": 325.71,
+   "e": 331.5
   },
   {
    "t": "Exempel 2 — Järnkista på havets botten",
-   "s": 331.0,
-   "e": 335.03
+   "s": 331.5,
+   "e": 335.54
   },
   {
    "t": "En kista av järn med måtten 70 × 90 × 40 centimeter som väger 260 kilogram står på havets botten.",
-   "s": 335.03,
-   "e": 342.53
+   "s": 335.54,
+   "e": 343.04
   },
   {
    "t": "Skulle du kunna lyfta kistan?",
-   "s": 342.53,
-   "e": 345.35
+   "s": 343.04,
+   "e": 345.85
   },
   {
    "t": "Eftersom kistan står på botten måste tyngdkraften F G nedåt vara större än lyftkraften F L uppåt.",
-   "s": 345.35,
-   "e": 352.67
+   "s": 345.85,
+   "e": 353.18
   },
   {
    "t": "Den kraft vi måste ta i med för att lyfta kistan F är skillnaden mellan tyngdkraften och lyftkraften, dvs.",
-   "s": 352.67,
-   "e": 368.62
+   "s": 353.18,
+   "e": 369.12
   },
   {
    "t": "kraften F är lika med F G minus F L",
-   "s": 352.67,
-   "e": 368.62
+   "s": 353.18,
+   "e": 369.12
   },
   {
    "t": "Observera att när vi beräknar lyftkraften med Arkimedes princip så är det vattnets densitet vi ska använda, inte järnets!",
-   "s": 352.67,
-   "e": 368.62
+   "s": 353.18,
+   "e": 369.12
   },
   {
    "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 260 gånger 9,82 som är lika med 2 553,2 newton F L som är lika med densiteten rho gånger g gånger volymen V som är lika med 998 gånger 9,82 gånger parentesen 0,70 gånger 0,90 gånger 0,40 slut parentes som är lika med 2 469,690 newton",
-   "s": 368.62,
-   "e": 395.12
+   "s": 369.12,
+   "e": 395.62
   },
   {
    "t": "kraften F är lika med F G minus F L som är lika med 2 553,2 minus 2 469,690 som är lika med 83,509 newton",
-   "s": 395.12,
-   "e": 408.13
+   "s": 395.62,
+   "e": 408.64
   },
   {
    "t": "Orkar du lyfta kistan?",
-   "s": 408.13,
-   "e": 410.61
+   "s": 408.64,
+   "e": 411.11
   },
   {
    "t": "Vi undersöker vilken massa som ger motsvarande tyngd.",
-   "s": 410.61,
-   "e": 414.87
+   "s": 411.11,
+   "e": 415.38
   },
   {
    "t": "massan m är lika med kraften F delat med tyngdfaktorn g som är lika med 83,509 delat med 9,82 som är lika med 8,504 kilogram som är ungefär lika med 8,5 kilogram",
-   "s": 414.87,
-   "e": 427.83
+   "s": 415.38,
+   "e": 428.34
   },
   {
    "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 427.83,
-   "e": 431.66
+   "s": 428.34,
+   "e": 432.16
   },
   {
    "t": "Den upplevs bara väga 8,5 kilogram.",
-   "s": 431.66,
-   "e": 435.47
+   "s": 432.16,
+   "e": 435.98
   },
   {
    "t": "Alternativ lösning",
-   "s": 435.47,
-   "e": 438.02
+   "s": 435.98,
+   "e": 438.52
   },
   {
    "t": "För att göra beräkningarna enklare kan vi göra om alla mått till dm i kubik och utnyttja att 1 liter vatten väger ca 1 kilogram.",
-   "s": 438.02,
-   "e": 446.1
+   "s": 438.52,
+   "e": 446.6
   },
   {
    "t": "Kom ihåg att 1 decimeter i kubik är lika med 1 liter.",
-   "s": 446.1,
-   "e": 450.53
+   "s": 446.6,
+   "e": 451.04
   },
   {
    "t": "Det undanträngda vattnets volym är",
-   "s": 450.53,
-   "e": 453.91
+   "s": 451.04,
+   "e": 454.41
   },
   {
    "t": "volymen V är lika med 7 decimeter gånger 9 decimeter gånger 4 decimeter som är lika med 252 kubikdecimeter som är lika med 252 liter",
-   "s": 453.91,
-   "e": 464.48
+   "s": 454.41,
+   "e": 464.99
   },
   {
    "t": "Eftersom 1 liter vatten väger ca 1 kilogram, så måste 252 liter vatten väga ca 252 kilogram.",
-   "s": 464.48,
-   "e": 473.28
+   "s": 464.99,
+   "e": 473.79
   },
   {
    "t": "Lyftkraften motsvarar alltså massan hos 252 kilogram medan tyngdkraften motsvarar massan hos 260 kilogram.",
-   "s": 473.28,
-   "e": 481.95
+   "s": 473.79,
+   "e": 482.45
   },
   {
    "t": "Det betyder att den kraft du måste ta i med för att lyfta kistan motsvarar",
-   "s": 481.95,
-   "e": 487.13
+   "s": 482.45,
+   "e": 487.64
   },
   {
    "t": "260 minus 252 är lika med 8 kilogram",
-   "s": 487.13,
-   "e": 492.41
+   "s": 487.64,
+   "e": 492.91
   },
   {
    "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 492.41,
-   "e": 496.22
+   "s": 492.91,
+   "e": 496.73
   },
   {
    "t": "Den upplevs bara väga ca 8 kilogram.",
-   "s": 496.22,
-   "e": 500.06
+   "s": 496.73,
+   "e": 500.56
   }
  ]
 }

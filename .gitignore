@@ -48,3 +48,9 @@ Genomgångar/
 # Upphovsrättsskyddade läromedelsuppgifter — endast lokala för kalibrering
 Uppgifter/
 Kursprovsuppgifter/
+
+# Obsidian-vault - synkas aldrig till GitHub
+docs-vault/
+
+# Käll-PDF:er för nationella prov — endast lokala
+NP/

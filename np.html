@@ -164,6 +164,18 @@
             margin: 6px 0 20px;
         }
         .np-fraga .np-kortlabel { color: var(--lab-ink-muted); }
+        /* Uppgiftstexten "fastnålad" högst upp medan lösningsstegen rullar
+           under den, så att man alltid kan blicka tillbaka på uppgiften.
+           Blir den hög skrollar kortet internt. */
+        .np-fraga-fast {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            max-height: 38vh;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            box-shadow: 0 12px 20px -14px rgba(15, 22, 32, 0.35);
+        }
         .np-kortlabel {
             font-family: var(--lab-font-mono);
             font-size: 11px;
@@ -172,15 +184,29 @@
             display: block;
             margin-bottom: 10px;
         }
-        .np-steg {
+        /* Hela lösningen ligger i ETT sammanhängande kort — de enskilda
+           stegen är oboxade och flödar naturligt under varandra
+           (önskemål 2026-07-21: inga separata rutor eller "Steg 1 av 2"). */
+        .np-losning-flode {
             background: var(--lab-bg-panel);
             border: 1px solid var(--lab-line);
             border-left: 3px solid var(--lab-accent-2);
             border-radius: 10px;
-            padding: 16px 22px;
+            padding: 18px 22px 8px;
             margin: 0 0 12px;
+        }
+        .np-steg {
+            margin: 0 0 18px;
             animation: np-steg-in .25s ease;
         }
+        /* Markör när en ny deluppgift (a, b, …) börjar i flödet */
+        .np-delmark {
+            font-family: var(--lab-font-display);
+            font-size: 19px;
+            line-height: 1.2;
+            margin: 2px 0 8px;
+        }
+        .np-steg + .np-steg .np-delmark { margin-top: 10px; }
         @keyframes np-steg-in {
             from { opacity: 0; transform: translateY(6px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -212,24 +238,10 @@
             font-size: 19px;
             line-height: 1.2;
         }
+        /* Förklaringen ("varför") renderas som vanlig löptext — ingen ruta,
+           ingen etikett (önskemål 2026-07-21). */
         .np-varfor {
-            border: 1px dashed var(--lab-line-strong);
-            border-radius: 8px;
-            background: var(--lab-bg);
-            padding: 10px 14px;
             margin: 10px 0 12px;
-            font-size: 14px;
-            color: var(--lab-ink-soft);
-            line-height: 1.55;
-        }
-        .np-varfor .np-varfor-label {
-            font-family: var(--lab-font-mono);
-            font-size: 10.5px;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--lab-accent);
-            display: block;
-            margin-bottom: 4px;
         }
         .np-varfor p { margin: 0 0 6px; }
         .np-varfor p:last-child { margin-bottom: 0; }
@@ -422,6 +434,29 @@
             gap: 8px;
         }
 
+        /* Fastnålad uppgiftstext även i presentationsläget — frågekortet
+           klistras mot overlayens överkant medan lösningsstegen rullar
+           under. Hålls odimmad (övriga tidigare steg tonas till 38 %)
+           eftersom den ska gå att läsa hela tiden. */
+        /* .lab-article-body har overflow-x:hidden, vilket gör kroppen till
+           en egen (oskrollbar) scroll-container och dödar sticky mot
+           overlayen. clip klipper i sidled UTAN att skapa scroll-container. */
+        .np-pres .lab-pres-body { overflow-x: clip; }
+        .np-pres .pres-item.np-pres-fraga-fast {
+            position: sticky;
+            top: 10px;
+            z-index: 30;
+        }
+        .lab-pres-body > .pres-item.np-pres-fraga-fast.is-on:not(.is-current) {
+            opacity: 1;
+        }
+        .np-pres .np-pres-fraga-fast .np-fraga {
+            max-height: 34vh;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            box-shadow: 0 14px 24px -14px rgba(15, 22, 32, 0.4);
+        }
+
         /* Presentationsläget: korten ärver np-stilarna; brödtexten är
            uppskalad av .lab-pres-body, så låt korten andas lite mer. */
         .np-pres .np-fraga,
@@ -430,7 +465,6 @@
             margin-bottom: 26px;
         }
         .np-pres .np-steg-titel { font-size: 24px; }
-        .np-pres .np-varfor { font-size: 16px; }
         .np-pres .np-figur svg { max-width: 100%; }
         /* Entré utan blur-filter: när blur-animationen släpper sitt
            GPU-lager omritas kortet och kan "snäppa" någon pixel — det
@@ -784,9 +818,15 @@
                     if (!target) return null;
                     const r = target.getBoundingClientRect();
                     const oh = overlay.clientHeight;
-                    const top = (r.height > oh * 0.62)
-                        ? overlay.scrollTop + r.top - oh * 0.10
-                        : overlay.scrollTop + r.top - (oh - r.height) / 2;
+                    // Fastnålad uppgiftstext upptar toppen — centrera det
+                    // aktuella steget i ytan UNDER den.
+                    const sh = (step >= 2 && stageRefs.current[1])
+                        ? Math.min(stageRefs.current[1].getBoundingClientRect().height, oh * 0.36) + 14
+                        : 0;
+                    const fri = oh - sh;
+                    const top = (r.height > fri * 0.62)
+                        ? overlay.scrollTop + r.top - sh - fri * 0.10
+                        : overlay.scrollTop + r.top - sh - (fri - r.height) / 2;
                     return Math.max(0, Math.min(top, overlay.scrollHeight - oh));
                 };
                 const tick = (now) => {
@@ -862,7 +902,8 @@
                             </div>
                         </div>
                         <div className="lab-article-body lab-pres-body np-pres-body">
-                            <div className={cls(1)} ref={el => { stageRefs.current[1] = el; }}>
+                            <div className={cls(1) + ' np-pres-fraga-fast'}
+                                ref={el => { stageRefs.current[1] = el; }}>
                                 <div className="np-fraga">
                                     <span className="np-kortlabel">Uppgift</span>
                                     <MdBlock source={uppgift.fraga} />
@@ -872,14 +913,11 @@
                             {uppgift.steg.map((s, i) => (
                                 <div key={i} className={cls(i + 2)} ref={el => { stageRefs.current[i + 2] = el; }}>
                                     <div className="np-steg">
-                                        <div className="np-steg-rubrik">
-                                            <span className="np-steg-uppgnr">{uppgift.nr}{s.del || ''}</span>
-                                            <span className="np-steg-nr">Steg {stegNumrering(uppgift, i).nr} av {stegNumrering(uppgift, i).totalt}</span>
-                                            <span className="np-steg-titel">{s.rubrik}</span>
-                                        </div>
+                                        {s.del && (i === 0 || uppgift.steg[i - 1].del !== s.del) && (
+                                            <div className="np-delmark">{s.del})</div>
+                                        )}
                                         {s.varfor && (
                                             <div className="np-varfor">
-                                                <span className="np-varfor-label">Varför gör vi så här?</span>
                                                 <MdBlock source={s.varfor} />
                                             </div>
                                         )}
@@ -925,6 +963,7 @@
             const [presenting, setPresenting] = useState(PRES_START != null);
             const stegEls = useRef([]);
             const svarEl = useRef(null);
+            const fragaEl = useRef(null);
             const prevVisade = useRef(LOS_DIREKT ? 999 : 0);
             useEffect(() => {
                 setVisadeSteg(LOS_DIREKT ? 999 : 0);
@@ -950,9 +989,15 @@
                         r = { top: r.top, height: r2.bottom - r.top };
                     }
                     const vh = window.innerHeight;
-                    const top = (r.height > vh * 0.62)
-                        ? window.scrollY + r.top - vh * 0.10
-                        : window.scrollY + r.top - (vh - r.height) / 2;
+                    // Fastnålad uppgiftstext upptar toppen av rutan —
+                    // centrera steget i ytan UNDER den.
+                    const stickyH = fragaEl.current
+                        ? Math.min(fragaEl.current.getBoundingClientRect().height, vh * 0.38) + 10
+                        : 0;
+                    const fri = vh - stickyH;
+                    const top = (r.height > fri * 0.62)
+                        ? window.scrollY + r.top - stickyH - fri * 0.10
+                        : window.scrollY + r.top - stickyH - (fri - r.height) / 2;
                     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
                 }, 90);
                 return () => clearTimeout(t);
@@ -982,7 +1027,7 @@
                         {dp && <span className="np-chip">{dp.hjalpmedelKort}</span>}
                     </div>
 
-                    <div className="np-fraga">
+                    <div className="np-fraga np-fraga-fast" ref={fragaEl}>
                         <span className="np-kortlabel">Uppgift</span>
                         <MdBlock source={uppgift.fraga} />
                         <Figur provId={prov.id} figurKey={uppgift.figur} />
@@ -1011,29 +1056,30 @@
                         </p>
                     )}
 
-                    {uppgift.steg.slice(0, visadeSteg).map((s, i) => (
-                        <div className="np-steg" key={i} ref={el => { stegEls.current[i] = el; }}>
-                            <div className="np-steg-rubrik">
-                                <span className="np-steg-uppgnr">{uppgift.nr}{s.del || ''}</span>
-                                            <span className="np-steg-nr">Steg {stegNumrering(uppgift, i).nr} av {stegNumrering(uppgift, i).totalt}</span>
-                                <span className="np-steg-titel">{s.rubrik}</span>
-                            </div>
-                            {s.varfor && (
-                                <div className="np-varfor">
-                                    <span className="np-varfor-label">Varför gör vi så här?</span>
-                                    <MdBlock source={s.varfor} />
+                    {visadeSteg > 0 && (
+                        <div className="np-losning-flode">
+                            {uppgift.steg.slice(0, visadeSteg).map((s, i) => (
+                                <div className="np-steg" key={i} ref={el => { stegEls.current[i] = el; }}>
+                                    {s.del && (i === 0 || uppgift.steg[i - 1].del !== s.del) && (
+                                        <div className="np-delmark">{s.del})</div>
+                                    )}
+                                    {s.varfor && (
+                                        <div className="np-varfor">
+                                            <MdBlock source={s.varfor} />
+                                        </div>
+                                    )}
+                                    <MdBlock source={s.text} />
+                                    <Figur provId={prov.id} figurKey={s.figur} />
+                                    {s.delsvar && (
+                                        <div className="np-delsvar">
+                                            <span className="np-delsvar-label">Svar {s.delsvar.del})</span>
+                                            <MdBlock source={s.delsvar.text} />
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                            <MdBlock source={s.text} />
-                            <Figur provId={prov.id} figurKey={s.figur} />
-                            {s.delsvar && (
-                                <div className="np-delsvar">
-                                    <span className="np-delsvar-label">Svar {s.delsvar.del})</span>
-                                    <MdBlock source={s.delsvar.text} />
-                                </div>
-                            )}
+                            ))}
                         </div>
-                    ))}
+                    )}
 
                     {alltVisat && (
                         <div className="np-svar" ref={svarEl}>

@@ -965,7 +965,7 @@
     "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t vilket är ekvivalent med att delta v är lika med a gånger delta t"
    },
    {
-    "t": "accelerationen a är lika med tyngdfaktorn g som är lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund"
+    "t": "accelerationen a är lika med tyngdfaktorn g som är ungefär lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund"
    },
    {
     "t": "delta hastigheten v är lika med parentesen minus 9,82 slut parentes gånger 2,0 som är lika med minus 19,64 meter per sekund"
@@ -4146,7 +4146,7 @@
     "t": "arbetet W är lika med E trycket p som är lika med massan m gånger tyngdfaktorn g gånger höjden h"
    },
    {
-    "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter"
+    "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter"
    },
    {
     "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 som är lika med 785,6 Nm som är ungefär lika med 790 Nm som är lika med 0,79 kNm"
@@ -4442,7 +4442,7 @@
     "t": "Lägg märke till att massan inte spelar roll för hur fort spyan slår i marken!"
    },
    {
-    "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram höjden h som är lika med 14 meter"
+    "t": "tyngdfaktorn g är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 14 meter"
    },
    {
     "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 14 som är lika med roten ur 274,96 som är ungefär lika med 16,58 meter per sekund"
@@ -4487,7 +4487,7 @@
     "t": "2 tyngdfaktorn g h ett plus v ett i kvadrat är lika med v två i kvadrat vilket är ekvivalent med att v två är lika med roten ur 2 gram h ett plus v ett i kvadrat"
    },
    {
-    "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund"
+    "t": "tyngdfaktorn g är ungefär lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund"
    },
    {
     "t": "v två är lika med roten ur 2 gånger 9,82 gånger 12 plus 14 i kvadrat som är lika med roten ur 431,68 som är lika med 20,776 meter per sekund som är ungefär lika med 21 meter per sekund"
@@ -4532,7 +4532,7 @@
     "t": "E hastigheten v är lika med massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 minus m v två i kvadrat delat med 2"
    },
    {
-    "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund"
+    "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund"
    },
    {
     "t": "E hastigheten v är lika med 82 gånger 9,82 gånger 20 plus 82 gånger 10 i kvadrat delat med 2 minus 82 gånger 19 i kvadrat delat med 2 som är lika med 16 104,8 plus 4 100 minus 14 801 som är lika med 5 403,8 joule som är ungefär lika med 5 400 joule som är lika med 5,4 kilojoule"
@@ -5404,7 +5404,7 @@
     "t": "arbetet W är lika med massan m gånger tyngdfaktorn g gånger höjden h plus my gånger F N gånger sträckan s"
    },
    {
-    "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter my som är lika med 0,35 F N som är lika med F två som är lika med m gånger g gånger cosinus alfa som är lika med 32 gånger 9,82 gånger cosinus 30 grader som är lika med 272,139 newton sträckan s som är lika med 5,0 meter"
+    "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter my som är lika med 0,35 F N som är lika med F två som är lika med m gånger g gånger cosinus alfa som är lika med 32 gånger 9,82 gånger cosinus 30 grader som är lika med 272,139 newton sträckan s som är lika med 5,0 meter"
    },
    {
     "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 plus 0,35 gånger 272,139 gånger 5,0 som är lika med 1 261,844 Nm som är ungefär lika med 1 300 Nm som är lika med 1,3 kNm"
@@ -6288,7 +6288,7 @@
     "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h"
    },
    {
-    "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter"
+    "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter"
    },
    {
     "t": "trycket p är lika med 998 gånger 9,82 gånger 3,0 som är lika med 29 401,08 pascal som är ungefär lika med 29 000 pascal som är lika med 29 kilopascal"
@@ -6303,7 +6303,7 @@
     "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h"
    },
    {
-    "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter"
+    "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter"
    },
    {
     "t": "trycket p är lika med 101 300 plus 998 gånger 9,82 gånger 3,0 som är lika med 130 701,08 pascal som är ungefär lika med 0,13 MPa"
@@ -6475,7 +6475,7 @@
     "t": "F L är lika med F G som är lika med massan m gånger tyngdfaktorn g"
    },
    {
-    "t": "massan m är lika med 450 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram"
+    "t": "massan m är lika med 450 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram"
    },
    {
     "t": "F L är lika med 450 gånger 9,82 som är lika med 4 419 newton som är ungefär lika med 4,4 kilonewton"
@@ -6490,7 +6490,7 @@
     "t": "F L är lika med densiteten rho gånger volymen V gånger tyngdfaktorn g vilket är ekvivalent med att V är lika med F L delat med rho gånger g"
    },
    {
-    "t": "F L är lika med 4 419 newton densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram"
+    "t": "F L är lika med 4 419 newton densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram"
    },
    {
     "t": "volymen V är lika med 4 419 delat med 998 gånger 9,82 som är lika med 0,450 kubikmeter som är ungefär lika med 0,45 kubikmeter"
@@ -6665,7 +6665,7 @@
     "t": "F L är lika med densiteten rho hävarmen l u frekvensen f tiden t gånger volymen V gånger tyngdfaktorn g"
    },
    {
-    "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram"
+    "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram"
    },
    {
     "t": "F L är lika med 1,293 gånger 0,011 gånger 9,82 som är lika med 0,1396 newton"
@@ -6677,7 +6677,7 @@
     "t": "F G är lika med parentesen m b accelerationen a hävarmen l l o n tyngdfaktorn g plus m höjden h e l i u massan m slut parentes gånger g"
    },
    {
-    "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är lika med 9,82 newton per kilogram"
+    "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är ungefär lika med 9,82 newton per kilogram"
    },
    {
     "t": "F G är lika med parentesen 0,004 plus 0,001958 slut parentes gånger 9,82 som är lika med 0,0585 newton"
@@ -6710,7 +6710,7 @@
     "t": "massan m gånger tyngdfaktorn g är lika med n gånger F S vilket är ekvivalent med att n är lika med m gånger g delat med F S"
    },
    {
-    "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton"
+    "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton"
    },
    {
     "t": "n är lika med 20 gånger 9,82 delat med 0,0811 som är lika med 2 419,613 som är ungefär lika med 2 400 ballonger"
@@ -8577,7 +8577,7 @@
     "t": "n är lika med laddningen Q delat med q e"
    },
    {
-    "t": "laddningen Q är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb"
+    "t": "laddningen Q är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb q e som är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb"
    },
    {
     "t": "n är lika med 3,0 gånger 10 upphöjt till minus 9 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,872 gånger 10 upphöjt till 10 st"
@@ -8930,7 +8930,7 @@
     "t": "n är lika med laddningen Q delat med q e"
    },
    {
-    "t": "laddningen Q är lika med 0,24 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb"
+    "t": "laddningen Q är lika med 0,24 coulomb q e som är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb"
    },
    {
     "t": "n är lika med 0,24 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,498 gånger 10 upphöjt till 18 st som är ungefär lika med 1,5 gånger 10 upphöjt till 18 st"
@@ -9060,7 +9060,7 @@
     "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m"
    },
    {
-    "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb spänningen U som är lika med 1,5 volt massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes"
+    "t": "q är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb spänningen U som är lika med 1,5 volt massan m som är ungefär lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes"
    },
    {
     "t": "hastigheten v är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 gånger 1,5 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 726 327,846 meter per sekund som är ungefär lika med 730 000 meter per sekund som är lika med 0,73 Mm per sekund"
@@ -10104,7 +10104,7 @@
     "t": "energin E är lika med k gånger laddningen Q delat med r i kvadrat"
    },
    {
-    "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 laddningen Q som är lika med 20 nC som är lika med 20 gånger 10 upphöjt till minus 9 coulomb r som är lika med 12 centimeter som är lika med 0,12 meter"
+    "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 laddningen Q som är lika med 20 nC som är lika med 20 gånger 10 upphöjt till minus 9 coulomb r som är lika med 12 centimeter som är lika med 0,12 meter"
    },
    {
     "t": "energin E är lika med 8,99 gånger 10 upphöjt till 9 gånger 20 gånger 10 upphöjt till minus 9 delat med 0,12 i kvadrat som är lika med 12 486,111 newton per coulomb som är ungefär lika med 12 000 newton per coulomb som är lika med 12 kilonewton per coulomb"
@@ -10134,7 +10134,7 @@
     "t": "energin E ett är lika med k gånger Q ett delat med r ett i kvadrat"
    },
    {
-    "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q ett som är lika med 8,0 nC som är lika med 8,0 gånger 10 upphöjt till minus 9 coulomb r ett som är lika med 2,0 centimeter som är lika med 0,020 meter"
+    "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q ett som är lika med 8,0 nC som är lika med 8,0 gånger 10 upphöjt till minus 9 coulomb r ett som är lika med 2,0 centimeter som är lika med 0,020 meter"
    },
    {
     "t": "energin E ett är lika med 8,99 gånger 10 upphöjt till 9 gånger 8,0 gånger 10 upphöjt till minus 9 delat med 0,020 i kvadrat som är lika med 179 800 newton per coulomb parentesen åt vänster i P då fält går IN I minus slut parentes"
@@ -10146,7 +10146,7 @@
     "t": "energin E två är lika med k gånger Q två delat med r två i kvadrat"
    },
    {
-    "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q två som är lika med 6,0 nC som är lika med 6,0 gånger 10 upphöjt till minus 9 coulomb r två som är lika med 5,0 centimeter som är lika med 0,050 meter"
+    "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q två som är lika med 6,0 nC som är lika med 6,0 gånger 10 upphöjt till minus 9 coulomb r två som är lika med 5,0 centimeter som är lika med 0,050 meter"
    },
    {
     "t": "energin E två är lika med 8,99 gånger 10 upphöjt till 9 gånger 6,0 gånger 10 upphöjt till minus 9 delat med 0,050 i kvadrat som är lika med 21 576 newton per coulomb parentesen åt vänster i P då fält går UT FRÅN plus slut parentes"
@@ -10795,7 +10795,7 @@
     "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med energin E"
    },
    {
-    "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter"
+    "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter"
    },
    {
     "t": "laddningen Q är lika med 2,15 gånger 10 upphöjt till minus 14 gånger 9,82 delat med 440 000 som är lika med 4,798 gånger 10 upphöjt till minus 19 coulomb"
@@ -12126,7 +12126,7 @@
     "t": "energin E är lika med delta massan m gånger c i kvadrat"
    },
    {
-    "t": "delta massan m är lika med 3,9674 gånger 10 upphöjt till minus 30 kilogram c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund"
+    "t": "delta massan m är lika med 3,9674 gånger 10 upphöjt till minus 30 kilogram c som är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund"
    },
    {
     "t": "energin E är lika med 3,9674 gånger 10 upphöjt till minus 30 gånger parentesen 2,998 gånger 10 upphöjt till 8 slut parentes i kvadrat som är lika med 3,5659 gånger 10 upphöjt till minus 13 joule"
@@ -13051,7 +13051,7 @@
     "t": "Omvandling mellan enheter"
    },
    {
-    "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt"
+    "t": "1 elektronvolt är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt"
    },
    {
     "t": "α-sönderfall"
@@ -14126,7 +14126,7 @@
     "t": "tyngdfaktorn g är lika med hastigheten v i kvadrat delat med r vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r"
    },
    {
-    "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 0,80 meter"
+    "t": "tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat r som är lika med 0,80 meter"
    },
    {
     "t": "hastigheten v är lika med roten ur 9,82 gånger 0,80 som är lika med roten ur 7,856 som är lika med 2,803 meter per sekund som är ungefär lika med 2,8 meter per sekund"
@@ -14190,7 +14190,7 @@
     "t": "periodtiden T är lika med 2 pi roten ur hävarmen l gånger cosinus alfa delat med tyngdfaktorn g"
    },
    {
-    "t": "hävarmen l är lika med 5,0 meter alfa som är lika med 30 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "hävarmen l är lika med 5,0 meter alfa som är lika med 30 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "periodtiden T är lika med 2 pi roten ur 5,0 gånger cosinus 30 grader delat med 9,82 som är lika med 4,172 sekund som är ungefär lika med 4,2 sekund"
@@ -14443,7 +14443,7 @@
     "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t vilket är ekvivalent med att t är lika med v noll gånger sinus alfa minus v y delat med g"
    },
    {
-    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader v y som är lika med 0 tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader v y som är lika med 0 tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "tiden t är lika med 15 gånger sinus 50 grader minus 0 delat med 9,82 som är lika med 1,170 sekund som är ungefär lika med 1,2 sekund"
@@ -14458,7 +14458,7 @@
     "t": "y \\max är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 tyngdfaktorn g"
    },
    {
-    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "y \\max är lika med 15 i kvadrat gånger sinus i kvadrat parentesen 50 grader slut parentes delat med 2 gånger 9,82 som är lika med 6,722 meter som är ungefär lika med 6,7 meter"
@@ -14488,7 +14488,7 @@
     "t": "Vi bestämmer v x och v y vid nedslaget."
    },
    {
-    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat tiden t som är lika med 2,340 sekund"
+    "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat tiden t som är lika med 2,340 sekund"
    },
    {
     "t": "v x är lika med v noll gånger cosinus alfa som är lika med 15 gånger cosinus 50 grader som är lika med 9,641 meter per sekund"
@@ -14548,7 +14548,7 @@
     "t": "y är lika med v noll gånger sinus alfa gånger tiden t minus tyngdfaktorn g gånger t i kvadrat delat med 2"
    },
    {
-    "t": "y är lika med minus 1,6 meter v noll som är lika med 25 meter per sekund alfa som är lika med 40 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "y är lika med minus 1,6 meter v noll som är lika med 25 meter per sekund alfa som är lika med 40 grader tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "minus 1,6 är lika med 25 gånger sinus 40 grader gånger tiden t minus 9,82 gånger t i kvadrat delat med 2"
@@ -14645,7 +14645,7 @@
     "t": "tyngdfaktorn g gånger höjden h är lika med hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v i kvadrat är lika med 2 gånger g gånger h vilket är ekvivalent med att v är lika med roten ur 2 gånger g gånger h"
    },
    {
-    "t": "Insättning av tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat och höjden h är lika med 1,0 meter (tyngdpunkten \"faller\" 1,0 meter) ger"
+    "t": "Insättning av tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat och höjden h är lika med 1,0 meter (tyngdpunkten \"faller\" 1,0 meter) ger"
    },
    {
     "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 1,0 som är lika med 4,431 meter per sekund"
@@ -14654,7 +14654,7 @@
     "t": "Nu kan vi beräkna spännkraften F S ."
    },
    {
-    "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "i ekvation 1 ger"
@@ -14687,7 +14687,7 @@
     "t": "hastigheten v i kvadrat delat med r är lika med tyngdfaktorn g vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r"
    },
    {
-    "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter"
+    "t": "tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter"
    },
    {
     "t": "hastigheten v är lika med roten ur 9,82 gånger 2,5 som är lika med 4,954 meter per sekund som är ungefär lika med 5,0 meter per sekund"
@@ -16095,7 +16095,7 @@
     "t": "periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g vilket är ekvivalent med att T i kvadrat är lika med 4 pi i kvadrat gånger l delat med g vilket är ekvivalent med att l är lika med T i kvadrat gånger g delat med 4 pi i kvadrat"
    },
    {
-    "t": "periodtiden T är lika med 2,00 sekund tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat"
+    "t": "periodtiden T är lika med 2,00 sekund tyngdfaktorn g som är ungefär lika med 9,82 meter per sekund i kvadrat"
    },
    {
     "t": "(Tiden 1,00 sekunder från ena vändläget till det andra motsvarar en halv periodtid, så T är lika med 2,00 sekunder.)"
@@ -18542,7 +18542,7 @@
     "t": "kraften F är lika med q gånger hastigheten v gånger B"
    },
    {
-    "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb hastigheten v som är lika med 2,4 Mm per sekund som är lika med 2,4 gånger 10 upphöjt till 6 meter per sekund B som är lika med 0,080 tesla"
+    "t": "q är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb hastigheten v som är lika med 2,4 Mm per sekund som är lika med 2,4 gånger 10 upphöjt till 6 meter per sekund B som är lika med 0,080 tesla"
    },
    {
     "t": "kraften F är lika med 1,602 gånger 10 upphöjt till minus 19 gånger 2,4 gånger 10 upphöjt till 6 gånger 0,080 som är lika med 3,076 gånger 10 upphöjt till minus 14 newton som är ungefär lika med 3,1 gånger 10 upphöjt till minus 14 newton som är lika med 31 fN"
@@ -21277,7 +21277,7 @@
     "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4 vilket är ekvivalent med att T är lika med 4:e roten ur M delat med sigma"
    },
    {
-    "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m^2 \\cdot K^4)"
+    "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är ungefär lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m^2 \\cdot K^4)"
    },
    {
     "t": "periodtiden T är lika med 4:e roten ur 1 500 delat med 5,67 gånger 10 upphöjt till minus 8 som är lika med 403,298 kelvin som är ungefär lika med 403 kelvin som är ungefär lika med 403 minus 273 ^\\circ C som är lika med 130 ^\\circ C"
@@ -21678,7 +21678,7 @@
     "t": "Omvandling mellan elektronvolt och joule"
    },
    {
-    "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule"
+    "t": "1 elektronvolt är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 joule"
    },
    {
     "t": "1 joule är lika med 1 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt"
@@ -21810,7 +21810,7 @@
     "t": "energin E är lika med höjden h gånger c delat med våglängden lambda"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund våglängden lambda som är lika med 633 nanometer som är lika med 633 gånger 10 upphöjt till minus 9 meter"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund våglängden lambda som är lika med 633 nanometer som är lika med 633 gånger 10 upphöjt till minus 9 meter"
    },
    {
     "t": "energin E är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 633 gånger 10 upphöjt till minus 9 som är lika med 3,138 gånger 10 upphöjt till minus 19 joule"
@@ -21849,7 +21849,7 @@
     "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger E k delat med m"
    },
    {
-    "t": "E k är lika med 0,138 elektronvolt som är lika med 0,138 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 2,225 gånger 10 upphöjt till minus 20 joule massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes"
+    "t": "E k är lika med 0,138 elektronvolt som är lika med 0,138 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 2,225 gånger 10 upphöjt till minus 20 joule massan m som är ungefär lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes"
    },
    {
     "t": "hastigheten v är lika med roten ur 2 gånger 2,225 gånger 10 upphöjt till minus 20 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 221 039,772 meter per sekund som är ungefär lika med 2,21 gånger 10 upphöjt till 5 meter per sekund som är lika med 0,221 Mm per sekund"
@@ -21885,7 +21885,7 @@
     "t": "hastigheten v är lika med höjden h delat med våglängden lambda gånger massan m"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js våglängden lambda som är lika med 450 nanometer som är lika med 450 gånger 10 upphöjt till minus 9 meter massan m som är lika med 14,003074 u som är lika med 14,003074 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 2,324 gånger 10 upphöjt till minus 26 kilogram"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js våglängden lambda som är lika med 450 nanometer som är lika med 450 gånger 10 upphöjt till minus 9 meter massan m som är lika med 14,003074 u som är lika med 14,003074 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 2,324 gånger 10 upphöjt till minus 26 kilogram"
    },
    {
     "t": "hastigheten v är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 450 gånger 10 upphöjt till minus 9 gånger 2,324 gånger 10 upphöjt till minus 26 som är lika med 0,06334 meter per sekund som är ungefär lika med 0,0633 meter per sekund som är lika med 6,33 centimeter per sekund"
@@ -22045,7 +22045,7 @@
     "t": "E e är lika med E k vilket är ekvivalent med att laddningen Q gånger spänningen U är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger Q gånger U delat med m"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är ungefär lika med 9,11 gånger 10 upphöjt till minus 31 kilogram"
    },
    {
     "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m som är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 coulomb gånger 200 volt delat med 9,11 gånger 10 upphöjt till minus 31 kilogram som är lika med 8,386 gånger 10 upphöjt till 6 meter per sekund"
@@ -22084,7 +22084,7 @@
     "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 58 gram som är lika med 0,058 kilogram hastigheten v som är lika med 108 kilometer per timme som är lika med 108 delat med 3,6 meter per sekund som är lika med 30 meter per sekund"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 58 gram som är lika med 0,058 kilogram hastigheten v som är lika med 108 kilometer per timme som är lika med 108 delat med 3,6 meter per sekund som är lika med 30 meter per sekund"
    },
    {
     "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 0,058 gånger 30 som är lika med 3,808 gånger 10 upphöjt till minus 34 meter"
@@ -22404,7 +22404,7 @@
     "t": "Hopp 3 ger 1:"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E ett som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 13,6 slut parentes som är lika med 12,09 elektronvolt som är lika med 12,09 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,936 gånger 10 upphöjt till minus 18 joule"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E ett som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 13,6 slut parentes som är lika med 12,09 elektronvolt som är lika med 12,09 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,936 gånger 10 upphöjt till minus 18 joule"
    },
    {
     "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,936 gånger 10 upphöjt till minus 18 som är lika med 1,0256 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 103 nanometer"
@@ -22413,7 +22413,7 @@
     "t": "Hopp 3 ger 2:"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E två som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 3,40 slut parentes som är lika med 1,89 elektronvolt som är lika med 1,89 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 3,027 gånger 10 upphöjt till minus 19 joule"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E två som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 3,40 slut parentes som är lika med 1,89 elektronvolt som är lika med 1,89 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 3,027 gånger 10 upphöjt till minus 19 joule"
    },
    {
     "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 3,027 gånger 10 upphöjt till minus 19 som är lika med 6,5608 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 656 nanometer"
@@ -22422,7 +22422,7 @@
     "t": "Hopp 2 ger 1:"
    },
    {
-    "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E två minus E ett som är lika med minus 3,40 minus parentesen minus 13,6 slut parentes som är lika med 10,2 elektronvolt som är lika med 10,2 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,634 gånger 10 upphöjt till minus 18 joule"
+    "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E två minus E ett som är lika med minus 3,40 minus parentesen minus 13,6 slut parentes som är lika med 10,2 elektronvolt som är lika med 10,2 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,634 gånger 10 upphöjt till minus 18 joule"
    },
    {
     "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,634 gånger 10 upphöjt till minus 18 som är lika med 1,215 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 122 nanometer"
@@ -22663,7 +22663,7 @@
     "t": "f är lika med ljusets frekvens (hertz)"
    },
    {
-    "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule"
+    "t": "1 elektronvolt är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 joule"
    },
    {
     "t": "trycket p är lika med höjden h delat med våglängden lambda som är lika med h gånger frekvensen f delat med c"
@@ -22747,7 +22747,7 @@
     "t": "I ett energinivådiagram är jonisationsgränsen satt till 0 elektronvolt, och alla bundna tillstånd (elektronen kvar i atomen) har negativ energi."
    },
    {
-    "t": "eV är en bekväm energienhet på atomär skala — omvandla alltid till joule ( 1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule ) innan du räknar ut hastigheter eller rörelsemängd."
+    "t": "eV är en bekväm energienhet på atomär skala — omvandla alltid till joule ( 1 elektronvolt är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 joule ) innan du räknar ut hastigheter eller rörelsemängd."
    },
    {
     "t": "Rörelsemängden bevaras vid fotonabsorption och Comptonspridning, precis som vid en vanlig kollision — men fotonen saknar massa, så dess rörelsemängd räknas med trycket p är lika med höjden h delat med våglängden lambda , inte trycket p är lika med massan m gånger hastigheten v ."

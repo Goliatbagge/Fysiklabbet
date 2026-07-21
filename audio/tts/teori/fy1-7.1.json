@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "6c9a0c3ed4da4d4723a2b25f4c395ce8108debc0",
- "dur": 520.56,
+ "hash": "36b421ce221f4501ddcf674571a27ab3833faabd",
+ "dur": 520.93,
  "segments": [
   {
    "t": "Laddning och influens",
@@ -472,52 +472,52 @@
   {
    "t": "n är lika med laddningen Q delat med q e",
    "s": 450.12,
-   "e": 464.11
+   "e": 464.47
   },
   {
-   "t": "laddningen Q är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
+   "t": "laddningen Q är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb q e som är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
    "s": 450.12,
-   "e": 464.11
+   "e": 464.47
   },
   {
    "t": "n är lika med 3,0 gånger 10 upphöjt till minus 9 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,872 gånger 10 upphöjt till 10 st",
-   "s": 464.11,
-   "e": 480.94
+   "s": 464.47,
+   "e": 481.32
   },
   {
    "t": "Svar: 1,9 gånger 10 upphöjt till 10 eller 19 miljarder (många!)",
-   "s": 464.11,
-   "e": 480.94
+   "s": 464.47,
+   "e": 481.32
   },
   {
    "t": "b) Eftersom båda kulor är lika stora och ledande kommer laddningarna att fördela sig jämnt mellan dem.",
-   "s": 480.94,
-   "e": 487.88
+   "s": 481.32,
+   "e": 488.26
   },
   {
    "t": "Deras slutgiltiga laddning Q fås genom medelvärdet av deras ursprungliga laddning.",
-   "s": 487.88,
-   "e": 493.73
+   "s": 488.26,
+   "e": 494.11
   },
   {
    "t": "laddningen Q är lika med Q ett plus Q två delat med 2",
-   "s": 493.73,
-   "e": 498.56
+   "s": 494.11,
+   "e": 498.93
   },
   {
    "t": "Q ett är lika med plus 5,0 nC Q två som är lika med minus 3,0 nC",
-   "s": 498.56,
-   "e": 505.13
+   "s": 498.93,
+   "e": 505.51
   },
   {
    "t": "laddningen Q är lika med plus 5,0 plus parentesen minus 3,0 slut parentes delat med 2 som är lika med plus 2,0 delat med 2 som är lika med plus 1,0 nC",
-   "s": 505.13,
-   "e": 516.97
+   "s": 505.51,
+   "e": 517.34
   },
   {
    "t": "Svar: +1,0 nC",
-   "s": 516.97,
-   "e": 520.56
+   "s": 517.34,
+   "e": 520.93
   }
  ]
 }

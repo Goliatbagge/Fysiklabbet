@@ -1,8 +1,8 @@
 {
- "id": "fy1-5.5",
+ "id": "fy1-5.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "54417e4da3e5a8be848498d1f8ac5e5581bfb339",
- "dur": 306.55,
+ "hash": "5a8cbb0aec7db7dc3a2e7d43a16bbb5d7f0cec97",
+ "dur": 309.52,
  "segments": [
   {
    "t": "Gasers lyftkraft",
@@ -142,97 +142,97 @@
   {
    "t": "F L är lika med densiteten rho hävarmen l u frekvensen f tiden t gånger volymen V gånger tyngdfaktorn g",
    "s": 140.43,
-   "e": 162.26
+   "e": 148.6
   },
   {
-   "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram",
-   "s": 140.43,
-   "e": 162.26
+   "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram",
+   "s": 148.6,
+   "e": 164.5
   },
   {
    "t": "F L är lika med 1,293 gånger 0,011 gånger 9,82 som är lika med 0,1396 newton",
-   "s": 162.26,
-   "e": 171.91
+   "s": 164.5,
+   "e": 174.14
   },
   {
    "t": "Sedan bestämmer vi F G (tyngden på ballong + helium).",
-   "s": 171.91,
-   "e": 177.04
+   "s": 174.14,
+   "e": 179.26
   },
   {
    "t": "F G är lika med parentesen m b accelerationen a hävarmen l l o n tyngdfaktorn g plus m höjden h e l i u massan m slut parentes gånger g",
-   "s": 177.04,
-   "e": 188.4
+   "s": 179.26,
+   "e": 190.62
   },
   {
-   "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är lika med 9,82 newton per kilogram",
-   "s": 188.4,
-   "e": 215.56
+   "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är ungefär lika med 9,82 newton per kilogram",
+   "s": 190.62,
+   "e": 218.14
   },
   {
    "t": "F G är lika med parentesen 0,004 plus 0,001958 slut parentes gånger 9,82 som är lika med 0,0585 newton",
-   "s": 215.56,
-   "e": 227.36
+   "s": 218.14,
+   "e": 230.01
   },
   {
    "t": "Insättning ger",
-   "s": 227.36,
-   "e": 229.62
+   "s": 230.01,
+   "e": 232.28
   },
   {
    "t": "F S är lika med 0,1396 minus 0,0585 som är lika med 0,0811 newton som är ungefär lika med 0,081 newton som är lika med 81 mN",
-   "s": 229.62,
-   "e": 242.32
+   "s": 232.28,
+   "e": 244.97
   },
   {
    "t": "Svar: 81 mN",
-   "s": 242.32,
-   "e": 245.41
+   "s": 244.97,
+   "e": 248.06
   },
   {
    "t": "b) Från a-uppgiften har vi att en ballong ger spännkraften F S är lika med 0,0811… N.",
-   "s": 245.41,
-   "e": 258.1
+   "s": 248.06,
+   "e": 260.75
   },
   {
    "t": "Om vi har n stycken ballonger blir alltså den sammanlagda lyftande kraften",
-   "s": 252.8,
-   "e": 258.1
+   "s": 255.45,
+   "e": 260.75
   },
   {
    "t": "kraften F är lika med n gånger F S",
-   "s": 258.1,
-   "e": 261.94
+   "s": 260.75,
+   "e": 264.59
   },
   {
    "t": "För att ballongerna ska lyfta Algot krävs att den sammanlagda lyftande kraften F är minst lika stor som Algots tyngd F G är lika med massan m gånger tyngdfaktorn g .",
-   "s": 261.94,
-   "e": 271.84
+   "s": 264.59,
+   "e": 274.48
   },
   {
    "t": "Detta ger",
-   "s": 271.84,
-   "e": 273.85
+   "s": 274.48,
+   "e": 276.49
   },
   {
    "t": "massan m gånger tyngdfaktorn g är lika med n gånger F S vilket är ekvivalent med att n är lika med m gånger g delat med F S",
-   "s": 273.85,
-   "e": 290.6
+   "s": 276.49,
+   "e": 293.57
   },
   {
-   "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton",
-   "s": 273.85,
-   "e": 290.6
+   "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton",
+   "s": 276.49,
+   "e": 293.57
   },
   {
    "t": "n är lika med 20 gånger 9,82 delat med 0,0811 som är lika med 2 419,613 som är ungefär lika med 2 400 ballonger",
-   "s": 290.6,
-   "e": 302.7
+   "s": 293.57,
+   "e": 305.68
   },
   {
    "t": "Svar: 2 400 ballonger",
-   "s": 302.7,
-   "e": 306.55
+   "s": 305.68,
+   "e": 309.52
   }
  ]
 }

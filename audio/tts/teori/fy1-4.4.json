@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "e0a478ce592640fce7fad3b014d6f3ee9dd7f8c7",
- "dur": 469.2,
+ "hash": "f3aa6931645d7c1229466dd36df1de60253ca9d1",
+ "dur": 470.56,
  "segments": [
   {
    "t": "Energiprincipen",
@@ -245,169 +245,169 @@
    "e": 242.3
   },
   {
-   "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram höjden h som är lika med 14 meter",
+   "t": "tyngdfaktorn g är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 14 meter",
    "s": 242.3,
-   "e": 249.43
+   "e": 249.78
   },
   {
    "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 14 som är lika med roten ur 274,96 som är ungefär lika med 16,58 meter per sekund",
-   "s": 249.43,
-   "e": 261.6
+   "s": 249.78,
+   "e": 261.94
   },
   {
    "t": "Svar: 17 meter per sekund (eller ca 60 kilometer i timmen!)",
-   "s": 261.6,
-   "e": 267.31
+   "s": 261.94,
+   "e": 267.66
   },
   {
    "t": "Exempel 2 — Sten från klippan",
-   "s": 267.31,
-   "e": 270.76
+   "s": 267.66,
+   "e": 271.11
   },
   {
    "t": "Du står på en klippa och kastar en sten snett uppåt med farten 14 meter per sekund från en punkt 12 meter över havet.",
-   "s": 270.76,
-   "e": 278.48
+   "s": 271.11,
+   "e": 278.82
   },
   {
    "t": "Med vilken fart kommer den att slå i vattenytan?",
-   "s": 278.48,
-   "e": 282.48
+   "s": 278.82,
+   "e": 282.82
   },
   {
    "t": "Luftmotståndet kan försummas.",
-   "s": 282.48,
-   "e": 285.61
+   "s": 282.82,
+   "e": 285.96
   },
   {
    "t": "Vi sätter nollnivån vid havsytan.",
-   "s": 285.61,
-   "e": 288.96
+   "s": 285.96,
+   "e": 289.31
   },
   {
    "t": "Energiprincipen ger",
-   "s": 288.96,
-   "e": 291.7
+   "s": 289.31,
+   "e": 292.05
   },
   {
    "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2",
-   "s": 291.7,
-   "e": 297.44
+   "s": 292.05,
+   "e": 297.79
   },
   {
    "t": "massan m tyngdfaktorn g h ett plus m v ett i kvadrat delat med 2 är lika med 0 plus m v två i kvadrat delat med 2",
-   "s": 297.44,
-   "e": 306.29
+   "s": 297.79,
+   "e": 306.64
   },
   {
    "t": "Eftersom varje term innehåller m, så dividerar vi med m i båda led.",
-   "s": 306.29,
-   "e": 311.62
+   "s": 306.64,
+   "e": 311.98
   },
   {
    "t": "tyngdfaktorn g h ett plus v ett i kvadrat delat med 2 är lika med v två i kvadrat delat med 2",
-   "s": 311.62,
-   "e": 318.94
+   "s": 311.98,
+   "e": 319.3
   },
   {
    "t": "Vi multiplicerar båda led med 2 för att få bort nämnarna och löser därefter ut v två .",
-   "s": 318.94,
-   "e": 327.13
+   "s": 319.3,
+   "e": 327.51
   },
   {
    "t": "2 tyngdfaktorn g h ett plus v ett i kvadrat är lika med v två i kvadrat vilket är ekvivalent med att v två är lika med roten ur 2 gram h ett plus v ett i kvadrat",
-   "s": 327.08,
-   "e": 338.3
+   "s": 327.46,
+   "e": 338.86
   },
   {
-   "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund",
-   "s": 338.3,
-   "e": 347.53
+   "t": "tyngdfaktorn g är ungefär lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund",
+   "s": 338.86,
+   "e": 348.51
   },
   {
    "t": "v två är lika med roten ur 2 gånger 9,82 gånger 12 plus 14 i kvadrat som är lika med roten ur 431,68 som är lika med 20,776 meter per sekund som är ungefär lika med 21 meter per sekund",
-   "s": 347.53,
-   "e": 363.17
+   "s": 348.51,
+   "e": 364.14
   },
   {
    "t": "Svar: 21 meter per sekund",
-   "s": 363.17,
-   "e": 366.8
+   "s": 364.14,
+   "e": 367.76
   },
   {
    "t": "Exempel 3 — Eddie i backen",
-   "s": 366.8,
-   "e": 370.03
+   "s": 367.76,
+   "e": 370.99
   },
   {
    "t": "Eddie med sin cykel väger 82 kilogram.",
-   "s": 370.03,
-   "e": 373.76
+   "s": 370.99,
+   "e": 374.72
   },
   {
    "t": "Han passerar ett backkrön med farten 10 meter per sekund.",
-   "s": 373.76,
-   "e": 378.27
+   "s": 374.72,
+   "e": 379.23
   },
   {
    "t": "Backen är 20 meter hög.",
-   "s": 378.27,
-   "e": 381.2
+   "s": 379.23,
+   "e": 382.16
   },
   {
    "t": "Farten längst ner är 19 meter per sekund.",
-   "s": 381.2,
-   "e": 385.02
+   "s": 382.16,
+   "e": 385.98
   },
   {
    "t": "Hur mycket energi har blivit friktionsvärme?",
-   "s": 385.02,
-   "e": 388.65
+   "s": 385.98,
+   "e": 389.61
   },
   {
    "t": "Vi kallar friktionsvärmen E hastigheten v .",
-   "s": 388.65,
-   "e": 392.61
+   "s": 389.61,
+   "e": 393.57
   },
   {
    "t": "Energiprincipen ger",
-   "s": 392.61,
-   "e": 395.37
+   "s": 393.57,
+   "e": 396.33
   },
   {
    "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 plus E hastigheten v",
-   "s": 395.37,
-   "e": 402.37
+   "s": 396.33,
+   "e": 403.33
   },
   {
    "t": "massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 är lika med 0 plus m v två i kvadrat delat med 2 plus E hastigheten v",
-   "s": 402.37,
-   "e": 412.61
+   "s": 403.33,
+   "e": 413.57
   },
   {
    "t": "Vi löser ut E hastigheten v",
-   "s": 412.61,
-   "e": 416.11
+   "s": 413.57,
+   "e": 417.07
   },
   {
    "t": "E hastigheten v är lika med massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 minus m v två i kvadrat delat med 2",
-   "s": 416.11,
-   "e": 426.17
+   "s": 417.07,
+   "e": 427.12
   },
   {
-   "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund",
-   "s": 426.17,
-   "e": 439.85
+   "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är ungefär lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund",
+   "s": 427.12,
+   "e": 441.21
   },
   {
    "t": "E hastigheten v är lika med 82 gånger 9,82 gånger 20 plus 82 gånger 10 i kvadrat delat med 2 minus 82 gånger 19 i kvadrat delat med 2 som är lika med 16 104,8 plus 4 100 minus 14 801 som är lika med 5 403,8 joule som är ungefär lika med 5 400 joule som är lika med 5,4 kilojoule",
-   "s": 439.85,
-   "e": 465.7
+   "s": 441.21,
+   "e": 467.06
   },
   {
    "t": "Svar: 5,4 kilojoule",
-   "s": 465.7,
-   "e": 469.2
+   "s": 467.06,
+   "e": 470.56
   }
  ]
 }

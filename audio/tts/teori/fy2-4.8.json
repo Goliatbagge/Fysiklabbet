@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.8",
  "voice": "sv-SE-SofieNeural",
- "hash": "5b9021b19cf4c3bea5ac6ac964b7f8b1d9223dc3",
- "dur": 436.88,
+ "hash": "d1c106af1eb3ff28db035fc1c4df9fcbbd0accf8",
+ "dur": 437.66,
  "segments": [
   {
    "t": "Bohrs atommodell och energinivåer",
@@ -202,57 +202,57 @@
   {
    "t": "Vi läser av energinivåerna från diagrammet ovan.",
    "s": 251.41,
-   "e": 256.0
+   "e": 256.01
   },
   {
    "t": "Hopp 3 ger 1:",
-   "s": 256.0,
-   "e": 292.76
+   "s": 256.01,
+   "e": 293.04
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E ett som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 13,6 slut parentes som är lika med 12,09 elektronvolt som är lika med 12,09 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,936 gånger 10 upphöjt till minus 18 joule",
-   "s": 256.0,
-   "e": 292.76
+   "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E ett som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 13,6 slut parentes som är lika med 12,09 elektronvolt som är lika med 12,09 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,936 gånger 10 upphöjt till minus 18 joule",
+   "s": 256.01,
+   "e": 293.04
   },
   {
    "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,936 gånger 10 upphöjt till minus 18 som är lika med 1,0256 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 103 nanometer",
-   "s": 292.76,
-   "e": 315.69
+   "s": 293.04,
+   "e": 315.66
   },
   {
    "t": "Hopp 3 ger 2:",
-   "s": 315.64,
-   "e": 351.14
+   "s": 315.61,
+   "e": 351.4
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E två som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 3,40 slut parentes som är lika med 1,89 elektronvolt som är lika med 1,89 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 3,027 gånger 10 upphöjt till minus 19 joule",
-   "s": 315.64,
-   "e": 351.14
+   "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E två som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 3,40 slut parentes som är lika med 1,89 elektronvolt som är lika med 1,89 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 3,027 gånger 10 upphöjt till minus 19 joule",
+   "s": 315.61,
+   "e": 351.4
   },
   {
    "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 3,027 gånger 10 upphöjt till minus 19 som är lika med 6,5608 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 656 nanometer",
-   "s": 351.14,
-   "e": 371.87
+   "s": 351.4,
+   "e": 372.11
   },
   {
    "t": "Hopp 2 ger 1:",
-   "s": 371.87,
-   "e": 405.91
+   "s": 372.11,
+   "e": 406.68
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E två minus E ett som är lika med minus 3,40 minus parentesen minus 13,6 slut parentes som är lika med 10,2 elektronvolt som är lika med 10,2 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,634 gånger 10 upphöjt till minus 18 joule",
-   "s": 371.87,
-   "e": 405.91
+   "t": "höjden h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E två minus E ett som är lika med minus 3,40 minus parentesen minus 13,6 slut parentes som är lika med 10,2 elektronvolt som är lika med 10,2 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,634 gånger 10 upphöjt till minus 18 joule",
+   "s": 372.11,
+   "e": 406.68
   },
   {
    "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,634 gånger 10 upphöjt till minus 18 som är lika med 1,215 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 122 nanometer",
-   "s": 405.91,
-   "e": 426.68
+   "s": 406.68,
+   "e": 427.46
   },
   {
    "t": "Svar: 103 nanometer (UV) eller 656 nanometer (synligt rött) och 122 nanometer (UV).",
-   "s": 426.68,
-   "e": 436.88
+   "s": 427.46,
+   "e": 437.66
   }
  ]
 }

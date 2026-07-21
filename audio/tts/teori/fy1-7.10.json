@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.10",
  "voice": "sv-SE-SofieNeural",
- "hash": "8d4ad9adbcdf442b666fe6a3e0fb9fd7b00e9f84",
- "dur": 462.45,
+ "hash": "e6952dd89f9f8fca1d70fae7fc216b7412600234",
+ "dur": 463.84,
  "segments": [
   {
    "t": "Elektriska fält och elektrisk fältstyrka",
@@ -245,99 +245,99 @@
    "e": 256.4
   },
   {
-   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 laddningen Q som är lika med 20 nC som är lika med 20 gånger 10 upphöjt till minus 9 coulomb r som är lika med 12 centimeter som är lika med 0,12 meter",
+   "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 laddningen Q som är lika med 20 nC som är lika med 20 gånger 10 upphöjt till minus 9 coulomb r som är lika med 12 centimeter som är lika med 0,12 meter",
    "s": 256.4,
-   "e": 274.21
+   "e": 274.59
   },
   {
    "t": "energin E är lika med 8,99 gånger 10 upphöjt till 9 gånger 20 gånger 10 upphöjt till minus 9 delat med 0,12 i kvadrat som är lika med 12 486,111 newton per coulomb som är ungefär lika med 12 000 newton per coulomb som är lika med 12 kilonewton per coulomb",
-   "s": 274.21,
-   "e": 293.01
+   "s": 274.59,
+   "e": 293.45
   },
   {
    "t": "Svar: 12 kilonewton/C eller 12 000 newton/C",
-   "s": 293.01,
-   "e": 304.76
+   "s": 293.45,
+   "e": 305.18
   },
   {
    "t": "Exempel 2 — Resulterande fält i punkt P",
-   "s": 293.01,
-   "e": 304.76
+   "s": 293.45,
+   "e": 305.18
   },
   {
    "t": "Bestäm den elektriska fältstyrkan i punkten P i figuren nedan.",
-   "s": 293.01,
-   "e": 304.76
+   "s": 293.45,
+   "e": 305.18
   },
   {
    "t": "Punkten P ligger mellan två laddningar: Q ett är lika med minus 8,0 nC till vänster (2,0 centimeter från P) och Q två är lika med plus 6,0 nC till höger (5,0 centimeter från P).",
-   "s": 304.76,
-   "e": 320.57
+   "s": 305.18,
+   "e": 321.25
   },
   {
    "t": "Det uppstår ett fält från laddningen till vänster och ett fält från laddningen till höger.",
-   "s": 320.52,
-   "e": 325.84
+   "s": 321.2,
+   "e": 326.51
   },
   {
    "t": "Det resulterande fältet fås genom att lägga ihop dessa fält.",
-   "s": 325.84,
-   "e": 330.65
+   "s": 326.51,
+   "e": 331.32
   },
   {
    "t": "Fältet från laddningen till vänster är",
-   "s": 330.65,
-   "e": 334.05
+   "s": 331.32,
+   "e": 334.72
   },
   {
    "t": "energin E ett är lika med k gånger Q ett delat med r ett i kvadrat",
-   "s": 334.05,
-   "e": 339.96
+   "s": 334.72,
+   "e": 340.64
   },
   {
-   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q ett som är lika med 8,0 nC som är lika med 8,0 gånger 10 upphöjt till minus 9 coulomb r ett som är lika med 2,0 centimeter som är lika med 0,020 meter",
-   "s": 339.96,
-   "e": 359.41
+   "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q ett som är lika med 8,0 nC som är lika med 8,0 gånger 10 upphöjt till minus 9 coulomb r ett som är lika med 2,0 centimeter som är lika med 0,020 meter",
+   "s": 340.64,
+   "e": 360.47
   },
   {
    "t": "energin E ett är lika med 8,99 gånger 10 upphöjt till 9 gånger 8,0 gånger 10 upphöjt till minus 9 delat med 0,020 i kvadrat som är lika med 179 800 newton per coulomb parentesen åt vänster i P då fält går IN I minus slut parentes",
-   "s": 359.41,
-   "e": 377.82
+   "s": 360.47,
+   "e": 378.89
   },
   {
    "t": "På motsvarande sätt räknar vi ut fältet från laddningen till höger som",
-   "s": 377.82,
-   "e": 382.85
+   "s": 378.89,
+   "e": 383.91
   },
   {
    "t": "energin E två är lika med k gånger Q två delat med r två i kvadrat",
-   "s": 382.85,
-   "e": 388.64
+   "s": 383.91,
+   "e": 389.7
   },
   {
-   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q två som är lika med 6,0 nC som är lika med 6,0 gånger 10 upphöjt till minus 9 coulomb r två som är lika med 5,0 centimeter som är lika med 0,050 meter",
-   "s": 388.64,
-   "e": 408.17
+   "t": "k är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2 Q två som är lika med 6,0 nC som är lika med 6,0 gånger 10 upphöjt till minus 9 coulomb r två som är lika med 5,0 centimeter som är lika med 0,050 meter",
+   "s": 389.7,
+   "e": 409.56
   },
   {
    "t": "energin E två är lika med 8,99 gånger 10 upphöjt till 9 gånger 6,0 gånger 10 upphöjt till minus 9 delat med 0,050 i kvadrat som är lika med 21 576 newton per coulomb parentesen åt vänster i P då fält går UT FRÅN plus slut parentes",
-   "s": 408.17,
-   "e": 426.5
+   "s": 409.56,
+   "e": 427.89
   },
   {
    "t": "Båda fälten verkar i samma riktning (åt vänster), så det sammanlagda fältet energin E fås genom att lägga ihop dessa.",
-   "s": 426.5,
-   "e": 434.56
+   "s": 427.89,
+   "e": 435.95
   },
   {
    "t": "energin E är lika med E ett plus E två som är lika med 179 800 plus 21 576 som är lika med 201 376 newton per coulomb som är ungefär lika med 200 000 newton per coulomb som är lika med 0,20 meganewton per coulomb åt vänster",
-   "s": 434.56,
-   "e": 453.7
+   "s": 435.95,
+   "e": 455.09
   },
   {
    "t": "Svar: 0,20 meganewton/C eller 2,0 gånger 10 upphöjt till 5 newton/C åt vänster.",
-   "s": 453.7,
-   "e": 462.45
+   "s": 455.09,
+   "e": 463.84
   }
  ]
 }

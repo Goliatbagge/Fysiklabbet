@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "d4f596589cba9e328838b20b525f8d0639b26430",
- "dur": 539.75,
+ "hash": "900085b99c2162f6d8b6df5a91b76c68069264fe",
+ "dur": 540.12,
  "segments": [
   {
    "t": "Cirkulär rörelse",
@@ -427,32 +427,32 @@
   {
    "t": "massan m gånger tyngdfaktorn g är lika med m gånger hastigheten v i kvadrat delat med r",
    "s": 493.15,
-   "e": 499.57
+   "e": 499.58
   },
   {
    "t": "Vi dividerar båda led med m och löser ut farten v.",
-   "s": 499.57,
-   "e": 503.91
+   "s": 499.58,
+   "e": 503.92
   },
   {
    "t": "tyngdfaktorn g är lika med hastigheten v i kvadrat delat med r vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r",
-   "s": 503.91,
-   "e": 521.67
+   "s": 503.92,
+   "e": 522.05
   },
   {
-   "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 0,80 meter",
-   "s": 503.91,
-   "e": 521.67
+   "t": "tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat r som är lika med 0,80 meter",
+   "s": 503.92,
+   "e": 522.05
   },
   {
    "t": "hastigheten v är lika med roten ur 9,82 gånger 0,80 som är lika med roten ur 7,856 som är lika med 2,803 meter per sekund som är ungefär lika med 2,8 meter per sekund",
-   "s": 521.67,
-   "e": 535.93
+   "s": 522.05,
+   "e": 536.31
   },
   {
    "t": "Svar: 2,8 meter per sekund",
-   "s": 535.93,
-   "e": 539.75
+   "s": 536.31,
+   "e": 540.12
   }
  ]
 }

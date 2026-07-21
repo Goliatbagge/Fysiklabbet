@@ -1,8 +1,8 @@
 {
- "id": "fy1-2.3",
+ "id": "fy1-2.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "8d8b5085e1c7931f947c3b8de2ad2bceeb5b2710",
- "dur": 326.12,
+ "hash": "91ea5649b17b632f0b155fff51f8473ac6f64882",
+ "dur": 326.53,
  "segments": [
   {
    "t": "Acceleration",
@@ -267,37 +267,37 @@
   {
    "t": "Vi ställer upp formeln för konstant acceleration och löser ut hastighetsändringen Δv.",
    "s": 262.5,
-   "e": 275.66
+   "e": 275.68
   },
   {
    "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t vilket är ekvivalent med att delta v är lika med a gånger delta t",
    "s": 262.5,
-   "e": 275.66
+   "e": 275.68
   },
   {
-   "t": "accelerationen a är lika med tyngdfaktorn g som är lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund",
-   "s": 275.66,
-   "e": 285.81
+   "t": "accelerationen a är lika med tyngdfaktorn g som är ungefär lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund",
+   "s": 275.68,
+   "e": 286.23
   },
   {
    "t": "delta hastigheten v är lika med parentesen minus 9,82 slut parentes gånger 2,0 som är lika med minus 19,64 meter per sekund",
-   "s": 285.81,
-   "e": 296.45
+   "s": 286.23,
+   "e": 296.89
   },
   {
    "t": "Eftersom stenen släpps från vila (v är lika med 0) och den minskar sin hastighet med 19,64 meter per sekund blir den slutgiltiga hastigheten",
-   "s": 296.45,
-   "e": 308.17
+   "s": 296.89,
+   "e": 308.57
   },
   {
    "t": "0 plus parentesen minus 19,64 slut parentes meter per sekund är lika med minus 19,64 meter per sekund som är ungefär lika med minus 20 meter per sekund",
-   "s": 308.12,
-   "e": 320.06
+   "s": 308.52,
+   "e": 320.47
   },
   {
    "t": "Svar: −20 meter per sekund alternativt 20 meter per sekund nedåt.",
-   "s": 320.06,
-   "e": 326.12
+   "s": 320.47,
+   "e": 326.53
   }
  ]
 }

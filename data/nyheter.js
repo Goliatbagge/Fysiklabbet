@@ -34,6 +34,139 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-24-fryst-optisk-fiber",
+    date: "2026-07-24",
+    time: "09:00",
+    title: "Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare",
+    deck: "En vätskefylld optisk fiber blir spröd och svårhanterlig i en vanlig labbmiljö. Genom att frysa den i flytande kväve har forskare vid Max Planck-institutet för ljusets fysik i Tyskland i stället gjort den robust — och samtidigt kopplat ihop ljus och ljud mer än tusen gånger starkare än i en vanlig glasfiber.",
+    category: "Vågor",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-24-fryst-optisk-fiber.jpg",
+    imageAlt: "Konstnärlig 3D-illustration av en genomskinlig, frostig optisk fiber där en röd ljusvåg färdas genom kärnan och fortsätter ut som en fri vågform i luften ovanför fibern.",
+    imageCredit: "Illustration: Philipp Denghe / Max Planck Institute for the Science of Light (pressbild)",
+    tags: ["vågor", "optik", "ljud", "brillouin-spridning", "materialfysik", "fotonik", "kvantteknik", "fiberoptik", "termodynamik", "fysik 2"],
+    sources: [
+      { name: "idw-online (pressmeddelande, Max Planck-institutet för ljusets fysik)", url: "https://idw-online.de/en/news874871" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-frozen-fiber-couples-strongly-standard.html" }
+    ],
+    research: { citation: "S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, ”Giant Brillouin gain in frozen CS₂ capillaries”, Optica 13, 1415–1422 (2026)", url: "https://doi.org/10.1364/OPTICA.600056" },
+    body: [
+      { type: "p", html: "En optisk fiber med flytande kärna är känslig utrustning — vätskan läcker, avdunstar och gör fibern svår att hantera utanför ett kontrollerat laboratorium. Forskare vid Max Planck-institutet för ljusets fysik (MPL) i Erlangen, tillsammans med Leibniz universitet i Hannover och Leibniz-institutet för fotonisk teknik i Jena, har löst det problemet på ett oväntat sätt: genom att frysa vätskan till is. Resultatet, publicerat i tidskriften <em>Optica</em> den 20&nbsp;juli, är en fiber som inte bara blir robust och lätthanterlig utan som dessutom kopplar samman ljus och ljud mer än 1&nbsp;000 gånger starkare än en vanlig glasfiber." },
+
+      { type: "h2", text: "En glaskapillär fylld med flytande koldisulfid" },
+      { type: "p", html: "Fibern är i grunden en tunn glaskapillär, fylld med den flytande kemikalien koldisulfid (CS₂) i stället för fiberns vanliga fasta glaskärna. En sådan vätskefylld fiber (förkortat LiCOF, liquid-core optical fiber) leder ljus ungefär som en vanlig fiber, men vätskans mjukare, mer eftergivliga struktur gör att ljuset kopplar mycket starkare till materialets naturliga ljudvågor än vad stelt glas tillåter. Kopplingen kallas Brillouin-Mandelstam-spridning, efter fysikerna Léon Brillouin och Leonid Mandelstam som båda förutspådde fenomenet på 1920-talet: ljus som färdas genom ett material kan växelverka med materialets egna, extremt högfrekventa ljudvågor — så kallat hypersoniskt ljud, med frekvenser i gigahertzområdet, långt bortom det mänskliga örats gräns på omkring 20&nbsp;kilohertz." },
+
+      { type: "h2", text: "Fryst till is — men fortfarande en ledare för både ljus och ljud" },
+      { type: "p", html: "Problemet med vätskefyllda fibrer har varit att de är bräckliga och svåra att koppla samman med annan utrustning. Forskarnas lösning var att kyla en sektion av fibern i flytande kväve, ner till −196&nbsp;°C — långt under koldisulfidens fryspunkt på omkring −112&nbsp;°C — så att vätskekärnan övergår i fast, glasartad is." },
+      { type: "quote", html: "”Den springande punkten är att den frusna delen av fibern behåller sin förmåga att leda ljus. Och inte nog med det — både den flytande och den frusna delen av fibern leder också hypersoniska ljudvågor.”", cite: "Simon Seiderer, doktorand och en av försteförfattarna, Max Planck-institutet för ljusets fysik" },
+      { type: "p", html: "Överraskningen var att kopplingen mellan ljus och ljud inte försvagades av frysningen — den förstärktes kraftigt. Forskargruppen mätte en Brillouin-förstärkning på 434&nbsp;W<sup>−1</sup>m<sup>−1</sup> (en förstärkningskoefficient per watt pumpeffekt och meter fiber), med en smal bandbredd på bara 24&nbsp;megahertz — mer än tusen gånger starkare än kopplingen i en vanlig, fast glasfiber." },
+      { type: "quote", html: "”Genom att frysa vätskekärnan har vi skapat en helt ny fysikalisk plattform som ger extrema olinjäriteter samtidigt som den är enkel att hantera.”", cite: "Birgit Stiller, forskningsgruppledare, Max Planck-institutet för ljusets fysik" },
+
+      { type: "h2", text: "Ett minne byggt av ljudvågor" },
+      { type: "p", html: "Som ett praktiskt test byggde forskarna ett så kallat optoakustiskt minne: en komponent som lagrar en ljussignal genom att tillfälligt omvandla den till en ljudvåg i fibern och sedan läsa av den igen. Tack vare den starka kopplingen kunde minnet drivas med omkring hundra gånger lägre effekt än jämförbara komponenter — ett steg mot fotonik som slösar betydligt mindre energi." },
+      { type: "quote", html: "”Att demonstrera ett väldigt effektivt optoakustiskt minne är ett fantastiskt första steg. Men den här nivån av koppling mellan ljus och ljud öppnar inte bara nya möjligheter för neuromorf databehandling, utan också för kvantinformationsbehandling, mikrovågsfotonik och högprecisionssensorer.”", cite: "Birgit Stiller, Max Planck-institutet för ljusets fysik" },
+
+      { type: "h2", text: "Vad kan tekniken användas till?" },
+      { type: "p", html: "Neuromorf databehandling är ett sätt att bygga datorkretsar som efterliknar hjärnans nätverk av nervceller, ofta med målet att spara ström jämfört med vanliga processorer. En stark, lätthanterlig koppling mellan ljus och ljud i en fiber som dessutom går att skarva ihop med vanlig fiberoptik kan också göra det enklare att bygga känsliga sensorer, eller att skicka de bräckliga kvanttillstånd som framtida kvantdatorer och kvantnätverk behöver utan att de störs av omgivningens brus." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Koldisulfid (CS₂) är en flyktig, brandfarlig vätska som fryser till en glasartad, transparent is vid omkring −112&nbsp;°C — långt över de −196&nbsp;°C forskarna kylde ner till med flytande kväve.",
+        "Brillouin-spridning förutspåddes teoretiskt redan 1922 av den franske fysikern Léon Brillouin, långt innan lasern ens hade uppfunnits.",
+        "Ljudvågorna som kopplas till ljuset i fibern svänger i gigahertzfrekvenser — mer än 100&nbsp;000 gånger snabbare än det mänskliga örat kan uppfatta som ton."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-07-23-heliumnova-kulor",
+    date: "2026-07-23",
+    time: "09:00",
+    title: "Astronomer löser 25 år gammal novagåta — och hittar mystiska ”kulor” av gas ingen sett förut",
+    deck: "V445 Puppis är den enda kända heliumnovan i Vintergatan — en stjärnexplosion år 2000 som till skillnad från alla andra kända novor helt saknade väte. En doktorand vid University of Warwick har nu, med hjälp av flera av världens största teleskop, bekräftat orsaken — och samtidigt upptäckt snabba klumpar av gas som aldrig setts i någon annan nova.",
+    category: "Astronomi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-23-heliumnova-kulor.jpg",
+    imageAlt: "Ett vetenskapligt falskfärgsfoto från rymdteleskopet Hubble som visar en symmetrisk, fjärilsformad struktur i orange och lila mot svart bakgrund — de två motsatta gasloberna kring stjärnsystemet V445 Puppis, med en skala som visar 0,1 ljusår.",
+    imageCredit: "Foto: NASA/ESA (rymdteleskopet Hubble), John Mills / University of Warwick (pressbild, NAM2026)",
+    tags: ["astronomi", "mekanik", "newtons lagar", "krafter", "novor", "vita dvärgar", "dubbelstjärnor", "spektroskopi", "doppler-effekt", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Royal Astronomical Society (pressmeddelande, NAM2026)", url: "https://ras.ac.uk/news-and-press/news/mystery-bullets-spotted-only-stellar-explosion-its-kind-milky-way" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-mysterious-gas-bullets-milky-helium.html" }
+    ],
+    research: null,
+    body: [
+      { type: "p", html: "I 25&nbsp;år har astronomer klurat på en gåta: varför saknade stjärnexplosionen som lyste upp stjärnbilden Aktern (Puppis) i december år 2000 helt och hållet väte, universums absolut vanligaste grundämne? Nu, vid Royal Astronomical Societys nationella astronomimöte (NAM2026) i Birmingham, har doktoranden John Mills vid University of Warwick lagt fram svaret — och samtidigt en ny gåta. Objektet, katalogiserat som V445&nbsp;Puppis, är den enda bekräftade heliumnovan i hela Vintergatan." },
+
+      { type: "h2", text: "En nova helt utan väte" },
+      { type: "p", html: "En vanlig nova uppstår när en vit dvärg — resten av en utbränd stjärna, ungefär jordstor men med en massa i klass med solens — suger gas från en närliggande följeslagarstjärna. Gasen, oftast väterik, lägger sig i ett allt tätare lager på den vita dvärgens yta tills trycket och temperaturen blir så höga att en okontrollerad kärnreaktion tänds: en nova. V445&nbsp;Puppis stack ut redan från början genom att dess spektrum helt saknade väte." },
+      { type: "quote", html: "”V445 Puppis har länge stuckit ut bland novor genom sin fullständiga avsaknad av väte. Hur kunde en sådan händelse vara helt utan universums vanligaste grundämne?”", cite: "John Mills, doktorand, University of Warwick" },
+
+      { type: "h2", text: "Dammet som till slut lade sig" },
+      { type: "p", html: "Svaret dröjde eftersom explosionen år 2000 spydde ut enorma mängder stoft, som i praktiken dolde stjärnsystemet bakom ett tjockt dammoln i över tjugo år. Först nu, när dammet gradvis klarnat, har Mills och kollegor kunnat kombinera bilder från rymdteleskopet Hubble, infraröda mätningar från europeiska sydobservatoriets Very Large Telescope, spektroskopi från Southern African Large Telescope och ljuskurvor från NASA:s planetjägare TESS för att lista ut vad som döljer sig i systemets mitt: en vit dvärg som stjäl material — inte från en vanlig stjärna, utan från en extremt sällsynt heliumstjärna, en stjärna som redan bränt slut på vätet i sin kärna. De två stjärnorna kretsar om varandra på bara 3,7&nbsp;dygn." },
+      { type: "quote", html: "”Explosionens utflöde har nu falnat tillräckligt för att vi ska kunna undersöka dess ursprung, och vi kan därför bekräfta att stjärnsystemet faktiskt består av en vit dvärg som suger material från en extremt sällsynt stjärntyp som kallas en heliumstjärna.”", cite: "John Mills, University of Warwick" },
+
+      { type: "h2", text: "Kulor av gas i nästan 3 % av ljusets hastighet" },
+      { type: "p", html: "Men bilderna avslöjade också något ingen väntat sig: kompakta klumpar av trolig syrerik gas, ”kulor”, som skjuts ut från explosionsplatsen i upp till 20&nbsp;miljoner miles i timmen — omkring 8&nbsp;940&nbsp;km/s, nästan 3,0&nbsp;% av ljusets hastighet. Sådana höghastighetsklumpar har aldrig setts i någon annan nova, vare sig väterik eller heliumrik." },
+      { type: "quote", html: "”Ursprunget till de här ’kulorna’ är ett mysterium. Vi misstänker att de uppstod efter själva utbrottet, men den här typen av ’kulor’ har inte observerats i någon annan nova.”", cite: "John Mills, University of Warwick" },
+
+      { type: "h2", text: "En gåta löst, en ny gåta född" },
+      { type: "p", html: "Fyndet presenterades vid NAM2026 och är ännu inte publicerat i en granskad vetenskaplig tidskrift, men bygger på flera års systematiska observationer med några av världens mest kraftfulla teleskop. Att äntligen kunna bekräfta vad som orsakade en av de mest särpräglade stjärnexplosioner som observerats i vår galax är i sig en framgång — men de snabba gaskulorna, och kraften som måste ha krävts för att accelerera dem till nästan tre procent av ljusets hastighet, ger astronomer en ny fråga att jaga svaret på." },
+      { type: "quote", html: "”De skyldiga bakom det här galaktiska utbrottet har varit ett ihållande mysterium under de senaste 25&nbsp;åren, vilket gör det väldigt spännande att kunna bekräfta att den här heliumnovan var resultatet av att en heliumstjärna föll ner på en vit dvärg.”", cite: "John Mills, University of Warwick" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "V445 Puppis ligger omkring 20&nbsp;000 ljusår bort i stjärnbilden Aktern (Puppis) — ljuset vi ser av explosionen lämnade stjärnan flera tusen år innan de första pyramiderna byggdes.",
+        "Den vita dvärgen i systemet väger mer än 1,3&nbsp;gånger så mycket som solen, nära gränsen (1,38&nbsp;solmassor) där en vit dvärg blir så tung att den kan kollapsa i en supernovaexplosion.",
+        "20&nbsp;miljoner miles i timmen motsvarar omkring 8&nbsp;940&nbsp;km/s — snabbt nog för att tillryggalägga ett helt varv runt jorden (40&nbsp;075&nbsp;km) på omkring 4,5&nbsp;sekunder."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-07-22-elektronfyren",
+    date: "2026-07-22",
+    title: "Forskare bygger en ”elektronfyr” — två laserfärger styr strömmen utan spänning",
+    deck: "Normalt krävs en pålagd elektrisk spänning för att driva en riktad ström av elektroner genom en halvledare. Fysiker vid University of Michigan har byggt en komponent där två samverkande färger av laserljus gör jobbet helt själva — och kan svepa strömmens riktning runt som ljuskäglan från en fyr.",
+    category: "Kvantfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-22-elektronfyren.jpg",
+    imageAlt: "Datorrenderad illustration av en genomskinlig, skålformad halvledarkomponent på ett kristallgitter, med två spiralformade rosa laserstrålar som möts ovanför den och en gyllene ström av ljuspartiklar som strömmar ut åt ena hållet mot en av fyra guldfärgade elektroder.",
+    imageCredit: "Illustration: Yiming Gong / University of Michigan (pressbild)",
+    tags: ["kvantfysik", "ellära", "optik", "halvledare", "laser", "interferens", "fotoström", "modern fysik", "fysik 2"],
+    sources: [
+      { name: "University of Michigan News (pressmeddelande)", url: "https://news.umich.edu/electron-lighthouse-illuminates-new-physics/" },
+      { name: "Newswise (referat av pressmeddelandet)", url: "https://www.newswise.com/articles/electron-lighthouse-illuminates-new-physics" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-lasers-aim-electron-currents-semiconductor.html" }
+    ],
+    research: { citation: "Y. Gong, K. Wang, S. T. Cundiff, ”Directional Photocurrent Generated by Quantum Interference Control”, Physical Review Letters (2026)", url: "https://doi.org/10.1103/3v91-5pzf" },
+    body: [
+      { type: "p", html: "För att få elektroner att strömma åt ett bestämt håll genom en halvledare brukar man behöva koppla på en elektrisk spänning, precis som i vilket batteridrivet kretskort som helst. Fysiker vid University of Michigan, ledda av professor Steven Cundiff och doktoranden Yiming Gong, har nu visat att det går att hoppa över spänningen helt. Genom att låta två olikfärgade laserpulser mötas i en halvledarkomponent kan de driva fram en riktad elektronström med enbart ljus — och genom att vrida ljusets polarisation kan de svepa strömmens riktning runt, ungefär som ljuskäglan från en fyr. Resultatet publicerades i <em>Physical Review Letters</em> den 21&nbsp;juli." },
+
+      { type: "h2", text: "Ljuset gör mer än att sätta fart på strömmen" },
+      { type: "p", html: "Att belysa en halvledare med laserljus och få loss strömförande elektroner är i sig inget nytt — det är själva grundprincipen bakom solceller. Det ovanliga är riktningen. Normalt sprids de elektroner som lossnar åt alla håll, utan någon föredragen riktning, om inget elektriskt fält finns där för att styra dem." },
+      { type: "quote", html: "”Så här fungerar det normalt inte … man kan faktiskt liksom spruta ut elektronerna i en bestämd riktning utan att lägga på något elektriskt fält.”", cite: "Steven Cundiff, professor i fysik, University of Michigan" },
+
+      { type: "h2", text: "Två vägar till samma mål" },
+      { type: "p", html: "Tricket bygger på kvantmekanisk interferens. Forskarna sköt in ljus i två färger samtidigt i en tunn skiva av aluminiumgalliumarsenid (Al<sub>0,28</sub>Ga<sub>0,72</sub>As), med pulser bara omkring 85&nbsp;femtosekunder korta. Elektronerna i materialet kan nå samma slutgiltiga energitillstånd via två olika ”vägar”: antingen genom att absorbera två fotoner av den ena färgen, eller tre fotoner av den andra. Eftersom de båda ljusfälten är i fas med varandra (koherenta) interfererar de två vägarna kvantmekaniskt — precis som två vågor i vatten kan förstärka eller släcka ut varandra beroende på hur vågtopparna möts. För elektroner som skulle röra sig i en viss riktning förstärker de båda vägarna varandra, medan de släcker ut varandra för elektroner på väg åt motsatt håll. Nettoresultatet blir en ström av elektroner i en bestämd riktning, utan att något elektriskt fält behövt knuffa på." },
+      { type: "quote", html: "”Ljuset slår inte bara på strömmen längre — det siktar den också.”", cite: "Steven Cundiff, University of Michigan" },
+
+      { type: "h2", text: "En roterbar elektronstråle" },
+      { type: "p", html: "Fenomenet, känt som kvantinterferenskontroll, demonstrerades första gången redan på 1990-talet i en enklare variant (en färg och dess overton). Den nya, skarpare versionen — där tre fotoner konkurrerar med två — förutspåddes teoretiskt av fysikern John Sipe vid University of Toronto, som visade att den skulle ge en betydligt smalare, mer riktningsbestämd elektronstråle än den enklare varianten." },
+      { type: "quote", html: "”Den här förutsägelsen var direkt drivande för mitt arbete.”", cite: "Yiming Gong, doktorand, University of Michigan" },
+      { type: "p", html: "Med hjälp av renrumsanläggningen Lurie Nanofabrication Facility byggde Gong en komponent med två par mikroskopiska elektroder, vinkelräta mot varandra, för att läsa av strömmen i två riktningar samtidigt. Genom att rotera polarisationen hos de två laserfärgerna 90&nbsp;grader kunde forskarna se strömsignalen försvinna från det ena elektrodparet och dyka upp i det andra — ett direkt bevis på att det verkligen är ljusets polarisation, inte något annat, som styr elektronernas färdriktning." },
+      { type: "quote", html: "”Vi kunde knacka på det optiska bordet och se strömmen svara omedelbart.”", cite: "Yiming Gong, University of Michigan" },
+
+      { type: "h2", text: "Grundforskning med möjliga tillämpningar" },
+      { type: "p", html: "Experimentet är i första hand ett bevis för ett tidigare oobserverat fysikaliskt fenomen, inte en färdig produkt. Men en ström som styrs enbart av ljusets färg och polarisation — utan ledningar, batterier eller pålagd spänning — skulle kunna bana väg för nya sätt att mäta och avbilda ljus, snabbare telekommunikation och komponenter som kodar mer information i en och samma ljussignal." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Att styra strömriktning med två ljusfärger utan spänning demonstrerades första gången redan 1996–1997, i en enklare variant med en foton mot två. Den nya versionen, med två fotoner mot tre, ger en betydligt skarpare riktad ”stråle” av elektroner.",
+        "En femtosekund är en miljondels miljarddels sekund (10<sup>−15</sup>&nbsp;s). De 85&nbsp;femtosekunder korta laserpulserna hinner knappt röra sig någonstans innan de är över — ljus färdas bara omkring 25&nbsp;mikrometer, ungefär en tredjedels hårstrå, på den tiden.",
+        "Namnet ”elektronfyr” syftar på att elektronstrålens riktning kan svepas runt kontinuerligt genom att man roterar ljusets polarisationsvinkel — precis som en fyrs roterande lampa sveper sin ljuskägla över havet."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-21-kolnanoror-kroppsvarme",
     date: "2026-07-21",
     title: "Forskare stoppar kolnanorören från att klumpa ihop sig — och slår rekord i att omvandla kroppsvärme till el",

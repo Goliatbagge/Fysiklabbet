@@ -5,6 +5,9 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-24 | `2026-07-24-fryst-optisk-fiber` | Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare | idw-online (pressmeddelande, Max Planck-institutet för ljusets fysik) / Phys.org / Optica (S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, 2026) |
+| 2026-07-23 | `2026-07-23-heliumnova-kulor` | Astronomer löser 25 år gammal novagåta — och hittar mystiska ”kulor” av gas ingen sett förut | Royal Astronomical Society (pressmeddelande, NAM2026) / Phys.org — presenterat av John Mills, University of Warwick, ej ännu peer review-publicerat |
+| 2026-07-22 | `2026-07-22-elektronfyren` | Forskare bygger en ”elektronfyr” — två laserfärger styr strömmen utan spänning | University of Michigan News (pressmeddelande) / Newswise / Phys.org / Physical Review Letters (Y. Gong, K. Wang, S. T. Cundiff, 2026) |
 | 2026-07-21 | `2026-07-21-kolnanoror-kroppsvarme` | Forskare stoppar kolnanorören från att klumpa ihop sig — och slår rekord i att omvandla kroppsvärme till el | Phys.org / Mirage News (referat av QUT:s pressmeddelande) / Angewandte Chemie International Edition (S. Zhou, X.-L. Shi, M. Li, W. Chen, T. Cao, N.-H. Li, M. Zhang, P. Sonar, Q. Liu, Z.-G. Chen, 2026) |
 | 2026-07-20 | `2026-07-20-morka-kometen-1998sh2` | En ”asteroid” har i 27 år dolt att den egentligen är en komet med sin egen lilla raketmotor | NASA/JPL (pressmeddelande) / Phys.org / Nature Astronomy (D. Farnocchia, O. R. Hainaut, D. Z. Seligman et al., 2026) |
 | 2026-07-19 | `2026-07-19-tour-de-france-aerodynamik` | Valet av följebil kan avgöra Tour de France — fysiker mäter den osynliga knuffen bakom cyklisten | Heriot-Watt University (pressmeddelande) / Phys.org / road.cc (B. Blocken, forskningsrapport, 2026) |
@@ -68,3 +71,12 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Nature News in i juli) — inget färskare och lika gymnasievänligt hittades i
 > mekanik/ellära/astronomi/partikelfysik/kärnfysik vid sökningen 2026-07-15, och
 > uppgiften tillät uttryckligen en nyhet från tidigare i veckan/månaden.
+>
+> Not: artiklarna 2026-07-22, 2026-07-23 och 2026-07-24 skrevs och committades
+> allihopa 2026-07-22 (användaren på semester några dagar) — tre helt skilda
+> ämnen (kvantfysik/ellära, astronomi, vågor/optik) för att undvika
+> upprepning. 07-23 och 07-24 har `time: "09:00"` satt och avslöjas av
+> datumgrinden i data/nyheter.js på sina respektive dagar utan att något
+> behöver köras lokalt. 2026-07-23-artikeln (V445 Puppis) bygger på en
+> presentation vid Royal Astronomical Societys NAM2026-konferens, ännu inte
+> peer review-publicerad — tydligt markerat i brödtexten; `research: null`.

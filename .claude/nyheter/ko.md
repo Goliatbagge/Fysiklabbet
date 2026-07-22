@@ -14,6 +14,37 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-22, research för tre förhandsskrivna dagar) — kan tas upp senare
+
+- **Astronomer protesterar mot godkänt tillstånd för en "rymdspegel"** —
+  regulatorer har godkänt ett tillstånd för en satellit som ska reflektera
+  solljus mot jorden nattetid (ljusföroreningsdebatt). Bra vinkel för optik/
+  reflektion/omloppsmekanik och en aktuell kontrovers, men kräver mer
+  research kring vilket företag/projekt och vilka fysikaliska detaljer
+  (albedo, omloppshöjd, skenbar magnitud) för att bli en solid artikel.
+  Källa: physicsworld.com (sök "astronomers express outrage space mirror
+  permit"). (tillagd 2026-07-22)
+- **Astronomer bevittnar ett återkommande utbrott från ett svart hål i
+  realtid** samt **Manet-nebulosan kan vara skådeplatsen för två
+  supernovor** — två färska phys.org-astronominyheter (kring 2026-07-21)
+  som inte hann researchas klart. Vi har redan tre astronominyheter i kön
+  för 07-22 till 07-24 (däribland V445 Puppis) — spara dessa till
+  astronomiklustret svalnat. Källor:
+  https://phys.org/news/2026-07-astronomers-recurring-black-hole-eruption.html ,
+  https://phys.org/news/2026-07-jellyfish-nebula-scene-stars-supernova.html
+  (tillagd 2026-07-22)
+- **Ny teknik låter LIGO se längre ut i universum** — färsk
+  gravitationsvågsnyhet (phys.org, ~2026-07-21), men vi har kört mycket
+  gravitationsvågs-/svart hål-astronomi senaste veckorna. Källa:
+  https://phys.org/news/2026-07-technique-enables-ligo-peer-distant.html
+  (tillagd 2026-07-22)
+- **Kvantavkänningsmikroskop kastar ljus över transistordesign** —
+  kvantsensor/halvledarnyhet, men vi publicerar redan en kvantfysik/
+  halvledarvinklad nyhet (elektronfyren) 2026-07-22 — spara till ämnet
+  känns fräscht igen. Källa:
+  https://phys.org/news/2026-07-quantum-microscope-illuminates-transistor.html
+  (tillagd 2026-07-22)
+
 ## Fynd som inte användes (2026-07-21) — kan tas upp senare
 
 - **En ordinär laptop löste ett kvantfysikproblem som troddes kräva en

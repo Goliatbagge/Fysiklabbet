@@ -39,6 +39,36 @@
         .glow-text {
             text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
+        /* ── Växlare mellan avsnittets två simuleringar ── */
+        .sim-switch-wrap { display: flex; flex-direction: column; align-items: flex-end; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
         .btn-glow {
             box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
             transition: all 0.3s ease;
@@ -1397,6 +1427,15 @@
             return (
                 <div className="dark-container min-h-screen">
                     <div className="max-w-6xl mx-auto py-8 px-4">
+                        {/* Växlare mellan avsnittets två simuleringar */}
+                        <div className="sim-switch-wrap" style={{ marginBottom: '0.75rem' }}>
+                            <span className="sim-switch-label">Simulering</span>
+                            <div className="sim-switch">
+                                <span className="sim-switch-active">Elektrisk influens</span>
+                                <a href="fysik1-bandgenerator-app.html">Bandgeneratorn</a>
+                            </div>
+                        </div>
+
                         {/* Header */}
                         <header className="text-center mb-8">
                             <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">

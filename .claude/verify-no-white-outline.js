@@ -53,6 +53,12 @@ const WHITELIST = {
         'stroke="#fff" strokeWidth="1.5"',     // ring runt mörk handtagscirkel
         '<g stroke="#fff" strokeWidth="2" strokeLinecap="round"', // vit upp/ned-pil-ikon i handtaget
     ],
+    // Vitt minusstreck INUTI den mättat blå elektronprickens canvas-textur —
+    // samma stil som teorifigurernas elektroner (vit symbol på blå cirkel),
+    // ingen halo mot papper.
+    'fysik1-bandgenerator-app.html': [
+        "ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 6; ctx.lineCap = 'round';",
+    ],
 };
 
 // Hämta alla *.html-filer direkt i projektroten (inte undermappar som

@@ -124,7 +124,7 @@ window.KATALOG = {
             number: 7,
             intro: 'Från statisk elektricitet till elektriska kretsar. Du lär dig om laddningar, Coulombs lag, ström, spänning och resistans — och hur de kopplas ihop i kretsar via Ohms och Kirchhoffs lagar.',
             sections: [
-              { num: '7.1', title: 'Laddning och influens', description: 'Hur en neutral aluminiumburk attraheras av en laddad stav.', href: 'fysik1-influens.html', icon: '🧲', keywords: ['ellära','elektricitet','laddning','influens','elektrostatik','neutral','statisk elektricitet'] },
+              { num: '7.1', title: 'Laddning och influens', description: 'Influens i burk och stav — eller ladda upp bandgeneratorns klot i 3D och se gnistor, flygande formar och hår som reser sig.', href: 'fysik1-influens.html', href2: 'fysik1-bandgenerator-app.html', icon: '🧲', keywords: ['ellära','elektricitet','laddning','influens','elektrostatik','neutral','statisk elektricitet','bandgenerator','van de graaff','gnista','urladdning','jordning','elektroner'] },
               { num: '7.2', title: 'Krafter mellan laddningar och Coulombs lag', description: 'Elektrisk kraft mellan två laddningar — flytta och se kraften ändras.', href: 'fysik1-coulombs-lag.html', icon: '⚡', keywords: ['ellära','elektricitet','coulomb','elektrostatik','laddning','kraft','avstånd'] },
               { num: '7.3', title: 'Elektrisk ström', description: 'Vad ström är och hur den mäts.', href: null, icon: '🔌', keywords: ['ellära','elektricitet','ström','ampere'] },
               { num: '7.4', title: 'Spänning', description: 'Spänning som energi per laddning.', href: null, icon: '🔋', keywords: ['ellära','elektricitet','spänning','volt','energi'] },

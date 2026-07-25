@@ -34,6 +34,46 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-25-varmestralar",
+    date: "2026-07-25",
+    title: "Forskare får värme att bete sig som ljus i en optisk fiber — vid rumstemperatur",
+    deck: "I vanliga material sprids värme åt alla håll, ungefär som ringar på vattnet. I en kristall av bor-arsenid har forskare vid University of California, Los Angeles i stället sett värmen forma sig till skarpa, riktade strålar — ett beteende som tidigare bara observerats nära den absoluta nollpunkten.",
+    category: "Termodynamik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-25-varmestralar.jpg",
+    imageAlt: "Ett falskfärgat värmekartsbild i orange och gult som visar hur värme sprider sig i ett kristallprov av bor-arsenid vid 300 K: sex skarpa, mörka strålar strålar ut symmetriskt från en central mörk punkt, med en skala som visar 100 nanometer.",
+    imageCredit: "Bild: H-Lab, UCLA Samueli School of Engineering (pressbild)",
+    tags: ["termodynamik", "vågor", "värme", "fononer", "kristallfysik", "halvledare", "bor-arsenid", "nanoteknik", "värmeledning", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "UCLA Samueli School of Engineering (pressmeddelande)", url: "https://newsroom.ucla.edu/releases/ucla-engineers-observe-quantum-heat-waves-room-temperature" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-quantum-room-temperature.html" }
+    ],
+    research: { citation: "M. Li, H. Wu, Z. Qin, C. Su, H. D. Nguyen, Y. Hu, ”Phonon focusing at room temperature”, Nature Physics (2026)", url: "https://doi.org/10.1038/s41567-026-03335-y" },
+    body: [
+      { type: "p", html: "Värme brukar sprida sig åt alla håll på en gång, ungefär som ringar på vattnet efter en sten. Men i en kristall av halvledarmaterialet bor-arsenid har forskare vid University of California, Los Angeles (UCLA) sett värmen bete sig helt annorlunda: den samlar sig i skarpa, riktade strålar som skjuter ut längs bestämda riktningar i kristallgittret — ett beteende som tidigare bara har setts vid temperaturer nära den absoluta nollpunkten. Nu har forskarna, ledda av professor Yongjie Hu, för första gången observerat fenomenet vid rumstemperatur. Studien publicerades i tidskriften <em>Nature Physics</em> den 23&nbsp;juli." },
+
+      { type: "h2", text: "Värme som ljud i ett fast ämne" },
+      { type: "p", html: "Värme i ett fast material transporteras av fononer — kvantiserade ljudvågor som uppstår när atomerna i kristallgittret vibrerar kollektivt. Ju varmare materialet är, desto mer vibrerar atomerna, och det är just vibrationerna som vandrar vidare genom kristallen och för värmen framåt. Normalt krockar fononerna hela tiden med varandra, med föroreningar och med gittrets egna oregelbundenheter. Varje krock slumpar om riktningen, och efter otaliga krockar har all information om ursprungsriktningen gått förlorad — värmen sprids diffust åt alla håll, ungefär som doften av nybryggt kaffe sprids i ett rum." },
+
+      { type: "h2", text: "Ett ovanligt tyst kristallgitter" },
+      { type: "p", html: "Bor-arsenid är ett undantag. Hus forskargrupp upptäckte redan 2018 att materialet har en ovanligt hög värmeledningsförmåga, och orsaken är att dess fononer sprids betydligt mer sällan än i de flesta andra material. Med en nyutvecklad metod för att kartlägga temperatur i nanoskala kunde forskarna nu jämföra hur värmen rör sig i vanliga material med hur den rör sig i bor-arsenid. I vanliga material bildade värmen cirkelrunda mönster, precis som väntat. I bor-arsenid bildade den i stället skarpa strålar som pekade längs kristallens egna symmetririktningar — sex, åtta eller fyra strålar, beroende på vilket kristallplan forskarna undersökte." },
+      { type: "quote", html: "”Det här är en grundläggande observation som gör att vi kan tänka nytt kring hur värme hanteras. Genom att göra det möjligt att styra, fokusera och omfördela värme med nanometerprecision vid rumstemperatur lägger upptäckten grunden för det forskarna kallar kvantvärmeteknik.”", cite: "Yongjie Hu, professor i maskin- och rymdteknik, UCLA" },
+
+      { type: "h2", text: "Som ljus i en optisk fiber" },
+      { type: "p", html: "Strålarna höll ihop över en sträcka av omkring en mikrometer — en tusendels millimeter — och forskarna tror att effekten kan sträcka sig ännu längre, uppemot tiotals mikrometer. Det är fortfarande en mikroskopisk sträcka, men fullt tillräcklig för många av dagens elektroniska, fotoniska och kvantbaserade komponenter. Forskarna liknar effekten vid hur en optisk fiber leder ljus längs en bestämd bana i stället för att låta det spridas fritt: i bor-arsenid tycks kristallgittret på samma sätt kunna leda värme längs förutbestämda banor. Att fenomenet visar sig hålla i sig vid 300&nbsp;K — omkring 27&nbsp;°C, alltså vanlig rumstemperatur — och inte bara nära 0&nbsp;K, är det som gör upptäckten praktiskt användbar." },
+
+      { type: "h2", text: "Svalare chip och känsligare sensorer" },
+      { type: "p", html: "Överhettning är ett växande problem i allt tätare packad elektronik, inte minst i kretsarna som driver AI-beräkningar. Kan värme styras längs bestämda banor i stället för att bara ledas bort efter att den redan spridit sig ut, öppnas nya sätt att kyla mikroelektronik, rymdelektronik och framtida kvantkomponenter mer effektivt. Hu pekar också på möjligheten att finjustera hur fononer växelverkar med elektroner och andra energibärare — en väg mot känsligare sensorer och stabilare kvantinformationsteknik." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Fononer är kvantiserade ljudvågor i ett fast material — ett sätt att beskriva hur atomerna i ett kristallgitter vibrerar kollektivt, med samma vågmatematik som beskriver andra vågrörelser.",
+        "300&nbsp;K motsvarar cirka 27&nbsp;°C. Fenomenet, som kallas fononfokusering, har tidigare bara observerats vid temperaturer nära absoluta nollpunkten, 0&nbsp;K (−273,15&nbsp;°C).",
+        "Bor-arsenid visade sig ha extremt hög värmeledningsförmåga redan 2018, i en studie från samma forskargrupp publicerad i tidskriften Science."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-24-fryst-optisk-fiber",
     date: "2026-07-24",
     time: "09:00",

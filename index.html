@@ -80,6 +80,8 @@
     <div id="root"></div>
 
     <script src="data/katalog.js"></script>
+    <script>document.write('<scr' + 'ipt src="data/simuleringar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -87,7 +89,6 @@
 
     <script type="text/babel" data-presets="react">
         const { useState, useEffect, useMemo, useRef } = React;
-        const KF = window.KATALOG_FLAT;
         const NYHETER = window.NYHETER || [];
 
         const MONTHS_SV = ['januari','februari','mars','april','maj','juni','juli',
@@ -120,14 +121,6 @@
             { date: '2026-07-03', href: 'fysik2-lenz-lag-app.html', title: 'Inducerad ström och Lenz lag', text: 'Ta tag i stavmagneten och närma dig eller avlägsna dig från slingan — galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Jämför magnetens fält med slingans inducerade fält, byt pol och se kraften som bromsar magneten.' },
             { date: '2026-07-03', href: 'fysik2-induktion-app.html', title: 'Induktion och inducerad spänning', text: 'Dra en ledare genom ett magnetfält och se den inducerade spänningen e = l · v · B uppstå — men bara medan ledaren rör sig! Elektronerna knuffas av den magnetiska kraften mot ena änden tills kraftjämvikt råder, och polariteten byter håll när rörelsen vänder.' },
         ];
-
-        const normalize = (text) => text.toLowerCase()
-            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
-            .replace(/é/g, 'e').replace(/è/g, 'e');
-
-        const HAYSTACKS = KF.map(sim =>
-            normalize([sim.title, sim.description, sim.course, sim.chapter, ...(sim.keywords || [])].join(' '))
-        );
 
         function Topbar() {
             return (
@@ -232,25 +225,10 @@
             const [open, setOpen] = useState(false);
             const wrapRef = useRef(null);
 
-            const matches = useMemo(() => {
-                const q = normalize(query.trim());
-                if (!q) return [];
-                const terms = q.split(/\s+/).filter(t => t.length > 0);
-                if (terms.length === 0) return [];
-                const filtered = KF.filter((_, i) => {
-                    const hay = HAYSTACKS[i] || '';
-                    return terms.every(t => hay.includes(t));
-                });
-                const out = [];
-                for (const sim of filtered) {
-                    const code = sim.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
-                    out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
-                    if (sim.href) {
-                        out.push({ ...sim, kind: 'sim', resultHref: sim.href });
-                    }
-                }
-                return out;
-            }, [query]);
+            // Sökindexet (data/sok.js) ger en teori-rad per avsnitt och en
+            // rad per simulering — avsnitt med två simuleringar ger alltså
+            // två sim-rader, var och en med sitt eget namn och sin egen länk.
+            const matches = useMemo(() => window.SOK_SEARCH(query), [query]);
 
             useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
 
@@ -291,7 +269,7 @@
                             <div className="lab-search-empty">Inget matchar "{query}"</div>
                         )}
                         {open && matches.map((sim, idx) => (
-                            <a key={`${sim.course}-${sim.num}-${sim.kind}`} href={sim.resultHref}
+                            <a key={`${sim.kind}-${sim.resultHref}-${idx}`} href={sim.resultHref}
                                 className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
                                 role="option" onMouseEnter={() => setActiveIdx(idx)}>
                                 <span className="lab-search-result-icon">
@@ -300,7 +278,7 @@
                                 <div>
                                     <div className="lab-search-result-title">
                                         <span className="lab-search-result-kind">
-                                            {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
+                                            {sim.kindLabel}
                                         </span>
                                         {sim.title}
                                     </div>

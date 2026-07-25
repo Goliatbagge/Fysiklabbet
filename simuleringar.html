@@ -100,6 +100,7 @@
 
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/simuleringar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -107,26 +108,10 @@
     <script type="text/babel" data-presets="react">
         const { useState, useEffect, useMemo, useRef } = React;
         const K = window.KATALOG;
-        const KF = window.KATALOG_FLAT;
-        const SIM_NAMES = window.SIM_NAMES || {};
 
         // En teorisektion (med href) → en eller flera listposter, namngivna
-        // efter vad simuleringen visar. Saknas namn används avsnittstiteln.
-        function simEntries(section) {
-            const v = SIM_NAMES[section.href];
-            const items = v == null ? [section.title] : (Array.isArray(v) ? v : [v]);
-            return items.map(it => (typeof it === 'string')
-                ? { name: it, desc: section.description, href: section.href, num: section.num }
-                : { name: it.name, desc: it.desc || section.description, href: it.href || section.href, num: section.num });
-        }
-
-        const normalize = (text) => text.toLowerCase()
-            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
-            .replace(/é/g, 'e').replace(/è/g, 'e');
-
-        const HAYSTACKS = KF.map(sim =>
-            normalize([sim.title, sim.description, sim.course, sim.chapter, ...(sim.keywords || [])].join(' '))
-        );
+        // efter vad simuleringen visar (data/sok.js, delad med sökrutan).
+        const simEntries = window.SIM_ENTRIES;
 
         function Topbar() {
             return (
@@ -144,25 +129,9 @@
             const [open, setOpen] = useState(false);
             const wrapRef = useRef(null);
 
-            const matches = useMemo(() => {
-                const q = normalize(query.trim());
-                if (!q) return [];
-                const terms = q.split(/\s+/).filter(t => t.length > 0);
-                if (terms.length === 0) return [];
-                const filtered = KF.filter((_, i) => {
-                    const hay = HAYSTACKS[i] || '';
-                    return terms.every(t => hay.includes(t));
-                });
-                const out = [];
-                for (const sim of filtered) {
-                    const code = sim.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
-                    out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
-                    if (sim.href) {
-                        out.push({ ...sim, kind: 'sim', resultHref: sim.href });
-                    }
-                }
-                return out;
-            }, [query]);
+            // Sökindexet (data/sok.js) ger en teori-rad per avsnitt och en rad
+            // per simulering — samma expansion som listan nedan använder.
+            const matches = useMemo(() => window.SOK_SEARCH(query), [query]);
 
             useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
 
@@ -203,7 +172,7 @@
                             <div className="lab-search-empty">Inget matchar "{query}"</div>
                         )}
                         {open && matches.map((sim, idx) => (
-                            <a key={`${sim.course}-${sim.num}-${sim.kind}`} href={sim.resultHref}
+                            <a key={`${sim.kind}-${sim.resultHref}-${idx}`} href={sim.resultHref}
                                 className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
                                 role="option" onMouseEnter={() => setActiveIdx(idx)}>
                                 <span className="lab-search-result-icon">
@@ -212,7 +181,7 @@
                                 <div>
                                     <div className="lab-search-result-title">
                                         <span className="lab-search-result-kind">
-                                            {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
+                                            {sim.kindLabel}
                                         </span>
                                         {sim.title}
                                     </div>

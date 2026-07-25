@@ -37,6 +37,12 @@ node .claude/verify-vinkelbagar.js
 # börja med "Rätt!"/"Fel!" (UI:t sätter etiketterna).
 node .claude/verify-exittickets.js
 
+# Verifiera sökindexet efter nya simuleringar eller ändringar i
+# data/simuleringar.js (KÖR FÖRE COMMIT!) — varje länkad simulering (även
+# href2 och djuplänkar) ska finnas som egen rad i sökrutan, med eget namn
+# och egna nyckelord. Se "Sökruta och nyckelord" nedan.
+node .claude/verify-sok.js
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -1124,10 +1130,40 @@ Markera först som klart när skärmdumpen passerar alla sju kontroller.
 
 ## Sökruta och nyckelord
 
-Startsidan (`index.html`) har en sökruta som filtrerar simuleringar i realtid.
-Varje sim finns i `SIMULATIONS`-arrayen i bottnen av `index.html`.
+Sökrutan i sidhuvudet (`index.html`, `katalog.html`, `simuleringar.html`)
+filtrerar i realtid. Alla tre sidorna använder **samma sökindex**,
+`data/sok.js`, som byggs av `data/katalog.js` + `data/simuleringar.js`.
+Ändra aldrig sökningen i bara en av sidorna — logiken bor i `sok.js`.
 
-Varje ny simulering MÅSTE få lämpliga `keywords`:
+Varje avsnitt expanderas till flera träffrader:
+
+- en **TEORI**-rad (alltid) → `katalog.html#<kurskod>-<num>`,
+- en **SIMULERING**-rad **per simulering** avsnittet har,
+- **REPETITION** för kapitelsammanfattningarnas länk till
+  `fysik-repetition.html`.
+
+### ⚠️ Varje enskild simulering ska gå att söka fram
+
+Har ett avsnitt **två simuleringar** (`href` + `href2` i `data/katalog.js`,
+se två-sim-mönstret) måste **båda** komma upp i sökrutan under sina **egna
+namn** — inte som en enda rad med avsnittets titel. Namn, beskrivning och
+länk hämtas ur `data/simuleringar.js` (`SIM_NAMES`), så:
+
+1. Lägg in en post i `SIM_NAMES` för avsnittets `href`, som en array med en
+   post per simulering: `{ name, desc, href, kw }` (`href` utelämnas för
+   avsnittets egen fil; ange den för den andra simuleringen).
+2. **`kw:` är obligatoriskt när avsnittet har flera simuleringar.** Ett
+   avsnitt med EN simulering ärver avsnittets `keywords` från
+   `data/katalog.js`; med FLERA ärvs de inte (annars skulle "bandgenerator"
+   också träffa "Elektrisk influens"). Ge då varje simulering egna nyckelord
+   — huvudområde, specifika begrepp och synonymer.
+3. Testa i sökrutan att **varje** simulering kommer upp på sitt eget namn
+   och på minst ett eget nyckelord.
+
+(Saknas `SIM_NAMES`-posten helt lägger `sok.js` ändå in `href2` som en rad
+med avsnittets titel — ett skyddsnät, inte ett godkänt slutläge.)
+
+Nyckelord (`keywords` i `data/katalog.js`, `kw` i `data/simuleringar.js`):
 - **Huvudområde** (ett av: `rörelse`, `krafter`, `densitet`, `tryck`,
   `värme`, `ellära`, `kärnfysik`, `vågor`, `optik`, `elektromagnetism`,
   `magnetism`, `modern fysik`, `kvantfysik`, `atomfysik`, `astronomi`,
@@ -1137,10 +1173,18 @@ Varje ny simulering MÅSTE få lämpliga `keywords`:
 - Gemener och svenska tecken — sökningen normaliserar å/ä/ö automatiskt.
 
 ```javascript
-{ title: "Halveringstid", description: "...", href: "fysik1-halveringstid.html",
-  icon: "⏳", course: "Fysik 1",
-  keywords: ["kärnfysik", "atomfysik", "halveringstid", "radioaktivitet",
-             "exponentiell", "sönderfall", "strålning"] }
+// data/katalog.js — avsnittet (två simuleringar: href + href2)
+{ num: '7.1', title: 'Laddning och influens', description: '…',
+  href: 'fysik1-influens.html', href2: 'fysik1-bandgenerator-app.html',
+  icon: '🧲', keywords: ['ellära','laddning','influens','bandgenerator', …] }
+
+// data/simuleringar.js — en post per simulering, med egna nyckelord
+'fysik1-influens.html': [
+  { name: 'Elektrisk influens', desc: '…',
+    kw: ['ellära','influens','elektrostatik','laddad stav', …] },
+  { name: 'Bandgeneratorn', href: 'fysik1-bandgenerator-app.html', desc: '…',
+    kw: ['ellära','bandgenerator','van de graaff','gnista','urladdning', …] },
+],
 ```
 
 ## Checklista: Ny simulering
@@ -1151,12 +1195,17 @@ Varje ny simulering MÅSTE få lämpliga `keywords`:
 4. [ ] Uppdatera `verify-navigation.js` med filnamnet
 5. [ ] Kör `node .claude/verify-navigation.js`
 6. [ ] Lägg till kort i `fysik1.html` eller `fysik2.html`
-7. [ ] Lägg till i `SIMULATIONS`-arrayen i `index.html` med `keywords`
-8. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (max 4–5 poster)
-9. [ ] Testa i webbläsare (normalt OCH fullskärm, bred OCH smal skärm)
-10. [ ] Verifiera decimalformatering (komma, inte punkt)
-11. [ ] Testa att sökningen hittar simuleringen via minst ett nyckelord
-12. [ ] Kör `node .claude/verify-no-white-outline.js` — inga vita konturer/
+7. [ ] Länka simuleringen i rätt avsnitt i `data/katalog.js` (`href`, eller
+    `href2` om avsnittet redan har en sim) med `keywords`
+8. [ ] Namnge simuleringen i `data/simuleringar.js` — och vid **två sims på
+    samma avsnitt**: en post per sim med eget `name`, `desc`, `href` och
+    `kw` (se "Sökruta och nyckelord")
+9. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (max 4–5 poster)
+10. [ ] Testa i webbläsare (normalt OCH fullskärm, bred OCH smal skärm)
+11. [ ] Verifiera decimalformatering (komma, inte punkt)
+12. [ ] Testa att sökningen hittar **varje enskild** simulering — på sitt
+    eget namn och på minst ett eget nyckelord
+13. [ ] Kör `node .claude/verify-no-white-outline.js` — inga vita konturer/
     halor runt etiketter eller pilar på ljus scenbakgrund
 
 ## Övningar

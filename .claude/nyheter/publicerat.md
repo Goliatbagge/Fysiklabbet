@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-25 | `2026-07-25-varmestralar` | Forskare får värme att bete sig som ljus i en optisk fiber — vid rumstemperatur | UCLA Samueli School of Engineering (pressmeddelande) / Phys.org / Nature Physics (M. Li, H. Wu, Z. Qin, C. Su, H. D. Nguyen, Y. Hu, 2026) |
 | 2026-07-24 | `2026-07-24-fryst-optisk-fiber` | Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare | idw-online (pressmeddelande, Max Planck-institutet för ljusets fysik) / Phys.org / Optica (S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, 2026) |
 | 2026-07-23 | `2026-07-23-heliumnova-kulor` | Astronomer löser 25 år gammal novagåta — och hittar mystiska ”kulor” av gas ingen sett förut | Royal Astronomical Society (pressmeddelande, NAM2026) / Phys.org — presenterat av John Mills, University of Warwick, ej ännu peer review-publicerat |
 | 2026-07-22 | `2026-07-22-elektronfyren` | Forskare bygger en ”elektronfyr” — två laserfärger styr strömmen utan spänning | University of Michigan News (pressmeddelande) / Newswise / Phys.org / Physical Review Letters (Y. Gong, K. Wang, S. T. Cundiff, 2026) |

@@ -14,6 +14,51 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-25) — kan tas upp senare
+
+- **2026 Europhysics Prize hedrar upptäckten av altermagnetism — en tredje
+  grundläggande magnetismklass** — Jairo Sinova (Johannes Gutenberg-
+  universitetet Mainz), Libor Šmejkal och Tomas Jungwirth (Fysikinstitutet,
+  Tjeckiska vetenskapsakademin) prisas för att ha visat att altermagneter
+  saknar nettomagnetisering (som antiferromagneter) men ändå har starkt
+  spinnpolariserade elektroniska egenskaper (som ferromagneter) — en tredje
+  magnetismtyp utöver de två man känt till i över hundra år. Utmärkt
+  ellära/magnetism-vinkel (kan konkretiseras via spinnpolariserad ström och
+  spinntronik) för en dag utan färskare kandidat. Källa:
+  https://phys.org/news/2026-07-prize-honors-discovery-altermagnetism-fundamental.html
+  (tillagd 2026-07-25)
+- **Oregelbunden mikroskalig ytstruktur minskar luftmotstånd med upp till
+  43,6 % — tvärtemot 80 års antagande om att släta ytor är bäst** —
+  Tohoku University (Aiko Yakeno m.fl.) har med ett magnetiskt
+  levitationssystem i vindtunnel (1 m-MSBS) visat att distribuerad
+  mikroskalig råhet (DMR) fördröjer övergången från laminär till turbulent
+  strömning i stället för att tidigarelägga den. Publicerad i Journal of
+  Fluid Mechanics redan 7 maj 2026, så inte en färsk upptäckt, men
+  omtäckt av phys.org/BetaNews/Tohoku:s eget pressrum kring 2026-07-22/23.
+  Stark mekanik/strömningsfysik-vinkel (gränsskikt, laminär/turbulent
+  strömning) men ligger tematiskt nära vår redan publicerade
+  följebils-aerodynamik-artikel om Tour de France (2026-07-19) — vänta
+  till aerodynamikämnet känns fräscht igen. Källor:
+  https://www.tohoku.ac.jp/en/press/microscale_roughness_breakthrough_defies_80_years_of_fluid_dynamics.html ,
+  https://phys.org/news/2026-07-microscale-roughness-breakthrough-defies-years.html
+  (tillagd 2026-07-25)
+- **Oxygen-/neonkollisioner i LHC visar nya tecken på kvark-gluonplasma**
+  — alla fyra stora LHC-experiment har hittat nya indikationer på att
+  syre- och neonkollisioner kan skapa samma extrema materietillstånd som
+  fanns under universums första mikrosekunder. Bra partikelfysik-vinkel,
+  men vi har redan täckt CERN/LHC två gånger (2026-07-02) och den kräver
+  rejäl förenkling av kvark-gluonplasma-begreppet. Källa:
+  https://phys.org/news/2026-07-oxygen-collisions-lhc-indications-extreme.html
+  (tillagd 2026-07-25)
+- **Kvantprickar avslöjar dolda ljusvågor på metallytor** — Osaka
+  Metropolitan University har utvecklat avbildningsteknik som gör
+  ytplasmoner (elektronvågor på en metallyta som kopplar till ljus)
+  synliga. Intressant optik/nanofysik-vinkel men tekniskt tungt
+  (ytplasmon-polaritoner) och vi har kört mycket kvant-/nanofysik senaste
+  veckorna. Källa:
+  https://phys.org/news/2026-07-quantum-dots-reveal-hidden-metal.html
+  (tillagd 2026-07-25)
+
 ## Fynd som inte användes (2026-07-22, research för tre förhandsskrivna dagar) — kan tas upp senare
 
 - **Astronomer protesterar mot godkänt tillstånd för en "rymdspegel"** —

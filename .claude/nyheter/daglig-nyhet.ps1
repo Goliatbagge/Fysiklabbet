@@ -47,7 +47,29 @@ if (HasTodayArticle) {
     return
 }
 
-# 2) Enkel las sa tva inloggningar inte kor samtidigt.
+# 2) Hogst tva tunga korningar per dag: forsta inloggningen + en retry (t.ex.
+#    om natverket inte hunnit upp). Utan detta skulle VARJE inloggning samma
+#    dag starta en ny full Claude-korning sa lange nagot gatt fel.
+$MaxForsok   = 2
+$ForsokFil   = Join-Path $LogDir ('.forsok-{0}' -f $Today)
+$AntalForsok = 0
+if (Test-Path $ForsokFil) {
+    $raw = (Get-Content -Path $ForsokFil -TotalCount 1)
+    [void][int]::TryParse($raw, [ref]$AntalForsok)
+}
+if ($AntalForsok -ge $MaxForsok) {
+    Log ("Redan {0} korning(ar) idag utan resultat - avstar till imorgon." -f $AntalForsok)
+    Log "=== Daglig nyhet: slut ==="
+    return
+}
+Set-Content -Path $ForsokFil -Value ($AntalForsok + 1) -Encoding ascii
+
+# Stada bort gamla forsoksmarkorer.
+Get-ChildItem -Path $LogDir -Filter '.forsok-*' -Force -ErrorAction SilentlyContinue |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-7) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 3) Enkel las sa tva inloggningar inte kor samtidigt.
 $Lock = Join-Path $LogDir '.lock'
 if (Test-Path $Lock) {
     $ageMin = ((Get-Date) - (Get-Item $Lock).LastWriteTime).TotalMinutes
@@ -61,7 +83,7 @@ if (Test-Path $Lock) {
 Set-Content -Path $Lock -Value $Today -Encoding ascii
 
 try {
-    # 3) Synka med GitHub forst (undvik push-konflikt).
+    # 4) Synka med GitHub forst (undvik push-konflikt).
     Log "git pull --rebase --autostash origin main"
     Invoke-Native 'git' @('pull','--rebase','--autostash','origin','main')
 
@@ -69,7 +91,7 @@ try {
         Log "Dagens nyhet kom in via pull. Inget mer att gora."
     }
     else {
-        # 4) Hitta claude.exe.
+        # 5) Hitta claude.exe.
         $Claude = Join-Path $env:USERPROFILE '.local\bin\claude.exe'
         if (-not (Test-Path $Claude)) { $Claude = 'claude' }
 
@@ -86,7 +108,7 @@ Publish ONLY ONE article. If today's date already exists in data/nyheter.js, mak
         Log ("Claude avslutade med kod {0}" -f $LASTEXITCODE)
     }
 
-    # 5) Skyddsnat: pusha eventuella ej pushade commits.
+    # 6) Skyddsnat: pusha eventuella ej pushade commits.
     $ahead = (& git rev-list --count 'origin/main..HEAD' 2>$null)
     if ($ahead -and ([int]$ahead -gt 0)) {
         Log ("Pushar {0} ej pushade commit(s)..." -f $ahead)

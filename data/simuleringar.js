@@ -10,12 +10,18 @@
 // Värde per href:
 //   'Namn'                              — en simulering (beskrivning ärvs från avsnittet)
 //   ['Namn A', 'Namn B']               — flera simuleringar (beskrivning ärvs)
-//   [{ name, desc, href }, …]          — flera, med egna beskrivningar/djuplänkar
+//   [{ name, desc, href, kw }, …]      — flera, med egna beskrivningar/djuplänkar
 //
 // href per post: utelämnas → avsnittets fil. Anges (t.ex. med ?sim=globe)
 // → raden öppnar exakt den simuleringen direkt.
 //
 // Saknas en href här används avsnittets titel som reserv.
+//
+// kw per post: nyckelord för sökrutan (data/sok.js). Ett avsnitt med EN
+// simulering ärver avsnittets keywords från data/katalog.js; har avsnittet
+// FLERA simuleringar ärvs de inte (annars skulle en sökning på
+// "bandgenerator" också träffa "Elektrisk influens") — ge då varje
+// simulering egna kw så att var och en går att hitta på sina begrepp.
 
 window.SIM_NAMES = {
   // ── Fysik nivå 1 ────────────────────────────────────────────────────────
@@ -24,8 +30,10 @@ window.SIM_NAMES = {
   'fysik1-vektoraddition-app.html': 'Vektoraddition',
   'fysik1-stracka-tid-app.html': 'Läge-tid-diagram',
   'fysik1-tyngdfaktor-jorden.html': [
-    { name: 'Fritt fall i vakuum', href: 'fysik1-tyngdfaktor-jorden.html?sim=vacuum', desc: 'Rosenblad och mynt i två glasrör — pumpa ut luften och se dem falla lika fort.' },
-    { name: 'Tyngdaccelerationen på jorden', href: 'fysik1-tyngdfaktor-jorden.html?sim=globe', desc: 'Hur tyngdaccelerationen g varierar mellan ekvator och poler på en roterande jord i 3D.' },
+    { name: 'Fritt fall i vakuum', href: 'fysik1-tyngdfaktor-jorden.html?sim=vacuum', desc: 'Rosenblad och mynt i två glasrör — pumpa ut luften och se dem falla lika fort.',
+      kw: ['krafter','tyngdfaktor','tyngdacceleration','fritt fall','vakuum','luftmotstånd','luftpump','glasrör','mynt','rosenblad','galilei','fjäder'] },
+    { name: 'Tyngdaccelerationen på jorden', href: 'fysik1-tyngdfaktor-jorden.html?sim=globe', desc: 'Hur tyngdaccelerationen g varierar mellan ekvator och poler på en roterande jord i 3D.',
+      kw: ['krafter','tyngdfaktor','tyngdacceleration','tyngdkraft','jorden','ekvator','pol','rotation','latitud','3d','gravitation'] },
   ],
   'fysik1-hastighet-tid-app.html': 'Hastighet-tid-diagram',
   'fysik1-acceleration-tid-app.html': 'Acceleration-tid-diagram',
@@ -38,14 +46,18 @@ window.SIM_NAMES = {
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',
   'fysik1-flytkraft-app.html': [
-    { name: 'Flyta eller sjunka', desc: 'Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.' },
-    { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Lyftkraft och undanträngt vatten med dynamometer.' },
+    { name: 'Flyta eller sjunka', desc: 'Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.',
+      kw: ['lyftkraft','flytkraft','arkimedes','densitet','vätska','vatten','flyta','sjunka','flytförmåga','undanträngd','block','massa','volym'] },
+    { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Lyftkraft och undanträngt vatten med dynamometer.',
+      kw: ['arkimedes','arkimedes princip','lyftkraft','flytkraft','dynamometer','undanträngt vatten','undanträngd','densitet','vätska'] },
   ],
   'fysik1-tryck.html': 'Ideala gaslagen',
   'fysik1-varme-app.html': 'Uppvärmning och avsvalning',
   'fysik1-influens.html': [
-    { name: 'Elektrisk influens', desc: 'Hur en neutral aluminiumburk attraheras av en laddad stav.' },
-    { name: 'Bandgeneratorn', href: 'fysik1-bandgenerator-app.html', desc: 'Ladda klotet i 3D — gnistor mot jordad kula, flygande aluminiumformar och hår som reser sig.' },
+    { name: 'Elektrisk influens', desc: 'Hur en neutral aluminiumburk attraheras av en laddad stav.',
+      kw: ['ellära','elektricitet','laddning','influens','elektrostatik','neutral','statisk elektricitet','aluminiumburk','laddad stav','elektroner','attraktion'] },
+    { name: 'Bandgeneratorn', href: 'fysik1-bandgenerator-app.html', desc: 'Ladda klotet i 3D — gnistor mot jordad kula, flygande aluminiumformar och hår som reser sig.',
+      kw: ['ellära','elektricitet','laddning','bandgenerator','van de graaff','gnista','urladdning','jordning','statisk elektricitet','elektrostatik','elektroner','3d','hår'] },
   ],
   'fysik1-coulombs-lag.html': 'Coulombs lag',
   'fysik1-ellara-app.html': 'Elektriska kretsar',

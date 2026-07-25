@@ -27,6 +27,8 @@
     <div id="root"></div>
 
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/simuleringar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
@@ -365,15 +367,6 @@
             return s ? s.replace(/\*/g, '') : s;
         }
 
-        const normalize = (text) => text.toLowerCase()
-            .replace(/\*/g, '')
-            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
-            .replace(/é/g, 'e').replace(/è/g, 'e');
-
-        const HAYSTACKS = KF.map(sim =>
-            normalize([sim.title, sim.description, sim.course, sim.chapter, ...(sim.keywords || [])].join(' '))
-        );
-
         function Topbar() {
             return (
                 <div className="lab-topbar">
@@ -459,27 +452,11 @@
             const [open, setOpen] = useState(false);
             const wrapRef = useRef(null);
 
-            const matches = useMemo(() => {
-                const q = normalize(query.trim());
-                if (!q) return [];
-                const terms = q.split(/\s+/).filter(t => t.length > 0);
-                if (terms.length === 0) return [];
-                const filtered = KF.filter((_, i) => {
-                    const hay = HAYSTACKS[i] || '';
-                    return terms.every(t => hay.includes(t));
-                });
-                // Expandera varje matchat avsnitt till två rader:
-                // en teori-länk (alltid) och en simulering-länk (om href finns).
-                const out = [];
-                for (const sim of filtered) {
-                    const code = courseCode(sim.course) || 'fy1';
-                    out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
-                    if (sim.href) {
-                        out.push({ ...sim, kind: 'sim', resultHref: sim.href });
-                    }
-                }
-                return out;
-            }, [query]);
+            // Sökindexet (data/sok.js) expanderar varje matchat avsnitt till en
+            // teori-rad (alltid) plus en rad per simulering avsnittet har — ett
+            // avsnitt med två simuleringar ger alltså två sim-rader, var och en
+            // med sitt eget namn och sin egen länk.
+            const matches = useMemo(() => window.SOK_SEARCH(query), [query]);
 
             useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
 
@@ -520,7 +497,7 @@
                             <div className="lab-search-empty">Inga simuleringar matchar "{query}"</div>
                         )}
                         {open && matches.map((sim, idx) => (
-                            <a key={`${sim.course}-${sim.num}-${sim.kind}`} href={sim.resultHref}
+                            <a key={`${sim.kind}-${sim.resultHref}-${idx}`} href={sim.resultHref}
                                 className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
                                 role="option" onMouseEnter={() => setActiveIdx(idx)}>
                                 <span className="lab-search-result-icon">
@@ -529,7 +506,7 @@
                                 <div>
                                     <div className="lab-search-result-title">
                                         <span className="lab-search-result-kind">
-                                            {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
+                                            {sim.kindLabel}
                                         </span>
                                         {emTitle(sim.title)}
                                     </div>

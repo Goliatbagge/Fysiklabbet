@@ -43,7 +43,10 @@ window.SIM_NAMES = {
   ],
   'fysik1-tryck.html': 'Ideala gaslagen',
   'fysik1-varme-app.html': 'Uppvärmning och avsvalning',
-  'fysik1-influens.html': 'Elektrisk influens',
+  'fysik1-influens.html': [
+    { name: 'Elektrisk influens', desc: 'Hur en neutral aluminiumburk attraheras av en laddad stav.' },
+    { name: 'Bandgeneratorn', href: 'fysik1-bandgenerator-app.html', desc: 'Ladda klotet i 3D — gnistor mot jordad kula, flygande aluminiumformar och hår som reser sig.' },
+  ],
   'fysik1-coulombs-lag.html': 'Coulombs lag',
   'fysik1-ellara-app.html': 'Elektriska kretsar',
   'fysik1-serie-parallell.html': 'Serie- och parallellkoppling',

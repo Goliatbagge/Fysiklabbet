@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandgeneratorn - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        #three-canvas-container {
+            width: 100%;
+            height: 560px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: grab;
+            background: #f3eee4;
+        }
+        #three-canvas-container:active { cursor: grabbing; }
+        #three-canvas-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .vdg-card {
+            background: var(--lab-bg-panel, #ffffff);
+            border: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+            border-radius: 12px;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) {
+            .sim-grid { grid-template-columns: 1fr; }
+            #three-canvas-container { height: 400px; }
+        }
+
+        /* ── Växlare mellan avsnittets två simuleringar ── */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
+        /* ── Knappar (Laborans papper) ── */
+        .vdg-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.55rem 1.3rem; border-radius: 8px;
+            font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.15s ease;
+        }
+        .vdg-btn-primary {
+            background: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-ink, #0f1620);
+        }
+        .vdg-btn-primary:hover { opacity: 0.88; }
+        .vdg-btn-secondary {
+            background: var(--lab-bg-panel, #ffffff);
+            color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .vdg-btn-secondary:hover { border-color: var(--lab-ink, #0f1620); }
+
+        input[type="range"] {
+            -webkit-appearance: none; appearance: none;
+            background: var(--lab-line, rgba(15,22,32,0.14));
+            border-radius: 4px; height: 6px; width: 100%;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--lab-ink, #0f1620); cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--lab-ink, #0f1620); cursor: pointer; border: none;
+        }
+
+        /* ── Formelkort ── */
+        .vdg-formula {
+            display: flex; align-items: center; justify-content: center;
+            flex-wrap: wrap; gap: 0.75rem 1.0rem;
+            font-family: 'Poppins', sans-serif; color: var(--lab-ink, #0f1620);
+            font-size: 1.05rem;
+        }
+        .vdg-formula .flbl {
+            display: block; font-size: 9px; letter-spacing: 0.06em;
+            text-transform: uppercase; font-weight: 600;
+            color: var(--lab-ink-muted, #5a6170); text-align: center;
+            line-height: 1.25; white-space: nowrap;
+        }
+        .vdg-frac { display: flex; flex-direction: column; align-items: center; }
+        .vdg-frac .num, .vdg-frac .den {
+            padding: 0.1rem 0.55rem; text-align: center; white-space: nowrap;
+        }
+        .vdg-frac .den { border-top: 2px solid currentColor; align-self: stretch; }
+        .vdg-op { font-weight: 500; }
+
+        /* ── Visningsval + styrknappar uppe till höger i scenen ── */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .vdg-btn {
+            width: 100%; justify-content: center;
+            padding: 0.45rem 0.9rem; font-size: 0.82rem;
+        }
+
+        /* Rader i den hopfällbara fullskärmspanelen */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; min-width: 60px; }
+        .fs-controls .fs-label { min-width: 120px; flex-shrink: 0; }
+        .fs-controls .fs-value { min-width: 60px; text-align: right; flex-shrink: 0; }
+
+        /* Ljudknapp: samma cirkelstil som fs-btn, placerad direkt under den */
+        body.lab-sim .vdg-sound-btn { top: 62px; }
+
+        /* Fullskärm: THREE.js-containern följer wrapperns 100vw/100vh */
+        body.lab-sim .scene-wrap:fullscreen #three-canvas-container,
+        body.lab-sim .scene-wrap:-webkit-full-screen #three-canvas-container {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+
+        .result-label {
+            font-size: 0.72rem; color: var(--lab-ink-muted, #5a6170);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .result-value {
+            font-family: 'Poppins', sans-serif; font-size: 1.05rem;
+            font-weight: 600; color: var(--lab-ink, #0f1620);
+        }
+    </style>
+</head>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                        <a href="katalog.html#ma1c">Matematik nivå 1c</a>
+                        <a href="katalog.html#ma2c">Matematik nivå 2c</a>
+                        <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
+                        <a href="katalog.html#ma4">Matematik fortsättning nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container" style="max-width:1300px; margin:0 auto; padding: 1.5rem 1rem 3rem;">
+        <div class="breadcrumb" style="margin-bottom:1rem;">
+            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / <span>Bandgeneratorn</span>
+        </div>
+
+        <section class="intro-section" style="margin-bottom:1.25rem;">
+            <div class="intro-head">
+                <div>
+                    <h1 class="section-title" style="font-size:1.8rem; font-weight:700; color:var(--lab-ink); margin-bottom:0.5rem;">Bandgeneratorn</h1>
+                    <p style="color:var(--lab-ink-muted); max-width:720px; line-height:1.7;">
+                        Starta motorn och se hur gummibandet bär elektroner upp till metallklotet, som
+                        laddas mer och mer negativt. Dra den jordade kulan mot klotet och se gnistan
+                        när urladdningen sker, lägg aluminiumformar på klotet, titta in i klotet i
+                        genomskärning — eller låt en modig figur hålla i klotet medan det laddas upp.
+                    </p>
+                </div>
+                <div class="sim-switch-wrap">
+                    <span class="sim-switch-label">Simulering</span>
+                    <div class="sim-switch">
+                        <a href="fysik1-influens.html">Elektrisk influens</a>
+                        <span class="sim-switch-active">Bandgeneratorn</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const formatNum = (num, decimals = 2) => {
+        if (!isFinite(num)) return '0';
+        const s = num.toFixed(decimals);
+        if (parseFloat(s) === 0) return '0';        // exakt/avrundat noll → "0"
+        return s.replace('.', ',');
+    };
+
+    // ─── Fysikaliska konstanter (visning) ────────────────────────────────────
+    const Q_MAX_UC = 3.0;               // klotets maximala laddning (µC, belopp)
+    const Q_E = 1.602e-19;              // elementarladdningen (C)
+
+    // ─── Geometri (världskoordinater) ────────────────────────────────────────
+    const DOME_C = { x: 0, y: 3.9, z: 0 };   // klotets centrum
+    const DOME_R = 1.15;                      // klotets radie
+    const BALL_R = 0.22;                      // jordade kulans radie
+    const BALL_Y = 3.9;                       // jordade kulans höjd
+    const BALL_X_CONTACT = DOME_R + BALL_R;   // kulan ligger dikt an mot klotytan
+    const BALL_X_MIN = BALL_X_CONTACT;
+    const BALL_X_MAX = 4.1;
+    const BALL_X_START = 3.4;
+
+    // ─── Gnistljud (Web Audio, syntetiserat — ingen ljudfil) ─────────────────
+    // Kort snärtande elektriskt knäpp: högpassfiltrerad brusskur + lågt "tock".
+    // Pedagogisk poäng: eftersom klotet laddas om mellan gnistorna hörs det
+    // tydligt att knäppen kommer tätare ju närmare den jordade kulan hålls.
+    class SparkSound {
+        constructor() {
+            this.ctx = null;
+            this.muted = false;
+        }
+        // Skapa/väck ljudkontexten — måste ske efter en användargest
+        unlock() {
+            if (!this.ctx) {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return;
+                this.ctx = new AC();
+            }
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+        }
+        // size 0..1: liten tät gnista (nära) → stor knall (långt avstånd).
+        // Enbart högpassfiltrerat brus — ljust och "elektriskt", ingen låg
+        // "trum"-komponent. Stora urladdningar: starkare, något fylligare och
+        // längre; små: korta svaga ljusa knäpp.
+        play(size = 1) {
+            if (this.muted) return;
+            this.unlock();
+            if (!this.ctx || this.ctx.state !== 'running') return;
+            const ctx = this.ctx;
+            const t = ctx.currentTime;
+            const s = Math.max(0, Math.min(1, size));
+
+            // Ultrakort ljus "spets" i attacken (själva blixt-knäppet)
+            const durA = 0.016;
+            const bufA = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * durA), ctx.sampleRate);
+            const dA = bufA.getChannelData(0);
+            for (let i = 0; i < dA.length; i++) {
+                dA[i] = (Math.random() * 2 - 1) * (1 - i / dA.length);
+            }
+            const srcA = ctx.createBufferSource();
+            srcA.buffer = bufA;
+            const hpA = ctx.createBiquadFilter();
+            hpA.type = 'highpass';
+            hpA.frequency.value = 7000;
+            const gA = ctx.createGain();
+            const vol = 0.10 + 0.85 * Math.pow(s, 1.3);
+            gA.gain.setValueAtTime(vol, t);
+            gA.gain.exponentialRampToValueAtTime(0.001, t + durA + 0.01);
+            srcA.connect(hpA); hpA.connect(gA); gA.connect(ctx.destination);
+            srcA.start(t);
+
+            // Kroppen: kort fräsande brusskur, ljusare ju mindre gnistan är
+            const durB = 0.05 + 0.13 * s;
+            const bufB = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * durB), ctx.sampleRate);
+            const dB = bufB.getChannelData(0);
+            for (let i = 0; i < dB.length; i++) {
+                dB[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / dB.length, 3);
+            }
+            const srcB = ctx.createBufferSource();
+            srcB.buffer = bufB;
+            const hpB = ctx.createBiquadFilter();
+            hpB.type = 'highpass';
+            hpB.frequency.value = 6200 - 2600 * s;
+            const gB = ctx.createGain();
+            gB.gain.setValueAtTime(vol * 0.8, t);
+            gB.gain.exponentialRampToValueAtTime(0.001, t + durB);
+            srcB.connect(hpB); hpB.connect(gB); gB.connect(ctx.destination);
+            srcB.start(t);
+        }
+    }
+
+    // ─── Three.js-scen ───────────────────────────────────────────────────────
+    class VdGScene {
+        constructor(container) {
+            this.container = container;
+            this.sound = new SparkSound();
+
+            // Simuleringstillstånd
+            this.q = 0;                  // normerad laddning 0..1
+            this.spark = { active: false, t: 0, cooldown: 0, regen: 0 };
+            this.beltPhase = 0;
+            this.spawnTimer = 0;
+            this.beltElectrons = [];     // {sprite, mode:'belt'|'jump', y, z, t}
+            this.prevFoilsOn = false;
+            this.prevPerson = false;
+            this.lastHairT = -1;
+            this.ui = {
+                running: false, speed: 1.0, showElectrons: true,
+                showField: false, cutaway: false, showPerson: false, foilsOn: false
+            };
+
+            this._initRenderer();
+            this._initScene();
+            this._initCamera();
+            this._initLights();
+            this._makeTextures();
+            this._buildFloor();
+            this._buildBase();
+            this._buildColumn();
+            this._buildBelt();
+            this._buildDome();
+            this._buildInterior();
+            this._buildDomeElectrons();
+            this._buildFieldArrows();
+            this._buildGroundAssembly();
+            this._buildFoils();
+            this._buildPerson();
+            this._buildSpark();
+            this._buildLabels();
+            this._initInteraction();
+
+            this._onResize = this._onResize.bind(this);
+            window.addEventListener('resize', this._onResize);
+        }
+
+        _initRenderer() {
+            this.renderer = new THREE.WebGLRenderer({ antialias: true });
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.renderer.shadowMap.enabled = true;
+            this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            this.renderer.localClippingEnabled = true;
+            this.renderer.setClearColor(0xf3eee4, 1);
+            const w = this.container.clientWidth || 700;
+            const h = this.container.clientHeight || 560;
+            this.renderer.setSize(w, h);
+            this.container.appendChild(this.renderer.domElement);
+        }
+
+        _initScene() {
+            this.scene = new THREE.Scene();
+        }
+
+        _initCamera() {
+            const w = this.container.clientWidth || 700;
+            const h = this.container.clientHeight || 560;
+            this.camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 100);
+            this._target = new THREE.Vector3(0.7, 2.85, 0);
+        }
+
+        _initLights() {
+            this.scene.add(new THREE.AmbientLight(0xffffff, 0.42));
+            const hemi = new THREE.HemisphereLight(0xffffff, 0xd8cdb4, 0.35);
+            this.scene.add(hemi);
+            const dir = new THREE.DirectionalLight(0xffffff, 0.75);
+            dir.position.set(6, 10, 5);
+            dir.castShadow = true;
+            dir.shadow.mapSize.set(2048, 2048);
+            dir.shadow.camera.left = -7; dir.shadow.camera.right = 7;
+            dir.shadow.camera.top = 8; dir.shadow.camera.bottom = -3;
+            this.scene.add(dir);
+        }
+
+        // ── Texturer (elektron-prick, glöd, bandränder) ──
+        _makeTextures() {
+            // Elektron: blå cirkel med vitt minusstreck (samma färgspråk som teorin)
+            const ec = document.createElement('canvas');
+            ec.width = ec.height = 64;
+            let ctx = ec.getContext('2d');
+            ctx.beginPath(); ctx.arc(32, 32, 26, 0, Math.PI * 2);
+            ctx.fillStyle = '#2563c9'; ctx.fill();
+            ctx.strokeStyle = 'rgba(15,22,32,0.55)'; ctx.lineWidth = 3; ctx.stroke();
+            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+            ctx.beginPath(); ctx.moveTo(19, 32); ctx.lineTo(45, 32); ctx.stroke();
+            this.electronTex = new THREE.CanvasTexture(ec);
+
+            // Glöd (radial gradient) för gnistans ändpunkter
+            const gc = document.createElement('canvas');
+            gc.width = gc.height = 64;
+            ctx = gc.getContext('2d');
+            const grad = ctx.createRadialGradient(32, 32, 2, 32, 32, 30);
+            grad.addColorStop(0, 'rgba(190,220,255,0.95)');
+            grad.addColorStop(0.4, 'rgba(140,185,255,0.45)');
+            grad.addColorStop(1, 'rgba(140,185,255,0)');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, 64, 64);
+            this.glowTex = new THREE.CanvasTexture(gc);
+
+            // Bandränder: mörkt gummi med svaga tvärlinjer
+            const mkBeltTex = () => {
+                const bc = document.createElement('canvas');
+                bc.width = 32; bc.height = 128;
+                const c2 = bc.getContext('2d');
+                c2.fillStyle = '#3a3f4a'; c2.fillRect(0, 0, 32, 128);
+                c2.strokeStyle = 'rgba(255,255,255,0.10)'; c2.lineWidth = 3;
+                for (let y = 8; y < 128; y += 24) {
+                    c2.beginPath(); c2.moveTo(0, y); c2.lineTo(32, y); c2.stroke();
+                }
+                const t = new THREE.CanvasTexture(bc);
+                t.wrapS = THREE.RepeatWrapping; t.wrapT = THREE.RepeatWrapping;
+                t.repeat.set(1, 3);
+                return t;
+            };
+            this.beltTexUp = mkBeltTex();
+            this.beltTexDown = mkBeltTex();
+
+            // Miljökubkarta för metallreflexer (blank järn-känsla): ljus takton,
+            // horisontlinje, mörkare golv och vita "fönsterstreck" som ger de
+            // skarpa speglingarna. Håller sig i pappersmiljöns varma toner.
+            const S = 128;
+            const face = (draw) => {
+                const c = document.createElement('canvas');
+                c.width = c.height = S;
+                draw(c.getContext('2d'));
+                return c;
+            };
+            const sideFace = (winX, winW) => face(g => {
+                const gr = g.createLinearGradient(0, 0, 0, S);
+                gr.addColorStop(0, '#f2ede2');
+                gr.addColorStop(0.46, '#c9c1af');
+                gr.addColorStop(0.52, '#847c6c');
+                gr.addColorStop(1, '#4e493f');
+                g.fillStyle = gr;
+                g.fillRect(0, 0, S, S);
+                if (winW > 0) {
+                    // Suddigt ljust "fönster" ovanför horisonten
+                    const wg = g.createLinearGradient(winX, 0, winX + winW, 0);
+                    wg.addColorStop(0, 'rgba(255,255,255,0)');
+                    wg.addColorStop(0.5, 'rgba(255,255,255,0.85)');
+                    wg.addColorStop(1, 'rgba(255,255,255,0)');
+                    g.fillStyle = wg;
+                    g.fillRect(winX, S * 0.04, winW, S * 0.42);
+                }
+            });
+            const topFace = face(g => {
+                g.fillStyle = '#f6f2e9';
+                g.fillRect(0, 0, S, S);
+                const rg = g.createRadialGradient(S / 2, S / 2, 4, S / 2, S / 2, S * 0.55);
+                rg.addColorStop(0, 'rgba(255,255,255,0.95)');
+                rg.addColorStop(1, 'rgba(255,255,255,0)');
+                g.fillStyle = rg;
+                g.fillRect(0, 0, S, S);
+            });
+            const bottomFace = face(g => {
+                g.fillStyle = '#57503f';
+                g.fillRect(0, 0, S, S);
+            });
+            this.envMap = new THREE.CubeTexture([
+                sideFace(S * 0.2, S * 0.22),   // +x
+                sideFace(S * 0.55, S * 0.16),  // -x
+                topFace,                       // +y
+                bottomFace,                    // -y
+                sideFace(S * 0.35, S * 0.26),  // +z
+                sideFace(0, 0),                // -z
+            ]);
+            this.envMap.needsUpdate = true;
+        }
+
+        _label(text, position, color = '#5a6170', size = 26, italic = false) {
+            const canvas = document.createElement('canvas');
+            const pad = 8;
+            const mctx = canvas.getContext('2d');
+            mctx.font = `${italic ? 'italic ' : ''}600 ${size}px Poppins, sans-serif`;
+            const w = Math.ceil(mctx.measureText(text).width) + pad * 2;
+            canvas.width = w; canvas.height = size + pad * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.font = `${italic ? 'italic ' : ''}600 ${size}px Poppins, sans-serif`;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+            const tex = new THREE.CanvasTexture(canvas);
+            const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
+            const sprite = new THREE.Sprite(mat);
+            const scale = 0.011 * size;
+            sprite.scale.set(scale * canvas.width / canvas.height, scale, 1);
+            sprite.position.copy(position);
+            this.scene.add(sprite);
+            return sprite;
+        }
+
+        // ── Golv ──
+        _buildFloor() {
+            const floor = new THREE.Mesh(
+                new THREE.CircleGeometry(14, 48),
+                new THREE.MeshPhongMaterial({ color: 0xe9e0cd, shininess: 4 })
+            );
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            this.scene.add(floor);
+        }
+
+        // ── Motorlåda ──
+        _buildBase() {
+            const mat = new THREE.MeshPhongMaterial({ color: 0x2e3850, shininess: 40 });
+            const base = new THREE.Mesh(new THREE.BoxGeometry(2.3, 1.0, 1.5), mat);
+            base.position.set(0, 0.5, 0);
+            base.castShadow = true; base.receiveShadow = true;
+            this.scene.add(base);
+
+            // Topplatta där kolonnen står
+            const plate = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.58, 0.58, 0.07, 32),
+                new THREE.MeshPhongMaterial({ color: 0x1f2740, shininess: 60 })
+            );
+            plate.position.set(0, 1.035, 0);
+            plate.castShadow = true;
+            this.scene.add(plate);
+
+            // Driftlampa på framsidan — lyser grönt när motorn är igång
+            this.ledMat = new THREE.MeshPhongMaterial({ color: 0x3c4458, emissive: 0x000000 });
+            const led = new THREE.Mesh(new THREE.SphereGeometry(0.055, 12, 12), this.ledMat);
+            led.position.set(-0.75, 0.72, 0.76);
+            this.scene.add(led);
+
+            // Vred
+            const knob = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.09, 0.09, 0.06, 20),
+                new THREE.MeshPhongMaterial({ color: 0xd8dade, shininess: 90 })
+            );
+            knob.rotation.x = Math.PI / 2;
+            knob.position.set(-0.45, 0.72, 0.76);
+            this.scene.add(knob);
+        }
+
+        // ── Genomskinlig isolerande kolonn ──
+        _buildColumn() {
+            const mat = new THREE.MeshPhongMaterial({
+                color: 0xcfd8e2, transparent: true, opacity: 0.18,
+                depthWrite: false, side: THREE.DoubleSide, shininess: 100
+            });
+            const col = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1.9, 32, 1, true), mat);
+            col.position.set(0, 2.0, 0);
+            this.scene.add(col);
+        }
+
+        // ── Gummibandet + rullar ──
+        _buildBelt() {
+            // Två band-lopp: upp-loppet (x=+0.16) och ner-loppet (x=-0.16)
+            const upMat = new THREE.MeshPhongMaterial({ map: this.beltTexUp, shininess: 8 });
+            const downMat = new THREE.MeshPhongMaterial({ map: this.beltTexDown, shininess: 8 });
+            const runGeo = new THREE.BoxGeometry(0.035, 2.4, 0.55);
+
+            const up = new THREE.Mesh(runGeo, upMat);
+            up.position.set(0.16, 2.65, 0);
+            this.scene.add(up);
+
+            const down = new THREE.Mesh(runGeo, downMat);
+            down.position.set(-0.16, 2.65, 0);
+            this.scene.add(down);
+
+            // Bandets vändor runt rullarna (öppna cylindrar)
+            const wrapMat = new THREE.MeshPhongMaterial({ color: 0x3a3f4a, shininess: 8, side: THREE.DoubleSide });
+            const wrapGeo = new THREE.CylinderGeometry(0.178, 0.178, 0.55, 20, 1, true);
+            const wrapLow = new THREE.Mesh(wrapGeo, wrapMat);
+            wrapLow.rotation.x = Math.PI / 2;
+            wrapLow.position.set(0, 1.45, 0);
+            this.scene.add(wrapLow);
+            const wrapHigh = new THREE.Mesh(wrapGeo, wrapMat);
+            wrapHigh.rotation.x = Math.PI / 2;
+            wrapHigh.position.set(0, 3.85, 0);
+            this.scene.add(wrapHigh);
+
+            // Rullarna (metall, med markeringsstreck så rotationen syns)
+            const rollMat = new THREE.MeshPhongMaterial({ color: 0x9aa3b0, shininess: 90 });
+            this.rollers = [];
+            [[0, 1.45, 0], [0, 3.85, 0]].forEach(p => {
+                const g = new THREE.Group();
+                const roll = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.62, 20), rollMat);
+                roll.rotation.x = Math.PI / 2;
+                g.add(roll);
+                const mark = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.02, 0.24, 0.64),
+                    new THREE.MeshPhongMaterial({ color: 0x4a5568 })
+                );
+                g.add(mark);
+                g.position.set(...p);
+                this.scene.add(g);
+                this.rollers.push(g);
+            });
+        }
+
+        // ── Metallklotet ──
+        _buildDome() {
+            this.cutPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), DOME_C.z);
+            this.domeMat = new THREE.MeshStandardMaterial({
+                color: 0xcfd3d9, metalness: 0.92, roughness: 0.22,
+                envMap: this.envMap, envMapIntensity: 1.0,
+                side: THREE.DoubleSide
+            });
+            this.dome = new THREE.Mesh(new THREE.SphereGeometry(DOME_R, 48, 32), this.domeMat);
+            this.dome.position.set(DOME_C.x, DOME_C.y, DOME_C.z);
+            this.dome.castShadow = true;
+            this.scene.add(this.dome);
+
+            // Snittkant (visas bara i genomskärning) — orienteras mot kameran varje bildruta
+            this.cutRim = new THREE.Mesh(
+                new THREE.TorusGeometry(DOME_R, 0.022, 10, 64),
+                new THREE.MeshPhongMaterial({ color: 0x6a7484, shininess: 30 })
+            );
+            this.cutRim.position.copy(this.dome.position);
+            this.cutRim.visible = false;
+            this.scene.add(this.cutRim);
+        }
+
+        // ── Insidan: metallkammen (vass kant) och dess fäste ──
+        _buildInterior() {
+            const metal = new THREE.MeshPhongMaterial({ color: 0xb9a24c, shininess: 110 });
+
+            // Kammen: tunt blad vars vassa kant ligger dikt an mot bandets upp-lopp
+            const blade = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.028, 0.44), metal);
+            blade.position.set(0.30, 3.68, 0);
+            blade.rotation.z = 0.18;
+            this.scene.add(blade);
+
+            // Sågtandad framkant (små koner mot bandet)
+            this.combTips = [];
+            for (let i = -2; i <= 2; i++) {
+                const tip = new THREE.Mesh(new THREE.ConeGeometry(0.018, 0.07, 6), metal);
+                tip.rotation.z = Math.PI / 2 - 0.18;
+                tip.position.set(0.215, 3.695, i * 0.09);
+                this.scene.add(tip);
+                this.combTips.push(tip);
+            }
+
+            // Fäste från kammen till klotets insida
+            const bracket = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.72, 10), metal);
+            bracket.position.set(0.68, 3.62, 0);
+            bracket.rotation.z = Math.PI / 2 - 0.18;
+            this.scene.add(bracket);
+
+            // Små gnistor mellan band och kam (syns i genomskärning)
+            // OBS: ingen AdditiveBlending — mot ljus pappersbakgrund blir
+            // additiva ljusa linjer osynliga. Mörk elblå med normal blending.
+            this.combSparkMat = new THREE.LineBasicMaterial({
+                color: 0x2563c9, transparent: true, opacity: 0, depthWrite: false
+            });
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3 * 6 * 3), 3));
+            this.combSpark = new THREE.LineSegments(geo, this.combSparkMat);
+            this.scene.add(this.combSpark);
+        }
+
+        // ── Elektroner jämnt fördelade på klotets yta ──
+        _buildDomeElectrons() {
+            this.domeElectrons = [];
+            const N = 110;
+            const golden = Math.PI * (3 - Math.sqrt(5));
+            for (let i = 0; i < N; i++) {
+                const y = 1 - (i / (N - 1)) * 2;
+                if (y < -0.82) continue;             // hoppa över hålet där kolonnen går in
+                const r = Math.sqrt(1 - y * y);
+                const th = golden * i;
+                const dir = new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r);
+                const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: this.electronTex, transparent: true, depthWrite: false
+                }));
+                sp.scale.set(0.13, 0.13, 1);
+                sp.position.copy(dir).multiplyScalar(DOME_R + 0.045)
+                    .add(new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z));
+                sp.userData.dir = dir;
+                sp.visible = false;
+                this.scene.add(sp);
+                this.domeElectrons.push(sp);
+            }
+            // Slumpa ordningen så att elektronerna dyker upp/försvinner
+            // spritt över hela ytan (inte nerifrån och upp)
+            for (let i = this.domeElectrons.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [this.domeElectrons[i], this.domeElectrons[j]] =
+                    [this.domeElectrons[j], this.domeElectrons[i]];
+            }
+        }
+
+        // ── Elektriska fältet: pilar radiellt IN mot det negativa klotet ──
+        _buildFieldArrows() {
+            this.fieldGroup = new THREE.Group();
+            const mat = new THREE.MeshPhongMaterial({
+                color: 0x233043, emissive: 0x101722, transparent: true, opacity: 0.85
+            });
+            this.fieldArrows = [];
+            const N = 26;
+            const golden = Math.PI * (3 - Math.sqrt(5));
+            for (let i = 0; i < N; i++) {
+                const y = 1 - (i / (N - 1)) * 2;
+                if (y < -0.35) continue;             // inga pilar rakt underifrån (kolonnen)
+                const r = Math.sqrt(1 - y * y);
+                const th = golden * i;
+                const dir = new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r).normalize();
+
+                // Lokal ram: +y pekar utåt (radiellt). Spetsen (konen) pekar mot klotet.
+                const g = new THREE.Group();
+                const head = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.16, 10), mat);
+                head.rotation.z = Math.PI;           // spets mot -y (in mot klotet)
+                head.position.y = 0.08;
+                g.add(head);
+                const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 8), mat);
+                shaft.position.y = 0.16 + 0.5;
+                g.add(shaft);
+
+                const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+                g.quaternion.copy(quat);
+                g.userData = { dir, shaft };
+                this.fieldGroup.add(g);
+                this.fieldArrows.push(g);
+            }
+            this.fieldLabel = this._label('E', new THREE.Vector3(DOME_C.x - 2.0, DOME_C.y + 1.7, 0), '#233043', 34, true);
+            this.fieldLabel.visible = false;
+            this.fieldGroup.visible = false;
+            this.scene.add(this.fieldGroup);
+        }
+
+        // ── Jordad kula + sladd + jordsymbol ──
+        _buildGroundAssembly() {
+            this.ballPos = new THREE.Vector3(BALL_X_START, BALL_Y, 0);
+
+            const mat = new THREE.MeshStandardMaterial({
+                color: 0xcfd3d9, metalness: 0.92, roughness: 0.22,
+                envMap: this.envMap, envMapIntensity: 1.0
+            });
+            this.ball = new THREE.Mesh(new THREE.SphereGeometry(BALL_R, 28, 20), mat);
+            this.ball.position.copy(this.ballPos);
+            this.ball.castShadow = true;
+            this.scene.add(this.ball);
+
+            // Osynlig större träffyta som gör kulan lätt att ta tag i
+            this.ballHit = new THREE.Mesh(
+                new THREE.SphereGeometry(0.5, 12, 10),
+                new THREE.MeshBasicMaterial({ visible: false })
+            );
+            this.ballHit.position.copy(this.ballPos);
+            this.scene.add(this.ballHit);
+
+            // Sladden byggs om när kulan flyttas
+            this.cableMat = new THREE.MeshPhongMaterial({ color: 0x2f7a4d, shininess: 30 });
+            this.cableMesh = null;
+            this._rebuildCable();
+
+            // Jordsymbol: stolpe + tre avsmalnande tvärslåar
+            const ink = new THREE.MeshPhongMaterial({ color: 0x2a3448 });
+            const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.42, 8), ink);
+            rod.position.set(4.55, 0.44, 0);
+            rod.castShadow = true;
+            this.scene.add(rod);
+            [[0.56, 0.24], [0.38, 0.15], [0.2, 0.06]].forEach(([w, y]) => {
+                const bar = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.035, w), ink);
+                bar.position.set(4.55, y, 0);
+                bar.castShadow = true;
+                this.scene.add(bar);
+            });
+
+            // Elektroner som leds bort genom sladden vid urladdning
+            this.cableElectrons = [];
+            for (let i = 0; i < 9; i++) {
+                const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: this.electronTex, transparent: true, depthWrite: false
+                }));
+                sp.scale.set(0.12, 0.12, 1);
+                sp.visible = false;
+                this.scene.add(sp);
+                this.cableElectrons.push(sp);
+            }
+        }
+
+        _rebuildCable() {
+            const p = this.ballPos;
+            const pts = [
+                new THREE.Vector3(p.x, p.y - BALL_R + 0.03, p.z),
+                new THREE.Vector3(p.x + 0.45, p.y - 1.5, 0),
+                new THREE.Vector3(p.x * 0.35 + 3.0, 0.55, 0),
+                new THREE.Vector3(4.42, 0.14, 0),
+                new THREE.Vector3(4.55, 0.1, 0)
+            ];
+            this.cableCurve = new THREE.CatmullRomCurve3(pts);
+            const geo = new THREE.TubeGeometry(this.cableCurve, 42, 0.028, 8, false);
+            if (this.cableMesh) {
+                this.cableMesh.geometry.dispose();
+                this.cableMesh.geometry = geo;
+            } else {
+                this.cableMesh = new THREE.Mesh(geo, this.cableMat);
+                this.cableMesh.castShadow = true;   // kulan skuggar — då ska sladden också göra det
+                this.scene.add(this.cableMesh);
+            }
+        }
+
+        // ── Aluminiumformar ──
+        _buildFoils() {
+            this.foilGroup = new THREE.Group();
+            this.foils = [];
+            const alu = new THREE.MeshStandardMaterial({
+                color: 0xe6e9ee, metalness: 0.85, roughness: 0.38,
+                envMap: this.envMap, envMapIntensity: 0.8, side: THREE.DoubleSide
+            });
+            for (let i = 0; i < 4; i++) {
+                const g = new THREE.Group();
+                // Upp-och-nervänd form: smal "botten" uppåt, bred kant nedåt
+                const cone = new THREE.Mesh(new THREE.CylinderGeometry(0.23, 0.35, 0.12, 26, 1, true), alu);
+                g.add(cone);
+                const lid = new THREE.Mesh(new THREE.CircleGeometry(0.23, 26), alu);
+                lid.rotation.x = -Math.PI / 2;
+                lid.position.y = 0.06;
+                g.add(lid);
+                g.children.forEach(m => { m.castShadow = true; });
+
+                // Ett par elektroner som "smittar över" på formen
+                const el = [];
+                for (let k = 0; k < 2; k++) {
+                    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                        map: this.electronTex, transparent: true, depthWrite: false
+                    }));
+                    sp.scale.set(0.11, 0.11, 1);
+                    sp.position.set(k === 0 ? 0.3 : -0.28, k === 0 ? 0.02 : -0.03, 0.12);
+                    sp.visible = false;
+                    g.add(sp);
+                    el.push(sp);
+                }
+                g.userData = {
+                    state: 'stacked',
+                    threshold: [0.40, 0.50, 0.62, 0.74][i],
+                    vel: new THREE.Vector3(), angVel: new THREE.Vector3(),
+                    electrons: el
+                };
+                this.foilGroup.add(g);
+                this.foils.push(g);
+            }
+            this._stackFoils();
+            this.foilGroup.visible = false;
+            this.scene.add(this.foilGroup);
+        }
+
+        _stackFoils() {
+            this.foils.forEach((g, i) => {
+                g.position.set(DOME_C.x, DOME_C.y + DOME_R + 0.045 + i * 0.055, DOME_C.z);
+                g.rotation.set(0, 0, 0);
+                g.userData.state = 'stacked';
+                g.userData.vel.set(0, 0, 0);
+                g.userData.angVel.set(0, 0, 0);
+                g.visible = true;
+            });
+        }
+
+        // ── Figuren med långt hår ──
+        _buildPerson() {
+            const P = this.personG = new THREE.Group();
+            P.position.set(-1.95, 0, 0);
+
+            const skin = new THREE.MeshPhongMaterial({ color: 0xeec39a, shininess: 18 });
+            const sweater = new THREE.MeshPhongMaterial({ color: 0x557a5e, shininess: 12 });
+            const jeans = new THREE.MeshPhongMaterial({ color: 0x33415c, shininess: 10 });
+            const shoe = new THREE.MeshPhongMaterial({ color: 0x2a2f3a, shininess: 30 });
+
+            const add = (mesh) => { mesh.castShadow = true; P.add(mesh); return mesh; };
+
+            // Isolerande pall
+            const stoolMat = new THREE.MeshPhongMaterial({ color: 0xcbbfa4, shininess: 25 });
+            const stool = add(new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.4, 0.78, 22), stoolMat));
+            stool.position.y = 0.39;
+            const stoolTop = add(new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.06, 22), stoolMat));
+            stoolTop.position.y = 0.81;
+
+            // Skor + ben
+            [-0.12, 0.12].forEach(z => {
+                const s = add(new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.09, 0.13), shoe));
+                s.position.set(0.03, 0.885, z);
+                const leg = add(new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.085, 0.75, 12), jeans));
+                leg.position.set(0, 1.3, z);
+            });
+
+            // Kropp
+            const torso = add(new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.26, 1.0, 18), sweater));
+            torso.position.set(0, 2.16, 0);
+            const shoulders = add(new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 12), sweater));
+            shoulders.position.set(0, 2.62, 0);
+            shoulders.scale.set(1, 0.7, 1.35);
+
+            // Armar (cylinder mellan två punkter)
+            const limb = (a, b, r, mat) => {
+                const va = new THREE.Vector3(...a), vb = new THREE.Vector3(...b);
+                const d = vb.clone().sub(va);
+                const m = add(new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 10), mat));
+                m.position.copy(va).add(d.clone().multiplyScalar(0.5));
+                m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+                return m;
+            };
+
+            // Arm som håller i klotet (mot +x): axel → armbåge → hand på klotytan
+            const shoulderA = [0.05, 2.55, 0.24];
+            const elbowA = [0.5, 2.85, 0.26];
+            const handA = [1.0, 3.26, 0.12];   // världens (-0.95, 3.26, 0.12)
+            limb(shoulderA, elbowA, 0.062, sweater);
+            limb(elbowA, handA, 0.055, sweater);
+            const hand1 = add(new THREE.Mesh(new THREE.SphereGeometry(0.075, 12, 10), skin));
+            hand1.position.set(...handA);
+
+            // Hängande arm
+            const shoulderB = [0.0, 2.55, -0.26];
+            const elbowB = [0.03, 2.12, -0.31];
+            const handB = [0.09, 1.72, -0.28];
+            limb(shoulderB, elbowB, 0.062, sweater);
+            limb(elbowB, handB, 0.055, sweater);
+            const hand2 = add(new THREE.Mesh(new THREE.SphereGeometry(0.075, 12, 10), skin));
+            hand2.position.set(...handB);
+
+            // Huvud + ansikte (vänt mot generatorn, +x)
+            this.headC = new THREE.Vector3(0.06, 2.98, 0);
+            const head = add(new THREE.Mesh(new THREE.SphereGeometry(0.23, 20, 16), skin));
+            head.position.copy(this.headC);
+            [-0.075, 0.075].forEach(z => {
+                const eye = new THREE.Mesh(new THREE.SphereGeometry(0.022, 8, 8),
+                    new THREE.MeshPhongMaterial({ color: 0x22262e }));
+                eye.position.set(this.headC.x + 0.2, this.headC.y + 0.04, z);
+                P.add(eye);
+            });
+
+            // Hår: många strån som LineSegments — uppdateras med laddningen
+            this.hairStrands = [];
+            const NH = 130, SEGS = 8;
+            for (let i = 0; i < NH; i++) {
+                // Slumpad riktning på övre delen av huvudet, ansiktet lämnas fritt
+                let dir;
+                for (let tries = 0; tries < 40; tries++) {
+                    const u = Math.random() * 2 - 1;
+                    const th = Math.random() * Math.PI * 2;
+                    const r = Math.sqrt(1 - u * u);
+                    dir = new THREE.Vector3(r * Math.cos(th), u, r * Math.sin(th));
+                    const faceAngle = dir.angleTo(new THREE.Vector3(1, 0, 0));
+                    if (dir.y > -0.05 && (faceAngle > 1.0 || dir.y > 0.6)) break;
+                }
+                const jitter = new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.3,
+                    (Math.random() - 0.5) * 0.3,
+                    (Math.random() - 0.5) * 0.3
+                );
+                this.hairStrands.push({
+                    root: this.headC.clone().add(dir.clone().multiplyScalar(0.225)),
+                    dirCharged: dir.clone().add(jitter).normalize(),
+                    dirRest: dir.clone().multiplyScalar(0.32).add(new THREE.Vector3(0, -1, 0)).normalize(),
+                    len: 0.5 + Math.random() * 0.24,
+                    phase: Math.random()
+                });
+            }
+            const hairGeo = new THREE.BufferGeometry();
+            this.hairPos = new Float32Array(NH * SEGS * 2 * 3);
+            hairGeo.setAttribute('position', new THREE.BufferAttribute(this.hairPos, 3));
+            this.hairSegs = SEGS;
+            this.hairLines = new THREE.LineSegments(hairGeo,
+                new THREE.LineBasicMaterial({ color: 0x5b3f28 }));
+            P.add(this.hairLines);
+            this._updateHair(0);
+
+            // Elektroner som sprids över figuren när klotet laddas
+            this.personElectrons = [];
+            const anchors = [
+                [1.0, 3.26, 0.2], [0.62, 2.95, 0.3], [0.2, 2.6, 0.3],
+                [0.05, 2.2, 0.3], [0.3, 3.35, 0.1], [-0.15, 3.2, -0.15],
+                [0.0, 2.9, -0.3], [-0.2, 2.75, 0.15], [0.1, 1.85, -0.32], [0.0, 1.6, 0.22]
+            ];
+            anchors.forEach(a => {
+                const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: this.electronTex, transparent: true, depthWrite: false
+                }));
+                sp.scale.set(0.11, 0.11, 1);
+                sp.position.set(...a);
+                sp.visible = false;
+                P.add(sp);
+                this.personElectrons.push(sp);
+            });
+
+            P.visible = false;
+            this.scene.add(this.personG);
+        }
+
+        _updateHair(t) {
+            const S = this.hairSegs;
+            let o = 0;
+            const down = new THREE.Vector3(0, -1, 0);
+            const p = new THREE.Vector3(), d = new THREE.Vector3(), pn = new THREE.Vector3();
+            for (const st of this.hairStrands) {
+                const tk = Math.max(0, Math.min(1, t * 1.3 - st.phase * 0.22));
+                d.copy(st.dirRest).lerp(st.dirCharged, tk).normalize();
+                const droop = (1 - tk) * 1.5;
+                const ds = st.len / S;
+                p.copy(st.root);
+                for (let i = 0; i < S; i++) {
+                    pn.copy(p).addScaledVector(d, ds);
+                    this.hairPos[o++] = p.x; this.hairPos[o++] = p.y; this.hairPos[o++] = p.z;
+                    this.hairPos[o++] = pn.x; this.hairPos[o++] = pn.y; this.hairPos[o++] = pn.z;
+                    p.copy(pn);
+                    d.addScaledVector(down, droop * ds).normalize();
+                }
+            }
+            this.hairLines.geometry.attributes.position.needsUpdate = true;
+            this.lastHairT = t;
+        }
+
+        // ── Gnistan ──
+        _buildSpark() {
+            this.sparkLines = [];
+            for (let i = 0; i < 3; i++) {
+                const geo = new THREE.BufferGeometry();
+                geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(14 * 3), 3));
+                // Mörk elblå kärna + ljusare sidoblixtar, normal blending
+                // (additiv blending syns inte mot ljus pappersbakgrund)
+                const mat = new THREE.LineBasicMaterial({
+                    color: i === 0 ? 0x1d4ed8 : 0x5b8ee6, transparent: true, opacity: 0,
+                    depthWrite: false
+                });
+                const line = new THREE.Line(geo, mat);
+                line.visible = false;
+                this.scene.add(line);
+                this.sparkLines.push(line);
+            }
+            this.sparkGlows = [0, 1].map(() => {
+                const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: this.glowTex, transparent: true, opacity: 0,
+                    color: 0x2563c9, depthWrite: false
+                }));
+                sp.scale.set(0.55, 0.55, 1);
+                sp.visible = false;
+                this.scene.add(sp);
+                return sp;
+            });
+        }
+
+        _regenSpark() {
+            const c = new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z);
+            const dir = this.ballPos.clone().sub(c).normalize();
+            const a = c.clone().addScaledVector(dir, DOME_R);
+            const b = this.ballPos.clone().addScaledVector(dir, -BALL_R);
+            const seg = b.clone().sub(a);
+            const len = seg.length();
+            const perp1 = new THREE.Vector3(-dir.y, dir.x, 0).normalize();
+            const perp2 = dir.clone().cross(perp1).normalize();
+
+            this.sparkLines.forEach((line, li) => {
+                const pos = line.geometry.attributes.position.array;
+                const N = 14;
+                for (let i = 0; i < N; i++) {
+                    const t = i / (N - 1);
+                    const amp = Math.sin(t * Math.PI) * len * 0.16;
+                    const p = a.clone().addScaledVector(seg, t)
+                        .addScaledVector(perp1, (Math.random() - 0.5) * amp)
+                        .addScaledVector(perp2, (Math.random() - 0.5) * amp * 0.6);
+                    pos[i * 3] = p.x; pos[i * 3 + 1] = p.y; pos[i * 3 + 2] = p.z;
+                }
+                line.geometry.attributes.position.needsUpdate = true;
+            });
+            this.sparkGlows[0].position.copy(a);
+            this.sparkGlows[1].position.copy(b);
+        }
+
+        _triggerSpark() {
+            const size = this.q;                       // urladdningens storlek
+            this.spark.active = true;
+            this.spark.t = 0;
+            this.spark.regen = 0;
+            this.spark.size = size;
+            this.spark.dur = 0.10 + 0.34 * size;       // liten gnista = kort blink
+            this.spark.cd = 0.05 + 0.30 * size;        // ...och kort paus → tätt smatter nära
+            this._regenSpark();
+            this.sparkLines.forEach(l => { l.visible = true; });
+            this.sparkGlows.forEach(g => {
+                g.visible = true;
+                const sc = 0.25 + 0.45 * size;
+                g.scale.set(sc, sc, 1);
+            });
+            // Stor urladdning (långt avstånd, mycket laddning) → starkare knall;
+            // liten (nära) → svagt ljust knäpp
+            this.sound.play(size);
+        }
+
+        // ── Etiketter ──
+        _buildLabels() {
+            this._label('Metallklot', new THREE.Vector3(-1.7, 5.05, 0));
+            this._label('Gummiband', new THREE.Vector3(1.25, 2.3, 0));
+            this._label('Jord', new THREE.Vector3(4.6, 0.85, 0));
+            this.ballLabel = this._label('Jordad kula — dra mig!', new THREE.Vector3(0, 0, 0), '#2f7a4d', 24);
+            this.combLabel = this._label('Metallkam', new THREE.Vector3(1.85, 4.52, 0));
+            this.combLabel.visible = false;
+            // Tunn pekarlinje från etiketten ner till kammen
+            const ptrGeo = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(1.5, 4.42, 0), new THREE.Vector3(0.5, 3.76, 0)
+            ]);
+            this.combPointer = new THREE.Line(ptrGeo,
+                new THREE.LineBasicMaterial({ color: 0x5a6170, transparent: true, opacity: 0.7 }));
+            this.combPointer.visible = false;
+            this.scene.add(this.combPointer);
+            this.stoolLabel = this._label('Isolerande pall', new THREE.Vector3(-3.5, 0.14, 0), '#5a6170', 22);
+            this.stoolLabel.visible = false;
+        }
+
+        // ── Interaktion: orbit, zoom, dra kulan ──
+        _initInteraction() {
+            this._sph = { theta: 0.42, phi: 1.12 };
+            this._radius = 9.2;
+            this._dragMode = null;       // 'orbit' | 'ball' | 'pinch'
+            this._prev = { x: 0, y: 0 };
+            this._pinchDist = 0;
+            this.raycaster = new THREE.Raycaster();
+
+            const el = this.renderer.domElement;
+            const rectPointer = (cx, cy) => {
+                const r = el.getBoundingClientRect();
+                return new THREE.Vector2(
+                    ((cx - r.left) / r.width) * 2 - 1,
+                    -((cy - r.top) / r.height) * 2 + 1
+                );
+            };
+            this._rectPointer = rectPointer;
+
+            const hitBall = (cx, cy) => {
+                this.raycaster.setFromCamera(rectPointer(cx, cy), this.camera);
+                return this.raycaster.intersectObjects([this.ball, this.ballHit]).length > 0;
+            };
+
+            const start = (cx, cy) => {
+                this._prev = { x: cx, y: cy };
+                this._dragMode = hitBall(cx, cy) ? 'ball' : 'orbit';
+                this.sound.unlock();   // ljudkontexten kräver en användargest
+            };
+            const move = (cx, cy) => {
+                if (!this._dragMode) {
+                    el.style.cursor = hitBall(cx, cy) ? 'grab' : '';
+                    return;
+                }
+                const dx = cx - this._prev.x;
+                const dy = cy - this._prev.y;
+                this._prev = { x: cx, y: cy };
+                if (this._dragMode === 'orbit') {
+                    this._sph.theta -= dx * 0.008;
+                    this._sph.phi = Math.max(0.2, Math.min(1.62, this._sph.phi + dy * 0.008));
+                    this._updateCamera();
+                } else if (this._dragMode === 'ball') {
+                    // Skärm-dx → världs-dx längs x-axeln (projektion av enhetssteg)
+                    const r = el.getBoundingClientRect();
+                    const p1 = this.ballPos.clone().project(this.camera);
+                    const p2 = this.ballPos.clone().add(new THREE.Vector3(0.2, 0, 0)).project(this.camera);
+                    const pxPerWorld = (p2.x - p1.x) * 0.5 * r.width / 0.2;
+                    if (Math.abs(pxPerWorld) > 4) {
+                        // Steglöst hela vägen in till kontakt (inget snäpp — ett
+                        // snäpp gjorde dessutom att kulan "fastnade" på klotet)
+                        this.ballPos.x = Math.max(BALL_X_MIN, Math.min(BALL_X_MAX,
+                            this.ballPos.x + dx / pxPerWorld));
+                        this.ball.position.copy(this.ballPos);
+                        this.ballHit.position.copy(this.ballPos);
+                        this._rebuildCable();
+                    }
+                }
+            };
+            const end = () => { this._dragMode = null; };
+
+            el.addEventListener('mousedown', e => start(e.clientX, e.clientY));
+            el.addEventListener('mousemove', e => move(e.clientX, e.clientY));
+            el.addEventListener('mouseup', end);
+            el.addEventListener('mouseleave', end);
+
+            el.addEventListener('touchstart', e => {
+                if (e.touches.length === 2) {
+                    this._dragMode = 'pinch';
+                    this._pinchDist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                } else {
+                    start(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+            el.addEventListener('touchmove', e => {
+                if (this._dragMode === 'pinch' && e.touches.length === 2) {
+                    const d = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    this._radius = Math.max(4.5, Math.min(17, this._radius * this._pinchDist / Math.max(d, 1)));
+                    this._pinchDist = d;
+                    this._updateCamera();
+                } else if (e.touches.length === 1) {
+                    move(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+            el.addEventListener('touchend', end);
+
+            el.addEventListener('wheel', e => {
+                this._radius = Math.max(4.5, Math.min(17, this._radius + e.deltaY * 0.015));
+                this._updateCamera();
+            }, { passive: true });
+
+            this._updateCamera();
+        }
+
+        _updateCamera() {
+            const { theta, phi } = this._sph;
+            const r = this._radius;
+            this.camera.position.set(
+                this._target.x + r * Math.sin(phi) * Math.sin(theta),
+                this._target.y + r * Math.cos(phi),
+                this._target.z + r * Math.sin(phi) * Math.cos(theta)
+            );
+            this.camera.lookAt(this._target);
+        }
+
+        _onResize() {
+            const w = this.container.clientWidth;
+            const h = this.container.clientHeight;
+            if (!w || !h) return;
+            this.camera.aspect = w / h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+        }
+
+        reset() {
+            this.q = 0;
+            this.spark.active = false;
+            this.spark.cooldown = 0;
+            this.sparkLines.forEach(l => { l.visible = false; });
+            this.sparkGlows.forEach(g => { g.visible = false; });
+            this.cableElectrons.forEach(s => { s.visible = false; });
+            this.beltElectrons.forEach(e => this.scene.remove(e.sprite));
+            this.beltElectrons = [];
+            this.ballPos.x = BALL_X_START;
+            this.ball.position.copy(this.ballPos);
+            this.ballHit.position.copy(this.ballPos);
+            this._rebuildCable();
+            this._stackFoils();
+        }
+
+        // ── Huvuduppdatering: fysik + visuellt, en gång per bildruta ──
+        step(dt, ui) {
+            this.ui = ui;
+
+            // Växlingar
+            if (ui.foilsOn !== this.prevFoilsOn) {
+                this.prevFoilsOn = ui.foilsOn;
+                if (ui.foilsOn) this._stackFoils();
+                this.foilGroup.visible = ui.foilsOn;
+            }
+            if (ui.showPerson !== this.prevPerson) {
+                this.prevPerson = ui.showPerson;
+                this.personG.visible = ui.showPerson;
+                this.stoolLabel.visible = ui.showPerson;
+            }
+
+            // ── Laddning ──
+            let status;
+            const domeCenter = new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z);
+            const gap = this.ballPos.distanceTo(domeCenter) - DOME_R - BALL_R;
+            const inContact = gap <= 0.015;
+
+            if (inContact) {
+                // Kulan ligger dikt an mot klotytan: direktkontakt via ledare —
+                // alla elektroner leds kontinuerligt bort genom sladden, ingen
+                // gnista behövs och klotet kan inte laddas upp.
+                if (this.spark.active) {
+                    this.spark.active = false;
+                    this.sparkLines.forEach(l => { l.visible = false; });
+                    this.sparkGlows.forEach(g => { g.visible = false; });
+                }
+                this.q *= Math.exp(-dt * 10);
+                if (this.q < 0.004) this.q = 0;
+                const flowing = ui.running || this.q > 0.01;
+                this.flowPhase = (this.flowPhase || 0) + dt * (ui.running ? ui.speed : 1.4);
+                this.cableElectrons.forEach((sp, i) => {
+                    const u = (this.flowPhase * 0.55 + i / 9) % 1;
+                    sp.position.copy(this.cableCurve.getPoint(u));
+                    sp.visible = ui.showElectrons && flowing;
+                });
+                status = flowing ? 'Jordad — elektronerna leds bort'
+                    : (ui.running ? 'Jordad — elektronerna leds bort' : 'Jordad');
+            } else if (this.spark.active) {
+                this.spark.t += dt;
+                this.spark.regen += dt;
+                // Liten gnista tömmer bara klotet delvis (→ nästa kommer snabbt),
+                // stor gnista laddar ur nästan helt
+                this.q *= Math.exp(-dt * (3.5 + 6 * this.spark.size));
+                if (this.spark.regen > 0.045) {
+                    this.spark.regen = 0;
+                    this._regenSpark();
+                }
+                const flick = 0.55 + Math.random() * 0.45;
+                this.sparkLines.forEach((l, i) => { l.material.opacity = flick * (i === 0 ? 1 : 0.6); });
+                this.sparkGlows.forEach(g => { g.material.opacity = flick * 0.9; });
+                // Elektroner far genom sladden mot jorden
+                this.cableElectrons.forEach((sp, i) => {
+                    const u = (this.spark.t * 1.9 + i / 9) % 1;
+                    sp.position.copy(this.cableCurve.getPoint(u));
+                    sp.visible = ui.showElectrons;
+                });
+                if (this.spark.t > this.spark.dur) {
+                    this.spark.active = false;
+                    this.spark.cooldown = this.spark.cd;
+                    this.sparkLines.forEach(l => { l.visible = false; });
+                    this.sparkGlows.forEach(g => { g.visible = false; });
+                    this.cableElectrons.forEach(s => { s.visible = false; });
+                }
+                status = 'Urladdning!';
+            } else {
+                if (this.spark.cooldown > 0) this.spark.cooldown -= dt;
+                if (ui.running) {
+                    this.q = Math.min(1, this.q + 0.13 * ui.speed * dt * (1.04 - this.q));
+                }
+                // Låg tröskel: på nära håll räcker lite laddning → flera små
+                // urladdningar per sekund; på långt avstånd krävs mycket
+                // laddning → sällsynta stora knallar
+                if (this.spark.cooldown <= 0 && this.q > 0.045 &&
+                    gap < 1.35 * Math.pow(this.q, 1.15)) {
+                    this._triggerSpark();
+                }
+                this.cableElectrons.forEach(s => { s.visible = false; });
+                status = !ui.running ? 'Motorn är av'
+                    : (this.q > 0.99 ? 'Fulladdat' : 'Laddar…');
+            }
+
+            // ── Bandet ──
+            if (ui.running) {
+                const v = ui.speed;
+                this.beltTexUp.offset.y -= v * dt * 1.05;
+                this.beltTexDown.offset.y += v * dt * 1.05;
+                this.rollers.forEach(g => { g.rotation.z -= v * dt * 6.9; });
+
+                // Nya elektroner gnids loss vid nedre rullen och följer med upp
+                this.spawnTimer -= dt;
+                if (this.spawnTimer <= 0 && this.beltElectrons.length < 22) {
+                    this.spawnTimer = 0.5 / v;
+                    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+                        map: this.electronTex, transparent: true, depthWrite: false
+                    }));
+                    sp.scale.set(0.12, 0.12, 1);
+                    const z = (Math.random() - 0.5) * 0.42;
+                    sp.position.set(0.215, 1.52, z);
+                    this.scene.add(sp);
+                    this.beltElectrons.push({ sprite: sp, mode: 'belt', y: 1.52, z, t: 0 });
+                }
+            }
+            for (let i = this.beltElectrons.length - 1; i >= 0; i--) {
+                const e = this.beltElectrons[i];
+                if (e.mode === 'belt') {
+                    if (ui.running) e.y += ui.speed * 1.05 * dt;
+                    e.sprite.position.set(0.215, e.y, e.z);
+                    if (e.y >= 3.62) { e.mode = 'jump'; e.t = 0; }
+                } else {
+                    e.t += dt / 0.3;
+                    // Kvadratisk bezier: bandet → kammens spets → klotets insida
+                    const t = Math.min(1, e.t);
+                    const a = new THREE.Vector3(0.215, 3.66, e.z);
+                    const ctrl = new THREE.Vector3(0.55, 3.8, e.z * 0.4);
+                    const b = new THREE.Vector3(1.02, 3.55, e.z * 0.25);
+                    const p1 = a.clone().lerp(ctrl, t);
+                    const p2 = ctrl.clone().lerp(b, t);
+                    e.sprite.position.copy(p1.lerp(p2, t));
+                    if (e.t >= 1) {
+                        this.scene.remove(e.sprite);
+                        this.beltElectrons.splice(i, 1);
+                        continue;
+                    }
+                }
+                e.sprite.visible = ui.showElectrons;
+            }
+
+            // Driftlampan
+            this.ledMat.emissive.setHex(ui.running ? 0x2fae4e : 0x000000);
+            this.ledMat.color.setHex(ui.running ? 0x2fae4e : 0x3c4458);
+
+            // Små gnistor vid kammen (syns i genomskärning)
+            if (ui.running && Math.random() < 0.75) {
+                const pos = this.combSpark.geometry.attributes.position.array;
+                let o = 0;
+                for (let s = 0; s < 3; s++) {
+                    const z0 = (Math.random() - 0.5) * 0.36;
+                    let px = 0.205, py = 3.65 + Math.random() * 0.05, pz = z0;
+                    for (let k = 0; k < 3; k++) {
+                        pos[o++] = px; pos[o++] = py; pos[o++] = pz;
+                        px += 0.02 + Math.random() * 0.015;
+                        py += (Math.random() - 0.5) * 0.05 + 0.015;
+                        pz += (Math.random() - 0.5) * 0.03;
+                        pos[o++] = px; pos[o++] = py; pos[o++] = pz;
+                    }
+                }
+                this.combSpark.geometry.attributes.position.needsUpdate = true;
+                this.combSparkMat.opacity = 0.35 + Math.random() * 0.6;
+            } else if (!ui.running) {
+                this.combSparkMat.opacity = 0;
+            }
+
+            // ── Genomskärning ──
+            if (ui.cutaway) {
+                // Snittplanet följer kameran i sidled så öppningen alltid vetter mot betraktaren
+                const camDir = this.camera.position.clone()
+                    .sub(new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z));
+                camDir.y = 0;
+                if (camDir.lengthSq() < 0.001) camDir.set(0, 0, 1);
+                camDir.normalize();
+                const n = camDir.clone().negate();
+                this.cutPlane.normal.copy(n);
+                this.cutPlane.constant = -n.dot(new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z));
+                this.domeMat.clippingPlanes = [this.cutPlane];
+                this.cutRim.visible = true;
+                this.cutRim.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), n);
+                this.combLabel.visible = true;
+                this.combPointer.visible = true;
+            } else {
+                this.domeMat.clippingPlanes = null;
+                this.cutRim.visible = false;
+                this.combLabel.visible = false;
+                this.combPointer.visible = false;
+            }
+
+            // ── Elektroner på klotet ──
+            const visCount = Math.round(this.q * this.domeElectrons.length);
+            this.domeElectrons.forEach((sp, i) => {
+                let v = ui.showElectrons && i < visCount;
+                if (v && ui.cutaway) {
+                    // Dölj elektroner på den bortskurna halvan
+                    v = this.cutPlane.distanceToPoint(sp.position) > 0;
+                }
+                sp.visible = v;
+            });
+
+            // ── Elektriska fältet ──
+            const showF = ui.showField && this.q > 0.03;
+            this.fieldGroup.visible = showF;
+            this.fieldLabel.visible = showF;
+            if (showF) {
+                const L = 0.18 + 0.95 * this.q;
+                this.fieldArrows.forEach(g => {
+                    const { dir, shaft } = g.userData;
+                    shaft.scale.y = L;
+                    shaft.position.y = 0.16 + L / 2;
+                    g.position.set(
+                        DOME_C.x + dir.x * (DOME_R + 0.12),
+                        DOME_C.y + dir.y * (DOME_R + 0.12),
+                        DOME_C.z + dir.z * (DOME_R + 0.12)
+                    );
+                });
+            }
+
+            // ── Aluminiumformar ──
+            if (ui.foilsOn) {
+                this.foils.forEach(g => {
+                    const ud = g.userData;
+                    if (ud.state === 'stacked') {
+                        ud.electrons.forEach(sp => {
+                            sp.visible = ui.showElectrons && this.q > 0.28;
+                        });
+                        if (this.q > ud.threshold) {
+                            ud.state = 'flying';
+                            const az = Math.random() * Math.PI * 2;
+                            const h = 0.5 + Math.random() * 0.9;
+                            ud.vel.set(Math.cos(az) * h, 2.4 + Math.random() * 1.1, Math.sin(az) * h);
+                            ud.angVel.set(
+                                (Math.random() - 0.5) * 7,
+                                (Math.random() - 0.5) * 4,
+                                (Math.random() - 0.5) * 7
+                            );
+                        }
+                    } else if (ud.state === 'flying') {
+                        ud.vel.y -= 5.5 * dt;
+                        g.position.addScaledVector(ud.vel, dt);
+                        g.rotation.x += ud.angVel.x * dt;
+                        g.rotation.y += ud.angVel.y * dt;
+                        g.rotation.z += ud.angVel.z * dt;
+                        if (g.position.y < 0.1 && ud.vel.y < 0) {
+                            if (Math.abs(ud.vel.y) > 0.8) {
+                                ud.vel.y *= -0.3;             // liten studs
+                                ud.vel.x *= 0.6; ud.vel.z *= 0.6;
+                                ud.angVel.multiplyScalar(0.5);
+                                g.position.y = 0.1;
+                            } else {
+                                ud.state = 'landed';
+                                g.position.y = 0.09;
+                                g.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.5;
+                                ud.electrons.forEach(sp => { sp.visible = false; });
+                            }
+                        }
+                    }
+                });
+            }
+
+            // ── Figuren: håret reser sig med laddningen ──
+            if (ui.showPerson) {
+                const t = this.q;
+                if (Math.abs(t - this.lastHairT) > 0.004) this._updateHair(t);
+                const pCount = Math.round(t * this.personElectrons.length);
+                this.personElectrons.forEach((sp, i) => {
+                    sp.visible = ui.showElectrons && i < pCount;
+                });
+            }
+
+            // Kul-etikettens position följer kulan (i fri yta under kulan).
+            // Döljs när användaren väl flyttat kulan — annars korsar texten
+            // klotet när kulan dras nära.
+            this.ballLabel.position.set(this.ballPos.x + 0.1, this.ballPos.y - 0.72, this.ballPos.z);
+            this.ballLabel.visible = Math.abs(this.ballPos.x - BALL_X_START) < 0.05;
+
+            return { q: this.q, status };
+        }
+
+        render() {
+            this.renderer.render(this.scene, this.camera);
+        }
+
+        dispose() {
+            window.removeEventListener('resize', this._onResize);
+            this.renderer.dispose();
+            if (this.renderer.domElement.parentNode) {
+                this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
+            }
+        }
+    }
+
+    // ─── Format-hjälpare för tiopotenser ─────────────────────────────────────
+    // Ger { m: '1,9', e: 13 } för 1.87e13
+    function sciParts(x) {
+        if (x <= 0) return null;
+        const e = Math.floor(Math.log10(x));
+        const m = x / Math.pow(10, e);
+        return { m: formatNum(m, 1), e };
+    }
+
+    // ─── React-appen ─────────────────────────────────────────────────────────
+    function App() {
+        const [running, setRunning] = useState(false);
+        const [speed, setSpeed] = useState(1.0);
+        const [showElectrons, setShowElectrons] = useState(true);
+        const [showField, setShowField] = useState(false);
+        const [cutaway, setCutaway] = useState(false);
+        const [showPerson, setShowPerson] = useState(false);
+        const [foilsOn, setFoilsOn] = useState(false);
+        const [isFullscreen, setIsFullscreen] = useState(false);
+        const [controlsOpen, setControlsOpen] = useState(false);
+        const [muted, setMuted] = useState(false);
+        const [readout, setReadout] = useState({ q: 0, status: 'Motorn är av' });
+
+        const sceneWrapRef = useRef(null);
+        const containerRef = useRef(null);
+        const sceneRef = useRef(null);
+        const animRef = useRef(null);
+        const lastTimeRef = useRef(null);
+        const uiRef = useRef({});
+        uiRef.current = { running, speed, showElectrons, showField, cutaway, showPerson, foilsOn };
+
+        // Init Three.js
+        useEffect(() => {
+            if (!containerRef.current) return;
+            const scene = new VdGScene(containerRef.current);
+            sceneRef.current = scene;
+            window.__VDG_SCENE = scene;      // test-krok för E2E-skärmdumpar
+            return () => {
+                if (sceneRef.current) {
+                    sceneRef.current.dispose();
+                    sceneRef.current = null;
+                }
+            };
+        }, []);
+
+        // Ljud av/på
+        useEffect(() => {
+            if (sceneRef.current) sceneRef.current.sound.muted = muted;
+        }, [muted]);
+
+        // Fullskärm
+        useEffect(() => {
+            const handler = () => {
+                setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                setTimeout(() => {
+                    if (sceneRef.current) sceneRef.current._onResize();
+                }, 80);
+            };
+            document.addEventListener('fullscreenchange', handler);
+            document.addEventListener('webkitfullscreenchange', handler);
+            return () => {
+                document.removeEventListener('fullscreenchange', handler);
+                document.removeEventListener('webkitfullscreenchange', handler);
+            };
+        }, []);
+
+        const toggleFullscreen = () => {
+            const el = sceneWrapRef.current;
+            if (!el) return;
+            const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+            if (isFs) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            }
+        };
+
+        // Animationsloop
+        useEffect(() => {
+            const loop = (ts) => {
+                animRef.current = requestAnimationFrame(loop);
+                const dt = lastTimeRef.current ? Math.min((ts - lastTimeRef.current) / 1000, 0.05) : 0;
+                lastTimeRef.current = ts;
+                if (sceneRef.current) {
+                    const r = sceneRef.current.step(dt, uiRef.current);
+                    sceneRef.current.render();
+                    if (Math.round(ts / 16) % 4 === 0) setReadout(r);
+                }
+            };
+            animRef.current = requestAnimationFrame(loop);
+            return () => {
+                if (animRef.current) cancelAnimationFrame(animRef.current);
+                lastTimeRef.current = null;
+            };
+        }, []);
+
+        const handleToggleRun = () => {
+            if (sceneRef.current) sceneRef.current.sound.unlock();
+            setRunning(r => !r);
+        };
+
+        const handleReset = () => {
+            if (sceneRef.current) sceneRef.current.reset();
+            setRunning(false);
+        };
+
+        const qUC = readout.q * Q_MAX_UC;                 // laddningens belopp i µC
+        const nElectrons = qUC * 1e-6 / Q_E;
+        const nSci = sciParts(nElectrons);
+        const qSci = sciParts(qUC * 1e-6);
+
+        const toggles = (
+            <div className="scene-toggles">
+                <div className="st-title">Visa</div>
+                <label>
+                    <input type="checkbox" checked={showElectrons}
+                        onChange={e => setShowElectrons(e.target.checked)} aria-label="Visa elektroner" />
+                    <span>Elektroner</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked={showField}
+                        onChange={e => setShowField(e.target.checked)} aria-label="Visa elektriskt fält" />
+                    <span>Elektriskt fält</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked={cutaway}
+                        onChange={e => setCutaway(e.target.checked)} aria-label="Visa klotet i genomskärning" />
+                    <span>Genomskärning</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked={foilsOn}
+                        onChange={e => setFoilsOn(e.target.checked)} aria-label="Lägg aluminiumformar på klotet" />
+                    <span>Aluminiumformar</span>
+                </label>
+                <label>
+                    <input type="checkbox" checked={showPerson}
+                        onChange={e => setShowPerson(e.target.checked)} aria-label="Låt en figur hålla i klotet" />
+                    <span>Figur håller i klotet</span>
+                </label>
+                {isFullscreen && (
+                    <div className="st-actions">
+                        <button className="vdg-btn vdg-btn-primary" onClick={handleToggleRun}
+                                aria-label={running ? 'Pausa motorn' : 'Starta motorn'}>
+                            {running ? 'Pausa' : 'Starta'}
+                        </button>
+                        <button className="vdg-btn vdg-btn-secondary" onClick={handleReset}
+                                aria-label="Återställ simuleringen">
+                            Återställ
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+
+        return (
+            <div>
+                {/* Formelkort: antal överskottselektroner */}
+                <div className="vdg-card" style={{ padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
+                    <div className="vdg-formula">
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <span className="flbl">Antal överskottselektroner</span>
+                            <span><em>n</em></span>
+                            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>Antal överskottselektroner</span>
+                        </div>
+                        <span className="vdg-op">=</span>
+                        <div className="vdg-frac">
+                            <span className="flbl">Laddning</span>
+                            <span className="num"><em>Q</em></span>
+                            <span className="den"><em>q</em><sub>e</sub></span>
+                            <span className="flbl">Elementarladdning</span>
+                        </div>
+                        <span className="vdg-op">=</span>
+                        <div className="vdg-frac">
+                            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>&nbsp;</span>
+                            <span className="num">
+                                {qSci ? <React.Fragment>{qSci.m} &middot; 10<sup>{qSci.e < 0 ? '−' + (-qSci.e) : qSci.e}</sup>&nbsp;C</React.Fragment> : <React.Fragment>0&nbsp;C</React.Fragment>}
+                            </span>
+                            <span className="den">1,602 &middot; 10<sup>&minus;19</sup>&nbsp;C</span>
+                            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>&nbsp;</span>
+                        </div>
+                        <span className="vdg-op">&asymp;</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>&nbsp;</span>
+                            <span style={{ fontWeight: 600 }}>
+                                {nSci ? <React.Fragment>{nSci.m} &middot; 10<sup>{nSci.e}</sup>&nbsp;st</React.Fragment> : <React.Fragment>0&nbsp;st</React.Fragment>}
+                            </span>
+                            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="sim-grid">
+                    {/* Vänster: 3D-scenen */}
+                    <div>
+                        <div className="vdg-card" style={{ overflow: 'hidden', padding: 0 }}>
+                            <div className="scene-wrap" ref={sceneWrapRef} style={{ userSelect: 'none' }}>
+                                <div ref={containerRef} id="three-canvas-container" />
+
+                                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                    {isFullscreen ? (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                        </svg>
+                                    )}
+                                </button>
+
+                                <button className="fs-btn vdg-sound-btn"
+                                        onClick={() => setMuted(m => !m)}
+                                        aria-label={muted ? 'Slå på ljud' : 'Stäng av ljud'}
+                                        aria-pressed={muted}
+                                        title={muted ? 'Slå på ljud' : 'Stäng av ljud'}>
+                                    {muted ? (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M11 5 6 9H3v6h3l5 4z"/>
+                                            <path d="M16 9l5 6M21 9l-5 6"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M11 5 6 9H3v6h3l5 4z"/>
+                                            <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+                                            <path d="M18.5 6a9 9 0 0 1 0 12"/>
+                                        </svg>
+                                    )}
+                                </button>
+
+                                {toggles}
+
+                                {/* Hopfällbar glidarpanel i underkanten (endast fullskärm) */}
+                                {isFullscreen && (
+                                    <React.Fragment>
+                                        <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                            <div className="fs-row">
+                                                <span className="fs-label">Bandets fart</span>
+                                                <input type="range" min="0.5" max="2.0" step="0.1" value={speed}
+                                                    onChange={e => setSpeed(parseFloat(e.target.value))}
+                                                    aria-label="Bandets fart" />
+                                                <span className="fs-value">{formatNum(speed, 1)}&times;</span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            className="fs-toggle-handle"
+                                            onClick={() => setControlsOpen(o => !o)}
+                                            title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                            aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                            aria-expanded={controlsOpen}>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                 stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                 style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                <path d="M6 9l6 6 6-6"/>
+                                            </svg>
+                                            <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                        </button>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Höger: reglage + avläsningar */}
+                    <aside style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <div className="vdg-card" style={{ padding: '1rem', display: 'flex', gap: '0.75rem' }}>
+                            <button className="vdg-btn vdg-btn-primary" style={{ flex: 1 }}
+                                    onClick={handleToggleRun}
+                                    aria-label={running ? 'Pausa motorn' : 'Starta motorn'}>
+                                {running ? 'Pausa' : 'Starta'}
+                            </button>
+                            <button className="vdg-btn vdg-btn-secondary" style={{ flex: 1 }}
+                                    onClick={handleReset} aria-label="Återställ simuleringen">
+                                Återställ
+                            </button>
+                        </div>
+
+                        <div className="vdg-card" style={{ padding: '1rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.6rem' }}>
+                                Reglage
+                            </h3>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                                <label style={{ fontSize: '0.85rem', color: 'var(--lab-ink-soft)' }}>Bandets fart</label>
+                                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lab-ink)' }}>
+                                    {formatNum(speed, 1)}&times;
+                                </span>
+                            </div>
+                            <input type="range" min="0.5" max="2.0" step="0.1" value={speed}
+                                onChange={e => setSpeed(parseFloat(e.target.value))}
+                                aria-label="Bandets fart" />
+                        </div>
+
+                        <div className="vdg-card" style={{ padding: '1rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.7rem' }}>
+                                Avläsningar
+                            </h3>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                                <div>
+                                    <div className="result-label">Klotets laddning <em style={{ textTransform: 'none' }}>Q</em></div>
+                                    <div className="result-value">
+                                        {readout.q > 0.001 ? '−' : ''}{formatNum(qUC, 2)}&nbsp;&micro;C
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="result-label">Överskottselektroner <em style={{ textTransform: 'none' }}>n</em></div>
+                                    <div className="result-value">
+                                        {nSci ? <React.Fragment>{nSci.m} &middot; 10<sup>{nSci.e}</sup>&nbsp;st</React.Fragment> : '0 st'}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="result-label">Status</div>
+                                    <div className="result-value" style={{ color: readout.status === 'Urladdning!' ? 'var(--lab-accent, #c8324a)' : 'var(--lab-ink)' }}>
+                                        {readout.status}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="vdg-card" style={{ padding: '1rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.6rem' }}>
+                                Prova själv
+                            </h3>
+                            <ul style={{ fontSize: '0.83rem', color: 'var(--lab-ink-muted)', lineHeight: 1.65, paddingLeft: '1.1rem', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                <li>Dra den jordade kulan mot klotet — när den kommer tillräckligt nära hoppar en gnista och elektronerna leds bort till jorden. Lyssna: håller du kulan på kort avstånd knäpper det tätare än på långt.</li>
+                                <li>Lägg kulan dikt an mot klotytan — då leds alla elektroner bort direkt genom sladden och klotet kan inte laddas upp alls.</li>
+                                <li>Slå på genomskärningen och titta in i klotet: bandet glider mot en vass metallkam som sliter loss elektronerna.</li>
+                                <li>Lägg på aluminiumformar och ladda klotet — formarna blir negativa och repellerar.</li>
+                                <li>Låt figuren hålla i klotet medan du laddar. Dra i scenen för att vrida kameran, rulla för att zooma.</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+                {/* Förklaring */}
+                <div className="vdg-card" style={{ padding: '1.5rem', marginTop: '1.5rem' }}>
+                    <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--lab-ink)', marginBottom: '1rem' }}>
+                        Så fungerar bandgeneratorn
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.2rem' }}>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lab-accent, #c8324a)', marginBottom: '0.4rem' }}>
+                                Gnidning laddar bandet
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: 1.7 }}>
+                                När gummibandet glider över den nedre rullen gnids elektroner loss och
+                                fastnar på bandet — precis som när en ballong gnids mot hår. Bandet är en
+                                isolator, så elektronerna kan inte rinna tillbaka utan följer med bandet
+                                upp mot klotet.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lab-accent, #c8324a)', marginBottom: '0.4rem' }}>
+                                Den vassa kanten samlar in elektronerna
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: 1.7 }}>
+                                Inuti klotet glider bandet mot en vass metallkam. Där slits elektronerna
+                                loss från bandet och leds ut till klotet, som är en ledare. Eftersom lika
+                                laddningar repellerar varandra strävar överskottselektronerna efter att
+                                komma så långt ifrån varandra som möjligt — de fördelar sig därför jämnt
+                                över klotets utsida.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lab-accent, #c8324a)', marginBottom: '0.4rem' }}>
+                                Urladdning mot den jordade kulan
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: 1.7 }}>
+                                Runt det laddade klotet finns ett elektriskt fält som blir starkare ju mer
+                                laddning klotet har. Kommer den jordade kulan tillräckligt nära blir fältet
+                                så starkt att luften mellan dem börjar leda ström — det syns som en gnista
+                                och hörs som ett knäpp. Ju närmare kulan hålls, desto mindre laddning krävs
+                                för nästa gnista — därför knäpper det tätare på kort avstånd. Läggs kulan
+                                dikt an mot klotet leds elektronerna i stället bort direkt genom sladden,
+                                utan gnista, och klotet kan aldrig laddas upp.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lab-accent, #c8324a)', marginBottom: '0.4rem' }}>
+                                Formar som flyger och hår som reser sig
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: 1.7 }}>
+                                Aluminiumformar är goda ledare: de tar emot elektroner från klotet, blir
+                                negativa precis som klotet — och repellerar så starkt att de flyger iväg.
+                                Samma sak händer med håret på den som håller i klotet: varje hårstrå blir
+                                negativt laddat och stöts bort från de andra, så håret ställer sig åt alla
+                                håll. Figuren står på en isolerande pall — annars skulle laddningen ledas
+                                ner i golvet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

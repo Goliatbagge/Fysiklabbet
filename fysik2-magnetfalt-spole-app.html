@@ -762,14 +762,29 @@
                 });
                 // B-etikett vid mittlinjens utgångsände
                 const bSpr = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.46);
-                bSpr.position.set(bDir * (xReach + 0.30), 0.62, 0);
+                // Under axellinjen och en bit utanför fältbilden: N-etiketten
+                // står numera vid spolens ände strax OVANFÖR axeln, så B får
+                // hugga linjen underifrån — annars krockar de när strömmen
+                // vänds (den bortre änden trycks ihop av perspektivet).
+                bSpr.position.set(bDir * (xReach + 0.85), -0.58, 0);
                 falt.add(bSpr);
 
                 // ── Polerna N och S ──
+                // Polerna sitter vid spolens ÄNDAR (där fältlinjerna går ut
+                // respektive in), inte ovanför spolen: etiketterna placeras
+                // strax utanför var sin ändyta, nära axeln. Liten höjning
+                // (y) så att glyfen inte hamnar ovanpå den raka axel-
+                // fältlinjen — bokstaven ska stå bredvid linjen, inte på den.
+                // z-förskjutningen lägger etiketten MELLAN fältlinjernas sex
+                // halvplan (de ritas vid φ = 0°, 60°, …) i stället för mitt i
+                // ett av dem — annars hamnar bokstaven ovanpå en fältlinje.
+                // Tecknet följer änden (inte strömriktningen), så båda
+                // etiketterna skjuts utåt i vyn.
+                const polX = Lw / 2 + 0.85, polY = 0.74, polZ = 0.34;
                 const nSpr = textSprite([{ t: 'N', weight: 700, color: COL.npol }], 0.62);
-                nSpr.position.set(bDir * (Lw / 2 + 0.85), 1.62, 0);
+                nSpr.position.set(bDir * polX, polY, -bDir * polZ);
                 const sSpr = textSprite([{ t: 'S', weight: 700, color: COL.spol, stroke: COL.spolKant, strokeWidth: 4.6 }], 0.62);
-                sSpr.position.set(-bDir * (Lw / 2 + 0.85), 1.62, 0);
+                sSpr.position.set(-bDir * polX, polY, bDir * polZ);
                 poler.add(nSpr, sSpr);
 
                 // ── Måttlinje för spolens längd l (dubbelpil i fri yta under spolen) ──

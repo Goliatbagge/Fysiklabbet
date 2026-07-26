@@ -305,6 +305,31 @@
     const BALL_X_MAX = 4.1;
     const BALL_X_START = 3.4;
 
+    // Aluminiumformarna (upp-och-nervända): den nedre, breda kanten ska vila
+    // DIKT AN mot klotytan — ingen luftspalt. Kantens radie är FOIL_R_BOT, så
+    // klotytan ligger där på höjden √(R² − r²) över klotets centrum. Formens
+    // origo sitter mitt i konen ⇒ + halva höjden. Sista termen sänker ned
+    // kanten ett par hundradelar så att ingen ljusspringa syns i kontakten.
+    const FOIL_R_TOP = 0.23;
+    const FOIL_R_BOT = 0.35;
+    const FOIL_H = 0.12;
+    const FOIL_DY = 0.055;                    // stapelavstånd
+    const FOIL_BASE_Y = DOME_C.y
+        + Math.sqrt(DOME_R * DOME_R - FOIL_R_BOT * FOIL_R_BOT)
+        + FOIL_H / 2 - 0.012;
+
+    // Isolerande handtag som kulan sitter fast i (som på en riktig
+    // urladdningsstav): pekar snett ned/åt höger, bort från klotet.
+    const HANDLE_ANG = 52 * Math.PI / 180;
+    const HANDLE_DIR = { x: Math.cos(HANDLE_ANG), y: -Math.sin(HANDLE_ANG) };
+    const HANDLE_END_S = 1.90;                // avstånd kulcentrum → sladdens fäste
+
+    // Jordanslutning (polskruv) på generatorns fot. Från fotens undersida
+    // går en synlig jordledning ned i marken (byggs i _buildGroundAssembly)
+    // så att eleven ser att elektronerna leds bort ned i jorden — inte
+    // tillbaka in i apparaten.
+    const GROUND_TERM = { x: 1.32, y: 0.62, z: 0.42 };
+
     // ─── Gnistljud (Web Audio, syntetiserat — ingen ljudfil) ─────────────────
     // Kort snärtande elektriskt knäpp: högpassfiltrerad brusskur + lågt "tock".
     // Pedagogisk poäng: eftersom klotet laddas om mellan gnistorna hörs det
@@ -403,6 +428,7 @@
             this._buildBase();
             this._buildColumn();
             this._buildBelt();
+            this._buildRollerMounts();
             this._buildDome();
             this._buildInterior();
             this._buildDomeElectrons();
@@ -672,6 +698,90 @@
             });
         }
 
+        // ── Fästen för rullarna (annars ser de ut att hänga fritt i luften) ──
+        // Nedre rullen sitter direkt på elmotorns axel; motorn står i sin tur
+        // på en bock som är fastbultad i fotens topplatta. Övre rullens axel
+        // är lagrad i klotets insida, som på en riktig bandgenerator.
+        _buildRollerMounts() {
+            const ink = new THREE.MeshPhongMaterial({ color: 0x252d3e, shininess: 42 });
+            const steel = new THREE.MeshStandardMaterial({
+                color: 0xb2b8c2, metalness: 0.88, roughness: 0.28,
+                envMap: this.envMap, envMapIntensity: 0.9
+            });
+            const add = (mesh, shadow = true) => {
+                mesh.castShadow = shadow;
+                this.scene.add(mesh);
+                return mesh;
+            };
+
+            // ── Nedre rullen: axel, lagerbock och motorhus på topplattan ──
+            const axle = add(new THREE.Mesh(
+                new THREE.CylinderGeometry(0.032, 0.032, 0.94, 12), steel));
+            axle.rotation.x = Math.PI / 2;
+            axle.position.set(0, 1.45, 0);
+
+            // Fotplatta som hela bocken står på (topplattans ovansida: y = 1,07)
+            const foot = add(new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.05, 0.80), ink));
+            foot.position.set(0, 1.095, 0);
+            foot.receiveShadow = true;
+
+            [[-0.21, 0.33], [0.21, 0.33], [-0.21, -0.33], [0.21, -0.33]].forEach(([x, z]) => {
+                const bolt = add(new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.026, 0.026, 0.028, 6), steel), false);
+                bolt.position.set(x, 1.132, z);
+            });
+
+            // Främre lagerbock med lagerhus kring axeln
+            const post = add(new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.36, 0.10), ink));
+            post.position.set(0, 1.29, 0.375);
+            const boss = add(new THREE.Mesh(
+                new THREE.CylinderGeometry(0.085, 0.085, 0.11, 18), steel));
+            boss.rotation.x = Math.PI / 2;
+            boss.position.set(0, 1.45, 0.375);
+
+            // Elmotorn bakom rullen: hus + pelare ned till fotplattan
+            const canBody = add(new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.31, 0.16), ink));
+            canBody.position.set(0, 1.43, -0.395);
+            const canFace = add(new THREE.Mesh(
+                new THREE.CylinderGeometry(0.10, 0.10, 0.045, 20), steel));
+            canFace.rotation.x = Math.PI / 2;
+            canFace.position.set(0, 1.45, -0.30);
+            // Kylflänsar
+            [-0.07, 0, 0.07].forEach(dy => {
+                const fin = add(new THREE.Mesh(new THREE.BoxGeometry(0.275, 0.022, 0.17), ink), false);
+                fin.position.set(0, 1.43 + dy, -0.395);
+            });
+            const canLeg = add(new THREE.Mesh(new THREE.BoxGeometry(0.17, 0.22, 0.13), ink));
+            canLeg.position.set(0, 1.19, -0.395);
+
+            // ── Övre rullen: axeln lagrad mot klotets insida ──
+            // Egen materialinstans: i genomskärning kapas fästet av samma plan
+            // som klotskalet, annars skulle den främre flänsen bli hängande i
+            // luften där skalet är bortskuret.
+            this.topMountMat = steel.clone();
+            const zWall = Math.sqrt(DOME_R * DOME_R - Math.pow(3.85 - DOME_C.y, 2));
+            // OBS: flänsen och axeländen är PLATTA medan klotväggen buktar —
+            // ligger de exakt vid zWall sticker kanterna igenom skalet och
+            // syns utifrån som en grå cirkel på klotet. Dra därför in dem
+            // så att hela geometrin stannar innanför den buktade väggen.
+            const axleTop = add(new THREE.Mesh(
+                new THREE.CylinderGeometry(0.030, 0.030, 2 * (zWall - 0.02), 12), this.topMountMat));
+            axleTop.rotation.x = Math.PI / 2;
+            axleTop.position.set(0, 3.85, 0);
+            [1, -1].forEach(s => {
+                const b = add(new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.075, 0.075, 0.10, 18), this.topMountMat));
+                b.rotation.x = Math.PI / 2;
+                b.position.set(0, 3.85, s * 0.40);
+                // Lagerfäste där axeln möter klotväggen (flänsens yttre kant,
+                // radie 0,115, kräver ≈0,006 marginal mot bukten + lite till)
+                const pad = add(new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.115, 0.085, 0.07, 20), this.topMountMat));
+                pad.rotation.x = s * Math.PI / 2;   // bred fläns mot klotväggen
+                pad.position.set(0, 3.85, s * (zWall - 0.055));
+            });
+        }
+
         // ── Metallklotet ──
         _buildDome() {
             this.cutPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), DOME_C.z);
@@ -764,35 +874,101 @@
             }
         }
 
-        // ── Elektriska fältet: pilar radiellt IN mot det negativa klotet ──
+        // ── Elektriska fältet: linjer radiellt IN mot det negativa klotet ──
+        // Fältstyrkan åskådliggörs med TÄTHETEN mellan fältlinjerna
+        // (Faradays konvention: antal linjer ∝ laddningen), inte med
+        // linjernas längd. Alla linjer har samma fasta längd, från klotytan
+        // ut mot scenkanten, och är tunna/svaga så de inte dominerar.
+        //
+        // Befintliga linjer får ALDRIG flytta sig när laddningen ändras —
+        // fältets riktning beror inte på Q, bara beloppet. I stället tonas
+        // nya linjer mjukt in mitt i den största luckan mellan de gamla
+        // ("hierarkisk insättning"). Det uppnås med en farthest-point-
+        // ordning av riktningarna: varje prefix av listan är jämnt spritt
+        // över klotet, och linje nr k+1 ligger alltid i det glesaste hålet.
         _buildFieldArrows() {
             this.fieldGroup = new THREE.Group();
-            const mat = new THREE.MeshPhongMaterial({
-                color: 0x233043, emissive: 0x101722, transparent: true, opacity: 0.85
-            });
             this.fieldArrows = [];
-            const N = 26;
+            // Linjerna får inte SLUTA tvärt — fältet upphör ju inte på ett
+            // visst avstånd. Lång linje + alfagradient som tonar ut mot
+            // spetsen ⇒ linjen "löses upp" i fjärran (fortsätter i tanken
+            // ut i oändligheten).
+            const L = 7.0;                           // lång: långt utanför bild
+            const fadeCnv = document.createElement('canvas');
+            fadeCnv.width = 2; fadeCnv.height = 128;
+            const fctx = fadeCnv.getContext('2d');
+            const grad = fctx.createLinearGradient(0, 0, 0, 128);
+            grad.addColorStop(0, '#000');            // bortre änden: helt uttonad
+            grad.addColorStop(0.72, '#fff');         // full styrka närmast klotet
+            grad.addColorStop(1, '#fff');
+            fctx.fillStyle = grad;
+            fctx.fillRect(0, 0, 2, 128);
+            const fadeTex = new THREE.CanvasTexture(fadeCnv);
+
+            // Kandidatriktningar: fibonacci-fördelade, utom rakt nedåt (kolonnen)
+            const cand = [];
+            const NCAND = 96;
             const golden = Math.PI * (3 - Math.sqrt(5));
-            for (let i = 0; i < N; i++) {
-                const y = 1 - (i / (N - 1)) * 2;
-                if (y < -0.35) continue;             // inga pilar rakt underifrån (kolonnen)
+            for (let i = 0; i < NCAND; i++) {
+                const y = 1 - (i / (NCAND - 1)) * 2;
+                if (y < -0.35) continue;
                 const r = Math.sqrt(1 - y * y);
                 const th = golden * i;
-                const dir = new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r).normalize();
+                cand.push(new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r).normalize());
+            }
+            // Farthest-point-ordning: börja på toppen, välj sedan alltid den
+            // kandidat som ligger längst från alla redan valda
+            const ordered = [];
+            let start = 0;
+            for (let i = 1; i < cand.length; i++) if (cand[i].y > cand[start].y) start = i;
+            ordered.push(cand.splice(start, 1)[0]);
+            while (cand.length) {
+                let best = 0, bestD = -Infinity;
+                for (let i = 0; i < cand.length; i++) {
+                    let dMin = Infinity;
+                    for (const p of ordered) dMin = Math.min(dMin, cand[i].distanceToSquared(p));
+                    if (dMin > bestD) { bestD = dMin; best = i; }
+                }
+                ordered.push(cand.splice(best, 1)[0]);
+            }
 
-                // Lokal ram: +y pekar utåt (radiellt). Spetsen (konen) pekar mot klotet.
+            for (const dir of ordered) {
+                // Egna materialinstanser per linje så den kan tonas in/ut
+                // enskilt. Skaftet får avstånds-uttoningen (alphaMap);
+                // pilspetsen sitter nära klotet där linjen är helt tät.
+                const mat = new THREE.MeshPhongMaterial({
+                    color: 0x233043, emissive: 0x101722, transparent: true,
+                    opacity: 0, alphaMap: fadeTex, depthWrite: false
+                });
+                const hmat = new THREE.MeshPhongMaterial({
+                    color: 0x233043, emissive: 0x101722, transparent: true,
+                    opacity: 0, depthWrite: false
+                });
+                // Lokal ram: +y pekar utåt (radiellt). Spetsen (konen) pekar mot
+                // klotet och sitter PÅ fältlinjen — inte i dess ände.
+                // (Fältlinjekonvention: linjen visar riktningen, pilspetsen
+                // markerar den utan att avsluta linjen.)
                 const g = new THREE.Group();
-                const head = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.16, 10), mat);
+                const head = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.13, 8), hmat);
                 head.rotation.z = Math.PI;           // spets mot -y (in mot klotet)
-                head.position.y = 0.08;
+                head.position.y = 1.0;               // en bit ut, där linjen är tät
                 g.add(head);
-                const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 8), mat);
-                shaft.position.y = 0.16 + 0.5;
+                const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.009, L, 6), mat);
+                shaft.position.y = L / 2;
                 g.add(shaft);
 
                 const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
                 g.quaternion.copy(quat);
-                g.userData = { dir, shaft };
+                // Starta strax INNANFÖR klotytan: klotet skymmer biten inuti,
+                // så linjen ser ut att växa ur ytan — även linjer som pekar
+                // snett bakåt (annars ser de ut att sväva en bit från klotet)
+                g.position.set(
+                    DOME_C.x + dir.x * (DOME_R - 0.06),
+                    DOME_C.y + dir.y * (DOME_R - 0.06),
+                    DOME_C.z + dir.z * (DOME_R - 0.06)
+                );
+                g.visible = false;
+                g.userData = { dir, mat, hmat, op: 0 };
                 this.fieldGroup.add(g);
                 this.fieldArrows.push(g);
             }
@@ -823,23 +999,94 @@
             this.ballHit.position.copy(this.ballPos);
             this.scene.add(this.ballHit);
 
-            // Sladden byggs om när kulan flyttas
-            this.cableMat = new THREE.MeshPhongMaterial({ color: 0x2f7a4d, shininess: 30 });
-            this.cableMesh = null;
-            this._rebuildCable();
-
-            // Jordsymbol: stolpe + tre avsmalnande tvärslåar
             const ink = new THREE.MeshPhongMaterial({ color: 0x2a3448 });
-            const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.42, 8), ink);
-            rod.position.set(4.55, 0.44, 0);
-            rod.castShadow = true;
-            this.scene.add(rod);
-            [[0.56, 0.24], [0.38, 0.15], [0.2, 0.06]].forEach(([w, y]) => {
-                const bar = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.035, w), ink);
-                bar.position.set(4.55, y, 0);
-                bar.castShadow = true;
+
+            // ── Isolerande handtag som kulan sitter fast i ──
+            // Kulan är alltså inte lös: den sitter på en stav med isolerande
+            // grepp, och sladden till jord går ut ur handtagets nedre ände.
+            this.handle = new THREE.Group();
+            const axis = new THREE.Vector3(HANDLE_DIR.x, HANDLE_DIR.y, 0).normalize();
+            const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), axis);
+            // s = avstånd från kulans centrum längs handtagets axel
+            const put = (mesh, s) => {
+                mesh.quaternion.copy(quat);
+                mesh.position.copy(axis).multiplyScalar(s);
+                mesh.castShadow = true;
+                this.handle.add(mesh);
+            };
+            const chrome = new THREE.MeshStandardMaterial({
+                color: 0xc4c9d1, metalness: 0.9, roughness: 0.25,
+                envMap: this.envMap, envMapIntensity: 0.9
+            });
+            const grip = new THREE.MeshPhongMaterial({ color: 0x3a4252, shininess: 26 });
+            // Metallhylsa där kulan är fastskruvad
+            put(new THREE.Mesh(new THREE.CylinderGeometry(0.062, 0.075, 0.17, 20), chrome), 0.28);
+            // Isolerande skaft
+            put(new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.062, 1.15, 20), grip), 0.94);
+            // Greppdel med två ringspår
+            put(new THREE.Mesh(new THREE.CylinderGeometry(0.082, 0.078, 0.36, 20), grip), 1.69);
+            [1.60, 1.78].forEach(s => {
+                put(new THREE.Mesh(new THREE.CylinderGeometry(0.089, 0.089, 0.022, 20), ink), s);
+            });
+            // Ändknopp med genomföring för sladden
+            put(new THREE.Mesh(new THREE.CylinderGeometry(0.058, 0.072, 0.09, 20), chrome), 1.90);
+            this.handle.position.copy(this.ballPos);
+            this.scene.add(this.handle);
+
+            // ── Jordanslutning på generatorns fot ──
+            // Polskruv på fotens högra sida — precis som på en riktig
+            // bandgenerator jordas urladdningskulan via generatorns fot.
+            const T = GROUND_TERM;
+            const alongX = new THREE.Euler(0, 0, -Math.PI / 2);
+            const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.025, 20), ink);
+            plate.rotation.copy(alongX);
+            plate.position.set(1.155, T.y, T.z);
+            this.scene.add(plate);
+            const post = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.042, 0.13, 16), chrome);
+            post.rotation.copy(alongX);
+            post.position.set(1.235, T.y, T.z);
+            post.castShadow = true;
+            this.scene.add(post);
+            const nut = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.075, 6), chrome);
+            nut.rotation.copy(alongX);
+            nut.position.set(1.325, T.y, T.z);
+            nut.castShadow = true;
+            this.scene.add(nut);
+
+            // Liten jordsymbol graverad bredvid uttaget
+            const mark = new THREE.MeshPhongMaterial({ color: 0x99a3b4 });
+            const stem = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.10, 0.026), mark);
+            stem.position.set(1.157, T.y - 0.20, T.z);
+            this.scene.add(stem);
+            [[0.24, 0.27], [0.16, 0.33], [0.08, 0.39]].forEach(([w, y]) => {
+                const bar = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.026, w), mark);
+                bar.position.set(1.157, T.y - y, T.z);
                 this.scene.add(bar);
             });
+
+            // ── Jordledningen: synlig ledare från fotens undersida ned i
+            // marken. Polskruven är internt kopplad genom foten hit, och
+            // elektronerna ses fortsätta här ned under markytan — så att det
+            // inte ser ut som att de blir kvar i apparaten.
+            this.cableMat = new THREE.MeshPhongMaterial({ color: 0x2f7a4d, shininess: 30 });
+            this.earthWirePts = [
+                new THREE.Vector3(1.02, 0.10, T.z + 0.06),   // inne i foten
+                new THREE.Vector3(1.22, 0.09, T.z + 0.07),   // ut ur underkanten
+                new THREE.Vector3(1.52, 0.04, T.z + 0.09),
+                new THREE.Vector3(1.72, -0.06, T.z + 0.10),  // dyker ned i marken
+                new THREE.Vector3(1.80, -0.45, T.z + 0.11)   // under markytan
+            ];
+            const earthCurve = new THREE.CatmullRomCurve3(this.earthWirePts);
+            const earthWire = new THREE.Mesh(
+                new THREE.TubeGeometry(earthCurve, 24, 0.028, 8, false),
+                this.cableMat
+            );
+            earthWire.castShadow = true;
+            this.scene.add(earthWire);
+
+            // Sladden byggs om när kulan flyttas
+            this.cableMesh = null;
+            this._rebuildCable();
 
             // Elektroner som leds bort genom sladden vid urladdning
             this.cableElectrons = [];
@@ -854,16 +1101,48 @@
             }
         }
 
+        // Sladden går ut ur handtagets nedre ände, hänger ned i en slak båge
+        // och kopplas in på polskruven på generatorns fot.
         _rebuildCable() {
             const p = this.ballPos;
-            const pts = [
-                new THREE.Vector3(p.x, p.y - BALL_R + 0.03, p.z),
-                new THREE.Vector3(p.x + 0.45, p.y - 1.5, 0),
-                new THREE.Vector3(p.x * 0.35 + 3.0, 0.55, 0),
-                new THREE.Vector3(4.42, 0.14, 0),
-                new THREE.Vector3(4.55, 0.1, 0)
-            ];
+            const T = GROUND_TERM;
+            // Startpunkt: handtagets ändknopp
+            const e = new THREE.Vector3(
+                p.x + HANDLE_DIR.x * (HANDLE_END_S + 0.02),
+                p.y + HANDLE_DIR.y * (HANDLE_END_S + 0.02),
+                p.z
+            );
+            // A = strax efter genomföringen (sladden fortsätter i handtagets
+            // riktning ett kort stycke innan den viker av nedåt)
+            const A = new THREE.Vector3(
+                e.x + HANDLE_DIR.x * 0.16,
+                e.y + HANDLE_DIR.y * 0.16 - 0.18,
+                e.z + 0.06
+            );
+            // B = inkopplingspunkten strax utanför polskruven
+            const B = new THREE.Vector3(T.x + 0.30, T.y + 0.06, T.z + 0.04);
+            // Slakhet: längre spann → djupare hängande båge, men aldrig ned i golvet
+            const span = Math.hypot(B.x - A.x, B.z - A.z);
+            const sag = Math.min(1.12, 0.34 + 0.24 * span);
+            const pts = [e, A];
+            [0.28, 0.55, 0.82].forEach(t => {
+                const q = A.clone().lerp(B, t);
+                const bow = Math.sin(Math.PI * t);
+                q.y -= sag * bow;
+                q.z += 0.20 * bow;
+                pts.push(q);
+            });
+            pts.push(B, new THREE.Vector3(T.x, T.y, T.z));
             this.cableCurve = new THREE.CatmullRomCurve3(pts);
+            // Elektronernas bana fortsätter från polskruven genom fotens
+            // inre (skyms av lådan) och ut genom jordledningen på fotens
+            // undersida, ned UNDER MARKYTAN — golvet skymmer dem där, så de
+            // ses ledas bort ner i jorden i stället för att bli kvar i
+            // apparaten
+            this.flowCurve = new THREE.CatmullRomCurve3([
+                ...pts,
+                ...this.earthWirePts
+            ]);
             const geo = new THREE.TubeGeometry(this.cableCurve, 42, 0.028, 8, false);
             if (this.cableMesh) {
                 this.cableMesh.geometry.dispose();
@@ -886,11 +1165,12 @@
             for (let i = 0; i < 4; i++) {
                 const g = new THREE.Group();
                 // Upp-och-nervänd form: smal "botten" uppåt, bred kant nedåt
-                const cone = new THREE.Mesh(new THREE.CylinderGeometry(0.23, 0.35, 0.12, 26, 1, true), alu);
+                const cone = new THREE.Mesh(
+                    new THREE.CylinderGeometry(FOIL_R_TOP, FOIL_R_BOT, FOIL_H, 26, 1, true), alu);
                 g.add(cone);
-                const lid = new THREE.Mesh(new THREE.CircleGeometry(0.23, 26), alu);
+                const lid = new THREE.Mesh(new THREE.CircleGeometry(FOIL_R_TOP, 26), alu);
                 lid.rotation.x = -Math.PI / 2;
-                lid.position.y = 0.06;
+                lid.position.y = FOIL_H / 2;
                 g.add(lid);
                 g.children.forEach(m => { m.castShadow = true; });
 
@@ -922,7 +1202,7 @@
 
         _stackFoils() {
             this.foils.forEach((g, i) => {
-                g.position.set(DOME_C.x, DOME_C.y + DOME_R + 0.045 + i * 0.055, DOME_C.z);
+                g.position.set(DOME_C.x, FOIL_BASE_Y + i * FOIL_DY, DOME_C.z);
                 g.rotation.set(0, 0, 0);
                 g.userData.state = 'stacked';
                 g.userData.vel.set(0, 0, 0);
@@ -1165,7 +1445,16 @@
         _buildLabels() {
             this._label('Metallklot', new THREE.Vector3(-1.7, 5.05, 0));
             this._label('Gummiband', new THREE.Vector3(1.25, 2.3, 0));
-            this._label('Jord', new THREE.Vector3(4.6, 0.85, 0));
+            // "Jord" placeras i fri yta ovanför foten (texten får inte hamna på
+            // den mörkblå lådan) med en tunn pekarlinje ner till punkten där
+            // jordledningen dyker ned i marken.
+            this._label('Jord', new THREE.Vector3(2.30, 1.60, GROUND_TERM.z));
+            const gndPtr = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(2.28, 1.45, GROUND_TERM.z),
+                new THREE.Vector3(1.72, 0.10, GROUND_TERM.z + 0.10)
+            ]);
+            this.scene.add(new THREE.Line(gndPtr,
+                new THREE.LineBasicMaterial({ color: 0x5a6170, transparent: true, opacity: 0.7 })));
             this.ballLabel = this._label('Jordad kula — dra mig!', new THREE.Vector3(0, 0, 0), '#2f7a4d', 24);
             this.combLabel = this._label('Metallkam', new THREE.Vector3(1.85, 4.52, 0));
             this.combLabel.visible = false;
@@ -1182,9 +1471,29 @@
         }
 
         // ── Interaktion: orbit, zoom, dra kulan ──
+        // Smal scen (mobil) → dra ut kameran så att hela urladdningsstaven
+        // ryms i bild; på bred skärm är faktorn 1 (oförändrad vy).
+        _baseRadius() {
+            const w = this.container.clientWidth || 800;
+            const h = this.container.clientHeight || 560;
+            const aspect = w / Math.max(h, 1);
+            return 9.2 * Math.max(1, Math.min(1.35, 1.45 / Math.max(aspect, 0.4)));
+        }
+
+        _applyResponsiveZoom() {
+            const nb = this._baseRadius();
+            if (this._base) {
+                // Behåll användarens egen zoom som förhållande till basen
+                this._radius = Math.max(4.5, Math.min(17, this._radius * nb / this._base));
+            } else {
+                this._radius = nb;
+            }
+            this._base = nb;
+        }
+
         _initInteraction() {
             this._sph = { theta: 0.42, phi: 1.12 };
-            this._radius = 9.2;
+            this._applyResponsiveZoom();
             this._dragMode = null;       // 'orbit' | 'ball' | 'pinch'
             this._prev = { x: 0, y: 0 };
             this._pinchDist = 0;
@@ -1202,7 +1511,7 @@
 
             const hitBall = (cx, cy) => {
                 this.raycaster.setFromCamera(rectPointer(cx, cy), this.camera);
-                return this.raycaster.intersectObjects([this.ball, this.ballHit]).length > 0;
+                return this.raycaster.intersectObjects([this.ball, this.ballHit, this.handle], true).length > 0;
             };
 
             const start = (cx, cy) => {
@@ -1220,7 +1529,9 @@
                 this._prev = { x: cx, y: cy };
                 if (this._dragMode === 'orbit') {
                     this._sph.theta -= dx * 0.008;
-                    this._sph.phi = Math.max(0.2, Math.min(1.62, this._sph.phi + dy * 0.008));
+                    // Inverterad y-axel (uttryckligt önskemål): dra nedåt →
+                    // vyn rör sig uppåt
+                    this._sph.phi = Math.max(0.2, Math.min(1.62, this._sph.phi - dy * 0.008));
                     this._updateCamera();
                 } else if (this._dragMode === 'ball') {
                     // Skärm-dx → världs-dx längs x-axeln (projektion av enhetssteg)
@@ -1235,6 +1546,7 @@
                             this.ballPos.x + dx / pxPerWorld));
                         this.ball.position.copy(this.ballPos);
                         this.ballHit.position.copy(this.ballPos);
+                        this.handle.position.copy(this.ballPos);
                         this._rebuildCable();
                     }
                 }
@@ -1298,6 +1610,8 @@
             this.camera.aspect = w / h;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(w, h);
+            this._applyResponsiveZoom();
+            this._updateCamera();
         }
 
         reset() {
@@ -1312,6 +1626,7 @@
             this.ballPos.x = BALL_X_START;
             this.ball.position.copy(this.ballPos);
             this.ballHit.position.copy(this.ballPos);
+            this.handle.position.copy(this.ballPos);
             this._rebuildCable();
             this._stackFoils();
         }
@@ -1353,7 +1668,7 @@
                 this.flowPhase = (this.flowPhase || 0) + dt * (ui.running ? ui.speed : 1.4);
                 this.cableElectrons.forEach((sp, i) => {
                     const u = (this.flowPhase * 0.55 + i / 9) % 1;
-                    sp.position.copy(this.cableCurve.getPoint(u));
+                    sp.position.copy(this.flowCurve.getPoint(u));
                     sp.visible = ui.showElectrons && flowing;
                 });
                 status = flowing ? 'Jordad — elektronerna leds bort'
@@ -1371,10 +1686,11 @@
                 const flick = 0.55 + Math.random() * 0.45;
                 this.sparkLines.forEach((l, i) => { l.material.opacity = flick * (i === 0 ? 1 : 0.6); });
                 this.sparkGlows.forEach(g => { g.material.opacity = flick * 0.9; });
-                // Elektroner far genom sladden mot jorden
+                // Elektroner far genom sladden, ned genom jordspettet och
+                // försvinner under markytan
                 this.cableElectrons.forEach((sp, i) => {
                     const u = (this.spark.t * 1.9 + i / 9) % 1;
-                    sp.position.copy(this.cableCurve.getPoint(u));
+                    sp.position.copy(this.flowCurve.getPoint(u));
                     sp.visible = ui.showElectrons;
                 });
                 if (this.spark.t > this.spark.dur) {
@@ -1407,7 +1723,10 @@
                 const v = ui.speed;
                 this.beltTexUp.offset.y -= v * dt * 1.05;
                 this.beltTexDown.offset.y += v * dt * 1.05;
-                this.rollers.forEach(g => { g.rotation.z -= v * dt * 6.9; });
+                // Rullarna snurrar MOTURS sett från kameran (+z): upp-loppet
+                // ligger på +x-sidan, och en moturs rulle för ytan uppåt där.
+                // (Medurs skulle dra bandet nedåt på upp-loppet — fel håll.)
+                this.rollers.forEach(g => { g.rotation.z += v * dt * 6.9; });
 
                 // Nya elektroner gnids loss vid nedre rullen och följer med upp
                 this.spawnTimer -= dt;
@@ -1485,12 +1804,14 @@
                 this.cutPlane.normal.copy(n);
                 this.cutPlane.constant = -n.dot(new THREE.Vector3(DOME_C.x, DOME_C.y, DOME_C.z));
                 this.domeMat.clippingPlanes = [this.cutPlane];
+                this.topMountMat.clippingPlanes = [this.cutPlane];
                 this.cutRim.visible = true;
                 this.cutRim.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), n);
                 this.combLabel.visible = true;
                 this.combPointer.visible = true;
             } else {
                 this.domeMat.clippingPlanes = null;
+                this.topMountMat.clippingPlanes = null;
                 this.cutRim.visible = false;
                 this.combLabel.visible = false;
                 this.combPointer.visible = false;
@@ -1511,19 +1832,30 @@
             const showF = ui.showField && this.q > 0.03;
             this.fieldGroup.visible = showF;
             this.fieldLabel.visible = showF;
-            if (showF) {
-                const L = 0.18 + 0.95 * this.q;
-                this.fieldArrows.forEach(g => {
-                    const { dir, shaft } = g.userData;
-                    shaft.scale.y = L;
-                    shaft.position.y = 0.16 + L / 2;
-                    g.position.set(
-                        DOME_C.x + dir.x * (DOME_R + 0.12),
-                        DOME_C.y + dir.y * (DOME_R + 0.12),
-                        DOME_C.z + dir.z * (DOME_R + 0.12)
-                    );
-                });
-            }
+            // Tätheten (antalet fältlinjer) växer med laddningen — linjernas
+            // längd är konstant (Faraday: antal linjer ∝ Q). Nya linjer tonas
+            // mjukt in i den största luckan (farthest-point-ordningen);
+            // befintliga linjer står stilla.
+            const nVis = showF
+                ? Math.max(4, Math.round(this.q * this.fieldArrows.length))
+                : 0;
+            const fade = Math.min(1, dt * 5);
+            this.fieldArrows.forEach((g, i) => {
+                const ud = g.userData;
+                const target = i < nVis ? 0.45 : 0;
+                if (target > ud.op) {
+                    // Fältet växer: nya linjer tonas mjukt in
+                    ud.op += (target - ud.op) * fade;
+                } else {
+                    // Laddning försvinner (gnista/jordning): linjen släcks
+                    // TVÄRT — laddningen är ju borta momentant, en långsam
+                    // uttoning skulle se ut som att ett restfält dröjer kvar
+                    ud.op = target;
+                }
+                ud.mat.opacity = ud.op;
+                ud.hmat.opacity = ud.op;
+                g.visible = ud.op > 0.01;
+            });
 
             // ── Aluminiumformar ──
             if (ui.foilsOn) {
@@ -1565,6 +1897,20 @@
                         }
                     }
                 });
+
+                // Stapeln sjunker ihop när formar flyger av. Utan detta blir de
+                // kvarvarande formarna svävande: den nedersta flyger först
+                // (lägst tröskel), och de ovanför står kvar på sin gamla höjd
+                // utan något under sig. Här får de kvarvarande i stället nya
+                // platser 0, 1, 2 … i stapeln, och glider mjukt ned dit så att
+                // den understa alltid vilar dikt an mot klotet.
+                let seat = 0;
+                this.foils.forEach(g => {
+                    if (g.userData.state !== 'stacked') return;
+                    const target = FOIL_BASE_Y + seat * FOIL_DY;
+                    seat++;
+                    g.position.y += (target - g.position.y) * Math.min(1, dt * 11);
+                });
             }
 
             // ── Figuren: håret reser sig med laddningen ──
@@ -1577,10 +1923,10 @@
                 });
             }
 
-            // Kul-etikettens position följer kulan (i fri yta under kulan).
-            // Döljs när användaren väl flyttat kulan — annars korsar texten
-            // klotet när kulan dras nära.
-            this.ballLabel.position.set(this.ballPos.x + 0.1, this.ballPos.y - 0.72, this.ballPos.z);
+            // Kul-etikettens position följer kulan (i fri yta OVANFÖR kulan —
+            // under den sitter numera handtaget). Döljs när användaren väl
+            // flyttat kulan — annars korsar texten klotet när kulan dras nära.
+            this.ballLabel.position.set(this.ballPos.x + 0.05, this.ballPos.y + 0.62, this.ballPos.z);
             this.ballLabel.visible = Math.abs(this.ballPos.x - BALL_X_START) < 0.05;
 
             return { q: this.q, status };
@@ -1925,7 +2271,7 @@
                                 Prova själv
                             </h3>
                             <ul style={{ fontSize: '0.83rem', color: 'var(--lab-ink-muted)', lineHeight: 1.65, paddingLeft: '1.1rem', listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                                <li>Dra den jordade kulan mot klotet — när den kommer tillräckligt nära hoppar en gnista och elektronerna leds bort till jorden. Lyssna: håller du kulan på kort avstånd knäpper det tätare än på långt.</li>
+                                <li>Dra urladdningsstaven i handtaget mot klotet — när kulan kommer tillräckligt nära hoppar en gnista och elektronerna leds bort till jorden. Lyssna: håller du kulan på kort avstånd knäpper det tätare än på långt.</li>
                                 <li>Lägg kulan dikt an mot klotytan — då leds alla elektroner bort direkt genom sladden och klotet kan inte laddas upp alls.</li>
                                 <li>Slå på genomskärningen och titta in i klotet: bandet glider mot en vass metallkam som sliter loss elektronerna.</li>
                                 <li>Lägg på aluminiumformar och ladda klotet — formarna blir negativa och repellerar.</li>
@@ -1975,7 +2321,10 @@
                                 och hörs som ett knäpp. Ju närmare kulan hålls, desto mindre laddning krävs
                                 för nästa gnista — därför knäpper det tätare på kort avstånd. Läggs kulan
                                 dikt an mot klotet leds elektronerna i stället bort direkt genom sladden,
-                                utan gnista, och klotet kan aldrig laddas upp.
+                                utan gnista, och klotet kan aldrig laddas upp. Kulan sitter fast på ett
+                                isolerande handtag, och sladden från handtaget är kopplad till generatorns
+                                fot, som i sin tur är jordad — därför kan man hålla i staven utan att
+                                strömmen går genom kroppen.
                             </p>
                         </div>
                         <div>

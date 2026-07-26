@@ -393,11 +393,15 @@
                     ctx.lineWidth = inside ? 2.5 : 1.5;
                     ctx.stroke();
 
-                    // Arrowhead
+                    // Arrowhead — sitter MITT PÅ fältlinjen, inte i dess ände
+                    // (fältlinjekonvention; linjen fortsätter förbi spetsen).
+                    // Sträckans egen mittpunkt ligger i ytan och skyms av den,
+                    // så spetsen centreras mitt på den synliga delen under ytan.
+                    const headY = sy + arrowBelow * 0.5;
                     ctx.beginPath();
-                    ctx.moveTo(sx, bottomY);
-                    ctx.lineTo(sx - arrowHeadSize, bottomY - arrowHeadSize * 1.5);
-                    ctx.lineTo(sx + arrowHeadSize, bottomY - arrowHeadSize * 1.5);
+                    ctx.moveTo(sx, headY + arrowHeadSize * 0.75);
+                    ctx.lineTo(sx - arrowHeadSize, headY - arrowHeadSize * 0.75);
+                    ctx.lineTo(sx + arrowHeadSize, headY - arrowHeadSize * 0.75);
                     ctx.closePath();
                     ctx.fillStyle = color;
                     ctx.fill();
@@ -657,8 +661,8 @@
         root.render(<App />);
     </script>
     <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
 </body>
 </html>
-    <script src="sim-dock.js" defer></script>

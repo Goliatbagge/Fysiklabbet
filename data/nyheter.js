@@ -34,6 +34,47 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-26-altermagnetism",
+    date: "2026-07-26",
+    title: "Fysiker hedras för en tredje sorts magnetism — dold i över hundra år",
+    deck: "I mer än ett sekel har magnetiska material delats in i två familjer: ferromagneter, som kylskåpsmagneten, och antiferromagneter, som inte drar till sig ett gem. Nu tilldelas tre forskare ett av Europas finaste fysikpris för att ha bevisat att det finns en tredje, tidigare dold klass — altermagnetism.",
+    category: "Magnetism",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-26-altermagnetism.jpg",
+    imageAlt: "Vetenskaplig illustration av en altermagnetisk kristallstruktur: rosa och turkosa droppformade ytor (isospinn-densitet) sväller upp ovanför ett gitter av lila och blå atomkulor, vridna i förhållande till varandra i stället för spegelvända.",
+    imageCredit: "Illustration: Libor Šmejkal / Johannes Gutenberg-universitetet Mainz (pressbild)",
+    tags: ["ellära", "magnetism", "spinntronik", "kristallfysik", "kondenserade materiens fysik", "elektroner", "spinn", "europhysics-priset", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-prize-honors-discovery-altermagnetism-fundamental.html" },
+      { name: "Johannes Gutenberg-universitetet Mainz (pressmeddelande)", url: "https://press.uni-mainz.de/2026-europhysics-prize-honors-discovery-of-a-third-fundamental-class-of-magnetism/" },
+      { name: "European Physical Society (officiellt tillkännagivande)", url: "https://eps.org/2026-eps-europhysics-prize-for-outstanding-achievement-in-condensed-matter-physics-announced/" }
+    ],
+    research: { citation: "L. Šmejkal, J. Sinova, T. Jungwirth, ”Beyond Conventional Ferromagnetism and Antiferromagnetism: A Phase with Nonrelativistic Spin and Crystal Rotation Symmetry”, Physical Review X 12, 031042 (2022)", url: "https://doi.org/10.1103/PhysRevX.12.031042" },
+    body: [
+      { type: "p", html: "I mer än hundra år har fysiker delat in magnetiska material i två väletablerade familjer: ferromagneter, som kylskåpsmagneten hemma i köket, och antiferromagneter, som inte drar till sig ett gem men ändå är strikt ordnade på atomnivå. Nu tilldelas tre forskare 2026 års Europhysics-pris — ett av Europas mest ansedda utmärkelser inom kondenserade materiens fysik, utdelat av European Physical Society — för att ha bevisat att det finns en tredje, tidigare dold klass av magnetism. Priset offentliggjordes 24&nbsp;juli 2026 och går till Jairo Sinova vid Johannes Gutenberg-universitetet i Mainz, samt Libor Šmejkal och Tomas Jungwirth vid Fysikinstitutet vid Tjeckiska vetenskapsakademin i Prag." },
+
+      { type: "h2", text: "Två kända sorters magnetism" },
+      { type: "p", html: "Varje elektron bär på en egen liten magnetisk kompassnål: dess spinn. I ett ferromagnetiskt material, som järn, pekar alla dessa spinn åt samma håll och lägger ihop sig till ett kraftfullt yttre magnetfält. I ett antiferromagnetiskt material pekar spinnen hos grannatomerna i stället åt motsatt håll och släcker ut varandra fullständigt, så att materialet varken drar till sig eller stöts bort av en vanlig magnet. I över hundra år antog fysiker att de här två mönstren — samverkande eller motverkande spinn — var allt som fanns att hitta." },
+
+      { type: "h2", text: "Den gömda tredje sorten" },
+      { type: "p", html: "Altermagneter har, precis som antiferromagneter, ingen nettomagnetisering: spinn upp och spinn ner tar ut varandra helt. Skillnaden ligger i kristallens geometri. Hos en vanlig antiferromagnet omges atomen med spinn upp av exakt samma atommönster som atomen med spinn ner — bara spegelvänt eller förskjutet i sidled. Hos en altermagnet är omgivningen i stället vriden, roterad ett bestämt antal grader jämfört med sin motsvarighet. Den till synes obetydliga skillnaden får elektronernas energitillstånd att dela upp sig efter spinnriktning, precis som i en ferromagnet — trots att materialet utåt sett är helt magnetiskt neutralt." },
+      { type: "quote", html: "”Att upptäcka att en helt ny magnetisk fas hade legat dold i mer än hundra år visar att även de mest utforskade områdena inom fysiken fortfarande kan rymma grundläggande överraskningar.”", cite: "Jairo Sinova, professor vid Johannes Gutenberg-universitetet Mainz, en av pristagarna" },
+
+      { type: "h2", text: "Från symmetriteori till riktiga kristaller" },
+      { type: "p", html: "Sinova, Šmejkal och Jungwirth lade fram en fullständig symmetriklassificering av altermagnetism 2022, i en artikel i <em>Physical Review X</em>, och pekade samtidigt ut mer än 200 kandidatmaterial. Förutsägelsen bekräftades snabbt: forskargrupper världen över mätte den spinnuppdelade elektronstrukturen experimentellt, bland annat i manganditellurid (MnTe) och kromantimonid (CrSb), med hjälp av fotoelektronspektroskopi och elektriska transportmätningar. Sedan dess har fältet vuxit explosionsartat — enligt prismotiveringen har det ursprungliga arbetet redan inspirerat mer än 1&nbsp;000 uppföljande studier." },
+
+      { type: "h2", text: "Varför det spelar roll för framtidens elektronik" },
+      { type: "p", html: "Vanlig elektronik lagrar och flyttar information genom att styra elektroners laddning. Spinntronik försöker i stället utnyttja elektronernas spinnriktning, vilket kan ge snabbare kretsar som slösar mindre energi. Problemet har varit att välja mellan två alternativ som båda har en nackdel: ferromagneter ger spinnpolariserad ström men läcker ett störande magnetfält som gör det svårt att packa komponenter tätt, medan antiferromagneter är kompakta och okänsliga för yttre magnetfält men saknar just den spinnpolariserade strömmen elektroniken behöver. Altermagneter tycks kunna kombinera fördelarna hos båda: inget läckande magnetfält, men ändå en spinnpolariserad ström och magnetisk växling som kan ske långt snabbare än i dagens material — egenskaper som gör dem till en lovande kandidat för nästa generations minnen och logikkretsar." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Spinn är elektronens egen inbyggda rörelsemängdsmoment — ofta liknat vid en mikroskopisk kompassnål som antingen pekar ”upp” eller ”ner”.",
+        "Mer än 200 material har föreslagits vara altermagneter sedan 2022, och forskningsfältet har redan gett upphov till över 1&nbsp;000 vetenskapliga uppföljningsstudier.",
+        "Priset delas ut i september 2026 vid konferensen CMD32 i Graz, Österrike — samma prisserie har delats ut sedan 1975."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-25-varmestralar",
     date: "2026-07-25",
     title: "Forskare får värme att bete sig som ljus i en optisk fiber — vid rumstemperatur",

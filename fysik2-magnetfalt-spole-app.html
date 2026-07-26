@@ -772,15 +772,16 @@
                 // ── Polerna N och S ──
                 // Polerna sitter vid spolens ÄNDAR (där fältlinjerna går ut
                 // respektive in), inte ovanför spolen: etiketterna placeras
-                // strax utanför var sin ändyta, nära axeln. Liten höjning
-                // (y) så att glyfen inte hamnar ovanpå den raka axel-
-                // fältlinjen — bokstaven ska stå bredvid linjen, inte på den.
+                // strax utanför var sin ändyta, nära axeln och ungefär i
+                // höjd med spolens mitt. Liten höjning (y) så att glyfen
+                // inte hamnar ovanpå den raka axel-fältlinjen — bokstaven
+                // ska stå strax ovanför linjen, inte på den.
                 // z-förskjutningen lägger etiketten MELLAN fältlinjernas sex
                 // halvplan (de ritas vid φ = 0°, 60°, …) i stället för mitt i
                 // ett av dem — annars hamnar bokstaven ovanpå en fältlinje.
                 // Tecknet följer änden (inte strömriktningen), så båda
                 // etiketterna skjuts utåt i vyn.
-                const polX = Lw / 2 + 0.85, polY = 0.74, polZ = 0.34;
+                const polX = Lw / 2 + 0.85, polY = 0.32, polZ = 0.34;
                 const nSpr = textSprite([{ t: 'N', weight: 700, color: COL.npol }], 0.62);
                 nSpr.position.set(bDir * polX, polY, -bDir * polZ);
                 const sSpr = textSprite([{ t: 'S', weight: 700, color: COL.spol, stroke: COL.spolKant, strokeWidth: 4.6 }], 0.62);

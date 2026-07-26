@@ -14,19 +14,67 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-26) — kan tas upp senare
+
+- **Magnetiska "spår" i atomkärnor löser decennier gammal gåta om hur tunga
+  grundämnen bildas i stjärnor** — Eleanor Ronning (tidigare FRIB-doktorand,
+  nu postdok vid INFN Padua) och ett samarbete på 25 institutioner (ledda av
+  Michigan State University/FRIB) har visat att det gåtfulla överskottet av
+  lågenergetisk gammastrålning (”LEE”) från zink-70-kärnor beror på
+  magnetiska (inte elektriska) övergångar — genom att studera betasönderfall
+  från två olika tillstånd av koppar-70. Effekten gör att neutroninfångnings-
+  reaktioner sker oftare än väntat, vilket direkt påverkar beräkningar av
+  hur tunga grundämnen bildas i supernovor och neutronstjärnekrockar. Utmärkt
+  kärnfysik/astrofysik-vinkel (betasönderfall, gammastrålning,
+  nukleosyntes), tydlig och fräsch (publicerad i <em>Nature</em> 24 juli
+  2026). Sparas bara för att dagens artikel (altermagnetism) redan var vald
+  när denna hittades — stark kandidat för närmaste dagarna. Källor:
+  https://phys.org/news/2026-07-magnetic-clues-atomic-nuclei-elements.html ,
+  E. K. Ronning et al., ”Magnetic Character of the Low-Energy Enhancement in
+  <sup>70</sup>Zn”, Nature (2026), DOI: 10.1038/s41586-026-10758-3.
+  (tillagd 2026-07-26)
+- **Vintergatan kan ha genomgått en dramatisk "volt" för 10–11 miljarder år
+  sedan** — Kirill Batrakov (Durham University) har med superdatorsimuleringar
+  (Auriga-sviten, 25 Vintergats-lika galaxer) visat att galaxer med
+  långsamt roterande stjärnhalo delar två drag: en tidig, rakt-på-krock-
+  sammanslagning och en dramatisk skivvridning (>90°). Forskarna föreslår att
+  Vintergatan genomgick en sådan vridning vid sammanslagningen med
+  Gaia-Sausage-Enceladus. Häftig astronomivinkel men presenterad vid Royal
+  Astronomical Societys NAM2026-konferens (21 juli 2026) — ännu inte peer
+  review-publicerad, och vi har redan kört mycket astronomi senaste veckorna.
+  Källa: Royal Astronomical Society (pressmeddelande, NAM2026), 2026-07-21.
+  (tillagd 2026-07-26)
+- **Ovanlig blå optisk transient (AT2019ijn) kan tillhöra en helt ny klass av
+  kosmiska explosioner** — kinesiska astronomer (VLA-observationer) har sett
+  ett extremt ljusstarkt radioutbrott från en trolig jet-driven
+  flodvågshändelse (tidal disruption event) där ett mellanmassivt svart hål
+  (~132 000 solmassor) slet sönder en stjärna i en dvärggalax. Publicerad i
+  Astrophysical Journal Letters 6 juli 2026. Bra svart hål/astronomivinkel
+  men vi har kört mycket astronomi och svarta hål-nyheter senaste veckorna.
+  Källa: https://phys.org/news/2026-07-rare-blue-optical-transient-class.html
+  (tillagd 2026-07-26)
+- **Kall atomgas i ett skakat optiskt gitter simulerar "svarta hålens
+  kvantkaos" (SYK-modellen)** — Charles Creffield (Complutense-universitetet
+  Madrid), Nathan Goldman (Solvay Institutes/ULB), Fernando Sols och Marco
+  Schiró har visat att periodisk modulering (Floquet-teknik) av ultrakalla
+  atomer i ett optiskt gitter kan återskapa Sachdev-Ye-Kitaev-modellens
+  starka kvantkaos och snabba informations-"scrambling" — samma fysik som
+  associeras med svarta hål. Häftig men mycket teoretiskt tung
+  kvantsimulerings-vinkel, och vi har redan kört flera "svart hål i
+  labbet"-vinklade nyheter (syntetiskt svart hål 2026-07-12, Penrose-process
+  2026-07-15 sparad). Publicerad i Physical Review Letters 23 juli 2026.
+  Källa: phys.org (sök ”shaking atoms black hole quantum chaos”), DOI:
+  10.1103/r8zs-qvj3. (tillagd 2026-07-26)
+- **OBS — mager nyhetsdag (helg) vid sökningen 2026-07-26**: phys.org,
+  physicsworld.com och sciencedaily.com hade vid tidpunkten för sökningen
+  inget färskare än 2026-07-24 i sina physics-listningar (samma eftersläpnings-
+  mönster som redan noterats 2026-07-21). Bekräftar att helger är svaga för
+  färska pressmeddelanden — sök brett (WebSearch + direkta institutions-
+  pressrum) snarare än att bara skrolla förstasidorna vid en helgkörning.
+  (tillagd 2026-07-26)
+
 ## Fynd som inte användes (2026-07-25) — kan tas upp senare
 
-- **2026 Europhysics Prize hedrar upptäckten av altermagnetism — en tredje
-  grundläggande magnetismklass** — Jairo Sinova (Johannes Gutenberg-
-  universitetet Mainz), Libor Šmejkal och Tomas Jungwirth (Fysikinstitutet,
-  Tjeckiska vetenskapsakademin) prisas för att ha visat att altermagneter
-  saknar nettomagnetisering (som antiferromagneter) men ändå har starkt
-  spinnpolariserade elektroniska egenskaper (som ferromagneter) — en tredje
-  magnetismtyp utöver de två man känt till i över hundra år. Utmärkt
-  ellära/magnetism-vinkel (kan konkretiseras via spinnpolariserad ström och
-  spinntronik) för en dag utan färskare kandidat. Källa:
-  https://phys.org/news/2026-07-prize-honors-discovery-altermagnetism-fundamental.html
-  (tillagd 2026-07-25)
 - **Oregelbunden mikroskalig ytstruktur minskar luftmotstånd med upp till
   43,6 % — tvärtemot 80 års antagande om att släta ytor är bäst** —
   Tohoku University (Aiko Yakeno m.fl.) har med ett magnetiskt

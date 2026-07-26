@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-26 | `2026-07-26-altermagnetism` | Fysiker hedras för en tredje sorts magnetism — dold i över hundra år | Phys.org / Johannes Gutenberg-universitetet Mainz (pressmeddelande) / European Physical Society (officiellt tillkännagivande) / Physical Review X (L. Šmejkal, J. Sinova, T. Jungwirth, 2022) |
 | 2026-07-25 | `2026-07-25-varmestralar` | Forskare får värme att bete sig som ljus i en optisk fiber — vid rumstemperatur | UCLA Samueli School of Engineering (pressmeddelande) / Phys.org / Nature Physics (M. Li, H. Wu, Z. Qin, C. Su, H. D. Nguyen, Y. Hu, 2026) |
 | 2026-07-24 | `2026-07-24-fryst-optisk-fiber` | Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare | idw-online (pressmeddelande, Max Planck-institutet för ljusets fysik) / Phys.org / Optica (S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, 2026) |
 | 2026-07-23 | `2026-07-23-heliumnova-kulor` | Astronomer löser 25 år gammal novagåta — och hittar mystiska ”kulor” av gas ingen sett förut | Royal Astronomical Society (pressmeddelande, NAM2026) / Phys.org — presenterat av John Mills, University of Warwick, ej ännu peer review-publicerat |
@@ -81,3 +82,11 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > behöver köras lokalt. 2026-07-23-artikeln (V445 Puppis) bygger på en
 > presentation vid Royal Astronomical Societys NAM2026-konferens, ännu inte
 > peer review-publicerad — tydligt markerat i brödtexten; `research: null`.
+>
+> Not: 2026-07-26-artikeln (altermagnetism) valdes efter en bred sökning som
+> visade en ovanligt mager nyhetsdag (helg; phys.org/physicsworld/sciencedaily
+> hade inget färskare än 2026-07-24 vid tidpunkten för sökningen). Kandidaten
+> låg redan sparad i `ko.md` sedan 2026-07-25 som en bra reserv för just denna
+> situation. Själva forskningen (symmetriklassificeringen) är från 2022, men
+> nyhetshaken — 2026 års Europhysics-pris — offentliggjordes 2026-07-24, så
+> artikeln är tidsaktuell trots att grundforskningen är några år gammal.

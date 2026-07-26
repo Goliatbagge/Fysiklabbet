@@ -266,6 +266,88 @@
             return m;
         };
 
+        // ── Fältlinjeberäkning (Biot–Savart för cirkulära strömvarv) ──
+        // K(m) och E(m), fullständiga elliptiska integraler, via AGM-iteration
+        const ellipKE = (m) => {
+            if (m >= 1) m = 1 - 1e-12;
+            let a = 1, b = Math.sqrt(1 - m), c = Math.sqrt(m);
+            let sum = 0.5 * c * c, pow = 0.5;
+            for (let i = 0; i < 12 && c > 1e-14; i++) {
+                const an = (a + b) / 2;
+                b = Math.sqrt(a * b);
+                c = (a - b) / 2;
+                a = an;
+                pow *= 2;
+                sum += pow * c * c;
+            }
+            const K = Math.PI / (2 * a);
+            return [K, K * (1 - sum)];
+        };
+
+        // Fältet (Bx, Bρ) i punkten (x, ρ) från ett strömvarv med radie a i
+        // planet x = x0 (axialsymmetriskt; enheter så att μ0·I = 1)
+        const loopField = (a, x0, x, rho) => {
+            const dx = x - x0;
+            if (Math.abs(rho) < 1e-9) {
+                const d = a * a + dx * dx;
+                return [a * a / (2 * Math.pow(d, 1.5)), 0];
+            }
+            const sp = (a + rho) * (a + rho) + dx * dx;
+            const sm = (a - rho) * (a - rho) + dx * dx;
+            const [K, E] = ellipKE(4 * a * rho / sp);
+            const com = 1 / (2 * Math.PI * Math.sqrt(sp));
+            return [
+                com * (K + E * (a * a - rho * rho - dx * dx) / sm),
+                com * (dx / rho) * (-K + E * (a * a + rho * rho + dx * dx) / sm),
+            ];
+        };
+
+        // Sluten fältlinje genom (x=0, ρ=rho0): RK4 längs fältet tills
+        // linjen rundat en spolände och korsar mittplanet x = 0 igen.
+        // Startar rho0 UTANFÖR spolen (rho0 > R) spåras återledningen in
+        // till den inre korsningen; startar den INUTI (rho0 < R) spåras
+        // linjen ut genom änden till den yttre korsningen. Andra halvan är
+        // spegelbilden — fältet är symmetriskt kring spolens mittplan.
+        // Adaptiv steglängd/decimering: tätt nära spolen, glest långt ute
+        // (de axelnära linjerna sluter sig först flera spollängder bort).
+        // srcX = strömvarvens x-lägen.
+        const traceFieldLoop = (srcX, R, rho0) => {
+            const dir = (x, rho) => {
+                let bx = 0, br = 0;
+                for (let i = 0; i < srcX.length; i++) {
+                    const f = loopField(R, srcX[i], x, rho);
+                    bx += f[0]; br += f[1];
+                }
+                const nrm = Math.hypot(bx, br) || 1;
+                return [bx / nrm, br / nrm];
+            };
+            const half = [[0, rho0]];
+            let x = 0, rho = rho0, rhoEnd = rho0, xMin = 0;
+            for (let s = 0; s < 4000; s++) {
+                const far = Math.hypot(x, rho);
+                const ds = far < 4 ? 0.012 : 0.04;
+                const k1 = dir(x, rho);
+                const k2 = dir(x + 0.5 * ds * k1[0], rho + 0.5 * ds * k1[1]);
+                const k3 = dir(x + 0.5 * ds * k2[0], rho + 0.5 * ds * k2[1]);
+                const k4 = dir(x + ds * k3[0], rho + ds * k3[1]);
+                const nx = x + ds * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6;
+                const nr = rho + ds * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6;
+                if (s > 10 && ((x < 0 && nx >= 0) || (x > 0 && nx <= 0))) {
+                    rhoEnd = rho + (nr - rho) * (-x / (nx - x));
+                    half.push([0, rhoEnd]);
+                    break;
+                }
+                x = nx; rho = nr;
+                xMin = Math.min(xMin, x);
+                if (s % (far < 4 ? 3 : 12) === 0) half.push([x, rho]);
+                if (far > 30) break;   // säkerhetsnät
+            }
+            // spegla halvan (x → −x, baklänges) till en hel sluten slinga
+            const pts = half.slice();
+            for (let i = half.length - 2; i > 0; i--) pts.push([-half[i][0], half[i][1]]);
+            return { pts, half, rhoEnd, xMin };
+        };
+
         const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
             <div className="mb-3">
                 <div className="flex justify-between items-baseline mb-1">
@@ -336,7 +418,7 @@
             const [n, setN] = useState(isFinite(parseFloat(q.get('n'))) ? parseFloat(q.get('n')) : 600);
             const [lcm, setLcm] = useState(isFinite(parseFloat(q.get('l'))) ? parseFloat(q.get('l')) : 7.5);
             const [reversed, setReversed] = useState(q.get('rev') === '1');
-            const [show, setShow] = useState({ falt: true, strom: true, poler: true });
+            const [show, setShow] = useState({ falt: true, strom: true, poler: true, spole: true });
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
             const [fontsReady, setFontsReady] = useState(0);
@@ -389,7 +471,7 @@
 
                 const T = {
                     renderer, scene, camera, groups,
-                    dots: [], wire: null,
+                    dots: [], fans: [], wire: null,
                     // Smal mobilviewport klipper spolen och I-etiketten — starta längre ut
                     az: 0.55, pol: 1.22, radius: wrap.clientWidth < 600 ? 12.5 : 9.0,
                 };
@@ -453,6 +535,27 @@
                             T.wire.getPointAt(d.u, d.mesh.position);
                         });
                     }
+                    // Mellanlinjernas kamerafadning: en mellanslinga sträcker
+                    // sig flera enheter ut ur spolen — bågen i det halvplan
+                    // som buktar MOT kameran passerar strax framför den och
+                    // ser ut som ett jättetjockt rör i förgrunden. Den fläkt
+                    // vars YTTERSTA bågpunkt (≈ u·ρmax vid x = 0) kommer nära
+                    // kameran tonas därför mjukt ut (och in igen vid rotation).
+                    // Avståndskriteriet (inte vinkel!) gör att alla sex fläktar
+                    // syns när kameran tittar längs spolaxeln — då är ingen
+                    // båge nära kameran.
+                    if (T.fans.length) {
+                        const cp = camera.position;
+                        const pl = Math.hypot(cp.y, cp.z);
+                        T.fans.forEach((f) => {
+                            const d2 = cp.x * cp.x + pl * pl + f.rhoM * f.rhoM
+                                - 2 * f.rhoM * (cp.y * f.u[0] + cp.z * f.u[1]);
+                            const d = Math.sqrt(Math.max(0, d2));
+                            const t = Math.min(1, Math.max(0, (d - 5.0) / 1.5));
+                            const vis = t * t * (3 - 2 * t);   // smoothstep-fadning
+                            f.mats.forEach((m) => { m.opacity = m.userData.base * vis; });
+                        });
+                    }
                     renderer.render(scene, camera);
                 };
                 raf = requestAnimationFrame(loop);
@@ -513,14 +616,8 @@
                 );
                 coil.add(tube);
 
-                // ── Strömriktningen: pilar på tråden + vandrande prickar ──
-                const stromCol = new THREE.Color(COL.strom);
-                const NARROW = 12;
-                for (let k = 0; k < NARROW; k++) {
-                    const u = 0.05 + 0.9 * k / (NARROW - 1);
-                    const tan = wire.getTangentAt(u).multiplyScalar(reversed ? -1 : 1);
-                    strom.add(cone(tan, wire.getPointAt(u), 0.24, 0.105, stromCol));
-                }
+                // ── Strömriktningen: vandrande prickar längs tråden ──
+                // (inga fasta pilar på tråden — rörelsen visar riktningen)
                 const dotGeo = new THREE.SphereGeometry(0.07, 12, 12);
                 const dotMat = new THREE.MeshBasicMaterial({ color: COL.strom });
                 for (let k = 0; k < 14; k++) {
@@ -538,50 +635,120 @@
                 iSpr.position.set(Lw / 2 + 1.45, -1.95, -0.75);
                 strom.add(iSpr);
 
-                // ── Fältlinjer ──
-                // inre: parallella, jämnt fördelade — homogent fält
-                const rIn = 0.015 + 0.022 * strength;
-                const LIn = Lw + 1.0;
-                const inMat = new THREE.MeshStandardMaterial({ color: COL.falt, transparent: true, opacity: opF, roughness: 0.7 });
-                [{ y: 0, z: 0 }, { y: 0.45, z: 0 }, { y: -0.45, z: 0 }, { y: 0, z: 0.45 }, { y: 0, z: -0.45 }].forEach((o) => {
-                    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(rIn, rIn, LIn, 8), inMat);
-                    cyl.rotation.z = Math.PI / 2;
-                    cyl.position.set(0, o.y, o.z);
-                    falt.add(cyl);
-                    // Pilspetsen sitter MITT PÅ fältlinjen, inte i dess ände —
-                    // linjen löper obruten förbi spetsen (fältlinjekonvention).
-                    const xdir = new THREE.Vector3(bDir, 0, 0);
-                    falt.add(cone(xdir, new THREE.Vector3(0, o.y, o.z), 0.24, 0.075, COL.falt, opF));
-                });
-                // B-etikett vid de inre fältlinjernas utgångsände
-                const bSpr = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.46);
-                bSpr.position.set(bDir * (LIn / 2 + 0.30), 0.62, 0);
-                falt.add(bSpr);
+                // ── Fältlinjer: slutna slingor beräknade ur spolens fält ──
+                // Varje linje integreras fram ur Biot–Savart för strömvarven
+                // och blir en OBRUTEN sluten slinga: nästan rak inuti spolen,
+                // böjer av vid ändarna och sluter sig utanför — som hos en
+                // stavmagnet. Källvarven läggs tätare än de ritade varven
+                // (idealiserad solenoid, samma modell som B = μ0·n·I/l).
+                // Axisymmetri: linjen beräknas en gång i (x,ρ)-planet och
+                // roteras ut i sex halvplan. Samma rörtjocklek på HELA
+                // linjen — inuti som utanför.
+                const rF = 0.020 + 0.008 * strength;
+                const faltMat = new THREE.MeshStandardMaterial({ color: COL.falt, transparent: true, opacity: opF, roughness: 0.7 });
+                const srcX = [];
+                const NSRC = Math.max(turns, Math.round(Lw / 0.22));
+                for (let i = 0; i < NSRC; i++) srcX.push(-Lw / 2 + Lw * (i + 0.5) / NSRC);
 
-                // yttre: slutna slingor runt spolen, som hos en stavmagnet
-                const loopMat = new THREE.LineBasicMaterial({ color: COL.falt, transparent: true, opacity: 0.72 * opF });
-                // varje hel ellips täcker två radiella riktningar (φ och φ + 180°)
-                const phis = [0, Math.PI / 3, 2 * Math.PI / 3];
-                [1.75, 2.35].forEach((b, bi) => {
-                    const a = Lw / 2 + 0.55 + bi * 0.4;
+                const phis = [0, 1, 2, 3, 4, 5].map((k) => k * Math.PI / 3);
+                let xReach = Lw / 2 + 0.8;
+                [1.65, 2.35].forEach((rhoOut, si) => {
+                    const fl = traceFieldLoop(srcX, R, rhoOut);
+                    xReach = Math.max(xReach, -fl.xMin + 0.6);
+                    const p3base = fl.pts;
                     phis.forEach((phi) => {
                         const u = new THREE.Vector3(0, Math.cos(phi), Math.sin(phi));
-                        const lpts = [];
-                        for (let k = 0; k <= 72; k++) {
-                            const s = 2 * Math.PI * k / 72;
-                            lpts.push(new THREE.Vector3(a * Math.cos(s), 0, 0)
-                                .addScaledVector(u, b * Math.sin(s)));
-                        }
-                        falt.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(lpts), loopMat));
-                        // pilar på slingans yttersta punkter: utanför spolen går fältet N ⟶ S
-                        if (bi === 0) {
-                            falt.add(cone(new THREE.Vector3(-bDir, 0, 0),
-                                u.clone().multiplyScalar(b), 0.20, 0.065, COL.falt, 0.85 * opF));
-                            falt.add(cone(new THREE.Vector3(-bDir, 0, 0),
-                                u.clone().multiplyScalar(-b), 0.20, 0.065, COL.falt, 0.85 * opF));
-                        }
+                        const p3 = p3base.map(([px, pr]) =>
+                            new THREE.Vector3(px, 0, 0).addScaledVector(u, pr));
+                        const curve = new THREE.CatmullRomCurve3(p3, true);
+                        falt.add(new THREE.Mesh(
+                            new THREE.TubeGeometry(curve, Math.min(260, p3.length + 8), rF, 8, true),
+                            faltMat));
+                        // Pilspetsen sitter MITT PÅ fältlinjen, aldrig i dess
+                        // ände (fältlinjekonvention). Stora slingan får spetsen
+                        // på sin inre, raka del (fältet åt +B-hållet), lilla
+                        // slingan på återledningen utanför (N ⟶ S) — alla
+                        // spetsar ligger vinkelrätt över varandra i mittplanet.
+                        if (si === 1) falt.add(cone(new THREE.Vector3(bDir, 0, 0),
+                            u.clone().multiplyScalar(fl.rhoEnd), 0.22, 0.07, COL.falt, opF));
+                        else falt.add(cone(new THREE.Vector3(-bDir, 0, 0),
+                            u.clone().multiplyScalar(rhoOut), 0.22, 0.07, COL.falt, opF));
                     });
                 });
+
+                // "Mellanlinjer": fältlinjer nära axeln, mellan mittlinjen och
+                // de täta slingorna. De går genom spolen vid ρ0 = 0,24 och
+                // sluter sig först ~7 enheter ut — utanför bilden i normalvyn
+                // (så de ser ut att fana ut mot oändligheten, som i
+                // läroböckerna) men ärligt slutna om man zoomar ut. Utan dem
+                // gapar det tomt mellan den raka mittlinjen och slingorna.
+                // (EN familj räcker — två gjorde bilden rörig.) De ritas i
+                // ALLA sex halvplan (3D-känsla även sett längs axeln), men
+                // varje plan får ett eget material: fläkten som buktar mot
+                // kameran tonas ut i renderloopen — annars passerar dess båge
+                // strax framför kameran och ser ut som ett jättetjockt rör.
+                // OBS: deras utsträckning får INTE påverka xReach.
+                T.fans = [];
+                [0.24].forEach((rho0) => {
+                    const fl = traceFieldLoop(srcX, R, rho0);
+                    // pil på var gren där linjen passerar mittlinjens yttre
+                    // pilkolumn (|x| ≈ xReach + 0,9) — spetsen mitt på linjen
+                    const xa = xReach + 0.9;
+                    let ia = fl.half.findIndex((p) => p[0] >= xa);
+                    if (ia < 1 || ia > fl.half.length - 2) ia = -1;
+                    phis.forEach((phi) => {
+                        const u = new THREE.Vector3(0, Math.cos(phi), Math.sin(phi));
+                        const mat = faltMat.clone();
+                        mat.transparent = true;
+                        mat.userData.base = opF;
+                        const mats = [mat];
+                        const p3 = fl.pts.map(([px, pr]) =>
+                            new THREE.Vector3(px, 0, 0).addScaledVector(u, pr));
+                        const curve = new THREE.CatmullRomCurve3(p3, true);
+                        falt.add(new THREE.Mesh(
+                            new THREE.TubeGeometry(curve, Math.min(300, p3.length + 8), rF, 8, true),
+                            mat));
+                        if (ia > 0) {
+                            const [ax, ar] = fl.half[ia];
+                            const t2 = [fl.half[ia + 1][0] - fl.half[ia - 1][0],
+                                        fl.half[ia + 1][1] - fl.half[ia - 1][1]];
+                            const tn = Math.hypot(t2[0], t2[1]) || 1;
+                            // högergrenen: tangenten längs fältet; vänstergrenen
+                            // är speglad (Bx lika, Bρ byter tecken)
+                            [[1, ax], [-1, -ax]].forEach(([sgn, cx]) => {
+                                const c = cone(new THREE.Vector3(t2[0] / tn, 0, 0)
+                                    .addScaledVector(u, sgn * t2[1] / tn).multiplyScalar(bDir),
+                                    new THREE.Vector3(cx, 0, 0).addScaledVector(u, ar),
+                                    0.22, 0.07, COL.falt, opF);
+                                c.material.transparent = true;
+                                c.material.userData.base = opF;
+                                mats.push(c.material);
+                                falt.add(c);
+                            });
+                        }
+                        T.fans.push({ u: [u.y, u.z], rhoM: fl.rhoEnd, mats });
+                    });
+                });
+
+                // mittlinjen: fältlinjen längs axeln sluter sig först långt
+                // utanför bilden — den ritas därför "oändlig": så lång att den
+                // aldrig syns ta slut ens vid max utzoomning (kameraradie 15
+                // ⟹ synfält ≲ ±12; linjen får ±30). Fältet upphör ju inte
+                // strax utanför spolen.
+                const AXH = 30;
+                const axis = new THREE.Mesh(new THREE.CylinderGeometry(rF, rF, 2 * AXH, 10), faltMat);
+                axis.rotation.z = Math.PI / 2;
+                falt.add(axis);
+                // pilspetsar mitt på linjen (aldrig i änden): en i spolens
+                // centrum och en på var sida utanför slingorna, så att linjen
+                // läses som fältlinje även där den lämnar bilden
+                [0, -(xReach + 0.9), xReach + 0.9].forEach((ax) => {
+                    falt.add(cone(new THREE.Vector3(bDir, 0, 0), new THREE.Vector3(ax, 0, 0), 0.24, 0.075, COL.falt, opF));
+                });
+                // B-etikett vid mittlinjens utgångsände
+                const bSpr = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.46);
+                bSpr.position.set(bDir * (xReach + 0.30), 0.62, 0);
+                falt.add(bSpr);
 
                 // ── Polerna N och S ──
                 const nSpr = textSprite([{ t: 'N', weight: 700, color: COL.npol }], 0.62);
@@ -619,6 +786,22 @@
                 T.groups.strom.visible = show.strom;
                 T.groups.poler.visible = show.poler;
             }, [show]);
+
+            // ── "Dölj" spolen: nästan helt osynlig — men inte helt ──
+            // Spöket ska inte heller skymma fältlinjerna bakom sig
+            // (depthWrite av). Beror även på ombyggnadsparametrarna, eftersom
+            // ombyggnaden skapar ett nytt opakt trådmaterial.
+            useEffect(() => {
+                const T = threeRef.current;
+                if (!T) return;
+                T.groups.coil.traverse((o) => {
+                    if (!o.material) return;
+                    o.material.transparent = !show.spole;
+                    o.material.opacity = show.spole ? 1 : 0.09;
+                    o.material.depthWrite = show.spole;
+                    o.material.needsUpdate = true;
+                });
+            }, [show, n, lcm, I, reversed, B, fontsReady]);
 
             // ── Fullskärm ──
             useEffect(() => {
@@ -660,6 +843,9 @@
                     <label><input type="checkbox" checked={show.poler} onChange={() => tShow('poler')} />
                         <span className="st-swatch" style={{ background: COL.npol }}></span>
                         <span>Polerna (N och S)</span></label>
+                    <label><input type="checkbox" checked={show.spole} onChange={() => tShow('spole')} />
+                        <span className="st-swatch" style={{ background: COL.koppar }}></span>
+                        <span>Spolen</span></label>
                     {/* Styrknappen visas här BARA i fullskärm — i normalläget finns
                         den i sidopanelen (aldrig dubblerad). */}
                     {isFullscreen && (
@@ -690,8 +876,8 @@
                             Sätter vi ihop flera strömslingor bildas en <strong>spole</strong>. Fälten från varven
                             samverkar, och inuti en lång rak spole — en <strong>solenoid</strong> — blir magnetfältet
                             <strong> homogent</strong>: lika stort överallt. Dra i scenen för att rotera spolen i tre
-                            dimensioner och studera hur tråden är lindad — de blå pilarna och prickarna visar åt
-                            vilket håll strömmen går runt spolen, och tillsammans med lindningen avgör det fältets
+                            dimensioner och studera hur tråden är lindad — de blå prickarna som vandrar längs
+                            tråden visar åt vilket håll strömmen går runt spolen, och tillsammans med lindningen avgör det fältets
                             riktning (tumregeln). Ändra strömmen <em>I</em>, varvtalet <em>n</em> och spolens
                             längd <em>l</em>, och byt strömriktning för att vända fältet. Vi har byggt en elektromagnet!
                         </p>
@@ -830,9 +1016,10 @@
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Homogent fält inuti</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Inuti en lång rak spole betraktas magnetfältet som <strong>homogent</strong> —
-                                    lika stort överallt. Det syns i modellen: fältlinjerna inuti spolen är parallella
-                                    och jämnt fördelade. Utanför spolen liknar fältet en stavmagnets, med en
-                                    nordpol i ena änden och en sydpol i den andra.
+                                    lika stort överallt. Det syns i modellen: inuti spolen löper fältlinjerna parallellt
+                                    med spolens axel. Utanför spolen liknar fältet en stavmagnets, med en
+                                    nordpol i ena änden och en sydpol i den andra — varje fältlinje är en
+                                    sluten slinga som går genom spolen och tillbaka runt utsidan.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">

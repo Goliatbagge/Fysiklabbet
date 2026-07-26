@@ -597,11 +597,34 @@
             return sprite;
         }
 
-        // ── Golv ──
+        // ── Golv: kollegieblocksyta med rutnät ──
+        // Dovare papperston + ljusblått rutnät (som ett kollegieblock) i
+        // stället för den stora enfärgat ljusa ytan — matchar Laborans-
+        // stilen och vilar bättre för ögat.
         _buildFloor() {
+            const tile = document.createElement('canvas');
+            tile.width = tile.height = 128;
+            const ctx = tile.getContext('2d');
+            ctx.fillStyle = '#e2d8bf';               // kollegieblock-papper
+            ctx.fillRect(0, 0, 128, 128);
+            ctx.strokeStyle = 'rgba(98, 130, 158, 0.34)';  // ljusblå rutlinje
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(1, 0); ctx.lineTo(1, 128);    // vänsterkant → lodräta linjer
+            ctx.moveTo(0, 1); ctx.lineTo(128, 1);    // överkant → vågräta linjer
+            ctx.stroke();
+            const tex = new THREE.CanvasTexture(tile);
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(46, 46);                  // ruta ≈ 0,6 världsenheter
+            if (this.renderer) {
+                tex.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
+            }
+            // Ljusen summerar till ≈1,36× på en vågrät yta — utan kompensation
+            // klipps texturen till vitt och rutnätet syns bara i skuggorna.
+            // Grå grundfärg (≈1/1,36) gör att golvet visar texturens ton.
             const floor = new THREE.Mesh(
                 new THREE.CircleGeometry(14, 48),
-                new THREE.MeshPhongMaterial({ color: 0xe9e0cd, shininess: 4 })
+                new THREE.MeshPhongMaterial({ map: tex, color: 0xbcbcbc, shininess: 2 })
             );
             floor.rotation.x = -Math.PI / 2;
             floor.receiveShadow = true;

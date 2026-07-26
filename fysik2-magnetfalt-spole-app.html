@@ -548,12 +548,12 @@
                     cyl.rotation.z = Math.PI / 2;
                     cyl.position.set(0, o.y, o.z);
                     falt.add(cyl);
-                    // pilspets vid utgångsänden + liten pil på mitten
+                    // Pilspetsen sitter MITT PÅ fältlinjen, inte i dess ände —
+                    // linjen löper obruten förbi spetsen (fältlinjekonvention).
                     const xdir = new THREE.Vector3(bDir, 0, 0);
-                    falt.add(cone(xdir, new THREE.Vector3(bDir * (LIn / 2 + 0.10), o.y, o.z), 0.24, 0.075, COL.falt, opF));
-                    falt.add(cone(xdir, new THREE.Vector3(bDir * 0.1, o.y, o.z), 0.20, 0.065, COL.falt, opF));
+                    falt.add(cone(xdir, new THREE.Vector3(0, o.y, o.z), 0.24, 0.075, COL.falt, opF));
                 });
-                // B-etikett vid de inre pilspetsarna
+                // B-etikett vid de inre fältlinjernas utgångsände
                 const bSpr = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.46);
                 bSpr.position.set(bDir * (LIn / 2 + 0.30), 0.62, 0);
                 falt.add(bSpr);

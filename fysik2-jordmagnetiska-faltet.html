@@ -873,7 +873,7 @@
             magnetGroup.add(northPole);
 
             // Add curved labels on the magnet surface
-            const createCurvedLabel = (text, textColor, yPos) => {
+            const createCurvedLabel = (text, textColor, yPos, strokeColor) => {
                 const canvas = document.createElement('canvas');
                 canvas.width = 128;
                 canvas.height = 128;
@@ -883,10 +883,21 @@
                 ctx.clearRect(0, 0, 128, 128);
 
                 // Text
-                ctx.fillStyle = textColor;
                 ctx.font = 'bold 100px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
+                // Valfri kontur (ritas före fyllningen, så bara yttre halvan
+                // syns): sydpolen är vit enligt svensk konvention, så det vita
+                // S:et behöver en tunn svart kant för att synas mot den vita
+                // polen. Nordpolens vita N ligger på rött och klarar sig utan.
+                if (strokeColor) {
+                    ctx.strokeStyle = strokeColor;
+                    ctx.lineWidth = 6;
+                    ctx.lineJoin = 'round';
+                    ctx.miterLimit = 2;
+                    ctx.strokeText(text, 64, 68);
+                }
+                ctx.fillStyle = textColor;
                 ctx.fillText(text, 64, 68);
 
                 const texture = new THREE.CanvasTexture(canvas);
@@ -916,8 +927,8 @@
                 return curvedLabel;
             };
 
-            // S label on white part (white text)
-            magnetGroup.add(createCurvedLabel('S', '#ffffff', halfLength * 0.92));
+            // S label on white part (white text with a thin black outline)
+            magnetGroup.add(createCurvedLabel('S', '#ffffff', halfLength * 0.92, '#0f1620'));
 
             // N label on red part (white text)
             magnetGroup.add(createCurvedLabel('N', '#ffffff', -halfLength * 0.92));

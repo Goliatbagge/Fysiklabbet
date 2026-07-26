@@ -996,6 +996,28 @@ deklination), måttpilar och högerhandsregelns fingrar. Fråga: visar pilen
 en storhets belopp eller en linjes förlopp? Belopp → spets i änden.
 Förlopp → spets mitt på.
 
+### Magnetpoler: nordpolen röd, sydpolen VIT — aldrig blå
+
+I svensk fysiklitteratur markeras **nordpolen röd och sydpolen vit**. Blått
+är i våra figurer strömmens färg (*I*), så en blå sydpol läses som ström i
+stället för som pol. Gäller polkroppar och polbeteckningar överallt: sims
+(SVG, canvas, THREE.js), teori-figurer och övningsfigurer.
+
+**Sydpolens `S` ritas vitt med en tunn svart kontur** (`#0f1620`), så att
+den håller både mot den ljusa pappersbotten (`#f3eee4`) och mot en vit
+polkropp. Nordpolens `N` är vitt på den röda polkroppen och behöver ingen
+kontur.
+
+Konturen ritas som `strokeText` **före** `fillText` (canvas) respektive
+`paint-order: stroke` (SVG) — då täcker fyllningen konturens inre halva och
+bara den yttre halvan syns, vilket ger en jämn tunn kant i stället för en
+uppsvälld glyf. Riktvärde `lineWidth` ≈ 4,5–6 vid 64–100 px teckenstorlek.
+
+⚠️ Detta är INTE ett brott mot no-white-outline-regeln nedan: där är felet
+en *vit halo runt mörk text*. Här är vitt fyllnadsfärgen och konturen svart.
+Referensimpl: `textSprite()` i `fysik2-magnetfalt-spole-app.html` och
+`createCurvedLabel()` i `fysik2-jordmagnetiska-faltet.html`.
+
 ### Kraftfigurer: angreppspunkt, komposanter, kontakt och etiketter
 
 Detta avsnitt samlar fel som **upprepade gånger** har behövt rättas i

@@ -812,9 +812,37 @@ body.lab-sim .fs-toggle-handle:hover {
 }
 body.lab-sim .fs-toggle-handle svg { transition: transform 0.3s ease; }
 
+/* Handtag för den dockade verktygsraden på mobil (skapas av sim-dock.js;
+   placeras i flödet av sektion 8.3). Samma vita pill-look som .fs-btn så
+   att den fungerar mot både ljus pappersscen och mörk rymdscen. */
+body.lab-sim .fs-dock-handle {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--lab-line-strong);
+    color: var(--lab-ink);
+    font-family: var(--lab-font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    z-index: 20;
+    white-space: nowrap;
+}
+
 /* fs-row (rad inom fs-controls) */
 body.lab-sim .fs-label { color: #e2e8f0; font-size: 0.95rem; font-weight: 500; }
 body.lab-sim .fs-value { color: #e2e8f0; font-size: 0.92rem; font-weight: 500; }
+/* Glidarskenan ärver papper-stilens ink-färg (var(--lab-line-strong)) och
+   blir då osynlig mot .fs-controls mörka botten — bara greppet syns. Ljus
+   skena här, precis som .fs-label/.fs-value är ljusa. */
+body.lab-sim .fs-controls input[type="range"] {
+    background: rgba(226, 232, 240, 0.34);
+}
 
 /* Fullskärmsknapp (utvidga/komprimera) */
 body.lab-sim .fs-btn {
@@ -1117,23 +1145,60 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
 }
 
 /* ============================================================
-   8. Mobilanpassning (≤600px)
+   8. Mobilanpassning (≤600px) — scenen först, verktygen UNDER
    ----------------------------------------------------------------
-   På smala skärmar skalas scenen ner kraftigt — overlay-rutorna
-   (.scene-toggles uppe till höger, .fs-sliders uppe till vänster)
-   täcker då större delen av scenen och skymmer innehållet. I
-   normalläget låter vi dem i stället FLÖDA under scenen (static),
-   så att scenen är fri och alla verktyg ändå nås direkt. I
-   fullskärm behålls overlay-läget (där finns gott om plats och
-   panelen måste ligga ovanpå canvasen).
+   På en telefon är ritytan bara ~215 px hög (en 860×520-viewBox mot
+   390 px bredd). Overlay-rutorna — .scene-toggles (uppe till höger),
+   .fs-sliders (uppe till vänster) och .fs-controls (nederkanten) —
+   täcker då i praktiken HELA scenen. Lösningen är inte
+   genomskinlighet eller mindre rutor, utan en annan disposition:
+
+       scenen överst  →  verktygen dockade under  →  skroll vid behov
+
+   Samma disposition i normalläge OCH fullskärm, så eleven möter
+   samma sak i båda. I fullskärm ligger scenen dessutom `sticky` i
+   överkanten, så den syns kvar när verktygen skrollas.
+
+   Två fel som denna sektion rättar (rör den inte utan att köra
+   `node .claude/verify-mobil-scen.js`, som mäter både):
+
+   a) Verktygen ovanpå scenen i fullskärm (påpekat 2026-07-26).
+   b) Wrappern har ofta FAST höjd (t.ex. 540–580 px) + overflow:
+      hidden, medan svg:n är height:100%. De static-lagda
+      .scene-toggles/.scene-hint hamnade då UTANFÖR ramen och
+      klipptes bort helt — "Visa"-kryssrutorna var oåtkomliga på
+      mobil i ett par dussin simuleringar. Auto-höjd på wrappern +
+      höjd ur svg:ns viewBox löser både det och de döda ytorna
+      över/under ritytan.
    ============================================================ */
 
 @media (max-width: 600px) {
-    body.lab-sim .scene-wrap .scene-toggles,
-    body.lab-sim .canvas-wrap .scene-toggles,
-    body.lab-sim .wave-stage .scene-toggles,
-    body.lab-sim .scene-wrap .fs-sliders,
-    body.lab-sim .canvas-wrap .fs-sliders {
+
+    /* ── 8.1 Scenramen hugger sitt innehåll ──────────────────────
+       Fast höjd bort: svg:ns viewBox ger den naturliga höjden, och
+       verktygsrutorna får plats innanför ramen i stället för att
+       klippas. Ritytan blir INTE mindre — den var redan begränsad
+       av bredden; det är bara de döda ytorna som försvinner.
+
+       ⚠️ UNDANTAG `:not(:has(> .inset-0))`: några sims bygger scenen
+       av HTML i ett `div.absolute.inset-0` som fyller ramen. Där är
+       ALLA barn ur flödet, så auto-höjd kollapsar ramen till 0 px och
+       hela simuleringen försvinner (fysik1-faradays-bur,
+       fysik1-influens). De behåller sin deklarerade höjd. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):not(:has(> .inset-0)) {
+        height: auto !important;
+        min-height: 0 !important;
+        /* aspect-ratio låser annars ramen till scenens proportion, så att
+           verktygsrutorna hamnar utanför (fysik1-berg-och-dalbana m.fl.) */
+        aspect-ratio: auto !important;
+    }
+    body.lab-sim .scene-wrap > svg,
+    body.lab-sim .wave-stage > svg {
+        height: auto !important;          /* viewBox ger proportionen */
+    }
+
+    /* ── 8.2 Verktygsrutorna flödar under scenen (normalläge) ──── */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage) :is(.scene-toggles, .fs-sliders) {
         position: static;
         width: auto;
         max-width: none;
@@ -1143,78 +1208,239 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
         -webkit-backdrop-filter: none;
     }
 
-    /* I fullskärm: tillbaka till overlay */
-    body.lab-sim .scene-wrap:fullscreen .scene-toggles,
-    body.lab-sim .canvas-wrap:fullscreen .scene-toggles,
-    body.lab-sim .wave-stage:fullscreen .scene-toggles {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        margin: 0;
-        max-width: 70vw;
-        max-height: 60vh;
-        overflow-y: auto;
-    }
-    body.lab-sim .scene-wrap:-webkit-full-screen .scene-toggles,
-    body.lab-sim .canvas-wrap:-webkit-full-screen .scene-toggles,
-    body.lab-sim .wave-stage:-webkit-full-screen .scene-toggles {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        margin: 0;
-        max-width: 70vw;
-        max-height: 60vh;
-        overflow-y: auto;
-    }
-    body.lab-sim .scene-wrap:fullscreen .fs-sliders,
-    body.lab-sim .canvas-wrap:fullscreen .fs-sliders {
-        position: absolute;
-        top: 64px;
-        left: 14px;
-        margin: 0;
-        max-width: 60vw;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-    body.lab-sim .scene-wrap:-webkit-full-screen .fs-sliders,
-    body.lab-sim .canvas-wrap:-webkit-full-screen .fs-sliders {
-        position: absolute;
-        top: 64px;
-        left: 14px;
-        margin: 0;
-        max-width: 60vw;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    /* Hint-pillen ("Ta tag i …") ligger i scenens nederkant och krockar
-       med avläsningsrutorna på mobil — låt den flöda under scenen i
-       normalläge (samma mönster som .scene-toggles ovan) */
-    body.lab-sim .scene-wrap .scene-hint,
-    body.lab-sim .canvas-wrap .scene-hint,
-    body.lab-sim .wave-stage .scene-hint {
+    /* Hint-pillen ("Ta tag i …") ligger i scenens nederkant och
+       krockar med avläsningsrutorna — låt den flöda under scenen. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage) .scene-hint {
         position: static;
         display: block;
         width: fit-content;
+        max-width: calc(100% - 16px);
         margin: 0 8px 8px;
     }
-    body.lab-sim .scene-wrap:fullscreen .scene-hint,
-    body.lab-sim .canvas-wrap:fullscreen .scene-hint,
-    body.lab-sim .wave-stage:fullscreen .scene-hint {
-        position: absolute;
-        bottom: 10px;
-        left: 12px;
-        margin: 0;
-    }
-    body.lab-sim .scene-wrap:-webkit-full-screen .scene-hint,
-    body.lab-sim .canvas-wrap:-webkit-full-screen .scene-hint,
-    body.lab-sim .wave-stage:-webkit-full-screen .scene-hint {
-        position: absolute;
-        bottom: 10px;
-        left: 12px;
-        margin: 0;
+
+    /* Avläsningsrutan (.scene-info) är `bottom`-ankrad mot scenramen. När
+       ramen växer för att rymma verktygen (8.1) — eller blir hela skärmen i
+       fullskärm — följer rutan med NEDÅT och lägger sig ovanpå verktygen i
+       stället för på scenen. Docka den direkt under scenen, kvar i
+       högerkanten som förut. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage) .scene-info {
+        position: static;
+        align-self: flex-end;
+        margin: 0 8px 8px auto;
+        width: fit-content;
     }
 
+    /* ── 8.3 Fullskärm: scenen sticky överst, verktygen dockade ──
+       display:flex slår :fullscreen-regelns `display: block !important`
+       (sektion 7). Ordningen sätts med `order` eftersom DOM-ordningen
+       på rutorna varierar mellan simuleringarna.
+
+       ⚠️ !important på flex-egenskaperna är nödvändigt: ett par dussin
+       sims har en EGEN `body.lab-sim .scene-wrap:fullscreen { display:
+       flex !important; align-items: center; justify-content: center }`
+       i sitt <style>-block. Den har exakt samma specificitet som
+       regeln här (0,3,1) men står senare i dokumentet, så utan
+       !important vann deras centrering — och då överflödade den för
+       höga docken symmetriskt UT ur skärmen i båda ändar. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        overflow-y: auto !important;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+        scrollbar-width: none;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen)::-webkit-scrollbar {
+        display: none;
+    }
+    /* Inget barn får krympas av flexboxen. Utan detta klämdes scener som
+       är en <div> med fast höjd ihop när docken inte fick plats — i
+       fysik1-densitet-app blev en 400 px-scen 66 px hög. Ramen skrollar
+       i stället. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) > * {
+        flex-shrink: 0;
+    }
+
+    /* Scenen: naturlig höjd, klistrad i överkanten. `background:
+       inherit` gör att verktygen inte lyser igenom när de skrollas
+       upp under den. */
+    body.lab-sim :is(.scene-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) > svg,
+    body.lab-sim :is(.scene-wrap, .canvas-wrap):is(:fullscreen, :-webkit-full-screen) > canvas {
+        flex: 0 0 auto;
+        order: 0;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+    }
+    /* THREE.js-scener (renderer i .scene-canvas) skalas av JS efter
+       containerns höjd — ge den en andel av skärmen så verktygen får
+       plats, i stället för sektion 7:s 100vh. */
+    body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .scene-canvas,
+    body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) canvas.scene-canvas {
+        flex: 0 0 auto;
+        order: 0;
+        height: 54vh !important;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+    body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .scene-canvas > canvas {
+        height: 100% !important;
+    }
+
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .scene-hint {
+        order: 1;
+        flex: 0 0 auto;
+        position: static;
+        margin: 6px 8px 2px;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .scene-info {
+        order: 1;
+        flex: 0 0 auto;
+        margin: 6px 8px 0 auto;
+    }
+    /* Handtaget som fäller ihop docken (skapas av sim-dock.js) */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-dock-handle {
+        order: 2;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-sliders {
+        order: 3;
+        flex: 0 0 auto;
+        position: static;
+        width: auto;
+        max-width: none;
+        max-height: none;
+        margin: 6px 8px;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .scene-toggles {
+        order: 4;
+        flex: 0 0 auto;
+        position: static;
+        width: auto;
+        max-width: none;
+        max-height: none;
+        margin: 6px 8px;
+    }
+    /* En del sims samlar flera verktygsrutor i en egen absolut
+       positionerad kolumn (t.ex. .fs-right i berg-och-dalbana, som
+       håller visningsvalen + hopfällbara diagram). Docka den som en
+       enhet i stället för att låta den täcka scenen. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen)
+        > *:has(> .scene-toggles, > .fs-sliders, > .fs-controls) {
+        order: 4;
+        flex: 0 0 auto;
+        position: static !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+        align-items: stretch !important;
+        margin: 6px 8px;
+    }
+
+    /* Reglagepanelen (.fs-controls) dockas likadant — den är annars
+       absolut placerad i nederkanten med translateX(-50%). */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-toggle-handle {
+        order: 5;
+        flex: 0 0 auto;
+        position: static;
+        transform: none;
+        margin: 4px auto 0;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-controls {
+        order: 6;
+        flex: 0 0 auto;
+        position: static;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: auto;
+        max-height: none;
+        margin: 6px 8px;
+    }
+
+    /* ── 8.4 Ark-läge: scener utan egen proportion ──────────────
+       De flesta scener är en SVG med viewBox och får därmed en
+       naturlig höjd (~235 px på 390 px bredd) — då finns gott om
+       ledig yta UNDER att docka verktygen i. Men ett tiotal sims
+       ritar scenen i en canvas/div som JS skalar efter ramens
+       storlek; i fullskärm blir den 100vh och det finns ingen ledig
+       yta kvar. Att i stället tvinga ner höjden med CSS skulle
+       platta till bilden (bitmappen är redan ritad i full höjd).
+
+       För dem gör sim-dock.js om docken till ett ARK i nederkanten:
+       scenen ligger kvar i full storlek och verktygen läggs över dess
+       nedre del — men bara ~1/3 av skärmen, och hela arket fälls bort
+       med handtaget. Klassen sätts av JS (.dock-overlay på ramen,
+       .dock-media på scenen) eftersom CSS inte kan mäta höjder. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay {
+        justify-content: flex-end !important;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay > .dock-media {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay
+        :is(.fs-sliders, .scene-toggles, .fs-controls) {
+        max-height: 28vh;              /* två rutor ⇒ arket ≤ ~60 % av skärmen */
+        overflow-y: auto;
+        box-shadow: 0 4px 16px rgba(15, 22, 32, 0.28);
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay .scene-hint {
+        display: none;                 /* skulle hamna mitt över scenen */
+    }
+
+    /* ── 8.5 Hopfälld dock: scenen får hela skärmen ─────────────
+       Handtaget lämnas kvar (annars går läget inte att ångra) och
+       scenen centreras som den gjorde före dockningen. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-collapsed {
+        justify-content: center !important;
+        overflow-y: hidden !important;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-collapsed
+        :is(.fs-sliders, .scene-toggles, .fs-controls, .fs-toggle-handle),
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-collapsed
+        > *:has(> .scene-toggles, > .fs-sliders, > .fs-controls) {
+        display: none;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-collapsed > svg,
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-collapsed > canvas {
+        position: static;              /* sticky behövs inte utan skroll */
+    }
+    /* Hopfälld panel ska ge tillbaka PLATSEN, inte bara bli osynlig
+       (transform lämnar kvar sin ruta i flödet). */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-controls.collapsed {
+        display: none;
+    }
+
+    /* EN fäll-knapp i docken. Finns .fs-dock-handle (sim-dock.js) styr
+       den hela docken — då göms simuleringens egna "Dölj reglage" och
+       .fs-controls visas alltid, annars skulle två snarlika pill-knappar
+       stå bredvid varandra och fälla olika delar av samma dock. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen):has(> .fs-dock-handle) .fs-toggle-handle {
+        display: none;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen):has(> .fs-dock-handle) .fs-controls.collapsed {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    /* Fullskärmsknappen får inte skrolla bort med verktygen —
+       `fixed` inne i ett fullskärmselement = fäst mot skärmen. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen) .fs-btn {
+        position: fixed;
+        z-index: 30;
+    }
+
+    /* ── 8.6 Övrigt mobilpynt ──────────────────────────────────── */
     /* Mindre fullskärmsknapp på mobil — 40 px-cirkeln täcker annars
        diagrammens övre vänstra hörn när scenen skalats ner */
     body.lab-sim .fs-btn {
@@ -1228,13 +1454,36 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
         height: 15px;
     }
 
-    /* Fullskärmspanelen med glidare får inte täcka hela mobilskärmen */
+    /* Kompaktare reglagepanel — full skärmbredd behövs till scenen */
     body.lab-sim .fs-controls {
         width: min(820px, 96%);
         padding: 10px 12px;
         gap: 8px;
-        max-height: 45vh;
-        overflow-y: auto;
+    }
+    /* Reglagerad: etikett + värde på en rad, glidaren på egen rad under.
+       Annars kläms skenan (mellan en 132 px-etikett och ett 82 px-värde)
+       ihop till nästan ingenting i den smala docken — bara greppet syns
+       och den blir svår att träffa med fingret. */
+    body.lab-sim .fs-controls .fs-row {
+        flex-wrap: wrap;
+        row-gap: 3px;
+    }
+    body.lab-sim .fs-controls .fs-row > input[type="range"] {
+        flex: 1 0 100% !important;
+        order: 2;
+    }
+    body.lab-sim .fs-controls .fs-row > .fs-label {
+        flex: 1 1 auto;
+        min-width: 0 !important;
+    }
+    body.lab-sim .fs-controls .fs-row > .fs-value {
+        order: 1;
+        min-width: 0 !important;
+        margin-left: auto;
+    }
+    /* Hopfälld panel tar ingen plats även i normalläge */
+    body.lab-sim .fs-controls.collapsed {
+        display: none;
     }
 }
 

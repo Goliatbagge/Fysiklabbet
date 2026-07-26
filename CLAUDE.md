@@ -43,6 +43,14 @@ node .claude/verify-exittickets.js
 # och egna nyckelord. Se "Sökruta och nyckelord" nedan.
 node .claude/verify-sok.js
 
+# Verifiera mobil-dispositionen i simuleringarna (KÖR FÖRE COMMIT vid
+# ändringar i scener, verktygsrutor eller sektion 8 i
+# styles-laborans-sim.css) — startar 390×744, går in i fullskärm i varje
+# sim och mäter att ingen verktygsruta ligger ovanpå ritytan, klipps bort,
+# kollapsar scenramen eller krockar med avläsningsrutan. Se "Mobil (≤600px)"
+# nedan. Kräver dev-servern på port 8000 + puppeteer-core i %TEMP%\pptr-test.
+node .claude/verify-mobil-scen.js
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -128,7 +136,13 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 
 3. **Uppdatera** `.claude/verify-navigation.js` — lägg till filnamnet i `HTML_FILES_TO_CHECK`
 
-4. Direkt före `</body>`: `<script src="feedback.js" defer></script>` (feedback-widget)
+4. Direkt före `</body>`:
+```html
+<script src="feedback.js" defer></script>
+<script src="sim-dock.js" defer></script>
+```
+   (feedback-widget + hopfällbar verktygsdock på mobil — se
+   "Mobil (≤600px)" nedan. Båda ska finnas i ALLA simuleringar.)
 
 ## ⚠️ KRITISK: Synka beteckningar och kurs med teorigenomgången
 
@@ -632,8 +646,12 @@ Referensimpl: `fysik2-brytning-app.html`, `fysik2-fotoelektrisk-effekt.html`.
 Varje sim ska ha fullskärmsläge. **All interaktion måste vara möjlig även i
 fullskärm** — fullskärm får aldrig bli ett "titta-men-rör-inte"-läge.
 
-⚠️ **PLACERINGSREGEL (gäller ALLA simuleringar):** I fullskärm placeras
-reglagen efter typ, så att de inte skymmer scenen:
+⚠️ **PLACERINGSREGEL (gäller ALLA simuleringar):** I fullskärm på **bred
+skärm** placeras reglagen efter typ, så att de inte skymmer scenen. (På
+skärmar ≤600 px gäller i stället "Mobil (≤600px)" nedan: overlay-lägena
+kopplas bort och verktygen dockas under scenen. Du behöver inte göra något
+särskilt för det — men skriv inga egna `align-items: center`-regler på
+`.scene-wrap:fullscreen`, se fällan där.)
 
 - **Glidare/reglage (och sifferfält) → en hopfällbar panel (dropdown) i
   scenens UNDERKANT** (`.fs-controls` + `.fs-toggle-handle`). Användaren kan
@@ -711,6 +729,52 @@ Krav på mönstret:
 
 Komplett CSS- och React-mall: kopiera från `fysik2-fotoelektrisk-effekt.html`
 eller `fysik2-brytning-app.html`.
+
+### Mobil (≤600px): scenen överst, verktygen UNDER — aldrig ovanpå
+
+**På smal skärm är overlay-placeringen ovan FÖRBJUDEN.** En 860×520-viewBox
+mot 390 px bredd ger en rityta som bara är ~215 px hög — en panel uppe till
+vänster eller höger täcker då i praktiken hela simuleringen. Dispositionen
+byggs därför om, och det sköts **centralt i `styles-laborans-sim.css`
+sektion 8** plus `sim-dock.js`. Du behöver normalt inte skriva någon
+mobil-CSS i en ny simulering; du behöver däremot **inte motarbeta** reglerna:
+
+    scenen överst  →  verktygen dockade under  →  hopfällbara med handtag
+
+- **Normalläge**: scenramen får `height: auto` (fast höjd + `aspect-ratio`
+  neutraliseras) så att den hugger scenen och rymmer `.scene-toggles`,
+  `.scene-info` och `.scene-hint` under den. Sätt alltså gärna en fast höjd
+  på `.scene-wrap` för desktop — mobilen skriver över den.
+- **Fullskärm**: ramen blir en flex-kolumn, scenen ligger `sticky` i
+  överkanten och verktygsrutorna flödar under i ordningen scen → avläsning →
+  hint → handtag → `.fs-sliders` → `.scene-toggles` → `.fs-controls`.
+- **Hopfällbart**: `sim-dock.js` lägger till ett handtag ("Dölj verktyg" /
+  "Visa verktyg") som fäller hela docken. Det ersätter simuleringens egna
+  `.fs-toggle-handle` på mobil, så att det bara finns EN fäll-knapp.
+- **Ark-läge**: har scenen ingen egen proportion (canvas/div som JS skalar
+  efter ramen) blir den 100vh i fullskärm och det finns ingen yta under att
+  docka i. Då lägger `sim-dock.js` verktygen som ett ark över scenens nedre
+  del (max ~60 % av skärmen) och fäller ihop det som utgångsläge.
+
+Fällor som redan kostat tid (finns som kommentarer i CSS:en — läs dem innan
+du ändrar):
+
+1. **`align-items: center; justify-content: center` på
+   `body.lab-sim .scene-wrap:fullscreen`** i en simulerings egna
+   `<style>`-block har exakt samma specificitet som sektion 8 men står
+   senare → utan `!important` i sektion 8 vann centreringen och docken
+   överflödade symmetriskt ut ur skärmen. Skriv inte nya sådana regler.
+2. **Absolut positionerad scen** (`div.absolute.inset-0`) gör att
+   `height: auto` kollapsar ramen till 0 px. Sektion 8.1 undantar det med
+   `:not(:has(> .inset-0))` — behåll klassen `inset-0` om du bygger så.
+3. **`bottom`-ankrade overlays** (`.scene-info`) följer med nedåt när ramen
+   växer och landar bakom verktygen. De dockas därför också.
+
+**Kör `node .claude/verify-mobil-scen.js` före commit** när du rört en scen,
+en verktygsruta eller sektion 8. Den startar 390×744, går in i fullskärm i
+varje simulering och mäter att ingen verktygsruta ligger ovanpå ritytan,
+klipps bort, kollapsar ramen eller krockar med avläsningsrutan. Kräver
+dev-servern på port 8000.
 
 ### Inga överlappande objekt
 
@@ -895,6 +959,42 @@ Helpers som redan följer regeln: `makeBField`, `makeProjectile`,
 Skriver du en ny helper eller ny canvas-sim med v-pilar måste du själv
 implementera kant-offseten. **Granska alltid skärmdump** och verifiera
 att hastighetspilen kommer från kanten, inte mitten.
+
+### Fältlinjer: pilspetsen MITT PÅ linjen, aldrig i dess ände
+
+**En fältlinje avslutas ALDRIG med en pilspets — spetsen sitter mitt på
+linjen och linjen löper obruten förbi den** (uttryckligt önskemål
+2026-07-26). Gäller ALLA fält, i alla medier: elektriska och magnetiska
+fältlinjer i simuleringar (SVG, canvas och THREE.js), i teori-figurer
+(`::: figur`) och i övningsfigurer.
+
+Skälet är att en fältlinje inte är en vektor: den har varken början, slut
+eller längd som betyder något — den visar bara fältets *förlopp*. En pil i
+änden gör att linjen läses som en enskild vektorpil som "pekar på" objektet,
+i stället för som en linje genom hela fältet. Pilspetsen är en
+riktningsmarkör längs linjen, precis som i läroböckerna.
+
+- **Rak linje**: spetsen centreras på sträckans mittpunkt; skaftet ritas
+  hela vägen till den gamla spetsens position.
+- **Kurva/sluten slinga**: spetsen placeras på en punkt längs kurvan
+  (t.ex. `t ≈ 0,3` och `0,7`, eller på slingans ytterpunkter) — flera
+  spetsar per linje är helt i sin ordning på långa linjer.
+- **Parallella fältlinjer**: alla spetsar ska ligga *vinkelrätt över
+  varandra* (samma *x* för vågrätt fält, samma *y* för lodrätt) så scenen
+  läses som ETT fält, inte som spridda pilar. `makeBField` i
+  `data/ovningar.js` gör redan detta — kopiera mönstret.
+- **Krockar**: hamnar mittpunkten på ett objekt (ledartvärsnitt ⊗/⊙,
+  strömslinga, magnet) — flytta i första hand *objektet*, i andra hand
+  spetskolumnen till en fri del av linjen. Lägg ALDRIG spetsen tillbaka i
+  änden, och lägg aldrig en kontur/halo bakom den.
+
+⚠️ **Detta gäller INTE vektorpilar**, som fortsatt har spetsen i änden
+eftersom pilens *längd* bär informationen: kraft-, hastighets- och
+accelerationspilar, fältstyrke-*vektorer* vars längd visar beloppet,
+strömriktningspilar längs en ledare, kompassnålar/riktningspilar (norr,
+deklination), måttpilar och högerhandsregelns fingrar. Fråga: visar pilen
+en storhets belopp eller en linjes förlopp? Belopp → spets i änden.
+Förlopp → spets mitt på.
 
 ### Kraftfigurer: angreppspunkt, komposanter, kontakt och etiketter
 
@@ -1207,6 +1307,9 @@ Nyckelord (`keywords` i `data/katalog.js`, `kw` i `data/simuleringar.js`):
     eget namn och på minst ett eget nyckelord
 13. [ ] Kör `node .claude/verify-no-white-outline.js` — inga vita konturer/
     halor runt etiketter eller pilar på ljus scenbakgrund
+14. [ ] Lägg in `<script src="sim-dock.js" defer></script>` före `</body>`
+15. [ ] Kör `node .claude/verify-mobil-scen.js` — scenen överst och verktygen
+    under på 390×744, i både normalläge och fullskärm
 
 ## Övningar
 

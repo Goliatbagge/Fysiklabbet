@@ -960,7 +960,8 @@
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Bräda, stöd och last</div>
-                                    <Controls m={m} setM={setM} xP={xP} setXP={setXP} xQ={xQ} setXQ={setXQ}
+                                    <Controls m={m} setM={setM} Lb={Lb} setL={setL} plankX={plankX}
+                                              xP={xP} setXP={setXP} xQ={xQ} setXQ={setXQ}
                                               person={person} setPerson={setPerson} reset={reset} />
                                 </div>
 
@@ -1038,6 +1039,7 @@
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
     <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
 </body>

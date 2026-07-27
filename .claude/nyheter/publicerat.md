@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-27 | `2026-07-27-zink-70-magnetisk-gata` | Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden | Phys.org / SciTechDaily / Facility for Rare Isotope Beams, Michigan State University (pressrum) / Nature (E. K. Ronning et al., 2026) |
 | 2026-07-26 | `2026-07-26-altermagnetism` | Fysiker hedras för en tredje sorts magnetism — dold i över hundra år | Phys.org / Johannes Gutenberg-universitetet Mainz (pressmeddelande) / European Physical Society (officiellt tillkännagivande) / Physical Review X (L. Šmejkal, J. Sinova, T. Jungwirth, 2022) |
 | 2026-07-25 | `2026-07-25-varmestralar` | Forskare får värme att bete sig som ljus i en optisk fiber — vid rumstemperatur | UCLA Samueli School of Engineering (pressmeddelande) / Phys.org / Nature Physics (M. Li, H. Wu, Z. Qin, C. Su, H. D. Nguyen, Y. Hu, 2026) |
 | 2026-07-24 | `2026-07-24-fryst-optisk-fiber` | Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare | idw-online (pressmeddelande, Max Planck-institutet för ljusets fysik) / Phys.org / Optica (S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, 2026) |

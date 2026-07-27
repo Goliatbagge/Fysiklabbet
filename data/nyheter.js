@@ -34,6 +34,49 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-27-zink-70-magnetisk-gata",
+    date: "2026-07-27",
+    title: "Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden",
+    deck: "I decennier har vissa atomkärnor avgett fler lågenergetiska gammastrålar än teorin kunnat förklara. Nu har ett internationellt forskarlag lett från Michigan State University spårat överskottet till magnetiska – inte elektriska – övergångar inuti kärnan zink-70, ett fynd som kan skärpa beräkningarna av hur tunga grundämnen som guld och platina bildas i supernovor och kolliderande neutronstjärnor.",
+    category: "Kärnfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-27-zink-70-magnetisk-gata.jpg",
+    imageAlt: "Vetenskaplig illustration av atomkärnan zink-70 som ett klot av röda och blå kulor (protoner och neutroner), med gula magnetfältlinjer som böjer sig kring kärnan och fyra vågiga gammastrålar (märkta med den grekiska bokstaven gamma) som strålar ut åt olika håll mot en mörkblå bakgrund.",
+    imageCredit: "Illustration: Facility for Rare Isotope Beams (FRIB), Michigan State University (pressbild)",
+    tags: ["kärnfysik", "atomfysik", "gammastrålning", "magnetism", "nukleosyntes", "astrofysik", "neutronstjärnor", "supernova", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-magnetic-clues-atomic-nuclei-elements.html" },
+      { name: "SciTechDaily", url: "https://scitechdaily.com/scientists-solve-a-decades-old-mystery-inside-atomic-nuclei/" },
+      { name: "Facility for Rare Isotope Beams, Michigan State University (pressrum)", url: "https://frib.msu.edu/news-center" }
+    ],
+    research: { citation: "E. K. Ronning et al., ”Magnetic Character of the Low-Energy Enhancement in 70Zn”, Nature (2026)", url: "https://doi.org/10.1038/s41586-026-10758-3" },
+    body: [
+      { type: "p", html: "Djupt inne i en atomkärna gömmer sig en av kärnfysikens mest ihärdiga gåtor. I decennier har forskare sett att vissa atomkärnor, när de svalnar från ett upphetsat tillstånd, sänder ut betydligt fler lågenergetiska gammafotoner än teorin förutspår – ett fenomen som fått namnet lågenergiförhöjning (<em>low-energy enhancement</em>, LEE). Ingen har kunnat visa exakt vad som orsakar överskottet. Nu har ett internationellt forskarlag, lett från Facility for Rare Isotope Beams (FRIB) vid Michigan State University i USA, spårat gåtan till dess källa i atomkärnan zink-70: överskottet beror på magnetiska, inte elektriska, övergångar. Studien publicerades i tidskriften <em>Nature</em> den 24&nbsp;juli 2026." },
+
+      { type: "h2", text: "En strålning som inte borde finnas" },
+      { type: "p", html: "En atomkärna som nyss bildats i en kärnreaktion, eller som just genomgått ett radioaktivt sönderfall, befinner sig ofta i ett upphetsat, energirikt tillstånd. För att lugna ner sig och nå sitt mest stabila grundtillstånd sänder den ut energiöverskottet som gammastrålning – elektromagnetisk strålning med fotonenergier hundratusentals till miljontals gånger högre än synligt ljus. Varje sådan övergång klassificeras som antingen <em>elektrisk</em> eller <em>magnetisk</em>, beroende på vad som förändras inuti kärnan. Vid en elektrisk övergång omfördelas kärnans positiva laddning – protonerna förskjuts i förhållande till varandra. Vid en magnetisk övergång är det i stället partiklarnas egen inbyggda magnetism, deras spinn och rörelse i banor, som byter riktning. Teoretiska modeller förutsäger noga hur ofta vardera typen ska inträffa vid olika energier. Men i experiment dyker det gång på gång upp fler gammafotoner vid låga energier än någon modell klarar av att räkna fram – och ingen har kunnat säga med säkerhet om överskottet är elektriskt eller magnetiskt till sin natur." },
+      { type: "quote", html: "”Den här lågenergiförhöjningen förutsågs inte av teorin, så det var något av en chock för forskarsamhället när den först observerades.”", cite: "Eleanor Ronning, huvudförfattare till studien, tidigare doktorand vid FRIB/Michigan State University, numera postdoktor vid INFN i Padova, Italien" },
+
+      { type: "h2", text: "Två olika vägar in i samma kärna" },
+      { type: "p", html: "För att komma åt svaret behövde forskarna ett sätt att skilja de elektriska och magnetiska bidragen åt – något ingen tidigare lyckats göra tillräckligt rent för zink-70. Lösningen byggde på ett smart trick med kärnans moderisotop, koppar-70. Precis som en atomkärna kan ha flera upphetsade tillstånd finns koppar-70 i två varianter: dess vanliga grundtillstånd och ett långlivat, energirikt så kallat isomertillstånd. Båda sönderfaller genom betasönderfall – en neutron omvandlas till en proton och kärnan skickar iväg en elektron – till samma dotterkärna, zink-70, men de fyller upp olika energinivåer i den nybildade kärnan. Genom att jämföra gammastrålningen från de två sönderfallsvägarna fick forskarna två oberoende fönster in i exakt samma atomkärna." },
+      { type: "p", html: "Vid FRIB separerades de två koppar-70-tillstånden med hjälp av anläggningens precisionsinstrument LEBIT (Low Energy Beam and Ion Trap) – en så kallad Penningfälla som normalt används för att väga atomkärnor med extrem noggrannhet, men som forskarna nu för första gången använde för att rena fram enbart det önskade tillståndet ur jonstrålen. Gammastrålningen som sedan sändes ut fångades upp av detektorn SuN (Summing NaI), och forskarna räknade fram varje sönderfallsvägs så kallade gammastrålningsstyrkefunktion – ett mått på hur troligt det är att kärnan sänder ut en gammafoton vid en given energi – med två oberoende analysmetoder som kontrollerade varandra." },
+
+      { type: "h2", text: "Magnetismen vinner" },
+      { type: "p", html: "När de två styrkefunktionerna jämfördes gav de forskarna sitt svar. Hade lågenergiförhöjningen varit elektrisk till sin natur borde den ha sett olika ut beroende på vilket av de två koppartillstånden som sönderfallit, eftersom elektriska övergångar är känsliga för hur kärnans protoner är fördelade i just det tillståndet. I stället var förhöjningen praktiskt taget identisk längs båda vägarna in i zink-70 – ett tydligt fingeravtryck för en magnetisk övergång, som saknar den känsligheten. Resultatet gav forskarna det första direkta experimentella beviset för att lågenergiförhöjningen i zink-70 domineras av magnetisk dipolstrålning." },
+      { type: "quote", html: "”Vi använde en ny experimentell teknik som kombinerar specialiserade instrument på ett sätt som i praktiken utnyttjade hela anläggningen.”", cite: "Sean Liddick, professor vid FRIB och Michigan State University, Ronnings handledare" },
+
+      { type: "h2", text: "Kärnfysikens svar formar stjärnornas periodiska system" },
+      { type: "p", html: "Upptäckten är mer än en detalj i kärnfysikens karta. Grundämnen tyngre än järn kan inte bildas genom vanlig fusion inuti en stjärna – det kräver i stället att atomkärnor fångar in neutroner, en efter en, i en snabb kedjereaktion som kallas r-processen. Den äger rum i universums mest extrema miljöer: supernovaexplosioner och kolliderande neutronstjärnor. Varje gång en kärna fångar en neutron blir den tyngre och mer energirik, och måste göra sig av med överskottsenergin som just gammastrålning innan den hinner fånga nästa neutron. Hur troligt det är att detta sker – särskilt vid låga energier, där lågenergiförhöjningen gör sig som starkast gällande – styr alltså takten i hela kedjan, ända upp till de tyngsta grundämnena som guld, platina och uran. Har teoretiska modeller fel typ av strålning i sina beräkningar riskerar hela den förutsagda mängden av dessa grundämnen att bli fel. Med facit i hand – magnetisk, inte elektrisk, strålning – kan kärnfysiker nu bygga mer träffsäkra modeller för hur universums tyngsta atomer en gång skapades." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Gammastrålning är den mest energirika formen av elektromagnetisk strålning – samma familj som synligt ljus och radiovågor, men med fotonenergier hundratusentals till miljontals gånger högre.",
+        "Studien byggde på ett samarbete mellan 25 institutioner i USA, Kanada, Italien, Tyskland, Norge och Sydkorea.",
+        "Nästan alla grundämnen tyngre än järn i universum – guld och platina inräknat – tros ha bildats via r-processens snabba neutroninfångning i kolliderande neutronstjärnor och supernovor."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-26-altermagnetism",
     date: "2026-07-26",
     title: "Fysiker hedras för en tredje sorts magnetism — dold i över hundra år",

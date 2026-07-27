@@ -22,35 +22,35 @@ optimeringsproblem.
 
 ## Begrepp att kunna
 
-- **växande funktion** — funktion vars graf har positiv lutning i ett
+- **växande funktion**: funktion vars graf har positiv lutning i ett
   intervall; $f'(x) > 0$.
-- **avtagande funktion** — funktion vars graf har negativ lutning i ett
+- **avtagande funktion**: funktion vars graf har negativ lutning i ett
   intervall; $f'(x) < 0$.
-- **strängt växande / strängt avtagande** — en funktion som är växande
+- **strängt växande / strängt avtagande**: en funktion som är växande
   (avtagande) i HELA ett intervall, utan avbrott.
-- **lokal extrempunkt** — gemensamt namn för lokal maximipunkt (en "topp",
+- **lokal extrempunkt**: gemensamt namn för lokal maximipunkt (en "topp",
   där kurvan växlar från växande till avtagande) och lokal minimipunkt
   (en "dal", där kurvan växlar från avtagande till växande).
   Funktionsvärdet i punkten kallas **lokalt extremvärde**.
-- **terrasspunkt** — en punkt där tangenten är vågrät ($f'(a) = 0$) men
+- **terrasspunkt**: en punkt där tangenten är vågrät ($f'(a) = 0$) men
   kurvan fortsätter i samma riktning som innan, utan att vända.
-- **teckentabell** — tabell som visar tecknet på $f'(x)$ (eller $f''(x)$)
+- **teckentabell**: tabell som visar tecknet på $f'(x)$ (eller $f''(x)$)
   i intervallen mellan nollställena; används för att bestämma
   extrempunkters karaktär eller kurvans form.
-- **andraderivata ($f''(x)$)** — derivatan av derivatan, utläses
+- **andraderivata ($f''(x)$)**: derivatan av derivatan, utläses
   "$f$ bis av $x$"; beskriver hur lutningen $f'(x)$ ändras.
-- **konvex kurva** — kurva som "böjer av uppåt" (en "glad" kurva);
+- **konvex kurva**: kurva som "böjer av uppåt" (en "glad" kurva);
   $f''(x) > 0$.
-- **konkav kurva** — kurva som "böjer av nedåt" (en "sur" kurva);
+- **konkav kurva**: kurva som "böjer av nedåt" (en "sur" kurva);
   $f''(x) < 0$.
-- **inflexionspunkt** — punkten där kurvan växlar mellan konvex och
+- **inflexionspunkt**: punkten där kurvan växlar mellan konvex och
   konkav; $f''(x) = 0$.
-- **andraderivatametoden** — metod att bestämma en extrempunkts karaktär
+- **andraderivatametoden**: metod att bestämma en extrempunkts karaktär
   med hjälp av tecknet på $f''(a)$, som alternativ till en teckentabell.
-- **extremvärdesproblem (optimeringsproblem)** — problem som handlar om
+- **extremvärdesproblem (optimeringsproblem)**: problem som handlar om
   att bestämma ett störst eller minst möjligt värde, t.ex. maximal area
   eller minimal kostnad.
-- **kurvkonstruktion** — att skissa en funktions graf utifrån dess
+- **kurvkonstruktion**: att skissa en funktions graf utifrån dess
   ändpunkter, extrempunkter och inflexionspunkter, utan att räkna ut
   fler punkter än nödvändigt.
 

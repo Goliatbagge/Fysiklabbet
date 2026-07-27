@@ -20,50 +20,50 @@ sammansatta händelser.
 
 ## Begrepp att kunna
 
-- **population och stickprov** — populationen är den grupp en undersökning
+- **population och stickprov**: populationen är den grupp en undersökning
   handlar om; en totalundersökning undersöker hela populationen, en
   stickprovsundersökning bara en mindre del av den.
-- **urval** — hur man väljer ut vilka i populationen som ska ingå i en
+- **urval**: hur man väljer ut vilka i populationen som ska ingå i en
   stickprovsundersökning; tre vanliga metoder är obundet slumpmässigt,
   systematiskt och stratifierat urval.
-- **felkällor (urvalsfel och mätfel)** — urvalsfel uppstår när urvalet inte
+- **felkällor (urvalsfel och mätfel)**: urvalsfel uppstår när urvalet inte
   representerar populationen; mätfel uppstår t.ex. genom ledande frågor
   eller ofullständiga svarsalternativ.
-- **svarsbortfall** — när inte alla tillfrågade svarar på en undersökning;
+- **svarsbortfall**: när inte alla tillfrågade svarar på en undersökning;
   ett stort bortfall gör att det sanna resultatet bara kan anges som ett
   intervall.
-- **felmarginal ($f$)** — hur mycket ett resultat kan förväntas variera om
+- **felmarginal ($f$)**: hur mycket ett resultat kan förväntas variera om
   undersökningen upprepades; anges ofta så att resultatet med 95 %
   säkerhet ligger inom felmarginalen.
-- **konfidensintervall** — det intervall (resultatet ± felmarginalen) som
+- **konfidensintervall**: det intervall (resultatet ± felmarginalen) som
   det sanna värdet med 95 % säkerhet ligger inom.
-- **signifikans** — sannolikheten att en uppmätt förändring är verklig och
+- **signifikans**: sannolikheten att en uppmätt förändring är verklig och
   inte bara beror på slumpen; en förändring större än felmarginalen är
   statistiskt säkerställd.
-- **korrelation** — ett samband mellan två variabler, undersöks med ett
+- **korrelation**: ett samband mellan två variabler, undersöks med ett
   spridningsdiagram; kan vara stark eller svag samt positiv eller negativ.
-- **kausalitet och skensamband** — kausalitet är ett orsakssamband mellan
+- **kausalitet och skensamband**: kausalitet är ett orsakssamband mellan
   två variabler; ett skensamband är en korrelation utan kausalitet, ofta
   orsakad av en bakomliggande gemensam faktor.
-- **sannolikhet ($P$), utfall och utfallsrum** — sannolikheten anger
+- **sannolikhet ($P$), utfall och utfallsrum**: sannolikheten anger
   chansen att en händelse inträffar; utfallsrummet är mängden av alla
   möjliga utfall och de gynnsamma utfallen är de som stämmer med
   händelsen.
-- **den klassiska sannolikhetsdefinitionen** — vid likformig
+- **den klassiska sannolikhetsdefinitionen**: vid likformig
   sannolikhetsfördelning (alla utfall lika sannolika) ges sannolikheten av
   antalet gynnsamma utfall genom antalet möjliga utfall.
-- **experimentell sannolikhet och relativ frekvens** — när utfallen inte är
+- **experimentell sannolikhet och relativ frekvens**: när utfallen inte är
   lika sannolika bestäms sannolikheten i stället genom upprepade försök;
   ju fler försök desto säkrare blir den relativa frekvensen.
-- **produktregeln** — sannolikheten för en kombination av händelser fås
+- **produktregeln**: sannolikheten för en kombination av händelser fås
   genom att multiplicera de enskilda händelsernas sannolikheter.
-- **oberoende och beroende händelse** — vid en oberoende händelse (t.ex.
+- **oberoende och beroende händelse**: vid en oberoende händelse (t.ex.
   med återläggning) påverkas inte sannolikheten av tidigare utfall; vid en
   beroende händelse (t.ex. utan återläggning) ändras sannolikheten.
-- **träddiagram** — ett diagram med grenar som visar sannolikheten för
+- **träddiagram**: ett diagram med grenar som visar sannolikheten för
   varje utfall i en kombination; sannolikheten för en gren fås genom att
   multiplicera längs grenen, och flera grenar med samma resultat adderas.
-- **komplementhändelse** — en händelses "motsats"; sannolikheterna för en
+- **komplementhändelse**: en händelses "motsats"; sannolikheterna för en
   händelse och dess komplementhändelse summerar alltid till 1 (100 %),
   vilket används vid "minst en"-uppgifter.
 

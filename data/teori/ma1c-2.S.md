@@ -20,35 +20,35 @@ hur många lösningar en ekvation eller olikhet har.
 
 ## Begrepp att kunna
 
-- **variabel** — bokstav (t.ex. $x$) som representerar ett okänt eller
+- **variabel**: bokstav (t.ex. $x$) som representerar ett okänt eller
   varierande tal.
-- **koefficient** — talet som multiplicerar en variabel i en term
+- **koefficient**: talet som multiplicerar en variabel i en term
   (t.ex. 150 i $150x$).
-- **variabelterm / konstantterm** — term som innehåller en variabel
+- **variabelterm / konstantterm**: term som innehåller en variabel
   respektive en term som bara består av ett tal.
-- **uttryckets värde** — talet man får när man sätter in ett värde på
+- **uttryckets värde**: talet man får när man sätter in ett värde på
   variabeln och beräknar uttrycket.
-- **förenkla uttryck** — slå ihop likadana termer ($x$-termer för sig,
+- **förenkla uttryck**: slå ihop likadana termer ($x$-termer för sig,
   $x^2$-termer för sig, konstanttermer för sig och så vidare).
-- **utveckla uttryck** — skriva om ett parentesuttryck utan parenteser
+- **utveckla uttryck**: skriva om ett parentesuttryck utan parenteser
   genom att multiplicera in faktorn i varje term.
-- **distributiva lagen** — regeln $a(b+c) = ab + ac$ som ligger bakom all
+- **distributiva lagen**: regeln $a(b+c) = ab + ac$ som ligger bakom all
   multiplikation med en parentes.
-- **faktorisera uttryck** — skriva ett uttryck som en multiplikation genom
+- **faktorisera uttryck**: skriva ett uttryck som en multiplikation genom
   att bryta ut en gemensam faktor.
-- **ekvation** — likhet mellan två uttryck som innehåller en variabel; att
+- **ekvation**: likhet mellan två uttryck som innehåller en variabel; att
   lösa den innebär att lösa ut variabeln.
-- **olikhet** — jämförelse mellan två uttryck med ett olikhetstecken
+- **olikhet**: jämförelse mellan två uttryck med ett olikhetstecken
   (<, >, ≤, ≥) i stället för likhetstecken.
-- **andragradsekvation / tredjegradsekvation** — ekvation där variabelns
+- **andragradsekvation / tredjegradsekvation**: ekvation där variabelns
   högsta exponent är 2 respektive 3.
-- **potensekvation** — ekvation där variabeln står upphöjd till en
+- **potensekvation**: ekvation där variabeln står upphöjd till en
   godtycklig exponent, $x^n = a$.
-- **talföljd och element** — en serie tal $a_1, a_2, a_3, \ldots$; varje
+- **talföljd och element**: en serie tal $a_1, a_2, a_3, \ldots$; varje
   tal i serien kallas ett element.
-- **sluten formel** — formel som ger ett godtyckligt element $a_n$ i en
+- **sluten formel**: formel som ger ett godtyckligt element $a_n$ i en
   talföljd direkt, utan att räkna ut alla föregående element.
-- **storhet och formel** — något mätbart, t.ex. längd eller hastighet
+- **storhet och formel**: något mätbart, t.ex. längd eller hastighet
   (storhet), respektive en ekvation som beskriver ett samband mellan
   storheter (formel).
 

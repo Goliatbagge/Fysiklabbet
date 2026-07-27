@@ -19,37 +19,37 @@ skalär — både grafiskt och i koordinatform.
 
 ## Begrepp att kunna
 
-- **hypotenusa** — den längsta sidan i en rätvinklig triangel, sidan mitt
+- **hypotenusa**: den längsta sidan i en rätvinklig triangel, sidan mitt
   emot den räta vinkeln.
-- **katet** — en av de två kortare sidorna i en rätvinklig triangel.
-- **motstående katet** — kateten som ligger mitt emot den aktuella
+- **katet**: en av de två kortare sidorna i en rätvinklig triangel.
+- **motstående katet**: kateten som ligger mitt emot den aktuella
   vinkeln.
-- **närliggande katet** — kateten som (tillsammans med hypotenusan)
+- **närliggande katet**: kateten som (tillsammans med hypotenusan)
   bildar den aktuella vinkeln.
-- **tangens, sinus, cosinus (tan, sin, cos)** — trigonometriska
+- **tangens, sinus, cosinus (tan, sin, cos)**: trigonometriska
   funktioner som beskriver förhållandet mellan två sidor i en rätvinklig
   triangel för en given vinkel.
 - **inversa trigonometriska funktioner (tan⁻¹/arctan, sin⁻¹/arcsin,
-  cos⁻¹/arccos)** — används för att bestämma en vinkel när ett
+  cos⁻¹/arccos)**: används för att bestämma en vinkel när ett
   sidoförhållande är känt.
-- **Pythagoras sats** — sambandet mellan kateterna och hypotenusan i en
+- **Pythagoras sats**: sambandet mellan kateterna och hypotenusan i en
   rätvinklig triangel; används för sträckor i koordinatsystem och för
   vektorers längd.
-- **l.e. och a.e. (längdenheter och areaenheter)** — beteckningar som
+- **l.e. och a.e. (längdenheter och areaenheter)**: beteckningar som
   används när en sträcka respektive area saknar angiven enhet.
-- **storhet** — en egenskap som kan mätas, t.ex. sträcka, hastighet eller
+- **storhet**: en egenskap som kan mätas, t.ex. sträcka, hastighet eller
   temperatur.
-- **vektor** — en storhet som anges med både storlek och riktning, t.ex.
+- **vektor**: en storhet som anges med både storlek och riktning, t.ex.
   hastighet, kraft och acceleration; betecknas $\vec{u}$.
-- **skalär** — en storhet som endast anges med storlek, t.ex. vikt, tid
+- **skalär**: en storhet som endast anges med storlek, t.ex. vikt, tid
   och temperatur.
-- **vektorns längd (belopp) ($|\vec{u}|$)** — vektorns storlek, beräknas
+- **vektorns längd (belopp) ($|\vec{u}|$)**: vektorns storlek, beräknas
   med Pythagoras sats eller ur koordinatformen.
-- **motsatta vektorer** — vektorer med samma storlek men motsatt
+- **motsatta vektorer**: vektorer med samma storlek men motsatt
   riktning, t.ex. $\vec{v}_2 = -\vec{v}_1$.
-- **parallella vektorer** — vektorer som har samma lutning, oavsett om de
+- **parallella vektorer**: vektorer som har samma lutning, oavsett om de
   är olika stora eller motriktade.
-- **resultant** — den vektor som fås när två (eller flera) vektorer
+- **resultant**: den vektor som fås när två (eller flera) vektorer
   adderas, med polygonmetoden.
 
 ## Formler

@@ -19,42 +19,42 @@ ett samband är en funktion, och skilja de olika funktionstyperna åt.
 
 ## Begrepp att kunna
 
-- **koordinatsystem** — bildas av en vågrät ***x*-axel** och en lodrät
+- **koordinatsystem**: bildas av en vågrät ***x*-axel** och en lodrät
   ***y*-axel**; skärningspunkten kallas **origo**. En punkts läge anges
   med koordinaten $(x, y)$.
-- **kvadrant** — de fyra områden koordinatsystemet delas in i av axlarna,
+- **kvadrant**: de fyra områden koordinatsystemet delas in i av axlarna,
   numrerade moturs med start uppe till höger (första kvadranten har
   positiva *x*- och *y*-värden).
-- **linjär modell** — ett samband som ändras i jämn takt med *samma
+- **linjär modell**: ett samband som ändras i jämn takt med *samma
   mängd*; grafen är alltid en rät linje.
-- **proportionalitet (proportionalitetskonstant $k$)** — specialfall av
+- **proportionalitet (proportionalitetskonstant $k$)**: specialfall av
   linjärt samband, $y = kx$, vars graf alltid är en rät linje genom
   origo.
-- **räta linjens ekvation (RLE) i k-form** — $y = kx + m$; beskriver alla
+- **räta linjens ekvation (RLE) i k-form**: $y = kx + m$; beskriver alla
   räta linjer utom vertikala.
-- **riktningskoefficient ($k$-värde)** — linjens lutning; positivt $k$
+- **riktningskoefficient ($k$-värde)**: linjens lutning; positivt $k$
   ger en stigande linje, negativt $k$ en fallande. Linjer med samma
   $k$-värde kallas **parallella**.
-- **$m$-värde (*y*-intercept)** — linjens skärning med *y*-axeln;
+- **$m$-värde (*y*-intercept)**: linjens skärning med *y*-axeln;
   motsvarar "startvärdet" i en linjär modell.
-- **vertikal linje** — en lodrät linje; kan inte skrivas i k-form utan
+- **vertikal linje**: en lodrät linje; kan inte skrivas i k-form utan
   beskrivs med $x = a$.
-- **räta linjens ekvation i allmän form** — $ax + by + c = 0$; kan
+- **räta linjens ekvation i allmän form**: $ax + by + c = 0$; kan
   beskriva alla räta linjer, även vertikala.
-- **funktion ($f(x)$)** — ett samband där varje tillåtet *x*-värde ger
+- **funktion ($f(x)$)**: ett samband där varje tillåtet *x*-värde ger
   exakt ett *y*-värde; $x$ kallas den **oberoende** och $y$ (= $f(x)$)
   den **beroende variabeln**. En **linjär funktion** har grafen en rät
   linje.
-- **definitionsmängd och värdemängd** — tillåtna *x*-värden respektive
+- **definitionsmängd och värdemängd**: tillåtna *x*-värden respektive
   *y*-värden för en funktion; ifylld ring/punkt i grafens ändpunkt
   betyder att värdet ingår ($\leq$, $\geq$), tom ring att det inte gör
   det ($<$, $>$).
-- **grafisk lösning** — att lösa en ekvation eller olikhet genom att rita
+- **grafisk lösning**: att lösa en ekvation eller olikhet genom att rita
   VL och HL som grafer i ett grafritande hjälpmedel och läsa av
   skärningspunkten.
-- **exponentialfunktion** — funktion där den oberoende variabeln står i
+- **exponentialfunktion**: funktion där den oberoende variabeln står i
   exponenten, $y = Ca^x$.
-- **potensfunktion** — funktion där den oberoende variabeln står i
+- **potensfunktion**: funktion där den oberoende variabeln står i
   basen, $f(x) = Cx^a$.
 
 ## Formler

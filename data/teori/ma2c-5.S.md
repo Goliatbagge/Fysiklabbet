@@ -20,26 +20,26 @@ andra baser än 10.
 
 ## Begrepp att kunna
 
-- **potensekvation** — ekvation där variabeln står i basen ($x^n = a$);
+- **potensekvation**: ekvation där variabeln står i basen ($x^n = a$);
   löses med potenslagar eller rotuttryck.
-- **exponentialekvation** — ekvation där variabeln står i exponenten
+- **exponentialekvation**: ekvation där variabeln står i exponenten
   ($a^x = b$); löses grafiskt eller algebraiskt med logaritmer.
-- **potensfunktion ($y = C \cdot x^a$)** — generell form för en
+- **potensfunktion ($y = C \cdot x^a$)**: generell form för en
   funktion där variabeln $x$ är i basen.
-- **exponentialfunktion ($y = C \cdot a^x$)** — generell form för
+- **exponentialfunktion ($y = C \cdot a^x$)**: generell form för
   exponentiell förändring; $C$ är startvärdet och $a$ är
   förändringsfaktorn.
-- **förändringsfaktor ($a$)** — talet varje steg multipliceras med;
+- **förändringsfaktor ($a$)**: talet varje steg multipliceras med;
   $a > 1$ ger ökning, $0 < a < 1$ ger minskning.
-- **tiologaritm ($\lg$)** — det tal 10 ska upphöjas till för att bli
+- **tiologaritm ($\lg$)**: det tal 10 ska upphöjas till för att bli
   ett visst tal $a$; $\lg a = x \iff 10^x = a$.
-- **logaritmform och potensform** — två likvärdiga sätt att skriva
+- **logaritmform och potensform**: två likvärdiga sätt att skriva
   samma samband, $\lg x = a \iff 10^a = x$.
-- **logaritmekvation** — ekvation där variabeln står i logaritmen
+- **logaritmekvation**: ekvation där variabeln står i logaritmen
   (t.ex. $\lg x = 3$); löses genom omskrivning till potensform.
-- **logaritmlagarna** — tre räkneregler för summa, differens och
+- **logaritmlagarna**: tre räkneregler för summa, differens och
   potens av logaritmer.
-- **generell logaritm ($\log_a b$)** — lösningen till ekvationen
+- **generell logaritm ($\log_a b$)**: lösningen till ekvationen
   $a^x = b$ för en valfri bas $a > 0$.
 
 ## Formler

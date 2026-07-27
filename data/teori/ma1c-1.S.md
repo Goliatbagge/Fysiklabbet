@@ -20,37 +20,37 @@ skrivna i grundpotensform eller med prefix.
 
 ## Begrepp att kunna
 
-- **talmängd** — en samling tal med en gemensam egenskap: naturliga tal
+- **talmängd**: en samling tal med en gemensam egenskap: naturliga tal
   ($\mathbb{N}$), heltal ($\mathbb{Z}$), rationella tal ($\mathbb{Q}$) och
   reella tal ($\mathbb{R}$); varje mängd ligger inuti nästa.
-- **irrationella tal** — tal som inte kan skrivas som ett bråk av två
+- **irrationella tal**: tal som inte kan skrivas som ett bråk av två
   heltal, t.ex. π och $\sqrt{2}$; har en oändlig decimalutveckling som
   inte upprepar sig.
-- **täljare och nämnare** — talet ovanför respektive under bråkstrecket i
+- **täljare och nämnare**: talet ovanför respektive under bråkstrecket i
   ett bråk.
-- **förlängning och förkortning** — att multiplicera respektive dividera
+- **förlängning och förkortning**: att multiplicera respektive dividera
   täljare och nämnare med samma tal, utan att bråkets värde ändras.
-- **minsta gemensamma nämnaren (MGN)** — den minsta nämnare som flera bråk
+- **minsta gemensamma nämnaren (MGN)**: den minsta nämnare som flera bråk
   kan skrivas med samtidigt.
-- **blandad form** — ett bråk skrivet som ett helt tal plus ett bråk, t.ex.
+- **blandad form**: ett bråk skrivet som ett helt tal plus ett bråk, t.ex.
   $3\frac{3}{4}$, till skillnad från bråkform ($\frac{15}{4}$).
-- **närmevärde och avrundningssiffra** — ett avrundat värde kallas
+- **närmevärde och avrundningssiffra**: ett avrundat värde kallas
   närmevärde; siffran som avgör avrundningen kallas avrundningssiffra.
-- **värdesiffror (gällande siffror)** — mått på hur noggrant ett närmevärde
+- **värdesiffror (gällande siffror)**: mått på hur noggrant ett närmevärde
   är angivet; styr hur mycket ett svar ska avrundas.
-- **potens, bas och exponent** — i $a^n$ kallas $a$ basen (det som
+- **potens, bas och exponent**: i $a^n$ kallas $a$ basen (det som
   upphöjs) och $n$ exponenten (det som anger hur många gånger).
-- **potensform och faktorform** — ett tal skrivet med bas och exponent
+- **potensform och faktorform**: ett tal skrivet med bas och exponent
   ($3^5$) respektive skrivet som en produkt av faktorer
   ($3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$).
-- **rationell exponent** — en exponent som är ett bråk, t.ex.
+- **rationell exponent**: en exponent som är ett bråk, t.ex.
   $a^{1/n} = \sqrt[n]{a}$.
-- **tiopotens och grundpotensform** — en tiopotens är en potens av 10; ett
+- **tiopotens och grundpotensform**: en tiopotens är en potens av 10; ett
   tal på formen $a \cdot 10^n$ där $1 \leq a < 10$ är skrivet i
   grundpotensform.
-- **prefix** — en bokstav som ersätter en tiopotens framför en enhet, t.ex.
+- **prefix**: en bokstav som ersätter en tiopotens framför en enhet, t.ex.
   k (kilo, $10^3$), M (mega, $10^6$) och m (milli, $10^{-3}$).
-- **prioriteringsregler** — ordningen räknesätten ska utföras i:
+- **prioriteringsregler**: ordningen räknesätten ska utföras i:
   parenteser, potenser, multiplikation/division, addition/subtraktion.
 
 ## Formler

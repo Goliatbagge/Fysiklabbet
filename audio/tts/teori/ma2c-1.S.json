@@ -1,0 +1,313 @@
+{
+ "id": "ma2c-1.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7ddf48534c2f2012456e19df0a49e9d6f7fd6401",
+ "dur": 431.29,
+ "segments": [
+  {
+   "t": "Sammanfattning — Linjära ekvationssystem",
+   "s": 0.1,
+   "e": 3.9
+  },
+  {
+   "t": "Det här kapitlet handlade om att lösa system av två linjära ekvationer med två okända — både grafiskt och algebraiskt.",
+   "s": 3.85,
+   "e": 11.71
+  },
+  {
+   "t": "Du har sett hur linjernas k- och m-värden avgör om ett ekvationssystem har en lösning, saknar lösningar eller har oändligt många lösningar, och du har övat på två algebraiska metoder: substitutionsmetoden och additionsmetoden.",
+   "s": 11.71,
+   "e": 25.74
+  },
+  {
+   "t": "Du har också sett hur ekvationssystem används för att lösa textproblem med två okända storheter.",
+   "s": 25.74,
+   "e": 32.4
+  },
+  {
+   "t": "Du ska efter kapitlet kunna välja en lämplig metod och lösa ett linjärt ekvationssystem både grafiskt och algebraiskt.",
+   "s": 32.4,
+   "e": 40.02
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 40.02,
+   "e": 42.31
+  },
+  {
+   "t": "ekvationssystem — flera ekvationer som ska ha en gemensam lösning; skrivs samman med en krullparentes.",
+   "s": 42.31,
+   "e": 49.15
+  },
+  {
+   "t": "grafisk lösning — att lösa ett ekvationssystem genom att rita upp ekvationernas grafer och läsa av skärningspunkten.",
+   "s": 49.15,
+   "e": 56.64
+  },
+  {
+   "t": "skärningspunkt — punkten där graferna möts; dess x-koordinat är lösningen för x och y-koordinaten är lösningen för y .",
+   "s": 56.64,
+   "e": 64.84
+  },
+  {
+   "t": "antal lösningar — bestäms av linjernas k- och m-värden: olika k-värden ger en lösning, samma k-värde men olika m-värde ger inga lösningar, och samma k- och m-värde ger oändligt många lösningar.",
+   "s": 64.84,
+   "e": 77.01
+  },
+  {
+   "t": "parallella linjer — linjer med samma k-värde men olika m-värde; saknar gemensam punkt, så ekvationssystemet saknar då lösning.",
+   "s": 77.01,
+   "e": 85.55
+  },
+  {
+   "t": "sammanfallande linjer — linjer med samma k- och m-värde; de ligger ovanpå varandra, så ekvationssystemet har då oändligt många lösningar.",
+   "s": 85.55,
+   "e": 94.71
+  },
+  {
+   "t": "substitutionsmetoden — algebraisk lösningsmetod där en variabel löses ut ur en ekvation och byts ut (substitueras) i den andra.",
+   "s": 94.71,
+   "e": 103.86
+  },
+  {
+   "t": "additionsmetoden — algebraisk lösningsmetod där ekvationerna adderas ledvis så att en variabel elimineras.",
+   "s": 103.86,
+   "e": 111.53
+  },
+  {
+   "t": "eliminera en variabel — få en variabels term att försvinna, t.ex. genom att addera två ekvationer där termen har olika tecken framför sig.",
+   "s": 111.53,
+   "e": 120.64
+  },
+  {
+   "t": "ledvis addition — att addera två ekvationer term för term, vänsterled för sig och högerled för sig.",
+   "s": 120.64,
+   "e": 127.47
+  },
+  {
+   "t": "koefficient — talet framför en variabel i en term, t.ex. 5 i termen 5 x .",
+   "s": 127.47,
+   "e": 134.12
+  },
+  {
+   "t": "etikettering av ekvationer — att numrera ekvationerna ekvation 1, ekvation 2, ekvation 3 … för att kunna hänvisa till dem i lösningen.",
+   "s": 134.12,
+   "e": 143.54
+  },
+  {
+   "t": "lösning till ett ekvationssystem — det värdepar parentesen x, y slut parentes som uppfyller båda ekvationerna samtidigt; anges med en krullparentes.",
+   "s": 143.54,
+   "e": 153.56
+  },
+  {
+   "t": "Formler",
+   "s": 153.56,
+   "e": 155.39
+  },
+  {
+   "t": "Kapitlets metoder",
+   "s": 155.39,
+   "e": 157.81
+  },
+  {
+   "t": "Linjärt ekvationssystem",
+   "s": 157.81,
+   "e": 160.62
+  },
+  {
+   "t": "y är lika med k ett x plus m ett y som är lika med k två x plus m två",
+   "s": 160.62,
+   "e": 166.95
+  },
+  {
+   "t": "där k ett och k två är linjernas lutningar (k-värden) och m ett och m två är linjernas skärningar med y-axeln (m-värden).",
+   "s": 166.95,
+   "e": 175.76
+  },
+  {
+   "t": "Antal lösningar",
+   "s": 175.76,
+   "e": 178.19
+  },
+  {
+   "t": "Substitutionsmetoden",
+   "s": 178.19,
+   "e": 180.84
+  },
+  {
+   "t": "Lös ut en variabel ur en av ekvationerna.",
+   "s": 180.84,
+   "e": 184.82
+  },
+  {
+   "t": "Byt ut (substituera) variabeln mot uttrycket i den ekvation du inte använt.",
+   "s": 184.82,
+   "e": 191.24
+  },
+  {
+   "t": "Lös den nya ekvationen och bestäm värdet på den kvarvarande variabeln.",
+   "s": 191.24,
+   "e": 196.44
+  },
+  {
+   "t": "Sätt in värdet i en av de ursprungliga ekvationerna för att få värdet på den andra variabeln.",
+   "s": 196.44,
+   "e": 202.62
+  },
+  {
+   "t": "Additionsmetoden",
+   "s": 202.62,
+   "e": 205.0
+  },
+  {
+   "t": "Se till att samma variabelterm förekommer med olika tecken i de båda ekvationerna — multiplicera vid behov en eller båda ekvationerna med ett tal (alla termer i ekvationen ska då multipliceras).",
+   "s": 205.0,
+   "e": 216.3
+  },
+  {
+   "t": "Addera ekvationerna ledvis så att variabeln elimineras.",
+   "s": 216.3,
+   "e": 221.14
+  },
+  {
+   "t": "Lös den kvarvarande ekvationen.",
+   "s": 221.14,
+   "e": 224.44
+  },
+  {
+   "t": "Sätt in värdet i en av de ursprungliga ekvationerna för att få värdet på den andra variabeln.",
+   "s": 224.44,
+   "e": 230.6
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 230.6,
+   "e": 233.46
+  },
+  {
+   "t": "Ett ekvationssystem markeras med en krullparentes, och lösningen parentesen x, y slut parentes måste uppfylla båda ekvationerna samtidigt.",
+   "s": 233.46,
+   "e": 242.95
+  },
+  {
+   "t": "Grafisk lösning ger svaret direkt: skärningspunktens x-koordinat är lösningen för x , y-koordinaten lösningen för y .",
+   "s": 242.95,
+   "e": 251.31
+  },
+  {
+   "t": "Antalet lösningar avgörs enbart av linjernas k- och m-värden — utan att rita något kan du avgöra om systemet har en, ingen eller oändligt många lösningar.",
+   "s": 251.31,
+   "e": 261.36
+  },
+  {
+   "t": "Substitutionsmetoden passar bäst när en variabel redan står ensam i ena ledet, eller är enkel att lösa ut (t.ex. utan koefficient eller minustecken framför).",
+   "s": 261.36,
+   "e": 272.29
+  },
+  {
+   "t": "Additionsmetoden passar bäst när samma variabelterm redan finns i båda ekvationerna med olika tecken, eller enkelt kan göras det genom multiplikation.",
+   "s": 272.29,
+   "e": 283.31
+  },
+  {
+   "t": "Räcker det inte att multiplicera en ekvation för att få samma variabelterm med olika tecken, multiplicera båda ekvationerna — med varandras koefficienter framför den variabel som ska elimineras, och med motsatt tecken på den ena.",
+   "s": 283.26,
+   "e": 295.86
+  },
+  {
+   "t": "Multiplicerar du en ekvation med ett tal måste alla termer i ekvationen multipliceras, inte bara den du vill matcha.",
+   "s": 295.86,
+   "e": 303.38
+  },
+  {
+   "t": "Etikettera ekvationerna ekvation 1, ekvation 2, ekvation 3 … så att du enkelt kan hänvisa till dem i din lösning — särskilt när du härleder en ny ekvation ur en av de ursprungliga.",
+   "s": 303.38,
+   "e": 315.2
+  },
+  {
+   "t": "När du bestämt den ena variabeln: sätt in värdet i en av de ursprungliga ekvationerna (eller en tidigare härledd) för att bestämma den andra.",
+   "s": 315.2,
+   "e": 324.08
+  },
+  {
+   "t": "Vid problemlösning: definiera dina variabler tydligt innan du ställer upp ekvationssystemet, och avsluta alltid med att tolka svaret i ord — inte bara i siffror.",
+   "s": 324.08,
+   "e": 333.84
+  },
+  {
+   "t": "Kontrollera gärna ditt svar genom att sätta in båda värdena i båda de ursprungliga ekvationerna — stämmer båda likheterna är svaret rätt.",
+   "s": 333.84,
+   "e": 341.88
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 341.88,
+   "e": 344.9
+  },
+  {
+   "t": "Antalet lösningar beror bara på linjernas k- och m-värden — tre möjliga fall:",
+   "s": 344.9,
+   "e": 351.35
+  },
+  {
+   "t": "Inför provet",
+   "s": 344.9,
+   "e": 351.35
+  },
+  {
+   "t": "Vet du vad ett ekvationssystem är, och varför lösningen skrivs med en krullparentes?",
+   "s": 351.35,
+   "e": 357.24
+  },
+  {
+   "t": "Kan du lösa ett ekvationssystem grafiskt genom att rita upp graferna och läsa av skärningspunktens koordinater?",
+   "s": 357.24,
+   "e": 364.33
+  },
+  {
+   "t": "Vet du hur linjernas k- och m-värden avgör om systemet har en lösning, saknar lösningar eller har oändligt många lösningar?",
+   "s": 364.33,
+   "e": 372.51
+  },
+  {
+   "t": "Kan du lösa ett ekvationssystem med substitutionsmetoden, även när ingen variabel står ensam i ena ledet från början?",
+   "s": 372.51,
+   "e": 380.44
+  },
+  {
+   "t": "Kan du lösa ett ekvationssystem med additionsmetoden, och avgöra när du behöver multiplicera en eller båda ekvationerna innan du adderar?",
+   "s": 380.44,
+   "e": 389.14
+  },
+  {
+   "t": "Kommer du ihåg att multiplicera alla termer i en ekvation när du skalar den?",
+   "s": 389.14,
+   "e": 394.61
+  },
+  {
+   "t": "Kan du sätta etiketter ekvation 1, ekvation 2, ekvation 3 på ekvationerna och hänvisa till dem i din lösning?",
+   "s": 394.61,
+   "e": 402.99
+  },
+  {
+   "t": "Kan du sätta in din lösning i en av de ursprungliga ekvationerna för att bestämma den andra variabeln?",
+   "s": 402.99,
+   "e": 409.35
+  },
+  {
+   "t": "Kan du ställa upp ett eget ekvationssystem utifrån en textuppgift med två okända, t.ex. kor och höns eller summan och differensen av två tal?",
+   "s": 409.35,
+   "e": 419.21
+  },
+  {
+   "t": "Avslutar du problemlösningsuppgifter med att tolka svaret i ord, inte bara med siffror?",
+   "s": 419.21,
+   "e": 425.09
+  },
+  {
+   "t": "Kontrollerar du ditt svar genom att sätta in båda värdena i båda de ursprungliga ekvationerna?",
+   "s": 425.09,
+   "e": 431.29
+  }
+ ]
+}

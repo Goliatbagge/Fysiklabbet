@@ -1,0 +1,363 @@
+{
+ "id": "ma1c-6.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "409f8d74e40a5e033975a3ef4a66f2f441c85ad3",
+ "dur": 536.13,
+ "segments": [
+  {
+   "t": "Sammanfattning — Trigonometri",
+   "s": 0.1,
+   "e": 3.21
+  },
+  {
+   "t": "Det här kapitlet handlade om trigonometri i rätvinkliga trianglar och om vektorer.",
+   "s": 3.16,
+   "e": 8.93
+  },
+  {
+   "t": "Du har lärt dig beräkna sidor och vinklar med tangens, sinus, cosinus och deras inversa funktioner, samt bestämma sträckor och vinklar mellan punkter i ett koordinatsystem med Pythagoras sats.",
+   "s": 8.93,
+   "e": 21.18
+  },
+  {
+   "t": "Du har också lärt dig skillnaden mellan vektorer och skalärer, hur en vektors längd beräknas, och hur vektorer adderas, subtraheras och multipliceras med en skalär — både grafiskt och i koordinatform.",
+   "s": 21.18,
+   "e": 33.35
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 33.35,
+   "e": 35.67
+  },
+  {
+   "t": "hypotenusa — den längsta sidan i en rätvinklig triangel, sidan mitt emot den räta vinkeln.",
+   "s": 35.67,
+   "e": 42.01
+  },
+  {
+   "t": "katet — en av de två kortare sidorna i en rätvinklig triangel.",
+   "s": 42.01,
+   "e": 47.06
+  },
+  {
+   "t": "motstående katet — kateten som ligger mitt emot den aktuella vinkeln.",
+   "s": 47.06,
+   "e": 52.09
+  },
+  {
+   "t": "närliggande katet — kateten som (tillsammans med hypotenusan) bildar den aktuella vinkeln.",
+   "s": 52.09,
+   "e": 59.04
+  },
+  {
+   "t": "tangens, sinus, cosinus (tan, sin, cos) — trigonometriska funktioner som beskriver förhållandet mellan två sidor i en rätvinklig triangel för en given vinkel.",
+   "s": 59.04,
+   "e": 71.1
+  },
+  {
+   "t": "inversa trigonometriska funktioner (tan upphöjt till minus 1/arctan, sin upphöjt till minus 1/arcsin, cos upphöjt till minus 1/arccos) — används för att bestämma en vinkel när ett sidoförhållande är känt.",
+   "s": 71.1,
+   "e": 85.47
+  },
+  {
+   "t": "Pythagoras sats — sambandet mellan kateterna och hypotenusan i en rätvinklig triangel; används för sträckor i koordinatsystem och för vektorers längd.",
+   "s": 85.47,
+   "e": 95.31
+  },
+  {
+   "t": "l.e. och a.e. (längdenheter och areaenheter) — beteckningar som används när en sträcka respektive area saknar angiven enhet.",
+   "s": 95.31,
+   "e": 104.88
+  },
+  {
+   "t": "storhet — en egenskap som kan mätas, t.ex. sträcka, hastighet eller temperatur.",
+   "s": 104.88,
+   "e": 111.91
+  },
+  {
+   "t": "vektor — en storhet som anges med både storlek och riktning, t.ex. hastighet, kraft och acceleration; betecknas vektorn u .",
+   "s": 111.91,
+   "e": 121.2
+  },
+  {
+   "t": "skalär — en storhet som endast anges med storlek, t.ex. vikt, tid och temperatur.",
+   "s": 121.2,
+   "e": 128.12
+  },
+  {
+   "t": "vektorns längd (belopp) ( längden av vektorn u ) — vektorns storlek, beräknas med Pythagoras sats eller ur koordinatformen.",
+   "s": 128.12,
+   "e": 137.25
+  },
+  {
+   "t": "motsatta vektorer — vektorer med samma storlek men motsatt riktning, t.ex. vektorn v två är lika med minus vektorn v ett .",
+   "s": 137.25,
+   "e": 145.8
+  },
+  {
+   "t": "parallella vektorer — vektorer som har samma lutning, oavsett om de är olika stora eller motriktade.",
+   "s": 145.8,
+   "e": 152.53
+  },
+  {
+   "t": "resultant — den vektor som fås när två (eller flera) vektorer adderas, med polygonmetoden.",
+   "s": 152.53,
+   "e": 159.66
+  },
+  {
+   "t": "Formler",
+   "s": 159.66,
+   "e": 161.49
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 161.49,
+   "e": 163.84
+  },
+  {
+   "t": "Trigonometriska funktioner",
+   "s": 163.84,
+   "e": 166.82
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet som är lika med a delat med b",
+   "s": 166.82,
+   "e": 183.43
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa som är lika med a delat med c",
+   "s": 166.82,
+   "e": 183.43
+  },
+  {
+   "t": "cosinus v är lika med närliggande katet delat med hypotenusa som är lika med b delat med c",
+   "s": 166.82,
+   "e": 183.43
+  },
+  {
+   "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
+   "s": 183.43,
+   "e": 190.39
+  },
+  {
+   "t": "Inversa trigonometriska funktioner",
+   "s": 190.39,
+   "e": 194.03
+  },
+  {
+   "t": "v är lika med tangens upphöjt till minus 1 parentesen a delat med b slut parentes v som är lika med sinus upphöjt till minus 1 parentesen a delat med c slut parentes v som är lika med cosinus upphöjt till minus 1 parentesen b delat med c slut parentes",
+   "s": 194.03,
+   "e": 210.44
+  },
+  {
+   "t": "där tan upphöjt till minus 1 (arctan), sin upphöjt till minus 1 (arcsin) och cos upphöjt till minus 1 (arccos) är de inversa funktionerna till tan, sin respektive cos.",
+   "s": 210.44,
+   "e": 222.25
+  },
+  {
+   "t": "Pythagoras sats",
+   "s": 222.25,
+   "e": 224.89
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat",
+   "s": 224.89,
+   "e": 229.86
+  },
+  {
+   "t": "där a och b är kateterna och c är hypotenusan i en rätvinklig triangel.",
+   "s": 229.86,
+   "e": 235.59
+  },
+  {
+   "t": "Triangelns area",
+   "s": 235.59,
+   "e": 237.96
+  },
+  {
+   "t": "A är lika med b gånger h delat med 2",
+   "s": 237.96,
+   "e": 241.66
+  },
+  {
+   "t": "där b är basen och h är höjden mot basen.",
+   "s": 241.66,
+   "e": 245.74
+  },
+  {
+   "t": "Vektorns längd i koordinatform",
+   "s": 245.74,
+   "e": 248.84
+  },
+  {
+   "t": "längden av vektorn u är lika med roten ur a x i kvadrat plus a y i kvadrat",
+   "s": 248.84,
+   "e": 255.12
+  },
+  {
+   "t": "där vektorn u är lika med parentesen a x, a y slut parentes .",
+   "s": 255.12,
+   "e": 260.81
+  },
+  {
+   "t": "Subtraktion av vektorer",
+   "s": 260.81,
+   "e": 263.79
+  },
+  {
+   "t": "vektorn u minus vektorn v är lika med vektorn u plus parentesen minus vektorn v slut parentes",
+   "s": 263.79,
+   "e": 270.73
+  },
+  {
+   "t": "där subtraktionen skrivs om som en addition av den motsatta vektorn minus vektorn v .",
+   "s": 270.73,
+   "e": 276.73
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 276.73,
+   "e": 279.6
+  },
+  {
+   "t": "Välj rätt trigonometrisk funktion utifrån vilka två sidor (eller sida och vinkel) som är kända eller efterfrågade: tangens kopplar ihop de två kateterna, sinus kopplar motstående katet och hypotenusa, cosinus kopplar närliggande katet och hypotenusa.",
+   "s": 279.6,
+   "e": 297.28
+  },
+  {
+   "t": "Sök en vinkel med den inversa funktionen (tan upphöjt till minus 1, sin upphöjt till minus 1 eller cos upphöjt till minus 1) — inte med den vanliga funktionen — när sidoförhållandet redan är känt.",
+   "s": 297.23,
+   "e": 309.02
+  },
+  {
+   "t": "Rita alltid en skiss och markera vilken sida som är motstående respektive närliggande katet till den aktuella vinkeln innan du väljer formel — annars är det lätt att blanda ihop tan, sin och cos.",
+   "s": 309.02,
+   "e": 320.19
+  },
+  {
+   "t": "Är triangeln inte rätvinklig: rita in höjden mot en av sidorna för att bilda en rätvinklig deltriangel, beräkna höjden med sinus och sätt sedan in den i triangelns areaformel.",
+   "s": 320.19,
+   "e": 330.98
+  },
+  {
+   "t": "Sträckan och vinkeln mellan två punkter i ett koordinatsystem bestäms genom att bilda en rätvinklig triangel med kateterna längs x- och y-led: sträckan (hypotenusan) fås med Pythagoras sats, vinkeln mot x-axeln fås med tangens.",
+   "s": 330.98,
+   "e": 345.85
+  },
+  {
+   "t": "Saknar en sträcka enhet i uppgiften: svara i l.e. (längdenheter); motsvarande gäller area i a.e. (areaenheter).",
+   "s": 345.85,
+   "e": 356.07
+  },
+  {
+   "t": "En vektor kan parallellförflyttas utan att ändras — det är storleken och riktningen som avgör om två vektorer är samma vektor, inte var i planet de ritas.",
+   "s": 356.07,
+   "e": 366.04
+  },
+  {
+   "t": "Vid addition av vektorer: parallellförflytta den ena vektorn så att den startar vid den andras spets (polygonmetoden); resultanten dras sedan från startpunkten till den slutliga spetsen.",
+   "s": 366.04,
+   "e": 377.5
+  },
+  {
+   "t": "Vid subtraktion vektorn u minus vektorn v : rita den motsatta vektorn minus vektorn v (lika lång men motriktad mot vektorn v ) och addera den till vektorn u som vanligt.",
+   "s": 377.5,
+   "e": 388.19
+  },
+  {
+   "t": "Multiplikation av en vektor med en skalär ändrar bara vektorns storlek (och, om skalären är negativ, dess riktning) — aldrig dess lutning.",
+   "s": 388.19,
+   "e": 397.42
+  },
+  {
+   "t": "En sträckas eller en vektors längd är alltid positiv: bortse från den negativa lösningen när du löser ut roten i Pythagoras sats.",
+   "s": 397.42,
+   "e": 405.87
+  },
+  {
+   "t": "I koordinatform motsvarar en vektors koordinater precis kateternas längd i den rätvinkliga triangel som bildas — därför fungerar samma formel, längden av vektorn u är lika med roten ur a x i kvadrat plus a y i kvadrat , oavsett om koordinaterna är negativa.",
+   "s": 405.87,
+   "e": 421.74
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 421.74,
+   "e": 424.79
+  },
+  {
+   "t": "Grundfiguren för all trigonometri i kapitlet: en rätvinklig triangel med kateterna a och b, hypotenusan c och vinkeln v.",
+   "s": 424.79,
+   "e": 433.85
+  },
+  {
+   "t": "Det är denna uppställning tan, sin, cos och Pythagoras sats bygger på:",
+   "s": 433.85,
+   "e": 452.23
+  },
+  {
+   "t": "Så här adderas två vektorer med polygonmetoden: den ena vektorn parallellförflyttas till den andras spets, och resultanten vektorn w är lika med vektorn u plus vektorn v dras från startpunkten till den nya slutpunkten:",
+   "s": 433.85,
+   "e": 452.23
+  },
+  {
+   "t": "Inför provet",
+   "s": 433.85,
+   "e": 452.23
+  },
+  {
+   "t": "Kan du namnge hypotenusa, motstående katet och närliggande katet till en given vinkel i en rätvinklig triangel?",
+   "s": 452.23,
+   "e": 459.74
+  },
+  {
+   "t": "Kan du ställa upp och beräkna tan, sin och cos för en vinkel utifrån sidornas längd?",
+   "s": 459.74,
+   "e": 465.89
+  },
+  {
+   "t": "Vet du hur du väljer rätt trigonometrisk funktion beroende på vilka sidor och vinklar som är kända?",
+   "s": 465.89,
+   "e": 472.52
+  },
+  {
+   "t": "Kan du använda de inversa funktionerna (tan upphöjt till minus 1, sin upphöjt till minus 1, cos upphöjt till minus 1) för att bestämma en okänd vinkel?",
+   "s": 472.52,
+   "e": 482.1
+  },
+  {
+   "t": "Kan du beräkna arean av en triangel som inte är rätvinklig genom att först bestämma höjden med trigonometri?",
+   "s": 482.1,
+   "e": 489.08
+  },
+  {
+   "t": "Kan du bestämma sträckan och vinkeln mellan två punkter i ett koordinatsystem genom att bilda en rätvinklig triangel och använda Pythagoras sats respektive tangens?",
+   "s": 489.08,
+   "e": 498.87
+  },
+  {
+   "t": "Vet du skillnaden mellan en vektor och en skalär, och kan du ge exempel på var och en?",
+   "s": 498.87,
+   "e": 504.92
+  },
+  {
+   "t": "Kan du avgöra om två vektorer är samma, motsatta eller parallella utifrån storlek och riktning?",
+   "s": 504.92,
+   "e": 511.94
+  },
+  {
+   "t": "Kan du beräkna en vektors längd (belopp), både grafiskt med Pythagoras sats och ur koordinatformen längden av vektorn u är lika med roten ur a x i kvadrat plus a y i kvadrat ?",
+   "s": 511.94,
+   "e": 523.24
+  },
+  {
+   "t": "Kan du addera och subtrahera vektorer grafiskt med polygonmetoden?",
+   "s": 523.24,
+   "e": 528.6
+  },
+  {
+   "t": "Vet du vad som händer med en vektors storlek och riktning när den multipliceras med en positiv respektive negativ skalär?",
+   "s": 528.6,
+   "e": 536.13
+  }
+ ]
+}

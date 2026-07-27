@@ -1,0 +1,383 @@
+{
+ "id": "ma1c-5.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b3d86afd8fab785522a15ba43e511493f1f74f38",
+ "dur": 545.79,
+ "segments": [
+  {
+   "t": "Sammanfattning — Statistik och sannolikhetslära",
+   "s": 0.1,
+   "e": 4.15
+  },
+  {
+   "t": "Det här kapitlet handlade om hur man samlar in och tolkar data på ett tillförlitligt sätt, och om hur man räknar på slumpens spel.",
+   "s": 4.1,
+   "e": 11.8
+  },
+  {
+   "t": "Du har mött urvalsmetoder och felkällor, felmarginal och signifikans, korrelation och kausalitet, samt fyra olika sätt att räkna ut sannolikheter: den klassiska sannolikhetsdefinitionen, experimentell sannolikhet, produktregeln med träddiagram och komplementhändelse.",
+   "s": 11.8,
+   "e": 29.25
+  },
+  {
+   "t": "Du ska efter kapitlet kunna granska en undersöknings tillförlitlighet och beräkna sannolikheten för både enkla och sammansatta händelser.",
+   "s": 29.25,
+   "e": 37.67
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 37.67,
+   "e": 39.95
+  },
+  {
+   "t": "population och stickprov — populationen är den grupp en undersökning handlar om; en totalundersökning undersöker hela populationen, en stickprovsundersökning bara en mindre del av den.",
+   "s": 39.95,
+   "e": 50.99
+  },
+  {
+   "t": "urval — hur man väljer ut vilka i populationen som ska ingå i en stickprovsundersökning; tre vanliga metoder är obundet slumpmässigt, systematiskt och stratifierat urval.",
+   "s": 50.99,
+   "e": 62.0
+  },
+  {
+   "t": "felkällor (urvalsfel och mätfel) — urvalsfel uppstår när urvalet inte representerar populationen; mätfel uppstår t.ex. genom ledande frågor eller ofullständiga svarsalternativ.",
+   "s": 62.0,
+   "e": 74.55
+  },
+  {
+   "t": "svarsbortfall — när inte alla tillfrågade svarar på en undersökning; ett stort bortfall gör att det sanna resultatet bara kan anges som ett intervall.",
+   "s": 74.55,
+   "e": 83.5
+  },
+  {
+   "t": "felmarginal ( f ) — hur mycket ett resultat kan förväntas variera om undersökningen upprepades; anges ofta så att resultatet med 95 procent säkerhet ligger inom felmarginalen.",
+   "s": 83.5,
+   "e": 95.36
+  },
+  {
+   "t": "konfidensintervall — det intervall (resultatet ± felmarginalen) som det sanna värdet med 95 procent säkerhet ligger inom.",
+   "s": 95.36,
+   "e": 104.46
+  },
+  {
+   "t": "signifikans — sannolikheten att en uppmätt förändring är verklig och inte bara beror på slumpen; en förändring större än felmarginalen är statistiskt säkerställd.",
+   "s": 104.46,
+   "e": 114.25
+  },
+  {
+   "t": "korrelation — ett samband mellan två variabler, undersöks med ett spridningsdiagram; kan vara stark eller svag samt positiv eller negativ.",
+   "s": 114.25,
+   "e": 123.03
+  },
+  {
+   "t": "kausalitet och skensamband — kausalitet är ett orsakssamband mellan två variabler; ett skensamband är en korrelation utan kausalitet, ofta orsakad av en bakomliggande gemensam faktor.",
+   "s": 123.03,
+   "e": 134.9
+  },
+  {
+   "t": "sannolikhet ( P ), utfall och utfallsrum — sannolikheten anger chansen att en händelse inträffar; utfallsrummet är mängden av alla möjliga utfall och de gynnsamma utfallen är de som stämmer med händelsen.",
+   "s": 134.9,
+   "e": 147.79
+  },
+  {
+   "t": "den klassiska sannolikhetsdefinitionen — vid likformig sannolikhetsfördelning (alla utfall lika sannolika) ges sannolikheten av antalet gynnsamma utfall genom antalet möjliga utfall.",
+   "s": 147.79,
+   "e": 159.07
+  },
+  {
+   "t": "experimentell sannolikhet och relativ frekvens — när utfallen inte är lika sannolika bestäms sannolikheten i stället genom upprepade försök; ju fler försök desto säkrare blir den relativa frekvensen.",
+   "s": 159.07,
+   "e": 171.1
+  },
+  {
+   "t": "produktregeln — sannolikheten för en kombination av händelser fås genom att multiplicera de enskilda händelsernas sannolikheter.",
+   "s": 171.1,
+   "e": 179.51
+  },
+  {
+   "t": "oberoende och beroende händelse — vid en oberoende händelse (t.ex. med återläggning) påverkas inte sannolikheten av tidigare utfall; vid en beroende händelse (t.ex. utan återläggning) ändras sannolikheten.",
+   "s": 179.51,
+   "e": 193.32
+  },
+  {
+   "t": "träddiagram — ett diagram med grenar som visar sannolikheten för varje utfall i en kombination; sannolikheten för en gren fås genom att multiplicera längs grenen, och flera grenar med samma resultat adderas.",
+   "s": 193.32,
+   "e": 205.76
+  },
+  {
+   "t": "komplementhändelse — en händelses \"motsats\"; sannolikheterna för en händelse och dess komplementhändelse summerar alltid till 1 (100 procent), vilket används vid \"minst en\"-uppgifter.",
+   "s": 205.76,
+   "e": 217.06
+  },
+  {
+   "t": "Formler",
+   "s": 217.06,
+   "e": 218.89
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 218.89,
+   "e": 221.24
+  },
+  {
+   "t": "Felmarginal",
+   "s": 221.24,
+   "e": 223.47
+  },
+  {
+   "t": "f är lika med 1,96 gånger roten ur p parentesen 100 minus p slut parentes delat med n",
+   "s": 223.47,
+   "e": 231.26
+  },
+  {
+   "t": "där",
+   "s": 231.26,
+   "e": 232.78
+  },
+  {
+   "t": "f är lika med felmarginal (procentenheter)",
+   "s": 232.78,
+   "e": 236.89
+  },
+  {
+   "t": "p är lika med andelen i procent som gett ett visst svar",
+   "s": 236.89,
+   "e": 241.47
+  },
+  {
+   "t": "n är lika med stickprovets storlek",
+   "s": 241.47,
+   "e": 244.84
+  },
+  {
+   "t": "Konfidensintervall",
+   "s": 244.84,
+   "e": 247.19
+  },
+  {
+   "t": "p minus f är mindre än eller lika med sant värde är mindre än eller lika med p plus f",
+   "s": 247.19,
+   "e": 253.35
+  },
+  {
+   "t": "där",
+   "s": 253.35,
+   "e": 254.82
+  },
+  {
+   "t": "p är lika med den uppmätta andelen (procent)",
+   "s": 254.82,
+   "e": 258.96
+  },
+  {
+   "t": "f är lika med felmarginalen (procentenheter)",
+   "s": 258.96,
+   "e": 263.27
+  },
+  {
+   "t": "Den klassiska sannolikhetsdefinitionen",
+   "s": 263.27,
+   "e": 266.85
+  },
+  {
+   "t": "P av händelse är lika med antalet gynnsamma utfall delat med antalet möjliga utfall",
+   "s": 266.85,
+   "e": 274.62
+  },
+  {
+   "t": "(Gäller vid likformig sannolikhetsfördelning, dvs. när alla utfall är lika sannolika.)",
+   "s": 274.57,
+   "e": 281.42
+  },
+  {
+   "t": "Produktregeln (oberoende händelser)",
+   "s": 281.42,
+   "e": 285.17
+  },
+  {
+   "t": "P av A och B är lika med P av A gånger P av B",
+   "s": 285.17,
+   "e": 289.98
+  },
+  {
+   "t": "där P av A och P av B är sannolikheterna för två oberoende händelser.",
+   "s": 289.98,
+   "e": 295.83
+  },
+  {
+   "t": "Regeln gäller på samma sätt för fler än två händelser i rad — sannolikheterna multipliceras led för led.",
+   "s": 295.83,
+   "e": 302.71
+  },
+  {
+   "t": "Komplementhändelse",
+   "s": 302.71,
+   "e": 305.09
+  },
+  {
+   "t": "P av händelse är lika med 1 minus P av komplementhändelse",
+   "s": 305.09,
+   "e": 309.94
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 309.94,
+   "e": 312.78
+  },
+  {
+   "t": "Skilj på totalundersökning (hela populationen undersöks, exakt men tidskrävande) och stickprovsundersökning (en del av populationen, mindre exakt men lättare att genomföra).",
+   "s": 312.78,
+   "e": 324.66
+  },
+  {
+   "t": "Kontrollera alltid att en enkätfråga inte är ledande och att svarsalternativen täcker in alla rimliga svar — annars uppstår ett mätfel.",
+   "s": 324.66,
+   "e": 332.84
+  },
+  {
+   "t": "Tar man hänsyn till svarsbortfallet kan resultatets sanna värde bara anges som ett intervall: den undre gränsen fås om ingen i bortfallet svarat på ett visst sätt, den övre gränsen om alla gjort det.",
+   "s": 332.84,
+   "e": 344.32
+  },
+  {
+   "t": "Konfidensintervallet fås genom att ta resultatet ± felmarginalen ( p plus minus f ).",
+   "s": 344.32,
+   "e": 351.53
+  },
+  {
+   "t": "En förändring är signifikant (statistiskt säkerställd) bara om den är större än felmarginalen — annars kan den bero på slumpen.",
+   "s": 351.53,
+   "e": 359.92
+  },
+  {
+   "t": "Avläs riktning (positiv/negativ lutning) och styrka (stark/svag spridning) hos en korrelation i ett spridningsdiagram.",
+   "s": 359.92,
+   "e": 369.31
+  },
+  {
+   "t": "Korrelation innebär inte kausalitet — kontrollera alltid om ett samband kan vara ett skensamband, orsakat av en bakomliggande gemensam faktor.",
+   "s": 369.31,
+   "e": 378.42
+  },
+  {
+   "t": "Den klassiska sannolikhetsdefinitionen gäller bara vid likformig sannolikhetsfördelning — är utfallen olika sannolika (t.ex. mål/miss vid straffar) måste sannolikheten i stället bestämmas experimentellt genom relativ frekvens.",
+   "s": 378.42,
+   "e": 392.62
+  },
+  {
+   "t": "Vid uppgifter med två föremål (två tärningar, två mynt): rita upp hela utfallsrummet och räkna gynnsamma utfall mot möjliga utfall.",
+   "s": 392.62,
+   "e": 401.72
+  },
+  {
+   "t": "Avgör alltid om händelser är oberoende (med återläggning — sannolikheten ändras inte) eller beroende (utan återläggning — sannolikheten ändras) innan produktregeln tillämpas.",
+   "s": 401.72,
+   "e": 413.47
+  },
+  {
+   "t": "I ett träddiagram: multiplicera sannolikheterna längs en gren för att få sannolikheten för just den kombinationen; finns flera grenar som ger samma resultat, addera grenarnas sannolikheter.",
+   "s": 413.47,
+   "e": 425.32
+  },
+  {
+   "t": "Vid \"minst en\"-uppgifter (t.ex. minst en sexa vid flera tärningskast) är det oftast enklast att räkna ut sannolikheten för komplementhändelsen (\"ingen sexa alls\") och sedan ta 1 minus den sannolikheten.",
+   "s": 425.32,
+   "e": 438.01
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 438.01,
+   "e": 441.06
+  },
+  {
+   "t": "Ett spridningsdiagram där punkterna ligger tätt kring en stigande linje visar en stark positiv korrelation:",
+   "s": 441.06,
+   "e": 449.24
+  },
+  {
+   "t": "Stark positiv korrelation.",
+   "s": 441.06,
+   "e": 449.24
+  },
+  {
+   "t": "Ex. fotlängd/skostorlek.",
+   "s": 449.24,
+   "e": 452.83
+  },
+  {
+   "t": "Utfallsrummet för summan av två tärningar — grunden för att systematiskt räkna gynnsamma och möjliga utfall vid uppgifter med två föremål:",
+   "s": 452.83,
+   "e": 469.16
+  },
+  {
+   "t": "Ett träddiagram med sannolikheterna vid varje gren — sannolikheten för en kombination fås genom att multiplicera sannolikheterna längs grenen:",
+   "s": 452.83,
+   "e": 469.16
+  },
+  {
+   "t": "Inför provet",
+   "s": 452.83,
+   "e": 469.16
+  },
+  {
+   "t": "Kan du skilja mellan totalundersökning och stickprovsundersökning, och namnge de tre urvalsmetoderna?",
+   "s": 469.16,
+   "e": 475.97
+  },
+  {
+   "t": "Vet du skillnaden mellan urvalsfel och mätfel, och kan du känna igen en ledande fråga eller ofullständiga svarsalternativ?",
+   "s": 475.97,
+   "e": 483.96
+  },
+  {
+   "t": "Kan du räkna ut hur ett svarsbortfall påverkar resultatets övre och undre gräns?",
+   "s": 483.96,
+   "e": 489.79
+  },
+  {
+   "t": "Kan du formeln för felmarginal och räkna ut ett konfidensintervall utifrån ett stickprovsresultat?",
+   "s": 489.79,
+   "e": 496.58
+  },
+  {
+   "t": "Vet du när en förändring räknas som statistiskt säkerställd (signifikant)?",
+   "s": 496.58,
+   "e": 502.33
+  },
+  {
+   "t": "Kan du avgöra typ av korrelation (stark/svag, positiv/negativ) utifrån ett spridningsdiagram?",
+   "s": 502.33,
+   "e": 510.67
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan korrelation och kausalitet, och vad ett skensamband är?",
+   "s": 510.67,
+   "e": 516.52
+  },
+  {
+   "t": "Kan du den klassiska sannolikhetsdefinitionen och vet du när den inte gäller?",
+   "s": 516.52,
+   "e": 521.72
+  },
+  {
+   "t": "Kan du räkna ut en experimentell sannolikhet med hjälp av relativ frekvens?",
+   "s": 521.72,
+   "e": 527.37
+  },
+  {
+   "t": "Kan du produktregeln, och kan du avgöra om två händelser är oberoende eller beroende av varandra?",
+   "s": 527.37,
+   "e": 534.11
+  },
+  {
+   "t": "Kan du rita och använda ett träddiagram för att beräkna sannolikheten för en kombination av händelser?",
+   "s": 534.11,
+   "e": 540.44
+  },
+  {
+   "t": "Kan du använda komplementhändelse för att förenkla en \"minst en\"-uppgift?",
+   "s": 540.56,
+   "e": 545.79
+  }
+ ]
+}

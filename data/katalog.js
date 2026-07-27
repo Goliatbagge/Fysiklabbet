@@ -306,6 +306,7 @@ window.KATALOG = {
               { num: '1.9', title: 'Grundpotensform och prefix', description: 'Skriv stora och små tal med tiopotenser — och byt ut tiopotensen mot ett prefix.', href: null, icon: null, keywords: ['aritmetik','grundpotensform','tiopotens','tiopotenser','prefix','kilo','mega','giga','tera','milli','mikro','nano','piko'] },
               { num: '1.10', title: 'Prioriteringsregler', description: 'I vilken ordning räkneoperationer utförs — parenteser, potenser, multiplikation och addition.', href: null, icon: null, keywords: ['aritmetik','prioriteringsregler','räkneordning','parenteser','potenser','mattedjävulen','term','summa','differens','faktor','produkt','täljare','nämnare','kvot'] },
               { num: '1.11', title: 'Hur du slår på din räknare', description: 'Testberäkningar för räknaren — rötter, potenser, parenteser i bråk och E-notation.', href: null, icon: null, keywords: ['aritmetik','räknare','miniräknare','grafräknare','e-notation','tiopotens','parenteser','rot','bråk'] },
+              { num: '1.S', title: 'Sammanfattning', description: 'Talmängder, bråkräkning, potenslagar och prefix — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','aritmetik','bråk','potenser','potenslagarna','prefix','grundpotensform'] },
             ],
           },
           'Algebra och ekvationer': {
@@ -325,6 +326,7 @@ window.KATALOG = {
               { num: '2.11', title: 'Olikheter', description: 'Lös olikheter som ekvationer — men vänd tecknet vid multiplikation med negativa tal.', href: null, icon: null, keywords: ['algebra','olikhet','olikheter','olikhetstecken','större än','mindre än','intervall','vända tecknet'] },
               { num: '2.12', title: 'Använda formler', description: 'Sätt in värden, lös ut storheter — och håll koll på enheterna.', href: null, icon: null, keywords: ['algebra','formel','formler','storhet','lösa ut','insättning','enheter','hastighet'] },
               { num: '2.13', title: 'Mönster och formler', description: 'Talföljder och slutna formler — hitta mönstret och beräkna element nummer 1 000 direkt.', href: null, icon: null, keywords: ['algebra','talföljd','mönster','element','sluten formel','ordningsnummer','prickmönster'] },
+              { num: '2.S', title: 'Sammanfattning', description: 'Uttryck, ekvationslösning, olikheter och formler — kapitlets begrepp och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','algebra','ekvationer','ekvation','olikheter','faktorisera','balansmetoden'] },
             ],
           },
           'Procentuella förändringar': {
@@ -336,6 +338,7 @@ window.KATALOG = {
               { num: '3.3', title: 'Upprepade procentuella förändringar', description: 'Multiplicera förändringsfaktorerna — och varför +15 % följt av −15 % inte ger 0 %.', href: null, icon: null, keywords: ['procent','upprepade förändringar','total förändringsfaktor','ränta på ränta','sparkonto','exponentiell'] },
               { num: '3.4', title: 'Sparande och ränteberäkningar', description: 'Ränta, behållning och kalkylblad — låsta cellreferenser och årligt sparande.', href: null, icon: null, keywords: ['procent','ränta','årsränta','sparande','sparkonto','behållning','kalkylblad','kalkylark','excel','cell','fyllnadshandtag'] },
               { num: '3.5', title: 'Lån och ränteberäkningar', description: 'Amortering, ränta och total lånekostnad — rak amortering månad för månad i kalkylblad.', href: null, icon: null, keywords: ['procent','lån','ränta','räntesats','amortera','amortering','rak amortering','skuld','inbetalning','lånekostnad','privatekonomi'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Procent, förändringsfaktor och ränteberäkningar — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','procent','förändringsfaktor','ränta','lån','sparande'] },
             ],
           },
           'Räta linjer och funktioner': {
@@ -353,6 +356,7 @@ window.KATALOG = {
               { num: '4.9', title: 'Definitionsmängd och värdemängd', description: 'Tillåtna *x*- och *y*-värden — med ifyllda och tomma ringar i grafens ändpunkter.', href: null, icon: null, keywords: ['funktioner','definitionsmängd','värdemängd','intervall','ifylld ring','tom ring','ändpunkt'] },
               { num: '4.10', title: 'Exponentialfunktioner', description: 'y = C·aˣ — variabeln i exponenten, med tillväxt när a > 1 och avtagande när a < 1.', href: null, icon: null, keywords: ['funktioner','exponentialfunktion','exponentialfunktioner','exponentiell','tillväxt','avtagande','förändringsfaktor','ränta på ränta','sönderfall'] },
               { num: '4.11', title: 'Potensfunktioner', description: 'f(x) = C·xᵃ — variabeln i basen, från parabler och hyperblar till rotkurvor.', href: null, icon: null, keywords: ['funktioner','potensfunktion','potensfunktioner','parabel','hyperbel','rotfunktion','funktion i funktion','sammansatt funktion'] },
+              { num: '4.S', title: 'Sammanfattning', description: 'Räta linjens ekvation, funktionsbegreppet och exponentialfunktioner — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','räta linjer','funktioner','k-värde','m-värde','exponentialfunktion','potensfunktion'] },
             ],
           },
           'Statistik och sannolikhetslära': {
@@ -367,6 +371,7 @@ window.KATALOG = {
               { num: '5.6', title: 'Produktregeln', description: 'Multiplicera sannolikheterna — oberoende och beroende händelser, med och utan återläggning.', href: null, icon: null, keywords: ['sannolikhet','produktregeln','oberoende händelser','beroende händelser','återläggning','utan återläggning','yatzy'] },
               { num: '5.7', title: 'Träddiagram', description: 'Multiplicera längs grenarna och addera de gynnsamma — flerstegsförsök med olika sannolikheter.', href: null, icon: null, keywords: ['sannolikhet','träddiagram','grenar','flerstegsförsök','kombination','strumpor'] },
               { num: '5.8', title: 'Komplementhändelse', description: 'P(händelse) = 1 − P(motsatsen) — nyckeln till "minst en"-uppgifter och födelsedagsparadoxen.', href: null, icon: null, keywords: ['sannolikhet','komplementhändelse','komplement','motsatshändelse','minst en','födelsedagsparadoxen'] },
+              { num: '5.S', title: 'Sammanfattning', description: 'Undersökningar, felkällor och sannolikhetslärans regler — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','statistik','sannolikhet','träddiagram','produktregeln','komplementhändelse'] },
             ],
           },
           'Trigonometri': {
@@ -381,6 +386,7 @@ window.KATALOG = {
               { num: '6.6', title: 'Räkneoperationer med vektorer', description: 'Multiplicera med skalär och addera med polygonmetoden — resultanten från start till slut.', href: null, icon: null, keywords: ['vektorer','vektoraddition','resultant','polygonmetoden','skalär','multiplikation'] },
               { num: '6.7', title: 'Subtraktion av vektorer', description: 'u − v = u + (−v) — addera den motsatta vektorn med polygonmetoden.', href: null, icon: null, keywords: ['vektorer','vektorsubtraktion','subtraktion','motsatt vektor','resultant'] },
               { num: '6.8', title: 'Längden av en vektor i koordinatform', description: 'Koordinaterna är katetrar — Pythagoras sats ger längden av vektorn (a, b).', href: null, icon: null, keywords: ['vektorer','koordinatform','vektorlängd','längd','belopp','absolutbelopp','pythagoras sats','komponenter'] },
+              { num: '6.S', title: 'Sammanfattning', description: 'Tangens, sinus, cosinus och vektorer — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','trigonometri','vektorer','sinus','cosinus','tangens','pythagoras sats'] },
             ],
           },
         },
@@ -413,6 +419,7 @@ window.KATALOG = {
               { num: '1.2', title: 'Substitutionsmetoden', description: 'Lös ut en variabel och byt ut den i den andra ekvationen — algebraisk lösning utan graf.', href: null, icon: null, keywords: ['ekvationssystem','substitutionsmetoden','substitution','algebraisk lösning','lösa ut variabel','byta ut'] },
               { num: '1.3', title: 'Additionsmetoden', description: 'Addera ekvationerna ledvis så att en variabel elimineras — multiplicera först vid behov.', href: null, icon: null, keywords: ['ekvationssystem','additionsmetoden','eliminera','ledvis addition','eliminationsmetoden','multiplicera ekvation'] },
               { num: '1.4', title: 'Problemlösning med ekvationssystem', description: 'Definiera variabler, ställ upp systemet och tolka svaret — från textproblem till lösning.', href: null, icon: null, keywords: ['ekvationssystem','problemlösning','teckna ekvationssystem','definiera variabler','textuppgift','tolka svar'] },
+              { num: '1.S', title: 'Sammanfattning', description: 'Grafisk lösning, substitution och addition — kapitlets begrepp och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','ekvationssystem','substitutionsmetoden','additionsmetoden','skärningspunkt'] },
             ],
           },
           'Algebra och andragradsekvationer': {
@@ -427,6 +434,7 @@ window.KATALOG = {
               { num: '2.6', title: 'Antal lösningar till en andragradsekvation', description: 'Diskriminantens tecken avgör: positiv ger två, noll ger en och negativ ger inga lösningar.', href: null, icon: null, keywords: ['algebra','diskriminant','diskriminanten','antal lösningar','dubbelrot','andragradsekvation'] },
               { num: '2.7', title: 'Problemlösning med andragradsekvationer', description: 'Tolka, ställ upp, lös och tolka svaret — och sortera bort orimliga rötter.', href: null, icon: null, keywords: ['algebra','problemlösning','andragradsekvation','textuppgift','geometriproblem','area','omkrets','tolka svar'] },
               { num: '2.8', title: 'Rotekvationer', description: 'Kvadrera båda led och kontrollera lösningarna — falska rötter kan uppstå.', href: null, icon: null, keywords: ['algebra','rotekvation','rotekvationer','kvadrera','falsk rot','falska rötter','variabelsubstitution','rottecken'] },
+              { num: '2.S', title: 'Sammanfattning', description: 'Kvadrerings- och konjugatreglerna, *pq*-formeln och rotekvationer — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','algebra','andragradsekvation','pq-formeln','konjugatregeln','kvadreringsreglerna','diskriminant'] },
             ],
           },
           'Andragradsfunktioner': {
@@ -438,6 +446,7 @@ window.KATALOG = {
               { num: '3.3', title: 'Andragradsfunktioner och modellering', description: 'Bestäm funktionen ur grafen — faktorform med nollställen eller ekvationssystem med tre punkter.', href: null, icon: null, keywords: ['andragradsfunktion','modellering','faktorform','utvecklad form','bestämma funktion','nollställen','tre punkter','kastparabel','fontän'] },
               { num: '3.4', title: 'Andragradsekvationer och olikheter med grafritande hjälpmedel', description: 'Skärningarnas *x*-koordinater ger lösningarna — och över/under avgör olikhetens intervall.', href: null, icon: null, keywords: ['andragradsekvation','olikhet','olikheter','grafisk lösning','geogebra','skärningspunkt','nollställen','intervall'] },
               { num: '3.5', title: 'Problemlösning med grafritande hjälpmedel', description: 'Raketbanor och maximala areor — extrempunkt, nollställen och skärningar i tillämpningar.', href: null, icon: null, keywords: ['problemlösning','grafritande hjälpmedel','geogebra','extrempunkt','maximering','största area','raket','kastbana'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Parabelns extrempunkt, symmetrilinje och nollställen — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','andragradsfunktion','parabel','extrempunkt','symmetrilinje','nollställen'] },
             ],
           },
           'Geometri': {
@@ -456,6 +465,7 @@ window.KATALOG = {
               { num: '4.10', title: 'Kongruens', description: 'Likformiga och lika stora — kongruensvillkoren SVS, SSS och VSV avgör med tre uppgifter.', href: null, icon: null, keywords: ['geometri','kongruens','kongruenta trianglar','svs','sss','vsv','kongruensvillkor'] },
               { num: '4.11', title: 'Randvinkelsatsen', description: 'Medelpunktsvinkeln är dubbla randvinkeln — med följdsatser, tangenter och likbenta radie-trianglar.', href: null, icon: null, keywords: ['geometri','cirkel','randvinkelsatsen','randvinkel','medelpunktsvinkel','cirkelbåge','tangent','halvcirkelbåge','följdsats'] },
               { num: '4.12', title: 'Kordasatsen och inskrivna fyrhörningar', description: 'Korsande kordors delsträckor: a · b = c · d — och motstående vinklar som summerar till 180°.', href: null, icon: null, keywords: ['geometri','cirkel','korda','kordasatsen','inskriven fyrhörning','motstående vinklar'] },
+              { num: '4.S', title: 'Sammanfattning', description: 'Vinklar, Pythagoras sats, likformighet och cirkelns satser — kapitlets begrepp och satser komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','geometri','pythagoras sats','likformighet','kongruens','randvinkelsatsen','kordasatsen'] },
             ],
           },
           'Logaritmer': {
@@ -468,6 +478,7 @@ window.KATALOG = {
               { num: '5.4', title: 'Logaritmlagarna', description: 'lg x + lg y = lg xy och två lagar till — med härledningar och den snabba vägen genom exponentialekvationer.', href: null, icon: null, keywords: ['logaritmer','logaritmlagarna','logaritmlagar','första logaritmlagen','andra logaritmlagen','tredje logaritmlagen','logaritmera'] },
               { num: '5.5', title: 'Tillämpningar av logaritmer', description: 'Ränta, tillväxt och värdeminskning — logaritmerna ger tiden i modellen y = C · aˣ.', href: null, icon: null, keywords: ['logaritmer','tillämpningar','ränta','sparkonto','exponentiell tillväxt','värdeminskning','fördubblingstid'] },
               { num: '5.6', title: 'Logaritmer med andra baser', description: 'aˣ = b har lösningen x = log_a b — samma logik som lg, med valfri bas.', href: null, icon: null, keywords: ['logaritmer','andra baser','generella logaritmer','log2','logaritm med bas','tvålogaritm'] },
+              { num: '5.S', title: 'Sammanfattning', description: 'Tiologaritmer, logaritmlagarna och exponentialekvationer — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','logaritmer','logaritmlagarna','exponentialekvation','lg'] },
             ],
           },
           'Statistik': {
@@ -481,6 +492,7 @@ window.KATALOG = {
               { num: '6.5', title: 'Normalfördelning', description: 'Klockkurvan med 34,1 – 13,6 – 2,3 % — och sannolikhetskalkylatorn för alla andra intervall.', href: null, icon: null, keywords: ['statistik','normalfördelning','normalfördelningskurva','klockkurva','standardavvikelse','sannolikhetskalkylator','andel'] },
               { num: '6.6', title: 'Linjär regression', description: 'Regressionslinjen och korrelationskoefficienten r — anpassa en linje och gör prognoser.', href: null, icon: null, keywords: ['statistik','linjär regression','regressionslinje','korrelation','korrelationskoefficient','spridningsdiagram','prognos'] },
               { num: '6.7', title: 'Olika regressionsmodeller', description: 'Linjär, exponentiell, potens eller polynom — kännetecken och r²-värden avgör bästa modellen.', href: null, icon: null, keywords: ['statistik','regressionsmodeller','regression','exponentiell modell','potensmodell','polynommodell','kurvanpassning','determinationskoefficient'] },
+              { num: '6.S', title: 'Sammanfattning', description: 'Lägesmått, spridningsmått, normalfördelning och regression — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','statistik','standardavvikelse','normalfördelning','regression','lådagram'] },
             ],
           },
         },
@@ -515,6 +527,7 @@ window.KATALOG = {
               { num: '1.3', title: 'Multiplikation och division av rationella uttryck', description: 'Multiplicera täljare med täljare och nämnare med nämnare; vid division byts divisionstecknet mot multiplikation och uttrycket i nämnaren inverteras.', href: null, icon: null, keywords: ['rationella uttryck','multiplikation','division','invertera','faktorisera','förkorta','ekvationer','definitionsmängd'] },
               { num: '1.4', title: 'Gränsvärden', description: 'Bestäm vad ett uttryck närmar sig när variabeln går mot ett tal eller mot en oändlighet — genom insättning, förkortning eller tabeller.', href: null, icon: null, keywords: ['gränsvärde','limes','oändlighet','tabellmetod','förkorta','lim','asymptot'] },
               { num: '1.5', title: 'Symbolhanterande hjälpmedel', description: 'Geogebra som CAS-verktyg — förenkla och faktorisera uttryck, lös ekvationer exakt eller numeriskt och beräkna gränsvärden.', href: null, icon: null, keywords: ['symbolhanterande hjälpmedel','geogebra','cas','faktorisera','förenkla','lösa ekvationer','gränsvärde','digitala verktyg'] },
+              { num: '1.S', title: 'Sammanfattning', description: 'Rationella uttryck och gränsvärden — kapitlets begrepp och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','rationella uttryck','gränsvärde','faktorisera','förkorta'] },
             ],
           },
           'Derivatan': {
@@ -526,6 +539,7 @@ window.KATALOG = {
               { num: '2.3', title: 'Derivatans definition', description: 'Derivatan som gränsvärde: sekantens lutning då avståndet h mellan punkterna går mot 0.', href: null, icon: null, keywords: ['derivata', 'derivatans definition', 'gränsvärde', 'sekant', 'tangent', 'lutning', 'differentialkvot'] },
               { num: '2.4', title: 'Använda derivata', description: 'Tolka vad f\'(a) betyder som momentan förändringshastighet, och beräkna derivator med symbolhanterande hjälpmedel som Geogebra.', href: null, icon: null, keywords: ['derivata','tolka derivata','förändringshastighet','geogebra','symbolhanterande hjälpmedel','digitala hjälpmedel','momentanhastighet'] },
               { num: '2.5', title: 'Deriverbarhet och absolutbelopp', description: 'Kontinuerliga och diskontinuerliga funktioner, absolutbelopp och varför en hörnpunkt aldrig är deriverbar.', href: null, icon: null, keywords: ['derivata','deriverbarhet','absolutbelopp','kontinuerlig','diskontinuerlig','hörnpunkt','hörn','hopp','språng','gränsvärde'] },
+              { num: '2.S', title: 'Sammanfattning', description: 'Sekant, tangent och derivatans definition — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','derivata','derivatans definition','sekant','tangent','deriverbarhet'] },
             ],
           },
           'Deriveringsregler': {
@@ -539,6 +553,7 @@ window.KATALOG = {
               { num: '3.5', title: 'Derivatan av eᵏˣ och aˣ', description: 'Derivatan av e^(kx) är k · e^(kx), och av a^x är a^x · ln a — via derivatans definition och en omskrivning till basen e med den naturliga logaritmen.', href: null, icon: null, keywords: ['derivator','deriveringsregler','exponentialfunktioner','derivatan av e^x','naturliga logaritmen','ln','basbyte','exponentialfunktion','lathund'] },
               { num: '3.6', title: 'Tillämpningar av derivata', description: 'Förändringshastighet vid en tidpunkt, obekanta konstanter i modeller — och tangentens ekvation y = kx + m med k = f\'(a).', href: null, icon: null, keywords: ['derivata','tillämpningar','förändringshastighet','tillväxthastighet','tangent','tangentens ekvation','räta linjens ekvation','konstant','exponentialfunktion','tolka derivata'] },
               { num: '3.7', title: 'Tillämpningar av derivata med digitala hjälpmedel', description: 'Geogebra som räknehjälp — derivera, lös ekvationer numeriskt eller exakt, och skriv om exponentialmodeller med basen e.', href: null, icon: null, keywords: ['derivata','deriveringsregler','geogebra','digitala hjälpmedel','tillämpningar','exponentialfunktion','basen e','tillväxthastighet','nlös','extrempunkt'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Potensregeln, polynom och exponentialfunktionernas derivator — kapitlets regler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','deriveringsregler','potensregeln','derivata','exponentialfunktion','talet e','tangentens ekvation'] },
             ],
           },
           'Kurvor och extremvärden': {
@@ -552,6 +567,7 @@ window.KATALOG = {
               { num: '4.5', title: 'Andraderivatan och lokala extrempunkter', description: 'Avgör en extrempunkts karaktär direkt med andraderivatans tecken — positiv ger minimipunkt, negativ ger maximipunkt — som ett snabbare alternativ till teckentabellen.', href: null, icon: null, keywords: ['andraderivata','extrempunkt','maximipunkt','minimipunkt','terrasspunkt','konkav','konvex','teckentabell','lokal extrempunkt'] },
               { num: '4.6', title: 'Extremvärdesproblem', description: 'Ställ upp en funktion för storheten som ska maximeras eller minimeras, derivera, sätt derivatan lika med 0 och lös — tolka sedan resultatet i sammanhanget.', href: null, icon: null, keywords: ['extremvärdesproblem','optimeringsproblem','optimering','maximal area','maximal intäkt','derivata','extrempunkt','andraderivata','maximivärde','minimivärde'] },
               { num: '4.7', title: 'Extremvärdesproblem med digitalt hjälpmedel', description: 'Lös samma typ av optimeringsproblem grafiskt i Geogebra — rita funktionen och läs av extrempunkten i stället för att derivera för hand.', href: null, icon: null, keywords: ['extremvärdesproblem','geogebra','digitalt hjälpmedel','extrempunkt','optimering','graf','definitionsmängd'] },
+              { num: '4.S', title: 'Sammanfattning', description: 'Teckentabeller, extrempunkter och andraderivatan — kapitlets begrepp och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','extrempunkt','teckentabell','andraderivata','extremvärdesproblem','kurvkonstruktion'] },
             ],
           },
           'Integraler': {
@@ -565,6 +581,7 @@ window.KATALOG = {
               { num: '5.5', title: 'Beräkna integraler med digitalt hjälpmedel', description: 'Geogebra som räknehjälp — primitiva funktioner och bestämda integraler, exakt i CAS-läget eller som närmevärde i standardläget.', href: null, icon: null, keywords: ['integraler','primitiv funktion','digitalt hjälpmedel','geogebra','cas-läget','standardläget','närmevärde','exakt värde','bestämd integral'] },
               { num: '5.6', title: 'Area mellan kurvor', description: 'Arean mellan två kurvor ges av integralen av övre funktion minus undre funktion, med skärningspunkterna som integrationsgränser — exakt för hand eller med Geogebras IntegralMellan.', href: null, icon: null, keywords: ['integral', 'area mellan kurvor', 'övre funktion', 'undre funktion', 'skärningspunkter', 'geogebra', 'integralmellan', 'sammansatt area'] },
               { num: '5.7', title: 'Tillämpningar av integraler', description: 'Integralen som produkten av en beroende och en oberoende variabel — sträcka från hastighet, total omsättning från en förändringstakt.', href: null, icon: null, keywords: ['integraler','tillämpningar','sträcka','hastighet','acceleration','enhetsanalys','tolka integraler','derivera','integrera'] },
+              { num: '5.S', title: 'Sammanfattning', description: 'Primitiva funktioner, fundamentalsatsen och area under och mellan kurvor — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','integraler','primitiv funktion','bestämd integral','fundamentalsats','area'] },
             ],
           },
           'Trigonometri och triangelsatserna': {
@@ -579,6 +596,7 @@ window.KATALOG = {
               { num: '6.6', title: 'Sinussatsen', description: 'Kvoten mellan en sida och sinus för dess motstående vinkel är lika för alla tre sidorna — använd sinussatsen när en sida och två vinklar, eller två sidor och en icke-mellanliggande vinkel, är kända.', href: null, icon: null, keywords: ['sinussatsen','triangel','motstående vinkel','sida','vinkel','triangelsatserna','tvetydiga fallet','trigonometri'] },
               { num: '6.7', title: 'Cosinussatsen', description: 'c² = a² + b² − 2ab · cos C — bestäm en sida med två kända sidor och mellanliggande vinkel, eller en vinkel när alla tre sidorna är kända.', href: null, icon: null, keywords: ['cosinussatsen','triangelsatserna','trigonometri','sinussatsen','vinkel','sida','mellanliggande vinkel'] },
               { num: '6.8', title: 'Tillämpningar av triangelsatserna', description: 'Välj rätt sats efter vad som är känt i triangeln, och kedja ihop flera trianglar för att lösa verkliga höjd- och avståndsproblem.', href: null, icon: null, keywords: ['triangelsatserna','tillämpningar','areasatsen','sinussatsen','cosinussatsen','höjdvinkel','elevationsvinkel','flaggstång','kulle','problemlösning'] },
+              { num: '6.S', title: 'Sammanfattning', description: 'Enhetscirkeln, trigonometriska ekvationer och triangelsatserna — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','trigonometri','enhetscirkeln','areasatsen','sinussatsen','cosinussatsen'] },
             ],
           },
         },
@@ -623,6 +641,7 @@ window.KATALOG = {
 { num: '1.13', title: 'Grafen till y = tan x', description: 'Tangensfunktionen har lodräta asymptoter där cos x = 0, perioden 180° och ingen amplitud — förskjutningar beräknas som för sinus och cosinus.', href: null, icon: null, keywords: ['trigonometri','tangens','tan','graf','asymptot','period','förskjutning','amplitud','sinus','cosinus','odefinierad'] },
 { num: '1.14', title: 'Grafen till y = a sin x + b cos x', description: 'Skriv om a sin x + b cos x som en enda förskjuten sinuskurva med amplitud √(a²+b²) — och bestäm största och minsta värde.', href: null, icon: null, keywords: ['trigonometri','sinuskurva','cosinus','amplitud','största värde','minsta värde','förskjuten sinus','sammanslagning','a sin x + b cos x','fasförskjutning','ekvationssystem'] },
 { num: '1.15', title: 'Tillämpningar av trigonometriska funktioner', description: 'Harmoniska svängningar som sinusmodeller: amplitud |A|, periodtid T = 2π/B, fasförskjutning C/B och jämviktsläge — och hur man ställer upp modellen y = A sin(Bx + C) + D.', href: null, icon: null, keywords: ['trigonometri','tillämpningar','sinusfunktion','harmonisk svängning','periodtid','period','amplitud','fasförskjutning','jämviktsläge','radianer','sinusmodell','växelström'] },
+{ num: '1.S', title: 'Sammanfattning', description: 'Enhetscirkeln, radianer, trigonometriska formler och sinuskurvans parametrar — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','trigonometri','enhetscirkeln','radianer','trigonometriska ekvationer','amplitud','period'] },
             ],
           },
           'Derivata': {
@@ -643,6 +662,7 @@ window.KATALOG = {
 { num: '2.12', title: 'Vertikala och horisontella asymptoter', description: 'En asymptot är en linje kurvan närmar sig utan att nå: en vertikal asymptot där nämnaren i en rationell funktion är 0, och en horisontell asymptot som funktionens gränsvärde då $x \\to \\pm\\infty$.', href: null, icon: null, keywords: ['asymptot', 'vertikal asymptot', 'horisontell asymptot', 'rationell funktion', 'gränsvärde', 'nämnare', 'oändligheten', 'lodrät', 'vågrät', 'kurvanalys'] },
 { num: '2.13', title: 'Sneda asymptoter', description: 'En asymptot som varken är lodrät eller vågrät. Hur den bestäms för rationella funktioner där täljarens grad är en högre än nämnarens — genom omskrivning till en rät linje y = kx + m plus en restterm som går mot noll, ofta via polynomdivision.', href: null, icon: null, keywords: ['sneda asymptoter', 'asymptot', 'rationella funktioner', 'polynomdivision', 'rät linje', 'restterm', 'gränsvärde', 'kurvor', 'riktningskoefficient', 'derivata'] },
 { num: '2.14', title: 'Kurvritning med hjälp av asymptoter', description: 'Skissa grafen till rationella funktioner: bestäm lodräta, vågräta och sneda asymptoter, ta fram extrempunkter och gör teckentabell.', href: null, icon: null, keywords: ['kurvritning', 'asymptoter', 'rationella funktioner', 'sned asymptot', 'lodrät asymptot', 'teckentabell', 'extrempunkter', 'derivata', 'grafskiss', 'gränsvärde'] },
+{ num: '2.S', title: 'Sammanfattning', description: 'Kedjeregeln, produkt- och kvotregeln, trigonometriska derivator och asymptoter — kapitlets regler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','derivata','deriveringsregler','kedjeregeln','produktregeln','kvotregeln','asymptoter'] },
             ],
           },
           'Integraler': {
@@ -657,6 +677,7 @@ window.KATALOG = {
 { num: '3.6', title: 'Täthetsfunktioner', description: 'Täthetsfunktioner kopplar integralen till sannolikhet: arean under grafen mellan två gränser är sannolikheten för ett intervall, och den totala arean är alltid 1. Likformig, normal- och exponentialfördelning.', href: null, icon: null, keywords: ['täthetsfunktion', 'sannolikhet', 'sannolikhetsfördelning', 'likformig fördelning', 'normalfördelning', 'exponentialfördelning', 'integral', 'area', 'kontinuerligt utfallsrum'] },
 { num: '3.7', title: 'Rotationskroppar', description: 'Skivmetoden: när ett område mellan en kurva och *x*-axeln roterar sveps en rotationskropp ut vars volym ges av V = π∫y² dx, med exempel där integrationsgränserna först måste hittas ur nollställena.', href: null, icon: null, keywords: ['rotationskropp', 'rotationskroppar', 'skivmetoden', 'volym', 'integral', 'rotation', 'x-axeln', 'volymenheter', 'nollställen', 'integralkalkyl'] },
 { num: '3.8', title: 'Mer om rotationskroppar (rotation kring *y*-axeln)', description: 'Volymen av en rotationskropp som bildas när en kurva roterar kring *y*-axeln: skivmetoden ger $V = \\pi\\int_a^b x^2\\, dy$, där kurvans *x*-värde är radien och x uttrycks i y genom att lösa ut inversen.', href: null, icon: null, keywords: ['rotationskropp','rotation kring y-axeln','volym','integral','skivmetoden','skiva','invers','lös ut x','bestämd integral','volymsenheter'] },
+{ num: '3.S', title: 'Sammanfattning', description: 'Primitiva funktioner, areaberäkning, täthetsfunktioner och rotationskroppar — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','integraler','primitiv funktion','area','täthetsfunktion','rotationskropp'] },
             ],
           },
           'Komplexa tal': {
@@ -673,6 +694,7 @@ window.KATALOG = {
 { num: '4.8', title: 'Potenser av komplexa tal och de Moivres formel', description: 'de Moivres formel gör potensräkning enkel: upphöj beloppet till n och multiplicera argumentet med n. Vi beräknar z^n i polär form och skriver svaret på formen a + bi.', href: null, icon: null, keywords: ['komplexa tal', 'de moivres formel', 'potens', 'polär form', 'argument', 'absolutbelopp', 'exponent', 'rektangulär form'] },
 { num: '4.9', title: 'Ekvationen zⁿ = w', description: 'Lös potensekvationer zⁿ = w — n lösningar jämnt fördelade som hörn i en regelbunden n-hörning på en cirkel med radien n:te roten ur |w|.', href: null, icon: null, keywords: ['komplexa tal','potensekvation','de moivre','polär form','rötter','enhetscirkel','regelbunden månghörning','argument','absolutbelopp','n-hörning'] },
 { num: '4.10', title: 'Eulers formel och talet eᶻ', description: 'Eulers formel eⁱᵛ = cos v + i·sin v binder samman exponentialfunktionen med trigonometrin — komplexa tal på exponentiell form z = reⁱᵛ, talet e^z och Eulers identitet.', href: null, icon: null, keywords: ['komplexa tal','eulers formel','eulers identitet','exponentiell form','polär form','argand','komplexa talplanet','exponentialfunktion','trigonometri'] },
+{ num: '4.S', title: 'Sammanfattning', description: 'Talet i, komplexa talplanet, polär form och de Moivres formel — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','komplexa tal','imaginär enhet','polär form','de moivres formel','eulers formel'] },
             ],
           },
         },

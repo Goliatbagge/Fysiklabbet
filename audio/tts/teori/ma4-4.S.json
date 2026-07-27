@@ -1,0 +1,443 @@
+{
+ "id": "ma4-4.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a799108f46219d07f6d42ed378adeb5e569e3152",
+ "dur": 709.34,
+ "segments": [
+  {
+   "t": "Sammanfattning — Komplexa tal",
+   "s": 0.1,
+   "e": 3.17
+  },
+  {
+   "t": "Det här kapitlet handlade om komplexa tal: hur den imaginära enheten i gör det möjligt att lösa ekvationer som saknar reella lösningar, hur komplexa tal räknas med och åskådliggörs som punkter eller visare i det komplexa talplanet, samt hur den polära och exponentiella formen förenklar multiplikation, potenser och rotutdragning.",
+   "s": 3.12,
+   "e": 22.69
+  },
+  {
+   "t": "Du ska efter kapitlet kunna räkna med komplexa tal i alla räknesätt, lösa andra- och högregradsekvationer med komplexa rötter, växla mellan talets tre former och använda de Moivres formel samt Eulers formel.",
+   "s": 22.69,
+   "e": 35.2
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 35.2,
+   "e": 37.52
+  },
+  {
+   "t": "imaginära enheten ( i ) — talet med egenskapen i i kvadrat är lika med minus 1 ; gör det möjligt att dra kvadratroten ur negativa tal.",
+   "s": 37.52,
+   "e": 47.16
+  },
+  {
+   "t": "imaginärt tal / rent imaginärt tal — ett tal på formen a plus b i med b är inte lika med 0 är imaginärt; är dessutom a är lika med 0 kallas det rent imaginärt.",
+   "s": 47.16,
+   "e": 57.81
+  },
+  {
+   "t": "komplext tal ( z ) — tal på formen z är lika med a plus b i ; de reella talen är en delmängd av de komplexa talen ( C ).",
+   "s": 57.81,
+   "e": 67.45
+  },
+  {
+   "t": "realdel ( Re z ) och imaginärdel ( Im z ) — för z är lika med a plus b i gäller Re z är lika med a och Im z är lika med b .",
+   "s": 67.45,
+   "e": 77.88
+  },
+  {
+   "t": "konjugat ( bar z ) — talet a minus b i ; fås genom att byta tecken på imaginärdelen, motsvarar en spegling i den reella axeln.",
+   "s": 77.88,
+   "e": 88.06
+  },
+  {
+   "t": "komplexa talplanet — koordinatsystem med en reell axel (Re) och en imaginär axel (Im), där z är lika med a plus b i svarar mot punkten parentesen a, b slut parentes .",
+   "s": 88.06,
+   "e": 100.26
+  },
+  {
+   "t": "visare — en pil från origo till punkten z i det komplexa talplanet.",
+   "s": 100.26,
+   "e": 105.88
+  },
+  {
+   "t": "absolutbelopp ( | z | , r ) — visarens längd, | z | är lika med roten ur a i kvadrat plus b i kvadrat ; | z minus w | är avståndet mellan punkterna z och w .",
+   "s": 105.88,
+   "e": 118.17
+  },
+  {
+   "t": "argument ( arg z , v ) — vinkeln visaren bildar med den positiva reella axeln.",
+   "s": 118.17,
+   "e": 125.08
+  },
+  {
+   "t": "polär form — sättet att skriva ett komplext tal som z är lika med r parentesen cosinus v plus i sinus v slut parentes .",
+   "s": 125.08,
+   "e": 133.75
+  },
+  {
+   "t": "exponentiell form — sättet att skriva ett komplext tal som z är lika med r e upphöjt till i v , via Eulers formel.",
+   "s": 133.75,
+   "e": 141.51
+  },
+  {
+   "t": "de Moivres formel — genväg för att beräkna potenser av komplexa tal i polär form utan att multiplicera ut dem.",
+   "s": 141.51,
+   "e": 149.06
+  },
+  {
+   "t": "faktorsatsen — är x är lika med a ett nollställe till polynomet p parentesen x slut parentes , är parentesen x minus a slut parentes en faktor till polynomet.",
+   "s": 149.06,
+   "e": 160.09
+  },
+  {
+   "t": "polynomdivision och nollproduktmetoden — polynomdivision tar fram en polynomekvations återstående faktor(er) när en rot är känd; nollprodukt- metoden löser sedan den faktoriserade ekvationen faktor för faktor.",
+   "s": 160.09,
+   "e": 173.54
+  },
+  {
+   "t": "Formler",
+   "s": 173.54,
+   "e": 175.36
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 175.36,
+   "e": 177.71
+  },
+  {
+   "t": "Imaginära enheten och rotutdragning ur negativa tal",
+   "s": 177.71,
+   "e": 182.28
+  },
+  {
+   "t": "i i kvadrat är lika med minus 1 roten ur minus a som är lika med roten ur a gånger i",
+   "s": 182.28,
+   "e": 190.38
+  },
+  {
+   "t": "pq-formeln — komplexa rötter",
+   "s": 182.28,
+   "e": 190.38
+  },
+  {
+   "t": "x i kvadrat plus p x plus q är lika med 0 vilket ger att x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 190.38,
+   "e": 202.61
+  },
+  {
+   "t": "där",
+   "s": 202.61,
+   "e": 204.1
+  },
+  {
+   "t": "diskriminanten parentesen p delat med 2 slut parentes i kvadrat minus q positiv två reella lösningar",
+   "s": 204.1,
+   "e": 211.57
+  },
+  {
+   "t": "diskriminanten noll en reell lösning (dubbelrot)",
+   "s": 211.57,
+   "e": 216.21
+  },
+  {
+   "t": "diskriminanten negativ två komplexa lösningar, varandras konjugat a plus b i och a minus b i",
+   "s": 216.21,
+   "e": 226.07
+  },
+  {
+   "t": "Realdel, imaginärdel och konjugat",
+   "s": 216.21,
+   "e": 226.07
+  },
+  {
+   "t": "Re z är lika med a Im z som är lika med b bar z som är lika med a minus b i",
+   "s": 226.07,
+   "e": 232.78
+  },
+  {
+   "t": "där z är lika med a plus b i .",
+   "s": 232.78,
+   "e": 236.29
+  },
+  {
+   "t": "Addition och subtraktion",
+   "s": 236.29,
+   "e": 239.05
+  },
+  {
+   "t": "parentesen a plus b i slut parentes plus minus parentesen c plus d i slut parentes är lika med parentesen a plus minus c slut parentes plus parentesen b plus minus d slut parentes i",
+   "s": 239.05,
+   "e": 253.99
+  },
+  {
+   "t": "Faktorsatsen",
+   "s": 239.05,
+   "e": 253.99
+  },
+  {
+   "t": "p parentesen x slut parentes är lika med parentesen x minus a slut parentes gånger q parentesen x slut parentes",
+   "s": 253.99,
+   "e": 262.85
+  },
+  {
+   "t": "där x är lika med a är ett nollställe till polynomet p parentesen x slut parentes och q parentesen x slut parentes är ett polynom med lägre grad.",
+   "s": 262.85,
+   "e": 272.88
+  },
+  {
+   "t": "Absolutbelopp och argument",
+   "s": 272.88,
+   "e": 275.96
+  },
+  {
+   "t": "| z | är lika med r som är lika med roten ur a i kvadrat plus b i kvadrat tangens v som är lika med b delat med a, v som är lika med arg z",
+   "s": 275.96,
+   "e": 287.06
+  },
+  {
+   "t": "Polär och exponentiell form",
+   "s": 275.96,
+   "e": 287.06
+  },
+  {
+   "t": "z är lika med r parentesen cosinus v plus i sinus v slut parentes som är lika med r e upphöjt till i v",
+   "s": 287.06,
+   "e": 297.29
+  },
+  {
+   "t": "Multiplikation och division i polär form",
+   "s": 297.24,
+   "e": 301.01
+  },
+  {
+   "t": "z gånger w är lika med | z | gånger | w | parentesen cosinus parentesen u plus v slut parentes plus i sinus parentesen u plus v slut parentes slut parentes",
+   "s": 301.01,
+   "e": 313.19
+  },
+  {
+   "t": "z delat med w är lika med | z | delat med | w | parentesen cosinus parentesen u minus v slut parentes plus i sinus parentesen u minus v slut parentes slut parentes",
+   "s": 313.19,
+   "e": 325.94
+  },
+  {
+   "t": "där z är lika med | z | parentesen cosinus u plus i sinus u slut parentes och w är lika med | w | parentesen cosinus v plus i sinus v slut parentes .",
+   "s": 325.94,
+   "e": 337.3
+  },
+  {
+   "t": "Multiplikation och division med talet i",
+   "s": 337.3,
+   "e": 345.32
+  },
+  {
+   "t": "multiplikation med i vilket är ekvivalent med att vridning 90 grader moturs",
+   "s": 337.3,
+   "e": 345.32
+  },
+  {
+   "t": "division med i vilket är ekvivalent med att vridning 90 grader medurs",
+   "s": 345.32,
+   "e": 350.91
+  },
+  {
+   "t": "de Moivres formel",
+   "s": 350.91,
+   "e": 353.47
+  },
+  {
+   "t": "z upphöjt till n är lika med bigl parentesen r parentesen cosinus v plus i sinus v slut parentes bigr slut parentes upphöjt till n som är lika med r upphöjt till n bigl parentesen cosinus n v plus i sinus n v bigr slut parentes",
+   "s": 353.47,
+   "e": 368.62
+  },
+  {
+   "t": "där n är ett positivt heltal.",
+   "s": 368.62,
+   "e": 371.86
+  },
+  {
+   "t": "Ekvationen z upphöjt till n är lika med w",
+   "s": 371.86,
+   "e": 383.91
+  },
+  {
+   "t": "v är lika med arg w plus k gånger 360 grader delat med n, k som är lika med 0, 1, 2,, n minus 1",
+   "s": 371.86,
+   "e": 383.91
+  },
+  {
+   "t": "där ekvationen z upphöjt till n är lika med w har exakt n rötter, jämnt fördelade på en cirkel med radien r är lika med n:e roten ur | w | , som hörnen i en regelbunden n -hörning.",
+   "s": 383.91,
+   "e": 396.0
+  },
+  {
+   "t": "Eulers formel och Eulers identitet",
+   "s": 396.0,
+   "e": 399.47
+  },
+  {
+   "t": "e upphöjt till i v är lika med cosinus v plus i sinus v e upphöjt till i pi som är lika med minus 1",
+   "s": 399.47,
+   "e": 407.06
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 407.06,
+   "e": 409.89
+  },
+  {
+   "t": "Diskriminanten parentesen p delat med 2 slut parentes i kvadrat minus q i pq-formeln avgör om en andragradsekvation har reella eller komplexa rötter — är den negativ blir rötterna alltid varandras konjugat, a plus b i och a minus b i .",
+   "s": 409.89,
+   "e": 424.79
+  },
+  {
+   "t": "Räkna med i som vilket tal som helst genom hela uträkningen och använd i i kvadrat är lika med minus 1 först på slutet för att förenkla svaret.",
+   "s": 424.79,
+   "e": 433.7
+  },
+  {
+   "t": "Vid division av komplexa tal: förläng alltid bråket med nämnarens konjugat.",
+   "s": 433.7,
+   "e": 439.64
+  },
+  {
+   "t": "Produkten parentesen a plus b i slut parentes parentesen a minus b i slut parentes är lika med a i kvadrat plus b i kvadrat är reell, så nämnaren blir ett vanligt tal du kan dela med.",
+   "s": 439.64,
+   "e": 451.67
+  },
+  {
+   "t": "Känner du en rot till en ekvation av högre grad ger faktorsatsen motsvarande faktor parentesen x minus a slut parentes ; polynomdivision tar fram den kvarvarande faktorn av lägre grad, som sedan löses vidare (t.ex. med pq-formeln).",
+   "s": 451.67,
+   "e": 466.8
+  },
+  {
+   "t": "Addition och subtraktion av komplexa tal fungerar geometriskt som vektoraddition — visarna läggs ihop.",
+   "s": 466.8,
+   "e": 474.07
+  },
+  {
+   "t": "Multiplikation och division fungerar annorlunda: som vridning (argumenten adderas/subtraheras) och skalning (beloppen multipliceras/divideras).",
+   "s": 474.07,
+   "e": 485.94
+  },
+  {
+   "t": "Konjugatet bar z motsvarar en spegling av visaren i den reella axeln (Re-axeln) — samma realdel, motsatt imaginärdel.",
+   "s": 485.94,
+   "e": 494.91
+  },
+  {
+   "t": "| z minus w | är avståndet mellan punkterna z och w i det komplexa talplanet — används t.ex. för att tolka en absolutbeloppsekvation som en cirkel.",
+   "s": 494.91,
+   "e": 505.19
+  },
+  {
+   "t": "Vid beräkning av argumentet: ligger talet i första eller fjärde kvadranten ( a är större än 0 ) ger tangens upphöjt till minus 1 vinkeln direkt; ligger det i andra eller tredje kvadranten ( a är mindre än 0 ) måste 180 grader (eller pi ) adderas till räknarens svar.",
+   "s": 505.19,
+   "e": 521.8
+  },
+  {
+   "t": "Polär form gör multiplikation, potenser och rotutdragning betydligt enklare än rektangulär form — beloppen multipliceras/upphöjs och argumenten adderas/multipliceras i stället för en mödosam utveckling av parenteser.",
+   "s": 521.8,
+   "e": 536.14
+  },
+  {
+   "t": "Multiplikation med i vrider visaren 90 grader moturs; division med i vrider den 90 grader medurs.",
+   "s": 536.14,
+   "e": 543.51
+  },
+  {
+   "t": "Ekvationen z upphöjt till n är lika med w har alltid exakt n rötter, som ligger jämnt fördelade på en cirkel med radien n:e roten ur | w | och bildar hörnen i en regelbunden n -hörning kring origo.",
+   "s": 543.51,
+   "e": 556.21
+  },
+  {
+   "t": "Ett komplext tal kan skrivas på tre likvärdiga former — rektangulär ( a plus b i ), polär ( r parentesen cosinus v plus i sinus v slut parentes ) och exponentiell ( r e upphöjt till i v ) — med samma belopp r och argument v i de två sistnämnda.",
+   "s": 556.21,
+   "e": 572.57
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 572.57,
+   "e": 575.62
+  },
+  {
+   "t": "En visare för det komplexa talet z har längden r är lika med | z | och bildar vinkeln v är lika med arg z med den positiva reella axeln — grunden för polär form:",
+   "s": 575.62,
+   "e": 608.59
+  },
+  {
+   "t": "Ekvationen z i kubik är lika med 64 har tre lösningar som ligger jämnt fördelade på en cirkel och bildar hörnen i en liksidig triangel — mönstret som gäller för alla ekvationer på formen z upphöjt till n är lika med w :",
+   "s": 579.34,
+   "e": 608.59
+  },
+  {
+   "t": "Eulers formel kopplar ihop exponentialfunktionen med cosinus och sinus: punkten e upphöjt till i v ligger på enhetscirkeln med realdel cosinus v och imaginärdel sinus v :",
+   "s": 579.34,
+   "e": 612.45
+  },
+  {
+   "t": "Inför provet",
+   "s": 608.59,
+   "e": 612.45
+  },
+  {
+   "t": "Kan du förklara vad den imaginära enheten i är och varför den infördes ( i i kvadrat är lika med minus 1 )?",
+   "s": 612.45,
+   "e": 620.28
+  },
+  {
+   "t": "Kan du skilja på realdel, imaginärdel, komplext tal, imaginärt tal och rent imaginärt tal?",
+   "s": 620.28,
+   "e": 627.51
+  },
+  {
+   "t": "Kan du addera, subtrahera, multiplicera och dividera komplexa tal, och vet du att division kräver förlängning med nämnarens konjugat?",
+   "s": 627.51,
+   "e": 636.73
+  },
+  {
+   "t": "Kan du lösa en andragradsekvation med pq-formeln även när diskriminanten är negativ, och vet du att rötterna då blir varandras konjugat?",
+   "s": 636.73,
+   "e": 645.68
+  },
+  {
+   "t": "Kan du använda faktorsatsen och polynomdivision för att lösa en tredjegradsekvation när du känner en av rötterna?",
+   "s": 645.68,
+   "e": 652.76
+  },
+  {
+   "t": "Kan du rita in ett komplext tal som en punkt eller en visare i det komplexa talplanet, och tolka konjugatet som en spegling i Re-axeln?",
+   "s": 652.76,
+   "e": 661.15
+  },
+  {
+   "t": "Kan du beräkna ett komplext tals absolutbelopp och argument, och avgöra i vilken kvadrant talet ligger?",
+   "s": 661.15,
+   "e": 668.34
+  },
+  {
+   "t": "Kan du växla mellan ett komplext tals rektangulära, polära och exponentiella form?",
+   "s": 668.34,
+   "e": 674.34
+  },
+  {
+   "t": "Vet du hur multiplikation och division fungerar i polär form (belopp multipliceras/divideras, argument adderas/subtraheras), och vad multiplikation med i gör geometriskt?",
+   "s": 674.34,
+   "e": 687.25
+  },
+  {
+   "t": "Kan du använda de Moivres formel för att beräkna en potens av ett komplext tal i polär form?",
+   "s": 687.25,
+   "e": 693.35
+  },
+  {
+   "t": "Kan du lösa ekvationen z upphöjt till n är lika med w och förklara varför den har exakt n rötter, jämnt fördelade på en cirkel?",
+   "s": 693.35,
+   "e": 701.75
+  },
+  {
+   "t": "Kan du Eulers formel och Eulers identitet, och förklara varför den sistnämnda kallas \"världens vackraste ekvation\"?",
+   "s": 701.75,
+   "e": 709.34
+  }
+ ]
+}

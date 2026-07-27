@@ -1,0 +1,363 @@
+{
+ "id": "ma1c-3.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "33e08bb03357dcdb42db822a72f8941b60316ceb",
+ "dur": 525.65,
+ "segments": [
+  {
+   "t": "Sammanfattning — Procentuella förändringar",
+   "s": 0.1,
+   "e": 3.7
+  },
+  {
+   "t": "Det här kapitlet handlade om att räkna med procentuella förändringar: hur andelar anges som procent, promille och ppm, hur en förändringsfaktor gör att ett nytt värde kan räknas ut i ett enda steg, och hur upprepade förändringar (t.ex. flera års ränta) kombineras till en total förändringsfaktor.",
+   "s": 3.65,
+   "e": 21.2
+  },
+  {
+   "t": "Kapitlet visade också hur ett kalkylblad används för att beräkna behållning vid sparande och för att bygga en amorteringsplan vid lån.",
+   "s": 21.2,
+   "e": 29.07
+  },
+  {
+   "t": "Du ska efter kapitlet kunna räkna med andelar, förändringsfaktorer och ränta, samt bygga kalkylbladsformler med relativa och låsta cellreferenser.",
+   "s": 29.07,
+   "e": 38.69
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 38.69,
+   "e": 41.01
+  },
+  {
+   "t": "procent (procent) — hundradel; 1 procent är lika med 1 delat med 100 som är lika med 0,01 .",
+   "s": 41.01,
+   "e": 49.06
+  },
+  {
+   "t": "promille (promille) — tusendel; 1 promille är lika med 1 delat med 1 000 som är lika med 0,001 .",
+   "s": 49.06,
+   "e": 57.65
+  },
+  {
+   "t": "ppm (parts per million) — miljondel; 1 ppm är lika med 1 delat med 1 000 000 som är lika med 0,000 001 .",
+   "s": 57.65,
+   "e": 67.29
+  },
+  {
+   "t": "andel — delen genom det hela, angiven i bråk- eller decimalform.",
+   "s": 67.29,
+   "e": 72.76
+  },
+  {
+   "t": "förändringsfaktor — talet man multiplicerar det gamla värdet med för att direkt få det nya värdet vid en procentuell förändring.",
+   "s": 72.76,
+   "e": 80.61
+  },
+  {
+   "t": "total förändringsfaktor — produkten av flera förändringsfaktorer vid upprepade förändringar.",
+   "s": 80.61,
+   "e": 86.83
+  },
+  {
+   "t": "ränta — ersättning eller kostnad för lånade pengar, oftast angiven i procent (räntesats).",
+   "s": 86.83,
+   "e": 93.89
+  },
+  {
+   "t": "årsränta — den procentsats med vilken ett belopp växer (eller kostar) per år; det som avses om enbart \"ränta\" nämns.",
+   "s": 93.89,
+   "e": 102.1
+  },
+  {
+   "t": "behållning — beloppet som finns på ett sparkonto vid en given tidpunkt.",
+   "s": 102.1,
+   "e": 107.14
+  },
+  {
+   "t": "kalkylblad, cell — verktyg (t.ex. Google Kalkylark, Excel) uppbyggt av celler namngivna med kolumnbokstav + radnummer (t.ex. B3); en formel i en cell inleds alltid med likhetstecknet =.",
+   "s": 107.14,
+   "e": 121.94
+  },
+  {
+   "t": "fyllnadshandtag — verktyget i kalkylbladets nedre högra cellhörn som kopierar en formel neråt i en kolumn.",
+   "s": 121.94,
+   "e": 129.22
+  },
+  {
+   "t": "relativ och låst cellreferens — en relativ referens (B2) ändras när formeln kopieras till en ny rad; en låst referens ($B$12) hålls fast.",
+   "s": 129.22,
+   "e": 140.46
+  },
+  {
+   "t": "lån — pengar som lånas, från t.ex. en bank, och som ska betalas tillbaka.",
+   "s": 140.46,
+   "e": 146.14
+  },
+  {
+   "t": "amortera / amortering — återbetalning av själva lånebeloppet (skulden).",
+   "s": 146.14,
+   "e": 152.34
+  },
+  {
+   "t": "räntesats — räntan uttryckt i procent av skulden.",
+   "s": 152.34,
+   "e": 156.7
+  },
+  {
+   "t": "rak amortering — samma amorteringsbelopp betalas vid varje inbetalning, så räntan (och därmed hela inbetalningen) minskar efter hand som skulden minskar.",
+   "s": 156.7,
+   "e": 166.61
+  },
+  {
+   "t": "Formler",
+   "s": 166.61,
+   "e": 168.44
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 168.44,
+   "e": 170.79
+  },
+  {
+   "t": "Procent, promille och ppm",
+   "s": 170.79,
+   "e": 174.14
+  },
+  {
+   "t": "1 procent är lika med 1 delat med 100 som är lika med 0,01 1 promille som är lika med 1 delat med 1 000 som är lika med 0,001 1 ppm som är lika med 1 delat med 1 000 000 som är lika med 0,000 001",
+   "s": 174.14,
+   "e": 187.95
+  },
+  {
+   "t": "Andel",
+   "s": 187.95,
+   "e": 189.71
+  },
+  {
+   "t": "andel är lika med delen delat med hela",
+   "s": 189.71,
+   "e": 193.29
+  },
+  {
+   "t": "där andelen anges i bråk- eller decimalform (kan räknas om till procent, promille eller ppm).",
+   "s": 193.29,
+   "e": 200.82
+  },
+  {
+   "t": "Förändringsfaktor",
+   "s": 200.82,
+   "e": 203.21
+  },
+  {
+   "t": "förändringsfaktor är lika med nya värdet delat med gamla värdet vilket är ekvivalent med att nya värdet är lika med förändringsfaktor gånger gamla värdet",
+   "s": 203.21,
+   "e": 212.65
+  },
+  {
+   "t": "där det man jämför med motsvarar det gamla värdet.",
+   "s": 212.65,
+   "e": 216.47
+  },
+  {
+   "t": "Total förändringsfaktor vid upprepade förändringar",
+   "s": 216.47,
+   "e": 220.41
+  },
+  {
+   "t": "total förändringsfaktor är lika med förändringsfaktor ett gånger förändringsfaktor två gånger",
+   "s": 220.41,
+   "e": 226.7
+  },
+  {
+   "t": "Är alla förändringsfaktorer lika stora (t.ex. samma ränta varje år) blir den totala förändringsfaktorn en potens:",
+   "s": 226.7,
+   "e": 238.8
+  },
+  {
+   "t": "nytt värde är lika med gammalt värde gånger förändringsfaktor upphöjt till n",
+   "s": 226.7,
+   "e": 238.8
+  },
+  {
+   "t": "där n är lika med antal upprepningar (t.ex. antal år).",
+   "s": 238.8,
+   "e": 244.1
+  },
+  {
+   "t": "Ränta vid lån",
+   "s": 244.1,
+   "e": 246.47
+  },
+  {
+   "t": "årsränta är lika med räntesats gånger skuld",
+   "s": 246.47,
+   "e": 250.35
+  },
+  {
+   "t": "där räntesatsen är angiven i decimalform.",
+   "s": 250.35,
+   "e": 254.31
+  },
+  {
+   "t": "Betalas lånet av månadsvis divideras årsräntan med 12:",
+   "s": 254.31,
+   "e": 262.09
+  },
+  {
+   "t": "ränta per månad är lika med årsränta delat med 12",
+   "s": 254.31,
+   "e": 262.09
+  },
+  {
+   "t": "Inbetalning vid lån",
+   "s": 262.09,
+   "e": 264.6
+  },
+  {
+   "t": "inbetalning är lika med amortering plus ränta",
+   "s": 264.6,
+   "e": 268.51
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 268.51,
+   "e": 271.35
+  },
+  {
+   "t": "Vid en andelsberäkning måste delen och det hela ha samma enhet innan de sätts in i formeln — gör t.ex. om kilogram till gram innan du dividerar.",
+   "s": 271.35,
+   "e": 280.69
+  },
+  {
+   "t": "Procenttriangeln är ett minnesstöd: står storheterna bredvid varandra ska de multipliceras, står de över varandra ska de divideras.",
+   "s": 280.69,
+   "e": 289.14
+  },
+  {
+   "t": "Förändringsfaktorn fås genom att lägga ändringen i procentform till (vid ökning) eller dra ifrån (vid minskning) 100 procent, och sedan skriva om till decimalform: plus 5 procent går mot 1,05 , minus 25 procent går mot 0,75 .",
+   "s": 289.3,
+   "e": 305.25
+  },
+  {
+   "t": "Vid jämförelser (\"hur många procent mer/mindre\") motsvarar det du jämför med alltid det gamla värdet — byter du jämförelseobjekt får du ett annat procenttal (18 kronor mot 22 kronor ger inte samma svar som 22 kronor mot 18 kronor).",
+   "s": 305.2,
+   "e": 320.48
+  },
+  {
+   "t": "En ökning med x procent följd av en minskning med x procent ger inte tillbaka samma värde, eftersom minskningen räknas på ett redan förändrat (större) belopp.",
+   "s": 320.48,
+   "e": 330.62
+  },
+  {
+   "t": "Vid upprepade lika stora förändringar (t.ex. samma ränta år efter år) multipliceras samma förändringsfaktor med sig själv flera gånger, vilket ger en potens: förändringsfaktor upphöjt till antalet perioder.",
+   "s": 330.62,
+   "e": 343.55
+  },
+  {
+   "t": "I ett kalkylblad låses en cellreferens som ska vara oförändrad i alla rader med dollartecken ($B$12), medan en referens som ska ändras per rad (B2) lämnas relativ.",
+   "s": 343.55,
+   "e": 355.55
+  },
+  {
+   "t": "Vid årligt sparande med insättning varje period kombineras tillväxt (multiplikation med förändringsfaktorn) och ny insättning (addition) i samma cellformel, t.ex. =B2*1,028+5000.",
+   "s": 355.55,
+   "e": 371.11
+  },
+  {
+   "t": "Vid ett lån betalar man vid varje inbetalning både amortering (avbetalning av skulden) och ränta (kostnaden för lånet); räntan beräknas på den skuld som återstår och minskar därför efter hand vid rak amortering.",
+   "s": 371.11,
+   "e": 383.89
+  },
+  {
+   "t": "Anges räntan som årsränta men betalningarna sker månadsvis, ska räntesatsen (eller den beräknade årsräntan) delas med 12 innan den används i månadsberäkningen.",
+   "s": 383.89,
+   "e": 394.24
+  },
+  {
+   "t": "En kolumn med alla inbetalningar summeras enkelt i kalkylbladet med SUM-funktionen, t.ex. =SUM(D2:D61), för att få lånets totala kostnad.",
+   "s": 394.24,
+   "e": 406.2
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 406.2,
+   "e": 409.25
+  },
+  {
+   "t": "Procenttriangeln sammanfattar sambandet mellan delen, andelen och det hela — täck över den storhet du söker, så visar triangeln formeln:",
+   "s": 409.25,
+   "e": 426.29
+  },
+  {
+   "t": "Triangeln sammanfattar: delen är lika med andelen gånger hela, andelen är lika med delen/hela och hela är lika med delen/andelen.",
+   "s": 409.25,
+   "e": 426.29
+  },
+  {
+   "t": "Inför provet",
+   "s": 426.29,
+   "e": 428.44
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan procent, promille och ppm, och räkna om mellan bråkform, decimalform och de olika enheterna?",
+   "s": 428.44,
+   "e": 436.91
+  },
+  {
+   "t": "Kan du bestämma andelen, delen eller det hela när två av de tre är kända, t.ex. med hjälp av procenttriangeln?",
+   "s": 436.91,
+   "e": 444.6
+  },
+  {
+   "t": "Kan du bestämma en förändringsfaktor utifrån en procentuell ökning eller minskning, och vet du att en minskning ger en faktor mindre än 1?",
+   "s": 444.6,
+   "e": 453.41
+  },
+  {
+   "t": "Kan du använda förändringsfaktorn för att räkna ut ett nytt värde direkt, utan mellansteg?",
+   "s": 453.41,
+   "e": 459.59
+  },
+  {
+   "t": "Vet du att man vid jämförelser alltid utgår från det man jämför med som \"gamla värdet\", och att svaret beror på vilket håll man jämför?",
+   "s": 459.59,
+   "e": 467.48
+  },
+  {
+   "t": "Kan du förklara varför en ökning med x procent följd av en minskning med samma x procent inte ger tillbaka ursprungsvärdet?",
+   "s": 467.48,
+   "e": 475.35
+  },
+  {
+   "t": "Kan du räkna ut en total förändringsfaktor vid flera upprepade förändringar, t.ex. flera års sparande med samma ränta?",
+   "s": 475.35,
+   "e": 483.12
+  },
+  {
+   "t": "Kan du bygga ett kalkylblad som beräknar behållningen på ett sparkonto år för år, och vet du skillnaden mellan en relativ (B2) och en låst ($B$12) cellreferens?",
+   "s": 483.12,
+   "e": 494.45
+  },
+  {
+   "t": "Kan du bygga ett kalkylblad för ett återkommande sparande där både tillväxt och ny insättning ingår i samma formel?",
+   "s": 494.45,
+   "e": 501.8
+  },
+  {
+   "t": "Vet du skillnaden mellan amortering och ränta vid ett lån, och att räntan beräknas på den skuld som återstår?",
+   "s": 501.8,
+   "e": 508.7
+  },
+  {
+   "t": "Kan du räkna om en årsränta till en månadsränta och sätta upp ett kalkylblad som visar skuld, ränta och inbetalning månad för månad vid rak amortering?",
+   "s": 508.7,
+   "e": 518.19
+  },
+  {
+   "t": "Kan du summera en kolumn i ett kalkylblad, t.ex. med SUM-funktionen, för att få lånets totala kostnad?",
+   "s": 518.19,
+   "e": 525.65
+  }
+ ]
+}

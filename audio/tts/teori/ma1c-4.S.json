@@ -1,0 +1,423 @@
+{
+ "id": "ma1c-4.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "602a1ec2bcf348cf38ee9b55b55b5f01862383d1",
+ "dur": 557.63,
+ "segments": [
+  {
+   "t": "Sammanfattning — Räta linjer och funktioner",
+   "s": 0.1,
+   "e": 3.92
+  },
+  {
+   "t": "Det här kapitlet handlade om koordinatsystemet, linjära modeller och räta linjens ekvation y är lika med k x plus m — hur du går mellan formel, värdetabell och graf, och hur k - och m -värdet läses av eller beräknas.",
+   "s": 3.88,
+   "e": 18.01
+  },
+  {
+   "t": "Du har också mött funktionsbegreppet, definitions- och värdemängd, grafisk lösning av ekvationer och olikheter, samt exponential- och potensfunktioner.",
+   "s": 18.01,
+   "e": 28.23
+  },
+  {
+   "t": "Efter kapitlet ska du kunna bestämma en linjes ekvation på flera sätt, avgöra om ett samband är en funktion, och skilja de olika funktionstyperna åt.",
+   "s": 28.23,
+   "e": 37.64
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 37.64,
+   "e": 39.96
+  },
+  {
+   "t": "koordinatsystem — bildas av en vågrät x-axel och en lodrät y-axel; skärningspunkten kallas origo.",
+   "s": 39.96,
+   "e": 47.16
+  },
+  {
+   "t": "En punkts läge anges med koordinaten parentesen x, y slut parentes .",
+   "s": 47.16,
+   "e": 53.15
+  },
+  {
+   "t": "kvadrant — de fyra områden koordinatsystemet delas in i av axlarna, numrerade moturs med start uppe till höger (första kvadranten har positiva x- och y-värden).",
+   "s": 53.15,
+   "e": 64.01
+  },
+  {
+   "t": "linjär modell — ett samband som ändras i jämn takt med samma mängd; grafen är alltid en rät linje.",
+   "s": 64.01,
+   "e": 70.72
+  },
+  {
+   "t": "proportionalitet (proportionalitetskonstant k ) — specialfall av linjärt samband, y är lika med k x , vars graf alltid är en rät linje genom origo.",
+   "s": 70.72,
+   "e": 81.5
+  },
+  {
+   "t": "räta linjens ekvation (RLE) i k-form — y är lika med k x plus m ; beskriver alla räta linjer utom vertikala.",
+   "s": 81.5,
+   "e": 90.34
+  },
+  {
+   "t": "riktningskoefficient ( k -värde) — linjens lutning; positivt k ger en stigande linje, negativt k en fallande.",
+   "s": 90.34,
+   "e": 99.2
+  },
+  {
+   "t": "Linjer med samma k -värde kallas parallella.",
+   "s": 99.2,
+   "e": 103.14
+  },
+  {
+   "t": "m -värde (y-intercept) — linjens skärning med y-axeln; motsvarar \"startvärdet\" i en linjär modell.",
+   "s": 103.14,
+   "e": 110.49
+  },
+  {
+   "t": "vertikal linje — en lodrät linje; kan inte skrivas i k-form utan beskrivs med x är lika med a .",
+   "s": 110.49,
+   "e": 117.64
+  },
+  {
+   "t": "räta linjens ekvation i allmän form — a x plus b y plus c är lika med 0 ; kan beskriva alla räta linjer, även vertikala.",
+   "s": 117.64,
+   "e": 126.71
+  },
+  {
+   "t": "funktion ( f av x ) — ett samband där varje tillåtet x-värde ger exakt ett y-värde; x kallas den oberoende och y (= f av x ) den beroende variabeln.",
+   "s": 126.71,
+   "e": 138.36
+  },
+  {
+   "t": "En linjär funktion har grafen en rät linje.",
+   "s": 138.36,
+   "e": 142.34
+  },
+  {
+   "t": "definitionsmängd och värdemängd — tillåtna x-värden respektive y-värden för en funktion; ifylld ring/punkt i grafens ändpunkt betyder att värdet ingår ( är mindre än eller lika med , är större än eller lika med ), tom ring att det inte gör det ( är mindre än , är större än ).",
+   "s": 142.34,
+   "e": 158.97
+  },
+  {
+   "t": "grafisk lösning — att lösa en ekvation eller olikhet genom att rita VL och HL som grafer i ett grafritande hjälpmedel och läsa av skärningspunkten.",
+   "s": 158.97,
+   "e": 168.74
+  },
+  {
+   "t": "exponentialfunktion — funktion där den oberoende variabeln står i exponenten, y är lika med C a upphöjt till x .",
+   "s": 168.74,
+   "e": 176.54
+  },
+  {
+   "t": "potensfunktion — funktion där den oberoende variabeln står i basen, f av x är lika med C x upphöjt till a .",
+   "s": 176.54,
+   "e": 184.16
+  },
+  {
+   "t": "Formler",
+   "s": 184.16,
+   "e": 185.99
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 185.99,
+   "e": 188.35
+  },
+  {
+   "t": "Räta linjens ekvation (k-form)",
+   "s": 188.35,
+   "e": 191.8
+  },
+  {
+   "t": "y är lika med k x plus m",
+   "s": 191.8,
+   "e": 195.19
+  },
+  {
+   "t": "där",
+   "s": 195.19,
+   "e": 196.66
+  },
+  {
+   "t": "k är lika med riktningskoefficient (linjens lutning)",
+   "s": 196.66,
+   "e": 201.26
+  },
+  {
+   "t": "m är lika med linjens skärning med y-axeln (y-intercept)",
+   "s": 201.26,
+   "e": 205.91
+  },
+  {
+   "t": "Proportionalitet",
+   "s": 205.91,
+   "e": 208.46
+  },
+  {
+   "t": "y är lika med k x",
+   "s": 208.46,
+   "e": 211.21
+  },
+  {
+   "t": "där k är proportionalitetskonstanten (specialfall av RLE med m är lika med 0 ).",
+   "s": 211.21,
+   "e": 217.97
+  },
+  {
+   "t": "Riktningskoefficient ur två punkter",
+   "s": 217.97,
+   "e": 221.36
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett",
+   "s": 221.36,
+   "e": 227.09
+  },
+  {
+   "t": "där parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes är två punkter på linjen.",
+   "s": 227.09,
+   "e": 235.41
+  },
+  {
+   "t": "Vertikala linjens ekvation",
+   "s": 235.41,
+   "e": 238.39
+  },
+  {
+   "t": "x är lika med a",
+   "s": 238.39,
+   "e": 240.8
+  },
+  {
+   "t": "där a är linjens läge i x-led.",
+   "s": 240.8,
+   "e": 244.3
+  },
+  {
+   "t": "Räta linjens ekvation i allmän form",
+   "s": 244.3,
+   "e": 247.74
+  },
+  {
+   "t": "a x plus b y plus c är lika med 0",
+   "s": 247.74,
+   "e": 251.94
+  },
+  {
+   "t": "där a , b och c är konstanter.",
+   "s": 251.94,
+   "e": 255.47
+  },
+  {
+   "t": "Exponentiell förändring",
+   "s": 255.47,
+   "e": 258.04
+  },
+  {
+   "t": "y är lika med C a upphöjt till x",
+   "s": 258.04,
+   "e": 261.61
+  },
+  {
+   "t": "där",
+   "s": 261.61,
+   "e": 263.07
+  },
+  {
+   "t": "y är lika med värdet efter en viss tid",
+   "s": 263.07,
+   "e": 266.49
+  },
+  {
+   "t": "C är lika med ursprungliga värdet",
+   "s": 266.49,
+   "e": 269.82
+  },
+  {
+   "t": "a är lika med förändringsfaktorn",
+   "s": 269.82,
+   "e": 272.91
+  },
+  {
+   "t": "x är lika med tid",
+   "s": 272.91,
+   "e": 275.38
+  },
+  {
+   "t": "Potensfunktion",
+   "s": 275.38,
+   "e": 277.71
+  },
+  {
+   "t": "f av x är lika med C x upphöjt till a",
+   "s": 277.71,
+   "e": 281.84
+  },
+  {
+   "t": "där C och a är konstanter.",
+   "s": 281.84,
+   "e": 284.91
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 284.91,
+   "e": 287.74
+  },
+  {
+   "t": "En proportionalitet måste uppfylla BÅDA kraven: grafen ska vara en rät linje OCH gå genom origo — annars är det bara en linjär modell, inte en proportionalitet.",
+   "s": 287.74,
+   "e": 297.95
+  },
+  {
+   "t": "m -värdet läses av direkt som linjens skärning med y-axeln (motsvarar \"startvärdet\" i modellen); k -värdet är lutningen och motsvarar förändringstakten per steg i x-led.",
+   "s": 297.95,
+   "e": 310.91
+  },
+  {
+   "t": "Trappstegsmetoden: gå ett steg åt höger längs linjen — trappstegets höjd (med tecken) är då lika med k .",
+   "s": 310.86,
+   "e": 318.11
+  },
+  {
+   "t": "Ur två punkter beräknas k med k är lika med y två minus y ett delat med x två minus x ett — välj punkter som är lätta att läsa av; ordningen på punkterna spelar ingen roll bara täljare och nämnare tas i samma ordning.",
+   "s": 318.11,
+   "e": 331.37
+  },
+  {
+   "t": "För att bestämma en linjes ekvation när du känner k och en punkt: sätt in k i y är lika med k x plus m , sätt sedan in punktens koordinater och lös ut m .",
+   "s": 331.37,
+   "e": 341.98
+  },
+  {
+   "t": "Parallella linjer har samma k -värde men olika m -värde; en vertikal linje har inget k -värde alls och måste skrivas x är lika med a .",
+   "s": 341.98,
+   "e": 350.94
+  },
+  {
+   "t": "Räta linjens ekvation i allmän form ( a x plus b y plus c är lika med 0 ) funkar för ALLA räta linjer, även vertikala — omvänt tar du fram k-formen ur allmän form genom att lösa ut y .",
+   "s": 350.94,
+   "e": 363.44
+  },
+  {
+   "t": "Funktionstestet (\"pennan\"): för att en graf ska vara en funktion får en lodrät linje bara skära grafen högst en gång, för varje x-värde.",
+   "s": 363.44,
+   "e": 372.39
+  },
+  {
+   "t": "f av a läses av som y-koordinaten på grafen vid x är lika med a ; att lösa f av x är lika med 0 innebär att läsa av var grafen skär x-axeln.",
+   "s": 372.39,
+   "e": 382.31
+  },
+  {
+   "t": "Vid grafisk lösning av en ekvation VL är lika med HL: rita y är lika med vänsterledet och y är lika med högerledet , skärningspunktens x-koordinat är lösningen.",
+   "s": 382.31,
+   "e": 392.98
+  },
+  {
+   "t": "Vid en olikhet avgör du i stället vilken linje som ligger över/under den andra.",
+   "s": 392.98,
+   "e": 398.99
+  },
+  {
+   "t": "Definitions- och värdemängd läses av som intervall på x- respektive y-axeln: ifylld ring/punkt betyder att gränsen ingår ( är mindre än eller lika med , är större än eller lika med ), tom ring att den inte gör det ( är mindre än , är större än ).",
+   "s": 398.99,
+   "e": 414.56
+  },
+  {
+   "t": "Skilj exponentialfunktioner ( y är lika med C a upphöjt till x , oberoende variabeln i exponenten) från potensfunktioner ( y är lika med C x upphöjt till a , oberoende variabeln i basen) — i en exponentialfunktion avgör a om värdet ökar ( a är större än 1 ) eller minskar ( 0 är mindre än a är mindre än 1 ), och C är startvärdet.",
+   "s": 414.56,
+   "e": 435.88
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 435.88,
+   "e": 438.91
+  },
+  {
+   "t": "Koordinatsystemets fyra kvadranter numreras moturs med start uppe till höger:",
+   "s": 438.91,
+   "e": 447.53
+  },
+  {
+   "t": "Kvadranterna numreras moturs med start uppe till höger.",
+   "s": 438.91,
+   "e": 447.53
+  },
+  {
+   "t": "En funktion kan liknas vid en maskin som stoppar in ett x-värde och lämnar ut motsvarande y-värde:",
+   "s": 447.53,
+   "e": 462.48
+  },
+  {
+   "t": "Vi stoppar in den oberoende variabeln x är lika med 3 i funktionsmaskinen f av x är lika med x plus 2 och får ut den beroende variabeln y är lika med 5 .",
+   "s": 447.53,
+   "e": 462.48
+  },
+  {
+   "t": "Inför provet",
+   "s": 462.48,
+   "e": 464.66
+  },
+  {
+   "t": "Kan du rita ett koordinatsystem, ange en punkts koordinat och avgöra vilken kvadrant en punkt ligger i?",
+   "s": 464.66,
+   "e": 471.52
+  },
+  {
+   "t": "Kan du ställa upp en linjär modell som formel, värdetabell och graf utifrån en textuppgift?",
+   "s": 471.52,
+   "e": 478.24
+  },
+  {
+   "t": "Vet du vad som krävs för att ett samband ska vara en proportionalitet (rät linje OCH genom origo), och kan du avgöra det ur en graf?",
+   "s": 478.24,
+   "e": 486.61
+  },
+  {
+   "t": "Kan du räta linjens ekvation y är lika med k x plus m utantill och vet du vad k och m betyder?",
+   "s": 486.61,
+   "e": 493.46
+  },
+  {
+   "t": "Kan du bestämma k -värdet både med trappstegsmetoden ur en graf och med formeln k är lika med y två minus y ett delat med x två minus x ett ur två punkter?",
+   "s": 493.46,
+   "e": 503.82
+  },
+  {
+   "t": "Kan du bestämma en linjes ekvation när du känner lutningen och en punkt på linjen?",
+   "s": 503.82,
+   "e": 509.14
+  },
+  {
+   "t": "Vet du skillnaden mellan parallella linjer och en vertikal linje, och hur du skriver ekvationen för en vertikal linje?",
+   "s": 509.14,
+   "e": 516.26
+  },
+  {
+   "t": "Kan du skriva om mellan räta linjens ekvation i k-form och i allmän form ( a x plus b y plus c är lika med 0 )?",
+   "s": 516.26,
+   "e": 524.54
+  },
+  {
+   "t": "Kan du avgöra om ett samband eller en graf är en funktion, och förklara varför med \"penn-testet\"?",
+   "s": 524.54,
+   "e": 530.82
+  },
+  {
+   "t": "Kan du beräkna funktionsvärden som f av 4 eller f av 3 a , och läsa av funktionsvärden ur en graf?",
+   "s": 530.82,
+   "e": 538.01
+  },
+  {
+   "t": "Kan du bestämma definitions- och värdemängd ur en graf, och avgöra om ändpunkterna ska ha är mindre än eller lika med / är större än eller lika med eller är mindre än / är större än ?",
+   "s": 538.01,
+   "e": 549.42
+  },
+  {
+   "t": "Kan du lösa en ekvation eller olikhet grafiskt med grafritande hjälpmedel, och skilja exponential- från potensfunktioner?",
+   "s": 549.42,
+   "e": 557.63
+  }
+ ]
+}

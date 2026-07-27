@@ -1,0 +1,363 @@
+{
+ "id": "ma3c-4.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "16b0e46dd95d838e900ec5e5a1a9034bd2952cd2",
+ "dur": 609.75,
+ "segments": [
+  {
+   "t": "Sammanfattning — Kurvor och extremvärden",
+   "s": 0.1,
+   "e": 3.9
+  },
+  {
+   "t": "Det här kapitlet handlade om hur derivatan avslöjar en funktions utseende: var den växer och avtar, var den har lokala maximi- och minimipunkter, och hur kurvan böjer (konvex eller konkav).",
+   "s": 3.85,
+   "e": 16.34
+  },
+  {
+   "t": "Du har lärt dig att bestämma extrempunkters karaktär både med en teckentabell och med andraderivatan, att hitta en funktions största och minsta värde i ett slutet intervall, att skissa en kurva utifrån dess extrempunkter, samt att lösa extremvärdesproblem både algebraiskt och grafiskt med digitalt hjälpmedel.",
+   "s": 16.34,
+   "e": 33.69
+  },
+  {
+   "t": "Du ska efter kapitlet kunna läsa av och räkna fram en kurvas form och extrempunkter, och använda detta för att lösa tillämpade optimeringsproblem.",
+   "s": 33.69,
+   "e": 42.79
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 42.79,
+   "e": 45.11
+  },
+  {
+   "t": "växande funktion — funktion vars graf har positiv lutning i ett intervall; f prim parentesen x slut parentes är större än 0 .",
+   "s": 45.11,
+   "e": 53.88
+  },
+  {
+   "t": "avtagande funktion — funktion vars graf har negativ lutning i ett intervall; f prim parentesen x slut parentes är mindre än 0 .",
+   "s": 53.88,
+   "e": 62.81
+  },
+  {
+   "t": "strängt växande / strängt avtagande — en funktion som är växande (avtagande) i HELA ett intervall, utan avbrott.",
+   "s": 62.81,
+   "e": 71.59
+  },
+  {
+   "t": "lokal extrempunkt — gemensamt namn för lokal maximipunkt (en \"topp\", där kurvan växlar från växande till avtagande) och lokal minimipunkt (en \"dal\", där kurvan växlar från avtagande till växande).",
+   "s": 71.59,
+   "e": 84.61
+  },
+  {
+   "t": "Funktionsvärdet i punkten kallas lokalt extremvärde.",
+   "s": 84.61,
+   "e": 89.04
+  },
+  {
+   "t": "terrasspunkt — en punkt där tangenten är vågrät ( f prim parentesen a slut parentes är lika med 0 ) men kurvan fortsätter i samma riktning som innan, utan att vända.",
+   "s": 89.04,
+   "e": 99.71
+  },
+  {
+   "t": "teckentabell — tabell som visar tecknet på f prim parentesen x slut parentes (eller f bis parentesen x slut parentes ) i intervallen mellan nollställena; används för att bestämma extrempunkters karaktär eller kurvans form.",
+   "s": 99.71,
+   "e": 113.59
+  },
+  {
+   "t": "andraderivata ( f bis parentesen x slut parentes ) — derivatan av derivatan, utläses \" f bis av x \"; beskriver hur lutningen f prim parentesen x slut parentes ändras.",
+   "s": 113.59,
+   "e": 126.42
+  },
+  {
+   "t": "konvex kurva — kurva som \"böjer av uppåt\" (en \"glad\" kurva); f bis parentesen x slut parentes är större än 0 .",
+   "s": 126.42,
+   "e": 134.64
+  },
+  {
+   "t": "konkav kurva — kurva som \"böjer av nedåt\" (en \"sur\" kurva); f bis parentesen x slut parentes är mindre än 0 .",
+   "s": 134.64,
+   "e": 142.91
+  },
+  {
+   "t": "inflexionspunkt — punkten där kurvan växlar mellan konvex och konkav; f bis parentesen x slut parentes är lika med 0 .",
+   "s": 142.91,
+   "e": 151.46
+  },
+  {
+   "t": "andraderivatametoden — metod att bestämma en extrempunkts karaktär med hjälp av tecknet på f bis parentesen a slut parentes , som alternativ till en teckentabell.",
+   "s": 151.46,
+   "e": 161.71
+  },
+  {
+   "t": "extremvärdesproblem (optimeringsproblem) — problem som handlar om att bestämma ett störst eller minst möjligt värde, t.ex. maximal area eller minimal kostnad.",
+   "s": 161.71,
+   "e": 172.2
+  },
+  {
+   "t": "kurvkonstruktion — att skissa en funktions graf utifrån dess ändpunkter, extrempunkter och inflexionspunkter, utan att räkna ut fler punkter än nödvändigt.",
+   "s": 172.2,
+   "e": 182.21
+  },
+  {
+   "t": "Formler",
+   "s": 182.21,
+   "e": 184.04
+  },
+  {
+   "t": "Kapitlets formler och regler",
+   "s": 184.04,
+   "e": 186.89
+  },
+  {
+   "t": "Växande och avtagande funktion",
+   "s": 186.89,
+   "e": 190.21
+  },
+  {
+   "t": "f prim parentesen x slut parentes är större än 0 vilket ger att f av x är växande",
+   "s": 190.21,
+   "e": 196.76
+  },
+  {
+   "t": "f prim parentesen x slut parentes är mindre än 0 vilket ger att f av x är avtagande",
+   "s": 196.76,
+   "e": 203.43
+  },
+  {
+   "t": "Lokal extrempunkt",
+   "s": 203.43,
+   "e": 206.14
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med 0",
+   "s": 206.14,
+   "e": 210.71
+  },
+  {
+   "t": "Punkten där x är lika med a är då en lokal maximipunkt, en lokal minimipunkt eller en terrasspunkt — vilket avgörs med en teckentabell eller med andraderivatan.",
+   "s": 210.71,
+   "e": 220.74
+  },
+  {
+   "t": "Andraderivatan och kurvans form",
+   "s": 220.74,
+   "e": 223.94
+  },
+  {
+   "t": "f bis parentesen a slut parentes är större än 0 vilket ger att kurvan är konvex vid x är lika med a",
+   "s": 223.94,
+   "e": 242.2
+  },
+  {
+   "t": "f bis parentesen a slut parentes är mindre än 0 vilket ger att kurvan är konkav vid x är lika med a",
+   "s": 223.94,
+   "e": 242.2
+  },
+  {
+   "t": "f bis parentesen a slut parentes är lika med 0 vilket ger att x är lika med a är en inflexionspunkt",
+   "s": 223.94,
+   "e": 242.2
+  },
+  {
+   "t": "Andraderivatametoden — extrempunktens karaktär",
+   "s": 242.2,
+   "e": 246.39
+  },
+  {
+   "t": "Om f prim parentesen a slut parentes är lika med 0 gäller",
+   "s": 246.39,
+   "e": 251.36
+  },
+  {
+   "t": "f bis parentesen a slut parentes är större än 0 vilket ger att lokal minimipunkt",
+   "s": 251.36,
+   "e": 257.65
+  },
+  {
+   "t": "f bis parentesen a slut parentes är mindre än 0 vilket ger att lokal maximipunkt",
+   "s": 257.65,
+   "e": 264.04
+  },
+  {
+   "t": "f bis parentesen a slut parentes är lika med 0 vilket ger att terrasspunkt eller extrempunkt (teckentabell krävs)",
+   "s": 264.04,
+   "e": 272.56
+  },
+  {
+   "t": "där",
+   "s": 272.56,
+   "e": 274.06
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med förstaderivatan (kurvans lutning)",
+   "s": 274.06,
+   "e": 282.54
+  },
+  {
+   "t": "f bis parentesen x slut parentes är lika med andraderivatan (hur lutningen ändras)",
+   "s": 282.49,
+   "e": 289.57
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 289.57,
+   "e": 292.44
+  },
+  {
+   "t": "Metoden \"derivera går mot sätt f prim parentesen x slut parentes är lika med 0 går mot lös\" ger extrempunkternas x -koordinater; sätt sedan in dessa i den URSPRUNGLIGA funktionen f av x — inte i derivatan — för att få y -koordinaterna.",
+   "s": 292.44,
+   "e": 307.59
+  },
+  {
+   "t": "Karaktären hos en extrempunkt kan bestämmas på två sätt: med en teckentabell (tecknet på f prim parentesen x slut parentes strax till vänster/höger om punkten) eller snabbare med andraderivatametoden.",
+   "s": 307.59,
+   "e": 321.03
+  },
+  {
+   "t": "Är f bis parentesen a slut parentes är lika med 0 räcker inte andraderivatametoden — då krävs en teckentabell ändå.",
+   "s": 321.03,
+   "e": 329.16
+  },
+  {
+   "t": "För en andragradsfunktion kan karaktären avgöras direkt utan derivering, utifrån tecknet framför x i kvadrat -termen: en positiv koefficient ger en \"glad\" kurva (minimipunkt), en negativ ger en \"sur\" kurva (maximipunkt).",
+   "s": 329.16,
+   "e": 343.94
+  },
+  {
+   "t": "Störst/minst värde i ett slutet intervall a är mindre än eller lika med x är mindre än eller lika med b : jämför funktionsvärdet i ALLA extrempunkter inom intervallet med värdena i de två ändpunkterna — det störst/minst av dessa är svaret, aldrig något annat ställe.",
+   "s": 343.94,
+   "e": 360.18
+  },
+  {
+   "t": "Kurvkonstruktion: rita en jämn kurva genom ändpunkter, extrempunkter och inflexionspunkter.",
+   "s": 360.18,
+   "e": 366.89
+  },
+  {
+   "t": "Kurvans stigning eller sjunkning mellan punkterna ges av tecknet på f prim parentesen x slut parentes i teckentabellen.",
+   "s": 366.89,
+   "e": 374.76
+  },
+  {
+   "t": "En inflexionspunkt ligger alltid mitt emellan två närliggande extrempunkter till samma funktion (symmetri) — ett genvägsknep när extrempunkternas x -koordinater redan är kända.",
+   "s": 374.76,
+   "e": 386.12
+  },
+  {
+   "t": "Andraderivatan f bis parentesen x slut parentes kan tolkas som derivatan av f prim parentesen x slut parentes : en inflexionspunkt hos f av x svarar mot en extrempunkt hos f prim parentesen x slut parentes .",
+   "s": 386.12,
+   "e": 401.02
+  },
+  {
+   "t": "Extremvärdesproblem löses i samma steg som när man vanligtvis tar fram extrempunkter, med ett tillägg: ett bivillkor används för att skriva om den storhet som ska optimeras i EN enda variabel innan derivering, och svaret tolkas till sist i problemets sammanhang (med rätt enhet).",
+   "s": 401.02,
+   "e": 417.44
+  },
+  {
+   "t": "Kontrollera alltid att svaret i ett extremvärdesproblem ligger inom en rimlig definitionsmängd, t.ex. att en radie eller höjd inte blir negativ.",
+   "s": 417.44,
+   "e": 426.67
+  },
+  {
+   "t": "Extremvärdesproblem kan även lösas grafiskt med digitalt hjälpmedel, t.ex. Geogebra: rita upp funktionen och använd verktyget Extrempunkt i stället för att derivera för hand. x -koordinaten ger den sökta variabeln och y -koordinaten det optimerade värdet — men bara som ett avrundat värde, inte ett exakt uttryck.",
+   "s": 426.67,
+   "e": 447.18
+  },
+  {
+   "t": "Skilj en lokal extrempunkt (kurvan vänder) från en terrasspunkt (kurvan planar ut men fortsätter i samma riktning) — båda har f prim parentesen a slut parentes är lika med 0 , men bara i en extrempunkt byter f prim parentesen x slut parentes tecken.",
+   "s": 447.18,
+   "e": 463.51
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 463.51,
+   "e": 466.56
+  },
+  {
+   "t": "En kurva som stiger till en topp, sjunker till en dal och stiger igen — grunddefinitionen av lokal maximipunkt och lokal minimipunkt:",
+   "s": 466.56,
+   "e": 491.06
+  },
+  {
+   "t": "Övergången mellan en konkav (blå) och en konvex (röd) del av en kurva, med inflexionspunkten mitt emellan:",
+   "s": 466.56,
+   "e": 491.06
+  },
+  {
+   "t": "Andraderivatan är negativ för hela den blå delen av kurvan (\"ledsen\" kurva, konkav) och positiv för hela den röda delen (\"glad\" kurva, konvex).",
+   "s": 466.56,
+   "e": 491.06
+  },
+  {
+   "t": "I inflexionspunkten, där kurvan varken är konkav eller konvex, är andraderivatan lika med noll.",
+   "s": 491.06,
+   "e": 498.17
+  },
+  {
+   "t": "Inför provet",
+   "s": 498.17,
+   "e": 500.33
+  },
+  {
+   "t": "Kan du avgöra om en funktion är växande eller avtagande utifrån tecknet på f prim parentesen x slut parentes , både från en graf och från ett funktionsuttryck?",
+   "s": 500.33,
+   "e": 510.88
+  },
+  {
+   "t": "Vet du skillnaden mellan en lokal maximipunkt, en lokal minimipunkt och en terrasspunkt?",
+   "s": 510.88,
+   "e": 517.37
+  },
+  {
+   "t": "Kan du bestämma lokala extrempunkter genom att derivera, sätta f prim parentesen x slut parentes är lika med 0 och lösa ekvationen — och sedan sätta in x -värdena i den URSPRUNGLIGA funktionen för att få y -koordinaterna?",
+   "s": 517.37,
+   "e": 530.49
+  },
+  {
+   "t": "Kan du bestämma en extrempunkts karaktär med en teckentabell?",
+   "s": 530.49,
+   "e": 535.11
+  },
+  {
+   "t": "Vet du hur du snabbt avgör karaktären hos en andragradsfunktions extrempunkt utifrån tecknet på x i kvadrat -termen?",
+   "s": 535.11,
+   "e": 543.03
+  },
+  {
+   "t": "Kan du bestämma en funktions största och minsta värde i ett slutet intervall genom att jämföra extrempunkter med intervallets ändpunkter?",
+   "s": 543.03,
+   "e": 552.92
+  },
+  {
+   "t": "Kan du skissa en funktions graf (kurvkonstruktion) utifrån dess ändpunkter, extrempunkter och deras karaktär?",
+   "s": 552.87,
+   "e": 560.8
+  },
+  {
+   "t": "Vet du vad andraderivatan f bis parentesen x slut parentes beskriver, och kan du avgöra om en kurva är konvex eller konkav utifrån dess tecken?",
+   "s": 560.8,
+   "e": 570.89
+  },
+  {
+   "t": "Kan du bestämma en inflexionspunkts koordinater, och vet du att den ligger mitt emellan två närliggande extrempunkter?",
+   "s": 570.89,
+   "e": 578.41
+  },
+  {
+   "t": "Kan du använda andraderivatametoden för att avgöra en extrempunkts karaktär utan teckentabell, och vet du när metoden inte räcker till ( f bis parentesen a slut parentes är lika med 0 )?",
+   "s": 578.41,
+   "e": 590.51
+  },
+  {
+   "t": "Kan du lösa ett extremvärdesproblem: ställa upp en formel, använda ett bivillkor för att få en enda variabel, derivera, bestämma karaktären och tolka svaret i sammanhanget?",
+   "s": 590.51,
+   "e": 601.44
+  },
+  {
+   "t": "Kan du lösa ett extremvärdesproblem grafiskt med digitalt hjälpmedel, t.ex. med Geogebras verktyg Extrempunkt?",
+   "s": 601.44,
+   "e": 609.75
+  }
+ ]
+}

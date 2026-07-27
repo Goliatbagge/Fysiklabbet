@@ -1,0 +1,358 @@
+{
+ "id": "ma3c-5.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "539cb00d7cfff3638208bffde9e40a2c473ccfc8",
+ "dur": 548.3,
+ "segments": [
+  {
+   "t": "Sammanfattning — Integraler",
+   "s": 0.1,
+   "e": 3.19
+  },
+  {
+   "t": "Det här kapitlet handlade om integraler: hur man tar fram primitiva funktioner till potens-, konstant- och exponentialfunktioner, och hur en sådan primitiv funktion kan bestämmas exakt med hjälp av ett villkor.",
+   "s": 3.14,
+   "e": 15.54
+  },
+  {
+   "t": "Du har lärt dig att en bestämd integral grafiskt motsvarar arean mellan en graf och x-axeln, hur integralkalkylens fundamentalsats används för att beräkna integraler exakt, hur digitala hjälpmedel som Geogebra hanterar primitiva funktioner och integraler, samt hur arean mellan två kurvor och andra tillämpningar av integraler beräknas och tolkas.",
+   "s": 15.54,
+   "e": 36.17
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 36.17,
+   "e": 38.5
+  },
+  {
+   "t": "primitiv funktion ( F parentesen x slut parentes ) — en funktion vars derivata är den ursprungliga funktionen, dvs. F prim parentesen x slut parentes är lika med f av x ; kallas även baklängesderivata eller antiderivata.",
+   "s": 38.5,
+   "e": 53.56
+  },
+  {
+   "t": "integrera — att ta fram en primitiv funktion till en given funktion; motsatsen till att derivera.",
+   "s": 53.56,
+   "e": 60.14
+  },
+  {
+   "t": "integrationskonstant ( C ) — konstanten som läggs till när samtliga primitiva funktioner till en funktion anges, eftersom en konstant term försvinner vid derivering.",
+   "s": 60.14,
+   "e": 70.6
+  },
+  {
+   "t": "villkor — en given uppgift om en primitiv funktion, t.ex. F, ekvation 1 är lika med 7 , som används för att bestämma integrationskonstanten C .",
+   "s": 70.6,
+   "e": 80.71
+  },
+  {
+   "t": "integraltecken ( integralen av ) — summatecknet för oändligt många oändligt smala termer; ett utdraget \"s\".",
+   "s": 80.71,
+   "e": 88.99
+  },
+  {
+   "t": "bestämd integral — en integral med en undre gräns a och en övre gräns b, integralen av a upphöjt till b f av x d x , som ger ett bestämt tal.",
+   "s": 88.99,
+   "e": 99.58
+  },
+  {
+   "t": "integrand — funktionen f av x som integreras, dvs. den funktion arean beräknas under.",
+   "s": 99.58,
+   "e": 106.74
+  },
+  {
+   "t": "integrationsgränser — x-värdena a (undre gräns) och b (övre gräns) som avgränsar det område en bestämd integral beräknar.",
+   "s": 106.74,
+   "e": 115.67
+  },
+  {
+   "t": "areaenhet (areaenheter) — enheten en beräknad area anges i; en integrals värde saknar däremot enhet så länge det inte tolkas som en area.",
+   "s": 115.67,
+   "e": 126.06
+  },
+  {
+   "t": "integralkalkylens fundamentalsats — sambandet integralen av a upphöjt till b f av x d x är lika med F parentesen b slut parentes minus F parentesen a slut parentes som gör det möjligt att beräkna integraler exakt med hjälp av primitiva funktioner.",
+   "s": 126.06,
+   "e": 142.72
+  },
+  {
+   "t": "CAS-läge och standardläge (Geogebra) — CAS-läget ger exakta svar (bråk, rotuttryck), standardläget ger numeriska närmevärden.",
+   "s": 142.72,
+   "e": 152.81
+  },
+  {
+   "t": "area mellan kurvor — arean av området mellan två grafer, beräknad genom att integrera den övre funktionen minus den undre funktionen.",
+   "s": 152.81,
+   "e": 161.61
+  },
+  {
+   "t": "Formler",
+   "s": 161.61,
+   "e": 163.44
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 163.44,
+   "e": 165.8
+  },
+  {
+   "t": "Primitiv funktion till en potensfunktion",
+   "s": 165.8,
+   "e": 169.43
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att F parentesen x slut parentes är lika med x upphöjt till n plus 1 delat med n plus 1",
+   "s": 169.43,
+   "e": 179.01
+  },
+  {
+   "t": "Primitiv funktion till en konstant funktion",
+   "s": 179.01,
+   "e": 182.74
+  },
+  {
+   "t": "f av x är lika med k vilket ger att F parentesen x slut parentes är lika med k x",
+   "s": 182.74,
+   "e": 192.75
+  },
+  {
+   "t": "Primitiv funktion till en exponentialfunktion (basen e )",
+   "s": 182.74,
+   "e": 192.75
+  },
+  {
+   "t": "f av x är lika med e upphöjt till k x vilket ger att F parentesen x slut parentes är lika med e upphöjt till k x delat med k",
+   "s": 192.75,
+   "e": 204.46
+  },
+  {
+   "t": "Samband mellan sträcka, hastighet och acceleration",
+   "s": 192.75,
+   "e": 204.46
+  },
+  {
+   "t": "s parentesen t slut parentes xrightarrow derivera v parentesen t slut parentes xrightarrow derivera a parentesen t slut parentes",
+   "s": 204.46,
+   "e": 214.28
+  },
+  {
+   "t": "a parentesen t slut parentes xrightarrow integrera v parentesen t slut parentes xrightarrow integrera s parentesen t slut parentes",
+   "s": 214.28,
+   "e": 224.24
+  },
+  {
+   "t": "Bestämd integral",
+   "s": 224.24,
+   "e": 226.55
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x",
+   "s": 226.55,
+   "e": 231.82
+  },
+  {
+   "t": "där",
+   "s": 231.82,
+   "e": 233.32
+  },
+  {
+   "t": "integralen av är lika med integraltecken (summatecken för oändligt många termer)",
+   "s": 233.32,
+   "e": 239.55
+  },
+  {
+   "t": "a är lika med undre integrationsgräns",
+   "s": 239.55,
+   "e": 243.16
+  },
+  {
+   "t": "b är lika med övre integrationsgräns",
+   "s": 243.16,
+   "e": 246.82
+  },
+  {
+   "t": "f av x är lika med integrand (funktionen arean beräknas under)",
+   "s": 246.82,
+   "e": 252.49
+  },
+  {
+   "t": "d x är lika med integrationsvariabel (den oändligt smala bredden hos en rektangel)",
+   "s": 252.49,
+   "e": 259.57
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 259.57,
+   "e": 263.12
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med F parentesen x slut parentes a upphöjt till b som är lika med F parentesen b slut parentes minus F parentesen a slut parentes",
+   "s": 263.12,
+   "e": 276.41
+  },
+  {
+   "t": "Area mellan två kurvor",
+   "s": 276.41,
+   "e": 279.36
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b parentesen f av x minus g av x slut parentes d x",
+   "s": 279.36,
+   "e": 287.98
+  },
+  {
+   "t": "där f av x är den övre funktionen och g av x är den undre funktionen i intervallet a, b .",
+   "s": 287.98,
+   "e": 296.22
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 296.17,
+   "e": 299.01
+  },
+  {
+   "t": "Ska du ange en primitiv funktion räcker ett enda uttryck.",
+   "s": 299.01,
+   "e": 303.67
+  },
+  {
+   "t": "Ska du ange samtliga primitiva funktioner måste den generella konstanten C läggas till på slutet.",
+   "s": 303.67,
+   "e": 310.3
+  },
+  {
+   "t": "Har funktionen flera termer: ta fram en primitiv funktion till varje term för sig och lägg ihop dem.",
+   "s": 310.3,
+   "e": 316.88
+  },
+  {
+   "t": "Ett villkor (t.ex. F, ekvation 1 är lika med 7 ) används genom att sätta in villkorets x-värde i den primitiva funktionen (med C kvar), sätta uttrycket lika med det angivna funktionsvärdet och lösa ut C .",
+   "s": 316.88,
+   "e": 330.83
+  },
+  {
+   "t": "En bestämd integral kan bli negativ om området ligger under x-axeln — en area kan aldrig vara negativ, men integralens värde är då lika med arean fast med motsatt tecken.",
+   "s": 330.83,
+   "e": 341.5
+  },
+  {
+   "t": "Ligger ett område delvis över och delvis under x-axeln bidrar den övre delen positivt och den undre delen negativt till integralens sammanlagda värde.",
+   "s": 341.5,
+   "e": 351.17
+  },
+  {
+   "t": "Beräkna en bestämd integral med primitiva funktioner: sätt den primitiva funktionen inom klammer med gränserna, sätt in den övre gränsen och subtrahera med värdet vid den undre gränsen.",
+   "s": 351.17,
+   "e": 362.2
+  },
+  {
+   "t": "Har den primitiva funktionen flera termer måste du sätta parentes runt hela uttrycket innan den undre gränsen sätts in — annars påverkar minustecknet bara den första termen och svaret blir fel.",
+   "s": 362.2,
+   "e": 373.57
+  },
+  {
+   "t": "I Geogebra ger CAS-läget exakta svar medan standardläget ger numeriska närmevärden — välj läge efter vad uppgiften efterfrågar.",
+   "s": 373.57,
+   "e": 382.07
+  },
+  {
+   "t": "Arean mellan två kurvor fås genom att integrera övre funktionen minus undre funktionen över intervallet.",
+   "s": 382.07,
+   "e": 389.47
+  },
+  {
+   "t": "Skär kurvorna varandra inom området kan det behöva delas upp i flera delintervall, där vilken funktion som är övre respektive undre kan skifta.",
+   "s": 389.47,
+   "e": 398.25
+  },
+  {
+   "t": "Skärningspunkter mellan kurvor (integrationsgränser vid area mellan kurvor) bestäms genom att sätta funktionsuttrycken lika med varandra och lösa den ekvation som uppstår.",
+   "s": 398.25,
+   "e": 409.11
+  },
+  {
+   "t": "En integral kan tolkas som produkten av den beroende variabeln (t.ex. y eller f av x ) och den oberoende variabeln (t.ex. x ); enheten fås genom att ta enheten för y gånger enheten för x .",
+   "s": 409.11,
+   "e": 422.01
+  },
+  {
+   "t": "Vid tillämpningar: integrerar man en acceleration a parentesen t slut parentes får man en hastighet v parentesen t slut parentes , och integrerar man en hastighet v parentesen t slut parentes får man en sträcka s parentesen t slut parentes — omvänt mot vad derivering ger.",
+   "s": 422.01,
+   "e": 438.72
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 438.72,
+   "e": 441.77
+  },
+  {
+   "t": "Grunden för hela kapitlet: den bestämda integralen definieras som gränsvärdet av en summa av allt smalare rektangelareor under en kurva:",
+   "s": 441.77,
+   "e": 459.6
+  },
+  {
+   "t": "Arean mellan två kurvor f av x och g av x — den skuggade arean A fås genom att integrera den övre funktionen minus den undre funktionen:",
+   "s": 441.77,
+   "e": 459.6
+  },
+  {
+   "t": "Inför provet",
+   "s": 441.77,
+   "e": 459.6
+  },
+  {
+   "t": "Kan du förklara vad en primitiv funktion är, och skillnaden mellan att ange en primitiv funktion och samtliga primitiva funktioner?",
+   "s": 459.6,
+   "e": 467.41
+  },
+  {
+   "t": "Kan du ta fram primitiva funktioner till potensfunktioner, konstanta funktioner och exponentialfunktioner med basen e ?",
+   "s": 467.41,
+   "e": 475.32
+  },
+  {
+   "t": "Kan du bestämma integrationskonstanten C utifrån ett givet villkor, t.ex. F, ekvation 1 är lika med 7 ?",
+   "s": 475.32,
+   "e": 483.71
+  },
+  {
+   "t": "Kan du förklara sambandet mellan sträcka, hastighet och acceleration vid derivering respektive integrering?",
+   "s": 483.71,
+   "e": 491.12
+  },
+  {
+   "t": "Vet du att en bestämd integral grafiskt motsvarar arean mellan en funktions graf och x-axeln, och hur den kan härledas ur en summa av rektangelareor?",
+   "s": 491.12,
+   "e": 500.97
+  },
+  {
+   "t": "Kan du avgöra om en integral blir positiv eller negativ utifrån om området ligger över eller under x-axeln?",
+   "s": 500.97,
+   "e": 508.56
+  },
+  {
+   "t": "Kan du integralkalkylens fundamentalsats och beräkna en bestämd integral med hjälp av en primitiv funktion?",
+   "s": 508.56,
+   "e": 515.67
+  },
+  {
+   "t": "Kommer du ihåg att sätta parentes runt en primitiv funktion med flera termer innan den undre gränsen sätts in?",
+   "s": 515.67,
+   "e": 522.8
+  },
+  {
+   "t": "Kan du använda Geogebra, i både standardläge och CAS-läge, för att beräkna primitiva funktioner och integraler som närmevärde respektive exakt?",
+   "s": 522.8,
+   "e": 532.06
+  },
+  {
+   "t": "Kan du beräkna arean mellan två kurvor, och vet du hur du bestämmer skärningspunkter när området behöver delas upp i flera delar?",
+   "s": 532.06,
+   "e": 540.3
+  },
+  {
+   "t": "Kan du tolka vad en integral betyder i ett tillämpat sammanhang, t.ex. utifrån enheterna på y-axeln och x-axeln?",
+   "s": 540.3,
+   "e": 548.3
+  }
+ ]
+}

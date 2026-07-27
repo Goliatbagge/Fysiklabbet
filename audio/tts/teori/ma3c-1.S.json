@@ -1,0 +1,378 @@
+{
+ "id": "ma3c-1.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9461f57fa2fb06bc896d19c17e5d9d3700ce0ae2",
+ "dur": 563.37,
+ "segments": [
+  {
+   "t": "Sammanfattning — Rationella uttryck och gränsvärden",
+   "s": 0.1,
+   "e": 4.24
+  },
+  {
+   "t": "Det här kapitlet handlade om rationella uttryck — bråk där täljare och nämnare är polynom — och om gränsvärden.",
+   "s": 4.19,
+   "e": 11.21
+  },
+  {
+   "t": "Du har övat på att förkorta, förlänga, addera, subtrahera, multiplicera och dividera rationella uttryck genom att faktorisera, bland annat med en ny metod: faktorisering med hjälp av polynomets nollställen.",
+   "s": 11.21,
+   "e": 24.8
+  },
+  {
+   "t": "Du har också löst ekvationer som innehåller rationella uttryck, och lärt dig bestämma gränsvärden både då en variabel går mot ett tal och då den går mot en oändlighet.",
+   "s": 24.8,
+   "e": 34.73
+  },
+  {
+   "t": "Sist i kapitlet användes ett symbolhanterande hjälpmedel (Geogebra) för att lösa samma typer av problem.",
+   "s": 34.73,
+   "e": 42.15
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 42.15,
+   "e": 44.48
+  },
+  {
+   "t": "polynom — ett uttryck där alla variabeltermer har positiva heltalsexponenter.",
+   "s": 44.48,
+   "e": 50.33
+  },
+  {
+   "t": "rationellt uttryck — ett uttryck med ett polynom i täljaren och ett polynom i nämnaren, t.ex. 5 x i kvadrat minus 5 x delat med 3 x minus 3 .",
+   "s": 50.33,
+   "e": 61.19
+  },
+  {
+   "t": "förlänga — multiplicera både täljare och nämnare med samma tal eller uttryck; ändrar inte uttryckets värde.",
+   "s": 61.19,
+   "e": 68.36
+  },
+  {
+   "t": "förkorta — dividera både täljare och nämnare med en gemensam faktor; ändrar inte uttryckets värde.",
+   "s": 68.36,
+   "e": 75.05
+  },
+  {
+   "t": "nollställe — det x -värde som gör att ett uttryck blir lika med noll; används för att faktorisera polynom som inte går att faktorisera med utbrytning eller kvadrerings-/konjugatregeln.",
+   "s": 75.05,
+   "e": 86.38
+  },
+  {
+   "t": "minsta gemensamma nämnaren (MGN) — den minsta gemensamma nämnare som alla termer i ett uttryck eller en ekvation kan göras liknämniga med.",
+   "s": 86.38,
+   "e": 95.26
+  },
+  {
+   "t": "liknämnigt — när flera rationella uttryck har förlängts till samma nämnare, så att täljarna kan adderas eller subtraheras på ett gemensamt divisionsstreck.",
+   "s": 95.26,
+   "e": 104.61
+  },
+  {
+   "t": "korsvis multiplikation — genväg för att lösa en ekvation på formen a delat med b är lika med c delat med d : ger direkt a gånger d är lika med c gånger b .",
+   "s": 104.61,
+   "e": 115.46
+  },
+  {
+   "t": "definitionsmängd — de x -värden en ekvation eller ett uttryck är definierat för; värden som gör en nämnare lika med noll måste alltid uteslutas.",
+   "s": 115.46,
+   "e": 124.84
+  },
+  {
+   "t": "gränsvärde ( gränsvärdet då ) — det värde ett uttryck närmar sig, utan att nödvändigtvis nå fram till det, när variabeln närmar sig ett tal eller en oändlighet.",
+   "s": 124.84,
+   "e": 135.31
+  },
+  {
+   "t": "oändligheten ( oändligheten ) — beteckning för att en variabel växer utan gräns ( x går mot oändligheten ) eller avtar utan gräns ( x går mot minus oändligheten ).",
+   "s": 135.31,
+   "e": 146.96
+  },
+  {
+   "t": "gränsvärde saknas — när uttrycket går mot olika värden underifrån och ovanifrån finns inget gemensamt gränsvärde.",
+   "s": 146.96,
+   "e": 154.74
+  },
+  {
+   "t": "symbolhanterande hjälpmedel — en räknare eller programvara (t.ex. Geogebra) som förutom siffror även kan hantera algebraiska bokstavsuttryck.",
+   "s": 154.74,
+   "e": 164.81
+  },
+  {
+   "t": "Formler",
+   "s": 164.81,
+   "e": 166.64
+  },
+  {
+   "t": "Kapitlets formler och regler",
+   "s": 166.64,
+   "e": 169.5
+  },
+  {
+   "t": "Faktorisera med hjälp av nollställen",
+   "s": 169.5,
+   "e": 172.8
+  },
+  {
+   "t": "p parentesen x slut parentes är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes parentesen x minus x n slut parentes",
+   "s": 172.8,
+   "e": 185.72
+  },
+  {
+   "t": "där",
+   "s": 185.72,
+   "e": 187.2
+  },
+  {
+   "t": "p parentesen x slut parentes är lika med ett polynom av grad n med nollställena x ett, x två,, x n",
+   "s": 187.2,
+   "e": 199.82
+  },
+  {
+   "t": "k är lika med koefficienten framför x -termen med högst grad (exponent)",
+   "s": 187.2,
+   "e": 199.82
+  },
+  {
+   "t": "Multiplikation av rationella uttryck",
+   "s": 199.82,
+   "e": 203.45
+  },
+  {
+   "t": "a delat med b gånger c delat med d är lika med a gånger c delat med b gånger d",
+   "s": 203.45,
+   "e": 210.46
+  },
+  {
+   "t": "Täljare multipliceras med täljare och nämnare med nämnare.",
+   "s": 210.46,
+   "e": 214.99
+  },
+  {
+   "t": "Faktorisera gärna innan du multiplicerar — det gör det lättare att se vad som senare kan förkortas bort.",
+   "s": 214.99,
+   "e": 221.43
+  },
+  {
+   "t": "Division av rationella uttryck",
+   "s": 221.43,
+   "e": 224.66
+  },
+  {
+   "t": "a delat med b delat med c delat med d är lika med a delat med b gånger d delat med c",
+   "s": 224.66,
+   "e": 239.18
+  },
+  {
+   "t": "Divisionstecknet byts ut mot multiplikation samtidigt som uttrycket i nämnaren inverteras (täljare och nämnare byter plats).",
+   "s": 224.66,
+   "e": 239.18
+  },
+  {
+   "t": "Korsvis multiplikation",
+   "s": 239.18,
+   "e": 242.06
+  },
+  {
+   "t": "a delat med b är lika med c delat med d vilket ger att a gånger d är lika med c gånger b",
+   "s": 242.06,
+   "e": 250.16
+  },
+  {
+   "t": "Gränsvärde",
+   "s": 242.06,
+   "e": 250.16
+  },
+  {
+   "t": "gränsvärdet då x går mot a f av x är lika med L",
+   "s": 250.16,
+   "e": 258.62
+  },
+  {
+   "t": "utläses \"gränsvärdet av f av x då x går mot a är L \".",
+   "s": 250.16,
+   "e": 258.62
+  },
+  {
+   "t": "Regler för gränsvärde vid en oändlighet",
+   "s": 258.62,
+   "e": 262.46
+  },
+  {
+   "t": "Oändlighet enbart i täljaren ger gränsvärdet blir en oändlighet.",
+   "s": 262.46,
+   "e": 267.55
+  },
+  {
+   "t": "Oändlighet enbart i nämnaren ger gränsvärdet blir 0.",
+   "s": 267.55,
+   "e": 272.01
+  },
+  {
+   "t": "Oändlighet i både täljare och nämnare ger stryk konstanttermerna, förkorta uttrycket och bestäm sedan gränsvärdet av det som blir kvar.",
+   "s": 272.01,
+   "e": 282.22
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 282.17,
+   "e": 285.0
+  },
+  {
+   "t": "Faktorisera i den här ordningen: 1) bryt ut gemensam faktor, kvadreringsreglerna eller konjugatregeln baklänges, 3) bestäm nollställena och skriv p parentesen x slut parentes är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes parentesen x minus x n slut parentes .",
+   "s": 285.0,
+   "e": 306.35
+  },
+  {
+   "t": "Fungerar inte metod 1, gå vidare till metod 2, och så vidare.",
+   "s": 306.35,
+   "e": 311.8
+  },
+  {
+   "t": "kvadreringsreglerna eller konjugatregeln baklänges, 3) bestäm nollställena och skriv p parentesen x slut parentes är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes parentesen x minus x n slut parentes .",
+   "s": 311.8,
+   "e": 329.03
+  },
+  {
+   "t": "Fungerar inte metod 1, gå vidare till metod 2, och så vidare.",
+   "s": 329.03,
+   "e": 334.49
+  },
+  {
+   "t": "Vid addition och subtraktion krävs samma nämnare.",
+   "s": 334.49,
+   "e": 338.83
+  },
+  {
+   "t": "Har termerna olika nämnare förlänger du varje term med den andra termens nämnare (eller med MGN) innan täljarna adderas eller subtraheras.",
+   "s": 338.83,
+   "e": 348.02
+  },
+  {
+   "t": "Vid en ekvation med rationella uttryck: kontrollera först vilka x -värden som gör någon nämnare lika med noll — dessa är aldrig tillåtna som lösningar.",
+   "s": 348.02,
+   "e": 357.2
+  },
+  {
+   "t": "Lös sedan genom att multiplicera båda leden med MGN, eller genom att göra liknämnigt och likställa täljarna.",
+   "s": 357.2,
+   "e": 364.7
+  },
+  {
+   "t": "En ekvation på formen a delat med b är lika med c delat med d kan lösas snabbare med korsvis multiplikation — det ger samma ekvation som att multiplicera med MGN, men i ett steg.",
+   "s": 364.7,
+   "e": 376.04
+  },
+  {
+   "t": "Vid division av rationella uttryck: byt ut divisionstecknet mot multiplikation och invertera uttrycket i nämnaren innan du förenklar.",
+   "s": 376.04,
+   "e": 385.25
+  },
+  {
+   "t": "Kontrollera alltid mot uteslutna x -värden i slutet — en lösning som råkar bli lika med ett uteslutet värde måste förkastas.",
+   "s": 385.25,
+   "e": 393.34
+  },
+  {
+   "t": "Bestäm ett gränsvärde då x går mot ett tal i den här ordningen: sätt in värdet direkt, 2) faktorisera och förkorta uttrycket och sätt sedan in värdet, 3) gör två tabeller och närma dig värdet underifrån och ovanifrån.",
+   "s": 393.34,
+   "e": 407.4
+  },
+  {
+   "t": "Ger metod 1 ett tal som 0 delat med 0 är uttrycket inte definierat där, och du måste gå vidare till metod 2.",
+   "s": 407.4,
+   "e": 415.07
+  },
+  {
+   "t": "sätt in värdet direkt, 2) faktorisera och förkorta uttrycket och sätt sedan in värdet, 3) gör två tabeller och närma dig värdet underifrån och ovanifrån.",
+   "s": 415.07,
+   "e": 425.98
+  },
+  {
+   "t": "Ger metod 1 ett tal som 0 delat med 0 är uttrycket inte definierat där, och du måste gå vidare till metod 2.",
+   "s": 425.98,
+   "e": 433.68
+  },
+  {
+   "t": "Går tabellerna i metod 3 mot olika värden underifrån och ovanifrån (eller mot minus oändligheten åt ena hållet och plus oändligheten åt andra) saknas gränsvärde.",
+   "s": 433.68,
+   "e": 445.02
+  },
+  {
+   "t": "Går både täljaren och nämnaren mot en oändlighet: stryk konstanttermerna (de försvinner i jämförelse med oändligheten), förkorta det som blir kvar, och beräkna gränsvärdet av det förenklade uttrycket.",
+   "s": 445.02,
+   "e": 457.22
+  },
+  {
+   "t": "Ett symbolhanterande hjälpmedel som Geogebra kan förenkla, faktorisera, lösa ekvationer (exakt eller numeriskt) och beräkna gränsvärden direkt — men förstå gärna metoden för hand innan du använder ett sådant verktyg, så att du kan tolka och kontrollera svaret.",
+   "s": 457.22,
+   "e": 472.89
+  },
+  {
+   "t": "Inför provet",
+   "s": 472.89,
+   "e": 475.03
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan ett polynom och ett rationellt uttryck?",
+   "s": 475.03,
+   "e": 480.02
+  },
+  {
+   "t": "Kan du de tre metoderna för att faktorisera ett uttryck (bryta ut, kvadrerings-/konjugatregeln, nollställen) och vet du i vilken ordning du ska pröva dem?",
+   "s": 480.02,
+   "e": 490.54
+  },
+  {
+   "t": "Kan du förkorta och förlänga rationella uttryck utan att ändra deras värde?",
+   "s": 490.54,
+   "e": 495.77
+  },
+  {
+   "t": "Kan du addera och subtrahera rationella uttryck med olika nämnare genom att göra dem liknämniga?",
+   "s": 495.77,
+   "e": 502.19
+  },
+  {
+   "t": "Kan du lösa en ekvation med rationella uttryck genom att multiplicera med MGN, och vet du varför vissa lösningar måste förkastas?",
+   "s": 502.19,
+   "e": 510.44
+  },
+  {
+   "t": "Kan du multiplicera och dividera rationella uttryck, och minns du att division innebär att invertera och multiplicera?",
+   "s": 510.44,
+   "e": 518.15
+  },
+  {
+   "t": "Vet du hur man löser en ekvation på formen a delat med b är lika med c delat med d med korsvis multiplikation?",
+   "s": 518.15,
+   "e": 526.19
+  },
+  {
+   "t": "Kan du bestämma ett gränsvärde genom att sätta in värdet direkt, och vet du när den metoden inte fungerar?",
+   "s": 526.19,
+   "e": 532.87
+  },
+  {
+   "t": "Kan du bestämma ett gränsvärde genom att faktorisera och förkorta uttrycket, t.ex. med konjugatregeln?",
+   "s": 532.87,
+   "e": 540.0
+  },
+  {
+   "t": "Vet du hur man med hjälp av tabeller avgör om ett gränsvärde saknas?",
+   "s": 540.0,
+   "e": 545.19
+  },
+  {
+   "t": "Kan du bestämma gränsvärden då x går mot en oändlighet, och vet du skillnaden mellan oändlighet i täljaren, i nämnaren och i båda?",
+   "s": 545.19,
+   "e": 555.39
+  },
+  {
+   "t": "Kan du använda ett symbolhanterande hjälpmedel för att förenkla, faktorisera, lösa ekvationer och bestämma gränsvärden?",
+   "s": 555.34,
+   "e": 563.37
+  }
+ ]
+}

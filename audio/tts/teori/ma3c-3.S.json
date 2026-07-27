@@ -1,0 +1,348 @@
+{
+ "id": "ma3c-3.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7f82a0825f9b9db73d39afd87e6dd004d7256ff4",
+ "dur": 500.96,
+ "segments": [
+  {
+   "t": "Sammanfattning — Deriveringsregler",
+   "s": 0.1,
+   "e": 3.41
+  },
+  {
+   "t": "Det här kapitlet handlade om att hitta genvägar för att derivera, i stället för att varje gång använda derivatans definition.",
+   "s": 3.36,
+   "e": 10.99
+  },
+  {
+   "t": "Du har sett hur potensfunktioner, polynom och funktioner med rötter eller nämnare deriveras med enkla regler som gäller för alla reella exponenter, samt hur exponentialfunktioner med basen e och andra baser deriveras.",
+   "s": 10.99,
+   "e": 24.15
+  },
+  {
+   "t": "Kapitlet avslutades med tillämpningar: tolka derivatans tecken och enhet, bestämma en obekant konstant i en modell, beräkna tangentens ekvation och lösa den här typen av uppgifter med digitala hjälpmedel som Geogebra.",
+   "s": 24.15,
+   "e": 37.66
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 37.66,
+   "e": 39.98
+  },
+  {
+   "t": "deriveringsregel — genväg för att beräkna en derivata utan att använda derivatans definition varje gång.",
+   "s": 39.98,
+   "e": 47.2
+  },
+  {
+   "t": "potensregeln — f av x är lika med x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1 : multiplicera ned exponenten och minska den med 1.",
+   "s": 47.2,
+   "e": 59.75
+  },
+  {
+   "t": "Gäller för alla reella exponenter n, inte bara positiva heltal.",
+   "s": 59.75,
+   "e": 64.9
+  },
+  {
+   "t": "polynomfunktion — funktion med flera termer; deriveras term för term.",
+   "s": 64.9,
+   "e": 70.24
+  },
+  {
+   "t": "konstant funktion — funktion utan x -term; har alltid derivatan 0 eftersom grafen är en horisontell linje.",
+   "s": 70.24,
+   "e": 77.96
+  },
+  {
+   "t": "exponentialfunktion — funktion där variabeln sitter i exponenten, t.ex. f av x är lika med a upphöjt till x .",
+   "s": 77.96,
+   "e": 85.94
+  },
+  {
+   "t": "talet e (Eulers tal) — det irrationella talet e är ungefär lika med 2,72 för vilket f av x är lika med e upphöjt till x är sin egen derivata.",
+   "s": 85.94,
+   "e": 96.46
+  },
+  {
+   "t": "naturliga logaritmen (ln) — logaritmen med basen e; naturliga logaritmen av x är det tal e ska upphöjas till för att ge x.",
+   "s": 96.46,
+   "e": 111.14
+  },
+  {
+   "t": "tillväxthastighet — hur snabbt en storhet förändras vid en viss tidpunkt; ges av derivatans värde där.",
+   "s": 96.46,
+   "e": 111.14
+  },
+  {
+   "t": "tangent — rät linje som tangerar en kurva i en punkt och har samma lutning som kurvan i den punkten.",
+   "s": 111.14,
+   "e": 117.94
+  },
+  {
+   "t": "riktningskoefficient (k-värde) — tangentens lutning; ges av derivatans värde i tangeringspunkten, k är lika med f prim parentesen a slut parentes .",
+   "s": 117.94,
+   "e": 128.82
+  },
+  {
+   "t": "Formler",
+   "s": 128.82,
+   "e": 130.65
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 130.65,
+   "e": 133.0
+  },
+  {
+   "t": "Potensregeln",
+   "s": 133.0,
+   "e": 135.11
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1",
+   "s": 135.11,
+   "e": 144.11
+  },
+  {
+   "t": "Gäller för alla reella exponenter n, inte bara positiva heltal (förutsatt x är större än 0 ).",
+   "s": 144.11,
+   "e": 151.35
+  },
+  {
+   "t": "Koefficient, konstant och nämnarkonstant",
+   "s": 151.35,
+   "e": 155.41
+  },
+  {
+   "t": "f av x är lika med k x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n k x upphöjt till n minus 1",
+   "s": 155.41,
+   "e": 164.9
+  },
+  {
+   "t": "f av x är lika med a vilket ger att f prim parentesen x slut parentes är lika med 0 f av x som är lika med g av x delat med a vilket ger att f prim parentesen x slut parentes är lika med g prim parentesen x slut parentes delat med a",
+   "s": 164.9,
+   "e": 180.07
+  },
+  {
+   "t": "där",
+   "s": 180.07,
+   "e": 181.55
+  },
+  {
+   "t": "k är lika med koefficient framför potensen",
+   "s": 181.55,
+   "e": 185.44
+  },
+  {
+   "t": "a är lika med en konstant (ett tal utan x )",
+   "s": 185.44,
+   "e": 189.6
+  },
+  {
+   "t": "g av x är lika med en deriverbar funktion i täljaren",
+   "s": 189.6,
+   "e": 194.32
+  },
+  {
+   "t": "Derivatan av e upphöjt till x",
+   "s": 194.32,
+   "e": 210.64
+  },
+  {
+   "t": "f av x är lika med e upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med e upphöjt till x f av x som är lika med a e upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med a e upphöjt till x",
+   "s": 194.32,
+   "e": 210.64
+  },
+  {
+   "t": "där a är en koefficient framför funktionen; den behålls oförändrad vid derivering.",
+   "s": 210.64,
+   "e": 216.91
+  },
+  {
+   "t": "Derivatan av e upphöjt till k x och a upphöjt till x",
+   "s": 216.91,
+   "e": 236.38
+  },
+  {
+   "t": "f av x är lika med e upphöjt till k x vilket ger att f prim parentesen x slut parentes är lika med k gånger e upphöjt till k x",
+   "s": 216.91,
+   "e": 236.38
+  },
+  {
+   "t": "f av x är lika med a upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med a upphöjt till x gånger naturliga logaritmen av a",
+   "s": 216.91,
+   "e": 236.38
+  },
+  {
+   "t": "där",
+   "s": 236.38,
+   "e": 237.88
+  },
+  {
+   "t": "k är lika med koefficienten i exponenten",
+   "s": 237.88,
+   "e": 241.75
+  },
+  {
+   "t": "naturliga logaritmen av a är lika med den naturliga logaritmen av basen a",
+   "s": 241.75,
+   "e": 248.9
+  },
+  {
+   "t": "Tangentens ekvation",
+   "s": 241.75,
+   "e": 248.9
+  },
+  {
+   "t": "y är lika med k x plus m, k som är lika med f prim parentesen a slut parentes",
+   "s": 248.9,
+   "e": 255.45
+  },
+  {
+   "t": "där",
+   "s": 255.45,
+   "e": 256.95
+  },
+  {
+   "t": "k är lika med tangentens riktningskoefficient (derivatans värde i tangeringspunkten)",
+   "s": 256.95,
+   "e": 263.32
+  },
+  {
+   "t": "m är lika med bestäms genom att sätta in tangeringspunktens koordinater parentesen a, f av a slut parentes i räta linjens ekvation",
+   "s": 263.32,
+   "e": 272.38
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 272.38,
+   "e": 275.25
+  },
+  {
+   "t": "En potensfunktion deriveras genom att multiplicera ned exponenten och minska exponenten med 1 — regeln gäller för alla reella exponenter, inte bara positiva heltal.",
+   "s": 275.25,
+   "e": 287.63
+  },
+  {
+   "t": "Ett polynom deriveras term för term; koefficienter behålls, och konstanttermer faller bort eftersom derivatan av en konstant alltid är 0.",
+   "s": 287.58,
+   "e": 296.82
+  },
+  {
+   "t": "Variabler under ett rottecken eller i en nämnare måste först skrivas om som en potens (t.ex. roten ur x är lika med x upphöjt till 1 delat med 2 , 1 delat med x är lika med x upphöjt till minus 1 ) innan potensregeln kan användas.",
+   "s": 296.82,
+   "e": 311.58
+  },
+  {
+   "t": "Har uttrycket variabeln i både täljare och nämnare: dela upp bråket i flera termer och derivera var och en för sig, i stället för att derivera hela bråket på en gång.",
+   "s": 311.58,
+   "e": 321.87
+  },
+  {
+   "t": "f av x är lika med e upphöjt till x är sin egen derivata — grafiskt betyder det att funktionsvärdet i varje punkt är detsamma som kurvans lutning där.",
+   "s": 321.87,
+   "e": 331.23
+  },
+  {
+   "t": "Lathund för exponentialfunktioner: skriv av funktionen oförändrad, multiplicera med koefficienten i exponenten (om någon finns), och multiplicera dessutom med naturliga logaritmen av a om basen inte är e.",
+   "s": 331.23,
+   "e": 344.94
+  },
+  {
+   "t": "En bas a kan alltid skrivas om till basen e med a är lika med e upphöjt till naturliga logaritmen av a — det är så deriveringsregeln för a upphöjt till x härleds ur regeln för e upphöjt till k x .",
+   "s": 344.94,
+   "e": 356.49
+  },
+  {
+   "t": "Derivatans tecken avgör om en storhet ökar eller minskar: positiv derivata betyder ökning, negativ derivata betyder minskning.",
+   "s": 356.49,
+   "e": 365.63
+  },
+  {
+   "t": "Enheten för en derivata är \"enheten för funktionen\" per \"enheten för variabeln\", t.ex. invånare/år eller °C/minut.",
+   "s": 365.63,
+   "e": 375.28
+  },
+  {
+   "t": "Är en konstant i en modell obekant kan den bestämmas genom att sätta in ett känt funktions- eller derivatavärde och lösa ut konstanten — ofta med hjälp av naturliga logaritmen av , eftersom naturliga logaritmen av e är lika med 1 .",
+   "s": 375.28,
+   "e": 388.82
+  },
+  {
+   "t": "Tangentens k-värde ges av derivatan i tangeringspunkten; m-värdet bestäms sedan genom att sätta in tangeringspunktens koordinater i räta linjens ekvation.",
+   "s": 388.82,
+   "e": 398.99
+  },
+  {
+   "t": "Med digitala hjälpmedel (t.ex. Geogebra) kan derivator, funktionsvärden och ekvationer (NLös/Lös) bestämmas direkt utan att räkna för hand — användbart t.ex. för att hitta extrempunkter till derivatan.",
+   "s": 398.99,
+   "e": 413.43
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 413.43,
+   "e": 416.48
+  },
+  {
+   "t": "Tangenten till en kurva i en punkt har samma lutning som kurvan där, given av derivatans värde i tangeringspunkten:",
+   "s": 416.48,
+   "e": 425.02
+  },
+  {
+   "t": "Inför provet",
+   "s": 416.48,
+   "e": 425.02
+  },
+  {
+   "t": "Kan du derivera en potensfunktion f av x är lika med x upphöjt till n för godtyckliga reella exponenter, även bråk- och negativa exponenter?",
+   "s": 425.02,
+   "e": 434.29
+  },
+  {
+   "t": "Kan du skriva om uttryck med variabeln under ett rottecken eller i en nämnare till potensform innan du deriverar?",
+   "s": 434.29,
+   "e": 441.56
+  },
+  {
+   "t": "Kan du derivera ett polynom term för term, och vet du varför konstanttermer försvinner vid derivering?",
+   "s": 441.56,
+   "e": 448.32
+  },
+  {
+   "t": "Vet du varför f av x är lika med e upphöjt till x är sin egen derivata, och kan du förklara vad talet e är?",
+   "s": 448.32,
+   "e": 456.07
+  },
+  {
+   "t": "Kan du derivera f av x är lika med e upphöjt till k x och f av x är lika med a upphöjt till x , och känner du till lathunden för att derivera exponentialfunktioner?",
+   "s": 456.07,
+   "e": 466.14
+  },
+  {
+   "t": "Vet du vad den naturliga logaritmen naturliga logaritmen av är, och hur man skriver om en bas a till basen e?",
+   "s": 466.14,
+   "e": 473.51
+  },
+  {
+   "t": "Kan du bestämma en obekant konstant i en modell genom att sätta in ett känt funktions- eller derivatavärde?",
+   "s": 473.51,
+   "e": 480.49
+  },
+  {
+   "t": "Kan du tolka derivatans tecken och enhet i en tillämpning, t.ex. en tillväxthastighet?",
+   "s": 480.49,
+   "e": 487.26
+  },
+  {
+   "t": "Kan du bestämma ekvationen för tangenten till en kurva i en given punkt?",
+   "s": 487.26,
+   "e": 492.47
+  },
+  {
+   "t": "Kan du använda digitala hjälpmedel som Geogebra för att derivera, beräkna funktionsvärden och lösa ekvationer numeriskt eller exakt?",
+   "s": 492.47,
+   "e": 500.96
+  }
+ ]
+}

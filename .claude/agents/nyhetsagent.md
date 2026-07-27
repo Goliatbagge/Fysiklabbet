@@ -56,9 +56,11 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 9. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska vara
    intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
    skärmdump för att se att artikeln och bilden renderar snyggt.
-   Kör också termkontrollen `grep -in "upphets" data/nyheter.js` — varje träff
-   ska granskas och nästan alltid rättas till ”exciterad/excitation”
-   (se Skrivregler: svenska facktermer).
+   Kör också termkontrollerna
+   `grep -in "upphets" data/nyheter.js` (ska ge noll träffar — rätta till
+   ”exciterad/excitation”) och `grep -in "biljon\|biljard\|triljon" data/nyheter.js`
+   (varje träff stäms av mot originalets *billion/trillion* och mot en
+   rimlighetsberäkning). Se Skrivregler: svenska facktermer och räkneord.
 
 10. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
     granskad (redaktionell korrektur + faktakoll av citat, se nedan) och
@@ -123,6 +125,17 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
   *beam* → stråle (inte ”balk”), *lattice* → gitter, *shell* → skal,
   *quenching* → släckning. Är du osäker på en term: kontrollera hur den skrivs i
   svensk fysiklitteratur innan du publicerar.
+- **Räkneorden är den farligaste falska vännen — kontrollera VARJE stort tal.**
+  Engelskans *billion* = svenskans **miljard** (10<sup>9</sup>), *trillion* =
+  **biljon** (10<sup>12</sup>), *quadrillion* = **biljard** (10<sup>15</sup>).
+  Skriver du ”biljoner” där källan sa *billions* blir siffran **tusen gånger fel**
+  — och det syns inte i språkgranskningen, bara i fysiken. Rutin: sök i den färdiga
+  artikeln efter ”biljon”, ”biljard” och ”triljon”, slå upp originalformuleringen
+  för varje träff, och **räkna dessutom en rimlighetskontroll** (t.ex. solens
+  neutrinoflöde ≈ 6,5&nbsp;·&nbsp;10<sup>10</sup> per cm² och sekund ⇒ ”hundratals
+  miljarder genom en tumnagel”, men ≈&nbsp;10<sup>14</sup> ⇒ ”hundra biljoner genom
+  hela kroppen”). Använder du samma tal om två olika stora ytor/volymer är minst
+  ett av dem fel.
 - **Glimten i ögat är tillåten — sparsamt.** Max en–två lättsamma formuleringar per
   artikel, och aldrig på bekostnad av sakligheten. Humorn får krydda, inte styra.
   Om du tvekar: stryk skämtet.

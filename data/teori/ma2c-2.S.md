@@ -19,31 +19,31 @@ färdigt, och använda allt detta i problemlösning.
 
 ## Begrepp att kunna
 
-- **kvadreringsreglerna** — genvägar för att utveckla $(a + b)^2$ och
+- **kvadreringsreglerna**: genvägar för att utveckla $(a + b)^2$ och
   $(a - b)^2$ utan att multiplicera ut parentes för parentes.
-- **konjugatregeln** — genväg för att utveckla ett "kvadrat minus
+- **konjugatregeln**: genväg för att utveckla ett "kvadrat minus
   kvadrat"-uttryck: $(a + b)(a - b) = a^2 - b^2$.
-- **faktorisera** — skriva om ett uttryck som en multiplikation, t.ex.
+- **faktorisera**: skriva om ett uttryck som en multiplikation, t.ex.
   genom att bryta ut en gemensam faktor eller använda en
   kvadrerings- eller konjugatregel baklänges.
-- **rationellt uttryck** — ett bråkuttryck som innehåller $x$; förkortas
+- **rationellt uttryck**: ett bråkuttryck som innehåller $x$; förkortas
   genom att faktorisera täljare och nämnare och stryka gemensamma
   faktorer.
-- **nollproduktmetoden** — lösningsmetod för ekvationer där en produkt är
+- **nollproduktmetoden**: lösningsmetod för ekvationer där en produkt är
   lika med 0: minst en av faktorerna måste då vara 0.
-- **rot** — en annan benämning på en lösning till en ekvation.
-- ***pq*-formeln** — formel som ger lösningarna till en fullständig
+- **rot**: en annan benämning på en lösning till en ekvation.
+- ***pq*-formeln**: formel som ger lösningarna till en fullständig
   andragradsekvation på formen $x^2 + px + q = 0$.
-- ***abc*-formeln** — formel som ger lösningarna till en fullständig
+- ***abc*-formeln**: formel som ger lösningarna till en fullständig
   andragradsekvation på formen $ax^2 + bx + c = 0$, utan att koefficienten
   framför $x^2$ behöver divideras bort först.
-- **diskriminant** — uttrycket under rottecknet i *pq*-formeln eller
+- **diskriminant**: uttrycket under rottecknet i *pq*-formeln eller
   *abc*-formeln; tecknet avgör hur många lösningar ekvationen har.
-- **rotekvation** — en ekvation där den obekanta står under ett
+- **rotekvation**: en ekvation där den obekanta står under ett
   rottecken.
-- **falsk rot** — en lösning som uppstår vid kvadrering men som inte
+- **falsk rot**: en lösning som uppstår vid kvadrering men som inte
   uppfyller den ursprungliga ekvationen.
-- **variabelsubstitution** — att byta ut ett uttryck (t.ex. $\sqrt{x}$)
+- **variabelsubstitution**: att byta ut ett uttryck (t.ex. $\sqrt{x}$)
   mot en ny variabel för att förenkla en ekvation innan man löser den.
 
 ## Formler

@@ -22,43 +22,43 @@ normalfördelningskurvor, samt ta fram och tolka en regressionsmodell.
 
 ## Begrepp att kunna
 
-- **lägesmått** — ett sammanfattande värde för ett statistiskt material; de
+- **lägesmått**: ett sammanfattande värde för ett statistiskt material; de
   vanligaste är medelvärde, median och typvärde.
-- **medelvärde** — summan av alla värden delat med antalet värden; det
+- **medelvärde**: summan av alla värden delat med antalet värden; det
   vanligaste lägesmåttet, men känsligt för enstaka extremvärden.
-- **median** — värdet i mitten när alla värden sorterats i storleksordning
+- **median**: värdet i mitten när alla värden sorterats i storleksordning
   (medelvärdet av de två mittersta om antalet är jämnt); ofta bättre än
   medelvärdet vid sned fördelning.
-- **typvärde** — det värde som förekommer flest gånger; det enda lägesmåttet
+- **typvärde**: det värde som förekommer flest gånger; det enda lägesmåttet
   som går att använda även på data som inte är siffror.
-- **frekvens** — hur många gånger ett visst värde, eller en viss klass,
+- **frekvens**: hur många gånger ett visst värde, eller en viss klass,
   förekommer i en datamängd.
-- **klass och klassmitt** — vid intervallindelad data (t.ex. i ett
+- **klass och klassmitt**: vid intervallindelad data (t.ex. i ett
   histogram) räknas varje värde som om det låg i sin klassmitt, intervallets
   mittpunkt.
-- **variationsbredd** — skillnaden mellan det största och det minsta värdet
+- **variationsbredd**: skillnaden mellan det största och det minsta värdet
   i en datamängd; det enklaste spridningsmåttet.
-- **kvartil ($Q_1$, $Q_2$, $Q_3$)** — de tre värden som delar en sorterad
+- **kvartil ($Q_1$, $Q_2$, $Q_3$)**: de tre värden som delar en sorterad
   datamängd i fyra lika stora delar; $Q_2$ är samma sak som medianen.
-- **lådagram** — diagram som visar minsta värdet, $Q_1$, medianen, $Q_3$ och
+- **lådagram**: diagram som visar minsta värdet, $Q_1$, medianen, $Q_3$ och
   största värdet; en "låda" mellan kvartilerna med "morrhår" ut till minsta
   och största värdet.
-- **kvartilavstånd** — skillnaden mellan övre och nedre kvartil, $Q_3 - Q_1$;
+- **kvartilavstånd**: skillnaden mellan övre och nedre kvartil, $Q_3 - Q_1$;
   lådans bredd i lådagrammet, ett mått på spridningen i mitten av
   materialet.
-- **percentil** — ett värde som en given andel av datamängden ligger under;
+- **percentil**: ett värde som en given andel av datamängden ligger under;
   t.ex. anger $p_{90}$ gränsen för de $10\ \%$ högsta värdena.
-- **standardavvikelse ($\sigma$, $s$)** — hur mycket värdena i genomsnitt
+- **standardavvikelse ($\sigma$, $s$)**: hur mycket värdena i genomsnitt
   avviker från medelvärdet; $\sigma$ används vid totalundersökning och $s$
   vid stickprovsundersökning.
-- **normalfördelning ($\mu$, $\sigma$)** — en symmetrisk fördelning kring
+- **normalfördelning ($\mu$, $\sigma$)**: en symmetrisk fördelning kring
   medelvärdet $\mu$ där andelen värden inom ett givet antal
   standardavvikelser $\sigma$ alltid är densamma.
-- **korrelation och korrelationskoefficient ($r$)** — hur starkt två
+- **korrelation och korrelationskoefficient ($r$)**: hur starkt två
   variabler hänger ihop, avläst i ett spridningsdiagram; $r$ ligger mellan
   −1 (perfekt negativ) och 1 (perfekt positiv), och $0$ betyder ingen
   korrelation.
-- **regressionslinje och regressionsmodell** — regressionslinjen är den
+- **regressionslinje och regressionsmodell**: regressionslinjen är den
   räta linje som bäst beskriver ett linjärt samband (linjär regression);
   andra samband beskrivs i stället med en exponentiell, potens- eller
   andragradsmodell, och $r^2$-värdet avgör vilken modell som passar bäst.

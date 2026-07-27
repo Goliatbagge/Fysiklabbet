@@ -20,25 +20,25 @@ typen av uppgifter med digitala hjälpmedel som Geogebra.
 
 ## Begrepp att kunna
 
-- **deriveringsregel** — genväg för att beräkna en derivata utan att
+- **deriveringsregel**: genväg för att beräkna en derivata utan att
   använda derivatans definition varje gång.
-- **potensregeln** — $f(x) = x^n \Rightarrow f'(x) = nx^{n-1}$: multiplicera
+- **potensregeln**: $f(x) = x^n \Rightarrow f'(x) = nx^{n-1}$: multiplicera
   ned exponenten och minska den med 1. Gäller för alla reella exponenter
   *n*, inte bara positiva heltal.
-- **polynomfunktion** — funktion med flera termer; deriveras term för term.
-- **konstant funktion** — funktion utan $x$-term; har alltid derivatan 0
+- **polynomfunktion**: funktion med flera termer; deriveras term för term.
+- **konstant funktion**: funktion utan $x$-term; har alltid derivatan 0
   eftersom grafen är en horisontell linje.
-- **exponentialfunktion** — funktion där variabeln sitter i exponenten,
+- **exponentialfunktion**: funktion där variabeln sitter i exponenten,
   t.ex. $f(x) = a^x$.
-- **talet e (Eulers tal)** — det irrationella talet $e \approx 2{,}72$ för
+- **talet e (Eulers tal)**: det irrationella talet $e \approx 2{,}72$ för
   vilket $f(x) = e^x$ är sin egen derivata.
-- **naturliga logaritmen (ln)** — logaritmen med basen *e*; $\ln x$ är det
+- **naturliga logaritmen (ln)**: logaritmen med basen *e*; $\ln x$ är det
   tal *e* ska upphöjas till för att ge *x*.
-- **tillväxthastighet** — hur snabbt en storhet förändras vid en viss
+- **tillväxthastighet**: hur snabbt en storhet förändras vid en viss
   tidpunkt; ges av derivatans värde där.
-- **tangent** — rät linje som tangerar en kurva i en punkt och har samma
+- **tangent**: rät linje som tangerar en kurva i en punkt och har samma
   lutning som kurvan i den punkten.
-- **riktningskoefficient (*k*-värde)** — tangentens lutning; ges av
+- **riktningskoefficient (*k*-värde)**: tangentens lutning; ges av
   derivatans värde i tangeringspunkten, $k = f'(a)$.
 
 ## Formler

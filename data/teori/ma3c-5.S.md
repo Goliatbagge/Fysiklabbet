@@ -20,32 +20,32 @@ andra tillämpningar av integraler beräknas och tolkas.
 
 ## Begrepp att kunna
 
-- **primitiv funktion ($F(x)$)** — en funktion vars derivata är den
+- **primitiv funktion ($F(x)$)**: en funktion vars derivata är den
   ursprungliga funktionen, dvs. $F'(x) = f(x)$; kallas även
   baklängesderivata eller antiderivata.
-- **integrera** — att ta fram en primitiv funktion till en given funktion;
+- **integrera**: att ta fram en primitiv funktion till en given funktion;
   motsatsen till att derivera.
-- **integrationskonstant ($C$)** — konstanten som läggs till när samtliga
+- **integrationskonstant ($C$)**: konstanten som läggs till när samtliga
   primitiva funktioner till en funktion anges, eftersom en konstant term
   försvinner vid derivering.
-- **villkor** — en given uppgift om en primitiv funktion, t.ex.
+- **villkor**: en given uppgift om en primitiv funktion, t.ex.
   $F(1) = 7$, som används för att bestämma integrationskonstanten $C$.
-- **integraltecken ($\int$)** — summatecknet för oändligt många oändligt
+- **integraltecken ($\int$)**: summatecknet för oändligt många oändligt
   smala termer; ett utdraget "s".
-- **bestämd integral** — en integral med en undre gräns *a* och en övre
+- **bestämd integral**: en integral med en undre gräns *a* och en övre
   gräns *b*, $\int_a^b f(x)\, dx$, som ger ett bestämt tal.
-- **integrand** — funktionen $f(x)$ som integreras, dvs. den funktion
+- **integrand**: funktionen $f(x)$ som integreras, dvs. den funktion
   arean beräknas under.
-- **integrationsgränser** — *x*-värdena *a* (undre gräns) och *b* (övre
+- **integrationsgränser**: *x*-värdena *a* (undre gräns) och *b* (övre
   gräns) som avgränsar det område en bestämd integral beräknar.
-- **areaenhet (a.e.)** — enheten en beräknad area anges i; en integrals
+- **areaenhet (a.e.)**: enheten en beräknad area anges i; en integrals
   värde saknar däremot enhet så länge det inte tolkas som en area.
-- **integralkalkylens fundamentalsats** — sambandet
+- **integralkalkylens fundamentalsats**: sambandet
   $\int_a^b f(x)\, dx = F(b) - F(a)$ som gör det möjligt att beräkna
   integraler exakt med hjälp av primitiva funktioner.
-- **CAS-läge och standardläge (Geogebra)** — CAS-läget ger exakta svar
+- **CAS-läge och standardläge (Geogebra)**: CAS-läget ger exakta svar
   (bråk, rotuttryck), standardläget ger numeriska närmevärden.
-- **area mellan kurvor** — arean av området mellan två grafer, beräknad
+- **area mellan kurvor**: arean av området mellan två grafer, beräknad
   genom att integrera den övre funktionen minus den undre funktionen.
 
 ## Formler

@@ -20,36 +20,36 @@ givet problem och lösa tillämpningar med flera trianglar efter varandra.
 
 ## Begrepp att kunna
 
-- **hypotenusa** — sidan mitt emot den räta vinkeln i en rätvinklig
+- **hypotenusa**: sidan mitt emot den räta vinkeln i en rätvinklig
   triangel; alltid triangelns längsta sida.
-- **katet** — en av de två kortare sidorna i en rätvinklig triangel; delas
+- **katet**: en av de två kortare sidorna i en rätvinklig triangel; delas
   i motstående katet (mitt emot vinkeln *v*) och närliggande katet
   (bredvid *v*).
-- **sinus, cosinus, tangens** — de tre trigonometriska funktionerna,
+- **sinus, cosinus, tangens**: de tre trigonometriska funktionerna,
   definierade som förhållanden mellan sidorna i en rätvinklig triangel
   (se Formler).
 - **inversa trigonometriska funktioner** ($\sin^{-1}$, $\cos^{-1}$,
-  $\tan^{-1}$) — används för att bestämma en vinkel när ett sidoförhållande
+  $\tan^{-1}$): används för att bestämma en vinkel när ett sidoförhållande
   är känt; kallas även arcsin, arccos och arctan.
-- **enhetscirkeln** — en cirkel med radien $1$ och medelpunkt i origo;
+- **enhetscirkeln**: en cirkel med radien $1$ och medelpunkt i origo;
   används för att definiera sinus och cosinus för alla vinklar, inte bara
   spetsiga.
-- **period** — det antal grader en vinkel måste öka med för att en
+- **period**: det antal grader en vinkel måste öka med för att en
   trigonometrisk funktion ska anta samma värde igen; $360^\circ$ för sinus
   och cosinus, $180^\circ$ för tangens.
-- **trigonometrisk ekvation** — en ekvation som innehåller en
+- **trigonometrisk ekvation**: en ekvation som innehåller en
   trigonometrisk funktion, t.ex. $\sin v = a$; löses med enhetscirkeln
   eller räknarens inversa funktioner.
-- **mellanliggande vinkel** — vinkeln som ligger mellan två kända sidor i
+- **mellanliggande vinkel**: vinkeln som ligger mellan två kända sidor i
   en triangel; krävs för areasatsen och för ett av cosinussatsens
   användningsfall.
-- **areasatsen** — formel för en triangels area utifrån två sidor och den
+- **areasatsen**: formel för en triangels area utifrån två sidor och den
   mellanliggande vinkeln.
-- **sinussatsen** — samband mellan en triangels sidor och motstående
+- **sinussatsen**: samband mellan en triangels sidor och motstående
   vinklars sinusvärden.
-- **cosinussatsen** — generalisering av Pythagoras sats till godtyckliga
+- **cosinussatsen**: generalisering av Pythagoras sats till godtyckliga
   trianglar; samband mellan alla tre sidorna och en vinkel.
-- **triangelsatserna** — samlingsnamn för areasatsen, sinussatsen och
+- **triangelsatserna**: samlingsnamn för areasatsen, sinussatsen och
   cosinussatsen.
 
 ## Formler

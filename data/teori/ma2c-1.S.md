@@ -21,36 +21,36 @@ grafiskt och algebraiskt.
 
 ## Begrepp att kunna
 
-- **ekvationssystem** — flera ekvationer som ska ha en gemensam lösning;
+- **ekvationssystem**: flera ekvationer som ska ha en gemensam lösning;
   skrivs samman med en krullparentes.
-- **grafisk lösning** — att lösa ett ekvationssystem genom att rita upp
+- **grafisk lösning**: att lösa ett ekvationssystem genom att rita upp
   ekvationernas grafer och läsa av skärningspunkten.
-- **skärningspunkt** — punkten där graferna möts; dess *x*-koordinat är
+- **skärningspunkt**: punkten där graferna möts; dess *x*-koordinat är
   lösningen för $x$ och *y*-koordinaten är lösningen för $y$.
-- **antal lösningar** — bestäms av linjernas *k*- och *m*-värden: olika
+- **antal lösningar**: bestäms av linjernas *k*- och *m*-värden: olika
   *k*-värden ger en lösning, samma *k*-värde men olika *m*-värde ger
   inga lösningar, och samma *k*- och *m*-värde ger oändligt många
   lösningar.
-- **parallella linjer** — linjer med samma *k*-värde men olika
+- **parallella linjer**: linjer med samma *k*-värde men olika
   *m*-värde; saknar gemensam punkt, så ekvationssystemet saknar då
   lösning.
-- **sammanfallande linjer** — linjer med samma *k*- och *m*-värde; de
+- **sammanfallande linjer**: linjer med samma *k*- och *m*-värde; de
   ligger ovanpå varandra, så ekvationssystemet har då oändligt många
   lösningar.
-- **substitutionsmetoden** — algebraisk lösningsmetod där en variabel
+- **substitutionsmetoden**: algebraisk lösningsmetod där en variabel
   löses ut ur en ekvation och byts ut (substitueras) i den andra.
-- **additionsmetoden** — algebraisk lösningsmetod där ekvationerna
+- **additionsmetoden**: algebraisk lösningsmetod där ekvationerna
   adderas ledvis så att en variabel elimineras.
-- **eliminera en variabel** — få en variabels term att försvinna, t.ex.
+- **eliminera en variabel**: få en variabels term att försvinna, t.ex.
   genom att addera två ekvationer där termen har olika tecken framför
   sig.
-- **ledvis addition** — att addera två ekvationer term för term,
+- **ledvis addition**: att addera två ekvationer term för term,
   vänsterled för sig och högerled för sig.
-- **koefficient** — talet framför en variabel i en term, t.ex. 5 i
+- **koefficient**: talet framför en variabel i en term, t.ex. 5 i
   termen $5x$.
-- **etikettering av ekvationer** — att numrera ekvationerna (1), (2),
+- **etikettering av ekvationer**: att numrera ekvationerna (1), (2),
   (3) … för att kunna hänvisa till dem i lösningen.
-- **lösning till ett ekvationssystem** — det värdepar $(x, y)$ som
+- **lösning till ett ekvationssystem**: det värdepar $(x, y)$ som
   uppfyller båda ekvationerna samtidigt; anges med en krullparentes.
 
 ## Formler

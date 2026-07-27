@@ -21,35 +21,35 @@ problem.
 
 ## Begrepp att kunna
 
-- **polynom** — ett uttryck där alla variabeltermer har positiva
+- **polynom**: ett uttryck där alla variabeltermer har positiva
   heltalsexponenter.
-- **rationellt uttryck** — ett uttryck med ett polynom i täljaren och ett
+- **rationellt uttryck**: ett uttryck med ett polynom i täljaren och ett
   polynom i nämnaren, t.ex. $\dfrac{5x^2 - 5x}{3x - 3}$.
-- **förlänga** — multiplicera både täljare och nämnare med samma tal eller
+- **förlänga**: multiplicera både täljare och nämnare med samma tal eller
   uttryck; ändrar inte uttryckets värde.
-- **förkorta** — dividera både täljare och nämnare med en gemensam faktor;
+- **förkorta**: dividera både täljare och nämnare med en gemensam faktor;
   ändrar inte uttryckets värde.
-- **nollställe** — det $x$-värde som gör att ett uttryck blir lika med noll;
+- **nollställe**: det $x$-värde som gör att ett uttryck blir lika med noll;
   används för att faktorisera polynom som inte går att faktorisera med
   utbrytning eller kvadrerings-/konjugatregeln.
-- **minsta gemensamma nämnaren (MGN)** — den minsta gemensamma nämnare som
+- **minsta gemensamma nämnaren (MGN)**: den minsta gemensamma nämnare som
   alla termer i ett uttryck eller en ekvation kan göras liknämniga med.
-- **liknämnigt** — när flera rationella uttryck har förlängts till samma
+- **liknämnigt**: när flera rationella uttryck har förlängts till samma
   nämnare, så att täljarna kan adderas eller subtraheras på ett
   gemensamt divisionsstreck.
-- **korsvis multiplikation** — genväg för att lösa en ekvation på formen
+- **korsvis multiplikation**: genväg för att lösa en ekvation på formen
   $\dfrac{a}{b} = \dfrac{c}{d}$: ger direkt $a \cdot d = c \cdot b$.
-- **definitionsmängd** — de $x$-värden en ekvation eller ett uttryck är
+- **definitionsmängd**: de $x$-värden en ekvation eller ett uttryck är
   definierat för; värden som gör en nämnare lika med noll måste alltid
   uteslutas.
-- **gränsvärde ($\lim$)** — det värde ett uttryck närmar sig, utan att
+- **gränsvärde ($\lim$)**: det värde ett uttryck närmar sig, utan att
   nödvändigtvis nå fram till det, när variabeln närmar sig ett tal eller en
   oändlighet.
-- **oändligheten ($\infty$)** — beteckning för att en variabel växer utan
+- **oändligheten ($\infty$)**: beteckning för att en variabel växer utan
   gräns ($x \to \infty$) eller avtar utan gräns ($x \to -\infty$).
-- **gränsvärde saknas** — när uttrycket går mot olika värden underifrån och
+- **gränsvärde saknas**: när uttrycket går mot olika värden underifrån och
   ovanifrån finns inget gemensamt gränsvärde.
-- **symbolhanterande hjälpmedel** — en räknare eller programvara (t.ex.
+- **symbolhanterande hjälpmedel**: en räknare eller programvara (t.ex.
   Geogebra) som förutom siffror även kan hantera algebraiska
   bokstavsuttryck.
 

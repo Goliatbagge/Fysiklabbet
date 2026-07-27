@@ -20,40 +20,40 @@ kortfattat och genomföra enkla bevis.
 
 ## Begrepp att kunna
 
-- **transversal** — en linje som skär minst två andra linjer.
-- **vinkelpar vid parallella linjer** — likbelägna vinklar,
+- **transversal**: en linje som skär minst två andra linjer.
+- **vinkelpar vid parallella linjer**: likbelägna vinklar,
   vertikalvinklar och alternatvinklar är parvis lika stora; sidovinklar
   summerar till 180°.
-- **bisektris** — en stråle som delar en vinkel mitt itu.
-- **månghörning** — en sluten figur som bara består av sträckor och
+- **bisektris**: en stråle som delar en vinkel mitt itu.
+- **månghörning**: en sluten figur som bara består av sträckor och
   hörn; tre hörn ger en triangel, fyra en fyrhörning och så vidare.
-- **rätvinklig, likbent och liksidig triangel** — klassificering efter
+- **rätvinklig, likbent och liksidig triangel**: klassificering efter
   vinklar/sidor: rätvinklig har en rät vinkel, likbent har minst två
   lika sidor (och lika stora basvinklar), liksidig har alla sidor och
   vinklar (60°) lika.
-- **implikation (⟹)** — ett påstående som medför ett annat, men inte
+- **implikation (⟹)**: ett påstående som medför ett annat, men inte
   nödvändigtvis tvärtom.
-- **ekvivalens (⟺)** — en implikation som gäller åt båda hållen.
-- **motexempel** — ett enda exempel som räcker för att visa att en
+- **ekvivalens (⟺)**: en implikation som gäller åt båda hållen.
+- **motexempel**: ett enda exempel som räcker för att visa att en
   implikation är falsk.
-- **axiom, definition och sats** — ett axiom är en grundsats utan
+- **axiom, definition och sats**: ett axiom är en grundsats utan
   bevis, en definition är en överenskommelse om ett begrepp och en sats
   är ett bevisat påstående.
-- **hypotenusa och kateter** — i en rätvinklig triangel är hypotenusan
+- **hypotenusa och kateter**: i en rätvinklig triangel är hypotenusan
   den längsta sidan (mitt emot den räta vinkeln); de två övriga sidorna
   kallas kateter.
-- **koordinatgeometri** — att studera geometriska figurer med hjälp av
+- **koordinatgeometri**: att studera geometriska figurer med hjälp av
   ett koordinatsystem, t.ex. med avståndsformeln och mittpunktsformeln.
-- **likformiga figurer (~)** — figurer med samma form men eventuellt
+- **likformiga figurer (~)**: figurer med samma form men eventuellt
   olika storlek, vridning eller spegling.
-- **skalfaktor** — talet som anger hur mycket större/mindre en
+- **skalfaktor**: talet som anger hur mycket större/mindre en
   likformig figur är jämfört med en annan.
-- **kongruenta trianglar (≅)** — trianglar som är likformiga OCH lika
+- **kongruenta trianglar (≅)**: trianglar som är likformiga OCH lika
   stora; avgörs med villkoren SVS, SSS eller VSV.
-- **randvinkel, medelpunktsvinkel och korda** — randvinkeln har spetsen
+- **randvinkel, medelpunktsvinkel och korda**: randvinkeln har spetsen
   på cirkelns rand, medelpunktsvinkeln i medelpunkten; kordan är en
   sträcka mellan två punkter på randen.
-- **inskriven fyrhörning** — en fyrhörning vars alla fyra hörn ligger på
+- **inskriven fyrhörning**: en fyrhörning vars alla fyra hörn ligger på
   en cirkels rand.
 
 ## Formler

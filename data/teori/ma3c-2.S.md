@@ -20,30 +20,30 @@ avgöra i vilka punkter en funktion inte är deriverbar.
 
 ## Begrepp att kunna
 
-- **sekant** — en rät linje som skär en kurva i två punkter; dess lutning
+- **sekant**: en rät linje som skär en kurva i två punkter; dess lutning
   ger kurvans medellutning i intervallet mellan punkterna.
-- **medellutning / riktningskoefficient / ändringskvot (*k*-värde)** —
+- **medellutning / riktningskoefficient / ändringskvot (*k*-värde)**:
   sekantens lutning, beräknad ur $k = \dfrac{\Delta y}{\Delta x}$.
-- **tangent** — en rät linje som snuddar (tangerar) en kurva i en enda
+- **tangent**: en rät linje som snuddar (tangerar) en kurva i en enda
   punkt; dess lutning motsvarar kurvans lutning i just den punkten.
-- **derivata ($f'(a)$)** — tangentens lutning i en given punkt; utläses
+- **derivata ($f'(a)$)**: tangentens lutning i en given punkt; utläses
   "$f$ prim av $a$".
-- **derivatans definition** — gränsvärdet av sekantens lutning då
+- **derivatans definition**: gränsvärdet av sekantens lutning då
   avståndet $h$ mellan de två punkterna går mot 0.
-- **deriverbar** — en funktion är deriverbar i en punkt om det går att
+- **deriverbar**: en funktion är deriverbar i en punkt om det går att
   beräkna derivatan (gränsvärdet) där.
-- **kontinuerlig funktion** — en funktion vars graf hänger ihop och kan
+- **kontinuerlig funktion**: en funktion vars graf hänger ihop och kan
   ritas "utan att lyfta pennan".
-- **diskontinuerlig funktion** — en funktion vars graf har ett hopp (öppen
+- **diskontinuerlig funktion**: en funktion vars graf har ett hopp (öppen
   ring och fylld prick på olika höjd) eller ett språng (t.ex. vid en
   lodrät asymptot).
-- **hörnpunkt** — en punkt där grafen bildar ett skarpt "hörn", t.ex. i
+- **hörnpunkt**: en punkt där grafen bildar ett skarpt "hörn", t.ex. i
   $x = 0$ för $f(x) = |x|$.
-- **absolutbelopp ($|a|$)** — ett tals avstånd till 0 på tallinjen; "tar
+- **absolutbelopp ($|a|$)**: ett tals avstånd till 0 på tallinjen; "tar
   bort" minustecknet från negativa tal.
-- **genomsnittlig förändringshastighet** — vad sekantens lutning står för
+- **genomsnittlig förändringshastighet**: vad sekantens lutning står för
   vid tillämpningar.
-- **momentanhastighet / förändringshastighet vid en tidpunkt** — vad
+- **momentanhastighet / förändringshastighet vid en tidpunkt**: vad
   tangentens lutning (derivatan) står för vid tillämpningar.
 
 ## Formler

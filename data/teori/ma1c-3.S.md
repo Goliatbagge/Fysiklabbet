@@ -21,34 +21,34 @@ cellreferenser.
 
 ## Begrepp att kunna
 
-- **procent (%)** — hundradel; $1\ \% = \frac{1}{100} = 0{,}01$.
-- **promille (‰)** — tusendel; $1\ \text{‰} = \frac{1}{1\,000} = 0{,}001$.
-- **ppm (parts per million)** — miljondel;
+- **procent (%)**: hundradel; $1\ \% = \frac{1}{100} = 0{,}01$.
+- **promille (‰)**: tusendel; $1\ \text{‰} = \frac{1}{1\,000} = 0{,}001$.
+- **ppm (parts per million)**: miljondel;
   $1\ \text{ppm} = \frac{1}{1\,000\,000} = 0{,}000\,001$.
-- **andel** — delen genom det hela, angiven i bråk- eller decimalform.
-- **förändringsfaktor** — talet man multiplicerar det gamla värdet med för
+- **andel**: delen genom det hela, angiven i bråk- eller decimalform.
+- **förändringsfaktor**: talet man multiplicerar det gamla värdet med för
   att direkt få det nya värdet vid en procentuell förändring.
-- **total förändringsfaktor** — produkten av flera förändringsfaktorer vid
+- **total förändringsfaktor**: produkten av flera förändringsfaktorer vid
   upprepade förändringar.
-- **ränta** — ersättning eller kostnad för lånade pengar, oftast angiven i
+- **ränta**: ersättning eller kostnad för lånade pengar, oftast angiven i
   procent (räntesats).
-- **årsränta** — den procentsats med vilken ett belopp växer (eller
+- **årsränta**: den procentsats med vilken ett belopp växer (eller
   kostar) per år; det som avses om enbart "ränta" nämns.
-- **behållning** — beloppet som finns på ett sparkonto vid en given
+- **behållning**: beloppet som finns på ett sparkonto vid en given
   tidpunkt.
-- **kalkylblad, cell** — verktyg (t.ex. Google Kalkylark, Excel) uppbyggt
+- **kalkylblad, cell**: verktyg (t.ex. Google Kalkylark, Excel) uppbyggt
   av celler namngivna med kolumnbokstav + radnummer (t.ex. B3); en formel
   i en cell inleds alltid med likhetstecknet =.
-- **fyllnadshandtag** — verktyget i kalkylbladets nedre högra cellhörn som
+- **fyllnadshandtag**: verktyget i kalkylbladets nedre högra cellhörn som
   kopierar en formel neråt i en kolumn.
-- **relativ och låst cellreferens** — en relativ referens (`B2`) ändras när
+- **relativ och låst cellreferens**: en relativ referens (`B2`) ändras när
   formeln kopieras till en ny rad; en låst referens (`$B$12`) hålls fast.
-- **lån** — pengar som lånas, från t.ex. en bank, och som ska betalas
+- **lån**: pengar som lånas, från t.ex. en bank, och som ska betalas
   tillbaka.
-- **amortera / amortering** — återbetalning av själva lånebeloppet
+- **amortera / amortering**: återbetalning av själva lånebeloppet
   (skulden).
-- **räntesats** — räntan uttryckt i procent av skulden.
-- **rak amortering** — samma amorteringsbelopp betalas vid varje
+- **räntesats**: räntan uttryckt i procent av skulden.
+- **rak amortering**: samma amorteringsbelopp betalas vid varje
   inbetalning, så räntan (och därmed hela inbetalningen) minskar efter
   hand som skulden minskar.
 

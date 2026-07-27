@@ -21,33 +21,33 @@ hjälp av grafritande hjälpmedel som Geogebra.
 
 ## Begrepp att kunna
 
-- **andragradsfunktion** — en funktion där variabelns högsta exponent
+- **andragradsfunktion**: en funktion där variabelns högsta exponent
   är 2, t.ex. $f(x) = ax^2 + bx + c$.
-- **andragradsterm** — termen med $x^2$ i funktionsuttrycket, t.ex.
+- **andragradsterm**: termen med $x^2$ i funktionsuttrycket, t.ex.
   $x^2$ eller $3x^2$; tecknet på termen avgör parabelns form.
-- **parabel** — den bågformade grafen till en andragradsfunktion.
-- **maximipunkt** — parabelns "topp", där funktionen har sitt största
+- **parabel**: den bågformade grafen till en andragradsfunktion.
+- **maximipunkt**: parabelns "topp", där funktionen har sitt största
   värde.
-- **minimipunkt** — parabelns "dal", där funktionen har sitt minsta
+- **minimipunkt**: parabelns "dal", där funktionen har sitt minsta
   värde.
-- **extrempunkt** — samlingsnamn för maximi- och minimipunkt.
-- **extrempunktens karaktär** — om extrempunkten är en maximi- eller
+- **extrempunkt**: samlingsnamn för maximi- och minimipunkt.
+- **extrempunktens karaktär**: om extrempunkten är en maximi- eller
   en minimipunkt; avgörs av tecknet på andragradstermen.
-- **symmetrilinje ($x_s$)** — den lodräta linje som parabeln är
+- **symmetrilinje ($x_s$)**: den lodräta linje som parabeln är
   symmetrisk kring; går alltid genom extrempunkten.
-- **nollställe** — $x$-värde där funktionen är 0 och grafen skär
+- **nollställe**: $x$-värde där funktionen är 0 och grafen skär
   $x$-axeln; en andragradsfunktion kan ha två, ett eller inga
   nollställen.
-- **utvecklad form** — funktionsuttrycket skrivet som
+- **utvecklad form**: funktionsuttrycket skrivet som
   $f(x) = ax^2 + bx + c$.
-- **faktorform** — funktionsuttrycket skrivet som
+- **faktorform**: funktionsuttrycket skrivet som
   $f(x) = k(x - x_1)(x - x_2)$ med nollställena $x_1$ och $x_2$.
-- **dubbelrot** — när en andragradsfunktions två nollställen
+- **dubbelrot**: när en andragradsfunktions två nollställen
   sammanfaller ($x_1 = x_2$); grafen nuddar då $x$-axeln i en enda
   punkt.
-- **största/minsta värde** — extrempunktens $y$-koordinat; störst vid
+- **största/minsta värde**: extrempunktens $y$-koordinat; störst vid
   en maximipunkt, minst vid en minimipunkt.
-- **skärningspunkt** — punkt där två grafer möts; används för att lösa
+- **skärningspunkt**: punkt där två grafer möts; används för att lösa
   ekvationer och olikheter grafiskt.
 
 ## Formler

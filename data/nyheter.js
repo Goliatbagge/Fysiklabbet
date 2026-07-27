@@ -1849,7 +1849,7 @@ const NYHETER_ALL = [
       url: "https://www.nature.com/articles/s41586-026-10538-z"
     },
     body: [
-      { type: "p", html: "Just medan du läser den här meningen susar omkring hundra biljoner neutriner rakt genom din tumnagel. De bryr sig inte det minsta om dig — eller om jorden, för den delen. De allra flesta passerar tvärs igenom hela planeten utan att ens nudda en enda atom. Neutrinen är universums mest asociala partikel, och just därför en av de allra svåraste att studera." },
+      { type: "p", html: "Just medan du läser den här meningen susar hundratals miljarder neutriner rakt genom din tumnagel. De bryr sig inte det minsta om dig — eller om jorden, för den delen. De allra flesta passerar tvärs igenom hela planeten utan att ens nudda en enda atom. Neutrinen är universums mest asociala partikel, och just därför en av de allra svåraste att studera." },
       { type: "p", html: "Men nu har fysikerna fått ett osedvanligt skarpt verktyg. Den 10&nbsp;juni 2026 publicerade <em>Nature</em> de första resultaten från <strong>JUNO</strong> — Jiangmen Underground Neutrino Observatory — ett gigantiskt detektorbygge 700&nbsp;meter under marken i södra Kina. Och redan med sina första veckors data har det ställt sig i främsta ledet bland världens neutrinoexperiment." },
 
       { type: "h2", text: "En glaskula stor som ett tolvvåningshus" },

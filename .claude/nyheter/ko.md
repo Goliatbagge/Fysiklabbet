@@ -14,25 +14,41 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-27) — kan tas upp senare
+
+- **Fyra vita dvärgar upptäckta i vårt kosmiska baklandskap** — University
+  of Warwick och University of Colorado Boulder har för första gången
+  direkt observerat fyra vita dvärgar i dubbelstjärnesystem i vår närmaste
+  omgivning. Bra astronomi/stjärnutveckling-vinkel (slutstadiet för
+  solliknande stjärnor), men vi har kört mycket astronomi senaste veckorna
+  och zink-70-nyheten (kärnfysik/nukleosyntes) vann dagens plats. Källa:
+  https://phys.org/news/2026-07-dead-stars-cosmic-backyard-astronomers.html
+  (tillagd 2026-07-27)
+- **Kvantvakuum kan hjälpa till att bryta molekylbindningar med mindre
+  energi** — Felipe Herrera m.fl. har visat att kopplingen mellan molekyler
+  och kvantfluktuationerna i det elektromagnetiska vakuumet (polariton-
+  kemi) kan sänka energin som krävs för att bryta kemiska bindningar.
+  Spännande kvantfysik/kemi-gränssnitt, men kräver rejäl förenkling av
+  vakuumfluktuationer och ljus-materia-koppling för gymnasienivå. Källa:
+  https://phys.org/news/2026-07-quantum-vacuum-molecular-bonds-energy.html
+  (tillagd 2026-07-27)
+- **Astronomer hittar de tidigaste tecknen på galaxbygge i universums
+  historia** — nya observationer visar att galaxer utvecklade komplexa
+  inre strukturer mycket tidigare än väntat. Astronomivinkel, men vi har
+  redan kört flera tidiga universum-nyheter (kvasarer 2026-07-06,
+  Vintergatans spiralarmar 2026-07-03) senaste veckorna. Källa:
+  https://phys.org/news/2026-07-astronomers-uncover-earliest-galaxy-action.html
+  (tillagd 2026-07-27)
+- **OBS — sökningen 2026-07-27 (måndag) hade fortfarande inget färskare än
+  2026-07-24/26 hos phys.org/physicsworld.com/sciencedaily.com/quanta**,
+  samma eftersläpningsmönster som redan noterats för helger — verkar även
+  gälla i alla fall någon dag efter en helg. Zink-70-nyheten (funnen och
+  sparad 2026-07-26, publicerad i <em>Nature</em> 2026-07-24) var
+  dagens starkaste, obrukade, väldokumenterade kandidat och användes
+  därför i dag. (tillagd 2026-07-27)
+
 ## Fynd som inte användes (2026-07-26) — kan tas upp senare
 
-- **Magnetiska "spår" i atomkärnor löser decennier gammal gåta om hur tunga
-  grundämnen bildas i stjärnor** — Eleanor Ronning (tidigare FRIB-doktorand,
-  nu postdok vid INFN Padua) och ett samarbete på 25 institutioner (ledda av
-  Michigan State University/FRIB) har visat att det gåtfulla överskottet av
-  lågenergetisk gammastrålning (”LEE”) från zink-70-kärnor beror på
-  magnetiska (inte elektriska) övergångar — genom att studera betasönderfall
-  från två olika tillstånd av koppar-70. Effekten gör att neutroninfångnings-
-  reaktioner sker oftare än väntat, vilket direkt påverkar beräkningar av
-  hur tunga grundämnen bildas i supernovor och neutronstjärnekrockar. Utmärkt
-  kärnfysik/astrofysik-vinkel (betasönderfall, gammastrålning,
-  nukleosyntes), tydlig och fräsch (publicerad i <em>Nature</em> 24 juli
-  2026). Sparas bara för att dagens artikel (altermagnetism) redan var vald
-  när denna hittades — stark kandidat för närmaste dagarna. Källor:
-  https://phys.org/news/2026-07-magnetic-clues-atomic-nuclei-elements.html ,
-  E. K. Ronning et al., ”Magnetic Character of the Low-Energy Enhancement in
-  <sup>70</sup>Zn”, Nature (2026), DOI: 10.1038/s41586-026-10758-3.
-  (tillagd 2026-07-26)
 - **Vintergatan kan ha genomgått en dramatisk "volt" för 10–11 miljarder år
   sedan** — Kirill Batrakov (Durham University) har med superdatorsimuleringar
   (Auriga-sviten, 25 Vintergats-lika galaxer) visat att galaxer med

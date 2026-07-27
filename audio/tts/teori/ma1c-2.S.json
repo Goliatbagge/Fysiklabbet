@@ -1,0 +1,343 @@
+{
+ "id": "ma1c-2.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c813c2d323e9edd4bdad75c27930c46e406ccff6",
+ "dur": 495.62,
+ "segments": [
+  {
+   "t": "Sammanfattning — Algebra och ekvationer",
+   "s": 0.1,
+   "e": 3.8
+  },
+  {
+   "t": "Det här kapitlet handlade om att teckna, tolka, förenkla, utveckla och faktorisera algebraiska uttryck, samt att lösa ekvationer och olikheter av flera olika slag — linjära ekvationer, ekvationer med nämnare, enkla andra- och tredjegradsekvationer, potensekvationer och olikheter.",
+   "s": 3.75,
+   "e": 22.18
+  },
+  {
+   "t": "Du har också övat på att lösa ut en variabel ur en formel och att hitta en sluten formel för en talföljd.",
+   "s": 22.18,
+   "e": 28.77
+  },
+  {
+   "t": "Du ska efter kapitlet kunna lösa dessa ekvationstyper metodiskt — aldrig genom att pröva dig fram — och avgöra hur många lösningar en ekvation eller olikhet har.",
+   "s": 28.77,
+   "e": 38.21
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 38.21,
+   "e": 40.52
+  },
+  {
+   "t": "variabel — bokstav (t.ex. x ) som representerar ett okänt eller varierande tal.",
+   "s": 40.52,
+   "e": 47.3
+  },
+  {
+   "t": "koefficient — talet som multiplicerar en variabel i en term (t.ex. 150 i 150 x ).",
+   "s": 47.3,
+   "e": 55.92
+  },
+  {
+   "t": "variabelterm / konstantterm — term som innehåller en variabel respektive en term som bara består av ett tal.",
+   "s": 55.92,
+   "e": 63.49
+  },
+  {
+   "t": "uttryckets värde — talet man får när man sätter in ett värde på variabeln och beräknar uttrycket.",
+   "s": 63.49,
+   "e": 69.88
+  },
+  {
+   "t": "förenkla uttryck — slå ihop likadana termer ( x -termer för sig, x i kvadrat -termer för sig, konstanttermer för sig och så vidare).",
+   "s": 69.88,
+   "e": 79.36
+  },
+  {
+   "t": "utveckla uttryck — skriva om ett parentesuttryck utan parenteser genom att multiplicera in faktorn i varje term.",
+   "s": 79.36,
+   "e": 86.96
+  },
+  {
+   "t": "distributiva lagen — regeln a parentesen b plus c slut parentes är lika med a b plus a c som ligger bakom all multiplikation med en parentes.",
+   "s": 86.96,
+   "e": 96.67
+  },
+  {
+   "t": "faktorisera uttryck — skriva ett uttryck som en multiplikation genom att bryta ut en gemensam faktor.",
+   "s": 96.67,
+   "e": 103.66
+  },
+  {
+   "t": "ekvation — likhet mellan två uttryck som innehåller en variabel; att lösa den innebär att lösa ut variabeln.",
+   "s": 103.66,
+   "e": 111.1
+  },
+  {
+   "t": "olikhet — jämförelse mellan två uttryck med ett olikhetstecken (<, >, ≤, ≥) i stället för likhetstecken.",
+   "s": 111.1,
+   "e": 117.71
+  },
+  {
+   "t": "andragradsekvation / tredjegradsekvation — ekvation där variabelns högsta exponent är 2 respektive 3.",
+   "s": 117.71,
+   "e": 125.26
+  },
+  {
+   "t": "potensekvation — ekvation där variabeln står upphöjd till en godtycklig exponent, x upphöjt till n är lika med a .",
+   "s": 125.26,
+   "e": 133.11
+  },
+  {
+   "t": "talföljd och element — en serie tal a ett, a två, a tre, ; varje tal i serien kallas ett element.",
+   "s": 133.11,
+   "e": 141.16
+  },
+  {
+   "t": "sluten formel — formel som ger ett godtyckligt element a n i en talföljd direkt, utan att räkna ut alla föregående element.",
+   "s": 141.16,
+   "e": 149.82
+  },
+  {
+   "t": "storhet och formel — något mätbart, t.ex. längd eller hastighet (storhet), respektive en ekvation som beskriver ett samband mellan storheter (formel).",
+   "s": 149.82,
+   "e": 160.84
+  },
+  {
+   "t": "Formler",
+   "s": 160.84,
+   "e": 162.66
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 162.66,
+   "e": 165.01
+  },
+  {
+   "t": "Distributiva lagen",
+   "s": 165.01,
+   "e": 167.44
+  },
+  {
+   "t": "a parentesen b plus c slut parentes är lika med a b plus a c",
+   "s": 167.44,
+   "e": 174.66
+  },
+  {
+   "t": "Ekvationslösningens grunder",
+   "s": 167.44,
+   "e": 174.66
+  },
+  {
+   "t": "Samma räkneoperation görs på båda led, med motsatt räknesätt för att få bort en term eller faktor:",
+   "s": 174.66,
+   "e": 184.21
+  },
+  {
+   "t": "addition tas bort genom subtraktion, och tvärtom",
+   "s": 174.66,
+   "e": 184.21
+  },
+  {
+   "t": "multiplikation tas bort genom division, och tvärtom",
+   "s": 184.21,
+   "e": 188.74
+  },
+  {
+   "t": "Enkla andra- och tredjegradsekvationer",
+   "s": 188.74,
+   "e": 192.18
+  },
+  {
+   "t": "x i kvadrat är lika med a parentesen a är större än eller lika med 0 slut parentes vilket ger att x är lika med plus minus roten ur a",
+   "s": 192.18,
+   "e": 204.96
+  },
+  {
+   "t": "x i kubik är lika med a vilket ger att x är lika med tredje roten ur a",
+   "s": 192.18,
+   "e": 204.96
+  },
+  {
+   "t": "där a är talet på ekvationens högerled.",
+   "s": 204.96,
+   "e": 208.84
+  },
+  {
+   "t": "I andragradsfallet saknas reella lösningar om a är mindre än 0 .",
+   "s": 208.84,
+   "e": 213.94
+  },
+  {
+   "t": "Potensekvationer",
+   "s": 213.94,
+   "e": 216.34
+  },
+  {
+   "t": "x upphöjt till n är lika med a vilket ger att x är lika med a upphöjt till 1 delat med n som är lika med n:e roten ur a",
+   "s": 216.34,
+   "e": 224.32
+  },
+  {
+   "t": "där jämn exponent n ger plus minus framför roten (två, en eller noll lösningar) och udda exponent ger en lösning utan plus minus .",
+   "s": 224.32,
+   "e": 233.71
+  },
+  {
+   "t": "Olikheter",
+   "s": 233.71,
+   "e": 235.79
+  },
+  {
+   "t": "Löses som ekvationer, men olikhetstecknet vänds vid multiplikation eller division med ett negativt tal.",
+   "s": 235.79,
+   "e": 243.2
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 243.2,
+   "e": 246.07
+  },
+  {
+   "t": "Ekvationer löses genom att göra samma räkneoperation på båda led — ALDRIG genom prövning (att gissa och testa sig fram till en lösning).",
+   "s": 246.07,
+   "e": 254.7
+  },
+  {
+   "t": "Ett minustecken framför en parentes byter tecken på alla termer inuti parentesen när parentesen tas bort; ett plustecken lämnar tecknen oförändrade.",
+   "s": 254.7,
+   "e": 264.35
+  },
+  {
+   "t": "Vid multiplikation av två parenteser ska varje term i den första parentesen multipliceras med varje term i den andra.",
+   "s": 264.35,
+   "e": 272.14
+  },
+  {
+   "t": "Vid faktorisering bryter man ut den största gemensamma talfaktorn och den minsta potensen av varje variabel som finns i alla termer.",
+   "s": 272.14,
+   "e": 280.21
+  },
+  {
+   "t": "Har ekvationen variabler i båda led: samla variabeltermerna på den sida som har minst koefficient, så blir fortsatt räkning enklare.",
+   "s": 280.21,
+   "e": 290.71
+  },
+  {
+   "t": "Leder ekvationslösningen till en falsk likhet (t.ex. minus 12 är lika med 63 ) saknar ekvationen lösning.",
+   "s": 290.66,
+   "e": 299.14
+  },
+  {
+   "t": "I ekvationer med variabeln i nämnaren måste man först ange vilka värden som gör nämnaren noll (och alltså inte är tillåtna); har ekvationen en bråkterm i vardera ledet löser man med korsvis multiplikation, och med tre eller fler bråktermer multiplicerar man båda led med minsta gemensamma nämnaren (MGN).",
+   "s": 299.14,
+   "e": 317.06
+  },
+  {
+   "t": "Problemlösning görs i tre steg: översätt (inför en beteckning och ställ upp en ekvation), lös ekvationen, och tolka och svara med enhet — och kontrollera att svaret är rimligt.",
+   "s": 317.06,
+   "e": 328.41
+  },
+  {
+   "t": "Andragradsolikheter löses genom att först undersöka gränsfallet (motsvarande ekvation) och sedan avgöra vilket intervall som uppfyller olikheten med hjälp av en tallinje.",
+   "s": 328.41,
+   "e": 339.15
+  },
+  {
+   "t": "I potensekvationer avgör exponentens jämnhet antalet lösningar: jämn exponent ger upp till två lösningar (med plus minus ), udda exponent ger alltid exakt en lösning.",
+   "s": 339.15,
+   "e": 350.32
+  },
+  {
+   "t": "En sluten formel för en talföljd hittas genom att gissa en term utifrån skillnaden mellan elementen, testa mot a ett , och justera med en konstant tills formeln stämmer för flera element.",
+   "s": 350.32,
+   "e": 361.25
+  },
+  {
+   "t": "Vid formelanvändning måste enheterna vara konsekventa genom hela beräkningen (t.ex. omvandla mil till km, och km/h till samma tidsenhet som övriga värden) innan man sätter in dem i formeln.",
+   "s": 361.25,
+   "e": 374.38
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 374.38,
+   "e": 377.4
+  },
+  {
+   "t": "Multiplikation av två parenteser: varje term i den första parentesen multipliceras med varje term i den andra — grunden för att utveckla uttryck som parentesen a plus b slut parentes parentesen c plus d slut parentes :",
+   "s": 377.4,
+   "e": 405.11
+  },
+  {
+   "t": "Andragradsolikheten x i kvadrat är mindre än 9 : gränsfallet x i kvadrat är lika med 9 ger x är lika med plus minus 3 , och lösningen är alla tal mellan −3 och 3, markerat på en tallinje:",
+   "s": 377.4,
+   "e": 405.11
+  },
+  {
+   "t": "Inför provet",
+   "s": 377.4,
+   "e": 405.11
+  },
+  {
+   "t": "Kan du teckna och tolka ett uttryck (variabel, koefficient, variabelterm, konstantterm), och förenkla det genom att slå ihop likadana termer och hantera tecken framför en parentes?",
+   "s": 405.11,
+   "e": 417.19
+  },
+  {
+   "t": "Kan du utveckla ett parentesuttryck med distributiva lagen, även när två parenteser multipliceras med varandra?",
+   "s": 417.19,
+   "e": 424.89
+  },
+  {
+   "t": "Kan du faktorisera ett uttryck genom att bryta ut en gemensam faktor (tal och variabel)?",
+   "s": 424.89,
+   "e": 431.49
+  },
+  {
+   "t": "Kan du lösa en linjär ekvation steg för steg, utan att pröva dig fram?",
+   "s": 431.49,
+   "e": 436.73
+  },
+  {
+   "t": "Vet du hur man löser en ekvation med variabler i båda led, och känner du igen när en ekvation saknar lösning?",
+   "s": 436.73,
+   "e": 444.04
+  },
+  {
+   "t": "Kan du lösa en ekvation med nämnare, ange vilka värden som inte är tillåtna, och välja rätt metod utifrån antalet bråktermer?",
+   "s": 444.04,
+   "e": 452.18
+  },
+  {
+   "t": "Kan du lösa ett problem genom att införa en beteckning, ställa upp en ekvation, lösa den och tolka svaret med rätt enhet?",
+   "s": 452.18,
+   "e": 460.0
+  },
+  {
+   "t": "Kan du lösa enkla andra- och tredjegradsekvationer och en potensekvation, och avgöra antalet lösningar utifrån exponentens jämnhet?",
+   "s": 460.0,
+   "e": 468.84
+  },
+  {
+   "t": "Kan du lösa en olikhet och komma ihåg att vända olikhetstecknet vid multiplikation eller division med ett negativt tal?",
+   "s": 468.84,
+   "e": 476.49
+  },
+  {
+   "t": "Kan du lösa en andragradsolikhet genom att undersöka gränsfallet och rita upp lösningen på en tallinje?",
+   "s": 476.49,
+   "e": 483.27
+  },
+  {
+   "t": "Kan du lösa ut en variabel ur en formel och sätta in värden med rätt enheter?",
+   "s": 483.27,
+   "e": 488.73
+  },
+  {
+   "t": "Kan du hitta en sluten formel för en talföljd och använda den för att beräkna ett element långt fram i följden?",
+   "s": 488.73,
+   "e": 495.62
+  }
+ ]
+}

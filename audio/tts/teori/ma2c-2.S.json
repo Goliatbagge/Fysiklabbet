@@ -1,0 +1,323 @@
+{
+ "id": "ma2c-2.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f6dd6504a45e7266343f4065f392e3e23516e1b0",
+ "dur": 479.11,
+ "segments": [
+  {
+   "t": "Sammanfattning — Algebra och andragradsekvationer",
+   "s": 0.1,
+   "e": 4.34
+  },
+  {
+   "t": "Det här kapitlet handlade om hur man utvecklar och faktoriserar algebraiska uttryck, och hur man löser alla typer av andragradsekvationer — från enkla ekvationer med bara x i kvadrat - och x -termer till fullständiga ekvationer med en konstantterm, samt ekvationer där x står under ett rottecken.",
+   "s": 4.29,
+   "e": 20.94
+  },
+  {
+   "t": "Du ska efter kapitlet kunna välja rätt lösningsmetod utifrån ekvationens utseende, avgöra antalet lösningar utan att lösa ekvationen färdigt, och använda allt detta i problemlösning.",
+   "s": 20.94,
+   "e": 32.38
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 32.38,
+   "e": 34.7
+  },
+  {
+   "t": "kvadreringsreglerna — genvägar för att utveckla parentesen a plus b slut parentes i kvadrat och parentesen a minus b slut parentes i kvadrat utan att multiplicera ut parentes för parentes.",
+   "s": 34.7,
+   "e": 46.92
+  },
+  {
+   "t": "konjugatregeln — genväg för att utveckla ett \"kvadrat minus kvadrat\"-uttryck: parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus b i kvadrat .",
+   "s": 46.92,
+   "e": 59.86
+  },
+  {
+   "t": "faktorisera — skriva om ett uttryck som en multiplikation, t.ex. genom att bryta ut en gemensam faktor eller använda en kvadrerings- eller konjugatregel baklänges.",
+   "s": 59.86,
+   "e": 70.46
+  },
+  {
+   "t": "rationellt uttryck — ett bråkuttryck som innehåller x ; förkortas genom att faktorisera täljare och nämnare och stryka gemensamma faktorer.",
+   "s": 70.46,
+   "e": 79.56
+  },
+  {
+   "t": "nollproduktmetoden — lösningsmetod för ekvationer där en produkt är lika med 0: minst en av faktorerna måste då vara 0.",
+   "s": 79.56,
+   "e": 87.78
+  },
+  {
+   "t": "rot — en annan benämning på en lösning till en ekvation.",
+   "s": 87.78,
+   "e": 92.36
+  },
+  {
+   "t": "pq-formeln — formel som ger lösningarna till en fullständig andragradsekvation på formen x i kvadrat plus p x plus q är lika med 0 .",
+   "s": 92.36,
+   "e": 101.34
+  },
+  {
+   "t": "abc-formeln — formel som ger lösningarna till en fullständig andragradsekvation på formen a x i kvadrat plus b x plus c är lika med 0 , utan att koefficienten framför x i kvadrat behöver divideras bort först.",
+   "s": 101.34,
+   "e": 114.84
+  },
+  {
+   "t": "diskriminant — uttrycket under rottecknet i pq-formeln eller abc-formeln; tecknet avgör hur många lösningar ekvationen har.",
+   "s": 114.84,
+   "e": 123.35
+  },
+  {
+   "t": "rotekvation — en ekvation där den obekanta står under ett rottecken.",
+   "s": 123.35,
+   "e": 128.54
+  },
+  {
+   "t": "falsk rot — en lösning som uppstår vid kvadrering men som inte uppfyller den ursprungliga ekvationen.",
+   "s": 128.54,
+   "e": 135.18
+  },
+  {
+   "t": "variabelsubstitution — att byta ut ett uttryck (t.ex. roten ur x ) mot en ny variabel för att förenkla en ekvation innan man löser den.",
+   "s": 135.18,
+   "e": 144.18
+  },
+  {
+   "t": "Formler",
+   "s": 144.18,
+   "e": 146.0
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 146.0,
+   "e": 148.36
+  },
+  {
+   "t": "Kvadreringsreglerna",
+   "s": 148.36,
+   "e": 150.66
+  },
+  {
+   "t": "parentesen a plus b slut parentes i kvadrat är lika med a i kvadrat plus 2 a b plus b i kvadrat",
+   "s": 150.66,
+   "e": 158.68
+  },
+  {
+   "t": "parentesen a minus b slut parentes i kvadrat är lika med a i kvadrat minus 2 a b plus b i kvadrat",
+   "s": 158.68,
+   "e": 166.86
+  },
+  {
+   "t": "Konjugatregeln",
+   "s": 166.86,
+   "e": 169.1
+  },
+  {
+   "t": "parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus b i kvadrat",
+   "s": 169.1,
+   "e": 178.01
+  },
+  {
+   "t": "Nollproduktmetoden",
+   "s": 178.01,
+   "e": 180.53
+  },
+  {
+   "t": "A gånger B är lika med 0 vilket är ekvivalent med att A är lika med 0 eller B som är lika med 0",
+   "s": 180.53,
+   "e": 187.09
+  },
+  {
+   "t": "pq-formeln",
+   "s": 187.09,
+   "e": 189.2
+  },
+  {
+   "t": "x i kvadrat plus p x plus q är lika med 0",
+   "s": 189.2,
+   "e": 193.68
+  },
+  {
+   "t": "har lösningarna",
+   "s": 193.68,
+   "e": 196.11
+  },
+  {
+   "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 196.11,
+   "e": 204.69
+  },
+  {
+   "t": "där p är koefficienten framför x -termen och q är konstanttermen.",
+   "s": 204.69,
+   "e": 210.04
+  },
+  {
+   "t": "abc-formeln",
+   "s": 210.04,
+   "e": 212.4
+  },
+  {
+   "t": "a x i kvadrat plus b x plus c är lika med 0",
+   "s": 212.4,
+   "e": 217.44
+  },
+  {
+   "t": "har lösningarna",
+   "s": 217.44,
+   "e": 219.86
+  },
+  {
+   "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
+   "s": 219.86,
+   "e": 228.01
+  },
+  {
+   "t": "där a, b och c är koefficienterna respektive konstanttermen i ekvationen ( a är inte lika med 0 ).",
+   "s": 228.01,
+   "e": 235.74
+  },
+  {
+   "t": "Diskriminant (uttrycket under rottecknet i pq-formeln)",
+   "s": 235.74,
+   "e": 240.84
+  },
+  {
+   "t": "parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 240.84,
+   "e": 247.59
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 240.84,
+   "e": 247.59
+  },
+  {
+   "t": "Välj metod efter vilka termer ekvationen innehåller: bara x i kvadrat - och x -termer (ingen konstantterm) ger nollproduktmetoden; en fullständig ekvation med konstantterm ger pq-formeln eller abc-formeln.",
+   "s": 247.59,
+   "e": 261.19
+  },
+  {
+   "t": "Vid faktorisering: bryt alltid ut en gemensam faktor först, om möjligt, innan du provar en kvadrerings- eller konjugatregel baklänges.",
+   "s": 261.19,
+   "e": 270.85
+  },
+  {
+   "t": "\"Kvadrat minus kvadrat\" (två termer) ger konjugatregeln.",
+   "s": 270.85,
+   "e": 275.8
+  },
+  {
+   "t": "Tre termer där första och sista är kvadrater ger en kvadreringsregel; kontrollera alltid att mittentermen stämmer med den dubbla produkten, och läs av tecknet (plus första regeln, minus andra regeln).",
+   "s": 275.8,
+   "e": 288.09
+  },
+  {
+   "t": "Nollproduktmetoden kräver att högra ledet är 0 och att vänstra ledet är faktoriserat — flytta över alla termer innan du faktoriserar.",
+   "s": 288.09,
+   "e": 298.69
+  },
+  {
+   "t": "pq-formeln kräver att koefficienten framför x i kvadrat -termen är 1; är den inte det, dividera hela ekvationen med koefficienten först (eller använd abc-formeln, som fungerar direkt oavsett koefficient).",
+   "s": 298.64,
+   "e": 312.22
+  },
+  {
+   "t": "Diskriminantens tecken avgör antalet lösningar utan att du behöver räkna färdigt: positiv ger två lösningar, noll ger en (en så kallad dubbelrot) och negativ ger inga lösningar (kvadratroten ur ett negativt tal saknar reell mening).",
+   "s": 312.22,
+   "e": 327.31
+  },
+  {
+   "t": "En ekvation med givna rötter x ett och x två kan konstrueras med nollproduktmetoden baklänges: parentesen x minus x ett slut parentes parentesen x minus x två slut parentes är lika med 0 .",
+   "s": 327.31,
+   "e": 340.76
+  },
+  {
+   "t": "Vid problemlösning: tolka problemet och inför variabler (rita figur vid behov), ställ upp en eller flera ekvationer, lös dem, och tolka sedan svaret — förkasta lösningar som inte är rimliga (t.ex. negativa längder eller negativa antal).",
+   "s": 340.76,
+   "e": 356.29
+  },
+  {
+   "t": "Vid rotekvationer: isolera rotuttrycket i ett led, kvadrera båda led, lös ekvationen med lämplig metod och kontrollera alltid lösningen i den ursprungliga ekvationen — kvadrering kan skapa falska rötter.",
+   "s": 356.29,
+   "e": 368.96
+  },
+  {
+   "t": "Variabelsubstitution (t.ex. roten ur x är lika med t ) förenklar en rotekvation till en vanlig andragradsekvation i t — glöm inte att räkna tillbaka till x och kontrollera lösningarna på slutet.",
+   "s": 368.96,
+   "e": 381.4
+  },
+  {
+   "t": "Förkorta ett rationellt uttryck genom att faktorisera täljare och nämnare fullständigt och sedan stryka de faktorer som finns i båda.",
+   "s": 381.4,
+   "e": 389.51
+  },
+  {
+   "t": "Inför provet",
+   "s": 389.51,
+   "e": 391.65
+  },
+  {
+   "t": "Kan du kvadreringsreglerna och konjugatregeln utantill, och känner du igen när ett uttryck ska utvecklas eller faktoriseras med dem?",
+   "s": 391.65,
+   "e": 399.81
+  },
+  {
+   "t": "Kan du bryta ut en gemensam faktor ur ett uttryck innan du provar kvadrerings- eller konjugatregeln baklänges?",
+   "s": 399.81,
+   "e": 407.3
+  },
+  {
+   "t": "Kan du förkorta ett rationellt uttryck genom att faktorisera täljare och nämnare?",
+   "s": 407.3,
+   "e": 412.96
+  },
+  {
+   "t": "Vet du när nollproduktmetoden kan användas, och kan du lösa en ekvation med den (inklusive att flytta över termer så att högra ledet blir 0 först)?",
+   "s": 412.96,
+   "e": 422.57
+  },
+  {
+   "t": "Kan du pq-formeln utantill och vet du vad som krävs för att den ska få användas (koefficienten framför x i kvadrat måste vara 1)?",
+   "s": 422.57,
+   "e": 431.3
+  },
+  {
+   "t": "Kan du abc-formeln och vet du vad som skiljer den från pq-formeln?",
+   "s": 431.3,
+   "e": 436.12
+  },
+  {
+   "t": "Kan du avgöra hur många lösningar en andragradsekvation har genom att titta på diskriminantens tecken, utan att lösa ekvationen färdigt?",
+   "s": 436.12,
+   "e": 444.9
+  },
+  {
+   "t": "Kan du konstruera en ekvation som har givna rötter?",
+   "s": 444.9,
+   "e": 449.12
+  },
+  {
+   "t": "Kan du lösa en problemlösningsuppgift som leder till en andragradsekvation, och avgöra vilken av lösningarna som är rimlig?",
+   "s": 449.12,
+   "e": 456.85
+  },
+  {
+   "t": "Vet du hur man löser en rotekvation genom att isolera rotuttrycket och kvadrera, och varför man alltid måste kontrollera lösningarna?",
+   "s": 456.85,
+   "e": 465.05
+  },
+  {
+   "t": "Kan du lösa en rotekvation med variabelsubstitution?",
+   "s": 465.05,
+   "e": 469.52
+  },
+  {
+   "t": "Vet du varför falska rötter kan uppstå vid kvadrering, och kan du förklara det med ett enkelt exempel ( A är lika med B jämfört med A är lika med minus B )?",
+   "s": 469.52,
+   "e": 479.11
+  }
+ ]
+}

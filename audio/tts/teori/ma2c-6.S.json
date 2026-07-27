@@ -1,0 +1,408 @@
+{
+ "id": "ma2c-6.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e791945f81fcf7336182a3a185f60d3cb59ebf22",
+ "dur": 625.02,
+ "segments": [
+  {
+   "t": "Sammanfattning — Statistik",
+   "s": 0.1,
+   "e": 3.1
+  },
+  {
+   "t": "Det här kapitlet handlade om att beskriva och tolka statistiskt material.",
+   "s": 3.05,
+   "e": 8.21
+  },
+  {
+   "t": "Du har sett hur en datamängd sammanfattas med lägesmått som medelvärde, median och typvärde, och hur dess spridning beskrivs med variationsbredd, lådagram, kvartilavstånd och standardavvikelse.",
+   "s": 8.21,
+   "e": 20.2
+  },
+  {
+   "t": "Du har också sett hur normalfördelningen används för att uppskatta andelar, samt hur linjär och andra regressionsmodeller används för att hitta och beskriva samband mellan två variabler.",
+   "s": 20.2,
+   "e": 30.88
+  },
+  {
+   "t": "Genomgående används digitala verktyg som Geogebra för beräkningarna.",
+   "s": 30.88,
+   "e": 36.2
+  },
+  {
+   "t": "Du ska efter kapitlet kunna välja rätt läges- och spridningsmått för en given situation, tolka lådagram och normalfördelningskurvor, samt ta fram och tolka en regressionsmodell.",
+   "s": 36.2,
+   "e": 46.96
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 46.96,
+   "e": 49.29
+  },
+  {
+   "t": "lägesmått — ett sammanfattande värde för ett statistiskt material; de vanligaste är medelvärde, median och typvärde.",
+   "s": 49.29,
+   "e": 57.33
+  },
+  {
+   "t": "medelvärde — summan av alla värden delat med antalet värden; det vanligaste lägesmåttet, men känsligt för enstaka extremvärden.",
+   "s": 57.33,
+   "e": 66.1
+  },
+  {
+   "t": "median — värdet i mitten när alla värden sorterats i storleksordning (medelvärdet av de två mittersta om antalet är jämnt); ofta bättre än medelvärdet vid sned fördelning.",
+   "s": 66.1,
+   "e": 77.31
+  },
+  {
+   "t": "typvärde — det värde som förekommer flest gånger; det enda lägesmåttet som går att använda även på data som inte är siffror.",
+   "s": 77.31,
+   "e": 85.26
+  },
+  {
+   "t": "frekvens — hur många gånger ett visst värde, eller en viss klass, förekommer i en datamängd.",
+   "s": 85.26,
+   "e": 91.74
+  },
+  {
+   "t": "klass och klassmitt — vid intervallindelad data (t.ex. i ett histogram) räknas varje värde som om det låg i sin klassmitt, intervallets mittpunkt.",
+   "s": 91.74,
+   "e": 101.72
+  },
+  {
+   "t": "variationsbredd — skillnaden mellan det största och det minsta värdet i en datamängd; det enklaste spridningsmåttet.",
+   "s": 101.72,
+   "e": 108.99
+  },
+  {
+   "t": "kvartil ( Q ett , Q två , Q tre ) — de tre värden som delar en sorterad datamängd i fyra lika stora delar; Q två är samma sak som medianen.",
+   "s": 108.99,
+   "e": 119.59
+  },
+  {
+   "t": "lådagram — diagram som visar minsta värdet, Q ett , medianen, Q tre och största värdet; en \"låda\" mellan kvartilerna med \"morrhår\" ut till minsta och största värdet.",
+   "s": 119.59,
+   "e": 130.81
+  },
+  {
+   "t": "kvartilavstånd — skillnaden mellan övre och nedre kvartil, Q tre minus Q ett ; lådans bredd i lådagrammet, ett mått på spridningen i mitten av materialet.",
+   "s": 130.81,
+   "e": 141.09
+  },
+  {
+   "t": "percentil — ett värde som en given andel av datamängden ligger under; t.ex. anger p nio noll gränsen för de 10 procent högsta värdena.",
+   "s": 141.09,
+   "e": 150.09
+  },
+  {
+   "t": "standardavvikelse ( sigma , s ) — hur mycket värdena i genomsnitt avviker från medelvärdet; sigma används vid totalundersökning och s vid stickprovsundersökning.",
+   "s": 150.09,
+   "e": 160.99
+  },
+  {
+   "t": "normalfördelning ( my , sigma ) — en symmetrisk fördelning kring medelvärdet my där andelen värden inom ett givet antal standardavvikelser sigma alltid är densamma.",
+   "s": 160.99,
+   "e": 171.55
+  },
+  {
+   "t": "korrelation och korrelationskoefficient ( r ) — hur starkt två variabler hänger ihop, avläst i ett spridningsdiagram; r ligger mellan −1 (perfekt negativ) och 1 (perfekt positiv), och 0 betyder ingen korrelation.",
+   "s": 171.55,
+   "e": 185.93
+  },
+  {
+   "t": "regressionslinje och regressionsmodell — regressionslinjen är den räta linje som bäst beskriver ett linjärt samband (linjär regression); andra samband beskrivs i stället med en exponentiell, potens- eller andragradsmodell, och r i kvadrat -värdet avgör vilken modell som passar bäst.",
+   "s": 185.93,
+   "e": 203.01
+  },
+  {
+   "t": "Formler",
+   "s": 203.01,
+   "e": 204.84
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 204.84,
+   "e": 207.2
+  },
+  {
+   "t": "Medelvärde",
+   "s": 207.2,
+   "e": 209.22
+  },
+  {
+   "t": "medelvärde är lika med summan av alla värden delat med antalet värden",
+   "s": 209.22,
+   "e": 214.32
+  },
+  {
+   "t": "Variationsbredd",
+   "s": 214.32,
+   "e": 216.56
+  },
+  {
+   "t": "variationsbredd är lika med största värdet minus minsta värdet",
+   "s": 216.56,
+   "e": 221.49
+  },
+  {
+   "t": "Kvartilavstånd",
+   "s": 221.49,
+   "e": 223.62
+  },
+  {
+   "t": "kvartilavstånd är lika med övre kvartil minus nedre kvartil",
+   "s": 223.62,
+   "e": 228.43
+  },
+  {
+   "t": "Kvartilavståndet skrivs ofta Q tre minus Q ett .",
+   "s": 228.43,
+   "e": 232.97
+  },
+  {
+   "t": "Standardavvikelse",
+   "s": 232.97,
+   "e": 235.38
+  },
+  {
+   "t": "sigma är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n",
+   "s": 235.38,
+   "e": 250.47
+  },
+  {
+   "t": "s är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n minus 1",
+   "s": 250.47,
+   "e": 265.91
+  },
+  {
+   "t": "där",
+   "s": 265.91,
+   "e": 267.41
+  },
+  {
+   "t": "sigma är lika med standardavvikelse vid totalundersökning",
+   "s": 267.41,
+   "e": 272.01
+  },
+  {
+   "t": "s är lika med standardavvikelse vid stickprovsundersökning",
+   "s": 272.01,
+   "e": 278.29
+  },
+  {
+   "t": "bar x är lika med medelvärdet",
+   "s": 278.24,
+   "e": 281.69
+  },
+  {
+   "t": "n är lika med antalet värden",
+   "s": 281.69,
+   "e": 284.64
+  },
+  {
+   "t": "I den här kursen beräknas standardavvikelsen med ett digitalt verktyg, inte för hand.",
+   "s": 284.64,
+   "e": 290.42
+  },
+  {
+   "t": "Regressionsmodeller",
+   "s": 290.42,
+   "e": 292.88
+  },
+  {
+   "t": "Linjär: y är lika med k x plus m — rät linje, konstant ökning eller minskning.",
+   "s": 292.88,
+   "e": 299.68
+  },
+  {
+   "t": "Exponentiell: y är lika med C gånger a upphöjt till x — liten förändring i början, stor i slutet (eller tvärtom).",
+   "s": 299.68,
+   "e": 308.09
+  },
+  {
+   "t": "Potens: y är lika med C gånger x upphöjt till a — kurva som vänder och går genom origo.",
+   "s": 308.09,
+   "e": 315.01
+  },
+  {
+   "t": "Polynom (grad 2): y är lika med a x i kvadrat plus b x plus c — kurva som vänder, inte nödvändigtvis genom origo.",
+   "s": 315.01,
+   "e": 324.82
+  },
+  {
+   "t": "där",
+   "s": 324.82,
+   "e": 326.31
+  },
+  {
+   "t": "r är lika med korrelationskoefficienten (mellan −1 och 1)",
+   "s": 326.31,
+   "e": 331.46
+  },
+  {
+   "t": "r i kvadrat är lika med kvadraten på korrelationskoefficienten (mellan 0 och 1)",
+   "s": 331.46,
+   "e": 337.98
+  },
+  {
+   "t": "Ju närmare 1 (eller −1 för r ) dessa värden ligger, desto bättre beskriver modellen punkterna.",
+   "s": 337.98,
+   "e": 344.59
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 344.59,
+   "e": 347.47
+  },
+  {
+   "t": "Välj lägesmått efter sammanhanget: medelvärde är standard, men om enstaka extremvärden (uteliggare) drar med sig medelvärdet är medianen ofta mer representativ.",
+   "s": 347.47,
+   "e": 358.51
+  },
+  {
+   "t": "Typvärdet är det enda lägesmåttet som fungerar även för data som inte är siffror, t.ex. bilmärken eller färger.",
+   "s": 358.51,
+   "e": 366.41
+  },
+  {
+   "t": "I klassindelat material (t.ex. i ett histogram) räknas varje värde som om det låg i sin klassmitt när medelvärdet ska beräknas.",
+   "s": 366.41,
+   "e": 375.29
+  },
+  {
+   "t": "I ett lådagram innehåller varje del — vänster morrhår, vänstra lådan, högra lådan och höger morrhår — alltid 25 procent av värdena; en bred del betyder stor spridning i det området, en smal del liten spridning.",
+   "s": 375.29,
+   "e": 388.96
+  },
+  {
+   "t": "Percentiler generaliserar kvartiler till hundradelar: p nio noll är gränsen under vilken 90 procent av värdena ligger, och beräknas med digitalt verktyg (i Geogebra: kommandot Percentil).",
+   "s": 388.96,
+   "e": 401.63
+  },
+  {
+   "t": "Standardavvikelsen mäter hur mycket värdena i genomsnitt avviker från medelvärdet: större spridning ger större standardavvikelse, ingen spridning alls ger standardavvikelsen 0 .",
+   "s": 401.63,
+   "e": 412.13
+  },
+  {
+   "t": "Normalfördelningskurvans klassiska procentsatser är värda att kunna utantill: 34,1 procent av värdena ligger inom en standardavvikelse från my åt vardera hållet, ytterligare 13,6 procent ligger i nästa steg (mellan en och två standardavvikelser), och bara 2,3 procent ligger mer än två standardavvikelser bort.",
+   "s": 412.13,
+   "e": 431.48
+  },
+  {
+   "t": "Ju mindre spridningen är, desto högre och smalare blir kurvan — även om medelvärdet my är detsamma.",
+   "s": 431.48,
+   "e": 438.08
+  },
+  {
+   "t": "I Geogebras Envariabelanalys läser du av n , medelvärde, min, Q ett , median, Q tre och max i samma tabell; sannolikhetskalkylatorn används i stället för att räkna ut andelar i en normalfördelning givet my och sigma .",
+   "s": 438.08,
+   "e": 453.13
+  },
+  {
+   "t": "Ett spridningsdiagram visar om ett samband finns mellan två variabler: stark korrelation ger punkter tätt intill en linje, svag korrelation ger mer utspridda punkter; lutningen avgör om korrelationen är positiv eller negativ.",
+   "s": 453.13,
+   "e": 466.48
+  },
+  {
+   "t": "Korrelationskoefficienten r mäter styrkan i ett linjärt samband, medan r i kvadrat -värdet används för att jämföra hur väl olika regressionsmodeller (linjär, exponentiell, potens, polynom) passar samma punkter — modellen med r i kvadrat närmast 1 är bäst anpassad.",
+   "s": 466.48,
+   "e": 483.58
+  },
+  {
+   "t": "Kom ihåg att Geogebra kräver decimalpunkt i stället för decimalkomma när tal matas in, t.ex. 165,5 ger 165.5.",
+   "s": 483.58,
+   "e": 494.41
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 494.41,
+   "e": 497.46
+  },
+  {
+   "t": "Ett lådagram med de fem viktiga värdena — minsta värdet, nedre kvartil Q ett , medianen Q två , övre kvartil Q tre och största värdet.",
+   "s": 497.46,
+   "e": 507.02
+  },
+  {
+   "t": "Varje del innehåller 25 procent av materialet:",
+   "s": 507.02,
+   "e": 522.81
+  },
+  {
+   "t": "Normalfördelningskurvan och dess klassiska procentsatser kring medelvärdet my och standardavvikelsen sigma :",
+   "s": 507.02,
+   "e": 522.81
+  },
+  {
+   "t": "Fyra typiska kurvformer som hjälper dig avgöra vilken regressionsmodell som passar en punktsamling:",
+   "s": 507.02,
+   "e": 522.81
+  },
+  {
+   "t": "Inför provet",
+   "s": 507.02,
+   "e": 522.81
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan medelvärde, median och typvärde, och avgöra vilket som är lämpligast i ett givet fall?",
+   "s": 522.81,
+   "e": 530.49
+  },
+  {
+   "t": "Vet du hur man beräknar medelvärdet för klassindelat material med hjälp av klassmitter?",
+   "s": 530.49,
+   "e": 536.42
+  },
+  {
+   "t": "Kan du för hand bestämma variationsbredd, kvartilerna Q ett , Q två och Q tre , samt kvartilavståndet för en datamängd?",
+   "s": 536.42,
+   "e": 544.73
+  },
+  {
+   "t": "Kan du rita och tolka ett lådagram, och förklara att varje del innehåller 25 procent av värdena?",
+   "s": 544.73,
+   "e": 553.11
+  },
+  {
+   "t": "Vet du vad en percentil är, och kan du bestämma en given percentil (t.ex. p nio noll ) med Geogebra?",
+   "s": 553.06,
+   "e": 560.45
+  },
+  {
+   "t": "Kan du förklara vad standardavvikelsen mäter, och skillnaden mellan sigma (totalundersökning) och s (stickprovsundersökning)?",
+   "s": 560.45,
+   "e": 569.17
+  },
+  {
+   "t": "Kan du använda Geogebras Envariabelanalys för att ta fram n , medelvärde, min, kvartiler, median, max och standardavvikelse?",
+   "s": 569.17,
+   "e": 579.11
+  },
+  {
+   "t": "Känner du till normalfördelningskurvans procentsatser ( 34,1 procent , 13,6 procent och 2,3 procent ) och kan du använda dem för att uppskatta andelar?",
+   "s": 579.11,
+   "e": 590.19
+  },
+  {
+   "t": "Kan du använda Geogebras sannolikhetskalkylator för att bestämma en andel i en normalfördelning, givet my och sigma ?",
+   "s": 590.19,
+   "e": 597.92
+  },
+  {
+   "t": "Kan du avgöra om en korrelation är stark eller svag, och positiv eller negativ, utifrån ett spridningsdiagram?",
+   "s": 597.92,
+   "e": 605.7
+  },
+  {
+   "t": "Kan du ta fram en regressionslinjes ekvation och korrelationskoefficienten r med digitalt verktyg, och använda ekvationen för att uppskatta värden?",
+   "s": 605.7,
+   "e": 614.7
+  },
+  {
+   "t": "Vet du hur man med hjälp av r i kvadrat -värdet avgör vilken regressionsmodell — linjär, exponentiell, potens eller polynom — som passar en punktsamling bäst?",
+   "s": 614.7,
+   "e": 625.02
+  }
+ ]
+}

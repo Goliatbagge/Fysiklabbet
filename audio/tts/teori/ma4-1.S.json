@@ -1,0 +1,493 @@
+{
+ "id": "ma4-1.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "81d860e9617cbc1295cca5c3073edee6838d60c7",
+ "dur": 878.27,
+ "segments": [
+  {
+   "t": "Sammanfattning — Trigonometri",
+   "s": 0.1,
+   "e": 3.23
+  },
+  {
+   "t": "Det här kapitlet handlade om trigonometri: hur sinus, cosinus och tangens definieras både i en rätvinklig triangel och på enhetscirkeln, hur trigonometriska ekvationer löses fullständigt (med periodterm) och i givna intervall, samt hur sinus- och cosinusfunktionernas grafer formas av amplitud, period och förskjutning.",
+   "s": 3.17,
+   "e": 22.98
+  },
+  {
+   "t": "Du ska efter kapitlet kunna räkna med grader och radianer, använda trigonometriska samband (ettan, additions- och subtraktionsformlerna, dubbla vinkeln) för att förenkla uttryck, bevisa identiteter och lösa ekvationer, samt tolka och ställa upp sinusmodeller för periodiska förlopp.",
+   "s": 22.98,
+   "e": 40.45
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 40.45,
+   "e": 42.76
+  },
+  {
+   "t": "hypotenusa — sidan mitt emot den räta vinkeln i en rätvinklig triangel; alltid triangelns längsta sida.",
+   "s": 42.76,
+   "e": 49.85
+  },
+  {
+   "t": "katet — de två kortare sidorna i en rätvinklig triangel; motstående katet ligger mitt emot vinkeln v, närliggande katet bildar vinkeln v tillsammans med hypotenusan.",
+   "s": 49.85,
+   "e": 61.05
+  },
+  {
+   "t": "inversa trigonometriska funktioner ( tangens upphöjt till minus 1 , sinus upphöjt till minus 1 , cosinus upphöjt till minus 1 ) — ger vinkeln när ett sidoförhållande är känt; kallas även arctan, arcsin och arccos.",
+   "s": 61.05,
+   "e": 75.01
+  },
+  {
+   "t": "enhetscirkeln — en cirkel med radien 1 och medelpunkt i origo; en vinkel v mätt moturs från positiva x-axeln ger punkten parentesen cosinus v, sinus v slut parentes på randen.",
+   "s": 75.01,
+   "e": 87.4
+  },
+  {
+   "t": "radian — vinkelmått där 1 radian spänner upp en cirkelbåge lika lång som radien; pi rad är lika med 180 grader .",
+   "s": 87.4,
+   "e": 95.51
+  },
+  {
+   "t": "komplementvinklar — två vinklar vars summa är 90 grader ; sinus för den ena är cosinus för den andra.",
+   "s": 95.51,
+   "e": 102.62
+  },
+  {
+   "t": "trigonometriska ettan — sambandet sinus i kvadrat v plus cosinus i kvadrat v är lika med 1 , som gäller för alla vinklar v.",
+   "s": 102.62,
+   "e": 111.3
+  },
+  {
+   "t": "additions- och subtraktionsformler — uttryck för sinus parentesen u plus minus v slut parentes och cosinus parentesen u plus minus v slut parentes i termer av sinus och cosinus för u och v var för sig.",
+   "s": 111.3,
+   "e": 124.16
+  },
+  {
+   "t": "dubbla vinkeln — formler för sinus 2 v och cosinus 2 v , som fås genom att sätta u är lika med v i additionsformlerna.",
+   "s": 124.16,
+   "e": 132.82
+  },
+  {
+   "t": "amplitud — avståndet från jämviktsläget till kurvans topp (eller dal); hälften av skillnaden mellan största och minsta värde.",
+   "s": 132.82,
+   "e": 141.05
+  },
+  {
+   "t": "period — den minsta vinkel (eller sträcka i x-led) där grafen upprepar sig; kallas ofta periodtid ( T ) i tillämpningar.",
+   "s": 141.05,
+   "e": 149.6
+  },
+  {
+   "t": "förskjutning — att en graf flyttas i x-led och/eller y-led utan att ändra form; x-ledsförskjutningen kallas ofta fasförskjutning och y-ledsförskjutningen bestämmer jämviktsläget i tillämpningar.",
+   "s": 149.6,
+   "e": 161.76
+  },
+  {
+   "t": "asymptot — en linje som en graf närmar sig men aldrig når; grafen till y är lika med tangens x har lodräta asymptoter där cosinus x är lika med 0 .",
+   "s": 161.76,
+   "e": 171.62
+  },
+  {
+   "t": "harmonisk svängning — periodisk rörelse (t.ex. ljud eller växelström) som kan beskrivas med en sinusfunktion.",
+   "s": 171.62,
+   "e": 179.65
+  },
+  {
+   "t": "Formler",
+   "s": 179.65,
+   "e": 181.47
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 181.47,
+   "e": 183.82
+  },
+  {
+   "t": "Trigonometriska funktioner i rätvinklig triangel",
+   "s": 183.82,
+   "e": 187.81
+  },
+  {
+   "t": "tangens v är lika med a delat med b, sinus v som är lika med a delat med c, cosinus v som är lika med b delat med c",
+   "s": 187.81,
+   "e": 196.12
+  },
+  {
+   "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
+   "s": 196.12,
+   "e": 203.11
+  },
+  {
+   "t": "Är sidorna kända i stället för vinkeln används en invers funktion, t.ex.",
+   "s": 203.11,
+   "e": 217.49
+  },
+  {
+   "t": "v är lika med tangens upphöjt till minus 1 parentesen a delat med b slut parentes som är lika med arctangens parentesen a delat med b slut parentes",
+   "s": 203.11,
+   "e": 217.49
+  },
+  {
+   "t": "Sinus, cosinus och tangens på enhetscirkeln",
+   "s": 217.49,
+   "e": 222.0
+  },
+  {
+   "t": "sinus v är lika med y, cosinus v som är lika med x, tangens v som är lika med sinus v delat med cosinus v parentesen cosinus v är inte lika med 0 slut parentes",
+   "s": 222.0,
+   "e": 233.65
+  },
+  {
+   "t": "där parentesen x, y slut parentes är den punkt på enhetscirkeln (radie 1, medelpunkt i origo) som en radie vid vinkeln v, mätt moturs från positiva x-axeln, träffar.",
+   "s": 233.65,
+   "e": 246.07
+  },
+  {
+   "t": "Exakta värden för standardvinklarna",
+   "s": 246.07,
+   "e": 249.29
+  },
+  {
+   "t": "v 0 grader 30 grader 45 grader 60 grader 90 grader hline sinus v 0 1 delat med 2 roten ur 2 delat med 2 roten ur 3 delat med 2 1, 2 meter m cosinus v 1 roten ur 3 delat med 2 roten ur 2 delat med 2 1 delat med 2 0, 2 meter m tangens v 0 roten ur 3 delat med 3 1 roten ur 3 odef.",
+   "s": 249.29,
+   "e": 270.1
+  },
+  {
+   "t": "Samtliga lösningar till en trigonometrisk ekvation",
+   "s": 270.1,
+   "e": 274.26
+  },
+  {
+   "t": "Är v en lösning gäller, där n är ett godtyckligt heltal:",
+   "s": 274.26,
+   "e": 290.76
+  },
+  {
+   "t": "sinus x är lika med a : x som är lika med v plus n gånger 360 grader och x som är lika med 180 grader minus v plus n gånger 360 grader",
+   "s": 277.42,
+   "e": 290.76
+  },
+  {
+   "t": "cosinus x är lika med a : x som är lika med plus minus v plus n gånger 360 grader",
+   "s": 290.71,
+   "e": 298.25
+  },
+  {
+   "t": "tangens x är lika med a : x som är lika med v plus n gånger 180 grader",
+   "s": 298.25,
+   "e": 304.82
+  },
+  {
+   "t": "Samband mellan grader och radianer",
+   "s": 304.82,
+   "e": 308.22
+  },
+  {
+   "t": "360 grader är lika med 2 pi rad 180 grader som är lika med pi rad",
+   "s": 308.22,
+   "e": 314.57
+  },
+  {
+   "t": "1 grader är lika med pi delat med 180 rad 1 rad som är lika med 180 grader delat med pi som är ungefär lika med 57,3 grader",
+   "s": 314.57,
+   "e": 324.21
+  },
+  {
+   "t": "Komplementvinklar och andra samband i enhetscirkeln",
+   "s": 324.21,
+   "e": 328.56
+  },
+  {
+   "t": "\\begin{array}{l@{\\qquad}l} \\sin(90^\\circ - v) är lika med \\cos v & \\cos(90^\\circ - v) är lika med \\sin v \\\\[2pt] \\sin(-v) är lika med -\\sin v & \\cos(-v) är lika med \\cos v \\\\[2pt] \\sin(180^\\circ - v) är lika med \\sin v & \\cos(180^\\circ - v) är lika med -\\cos v \\\\[2pt] \\sin(v + 90^\\circ) är lika med \\cos v & \\cos(v + 90^\\circ) är lika med -\\sin v \\\\[2pt] \\sin(v + 180^\\circ) är lika med -\\sin v & \\cos(v + 180^\\circ) är lika med -\\cos v \\end{array}",
+   "s": 328.56,
+   "e": 413.85
+  },
+  {
+   "t": "Dessa samband står inte med i formelbladet — förstå dem gärna utifrån enhetscirkelns symmetrier i stället för att bara memorera dem.",
+   "s": 413.85,
+   "e": 421.89
+  },
+  {
+   "t": "Trigonometriska ettan",
+   "s": 421.89,
+   "e": 424.63
+  },
+  {
+   "t": "sinus i kvadrat v plus cosinus i kvadrat v är lika med 1",
+   "s": 424.63,
+   "e": 430.02
+  },
+  {
+   "t": "sinus i kvadrat v är lika med 1 minus cosinus i kvadrat v cosinus i kvadrat v som är lika med 1 minus sinus i kvadrat v",
+   "s": 430.02,
+   "e": 438.63
+  },
+  {
+   "t": "Additions- och subtraktionsformler",
+   "s": 438.63,
+   "e": 441.87
+  },
+  {
+   "t": "sinus parentesen u plus v slut parentes är lika med sinus u cosinus v plus cosinus u sinus v sinus parentesen u minus v slut parentes som är lika med sinus u cosinus v minus cosinus u sinus v cosinus parentesen u plus v slut parentes som är lika med cosinus u cosinus v minus sinus u sinus v cosinus parentesen u minus v slut parentes som är lika med cosinus u cosinus v plus sinus u sinus v",
+   "s": 441.87,
+   "e": 469.66
+  },
+  {
+   "t": "Formler för dubbla vinkeln",
+   "s": 469.66,
+   "e": 472.46
+  },
+  {
+   "t": "sinus 2 v är lika med 2 sinus v cosinus v",
+   "s": 472.46,
+   "e": 477.25
+  },
+  {
+   "t": "cosinus 2 v är lika med cosinus i kvadrat v minus sinus i kvadrat v som är lika med 2 cosinus i kvadrat v minus 1 som är lika med 1 minus 2 sinus i kvadrat v",
+   "s": 477.25,
+   "e": 488.72
+  },
+  {
+   "t": "Amplitud och period för sinus- och cosinusfunktionen",
+   "s": 488.72,
+   "e": 493.19
+  },
+  {
+   "t": "y är lika med A sinus parentesen B x plus C slut parentes plus D",
+   "s": 493.19,
+   "e": 499.93
+  },
+  {
+   "t": "amplitud | A |",
+   "s": 499.93,
+   "e": 502.13
+  },
+  {
+   "t": "period 360 grader delat med B (eller 2 pi delat med B rad) — kallas ofta periodtid T i tillämpningar",
+   "s": 502.13,
+   "e": 510.31
+  },
+  {
+   "t": "förskjutning minus C delat med B i x-led — kallas ofta fasförskjutning i tillämpningar",
+   "s": 510.31,
+   "e": 516.93
+  },
+  {
+   "t": "förskjutning D i y-led — bestämmer jämviktsläget i tillämpningar",
+   "s": 516.93,
+   "e": 522.31
+  },
+  {
+   "t": "Grundfunktionerna y är lika med sinus x och y är lika med cosinus x har perioden 360 grader ( 2 pi rad) och värdemängden minus 1 är mindre än eller lika med y är mindre än eller lika med 1 .",
+   "s": 522.31,
+   "e": 535.63
+  },
+  {
+   "t": "Period för tangensfunktionen",
+   "s": 535.63,
+   "e": 538.88
+  },
+  {
+   "t": "y är lika med tangens parentesen B x plus C slut parentes plus D",
+   "s": 538.88,
+   "e": 545.28
+  },
+  {
+   "t": "har perioden 180 grader delat med B (eller pi delat med B rad) och saknar amplitud.",
+   "s": 545.28,
+   "e": 552.25
+  },
+  {
+   "t": "Lodräta asymptoter finns där cosinus parentesen B x plus C slut parentes är lika med 0 .",
+   "s": 552.25,
+   "e": 559.67
+  },
+  {
+   "t": "Sammanslagning till en sinuskurva",
+   "s": 559.67,
+   "e": 562.98
+  },
+  {
+   "t": "y är lika med a sinus x plus b cosinus x som är lika med c sinus parentesen x plus v slut parentes",
+   "s": 562.98,
+   "e": 571.33
+  },
+  {
+   "t": "där",
+   "s": 571.33,
+   "e": 572.85
+  },
+  {
+   "t": "c är lika med roten ur a i kvadrat plus b i kvadrat och tangens v som är lika med b delat med a",
+   "s": 572.85,
+   "e": 582.63
+  },
+  {
+   "t": "Största värdet är c och minsta värdet är minus c .",
+   "s": 572.85,
+   "e": 582.63
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 582.63,
+   "e": 585.51
+  },
+  {
+   "t": "Välj trigonometrisk funktion utifrån vilka sidor du känner och vilken du söker: sinus (motstående/hypotenusa), cosinus (närliggande/hypotenusa), tangens (motstående/närliggande).",
+   "s": 585.51,
+   "e": 600.02
+  },
+  {
+   "t": "Söker du i stället vinkeln används den inversa funktionen.",
+   "s": 600.02,
+   "e": 604.75
+  },
+  {
+   "t": "Sinus är y-koordinaten och cosinus är x-koordinaten för den punkt där vinkelns radie träffar enhetscirkeln — det gäller för alla vinklar, inte bara de spetsiga i en rätvinklig triangel.",
+   "s": 604.75,
+   "e": 616.02
+  },
+  {
+   "t": "En vinkel över 360 grader (eller under 0 grader ) ger samma trigonometriska värden som vinkeln minus (eller plus) ett helt antal varv — dra bort/lägg till n gånger 360 grader innan du tolkar den i enhetscirkeln.",
+   "s": 616.02,
+   "e": 630.62
+  },
+  {
+   "t": "En trigonometrisk ekvation har oändligt många lösningar.",
+   "s": 630.62,
+   "e": 635.28
+  },
+  {
+   "t": "Ange först samtliga lösningar med rätt periodterm, pröva sedan vilka heltal n som ger lösningar i det intervall uppgiften frågar efter.",
+   "s": 635.28,
+   "e": 645.57
+  },
+  {
+   "t": "Nollproduktmetoden fungerar även på trigonometriska ekvationer: är en produkt av trigonometriska uttryck lika med noll, sätt varje faktor för sig lika med noll.",
+   "s": 645.52,
+   "e": 655.79
+  },
+  {
+   "t": "Utnyttja sinus x delat med cosinus x är lika med tangens x för att eliminera en blandad term, och trigonometriska ettan för att byta sinus i kvadrat mot cosinus i kvadrat (eller tvärtom) så att ekvationen bara innehåller en och samma funktion.",
+   "s": 655.79,
+   "e": 670.85
+  },
+  {
+   "t": "Innehåller ekvationen både en vinkel och dess dubbel: skriv om med formlerna för dubbla vinkeln så att hela ekvationen står i en enda vinkel — välj den variant av cosinus 2 v som matchar övriga termer.",
+   "s": 670.85,
+   "e": 682.61
+  },
+  {
+   "t": "Ger en substitution (t.ex. sinus x är lika med t ) en andragradsekvation: lös den med pq-formeln och kontrollera att lösningarna ligger i intervallet minus 1 är mindre än eller lika med t är mindre än eller lika med 1 innan du växlar tillbaka till x.",
+   "s": 682.61,
+   "e": 708.44
+  },
+  {
+   "t": "Trigonometriska ettan bestämmer beloppet av sinus v eller cosinus v när den andra är given — men kvadranten avgör vilket tecken (plus eller minus) som är det rätta svaret.",
+   "s": 682.61,
+   "e": 708.44
+  },
+  {
+   "t": "Koefficienten framför den trigonometriska funktionen styr amplituden; koefficienten inuti argumentet (framför x) styr perioden.",
+   "s": 708.44,
+   "e": 717.6
+  },
+  {
+   "t": "Blanda aldrig ihop dem.",
+   "s": 717.6,
+   "e": 720.32
+  },
+  {
+   "t": "Ett minustecken inne i argumentet ( x minus 90 grader ) skjuter kurvan åt höger, ett plustecken åt vänster — lätt att blanda ihop.",
+   "s": 720.32,
+   "e": 729.19
+  },
+  {
+   "t": "En summa a sinus x plus b cosinus x kan alltid skrivas om som en enda sinuskurva c sinus parentesen x plus v slut parentes , vilket gör det enkelt att direkt läsa av största och minsta värde som plus minus c .",
+   "s": 729.19,
+   "e": 742.76
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 742.76,
+   "e": 745.81
+  },
+  {
+   "t": "Grundfiguren för trigonometri i en rätvinklig triangel — beteckningarna för kateter, hypotenusa och vinkeln v som alla formler i kapitlet bygger på:",
+   "s": 745.81,
+   "e": 766.4
+  },
+  {
+   "t": "Enhetscirkeln, som utvidgar definitionerna till alla vinklar: punkten där vinkelns radie träffar cirkeln har koordinaterna parentesen cosinus v, sinus v slut parentes :",
+   "s": 745.81,
+   "e": 766.4
+  },
+  {
+   "t": "Inför provet",
+   "s": 745.81,
+   "e": 766.4
+  },
+  {
+   "t": "Kan du definiera sinus, cosinus och tangens både i en rätvinklig triangel och på enhetscirkeln?",
+   "s": 766.4,
+   "e": 773.41
+  },
+  {
+   "t": "Kan du använda inversa trigonometriska funktioner för att bestämma en vinkel ur ett känt sidoförhållande?",
+   "s": 773.41,
+   "e": 780.22
+  },
+  {
+   "t": "Kan du de exakta värdena för 0 grader , 30 grader , 45 grader , 60 grader och 90 grader (eller minnesknepet för att ta fram dem)?",
+   "s": 780.22,
+   "e": 790.0
+  },
+  {
+   "t": "Vet du hur man omvandlar mellan grader och radianer, och att pi rad är lika med 180 grader ?",
+   "s": 790.0,
+   "e": 796.41
+  },
+  {
+   "t": "Kan du ange samtliga lösningar till en trigonometrisk ekvation med rätt periodterm, för sinus, cosinus respektive tangens?",
+   "s": 796.41,
+   "e": 804.85
+  },
+  {
+   "t": "Kan du plocka fram de lösningar som ligger i ett givet intervall genom att pröva olika heltal n?",
+   "s": 804.85,
+   "e": 811.19
+  },
+  {
+   "t": "Kan du komplementvinkel-sambandet och övriga samband mellan vinklar i enhetscirkeln (negativ vinkel, halvt varv, kvartsvarv)?",
+   "s": 811.19,
+   "e": 820.34
+  },
+  {
+   "t": "Kan du trigonometriska ettan, och använda den för att bestämma sinus v eller cosinus v när den andra är given — med rätt tecken utifrån kvadranten?",
+   "s": 820.34,
+   "e": 829.47
+  },
+  {
+   "t": "Kan du additions- och subtraktionsformlerna samt formlerna för dubbla vinkeln, och använda dem för att skriva om ekvationer och bevisa identiteter?",
+   "s": 829.47,
+   "e": 838.15
+  },
+  {
+   "t": "Kan du avläsa amplitud och period ur en funktion på formen y är lika med A sinus parentesen B x plus C slut parentes plus D , skilja på vad A, B, C och D gör med grafen, och förklara varför grafen till y är lika med tangens x i stället har lodräta asymptoter?",
+   "s": 838.15,
+   "e": 856.07
+  },
+  {
+   "t": "Kan du skriva om y är lika med a sinus x plus b cosinus x som en enda sinuskurva c sinus parentesen x plus v slut parentes och använda den för att hitta största och minsta värde?",
+   "s": 856.07,
+   "e": 868.11
+  },
+  {
+   "t": "Kan du ställa upp en sinusmodell (amplitud, period, fasförskjutning, jämviktsläge) för en periodisk tillämpning utifrån en textuppgift?",
+   "s": 868.11,
+   "e": 878.27
+  }
+ ]
+}

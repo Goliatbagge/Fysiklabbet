@@ -1,0 +1,313 @@
+{
+ "id": "ma2c-5.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8ef4e690960f157f6375d5e04e08ec9bb730ddf8",
+ "dur": 431.17,
+ "segments": [
+  {
+   "t": "Sammanfattning — Logaritmer",
+   "s": 0.1,
+   "e": 3.04
+  },
+  {
+   "t": "Det här kapitlet handlade om potens- och exponentialekvationer och hur logaritmer används för att lösa dem algebraiskt.",
+   "s": 2.99,
+   "e": 10.6
+  },
+  {
+   "t": "Du har mött tiologaritmen som en ny räkneoperation, de tre logaritmlagarna och hur de kan bevisas, samt hur logaritmer används i verkliga tillämpningar som ränta och värdeförändring.",
+   "s": 10.6,
+   "e": 21.94
+  },
+  {
+   "t": "Du ska efter kapitlet kunna skilja på potens- och exponentialekvationer, lösa båda typerna algebraiskt med logaritmer, hantera logaritmekvationer och räkna med logaritmer i andra baser än 10.",
+   "s": 21.94,
+   "e": 34.12
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 34.12,
+   "e": 36.45
+  },
+  {
+   "t": "potensekvation — ekvation där variabeln står i basen ( x upphöjt till n är lika med a ); löses med potenslagar eller rotuttryck.",
+   "s": 36.45,
+   "e": 45.48
+  },
+  {
+   "t": "exponentialekvation — ekvation där variabeln står i exponenten ( a upphöjt till x är lika med b ); löses grafiskt eller algebraiskt med logaritmer.",
+   "s": 45.48,
+   "e": 55.44
+  },
+  {
+   "t": "potensfunktion ( y är lika med C gånger x upphöjt till a ) — generell form för en funktion där variabeln x är i basen.",
+   "s": 55.44,
+   "e": 63.73
+  },
+  {
+   "t": "exponentialfunktion ( y är lika med C gånger a upphöjt till x ) — generell form för exponentiell förändring; C är startvärdet och a är förändringsfaktorn.",
+   "s": 63.73,
+   "e": 73.99
+  },
+  {
+   "t": "förändringsfaktor ( a ) — talet varje steg multipliceras med; a är större än 1 ger ökning, 0 är mindre än a är mindre än 1 ger minskning.",
+   "s": 73.99,
+   "e": 83.79
+  },
+  {
+   "t": "tiologaritm ( logaritmen av ) — det tal 10 ska upphöjas till för att bli ett visst tal a ; logaritmen av a är lika med x vilket är ekvivalent med att 10 upphöjt till x är lika med a .",
+   "s": 83.79,
+   "e": 95.75
+  },
+  {
+   "t": "logaritmform och potensform — två likvärdiga sätt att skriva samma samband, logaritmen av x är lika med a vilket är ekvivalent med att 10 upphöjt till a är lika med x .",
+   "s": 95.75,
+   "e": 106.7
+  },
+  {
+   "t": "logaritmekvation — ekvation där variabeln står i logaritmen (t.ex. logaritmen av x är lika med 3 ); löses genom omskrivning till potensform.",
+   "s": 106.7,
+   "e": 117.04
+  },
+  {
+   "t": "logaritmlagarna — tre räkneregler för summa, differens och potens av logaritmer.",
+   "s": 117.04,
+   "e": 123.22
+  },
+  {
+   "t": "generell logaritm ( a-logaritmen av b ) — lösningen till ekvationen a upphöjt till x är lika med b för en valfri bas a är större än 0 .",
+   "s": 123.22,
+   "e": 132.39
+  },
+  {
+   "t": "Formler",
+   "s": 132.39,
+   "e": 134.21
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 134.21,
+   "e": 136.57
+  },
+  {
+   "t": "Exponentiell förändring — modell",
+   "s": 136.57,
+   "e": 139.74
+  },
+  {
+   "t": "y är lika med C gånger a upphöjt till x",
+   "s": 139.74,
+   "e": 143.72
+  },
+  {
+   "t": "där",
+   "s": 143.72,
+   "e": 145.2
+  },
+  {
+   "t": "y är lika med värdet efter x förändringar",
+   "s": 145.2,
+   "e": 148.84
+  },
+  {
+   "t": "C är lika med startvärdet",
+   "s": 148.84,
+   "e": 151.79
+  },
+  {
+   "t": "a är lika med förändringsfaktorn",
+   "s": 151.79,
+   "e": 154.89
+  },
+  {
+   "t": "x är lika med antal förändringar (ofta tid)",
+   "s": 154.89,
+   "e": 159.1
+  },
+  {
+   "t": "Tiologaritm — definition",
+   "s": 159.1,
+   "e": 162.0
+  },
+  {
+   "t": "a är lika med 10 upphöjt till x vilket är ekvivalent med att x är lika med logaritmen av a där a är större än 0",
+   "s": 162.0,
+   "e": 170.06
+  },
+  {
+   "t": "Skriva ett tal med basen 10",
+   "s": 170.06,
+   "e": 173.34
+  },
+  {
+   "t": "a är lika med 10 upphöjt till logaritmen av a där a är större än 0",
+   "s": 173.34,
+   "e": 178.99
+  },
+  {
+   "t": "Logaritmform och potensform",
+   "s": 178.99,
+   "e": 181.99
+  },
+  {
+   "t": "logaritmen av x är lika med a vilket är ekvivalent med att 10 upphöjt till a är lika med x",
+   "s": 181.99,
+   "e": 189.59
+  },
+  {
+   "t": "Logaritmlagarna",
+   "s": 181.99,
+   "e": 189.59
+  },
+  {
+   "t": "logaritmen av x plus logaritmen av y är lika med logaritmen av x y",
+   "s": 189.59,
+   "e": 204.39
+  },
+  {
+   "t": "logaritmen av x minus logaritmen av y är lika med logaritmen av x delat med y",
+   "s": 189.59,
+   "e": 204.39
+  },
+  {
+   "t": "logaritmen av x upphöjt till p är lika med p gånger logaritmen av x",
+   "s": 189.59,
+   "e": 204.39
+  },
+  {
+   "t": "där x är större än 0 och y är större än 0 .",
+   "s": 204.39,
+   "e": 208.39
+  },
+  {
+   "t": "Generella logaritmer",
+   "s": 208.39,
+   "e": 210.86
+  },
+  {
+   "t": "a upphöjt till x är lika med b vilket är ekvivalent med att x är lika med a-logaritmen av b",
+   "s": 210.86,
+   "e": 219.1
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 210.86,
+   "e": 219.1
+  },
+  {
+   "t": "Avgör först om variabeln står i basen (potensekvation, x upphöjt till n är lika med a ) eller i exponenten (exponentialekvation, a upphöjt till x är lika med b ) — det avgör vilken lösningsmetod som ska användas.",
+   "s": 219.1,
+   "e": 232.84
+  },
+  {
+   "t": "En potensekvation med jämn exponent har två lösningar, en positiv och en negativ ( plus minus framför roten/lösningen); en udda exponent ger bara en lösning.",
+   "s": 232.84,
+   "e": 243.95
+  },
+  {
+   "t": "Metod 1 för exponentialekvationer: skriv om båda led till basen 10 (t.ex. 2 är lika med 10 upphöjt till logaritmen av 2 ), förenkla med potenslagarna och sätt exponenterna lika.",
+   "s": 243.95,
+   "e": 256.4
+  },
+  {
+   "t": "Metod 2 (snabbare): logaritmera båda led direkt (sätt logaritmen av framför hela uttrycket) och använd tredje logaritmlagen för att multiplicera ner exponenten.",
+   "s": 256.4,
+   "e": 267.41
+  },
+  {
+   "t": "En logaritmekvation (variabeln i logaritmen) löses genom att skriva om från logaritmform till potensform: logaritmen av x är lika med a vilket är ekvivalent med att 10 upphöjt till a är lika med x .",
+   "s": 267.41,
+   "e": 280.5
+  },
+  {
+   "t": "Har ekvationen flera logaritmtermer, samla dem till en enda logaritm med logaritmlagarna innan logaritmfunktionen stryks från båda led.",
+   "s": 280.5,
+   "e": 291.25
+  },
+  {
+   "t": "Alla samband gäller bara för x är större än 0 och y är större än 0 — man kan aldrig ta logaritmen av ett negativt tal eller av noll.",
+   "s": 291.2,
+   "e": 299.26
+  },
+  {
+   "t": "Vid tillämpningar (ränta, befolkningstillväxt, värdeökning) räknas förändringsfaktorn a ut ur en given procentsats: en ökning med p procent ger a är lika med 1 plus p delat med 100 , en minskning ger a är lika med 1 minus p delat med 100 .",
+   "s": 299.26,
+   "e": 315.2
+  },
+  {
+   "t": "Ett svar med en logaritm kvar i sig (t.ex. x är lika med logaritmen av 53 ) är ett exakt svar — avrunda bara till decimaler när uppgiften ber om det.",
+   "s": 315.2,
+   "e": 325.31
+  },
+  {
+   "t": "Alla logaritmlagarna och sambanden med basen 10 gäller likadant för andra baser ( a-logaritmen av b ) — bara basen i potensen byts ut.",
+   "s": 325.31,
+   "e": 334.99
+  },
+  {
+   "t": "Inför provet",
+   "s": 334.99,
+   "e": 337.15
+  },
+  {
+   "t": "Kan du skilja på en potensekvation och en exponentialekvation genom att avgöra om variabeln står i basen eller i exponenten?",
+   "s": 337.15,
+   "e": 345.19
+  },
+  {
+   "t": "Vet du varför en potensekvation med jämn exponent har två lösningar, en positiv och en negativ?",
+   "s": 345.19,
+   "e": 352.15
+  },
+  {
+   "t": "Kan du definitionen av tiologaritmen, a är lika med 10 upphöjt till x vilket är ekvivalent med att x är lika med logaritmen av a ?",
+   "s": 352.15,
+   "e": 361.01
+  },
+  {
+   "t": "Kan du skriva om ett tal med basen 10, a är lika med 10 upphöjt till logaritmen av a , och förklara varför a måste vara större än 0?",
+   "s": 361.01,
+   "e": 369.45
+  },
+  {
+   "t": "Kan du lösa en exponentialekvation genom att skriva om båda led till basen 10 och sätta exponenterna lika?",
+   "s": 369.45,
+   "e": 376.75
+  },
+  {
+   "t": "Kan du lösa en exponentialekvation snabbare genom att logaritmera båda led och använda tredje logaritmlagen?",
+   "s": 376.75,
+   "e": 384.12
+  },
+  {
+   "t": "Kan du lösa en logaritmekvation genom att skriva om den från logaritmform till potensform?",
+   "s": 384.12,
+   "e": 390.32
+  },
+  {
+   "t": "Kan du alla tre logaritmlagarna utantill och använda dem för att förenkla eller samla logaritmuttryck?",
+   "s": 390.32,
+   "e": 396.87
+  },
+  {
+   "t": "Kan du bevisa (härleda) någon av logaritmlagarna med hjälp av sambandet a är lika med 10 upphöjt till logaritmen av a ?",
+   "s": 396.87,
+   "e": 405.16
+  },
+  {
+   "t": "Kan du lösa en ekvation med flera logaritmtermer genom att samla dem till en enda logaritm innan du stryker logaritmen av ?",
+   "s": 405.16,
+   "e": 412.72
+  },
+  {
+   "t": "Kan du ställa upp och lösa en tillämpning med modellen y är lika med C gånger a upphöjt till x , t.ex. ränta eller värdeökning?",
+   "s": 412.72,
+   "e": 421.24
+  },
+  {
+   "t": "Kan du lösa ekvationer med andra baser än 10, t.ex. 3 upphöjt till x är lika med 25 , med hjälp av generella logaritmer a-logaritmen av b ?",
+   "s": 421.24,
+   "e": 431.17
+  }
+ ]
+}

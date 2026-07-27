@@ -1,0 +1,283 @@
+{
+ "id": "ma3c-2.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "33a2333078cf537e0e6e07b40ccfdbe8d579cd73",
+ "dur": 433.15,
+ "segments": [
+  {
+   "t": "Sammanfattning — Derivatan",
+   "s": 0.1,
+   "e": 3.06
+  },
+  {
+   "t": "Det här kapitlet handlade om hur man bestämmer en kurvas lutning — dels i genomsnitt över ett intervall (sekant), dels exakt i en enda punkt (tangent och derivata).",
+   "s": 3.01,
+   "e": 13.69
+  },
+  {
+   "t": "Du har mött derivatans definition som ett gränsvärde, lärt dig tolka derivator i tillämpningar och beräkna dem med symbolhanterande hjälpmedel, samt sett vad som krävs för att en funktion ska vara deriverbar i en punkt.",
+   "s": 13.69,
+   "e": 26.41
+  },
+  {
+   "t": "Du ska efter kapitlet kunna beräkna och tolka både sekantens och tangentens lutning, ställa upp derivatans definition och avgöra i vilka punkter en funktion inte är deriverbar.",
+   "s": 26.41,
+   "e": 37.35
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 37.35,
+   "e": 39.69
+  },
+  {
+   "t": "sekant — en rät linje som skär en kurva i två punkter; dess lutning ger kurvans medellutning i intervallet mellan punkterna.",
+   "s": 39.69,
+   "e": 47.64
+  },
+  {
+   "t": "medellutning / riktningskoefficient / ändringskvot (k-värde) — sekantens lutning, beräknad ur k är lika med delta y delat med delta x .",
+   "s": 47.64,
+   "e": 58.45
+  },
+  {
+   "t": "tangent — en rät linje som snuddar (tangerar) en kurva i en enda punkt; dess lutning motsvarar kurvans lutning i just den punkten.",
+   "s": 58.45,
+   "e": 67.6
+  },
+  {
+   "t": "derivata ( f prim parentesen a slut parentes ) — tangentens lutning i en given punkt; utläses \" f prim av a \".",
+   "s": 67.6,
+   "e": 76.42
+  },
+  {
+   "t": "derivatans definition — gränsvärdet av sekantens lutning då avståndet h mellan de två punkterna går mot 0.",
+   "s": 76.42,
+   "e": 83.7
+  },
+  {
+   "t": "deriverbar — en funktion är deriverbar i en punkt om det går att beräkna derivatan (gränsvärdet) där.",
+   "s": 83.7,
+   "e": 91.0
+  },
+  {
+   "t": "kontinuerlig funktion — en funktion vars graf hänger ihop och kan ritas \"utan att lyfta pennan\".",
+   "s": 91.0,
+   "e": 97.39
+  },
+  {
+   "t": "diskontinuerlig funktion — en funktion vars graf har ett hopp (öppen ring och fylld prick på olika höjd) eller ett språng (t.ex. vid en lodrät asymptot).",
+   "s": 97.39,
+   "e": 107.5
+  },
+  {
+   "t": "hörnpunkt — en punkt där grafen bildar ett skarpt \"hörn\", t.ex. i x är lika med 0 för f av x är lika med | x | .",
+   "s": 107.5,
+   "e": 115.66
+  },
+  {
+   "t": "absolutbelopp ( | a | ) — ett tals avstånd till 0 på tallinjen; \"tar bort\" minustecknet från negativa tal.",
+   "s": 115.66,
+   "e": 123.47
+  },
+  {
+   "t": "genomsnittlig förändringshastighet — vad sekantens lutning står för vid tillämpningar.",
+   "s": 123.47,
+   "e": 129.22
+  },
+  {
+   "t": "momentanhastighet / förändringshastighet vid en tidpunkt — vad tangentens lutning (derivatan) står för vid tillämpningar.",
+   "s": 129.22,
+   "e": 137.82
+  },
+  {
+   "t": "Formler",
+   "s": 137.82,
+   "e": 139.65
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 139.65,
+   "e": 142.0
+  },
+  {
+   "t": "Riktningskoefficienten (sekant och tangent)",
+   "s": 142.0,
+   "e": 146.32
+  },
+  {
+   "t": "k är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett som är lika med f av x två minus f av x ett delat med x två minus x ett",
+   "s": 146.32,
+   "e": 158.96
+  },
+  {
+   "t": "där",
+   "s": 158.96,
+   "e": 160.44
+  },
+  {
+   "t": "k är lika med riktningskoefficient (lutning)",
+   "s": 160.44,
+   "e": 164.57
+  },
+  {
+   "t": "parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes är lika med två punkter på linjen (sekanten eller tangenten)",
+   "s": 164.57,
+   "e": 175.16
+  },
+  {
+   "t": "Derivatans definition",
+   "s": 175.16,
+   "e": 177.94
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med gränsvärdet då h går mot 0 f av a plus h minus f av a delat med h eller f prim parentesen x slut parentes som är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 177.94,
+   "e": 193.81
+  },
+  {
+   "t": "där",
+   "s": 193.81,
+   "e": 195.29
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med derivatan av f i punkten x är lika med a",
+   "s": 195.29,
+   "e": 205.53
+  },
+  {
+   "t": "h är lika med avståndet i sidled mellan sekantens två punkter",
+   "s": 195.29,
+   "e": 205.53
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 205.53,
+   "e": 208.38
+  },
+  {
+   "t": "Sekantens lutning ger kurvans medellutning (genomsnittlig förändringshastighet) över ett helt intervall; tangentens lutning ger lutningen (förändringshastigheten) i en enda punkt.",
+   "s": 208.38,
+   "e": 219.99
+  },
+  {
+   "t": "Ju mindre avståndet h mellan sekantens två punkter blir, desto mer närmar sig sekanten en tangent — därför bygger derivatans definition på gränsvärdet då h går mot 0 .",
+   "s": 219.99,
+   "e": 230.75
+  },
+  {
+   "t": "Lösningsgång för derivatans definition: ekvation 1 ställ upp definitionen med funktionen f , ekvation 2 förenkla täljaren och faktorisera bort h ur täljare och nämnare (annars blir det division med 0), ekvation 3 sätt h är lika med 0 och beräkna gränsvärdet.",
+   "s": 230.75,
+   "e": 247.1
+  },
+  {
+   "t": "Enheten för derivatan fås genom \"enheten för funktionen\" per \"enheten för variabeln\" — samma princip som för sekantens och tangentens lutning.",
+   "s": 247.1,
+   "e": 256.38
+  },
+  {
+   "t": "Med symbolhanterande hjälpmedel (t.ex. Geogebra): definiera funktionen som f av x är lika med och beräkna derivatan i en punkt genom att skriva f prim parentesen a slut parentes .",
+   "s": 256.38,
+   "e": 268.32
+  },
+  {
+   "t": "OBS: Geogebra använder punkt som decimaltecken, inte komma.",
+   "s": 268.32,
+   "e": 273.71
+  },
+  {
+   "t": "En funktion är inte deriverbar i en punkt om den ekvation 1 inte är definierad där, ekvation 2 är diskontinuerlig där (hopp), eller ekvation 3 har en hörnpunkt där.",
+   "s": 273.71,
+   "e": 286.67
+  },
+  {
+   "t": "I en hörnpunkt (t.ex. x är lika med 0 för f av x är lika med | x | ) ger gränsvärdet av derivatan olika svar beroende på om man närmar sig punkten från vänster eller höger — derivatan saknar då ett entydigt värde.",
+   "s": 286.62,
+   "e": 300.06
+  },
+  {
+   "t": "En ekvation med absolutbelopp, | x minus a | är lika med b , löses genom att sätta x minus a är lika med plus minus b och lösa båda fallen separat.",
+   "s": 300.06,
+   "e": 310.04
+  },
+  {
+   "t": "Skilj på kontinuitetens två typer av avbrott: ett hopp (funktionen definierad men värdet \"hoppar\", öppen ring/fylld prick) och ett språng (grafen går mot plus minus oändligheten , t.ex. vid en lodrät asymptot).",
+   "s": 310.04,
+   "e": 324.87
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 324.87,
+   "e": 327.92
+  },
+  {
+   "t": "Sekanten mellan punkterna parentesen a, f av a slut parentes och parentesen a plus h, f av a plus h slut parentes — när avståndet h går mot 0 övergår sekanten i en tangent, vilket är själva idén bakom derivatans definition:",
+   "s": 327.92,
+   "e": 355.65
+  },
+  {
+   "t": "Grafen till f av x är lika med | x | har en hörnpunkt i origo: lutningen är minus 1 till vänster om x är lika med 0 och 1 till höger — eftersom gränsvärdena skiljer sig är funktionen inte deriverbar i hörnpunkten:",
+   "s": 327.92,
+   "e": 355.65
+  },
+  {
+   "t": "Inför provet",
+   "s": 327.92,
+   "e": 355.65
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan en sekant och en tangent?",
+   "s": 355.65,
+   "e": 360.27
+  },
+  {
+   "t": "Kan du beräkna riktningskoefficienten för en sekant eller tangent ur formeln k är lika med delta y delat med delta x ?",
+   "s": 360.27,
+   "e": 368.18
+  },
+  {
+   "t": "Vet du att sekantens lutning står för en genomsnittlig förändringshastighet, medan tangentens lutning står för förändringshastigheten vid en enda tidpunkt?",
+   "s": 368.18,
+   "e": 377.7
+  },
+  {
+   "t": "Kan du ställa upp och tillämpa derivatans definition, inklusive att faktorisera bort h innan du sätter h är lika med 0 ?",
+   "s": 377.7,
+   "e": 385.65
+  },
+  {
+   "t": "Vet du vad notationen f prim parentesen a slut parentes betyder och hur den utläses?",
+   "s": 385.65,
+   "e": 391.93
+  },
+  {
+   "t": "Kan du tolka en derivata i ett tillämpat sammanhang och avgöra dess enhet?",
+   "s": 391.93,
+   "e": 397.4
+  },
+  {
+   "t": "Kan du beräkna en derivata med symbolhanterande hjälpmedel (t.ex. Geogebra), och vet du att Geogebra använder punkt som decimaltecken?",
+   "s": 397.4,
+   "e": 406.74
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan en kontinuerlig och en diskontinuerlig funktion, och mellan ett hopp och ett språng?",
+   "s": 406.74,
+   "e": 413.73
+  },
+  {
+   "t": "Kan du beräkna absolutbeloppet av ett tal eller uttryck, och lösa en ekvation med absolutbelopp?",
+   "s": 413.73,
+   "e": 420.53
+  },
+  {
+   "t": "Vet du vilka tre villkor som gör att en funktion inte är deriverbar i en punkt?",
+   "s": 420.53,
+   "e": 426.13
+  },
+  {
+   "t": "Kan du avläsa ur en graf var en funktion inte är deriverbar (hörnpunkter och diskontinuiteter)?",
+   "s": 426.13,
+   "e": 433.15
+  }
+ ]
+}

@@ -1,0 +1,443 @@
+{
+ "id": "ma4-2.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4a22987dd120779540de4cf6e9cb724243aab31f",
+ "dur": 808.91,
+ "segments": [
+  {
+   "t": "Sammanfattning — Derivata",
+   "s": 0.1,
+   "e": 3.01
+  },
+  {
+   "t": "Det här kapitlet byggde vidare på derivatan från Matematik 3: definitionen som gränsvärdet av en ändringskvot, Leibniz notation d y delat med d x och tolkningen av derivata som tangentlutning och förändringshastighet.",
+   "s": 2.96,
+   "e": 18.07
+  },
+  {
+   "t": "Därefter utökades deriveringsreglerna med kedjeregeln (för sammansatta funktioner), derivator av sinus x , cosinus x , e upphöjt till x och naturliga logaritmen av x , samt produkt- och kvotregeln.",
+   "s": 18.07,
+   "e": 31.82
+  },
+  {
+   "t": "Kapitlet avslutades med extremvärdesproblem, kurvkonstruktion med teckentabell och asymptoter — vertikala, horisontella och sneda.",
+   "s": 31.82,
+   "e": 40.85
+  },
+  {
+   "t": "Du ska efter kapitlet kunna derivera alla dessa funktionstyper, tolka ett derivatavärde i en tillämpning, bestämma och klassificera extrempunkter samt skissa grafer med hjälp av teckentabell och asymptoter.",
+   "s": 40.85,
+   "e": 53.19
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 53.19,
+   "e": 55.51
+  },
+  {
+   "t": "Leibniz notation ( d y delat med d x ) — alternativt skrivsätt för derivata som visar vilken variabel man deriverar med avseende på; särskilt användbart när flera storheter beror på varandra.",
+   "s": 55.51,
+   "e": 69.31
+  },
+  {
+   "t": "derivatans definition — derivatan i en punkt är gränsvärdet av ändringskvoten f av a plus h minus f av a delat med h då h går mot 0 , det vill säga lutningen på en sekant som glider mot tangenten.",
+   "s": 69.31,
+   "e": 81.96
+  },
+  {
+   "t": "sekant och tangent — en sekant skär kurvan i två punkter, en tangent tangerar kurvan i en enda punkt; sekantens lutning går mot tangentens lutning när de två punkterna glider ihop.",
+   "s": 81.96,
+   "e": 93.31
+  },
+  {
+   "t": "derivata som förändringshastighet — vid tillämpningar anger derivatan hur snabbt en storhet ändras; enheten fås som \"enhet på y-axeln per enhet på x-axeln\".",
+   "s": 93.31,
+   "e": 103.92
+  },
+  {
+   "t": "sammansatt funktion — en funktion av en funktion, f parentesen g av x slut parentes , med en yttre funktion f och en inre funktion g.",
+   "s": 103.92,
+   "e": 120.59
+  },
+  {
+   "t": "kedjeregeln — regeln för att derivera en sammansatt funktion: yttre derivatan (med inre funktionen kvar oförändrad) gånger inre derivatan.",
+   "s": 103.92,
+   "e": 120.59
+  },
+  {
+   "t": "relaterade förändringshastigheter — problem där kedjeregeln i Leibniz-form, d y delat med d x är lika med d y delat med d z gånger d z delat med d x , kopplar ihop två storheters förändringstakt.",
+   "s": 120.59,
+   "e": 137.76
+  },
+  {
+   "t": "produktregeln — regeln för att derivera en produkt av två funktioner.",
+   "s": 137.76,
+   "e": 142.89
+  },
+  {
+   "t": "kvotregeln — regeln för att derivera en kvot av två funktioner.",
+   "s": 142.89,
+   "e": 147.82
+  },
+  {
+   "t": "D-notation ( D parentesen f av x slut parentes ) — annat skrivsätt för f prim parentesen x slut parentes där uttrycket som ska deriveras sätts in direkt i operatorn D.",
+   "s": 147.82,
+   "e": 161.36
+  },
+  {
+   "t": "extremvärdesproblem — problem som handlar om att bestämma en storhets största eller minsta värde, oftast genom att lösa f prim parentesen x slut parentes är lika med 0 .",
+   "s": 161.36,
+   "e": 171.78
+  },
+  {
+   "t": "lokal maximi-/minimipunkt och terrasspunkt — punkter där f prim parentesen x slut parentes är lika med 0 ; en maximi-/minimipunkt är en \"topp\"/\"dal\" där kurvan vänder, en terrasspunkt planar bara ut utan att vända.",
+   "s": 171.78,
+   "e": 186.82
+  },
+  {
+   "t": "andraderivata — derivatan av derivatan; tecknet avgör om kurvan böjer uppåt (konvex) eller nedåt (konkav), och därmed en extrempunkts karaktär.",
+   "s": 186.82,
+   "e": 198.04
+  },
+  {
+   "t": "teckentabell — tabell som visar derivatans tecken i varje delintervall, använd för att skissa en funktions graf.",
+   "s": 198.04,
+   "e": 205.41
+  },
+  {
+   "t": "asymptot (vertikal, horisontell, sned) — en linje som kurvan närmar sig men aldrig når, då x går mot ett visst värde eller mot oändligheten.",
+   "s": 205.41,
+   "e": 215.75
+  },
+  {
+   "t": "Formler",
+   "s": 215.75,
+   "e": 217.57
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 217.57,
+   "e": 219.93
+  },
+  {
+   "t": "Leibniz notation",
+   "s": 219.93,
+   "e": 222.38
+  },
+  {
+   "t": "y prim är lika med f prim parentesen x slut parentes som är lika med d y delat med d x y bis som är lika med f bis parentesen x slut parentes som är lika med d i kvadrat y delat med d x i kvadrat",
+   "s": 222.38,
+   "e": 237.76
+  },
+  {
+   "t": "Derivatans definition",
+   "s": 237.76,
+   "e": 240.54
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 240.54,
+   "e": 251.51
+  },
+  {
+   "t": "Deriveringsregler för grundfunktioner",
+   "s": 240.54,
+   "e": 251.51
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1 f av x som är lika med k x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n k x upphöjt till n minus 1 f av x som är lika med e upphöjt till k x vilket ger att f prim parentesen x slut parentes är lika med k e upphöjt till k x f av x som är lika med a upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med a upphöjt till x naturliga logaritmen av a f av x som är lika med naturliga logaritmen av x vilket ger att f prim parentesen x slut parentes är lika med 1 delat med x parentesen x är större än 0 slut parentes f av x som är lika med sinus x vilket ger att f prim parentesen x slut parentes är lika med cosinus x f av x som är lika med cosinus x vilket ger att f prim parentesen x slut parentes är lika med minus sinus x f av x som är lika med tangens x vilket ger att f prim parentesen x slut parentes är lika med 1 delat med cosinus i kvadrat x som är lika med 1 plus tangens i kvadrat x",
+   "s": 251.51,
+   "e": 322.08
+  },
+  {
+   "t": "där basen a i fjärde raden är exponentialfunktionens bas, och vinkeln x i de trigonometriska funktionerna måste mätas i radianer.",
+   "s": 322.08,
+   "e": 331.2
+  },
+  {
+   "t": "Kedjeregeln",
+   "s": 331.2,
+   "e": 333.38
+  },
+  {
+   "t": "y prim är lika med f prim parentesen g av x slut parentes gånger g prim parentesen x slut parentes eller, med Leibniz notation, d y delat med d x som är lika med d y delat med d z gånger d z delat med d x",
+   "s": 333.38,
+   "e": 351.44
+  },
+  {
+   "t": "där f (eller y som funktion av z) är den yttre funktionen och g av x (eller z) den inre funktionen.",
+   "s": 351.44,
+   "e": 359.49
+  },
+  {
+   "t": "Produktregeln",
+   "s": 359.49,
+   "e": 361.65
+  },
+  {
+   "t": "y prim är lika med f prim parentesen x slut parentes gånger g av x plus f av x gånger g prim parentesen x slut parentes",
+   "s": 361.65,
+   "e": 371.37
+  },
+  {
+   "t": "om y är lika med f av x gånger g av x .",
+   "s": 371.37,
+   "e": 375.67
+  },
+  {
+   "t": "Kvotregeln",
+   "s": 375.67,
+   "e": 377.7
+  },
+  {
+   "t": "y prim är lika med f prim parentesen x slut parentes gånger g av x minus f av x gånger g prim parentesen x slut parentes delat med bigl parentesen g av x bigr slut parentes i kvadrat",
+   "s": 377.7,
+   "e": 390.8
+  },
+  {
+   "t": "om y är lika med f av x delat med g av x .",
+   "s": 390.8,
+   "e": 395.04
+  },
+  {
+   "t": "Andraderivatan och en extrempunkts karaktär",
+   "s": 395.04,
+   "e": 398.93
+  },
+  {
+   "t": "I en punkt där f prim parentesen x slut parentes är lika med 0 gäller",
+   "s": 398.93,
+   "e": 404.45
+  },
+  {
+   "t": "f bis parentesen x slut parentes är större än 0 — kurvan böjer uppåt (konvex): minimipunkt",
+   "s": 404.45,
+   "e": 412.23
+  },
+  {
+   "t": "f bis parentesen x slut parentes är mindre än 0 — kurvan böjer nedåt (konkav): maximipunkt",
+   "s": 412.23,
+   "e": 420.02
+  },
+  {
+   "t": "f bis parentesen x slut parentes är lika med 0 — teckenstudium krävs; kan vara en terrasspunkt",
+   "s": 420.02,
+   "e": 427.35
+  },
+  {
+   "t": "Vertikal asymptot",
+   "s": 427.35,
+   "e": 430.02
+  },
+  {
+   "t": "gränsvärdet då x går mot a upphöjt till minus f av x är lika med plus minus oändligheten eller gränsvärdet då x går mot a upphöjt till plus f av x som är lika med plus minus oändligheten vilket ger att x är lika med a",
+   "s": 430.02,
+   "e": 443.39
+  },
+  {
+   "t": "För en rationell funktion fås a genom att sätta nämnaren lika med noll.",
+   "s": 443.39,
+   "e": 448.44
+  },
+  {
+   "t": "Horisontell asymptot",
+   "s": 448.44,
+   "e": 451.08
+  },
+  {
+   "t": "gränsvärdet då x går mot minus oändligheten f av x är lika med m eller gränsvärdet då x går mot oändligheten f av x som är lika med m vilket ger att y är lika med m",
+   "s": 451.08,
+   "e": 462.73
+  },
+  {
+   "t": "Sned asymptot",
+   "s": 451.08,
+   "e": 462.73
+  },
+  {
+   "t": "f av x är lika med k x plus m plus R parentesen x slut parentes, gränsvärdet då x går mot plus minus oändligheten R parentesen x slut parentes som är lika med 0 vilket ger att y är lika med k x plus m",
+   "s": 462.73,
+   "e": 482.2
+  },
+  {
+   "t": "Sneda asymptoter uppstår för rationella funktioner där täljarens grad är exakt en högre än nämnarens.",
+   "s": 462.73,
+   "e": 482.2
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 482.2,
+   "e": 485.07
+  },
+  {
+   "t": "Leibniz notation d y delat med d x tydliggör vilken variabel man deriverar med avseende på — avgörande när flera storheter beror på varandra, som vid relaterade förändringshastigheter.",
+   "s": 485.07,
+   "e": 497.94
+  },
+  {
+   "t": "Tangentens ekvation bestäms i två steg: k -värdet är derivatans värde i punkten, y prim parentesen a slut parentes ; m -värdet fås sedan genom att sätta in punktens koordinater i räta linjens ekvation y är lika med k x plus m .",
+   "s": 497.94,
+   "e": 513.14
+  },
+  {
+   "t": "Kedjeregeln: derivera den yttre funktionen med den inre funktionen kvar oförändrad, multiplicera sedan med den inre derivatan.",
+   "s": 513.14,
+   "e": 521.69
+  },
+  {
+   "t": "Har den inre funktionen i sin tur en egen inre funktion krävs kedjeregeln flera gånger i följd.",
+   "s": 521.69,
+   "e": 528.33
+  },
+  {
+   "t": "Vid relaterade förändringshastigheter: identifiera vad som söks och vad som är givet, ställ upp kedjeregeln i Leibniz-form ( d y delat med d t är lika med d y delat med d r gånger d r delat med d t till exempel) och lös ut den efterfrågade kvoten.",
+   "s": 528.33,
+   "e": 547.67
+  },
+  {
+   "t": "Derivator av sinus x och cosinus x gäller bara om vinkeln mäts i radianer — i grader stämmer inte deriveringsregeln.",
+   "s": 547.67,
+   "e": 555.67
+  },
+  {
+   "t": "En produkt av två funktioner får inte deriveras faktor för faktor; produktregeln krävs.",
+   "s": 555.67,
+   "e": 562.08
+  },
+  {
+   "t": "En summa av termer deriveras däremot fortfarande termvis.",
+   "s": 562.08,
+   "e": 566.9
+  },
+  {
+   "t": "Digitala verktyg (t.ex. GeoGebra) kan derivera och lösa f prim parentesen x slut parentes är lika med 0 numeriskt eller grafiskt när handräkning är svår eller omöjlig, till exempel för funktioner som f av x är lika med x upphöjt till sinus x .",
+   "s": 566.9,
+   "e": 584.84
+  },
+  {
+   "t": "Avgör alltid först vilken operation frågan svarar mot: en förändringstakt är ett derivatavärde f prim parentesen a slut parentes , medan \"störst/minst\" eller \"ingen förändring\" leder till ekvationen f prim parentesen x slut parentes är lika med 0 .",
+   "s": 584.79,
+   "e": 600.37
+  },
+  {
+   "t": "Extremvärdesproblem löses i tre steg: derivera, sätt f prim parentesen x slut parentes är lika med 0 och lös ut x; sätt in x-värdena i den ursprungliga funktionen för att få y-koordinaterna; avgör karaktären med andraderivatans tecken.",
+   "s": 600.37,
+   "e": 616.25
+  },
+  {
+   "t": "I ett slutet intervall räcker det inte att titta på extrempunkterna — jämför även funktionsvärdet i intervallets ändpunkter.",
+   "s": 616.25,
+   "e": 623.81
+  },
+  {
+   "t": "Det största av alla jämförda värden är funktionens största värde, det minsta är dess minsta värde.",
+   "s": 623.81,
+   "e": 630.27
+  },
+  {
+   "t": "Kurvkonstruktion görs med en teckentabell: markera derivatans nollställen och definitionsluckor, undersök derivatans tecken i varje delintervall och läs av växande ( nearrow ) och avtagande ( searrow ) grenar.",
+   "s": 630.27,
+   "e": 643.76
+  },
+  {
+   "t": "Vertikala asymptoter fås av nämnaren är lika med 0 (rationella funktioner).",
+   "s": 643.76,
+   "e": 649.84
+  },
+  {
+   "t": "Horisontella asymptoter fås av gränsvärdet då x går mot plus minus oändligheten , om det är ändligt.",
+   "s": 649.84,
+   "e": 657.09
+  },
+  {
+   "t": "Sneda asymptoter uppstår i stället när täljarens grad är exakt en högre än nämnarens — dela då upp uttrycket i termer tills det står på formen k x plus m plus R parentesen x slut parentes med R parentesen x slut parentes går mot 0 .",
+   "s": 657.09,
+   "e": 671.59
+  },
+  {
+   "t": "En funktion kan inte ha både en horisontell och en sned asymptot åt samma håll samtidigt — bara en av dem gäller för respektive riktning.",
+   "s": 671.59,
+   "e": 679.77
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 679.77,
+   "e": 682.82
+  },
+  {
+   "t": "Grunden för hela kapitlet: en sekant genom punkterna P och Q på kurvan glider mot tangenten i P när h går mot 0 — sekantens lutning går då mot derivatans värde f prim parentesen a slut parentes :",
+   "s": 682.82,
+   "e": 708.86
+  },
+  {
+   "t": "En rationell funktion kan ha både en lodrät och en sned asymptot samtidigt — kurvan gör ett språng vid den lodräta asymptoten x är lika med 2 och smyger sig mot den sneda asymptoten y är lika med minus x plus 1 längre ut:",
+   "s": 682.82,
+   "e": 708.86
+  },
+  {
+   "t": "Inför provet",
+   "s": 682.82,
+   "e": 708.86
+  },
+  {
+   "t": "Kan du förklara vad derivatans definition egentligen mäter, och koppla ihop sekant och tangent?",
+   "s": 708.86,
+   "e": 715.62
+  },
+  {
+   "t": "Vet du skillnaden mellan skrivsätten y prim , f prim parentesen x slut parentes och d y delat med d x , och varför Leibniz notation ibland är att föredra?",
+   "s": 715.62,
+   "e": 726.96
+  },
+  {
+   "t": "Kan du tolka ett derivatavärde både grafiskt (tangentens lutning) och i en tillämpning (förändringshastighet, med rätt enhet)?",
+   "s": 726.96,
+   "e": 736.07
+  },
+  {
+   "t": "Kan du derivera en sammansatt funktion med kedjeregeln, även när den inre funktionen i sin tur har en egen inre funktion?",
+   "s": 736.07,
+   "e": 743.9
+  },
+  {
+   "t": "Kan du ställa upp och lösa problem med relaterade förändringshastigheter med kedjeregeln i Leibniz-form?",
+   "s": 743.9,
+   "e": 750.75
+  },
+  {
+   "t": "Kan du deriveringsreglerna för sinus x , cosinus x , e upphöjt till k x , a upphöjt till x och naturliga logaritmen av x utantill, och vet du att de trigonometriska kräver radianer?",
+   "s": 750.75,
+   "e": 762.91
+  },
+  {
+   "t": "Kan du produktregeln och kvotregeln, och vet du varför man inte kan derivera en produkt \"faktor för faktor\"?",
+   "s": 762.91,
+   "e": 770.06
+  },
+  {
+   "t": "Kan du bestämma extrempunkter (derivera, sätt lika med noll, lös) och avgöra deras karaktär med andraderivatan?",
+   "s": 770.06,
+   "e": 778.45
+  },
+  {
+   "t": "Kan du bestämma det största/minsta värdet av en funktion i ett slutet intervall genom att jämföra extrempunkter och ändpunkter?",
+   "s": 778.45,
+   "e": 786.6
+  },
+  {
+   "t": "Kan du skissa en funktions graf med hjälp av en teckentabell?",
+   "s": 786.6,
+   "e": 791.1
+  },
+  {
+   "t": "Kan du bestämma vertikala, horisontella och sneda asymptoter till en rationell funktion?",
+   "s": 791.1,
+   "e": 797.07
+  },
+  {
+   "t": "Vet du när ett digitalt verktyg är nödvändigt, och vilken operation ( f prim parentesen a slut parentes eller f prim parentesen x slut parentes är lika med 0 ) som svarar mot frågan?",
+   "s": 797.07,
+   "e": 808.91
+  }
+ ]
+}

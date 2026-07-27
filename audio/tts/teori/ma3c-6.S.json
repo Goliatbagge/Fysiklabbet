@@ -1,0 +1,348 @@
+{
+ "id": "ma3c-6.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b7e269fd0f7425cdbb6f7257c6449c02b2837ad1",
+ "dur": 566.71,
+ "segments": [
+  {
+   "t": "Sammanfattning — Trigonometri och triangelsatserna",
+   "s": 0.1,
+   "e": 4.21
+  },
+  {
+   "t": "Det här kapitlet handlade om trigonometri bortom den rätvinkliga triangeln.",
+   "s": 4.16,
+   "e": 9.6
+  },
+  {
+   "t": "Du har sett hur sinus, cosinus och tangens definieras för alla vinklar med hjälp av enhetscirkeln, hur trigonometriska ekvationer löses och varför de oftast har två lösningar, samt hur areasatsen, sinussatsen och cosinussatsen (tillsammans kallade triangelsatserna) används för att bestämma sidor, vinklar och areor i godtyckliga trianglar — inte bara rätvinkliga.",
+   "s": 9.6,
+   "e": 31.68
+  },
+  {
+   "t": "Du ska efter kapitlet kunna avgöra vilken sats som passar ett givet problem och lösa tillämpningar med flera trianglar efter varandra.",
+   "s": 31.68,
+   "e": 39.7
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 39.7,
+   "e": 41.99
+  },
+  {
+   "t": "hypotenusa — sidan mitt emot den räta vinkeln i en rätvinklig triangel; alltid triangelns längsta sida.",
+   "s": 41.99,
+   "e": 49.06
+  },
+  {
+   "t": "katet — en av de två kortare sidorna i en rätvinklig triangel; delas i motstående katet (mitt emot vinkeln v) och närliggande katet (bredvid v).",
+   "s": 49.06,
+   "e": 59.49
+  },
+  {
+   "t": "sinus, cosinus, tangens — de tre trigonometriska funktionerna, definierade som förhållanden mellan sidorna i en rätvinklig triangel (se Formler).",
+   "s": 59.49,
+   "e": 70.21
+  },
+  {
+   "t": "inversa trigonometriska funktioner ( sinus upphöjt till minus 1 , cosinus upphöjt till minus 1 , tangens upphöjt till minus 1 ) — används för att bestämma en vinkel när ett sidoförhållande är känt; kallas även arcsin, arccos och arctan.",
+   "s": 70.21,
+   "e": 84.92
+  },
+  {
+   "t": "enhetscirkeln — en cirkel med radien 1 och medelpunkt i origo; används för att definiera sinus och cosinus för alla vinklar, inte bara spetsiga.",
+   "s": 84.92,
+   "e": 94.54
+  },
+  {
+   "t": "period — det antal grader en vinkel måste öka med för att en trigonometrisk funktion ska anta samma värde igen; 360 grader för sinus och cosinus, 180 grader för tangens.",
+   "s": 94.54,
+   "e": 106.22
+  },
+  {
+   "t": "trigonometrisk ekvation — en ekvation som innehåller en trigonometrisk funktion, t.ex. sinus v är lika med a ; löses med enhetscirkeln eller räknarens inversa funktioner.",
+   "s": 106.22,
+   "e": 117.65
+  },
+  {
+   "t": "mellanliggande vinkel — vinkeln som ligger mellan två kända sidor i en triangel; krävs för areasatsen och för ett av cosinussatsens användningsfall.",
+   "s": 117.65,
+   "e": 126.91
+  },
+  {
+   "t": "areasatsen — formel för en triangels area utifrån två sidor och den mellanliggande vinkeln.",
+   "s": 126.91,
+   "e": 133.34
+  },
+  {
+   "t": "sinussatsen — samband mellan en triangels sidor och motstående vinklars sinusvärden.",
+   "s": 133.34,
+   "e": 139.49
+  },
+  {
+   "t": "cosinussatsen — generalisering av Pythagoras sats till godtyckliga trianglar; samband mellan alla tre sidorna och en vinkel.",
+   "s": 139.49,
+   "e": 147.84
+  },
+  {
+   "t": "triangelsatserna — samlingsnamn för areasatsen, sinussatsen och cosinussatsen.",
+   "s": 147.84,
+   "e": 154.0
+  },
+  {
+   "t": "Formler",
+   "s": 154.0,
+   "e": 155.82
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 155.82,
+   "e": 158.18
+  },
+  {
+   "t": "Trigonometriska funktioner i en rätvinklig triangel",
+   "s": 158.18,
+   "e": 162.32
+  },
+  {
+   "t": "tangens v är lika med a delat med b, sinus v som är lika med a delat med c, cosinus v som är lika med b delat med c",
+   "s": 162.32,
+   "e": 170.57
+  },
+  {
+   "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
+   "s": 170.57,
+   "e": 177.54
+  },
+  {
+   "t": "Inversa trigonometriska funktioner",
+   "s": 177.54,
+   "e": 181.18
+  },
+  {
+   "t": "v är lika med tangens upphöjt till minus 1 parentesen a delat med b slut parentes, v som är lika med sinus upphöjt till minus 1 parentesen a delat med c slut parentes, v som är lika med cosinus upphöjt till minus 1 parentesen b delat med c slut parentes",
+   "s": 181.18,
+   "e": 197.89
+  },
+  {
+   "t": "Sinus, cosinus och tangens på enhetscirkeln",
+   "s": 197.89,
+   "e": 202.35
+  },
+  {
+   "t": "sinus v är lika med y, cosinus v som är lika med x, tangens v som är lika med sinus v delat med cosinus v",
+   "s": 202.35,
+   "e": 210.66
+  },
+  {
+   "t": "där parentesen x, y slut parentes är koordinaterna för den punkt på enhetscirkeln som vinkeln v ger.",
+   "s": 210.66,
+   "e": 218.3
+  },
+  {
+   "t": "Trigonometriska funktionernas perioder",
+   "s": 218.3,
+   "e": 221.94
+  },
+  {
+   "t": "Andra lösningen till en trigonometrisk ekvation (i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader , med v ett som räknarens svar)",
+   "s": 221.94,
+   "e": 233.94
+  },
+  {
+   "t": "sinus v är lika med a : v två är lika med 180 grader minus v ett",
+   "s": 233.94,
+   "e": 240.46
+  },
+  {
+   "t": "cosinus v är lika med a : v två är lika med 360 grader minus v ett",
+   "s": 240.46,
+   "e": 247.26
+  },
+  {
+   "t": "tangens v är lika med a : v två är lika med v ett plus 180 grader",
+   "s": 247.26,
+   "e": 253.46
+  },
+  {
+   "t": "Areasatsen",
+   "s": 253.46,
+   "e": 255.68
+  },
+  {
+   "t": "T är lika med a b sinus C delat med 2 som är lika med a c sinus B delat med 2 som är lika med b c sinus A delat med 2",
+   "s": 255.68,
+   "e": 264.61
+  },
+  {
+   "t": "där T är triangelns area.",
+   "s": 264.61,
+   "e": 267.62
+  },
+  {
+   "t": "Sinussatsen",
+   "s": 267.62,
+   "e": 269.91
+  },
+  {
+   "t": "sinus A delat med a är lika med sinus B delat med b som är lika med sinus C delat med c",
+   "s": 269.91,
+   "e": 277.65
+  },
+  {
+   "t": "Cosinussatsen",
+   "s": 269.91,
+   "e": 277.65
+  },
+  {
+   "t": "c i kvadrat är lika med a i kvadrat plus b i kvadrat minus 2 a b cosinus C b i kvadrat som är lika med a i kvadrat plus c i kvadrat minus 2 a c cosinus B a i kvadrat som är lika med b i kvadrat plus c i kvadrat minus 2 b c cosinus A",
+   "s": 277.65,
+   "e": 296.93
+  },
+  {
+   "t": "I sinussatsen och cosinussatsen är sidan a motstående sida till vinkel A, sidan b motstående sida till vinkel B och sidan c motstående sida till vinkel C.",
+   "s": 296.88,
+   "e": 308.15
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 296.88,
+   "e": 308.15
+  },
+  {
+   "t": "Avgör vilken trigonometrisk funktion som passar utifrån vilka sidor som är kända: motstående/hypotenusa ger sinus, närliggande/hypotenusa ger cosinus, motstående/närliggande ger tangens.",
+   "s": 308.15,
+   "e": 322.32
+  },
+  {
+   "t": "Ska du bestämma en vinkel i stället för en sida, använd den inversa funktionen ( sinus upphöjt till minus 1 , cosinus upphöjt till minus 1 , tangens upphöjt till minus 1 ) på räknaren.",
+   "s": 322.32,
+   "e": 333.85
+  },
+  {
+   "t": "Punkten på enhetscirkeln som vinkeln v ger kan alltid skrivas parentesen cosinus v, sinus v slut parentes — för vilken vinkel som helst, inte bara spetsiga.",
+   "s": 333.85,
+   "e": 344.18
+  },
+  {
+   "t": "En vinkel större än 360 grader ger samma punkt som vinkeln minus ett helt varv; en negativ vinkel motsvarar en vridning medurs i stället för moturs.",
+   "s": 344.18,
+   "e": 354.33
+  },
+  {
+   "t": "Ekvationen sinus v är lika med a eller cosinus v är lika med a saknar lösning om | a | är större än 1 , eftersom linjen då hamnar helt utanför enhetscirkeln (vars radie bara är 1 ).",
+   "s": 354.33,
+   "e": 365.98
+  },
+  {
+   "t": "Räknaren ger bara den minsta lösningen v ett i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader — den andra lösningen v två måste räknas ut för hand (se formlerna ovan).",
+   "s": 365.98,
+   "e": 379.69
+  },
+  {
+   "t": "Välj triangelsats efter vad som är känt: areasatsen (två sidor och mellanliggande vinkel), sinussatsen (en sida och två vinklar, eller två sidor och en icke-mellanliggande vinkel), cosinussatsen (två sidor och mellanliggande vinkel, eller alla tre sidor).",
+   "s": 379.69,
+   "e": 396.92
+  },
+  {
+   "t": "Ska du bestämma en vinkel är cosinussatsen säkrare än sinussatsen: cosinussatsen ger direkt rätt vinkel (tecknet på cosinus v avslöjar om vinkeln är spetsig eller trubbig), medan sinussatsen kan ge en falsk lösning som måste uteslutas med triangelns vinkelsumma ( 180 grader ).",
+   "s": 396.92,
+   "e": 414.33
+  },
+  {
+   "t": "Areasatsen ger ofta två giltiga mellanliggande vinklar ( C ett och 180 grader minus C ett ) för samma area och sidor — till skillnad från sinussatsen finns här inget vinkelsummevillkor som utesluter någon av dem.",
+   "s": 414.33,
+   "e": 427.65
+  },
+  {
+   "t": "I tillämpningsproblem med flera trianglar: lös först den triangel där tillräckligt mycket är känt, och använd sedan den beräknade storheten som känd information i nästa triangel.",
+   "s": 427.65,
+   "e": 438.15
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 438.15,
+   "e": 441.2
+  },
+  {
+   "t": "Trigonometriska funktioner definieras i en rätvinklig triangel med motstående katet a, närliggande katet b och hypotenusa c:",
+   "s": 441.2,
+   "e": 467.2
+  },
+  {
+   "t": "Enhetscirkeln definierar sinus och cosinus för alla vinklar — inte bara spetsiga — som punktens y - respektive x -koordinat:",
+   "s": 441.2,
+   "e": 467.2
+  },
+  {
+   "t": "Triangelsatserna delar alla samma beteckningar: sidan a mitt emot vinkel A, sidan b mitt emot vinkel B och sidan c mitt emot vinkel C:",
+   "s": 441.2,
+   "e": 467.2
+  },
+  {
+   "t": "Inför provet",
+   "s": 441.2,
+   "e": 467.2
+  },
+  {
+   "t": "Kan du definiera sinus, cosinus och tangens med hjälp av en rätvinklig triangels sidor (motstående katet, närliggande katet, hypotenusa)?",
+   "s": 467.2,
+   "e": 477.4
+  },
+  {
+   "t": "Kan du använda de inversa trigonometriska funktionerna för att bestämma en vinkel när två sidor är kända?",
+   "s": 477.4,
+   "e": 484.15
+  },
+  {
+   "t": "Vet du hur en punkt på enhetscirkeln hänger ihop med sinus och cosinus för en godtycklig vinkel — även trubbiga och negativa vinklar?",
+   "s": 484.15,
+   "e": 492.38
+  },
+  {
+   "t": "Kan du lösa en trigonometrisk ekvation som sinus v är lika med a eller cosinus v är lika med a med hjälp av enhetscirkeln, och avgöra när ekvationen saknar lösning?",
+   "s": 492.38,
+   "e": 502.88
+  },
+  {
+   "t": "Kan du bestämma båda lösningarna till en trigonometrisk ekvation i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader , inte bara den räknaren ger direkt?",
+   "s": 502.88,
+   "e": 514.92
+  },
+  {
+   "t": "Vet du att sinus och cosinus har perioden 360 grader medan tangens har perioden 180 grader , och varför tangens period är hälften så lång?",
+   "s": 514.92,
+   "e": 525.35
+  },
+  {
+   "t": "Kan du areasatsen och vet du vilken information som krävs för att använda den?",
+   "s": 525.35,
+   "e": 530.8
+  },
+  {
+   "t": "Kan du sinussatsen och vet du när den kan användas?",
+   "s": 530.8,
+   "e": 534.75
+  },
+  {
+   "t": "Kan du cosinussatsen och vet du när den kan användas?",
+   "s": 534.75,
+   "e": 538.8
+  },
+  {
+   "t": "Kan du avgöra vilken av de tre triangelsatserna som passar till ett givet problem, utifrån vad som är känt i triangeln?",
+   "s": 538.8,
+   "e": 546.22
+  },
+  {
+   "t": "Vet du varför cosinussatsen är säkrare än sinussatsen när man ska bestämma en vinkel, och hur man kontrollerar en misstänkt falsk lösning med triangelns vinkelsumma?",
+   "s": 546.22,
+   "e": 558.2
+  },
+  {
+   "t": "Kan du lösa ett tillämpningsproblem som kräver flera trianglar efter varandra, där en beräknad storhet i den ena triangeln används i nästa?",
+   "s": 558.15,
+   "e": 566.71
+  }
+ ]
+}

@@ -1,0 +1,403 @@
+{
+ "id": "ma4-3.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "03648d7d93cbc2303bcf390e3ab3a4d72557e9c0",
+ "dur": 787.26,
+ "segments": [
+  {
+   "t": "Sammanfattning — Integraler",
+   "s": 0.1,
+   "e": 3.16
+  },
+  {
+   "t": "Det här kapitlet handlade om integraler: hur man bestämmer primitiva funktioner, beräknar bestämda integraler med integralkalkylens fundamentalsats, och använder integraler för att beräkna areor, volymer och sannolikheter.",
+   "s": 3.11,
+   "e": 16.66
+  },
+  {
+   "t": "Du har sett hur integralen tolkas som en area under en kurva, hur den kopplas till förändringshastigheter (hastighet, kraft, effekt) och hur den används för att beräkna rotationskroppars volym med skivmetoden.",
+   "s": 16.66,
+   "e": 29.74
+  },
+  {
+   "t": "Du ska efter kapitlet kunna bestämma primitiva funktioner, beräkna bestämda integraler och areor — även mellan två kurvor — samt ställa upp och tolka integraler i tillämpningar som sträcka, arbete, energi, sannolikhet och volym.",
+   "s": 29.74,
+   "e": 43.94
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 43.94,
+   "e": 46.26
+  },
+  {
+   "t": "primitiv funktion ( F ) — en funktion vars derivata är den ursprungliga funktionen, F prim parentesen x slut parentes är lika med f av x ; att bestämma den är den omvända operationen till derivering.",
+   "s": 46.26,
+   "e": 58.92
+  },
+  {
+   "t": "konstanten C — läggs till när man anger samtliga primitiva funktioner, F parentesen x slut parentes plus C , eftersom en konstant deriveras bort.",
+   "s": 58.92,
+   "e": 69.06
+  },
+  {
+   "t": "bestämd integral — integralen integralen av a upphöjt till b f av x d x med angivna gränser; ger ett tal, tolkat som en area.",
+   "s": 69.06,
+   "e": 78.86
+  },
+  {
+   "t": "integrand — funktionen f av x som står innanför integraltecknet och ska integreras.",
+   "s": 78.86,
+   "e": 85.31
+  },
+  {
+   "t": "integrationsgränser ( a , b ) — det undre och övre värdet som avgränsar integrationen.",
+   "s": 85.31,
+   "e": 92.22
+  },
+  {
+   "t": "integralkalkylens fundamentalsats — sambandet mellan en bestämd integral och en primitiv funktion, integralen av a upphöjt till b f av x d x är lika med F parentesen b slut parentes minus F parentesen a slut parentes .",
+   "s": 92.22,
+   "e": 107.34
+  },
+  {
+   "t": "areaenhet (areaenheter) och volymsenhet (volymenheter) — enheter som används när en area eller volym beräknas utan given längdskala.",
+   "s": 107.34,
+   "e": 117.64
+  },
+  {
+   "t": "täthetsfunktion — en funktion vars area under grafen (integralen) ger sannolikheten för ett intervall av utfall.",
+   "s": 117.64,
+   "e": 125.42
+  },
+  {
+   "t": "diskret respektive kontinuerligt utfallsrum — ett ändligt antal möjliga utfall (t.ex. tärningskast) respektive oändligt många (t.ex. alla tider eller vikter).",
+   "s": 125.42,
+   "e": 136.57
+  },
+  {
+   "t": "likformig fördelning — täthetsfunktion som är konstant (en rät, vågrät linje) inom ett intervall; arean är en rektangel.",
+   "s": 136.57,
+   "e": 145.62
+  },
+  {
+   "t": "normalfördelning — symmetrisk klockkurva kring medelvärdet my ; saknar enkel primitiv funktion och beräknas med digitalt hjälpmedel.",
+   "s": 145.62,
+   "e": 154.2
+  },
+  {
+   "t": "exponentialfördelning — täthetsfunktion som avtar snabbt från ett högt startvärde mot noll; kan ofta integreras för hand.",
+   "s": 154.2,
+   "e": 162.04
+  },
+  {
+   "t": "rotationskropp — en tredimensionell kropp som uppstår när en kurva eller ett område roteras ett helt varv runt en axel.",
+   "s": 162.04,
+   "e": 169.78
+  },
+  {
+   "t": "skivmetoden — metod att beräkna en rotationskropps volym genom att summera oändligt tunna cylindriska skivor med en integral.",
+   "s": 169.78,
+   "e": 177.71
+  },
+  {
+   "t": "Formler",
+   "s": 177.71,
+   "e": 179.54
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 179.54,
+   "e": 181.9
+  },
+  {
+   "t": "Primitiva funktioner — grundregler",
+   "s": 181.9,
+   "e": 185.22
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att F parentesen x slut parentes är lika med x upphöjt till n plus 1 delat med n plus 1, n är inte lika med minus 1, 4 p t f av x som är lika med k vilket ger att F parentesen x slut parentes är lika med k x, 4 p t f av x som är lika med e upphöjt till k x vilket ger att F parentesen x slut parentes är lika med e upphöjt till k x delat med k, 4 p t f av x som är lika med a upphöjt till k x vilket ger att F parentesen x slut parentes är lika med a upphöjt till k x delat med k gånger naturliga logaritmen av a",
+   "s": 185.22,
+   "e": 253.21
+  },
+  {
+   "t": "Primitiva funktioner — trigonometriska och 1/x",
+   "s": 218.53,
+   "e": 253.21
+  },
+  {
+   "t": "f av x är lika med sinus k x vilket ger att F parentesen x slut parentes är lika med minus cosinus k x delat med k, 4 p t f av x som är lika med cosinus k x vilket ger att F parentesen x slut parentes är lika med sinus k x delat med k, 4 p t f av x som är lika med 1 delat med x vilket ger att F parentesen x slut parentes är lika med naturliga logaritmen av x, parentesen x är större än 0 slut parentes",
+   "s": 218.53,
+   "e": 256.01
+  },
+  {
+   "t": "där k är lika med 1 ger specialfallen sinus x vilket ger att minus cosinus x och cosinus x vilket ger att sinus x .",
+   "s": 256.01,
+   "e": 264.75
+  },
+  {
+   "t": "Vinklar anges alltid i radianer.",
+   "s": 264.75,
+   "e": 268.1
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 268.1,
+   "e": 271.6
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med F parentesen x slut parentes a upphöjt till b som är lika med F parentesen b slut parentes minus F parentesen a slut parentes",
+   "s": 271.6,
+   "e": 287.25
+  },
+  {
+   "t": "Area mellan kurva och x-axeln",
+   "s": 287.2,
+   "e": 290.5
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b f av x d x parentesen f av x är större än 0 slut parentes A som är lika med minus integralen av a upphöjt till b f av x d x parentesen f av x är mindre än 0 slut parentes",
+   "s": 290.5,
+   "e": 306.46
+  },
+  {
+   "t": "Räkneregler för integraler",
+   "s": 306.46,
+   "e": 309.57
+  },
+  {
+   "t": "integralen av a upphöjt till c f av x d x är lika med integralen av a upphöjt till b f av x d x plus integralen av b upphöjt till c f av x d x, 4 p t integralen av a upphöjt till b bigl parentesen f av x plus minus g av x bigr slut parentes d x som är lika med integralen av a upphöjt till b f av x d x plus minus integralen av a upphöjt till b g av x d x, 4 p t integralen av a upphöjt till b k gånger f av x d x som är lika med k gånger integralen av a upphöjt till b f av x d x, 4 p t integralen av a upphöjt till b f av x d x som är lika med minus integralen av b upphöjt till a f av x d x",
+   "s": 309.57,
+   "e": 358.01
+  },
+  {
+   "t": "där k i tredje raden är en konstant, oberoende av x .",
+   "s": 358.01,
+   "e": 363.3
+  },
+  {
+   "t": "Area mellan två kurvor",
+   "s": 363.3,
+   "e": 366.24
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b parentesen f av x minus g av x slut parentes d x",
+   "s": 366.24,
+   "e": 374.76
+  },
+  {
+   "t": "där f av x är den övre funktionen och g av x den undre.",
+   "s": 374.76,
+   "e": 379.94
+  },
+  {
+   "t": "Integralens enhet och fyra vanliga tillämpningar",
+   "s": 379.94,
+   "e": 383.87
+  },
+  {
+   "t": "y -axelns enhet gånger x -axelns enhet är lika med integralens enhet",
+   "s": 383.87,
+   "e": 389.77
+  },
+  {
+   "t": "Lägesändring: delta s är lika med integralen av t ett upphöjt till t två v parentesen t slut parentes d t, 4 p t Hastighetsändring: delta v som är lika med integralen av t ett upphöjt till t två a parentesen t slut parentes d t, 4 p t Arbete: W som är lika med integralen av s ett upphöjt till s två F parentesen s slut parentes d s, 4 p t Energiförbrukning: E som är lika med integralen av t ett upphöjt till t två P av t d t",
+   "s": 389.77,
+   "e": 424.84
+  },
+  {
+   "t": "Täthetsfunktion",
+   "s": 389.77,
+   "e": 424.84
+  },
+  {
+   "t": "P av a är mindre än eller lika med X är mindre än eller lika med b är lika med integralen av a upphöjt till b f av x d x",
+   "s": 424.84,
+   "e": 443.24
+  },
+  {
+   "t": "f av x är större än eller lika med 0 för alla x och integralen av -\\infty upphöjt till oändligheten f av x d x är lika med 1",
+   "s": 424.84,
+   "e": 443.24
+  },
+  {
+   "t": "Volym vid rotation kring x-axeln",
+   "s": 443.24,
+   "e": 446.81
+  },
+  {
+   "t": "V är lika med pi integralen av a upphöjt till b y i kvadrat d x",
+   "s": 446.81,
+   "e": 455.15
+  },
+  {
+   "t": "Volym vid rotation kring y-axeln",
+   "s": 446.81,
+   "e": 455.15
+  },
+  {
+   "t": "V är lika med pi integralen av a upphöjt till b x i kvadrat d y",
+   "s": 455.15,
+   "e": 461.39
+  },
+  {
+   "t": "där x måste vara uttryckt som funktion av y (kurvans invers) innan integralen beräknas.",
+   "s": 461.39,
+   "e": 468.46
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 468.46,
+   "e": 471.34
+  },
+  {
+   "t": "En integral kan bli negativ om grafen ligger under x-axeln, men en area kan aldrig vara negativ — ligger f av x är mindre än 0 i intervallet räknas arean som minus integralen av a upphöjt till b f av x d x .",
+   "s": 471.34,
+   "e": 485.1
+  },
+  {
+   "t": "Ligger området delvis över och delvis under x-axeln (eller byter den övre/undre funktionen på vägen) måste beräkningen delas upp i flera integraler, en för varje delintervall.",
+   "s": 485.1,
+   "e": 496.86
+  },
+  {
+   "t": "Räknereglerna låter dig dela upp en integral efter delintervall ( a går mot b går mot c ), integrera summor och differenser termvis, och bryta ut en konstant faktor framför integraltecknet — konstanten får inte innehålla x .",
+   "s": 496.86,
+   "e": 510.55
+  },
+  {
+   "t": "Byter man plats på integrationsgränserna byter integralen tecken: integralen av a upphöjt till b f av x d x är lika med minus integralen av b upphöjt till a f av x d x .",
+   "s": 510.55,
+   "e": 523.57
+  },
+  {
+   "t": "För att hitta arean mellan två kurvor: sätt funktionsuttrycken lika och lös ekvationen — skärningspunkternas x -koordinater blir integrationsgränserna.",
+   "s": 523.57,
+   "e": 533.34
+  },
+  {
+   "t": "Kontrollera alltid vilken funktion som är övre respektive undre i intervallet, och förenkla uttrycken innan du integrerar.",
+   "s": 533.34,
+   "e": 540.91
+  },
+  {
+   "t": "Integralens enhet är alltid produkten av axlarnas enheter ( y -axelns enhet gånger x -axelns enhet) — det avslöjar vilken storhet integralen (arean) faktiskt står för.",
+   "s": 540.91,
+   "e": 552.85
+  },
+  {
+   "t": "Fyra vanliga tillämpningar bygger på samma idé: integralen av en förändringshastighet ger den ackumulerade storheten (hastighet ger sträcka, acceleration ger hastighetsändring, kraft ger arbete, effekt ger energi).",
+   "s": 552.85,
+   "e": 566.96
+  },
+  {
+   "t": "Vid ett kontinuerligt utfallsrum (t.ex. tid eller vikt) är sannolikheten för ett exakt värde alltid 0 — därför beräknas i stället sannolikheten för ett intervall, som arean under täthetsfunktionen.",
+   "s": 566.96,
+   "e": 579.05
+  },
+  {
+   "t": "En täthetsfunktion måste vara icke-negativ överallt, och den totala arean under hela kurvan måste vara exakt 1 (100 procent).",
+   "s": 579.05,
+   "e": 589.65
+  },
+  {
+   "t": "Vid rotation kring x-axeln används formeln V är lika med pi integralen av a upphöjt till b y i kvadrat d x direkt; vid rotation kring y-axeln måste kurvan först lösas ut som x i termer av y (inversen) innan formeln V är lika med pi integralen av a upphöjt till b x i kvadrat d y används.",
+   "s": 589.6,
+   "e": 609.32
+  },
+  {
+   "t": "Saknas integrationsgränserna i en uppgift om area eller rotationskropp: sök upp funktionens nollställen (skärningar med x-axeln) eller skärningspunkterna mellan kurvorna för att hitta dem.",
+   "s": 609.32,
+   "e": 621.02
+  },
+  {
+   "t": "Med digitalt hjälpmedel (t.ex. GeoGebra) kan area och volym ofta beräknas direkt — kommandot IntegralMellan(övre funktion, undre funktion, från x-värde, till x-värde) ger arean mellan två kurvor, och sannolikhetskalkylatorn används för normalfördelningar som saknar enkel primitiv funktion.",
+   "s": 621.02,
+   "e": 640.44
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 640.44,
+   "e": 643.49
+  },
+  {
+   "t": "Sambandet mellan sträcka, hastighet och acceleration: att derivera tar dig ett steg uppåt i kedjan, att bestämma en primitiv funktion (integrera) tar dig ett steg nedåt igen:",
+   "s": 643.49,
+   "e": 673.69
+  },
+  {
+   "t": "Integralen tolkad som arean mellan kurvan y är lika med f av x och x-axeln, mellan gränserna a och b — grundbilden för hela kapitlet:",
+   "s": 643.49,
+   "e": 673.69
+  },
+  {
+   "t": "En rotationskropp där kurvan y är lika med f av x roterar kring x-axeln — skivmetoden tänker sig kroppen uppbyggd av oändligt tunna cylindriska skivor med radien r är lika med y :",
+   "s": 643.49,
+   "e": 673.69
+  },
+  {
+   "t": "Inför provet",
+   "s": 643.49,
+   "e": 675.54
+  },
+  {
+   "t": "Kan du förklara vad en primitiv funktion är och skrivsättet f bis går mot f prim går mot f går mot F ?",
+   "s": 675.54,
+   "e": 683.17
+  },
+  {
+   "t": "Kan du bestämma en primitiv funktion till potens-, exponential- och trigonometriska funktioner, samt till 1 delat med x ?",
+   "s": 683.17,
+   "e": 691.2
+  },
+  {
+   "t": "Vet du skillnaden mellan att ange en primitiv funktion och samtliga primitiva funktioner (konstanten C )?",
+   "s": 691.2,
+   "e": 698.47
+  },
+  {
+   "t": "Kan du integralkalkylens fundamentalsats och använda den för att beräkna en bestämd integral?",
+   "s": 698.47,
+   "e": 704.7
+  },
+  {
+   "t": "Vet du varför en integral kan bli negativ men en area aldrig kan det, och hur du hanterar ett område som ligger både över och under x-axeln?",
+   "s": 704.7,
+   "e": 713.69
+  },
+  {
+   "t": "Kan du räknereglerna för integraler: dela upp efter intervall, integrera summor och differenser termvis, och bryta ut en konstant faktor?",
+   "s": 713.69,
+   "e": 722.85
+  },
+  {
+   "t": "Kan du beräkna arean mellan två kurvor, inklusive att hitta skärningspunkterna och avgöra vilken funktion som är övre respektive undre?",
+   "s": 722.85,
+   "e": 731.36
+  },
+  {
+   "t": "Vet du hur man delar upp en area i flera integraler när fler än två kurvor begränsar området?",
+   "s": 731.36,
+   "e": 737.96
+  },
+  {
+   "t": "Kan du avgöra vilken storhet en integral (area) står för genom att multiplicera ihop axlarnas enheter?",
+   "s": 737.96,
+   "e": 745.62
+  },
+  {
+   "t": "Kan du ställa upp och använda formlerna delta s är lika med integralen av v parentesen t slut parentes d t , delta v är lika med integralen av a parentesen t slut parentes d t , W är lika med integralen av F parentesen s slut parentes d s och E är lika med integralen av P av t d t ?",
+   "s": 745.62,
+   "e": 767.75
+  },
+  {
+   "t": "Vet du vad en täthetsfunktion är, vilka två krav den måste uppfylla, och hur den skiljer sig mellan likformig, normal- och exponentialfördelning?",
+   "s": 767.75,
+   "e": 777.0
+  },
+  {
+   "t": "Kan du härleda och använda skivmetoden för att beräkna volymen av en rotationskropp kring både x-axeln och y-axeln, inklusive att lösa ut x som funktion av y ?",
+   "s": 777.0,
+   "e": 787.26
+  }
+ ]
+}

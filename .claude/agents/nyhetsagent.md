@@ -56,6 +56,9 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 9. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska vara
    intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
    skärmdump för att se att artikeln och bilden renderar snyggt.
+   Kör också termkontrollen `grep -in "upphets" data/nyheter.js` — varje träff
+   ska granskas och nästan alltid rättas till ”exciterad/excitation”
+   (se Skrivregler: svenska facktermer).
 
 10. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
     granskad (redaktionell korrektur + faktakoll av citat, se nedan) och
@@ -106,6 +109,20 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
   Ingen title case — bara första ordet i rubrik/mening versalt.
 - **Ton: professionell men populärvetenskaplig.** Förklara facktermer i klartext.
   Korta stycken. Konkreta jämförelser ("stor som ett tolvvåningshus").
+- **Använd de vedertagna svenska facktermerna — inte en ordboksöversättning av
+  den engelska källan.** Efter att artikeln är skriven: **sök igenom texten efter
+  ordstammen ”upphets” (upphetsad, upphetsat, upphetsade, upphetsning) och byt
+  till ”exciterad/exciterat/exciterade/excitation”** när det handlar om
+  energitillstånd hos atomkärnor, atomer, elektroner, molekyler eller kvantsystem
+  (engelskans *excited state* = **exciterat tillstånd**, aldrig ”upphetsat
+  tillstånd”). Kontrollera samtidigt att omgivande värmemetaforer inte hänger kvar
+  (”svalnar från”, ”lugnar ner sig”) — skriv i stället ”faller ner från ett
+  exciterat tillstånd”, ”deexciteras”, ”går ner till grundtillståndet”.
+  Samma typ av kontroll gäller andra vanliga falska vänner: *decay* → sönderfall
+  (inte ”förfall”), *momentum* → rörelsemängd (inte ”momentum”), *spin* → spinn,
+  *beam* → stråle (inte ”balk”), *lattice* → gitter, *shell* → skal,
+  *quenching* → släckning. Är du osäker på en term: kontrollera hur den skrivs i
+  svensk fysiklitteratur innan du publicerar.
 - **Glimten i ögat är tillåten — sparsamt.** Max en–två lättsamma formuleringar per
   artikel, och aldrig på bekostnad av sakligheten. Humorn får krydda, inte styra.
   Om du tvekar: stryk skämtet.

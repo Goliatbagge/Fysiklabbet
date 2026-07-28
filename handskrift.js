@@ -196,7 +196,10 @@
           continue;
         }
         if (scriptAnchor == null) scriptAnchor = x;
-        var nx = placeGlyph(sc, scriptAnchor, sb, s * 0.62, out, color);
+        /* övre integralgräns: in över krokens topp, inte helt till höger —
+         * minskar också luften fram till integranden */
+        var ax = (prevBase === '∫') ? scriptAnchor - 0.13 * F : scriptAnchor;
+        var nx = placeGlyph(sc, ax, sb, s * 0.62, out, color);
         if (prevBase === ']') {
           LASTLIM[sub ? 'sub' : 'sup'] =
             [(scriptAnchor + nx) / 2, sb - 0.28 * F];

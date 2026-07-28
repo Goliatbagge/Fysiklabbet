@@ -1318,6 +1318,8 @@
         'border-radius:8px;padding:6px 18px;font-weight:600;font-size:14px;cursor:pointer;' +
         'font-family:inherit;transition:background .15s,color .15s}' +
       '.hk-btn:hover{background:#efe8d8}' +
+      '.hk-btn:disabled{opacity:.4;cursor:default}' +
+      '.hk-btn:disabled:hover{background:' + PAPER + '}' +
       '.hk-btn.hk-active,.hk-btn.hk-active:hover{background:' + LABINK + ';color:' + PAPER + '}' +
       '.hk-speed{display:flex;gap:4px;align-items:center;margin-left:auto}' +
       '.hk-speed-label{font-size:12.5px;color:rgba(15,22,32,.62);margin-right:2px}' +
@@ -1604,8 +1606,8 @@
     }
 
     function play() {
-      if (playing) return;
-      if (tNow >= TOTAL) tNow = 0;
+      if (playing || tNow >= TOTAL) return;   /* klar lösning står kvar —
+                                                 omstart bara via "Börja om" */
       target = nextTarget();
       playing = true; lastTs = null;
       rafId = requestAnimationFrame(frame);
@@ -1628,11 +1630,27 @@
     playBtn.addEventListener('click', function () {
       if (playing) stop(); else play();
     });
+    /* föregående steg: hoppa tillbaka till närmast föregående steggräns
+     * (mitt i ett steg: till stegets början) och visa läget direkt */
+    var prevBtn = document.createElement('button');
+    prevBtn.className = 'hk-btn';
+    prevBtn.textContent = 'Föregående steg';
+    prevBtn.addEventListener('click', function () {
+      stop();
+      var t0 = 0;
+      for (var i = 0; i < boundaries.length; i++) {
+        if (boundaries[i] < tNow - 1) t0 = boundaries[i];
+      }
+      tNow = t0;
+      render(tNow);
+      updateBtns();
+    });
     var againBtn = document.createElement('button');
     againBtn.className = 'hk-btn';
     againBtn.textContent = 'Börja om';
     againBtn.addEventListener('click', restart);
     ctrls.appendChild(playBtn);
+    ctrls.appendChild(prevBtn);
     ctrls.appendChild(againBtn);
 
     var spWrap = document.createElement('span');
@@ -1666,10 +1684,14 @@
     }
 
     function updateBtns() {
+      var klar = tNow >= TOTAL;
+      playBtn.style.display = klar ? 'none' : '';   /* klar: bara Föregående/Börja om */
       playBtn.textContent = playing ? 'Paus'
-        : (tNow >= TOTAL ? 'Skriv igen'
-          : (atBoundary() ? 'Nästa steg' : (tNow > 0 ? 'Fortsätt' : 'Skriv')));
+        : (atBoundary() ? 'Nästa steg' : (tNow > 0 ? 'Fortsätt' : 'Skriv'));
       playBtn.classList.toggle('hk-active', playing);
+      prevBtn.disabled = tNow <= 0;
+      paperDiv.style.cursor = klar ? 'default' : 'pointer';
+      paperDiv.title = klar ? '' : 'Klicka för nästa steg';
     }
 
     /* klick var som helst på papperet: nästa steg — eller, om ett steg
@@ -1686,6 +1708,7 @@
     });
 
     render(0);
+    updateBtns();
     if (opts.instant) jumpToEnd();
     else if (opts.at != null) { tNow = opts.at; render(tNow); updateBtns(); }
     else if (opts.autostart) play();

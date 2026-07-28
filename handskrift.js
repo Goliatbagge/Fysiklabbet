@@ -1,6 +1,6 @@
-/* handskrift.js — animerad handskriven räknelösning ("hand med penna").
+/* handskrift.js — animerad handskriven räknelösning.
  *
- * Visar HUR en lösning skrivs för hand: en hand med blyertspenna skriver
+ * Visar HUR en lösning skrivs för hand: en blyertspenna skriver
  * tecken för tecken, streck för streck, på ett rutat papper. Tänkt att
  * bäddas in i teorigenomgångarna (senare via ett ::: handskrift-block,
  * samma mönster som graf.js).
@@ -23,8 +23,9 @@
  *                                men är fortfarande ett eget klicksteg.
  *
  *   opts = { fontSize: 40, speed: 1, autostart: false, instant: false,
- *            at: ms|null, stegvis: true, hand: true }  — hand:false ritar
- *            bara pennan (ingen hand)  — stegvis=false ger gamla
+ *            at: ms|null, stegvis: true, hand: false }  — STANDARD är att
+ *            bara pennan ritas (användarbeslut 2026-07-28); hand:true
+ *            ritar handen som håller pennan  — stegvis=false ger gamla
  *            beteendet (allt skrivs i en följd).
  *
  *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela }
@@ -1446,7 +1447,7 @@
      * tankebubblorna ÖVER handen (får aldrig skymmas) */
     var objs = [];
     var rulerG = el('g', null, svg);
-    var hand = (opts.hand === false) ? buildPencil(F / 40) : buildHand(F / 40);
+    var hand = (opts.hand === true) ? buildHand(F / 40) : buildPencil(F / 40);
     svg.appendChild(hand);
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {

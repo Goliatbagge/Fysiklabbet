@@ -1313,16 +1313,15 @@
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
       '.hk-paper svg{display:block;width:100%;height:auto}' +
-      /* samma look som simuleringarnas .fs-btn (vit cirkel, tunn kant,
-       * mjuk skugga, växer lite vid hover) — fast uppe till höger,
-       * vänstra hörnet är upptaget av skriften */
-      '.hk-fsbtn{position:absolute;top:10px;right:10px;width:40px;height:40px;' +
-        'border-radius:50%;background:rgba(255,255,255,.92);' +
-        'border:1px solid rgba(15,22,32,.28);color:' + LABINK + ';' +
+      /* helskärmsknappen följer widgetens eget formspråk (samma kant,
+       * botten och radie som hk-btn-knapparna) — diskret uppe till höger */
+      '.hk-fsbtn{position:absolute;top:10px;right:10px;width:32px;height:32px;' +
+        'border-radius:8px;background:' + PAPER + ';' +
+        'border:1.5px solid rgba(15,22,32,.55);color:' + LABINK + ';' +
         'display:flex;align-items:center;justify-content:center;cursor:pointer;' +
-        'padding:0;box-shadow:0 2px 6px rgba(0,0,0,.18);' +
-        'transition:transform .15s ease,background .15s ease;z-index:5}' +
-      '.hk-fsbtn:hover{transform:scale(1.08);background:#f3eee4}' +
+        'padding:0;opacity:.75;transition:background .15s,opacity .15s;z-index:5}' +
+      '.hk-fsbtn:hover{background:#efe8d8;opacity:1}' +
+      '.hk-fsbtn svg{width:14px;height:14px}' +
       /* helskärm (presentation): arket fyller skärmens BREDD (stor text),
        * sidan rullar på höjden och följer pennan; knappraden ligger fast
        * i underkanten */
@@ -1763,10 +1762,11 @@
       fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
       fsBtn.title = fs ? 'Lämna helskärm' : 'Helskärm';
       if (fs) {
-        /* fyll skärmens bredd — stor text, rulla på höjden */
+        /* stor men inte gigantisk: fyll bredden upp till ett skaltak */
         var availW = window.innerWidth - 36;
-        svg.style.width = availW + 'px';
-        svg.style.height = Math.round(H * availW / W) + 'px';
+        var sc = Math.min(availW / W, 1.35);
+        svg.style.width = Math.round(W * sc) + 'px';
+        svg.style.height = Math.round(H * sc) + 'px';
       } else {
         svg.style.width = '';
         svg.style.height = '';
@@ -1776,16 +1776,36 @@
     document.addEventListener('fullscreenchange', fitFS);
     window.addEventListener('resize', fitFS);
 
-    /* håll pennan i sikte i helskärm: rulla mjukt under uppspelning,
-     * hoppa direkt vid steghopp */
+    /* håll pennan i sikte i helskärm — med DÖDZON så att vyn ligger
+     * stilla medan handen skriver: rulla först när pennan närmar sig
+     * skärmens under-/överkant, och glid då till ett fast mål (känns
+     * som att man flyttar blicket, inte som sjögång) */
+    var scrollTarget = null;
+    /* manuell rullning vinner: släpp målet tills pennan lämnar dödzonen */
+    wrap.addEventListener('wheel', function () { scrollTarget = null; },
+      { passive: true });
+    wrap.addEventListener('touchmove', function () { scrollTarget = null; },
+      { passive: true });
     function followPen(instant) {
-      if (document.fullscreenElement !== wrap) return;
+      if (document.fullscreenElement !== wrap) { scrollTarget = null; return; }
       var sc = svg.clientWidth / W;
       var pp = penPosAt(Math.min(tNow, TOTAL - 810));  /* ej slutglidningen */
-      var target = pp.pos[1] * sc - window.innerHeight * 0.55;
-      target = Math.max(0, Math.min(target, wrap.scrollHeight - window.innerHeight));
-      if (instant) wrap.scrollTop = target;
-      else wrap.scrollTop += (target - wrap.scrollTop) * 0.06;
+      var py = pp.pos[1] * sc;
+      var vh = window.innerHeight;
+      var maxScroll = Math.max(0, wrap.scrollHeight - vh);
+      function clampT(t) { return Math.max(0, Math.min(t, maxScroll)); }
+      if (instant) {
+        scrollTarget = clampT(py - 0.45 * vh);
+        wrap.scrollTop = scrollTarget;
+        return;
+      }
+      var onScreen = py - wrap.scrollTop;
+      if (onScreen > 0.72 * vh || onScreen < 0.12 * vh) {
+        scrollTarget = clampT(py - 0.40 * vh);
+      }
+      if (scrollTarget != null && Math.abs(scrollTarget - wrap.scrollTop) > 1) {
+        wrap.scrollTop += (scrollTarget - wrap.scrollTop) * 0.08;
+      }
     }
 
     render(0);

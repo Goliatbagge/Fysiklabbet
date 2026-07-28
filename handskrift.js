@@ -23,7 +23,8 @@
  *                                men är fortfarande ett eget klicksteg.
  *
  *   opts = { fontSize: 40, speed: 1, autostart: false, instant: false,
- *            at: ms|null, stegvis: true }  — stegvis=false ger gamla
+ *            at: ms|null, stegvis: true, hand: true }  — hand:false ritar
+ *            bara pennan (ingen hand)  — stegvis=false ger gamla
  *            beteendet (allt skrivs i en följd).
  *
  *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela }
@@ -1200,6 +1201,32 @@
     return hand;
   }
 
+  /* Bara pennan, ingen hand (opts.hand === false): samma penna i samma
+   * vinkel med spetsen i (0,0) — allt annat (rörelser, lyft, pennbyte)
+   * fungerar oförändrat. Diskret liten skugga vid spetsen. */
+  function buildPencil(scale) {
+    var hand = el('g', { 'class': 'hk-hand' });
+    var g = el('g', { transform: 'scale(' + scale + ')' }, hand);
+    el('ellipse', { cx: 10, cy: 6, rx: 16, ry: 5, fill: '#000',
+                    opacity: 0.05 }, g);
+    var pg = el('g', { transform: 'rotate(-50)' }, g);
+    var pTip = el('path', { d: 'M0 0 L9 -3 L9 3 Z', fill: '#4e4c48' }, pg);
+    el('path', { d: 'M9 -3 L23 -6.5 L23 6.5 L9 3 Z', fill: '#ead2a9',
+                 stroke: '#c9a976', 'stroke-width': 0.7 }, pg);
+    var pBarrel = el('rect', { x: 23, y: -6.5, width: 92, height: 13,
+                 fill: '#e9a83f', stroke: '#c08624',
+                 'stroke-width': 0.8 }, pg);
+    var pHi = el('line', { x1: 24, y1: -2.2, x2: 115, y2: -2.2,
+                 stroke: '#f6c56d', 'stroke-width': 2.2 }, pg);
+    var pLo = el('line', { x1: 24, y1: 2.4, x2: 115, y2: 2.4,
+                 stroke: '#c9882a', 'stroke-width': 2.2 }, pg);
+    el('rect', { x: 115, y: -6.8, width: 9, height: 13.6, fill: '#b9bdc6' }, pg);
+    el('rect', { x: 124, y: -6.2, width: 13, height: 12.4, rx: 5,
+                 fill: '#e8a09b' }, pg);
+    hand._pencil = { tip: pTip, barrel: pBarrel, hi: pHi, lo: pLo };
+    return hand;
+  }
+
   /* ---------------- tankebubbla ----------------
    * "Det man tänker men inte skriver" — tryckt text (Poppins) i ett
    * molnformat moln: bulor (cirklar) runt kanten i två pass (konturer
@@ -1419,7 +1446,7 @@
      * tankebubblorna ÖVER handen (får aldrig skymmas) */
     var objs = [];
     var rulerG = el('g', null, svg);
-    var hand = buildHand(F / 40);
+    var hand = (opts.hand === false) ? buildPencil(F / 40) : buildHand(F / 40);
     svg.appendChild(hand);
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {

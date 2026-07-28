@@ -528,6 +528,15 @@
      * x-värdet på x-axeln och vågrätt till y-värdet på y-axeln — så att
      * eleven ser varför punkten hamnar just där. De tonar ut när nästa
      * punkt prickas in. */
+    /* hjälpsiffrans pennstreck förrenderas (den tonar in med linjerna,
+     * handen ritar den inte) */
+    function guideLabel(str, gx, gy) {
+      var tmp = [];
+      placeString(str, gx, gy, s * 0.45, F * 0.45, tmp);
+      return tmp.filter(function (a) { return a.kind === 'stroke'; })
+                .map(function (a) { return a.pts; });
+    }
+    var scaleX = tickVals(xmin, xmax), scaleY = tickVals(ymin, ymax);
     var prevGuide = null;
     xs.forEach(function (x, i) {
       var rcy = ty + rowH * (i + 1) + rowH / 2;
@@ -539,7 +548,20 @@
       pause(200);
       var px = ox + x * u, py = oy - ys[i] * u;
       if (prevGuide) acts.push({ kind: 'hide', obj: prevGuide });
-      var guide = { guide: 1, px: px, py: py, ox: ox, oy: oy, wins: [] };
+      var guide = { guide: 1, px: px, py: py, ox: ox, oy: oy, wins: [],
+                    labels: [] };
+      /* hjälpsiffror vid axlarna — men inte för tal som redan står på
+       * skalan (t.ex. 1 och 5) och inte för 0 */
+      if (x !== 0 && scaleX.indexOf(x) < 0) {
+        var wgx = stringAdvance(num(x), s * 0.45, F * 0.45);
+        guide.labels = guide.labels.concat(
+          guideLabel(num(x), px - wgx / 2, oy + 23));
+      }
+      if (ys[i] !== 0 && scaleY.indexOf(ys[i]) < 0) {
+        var wgy = stringAdvance(num(ys[i]), s * 0.45, F * 0.45);
+        guide.labels = guide.labels.concat(
+          guideLabel(num(ys[i]), ox - 8 - wgy, py + 5));
+      }
       acts.push({ kind: 'show', obj: guide });
       prevGuide = guide;
       pause(220);
@@ -680,10 +702,10 @@
     /* ---- steg 2: a) areafunktionen skrivs upp ---- */
     var y = by + 96;
     var adv = 1.7 * F;
-    var b3 = bubble(346, y - 130, 226, [
+    var b3 = bubble(120, y + 22, 226, [
       [['Rektangelns area:']],
       [['basen · höjden']]
-    ], [290, y + 6]);
+    ], [250, y - 8]);
     acts.push({ kind: 'show', obj: b3 });
     pause(700);
     var xx = placeString('a) A(x)=(', padL, y, s, F, acts);
@@ -699,10 +721,10 @@
     stepEnd();
 
     /* ---- steg 3: distributiva bågpilar + utvecklingen ---- */
-    var b3b = bubble(346, y - 130, 252, [
+    var b3b = bubble(120, y + adv + 22, 252, [
       [['Distributiva lagen: ', 0], ['x', 1], ['-et', 0]],
       [['multipliceras med båda termerna!']]
-    ], [cxm + 8, y - 34]);
+    ], [300, y + adv - 8]);
     acts.push({ kind: 'show', obj: b3b });
     pause(650);
     /* bågpil x → 60, sedan termen 60x; bågpil x → 2x, sedan −2x² */
@@ -732,25 +754,25 @@
 
     /* ---- steg 5–6: b) derivera och sätt derivatan till noll ---- */
     y += adv + 18;
-    var b4 = bubble(346, y - 34, 236, [
+    var b4 = bubble(120, y + 22, 236, [
       [['Största arean? Derivera']],
       [['och sätt ', 0], ["A'", 1], ['(', 0], ['x', 1], [') = 0!']]
-    ], [270, y + 24]);
+    ], [250, y - 8]);
     acts.push({ kind: 'show', obj: b4 });
     pause(700);
     placeString("b) A'(x)=60-4x", padL, y, s, F, acts);
+    acts.push({ kind: 'hide', obj: b4 });
     stepEnd();
     y += adv;
     placeString('60-4x=0', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b4 });
     stepEnd();
 
     /* ---- steg 7–11: lös ekvationen — ALLA mellansteg, rad för rad ---- */
     y += adv + 18;
-    var b4b = bubble(346, y - 118, 248, [
+    var b4b = bubble(120, y + 22, 248, [
       [['Vågskålsmetoden: addera 4', 0], ['x', 1], [',']],
       [['dela sedan båda leden med 4.']]
-    ], [280, y + 20]);
+    ], [260, y - 8]);
     acts.push({ kind: 'show', obj: b4b });
     pause(700);
     xx = placeString('60-4x', padL, y, s, F, acts);
@@ -758,6 +780,7 @@
     xx = placeString('=', xx, y, s, F, acts);
     xx = placeString('0', xx, y, s, F, acts);
     placeString('+4x', xx, y, s, F, acts, BLUE);
+    acts.push({ kind: 'hide', obj: b4b });
     stepEnd();
     y += adv;
     placeString('60=4x', padL, y, s, F, acts);
@@ -785,38 +808,37 @@
     stepEnd();
     y += adv;
     placeString('x=15', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b4b });
     stepEnd();
 
     /* ---- steg 12–13: insättning i A(x) ---- */
     y += adv + 18;
-    var b5 = bubble(346, y - 118, 240, [
+    var b5 = bubble(120, y + 22, 240, [
       [['Hur stor är arean då?']],
       [['In med ', 0], ['x', 1], [' = 15 i ', 0], ['A', 1], ['(', 0], ['x', 1], [')!']]
-    ], [300, y + 20]);
+    ], [280, y - 8]);
     acts.push({ kind: 'show', obj: b5 });
     pause(700);
     placeString('A(15)=60·15-2·15^2', padL, y, s, F, acts);
+    acts.push({ kind: 'hide', obj: b5 });
     stepEnd();
     y += adv;
     placeString('=900-450=450', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b5 });
     stepEnd();
 
     /* ---- steg 14–15: karaktär + svar ---- */
     y += adv + 18;
-    var b6 = bubble(346, y - 118, 244, [
+    var b6 = bubble(120, y + 22, 244, [
       [['Max eller min? Kolla tecknet på']],
       [['andraderivatan: negativt = max!']]
-    ], [260, y + 20]);
+    ], [270, y - 8]);
     acts.push({ kind: 'show', obj: b6 });
     pause(700);
     placeString("A''(x)=−4<0⇒max", padL, y, s, F, acts);
+    acts.push({ kind: 'hide', obj: b6 });
     stepEnd();
     y += adv;
     xe = placeString('Svar: 450 m^2', padL, y, s, F, acts);
     underline(xe, y);
-    acts.push({ kind: 'hide', obj: b6 });
     stepEnd();
 
     return { acts: acts, contentW: 566, lastBase: y + 14, padL: padL };
@@ -991,10 +1013,10 @@
     var adv = 1.7 * F;
     var bx = 340, bw = 290;
 
-    var b4 = bubble(bx, y - 44, bw, [
+    var b4 = bubble(120, y + 24, bw, [
       [['Momentjämvikt: momentet moturs']],
       [['är lika stort som momentet medurs.']]
-    ], [220, y - 8]);
+    ], [160, y - 6]);
     acts.push({ kind: 'show', obj: b4 });
     pause(700);
     placeString('M_1=M_2', padL, y, s, F, acts);
@@ -1002,11 +1024,11 @@
     stepEnd();
 
     y += adv;
-    var b5 = bubble(bx, y - 44, bw, [
+    var b5 = bubble(120, y + 24, bw, [
       [['Varje moment är ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0],
        ['l', 1], [' —', 0]],
       [['kraften gånger hävarmen.']]
-    ], [250, y - 8]);
+    ], [200, y - 6]);
     acts.push({ kind: 'show', obj: b5 });
     pause(700);
     placeString('F_P·l_P=F_B·l_B', padL, y, s, F, acts);
@@ -1014,11 +1036,11 @@
     stepEnd();
 
     y += adv;
-    var b6 = bubble(bx, y - 44, bw, [
+    var b6 = bubble(120, y + 24, bw, [
       [['Tyngdkraften är ', 0], ['F', 1], [' = ', 0], ['m', 1], [' · ', 0],
        ['g', 1], [' —', 0]],
       [['jag byter ut båda krafterna.']]
-    ], [280, y - 8]);
+    ], [220, y - 6]);
     acts.push({ kind: 'show', obj: b6 });
     pause(700);
     placeString('m_P·g·l_P=m_B·g·l_B', padL, y, s, F, acts);
@@ -1026,27 +1048,27 @@
     stepEnd();
 
     y += adv + 0.55 * F;
-    var b7 = bubble(bx, y - 128, bw, [
+    var b7 = bubble(140, y + 52, bw, [
       [['g', 1], [' finns i båda leden —', 0]],
       [['jag delar båda leden med ', 0], ['g', 1], ['!', 0]]
-    ], [280, y - 8]);
+    ], [230, y + 20]);
     acts.push({ kind: 'show', obj: b7 });
     pause(700);
     var xx = fracH('m_P·g·l_P', 'g', padL, y, BLUE);
     xx = placeString('=', xx, y, s, F, acts);
     fracH('m_B·g·l_B', 'g', xx, y, BLUE);
+    acts.push({ kind: 'hide', obj: b7 });
     stepEnd();
 
     y += adv + 0.65 * F;
     placeString('m_P·l_P=m_B·l_B', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b7 });
     stepEnd();
 
     y += adv + 0.55 * F;
-    var b8 = bubble(bx, y - 44, bw, [
+    var b8 = bubble(140, y + 52, bw, [
       [['Dela med pappans massa så att']],
       [['hävarmen blir ensam kvar.']]
-    ], [270, y - 8]);
+    ], [220, y + 20]);
     acts.push({ kind: 'show', obj: b8 });
     pause(700);
     xx = placeString('l_P=', padL, y, s, F, acts);
@@ -1055,10 +1077,10 @@
     stepEnd();
 
     y += adv + 1.2 * F;
-    var b9 = bubble(bx, y - 128, bw, [
+    var b9 = bubble(140, y + 52, bw, [
       [['In med värdena: 30 kg och 2,0 m']],
       [['för barnet, 80 kg för pappa.']]
-    ], [300, y - 8]);
+    ], [240, y + 20]);
     acts.push({ kind: 'show', obj: b9 });
     pause(700);
     xx = placeString('l_P=', padL, y, s, F, acts);
@@ -1070,10 +1092,10 @@
     stepEnd();
 
     y += adv + 0.65 * F;
-    var b10 = bubble(bx, y - 44, bw, [
+    var b10 = bubble(120, y + 30, bw, [
       [['Pappa ska sitta närmare än barnet —']],
       [['rimligt, han är ju tyngre!']]
-    ], [280, y - 8]);
+    ], [200, y - 6]);
     acts.push({ kind: 'show', obj: b10 });
     pause(700);
     var xe = placeString('Svar: l_P=0,75 m', padL, y, s, F, acts);
@@ -1081,7 +1103,7 @@
     acts.push({ kind: 'hide', obj: b10 });
     stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 14, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
@@ -1242,12 +1264,22 @@
    * Ritas inte av handen (de är "tänkta" linjer), ligger UNDER handen. */
   function makeGuide(o) {
     var g = el('g', { opacity: 0 });
-    el('line', { x1: o.px, y1: o.py, x2: o.px, y2: o.oy, stroke: LABINK,
-                 'stroke-width': 1.5, 'stroke-dasharray': '5 4',
-                 opacity: 0.5 }, g);
-    el('line', { x1: o.px, y1: o.py, x2: o.ox, y2: o.py, stroke: LABINK,
-                 'stroke-width': 1.5, 'stroke-dasharray': '5 4',
-                 opacity: 0.5 }, g);
+    if (Math.abs(o.px - o.ox) > 1) {         /* ingen linje ovanpå en axel */
+      el('line', { x1: o.px, y1: o.py, x2: o.px, y2: o.oy, stroke: LABINK,
+                   'stroke-width': 1.5, 'stroke-dasharray': '5 4',
+                   opacity: 0.5 }, g);
+    }
+    if (Math.abs(o.py - o.oy) > 1) {
+      el('line', { x1: o.px, y1: o.py, x2: o.ox, y2: o.py, stroke: LABINK,
+                   'stroke-width': 1.5, 'stroke-dasharray': '5 4',
+                   opacity: 0.5 }, g);
+    }
+    /* hjälpsiffror i handstil (förrenderade pennstreck, lite ljusare) */
+    (o.labels || []).forEach(function (pts) {
+      el('path', { d: pathFrom(pts), fill: 'none', stroke: INK,
+                   'stroke-width': 2, 'stroke-linecap': 'round',
+                   'stroke-linejoin': 'round', opacity: 0.78 }, g);
+    });
     return g;
   }
 

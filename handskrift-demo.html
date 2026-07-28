@@ -74,7 +74,9 @@
     speed: q.has('speed') ? parseFloat(q.get('speed')) : 1,
     autostart: q.has('auto'),
     instant: q.has('instant'),
-    at: q.has('at') ? parseFloat(q.get('at')) : null
+    at: q.has('at') ? parseFloat(q.get('at')) : null,
+    /* test: bara pennan, ingen hand — ?hand visar handen igen */
+    hand: q.has('hand')
   };
   var spec = [
     "5x+3=23",

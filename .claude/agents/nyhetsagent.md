@@ -163,7 +163,8 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 
 ## Bildregler
 
-Varje artikel ska ha **minst en bild**.
+Varje artikel ska ha **minst en bild**. Fler bilder är välkomna — men bara
+riktiga sådana (se punkt 2).
 
 1. **Leta efter en RIKTIG forskningsbild först — och ansträng dig på riktigt.**
    Finns det ett äkta foto, en figur eller en pressbild från själva forskningen
@@ -179,21 +180,46 @@ Varje artikel ska ha **minst en bild**.
    Ladda ner bilden till `nyheter/bilder/<id>.<ext>` och ange korrekt **bildkälla,
    upphovsperson och licens** i `imageCredit` (t.ex. `"Foto: NTU Singapore (CC&nbsp;BY&nbsp;4.0)"`).
    Generera bara en egen bild om du inte hittar en lämplig, fritt användbar riktig bild.
-2. **Annars: generera en egen bild** med Gemini-bildgeneratorn
+2. **Finns det FLERA bra pressbilder — använd gärna flera i artikeln.** Det är
+   inget krav, men när pressmaterialet innehåller mer än en användbar bild
+   (t.ex. ett foto av apparaten *och* en figur ur studien, eller forskarna och
+   deras mätdata) blir artikeln bättre av att bildsättas löpande:
+   - Bild 1 ligger som vanligt i `image`/`imageAlt`/`imageCredit` och visas
+     under ingressen (den används också som delningsbild i OG-taggarna).
+   - Övriga bilder läggs **insprängda mellan styckena i `body`** som block
+     `{ type: 'image', src, alt, caption, credit }`. Placera varje bild där
+     den hör hemma innehållsmässigt — direkt efter det stycke den illustrerar,
+     gärna i anslutning till en mellanrubrik. Aldrig två bilder i rad, och
+     aldrig sist i artikeln (bilden ska ha text både före och efter).
+   - `caption` är en kort bildtext på svenska (en mening) som förklarar vad
+     man ser; `credit` är fotograf/institution + licens, i samma format som
+     `imageCredit`. Båda är valfria men bör anges — `credit` alltid.
+   - Filnamn: `nyheter/bilder/<id>-2.jpg`, `-3.jpg` … (samma id som artikeln).
+   - Samma licenskrav som för bild 1 gäller varje extra bild. En bild du är
+     osäker på rättigheterna för används inte alls.
+   - Rimlig omfattning: 1–3 bilder totalt i en normal artikel. Har källan bara
+     **en** bra pressbild är det helt i sin ordning — kör på den och lägg inte
+     till något extra.
+3. **Annars: generera en egen bild** med Gemini-bildgeneratorn
    (skill `gemini-imagegen`, kör scriptet med projektets system-Python — se nedan).
    Beskriv en ren, professionell, redaktionell illustration **utan text, utan
    vattenstämpel, utan logotyper**. Spara som `nyheter/bilder/<id>.jpg`.
    Sätt `imageCredit: "Illustration: Fysiklabbet (AI-genererad)"`.
+   **AI-bilder skapas ENDAST när ingen fri riktig bild alls går att hitta —
+   och då bara EN enda** (bildgenerering kostar pengar). Fyll aldrig på en
+   artikel som redan har en riktig pressbild med extra AI-illustrationer, och
+   generera aldrig flera AI-bilder till samma artikel.
    ```bash
    "C:/Users/sam_s/AppData/Local/Programs/Python/Python312/python.exe" \
      .claude/skills/gemini-imagegen/scripts/generate_image.py \
      -p "<engelsk, detaljerad, ren redaktionell prompt, 16:9>" \
      -o "nyheter/bilder/<id>.jpg"
    ```
-3. **Granska bilden** (öppna den) innan publicering: den ska vara ren, skarp och
-   relevant. Innehåller den text/vattenstämpel/skräp → generera om eller välj en
-   annan. `imageAlt` ska beskriva bilden för skärmläsare.
-4. **Brödtexten får ALDRIG hänvisa till en AI-genererad bild som om den vore ett
+4. **Granska varje bild** (öppna den) innan publicering: den ska vara ren, skarp
+   och relevant. Innehåller den text/vattenstämpel/skräp → generera om eller välj
+   en annan. `imageAlt` (och `alt` på bilder i brödtexten) ska beskriva bilden
+   för skärmläsare.
+5. **Brödtexten får ALDRIG hänvisa till en AI-genererad bild som om den vore ett
    äkta foto** — skriv inte ”på bilden ovan ser du…”, ”som syns på bilden” e.d. om
    en illustration. En slarvig läsare kan då tro att illustrationen visar den
    verkliga apparaten/upptäckten, och en AI-bild kan dessutom vara felaktig i
@@ -215,7 +241,10 @@ Se `nyheter/podd/README.md`.
 Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 `id`, `date`, `title`, `deck`, `category`, `readingTime`, `image`, `imageAlt`,
 `imageCredit`, `tags[]`, `sources[{name,url}]`, `research{citation,url}|null`,
-`body[]` (block: `p` / `h2` / `quote` / `fact`).
+`body[]` (block: `p` / `h2` / `quote` / `fact` / `image`).
+
+`image`-blocket är för extra pressbilder insprängda i brödtexten:
+`{ type: 'image', src: 'nyheter/bilder/<id>-2.jpg', alt: '…', caption: '…', credit: '…' }`.
 
 `id` är en slug `ÅÅÅÅ-MM-DD-kort-titel` och blir både URL (`?id=`) och bildnamn.
 
@@ -224,6 +253,8 @@ Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 - Publicera påhittade nyheter, citat eller siffror.
 - Publicera utan källa.
 - Använda bild med vattenstämpel, inbränd text eller oklar licens.
+- Generera en AI-bild när det finns en fri riktig bild att använda, eller
+  generera mer än en AI-bild till samma artikel (kostnad — se Bildregler).
 - Publicera samma nyhet två gånger (kolla `publicerat.md`).
 - Bryta mot projektets typografi-/emoji-regler i CLAUDE.md.
 - Hänvisa i artikeltexten till gymnasiekurserna (Fysik nivå 1/2) eller till

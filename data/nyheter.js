@@ -31,6 +31,15 @@
  *                 { type: 'h2',   text: '…' }   mellanrubrik
  *                 { type: 'quote',html: '…', cite: '…' }
  *                 { type: 'fact', title: '…', items: ['…', …] }   faktaruta
+ *                 { type: 'image', src: 'nyheter/bilder/<id>-2.jpg',
+ *                   alt: '…', caption: '…', credit: '…' }        bild i brödtexten
+ *
+ * Flera bilder per artikel: har nyheten fler än en fri pressbild får (och bör)
+ * de extra bilderna läggas in som 'image'-block mellan styckena i body. Den
+ * första bilden ligger kvar i `image`/`imageAlt`/`imageCredit` (toppbild +
+ * delningsbild). Extra bilder namnges `nyheter/bilder/<id>-2.jpg`, `-3.jpg` …
+ * AI-genererade bilder skapas ENDAST när ingen fri riktig bild finns — och då
+ * bara en enda (kostnad). Se .claude/agents/nyhetsagent.md, Bildregler.
  */
 const NYHETER_ALL = [
   {

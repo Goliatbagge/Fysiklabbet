@@ -1313,21 +1313,31 @@
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
       '.hk-paper svg{display:block;width:100%;height:auto}' +
-      '.hk-fsbtn{position:absolute;top:8px;right:8px;width:40px;height:40px;' +
-        'border-radius:50%;background:#fffdf8;border:1.5px solid rgba(15,22,32,.35);' +
-        'color:' + LABINK + ';display:flex;align-items:center;justify-content:center;' +
-        'cursor:pointer;opacity:.85;padding:0}' +
-      '.hk-fsbtn:hover{background:#efe8d8;opacity:1}' +
-      /* helskärm (presentation): hela widgeten fullskärmas, arket skalas
-       * så att det ryms, knappraden ligger kvar under */
+      /* samma look som simuleringarnas .fs-btn (vit cirkel, tunn kant,
+       * mjuk skugga, växer lite vid hover) — fast uppe till höger,
+       * vänstra hörnet är upptaget av skriften */
+      '.hk-fsbtn{position:absolute;top:10px;right:10px;width:40px;height:40px;' +
+        'border-radius:50%;background:rgba(255,255,255,.92);' +
+        'border:1px solid rgba(15,22,32,.28);color:' + LABINK + ';' +
+        'display:flex;align-items:center;justify-content:center;cursor:pointer;' +
+        'padding:0;box-shadow:0 2px 6px rgba(0,0,0,.18);' +
+        'transition:transform .15s ease,background .15s ease;z-index:5}' +
+      '.hk-fsbtn:hover{transform:scale(1.08);background:#f3eee4}' +
+      /* helskärm (presentation): arket fyller skärmens BREDD (stor text),
+       * sidan rullar på höjden och följer pennan; knappraden ligger fast
+       * i underkanten */
       '.hk-wrap:fullscreen,.hk-wrap:-webkit-full-screen{max-width:none;' +
         'background:linear-gradient(160deg,#f2ecdf,#e9e0cd);display:flex;' +
-        'flex-direction:column;align-items:center;justify-content:center;' +
-        'padding:14px;overflow:auto}' +
+        'flex-direction:column;align-items:center;justify-content:flex-start;' +
+        'padding:12px 12px 84px;overflow-y:auto;overflow-x:hidden}' +
       '.hk-wrap:fullscreen .hk-paper,.hk-wrap:-webkit-full-screen .hk-paper' +
-        '{flex:0 1 auto}' +
+        '{flex:0 0 auto}' +
+      '.hk-wrap:fullscreen .hk-fsbtn,.hk-wrap:-webkit-full-screen .hk-fsbtn' +
+        '{position:fixed;top:12px;right:12px}' +
       '.hk-wrap:fullscreen .hk-controls,.hk-wrap:-webkit-full-screen .hk-controls' +
-        '{flex:0 0 auto;justify-content:center;width:100%}' +
+        '{position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 18px;' +
+        'justify-content:center;background:rgba(243,238,228,.93);' +
+        'border-top:1px solid rgba(15,22,32,.15)}' +
       '.hk-controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}' +
       '.hk-btn{border:1.5px solid ' + LABINK + ';background:' + PAPER + ';color:' + LABINK + ';' +
         'border-radius:8px;padding:6px 18px;font-weight:600;font-size:14px;cursor:pointer;' +
@@ -1615,8 +1625,9 @@
       if (!playing) return;
       if (lastTs != null) tNow += (ts - lastTs) * speed;
       lastTs = ts;
-      if (tNow >= target) { tNow = target; render(tNow); stop(); return; }
+      if (tNow >= target) { tNow = target; render(tNow); followPen(false); stop(); return; }
       render(tNow);
+      followPen(false);
       rafId = requestAnimationFrame(frame);
     }
 
@@ -1634,7 +1645,7 @@
       updateBtns();
     }
     function restart() { tNow = 0; render(0); if (!playing) play(); }
-    function jumpToEnd() { stop(); tNow = TOTAL; render(TOTAL); updateBtns(); }
+    function jumpToEnd() { stop(); tNow = TOTAL; render(TOTAL); followPen(true); updateBtns(); }
 
     /* ---------------- kontroller ---------------- */
     var ctrls = document.createElement('div');
@@ -1658,6 +1669,7 @@
       }
       tNow = t0;
       render(tNow);
+      followPen(true);
       updateBtns();
     });
     var againBtn = document.createElement('button');
@@ -1716,6 +1728,7 @@
       if (playing) {
         tNow = target;
         render(tNow);
+        followPen(true);
         stop();
       } else {
         play();
@@ -1750,18 +1763,30 @@
       fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
       fsBtn.title = fs ? 'Lämna helskärm' : 'Helskärm';
       if (fs) {
-        var availW = window.innerWidth - 48;
-        var availH = window.innerHeight - ctrls.offsetHeight - 52;
-        var sc = Math.min(availW / W, availH / H);
-        svg.style.width = Math.round(W * sc) + 'px';
-        svg.style.height = Math.round(H * sc) + 'px';
+        /* fyll skärmens bredd — stor text, rulla på höjden */
+        var availW = window.innerWidth - 36;
+        svg.style.width = availW + 'px';
+        svg.style.height = Math.round(H * availW / W) + 'px';
       } else {
         svg.style.width = '';
         svg.style.height = '';
       }
+      followPen(true);
     }
     document.addEventListener('fullscreenchange', fitFS);
     window.addEventListener('resize', fitFS);
+
+    /* håll pennan i sikte i helskärm: rulla mjukt under uppspelning,
+     * hoppa direkt vid steghopp */
+    function followPen(instant) {
+      if (document.fullscreenElement !== wrap) return;
+      var sc = svg.clientWidth / W;
+      var pp = penPosAt(Math.min(tNow, TOTAL - 810));  /* ej slutglidningen */
+      var target = pp.pos[1] * sc - window.innerHeight * 0.55;
+      target = Math.max(0, Math.min(target, wrap.scrollHeight - window.innerHeight));
+      if (instant) wrap.scrollTop = target;
+      else wrap.scrollTop += (target - wrap.scrollTop) * 0.06;
+    }
 
     render(0);
     updateBtns();

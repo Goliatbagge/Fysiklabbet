@@ -86,11 +86,11 @@
 
   var specInt = [
     "∫_1^3 2x dx",
-    ["=", {brack:'['}, {frac:["2x^2","2"]}, {brack:']', sub:"1", sup:"3"}],
+    [{cont:1}, "=", {brack:'['}, {frac:["2x^2","2"]}, {brack:']', sub:"1", sup:"3"}],
     "=[x^2]_1^3",
-    ["=", {ring:'sup'}, "3^2", "-", {ring:'sub'}, "1^2"],
-    "=9-1",
-    "=8",
+    [{cont:1}, "=", {ring:'sup'}, "3^2", "-", {ring:'sub'}, "1^2"],
+    [{cont:1}, "=9-1"],
+    [{cont:1}, "=8"],
     "Svar: 8"
   ];
   HANDSKRIFT.mount(document.getElementById('demo2'), specInt, opts);

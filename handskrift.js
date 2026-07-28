@@ -358,10 +358,13 @@
   }
 
   /* ---------------- scen: "från ekvation till graf" ----------------
-   * Fem steg: 1) sambandet skrivs upp, 2) värdetabell beräknas (tanke-
-   * bubblor visar räkningen), 3) koordinatsystem + skala ritas,
-   * 4) punkterna prickas in (raden ringas in med blåpennan först),
-   * 5) linjal fram och rät linje.
+   * Kollegieblock-disposition: sambandet överst, värdetabellen till
+   * vänster med EN HANDSKRIVEN UTRÄKNING bredvid varje rad (ingen
+   * tankebubbla som hinner försvinna), koordinatsystemet UNDER tabellen.
+   * Före varje insättning ringar blåpennan in radens x-värde i tabellen
+   * och x:et i sambandet ("nu sätter jag in detta här"). Steg: 1) samband,
+   * 2) tabellram, 3–9) en tabellrad per steg (ring + uträkning + y-värde),
+   * 10) koordinatsystem + skala, 11) punkter, 12) linjal + rät linje.
    * cfg = { typ:'linjegraf', k, m, xs:[...] }                          */
   function layoutLinjegraf(cfg, F) {
     F = Math.min(F, 34);                     /* scenen kräver kompaktare skrift */
@@ -372,16 +375,19 @@
     var ys = xs.map(function (x) { return k * x + m; });
 
     function num(v) { return v < 0 ? '−' + (-v) : '' + v; }
-    function kTerm(x) {           /* "−2·(−3)" med tecken */
-      var kk = num(k);
-      return x < 0 ? kk + '·(' + num(x) + ')' : kk + '·' + x;
+    /* uträkningen bredvid tabellraden: "y=−2·(−3)+3=6+3=9" */
+    function calcNote(x, yv) {
+      var kx = x < 0 ? num(k) + '·(' + num(x) + ')' : num(k) + '·' + x;
+      var mT = (m >= 0 ? '+' : '-') + Math.abs(m);
+      return 'y=' + kx + mT + '=' + num(k * x) + mT + '=' + num(yv);
     }
 
-    /* --- geometri --- */
+    /* --- geometri: tabell + uträkningar överst, koordinatsystem under --- */
     var u = 27;                              /* 1 enhet = 1 ruta */
     var tx = 30, ty = 74, colW = 62, rowH = 34;
     var tw = 2 * colW, th = (xs.length + 1) * rowH;
-    var ox = 324, oy = 297;                  /* origo på rutnätslinjer */
+    var noteX = tx + tw + 14;                /* uträkningarna börjar här */
+    var ox = 243, oy = 648;                  /* origo på rutnätslinjer, under tabellen */
     var xmin = Math.min.apply(null, xs), xmax = Math.max.apply(null, xs);
     var ymin = Math.min.apply(null, ys), ymax = Math.max.apply(null, ys);
 
@@ -389,8 +395,8 @@
       acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
     }
     function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
 
-    /* --- tankebubblor (skapas som objekt, visas/döljs i tidslinjen) --- */
     function bubble(x, y, w, lines, tail) {
       return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
     }
@@ -399,32 +405,29 @@
       [['och väljer några']],
       [['x', 1], ['-värden kring 0.']]
     ], [160, 80]);
-    var bRows = xs.map(function (x, i) {
-      return bubble(246, 40, 212, [
-        [['y', 1], [' = ' + kTerm(x) + ' + ' + m + ' = ' + num(ys[i])]]
-      ], [tx + tw + 6, ty + rowH * (i + 1) + rowH / 2]);
-    });
-    var bScale = bubble(26, ty + th + 12, 280, [
+    var bScale = bubble(26, ty + th + 16, 280, [
       [['x', 1], ['-axeln måste rymma ' + num(xmin) + ' till ' + num(xmax) + ',']],
       [['y', 1], ['-axeln ' + num(ymin) + ' till ' + num(ymax) + '.']]
-    ], [ox - 3 * u, oy + 20]);
-    var bPoint = bubble(26, ty + th + 12, 280, [
+    ], [ox - 2 * u, oy - 6 * u]);
+    var bPoint = bubble(285, 400, 240, [
       [['Raden med ', 0], ['x', 1], [' = ' + num(xs[0]) + ' och ', 0], ['y', 1],
        [' = ' + num(ys[0])]],
       [['ger punkten (' + num(xs[0]) + ', ' + num(ys[0]) + ').']]
     ], [tx + tw - 20, ty + 2 * rowH]);
-    var bLinjal = bubble(26, ty + th + 12, 296, [
+    var bLinjal = bubble(264, 420, 246, [
       [['Punkterna ligger på en rät linje —']],
       [['jag drar den med linjalen.']]
-    ], [ox - u, oy - 3 * u]);
+    ], [ox - u, oy - 5 * u]);
 
     /* ---- steg 1: sambandet skrivs upp ---- */
-    placeString('y=' + num(k) + 'x+' + m, tx, 46, s * 0.9, F * 0.9, acts);
-    pause(240);
-    acts.push({ kind: 'lineEnd' });
-    pause(320);
+    var xx = placeString('y=' + num(k), tx, 46, s * 0.9, F * 0.9, acts);
+    var exA = xx;
+    xx = placeString('x', xx, 46, s * 0.9, F * 0.9, acts);
+    var eqXc = (exA + xx) / 2;               /* mitten av x:et i sambandet */
+    placeString((m >= 0 ? '+' : '-') + Math.abs(m), xx, 46, s * 0.9, F * 0.9, acts);
+    stepEnd();
 
-    /* ---- steg 2: värdetabellen ---- */
+    /* ---- steg 2: tabellram + rubriker ---- */
     acts.push({ kind: 'show', obj: bIntro });
     pause(700);
     line([tx, ty], [tx + tw, ty]);                       /* tabellram */
@@ -442,27 +445,45 @@
     placeString('x', tx + colW / 2 - whx / 2, ty + rowH - 10, s * 0.62, F * 0.62, acts);
     placeString('y', tx + colW + colW / 2 - why / 2, ty + rowH - 10, s * 0.62, F * 0.62, acts);
     acts.push({ kind: 'hide', obj: bIntro });
-    pause(200);
+    stepEnd();
+
+    /* ---- steg 3–9: EN tabellrad per steg ----
+     * x-värdet skrivs, blåpennan ringar in det och x:et i sambandet
+     * ("detta sätts in här"), uträkningen antecknas till höger om raden
+     * och först då skrivs y-värdet in i kolumnen. */
     xs.forEach(function (x, i) {
       var base = ty + rowH * (i + 2) - 10;
-      acts.push({ kind: 'show', obj: bRows[i] });
-      pause(650);
+      var rowCy = ty + rowH * (i + 1) + rowH / 2;
       var sx = num(x), sy = num(ys[i]);
       var wx = stringAdvance(sx, s * 0.62, F * 0.62);
-      var wy = stringAdvance(sy, s * 0.62, F * 0.62);
       placeString(sx, tx + colW / 2 - wx / 2, base, s * 0.62, F * 0.62, acts);
-      pause(120);
+      pause(180);
+      var rA = { kind: 'stroke',
+                 pts: ringPts(tx + colW / 2, rowCy, colW / 2 - 5, 13.5),
+                 color: BLUE };
+      acts.push(rA);
+      pause(260);
+      var rB = { kind: 'stroke', pts: ringPts(eqXc, 46 - 0.25 * F, 15, 12),
+                 color: BLUE };
+      acts.push(rB);
+      pause(280);
+      placeString(calcNote(x, ys[i]), noteX, base, s * 0.55, F * 0.55, acts);
+      pause(180);
+      var wy = stringAdvance(sy, s * 0.62, F * 0.62);
       placeString(sy, tx + colW + colW / 2 - wy / 2, base, s * 0.62, F * 0.62, acts);
-      acts.push({ kind: 'hide', obj: bRows[i] });
-      pause(120);
+      acts.push({ kind: 'fade', ref: rA });
+      acts.push({ kind: 'fade', ref: rB });
+      stepEnd();
     });
-    pause(240);
-    acts.push({ kind: 'lineEnd' });
-    pause(320);
 
-    /* ---- steg 3: koordinatsystem + skala ---- */
+    /* ---- steg 10: koordinatsystem + skala ----
+     * Bubblan visas och göms INNAN axlarna ritas — nere vid koordinat-
+     * systemet finns ingen fri yta, och en bubbla får aldrig ligga
+     * framför det som skrivs. */
     acts.push({ kind: 'show', obj: bScale });
-    pause(700);
+    pause(1300);
+    acts.push({ kind: 'hide', obj: bScale });
+    pause(200);
     var xa0 = ox + (xmin - 0.6) * u, xa1 = ox + (xmax + 0.8) * u;
     var ya0 = oy - (ymax + 0.8) * u, ya1 = oy - (ymin - 0.6) * u;
     line([xa0, oy], [xa1, oy]);                          /* x-axel + pil */
@@ -473,7 +494,6 @@
     line([ox + 5, ya0 + 8], [ox, ya0 - 1]);
     placeGlyph('x', xa1 + 4, oy + 22, s * 0.6, acts);    /* axeletiketter */
     placeGlyph('y', ox + 10, ya0 + 4, s * 0.6, acts);
-    acts.push({ kind: 'hide', obj: bScale });
     pause(200);
     /* skala: skalstreck + tal vid 1 och sedan vart femte steg.
      * Talen skrivs KONSEKVENT under x-axeln resp. vänster om y-axeln. */
@@ -490,7 +510,7 @@
       line([ox + v * u, oy - 4], [ox + v * u, oy + 4]);  /* skalstreck */
       str = num(v);
       w = stringAdvance(str, s * 0.45, F * 0.45);
-      placeString(str, ox + v * u - w / 2, oy + 18, s * 0.45, F * 0.45, acts);
+      placeString(str, ox + v * u - w / 2, oy + 23, s * 0.45, F * 0.45, acts);
       acts.push({ kind: 'pause', ms: 90 });
     });
     pause(150);
@@ -501,11 +521,14 @@
       placeString(str, ox - 8 - w, oy - v * u + 5, s * 0.45, F * 0.45, acts);
       acts.push({ kind: 'pause', ms: 90 });
     });
-    pause(240);
-    acts.push({ kind: 'lineEnd' });
-    pause(320);
+    stepEnd();
 
-    /* ---- steg 4: pricka in punkterna ---- */
+    /* ---- steg 11: pricka in punkterna ----
+     * Vid varje punkt tonar STRECKADE HJÄLPLINJER in — lodrätt ned till
+     * x-värdet på x-axeln och vågrätt till y-värdet på y-axeln — så att
+     * eleven ser varför punkten hamnar just där. De tonar ut när nästa
+     * punkt prickas in. */
+    var prevGuide = null;
     xs.forEach(function (x, i) {
       var rcy = ty + rowH * (i + 1) + rowH / 2;
       if (i === 0) { acts.push({ kind: 'show', obj: bPoint }); pause(750); }
@@ -514,18 +537,23 @@
                    color: BLUE };
       acts.push(ring);
       pause(200);
-      /* prick på punkten — liten tät spiral som fyller igen */
       var px = ox + x * u, py = oy - ys[i] * u;
+      if (prevGuide) acts.push({ kind: 'hide', obj: prevGuide });
+      var guide = { guide: 1, px: px, py: py, ox: ox, oy: oy, wins: [] };
+      acts.push({ kind: 'show', obj: guide });
+      prevGuide = guide;
+      pause(220);
+      /* prick på punkten — liten tät spiral som fyller igen */
       acts.push({ kind: 'stroke', pts: dotPts(px, py) });
       acts.push({ kind: 'fade', ref: ring });
       if (i === 0) acts.push({ kind: 'hide', obj: bPoint });
-      pause(160);
+      pause(200);
     });
-    pause(240);
-    acts.push({ kind: 'lineEnd' });
-    pause(320);
+    pause(400);
+    if (prevGuide) acts.push({ kind: 'hide', obj: prevGuide });
+    stepEnd();
 
-    /* ---- steg 5: linjal + rät linje ---- */
+    /* ---- steg 12: linjal + rät linje ---- */
     acts.push({ kind: 'show', obj: bLinjal });
     pause(750);
     var ex0 = xmin - 0.2, ex1 = xmax + 0.2;
@@ -545,7 +573,7 @@
     acts.push({ kind: 'lineEnd' });
     pause(200);
 
-    return { acts: acts, contentW: 460, lastBase: 428, padL: tx };
+    return { acts: acts, contentW: 500, lastBase: ya1 + 6, padL: tx };
   }
 
   /* ---------------- scen: extremvärdesproblem "hästhagen" ----------------
@@ -652,7 +680,7 @@
     /* ---- steg 2: a) areafunktionen skrivs upp ---- */
     var y = by + 96;
     var adv = 1.7 * F;
-    var b3 = bubble(346, y - 44, 226, [
+    var b3 = bubble(346, y - 130, 226, [
       [['Rektangelns area:']],
       [['basen · höjden']]
     ], [290, y + 6]);
@@ -671,7 +699,7 @@
     stepEnd();
 
     /* ---- steg 3: distributiva bågpilar + utvecklingen ---- */
-    var b3b = bubble(346, y - 44, 252, [
+    var b3b = bubble(346, y - 130, 252, [
       [['Distributiva lagen: ', 0], ['x', 1], ['-et', 0]],
       [['multipliceras med båda termerna!']]
     ], [cxm + 8, y - 34]);
@@ -719,7 +747,7 @@
 
     /* ---- steg 7–11: lös ekvationen — ALLA mellansteg, rad för rad ---- */
     y += adv + 18;
-    var b4b = bubble(346, y - 34, 248, [
+    var b4b = bubble(346, y - 118, 248, [
       [['Vågskålsmetoden: addera 4', 0], ['x', 1], [',']],
       [['dela sedan båda leden med 4.']]
     ], [280, y + 20]);
@@ -762,7 +790,7 @@
 
     /* ---- steg 12–13: insättning i A(x) ---- */
     y += adv + 18;
-    var b5 = bubble(346, y - 34, 240, [
+    var b5 = bubble(346, y - 118, 240, [
       [['Hur stor är arean då?']],
       [['In med ', 0], ['x', 1], [' = 15 i ', 0], ['A', 1], ['(', 0], ['x', 1], [')!']]
     ], [300, y + 20]);
@@ -777,7 +805,7 @@
 
     /* ---- steg 14–15: karaktär + svar ---- */
     y += adv + 18;
-    var b6 = bubble(346, y - 34, 244, [
+    var b6 = bubble(346, y - 118, 244, [
       [['Max eller min? Kolla tecknet på']],
       [['andraderivatan: negativt = max!']]
     ], [260, y + 20]);
@@ -998,7 +1026,7 @@
     stepEnd();
 
     y += adv + 0.55 * F;
-    var b7 = bubble(bx, y - 44, bw, [
+    var b7 = bubble(bx, y - 128, bw, [
       [['g', 1], [' finns i båda leden —', 0]],
       [['jag delar båda leden med ', 0], ['g', 1], ['!', 0]]
     ], [280, y - 8]);
@@ -1027,7 +1055,7 @@
     stepEnd();
 
     y += adv + 1.2 * F;
-    var b9 = bubble(bx, y - 44, bw, [
+    var b9 = bubble(bx, y - 128, bw, [
       [['In med värdena: 30 kg och 2,0 m']],
       [['för barnet, 80 kg för pappa.']]
     ], [300, y - 8]);
@@ -1208,6 +1236,21 @@
     return g;
   }
 
+  /* ---------------- hjälplinjer vid punktplottning ----------------
+   * Streckade linjer från punkten lodrätt till x-axeln och vågrätt till
+   * y-axeln — tonar in när punkten prickas och ut när nästa prickas.
+   * Ritas inte av handen (de är "tänkta" linjer), ligger UNDER handen. */
+  function makeGuide(o) {
+    var g = el('g', { opacity: 0 });
+    el('line', { x1: o.px, y1: o.py, x2: o.px, y2: o.oy, stroke: LABINK,
+                 'stroke-width': 1.5, 'stroke-dasharray': '5 4',
+                 opacity: 0.5 }, g);
+    el('line', { x1: o.px, y1: o.py, x2: o.ox, y2: o.py, stroke: LABINK,
+                 'stroke-width': 1.5, 'stroke-dasharray': '5 4',
+                 opacity: 0.5 }, g);
+    return g;
+  }
+
   /* ---------------- linjal ----------------
    * Halvtransparent plastlinjal längs linjen som ska dras; överkanten
    * ligger exakt på linjen, kroppen under. */
@@ -1323,7 +1366,8 @@
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {
       if (a.kind !== 'show' || a.obj.el) return;
-      a.obj.el = a.obj.bubble ? makeBubble(a.obj) : makeRuler(a.obj);
+      a.obj.el = a.obj.bubble ? makeBubble(a.obj)
+        : a.obj.guide ? makeGuide(a.obj) : makeRuler(a.obj);
       (a.obj.bubble ? bubbleG : rulerG).appendChild(a.obj.el);
       objs.push(a.obj);
     });

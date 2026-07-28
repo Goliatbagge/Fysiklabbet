@@ -1309,10 +1309,25 @@
     st.id = 'hk-style';
     st.textContent =
       '.hk-wrap{max-width:760px;margin:0 auto;font-family:Poppins,system-ui,sans-serif}' +
-      '.hk-paper{border-radius:12px;overflow:hidden;cursor:pointer;' +
+      '.hk-paper{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;' +
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
       '.hk-paper svg{display:block;width:100%;height:auto}' +
+      '.hk-fsbtn{position:absolute;top:8px;right:8px;width:40px;height:40px;' +
+        'border-radius:50%;background:#fffdf8;border:1.5px solid rgba(15,22,32,.35);' +
+        'color:' + LABINK + ';display:flex;align-items:center;justify-content:center;' +
+        'cursor:pointer;opacity:.85;padding:0}' +
+      '.hk-fsbtn:hover{background:#efe8d8;opacity:1}' +
+      /* helskärm (presentation): hela widgeten fullskärmas, arket skalas
+       * så att det ryms, knappraden ligger kvar under */
+      '.hk-wrap:fullscreen,.hk-wrap:-webkit-full-screen{max-width:none;' +
+        'background:linear-gradient(160deg,#f2ecdf,#e9e0cd);display:flex;' +
+        'flex-direction:column;align-items:center;justify-content:center;' +
+        'padding:14px;overflow:auto}' +
+      '.hk-wrap:fullscreen .hk-paper,.hk-wrap:-webkit-full-screen .hk-paper' +
+        '{flex:0 1 auto}' +
+      '.hk-wrap:fullscreen .hk-controls,.hk-wrap:-webkit-full-screen .hk-controls' +
+        '{flex:0 0 auto;justify-content:center;width:100%}' +
       '.hk-controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}' +
       '.hk-btn{border:1.5px solid ' + LABINK + ';background:' + PAPER + ';color:' + LABINK + ';' +
         'border-radius:8px;padding:6px 18px;font-weight:600;font-size:14px;cursor:pointer;' +
@@ -1706,6 +1721,47 @@
         play();
       }
     });
+
+    /* ---------------- helskärm (presentation för klass) ----------------
+     * Kanonisk fullskärmsikon (samma som simuleringarnas fs-btn). Hela
+     * widgeten fullskärmas; arket skalas om så att det ryms på skärmen. */
+    var ICO_EXPAND = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"' +
+      ' stroke="currentColor" stroke-width="2.2" stroke-linecap="round"' +
+      ' stroke-linejoin="round"><path d="M3 9V3h6"/><path d="M21 9V3h-6"/>' +
+      '<path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+    var ICO_COMPRESS = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"' +
+      ' stroke="currentColor" stroke-width="2.2" stroke-linecap="round"' +
+      ' stroke-linejoin="round"><path d="M9 3v6H3"/><path d="M15 21v-6h6"/>' +
+      '<path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+    var fsBtn = document.createElement('button');
+    fsBtn.className = 'hk-fsbtn';
+    fsBtn.title = 'Helskärm';
+    fsBtn.setAttribute('aria-label', 'Helskärm');
+    fsBtn.innerHTML = ICO_EXPAND;
+    fsBtn.addEventListener('click', function (e) {
+      e.stopPropagation();                 /* inte ett stegklick */
+      if (document.fullscreenElement === wrap) document.exitFullscreen();
+      else if (wrap.requestFullscreen) wrap.requestFullscreen();
+    });
+    paperDiv.appendChild(fsBtn);
+
+    function fitFS() {
+      var fs = document.fullscreenElement === wrap;
+      fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
+      fsBtn.title = fs ? 'Lämna helskärm' : 'Helskärm';
+      if (fs) {
+        var availW = window.innerWidth - 48;
+        var availH = window.innerHeight - ctrls.offsetHeight - 52;
+        var sc = Math.min(availW / W, availH / H);
+        svg.style.width = Math.round(W * sc) + 'px';
+        svg.style.height = Math.round(H * sc) + 'px';
+      } else {
+        svg.style.width = '';
+        svg.style.height = '';
+      }
+    }
+    document.addEventListener('fullscreenchange', fitFS);
+    window.addEventListener('resize', fitFS);
 
     render(0);
     updateBtns();

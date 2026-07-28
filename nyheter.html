@@ -157,6 +157,22 @@
             font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.03em;
             color: var(--lab-ink-muted); margin-top: 8px; text-align: right;
         }
+        /* Bild insprängd i brödtexten — body-block { type: 'image' }. Används när
+           nyheten har flera fria pressbilder; bildtexten står till vänster och
+           källan/krediten under den. */
+        .article-body figure.article-figure-inline { margin: 32px 0 28px; }
+        .article-body figure.article-figure-inline figcaption {
+            display: flex; flex-direction: column; gap: 5px;
+            margin-top: 9px; text-align: left;
+        }
+        .article-body figure.article-figure-inline .fig-caption {
+            font-family: var(--lab-font-sans); font-size: 14.5px; line-height: 1.55;
+            letter-spacing: 0; text-transform: none; color: var(--lab-ink);
+        }
+        .article-body figure.article-figure-inline .fig-credit {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.03em;
+            color: var(--lab-ink-muted);
+        }
         .article-body { margin-top: 26px; }
         .article-body p {
             font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px;
@@ -294,7 +310,7 @@
         }
         function applyBionic(root) {
             if (!root || root.querySelector('.lab-bionic')) return; // redan gjort
-            const SKIP = { SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1 };
+            const SKIP = { SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, FIGCAPTION: 1 };
             const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
                 acceptNode(node) {
                     if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
@@ -472,6 +488,18 @@
                     <p dangerouslySetInnerHTML={{ __html: b.html }} />
                     {b.cite && <cite>{b.cite}</cite>}
                 </blockquote>
+            );
+            if (b.type === 'image') return (
+                <figure className="article-figure article-figure-inline">
+                    <img src={b.src} alt={b.alt} loading="lazy" />
+                    {(b.caption || b.credit) && (
+                        <figcaption>
+                            {b.caption && <span className="fig-caption"
+                                dangerouslySetInnerHTML={{ __html: b.caption }} />}
+                            {b.credit && <span className="fig-credit">{b.credit}</span>}
+                        </figcaption>
+                    )}
+                </figure>
             );
             if (b.type === 'fact') return (
                 <div className="article-fact">

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handskriven lösning — prototyp (tillfällig demosida)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: linear-gradient(160deg, #f2ecdf, #e9e0cd);
+    min-height: 100vh;
+    color: #0f1620;
+  }
+  .page { max-width: 820px; margin: 0 auto; padding: 36px 20px 60px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  h2 { font-size: 19px; margin: 44px 0 4px; }
+  .sub { color: rgba(15,22,32,.66); font-size: 15px; margin: 0 0 26px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Handskriven lösning — prototyp</h1>
+  <h2>Ekvation med vågskålsmetoden</h2>
+  <p class="sub">Samma operation på båda sidor om likhetstecknet — det man
+     gör på båda sidor skrivs med blå penna (handen byter penna!).
+     Tryck på <strong>Skriv</strong> och klicka sedan fram
+     <strong>Nästa steg</strong>.</p>
+  <div id="demo"></div>
+  <h2>Integralberäkning</h2>
+  <p class="sub">Integraltecken med gränser, primitiv funktion i klammer
+     och insättning av gränserna.</p>
+  <div id="demo2"></div>
+  <h2>Från ekvation till graf</h2>
+  <p class="sub">Exempel 1 ur Ma 1c 4.3: rita grafen till
+     <em>y</em> = −2<em>x</em> + 3. Värdetabell, koordinatsystem, punkter
+     och linjal — med tankebubblor som visar vad man tänker.</p>
+  <div id="demo3"></div>
+  <h2>Extremvärdesproblem — maximal area</h2>
+  <p class="sub">Exempel 2 ur Ma fortsättning 1c 4.6: hästhage mot en mur
+     med 60 m stängsel. Geometrisk figur, distributiva bågpilar,
+     areafunktion, derivata med alla mellansteg och teckenkoll — varje
+     rad är ett eget klicksteg.</p>
+  <div id="demo4"></div>
+  <h2>Fysik: kraftmoment — gungbrädan</h2>
+  <p class="sub">Exempel 3 ur Fysik nivå 2, 1.1 Kraftmoment: pappa 80 kg
+     och barn 30 kg ska nå momentjämvikt. Handmetoden: rita först det man
+     vet (streckgubbar duger!), lägg sedan till tyngdkrafterna som
+     skalenliga pilar och hävarmarnas måttlinjer — och räkna till sist
+     rad för rad.</p>
+  <div id="demo5"></div>
+</div>
+<script src="handskrift.js"></script>
+<script>
+  var q = new URLSearchParams(location.search);
+  /* ?bara=N visar bara demo N (för skärmdumpstest) */
+  if (q.has('bara')) {
+    var keep = 'demo' + (q.get('bara') === '1' ? '' : q.get('bara'));
+    document.querySelectorAll('.page > h2, .page > .sub, .page > div[id]')
+      .forEach(function (n) {
+        if (n.id === keep) return;
+        if (n.tagName === 'DIV' && n.id !== keep) n.style.display = 'none';
+      });
+    document.querySelectorAll('.page > div[id]').forEach(function (n) {
+      if (n.id !== keep) n.style.display = 'none';
+    });
+  }
+  var opts = {
+    fontSize: 40,
+    speed: q.has('speed') ? parseFloat(q.get('speed')) : 1,
+    autostart: q.has('auto'),
+    instant: q.has('instant'),
+    at: q.has('at') ? parseFloat(q.get('at')) : null
+  };
+  var spec = [
+    "5x+3=23",
+    ["5x+3", {t:"-3", c:1}, "=", "23", {t:"-3", c:1}],
+    "5x=20",
+    [{frac:["5x","5"], fc:1}, "=", {frac:["20","5"], fc:1}],
+    "x=4",
+    "Svar: x=4"
+  ];
+  HANDSKRIFT.mount(document.getElementById('demo'), spec, opts);
+
+  var specInt = [
+    "∫_1^3 2x dx",
+    ["=", {brack:'['}, {frac:["2x^2","2"]}, {brack:']', sub:"1", sup:"3"}],
+    "=[x^2]_1^3",
+    ["=", {ring:'sup'}, "3^2", "-", {ring:'sub'}, "1^2"],
+    "=9-1",
+    "=8",
+    "Svar: 8"
+  ];
+  HANDSKRIFT.mount(document.getElementById('demo2'), specInt, opts);
+
+  HANDSKRIFT.mount(document.getElementById('demo3'),
+    { typ: 'linjegraf', k: -2, m: 3, xs: [-3,-2,-1,0,1,2,3] }, opts);
+
+  HANDSKRIFT.mount(document.getElementById('demo4'), { typ: 'hage' }, opts);
+
+  HANDSKRIFT.mount(document.getElementById('demo5'), { typ: 'gungbrada' }, opts);
+</script>
+</body>
+</html>

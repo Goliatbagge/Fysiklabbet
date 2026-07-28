@@ -17,6 +17,10 @@
  *         {frac:["5x","5"]}      bråk med rakt divisionsstreck
  *                                (skrivordning: täljare → streck → nämnare);
  *                                fc:1 gör streck + nämnare blå.
+ *         {cont:1}               FÖRSTA segmentet i en rad: raden fortsätter
+ *                                på FÖREGÅENDE rads baslinje (kollegieblock-
+ *                                stil, "… = … = …") i stället för på ny rad —
+ *                                men är fortfarande ett eget klicksteg.
  *
  *   opts = { fontSize: 40, speed: 1, autostart: false, instant: false,
  *            at: ms|null, stegvis: true }  — stegvis=false ger gamla
@@ -244,16 +248,27 @@
     var lastBase = y;
 
     var pendingRing = null;
+    var prevEndX = padL, prevBaseY = null;
     spec.forEach(function (line, li) {
       var segs = typeof line === 'string' ? [line] : line;
+      var cont = Array.isArray(segs) && segs.length &&
+        segs[0] && typeof segs[0] === 'object' && segs[0].cont;
+      if (cont) segs = segs.slice(1);
       var hasFrac = segs.some(function (sg) { return sg && sg.frac; });
       var textAll = segs.map(function (sg) {
         return typeof sg === 'string' ? sg : (sg && sg.t) || '';
       }).join('');
       var hasTall = /[∫\[]/.test(textAll);   /* integraltecken/klamrar */
-      if (hasFrac) y += 0.55 * F;
-      else if (hasTall) y += 0.45 * F;
-      var x = padL;
+      var x;
+      if (cont && prevBaseY != null) {
+        /* fortsättningsrad: samma baslinje, liten lucka efter förra uttrycket */
+        y = prevBaseY;
+        x = prevEndX + 0.38 * F;
+      } else {
+        if (hasFrac) y += 0.55 * F;
+        else if (hasTall) y += 0.45 * F;
+        x = padL;
+      }
 
       segs.forEach(function (sg) {
         if (typeof sg === 'string') {
@@ -329,7 +344,10 @@
       }
 
       maxW = Math.max(maxW, x);
-      lastBase = hasFrac ? y + 0.75 * F : (hasTall ? y + 0.35 * F : y);
+      var bottom = hasFrac ? y + 0.75 * F : (hasTall ? y + 0.35 * F : y);
+      lastBase = cont ? Math.max(lastBase, bottom) : bottom;
+      prevEndX = x;
+      prevBaseY = y;
       acts.push({ kind: 'pause', ms: 240 });
       acts.push({ kind: 'lineEnd' });        /* steggräns: här pausas stegvis läge */
       acts.push({ kind: 'pause', ms: 320 });
@@ -1473,6 +1491,9 @@
       }
       var pp = penPosAt(time);
       setPencil(pp.col === BLUE);
+      /* före start (tomt ark) syns ingen hand; den tonar in när skrivandet
+       * börjar */
+      hand.setAttribute('opacity', time <= 0 ? 0 : Math.min(1, time / 260));
       var wob = (time < TOTAL - 800)
         ? Math.sin(time * 0.011) * 1.4 : 0;
       var lx = pp.pos[0] + pp.lift * 2;

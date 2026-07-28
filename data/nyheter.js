@@ -34,6 +34,50 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-28-ljusets-envagsgata",
+    date: "2026-07-28",
+    title: "Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån",
+    deck: "Normalt spelar det ingen roll åt vilket håll ljus passerar genom ett material — resultatet blir detsamma. Forskare vid Cornell University har nu visat att tunna filmer av vanliga halvledarkristaller kan bryta den regeln, så att samma film ser fullständigt olika ut beroende på om man betraktar den framifrån eller bakifrån.",
+    category: "Optik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-28-ljusets-envagsgata.jpg",
+    imageAlt: "Doktoranden Thomas Ugras (till vänster) och professor Richard Robinson undersöker halvledarprover i ett materialvetenskapligt laboratorium vid Cornell University. Ugras bär en blå skyddshandske och placerar ett prov i en mätapparat medan Robinson, i rutig skjorta och glasögon, ser på.",
+    imageCredit: "Foto: Allison Usavage/Duffield Engineering, Cornell University (pressbild)",
+    tags: ["optik", "vågor", "ljus", "polarisation", "kiralitet", "halvledare", "nanomaterial", "fotonik", "kvantteknik", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Cornell Chronicle (pressmeddelande)", url: "https://news.cornell.edu/stories/2026/07/researchers-break-light-symmetry-simple-materials" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-simple-semiconductor-front-symmetry.html" }
+    ],
+    research: {
+      citation: "T. J. Ugras et al., ”Non-reciprocal linearly polarized light in simple media”, Nature Materials (2026)",
+      url: "https://doi.org/10.1038/s41563-026-02660-0"
+    },
+    body: [
+      { type: "p", html: "Det finns en regel som gäller för nästan allt ljus som passerar genom vanliga material: det spelar ingen roll åt vilket håll ljuset går. Skickar man in ljus framifrån och bakifrån får man exakt samma resultat. Regeln kallas optisk reciprocitet, och den sitter så djupt i de flesta material att man normalt måste ta till kraftiga magnetfält eller avancerade konstgjorda nanostrukturer, metamaterial, för att bryta den. Nu har forskare vid Cornell University i USA visat att den går att bryta med betydligt enklare medel — tunna filmer av vanliga halvledarkristaller, tillverkade genom att låta dem självorganisera sig i en lösning. Studien publicerades i tidskriften <em>Nature Materials</em> den 27&nbsp;juli 2026." },
+
+      { type: "h2", text: "En osynlig envägsgata för ljus" },
+      { type: "p", html: "Den vanligaste tillämpningen av brutet reciprocitet är den optiska isolatorn: en komponent som släpper igenom laserljus i en riktning men blockerar det i den motsatta, ungefär som en backventil för ljus. Isolatorer skyddar känsliga lasrar mot störande reflexer som annars skulle studsa tillbaka in i dem, men de bygger nästan alltid på magneto-optiska material som måste omges av ett yttre magnetfält — opraktiskt att klämma in i en liten fotonisk krets. Forskarlaget, lett av doktoranden Thomas Ugras och professor Richard Robinson, ville se om samma sorts effekt gick att få fram utan magneter, i material som redan är enkla att tillverka." },
+      { type: "quote", html: "”Föreställ dig persienner där solljus kommer in genom de vågräta ribborna, men att samma persienner, sedda från andra hållet, släpper igenom ljuset som om ribborna stod lodrätt — helt omvänt. Normalt krävs komplicerade metamaterial eller yttre magnetfält för det beteendet, men vi visar att det går att uppnå i enkla, lösningsprocessade halvledar-nanokluster.”", cite: "Richard Robinson, professor i materialvetenskap och teknik, Cornell University" },
+
+      { type: "h2", text: "Snurrande nanokristaller i lösning" },
+      { type: "p", html: "Nyckeln var något forskargruppen kallar <em>magic-size clusters</em> — nanokristaller med ett så exakt antal atomer att de blir ovanligt stabila och självmant ordnar sig i spiralformade strukturer, tillverkade av kadmiumsulfid, kadmiumselenid eller kadmiumtellurid. Spiralformen gör materialet kiralt: precis som en vänsterhand aldrig går att lägga exakt ovanpå en högerhand går en kiral kristallstruktur inte att överlappa med sin spegelbild. Kirala material är sedan tidigare kända för att absorbera vänster- och högercirkulärt polariserat ljus olika mycket, så kallad cirkulär dikroism, men den effekten är normalt mycket svagare än materialets vanliga, riktningsberoende absorption av rakt polariserat ljus, linjär dikroism. Ugras upptäckte att när de två effekterna görs ungefär lika starka i samma material samverkar de i stället med varandra — och resultatet blir just den riktningsberoende asymmetri som persienn-liknelsen beskriver." },
+
+      { type: "h2", text: "En film som läser ”Y” framifrån och ”N” bakifrån" },
+      { type: "p", html: "För att visa hur påtaglig effekten kan bli mönstrade forskarna en film där olika delar hade olika kiral vridriktning och orientering. Resultatet var en yta som visar helt olika mönster beroende på från vilket håll den betraktas." },
+      { type: "quote", html: "”Kontrollerar och mönstrar man ett material på ett underlag, och varierar dess kirala vridriktning och orientering i rummet, går det att skapa en film som ser olika ut beroende på om den betraktas framifrån eller bakifrån. Vi har gjort en film som läser ’Y’ framifrån och ’N’ bakifrån. Konceptet går lätt att bygga ut, till exempel för att skapa hologram med unikt utseende åt varje håll.”", cite: "Thomas Ugras, doktorand och försteförfattare till studien, Cornell University" },
+
+      { type: "h2", text: "Från hologram till kvantteknik" },
+      { type: "p", html: "Forskarna pekar ut flera möjliga tillämpningar: skärmar och hologram som visar olika bilder beroende på betraktningsvinkel, optisk kryptering där ett meddelande bara går att läsa från ett håll, kompakta fotoniska komponenter som styr ljussignaler i en bestämd riktning utan magneter, och polarisationsbaserad kvantteknik. Det mest slående är enligt Robinson ändå inte att man hittat ett nytt exotiskt material, utan att den ovanliga optiska egenskapen kan uppstå i material forskare redan vet hur man tillverkar i stor skala — vilket öppnar ett betydligt bredare fält för morgondagens icke-reciproka fotonik." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Optisk reciprocitet, ibland kallad Helmholtz reciprocitet, gäller matematiskt för praktiskt taget alla vanliga material — den bryts normalt bara av magnetfält, tidsvarierande fält eller olinjära effekter.",
+        "Kadmiumsulfid, kadmiumselenid och kadmiumtellurid är väletablerade halvledare som redan används i bland annat solceller och lysdioder.",
+        "Kiralitet betyder att ett föremål inte går att lägga exakt ovanpå sin spegelbild — precis som en hand. Ordet kommer av grekiskans <em>cheir</em>, ”hand”."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-27-zink-70-magnetisk-gata",
     date: "2026-07-27",
     title: "Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden",

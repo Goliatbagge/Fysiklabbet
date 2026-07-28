@@ -14,6 +14,57 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-28) — kan tas upp senare
+
+- **Termodynamiskt ramverk för snurrande ”aktiva” partiklar ger effektiv
+  temperatur och kantströmmar** — Hartmut Löwen m.fl. (Heinrich Heine
+  University Düsseldorf, TU Darmstadt, Sapienza Rom, University of Camerino)
+  har visat att gaser av självdrivna, snurrande partiklar (kirala mini-robotar
+  i experimentet) lyder en modifierad "allmänna gaslagen" med en
+  aktivitetsberoende effektiv temperatur, och bildar riktade ytströmmar vid
+  väggar liknande topologiska isolatorers kantströmmar. Publicerad i PNAS
+  2026, DOI 10.1073/pnas.2532158123. Intressant termodynamik-vinkel men
+  begreppen (aktiv materia, icke-jämvikt, effektiv temperatur) är abstrakta
+  för gymnasienivå, och vi körde en termodynamiknyhet nyligen (värmestrålar
+  07-25) — spara till ämnet känns fräscht. Källa:
+  https://phys.org/news/2026-07-thermodynamic-framework-pressure-edge-currents.html
+  (tillagd 2026-07-28)
+- **Första direkta beviset för ett ljusinducerat Floquet-topologiskt
+  tillstånd** — Claude Monney, Jan Minár och Akki Pulkkinen (University of
+  West Bohemia, Pilsen) har med tidsupplöst ARPES på tenntellurid (SnTe) vid
+  30 K visat att en kraftig laserpuls tillfälligt kan göra en vanlig
+  halvledare till en topologisk isolator/metall — ett fenomen förutsagt
+  teoretiskt redan 2011. Publicerad i Nature Physics 2026, DOI
+  10.1038/s41567-026-03341-0. Häftig kvantfysik/fotonik-vinkel men mycket
+  teoretiskt tung (Floquet-tillstånd, topologiska isolatorer, Dirackoner) för
+  gymnasienivå, och vi har kört mycket kvantfysik senaste veckorna. Källa:
+  https://phys.org/news/2026-07-physicists-capture-evidence-floquet-topological.html
+  (tillagd 2026-07-28)
+- **Extragalaktiska positron-annihilationshotspots kan betyda att
+  Vintergatan producerar betydligt fler positroner än väntat** —
+  astrofysiknyhet (phys.org, ~15 h gammal vid sökningen). Astronomivinkel,
+  men vi har kört mycket astronomi senaste veckorna (heliumnova-kulor
+  07-23, mörka kometen 07-20) och nyheten var inte färdigresearchad. Källa:
+  https://phys.org/news/2026-07-extragalactic-positron-annihilation-hotspots-milky.html
+  (tillagd 2026-07-28)
+- **Kvantneurala nätverk får sitt första hårdvarutest** samt **Ny
+  kvantchip-arkitektur kan använda inbyggda vibrationer för att länka
+  avlägsna qubitar** — två färska kvantdator-/kvantchip-nyheter (phys.org,
+  ~17 respektive ~10 h gamla). Vi valde optiknyheten (Cornells icke-reciproka
+  ljus) i stället eftersom vi kört mycket kvantdator-/kvantchipnyheter
+  senaste veckorna och för att sprida över ämnen. Källor:
+  https://phys.org/news/2026-07-quantum-neural-networks-hardware.html ,
+  https://phys.org/news/2026-07-quantum-chip-architecture-built-vibrations.html
+  (tillagd 2026-07-28)
+- **Valdes i dag: Cornell (Thomas Ugras, Richard Robinson) visar
+  icke-reciprok linjärt polariserat ljus i enkla halvledar-nanokluster**
+  (kadmiumsulfid/selenid/tellurid, ”magic-size clusters”) — en film som ser
+  olika ut framifrån och bakifrån, publicerad i Nature Materials 27 juli
+  2026. Stark optik/vågvinkel (polarisation, kiralitet, reciprocitet), färsk,
+  välkällad (Cornell Chronicle-pressmeddelande + phys.org), riktig pressbild
+  med namngivna forskare. Se publicerat.md för full källista. (tillagd
+  2026-07-28)
+
 ## Fynd som inte användes (2026-07-27) — kan tas upp senare
 
 - **Fyra vita dvärgar upptäckta i vårt kosmiska baklandskap** — University

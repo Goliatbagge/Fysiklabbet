@@ -43,6 +43,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-29-neutronernas-spegelvarld",
+    date: "2026-07-29",
+    title: "Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår",
+    deck: "En snart sjuttio år gammal hypotes i partikelfysiken föreslår att varje partikel har en osynlig spegelpartner i en parallell materievärld som bara märks via gravitationen — och som räknas som en kandidat för mörk materia. Vid Paul Scherrer-institutet i Schweiz har forskare med hittills oöverträffad precision letat efter tecken på att neutroner läcker in i denna spegelvärld, genom att studera omkring 25 miljarder neutroner under flera månader — utan att hitta ett enda spår.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-29-neutronernas-spegelvarld.jpg",
+    imageAlt: "Forskarna Bernhard Lauss (till vänster, i svart t-shirt med rosa nyckelband) och Geza Zsigmond (till höger, i mörkblå t-shirt) studerar utrustningen vid Paul Scherrer-institutets ultrakalla neutronkälla i Schweiz. Lauss pekar uppåt mot rostfria stålrör och ventiler i apparaturen, medan Zsigmond ser i samma riktning. I bakgrunden syns fler delar av anläggningen med blåa ventiler och stora tankar.",
+    imageCredit: "Foto: Markus Fischer/Paul Scherrer Institute PSI (pressbild)",
+    tags: ["partikelfysik", "kärnfysik", "modern fysik", "mörk materia", "neutroner", "symmetri", "kvantfysik", "grundläggande fysik", "fysik 2"],
+    sources: [
+      { name: "Paul Scherrer Institute PSI (pressmeddelande)", url: "https://www.psi.ch/en/news/media-releases/neutrons-dont-disappear-into-the-mirror-world" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-ultracold-neutrons-dont-mirror-world.html" }
+    ],
+    research: {
+      citation: "N. J. Ayres et al., ”New high-sensitivity search for neutron to mirror-neutron oscillations at the PSI UCN source”, Physical Review Letters (2026)",
+      url: "https://doi.org/10.1103/2qck-n6mb"
+    },
+    body: [
+      { type: "p", html: "Ibland är den mest spännande vetenskapliga upptäckten att inte hitta någonting alls. Vid Paul Scherrer-institutet (PSI) i Schweiz har forskare under flera månader fångat och räknat omkring 25&nbsp;miljarder ultrakalla neutroner i jakten på tecken på en hypotetisk, gömd spegelvärld av materia. Resultatet, publicerat i <em>Physical Review Letters</em> den 28&nbsp;juli 2026, är entydigt: inget spår av spegelvärlden syntes — vilket utesluter en tidigare misstänkt anomali med rekordprecision." },
+
+      { type: "h2", text: "En spegelbild av hela universum" },
+      { type: "p", html: "Idén om en spegelvärld går tillbaka till 1950-talet. När fysiker 1957 experimentellt visade att den svaga kärnkraften bryter mot spegelsymmetri, paritet — naturens lagar ser alltså inte likadana ut i en spegel som i verkligheten — föreslog teoretiker en lösning: kanske finns det en helt separat uppsättning partiklar, spegelelektroner, spegelprotoner och spegelneutroner, som tillsammans med vår vanliga materia återställer symmetrin i universum som helhet. Spegelpartiklarna skulle växelverka med vår värld nästan uteslutande via gravitationen, vilket också gör dem till en föreslagen kandidat för mörk materia — den osynliga massa som håller ihop galaxer men som aldrig har observerats direkt." },
+      { type: "quote", html: "”I grunden känner de båda partikeltyperna bara av varandras närvaro genom gravitationskraften.”", cite: "Geza Zsigmond, forskare vid PSI Center for Neutron and Muon Sciences" },
+
+      { type: "h2", text: "Neutronen som kan försvinna" },
+      { type: "p", html: "Gravitationen är en alldeles för svag kraft för att mäta enskilda partiklar med, så forskarna behövde ett annat sätt att komma åt hypotesen. Lösningen låg i en av kvantmekanikens mer bisarra möjligheter: om en spegelneutron existerar och är nästan identisk med den vanliga neutronen, skulle en neutron i princip kunna oscillera fram och tillbaka mellan de två tillstånden — försvinna in i spegelvärlden ett ögonblick och dyka upp igen i vår värld strax därpå. Ett sådant läckage vore i praktiken mätbart: fångar man en samling neutroner i en behållare skulle några av dem sakta men säkert försvinna in i spegelvärlden och aldrig komma tillbaka, som ett läckage i en tät tank." },
+      { type: "quote", html: "”Det går inte att bevisa att spegelpartiklar existerar enbart genom gravitationsväxelverkan. Därför inriktade vi oss i stället på en annan egenskap hos dem — att neutrala partiklar borde kunna oscillera fram och tillbaka mellan vår vanliga materievärld och spegelvärlden.”", cite: "Bernhard Lauss, gruppledare för ultrakall neutronfysik, PSI Center for Neutron and Muon Sciences" },
+
+      { type: "h2", text: "25 miljarder neutroner i en fälla av stål" },
+      { type: "p", html: "Tillsammans med ETH Zürich och Jagellonska universitetet i Krakow byggde forskarna en fälla av icke-magnetiskt rostfritt stål vid PSI:s källa för ultrakalla neutroner. Där bromsas neutroner ner så mycket att de rör sig i en takt jämförbar med gångfart och kan studsa mot väggarna i en behållare i stället för att flyga rakt igenom den. Var femte minut fångade forskarna omkring 1,5&nbsp;miljoner ultrakalla neutroner i behållaren, lät dem sitta instängda i cirka 200&nbsp;sekunder och räknade sedan hur många som fanns kvar. Under experimentets gång varierade de systematiskt styrkan hos ett omgivande magnetfält, mellan 5 och 109&nbsp;μT (bara någon procent av jordens eget magnetfält), eftersom teorin förutspår att oscillationen skulle förstärkas vid en viss fältstyrka där energinivåerna i vår värld och spegelvärlden matchar varandra. Proceduren upprepades om och om igen under flera månader, tills forskarna sammanlagt hade studerat omkring 25&nbsp;miljarder neutroner." },
+
+      { type: "h2", text: "Inget läckage — ett nej som pekar framåt" },
+      { type: "p", html: "Resultatet blev entydigt: neutronerna försvann inte snabbare än vad redan kända effekter, som neutronens naturliga radioaktiva sönderfall, förutspår — oavsett vilken magnetfältstyrka forskarna testade. Mätningen är särskilt betydelsefull eftersom tidigare experiment vid institutet Laue-Langevin i Frankrike hade väckt ny spekulation om just en sådan anomali. PSI:s mätning, med hittills oöverträffad precision, utesluter nu det tidigare misstänkta området med 99,98&nbsp;% konfidens." },
+      { type: "quote", html: "”Vi såg inga som helst tecken på sådana oscillationer.”", cite: "Bernhard Lauss" },
+      { type: "p", html: "Ett nollresultat kan låta som en anti-klimax, men i fysiken är det ofta lika värdefullt som en upptäckt. Genom att stänga en dörr tvingas teoretiker leta efter andra förklaringar till mörk materia, och om spegelvärldshypotesen fortfarande ska hålla måste den formuleras om för att undvika precis det experiment PSI-teamet nu har genomfört. Resultatet, som byggde på två doktorsavhandlingar vid ETH Zürich och flera studenters arbete, sätter samtidigt ett nytt riktmärke för framtida sökningar efter oscillerande neutroner världen över." },
+      { type: "quote", html: "”Genom att begränsa utrymmet för vissa spekulationer visar vi de teoretiska fysikerna att de måste utforska nya vägar.”", cite: "Geza Zsigmond" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Ultrakalla neutroner rör sig så långsamt — bara några meter per sekund, ungefär gångfart — att de kan studsa mot väggarna i en behållare i stället för att flyga rakt igenom dem, vilket gör det möjligt att fånga och räkna dem en och en.",
+        "Idén om spegelpartiklar föreslogs på 1950-talet, efter att fysikerna Chien-Shiung Wu och medarbetare 1957 experimentellt visade att den svaga kärnkraften bryter mot spegelsymmetri (paritet) — ett av de mest överraskande resultaten i modern fysik.",
+        "Neutronen har en egen liten gåta sedan tidigare: mätt instängd i en behållare (som i det här experimentet) verkar den i genomsnitt leva några sekunder kortare än när den mäts i en stråle av fritt flygande neutroner — en avvikelse som ännu inte är fullt förklarad."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-28-ljusets-envagsgata",
     date: "2026-07-28",
     title: "Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån",

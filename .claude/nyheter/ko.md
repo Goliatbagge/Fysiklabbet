@@ -14,6 +14,44 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-29) — kan tas upp senare
+
+- **Valdes i dag: Paul Scherrer-institutet (Bernhard Lauss, Geza Zsigmond m.fl.)
+  har med rekordprecision letat efter neutron–spegelneutron-oscillationer**
+  — en snart sjuttio år gammal hypotes om en parallell ”spegelvärld” av
+  materia (mörk materia-kandidat) som bara känns av via gravitationen. Med
+  en fälla av icke-magnetiskt rostfritt stål vid PSI:s ultrakalla neutronkälla
+  studerade forskarna omkring 25 miljarder neutroner under flera månader och
+  hittade inget tecken på oscillationer, vilket utesluter en tidigare
+  misstänkt anomali (från ILL i Frankrike) med 99,98&nbsp;% konfidens.
+  Publicerad i <em>Physical Review Letters</em> 28 juli 2026. Stark
+  partikelfysik/modern fysik-vinkel (symmetri, mörk materia, kvantoscillationer),
+  färsk, välkällad (PSI:s eget pressmeddelande + Phys.org), riktig pressbild av
+  de två forskarna vid apparaturen. Ämnesmässigt en annan vinkel än
+  gårdagens optiknyhet och senaste veckans kärnfysik/astronomi/kvantdator-kluster.
+  Se publicerat.md för full källista. (tillagd 2026-07-29)
+- **Heta elektroner kan omforma metallers kristallstruktur på miljarddels-
+  sekunder** — Sam Azadi (University of Manchester) har med simuleringar av
+  17 olika grundämnesmetaller visat att en kraftig laserpuls kan hetta upp
+  elektronerna (men inte atomerna) så mycket att metallens kristallstruktur
+  själv byter form (hcp/fcc/bcc) via ”elektronisk entropi” snarare än vanlig
+  värmeledning. Intressant termodynamik/materialfysik-vinkel, men en
+  renodlad simuleringsstudie (inget experiment) och tekniskt abstrakt
+  (elektronisk entropi som ”termodynamisk kontrollparameter”) för
+  gymnasienivå. Publicerad i <em>Physical Review Materials</em>, DOI
+  10.1103/nzv9-dskm, 28 juli 2026. Källa:
+  https://phys.org/news/2026-07-hot-electrons-reshape-metals-billionths.html
+  (tillagd 2026-07-29)
+- **Nytt sätt att läsa av kvantbitar snabbare med mindre hårdvara** samt
+  **Forskare vid Skoltech visar övergången mellan starkt och svagt
+  kopplade polaritonlasrar** — två färska kvantteknik-/kvantoptiknyheter
+  (phys.org, ~17 respektive ~12 h gamla vid sökningen). Vi har kört mycket
+  kvantdator-/kvantoptiknyheter senaste veckorna — spara till ämnet känns
+  fräscht igen. Källor:
+  https://phys.org/news/2026-07-quantum-bits-faster-hardware.html ,
+  https://phys.org/news/2026-07-scientists-transition-strong-weak-coupling.html
+  (tillagd 2026-07-29)
+
 ## Fynd som inte användes (2026-07-28) — kan tas upp senare
 
 - **Termodynamiskt ramverk för snurrande ”aktiva” partiklar ger effektiv

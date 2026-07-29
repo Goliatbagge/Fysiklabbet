@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-29 | `2026-07-29-neutronernas-spegelvarld` | Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår | Paul Scherrer Institute PSI (pressmeddelande) / Phys.org / Physical Review Letters (N. J. Ayres et al., 2026) |
 | 2026-07-28 | `2026-07-28-ljusets-envagsgata` | Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån | Cornell Chronicle (pressmeddelande) / Phys.org / Nature Materials (T. J. Ugras et al., 2026) |
 | 2026-07-27 | `2026-07-27-zink-70-magnetisk-gata` | Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden | Phys.org / SciTechDaily / Facility for Rare Isotope Beams, Michigan State University (pressrum) / Nature (E. K. Ronning et al., 2026) |
 | 2026-07-26 | `2026-07-26-altermagnetism` | Fysiker hedras för en tredje sorts magnetism — dold i över hundra år | Phys.org / Johannes Gutenberg-universitetet Mainz (pressmeddelande) / European Physical Society (officiellt tillkännagivande) / Physical Review X (L. Šmejkal, J. Sinova, T. Jungwirth, 2022) |
@@ -92,3 +93,12 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > situation. Själva forskningen (symmetriklassificeringen) är från 2022, men
 > nyhetshaken — 2026 års Europhysics-pris — offentliggjordes 2026-07-24, så
 > artikeln är tidsaktuell trots att grundforskningen är några år gammal.
+>
+> Not: den schemalagda körningen för 2026-07-29 kraschade med ett API-fel kl.
+> 09:12 innan artikeln hann skrivas. Kön (`ko.md`) var tom vid det tillfället,
+> så en helt fri research gjordes samma dag: PSI:s neutron/spegelvärld-nyhet
+> (28 juli 2026) valdes framför tre andra färska kandidater (Manchester —
+> laserinducerad metallfasomvandling; två kvantteknik-notiser om qubit-
+> avläsning respektive polaritonlaser) för att den var färskast, bäst källad
+> (eget institutionellt pressmeddelande + riktig pressbild av forskarna) och
+> gav bäst ämnesspridning mot senaste veckornas kärnfysik/kvantdator/astronomi.

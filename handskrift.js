@@ -30,6 +30,17 @@
  *
  *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela }
  *
+ * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
+ * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
+ * bräda/vägg/hage-linjer, skraffering — alltid i grafit. Alla
+ * ANTECKNINGAR som läggs ovanpå scenen i form av EN VEKTOR (kraftpilar,
+ * måttpilar/hävarmar — både pilskaft och pilspets) eller ETT TAL/VÄRDE
+ * (massor som "80 kg", mått som "l_B=2,0 m", "60−2x") ritas i STÄLLET
+ * med blåpennan (BLUE). Namnetiketter på objekt ("Mur") och rena
+ * hjälplinjer utan pilspets (streckade projektionslinjer) räknas inte
+ * som vektor/tal och förblir grafit. Syftet är att synligt skilja "given
+ * data/vektorer" från den ritade scenen.
+ *
  * Teckenuppsättningen är en egen enstreckad "handstil": varje tecken är
  * definierat som en lista pennstreck (punkter i en 100-enheters box,
  * baslinje y=100). Strecken ritas i naturlig skrivordning och får små
@@ -91,6 +102,14 @@
     'B': { w: 68, strokes: [[[32, 12], [28, 100]], [[32, 12], [56, 11], [65, 21], [63, 34], [52, 44], [30, 46]], [[30, 46], [58, 47], [68, 60], [67, 80], [54, 96], [28, 100]]] },
     'l': { w: 42, strokes: [[[30, 10], [29, 80], [33, 97], [41, 94]]] },
     'g': { w: 64, strokes: [[[58, 57], [45, 49], [31, 56], [26, 73], [31, 89], [46, 97], [58, 88]], [[60, 50], [62, 86], [60, 112], [50, 126], [36, 124], [30, 114]]] },
+    /* tillagda gemener (2026-07-29, för figur-etiketterna "basen"/"höjden") */
+    'e': { w: 58, strokes: [[[56, 58], [27, 60], [22, 74], [28, 90], [45, 97], [58, 89], [54, 80]]] },
+    's': { w: 54, strokes: [[[52, 58], [35, 50], [24, 57], [27, 67], [43, 72], [54, 81], [49, 92], [33, 98], [19, 89]]] },
+    'n': { w: 66, strokes: [[[24, 52], [25, 100]], [[25, 60], [36, 50], [48, 50], [58, 60], [59, 100]]] },
+    'h': { w: 68, strokes: [[[26, 10], [27, 100]], [[27, 62], [38, 50], [50, 50], [60, 60], [61, 100]]] },
+    'j': { w: 40, strokes: [[[30, 52], [29, 110], [24, 124], [14, 122]], [[29, 20], [30, 22]]] },
+    'o': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]]] },
+    'ö': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]], [[32, 28], [33, 30]], [[48, 28], [49, 30]]] },
     'k': { w: 60, strokes: [[[28, 10], [28, 100]], [[58, 48], [40, 70], [30, 74]], [[38, 66], [60, 100]]] },
     ',': { w: 30, strokes: [[[26, 90], [28, 98], [21, 112]]] },
     '?': { w: 68, strokes: [[[26, 30], [33, 14], [50, 10], [63, 17], [66, 31], [58, 45], [47, 53], [45, 64]], [[45, 86], [46, 88]]] },
@@ -364,9 +383,11 @@
    * vänster med EN HANDSKRIVEN UTRÄKNING bredvid varje rad (ingen
    * tankebubbla som hinner försvinna), koordinatsystemet UNDER tabellen.
    * Före varje insättning ringar blåpennan in radens x-värde i tabellen
-   * och x:et i sambandet ("nu sätter jag in detta här"). Steg: 1) samband,
-   * 2) tabellram, 3–9) en tabellrad per steg (ring + uträkning + y-värde),
-   * 10) koordinatsystem + skala, 11) punkter, 12) linjal + rät linje.
+   * och x:et i sambandet ("nu sätter jag in detta här"). Varje tanke-
+   * bubbla är ett EGET steg (visas ensam; tonar ut när nästa steg
+   * börjar). Steg: samband → bubbla → tabellram → en tabellrad per steg
+   * (ring + uträkning + y-värde) → bubbla → koordinatsystem + skala →
+   * bubbla → punkter → bubbla → linjal + rät linje.
    * cfg = { typ:'linjegraf', k, m, xs:[...] }                          */
   function layoutLinjegraf(cfg, F) {
     F = Math.min(F, 34);                     /* scenen kräver kompaktare skrift */
@@ -398,6 +419,14 @@
     }
     function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    /* tankebubbla som EGET steg: bubblan visas ensam och steget slutar;
+     * vid nästa steg tonar den ut medan skrivandet börjar */
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
 
     function bubble(x, y, w, lines, tail) {
       return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
@@ -429,9 +458,10 @@
     placeString((m >= 0 ? '+' : '-') + Math.abs(m), xx, 46, s * 0.9, F * 0.9, acts);
     stepEnd();
 
-    /* ---- steg 2: tabellram + rubriker ---- */
-    acts.push({ kind: 'show', obj: bIntro });
-    pause(700);
+    /* ---- steg 2: tankebubblan (eget steg) ---- */
+    tanke(bIntro);
+
+    /* ---- steg 3: tabellram + rubriker ---- */
     line([tx, ty], [tx + tw, ty]);                       /* tabellram */
     line([tx + tw, ty], [tx + tw, ty + th]);
     line([tx + tw, ty + th], [tx, ty + th]);
@@ -446,10 +476,9 @@
     var why = stringAdvance('y', s * 0.62, F * 0.62);
     placeString('x', tx + colW / 2 - whx / 2, ty + rowH - 10, s * 0.62, F * 0.62, acts);
     placeString('y', tx + colW + colW / 2 - why / 2, ty + rowH - 10, s * 0.62, F * 0.62, acts);
-    acts.push({ kind: 'hide', obj: bIntro });
     stepEnd();
 
-    /* ---- steg 3–9: EN tabellrad per steg ----
+    /* ---- steg 4–10: EN tabellrad per steg ----
      * x-värdet skrivs, blåpennan ringar in det och x:et i sambandet
      * ("detta sätts in här"), uträkningen antecknas till höger om raden
      * och först då skrivs y-värdet in i kolumnen. */
@@ -478,14 +507,11 @@
       stepEnd();
     });
 
-    /* ---- steg 10: koordinatsystem + skala ----
-     * Bubblan visas och göms INNAN axlarna ritas — nere vid koordinat-
-     * systemet finns ingen fri yta, och en bubbla får aldrig ligga
-     * framför det som skrivs. */
-    acts.push({ kind: 'show', obj: bScale });
-    pause(1300);
-    acts.push({ kind: 'hide', obj: bScale });
-    pause(200);
+    /* ---- steg 11: skal-bubblan (eget steg) — den tonar ut när
+     * axlarna börjar ritas, så den hinner aldrig ligga i vägen ---- */
+    tanke(bScale);
+
+    /* ---- steg 12: koordinatsystem + skala ---- */
     var xa0 = ox + (xmin - 0.6) * u, xa1 = ox + (xmax + 0.8) * u;
     var ya0 = oy - (ymax + 0.8) * u, ya1 = oy - (ymin - 0.6) * u;
     line([xa0, oy], [xa1, oy]);                          /* x-axel + pil */
@@ -540,9 +566,9 @@
     }
     var scaleX = tickVals(xmin, xmax), scaleY = tickVals(ymin, ymax);
     var prevGuide = null;
+    tanke(bPoint);                      /* punkt-bubblan är ett eget steg */
     xs.forEach(function (x, i) {
       var rcy = ty + rowH * (i + 1) + rowH / 2;
-      if (i === 0) { acts.push({ kind: 'show', obj: bPoint }); pause(750); }
       /* ringa in raden med blåpennan */
       var ring = { kind: 'stroke', pts: ringPts(tx + tw / 2, rcy, tw / 2 + 8, 14.5),
                    color: BLUE };
@@ -570,16 +596,14 @@
       /* prick på punkten — liten tät spiral som fyller igen */
       acts.push({ kind: 'stroke', pts: dotPts(px, py) });
       acts.push({ kind: 'fade', ref: ring });
-      if (i === 0) acts.push({ kind: 'hide', obj: bPoint });
       pause(200);
     });
     pause(400);
     if (prevGuide) acts.push({ kind: 'hide', obj: prevGuide });
     stepEnd();
 
-    /* ---- steg 12: linjal + rät linje ---- */
-    acts.push({ kind: 'show', obj: bLinjal });
-    pause(750);
+    /* ---- linjal-bubblan (eget steg), sedan linjal + rät linje ---- */
+    tanke(bLinjal);
     var ex0 = xmin - 0.2, ex1 = xmax + 0.2;
     var lp1 = [ox + ex0 * u, oy - (k * ex0 + m) * u];
     var lp2 = [ox + ex1 * u, oy - (k * ex1 + m) * u];
@@ -592,7 +616,6 @@
     acts.push({ kind: 'stroke', pts: [lp1, lp2] });      /* exakt rak — mot linjalen */
     pause(350);
     acts.push({ kind: 'hide', obj: ruler });
-    acts.push({ kind: 'hide', obj: bLinjal });
     pause(400);
     acts.push({ kind: 'lineEnd' });
     pause(200);
@@ -605,7 +628,7 @@
    * måttpilar) ritas först, sedan a) areafunktion och b) derivering,
    * nollställe, insättning, andraderivata och svar. VARJE skriven rad är
    * ett eget klicksteg (ett "skipklick" ska aldrig hoppa över mer än den
-   * rad man är på); bara figuren ritas som ett sammanhållet steg. */
+   * rad man är på), och varje tankebubbla är också ett EGET steg. */
   function layoutHage(cfg, F) {
     F = Math.min(F, 32);
     var s = F / 100;
@@ -620,6 +643,14 @@
       return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
     }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    /* tankebubbla som EGET steg: bubblan visas ensam och steget slutar;
+     * vid nästa steg tonar den ut medan skrivandet börjar */
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
     function underline(xEnd, y) {
       pause(220);
       acts.push({ kind: 'stroke',
@@ -627,15 +658,15 @@
     }
     /* pilspets som följer bågens SLUTRIKTNING: benen läggs symmetriskt
      * kring tangenten vid spetsen, så spetsen pekar dit bågen pekar */
-    function arrowHead(tipX, tipY, fromX, fromY, len) {
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
       var dx = tipX - fromX, dy = tipY - fromY;
       var L = Math.hypot(dx, dy) || 1;
       dx /= L; dy /= L;
       var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
       line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
-           [tipX, tipY]);
+           [tipX, tipY], color);
       line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
-           [tipX, tipY]);
+           [tipX, tipY], color);
     }
 
     /* ---- steg 1: figuren ---- */
@@ -653,8 +684,7 @@
       [['x', 1], [' + ', 0], ['x', 1], [' + (60 − 2', 0], ['x', 1], [') = 60 meter.']]
     ], [hx + hw + 10, hy + hh - 20]);
 
-    acts.push({ kind: 'show', obj: b1 });
-    pause(700);
+    tanke(b1);
     line([fx, fy], [fx + murW, fy]);                       /* muren */
     line([fx, fy + murH], [fx + murW, fy + murH]);
     line([fx, fy], [fx, fy + murH]);
@@ -671,64 +701,82 @@
     line([hx, hy], [hx, hy + hh]);                         /* hagen: tre sidor */
     line([hx, hy + hh], [hx + hw, hy + hh]);
     line([hx + hw, hy + hh], [hx + hw, hy]);
-    acts.push({ kind: 'hide', obj: b1 });
-    pause(250);
-    acts.push({ kind: 'show', obj: b2 });
-    pause(700);
+    stepEnd();
+    tanke(b2);
+    /* måttpilar + mått ÄR vektorer/tal (se REGEL i filhuvudet) → blått */
     var lx = hx - 16, rx = hx + hw + 16, by = hy + hh + 18;
-    line([lx, hy + 8], [lx, hy + hh - 8]);                 /* måttpil vänster */
-    line([lx - 4, hy + 15], [lx, hy + 7]);
-    line([lx + 4, hy + 15], [lx, hy + 7]);
-    line([lx - 4, hy + hh - 15], [lx, hy + hh - 7]);
-    line([lx + 4, hy + hh - 15], [lx, hy + hh - 7]);
-    placeGlyph('x', lx - 26, hy + hh / 2 + 6, s * 0.6, acts);
-    line([rx, hy + 8], [rx, hy + hh - 8]);                 /* måttpil höger */
-    line([rx - 4, hy + 15], [rx, hy + 7]);
-    line([rx + 4, hy + 15], [rx, hy + 7]);
-    line([rx - 4, hy + hh - 15], [rx, hy + hh - 7]);
-    line([rx + 4, hy + hh - 15], [rx, hy + hh - 7]);
-    placeGlyph('x', rx + 8, hy + hh / 2 + 6, s * 0.6, acts);
-    line([hx + 8, by], [hx + hw - 8, by]);                 /* måttpil botten */
-    line([hx + 15, by - 4], [hx + 7, by]);
-    line([hx + 15, by + 4], [hx + 7, by]);
-    line([hx + hw - 15, by - 4], [hx + hw - 7, by]);
-    line([hx + hw - 15, by + 4], [hx + hw - 7, by]);
+    line([lx, hy + 8], [lx, hy + hh - 8], BLUE);           /* måttpil vänster */
+    line([lx - 4, hy + 15], [lx, hy + 7], BLUE);
+    line([lx + 4, hy + 15], [lx, hy + 7], BLUE);
+    line([lx - 4, hy + hh - 15], [lx, hy + hh - 7], BLUE);
+    line([lx + 4, hy + hh - 15], [lx, hy + hh - 7], BLUE);
+    placeGlyph('x', lx - 26, hy + hh / 2 + 6, s * 0.6, acts, BLUE);
+    line([rx, hy + 8], [rx, hy + hh - 8], BLUE);           /* måttpil höger */
+    line([rx - 4, hy + 15], [rx, hy + 7], BLUE);
+    line([rx + 4, hy + 15], [rx, hy + 7], BLUE);
+    line([rx - 4, hy + hh - 15], [rx, hy + hh - 7], BLUE);
+    line([rx + 4, hy + hh - 15], [rx, hy + hh - 7], BLUE);
+    placeGlyph('x', rx + 8, hy + hh / 2 + 6, s * 0.6, acts, BLUE);
+    line([hx + 8, by], [hx + hw - 8, by], BLUE);           /* måttpil botten */
+    line([hx + 15, by - 4], [hx + 7, by], BLUE);
+    line([hx + 15, by + 4], [hx + 7, by], BLUE);
+    line([hx + hw - 15, by - 4], [hx + hw - 7, by], BLUE);
+    line([hx + hw - 15, by + 4], [hx + hw - 7, by], BLUE);
     var wBot = stringAdvance('60−2x', s * 0.6, F * 0.6);
-    placeString('60−2x', hx + hw / 2 - wBot / 2, by + 24, s * 0.6, F * 0.6, acts);
+    placeString('60−2x', hx + hw / 2 - wBot / 2, by + 24, s * 0.6, F * 0.6, acts, BLUE);
     /* enheten uppe till höger i figuren */
     var wEnh = stringAdvance('(m)', s * 0.55, F * 0.55);
-    placeString('(m)', fx + murW - wEnh + 8, fy - 8, s * 0.55, F * 0.55, acts);
-    acts.push({ kind: 'hide', obj: b2 });
+    placeString('(m)', fx + murW - wEnh + 8, fy - 8, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
-    /* ---- steg 2: a) areafunktionen skrivs upp ---- */
+    /* ---- steg 2: a) areafunktionen skrivs upp ----
+     * Pedagogiska krullklamrar i blått: "basen" över (60-2x), "höjden"
+     * över x, ritade ovanför uttrycket. De fejdas ut som grupp när nästa
+     * steg börjar (se braceGroup + fade-eventen precis före tanke(b3b)). */
     var y = by + 96;
     var adv = 1.7 * F;
     var b3 = bubble(120, y + 22, 226, [
       [['Rektangelns area:']],
       [['basen · höjden']]
     ], [250, y - 8]);
-    acts.push({ kind: 'show', obj: b3 });
-    pause(700);
+    tanke(b3);
+    function brace(x0, x1, label) {
+      var pad = 4, yTop = y - 0.60 * F, h = 0.30 * F;
+      var st = { kind: 'stroke', pts: bracePts(x0 - pad, x1 + pad, yTop, h),
+                 color: BLUE };
+      acts.push(st);
+      pause(110);
+      var group = [st], before = acts.length;
+      var lw = stringAdvance(label, s * 0.5, F * 0.5);
+      placeString(label, (x0 + x1) / 2 - lw / 2, yTop - h * 1.18 - 10,
+                  s * 0.5, F * 0.5, acts, BLUE);
+      for (var i = before; i < acts.length; i++) {
+        if (acts[i].kind === 'stroke') group.push(acts[i]);
+      }
+      pause(150);
+      return group;
+    }
     var xx = placeString('a) A(x)=(', padL, y, s, F, acts);
     var s60 = xx; xx = placeString('60', xx, y, s, F, acts);
     var c60 = (s60 + xx) / 2;
     xx = placeString('-', xx, y, s, F, acts);
     var s2x = xx; xx = placeString('2x', xx, y, s, F, acts);
     var c2x = (s2x + xx) / 2;
+    var pEnd = xx;                        /* slutet av "60-2x"-uttrycket */
     xx = placeString(')·', xx, y, s, F, acts);
     var sxm = xx; xx = placeString('x', xx, y, s, F, acts);
     var cxm = (sxm + xx) / 2;
-    acts.push({ kind: 'hide', obj: b3 });
+    var xEnd = xx;                        /* slutet av höjdfaktorn "x" */
+    var braceGroup = brace(s60, pEnd, 'basen').concat(brace(sxm, xEnd, 'höjden'));
     stepEnd();
 
     /* ---- steg 3: distributiva bågpilar + utvecklingen ---- */
     var b3b = bubble(120, y + adv + 22, 252, [
-      [['Distributiva lagen: ', 0], ['x', 1], ['-et', 0]],
+      [['Distributiva lagen: ', 0], ['x', 1], [':et', 0]],
       [['multipliceras med båda termerna!']]
     ], [300, y + adv - 8]);
-    acts.push({ kind: 'show', obj: b3b });
-    pause(650);
+    braceGroup.forEach(function (st) { acts.push({ kind: 'fade', ref: st }); });
+    tanke(b3b);
     /* bågpil x → 60, sedan termen 60x; bågpil x → 2x, sedan −2x² */
     var yArc = y - 0.98 * F;
     var m1x = (cxm + c60) / 2, m1y = yArc - 30;
@@ -745,7 +793,6 @@
     arrowHead(c2x + 5, yArc - 3, m2x, m2y, 11);
     pause(300);
     placeString('-2x^2', xx, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b3b });
     stepEnd();
 
     /* ---- steg 4: svaret på a) ---- */
@@ -760,10 +807,8 @@
       [['Största arean? Derivera']],
       [['och sätt ', 0], ["A'", 1], ['(', 0], ['x', 1], [') = 0!']]
     ], [250, y - 8]);
-    acts.push({ kind: 'show', obj: b4 });
-    pause(700);
+    tanke(b4);
     placeString("b) A'(x)=60-4x", padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b4 });
     stepEnd();
     y += adv;
     placeString('60-4x=0', padL, y, s, F, acts);
@@ -775,14 +820,12 @@
       [['Vågskålsmetoden: addera 4', 0], ['x', 1], [',']],
       [['dela sedan båda leden med 4.']]
     ], [260, y - 8]);
-    acts.push({ kind: 'show', obj: b4b });
-    pause(700);
+    tanke(b4b);
     xx = placeString('60-4x', padL, y, s, F, acts);
     xx = placeString('+4x', xx, y, s, F, acts, BLUE);
     xx = placeString('=', xx, y, s, F, acts);
     xx = placeString('0', xx, y, s, F, acts);
     placeString('+4x', xx, y, s, F, acts, BLUE);
-    acts.push({ kind: 'hide', obj: b4b });
     stepEnd();
     y += adv;
     placeString('60=4x', padL, y, s, F, acts);
@@ -818,10 +861,8 @@
       [['Hur stor är arean då?']],
       [['In med ', 0], ['x', 1], [' = 15 i ', 0], ['A', 1], ['(', 0], ['x', 1], [')!']]
     ], [280, y - 8]);
-    acts.push({ kind: 'show', obj: b5 });
-    pause(700);
+    tanke(b5);
     placeString('A(15)=60·15-2·15^2', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b5 });
     stepEnd();
     y += adv;
     placeString('=900-450=450', padL, y, s, F, acts);
@@ -833,10 +874,8 @@
       [['Max eller min? Kolla tecknet på']],
       [['andraderivatan: negativt = max!']]
     ], [270, y - 8]);
-    acts.push({ kind: 'show', obj: b6 });
-    pause(700);
+    tanke(b6);
     placeString("A''(x)=−4<0⇒max", padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b6 });
     stepEnd();
     y += adv;
     xe = placeString('Svar: 450 m^2', padL, y, s, F, acts);
@@ -852,7 +891,8 @@
    * man VET (bräda, vridningspunkt med prick, streckgubbar — man behöver
    * inte vara konstnär!), rita sedan TILLÄGG i figuren (tyngdkrafterna
    * som skalenliga pilar, hävarmarnas måttlinjer) och räkna till sist
-   * rad för rad. Varje rad/figurtillägg är ett eget klicksteg. */
+   * rad för rad. Varje rad/figurtillägg är ett eget klicksteg, och
+   * varje tankebubbla är också ett EGET steg. */
   function layoutGunga(cfg, F) {
     F = Math.min(F, 32);
     var s = F / 100;
@@ -878,20 +918,28 @@
       return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
     }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    /* tankebubbla som EGET steg: bubblan visas ensam och steget slutar;
+     * vid nästa steg tonar den ut medan skrivandet börjar */
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
     function underline(xEnd, y) {
       pause(220);
       acts.push({ kind: 'stroke',
         pts: humanize([[padL - 2, y + 0.30 * F], [xEnd - 0.10 * F, y + 0.30 * F]]) });
     }
-    function arrowHead(tipX, tipY, fromX, fromY, len) {
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
       var dx = tipX - fromX, dy = tipY - fromY;
       var L = Math.hypot(dx, dy) || 1;
       dx /= L; dy /= L;
       var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
       line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
-           [tipX, tipY]);
+           [tipX, tipY], color);
       line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
-           [tipX, tipY]);
+           [tipX, tipY], color);
     }
     /* handritad cirkel (streckgubbe-huvud) */
     function circle(cx, cy, r) {
@@ -930,8 +978,7 @@
       [['streckgubbar duger gott!']],
       [['Pricken är vridningspunkten.']]
     ], [250, 130]);
-    acts.push({ kind: 'show', obj: b1 });
-    pause(700);
+    tanke(b1);
     line([plankL, plankY], [plankR, plankY]);            /* brädan */
     line([plankL, plankB], [plankR, plankB]);
     line([plankL, plankY], [plankL, plankB]);
@@ -949,7 +996,7 @@
     line([papX, 147], [papX + 18, 147]);                 /* lår */
     line([papX + 18, 147], [papX + 19, 168]);            /* underben */
     var w80 = stringAdvance('80 kg', s * 0.55, F * 0.55);
-    placeString('80 kg', papX - w80 / 2, 74, s * 0.55, F * 0.55, acts);
+    placeString('80 kg', papX - w80 / 2, 74, s * 0.55, F * 0.55, acts, BLUE);
     pause(150);
     /* barnet (mindre streckgubbe, höger, vänd åt vänster) */
     circle(barnX, 109, 10);
@@ -958,8 +1005,7 @@
     line([barnX, 147], [barnX - 14, 147]);
     line([barnX - 14, 147], [barnX - 15, 163]);
     var w30 = stringAdvance('30 kg', s * 0.55, F * 0.55);
-    placeString('30 kg', barnX - w30 / 2, 90, s * 0.55, F * 0.55, acts);
-    acts.push({ kind: 'hide', obj: b1 });
+    placeString('30 kg', barnX - w30 / 2, 90, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
     /* ---- steg 2: tillägg — tyngdkrafterna som skalenliga pilar ---- */
@@ -969,19 +1015,20 @@
       [['brädan åt varsitt håll. Pappa är']],
       [['tyngre — hans pil ritas längre!']]
     ], [180, 195]);
-    acts.push({ kind: 'show', obj: b2 });
-    pause(700);
-    /* pil ∝ massa: 1 px per kg — pappas pil ritas från tyngdpunkten */
+    tanke(b2);
+    /* pil ∝ massa: 1 px per kg — pappas pil ritas från tyngdpunkten.
+     * Kraftvektorn (skaft + spets) och dess etikett är en vektor/tal-
+     * annotering (se REGEL i filhuvudet) → blått; tyngdpunktspricken
+     * förblir grafit (del av grundscenen). */
     acts.push({ kind: 'stroke', pts: dotPts(papX, 148) });
-    line([papX, 148], [papX, 228 - 10]);
-    arrowHead(papX, 228, papX, 148, 11);
-    placeString('F_P', papX + 12, 240, s * 0.62, F * 0.62, acts);
+    line([papX, 148], [papX, 228 - 10], BLUE);
+    arrowHead(papX, 228, papX, 148, 11, BLUE);
+    placeString('F_P', papX + 12, 240, s * 0.62, F * 0.62, acts, BLUE);
     pause(200);
     acts.push({ kind: 'stroke', pts: dotPts(barnX, 148) });
-    line([barnX, 148], [barnX, 178 - 9]);
-    arrowHead(barnX, 178, barnX, 148, 10);
-    placeString('F_B', barnX + 10, 190, s * 0.62, F * 0.62, acts);
-    acts.push({ kind: 'hide', obj: b2 });
+    line([barnX, 148], [barnX, 178 - 9], BLUE);
+    arrowHead(barnX, 178, barnX, 148, 10, BLUE);
+    placeString('F_B', barnX + 10, 190, s * 0.62, F * 0.62, acts, BLUE);
     stepEnd();
 
     /* ---- steg 3: tillägg — hävarmarna som måttlinjer ---- */
@@ -990,24 +1037,23 @@
       [['vridningspunkten till kraftens']],
       [['riktningslinje.']]
     ], [260, 250]);
-    acts.push({ kind: 'show', obj: b3 });
-    pause(700);
-    dash([pivX, plankB + 46], [pivX, dimY]);             /* projektionslinjer */
+    tanke(b3);
+    dash([pivX, plankB + 46], [pivX, dimY]);             /* projektionslinjer (grafit) */
     dash([papX, 232], [papX, dimY]);
     dash([barnX, 182], [barnX, dimY]);
     pause(150);
-    line([papX + 10, dimY], [pivX - 12, dimY]);          /* måttlinje vänster */
-    arrowHead(papX, dimY, papX + 16, dimY, 9);
-    arrowHead(pivX - 4, dimY, pivX - 20, dimY, 9);
+    /* måttpilar + hävarmsvärden ÄR vektorer/tal (se REGEL) → blått */
+    line([papX + 10, dimY], [pivX - 12, dimY], BLUE);    /* måttlinje vänster */
+    arrowHead(papX, dimY, papX + 16, dimY, 9, BLUE);
+    arrowHead(pivX - 4, dimY, pivX - 20, dimY, 9, BLUE);
     var wLp = stringAdvance('l_P=?', s * 0.62, F * 0.62);
-    placeString('l_P=?', (papX + pivX) / 2 - 9 - wLp / 2, 282, s * 0.62, F * 0.62, acts);
+    placeString('l_P=?', (papX + pivX) / 2 - 9 - wLp / 2, 282, s * 0.62, F * 0.62, acts, BLUE);
     pause(150);
-    line([pivX + 12, dimY], [barnX - 10, dimY]);         /* måttlinje höger */
-    arrowHead(pivX + 4, dimY, pivX + 20, dimY, 9);
-    arrowHead(barnX, dimY, barnX - 16, dimY, 9);
+    line([pivX + 12, dimY], [barnX - 10, dimY], BLUE);   /* måttlinje höger */
+    arrowHead(pivX + 4, dimY, pivX + 20, dimY, 9, BLUE);
+    arrowHead(barnX, dimY, barnX - 16, dimY, 9, BLUE);
     var wLb = stringAdvance('l_B=2,0 m', s * 0.62, F * 0.62);
-    placeString('l_B=2,0 m', (pivX + barnX) / 2 + 9 - wLb / 2, 282, s * 0.62, F * 0.62, acts);
-    acts.push({ kind: 'hide', obj: b3 });
+    placeString('l_B=2,0 m', (pivX + barnX) / 2 + 9 - wLb / 2, 282, s * 0.62, F * 0.62, acts, BLUE);
     stepEnd();
 
     /* ---- beräkningen, rad för rad ---- */
@@ -1019,10 +1065,8 @@
       [['Momentjämvikt: momentet moturs']],
       [['är lika stort som momentet medurs.']]
     ], [160, y - 6]);
-    acts.push({ kind: 'show', obj: b4 });
-    pause(700);
+    tanke(b4);
     placeString('M_1=M_2', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b4 });
     stepEnd();
 
     y += adv;
@@ -1031,10 +1075,8 @@
        ['l', 1], [' —', 0]],
       [['kraften gånger hävarmen.']]
     ], [200, y - 6]);
-    acts.push({ kind: 'show', obj: b5 });
-    pause(700);
+    tanke(b5);
     placeString('F_P·l_P=F_B·l_B', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b5 });
     stepEnd();
 
     y += adv;
@@ -1043,10 +1085,8 @@
        ['g', 1], [' —', 0]],
       [['jag byter ut båda krafterna.']]
     ], [220, y - 6]);
-    acts.push({ kind: 'show', obj: b6 });
-    pause(700);
+    tanke(b6);
     placeString('m_P·g·l_P=m_B·g·l_B', padL, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b6 });
     stepEnd();
 
     y += adv + 0.55 * F;
@@ -1054,12 +1094,10 @@
       [['g', 1], [' finns i båda leden —', 0]],
       [['jag delar båda leden med ', 0], ['g', 1], ['!', 0]]
     ], [230, y + 20]);
-    acts.push({ kind: 'show', obj: b7 });
-    pause(700);
+    tanke(b7);
     var xx = fracH('m_P·g·l_P', 'g', padL, y, BLUE);
     xx = placeString('=', xx, y, s, F, acts);
     fracH('m_B·g·l_B', 'g', xx, y, BLUE);
-    acts.push({ kind: 'hide', obj: b7 });
     stepEnd();
 
     y += adv + 0.65 * F;
@@ -1071,11 +1109,9 @@
       [['Dela med pappans massa så att']],
       [['hävarmen blir ensam kvar.']]
     ], [220, y + 20]);
-    acts.push({ kind: 'show', obj: b8 });
-    pause(700);
+    tanke(b8);
     xx = placeString('l_P=', padL, y, s, F, acts);
     fracH('m_B·l_B', 'm_P', xx, y);
-    acts.push({ kind: 'hide', obj: b8 });
     stepEnd();
 
     y += adv + 1.2 * F;
@@ -1083,14 +1119,12 @@
       [['In med värdena: 30 kg och 2,0 m']],
       [['för barnet, 80 kg för pappa.']]
     ], [240, y + 20]);
-    acts.push({ kind: 'show', obj: b9 });
-    pause(700);
+    tanke(b9);
     xx = placeString('l_P=', padL, y, s, F, acts);
     xx = fracH('30·2,0', '80', xx, y);
     xx = placeString('=', xx, y, s, F, acts);
     xx = fracH('60', '80', xx, y);
     placeString('=0,75 m', xx, y, s, F, acts);
-    acts.push({ kind: 'hide', obj: b9 });
     stepEnd();
 
     y += adv + 0.65 * F;
@@ -1098,11 +1132,9 @@
       [['Pappa ska sitta närmare än barnet —']],
       [['rimligt, han är ju tyngre!']]
     ], [200, y - 6]);
-    acts.push({ kind: 'show', obj: b10 });
-    pause(700);
+    tanke(b10);
     var xe = placeString('Svar: l_P=0,75 m', padL, y, s, F, acts);
     underline(xe, y);
-    acts.push({ kind: 'hide', obj: b10 });
     stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -1128,6 +1160,29 @@
                 cy + Math.sin(a) * (ry + rnd(-1.5, 1.5))]);
     }
     return pts;
+  }
+
+  /* handritad "krullklammer" (överklammer): två pucklar med en spets i
+   * mitten, som en vanlig klammer { roterad 90° och lagd ovanpå ett
+   * uttryck. x0/x1 = klammerns fötter (på tecknens breddgräns), yTop =
+   * fotnivå (strax ovanför tecknen), h = hur högt pucklarna/spetsen
+   * reser sig ovanför yTop. Används för pedagogiska bas/höjd-etiketter. */
+  function bracePts(x0, x1, yTop, h) {
+    var w = x1 - x0, xm = (x0 + x1) / 2;
+    var raw = [
+      [x0, yTop],
+      [x0 + w * 0.08, yTop - h * 0.65],
+      [xm - w * 0.16, yTop - h * 0.92],
+      [xm - w * 0.045, yTop - h * 0.7],
+      [xm, yTop - h * 1.18],
+      [xm + w * 0.045, yTop - h * 0.7],
+      [xm + w * 0.16, yTop - h * 0.92],
+      [x1 - w * 0.08, yTop - h * 0.65],
+      [x1, yTop]
+    ];
+    return raw.map(function (p) {
+      return [p[0] + rnd(-0.8, 0.8), p[1] + rnd(-0.8, 0.8)];
+    });
   }
 
   /* ---------------- handen med pennan ----------------
@@ -1473,18 +1528,21 @@
     var boundaries = [];   /* tider där stegvis uppspelning pausar */
     var t = 350;
     var pen = null;
+    var drew = false;   /* skrevs något sedan förra steggränsen? */
 
     L.acts.forEach(function (a) {
       if (a.kind === 'lineEnd') {
         /* handen dras bort åt höger vid steggränsen så att den inte
-         * skymmer det nyskrivna medan man läser */
-        if (pen) {
+         * skymmer det nyskrivna medan man läser — men bara om något
+         * faktiskt skrevs (rena tankebubbel-steg lämnar handen i vila) */
+        if (pen && drew) {
           var rest = [W + 40, Math.min(pen[1] + 60, H - 20)];
           events.push({ type: 'move', t0: t, t1: t + 550, from: pen, to: rest });
           t += 550;
           pen = rest;
         }
         boundaries.push(t);
+        drew = false;
         return;
       }
       if (a.kind === 'show') { a.obj.wins.push([t, Infinity]); return; }
@@ -1523,6 +1581,7 @@
       events.push({ type: 'draw', t0: t, t1: t + dur, a: a });
       t += dur;
       pen = end;
+      drew = true;
     });
     /* handen glider av papperet när allt är klart */
     var exitTo = [W + 60, L.lastBase + 2 * F];
@@ -1547,6 +1606,7 @@
 
     /* ---------------- uppspelning ---------------- */
     var tNow = 0, playing = false, rafId = null, lastTs = null;
+    var boost = 1;   /* > 1 = snabbspolning av resten av steget (klick) */
 
     function penPosAt(time) {
       var pos = startPos, lift = 0;
@@ -1650,9 +1710,11 @@
 
     function frame(ts) {
       if (!playing) return;
-      if (lastTs != null) tNow += (ts - lastTs) * speed;
+      if (lastTs != null) tNow += (ts - lastTs) * speed * boost;
       lastTs = ts;
-      if (tNow >= target) { tNow = target; render(tNow); followPen(false); stop(); return; }
+      if (tNow >= target) {
+        tNow = target; render(tNow); followPen(boost > 1); stop(); return;
+      }
       render(tNow);
       followPen(false);
       rafId = requestAnimationFrame(frame);
@@ -1661,13 +1723,14 @@
     function play() {
       if (playing || tNow >= TOTAL) return;   /* klar lösning står kvar —
                                                  omstart bara via "Börja om" */
+      boost = 1;
       target = nextTarget();
       playing = true; lastTs = null;
       rafId = requestAnimationFrame(frame);
       updateBtns();
     }
     function stop() {
-      playing = false; lastTs = null;
+      playing = false; lastTs = null; boost = 1;
       if (rafId) cancelAnimationFrame(rafId);
       updateBtns();
     }
@@ -1749,17 +1812,11 @@
     }
 
     /* klick var som helst på papperet: nästa steg — eller, om ett steg
-     * håller på att skrivas, hoppa direkt till slutet av det steget
-     * (så att man kan "speeda på" långa animeringar) */
+     * håller på att skrivas, SNABBSPOLA resten av steget (animeras
+     * ultrasnabbt i stället för att hoppa dit på 0 sekunder) */
     paperDiv.addEventListener('click', function () {
-      if (playing) {
-        tNow = target;
-        render(tNow);
-        followPen(true);
-        stop();
-      } else {
-        play();
-      }
+      if (playing) boost = 14;
+      else play();
     });
 
     /* ---------------- helskärm (presentation för klass) ----------------

@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-30 | `2026-07-30-hattformens-kirala-ljus` | Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva | Institute of Industrial Science, The University of Tokyo (pressmeddelande) / Phys.org / EurekAlert! / Nature Communications (Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, 2026) |
 | 2026-07-29 | `2026-07-29-neutronernas-spegelvarld` | Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår | Paul Scherrer Institute PSI (pressmeddelande) / Phys.org / Physical Review Letters (N. J. Ayres et al., 2026) |
 | 2026-07-28 | `2026-07-28-ljusets-envagsgata` | Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån | Cornell Chronicle (pressmeddelande) / Phys.org / Nature Materials (T. J. Ugras et al., 2026) |
 | 2026-07-27 | `2026-07-27-zink-70-magnetisk-gata` | Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden | Phys.org / SciTechDaily / Facility for Rare Isotope Beams, Michigan State University (pressrum) / Nature (E. K. Ronning et al., 2026) |
@@ -102,3 +103,21 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > avläsning respektive polaritonlaser) för att den var färskast, bäst källad
 > (eget institutionellt pressmeddelande + riktig pressbild av forskarna) och
 > gav bäst ämnesspridning mot senaste veckornas kärnfysik/kvantdator/astronomi.
+>
+> Not: den schemalagda körningen för 2026-07-30 kraschade också innan artikeln
+> hann skrivas; huvudsessionen gjorde om hela research/skriv/publicera-flödet
+> senare samma dag. Kön var tom. Valet föll på University of Tokyos upptäckt
+> (Moritake/Notomi) att den berömda aperiodiska ”hatt”-formen (som löste
+> matematikens Einstein-problem 2023) ger kirala diffraktionsmönster i
+> laserljus — pressmeddelandet var daterat exakt samma dag (2026-07-30),
+> gav en genuint ny optik/vågfysik-vinkel (ingen av de senaste veckornas
+> artiklar handlade om diffraktion/kiral optik via geometri) och kom med en
+> utmärkt, ren pressbild som visar både kakelmönstret och det verkliga
+> pinwheel-diffraktionsmönstret sida vid sida. Andra kandidater som
+> övervägdes men valdes bort: strain-inducerad kiralitet i kristaller
+> (Max Planck/Cavalleri, Nature, "piezochiral" — mer kondenserad materiens
+> fysik, svårare att konkretisera), en första 3D-temperaturkarta över det
+> lokala interstellära mediet (Technion, ännu bara arXiv-preprint, inte
+> peer review-granskad), samt två kvantdator-notiser (2D-kvantminne på
+> enelektronnivå; superledande qubitars utveckling) som fick stå tillbaka
+> för ämnesspridning. Se `ko.md` för fullständig lista med källor.

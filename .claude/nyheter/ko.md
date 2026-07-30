@@ -14,6 +14,67 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-30) — kan tas upp senare
+
+- **Valdes i dag: University of Tokyo (Yuto Moritake, Masaya Notomi m.fl.)
+  visar att den berömda aperiodiska ”hatt”-formen (löste matematikens
+  Einstein-problem 2023) ger kirala diffraktionsmönster i laserljus** —
+  nanostora mönster av hattformen etsades i kiselnitridfilm med
+  elektronstrålelitografi; laserljus genom strukturen gav virvlande
+  ”pinwheel”-diffraktionsmönster som är kirala (saknar spegelsymmetri) och
+  polarisationsberoende, ett beteende som saknas i vanliga kvasikristaller.
+  Publicerad i <em>Nature Communications</em> 17, 6085 (2026), DOI
+  10.1038/s41467-026-75023-7. Pressmeddelande daterat exakt 2026-07-30
+  (Institute of Industrial Science, Tokyos universitet), korsläst mot
+  Phys.org och EurekAlert!. Stark optik/vågvinkel (diffraktion, kiralitet,
+  polarisation) som inte upprepar senaste veckornas ämnen, mycket bra
+  pressbild (kakelmönster + verkligt diffraktionsmönster sida vid sida,
+  ingen vattenstämpel). Se publicerat.md för full källista och avvägning
+  mot andra kandidater. (tillagd 2026-07-30)
+- **Strain kan vrida icke-kirala kristaller kiralt, åt valfritt håll** —
+  Andrea Cavalleri, Zhiyang Zeng, Michael Först (Max Planck-institutet för
+  struktur och dynamik hos materia, Hamburg) och Paolo Radaelli (Oxford)
+  har visat att mekanisk töjning reversibelt kan inducera kiralitet
+  (”piezokiralitet”) i kristaller som normalt inte är kirala — riktningen på
+  töjningen avgör händigheten. Öppen databas: piezochiral.org. Publicerad i
+  <em>Nature</em> 2026-07-29, DOI 10.1038/s41586-026-10845-5. Intressant
+  ellära/materialfysik-vinkel (kristallstruktur, symmetribrytning) men mer
+  kondenserad materiens fysik och svårare att konkretisera för
+  gymnasienivå än hattforms-nyheten; bra reserv. Källa: phys.org (sök
+  ”strain chiral crystals left demand 2026”). (tillagd 2026-07-30)
+- **Första 3D-temperaturkartan över det lokala interstellära mediet** —
+  Jonathan Shelest (Technion) har med ett nytt verktyg (𝒫3D, som kombinerar
+  3D-dammkartläggning, UV-stjärnljus och termisk modellering) kartlagt
+  gasens temperaturtillstånd i en ~3&nbsp;260 ljusår stor sfär runt solen och
+  visar att ~41&nbsp;% av gasen nära galaxplanet är i ett instabilt tillstånd
+  som växlar mellan varmt och kallt på 3–6 miljoner år — utmanar den
+  klassiska tvåfasmodellen. Bra termodynamik/astronomi-vinkel men bygger
+  ännu bara på en arXiv-preprint (inte peer review-granskad), DOI
+  10.48550/arxiv.2607.15352. Källa:
+  https://phys.org/news/2026-07-3d-reveals-hidden-thermal-nearby.html
+  (tillagd 2026-07-30)
+- **2D-kvantminne når enelektronsgränsen för informationslagring** samt
+  **Superledande qubitars utveckling mot praktisk användning** — två
+  kvantdator-/kvantteknik-notiser (phys.org, ~14 respektive ~5 h gamla vid
+  sökningen). Vi har kört mycket kvantdator-/kvantteknikrelaterat senaste
+  veckorna — spara till ämnet känns fräscht igen. Källor:
+  https://phys.org/news/2026-07-2d-quantum-memory-device-electron.html ,
+  https://phys.org/news/2026-07-quantum-palm-evolution-superconducting-qubits.html
+  (tillagd 2026-07-30)
+- **Fotonisk plattform för icke-abelska gaugefält på labbordet** — teoretiskt
+  tung fotonik/fältteori-nyhet (phys.org), svår att konkretisera för
+  gymnasienivå utan mycket förarbete. Källa:
+  https://phys.org/news/2026-07-complex-field-physics-tabletop-photonic.html
+  (tillagd 2026-07-30)
+- **Astronomer protesterar mot godkänt tillstånd för en ”rymdspegel”**
+  (uppföljning av redan sparat uppslag från 2026-07-22, se nedan) samt
+  **privata investeringar i fusionsbolag ökar med 4,5 miljarder dollar** —
+  två policy-/finansieringsnyheter från Physics World, mer
+  forskningspolitik än nya fysikaliska upptäckter. Källor:
+  https://physicsworld.com/a/astronomers-express-outrage-after-regulators-approve-space-mirror-permit/ ,
+  https://physicsworld.com/a/private-investment-in-fusion-firms-jumps-by-4-5bn/
+  (tillagd 2026-07-30)
+
 ## Fynd som inte användes (2026-07-29) — kan tas upp senare
 
 - **Valdes i dag: Paul Scherrer-institutet (Bernhard Lauss, Geza Zsigmond m.fl.)

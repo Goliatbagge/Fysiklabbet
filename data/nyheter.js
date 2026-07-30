@@ -43,6 +43,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-30-hattformens-kirala-ljus",
+    date: "2026-07-30",
+    title: "Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva",
+    deck: "2023 chockade en hobbymatematiker världen med en enda kakelform som kan täcka ett golv i oändlighet utan att mönstret någonsin upprepas — en lösning på det femtio år gamla Einstein-problemet i matematiken. Nu har fysiker i Tokyo skickat laserljus genom nanostrukturer byggda av samma form och upptäckt att den bryter mot en optisk grundregel: ljuset som diffrakteras bildar ett mönster som aldrig går att lägga exakt ovanpå sin egen spegelbild.",
+    category: "Optik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-30-hattformens-kirala-ljus.jpg",
+    imageAlt: "En bild i två delar. Till vänster syns hattformens aperiodiska kakelmönster i rosa och ljusblått, med svarta konturlinjer mellan de trettonsidiga bitarna. Till höger syns det verkliga diffraktionsmönster som uppstod när forskarna sköt laserljus genom en nanostor version av samma mönster: ett virvlande, pinwheel-likt mönster av gröna, röda och blå ljusstrålar som strålar ut från en ljusstark gulvit mittpunkt mot en svart bakgrund.",
+    imageCredit: "Bild: Institute of Industrial Science, The University of Tokyo (pressbild)",
+    tags: ["optik", "vågor", "diffraktion", "kiralitet", "kvasikristaller", "matematik", "nanoteknik", "polarisation", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Institute of Industrial Science, The University of Tokyo (pressmeddelande)", url: "https://www.iis.u-tokyo.ac.jp/en/news/5114" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-einstein-problem-reveals-unexpected-physics.html" },
+      { name: "EurekAlert!", url: "https://www.eurekalert.org/news-releases/1137592" }
+    ],
+    research: {
+      citation: "Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, ”Chiral diffraction from aperiodic monotile structure”, Nature Communications 17, 6085 (2026)",
+      url: "https://doi.org/10.1038/s41467-026-75023-7"
+    },
+    body: [
+      { type: "p", html: "I mars 2023 chockade den brittiske hobbymatematikern David Smith vetenskapsvärlden med en enda kakelform, kallad ”hatten”, som kan täcka ett golv i oändlighet utan att mönstret någonsin upprepar sig — en lösning på det femtio år gamla ”Einstein-problemet” i matematiken. Nu har fysiker vid Tokyos universitet skickat laserljus genom nanostora mönster byggda av just den formen, och upptäckt att den gömmer på en helt egen optisk effekt: ljuset som studsar ut bildar ett mönster som aldrig går att lägga exakt ovanpå sin egen spegelbild. Studien publicerades i tidskriften <em>Nature Communications</em> den 30&nbsp;juli 2026." },
+
+      { type: "h2", text: "En enda form som aldrig upprepar sig" },
+      { type: "p", html: "En vanlig kakelplatta — en sexkant i ett bikakemönster eller en kvadrat i ett schackbräde — täcker ett golv i ett mönster som upprepar sig regelbundet hur långt man än fortsätter. Matematiker har länge undrat om det går att hitta en enda form som gör motsatsen: täcker ett obegränsat plan utan att mönstret någonsin upprepas exakt, oavsett hur man vrider och speglar formen. Frågan kallas Einstein-problemet — inte efter fysikern Albert Einstein, utan ett ordskämt på tyskans <em>ein Stein</em>, ”en sten” eller ”en bricka”. I mars 2023 löste Smith gåtan tillsammans med matematikerna Craig Kaplan, Joseph Myers och Chaim Goodman-Strauss: en trettonsidig form, ”hatten”, byggd av åtta likadana fyrhörningar (så kallade kites) hämtade ur ett hexagonalt bikakegitter." },
+      { type: "quote", html: "”Det som är särskilt fascinerande med hattformen är att mönstret ser oregelbundet ut vid första anblicken, men i själva verket är uppbyggt utifrån ett bikakegitter.”", cite: "Yuto Moritake, docent och försteförfattare till studien, Institute of Industrial Science, Tokyos universitet" },
+
+      { type: "h2", text: "Laser genom en nanostor hatt" },
+      { type: "p", html: "Forskarlaget, lett av Moritake och professor Masaya Notomi vid Institute of Industrial Science, ville se om formens ovanliga geometri också kunde ge upphov till ny fysik. De tillverkade nanostora mönster av hattformen i kiselnitridfilmer med elektronstrålelitografi — en teknik som ritar mönster med en styrd stråle av elektroner i stället för ljus, för att nå ner till skalor tusen gånger tunnare än ett hårstrå. När forskarna sedan sköt laserljus genom strukturerna böjdes ljuset av (diffrakterade) i tydliga, virvlande ”pinwheel”-mönster — ett beteende som aldrig setts i vanliga kvasikristaller." },
+      { type: "quote", html: "”Vi fann att diffraktionsmönstren själva blir kirala, eftersom strukturen saknar spegelsymmetri. Den här typen av optiskt svar skiljer sig fundamentalt från det man ser i vanliga kvasikristallina material.”", cite: "Masaya Notomi, professor, Institute of Industrial Science, Tokyos universitet" },
+
+      { type: "h2", text: "En händighet du kan se i ljuset" },
+      { type: "p", html: "Kiralitet betyder att ett föremål inte går att lägga exakt ovanpå sin egen spegelbild — precis som en vänsterhand aldrig riktigt passar i en högerhandske. De flesta kvasikristallina mönster, som de berömda Penrose-mosaikerna, har en inbyggd spegelsymmetri som gör att de ser likadana ut oavsett hur man vänder på dem. Hattmönstret saknar den symmetrin, och forskarna visade att det faktiskt syns i ljuset: diffraktionsmönstret ändrades beroende på både riktningen och den cirkulära polarisationen (vridriktningen) hos det infallande laserljuset, och en spegelvänd kopia av samma nanostruktur gav ett spegelvänt optiskt svar — en symmetristyrd effekt som varken kräver magnetfält eller exotiska material, bara formens egen geometri." },
+      { type: "quote", html: "”De här resultaten öppnar en ny forskningsriktning kring mötet mellan kvasiperiodisk ordning och kiralitet. Hattmönster ger en plattform för att utforska optiska fenomen som uppstår ur samspelet mellan symmetri, kiralitet och aperiodicitet.”", cite: "Yuto Moritake" },
+
+      { type: "h2", text: "Från matematisk nyfikenhet till framtida optik" },
+      { type: "p", html: "Forskarna hoppas att hattinspirerade mönster kan bli användbara i teknik som styr och manipulerar ljus, till exempel komponenter för polarisationskontroll och avancerade optiska enheter. Framför allt är fyndet ett exempel på hur en till synes abstrakt, ren matematisk upptäckt — en enda form som löser en pusselgåta — kan visa sig gömma helt ny, oväntad fysik så snart någon faktiskt bygger den i verkligheten och skiner ljus på den." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Namnet ”Einstein-problemet” har inget med fysikern Albert Einstein att göra — det är ett ordskämt på tyskans <em>ein Stein</em>, ”en sten” (eller ”en bricka”), eftersom problemet handlar om att hitta EN enda kakelform.",
+        "Hattformen upptäcktes av hobbymatematikern David Smith, som experimenterade med pappersutklipp för hand innan han tog hjälp av tre professionella matematiker för att bevisa att formen verkligen aldrig upprepar sig.",
+        "Kiselnitridfilmerna forskarna använde mönstrades med elektronstrålelitografi — samma sorts nanotillverkningsteknik som används för att rita mönster i datorchip."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-29-neutronernas-spegelvarld",
     date: "2026-07-29",
     title: "Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår",

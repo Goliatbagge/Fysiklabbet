@@ -159,6 +159,35 @@
  * tyngre!"). Att stanna upp och pröva svarets rimlighet är elevens bästa
  * skydd mot slarvfel. Gäller ALLA fysikscener.
  *
+ * REGEL (TRIGONOMETRISK UPPSTÄLLNING, användarönskemål 2026-07-30): när
+ * en trig-ekvation ställs upp ur en figur (cos v = närliggande katet /
+ * hypotenusan osv.) byggs kvoten DEL FÖR DEL med två samverkande gester:
+ *   1. Ordet för delen ("närliggande katet", "hypotenusan") TONAR IN
+ *      bredvid täljaren respektive nämnaren medan kvoten ställs upp, och
+ *      tonar ut när nästa steg börjar. Byggsten: note-objekt
+ *      {note:1, x, y, text, anchor, wins:[]} — en tonande Poppins-
+ *      etikett som visas/döljs med show/hide (samma fönstermekanik som
+ *      bubblorna, men utan moln). Noterna är del av uppställningen och
+ *      står kvar även i "Utan tankar".
+ *   2. INNAN pennan skriver delen i kvoten ringar den in motsvarande
+ *      sida i FIGUREN med blåpennan (samma tanke som insättningsgesten):
+ *      närliggande kateten ringas innan täljaren skrivs, hypotenusan
+ *      innan nämnaren. Ringarna fejdas ut när raden är klar. För en
+ *      lutande sida används ringAlongPts(p1, p2, ry, off) — en ring
+ *      längs sidans riktning.
+ * Dessutom ringas VINKELN (bågen + gradtalet) in i figuren INNAN
+ * trigfunktionen skrivs — det är den vinkeln som "närliggande"/
+ * "motstående" relaterar till (godkänt förslag 2026-07-30).
+ * Eleven ska SE vilken sida i triangeln som blir täljare och vilken som
+ * blir nämnare. Gäller alla scener där en trigfunktion ställs upp ur en
+ * figur — för sin med ordet "motstående katet", för tan med "motstående
+ * katet"/"närliggande katet". Referensimpl: layoutSpett.
+ *
+ * REGEL (TONANDE ORD VID MOMENTLAGEN): när momentlagen M↺=M↻ skrivs
+ * tonar orden "moturs"/"medurs" in under respektive momentpil (note-
+ * objekt) när ledet skrivits, och ut när nästa steg börjar (godkänt
+ * förslag 2026-07-30). Referensimpl: layoutGunga.
+ *
  * Teckenuppsättningen är en egen enstreckad "handstil": varje tecken är
  * definierat som en lista pennstreck (punkter i en 100-enheters box,
  * baslinje y=100). Strecken ritas i naturlig skrivordning och får små
@@ -1345,8 +1374,24 @@
     placeString('Momentjämvikt gäller, så', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.8 * F;
-    placeString('M↺=M↻', padL, y, s, F, acts);
+    /* TONANDE ORD (godkänt förslag 2026-07-30): "moturs"/"medurs" tonar
+     * in under respektive momentpil när dess led skrivits, och ut när
+     * nästa steg börjar — påminner om vad pilarna betyder. */
+    var wM = stringAdvance('M', s, F);
+    var noteMot = { note: 1, x: padL + wM / 2, y: y + 0.78 * F,
+                    text: 'moturs', fs: 15, wins: [] };
+    var xEq = placeString('M↺', padL, y, s, F, acts);
+    acts.push({ kind: 'show', obj: noteMot });
+    pause(320);
+    var xM2 = placeString('=', xEq, y, s, F, acts);
+    var noteMed = { note: 1, x: xM2 + wM / 2, y: y + 0.78 * F,
+                    text: 'medurs', fs: 15, wins: [] };
+    placeString('M↻', xM2, y, s, F, acts);
+    acts.push({ kind: 'show', obj: noteMed });
+    pause(420);
     stepEnd();
+    acts.push({ kind: 'hide', obj: noteMot });
+    acts.push({ kind: 'hide', obj: noteMed });
 
     y += adv;
     var b5 = bubble(120, bubbleTop(y - adv), bw, [
@@ -1807,9 +1852,51 @@
       [['är 1,0 m. Då används cosinus.']]
     ]);
     tanke(b5);
+    /* Först ringas 45°-VINKELN in i figuren (godkänt förslag 2026-07-30):
+     * det är den vinkeln som "närliggande"/"motstående" relaterar till,
+     * och cos av just den vinkeln som nu ska skrivas. */
+    var ringVinkel = { kind: 'stroke', pts: ringPts(166, 186, 40, 20),
+                       color: BLUE };
+    acts.push(ringVinkel);
+    pause(420);
     var xx = placeString('cos 45°=', padL, y, s, F, acts);
-    fracH('l', '1,0', xx, y);
+    /* TRIG-UPPSTÄLLNING (se REGEL): kvoten byggs del för del. Ordet för
+     * delen tonar in bredvid sin plats i kvoten, pennan ringar in
+     * motsvarande sida i FIGUREN, och först därefter skrivs delen. */
+    var ybar = y - 0.34 * F;
+    var nw = stringAdvance('l', s, F), dw = stringAdvance('1,0', s, F);
+    var fw = Math.max(nw, dw) + 0.3 * F;
+    var noteX = xx + fw + 0.6 * F;
+    var noteNar = { note: 1, x: noteX, y: ybar - 0.14 * F,
+                    text: 'närliggande katet', anchor: 'start', wins: [] };
+    var noteHyp = { note: 1, x: noteX, y: ybar + 1.04 * F,
+                    text: 'hypotenusan', anchor: 'start', wins: [] };
+    /* täljaren: ordet in → ringa måttlinjen med l i figuren → skriv l */
+    acts.push({ kind: 'show', obj: noteNar });
+    pause(320);
+    var ringNar = { kind: 'stroke',
+                    pts: ringPts(174, 260, 63, 26), color: BLUE };
+    acts.push(ringNar);
+    pause(420);
+    placeString('l', xx + (fw - nw) / 2, ybar - 0.14 * F, s, F, acts);
+    pause(130);
+    acts.push({ kind: 'stroke', pts: humanize([[xx, ybar], [xx + fw, ybar]]) });
+    pause(130);
+    /* nämnaren: ordet in → ringa spettet (hypotenusan, 1,0 m) → skriv 1,0.
+     * Ringen förskjuts mot etiketten "1,0 m" så att den också ryms. */
+    acts.push({ kind: 'show', obj: noteHyp });
+    pause(320);
+    var ringHyp = { kind: 'stroke',
+                    pts: ringAlongPts([pivX, groundY], [topX, topY], 34, 18),
+                    color: BLUE };
+    acts.push(ringHyp);
+    pause(420);
+    placeString('1,0', xx + (fw - dw) / 2, ybar + 1.04 * F, s, F, acts);
+    fadeRings(acts, [ringVinkel, ringNar, ringHyp]);
     stepEnd();
+    /* orden tonar ut när nästa steg börjar */
+    acts.push({ kind: 'hide', obj: noteNar });
+    acts.push({ kind: 'hide', obj: noteHyp });
 
     y += adv + 0.7 * F;
     xx = placeString('l=1,0·cos 45°≈', padL, y, s, F, acts);
@@ -1884,6 +1971,27 @@
       var a = -0.6 + (i / 13) * Math.PI * 2.15;   /* börjar snett, överlapp */
       pts.push([cx + Math.cos(a) * (rx + rnd(-2, 2)),
                 cy + Math.sin(a) * (ry + rnd(-1.5, 1.5))]);
+    }
+    return pts;
+  }
+
+  /* handritad ring LÄNGS en lutande sträcka (t.ex. en triangelsida):
+   * ellipsen roteras till sträckans riktning. `off` förskjuter ringen
+   * vinkelrätt (positivt = åt normalens håll) så att en etikett bredvid
+   * sidan också ryms i ringen. Se REGEL (TRIGONOMETRISK UPPSTÄLLNING). */
+  function ringAlongPts(p1, p2, ry, off) {
+    var cx = (p1[0] + p2[0]) / 2, cy = (p1[1] + p2[1]) / 2;
+    var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+    var L = Math.hypot(dx, dy) || 1;
+    var ux = dx / L, uy = dy / L, nx = uy, ny = -ux;
+    cx += (off || 0) * nx; cy += (off || 0) * ny;
+    var rx = L / 2 + 12;
+    var pts = [];
+    for (var i = 0; i <= 15; i++) {
+      var a = -0.6 + (i / 15) * Math.PI * 2.15;
+      var ex = Math.cos(a) * (rx + rnd(-2, 2));
+      var ey = Math.sin(a) * (ry + rnd(-1.5, 1.5));
+      pts.push([cx + ex * ux + ey * nx, cy + ex * uy + ey * ny]);
     }
     return pts;
   }
@@ -2220,6 +2328,23 @@
     buildBubble(o);
   }
 
+  /* ---------------- tonande textnot (note-objekt) ----------------
+   * En liten Poppins-etikett som tonar in vid ett moment och ut vid
+   * nästa (show/hide, samma fönstermekanik som bubblorna) — utan moln.
+   * Används t.ex. för "närliggande katet"/"hypotenusan" bredvid en
+   * trig-kvot, se REGEL (TRIGONOMETRISK UPPSTÄLLNING). Ritas inte av
+   * pennan; den "bara finns" som en påminnelse. */
+  function makeNote(o) {
+    var g = el('g', { opacity: 0 });
+    var t = el('text', { x: o.x, y: o.y,
+                         'text-anchor': o.anchor || 'middle',
+                         'font-family': BUBBLE_FONT,
+                         'font-size': o.fs || 16,
+                         fill: o.color || BLUE }, g);
+    t.textContent = o.text;
+    return g;
+  }
+
   /* ---------------- hjälplinjer vid punktplottning ----------------
    * Streckade linjer från punkten lodrätt till x-axeln och vågrätt till
    * y-axeln — tonar in när punkten prickas och ut när nästa prickas.
@@ -2379,7 +2504,10 @@
       '.hk-sbtn{border:1.5px solid rgba(15,22,32,.35);background:' + PAPER + ';color:' + LABINK + ';' +
         'border-radius:7px;padding:3px 9px;font-weight:600;font-size:12.5px;cursor:pointer;' +
         'font-family:inherit}' +
-      '.hk-sbtn.hk-active{background:' + LABINK + ';color:' + PAPER + ';border-color:' + LABINK + '}';
+      '.hk-sbtn.hk-active{background:' + LABINK + ';color:' + PAPER + ';border-color:' + LABINK + '}' +
+      /* växeln "Med penna"/"Som text" ovanför arket (se mountAll) */
+      '.hk-vyval{display:flex;gap:8px;align-items:center;margin:0 0 12px;flex-wrap:wrap}' +
+      '.hk-vyval-label{font-size:12.5px;color:rgba(15,22,32,.62);margin-right:2px}';
     document.head.appendChild(st);
   }
 
@@ -2472,8 +2600,9 @@
     L.acts.forEach(function (a) {
       if (a.kind !== 'show' || a.obj.el) return;
       a.obj.el = a.obj.bubble ? makeBubble(a.obj)
+        : a.obj.note ? makeNote(a.obj)
         : a.obj.guide ? makeGuide(a.obj) : makeRuler(a.obj);
-      (a.obj.bubble ? bubbleG : rulerG).appendChild(a.obj.el);
+      ((a.obj.bubble || a.obj.note) ? bubbleG : rulerG).appendChild(a.obj.el);
       objs.push(a.obj);
     });
 
@@ -2997,6 +3126,74 @@
              forra: stepBack, steg: steg, boundaries: boundaries };
   }
 
+  /* ---------------- lösningsvy: "Med penna" / "Som text" --------------
+   * Ett ::: textlosning-block DIREKT EFTER handskrift-blocket i md:n
+   * renderas som <div class="lab-block lab-block-textlosning"> och
+   * innehåller samma lösning som vanlig text (går genom den ordinarie
+   * markdown-pipelinen, så KaTeX, termtips och dyslexi-/bionic-läget
+   * fungerar). mountAll parar ihop widgeten med textblocket och sätter
+   * en växel ovanför arket. Valet gäller ALLA exempel på sidan och
+   * kommer ihåg mellan besök via localStorage — den som föredrar
+   * textlösningar ska slippa växla i varje exempel. */
+  var VIEW_KEY = 'hkLosningsvy';
+  var PAIRS = [];
+  function getView() {
+    try {
+      return localStorage.getItem(VIEW_KEY) === 'text' ? 'text' : 'penna';
+    } catch (e) { return 'penna'; }
+  }
+  function setView(v) {
+    try { localStorage.setItem(VIEW_KEY, v); } catch (e) {}
+    /* rensa par vars DOM försvunnit (React kan ha renderat om sidan) */
+    PAIRS = PAIRS.filter(function (p) {
+      return document.body.contains(p.hkDiv);
+    });
+    PAIRS.forEach(applyView);
+  }
+  function applyView(p) {
+    var text = getView() === 'text';
+    p.wrapEl.style.display = text ? 'none' : '';
+    p.textEl.style.display = text ? '' : 'none';
+    p.pennaBtn.classList.toggle('hk-active', !text);
+    p.textBtn.classList.toggle('hk-active', text);
+    if (text && p.ctl && p.ctl.pause) p.ctl.pause();
+  }
+  function buildVyval(div, ctl) {
+    var textEl = div.nextElementSibling;
+    if (!(textEl && textEl.classList &&
+          textEl.classList.contains('lab-block-textlosning'))) return;
+    var wrapEl = div.querySelector('.hk-wrap');
+    if (!wrapEl) return;
+    var row = document.createElement('div');
+    row.className = 'hk-vyval';
+    row.setAttribute('role', 'group');
+    row.setAttribute('aria-label', 'Välj hur lösningen visas');
+    var lbl = document.createElement('span');
+    lbl.className = 'hk-vyval-label';
+    lbl.textContent = 'Lösning';
+    row.appendChild(lbl);
+    function vyBtn(txt, v, title) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hk-btn';
+      b.textContent = txt;
+      b.title = title;
+      b.addEventListener('click', function () { setView(v); });
+      row.appendChild(b);
+      return b;
+    }
+    var pair = {
+      hkDiv: div, wrapEl: wrapEl, textEl: textEl, ctl: ctl,
+      pennaBtn: vyBtn('Med penna', 'penna',
+        'Se hur lösningen skrivs för hand, steg för steg'),
+      textBtn: vyBtn('Som text', 'text',
+        'Visa lösningen som vanlig text')
+    };
+    div.insertBefore(row, div.firstChild);
+    PAIRS.push(pair);
+    applyView(pair);
+  }
+
   /* ---------------- mountAll: ::: handskrift-block i teorin ----------
    * Teorisidorna (katalog.html/avsnitt.html) gör om ett
    *
@@ -3034,7 +3231,8 @@
         });
       } catch (e) { return; }
       if (!cfg.typ) return;
-      mount(div, cfg, {});
+      var ctl = mount(div, cfg, {});
+      buildVyval(div, ctl);
     });
   }
 

@@ -34,6 +34,7 @@
     <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/visualiseringar/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="handskrift.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -281,6 +282,22 @@
                     const src = cfgLines.join('\n');
                     const b64 = btoa(unescape(encodeURIComponent(src)));
                     out.push('<div class="lab-graf" data-graf-src="' + b64 + '"></div>');
+                    i = j; // hoppa förbi det avslutande :::
+                    continue;
+                }
+                // ::: handskrift — animerad handskriven lösning. Samma
+                // mönster: config-raderna → mount-placeholder (handskrift.js).
+                const hkOpen = line.match(/^:::\s*handskrift\s*$/i);
+                if (hkOpen) {
+                    const cfgLines = [];
+                    let j = i + 1;
+                    for (; j < lines.length; j++) {
+                        if (/^:::\s*$/.test(lines[j])) break;
+                        cfgLines.push(lines[j]);
+                    }
+                    const src = cfgLines.join('\n');
+                    const b64 = btoa(unescape(encodeURIComponent(src)));
+                    out.push('<div class="lab-handskrift" data-handskrift-src="' + b64 + '"></div>');
                     i = j; // hoppa förbi det avslutande :::
                     continue;
                 }
@@ -585,6 +602,9 @@
                         // spann blir egna flex-items i flex-etiketter
                         // ("Visa trappsteget" → "Vi sa trapp steget").
                         if (c && c.contains('lab-graf')) return NodeFilter.FILTER_REJECT;
+                        // Handskrift-widgetens UI ("Med tankar", knappar):
+                        // split-spann ger glapp i etiketterna ("M ed ta nkar").
+                        if (c && c.contains('lab-handskrift')) return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -748,6 +768,8 @@
                 buildFormelLayouts(ref.current);
                 // Interaktiva grafer (::: graf) — bygg widgetarna.
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(ref.current);
+                // Handskrivna lösningar (::: handskrift) — bygg widgetarna.
+                if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(ref.current);
                 // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
                 // Synlighet styrs sedan av .bionic-on-klassen via CSS.
                 applyBionic(ref.current);
@@ -938,7 +960,7 @@
                     // Fokus i ett reglage/fält (t.ex. graf-widgetens glidare):
                     // piltangenter m.m. ska styra reglaget, inte bläddra.
                     const t = e.target;
-                    if (t && t.closest && t.closest('input, textarea, select, .lab-graf, .lab-vis-host')) return;
+                    if (t && t.closest && t.closest('input, textarea, select, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
                     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
                         || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
                     else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
@@ -966,6 +988,7 @@
                 });
                 buildFormelLayouts(root);
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(root);
+                if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(root);
                 const { steps, blocks } = buildPresSteps(root);
                 stepsRef.current = steps;
                 blocksRef.current = blocks;
@@ -1036,7 +1059,7 @@
                 // Interaktiva graf-widgetar: dra i glidare/rutnät, kryssrutor
                 // och sifferfält ska INTE bläddra vidare — man ska kunna
                 // stanna kvar och utforska. (Släpp efter drag ger ett click.)
-                if (e.target.closest('input, label, .lab-graf, .lab-vis-host')) return;
+                if (e.target.closest('input, label, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
                 next();

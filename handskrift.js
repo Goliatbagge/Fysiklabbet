@@ -22,13 +22,29 @@
  *                                stil, "… = … = …") i stället för på ny rad —
  *                                men är fortfarande ett eget klicksteg.
  *
- *   opts = { fontSize: 40, speed: 1, autostart: false, instant: false,
- *            at: ms|null, stegvis: true, hand: false }  — STANDARD är att
+ *   opts = { speed: 1, autostart: false, instant: false, at: ms|null,
+ *            stegvis: true, hand: false, tankar: true }  — STANDARD är att
  *            bara pennan ritas (användarbeslut 2026-07-28); hand:true
  *            ritar handen som håller pennan  — stegvis=false ger gamla
- *            beteendet (allt skrivs i en följd).
+ *            beteendet (allt skrivs i en följd). tankar:false startar i
+ *            läget "Utan tankar" (se nedan).
  *
- *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela }
+ *   Lösningar MED tankebubblor får en inställningsruta uppe till höger
+ *   på arket med radioknapparna "Med tankar"/"Utan tankar" (användar-
+ *   önskemål 2026-07-30). "Utan tankar" bygger om tidslinjen från en
+ *   aktlista där bubbelstegen filtrerats bort — samma pennstreck, färre
+ *   klicksteg — och behåller positionen i lösningen (redan skrivna rader
+ *   står kvar). Lösningar utan bubblor får ingen ruta.
+ *
+ *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela,
+ *                  steg, nasta, forra, boundaries }
+ *
+ *   STEGNING (användarönskemål 2026-07-30): pilknappar ligger stickande i
+ *   arkets vänster-/högerkant vid halva skärmhöjden — man ska aldrig
+ *   behöva rulla ned till knappraden för att stega. Bottenraden har därför
+ *   inga Nästa/Föregående-knappar (bara Skriv/Paus, Börja om, Tempo).
+ *   Piltangent höger/vänster stegar också fram/tillbaka — i den SENAST
+ *   ANVÄNDA widgeten (hovring/klick avgör när flera ligger på samma sida).
  *
  * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
  * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
@@ -40,6 +56,108 @@
  * hjälplinjer utan pilspets (streckade projektionslinjer) räknas inte
  * som vektor/tal och förblir grafit. Syftet är att synligt skilja "given
  * data/vektorer" från den ritade scenen.
+ *
+ * REGEL (TANKEBUBBLOR SKYMMER ALDRIG NÅGOT): en tankebubbla får aldrig
+ * ligga över figuren, en skriven rad eller något annat på arket — varken
+ * molnet eller dess bulor (radie upp till ~25). Bubblor som hör till en
+ * FIGUR läggs UNDER figuren (`figurBubble()`), inte intryckta bredvid
+ * den i högermarginalen: pressar man in dem vid sidan hamnar molnet ändå
+ * på figurens ytterdelar (användarbeslut 2026-07-29). Bubblor vid
+ * räkneraderna läggs där NÄSTA rad ska hamna. Båda ytorna är ännu tomma
+ * och bubblan är ett eget steg som tonar ut innan något ritas där.
+ * Omvänt får en bubbla heller aldrig SKYMMAS: arkets ÖVRE HÖGRA HÖRN
+ * (ca x > paperW−210, y < 90 inkl. bulor) är reserverat för inställnings-
+ * rutan och helskärmsknappen — lägg aldrig en bubbla där. Kontrollera
+ * alltid i skärmdump.
+ *
+ * REGEL (INSÄTTNING): varje gång något SÄTTS IN i något annat — ett
+ * värde i en funktion/formel, ett uttryck i en ekvation, mätvärden i ett
+ * samband — ska handen göra en hjälpande gest FÖRE den nya raden skrivs:
+ * den ringar först in VÄRDET/VÄRDENA där de står (t.ex. raden "x = 15",
+ * eller måtten i figuren) och sedan UTTRYCKET de sätts in i (t.ex.
+ * "A(x) = 60x − 2x²"), med blåpennan och en kort paus mellan ringarna.
+ * Ringarna står kvar medan insättningsraden skrivs och fejdas ut när den
+ * är klar. Syftet är att eleven ska SE var siffrorna kommer ifrån och vart
+ * de tar vägen — det är den vanligaste punkten där man tappar tråden.
+ * Använd helpers: `substRings(acts, [[x0, x1, yBas, F, opt], …])` och
+ * `fadeRings(acts, ringar)`; spara x-gränserna när raderna skrivs
+ * (`placeString` returnerar slut-x). Gäller ALLA layouter — bygger du en
+ * ny scen med en insättning ska gesten finnas med.
+ *
+ * UNDANTAG: värden som hämtas ur en MÄTVÄRDESKLAMMER ringas INTE in
+ * (användarbeslut 2026-07-29) — klammern står direkt ovanför insättnings-
+ * raden och gör redan jobbet. Ringar är till för värden som står
+ * utspridda (i figuren eller i en tidigare rad).
+ *
+ * REGEL (BUBBELTEXT — INGA TANKSTRECK): en tankebubbla får ALDRIG
+ * innehålla tankstreck (—). I en text full av formler läses strecket som
+ * ett minustecken (påpekat 2026-07-29). Dela i stället meningen med
+ * punkt, komma eller kolon — men sätt ALDRIG ett skiljetecken direkt
+ * efter en kursiv variabel: kursiva l, g och x växer ihop med kolon och
+ * komma till en obegriplig glyf. Låt formeln avsluta raden i stället
+ * ("hävarmen: M = F · l") eller skjut in text efter den ("F = m · g i
+ * båda leden.").
+ *
+ * REGEL (MOMENT MOTURS/MEDURS): moment skrivs som i svensk
+ * kurslitteratur — ett M med en VRIDPIL ovanför: moturs och medurs.
+ * Pennan har två kombinerande tecken för det, `↺` och `↻`, som ritas
+ * ovanpå föregående bokstav utan eget advance. Momentjämvikt skrivs
+ * alltså `M↺=M↻`, inte `M_1=M_2`.
+ *
+ * REGEL (BETECKNINGAR I FIGURER, fysikuppgifter): en storhet vi KÄNNER
+ * skrivs med beteckningen framför värdet — "m_P = 80 kg", "l_B = 2,0 m",
+ * aldrig bara "80 kg". En storhet vi SÖKER skrivs med enbart beteckningen
+ * — "l_P", aldrig "l_P = ?" (användarbeslut 2026-07-29). Beteckningen är
+ * det som binder ihop figuren med räkneraderna; frågetecknet tillför
+ * inget.
+ *
+ * REGEL (MÄTVÄRDESKLAMMER, fysikuppgifter): när den sökta variabeln har
+ * lösts ut skrivs ALLA mätvärden upp i en hög klammer [ … ] — ett värde
+ * per rad, omvandlade till SI-enheter vid behov (omvandlingen skrivs då
+ * ut i raden, t.ex. "l=25 cm=0,25 m") — INNAN de sätts in i uttrycket.
+ * Samma princip som exempeluppgifterna och övningarnas lösningsförslag i
+ * teorin (\left[ \begin{array}{l} … \end{array} \right]-listorna).
+ * Använd helpern `valueBracket(acts, rader, x0, yTop, s, F)`. Kedjan blir:
+ * figurens värden ringas in medan klammern skrivs (där kommer siffrorna
+ * ifrån), och därefter skrivs insättningsraden UTAN ringar — klammern
+ * ligger ju direkt ovanför. Gäller ALLA fysikscener.
+ *
+ * REGEL (DIVIDERA BORT EN GEMENSAM FAKTOR — BARA fysikuppgifter): när
+ * samma faktor står i båda leden (t.ex. g i m_P·g·l_P = m_B·g·l_B) delas
+ * den bort genom att STRYKAS med ett snett streck direkt i den redan
+ * skrivna raden, varefter nästa rad skrivs utan faktorn. Divisionen
+ * skrivs alltså INTE ut som bråk med faktorn i nämnaren. Formellt lite
+ * slarvigt, men det är så man redovisar i fysikkursen (användarbeslut
+ * 2026-07-29). Blåpennan används, eftersom det är något som görs på båda
+ * sidor om likhetstecknet. I MATTEscener gäller motsatsen — där skrivs
+ * divisionen ut i båda led som vanligt (se hage-scenen). Helper:
+ * `strikeThrough(x0, w, yBas)`.
+ *
+ * SPRÅKREGEL: i TEXT (tankebubblor, förklaringar) heter det alltid
+ * "dividera bort" — aldrig "stryka bort" — även om pennan rent visuellt
+ * gör en strykning (användarbeslut 2026-07-29). Det är divisionen som är
+ * det matematiska innehållet; strykningen är bara hur man skriver ned den.
+ *
+ * REGEL (SVARSRAD, fysikuppgifter): svaret skrivs som enbart mätetal och
+ * enhet — "Svar: 0,75 m" — ALDRIG med beteckningen framför ("Svar:
+ * l_P = 0,75 m"). Frågan har redan sagt vad som söks (användarbeslut
+ * 2026-07-29). I mattescener skrivs svaret som uppgiften kräver.
+ *
+ * REGEL (INLEDANDE MOTIVERING): en formel som behöver motiveras kan
+ * föregås av en kort motivering i TEXT som handen skriver i grafit
+ * ("Momentjämvikt gäller, så") — och då skrivs formeln DIREKT UNDER
+ * motiveringen i SAMMA klicksteg, ingen steggräns emellan (användar-
+ * önskemål 2026-07-30). Motiveringen skrivs mindre (0,62·F, som
+ * figuretiketter) och är en del av redovisningen: den står kvar även i
+ * "Utan tankar", till skillnad från tankebubblorna. Ge formeln extra
+ * radavstånd när den har höga tecken — momentpilarna kräver ~1,8·F ned
+ * till formelbaslinjen, annars nuddar de motiveringens nedstaplar (j, g).
+ *
+ * REGEL (RIMLIGHETSBEDÖMNING, fysikuppgifter): innan svarsraden skrivs
+ * ska en tankebubbla ALLTID göra en rimlighetsbedömning av resultatet
+ * (t.ex. "Pappa ska sitta närmare än barnet — rimligt, han är ju
+ * tyngre!"). Att stanna upp och pröva svarets rimlighet är elevens bästa
+ * skydd mot slarvfel. Gäller ALLA fysikscener.
  *
  * Teckenuppsättningen är en egen enstreckad "handstil": varje tecken är
  * definierat som en lista pennstreck (punkter i en 100-enheters box,
@@ -54,6 +172,22 @@
   var SVGNS = 'http://www.w3.org/2000/svg';
   var INK = '#4a4a4a';          // grafit
   var BLUE = '#2b5ca8';         // blåpenna — "det man gör på båda sidor"
+
+  /* KONSEKVENT SKRIFTSTORLEK (uttryckligt önskemål 2026-07-29): pennan
+   * ska skriva LIKA STORT i alla uppgifter. Alla ark har därför samma
+   * fasta bredd i viewBox-enheter (PAPER_W) och all skrift samma storlek
+   * (FSIZE). Eftersom arken renderas i samma CSS-bredd blir skriften då
+   * exakt lika stor på skärmen oavsett uppgift. Scenerna får INTE klampa
+   * eller välja egen storlek, och opts.fontSize är borttagen ur API:t.
+   *
+   * En HUVUDRAD (räkneraden) skrivs ALLTID i F rakt av — aldrig i F*0,9
+   * e.d. Just en sådan faktor i linjegraf-scenen gjorde att uppgifterna
+   * fortfarande skrevs olika stort (påpekat 2026-07-29); den mindre
+   * storleken var den önskade, så FSIZE sänktes 32 → 29 och faktorn togs
+   * bort. Delvis mindre skrift (tabellrubriker, axelsiffror, klammer) är
+   * fortfarande OK — det är huvudraderna som måste vara lika. */
+  var FSIZE = 29;               // skriftstorlek — samma i ALLA uppgifter
+  var PAPER_W = 730;            // arkets bredd — samma i ALLA uppgifter
   var PAPER = '#faf6ec';
   var GRID = '#93aec7';
   var LABINK = '#0f1620';
@@ -103,7 +237,13 @@
     'l': { w: 42, strokes: [[[30, 10], [29, 80], [33, 97], [41, 94]]] },
     'g': { w: 64, strokes: [[[58, 57], [45, 49], [31, 56], [26, 73], [31, 89], [46, 97], [58, 88]], [[60, 50], [62, 86], [60, 112], [50, 126], [36, 124], [30, 114]]] },
     /* tillagda gemener (2026-07-29, för figur-etiketterna "basen"/"höjden") */
-    'e': { w: 58, strokes: [[[56, 58], [27, 60], [22, 74], [28, 90], [45, 97], [58, 89], [54, 80]]] },
+    /* 'e' ritas som handstil: tvärstrecket först (vänster→höger), sedan
+     * runt över toppen och ner runt bottnen med utsläpp åt höger. Ögat
+     * mellan tvärstrecket och toppbågen måste vara HÖGT (~24 enheter) —
+     * pennan är 0,062·F bred oavsett teckenstorlek, så i halvstora
+     * etiketter ("basen"/"höjden") fylls ett litet öga igen och e:et blir
+     * en klump. Sänk aldrig tvärstrecket mot toppbågen. */
+    'e': { w: 62, strokes: [[[20, 76], [56, 70], [55, 57], [42, 48], [29, 53], [21, 68], [22, 83], [33, 95], [47, 97], [59, 86]]] },
     's': { w: 54, strokes: [[[52, 58], [35, 50], [24, 57], [27, 67], [43, 72], [54, 81], [49, 92], [33, 98], [19, 89]]] },
     'n': { w: 66, strokes: [[[24, 52], [25, 100]], [[25, 60], [36, 50], [48, 50], [58, 60], [59, 100]]] },
     'h': { w: 68, strokes: [[[26, 10], [27, 100]], [[27, 62], [38, 50], [50, 50], [60, 60], [61, 100]]] },
@@ -111,17 +251,42 @@
     'o': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]]] },
     'ö': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]], [[32, 28], [33, 30]], [[48, 28], [49, 30]]] },
     'k': { w: 60, strokes: [[[28, 10], [28, 100]], [[58, 48], [40, 70], [30, 74]], [[38, 66], [60, 100]]] },
+    /* tillagda 2026-07-30 (för inledande motiveringar som "Momentjämvikt
+     * gäller, så") */
+    't': { w: 48, strokes: [[[31, 24], [29, 78], [33, 95], [44, 91]], [[17, 50], [47, 48]]] },
+    'f': { w: 50, strokes: [[[54, 18], [45, 12], [37, 20], [34, 44], [33, 100]], [[19, 52], [49, 50]]] },
+    'i': { w: 40, strokes: [[[29, 52], [28, 82], [32, 97], [40, 93]], [[28, 30], [29, 32]]] },
+    'ä': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]], [[34, 30], [35, 32]], [[52, 30], [53, 32]]] },
+    'å': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]], [[45, 18], [38, 21], [36, 28], [41, 34], [49, 33], [52, 26], [46, 19]]] },
     ',': { w: 30, strokes: [[[26, 90], [28, 98], [21, 112]]] },
     '?': { w: 68, strokes: [[[26, 30], [33, 14], [50, 10], [63, 17], [66, 31], [58, 45], [47, 53], [45, 64]], [[45, 86], [46, 88]]] },
     '(': { w: 42, strokes: [[[36, 8], [26, 34], [23, 60], [26, 85], [36, 106]]] },
     ')': { w: 42, strokes: [[[22, 8], [32, 34], [35, 60], [32, 85], [22, 106]]] },
     '·': { w: 34, strokes: [[[27, 60], [28, 62]]] },
+    'N': { w: 78, strokes: [[[22, 100], [25, 12], [66, 97], [69, 10]]] },
+    'c': { w: 54, strokes: [[[55, 57], [41, 48], [27, 53], [20, 68], [22, 85], [36, 97], [52, 90]]] },
+    /* gradtecken: liten ring i versalhöjd (45°) */
+    '°': { w: 40, strokes: [[[30, 12], [22, 17], [20, 26], [26, 33], [35, 31], [38, 22], [31, 13]]] },
+    /* ungefär lika med: två vågiga streck (avrundningar) */
+    '≈': { w: 88, strokes: [[[20, 50], [33, 44], [48, 53], [63, 60], [76, 53]],
+                            [[20, 74], [33, 68], [48, 77], [63, 84], [76, 77]]] },
     "'": { w: 24, strokes: [[[27, 8], [19, 30]]] },
     '<': { w: 76, strokes: [[[64, 40], [24, 66], [64, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
-    '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] }
+    '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] },
+    /* MOMENTPILAR (svensk kurslitteratur): moment moturs/medurs skrivs som
+     * ett M med en vridpil ÖVER bokstaven. Pilarna är KOMBINERANDE tecken
+     * — de har inget advance och placeString ritar dem ovanför föregående
+     * glyf (se där). Bågen går från den ena änden över toppen till den
+     * andra, med pilspetsen i färdriktningen: ↺ slutar till vänster
+     * (moturs på skärmen), ↻ till höger (medurs). */
+    '↺': { w: 88, strokes: [[[90, 92], [78, 74], [60, 64], [40, 64], [22, 74], [10, 92]],
+                            [[29, 85], [10, 92], [10, 72]]] },
+    '↻': { w: 88, strokes: [[[10, 92], [22, 74], [40, 64], [60, 64], [78, 74], [90, 92]],
+                            [[71, 85], [90, 92], [90, 72]]] }
   };
-  var OPS = { '+': 1, '-': 1, '=': 1, '<': 1, '⇒': 1 };
+  var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '⇒': 1 };
 
   /* Senast skrivna klammergränser (position för övre/undre gräns) — så
    * att insättningssteget kan ringa in dem med en pedagogisk gest. */
@@ -232,6 +397,12 @@
         x = Math.max(x, nx);
         continue;
       }
+      /* kombinerande tecken (momentpilarna ↺ ↻): ritas ÖVER föregående
+       * glyf och flyttar inte skrivpositionen framåt */
+      if (COMBINING[ch]) {
+        placeGlyph(ch, prevBaseX, baseline - 0.95 * F, s, out, color);
+        continue;
+      }
       scriptAnchor = null;
       if (OPS[ch]) { x += 0.26 * F; }
       prevBaseX = x;
@@ -252,6 +423,7 @@
         x += (sg ? sg.w : 40) * s * 0.62 + 1.5;
         continue;
       }
+      if (COMBINING[ch]) continue;         /* momentpil: inget advance */
       var g = GLYPHS[ch];
       x += (g ? g.w : 40) * s + 1.5;
       if (OPS[ch]) x += 0.52 * F;
@@ -361,7 +533,7 @@
       if (/^Svar/.test(firstText)) {
         acts.push({ kind: 'pause', ms: 220 });
         acts.push({ kind: 'stroke',
-          pts: humanize([[padL - 2, y + 0.30 * F], [x - 0.10 * F, y + 0.30 * F]]) });
+          pts: underlinePts(padL - 2, x - 0.10 * F, y, F) });
       }
 
       maxW = Math.max(maxW, x);
@@ -390,7 +562,6 @@
    * bubbla → punkter → bubbla → linjal + rät linje.
    * cfg = { typ:'linjegraf', k, m, xs:[...] }                          */
   function layoutLinjegraf(cfg, F) {
-    F = Math.min(F, 34);                     /* scenen kräver kompaktare skrift */
     var s = F / 100;
     var acts = [];
     var k = cfg.k, m = cfg.m;
@@ -428,34 +599,35 @@
       pause(300);
     }
 
-    function bubble(x, y, w, lines, tail) {
-      return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
     }
     var bIntro = bubble(246, 40, 208, [
       [['Jag gör en värdetabell']],
       [['och väljer några']],
       [['x', 1], ['-värden kring 0.']]
-    ], [160, 80]);
+    ]);
     var bScale = bubble(26, ty + th + 16, 280, [
       [['x', 1], ['-axeln måste rymma ' + num(xmin) + ' till ' + num(xmax) + ',']],
       [['y', 1], ['-axeln ' + num(ymin) + ' till ' + num(ymax) + '.']]
-    ], [ox - 2 * u, oy - 6 * u]);
+    ]);
     var bPoint = bubble(285, 400, 240, [
       [['Raden med ', 0], ['x', 1], [' = ' + num(xs[0]) + ' och ', 0], ['y', 1],
        [' = ' + num(ys[0])]],
       [['ger punkten (' + num(xs[0]) + ', ' + num(ys[0]) + ').']]
-    ], [tx + tw - 20, ty + 2 * rowH]);
+    ]);
     var bLinjal = bubble(264, 420, 246, [
-      [['Punkterna ligger på en rät linje —']],
-      [['jag drar den med linjalen.']]
-    ], [ox - u, oy - 5 * u]);
-
-    /* ---- steg 1: sambandet skrivs upp ---- */
-    var xx = placeString('y=' + num(k), tx, 46, s * 0.9, F * 0.9, acts);
+      [['Punkterna ligger på en rät linje.']],
+      [['Jag drar den med linjalen.']]
+    ]);
+    /* ---- steg 1: sambandet skrivs upp ----
+     * full F (ingen 0,9-faktor) — huvudrader skrivs lika stort i alla
+     * uppgifter, se KONSEKVENT SKRIFTSTORLEK */
+    var xx = placeString('y=' + num(k), tx, 46, s, F, acts);
     var exA = xx;
-    xx = placeString('x', xx, 46, s * 0.9, F * 0.9, acts);
+    xx = placeString('x', xx, 46, s, F, acts);
     var eqXc = (exA + xx) / 2;               /* mitten av x:et i sambandet */
-    placeString((m >= 0 ? '+' : '-') + Math.abs(m), xx, 46, s * 0.9, F * 0.9, acts);
+    placeString((m >= 0 ? '+' : '-') + Math.abs(m), xx, 46, s, F, acts);
     stepEnd();
 
     /* ---- steg 2: tankebubblan (eget steg) ---- */
@@ -630,7 +802,6 @@
    * ett eget klicksteg (ett "skipklick" ska aldrig hoppa över mer än den
    * rad man är på), och varje tankebubbla är också ett EGET steg. */
   function layoutHage(cfg, F) {
-    F = Math.min(F, 32);
     var s = F / 100;
     var acts = [];
     var padL = 30;
@@ -639,8 +810,8 @@
     function line(p1, p2, color) {
       acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
     }
-    function bubble(x, y, w, lines, tail) {
-      return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
     }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
     /* tankebubbla som EGET steg: bubblan visas ensam och steget slutar;
@@ -654,7 +825,7 @@
     function underline(xEnd, y) {
       pause(220);
       acts.push({ kind: 'stroke',
-        pts: humanize([[padL - 2, y + 0.30 * F], [xEnd - 0.10 * F, y + 0.30 * F]]) });
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
     }
     /* pilspets som följer bågens SLUTRIKTNING: benen läggs symmetriskt
      * kring tangenten vid spetsen, så spetsen pekar dit bågen pekar */
@@ -674,16 +845,20 @@
     var murW = 272, murH = 26;
     var hx = fx + 36, hy = fy + murH, hw = 200, hh = 104;
 
-    var b1 = bubble(346, 40, 236, [
+    /* y=100, INTE högre upp: arkets övre högra hörn är reserverat för
+     * inställningsrutan ("Med/Utan tankar") + helskärmsknappen — en bubbla
+     * där skyms av rutan (samma REGEL som att bubblor aldrig skymmer:
+     * de får heller aldrig SKYMMAS). Bulorna når ~25 px över rektangeln,
+     * så toppen måste ligga under ca y=90. */
+    var b1 = bubble(346, 100, 236, [
       [['Först ritar jag en figur!']],
-      [['Muren blir hagens ena sida —']],
-      [['där behövs inget stängsel.']]
-    ], [fx + murW + 6, fy + 40]);
-    var b2 = bubble(346, 40, 240, [
+      [['Muren blir hagens ena sida.']],
+      [['Där behövs inget stängsel.']]
+    ]);
+    var b2 = bubble(346, 100, 240, [
       [['Stängslet räcker till tre sidor:']],
       [['x', 1], [' + ', 0], ['x', 1], [' + (60 − 2', 0], ['x', 1], [') = 60 meter.']]
-    ], [hx + hw + 10, hy + hh - 20]);
-
+    ]);
     tanke(b1);
     line([fx, fy], [fx + murW, fy]);                       /* muren */
     line([fx, fy + murH], [fx + murW, fy + murH]);
@@ -733,15 +908,26 @@
      * Pedagogiska krullklamrar i blått: "basen" över (60-2x), "höjden"
      * över x, ritade ovanför uttrycket. De fejdas ut som grupp när nästa
      * steg börjar (se braceGroup + fade-eventen precis före tanke(b3b)). */
-    var y = by + 96;
+    var y = by + 114;
     var adv = 1.7 * F;
-    var b3 = bubble(120, y + 22, 226, [
+    /* Bubblorna ligger under senast skrivna rad (2026-07-29) — de tonar ut
+     * innan nästa rad skrivs, så platsen är ledig. LUFT MOT RADEN OVANFÖR:
+     * bulorna når BUBBLE_R[1] = 25 px över molnrektangeln, så toppen läggs
+     * 0,28·F (underlängd) + 33 px under föregående baslinje. Skriv aldrig
+     * egna offsets på fri hand — de blir tajta (påpekat 2026-07-29). */
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    var b3 = bubble(120, bubbleTop(by + 24), 226, [
       [['Rektangelns area:']],
       [['basen · höjden']]
-    ], [250, y - 8]);
+    ]);
     tanke(b3);
     function brace(x0, x1, label) {
-      var pad = 4, yTop = y - 0.60 * F, h = 0.30 * F;
+      /* Klammerns fötter måste ligga med LUFT ovanför tecknen: versaler och
+       * siffror når ~0,86·F över baslinjen (glyfen v=14→100 skalas med F/100)
+       * plus jitter. 1,05·F ger ~6 px marginal — lägre värden lägger
+       * klammern direkt på siffrorna. */
+      var pad = 4, yTop = y - 1.05 * F, h = 0.30 * F;
       var st = { kind: 'stroke', pts: bracePts(x0 - pad, x1 + pad, yTop, h),
                  color: BLUE };
       acts.push(st);
@@ -771,10 +957,12 @@
     stepEnd();
 
     /* ---- steg 3: distributiva bågpilar + utvecklingen ---- */
-    var b3b = bubble(120, y + adv + 22, 252, [
-      [['Distributiva lagen: ', 0], ['x', 1], [':et', 0]],
-      [['multipliceras med båda termerna!']]
-    ], [300, y + adv - 8]);
+    var b3b = bubble(120, bubbleTop(y), 252, [
+      /* inget skiljetecken direkt efter kursiv variabel — "x:et" växer
+        * ihop till "x.et" (påpekat 2026-07-29) */
+      [['Distributiva lagen: ', 0], ['x', 1], [' multipliceras', 0]],
+      [['med båda termerna!']]
+    ]);
     braceGroup.forEach(function (st) { acts.push({ kind: 'fade', ref: st }); });
     tanke(b3b);
     /* bågpil x → 60, sedan termen 60x; bågpil x → 2x, sedan −2x² */
@@ -795,18 +983,22 @@
     placeString('-2x^2', xx, y, s, F, acts);
     stepEnd();
 
-    /* ---- steg 4: svaret på a) ---- */
+    /* ---- steg 4: svaret på a) ----
+     * Skrivs i två placeString så att areafunktionens x-gränser kan sparas
+     * — det är DEN handen ringar in vid insättningen i steg 12. */
     y += adv;
-    var xe = placeString('Svar: A(x)=60x-2x^2', padL, y, s, F, acts);
+    var xSvar = placeString('Svar: ', padL, y, s, F, acts);
+    var xe = placeString('A(x)=60x-2x^2', xSvar, y, s, F, acts);
+    var boxAx = [xSvar, xe, y, F, { ry: 0.82 * F, cy: y - 0.46 * F }];
     underline(xe, y);
     stepEnd();
 
     /* ---- steg 5–6: b) derivera och sätt derivatan till noll ---- */
     y += adv + 18;
-    var b4 = bubble(120, y + 22, 236, [
+    var b4 = bubble(120, bubbleTop(y - adv - 18), 236, [
       [['Största arean? Derivera']],
       [['och sätt ', 0], ["A'", 1], ['(', 0], ['x', 1], [') = 0!']]
-    ], [250, y - 8]);
+    ]);
     tanke(b4);
     placeString("b) A'(x)=60-4x", padL, y, s, F, acts);
     stepEnd();
@@ -816,10 +1008,10 @@
 
     /* ---- steg 7–11: lös ekvationen — ALLA mellansteg, rad för rad ---- */
     y += adv + 18;
-    var b4b = bubble(120, y + 22, 248, [
-      [['Vågskålsmetoden: addera 4', 0], ['x', 1], [',']],
-      [['dela sedan båda leden med 4.']]
-    ], [260, y - 8]);
+    var b4b = bubble(120, bubbleTop(y - adv - 18), 248, [
+      [['Vågskålsmetoden: addera 4', 0], ['x', 1]],
+      [['och dela sedan båda leden med 4.']]
+    ]);
     tanke(b4b);
     xx = placeString('60-4x', padL, y, s, F, acts);
     xx = placeString('+4x', xx, y, s, F, acts, BLUE);
@@ -852,17 +1044,23 @@
     placeString('15=x', padL, y, s, F, acts);
     stepEnd();
     y += adv;
-    placeString('x=15', padL, y, s, F, acts);
+    var xE15 = placeString('x=15', padL, y, s, F, acts);
+    var box15 = [padL, xE15, y, F];
     stepEnd();
 
-    /* ---- steg 12–13: insättning i A(x) ---- */
+    /* ---- steg 12–13: insättning i A(x) ----
+     * INSÄTTNINGSGEST (se REGEL i filhuvudet): ring först runt värdet
+     * "x = 15", sedan runt areafunktionen på svarsraden — därefter
+     * skrivs den insatta raden. Ringarna fejdas ut när raden är klar. */
     y += adv + 18;
-    var b5 = bubble(120, y + 22, 240, [
+    var b5 = bubble(120, bubbleTop(y - adv - 18), 240, [
       [['Hur stor är arean då?']],
       [['In med ', 0], ['x', 1], [' = 15 i ', 0], ['A', 1], ['(', 0], ['x', 1], [')!']]
-    ], [280, y - 8]);
+    ]);
     tanke(b5);
+    var ringar = substRings(acts, [box15, boxAx]);
     placeString('A(15)=60·15-2·15^2', padL, y, s, F, acts);
+    fadeRings(acts, ringar);
     stepEnd();
     y += adv;
     placeString('=900-450=450', padL, y, s, F, acts);
@@ -870,10 +1068,10 @@
 
     /* ---- steg 14–15: karaktär + svar ---- */
     y += adv + 18;
-    var b6 = bubble(120, y + 22, 244, [
+    var b6 = bubble(120, bubbleTop(y - adv - 18), 244, [
       [['Max eller min? Kolla tecknet på']],
       [['andraderivatan: negativt = max!']]
-    ], [270, y - 8]);
+    ]);
     tanke(b6);
     placeString("A''(x)=−4<0⇒max", padL, y, s, F, acts);
     stepEnd();
@@ -885,6 +1083,43 @@
     return { acts: acts, contentW: 566, lastBase: y + 14, padL: padL };
   }
 
+  /* ---------------- mätvärdesklammer (se REGEL i filhuvudet) ---------
+   * Skriver alla mätvärden i en hög klammer [ … ], ett värde per rad,
+   * efter att den sökta variabeln lösts ut och INNAN värdena sätts in.
+   * rows = strängar som 'm_B=30 kg' — behövs SI-omvandling skrivs den ut
+   * i raden ('l=25 cm=0,25 m'). Returnerar { boxes, yEnd } där boxes[i]
+   * är rad i:s ringbox för insättningsgesten och yEnd sista radens
+   * baslinje. Klammern skrivs som handen gör det: vänsterklammern först,
+   * sedan raderna uppifrån och ned, sist högerklammern. */
+  function valueBracket(acts, rows, x0, yTop, s, F) {
+    var rs = 0.8;                            /* något mindre än huvudraderna */
+    var ss = s * rs, sF = F * rs;
+    var rowAdv = 1.5 * sF;
+    var widths = rows.map(function (r) { return stringAdvance(r, ss, sF); });
+    var wMax = Math.max.apply(null, widths);
+    var tick = 0.34 * sF;                    /* klammerklackarnas längd */
+    var yA = yTop - 0.95 * sF;               /* klammerns över-/underkant */
+    var yB = yTop + (rows.length - 1) * rowAdv + 0.4 * sF;
+    var xT = x0 + tick + 0.45 * sF;          /* radernas vänsterkant */
+    var xR = xT + wMax + 0.45 * sF + tick;   /* högerklammerns streck */
+    /* vänsterklammern [ : klack, lodrätt streck, klack */
+    acts.push({ kind: 'stroke', pts: humanize([[x0 + tick, yA], [x0, yA]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[x0, yA], [x0, yB]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[x0, yB], [x0 + tick, yB]]) });
+    acts.push({ kind: 'pause', ms: 160 });
+    var boxes = rows.map(function (r, i) {
+      var yi = yTop + i * rowAdv;
+      placeString(r, xT, yi, ss, sF, acts);
+      acts.push({ kind: 'pause', ms: 140 });
+      return [xT, xT + widths[i], yi, sF];
+    });
+    /* högerklammern ] */
+    acts.push({ kind: 'stroke', pts: humanize([[xR - tick, yA], [xR, yA]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[xR, yA], [xR, yB]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[xR, yB], [xR - tick, yB]]) });
+    return { boxes: boxes, yEnd: yTop + (rows.length - 1) * rowAdv };
+  }
+
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
    * Exempel 3 ur Fysik nivå 2, 1.1 Kraftmoment (momentjämvikt): pappa
    * 80 kg och barn 30 kg på en gungbräda. Handmetoden: rita först det
@@ -894,7 +1129,6 @@
    * rad för rad. Varje rad/figurtillägg är ett eget klicksteg, och
    * varje tankebubbla är också ett EGET steg. */
   function layoutGunga(cfg, F) {
-    F = Math.min(F, 32);
     var s = F / 100;
     var acts = [];
     var padL = 30;
@@ -914,8 +1148,19 @@
              [p1[0] + dx * t1, p1[1] + dy * t1]);
       }
     }
-    function bubble(x, y, w, lines, tail) {
-      return { bubble: 1, x: x, y: y, w: w, lines: lines, tail: tail, wins: [] };
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    /* figurbubbla: läggs UNDER figuren (användarbeslut 2026-07-29), i den
+     * ännu tomma ytan där räkneraderna sedan hamnar — bubblan är ett eget
+     * steg och tonar ut innan något skrivs där. Tidigare pressades den in
+     * bredvid figuren i högermarginalen, men då hamnade molnet ändå på
+     * brädan och etiketten "30 kg": hellre under figuren än intryckt
+     * bredvid den. Samma x som räknebubblorna, så bubblorna vandrar
+     * lodrätt nedför arket i stället för att hoppa i sidled. */
+    var FIGB_Y = 300;                        /* under figurens måttlinjer */
+    function figurBubble(w, lines) {
+      return bubble(120, FIGB_Y, w, lines);
     }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
     /* tankebubbla som EGET steg: bubblan visas ensam och steget slutar;
@@ -929,7 +1174,7 @@
     function underline(xEnd, y) {
       pause(220);
       acts.push({ kind: 'stroke',
-        pts: humanize([[padL - 2, y + 0.30 * F], [xEnd - 0.10 * F, y + 0.30 * F]]) });
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
     }
     function arrowHead(tipX, tipY, fromX, fromY, len, color) {
       var dx = tipX - fromX, dy = tipY - fromY;
@@ -950,6 +1195,14 @@
                   cy + Math.sin(a) * (r + rnd(-0.8, 0.8))]);
       }
       acts.push({ kind: 'stroke', pts: pts });
+    }
+    /* stryk bort en faktor: snett streck nedifrån vänster upp åt höger
+     * genom tecknet (x0 = teckenets vänsterkant, w = dess bredd, yBas =
+     * radens baslinje). Går en bit utanför glyfen i båda ändar, som när
+     * man stryker för hand. */
+    function strikeThrough(x0, w, yBas) {
+      line([x0 - 0.16 * F, yBas + 0.32 * F],
+           [x0 + w + 0.16 * F, yBas - 0.68 * F], BLUE);
     }
     /* bråk med rakt streck; col färgar streck + nämnare (division i blått) */
     function fracH(numS, denS, x0, yb, col) {
@@ -973,11 +1226,13 @@
     var dimY = 258;                          /* måttlinjens nivå */
 
     /* ---- steg 1: rita det vi vet — bräda, vridningspunkt, personer ---- */
-    var b1 = bubble(398, 40, 250, [
-      [['Först en enkel figur —']],
-      [['streckgubbar duger gott!']],
+    /* Kort och saklig: kommentera VAD figuren visar, inte att en enkel
+     * figur duger (användarbeslut 2026-07-29 — principen stämmer, men
+     * den behöver inte skrivas ut). */
+    var b1 = figurBubble(250, [
+      [['Ritar en figur.']],
       [['Pricken är vridningspunkten.']]
-    ], [250, 130]);
+    ]);
     tanke(b1);
     line([plankL, plankY], [plankR, plankY]);            /* brädan */
     line([plankL, plankB], [plankR, plankB]);
@@ -995,8 +1250,13 @@
     line([papX, 118], [papX + 15, 146]);                 /* arm mot brädan */
     line([papX, 147], [papX + 18, 147]);                 /* lår */
     line([papX + 18, 147], [papX + 19, 168]);            /* underben */
-    var w80 = stringAdvance('80 kg', s * 0.55, F * 0.55);
-    placeString('80 kg', papX - w80 / 2, 74, s * 0.55, F * 0.55, acts, BLUE);
+    /* KÄNDA storheter i figuren skrivs med BETECKNING framför värdet
+      * (m_P = 80 kg), okända med enbart beteckningen (l_P) — se REGEL i
+      * filhuvudet. */
+    var w80 = stringAdvance('m_P=80 kg', s * 0.55, F * 0.55);
+    placeString('m_P=80 kg', papX - w80 / 2, 74, s * 0.55, F * 0.55, acts, BLUE);
+    /* figurens mätvärden ringas in vid insättningen (REGEL: insättning) */
+    var box80 = [papX - w80 / 2, papX + w80 / 2, 74, F * 0.55];
     pause(150);
     /* barnet (mindre streckgubbe, höger, vänd åt vänster) */
     circle(barnX, 109, 10);
@@ -1004,17 +1264,18 @@
     line([barnX, 126], [barnX - 12, 146]);
     line([barnX, 147], [barnX - 14, 147]);
     line([barnX - 14, 147], [barnX - 15, 163]);
-    var w30 = stringAdvance('30 kg', s * 0.55, F * 0.55);
-    placeString('30 kg', barnX - w30 / 2, 90, s * 0.55, F * 0.55, acts, BLUE);
+    var w30 = stringAdvance('m_B=30 kg', s * 0.55, F * 0.55);
+    placeString('m_B=30 kg', barnX - w30 / 2, 90, s * 0.55, F * 0.55, acts, BLUE);
+    var box30 = [barnX - w30 / 2, barnX + w30 / 2, 90, F * 0.55];
     stepEnd();
 
     /* ---- steg 2: tillägg — tyngdkrafterna som skalenliga pilar ---- */
-    var b2 = bubble(398, 40, 252, [
+    var b2 = figurBubble(252, [
       [['Tyngdkrafterna ', 0], ['F', 1], [' = ', 0], ['m', 1], [' · ', 0],
        ['g', 1], [' vrider']],
       [['brädan åt varsitt håll. Pappa är']],
-      [['tyngre — hans pil ritas längre!']]
-    ], [180, 195]);
+      [['tyngre, så hans pil ritas längre!']]
+    ]);
     tanke(b2);
     /* pil ∝ massa: 1 px per kg — pappas pil ritas från tyngdpunkten.
      * Kraftvektorn (skaft + spets) och dess etikett är en vektor/tal-
@@ -1032,11 +1293,11 @@
     stepEnd();
 
     /* ---- steg 3: tillägg — hävarmarna som måttlinjer ---- */
-    var b3 = bubble(398, 40, 252, [
+    var b3 = figurBubble(252, [
       [['Hävarmen är avståndet från']],
       [['vridningspunkten till kraftens']],
       [['riktningslinje.']]
-    ], [260, 250]);
+    ]);
     tanke(b3);
     dash([pivX, plankB + 46], [pivX, dimY]);             /* projektionslinjer (grafit) */
     dash([papX, 232], [papX, dimY]);
@@ -1046,14 +1307,17 @@
     line([papX + 10, dimY], [pivX - 12, dimY], BLUE);    /* måttlinje vänster */
     arrowHead(papX, dimY, papX + 16, dimY, 9, BLUE);
     arrowHead(pivX - 4, dimY, pivX - 20, dimY, 9, BLUE);
-    var wLp = stringAdvance('l_P=?', s * 0.62, F * 0.62);
-    placeString('l_P=?', (papX + pivX) / 2 - 9 - wLp / 2, 282, s * 0.62, F * 0.62, acts, BLUE);
+    /* OKÄND storhet: bara beteckningen, inget "= ?" efter */
+    var wLp = stringAdvance('l_P', s * 0.62, F * 0.62);
+    placeString('l_P', (papX + pivX) / 2 - 9 - wLp / 2, 282, s * 0.62, F * 0.62, acts, BLUE);
     pause(150);
     line([pivX + 12, dimY], [barnX - 10, dimY], BLUE);   /* måttlinje höger */
     arrowHead(pivX + 4, dimY, pivX + 20, dimY, 9, BLUE);
     arrowHead(barnX, dimY, barnX - 16, dimY, 9, BLUE);
     var wLb = stringAdvance('l_B=2,0 m', s * 0.62, F * 0.62);
-    placeString('l_B=2,0 m', (pivX + barnX) / 2 + 9 - wLb / 2, 282, s * 0.62, F * 0.62, acts, BLUE);
+    var xLb = (pivX + barnX) / 2 + 9 - wLb / 2;
+    placeString('l_B=2,0 m', xLb, 282, s * 0.62, F * 0.62, acts, BLUE);
+    var boxLb = [xLb, xLb + wLb, 282, F * 0.62];
     stepEnd();
 
     /* ---- beräkningen, rad för rad ---- */
@@ -1061,65 +1325,119 @@
     var adv = 1.7 * F;
     var bx = 340, bw = 290;
 
-    var b4 = bubble(120, y + 24, bw, [
+    /* Bubblorna ligger under senast skrivna rad (önskemål 2026-07-29) —
+     * de är egna steg som tonar ut innan nästa rad skrivs, så de får
+     * ligga där raden sedan hamnar. LUFT MOT RADEN OVANFÖR: molnbulorna
+     * når BUBBLE_R[1] = 25 px över molnrektangeln, så toppen läggs
+     * 0,28·F (radens underlängd) + 33 px under föregående baslinje —
+     * annars ligger bubblan tajt mot texten (påpekat 2026-07-29).
+     * bubbleTop() räknar ut det; skriv aldrig egna offsets på fri hand. */
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    var b4 = bubble(120, bubbleTop(287), bw, [
       [['Momentjämvikt: momentet moturs']],
       [['är lika stort som momentet medurs.']]
-    ], [160, y - 6]);
+    ]);
     tanke(b4);
-    placeString('M_1=M_2', padL, y, s, F, acts);
+    /* INLEDANDE MOTIVERING (se REGEL i filhuvudet): motiveringen skrivs i
+     * grafit och formeln DIREKT UNDER — allt i SAMMA klicksteg. 1,8·F ned
+     * till formelraden så att momentpilarna går fria från j/g-staplarna. */
+    placeString('Momentjämvikt gäller, så', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.8 * F;
+    placeString('M↺=M↻', padL, y, s, F, acts);
     stepEnd();
 
     y += adv;
-    var b5 = bubble(120, y + 24, bw, [
-      [['Varje moment är ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0],
-       ['l', 1], [' —', 0]],
-      [['kraften gånger hävarmen.']]
-    ], [200, y - 6]);
+    var b5 = bubble(120, bubbleTop(y - adv), bw, [
+      /* skiljetecken ALDRIG direkt efter en kursiv variabel — kursiva l
+        * och g växer ihop med kolon/komma till en obegriplig glyf. Låt
+        * formeln avsluta raden i stället. */
+      [['Ett moment är kraften gånger']],
+      [['hävarmen: ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0], ['l', 1]]
+    ]);
     tanke(b5);
     placeString('F_P·l_P=F_B·l_B', padL, y, s, F, acts);
     stepEnd();
 
     y += adv;
-    var b6 = bubble(120, y + 24, bw, [
-      [['Tyngdkraften är ', 0], ['F', 1], [' = ', 0], ['m', 1], [' · ', 0],
-       ['g', 1], [' —', 0]],
-      [['jag byter ut båda krafterna.']]
-    ], [220, y - 6]);
+    var b6 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Tyngdkraften byter jag ut mot']],
+      [['F', 1], [' = ', 0], ['m', 1], [' · ', 0], ['g', 1],
+       [' i båda leden.', 0]]
+    ]);
     tanke(b6);
     placeString('m_P·g·l_P=m_B·g·l_B', padL, y, s, F, acts);
     stepEnd();
 
-    y += adv + 0.55 * F;
-    var b7 = bubble(140, y + 52, bw, [
-      [['g', 1], [' finns i båda leden —', 0]],
-      [['jag delar båda leden med ', 0], ['g', 1], ['!', 0]]
-    ], [230, y + 20]);
+    /* STRYKA BORT EN GEMENSAM FAKTOR (fysikkonvention, se REGEL i
+     * filhuvudet): g finns som faktor i båda leden — i stället för att
+     * skriva ut divisionen som bråk stryks g helt enkelt bort i båda led,
+     * direkt i den redan skrivna raden. Blåpennan, eftersom det är något
+     * som görs på BÅDA sidor om likhetstecknet. */
+    var yG = y;                                    /* raden där g står */
+    var gx1 = padL + stringAdvance('m_P·', s, F);
+    var gx2 = padL + stringAdvance('m_P·g·l_P=m_B·', s, F);
+    var gw = stringAdvance('g', s, F) - 1.5;
+    /* svansen pekar NEDÅT i den ännu tomma ytan (som de andra rad-
+     * bubblorna) — riktad mot raden ovanför skulle tankecirklarna lägga
+     * sig ovanpå den skrivna raden (REGEL: bubblor skymmer aldrig något) */
+    var b7 = bubble(140, bubbleTop(yG), bw, [
+      [['g', 1], [' finns som faktor i båda leden,', 0]],
+      [['så den kan divideras bort!']]
+    ]);
     tanke(b7);
-    var xx = fracH('m_P·g·l_P', 'g', padL, y, BLUE);
-    xx = placeString('=', xx, y, s, F, acts);
-    fracH('m_B·g·l_B', 'g', xx, y, BLUE);
+    strikeThrough(gx1, gw, yG);
+    pause(260);
+    strikeThrough(gx2, gw, yG);
     stepEnd();
 
-    y += adv + 0.65 * F;
+    y += adv;
     placeString('m_P·l_P=m_B·l_B', padL, y, s, F, acts);
     stepEnd();
 
     y += adv + 0.55 * F;
-    var b8 = bubble(140, y + 52, bw, [
+    var b8 = bubble(140, bubbleTop(y - adv), bw, [
       [['Dela med pappans massa så att']],
       [['hävarmen blir ensam kvar.']]
-    ], [220, y + 20]);
+    ]);
     tanke(b8);
-    xx = placeString('l_P=', padL, y, s, F, acts);
-    fracH('m_B·l_B', 'm_P', xx, y);
+    var xx = placeString('l_P=', padL, y, s, F, acts);
+    var xFormel = fracH('m_B·l_B', 'm_P', xx, y);
+    /* hela hävarmsformeln — det uttryck värdena sätts in i (REGEL) */
+    var boxFormel = [padL, xFormel, y, F, { ry: 1.15 * F, cy: y - 0.32 * F }];
     stepEnd();
 
+    /* ---- mätvärdesklammern (se REGEL i filhuvudet): alla mätvärden
+     * skrivs upp i en klammer innan de sätts in — omvandlade till SI-
+     * enheter vid behov (här är de redan i kg och m). Värdena hämtas ur
+     * figuren, så figurens etiketter ringas in medan klammern skrivs. */
+    y += adv + 0.9 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Innan insättningen: skriv upp alla']],
+      [['mätvärden i en klammer, omgjorda']],
+      [['till SI-enheter när det behövs!']]
+    ]);
+    tanke(bK);
+    var figRingar = substRings(acts, [box30, boxLb, box80]);
+    var klam = valueBracket(acts, ['m_B=30 kg', 'l_B=2,0 m', 'm_P=80 kg'],
+                            padL, y, s, F);
+    fadeRings(acts, figRingar);
+    stepEnd();
+    y = klam.yEnd;
+
     y += adv + 1.2 * F;
-    var b9 = bubble(140, y + 52, bw, [
-      [['In med värdena: 30 kg och 2,0 m']],
-      [['för barnet, 80 kg för pappa.']]
-    ], [240, y + 20]);
+    var b9 = bubble(140, bubbleTop(klam.yEnd + 0.32 * F), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
     tanke(b9);
+    /* UNDANTAG från insättningsgesten (användarbeslut 2026-07-29): när
+     * värdena hämtas ur MÄTVÄRDESKLAMMERN ringas de INTE in. Klammern är
+     * i sig gesten — den samlar värdena direkt ovanför insättningsraden,
+     * så ringarna tillför inget och skräpar bara ned raderna. Ringar
+     * används alltså när värdena står utspridda (i figuren, i en tidigare
+     * rad), inte när de redan står uppradade i en klammer. */
     xx = placeString('l_P=', padL, y, s, F, acts);
     xx = fracH('30·2,0', '80', xx, y);
     xx = placeString('=', xx, y, s, F, acts);
@@ -1128,12 +1446,420 @@
     stepEnd();
 
     y += adv + 0.65 * F;
-    var b10 = bubble(120, y + 30, bw, [
-      [['Pappa ska sitta närmare än barnet —']],
-      [['rimligt, han är ju tyngre!']]
-    ], [200, y - 6]);
+    /* RIMLIGHETSBEDÖMNING (se REGEL i filhuvudet): tankebubblan prövar
+     * alltid svarets rimlighet INNAN svarsraden skrivs. */
+    var b10 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Pappa ska sitta närmare än barnet.']],
+      [['Rimligt, han är ju tyngre!']]
+    ]);
     tanke(b10);
-    var xe = placeString('Svar: l_P=0,75 m', padL, y, s, F, acts);
+    /* SVARSRAD, fysik: bara mätetal + enhet — ingen beteckning framför
+     * (användarbeslut 2026-07-29). "Svar: 0,75 m", inte "Svar: l_P=0,75 m". */
+    var xe = placeString('Svar: 0,75 m', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kraftmoment "skiftnyckeln" ----------------
+   * Exempel 1 ur Fysik nivå 2, 1.1 Kraftmoment: en kraft på 34 N verkar
+   * vinkelrätt mot en skiftnyckel 0,25 m från muttern. Handmetoden: rita
+   * det man vet (skaft, mutter med prick = vridningspunkten), lägg till
+   * kraftpilen och hävarmens måttlinje i blått, och räkna sedan rad för
+   * rad med mätvärdesklammer före insättningen. */
+  function layoutSkiftnyckel(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 265;                       /* under figuren (se gungbrädan) */
+    function figurBubble(w, lines) {
+      return bubble(120, FIGB_Y, w, lines);
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function circle(cx, cy, r) {
+      var pts = [];
+      for (var i = 0; i <= 10; i++) {
+        var a = -1.2 + (i / 10) * Math.PI * 2.12;
+        pts.push([cx + Math.cos(a) * (r + rnd(-0.8, 0.8)),
+                  cy + Math.sin(a) * (r + rnd(-0.8, 0.8))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri --- */
+    var skaftT = 130, skaftB = 146;        /* skaftets över-/underkant */
+    var skaftL = 110;                      /* vänster ände (handens grepp) */
+    var mutX = 356, mutY = 138, mutR = 16; /* muttern = vridningspunkten */
+    var gripX = 130;                       /* kraftens angreppspunkt */
+    var dimY = 80;                         /* måttlinjens nivå (ovanför) */
+
+    /* ---- steg 1: rita det vi vet — skaft, mutter, vridningspunkt ---- */
+    var b1 = figurBubble(250, [
+      [['Ritar en figur. Pricken i muttern']],
+      [['är vridningspunkten.']]
+    ]);
+    tanke(b1);
+    line([skaftL, skaftT], [342, skaftT]);               /* skaftet */
+    line([skaftL, skaftB], [342, skaftB]);
+    line([skaftL, skaftT], [skaftL, skaftB]);
+    pause(120);
+    circle(mutX, mutY, mutR);                            /* muttern */
+    acts.push({ kind: 'stroke', pts: dotPts(mutX, mutY) }); /* vridningspunkt */
+    stepEnd();
+
+    /* ---- steg 2: tillägg — kraften och vridriktningen ---- */
+    var b2 = figurBubble(252, [
+      [['Kraften drar skaftet nedåt, så']],
+      [['skiftnyckeln vrider moturs.']]
+    ]);
+    tanke(b2);
+    /* kraftpil + värde är vektor/tal-annotering (se REGEL) → blått */
+    line([gripX, skaftB], [gripX, 215 - 10], BLUE);
+    arrowHead(gripX, 215, gripX, skaftB, 10, BLUE);
+    var wF = stringAdvance('F=34 N', s * 0.62, F * 0.62);
+    placeString('F=34 N', gripX + 12, 222, s * 0.62, F * 0.62, acts, BLUE);
+    var boxF = [gripX + 12, gripX + 12 + wF, 222, F * 0.62];
+    pause(200);
+    /* vridriktningspil (moturs) — del av scenen, grafit */
+    var arc = [], th;
+    for (th = -55; th <= 65; th += 15) {
+      var a = th * Math.PI / 180;
+      arc.push([mutX + 27 * Math.cos(a), mutY - 27 * Math.sin(a)]);
+    }
+    acts.push({ kind: 'stroke', pts: arc });
+    var tipA = arc[arc.length - 1];
+    arrowHead(tipA[0], tipA[1], tipA[0] + 18.1, tipA[1] + 8.5, 9);
+    stepEnd();
+
+    /* ---- steg 3: tillägg — hävarmen som måttlinje ---- */
+    var b3 = figurBubble(252, [
+      [['Kraften är vinkelrät mot skaftet,']],
+      [['så hävarmen är hela avståndet']],
+      [['in till vridningspunkten.']]
+    ]);
+    tanke(b3);
+    dash([gripX, skaftT - 4], [gripX, dimY]);            /* projektionslinjer */
+    dash([mutX, mutY - mutR - 4], [mutX, dimY]);
+    pause(150);
+    /* måttpil + hävarmsvärde är vektor/tal (se REGEL) → blått */
+    line([gripX + 10, dimY], [mutX - 12, dimY], BLUE);
+    arrowHead(gripX, dimY, gripX + 16, dimY, 9, BLUE);
+    arrowHead(mutX - 4, dimY, mutX - 20, dimY, 9, BLUE);
+    var wL = stringAdvance('l=0,25 m', s * 0.62, F * 0.62);
+    var xL = (gripX + mutX) / 2 - wL / 2;
+    placeString('l=0,25 m', xL, 64, s * 0.62, F * 0.62, acts, BLUE);
+    var boxL = [xL, xL + wL, 64, F * 0.62];
+    stepEnd();
+
+    /* ---- beräkningen, rad för rad ---- */
+    var y = 340;
+    var adv = 1.7 * F;
+    var bw = 290;
+
+    var b4 = bubble(120, bubbleTop(230), bw, [
+      [['Momentet är kraften gånger']],
+      [['hävarmen: ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0], ['l', 1]]
+    ]);
+    tanke(b4);
+    /* INLEDANDE MOTIVERING (se REGEL): motivering + formel i SAMMA steg */
+    placeString('Formeln för kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.45 * F;
+    placeString('M=F·l', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL): värdena hämtas ur figuren,
+     * så figurens etiketter ringas in medan klammern skrivs ---- */
+    y += adv + 0.9 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Innan insättningen: skriv upp alla']],
+      [['mätvärden i en klammer, omgjorda']],
+      [['till SI-enheter när det behövs!']]
+    ]);
+    tanke(bK);
+    var figRingar = substRings(acts, [boxF, boxL]);
+    var klam = valueBracket(acts, ['F=34 N', 'l=0,25 m'], padL, y, s, F);
+    fadeRings(acts, figRingar);
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.2 * F;
+    var b9 = bubble(140, bubbleTop(klam.yEnd + 0.32 * F), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(b9);
+    /* värden ur klammern ringas INTE in (se UNDANTAG i filhuvudet) */
+    placeString('M=34·0,25=8,5 Nm', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.65 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var b10 = bubble(120, bubbleTop(y - adv), bw, [
+      [['En fjärdedel av 34 är ungefär']],
+      [['8,5. Och kraften vrider moturs,']],
+      [['så momentet är positivt!']]
+    ]);
+    tanke(b10);
+    var xe = placeString('Svar: 8,5 Nm moturs', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kraftmoment "spettet mot stenen" ----------------
+   * Exempel 2 ur Fysik nivå 2, 1.1 Kraftmoment: ett spett på 1,0 m lutar
+   * 45° mot marken, en kraft på 800 N verkar lodrätt nedåt i övre änden.
+   * Poängen: hävarmen är INTE spettets längd utan det vinkelräta
+   * avståndet från vridningspunkten till kraftens riktningslinje —
+   * trigonometri (cos 45°) före insättningen. */
+  function layoutSpett(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 315;                       /* under figurens måttlinje */
+    function figurBubble(w, lines) {
+      return bubble(120, FIGB_Y, w, lines);
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+    /* bråk med rakt streck (samma som gungbrädan) */
+    function fracH(numS, denS, x0, yb, col) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: col || null });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts, col || null);
+      return x0 + w + 1.5;
+    }
+
+    /* --- figurens geometri: 45°-lutning, pivot vid stenens fot --- */
+    var groundY = 200, pivX = 115, topX = 235, topY = 80;
+    var dimY = 248;                          /* måttlinjens nivå */
+
+    /* ---- steg 1: rita det vi vet — mark, sten, spett, vinkel ---- */
+    var b1 = figurBubble(252, [
+      [['Ritar en figur. Pricken vid']],
+      [['stenens fot är vridningspunkten.']]
+    ]);
+    tanke(b1);
+    line([50, groundY], [420, groundY]);                 /* marken */
+    pause(120);
+    acts.push({ kind: 'stroke',                          /* stenen */
+      pts: [[62, groundY], [68, 182], [82, 170], [100, 172],
+            [112, 186], [117, groundY]] });
+    pause(120);
+    line([pivX, groundY], [topX, topY]);                 /* spettet */
+    acts.push({ kind: 'stroke', pts: dotPts(pivX, groundY) }); /* vridningspunkt */
+    pause(150);
+    var arc = [], th;                                    /* 45°-bågen */
+    for (th = 0; th <= 45; th += 15) {
+      var a = th * Math.PI / 180;
+      arc.push([pivX + 30 * Math.cos(a), groundY - 30 * Math.sin(a)]);
+    }
+    acts.push({ kind: 'stroke', pts: arc });
+    /* givna värden i figuren är tal-anteckningar (se REGEL) → blått */
+    placeString('45°', 152, 191, s * 0.55, F * 0.55, acts, BLUE);
+    pause(150);
+    placeString('1,0 m', 118, 112, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- steg 2: tillägg — kraften ---- */
+    var b2 = figurBubble(252, [
+      [['Kraften 800 N drar lodrätt']],
+      [['nedåt i spettets övre ände.']]
+    ]);
+    tanke(b2);
+    line([topX, topY], [topX, 150 - 10], BLUE);
+    arrowHead(topX, 150, topX, topY, 10, BLUE);
+    var wF = stringAdvance('F=800 N', s * 0.62, F * 0.62);
+    placeString('F=800 N', topX + 14, 158, s * 0.62, F * 0.62, acts, BLUE);
+    var boxF = [topX + 14, topX + 14 + wF, 158, F * 0.62];
+    stepEnd();
+
+    /* ---- steg 3: tillägg — riktningslinjen och hävarmen ---- */
+    var b3 = figurBubble(252, [
+      [['Hävarmen är inte 1,0 m! Den är']],
+      [['avståndet från vridningspunkten']],
+      [['till kraftens riktningslinje.']]
+    ]);
+    tanke(b3);
+    dash([topX, 153], [topX, dimY - 4]);                 /* riktningslinjen */
+    pause(120);
+    line([topX - 9, groundY], [topX - 9, groundY - 9]);  /* rät vinkel-markering */
+    line([topX - 9, groundY - 9], [topX, groundY - 9]);
+    pause(120);
+    dash([pivX, groundY + 5], [pivX, dimY - 4]);         /* projektion från pivoten */
+    pause(150);
+    line([pivX + 10, dimY], [topX - 12, dimY], BLUE);    /* måttlinjen */
+    arrowHead(pivX, dimY, pivX + 16, dimY, 9, BLUE);
+    arrowHead(topX - 4, dimY, topX - 20, dimY, 9, BLUE);
+    /* OKÄND storhet: bara beteckningen (se REGEL) */
+    placeString('l', (pivX + topX) / 2 - 5, 276, s * 0.62, F * 0.62, acts, BLUE);
+    stepEnd();
+
+    /* ---- beräkningen, rad för rad ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 290;
+
+    var b4 = bubble(120, bubbleTop(280), bw, [
+      [['Momentet är kraften gånger']],
+      [['hävarmen: ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0], ['l', 1]]
+    ]);
+    tanke(b4);
+    placeString('Formeln för kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.45 * F;
+    placeString('M=F·l', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- hävarmen ur triangeln ---- */
+    y += adv + 0.34 * F;
+    var b5 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Rätvinklig triangel! ', 0], ['l', 1], [' är närliggande', 0]],
+      [['katet till 45° och hypotenusan']],
+      [['är 1,0 m. Då används cosinus.']]
+    ]);
+    tanke(b5);
+    var xx = placeString('cos 45°=', padL, y, s, F, acts);
+    fracH('l', '1,0', xx, y);
+    stepEnd();
+
+    y += adv + 0.7 * F;
+    xx = placeString('l=1,0·cos 45°≈', padL, y, s, F, acts);
+    var x707 = placeString('0,707 m', xx, y, s, F, acts);
+    var box707 = [xx, x707, y, F];
+    stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL): kraften hämtas ur figuren och
+     * hävarmen ur raden ovanför — båda ringas in medan klammern skrivs */
+    y += adv + 0.9 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Innan insättningen: skriv upp alla']],
+      [['mätvärden i en klammer, omgjorda']],
+      [['till SI-enheter när det behövs!']]
+    ]);
+    tanke(bK);
+    var figRingar = substRings(acts, [boxF, box707]);
+    var klam = valueBracket(acts, ['F=800 N', 'l≈0,707 m'], padL, y, s, F);
+    fadeRings(acts, figRingar);
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.2 * F;
+    var b9 = bubble(140, bubbleTop(klam.yEnd + 0.32 * F), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(b9);
+    placeString('M=800·0,707=565,6 Nm', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bAvr = bubble(140, bubbleTop(y - adv), bw, [
+      [['Mätvärdena har två gällande']],
+      [['siffror, så jag avrundar till']],
+      [['570 Nm. Det är 0,57 kNm.']]
+    ]);
+    tanke(bAvr);
+    placeString('M≈570 Nm=0,57 kNm', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.65 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var b10 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Hävarmen är kortare än spettet,']],
+      [['så momentet blir mindre än']],
+      [['800 Nm. Rimligt!']]
+    ]);
+    tanke(b10);
+    var xe = placeString('Svar: 0,57 kNm', padL, y, s, F, acts);
     underline(xe, y);
     stepEnd();
 
@@ -1159,6 +1885,73 @@
       pts.push([cx + Math.cos(a) * (rx + rnd(-2, 2)),
                 cy + Math.sin(a) * (ry + rnd(-1.5, 1.5))]);
     }
+    return pts;
+  }
+
+  /* ---------------- insättningsgest (se REGEL i filhuvudet) ----------
+   * Ringen läggs runt ett textparti på en rad: x0/x1 = partiets vänstra
+   * och högra kant, yBase = radens baslinje. `opt` = { ry, cy } när
+   * partiet är högre än en vanlig rad (bråk, exponenter) eller sitter
+   * på annan höjd (figuretiketter). */
+  function ringBox(x0, x1, yBase, F, opt) {
+    opt = opt || {};
+    var ry = opt.ry != null ? opt.ry : 0.72 * F;
+    var cy = opt.cy != null ? opt.cy : yBase - 0.40 * F;
+    return ringPts((x0 + x1) / 2, cy, (x1 - x0) / 2 + 0.18 * F, ry);
+  }
+
+  /* Ritar insättningsgesten: en ring per box i ordning (först värdet/
+   * värdena, sist uttrycket de sätts in i) med blåpennan, med en kort
+   * paus mellan ringarna så att ögat hinner följa med. Returnerar
+   * stroke-listan — fejda ut den med fadeRings() när den insatta raden
+   * är skriven. box = [x0, x1, yBase, F, opt?]. */
+  function substRings(acts, boxes) {
+    var rings = [];
+    boxes.forEach(function (b, i) {
+      if (i) acts.push({ kind: 'pause', ms: 240 });
+      var st = { kind: 'stroke', pts: ringBox(b[0], b[1], b[2], b[3], b[4]),
+                 color: BLUE };
+      acts.push(st);
+      rings.push(st);
+    });
+    acts.push({ kind: 'pause', ms: 420 });
+    return rings;
+  }
+
+  function fadeRings(acts, rings) {
+    acts.push({ kind: 'pause', ms: 260 });
+    rings.forEach(function (st) { acts.push({ kind: 'fade', ref: st }); });
+  }
+
+  /* Understrykning av svarsrader: en avlång "rektangel" med mycket låg
+   * höjd — som när man ramar in svaret med två tätt liggande streck —
+   * i stället för ett enkelt streck (uttryckligt önskemål 2026-07-29).
+   * Ritas som EN obruten penndragning: topp → höger kortsida → botten →
+   * vänster kortsida, tillbaka till start.
+   *
+   * ⚠️ Perimetern samplas JÄMNT (~16 px mellan punkterna) — dubblera
+   * ALDRIG hörnpunkten för att få skarpt hörn. pathFrom() är en uniform
+   * Catmull-Rom: kontrollpunkten i p1 är (p2 − p0)/6, så ett
+   * nollängdssegment (hörnet två gånger) ger en kontrollpunkt som sticker
+   * ut ~halva lådbredden/6 utanför hörnet, och kurvan gör en tydlig tagg
+   * utanför lådan (syntes som ett utstick nere till vänster). Med jämnt
+   * avstånd blir överslaget bara några px. Jittret per punkt är själva
+   * poängen — strecket ska se handdraget ut. */
+  function underlinePts(x0, x1, y, F) {
+    var yTop = y + 0.26 * F, yBot = yTop + 0.15 * F;
+    var horn = [[x0, yTop], [x1, yTop], [x1, yBot], [x0, yBot], [x0, yTop]];
+    var steg = 16, pts = [];
+    for (var i = 0; i < horn.length - 1; i++) {
+      var a = horn[i], b = horn[i + 1];
+      var n = Math.max(1, Math.round(
+        Math.hypot(b[0] - a[0], b[1] - a[1]) / steg));
+      for (var k = 0; k < n; k++) {
+        var t = k / n;
+        pts.push([a[0] + (b[0] - a[0]) * t + rnd(-0.55, 0.55),
+                  a[1] + (b[1] - a[1]) * t + rnd(-0.45, 0.45)]);
+      }
+    }
+    pts.push([x0 + rnd(-0.4, 0.4), yTop + rnd(-0.4, 0.4)]);
     return pts;
   }
 
@@ -1284,52 +2077,72 @@
   }
 
   /* ---------------- tankebubbla ----------------
-   * "Det man tänker men inte skriver" — tryckt text (Poppins) i ett
-   * molnformat moln: bulor (cirklar) runt kanten i två pass (konturer
-   * först, fyllningar sedan) så att bara de yttre bågarna syns.
-   * Bubblorna ligger i ett lager ÖVER handen — de skyms aldrig. */
+   * "Det man tänker men inte skriver" — tryckt text i ett serietidnings-
+   * moln (uttryckligt önskemål 2026-07-29): FÅ men STORA bulor med
+   * KRAFTIG mörk kontur, och en svans av TRE krympande små cirklar mot
+   * den som tänker.
+   *
+   * Texten sätts i SAMMA typsnitt som sidans brödtext (Poppins,
+   * användarbeslut 2026-07-29) — inte i ett eget handskrivet typsnitt.
+   *
+   * KONTUREN RITAS SOM EN ENDA SAMMANHÄNGANDE BANA (unionen av bulorna),
+   * och molnet har TRANSPARENT insida. Tidigare ritades bulorna som hela
+   * cirklar som täcktes av vita fyllningscirklar + en vit rektangel bakom
+   * texten; den vita ytan lade sig då ovanpå konturen där bulorna glesnade,
+   * så molnkanten blev avkapad (påpekat 2026-07-29). Med en unionsbana
+   * finns ingen övertäckande fyllning alls, och pappret (med sina rutor)
+   * syns rakt igenom bubblan. Bulorna ligger i ett lager ÖVER handen. */
+  var BUBBLE_FONT = "Poppins,system-ui,sans-serif";
+  var BUBBLE_STEP = 36;         /* avstånd mellan bulornas medelpunkter */
+  var BUBBLE_R = [20, 25];      /* bulradie — summan av två MÅSTE > STEP,
+                                 * annars glappar unionen isär */
+  /* marginal mellan molnREKTANGELN och arkkanten — molnbulorna sticker ut
+   * upp till ~25 px (+ halva konturen) utanför rektangeln */
+  var BUBBLE_EDGE = 30;
   function makeBubble(o) {
     var g = el('g', { opacity: 0 });
-    var lineH = 22, fs = 16;
-    var h = o.lines.length * lineH + 30;
+    o._g = g;
+    buildBubble(o);
+    return g;
+  }
+
+  /* Molnet ritas ur o.w — men textens faktiska bredd går bara att mäta
+   * efter att svg:n hamnat i DOM:en. fitBubble() nedan mäter och bygger
+   * om bubblan bredare om texten sticker ut. */
+  function buildBubble(o) {
+    var g = o._g;
+    var lineH = 24, fs = 18;
+    var h = o.lines.length * lineH + 18;   /* tight: ~10 px över/under */
     var cx = o.x + o.w / 2, cy = o.y + h / 2;
-    var dx = o.tail[0] - cx, dy = o.tail[1] - cy;
-    var dl = Math.hypot(dx, dy) || 1;
-    /* tanke-cirklar från molnkanten mot målet */
-    var edge = Math.min(dx !== 0 ? Math.abs((o.w / 2 + 12) / (dx / dl)) : 1e9,
-                        dy !== 0 ? Math.abs((h / 2 + 12) / (dy / dl)) : 1e9);
-    var ex = cx + dx / dl * edge, ey = cy + dy / dl * edge;
-    el('circle', { cx: ex + dx / dl * 12, cy: ey + dy / dl * 12, r: 5.4,
-                   fill: '#fffdf8', stroke: 'rgba(15,22,32,.55)',
-                   'stroke-width': 1.3 }, g);
-    el('circle', { cx: ex + dx / dl * 25, cy: ey + dy / dl * 25, r: 3.3,
-                   fill: '#fffdf8', stroke: 'rgba(15,22,32,.5)',
-                   'stroke-width': 1.1 }, g);
-    /* molnbulor längs rektangelns kant */
+    /* INGEN svans: de tre krympande tankecirklarna är borttagna
+     * (användarbeslut 2026-07-29). De pekade ut "den som tänker", men på
+     * ett ark utan person fyllde de ingen funktion och var det som oftast
+     * hamnade ovanpå figuren. Bubblorna har därför bara molnet. */
+    /* molnbulor längs rektangelns kant — få och stora (seriestil).
+     * ceil (inte round) på antalet: annars kan avståndet bli större än
+     * BUBBLE_STEP så att två grannbulor inte skär varandra och konturen
+     * glappar isär. */
     var bumps = [];
     function walkEdge(x1, y1, x2, y2) {
       var len = Math.hypot(x2 - x1, y2 - y1);
-      var n = Math.max(1, Math.round(len / 21));
+      var n = Math.max(1, Math.ceil(len / BUBBLE_STEP));
       for (var i = 0; i < n; i++) {
         bumps.push([x1 + (x2 - x1) * i / n, y1 + (y2 - y1) * i / n,
-                    rnd(11, 15)]);
+                    rnd(BUBBLE_R[0], BUBBLE_R[1])]);
       }
     }
     walkEdge(o.x, o.y, o.x + o.w, o.y);
     walkEdge(o.x + o.w, o.y, o.x + o.w, o.y + h);
     walkEdge(o.x + o.w, o.y + h, o.x, o.y + h);
     walkEdge(o.x, o.y + h, o.x, o.y);
-    bumps.forEach(function (b) {
-      el('circle', { cx: b[0], cy: b[1], r: b[2], fill: '#fffdf8',
-                     stroke: 'rgba(15,22,32,.55)', 'stroke-width': 1.3 }, g);
-    });
-    bumps.forEach(function (b) {          /* döljer de inre konturbågarna */
-      el('circle', { cx: b[0], cy: b[1], r: b[2], fill: '#fffdf8' }, g);
-    });
-    el('rect', { x: o.x, y: o.y, width: o.w, height: h, fill: '#fffdf8' }, g);
+    el('path', { d: cloudPath(bumps, cx, cy), fill: 'none', stroke: LABINK,
+                 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
+    o._texts = [];
+    /* raderna CENTRERAS i molnet (uttryckligt önskemål 2026-07-29) */
     o.lines.forEach(function (ln, i) {
-      var t = el('text', { x: o.x + 10, y: o.y + 24 + lineH * i,
-                           'font-family': 'Poppins, system-ui, sans-serif',
+      var t = el('text', { x: o.x + o.w / 2, y: o.y + 24 + lineH * i,
+                           'text-anchor': 'middle',
+                           'font-family': BUBBLE_FONT,
                            'font-size': fs, fill: LABINK }, g);
       ln.forEach(function (seg) {
         var sp = document.createElementNS(SVGNS, 'tspan');
@@ -1337,8 +2150,74 @@
         sp.textContent = seg[0];
         t.appendChild(sp);
       });
+      o._texts.push(t);
     });
-    return g;
+  }
+
+  /* Molnkonturen = UNIONEN av bulorna, som EN bana: för varje bula ritas
+   * bara bågen från skärningspunkten med föregående bula till skärnings-
+   * punkten med nästa. De inre bågarna kommer alltså aldrig med, så
+   * molnet behöver ingen övertäckande fyllning — insidan blir transparent
+   * och konturen sammanhängande. Bulorna ligger medurs (topp → höger →
+   * botten → vänster) i skärmens y-nedåt-system, så varje båge går medurs
+   * (sweep-flagga 1). */
+  function cloudPath(b, cx, cy) {
+    var n = b.length, pts = [], i;
+    for (i = 0; i < n; i++) pts.push(outerCross(b[i], b[(i + 1) % n], cx, cy));
+    var d = 'M' + pts[n - 1][0].toFixed(1) + ' ' + pts[n - 1][1].toFixed(1);
+    for (i = 0; i < n; i++) {
+      var c = b[i], p0 = pts[(i + n - 1) % n], p1 = pts[i];
+      var a0 = Math.atan2(p0[1] - c[1], p0[0] - c[0]);
+      var a1 = Math.atan2(p1[1] - c[1], p1[0] - c[0]);
+      var da = a1 - a0;
+      while (da < 0) da += 2 * Math.PI;
+      d += 'A' + c[2].toFixed(1) + ' ' + c[2].toFixed(1) + ' 0 ' +
+           (da > Math.PI ? 1 : 0) + ' 1 ' +
+           p1[0].toFixed(1) + ' ' + p1[1].toFixed(1);
+    }
+    return d + 'Z';
+  }
+
+  /* Den av två cirklars skärningspunkter som ligger LÄNGST från molnets
+   * mitt (= den yttre). Skär de inte varandra faller punkten tillbaka på
+   * radikallinjen, så banan hänger ihop även då. */
+  function outerCross(c1, c2, cx, cy) {
+    var dx = c2[0] - c1[0], dy = c2[1] - c1[1];
+    var d = Math.hypot(dx, dy) || 1e-6;
+    var ux = dx / d, uy = dy / d;
+    var a = (d * d + c1[2] * c1[2] - c2[2] * c2[2]) / (2 * d);
+    var hh = Math.sqrt(Math.max(0, c1[2] * c1[2] - a * a));
+    var mx = c1[0] + a * ux, my = c1[1] + a * uy;
+    var p1 = [mx - hh * uy, my + hh * ux];
+    var p2 = [mx + hh * uy, my - hh * ux];
+    return Math.hypot(p1[0] - cx, p1[1] - cy) >=
+           Math.hypot(p2[0] - cx, p2[1] - cy) ? p1 : p2;
+  }
+
+  /* Mät den renderade texten och bygg om molnet så att det passar EXAKT
+   * (12 px marginal per sida) — både bredare om texten sticker ut och
+   * SMALARE om layoutens gissade bredd gav onödig luft (uttryckligt
+   * önskemål 2026-07-29: så lite marginal runt texten som möjligt).
+   * Kräver att svg:n redan ligger i DOM:en (getComputedTextLength).
+   * Körs igen på document.fonts.ready eftersom fontbytet ändrar bredden. */
+  function fitBubble(o, paperW) {
+    if (!o._texts || !o._texts.length) return;
+    var need = 0;
+    o._texts.forEach(function (t) {
+      var w = 0;
+      try { w = t.getComputedTextLength(); } catch (e) { w = 0; }
+      if (w > need) need = w;
+    });
+    if (!need) return;
+    var want = Math.ceil(need) + 24;
+    if (Math.abs(want - o.w) < 1) return;
+    o.w = want;
+    /* bubblan flyttas in i arket bara om den skulle sticka ut */
+    if (o.x + o.w > paperW - BUBBLE_EDGE) {
+      o.x = Math.max(8, paperW - BUBBLE_EDGE - o.w);
+    }
+    while (o._g.firstChild) o._g.removeChild(o._g.firstChild);
+    buildBubble(o);
   }
 
   /* ---------------- hjälplinjer vid punktplottning ----------------
@@ -1385,13 +2264,62 @@
     return g;
   }
 
+  /* ---------------- "Utan tankar": filtrera bort bubbelstegen ----------
+   * Tar bort varje tankebubblas steg ur aktlistan: från show till
+   * motsvarande hide (inklusive steggränsen däremellan och pausen efter).
+   * Bubbelsteg ritar inga streck (tanke()-mönstret garanterar det), så
+   * strecklistan är identisk med och utan tankar — bara tidslinjen och
+   * antalet klicksteg skiljer. */
+  function actsUtanTankar(src) {
+    var out = [];
+    for (var i = 0; i < src.length; i++) {
+      var a = src[i];
+      if (a.kind === 'show' && a.obj && a.obj.bubble) {
+        var j = i + 1;
+        while (j < src.length &&
+               !(src[j].kind === 'hide' && src[j].obj === a.obj)) j++;
+        if (j + 1 < src.length && src[j + 1].kind === 'pause') j++;
+        i = j;
+        continue;
+      }
+      out.push(a);
+    }
+    return out;
+  }
+
   /* ---------------- CSS (injiceras en gång) ---------------- */
   function injectCSS() {
     if (document.getElementById('hk-style')) return;
+    /* bubbeltypsnittet (Patrick Hand — "snällt" handskrivet, med åäö)
+     * laddas av widgeten själv så att det finns var den än monteras */
+    if (!document.getElementById('hk-bubblefont')) {
+      var lnk = document.createElement('link');
+      lnk.id = 'hk-bubblefont';
+      lnk.rel = 'stylesheet';
+      lnk.href = 'https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap';
+      document.head.appendChild(lnk);
+    }
     var st = document.createElement('style');
     st.id = 'hk-style';
     st.textContent =
-      '.hk-wrap{max-width:760px;margin:0 auto;font-family:Poppins,system-ui,sans-serif}' +
+      '.hk-wrap{max-width:760px;margin:0 auto;position:relative;' +
+        'font-family:Poppins,system-ui,sans-serif}' +
+      /* navpilar: stickande i vänster-/högerkanten vid halva skärmhöjden —
+       * railen spänner hela widgeten, knappen är sticky i den så att den
+       * följer med när man rullar (aldrig behöva rulla ned för att stega) */
+      '.hk-navrail{position:absolute;top:0;bottom:0;pointer-events:none;z-index:6}' +
+      '.hk-navrail.hk-left{left:2px}' +
+      '.hk-navrail.hk-right{right:2px}' +
+      /* max 26 px bred + 2 px kant: skriften börjar vid padL=30 — knappen
+       * får inte nå in över radernas första tecken/svarsramen */
+      '.hk-nav{position:sticky;top:calc(50vh - 26px);pointer-events:auto;' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'width:26px;height:52px;border-radius:10px;background:' + PAPER + ';' +
+        'border:1.5px solid rgba(15,22,32,.55);color:' + LABINK + ';' +
+        'cursor:pointer;padding:0;opacity:.75;transition:background .15s,opacity .15s}' +
+      '.hk-nav:hover{background:#efe8d8;opacity:1}' +
+      '.hk-nav:disabled{opacity:.18;cursor:default}' +
+      '.hk-nav:disabled:hover{background:' + PAPER + '}' +
       '.hk-paper{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;' +
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
@@ -1405,6 +2333,17 @@
         'padding:0;opacity:.75;transition:background .15s,opacity .15s;z-index:5}' +
       '.hk-fsbtn:hover{background:#efe8d8;opacity:1}' +
       '.hk-fsbtn svg{width:14px;height:14px}' +
+      /* inställningsruta (tankebubblor på/av) — samma formspråk som
+       * fs-knappen, direkt till vänster om den uppe till höger */
+      '.hk-settings{position:absolute;top:10px;right:52px;z-index:5;' +
+        'background:' + PAPER + ';border:1.5px solid rgba(15,22,32,.55);' +
+        'border-radius:8px;padding:6px 12px;display:flex;flex-direction:column;' +
+        'gap:3px;opacity:.9}' +
+      '.hk-settings:hover{opacity:1}' +
+      '.hk-settings label{display:flex;align-items:center;gap:6px;' +
+        'font-size:12.5px;font-weight:600;color:' + LABINK + ';' +
+        'cursor:pointer;white-space:nowrap;user-select:none}' +
+      '.hk-settings input{accent-color:' + LABINK + ';margin:0;cursor:pointer}' +
       /* helskärm (presentation): arket fyller skärmens BREDD (stor text),
        * sidan rullar på höjden och följer pennan; knappraden ligger fast
        * i underkanten */
@@ -1416,6 +2355,13 @@
         '{flex:0 0 auto}' +
       '.hk-wrap:fullscreen .hk-fsbtn,.hk-wrap:-webkit-full-screen .hk-fsbtn' +
         '{position:fixed;top:12px;right:12px}' +
+      '.hk-wrap:fullscreen .hk-settings,.hk-wrap:-webkit-full-screen .hk-settings' +
+        '{position:fixed;top:12px;right:56px}' +
+      /* helskärm: railen fixeras mot skärmen (en absolut rail i den
+       * rullande wrappen når bara första skärmhöjden — sticky-knappen
+       * skulle fastna i railens botten efter en skärms rullning) */
+      '.hk-wrap:fullscreen .hk-navrail,.hk-wrap:-webkit-full-screen .hk-navrail' +
+        '{position:fixed}' +
       '.hk-wrap:fullscreen .hk-controls,.hk-wrap:-webkit-full-screen .hk-controls' +
         '{position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 18px;' +
         'justify-content:center;background:rgba(243,238,228,.93);' +
@@ -1437,23 +2383,41 @@
     document.head.appendChild(st);
   }
 
+  /* ---------------- piltangenter ----------------
+   * Höger/vänster piltangent stegar fram/tillbaka i den SENAST ANVÄNDA
+   * widgeten (hovring eller klick sätter ACTIVE) — flera widgets kan
+   * ligga på samma sida, och utan aktiv-begreppet skulle alla stega
+   * samtidigt. Formulärelement (radioknapparna!) behåller sina
+   * piltangenter via target-filtret. */
+  var ACTIVE = null;
+  document.addEventListener('keydown', function (e) {
+    if (!ACTIVE) return;
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var tg = e.target;
+    if (tg && /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName)) return;
+    e.preventDefault();
+    if (e.key === 'ArrowRight') ACTIVE.fwd(); else ACTIVE.back();
+  });
+
   /* ---------------- mount ---------------- */
+  var UID = 0;   /* unika radiogruppnamn (flera widgets per sida) */
   function mount(container, spec, opts) {
     opts = opts || {};
-    var F = opts.fontSize || 40;
+    var F = FSIZE;   /* alltid samma — se KONSEKVENT SKRIFTSTORLEK ovan */
     var speed = opts.speed || 1;
     injectCSS();
 
-    var L = (spec && !Array.isArray(spec) && spec.typ === 'linjegraf')
-      ? layoutLinjegraf(spec, F)
-      : (spec && !Array.isArray(spec) && spec.typ === 'hage')
-        ? layoutHage(spec, F)
-        : (spec && !Array.isArray(spec) && spec.typ === 'gungbrada')
-          ? layoutGunga(spec, F) : layout(spec, F);
+    var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
+                   gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
+                   spett: layoutSpett };
+    var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
+      ? SCENES[spec.typ](spec, F) : layout(spec, F);
 
     /* svg är "skrivbordet": papperet + extra marginal höger/nedåt så att
-     * handen får rum att sticka ut utanför papperskanten. */
-    var paperW = Math.max(L.contentW + 70, 430);
+     * handen får rum att sticka ut utanför papperskanten. Bredden är
+     * ALLTID PAPER_W (samma ark för alla uppgifter) — annars renderas
+     * skriften olika stort på skärmen (se KONSEKVENT SKRIFTSTORLEK). */
+    var paperW = Math.max(L.contentW + 70, PAPER_W);
     var paperH = L.lastBase + 0.5 * F + 20;
     var W = paperW, H = paperH + 1.9 * F;   /* extra luft under sista raden */
 
@@ -1515,94 +2479,124 @@
 
     /* container in i DOM före mätning (getTotalLength kräver rendering) */
     container.appendChild(wrap);
+    objs.forEach(function (o) { if (o.bubble) fitBubble(o, paperW); });
+    /* Poppins kan laddas asynkront — mät om när typsnittet är på plats
+     * (fitBubble vidgar bara, så en extra körning är ofarlig). */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        objs.forEach(function (o) { if (o.bubble) fitBubble(o, paperW); });
+      });
+    }
     strokes.forEach(function (a) {
       a.len = a.path.getTotalLength();
       a.path.setAttribute('stroke-dasharray', (a.len + 2) + ' ' + (a.len + 2));
       a.path.setAttribute('stroke-dashoffset', a.len + 2);
     });
 
-    /* ---------------- tidslinje ---------------- */
+    /* ---------------- tidslinje ----------------
+     * Byggs om när tankeläget växlas: "Utan tankar" använder en filtrerad
+     * aktlista utan bubbelstegen. Strecken (DOM:en) är desamma i båda
+     * lägena — bubbelsteg ritar inga streck — så bara tiderna görs om. */
     var DRAW = 0.155;    /* px per ms  (~155 px/s, behagligt tempo) */
     var LIFT = 0.55;     /* px per ms vid pennlyft */
-    var events = [];
-    var boundaries = [];   /* tider där stegvis uppspelning pausar */
-    var t = 350;
-    var pen = null;
-    var drew = false;   /* skrevs något sedan förra steggränsen? */
-
-    L.acts.forEach(function (a) {
-      if (a.kind === 'lineEnd') {
-        /* handen dras bort åt höger vid steggränsen så att den inte
-         * skymmer det nyskrivna medan man läser — men bara om något
-         * faktiskt skrevs (rena tankebubbel-steg lämnar handen i vila) */
-        if (pen && drew) {
-          var rest = [W + 40, Math.min(pen[1] + 60, H - 20)];
-          events.push({ type: 'move', t0: t, t1: t + 550, from: pen, to: rest });
-          t += 550;
-          pen = rest;
-        }
-        boundaries.push(t);
-        drew = false;
-        return;
-      }
-      if (a.kind === 'show') { a.obj.wins.push([t, Infinity]); return; }
-      if (a.kind === 'hide') {
-        var wl = a.obj.wins;
-        if (wl.length) wl[wl.length - 1][1] = t;
-        return;
-      }
-      if (a.kind === 'fade') { a.ref.fade0 = t; a.ref.fade1 = t + 600; return; }
-      if (a.kind === 'jump') {
-        if (pen) {
-          var jd = Math.hypot(a.to[0] - pen[0], a.to[1] - pen[1]);
-          var jdur = Math.max(100, Math.min(520, jd / LIFT));
-          events.push({ type: 'move', t0: t, t1: t + jdur, from: pen, to: a.to });
-          t += jdur;
-        }
-        pen = a.to.slice();
-        return;
-      }
-      if (a.kind === 'pause') {
-        if (pen) { events.push({ type: 'wait', t0: t, t1: t + a.ms, at: pen }); }
-        t += a.ms;
-        return;
-      }
-      var start = [a.pts[0][0], a.pts[0][1]];
-      var end = [a.pts[a.pts.length - 1][0], a.pts[a.pts.length - 1][1]];
-      if (pen) {
-        var d = Math.hypot(start[0] - pen[0], start[1] - pen[1]);
-        if (d > 1.5) {
-          var mdur = Math.max(80, Math.min(480, d / LIFT));
-          events.push({ type: 'move', t0: t, t1: t + mdur, from: pen, to: start });
-          t += mdur;
-        }
-      }
-      var dur = Math.max(55, a.len / DRAW);
-      events.push({ type: 'draw', t0: t, t1: t + dur, a: a });
-      t += dur;
-      pen = end;
-      drew = true;
-    });
-    /* handen glider av papperet när allt är klart */
-    var exitTo = [W + 60, L.lastBase + 2 * F];
-    events.push({ type: 'move', t0: t, t1: t + 800, from: pen || [W / 2, H / 2],
-                  to: exitTo });
-    var TOTAL = t + 800;
-    /* sista radens steggräns slopas: sista steget löper ut i handens sorti */
-    boundaries.pop();
     var stegvis = opts.stegvis !== false;
+    var tankar = opts.tankar !== false;
+    var events = [];
+    var boundaries = [];   /* tider där stegvis uppspelning pausar —
+                              MUTERAS på plats (controllern delar referensen) */
+    var TOTAL = 0;
+    var startPos = [W / 2, H / 2];
 
-    /* penColor per event: vad pennan skriver/ska skriva härnäst — pennan
-     * "byts" till blåpennan redan under lyftet fram till ett blått streck */
-    var upcoming = null;
-    for (var bi = events.length - 1; bi >= 0; bi--) {
-      var bev = events[bi];
-      if (bev.type === 'draw') upcoming = bev.a.color || null;
-      bev.penCol = upcoming;
+    function buildTimeline(actsArr) {
+      events = [];
+      boundaries.length = 0;
+      strokes.forEach(function (a) {
+        a._t0 = Infinity; a._t1 = Infinity;
+        a.fade0 = null; a.fade1 = null;
+        a.path.removeAttribute('opacity');
+      });
+      objs.forEach(function (o) { o.wins.length = 0; });
+      var t = 350;
+      var pen = null;
+      var drew = false;   /* skrevs något sedan förra steggränsen? */
+
+      actsArr.forEach(function (a) {
+        if (a.kind === 'lineEnd') {
+          /* handen dras bort åt höger vid steggränsen så att den inte
+           * skymmer det nyskrivna medan man läser — men bara om något
+           * faktiskt skrevs (rena tankebubbel-steg lämnar handen i vila) */
+          if (pen && drew) {
+            var rest = [W + 40, Math.min(pen[1] + 60, H - 20)];
+            events.push({ type: 'move', t0: t, t1: t + 550, from: pen, to: rest });
+            t += 550;
+            pen = rest;
+          }
+          boundaries.push(t);
+          drew = false;
+          return;
+        }
+        if (a.kind === 'show') { a.obj.wins.push([t, Infinity]); return; }
+        if (a.kind === 'hide') {
+          var wl = a.obj.wins;
+          if (wl.length) wl[wl.length - 1][1] = t;
+          return;
+        }
+        if (a.kind === 'fade') { a.ref.fade0 = t; a.ref.fade1 = t + 600; return; }
+        if (a.kind === 'jump') {
+          if (pen) {
+            var jd = Math.hypot(a.to[0] - pen[0], a.to[1] - pen[1]);
+            var jdur = Math.max(100, Math.min(520, jd / LIFT));
+            events.push({ type: 'move', t0: t, t1: t + jdur, from: pen, to: a.to });
+            t += jdur;
+          }
+          pen = a.to.slice();
+          return;
+        }
+        if (a.kind === 'pause') {
+          if (pen) { events.push({ type: 'wait', t0: t, t1: t + a.ms, at: pen }); }
+          t += a.ms;
+          return;
+        }
+        var start = [a.pts[0][0], a.pts[0][1]];
+        var end = [a.pts[a.pts.length - 1][0], a.pts[a.pts.length - 1][1]];
+        if (pen) {
+          var d = Math.hypot(start[0] - pen[0], start[1] - pen[1]);
+          if (d > 1.5) {
+            var mdur = Math.max(80, Math.min(480, d / LIFT));
+            events.push({ type: 'move', t0: t, t1: t + mdur, from: pen, to: start });
+            t += mdur;
+          }
+        }
+        var dur = Math.max(55, a.len / DRAW);
+        events.push({ type: 'draw', t0: t, t1: t + dur, a: a });
+        t += dur;
+        pen = end;
+        drew = true;
+      });
+      /* handen glider av papperet när allt är klart */
+      var exitTo = [W + 60, L.lastBase + 2 * F];
+      events.push({ type: 'move', t0: t, t1: t + 800, from: pen || [W / 2, H / 2],
+                    to: exitTo });
+      TOTAL = t + 800;
+      /* sista radens steggräns slopas: sista steget löper ut i handens sorti */
+      boundaries.pop();
+
+      /* penColor per event: vad pennan skriver/ska skriva härnäst — pennan
+       * "byts" till blåpennan redan under lyftet fram till ett blått streck */
+      var upcoming = null;
+      for (var bi = events.length - 1; bi >= 0; bi--) {
+        var bev = events[bi];
+        if (bev.type === 'draw') upcoming = bev.a.color || null;
+        bev.penCol = upcoming;
+      }
+      startPos = strokes.length
+        ? [strokes[0].pts[0][0], strokes[0].pts[0][1]] : [W / 2, H / 2];
+      /* koppla drawtider till strecken */
+      events.forEach(function (ev) {
+        if (ev.type === 'draw') { ev.a._t0 = ev.t0; ev.a._t1 = ev.t1; }
+      });
     }
-    var startPos = events.length ? (events[0].at || events[0].from ||
-      [strokes[0].pts[0][0], strokes[0].pts[0][1]]) : [W / 2, H / 2];
-    if (strokes.length) startPos = [strokes[0].pts[0][0], strokes[0].pts[0][1]];
+    buildTimeline(tankar ? L.acts : actsUtanTankar(L.acts));
 
     /* ---------------- uppspelning ---------------- */
     var tNow = 0, playing = false, rafId = null, lastTs = null;
@@ -1693,11 +2687,6 @@
         'rotate(' + (wob - pp.lift * 4).toFixed(2) + ')');
     }
 
-    /* koppla drawtider till strecken */
-    events.forEach(function (ev) {
-      if (ev.type === 'draw') { ev.a._t0 = ev.t0; ev.a._t1 = ev.t1; }
-    });
-
     var target = TOTAL;   /* i stegvis läge: nästa steggräns */
 
     function nextTarget() {
@@ -1736,6 +2725,25 @@
     }
     function restart() { tNow = 0; render(0); if (!playing) play(); }
     function jumpToEnd() { stop(); tNow = TOTAL; render(TOTAL); followPen(true); updateBtns(); }
+    /* nästa steg — eller, om ett steg håller på att skrivas, SNABBSPOLA
+     * resten av steget (animeras ultrasnabbt, hoppar inte dit på 0 s) */
+    function stepFwd() {
+      if (playing) boost = 14;
+      else play();
+    }
+    /* föregående steg: hoppa tillbaka till närmast föregående steggräns
+     * (mitt i ett steg: till stegets början) och visa läget direkt */
+    function stepBack() {
+      stop();
+      var t0 = 0;
+      for (var i = 0; i < boundaries.length; i++) {
+        if (boundaries[i] < tNow - 1) t0 = boundaries[i];
+      }
+      tNow = t0;
+      render(tNow);
+      followPen(true);
+      updateBtns();
+    }
 
     /* ---------------- kontroller ---------------- */
     var ctrls = document.createElement('div');
@@ -1746,28 +2754,11 @@
     playBtn.addEventListener('click', function () {
       if (playing) stop(); else play();
     });
-    /* föregående steg: hoppa tillbaka till närmast föregående steggräns
-     * (mitt i ett steg: till stegets början) och visa läget direkt */
-    var prevBtn = document.createElement('button');
-    prevBtn.className = 'hk-btn';
-    prevBtn.textContent = 'Föregående steg';
-    prevBtn.addEventListener('click', function () {
-      stop();
-      var t0 = 0;
-      for (var i = 0; i < boundaries.length; i++) {
-        if (boundaries[i] < tNow - 1) t0 = boundaries[i];
-      }
-      tNow = t0;
-      render(tNow);
-      followPen(true);
-      updateBtns();
-    });
     var againBtn = document.createElement('button');
     againBtn.className = 'hk-btn';
     againBtn.textContent = 'Börja om';
     againBtn.addEventListener('click', restart);
     ctrls.appendChild(playBtn);
-    ctrls.appendChild(prevBtn);
     ctrls.appendChild(againBtn);
 
     var spWrap = document.createElement('span');
@@ -1776,7 +2767,11 @@
     spLbl.className = 'hk-speed-label';
     spLbl.textContent = 'Tempo';
     spWrap.appendChild(spLbl);
-    var speeds = [[0.75, '0,75×'], [1, '1×'], [1.5, '1,5×'], [2, '2×']];
+    /* "Ultra" = varje steg skrivs i snabbspolningsfart (användarönskemål
+     * 2026-07-30) — samma faktor som boost, så ultratempot och ett
+     * skipklick ser likadana ut */
+    var speeds = [[0.75, '0,75×'], [1, '1×'], [1.5, '1,5×'], [2, '2×'],
+                  [14, 'Ultra']];
     var sBtns = [];
     speeds.forEach(function (sp) {
       var b = document.createElement('button');
@@ -1793,6 +2788,33 @@
     ctrls.appendChild(spWrap);
     wrap.appendChild(ctrls);
 
+    /* navpilar i kanterna (se STEGNING i filhuvudet): railen spänner hela
+     * widgeten, knappen ligger sticky vid halva skärmhöjden */
+    function navBtn(dir) {
+      var rail = document.createElement('div');
+      rail.className = 'hk-navrail ' + (dir < 0 ? 'hk-left' : 'hk-right');
+      var b = document.createElement('button');
+      b.className = 'hk-nav';
+      b.title = dir < 0 ? 'Föregående steg (vänsterpil)'
+                        : 'Nästa steg (högerpil)';
+      b.setAttribute('aria-label', b.title);
+      b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"' +
+        ' stroke="currentColor" stroke-width="2.4" stroke-linecap="round"' +
+        ' stroke-linejoin="round"><path d="' +
+        (dir < 0 ? 'M15 4 7 12l8 8' : 'M9 4l8 8-8 8') + '"/></svg>';
+      b.addEventListener('click', dir < 0 ? stepBack : stepFwd);
+      rail.appendChild(b);
+      wrap.appendChild(rail);
+      return b;
+    }
+    var navPrev = navBtn(-1), navNext = navBtn(1);
+
+    /* piltangenterna styr senast använda widget (se ACTIVE ovan) */
+    var keyApi = { fwd: stepFwd, back: stepBack };
+    if (!ACTIVE) ACTIVE = keyApi;
+    wrap.addEventListener('pointerenter', function () { ACTIVE = keyApi; });
+    wrap.addEventListener('pointerdown', function () { ACTIVE = keyApi; });
+
     function atBoundary() {
       for (var i = 0; i < boundaries.length; i++) {
         if (Math.abs(boundaries[i] - tNow) < 2) return true;
@@ -1802,22 +2824,80 @@
 
     function updateBtns() {
       var klar = tNow >= TOTAL;
-      playBtn.style.display = klar ? 'none' : '';   /* klar: bara Föregående/Börja om */
-      playBtn.textContent = playing ? 'Paus'
-        : (atBoundary() ? 'Nästa steg' : (tNow > 0 ? 'Fortsätt' : 'Skriv'));
+      playBtn.style.display = klar ? 'none' : '';   /* klar: bara Börja om */
+      playBtn.textContent = playing ? 'Paus' : (tNow > 0 ? 'Fortsätt' : 'Skriv');
       playBtn.classList.toggle('hk-active', playing);
-      prevBtn.disabled = tNow <= 0;
+      navPrev.disabled = tNow <= 0;
+      navNext.disabled = klar;
       paperDiv.style.cursor = klar ? 'default' : 'pointer';
       paperDiv.title = klar ? '' : 'Klicka för nästa steg';
     }
 
-    /* klick var som helst på papperet: nästa steg — eller, om ett steg
-     * håller på att skrivas, SNABBSPOLA resten av steget (animeras
-     * ultrasnabbt i stället för att hoppa dit på 0 sekunder) */
-    paperDiv.addEventListener('click', function () {
-      if (playing) boost = 14;
-      else play();
-    });
+    /* klick var som helst på papperet: nästa steg / snabbspola steget */
+    paperDiv.addEventListener('click', stepFwd);
+
+    /* ---------------- inställningsruta: "Med/Utan tankar" ----------------
+     * Växlingen bygger om tidslinjen och återtar positionen via det senast
+     * färdigskrivna strecket — strecken är identiska i båda lägena, så
+     * allt som redan skrivits står kvar. Därefter snäpps tiden fram till
+     * nästa steggräns, men bara om inget streck ritas däremellan (annars
+     * vore det ett hopp framåt i lösningen). */
+    function setTankar(on) {
+      if (on === tankar) return;
+      var klar = tNow >= TOTAL;
+      stop();
+      var idx = -1;
+      for (var i = 0; i < strokes.length; i++) {
+        if (strokes[i]._t1 <= tNow) idx = i; else break;
+      }
+      tankar = on;
+      buildTimeline(on ? L.acts : actsUtanTankar(L.acts));
+      if (klar) tNow = TOTAL;
+      else if (idx < 0) tNow = 0;
+      else {
+        tNow = strokes[idx]._t1;
+        for (var j = 0; j < boundaries.length; j++) {
+          if (boundaries[j] >= tNow) {
+            var b = boundaries[j];
+            var ritas = events.some(function (ev) {
+              return ev.type === 'draw' && ev.t0 > tNow && ev.t1 <= b + 1;
+            });
+            if (!ritas) tNow = b;
+            break;
+          }
+        }
+      }
+      target = TOTAL;
+      render(tNow);
+      followPen(true);
+      updateBtns();
+    }
+
+    /* Rutan visas bara när lösningen har tankebubblor (användarönskemål
+     * 2026-07-30). Radiogruppens namn måste vara unikt per widget —
+     * flera widgets ligger på samma sida. */
+    if (objs.some(function (o) { return o.bubble; })) {
+      var setBox = document.createElement('div');
+      setBox.className = 'hk-settings';
+      setBox.addEventListener('click', function (e) {
+        e.stopPropagation();               /* inte ett stegklick på arket */
+      });
+      var radioName = 'hk-tankar-' + (++UID);
+      [['Med tankar', true], ['Utan tankar', false]].forEach(function (val) {
+        var lab = document.createElement('label');
+        var inp = document.createElement('input');
+        inp.type = 'radio';
+        inp.name = radioName;
+        inp.checked = val[1] === tankar;
+        inp.addEventListener('change', function () {
+          if (inp.checked) setTankar(val[1]);
+        });
+        lab.appendChild(inp);
+        lab.appendChild(document.createTextNode(val[0]));
+        setBox.appendChild(lab);
+      });
+      paperDiv.appendChild(setBox);
+    }
 
     /* ---------------- helskärm (presentation för klass) ----------------
      * Kanonisk fullskärmsikon (samma som simuleringarnas fs-btn). Hela
@@ -1899,10 +2979,64 @@
     else if (opts.at != null) { tNow = opts.at; render(tNow); updateBtns(); }
     else if (opts.autostart) play();
 
+    /* steg(i): hoppa direkt till slutet av steg i (0-indexerat). Används av
+     * skärmdumpsharnesset i .shots/ för att granska ett enskilt steg — och
+     * är praktiskt när ett block ska öppnas mitt i en genomgång. */
+    function steg(i) {
+      stop();
+      tNow = boundaries.length
+        ? boundaries[Math.max(0, Math.min(i, boundaries.length - 1))] : 0;
+      render(tNow);
+      followPen(true);
+      updateBtns();
+    }
+
     return { play: play, pause: stop, restart: restart,
              setSpeed: function (v) { speed = v; },
-             jumpToEnd: jumpToEnd, spela: play };
+             jumpToEnd: jumpToEnd, spela: play, nasta: stepFwd,
+             forra: stepBack, steg: steg, boundaries: boundaries };
   }
 
-  window.HANDSKRIFT = { mount: mount, version: 1 };
+  /* ---------------- mountAll: ::: handskrift-block i teorin ----------
+   * Teorisidorna (katalog.html/avsnitt.html) gör om ett
+   *
+   *   ::: handskrift
+   *   typ: gungbrada
+   *   :::
+   *
+   * -block till <div class="lab-handskrift" data-handskrift-src="b64">
+   * (samma mönster som ::: graf → graf.js). mountAll hittar
+   * platshållarna, tolkar config-raderna (nyckel: värde; numeriska
+   * värden och listor konverteras) och monterar widgeten. Idempotent —
+   * en redan monterad div hoppas över (React kan rendera om). */
+  function mountAll(root) {
+    var divs = (root || document).querySelectorAll(
+      '.lab-handskrift[data-handskrift-src]');
+    Array.prototype.forEach.call(divs, function (div) {
+      if (div.__hkMounted) return;
+      div.__hkMounted = true;
+      var cfg = {};
+      try {
+        var src = decodeURIComponent(escape(atob(
+          div.getAttribute('data-handskrift-src'))));
+        src.split('\n').forEach(function (ln) {
+          var m = ln.match(/^\s*([a-zåäö]+)\s*:\s*(.+?)\s*$/i);
+          if (!m) return;
+          var v = m[2];
+          if (/^-?\d+(?:[.,]\d+)?$/.test(v)) {
+            v = parseFloat(v.replace(',', '.'));
+          } else if (/^-?\d[\d\s.,;-]*$/.test(v) && /[,;]/.test(v)) {
+            v = v.split(/[,;]\s*/).map(function (t) {
+              return parseFloat(t.replace(',', '.'));
+            });
+          }
+          cfg[m[1].toLowerCase()] = v;
+        });
+      } catch (e) { return; }
+      if (!cfg.typ) return;
+      mount(div, cfg, {});
+    });
+  }
+
+  window.HANDSKRIFT = { mount: mount, mountAll: mountAll, version: 1 };
 })();

@@ -1826,6 +1826,11 @@ button.lab-card-disabled { pointer-events: none; }
    Ett kort med KaTeX-etikett, SVG-koordinatsystem och glidare/sifferfält
    som ritar om grafen live. Byggs av window.FYSIKGRAF.mountAll(). */
 .lab-graf { margin: 22px 0; }
+
+/* ── Handskriven lösning (::: handskrift → handskrift.js) ────────────
+   Rutat ark där en blyertspenna skriver lösningen steg för steg.
+   Byggs av window.HANDSKRIFT.mountAll(); widgeten har egen intern CSS. */
+.lab-handskrift { margin: 22px 0; }
 .lab-graf-card {
     background: var(--lab-bg-panel);
     border: 1px solid var(--lab-line-strong);

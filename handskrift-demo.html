@@ -53,6 +53,14 @@
      skalenliga pilar och hävarmarnas måttlinjer — och räkna till sist
      rad för rad.</p>
   <div id="demo5"></div>
+  <h2>Fysik: kraftmoment — skiftnyckeln</h2>
+  <p class="sub">Exempel 1 ur Fysik nivå 2, 1.1 Kraftmoment: 34 N vinkelrätt
+     mot skiftnyckeln 0,25 m från muttern.</p>
+  <div id="demo6"></div>
+  <h2>Fysik: kraftmoment — spettet mot stenen</h2>
+  <p class="sub">Exempel 2 ur Fysik nivå 2, 1.1 Kraftmoment: spett 1,0 m,
+     45° mot marken, 800 N lodrätt nedåt — hävarmen kräver trigonometri.</p>
+  <div id="demo7"></div>
 </div>
 <script src="handskrift.js"></script>
 <script>
@@ -70,13 +78,14 @@
     });
   }
   var opts = {
-    fontSize: 40,
     speed: q.has('speed') ? parseFloat(q.get('speed')) : 1,
     autostart: q.has('auto'),
     instant: q.has('instant'),
     at: q.has('at') ? parseFloat(q.get('at')) : null,
     /* pennan är standard; ?hand visar handen för jämförelse */
-    hand: q.has('hand')
+    hand: q.has('hand'),
+    /* ?utantankar startar i läget "Utan tankar" (rutan uppe till höger) */
+    tankar: !q.has('utantankar')
   };
   var spec = [
     "5x+3=23",
@@ -105,6 +114,10 @@
   HANDSKRIFT.mount(document.getElementById('demo4'), { typ: 'hage' }, opts);
 
   HANDSKRIFT.mount(document.getElementById('demo5'), { typ: 'gungbrada' }, opts);
+
+  HANDSKRIFT.mount(document.getElementById('demo6'), { typ: 'skiftnyckel' }, opts);
+
+  HANDSKRIFT.mount(document.getElementById('demo7'), { typ: 'spett' }, opts);
 </script>
 </body>
 </html>

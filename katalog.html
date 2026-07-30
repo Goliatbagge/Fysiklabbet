@@ -885,6 +885,18 @@
                         blocks.push(el);
                         for (const c of subs) {
                             c.classList.add('pres-sub');
+                            // Textlösningen är en alternativ vy av handskrift-
+                            // lösningen (växeln "Med penna"/"Som text") — den
+                            // hör till SAMMA steg som widgeten, inte ett eget
+                            // (annars blir det ett tomt klick i det dolda läget).
+                            const prev = steps[steps.length - 1];
+                            if (c.classList.contains('lab-block-textlosning') &&
+                                c.previousElementSibling &&
+                                c.previousElementSibling.classList.contains('lab-handskrift') &&
+                                prev && prev.el === c.previousElementSibling) {
+                                prev.twin = c;
+                                continue;
+                            }
                             steps.push({ el: c, block: el });
                         }
                         continue;
@@ -1009,6 +1021,13 @@
                 steps.forEach((st, i) => {
                     st.el.classList.toggle('is-on', i < step);
                     st.el.classList.toggle('is-current', i === step - 1);
+                    // Tvilling (textlösningen till en handskrift-widget) följer
+                    // sitt steg — vilken av dem som faktiskt syns styrs av
+                    // växeln "Med penna"/"Som text" (inline display).
+                    if (st.twin) {
+                        st.twin.classList.toggle('is-on', i < step);
+                        st.twin.classList.toggle('is-current', i === step - 1);
+                    }
                 });
                 blocksRef.current.forEach(b => {
                     let anyOn = false, anyCur = false;

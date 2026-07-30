@@ -1831,6 +1831,15 @@ button.lab-card-disabled { pointer-events: none; }
    Rutat ark där en blyertspenna skriver lösningen steg för steg.
    Byggs av window.HANDSKRIFT.mountAll(); widgeten har egen intern CSS. */
 .lab-handskrift { margin: 22px 0; }
+
+/* Textlösning (::: textlosning) — den vanliga textvarianten av en
+   handskriven lösning. Renderas som lös brödtext, inte som en blockruta;
+   handskrift.js växlar synligheten ("Med penna"/"Som text"). */
+.lab-block-textlosning {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
 .lab-graf-card {
     background: var(--lab-bg-panel);
     border: 1px solid var(--lab-line-strong);

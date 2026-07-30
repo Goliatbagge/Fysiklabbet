@@ -143,21 +143,43 @@
  * l_P = 0,75 m"). Frågan har redan sagt vad som söks (användarbeslut
  * 2026-07-29). I mattescener skrivs svaret som uppgiften kräver.
  *
- * REGEL (INLEDANDE MOTIVERING): en formel som behöver motiveras kan
- * föregås av en kort motivering i TEXT som handen skriver i grafit
- * ("Momentjämvikt gäller, så") — och då skrivs formeln DIREKT UNDER
- * motiveringen i SAMMA klicksteg, ingen steggräns emellan (användar-
+ * REGEL (INLEDANDE MOTIVERING): en formel kan föregås av en kort rubrik/
+ * motivering i TEXT som handen skriver i grafit — och då skrivs formeln
+ * DIREKT UNDER i SAMMA klicksteg, ingen steggräns emellan (användar-
  * önskemål 2026-07-30). Motiveringen skrivs mindre (0,62·F, som
  * figuretiketter) och är en del av redovisningen: den står kvar även i
  * "Utan tankar", till skillnad från tankebubblorna. Ge formeln extra
  * radavstånd när den har höga tecken — momentpilarna kräver ~1,8·F ned
  * till formelbaslinjen, annars nuddar de motiveringens nedstaplar (j, g).
+ * SKRIV KORT (användarönskemål 2026-07-30): eleverna ska inte tröttas ut
+ * med mer skrivet än nödvändigt. För en "basic" formel för en storhet
+ * eller lag räcker BARA NAMNET som rubrik — "Kraftmoment", inte "Formeln
+ * för kraftmoment"; "Momentjämvikt", inte "Momentjämvikt ger". Utveckla
+ * texten bara när det behöver motiveras VARFÖR formeln får ställas upp.
+ *
+ * REGEL (FIGURORIENTERING, användarönskemål 2026-07-30): finns en
+ * ursprunglig uppgiftsfigur ritas handens figur med SAMMA orientering
+ * som den (skiftnyckeln snett med muttern uppe till höger — inte
+ * "tillrättalagd" vågrätt). En omorienterad figur är fysikaliskt
+ * korrekt men förvirrar elever som jämför med uppgiftens bild.
+ * Referensimpl: layoutSkiftnyckel (u/n-enhetsvektorer + P()-helper).
  *
  * REGEL (RIMLIGHETSBEDÖMNING, fysikuppgifter): innan svarsraden skrivs
  * ska en tankebubbla ALLTID göra en rimlighetsbedömning av resultatet
  * (t.ex. "Pappa ska sitta närmare än barnet — rimligt, han är ju
  * tyngre!"). Att stanna upp och pröva svarets rimlighet är elevens bästa
  * skydd mot slarvfel. Gäller ALLA fysikscener.
+ *
+ * REGEL (AVRUNDNING, användarönskemål 2026-07-30): avrunda ALDRIG i
+ * mellanled. Ett värde med många decimaler skrivs oavrundat med tre
+ * punkter och VANLIGT likhetstecken ("l=1,0·cos 45°=0,707..."), och
+ * det oavrundade värdet följer med i klammern och insättningen
+ * ("M=800·0,707...=565,685... Nm"). Först i det ALLRA SISTA steget
+ * avrundas svaret, med ≈, till så många värdesiffror som det ingående
+ * mätvärde som har MINST antal värdesiffror (här 1,0 m → två). En
+ * tankebubbla motiverar avrundningen. Punktglyfen '.' finns i GLYPHS.
+ * Avrundningen är en FORTSÄTTNING på uträkningsraden: bryts raden vid ≈
+ * börjar nästa rad med "≈ 570 Nm..." — vänsterledet (M) upprepas ALDRIG.
  *
  * REGEL (TRIGONOMETRISK UPPSTÄLLNING, användarönskemål 2026-07-30): när
  * en trig-ekvation ställs upp ur en figur (cos v = närliggande katet /
@@ -169,12 +191,13 @@
  *      etikett som visas/döljs med show/hide (samma fönstermekanik som
  *      bubblorna, men utan moln). Noterna är del av uppställningen och
  *      står kvar även i "Utan tankar".
- *   2. INNAN pennan skriver delen i kvoten ringar den in motsvarande
- *      sida i FIGUREN med blåpennan (samma tanke som insättningsgesten):
- *      närliggande kateten ringas innan täljaren skrivs, hypotenusan
- *      innan nämnaren. Ringarna fejdas ut när raden är klar. För en
- *      lutande sida används ringAlongPts(p1, p2, ry, off) — en ring
- *      längs sidans riktning.
+ *   2. INNAN pennan skriver delen i kvoten gör den ett TORRSVEP längs
+ *      motsvarande sträcka i FIGUREN: pennspetsen dras mot papperet
+ *      parallellt rakt på sidan, utan att lämna bläck (akt
+ *      {kind:'sweep', pts: humanize([p1, p2])}). Närliggande kateten
+ *      sveps innan täljaren skrivs, hypotenusan innan nämnaren.
+ *      (Ersatte inringning av sidorna 2026-07-30 på användarens begäran;
+ *      ringAlongPts finns kvar för andra behov.)
  * Dessutom ringas VINKELN (bågen + gradtalet) in i figuren INNAN
  * trigfunktionen skrivs — det är den vinkeln som "närliggande"/
  * "motstående" relaterar till (godkänt förslag 2026-07-30).
@@ -280,14 +303,17 @@
     'o': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]]] },
     'ö': { w: 60, strokes: [[[54, 60], [42, 49], [28, 53], [22, 68], [24, 85], [38, 96], [52, 92], [58, 76], [54, 60]], [[32, 28], [33, 30]], [[48, 28], [49, 30]]] },
     'k': { w: 60, strokes: [[[28, 10], [28, 100]], [[58, 48], [40, 70], [30, 74]], [[38, 66], [60, 100]]] },
+    'K': { w: 72, strokes: [[[27, 12], [26, 100]], [[66, 12], [40, 54], [30, 60]], [[40, 54], [68, 100]]] },
     /* tillagda 2026-07-30 (för inledande motiveringar som "Momentjämvikt
-     * gäller, så") */
+     * ger") */
     't': { w: 48, strokes: [[[31, 24], [29, 78], [33, 95], [44, 91]], [[17, 50], [47, 48]]] },
     'f': { w: 50, strokes: [[[54, 18], [45, 12], [37, 20], [34, 44], [33, 100]], [[19, 52], [49, 50]]] },
     'i': { w: 40, strokes: [[[29, 52], [28, 82], [32, 97], [40, 93]], [[28, 30], [29, 32]]] },
     'ä': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]], [[34, 30], [35, 32]], [[52, 30], [53, 32]]] },
     'å': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]], [[45, 18], [38, 21], [36, 28], [41, 34], [49, 33], [52, 26], [46, 19]]] },
     ',': { w: 30, strokes: [[[26, 90], [28, 98], [21, 112]]] },
+    /* punkt på baslinjen — för "0,707..." (oavrundat värde, tre punkter) */
+    '.': { w: 28, strokes: [[[24, 92], [26, 94]]] },
     '?': { w: 68, strokes: [[[26, 30], [33, 14], [50, 10], [63, 17], [66, 31], [58, 45], [47, 53], [45, 64]], [[45, 86], [46, 88]]] },
     '(': { w: 42, strokes: [[[36, 8], [26, 34], [23, 60], [26, 85], [36, 106]]] },
     ')': { w: 42, strokes: [[[22, 8], [32, 34], [35, 60], [32, 85], [22, 106]]] },
@@ -303,6 +329,10 @@
     '<': { w: 76, strokes: [[[64, 40], [24, 66], [64, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
     '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] },
+    /* ekvivalenspil ⟺: två parallella streck + spets åt båda hållen */
+    '⟺': { w: 110, strokes: [[[30, 56], [80, 57]], [[30, 74], [80, 73]],
+                              [[34, 44], [14, 65], [34, 88]],
+                              [[76, 44], [96, 65], [76, 88]]] },
     /* MOMENTPILAR (svensk kurslitteratur): moment moturs/medurs skrivs som
      * ett M med en vridpil ÖVER bokstaven. Pilarna är KOMBINERANDE tecken
      * — de har inget advance och placeString ritar dem ovanför föregående
@@ -315,7 +345,7 @@
                             [[71, 85], [90, 92], [90, 72]]] }
   };
   var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
-  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '⇒': 1 };
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '⇒': 1, '⟺': 1 };
 
   /* Senast skrivna klammergränser (position för övre/undre gräns) — så
    * att insättningssteget kan ringa in dem med en pedagogisk gest. */
@@ -1371,7 +1401,7 @@
     /* INLEDANDE MOTIVERING (se REGEL i filhuvudet): motiveringen skrivs i
      * grafit och formeln DIREKT UNDER — allt i SAMMA klicksteg. 1,8·F ned
      * till formelraden så att momentpilarna går fria från j/g-staplarna. */
-    placeString('Momentjämvikt gäller, så', padL, y, s * 0.62, F * 0.62, acts);
+    placeString('Momentjämvikt', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.8 * F;
     /* TONANDE ORD (godkänt förslag 2026-07-30): "moturs"/"medurs" tonar
@@ -1535,7 +1565,7 @@
     function bubble(x, y, w, lines) {
       return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
     }
-    var FIGB_Y = 265;                       /* under figuren (se gungbrädan) */
+    var FIGB_Y = 278;                       /* under figuren (se gungbrädan) */
     function figurBubble(w, lines) {
       return bubble(120, FIGB_Y, w, lines);
     }
@@ -1572,12 +1602,22 @@
     }
     function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
 
-    /* --- figurens geometri --- */
-    var skaftT = 130, skaftB = 146;        /* skaftets över-/underkant */
-    var skaftL = 110;                      /* vänster ände (handens grepp) */
-    var mutX = 356, mutY = 138, mutR = 16; /* muttern = vridningspunkten */
-    var gripX = 130;                       /* kraftens angreppspunkt */
-    var dimY = 80;                         /* måttlinjens nivå (ovanför) */
+    /* --- figurens geometri ---
+     * FIGURORIENTERING (se REGEL): originalfiguren har nyckeln SNETT med
+     * muttern uppe till höger och kraften vinkelrät mot skaftet — samma
+     * orientering ritas här (35° lutning), inte en "tillrättalagd"
+     * vågrät nyckel. u = enhetsvektor mutter→handtag, n = vinkelrät
+     * (kraftens riktning, snett nedåt höger). */
+    var ca = Math.cos(35 * Math.PI / 180), sa = Math.sin(35 * Math.PI / 180);
+    var ux = -ca, uy = sa;                 /* mutter → handtag (ned-vänster) */
+    var nx = sa, ny = ca;                  /* vinkelrät, kraftens riktning */
+    var mutX = 356, mutY = 72, mutR = 16;  /* muttern = vridningspunkten */
+    function P(fromX, fromY, du, dn) {     /* punkt: bas + du·u + dn·n */
+      return [fromX + du * ux + dn * nx, fromY + du * uy + dn * ny];
+    }
+    var grip = P(mutX, mutY, 226, 0);      /* kraftens angreppspunkt */
+    var hEnd = P(mutX, mutY, 258, 0);      /* handtagets ände */
+    var junc = P(mutX, mutY, 18, 0);       /* skaftets möte med muttern */
 
     /* ---- steg 1: rita det vi vet — skaft, mutter, vridningspunkt ---- */
     var b1 = figurBubble(250, [
@@ -1585,9 +1625,9 @@
       [['är vridningspunkten.']]
     ]);
     tanke(b1);
-    line([skaftL, skaftT], [342, skaftT]);               /* skaftet */
-    line([skaftL, skaftB], [342, skaftB]);
-    line([skaftL, skaftT], [skaftL, skaftB]);
+    line(P(hEnd[0], hEnd[1], 0, -8), P(junc[0], junc[1], 0, -8)); /* skaftet */
+    line(P(hEnd[0], hEnd[1], 0, 8), P(junc[0], junc[1], 0, 8));
+    line(P(hEnd[0], hEnd[1], 0, -8), P(hEnd[0], hEnd[1], 0, 8));
     pause(120);
     circle(mutX, mutY, mutR);                            /* muttern */
     acts.push({ kind: 'stroke', pts: dotPts(mutX, mutY) }); /* vridningspunkt */
@@ -1595,16 +1635,18 @@
 
     /* ---- steg 2: tillägg — kraften och vridriktningen ---- */
     var b2 = figurBubble(252, [
-      [['Kraften drar skaftet nedåt, så']],
-      [['skiftnyckeln vrider moturs.']]
+      [['Kraften drar vinkelrätt mot']],
+      [['skaftet — nyckeln vrider moturs.']]
     ]);
     tanke(b2);
-    /* kraftpil + värde är vektor/tal-annotering (se REGEL) → blått */
-    line([gripX, skaftB], [gripX, 215 - 10], BLUE);
-    arrowHead(gripX, 215, gripX, skaftB, 10, BLUE);
+    /* kraftpil + värde är vektor/tal-annotering (se REGEL) → blått;
+     * pilen utgår från skaftets kant i kraftens riktning (vinkelrätt) */
+    var fTip = P(grip[0], grip[1], 0, 72);
+    line(P(grip[0], grip[1], 0, 8), P(grip[0], grip[1], 0, 62), BLUE);
+    arrowHead(fTip[0], fTip[1], grip[0], grip[1], 10, BLUE);
     var wF = stringAdvance('F=34 N', s * 0.62, F * 0.62);
-    placeString('F=34 N', gripX + 12, 222, s * 0.62, F * 0.62, acts, BLUE);
-    var boxF = [gripX + 12, gripX + 12 + wF, 222, F * 0.62];
+    placeString('F=34 N', fTip[0] + 14, fTip[1] + 1, s * 0.62, F * 0.62, acts, BLUE);
+    var boxF = [fTip[0] + 14, fTip[0] + 14 + wF, fTip[1] + 1, F * 0.62];
     pause(200);
     /* vridriktningspil (moturs) — del av scenen, grafit */
     var arc = [], th;
@@ -1617,24 +1659,31 @@
     arrowHead(tipA[0], tipA[1], tipA[0] + 18.1, tipA[1] + 8.5, 9);
     stepEnd();
 
-    /* ---- steg 3: tillägg — hävarmen som måttlinje ---- */
+    /* ---- steg 3: tillägg — hävarmen som måttlinje (parallell med
+     * skaftet, förskjuten ut i fri yta ovanför-vänster) ---- */
     var b3 = figurBubble(252, [
       [['Kraften är vinkelrät mot skaftet,']],
       [['så hävarmen är hela avståndet']],
       [['in till vridningspunkten.']]
     ]);
     tanke(b3);
-    dash([gripX, skaftT - 4], [gripX, dimY]);            /* projektionslinjer */
-    dash([mutX, mutY - mutR - 4], [mutX, dimY]);
+    dash(P(grip[0], grip[1], 0, -12), P(grip[0], grip[1], 0, -30));
+    dash(P(mutX, mutY, 0, -20), P(mutX, mutY, 0, -30));  /* projektioner */
     pause(150);
     /* måttpil + hävarmsvärde är vektor/tal (se REGEL) → blått */
-    line([gripX + 10, dimY], [mutX - 12, dimY], BLUE);
-    arrowHead(gripX, dimY, gripX + 16, dimY, 9, BLUE);
-    arrowHead(mutX - 4, dimY, mutX - 20, dimY, 9, BLUE);
+    var dimG = P(grip[0], grip[1], 0, -34);   /* ände vid greppet */
+    var dimM = P(mutX, mutY, 0, -34);         /* ände vid muttern */
+    line(P(dimG[0], dimG[1], -10, 0), P(dimM[0], dimM[1], 12, 0), BLUE);
+    arrowHead(dimG[0], dimG[1], P(dimG[0], dimG[1], -16, 0)[0],
+              P(dimG[0], dimG[1], -16, 0)[1], 9, BLUE);
+    arrowHead(P(dimM[0], dimM[1], 4, 0)[0], P(dimM[0], dimM[1], 4, 0)[1],
+              P(dimM[0], dimM[1], 20, 0)[0], P(dimM[0], dimM[1], 20, 0)[1],
+              9, BLUE);
+    /* etiketten vågrätt i den fria ytan uppe till vänster om måttlinjen */
     var wL = stringAdvance('l=0,25 m', s * 0.62, F * 0.62);
-    var xL = (gripX + mutX) / 2 - wL / 2;
-    placeString('l=0,25 m', xL, 64, s * 0.62, F * 0.62, acts, BLUE);
-    var boxL = [xL, xL + wL, 64, F * 0.62];
+    var xL = 122;
+    placeString('l=0,25 m', xL, 96, s * 0.62, F * 0.62, acts, BLUE);
+    var boxL = [xL, xL + wL, 96, F * 0.62];
     stepEnd();
 
     /* ---- beräkningen, rad för rad ---- */
@@ -1648,7 +1697,7 @@
     ]);
     tanke(b4);
     /* INLEDANDE MOTIVERING (se REGEL): motivering + formel i SAMMA steg */
-    placeString('Formeln för kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
+    placeString('Kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.45 * F;
     placeString('M=F·l', padL, y, s, F, acts);
@@ -1838,15 +1887,42 @@
       [['hävarmen: ', 0], ['M', 1], [' = ', 0], ['F', 1], [' · ', 0], ['l', 1]]
     ]);
     tanke(b4);
-    placeString('Formeln för kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
+    placeString('Kraftmoment', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.45 * F;
     placeString('M=F·l', padL, y, s, F, acts);
     stepEnd();
 
-    /* ---- hävarmen ur triangeln ---- */
-    y += adv + 0.34 * F;
-    var b5 = bubble(140, bubbleTop(y - adv), bw, [
+    /* ---- mätvärdesklammern — uträkningen av l görs INUTI klammern ----
+     * Strukturregeln (användarönskemål 2026-07-30): Figur → Formel →
+     * Klammer (mätvärden i SI, INKLUSIVE deluträkningar som hävarmen) →
+     * Insättning → Uträkning → Avrundning → Svar. Deluträkningen skrivs
+     * som i textlösningen: cos 45°=l/1,0 ⟺ l=1,0·cos 45°=0,707... m */
+    y += adv + 0.9 * F;
+    var ssK = 0.8 * s, sFK = 0.8 * F;     /* klammerrader: 0.8 av huvudskala */
+    var tick = 0.34 * sFK;
+    var yK1 = y, yK2 = y + 2.5 * sFK;     /* rad 1 / rad 2 (med bråk) */
+    var yKA = yK1 - 0.95 * sFK, yKB = yK2 + 1.1 * sFK;
+    var xT = padL + tick + 0.45 * sFK;
+
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Innan insättningen: skriv upp alla']],
+      [['mätvärden i en klammer, omgjorda']],
+      [['till SI-enheter när det behövs!']]
+    ]);
+    tanke(bK);
+    /* vänsterklammern + rad 1: kraften hämtas ur figuren → ringas */
+    acts.push({ kind: 'stroke', pts: humanize([[padL + tick, yKA], [padL, yKA]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[padL, yKA], [padL, yKB]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[padL, yKB], [padL + tick, yKB]]) });
+    pause(160);
+    var ringF = substRings(acts, [boxF]);
+    var xRow1 = placeString('F=800 N', xT, yK1, ssK, sFK, acts);
+    fadeRings(acts, ringF);
+    stepEnd();
+
+    /* rad 2: hävarmen ur triangeln — TRIG-UPPSTÄLLNING (se REGEL) */
+    var b5 = bubble(140, bubbleTop(yK1), bw, [
       [['Rätvinklig triangel! ', 0], ['l', 1], [' är närliggande', 0]],
       [['katet till 45° och hypotenusan']],
       [['är 1,0 m. Då används cosinus.']]
@@ -1859,83 +1935,72 @@
                        color: BLUE };
     acts.push(ringVinkel);
     pause(420);
-    var xx = placeString('cos 45°=', padL, y, s, F, acts);
-    /* TRIG-UPPSTÄLLNING (se REGEL): kvoten byggs del för del. Ordet för
-     * delen tonar in bredvid sin plats i kvoten, pennan ringar in
-     * motsvarande sida i FIGUREN, och först därefter skrivs delen. */
-    var ybar = y - 0.34 * F;
-    var nw = stringAdvance('l', s, F), dw = stringAdvance('1,0', s, F);
-    var fw = Math.max(nw, dw) + 0.3 * F;
-    var noteX = xx + fw + 0.6 * F;
-    var noteNar = { note: 1, x: noteX, y: ybar - 0.14 * F,
+    var xx = placeString('cos 45°=', xT, yK2, ssK, sFK, acts);
+    var ybar = yK2 - 0.34 * sFK;
+    var nw = stringAdvance('l', ssK, sFK), dw = stringAdvance('1,0', ssK, sFK);
+    var fw = Math.max(nw, dw) + 0.3 * sFK;
+    var noteX = xx + fw + 0.6 * sFK;
+    var noteNar = { note: 1, x: noteX, y: ybar - 0.14 * sFK, fs: 14,
                     text: 'närliggande katet', anchor: 'start', wins: [] };
-    var noteHyp = { note: 1, x: noteX, y: ybar + 1.04 * F,
+    var noteHyp = { note: 1, x: noteX, y: ybar + 1.04 * sFK, fs: 14,
                     text: 'hypotenusan', anchor: 'start', wins: [] };
-    /* täljaren: ordet in → ringa måttlinjen med l i figuren → skriv l */
+    /* täljaren: ordet in → torrsvep längs måttlinjen med l → skriv l */
     acts.push({ kind: 'show', obj: noteNar });
     pause(320);
-    var ringNar = { kind: 'stroke',
-                    pts: ringPts(174, 260, 63, 26), color: BLUE };
-    acts.push(ringNar);
-    pause(420);
-    placeString('l', xx + (fw - nw) / 2, ybar - 0.14 * F, s, F, acts);
+    acts.push({ kind: 'sweep',
+                pts: humanize([[pivX + 8, dimY], [topX - 10, dimY]]) });
+    pause(380);
+    placeString('l', xx + (fw - nw) / 2, ybar - 0.14 * sFK, ssK, sFK, acts);
     pause(130);
     acts.push({ kind: 'stroke', pts: humanize([[xx, ybar], [xx + fw, ybar]]) });
     pause(130);
-    /* nämnaren: ordet in → ringa spettet (hypotenusan, 1,0 m) → skriv 1,0.
-     * Ringen förskjuts mot etiketten "1,0 m" så att den också ryms. */
+    /* nämnaren: ordet in → torrsvep längs spettet (hypotenusan, 1,0 m)
+     * → skriv 1,0. Svepet går nedifrån vinkeln upp mot kraften. */
     acts.push({ kind: 'show', obj: noteHyp });
     pause(320);
-    var ringHyp = { kind: 'stroke',
-                    pts: ringAlongPts([pivX, groundY], [topX, topY], 34, 18),
-                    color: BLUE };
-    acts.push(ringHyp);
-    pause(420);
-    placeString('1,0', xx + (fw - dw) / 2, ybar + 1.04 * F, s, F, acts);
-    fadeRings(acts, [ringVinkel, ringNar, ringHyp]);
-    stepEnd();
-    /* orden tonar ut när nästa steg börjar */
+    acts.push({ kind: 'sweep',
+                pts: humanize([[pivX + 4, groundY - 4], [topX, topY + 5]]) });
+    pause(380);
+    placeString('1,0', xx + (fw - dw) / 2, ybar + 1.04 * sFK, ssK, sFK, acts);
+    /* orden tonar ut INNAN lösnings-kedjan skrivs på deras plats */
+    pause(300);
     acts.push({ kind: 'hide', obj: noteNar });
     acts.push({ kind: 'hide', obj: noteHyp });
-
-    y += adv + 0.7 * F;
-    xx = placeString('l=1,0·cos 45°≈', padL, y, s, F, acts);
-    var x707 = placeString('0,707 m', xx, y, s, F, acts);
-    var box707 = [xx, x707, y, F];
+    pause(340);
+    /* AVRUNDA ALDRIG i mellanled (se REGEL): "0,707..." med tre punkter
+     * och vanligt likhetstecken — ≈ först i sista steget */
+    var xRow2 = placeString('⟺l=1,0·cos 45°=0,707... m',
+                            xx + fw + 0.15 * sFK, yK2, ssK, sFK, acts);
+    /* högerklammern */
+    var xKR = Math.max(xRow1, xRow2) + 0.45 * sFK + tick;
+    pause(160);
+    acts.push({ kind: 'stroke', pts: humanize([[xKR - tick, yKA], [xKR, yKA]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[xKR, yKA], [xKR, yKB]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[xKR, yKB], [xKR - tick, yKB]]) });
+    fadeRings(acts, [ringVinkel]);
     stepEnd();
-
-    /* ---- mätvärdesklammern (se REGEL): kraften hämtas ur figuren och
-     * hävarmen ur raden ovanför — båda ringas in medan klammern skrivs */
-    y += adv + 0.9 * F;
-    var bK = bubble(140, bubbleTop(y - adv), bw, [
-      [['Innan insättningen: skriv upp alla']],
-      [['mätvärden i en klammer, omgjorda']],
-      [['till SI-enheter när det behövs!']]
-    ]);
-    tanke(bK);
-    var figRingar = substRings(acts, [boxF, box707]);
-    var klam = valueBracket(acts, ['F=800 N', 'l≈0,707 m'], padL, y, s, F);
-    fadeRings(acts, figRingar);
-    stepEnd();
-    y = klam.yEnd;
+    y = yK2;
 
     y += adv + 1.2 * F;
-    var b9 = bubble(140, bubbleTop(klam.yEnd + 0.32 * F), bw, [
+    var b9 = bubble(140, bubbleTop(yK2 + 0.32 * F), bw, [
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]);
     tanke(b9);
-    placeString('M=800·0,707=565,6 Nm', padL, y, s, F, acts);
+    placeString('M=800·0,707...=565,685... Nm', padL, y, s, F, acts);
     stepEnd();
 
     y += adv;
     var bAvr = bubble(140, bubbleTop(y - adv), bw, [
-      [['Mätvärdena har två gällande']],
-      [['siffror, så jag avrundar till']],
-      [['570 Nm. Det är 0,57 kNm.']]
+      [['Först NU avrundar jag! Värdet']],
+      [['med minst antal värdesiffror']],
+      [['(1,0 m) har två — då får svaret']],
+      [['också två: 570 Nm.']]
     ]);
     tanke(bAvr);
-    placeString('M≈570 Nm=0,57 kNm', padL, y, s, F, acts);
+    /* fortsättning på raden ovanför — M upprepas INTE, raden börjar med ≈
+     * (radbrytning vid ≈ är ok, användarönskemål 2026-07-30) */
+    placeString('≈570 Nm=0,57 kNm', padL, y, s, F, acts);
     stepEnd();
 
     y += adv + 0.65 * F;
@@ -2432,7 +2497,10 @@
       /* navpilar: stickande i vänster-/högerkanten vid halva skärmhöjden —
        * railen spänner hela widgeten, knappen är sticky i den så att den
        * följer med när man rullar (aldrig behöva rulla ned för att stega) */
-      '.hk-navrail{position:absolute;top:0;bottom:0;pointer-events:none;z-index:6}' +
+      /* railen börjar under helskärmsknappen/inställningsrutan (uppe till
+       * höger) — annars landar sticky-pilen ovanpå dem när widgeten ligger
+       * högt upp i vyn (påpekat 2026-07-30) */
+      '.hk-navrail{position:absolute;top:56px;bottom:0;pointer-events:none;z-index:6}' +
       '.hk-navrail.hk-left{left:2px}' +
       '.hk-navrail.hk-right{right:2px}' +
       /* max 26 px bred + 2 px kant: skriften börjar vid padL=30 — knappen
@@ -2628,6 +2696,7 @@
      * lägena — bubbelsteg ritar inga streck — så bara tiderna görs om. */
     var DRAW = 0.155;    /* px per ms  (~155 px/s, behagligt tempo) */
     var LIFT = 0.55;     /* px per ms vid pennlyft */
+    var SWEEP = 0.19;    /* px per ms vid torrsvep längs en figursträcka */
     var stegvis = opts.stegvis !== false;
     var tankar = opts.tankar !== false;
     var events = [];
@@ -2684,6 +2753,33 @@
         if (a.kind === 'pause') {
           if (pen) { events.push({ type: 'wait', t0: t, t1: t + a.ms, at: pen }); }
           t += a.ms;
+          return;
+        }
+        if (a.kind === 'sweep') {
+          /* torrsvep: pennspetsen dras längs sträckan PÅ papperet men
+           * lämnar inget bläck — pekgest som visar en sträcka i figuren */
+          var sp = a.pts;
+          var sLen = 0, cum = [0];
+          for (var si = 1; si < sp.length; si++) {
+            sLen += Math.hypot(sp[si][0] - sp[si - 1][0],
+                               sp[si][1] - sp[si - 1][1]);
+            cum.push(sLen);
+          }
+          if (pen) {
+            var sd = Math.hypot(sp[0][0] - pen[0], sp[0][1] - pen[1]);
+            if (sd > 1.5) {
+              var sdur = Math.max(80, Math.min(480, sd / LIFT));
+              events.push({ type: 'move', t0: t, t1: t + sdur,
+                            from: pen, to: [sp[0][0], sp[0][1]] });
+              t += sdur;
+            }
+          }
+          var tdur = Math.max(260, sLen / SWEEP);
+          events.push({ type: 'trace', t0: t, t1: t + tdur, pts: sp,
+                        len: sLen, cum: cum,
+                        to: [sp[sp.length - 1][0], sp[sp.length - 1][1]] });
+          t += tdur;
+          pen = [sp[sp.length - 1][0], sp[sp.length - 1][1]];
           return;
         }
         var start = [a.pts[0][0], a.pts[0][1]];
@@ -2753,6 +2849,17 @@
           pos = [ev.from[0] + (ev.to[0] - ev.from[0]) * e,
                  ev.from[1] + (ev.to[1] - ev.from[1]) * e];
           lift = Math.sin(Math.PI * p);
+        } else if (ev.type === 'trace') {
+          /* torrsvep: följ polylinjen med jämn fart och mjuk start/stopp,
+           * pennan kvar mot papperet (lift = 0) */
+          var et = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          var dist = et * ev.len;
+          var k = 0;
+          while (k < ev.pts.length - 2 && ev.cum[k + 1] < dist) k++;
+          var segL = ev.cum[k + 1] - ev.cum[k] || 1;
+          var f = (dist - ev.cum[k]) / segL;
+          pos = [ev.pts[k][0] + (ev.pts[k + 1][0] - ev.pts[k][0]) * f,
+                 ev.pts[k][1] + (ev.pts[k + 1][1] - ev.pts[k][1]) * f];
         } else { pos = ev.at; }
         col = ev.penCol;
         break;

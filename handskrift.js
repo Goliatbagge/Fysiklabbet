@@ -3016,6 +3016,10 @@
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
       '.hk-paper svg{display:block;width:100%;height:auto}' +
+      '.hk-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}' +
+      /* MOBIL: svg:n bredare än rutan + sidledsskroll med pennföljning —
+       * annars krymper handskriften till oläslighet på smal skärm */
+      '@media (max-width:600px){.hk-paper .hk-scroll svg{width:160%;max-width:none}}' +
       /* helskärmsknappen följer widgetens eget formspråk (samma kant,
        * botten och radie som hk-btn-knapparna) — diskret uppe till höger */
       '.hk-fsbtn{position:absolute;top:10px;right:10px;width:32px;height:32px;' +
@@ -3125,7 +3129,34 @@
 
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H,
                           'aria-label': 'Handskriven lösning' });
-    paperDiv.appendChild(svg);
+    /* MOBIL: på smal skärm görs svg:n bredare än arket (media query i
+     * injectCSS) och skrollas i sidled i en egen container — annars blir
+     * handskriften för liten att läsa (användarönskemål 2026-07-30).
+     * Skrollern ligger INUTI paperDiv så att de absoluta kontrollerna
+     * (helskärm, tankar-rutan) inte följer med i sidledsskrollen.
+     * Pennföljning i x-led: se render(); snapX() vid steggränser. */
+    var scroller = document.createElement('div');
+    scroller.className = 'hk-scroll';
+    paperDiv.appendChild(scroller);
+    scroller.appendChild(svg);
+    /* vid steggräns: visa radens början — men står en tankebubbla framme
+     * (t.ex. i den fria ytan till höger om figuren) centreras DEN i vyn,
+     * annars läses steget utan sin bubbla på mobilen */
+    function snapX() {
+      if (scroller.scrollWidth - scroller.clientWidth < 8) return;
+      var target = 0;
+      for (var i = 0; i < objs.length; i++) {
+        var o = objs[i];
+        if (!o.bubble) continue;
+        if (winOpacity(o.wins, tNow) > 0.5) {
+          var scx = svg.clientWidth / W;
+          target = Math.max(0, (o.x + (o.w || 200) / 2) * scx -
+                               scroller.clientWidth / 2);
+          break;
+        }
+      }
+      scroller.scrollLeft = target;
+    }
 
     /* defs: rutmönster + blyertsfilter */
     var defs = el('defs', null, svg);
@@ -3420,6 +3451,17 @@
       hand.setAttribute('transform',
         'translate(' + lx.toFixed(1) + ' ' + ly.toFixed(1) + ') ' +
         'rotate(' + (wob - pp.lift * 4).toFixed(2) + ')');
+      /* mobil sidledsskroll (se .hk-scroll): följ pennan i x-led med
+       * dödzon. Handens viloläge (W+40) jagas inte — klampa till arket. */
+      if (scroller.scrollWidth - scroller.clientWidth > 8) {
+        var scx = svg.clientWidth / W;
+        var px = Math.min(pp.pos[0], W - 40) * scx;
+        var vw = scroller.clientWidth;
+        var dead = 0.24 * vw;
+        var on = px - scroller.scrollLeft;
+        if (on > vw - dead) scroller.scrollLeft = px - vw + dead;
+        else if (on < dead) scroller.scrollLeft = Math.max(0, px - dead);
+      }
     }
 
     var target = TOTAL;   /* i stegvis läge: nästa steggräns */
@@ -3437,7 +3479,9 @@
       if (lastTs != null) tNow += (ts - lastTs) * speed * boost;
       lastTs = ts;
       if (tNow >= target) {
-        tNow = target; render(tNow); followPen(boost > 1); stop(); return;
+        tNow = target; render(tNow); followPen(boost > 1);
+        snapX();               /* mobil: visa radens början vid steggräns */
+        stop(); return;
       }
       render(tNow);
       followPen(false);
@@ -3687,7 +3731,11 @@
     wrap.addEventListener('touchmove', function () { scrollTarget = null; },
       { passive: true });
     function followPen(instant) {
-      if (document.fullscreenElement !== wrap) { scrollTarget = null; return; }
+      if (document.fullscreenElement !== wrap) {
+        scrollTarget = null;
+        if (instant) snapX();  /* mobil: hopp/steg → visa radens början */
+        return;
+      }
       var sc = svg.clientWidth / W;
       var pp = penPosAt(Math.min(tNow, TOTAL - 810));  /* ej slutglidningen */
       var py = pp.pos[1] * sc;

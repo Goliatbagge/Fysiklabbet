@@ -249,10 +249,17 @@
             ink:   '#0f1620',
             ok:    '#0d7a52',  // jämvikt (grön)
         };
-        const PALETTE = ['#c8324a', '#2563eb', '#0d9488', '#e0701a', '#7c3aed', '#b45309'];
+        // Viktfärger. Ingen av dem får vara crimson (tyngdkraftens färg) eller
+        // teal (hävarmens färg) — tyngdkraftspilen ritas genom vikten, och en
+        // likfärgad låda skulle svälja pilen.
+        const PALETTE = ['#2563eb', '#e0701a', '#7c3aed', '#15803d', '#475569', '#a16207'];
 
         // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. ──
-        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, dash = false, opacity = 1 }) => {
+        // Ingen mörk casing heller: kraftfärgen räcker mot både pappersbotten,
+        // bräda och vikt, och en kantlinje läser sig som en skugga.
+        // cap='butt' används där svansen ska sluta exakt i angreppspunkten.
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, dash = false,
+                        opacity = 1, cap = 'round' }) => {
             const ang = Math.atan2(y2 - y1, x2 - x1);
             const len = Math.hypot(x2 - x1, y2 - y1);
             if (len < 0.5) return null;
@@ -264,9 +271,9 @@
             return (
                 <g opacity={opacity}>
                     <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
-                          strokeLinecap="round" strokeDasharray={dash ? '7 6' : undefined} />
+                          strokeLinecap={cap} strokeDasharray={dash ? '7 6' : undefined} />
                     <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
-                             stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                             strokeLinejoin="round" />
                 </g>
             );
         };
@@ -323,11 +330,17 @@
         // Maxlutning = den vinkel där brädans nedre ände precis vilar mot marken.
         const THETA_GROUND = Math.asin((GROUND_Y - PY - BEAM_T / 2) / HALF_PX);
         // ── Rotationsdynamik (gungbrädan svänger som i verkligheten) ──
-        // I·θ'' = M_last − C·sinθ − b·θ'   (M_last = netto kraftmoment).
-        // Återförande termen C·sinθ ger en liten "flytzon" mycket nära jämvikt;
-        // vid större obalans överskrids markvinkeln och brädan vilar mot marken.
-        const REST_C = 22;                 // återförande vridmoment (Nm/rad) — brädans egenstabilitet
-        const DAMP_B = 10;                 // dämpning (Nm per rad/s)
+        // I·θ'' = M_last − C·sinθ − b·θ'   (M_last = viktenas netto kraftmoment).
+        // Egenstabiliteten C·sinθ (vridpunkten sitter strax ovanför brädans
+        // tyngdpunkt) är i den ideala modellen FÖRSUMBAR mot varje verklig
+        // obalans: den appliceras därför BARA när viktmomenten tar ut varandra
+        // (samma avrundade värde som visas i jämviktsrutan) och ställer då
+        // brädan vågrätt. Vid minsta obalans är brädan fri (C = 0) och vrider
+        // sig hela vägen tills den nedre änden vilar mot marken — den får
+        // ALDRIG stanna i ett mellanläge när momenten är olika stora.
+        const REST_C = 22;                 // egenstabilitet (Nm/rad) — bara vid jämvikt
+        const DAMP_B_FREE = 4;             // dämpning vid obalans (Nm per rad/s)
+        const DAMP_B_BAL = 10;             // dämpning vid jämvikt (lugn insvängning)
         const INERTIA0 = 1.1;              // grundtröghet
         const INERTIA_M = 0.22;            // tröghetstillskott per kg total massa
         const kF = 1.4;                    // px per N (tyngdkraftspil)
@@ -341,17 +354,21 @@
                                draggingId, massDown, massMove, massUp }) => {
             const cosT = Math.cos(theta), sinT = Math.sin(theta);
             const deg = theta * 180 / Math.PI;
-            // riktning längs brädan (mot höger ände) och uppåtnormal
-            const nUp = { x: sinT, y: -cosT };
-
             const beamPoint = (x) => ({ x: PX + x * PXM * cosT, y: PY + x * PXM * sinT });
 
             // förberäkna varje massas geometri
             const items = masses.map((mass, i) => {
                 const bp = beamPoint(mass.x);
                 const hw = massHW(mass.m), hh = massHH(mass.m);
-                const off = BEAM_T / 2 + hh / 2 + 2;
-                const cx = bp.x + nUp.x * off, cy = bp.y + nUp.y * off;
+                const off = BEAM_T / 2 + hh / 2 + 2;   // vinkelrätt avstånd till brädan
+                // Tyngdpunkten läggs LODRÄTT ovanför viktens punkt på brädan.
+                // En lodrät förskjutning d = off/cos θ ger exakt samma vinkelräta
+                // avstånd (off) till brädan — lådan vilar alltså fortfarande plant
+                // mot brädan — samtidigt som tyngdkraftens verkningslinje genom
+                // tyngdpunkten sammanfaller med hävarmen l = x · cos θ och med
+                // hävarmens måttlinje. (Med en förskjutning längs brädans normal
+                // hamnade tyngdpunkten i stället vid sidan om verkningslinjen.)
+                const cx = bp.x, cy = bp.y - off / cosT;
                 const F = mass.m * G;
                 const arm = mass.x * cosT;       // hävarm (m), tecken: + höger
                 // Kraftmoment med tecken: + = moturs (vänster), − = medurs (höger)
@@ -487,7 +504,7 @@
                     <circle cx={PX} cy={PY} r="6.5" fill="#e9e3d4" stroke="#1b1f27" strokeWidth="2" />
 
                     {/* massorna (vikter ovanpå brädan) */}
-                    {items.map(({ mass, i, cx, cy, hw, hh }) => (
+                    {items.map(({ mass, cx, cy, hw, hh }) => (
                         <g key={'box' + mass.id}
                            style={{ cursor: draggingId === mass.id ? 'grabbing' : 'grab' }}
                            onPointerDown={(e) => massDown(e, mass.id)}
@@ -501,7 +518,6 @@
                                 {/* handtag-bygel */}
                                 <path d={`M ${cx - hw * 0.5} ${cy - hh / 2} q 0 -8 ${hw * 0.5} -8 q ${hw * 0.5} 0 ${hw * 0.5} 8`}
                                       fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="2.4" />
-                                <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff">{i + 1}</text>
                             </g>
                         </g>
                     ))}
@@ -515,20 +531,34 @@
                         </Tag>
                     ))}
 
-                    {/* tyngdkrafter (rakt ned genom viktens läge på brädan =
-                        verkningslinjen som hävarmen mäts till) */}
-                    {show.forces && items.map(({ mass, i, bp, cy, hh, F }) => {
-                        const fx = bp.x;                 // verkningslinje = viktens punkt på brädan
-                        const y0 = cy + hh / 2 - 2;
-                        const L = lenF(F);
-                        const y1 = y0 + L;
+                    {/* tyngdkrafter — svansen i viktens TYNGDPUNKT (angreppspunkten,
+                        markerad med en prick) och pilen rakt ned genom kroppen.
+                        Verkningslinjen är lodrät genom tyngdpunkten och sammanfaller
+                        med hävarmens måttlinje. Pilen ritas ovanpå vikten och brädan
+                        i ren kraftfärg — ingen kontur/casing (den läser sig som en
+                        skugga) och absolut ingen vit halo (se CLAUDE.md). */}
+                    {show.forces && items.map(({ mass, cx, cy, hh, F }) => {
+                        // Svansen sitter i tyngdpunkten, alltså hh/2 upp INNE i lådan.
+                        // Den delen är lika lång för alla vikter av samma storlek, så
+                        // den fritt synliga delen under lådan förblir ∝ F och pilarna
+                        // går att jämföra — och pilspetsen hamnar alltid i fri yta.
+                        const y1 = cy + hh / 2 + lenF(F);
                         const anchor = mass.x >= 0 ? 'start' : 'end';
-                        const lx = fx + (mass.x >= 0 ? 9 : -9);
+                        const lx = cx + (mass.x >= 0 ? 9 : -9);
+                        // När brädans ände vilar mot marken hamnar pilspetsen nära
+                        // marklinjen — flytta då etiketten under linjen (fri yta)
+                        // så att den aldrig ligger PÅ marklinjen eller brädänden.
+                        let ly = y1 + 13;
+                        if (ly > GROUND_Y - 8 && ly < GROUND_Y + 20) ly = GROUND_Y + 20;
                         return (
-                            <g key={'fg' + mass.id}>
-                                <Arrow x1={fx} y1={y0} x2={fx} y2={y1} color={COL.tyngd} width={6} head={17} />
+                            <g key={'fg' + mass.id} style={{ pointerEvents: 'none' }}>
+                                <Arrow x1={cx} y1={cy} x2={cx} y2={y1} color={COL.tyngd}
+                                       width={6} head={17} cap="butt" />
+                                {/* angreppspunkt = tyngdpunkten (rund knopp i samma
+                                    kraftfärg — syns som svansens markör utan kontur) */}
+                                <circle cx={cx} cy={cy} r="4.6" fill={COL.tyngd} />
                                 {/* Etiketten under pilspetsen, i fri yta — inte på brädan */}
-                                <Tag x={lx} y={y1 + 13} color={COL.tyngd} size={13} anchor={anchor}>
+                                <Tag x={lx} y={ly} color={COL.tyngd} size={13} anchor={anchor}>
                                     <tspan fontStyle="italic">F</tspan>
                                     <tspan dy="3" fontSize="10">G</tspan>
                                     <tspan dy="-3"> = {fmt(F)} N</tspan>
@@ -640,7 +670,9 @@
                 if (arm > 0) mRight += M;
                 else if (arm < 0) mLeft += M;
             });
-            const balanced = Math.abs(mLeft - mRight) < 0.4;
+            // Jämvikt = de avrundade värdena som visas (en decimal) är lika —
+            // samma villkor som styr brädans egenstabilitet i animationsloopen.
+            const balanced = Math.round(mLeft * 10) === Math.round(mRight * 10);
             const leanRight = mRight > mLeft;
 
             // animationsloop — riktig rotationsdynamik: större kraftmoment ger
@@ -652,14 +684,27 @@
                     lastRef.current = ts;
                     if (dt > 0.05) dt = 0.05;          // hoppa inte vid flikbyte
 
-                    let S = 0, mTot = 0;
-                    for (const w of massesRef.current) { S += w.m * w.x; mTot += w.m; }
-
                     const prev = thetaRef.current;
                     let th = prev, om = omegaRef.current;
+
+                    // moment per sida med aktuella hävarmar (samma som visas i UI)
+                    let Sl = 0, Sr = 0, mTot = 0;
+                    const cT0 = Math.cos(th);
+                    for (const w of massesRef.current) {
+                        const arm = w.x * cT0;
+                        const M = w.m * G * Math.abs(arm);
+                        if (arm > 0) Sr += M; else if (arm < 0) Sl += M;
+                        mTot += w.m;
+                    }
                     const I = INERTIA0 + INERTIA_M * mTot;
-                    const Mload = G * Math.cos(th) * S;            // netto kraftmoment (Nm), + = medurs
-                    const aa = (Mload - REST_C * Math.sin(th) - DAMP_B * om) / I;
+                    const Mload = Sr - Sl;                         // netto kraftmoment (Nm), + = medurs
+                    // Jämvikt = samma avrundade värden som i jämviktsrutan (en decimal).
+                    // Bara då verkar egenstabiliteten och ställer brädan vågrätt;
+                    // vid obalans är brädan fri och vrider sig ända ned till marken.
+                    const isBal = Math.round(Sl * 10) === Math.round(Sr * 10);
+                    const rest = isBal ? REST_C * Math.sin(th) : 0;
+                    const damp = isBal ? DAMP_B_BAL : DAMP_B_FREE;
+                    const aa = (Mload - rest - damp * om) / I;
                     om += aa * dt;
                     if (om > 8) om = 8; else if (om < -8) om = -8;
                     th += om * dt;

@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-31 | `2026-07-31-fotonisk-tidskristall` | Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen | Helmholtz-Zentrum Dresden-Rossendorf, HZDR (pressmeddelande) / Phys.org / EurekAlert! / Nature (T. Guo et al., 2026) |
 | 2026-07-30 | `2026-07-30-hattformens-kirala-ljus` | Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva | Institute of Industrial Science, The University of Tokyo (pressmeddelande) / Phys.org / EurekAlert! / Nature Communications (Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, 2026) |
 | 2026-07-29 | `2026-07-29-neutronernas-spegelvarld` | Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår | Paul Scherrer Institute PSI (pressmeddelande) / Phys.org / Physical Review Letters (N. J. Ayres et al., 2026) |
 | 2026-07-28 | `2026-07-28-ljusets-envagsgata` | Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån | Cornell Chronicle (pressmeddelande) / Phys.org / Nature Materials (T. J. Ugras et al., 2026) |

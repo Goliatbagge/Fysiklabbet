@@ -43,6 +43,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-31-fotonisk-tidskristall",
+    date: "2026-07-31",
+    title: "Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen",
+    deck: "En vanlig kristall — som salt eller diamant — upprepar exakt samma mönster om och om igen genom rummet. Nu har ett internationellt forskarlag för första gången byggt kristallens tidsmässiga motsvarighet: ett material vars optiska egenskaper i stället upprepar sig i tiden — och använt det för att nästan halvera hur mycket energi terahertzljus förlorar på väg genom det.",
+    category: "Vågor",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-31-fotonisk-tidskristall.jpg",
+    imageAlt: "En konstnärlig gestaltning i ett mörkt rum: en gulorange ljusvåg med tydliga vågtoppar rör sig in från vänster mot en genomskinlig kub uppbyggd av ett nätverk av blå och rödaktiga vågmönster, prickad med ljusa punkter. Bilden illustrerar hur en terahertzpuls sätter en fotonisk tidskristall i svängning.",
+    imageCredit: "Bild: B. Schröder/HZDR (pressbild, konstnärlig gestaltning)",
+    tags: ["optik", "vågor", "terahertz", "metamaterial", "plasmon", "halvledare", "laser", "kristaller", "fysik 2"],
+    sources: [
+      { name: "Helmholtz-Zentrum Dresden-Rossendorf, HZDR (pressmeddelande)", url: "https://www.hzdr.de/db/Cms?pNid=99&pOid=78295" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-photonic-crystals-ultrafast-terahertz-range.html" },
+      { name: "EurekAlert!", url: "https://www.eurekalert.org/news-releases/1138063" }
+    ],
+    research: {
+      citation: "T. Guo et al., ”Plasmonic metamaterial time crystal”, Nature (2026)",
+      url: "https://doi.org/10.1038/s41586-026-10825-9"
+    },
+    body: [
+      { type: "p", html: "En vanlig kristall — ett saltkorn, en diamant, is i en fönsterruta — är byggd av atomer som upprepar exakt samma mönster om och om igen genom rummet. Den regelbundenheten är själva grunden för hur kristaller styr allt från ljus till elektroner. Nu har ett internationellt forskarlag, lett från École polytechnique i Frankrike tillsammans med Collège de France och Helmholtz-Zentrum Dresden-Rossendorf (HZDR) i Tyskland, för första gången byggt kristallens tidsmässiga motsvarighet: ett material vars optiska egenskaper upprepar sig i tiden i stället för i rummet. Studien, publicerad i tidskriften <em>Nature</em> den 30&nbsp;juli 2026, visar att ljus som färdas genom materialet läcker mindre än hälften så mycket energi som väntat." },
+
+      { type: "h2", text: "En kristall som upprepar sig i tiden, inte i rummet" },
+      { type: "p", html: "Fotoniska kristaller — konstgjorda material med ett periodiskt mönster i mikrometerskala — har använts i årtionden för att styra ljus, ungefär som ett vanligt kristallgitter av atomer styr elektroner: vissa våglängder studsar tillbaka, andra släpps rakt igenom. Idén bakom den nya studien är att göra samma sak, fast med tiden som den periodiska variabeln i stället för rummet. I stället för att bygga strukturen i rader och kolumner genom materialet fick forskarna materialets optiska egenskaper — hur starkt det bryter och reflekterar ljus — att svänga upp och ner om och om igen, exakt en gång per ljusvåg." },
+
+      { type: "h2", text: "Ett galler av guld ovanpå en halvledarkristall" },
+      { type: "p", html: "Testbädden är ett så kallat metamaterial: ett konstgjort material vars egenskaper kommer från en noggrant designad mikrostruktur snarare än från de enskilda atomerna. Ovanpå en några millimeter stor kristall av indium-antimonid — en halvledare med ovanligt lättrörliga elektroner — lade forskarna ett tunt isolerande lager och därpå ett galler av guldremsor, var och en tunnare än ett hårstrå. Under remsorna kan elektronerna i halvledaren svänga kollektivt fram och tillbaka som en så kallad ytplasmon: en vågrörelse hos elektronernas laddning som är instängd nära ytan och kopplar mycket starkt till ljus." },
+      { type: "p", html: "För att sätta systemet i svängning använde forskarna TELBE, en anläggning vid HZDR:s elektronaccelerator ELBE som kan skicka ut extremt kraftfulla och fasstabila pulser av terahertzljus — ljus med en frekvens någonstans mellan mikrovågor och infrarött. En puls vid 0,69&nbsp;THz (ungefär 690&nbsp;miljarder svängningar per sekund) med ett toppfält på omkring 40&nbsp;kV/cm fick elektronerna att accelerera så hårt att deras effektiva massa — hur trögt de rör sig genom materialet — periodvis förändrades med upp till 80&nbsp;%, exakt i takt med ljusvågens svängningar. Den regelbundna, periodiska förändringen är precis det som definierar en tidskristall." },
+      { type: "quote", html: "”Genom att utvidga fotoniska kristaller från rummet till tiden öppnar vi en ny dimension för att kontrollera ljus — och en ny väg mot förstärkning och lasereffekt.”", cite: "Tingwen Guo, doktorand och försteförfattare till studien, École polytechnique" },
+
+      { type: "h2", text: "Från läckage till förstärkning" },
+      { type: "p", html: "Normalt läcker en ytplasmon energi som värme nästan lika fort som den bildas — ungefär som en studsande boll som tappar fart för varje studs. Men efter omkring 21&nbsp;pikosekunder (21 biljondels sekunder) av den periodiska drivningen passerade systemet en kritisk gräns i sin fysik, vad forskarna kallar en exceptionell punkt, där förlusterna vände till en inbyggd förstärkning. Energiförlusterna minskade med omkring 50&nbsp;%, vilket syns i att den så kallade linjebredden hos ytplasmonen — ett mått på hur snabbt svängningen dör ut — smalnade av från omkring 70 till 40&nbsp;gigahertz. Teoretiker vid Collège de France kunde återskapa hela förloppet i en matematisk modell, en karta som forskarna nu kan använda för att förutsäga och styra effekten i framtida experiment." },
+      { type: "quote", html: "”TELBE:s unika förmåga att generera terahertzpulser med högt fält och stabil fas var avgörande. Utan den här infrastrukturen hade det varit omöjligt att uppnå den koherenta, ultrasnabba modulering som krävs för tidskristall-tillståndet.”", cite: "Jan-Christoph Deinert, ansvarig för TELBE-anläggningen, HZDR" },
+
+      { type: "h2", text: "Ett gap som väntar på att fyllas" },
+      { type: "p", html: "Terahertzljus befinner sig i vad fysiker brukar kalla terahertzgapet: ett frekvensband som är för snabbt för vanlig elektronik och för långsamt för vanlig optik, vilket gör det ovanligt svårt att både skapa, förstärka och styra. Ändå är det just det bandet som framtidens höghastighetskommunikation och ultrasnabba optiska databehandling behöver ta sig an. En förstärkningseffekt som uppstår ur materialets egen periodicitet, i stället för från en traditionell laserpump, skulle kunna bli grunden för kompakta terahertzlasrar som fungerar vid rumstemperatur — något som i dag kräver dyr utrustning nedkyld till några kelvin över absoluta nollpunkten." },
+      { type: "quote", html: "”Terahertzområdet utgör gränslandet mellan elektronikens och fotonikens teknologier. Det är fullt av möjligheter för både vetenskapen och samhället, men fortfarande tekniskt underutvecklat jämfört med sina elektriska och fotoniska motsvarigheter.”", cite: "Yannis Laplace, forskare vid École polytechnique, Laboratoriet för bestrålade fasta ämnen (LSI)" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Terahertzgapet: ljus med frekvenser mellan ungefär 0,1 och 10&nbsp;THz ligger i ett ingenmansland mellan elektronikens och optikens verktygslådor — notoriskt svårt att både skapa och styra.",
+        "Namnet ”tidskristall” myntades redan 2012 av fysikern Frank Wilczek, men för en helt annan idé: kvantsystem vars grundtillstånd spontant upprepar sig i tiden utan någon yttre påverkan, en variant som några år senare byggdes i bland annat kvantdatorer. Den ”fotoniska tidskristallen” i den här studien delar bara namnet — här är det en yttre laserpuls, inte spontan symmetribrytning, som tvingar fram periodiciteten.",
+        "TELBE-anläggningen drivs av ELBE, en partikelaccelerator vid HZDR som normalt används för allt från kärnfysik till materialforskning."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-30-hattformens-kirala-ljus",
     date: "2026-07-30",
     title: "Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva",

@@ -30,6 +30,14 @@ node .claude/verify-figur-bounds.js
 # Se "Geometrifigurer" nedan för reglerna.
 node .claude/verify-vinkelbagar.js
 
+# Verifiera BALANSEN i kopplingsscheman (KÖR FÖRE COMMIT vid ändringar i
+# kopplingsscheman!) — komponenterna ska ha lika stora mellanrum på sin
+# ledarsträcka, batteriet sitta centrerat och parallellgrenarna ligga på
+# lika avstånd (även ner till bottenledningen). Granskar både
+# data/teori/*.md och schemana som makeCircuit/makeBridge genererar.
+# Se "Kopplingsscheman: jämn fördelning och centrering" nedan.
+node .claude/verify-kopplingsschema.js
+
 # Verifiera exit tickets efter ändringar i data/exittickets.js (KÖR FÖRE
 # COMMIT!) — syntax, täckning mot katalogen, choices/why-längder, emoji,
 # tappade KaTeX-backslash. Dataformatet dokumenteras i filens huvud;
@@ -1166,6 +1174,48 @@ fysikfigurer). Dessa fel har ALLA förekommit och rättats i stor skala
    sida i rätt delningsförhållande), hjälpsträckor ska gå till de hörn
    beviset använder, medelpunktsvinkeln 2v ska vara just 2v (kan bli
    reflex > 180° — rita den då som reflexbåge med large-arc-flagga 1).
+
+### Kopplingsscheman: jämn fördelning och centrering
+
+**Komponenterna i ett kopplingsschema ska sitta JÄMNT FÖRDELADE på sin
+ledare — aldrig hopklumpade i ena änden** (uttryckligt önskemål
+2026-07-31). Balansen är det första ögat läser i ett schema: två lampor
+tryckta åt vänster med tom ledning till höger, eller ett batteri som
+sitter bredvid mitten, ser slarvigt ut även när kopplingen är elektriskt
+rätt. Kör `node .claude/verify-kopplingsschema.js` före commit — den
+mäter mellanrummen i teorifigurerna och i schemana som
+`makeCircuit`/`makeBridge` genererar.
+
+1. **Lika stora mellanrum — räkna, gissa aldrig.** På en ledarsträcka
+   ska mellanrummet före första komponenten, mellan varje par och efter
+   sista komponenten vara lika stort:
+   `g = (sträckans längd − Σ komponentbredder) / (antal komponenter + 1)`.
+   Komponentens mittpunkt blir då `sträckans början + g + bredd/2` osv.
+   (Detta ger automatiskt en centrerad rad — centrering är alltså inte
+   ett separat steg.)
+2. **Sträckan går från nod till nod.** En nod är ett hörn, en
+   förgrening eller en utmärkt/jordad punkt. Varje sträcka fördelas för
+   sig: sitter en resistor mellan noderna A och B centreras den mellan
+   A och B, inte mot hela ledarens mitt.
+3. **Batteriet centreras på sin ledare** — även när det sitter ensamt på
+   bottenledningen (mittpunkt = ledarens mittpunkt) och även när ledaren
+   är lodrät. Samma sak för växelspänningskälla, amperemeter och andra
+   symboler som sitter ensamma på en sträcka.
+4. **Parallellkopplingens grenar ligger på LIKA avstånd** — och
+   avståndet toppledning → första grenen och sista grenen →
+   bottenledning ska vara lika stora som avståndet mellan grenarna.
+   Vanligaste felet: bottenledningen klistras fast strax under understa
+   grenen medan grenarna har rejält med luft mellan sig.
+5. **Grenarnas komponenter centreras i sin gren.** En gren med EN lampa
+   sätter lampan mitt på grenen, även om en annan gren har två
+   komponenter — grenarna fördelas var för sig.
+6. **Symmetriska ben.** Har schemat en seriekomponent på ena sidan om en
+   parallellsektion ska ledningsbenen på var sida vara lika långa, så
+   att parallellsektionen och batteriet hamnar på samma lodräta
+   mittlinje.
+7. `makeCircuit()`/`makeBridge()` i `data/ovningar.js` gör allt detta
+   automatiskt via `spreadCenters()` — bygg övningsscheman med dem, och
+   ändra inte fördelningslogiken till fasta slot-avstånd igen.
 
 ### Diagramkonventioner (svensk fysik/matte-standard)
 

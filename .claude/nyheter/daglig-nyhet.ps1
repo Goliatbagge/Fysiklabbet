@@ -82,6 +82,8 @@ if (Test-Path $Lock) {
 }
 Set-Content -Path $Lock -Value $Today -Encoding ascii
 
+$Misslyckades = $false
+
 try {
     # 4) Synka med GitHub forst (undvik push-konflikt).
     Log "git pull --rebase --autostash origin main"
@@ -103,9 +105,28 @@ Steps: check the queue/log in .claude/nyheter/ so you do not repeat a story; pic
 Publish ONLY ONE article. If today's date already exists in data/nyheter.js, make no changes and do not commit.
 "@
 
-        Log "Startar Claude Code (headless, modell sonnet)..."
-        Invoke-Native $Claude @('-p', $Prompt, '--model', 'sonnet', '--dangerously-skip-permissions')
+        # Headless print-lage avslutar bakgrundsagenter efter 600 s som standard.
+        # Nyhetsagenten startas ofta i bakgrunden och behover langre tid an sa
+        # (2026-07-30: agenten dodades mitt i arbetet, exitkod 0, ingen artikel).
+        # 0 = vanta ut bakgrundsjobben i stallet for att kapa dem.
+        $env:CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS = '0'
+
+        # Modell: opus (uttryckligt onskemal 2026-07-31). Nyhetsagenten gor
+        # research, faktakoll och redaktionell bedomning - det tjanar pa den
+        # starkaste modellen. 'opus' = senaste Opus-versionen.
+        Log "Startar Claude Code (headless, modell opus)..."
+        Invoke-Native $Claude @('-p', $Prompt, '--model', 'opus', '--dangerously-skip-permissions')
         Log ("Claude avslutade med kod {0}" -f $LASTEXITCODE)
+
+        # Lita INTE pa exitkoden - den kan bli 0 aven nar ingen artikel skrevs.
+        # Kontrollera resultatet i data/nyheter.js i stallet.
+        if (HasTodayArticle) {
+            Log "OK: dagens artikel finns nu i data/nyheter.js."
+        }
+        else {
+            $Misslyckades = $true
+            Log ('FEL: Claude avslutade utan att skriva nagon artikel for {0} - ingen rad "date: {1}{0}{1}" i data/nyheter.js.' -f $Today, '"')
+        }
     }
 
     # 6) Skyddsnat: pusha eventuella ej pushade commits.
@@ -119,9 +140,19 @@ Publish ONLY ONE article. If today's date already exists in data/nyheter.js, mak
     }
 }
 catch {
+    $Misslyckades = $true
     Log ("FEL: {0}" -f $_.Exception.Message)
 }
 finally {
     Remove-Item -Force $Lock -ErrorAction SilentlyContinue
-    Log "=== Daglig nyhet: slut ==="
+    if ($Misslyckades) {
+        Log "=== Daglig nyhet: slut (MISSLYCKADES - ingen artikel publicerad) ==="
+    }
+    else {
+        Log "=== Daglig nyhet: slut ==="
+    }
 }
+
+# Icke-noll exitkod nar inget publicerades, sa Windows Schemalaggaren visar
+# korningen som misslyckad i stallet for gron.
+if ($Misslyckades) { exit 1 }

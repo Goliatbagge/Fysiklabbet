@@ -298,42 +298,35 @@ Stöder serie, parallell (1–N grenar) och en blandkoppling (en
 parallellsektion i serie). Se kommentaren ovanför funktionen för
 fullständigt API.
 
-**Komponenterna ska sitta centrerat och jämnt fördelade på ledaren.**
-I en rak del av en ledare (typiskt topp-ledningen) ska komponenterna
-ligga med **lika marginal** mot vänster och höger ram, med jämnt
-inbördes avstånd. En seriekoppling med tre lampor som hamnar förskjutna
-åt vänster med tomt utrymme till höger ser obalanserad och ful ut.
+**Komponenterna ska sitta jämnt fördelade på ledaren.** Mellanrummet
+före första komponenten, mellan varje par och efter sista komponenten
+ska vara **lika stort** — då hamnar raden automatiskt centrerad. En
+seriekoppling med tre lampor som hamnar förskjutna åt vänster med tomt
+utrymme till höger ser obalanserad och ful ut. Hela regeln (som gäller
+ALLA kopplingsscheman, även handskrivna i `data/teori`) står i
+[CLAUDE.md](CLAUDE.md) under "Kopplingsscheman: jämn fördelning och
+centrering"; `node .claude/verify-kopplingsschema.js` mäter efterlevnaden.
 
-`makeCircuit` centrerar på **content-bounding-box** (yttersta vänster-
-kant till yttersta högerkant av alla element, inkl. förgreningsnoderna
-för parallel-sektioner) — inte på komponenternas geometriska centroider.
-Skillnaden märks i blandkopplingar där en parallel-sektion "sticker ut"
-med förgreningsnoder ±segW/2 utanför sin slot-center; bounding-box-
-centrering ger jämn marginal mot ramen, centroid-centrering inte.
+`makeCircuit` sköter det med `spreadCenters(x1, x2, bredder)`:
+`g = (x2 − x1 − Σ bredder) / (antal + 1)`, applicerad både på
+topp-ledningen och inuti varje parallellgren. Parallell-sektionen
+räknas som EN komponent med bredden `parallelNaturalW`, så
+förgreningsnoderna får samma luft som allt annat. Ändra inte tillbaka
+till fasta slot-positioner — det var precis det som gav sneda scheman.
 
-**Avståndet mellan komponenter** styrs av tre olika värden:
+**Storleksvärden** som styr hur stor ytan blir (inte fördelningen):
 
-- `segW = 72` — slotbredd i **rena seriekretsar** (utan parallel-zon).
-  Kompakt och läroboksigt, ~48 px ledning mellan lamp-kanter.
-- `segW = 88` — slotbredd i **kretsar med parallel-zon**. Behövs så
-  förgreningsnoderna (sticker ut ±segW/2 från slot-center) inte ligger
-  trångt mot intilliggande seriekomponenter.
-- `branchSegW = 60` — **inre slot-bredd inom en parallel-gren med
-  flera komponenter**. Komponenterna fördelas centrerat i parallel-
-  zonen med detta fasta avstånd, inte jämnt över hela parallel-bredden
-  — annars sprids de glest med tomma "rader" i kanterna och en obalanserad
-  visuell tyngd jämfört med en ensam komponent i en parallell-gren.
-- `branchEdgeMargin = 36` — **luft mellan förgreningsnod och första/
-  sista komponent i den bredaste grenen**. Parallel-zonen krymps
-  automatiskt (via `parallelInset`) så avståndet pStartX → första
-  lampans vänsterkant blir exakt detta värde. Konsekvensen: alla
-  mellanrum inom parallel-zonen blir lika stora (36 px både vid
-  kanterna och mellan grannar i grenen), vilket ger en harmonisk
-  layout.
+- `segW = 72` — slotbredd som ramens bredd beräknas från i **rena
+  seriekretsar**. Kompakt och läroboksigt.
+- `segW = 88` — samma sak i **kretsar med parallel-zon**; ger mer luft
+  så förgreningsnoderna inte hamnar trångt mot seriekomponenterna.
+- `branchSegW = 60` — antaget inre avstånd när **parallell-zonens
+  naturliga bredd** beräknas ur den bredaste grenen.
+- `branchEdgeMargin = 36` — luft mellan förgreningsnod och första/sista
+  komponent i den bredaste grenen; sätter `parallelNaturalW`.
 
-Helpern väljer automatiskt. Skriver du egen SVG, sikta på ~32 px
-synlig ledning mellan kanter på närliggande element (mer i serie-zoner,
-mindre i parallel-zoner med flera komponenter per gren).
+Helpern väljer automatiskt. Skriver du egen SVG: räkna fram positionerna
+med samma formel i stället för att placera på ögonmått.
 
 **Etikettplacering.** Etiketter (L₁, *R*₁, *U* = 12 V) placeras direkt
 ovanför sin komponent i topp-ledningen och direkt under komponenten i

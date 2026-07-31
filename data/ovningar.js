@@ -1238,7 +1238,8 @@ function makeHydraulicPress(opts) {
 // komplexa topologier (Kirchhoff-bryggor) krävs egen inline-SVG.
 
 function makeCircuit(opts) {
-    // segW väljs efter krets-topologi:
+    // segW sätter hur BRED figuren blir (inte var komponenterna hamnar —
+    // de fördelas jämnt över ledaren av spreadCenters längre ned):
     //   - Ren seriekrets: 72 px → kompakt, lagom luft mellan komponenter
     //   - Med parallel-sektion: 88 px → mer luft så förgreningsnoderna
     //     inte ligger trångt mot intilliggande seriekomponenter
@@ -1416,32 +1417,20 @@ function makeCircuit(opts) {
         W = railRight + padX + 4;
     }
 
-    // halfW för bounding-box-centrering. Parallel-elementets effektiva
-    // halv-bredd är efter inset-krympningen.
-    function halfW(c) {
-        if (c && c.type === 'parallel') return segW / 2 - parallelInset;
-        return halfWBase(c);
+    // JÄMN FÖRDELNING (regel för kopplingsscheman): komponenterna på en
+    // ledare ska ha LIKA STORA mellanrum — före första, mellan varje par och
+    // efter sista. Då hamnar raden automatiskt centrerad på ledaren i stället
+    // för förskjuten åt ena hållet. Parallell-sektionen räknas som EN
+    // komponent med bredden parallelNaturalW.
+    function spreadCenters(x1, x2, widths) {
+        const gap = (x2 - x1 - widths.reduce((a, b) => a + b, 0)) / (widths.length + 1);
+        const out = [];
+        let cur = x1;
+        for (const w of widths) { cur += gap; out.push(cur + w / 2); cur += w; }
+        return out;
     }
-
-    // Slot-positioner längs topp-ledningen — startX väljs så att kretsens
-    // content-bounding-box (yttersta vänsterkant till yttersta högerkant)
-    // centreras över railLeft–railRight, inte komponenternas geometriska
-    // centroider. Annars hamnar parallel-sektionens förgreningsnoder
-    // ojämnt fördelade mot ramen.
-    const totalCompW = totalSlots > 1 ? (totalSlots - 1) * segW : 0;
-    const leftHalf = halfW(comps[0]);
-    const rightHalf = halfW(comps[comps.length - 1]);
-    const startX = (railLeft + railRight - totalCompW + leftHalf - rightHalf) / 2;
-    // Komponenter EFTER parallel-zonen (sista slot pIdx+pSlots-1) skiftar
-    // åt vänster med 2*parallelInset eftersom parallel-zonen tog mindre
-    // plats än sin slot-allokering. OBS: pStartX/pEndX själva använder
-    // sx(before) och sx(before+pSlots-1) — de är INOM parallel-zonen och
-    // ska INTE skiftas, annars kollapsar parallel-zonen dubbelt.
-    const sx = i => {
-        let pos = startX + i * segW;
-        if (pIdx >= 0 && i > pIdx + pSlots - 1) pos -= 2 * parallelInset;
-        return pos;
-    };
+    const compW = c => (c && c.type === 'parallel' ? parallelNaturalW : 2 * halfWBase(c));
+    const topCenters = spreadCenters(railLeft, railRight, comps.map(compW));
 
     let body = '';
 
@@ -1463,7 +1452,7 @@ function makeCircuit(opts) {
 
     // 2. Seriekomponenter före parallel-sektionen (topp-ledning)
     for (let i = 0; i < before; i++) {
-        const x = sx(i);
+        const x = topCenters[i];
         body += drawComp(comps[i], x, topY);
         const lbl = fmtLabel(comps[i], UPRIGHT_LABEL[comps[i].type]);
         if (lbl) body += drawText(x, topY - 16, lbl);
@@ -1472,11 +1461,11 @@ function makeCircuit(opts) {
     // 3. Parallel-sektion
     if (pIdx >= 0) {
         const par = comps[pIdx];
-        // pStartX/pEndX dras in med parallelInset så förgreningsnoderna
-        // hamnar precis vid branchEdgeMargin från första/sista komponent
-        // i den bredaste grenen.
-        let pStartX = sx(before) - segW / 2 + parallelInset;
-        let pEndX = sx(before + pSlots - 1) + segW / 2 - parallelInset;
+        // Förgreningsnoderna ligger på parallell-sektionens kanter — dess
+        // bredd är parallelNaturalW (bredaste grenen + branchEdgeMargin på
+        // var sida), centrerad på sin plats i den jämna fördelningen ovan.
+        let pStartX = topCenters[pIdx] - parallelNaturalW / 2;
+        let pEndX = topCenters[pIdx] + parallelNaturalW / 2;
         if (isPureParallel) { pStartX = railLeft; pEndX = railRight; }
         for (let bi = 0; bi < nBr; bi++) {
             const branch = par.branches[bi];
@@ -1492,14 +1481,11 @@ function makeCircuit(opts) {
                     body += drawDot(pEndX, topY);
                 }
             }
-            // Rita branch-komponenter med fast inre slot-bredd (60 px),
-            // centrerat över parallel-bredden. Annars sprids komponenterna
-            // ut över hela parallel-bredden vilket ger glesa "tomma" rader.
-            const branchSegW = 60;
-            const branchCenterX = (pStartX + pEndX) / 2;
-            const firstBranchX = branchCenterX - (branch.length - 1) * branchSegW / 2;
+            // Grenens komponenter fördelas jämnt mellan förgreningsnoderna —
+            // samma regel som på topp-ledningen (lika stora mellanrum).
+            const bCenters = spreadCenters(pStartX, pEndX, branch.map(compW));
             for (let j = 0; j < branch.length; j++) {
-                const cx = firstBranchX + j * branchSegW;
+                const cx = bCenters[j];
                 body += drawComp(branch[j], cx, by);
                 const lbl = fmtLabel(branch[j], UPRIGHT_LABEL[branch[j].type]);
                 if (lbl) {
@@ -1513,7 +1499,7 @@ function makeCircuit(opts) {
     // 4. Seriekomponenter efter parallel-sektionen
     if (after > 0) {
         for (let i = 0; i < after; i++) {
-            const x = sx(before + pSlots + i);
+            const x = topCenters[pIdx + 1 + i];
             const c = comps[pIdx + 1 + i];
             body += drawComp(c, x, topY);
             const lbl = fmtLabel(c, UPRIGHT_LABEL[c.type]);
@@ -1601,7 +1587,9 @@ function makeBridge(opts) {
 
     const W = opts.width != null ? opts.width : 330;
     const xL = 46, xR = W - 46, xM = (xL + xR) / 2;
-    const yT = 42, yU = 104, yLo = 176;
+    // Raderna (toppledning, övre grenen, undre grenen) ligger på LIKA stora
+    // avstånd — samma balansregel som för parallellkopplingar i övrigt.
+    const yT = 42, yU = 110, yLo = 178;
     const grd = opts.ground || null;
     const H = yLo + (grd ? 56 : 40);
 
@@ -5845,29 +5833,29 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Elvira placerar en låda med massan 7,5 kg på ett plan enligt figuren. Friktionstalet mellan låda och plan är 0,42.
+            question: `Elvira placerar en låda med massan 6,0 kg på ett plan enligt figuren. Friktionstalet mellan låda och plan är 0,35.
 
-${makeInclinePlane({ angle: 36, mass: '7,5 kg' })}
+${makeInclinePlane({ angle: 31, mass: '6,0 kg' })}
 
 a) Visa att lådan **accelererar nedför planet** (kraften nedför planet är större än maximal friktion).
 
 b) Beräkna lådans acceleration nedför planet.
 
 *Ange accelerationen från (b) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
-            answer: { value: 2.44, unit: 'm/s²', tol: 0.03 },
+            answer: { value: 2.11, unit: 'm/s²', tol: 0.03 },
             solution: `**a) Kontrollera att lådan glider.** Mata in värdena för $F_1$ (drivande kraft nedför planet) och maximal friktion $F_{f,\\max}$:
 
 $$
-F_1 = m g \\sin\\alpha = 7{,}5 \\cdot 9{,}82 \\cdot \\sin 36^{\\circ} \\approx 43{,}3\\ \\mathrm{N}
+F_1 = m g \\sin\\alpha = 6{,}0 \\cdot 9{,}82 \\cdot \\sin 31^{\\circ} \\approx 30{,}3\\ \\mathrm{N}
 $$
 
 $$
-F_{f,\\max} = \\mu \\cdot m g \\cos\\alpha = 0{,}42 \\cdot 7{,}5 \\cdot 9{,}82 \\cdot \\cos 36^{\\circ} \\approx 25{,}0\\ \\mathrm{N}
+F_{f,\\max} = \\mu \\cdot m g \\cos\\alpha = 0{,}35 \\cdot 6{,}0 \\cdot 9{,}82 \\cdot \\cos 31^{\\circ} \\approx 17{,}7\\ \\mathrm{N}
 $$
 
-Eftersom $F_1 > F_{f,\\max}$ (43,3 > 25,0) kommer lådan att accelerera nedför planet.
+Eftersom $F_1 > F_{f,\\max}$ (30,3 > 17,7) kommer lådan att accelerera nedför planet.
 
-Alternativ kontroll: jämför $\\tan\\alpha$ med $\\mu$. Om $\\tan\\alpha > \\mu$ glider lådan. $\\tan 36^{\\circ} \\approx 0{,}73 > 0{,}42$ ✓.
+Alternativ kontroll: jämför $\\tan\\alpha$ med $\\mu$. Om $\\tan\\alpha > \\mu$ glider lådan. $\\tan 31^{\\circ} \\approx 0{,}60 > 0{,}35$ ✓.
 
 **b) Acceleration.** Den resulterande kraften nedför planet:
 
@@ -5882,15 +5870,15 @@ a = g \\cdot (\\sin\\alpha - \\mu \\cos\\alpha)
 $$
 
 $$
-a = 9{,}82 \\cdot (\\sin 36^{\\circ} - 0{,}42 \\cdot \\cos 36^{\\circ})
-= 9{,}82 \\cdot (0{,}588 - 0{,}42 \\cdot 0{,}809)
+a = 9{,}82 \\cdot (\\sin 31^{\\circ} - 0{,}35 \\cdot \\cos 31^{\\circ})
+= 9{,}82 \\cdot (0{,}515 - 0{,}35 \\cdot 0{,}857)
 $$
 
 $$
-a = 9{,}82 \\cdot (0{,}588 - 0{,}340) = 9{,}82 \\cdot 0{,}248 \\approx 2{,}44\\ \\mathrm{m/s^2}
+a = 9{,}82 \\cdot (0{,}515 - 0{,}300) = 9{,}82 \\cdot 0{,}215 \\approx 2{,}11\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** a) $F_1 \\approx 43$ N $>$ $F_{f,\\max} \\approx 25$ N — lådan accelererar. b) Accelerationen är ca 2,4 m/s² nedför planet.
+**Svar:** a) $F_1 \\approx 30$ N $>$ $F_{f,\\max} \\approx 18$ N — lådan accelererar. b) Accelerationen är ca 2,1 m/s² nedför planet.
 
 **Generell slutsats:** Generellt för en låda på lutande plan med friktion:
 

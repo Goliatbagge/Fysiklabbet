@@ -14,6 +14,43 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-31) — kan tas upp senare
+
+- **Valdes i dag: École polytechnique, Collège de France och HZDR bygger den
+  första fotoniska tidskristallen** — se publicerat.md för full källista.
+  Konkurrenter som lades åt sidan i dag, i ungefärlig styrkeordning:
+- **Fysiker kopplar Riemann-hypotesen till fastransitioner i kvantsystem**
+  — matematiskt intressant brygga mellan talteori och kvantfysik (phys.org,
+  ~14 h gammal vid sökningen), men Riemann-hypotesen är alldeles för tungt
+  matematiskt maskineri för gymnasienivå utan orimligt mycket förarbete.
+  Källa: https://phys.org/news/2026-07-physicists-link-riemann-hypothesis-phase.html
+  (tillagd 2026-07-31)
+- **Bose–Einstein-kondensat skapat av ultrakalla polära molekyler** —
+  färsk kvantfysiknyhet (phys.org, ~19 h gammal), men vi har kört mycket
+  kvantfysik/kvantgas-relaterat senaste veckorna (radiummolekyler 07-18,
+  neutronernas spegelvärld 07-29 m.fl.) — spara till ämnet känns fräscht
+  igen. Källa:
+  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
+  (tillagd 2026-07-31)
+- **Kvant-spinneffekter kan förstärka enkelriktad elektrisk transport i
+  kirala magneter** (Hiroaki Ishizuka, Hajime Murata m.fl., Institute of
+  Science Tokyo, Physical Review Letters, DOI 10.1103/y243-ygbf) — bra
+  ellära/magnetism-vinkel (Kondo-effekt, olikriktad resistans), men
+  tematiskt för nära både dagens tidskristall-artikel och de senaste
+  veckornas kiralitets-kluster (hattformens kirala ljus 07-30, ljusets
+  envägsgata 07-28) — spara till kiralitetstemat svalnat. Källa:
+  https://phys.org/news/2026-07-quantum-effects-electrical-chiral-magnets.html
+  (tillagd 2026-07-31)
+- **Spektroskopisystem upptäcker aerosoler via ljus reflekterat från
+  vägskyltar och trädstammar** — smart tillämpad optik/miljöfysik-vinkel,
+  men mer ingenjörskonst/mätteknik än en tydlig fysikalisk upptäckt.
+  Källa: https://phys.org/news/2026-07-spectroscopy-aerosols-traffic-tree-trunks.html
+  (tillagd 2026-07-31)
+- **OBS — Physics World och Quanta hade inget färskare vid sökningen
+  2026-07-31** än redan kända/äldre poster (space mirror-protesten,
+  fusionsinvesteringar, myon-g-2-uppföljningen 07-29) — phys.org var
+  klart färskast i dag.
+
 ## Fynd som inte användes (2026-07-30) — kan tas upp senare
 
 - **Valdes i dag: University of Tokyo (Yuto Moritake, Masaya Notomi m.fl.)

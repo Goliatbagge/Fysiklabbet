@@ -146,6 +146,26 @@ if (katalogHtml) {
   }
 }
 
+// ── 3d. Har simuleringssidorna sidspecifika og:-taggar? ───────────────────
+// Utan og:title/og:description visar en delad simulering samma generiska
+// Fysiklabbet-kort som alla andra, och Googles sökresultat får ingen
+// beskrivningstext. Nya simuleringar missar detta tyst — därför kontrollen.
+// (Sidorna som medvetet hålls utanför sitemapen kontrolleras inte.)
+if (sitemapPaDisk) {
+  const iSitemap = new Set([...sitemapPaDisk.matchAll(/<loc>[^<]*?\/([^/<?]+\.html)<\/loc>/g)]
+    .map((m) => m[1]));
+  const utanOg = fs.readdirSync(B.ROOT)
+    .filter((f) => /^fysik[12].*\.html$/.test(f))
+    .filter((f) => f !== 'fysik1.html' && f !== 'fysik2.html')
+    .filter((f) => iSitemap.has(f))
+    .filter((f) => !/og:title/.test(fs.readFileSync(path.join(B.ROOT, f), 'utf8')));
+  if (utanOg.length) {
+    fel.push(`${utanOg.length} simuleringssida(or) saknar og:title/og:description ` +
+      `och visar därför ett generiskt delningskort:\n   ${utanOg.slice(0, 8).join('\n   ')}` +
+      '\n   Lägg in dem i <head> (se en befintlig simulering som mall).');
+  }
+}
+
 // ── 4. Pekar sitemapen på filer som faktiskt finns? ───────────────────────
 // Fångar sidor som döpts om eller tagits bort utan att sitemapen byggts om.
 if (sitemapPaDisk) {

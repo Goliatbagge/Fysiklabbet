@@ -1541,6 +1541,15 @@ styckar orden i `<span>`-taggar och då hittas de inte längre (se
 14. [ ] Lägg in `<script src="sim-dock.js" defer></script>` före `</body>`
 15. [ ] Kör `node .claude/verify-mobil-scen.js` — scenen överst och verktygen
     under på 390×744, i både normalläge och fullskärm
+16. [ ] **Sidspecifika meta-taggar i `<head>`** — kopiera mönstret från
+    `fysik1-densitet-app.html`: `<meta name="description">`,
+    `<link rel="canonical">`, `og:title`, `og:description`, `og:url`,
+    `twitter:title`, `twitter:description`. Utan dem visar en delad
+    simulering samma generiska Fysiklabbet-kort som alla andra, och Googles
+    sökresultat får ingen beskrivningstext. `og:title` skrivs
+    `"<Simuleringens namn> — <Kurs>"`, `<title>` som
+    `"<Namn> — Fysiklabbet"` (em-streck). Kör
+    `node .claude/verify-sitemap.js` — den larmar om taggarna saknas.
 
 ## Övningar
 

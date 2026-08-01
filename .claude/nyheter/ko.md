@@ -14,6 +14,72 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-08-01) — kan tas upp senare
+
+- **Valdes i dag: IC 1101, universums största kända galax, har äntligen
+  fått sin ytterkant uppmätt** — Carlos Marrero-de la Rosa, Ignacio
+  Trujillo, Mireia Montes m.fl. (Instituto de Astrofísica de Canarias) har
+  med ultradjupa bilder från Isaac Newton-teleskopet på La Palma (2,5 m,
+  Wide Field Camera, g- och r-band, drygt 8 h total exponering, djup
+  ~30 mag/bågsek²) för första gången kunnat peka ut kanten på IC 1101 i
+  galaxhopen Abell 2029: R_edge = 260 ± 38 kpc, diameter ~520 kpc
+  (~1,7 miljoner ljusår), stjärnmassa 3,4 · 10^12 solmassor. Åtta svaga
+  osymmetriska strukturer (A–H) sammanfaller med röntgengasens
+  spiralstörningar → galaxen växer fortfarande. arXiv:2607.15340,
+  CC BY 4.0 (två figurer återanvända som artikelbilder). OBS ännu ej
+  kollegialt granskad. Se publicerat.md för full avvägning.
+  Konkurrenter som lades åt sidan i dag, i ungefärlig styrkeordning:
+- **Värmekameratrick låter LIGO se längre ut i universum** — Jonathan
+  Richardsons grupp vid UC Riverside mäter speglarnas yttemperatur med
+  vanliga IR-kameror och rekonstruerar, via en värmeflödesmodell, de
+  nanometerstora deformationer som laserns egen effekt orsakar inuti
+  optiken. Ger ~31 % bättre töjningskänslighet för LIGO A+ (binära
+  neutronstjärnor synliga ~33 miljoner ljusår längre bort; volymen skalar
+  med avståndet i kubik). Redan inbakad i Cosmic Explorers basdesign.
+  Publicerad i *Classical and Quantum Gravity* (2026), ”Error signals for
+  overcoming the laser power limits of gravitational-wave detectors”
+  (medförfattare Liu Tao, Pooyan Goodarzi). **Stark reserv och den bäst
+  källade av dagens kandidater (peer review-granskad + institutionellt
+  pressmeddelande med fria LIGO-bilder)** — valdes bort i dag enbart för
+  ämnesspridning (pressmeddelandet är från 07-21 och veckan var full av
+  optik/spegel-ämnen). Bra att ta upp när gravitationsvågor känns fräscht.
+  Källor: https://news.ucr.edu/articles/2026/07/21/new-technique-enables-ligo-peer-farther-distant-universe ,
+  https://phys.org/news/2026-07-thermal-camera-ligo.html (tillagd 2026-08-01)
+- **Ny fotonisk plattform ger ljuset en ”fyrfilig motorväg”** — färsk
+  optiknyhet (phys.org, ~16 h gammal vid sökningen), men vi har kört optik/
+  fotonik fem av de senaste åtta dagarna. Källa:
+  https://phys.org/news/2026-07-photonic-platform-lane-highway.html
+  (tillagd 2026-08-01)
+- **Optimerade magnetpulser kan sänka energin för minnesswitchning med
+  flera tiopotenser** — bra ellära/magnetism-vinkel med tydlig
+  samhällskoppling (AI-datacentrens energiförbrukning), men mer
+  materialteknik än fysikalisk upptäckt. Källa:
+  https://phys.org/news/2026-07-optimized-magnetic-pulses-memory-energy.html
+  (tillagd 2026-08-01)
+- **Två oberoende studier skjuter halvledarqubitar mot praktisk skala**
+  samt **mindre utforskad kvantkod kan vara stabilare för felkorrigering**
+  — två kvantdatornotiser (phys.org). Samma bedömning som 07-30 och 07-31:
+  spara till kvantdatorämnet känns fräscht igen. Källor:
+  https://phys.org/news/2026-07-independent-semiconductor-qubits-scales.html ,
+  https://phys.org/news/2026-07-explored-quantum-code-powerful-stable.html
+  (tillagd 2026-08-01)
+- **Nyupptäckt defekt i diamant kan tämja vibrationer som stör
+  kvantljuskällor** — kvantoptik (phys.org, ~14 h), samma
+  ämnesspridningsskäl. Källa:
+  https://phys.org/news/2026-07-diamond-newfound-defect-vibrations-hinder.html
+  (tillagd 2026-08-01)
+- **eROSITA:s andra datasläpp kartlägger röntgenhimlen** och **första
+  AI-styrda teleskopet börjar observera** — två astronominotiser som fick
+  stå tillbaka för IC 1101 (datasläpp respektive teknikintroduktion snarare
+  än enskild upptäckt). Källor:
+  https://phys.org/news/2026-07-homing-ray-sky-erosita.html ,
+  https://phys.org/news/2026-07-ai-driven-telescope-stargazing.html
+  (tillagd 2026-08-01)
+- **OBS — Physics World hade i dag mest policy/populärhistoria** (Bayeux-
+  tapeten och optiska tekniker, brittiska anslagsnedskärningar) och Quanta
+  inget nytt sedan myon-artikeln 07-29. ScienceDaily var senast uppdaterad
+  07-29. Phys.org var klart färskast även i dag.
+
 ## Fynd som inte användes (2026-07-31) — kan tas upp senare
 
 - **Valdes i dag: École polytechnique, Collège de France och HZDR bygger den

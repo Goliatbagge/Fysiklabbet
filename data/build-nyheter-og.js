@@ -18,10 +18,19 @@
  * (/nyheter.html?id=<id>); en robot läser OG-taggarna och bygger ett korrekt
  * förhandsvisningskort. Delningsknapparna i nyheter.html pekar på dessa filer.
  *
+ * DESSUTOM genererar skriptet:
+ *   feed.xml    — RSS 2.0-flöde med de senaste PUBLICERADE artiklarna
+ *                 (datumgrindade framtida artiklar hålls utanför tills
+ *                 skriptet körs igen efter deras datum — de dagliga
+ *                 körningarna sköter det).
+ *   sitemap.xml — alla publika sidor + varje publicerad artikels
+ *                 kanoniska URL (nyheter.html?id=…), för sökmotorer.
+ *                 robots.txt (statisk, i repo-roten) pekar hit.
+ *
  * KÖRNING
  *   node data/build-nyheter-og.js
  * Kör detta efter varje ändring i data/nyheter.js (ny artikel, ändrad
- * rubrik/ingress/bild). Genererar filer för ALLA artiklar, inkl. framtida
+ * rubrik/ingress/bild). Genererar OG-sidor för ALLA artiklar, inkl. framtida
  * (datumgrindade) — så att delningssidan finns redo när artikeln aktiveras.
  */
 'use strict';
@@ -129,6 +138,103 @@ function pageHtml(a) {
 `;
 }
 
+// ── Publiceringsgrind ─────────────────────────────────────────────────────
+// Samma logik som datumgrinden i data/nyheter.js: en artikel är publicerad
+// när date (+ ev. time) har passerats enligt lokal klocka. Framtidsdaterade
+// artiklar hålls utanför RSS och sitemap tills skriptet körs igen.
+function publishedOnly(articles) {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  const nowStamp = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate())
+    + 'T' + p(d.getHours()) + ':' + p(d.getMinutes());
+  return articles.filter((a) => (a.date + 'T' + (a.time || '00:00')) <= nowStamp);
+}
+
+// RFC 1123-datum för RSS <pubDate>. Klockslag saknas oftast → 06:00 svensk
+// tid som rimlig standard (exakt tidszonsförskjutning är oviktig här).
+function rssDate(a) {
+  const t = (a.time || '06:00') + ':00';
+  return new Date(`${a.date}T${t}+02:00`).toUTCString();
+}
+
+// ── feed.xml (RSS 2.0) ────────────────────────────────────────────────────
+const FEED_MAX = 20;
+
+function buildFeed(published) {
+  const items = published.slice(0, FEED_MAX).map((a) => {
+    const link = `${SITE_ORIGIN}/nyheter.html?id=${encodeURIComponent(a.id)}`;
+    // Bild som enclosure om filen finns på disk (RSS-läsare visar den).
+    let enclosure = '';
+    if (a.image) {
+      const imgPath = path.join(ROOT, String(a.image).replace(/^\/+/, ''));
+      if (fs.existsSync(imgPath)) {
+        const ext = path.extname(imgPath).toLowerCase();
+        const mime = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+                       '.webp': 'image/webp', '.gif': 'image/gif' }[ext];
+        if (mime) {
+          const size = fs.statSync(imgPath).size;
+          const url = `${SITE_ORIGIN}/${String(a.image).replace(/^\/+/, '')}`;
+          enclosure = `\n      <enclosure url="${esc(url)}" length="${size}" type="${mime}"/>`;
+        }
+      }
+    }
+    return `    <item>
+      <title>${esc(toPlain(a.title))}</title>
+      <link>${esc(link)}</link>
+      <guid isPermaLink="true">${esc(link)}</guid>
+      <pubDate>${rssDate(a)}</pubDate>
+      <category>${esc(a.category || 'Fysik')}</category>
+      <description>${esc(toPlain(a.deck || a.title))}</description>${enclosure}
+    </item>`;
+  });
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fysiklabbet — fysiknyheter</title>
+    <link>${SITE_ORIGIN}/nyheter.html</link>
+    <atom:link href="${SITE_ORIGIN}/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
+    <language>sv-SE</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${items.join('\n')}
+  </channel>
+</rss>
+`;
+}
+
+// ── sitemap.xml ───────────────────────────────────────────────────────────
+// Publika sidor = alla *.html i repo-roten utom interna verktygs-/testsidor.
+const SITEMAP_EXCLUDE = new Set([
+  'figur-preview.html',          // internt figur-testverktyg
+  'prototyp-tts.html',           // prototyp
+  'handskrift-demo.html',        // intern demo för handskriftsmotorn
+  'matte-triangel-rektangel.html', // olänkad arbetsfil
+  'fysik2-rorelse-wrapper.html', // olänkad wrapper
+]);
+
+function buildSitemap(published) {
+  const urls = [];
+
+  for (const f of fs.readdirSync(ROOT).sort()) {
+    if (!f.endsWith('.html') || SITEMAP_EXCLUDE.has(f)) continue;
+    // index.html som ren domänrot.
+    urls.push(f === 'index.html' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${f}`);
+  }
+
+  const entries = urls.map((u) => `  <url><loc>${esc(u)}</loc></url>`);
+  for (const a of published) {
+    const loc = `${SITE_ORIGIN}/nyheter.html?id=${encodeURIComponent(a.id)}`;
+    entries.push(`  <url><loc>${esc(loc)}</loc><lastmod>${esc(a.date)}</lastmod></url>`);
+  }
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries.join('\n')}
+</urlset>
+`;
+}
+
 // ── Bygg ───────────────────────────────────────────────────────────────────
 function build() {
   const articles = loadArticles();
@@ -153,6 +259,15 @@ function build() {
 
   console.log(`OG-delningssidor: ${articles.length} skrivna i nyheter/dela/` +
     (removed ? `, ${removed} föräldralösa borttagna` : ''));
+
+  // RSS + sitemap (endast publicerade artiklar).
+  const published = publishedOnly(articles);
+  fs.writeFileSync(path.join(ROOT, 'feed.xml'), buildFeed(published), 'utf8');
+  console.log(`feed.xml: ${Math.min(published.length, FEED_MAX)} artiklar i RSS-flödet`);
+  const sitemap = buildSitemap(published);
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap, 'utf8');
+  console.log(`sitemap.xml: ${(sitemap.match(/<url>/g) || []).length} URL:er ` +
+    `(${published.length} artiklar + sidorna)`);
 }
 
 build();

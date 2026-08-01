@@ -7,6 +7,7 @@
     <meta name="description" content="Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="alternate" type="application/rss+xml" title="Fysiklabbet — fysiknyheter" href="https://fysiklabbet.se/feed.xml">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Nyheter — Fysiklabbet">
@@ -110,6 +111,42 @@
             padding: 22px; border: 1px dashed var(--lab-line-strong); border-radius: 4px;
             background: var(--lab-bg-raised);
         }
+
+        /* Arkivfilter: sökruta + kategori-chips (alla artiklar ska gå att gräva fram) */
+        .news-filter { margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
+        .news-search {
+            width: 100%; max-width: 430px;
+            font-family: var(--lab-font-sans); font-size: 14px;
+            color: var(--lab-ink); background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong); border-radius: 4px;
+            padding: 10px 14px; outline: none;
+        }
+        .news-search:focus { border-color: var(--lab-accent); }
+        .news-search::placeholder { color: var(--lab-ink-muted); }
+        .news-cats { display: flex; flex-wrap: wrap; gap: 8px; }
+        .news-cat-chip {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.05em;
+            text-transform: uppercase; line-height: 1;
+            color: var(--lab-ink-soft); background: var(--lab-bg-raised);
+            border: 1px solid var(--lab-line-strong); border-radius: 999px;
+            padding: 6px 12px; cursor: pointer;
+        }
+        .news-cat-chip:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+        .news-cat-chip.is-on { background: var(--lab-ink); color: var(--lab-bg); border-color: var(--lab-ink); }
+        .news-cat-chip.is-on:hover { color: var(--lab-bg); }
+        .news-cat-chip .chip-n { opacity: 0.55; margin-left: 4px; }
+        .news-clear {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-accent);
+            background: none; border: none; cursor: pointer; padding: 6px 4px;
+        }
+        .news-rss {
+            display: inline-block; margin-top: 14px;
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted); text-decoration: none;
+            border-bottom: 1px solid var(--lab-line-strong); padding-bottom: 2px;
+        }
+        .news-rss:hover { color: var(--lab-accent); border-color: var(--lab-accent); }
 
         /* ── Artikelvy ─────────────────────────────────────────────── */
         .article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
@@ -421,8 +458,56 @@
             );
         }
 
+        // Söknormalisering: gemener + å/ä/ö → a/a/o, så att "vagor" träffar "Vågor".
+        function normSok(s) {
+            return String(s).toLowerCase()
+                .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e');
+        }
+
+        function NewsCard({ a }) {
+            return (
+                <a className="news-card" href={`?id=${a.id}`}>
+                    <div className="news-card-media">
+                        <img src={a.image} alt={a.imageAlt} loading="lazy" />
+                    </div>
+                    <MetaRow a={a} />
+                    <h3 className="news-card-title">{a.title}</h3>
+                    <p className="news-card-deck">{a.deck}</p>
+                </a>
+            );
+        }
+
         function ListView() {
-            const [featured, ...rest] = NYHETER;
+            const init = new URLSearchParams(window.location.search);
+            const [query, setQuery] = React.useState(init.get('sok') || '');
+            const [cat, setCat] = React.useState(init.get('kategori') || '');
+
+            // Spegla filtren i URL:en så att en filtrerad vy går att länka/bokmärka.
+            React.useEffect(() => {
+                const p = new URLSearchParams();
+                if (cat) p.set('kategori', cat);
+                if (query.trim()) p.set('sok', query.trim());
+                const qs = p.toString();
+                try { history.replaceState(null, '', qs ? '?' + qs : window.location.pathname); } catch (e) {}
+            }, [query, cat]);
+
+            // Kategorier med antal, störst först (sekundärt svensk bokstavsordning).
+            const cats = React.useMemo(() => {
+                const m = new Map();
+                NYHETER.forEach(a => { if (a.category) m.set(a.category, (m.get(a.category) || 0) + 1); });
+                return [...m.entries()].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], 'sv'));
+            }, []);
+
+            const q = normSok(query.trim());
+            const filtering = !!(q || cat);
+            const matches = NYHETER.filter(a => {
+                if (cat && a.category !== cat) return false;
+                if (!q) return true;
+                const hay = normSok([a.title, a.deck, a.category, (a.tags || []).join(' ')].join(' '));
+                return q.split(/\s+/).every(w => hay.includes(w));
+            });
+            const [featured, ...rest] = matches;
+
             return (
                 <React.Fragment>
                     <div className="news-hero">
@@ -434,46 +519,88 @@
                             skrivet för att vara lätt att ta till sig. Källa anges alltid, och
                             där det går länkar vi direkt till originalforskningen.
                         </p>
+                        <a className="news-rss" href="feed.xml"
+                           title="Prenumerera på nyheterna i en RSS-läsare">RSS-flöde ↗</a>
                     </div>
 
                     <div className="news-wrap">
-                        {!featured && (
+                        {NYHETER.length > 0 && (
+                            <div className="news-filter">
+                                <input className="news-search" type="search" value={query}
+                                       onChange={e => setQuery(e.target.value)}
+                                       placeholder="Sök bland nyheterna — rubrik, ämne eller nyckelord …"
+                                       aria-label="Sök bland nyheterna" />
+                                <div className="news-cats">
+                                    <button type="button"
+                                            className={'news-cat-chip' + (!cat ? ' is-on' : '')}
+                                            onClick={() => setCat('')}>
+                                        Alla<span className="chip-n">{NYHETER.length}</span>
+                                    </button>
+                                    {cats.map(([c, n]) => (
+                                        <button type="button" key={c}
+                                                className={'news-cat-chip' + (cat === c ? ' is-on' : '')}
+                                                onClick={() => setCat(cat === c ? '' : c)}>
+                                            {c}<span className="chip-n">{n}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {NYHETER.length === 0 && (
                             <div className="news-empty">Inga nyheter publicerade ännu — kom tillbaka snart!</div>
                         )}
 
-                        {featured && (
-                            <a className="news-featured" href={`?id=${featured.id}`}>
-                                <div className="news-featured-media">
-                                    <span className="news-featured-flag">Senaste nytt</span>
-                                    <img src={featured.image} alt={featured.imageAlt} loading="eager" />
-                                </div>
-                                <div className="news-featured-text">
-                                    <MetaRow a={featured} />
-                                    <h2 className="news-featured-title">{featured.title}</h2>
-                                    <p className="news-featured-deck">{featured.deck}</p>
-                                    <span className="news-readmore">Läs hela →</span>
-                                </div>
-                            </a>
-                        )}
-
-                        {rest.length > 0 && (
+                        {filtering ? (
                             <React.Fragment>
                                 <div className="news-grid-head">
-                                    <span className="lab-mono-label">Tidigare nyheter</span>
-                                    <span className="lab-mono-label">{rest.length} st</span>
+                                    <span className="lab-mono-label">
+                                        {matches.length === 0 ? 'Inga träffar'
+                                            : matches.length === 1 ? '1 träff'
+                                            : `${matches.length} träffar`}
+                                    </span>
+                                    <button type="button" className="news-clear"
+                                            onClick={() => { setQuery(''); setCat(''); }}>
+                                        Rensa filtret ✕
+                                    </button>
                                 </div>
-                                <div className="news-grid">
-                                    {rest.map(a => (
-                                        <a className="news-card" href={`?id=${a.id}`} key={a.id}>
-                                            <div className="news-card-media">
-                                                <img src={a.image} alt={a.imageAlt} loading="lazy" />
-                                            </div>
-                                            <MetaRow a={a} />
-                                            <h3 className="news-card-title">{a.title}</h3>
-                                            <p className="news-card-deck">{a.deck}</p>
-                                        </a>
-                                    ))}
-                                </div>
+                                {matches.length === 0 ? (
+                                    <div className="news-empty">
+                                        Ingen nyhet matchar — prova ett annat sökord eller en annan kategori.
+                                    </div>
+                                ) : (
+                                    <div className="news-grid">
+                                        {matches.map(a => <NewsCard a={a} key={a.id} />)}
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                {featured && (
+                                    <a className="news-featured" href={`?id=${featured.id}`}>
+                                        <div className="news-featured-media">
+                                            <span className="news-featured-flag">Senaste nytt</span>
+                                            <img src={featured.image} alt={featured.imageAlt} loading="eager" />
+                                        </div>
+                                        <div className="news-featured-text">
+                                            <MetaRow a={featured} />
+                                            <h2 className="news-featured-title">{featured.title}</h2>
+                                            <p className="news-featured-deck">{featured.deck}</p>
+                                            <span className="news-readmore">Läs hela →</span>
+                                        </div>
+                                    </a>
+                                )}
+                                {rest.length > 0 && (
+                                    <React.Fragment>
+                                        <div className="news-grid-head">
+                                            <span className="lab-mono-label">Tidigare nyheter</span>
+                                            <span className="lab-mono-label">{rest.length} st</span>
+                                        </div>
+                                        <div className="news-grid">
+                                            {rest.map(a => <NewsCard a={a} key={a.id} />)}
+                                        </div>
+                                    </React.Fragment>
+                                )}
                             </React.Fragment>
                         )}
                     </div>

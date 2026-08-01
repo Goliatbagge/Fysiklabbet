@@ -138,6 +138,71 @@ function pageHtml(a) {
 `;
 }
 
+// ── Delningssida för ett teoriavsnitt ─────────────────────────────────────
+// Samma princip som artiklarnas dela-sidor ovan: katalog.html sätter visserligen
+// rätt <title> per avsnitt, men det görs av JavaScript — och Facebooks,
+// LinkedIns och Slacks robotar kör aldrig JS. De läser bara den statiska
+// <head>, och skulle därför visa samma generiska kort för alla 333 avsnitt.
+// Delningsraden i katalog.html pekar på de här filerna.
+const AVSNITT_DELA_DIR = path.join(ROOT, 'katalog', 'dela');
+
+function avsnittDelaHtml(a) {
+  const articlePath = `/katalog.html?id=${encodeURIComponent(a.id)}`;
+  const articleUrl = `${SITE_ORIGIN}${articlePath}`;
+  const shareUrl = `${SITE_ORIGIN}/katalog/dela/${a.id}.html`;
+  const imageUrl = `${SITE_ORIGIN}/og-fysiklabbet.png`;
+
+  const rubrik = esc(`${a.namn} — ${a.kurs}`);
+  const desc = esc(a.beskrivning || `${a.namn} — genomgång, övningar och simulering i ${a.kurs}.`);
+
+  return `<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${esc(a.namn)} — ${esc(a.kurs)} — Fysiklabbet</title>
+    <meta name="description" content="${desc}">
+    <link rel="canonical" href="${articleUrl}">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Open Graph (Facebook, LinkedIn, Messenger, WhatsApp, Slack, iMessage …) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="${rubrik}">
+    <meta property="og:description" content="${desc}">
+    <meta property="og:url" content="${shareUrl}">
+    <meta property="og:image" content="${imageUrl}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${rubrik}">
+    <meta name="twitter:description" content="${desc}">
+    <meta name="twitter:image" content="${imageUrl}">
+
+    <!-- Skicka människor vidare till genomgången direkt. -->
+    <meta http-equiv="refresh" content="0; url=${articlePath}">
+    <script>location.replace(${JSON.stringify(articlePath)});</script>
+    <style>
+        html, body { margin: 0; height: 100%; }
+        body {
+            background: #f7f2e8;
+            color: #1a1712;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 24px;
+        }
+        a { color: #b23a2e; }
+    </style>
+</head>
+<body>
+    <p>Öppnar genomgången … <a href="${articlePath}">Klicka här om inget händer.</a></p>
+</body>
+</html>
+`;
+}
+
 // ── Publiceringsgrind ─────────────────────────────────────────────────────
 // Samma logik som datumgrinden i data/nyheter.js: en artikel är publicerad
 // när date (+ ev. time) har passerats enligt lokal klocka. Framtidsdaterade
@@ -282,11 +347,30 @@ function korIFil(fil, global) {
 
 // Teoriavsnitt ur data/katalog.js → katalog.html?id=<kurskod>-<num>
 function loadAvsnitt() {
+  return loadAvsnittData().map((a) => a.id);
+}
+
+// Samma avsnitt, men med den text delningssidorna behöver.
+function loadAvsnittData() {
   const flat = korIFil('data/katalog.js', 'KATALOG_FLAT');
   if (!Array.isArray(flat)) return [];
+  // Katalogtitlar kan bära markdown-kursiv (*pq*-formeln) — den får inte
+  // synas bokstavligt i ett delningskort. Samma strippning som katalog.html
+  // gör för document.title.
+  const rent = (t) => String(t == null ? '' : t).replace(/\*/g, '').trim();
   return flat
-    .map((s) => (KURSKOD[s.course] ? `${KURSKOD[s.course]}-${s.num}` : null))
-    .filter(Boolean);
+    .filter((s) => KURSKOD[s.course])
+    .map((s) => ({
+      id: `${KURSKOD[s.course]}-${s.num}`,
+      // Sammanfattningarna heter bara "Sammanfattning" i varje kapitel.
+      namn: String(s.num).endsWith('.S')
+        ? `Sammanfattning: ${rent(s.chapter)}`
+        : rent(s.title),
+      beskrivning: rent(s.description),
+      kurs: s.course,
+      kapitel: rent(s.chapter),
+      num: s.num,
+    }));
 }
 
 // Nationella prov ur data/np/index.js → np.html?id=<provId>
@@ -365,6 +449,25 @@ function build() {
   console.log(`OG-delningssidor: ${articles.length} skrivna i nyheter/dela/` +
     (removed ? `, ${removed} föräldralösa borttagna` : ''));
 
+  // Delningssidor för teoriavsnitten.
+  const avsnitt = loadAvsnittData();
+  if (avsnitt.length) {
+    fs.mkdirSync(AVSNITT_DELA_DIR, { recursive: true });
+    for (const a of avsnitt) {
+      fs.writeFileSync(path.join(AVSNITT_DELA_DIR, `${a.id}.html`), avsnittDelaHtml(a), 'utf8');
+    }
+    const önskade = new Set(avsnitt.map((a) => `${a.id}.html`));
+    let bort = 0;
+    for (const f of fs.readdirSync(AVSNITT_DELA_DIR)) {
+      if (f.endsWith('.html') && !önskade.has(f)) {
+        fs.unlinkSync(path.join(AVSNITT_DELA_DIR, f));
+        bort++;
+      }
+    }
+    console.log(`Avsnittsdelning: ${avsnitt.length} skrivna i katalog/dela/` +
+      (bort ? `, ${bort} föräldralösa borttagna` : ''));
+  }
+
   // RSS + sitemap (endast publicerade artiklar).
   const published = publishedOnly(articles);
   fs.writeFileSync(path.join(ROOT, 'feed.xml'), buildFeed(published), 'utf8');
@@ -397,5 +500,6 @@ if (require.main === module) build();
 module.exports = {
   ROOT, SITE_ORIGIN, OUT_DIR, FEED_MAX,
   loadArticles, publishedOnly, loadBegrepp, buildFeed, buildSitemap, pageHtml,
-  loadAvsnitt, loadProv, loadRepetition,
+  loadAvsnitt, loadAvsnittData, loadProv, loadRepetition,
+  AVSNITT_DELA_DIR, avsnittDelaHtml,
 };

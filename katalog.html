@@ -1701,6 +1701,38 @@
             // Presentationsläge (fullskärmsbildspel av teorin)
             const [presenting, setPresenting] = useState(false);
 
+            // Delning av ett avsnitt.
+            //
+            // Länken pekar på den STATISKA dela-sidan (katalog/dela/<id>.html),
+            // inte på katalog.html?id=. Skälet: Facebooks, LinkedIns och Slacks
+            // robotar kör aldrig JavaScript. Titeln som katalog.html sätter är
+            // därför osynlig för dem, och alla 333 avsnitt skulle visa samma
+            // generiska förhandsvisningskort. Dela-sidan bär avsnittets egna
+            // og:*-taggar i statisk <head> och skickar människor vidare direkt.
+            // Genereras av data/build-nyheter-og.js.
+            //
+            // Produktions-origin är hårdkodad så att man aldrig råkar dela en
+            // localhost-länk från utvecklingsservern (samma grepp som i
+            // nyheter.html:s ShareBar).
+            const [delaKopierad, setDelaKopierad] = useState(false);
+            const kurskod = Object.keys(HASH_COURSES).find(k => HASH_COURSES[k][1] === course);
+            const delaUrl = (activeSection && kurskod)
+                ? `https://fysiklabbet.se/katalog/dela/${kurskod}-${activeSection.num}.html`
+                : null;
+            const delaAvsnitt = async () => {
+                if (!delaUrl) return;
+                const titel = String(activeSection.title || '').replace(/\*/g, '');
+                if (navigator.share) {
+                    try { await navigator.share({ title: titel, url: delaUrl }); } catch (e) { /* avbruten */ }
+                    return;
+                }
+                try {
+                    await navigator.clipboard.writeText(delaUrl);
+                    setDelaKopierad(true);
+                    setTimeout(() => setDelaKopierad(false), 2000);
+                } catch (e) { /* clipboard nekad */ }
+            };
+
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
             const sectionContentRef = useRef(null);
@@ -1933,6 +1965,13 @@
                                                         <a className="lab-btn" href={activeSection.href}>
                                                             Simulering →
                                                         </a>
+                                                    )}
+                                                    {delaUrl && (
+                                                        <button className="lab-btn lab-btn-quiet" type="button"
+                                                            onClick={delaAvsnitt}
+                                                            title="Kopiera en länk till avsnittet — den visar avsnittets namn och beskrivning när du klistrar in den">
+                                                            {delaKopierad ? 'Länk kopierad' : 'Dela avsnittet'}
+                                                        </button>
                                                     )}
                                                     <div className="lab-section-actions-spacer" />
                                                     <button className="lab-btn lab-btn-quiet" type="button"

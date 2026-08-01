@@ -108,6 +108,44 @@ if (utanDelning.length) {
     '\n   Kör: node data/build-nyheter-og.js');
 }
 
+// ── 3b. Har varje teoriavsnitt sin delningssida? ──────────────────────────
+// Utan den visar en delad avsnittslänk samma generiska kort för alla 333
+// avsnitt — och delningsknappen i katalog.html pekar på en 404.
+const avsnittUtanDela = B.loadAvsnittData().filter(
+  (a) => !fs.existsSync(path.join(B.AVSNITT_DELA_DIR, `${a.id}.html`)));
+if (avsnittUtanDela.length) {
+  fel.push(`${avsnittUtanDela.length} teoriavsnitt saknar delningssida i katalog/dela/:` +
+    `\n   ${avsnittUtanDela.slice(0, 8).map((a) => a.id).join('\n   ')}` +
+    '\n   Kör: node data/build-nyheter-og.js');
+}
+
+// ── 3c. Är kurskoderna samma på båda sidor? ───────────────────────────────
+// Delningsknappen i katalog.html bygger sin URL ur HASH_COURSES; filerna i
+// katalog/dela/ genereras ur KURSKOD i byggskriptet. Två listor över samma
+// sak — glider de isär pekar en hel kurs delningslänkar på 404 utan att
+// något annat ser fel ut.
+const katalogHtml = las('katalog.html');
+if (katalogHtml) {
+  const block = katalogHtml.match(/const HASH_COURSES = \{([\s\S]*?)\};/);
+  if (!block) {
+    varning.push('Hittade inte HASH_COURSES i katalog.html — kan inte kontrollera ' +
+      'att kurskoderna stämmer med byggskriptets KURSKOD.');
+  } else {
+    const iSidan = new Map();
+    for (const m of block[1].matchAll(/(\w+):\s*\[[^,]+,\s*'([^']+)'\]/g)) {
+      iSidan.set(m[2], m[1]);           // kursnamn → kod
+    }
+    const iBygget = new Map();
+    for (const id of B.loadAvsnitt()) iBygget.set(id.split('-')[0], true);
+    const saknas = [...iSidan.entries()].filter(([, kod]) => !iBygget.has(kod));
+    if (saknas.length) {
+      varning.push('Kurser i katalog.htmls HASH_COURSES som inte gav några avsnitt i ' +
+        `bygget: ${saknas.map(([namn, kod]) => `${kod} (${namn})`).join(', ')}. ` +
+        'Kontrollera att KURSKOD i data/build-nyheter-og.js har exakt samma kursnamn.');
+    }
+  }
+}
+
 // ── 4. Pekar sitemapen på filer som faktiskt finns? ───────────────────────
 // Fångar sidor som döpts om eller tagits bort utan att sitemapen byggts om.
 if (sitemapPaDisk) {

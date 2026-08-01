@@ -134,6 +134,18 @@ const NYHETER_ALL = [
       citation: "T. Guo et al., ”Plasmonic metamaterial time crystal”, Nature (2026)",
       url: "https://doi.org/10.1038/s41586-026-10825-9"
     },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 2.3 Harmonisk svängning", href: "katalog.html#fy2-2.3" },
+        { label: "Fysik nivå 2 · 2.6 Resonans", href: "katalog.html#fy2-2.6" },
+        { label: "Fysik nivå 2 · 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }
+      ],
+      fragor: [
+        "En vanlig kristall upprepar sitt mönster i rummet. Här upprepas i stället materialets egenskaper i tiden. Vad betyder ”periodisk” egentligen — och varför är det inte självklart att en period i tiden ska ge samma sorts effekter som en period i rummet?",
+        "Efter en stund vände energiförlusterna till förstärkning: ljuset kom ut starkare än man väntat. Betyder det att energi skapades? Var kommer energin ifrån, och vad i uppställningen måste man titta på för att svara?",
+        "Att driva systemet exakt en gång per ljusvåg är avgörande — vid fel takt händer ingenting. Vilket vardagligt fenomen bygger på samma princip, och vad avgör där hur mycket energi som byggs upp?"
+      ]
+    },
     body: [
       { type: "p", html: "En vanlig kristall — ett saltkorn, en diamant, is i en fönsterruta — är byggd av atomer som upprepar exakt samma mönster om och om igen genom rummet. Den regelbundenheten är själva grunden för hur kristaller styr allt från ljus till elektroner. Nu har ett internationellt forskarlag, lett från École polytechnique i Frankrike tillsammans med Collège de France och Helmholtz-Zentrum Dresden-Rossendorf (HZDR) i Tyskland, för första gången byggt kristallens tidsmässiga motsvarighet: ett material vars optiska egenskaper upprepar sig i tiden i stället för i rummet. Studien, publicerad i tidskriften <em>Nature</em> den 30&nbsp;juli 2026, visar att ljus som färdas genom materialet läcker mindre än hälften så mycket energi som väntat." },
 
@@ -180,6 +192,18 @@ const NYHETER_ALL = [
     research: {
       citation: "Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, ”Chiral diffraction from aperiodic monotile structure”, Nature Communications 17, 6085 (2026)",
       url: "https://doi.org/10.1038/s41467-026-75023-7"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 2.14 Diffraktion och interferens", href: "katalog.html#fy2-2.14" },
+        { label: "Fysik nivå 2 · 4.2 Ljus, diffraktion och interferens", href: "katalog.html#fy2-4.2" },
+        { label: "Symmetri och geometri" }
+      ],
+      fragor: [
+        "Ett vanligt gitter har ett mönster som upprepar sig, och ger skarpa ljuspunkter i bestämda riktningar. Hattmönstret upprepar sig aldrig — ändå syns ett tydligt mönster i det diffrakterade ljuset. Vad säger det om vad ljuset egentligen ”läser av” i strukturen?",
+        "Formen är kiral: den går inte att lägga ovanpå sin spegelbild. Ge exempel på kirala föremål i vardagen. Varför kan just den egenskapen ge olika svar för höger- och vänstervridet ljus, när mönstrets storlek är densamma åt båda hållen?",
+        "Formen upptäcktes 2023 av en hobbymatematiker som löste ett rent matematiskt pussel, utan tanke på optik. Fysiken hittades först tre år senare, av någon som byggde formen och lyste på den. Vad säger det om förhållandet mellan matematik och fysik — och om att forska på sådant som ännu inte har någon användning?"
+      ]
     },
     body: [
       { type: "p", html: "I mars 2023 chockade den brittiske hobbymatematikern David Smith vetenskapsvärlden med en enda kakelform, kallad ”hatten”, som kan täcka ett golv i oändlighet utan att mönstret någonsin upprepar sig — en lösning på det femtio år gamla ”Einstein-problemet” i matematiken. Nu har fysiker vid Tokyos universitet skickat laserljus genom nanostora mönster byggda av just den formen, och upptäckt att den gömmer på en helt egen optisk effekt: ljuset som studsar ut bildar ett mönster som aldrig går att lägga exakt ovanpå sin egen spegelbild. Studien publicerades i tidskriften <em>Nature Communications</em> den 30&nbsp;juli 2026." },
@@ -229,7 +253,7 @@ const NYHETER_ALL = [
     larare: {
       moment: [
         { label: "Fysik nivå 1 · 9.1 Atomkärnan", href: "katalog.html#fy1-9.1" },
-        { label: "Fysik nivå 2 · 4.6 Våg-partikeldualitet", href: "katalog.html#fy2-4.6" },
+        { label: "Fysik nivå 2 · 4.6 Våg-partikeldualitet och de Broglies hypotes", href: "katalog.html#fy2-4.6" },
         { label: "Naturvetenskapligt arbetssätt — hypotesprövning" }
       ],
       fragor: [
@@ -285,6 +309,18 @@ const NYHETER_ALL = [
       citation: "T. J. Ugras et al., ”Non-reciprocal linearly polarized light in simple media”, Nature Materials (2026)",
       url: "https://doi.org/10.1038/s41563-026-02660-0"
     },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 4.4 Ljusets brytning", href: "katalog.html#fy2-4.4" },
+        { label: "Fysik nivå 2 · 2.8 Reflexion, transmission och stående vågor", href: "katalog.html#fy2-2.8" },
+        { label: "Fysik nivå 2 · 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }
+      ],
+      fragor: [
+        "En envägsspegel i ett förhörsrum släpper ju också igenom ljus åt ett håll men inte åt det andra. Ändå bryter den INTE mot regeln forskarna bröt. Vad är det egentligen som skiljer — vad beror envägsspegelns effekt på?",
+        "Regeln säger att ljus ska bete sig likadant åt båda hållen genom ett material. Varför är det en så djupt rotad förväntan i fysiken? Fundera på vad som skulle hända med energin om man enkelt kunde bygga ett material som släpper igenom ljus åt ena hållet men blockerar det åt det andra.",
+        "Effekten uppstod när två svaga fenomen gjordes ungefär lika starka och började samverka. Varför kan ”lika starka” vara mer avgörande än ”så starka som möjligt”? Kan ni komma på andra fall i fysiken där två effekter måste balanseras för att något nytt ska hända?"
+      ]
+    },
     body: [
       { type: "p", html: "Det finns en regel som gäller för nästan allt ljus som passerar genom vanliga material: det spelar ingen roll åt vilket håll ljuset går. Skickar man in ljus framifrån och bakifrån får man exakt samma resultat. Regeln kallas optisk reciprocitet, och den sitter så djupt i de flesta material att man normalt måste ta till kraftiga magnetfält eller avancerade konstgjorda nanostrukturer, metamaterial, för att bryta den. Nu har forskare vid Cornell University i USA visat att den går att bryta med betydligt enklare medel — tunna filmer av vanliga halvledarkristaller, tillverkade genom att låta dem självorganisera sig i en lösning. Studien publicerades i tidskriften <em>Nature Materials</em> den 27&nbsp;juli 2026." },
 
@@ -327,6 +363,18 @@ const NYHETER_ALL = [
       { name: "Facility for Rare Isotope Beams, Michigan State University (pressrum)", url: "https://frib.msu.edu/news-center" }
     ],
     research: { citation: "E. K. Ronning et al., ”Magnetic Character of the Low-Energy Enhancement in 70Zn”, Nature (2026)", url: "https://doi.org/10.1038/s41586-026-10758-3" },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 9.1 Atomkärnan", href: "katalog.html#fy1-9.1" },
+        { label: "Fysik nivå 2 · 4.8 Bohrs atommodell och energinivåer", href: "katalog.html#fy2-4.8" },
+        { label: "Fysik nivå 1 · 9.2 Massdefekt och bindningsenergi", href: "katalog.html#fy1-9.2" }
+      ],
+      fragor: [
+        "En exciterad atom sänder ut synligt ljus när den faller till ett lägre tillstånd. En exciterad atomkärna gör samma sak, men fotonerna har miljontals gånger högre energi. Vad säger den skillnaden om hur energinivåerna inuti kärnan förhåller sig till dem i elektronskalen?",
+        "Forskarna kunde inte mäta ”elektrisk eller magnetisk” direkt. I stället jämförde de två olika vägar in i samma kärna och konstaterade att resultatet blev likadant. Hur kan en jämförelse avgöra en fråga som ingen enskild mätning kunde svara på?",
+        "En detalj om vilken sorts strålning en kärna sänder ut ändrar hur mycket guld modellerna förutsäger att universum ska innehålla. Följ kedjan bakåt: varför påverkar sannolikheten för gammautsändning hur tunga grundämnen som hinner byggas upp?"
+      ]
+    },
     body: [
       { type: "p", html: "Djupt inne i en atomkärna gömmer sig en av kärnfysikens mest ihärdiga gåtor. I decennier har forskare sett att vissa atomkärnor, när de faller ner från ett exciterat tillstånd, sänder ut betydligt fler lågenergetiska gammafotoner än teorin förutspår – ett fenomen som fått namnet lågenergiförhöjning (<em>low-energy enhancement</em>, LEE). Ingen har kunnat visa exakt vad som orsakar överskottet. Nu har ett internationellt forskarlag, lett från Facility for Rare Isotope Beams (FRIB) vid Michigan State University i USA, spårat gåtan till dess källa i atomkärnan zink-70: överskottet beror på magnetiska, inte elektriska, övergångar. Studien publicerades i tidskriften <em>Nature</em> den 24&nbsp;juli 2026." },
 
@@ -370,6 +418,18 @@ const NYHETER_ALL = [
       { name: "European Physical Society (officiellt tillkännagivande)", url: "https://eps.org/2026-eps-europhysics-prize-for-outstanding-achievement-in-condensed-matter-physics-announced/" }
     ],
     research: { citation: "L. Šmejkal, J. Sinova, T. Jungwirth, ”Beyond Conventional Ferromagnetism and Antiferromagnetism: A Phase with Nonrelativistic Spin and Crystal Rotation Symmetry”, Physical Review X 12, 031042 (2022)", url: "https://doi.org/10.1103/PhysRevX.12.031042" },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 3.1 Magnetism och magnetfält", href: "katalog.html#fy2-3.1" },
+        { label: "Fysik nivå 1 · 7.3 Elektrisk ström", href: "katalog.html#fy1-7.3" },
+        { label: "Vetenskaplig klassificering" }
+      ],
+      fragor: [
+        "En altermagnet har inget yttre magnetfält alls — den drar inte till sig ett gem — men är ändå strikt magnetiskt ordnad inuti. Hur kan något vara magnetiskt ordnat utan att vi märker det utifrån? Vad är det egentligen vi mäter när vi håller upp en magnet mot ett material?",
+        "Skillnaden mot en vanlig antiferromagnet är att grannatomernas omgivning är vriden i stället för spegelvänd. Varför kan en så liten geometrisk detalj ge helt andra egenskaper, när själva spinnen är ordnade likadant?",
+        "Materialen fanns redan och hade studerats i decennier — det som var nytt var att någon insåg att de utgör en egen klass. När är det befogat att införa en ny kategori i naturvetenskapen, och när är det bara ett specialfall av något känt? Vad vinner forskningen på en ny indelning?"
+      ]
+    },
     body: [
       { type: "p", html: "I mer än hundra år har fysiker delat in magnetiska material i två väletablerade familjer: ferromagneter, som kylskåpsmagneten hemma i köket, och antiferromagneter, som inte drar till sig ett gem men ändå är strikt ordnade på atomnivå. Nu tilldelas tre forskare 2026 års Europhysics-pris — ett av Europas mest ansedda utmärkelser inom kondenserade materiens fysik, utdelat av European Physical Society — för att ha bevisat att det finns en tredje, tidigare dold klass av magnetism. Priset offentliggjordes 24&nbsp;juli 2026 och går till Jairo Sinova vid Johannes Gutenberg-universitetet i Mainz, samt Libor Šmejkal och Tomas Jungwirth vid Fysikinstitutet vid Tjeckiska vetenskapsakademin i Prag." },
 
@@ -410,6 +470,18 @@ const NYHETER_ALL = [
       { name: "Phys.org", url: "https://phys.org/news/2026-07-quantum-room-temperature.html" }
     ],
     research: { citation: "M. Li, H. Wu, Z. Qin, C. Su, H. D. Nguyen, Y. Hu, ”Phonon focusing at room temperature”, Nature Physics (2026)", url: "https://doi.org/10.1038/s41567-026-03335-y" },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 6.1 Värme och temperatur", href: "katalog.html#fy1-6.1" },
+        { label: "Fysik nivå 2 · 2.7 Pulser, vågor och utbredningshastighet", href: "katalog.html#fy2-2.7" },
+        { label: "Fysik nivå 2 · 2.10 Ljudvågor och stående vågor i rör", href: "katalog.html#fy2-2.10" }
+      ],
+      fragor: [
+        "Värme i ett fast material är atomernas vibrationer. Varför sprider sig värme normalt åt alla håll, trots att varje enskild vibration rör sig i en bestämd riktning? Vad är det som suddar ut riktningen?",
+        "I bor-arsenid krockar vibrationerna ovanligt sällan, och då behåller de sin riktning. Jämför med att gå rakt fram genom en folktom korridor respektive genom en fullpackad festlokal. Hur långt hinner man i vardera fallet innan man tappat sin ursprungliga riktning?",
+        "Vi säger att värme ”leds bort”. Om värmen i stället kan styras längs bestämda banor — vad förändras då i hur man skulle designa kylningen av en processor? Vilken av storheterna temperatur och värme är det egentligen som transporteras?"
+      ]
+    },
     body: [
       { type: "p", html: "Värme brukar sprida sig åt alla håll på en gång, ungefär som ringar på vattnet efter en sten. Men i en kristall av halvledarmaterialet bor-arsenid har forskare vid University of California, Los Angeles (UCLA) sett värmen bete sig helt annorlunda: den samlar sig i skarpa, riktade strålar som skjuter ut längs bestämda riktningar i kristallgittret — ett beteende som tidigare bara har setts vid temperaturer nära den absoluta nollpunkten. Nu har forskarna, ledda av professor Yongjie Hu, för första gången observerat fenomenet vid rumstemperatur. Studien publicerades i tidskriften <em>Nature Physics</em> den 23&nbsp;juli." },
 
@@ -451,6 +523,18 @@ const NYHETER_ALL = [
       { name: "Phys.org", url: "https://phys.org/news/2026-07-frozen-fiber-couples-strongly-standard.html" }
     ],
     research: { citation: "S. Seiderer, A. Geilen, L. Sliwa, L. Gan, X. Qi, M. Chemnitz, M. A. Schmidt, B. Stiller, ”Giant Brillouin gain in frozen CS₂ capillaries”, Optica 13, 1415–1422 (2026)", url: "https://doi.org/10.1364/OPTICA.600056" },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 2.10 Ljudvågor och stående vågor i rör", href: "katalog.html#fy2-2.10" },
+        { label: "Fysik nivå 2 · 2.7 Pulser, vågor och utbredningshastighet", href: "katalog.html#fy2-2.7" },
+        { label: "Fysik nivå 2 · 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }
+      ],
+      fragor: [
+        "Ljudvågorna i fibern svänger i gigahertzområdet — miljontals gånger snabbare än vad örat kan uppfatta. På vilket sätt är det ändå ljud? Vad är det som avgör om en vågrörelse ska kallas ljud, och vad har frekvensen med saken att göra?",
+        "Texten säger först att vätskans mjuka struktur kopplar starkare till ljus än stelt glas gör. Sedan fryser forskarna vätskan till fast form — och kopplingen blir ännu starkare. Är det en motsägelse? Vad skulle behöva stämma om båda påståendena ska kunna vara sanna samtidigt?",
+        "Minnet fungerar genom att en ljussignal tillfälligt lagras som en ljudvåg och läses av igen. Varför är det praktiskt att växla från ljus till ljud för att lagra något en kort stund? Jämför utbredningshastigheterna."
+      ]
+    },
     body: [
       { type: "p", html: "En optisk fiber med flytande kärna är känslig utrustning — vätskan läcker, avdunstar och gör fibern svår att hantera utanför ett kontrollerat laboratorium. Forskare vid Max Planck-institutet för ljusets fysik (MPL) i Erlangen, tillsammans med Leibniz universitet i Hannover och Leibniz-institutet för fotonisk teknik i Jena, har löst det problemet på ett oväntat sätt: genom att frysa vätskan till is. Resultatet, publicerat i tidskriften <em>Optica</em> den 20&nbsp;juli, är en fiber som inte bara blir robust och lätthanterlig utan som dessutom kopplar samman ljus och ljud mer än 1&nbsp;000 gånger starkare än en vanlig glasfiber." },
 
@@ -495,6 +579,18 @@ const NYHETER_ALL = [
       { name: "Phys.org", url: "https://phys.org/news/2026-07-mysterious-gas-bullets-milky-helium.html" }
     ],
     research: null,
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 2.12 Ljudfrekvens och dopplereffekt", href: "katalog.html#fy2-2.12" },
+        { label: "Fysik nivå 2 · 4.7 Spektrallinjer", href: "katalog.html#fy2-4.7" },
+        { label: "Fysik nivå 1 · 3.5 Gravitationslagen", href: "katalog.html#fy1-3.5" }
+      ],
+      fragor: [
+        "Gaskulorna är tusentals ljusår bort och alldeles för små för att synas som föremål. Ändå anges deras fart till 8 940 km/s. Hur kan man mäta hastigheten hos något man inte kan följa med blicken? Vad i ljuset bär informationen?",
+        "Att spektrumet saknade väte var det som gjorde explosionen unik — universums vanligaste grundämne lyste med sin frånvaro. Varför är det så avslöjande att ett ämne INTE syns i ett spektrum, och vad kan man dra för slutsats om stjärnan som gasen kom ifrån?",
+        "Gasen accelererades till ungefär 3 % av ljushastigheten. Uppskatta rörelseenergin hos ett kilo sådan gas och jämför med något vardagligt — en bil på motorvägen, en sprängladdning. Vad säger jämförelsen om vilken sorts process som måste ligga bakom?"
+      ]
+    },
     body: [
       { type: "p", html: "I 25&nbsp;år har astronomer klurat på en gåta: varför saknade stjärnexplosionen som lyste upp stjärnbilden Aktern (Puppis) i december år 2000 helt och hållet väte, universums absolut vanligaste grundämne? Nu, vid Royal Astronomical Societys nationella astronomimöte (NAM2026) i Birmingham, har doktoranden John Mills vid University of Warwick lagt fram svaret — och samtidigt en ny gåta. Objektet, katalogiserat som V445&nbsp;Puppis, är den enda bekräftade heliumnovan i hela Vintergatan." },
 

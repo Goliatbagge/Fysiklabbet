@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /.shots/
+Disallow: /.shot-0264ac28/
+Disallow: /.claude/
+Disallow: /design/
+
+Sitemap: https://fysiklabbet.se/sitemap.xml

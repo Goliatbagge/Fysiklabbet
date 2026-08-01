@@ -62,9 +62,11 @@ node .claude/verify-mobil-scen.js
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
-# Bygg per-artikel-OG-sidor efter ändringar i data/nyheter.js (KÖR FÖRE COMMIT!)
-# Genererar nyheter/dela/<id>.html med rätt og:*-taggar för korrekt
-# delningsförhandsvisning (Facebook/X/LinkedIn) — delningsknapparna pekar dit
+# Bygg per-artikel-OG-sidor + RSS + sitemap efter ändringar i data/nyheter.js
+# (KÖR FÖRE COMMIT!) Genererar (1) nyheter/dela/<id>.html med rätt og:*-taggar
+# för delningsförhandsvisning (Facebook/X/LinkedIn), (2) feed.xml — RSS-flödet
+# med de 20 senaste publicerade artiklarna (datumgrindat), (3) sitemap.xml —
+# alla publika sidor + artiklarnas ?id=-URL:er (robots.txt pekar hit).
 node data/build-nyheter-og.js
 
 # Uppläsning (talsyntes): bygg om manus + ljud efter ändringar i

@@ -125,6 +125,32 @@ if (sitemapPaDisk) {
   }
 }
 
+// ── 4b. Löser avsnittsadresserna faktiskt ut? ─────────────────────────────
+// Det farligaste felläget: byter någon kursnamnet i data/katalog.js slutar
+// KURSKOD matcha, och alla 333 avsnittsadresser hamnar utanför sitemapen —
+// eller värre, en adress som INTE matchar katalogens regexp faller tyst
+// tillbaka till standardsidan, så Google indexerar hundratals identiska
+// sidor. Regexpen nedan är kopierad ur katalog.htmls parseInitialState() och
+// måste hållas i takt med den.
+const KATALOG_RE = /^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S))?)?(?::(teori|ovningar|exitticket|visualisering))?$/;
+const avsnitt = B.loadAvsnitt();
+if (!avsnitt.length) {
+  fel.push('Inga teoriavsnitt hittades i data/katalog.js — har kursnamnen ändrats? ' +
+    'KURSKOD i data/build-nyheter-og.js måste matcha `course`-fältet exakt.');
+} else {
+  const trasiga = avsnitt.filter((id) => !KATALOG_RE.test(id));
+  if (trasiga.length) {
+    fel.push(`${trasiga.length} avsnittsadress(er) matchar inte katalogens routing och ` +
+      `skulle visa standardsidan i stället:\n   ${trasiga.slice(0, 8).join('\n   ')}`);
+  }
+  const sedda = new Set();
+  const dubbletter = avsnitt.filter((id) => sedda.size === sedda.add(id).size);
+  if (dubbletter.length) {
+    fel.push(`${dubbletter.length} avsnittsadress(er) förekommer flera gånger: ` +
+      `${[...new Set(dubbletter)].slice(0, 8).join(', ')}`);
+  }
+}
+
 // ── 5. Är XML:en välformad? ───────────────────────────────────────────────
 // Ett oescapat & i en rubrik räcker för att Google ska avvisa hela filen.
 for (const fil of ['feed.xml', 'sitemap.xml']) {
@@ -151,6 +177,9 @@ console.log('Kontroll av feed.xml, sitemap.xml och delningssidor');
 console.log('='.repeat(60));
 console.log(`Artiklar i data/nyheter.js : ${artiklar.length} (${publicerade.length} publicerade)`);
 console.log(`Begrepp i data/begrepp.js  : ${B.loadBegrepp().length}`);
+console.log(`Teoriavsnitt (katalog.js)  : ${B.loadAvsnitt().length}`);
+console.log(`Nationella prov            : ${B.loadProv().length}`);
+console.log(`Repetitionspaket           : ${B.loadRepetition().length}`);
 if (sitemapPaDisk) {
   console.log(`Adresser i sitemap.xml     : ${(sitemapPaDisk.match(/<loc>/g) || []).length}`);
 }

@@ -43,7 +43,9 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 
 7. **Fyll på begreppsordlistan** (se "Begreppsordlistan" nedan) — gå igenom
    artikeln och lägg till de facktermer som ligger över gymnasienivå i
-   `data/begrepp.js`. Kör `node .claude/verify-begrepp.js`.
+   `data/begrepp.js`. Kör `node .claude/verify-begrepp.js`. Bygget i nästa steg
+   genererar om det lätta begreppsindexet (`data/begrepp-sok.js`) — utan det
+   syns inte de nya orden på sajten.
 
 8. **Bygg delningssidor, RSS och sitemap:** kör `node data/build-nyheter-og.js`.
    Det genererar TRE saker:
@@ -81,7 +83,8 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
     användarens godkännande. Användaren gör eventuella justeringar i efterhand.
     Committa **bara nyhetsfilerna** — `data/nyheter.js`, bilden i
     `nyheter/bilder/`, de genererade `nyheter/dela/*.html`, `feed.xml`,
-    `sitemap.xml`, dagens tillägg i `data/begrepp.js`, samt
+    `sitemap.xml`, dagens tillägg i `data/begrepp.js` + den genererade
+    `data/begrepp-sok.js`, samt
     `.claude/nyheter/publicerat.md` och `ko.md`. Lämna orelaterade ändringar
     (t.ex. `.claude/settings.local.json`, sim-kod) utanför committen.
     Detta är den enda ändringstyp i projektet som pushas utan att fråga —

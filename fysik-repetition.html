@@ -288,6 +288,7 @@
                 </div>
                 <a href="simuleringar.html">Simuleringar</a>
                 <a href="nyheter.html">Fysiknyheter</a>
+                <a href="begrepp.html">Ordlista</a>
                 <a href="om.html">Om</a>
                 <a href="kontakt.html">Kontakt</a>
             </nav>
@@ -944,7 +945,13 @@
         // ── Huvudapp ─────────────────────────────────────────────
         function useHashId() {
             const read = () => (window.location.hash || '').replace(/^#/, '').trim();
-            const [id, setId] = useState(read);
+            // ?id=<paket> är en likvärdig ingång till #<paket> — fragment
+            // efter # är osynliga för sökmotorer, så alla kapitelpaket
+            // räknades som samma sida. Gäller BARA första inläsningen: när
+            // användaren sedan går tillbaka till listan töms hashen, och då
+            // ska ?id= inte dra in i paketet igen.
+            const [id, setId] = useState(() => read()
+                || (new URLSearchParams(window.location.search).get('id') || '').trim());
             useEffect(() => {
                 const h = () => setId(read());
                 window.addEventListener('hashchange', h);

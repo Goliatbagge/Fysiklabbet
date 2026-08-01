@@ -51,6 +51,12 @@ node .claude/verify-exittickets.js
 # och egna nyckelord. Se "Sökruta och nyckelord" nedan.
 node .claude/verify-sok.js
 
+# Verifiera begreppsordlistan efter ändringar i data/begrepp.js (KÖR FÖRE
+# COMMIT!) — schema, unika id:n, att uppslagsordet finns bland `former`, att
+# ingen böjningsform tillhör två begrepp, typografi och täckning mot
+# nyhetsartiklarna. Se "Begreppsordlista" nedan.
+node .claude/verify-begrepp.js
+
 # Verifiera mobil-dispositionen i simuleringarna (KÖR FÖRE COMMIT vid
 # ändringar i scener, verktygsrutor eller sektion 8 i
 # styles-laborans-sim.css) — startar 390×744, går in i fullskärm i varje
@@ -62,12 +68,28 @@ node .claude/verify-mobil-scen.js
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
-# Bygg per-artikel-OG-sidor + RSS + sitemap efter ändringar i data/nyheter.js
-# (KÖR FÖRE COMMIT!) Genererar (1) nyheter/dela/<id>.html med rätt og:*-taggar
-# för delningsförhandsvisning (Facebook/X/LinkedIn), (2) feed.xml — RSS-flödet
-# med de 20 senaste publicerade artiklarna (datumgrindat), (3) sitemap.xml —
-# alla publika sidor + artiklarnas ?id=-URL:er (robots.txt pekar hit).
+# Bygg per-artikel-OG-sidor + RSS + sitemap + begreppsindex efter ändringar i
+# data/nyheter.js ELLER data/begrepp.js (KÖR FÖRE COMMIT!) Genererar
+# (1) nyheter/dela/<id>.html med rätt og:*-taggar för delningsförhandsvisning
+# (Facebook/X/LinkedIn), (2) feed.xml — RSS-flödet med de 20 senaste
+# publicerade artiklarna (datumgrindat), (3) sitemap.xml — alla publika sidor,
+# artiklarnas ?id=-URL:er, begreppens ?ord=-URL:er samt teoriavsnittens,
+# de nationella provens och repetitionspaketens ?id=-URL:er (robots.txt pekar
+# hit; se "Adresser till teoriavsnitt" nedan),
+# (4) data/begrepp-sok.js — det lätta begreppsindexet (se "Begreppsordlista").
 node data/build-nyheter-og.js
+
+# Verifiera att feed.xml, sitemap.xml och delningssidorna är i takt med
+# data/nyheter.js + data/begrepp.js (KÖR FÖRE COMMIT vid nyhets-/begreppsändringar!)
+# Bygger om vad filerna BORDE innehålla och jämför med disk — fångar den tysta
+# missen att byggskriptet ovan aldrig kördes (artikeln syns på sajten men
+# saknas i RSS och sitemap, utan att något ser trasigt ut).
+# Körs dessutom automatiskt av GitHub Actions vid varje push till main OCH
+# dagligen 06:00 UTC — se .github/workflows/verifiera-sitemap.yml. Den dagliga
+# körningen fångar datumgrindade artiklar som blir synliga vid midnatt utan
+# att någon pushar. Ägarverifieringsfiler (google<token>.html) hålls medvetet
+# utanför sitemapen men MÅSTE ligga kvar i roten.
+node .claude/verify-sitemap.js
 
 # Uppläsning (talsyntes): bygg om manus + ljud efter ändringar i
 # data/teori/*.md eller data/tts/manus-lib.js. (Nyhetsartiklar har INGEN
@@ -1360,6 +1382,133 @@ Nyckelord (`keywords` i `data/katalog.js`, `kw` i `data/simuleringar.js`):
     kw: ['ellära','bandgenerator','van de graaff','gnista','urladdning', …] },
 ],
 ```
+
+## Adresser till teoriavsnitt, prov och repetitionspaket
+
+Tre sidor visar allt sitt innehåll i EN HTML-fil och väljer vad som ska
+visas utifrån adressen:
+
+| Sida | Hash (som förr) | `?id=` (sitemap/sökmotorer) |
+|---|---|---|
+| `katalog.html` | `#fy1-3.2`, `#fy1-3.2:ovningar` | `?id=fy1-3.2` |
+| `np.html` | `#fy2-vt2016`, `#fy2-vt2016:7` | `?id=fy2-vt2016` |
+| `fysik-repetition.html` | `#fy1-3` | `?id=fy1-3` |
+
+**Varför båda formerna finns:** allt efter `#` är osynligt för sökmotorer.
+`katalog.html#fy1-3.2` och `katalog.html#ma4-5.1` räknas som *samma* sida av
+Google, så alla 333 genomgångar var i praktiken omöjliga att hitta via
+sökning. `?id=` ger varje avsnitt en egen riktig adress.
+
+**Regler:**
+
+- **`?id=` läses BARA när hashen är tom.** Hashen vinner alltid, så
+  befintliga länkar, bokmärken och sökrutans träffar beter sig oförändrat.
+  Rör inte den ordningen.
+- **Sidorna skriver aldrig om adressfältet** — varken hash eller query.
+  Navigering sker i React-state. Inför ingen `replaceState`-normalisering
+  utan att tänka igenom hur den samverkar med `hashchange`.
+- **I `fysik-repetition.html` gäller `?id=` bara första inläsningen.**
+  `read()` körs även vid `hashchange`; faller den tillbaka på `?id=` när
+  användaren går tillbaka till listan dras hen in i paketet igen.
+- **Intern länkning fortsätter använda hash** (`data/sok.js` bygger
+  `katalog.html#…`). Byt inte — `?id=` är till för sitemapen.
+- **Adresserna räknas upp i `data/build-nyheter-og.js`** av `loadAvsnitt()`
+  (ur `KATALOG_FLAT`), `loadProv()` (ur `data/np/index.js`) och
+  `loadRepetition()` (filnamnen i `data/repetition/`). Kursnamn → kurskod
+  sker via `KURSKOD`, som **måste matcha `course`-fältet i `data/katalog.js`
+  exakt** — byter någon ett kursnamn försvinner hela kursens avsnitt ur
+  sitemapen. `.claude/verify-sitemap.js` larmar om det, och kontrollerar
+  dessutom att varje genererad adress matchar katalogens routing-regexp
+  (annars skulle den tyst visa standardsidan, och Google indexera hundratals
+  identiska sidor). **Hålls regexpen i takt med `parseInitialState()`.**
+
+## Begreppsordlista
+
+Nyhetsartiklarna innehåller ofta facktermer som ligger över gymnasienivå
+(altermagnetism, kvasar, skyrmion). Sådana ord är **klickbara i artikeltexten**
+och leder till ett uppslag i begreppsordlistan, där begreppet förklaras
+enklare, utförligare och mer pedagogiskt än artikeln hinner göra. Hela listan
+finns på `begrepp.html` i bokstavsordning (nav-länken "Ordlista").
+
+**Ordlistan byggs på efterhand — den är aldrig "klar".** Varje ny nyhet är ett
+tillfälle att fylla på den.
+
+### Delarna
+
+| Fil | Roll |
+|---|---|
+| `data/begrepp.js` | Datamängden (`window.BEGREPP`). Fältformatet dokumenteras i filens huvud. **Detta är filen du redigerar.** |
+| `data/begrepp-sok.js` | **Genererad** — lätt index (id, term, kort, former, utan brödtext). Byggs av `data/build-nyheter-og.js`. |
+| `begrepp-lank.js` | Autolänkaren + förhandsvisningen (popover). Delad, kan användas på fler sidor. |
+| `begrepp.html` | Hela ordlistan (A–Ö, filter) + uppslagssidan `?ord=<id>`. |
+| `.claude/verify-begrepp.js` | Validator — kör före commit. |
+
+**Vilken fil laddar vad:** sidor som bara *länkar och förhandsvisar* begrepp
+(`index.html`, `katalog.html`, `simuleringar.html`, `nyheter.html`) laddar det
+lätta `data/begrepp-sok.js` — 20 kB i stället för 113 kB, eftersom de aldrig
+renderar uppslagens brödtext. **Bara `begrepp.html` laddar hela
+`data/begrepp.js`.** Båda sätter `window.BEGREPP`; det lätta indexet sätter
+dessutom `window.BEGREPP_LATT = true`. Lägger du till något som renderar
+`body` på en annan sida måste den byta till hela filen. **Kör
+`node data/build-nyheter-og.js` efter varje ändring i `data/begrepp.js`** —
+annars ser sidorna den gamla ordlistan (samma fälla som teori-bundeln).
+
+Länkningen är **helt automatisk**: `begrepp-lank.js` går igenom artikelns
+DOM och länkar **första** förekomsten av varje känt ord. Skriv därför
+**aldrig** manuella `<a href="begrepp.html#…">` i artikeltexterna — lägg bara
+till posten i `data/begrepp.js`, så blir ordet klickbart i *alla* artiklar,
+även gamla. Sökrutan (`data/sok.js`) och `sitemap.xml` plockar upp nya
+begrepp automatiskt.
+
+### Lägga till ett begrepp
+
+```javascript
+{
+  id: 'kvasar',                       // a–z, 0–9, bindestreck (å/ä/ö → a/a/o)
+  term: 'Kvasar',                     // uppslagsordet, bara första bokstaven versal
+  former: ['kvasar', 'kvasaren',      // ALLA böjningsformer, gemener
+           'kvasarer', 'kvasarerna'], // (genitiv-s fångas automatiskt)
+  kort: 'Kärnan i en avlägsen galax som lyser starkare än …',  // 1–2 meningar
+  relaterade: ['mork-energi'],        // valfritt, id:n
+  body: [ { type: 'p', html: '…' }, { type: 'h2', text: '…' },
+          { type: 'fact', title: '…', items: ['…'] } ],
+}
+```
+
+Regler:
+
+- **Uppslagsordet måste finnas bland `former`** — annars länkas det aldrig
+  i texten (validatorn fångar detta).
+- **En böjningsform får bara tillhöra ETT begrepp.** Två poster som båda
+  listar "gitter" gör länkningen tvetydig — validatorn ger fel.
+- **Matchningen sker på hela ord.** Sammansättningar länkas bara om de står
+  i `former` ("kristallgittret"), så lägg in de sammansättningar som är
+  värda att länka. Korta former (< 4 tecken) ger varning — de riskerar att
+  träffa fel ord. Validatorn listar under rubriken **"sammansättningar som
+  inte är klickbara"** de ord i artiklarna som SLUTAR på en känd form utan
+  att själva stå i `former` (t.ex. "diffraktionsgitter", "laserspektroskopi").
+  Gå igenom listan och lägg till dem som betyder samma sak — men bara dem:
+  "ytplasmon" är inte plasma, och "cirkulationskvantum" är inte kvantmekanik.
+- **Ordlistan renderas som ren HTML — det finns ingen KaTeX på
+  `begrepp.html`.** Ett math-block (`$z = 1$`) visas bokstavligt med
+  dollartecken och allt. Skriv `<em>z</em>&nbsp;=&nbsp;1`. Validatorn ger fel
+  på math-block och varnar för vanligt mellanslag mellan tal och enhet.
+- **Förklaringen ska stå på egna ben** — hänvisa inte till kurserna eller
+  till en enskild nyhetsartikel (uppslagssidan listar själv vilka nyheter
+  som nämner ordet). Samma standalone-regel som för nyhetsartiklar.
+- **Skriv för en 16-åring utan förkunskaper**: börja i det konkreta, använd
+  vardagsjämförelser, och var utförligare än artikeln — ~3 stycken är lagom
+  (validatorn varnar under ~90 ord).
+- Vanlig HTML-kontext: `10<sup>−9</sup>` (äkta minus), `&nbsp;` mellan tal
+  och enhet, kommatecken som decimalavskiljare, svenska citattecken ”…”.
+
+### Var ordlistan används
+
+`begrepp-lank.js` hoppar över rubriker, citat, bildtexter och redan länkad
+text. Ett element med klassen `no-begrepp` lämnas också orört. På sidor som
+har bionisk läsning **måste länkningen köras före `applyBionic`** — den
+styckar orden i `<span>`-taggar och då hittas de inte längre (se
+`ArticleView` i `nyheter.html`).
 
 ## Checklista: Ny simulering
 

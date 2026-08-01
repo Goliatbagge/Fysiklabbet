@@ -43,6 +43,59 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-01-storsta-galaxen",
+    date: "2026-08-01",
+    title: "Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande",
+    deck: "Vintergatan är ungefär 100 000 ljusår bred. Galaxen IC 1101 är sjutton gånger så stor — men exakt var den tar slut har ingen kunnat säga, eftersom en galax inte har någon skarp kant. Nu har ett forskarlag på Kanarieöarna samlat drygt åtta timmars ljus med ett teleskop på La Palma, räknat bort ljusspillet från 250 förgrundsstjärnor och för första gången pekat ut gränsen.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-01-storsta-galaxen.jpg",
+    imageAlt: "Tre bilder av samma galax bredvid varandra, tagna med olika djup. Längst till vänster (SDSS) syns ett brusigt blåaktigt fält där galaxen bara anas som ett svagt ljust dis. I mitten (DESI Legacy Survey) framträder galaxen tydligare som ett avlångt gulvitt ljussken omgivet av mindre galaxer. Längst till höger (INT) syns den djupaste bilden, där galaxens ljus breder ut sig märkbart längre ut över ett kornigt fält av små blå och gula punkter.",
+    imageCredit: "Bild: C. Marrero-de la Rosa m.fl. (2026), arXiv:2607.15340 (CC BY 4.0)",
+    tags: ["astronomi", "galaxer", "kosmologi", "teleskop", "ljusår", "galaxhopar", "optik", "gravitation", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-astronomers-full-size-largest-galaxy.html" },
+      { name: "arXiv (förhandspublicering, Instituto de Astrofísica de Canarias)", url: "https://arxiv.org/abs/2607.15340" }
+    ],
+    research: {
+      citation: "C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., ”How large can galaxies be? Ultra-deep imaging of IC 1101, the most extended known galaxy”, arXiv:2607.15340 (förhandspublicering, 2026)",
+      url: "https://doi.org/10.48550/arXiv.2607.15340"
+    },
+    body: [
+      { type: "p", html: "Var slutar en galax? Frågan låter enkel, men den är förvånansvärt svår att besvara. En galax är ingen boll med en yta — den är hundratals miljarder stjärnor som blir glesare och glesare utåt, tills ljuset till slut drunknar i natthimlens eget svaga sken. Nu har ett forskarlag lett från Instituto de Astrofísica de Canarias tagit de djupaste bilderna någonsin av IC 1101, den mest utsträckta galax vi känner till, och för första gången kunnat peka ut var den faktiskt tar slut: omkring 260&nbsp;kiloparsec ut från mitten, vilket ger en diameter på ungefär 1,7&nbsp;miljoner ljusår." },
+
+      { type: "h2", text: "Sjutton Vintergator på bredden" },
+      { type: "p", html: "IC 1101 ligger ungefär en miljard ljusår bort, mitt i galaxhopen Abell 2029. Den är vad astronomer kallar hopens ljusstarkaste galax: den tunga jätten i mitten av en galaxhop, som under miljarder år har slukat sina grannar. Med en diameter på omkring 520&nbsp;kiloparsec är den runt sjutton gånger bredare än Vintergatan, som mäter ungefär 100&nbsp;000 ljusår tvärs över. Stjärnorna innanför den nyfunna kanten väger tillsammans omkring 3,4&nbsp;biljoner solmassor (3,4&nbsp;·&nbsp;10<sup>12</sup>) — ungefär femtio gånger mer stjärnmassa än hela Vintergatan." },
+
+      { type: "h2", text: "Problemet: en galax har ingen skarp kant" },
+      { type: "p", html: "Att IC 1101 är enorm har varit känt länge. Redan 1991 följde astronomer dess ljus ut till drygt 600&nbsp;kiloparsec, men ingen kunde avgöra hur mycket av det svaga skenet som var galaxen själv och hur mycket som var det diffusa ljushav av stjärnor som slitits loss ur andra galaxer och driver fritt mellan hopens medlemmar. För att komma vidare använde forskarna ett kantbegrepp som utvecklats under de senaste åren: en galax kant är inte ett tvärt slut, utan ett tydligt brott i hur snabbt ljuset avtar utåt — ett brott som dessutom brukar sammanfalla med att färgen och formen ändrar sig på samma ställe. Gränsen markerar var galaxens egen stjärnkropp övergår i den yttre kappa som byggts upp av material den ätit upp." },
+
+      { type: "h2", text: "Drygt åtta timmar — och 250 stjärnor som måste bort" },
+      { type: "p", html: "Bilderna togs med Wide Field Camera på det 2,5&nbsp;m stora Isaac Newton-teleskopet på La Palma, i två färgfilter och med sammanlagt drygt åtta timmars exponering. Slutresultatet når ner till omkring 30&nbsp;magnituder per kvadratbågsekund — ett mått på ytljusstyrka som innebär att de svagaste partierna lyser flera tusen gånger svagare än den mörka natthimlen själv." },
+      { type: "p", html: "Den stora svårigheten på den nivån är inte att samla ihop tillräckligt med ljus, utan att bli av med fel ljus. Varje ljusstark stjärna i förgrunden smetar ut ett svagt sken över hela bildfältet, och det skenet är lätt att förväxla med en galax yttersta utkanter. Forskarna byggde därför en noggrann modell av precis hur teleskopet sprider ljuset från en enda punktkälla — kalibrerad på allt från svaga stjärnor till en riktigt ljusstark referensstjärna — och räknade sedan bort bidraget från över 250 förgrundsstjärnor innan de vågade tro på det som blev kvar." },
+
+      { type: "h2", text: "Åtta svaga skuggor avslöjar en pågående måltid" },
+      { type: "p", html: "När stjärnljuset var borträknat framträdde åtta svaga, osymmetriska strukturer runt galaxen. Flera av dem ligger precis där röntgenobservationer har visat att den heta gasen i galaxhopen skvalpar runt i ett spiralmönster — ett tecken på att hopens centrum har skakats om av en tidigare kollision. Strukturerna tolkas som spår av material som fortfarande är på väg in i IC 1101." },
+      { type: "image", src: "nyheter/bilder/2026-08-01-storsta-galaxen-2.jpg",
+        alt: "En djup astronomisk bild i mörka toner där de ljusstarka förgrundsstjärnorna räknats bort. I vänstra halvan syns IC 1101 som ett stort avlångt gulvitt ljussken, omgivet av dussintals mindre galaxer som gula och blå fläckar mot ett kornigt fält. Vita pilar märkta med bokstäverna A till H pekar ut svaga, diffusa strukturer runt om galaxen.",
+        caption: "Med förgrundsstjärnornas ljus borträknat framträder åtta svaga strukturer (A–H) runt IC 1101 — spår av material som galaxen fortfarande drar till sig.",
+        credit: "Bild: C. Marrero-de la Rosa m.fl. (2026), arXiv:2607.15340 (CC BY 4.0)" },
+      { type: "quote", html: "”Med en bekräftad diameter på omkring 520 kiloparsec står IC 1101 som den största galax som är känd hittills. Ändå visar dess utkanter tydliga tecken på pågående massuppbyggnad, vilket tyder på att dess utsträckning fortfarande växer.”", cite: "Ur studien, Marrero-de la Rosa m.fl. (2026)" },
+
+      { type: "h2", text: "Hur stor kan en galax bli?" },
+      { type: "p", html: "Studiens titel är just den frågan, och svaret verkar tills vidare vara: större än så här har vi ännu inte sett — men taket är inte nått. IC 1101 lägger sig i den absoluta ytterkanten av det samband mellan massa och storlek som galaxer i allmänhet följer, och den sitter på den plats i universum där en galax har allra bäst förutsättningar att växa. Abell 2029 väger sammanlagt omkring 8,5&nbsp;·&nbsp;10<sup>14</sup> solmassor, och hopens medlemmar faller sakta in mot mitten där jätten väntar. Galaxer växer nämligen inte i första hand genom att bilda nya stjärnor, utan genom att äta varandra." },
+      { type: "p", html: "Resultatet ligger tills vidare som en förhandspublicering på arXiv och har ännu inte genomgått en vetenskaplig tidskrifts kollegiala granskning." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En parsec är ungefär 3,26&nbsp;ljusår och en kiloparsec 1&nbsp;000 parsec, alltså drygt 3&nbsp;260&nbsp;ljusår. IC 1101:s 520&nbsp;kiloparsec motsvarar därmed cirka 1,7&nbsp;miljoner ljusår.",
+        "Ljuset behöver 1,7&nbsp;miljoner år på sig för att ta sig tvärs över IC 1101. Samma resa rakt genom Vintergatan klaras av på omkring 100&nbsp;000 år.",
+        "Vissa radiogalaxer sprutar ut jetstrålar och lober som sträcker sig över mer än tio miljoner ljusår och är alltså vidare än IC 1101 — men de består av utströmmande plasma, inte av stjärnor. Bland galaxernas stjärnkroppar är IC 1101 rekordhållaren.",
+        "Ytljusstyrka mäts i magnituder per kvadratbågsekund. Skalan är omvänd: ju högre siffra, desto svagare ljus — och fem steg uppåt motsvarar hundra gånger svagare sken."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-31-fotonisk-tidskristall",
     date: "2026-07-31",
     title: "Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen",

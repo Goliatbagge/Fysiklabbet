@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-01 | `2026-08-01-storsta-galaxen` | Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande | Phys.org / arXiv-förhandspublicering, Instituto de Astrofísica de Canarias (C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., 2026) |
 | 2026-07-31 | `2026-07-31-fotonisk-tidskristall` | Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen | Helmholtz-Zentrum Dresden-Rossendorf, HZDR (pressmeddelande) / Phys.org / EurekAlert! / Nature (T. Guo et al., 2026) |
 | 2026-07-30 | `2026-07-30-hattformens-kirala-ljus` | Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva | Institute of Industrial Science, The University of Tokyo (pressmeddelande) / Phys.org / EurekAlert! / Nature Communications (Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, 2026) |
 | 2026-07-29 | `2026-07-29-neutronernas-spegelvarld` | Forskare letar efter en dold spegelvärld i 25 miljarder neutroner — och hittar inget spår | Paul Scherrer Institute PSI (pressmeddelande) / Phys.org / Physical Review Letters (N. J. Ayres et al., 2026) |
@@ -122,3 +123,21 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > peer review-granskad), samt två kvantdator-notiser (2D-kvantminne på
 > enelektronnivå; superledande qubitars utveckling) som fick stå tillbaka
 > för ämnesspridning. Se `ko.md` för fullständig lista med källor.
+>
+> Not: 2026-08-01-artikeln (IC 1101) valdes för ämnesspridningens skull —
+> hela senaste veckan hade dominerats av optik/fotonik och kondenserad
+> materiens fysik (tidskristall 07-31, kiralt ljus 07-30, envägsljus 07-28,
+> värmestrålar 07-25, fryst fiber 07-24), medan astronomi senast förekom
+> 07-23. Phys.org-notisen var ~17 h gammal vid sökningen. Studien är en
+> arXiv-förhandspublicering (postad 2026-07-16) som ännu INTE är kollegialt
+> granskad — det står uttryckligen i brödtexten och i `research.citation`,
+> samma hantering som 2026-07-23 (NAM-konferenspresentationen). Artikeln
+> bildsattes med TVÅ äkta forskningsfigurer ur studien (CC BY 4.0, hämtade
+> från arXiv:s HTML-version) — ingen AI-bild behövdes. Detta är första
+> artikeln som använder ett `image`-block i `body`; formatet fungerar (bild
+> + bildtext + kredit renderas korrekt i `nyheter.html`). Andra kandidater
+> som övervägdes: UC Riversides värmekameratrick som ska låta LIGO se längre
+> (peer review-granskad i Classical and Quantum Gravity, men pressmeddelandet
+> är från 07-21 och det är ännu ett optik/spegel-ämne), fyrfilig fotonisk
+> motorväg för ljus, optimerade magnetpulser för minnesswitchning, samt två
+> halvledarqubit-studier (alla för nära senaste veckornas ämnen). Se `ko.md`.

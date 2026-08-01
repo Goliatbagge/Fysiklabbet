@@ -41,33 +41,47 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 6. **Lägg till artikeln** överst i `window.NYHETER`-arrayen i `data/nyheter.js`
    (nyast först). Följ exakt fältformatet som dokumenteras i toppen av den filen.
 
-7. **Bygg delnings-OG-sidorna:** kör `node data/build-nyheter-og.js`. Det
-   genererar en per-artikel-OG-sida (`nyheter/dela/<id>.html`) med artikelns
-   egna og:*-taggar, så att förhandsvisningen på Facebook/X/LinkedIn m.fl.
-   visar rätt bild och rubrik. **Måste köras efter varje ändring i
-   `data/nyheter.js`** (som teori-bundeln) — annars saknar den nya artikeln
-   sin delningssida och committa/pusha lämnar den ogenererad.
+7. **Fyll på begreppsordlistan** (se "Begreppsordlistan" nedan) — gå igenom
+   artikeln och lägg till de facktermer som ligger över gymnasienivå i
+   `data/begrepp.js`. Kör `node .claude/verify-begrepp.js`.
 
-8. **Uppdatera minnet:**
+8. **Bygg delningssidor, RSS och sitemap:** kör `node data/build-nyheter-og.js`.
+   Det genererar TRE saker:
+   - `nyheter/dela/<id>.html` — per-artikel-OG-sida med artikelns egna
+     og:*-taggar, så att förhandsvisningen på Facebook/X/LinkedIn m.fl. visar
+     rätt bild och rubrik.
+   - `feed.xml` — RSS-flödet (20 senaste publicerade artiklarna).
+   - `sitemap.xml` — alla publika sidor + artiklarnas `?id=`-URL:er, för
+     Google Search Console.
+
+   **Måste köras efter varje ändring i `data/nyheter.js`** (som teori-bundeln).
+   Hoppas steget över saknar den nya artikeln sin delningssida, ligger utanför
+   RSS-flödet och blir osynlig för sökmotorer. **Glöm inte att committa alla
+   tre** — `feed.xml` och `sitemap.xml` ligger i repo-roten, inte i `nyheter/`.
+
+9. **Uppdatera minnet:**
    - Lägg en rad i `.claude/nyheter/publicerat.md` (datum, id, titel, källa).
    - Ta bort den publicerade posten ur `ko.md` om den kom därifrån; lägg ev. nya
      uppslag du hittade men inte använde i `ko.md`.
 
-9. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska vara
-   intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
-   skärmdump för att se att artikeln och bilden renderar snyggt.
-   Kör också termkontrollerna
-   `grep -in "upphets" data/nyheter.js` (ska ge noll träffar — rätta till
-   ”exciterad/excitation”) och `grep -in "biljon\|biljard\|triljon" data/nyheter.js`
-   (varje träff stäms av mot originalets *billion/trillion* och mot en
-   rimlighetsberäkning). Se Skrivregler: svenska facktermer och räkneord.
+10. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska
+    vara intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
+    skärmdump för att se att artikeln och bilden renderar snyggt. Kontrollera
+    samtidigt att artikelns svåra ord fått en prickad understrykning (ordlistan
+    är inkopplad) och att rutan "Ordförklaringar" listar dem.
+    Kör också termkontrollerna
+    `grep -in "upphets" data/nyheter.js` (ska ge noll träffar — rätta till
+    ”exciterad/excitation”) och `grep -in "biljon\|biljard\|triljon" data/nyheter.js`
+    (varje träff stäms av mot originalets *billion/trillion* och mot en
+    rimlighetsberäkning). Se Skrivregler: svenska facktermer och räkneord.
 
-10. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
+11. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
     granskad (redaktionell korrektur + faktakoll av citat, se nedan) och
     verifieringen är grön: committa och pusha nyheten direkt, utan att invänta
     användarens godkännande. Användaren gör eventuella justeringar i efterhand.
     Committa **bara nyhetsfilerna** — `data/nyheter.js`, bilden i
-    `nyheter/bilder/`, de genererade `nyheter/dela/*.html`, samt
+    `nyheter/bilder/`, de genererade `nyheter/dela/*.html`, `feed.xml`,
+    `sitemap.xml`, dagens tillägg i `data/begrepp.js`, samt
     `.claude/nyheter/publicerat.md` och `ko.md`. Lämna orelaterade ändringar
     (t.ex. `.claude/settings.local.json`, sim-kod) utanför committen.
     Detta är den enda ändringstyp i projektet som pushas utan att fråga —
@@ -227,6 +241,50 @@ riktiga sådana (se punkt 2).
    en illustration vars ursprung framgår av `imageCredit`. (Hänvisningar i texten är
    ok ENBART om bilden är ett verifierat äkta foto/diagram med känd källa.)
 
+## Begreppsordlistan
+
+Nyheterna handlar ofta om fysik långt bortom gymnasiekursen, och då dyker det
+upp ord som varken eleven eller läraren har mött förut. Sådana ord är
+klickbara i artikeltexten och leder till ett uppslag i begreppsordlistan
+(`begrepp.html`), där de förklaras enklare och utförligare. **Ordlistan är
+ditt ansvar att fylla på — varje dag, för varje ny artikel.**
+
+Så här gör du, efter att artikeln är skriven:
+
+1. **Läs igenom din färdiga artikel och plocka ut de svåra orden.** Kriteriet
+   är: *skulle en gymnasieelev behöva slå upp det här?* Typiska kandidater är
+   fackuttryck (altermagnetism, kiralitet, skyrmion), fenomen som inte ingår i
+   gymnasiefysiken (superfluiditet, tidskristall) och storheter/objekt eleven
+   bara hört talas om (kvasar, neutrino, mörk energi). Vardagliga ord och
+   sådant artikeln redan förklarar i en bisats behöver inget uppslag.
+2. **Kolla om ordet redan finns** i `data/begrepp.js` (sök på ordstammen). Gör
+   det det: kontrollera bara att artikelns böjningsform finns i `former` —
+   annars länkas den inte. Lägg till formen om den saknas.
+3. **Skriv en ny post** enligt fältformatet i filens huvud (`id`, `term`,
+   `former`, `kort`, `relaterade`, `body`). Sikta på ~3 stycken: börja
+   konkret, förklara varför fenomenet uppstår, avsluta med var det används
+   eller vad som är olöst. Skrivreglerna ovan gäller (svenska facktermer,
+   räkneord, typografi, inga emojis) — plus:
+   - **Uppslaget ska stå på egna ben.** Hänvisa inte till artikeln ("som vi
+     skrev om i dag") eller till kurserna — sidan listar själv vilka nyheter
+     som nämner ordet.
+   - **Förklara enklare än artikeln, inte likadant.** Uppslaget är för den som
+     inte hängde med. Vardagsjämförelser (händer, dammringar, knutar på ett
+     rep) är hela poängen.
+   - **`former` ska täcka alla böjningar** som förekommer i texten: grundform,
+     bestämd form, plural och de sammansättningar som är värda att länka.
+     Genitiv-s fångas automatiskt. Uppslagsordet självt MÅSTE finnas i listan.
+4. **Kör validatorn:** `node .claude/verify-begrepp.js`. Den fångar
+   dubblerade böjningsformer, saknade uppslagsord, emoji och för korta
+   förklaringar.
+5. **Skriv aldrig manuella länkar i artikeltexten.** Länkningen sker
+   automatiskt utifrån `former` — en `<a href="begrepp.html…">` i `body`
+   skulle bara bli en dubbelmarkering.
+
+Riktvärde: 1–4 nya begrepp per artikel. Har dagens nyhet inga svåra ord alls
+är noll helt i sin ordning — men kontrollera då i stället om något *befintligt*
+begrepp saknar en böjningsform som artikeln använder.
+
 ## Podd (valfritt, manuellt steg)
 
 Varje artikel kan ha en poddspelare (ljudöversikt/"djupdykning") högst upp.
@@ -259,3 +317,6 @@ Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 - Bryta mot projektets typografi-/emoji-regler i CLAUDE.md.
 - Hänvisa i artikeltexten till gymnasiekurserna (Fysik nivå 1/2) eller till
   Fysiklabbets egna genomgångar/simuleringar (se Skrivregler: standalone).
+- Lägga en manuell länk till ordlistan i artikeltexten (länkningen är
+  automatisk) — eller publicera en artikel full av oförklarade facktermer
+  utan att fylla på `data/begrepp.js`.

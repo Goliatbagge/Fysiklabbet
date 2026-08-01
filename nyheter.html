@@ -274,6 +274,48 @@
         .article-research strong { color: var(--lab-ink); font-weight: 600; }
         .article-research a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
 
+        /* "För läraren" — diskussionsfrågor och momentkoppling.
+           Ligger UTANFÖR artikeltexten (under källorna) eftersom artikeln
+           själv aldrig får hänvisa till kurserna. Tydligt avgränsad så att
+           en elev ser att rutan inte är en del av nyheten. */
+        .article-larare {
+            margin: 34px 0 0; padding: 22px 24px;
+            border: 1px solid var(--lab-line-strong); border-radius: 5px;
+            background: var(--lab-bg-raised);
+        }
+        .article-larare-head {
+            display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        .article-larare-label {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-accent);
+        }
+        .article-larare-note {
+            font-family: var(--lab-font-mono); font-size: 10.5px; letter-spacing: 0.06em;
+            color: var(--lab-ink-muted);
+        }
+        .article-larare-moment {
+            display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 18px;
+        }
+        .article-larare-moment a,
+        .article-larare-moment span {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.04em;
+            color: var(--lab-ink-soft); background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong); border-radius: 999px;
+            padding: 5px 11px; text-decoration: none;
+        }
+        .article-larare-moment a:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+        .article-larare ol { margin: 0; padding-left: 22px; }
+        .article-larare li {
+            font-size: 15px; line-height: 1.6; color: var(--lab-ink-soft);
+            margin-bottom: 12px; padding-left: 4px;
+        }
+        .article-larare li:last-child { margin-bottom: 0; }
+        @media (max-width: 600px) {
+            .article-larare { padding: 18px 16px; }
+        }
+
         /* Dela-artikel-rad */
         .article-share {
             margin: 30px 0 6px; padding-top: 22px;
@@ -907,8 +949,44 @@
                         )}
                     </div>
 
+                    {a.larare && <LararRuta l={a.larare} />}
+
                     <ShareBar a={a} />
                 </article>
+            );
+        }
+
+        // "För läraren": diskussionsfrågor och momentkoppling.
+        //
+        // Renderas UNDER källorna, alltså utanför artikeltexten. Det är
+        // avsiktligt: artikeln ska stå på egna ben och aldrig hänvisa till
+        // gymnasiekurserna eller Fysiklabbets eget material. Rutan är till
+        // för läraren som ska använda nyheten i klassrummet — inte för
+        // eleven som läser artikeln.
+        function LararRuta({ l }) {
+            const moment = l.moment || [];
+            const fragor = l.fragor || [];
+            if (!moment.length && !fragor.length) return null;
+            return (
+                <div className="article-larare">
+                    <div className="article-larare-head">
+                        <span className="article-larare-label">För läraren</span>
+                        <span className="article-larare-note">Diskussionsunderlag</span>
+                    </div>
+                    {moment.length > 0 && (
+                        <div className="article-larare-moment">
+                            {moment.map((m, i) => (m.href
+                                ? <a href={m.href} key={i}>{m.label}</a>
+                                : <span key={i}>{m.label}</span>
+                            ))}
+                        </div>
+                    )}
+                    {fragor.length > 0 && (
+                        <ol>
+                            {fragor.map((f, i) => <li key={i}>{f}</li>)}
+                        </ol>
+                    )}
+                </div>
             );
         }
 

@@ -23,6 +23,14 @@
  *   tags      – array med nyckelord (gemener)
  *   sources   – array av { name, url } (nyhetskällor, ALLTID minst en)
  *   research  – { citation, url } direktlänk till originalforskningen (om möjlig), annars null
+ *   larare    – (valfritt, UTVÄRDERAS) { moment: [{label, href?}], fragor: [str] }
+ *               "För läraren"-ruta: 2–3 diskussionsfrågor och vilka moment
+ *               nyheten hör till. Renderas UNDER källorna, alltså UTANFÖR
+ *               artikeltexten — artikeln själv måste förbli fristående och
+ *               får aldrig hänvisa till kurserna (se nyhetsagentens regler).
+ *               Frågorna ska kräva resonemang, inte faktakoll: sikta på
+ *               "varför fungerar vetenskapen så här", inte "vad stod det".
+ *               `href` är valfri; utan den blir momentet bara en etikett.
  *   audio     – (valfritt) sökväg till en poddfil. Utelämnas oftast: lägg bara
  *               ljudfilen som nyheter/podd/<id>.<ext> så hittar spelaren den.
  *               Se nyheter/podd/README.md för det manuella NotebookLM-flödet.
@@ -60,6 +68,17 @@ const NYHETER_ALL = [
     research: {
       citation: "C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., ”How large can galaxies be? Ultra-deep imaging of IC 1101, the most extended known galaxy”, arXiv:2607.15340 (förhandspublicering, 2026)",
       url: "https://doi.org/10.48550/arXiv.2607.15340"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 1.2 Storheter, enheter och prefix", href: "katalog.html#fy1-1.2" },
+        { label: "Fysik nivå 2 · mätnoggrannhet och systematiska fel" }
+      ],
+      fragor: [
+        "Galaxen har ingen skarp kant — ljuset bara tunnas ut. Ändå anger forskarna en diameter. Vad är det egentligen de har mätt, och vad måste man komma överens om innan en sådan siffra betyder något?",
+        "Ju längre man exponerar, desto svagare ljus syns — och desto längre ut verkar galaxen sträcka sig. Betyder det att galaxen växer när vi tittar bättre, eller att vår mätning gör det? Vad säger det om skillnaden mellan ett föremål och en mätning av det?",
+        "Forskarna räknade bort ljuset från över 250 förgrundsstjärnor innan de litade på resultatet. Vad skulle hända med den uppmätta kanten om de räknade bort för mycket? För lite? Vilken sorts fel är det — slumpmässigt eller systematiskt?"
+      ]
     },
     body: [
       { type: "p", html: "Var slutar en galax? Frågan låter enkel, men den är förvånansvärt svår att besvara. En galax är ingen boll med en yta — den är hundratals miljarder stjärnor som blir glesare och glesare utåt, tills ljuset till slut drunknar i natthimlens eget svaga sken. Nu har ett forskarlag lett från Instituto de Astrofísica de Canarias tagit de djupaste bilderna någonsin av IC 1101, den mest utsträckta galax vi känner till, och för första gången kunnat peka ut var den faktiskt tar slut: omkring 260&nbsp;kiloparsec ut från mitten, vilket ger en diameter på ungefär 1,7&nbsp;miljoner ljusår." },
@@ -206,6 +225,18 @@ const NYHETER_ALL = [
     research: {
       citation: "N. J. Ayres et al., ”New high-sensitivity search for neutron to mirror-neutron oscillations at the PSI UCN source”, Physical Review Letters (2026)",
       url: "https://doi.org/10.1103/2qck-n6mb"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 9.1 Atomkärnan", href: "katalog.html#fy1-9.1" },
+        { label: "Fysik nivå 2 · 4.6 Våg-partikeldualitet", href: "katalog.html#fy2-4.6" },
+        { label: "Naturvetenskapligt arbetssätt — hypotesprövning" }
+      ],
+      fragor: [
+        "Experimentet hittade ingenting. Ändå publicerades det i en av fysikens mest ansedda tidskrifter. På vilket sätt är ett nollresultat ett resultat — och varför är det ofta svårare att få publicerat än ett fynd?",
+        "För att ett nollresultat ska betyda något måste forskarna veta hur litet något de skulle ha kunnat se. Varför räcker det inte att säga ”vi hittade inget”? Jämför med att leta efter en nyckel i gräset med respektive utan ficklampa.",
+        "Hypotesen om en spegelvärld väcktes för att naturen visade sig bryta mot en symmetri man trodde var självklar. Är det god vetenskap att uppfinna en osynlig värld för att rädda en symmetri? Vad skulle krävas för att idén ska förkastas helt?"
+      ]
     },
     body: [
       { type: "p", html: "Ibland är den mest spännande vetenskapliga upptäckten att inte hitta någonting alls. Vid Paul Scherrer-institutet (PSI) i Schweiz har forskare under flera månader fångat och räknat omkring 25&nbsp;miljarder ultrakalla neutroner i jakten på tecken på en hypotetisk, gömd spegelvärld av materia. Resultatet, publicerat i <em>Physical Review Letters</em> den 28&nbsp;juli 2026, är entydigt: inget spår av spegelvärlden syntes — vilket utesluter en tidigare misstänkt anomali med rekordprecision." },

@@ -101,6 +101,24 @@
     }
   }
 
+  // Begreppsordlistan (data/begrepp.js) — ett uppslagsord = en sökrad, så att
+  // "supraledare" eller "kvasar" hittas även när inget avsnitt heter så.
+  // Laddas begrepp.js inte på sidan hoppas raderna helt enkelt över.
+  for (const b of (window.BEGREPP || [])) {
+    if (!b || !b.id) continue;
+    index.push({
+      kind: 'begrepp',
+      kindLabel: 'Begrepp',
+      title: b.term,
+      description: b.kort,
+      course: 'Ordlista',
+      num: '',
+      icon: null,
+      resultHref: 'begrepp.html?ord=' + encodeURIComponent(b.id),
+      hay: normalize([b.term, b.kort].concat(b.former || []).join(' ')),
+    });
+  }
+
   function search(query) {
     const q = normalize(String(query || '').trim());
     if (!q) return [];

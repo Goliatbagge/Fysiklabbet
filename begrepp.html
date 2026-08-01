@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Begreppsordlistan — Fysiklabbet</title>
+    <meta name="description" content="Fysikens svåra ord förklarade enkelt och utförligt — från absoluta nollpunkten till tidskristaller. Ordlistan växer med varje ny fysiknyhet.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Begreppsordlistan — Fysiklabbet">
+    <meta property="og:description" content="Fysikens svåra ord förklarade enkelt och utförligt — från absoluta nollpunkten till tidskristaller. Ordlistan växer med varje ny fysiknyhet.">
+    <meta property="og:url" content="https://fysiklabbet.se/begrepp.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ── Sidan Begreppsordlistan ───────────────────────────────── */
+        .ord-hero { max-width: 1100px; margin: 0 auto; padding: 56px 56px 4px; width: 100%; }
+        .ord-hero-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(40px, 6vw, 64px);
+            line-height: 1.02; letter-spacing: -0.01em;
+            color: var(--lab-ink); margin: 10px 0 14px;
+        }
+        .ord-hero-lead { font-size: 17px; line-height: 1.6; color: var(--lab-ink-soft); max-width: 62ch; }
+
+        .ord-wrap { max-width: 1100px; margin: 0 auto; padding: 8px 56px 30px; width: 100%; }
+
+        /* Filterfält + bokstavsrad */
+        .ord-tools {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px;
+            margin: 26px 0 8px; padding-bottom: 18px;
+            border-bottom: 2px solid var(--lab-line-strong);
+        }
+        .ord-filter-wrap { position: relative; flex: 1 1 280px; max-width: 420px; }
+        .ord-filter {
+            width: 100%; padding: 10px 34px 10px 34px;
+            font-family: var(--lab-font-sans); font-size: 14.5px; color: var(--lab-ink);
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong); border-radius: 999px;
+            transition: border-color 140ms ease;
+        }
+        .ord-filter:focus { outline: none; border-color: var(--lab-accent); }
+        .ord-filter::placeholder { color: var(--lab-ink-muted); }
+        .ord-filter-icon {
+            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            color: var(--lab-ink-muted); font-size: 15px; pointer-events: none;
+        }
+        .ord-filter-clear {
+            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; cursor: pointer; padding: 4px 6px;
+            color: var(--lab-ink-muted); font-size: 13px; line-height: 1;
+        }
+        .ord-filter-clear:hover { color: var(--lab-accent); }
+
+        .ord-alphabet { display: flex; flex-wrap: wrap; gap: 3px; }
+        .ord-alphabet a, .ord-alphabet span {
+            font-family: var(--lab-font-mono); font-size: 12px;
+            min-width: 22px; text-align: center; padding: 3px 2px;
+            border-radius: 3px; color: var(--lab-ink);
+        }
+        .ord-alphabet a:hover { background: var(--lab-accent); color: #fff; }
+        .ord-alphabet span { color: var(--lab-ink-muted); opacity: 0.4; }
+
+        /* Bokstavsgrupper */
+        .ord-group { margin-top: 30px; scroll-margin-top: 20px; }
+        .ord-group-letter {
+            font-family: var(--lab-font-display); font-size: 34px; line-height: 1;
+            color: var(--lab-accent); margin-bottom: 6px;
+        }
+        .ord-list { border-top: 1px solid var(--lab-line-strong); }
+        .ord-row {
+            display: grid; grid-template-columns: minmax(180px, 0.34fr) 1fr; gap: 8px 26px;
+            align-items: baseline; padding: 14px 4px 14px 0;
+            border-bottom: 1px solid var(--lab-line);
+            text-decoration: none; color: var(--lab-ink);
+        }
+        .ord-row:hover { background: var(--lab-bg-raised); }
+        .ord-row-term {
+            font-size: 16.5px; font-weight: 600; letter-spacing: -0.005em;
+            transition: color 110ms ease;
+        }
+        .ord-row:hover .ord-row-term { color: var(--lab-accent); }
+        .ord-row-kort { font-size: 14.5px; line-height: 1.55; color: var(--lab-ink-soft); }
+
+        .ord-empty {
+            margin-top: 24px; font-size: 15px; color: var(--lab-ink-soft);
+            padding: 22px; border: 1px dashed var(--lab-line-strong); border-radius: 4px;
+            background: var(--lab-bg-raised);
+        }
+
+        /* ── Begreppsartikel ───────────────────────────────────────── */
+        .ord-article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
+        /* Egen rad — annars hamnar mono-etiketten ("Begrepp") på samma rad
+           som tillbakalänken och texterna krockar. */
+        .ord-back {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-ink-muted); text-decoration: none;
+            display: block; width: fit-content; margin-bottom: 24px;
+        }
+        .ord-back:hover { color: var(--lab-accent); }
+        .ord-article-title {
+            font-family: var(--lab-font-display); font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.05; letter-spacing: -0.01em; color: var(--lab-ink); margin: 10px 0 18px;
+        }
+        .ord-article-kort {
+            font-size: 19px; line-height: 1.55; color: var(--lab-ink-soft);
+            font-style: italic; margin: 0 0 30px;
+            padding-left: 18px; border-left: 3px solid var(--lab-accent);
+        }
+        .ord-article-body p { font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px; }
+        .ord-article-body h2 {
+            font-family: var(--lab-font-display); font-size: 27px; line-height: 1.15;
+            color: var(--lab-ink); margin: 34px 0 14px; letter-spacing: -0.005em;
+        }
+        .ord-article-body a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
+        .ord-fact {
+            margin: 30px 0; padding: 22px 24px; border-radius: 5px;
+            background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
+            box-shadow: 0 1px 0 var(--lab-line);
+        }
+        .ord-fact-title {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-accent); margin-bottom: 12px;
+        }
+        .ord-fact ul { margin: 0; padding-left: 20px; }
+        .ord-fact li { font-size: 15.5px; line-height: 1.6; color: var(--lab-ink-soft); margin-bottom: 9px; }
+        .ord-fact li:last-child { margin-bottom: 0; }
+
+        /* Se även + var begreppet dyker upp */
+        .ord-section { margin: 36px 0 0; padding-top: 22px; border-top: 2px solid var(--lab-line-strong); }
+        .ord-section-label {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-ink-muted); margin-bottom: 13px;
+        }
+        .ord-pills { display: flex; flex-wrap: wrap; gap: 9px; }
+        .ord-pill {
+            font-family: var(--lab-font-mono); font-size: 12px;
+            color: var(--lab-ink); text-decoration: none;
+            border: 1px solid var(--lab-line-strong); border-radius: 999px; padding: 6px 13px;
+        }
+        .ord-pill:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+
+        .ord-mentions { display: flex; flex-direction: column; }
+        .ord-mention {
+            display: flex; align-items: baseline; gap: 14px;
+            padding: 11px 4px 11px 0; border-bottom: 1px solid var(--lab-line);
+            text-decoration: none; color: var(--lab-ink);
+        }
+        .ord-mention:first-child { border-top: 1px solid var(--lab-line); }
+        .ord-mention-date {
+            flex: 0 0 auto; min-width: 74px;
+            font-family: var(--lab-font-mono); font-size: 11px; color: var(--lab-ink-muted);
+        }
+        .ord-mention-title { font-size: 15px; line-height: 1.4; }
+        .ord-mention:hover .ord-mention-title { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Föregående/nästa begrepp */
+        .ord-prevnext {
+            display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+            margin: 34px 0 10px; padding-top: 20px; border-top: 1px solid var(--lab-line);
+        }
+        .ord-prevnext a { text-decoration: none; color: var(--lab-ink); max-width: 46%; }
+        .ord-prevnext a:hover .ord-prevnext-term { color: var(--lab-accent); }
+        .ord-prevnext-label {
+            display: block; font-family: var(--lab-font-mono); font-size: 10px;
+            letter-spacing: 0.12em; text-transform: uppercase; color: var(--lab-ink-muted);
+            margin-bottom: 4px;
+        }
+        .ord-prevnext-term { font-size: 15.5px; font-weight: 600; }
+        .ord-prevnext .ord-next { text-align: right; margin-left: auto; }
+
+        @media (max-width: 640px) {
+            .ord-hero { padding: 40px 22px 4px; }
+            .ord-wrap { padding: 8px 22px 24px; }
+            .ord-article { padding: 28px 20px 20px; }
+            .ord-row { grid-template-columns: 1fr; gap: 4px; }
+            .lab-section { padding: 0 22px; }
+        }
+    </style>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/begrepp.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="begrepp-lank.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useMemo, useEffect } = React;
+
+        // Alfabetisk ordning enligt svensk kollation (å, ä, ö sist).
+        // Alfabetiskt sorterad kopia. Heter ORDLISTA (inte BEGREPP) för att
+        // inte krocka med window.BEGREPP som data/begrepp.js sätter.
+        const ORDLISTA = (window.BEGREPP || []).slice()
+            .sort((a, b) => a.term.localeCompare(b.term, 'sv'));
+
+        function formatDate(iso) {
+            const months = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+            const [y, m, d] = iso.split('-').map(Number);
+            return `${d} ${months[m - 1]} ${y}`;
+        }
+
+        const normalize = (t) => String(t).toLowerCase()
+            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e');
+
+        // Ren text ur ett HTML-fragment, utan att ladda några resurser.
+        function htmlText(html) {
+            try {
+                return new DOMParser().parseFromString(String(html), 'text/html').body.textContent || '';
+            } catch (e) {
+                return String(html).replace(/<[^>]*>/g, ' ');
+            }
+        }
+
+        // Vilka begrepp nämns i vilken nyhetsartikel? Byggs en gång och
+        // används för "Nämns i dessa artiklar" på varje begreppssida.
+        const MENTIONS = (() => {
+            const map = {};
+            const artiklar = window.NYHETER || [];
+            if (!window.BEGREPPSLANK) return map;
+            for (const a of artiklar) {
+                const delar = [a.title, a.deck];
+                for (const b of (a.body || [])) {
+                    if (b.type === 'h2') delar.push(b.text);
+                    else if (b.type === 'fact') delar.push(b.title, (b.items || []).join(' '));
+                    else if (b.type === 'quote') delar.push(htmlText(b.html));
+                    else if (b.type === 'image') delar.push(htmlText(b.caption || ''));
+                    else delar.push(htmlText(b.html || ''));
+                }
+                for (const id of window.BEGREPPSLANK.matchIds(delar.join(' \n '))) {
+                    (map[id] = map[id] || []).push(a);
+                }
+            }
+            return map;
+        })();
+
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+                    </div>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g transform="rotate(-24 18 18)">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                                    <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <div className="lab-nav-dd">
+                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                    Ämne
+                                    <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                                </button>
+                                <div className="lab-nav-dd-menu">
+                                    <a href="katalog.html#fy1">Fysik nivå 1</a>
+                                    <a href="katalog.html#fy2">Fysik nivå 2</a>
+                                    <a href="katalog.html#ma1c">Matematik nivå 1c</a>
+                                    <a href="katalog.html#ma2c">Matematik nivå 2c</a>
+                                    <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
+                                    <a href="katalog.html#ma4">Matematik fortsättning nivå 2</a>
+                                </div>
+                            </div>
+                            <a href="simuleringar.html">Simuleringar</a>
+                            <a href="np.html">Nationella prov</a>
+                            <a href="nyheter.html">Fysiknyheter</a>
+                            <a href="begrepp.html" className="active">Ordlista</a>
+                            <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2025 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        const ALFABETET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ'.split('');
+
+        function ListView() {
+            const [q, setQ] = useState('');
+
+            const träffar = useMemo(() => {
+                const n = normalize(q.trim());
+                if (!n) return ORDLISTA;
+                return ORDLISTA.filter(b => normalize(
+                    [b.term, b.kort].concat(b.former || []).join(' ')
+                ).indexOf(n) !== -1);
+            }, [q]);
+
+            // Gruppera på begynnelsebokstav, i alfabetisk ordning.
+            const grupper = useMemo(() => {
+                const out = [];
+                for (const b of träffar) {
+                    const bokstav = b.term.charAt(0).toUpperCase();
+                    const sist = out[out.length - 1];
+                    if (sist && sist.bokstav === bokstav) sist.poster.push(b);
+                    else out.push({ bokstav, poster: [b] });
+                }
+                return out;
+            }, [träffar]);
+
+            const finnsBokstav = new Set(grupper.map(g => g.bokstav));
+
+            return (
+                <React.Fragment>
+                    <div className="ord-hero">
+                        <span className="lab-mono-label">Ordlista · {ORDLISTA.length} begrepp</span>
+                        <h1 className="ord-hero-title">Begrepps­ordlistan</h1>
+                        <p className="ord-hero-lead">
+                            Fysikens svåra ord, förklarade i lugn takt och utan förkunskaper.
+                            Dyker ett krångligt begrepp upp i en <a href="nyheter.html"
+                            style={{ color: 'var(--lab-accent)', textDecoration: 'underline',
+                                     textUnderlineOffset: '2px' }}>fysiknyhet</a> är det
+                            understruket i texten — klicka på ordet så hamnar du här.
+                            Listan växer för varje ny nyhet.
+                        </p>
+                    </div>
+
+                    <div className="ord-wrap">
+                        <div className="ord-tools">
+                            <div className="ord-filter-wrap">
+                                <span className="ord-filter-icon" aria-hidden="true">⌕</span>
+                                <input type="text" className="ord-filter" value={q}
+                                    onChange={(e) => setQ(e.target.value)}
+                                    placeholder="filtrera — t.ex. kvant, magnet, ljus…"
+                                    autoComplete="off" aria-label="Filtrera begrepp" />
+                                {q && (
+                                    <button className="ord-filter-clear" aria-label="Rensa filtret"
+                                        onClick={() => setQ('')}>✕</button>
+                                )}
+                            </div>
+                            {!q && (
+                                <div className="ord-alphabet">
+                                    {ALFABETET.map(bok => finnsBokstav.has(bok)
+                                        ? <a key={bok} href={'#bokstav-' + bok}>{bok}</a>
+                                        : <span key={bok} aria-hidden="true">{bok}</span>
+                                    )}
+                                </div>
+                            )}
+                            {q && (
+                                <span className="lab-mono-label">
+                                    {träffar.length} {träffar.length === 1 ? 'träff' : 'träffar'}
+                                </span>
+                            )}
+                        </div>
+
+                        {träffar.length === 0 && (
+                            <div className="ord-empty">
+                                Inget begrepp matchar ”{q}”. Ordlistan fylls på efterhand —
+                                saknar du ett ord får du gärna höra av dig via{' '}
+                                <a href="kontakt.html" style={{ color: 'var(--lab-accent)',
+                                   textDecoration: 'underline', textUnderlineOffset: '2px' }}>kontaktsidan</a>.
+                            </div>
+                        )}
+
+                        {grupper.map(g => (
+                            <div className="ord-group" id={'bokstav-' + g.bokstav} key={g.bokstav}>
+                                <div className="ord-group-letter">{g.bokstav}</div>
+                                <div className="ord-list">
+                                    {g.poster.map(b => (
+                                        <a className="ord-row" href={`?ord=${b.id}`} key={b.id}>
+                                            <span className="ord-row-term">{b.term}</span>
+                                            <span className="ord-row-kort">{b.kort}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </React.Fragment>
+            );
+        }
+
+        function Block({ b }) {
+            if (b.type === 'h2') return <h2>{b.text}</h2>;
+            if (b.type === 'fact') return (
+                <div className="ord-fact">
+                    <div className="ord-fact-title">{b.title}</div>
+                    <ul>{b.items.map((it, i) => <li key={i} dangerouslySetInnerHTML={{ __html: it }} />)}</ul>
+                </div>
+            );
+            return <p dangerouslySetInnerHTML={{ __html: b.html }} />;
+        }
+
+        function ArticleView({ b }) {
+            // Korslänka andra begrepp som nämns i förklaringen — men aldrig
+            // uppslagsordet självt (en sida ska inte länka till sig själv).
+            const bodyRef = React.useRef(null);
+            useEffect(() => {
+                if (window.BEGREPPSLANK) window.BEGREPPSLANK.linkify(bodyRef.current, { skip: [b.id] });
+            }, [b]);
+
+            const i = ORDLISTA.findIndex(x => x.id === b.id);
+            const forra = i > 0 ? ORDLISTA[i - 1] : null;
+            const nasta = i >= 0 && i < ORDLISTA.length - 1 ? ORDLISTA[i + 1] : null;
+            const relaterade = (b.relaterade || [])
+                .map(id => ORDLISTA.find(x => x.id === id))
+                .filter(Boolean);
+            const artiklar = MENTIONS[b.id] || [];
+
+            return (
+                <article className="ord-article">
+                    <a className="ord-back" href="begrepp.html">← Hela ordlistan</a>
+                    <span className="lab-mono-label">Begrepp</span>
+                    <h1 className="ord-article-title">{b.term}</h1>
+                    <p className="ord-article-kort">{b.kort}</p>
+
+                    <div className="ord-article-body" ref={bodyRef}>
+                        {(b.body || []).map((blk, k) => <Block b={blk} key={k} />)}
+                    </div>
+
+                    {relaterade.length > 0 && (
+                        <div className="ord-section">
+                            <div className="ord-section-label">Se även</div>
+                            <div className="ord-pills">
+                                {relaterade.map(r => (
+                                    <a className="ord-pill" href={`?ord=${r.id}`} key={r.id}>{r.term}</a>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {artiklar.length > 0 && (
+                        <div className="ord-section">
+                            <div className="ord-section-label">
+                                Nämns i {artiklar.length === 1 ? 'den här nyheten' : 'de här nyheterna'}
+                            </div>
+                            <div className="ord-mentions">
+                                {artiklar.map(a => (
+                                    <a className="ord-mention" href={`nyheter.html?id=${a.id}`} key={a.id}>
+                                        <span className="ord-mention-date">{formatDate(a.date)}</span>
+                                        <span className="ord-mention-title">{a.title}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {(forra || nasta) && (
+                        <nav className="ord-prevnext" aria-label="Fler begrepp">
+                            {forra && (
+                                <a href={`?ord=${forra.id}`}>
+                                    <span className="ord-prevnext-label">← Föregående</span>
+                                    <span className="ord-prevnext-term">{forra.term}</span>
+                                </a>
+                            )}
+                            {nasta && (
+                                <a className="ord-next" href={`?ord=${nasta.id}`}>
+                                    <span className="ord-prevnext-label">Nästa →</span>
+                                    <span className="ord-prevnext-term">{nasta.term}</span>
+                                </a>
+                            )}
+                        </nav>
+                    )}
+                </article>
+            );
+        }
+
+        function SaknasView({ ord }) {
+            return (
+                <div className="ord-wrap">
+                    <a className="ord-back" href="begrepp.html">← Hela ordlistan</a>
+                    <div className="ord-empty">
+                        Begreppet ”{ord}” finns inte i ordlistan (ännu).
+                    </div>
+                </div>
+            );
+        }
+
+        function App() {
+            const params = new URLSearchParams(window.location.search);
+            const ord = params.get('ord');
+            const b = ord ? ORDLISTA.find(x => x.id === ord) : null;
+
+            useEffect(() => {
+                document.title = b
+                    ? `${b.term} — Begreppsordlistan — Fysiklabbet`
+                    : 'Begreppsordlistan — Fysiklabbet';
+            }, [b]);
+
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    {ord ? (b ? <ArticleView b={b} /> : <SaknasView ord={ord} />) : <ListView />}
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

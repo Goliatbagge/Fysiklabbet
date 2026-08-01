@@ -147,6 +147,7 @@
             border-bottom: 1px solid var(--lab-line-strong); padding-bottom: 2px;
         }
         .news-rss:hover { color: var(--lab-accent); border-color: var(--lab-accent); }
+        .news-hero-links { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline; }
 
         /* ── Artikelvy ─────────────────────────────────────────────── */
         .article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
@@ -243,6 +244,15 @@
         .article-fact li { font-size: 15.5px; line-height: 1.6; color: var(--lab-ink-soft); margin-bottom: 9px; }
         .article-fact li:last-child { margin-bottom: 0; }
 
+        /* Ordförklaringar — de begrepp ur ordlistan som artikeln nämner.
+           Fylls av begrepp-lank.js autolänkning (se ArticleView). */
+        .article-ord {
+            margin: 38px 0 0; padding-top: 22px; border-top: 2px solid var(--lab-line-strong);
+        }
+        .article-ord-lead {
+            font-size: 14px; line-height: 1.55; color: var(--lab-ink-soft); margin: -4px 0 13px;
+        }
+
         .article-sources {
             margin: 38px 0 10px; padding-top: 22px; border-top: 2px solid var(--lab-line-strong);
         }
@@ -320,6 +330,10 @@
     <div id="root"></div>
 
     <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- Begreppsordlistan: data + autolänkare. Gör svåra ord i artikeltexten
+         klickbara (begrepp.html?ord=…) med förhandsvisning vid hovring. -->
+    <script>document.write('<scr' + 'ipt src="data/begrepp-sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="begrepp-lank.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -427,6 +441,7 @@
                             <a href="simuleringar.html">Simuleringar</a>
                             <a href="np.html">Nationella prov</a>
                             <a href="nyheter.html" className="active">Fysiknyheter</a>
+                            <a href="begrepp.html">Ordlista</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -517,10 +532,15 @@
                             Det senaste från forskningsfronten — neutriner, svarta hål,
                             kvantdatorer och allt däremellan — sammanfattat på svenska och
                             skrivet för att vara lätt att ta till sig. Källa anges alltid, och
-                            där det går länkar vi direkt till originalforskningen.
+                            där det går länkar vi direkt till originalforskningen. Krångliga
+                            fackord är understrukna i artiklarna och förklaras i ordlistan.
                         </p>
-                        <a className="news-rss" href="feed.xml"
-                           title="Prenumerera på nyheterna i en RSS-läsare">RSS-flöde ↗</a>
+                        <div className="news-hero-links">
+                            <a className="news-rss" href="begrepp.html"
+                               title="Alla fysikbegrepp förklarade, i bokstavsordning">Begreppsordlistan →</a>
+                            <a className="news-rss" href="feed.xml"
+                               title="Prenumerera på nyheterna i en RSS-läsare">RSS-flöde ↗</a>
+                        </div>
                     </div>
 
                     <div className="news-wrap">
@@ -799,8 +819,19 @@
             React.useEffect(() => {
                 try { localStorage.setItem('fy-dyslexia', dyslexia ? '1' : '0'); } catch (e) {}
             }, [dyslexia]);
-            // Lägg in bionic-spannen en gång när artikeln monterats.
-            React.useEffect(() => { applyBionic(bodyRef.current); }, [a]);
+            // Begrepp som ordlistan förklarar och som faktiskt förekommer i
+            // den här artikeln (fylls i av autolänkaren nedan).
+            const [ordIds, setOrdIds] = React.useState([]);
+
+            // Ordning: begreppslänkning FÖRE bionisk läsning. applyBionic
+            // styckar orden i <span>-taggar, och då hittar ordlistan dem inte
+            // längre. Båda muterar DOM:en direkt; React rör inte blocken igen
+            // eftersom deras html-strängar är oförändrade.
+            React.useEffect(() => {
+                setOrdIds(window.BEGREPPSLANK
+                    ? window.BEGREPPSLANK.linkify(bodyRef.current) : []);
+                applyBionic(bodyRef.current);
+            }, [a]);
 
             return (
                 <article className="article" ref={articleRef}>
@@ -839,6 +870,24 @@
                          className={'article-body' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}>
                         {a.body.map((b, i) => <Block b={b} key={i} />)}
                     </div>
+
+                    {ordIds.length > 0 && (
+                        <div className="article-ord">
+                            <div className="article-sources-label">Ordförklaringar</div>
+                            <p className="article-ord-lead">
+                                De understrukna orden i texten förklaras i ordlistan:
+                            </p>
+                            <div className="article-sources-list">
+                                {ordIds.map(id => {
+                                    const b = window.BEGREPPSLANK.byId(id);
+                                    return b ? (
+                                        <a className="article-source-pill" key={id}
+                                           href={`begrepp.html?ord=${b.id}`}>{b.term}</a>
+                                    ) : null;
+                                })}
+                            </div>
+                        </div>
+                    )}
 
                     <div className="article-sources">
                         <div className="article-sources-label">Källor</div>

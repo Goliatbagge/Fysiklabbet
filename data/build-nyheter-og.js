@@ -218,6 +218,34 @@ const SITEMAP_EXCLUDE = new Set([
 // men filerna MÅSTE ligga kvar i roten, annars återtas verifieringen.
 const VERIFIERINGSFIL = /^(google[0-9a-f]+\.html|BingSiteAuth\.xml|yandex_[0-9a-f]+\.html)$/;
 
+// ── data/begrepp-sok.js (lätt begreppsindex) ──────────────────────────────
+// Hela ordlistan med brödtext är stor och växer. Sidor som bara behöver
+// LÄNKA och förhandsvisa begrepp (index, katalog, simuleringar, nyheter)
+// laddar därför den här nedbantade versionen — id, term, kort och former,
+// utan body. Bara begrepp.html, som faktiskt renderar uppslagen, läser hela
+// data/begrepp.js.
+function buildBegreppIndex(begrepp) {
+  const lätt = begrepp.map((b) => ({
+    id: b.id, term: b.term, kort: b.kort, former: b.former,
+  }));
+  const rader = lätt.map((b) => '  ' + JSON.stringify(b) + ',').join('\n');
+  return `/*
+ * Fysiklabbet — lätt begreppsindex. GENERERAD FIL, redigera inte.
+ *
+ * Skapas av data/build-nyheter-og.js ur data/begrepp.js. Innehåller allt som
+ * behövs för att länka och förhandsvisa begrepp (id, term, kort, former) men
+ * INTE uppslagens brödtext — den läses bara av begrepp.html, som laddar hela
+ * data/begrepp.js i stället för den här filen.
+ *
+ * Kör "node data/build-nyheter-og.js" efter varje ändring i data/begrepp.js.
+ */
+window.BEGREPP_LATT = true;
+window.BEGREPP = [
+${rader}
+];
+`;
+}
+
 // Begreppsordlistan (data/begrepp.js) — varje uppslagsord har en egen
 // kanonisk URL (begrepp.html?ord=<id>) och hör hemma i sitemapen.
 function loadBegrepp() {
@@ -227,6 +255,54 @@ function loadBegrepp() {
   // eslint-disable-next-line no-new-func
   new Function('window', fs.readFileSync(file, 'utf8'))(win);
   return Array.isArray(win.BEGREPP) ? win.BEGREPP : [];
+}
+
+// ── Teoriavsnitt, nationella prov och repetitionspaket ────────────────────
+// Alla tre nås via en hash i webbläsaren (#fy1-3.2), men fragment efter #
+// är osynliga för sökmotorer — utan detta räknas alla 333 genomgångar som
+// EN sida. Sidorna svarar därför även på ?id=, och det är den formen som
+// hör hemma i sitemapen. Se kommentaren i katalog.htmls parseInitialState().
+const KURSKOD = {
+  'Fysik nivå 1': 'fy1',
+  'Fysik nivå 2': 'fy2',
+  'Matematik nivå 1c': 'ma1c',
+  'Matematik nivå 2c': 'ma2c',
+  'Matematik fortsättning nivå 1c': 'ma3c',
+  'Matematik fortsättning nivå 2': 'ma4',
+};
+
+function korIFil(fil, global) {
+  const p = path.join(ROOT, fil);
+  if (!fs.existsSync(p)) return null;
+  const win = {};
+  // eslint-disable-next-line no-new-func
+  new Function('window', fs.readFileSync(p, 'utf8'))(win);
+  return win[global];
+}
+
+// Teoriavsnitt ur data/katalog.js → katalog.html?id=<kurskod>-<num>
+function loadAvsnitt() {
+  const flat = korIFil('data/katalog.js', 'KATALOG_FLAT');
+  if (!Array.isArray(flat)) return [];
+  return flat
+    .map((s) => (KURSKOD[s.course] ? `${KURSKOD[s.course]}-${s.num}` : null))
+    .filter(Boolean);
+}
+
+// Nationella prov ur data/np/index.js → np.html?id=<provId>
+function loadProv() {
+  const index = korIFil('data/np/index.js', 'NP_INDEX');
+  return Array.isArray(index) ? index.map((p) => p && p.id).filter(Boolean) : [];
+}
+
+// Repetitionspaket — ett per fil i data/repetition/, id = filnamnet.
+function loadRepetition() {
+  const dir = path.join(ROOT, 'data', 'repetition');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter((f) => f.endsWith('.js'))
+    .map((f) => f.replace(/\.js$/, ''))
+    .sort();
 }
 
 function buildSitemap(published) {
@@ -246,6 +322,15 @@ function buildSitemap(published) {
   for (const b of loadBegrepp()) {
     if (!b || !b.id) continue;
     entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/begrepp.html?ord=${encodeURIComponent(b.id)}`)}</loc></url>`);
+  }
+  for (const id of loadAvsnitt()) {
+    entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/katalog.html?id=${encodeURIComponent(id)}`)}</loc></url>`);
+  }
+  for (const id of loadProv()) {
+    entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/np.html?id=${encodeURIComponent(id)}`)}</loc></url>`);
+  }
+  for (const id of loadRepetition()) {
+    entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/fysik-repetition.html?id=${encodeURIComponent(id)}`)}</loc></url>`);
   }
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -286,8 +371,20 @@ function build() {
   console.log(`feed.xml: ${Math.min(published.length, FEED_MAX)} artiklar i RSS-flödet`);
   const sitemap = buildSitemap(published);
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap, 'utf8');
+  const begrepp = loadBegrepp();
   console.log(`sitemap.xml: ${(sitemap.match(/<url>/g) || []).length} URL:er ` +
-    `(${published.length} artiklar + ${loadBegrepp().length} begrepp + sidorna)`);
+    `(${published.length} artiklar + ${begrepp.length} begrepp + ` +
+    `${loadAvsnitt().length} avsnitt + ${loadProv().length} prov + ` +
+    `${loadRepetition().length} repetitionspaket + sidorna)`);
+
+  // Lätt begreppsindex för sidor som bara länkar/förhandsvisar begrepp.
+  if (begrepp.length) {
+    const idx = buildBegreppIndex(begrepp);
+    fs.writeFileSync(path.join(ROOT, 'data', 'begrepp-sok.js'), idx, 'utf8');
+    const helSize = fs.statSync(path.join(ROOT, 'data', 'begrepp.js')).size;
+    console.log(`data/begrepp-sok.js: ${begrepp.length} begrepp, ` +
+      `${Math.round(idx.length / 1024)} kB (hela ordlistan: ${Math.round(helSize / 1024)} kB)`);
+  }
 }
 
 // Kör bygget när filen startas direkt (node data/build-nyheter-og.js).
@@ -300,4 +397,5 @@ if (require.main === module) build();
 module.exports = {
   ROOT, SITE_ORIGIN, OUT_DIR, FEED_MAX,
   loadArticles, publishedOnly, loadBegrepp, buildFeed, buildSitemap, pageHtml,
+  loadAvsnitt, loadProv, loadRepetition,
 };

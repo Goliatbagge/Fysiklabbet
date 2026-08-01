@@ -28,6 +28,7 @@
 
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/simuleringar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/begrepp-sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
@@ -428,6 +429,7 @@
                             <a href="simuleringar.html">Simuleringar</a>
                             <a href="np.html">Nationella prov</a>
                             <a href="nyheter.html">Fysiknyheter</a>
+                            <a href="begrepp.html">Ordlista</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -2003,7 +2005,19 @@
         function parseInitialState() {
             const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
 
-            const hash = (window.location.hash || '').replace(/^#/, '');
+            const params = new URLSearchParams(window.location.search);
+
+            // Ett avsnitt kan nås på TVÅ likvärdiga sätt, med samma kod efter
+            // detta ställe:
+            //   #fy1-3.2      — intern länkning, sökrutan, bokmärken (som förr)
+            //   ?id=fy1-3.2   — sitemap och sökmotorer
+            // Skälet till aliaset: allt efter # är osynligt för Google, så
+            // katalog.html#fy1-3.2 och katalog.html#ma4-5.1 räknas som SAMMA
+            // sida. Med ?id= får varje avsnitt en egen riktig adress och kan
+            // indexeras för sig. Hashen vinner när båda finns, så inga
+            // befintliga länkar ändrar beteende.
+            const hash = (window.location.hash || '').replace(/^#/, '')
+                || (params.get('id') || '');
             const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
@@ -2012,7 +2026,6 @@
             const courses = Object.keys(subj.courses);
             out.course = courses[0] || null;
 
-            const params = new URLSearchParams(window.location.search);
             const courseParam = params.get('course');
             if (courseParam && subj.courses[courseParam]) {
                 out.course = courseParam;

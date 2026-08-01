@@ -213,11 +213,27 @@ const SITEMAP_EXCLUDE = new Set([
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
 ]);
 
+// Ägarverifiering hos sökmotorerna (google<token>.html från Search Console,
+// BingSiteAuth.xml m.fl.) är inte innehåll och ska aldrig in i sitemapen —
+// men filerna MÅSTE ligga kvar i roten, annars återtas verifieringen.
+const VERIFIERINGSFIL = /^(google[0-9a-f]+\.html|BingSiteAuth\.xml|yandex_[0-9a-f]+\.html)$/;
+
+// Begreppsordlistan (data/begrepp.js) — varje uppslagsord har en egen
+// kanonisk URL (begrepp.html?ord=<id>) och hör hemma i sitemapen.
+function loadBegrepp() {
+  const file = path.join(ROOT, 'data', 'begrepp.js');
+  if (!fs.existsSync(file)) return [];
+  const win = {};
+  // eslint-disable-next-line no-new-func
+  new Function('window', fs.readFileSync(file, 'utf8'))(win);
+  return Array.isArray(win.BEGREPP) ? win.BEGREPP : [];
+}
+
 function buildSitemap(published) {
   const urls = [];
 
   for (const f of fs.readdirSync(ROOT).sort()) {
-    if (!f.endsWith('.html') || SITEMAP_EXCLUDE.has(f)) continue;
+    if (!f.endsWith('.html') || SITEMAP_EXCLUDE.has(f) || VERIFIERINGSFIL.test(f)) continue;
     // index.html som ren domänrot.
     urls.push(f === 'index.html' ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}/${f}`);
   }
@@ -226,6 +242,10 @@ function buildSitemap(published) {
   for (const a of published) {
     const loc = `${SITE_ORIGIN}/nyheter.html?id=${encodeURIComponent(a.id)}`;
     entries.push(`  <url><loc>${esc(loc)}</loc><lastmod>${esc(a.date)}</lastmod></url>`);
+  }
+  for (const b of loadBegrepp()) {
+    if (!b || !b.id) continue;
+    entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/begrepp.html?ord=${encodeURIComponent(b.id)}`)}</loc></url>`);
   }
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -267,7 +287,17 @@ function build() {
   const sitemap = buildSitemap(published);
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap, 'utf8');
   console.log(`sitemap.xml: ${(sitemap.match(/<url>/g) || []).length} URL:er ` +
-    `(${published.length} artiklar + sidorna)`);
+    `(${published.length} artiklar + ${loadBegrepp().length} begrepp + sidorna)`);
 }
 
-build();
+// Kör bygget när filen startas direkt (node data/build-nyheter-og.js).
+if (require.main === module) build();
+
+// Exporteras så att .claude/verify-sitemap.js kan återanvända EXAKT samma
+// logik när den kontrollerar att de committade filerna är aktuella. Byggde
+// verifieraren en egen kopia av reglerna kunde de glida isär — och då vore
+// kontrollen värdelös just när den behövs som mest.
+module.exports = {
+  ROOT, SITE_ORIGIN, OUT_DIR, FEED_MAX,
+  loadArticles, publishedOnly, loadBegrepp, buildFeed, buildSitemap, pageHtml,
+};

@@ -1,0 +1,40 @@
+# Kontrollerar att feed.xml, sitemap.xml och delningssidorna är i takt med
+# data/nyheter.js och data/begrepp.js.
+#
+# VARFÖR DEN LIGGER HÄR OCH INTE HOS NYHETSAGENTEN
+# Poängen är att fånga misstag som agenten själv gör. En kontroll som agenten
+# ska komma ihåg att köra hjälper inte den dag agenten glömmer steg 8 — då
+# hoppas kontrollen över av precis samma skäl. Den här körs av GitHub, utan
+# att någon behöver komma ihåg något.
+#
+# Misslyckas körningen mejlar GitHub repots ägare automatiskt.
+
+name: Verifiera sitemap och RSS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Dagligen 06:00 UTC (08:00 svensk sommartid). Fångar det pushar inte kan
+  # fånga: en framtidsdaterad artikel som passerar sin datumgrind blir synlig
+  # på sajten vid midnatt, men hamnar inte i sitemapen förrän byggskriptet
+  # körs igen. Kör inte nyhetsagenten den dagen förblir artikeln osynlig för
+  # Google — helt tyst. Den här körningen säger till.
+  schedule:
+    - cron: '0 6 * * *'
+  # Går även att starta för hand från fliken Actions.
+  workflow_dispatch:
+
+jobs:
+  verifiera:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Kontrollera feed.xml, sitemap.xml och delningssidor
+        run: node .claude/verify-sitemap.js

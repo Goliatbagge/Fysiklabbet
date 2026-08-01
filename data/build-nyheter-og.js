@@ -276,16 +276,6 @@ const SITEMAP_EXCLUDE = new Set([
   'handskrift-demo.html',        // intern demo för handskriftsmotorn
   'matte-triangel-rektangel.html', // olänkad arbetsfil
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
-  // Äldre simuleringsvarianter som ersatts av *-app.html. De ligger kvar på
-  // disk men länkas inte från katalogen eller någon annan sida (kontrollerat
-  // 2026-08-01). Två av dem dubblerar dessutom en LEVANDE sidas titel — t.ex.
-  // "Plan pendel", som också är fysik2-pendel-app.html — och att be Google
-  // indexera båda är att konkurrera med sig själv.
-  'fysik2-pendel.html',            // ersatt av fysik2-pendel-app.html
-  'fysik2-pendel-matematisk.html', // ersatt av fysik2-pendel-app.html
-  'fysik2-rorelse.html',           // ersatt av fysik2-rorelse-app.html
-  'fysik2-magnetfalt-spole.html',       // ersatt av fysik2-magnetfalt-spole-app.html
-  'fysik2-magnetisk-kraft-ledare.html', // ersatt av fysik2-ledare-magnetfalt-app.html
 ]);
 
 // Ägarverifiering hos sökmotorerna (google<token>.html från Search Console,

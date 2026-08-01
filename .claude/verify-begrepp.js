@@ -54,7 +54,12 @@ function formRegex(form) {
     );
 }
 
-function checkText(etikett, text) {
+// `plain: true` för fält som renderas som REN TEXT (term och kort). De visas
+// som React-textbarn i uppslaget, i A–Ö-listan och i sökträffarna, och sätts
+// med textContent i popovern — all HTML i dem hamnar SYNLIG på skärmen
+// ("9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km"). Använd literalt hårt
+// mellanslag (U+00A0) i stället för &nbsp;, och skriv om exponenter i ord.
+function checkText(etikett, text, plain) {
     const s = String(text);
     if (EMOJI.test(s)) errors.push(`${etikett}: innehåller emoji/piktogram`);
     if (SUPERSCRIPT.test(s)) errors.push(`${etikett}: Unicode-superscript — använd <sup>…</sup>`);
@@ -65,11 +70,26 @@ function checkText(etikett, text) {
     if (/\$[^$]{1,60}\$/.test(s)) {
         errors.push(`${etikett}: math-block ($…$) renderas inte här — skriv <em>x</em> och &nbsp;`);
     }
-    // Tal och enhet ska hållas ihop med hårt mellanslag. Ordgränsen måste
-    // vara unicode-medveten — \b ser "1998 mätte" som tal + enheten m,
-    // eftersom ä inte räknas som ordtecken i JS:s \w.
+
+    if (plain) {
+        const taggar = s.match(/<[^>]+>/g);
+        if (taggar) {
+            errors.push(`${etikett}: HTML-taggar (${[...new Set(taggar)].join(' ')}) visas bokstavligt — fältet renderas som ren text`);
+        }
+        const ent = s.match(/&[a-zA-Z#][a-zA-Z0-9]{1,9};/g);
+        if (ent) {
+            errors.push(`${etikett}: HTML-entiteter (${[...new Set(ent)].join(' ')}) visas bokstavligt — använd tecknet självt (hårt mellanslag = U+00A0)`);
+        }
+    }
+
+    // Tal och enhet ska hållas ihop. Ordgränsen måste vara unicode-medveten —
+    // \b ser "1998 mätte" som tal + enheten m, eftersom ä inte räknas som
+    // ordtecken i JS:s \w.
     const löst = s.match(/\d (?:km|m|s|kg|K|°C|Hz|THz|GHz|nm|µm|au|eV|GeV|MeV|W|J|T|A|V|%)(?![\p{L}\p{N}])/gu);
-    if (löst) warnings.push(`${etikett}: vanligt mellanslag mellan tal och enhet (${löst[0].trim()}) — använd &nbsp;`);
+    if (löst) {
+        warnings.push(`${etikett}: vanligt mellanslag mellan tal och enhet (${löst[0].trim()}) — använd `
+            + (plain ? 'hårt mellanslag (U+00A0)' : '&nbsp;'));
+    }
 }
 
 const ids = new Map();
@@ -89,7 +109,7 @@ for (const b of BEGREPP) {
     // Term
     if (!b.term) errors.push(`${b.id}: saknar term`);
     else {
-        checkText(`${b.id} term`, b.term);
+        checkText(`${b.id} term`, b.term, true);
         if (b.term[0] !== b.term[0].toUpperCase()) {
             warnings.push(`${b.id}: termen börjar med gemen ("${b.term}")`);
         }
@@ -102,7 +122,7 @@ for (const b of BEGREPP) {
     // Kort förklaring
     if (!b.kort) errors.push(`${b.id}: saknar kort`);
     else {
-        checkText(`${b.id} kort`, b.kort);
+        checkText(`${b.id} kort`, b.kort, true);
         if (b.kort.length > 340) warnings.push(`${b.id}: kort är ${b.kort.length} tecken — popovern blir hög (sikta på ≤ 340)`);
         if (!/[.!?]$/.test(b.kort.trim())) warnings.push(`${b.id}: kort saknar avslutande punkt`);
     }
@@ -157,10 +177,13 @@ for (const b of BEGREPP) {
                 if (!blk.html) errors.push(`${bt}: p-block utan html`);
                 else checkText(bt, blk.html);
             } else if (blk.type === 'h2') {
+                // <h2>{blk.text}</h2> — rendereras som ren text.
                 if (!blk.text) errors.push(`${bt}: h2-block utan text`);
-                else checkText(bt, blk.text);
+                else checkText(bt, blk.text, true);
             } else if (blk.type === 'fact') {
+                // Faktarutans rubrik rendereras som ren text; items som HTML.
                 if (!blk.title) errors.push(`${bt}: fact-block utan title`);
+                else checkText(`${bt} title`, blk.title, true);
                 if (!Array.isArray(blk.items) || blk.items.length === 0) errors.push(`${bt}: fact-block utan items`);
                 else blk.items.forEach((it, k) => checkText(`${bt} item[${k}]`, it));
             }

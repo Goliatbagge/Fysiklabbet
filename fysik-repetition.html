@@ -1082,6 +1082,14 @@
         function App() {
             const id = useHashId();
             const pack = PACKS[id];
+            // Sidtitel per kapitelpaket. Utan detta delar alla 14 paket samma
+            // rubrik i Googles sökresultat — se kommentaren i katalog.html.
+            // Hooken måste ligga före den villkorliga returen nedan.
+            useEffect(() => {
+                document.title = pack
+                    ? `Repetition: ${pack.chapter} — ${pack.course} — Fysiklabbet`
+                    : 'Repetition inför provet — Fysiklabbet';
+            }, [pack]);
             if (!pack) return <Chooser />;
             return <GameView key={id} packId={id} pack={pack} />;
         }

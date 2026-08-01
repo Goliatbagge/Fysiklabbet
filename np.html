@@ -1175,6 +1175,17 @@
                 ? prov.uppgifter.find(u => u.nr === route.nr && !u.sekretess)
                 : null;
 
+            // Sidtitel per prov och uppgift. Utan detta delar alla prov och
+            // alla uppgifter samma rubrik i Googles sökresultat — se
+            // motsvarande kommentar i katalog.html.
+            useEffect(() => {
+                document.title = uppgift
+                    ? `Uppgift ${uppgift.nr} — ${prov.namn} — Fysiklabbet`
+                    : prov
+                        ? `${prov.namn} — lösningar steg för steg — Fysiklabbet`
+                        : 'Fysiklabbet — Nationella prov med lösningar steg för steg';
+            }, [prov, uppgift]);
+
             return (
                 <div className="lab-page">
                     <Topbar />

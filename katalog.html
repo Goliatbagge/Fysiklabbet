@@ -2093,6 +2093,67 @@
                 }
             }, [state.subject, state.course, state.chapter, state.section]);
 
+            // Sidtitel och beskrivning per avsnitt.
+            //
+            // Google visar <title> som den klickbara raden i sökresultatet.
+            // Utan detta får alla 333 avsnitt samma rubrik där ("Fysiklabbet
+            // — Teori, simuleringar och övningar i fysik"), vilket är
+            // oanvändbart för den som söker OCH en stark signal om
+            // dubblettinnehåll — då riskerar avsnitten att inte indexeras
+            // alls. Samma mönster som nyheter.html och begrepp.html.
+            //
+            // OBS: detta hjälper Google (som kör JavaScript) men INTE
+            // delningsförhandsvisningar — Facebooks och LinkedIns robotar
+            // kör aldrig JS och ser bara den statiska <head>. För dem krävs
+            // statiska sidor per avsnitt, som nyheter/dela/.
+            useEffect(() => {
+                const subj = K[state.subject];
+                const kurs = subj && subj.courses && subj.courses[state.course];
+                const kap = kurs && kurs.chapters && kurs.chapters[state.chapter];
+                const avs = kap && (kap.sections || []).find(s => s.num === state.section);
+
+                // Titlar i katalogen kan innehålla markdown-kursiv
+                // (*pq*-formeln) — den ska inte synas bokstavligt i en
+                // webbläsarflik eller ett sökresultat.
+                const rent = (t) => String(t == null ? '' : t).replace(/\*/g, '').trim();
+
+                const vyPrefix = {
+                    ovningar: 'Övningar: ',
+                    exitticket: 'Exit ticket: ',
+                    visualisering: 'Visualisering: ',
+                }[state.view] || '';
+
+                let titel = 'Fysiklabbet — Teori, simuleringar och övningar i fysik';
+                let beskrivning = '';
+
+                if (avs) {
+                    // Sammanfattningarna heter bara "Sammanfattning" i varje
+                    // kapitel — utan kapitelnamnet blir de omöjliga att skilja åt.
+                    const namn = String(avs.num).endsWith('.S')
+                        ? `Sammanfattning: ${rent(state.chapter)}`
+                        : rent(avs.title);
+                    titel = `${vyPrefix}${namn} — ${state.course} — Fysiklabbet`;
+                    beskrivning = rent(avs.description);
+                } else if (state.chapter) {
+                    titel = `${rent(state.chapter)} — ${state.course} — Fysiklabbet`;
+                    beskrivning = typeof kap?.intro === 'string' ? rent(kap.intro) : '';
+                } else if (state.course) {
+                    titel = `${state.course} — teori, simuleringar och övningar — Fysiklabbet`;
+                }
+
+                document.title = titel;
+
+                if (beskrivning) {
+                    let el = document.querySelector('meta[name="description"]');
+                    if (!el) {
+                        el = document.createElement('meta');
+                        el.setAttribute('name', 'description');
+                        document.head.appendChild(el);
+                    }
+                    el.setAttribute('content', beskrivning);
+                }
+            }, [state.subject, state.course, state.chapter, state.section, state.view]);
+
             return (
                 <div className="lab-page">
                     <Topbar />

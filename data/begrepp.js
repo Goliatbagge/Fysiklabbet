@@ -30,6 +30,16 @@
  *                  { type: 'h2',   text: '…' }   mellanrubrik
  *                  { type: 'fact', title: '…', items: ['…', …] }
  *
+ * ⚠️ REN TEXT kontra HTML — den vanligaste fällan:
+ *   `term`, `kort`, h2-blockens `text` och faktarutans `title` renderas som
+ *   REN TEXT (React-textbarn; popovern sätter dem med textContent). Skriver
+ *   du HTML där syns den bokstavligt på skärmen — "9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km".
+ *   Använd literalt hårt mellanslag (U+00A0) i stället för &nbsp;, och skriv
+ *   om exponenter i ord ("knappt tio biljoner kilometer").
+ *   Bara p-blockens `html` och faktarutans `items` renderas som HTML — där
+ *   hör <em>, <sup>, &nbsp; och länkar hemma. Ingen KaTeX finns på sidan, så
+ *   math-block ($x$) fungerar ingenstans. Validatorn kontrollerar detta.
+ *
  * Skrivregler (utöver typografireglerna i CLAUDE.md):
  *   – Målgrupp: gymnasieelever. Begreppen ligger ofta ÖVER gymnasienivå —
  *     förklara dem enklare, utförligare och mer pedagogiskt än artikeln
@@ -49,7 +59,7 @@ window.BEGREPP = [
     id: 'absoluta-nollpunkten',
     term: 'Absoluta nollpunkten',
     former: ['absoluta nollpunkten', 'absolut nollpunkt'],
-    kort: 'Den lägsta temperatur som över huvud taget kan finnas: −273,15&nbsp;°C, eller 0 kelvin. Där har partiklarnas värmerörelse i princip helt stannat av.',
+    kort: 'Den lägsta temperatur som över huvud taget kan finnas: −273,15 °C, eller 0 kelvin. Där har partiklarnas värmerörelse i princip helt stannat av.',
     relaterade: ['supraledare', 'superfluid'],
     body: [
       { type: 'p', html: 'Temperatur är egentligen ett mått på hur mycket ett ämnes atomer och molekyler rör sig: i het ånga far vattenmolekylerna omkring i hög fart, i kallt is-vatten kryper de långsamt. Kyler man något blir rörelsen mindre och mindre — och då måste det finnas en botten, en temperatur där rörelsen inte kan bli mindre. Den bottnen kallas den absoluta nollpunkten och ligger vid −273,15&nbsp;°C. Kelvinskalan är byggd så att den börjar precis där: 0&nbsp;K är absoluta nollpunkten, och en grad på kelvinskalan är lika stor som en grad Celsius.' },
@@ -177,7 +187,7 @@ window.BEGREPP = [
     id: 'mork-energi',
     term: 'Mörk energi',
     former: ['mörk energi', 'mörka energin'],
-    kort: 'Den okända form av energi som får universums expansion att gå allt fortare. Den utgör ungefär 68&nbsp;% av universums totala energiinnehåll — och ingen vet vad den är.',
+    kort: 'Den okända form av energi som får universums expansion att gå allt fortare. Den utgör ungefär 68 % av universums totala energiinnehåll — och ingen vet vad den är.',
     relaterade: ['mork-materia', 'kosmologiska-konstanten'],
     body: [
       { type: 'p', html: 'Att universum expanderar har varit känt sedan 1920-talet, och länge var den självklara frågan hur mycket gravitationen bromsar expansionen. 1998 mätte två forskarlag inbromsningen med hjälp av avlägsna supernovor av en typ vars verkliga ljusstyrka är känd — och fick ett svar ingen väntat sig: expansionen bromsar inte alls, den <em>accelererar</em>. Upptäckten belönades med Nobelpriset i fysik 2011, och ”någonting” som knuffar på expansionen fick arbetsnamnet mörk energi.' },
@@ -293,7 +303,7 @@ window.BEGREPP = [
     id: 'ljusar',
     term: 'Ljusår',
     former: ['ljusår', 'ljusåret', 'ljusåren'],
-    kort: 'Den sträcka ljuset hinner på ett år, ungefär 9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km. Trots namnet är ljusåret ett längdmått, inte ett tidsmått.',
+    kort: 'Den sträcka ljuset hinner på ett år: knappt tio biljoner kilometer. Trots namnet är ljusåret ett längdmått, inte ett tidsmått.',
     relaterade: ['parsec', 'vintergatan', 'galaxhop'],
     body: [
       { type: 'p', html: 'Ett ljusår låter som en tid men är en sträcka: precis så långt som ljuset hinner färdas på ett år. Ljuset går knappt 300&nbsp;000&nbsp;km i sekunden — sju varv runt jorden medan du säger ordet — och när man låter den farten fortsätta i ett helt år blir sträckan ungefär 9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km, alltså nästan tio biljoner kilometer.' },
@@ -319,7 +329,7 @@ window.BEGREPP = [
     id: 'solmassa',
     term: 'Solmassa',
     former: ['solmassa', 'solmassan', 'solmassor', 'solmassorna'],
-    kort: 'Massan hos vår sol, ungefär 2&nbsp;·&nbsp;10<sup>30</sup>&nbsp;kg. Används som måttstock när man anger massan hos stjärnor, svarta hål och hela galaxer.',
+    kort: 'Massan hos vår sol, ungefär 330 000 gånger jordens. Används som måttstock när man anger massan hos stjärnor, svarta hål och hela galaxer.',
     relaterade: ['svart-hal', 'supernova', 'vintergatan'],
     body: [
       { type: 'p', html: 'Solen väger ungefär 2&nbsp;·&nbsp;10<sup>30</sup>&nbsp;kg — en tvåa följd av trettio nollor. Det är omkring 333&nbsp;000 gånger jordens massa, och trots att solsystemet rymmer åtta planeter, hundratals månar och otaliga asteroider sitter drygt 99,8&nbsp;% av all massa i solen själv. Allt annat är småsmulor som blev över.' },
@@ -368,7 +378,7 @@ window.BEGREPP = [
     id: 'vintergatan',
     term: 'Vintergatan',
     former: ['vintergatan'],
-    kort: 'Vår egen galax: en stavspiral med hundratals miljarder stjärnor, ungefär 100&nbsp;000 ljusår tvärs över. Det ljusa bandet på natthimlen är dess skiva sedd inifrån.',
+    kort: 'Vår egen galax: en stavspiral med hundratals miljarder stjärnor, ungefär 100 000 ljusår tvärs över. Det ljusa bandet på natthimlen är dess skiva sedd inifrån.',
     relaterade: ['svart-hal', 'ljusar', 'solmassa'],
     body: [
       { type: 'p', html: 'Långt från stadsljus syns ett svagt, disigt band tvärs över natthimlen. Det bandet gav Vintergatan sitt namn, och när Galilei 1610 riktade sitt teleskop mot det upptäckte han att dimman i själva verket består av oräkneliga enskilda stjärnor. Förklaringen till bandets form är att vi sitter mitt inne i en tillplattad skiva av stjärnor: tittar vi längs skivans plan ligger hundratusentals stjärnor bakom varandra och flyter ihop till en sammanhängande strimma, tittar vi rakt ut ur skivan ser vi bara enstaka stjärnor mot tom rymd.' },
@@ -723,7 +733,7 @@ window.BEGREPP = [
     term: 'Astronomisk enhet',
     former: ['astronomisk enhet', 'astronomiska enheter', 'astronomiska enheten',
              'astronomiska enheterna'],
-    kort: 'Avståndet mellan jorden och solen, knappt 150&nbsp;miljoner&nbsp;km. Det är måttstocken astronomer använder inom solsystemet, där ljusår blir orimligt stora.',
+    kort: 'Avståndet mellan jorden och solen, knappt 150 miljoner km. Det är måttstocken astronomer använder inom solsystemet, där ljusår blir orimligt stora.',
     relaterade: ['ljusar', 'parsec', 'asteroid', 'komet'],
     body: [
       { type: 'p', html: 'Avstånd i rymden spänner över så många storleksordningar att ett enda mått inte räcker. Ljusår passar mellan stjärnorna, men inne i vårt eget solsystem blir de löjligt stora — hela avståndet ut till Neptunus är bara en halv tusendels ljusår. Därför använder astronomer i stället jordens eget avstånd till solen som måttstock och kallar det en astronomisk enhet, förkortad au. Sedan 2012 är den exakt definierad till 149&nbsp;597&nbsp;870&nbsp;700 meter, alltså knappt 150&nbsp;miljoner&nbsp;km.' },

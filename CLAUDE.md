@@ -1489,10 +1489,18 @@ Regler:
   att själva stå i `former` (t.ex. "diffraktionsgitter", "laserspektroskopi").
   Gå igenom listan och lägg till dem som betyder samma sak — men bara dem:
   "ytplasmon" är inte plasma, och "cirkulationskvantum" är inte kvantmekanik.
-- **Ordlistan renderas som ren HTML — det finns ingen KaTeX på
-  `begrepp.html`.** Ett math-block (`$z = 1$`) visas bokstavligt med
-  dollartecken och allt. Skriv `<em>z</em>&nbsp;=&nbsp;1`. Validatorn ger fel
-  på math-block och varnar för vanligt mellanslag mellan tal och enhet.
+- **Håll isär rentext-fälten och HTML-fälten** (vanligaste felet):
+  `term`, `kort`, h2-blockens `text` och faktarutans `title` renderas som
+  **ren text** — HTML i dem syns bokstavligt på skärmen
+  (`9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km`). Använd literalt hårt
+  mellanslag (U+00A0) och skriv om exponenter i ord ("knappt tio biljoner
+  kilometer"). Bara p-blockens `html` och faktarutans `items` är **HTML** —
+  där hör `<em>`, `<sup>` och `&nbsp;` hemma.
+- **Ingen KaTeX finns på `begrepp.html`.** Ett math-block (`$z = 1$`) visas
+  bokstavligt med dollartecken och allt, även i p-blocken. Skriv
+  `<em>z</em>&nbsp;=&nbsp;1`. Validatorn ger fel på både math-block och
+  markup i rentext-fälten, och varnar för vanligt mellanslag mellan tal
+  och enhet.
 - **Förklaringen ska stå på egna ben** — hänvisa inte till kurserna eller
   till en enskild nyhetsartikel (uppslagssidan listar själv vilka nyheter
   som nämner ordet). Samma standalone-regel som för nyhetsartiklar.

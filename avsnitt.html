@@ -263,8 +263,24 @@
 
                 if (open) {
                     const [, type, title] = open;
-                    stack.push(type.toLowerCase());
-                    out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
+                    const ty = type.toLowerCase();
+                    const parent = stack.length ? stack[stack.length - 1].type : null;
+                    // Nästlad ::: härledning INUTI ::: formel → hopfällbar
+                    // dropdown (<details>) längst ned i formelrutan i stället
+                    // för en egen fristående ruta.
+                    if ((ty === 'härledning' || ty === 'harledning') && parent === 'formel') {
+                        stack.push({ type: ty, close: '</div></details>' });
+                        const label = title
+                            ? escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                            : 'Härledning';
+                        out.push('<details class="formel-harledning">');
+                        out.push('<summary>' + label + '<span class="fh-chevron"></span></summary>');
+                        out.push('<div class="formel-harledning-body">');
+                        out.push('');
+                        continue;
+                    }
+                    stack.push({ type: ty, close: '</div>' });
+                    out.push('<div class="lab-block lab-block-' + ty + '">');
                     if (title) {
                         // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
                         const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -272,9 +288,9 @@
                     }
                     out.push('');
                 } else if (close && stack.length > 0) {
-                    stack.pop();
+                    const top = stack.pop();
                     out.push('');
-                    out.push('</div>');
+                    out.push(top.close);
                 } else {
                     out.push(line);
                 }

@@ -5488,6 +5488,22 @@ window.EXITTICKETS = {
       'Massan $m$ finns inte med i formeln $T = 2\\pi\\sqrt{l \\cos\\alpha / g}$ — periodtiden är oberoende av vikten hos pendelkroppen.',
     ],
   },
+  {
+    question: 'I härledningen av formeln för konisk pendel ställs två kraftekvationer upp: $F_\\mathrm{S} \\cdot \\cos \\alpha = m \\cdot g$ i höjdled och $F_\\mathrm{S} \\cdot \\sin \\alpha = \\dfrac{4\\pi^{2} \\cdot m \\cdot r}{T^{2}}$ i sidled. Varför divideras den ena ekvationen med den andra?',
+    choices: [
+      'För att både spännkraften $F_\\mathrm{S}$ och massan $m$ då förkortas bort',
+      'För att periodtiden $T$ då försvinner ur ekvationen',
+      'För att tyngdaccelerationen $g$ då förkortas bort',
+      'För att vinkeln α då försvinner ur ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Divisionen gör att $F_\\mathrm{S}$ och $m$ står i både täljare och nämnare och förkortas bort — kvar blir ett samband mellan α, $r$, $g$ och $T$ som kan skrivas om till periodtidsformeln.',
+      'Periodtiden $T$ är just den storhet härledningen ska lösa ut — den måste finnas kvar efter divisionen.',
+      'Tyngdaccelerationen $g$ finns bara i den ena ekvationen och blir därför kvar i det sammanslagna uttrycket.',
+      'Vinkeln finns kvar efter divisionen, som $\\dfrac{\\sin \\alpha}{\\cos \\alpha}$ i vänsterledet.',
+    ],
+  },
 ],
 
 'fy2-1.6': [

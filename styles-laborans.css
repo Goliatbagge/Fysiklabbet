@@ -1747,6 +1747,55 @@ button.lab-card-disabled { pointer-events: none; }
 .lab-block-harledning .lab-block-title,
 .lab-block-härledning .lab-block-title { color: #8a4a18; }
 
+/* Härledning som hopfällbar dropdown i formelrutan (nästlat ::: härledning
+   inuti ::: formel). Renderas som <details> med en "Härledning"-rad längst
+   ned i den gröna rutan; expanderad visas härledningen persika-färgad.
+   Negativa marginaler = formelrutans padding (18px 22px) så remsan går
+   kant i kant med rutan. */
+.lab-block-formel > details.formel-harledning {
+    margin: 18px -22px -18px;
+    background: #f7e4cf;
+    border-top: 1px solid #d8b48a;
+    border-radius: 0 0 3px 3px;
+}
+.formel-harledning > summary {
+    /* OBS: ingen flex/gap här — bionisk läsning styckar "Härledning" i
+       spans, och som flex-items får de då mellanrum ("HÄRL EDNING"). */
+    list-style: none;
+    cursor: pointer;
+    display: block;
+    padding: 10px 22px;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #8a4a18;
+    user-select: none;
+}
+.formel-harledning > summary::-webkit-details-marker { display: none; }
+.formel-harledning > summary:focus-visible {
+    outline: 2px solid #8a4a18;
+    outline-offset: -2px;
+}
+.formel-harledning .fh-chevron {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+    border-right: 1.8px solid currentColor;
+    border-bottom: 1.8px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+}
+.formel-harledning[open] .fh-chevron {
+    margin-bottom: -2px;
+    transform: rotate(225deg);
+}
+.formel-harledning-body { padding: 2px 22px 16px; }
+.formel-harledning-body > :last-child { margin-bottom: 0; }
+
 /* Kuriosa — persika (samma som demo) */
 .lab-block-kuriosa {
     background: #f7e4cf;

@@ -306,8 +306,24 @@
                 const close = line.match(/^:::\s*$/);
                 if (open) {
                     const [, type, title] = open;
-                    stack.push(type.toLowerCase());
-                    out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
+                    const ty = type.toLowerCase();
+                    const parent = stack.length ? stack[stack.length - 1].type : null;
+                    // Nästlad ::: härledning INUTI ::: formel → hopfällbar
+                    // dropdown (<details>) längst ned i formelrutan i stället
+                    // för en egen fristående ruta.
+                    if ((ty === 'härledning' || ty === 'harledning') && parent === 'formel') {
+                        stack.push({ type: ty, close: '</div></details>' });
+                        const label = title
+                            ? escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                            : 'Härledning';
+                        out.push('<details class="formel-harledning">');
+                        out.push('<summary>' + label + '<span class="fh-chevron"></span></summary>');
+                        out.push('<div class="formel-harledning-body">');
+                        out.push('');
+                        continue;
+                    }
+                    stack.push({ type: ty, close: '</div>' });
+                    out.push('<div class="lab-block lab-block-' + ty + '">');
                     if (title) {
                         // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
                         const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -315,9 +331,9 @@
                     }
                     out.push('');
                 } else if (close && stack.length > 0) {
-                    stack.pop();
+                    const top = stack.pop();
                     out.push('');
-                    out.push('</div>');
+                    out.push(top.close);
                 } else {
                     out.push(line);
                 }
@@ -682,10 +698,13 @@
                 // kapitelsammanfattningarnas formelsektioner) lämnas i sitt
                 // naturliga flöde — tvåkolumnslayouten antar EN formel och EN
                 // "där"-lista och flyttar annars fel lista åt sidan.
-                if (box.querySelectorAll('ul').length > 1) return;
+                // (Innehåll i härlednings-dropdownen <details> räknas inte.)
+                const uls = Array.from(box.querySelectorAll('ul'))
+                    .filter(u => !u.closest('details'));
+                if (uls.length > 1) return;
                 // Förklaringen till höger: i första hand en punktlista <ul>,
                 // annars ett stycke som börjar med "där" (prosaförklaring).
-                let right = box.querySelector('ul');
+                let right = uls[0] || null;
                 let isProse = false;
                 if (!right) {
                     right = Array.from(box.children).find(
@@ -697,6 +716,7 @@
                 cell.className = 'formel-cell';
                 for (const el of Array.from(box.children)) {
                     if (el.classList && el.classList.contains('lab-block-title')) continue;
+                    if (el.tagName === 'DETAILS') continue;               // härlednings-dropdownen stannar under layouten
                     if (el === right) continue;
                     if (el.tagName === 'P' && el.textContent.trim().toLowerCase() === 'där') { el.remove(); continue; }
                     cell.appendChild(el);                                 // flytta in formelinnehållet
@@ -717,6 +737,9 @@
                 layout.appendChild(rule);
                 layout.appendChild(right);
                 box.appendChild(layout);
+                // Härlednings-dropdownen ska ligga SIST i rutan (under layouten).
+                const det = box.querySelector(':scope > details.formel-harledning');
+                if (det) box.appendChild(det);
             });
         }
         function fitFormel(root) {
@@ -971,10 +994,11 @@
                         if (e.key === 'Escape' && !document.fullscreenElement) setShowVis(false);
                         return;
                     }
-                    // Fokus i ett reglage/fält (t.ex. graf-widgetens glidare):
-                    // piltangenter m.m. ska styra reglaget, inte bläddra.
+                    // Fokus i ett reglage/fält (t.ex. graf-widgetens glidare)
+                    // eller på en härlednings-summary: tangenterna ska styra
+                    // reglaget/toggla dropdownen, inte bläddra.
                     const t = e.target;
-                    if (t && t.closest && t.closest('input, textarea, select, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
+                    if (t && t.closest && t.closest('input, textarea, select, summary, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
                     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
                         || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
                     else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
@@ -1080,7 +1104,9 @@
                 // Interaktiva graf-widgetar: dra i glidare/rutnät, kryssrutor
                 // och sifferfält ska INTE bläddra vidare — man ska kunna
                 // stanna kvar och utforska. (Släpp efter drag ger ett click.)
-                if (e.target.closest('input, label, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
+                // Gäller även härlednings-dropdownens summary-rad: klicket
+                // ska fälla ut/ihop härledningen, inte gå till nästa steg.
+                if (e.target.closest('input, label, summary, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
                 next();

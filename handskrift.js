@@ -149,6 +149,16 @@
  * arket: skriv klammern något mindre med valueBracket-optet {rs:0.75},
  * inte radbrytning. Referensimpl: layoutFjader b).
  *
+ * REGEL (DIVISION MED VÅGRÄTT STRECK, användarkrav 2026-08-02): i ALLA
+ * handskrivna uträkningar — klammerrader, marginalanteckningar,
+ * huvudrader — ritas division som ett BRÅK med vågrätt divisionsstreck,
+ * ALDRIG med snedstreck ("k·A²/2", "33 varv/60 s" eller "30/2" får inte
+ * förekomma i pennskrift). Snedstrecket används ENBART inuti enheter
+ * (N/m, m/s, varv/min). I en klammer skrivs bråket som segment-rad i
+ * valueBracket: ['E_1=', {frac:['k·A_1^2','2']}, '=35 J'] — bråkrader
+ * får automatiskt extra radhöjd. Referensimpl: layoutDampning
+ * (klammern), layoutLpskiva (frekvensraden + radie-anteckningen).
+ *
  * REGEL (DIVIDERA BORT EN GEMENSAM FAKTOR — BARA fysikuppgifter): när
  * samma faktor står i båda leden (t.ex. g i m_P·g·l_P = m_B·g·l_B) delas
  * den bort genom att STRYKAS med ett snett streck direkt i den redan
@@ -1291,15 +1301,44 @@
   function valueBracket(acts, rows, x0, yTop, s, F, opt) {
     /* opt.rs: radskala — 0,8 som standard (något mindre än huvudraderna);
      * en lång deluträkningsrad som annars inte ryms på arket får skrivas
-     * något mindre (0,75 räcker för fjader-scenens F_R-rad) */
+     * något mindre (0,75 räcker för fjader-scenens F_R-rad).
+     *
+     * En rad är en sträng ELLER en array av segment: strängar och
+     * {frac:['täljare','nämnare']} — bråk med VÅGRÄTT divisionsstreck
+     * (se REGEL DIVISION MED VÅGRÄTT STRECK; snedstreck i uträkningar är
+     * förbjudet). Bråkrader får automatiskt extra radhöjd. */
     var rs = (opt && opt.rs) || 0.8;
     var ss = s * rs, sF = F * rs;
-    var rowAdv = 1.5 * sF;
-    var widths = rows.map(function (r) { return stringAdvance(r, ss, sF); });
+    function segsOf(r) { return typeof r === 'string' ? [r] : r; }
+    function fracW(sg) {
+      return Math.max(stringAdvance(sg.frac[0], ss, sF),
+                      stringAdvance(sg.frac[1], ss, sF)) + 0.3 * sF;
+    }
+    function rowW(r) {
+      return segsOf(r).reduce(function (w, sg) {
+        return w + (typeof sg === 'string'
+          ? stringAdvance(sg, ss, sF) : fracW(sg) + 1.5);
+      }, 0);
+    }
+    function hasFrac(r) {
+      return segsOf(r).some(function (sg) { return typeof sg !== 'string'; });
+    }
+    var widths = rows.map(rowW);
     var wMax = Math.max.apply(null, widths);
+    /* radbaslinjer: en bråkrad kräver luft för täljaren ovanför sig och
+     * nämnaren under sig */
+    var ys = [], yCur = yTop;
+    rows.forEach(function (r, i) {
+      if (i > 0) {
+        yCur += 1.5 * sF + (hasFrac(r) ? 0.7 * sF : 0) +
+                (hasFrac(rows[i - 1]) ? 0.55 * sF : 0);
+      }
+      ys.push(yCur);
+    });
     var tick = 0.34 * sF;                    /* klammerklackarnas längd */
-    var yA = yTop - 0.95 * sF;               /* klammerns över-/underkant */
-    var yB = yTop + (rows.length - 1) * rowAdv + 0.4 * sF;
+    var yA = yTop - (hasFrac(rows[0]) ? 1.55 : 0.95) * sF;
+    var yB = ys[ys.length - 1] +
+             (hasFrac(rows[rows.length - 1]) ? 1.15 : 0.4) * sF;
     var xT = x0 + tick + 0.45 * sF;          /* radernas vänsterkant */
     var xR = xT + wMax + 0.45 * sF + tick;   /* högerklammerns streck */
     /* vänsterklammern [ : klack, lodrätt streck, klack */
@@ -1308,8 +1347,27 @@
     acts.push({ kind: 'stroke', pts: humanize([[x0, yB], [x0 + tick, yB]]) });
     acts.push({ kind: 'pause', ms: 160 });
     var boxes = rows.map(function (r, i) {
-      var yi = yTop + i * rowAdv;
-      placeString(r, xT, yi, ss, sF, acts);
+      var yi = ys[i];
+      var x = xT;
+      segsOf(r).forEach(function (sg) {
+        if (typeof sg === 'string') {
+          x = placeString(sg, x, yi, ss, sF, acts);
+        } else {
+          var ybar = yi - 0.34 * sF;
+          var nw = stringAdvance(sg.frac[0], ss, sF),
+              dw = stringAdvance(sg.frac[1], ss, sF);
+          var w = Math.max(nw, dw) + 0.3 * sF;
+          placeString(sg.frac[0], x + (w - nw) / 2, ybar - 0.14 * sF,
+                      ss, sF, acts);
+          acts.push({ kind: 'pause', ms: 120 });
+          acts.push({ kind: 'stroke',
+            pts: humanize([[x, ybar], [x + w, ybar]]) });
+          acts.push({ kind: 'pause', ms: 120 });
+          placeString(sg.frac[1], x + (w - dw) / 2, ybar + 1.04 * sF,
+                      ss, sF, acts);
+          x += w + 1.5;
+        }
+      });
       acts.push({ kind: 'pause', ms: 140 });
       return [xT, xT + widths[i], yi, sF];
     });
@@ -1317,7 +1375,7 @@
     acts.push({ kind: 'stroke', pts: humanize([[xR - tick, yA], [xR, yA]]) });
     acts.push({ kind: 'stroke', pts: humanize([[xR, yA], [xR, yB]]) });
     acts.push({ kind: 'stroke', pts: humanize([[xR, yB], [xR - tick, yB]]) });
-    return { boxes: boxes, yEnd: yTop + (rows.length - 1) * rowAdv };
+    return { boxes: boxes, yEnd: ys[ys.length - 1] };
   }
 
   /* ---------------- rotecken (√) ----------------
@@ -3009,7 +3067,19 @@
     tanke(b3);
     placeString('Skivans radie:', 452, 186, s * 0.62, F * 0.62, acts);
     pause(200);
-    placeString('30/2=15 cm', 452, 214, s * 0.62, F * 0.62, acts);
+    /* divisionen ritas som BRÅK med vågrätt streck (se REGEL DIVISION
+     * MED VÅGRÄTT STRECK) — aldrig "30/2" med snedstreck */
+    (function () {
+      var sA = s * 0.62, fA = F * 0.62;
+      var x0 = 452, yb = 220;
+      var ybar = yb - 0.34 * fA;
+      var nw = stringAdvance('30', sA, fA), dw = stringAdvance('2', sA, fA);
+      var w = Math.max(nw, dw) + 0.3 * fA;
+      placeString('30', x0 + (w - nw) / 2, ybar - 0.14 * fA, sA, fA, acts);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      placeString('2', x0 + (w - dw) / 2, ybar + 1.04 * fA, sA, fA, acts);
+      placeString('=15 cm', x0 + w + 0.1 * fA, yb, sA, fA, acts);
+    })();
     stepEnd();
 
     /* ---- steg 4: tillägg — suddgummit och banradien ---- */
@@ -3066,8 +3136,10 @@
       [['först, sedan vinkelhastigheten.']]
     ]);
     tanke(bK);
+    /* frekvensen är en DIVISION → bråk med vågrätt streck (se REGEL
+     * DIVISION MED VÅGRÄTT STRECK), inte "33 varv/60 s" med snedstreck */
     var klam = valueBracket(acts, [
-      'f=33 varv/60 s=0,55 Hz',
+      ['f=', { frac: ['33 varv', '60 s'] }, '=0,55 Hz'],
       'ω=2π·f=2π·0,55 Hz=1,1π rad/s',
       'r=15 cm-5,0 cm=10 cm=0,10 m'
     ], padL, y, s, F);
@@ -5177,10 +5249,11 @@
 
     /* ---- mätvärdesklammern DIREKT under formeln (se REGEL KLAMMERN
      * KOMMER DIREKT UNDER FORMELN): E_1 och E_2 är inte givna, så de
-     * beräknas PÅ SINA RADER INUTI klammern med energiformeln
-     * E=k·A^2/2 — med enheter vid varje tal. Raderna är långa →
-     * klammern i 0,72-skala. */
-    y += adv + 1.1 * F;
+     * beräknas PÅ SINA RADER INUTI klammern med energiformeln — med
+     * enheter vid varje tal. Divisionen ritas som BRÅK med vågrätt
+     * streck via valueBrackets {frac:…}-segment (se REGEL DIVISION MED
+     * VÅGRÄTT STRECK). */
+    y += adv + 1.4 * F;
     var bK = bubble(140, bubbleTop(y - adv), bw, [
       [['I vändlägena är all energi']],
       [['potentiell. Energierna räknas']],
@@ -5189,10 +5262,12 @@
       [['meter.']]
     ]);
     tanke(bK);
-    var klam = valueBracket(acts,
-      ['E_1=k·A_1^2/2=28000 N/m·(0,050 m)^2/2=35 J',
-       'E_2=k·A_2^2/2=28000 N/m·(0,025 m)^2/2=8,75 J'],
-      padL, y, s, F, { rs: 0.72 });
+    var klam = valueBracket(acts, [
+      ['E_1=', { frac: ['k·A_1^2', '2'] }, '=',
+       { frac: ['28000 N/m·(0,050 m)^2', '2'] }, '=35 J'],
+      ['E_2=', { frac: ['k·A_2^2', '2'] }, '=',
+       { frac: ['28000 N/m·(0,025 m)^2', '2'] }, '=8,75 J']
+    ], padL, y, s, F);
     stepEnd();
     y = klam.yEnd;
 

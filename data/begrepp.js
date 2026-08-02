@@ -56,6 +56,47 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'viskositet',
+    term: 'Viskositet',
+    former: ['viskositet', 'viskositeten', 'viskositeter', 'viskositeterna',
+             'viskositetsvärde', 'viskositetsvärdet', 'viskositetsgräns',
+             'viskositetsgränsen', 'viskositetsintervall', 'viskositetsintervallet',
+             'pascalsekund', 'pascalsekunden', 'pascalsekunder'],
+    kort: 'Ett mått på hur trögt ett ämne flyter — hur hårt det gör motstånd när skikten inuti det ska glida förbi varandra. Vatten har låg viskositet, honung hög och sten allra högst.',
+    relaterade: ['turbulens', 'superfluid'],
+    body: [
+      { type: 'p', html: 'Rör om i ett glas vatten och skeden möter nästan inget motstånd. Rör om i sirap och du måste ta i. Skillnaden är viskositeten: vätskans inre friktion. Tänk dig vätskan som en trave spelkort. Drar du det översta kortet åt sidan följer kortet under med en aning, och kortet under det en aning mindre. Viskositeten talar om hur stark den kopplingen är — hur stor kraft per ytenhet som krävs för att få två intilliggande skikt att glida förbi varandra med en viss hastighetsskillnad. SI-enheten heter pascalsekund (Pa·s). Luft ligger på omkring 10<sup>−5</sup>&nbsp;Pa·s, vatten på 10<sup>−3</sup>&nbsp;Pa·s, olivolja kring 10<sup>−1</sup>&nbsp;Pa·s och honung runt 10&nbsp;Pa·s.' },
+      { type: 'p', html: 'Motståndet kommer av att molekylerna hakar i varandra. I en vätska sitter de tätt och dras till varandra, och för att flyta måste de hela tiden lossa sitt grepp och ta nytt. Värmer man vätskan får molekylerna mer rörelseenergi, greppet lossnar lättare och viskositeten sjunker — därför rinner honung ur burken så mycket villigare efter en stund i varmt vatten. I en gas är det tvärtom. Där finns knappt några bindningar alls; motståndet uppstår i stället genom att snabba molekyler flyger mellan skikten och tar med sig rörelsemängd. Värmer man en gas flyger molekylerna fortare, blandningen går snabbare och viskositeten <em>ökar</em>. Varm luft är alltså trögare än kall.' },
+      { type: 'p', html: 'Skalan är enorm. Från luftens 10<sup>−5</sup>&nbsp;Pa·s upp till de allra styvaste bergarterna spänner den över drygt trettio tiopotenser. Beck, det svarta materialet från tjärframställning, ligger kring 10<sup>8</sup>&nbsp;Pa·s: det går att slå sönder med en hammare, men i ett berömt försök i Australien har det droppat ur en tratt ungefär vart tionde år sedan 1927. Glaciäris hamnar på 10<sup>13</sup>–10<sup>17</sup>&nbsp;Pa·s och jordens mantel kring 10<sup>21</sup>&nbsp;Pa·s. Just därför är viskositet alltid knutet till en tidsskala: nästan allting flyter, om man bara har tålamod att vänta tillräckligt länge på det.' }
+    ]
+  },
+  {
+    id: 'subduktion',
+    term: 'Subduktion',
+    former: ['subduktion', 'subduktionen', 'subduktionszon', 'subduktionszonen',
+             'subduktionszoner', 'subduktionszonerna', 'subducera', 'subducerar', 'subducerad'],
+    kort: 'När en av jordens tektoniska plattor glider ner under en annan och sjunker in i manteln. Där bildas djuphavsgravar, vulkankedjor och de kraftigaste jordbävningarna.',
+    relaterade: ['viskositet'],
+    body: [
+      { type: 'p', html: 'Jordens yttersta skal är inte ett enda stycke utan ett femtontal styva plattor som sakta glider omkring, ungefär lika fort som naglar växer — några centimeter om året. Eftersom jorden inte blir större måste det som skapas någonstans försvinna någon annanstans. Ny havsbottenplatta bildas längs de undervattensryggar där plattor dras isär, och den gamla plattan görs av med genom subduktion: den dyker ner under sin granne och sjunker in i manteln.' },
+      { type: 'p', html: 'Vilken platta som åker ner avgörs av tätheten. Havsbottenplattor består av tyngre bergarter än kontinenterna och blir dessutom kallare och tätare med åldern, så det är i stort sett alltid havsbottnen som förlorar. På havsytan syns nedgången som en djuphavsgrav — Marianergraven, jordens djupaste punkt på nästan elva kilometer, är just en sådan. Med sig ner tar plattan vatten som suttit bundet i bergarterna. Vattnet pressas ut på djupet och sänker smältpunkten hos berget ovanför, som delvis smälter och stiger upp. Det är därför vulkankedjor som Andernas och Japans följer subduktionszonerna som ett band.' },
+      { type: 'p', html: 'Kontakten mellan de två plattorna kärvar samtidigt som de trycks mot varandra, och när greppet till slut släpper frigörs den upplagrade energin på en gång. Världens allra kraftigaste jordbävningar sitter därför i subduktionszoner, och eftersom brottytan ofta ligger under havet lyfts vattenmassan ovanför och skapar tsunamier. Att en platta över huvud taget kan böja sig nedåt är för övrigt märkligare än det låter: berget är stelt på människors tidsskala, men på miljontals år beter det sig som en oerhört trögflytande vätska.' }
+    ]
+  },
+  {
+    id: 'maxwelltid',
+    term: 'Maxwelltid',
+    former: ['maxwelltid', 'maxwelltiden', 'maxwelltider',
+             'maxwells relaxationstid', 'maxwellrelaxationstid', 'relaxationstid', 'relaxationstiden'],
+    kort: 'Den tid man måste vänta innan ett material slutar bete sig som en fjäder och börjar bete sig som en trögflytande vätska. Man får den genom att dividera viskositeten med materialets styvhet.',
+    relaterade: ['viskositet'],
+    body: [
+      { type: 'p', html: 'Det finns en leksaksmassa, hoppgummi, som svarar helt olika beroende på hur snabbt man behandlar den. Kastar man en klump i golvet studsar den som en boll. Lämnar man samma klump på bordet över natten har den flutit ut till en pannkaka. Massan är varken fast eller flytande — den är båda, och vilket beteende som visar sig avgörs av tiden. Gränsen mellan de två kallas materialets maxwelltid, efter fysikern James Clerk Maxwell.' },
+      { type: 'p', html: 'Bakom ligger en enkel modell: en fjäder och en trög dämpare kopplade efter varandra. Fjädern står för det elastiska, den del som fjädrar tillbaka när kraften släpper. Dämparen står för det trögflytande, den del som ger efter för gott. Snabba påfrestningar hinner bara fjädern reagera på, och materialet känns fast. Långsamma påfrestningar hinner dämparen släppa igenom, och materialet flyter. Maxwelltiden räknas ut genom att dividera viskositeten med styvheten (skjuvmodulen), och den anger var omslaget sker. Påfrestningar som är mycket kortare än maxwelltiden möts av ett fast ämne, påfrestningar som är mycket längre av en vätska.' },
+      { type: 'p', html: 'För jordens mantel, med en viskositet kring 10<sup>21</sup>&nbsp;Pa·s och en styvhet kring 10<sup>11</sup>&nbsp;Pa, blir maxwelltiden ungefär 10<sup>10</sup> sekunder — några hundra år. Det förklarar två observationer som annars verkar motsäga varandra. En jordbävningsvåg, som passerar på sekunder, möter ett stelt berg och går rakt igenom. Men Skandinavien, som pressades ner av inlandsisen och blev av med den för tiotusen år sedan, reser sig fortfarande någon centimeter om året — för på den tidsskalan är samma berg en vätska som långsamt rinner tillbaka på plats.' }
+    ]
+  },
+  {
     id: 'absoluta-nollpunkten',
     term: 'Absoluta nollpunkten',
     former: ['absoluta nollpunkten', 'absolut nollpunkt'],

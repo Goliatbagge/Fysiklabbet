@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-02 | `2026-08-02-viskositetens-ovre-grans` | Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går | Physics World / Phys.org / Ritsumeikan University (pressmeddelande) / Physics of Fluids (M. Yoshida, 2026, DOI 10.1063/5.0335802) |
 | 2026-08-01 | `2026-08-01-storsta-galaxen` | Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande | Phys.org / arXiv-förhandspublicering, Instituto de Astrofísica de Canarias (C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., 2026) |
 | 2026-07-31 | `2026-07-31-fotonisk-tidskristall` | Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen | Helmholtz-Zentrum Dresden-Rossendorf, HZDR (pressmeddelande) / Phys.org / EurekAlert! / Nature (T. Guo et al., 2026) |
 | 2026-07-30 | `2026-07-30-hattformens-kirala-ljus` | Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva | Institute of Industrial Science, The University of Tokyo (pressmeddelande) / Phys.org / EurekAlert! / Nature Communications (Y. Moritake, M. Takiguchi, T. Aihara, M. Notomi, 2026) |
@@ -141,3 +142,31 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > är från 07-21 och det är ännu ett optik/spegel-ämne), fyrfilig fotonisk
 > motorväg för ljus, optimerade magnetpulser för minnesswitchning, samt två
 > halvledarqubit-studier (alla för nära senaste veckornas ämnen). Se `ko.md`.
+>
+> Not: 2026-08-02-artikeln (viskositetens övre gräns) valdes för ämnesspridningens
+> skull och för att den är en genuint konceptuell upptäckt snarare än ett tekniskt
+> delsteg. Senaste veckan hade dominerats av optik/fotonik, kondenserad materia och
+> astronomi; mekanik/materialfysik hade inte förekommit sedan 07-19
+> (Tour de France-aerodynamiken). Studien är kollegialt granskad (Physics of Fluids,
+> publicerad 2026-06-29) och korslästes mot fyra oberoende referat: Physics World,
+> Phys.org, Ritsumeikan Universitys eget pressmeddelande och EurekAlert!.
+> VIKTIGT vid ev. uppföljning: Physics Worlds referat innehåller TVÅ olika tal —
+> 10^28 Pa·s (högsta viskositet som går att OBSERVERA geodetiskt) och 10^30±2 Pa·s
+> (det tak studien faktiskt föreslår, ur mineralens deformationssamband). Bara det
+> senare är studiens slutsats; en tidig automatsammanfattning blandade ihop dem.
+> Talet 10^70 Pa·s (den orimliga siffra som lab-formlerna ger när de extrapoleras
+> till svalt ytberg, och som var Yoshidas ursprungliga motivation) anges ENBART av
+> Physics World — det är därför uttryckligen attribuerat i brödtexten.
+> Artikeln bildsattes med två äkta, fritt licensierade foton — veckade bergslager i
+> Thiva, Grekland (Catherine Christopoulou, CC BY-SA 4.0) som toppbild och NASA:s
+> ASTER-bild av Susitna Glacier (public domain) som bild i brödtexten. De rimmar
+> visuellt: veckad sten och veckad is. Ingen AI-bild behövdes. En CC BY-licensierad
+> bild av beckdroppsförsöket i Trinity College Dublin fanns men valdes bort —
+> liggande fotograferad på högkant, med kraftiga glasreflexer.
+> Tre nya begrepp: viskositet, subduktion, maxwelltid.
+> Andra kandidater som övervägdes: elektronkylning av högladdade joner i en
+> Penning-fälla (TU Darmstadt/GSI, Physical Review X — färskast av allt och mycket
+> väl källbelagd, men ett accelerator-tekniskt delsteg snarare än en upptäckt;
+> ligger nu överst i ko.md) och IBM/University of Chicagos verifierade
+> kvantöverlägsenhet (stor nyhet, men ännu bara arXiv-preprint och kvantdatorämnet
+> har prioriterats ner för ämnesspridning flera dagar i rad). Se ko.md.

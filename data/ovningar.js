@@ -12414,6 +12414,53 @@ $$ F_C = \\frac{4\\pi^2 \\cdot 0{,}20 \\cdot 0{,}80}{0{,}50^2} = 25\\ \\mathrm{N
 **Generell slutsats:** $F_C = \\dfrac{mv^2}{r} = \\dfrac{4\\pi^2 m r}{T^2}$ — välj formen efter om du har farten *v* eller perioden *T*.`,
         },
 
+        {
+            level: 1,
+            question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
+            answer: { value: 5.4, unit: 'm/s' },
+            solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
+
+$$ mgh = \\frac{mv^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
+
+Massan stryks. Insättning:
+
+$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}5} = 5{,}4\\ \\mathrm{m/s} $$
+
+**Svar:** Farten i lägsta punkten är ungefär $5{,}4\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Farten beror bara på fallhöjden, inte på massan eller banans form (om friktion försummas). Detta är samma $v = \\sqrt{2gh}$ som för fritt fall.`,
+        },
+        {
+            level: 1,
+            question: `I lägsta punkten av en gungbana (radie $3{,}0\\ \\mathrm{m}$) rör sig en gungare som väger $60\\ \\mathrm{kg}$ med farten $5{,}0\\ \\mathrm{m/s}$. Hur stor är centripetalkraften?
+
+${makeSwing({ ropeLabel: 'r = 3,0 m', forces: true })}`,
+            answer: { value: 500, unit: 'N' },
+            solution: `Centripetalkraften ges av
+
+$$ F_C = \\frac{m v^2}{r} = \\frac{60 \\cdot 5{,}0^2}{3{,}0} = \\frac{1\\,500}{3{,}0} = 500\\ \\mathrm{N} $$
+
+**Svar:** Centripetalkraften är $500\\ \\mathrm{N}$.
+
+**Generell slutsats:** I lägsta punkten är centripetalkraften riktad **uppåt** (in mot banans centrum) och utgörs av spännkraften minus tyngdkraften.`,
+        },
+        {
+            level: 1,
+            question: `En berg-och-dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v' })}`,
+            answer: { value: 6.3, unit: 'm/s' },
+            solution: `I gränsfallet är normalkraften (eller spännkraften) noll i högsta punkten, så tyngdkraften ensam utgör centripetalkraften:
+
+$$ mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad v = \\sqrt{gr} = \\sqrt{9{,}82 \\cdot 4{,}0} = 6{,}3\\ \\mathrm{m/s} $$
+
+**Svar:** Den minsta farten i högsta punkten är ungefär $6{,}3\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** $v = \\sqrt{gr}$ är den klassiska villkorsfarten i toppen av en loop — går vagnen långsammare faller den inåt och tappar banan.`,
+        },
+
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
@@ -12458,6 +12505,46 @@ $$ v = \\sqrt{\\mu \\cdot g \\cdot r} = \\sqrt{0{,}50 \\cdot 9{,}82 \\cdot 90} =
 **Generell slutsats:** Maxfarten beror *inte* på bilens massa (den stryks bort) — bara på friktionstalet och radien. Halt väglag (lågt μ) eller tvär kurva (litet *r*) sänker maxfarten.`,
         },
 
+        {
+            level: 2,
+            question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 40, hLabel: 'h = 1,2 m', ropeLabel: 'l = 4,0 m', angleLabel: null, forces: true })}`,
+            answer: { value: 1100, unit: 'N' },
+            solution: `Vi kombinerar **energiprincipen** (för farten) med **cirkulär rörelse** (för kraften).
+
+**Steg 1 — farten i lägsta punkten** ur energiprincipen:
+$$ v^2 = 2gh = 2 \\cdot 9{,}82 \\cdot 1{,}2 = 23{,}6\\ \\mathrm{m^2/s^2} $$
+
+**Steg 2 — krafterna i lägsta punkten.** Spännkraften $F_S$ uppåt och tyngdkraften $mg$ nedåt ger tillsammans centripetalkraften uppåt:
+$$ F_S - mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad F_S = \\frac{mv^2}{r} + mg $$
+$$ F_S = \\frac{70 \\cdot 23{,}6}{4{,}0} + 70 \\cdot 9{,}82 = 412 + 687 = 1\\,100\\ \\mathrm{N} $$
+
+**Svar:** Spännkraften i lägsta punkten är ungefär $1\\,100\\ \\mathrm{N}$.
+
+**Generell slutsats:** I lägsta punkten måste repet både bära tyngden *och* kröka banan — därför är $F_S > mg$. Energiprincipen ger farten, centripetalsambandet ger kraften.`,
+        },
+        {
+            level: 2,
+            question: `En berg-och-dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
+            answer: { value: 20, unit: 'm/s' },
+            solution: `Vi arbetar i två steg: villkoret i toppen ger minsta toppfarten, och energiprincipen kopplar topp och botten.
+
+**Steg 1 — minsta fart i toppen** (tyngdkraften = centripetalkraft):
+$$ v_\\text{topp}^2 = gr $$
+
+**Steg 2 — energiprincipen mellan botten och toppen.** Vagnen stiger höjden $2r$ (loopens diameter):
+$$ \\frac{v_\\text{botten}^2}{2} = \\frac{v_\\text{topp}^2}{2} + g \\cdot 2r \\quad\\Leftrightarrow\\quad v_\\text{botten}^2 = v_\\text{topp}^2 + 4gr = gr + 4gr = 5gr $$
+
+$$ v_\\text{botten} = \\sqrt{5gr} = \\sqrt{5 \\cdot 9{,}82 \\cdot 8{,}0} = 20\\ \\mathrm{m/s} $$
+
+**Svar:** Vagnen måste ha minst ungefär $20\\ \\mathrm{m/s}$ vid loopens botten.
+
+**Generell slutsats:** Det fina sambandet $v_\\text{botten} = \\sqrt{5gr}$ följer av att toppfarten ($\\sqrt{gr}$) plus energin för att lyfta vagnen $2r$ tillsammans bestämmer bottenfarten.`,
+        },
+
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
@@ -12484,6 +12571,30 @@ $$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}5
 **Svar:** Kurvan ska doseras med ungefär $30^\\circ$.
 
 **Generell slutsats:** Den avgörande insikten är att dela upp normalkraften i komposanter och inse att den lodräta komposanten bär tyngden medan den vågräta krökar banan. Genom att dividera ekvationerna stryks både normalkraften och massan — doseringsvinkeln beror bara på fart och radie.`,
+        },
+        {
+            level: 3,
+            question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 42, angleLabel: 'α', ropeLabel: 'l = 1,2 m', forces: true })}`,
+            answer: { value: 43, unit: '°' },
+            solution: `Tråden är som mest belastad i banans **lägsta punkt** (där farten är störst). Där måste spännkraften både bära tyngden och kröka banan. Vi måste alltså koppla ihop **energiprincipen** (farten) med **cirkulär dynamik** (kraften) och uttrycka allt i vinkeln α.
+
+**Farten i lägsta punkten.** Kulan faller höjden $h = l(1 - \\cos\\alpha)$ från släppläget till botten. Energiprincipen ger
+$$ v^2 = 2gh = 2gl(1 - \\cos\\alpha) $$
+
+**Spännkraften i lägsta punkten.** Här gäller $F_S - mg = \\dfrac{mv^2}{r}$ med $r = l$:
+$$ F_S = mg + \\frac{m \\cdot 2gl(1-\\cos\\alpha)}{l} = mg + 2mg(1-\\cos\\alpha) = mg\\,(3 - 2\\cos\\alpha) $$
+
+Trådlängden *l* försvann. Sätt $F_S = 3{,}0\\ \\mathrm{N}$ och lös ut vinkeln ($mg = 0{,}200 \\cdot 9{,}82 = 1{,}964\\ \\mathrm{N}$):
+
+$$ 3{,}0 = 1{,}964\\,(3 - 2\\cos\\alpha) \\;\\Rightarrow\\; 3 - 2\\cos\\alpha = 1{,}527 \\;\\Rightarrow\\; \\cos\\alpha = 0{,}736 $$
+
+$$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
+
+**Svar:** Kulan kan släppas från högst ungefär $43^\\circ$ utan att tråden brister.
+
+**Generell slutsats:** Det eleganta resultatet $F_S = mg(3 - 2\\cos\\alpha)$ kombinerar tre idéer: fallhöjden uttryckt med trigonometri ($l(1-\\cos\\alpha)$), energiprincipen för farten, och kraftekvationen för cirkelrörelse i lägsta punkten. Släpps kulan rakt ut ($\\alpha = 90^\\circ$) blir $F_S = 3mg$.`,
         },
     ],
 
@@ -12734,123 +12845,6 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
     ],
 
     'fy2-1.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
-        {
-            level: 1,
-            question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
-            answer: { value: 5.4, unit: 'm/s' },
-            solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
-
-$$ mgh = \\frac{mv^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
-
-Massan stryks. Insättning:
-
-$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}5} = 5{,}4\\ \\mathrm{m/s} $$
-
-**Svar:** Farten i lägsta punkten är ungefär $5{,}4\\ \\mathrm{m/s}$.
-
-**Generell slutsats:** Farten beror bara på fallhöjden, inte på massan eller banans form (om friktion försummas). Detta är samma $v = \\sqrt{2gh}$ som för fritt fall.`,
-        },
-        {
-            level: 1,
-            question: `I lägsta punkten av en gungbana (radie $3{,}0\\ \\mathrm{m}$) rör sig en gungare som väger $60\\ \\mathrm{kg}$ med farten $5{,}0\\ \\mathrm{m/s}$. Hur stor är centripetalkraften?
-
-${makeSwing({ ropeLabel: 'r = 3,0 m', forces: true })}`,
-            answer: { value: 500, unit: 'N' },
-            solution: `Centripetalkraften ges av
-
-$$ F_C = \\frac{m v^2}{r} = \\frac{60 \\cdot 5{,}0^2}{3{,}0} = \\frac{1\\,500}{3{,}0} = 500\\ \\mathrm{N} $$
-
-**Svar:** Centripetalkraften är $500\\ \\mathrm{N}$.
-
-**Generell slutsats:** I lägsta punkten är centripetalkraften riktad **uppåt** (in mot banans centrum) och utgörs av spännkraften minus tyngdkraften.`,
-        },
-        {
-            level: 1,
-            question: `En berg-och-dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v' })}`,
-            answer: { value: 6.3, unit: 'm/s' },
-            solution: `I gränsfallet är normalkraften (eller spännkraften) noll i högsta punkten, så tyngdkraften ensam utgör centripetalkraften:
-
-$$ mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad v = \\sqrt{gr} = \\sqrt{9{,}82 \\cdot 4{,}0} = 6{,}3\\ \\mathrm{m/s} $$
-
-**Svar:** Den minsta farten i högsta punkten är ungefär $6{,}3\\ \\mathrm{m/s}$.
-
-**Generell slutsats:** $v = \\sqrt{gr}$ är den klassiska villkorsfarten i toppen av en loop — går vagnen långsammare faller den inåt och tappar banan.`,
-        },
-
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
-        {
-            level: 2,
-            question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeSwing({ angle: 40, hLabel: 'h = 1,2 m', ropeLabel: 'l = 4,0 m', angleLabel: null, forces: true })}`,
-            answer: { value: 1100, unit: 'N' },
-            solution: `Vi kombinerar **energiprincipen** (för farten) med **cirkulär rörelse** (för kraften).
-
-**Steg 1 — farten i lägsta punkten** ur energiprincipen:
-$$ v^2 = 2gh = 2 \\cdot 9{,}82 \\cdot 1{,}2 = 23{,}6\\ \\mathrm{m^2/s^2} $$
-
-**Steg 2 — krafterna i lägsta punkten.** Spännkraften $F_S$ uppåt och tyngdkraften $mg$ nedåt ger tillsammans centripetalkraften uppåt:
-$$ F_S - mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad F_S = \\frac{mv^2}{r} + mg $$
-$$ F_S = \\frac{70 \\cdot 23{,}6}{4{,}0} + 70 \\cdot 9{,}82 = 412 + 687 = 1\\,100\\ \\mathrm{N} $$
-
-**Svar:** Spännkraften i lägsta punkten är ungefär $1\\,100\\ \\mathrm{N}$.
-
-**Generell slutsats:** I lägsta punkten måste repet både bära tyngden *och* kröka banan — därför är $F_S > mg$. Energiprincipen ger farten, centripetalsambandet ger kraften.`,
-        },
-        {
-            level: 2,
-            question: `En berg-och-dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
-            answer: { value: 20, unit: 'm/s' },
-            solution: `Vi arbetar i två steg: villkoret i toppen ger minsta toppfarten, och energiprincipen kopplar topp och botten.
-
-**Steg 1 — minsta fart i toppen** (tyngdkraften = centripetalkraft):
-$$ v_\\text{topp}^2 = gr $$
-
-**Steg 2 — energiprincipen mellan botten och toppen.** Vagnen stiger höjden $2r$ (loopens diameter):
-$$ \\frac{v_\\text{botten}^2}{2} = \\frac{v_\\text{topp}^2}{2} + g \\cdot 2r \\quad\\Leftrightarrow\\quad v_\\text{botten}^2 = v_\\text{topp}^2 + 4gr = gr + 4gr = 5gr $$
-
-$$ v_\\text{botten} = \\sqrt{5gr} = \\sqrt{5 \\cdot 9{,}82 \\cdot 8{,}0} = 20\\ \\mathrm{m/s} $$
-
-**Svar:** Vagnen måste ha minst ungefär $20\\ \\mathrm{m/s}$ vid loopens botten.
-
-**Generell slutsats:** Det fina sambandet $v_\\text{botten} = \\sqrt{5gr}$ följer av att toppfarten ($\\sqrt{gr}$) plus energin för att lyfta vagnen $2r$ tillsammans bestämmer bottenfarten.`,
-        },
-
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
-        {
-            level: 3,
-            question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeSwing({ angle: 42, angleLabel: 'α', ropeLabel: 'l = 1,2 m', forces: true })}`,
-            answer: { value: 43, unit: '°' },
-            solution: `Tråden är som mest belastad i banans **lägsta punkt** (där farten är störst). Där måste spännkraften både bära tyngden och kröka banan. Vi måste alltså koppla ihop **energiprincipen** (farten) med **cirkulär dynamik** (kraften) och uttrycka allt i vinkeln α.
-
-**Farten i lägsta punkten.** Kulan faller höjden $h = l(1 - \\cos\\alpha)$ från släppläget till botten. Energiprincipen ger
-$$ v^2 = 2gh = 2gl(1 - \\cos\\alpha) $$
-
-**Spännkraften i lägsta punkten.** Här gäller $F_S - mg = \\dfrac{mv^2}{r}$ med $r = l$:
-$$ F_S = mg + \\frac{m \\cdot 2gl(1-\\cos\\alpha)}{l} = mg + 2mg(1-\\cos\\alpha) = mg\\,(3 - 2\\cos\\alpha) $$
-
-Trådlängden *l* försvann. Sätt $F_S = 3{,}0\\ \\mathrm{N}$ och lös ut vinkeln ($mg = 0{,}200 \\cdot 9{,}82 = 1{,}964\\ \\mathrm{N}$):
-
-$$ 3{,}0 = 1{,}964\\,(3 - 2\\cos\\alpha) \\;\\Rightarrow\\; 3 - 2\\cos\\alpha = 1{,}527 \\;\\Rightarrow\\; \\cos\\alpha = 0{,}736 $$
-
-$$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
-
-**Svar:** Kulan kan släppas från högst ungefär $43^\\circ$ utan att tråden brister.
-
-**Generell slutsats:** Det eleganta resultatet $F_S = mg(3 - 2\\cos\\alpha)$ kombinerar tre idéer: fallhöjden uttryckt med trigonometri ($l(1-\\cos\\alpha)$), energiprincipen för farten, och kraftekvationen för cirkelrörelse i lägsta punkten. Släpps kulan rakt ut ($\\alpha = 90^\\circ$) blir $F_S = 3mg$.`,
-        },
-    ],
-
-    'fy2-1.8': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,

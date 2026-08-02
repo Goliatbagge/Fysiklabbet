@@ -5405,6 +5405,86 @@ window.EXITTICKETS = {
       'Detta fås om man glömmer att kvadrera farten $v$.',
     ],
   },
+  {
+    question: 'Vilka två fysikaliska principer kombineras i räkneexemplet med den fatala gungan?',
+    choices: [
+      'Kraftmoment och rörelsemängd',
+      'Newtons tredje lag och tryck',
+      'Cirkulär rörelse (centripetalkraft) och energiprincipen',
+      'Vågrörelse och interferens',
+    ],
+    correct: 2,
+    why: [
+      'Kraftmoment nämns inte i detta exempel — det handlar om krafter i en cirkelbana, inte om vridning.',
+      'Newtons tredje lag och tryck förekommer inte i detta exempel.',
+      'Exemplet kombinerar centripetalkraft (cirkulär rörelse) i banans låg- och högpunkt med energiprincipen för att bestämma farten.',
+      'Vågrörelse och interferens hör inte till detta mekanik-exempel.',
+    ],
+  },
+  {
+    question: 'Vilka krafter verkar på gungsitsen i banans lägsta punkt?',
+    choices: [
+      'Endast tyngdkraften',
+      'Endast normalkraften',
+      'Tyngdkraften och friktionskraften',
+      'Tyngdkraften nedåt och spännkraften i repet uppåt',
+    ],
+    correct: 3,
+    why: [
+      'Om bara tyngdkraften verkade skulle det inte finnas någon resulterande kraft uppåt mot centrum, och gungan skulle inte kunna följa cirkelbanan.',
+      'Normalkraft förekommer inte här — gungsitsen hänger i ett rep, den vilar inte mot ett underlag.',
+      'Friktion spelar ingen roll i detta idealiserade exempel med en gunga i ett rep.',
+      'I lägsta punkten verkar tyngdkraften $F_\\mathrm{G}$ nedåt och spännkraften $F_\\mathrm{S}$ i repet uppåt.',
+    ],
+  },
+  {
+    question: 'Varför måste spännkraften $F_\\mathrm{S}$ vara större än tyngdkraften $F_\\mathrm{G}$ i gungans lägsta punkt?',
+    choices: [
+      'Eftersom centripetalkraften är riktad uppåt mot centrum och är resultanten av $F_\\mathrm{S}$ och $F_\\mathrm{G}$',
+      'Eftersom repet alltid väger mer än personen',
+      'Eftersom friktionen mot luften drar nedåt',
+      'Det stämmer inte — i verkligheten är $F_\\mathrm{S}$ mindre än $F_\\mathrm{G}$ i lägsta punkten',
+    ],
+    correct: 0,
+    why: [
+      'Centripetalkraften pekar mot cirkelns centrum (uppåt i lägsta punkten). Eftersom den är resultanten $F_\\mathrm{S} - F_\\mathrm{G}$ måste $F_\\mathrm{S}$ vara större än $F_\\mathrm{G}$ för att ge en nettokraft uppåt.',
+      'Repets egen vikt ingår inte i denna idealiserade modell — det är personens massa som avgör krafterna.',
+      'Luftmotstånd ingår inte i detta exempel.',
+      'Detta är fel — just för att centripetalkraften måste peka mot centrum (uppåt) krävs $F_\\mathrm{S} > F_\\mathrm{G}$, inte tvärtom.',
+    ],
+  },
+  {
+    question: 'Hur bestäms hastigheten i gungans lägsta punkt i detta exempel?',
+    choices: [
+      'Genom att mäta farten direkt med en fartmätare',
+      'Med energiprincipen: lägesenergin som tyngdpunkten förlorar omvandlas till rörelseenergi',
+      'Med kraftmomentlagen $M_1 = M_2$',
+      'Genom att anta att farten är densamma som i högsta punkten',
+    ],
+    correct: 1,
+    why: [
+      'Ingen mätning förekommer i räkneexemplet — hastigheten bestäms teoretiskt.',
+      'Lägesenergin $E_p = m \\cdot g \\cdot h$ som tyngdpunkten "faller" omvandlas till rörelseenergi $E_k = \\tfrac{1}{2} m v^2$, vilket ger farten i lägsta punkten.',
+      'Kraftmomentlagen används inte i detta exempel — den hör till avsnittet om kraftmoment.',
+      'Farten är inte densamma i de två lägena — gungan är snabbast i lägsta punkten och (i deluppgift b) långsammast i högsta punkten.',
+    ],
+  },
+  {
+    question: 'I gränsfallet i den övre delen av banan, precis när repet ska sluta vara spänt, vad gäller?',
+    choices: [
+      'Spännkraften är som störst',
+      'Farten är noll',
+      'Spännkraften är noll och centripetalkraften utgörs enbart av tyngdkraften',
+      'Tyngdkraften är noll',
+    ],
+    correct: 2,
+    why: [
+      'Precis i gränsfallet blir spännkraften minimal (noll), inte maximal.',
+      'Gungan har fortfarande en fart i den övre punkten — det är den fart som krävs för att repet precis inte ska slakna, inte noll.',
+      'I gränsfallet är $F_\\mathrm{S} = 0$, så hela centripetalkraften kommer enbart från tyngdkraften: $F_\\mathrm{C} = F_\\mathrm{G}$.',
+      'Tyngdkraften är alltid närvarande (den beror bara på massa och $g$) — det är spännkraften som blir noll, inte tyngdkraften.',
+    ],
+  },
 ],
 
 'fy2-1.5': [
@@ -5606,89 +5686,6 @@ window.EXITTICKETS = {
 ],
 
 'fy2-1.7': [
-  {
-    question: 'Vilka två fysikaliska principer kombineras i räkneexemplet med den fatala gungan?',
-    choices: [
-      'Kraftmoment och rörelsemängd',
-      'Newtons tredje lag och tryck',
-      'Cirkulär rörelse (centripetalkraft) och energiprincipen',
-      'Vågrörelse och interferens',
-    ],
-    correct: 2,
-    why: [
-      'Kraftmoment nämns inte i detta exempel — det handlar om krafter i en cirkelbana, inte om vridning.',
-      'Newtons tredje lag och tryck förekommer inte i detta exempel.',
-      'Exemplet kombinerar centripetalkraft (cirkulär rörelse) i banans låg- och högpunkt med energiprincipen för att bestämma farten.',
-      'Vågrörelse och interferens hör inte till detta mekanik-exempel.',
-    ],
-  },
-  {
-    question: 'Vilka krafter verkar på gungsitsen i banans lägsta punkt?',
-    choices: [
-      'Endast tyngdkraften',
-      'Endast normalkraften',
-      'Tyngdkraften och friktionskraften',
-      'Tyngdkraften nedåt och spännkraften i repet uppåt',
-    ],
-    correct: 3,
-    why: [
-      'Om bara tyngdkraften verkade skulle det inte finnas någon resulterande kraft uppåt mot centrum, och gungan skulle inte kunna följa cirkelbanan.',
-      'Normalkraft förekommer inte här — gungsitsen hänger i ett rep, den vilar inte mot ett underlag.',
-      'Friktion spelar ingen roll i detta idealiserade exempel med en gunga i ett rep.',
-      'I lägsta punkten verkar tyngdkraften $F_\\mathrm{G}$ nedåt och spännkraften $F_\\mathrm{S}$ i repet uppåt.',
-    ],
-  },
-  {
-    question: 'Varför måste spännkraften $F_\\mathrm{S}$ vara större än tyngdkraften $F_\\mathrm{G}$ i gungans lägsta punkt?',
-    choices: [
-      'Eftersom centripetalkraften är riktad uppåt mot centrum och är resultanten av $F_\\mathrm{S}$ och $F_\\mathrm{G}$',
-      'Eftersom repet alltid väger mer än personen',
-      'Eftersom friktionen mot luften drar nedåt',
-      'Det stämmer inte — i verkligheten är $F_\\mathrm{S}$ mindre än $F_\\mathrm{G}$ i lägsta punkten',
-    ],
-    correct: 0,
-    why: [
-      'Centripetalkraften pekar mot cirkelns centrum (uppåt i lägsta punkten). Eftersom den är resultanten $F_\\mathrm{S} - F_\\mathrm{G}$ måste $F_\\mathrm{S}$ vara större än $F_\\mathrm{G}$ för att ge en nettokraft uppåt.',
-      'Repets egen vikt ingår inte i denna idealiserade modell — det är personens massa som avgör krafterna.',
-      'Luftmotstånd ingår inte i detta exempel.',
-      'Detta är fel — just för att centripetalkraften måste peka mot centrum (uppåt) krävs $F_\\mathrm{S} > F_\\mathrm{G}$, inte tvärtom.',
-    ],
-  },
-  {
-    question: 'Hur bestäms hastigheten i gungans lägsta punkt i detta exempel?',
-    choices: [
-      'Genom att mäta farten direkt med en fartmätare',
-      'Med energiprincipen: lägesenergin som tyngdpunkten förlorar omvandlas till rörelseenergi',
-      'Med kraftmomentlagen $M_1 = M_2$',
-      'Genom att anta att farten är densamma som i högsta punkten',
-    ],
-    correct: 1,
-    why: [
-      'Ingen mätning förekommer i räkneexemplet — hastigheten bestäms teoretiskt.',
-      'Lägesenergin $E_p = m \\cdot g \\cdot h$ som tyngdpunkten "faller" omvandlas till rörelseenergi $E_k = \\tfrac{1}{2} m v^2$, vilket ger farten i lägsta punkten.',
-      'Kraftmomentlagen används inte i detta exempel — den hör till avsnittet om kraftmoment.',
-      'Farten är inte densamma i de två lägena — gungan är snabbast i lägsta punkten och (i deluppgift b) långsammast i högsta punkten.',
-    ],
-  },
-  {
-    question: 'I gränsfallet i den övre delen av banan, precis när repet ska sluta vara spänt, vad gäller?',
-    choices: [
-      'Spännkraften är som störst',
-      'Farten är noll',
-      'Spännkraften är noll och centripetalkraften utgörs enbart av tyngdkraften',
-      'Tyngdkraften är noll',
-    ],
-    correct: 2,
-    why: [
-      'Precis i gränsfallet blir spännkraften minimal (noll), inte maximal.',
-      'Gungan har fortfarande en fart i den övre punkten — det är den fart som krävs för att repet precis inte ska slakna, inte noll.',
-      'I gränsfallet är $F_\\mathrm{S} = 0$, så hela centripetalkraften kommer enbart från tyngdkraften: $F_\\mathrm{C} = F_\\mathrm{G}$.',
-      'Tyngdkraften är alltid närvarande (den beror bara på massa och $g$) — det är spännkraften som blir noll, inte tyngdkraften.',
-    ],
-  },
-],
-
-'fy2-1.8': [
   {
     question: 'Vad är syftet med räkneexemplet "Den flygande kossan"?',
     choices: [

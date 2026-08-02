@@ -4,21 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Värmeflöde — Fysiklabbet</title>
-    <meta name="description" content="Värmekapacitet och hur kroppar växlar värme med omgivningen.">
+    <meta name="description" content="Kroppen alstrar ca 100 W som måste bort. Se hur värmeflödet från huden beror på lufttemperaturen — och varför 22 °C känns lagom men 36 °C känns hett.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-varme-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Värmeflöde — Fysik nivå 1">
-    <meta property="og:description" content="Värmekapacitet och hur kroppar växlar värme med omgivningen.">
+    <meta property="og:description" content="Kroppen alstrar ca 100 W som måste bort. Se hur värmeflödet från huden beror på lufttemperaturen — och varför 22 °C känns lagom men 36 °C känns hett.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-varme-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Värmeflöde — Fysik nivå 1">
-    <meta name="twitter:description" content="Värmekapacitet och hur kroppar växlar värme med omgivningen.">
+    <meta name="twitter:description" content="Kroppen alstrar ca 100 W som måste bort. Se hur värmeflödet från huden beror på lufttemperaturen — och varför 22 °C känns lagom men 36 °C känns hett.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -46,22 +46,15 @@
         font-family: 'Poppins', sans-serif;
       }
 
-      .dark-container {
-        background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-      }
-
+      /* Papperskort (kontrollpanel m.m.) — cream med ram, enligt
+         Laborans-designsystemet */
       .glass-card {
-        background: rgba(15, 23, 42, 0.8);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(200, 50, 74, 0.15);
-        border-radius: 16px;
+        background: var(--lab-bg);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 12px;
       }
 
-      .glow-text {
-        text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-      }
-
-      /* Simulation container – mörk ram utan comic-kant */
+      /* Simulation container – papper med tunn ram */
       .sim-wrapper {
         background: var(--lab-bg);
         border: 1px solid var(--lab-line-strong);
@@ -69,129 +62,154 @@
         overflow: hidden;
       }
 
-      /* Overlay-labels ovanpå SVG */
+      /* Overlay-labels ovanpå SVG — vita kort på papper */
       .overlay-label {
-        background: var(--lab-bg-panel);
+        background: rgba(255, 255, 255, 0.92);
         border: 1px solid var(--lab-line-strong);
-        border-radius: 4px;
+        border-radius: 8px;
+        color: var(--lab-ink);
+        box-shadow: 0 2px 8px rgba(15, 22, 32, 0.08);
+      }
+      .overlay-label .ol-title {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--lab-ink-muted);
+        margin-bottom: 2px;
+      }
+      .overlay-label .ol-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--lab-ink);
+      }
+      .overlay-label .ol-sub {
+        font-size: 11px;
+        color: var(--lab-ink-muted);
+      }
+
+      /* Statusrad / värmebalansmätare — papperskort */
+      .status-bar {
+        background: var(--lab-bg);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 12px;
         color: var(--lab-ink);
       }
 
-      /* Status-rad */
-      .status-bar {
-        background: var(--lab-bg-panel);
-        border: 1px solid var(--lab-line-strong);
-        border-radius: 4px;
+      .meter-track {
+        position: relative;
+        height: 10px;
+        border-radius: 5px;
+        background: rgba(15, 22, 32, 0.10);
+        overflow: hidden;
+      }
+      .meter-fill {
+        height: 100%;
+        border-radius: 5px;
+        transition: width 0.18s ease-out;
+      }
+      .meter-mark {
+        position: absolute;
+        top: -3px;
+        bottom: -3px;
+        width: 0;
+        border-left: 2px dashed rgba(180, 83, 9, 0.9);
+      }
+      .meter-label {
+        font-size: 11.5px;
+        letter-spacing: 0.02em;
+        color: var(--lab-ink-soft);
+      }
+      .meter-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+        font-weight: 600;
+        white-space: nowrap;
       }
 
+      /* Formelkort i headern: P_netto = P_ut − P_in med ord-etiketter */
+      .formel-kort {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 10px;
+        padding: 12px 22px 14px;
+        color: var(--lab-ink);
+      }
+      .formel-kort .fvar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+      }
+      .formel-kort .flbl {
+        font-size: 9.5px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--lab-ink-muted);
+        white-space: nowrap;
+      }
+      .formel-kort .fsym {
+        font-size: 21px;
+        line-height: 1.15;
+      }
+      .formel-kort .fsym sub {
+        font-size: 12px;
+        font-style: normal;
+      }
+      .formel-kort .fop {
+        font-size: 21px;
+        line-height: 1.15;
+        padding-bottom: 1px;
+      }
+
+      /* Textfärgs-hjälpklasser (svart text är grundprincipen på papper) */
+      .t-ink   { color: var(--lab-ink); }
+      .t-soft  { color: var(--lab-ink-soft); }
+      .t-muted { color: var(--lab-ink-muted); }
+
       /* Mobil: scenen är bara ~195 px hög — kompakta overlay-korten så de
-         inte täcker rummet, och flytta upplevelse-kortet till nederkanten */
+         inte täcker rummet */
       @media (max-width: 600px) {
         .overlay-label {
           font-size: 10px !important;
           padding: 5px 7px !important;
           min-width: 0 !important;
         }
-        .overlay-label .text-2xl {
+        .overlay-label .ol-value {
           font-size: 14px !important;
           line-height: 1.2 !important;
         }
-        .overlay-label .text-xs {
-          font-size: 8.5px !important;
-        }
-        .overlay-label.top-4 {
-          top: 6px !important;
-        }
+        .overlay-label .ol-title { font-size: 8.5px !important; }
+        .overlay-label .ol-sub   { font-size: 8.5px !important; }
+        .overlay-label.top-4 { top: 6px !important; }
         .overlay-label.left-4 { left: 6px !important; }
         .overlay-label.right-4 { right: 6px !important; }
         .overlay-label.left-1\/2 {
           top: auto !important;
           bottom: 6px !important;
         }
+        /* Scenens sifferetiketter blir bara ~7 px höga på en 390 px-skärm.
+           Samma siffror står i värmebalansmätaren direkt under scenen,
+           så de döljs här. */
+        .scene-flow-label { display: none !important; }
       }
 
-      /* Info-ruta */
+      /* Info-ruta — cream med accentkant vänster (explanation-box-mönstret) */
       .info-box {
-        background: rgba(200, 50, 74, 0.08);
-        border: 1px solid rgba(200, 50, 74, 0.2);
+        background: var(--lab-bg);
+        border: 1px solid var(--lab-line);
+        border-left: 3px solid var(--lab-accent);
         border-radius: 10px;
       }
 
-      /* Temperatur-slider */
-      input[type="range"] {
-        -webkit-appearance: none;
-        appearance: none;
-        background: rgba(30, 41, 59, 0.8);
-        border-radius: 4px;
-        height: 8px;
-      }
-
-      input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #38bdf8;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
-      }
-
-      input[type="range"]::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #38bdf8;
-        cursor: pointer;
-        transition: all 0.2s;
-        border: none;
-        box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
-      }
-
-      input[type="range"]::-webkit-slider-thumb:hover {
-        background: #7dd3fc;
-        box-shadow: 0 0 14px rgba(200, 50, 74, 0.7);
-      }
-
-      /* Mörk checkbox – identisk med tyngdfaktor-sidan */
-      .dark-checkbox {
-        appearance: none;
-        -webkit-appearance: none;
-        width: 18px;
-        height: 18px;
-        border: 1.5px solid rgba(200, 50, 74, 0.4);
-        border-radius: 4px;
-        background: rgba(15, 23, 42, 0.8);
-        cursor: pointer;
-        position: relative;
-        flex-shrink: 0;
-        transition: all 0.2s;
-      }
-
-      .dark-checkbox:checked {
-        background: rgba(200, 50, 74, 0.25);
-        border-color: rgba(200, 50, 74, 0.8);
-      }
-
-      .dark-checkbox:checked::after {
-        content: '';
-        position: absolute;
-        left: 5px;
-        top: 2px;
-        width: 5px;
-        height: 9px;
-        border: 2px solid #38bdf8;
-        border-top: none;
-        border-left: none;
-        transform: rotate(45deg);
-      }
-
-      .dark-checkbox:hover {
-        border-color: rgba(200, 50, 74, 0.7);
-      }
-
-      /* Radio-knappar */
+      /* Radioknapps-kort: papper inaktiv, accent-markerad aktiv */
       .radio-option {
         display: flex;
         align-items: center;
@@ -200,34 +218,39 @@
         border: 2px solid;
         cursor: pointer;
         transition: all 0.2s;
+        color: var(--lab-ink);
       }
-
       .radio-option-active {
-        border-color: rgba(6, 182, 212, 0.5);
-        background: rgba(6, 182, 212, 0.10);
+        border-color: rgba(200, 50, 74, 0.55);
+        background: rgba(200, 50, 74, 0.07);
       }
-
       .radio-option-inactive {
-        border-color: rgba(71, 85, 105, 0.6);
-        background: rgba(15, 23, 42, 0.5);
+        border-color: var(--lab-line-strong);
+        background: rgba(255, 255, 255, 0.55);
       }
-
       .radio-option-inactive:hover {
-        border-color: rgba(100, 116, 139, 0.7);
+        border-color: rgba(15, 22, 32, 0.4);
       }
 
       input[type="radio"] {
-        accent-color: #38bdf8;
+        accent-color: var(--lab-accent);
         width: 18px;
         height: 18px;
         cursor: pointer;
         flex-shrink: 0;
       }
+      input[type="checkbox"].lab-checkbox {
+        accent-color: var(--lab-accent);
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
 
-      /* Fullskärm: visningsval uppe till höger (under "Du"-etiketten) och
-         temperaturglidaren uppe till vänster (under omgivningsetiketten) */
+      /* Fullskärm: visningsval uppe till höger och temperaturglidaren
+         uppe till vänster */
       .scene-toggles {
-        position: absolute; top: 122px; right: 14px; z-index: 6;
+        position: absolute; top: 132px; right: 14px; z-index: 6;
         background: rgba(246,242,234,0.94);
         -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
         border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
@@ -256,7 +279,7 @@
       }
 
       .fs-sliders {
-        position: absolute; top: 160px; left: 14px; z-index: 6;
+        position: absolute; top: 168px; left: 14px; z-index: 6;
         width: 300px; max-width: 44vw;
         background: rgba(246,242,234,0.94);
         -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
@@ -272,6 +295,12 @@
         font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
         white-space: nowrap; color: var(--lab-ink, #0f1620);
       }
+
+      @keyframes flowPulse {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0.78; }
+      }
+      .flow-anim { animation: flowPulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     </style>
     <script type="importmap">
 {
@@ -288,92 +317,302 @@
       import ReactDOM from 'react-dom/client';
       import { Thermometer, MoveHorizontal, Info } from 'lucide-react';
 
-      // ===== UTILS: CONVERSIONS =====
-      const kelvinToCelsius = (k) => {
-        return Math.round(k - 273.15);
+      // =====================================================================
+      // FYSIKALISK MODELL — kroppens värmebalans i vila
+      // ---------------------------------------------------------------------
+      // 1. Ämnesomsättningen alstrar hela tiden värme. En vuxen i vila
+      //    motsvarar ett element på ca 100 W (80–100 W). Termodynamikens
+      //    första huvudsats kräver att exakt lika mycket värme lämnar kroppen,
+      //    annars ändras kroppstemperaturen.
+      //
+      // 2. Det är HUDENS YTA som växlar värme med rummet, inte kärnan.
+      //    Huden håller ca 33 °C medan kärnan håller 37 °C.
+      //
+      // 3. Värmeutbytet med rummet är DUBBELRIKTAT. Allt som är varmare än
+      //    absoluta nollpunkten strålar värme, så rummet strålar hela tiden
+      //    in värme mot kroppen — samtidigt som huden strålar ut. Båda
+      //    bruttoflödena modelleras Stefan–Boltzmann-mässigt som C · T⁴
+      //    (T i kelvin), med konstanten C kalibrerad så att NETTOT
+      //
+      //        P_netto = C · (T_hud⁴ − T_luft⁴)
+      //
+      //    blir precis 100 W vid 22 °C — då råder termisk komfort.
+      //    (Konvektionen bakas in i samma konstant; en klädd person i
+      //    stillastående luft. Bruttoflödena hamnar då på realistiska
+      //    ~700 W ut och ~600 W in.)
+      //
+      // 4. Räcker inte den passiva avgivningen måste resten bort genom
+      //    AVDUNSTNING (svettning). Är luften varmare än huden vänder
+      //    nettoflödet helt: värme strömmar IN i kroppen och bara
+      //    avdunstning kyler.
+      //
+      // 5. Upplevelsen styrs av balansen P_netto − P_metabol, inte av om
+      //    luften är kallare än kroppens 37 °C. Därför känns 36 °C hett.
+      // =====================================================================
+
+      const T_HUD = 33;                        // °C — hudens yttemperatur i vila
+      const T_KARNA = 37;                      // °C — kroppens kärntemperatur
+      const P_METABOL = 100;                   // W  — värmeeffekt i vila
+      const T_KOMFORT = 22;                    // °C — lufttemperatur för komfort
+
+      const K4 = (c) => Math.pow(c + 273.15, 4);           // (T i kelvin)⁴
+      const C_STR = P_METABOL / (K4(T_HUD) - K4(T_KOMFORT)); // ≈ 8,4·10⁻⁸ W/K⁴
+
+      const P_UT_STRAL = C_STR * K4(T_HUD);    // ≈ 730 W — konstant (huden 33 °C)
+      const stralIn = (tAir) => C_STR * K4(tAir);
+
+      const T_MIN = -20;                       // °C — glidarens ändlägen
+      const T_MAX = 50;
+
+      // ===== UTILS =====
+      const NB = ' ';                     // hårt mellanslag
+      const MINUS = '−';                  // äkta minustecken
+
+      const kelvin = (c) => Math.round(c + 273.15);
+
+      const fmtC = (c) => {
+        const r = Math.round(c);
+        return (r < 0 ? MINUS : '') + Math.abs(r) + NB + '°C';
       };
 
-      const celsiusToKelvin = (c) => {
-        return c + 273.15;
+      const fmtW = (w) => {
+        const r = Math.round(w);
+        if (r === 0) return '0' + NB + 'W';
+        return (r < 0 ? MINUS : '') + Math.abs(r) + NB + 'W';
       };
 
-      const scaleArrowSize = (temp) => {
-        // Scaling proportional to T^4 (Stefan-Boltzmann Law)
-        const referenceTemp = 310;
-        const ratio = temp / referenceTemp;
-        const scale = 0.85 * Math.pow(ratio, 4);
-        return Number(scale.toFixed(3));
+      // Bruttoflödena är modellvärden — avrunda till tiotal W
+      const fmtW10 = (w) => {
+        const r = Math.round(w / 10) * 10;
+        if (r === 0) return '0' + NB + 'W';
+        return (r < 0 ? MINUS : '') + Math.abs(r) + NB + 'W';
       };
 
-      // ===== COMPONENT: HEAT ARROW =====
-      const HeatArrow = ({ x, y, angle, scale, color, animate = true }) => {
-        if (scale <= 0.1) return null;
+      // Nettoflöde ut från huden (positivt = ut, negativt = in i kroppen)
+      const heatOut = (tAir) => P_UT_STRAL - stralIn(tAir);
 
-        const transform = `translate(${x}, ${y}) rotate(${angle}) scale(${scale})`;
+      // Pillängder. Bruttopilarna ("alla"-läget) är STRIKT proportionella
+      // mot effekten så att ut- och in-pilen kan jämföras med ögat.
+      const lenGross = (p) => 0.19 * Math.abs(p);
+      // Nettopilarna ("balans"-läget) är proportionella i det normala
+      // spannet och mättas mjukt först vid extremkyla.
+      const lenNet = (p) => 260 * Math.tanh(Math.abs(p) * 0.9 / 260);
 
-        const style = animate ? {
-          animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-        } : {};
+      // Upplevelsen bestäms av balansen mellan avgiven och alstrad värme.
+      const sensation = (balans) => {
+        if (balans > 100) return {
+          text: 'MYCKET KALLT', tone: '#1e3a8a',
+          why: 'Du förlorar långt mer värme än kroppen hinner alstra.'
+        };
+        if (balans > 39) return {
+          text: 'KALLT', tone: '#1d4ed8',
+          why: 'Värmeförlusten är mycket större än värmeproduktionen.'
+        };
+        if (balans > 9) return {
+          text: 'SVALT', tone: '#2563eb',
+          why: 'Du gör dig av med lite mer värme än du alstrar.'
+        };
+        if (balans >= -9) return {
+          text: 'BEHAGLIGT', tone: '#15803d',
+          why: 'Du gör dig av med precis så mycket värme som du alstrar.'
+        };
+        if (balans >= -39) return {
+          text: 'VARMT', tone: '#c2410c',
+          why: 'Du blir inte av med all värme — resten måste svettas bort.'
+        };
+        if (balans >= -94) return {
+          text: 'MYCKET VARMT', tone: '#c8324a',
+          why: 'Nästan ingen värme lämnar huden passivt. Du svettas mycket.'
+        };
+        return {
+          text: 'HETT', tone: '#991b1b',
+          why: 'Luften är varmare än huden, så värme strömmar in i kroppen. Bara avdunstning kyler.'
+        };
+      };
 
-        return React.createElement('g', { transform, style },
-          React.createElement('path', {
-            d: "M -40 -10 L 20 -10 L 20 -25 L 60 0 L 20 25 L 20 10 L -40 10 Z",
-            fill: color,
-            stroke: "rgba(15, 23, 42, 0.6)",
-            strokeWidth: "1.5",
-            strokeLinejoin: "round"
+      // ===== FÄRGER (mörka nog för ljus pappersbakgrund) =====
+      const COL = {
+        ut: '#c8324a',       // värme som strålar ut från huden
+        in: '#c2410c',       // värme som strålar in från rummet
+        metabol: '#b45309',  // kroppens egen värmeproduktion
+        metabolGlow: '#f59e0b',
+        referens: '#b45309', // streckad referenspil = det som måste bort
+        svett: '#0e7490',    // avdunstning
+        overskott: '#2563eb' // överskottet som kyler ner dig
+      };
+
+      // ===== COMPONENT: FLOW ARROW (vågrät) =====
+      // Pekar från (xTail, y) till (xTip, y). Skaftet slutar vid huvudets
+      // bas; fast huvudstorlek — det är LÄNGDEN som bär informationen.
+      const FlowArrow = ({ xTail, xTip, y, color, dashed = false, animate = true }) => {
+        const len = Math.abs(xTip - xTail);
+        if (len < 14) return null;
+        const dir = xTip > xTail ? 1 : -1;
+        const headL = Math.min(20, Math.max(13, len * 0.35));
+        const headW = 11;
+        const baseX = xTip - dir * headL;
+        return React.createElement('g', {
+          className: animate && !dashed ? 'flow-anim' : undefined
+        },
+          React.createElement('line', {
+            x1: xTail, y1: y, x2: baseX, y2: y,
+            stroke: color,
+            strokeWidth: dashed ? 3 : 12,
+            strokeLinecap: 'butt',
+            strokeDasharray: dashed ? '8 6' : undefined
           }),
-          React.createElement('style', null, `
-            @keyframes pulse {
-              0%, 100% { opacity: 1; transform: ${transform} scale(1); }
-              50% { opacity: 0.85; transform: ${transform} scale(0.95); }
-            }
-          `)
+          React.createElement('polygon', {
+            points: `${baseX},${y - headW} ${xTip},${y} ${baseX},${y + headW}`,
+            fill: dashed ? 'none' : color,
+            stroke: dashed ? color : 'none',
+            strokeWidth: dashed ? 2.4 : 0,
+            strokeLinejoin: 'round'
+          })
         );
       };
 
+      // ===== COMPONENT: EVAPORATION ARROW (uppåt) =====
+      const EvapArrow = ({ x, yBase, len, color }) => {
+        if (len < 14) return null;
+        const tipY = yBase - len;
+        const headY = tipY + 11;
+        return React.createElement('g', { className: 'flow-anim' },
+          React.createElement('line', {
+            x1: x, y1: yBase, x2: x, y2: headY,
+            stroke: color, strokeWidth: 5, strokeLinecap: 'butt'
+          }),
+          React.createElement('polygon', {
+            points: `${x - 7.5},${headY} ${x},${tipY} ${x + 7.5},${headY}`,
+            fill: color
+          })
+        );
+      };
+
+      // ===== SCENENS REKVISITA =====
+      const el = React.createElement;
+
+      // Människa: klädd figur (t-shirt + byxor), ritad med omsorg.
+      // Fötterna står på golvet (lokal y = 100 ⇒ global y = 350).
+      // Siluetten håller sig inom |x| ≲ 31 så att flödespilarna
+      // (fäste vid ±40) aldrig ligger på armarna.
+      const Person = ({ cx, cy }) => el('g', { transform: `translate(${cx}, ${cy})` },
+        // Skugga på golvet
+        el('ellipse', { cx: 0, cy: 101, rx: 46, ry: 6, fill: 'rgba(15,22,32,0.10)' }),
+        // Byxor
+        el('path', {
+          d: 'M -19 12 L -21.5 86 Q -21.5 91 -17 91 L -7.5 91 Q -4.5 91 -4.3 87 L -1.5 38 L 1.5 38 L 4.3 87 Q 4.5 91 7.5 91 L 17 91 Q 21.5 91 21.5 86 L 19 12 Z',
+          fill: '#3f4a5c'
+        }),
+        // Skor
+        el('path', { d: 'M -22 91 L -5 91 L -5 98 Q -5 100 -8 100 L -20 100 Q -24 100 -24 96 Q -24 92 -22 91 Z', fill: '#2a2f3a' }),
+        el('path', { d: 'M 22 91 L 5 91 L 5 98 Q 5 100 8 100 L 20 100 Q 24 100 24 96 Q 24 92 22 91 Z', fill: '#2a2f3a' }),
+        // Armar (hud) — från ärmslut ner till händerna
+        el('path', { d: 'M -25 -12 Q -28 10 -26.5 30', fill: 'none', stroke: '#d4a37c', strokeWidth: 9, strokeLinecap: 'round' }),
+        el('path', { d: 'M 25 -12 Q 28 10 26.5 30', fill: 'none', stroke: '#d4a37c', strokeWidth: 9, strokeLinecap: 'round' }),
+        el('circle', { cx: -26.5, cy: 34, r: 5.2, fill: '#d4a37c' }),
+        el('circle', { cx: 26.5, cy: 34, r: 5.2, fill: '#d4a37c' }),
+        // Hals
+        el('rect', { x: -6.5, y: -58, width: 13, height: 10, fill: '#c99a70' }),
+        // T-shirt (axlar, korta ärmar, midja)
+        el('path', {
+          d: 'M 0 -52 C -13 -52 -23 -48 -25.5 -40 L -30 -14 Q -30.5 -9 -26 -8.5 L -20.5 -8 L -20.5 8 Q -20.5 15 -13 15 L 13 15 Q 20.5 15 20.5 8 L 20.5 -8 L 26 -8.5 Q 30.5 -9 30 -14 L 25.5 -40 C 23 -48 13 -52 0 -52 Z',
+          fill: '#6b7a8f'
+        }),
+        // Halsringning
+        el('path', { d: 'M -8 -51 Q 0 -45 8 -51', fill: 'none', stroke: '#59687c', strokeWidth: 2.5, strokeLinecap: 'round' }),
+        // Huvud
+        el('circle', { cx: 0, cy: -74, r: 20, fill: '#d4a37c', stroke: 'rgba(90,60,35,0.35)', strokeWidth: 1.4 }),
+        // Hår
+        el('path', {
+          d: 'M -20 -74 A 20 20 0 0 1 20 -74 L 20 -71 Q 12 -82 0 -81.5 Q -13 -81 -20 -68 Z',
+          fill: '#4a3426'
+        })
+      );
+
+      // Krukväxt i terrakottakruka
+      const Plant = ({ cx, cy }) => el('g', { transform: `translate(${cx}, ${cy})` },
+        el('ellipse', { cx: 0, cy: 93, rx: 27, ry: 5, fill: 'rgba(15,22,32,0.10)' }),
+        // Stjälkar
+        el('path', { d: 'M 0 40 C -6 10 -16 -8 -28 -22', fill: 'none', stroke: '#3f7a49', strokeWidth: 3 }),
+        el('path', { d: 'M 0 40 C 2 8 1 -14 0 -34', fill: 'none', stroke: '#3f7a49', strokeWidth: 3 }),
+        el('path', { d: 'M 0 40 C 6 14 15 -2 26 -14', fill: 'none', stroke: '#3f7a49', strokeWidth: 3 }),
+        // Blad (två gröna toner + tunn nerv)
+        el('g', { transform: 'rotate(-38 -28 -22)' },
+          el('ellipse', { cx: -28, cy: -22, rx: 15, ry: 8.5, fill: '#4c8f57' }),
+          el('line', { x1: -41, y1: -22, x2: -15, y2: -22, stroke: '#3c7847', strokeWidth: 1.2 })
+        ),
+        el('g', { transform: 'rotate(-90 0 -36)' },
+          el('ellipse', { cx: 0, cy: -36, rx: 14, ry: 8, fill: '#3c7847' }),
+          el('line', { x1: -12, y1: -36, x2: 12, y2: -36, stroke: '#2f5f39', strokeWidth: 1.2 })
+        ),
+        el('g', { transform: 'rotate(30 26 -14)' },
+          el('ellipse', { cx: 26, cy: -14, rx: 14, ry: 8, fill: '#4c8f57' }),
+          el('line', { x1: 14, y1: -14, x2: 38, y2: -14, stroke: '#3c7847', strokeWidth: 1.2 })
+        ),
+        el('g', { transform: 'rotate(-15 -14 6)' },
+          el('ellipse', { cx: -14, cy: 6, rx: 10, ry: 6, fill: '#5a9e64' }),
+          el('line', { x1: -23, y1: 6, x2: -5, y2: 6, stroke: '#3c7847', strokeWidth: 1 })
+        ),
+        el('g', { transform: 'rotate(18 12 2)' },
+          el('ellipse', { cx: 12, cy: 2, rx: 10, ry: 6, fill: '#5a9e64' }),
+          el('line', { x1: 3, y1: 2, x2: 21, y2: 2, stroke: '#3c7847', strokeWidth: 1 })
+        ),
+        // Kruka med fat och rand
+        el('path', { d: 'M -21 44 L 21 44 L 16 88 Q 15.4 92 11 92 L -11 92 Q -15.4 92 -16 88 Z', fill: '#b06a3e', stroke: 'rgba(80,45,20,0.35)', strokeWidth: 1.2 }),
+        el('rect', { x: -25, y: 36, width: 50, height: 10, rx: 3.5, fill: '#9a5a34', stroke: 'rgba(80,45,20,0.35)', strokeWidth: 1.2 }),
+        el('line', { x1: -18.5, y1: 62, x2: 18.5, y2: 62, stroke: 'rgba(80,45,20,0.22)', strokeWidth: 2 })
+      );
+
+      // Trästol
+      const Chair = ({ cx, cy }) => el('g', { transform: `translate(${cx}, ${cy})` },
+        el('ellipse', { cx: 0, cy: 71, rx: 42, ry: 6, fill: 'rgba(15,22,32,0.10)' }),
+        // Ben
+        el('rect', { x: -33, y: 0, width: 6.5, height: 70, rx: 2.5, fill: '#7c4e2c' }),
+        el('rect', { x: 26.5, y: 0, width: 6.5, height: 70, rx: 2.5, fill: '#7c4e2c' }),
+        // Tvärslå mellan benen
+        el('rect', { x: -30, y: 38, width: 60, height: 5, rx: 2, fill: '#6f4527' }),
+        // Ryggstöd: två stolpar, överliggare och mittslat
+        el('rect', { x: -33, y: -56, width: 6.5, height: 52, rx: 2.5, fill: '#8a5a36' }),
+        el('rect', { x: 26.5, y: -56, width: 6.5, height: 52, rx: 2.5, fill: '#8a5a36' }),
+        el('rect', { x: -35, y: -62, width: 70, height: 9.5, rx: 4.5, fill: '#8a5a36', stroke: 'rgba(60,35,15,0.3)', strokeWidth: 1 }),
+        el('rect', { x: -29, y: -37, width: 58, height: 6.5, rx: 3, fill: '#8a5a36' }),
+        // Sits
+        el('rect', { x: -39, y: -7, width: 78, height: 9, rx: 4, fill: '#9a6a40', stroke: 'rgba(60,35,15,0.3)', strokeWidth: 1 })
+      );
+
       // ===== COMPONENT: SIMULATION CANVAS =====
-      const SimulationCanvas = ({ envTemp, humanTemp, mode, showSensation,
+      const SimulationCanvas = ({ tAir, mode, showSensation,
                                   sceneRef, isFullscreen, onToggleFullscreen,
                                   onTempChange, onModeChange, onToggleSensation }) => {
-        const WARM_COLOR = "#ef4444";
-        const COOL_COLOR = "#3b82f6";
-        const NEUTRAL_COLOR = "#f59e0b";
-        const HUMAN_TEMP_COLOR = "#ef4444";
 
-        const envColor = envTemp > humanTemp ? WARM_COLOR : (envTemp < 285 ? COOL_COLOR : NEUTRAL_COLOR);
-        const humanColor = WARM_COLOR;
-
-        const humanAbsScale = scaleArrowSize(humanTemp);
-        const envAbsScale = scaleArrowSize(envTemp);
-
-        const rawDiff = Math.abs(humanAbsScale - envAbsScale);
-        const netScale = Math.min(rawDiff, Math.max(humanAbsScale, envAbsScale));
-
-        const netDirection = envTemp > humanTemp ? 'in' : 'out';
+        const pIn = stralIn(tAir);                               // W brutto in
+        const pOut = heatOut(tAir);                              // W netto, + = ut
+        const pSvett = Math.max(0, P_METABOL - pOut);            // W som måste avdunsta
+        const balans = pOut - P_METABOL;                         // + = du kyls ner
+        const sens = sensation(balans);
 
         const CENTER_X = 400;
         const CENTER_Y = 250;
-        const LEFT_X = 150;
-        const RIGHT_X = 650;
+        // Flödespilarnas fästpunkter: strax utanför kroppens siluett
+        const EDGE_R = 440;
+        const EDGE_L = 360;
+        const Y_UT = 208;    // utpilarnas höjd (bröstkorg)
+        const Y_IN = 268;    // inpilarnas höjd (höft)
 
-        const netLeftArrowX = 370 - (60 * netScale);
-        const netRightArrowX = 430 + (60 * netScale);
+        const flowColor = pOut >= 0 ? COL.ut : COL.in;
+        const lUt = lenGross(P_UT_STRAL);
+        const lIn = lenGross(pIn);
+        const lNet = lenNet(pOut);
+        const lRef = lenNet(P_METABOL);
 
-        let sensationText = "NEUTRALT";
-        let sensationColorClass = "";
-        let sensationTextStyle = { color: '#0f1620' };
-        let sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(15, 22, 32, 0.25)' };
+        // Avdunstningens pillängd. Taket är satt så att pilspetsarna alltid
+        // stannar UNDER upplevelse-kortet i scenens överkant (tips ≥ y 128).
+        const evapLen = pSvett > 0 ? Math.min(66, 14 + 40 * pSvett / P_METABOL) : 0;
 
-        if (envTemp < humanTemp) {
-          sensationText = "KALLT";
-          sensationTextStyle = { color: '#1e3a8a' };
-          sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(30, 58, 138, 0.4)' };
-        } else if (envTemp > humanTemp) {
-          sensationText = "VARMT";
-          sensationTextStyle = { color: '#c8324a' };
-          sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(200, 50, 74, 0.4)' };
-        }
+        // Rummets ton: svalt blått under 22 °C, varm ton över — subtil på papper
+        const tint = tAir < T_KOMFORT
+          ? { color: '#3b82f6', op: Math.min(0.11, (T_KOMFORT - tAir) * 0.0026) }
+          : { color: '#ef4444', op: Math.min(0.10, (tAir - T_KOMFORT) * 0.0036) };
 
         // Fullskärmsknapp (kanonisk ikon, global .fs-btn-stil)
         const fsIconPaths = isFullscreen
@@ -406,32 +645,32 @@
           React.createElement('div', { className: 'st-title mt' }, 'Visningsläge'),
           React.createElement('label', null,
             React.createElement('input', {
-              type: 'radio', name: 'mode-fs', checked: mode === 'absolute',
-              onChange: () => onModeChange('absolute')
+              type: 'radio', name: 'mode-fs', checked: mode === 'alla',
+              onChange: () => onModeChange('alla')
             }),
             React.createElement('span', null, 'Alla värmeflöden')
           ),
           React.createElement('label', null,
             React.createElement('input', {
-              type: 'radio', name: 'mode-fs', checked: mode === 'net',
-              onChange: () => onModeChange('net')
+              type: 'radio', name: 'mode-fs', checked: mode === 'balans',
+              onChange: () => onModeChange('balans')
             }),
-            React.createElement('span', null, 'Resulterande flöde på människa')
+            React.createElement('span', null, 'Alstrat mot avgivet')
           )
         );
 
         // Fullskärm: temperaturglidaren direkt synlig uppe till vänster
         const fsSliders = isFullscreen && React.createElement('div', { className: 'fs-sliders' },
-          React.createElement('div', { className: 'fs-sliders-title' }, 'Omgivningens temperatur'),
+          React.createElement('div', { className: 'fs-sliders-title' }, 'Luftens temperatur'),
           React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: 10 } },
             React.createElement('input', {
-              type: 'range', min: '200', max: '400', step: '1',
-              value: envTemp, onChange: onTempChange,
+              type: 'range', min: String(T_MIN), max: String(T_MAX), step: '1',
+              value: tAir, onChange: onTempChange,
               style: { flex: 1 },
-              'aria-label': 'Omgivningens temperatur'
+              'aria-label': 'Luftens temperatur'
             }),
             React.createElement('span', { className: 'fs-sliders-value' },
-              kelvinToCelsius(envTemp) + "°C (" + Math.round(envTemp) + " K)"
+              fmtC(tAir) + ' (' + kelvin(tAir) + NB + 'K)'
             )
           )
         );
@@ -439,6 +678,7 @@
         return React.createElement('div', {
           className: "sim-wrapper scene-wrap w-full relative",
           style: { aspectRatio: '2 / 1', userSelect: 'none' },
+          'data-theme': 'ljusPapper',
           ref: sceneRef
         },
           // SVG
@@ -447,150 +687,179 @@
             viewBox: "0 0 800 400",
             xmlns: "http://www.w3.org/2000/svg"
           },
-            // Mörk bakgrund
-            React.createElement('rect', { x: "0", y: "0", width: "800", height: "400", fill: "#02060f" }),
-
-            // Subtilt rutnät
             React.createElement('defs', null,
-              React.createElement('pattern', {
-                id: "grid",
-                width: "40",
-                height: "40",
-                patternUnits: "userSpaceOnUse"
-              },
-                React.createElement('path', {
-                  d: "M 40 0 L 0 0 0 40",
-                  fill: "none",
-                  stroke: "rgba(200, 50, 74, 0.04)",
-                  strokeWidth: "1"
-                })
-              )
-            ),
-            React.createElement('rect', { x: "0", y: "0", width: "800", height: "400", fill: "url(#grid)" }),
-
-            // Golv – ljus papper-ton
-            React.createElement('rect', { x: "0", y: "350", width: "800", height: "50",
-              fill: "url(#floorGrad)" }),
-            React.createElement('defs', null,
+              React.createElement('linearGradient', { id: "paperGrad", x1: "0", y1: "0", x2: "0", y2: "1" },
+                React.createElement('stop', { offset: "0%", stopColor: "#f7f2e8" }),
+                React.createElement('stop', { offset: "100%", stopColor: "#efe8d8" })
+              ),
               React.createElement('linearGradient', { id: "floorGrad", x1: "0", y1: "0", x2: "0", y2: "1" },
-                React.createElement('stop', { offset: "0%", stopColor: "#d4c9b1" }),
-                React.createElement('stop', { offset: "100%", stopColor: "#bfb398" })
+                React.createElement('stop', { offset: "0%", stopColor: "#e2d8c2" }),
+                React.createElement('stop', { offset: "100%", stopColor: "#d5c9ae" })
+              ),
+              React.createElement('radialGradient', { id: "metabolGlow" },
+                React.createElement('stop', { offset: "0%", stopColor: COL.metabolGlow, stopOpacity: "0.45" }),
+                React.createElement('stop', { offset: "55%", stopColor: COL.metabolGlow, stopOpacity: "0.16" }),
+                React.createElement('stop', { offset: "100%", stopColor: COL.metabolGlow, stopOpacity: "0" })
               )
             ),
+
+            // Papper + golv
+            React.createElement('rect', { x: "0", y: "0", width: "800", height: "400", fill: "url(#paperGrad)" }),
+            React.createElement('rect', { x: "0", y: "350", width: "800", height: "50", fill: "url(#floorGrad)" }),
             React.createElement('line', {
               x1: "0", y1: "350", x2: "800", y2: "350",
-              stroke: "rgba(15, 22, 32, 0.2)", strokeWidth: "1"
+              stroke: "rgba(15, 22, 32, 0.25)", strokeWidth: "1.2"
             }),
-            // Golvlinjer – subtila
-            React.createElement('line', { x1: "100", y1: "350", x2: "50", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "250", y1: "350", x2: "220", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "400", y1: "350", x2: "400", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "550", y1: "350", x2: "580", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "700", y1: "350", x2: "750", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
+            // Golvbrädor – subtila (ingen i x = 400, där metabolism-etiketten står)
+            React.createElement('line', { x1: "110", y1: "350", x2: "70", y2: "400", stroke: "rgba(15, 22, 32, 0.08)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "255", y1: "350", x2: "230", y2: "400", stroke: "rgba(15, 22, 32, 0.08)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "545", y1: "350", x2: "570", y2: "400", stroke: "rgba(15, 22, 32, 0.08)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "690", y1: "350", x2: "730", y2: "400", stroke: "rgba(15, 22, 32, 0.08)", strokeWidth: "1" }),
+            // Golvsockel
+            React.createElement('line', {
+              x1: "0", y1: "336", x2: "800", y2: "336",
+              stroke: "rgba(15, 22, 32, 0.10)", strokeWidth: "1"
+            }),
 
-            // Vägg – ljus papper-ton bakgrund
-            React.createElement('rect', { x: "0", y: "330", width: "800", height: "20",
-              fill: "rgba(212, 201, 177, 0.5)" }),
-            React.createElement('line', { x1: "0", y1: "330", x2: "800", y2: "330",
-              stroke: "rgba(15, 22, 32, 0.15)", strokeWidth: "1" }),
+            // Rummets temperaturton
+            React.createElement('rect', {
+              x: "0", y: "0", width: "800", height: "400",
+              fill: tint.color, opacity: tint.op, style: { pointerEvents: 'none' }
+            }),
 
-            // Plant
-            React.createElement('g', { transform: `translate(${LEFT_X}, 260)` },
-              React.createElement('path', { d: "M -20 90 L 20 90 L 25 40 L -25 40 Z", fill: "#7c4f2e", stroke: "rgba(0,0,0,0.4)", strokeWidth: "1.5" }),
-              React.createElement('ellipse', { cx: "0", cy: "40", rx: "25", ry: "5", fill: "#5a3520", stroke: "rgba(0,0,0,0.4)", strokeWidth: "1.5" }),
-              React.createElement('path', { d: "M 0 40 Q -10 0 -40 -20", fill: "none", stroke: "#15803d", strokeWidth: "3.5" }),
-              React.createElement('path', { d: "M 0 40 Q 10 10 40 -10", fill: "none", stroke: "#15803d", strokeWidth: "3.5" }),
-              React.createElement('path', { d: "M 0 40 L 0 -30", fill: "none", stroke: "#15803d", strokeWidth: "3.5" }),
-              React.createElement('ellipse', { cx: "-40", cy: "-20", rx: "15", ry: "10", fill: "#16a34a", stroke: "rgba(0,0,0,0.3)", strokeWidth: "1.5", transform: "rotate(-20 -40 -20)" }),
-              React.createElement('ellipse', { cx: "40", cy: "-10", rx: "15", ry: "10", fill: "#16a34a", stroke: "rgba(0,0,0,0.3)", strokeWidth: "1.5", transform: "rotate(20 40 -10)" }),
-              React.createElement('ellipse', { cx: "0", cy: "-30", rx: "10", ry: "15", fill: "#16a34a", stroke: "rgba(0,0,0,0.3)", strokeWidth: "1.5" })
+            // Rekvisita
+            React.createElement(Plant, { cx: 85, cy: 260 }),
+            React.createElement(Chair, { cx: 705, cy: 280 }),
+
+            // Kroppens egen värmeproduktion – glöd i bålen (alltid närvarande)
+            React.createElement('ellipse', {
+              cx: CENTER_X, cy: CENTER_Y - 5, rx: "78", ry: "96",
+              fill: "url(#metabolGlow)", style: { pointerEvents: 'none' }
+            }),
+
+            React.createElement(Person, { cx: CENTER_X, cy: CENTER_Y }),
+
+            // ---------- LÄGE: ALLA VÄRMEFLÖDEN ----------
+            mode === 'alla' && React.createElement(React.Fragment, null,
+              // Strålning UT från huden (konstant ~730 W) — båda sidor
+              React.createElement(FlowArrow, { xTail: EDGE_R, xTip: EDGE_R + lUt, y: Y_UT, color: COL.ut }),
+              React.createElement(FlowArrow, { xTail: EDGE_L, xTip: EDGE_L - lUt, y: Y_UT, color: COL.ut }),
+
+              // Strålning IN från rummet (växer med T⁴) — båda sidor
+              React.createElement(FlowArrow, { xTail: EDGE_R + lIn, xTip: EDGE_R, y: Y_IN, color: COL.in }),
+              React.createElement(FlowArrow, { xTail: EDGE_L - lIn, xTip: EDGE_L, y: Y_IN, color: COL.in }),
+
+              // Avdunstning (svett) – uppåt, vid sidan om huvudet. Foten ligger
+              // i axelhöjd (y = 194) så pilarna aldrig nuddar utpilarna (y ≥ 202).
+              React.createElement(EvapArrow, { x: 336, yBase: 194, len: evapLen, color: COL.svett }),
+              React.createElement(EvapArrow, { x: 464, yBase: 194, len: evapLen, color: COL.svett }),
+
+              // Etiketter — i fri yta till vänster om pilarna (växten är låg).
+              // Ut-etiketten ligger UNDER sin pil: ytan ovanför täcks av
+              // "Luften i rummet"-kortet (HTML-overlay uppe till vänster).
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "345", y: "236", textAnchor: "end", fill: COL.ut, fontSize: "15",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Huden strålar ut ≈ ' + fmtW10(P_UT_STRAL)),
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "345", y: "298", textAnchor: "end", fill: COL.in, fontSize: "15",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Rummet strålar in ≈ ' + fmtW10(pIn)),
+              pSvett > 0.5 && React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "482", y: "150", fill: COL.svett, fontSize: "15",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Avdunstning ' + fmtW(pSvett)),
+              // Nettot, i fri yta till höger ovanför stolen
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "482", y: "190", fill: "#0f1620", fontSize: "14",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, pOut >= 0.5
+                  ? 'Netto: ' + fmtW(pOut) + ' ut'
+                  : (pOut <= -0.5 ? 'Netto: ' + fmtW(-pOut) + ' in' : 'Netto: 0' + NB + 'W')),
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: CENTER_X, y: "376", textAnchor: "middle", fill: "#7a5410",
+                fontSize: "14", fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Ämnesomsättningen alstrar ' + fmtW(P_METABOL))
             ),
 
-            // Chair
-            React.createElement('g', { transform: `translate(${RIGHT_X}, 280)` },
-              React.createElement('path', { d: "M -30 70 L -30 0 L 30 0 L 30 70", fill: "none", stroke: "#92400e", strokeWidth: "4", strokeLinecap: "round" }),
-              React.createElement('path', { d: "M -30 0 L -30 -50 L 30 -50 L 30 0", fill: "none", stroke: "#92400e", strokeWidth: "4", strokeLinejoin: "round" }),
-              React.createElement('path', { d: "M -25 -45 L -25 -5 L -5 -5 L -5 -45 Z", fill: "none", stroke: "#92400e", strokeWidth: "1.5" }),
-              React.createElement('path', { d: "M 5 -45 L 5 -5 L 25 -5 L 25 -45 Z", fill: "none", stroke: "#92400e", strokeWidth: "1.5" }),
-              React.createElement('path', { d: "M -35 0 L 35 0", stroke: "#92400e", strokeWidth: "5", strokeLinecap: "round" })
-            ),
+            // ---------- LÄGE: ALSTRAT MOT AVGIVET ----------
+            mode === 'balans' && React.createElement(React.Fragment, null,
+              // Ifylld pil = NETTOT som faktiskt avges (eller tas upp)
+              pOut >= 0
+                ? React.createElement(React.Fragment, null,
+                    React.createElement(FlowArrow, { xTail: EDGE_R, xTip: EDGE_R + lNet, y: CENTER_Y, color: flowColor }),
+                    React.createElement(FlowArrow, { xTail: EDGE_L, xTip: EDGE_L - lNet, y: CENTER_Y, color: flowColor })
+                  )
+                : React.createElement(React.Fragment, null,
+                    React.createElement(FlowArrow, { xTail: EDGE_R + lNet, xTip: EDGE_R, y: CENTER_Y, color: flowColor }),
+                    React.createElement(FlowArrow, { xTail: EDGE_L - lNet, xTip: EDGE_L, y: CENTER_Y, color: flowColor })
+                  ),
 
-            // Human
-            React.createElement('g', { transform: `translate(${CENTER_X}, ${CENTER_Y})` },
-              React.createElement('line', { x1: "-10", y1: "40", x2: "-20", y2: "100", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
-              React.createElement('line', { x1: "10", y1: "40", x2: "20", y2: "100", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
-              React.createElement('line', { x1: "-15", y1: "-20", x2: "-45", y2: "30", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
-              React.createElement('line', { x1: "15", y1: "-20", x2: "45", y2: "30", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
-              React.createElement('ellipse', { cx: "0", cy: "0", rx: "20", ry: "50", fill: "#c49a7d", stroke: "rgba(0,0,0,0.4)", strokeWidth: "2" }),
-              React.createElement('circle', { cx: "0", cy: "-70", r: "25", fill: "#c49a7d", stroke: "rgba(0,0,0,0.4)", strokeWidth: "2" })
-            ),
+              // Streckad referenspil = det som MÅSTE bort (100 W), ovanpå
+              React.createElement(FlowArrow, { xTail: EDGE_R, xTip: EDGE_R + lRef, y: CENTER_Y, color: COL.referens, dashed: true }),
+              React.createElement(FlowArrow, { xTail: EDGE_L, xTip: EDGE_L - lRef, y: CENTER_Y, color: COL.referens, dashed: true }),
 
-            // Arrows
-            mode === 'absolute' && React.createElement(React.Fragment, null,
-              React.createElement(HeatArrow, { x: LEFT_X + 40, y: 250, angle: 0, scale: envAbsScale, color: envColor }),
-              React.createElement(HeatArrow, { x: RIGHT_X - 40, y: 250, angle: 180, scale: envAbsScale, color: envColor }),
-              React.createElement(HeatArrow, { x: CENTER_X - 40, y: CENTER_Y, angle: 180, scale: humanAbsScale, color: humanColor }),
-              React.createElement(HeatArrow, { x: CENTER_X + 40, y: CENTER_Y, angle: 0, scale: humanAbsScale, color: humanColor }),
-              React.createElement('g', { opacity: 0.4 },
-                React.createElement('path', { d: "M 50 100 Q 70 120 50 140", stroke: envColor, strokeWidth: "2.5", fill: "none" }),
-                React.createElement('path', { d: "M 40 100 Q 60 120 40 140", stroke: envColor, strokeWidth: "2.5", fill: "none" }),
-                React.createElement('path', { d: "M 750 100 Q 730 120 750 140", stroke: envColor, strokeWidth: "2.5", fill: "none" }),
-                React.createElement('path', { d: "M 760 100 Q 740 120 760 140", stroke: envColor, strokeWidth: "2.5", fill: "none" })
-              )
-            ),
+              // Etiketterna ligger i fri yta ovanför respektive under pilarna
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "470", y: "196", fill: COL.referens, fontSize: "15",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Måste bort: ' + fmtW(P_METABOL)),
+              React.createElement('text', {
+                className: 'scene-flow-label',
+                x: "470", y: "322", fill: flowColor, fontSize: "15",
+                fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, pOut >= 0
+                  ? 'Avges netto: ' + fmtW(pOut)
+                  : 'Tas upp netto: ' + fmtW(-pOut)),
 
-            mode === 'net' && React.createElement(React.Fragment, null,
-              Math.abs(envTemp - humanTemp) > 0.5 ? (
-                netDirection === 'out' ? React.createElement(React.Fragment, null,
-                  React.createElement(HeatArrow, { x: CENTER_X - 50, y: CENTER_Y, angle: 180, scale: netScale, color: HUMAN_TEMP_COLOR }),
-                  React.createElement(HeatArrow, { x: CENTER_X + 50, y: CENTER_Y, angle: 0, scale: netScale, color: HUMAN_TEMP_COLOR })
-                ) : React.createElement(React.Fragment, null,
-                  React.createElement(HeatArrow, { x: netLeftArrowX, y: CENTER_Y, angle: 0, scale: netScale, color: envColor }),
-                  React.createElement(HeatArrow, { x: netRightArrowX, y: CENTER_Y, angle: 180, scale: netScale, color: envColor })
-                )
-              ) : React.createElement('text', {
-                x: CENTER_X,
-                y: CENTER_Y - 110,
-                textAnchor: "middle",
-                fontSize: "20",
-                fill: "#7dd3fc",
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: "bold"
-              }, "Termisk jämvikt")
+              Math.abs(balans) <= 9 && React.createElement('text', {
+                className: 'scene-flow-label',
+                x: CENTER_X, y: "376", textAnchor: "middle", fill: "#155e2b",
+                fontSize: "14", fontFamily: "Poppins, sans-serif", fontWeight: "600"
+              }, 'Termisk jämvikt — allt du alstrar hinner bort')
             )
           ),
 
-          // Overlay Labels
+          // ---------- Overlay-etiketter ----------
           React.createElement('div', {
-            className: "overlay-label ol-env absolute p-3 text-sm shadow-md",
-            style: { minWidth: '160px' }
+            className: "overlay-label ol-env absolute p-3 text-sm",
+            style: { minWidth: '150px' }
           },
-            React.createElement('strong', { className: "block text-slate-300 mb-1 text-xs" }, "Omgivning (luft, växt och stol)"),
-            React.createElement('div', { className: "text-2xl font-mono text-cyan-300 font-bold" },
-              kelvinToCelsius(envTemp) + "°C"
-            ),
-            React.createElement('div', { className: "text-slate-500 text-xs" }, "(" + Math.round(envTemp) + " K)")
+            React.createElement('span', { className: "ol-title" }, "Luften i rummet"),
+            React.createElement('div', { className: "ol-value" }, fmtC(tAir)),
+            React.createElement('div', { className: "ol-sub" }, "(" + kelvin(tAir) + NB + "K)")
           ),
 
           React.createElement('div', {
-            className: "overlay-label absolute top-4 right-4 p-3 text-sm shadow-md text-right",
+            className: "overlay-label absolute top-4 right-4 p-3 text-sm text-right",
             style: { minWidth: '130px' }
           },
-            React.createElement('strong', { className: "block text-slate-300 mb-1 text-xs" }, "Du (människa)"),
-            React.createElement('div', { className: "text-2xl font-mono text-cyan-300 font-bold" }, "37°C"),
-            React.createElement('div', { className: "text-slate-500 text-xs" }, "(310 K)")
+            React.createElement('span', { className: "ol-title" }, "Din hud"),
+            React.createElement('div', { className: "ol-value" }, fmtC(T_HUD)),
+            React.createElement('div', { className: "ol-sub" },
+              "(" + kelvin(T_HUD) + NB + "K) · kärna " + fmtC(T_KARNA))
           ),
 
+          // Upplevelse-kortet hålls medvetet kompakt (ingen motiveringsrad) —
+          // annars växer det ner över avdunstningspilarna. Motiveringen står
+          // i värmebalansmätaren under scenen.
           showSensation && React.createElement('div', {
-            className: "overlay-label absolute top-4 left-1/2 p-3 text-sm shadow-md text-center",
+            className: "overlay-label absolute top-4 left-1/2 p-3 text-sm text-center",
             style: {
               transform: 'translateX(-50%)',
-              minWidth: '140px',
-              ...sensationBgStyle
+              minWidth: '150px',
+              background: '#ffffff',
+              border: '1px solid ' + sens.tone + '66'
             }
           },
-            React.createElement('strong', { className: "block mb-1 text-xs", style: { color: '#5a6170' } }, "Du upplever det"),
-            React.createElement('div', { className: 'text-2xl font-bold', style: sensationTextStyle }, sensationText)
+            React.createElement('span', { className: "ol-title" }, "Du upplever det"),
+            React.createElement('div', { className: 'text-2xl font-bold', style: { color: sens.tone } }, sens.text)
           ),
 
           fsBtn,
@@ -599,11 +868,78 @@
         );
       };
 
+      // ===== COMPONENT: VÄRMEBALANSMÄTARE =====
+      const BalanceMeter = ({ tAir }) => {
+        const BAR_MAX = 250;   // W som motsvarar full stapel
+        const pOut = heatOut(tAir);
+        const pInBrutto = stralIn(tAir);
+        const pAvges = Math.max(0, pOut);
+        const pInNetto = Math.max(0, -pOut);
+        const pSvett = Math.max(0, P_METABOL - pOut);
+        const balans = pOut - P_METABOL;
+        const sens = sensation(balans);
+
+        const row = (key, label, value, watts, color, mark) => React.createElement('div', { key },
+          React.createElement('div', { className: "flex justify-between items-baseline gap-3 mb-1" },
+            React.createElement('span', { className: "meter-label" }, label),
+            React.createElement('span', { className: "meter-value", style: { color } }, value)
+          ),
+          React.createElement('div', { className: "meter-track" },
+            React.createElement('div', {
+              className: "meter-fill",
+              style: { width: Math.min(100, (watts / BAR_MAX) * 100) + '%', background: color }
+            }),
+            mark && React.createElement('div', {
+              className: "meter-mark",
+              style: { left: (P_METABOL / BAR_MAX) * 100 + '%' },
+              title: 'Så mycket måste bort'
+            })
+          )
+        );
+
+        const tredje = balans > 0.5
+          ? row('3', 'Överskott — mer värme lämnar dig än du alstrar', fmtW(balans), balans, COL.overskott, false)
+          : (pSvett > 0.5
+            ? row('3', 'Måste bort genom avdunstning (svettning)', fmtW(pSvett), pSvett, COL.svett, false)
+            : row('3', 'Kvar att bli av med på annat sätt', fmtW(0), 0, '#15803d', false));
+
+        return React.createElement('div', { className: "status-bar p-4" },
+          React.createElement('div', { className: "flex items-start gap-3 mb-4" },
+            React.createElement('div', {
+              className: "w-3 h-3 rounded-full flex-shrink-0",
+              style: { background: sens.tone, marginTop: '6px' }
+            }),
+            React.createElement('span', { className: "font-medium t-ink" },
+              sens.text.charAt(0) + sens.text.slice(1).toLowerCase() + ' — ' + sens.why
+            )
+          ),
+          React.createElement('div', { className: "space-y-3" },
+            row('1', 'Kroppen alstrar (ämnesomsättningen)', fmtW(P_METABOL), P_METABOL, COL.metabol, false),
+            row('2', 'Nettoflöde ut till luften', fmtW(pAvges), pAvges, COL.ut, true),
+            tredje
+          ),
+          pInNetto > 0.5 && React.createElement('p', { className: "text-xs mt-3", style: { color: COL.in } },
+            'Luften är varmare än huden — nettoflödet går i stället in i kroppen: ' + fmtW(pInNetto) + '.'
+          ),
+          React.createElement('p', { className: "text-xs t-muted mt-3" },
+            'Utbytet går åt båda hållen: huden strålar ut ≈ ' + fmtW10(P_UT_STRAL) +
+            ' och rummet strålar in ≈ ' + fmtW10(pInBrutto) + ' — skillnaden är nettoflödet. ' +
+            'Streckad markering visar de ' + fmtW(P_METABOL) + ' som måste bort för att kroppstemperaturen ska hållas konstant.'
+          )
+        );
+      };
+
       // ===== COMPONENT: APP =====
+      // Startvärden kan sättas via URL (?t=12&mode=balans) — används av
+      // skärmdumpstesterna; utan parametrar gäller 22 °C och "alla".
+      const qs = new URLSearchParams(window.location.search);
+      const T_START = qs.has('t') && Number.isFinite(Number(qs.get('t')))
+        ? Math.min(T_MAX, Math.max(T_MIN, Math.round(Number(qs.get('t')))))
+        : 22;
+
       const App = () => {
-        const HUMAN_TEMP_K = 310;
-        const [envTemp, setEnvTemp] = useState(293);
-        const [mode, setMode] = useState('absolute');
+        const [tAir, setTAir] = useState(T_START);
+        const [mode, setMode] = useState(qs.get('mode') === 'balans' ? 'balans' : 'alla');
         const [showSensation, setShowSensation] = useState(true);
         const [isFullscreen, setIsFullscreen] = useState(false);
         const sceneRef = useRef(null);
@@ -634,12 +970,10 @@
           }
         };
 
-        const handleTempChange = (e) => {
-          setEnvTemp(Number(e.target.value));
-        };
+        const handleTempChange = (e) => setTAir(Number(e.target.value));
 
         return React.createElement('div', {
-          className: "min-h-screen dark-container font-sans",
+          className: "min-h-screen font-sans",
           style: { fontFamily: 'Poppins, sans-serif' }
         },
           React.createElement('div', { className: "max-w-5xl mx-auto px-4 md:px-8 py-8" },
@@ -655,10 +989,32 @@
             // Header
             React.createElement('header', { className: "mb-8 text-center" },
               React.createElement('h1', {
-                className: "text-4xl md:text-5xl font-bold text-slate-100 mb-4 tracking-tight glow-text"
+                className: "text-4xl md:text-5xl font-bold mb-4 tracking-tight t-ink"
               }, "Värmeflöde"),
-              React.createElement('p', { className: "text-lg text-slate-400 max-w-2xl mx-auto" },
-                "Utforska hur värme strålar mellan en människa och omgivningen. Vi sänder alltid ut värme, men hur mycket vi tar emot beror på omgivningens temperatur."
+              React.createElement('p', { className: "text-lg t-soft max-w-2xl mx-auto mb-5" },
+                "Kroppen alstrar hela tiden ungefär 100" + NB + "W värme som måste bort. " +
+                "Värmeutbytet med rummet går åt båda hållen — huden strålar ut och rummet strålar in — " +
+                "och det är nettot av de två flödena du känner som kallt eller varmt."
+              ),
+              // Formelkort: nettoflödet = ut − in, med ord-etiketter
+              React.createElement('div', { className: "formel-kort" },
+                React.createElement('div', { className: "fvar" },
+                  React.createElement('span', { className: "flbl" }, "Nettoflöde"),
+                  React.createElement('span', { className: "fsym" },
+                    React.createElement('em', null, "P"), React.createElement('sub', null, "netto"))
+                ),
+                React.createElement('span', { className: "fop" }, "="),
+                React.createElement('div', { className: "fvar" },
+                  React.createElement('span', { className: "flbl" }, "Ut från huden"),
+                  React.createElement('span', { className: "fsym" },
+                    React.createElement('em', null, "P"), React.createElement('sub', null, "ut"))
+                ),
+                React.createElement('span', { className: "fop" }, MINUS),
+                React.createElement('div', { className: "fvar" },
+                  React.createElement('span', { className: "flbl" }, "In från rummet"),
+                  React.createElement('span', { className: "fsym" },
+                    React.createElement('em', null, "P"), React.createElement('sub', null, "in"))
+                )
               )
             ),
 
@@ -668,8 +1024,7 @@
               // Simulation Area
               React.createElement('div', { className: "lg:col-span-2 space-y-4" },
                 React.createElement(SimulationCanvas, {
-                  envTemp: envTemp,
-                  humanTemp: HUMAN_TEMP_K,
+                  tAir: tAir,
                   mode: mode,
                   showSensation: showSensation,
                   sceneRef: sceneRef,
@@ -679,36 +1034,7 @@
                   onModeChange: setMode,
                   onToggleSensation: setShowSensation
                 }),
-
-                // Status-rad
-                React.createElement('div', {
-                  className: "status-bar p-4 flex justify-between items-center"
-                },
-                  React.createElement('div', { className: "flex items-center gap-3" },
-                    React.createElement('div', {
-                      className: "w-3 h-3 rounded-full flex-shrink-0",
-                      style: {
-                        background: envTemp < HUMAN_TEMP_K
-                          ? '#3b82f6'
-                          : envTemp > HUMAN_TEMP_K
-                          ? '#ef4444'
-                          : '#22c55e',
-                        boxShadow: envTemp < HUMAN_TEMP_K
-                          ? '0 0 8px rgba(200, 50, 74, 0.6)'
-                          : envTemp > HUMAN_TEMP_K
-                          ? '0 0 8px rgba(239, 68, 68, 0.6)'
-                          : '0 0 8px rgba(34, 197, 94, 0.6)'
-                      }
-                    }),
-                    React.createElement('span', { className: "font-medium text-slate-300" },
-                      envTemp < HUMAN_TEMP_K
-                        ? 'Du förlorar värme (netto)'
-                        : envTemp > HUMAN_TEMP_K
-                        ? 'Du tar upp värme (netto)'
-                        : 'Värmebalans'
-                    )
-                  )
-                )
+                React.createElement(BalanceMeter, { tAir: tAir })
               ),
 
               // Controls Area
@@ -716,11 +1042,51 @@
                 className: "glass-card p-6 h-fit sticky top-8"
               },
                 React.createElement('h2', {
-                  className: "text-xl font-bold mb-6 flex items-center gap-2 text-slate-100",
-                  style: { borderBottom: '1px solid rgba(200, 50, 74, 0.15)', paddingBottom: '0.75rem' }
+                  className: "text-xl font-bold mb-6 flex items-center gap-2 t-ink",
+                  style: { borderBottom: '1px solid var(--lab-line-strong)', paddingBottom: '0.75rem' }
                 },
-                  React.createElement(MoveHorizontal, { className: "w-5 h-5 text-cyan-400", style: { flexShrink: 0 } }),
+                  React.createElement(MoveHorizontal, { className: "w-5 h-5", style: { flexShrink: 0, color: 'var(--lab-accent)' } }),
                   "Inställningar"
+                ),
+
+                // Temperature Slider
+                React.createElement('div', { className: "mb-8" },
+                  React.createElement('div', { className: "flex justify-between items-end mb-3 gap-2 flex-wrap" },
+                    React.createElement('label', {
+                      className: "flex items-center gap-2 text-xs font-bold t-muted uppercase tracking-wide"
+                    },
+                      React.createElement(Thermometer, {
+                        className: "w-4 h-4 flex-shrink-0", style: { color: 'var(--lab-accent)' }
+                      }),
+                      React.createElement('span', null, "Luftens temperatur")
+                    ),
+                    React.createElement('span', { className: "text-2xl font-bold t-ink font-mono whitespace-nowrap" },
+                      fmtC(tAir),
+                      React.createElement('span', { className: "text-sm t-muted font-normal ml-2" },
+                        "(" + kelvin(tAir) + NB + "K)"
+                      )
+                    )
+                  ),
+                  React.createElement('input', {
+                    type: "range",
+                    min: String(T_MIN),
+                    max: String(T_MAX),
+                    step: "1",
+                    value: tAir,
+                    onChange: handleTempChange,
+                    className: "w-full rounded-lg appearance-none cursor-pointer",
+                    'aria-label': "Luftens temperatur",
+                    'aria-valuemin': String(T_MIN),
+                    'aria-valuemax': String(T_MAX),
+                    'aria-valuenow': tAir
+                  }),
+                  React.createElement('div', { className: "flex justify-between text-xs t-muted mt-2 font-mono" },
+                    React.createElement('span', null, fmtC(T_MIN) + " (" + kelvin(T_MIN) + NB + "K)"),
+                    React.createElement('span', null, fmtC(T_MAX) + " (" + kelvin(T_MAX) + NB + "K)")
+                  ),
+                  React.createElement('p', { className: "text-xs t-muted mt-3" },
+                    "Hudens temperatur ligger fast på " + fmtC(T_HUD) + " — kroppen håller den konstant."
+                  )
                 ),
 
                 // Show Sensation checkbox
@@ -733,11 +1099,11 @@
                       type: "checkbox",
                       checked: showSensation,
                       onChange: (e) => setShowSensation(e.target.checked),
-                      className: "dark-checkbox",
+                      className: "lab-checkbox",
                       'aria-label': "Visa upplevelse"
                     }),
                     React.createElement('span', {
-                      className: "font-bold text-slate-300 uppercase text-xs tracking-wide"
+                      className: "font-bold t-ink uppercase text-xs tracking-wide"
                     }, "Visa upplevelse")
                   )
                 ),
@@ -745,101 +1111,73 @@
                 // Mode radio
                 React.createElement('div', { className: "mb-8" },
                   React.createElement('label', {
-                    className: "block text-xs font-bold text-slate-400 mb-3 uppercase tracking-wide"
+                    className: "block text-xs font-bold t-muted mb-3 uppercase tracking-wide"
                   }, "Visningsläge"),
                   React.createElement('div', { className: "flex flex-col gap-3" },
 
                     React.createElement('label', {
-                      className: `radio-option ${mode === 'absolute' ? 'radio-option-active' : 'radio-option-inactive'}`,
+                      className: `radio-option ${mode === 'alla' ? 'radio-option-active' : 'radio-option-inactive'}`,
                       style: { minHeight: '44px' }
                     },
                       React.createElement('input', {
                         type: "radio",
                         name: "mode",
-                        value: "absolute",
-                        checked: mode === 'absolute',
-                        onChange: () => setMode('absolute'),
+                        value: "alla",
+                        checked: mode === 'alla',
+                        onChange: () => setMode('alla'),
                         'aria-label': "Visa alla värmeflöden"
                       }),
                       React.createElement('span', {
-                        className: `ml-3 font-medium text-sm ${mode === 'absolute' ? 'text-cyan-300' : 'text-slate-300'}`
+                        className: "ml-3 font-medium text-sm t-ink"
                       }, "Alla värmeflöden")
                     ),
 
                     React.createElement('label', {
-                      className: `radio-option ${mode === 'net' ? 'radio-option-active' : 'radio-option-inactive'}`,
+                      className: `radio-option ${mode === 'balans' ? 'radio-option-active' : 'radio-option-inactive'}`,
                       style: { minHeight: '44px' }
                     },
                       React.createElement('input', {
                         type: "radio",
                         name: "mode",
-                        value: "net",
-                        checked: mode === 'net',
-                        onChange: () => setMode('net'),
-                        'aria-label': "Visa resulterande flöde"
+                        value: "balans",
+                        checked: mode === 'balans',
+                        onChange: () => setMode('balans'),
+                        'aria-label': "Jämför alstrad och avgiven värme"
                       }),
                       React.createElement('span', {
-                        className: `ml-3 font-medium text-sm ${mode === 'net' ? 'text-cyan-300' : 'text-slate-300'}`
-                      }, "Resulterande flöde på människa")
+                        className: "ml-3 font-medium text-sm t-ink"
+                      }, "Alstrat mot avgivet")
                     )
                   ),
-                  React.createElement('p', { className: "text-xs text-slate-500 mt-2 px-1" },
-                    mode === 'absolute'
-                      ? 'Visar hur mycket värme som strålar ut från varje objekt oberoende av varandra.'
-                      : 'Visar skillnaden mellan utstrålad och absorberad värme för människan.'
-                  )
-                ),
-
-                // Temperature Slider
-                React.createElement('div', { className: "mb-8" },
-                  React.createElement('div', { className: "flex justify-between items-end mb-3 gap-2 flex-wrap" },
-                    React.createElement('label', {
-                      className: "flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide"
-                    },
-                      React.createElement(Thermometer, {
-                        className: "w-4 h-4 text-cyan-400 flex-shrink-0"
-                      }),
-                      React.createElement('span', null, "Omgivningens temperatur")
-                    ),
-                    React.createElement('span', { className: "text-2xl font-bold text-cyan-400 font-mono whitespace-nowrap" },
-                      kelvinToCelsius(envTemp) + "°C",
-                      React.createElement('span', { className: "text-sm text-slate-500 font-normal ml-2" },
-                        "(" + Math.round(envTemp) + " K)"
-                      )
-                    )
-                  ),
-                  React.createElement('input', {
-                    type: "range",
-                    min: "200",
-                    max: "400",
-                    step: "1",
-                    value: envTemp,
-                    onChange: handleTempChange,
-                    className: "w-full rounded-lg appearance-none cursor-pointer",
-                    'aria-label': "Omgivningens temperatur",
-                    'aria-valuemin': "200",
-                    'aria-valuemax': "400",
-                    'aria-valuenow': envTemp
-                  }),
-                  React.createElement('div', { className: "flex justify-between text-xs text-slate-500 mt-2 font-mono" },
-                    React.createElement('span', null, "-73°C (200 K)"),
-                    React.createElement('span', null, "127°C (400 K)")
+                  React.createElement('p', { className: "text-xs t-muted mt-2 px-1" },
+                    mode === 'alla'
+                      ? 'Visar utbytet åt båda hållen: värmen huden strålar ut, värmen rummet strålar in mot dig och den som måste avdunsta.'
+                      : 'Jämför den streckade pilen (värmen som måste bort) med den ifyllda (nettot som luften faktiskt tar emot).'
                   )
                 ),
 
                 // Info
                 React.createElement('div', { className: "info-box p-4 text-sm" },
                   React.createElement('h3', {
-                    className: "font-bold flex items-center gap-2 mb-2 text-cyan-400"
+                    className: "font-bold flex items-center gap-2 mb-2 t-ink"
                   },
-                    React.createElement(Info, { className: "w-4 h-4 flex-shrink-0" }),
+                    React.createElement(Info, { className: "w-4 h-4 flex-shrink-0", style: { color: 'var(--lab-accent)' } }),
                     "Hur fungerar det?"
                   ),
-                  React.createElement('ul', { className: "space-y-1.5 list-disc pl-4 text-slate-300" },
-                    React.createElement('li', null, "All materia över absoluta nollpunkten sänder ut värmestrålning."),
-                    React.createElement('li', null, "Människans temperatur hålls konstant (~37°C) av metabolismen."),
-                    React.createElement('li', null, "Om omgivningen är kallare strålar vi ut mer än vi tar emot (vi fryser)."),
-                    React.createElement('li', null, "Om omgivningen är varmare tar vi emot mer än vi strålar ut (vi svettas).")
+                  React.createElement('ul', { className: "space-y-1.5 list-disc pl-4 t-soft" },
+                    React.createElement('li', null,
+                      "Ämnesomsättningen alstrar ca 100" + NB + "W i vila. Exakt lika mycket måste lämna kroppen, annars ändras kroppstemperaturen."),
+                    React.createElement('li', null,
+                      "Allt som är varmare än absoluta nollpunkten strålar värme. Rummet strålar därför hela tiden in värme mot dig — men huden (ca 33" + NB + "°C) strålar ut ännu mer, så nettoflödet går ut."),
+                    React.createElement('li', null,
+                      "Vid 22" + NB + "°C blir nettoflödet precis 100" + NB + "W — därför känns 22" + NB + "°C lagom."),
+                    React.createElement('li', null,
+                      "Blir luften varmare strålar rummet in mer, nettot krymper och resten måste svettas ut. Det känns varmt."),
+                    React.createElement('li', null,
+                      "Är luften varmare än 33" + NB + "°C strålar rummet in mer än huden strålar ut — nettoflödet vänder in i kroppen och bara avdunstning kyler.")
+                  ),
+                  React.createElement('p', { className: "text-xs t-muted mt-3" },
+                    "Modellen gäller en vilande person med vanliga inomhuskläder. Kläder, blåst och rörelse ändrar hur snabbt värmen lämnar huden."
                   )
                 )
               )
@@ -848,7 +1186,7 @@
 
           // Footer
           React.createElement('footer', { className: "footer" },
-            React.createElement('p', null, "\u00A9 2025 Fysiklabbet. Skapad av Sam Skoglund.")
+            React.createElement('p', null, "© 2025 Fysiklabbet. Skapad av Sam Skoglund.")
           )
         );
       };

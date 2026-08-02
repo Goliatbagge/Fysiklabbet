@@ -23,15 +23,17 @@
  *                                men är fortfarande ett eget klicksteg.
  *
  *   opts = { speed: 1, autostart: false, instant: false, at: ms|null,
- *            stegvis: true, hand: false, tankar: true }  — STANDARD är att
+ *            stegvis: true, hand: false, tankar: false }  — STANDARD är att
  *            bara pennan ritas (användarbeslut 2026-07-28); hand:true
  *            ritar handen som håller pennan  — stegvis=false ger gamla
- *            beteendet (allt skrivs i en följd). tankar:false startar i
- *            läget "Utan tankar" (se nedan).
+ *            beteendet (allt skrivs i en följd). STANDARD är läget
+ *            "Utan tankar" (användarönskemål 2026-08-02); tankar:true
+ *            startar i "Med tankar" (se nedan).
  *
  *   Lösningar MED tankebubblor får en inställningsruta uppe till höger
- *   på arket med radioknapparna "Med tankar"/"Utan tankar" (användar-
- *   önskemål 2026-07-30). "Utan tankar" bygger om tidslinjen från en
+ *   på arket med radioknapparna "Utan tankar"/"Med tankar" — "Utan tankar"
+ *   överst och förvald (användarönskemål 2026-07-30 + 2026-08-02).
+ *   "Utan tankar" bygger om tidslinjen från en
  *   aktlista där bubbelstegen filtrerats bort — samma pennstreck, färre
  *   klicksteg — och behåller positionen i lösningen (redan skrivna rader
  *   står kvar). Lösningar utan bubblor får ingen ruta.
@@ -128,6 +130,24 @@
  * ut vid VARJE tal — "F_G=m·g=20 kg·9,82 N/kg=196,4 N" ('/'-glyf finns).
  * Detta gäller ENDAST i klammern; i insättningsraden därefter (värdena
  * ur klammern in i huvudformeln) skrivs talen som vanligt utan enheter.
+ *
+ * ⚠️ KLAMMERN KOMMER DIREKT UNDER FORMELN FÖR DEN SÖKTA STORHETEN
+ * (uttryckligt användarkrav 2026-08-02, efter fel i fjader-scenen).
+ * Ordningen är ALLTID, utan undantag:
+ *   (1) rubrik + formel med den sökta variabeln utlöst (a = F_R/m),
+ *   (2) mätvärdesklammern,
+ *   (3) insättningsraden.
+ * Är en storhet i formeln INTE given (t.ex. F_R) får den ALDRIG en egen
+ * rubrik + formelrad + egen klammer + egen uträkningsrad FÖRE huvud-
+ * formeln — den beräknas i stället som en DELUTRÄKNING PÅ SIN RAD INUTI
+ * huvudformelns klammer, med sin formel och med enheter vid varje tal:
+ *   [ F_R=−k·y=−30,6875 N/m·(−0,050 m)=1,534... N
+ *     m=250 g=0,250 kg                             ]
+ * (samma mönster som F_G=m·g-raderna). En hel lösningsdel består alltså
+ * av EN formel + EN klammer + EN insättning — aldrig en kedja av
+ * hjälpformler med egna klamrar. Ryms inte en lång deluträkningsrad på
+ * arket: skriv klammern något mindre med valueBracket-optet {rs:0.75},
+ * inte radbrytning. Referensimpl: layoutFjader b).
  *
  * REGEL (DIVIDERA BORT EN GEMENSAM FAKTOR — BARA fysikuppgifter): när
  * samma faktor står i båda leden (t.ex. g i m_P·g·l_P = m_B·g·l_B) delas
@@ -415,6 +435,21 @@
     'V': { w: 82, strokes: [[[20, 12], [44, 100], [70, 11]]] },
     'L': { w: 66, strokes: [[[30, 12], [26, 100], [66, 97]]] },
     'z': { w: 66, strokes: [[[22, 52], [62, 50], [22, 98], [64, 95]]] },
+    /* E som F med bottenstreck — jämför med F vid granskning */
+    'E': { w: 68, strokes: [[[32, 12], [28, 100]], [[32, 12], [68, 11]],
+                            [[30, 54], [60, 54]], [[28, 100], [66, 98]]] },
+    /* R som P med ett ben snett ned åt höger */
+    'R': { w: 72, strokes: [[[32, 12], [28, 100]],
+                            [[32, 12], [58, 11], [68, 22], [67, 37], [55, 48], [30, 50]],
+                            [[46, 49], [70, 100]]] },
+    /* J: toppstreck + stapel som svänger av åt vänster i en krok */
+    'J': { w: 64, strokes: [[[26, 13], [66, 12]],
+                            [[50, 12], [49, 68], [44, 91], [31, 98], [20, 88]]] },
+    /* w: som v fast dubbelt — jämför med v vid granskning */
+    'w': { w: 84, strokes: [[[16, 52], [26, 93], [32, 100], [42, 70],
+                             [46, 70], [54, 98], [59, 100], [70, 74], [78, 52]]] },
+    /* stort delta (Δl i Hookes lag): sluten triangel i EN penndragning */
+    'Δ': { w: 78, strokes: [[[21, 100], [44, 13], [47, 13], [72, 98], [21, 100]]] },
     "'": { w: 24, strokes: [[[27, 8], [19, 30]]] },
     '<': { w: 76, strokes: [[[64, 40], [24, 66], [64, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
@@ -1253,8 +1288,11 @@
    * är rad i:s ringbox för insättningsgesten och yEnd sista radens
    * baslinje. Klammern skrivs som handen gör det: vänsterklammern först,
    * sedan raderna uppifrån och ned, sist högerklammern. */
-  function valueBracket(acts, rows, x0, yTop, s, F) {
-    var rs = 0.8;                            /* något mindre än huvudraderna */
+  function valueBracket(acts, rows, x0, yTop, s, F, opt) {
+    /* opt.rs: radskala — 0,8 som standard (något mindre än huvudraderna);
+     * en lång deluträkningsrad som annars inte ryms på arket får skrivas
+     * något mindre (0,75 räcker för fjader-scenens F_R-rad) */
+    var rs = (opt && opt.rs) || 0.8;
     var ss = s * rs, sF = F * rs;
     var rowAdv = 1.5 * sF;
     var widths = rows.map(function (r) { return stringAdvance(r, ss, sF); });
@@ -4483,6 +4521,722 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: vikt i fjäder "Hookes lag" (fy2-2.1 Ex 1)
+   * En vikt på 250 g förlänger en fjäder 8,0 cm; vikten dras sedan ned
+   * 5,0 cm och släpps. a) fjäderkonstanten ur Hookes lag (kraften är
+   * viktens tyngd — kraftjämvikt), b) accelerationen i släppögonblicket
+   * via F_R = −k·y och Newtons andra lag. Figuren: tak, fjäder och vikt
+   * med två streckade nivåer (fjäderns slut utan vikt resp. jämvikts-
+   * läget) och Δl-måttpil; neddragningen ritas in i blått först i b).
+   * Fjäderkonstanten hämtas "sedan tidigare" ur a):s uträkning (bubblan
+   * förklarar, inga ringar vid klammerskrivningen — se REGEL). F_R-värdet
+   * ringas däremot in i raden ovanför när det sätts in i a=F_R/m
+   * (vertikalcirkel-mönstret: värde ur en tidigare RAD, inte ur
+   * klammern). */
+  function layoutFjader(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 10, color);
+    }
+    function rect(x0, y0, x1, y1) {
+      line([x0, y0], [x1, y0]);
+      line([x1, y0], [x1, y1]);
+      line([x1, y1], [x0, y1]);
+      line([x0, y1], [x0, y0]);
+    }
+    /* lodrät måttpil med spets i BÅDA ändar (som Δl i teorifiguren) */
+    function measureV(x, yA, yB, color) {
+      line([x, yA + 5], [x, yB - 5], color);
+      arrowHead(x, yA, x, yA + 18, 9, color);
+      arrowHead(x, yB, x, yB - 18, 9, color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri --- */
+    var fx = 240, takY = 56;
+    var endU = 106;                           /* fjäderns slut UTAN vikt */
+    var endL = 162;                           /* fjäderns slut MED vikt
+                                                 (jämviktsläget); 56 px =
+                                                 8,0 cm → 7 px/cm */
+
+    /* ---- steg 1: rita det vi vet — tak, fjäder, vikt, nivålinjer ---- */
+    var b1 = figurBubble(262, [
+      [['Ritar taket, fjädern och vikten.']],
+      [['Utan vikt slutar fjädern vid den']],
+      [['övre streckade linjen.']]
+    ]);
+    tanke(b1);
+    line([150, takY], [330, takY]);           /* taket */
+    for (var hx = 158; hx <= 330; hx += 16) {
+      line([hx, takY], [hx - 8, takY - 9]);   /* skraffering */
+    }
+    pause(140);
+    /* fjädern: sicksack i EN penndragning */
+    (function () {
+      var n = 7, yTop = takY + 6, yBot = endL - 6;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[fx, takY], [fx, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([fx + (k % 2 ? 13 : -13), yTop + k * step]);
+      }
+      pts.push([fx, yBot]);
+      pts.push([fx, endL]);
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    pause(140);
+    rect(fx - 14, endL, fx + 14, endL + 28);  /* vikten */
+    pause(140);
+    dash([fx + 16, endU], [340, endU]);       /* nivå utan vikt */
+    dash([fx + 16, endL], [340, endL]);       /* jämviktsläget */
+    pause(140);
+    placeString('utan vikt', 358, 100, s * 0.55, F * 0.55, acts);
+    placeString('jämviktsläge', 358, 166, s * 0.55, F * 0.55, acts);
+    stepEnd();
+
+    /* ---- steg 2: annoteringar — massan och förlängningen (blått) ---- */
+    var b2 = figurBubble(262, [
+      [['Skriver in det jag vet: vikten']],
+      [['250 g förlänger fjädern 8,0 cm']],
+      [['ned till jämviktsläget.']]
+    ]);
+    tanke(b2);
+    placeString('m=250 g', 96, 184, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    measureV(334, endU, endL, BLUE);
+    placeString('Δl=8,0 cm', 346, 128, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- a) Hookes lag ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF1 = bubble(120, bubbleTop(296), bw, [
+      [['Vikten hänger stilla: fjäder-']],
+      [['kraften är lika stor som tyngden.']],
+      [['Hookes lag kopplar kraften till']],
+      [['förlängningen.']]
+    ]);
+    tanke(bF1);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('a) Hookes lag', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    var xx = placeString('F=k·Δl⟺k=', padL, y, s, F, acts);
+    fracH('F', 'Δl', xx, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL) ---- */
+    y += adv + 1.1 * F;
+    var bK1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Kraften på fjädern är viktens']],
+      [['tyngd. Den räknas ut direkt i']],
+      [['klammern.']]
+    ]);
+    tanke(bK1);
+    var klam1 = valueBracket(acts,
+      ['F=m·g=0,250 kg·9,82 N/kg=2,455 N', 'Δl=8,0 cm=0,080 m'],
+      padL, y, s, F);
+    stepEnd();
+    y = klam1.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI1);
+    xx = placeString('k=', padL, y, s, F, acts);
+    var xe1 = fracH('2,455', '0,080', xx, y);
+    var xIns1 = placeString('=30,6875 N/m', xe1 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL): fortsättning på samma rad om möjligt */
+    var bAvr1 = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Förlängningen 8,0 cm har två']],
+      [['värdesiffror: svaret får två.']]
+    ]);
+    tanke(bAvr1);
+    var avrA = '≈31 N/m';
+    if (xIns1 + stringAdvance(avrA, s, F) < PAPER_W - 6) {
+      placeString(avrA, xIns1, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrA, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR1 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Tyngden 2,5 N gav 8 cm']],
+      [['förlängning. Då stämmer det att']],
+      [['en hel meter kräver drygt 30 N!']]
+    ]);
+    tanke(bR1);
+    var xeA = placeString('Svar: 31 N/m', padL, y, s, F, acts);
+    underline(xeA, y);
+    stepEnd();
+
+    /* ---- b) neddragningen ritas in i figuren ---- */
+    y += adv + 1.2 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Vikten dras ned 5,0 cm under']],
+      [['jämviktsläget. Elongationen']],
+      [['räknas negativ nedåt.']]
+    ]);
+    tanke(bB);
+    arrow([fx - 18, endL + 34], [fx - 18, endL + 72], BLUE);
+    dash([fx + 16, endL + 73], [340, endL + 73]);
+    placeString('y=−5,0 cm', 348, endL + 78, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    var bF2 = bubble(120, bubbleTop(y - 1.15 * F), bw, [
+      [['Accelerationen fås ur Newtons']],
+      [['andra lag. Då behöver jag den']],
+      [['resulterande kraften på vikten.']]
+    ]);
+    tanke(bF2);
+    placeString('b) Newtons andra lag', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    xx = placeString('F_R=m·a⟺a=', padL, y, s, F, acts);
+    fracH('F_R', 'm', xx, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL KLAMMERN
+     * KOMMER DIREKT UNDER FORMELN): F_R är inte given, så den beräknas
+     * som deluträkning PÅ SIN RAD INUTI klammern — med formeln F_R=−k·y
+     * och enheter utsatta vid varje tal. Fjäderkonstanten hämtas
+     * oavrundad ur a). Raden är lång → klammern i 0,75-skala. */
+    y += adv + 1.1 * F;
+    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Kraften är inte given: den']],
+      [['räknas ut direkt i klammern med']],
+      [['formeln för resulterande kraft.']],
+      [['Fjäderkonstanten tar jag']],
+      [['oavrundad från a).']]
+    ]);
+    tanke(bK2);
+    var klam2 = valueBracket(acts,
+      ['F_R=−k·y=−30,6875 N/m·(−0,050 m)=1,534... N',
+       'm=250 g=0,250 kg'],
+      padL, y, s, F, { rs: 0.75 });
+    stepEnd();
+    y = klam2.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Kraften blev positiv: den pekar']],
+      [['uppåt, mot jämviktsläget. Nu']],
+      [['sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI2);
+    xx = placeString('a=', padL, y, s, F, acts);
+    var xe2 = fracH('1,534...', '0,250', xx, y);
+    var xIns2 = placeString('=6,1375 m/s^2', xe2 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    var bAvr2 = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Neddragningen 5,0 cm har två']],
+      [['värdesiffror: accelerationen']],
+      [['avrundas till 6,1 m/s².']]
+    ]);
+    tanke(bAvr2);
+    var avrB = '≈6,1 m/s^2';
+    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 6) {
+      placeString(avrB, xIns2, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrB, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    var bR2 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Drygt hälften av tyngd-']],
+      [['accelerationen 9,82. En mjuk']],
+      [['fjäder ger en mjuk knuff,']],
+      [['rimligt!']]
+    ]);
+    tanke(bR2);
+    var xeB = placeString('Svar: 6,1 m/s^2', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: energi i fjäder (fy2-2.2 Ex 1) --------------
+   * En fjäder med k = 45 N/m dras ut 20 cm. Potentiella energin i
+   * a) nedre vändläget, b) övre vändläget, c) jämviktsläget. Figuren:
+   * fjäder med vikten i nedre vändläget och TRE streckade nivåer (övre
+   * vändläge, jämviktsläge, nedre vändläge) med amplituden måttsatt.
+   * Poängen är lägesresonemanget: i vändlägena är ALL energi potentiell
+   * (E_p = E = k·A²/2), i jämviktsläget är den 0 — b) och c) besvaras
+   * utan ny räkning. */
+  function layoutFjaderenergi(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function rect(x0, y0, x1, y1) {
+      line([x0, y0], [x1, y0]);
+      line([x1, y0], [x1, y1]);
+      line([x1, y1], [x0, y1]);
+      line([x0, y1], [x0, y0]);
+    }
+    function measureV(x, yA, yB, color) {
+      line([x, yA + 5], [x, yB - 5], color);
+      arrowHead(x, yA, x, yA + 18, 9, color);
+      arrowHead(x, yB, x, yB - 18, 9, color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri: jämvikt y=150, amplitud 56 px = 20 cm --- */
+    var fx = 240, takY = 56;
+    var yEq = 150, A = 56;
+    var yUp = yEq - A, yDn = yEq + A;         /* övre/nedre vändläget */
+
+    /* ---- steg 1: rita det vi vet ---- */
+    var b1 = figurBubble(266, [
+      [['Ritar fjädern med vikten i nedre']],
+      [['vändläget. Jämviktsläget och']],
+      [['vändlägena blir streckade linjer.']]
+    ]);
+    tanke(b1);
+    line([150, takY], [330, takY]);           /* taket */
+    for (var hx = 158; hx <= 330; hx += 16) {
+      line([hx, takY], [hx - 8, takY - 9]);
+    }
+    pause(140);
+    (function () {                            /* fjädern ned till vikten */
+      var n = 8, yTop = takY + 6, yBot = yDn - 6;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[fx, takY], [fx, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([fx + (k % 2 ? 13 : -13), yTop + k * step]);
+      }
+      pts.push([fx, yBot]);
+      pts.push([fx, yDn]);
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    pause(140);
+    rect(fx - 14, yDn, fx + 14, yDn + 28);    /* vikten i nedre vändläget */
+    pause(140);
+    dash([fx + 16, yUp], [430, yUp]);
+    dash([fx + 16, yEq], [430, yEq]);
+    dash([fx + 16, yDn], [430, yDn]);
+    pause(140);
+    placeString('övre vändläge', 438, yUp + 5, s * 0.55, F * 0.55, acts);
+    placeString('jämviktsläge', 438, yEq + 5, s * 0.55, F * 0.55, acts);
+    placeString('nedre vändläge', 438, yDn + 5, s * 0.55, F * 0.55, acts);
+    stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) ---- */
+    var b2 = figurBubble(262, [
+      [['Skriver in det jag vet: fjäder-']],
+      [['konstanten och amplituden,']],
+      [['utdraget 20 cm.']]
+    ]);
+    tanke(b2);
+    placeString('k=45 N/m', 96, 120, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    measureV(350, yEq, yDn, BLUE);
+    placeString('A=20 cm', 362, yEq + 36, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- a) energin i nedre vändläget ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF1 = bubble(120, bubbleTop(282), bw, [
+      [['a) I ett vändläge står vikten']],
+      [['stilla. Rörelseenergin är noll:']],
+      [['ALL energi är potentiell.']]
+    ]);
+    tanke(bF1);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('a) Fjäderns totala energi', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    var xx = placeString('E_p=E=', padL, y, s, F, acts);
+    fracH('k·A^2', '2', xx, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL) ---- */
+    y += adv + 1.1 * F;
+    var bK1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Amplituden görs om till meter']],
+      [['i klammern.']]
+    ]);
+    tanke(bK1);
+    var klam1 = valueBracket(acts, ['k=45 N/m', 'A=20 cm=0,20 m'],
+                             padL, y, s, F);
+    stepEnd();
+    y = klam1.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI1);
+    xx = placeString('E_p=', padL, y, s, F, acts);
+    var xe1 = fracH('45·0,20^2', '2', xx, y);
+    placeString('=0,90 J', xe1 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 1.2 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR1 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Knappt en joule, ungefär som']],
+      [['att lyfta ett litet äpple en']],
+      [['meter. Rimligt för en fjäder!']]
+    ]);
+    tanke(bR1);
+    var xeA = placeString('Svar: 0,90 J', padL, y, s, F, acts);
+    underline(xeA, y);
+    stepEnd();
+
+    /* ---- b) övre vändläget: samma amplitud, ingen ny räkning ---- */
+    y += adv + 1.2 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Vändlägena ligger lika långt']],
+      [['från jämviktsläget. Energin är']],
+      [['lika stor i båda.']]
+    ]);
+    tanke(bB);
+    placeString('b) Samma amplitud i båda vändlägena', padL, y,
+                s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.55 * F;
+    var xeB = placeString('Svar: 0,90 J', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    /* ---- c) jämviktsläget ---- */
+    y += adv + 1.0 * F;
+    var bC = bubble(120, bubbleTop(y - adv), bw, [
+      [['c) I jämviktsläget har vikten']],
+      [['störst fart. All energi är']],
+      [['rörelseenergi, den potentiella']],
+      [['är noll.']]
+    ]);
+    tanke(bC);
+    placeString('c) Jämviktsläget', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.55 * F;
+    placeString('E_p=0', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var xeC = placeString('Svar: 0', padL, y, s, F, acts);
+    underline(xeC, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: dämpad svängning (fy2-2.2 Ex 2) -------------
+   * En fjäder med k = 28 kN/m: amplituden är 5,0 cm i första övre
+   * vändläget och 2,5 cm i det andra. Hur mycket energi blir värme
+   * under första svängningen? Figuren ritas med SAMMA orientering som
+   * uppgiftens amplitud-tid-diagram (se REGEL FIGURORIENTERING): en
+   * avklingande kurva med de två övre vändlägena markerade. Värmen är
+   * skillnaden i total energi, E_värme = E₁ − E₂ (flerteckensindexet
+   * skrivs 'E_v_ä_r_m_e', se placeString). */
+  function layoutDampning(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 250;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- diagrammets geometri: axelkors i (90, 140), första övre
+     * vändläget i x=140 (5,0 cm = 70 px), period 190 px --- */
+    var ox = 90, oy = 140;
+    var x1 = 140, P = 190, A1px = 70;
+    function curveY(x) {
+      var ph = (x - x1) / P * Math.PI * 2;
+      var amp = A1px * Math.pow(0.5, (x - x1) / P);
+      return oy - amp * Math.cos(ph);
+    }
+
+    /* ---- steg 1: diagrammet (grafit) ---- */
+    var b1 = figurBubble(266, [
+      [['Ritar diagrammet ur uppgiften:']],
+      [['en dämpad svängning som tappar']],
+      [['höjd för varje period.']]
+    ]);
+    tanke(b1);
+    line([ox, 210], [ox, 48]);                /* y-axeln */
+    arrowHead(ox, 44, ox, 60, 9);
+    line([ox - 6, oy], [556, oy]);            /* t-axeln */
+    arrowHead(560, oy, 546, oy, 9);
+    pause(140);
+    placeString('A (cm)', 102, 50, s * 0.55, F * 0.55, acts);
+    placeString('t (s)', 516, 166, s * 0.55, F * 0.55, acts);
+    pause(140);
+    /* kurvan: SAMMANHÄNGANDE penndrag som delar ändpunkt (till skillnad
+     * från de streckade cirkelbanorna) — en dämpad kurva är en heldragen
+     * linje, inte en hjälplinje */
+    (function () {
+      var pts = [];
+      for (var x = 96; x <= 500; x += 6) pts.push([x, curveY(x)]);
+      for (var k = 0; k + 1 < pts.length; k += 9) {
+        acts.push({ kind: 'stroke', pts: pts.slice(k, k + 10) });
+      }
+    })();
+    stepEnd();
+
+    /* ---- steg 2: vändlägena markeras (blått) ---- */
+    var b2 = figurBubble(266, [
+      [['Amplituden är 5,0 cm i första']],
+      [['övre vändläget och 2,5 cm i']],
+      [['det andra.']]
+    ]);
+    tanke(b2);
+    acts.push({ kind: 'stroke', pts: dotPts(x1, oy - A1px), color: BLUE });
+    placeString('A_1=5,0 cm', 162, 74, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    acts.push({ kind: 'stroke', pts: dotPts(x1 + P, oy - A1px / 2), color: BLUE });
+    placeString('A_2=2,5 cm', 350, 96, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- beräkningen ---- */
+    var y = 320;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bE = bubble(120, bubbleTop(246), bw, [
+      [['Mellan vändlägena försvinner']],
+      [['mekanisk energi. Skillnaden har']],
+      [['blivit värme.']]
+    ]);
+    tanke(bE);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('Energiförlusten blir värme', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.55 * F;
+    placeString('E_v_ä_r_m_e=E_1-E_2', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL KLAMMERN
+     * KOMMER DIREKT UNDER FORMELN): E_1 och E_2 är inte givna, så de
+     * beräknas PÅ SINA RADER INUTI klammern med energiformeln
+     * E=k·A^2/2 — med enheter vid varje tal. Raderna är långa →
+     * klammern i 0,72-skala. */
+    y += adv + 1.1 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['I vändlägena är all energi']],
+      [['potentiell. Energierna räknas']],
+      [['ut direkt i klammern med']],
+      [['energiformeln, i newton och']],
+      [['meter.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts,
+      ['E_1=k·A_1^2/2=28000 N/m·(0,050 m)^2/2=35 J',
+       'E_2=k·A_2^2/2=28000 N/m·(0,025 m)^2/2=8,75 J'],
+      padL, y, s, F, { rs: 0.72 });
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in energierna ur']],
+      [['klammern. Halva amplituden gav']],
+      [['bara en fjärdedel av energin!']]
+    ]);
+    tanke(bI);
+    var xIns = placeString('E_v_ä_r_m_e=35-8,75=26,25 J', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvr = bubble(140, bubbleTop(y), bw, [
+      [['Amplituderna har två']],
+      [['värdesiffror: svaret avrundas']],
+      [['till 26 J.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈26 J';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      y += adv;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR = bubble(120, bubbleTop(y - adv), bw, [
+      [['Tre fjärdedelar av energin']],
+      [['försvann på en enda svängning.']],
+      [['Kraftigt dämpat, precis som']],
+      [['kurvan visar!']]
+    ]);
+    tanke(bR);
+    var xe = placeString('Svar: 26 J', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
   function dotPts(cx, cy) {
     var pts = [];
@@ -5078,7 +5832,9 @@
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,
                    vertikalcirkel: layoutVertikalcirkel,
                    slanggunga: layoutSlanggunga,
-                   kastboll: layoutKastboll, kasthojd: layoutKasthojd };
+                   kastboll: layoutKastboll, kasthojd: layoutKasthojd,
+                   fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
+                   dampning: layoutDampning };
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](spec, F) : layout(spec, F);
 
@@ -5198,7 +5954,7 @@
     var LIFT = 0.55;     /* px per ms vid pennlyft */
     var SWEEP = 0.19;    /* px per ms vid torrsvep längs en figursträcka */
     var stegvis = opts.stegvis !== false;
-    var tankar = opts.tankar !== false;
+    var tankar = opts.tankar === true;   /* standard: "Utan tankar" */
     var events = [];
     var boundaries = [];   /* tider där stegvis uppspelning pausar —
                               MUTERAS på plats (controllern delar referensen) */
@@ -5632,7 +6388,8 @@
         e.stopPropagation();               /* inte ett stegklick på arket */
       });
       var radioName = 'hk-tankar-' + (++UID);
-      [['Med tankar', true], ['Utan tankar', false]].forEach(function (val) {
+      /* "Utan tankar" överst — den är standardläget */
+      [['Utan tankar', false], ['Med tankar', true]].forEach(function (val) {
         var lab = document.createElement('label');
         var inp = document.createElement('input');
         inp.type = 'radio';

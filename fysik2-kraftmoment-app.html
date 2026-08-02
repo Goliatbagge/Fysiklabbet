@@ -387,8 +387,8 @@
 
             // ── byggstenar till kraftmoment-uträkningen (visas ovanför brädan) ──
             const nM = items.length;
-            const fsSym = nM <= 4 ? 17 : 15;
-            const fsNum = nM <= 3 ? 15.5 : nM <= 4 ? 14 : 12.5;
+            const fsSym = nM <= 4 ? 20 : 18;
+            const fsNum = nM <= 3 ? 18 : nM <= 4 ? 16.5 : 15;
             const symbolic = [<tspan key="Me" fontStyle="italic">M</tspan>, <tspan key="eq"> = </tspan>];
             items.forEach((it, i) => {
                 if (i > 0) symbolic.push(<tspan key={'p' + i}> + </tspan>);
@@ -442,7 +442,7 @@
                             <text x={VBW / 2} y={64 + fsSym + 7} textAnchor="middle" fontSize={fsNum} fill={COL.ink}>
                                 {numeric}
                             </text>
-                            <text x={VBW / 2} y={64 + fsSym + fsNum + 21} textAnchor="middle" fontSize="11.5"
+                            <text x={VBW / 2} y={64 + fsSym + fsNum + 21} textAnchor="middle" fontSize="13.5"
                                   fill="var(--lab-ink-muted, #5a6170)">
                                 positivt värde = moturs&nbsp;&nbsp;·&nbsp;&nbsp;negativt värde = medurs
                             </text>
@@ -459,8 +459,8 @@
                     {show.arms && (() => {
                         const armItems = items.filter((it) => Math.abs(it.arm) >= 0.02);
                         if (!armItems.length) return null;
-                        const yTop = show.moment ? 138 : 120;
-                        const gap = 23;
+                        const yTop = show.moment ? 148 : 120;
+                        const gap = 30;
                         return (
                             <g>
                                 {/* lodrät referenslinje genom vridpunkten, upp i fri yta
@@ -481,10 +481,10 @@
                                             {/* måttlinje med ändpilar */}
                                             <Arrow x1={PX} y1={yA} x2={xEnd} y2={yA} color={COL.arm} width={2.4} head={9} />
                                             <Arrow x1={xEnd} y1={yA} x2={PX} y2={yA} color={COL.arm} width={2.4} head={9} />
-                                            <Tag x={lx} y={yA - 5} color={COL.arm} size={13} anchor={anchor}>
+                                            <Tag x={lx} y={yA - 6} color={COL.arm} size={19} anchor={anchor}>
                                                 <tspan fontStyle="italic">l</tspan>
-                                                <tspan dy="3" fontSize="10">{it.i + 1}</tspan>
-                                                <tspan dy="-3"> = {fmt(Math.abs(it.arm), 2)} m</tspan>
+                                                <tspan dy="4" fontSize="14">{it.i + 1}</tspan>
+                                                <tspan dy="-4"> = {fmt(Math.abs(it.arm), 2)} m</tspan>
                                             </Tag>
                                         </g>
                                     );
@@ -532,10 +532,10 @@
 
                     {/* massetiketter (ovanför vikten, på lugn yta) */}
                     {items.map(({ mass, i, cx, cy, hh }) => (
-                        <Tag key={'ml' + mass.id} x={cx} y={cy - hh / 2 - 12} color={COL.ink} size={14} anchor="middle">
+                        <Tag key={'ml' + mass.id} x={cx} y={cy - hh / 2 - 14} color={COL.ink} size={22} anchor="middle">
                             <tspan fontStyle="italic">m</tspan>
-                            <tspan dy="3" fontSize="10">{i + 1}</tspan>
-                            <tspan dy="-3"> = {fmt(mass.m, 1)} kg</tspan>
+                            <tspan dy="4.5" fontSize="16">{i + 1}</tspan>
+                            <tspan dy="-4.5"> = {fmt(mass.m, 1)} kg</tspan>
                         </Tag>
                     ))}
 
@@ -556,8 +556,8 @@
                         // När brädans ände vilar mot marken hamnar pilspetsen nära
                         // marklinjen — flytta då etiketten under linjen (fri yta)
                         // så att den aldrig ligger PÅ marklinjen eller brädänden.
-                        let ly = y1 + 13;
-                        if (ly > GROUND_Y - 8 && ly < GROUND_Y + 20) ly = GROUND_Y + 20;
+                        let ly = y1 + 18;
+                        if (ly > GROUND_Y - 8 && ly < GROUND_Y + 25) ly = GROUND_Y + 25;
                         return (
                             <g key={'fg' + mass.id} style={{ pointerEvents: 'none' }}>
                                 <Arrow x1={cx} y1={cy} x2={cx} y2={y1} color={COL.tyngd}
@@ -566,10 +566,10 @@
                                     kraftfärg — syns som svansens markör utan kontur) */}
                                 <circle cx={cx} cy={cy} r="4.6" fill={COL.tyngd} />
                                 {/* Etiketten under pilspetsen, i fri yta — inte på brädan */}
-                                <Tag x={lx} y={ly} color={COL.tyngd} size={13} anchor={anchor}>
+                                <Tag x={lx} y={ly} color={COL.tyngd} size={21} anchor={anchor}>
                                     <tspan fontStyle="italic">F</tspan>
-                                    <tspan dy="3" fontSize="10">G</tspan>
-                                    <tspan dy="-3"> = {fmt(F)} N</tspan>
+                                    <tspan dy="4.5" fontSize="15">G</tspan>
+                                    <tspan dy="-4.5"> = {fmt(F)} N</tspan>
                                 </Tag>
                             </g>
                         );

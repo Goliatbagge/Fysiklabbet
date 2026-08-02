@@ -89,8 +89,8 @@
     at: q.has('at') ? parseFloat(q.get('at')) : null,
     /* pennan är standard; ?hand visar handen för jämförelse */
     hand: q.has('hand'),
-    /* ?utantankar startar i läget "Utan tankar" (rutan uppe till höger) */
-    tankar: !q.has('utantankar')
+    /* "Utan tankar" är standard; ?medtankar startar i "Med tankar" */
+    tankar: q.has('medtankar')
   };
   var spec = [
     "5x+3=23",

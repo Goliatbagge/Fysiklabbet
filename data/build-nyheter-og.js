@@ -374,9 +374,12 @@ function loadAvsnittData() {
 }
 
 // Nationella prov ur data/np/index.js → np.html?id=<provId>
+// Prov med `dold: true` hoppas över — de visas inte på np.html och ska
+// därför inte heller ligga i sitemapen.
 function loadProv() {
   const index = korIFil('data/np/index.js', 'NP_INDEX');
-  return Array.isArray(index) ? index.map((p) => p && p.id).filter(Boolean) : [];
+  if (!Array.isArray(index)) return [];
+  return index.filter((p) => p && p.id && !p.dold).map((p) => p.id);
 }
 
 // Repetitionspaket — ett per fil i data/repetition/, id = filnamnet.

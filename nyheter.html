@@ -149,6 +149,114 @@
         .news-rss:hover { color: var(--lab-accent); border-color: var(--lab-accent); }
         .news-hero-links { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline; }
 
+        /* ── Nyhetsbrevsrutan ──────────────────────────────────────── */
+        .nb-box {
+            margin: 44px 0 10px; padding: 30px 34px 24px;
+            border: 1px solid var(--lab-line-strong);
+            border-top: 3px solid var(--lab-accent);
+            border-radius: 4px; background: var(--lab-bg-panel);
+        }
+        .nb-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(26px, 3.2vw, 34px); line-height: 1.06;
+            letter-spacing: -0.01em; color: var(--lab-ink); margin: 9px 0 11px;
+        }
+        .nb-lead {
+            font-size: 15.5px; line-height: 1.6; color: var(--lab-ink-soft);
+            max-width: 58ch; margin: 0 0 18px;
+        }
+        .nb-fine {
+            font-family: var(--lab-font-mono); font-size: 10.5px;
+            letter-spacing: 0.04em; line-height: 1.6;
+            color: var(--lab-ink-muted); margin: 13px 0 0;
+        }
+        /* Höjden reserveras så att sidan inte hoppar när formuläret laddas in. */
+        .nb-form { min-height: 46px; }
+        .nb-klar {
+            font-size: 15.5px; line-height: 1.6; color: var(--lab-ink);
+            padding: 14px 16px; border-radius: 4px;
+            background: var(--lab-accent-soft);
+            border-left: 3px solid var(--lab-accent);
+        }
+
+        /* Omklädnad av EmailOctopus-formuläret.
+           Deras injicerade CSS är i sin helhet scopad till [data-form="…"],
+           så inget läcker ut i sidan. Nästan allt styrs av variabler —
+           skriv över dem hellre än att slåss mot enskilda regler. De egna
+           reglerna nedan behöver ändå !important på sina håll eftersom
+           Bootstraps hjälpklasser (.w-100, .mb-2) använder det.
+
+           Varje regel prefixas med BÅDE .nb-box och .nb-form. Det är inte
+           slarv: deras egna selektorer ligger på (0,3,1) och injiceras SENARE
+           i dokumentet än vår <style>, så vid lika specificitet vinner de.
+           Färgvariablerna sitter dessutom på <form> (.emailoctopus-form),
+           inte på wrappern — sätts de på wrappern skuggas de av formulärets
+           egen deklaration och knappen förblir EmailOctopus-lila. */
+        .nb-box .nb-form [data-form] {
+            --font-family: var(--lab-font-sans);
+            --base-font-size: 15px;
+            --text-colour: var(--lab-ink);
+        }
+        .nb-box .nb-form [data-form] .emailoctopus-form {
+            --label-colour: var(--lab-ink);
+            --field-colour: var(--lab-bg);
+            --field-border-colour: var(--lab-line-strong);
+            --button-colour: var(--lab-accent);
+            --button-text-colour: #ffffff;
+        }
+        /* Deras rubrik, ingress och kvittotext — vi sätter egna ovanför.
+           Rubriken är dessutom en <h1>, och sidan har redan en. */
+        .nb-box .nb-form [data-form] [eo-block="title"],
+        .nb-box .nb-form [data-form] [eo-block="text"],
+        .nb-box .nb-form [data-form] .emailoctopus-success-message { display: none; }
+        .nb-box .nb-form [data-form] [eo-block="form"] { margin: 0 !important; padding: 0 !important; }
+        /* Deras .form-container har margin: 0 40px och drog in hela
+           formuläret jämfört med rubriken ovanför. */
+        .nb-box .nb-form [data-form] .form-container { margin: 0 !important; }
+        .nb-box .nb-form [data-form] .main-form {
+            display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch;
+        }
+        .nb-box .nb-form [data-form] .emailoctopus-form-row {
+            flex: 1 1 250px; margin: 0 !important;
+        }
+        /* Etiketten döljs visuellt men läses fortfarande av skärmläsare. */
+        .nb-box .nb-form [data-form] .emailoctopus-form-row label {
+            position: absolute; width: 1px; height: 1px;
+            overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+        }
+        .nb-box .nb-form [data-form] input.form-control {
+            height: 46px; border-radius: 4px; padding: 0 14px;
+            border: 1px solid var(--lab-line-strong);
+            color: var(--lab-ink); font-size: 15px;
+        }
+        .nb-box .nb-form [data-form] input.form-control:focus {
+            border-color: var(--lab-accent); box-shadow: none;
+        }
+        .nb-box .nb-form [data-form] input[type="submit"] {
+            flex: 0 0 auto; width: auto !important;
+            height: 46px; padding: 0 28px; margin: 0 !important;
+            border-radius: 4px; border: 1px solid var(--lab-accent);
+            font-family: var(--lab-font-mono); font-size: 12px;
+            letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+        }
+        .nb-box .nb-form [data-form] input[type="submit"]:hover { opacity: 0.9; }
+        .nb-box .nb-form [data-form] .emailoctopus-error-message {
+            font-size: 14.5px; line-height: 1.5; text-align: left !important;
+            color: var(--lab-accent); margin: 0 0 10px;
+        }
+        /* Deras skript döljer formuläret vid lyckad anmälan. Vi gör det också,
+           så att kvittot aldrig kan hamna ovanför ett fortfarande synligt fält. */
+        .nb-box.is-klar .nb-form [data-form] .emailoctopus-form { display: none; }
+        /* Signaturen är en inline-block i en .text-center-behållare, så det är
+           FÖRÄLDERNS centrering som måste slås ut — inte signaturens egen. */
+        .nb-box .nb-form [data-form] .text-center { text-align: left !important; }
+        .nb-box .nb-form [data-form] .mastfoot {
+            font-family: var(--lab-font-mono); font-size: 10px;
+            letter-spacing: 0.04em; margin-top: 12px !important;
+        }
+        .nb-box .nb-form [data-form] .mastfoot p { color: var(--lab-ink-muted); margin: 0; }
+        .nb-box .nb-form [data-form] .mastfoot a { color: var(--lab-ink-muted); }
+
         /* ── Artikelvy ─────────────────────────────────────────────── */
         .article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
         .article-back {
@@ -362,6 +470,12 @@
         @media (max-width: 640px) {
             .news-hero { padding: 40px 22px 4px; }
             .news-wrap { padding: 8px 22px 24px; }
+            .nb-box { padding: 24px 20px 20px; }
+            /* Staplat fält + knapp tar dubbel höjd. */
+            .nb-form { min-height: 102px; }
+            /* Samma specificitet som regeln ovanför krävs — annars vinner
+               dess width:auto även här inne. */
+            .nb-box .nb-form [data-form] input[type="submit"] { width: 100% !important; }
             .news-grid { grid-template-columns: 1fr; }
             .article { padding: 28px 20px 20px; }
             .lab-section { padding: 0 22px; }
@@ -521,6 +635,124 @@
                 .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e');
         }
 
+        // ── Nyhetsbrevets anmälningsruta ───────────────────────────────
+        //
+        // Formuläret kommer från EmailOctopus. Deras skript injicerar VANLIG
+        // DOM (ingen iframe) plus en <style> vars samtliga regler är scopade
+        // till [data-form="…"] — inget läcker ut i sidan. Därför kan vi
+        // skriva egen rubrik och ingress och klä om deras fält via CSS
+        // (se .nb-form-reglerna ovan) i stället för att bygga ett eget
+        // formulär: reCAPTCHA, honungsfällan och dubbel opt-in fortsätter
+        // fungera även om de ändrar något i sin ände.
+        //
+        // Skriptet väger ~230 kB och laddas därför först när rutan närmar
+        // sig vyn. Rutan ligger långt ned på sidan, så de flesta besök
+        // slipper hämtningen helt.
+        const EO_FORM_ID = '2513d79c-8e59-11f1-80f2-23100a18f544';
+
+        // Skriptets egna meddelanden är på engelska och går inte att ändra i
+        // deras gränssnitt. Vi byter ut dem när de dyker upp.
+        const EO_FEL = {
+            'Your email address is required.':
+                'Du behöver fylla i din e-postadress.',
+            'Your email address looks incorrect, please try again.':
+                'E-postadressen ser inte riktig ut — kontrollera den och försök igen.',
+            "This doesn't look like a human submission.":
+                'Anmälan stoppades av skräppostskyddet. Ladda om sidan och försök igen.',
+            'Please check the checkbox to indicate your consent.':
+                'Du behöver kryssa i rutan för att ge ditt samtycke.',
+            'This form has missing or invalid fields.':
+                'Något fält saknas eller är felaktigt ifyllt.',
+            'This form is not connected to a list.':
+                'Formuläret är inte kopplat till någon lista — hör gärna av dig, så fixar vi det.',
+            'Sorry, an unknown error has occurred. Please try again later.':
+                'Något gick fel. Försök gärna igen om en stund.',
+        };
+
+        function NyhetsbrevBox() {
+            const holder = React.useRef(null);
+            const [klar, setKlar] = React.useState(false);
+
+            // Lat inladdning av formulärskriptet.
+            React.useEffect(() => {
+                const el = holder.current;
+                if (!el) return;
+                // Skriptet letar upp formuläret med document.querySelector, så
+                // två exemplar på samma sida skulle plocka fel. Rutan renderas
+                // bara en gång per vy, men guarden gör det ofarligt ändå.
+                if (document.querySelector(`[data-form="${EO_FORM_ID}"]`)) return;
+
+                let laddad = false;
+                const ladda = () => {
+                    if (laddad) return;
+                    laddad = true;
+                    const s = document.createElement('script');
+                    s.async = true;
+                    s.src = `https://eomail5.com/form/${EO_FORM_ID}.js`;
+                    s.setAttribute('data-form', EO_FORM_ID);
+                    el.appendChild(s);   // skriptet ersätter sig själv med formuläret
+                };
+
+                if (!('IntersectionObserver' in window)) { ladda(); return; }
+                const io = new IntersectionObserver(poster => {
+                    if (poster.some(p => p.isIntersecting)) { ladda(); io.disconnect(); }
+                }, { rootMargin: '400px' });
+                io.observe(el);
+                return () => io.disconnect();
+            }, []);
+
+            // Deras kvittotext är hårdkodad på engelska; vi visar en egen.
+            React.useEffect(() => {
+                const onSuccess = e => {
+                    if (e.detail && e.detail.form_id === EO_FORM_ID) setKlar(true);
+                };
+                document.addEventListener('emailoctopus:form.success', onSuccess);
+                return () => document.removeEventListener('emailoctopus:form.success', onSuccess);
+            }, []);
+
+            // Felmeddelandena skrivs rakt in i DOM:en av deras skript.
+            React.useEffect(() => {
+                const el = holder.current;
+                if (!el) return;
+                const oversatt = () => {
+                    const p = el.querySelector('.emailoctopus-error-message');
+                    if (!p) return;
+                    const sv = EO_FEL[p.textContent.trim()];
+                    if (sv) p.textContent = sv;
+                };
+                const mo = new MutationObserver(oversatt);
+                mo.observe(el, { childList: true, subtree: true, characterData: true });
+                return () => mo.disconnect();
+            }, []);
+
+            return (
+                <aside className={'nb-box no-begrepp' + (klar ? ' is-klar' : '')}>
+                    <span className="lab-mono-label">Nyhetsbrev</span>
+                    <h2 className="nb-title">Fysiklabbets veckobrev</h2>
+                    {klar ? (
+                        <div className="nb-klar">
+                            <strong>Tack!</strong> Kolla din inkorg — vi har skickat ett mejl
+                            där du bekräftar din adress. Prenumerationen startar först när du
+                            klickat på länken i det.
+                        </div>
+                    ) : (
+                        <p className="nb-lead">
+                            Veckans fysiknyheter och nytt material på Fysiklabbet, samlat i ett
+                            mejl i veckan. Utvalt och förklarat så att det går att ta med in i
+                            klassrummet.
+                        </p>
+                    )}
+                    <div className="nb-form" ref={holder} />
+                    {!klar && (
+                        <p className="nb-fine">
+                            Du får ett bekräftelsemejl innan prenumerationen startar.
+                            Avsluta när du vill — varje utskick har en avanmälningslänk.
+                        </p>
+                    )}
+                </aside>
+            );
+        }
+
         function NewsCard({ a }) {
             return (
                 <a className="news-card" href={`?id=${a.id}`}>
@@ -635,6 +867,7 @@
                                         {matches.map(a => <NewsCard a={a} key={a.id} />)}
                                     </div>
                                 )}
+                                <NyhetsbrevBox />
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -652,6 +885,14 @@
                                         </div>
                                     </a>
                                 )}
+
+                                {/* Rutan sitter i sömmen mellan senaste nytt och
+                                    arkivet. Längst ned på sidan hamnade den efter
+                                    ett femtiotal artiklar och syntes aldrig.
+                                    Exakt EN ruta får finnas per sida — skriptet
+                                    hittar formuläret med document.querySelector. */}
+                                <NyhetsbrevBox />
+
                                 {rest.length > 0 && (
                                     <React.Fragment>
                                         <div className="news-grid-head">
@@ -952,6 +1193,8 @@
                     {a.larare && <LararRuta l={a.larare} />}
 
                     <ShareBar a={a} />
+
+                    <NyhetsbrevBox />
                 </article>
             );
         }

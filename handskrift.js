@@ -372,6 +372,39 @@
     /* ungefär lika med: två vågiga streck (avrundningar) */
     '≈': { w: 88, strokes: [[[20, 50], [33, 44], [48, 53], [63, 60], [76, 53]],
                             [[20, 74], [33, 68], [48, 77], [63, 84], [76, 77]]] },
+    /* tillagda 2026-08-02 (fy2-1.3 Period, frekvens, radianer och vinkel-
+     * hastighet): grekiska ω/α/π samt versalerna H, V, L och gemena z. */
+    /* omega: två skålar öppna uppåt som möts i en spets på mitten */
+    'ω': { w: 92, strokes: [[[24, 52], [15, 68], [17, 86], [29, 97], [41, 90],
+                             [46, 72], [51, 90], [63, 97], [75, 86], [77, 68],
+                             [68, 52]]] },
+    /* alfa efter den italiska matte-formen (KaTeX/Computer Modern): en
+     * STOR, rund, sluten ÖGLA och ett HÖGERSTRECK som möter öglan i en
+     * spets upptill, buktar ut och löper TÄTT UTMED öglans högersida
+     * (bara ~15 enheters glapp) och avslutas med en KROK åt höger vid
+     * baslinjen. Fyra former förkastades 2026-08-02 innan denna: öppen
+     * skål + lodrät stapel, sluten skål + kort diagonal, skål +
+     * högerstreck som vek tillbaka in i botten (blev ett 'o'), och rund
+     * skål + långt ben snett ned åt höger. De tre första lästes som
+     * gemena 'a' eller 'o'. Felet i alla var att högerdelen SKÖT IVÄG
+     * från öglan i stället för att hugga intill den — det är närheten
+     * plus kroken som gör formen grekisk. Ändra aldrig glappet till ett
+     * utfallande ben igen. Granska nya glyfer sida vid sida med den
+     * bokstav de kan förväxlas med (labb: .shots/hk13-alfa-lab.html). */
+    'α': { w: 94, strokes: [[[57, 53], [45, 46], [29, 49], [18, 61], [16, 77],
+                             [22, 93], [35, 101], [50, 97], [58, 86], [60, 68],
+                             [55, 54]],
+                            [[56, 50], [66, 60], [74, 73], [74, 88], [70, 98],
+                             [79, 100], [86, 94]]] },
+    /* pi: tvärstreck först, sedan vänsterbenet och högerbenet med fot */
+    'π': { w: 92, strokes: [[[14, 54], [82, 51]],
+                            [[34, 54], [28, 100]],
+                            [[64, 54], [63, 90], [72, 100]]] },
+    'H': { w: 84, strokes: [[[26, 12], [21, 100]], [[72, 11], [67, 100]],
+                            [[23, 56], [70, 54]]] },
+    'V': { w: 82, strokes: [[[20, 12], [44, 100], [70, 11]]] },
+    'L': { w: 66, strokes: [[[30, 12], [26, 100], [66, 97]]] },
+    'z': { w: 66, strokes: [[[22, 52], [62, 50], [22, 98], [64, 95]]] },
     "'": { w: 24, strokes: [[[27, 8], [19, 30]]] },
     '<': { w: 76, strokes: [[[64, 40], [24, 66], [64, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
@@ -2517,6 +2550,480 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: vinkelhastighet "karusellen" ----------------
+   * Exempel 1 ur Fysik nivå 2, 1.3 Period, frekvens, radianer och
+   * vinkelhastighet: en karusell roterar ett varv på 10 s — a) vinkel-
+   * hastigheten i grader/s, b) i rad/s. Poängen är att SAMMA formel
+   * ω = α/t används i båda deluppgifterna; det enda som byts ut är hur
+   * ett helt varv mäts (360° respektive 2π rad). Omvandlingen skrivs
+   * därför ut i b):s mätvärdesklammer (α=360°=2π), precis som en
+   * SI-omvandling. */
+  function layoutKarusell(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;                       /* under figuren */
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    /* hel cirkel med lite överlapp — karusellen sedd uppifrån */
+    function ringShape(cx, cy, r, color) {
+      var pts = [];
+      for (var i = 0; i <= 24; i++) {
+        var a = -1.1 + (i / 24) * Math.PI * 2.14;
+        pts.push([cx + Math.cos(a) * (r + rnd(-1.3, 1.3)),
+                  cy + Math.sin(a) * (r + rnd(-1.3, 1.3))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: color || null });
+    }
+    /* bråk med rakt divisionsstreck (samma helper som spett/bräda) */
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri: karusellen uppifrån --- */
+    var cx = 205, cy = 172, R = 92, Rr = 108;   /* Rr = rotationsbågen */
+    function onArc(deg, rad) {
+      var a = deg * Math.PI / 180;
+      return [cx + Math.cos(a) * rad, cy - Math.sin(a) * rad];
+    }
+
+    /* ---- steg 1: rita det vi vet — karusellen uppifrån ---- */
+    var b1 = figurBubble(258, [
+      [['Ritar karusellen uppifrån.']],
+      [['Pricken i mitten är axeln som']],
+      [['den snurrar kring.']]
+    ]);
+    tanke(b1);
+    ringShape(cx, cy, R);
+    pause(120);
+    [0, 60, 120].forEach(function (d) {        /* tre diametrar = sex ekrar */
+      line(onArc(d, R), onArc(d + 180, R));
+    });
+    pause(120);
+    acts.push({ kind: 'stroke', pts: dotPts(cx, cy) });
+    stepEnd();
+
+    /* ---- steg 2: tillägg — rotationen och tiden för ett varv ---- */
+    var b2 = figurBubble(262, [
+      [['Ett helt varv tar 10 sekunder.']],
+      [['Jag följer en av gondolerna och']],
+      [['ritar rotationen som en pil.']]
+    ]);
+    tanke(b2);
+    acts.push({ kind: 'stroke', pts: dotPts(cx + R, cy) });   /* gondolen */
+    pause(150);
+    var arc = [], th;
+    for (th = -32; th <= 118; th += 15) arc.push(onArc(th, Rr));
+    acts.push({ kind: 'stroke', pts: arc });
+    var tipA = arc[arc.length - 1], preA = arc[arc.length - 2];
+    arrowHead(tipA[0], tipA[1], preA[0], preA[1], 10);
+    pause(150);
+    /* tal-annoteringar (se REGEL) → blått */
+    placeString('1 varv', 340, 96, s * 0.55, F * 0.55, acts, BLUE);
+    pause(150);
+    placeString('t=10 s', 340, 124, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- a) vinkelhastigheten i grader per sekund ---- */
+    var y = 358;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bA = bubble(120, bubbleTop(276), bw, [
+      [['a) Vinkelhastigheten är vinkeln']],
+      [['kroppen vridit sig, dividerad']],
+      [['med tiden: ', 0], ['ω', 1], [' = ', 0], ['α', 1], [' / ', 0], ['t', 1]]
+    ]);
+    tanke(bA);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('a) Vinkelhastighet', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;                          /* extra luft: formeln är ett bråk */
+    var xx = placeString('ω=', padL, y, s, F, acts);
+    fracH('α', 't', xx, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL) ---- */
+    y += adv + 0.9 * F;
+    var bK1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Ett helt varv är 360 grader,']],
+      [['och det tar 10 sekunder.']]
+    ]);
+    tanke(bK1);
+    var klam1 = valueBracket(acts, ['α=360°', 't=10 s'], padL, y, s, F);
+    stepEnd();
+    y = klam1.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI1);
+    xx = placeString('ω=', padL, y, s, F, acts);
+    xx = fracH('360°', '10', xx, y);
+    placeString('=36°/s', xx, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR1 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Ett tiondels varv per sekund,']],
+      [['alltså en tiondel av 360°.']],
+      [['36 grader per sekund stämmer!']]
+    ]);
+    tanke(bR1);
+    var xe = placeString('Svar: 36°/s', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- b) samma sak, men i radianer ---- */
+    y += adv + 0.9 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Samma formel, men nu mäts']],
+      [['varvet i radianer i stället för']],
+      [['i grader.']]
+    ]);
+    tanke(bB);
+    placeString('b) Vinkelhastighet i radianer', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    xx = placeString('ω=', padL, y, s, F, acts);
+    fracH('α', 't', xx, y);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Ett helt varv är 2π rad. Det']],
+      [['skrivs om i klammern, precis']],
+      [['som en enhetsomvandling.']]
+    ]);
+    tanke(bK2);
+    var klam2 = valueBracket(acts, ['α=360°=2π', 't=10 s'], padL, y, s, F);
+    stepEnd();
+    y = klam2.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Sätter in värdena och förkortar']],
+      [['bråket så långt det går.']]
+    ]);
+    tanke(bI2);
+    xx = placeString('ω=', padL, y, s, F, acts);
+    xx = fracH('2π', '10', xx, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracH('π', '5', xx, y);
+    var xIns = placeString('=0,628... rad/s', xx, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL): fortsättning på samma rad om papperet
+     * räcker, annars ny rad som börjar med ≈ */
+    var bAvr = bubble(140, bubbleTop(y), bw, [
+      [['Först NU avrundar jag. Tiden']],
+      [['10 s har två värdesiffror, så']],
+      [['svaret får två: 0,63 rad/s.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈0,63 rad/s';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 40) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      /* raden ovanför innehåller bråk — nämnaren sticker ned 1,04·F under
+       * baslinjen, så fortsättningsraden behöver extra luft */
+      y += adv + 0.8 * F;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bR2 = bubble(120, bubbleTop(y - adv), bw, [
+      [['En radian är ungefär 57°, och']],
+      [['36°/s är alltså knappt en radian']],
+      [['per sekund. Rimligt!']]
+    ]);
+    tanke(bR2);
+    xe = placeString('Svar: 0,63 rad/s', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: fart i cirkulär bana "LP-skivan" ------------
+   * Exempel 2 ur Fysik nivå 2, 1.3: en LP-skiva med diametern 30 cm
+   * snurrar 33 varv/minut; ett suddgummi ligger 5,0 cm från ytterkanten.
+   * Två fällor som figuren ska göra synliga: (1) det är RADIEN, inte
+   * diametern, som räknas, och (2) suddgummits BANRADIE är inte skivans
+   * radie utan 15 cm − 5,0 cm. Skivans radie är ett härlett mått och
+   * motiveras därför med en anteckning bredvid figuren innan måttet
+   * ritas (se REGEL om härledda mått). Vinkelhastigheten räknas ut inuti
+   * mätvärdesklammern, som deluträkningarna i bräd-scenen. */
+  function layoutLpskiva(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 330;                       /* under figurens måttlinjer */
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function dimArrow(x1, x2, yy) {         /* måttlinje med dubbelpil */
+      line([x1 + 10, yy], [x2 - 10, yy], BLUE);
+      arrowHead(x1, yy, x1 + 16, yy, 9, BLUE);
+      arrowHead(x2, yy, x2 - 16, yy, 9, BLUE);
+    }
+    function ringShape(cx, cy, r) {
+      var pts = [];
+      for (var i = 0; i <= 24; i++) {
+        var a = -1.1 + (i / 24) * Math.PI * 2.14;
+        pts.push([cx + Math.cos(a) * (r + rnd(-1.3, 1.3)),
+                  cy + Math.sin(a) * (r + rnd(-1.3, 1.3))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri: 8,53 px per cm (skivans radie 15 cm) ---
+     * Diametern måttsätts PÅ den vågräta diameterlinjen inne i skivan i
+     * stället för på en måttlinje ovanför. Den varianten provades först
+     * men kräver lodräta projektionslinjer utmed skivans sidor, och de
+     * korsar oundvikligen varje rotationsbåge man lägger utanför kanten.
+     * Här är ytan ovanför och till höger om skivan i stället helt fri. */
+    var cx = 193, cy = 168, R = 128, PXCM = R / 15;
+    var xL = cx - R, xRim = cx + R;          /* skivans vänstra/högra kant */
+    var xSudd = cx + 10 * PXCM;              /* suddgummits banradie 10 cm */
+    /* De två måtten ligger på VAR SIN nivå. Kedjade på samma nivå möts
+     * deras pilspetsar i xSudd, och eftersom 5,0 cm bara är ~43 px blir
+     * de två motriktade spetsarna ett ✕ i stället för ett måttbyte. */
+    var dimY = 232, dimY2 = 276;
+
+    /* ---- steg 1: rita det vi vet — skivan och diametern ---- */
+    var b1 = figurBubble(258, [
+      [['Ritar skivan uppifrån. Pricken']],
+      [['i mitten är axeln den snurrar']],
+      [['kring, och tvärs över är 30 cm.']]
+    ]);
+    tanke(b1);
+    ringShape(cx, cy, R);
+    pause(120);
+    acts.push({ kind: 'stroke', pts: dotPts(cx, cy) });
+    pause(150);
+    dimArrow(xL, xRim, cy);                  /* diametern som måttlinje */
+    placeString('d=30 cm', xL + 30, cy - 14, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- steg 2: tillägg — rotationen ---- */
+    var b2 = figurBubble(258, [
+      [['Skivan snurrar 33 varv varje']],
+      [['minut. Det blir frekvensen,']],
+      [['fast per minut i stället för']],
+      [['per sekund.']]
+    ]);
+    tanke(b2);
+    var arc = [], th;
+    for (th = 55; th >= 12; th -= 8.6) {     /* medurs, som en skivtallrik */
+      var a = th * Math.PI / 180;
+      arc.push([cx + Math.cos(a) * (R + 20), cy - Math.sin(a) * (R + 20)]);
+    }
+    acts.push({ kind: 'stroke', pts: arc });
+    var tipA = arc[arc.length - 1], preA = arc[arc.length - 2];
+    arrowHead(tipA[0], tipA[1], preA[0], preA[1], 10);
+    pause(150);
+    /* KÄND storhet → beteckningen framför värdet (se REGEL). Enheten är
+     * inte SI ännu; omvandlingen till Hz görs i mätvärdesklammern. */
+    placeString('f=33 varv/min', 358, 108, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- steg 3: skivans radie är ett HÄRLETT MÅTT (se REGEL) och
+     * motiveras med en anteckning i fri yta innan den används ---- */
+    var b3 = figurBubble(262, [
+      [['Det är radien som behövs, inte']],
+      [['diametern. Antecknar den vid']],
+      [['sidan av figuren.']]
+    ]);
+    tanke(b3);
+    placeString('Skivans radie:', 452, 186, s * 0.62, F * 0.62, acts);
+    pause(200);
+    placeString('30/2=15 cm', 452, 214, s * 0.62, F * 0.62, acts);
+    stepEnd();
+
+    /* ---- steg 4: tillägg — suddgummit och banradien ---- */
+    var b4 = figurBubble(262, [
+      [['Suddgummit ligger 5,0 cm från']],
+      [['kanten. Banradien ', 0], ['r', 1], [' är alltså']],
+      [['kortare än skivans radie.']]
+    ]);
+    tanke(b4);
+    /* suddgummit som en liten rektangel på banan */
+    line([xSudd - 11, cy - 8], [xSudd + 11, cy - 8]);
+    line([xSudd + 11, cy - 8], [xSudd + 11, cy + 8]);
+    line([xSudd + 11, cy + 8], [xSudd - 11, cy + 8]);
+    line([xSudd - 11, cy + 8], [xSudd - 11, cy - 8]);
+    pause(200);
+    dash([cx, cy + 8], [cx, dimY - 6]);      /* projektioner ned till måtten */
+    dash([xSudd, cy + 12], [xSudd, dimY2 - 6]);
+    dash([xRim, cy + 6], [xRim, dimY2 - 6]);
+    pause(150);
+    dimArrow(cx, xSudd, dimY);
+    /* OKÄND storhet: bara beteckningen (se REGEL). Etiketten dras in mot
+     * skivans mitt — mitt under måttlinjen hamnar den annars på cirkel-
+     * randen (etiketter aldrig på linjer). */
+    placeString('r', cx + 30, dimY + 26, s * 0.62, F * 0.62, acts, BLUE);
+    pause(200);
+    dimArrow(xSudd, xRim, dimY2);
+    placeString('5,0 cm', xRim + 16, dimY2 + 6, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- beräkningen, rad för rad ---- */
+    var y = 400;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF = bubble(120, bubbleTop(306), bw, [
+      [['Farten i banan är vinkel-']],
+      [['hastigheten gånger banradien:']],
+      [['', 0], ['v', 1], [' = ', 0], ['ω', 1], [' · ', 0], ['r', 1]]
+    ]);
+    tanke(bF);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('Fart i cirkulär bana', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.45 * F;
+    placeString('v=ω·r', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- mätvärdesklammern: frekvensen, vinkelhastigheten och
+     * banradien räknas ut INUTI klammern (se REGEL) ---- */
+    y += adv + 0.9 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Varken ', 0], ['ω', 1], [' eller ', 0], ['r', 1], [' är givna, så de']],
+      [['räknas ut i klammern. Frekvensen']],
+      [['först, sedan vinkelhastigheten.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts, [
+      'f=33 varv/60 s=0,55 Hz',
+      'ω=2π·f=2π·0,55 Hz=1,1π rad/s',
+      'r=15 cm-5,0 cm=10 cm=0,10 m'
+    ], padL, y, s, F);
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI);
+    var xIns = placeString('v=1,1π·0,10=0,345... m/s', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvr = bubble(140, bubbleTop(y), bw, [
+      [['Först NU avrundar jag. Måtten']],
+      [['har två värdesiffror, så svaret']],
+      [['får två: 0,35 m/s.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈0,35 m/s';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 40) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      y += adv;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR = bubble(120, bubbleTop(y - adv), bw, [
+      [['Suddgummits varv är bara']],
+      [['2π·0,10 ≈ 0,63 m långt, och det']],
+      [['tar drygt 1,8 s. Några tiondels']],
+      [['meter per sekund är rimligt!']]
+    ]);
+    tanke(bR);
+    var xe = placeString('Svar: 0,35 m/s', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
   function dotPts(cx, cy) {
     var pts = [];
@@ -3108,7 +3615,8 @@
 
     var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
-                   spett: layoutSpett, brada: layoutBrada };
+                   spett: layoutSpett, brada: layoutBrada,
+                   karusell: layoutKarusell, lpskiva: layoutLpskiva };
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](spec, F) : layout(spec, F);
 

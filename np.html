@@ -671,7 +671,9 @@
                         lösa uppgiften själv innan du tittar på nästa steg.
                     </p>
                     <div className="np-provkort-grid">
-                        {NP_INDEX.map(p => (
+                        {/* dold: true i data/np/index.js döljer provet här —
+                            djuplänken np.html#<id> fungerar fortfarande. */}
+                        {NP_INDEX.filter(p => !p.dold).map(p => (
                             <a key={p.id} className="lab-card lab-card-clickable" href={'#' + p.id}>
                                 <span className="lab-card-tag">{p.kurs.toUpperCase()}</span>
                                 <span className="lab-card-title">{p.namn}</span>

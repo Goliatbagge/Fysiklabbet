@@ -1,5 +1,13 @@
 // Fysiklabbet — index över nationella prov med steg-för-steg-lösningar.
 // Varje post pekar på ett prov i window.NP_PROV (laddas från egen fil).
+//
+// dold: true  → provet visas INTE i listan på np.html och tas inte med i
+// sitemap.xml (loadProv() i data/build-nyheter-og.js filtrerar bort det).
+// Provets data laddas fortfarande, så djuplänken np.html#<id> fungerar för
+// den som har adressen. Ta bort raden `dold: true` för att publicera igen —
+// kör därefter `node data/build-nyheter-og.js` så kommer provet tillbaka i
+// sitemapen (och lägg tillbaka raden i "Senaste uppdateringar" i index.html
+// om den är bortkommenterad).
 window.NP_INDEX = [
     {
         id: 'ma1c-vt2022',
@@ -30,5 +38,6 @@ window.NP_INDEX = [
         kurs: 'Fysik nivå 2',
         namn: 'Kursprov, våren 2016',
         meta: '19 uppgifter · Delprov A (teoriuppgifter) · Lösningar steg för steg',
+        dold: true,
     },
 ];

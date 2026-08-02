@@ -51,6 +51,79 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-02-viskositetens-ovre-grans",
+    date: "2026-08-02",
+    title: "Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går",
+    deck: "Vatten rinner lätt, honung trögt, glaciärer knappt märkbart. Men någonstans slutar ”trögflytande” att betyda något alls, och materialet är helt enkelt stelt. Efter att ha stått svarslös inför sina egna studenter har Masaki Yoshida vid Ritsumeikan University i Japan satt en siffra på var den gränsen går.",
+    category: "Geofysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-02-viskositetens-ovre-grans.jpg",
+    imageAlt: "En vägskärning i ett kuperat medelhavslandskap. I bergväggen syns ljusa och mörka stenlager som är hopveckade i vågor, öglor och skarpa knyckar, som om lagren en gång varit mjuka. Ovanför skärningen växer buskar och gles gräsmark, nedanför löper en asfaltsväg.",
+    imageCredit: "Foto: Catherine Christopoulou, Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["mekanik", "geofysik", "viskositet", "vätskor", "plattektonik", "jordens inre", "materialfysik", "tryck", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Physics World", url: "https://physicsworld.com/a/geophysicist-identifies-a-maximum-practical-viscosity/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-earth-deepest-upper-limit-viscosity.html" },
+      { name: "Ritsumeikan University (pressmeddelande)", url: "https://en.ritsumei.ac.jp/news/detail/?id=1174" }
+    ],
+    research: {
+      citation: "Masaki Yoshida, ”Upper bound of viscosity from a geophysical perspective”, Physics of Fluids 38, 063117 (2026)",
+      url: "https://doi.org/10.1063/5.0335802"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 1.2 Storheter, enheter och prefix", href: "katalog.html#fy1-1.2" },
+        { label: "Fysik nivå 1 · 3.6 Friktion", href: "katalog.html#fy1-3.6" },
+        { label: "Fysik nivå 1 · 5.2 Tryck och tryckkraft", href: "katalog.html#fy1-5.2" }
+      ],
+      fragor: [
+        "Beck går att slå sönder med en hammare, men rinner till en droppe ungefär vart tionde år. Är det ett fast ämne eller en vätska? Vad avgör svaret — materialet, eller hur länge man tittar på det?",
+        "Laboratoriets formler fungerade bra vid de temperaturer de prövats vid, men gav ett svar med sjuttio nollor när de användes långt utanför det området. Vad säger det om att använda en modell utanför sitt giltighetsområde? Hur skulle ni kunna märka att ni gjort just det?",
+        "Ljusets hastighet är ett verkligt tak: inget kan gå fortare. Yoshidas viskositetsgräns är av ett annat slag — större värden är inte omöjliga, de slutar bara betyda något. Vilken sorts gräns är mest användbar för en fysiker, och varför?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Häll upp ett glas vatten, så rinner det ut på ett ögonblick. Häll upp honung, och du får vänta. Häll upp beck — den becksvarta resten från tjärframställning — och du får vänta i tio år på en enda droppe. Storheten som skiljer dem åt heter viskositet, betecknas med den grekiska bokstaven <em>η</em> (eta) och mäter hur mycket ett ämne bråkar emot när det tvingas flyta. Luft ligger på omkring 10<sup>−5</sup>&nbsp;Pa·s, vatten på 10<sup>−3</sup>&nbsp;Pa·s och honung kring 10&nbsp;Pa·s." },
+      { type: "p", html: "Men vad händer i andra änden av skalan? Finns det ett tak — en punkt där ett ämne är så trögflytande att det inte är flytande längre? Masaki Yoshida, professor vid Ritsumeikan University i Japan, menar att det gör det. I en studie i tidskriften <em>Physics of Fluids</em> lägger han taket vid omkring 10<sup>30</sup>&nbsp;Pa·s — ungefär 10<sup>33</sup> gånger vattnets viskositet. Ovanför den gränsen, skriver han, är det inte längre meningsfullt att kalla ett material trögflytande. Då är det stelt." },
+
+      { type: "h2", text: "Allt rinner, om man bara väntar tillräckligt länge" },
+      { type: "p", html: "Gränsen mellan fast och flytande är luddigare än den verkar. Det mest tålmodiga beviset står i en glasmonter vid University of Queensland i Australien. År 1927 värmde fysikern Thomas Parnell beck till en vätska, hällde den i en tratt och lät den stelna. Beck går att slå sönder med en hammare som om det vore glas. Ändå har nio droppar sedan dess sakta tänjt sig loss och fallit ner i bägaren under tratten, den senaste i april 2014. Ur droppfallen har beckets viskositet kunnat räknas ut: omkring 2,3&nbsp;·&nbsp;10<sup>8</sup>&nbsp;Pa·s, alltså cirka 230&nbsp;miljarder gånger trögare än vatten." },
+      { type: "p", html: "Samma sak gäller is. En glaciär ser ut som ett stillastående block, men den kryper nedför dalen, och dess viskositet ligger någonstans mellan 10<sup>13</sup> och 10<sup>17</sup>&nbsp;Pa·s beroende på temperatur, påfrestning och iskristallernas struktur. Och samma sak gäller sten. Jordens mantel — de tusentals kilometer heta bergarter som ligger under skorpan — är fast material, och seismiska vågor går rakt igenom den som genom en solid kropp. Ändå vältrar den runt i långsamma konvektionsceller på miljontals år." },
+      { type: "image", src: "nyheter/bilder/2026-08-02-viskositetens-ovre-grans-2.jpg",
+        alt: "Satellitbild rakt uppifrån över ett snötäckt bergsområde. Flera isströmmar rinner ihop till en bred glaciärtunga, och de mörka gruslinjerna på isen är hopveckade i stora, mjuka öglor. Nedre delen av bilden lyser klarröd där växtligheten finns.",
+        caption: "Susitna Glacier i Alaska sedd från satellit. De mörka banden är sten och grus som isen dragit med sig — och som veckats ihop där isströmmar med olika fart flutit samman. Bilden är tagen i falska färger, där växtlighet återges röd.",
+        credit: "Bild: Jesse Allen och Robert Simmon, NASA Earth Observatory (ASTER/Terra), public domain" },
+      { type: "p", html: "Att även sten kan flyta syns med blotta ögat i vägskärningar där bergets lager ligger hopveckade i mjuka öglor. De vecken bildades djupt nere i jordskorpan, under högt tryck och hög temperatur, i en takt av kanske några millimeter om året. Det avgörande är alltså hur länge man tittar: ett material som verkar stenhårt under en sekund kan vara påtagligt flytande under en miljon år. Viskositet är därför alltid knuten till en tidsskala — och det är precis där Yoshidas problem började." },
+
+      { type: "h2", text: "Formeln gav ett svar med sjuttio nollor" },
+      { type: "p", html: "I laboratorier går det att klämma och vrida på bergartsprover och mäta hur de deformeras. Ur sådana försök får geologer fram samband som beskriver hur trögt ett visst mineral flyter vid ett visst tryck och en viss temperatur. Sambanden är extremt känsliga för just temperaturen: kyler man ner materialet skjuter viskositeten i höjden." },
+      { type: "p", html: "Problemet uppstår när man använder sambanden vid jordytan, där berget är svalt. Då spottar formlerna ur sig svindlande siffror — Physics World anger storleksordningen 10<sup>70</sup>&nbsp;Pa·s för de tektoniska plattorna. Ett material med den viskositeten skulle aldrig hinna röra sig ur fläcken, inte under universums hela livstid. Ändå ser vi plattorna böja sig och dyka ner i manteln vid subduktionszonerna, år efter år." },
+      { type: "quote", html: "”Jag insåg att jag inte kunde förklara för mina studenter varför plattor med så hög viskositet böjs och sjunker ner i manteln.”", cite: "Masaki Yoshida, Ritsumeikan University, i Physics World" },
+
+      { type: "h2", text: "Tre tidsskalor, ett svar" },
+      { type: "p", html: "Yoshidas grepp var att inte lita på en enda metod, utan att ringa in svaret från tre håll som täcker vitt skilda tidsspann." },
+      { type: "p", html: "Först satellitmätningar av hur markytan faktiskt deformeras, år efter år i decennier. De visar att plattornas stabila inre delar har effektiva viskositeter på omkring 10<sup>24</sup>&nbsp;Pa·s eller mer, och att töjningshastigheterna kan vara nere på 10<sup>−9</sup> per år — en miljarddels formförändring per år. Den högsta viskositet som över huvud taget går att observera på det viset landar kring 10<sup>28</sup>&nbsp;Pa·s." },
+      { type: "p", html: "Sedan laboratorieförsöken, som deformerar bergarter under timmar till år. Yoshida gick igenom deformationssambanden för de mineral som bygger upp jordens inre — olivin, klinopyroxen, diopsid, anortit och kvarts — vid realistiska tryck och temperaturer. Och till sist datorsimuleringar av mantelkonvektion och plattrörelser över miljontals år. De spåren pekade mot samma tak: 10<sup>30±2</sup>&nbsp;Pa·s." },
+
+      { type: "h2", text: "Varför gränsen ligger just där" },
+      { type: "p", html: "Bakom siffran ligger en ganska enkel tanke. Ett material som både kan fjädra tillbaka som ett gummiband och sakta flyta som sirap har en karakteristisk tid, Maxwelltiden, som säger hur länge man måste vänta innan flytandet tar över från fjädrandet. Den får man genom att dividera viskositeten med materialets styvhet." },
+      { type: "p", html: "För bergarter är styvheten omkring 10<sup>11</sup>&nbsp;Pa. Sätter man in en viskositet på 10<sup>30</sup>&nbsp;Pa·s hamnar Maxwelltiden på storleksordningen 10<sup>19</sup>&nbsp;sekunder — hundratals miljarder år, alltså mer än femtio gånger jordens ålder på 4,5&nbsp;miljarder år. Ett sådant material hinner aldrig flyta märkbart, hur länge planeten än får stå. Den samlade deformationen blir försumbar, och då är ”trögflytande vätska” helt enkelt fel beskrivning: kroppen är stel." },
+      { type: "quote", html: "”Det föreslagna övre viskositetsintervallet är ett tidsskaleberoende kriterium, ovanför vilket ett material beter sig som en i praktiken stel kropp i stället för som ett deformerbart, trögflytande kontinuum.”", cite: "Masaki Yoshida, ur pressmaterialet till studien" },
+
+      { type: "h2", text: "Varför det spelar roll" },
+      { type: "p", html: "Ett tak för viskositeten är inte bara en kuriositet. Varje datorsimulering av jordens inre måste ge plattorna ett viskositetsvärde, och väljer man ett orimligt högt fastnar hela modellen i det tillstånd geofysiker kallar stelt lock: ett obrutet, orörligt ytskal helt utan plattgränser — ungefär som Mars har i dag. Med ett realistiskt tak blir det i stället möjligt att räkna på hur ett sådant lock kan spricka upp och börja röra sig. Yoshida menar själv att frågan om varför plattrörelsen på jorden kom i gång efter att det stela locket bildats hänger nära ihop med hans resultat." },
+      { type: "p", html: "Om taket verkligen ligger vid 10<sup>30</sup>&nbsp;Pa·s får framtida mätningar och modeller avgöra. Osäkerheten på två tiopotenser åt vardera hållet är stor — men den är i alla fall ändlig, vilket 10<sup>70</sup> aldrig var." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En pascalsekund (Pa·s) är SI-enheten för viskositet. Den anger hur stor skjuvspänning som krävs för att få intilliggande skikt i ett material att glida förbi varandra med en viss hastighetsskillnad.",
+        "Beckdroppsförsöket vid University of Queensland startade 1927 och har på nästan hundra år gett nio droppar. Det finns beck kvar i tratten för mer än ett sekel till.",
+        "Jordens mantel har en viskositet kring 10<sup>21</sup>&nbsp;Pa·s, ungefär 10<sup>24</sup> gånger vattnets. Ändå rör sig materialet i den i samma takt som naglar växer — några centimeter om året.",
+        "Åt andra hållet finns också en gräns. Det kvark-gluonplasma som skapas när tunga atomkärnor krockar i partikelacceleratorer är det mest lättflytande ämne vi känner till, och tros ligga nära en teoretisk undre gräns för hur liten inre friktion ett ämne kan ha."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-08-01-storsta-galaxen",
     date: "2026-08-01",
     title: "Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande",

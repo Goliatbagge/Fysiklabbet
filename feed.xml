@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 01 Aug 2026 11:24:16 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 08:19:50 GMT</lastBuildDate>
+    <item>
+      <title>Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-02-viskositetens-ovre-grans</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-02-viskositetens-ovre-grans</guid>
+      <pubDate>Sun, 02 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Geofysik</category>
+      <description>Vatten rinner lätt, honung trögt, glaciärer knappt märkbart. Men någonstans slutar ”trögflytande” att betyda något alls, och materialet är helt enkelt stelt. Efter att ha stått svarslös inför sina egna studenter har Masaki Yoshida vid Ritsumeikan University i Japan satt en siffra på var den gränsen går.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-02-viskositetens-ovre-grans.jpg" length="453416" type="image/jpeg"/>
+    </item>
     <item>
       <title>Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-01-storsta-galaxen</link>
@@ -177,15 +186,6 @@
       <category>Mekanik</category>
       <description>Vad händer om man kör en trädgårdssprinkler baklänges, så att vatten sugs in i stället för sprutas ut? Frågan ställdes redan 1883 och gjorde till och med Richard Feynman så nyfiken att han sprängde en glasbehållare i ett misslyckat labbförsök på 1940-talet. Nu har matematiker vid New York University, ledda av Leif Ristroph, byggt en rad olika ”sprinklerleksaker” i böjda rörformer och löst gåtan i tidskriften PNAS: en baklängeskörd sprinkler snurrar visserligen, men av ett helt annat skäl än den vanliga — och omkring 50 gånger långsammare.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-14-baklanges-sprinkler.jpg" length="59326" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-13-karnvapen-i-rymden</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-13-karnvapen-i-rymden</guid>
-      <pubDate>Mon, 13 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Kärnfysik</category>
-      <description>MIT-forskaren Areg Danagoulian har i tidskriften Nature visat hur en detektor, inte större än en tjock uppslagsbok, skulle kunna avslöja om en satellit bär på ett kärnvapen — genom att räkna de neutroner som slås loss när jordens naturliga strålningsbälten träffar tunga atomkärnor som uran och plutonium. Metoden kan ge 1967 års rymdfördrag, som helt saknar kontrollmekanism, sina första verkliga tänder.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-13-karnvapen-i-rymden.jpg" length="586809" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

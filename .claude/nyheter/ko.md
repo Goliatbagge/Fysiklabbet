@@ -14,6 +14,55 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-08-02) — kan tas upp senare
+
+- **Valdes i dag: viskositetens övre gräns** — Masaki Yoshida (Ritsumeikan
+  University) föreslår ett fysikaliskt meningsfullt tak för viskositeten vid
+  10^30±2 Pa·s, över vilket ett material i praktiken är stelt i stället för
+  trögflytande. Physics of Fluids 38, 063117 (2026), DOI 10.1063/5.0335802.
+  Se publicerat.md för full avvägning och för fallgropen med talen
+  10^28 / 10^30 / 10^70.
+  Konkurrenter som lades åt sidan i dag, i ungefärlig styrkeordning:
+- **Elektronkylning av högladdade joner i en Penning-fälla — första gången**
+  (STARKASTE RESERVEN — ta denna härnäst om inget färskare dyker upp).
+  Simon Rausch, Wilfried Nörtershäuser m.fl. vid TU Darmstadt, tillsammans med
+  GSI:s decelerator-avdelning, har för första gången bromsat accelerator-
+  producerade högladdade joner (helt joniserad argon, alltså nakna atomkärnor)
+  från ~30 % av ljushastigheten hela vägen ner till fångst i en Penning-fälla —
+  en sänkning av rörelseenergin med en faktor ~10 000 — och där kylt dem med
+  elektroner och lagrat dem i flera sekunder. HITRAP-deceleratorn, fällan
+  387 mm mellan fångstelektroderna. Physical Review X (2026),
+  DOI 10.1103/961c-j3p5. Var FÄRSKAST av allt vid sökningen (~12 h) och är
+  kollegialt granskad; valdes bort enbart för att den är ett accelerator-
+  tekniskt delsteg snarare än en upptäckt, och för att artikeln hade blivit
+  mer teknisk än pedagogisk. Utmärkt vinkel på laddade partiklar i elektriska
+  och magnetiska fält om den tas upp. Källa:
+  https://phys.org/news/2026-07-electron-cooling-highly-ions-penning.html
+  (tillagd 2026-08-02)
+- **IBM och University of Chicago visar verifierad kvantöverlägsenhet** —
+  70 logiska qubitar, 2 415 logiska tvåqubitsoperationer, 468 T-grindar, ~15
+  minuters körning, med felkorrigerande kodning som gör att beräkningens
+  trohet går att sätta en statistisk undre gräns på. Simon Martiel m.fl.,
+  arXiv:2607.25941 (2026-08-01). Stor nyhet, men (a) ännu bara preprint,
+  (b) kvantdatorämnet har fått stå tillbaka för ämnesspridning 07-30, 07-31
+  och 08-01 — det börjar bli en skuld att betala av, så överväg den snart.
+  Källa: https://phys.org/news/2026-07-quantum-task-classical-simulations.html
+  (tillagd 2026-08-02)
+- **Ny legering upp till tio gånger starkare än stål och ändå böjlig** —
+  spröd kobolt-aluminiumförening gjord seg genom struktur på nanoskala
+  (ScienceDaily 07-30). Bra materialfysik-vinkel, men mer materialteknik än
+  fysikalisk upptäckt, och tematiskt nära dagens val (hur material deformeras).
+  Källa: https://www.sciencedaily.com/releases/2026/07/260729051524.htm
+  (tillagd 2026-08-02)
+- **Tryck på elbilsbatteriers elektroder kan förlänga livslängden** —
+  Physics World 07-30, tillämpad energifysik. För tillämpad/industrinära.
+  Källa: https://physicsworld.com/a/pressurizing-ev-battery-electrodes-could-make-them-last-longer-if-its-done-right/
+  (tillagd 2026-08-02)
+- **OBS — physics.aps.org svarade HTTP 403 vid sökningen 2026-08-02** och kunde
+  inte kontrolleras. Quanta hade inget nytt sedan myon-artikeln 07-29.
+  ScienceDaily var senast uppdaterad 07-31 (fotoniska tidskristallen, redan
+  publicerad hos oss 07-31). Phys.org var färskast även i dag.
+
 ## Fynd som inte användes (2026-08-01) — kan tas upp senare
 
 - **Valdes i dag: IC 1101, universums största kända galax, har äntligen

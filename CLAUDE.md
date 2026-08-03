@@ -103,9 +103,79 @@ python data/tts/generate-audio.py
 start [filnamn].html
 
 # Lokal utvecklingsserver (cache avstängd — använd ALLTID denna, inte
-# `python -m http.server` som låter webbläsaren cacha gamla filer)
-python .claude/dev-server.py 8000
+# `python -m http.server` som låter webbläsaren cacha gamla filer).
+# NORMALT BEHÖVS DEN INTE STARTAS FÖR HAND — se avsnittet nedan; en
+# schemalagd uppgift håller http://localhost:8000 igång dygnet runt.
+python .claude/dev-server.py 8000            # bara denna dator
+python .claude/dev-server.py 8000 0.0.0.0    # även hemmanätverket
+
+# Status / stopp / omstart för den alltid-igång-servern
+powershell -ExecutionPolicy Bypass -File .claude/server/dev-server-vakt.ps1 -Status
+powershell -ExecutionPolicy Bypass -File .claude/server/dev-server-vakt.ps1 -Stoppa
+powershell -ExecutionPolicy Bypass -File .claude/server/dev-server-vakt.ps1 -Starta_om
 ```
+
+## Utvecklingsservern körs alltid i bakgrunden
+
+`http://localhost:8000` ska **alltid** svara, så att ändringar kan provas i
+webbläsaren utan att pushas — och så att `verify-mobil-scen.js`,
+`build-manus.js` och skärmdumpsgranskningen alltid har en server att prata
+med. Det sköts av en schemalagd Windows-uppgift, inte av ett terminalfönster
+som råkar stå öppet:
+
+| Fil | Roll |
+|---|---|
+| `.claude/dev-server.py` | Själva servern (no-store, lyssnar bara på 127.0.0.1). |
+| `.claude/server/dev-server-vakt.ps1` | Vakten: startar servern **om den inte redan svarar**. Även `-Status`, `-Stoppa`, `-Starta_om`. |
+| `.claude/server/installera-server-task.ps1` | Registrerar uppgiften. Kör en gång per maskin (`-Avinstallera` tar bort den). |
+| `.claude/server/oppna-brandvagg.ps1` | Öppnar port 8000 för hemmanätverket. Kräver administratör, körs en gång. |
+| `.claude/server/logg/vakt.log` | Starter och fel. Serverns egen utskrift: `server-ut.log` / `server-fel.log`. |
+
+Uppgiften **Fysiklabbet dev-server** har två triggrar: vid inloggning (+30 s)
+och sedan var femte minut för alltid. Varje körning är en snabb hälsokoll —
+svarar servern görs ingenting, så det finns aldrig två servrar. Dör servern
+(krasch, `Stop-Process`, avbruten session) är den tillbaka inom fem minuter.
+
+- Servern startas som en **fristående `pythonw`-process** — den lever vidare
+  när uppgiften avslutas, och syns inte som något konsolfönster.
+- Vakten tar **aldrig över port 8000 från ett annat program**. Är porten
+  upptagen av något som inte är `dev-server.py` loggas det och vakten
+  avstår, i stället för att döda främmande processer.
+- **Starta inte servern för hand** i en långkörande terminal — kolla i
+  stället `-Status`. En manuellt startad server på 8000 gör att vakten inte
+  gör något (den ser bara att porten svarar), men den försvinner när
+  sessionen tar slut.
+
+### Nå sidan från telefon och surfplatta
+
+Uppgiften registreras som standard med `-Natverk`, så servern binder
+`0.0.0.0` och nås från alla enheter i hemmanätverket:
+
+- `http://<datorns IPv4>:8000` (visas av `-Status`; adressen är DHCP och
+  kan ändras vid omstart av routern)
+- `http://<datornamn>:8000` — stabilare, fungerar där NetBIOS/mDNS slår
+  igenom (iOS och Android brukar klara det; annars använd IP:t)
+
+Två saker gäller när servern är öppen mot nätverket:
+
+1. **Brandväggen måste släppa in porten.** Kör `oppna-brandvagg.ps1` en
+   gång som administratör. Den lägger till en tillåt-regel begränsad till
+   `-Profile Private -RemoteAddress LocalSubnet` (bara hemmanätverket) och
+   tar bort de **blockera-regler för python** som Windows skapar när en
+   brandväggsruta någon gång avfärdats med "Avbryt". En blockera-regel
+   vinner alltid över en tillåt-regel — utan det steget svarar servern
+   lokalt men aldrig utåt, och ingenting ser trasigt ut.
+2. **Mappar som aldrig ska lämna datorn spärras.** `LOKALA_MAPPAR` i
+   `dev-server.py` ger 404 på `Genomgångar/`, `Uppgifter/`,
+   `Kursprovsuppgifter/`, `NP/`, `docs-vault/` och `.git/` så snart
+   bindningen är något annat än `127.0.0.1` — annars hade hela
+   projektmappen, inklusive upphovsrättsskyddade PDF:er, legat öppen på
+   nätverket. Lägg till nya lokala mappar i den listan, inte bara i
+   `.gitignore`.
+
+Vill du stänga nätverkstillgången: kör om installationsskriptet med
+`-Lokal` (vakten startar då om servern mot `127.0.0.1`) och
+`oppna-brandvagg.ps1 -Stang` som administratör.
 
 ## ⚠️ KRITISK: Bygg teori-bundle efter md-ändringar
 

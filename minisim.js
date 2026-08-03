@@ -16,7 +16,7 @@
  *
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
- *           Tillgängliga typer: tomtebloss, centrifug
+ *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -48,6 +48,18 @@
  * till cirkeln. Varvtalsglidare, pausknapp som fryser bilden, "Ultrarapid"
  * för slow motion, fullskärm samt syntetiserat ljud (motorton som följer
  * varvtalet + vattenfräs som följer utslungningen — inga ljudfiler).
+ *
+ * ── typ: fjaderpendel ────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-2.1 (Hookes lag): en vikt som hänger i en
+ * spiralfjäder från taket. Dra i vikten (eller tryck "Dra ner och släpp")
+ * så pendlar den harmoniskt kring jämviktsläget y = 0, mellan vändlägena
+ * +A och −A. Kryssrutor visar hastighetsvektorn v (blå) och accelerations-
+ * vektorn a (röd) — pillängderna är skalenliga mot storheternas belopp, så
+ * eleven ser att farten är störst i jämviktsläget (a = 0 där) och att
+ * accelerationen är störst i vändlägena (v = 0 där), alltid riktad mot
+ * jämviktsläget. Ritad i laboranstemat (ljust papper med rutnät), samma
+ * färger som teorifigurerna: v = #2563c9, a = #c0392b. Pausknapp,
+ * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  */
 (function () {
     'use strict';
@@ -1506,8 +1518,554 @@
         updateInfo();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: fjaderpendel
+    // ══════════════════════════════════════════════════════════════════════
+    function buildFjaderpendel(node, cfg) {
+        var W = 560, H = 430;           // logisk ritstorlek
+        var CX = 312;                   // fjäderns/viktens x-läge
+        var CEIL_Y = 34;                // takets underkant
+        var EQ_Y = 248;                 // viktens mittpunkt i jämviktsläget
+        var Y_MAX = 92;                 // största tillåtna elongation (px)
+        var PX_PER_CM = 12;             // skala för avläsningen (px per cm)
+        var MASS_W = 38, MASS_H = 34;   // viktens mått
+        var T_PERIOD = 2.2;             // svängningstid (s)
+        var OMEGA = 2 * Math.PI / T_PERIOD;
+        var A_DEFAULT = 66;             // "Dra ner och släpp"-amplitud (px)
+        var L_VEC = 84;                 // pillängd vid maximal storhet (px)
+        var COL_V = '#2563c9';          // hastighetens färg (som teorifiguren)
+        var COL_A = '#c0392b';          // accelerationens färg (som teorifiguren)
+        var INK = '#1f2530';
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En vikt som hänger i en spiralfjäder från taket. Dra i vikten och ' +
+            'släpp så pendlar den kring jämviktsläget. Kryssrutor visar ' +
+            'hastighetsvektorn och accelerationsvektorn: farten är störst i ' +
+            'jämviktsläget och noll i vändlägena, accelerationen är störst i ' +
+            'vändlägena, noll i jämviktsläget och alltid riktad mot jämviktsläget.');
+        scene.appendChild(canvas);
+
+        // Fullskärmsknapp — samma ikon som .fs-btn på simuleringssidorna.
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var slappBtn = document.createElement('button');
+        slappBtn.type = 'button';
+        slappBtn.className = 'minisim-btn ms-primar';
+        slappBtn.textContent = 'Dra ner och släpp';
+
+        var stoppBtn = document.createElement('button');
+        stoppBtn.type = 'button';
+        stoppBtn.className = 'minisim-btn';
+        stoppBtn.textContent = 'Nollställ';
+
+        var pausBtn = document.createElement('button');
+        pausBtn.type = 'button';
+        pausBtn.className = 'minisim-btn';
+        pausBtn.textContent = 'Pausa';
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(slappBtn);
+        controls.appendChild(stoppBtn);
+        controls.appendChild(pausBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // Rad 2: visningsval (vektorer) + ultrarapid.
+        var toggles = document.createElement('div');
+        toggles.className = 'minisim-controls';
+
+        function makeCheck(text, checked, accent) {
+            var lbl = document.createElement('label');
+            lbl.className = 'minisim-check';
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = checked;
+            if (accent) cb.style.accentColor = accent;
+            lbl.appendChild(cb);
+            lbl.appendChild(document.createTextNode(text));
+            return { lbl: lbl, cb: cb };
+        }
+        var vChk = makeCheck('Visa hastighet', true, COL_V);
+        var aChk = makeCheck('Visa acceleration', true, COL_A);
+        var slowChk = makeCheck('Ultrarapid', false, null);
+
+        toggles.appendChild(vChk.lbl);
+        toggles.appendChild(aChk.lbl);
+        toggles.appendChild(slowChk.lbl);
+        card.appendChild(toggles);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisims) ────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        // Elongationen y räknas POSITIV UPPÅT från jämviktsläget (som i
+        // genomgången); skärmens y-axel pekar nedåt, så skärmläget är
+        // EQ_Y - y. Svängningen beräknas analytiskt (y = A·cos φ) så att
+        // amplituden aldrig driver.
+        var mode = 'rest';          // 'rest' | 'drag' | 'svang'
+        var A = 0;                  // amplitud (px)
+        var ph = 0;                 // fas (rad)
+        var yDrag = 0;              // elongation under pågående drag
+        var paused = false;
+        var dragging = false;
+        var dragPtr = -1;
+        var dragOffset = 0;         // greppunktens avstånd från viktens mitt
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        function timeScale() { return slowChk.cb.checked ? 0.25 : 1; }
+        function elong() {
+            if (mode === 'drag') return yDrag;
+            if (mode === 'svang') return A * Math.cos(ph);
+            return 0;
+        }
+        function veloc() {
+            return mode === 'svang' ? -A * OMEGA * Math.sin(ph) : 0;
+        }
+        function accel() { return -OMEGA * OMEGA * elong(); }
+        function massCY() { return EQ_Y - elong(); }
+
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        // Text med blandad stil: parts = [{ t: '+', it: false }, ...].
+        // align: 'left' | 'right' (mot angivet x).
+        function drawMixed(x, y, parts, align, size, color) {
+            var widths = [], total = 0, i;
+            for (i = 0; i < parts.length; i++) {
+                ctx.font = (parts[i].it ? 'italic ' : '') + size + 'px ' + FONT;
+                widths[i] = ctx.measureText(parts[i].t).width;
+                total += widths[i];
+            }
+            var cx = align === 'right' ? x - total : x;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'left';
+            for (i = 0; i < parts.length; i++) {
+                ctx.font = (parts[i].it ? 'italic ' : '') + size + 'px ' + FONT;
+                ctx.fillText(parts[i].t, cx, y);
+                cx += widths[i];
+            }
+        }
+
+        function drawCeiling() {
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(150, CEIL_Y);
+            ctx.lineTo(475, CEIL_Y);
+            ctx.stroke();
+            // snedstreck ovanför taket (fast yta)
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            for (var x = 160; x <= 475; x += 15) {
+                ctx.moveTo(x, CEIL_Y);
+                ctx.lineTo(x - 9, CEIL_Y - 9);
+            }
+            ctx.stroke();
+        }
+
+        function drawGuides() {
+            var yTop = null, yBot = null;
+            if (mode === 'svang' && A > 0) { yTop = EQ_Y - A; yBot = EQ_Y + A; }
+            if (mode === 'drag' && Math.abs(yDrag) > 4) {
+                yTop = EQ_Y - Math.abs(yDrag);
+                yBot = EQ_Y + Math.abs(yDrag);
+            }
+            // jämviktsläget y = 0 — heldragen
+            ctx.strokeStyle = '#7c828c';
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(160, EQ_Y);
+            ctx.lineTo(452, EQ_Y);
+            ctx.stroke();
+            drawMixed(152, EQ_Y + 4,
+                [{ t: 'y', it: true }, { t: ' = 0', it: false }],
+                'right', 14, INK);
+            // vändlägena ±A — streckade
+            if (yTop !== null) {
+                ctx.strokeStyle = '#9aa0a6';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 4]);
+                ctx.beginPath();
+                ctx.moveTo(160, yTop);
+                ctx.lineTo(452, yTop);
+                ctx.moveTo(160, yBot);
+                ctx.lineTo(452, yBot);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                drawMixed(152, yTop + 4,
+                    [{ t: '+', it: false }, { t: 'A', it: true }],
+                    'right', 14, INK);
+                drawMixed(152, yBot + 4,
+                    [{ t: '−', it: false }, { t: 'A', it: true }],
+                    'right', 14, INK);
+            }
+        }
+
+        function drawSpring() {
+            var massTop = massCY() - MASS_H / 2;
+            var y0 = CEIL_Y, y1 = massTop;
+            var N = 13;                       // antal sicksack-ben
+            var lead = 7;                     // raka ändbitar
+            var span = (y1 - lead) - (y0 + lead);
+            ctx.strokeStyle = '#7c828c';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'butt';
+            ctx.lineJoin = 'miter';
+            ctx.beginPath();
+            ctx.moveTo(CX, y0);
+            ctx.lineTo(CX, y0 + lead);
+            for (var i = 1; i <= N; i++) {
+                var xx = (i === N) ? CX : (i % 2 ? CX + 9 : CX - 9);
+                ctx.lineTo(xx, y0 + lead + span * i / N);
+            }
+            ctx.lineTo(CX, y1);
+            ctx.stroke();
+        }
+
+        function drawMass() {
+            var cy = massCY();
+            var x0 = CX - MASS_W / 2, y0 = cy - MASS_H / 2, r = 4;
+            ctx.beginPath();
+            ctx.moveTo(x0 + r, y0);
+            ctx.arcTo(x0 + MASS_W, y0, x0 + MASS_W, y0 + MASS_H, r);
+            ctx.arcTo(x0 + MASS_W, y0 + MASS_H, x0, y0 + MASS_H, r);
+            ctx.arcTo(x0, y0 + MASS_H, x0, y0, r);
+            ctx.arcTo(x0, y0, x0 + MASS_W, y0, r);
+            ctx.closePath();
+            ctx.fillStyle = '#6ba3d6';
+            ctx.fill();
+            ctx.strokeStyle = '#2f6db0';
+            ctx.lineWidth = 1.6;
+            ctx.stroke();
+        }
+
+        // Lodrät vektorpil: skaftet slutar vid pilhuvudets bas (linecap
+        // butt), spets i änden. sgn > 0 = uppåt (skärmens -y).
+        function drawVector(x, yTail, len, sgn, color, letter, labelSide) {
+            if (len < 6) return;
+            var yTip = yTail - sgn * len;
+            var head = Math.max(9, Math.min(14, len * 0.5));
+            var yBase = yTip + sgn * head;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(x, yTail);
+            ctx.lineTo(x, yBase);
+            ctx.stroke();
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x, yTip);
+            ctx.lineTo(x - 5.5, yBase);
+            ctx.lineTo(x + 5.5, yBase);
+            ctx.closePath();
+            ctx.fill();
+            // etikett vid spetsen, ut från vikten i fri yta
+            var ly = yTip + (sgn > 0 ? -6 : 16);
+            drawMixed(labelSide === 'left' ? x - 10 : x + 10, ly,
+                [{ t: letter, it: true }],
+                labelSide === 'left' ? 'right' : 'left', 16, color);
+        }
+
+        function drawVectors() {
+            var cy = massCY();
+            var v = veloc(), a = accel();
+            // skalenligt: pillängd ∝ belopp, samma referens (full
+            // elongation Y_MAX) för båda storheterna
+            if (vChk.cb.checked && mode === 'svang') {
+                var Lv = Math.abs(v) / (OMEGA * Y_MAX) * L_VEC;
+                var sv = v > 0 ? 1 : -1;
+                // hastighetspilen startar vid viktens KANT i pilens riktning
+                var tailV = cy - sv * MASS_H / 2;
+                drawVector(CX - 11, tailV, Lv, sv, COL_V, 'v', 'left');
+            }
+            if (aChk.cb.checked && (mode === 'svang' || mode === 'drag')) {
+                var La = Math.abs(a) / (OMEGA * OMEGA * Y_MAX) * L_VEC;
+                var sa = a > 0 ? 1 : -1;
+                var tailA = cy - sa * MASS_H / 2;
+                drawVector(CX + 11, tailA, La, sa, COL_A, 'a', 'right');
+            }
+        }
+
+        function render() {
+            ctx.globalCompositeOperation = 'source-over';
+            drawBackground();
+            drawGuides();
+            drawCeiling();
+            drawSpring();
+            drawMass();
+            drawVectors();
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        function step(dt) {
+            if (mode === 'svang') {
+                ph += OMEGA * dt;
+                if (ph > 2 * Math.PI) ph -= 2 * Math.PI;
+            }
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return mode === 'svang';
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            var cm = elong() / PX_PER_CM;
+            var s = fmt(Math.abs(cm), 1);
+            var sign = s === '0' ? '' : (cm > 0 ? '+' : '−');
+            info.textContent = 'Elongation: ' + sign + s + ' cm';
+        }
+
+        // ── UI-logik ──────────────────────────────────────────────────────
+        function syncUi() {
+            pausBtn.textContent = paused ? 'Fortsätt' : 'Pausa';
+            pausBtn.disabled = mode !== 'svang';
+            stoppBtn.disabled = mode === 'rest';
+        }
+
+        slappBtn.addEventListener('click', function () {
+            mode = 'svang';
+            A = A_DEFAULT;
+            ph = Math.PI;      // startar i nedre vändläget (y = −A, v = 0)
+            paused = false;
+            syncUi();
+            kick();
+        });
+        stoppBtn.addEventListener('click', function () {
+            mode = 'rest';
+            A = 0;
+            paused = false;
+            syncUi();
+            render();
+            updateInfo();
+        });
+        pausBtn.addEventListener('click', function () {
+            paused = !paused;
+            syncUi();
+            if (!paused) kick();
+            else render();      // frys exakt den bild som visas
+        });
+        vChk.cb.addEventListener('change', function () { render(); });
+        aChk.cb.addEventListener('change', function () { render(); });
+        slowChk.cb.addEventListener('change', kick);
+
+        // ── Dra i vikten (pekare/touch/mus) ───────────────────────────────
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - r.left) * W / r.width,
+                y: (e.clientY - r.top) * H / r.height
+            };
+        }
+        function overMass(p) {
+            return Math.abs(p.x - CX) < MASS_W / 2 + 16 &&
+                   Math.abs(p.y - massCY()) < MASS_H / 2 + 16;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!overMass(p)) return;
+            e.preventDefault();
+            dragging = true;
+            dragPtr = e.pointerId;
+            dragOffset = p.y - massCY();
+            yDrag = elong();
+            mode = 'drag';
+            paused = false;
+            A = 0;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            syncUi();
+            render();
+            updateInfo();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = overMass(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            var y = EQ_Y - (p.y - dragOffset);   // elongation, positiv uppåt
+            yDrag = Math.max(-Y_MAX, Math.min(Y_MAX, y));
+            render();
+            updateInfo();
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            canvas.style.cursor = 'default';
+            if (Math.abs(yDrag) < 4) {
+                mode = 'rest';
+                A = 0;
+            } else {
+                A = Math.abs(yDrag);
+                ph = yDrag > 0 ? 0 : Math.PI;    // släpps i vila (v = 0)
+                mode = 'svang';
+            }
+            syncUi();
+            render();
+            updateInfo();
+            kick();
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Litet test-handtag (används av e2e-/skärmdumpsskript i .shots/):
+        // frys svängningen i ett exakt fasläge.
+        card._setPhase = function (newA, newPh) {
+            mode = 'svang';
+            A = newA;
+            ph = newPh;
+            paused = true;
+            syncUi();
+            render();
+            updateInfo();
+        };
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
     // ── Register + publikt API ────────────────────────────────────────────
-    var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug };
+    var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+                  fjaderpendel: buildFjaderpendel };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

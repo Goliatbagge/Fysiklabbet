@@ -227,7 +227,9 @@ riktiga sådana (se punkt 2).
    artikel som redan har en riktig pressbild med extra AI-illustrationer, och
    generera aldrig flera AI-bilder till samma artikel.
    ```bash
-   "C:/Users/sam_s/AppData/Local/Programs/Python/Python312/python.exe" \
+   # Windows-launchern "py" pekar ut rätt tolk oavsett användarnamn och
+   # installationsplats — hårdkoda ALDRIG en sökväg under C:/Users/<namn>/.
+   py -3.12 \
      .claude/skills/gemini-imagegen/scripts/generate_image.py \
      -p "<engelsk, detaljerad, ren redaktionell prompt, 16:9>" \
      -o "nyheter/bilder/<id>.jpg"

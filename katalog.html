@@ -429,6 +429,26 @@
         }
 
         function Header() {
+            // Ämnes-dropdownen öppnas med :hover/:focus-within i CSS. På touch
+            // fastnar hovern kvar efter ett tryck, och länkarna pekar på SAMMA
+            // sida (katalog.html#fy2) — alltså ingen omladdning som annars
+            // stängt menyn. Utan detta blir menyn liggande över innehållet
+            // efter att man valt ämne. Vi tvingar den stängd vid val, och
+            // släpper tvånget vid nästa tryck / när pekaren lämnar, så att
+            // hover-beteendet på dator är oförändrat.
+            const ddRef = useRef(null);
+            const stangDd = () => {
+                const dd = ddRef.current;
+                if (!dd) return;
+                dd.classList.add('lab-nav-dd-stangd');
+                const aktiv = document.activeElement;
+                if (aktiv && dd.contains(aktiv) && aktiv.blur) aktiv.blur();
+            };
+            // Körs på pointerdown, alltså FÖRE click — ordningen gör att ett
+            // klick på en ämneslänk först släpper tvånget och sedan sätter det.
+            const oppnaDd = () => {
+                if (ddRef.current) ddRef.current.classList.remove('lab-nav-dd-stangd');
+            };
             return (
                 <div className="lab-header">
                     <div className="lab-header-inner">
@@ -445,12 +465,13 @@
                         <SearchBar />
                         <nav className="lab-nav" aria-label="Huvudnavigation">
                             <a href="index.html">Start</a>
-                            <div className="lab-nav-dd">
+                            <div className="lab-nav-dd" ref={ddRef}
+                                 onPointerDown={oppnaDd} onMouseLeave={oppnaDd}>
                                 <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
                                     Ämne
                                     <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                                 </button>
-                                <div className="lab-nav-dd-menu">
+                                <div className="lab-nav-dd-menu" onClick={stangDd}>
                                     <a href="katalog.html#fy1">Fysik nivå 1</a>
                                     <a href="katalog.html#fy2">Fysik nivå 2</a>
                                     <a href="katalog.html#ma1c">Matematik nivå 1c</a>

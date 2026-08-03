@@ -186,6 +186,28 @@ texten. Vanlig fälla: man fixar en typografisk detalj, laddar om sidan,
 ser fortfarande felet, och tror att fixet inte fungerade. Ingen
 auto-reload; lägg det som rutin efter md-redigeringar.
 
+## Härledningar i teorin: dropdown i formelrutan
+
+**En härledning/ett bevis av en formel skrivs som ett `::: härledning`-block
+NÄSTLAT INUTI formelns `::: formel`-block** — renderarna gör det då till en
+hopfällbar dropdown (`<details>`) längst ned i formelrutan (mönstret infört
+sajtbrett 2026-08-03, referens: `fy2-1.5.md`). Skapa ALDRIG en ny fristående
+härledningsruta direkt före/efter en formelruta.
+
+- Ordningen i md-filen: formelinnehåll (+ ev. `där`-lista och `::: figur`),
+  blankrad, `::: härledning "Härledning — …"`, innehåll, `:::` (härledning),
+  `:::` (formel) — två `:::` på raken.
+- **Flera härledningar per formel är OK** (t.ex. serie- + parallellbevis) —
+  de blir varsin dropdown-rad i källordning.
+- Rubriken blir dropdownens etikett. Låt den inte ordagrant dubblera
+  formelrubriken — skriv `"Härledning — <namn>"`/`"Bevis — <namn>"`.
+- **Fristående `::: härledning` är fortsatt rätt** för rutor som inte härleder
+  en formelruta: OBS/varningar, Kuriosa, Introduktion/Kom ihåg,
+  GeoGebra-tips, resonemang utan formelruta (t.ex. `ma3c-3.4`, `ma3c-5.3`)
+  — sådana ska INTE stoppas in i närmaste formelruta.
+- Layoutkoden i `katalog.html` (`buildFormelLayouts`) flyttar alla
+  `details.formel-harledning` sist i rutan — rör inte den ordningen.
+
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
 **En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara
@@ -368,6 +390,51 @@ upp). Efter att du lagt in ett block: kör `node data/teori/build.js` som
 vanligt. Ingen TTS-omgenerering behövs för själva grafen (den ger ingen
 uppläsningstext), men omgivande brödtext följer den vanliga
 uppdateringskedjan.
+
+## Minisimuleringar i teorin (`::: minisim`)
+
+En **minisimulering** är en liten inbäddad interaktiv demo direkt i ett
+teoriavsnitt — ett superlättillgängligt sätt att se/testa ett fysikaliskt
+koncept utan att lämna genomgången (enklare än de fristående
+simuleringssidorna). Passar särskilt för att göra `::: demo`-rutornas
+klassrumsdemonstrationer körbara virtuellt. Motorn bor i `minisim.js`
+(`window.FYSIKMINISIM.mountAll`), vanilla-JS med egen intern CSS,
+och kopplas in efter render i `katalog.html` och `avsnitt.html`.
+
+### Syntax
+
+```
+::: minisim
+typ: tomtebloss
+:::
+```
+
+- `typ:` — **obligatoriskt.** Vilken minisimulering som byggs. Tillgängliga
+  typer: `tomtebloss` (demonstrationen i fy2-1.4 Cirkulär rörelse: tänd ett
+  tomtebloss fäst i en skruvdragare, i mörker, och se gnistorna lämna
+  cirkelbanan tangentiellt; varvtalsglidare, pausknapp som fryser bilden,
+  "Ultrarapid"-kryssruta för slow motion samt fullskärmsläge).
+- `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
+  inuti en `::: demo`-ruta som redan har titel).
+- Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).
+
+### Bygga en ny minisim-typ
+
+Lägg en builder-funktion i `minisim.js` och registrera den i `TYPES`.
+Canvas-scen med DPR-skalning, svenska UI-texter (Poppins — INTE
+`--lab-font-display`, som är serif), komma som decimaltecken,
+IntersectionObserver som pausar rAF-loopen när widgeten inte syns.
+Simuleringen ska vara omedelbart begriplig: 1–3 knappar, inga menyer.
+
+### Byggkedja (samma mönster som `::: graf`)
+
+Blocket skyddas i `data/teori/build.js`, byggs om till en
+`.lab-minisim`-placeholder av `preprocessBlocks()` i `katalog.html`/
+`avsnitt.html`, undantas från bionic-läsning och tangentbordsklick, och
+hoppas över helt av TTS-manuset (`data/tts/export-manus.html` — config-
+raderna får aldrig läsas upp). Marginal-CSS i `styles-laborans.css`
+(`.lab-minisim`), övrig CSS injiceras av widgeten själv. Efter att du lagt
+in ett block: kör `node data/teori/build.js` som vanligt.
 
 ## Projektstruktur
 

@@ -91,11 +91,15 @@ node data/build-nyheter-og.js
 # utanför sitemapen men MÅSTE ligga kvar i roten.
 node .claude/verify-sitemap.js
 
-# Uppläsning (talsyntes): bygg om manus + ljud efter ändringar i
-# data/teori/*.md eller data/tts/manus-lib.js. (Nyhetsartiklar har INGEN
-# uppläsning — borttaget 2026-07-18.)
-# Kräver dev-servern på port 8000 och Python 3.12 med edge-tts.
-# Inkrementellt — bara dokument vars manus ändrats genereras om.
+# Uppläsning (talsyntes).
+# ⛔ PAUSAT (2026-08-03, tills vidare på uttrycklig begäran): generera INGET
+# nytt ljud och committa inga ljudkedje-artefakter (audio/,
+# data/tts/manus/teori.json) — ljudproduktionen löses på annat sätt framöver.
+# Kodfixar i själva kedjan (t.ex. export-manus.html) är fortsatt OK.
+# Kommandona nedan står kvar för när pausen hävs:
+# (kräver dev-servern på port 8000 och Python 3.12 med edge-tts;
+# inkrementellt — bara dokument vars manus ändrats genereras om.
+# Nyhetsartiklar har INGEN uppläsning — borttaget 2026-07-18.)
 node data/tts/build-manus.js
 python data/tts/generate-audio.py
 
@@ -223,9 +227,10 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
    `OVNINGAR.md`); ta bort/ersätt uppgifter som testar borttaget stoff.
 3. **Exit tickets** — `data/exittickets.js`, samma id. Frågorna ska förhöra
    det nya innehållet. Kör `node .claude/verify-exittickets.js`.
-4. **Uppläsning (TTS)** — `node data/tts/build-manus.js` +
-   `python data/tts/generate-audio.py` (dev-server på port 8000 krävs).
-   Inkrementellt: bara ändrade manus genereras om.
+4. **Uppläsning (TTS)** — ⛔ **PAUSAT tills vidare** (se Kommandon):
+   generera inget nytt ljud och committa inga ljudkedje-artefakter;
+   ljudet löses separat. (Normalt: `node data/tts/build-manus.js` +
+   `python data/tts/generate-audio.py`, dev-server på port 8000 krävs.)
 5. **Simuleringar + katalog** — grep på avsnittets ämnesord i
    `data/katalog.js`, `index.html` och `fysikN-*.html`: stämmer beteckningar,
    formler och beskrivningar fortfarande med den nya genomgången?

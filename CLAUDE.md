@@ -199,6 +199,30 @@ texten. Vanlig fälla: man fixar en typografisk detalj, laddar om sidan,
 ser fortfarande felet, och tror att fixet inte fungerade. Ingen
 auto-reload; lägg det som rutin efter md-redigeringar.
 
+## Tabeller i teorin: skriv dem som markdown, aldrig som rå HTML
+
+En värdetabell eller ett teckenschema kan ha 6–8 kolumner, och KaTeX-celler
+(`$x$`, `$f'(x)$`) bryter aldrig rad — på en telefon blir tabellen då bredare
+än textspalten. Eftersom `.lab-article-body`/`.lab-block` har
+`overflow-x: hidden` **klipptes de yttre kolumnerna bort helt** (partikel-
+tabellen i `fy1-9.3` visade två av sju kolumner på en 390 px-skärm, och
+resten gick inte att nå).
+
+Därför lindar marked-renderarna i `katalog.html`, `avsnitt.html` och
+`np.html` varje markdown-tabell i `<div class="lab-tabell">`, som scrollar i
+sidled i sig själv i stället för att klippas (samma lösning som
+`.katex-display` använder för breda displayformler). CSS:en ligger i
+`styles-laborans.css` intill de övriga tabellreglerna: tätare celler under
+560 px, och i en blockruta får scroll-rutan gå ända ut i rutans kant.
+
+- **Skriv tabeller som markdown** (`| a | b |`), inte som rå `<table>` i
+  md-filen — rå HTML går förbi renderaren och får ingen scroll-ruta.
+- Lägger du in markdown-rendering på en NY sida: kopiera `marked.use({
+  renderer: { table … } })` från `katalog.html`, annars klipps tabellerna
+  där.
+- Kontrollera breda tabeller i en skärmdump på 390 px: sista kolumnen ska
+  gå att nå genom att dra i tabellen, och sidan får aldrig vågrät scroll.
+
 ## Härledningar i teorin: dropdown i formelrutan
 
 **En härledning/ett bevis av en formel skrivs som ett `::: härledning`-block

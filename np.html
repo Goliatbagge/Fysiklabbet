@@ -511,6 +511,18 @@
         const NP_PROV = window.NP_PROV || {};
         const NP_FIGURER = window.NP_FIGURER || {};
 
+        // Breda tabeller lindas i en scroll-ruta (.lab-tabell) — annars
+        // klipps de yttre kolumnerna bort på mobil. Samma som katalog.html.
+        marked.use({
+            renderer: {
+                table(header, body) {
+                    return '<div class="lab-tabell"><table>\n<thead>\n' + header +
+                        '</thead>\n' + (body ? '<tbody>' + body + '</tbody>' : '') +
+                        '</table></div>\n';
+                },
+            },
+        });
+
         // --- Math-skydd för marked (samma mönster som katalog.html) ---
         function protectMath(md) {
             const tokens = [];

@@ -387,6 +387,20 @@
 
         marked.setOptions({ gfm: true, breaks: false });
 
+        // Breda tabeller (värdetabeller, teckenscheman) lindas i en egen
+        // scroll-ruta. Utan den klipps de yttre kolumnerna bort på mobil,
+        // eftersom .lab-article-body/.lab-block har overflow-x: hidden.
+        // CSS: .lab-tabell i styles-laborans.css.
+        marked.use({
+            renderer: {
+                table(header, body) {
+                    return '<div class="lab-tabell"><table>\n<thead>\n' + header +
+                        '</thead>\n' + (body ? '<tbody>' + body + '</tbody>' : '') +
+                        '</table></div>\n';
+                },
+            },
+        });
+
         // Kurskod för id/hash — 'Fysik nivå 1' → 'fy1', 'Matematik nivå 1c' → 'ma1c'
         function courseCode(courseName) {
             if (courseName === 'Fysik nivå 1') return 'fy1';

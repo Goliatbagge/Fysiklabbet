@@ -333,6 +333,18 @@
         // Konfigurera marked
         marked.setOptions({ gfm: true, breaks: false });
 
+        // Breda tabeller lindas i en scroll-ruta (.lab-tabell) — annars
+        // klipps de yttre kolumnerna bort på mobil. Samma som katalog.html.
+        marked.use({
+            renderer: {
+                table(header, body) {
+                    return '<div class="lab-tabell"><table>\n<thead>\n' + header +
+                        '</thead>\n' + (body ? '<tbody>' + body + '</tbody>' : '') +
+                        '</table></div>\n';
+                },
+            },
+        });
+
         // Hämta id från URL — använder hash (#fy1-2.3) eftersom file:// strippar query strings.
         function getId() {
             const hash = window.location.hash.replace(/^#/, '').trim();

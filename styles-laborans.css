@@ -1566,6 +1566,83 @@ button.lab-card-disabled { pointer-events: none; }
     background: rgba(15, 22, 32, 0.07);
 }
 
+/* ── Breda tabeller: scrolla i sidled inuti en egen ruta ────────────────
+   En värdetabell eller ett teckenschema kan ha 6–8 kolumner, och KaTeX-
+   celler ($x$, $f'(x)$) bryter aldrig rad. På mobil blir tabellen då
+   bredare än textspalten — och eftersom .lab-article-body/.lab-block har
+   overflow-x: hidden KLIPPTES de yttre kolumnerna bort helt (7-kolumners-
+   tabellen i fy1-9.3 visade två kolumner på en 390 px-skärm; resten gick
+   inte att nå). Renderarna i katalog.html/avsnitt.html/np.html lindar
+   därför varje markdown-tabell i .lab-tabell, som scrollar i sig själv i
+   stället för att klippas — samma lösning som .katex-display redan
+   använder för breda displayformler. Sidan får aldrig vågrät scroll. */
+.lab-tabell {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    margin: 18px 0 24px;
+}
+
+.lab-block .lab-tabell {
+    margin: 14px 0;
+}
+
+/* Marginalen hör hemma på wrappern — ligger den kvar på tabellen också
+   dubbleras avståndet till omgivande text. Tabellen får däremot vara
+   bredare än rutan; det är hela poängen med att rutan scrollar. */
+.lab-tabell > table {
+    margin: 0;
+    max-width: none;
+}
+
+/* Mobil: tätare celler, så att fler tabeller ryms helt utan att behöva
+   scrollas — och en smal, synlig scrollbar under dem som ändå måste. */
+@media (max-width: 560px) {
+    .lab-article-body th,
+    .lab-article-body td,
+    .lab-article-body-inline th,
+    .lab-article-body-inline td {
+        padding: 6px 9px;
+    }
+
+    .lab-article-body table,
+    .lab-article-body-inline table {
+        font-size: 0.88em;
+        min-width: 0;
+    }
+
+    .lab-tabell {
+        margin: 14px 0 18px;
+        padding-bottom: 2px;
+    }
+
+    /* I en blockruta får scroll-rutan gå ända ut i rutans kant (rutans
+       vågräta padding blir scroll-rutans egen padding i stället). Det ger
+       tabellen ~20 % mer bredd på en telefon, och den klipps synligt mot
+       rutans ram — vilket i sig visar att den fortsätter åt höger. */
+    .lab-block .lab-tabell {
+        margin-left: -22px;
+        margin-right: -22px;
+        padding-left: 22px;
+        padding-right: 22px;
+        /* max-width: 100% ovan skulle annars äta upp de negativa
+           marginalerna och rutan bli lika smal som förut. */
+        max-width: none;
+    }
+
+    .lab-tabell::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .lab-tabell::-webkit-scrollbar-thumb {
+        background: rgba(15, 22, 32, 0.28);
+        border-radius: 3px;
+    }
+}
+
 /* Matematik-placeholder */
 
 .lab-placeholder {

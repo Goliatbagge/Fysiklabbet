@@ -2,6 +2,15 @@
 
 Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
 
+## Git: "pusha" betyder pusha till main
+
+**När användaren skriver "pusha" (eller ber om en push utan att ange gren)
+ska ändringarna alltid hamna på `main`** — det är `main` som deployas till
+sajten, och användaren tittar direkt på den (ofta i mobilen). Arbetar
+sessionen på en arbetsgren: committa där, merga (fast-forward om möjligt)
+in i `main` och pusha `main`. Att bara pusha arbetsgrenen räcker inte —
+då syns ingenting på sajten. (Stående önskemål 2026-08-03.)
+
 ## Tech Stack
 
 - **Frontend**: Standalone HTML med React 18 (CDN), TailwindCSS (CDN)

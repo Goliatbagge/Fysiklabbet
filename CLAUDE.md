@@ -420,7 +420,12 @@ typ: tomtebloss
   cirkelbanan tangentiellt; varvtalsglidare, pausknapp som fryser bilden,
   "Ultrarapid"-kryssruta för slow motion, fullskärmsläge samt syntetiserat
   ljud via Web Audio — motorton som följer varvtalet + sprakande gnistor,
-  inga ljudfiler — med ljudknapp uppe till höger).
+  inga ljudfiler — med ljudknapp uppe till höger) och `centrifug`
+  (demonstrationen i fy2-1.4: en blöt tvättsvamp i en roterande
+  centrifugkorg sedd rakt uppifrån; vattendropparna lämnar banan
+  tangentiellt enligt Newtons första lag. Samma kontrolluppsättning som
+  tomteblosset: varvtalsglidare, paus som fryser bilden, "Ultrarapid",
+  fullskärm och syntetiserat ljud — motorton + vattenfräs).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
   inuti en `::: demo`-ruta som redan har titel).
 - Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).

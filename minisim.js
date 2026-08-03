@@ -16,7 +16,7 @@
  *
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
- *           Tillgängliga typer: tomtebloss
+ *           Tillgängliga typer: tomtebloss, centrifug
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -30,6 +30,18 @@
  * (Newtons första lag). Gnistornas utkastfart (~tiotals px/s) är liten
  * jämfört med spetsens banfart (ω·r, tusentals px/s), så strålen blir en
  * tangent till cirkeln.
+ *
+ * ── typ: centrifug ───────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-1.4 (Cirkulär rörelse): en blöt tvättsvamp i en
+ * centrifug (roterande korg utan lock, sedd rakt uppifrån). Blöt svampen
+ * och starta centrifugen — vattendropparna pressas ut genom korgväggen och
+ * lämnar banan TANGENTIELLT i rörelsens riktning (inte radiellt utåt),
+ * eftersom varje droppe behåller svampens hastighet i frigörelseögonblicket
+ * (Newtons första lag). Droppens lilla radiella läckfart (~tiotals px/s) är
+ * försumbar mot banfarten (ω·r, tusentals px/s), så banan blir en tangent
+ * till cirkeln. Varvtalsglidare, pausknapp som fryser bilden, "Ultrarapid"
+ * för slow motion, fullskärm samt syntetiserat ljud (motorton som följer
+ * varvtalet + vattenfräs som följer utslungningen — inga ljudfiler).
  */
 (function () {
     'use strict';
@@ -826,8 +838,638 @@
         updateInfo();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: centrifug
+    // ══════════════════════════════════════════════════════════════════════
+    function buildCentrifug(node, cfg) {
+        var W = 560, H = 430;              // logisk ritstorlek
+        var CX = W / 2, CY = H / 2;        // rotationscentrum (korgens nav)
+        var R_WALL = 150;                  // korgväggens radie
+        var R_SVAMP = 126;                 // svampens mittradie (pressad mot väggen)
+        var SVAMP_ARC = 0.40;              // vinkel som svampen upptar längs väggen
+        var DRAG = 0.55;                   // luftmotstånd på dropparna (1/s)
+        var OMEGA_MIN = 1.2;               // rad/s innan vattnet börjar pressas ut
+        var VATTEN_TOT = 620;              // droppar i en fullblöt svamp
+        var MAX_P = 1400;                  // partikeltak
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En blöt tvättsvamp i en roterande centrifugkorg, sedd rakt uppifrån. ' +
+            'När centrifugen roterar lämnar vattendropparna cirkelbanan ' +
+            'tangentiellt i rörelsens riktning.');
+        scene.appendChild(canvas);
+
+        // Fullskärmsknapp — samma ikon som .fs-btn på simuleringssidorna.
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+
+        // Ljudknapp (högtalare / överstruken högtalare)
+        var ICON_SND_ON =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var ICON_SND_OFF =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.className = 'minisim-sndbtn';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        sndBtn.title = 'Ljud av';
+        sndBtn.innerHTML = ICON_SND_ON;
+        scene.appendChild(sndBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var blotBtn = document.createElement('button');
+        blotBtn.type = 'button';
+        blotBtn.className = 'minisim-btn ms-primar';
+        blotBtn.textContent = 'Blöt svampen';
+
+        var startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.className = 'minisim-btn';
+        startBtn.textContent = 'Starta centrifugen';
+
+        var pausBtn = document.createElement('button');
+        pausBtn.type = 'button';
+        pausBtn.className = 'minisim-btn';
+        pausBtn.textContent = 'Pausa';
+
+        var slowLbl = document.createElement('label');
+        slowLbl.className = 'minisim-check';
+        var slowCb = document.createElement('input');
+        slowCb.type = 'checkbox';
+        slowLbl.appendChild(slowCb);
+        slowLbl.appendChild(document.createTextNode('Ultrarapid'));
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(blotBtn);
+        controls.appendChild(startBtn);
+        controls.appendChild(pausBtn);
+        controls.appendChild(slowLbl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // Varvtalsglidare — styr centrifugens (mål)varvtal i varv/s.
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Varvtal';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '0.5';
+        slider.max = '5';
+        slider.step = '0.1';
+        slider.value = '3';
+        slider.setAttribute('aria-label', 'Centrifugens varvtal i varv per sekund');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        function targetOmega() { return 2 * Math.PI * parseFloat(slider.value); }
+        function syncSliderVal() {
+            sliderVal.textContent = fmt(parseFloat(slider.value), 1) + ' varv/s';
+        }
+        syncSliderVal();
+
+        // ── Canvas-uppsättning (samma mönster som tomteblosset) ───────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var wet = 0;                // vatten kvar i svampen, 0–1 (startar torr)
+        var spinOn = false;
+        var paused = false;         // fryst bild — dropparna står stilla i luften
+        var theta = -Math.PI / 2;   // svampens vinkel (rakt upp från navet)
+        var omega = 0;              // rad/s
+        var particles = [];
+        var emitAcc = 0;            // ackumulerad bråkdels-emission
+        var emitRateSm = 0;         // glättad utslungningstakt (för ljudet)
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        // Svampens porer — slumpas EN gång så mönstret inte flimrar.
+        var pores = [];
+        for (var pi = 0; pi < 15; pi++) {
+            pores.push({
+                r: -16 + Math.random() * 32,     // radiellt läge i svampen
+                s: -25 + Math.random() * 50,     // tangentiellt läge
+                rad: 1.4 + Math.random() * 2.2
+            });
+        }
+
+        function timeScale() { return slowCb.checked ? 0.25 : 1; }
+
+        // ── Ljud (Web Audio, helt syntetiserat — inga ljudfiler) ──────────
+        // Motorton: två oscillatorer vars frekvens följer varvtalet.
+        // Vattenfräs: loopad vitbrus-buffer genom högpass, gain följer den
+        // glättade utslungningstakten. Skapas lazy vid första knapptryck.
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var audio = null;
+        var soundOn = true;
+
+        function makeNoiseBuffer(actx) {
+            var sr = actx.sampleRate;
+            var len = Math.floor(sr * 1.5);
+            var buf = actx.createBuffer(1, len, sr);
+            var d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * 0.3;
+            return buf;
+        }
+
+        function ensureAudio() {
+            if (audio || !AC) return;
+            var actx = new AC();
+            var master = actx.createGain();
+            master.gain.value = 0.55;
+            master.connect(actx.destination);
+            // motor
+            var motorGain = actx.createGain();
+            motorGain.gain.value = 0;
+            var motorFilt = actx.createBiquadFilter();
+            motorFilt.type = 'lowpass';
+            motorFilt.frequency.value = 1300;
+            motorFilt.Q.value = 1.2;
+            var o1 = actx.createOscillator();
+            o1.type = 'sawtooth';
+            o1.frequency.value = 60;
+            var o2 = actx.createOscillator();
+            o2.type = 'square';
+            o2.frequency.value = 121;
+            var o2g = actx.createGain();
+            o2g.gain.value = 0.3;
+            o1.connect(motorFilt);
+            o2.connect(o2g);
+            o2g.connect(motorFilt);
+            motorFilt.connect(motorGain);
+            motorGain.connect(master);
+            o1.start();
+            o2.start();
+            // vattenfräs
+            var sprayGain = actx.createGain();
+            sprayGain.gain.value = 0;
+            var hp = actx.createBiquadFilter();
+            hp.type = 'highpass';
+            hp.frequency.value = 1500;
+            var src = actx.createBufferSource();
+            src.buffer = makeNoiseBuffer(actx);
+            src.loop = true;
+            src.connect(hp);
+            hp.connect(sprayGain);
+            sprayGain.connect(master);
+            src.start();
+            audio = { ctx: actx, master: master, motorGain: motorGain,
+                      o1: o1, o2: o2, sprayGain: sprayGain, spraySrc: src };
+        }
+
+        function resumeAudio() {
+            ensureAudio();
+            if (audio && audio.ctx.state === 'suspended') audio.ctx.resume();
+        }
+
+        function updateAudio() {
+            if (!audio) return;
+            var t = audio.ctx.currentTime;
+            var ts = timeScale();
+            var active = soundOn && visible && !document.hidden && !paused;
+            // motorton — gain och frekvens följer det faktiska varvtalet
+            var revs = Math.abs(omega) / (2 * Math.PI);
+            var mg = (active && revs > 0.05) ? Math.min(0.45, 0.08 + revs * 0.08) : 0;
+            audio.motorGain.gain.setTargetAtTime(mg, t, 0.06);
+            var f = (48 + revs * 44) * (0.35 + 0.65 * ts);
+            audio.o1.frequency.setTargetAtTime(f, t, 0.06);
+            audio.o2.frequency.setTargetAtTime(f * 2.02, t, 0.06);
+            // vattenfräs — följer utslungningstakten, tystnar när svampen är torr
+            var sg = active ? Math.min(0.4, emitRateSm / 260) : 0;
+            audio.sprayGain.gain.setTargetAtTime(sg, t, 0.08);
+            audio.spraySrc.playbackRate.setTargetAtTime(ts < 1 ? 0.5 : 1, t, 0.1);
+        }
+
+        // ── Droppar ───────────────────────────────────────────────────────
+        function spawnDrop(th) {
+            if (particles.length >= MAX_P) return;
+            // droppen lämnar korgväggen någonstans längs svampens bredd
+            var a = th + (Math.random() - 0.5) * SVAMP_ARC;
+            var x = CX + R_WALL * Math.cos(a);
+            var y = CY + R_WALL * Math.sin(a);
+            // KÄRNFYSIKEN: droppen ärver svampens tangentiella hastighet
+            // (ω·r vinkelrätt mot radien) + en liten radiell läckfart.
+            var vtx = -Math.sin(a) * omega * R_WALL;
+            var vty = Math.cos(a) * omega * R_WALL;
+            var leak = 25 + 80 * Math.random() * Math.random();
+            particles.push({
+                x: x, y: y, px: x, py: y,
+                vx: vtx + Math.cos(a) * leak + (Math.random() - 0.5) * 30,
+                vy: vty + Math.sin(a) * leak + (Math.random() - 0.5) * 30,
+                age: 0, life: 1.6,
+                w: 1.1 + Math.random() * 1.1
+            });
+        }
+
+        function emit(dt, thPrev) {
+            if (wet <= 0) return 0;
+            // vattnet pressas ut först när rotationen övervinner svampens
+            // förmåga att hålla kvar det — takten växer med varvtalet
+            var excess = Math.max(0, Math.abs(omega) - OMEGA_MIN);
+            var rate = excess * 7 * (0.3 + 0.7 * wet);
+            if (rate <= 0) return 0;
+            emitAcc += rate * dt;
+            var n = Math.floor(emitAcc);
+            emitAcc -= n;
+            for (var i = 0; i < n; i++) {
+                // fördela emissionen längs bågen som svampen svepte under
+                // frame:en, så duschen blir jämn även vid hög fart
+                var f = Math.random();
+                spawnDrop(thPrev + (theta - thPrev) * f);
+            }
+            wet = Math.max(0, wet - rate * dt / VATTEN_TOT);
+            if (wet === 0) syncUi();
+            return rate;
+        }
+
+        function stepParticles(dt) {
+            var kd = Math.exp(-DRAG * dt);
+            for (var i = particles.length - 1; i >= 0; i--) {
+                var p = particles[i];
+                p.px = p.x; p.py = p.y;
+                p.vx *= kd;
+                p.vy *= kd;
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+                p.age += dt;
+                if (p.age >= p.life ||
+                    p.x < -50 || p.x > W + 50 || p.y < -50 || p.y > H + 50) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function drawBackground() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = '#04060b';
+            ctx.fillRect(0, 0, W, H);
+            var g = ctx.createRadialGradient(CX, CY, 60, CX, CY, 420);
+            g.addColorStop(0, 'rgba(14,17,26,0.55)');
+            g.addColorStop(1, 'rgba(0,0,0,0.72)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        function drawBasket() {
+            ctx.globalCompositeOperation = 'source-over';
+            // korgens botten
+            var g = ctx.createRadialGradient(CX, CY, 20, CX, CY, R_WALL);
+            g.addColorStop(0, '#131722');
+            g.addColorStop(1, '#0c0f16');
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(CX, CY, R_WALL, 0, 2 * Math.PI);
+            ctx.fill();
+            // ekrar som roterar med korgen
+            ctx.save();
+            ctx.translate(CX, CY);
+            ctx.rotate(theta);
+            ctx.strokeStyle = '#232937';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'butt';
+            for (var k = 0; k < 4; k++) {
+                var a = k * Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(Math.cos(a) * 18, Math.sin(a) * 18);
+                ctx.lineTo(Math.cos(a) * (R_WALL - 5), Math.sin(a) * (R_WALL - 5));
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        function drawWall() {
+            // korgväggen ritas EFTER svampen så den ser pressad ut mot väggen
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.beginPath();
+            ctx.arc(CX, CY, R_WALL, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#333b4c';
+            ctx.lineWidth = 7;
+            ctx.stroke();
+            // perforeringen (hålen vattnet slungas ut genom) roterar med korgen
+            ctx.fillStyle = '#0d1119';
+            for (var k = 0; k < 30; k++) {
+                var a = theta + k * 2 * Math.PI / 30;
+                ctx.beginPath();
+                ctx.arc(CX + R_WALL * Math.cos(a), CY + R_WALL * Math.sin(a),
+                        2.1, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            // navet
+            ctx.beginPath();
+            ctx.arc(CX, CY, 14, 0, 2 * Math.PI);
+            ctx.fillStyle = '#1c212b';
+            ctx.fill();
+            ctx.strokeStyle = '#2c3342';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(CX, CY, 3.2, 0, 2 * Math.PI);
+            ctx.fillStyle = '#3c4456';
+            ctx.fill();
+        }
+
+        function lerpByte(a, b, t) { return Math.round(a + (b - a) * t); }
+
+        function drawSpongeAt(th, alpha) {
+            ctx.save();
+            ctx.translate(CX, CY);
+            ctx.rotate(th);
+            ctx.globalAlpha = alpha;
+            // torr svamp är blekgul, blöt är mörkare och mättad
+            var fill = 'rgb(' + lerpByte(226, 199, wet) + ',' +
+                                lerpByte(211, 168, wet) + ',' +
+                                lerpByte(148, 74, wet) + ')';
+            ctx.fillStyle = fill;
+            ctx.strokeStyle = 'rgba(20,16,6,0.55)';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            // rundad rektangel med långsidan tangentiellt (x = radiellt)
+            var x0 = R_SVAMP - 20, y0 = -31, w = 40, h = 62, r = 9;
+            ctx.moveTo(x0 + r, y0);
+            ctx.arcTo(x0 + w, y0, x0 + w, y0 + h, r);
+            ctx.arcTo(x0 + w, y0 + h, x0, y0 + h, r);
+            ctx.arcTo(x0, y0 + h, x0, y0, r);
+            ctx.arcTo(x0, y0, x0 + w, y0, r);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            // porer
+            ctx.fillStyle = 'rgba(60,48,16,0.4)';
+            for (var i = 0; i < pores.length; i++) {
+                ctx.beginPath();
+                ctx.arc(R_SVAMP + pores[i].r, pores[i].s, pores[i].rad, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            // blank vattenglans när svampen är blöt
+            if (wet > 0.02) {
+                ctx.fillStyle = 'rgba(96,156,224,' + (0.26 * wet).toFixed(3) + ')';
+                ctx.beginPath();
+                ctx.moveTo(x0 + r, y0);
+                ctx.arcTo(x0 + w, y0, x0 + w, y0 + h, r);
+                ctx.arcTo(x0 + w, y0 + h, x0, y0 + h, r);
+                ctx.arcTo(x0, y0 + h, x0, y0, r);
+                ctx.arcTo(x0, y0, x0 + w, y0, r);
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            ctx.restore();
+        }
+
+        function drawSponge() {
+            // Rörelseoskärpa vid hög fart: spökbilder tätt bakåt längs bågen.
+            var wVis = Math.abs(omega) * timeScale();
+            // svag ring längs svampens bana (tröghet i ögat, som lång exponering)
+            var ring = Math.min(0.10, wVis / 220);
+            if (ring > 0.015) {
+                ctx.strokeStyle = 'rgba(214,190,110,' + ring.toFixed(3) + ')';
+                ctx.lineWidth = 42;
+                ctx.beginPath();
+                ctx.arc(CX, CY, R_SVAMP, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+            var n = Math.min(9, Math.floor(wVis / 3));
+            var stepA = Math.sign(omega) * wVis * 0.0045;
+            for (var i = n; i >= 1; i--) {
+                drawSpongeAt(theta - stepA * i, 0.07);
+            }
+            drawSpongeAt(theta, 1);
+        }
+
+        function drawParticles() {
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.lineCap = 'round';
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                var t = p.age / p.life;
+                var a = (1 - t) * 0.85;
+                ctx.strokeStyle = 'rgba(150,205,255,' + a.toFixed(3) + ')';
+                ctx.lineWidth = p.w;
+                ctx.beginPath();
+                ctx.moveTo(p.px, p.py);
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+                if (t < 0.5) {
+                    ctx.fillStyle = 'rgba(225,242,255,' + (0.55 * (1 - t)).toFixed(3) + ')';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.w * 0.8, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+            ctx.globalCompositeOperation = 'source-over';
+        }
+
+        function render() {
+            drawBackground();
+            drawBasket();
+            drawSponge();
+            drawWall();
+            drawParticles();
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        function step(dt) {
+            var thPrev = theta;
+            // centrifugen: mjuk uppspolning / utrullning mot glidarens mål
+            var target = spinOn ? targetOmega() : 0;
+            var k = spinOn ? 2.6 : 1.4;
+            omega += (target - omega) * Math.min(1, k * dt);
+            if (!spinOn && Math.abs(omega) < 0.02) omega = 0;
+            theta += omega * dt;
+
+            var rate = emit(dt, thPrev);
+            emitRateSm += (rate - emitRateSm) * Math.min(1, 6 * dt);
+            stepParticles(dt);
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            updateAudio();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return Math.abs(omega) > 0.02 || particles.length > 0;
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            info.textContent = 'Varvtal: ' + fmt(Math.abs(omega) / (2 * Math.PI), 1) +
+                ' varv/s · Vatten: ' + Math.round(wet * 100) + ' %';
+        }
+
+        // ── UI-logik ──────────────────────────────────────────────────────
+        function syncUi() {
+            blotBtn.disabled = wet > 0.95;
+            startBtn.textContent = spinOn ? 'Stoppa centrifugen' : 'Starta centrifugen';
+            pausBtn.textContent = paused ? 'Fortsätt' : 'Pausa';
+        }
+
+        blotBtn.addEventListener('click', function () {
+            wet = 1;
+            paused = false;
+            resumeAudio();
+            syncUi();
+            render();
+            updateInfo();
+            kick();
+        });
+        startBtn.addEventListener('click', function () {
+            spinOn = !spinOn;
+            paused = false;
+            resumeAudio();
+            syncUi();
+            kick();
+        });
+        pausBtn.addEventListener('click', function () {
+            paused = !paused;
+            syncUi();
+            updateAudio();  // tysta direkt vid paus
+            if (!paused) kick();
+            else render();  // frys exakt den bild som visas
+        });
+        sndBtn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
+            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            if (soundOn) resumeAudio();
+            updateAudio();
+        });
+        slowCb.addEventListener('change', kick);
+        slider.addEventListener('input', function () {
+            syncSliderVal();
+            kick();
+        });
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                updateAudio();
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            updateAudio();
+            if (!document.hidden) kick();
+        });
+
+        // Litet test-handtag (används av e2e-skriptet i .shots/)
+        card._audioState = function () { return audio ? audio.ctx.state : 'none'; };
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
     // ── Register + publikt API ────────────────────────────────────────────
-    var TYPES = { tomtebloss: buildTomtebloss };
+    var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

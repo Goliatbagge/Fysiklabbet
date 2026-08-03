@@ -158,6 +158,11 @@
  * valueBracket: ['E_1=', {frac:['k·A_1^2','2']}, '=35 J'] — bråkrader
  * får automatiskt extra radhöjd. Referensimpl: layoutDampning
  * (klammern), layoutLpskiva (frekvensraden + radie-anteckningen).
+ * TÄLJARE MED NEDSTAPEL OCH NÄMNARE MED EXPONENT: en täljare som slutar
+ * på g, y, j eller p (t.ex. T²·g) får sin svans rakt igenom bråkstrecket,
+ * och en nämnare med exponent (4π²) trycker upp exponenten i strecket.
+ * fracH/valueBracket lyfter därför täljaren respektive sänker nämnaren
+ * automatiskt — skriv bråket som vanligt, men granska i skärmdump.
  *
  * REGEL (DIVIDERA BORT EN GEMENSAM FAKTOR — BARA fysikuppgifter): när
  * samma faktor står i båda leden (t.ex. g i m_P·g·l_P = m_B·g·l_B) delas
@@ -448,6 +453,12 @@
     /* E som F med bottenstreck — jämför med F vid granskning */
     'E': { w: 68, strokes: [[[32, 12], [28, 100]], [[32, 12], [68, 11]],
                             [[30, 54], [60, 54]], [[28, 100], [66, 98]]] },
+    /* D (2026-08-03, för rubriken "Derivera …"): stapel + hel bukt från
+     * toppen runt till foten — jämför med B och P vid granskning: B har
+     * två bukter, P bara en halv */
+    'D': { w: 80, strokes: [[[32, 12], [28, 100]],
+                            [[32, 12], [58, 14], [72, 32], [73, 60],
+                             [62, 86], [43, 98], [28, 100]]] },
     /* R som P med ett ben snett ned åt höger */
     'R': { w: 72, strokes: [[[32, 12], [28, 100]],
                             [[32, 12], [58, 11], [68, 22], [67, 37], [55, 48], [30, 50]],
@@ -1357,7 +1368,10 @@
           var nw = stringAdvance(sg.frac[0], ss, sF),
               dw = stringAdvance(sg.frac[1], ss, sF);
           var w = Math.max(nw, dw) + 0.3 * sF;
-          placeString(sg.frac[0], x + (w - nw) / 2, ybar - 0.14 * sF,
+          /* täljare med nedstapel (g, y, j, p) lyfts, annars skär svansen
+           * rakt igenom divisionsstrecket */
+          var ny = /[gyjp]/.test(sg.frac[0]) ? -0.36 : -0.14;
+          placeString(sg.frac[0], x + (w - nw) / 2, ybar + ny * sF,
                       ss, sF, acts);
           acts.push({ kind: 'pause', ms: 120 });
           acts.push({ kind: 'stroke',
@@ -5312,6 +5326,1083 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: harmonisk svängning (fy2-2.3 Ex 1) ----------
+   * y = 0,15 sin(10t): amplitud, svängningstid, hastighet som funktion av
+   * t, maximal fart och acceleration. Figuren är ett y–t-diagram där de
+   * två sökta storheterna A och T är måttsatta med ENBART sin beteckning
+   * (se REGEL BETECKNINGAR I FIGURER) och uppgiftens samband står i blått.
+   * Poängen i a) är JÄMFÖRELSEN med grundformen y = A·sin(ω·t): de två
+   * sambanden skrivs under varandra och blåpennan ringar in 0,15 mot A
+   * (insättningsgest, se REGEL). Ur samma jämförelse hämtas ω = 10 rad/s
+   * till klammern i b). c)–e) är deriveringar utan mätvärden och har
+   * därför ingen klammer — det finns inga värden att sätta in. */
+  function layoutHarmonisk(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 288;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    /* måttpil med spets i BÅDA ändar (yA ovanför yB resp. xA till vänster) */
+    function measureV(x, yA, yB, color) {
+      line([x, yA + 5], [x, yB - 5], color);
+      arrowHead(x, yA, x, yA + 18, 9, color);
+      arrowHead(x, yB, x, yB - 18, 9, color);
+    }
+    function measureH(xA, xB, y, color) {
+      line([xA + 5, y], [xB - 5, y], color);
+      arrowHead(xA, y, xA + 18, y, 9, color);
+      arrowHead(xB, y, xB - 18, y, 9, color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- diagrammets geometri: origo (96, 152), amplitud 70 px,
+     * period 180 px; kurvan y = A·sin(ω·t) startar i origo --- */
+    var ox = 96, oy = 152, Apx = 70, P = 180;
+    function curveY(x) {
+      return oy - Apx * Math.sin((x - ox) / P * Math.PI * 2);
+    }
+    var top1 = ox + P / 4;                    /* första krönet (amplituden) */
+    /* perioden mäts DALBOTTEN till DALBOTTEN, inte krön till krön: krönet
+     * är upptaget av amplitudmåttet, och två mått i samma x-kolumn lägger
+     * projektionslinjen rakt ovanpå amplitudpilen */
+    var bot1 = ox + 3 * P / 4, bot2 = bot1 + P;
+
+    /* ---- steg 1: diagrammet (grafit) ---- */
+    var b1 = figurBubble(268, [
+      [['Ritar en svängning: läget ', 0], ['y', 1], [' som', 0]],
+      [['funktion av tiden ', 0], ['t', 1]],
+      [['Kurvan blir en sinuskurva.']]
+    ]);
+    tanke(b1);
+    line([ox, 250], [ox, 62]);                /* y-axeln */
+    arrowHead(ox, 58, ox, 74, 9);
+    line([ox - 8, oy], [552, oy]);            /* t-axeln */
+    arrowHead(556, oy, 542, oy, 9);
+    pause(140);
+    placeString('y (m)', 108, 72, s * 0.55, F * 0.55, acts);
+    placeString('t (s)', 508, 178, s * 0.55, F * 0.55, acts);
+    pause(140);
+    (function () {
+      var pts = [];
+      for (var x = ox; x <= 528; x += 6) pts.push([x, curveY(x)]);
+      for (var k = 0; k + 1 < pts.length; k += 9) {
+        acts.push({ kind: 'stroke', pts: pts.slice(k, k + 10) });
+      }
+    })();
+    stepEnd();
+
+    /* ---- steg 2: uppgiftens samband + de sökta måtten (blått) ---- */
+    var b2 = figurBubble(272, [
+      [['Skriver in sambandet ur']],
+      [['uppgiften. Amplituden ', 0], ['A', 1], [' och', 0]],
+      [['perioden ', 0], ['T', 1], [' är det jag söker,', 0]],
+      [['så de får bara sin beteckning.']]
+    ]);
+    tanke(b2);
+    placeString('y=0,15 sin(10t)', 330, 66, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    measureV(140, curveY(top1), oy, BLUE);    /* amplituden */
+    placeString('A', 150, 124, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    dash([bot1, curveY(bot1) + 8], [bot1, 248]);   /* projektioner */
+    dash([bot2, curveY(bot2) + 8], [bot2, 248]);
+    measureH(bot1, bot2, 254, BLUE);          /* perioden, dal till dal */
+    placeString('T', (bot1 + bot2) / 2 - 6, 246, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- a) jämförelse med grundformen ---- */
+    var y = 336;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF1 = bubble(120, bubbleTop(258), bw, [
+      [['Sambandet har samma form som']],
+      [['den allmänna formeln för en']],
+      [['harmonisk svängning. Då kan jag']],
+      [['läsa av ', 0], ['A', 1], [' genom att jämföra.', 0]]
+    ]);
+    tanke(bF1);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('a) Jämför med grundformen', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.9 * F;
+    var yGen = y;
+    var xa0 = placeString('y=', padL, yGen, s, F, acts);
+    var xa1 = placeString('A', xa0, yGen, s, F, acts);
+    var xa2 = placeString('·sin(', xa1, yGen, s, F, acts);
+    var xa3 = placeString('ω', xa2, yGen, s, F, acts);
+    placeString('·t)', xa3, yGen, s, F, acts);
+    stepEnd();
+
+    var yGiv = yGen + adv;
+    var bG = bubble(140, bubbleTop(yGen), bw, [
+      [['Skriver uppgiftens samband rakt']],
+      [['under, så att delarna hamnar']],
+      [['mot varandra.']]
+    ]);
+    tanke(bG);
+    var xg0 = placeString('y=', padL, yGiv, s, F, acts);
+    var xg1 = placeString('0,15', xg0, yGiv, s, F, acts);
+    var xg2 = placeString(' sin(', xg1, yGiv, s, F, acts);
+    var xg3 = placeString('10', xg2, yGiv, s, F, acts);
+    placeString('t)', xg3, yGiv, s, F, acts);
+    stepEnd();
+
+    /* INSÄTTNINGSGEST (se REGEL): talet framför sinus ringas in, sedan
+     * platsen det hör hemma på i grundformen */
+    y = yGiv + adv + 0.2 * F;
+    var bA = bubble(140, bubbleTop(yGiv), bw, [
+      [['Talet framför sinus står på']],
+      [['amplitudens plats.']]
+    ]);
+    tanke(bA);
+    var rings = substRings(acts, [[xg0, xg1, yGiv, F], [xa0, xa1, yGen, F]]);
+    var xeAmp = placeString('A=0,15 m=15 cm', padL, y, s, F, acts);
+    fadeRings(acts, rings);
+    stepEnd();
+
+    y += adv;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR1 = bubble(120, bubbleTop(y - adv), bw, [
+      [['15 cm åt vardera hållet. Ungefär']],
+      [['en handsbredd, rimligt för en']],
+      [['vikt i en fjäder!']]
+    ]);
+    tanke(bR1);
+    xeAmp = placeString('Svar: 15 cm', padL, y, s, F, acts);
+    underline(xeAmp, y);
+    stepEnd();
+
+    /* ---- b) svängningstiden ---- */
+    y += adv + 1.2 * F;
+    var bF2 = bubble(140, bubbleTop(y - adv - 0.5 * F), bw, [
+      [['Perioden sitter i vinkel-']],
+      [['hastigheten. Jag löser ut ', 0], ['T', 1], [' ur', 0]],
+      [['sambandet mellan dem.']]
+    ]);
+    tanke(bF2);
+    placeString('b) Vinkelhastighet och period', padL, y,
+                s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.1 * F;
+    var xb = placeString('ω=', padL, y, s, F, acts);
+    xb = fracH('2π', 'T', xb, y);
+    xb = placeString('⟺T=', xb + 0.12 * F, y, s, F, acts);
+    fracH('2π', 'ω', xb, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
+    y += adv + 1.3 * F;
+    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Jämförelsen i a) gav också']],
+      [['vinkelhastigheten: talet']],
+      [['framför ', 0], ['t', 1], [' inne i sinus.', 0]]
+    ]);
+    tanke(bK2);
+    var klam2 = valueBracket(acts, ['ω=10 rad/s'], padL, y, s, F);
+    stepEnd();
+    y = klam2.yEnd;
+
+    y += adv + 1.3 * F;
+    var bI2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdet ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI2);
+    var xi2 = placeString('T=', padL, y, s, F, acts);
+    var xe2 = fracH('2π', '10', xi2, y);
+    var xIns2 = placeString('=0,628... s', xe2 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL): fortsättning på samma rad om den ryms */
+    var bAvr2 = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Talen']],
+      [['i sambandet har två']],
+      [['värdesiffror: svaret får två.']]
+    ]);
+    tanke(bAvr2);
+    var avrB = '≈0,63 s';
+    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 6) {
+      placeString(avrB, xIns2, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrB, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    var bR2 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Drygt en halv sekund per']],
+      [['svängning. Det ser ut som en']],
+      [['fjäder som guppar, rimligt!']]
+    ]);
+    tanke(bR2);
+    var xeB = placeString('Svar: 0,63 s', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    /* ---- c) hastigheten som funktion av tiden ---- */
+    y += adv + 1.2 * F;
+    var bF3 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Hastigheten är hur snabbt läget']],
+      [['ändras: derivatan av ', 0], ['y', 1]],
+      [['Glöm inte den inre derivatan!']]
+    ]);
+    tanke(bF3);
+    placeString('c) Derivera läget', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.7 * F;
+    placeString("v=y'=10·0,15 cos(10t)", padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bC2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Faktorerna framför cosinus']],
+      [['slås ihop.']]
+    ]);
+    tanke(bC2);
+    placeString('=1,5 cos(10t)', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bR3 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Cosinus är 1 i jämviktsläget']],
+      [['och 0 i vändlägena. Precis så']],
+      [['rör sig en fjädervikt!']]
+    ]);
+    tanke(bR3);
+    var xeC = placeString('Svar: v=1,5 cos(10t) m/s', padL, y, s, F, acts);
+    underline(xeC, y);
+    stepEnd();
+
+    /* ---- d) maximala farten ---- */
+    y += adv + 1.2 * F;
+    var bF4 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Farten är störst när cosinus är']],
+      [['som störst, alltså 1. Det sker']],
+      [['i jämviktsläget.']]
+    ]);
+    tanke(bF4);
+    placeString('d) Farten är störst då cos(10t)=1', padL, y,
+                s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.7 * F;
+    placeString('v_m_a_x=1,5·1=1,5 m/s', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bR4 = bubble(120, bubbleTop(y - adv), bw, [
+      [['1,5 m/s är gånghastighet.']],
+      [['Rimligt för en vikt som guppar']],
+      [['15 cm åt vardera hållet!']]
+    ]);
+    tanke(bR4);
+    var xeD = placeString('Svar: 1,5 m/s', padL, y, s, F, acts);
+    underline(xeD, y);
+    stepEnd();
+
+    /* ---- e) accelerationen som funktion av tiden ---- */
+    y += adv + 1.2 * F;
+    var bF5 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Accelerationen är hur snabbt']],
+      [['hastigheten ändras. Det är']],
+      [['derivatan av ', 0], ['v', 1]]
+    ]);
+    tanke(bF5);
+    placeString('e) Derivera hastigheten', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.7 * F;
+    placeString("a=v'=−10·1,5 sin(10t)", padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bE2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Faktorerna framför sinus slås']],
+      [['ihop.']]
+    ]);
+    tanke(bE2);
+    placeString('=−15 sin(10t)', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bR5 = bubble(120, bubbleTop(y - adv), bw, [
+      [['Minustecknet betyder att']],
+      [['accelerationen alltid pekar mot']],
+      [['jämviktsläget. Så måste det vara']],
+      [['i en svängning!']]
+    ]);
+    tanke(bR5);
+    var xeE = placeString('Svar: a=−15 sin(10t) m/s^2', padL, y, s, F, acts);
+    underline(xeE, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: periodtid i fjäder (fy2-2.4 Ex 1) -----------
+   * En 100-gramsvikt förlänger fjädern 9,0 cm; den dras ned ytterligare
+   * 5,0 cm och släpps. Periodtiden söks. Figuren är samma fjäderfigur som
+   * i 2.1: tak, fjäder, vikt och två streckade nivåer med förlängningen
+   * måttsatt, plus neddragningen. Poängen är att AMPLITUDEN inte behövs —
+   * perioden beror bara på massan och fjäderkonstanten (bubblan säger
+   * det). Fjäderkonstanten är inte given och beräknas därför som en
+   * deluträkning PÅ SIN RAD INUTI klammern med Hookes lag och enheter vid
+   * varje tal (se REGEL KLAMMERN KOMMER DIREKT UNDER FORMELN); raden är
+   * lång, så klammern skrivs i 0,7-skala. */
+  function layoutPeriodfjader(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 10, color);
+    }
+    function rect(x0, y0, x1, y1) {
+      line([x0, y0], [x1, y0]);
+      line([x1, y0], [x1, y1]);
+      line([x1, y1], [x0, y1]);
+      line([x0, y1], [x0, y0]);
+    }
+    function measureV(x, yA, yB, color) {
+      line([x, yA + 5], [x, yB - 5], color);
+      arrowHead(x, yA, x, yA + 18, 9, color);
+      arrowHead(x, yB, x, yB - 18, 9, color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri: 7 px/cm, 9,0 cm förlängning = 63 px --- */
+    var fx = 240, takY = 56;
+    var endU = 100;                           /* fjäderns slut UTAN vikt */
+    var endL = 163;                           /* jämviktsläget med vikten */
+
+    /* ---- steg 1: rita det vi vet — tak, fjäder, vikt, nivålinjer ---- */
+    var b1 = figurBubble(266, [
+      [['Ritar taket, fjädern och vikten.']],
+      [['Utan vikt slutar fjädern vid den']],
+      [['övre streckade linjen.']]
+    ]);
+    tanke(b1);
+    line([150, takY], [330, takY]);           /* taket */
+    for (var hx = 158; hx <= 330; hx += 16) {
+      line([hx, takY], [hx - 8, takY - 9]);   /* skraffering */
+    }
+    pause(140);
+    (function () {                            /* fjädern i EN penndragning */
+      var n = 7, yTop = takY + 6, yBot = endL - 6;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[fx, takY], [fx, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([fx + (k % 2 ? 13 : -13), yTop + k * step]);
+      }
+      pts.push([fx, yBot]);
+      pts.push([fx, endL]);
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    pause(140);
+    rect(fx - 14, endL, fx + 14, endL + 28);  /* vikten */
+    pause(140);
+    dash([fx + 16, endU], [340, endU]);
+    dash([fx + 16, endL], [340, endL]);
+    pause(140);
+    placeString('utan vikt', 358, 94, s * 0.55, F * 0.55, acts);
+    placeString('jämviktsläge', 358, 167, s * 0.55, F * 0.55, acts);
+    stepEnd();
+
+    /* ---- steg 2: annoteringar — massan, förlängningen, neddragningen -- */
+    var b2 = figurBubble(268, [
+      [['Skriver in det jag vet: 100 g']],
+      [['förlänger fjädern 9,0 cm, och']],
+      [['sedan dras vikten ned 5,0 cm.']]
+    ]);
+    tanke(b2);
+    placeString('m=100 g', 96, 184, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    measureV(334, endU, endL, BLUE);
+    placeString('Δl=9,0 cm', 346, 126, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    arrow([fx - 18, endL + 34], [fx - 18, endL + 69], BLUE);
+    dash([fx + 16, endL + 70], [340, endL + 70]);
+    placeString('A=5,0 cm', 348, endL + 75, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- periodtiden ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF = bubble(120, bubbleTop(292), bw, [
+      [['Perioden beror bara på massan']],
+      [['och fjäderkonstanten. Ampli-']],
+      [['tuden 5,0 cm behövs alltså inte']],
+      [['alls!']]
+    ]);
+    tanke(bF);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('Periodtid för vikt i fjäder', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.35 * F;                            /* formeln har rot + bråk */
+    var xx = placeString('T=2π', padL, y, s, F, acts);
+    var nw = stringAdvance('m', s, F), dw = stringAdvance('k', s, F);
+    var fw = Math.max(nw, dw) + 0.3 * F;
+    var xs = rootSign(acts, xx, y, fw, F,
+                      { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    fracH('m', 'k', xs, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL): fjäder-
+     * konstanten är inte given och räknas ut på sin rad i klammern med
+     * Hookes lag, med enheter vid varje tal. Raden är lång → 0,7-skala. */
+    y += adv + 1.5 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Fjäderkonstanten är inte given.']],
+      [['Den räknas ut direkt i klammern']],
+      [['med Hookes lag: kraften på']],
+      [['fjädern är viktens tyngd.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts, [
+      'm=100 g=0,100 kg',
+      ['k=', { frac: ['m·g', 'Δl'] }, '=',
+       { frac: ['0,100 kg·9,82 N/kg', '0,090 m'] }, '=10,911... N/m']
+    ], padL, y, s, F, { rs: 0.7 });
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.6 * F;
+    var bI = bubble(140, bubbleTop(y - adv - 0.2 * F), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln. Fjäder-']],
+      [['konstanten tar jag oavrundad.']]
+    ]);
+    tanke(bI);
+    var xi = placeString('T=2π', padL, y, s, F, acts);
+    var nw2 = stringAdvance('0,100', s, F),
+        dw2 = stringAdvance('10,911...', s, F);
+    var fw2 = Math.max(nw2, dw2) + 0.3 * F;
+    var xs2 = rootSign(acts, xi, y, fw2, F,
+                       { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    var xe = fracH('0,100', '10,911...', xs2, y);
+    var xIns = placeString('=0,601... s', xe, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL): fortsättning på samma rad om den ryms */
+    var bAvr = bubble(140, bubbleTop(y + 1.35 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Förlängningen 9,0 cm har två']],
+      [['värdesiffror: svaret får två.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈0,60 s';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['En liten vikt i en mjuk fjäder']],
+      [['guppar ungefär två gånger i']],
+      [['sekunden. Rimligt!']]
+    ]);
+    tanke(bR);
+    var xeS = placeString('Svar: 0,60 s', padL, y, s, F, acts);
+    underline(xeS, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: massa för given period (fy2-2.4 Ex 2) -------
+   * En fjäder med k = 0,14 kN/m ska svänga med perioden 0,20 s — hur stor
+   * massa? Formeln kvadreras och massan löses ut (omskrivningen skrivs i
+   * FORTSÄTTNING på samma rad med ⟺, se REGEL). Massan är den SÖKTA
+   * storheten och skrivs därför i figuren med enbart sin beteckning. */
+  function layoutMassafjader(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 290;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 10, color);
+    }
+    function rect(x0, y0, x1, y1) {
+      line([x0, y0], [x1, y0]);
+      line([x1, y0], [x1, y1]);
+      line([x1, y1], [x0, y1]);
+      line([x0, y1], [x0, y0]);
+    }
+    /* nämnare MED EXPONENT (4π²) skrivs en aning lägre (exponenten reser
+     * sig 0,56·F över nämnarens baslinje och nuddar annars bråkstrecket),
+     * och en täljare med NEDSTAPEL (g, y, j, p) lyfts på samma sätt —
+     * annars går g:ets svans rakt igenom divisionsstrecket */
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var dy = /\^/.test(denS) ? 1.26 : 1.04;
+      var ny = /[gyjp]/.test(numS) ? -0.36 : -0.14;
+      placeString(numS, x0 + (w - nw) / 2, ybar + ny * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + dy * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri --- */
+    var fx = 240, takY = 56, endL = 168;
+
+    /* ---- steg 1: rita det vi vet — tak, fjäder, vikt ---- */
+    var b1 = figurBubble(266, [
+      [['Ritar taket, fjädern och den']],
+      [['vikt som ska hängas i den.']]
+    ]);
+    tanke(b1);
+    line([150, takY], [330, takY]);
+    for (var hx = 158; hx <= 330; hx += 16) {
+      line([hx, takY], [hx - 8, takY - 9]);
+    }
+    pause(140);
+    (function () {
+      var n = 7, yTop = takY + 6, yBot = endL - 6;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[fx, takY], [fx, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([fx + (k % 2 ? 13 : -13), yTop + k * step]);
+      }
+      pts.push([fx, yBot]);
+      pts.push([fx, endL]);
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    pause(140);
+    rect(fx - 14, endL, fx + 14, endL + 28);
+    stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) ---- */
+    var b2 = figurBubble(272, [
+      [['Skriver in fjäderkonstanten och']],
+      [['perioden. Massan ', 0], ['m', 1], [' är det jag', 0]],
+      [['söker, så den får bara sin']],
+      [['beteckning.']]
+    ]);
+    tanke(b2);
+    placeString('k=0,14 kN/m', 72, 118, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    placeString('m', fx - 40, endL + 22, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    arrow([304, endL + 2], [304, endL - 36], BLUE);      /* svänger upp */
+    arrow([304, endL + 26], [304, endL + 64], BLUE);     /* och ner */
+    placeString('T=0,20 s', 318, endL + 20, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- massan ---- */
+    var y = 368;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF = bubble(120, bubbleTop(284), bw, [
+      [['Formeln för perioden innehåller']],
+      [['massan. Jag ställer upp den och']],
+      [['löser ut ', 0], ['m', 1]]
+    ]);
+    tanke(bF);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('Periodtid för vikt i fjäder', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.35 * F;
+    var xx = placeString('T=2π', padL, y, s, F, acts);
+    var nw = stringAdvance('m', s, F), dw = stringAdvance('k', s, F);
+    var fw = Math.max(nw, dw) + 0.3 * F;
+    var xs = rootSign(acts, xx, y, fw, F,
+                      { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    fracH('m', 'k', xs, y);
+    stepEnd();
+
+    /* OMSKRIVNING MED EKVIVALENSPIL (se REGEL): kvadreringen och
+     * utlösningen ryms på samma rad */
+    y += adv + 1.3 * F;
+    var bQ = bubble(140, bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Massan sitter under ett']],
+      [['rottecken. Jag kvadrerar båda']],
+      [['led för att få bort roten, och']],
+      [['löser sedan ut ', 0], ['m', 1]]
+    ]);
+    tanke(bQ);
+    placeString('Kvadrera båda led', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    var xq = placeString('T^2=4π^2·', padL, y, s, F, acts);
+    xq = fracH('m', 'k', xq, y);
+    xq = placeString('⟺m=', xq + 0.12 * F, y, s, F, acts);
+    fracH('T^2·k', '4π^2', xq, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
+    y += adv + 1.5 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Fjäderkonstanten görs om till']],
+      [['newton per meter i klammern.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts, ['T=0,20 s', 'k=0,14 kN/m=140 N/m'],
+                            padL, y, s, F);
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    var bI = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI);
+    var xi = placeString('m=', padL, y, s, F, acts);
+    var xe = fracH('0,20^2·140', '4π^2', xi, y);
+    var xIns = placeString('=0,141... kg', xe + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL) */
+    var bAvr = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Både']],
+      [['0,20 s och 0,14 kN/m har två']],
+      [['värdesiffror: svaret får två.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈0,14 kg=140 g';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['En styv fjäder och en lätt vikt']],
+      [['ger snabba svängningar. Fem']],
+      [['svängningar i sekunden,']],
+      [['rimligt!']]
+    ]);
+    tanke(bR);
+    var xeS = placeString('Svar: 0,14 kg (140 g)', padL, y, s, F, acts);
+    underline(xeS, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: sekundpendeln (fy2-2.5 Ex 1) ----------------
+   * Hur lång är en pendel där tiden mellan vändlägena är 1,00 s? Figuren
+   * följer teorins pendelfigur: tak med skraffering, snöre, kula och en
+   * streckad cirkelbåge med de två vändlägena. Periodtiden är ett HÄRLETT
+   * MÅTT (1,00 s är bara en HALV period) och motiveras därför med en kort
+   * anteckning i fri yta bredvid figuren INNAN den används (se REGEL).
+   * Formeln kvadreras och pendellängden löses ut på samma rad med ⟺. */
+  function layoutSekundpendel(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dashPts(pts) {                   /* streckad kurva ur punktlista */
+      for (var i = 0; i + 1 < pts.length; i += 2) {
+        line(pts[i], pts[i + 1]);
+      }
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function ring(cx, cy, r, color) {         /* liten öppen cirkel */
+      var pts = [];
+      for (var i = 0; i <= 11; i++) {
+        var a = -1.2 + (i / 11) * Math.PI * 2.12;
+        pts.push([cx + Math.cos(a) * (r + rnd(-0.7, 0.7)),
+                  cy + Math.sin(a) * (r + rnd(-0.7, 0.7))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: color || null });
+    }
+    /* nämnare MED EXPONENT (4π²) skrivs en aning lägre (exponenten reser
+     * sig 0,56·F över nämnarens baslinje och nuddar annars bråkstrecket),
+     * och en täljare med NEDSTAPEL (g, y, j, p) lyfts på samma sätt —
+     * annars går g:ets svans rakt igenom divisionsstrecket */
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var dy = /\^/.test(denS) ? 1.26 : 1.04;
+      var ny = /[gyjp]/.test(numS) ? -0.36 : -0.14;
+      placeString(numS, x0 + (w - nw) / 2, ybar + ny * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + dy * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri: fäste (236, 52), snöre 152 px, utslag 26° --- */
+    var px = 236, py = 52, PL = 152;
+    var vin = 26 * Math.PI / 180;
+    var bob = [px, py + PL];
+    var vL = [px - PL * Math.sin(vin), py + PL * Math.cos(vin)];
+    var vR = [px + PL * Math.sin(vin), py + PL * Math.cos(vin)];
+
+    /* ---- steg 1: rita pendeln (grafit) ---- */
+    var b1 = figurBubble(268, [
+      [['Ritar pendeln: fästet i taket,']],
+      [['snöret och kulan. Den streckade']],
+      [['bågen visar hur kulan svänger']],
+      [['mellan vändlägena.']]
+    ]);
+    tanke(b1);
+    line([px - 90, py], [px + 90, py]);       /* taket */
+    for (var hx = px - 82; hx <= px + 90; hx += 16) {
+      line([hx, py], [hx - 8, py - 9]);       /* skraffering */
+    }
+    pause(140);
+    line([px, py], bob);                      /* snöret i lodläget */
+    acts.push({ kind: 'stroke', pts: dotPts(px, py) });
+    ring(bob[0], bob[1], 10);                 /* kulan */
+    acts.push({ kind: 'stroke', pts: dotPts(bob[0], bob[1]) });
+    pause(140);
+    dash([px, py], vL);                       /* vändlägena */
+    dash([px, py], vR);
+    ring(vL[0], vL[1], 9);
+    ring(vR[0], vR[1], 9);
+    pause(140);
+    (function () {                            /* streckad cirkelbåge */
+      var pts = [];
+      for (var i = 0; i <= 28; i++) {
+        var a = -vin + (i / 28) * 2 * vin;
+        pts.push([px + Math.sin(a) * (PL + 16) + rnd(-0.8, 0.8),
+                  py + Math.cos(a) * (PL + 16) + rnd(-0.8, 0.8)]);
+      }
+      dashPts(pts);
+    })();
+    stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) + härlett mått (grafit) ---- */
+    var b2 = figurBubble(272, [
+      [['Tiden 1,00 s gäller från det ena']],
+      [['vändläget till det andra.']],
+      [['Pendellängden ', 0], ['l', 1], [' är det jag', 0]],
+      [['söker.']]
+    ]);
+    tanke(b2);
+    placeString('l', px + 12, py + 84, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    /* måttpil längs bågen mellan vändlägena, med spets i båda ändar */
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 16; i++) {
+        var a = -vin * 0.86 + (i / 16) * 1.72 * vin;
+        pts.push([px + Math.sin(a) * (PL + 34), py + Math.cos(a) * (PL + 34)]);
+      }
+      for (var k = 0; k + 1 < pts.length; k++) line(pts[k], pts[k + 1], BLUE);
+      arrowHead(pts[0][0], pts[0][1], pts[2][0], pts[2][1], 9, BLUE);
+      arrowHead(pts[16][0], pts[16][1], pts[14][0], pts[14][1], 9, BLUE);
+    })();
+    placeString('1,00 s', px - 26, py + PL + 62, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* HÄRLETT MÅTT (se REGEL): periodtiden står inte i uppgiften —
+     * motiveras med en anteckning i fri yta bredvid figuren */
+    var b3 = figurBubble(276, [
+      [['Ena vändläget till det andra är']],
+      [['bara en HALV svängning. Hela']],
+      [['perioden är dubbelt så lång.']]
+    ]);
+    tanke(b3);
+    placeString('Halva perioden: 1,00 s', 424, 116, s * 0.62, F * 0.62, acts);
+    placeString('T=2·1,00=2,00 s', 424, 146, s * 0.62, F * 0.62, acts);
+    stepEnd();
+
+    /* ---- pendellängden ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bF = bubble(120, bubbleTop(292), bw, [
+      [['Formeln för pendelns periodtid']],
+      [['innehåller pendellängden.']],
+      [['Massan spelar ingen roll!']]
+    ]);
+    tanke(bF);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('Matematisk pendel', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.35 * F;
+    var xx = placeString('T=2π', padL, y, s, F, acts);
+    var nw = stringAdvance('l', s, F), dw = stringAdvance('g', s, F);
+    var fw = Math.max(nw, dw) + 0.3 * F;
+    var xs = rootSign(acts, xx, y, fw, F,
+                      { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    fracH('l', 'g', xs, y);
+    stepEnd();
+
+    /* OMSKRIVNING MED EKVIVALENSPIL (se REGEL) */
+    y += adv + 1.3 * F;
+    var bQ = bubble(140, bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Längden sitter under ett']],
+      [['rottecken. Jag kvadrerar båda']],
+      [['led för att få bort roten, och']],
+      [['löser sedan ut ', 0], ['l', 1]]
+    ]);
+    tanke(bQ);
+    placeString('Kvadrera båda led', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    var xq = placeString('T^2=4π^2·', padL, y, s, F, acts);
+    xq = fracH('l', 'g', xq, y);
+    xq = placeString('⟺l=', xq + 0.12 * F, y, s, F, acts);
+    fracH('T^2·g', '4π^2', xq, y);
+    stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
+    y += adv + 1.5 * F;
+    var bK = bubble(140, bubbleTop(y - adv), bw, [
+      [['Periodtiden är dubbla tiden']],
+      [['mellan vändlägena, precis som']],
+      [['anteckningen vid figuren visar.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts, ['T=2·1,00 s=2,00 s', 'g≈9,82 m/s^2'],
+                            padL, y, s, F);
+    stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    var bI = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI);
+    var xi = placeString('l=', padL, y, s, F, acts);
+    var xe = fracH('2,00^2·9,82', '4π^2', xi, y);
+    var xIns = placeString('=0,9949... m', xe + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* AVRUNDNING (se REGEL) */
+    var bAvr = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Tiden']],
+      [['1,00 s har tre värdesiffror:']],
+      [['svaret får tre.']]
+    ]);
+    tanke(bAvr);
+    var avrS = '≈0,995 m=99,5 cm';
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+      placeString(avrS, xIns, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrS, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Ungefär en meter, som pendeln i']],
+      [['ett golvur. Just så långa är de,']],
+      [['och de tickar en gång i']],
+      [['sekunden!']]
+    ]);
+    tanke(bR);
+    var xeS = placeString('Svar: 99,5 cm', padL, y, s, F, acts);
+    underline(xeS, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
   function dotPts(cx, cy) {
     var pts = [];
@@ -5909,7 +7000,10 @@
                    slanggunga: layoutSlanggunga,
                    kastboll: layoutKastboll, kasthojd: layoutKasthojd,
                    fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
-                   dampning: layoutDampning };
+                   dampning: layoutDampning, harmonisk: layoutHarmonisk,
+                   periodfjader: layoutPeriodfjader,
+                   massafjader: layoutMassafjader,
+                   sekundpendel: layoutSekundpendel };
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](spec, F) : layout(spec, F);
 

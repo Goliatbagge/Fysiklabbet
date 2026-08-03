@@ -77,7 +77,12 @@ $Action = New-ScheduledTaskAction -Execute 'powershell.exe' `
 # Kor som den inloggade anvandaren, utan admin-hojning. Interactive kravs
 # for att Claude Code ska na sin inloggning, git sina credentials och
 # headless Chrome en riktig session.
-$KontoNamn = '{0}\{1}' -f $env:USERDOMAIN, $env:USERNAME
+# $env:USERDOMAIN duger INTE. I en interaktiv session ar den maskinnamnet, men
+# i en SSH-session ar den 'WORKGROUP' - och 'WORKGROUP\namn' gar inte att sla
+# upp till nagot SID, sa Register-ScheduledTask faller pa "Det har inte gjorts
+# nagon mappning mellan kontonamn och sakerhets-ID".
+# WindowsIdentity ger alltid ratt form: MASKIN\anvandare.
+$KontoNamn = [Security.Principal.WindowsIdentity]::GetCurrent().Name
 
 $Principal = New-ScheduledTaskPrincipal -UserId $KontoNamn `
                                         -LogonType Interactive `

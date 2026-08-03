@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'hogladdad-jon',
+    term: 'Högladdad jon',
+    former: ['högladdad jon', 'högladdade joner', 'högladdad', 'högladdade', 'högladdade jonen', 'högladdade jonerna'],
+    kort: 'En atom som fått många eller rentav alla sina elektroner bortslitna och därför bär en kraftigt positiv laddning. De finns naturligt i solens yttre lager och tillverkas på konstgjord väg i acceleratorer och jonkällor.',
+    relaterade: ['plasma', 'partikelaccelerator', 'penningfalla', 'kvantelektrodynamik'],
+    body: [
+      { type: 'p', html: 'En vanlig jon — natriumjonen i ett glas saltvatten — har tappat en enda elektron. En högladdad jon har tappat tio, tjugo eller i ytterlighetsfallet allihop, så att bara den nakna atomkärnan återstår. Skillnaden i svårighetsgrad är enorm. Att lossa den yttersta elektronen ur en atom kostar bara några få elektronvolt, men de innersta elektronerna sitter tätt intill kärnan och känner hela dess positiva laddning på nära håll. För ett tungt grundämne krävs tiotusentals gånger mer energi för att få loss dem.' },
+      { type: 'p', html: 'Trots det är högladdade joner ingen laboratoriekuriositet — de dominerar universum. I solens korona, där temperaturen är någon miljon grader, har järnatomerna typiskt förlorat ett tiotal elektroner, och en av koronans karakteristiska gröna spektrallinjer kommer just från järn som saknar tretton elektroner. På jorden skapas de antingen i en jonkälla, där en tät elektronstråle slår bort en elektron i taget, eller genom att atomerna accelereras till nära ljushastigheten och skickas genom en tunn folie som sopar av elektronskalen.' },
+      { type: 'p', html: 'Att fysiker gärna vill ha tag på dem beror på två saker. Dels är en kärna med bara en eller ingen elektron kvar det enklaste system som finns att räkna på, samtidigt som det elektriska fältet alldeles intill kärnan är ofattbart starkt — starkare än någon laser kan skapa. Dels bär jonen på en väldig lagrad energi: all den energi som gick åt för att slita bort elektronerna finns kvar tills jonen träffar en yta, då den töms på ett ögonblick i en volym på några nanometer. Den effekten går att använda för att mönstra material i mycket liten skala.' }
+    ]
+  },
+  {
+    id: 'penningfalla',
+    term: 'Penningfälla',
+    former: ['penningfälla', 'penningfällan', 'penningfällor', 'penningfällorna', 'jonfälla', 'jonfällan', 'jonfällor', 'jonfällorna', 'jonfälletekniken', 'jonfälleteknik'],
+    kort: 'En fälla som håller kvar laddade partiklar mitt i ett vakuum med hjälp av ett starkt magnetfält och ett elektriskt fält. Enstaka joner eller elektroner kan förvaras i månader och mätas med extrem noggrannhet.',
+    relaterade: ['hogladdad-jon', 'partikelaccelerator', 'supraledare', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Hur förvarar man en enda jon? Inte i en burk — den skulle genast driva mot en vägg, ta upp en elektron och sluta vara en jon. Lösningen är att låta fält göra jobbet i stället för väggar. Ett kraftigt magnetfält längs fällans axel tvingar varje laddad partikel att gå i cirkelbanor kring fältlinjerna, och därmed kan den inte ta sig ut åt sidorna.' },
+      { type: 'p', html: 'Men magnetfältet räcker inte hela vägen. Den magnetiska kraften verkar alltid vinkelrätt mot rörelsen och kan därför aldrig bromsa en partikel som glider längs med fältlinjen — den skulle helt enkelt spiralera ut genom ändarna. Därför sätter man elektroder i vardera änden och laddar dem så att de stöter bort partikeln tillbaka in mot mitten. Magnetfältet håller den på plats i två riktningar, det elektriska fältet i den tredje, och tillsammans blir partikeln instängd utan att någonsin röra något fast.' },
+      { type: 'p', html: 'Namnet kommer från den nederländske fysikern Frans Michel Penning, som använde samma kombination av fält i en vakuummätare. Hans Dehmelt byggde de första fällorna av den här typen och delade Nobelpriset i fysik 1989 för fälltekniken. I hans mest berömda experiment hölls en ensam elektron fångad i månader, vilket gjorde det möjligt att mäta elektronens magnetiska egenskaper med ett dussin korrekta decimaler. I dag används fällorna bland annat till att väga exotiska atomkärnor och till att förvara antimateria vid CERN.' }
+    ]
+  },
+  {
+    id: 'kvantelektrodynamik',
+    term: 'Kvantelektrodynamik',
+    former: ['kvantelektrodynamik', 'kvantelektrodynamiken'],
+    kort: 'Teorin för hur ljus och elektriskt laddad materia växelverkar. Den beskriver den elektriska kraften som ett utbyte av fotoner och är den noggrannast prövade teori fysiken har.',
+    relaterade: ['kvantmekanik', 'foton', 'standardmodellen', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Coulombs lag säger att två laddningar drar eller stöter bort varandra på avstånd — men hur vet den ena laddningen att den andra finns där? Kvantelektrodynamikens svar är att de skickar fotoner mellan sig. Den elektriska kraften är helt enkelt ljuspartiklar som kastas fram och tillbaka. Fotonerna kallas virtuella, eftersom de aldrig går att fånga in och mäta; de dyker bara upp som mellansteg i räkningen. Två elektroner som studsar mot varandra gör det alltså inte genom något osynligt gummiband, utan genom ett utbyte.' },
+      { type: 'p', html: 'En annan följd är att tomrummet inte är tomt. Partiklar och antipartiklar bubblar hela tiden upp ur vakuumet och försvinner igen innan de hunnit göra av sig. En elektron är därför alltid omgiven av ett myller av sådana kortlivade par, och myllret påverkar hur elektronen uppträder — mycket lite, men mätbart. Det är skälet till att elektronens magnetiska styrka inte är exakt 2, som en enklare teori förutsäger, utan 2,002 319 304 … Beräkningen och mätningen stämmer med varandra på över tio decimaler, vilket gör detta till den skarpaste jämförelsen mellan teori och experiment i hela naturvetenskapen.' },
+      { type: 'p', html: 'Teorin fick sin färdiga form på 1940-talet genom Richard Feynman, Julian Schwinger och Sin-Itiro Tomonaga, som delade Nobelpriset 1965. Den fungerar lysande i de förhållandevis svaga elektriska fält vi normalt har omkring oss. Det som fortfarande är obeprövat är motsatta ytterligheten: alldeles intill en tung atomkärna är fältet av storleksordningen 10<sup>16</sup>&nbsp;volt per centimeter, långt bortom vad någon laser kan åstadkomma. Om teorin håller även där vet ingen säkert, och det är därför fysiker lägger ner så mycket möda på att fånga in tunga joner och mäta på dem.' }
+    ]
+  },
+  {
     id: 'viskositet',
     term: 'Viskositet',
     former: ['viskositet', 'viskositeten', 'viskositeter', 'viskositeterna',
@@ -650,7 +686,7 @@ window.BEGREPP = [
   {
     id: 'partikelaccelerator',
     term: 'Partikelaccelerator',
-    former: ['partikelaccelerator', 'partikelacceleratorn', 'partikelacceleratorer', 'partikelacceleratorerna', 'acceleratorn', 'acceleratorer', 'acceleratorerna', 'synkrotron', 'synkrotronen', 'synkrotroner', 'synkrotronljus', 'synkrotronljuset', 'cyklotron', 'cyklotronen', 'kollisionsenergi', 'kollisionsenergin', 'elektronvolt', 'gigaelektronvolt', 'megaelektronvolt', 'protonsynkrotron', 'protonsynkrotronen', 'synkrocyklotron', 'synkrocyklotronen'],
+    former: ['partikelaccelerator', 'partikelacceleratorn', 'partikelacceleratorer', 'partikelacceleratorerna', 'lagringsring', 'lagringsringen', 'lagringsringar', 'lagringsringarna', 'acceleratorn', 'acceleratorer', 'acceleratorerna', 'synkrotron', 'synkrotronen', 'synkrotroner', 'synkrotronljus', 'synkrotronljuset', 'cyklotron', 'cyklotronen', 'kollisionsenergi', 'kollisionsenergin', 'elektronvolt', 'gigaelektronvolt', 'megaelektronvolt', 'protonsynkrotron', 'protonsynkrotronen', 'synkrocyklotron', 'synkrocyklotronen'],
     kort: 'En maskin som driver upp laddade partiklar till nära ljushastigheten med elektriska fält och styr dem med magneter. Används för att utforska materiens minsta byggstenar — men allra mest inom sjukvård och materialforskning.',
     relaterade: ['standardmodellen', 'higgsbosonen', 'antimateria'],
     body: [

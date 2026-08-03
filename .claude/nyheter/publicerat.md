@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-03 | `2026-08-03-bromsade-atomkarnor` | Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående | Phys.org / TU Darmstadt (pressmeddelande) / GSI Helmholtzzentrum für Schwerionenforschung / Physical Review X 16, 031022 (S. Rausch m.fl., 2026, DOI 10.1103/961c-j3p5) |
 | 2026-08-02 | `2026-08-02-viskositetens-ovre-grans` | Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går | Physics World / Phys.org / Ritsumeikan University (pressmeddelande) / Physics of Fluids (M. Yoshida, 2026, DOI 10.1063/5.0335802) |
 | 2026-08-01 | `2026-08-01-storsta-galaxen` | Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande | Phys.org / arXiv-förhandspublicering, Instituto de Astrofísica de Canarias (C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., 2026) |
 | 2026-07-31 | `2026-07-31-fotonisk-tidskristall` | Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen | Helmholtz-Zentrum Dresden-Rossendorf, HZDR (pressmeddelande) / Phys.org / EurekAlert! / Nature (T. Guo et al., 2026) |
@@ -170,3 +171,38 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > ligger nu överst i ko.md) och IBM/University of Chicagos verifierade
 > kvantöverlägsenhet (stor nyhet, men ännu bara arXiv-preprint och kvantdatorämnet
 > har prioriterats ner för ämnesspridning flera dagar i rad). Se ko.md.
+
+> Not: 2026-08-03-artikeln (bromsade atomkärnor vid HITRAP) togs från toppen av
+> `ko.md`, där den låg som uttrycklig ”starkaste reserven — ta denna härnäst om
+> inget färskare dyker upp”. Inget färskare hade dykt upp: söndagen den 2 augusti
+> gav ingenting alls, och Phys.org:s nyaste notiser var fortfarande lördagens
+> (elektronkylning, RuO₂-magnetism, IBM-kvantöverlägsenheten). Studien är
+> kollegialt granskad och guld-öppen (Physical Review X 16, 031022, publicerad
+> 2026-07-29, CC BY 4.0) och korslästes mot Phys.org, TU Darmstadts
+> pressmeddelande (2026-07-31), GSI:s egna HITRAP-sidor och studiens abstract via
+> Crossref.
+>
+> VIKTIGT för ev. uppföljning — två skilda resultat som pressen slår ihop:
+> (a) acceleratorproducerade, fullständigt joniserade ³⁶Ar¹⁸⁺ bromsades från
+> 45 MeV/u till 6 keV/u och fångades i HITRAP:s Cooling Trap i flera sekunder,
+> och (b) den FÖRSTA elektronkylningen av högladdade joner i en Penningfälla
+> gjordes med joner från en LOKAL jonkälla vid fällan, inte med acceleratorstrålen.
+> Artikeln håller isär de två; skriv inte att acceleratorjonerna elektronkyldes.
+> Talkontroll: 45 MeV/u ⇒ β = 0,300 (≈ 90 000 km/s) och 6 keV/u ⇒ ≈ 1 100 km/s,
+> alltså en energisänkning med faktor 7 500 — pressmeddelandets citerade
+> ”ungefär 10 000” är Rauschs egen avrundning och står kvar i citatet, medan
+> brödtexten säger ”nästan fyra tiopotenser”.
+> Artikeln bildsattes med två äkta foton från Wikimedia Commons, båda av
+> Alexander Blecher och båda CC BY-SA 4.0: en acceleratorhall vid GSI (toppbild)
+> och GSI:s elektronkylare med ELECTRON-COOLER målat på tanken (i brödtexten).
+> Ingen AI-bild behövdes. TU Darmstadts egna pressbilder (G. Otto respektive
+> W. Geithner, GSI/FAIR) valdes bort eftersom licensen inte var uttalat fri.
+> Tre nya begrepp: högladdad jon, penningfälla, kvantelektrodynamik. Dessutom
+> fick `partikelaccelerator` böjningsformerna lagringsring/-en/-ar/-arna.
+> Andra kandidater som övervägdes: Bose–Einstein-kondensat av ultrakalla polära
+> molekyler med inställbar dipolväxelverkan och självbunden kvantdroppe (Dajun
+> Wang m.fl., Nature Physics, 2026-07-09 — mycket stark, men refererad hos
+> Phys.org redan 07-30 och alltså fyra dagar gammal; ligger nu överst i ko.md),
+> IBM/University of Chicagos verifierade kvantöverlägsenhet (fortfarande bara
+> preprint) och RuO₂ som visar magnetism under gitterspänning (för nära
+> altermagnetismartikeln 07-26). Se ko.md.

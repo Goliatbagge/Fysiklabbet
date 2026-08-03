@@ -51,6 +51,80 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-03-bromsade-atomkarnor",
+    date: "2026-08-03",
+    title: "Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående",
+    deck: "Enda sättet att få bort alla arton elektroner från en argonatom är att skjuta i väg den i nästan en tredjedel av ljusets hastighet och köra den genom en folie. Men mätningarna man sedan vill göra kräver att kärnan står stilla. Nu har ett tyskt forskarlag klarat hela vägen tillbaka — och i fällan mött jonerna med ett moln av kalla elektroner.",
+    category: "Atomfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-03-bromsade-atomkarnor.jpg",
+    imageAlt: "En lång, smal acceleratorhall med grönt golv. Utmed hela vänstra väggen står en rad enorma cylindriska vakuumtankar i lila-violett metall, sammankopplade i en obruten linje som försvinner bort mot bildens djup. Ovanpå tankarna sitter täta rader av rör, kablar och kopplingar.",
+    imageCredit: "Foto: Alexander Blecher, Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["atomfysik", "kärnfysik", "joner", "penningfälla", "magnetfält", "elektriska fält", "rörelseenergi", "acceleratorfysik", "kvantelektrodynamik", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-electron-cooling-highly-ions-penning.html" },
+      { name: "TU Darmstadt (pressmeddelande)", url: "https://www.tu-darmstadt.de/universitaet/aktuelles_meldungen/einzelansicht_572416.en.jsp" },
+      { name: "GSI Helmholtzzentrum für Schwerionenforschung — HITRAP", url: "https://www.gsi.de/en/work/research/appamml/atomic-quantum-fundamental-physics/experimental-facilities/hitrap" }
+    ],
+    research: {
+      citation: "S. Rausch m.fl., ”Deceleration of Accelerator-Produced and In-Trap Electron Cooling of Highly Charged Ions”, Physical Review X 16, 031022 (2026)",
+      url: "https://doi.org/10.1103/961c-j3p5"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 3.4 Laddade partiklar i magnetfält", href: "katalog.html#fy2-3.4" },
+        { label: "Fysik nivå 1 · 7.10 Elektriska fält och elektrisk fältstyrka", href: "katalog.html#fy1-7.10" },
+        { label: "Fysik nivå 1 · 4.3 Rörelseenergi", href: "katalog.html#fy1-4.3" }
+      ],
+      fragor: [
+        "Samma acceleratorkaviteter kan både ge fart och bromsa — det enda som skiljer är i vilket ögonblick partikeln kommer. Vilka andra fysikaliska system känner ni till där tajmningen, och inte styrkan, avgör om något får energi eller förlorar den?",
+        "I fällan hålls jonerna på plats i sidled av ett magnetfält och i längdled av ett elektriskt fält. Varför räcker det inte med magnetfältet ensamt? Vad är det den magnetiska kraften aldrig kan göra?",
+        "Elektronerna i fällan gör sig av med energi genom att stråla, eftersom de hela tiden accelereras när magnetfältet tvingar runt dem i cirklar. Jonerna, som är tiotusentals gånger tyngre, strålar nästan ingenting. Hur förklarar det att man kyler jonerna via elektronerna i stället för att bara vänta ut jonerna själva?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Fysiken har ett återkommande problem: de allra exaktaste mätningarna kräver att man studerar något som står stilla, medan det enda sättet att över huvud taget tillverka det man vill mäta på ofta är att köra det i väggen i vansinnig fart. Sällan är motsättningen så skarp som när man vill ha en helt naken atomkärna." },
+      { type: "p", html: "Att plocka bort de yttersta elektronerna ur en atom är enkelt — det gör kemin varje gång ett salt löser sig i vatten. Men de innersta elektronerna sitter hårt, och för att få bort dem allihop finns i praktiken bara en metod: accelerera hela atomen till en stor del av ljusets hastighet och skicka den genom en tunn folie. Elektronerna sopas av, och kvar flyger den nakna kärnan." },
+      { type: "p", html: "I en studie i tidskriften <em>Physical Review X</em> beskriver nu en grupp vid Technische Universität Darmstadt och GSI Helmholtzzentrum für Schwerionenforschung hur de tagit sådana kärnor hela vägen tillbaka: bromsat dem från acceleratorfart, fångat dem i en fälla och kylt dem med elektroner. Delar av den kedjan hade aldrig genomförts förut." },
+
+      { type: "h2", text: "Nakna kärnor i 90 000 kilometer per sekund" },
+      { type: "p", html: "Jonerna som användes var argon-36 med samtliga arton elektroner bortslitna — alltså atomkärnor med arton protoner och arton neutroner och ingenting annat. De producerades vid en rörelseenergi på 45&nbsp;MeV per nukleon, vilket motsvarar drygt 30&nbsp;procent av ljusets hastighet, ungefär 90&nbsp;000&nbsp;km/s." },
+      { type: "quote", html: "”I experimentet vi genomförde använde vi argonjoner som vi hade slitit bort alla elektroner från, så att bara de nakna atomkärnorna återstod.”", cite: "Simon Rausch, Technische Universität Darmstadt" },
+      { type: "p", html: "I den farten går det inte att mäta något med hög precision. Partikeln passerar mätutrustningen på ett ögonblick, och den höga farten förskjuter och breddar dessutom alla de spektrallinjer man skulle vilja läsa av. Vill man ha exakthet måste kärnan stå stilla — så jonerna måste bromsas lika hårt som de nyss accelererats." },
+
+      { type: "h2", text: "En accelerator som går baklänges" },
+      { type: "p", html: "Bromsningen sker i tre steg vid anläggningen HITRAP. Först i lagringsringen ESR, som tar ner energin till 4&nbsp;MeV per nukleon. Sedan i en linjär struktur som pressar den vidare till omkring 0,5&nbsp;MeV per nukleon, och till sist i en radiofrekvenskvadrupol som lämnar ifrån sig jonerna vid 6&nbsp;keV per nukleon — knappt 1&nbsp;100&nbsp;km/s. Rörelseenergin har då sjunkit med nästan fyra tiopotenser." },
+      { type: "quote", html: "”Produktionen skedde vid omkring 30&nbsp;procent av ljusets hastighet, och innan vi kunde fånga jonerna måste vi först sänka deras rörelseenergi med ungefär en faktor 10&nbsp;000.”", cite: "Simon Rausch, Technische Universität Darmstadt" },
+      { type: "p", html: "Knepet är att en accelerator inte behöver byggas om för att bli en broms. De snabbt växlande elektriska fälten i acceleratorns kaviteter puttar en partikel framåt om den anländer i rätt ögonblick — och bakåt om den anländer i fel. Det är samma sak som med en gunga: exakt samma knuff ger fart eller tar bort fart beroende på när den läggs in. Genom att förskjuta tajmningen ett halvt varv gör man om maskinen till en bromssträcka." },
+
+      { type: "h2", text: "En fälla av magnetfält på tvären och elfält på längden" },
+      { type: "p", html: "Målet för resan är en Penningfälla, som håller fast laddade partiklar med två fält samtidigt. Ett kraftigt magnetfält — här 6&nbsp;T från en supraledande magnet, ungefär fyra gånger så starkt som i en vanlig magnetkamera på sjukhus — tvingar jonerna att gå i cirklar och hindrar dem från att driva ut åt sidorna. Den magnetiska kraften verkar däremot alltid vinkelrätt mot rörelsen och kan aldrig stoppa något på längden, så där behövs något annat: elektroder i vardera änden som laddas upp och stöter bort de positiva jonerna." },
+      { type: "p", html: "Fällan i det här experimentet mäter 387&nbsp;mm mellan de två fångstelektroderna, och jonerna fångas i flykten. Knippet får flyga in genom en ände som ligger öppen, och innan det hinner ut igen slås spänningen på — dörren stängs bakom dem. Där låg de nakna argonkärnorna kvar i flera sekunder." },
+
+      { type: "h2", text: "Kylning med ett moln av elektroner" },
+      { type: "p", html: "Att vara fångad är inte samma sak som att vara stilla. Jonerna studsar fortfarande fram och tillbaka mellan fällans ändar med betydande energi, och den energin måste bort. Lösningen är att låta dem dela fälla med ungefär 10<sup>9</sup> elektroner. Fällan är nästlad: den har en potentialgrop som passar positiva joner och en annan som passar negativa elektroner, och de två groparna överlappar så att partiklarna blandas." },
+      { type: "p", html: "Där tar Coulombkraften vid. Varje gång en snabb jon passerar nära en elektron knuffar de på varandra, och energi läcker från den tunga jonen till den lätta elektronen — ungefär som när en het sten läggs i kallt vatten, fast vattnet i det här fallet är en gas av elektroner." },
+      { type: "image", src: "nyheter/bilder/2026-08-03-bromsade-atomkarnor-2.jpg",
+        alt: "En stor gul cylindrisk tank i en acceleratorhall, omgiven av ett svart stålstativ, gula kopplingsskåp, kablar och varningsskyltar för högspänning. På tankens sida står med stora svarta bokstäver ELECTRON-COOLER.",
+        caption: "En elektronkylare vid GSI:s acceleratoranläggning i Darmstadt. Grundtanken är densamma som i den nya fällan: ett moln av kalla elektroner får ta hand om de tunga jonernas överskottsenergi.",
+        credit: "Foto: Alexander Blecher, Wikimedia Commons (CC BY-SA 4.0)" },
+      { type: "p", html: "Men varför förblir elektronerna kalla? Därför att de är så lätta. En elektron som tvingas runt i cirklar av magnetfältet accelereras oavbrutet, och en accelererad laddning sänder ut strålning. Elektrongasen strålar därför hela tiden bort sin energi och sjunker tillbaka mot fällans egen temperatur, medan jonerna — tiotusentals gånger tyngre — knappt strålar alls. Elektronerna blir en kylare som aldrig behöver bytas." },
+      { type: "p", html: "På den vägen kan jonerna föras ner mot omkring 10&nbsp;eV, och med ytterligare en teknik vidare mot de ungefär 4&nbsp;K som råder inne i den supraledande magneten. Själva kylsteget demonstrerades med joner från en lokal jonkälla vid fällan, medan bromsningen och infångningen gjordes med joner från acceleratorn. Tillsammans betyder de två resultaten att hela kedjan nu finns på plats." },
+
+      { type: "h2", text: "Varför det är värt besväret" },
+      { type: "p", html: "En atomkärna utan elektroner, eller med bara en enda kvar, är på samma gång det enklaste och det mest extrema system fysiker kan få tag på. Enkelt, eftersom det inte finns någon trängsel av elektroner som grumlar räkningarna. Extremt, eftersom det elektriska fältet alldeles intill en tung kärna är av storleksordningen 10<sup>16</sup>&nbsp;V/cm — långt starkare än vad världens kraftigaste lasrar kan åstadkomma." },
+      { type: "p", html: "Där blir det möjligt att pröva kvantelektrodynamiken, teorin för hur ljus och laddning växelverkar, i ett område där den aldrig testats ordentligt. Håller teorins förutsägelser om elektronens magnetiska egenskaper och om de finaste detaljerna i energinivåerna även under sådana förhållanden — eller spricker något? Långsamma högladdade joner efterfrågas dessutom inom materialforskningen, där de hittills helt enkelt inte gått att få tag på." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Penningfällan är uppkallad efter den nederländske fysikern Frans Michel Penning. Hans Dehmelt, som utvecklade fälltekniken, delade Nobelpriset i fysik 1989 just för jonfällor.",
+        "Energi per nukleon (MeV/u) är ett praktiskt mått i acceleratorvärlden. Eftersom både rörelseenergin och massan växer i takt med antalet kärnpartiklar motsvarar ett visst värde alltid samma fart, oavsett hur tung kärnan är.",
+        "Argon-36 är en sällsynt stabil isotop — bara omkring 0,33&nbsp;% av luftens argon. Resten är nästan uteslutande argon-40, som bildas när kalium-40 i berggrunden sönderfaller.",
+        "Fällans magnetfält på 6&nbsp;T är ungefär 120&nbsp;000 gånger starkare än jordens magnetfält, det som får en kompassnål att ställa in sig."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-08-02-viskositetens-ovre-grans",
     date: "2026-08-02",
     title: "Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går",

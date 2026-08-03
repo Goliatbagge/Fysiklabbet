@@ -418,7 +418,9 @@ typ: tomtebloss
   typer: `tomtebloss` (demonstrationen i fy2-1.4 Cirkulär rörelse: tänd ett
   tomtebloss fäst i en skruvdragare, i mörker, och se gnistorna lämna
   cirkelbanan tangentiellt; varvtalsglidare, pausknapp som fryser bilden,
-  "Ultrarapid"-kryssruta för slow motion samt fullskärmsläge).
+  "Ultrarapid"-kryssruta för slow motion, fullskärmsläge samt syntetiserat
+  ljud via Web Audio — motorton som följer varvtalet + sprakande gnistor,
+  inga ljudfiler — med ljudknapp uppe till höger).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
   inuti en `::: demo`-ruta som redan har titel).
 - Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).

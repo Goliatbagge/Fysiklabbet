@@ -1881,6 +1881,11 @@ button.lab-card-disabled { pointer-events: none; }
    Byggs av window.HANDSKRIFT.mountAll(); widgeten har egen intern CSS. */
 .lab-handskrift { margin: 22px 0; }
 
+/* ── Minisimulering (::: minisim → minisim.js) ───────────────────────
+   Liten inbäddad interaktiv demo (t.ex. tomtebloss i fy2-1.4). Byggs av
+   window.FYSIKMINISIM.mountAll(); widgeten har egen intern CSS. */
+.lab-minisim { margin: 18px 0 6px; }
+
 /* Textlösning (::: textlosning) — den vanliga textvarianten av en
    handskriven lösning. Renderas som lös brödtext, inte som en blockruta;
    handskrift.js växlar synligheten ("Med penna"/"Som text"). */

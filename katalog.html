@@ -36,6 +36,7 @@
     <script>document.write('<scr' + 'ipt src="data/visualiseringar/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="handskrift.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="minisim.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -299,6 +300,22 @@
                     const src = cfgLines.join('\n');
                     const b64 = btoa(unescape(encodeURIComponent(src)));
                     out.push('<div class="lab-handskrift" data-handskrift-src="' + b64 + '"></div>');
+                    i = j; // hoppa förbi det avslutande :::
+                    continue;
+                }
+                // ::: minisim — inbäddad minisimulering. Samma mönster:
+                // config-raderna → mount-placeholder (minisim.js).
+                const msOpen = line.match(/^:::\s*minisim\s*$/i);
+                if (msOpen) {
+                    const cfgLines = [];
+                    let j = i + 1;
+                    for (; j < lines.length; j++) {
+                        if (/^:::\s*$/.test(lines[j])) break;
+                        cfgLines.push(lines[j]);
+                    }
+                    const src = cfgLines.join('\n');
+                    const b64 = btoa(unescape(encodeURIComponent(src)));
+                    out.push('<div class="lab-minisim" data-minisim-src="' + b64 + '"></div>');
                     i = j; // hoppa förbi det avslutande :::
                     continue;
                 }
@@ -623,6 +640,9 @@
                         // Handskrift-widgetens UI ("Med tankar", knappar):
                         // split-spann ger glapp i etiketterna ("M ed ta nkar").
                         if (c && c.contains('lab-handskrift')) return NodeFilter.FILTER_REJECT;
+                        // Minisimuleringarnas UI (knappar, kryssrutor) ska
+                        // inte heller bionic-formateras.
+                        if (c && c.contains('lab-minisim')) return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -737,9 +757,10 @@
                 layout.appendChild(rule);
                 layout.appendChild(right);
                 box.appendChild(layout);
-                // Härlednings-dropdownen ska ligga SIST i rutan (under layouten).
-                const det = box.querySelector(':scope > details.formel-harledning');
-                if (det) box.appendChild(det);
+                // Härlednings-dropdownerna ska ligga SIST i rutan (under
+                // layouten), i källordning — en formel kan ha flera.
+                box.querySelectorAll(':scope > details.formel-harledning')
+                    .forEach(det => box.appendChild(det));
             });
         }
         function fitFormel(root) {
@@ -795,6 +816,8 @@
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(ref.current);
                 // Handskrivna lösningar (::: handskrift) — bygg widgetarna.
                 if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(ref.current);
+                // Minisimuleringar (::: minisim) — bygg widgetarna.
+                if (window.FYSIKMINISIM) window.FYSIKMINISIM.mountAll(ref.current);
                 // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
                 // Synlighet styrs sedan av .bionic-on-klassen via CSS.
                 applyBionic(ref.current);
@@ -998,7 +1021,7 @@
                     // eller på en härlednings-summary: tangenterna ska styra
                     // reglaget/toggla dropdownen, inte bläddra.
                     const t = e.target;
-                    if (t && t.closest && t.closest('input, textarea, select, summary, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
+                    if (t && t.closest && t.closest('input, textarea, select, summary, .lab-graf, .lab-handskrift, .lab-minisim, .lab-vis-host')) return;
                     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
                         || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
                     else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
@@ -1027,6 +1050,7 @@
                 buildFormelLayouts(root);
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(root);
                 if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(root);
+                if (window.FYSIKMINISIM) window.FYSIKMINISIM.mountAll(root);
                 const { steps, blocks } = buildPresSteps(root);
                 stepsRef.current = steps;
                 blocksRef.current = blocks;
@@ -1106,7 +1130,7 @@
                 // stanna kvar och utforska. (Släpp efter drag ger ett click.)
                 // Gäller även härlednings-dropdownens summary-rad: klicket
                 // ska fälla ut/ihop härledningen, inte gå till nästa steg.
-                if (e.target.closest('input, label, summary, .lab-graf, .lab-handskrift, .lab-vis-host')) return;
+                if (e.target.closest('input, label, summary, .lab-graf, .lab-handskrift, .lab-minisim, .lab-vis-host')) return;
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
                 next();

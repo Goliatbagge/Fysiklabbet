@@ -90,6 +90,24 @@
                     i = j;
                     continue;
                 }
+                // ::: minisim — inbäddad minisimulering. Samma sak: bidrar
+                // inte med uppläsbar text, config-raderna hoppas över helt.
+                if (/^:::\s*minisim\s*$/i.test(line)) {
+                    let j = i + 1;
+                    for (; j < lines.length; j++) { if (/^:::\s*$/.test(lines[j])) break; }
+                    out.push('<div class="lab-minisim"></div>');
+                    i = j;
+                    continue;
+                }
+                // ::: handskrift — animerad handskriven lösning. Samma sak:
+                // config-raderna ("typ: gungbrada") får aldrig läsas upp.
+                if (/^:::\s*handskrift\s*$/i.test(line)) {
+                    let j = i + 1;
+                    for (; j < lines.length; j++) { if (/^:::\s*$/.test(lines[j])) break; }
+                    out.push('<div class="lab-handskrift"></div>');
+                    i = j;
+                    continue;
+                }
                 const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
                 const close = line.match(/^:::\s*$/);
                 if (open) {

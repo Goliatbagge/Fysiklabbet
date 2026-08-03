@@ -21,7 +21,6 @@ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 $$
 
 där $d$ är avståndet mellan punkterna $(x_1, y_1)$ och $(x_2, y_2)$.
-:::
 
 ::: härledning "Härledning — Avståndsformeln"
 Vi bestämmer avståndet $d$ mellan två punkter genom att bilda en
@@ -64,6 +63,7 @@ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 $$
 
 v.s.v.
+:::
 :::
 
 Punkten mitt emellan två andra punkter kallas **mittpunkt** och kan

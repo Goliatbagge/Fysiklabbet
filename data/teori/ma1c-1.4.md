@@ -77,7 +77,6 @@ Divisionstecknet kan ritas rakt eller snett:
 $$
 \dfrac{\;\dfrac{a}{b}\;}{\;\dfrac{c}{d}\;} = \frac{a}{b} \Big/ \frac{c}{d}
 $$
-:::
 
 ::: härledning "Bevis — Division med bråk"
 Vi bevisar regeln för division med bråk. Anta att vi dividerar två
@@ -96,6 +95,7 @@ $$
 Alltså gäller
 $\dfrac{\;\dfrac{a}{b}\;}{\;\dfrac{c}{d}\;} = \dfrac{a}{b} \cdot \dfrac{d}{c}$,
 vsv. (vilket skulle visas).
+:::
 :::
 
 ::: exempel "Exempel 3 — Division"

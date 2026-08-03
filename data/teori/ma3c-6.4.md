@@ -19,6 +19,13 @@ Vi har tidigare konstaterat att sinus- och cosinusfunktionerna upprepas
 för varje $360^\circ$ som läggs till (eller dras ifrån) en vinkel. Vi
 säger att sinus- och cosinusfunktionen har en **period** på $360^\circ$.
 
+::: formel "Trigonometriska funktioner och perioder"
+| Funktion | Period |
+| --- | --- |
+| $\sin$ | $360^\circ$ |
+| $\cos$ | $360^\circ$ |
+| $\tan$ | $180^\circ$ |
+
 ::: härledning "Härledning — tangens period"
 Vi undersöker perioden för tangensfunktionen. Vi vet sedan tidigare att
 
@@ -62,13 +69,6 @@ motsatta punkten på cirkeln — men det är **samma linje** genom origo, så
 lutningen ($\tan v$) blir densamma. Alltså är perioden för
 tangensfunktionen $180^\circ$.
 :::
-
-::: formel "Trigonometriska funktioner och perioder"
-| Funktion | Period |
-| --- | --- |
-| $\sin$ | $360^\circ$ |
-| $\cos$ | $360^\circ$ |
-| $\tan$ | $180^\circ$ |
 :::
 
 ::: exempel "Exempel 1 — Lös en tangensekvation"

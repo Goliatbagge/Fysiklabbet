@@ -12,7 +12,30 @@ section: '3.3'
 Sedan tidigare har vi visat att $f(x) = x^n$ har derivatan
 $f'(x) = nx^{n-1}$ där $n$ är ett positivt heltal. Vi undersöker om
 deriveringsregeln gäller även för exponenter som inte är positiva heltal —
-vi börjar med exponenter som inte är heltal alls.
+dels exponenter som inte är heltal alls, dels exponenter som är
+**negativa**. (Undersökningarna finns som härledningar i formelrutan
+nedan.)
+
+## Potensregeln för alla reella exponenter
+
+Båda undersökningarna bekräftar samma sak: den enkla deriverings-
+regeln — multiplicera ner exponenten och minska den med 1 — gäller inte
+bara för positiva heltalsexponenter, utan för **alla** reella exponenter.
+
+::: formel "Derivatan av potensfunktioner"
+Derivatan av
+
+$$
+f(x) = x^a
+$$
+
+är
+
+$$
+f'(x) = ax^{a-1}
+$$
+
+för alla reella tal $a$ (om $x > 0$).
 
 ::: härledning "Derivatan för $f(x) = x^{1/2}$, dvs. för $f(x) = \sqrt{x}$, med derivatans definition"
 Om den vanliga regeln (multiplicera ner exponenten och minska den med 1)
@@ -43,9 +66,6 @@ De enkla deriveringsreglerna gäller alltså även för annat än
 heltalsexponenter!
 :::
 
-Vi undersöker sedan om deriveringsregeln gäller för exponenter som är
-**negativa**.
-
 ::: härledning "Derivatan för $f(x) = x^{-1}$, dvs. för $f(x) = \dfrac{1}{x}$, med derivatans definition"
 Om den vanliga regeln gäller även för denna funktion ska
 $f'(x) = -x^{-2}$, dvs. $f'(x) = -\dfrac{1}{x^2}$.
@@ -69,27 +89,6 @@ $$
 
 De enkla deriveringsreglerna gäller alltså även för negativa exponenter!
 :::
-
-## Potensregeln för alla reella exponenter
-
-Båda undersökningarna ovan bekräftar samma sak: den enkla deriverings-
-regeln — multiplicera ner exponenten och minska den med 1 — gäller inte
-bara för positiva heltalsexponenter, utan för **alla** reella exponenter.
-
-::: formel "Derivatan av potensfunktioner"
-Derivatan av
-
-$$
-f(x) = x^a
-$$
-
-är
-
-$$
-f'(x) = ax^{a-1}
-$$
-
-för alla reella tal $a$ (om $x > 0$).
 :::
 
 För att kunna använda regeln måste uttrycket skrivas om som en ren potens

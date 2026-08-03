@@ -21,11 +21,6 @@ $$
 
 Summan av kvadraterna på de två kortare sidorna är lika med kvadraten
 på hypotenusan.
-:::
-
-::: figur
-<svg viewBox="16 20 184 82" width="184" height="82" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En rätvinklig triangel med kateterna a och b och hypotenusan c."><polygon points="24,82 176,82 176,26" fill="none" stroke="#1f2530" stroke-width="1.8"/><rect x="165" y="71" width="11" height="11" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="100" y="96" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="184" y="58" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="92" y="46" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">c</tspan></text></svg>
-:::
 
 ::: härledning "Härledning — Pythagoras sats"
 **1.** Vi bildar en godtycklig rätvinklig triangel med kateterna $a$
@@ -92,6 +87,11 @@ a^2 + b^2 = c^2
 $$
 
 v.s.v.
+:::
+:::
+
+::: figur
+<svg viewBox="16 20 184 82" width="184" height="82" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En rätvinklig triangel med kateterna a och b och hypotenusan c."><polygon points="24,82 176,82 176,26" fill="none" stroke="#1f2530" stroke-width="1.8"/><rect x="165" y="71" width="11" height="11" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="100" y="96" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="184" y="58" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="92" y="46" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">c</tspan></text></svg>
 :::
 
 Om triangeln är rätvinklig, så gäller $a^2 + b^2 = c^2$. Men

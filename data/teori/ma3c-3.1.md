@@ -19,6 +19,22 @@ $$
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
 $$
 
+Undersöker vi derivatan på det sättet för potensfunktionerna $x$, $x^2$,
+$x^3$ och så vidare (härledningarna finns i formelrutan nedan) får vi
+
+| $f(x)$ | $x$ | $x^2$ | $x^3$ | $x^4$ | $x^5$ |
+| --- | --- | --- | --- | --- | --- |
+| $f'(x)$ | $1$ | $2x$ | $3x^2$ | $4x^3$ | $5x^4$ |
+
+Vi ser att derivatan följer ett mönster. När vi deriverar en potensfunktion
+**multipliceras exponenten ned** framför samtidigt som **exponenten
+minskas med 1**.
+
+::: formel "Derivatan av $f(x) = x^n$"
+$$
+f(x) = x^n \quad\Rightarrow\quad f'(x) = nx^{n-1}
+$$
+
 ::: härledning "Derivatan för $f(x) = x$ med derivatans definition"
 $$
 \begin{aligned}
@@ -42,28 +58,23 @@ $$
 
 Så $f(x) = x^2$ har derivatan $f'(x) = 2x$.
 :::
-
-Fortsätter vi undersöka derivator på samma sätt för fler potensfunktioner
-får vi
-
-| $f(x)$ | $x$ | $x^2$ | $x^3$ | $x^4$ | $x^5$ |
-| --- | --- | --- | --- | --- | --- |
-| $f'(x)$ | $1$ | $2x$ | $3x^2$ | $4x^3$ | $5x^4$ |
-
-Vi ser att derivatan följer ett mönster. När vi deriverar en potensfunktion
-**multipliceras exponenten ned** framför samtidigt som **exponenten
-minskas med 1**.
-
-::: formel "Derivatan av $f(x) = x^n$"
-$$
-f(x) = x^n \quad\Rightarrow\quad f'(x) = nx^{n-1}
-$$
 :::
 
 ## Derivatan med en koefficient
 
 Vi undersöker vad derivatan blir för funktioner med en koefficient framför
-potensen.
+potensen. Det visar sig att samma mönster gäller fortfarande! Vi
+multiplicerar ned exponenten till koefficienten framför, samtidigt som vi
+minskar exponenten med 1, dvs.
+
+$$
+f(x) = 3x^2 \quad\Rightarrow\quad f'(x) = 2 \cdot 3x^{2-1} = 6x
+$$
+
+::: formel "Derivatan av $f(x) = kx^n$"
+$$
+f(x) = kx^n \quad\Rightarrow\quad f'(x) = nkx^{n-1}
+$$
 
 ::: härledning "Derivatan för $f(x) = 3x^2$ med derivatans definition"
 $$
@@ -76,19 +87,6 @@ $$
 
 Så $f(x) = 3x^2$ har derivatan $f'(x) = 6x$.
 :::
-
-Samma mönster gäller alltså fortfarande! Vi multiplicerar ned exponenten
-till koefficienten framför, samtidigt som vi minskar exponenten med 1,
-dvs.
-
-$$
-f(x) = 3x^2 \quad\Rightarrow\quad f'(x) = 2 \cdot 3x^{2-1} = 6x
-$$
-
-::: formel "Derivatan av $f(x) = kx^n$"
-$$
-f(x) = kx^n \quad\Rightarrow\quad f'(x) = nkx^{n-1}
-$$
 :::
 
 En följd av denna regel är att när $x$-termer av grad 1 deriveras, så
@@ -118,6 +116,13 @@ $$
 Till sist undersöker vi vad derivatan blir av konstanta funktioner, dvs.
 funktioner utan någon $x$-term alls.
 
+::: formel "Derivatan av $f(x) = a$"
+Derivatan av en konstant funktion $f(x) = a$, där $a$ är ett tal, är
+
+$$
+f'(x) = 0
+$$
+
 ::: härledning "Derivatan för $f(x) = 5$ med derivatans definition"
 $$
 \begin{aligned}
@@ -130,13 +135,6 @@ Så $f(x) = 5$ har derivatan $f'(x) = 0$. Detta gäller oavsett vilken
 konstant funktion vi har — lutningen är ju 0 för alla konstanta
 funktioner, eftersom grafen är en horisontell linje.
 :::
-
-::: formel "Derivatan av $f(x) = a$"
-Derivatan av en konstant funktion $f(x) = a$, där $a$ är ett tal, är
-
-$$
-f'(x) = 0
-$$
 :::
 
 ::: formel "Sammanfattning — deriveringsregler"

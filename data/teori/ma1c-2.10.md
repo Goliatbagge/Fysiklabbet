@@ -21,7 +21,6 @@ $$
 $$
 x = a^{1/n}
 $$
-:::
 
 ::: härledning "Härledning — Lösa potensekvationer med potenslagar"
 Vi utgår från den generella ekvationen
@@ -49,6 +48,7 @@ x = a^{1/n}
 $$
 
 vsv.
+:::
 :::
 
 ::: formel "Lösa potensekvationer med rötter"

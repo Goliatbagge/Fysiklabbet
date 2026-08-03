@@ -18,11 +18,6 @@ delsträckor lika med produkten av den andra kordans delsträckor.
 $$
 a \cdot b = c \cdot d
 $$
-:::
-
-::: figur
-<svg viewBox="8 8 128 128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En cirkel med två kordor som skär varandra. Den ena kordans delar är a och b, den andra kordans delar är c och d."><circle cx="70" cy="70" r="56" fill="none" stroke="#1f2530" stroke-width="1.6"/><line x1="42" y1="21.5" x2="89.2" y2="122.6" stroke="#1f2530" stroke-width="1.4"/><line x1="14.2" y1="74.9" x2="124.1" y2="55.5" stroke="#1f2530" stroke-width="1.4"/><text x="45" y="46" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="84" y="99" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="36" y="64" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="95" y="52" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">d</tspan></text></svg>
-:::
 
 ::: härledning "Bevis — Kordasatsen"
 Vi ritar två godtyckliga korsande kordor $AC$ och $BD$ som skär
@@ -63,6 +58,11 @@ $$
 
 v.s.b.
 :::
+:::
+
+::: figur
+<svg viewBox="8 8 128 128" width="128" height="128" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En cirkel med två kordor som skär varandra. Den ena kordans delar är a och b, den andra kordans delar är c och d."><circle cx="70" cy="70" r="56" fill="none" stroke="#1f2530" stroke-width="1.6"/><line x1="42" y1="21.5" x2="89.2" y2="122.6" stroke="#1f2530" stroke-width="1.4"/><line x1="14.2" y1="74.9" x2="124.1" y2="55.5" stroke="#1f2530" stroke-width="1.4"/><text x="45" y="46" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="84" y="99" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="36" y="64" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="95" y="52" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">d</tspan></text></svg>
+:::
 
 En fyrhörning med samtliga hörn på en cirkels rand kallas **inskriven
 fyrhörning**.
@@ -77,7 +77,6 @@ $$
 $$
 x + y = 180°
 $$
-:::
 
 ::: härledning "Bevis — Motstående vinklar i inskriven fyrhörning"
 Vi ritar en godtycklig inskriven fyrhörning. Vi kallar två motstående
@@ -103,6 +102,7 @@ u + v = 180°
 $$
 
 v.s.b.
+:::
 :::
 
 ::: exempel "Exempel 1 — Kordasatsen"

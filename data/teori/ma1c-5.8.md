@@ -19,7 +19,6 @@ komplementhändelse är lika med 1 eller 100 %.
 $$
 P(\text{händelse}) = 1 - P(\text{komplementhändelse})
 $$
-:::
 
 ::: härledning "Härledning — Sannolikhet med komplementhändelse"
 Enligt definitionen för komplementhändelse gäller
@@ -35,6 +34,7 @@ P(\text{händelse}) = 1 - P(\text{komplementhändelse})
 $$
 
 vsv.
+:::
 :::
 
 Komplementhändelser är användbara i uppgifter där vi ska beräkna

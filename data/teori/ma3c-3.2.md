@@ -18,6 +18,21 @@ $$
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
 $$
 
+Deriverar vi funktionen $f(x) = x^2 + 4x - 7$ **term för term**, med de
+deriveringsregler vi tidigare tagit fram (multiplicera ner exponenten och
+minska den med 1), får vi
+
+- $x^2$ har derivatan $2x$
+- $4x$ har derivatan $4$
+- $-7$ har derivatan $0$
+
+Lägger vi ihop dessa termer får vi $f'(x) = 2x + 4$ — precis samma svar som
+derivatans definition ger (se härledningen i formelrutan nedan)!
+
+::: formel "Derivatan av polynom"
+Derivatan av en funktion med flera termer (ett polynom) fås genom att
+derivera funktionen **term för term**.
+
 ::: härledning "Härledning — Derivatan av $f(x) = x^2 + 4x - 7$ med definitionen"
 $$
 \begin{aligned}
@@ -29,21 +44,6 @@ $$
 
 Så $f(x) = x^2 + 4x - 7$ har derivatan $f'(x) = 2x + 4$.
 :::
-
-Om vi i stället deriverar samma funktion $f(x) = x^2 + 4x - 7$ **term för
-term**, med de deriveringsregler vi tidigare tagit fram (multiplicera ner
-exponenten och minska den med 1), får vi
-
-- $x^2$ har derivatan $2x$
-- $4x$ har derivatan $4$
-- $-7$ har derivatan $0$
-
-Lägger vi ihop dessa termer får vi $f'(x) = 2x + 4$ — precis samma svar som
-med derivatans definition ovan!
-
-::: formel "Derivatan av polynom"
-Derivatan av en funktion med flera termer (ett polynom) fås genom att
-derivera funktionen **term för term**.
 :::
 
 ::: exempel "Exempel 1 — Derivera term för term"

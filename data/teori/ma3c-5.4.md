@@ -16,6 +16,17 @@ beräknar vi integralen i praktiken, utan att behöva summera oändligt många
 rektanglar? Svaret ligger i sambandet mellan integraler och primitiva
 funktioner.
 
+Vi kan alltså beräkna integralen exakt med hjälp av primitiva funktioner!
+Detta samband kallas **integralkalkylens fundamentalsats**.
+
+Differensen $F(b) - F(a)$ kan skrivas med det nya skrivsättet
+$\big[F(x)\big]_a^b$.
+
+::: formel "Integralkalkylens fundamentalsats"
+$$
+\int_a^b f(x)\, dx = \Big[F(x)\Big]_a^b = F(b) - F(a)
+$$
+
 ::: härledning "Härledning — Integralkalkylens fundamentalsats"
 Tankesätt: om vi har en funktion $F(x)$ vars förändring vi vill undersöka
 från $x = a$ till $x = b$ kan detta skrivas som "slutvärde" = "startvärde"
@@ -37,17 +48,6 @@ $$
 \int_a^b f(x)\, dx = F(b) - F(a)
 $$
 :::
-
-Vi kan alltså beräkna integralen exakt med hjälp av primitiva funktioner!
-Detta samband kallas **integralkalkylens fundamentalsats**.
-
-Differensen $F(b) - F(a)$ kan skrivas med det nya skrivsättet
-$\big[F(x)\big]_a^b$.
-
-::: formel "Integralkalkylens fundamentalsats"
-$$
-\int_a^b f(x)\, dx = \Big[F(x)\Big]_a^b = F(b) - F(a)
-$$
 :::
 
 ::: exempel "Exempel 1 — Beräkna integraler med primitiva funktioner"

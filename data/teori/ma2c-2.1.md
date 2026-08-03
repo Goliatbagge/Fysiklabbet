@@ -22,13 +22,6 @@ $$
 $$
 (a - b)^2 = a^2 - 2ab + b^2
 $$
-:::
-
-::: formel "Konjugatregeln"
-$$
-(a + b)(a - b) = a^2 - b^2
-$$
-:::
 
 ::: härledning "Bevis — Första kvadreringsregeln"
 $$
@@ -37,6 +30,12 @@ $$
 
 v.s.b.
 :::
+:::
+
+::: formel "Konjugatregeln"
+$$
+(a + b)(a - b) = a^2 - b^2
+$$
 
 ::: härledning "Bevis — Konjugatregeln"
 $$
@@ -44,6 +43,7 @@ $$
 $$
 
 v.s.b.
+:::
 :::
 
 ::: exempel "Exempel 1 — Utveckla med kvadreringsreglerna"

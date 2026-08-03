@@ -114,6 +114,7 @@ varandra ska de multipliceras, står de över varandra ska de divideras.
 
 ::: figur
 <svg viewBox="16 6 288 152" width="288" height="152" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Procenttriangeln: en triangel med ordet delen i toppen och orden andelen gånger hela i botten, åtskilda av ett vågrätt streck. Delen är lika med andelen gånger hela, andelen är delen genom hela och hela är delen genom andelen."><polygon points="160,10 20,150 300,150" fill="#fdfaf3" stroke="#1f2530" stroke-width="1.5"/><line x1="75" y1="95" x2="245" y2="95" stroke="#1f2530" stroke-width="1.5"/><text x="160" y="72" font-size="16" font-weight="600" text-anchor="middle" fill="#1f2530">delen</text><text x="160" y="132" font-size="16" font-weight="600" text-anchor="middle" fill="#1f2530">andelen · hela</text></svg>
+:::
 
 Triangeln sammanfattar: delen = andelen · hela,
 andelen = delen/hela och hela = delen/andelen.

@@ -12,7 +12,52 @@ Format per post:
 
 ## Kö
 
-(tom — se "Reservuppslag" nedan vid nyhetstorka)
+- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
+  dipolväxelverkan** (STARKASTE RESERVEN — ta denna härnäst om inget färskare
+  dyker upp). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
+  Chinese University of Hong Kong har gjort det första kondensatet av
+  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
+  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
+  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
+  självbunden kvantdroppe. Nature Physics (2026-07-09),
+  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
+  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
+  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
+  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
+  gammalt. Källa:
+  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
+  (tillagd 2026-08-03)
+
+## Fynd som inte användes (2026-08-03) — kan tas upp senare
+
+- **Valdes i dag: bromsade och infångade nakna atomkärnor vid HITRAP** — se
+  publicerat.md för full avvägning och för fällan med de två skilda resultaten
+  (acceleratorjoner bromsades och fångades; elektronkylningen demonstrerades
+  med joner från en lokal jonkälla).
+- **IBM och University of Chicago visar verifierad kvantöverlägsenhet** — kvar
+  i kön sedan 2026-08-02, fortfarande bara preprint (arXiv:2607.25941).
+  Kvantdatorämnet har nu fått stå tillbaka fyra dagar i rad; skulden växer.
+  Källa: https://phys.org/news/2026-07-quantum-task-classical-simulations.html
+- **Ovanlig metalloxid (RuO₂) visar tecken på magnetism under gitterspänning
+  i ultratunna skikt** — nära altermagnetismartikeln 2026-07-26, sparas.
+  Källa: https://phys.org/news/2026-07-unusual-metal-oxide-magnetism-lattice.html
+- **En kvantregel sätter tak för elektrisk resistivitet** — University of
+  Toronto, ENS Paris och Lehigh emulerar elektroner i en metall med ultrakalla
+  kaliumatomer i ett optiskt gitter och visar att kollisionsbidraget till
+  resistiviteten mättas. Physical Review Letters (2026), ”Lattice Unitarity:
+  Saturated Collisional Resistivity in Hubbard Metals”. Utmärkt ellära-vinkel
+  (resistans!), men ursprungligen refererad redan i juni; ScienceDaily
+  återpublicerade 07-30. Källor:
+  https://phys.org/news/2026-06-physicists-upper-limit-resistivity-pure.html ,
+  https://www.sciencedaily.com/releases/2026/07/260727012139.htm
+- **Värmekameratrick låter LIGO se längre ut i universum** — ligger kvar sedan
+  2026-08-01, fortfarande obrukad och välkällad (Classical and Quantum Gravity).
+  Bra att ta när gravitationsvågor känns fräscht.
+- **OBS — physics.aps.org svarade HTTP 403 även 2026-08-03** (andra gången i
+  rad) och kunde inte kontrolleras. Nature kräver inloggning via idp.nature.com
+  och gick inte heller att läsa. Quanta hade inget nytt sedan myon-artikeln
+  07-29; ScienceDaily inget nytt sedan 07-31. Phys.org var färskast även i dag,
+  men hade inget publicerat efter lördagen 2026-08-01.
 
 ## Fynd som inte användes (2026-08-02) — kan tas upp senare
 

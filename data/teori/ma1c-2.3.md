@@ -19,7 +19,6 @@ ska multipliceras med *varje term* inuti parentesen. Denna regel kallas
 $$
 a(b + c) = ab + ac
 $$
-:::
 
 ::: härledning "Kontroll — Distributiva lagen"
 Vi kontrollerar om den distributiva lagen gäller med de räkneregler vi vet
@@ -39,6 +38,7 @@ $$
 
 Vi får samma svar med distributiva lagen som med prioriteringsreglerna!
 Regeln verkar stämma.
+:::
 :::
 
 ::: exempel "Exempel 1 — Multiplicera in i parentesen"

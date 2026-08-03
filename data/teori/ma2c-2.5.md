@@ -25,7 +25,6 @@ har lösningarna
 $$
 x = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a}
 $$
-:::
 
 ::: härledning "Härledning — *abc*-formeln"
 Vi utgår från ekvationen
@@ -63,6 +62,7 @@ x = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a}
 $$
 
 v.s.b.
+:::
 :::
 
 ::: exempel "Exempel 1 — Lös med *abc*-formeln"

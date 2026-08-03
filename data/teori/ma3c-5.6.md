@@ -19,9 +19,6 @@ $$
 
 där $f(x)$ är den övre funktionen och $g(x)$ är den undre funktionen i
 intervallet $[a, b]$.
-:::
-
-## Härledning
 
 ::: härledning "Härledning — Area mellan kurvor"
 Vi vill beräkna arean mellan kurvorna $f(x)$ och $g(x)$ i figuren nedan, där
@@ -42,6 +39,7 @@ kvar precis den röda arean $A$ mellan kurvorna:
 $$
 A = \int_a^b f(x)\, dx - \int_a^b g(x)\, dx = \int_a^b \big(f(x) - g(x)\big)\, dx \qquad \text{vsv.}
 $$
+:::
 :::
 
 ## Area mellan kurvor med digitalt hjälpmedel

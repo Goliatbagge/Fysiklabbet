@@ -15,6 +15,13 @@ $7^3$ betyder att 7 ska multipliceras med sig själv 3 gånger, dvs.
 $7^3 = 7 \cdot 7 \cdot 7$. Men hur ska vi tolka exponenten noll, t.ex.
 $7^0$?
 
+::: formel "Exponenten noll"
+$$
+a^0 = 1, \quad \text{där } a \neq 0
+$$
+
+**Varning!** $7^0 \neq 0$ — värdet är 1, inte 0.
+
 ::: härledning "Undersökning — Tolkning av exponenten noll"
 För att undersöka det så studerar vi t.ex. kvoten $\dfrac{7^5}{7^5}$ och
 beräknar den på två sätt.
@@ -36,13 +43,6 @@ reella tal. Enda undantaget är 0, eftersom det skulle motsvara en division
 med 0. Till exempel: $0^0 = \dfrac{0^5}{0^5} = \dfrac{0}{0}$, som inte är
 definierat.
 :::
-
-::: formel "Exponenten noll"
-$$
-a^0 = 1, \quad \text{där } a \neq 0
-$$
-
-**Varning!** $7^0 \neq 0$ — värdet är 1, inte 0.
 :::
 
 ::: exempel "Exempel 1 — Exponenten noll"
@@ -69,6 +69,11 @@ $$
 
 Hur ska vi tolka negativa exponenter, t.ex. $2^{-3}$? Vi undersöker!
 
+::: formel "Negativa exponenter"
+$$
+a^{-n} = \frac{1}{a^n}, \quad \text{där } a \neq 0
+$$
+
 ::: härledning "Undersökning — Tolkning av negativa exponenter"
 På motsvarande sätt som för exponenten noll, så undersöker vi tolkningen av
 negativa tal genom att beräkna t.ex. kvoten $\dfrac{2^2}{2^5}$ på två olika
@@ -93,11 +98,6 @@ $5^{-4} = \dfrac{1}{5^4}$. Slutsats: tal upphöjt till negativa tal kan
 skrivas som "1 dividerat med samma tal, men utan minustecknet framför
 exponenten".
 :::
-
-::: formel "Negativa exponenter"
-$$
-a^{-n} = \frac{1}{a^n}, \quad \text{där } a \neq 0
-$$
 :::
 
 ::: exempel "Exempel 2 — Negativa exponenter"
@@ -151,7 +151,6 @@ $$
 
 ::: formel "Upphöja bråk till −1"
 Att upphöja bråk till (−1) är samma sak som att **invertera** bråket.
-:::
 
 ::: härledning "Bevis — Upphöja bråk till (−1) är samma sak som bråkets invers"
 Vi studerar bråket $\left(\dfrac{a}{b}\right)^{-1}$. Enligt reglerna för
@@ -166,6 +165,7 @@ $$
 $$
 
 dvs. $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
+:::
 :::
 
 ::: exempel "Exempel 5 — Bråk med negativa exponenter"

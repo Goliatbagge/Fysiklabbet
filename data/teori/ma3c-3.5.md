@@ -18,6 +18,13 @@ exponenten, $f(x) = e^{kx}$, med hjälp av derivatans definition.
 
 ## Koefficient i exponenten
 
+::: formel "Derivatan av $f(x) = e^{kx}$"
+Om $f(x) = e^{kx}$ så gäller att
+
+$$
+f'(x) = k \cdot e^{kx}
+$$
+
 ::: härledning "Derivatan för $f(x) = e^{kx}$ med derivatans definition"
 Vi undersöker derivatan för $f(x) = e^{kx}$ genom att studera derivatan till
 $f(x) = e^{3x}$ med derivatans definition.
@@ -51,13 +58,6 @@ $f'(x) = 4e^{4x}$ och att $f(x) = e^{5x}$ har derivatan $f'(x) = 5e^{5x}$.
 
 **Slutsats:** Om $f(x) = e^{kx}$ så gäller att $f'(x) = ke^{kx}$.
 :::
-
-::: formel "Derivatan av $f(x) = e^{kx}$"
-Om $f(x) = e^{kx}$ så gäller att
-
-$$
-f'(x) = k \cdot e^{kx}
-$$
 :::
 
 ::: exempel "Exempel 1 — Derivera exponentialfunktioner med basen e"
@@ -141,6 +141,13 @@ vidare.
 
 ## Andra baser än e
 
+::: formel "Derivatan av $f(x) = a^x$"
+Om $f(x) = a^x$ så gäller att
+
+$$
+f'(x) = a^x \cdot \ln a
+$$
+
 ::: härledning "Derivatan för $f(x) = a^x$ med annan bas än e"
 Vi undersöker derivatan för $f(x) = a^x$ med annan bas än $e$ genom att
 studera derivatan till $f(x) = 5^x$. Vi gör det genom att skriva om basen 5
@@ -174,13 +181,6 @@ $f'(x) = 1{,}14^x \cdot \ln 1{,}14$.
 
 **Slutsats:** Om $f(x) = a^x$ så gäller att $f'(x) = a^x \ln a$.
 :::
-
-::: formel "Derivatan av $f(x) = a^x$"
-Om $f(x) = a^x$ så gäller att
-
-$$
-f'(x) = a^x \cdot \ln a
-$$
 :::
 
 Om vi lägger ihop alla deriveringsregler vi nu har kommit fram till för

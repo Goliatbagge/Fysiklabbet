@@ -31,7 +31,6 @@ $$
 $$
 
 där $x > 0$ och $y > 0$.
-:::
 
 ::: härledning "Bevis — Första logaritmlagen"
 Vi skriver multiplikationen $x \cdot y$ på två sätt.
@@ -112,6 +111,7 @@ p \cdot \lg x = \lg x^p
 $$
 
 v.s.v.
+:::
 :::
 
 Med den tredje logaritmlagen kan vi lösa exponentialekvationer på

@@ -34,7 +34,6 @@ annan är att man ser det som en pil som pekar på det *mindre* värdet.
 Olikheter löses på samma sätt som ekvationer, men olikhetstecknet **vänds**
 vid *division eller multiplikation med negativa tal*. Olikheter av andra
 graden löser vi genom att undersöka gränsfallet (se exemplet nedan).
-:::
 
 ::: härledning "Undersökning — Olikhetstecknets vändning"
 Vi vet att $5 > 3$.
@@ -53,6 +52,7 @@ $$
 Men detta är ju falskt eftersom −5 är *mindre* än −3. Alltså måste
 olikhetstecknet vändas, dvs. $-5 < -3$, vid multiplikation och division
 med negativa tal.
+:::
 :::
 
 ::: exempel "Exempel 1 — Lös olikheterna"

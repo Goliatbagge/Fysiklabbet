@@ -25,19 +25,6 @@ $$
 
 Sidan $a$ är motstående sida till vinkel $A$, sidan $b$ är motstående sida
 till vinkel $B$ och sidan $c$ är motstående sida till vinkel $C$.
-:::
-
-::: figur
-<svg viewBox="-29.83 -35.49 259.11 228.85" width="259.11" height="228.85" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC. Sidan a ligger mitt emot vinkel A, sidan b mitt emot vinkel B och sidan c mitt emot vinkel C."><polygon points="66,0 0,168 198,168" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 57.96,20.48 A 22 22 0 0 0 79.59,17.3" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 8.04,147.52 A 22 22 0 0 1 22,168" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 184.41,150.7 A 22 22 0 0 0 176,168" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="63.09" y="-19.79" font-size="15" text-anchor="middle" fill="#1f2530">A</text><text x="-16.53" y="179.26" font-size="15" text-anchor="end" fill="#1f2530">B</text><text x="215.99" y="176.74" font-size="15" text-anchor="start" fill="#1f2530">C</text><text x="99" y="186" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="143.01" y="75.35" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="19.97" y="78.88" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">c</tspan></text></svg>
-:::
-
-Vi bevisar sambandet för $b^2$ nedan. Vi konstruerar en godtycklig triangel
-med beteckningar enligt figuren nedan, där höjden $h$ från $A$ delar sidan
-$a$ i delsträckorna $x$ (närmast $B$) och $a - x$ (närmast $C$).
-
-::: figur
-<svg viewBox="-22.68 -22.92 275.36 232.04" width="275.36" height="232.04" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC med höjden h från A vinkelrätt mot sidan a. Höjdens fotpunkt delar sidan a i delsträckorna x, närmast B, och a minus x, närmast C."><polygon points="0,150 230,150 80,0" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="80" y1="0" x2="80" y2="150" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="4 3" stroke-linecap="butt"/><path d="M 70,150 L 70,140 L 80,140" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="80" y="-8" font-size="14" text-anchor="middle" fill="#1f2530">A</text><text x="-10" y="166" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="240" y="166" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="29.41" y="69.35" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="163.49" y="66.51" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="90" y="79" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">h</tspan></text><text x="40" y="166" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="155" y="166" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan> &#8722; <tspan font-style="italic">x</tspan></text><line x1="0" y1="184" x2="230" y2="184" stroke="#1f2530" stroke-width="1.2"/><polygon points="0,184 7,180.5 7,187.5" fill="#1f2530"/><polygon points="230,184 223,180.5 223,187.5" fill="#1f2530"/><line x1="0" y1="156" x2="0" y2="190" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="2 2"/><line x1="230" y1="156" x2="230" y2="190" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="2 2"/><text x="115" y="202" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan></text></svg>
-:::
 
 ::: härledning "Bevis — Cosinussatsen"
 Pythagoras sats i de två räta trianglarna ger
@@ -75,6 +62,19 @@ b^2 = a^2 + c^2 - 2ac\cos B
 $$
 
 v.s.b. På motsvarande sätt bevisas de två övriga formlerna.
+:::
+:::
+
+::: figur
+<svg viewBox="-29.83 -35.49 259.11 228.85" width="259.11" height="228.85" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC. Sidan a ligger mitt emot vinkel A, sidan b mitt emot vinkel B och sidan c mitt emot vinkel C."><polygon points="66,0 0,168 198,168" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 57.96,20.48 A 22 22 0 0 0 79.59,17.3" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 8.04,147.52 A 22 22 0 0 1 22,168" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 184.41,150.7 A 22 22 0 0 0 176,168" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="63.09" y="-19.79" font-size="15" text-anchor="middle" fill="#1f2530">A</text><text x="-16.53" y="179.26" font-size="15" text-anchor="end" fill="#1f2530">B</text><text x="215.99" y="176.74" font-size="15" text-anchor="start" fill="#1f2530">C</text><text x="99" y="186" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="143.01" y="75.35" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="19.97" y="78.88" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">c</tspan></text></svg>
+:::
+
+Vi bevisar sambandet för $b^2$ nedan. Vi konstruerar en godtycklig triangel
+med beteckningar enligt figuren nedan, där höjden $h$ från $A$ delar sidan
+$a$ i delsträckorna $x$ (närmast $B$) och $a - x$ (närmast $C$).
+
+::: figur
+<svg viewBox="-22.68 -22.92 275.36 232.04" width="275.36" height="232.04" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC med höjden h från A vinkelrätt mot sidan a. Höjdens fotpunkt delar sidan a i delsträckorna x, närmast B, och a minus x, närmast C."><polygon points="0,150 230,150 80,0" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="80" y1="0" x2="80" y2="150" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="4 3" stroke-linecap="butt"/><path d="M 70,150 L 70,140 L 80,140" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="80" y="-8" font-size="14" text-anchor="middle" fill="#1f2530">A</text><text x="-10" y="166" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="240" y="166" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="29.41" y="69.35" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="163.49" y="66.51" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="90" y="79" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">h</tspan></text><text x="40" y="166" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="155" y="166" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan> &#8722; <tspan font-style="italic">x</tspan></text><line x1="0" y1="184" x2="230" y2="184" stroke="#1f2530" stroke-width="1.2"/><polygon points="0,184 7,180.5 7,187.5" fill="#1f2530"/><polygon points="230,184 223,180.5 223,187.5" fill="#1f2530"/><line x1="0" y1="156" x2="0" y2="190" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="2 2"/><line x1="230" y1="156" x2="230" y2="190" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="2 2"/><text x="115" y="202" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan></text></svg>
 :::
 
 ::: tips "Cosinussatsen – användning"

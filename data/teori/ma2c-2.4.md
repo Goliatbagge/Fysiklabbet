@@ -23,16 +23,6 @@ har lösningarna
 $$
 x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}
 $$
-:::
-
-Formeln med ord: först **halva koefficienten framför $x$-termen med
-ombytt tecken**, sedan plus/minus roten ur **föregående tal upphöjt
-till 2** (eventuellt minustecken innan kan bortses) **minus
-konstanttermen med ombytt tecken**.
-
-**OBS!** En förutsättning för att *pq*-formeln ska kunna användas är att
-ekvationen är lika med 0 **och** att vi inte har någon koefficient
-framför $x^2$-termen.
 
 ::: härledning "Härledning — *pq*-formeln"
 Vi utgår från ekvationen
@@ -70,6 +60,16 @@ $$
 
 v.s.b.
 :::
+:::
+
+Formeln med ord: först **halva koefficienten framför $x$-termen med
+ombytt tecken**, sedan plus/minus roten ur **föregående tal upphöjt
+till 2** (eventuellt minustecken innan kan bortses) **minus
+konstanttermen med ombytt tecken**.
+
+**OBS!** En förutsättning för att *pq*-formeln ska kunna användas är att
+ekvationen är lika med 0 **och** att vi inte har någon koefficient
+framför $x^2$-termen.
 
 ::: exempel "Exempel 1 — Lös ekvationerna"
 **Lös ekvationerna<br>a) $x^2 + 6x - 7 = 0$&emsp;&emsp;b) $3x^2 - 15x + 18 = 0$&emsp;&emsp;c) $x^2 = 39 - 10x$**

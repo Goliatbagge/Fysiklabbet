@@ -21,13 +21,6 @@ T = \frac{ab\sin C}{2} = \frac{ac\sin B}{2} = \frac{bc\sin A}{2}
 $$
 
 där $T$ är triangelns area.
-:::
-
-Vinkeln $C$ är mellanliggande vinkel till sidorna $a$ och $b$, eftersom det
-är dessa två sidor som möts i hörn $C$. På samma sätt är vinkeln $B$
-mellanliggande till sidorna $a$ och $c$, och vinkeln $A$ mellanliggande till
-sidorna $b$ och $c$. Areasatsen fungerar alltså för trianglar där två sidor
-och den mellanliggande vinkeln är kända.
 
 ::: härledning "Bevis — Areasatsen"
 Låt $A$ vara den mellanliggande vinkeln till sidorna $b$ och $c$. Vi drar en
@@ -61,6 +54,13 @@ På motsvarande sätt bevisas de två övriga formlerna, $T = \dfrac{ab\sin C}{2
 och $T = \dfrac{ac\sin B}{2}$, genom att i stället dra höjden från hörn $A$
 respektive hörn $B$.
 :::
+:::
+
+Vinkeln $C$ är mellanliggande vinkel till sidorna $a$ och $b$, eftersom det
+är dessa två sidor som möts i hörn $C$. På samma sätt är vinkeln $B$
+mellanliggande till sidorna $a$ och $c$, och vinkeln $A$ mellanliggande till
+sidorna $b$ och $c$. Areasatsen fungerar alltså för trianglar där två sidor
+och den mellanliggande vinkeln är kända.
 
 ::: exempel "Exempel 1 — Beräkna arean av en triangel"
 **Beräkna arean av triangeln nedan.**

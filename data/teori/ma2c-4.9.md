@@ -23,14 +23,6 @@ $$
 $$
 \frac{a}{a + b} = \frac{c}{c + d} = \frac{e}{f}
 $$
-:::
-
-::: figur
-<svg viewBox="8 6 216 152" width="216" height="152" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel A B C med en parallelltransversal genom punkterna D och E. Sträckorna a, b, c, d, e och f är markerade."><polygon points="100,20 25,135 195,135" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="16" y1="66" x2="216" y2="66" stroke="#1f2530" stroke-width="1.4"/><text x="100" y="14" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="19" y="148" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="201" y="148" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="62" y="62" font-size="12" text-anchor="end" fill="#1f2530">D</text><text x="139" y="62" font-size="12" text-anchor="start" fill="#1f2530">E</text><text x="78" y="42" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="42" y="102" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="122" y="42" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="172" y="102" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">d</tspan></text><text x="100" y="80" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">e</tspan></text><text x="110" y="130" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">f</tspan></text></svg>
-:::
-
-Parallelltransversalen är parallell med sidan $BC$; $a = AD$, $b = DB$,
-$c = AE$, $d = EC$, $e = DE$ och $f = BC$.
 
 ::: härledning "Bevis — Topptriangelsatsen"
 $\angle A$ är gemensam vinkel i $\triangle ABC$ och $\triangle ADE$.
@@ -49,6 +41,14 @@ $$
 
 v.s.b.
 :::
+:::
+
+::: figur
+<svg viewBox="8 6 216 152" width="216" height="152" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel A B C med en parallelltransversal genom punkterna D och E. Sträckorna a, b, c, d, e och f är markerade."><polygon points="100,20 25,135 195,135" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="16" y1="66" x2="216" y2="66" stroke="#1f2530" stroke-width="1.4"/><text x="100" y="14" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="19" y="148" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="201" y="148" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="62" y="62" font-size="12" text-anchor="end" fill="#1f2530">D</text><text x="139" y="62" font-size="12" text-anchor="start" fill="#1f2530">E</text><text x="78" y="42" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">a</tspan></text><text x="42" y="102" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">b</tspan></text><text x="122" y="42" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="172" y="102" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">d</tspan></text><text x="100" y="80" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">e</tspan></text><text x="110" y="130" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">f</tspan></text></svg>
+:::
+
+Parallelltransversalen är parallell med sidan $BC$; $a = AD$, $b = DB$,
+$c = AE$, $d = EC$, $e = DE$ och $f = BC$.
 
 ::: formel "Transversalsatsen"
 En parallelltransversal delar en triangels sidor i samma förhållande.
@@ -60,7 +60,6 @@ $$
 $$
 \frac{a}{b} = \frac{c}{d}
 $$
-:::
 
 ::: härledning "Bevis — Transversalsatsen"
 Sedan tidigare har vi visat $\triangle ABC \sim \triangle ADE$. Detta
@@ -99,6 +98,7 @@ $$
 
 v.s.b.
 :::
+:::
 
 ::: tips "Topptriangelsatsen eller transversalsatsen?"
 Om vi ska använda en triangelsats där topptriangelns bas
@@ -116,11 +116,6 @@ enligt förhållandet
 $$
 \frac{AD}{BD} = \frac{AC}{BC}
 $$
-:::
-
-::: figur
-<svg viewBox="10 -2 180 154" width="180" height="154" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel A B C där bisektrisen från C delar vinkeln vid C mitt itu och träffar sidan A B i punkten D."><polygon points="20,130 170,130 100,18" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="100" y1="18" x2="96.6" y2="130" stroke="#1f2530" stroke-width="1.4"/><path d="M 91.9,29.4 A 14 14 0 0 0 99.6,32" fill="none" stroke="#1f2530" stroke-width="1"/><path d="M 99.6,32 A 14 14 0 0 0 107.4,29.9" fill="none" stroke="#1f2530" stroke-width="1"/><text x="96" y="10" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="14" y="143" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="176" y="143" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="96.6" y="144" font-size="12" text-anchor="middle" fill="#1f2530">D</text></svg>
-:::
 
 ::: härledning "Bevis — Bisektrissatsen"
 Vi ritar en godtycklig triangel $ABC$ och ritar in en bisektris $AD$
@@ -166,6 +161,11 @@ $$
 $$
 
 v.s.b.
+:::
+:::
+
+::: figur
+<svg viewBox="10 -2 180 154" width="180" height="154" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel A B C där bisektrisen från C delar vinkeln vid C mitt itu och träffar sidan A B i punkten D."><polygon points="20,130 170,130 100,18" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="100" y1="18" x2="96.6" y2="130" stroke="#1f2530" stroke-width="1.4"/><path d="M 91.9,29.4 A 14 14 0 0 0 99.6,32" fill="none" stroke="#1f2530" stroke-width="1"/><path d="M 99.6,32 A 14 14 0 0 0 107.4,29.9" fill="none" stroke="#1f2530" stroke-width="1"/><text x="96" y="10" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="14" y="143" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="176" y="143" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="96.6" y="144" font-size="12" text-anchor="middle" fill="#1f2530">D</text></svg>
 :::
 
 ::: exempel "Exempel 1 — Parallelltransversal"

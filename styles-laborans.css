@@ -210,6 +210,29 @@ body.laborans a {
     transform: translateX(-50%) translateY(0);
 }
 
+/* Tvingad stängning efter att ett ämne valts.
+   På touch fastnar :hover kvar på dropdownen efter ett tryck, och ämnes-
+   länkarna pekar på samma sida (katalog.html#fy2) — ingen omladdning som
+   annars stängt menyn. Resultatet blev att menyn låg kvar och skymde
+   innehållet bakom. Klassen sätts vid klick på en ämneslänk och tas bort
+   igen vid nästa tryck (eller när pekaren lämnar), så hover-beteendet på
+   dator är oförändrat. Måste stå EFTER :hover/:focus-within-reglerna ovan
+   — de har samma specificitet, så källordningen avgör. */
+.lab-nav-dd.lab-nav-dd-stangd .lab-nav-dd-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+.lab-nav-dd.lab-nav-dd-stangd .lab-nav-dd-caret {
+    transform: none;
+}
+
+.lab-nav-dd.lab-nav-dd-stangd .lab-nav-dd-trigger {
+    border-bottom-color: transparent;
+}
+
 .lab-nav .lab-nav-dd-menu a {
     display: block;
     padding: 9px 16px;
@@ -409,6 +432,10 @@ body.laborans a {
     .lab-nav-dd:hover .lab-nav-dd-menu,
     .lab-nav-dd:focus-within .lab-nav-dd-menu {
         transform: translateX(0) translateY(0);
+    }
+
+    .lab-nav-dd.lab-nav-dd-stangd .lab-nav-dd-menu {
+        transform: translateX(0) translateY(-4px);
     }
 }
 

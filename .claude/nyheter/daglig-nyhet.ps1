@@ -11,7 +11,12 @@
 # undantag manuellt i try/catch.
 $ErrorActionPreference = 'Continue'
 
-$Repo    = 'C:\claude\Fysiklabbet'
+# Repo-roten harleds ur skriptets egen plats (<repo>\.claude\nyheter\) sa att
+# samma skript fungerar pa vilken maskin och vilken sokvag som helst.
+# Fallback behovs bara om skriptet dot-sourcas utan $PSScriptRoot.
+if ($PSScriptRoot) { $Repo = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent }
+else               { $Repo = 'C:\claude\Fysiklabbet' }
+
 $LogDir  = Join-Path $Repo '.claude\nyheter\logg'
 $DataJs  = Join-Path $Repo 'data\nyheter.js'
 $Today   = Get-Date -Format 'yyyy-MM-dd'
@@ -27,6 +32,23 @@ function Log($msg) {
 
 function HasTodayArticle {
     return [bool](Select-String -Path $DataJs -SimpleMatch ('date: "{0}"' -f $Today) -Quiet)
+}
+
+function Find-Python {
+    # Nyhetsagenten anropar Gemini-bildskriptet med en explicit Python-sokvag.
+    # Den FAR INTE hardkodas till ett anvandarnamn - da gar bildgenereringen
+    # sonder tyst pa en maskin dar kontot heter nagot annat.
+    $kandidat = Join-Path $env:LOCALAPPDATA 'Programs\Python\Python312\python.exe'
+    if (Test-Path $kandidat) { return $kandidat }
+
+    # Windows-launchern pekar ut ratt tolk aven vid annan installationsplats.
+    $viaLauncher = (& py -3.12 -c "import sys; print(sys.executable)" 2>$null)
+    if ($LASTEXITCODE -eq 0 -and $viaLauncher -and (Test-Path $viaLauncher)) { return $viaLauncher }
+
+    $cmd = Get-Command python -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+
+    return 'python'
 }
 
 function Invoke-Native {
@@ -97,10 +119,13 @@ try {
         $Claude = Join-Path $env:USERPROFILE '.local\bin\claude.exe'
         if (-not (Test-Path $Claude)) { $Claude = 'claude' }
 
+        $Python = Find-Python
+        Log ("Python for bildgenerering: {0}" -f $Python)
+
         $Prompt = @"
 Today is $Today. Read the file .claude/agents/nyhetsagent.md and carry out its FULL workflow to publish exactly ONE Swedish physics news article for today.
 
-Steps: check the queue/log in .claude/nyheter/ so you do not repeat a story; pick the single most relevant story from the listed sources (Phys.org, Physics Magazine/APS, Physics World, Quanta, ScienceDaily, Nature) and research it thoroughly (you may read other reputable sites and the original paper too); write an in-depth, popular-science article in Swedish that follows the project's typography rules (Swedish quotation marks, comma decimals, NBSP, italic variables, no emojis); obtain a clean open-source image or generate one with the Gemini image script using the system Python at C:/Users/sam_s/AppData/Local/Programs/Python/Python312/python.exe; save the image under nyheter/bilder/ and add the article object to the TOP of window.NYHETER in data/nyheter.js with a real source link and a direct link to the original research when one exists; update .claude/nyheter/publicerat.md and ko.md; run node .claude/verify-navigation.js; then git add, git commit and git push origin main.
+Steps: check the queue/log in .claude/nyheter/ so you do not repeat a story; pick the single most relevant story from the listed sources (Phys.org, Physics Magazine/APS, Physics World, Quanta, ScienceDaily, Nature) and research it thoroughly (you may read other reputable sites and the original paper too); write an in-depth, popular-science article in Swedish that follows the project's typography rules (Swedish quotation marks, comma decimals, NBSP, italic variables, no emojis); obtain a clean open-source image or generate one with the Gemini image script using the system Python at $Python; save the image under nyheter/bilder/ and add the article object to the TOP of window.NYHETER in data/nyheter.js with a real source link and a direct link to the original research when one exists; update .claude/nyheter/publicerat.md and ko.md; run node .claude/verify-navigation.js; then git add, git commit and git push origin main.
 
 Publish ONLY ONE article. If today's date already exists in data/nyheter.js, make no changes and do not commit.
 "@

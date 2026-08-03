@@ -83,6 +83,13 @@
         '  box-shadow:0 1px 4px rgba(0,0,0,0.35);}',
         '.minisim-fsbtn:hover{background:#fff;}',
         '.minisim-fsbtn:focus-visible{outline:2px solid #7aa2e0;outline-offset:2px;}',
+        /* Ljudknapp — samma cirkelstil, uppe till höger på scenen. */
+        '.minisim-sndbtn{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;',
+        '  display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);',
+        '  color:#0f1620;border:none;cursor:pointer;padding:0;z-index:5;',
+        '  box-shadow:0 1px 4px rgba(0,0,0,0.35);}',
+        '.minisim-sndbtn:hover{background:#fff;}',
+        '.minisim-sndbtn:focus-visible{outline:2px solid #7aa2e0;outline-offset:2px;}',
         /* Fullskärm: mörkt rum, scenen centrerad, kontrollerna under. */
         '.minisim-card:fullscreen{max-width:none;border:none;border-radius:0;display:flex;',
         '  flex-direction:column;align-items:center;justify-content:center;background:#04060b;',
@@ -167,6 +174,25 @@
         fsBtn.title = 'Fullskärm';
         fsBtn.innerHTML = ICON_EXPAND;
         scene.appendChild(fsBtn);
+
+        // Ljudknapp (högtalare / överstruken högtalare)
+        var ICON_SND_ON =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var ICON_SND_OFF =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.className = 'minisim-sndbtn';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        sndBtn.title = 'Ljud av';
+        sndBtn.innerHTML = ICON_SND_ON;
+        scene.appendChild(sndBtn);
         card.appendChild(scene);
 
         var controls = document.createElement('div');
@@ -274,6 +300,103 @@
         var rafId = 0;
 
         function timeScale() { return slowCb.checked ? 0.25 : 1; }
+
+        // ── Ljud (Web Audio, helt syntetiserat — inga ljudfiler) ──────────
+        // Motorton: två oscillatorer vars frekvens följer varvtalet.
+        // Sprak: procedurellt genererad crackle-buffer (fizz + slumpvisa
+        // knallar med exponentiella svansar) som loopas genom ett högpass.
+        // I ultrarapid pitchas båda ner. Skapas lazy vid första knapptryck
+        // (webbläsarnas autoplay-policy kräver en användargest).
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var audio = null;
+        var soundOn = true;
+
+        function makeCrackleBuffer(actx) {
+            var sr = actx.sampleRate;
+            var len = Math.floor(sr * 2);
+            var buf = actx.createBuffer(1, len, sr);
+            var d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * 0.05; // fräs
+            for (var n = 0; n < 700; n++) {                                      // knallar
+                var pos = Math.floor(Math.random() * (len - sr * 0.03));
+                var amp = 0.25 + Math.random() * 0.75;
+                var tau = sr * (0.0008 + Math.random() * 0.004);
+                var dur = Math.floor(tau * 6);
+                for (var k = 0; k < dur; k++) {
+                    d[pos + k] += (Math.random() * 2 - 1) * amp * Math.exp(-k / tau);
+                }
+            }
+            for (i = 0; i < len; i++) d[i] = Math.tanh(d[i]);                    // mjuk topp
+            return buf;
+        }
+
+        function ensureAudio() {
+            if (audio || !AC) return;
+            var actx = new AC();
+            var master = actx.createGain();
+            master.gain.value = 0.6;
+            master.connect(actx.destination);
+            // motor
+            var motorGain = actx.createGain();
+            motorGain.gain.value = 0;
+            var motorFilt = actx.createBiquadFilter();
+            motorFilt.type = 'lowpass';
+            motorFilt.frequency.value = 1600;
+            motorFilt.Q.value = 1.5;
+            var o1 = actx.createOscillator();
+            o1.type = 'sawtooth';
+            o1.frequency.value = 80;
+            var o2 = actx.createOscillator();
+            o2.type = 'square';
+            o2.frequency.value = 162;
+            var o2g = actx.createGain();
+            o2g.gain.value = 0.3;
+            o1.connect(motorFilt);
+            o2.connect(o2g);
+            o2g.connect(motorFilt);
+            motorFilt.connect(motorGain);
+            motorGain.connect(master);
+            o1.start();
+            o2.start();
+            // sprak
+            var crackleGain = actx.createGain();
+            crackleGain.gain.value = 0;
+            var hp = actx.createBiquadFilter();
+            hp.type = 'highpass';
+            hp.frequency.value = 1700;
+            var src = actx.createBufferSource();
+            src.buffer = makeCrackleBuffer(actx);
+            src.loop = true;
+            src.connect(hp);
+            hp.connect(crackleGain);
+            crackleGain.connect(master);
+            src.start();
+            audio = { ctx: actx, master: master, motorGain: motorGain,
+                      o1: o1, o2: o2, crackleGain: crackleGain, crackleSrc: src };
+        }
+
+        function resumeAudio() {
+            ensureAudio();
+            if (audio && audio.ctx.state === 'suspended') audio.ctx.resume();
+        }
+
+        function updateAudio() {
+            if (!audio) return;
+            var t = audio.ctx.currentTime;
+            var ts = timeScale();
+            var active = soundOn && visible && !document.hidden && !paused;
+            // motorton — gain och frekvens följer det faktiska varvtalet
+            var revs = Math.abs(omega) / (2 * Math.PI);
+            var mg = (active && revs > 0.05) ? Math.min(0.5, 0.1 + revs * 0.09) : 0;
+            audio.motorGain.gain.setTargetAtTime(mg, t, 0.06);
+            var f = (55 + revs * 48) * (0.35 + 0.65 * ts);
+            audio.o1.frequency.setTargetAtTime(f, t, 0.06);
+            audio.o2.frequency.setTargetAtTime(f * 2.02, t, 0.06);
+            // sprak — följer glödens flimmer, tystnar när blosset dör
+            var cg = (active && lit) ? (0.32 + 0.22 * flick) : 0;
+            audio.crackleGain.gain.setTargetAtTime(cg, t, 0.05);
+            audio.crackleSrc.playbackRate.setTargetAtTime(ts < 1 ? 0.45 : 1, t, 0.1);
+        }
 
         // ── Partiklar ─────────────────────────────────────────────────────
         function spawnSpark(x, y, vx, vy, main) {
@@ -575,6 +698,7 @@
             if (!paused) step(dt);
             render();
             updateInfo();
+            updateAudio();
             if (shouldRun()) {
                 running = true;
                 rafId = requestAnimationFrame(frame);
@@ -612,18 +736,21 @@
             lit = true;
             burnt = false;
             paused = false;
+            resumeAudio();
             syncUi();
             kick();
         });
         drillBtn.addEventListener('click', function () {
             drillOn = !drillOn;
             paused = false;
+            resumeAudio();
             syncUi();
             kick();
         });
         pausBtn.addEventListener('click', function () {
             paused = !paused;
             syncUi();
+            updateAudio();  // tysta direkt vid paus
             if (!paused) kick();
             else render();  // frys exakt den bild som visas
         });
@@ -633,8 +760,16 @@
             lit = true;
             paused = false;
             particles.length = 0;
+            resumeAudio();
             syncUi();
             kick();
+        });
+        sndBtn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
+            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            if (soundOn) resumeAudio();
+            updateAudio();
         });
         slowCb.addEventListener('change', kick);
         slider.addEventListener('input', function () {
@@ -673,13 +808,18 @@
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 visible = entries[0].isIntersecting;
+                updateAudio();  // tysta när widgeten skrollas ur bild
                 if (visible) kick();
             }, { threshold: 0.05 });
             io.observe(card);
         }
         document.addEventListener('visibilitychange', function () {
+            updateAudio();
             if (!document.hidden) kick();
         });
+
+        // Litet test-handtag (används av e2e-skriptet i .shots/)
+        card._audioState = function () { return audio ? audio.ctx.state : 'none'; };
 
         syncUi();
         render();

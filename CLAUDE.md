@@ -425,7 +425,8 @@ typ: tomtebloss
   centrifugkorg sedd rakt uppifrån; vattendropparna lämnar banan
   tangentiellt enligt Newtons första lag. Samma kontrolluppsättning som
   tomteblosset: varvtalsglidare, paus som fryser bilden, "Ultrarapid",
-  fullskärm och syntetiserat ljud — motorton + vattenfräs).
+  fullskärm och syntetiserat ljud — motorton + vattenfräs. Ritad i
+  laboranstemat: ljus pappersbakgrund med kollegieblocks-rutnät).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
   inuti en `::: demo`-ruta som redan har titel).
 - Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).
@@ -437,6 +438,15 @@ Canvas-scen med DPR-skalning, svenska UI-texter (Poppins — INTE
 `--lab-font-display`, som är serif), komma som decimaltecken,
 IntersectionObserver som pausar rAF-loopen när widgeten inte syns.
 Simuleringen ska vara omedelbart begriplig: 1–3 knappar, inga menyer.
+
+**Tema: minisimuleringar ska generellt gå i laboranstemat** — ljus
+pappersbakgrund (`#f7f2e8` → `#ece3d2`) med ett blått kollegieblocks-
+rutnät, som om simuleringen låg ritad på ett anteckningsblock. Använd
+kortklassen `ms-ljus` (ljusa knappar/reglage) + `drawBackground()`-mönstret
+i `buildCentrifug` (referens). Mörk scen är UNDANTAG och kräver att fysiken
+motiverar det (tomteblosset: gnistor i mörker). På den ljusa botten gäller
+no-white-outline-regeln som vanligt — mörka/mättade färger, inga haloer,
+och ingen additiv `lighter`-blending (den är till för mörka scener).
 
 ### Byggkedja (samma mönster som `::: graf`)
 

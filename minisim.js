@@ -31,9 +31,15 @@
  * jämfört med spetsens banfart (ω·r, tusentals px/s), så strålen blir en
  * tangent till cirkeln.
  *
+ * TEMA: minisimuleringar ska generellt gå i laboranstemat — ljus
+ * pappersbakgrund med ett blått kollegieblocks-rutnät, som om simuleringen
+ * låg ritad på ett anteckningsblock (kortklass ms-ljus + drawPaper()).
+ * Tomteblosset är UNDANTAGET: det kräver mörker för ljuseffekten.
+ *
  * ── typ: centrifug ───────────────────────────────────────────────────────
  * Demonstrationen ur fy2-1.4 (Cirkulär rörelse): en blöt tvättsvamp i en
- * centrifug (roterande korg utan lock, sedd rakt uppifrån). Blöt svampen
+ * centrifug (roterande korg utan lock, sedd rakt uppifrån, ritad på
+ * papperstemat med rutnät). Blöt svampen
  * och starta centrifugen — vattendropparna pressas ut genom korgväggen och
  * lämnar banan TANGENTIELLT i rörelsens riktning (inte radiellt utåt),
  * eftersom varje droppe behåller svampens hastighet i frigörelseögonblicket
@@ -115,6 +121,27 @@
         '.minisim-card:-webkit-full-screen .minisim-scene{width:min(100%,calc((100vh - 150px)*' + (560 / 430) + '));}',
         '.minisim-card:-webkit-full-screen .minisim-controls,',
         '.minisim-card:-webkit-full-screen .minisim-slider-row{width:min(92vw,640px);}',
+        /* Ljus temavariant (laborans papper) — standard för minisims som
+           inte kräver mörker. Läggs som extra klass på kortet: ms-ljus. */
+        '.minisim-card.ms-ljus{background:#f9f5ec;border-color:#d8cdb8;}',
+        '.minisim-card.ms-ljus .minisim-title{color:#1f2530;}',
+        '.minisim-card.ms-ljus .minisim-scene{border:1px solid #ddd3c0;}',
+        '.minisim-card.ms-ljus .minisim-btn{background:#fdfaf3;border-color:#c9bfa9;color:#1f2530;}',
+        '.minisim-card.ms-ljus .minisim-btn:hover{background:#f3ecdd;border-color:#b4a88e;}',
+        '.minisim-card.ms-ljus .minisim-btn.ms-primar{background:#b8531f;border-color:#a04617;color:#fff4e8;}',
+        '.minisim-card.ms-ljus .minisim-btn.ms-primar:hover{background:#c95f26;}',
+        '.minisim-card.ms-ljus .minisim-check{color:#4a5160;}',
+        '.minisim-card.ms-ljus .minisim-info{color:#6a7180;}',
+        '.minisim-card.ms-ljus .minisim-slider-lbl{color:#4a5160;}',
+        '.minisim-card.ms-ljus .minisim-slider-val{color:#1f2530;}',
+        '.minisim-card.ms-ljus .minisim-slider{background:#d8cdb8;}',
+        '.minisim-card.ms-ljus .minisim-slider::-webkit-slider-thumb{border-color:#f9f5ec;}',
+        '.minisim-card.ms-ljus .minisim-slider::-moz-range-thumb{border-color:#f9f5ec;}',
+        '.minisim-card.ms-ljus .minisim-fsbtn,',
+        '.minisim-card.ms-ljus .minisim-sndbtn{box-shadow:0 1px 4px rgba(15,22,32,0.22);',
+        '  border:1px solid #d8cdb8;}',
+        '.minisim-card.ms-ljus:fullscreen{background:#f2ebdc;}',
+        '.minisim-card.ms-ljus:-webkit-full-screen{background:#f2ebdc;}',
         /* (.lab-minisim-marginalen ligger i styles-laborans.css, som
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
         '.lab-minisim p{margin:0;}'
@@ -854,7 +881,7 @@
 
         // ── DOM ───────────────────────────────────────────────────────────
         var card = document.createElement('div');
-        card.className = 'minisim-card';
+        card.className = 'minisim-card ms-ljus';
         if (cfg.titel) {
             var t = document.createElement('div');
             t.className = 'minisim-title';
@@ -1157,24 +1184,35 @@
             }
         }
 
-        // ── Rendering ─────────────────────────────────────────────────────
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
         function drawBackground() {
             ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = '#04060b';
-            ctx.fillRect(0, 0, W, H);
-            var g = ctx.createRadialGradient(CX, CY, 60, CX, CY, 420);
-            g.addColorStop(0, 'rgba(14,17,26,0.55)');
-            g.addColorStop(1, 'rgba(0,0,0,0.72)');
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, W, H);
+            // rutnätet — som om simuleringen låg på ett kollegieblock
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
         }
 
         function drawBasket() {
             ctx.globalCompositeOperation = 'source-over';
-            // korgens botten
+            // korgens botten — ljus metall mot pappret
             var g = ctx.createRadialGradient(CX, CY, 20, CX, CY, R_WALL);
-            g.addColorStop(0, '#131722');
-            g.addColorStop(1, '#0c0f16');
+            g.addColorStop(0, '#fdfaf3');
+            g.addColorStop(1, '#efe7d5');
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.arc(CX, CY, R_WALL, 0, 2 * Math.PI);
@@ -1183,7 +1221,7 @@
             ctx.save();
             ctx.translate(CX, CY);
             ctx.rotate(theta);
-            ctx.strokeStyle = '#232937';
+            ctx.strokeStyle = '#a8aeb8';
             ctx.lineWidth = 3;
             ctx.lineCap = 'butt';
             for (var k = 0; k < 4; k++) {
@@ -1201,11 +1239,11 @@
             ctx.globalCompositeOperation = 'source-over';
             ctx.beginPath();
             ctx.arc(CX, CY, R_WALL, 0, 2 * Math.PI);
-            ctx.strokeStyle = '#333b4c';
+            ctx.strokeStyle = '#1f2530';
             ctx.lineWidth = 7;
             ctx.stroke();
             // perforeringen (hålen vattnet slungas ut genom) roterar med korgen
-            ctx.fillStyle = '#0d1119';
+            ctx.fillStyle = '#ece3d2';
             for (var k = 0; k < 30; k++) {
                 var a = theta + k * 2 * Math.PI / 30;
                 ctx.beginPath();
@@ -1216,14 +1254,14 @@
             // navet
             ctx.beginPath();
             ctx.arc(CX, CY, 14, 0, 2 * Math.PI);
-            ctx.fillStyle = '#1c212b';
+            ctx.fillStyle = '#2a3140';
             ctx.fill();
-            ctx.strokeStyle = '#2c3342';
+            ctx.strokeStyle = '#1f2530';
             ctx.lineWidth = 1.5;
             ctx.stroke();
             ctx.beginPath();
             ctx.arc(CX, CY, 3.2, 0, 2 * Math.PI);
-            ctx.fillStyle = '#3c4456';
+            ctx.fillStyle = '#dfd6c2';
             ctx.fill();
         }
 
@@ -1279,9 +1317,9 @@
             // Rörelseoskärpa vid hög fart: spökbilder tätt bakåt längs bågen.
             var wVis = Math.abs(omega) * timeScale();
             // svag ring längs svampens bana (tröghet i ögat, som lång exponering)
-            var ring = Math.min(0.10, wVis / 220);
+            var ring = Math.min(0.12, wVis / 200);
             if (ring > 0.015) {
-                ctx.strokeStyle = 'rgba(214,190,110,' + ring.toFixed(3) + ')';
+                ctx.strokeStyle = 'rgba(170,132,40,' + ring.toFixed(3) + ')';
                 ctx.lineWidth = 42;
                 ctx.beginPath();
                 ctx.arc(CX, CY, R_SVAMP, 0, 2 * Math.PI);
@@ -1296,26 +1334,26 @@
         }
 
         function drawParticles() {
-            ctx.globalCompositeOperation = 'lighter';
+            // mörkblå droppar mot ljust papper — ingen additiv blending
+            ctx.globalCompositeOperation = 'source-over';
             ctx.lineCap = 'round';
             for (var i = 0; i < particles.length; i++) {
                 var p = particles[i];
                 var t = p.age / p.life;
-                var a = (1 - t) * 0.85;
-                ctx.strokeStyle = 'rgba(150,205,255,' + a.toFixed(3) + ')';
+                var a = (1 - t) * 0.9;
+                ctx.strokeStyle = 'rgba(43,105,180,' + a.toFixed(3) + ')';
                 ctx.lineWidth = p.w;
                 ctx.beginPath();
                 ctx.moveTo(p.px, p.py);
                 ctx.lineTo(p.x, p.y);
                 ctx.stroke();
                 if (t < 0.5) {
-                    ctx.fillStyle = 'rgba(225,242,255,' + (0.55 * (1 - t)).toFixed(3) + ')';
+                    ctx.fillStyle = 'rgba(21,70,135,' + (0.75 * (1 - t)).toFixed(3) + ')';
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.w * 0.8, 0, 2 * Math.PI);
+                    ctx.arc(p.x, p.y, p.w * 0.85, 0, 2 * Math.PI);
                     ctx.fill();
                 }
             }
-            ctx.globalCompositeOperation = 'source-over';
         }
 
         function render() {

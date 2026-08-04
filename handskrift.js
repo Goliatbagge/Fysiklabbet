@@ -68,9 +68,15 @@
  * räkneraderna läggs där NÄSTA rad ska hamna. Båda ytorna är ännu tomma
  * och bubblan är ett eget steg som tonar ut innan något ritas där.
  * Omvänt får en bubbla heller aldrig SKYMMAS: arkets ÖVRE HÖGRA HÖRN
- * (ca x > paperW−210, y < 90 inkl. bulor) är reserverat för inställnings-
- * rutan och helskärmsknappen — lägg aldrig en bubbla där. Kontrollera
- * alltid i skärmdump.
+ * är reserverat för inställningsrutan och helskärmsknappen — lägg aldrig
+ * en bubbla där. ⚠️ Rutan är HTML och behåller sin pixelstorlek när
+ * arket krymper, så PÅ MOBIL täcker den en mycket större del av arket
+ * än på desktop: räkna med x > paperW−310 (≈420) och y < 150 (inkl.
+ * bulor) som förbjudet område, INTE bara desktopens ~210×90. Detta
+ * gäller ALLT som ritas på arket i det hörnet — även blå figur-
+ * anteckningar, etiketter och tallinjemarkeringar, inte bara bubblor
+ * ("23" på olikhets-tallinjen hamnade bakom rutan i mobil, påpekat
+ * 2026-08-04). Kontrollera alltid i skärmdump.
  *
  * REGEL (INSÄTTNING): varje gång något SÄTTS IN i något annat — ett
  * värde i en funktion/formel, ett uttryck i en ekvation, mätvärden i ett
@@ -1614,7 +1620,11 @@
       stepEnd();
     }
 
-    /* ---- a) 23 eller 19 ---- */
+    /* ---- a) 23 eller 19 ----
+     * Tallinjen ligger så långt ned (ty=170) att de blå markeringarna
+     * OVANFÖR den (baslinje ty−14) hamnar under inställningsrutans
+     * mobilzon y<150 — se REGEL i filhuvudet ("23" hamnade bakom rutan
+     * på mobil, påpekat 2026-08-04). */
     var bA = bubble(120, 40, 258, [
       [['a) Jag ritar tallinjen.']],
       [['Talet längst till höger']],
@@ -1623,14 +1633,14 @@
     tanke(bA);
     placeString('a)', padL, 62, s * 0.62, F * 0.62, acts);
     pause(200);
-    tallinje(126, 15, 25, 80, 48, [15, 20, 25], [19, 23]);
-    var bA2 = bubble(120, bubbleTop(152), 264, [
+    tallinje(170, 15, 25, 80, 48, [15, 20, 25], [19, 23]);
+    var bA2 = bubble(120, bubbleTop(196), 264, [
       [['23 ligger till höger om 19.']],
       [['Olikhetstecknet gapar mot']],
       [['det största talet!']]
     ]);
     tanke(bA2);
-    var y = 218;
+    var y = 262;
     var xe = placeString('Svar: 23>19', padL, y, s, F, acts);
     underline(xe, y);
     stepEnd();
@@ -1642,16 +1652,16 @@
       [['är det.']]
     ]);
     tanke(bB);
-    placeString('b)', padL, 292, s * 0.62, F * 0.62, acts);
+    placeString('b)', padL, 336, s * 0.62, F * 0.62, acts);
     pause(200);
-    tallinje(356, -21, 1, 66, 23, [-20, -15, -10, -5, 0], [-20, -3]);
-    var bB2 = bubble(120, bubbleTop(382), 262, [
+    tallinje(400, -21, 1, 66, 23, [-20, -15, -10, -5, 0], [-20, -3]);
+    var bB2 = bubble(120, bubbleTop(426), 262, [
       [['−20 ligger längst till']],
       [['vänster och är alltså']],
       [['det minsta talet.']]
     ]);
     tanke(bB2);
-    y = 448;
+    y = 492;
     xe = placeString('Svar: (−20)<(−3)', padL, y, s, F, acts);
     underline(xe, y);
     stepEnd();
@@ -1687,13 +1697,16 @@
     }
     function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
 
-    /* ---- a) 4−(−9) ---- */
+    /* ---- a) 4−(−9) ----
+     * Omskrivningen skrivs på EGEN rad som börjar med '=' (kollegie-
+     * block-stil) — på samma rad hade radslutet nått in i inställnings-
+     * rutans mobilzon x>420, y<150 (se REGEL i filhuvudet). */
     var y = 64;
     var xx = placeString('a) 4', padL, y, s, F, acts);
     var r0 = xx;
     xx = placeString('-(−', xx, y, s, F, acts);
     var r1 = xx;
-    xx = placeString('9)', xx, y, s, F, acts);
+    placeString('9)', xx, y, s, F, acts);
     stepEnd();
     var ringA = { kind: 'stroke', pts: ringBox(r0, r1, y, F), color: BLUE };
     acts.push(ringA);
@@ -1704,10 +1717,11 @@
       [['ett plustecken.']]
     ]);
     tanke(bA);
-    xx = placeString('=4', xx, y, s, F, acts);
+    y += 1.7 * F;
+    xx = placeString('=4', padL + 30, y, s, F, acts);
     xx = placeString('+', xx, y, s, F, acts, BLUE);
     xx = placeString('9', xx, y, s, F, acts);
-    xx = placeString('=13', xx, y, s, F, acts);
+    placeString('=13', xx, y, s, F, acts);
     acts.push({ kind: 'fade', ref: ringA });
     stepEnd();
     y += 1.7 * F;
@@ -1727,15 +1741,16 @@
     var q0 = xx;
     xx = placeString('+(−', xx, y, s, F, acts);
     var q1 = xx;
-    xx = placeString('10)', xx, y, s, F, acts);
+    placeString('10)', xx, y, s, F, acts);
     stepEnd();
     var ringB = { kind: 'stroke', pts: ringBox(q0, q1, y, F), color: BLUE };
     acts.push(ringB);
     pause(260);
-    xx = placeString('=25', xx, y, s, F, acts);
+    y += 1.7 * F;
+    xx = placeString('=25', padL + 30, y, s, F, acts);
     xx = placeString('-', xx, y, s, F, acts, BLUE);
     xx = placeString('10', xx, y, s, F, acts);
-    xx = placeString('=15', xx, y, s, F, acts);
+    placeString('=15', xx, y, s, F, acts);
     acts.push({ kind: 'fade', ref: ringB });
     stepEnd();
     y += 1.7 * F;
@@ -1894,8 +1909,10 @@
     var tubeL = 104, tubeR = 124, tubeC = (tubeL + tubeR) / 2;
     function lvl(d) { return 78 + (2 - d) * 15; }
 
-    /* ---- steg 1: rita termometern (grundscen i grafit) ---- */
-    var b1 = bubble(280, 110, 264, [
+    /* ---- steg 1: rita termometern (grundscen i grafit) ----
+     * Bubblan ligger under mobilzonen y<150 (se REGEL i filhuvudet) —
+     * arket är ännu tomt, så den kan lika gärna ligga lägre. */
+    var b1 = bubble(240, 180, 264, [
       [['Termometern visar −5 grader']],
       [['och temperaturen sjunker']],
       [['3 grader.']]

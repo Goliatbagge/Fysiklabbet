@@ -24,6 +24,11 @@ Om bråken har
 ::: exempel "Exempel 1 — Samma nämnare"
 **Beräkna<br>a) $\dfrac{1}{13} + \dfrac{2}{13}$&emsp;&emsp;b) $\dfrac{19}{6} - \dfrac{5}{6}$**
 
+::: handskrift
+typ: samnamnare
+:::
+
+::: textlosning
 **a)** Bråken har redan samma nämnare — addera täljarna och behåll nämnaren:
 
 $$
@@ -39,6 +44,7 @@ $$
 $$
 
 **Svar:** $\dfrac{7}{3}$
+:::
 :::
 
 ## Hitta en gemensam nämnare
@@ -56,6 +62,11 @@ nödvändigtvis den *minsta* gemensamma nämnaren.
 ::: exempel "Exempel 2 — Olika nämnare"
 **Beräkna<br>a) $\dfrac{3}{5} - \dfrac{7}{20}$&emsp;&emsp;b) $\dfrac{2}{5} + \dfrac{1}{3}$**
 
+::: handskrift
+typ: olikanamnare
+:::
+
+::: textlosning
 **a)** Vi kan förlänga bråket med den minsta nämnaren (5), så att nämnaren
 blir densamma som i bråket med den största nämnaren (20), genom att förlänga
 det med 4 (eftersom $5 \cdot 4 = 20$):
@@ -80,6 +91,7 @@ $$
 
 **Svar:** $\dfrac{11}{15}$
 :::
+:::
 
 ::: formel "Hitta minsta gemensamma nämnaren (MGN)"
 1. Skriv upp nämnarna i varsin kolumn och fyll kolumnerna med deras
@@ -95,6 +107,11 @@ en annan metod som vi kommer att gå igenom längre fram på nivån.
 **Bestäm den minsta gemensamma nämnaren till 10 och 6 och beräkna sedan
 $\dfrac{7}{10} - \dfrac{1}{6}$.**
 
+::: handskrift
+typ: mgn
+:::
+
+::: textlosning
 Vi skriver upp nämnarna i två kolumner och fyller på med deras multiplar:
 
 | Multiplar av 10 | Multiplar av 6 |
@@ -120,6 +137,7 @@ $$
 
 **Svar:** $\dfrac{8}{15}$
 :::
+:::
 
 ## Bråkform och blandad form
 
@@ -144,6 +162,11 @@ $= 3\frac{3}{4}$ (blandad form).
 ::: exempel "Exempel 4 — Skriv i bråkform"
 **Skriv i bråkform<br>a) $1\dfrac{4}{5}$&emsp;&emsp;b) $3\dfrac{1}{7}$**
 
+::: handskrift
+typ: brakform
+:::
+
+::: textlosning
 **a)** Ta talet framför bråket (1) och multiplicera med nämnaren (5).
 Addera talet i täljaren (4). Dela hela summan med nämnaren (5):
 
@@ -160,4 +183,5 @@ $$
 $$
 
 **Svar:** $\dfrac{22}{7}$
+:::
 :::

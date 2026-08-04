@@ -2275,6 +2275,1019 @@
     return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
   }
 
+  /* ================ MATTESCENER: Ma 1c 1.3–1.5 ================
+   * Pennlösningar till exempeluppgifterna i ma1c-1.3 (Addition och
+   * subtraktion av bråk), ma1c-1.4 (Multiplikation och division av bråk)
+   * och ma1c-1.5 (Tal i decimalform). Samma regler som mattescenerna
+   * ovan: räkningen skrivs om steg för steg i kollegieblock-stil, det man
+   * GÖR med uttrycket (förlänger, förkortar, inverterar) skrivs med
+   * blåpennan, division ritas ALLTID med vågrätt bråkstreck (aldrig
+   * snedstreck — se REGEL i filhuvudet) och svaret ramas in.
+   *
+   * De elva scenerna nedan delar sina byggstenar via mathTools(F) i
+   * stället för att upprepa samma sextio rader helper-kod elva gånger.
+   * Innehållet i verktygslådan är detsamma som scenerna ovan har var för
+   * sig — plus bigFrac() (bråk i bråk) och strike() (förkortning av en
+   * gemensam faktor i täljare och nämnare). */
+  function mathTools(F) {
+    var s = F / 100, acts = [], padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    /* Bubblan läggs UNDER senast skrivna rad. `dyn` = hur långt ned den
+     * radens bläck når, mätt i F: 0,28 för en vanlig rad, ~1,05 för en rad
+     * med bråk och ~1,4 för en inramad svarsrad med bråk. Molnbulorna
+     * sticker ut ~25 px ovanför rektangeln; de 33 px som läggs på täcker
+     * det (se REGEL: en bubbla får aldrig ligga över en skriven rad). */
+    function bubbleTop(prevBase, dyn) {
+      return prevBase + (dyn == null ? 0.28 : dyn) * F + 33;
+    }
+    /* skriv en sträng; sc skalar skriften (1 = huvudrad, 0,62 = etikett) */
+    function str(t, x, yb, col, sc) {
+      sc = sc == null ? 1 : sc;
+      return placeString(t, x, yb, s * sc, F * sc, acts, col || null);
+    }
+    function adv(t, sc) {
+      sc = sc == null ? 1 : sc;
+      return stringAdvance(t, s * sc, F * sc);
+    }
+    /* gångertecken mellan två bråk: '·' är ingen OPS-glyf och får därför
+     * ingen automatisk luft — utan den klistrar bråkstrecken ihop sig */
+    function mul(x, yb) { return str('·', x + 0.10 * F, yb) + 0.10 * F; }
+    function fracW(numS, denS) {
+      return Math.max(adv(numS), adv(denS)) + 0.3 * F;
+    }
+    /* bråk med rakt divisionsstreck; skrivordning täljare → streck →
+     * nämnare, precis som för hand. col färgar hela bråket. */
+    function fracH(numS, denS, x0, yb, col) {
+      var ybar = yb - 0.34 * F;
+      var nw = adv(numS), dw = adv(denS);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, col);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: col || null });
+      pause(130);
+      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, col);
+      return x0 + w + 1.5;
+    }
+    /* bråk där täljare/nämnare byggs av segment [text, färg] — så att
+     * "det man gör" (·4, /3 …) kan skrivas med blåpennan */
+    function segW(segs) {
+      var w = 0;
+      segs.forEach(function (sg) { w += adv(sg[0]); });
+      return w;
+    }
+    function fracSeg(numSegs, denSegs, x0, yb) {
+      var nw = segW(numSegs), dw = segW(denSegs);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var ybar = yb - 0.34 * F;
+      var x = x0 + (w - nw) / 2;
+      numSegs.forEach(function (sg) {
+        x = str(sg[0], x, ybar - 0.14 * F, sg[1] || null);
+      });
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      x = x0 + (w - dw) / 2;
+      denSegs.forEach(function (sg) {
+        x = str(sg[0], x, ybar + 1.04 * F, sg[1] || null);
+      });
+      return x0 + w + 1.5;
+    }
+    /* BRÅK I BRÅK — ett långt huvudstreck med ett litet bråk (eller ett
+     * ensamt tal) över och under. Delarna anges som ['3','4'] respektive
+     * '5'. Delarnas mittlinjer läggs 1,18·F från huvudstrecket, precis
+     * utanför det lilla bråkets egen halvhöjd (~1,05·F) — annars nuddar
+     * en nämnare huvudstrecket. Hela uttrycket når 2,57·F ovanför och
+     * 1,89·F nedanför raden, så ge en bigFrac-rad extra radavstånd. */
+    function bigFrac(num, den, x0, yb, opt) {
+      opt = opt || {};
+      function partW(p) { return Array.isArray(p) ? fracW(p[0], p[1]) : adv(p); }
+      var w = Math.max(partW(num), partW(den)) + 0.62 * F;
+      var ybar = yb - 0.34 * F;
+      function part(p, mid, col) {
+        var px = x0 + (w - partW(p)) / 2;
+        if (Array.isArray(p)) fracH(p[0], p[1], px, mid + 0.34 * F, col);
+        else str(p, px, mid + 0.45 * F, col);
+      }
+      part(num, ybar - 1.18 * F, opt.numCol);
+      pause(150);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(150);
+      part(den, ybar + 1.18 * F, opt.denCol);
+      return x0 + w + 1.5;
+    }
+    /* förkortning: ett snett blått streck genom en faktor som finns i
+     * både täljare och nämnare, som när man stryker för hand */
+    function strike(x0, x1, yb, down, up) {
+      line([x0 - 0.10 * F, yb + (down == null ? 0.30 : down) * F],
+           [x1 + 0.10 * F, yb - (up == null ? 0.72 : up) * F], BLUE);
+    }
+    /* blå inringning av ett textparti på en rad; returnerar strecket så
+     * att det kan fejdas ut med {kind:'fade', ref: …} */
+    function ring(x0, x1, yb, opt) {
+      var st = { kind: 'stroke', pts: ringBox(x0, x1, yb, F, opt), color: BLUE };
+      acts.push(st);
+      return st;
+    }
+    function fade(st) { acts.push({ kind: 'fade', ref: st }); }
+
+    return { acts: acts, s: s, padL: padL, pause: pause, line: line,
+             bubble: bubble, stepEnd: stepEnd, tanke: tanke,
+             underline: underline, bubbleTop: bubbleTop, str: str, adv: adv,
+             mul: mul, fracW: fracW, fracH: fracH, fracSeg: fracSeg,
+             bigFrac: bigFrac, strike: strike, ring: ring, fade: fade };
+  }
+
+  /* ---------------- scen: samma nämnare (ma1c-1.3 ex 1) ----------------
+   * a) 1/13 + 2/13 och b) 19/6 − 5/6. Nämnaren är redan gemensam, så
+   * täljarna räknas ihop och nämnaren står kvar; i b) förkortas svaret
+   * med 2 (divisionen skrivs med blåpennan i båda leden av bråkstrecket). */
+  function layoutSamnamnare(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) 1/13 + 2/13 ---- */
+    var bA = T.bubble(120, 40, 262, [
+      [['a) Nämnarna är redan lika!']],
+      [['Då adderar jag täljarna och']],
+      [['behåller nämnaren.']]
+    ]);
+    T.tanke(bA);
+    y = 150;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('1', '13', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('2', '13', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('1+2', '13', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('3', '13', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('3', '13', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) 19/6 − 5/6 ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 266, [
+      [['b) Samma sak vid subtraktion:']],
+      [['täljarna dras ifrån varandra,']],
+      [['nämnaren står kvar.']]
+    ]);
+    T.tanke(bB);
+    y += 3.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('19', '6', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('5', '6', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('19-5', '6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('14', '6', xx, y);
+    T.stepEnd();
+
+    var bB2 = T.bubble(120, T.bubbleTop(y, 1.05), 258, [
+      [['14 och 6 är båda jämna, så']],
+      [['bråket går att förkorta med 2.']]
+    ]);
+    T.tanke(bB2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['14'], ['/2', BLUE]], [['6'], ['/2', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7', '3', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('7', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: olika nämnare (ma1c-1.3 ex 2) ----------------
+   * a) 3/5 − 7/20 med metod 1 (förläng det minsta bråket upp till den
+   * största nämnaren) och b) 2/5 + 1/3 med metod 2 (förläng varje bråk
+   * med det andra bråkets nämnare). Förlängningsfaktorerna skrivs med
+   * blåpennan. */
+  function layoutOlikanamnare(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) metod 1 ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Olika nämnare! 5 blir 20']],
+      [['om jag förlänger med 4,']],
+      [['eftersom 5·4=20.']]
+    ]);
+    T.tanke(bA);
+    y = 150;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('3', '5', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('7', '20', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracSeg([['3'], ['·4', BLUE]], [['5'], ['·4', BLUE]], xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('7', '20', xx, y);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('12', '20', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('7', '20', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('12-7', '20', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '20', xx, y);
+    T.stepEnd();
+
+    var bA2 = T.bubble(120, T.bubbleTop(y, 1.05), 262, [
+      [['5 går i både 5 och 20, så']],
+      [['jag förkortar med 5.']]
+    ]);
+    T.tanke(bA2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['5'], ['/5', BLUE]], [['20'], ['/5', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '4', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('1', '4', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) metod 2 ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 272, [
+      [['b) 3 kan inte multipliceras']],
+      [['med ett heltal och bli 5.']],
+      [['Då förlänger jag varje bråk']],
+      [['med det andra bråkets nämnare.']]
+    ]);
+    T.tanke(bB);
+    y += 4.1 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('2', '5', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '3', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracSeg([['2'], ['·3', BLUE]], [['5'], ['·3', BLUE]], xx, y);
+    xx = T.str('+', xx, y);
+    T.fracSeg([['1'], ['·5', BLUE]], [['3'], ['·5', BLUE]], xx, y);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('6', '15', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('5', '15', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('6+5', '15', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('11', '15', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('11', '15', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: minsta gemensamma nämnaren (ma1c-1.3 ex 3) ---
+   * Multiplerna till 10 och 6 skrivs upp i varsin kolumn, den första
+   * multipel som dyker upp i BÅDA ringas in med blåpennan (MGN = 30) och
+   * sedan räknas 7/10 − 1/6 ut med 30 som gemensam nämnare. Bubblan om
+   * kolumnerna läggs UNDER dem, aldrig intryckt bredvid (se REGEL). */
+  function layoutMgn(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var M10 = ['10', '20', '30', '40', '50', '60', '70', '80'];
+    var M6 = ['6', '12', '18', '24', '30', '36', '42', '48'];
+
+    /* ---- steg 1: två kolumner med multiplar ---- */
+    var b1 = T.bubble(120, 40, 274, [
+      [['Jag skriver upp multiplarna']],
+      [['till 10 och till 6 i varsin']],
+      [['kolumn och letar efter den']],
+      [['första som finns i båda.']]
+    ]);
+    T.tanke(b1);
+    var cy0 = 200, rowH = 31, c1 = 80, c2 = 380;
+    T.str('Multiplar av 10', c1, cy0 - 36, null, 0.62);
+    T.pause(160);
+    T.str('Multiplar av 6', c2, cy0 - 36, null, 0.62);
+    T.pause(200);
+    var box10 = null, box6 = null;
+    M10.forEach(function (m, i) {
+      var x1 = T.str(m, c1, cy0 + i * rowH, null, 0.62);
+      if (m === '30') box10 = [c1, x1, cy0 + i * rowH];
+      T.pause(90);
+    });
+    T.stepEnd();
+    M6.forEach(function (m, i) {
+      var x1 = T.str(m, c2, cy0 + i * rowH, null, 0.62);
+      if (m === '30') box6 = [c2, x1, cy0 + i * rowH];
+      T.pause(90);
+    });
+    T.stepEnd();
+
+    /* ---- steg 2: ringa in 30 i båda kolumnerna ---- */
+    T.ring(box10[0], box10[1], box10[2],
+           { ry: 0.48 * F, cy: box10[2] - 0.27 * F });
+    T.pause(280);
+    T.ring(box6[0], box6[1], box6[2],
+           { ry: 0.48 * F, cy: box6[2] - 0.27 * F });
+    T.stepEnd();
+
+    y = cy0 + 7 * rowH;                    /* sista raden i kolumnerna */
+    var b2 = T.bubble(120, T.bubbleTop(y), 262, [
+      [['30 är den första multipeln']],
+      [['som finns i båda kolumnerna.']]
+    ]);
+    T.tanke(b2);
+    y += 2.6 * F;
+    T.str('MGN=30', padL, y);
+    T.stepEnd();
+
+    /* ---- steg 3: förläng båda bråken till nämnaren 30 ---- */
+    var b3 = T.bubble(120, T.bubbleTop(y), 274, [
+      [['10·3=30 och 6·5=30, så jag']],
+      [['förlänger med 3 respektive 5.']]
+    ]);
+    T.tanke(b3);
+    y += 3.4 * F;
+    xx = T.fracH('7', '10', padL, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('1', '6', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracSeg([['7'], ['·3', BLUE]], [['10'], ['·3', BLUE]], xx, y);
+    xx = T.str('-', xx, y);
+    T.fracSeg([['1'], ['·5', BLUE]], [['6'], ['·5', BLUE]], xx, y);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('21', '30', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('5', '30', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('21-5', '30', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('16', '30', xx, y);
+    T.stepEnd();
+
+    var b4 = T.bubble(120, T.bubbleTop(y, 1.05), 254, [
+      [['16 och 30 är jämna —']],
+      [['förkorta med 2!']]
+    ]);
+    T.tanke(b4);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['16'], ['/2', BLUE]], [['30'], ['/2', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('8', '15', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('8', '15', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: blandad form → bråkform (ma1c-1.3 ex 4) ------
+   * a) 1 4/5 och b) 3 1/7. Talet framför bråket multipliceras med
+   * nämnaren och täljaren adderas — den uträkningen är det man GÖR med
+   * talet, så täljaren skrivs med blåpennan. */
+  function layoutBrakform(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) 1 4/5 ---- */
+    var bA = T.bubble(120, 40, 276, [
+      [['a) Talet framför bråket (1)']],
+      [['gånger nämnaren (5), plus']],
+      [['täljaren (4). Allt delat']],
+      [['med nämnaren.']]
+    ]);
+    T.tanke(bA);
+    y = 175;
+    xx = T.str('a) 1', padL, y);
+    xx = T.fracH('4', '5', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracSeg([['1·5+4', BLUE]], [['5']], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('9', '5', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('9', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) 3 1/7 ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 264, [
+      [['b) Precis som i a-uppgiften:']],
+      [['3·7 och sedan plus 1.']]
+    ]);
+    T.tanke(bB);
+    y += 3.8 * F;
+    xx = T.str('b) 3', padL, y);
+    xx = T.fracH('1', '7', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracSeg([['3·7+1', BLUE]], [['7']], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('22', '7', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('22', '7', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 520, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: multiplikation av bråk (ma1c-1.4 ex 1) -------
+   * a) 8/3 · 7/2 (täljare gånger täljare, nämnare gånger nämnare, svaret
+   * förkortas med 2) och b) 3 · 4/5 (heltalet gånger TÄLJAREN). */
+  function layoutBrakmult(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) 8/3 · 7/2 ---- */
+    var bA = T.bubble(120, 40, 272, [
+      [['a) Täljare gånger']],
+      [['täljare, nämnare gånger']],
+      [['nämnare.']]
+    ]);
+    T.tanke(bA);
+    y = 150;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('8', '3', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('7', '2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('8·7', '3·2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('56', '6', xx, y);
+    T.stepEnd();
+
+    var bA2 = T.bubble(120, T.bubbleTop(y, 1.05), 258, [
+      [['56 och 6 är jämna, så jag']],
+      [['förkortar svaret med 2.']]
+    ]);
+    T.tanke(bA2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['56'], ['/2', BLUE]], [['6'], ['/2', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('28', '3', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('28', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) 3 · 4/5 ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 274, [
+      [['b) Ett heltal gånger ett bråk:']],
+      [['heltalet multipliceras med']],
+      [['täljaren. Nämnaren står kvar.']]
+    ]);
+    T.tanke(bB);
+    y += 3.8 * F;
+    xx = T.str('b) 3', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('4', '5', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('3·4', '5', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('12', '5', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('12', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorisera först (ma1c-1.4 ex 2) ------------
+   * 7/36 · 6/21 ger stora tal i nämnaren. Täljare och nämnare
+   * faktoriseras (blåpennan skriver om nämnaren) och de faktorer som
+   * finns i BÅDA förkortas bort — stryks hela täljaren blir 1 kvar. */
+  function layoutFaktorisera(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- steg 1: multiplicera ihop täljare och nämnare ---- */
+    var b1 = T.bubble(120, 40, 276, [
+      [['Talen blir stora om jag']],
+      [['räknar ut nämnaren direkt.']],
+      [['Jag faktoriserar i stället!']]
+    ]);
+    T.tanke(b1);
+    y = 160;
+    xx = T.fracH('7', '36', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('6', '21', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7·6', '36·21', xx, y);
+    T.stepEnd();
+
+    /* ---- steg 2: faktorisera nämnaren ---- */
+    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['36=6·6 och 21=7·3. Nu syns']],
+      [['både 7 och 6 i nämnaren!']]
+    ]);
+    T.tanke(b2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    var nx0 = xx;
+    T.fracSeg([['7·6']], [['6·6·7·3', BLUE]], xx, y);
+    T.stepEnd();
+
+    /* ---- steg 3: förkorta bort 7 och 6 ----
+     * strykningarnas x-lägen räknas ur segmentbredderna på exakt samma
+     * sätt som fracSeg placerade tecknen */
+    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 278, [
+      [['7 och 6 finns i både täljare']],
+      [['och nämnare, så de förkortas']],
+      [['bort. I täljaren blir 1 kvar.']]
+    ]);
+    T.tanke(b3);
+    var wNum = T.adv('7·6'), wDen = T.adv('6·6·7·3');
+    var fw = Math.max(wNum, wDen) + 0.3 * F;
+    var ybar = y - 0.34 * F;
+    var xNum = nx0 + (fw - wNum) / 2, xDen = nx0 + (fw - wDen) / 2;
+    var yNum = ybar - 0.14 * F, yDen = ybar + 1.04 * F;
+    T.strike(xNum, xNum + wNum, yNum, 0.08, 0.86);        /* hela täljaren */
+    T.pause(260);
+    var d7 = xDen + T.adv('6·6·');                        /* 7:an i nämnaren */
+    T.strike(d7, d7 + T.adv('7'), yDen);
+    T.pause(220);
+    var d6 = xDen + T.adv('6·');                          /* andra 6:an */
+    T.strike(d6, d6 + T.adv('6'), yDen);
+    T.pause(260);
+    T.str('1', xNum + wNum / 2 - T.adv('1', 0.62) / 2, yNum - 0.9 * F,
+          BLUE, 0.62);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('1', '6·3', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '18', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('1', '18', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: division med bråk (ma1c-1.4 ex 3) ------------
+   * a) (3/4)/(2/5), b) (4/5)/(2/7), c) 5/(3/4) och d) (2/3)/12. Samma
+   * regel varje gång: byt division mot multiplikation och INVERTERA
+   * bråket i nämnaren — det inverterade bråket skrivs med blåpennan.
+   * Uppgiften skriver b)–d) med snett divisionstecken; på pappret ritas
+   * division alltid med vågrätt streck (se REGEL i filhuvudet), och
+   * bubblan i b) kopplar ihop de två skrivsätten. */
+  function layoutBrakdiv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) (3/4)/(2/5) ---- */
+    var bA = T.bubble(120, 40, 280, [
+      [['a) Division med bråk: byt']],
+      [['till multiplikation och vänd']],
+      [['upp och ned på bråket i']],
+      [['nämnaren.']]
+    ]);
+    T.tanke(bA);
+    y = 215;
+    xx = T.str('a) ', padL, y);
+    xx = T.bigFrac(['3', '4'], ['2', '5'], xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('3', '4', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('5', '2', xx, y, BLUE);
+    xx = T.str('=', xx, y);
+    T.fracH('15', '8', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('15', '8', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) (4/5)/(2/7) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 282, [
+      [['b) Snett divisionstecken']],
+      [['betyder samma sak. Jag ritar']],
+      [['det som ett stort bråkstreck.']]
+    ]);
+    T.tanke(bB);
+    y += 5.4 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.bigFrac(['4', '5'], ['2', '7'], xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('4', '5', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('7', '2', xx, y, BLUE);
+    xx = T.str('=', xx, y);
+    T.fracH('28', '10', xx, y);
+    T.stepEnd();
+
+    y += 3.8 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['28'], ['/2', BLUE]], [['10'], ['/2', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('14', '5', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('14', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) 5/(3/4) ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 1.4), 278, [
+      [['c) Ett heltal är också ett']],
+      [['bråk. Skriver jag 5 som en']],
+      [['femma delat med ett blir']],
+      [['regeln precis densamma.']]
+    ]);
+    T.tanke(bC);
+    y += 6.0 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.bigFrac('5', ['3', '4'], xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.bigFrac(['5', '1'], ['3', '4'], xx, y, { numCol: BLUE });
+    xx = T.str('=', xx, y);
+    xx = T.fracH('5', '1', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('4', '3', xx, y, BLUE);
+    xx = T.str('=', xx, y);
+    T.fracH('20', '3', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('20', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- d) (2/3)/12 ---- */
+    var bD = T.bubble(120, T.bubbleTop(y, 1.4), 276, [
+      [['d) Nu står heltalet i']],
+      [['nämnaren. Inverterat blir']],
+      [['12 till ett delat med 12.']]
+    ]);
+    T.tanke(bD);
+    y += 5.4 * F;
+    xx = T.str('d) ', padL, y);
+    xx = T.bigFrac(['2', '3'], '12', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2', '3', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('1', '12', xx, y, BLUE);
+    xx = T.str('=', xx, y);
+    T.fracH('2', '36', xx, y);
+    T.stepEnd();
+
+    y += 3.8 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['2'], ['/2', BLUE]], [['36'], ['/2', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '18', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('1', '18', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bråkdel av något (ma1c-1.4 ex 4) -------------
+   * "Hur mycket är 5/7 av 63 kr?" En bråkdel AV något är en
+   * multiplikation; 63 hamnar i täljaren och 7 förkortas bort. */
+  function layoutBrakdel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- steg 1: "av" betyder gånger ---- */
+    var b1 = T.bubble(120, 40, 268, [
+      [['En bråkdel AV något']],
+      [['betyder att jag ska']],
+      [['multiplicera med den.']]
+    ]);
+    T.tanke(b1);
+    y = 165;
+    xx = T.fracH('5', '7', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.str('63', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5·63', '7', xx, y);
+    T.stepEnd();
+
+    /* ---- steg 2: förkorta med 7 ---- */
+    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 264, [
+      [['63 är delbart med 7, så jag']],
+      [['förkortar bråket med 7.']]
+    ]);
+    T.tanke(b2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracSeg([['5·63'], ['/7', BLUE]], [['7'], ['/7', BLUE]], xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('5·9', '1', xx, y);
+    xx = T.str('=', xx, y);
+    T.str('45', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: 45 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 580, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: avrundning (ma1c-1.5 ex 1) -------------------
+   * 61,4738 avrundat till a) tiondelar, b) ental och c) tiotal.
+   * Avrundningssiffran ringas in med blåpennan och siffran EFTER den
+   * stryks under — det är den som avgör om avrundningssiffran höjs eller
+   * behålls. */
+  function layoutAvrundning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var TAL = '61,4738';
+
+    /* skriv "x) 61,4738" och returnera varje siffras x-gränser */
+    function talrad(prefix, yb) {
+      var x = T.str(prefix, padL, yb), pos = [];
+      for (var i = 0; i < TAL.length; i++) {
+        var x0 = x;
+        x = T.str(TAL[i], x, yb);
+        pos.push([x0, x]);
+      }
+      return pos;
+    }
+    /* Ringa avrundningssiffran (index i) och stryk under den siffra som
+     * avgör avrundningen (index j). Indexen anges var för sig eftersom
+     * decimaltecknet ligger emellan i b): entalssiffran är index 1 och
+     * nästa SIFFRA index 3, inte 2. Markeringarna står kvar — de är
+     * lösningens motivering, inte en övergående gest. */
+    function marker(pos, i, j, yb) {
+      T.ring(pos[i][0], pos[i][1], yb);
+      T.pause(260);
+      T.line([pos[j][0] + 2, yb + 0.30 * F],
+             [pos[j][1] - 2, yb + 0.30 * F], BLUE);
+    }
+
+    /* ---- a) tiondelar ---- */
+    var bA = T.bubble(120, 40, 274, [
+      [['a) Tiondelssiffran är 4.']],
+      [['Siffran efter är 7, och 5']],
+      [['eller mer betyder uppåt.']]
+    ]);
+    T.tanke(bA);
+    y = 150;
+    var posA = talrad('a) ', y);
+    T.stepEnd();
+    marker(posA, 3, 4, y);                  /* 4 är tiondelssiffran, sedan 7 */
+    T.stepEnd();
+    y += 2.0 * F;
+    T.str('≈61,5', padL + 30, y);
+    T.stepEnd();
+    y += 1.8 * F;
+    xe = T.str('Svar: 61,5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ental ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 280, [
+      [['b) Entalssiffran är 1.']],
+      [['Siffran efter är 4, alltså']],
+      [['mindre än 5 — ettan behålls.']]
+    ]);
+    T.tanke(bB);
+    y += 3.0 * F;
+    var posB = talrad('b) ', y);
+    T.stepEnd();
+    marker(posB, 1, 3, y);                  /* 1 är entalssiffran, sedan 4 */
+    T.stepEnd();
+    y += 2.0 * F;
+    T.str('≈61', padL + 30, y);
+    T.stepEnd();
+    var bB2 = T.bubble(120, T.bubbleTop(y), 288, [
+      [['Se upp! Jag avrundar alltid']],
+      [['från ursprungstalet. Två steg']],
+      [['via 61,5 hade gett 62, fel.']]
+    ]);
+    T.tanke(bB2);
+    y += 1.8 * F;
+    xe = T.str('Svar: 61', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) tiotal ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 276, [
+      [['c) Tiotalssiffran är 6.']],
+      [['Siffran efter är 1, så 6:an']],
+      [['behålls och entalet blir 0.']]
+    ]);
+    T.tanke(bC);
+    y += 3.0 * F;
+    var posC = talrad('c) ', y);
+    T.stepEnd();
+    marker(posC, 0, 1, y);                  /* 6 är tiotalssiffran, sedan 1 */
+    T.stepEnd();
+    y += 2.0 * F;
+    T.str('≈60', padL + 30, y);
+    T.stepEnd();
+    y += 1.8 * F;
+    xe = T.str('Svar: 60', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 520, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: värdesiffror (ma1c-1.5 ex 2) -----------------
+   * Bokens framsida 19,5 cm × 24 cm. Arean räknas ut exakt, faktorernas
+   * värdesiffror räknas (talen ringas in med blåpennan medan de räknas)
+   * och svaret avrundas till det minsta antalet — två värdesiffror. */
+  function layoutVardesiffror(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- steg 1: uppställning + uträkning ---- */
+    var b1 = T.bubble(120, 40, 272, [
+      [['Framsidan är en']],
+      [['rektangel, så arean']],
+      [['är bas gånger höjd.']]
+    ]);
+    T.tanke(b1);
+    y = 145;
+    T.str('Framsidans area', padL, y, null, 0.62);
+    y += 1.5 * F;
+    T.str('Area=bas·höjd', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xx = T.str('=', padL + 30, y);
+    var x19 = xx;
+    xx = T.str('19,5', xx, y);
+    var x19e = xx;
+    xx = T.mul(xx, y);
+    var x24 = xx;
+    xx = T.str('24', xx, y);
+    var x24e = xx;
+    T.str('=468 cm^2', xx, y);
+    T.stepEnd();
+
+    /* ---- steg 2: räkna värdesiffrorna i faktorerna ---- */
+    var b2 = T.bubble(120, T.bubbleTop(y), 286, [
+      [['Multiplikation! Då styr talet']],
+      [['med färre värdesiffror hur']],
+      [['svaret ska avrundas.']]
+    ]);
+    T.tanke(b2);
+    var r1 = T.ring(x19, x19e, y);
+    T.pause(280);
+    var r2 = T.ring(x24, x24e, y);
+    T.pause(280);
+    y += 1.9 * F;
+    T.str('19,5 har 3 värdesiffror', padL + 30, y, null, 0.62);
+    T.pause(200);
+    y += 1.1 * F;
+    T.str('24 har 2 värdesiffror', padL + 30, y, null, 0.62);
+    T.fade(r1);
+    T.fade(r2);
+    T.stepEnd();
+
+    /* ---- steg 3: avrunda till två värdesiffror ---- */
+    var b3 = T.bubble(120, T.bubbleTop(y), 280, [
+      [['Minst är två värdesiffror,']],
+      [['så 468 avrundas till 470.']]
+    ]);
+    T.tanke(b3);
+    y += 2.4 * F;
+    T.str('≈470 cm^2', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 470 cm^2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: decimaler vid subtraktion (ma1c-1.5 ex 3) ----
+   * Brädan 1,73 m minus 1,3 m. Vid addition och subtraktion är det
+   * antalet DECIMALER som styr avrundningen, inte värdesiffrorna. */
+  function layoutDecimaler(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- steg 1: räkna ut vad som blir kvar ---- */
+    var b1 = T.bubble(120, 40, 276, [
+      [['Brädbiten som blir kvar']],
+      [['är brädan minus det']],
+      [['jag sågar av.']]
+    ]);
+    T.tanke(b1);
+    y = 145;
+    T.str('Brädbitens längd', padL, y, null, 0.62);
+    y += 1.5 * F;
+    var x173 = padL;
+    xx = T.str('1,73', padL, y);
+    var x173e = xx;
+    xx = T.str(' m', xx, y);
+    xx = T.str('-', xx, y);
+    var x13 = xx;
+    xx = T.str('1,3', xx, y);
+    var x13e = xx;
+    xx = T.str(' m', xx, y);
+    T.str('=0,43 m', xx, y);
+    T.stepEnd();
+
+    /* ---- steg 2: räkna decimalerna i talen ---- */
+    var b2 = T.bubble(120, T.bubbleTop(y), 288, [
+      [['Subtraktion! Då styr talet']],
+      [['med minst antal decimaler.']]
+    ]);
+    T.tanke(b2);
+    var r1 = T.ring(x173, x173e, y);
+    T.pause(280);
+    var r2 = T.ring(x13, x13e, y);
+    T.pause(280);
+    y += 1.9 * F;
+    T.str('1,73 har 2 decimaler', padL + 30, y, null, 0.62);
+    T.pause(200);
+    y += 1.1 * F;
+    T.str('1,3 har 1 decimal', padL + 30, y, null, 0.62);
+    T.fade(r1);
+    T.fade(r2);
+    T.stepEnd();
+
+    /* ---- steg 3: avrunda till en decimal ---- */
+    var b3 = T.bubble(120, T.bubbleTop(y), 276, [
+      [['Minst är en decimal, så']],
+      [['0,43 avrundas till 0,4.']]
+    ]);
+    T.tanke(b3);
+    y += 2.4 * F;
+    T.str('≈0,4 m', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 0,4 m', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 520, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
    * Exempel 3 ur Fysik nivå 2, 1.1 Kraftmoment (momentjämvikt): pappa
    * 80 kg och barn 30 kg på en gungbräda. Handmetoden: rita först det
@@ -7849,6 +8862,13 @@
                    negadd: layoutNegadd, negmult: layoutNegmult,
                    termometer: layoutTermometer, forkorta: layoutForkorta,
                    forlanga: layoutForlanga, jamfora: layoutJamfora,
+                   samnamnare: layoutSamnamnare,
+                   olikanamnare: layoutOlikanamnare, mgn: layoutMgn,
+                   brakform: layoutBrakform, brakmult: layoutBrakmult,
+                   faktorisera: layoutFaktorisera, brakdiv: layoutBrakdiv,
+                   brakdel: layoutBrakdel, avrundning: layoutAvrundning,
+                   vardesiffror: layoutVardesiffror,
+                   decimaler: layoutDecimaler,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,

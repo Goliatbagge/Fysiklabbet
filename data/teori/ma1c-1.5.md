@@ -40,6 +40,11 @@ kallas **avrundningssiffra**.
 ::: exempel "Exempel 1 — Avrundning"
 **Avrunda 61,4738 till<br>a) tiondelar&emsp;&emsp;b) ental&emsp;&emsp;c) tiotal**
 
+::: handskrift
+typ: avrundning
+:::
+
+::: textlosning
 **a)** Siffran 4 är tiondelssiffran. Siffran *efter* fyran är 7, så fyran
 ökas med 1 (och blir 5).
 
@@ -55,6 +60,7 @@ a-uppgiften, eftersom det då hade blivit 62.)
 behålls (och sedan fyller vi på med nollor).
 
 **Svar:** 60
+:::
 :::
 
 ## Värdesiffror
@@ -97,6 +103,11 @@ Vid
 ::: exempel "Exempel 2 — Värdesiffror vid multiplikation"
 **Framsidan av en bok är 19,5 cm × 24 cm. Bestäm framsidans area.**
 
+::: handskrift
+typ: vardesiffror
+:::
+
+::: textlosning
 $$
 \text{area} = \text{bas} \cdot \text{höjd} = 19{,}5 \cdot 24 = 468\ \mathrm{cm^2}
 $$
@@ -111,11 +122,17 @@ $$
 
 **Svar:** $470\ \mathrm{cm^2}$
 :::
+:::
 
 ::: exempel "Exempel 3 — Decimaler vid subtraktion"
 **Du har en bräda som är 1,73 meter och sågar av 1,3 meter. Hur lång är
 brädbiten som är kvar?**
 
+::: handskrift
+typ: decimaler
+:::
+
+::: textlosning
 $$
 \text{brädbitens längd} = 1{,}73\ \mathrm{m} - 1{,}3\ \mathrm{m} = 0{,}43\ \mathrm{m}
 $$
@@ -125,4 +142,5 @@ Vi har räknat subtraktion, så vi tittar på antalet decimaler. 1,73 har
 antalet decimaler, dvs. till en decimal.
 
 **Svar:** 0,4 m
+:::
 :::

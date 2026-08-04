@@ -19,6 +19,11 @@ Vid multiplikation av
 ::: exempel "Exempel 1 — Multiplikation"
 **Beräkna<br>a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$&emsp;&emsp;b) $3 \cdot \dfrac{4}{5}$**
 
+::: handskrift
+typ: brakmult
+:::
+
+::: textlosning
 **a)** Täljare gånger täljare och nämnare gånger nämnare — förkorta gärna
 svaret:
 
@@ -37,6 +42,7 @@ $$
 
 **Svar:** $\dfrac{12}{5}$
 :::
+:::
 
 ::: formel "Multiplikation av bråk med stora tal"
 Vid vissa uträkningar blir talen i täljaren och/eller nämnaren stora, och då
@@ -49,6 +55,11 @@ multiplikationen.
 **Beräkna $\dfrac{7}{36} \cdot \dfrac{6}{21}$ genom att faktorisera
 täljarna och nämnarna och därefter förenkla.**
 
+::: handskrift
+typ: faktorisera
+:::
+
+::: textlosning
 $$
 \frac{7}{36} \cdot \frac{6}{21} = \frac{7 \cdot 6}{36 \cdot 21}
 = \frac{7 \cdot 6}{6 \cdot 6 \cdot 7 \cdot 3}
@@ -63,6 +74,7 @@ $$
 $$
 
 **Svar:** $\dfrac{1}{18}$
+:::
 :::
 
 ## Division med bråk
@@ -101,6 +113,11 @@ vsv. (vilket skulle visas).
 ::: exempel "Exempel 3 — Division"
 **Beräkna<br>a) $\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$&emsp;&emsp;b) $\dfrac{4}{5} \Big/ \dfrac{2}{7}$&emsp;&emsp;c) $5 \Big/ \dfrac{3}{4}$&emsp;&emsp;d) $\dfrac{2}{3} \Big/ 12$**
 
+::: handskrift
+typ: brakdiv
+:::
+
+::: textlosning
 **a)** Byt division mot multiplikation och invertera bråket i nämnaren:
 
 $$
@@ -138,6 +155,7 @@ $$
 
 **Svar:** $\dfrac{1}{18}$
 :::
+:::
 
 ## Bråkdel av något
 
@@ -149,6 +167,11 @@ bråkdelen.
 ::: exempel "Exempel 4 — Bråkdel av ett belopp"
 **Hur mycket är $\dfrac{5}{7}$ av 63 kr?**
 
+::: handskrift
+typ: brakdel
+:::
+
+::: textlosning
 $$
 \frac{5}{7} \cdot 63 = \frac{5 \cdot 63}{7}
 $$
@@ -160,4 +183,5 @@ $$
 $$
 
 **Svar:** 45 kr
+:::
 :::

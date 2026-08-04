@@ -128,7 +128,7 @@
            att dra i sidled; klasserna fade-l/fade-r sätts av React vid scroll. */
         .news-cats-wrap { position: relative; }
         .news-cats {
-            display: flex; flex-wrap: nowrap; gap: 6px; align-items: center;
+            display: flex; flex-wrap: nowrap; gap: 5px; align-items: center;
             overflow-x: auto; -webkit-overflow-scrolling: touch;
             scrollbar-width: none; padding: 2px;
         }
@@ -145,7 +145,7 @@
            touchskärm sveper man i stället och pilarna göms. */
         .news-cats-nav {
             position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
-            width: 26px; height: 26px; border-radius: 50%; padding: 0;
+            width: 22px; height: 22px; border-radius: 50%; padding: 0;
             display: flex; align-items: center; justify-content: center;
             background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
             color: var(--lab-ink-soft); cursor: pointer;
@@ -157,16 +157,16 @@
         @media (pointer: coarse) { .news-cats-nav { display: none; } }
         .news-cat-chip {
             flex: 0 0 auto; white-space: nowrap;
-            font-family: var(--lab-font-mono); font-size: 10.5px; letter-spacing: 0.05em;
+            font-family: var(--lab-font-mono); font-size: 9px; letter-spacing: 0.04em;
             text-transform: uppercase; line-height: 1;
             color: var(--lab-ink-soft); background: var(--lab-bg-raised);
             border: 1px solid var(--lab-line-strong); border-radius: 999px;
-            padding: 5px 10px; cursor: pointer;
+            padding: 3.5px 8px; cursor: pointer;
         }
         .news-cat-chip:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
         .news-cat-chip.is-on { background: var(--lab-ink); color: var(--lab-bg); border-color: var(--lab-ink); }
         .news-cat-chip.is-on:hover { color: var(--lab-bg); }
-        .news-cat-chip .chip-n { opacity: 0.55; margin-left: 4px; }
+        .news-cat-chip .chip-n { opacity: 0.5; margin-left: 3px; }
         .news-clear {
             font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.05em;
             text-transform: uppercase; color: var(--lab-accent);

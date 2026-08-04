@@ -82,7 +82,9 @@ matnyttigt att man tar med sig något in i klassrummet.
    (datumet = tänkt utskicksdag). Öppna det i en skärmdump (headless Chrome
    mot dev-servern) och granska estetiken i ~600 px bredd: luft mellan
    sektionerna, bilderna skarpa och rätt beskurna, inget som ser klämt eller
-   plottrigt ut.
+   plottrigt ut. **Skicka sedan den renderade förhandsvisningen (JPEG, hela
+   brevet, tom yta bortbeskuren) till användaren med SendUserFile** — det är
+   så användaren granskar brevet i mobilen och godkänner det före utskick.
 
 8. **Uppdatera loggen**: lägg överst i `.claude/nyhetsbrev/logg.md` en post
    med datum, ämnesrad, vilka nyheter/uppdateringar som togs med, vilka

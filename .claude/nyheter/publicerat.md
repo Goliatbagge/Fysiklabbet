@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-05 | `2026-08-05-rubin-mork-materia` | Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen | Vera C. Rubin Observatory (pressmeddelanden om LSST-starten 2026-06-30 och COSMOS/EDP2 2026-07-31) / NSF NOIRLab (noirlab2618) / SLAC / Phys.org / The Astrophysical Journal 873:111 (Ž. Ivezić m.fl., 2019, DOI 10.3847/1538-4357/ab042c) |
 | 2026-08-04 | `2026-08-04-fusion-i-metall` | Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp | Physics World / Phys.org / Lawrence Berkeley National Laboratory (pressmeddelande) / Nature Communications (M. E. Karahadian, M. Colborne, A. Persaud, T. Schenkel, J. N. Munday, 2026, DOI 10.1038/s41467-026-74421-1) |
 | 2026-08-03 | `2026-08-03-bromsade-atomkarnor` | Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående | Phys.org / TU Darmstadt (pressmeddelande) / GSI Helmholtzzentrum für Schwerionenforschung / Physical Review X 16, 031022 (S. Rausch m.fl., 2026, DOI 10.1103/961c-j3p5) |
 | 2026-08-02 | `2026-08-02-viskositetens-ovre-grans` | Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går | Physics World / Phys.org / Ritsumeikan University (pressmeddelande) / Physics of Fluids (M. Yoshida, 2026, DOI 10.1063/5.0335802) |
@@ -61,6 +62,23 @@ gånger** — kontrollera den här listan först. Nyast överst.
 | 2026-06-13 | `2026-06-13-wasp-121b` | En planet med två helt olika skymningar | ScienceDaily (James Webb) |
 | 2026-06-12 | `2026-06-12-jordens-hav` | Var kom jordens hav ifrån? Kanske gjorde jorden dem själv | Quanta Magazine |
 | 2026-06-11 | `2026-06-11-konstgjord-fotosyntes` | Ett konstgjort blad som sköter sig självt | ScienceDaily / SciTechDaily / EES Solar |
+
+> Not 2026-08-05 (Rubin-observatoriet): skriven i förväg 2026-08-04 på användarens
+> begäran, med utgångspunkt i en svensk nyhetsnotis om SVT Vetenskaps reportage
+> från Cerro Pachón. Artikeln bygger uteslutande på primärkällorna: Rubin/NOIRLab/
+> SLAC-pressmeddelandena om LSST-starten (natten till 2026-06-30, citat av Brian
+> Stone, NSF, och Željko Ivezić, University of Washington) och om COSMOS-bilden +
+> Early Data Preview 2 (2026-07-31), samt Ivezić m.fl. 2019 (ApJ 873:111) för
+> genomgångens design. Ingen hänvisning till nyhetsaggregatorn.
+> OBS miljömässig begränsning i den här sessionen: WebFetch och all utgående HTTPS
+> utom sök var blockerad (403 från egress-policyn), så pressbilder gick inte att
+> ladda ner och Gemini-nyckel saknades. Bilderna är därför två egna SVG-figurer
+> renderade med headless Chromium: hero = schematisk svag gravitationslinsning,
+> body = rotationskurva (uppmätt platt mot förväntad keplersk). Byt gärna hero mot
+> NOIRLab:s COSMOS-bild (CC BY 4.0, noirlab2618) när nätet tillåter.
+> Uppgiften "3 000 kvadratgrader" som cirkulerar i sekundärkällor om EDP2 utelämnades
+> medvetet — den går inte ihop med COSMOS-fältets storlek och kunde inte styrkas.
+> Två nya begrepp: gravitationslinsning, rotationskurva.
 
 > Not: nyheterna 2026-06-11 – 2026-06-17 lades till retroaktivt 2026-06-18 för att
 > fylla på arkivet vid lanseringen (på användarens begäran).

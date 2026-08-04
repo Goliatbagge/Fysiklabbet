@@ -52,12 +52,18 @@ naturliga tal.
 ::: exempel "Exempel 1 — Rationellt tal som inte är heltal"
 **Ange ett rationellt tal som inte är ett heltal.**
 
+::: handskrift
+typ: talmangd
+:::
+
+::: textlosning
 Ett rationellt tal är ett tal som kan skrivas som ett bråk $\frac{a}{b}$ där
 $a$ och $b$ är heltal och $b \neq 0$. Väljer vi t.ex. $\frac{1}{3}$ får vi
 ett tal som ligger mellan heltalen 0 och 1 — det är alltså rationellt men
 inte ett heltal.
 
 **Svar:** T.ex. $\frac{1}{3}$
+:::
 :::
 
 ## Negativa tal
@@ -86,6 +92,11 @@ En kom ihåg-regel är att olikhetstecknet "gapar" åt det större värdet.
 **Sätt ut korrekt olikhetstecken, < eller >, mellan talen.<br>
 a) 23&emsp;19&emsp;&emsp;&emsp;b) −20&emsp;−3**
 
+::: handskrift
+typ: olikhet
+:::
+
+::: textlosning
 **a)** Talet längst till höger på tallinjen är det största talet.
 
 **Svar:** $23 > 19$
@@ -94,6 +105,7 @@ a) 23&emsp;19&emsp;&emsp;&emsp;b) −20&emsp;−3**
 det — och −20 ligger till vänster om −3.
 
 **Svar:** $(-20) < (-3)$
+:::
 :::
 
 ## Räkneregler för negativa tal
@@ -115,6 +127,11 @@ Minnesregel: "minus minus ger plus" och "plus minus ger minus".
 ::: exempel "Exempel 3 — Addition och subtraktion"
 **Beräkna<br>a) $4 - (-9)$&emsp;&emsp;b) $25 + (-10)$**
 
+::: handskrift
+typ: negadd
+:::
+
+::: textlosning
 **a)** Två minustecken ihop ersätts med ett plustecken:
 
 $$
@@ -130,6 +147,7 @@ $$
 $$
 
 **Svar:** 15
+:::
 :::
 
 ::: formel "Multiplikation och division"
@@ -155,6 +173,11 @@ Minnesregel: "minus gånger minus ger plus" och "plus gånger minus ger minus".
 ::: exempel "Exempel 4 — Multiplikation och division"
 **Beräkna<br>a) $4 \cdot (-3)$&emsp;&emsp;b) $(-5) \cdot (-9)$&emsp;&emsp;c) $\dfrac{35}{(-7)}$&emsp;&emsp;d) $\dfrac{(-42)}{(-7)}$**
 
+::: handskrift
+typ: negmult
+:::
+
+::: textlosning
 **a)** Olika tecken ger minus: $4 \cdot (-3) = -12$
 
 **Svar:** −12
@@ -171,10 +194,16 @@ Minnesregel: "minus gånger minus ger plus" och "plus gånger minus ger minus".
 
 **Svar:** 6
 :::
+:::
 
 ::: exempel "Exempel 5 — Se upp med subtraktionen"
 **Beräkna $(-5) - 3$**
 
+::: handskrift
+typ: termometer
+:::
+
+::: textlosning
 $$
 (-5) - 3 = -8
 $$
@@ -184,4 +213,5 @@ $$
 **OBS!** Svaret blir inte 8. Det är inte två minustecken *ihop* och inte
 heller minus *gånger* minus. Tänk termometern: −5 grader, och så sjunker
 temperaturen 3 grader. Då blir det −8 grader.
+:::
 :::

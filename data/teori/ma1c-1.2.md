@@ -50,6 +50,11 @@ storleken på bråket. När vi
 ::: exempel "Exempel 1 — Förkorta ett bråk"
 **Förkorta $\dfrac{6}{15}$ med 3.**
 
+::: handskrift
+typ: forkorta
+:::
+
+::: textlosning
 Vi dividerar täljare och nämnare med 3:
 
 $$
@@ -58,10 +63,16 @@ $$
 
 **Svar:** $\dfrac{2}{5}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Förläng ett bråk"
 **Förläng $\dfrac{2}{3}$ så att nämnaren blir 12.**
 
+::: handskrift
+typ: forlanga
+:::
+
+::: textlosning
 Tänk: "Vad ska jag multiplicera nämnaren 3 med för att den ska bli 12? Jo,
 med 4. Alltså ska jag multiplicera täljare och nämnare med 4!"
 
@@ -70,6 +81,7 @@ $$
 $$
 
 **Svar:** $\dfrac{8}{12}$
+:::
 :::
 
 ::: härledning "OBS — Stryka likadana tal"
@@ -95,6 +107,11 @@ nämnare**. Vi inser t.ex. lätt att $\frac{5}{7}$ är större än $\frac{4}{7}$
 ::: exempel "Exempel 3 — Vilket bråk är störst?"
 **Vilket bråk är störst: $\dfrac{4}{9}$ eller $\dfrac{3}{7}$?**
 
+::: handskrift
+typ: jamfora
+:::
+
+::: textlosning
 Vi gör om bråken till samma nämnare! Det går t.ex. genom att förlänga varje
 bråk med det tal som står i nämnaren *i det andra bråket*.
 
@@ -112,4 +129,5 @@ Vi ser nu enkelt att $\frac{28}{63}$ är större än $\frac{27}{63}$, och
 därför måste $\frac{4}{9}$ vara störst.
 
 **Svar:** $\dfrac{4}{9}$
+:::
 :::

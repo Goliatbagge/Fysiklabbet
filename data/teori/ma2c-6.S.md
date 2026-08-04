@@ -103,7 +103,7 @@ där
 - $\bar{x}$ = medelvärdet
 - $n$ = antalet värden
 
-I den här kursen beräknas standardavvikelsen med ett digitalt verktyg, inte
+På den här nivån beräknas standardavvikelsen med ett digitalt verktyg, inte
 för hand.
 
 **Regressionsmodeller**

@@ -10,8 +10,8 @@ section: '3.4'
 # Andragradsekvationer och olikheter med grafritande hjälpmedel
 
 Vi ska nu titta på hur man löser andragradsekvationer och olikheter
-grafiskt med hjälp av grafritande hjälpmedel, t.ex. Geogebra. Vi har i
-en tidigare kurs löst linjära ekvationer med grafritande hjälpmedel och
+grafiskt med hjälp av grafritande hjälpmedel, t.ex. Geogebra. Vi har på
+en tidigare nivå löst linjära ekvationer med grafritande hjälpmedel och
 metoden är precis densamma för andragradsekvationer. Skillnaden är att
 vi nu kan få två lösningar.
 

@@ -11,7 +11,7 @@ section: '4.3'
 
 Vi har tidigare sett hur en linjär modell kan beskrivas med en
 formel/ekvation, värdetabell respektive graf. När vi ritar grafer längre
-fram i kursen kommer vi att göra det med digitala hjälpmedel, t.ex.
+fram på nivån kommer vi att göra det med digitala hjälpmedel, t.ex.
 GeoGebra. För att förstå vad de digitala hjälpmedlen egentligen gör, så
 ska vi nu själva rita grafer för hand.
 

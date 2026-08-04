@@ -51,7 +51,7 @@ $v_2 = 300^\circ$.
 Observera att vi i intervallet $0^\circ \leq v \leq 360^\circ$ oftast får
 **två lösningar**. Egentligen finns det oändligt många lösningar, eftersom
 vi kan lägga till hur många multipler av $360^\circ$ som helst till varje
-lösning. I den här kursen håller vi oss vanligtvis till lösningar i
+lösning. På den här nivån håller vi oss vanligtvis till lösningar i
 intervallet $0^\circ \leq v \leq 360^\circ$.
 
 Eftersom enhetscirkelns radie är 1 kan varken $\sin v$ eller $\cos v$ anta

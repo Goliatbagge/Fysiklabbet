@@ -17,9 +17,9 @@ window.NP_PROV['fy2-vt2016'] = {
     id: 'fy2-vt2016',
     kurs: 'Fysik nivå 2',
     termin: 'VT 2016',
-    namn: 'Kursprov Fysik 2, våren 2016',
-    kort: 'Kursprov Fy 2 VT2016',
-    intro: 'Det här är kursprovet i Fysik 2 från våren 2016 (Skolverket/Umeå universitet). ' +
+    namn: 'Nationellt prov Fysik 2, våren 2016',
+    kort: 'NP Fy 2 VT2016',
+    intro: 'Det här är det nationella provet i Fysik 2 från våren 2016 (Skolverket/Umeå universitet). ' +
         'Här finns delprov A (teoriuppgifter) — delprov B är en laborativ uppgift och ingår ' +
         'inte i det frisläppta materialet. Välj en uppgift, lös den själv, och klicka sedan ' +
         'fram lösningen ett steg i taget. Varje steg förklarar både vad som görs och varför, ' +

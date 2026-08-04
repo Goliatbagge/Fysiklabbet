@@ -66,26 +66,37 @@ matnyttigt att man tar med sig något in i klassrummet.
      brev — säg det till användaren och föreslå att hoppa över veckan, i
      stället för att skriva ett tomt brev.
 
-4. **Skriv brevet** (se "Brevets delar" och "E-post-HTML" nedan).
+4. **Bildsätt brevet** (se "Design och bilder" nedan): välj veckans bästa
+   nyhetsbild som hjältebild, ta skärmdumpar av nya simuleringar, och lägg
+   allt som inte redan ligger på sajten i `nyheter/brev/`.
 
-5. **Granska**: läs hela brevet högt för dig själv i huvudet. Stryk det som
+5. **Skriv brevet** (se "Brevets delar", "Design och bilder" och
+   "E-post-HTML" nedan).
+
+6. **Granska**: läs hela brevet högt för dig själv i huvudet. Stryk det som
    inte bär, dubbelkolla varje länk mot att filen/artikeln faktiskt finns
    (`?id=` mot `data/nyheter.js`, simuleringsfiler mot repo-roten), och
    kontrollera ton (värme utan trams), typografi och facktermer.
 
-6. **Spara utkastet** som `.claude/nyhetsbrev/utkast/ÅÅÅÅ-MM-DD.html`
+7. **Spara utkastet** som `.claude/nyhetsbrev/utkast/ÅÅÅÅ-MM-DD.html`
    (datumet = tänkt utskicksdag). Öppna det i en skärmdump (headless Chrome
-   mot dev-servern) och kontrollera att det renderar snyggt i ~600 px bredd.
+   mot dev-servern) och granska estetiken i ~600 px bredd: luft mellan
+   sektionerna, bilderna skarpa och rätt beskurna, inget som ser klämt eller
+   plottrigt ut.
 
-7. **Uppdatera loggen**: lägg överst i `.claude/nyhetsbrev/logg.md` en post
-   med datum, ämnesrad, vilka nyheter/uppdateringar som togs med och vilken
-   teaser som gavs. Bocka av genomförda punkter i `planerat.md`.
+8. **Uppdatera loggen**: lägg överst i `.claude/nyhetsbrev/logg.md` en post
+   med datum, ämnesrad, vilka nyheter/uppdateringar som togs med, vilka
+   bilder som användes och vilken teaser som gavs. Bocka av genomförda
+   punkter i `planerat.md`.
 
-8. **Lämna över till användaren.** Du skickar ALDRIG brevet själv. Utskicket
+9. **Lämna över till användaren.** Du skickar ALDRIG brevet själv. Utskicket
    görs manuellt i EmailOctopus (anmälningsrutan på `nyheter.html` är kopplad
    dit): användaren klistrar in HTML-utkastet, sätter ämnesrad + preheader och
-   schemalägger. Påminn om rekommenderad utskickstid (se nedan) och committa
-   utkast + logg om användaren ber om det, enligt projektets vanliga regler.
+   schemalägger. Påminn om rekommenderad utskickstid (se nedan), och om att
+   **nya bilder i `nyheter/brev/` måste vara pushade till `main` (= ligga på
+   sajten) innan brevet skickas** — annars visar mejlet trasiga bildrutor.
+   Committa utkast + logg om användaren ber om det, enligt projektets
+   vanliga regler.
 
 ## Brevets delar
 
@@ -110,6 +121,78 @@ matnyttigt att man tar med sig något in i klassrummet.
 Riktlängd: **250–450 ord** brödtext. Ett nyhetsbrev läses på mobilen på två
 minuter; det som inte får plats får glänsa på sajten i stället.
 
+## Design och bilder
+
+Brevet ska vara **estetiskt tilltalande** — samma sobra laborantestetik som
+sajten, översatt till e-post. Tänk "ett uppslag ur ett vackert
+labbanteckningsblock", inte "ett företagsutskick".
+
+### Formspråk (e-postversionen av sajtens tema)
+
+- **Sidhuvud**: papperstonad platta med ordmärket "Fysiklabbet" i serif
+  (Georgia), och ovanför det en liten **mono-etikett** i stil med sajtens
+  `lab-mono-label`: `NYHETSBREV — VECKA 32` (versaler, brevbredd,
+  `font-family: 'Courier New', monospace; font-size: 11px;
+  letter-spacing: 2px;` i dämpad bläckton). Ingen logotypbild behövs —
+  typografin ÄR identiteten.
+- **Sektionsrubriker** inleds med samma mono-etikett ("VECKANS FYSIK",
+  "NYTT PÅ FYSIKLABBET", "NÄSTA VECKA") följd av en tunn **hårlinje**
+  (`border-top: 1px solid rgba(15,22,32,0.18)`). Hårlinjer och luft
+  (24–32 px vertikal padding) är brevets främsta dekoration — inga skuggor,
+  inga färgplattor, inga ramar runt allt.
+- **Färger**: papper `#f7f2e8` som ytterbakgrund, något ljusare kort
+  `#fdfaf3` för innehållsspalten, bläck `#0f1620`, dämpat bläck
+  `rgba(15,22,32,0.62)` för bildtexter/meta, sajtens blå för länkar.
+  Max EN accentfärg per brev.
+- **Knapplänk**: huvuduppmaningen (t.ex. "Prova simuleringen") får gärna
+  vara en enkel e-postsäker knapp — `<a>` med `display: inline-block`,
+  bläckfärgad bakgrund, papperstonad text, `padding: 10px 22px;
+  border-radius: 6px`. Max en–två knappar per brev; övriga länkar är
+  vanliga textlänkar.
+
+### Bilder — brevets blickfång
+
+Riktvärde: **2–4 bilder** per brev. Varje bild ska förtjäna sin plats;
+hellre två starka än fem utfyllnadsbilder.
+
+1. **Hjältebild**: veckans bästa nyhetsbild (`nyheter/bilder/…` — den ligger
+   redan på sajten, länka absolut) direkt under anslaget eller överst i
+   nyhetssektionen, full brevbredd (600 px), `border-radius: 8px`.
+   **Bildkredit alltid** som liten dämpad rad under (`imageCredit` ur
+   `data/nyheter.js`), i mono-etikettens stil fast 10–11 px.
+2. **Simuleringsskärmdumpar**: nya simuleringar/minisimuleringar visas som
+   skärmdump — det är sajtens mest säljande innehåll. Ta dem via headless
+   Chrome mot dev-servern, **med simuleringen i ett intressant tillstånd**
+   (ställ reglagen så scenen berättar något: gnistorna mitt i flykten,
+   pendeln i utslag — inte startlägets tomma vila). Beskär till själva
+   scenen, ta i dubbel upplösning (t.ex. 1200 px bred, visas som 600) så
+   den är skarp på mobil. Gör hela skärmdumpen klickbar → simuleringen.
+3. **Miniatyrrad**: har veckan flera nyheter kan 2 st små miniatyrer
+   (~284 px breda i två kolumner, en enkel tvåkolumns-`<table>`) ge rytm åt
+   nyhetssektionen — varje miniatyr klickbar till sin artikel. Använd bara
+   när bilderna håller; annars textlänkar.
+4. **Egna idéer är välkomna** när de bär: en enkel figur/diagram i sajtens
+   figurstil för veckans "visste du?", ett GIF-liknande före/efter är dock
+   INTE möjligt (ingen JS, undvik tunga GIF:ar) — håll dig till stillbilder.
+
+**Teknik och regler:**
+
+- E-postklienter visar bara bilder från **publika absoluta URL:er**.
+  Nyhetsbilder finns redan på sajten. Nya bilder (skärmdumpar m.m.) sparas
+  som `nyheter/brev/ÅÅÅÅ-MM-DD-<namn>.jpg` i repot och länkas
+  `https://fysiklabbet.se/nyheter/brev/…` — och **måste vara pushade till
+  `main` innan utskicket**, annars är de trasiga i mejlet.
+- Varje `<img>`: fast `width`, `height: auto`, beskrivande `alt`,
+  `style="display: block; border-radius: 8px; max-width: 100%;"`.
+  Brevet ska vara fullt läsbart och snyggt även med bilder blockerade
+  (alt-texterna bär då innehållet).
+- JPEG ~80 % kvalitet, riktvärde < 150 kB per bild, < 500 kB för hela
+  brevet — tunga mejl klipps av Gmail.
+- Samma bildregler som sajten: inga vattenstämplar, ingen oklar licens,
+  ingen AI-bild när en riktig finns, alltid kredit på nyhetsbilder.
+- Aldrig två bilder i följd utan text emellan, och aldrig en bild som
+  sista element före avslutet.
+
 ## E-post-HTML (utkastets format)
 
 E-postklienter är inte webbläsare — utkastet måste vara gammaldags robust:
@@ -124,9 +207,8 @@ E-postklienter är inte webbläsare — utkastet måste vara gammaldags robust:
   `font-family: -apple-system, Helvetica, Arial, sans-serif` för brödtext
   (webfonts som Poppins kan inte förutsättas i e-post).
 - **Absoluta länkar** till `https://fysiklabbet.se/…` — aldrig relativa.
-- Bilder är valfria; används någon (t.ex. veckans nyhetsbild) ska den ligga
-  på sajten (absolut URL), ha `alt`-text och fast bredd. Brevet ska vara
-  fullt läsbart även med bilder blockerade.
+- Bilder enligt "Design och bilder" ovan — publika URL:er, fast bredd,
+  `alt`-text, kredit.
 - Semantiska rubriker (`<h1>`/`<h2>`) med inline-stil; `<h1>` = brevets rubrik.
 
 ## Rekommenderad utskickstid
@@ -147,5 +229,10 @@ fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
 - Teasa något som inte står i `planerat.md` eller `.claude/nyheter/ko.md`.
 - Vara tramsig, ironisk på läsarens bekostnad, eller skämta bort fysiken.
 - Ta med interna/tekniska ändringar som ingen besökare märker.
+- Länka bilder som inte ligger (eller kommer att ligga, före utskicket) på
+  `https://fysiklabbet.se` — lokala sökvägar och dev-server-URL:er blir
+  trasiga bildrutor hos mottagaren.
+- Använda bild utan kredit/klar licens, eller en skärmdump av en simulering
+  i ett ointressant startläge när ett talande tillstånd går att ställa in.
 - Bryta mot typografi-/emojireglerna i CLAUDE.md.
 - Återanvända förra veckans anslag, formuleringar eller skämt.

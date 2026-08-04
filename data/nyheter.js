@@ -51,6 +51,82 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-04-fusion-i-metall",
+    date: "2026-08-04",
+    title: "Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp",
+    deck: "Ju trögare två atomkärnor möts, desto snabbare rasar chansen att de smälter samman. Så beter sig fria kärnor — men i folier av palladium och titan planar kurvan ut i stället för att dö. Utbytet blir över en triljon gånger, en etta med arton nollor, större än teorin för nakna kärnor förutsäger.",
+    category: "Kärnfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-04-fusion-i-metall.jpg",
+    imageAlt: "En smal blåvit stråle av joner färdas genom mörkret och träffar en tunn metallfolie. Bakom folien syns metallens kristallgitter som stora silverfärgade kulor i ett regelbundet rutmönster, med små lysande cyanfärgade kärnor inpackade i mellanrummen. Vid en av gitterplatserna lyser en varm orange blixt.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kärnfysik", "fusion", "deuterium", "coulombkraft", "tunneleffekt", "materialfysik", "palladium", "neutroner", "energi", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Physics World", url: "https://physicsworld.com/a/nuclear-fusion-persists-at-ultralow-energies-inside-metal-foils/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-materials-fusion-reaction.html" },
+      { name: "Lawrence Berkeley National Laboratory (pressmeddelande)", url: "https://newscenter.lbl.gov/2026/07/23/when-it-comes-to-fusion-materials-matter/" }
+    ],
+    research: {
+      citation: "Micah E. Karahadian, Matthew Colborne, Arun Persaud, Thomas Schenkel och Jeremy N. Munday, ”Enhanced nuclear fusion in the sub-keV energy regime”, Nature Communications (2026)",
+      url: "https://doi.org/10.1038/s41467-026-74421-1"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 9.2 Massdefekt och bindningsenergi", href: "katalog.html#fy1-9.2" },
+        { label: "Fysik nivå 1 · 7.2 Krafter mellan laddningar och Coulombs lag", href: "katalog.html#fy1-7.2" },
+        { label: "Fysik nivå 1 · 9.1 Atomkärnan", href: "katalog.html#fy1-9.1" }
+      ],
+      fragor: [
+        "Ser man bara till den elektriska avstötningen är solens kärna alldeles för sval för att väte ska kunna fusionera. Ändå lyser solen. Vad säger det om skillnaden mellan att något är omöjligt och att det är osannolikt — och varför spelar osannolikheten så liten roll just i solen?",
+        "Forskarna mäter både en neutron och en proton, med två detektorer som arbetar oberoende av varandra, trots att en enda detektor räcker för att se att något har hänt. Varför är det värt besväret? Vad är det en ensam mätning inte skulle kunna utesluta?",
+        "Reaktionerna är en faktor tio upphöjt till arton vanligare än väntat, men forskarna säger själva att det inte duger till energiproduktion. Hur kan båda påståendena vara sanna samtidigt? Vad skiljer en relativ jämförelse från ett absolut värde?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Att slå ihop två atomkärnor är svårt av ett enda skäl: båda är positivt laddade och stöter bort varandra. Ju närmare de kommer, desto hårdare knuffar de ifrån sig — och den starka kärnkraft som ska hålla dem samman tar inte vid förrän på ett avstånd av storleksordningen en biljondels millimeter." },
+      { type: "p", html: "Därför krävs fart. I solens kärna, vid omkring 15&nbsp;miljoner grader, rör sig kärnorna så snabbt att de ibland lyckas, och i en framtida fusionsreaktor ska ett plasma bli ännu hetare. Sänker man i stället energin rasar fusionshastigheten: varje steg nedåt gör reaktionen inte lite ovanligare, utan många tiopotenser ovanligare." },
+      { type: "p", html: "Ett forskarlag vid University of California, Davis och Lawrence Berkeley National Laboratory rapporterar nu i tidskriften <em>Nature Communications</em> att den regeln inte gäller överallt. Inne i tunna folier av palladium och titan slutade fusionen falla. Under omkring 2,5&nbsp;keV planade utbytet ut och la sig på en nivå som teorin för fria kärnor säger borde vara i praktiken noll." },
+
+      { type: "h2", text: "Berget som två kärnor måste ta sig förbi" },
+      { type: "p", html: "Kärnorna i experimentet är deuteroner — kärnan i deuterium, den tyngre väteisotop som har en proton och en neutron. Två deuteroner bär varsin positiv elementarladdning, och den elektriska kraften mellan dem växer som 1/<em>r</em><sup>2</sup> när avståndet krymper. Energitröskeln de måste ta sig förbi kallas coulombbarriären, och för två deuteroner ligger den på storleksordningen hundratals keV." },
+      { type: "p", html: "Att kärnorna ändå smälter samman vid långt lägre energier beror på kvantmekaniken. En partikel har ingen skarpt bestämd plats, och det finns en liten men fullt verklig sannolikhet att den helt enkelt dyker upp på andra sidan barriären utan att någonsin ha haft energi nog att klättra över den. Fenomenet heter tunneleffekt, och det är därför solen lyser trots att dess kärna strikt taget är alldeles för sval för uppgiften." },
+      { type: "p", html: "Priset är att sannolikheten sjunker exponentiellt när energin minskar. Det är den branta kurvan som gör fusionskraft så svår att förverkliga — och det är den kurvan som nu visat sig ha ett golv." },
+
+      { type: "h2", text: "Elektrokemi på ena sidan, jonstråle på den andra" },
+      { type: "p", html: "Apparaten är en dubbelkammare med folien som vägg mellan två världar." },
+      { type: "quote", html: "”En sorts membranreaktor som kombinerar en elektrokemisk cell med en deuteriumjonstråle.”", cite: "Thomas Schenkel, Lawrence Berkeley National Laboratory, i Physics World" },
+      { type: "p", html: "På ena sidan står en elektrokemisk cell med tungt vatten, där deuterium pressas in i metallen ungefär som vid vanlig elektrolys. Palladium har den ovanliga egenskapen att kunna suga upp väte i mängder som vida överstiger vad metallens egen volym verkar rymma — atomerna sätter sig i hålrummen mellan metallatomerna utan att gittret faller isär. På andra sidan råder vakuum, och där skjuts en stråle av deuteriumjoner mot folien med noggrant inställd energi." },
+      { type: "p", html: "Varje jon som träffar möter alltså en metall som redan är full av deuterium. Smälter två kärnor samman blir resultatet ett av två, ungefär lika ofta: antingen helium-3 plus en neutron, eller tritium plus en proton. Både neutronen och protonen far i väg med flera MeV och fångas upp av var sin detektor — två oberoende sätt att bekräfta att en reaktion verkligen ägt rum." },
+
+      { type: "h2", text: "Kurvan som vägrade falla" },
+      { type: "p", html: "Genom att vrida ner jonstrålens energi steg för steg kunde laget följa fusionsutbytet ända in i det område där det borde ha försvunnit. Det gjorde det inte." },
+      { type: "quote", html: "”Utbytet planade ut när vi sänkte jonenergin ytterligare.”", cite: "Thomas Schenkel, Lawrence Berkeley National Laboratory, i Physics World" },
+      { type: "p", html: "Platån dök upp i både palladium och titan. Jämfört med vad teorin för nakna, fria kärnor förutsäger vid samma energi var utbytet mer än 10<sup>18</sup> gånger större — en triljon, alltså en etta med arton nollor efter sig. Att dessutom fylla på metallen med extra deuterium från den elektrokemiska sidan ungefär fördubblade antalet reaktioner." },
+
+      { type: "h2", text: "Elektronerna som skymmer avståndet" },
+      { type: "p", html: "Den mest etablerade förklaringen heter skärmning. En deuteron inne i en metall är inte naken: den är omgiven av metallens rörliga ledningselektroner, vars negativa laddning tar udden av avstötningen mellan två kärnor. Barriären blir både lägre och smalare, och eftersom tunnelsannolikheten beror så känsligt på barriärens form kan en blygsam sänkning ge en enorm ökning av reaktionerna." },
+      { type: "p", html: "Att effekten finns har varit känt sedan 1990-talet. Problemet är att den uppmätta skärmningen i metaller genomgående varit kraftigare än beräkningarna kan förklara — och en platå som ligger helt still när energin sjunker är svår att få ihop med enbart skärmning. Jeremy Munday, professor vid UC&nbsp;Davis och studiens korresponderande författare, pekar i stället på att en metall är en betydligt rörigare miljö än ett plasma." },
+      { type: "quote", html: "”Metallgitter innehåller elektroner, defekter och lokalt koncentrerat deuterium, som alla kan samverka och skapa reaktionsmiljöer som inte finns i ett vanligt plasma.”", cite: "Jeremy Munday, University of California, Davis" },
+      { type: "p", html: "Vad som faktiskt bär upp platån — skärmningen, skador som jonstrålen själv orsakar i gittret, eller att deuteriumatomerna klumpar ihop sig på vissa platser — är just den fråga gruppen nu säger sig vilja svara på." },
+
+      { type: "h2", text: "Nej, det handlar inte om kall fusion" },
+      { type: "p", html: "Ordet fusion i en metallbit väcker minnen av 1989, då Martin Fleischmann och Stanley Pons påstod sig ha fått atomkärnor att smälta samman spontant i en elektrolyscell vid rumstemperatur. Ingen lyckades upprepa försöket, och kall fusion blev under lång tid ett uttryck man helst inte sa högt på en fysikinstitution." },
+      { type: "p", html: "Det som skiljer det nya arbetet är att ingenting påstås ske av sig självt. Energin tillförs uttryckligen utifrån, av jonstrålen, och varje reaktion räknas av detektorer som mäter precis de partiklar fusionen ska ge ifrån sig. Det anmärkningsvärda är inte att fusion sker, utan hur mycket oftare den sker än väntat — och forskarna är noga med proportionerna." },
+      { type: "quote", html: "”Det här är en enorm relativ ökning, även om den absoluta fusionshastigheten fortfarande är alldeles för låg för energiproduktion.”", cite: "Jeremy Munday, University of California, Davis, i Physics World" },
+      { type: "p", html: "Någon energikälla blir det alltså inte. Det närmaste praktiska användningsområdet är i stället kompakta neutronkällor: apparater som producerar neutroner på beställning och används för att genomlysa gods i hamnar, undersöka materials inre struktur och tillverka isotoper för sjukvården. Får man fler neutroner ur samma insats genom att välja rätt material, kan sådana apparater göras mindre och snålare." },
+      { type: "p", html: "På längre sikt är poängen större än så: att materialet runt en kärnreaktion inte behöver vara en passiv behållare som ska stå emot påfrestningarna, utan kan vara en aktiv del av själva reaktionen. Var den tanken tar slut vet ingen än." },
+      { type: "quote", html: "”Vi har sett att vi kan öka fusionshastigheten — men var går gränsen?”", cite: "Jeremy Munday, University of California, Davis" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Deuterium finns naturligt i allt vatten: ungefär en av 6&nbsp;400 väteatomer i havet är deuterium. Tungt vatten, där båda väteatomerna är deuterium, är omkring 11&nbsp;% tyngre än vanligt vatten — en isbit av tungt vatten sjunker i ett glas vanligt vatten.",
+        "Att palladium suger i sig väte upptäcktes av kemisten Thomas Graham 1866. Metallen kan ta upp hundratals gånger sin egen volym vätgas, och används än i dag som filter för att rena väte: vätet slinker igenom gittret, alla andra gaser stannar utanför.",
+        "Solens kärna håller omkring 15&nbsp;miljoner grader, vilket motsvarar en typisk partikelenergi på drygt 1&nbsp;keV — lägre än energierna i det här experimentet, och långt under coulombbarriären. Utan tunneleffekten hade solen aldrig börjat lysa.",
+        "Neutronen från deuterium–deuterium-fusion får alltid 2,45&nbsp;MeV i rörelseenergi. Just den siffran fungerar som ett fingeravtryck: mäter man neutroner med precis den energin vet man vilken reaktion som ägt rum."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-08-03-bromsade-atomkarnor",
     date: "2026-08-03",
     title: "Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående",

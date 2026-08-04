@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 03 Aug 2026 07:36:46 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 04 Aug 2026 01:24:39 GMT</lastBuildDate>
+    <item>
+      <title>Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-04-fusion-i-metall</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-04-fusion-i-metall</guid>
+      <pubDate>Tue, 04 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Kärnfysik</category>
+      <description>Ju trögare två atomkärnor möts, desto snabbare rasar chansen att de smälter samman. Så beter sig fria kärnor — men i folier av palladium och titan planar kurvan ut i stället för att dö. Utbytet blir över en triljon gånger, en etta med arton nollor, större än teorin för nakna kärnor förutsäger.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-04-fusion-i-metall.jpg" length="594900" type="image/jpeg"/>
+    </item>
     <item>
       <title>Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-03-bromsade-atomkarnor</link>
@@ -177,15 +186,6 @@
       <category>Optik</category>
       <description>Vid Paul Scherrer-institutet i Schweiz har forskare byggt den första lins som kan fokusera neutroner av olika våglängder till en och samma punkt — en så kallad akromatisk lins. Genom att kombinera brytning och diffraktion i en enda komponent kunde de förstora bilden av ett litiumjonbatteris inre struktur sju gånger, med batteriet placerat sex meter från detektorn.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-16-neutronlins.jpg" length="354180" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Ny värmekappa gömmer föremål för infraröd strålning — i alla riktningar</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-15-varmekappa-3d</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-15-varmekappa-3d</guid>
-      <pubDate>Wed, 15 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Termodynamik</category>
-      <description>Forskare vid University of Illinois Urbana-Champaign och Tekniska universitetet i Danmark har byggt den första tredimensionella ”värmekappan” som fungerar oavsett varifrån värmen kommer. I ett av testerna gömde de ett äpple i en kappa formad som ett päron — en värmekamera riktad mot föremålet visade bara en jämnt tempererad päronform.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-15-varmekappa-3d.jpg" length="162738" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

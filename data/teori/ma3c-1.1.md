@@ -31,7 +31,7 @@ faktorisera polynom:
 2. Kvadreringsreglerna eller konjugatregeln baklänges.
 
 Det finns en tredje metod för att faktorisera vilket polynomuttryck som
-helst — genom att bestämma polynomets **nollställen**! I Matematik 2c
+helst — genom att bestämma polynomets **nollställen**! I Matematik nivå 2c
 konstaterade vi att ett polynom $p(x)$ med nollställena $x_1, x_2, \ldots,
 x_n$ kunde skrivas enligt $p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)$. Detta
 är en faktorisering.

@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-04 | `2026-08-04-fusion-i-metall` | Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp | Physics World / Phys.org / Lawrence Berkeley National Laboratory (pressmeddelande) / Nature Communications (M. E. Karahadian, M. Colborne, A. Persaud, T. Schenkel, J. N. Munday, 2026, DOI 10.1038/s41467-026-74421-1) |
 | 2026-08-03 | `2026-08-03-bromsade-atomkarnor` | Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående | Phys.org / TU Darmstadt (pressmeddelande) / GSI Helmholtzzentrum für Schwerionenforschung / Physical Review X 16, 031022 (S. Rausch m.fl., 2026, DOI 10.1103/961c-j3p5) |
 | 2026-08-02 | `2026-08-02-viskositetens-ovre-grans` | Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går | Physics World / Phys.org / Ritsumeikan University (pressmeddelande) / Physics of Fluids (M. Yoshida, 2026, DOI 10.1063/5.0335802) |
 | 2026-08-01 | `2026-08-01-storsta-galaxen` | Astronomer hittar äntligen ytterkanten på universums största kända galax — 1,7 miljoner ljusår tvärs över, och den växer fortfarande | Phys.org / arXiv-förhandspublicering, Instituto de Astrofísica de Canarias (C. Marrero-de la Rosa, I. Trujillo, M. Montes m.fl., 2026) |
@@ -206,3 +207,47 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > IBM/University of Chicagos verifierade kvantöverlägsenhet (fortfarande bara
 > preprint) och RuO₂ som visar magnetism under gitterspänning (för nära
 > altermagnetismartikeln 07-26). Se ko.md.
+
+> Not: 2026-08-04-artikeln (fusion som planar ut i metallfolier) valdes efter en
+> genomsökning som visade att måndagen den 3 augusti var en mager nyhetsdag.
+> Phys.org hade ingenting publicerat efter lördagen 2026-08-01 (kvantkryptering
+> 08-02 samt ferroelektriska bubbeldomäner och ett beräkningsmikroskop 08-01).
+> Quanta stod stilla sedan myon-artikeln 07-29. ScienceDaily hade två notiser
+> daterade 08-03: vridna kristallskikt och en simuleringsstudie av acceleration i
+> kvark-gluonplasma (Nuclear Science and Techniques, DOI 10.1007/s41365-026-02044-8)
+> — den senare övervägdes men är en ren modellstudie och ganska teknisk.
+> Physics Worlds writeup 2026-08-03 av UC Davis/Berkeley Lab-studien var det
+> färskaste starka fyndet. Originalet är kollegialt granskat och öppet:
+> Nature Communications, publicerad 2026-07-18, DOI 10.1038/s41467-026-74421-1,
+> preprint arXiv:2512.06212. Korslästes mot Physics World, Phys.org (07-23),
+> Berkeley Labs pressmeddelande (07-23) och studiens abstract.
+>
+> VIKTIGT för ev. uppföljning — tre saker som lätt blir fel:
+> (a) Platån ligger under 2,5 keV enligt studiens abstract; Physics World skriver
+>     ”ungefär 2 keV”. Artikeln använder paperets 2,5 keV.
+> (b) 10^18 = svenskans TRILJON (long scale), engelskans *quintillion*. Phys.org
+>     skrev korrekt ”a quintillion equals 1 followed by 18 zeros”. Artikeln skriver
+>     ut både potensen och ”en etta med arton nollor” för att inget ska kunna
+>     misstolkas. ”En biljondels millimeter” = 10^−12 mm = 10^−15 m, också rätt.
+> (c) Citatet ”It gives you a new knob to turn that you didn't have before”
+>     tillskrivs Arun Persaud i Berkeley Labs pressmeddelande men Jeremy Munday i
+>     Phys.org-referatet. Attributionen är alltså osäker — citatet användes INTE.
+>     Övriga citat (Schenkel om membranreaktorn och om platån, Munday om
+>     metallgitter och om den absoluta hastigheten) har entydig attribution.
+> Detta är ett resultat om REAKTIONSHASTIGHET, inte om energi: den absoluta
+> fusionshastigheten är alldeles för låg för energiproduktion, vilket artikeln
+> säger uttryckligen och med Mundays eget citat. Ramen ”nej, det handlar inte om
+> kall fusion” (Fleischmann–Pons 1989) är medvetet med — utan den läses rubriken
+> fel. Skriv aldrig att detta är en väg till fusionskraft.
+> Ingen fri riktig bild gick att hitta: Berkeley Labs två pressbilder saknar
+> uttalad licens, och Wikimedia Commons hade inget relevant (sökningar på
+> palladiumfolie och jonstråle/målkammare gav bara gamla PDF-skanningar). Därför
+> EN AI-genererad illustration: jonstråle mot folie med kristallgitter i genomskärning.
+> Tre nya begrepp: kärnfusion, coulombbarriär, tunneleffekt. Dessutom fick
+> `gitter` formen metallgitter/-gittret och `isotop` formerna deuteron/-en/-er/-erna
+> och väteisotop/-en/-er/-erna.
+> Andra kandidater som övervägdes: LHAASO J1912+1014u, ett galaktiskt PeVatron
+> som accelererar protoner över 10^15 eV (Hiroshima University, The Astrophysical
+> Journal 1006:77, DOI 10.3847/1538-4357/ae680d, publicerad 07-16 — stark
+> astropartikel-vinkel, ligger nu i ko.md), samt kvark-gluonplasma-simuleringen
+> ovan. Se ko.md.

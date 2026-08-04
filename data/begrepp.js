@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'karnfusion',
+    term: 'Kärnfusion',
+    former: ['kärnfusion', 'kärnfusionen', 'fusion', 'fusionen', 'fusioner', 'fusionerna', 'fusionera', 'fusionerar', 'fusionerade', 'fusionsreaktion', 'fusionsreaktionen', 'fusionsreaktioner', 'fusionsreaktor', 'fusionsreaktorn', 'fusionsreaktorer', 'fusionskraft', 'fusionskraften', 'fusionshastighet', 'fusionshastigheten', 'vätefusion', 'vätefusionen', 'kall fusion', 'kalla fusionen'],
+    kort: 'Två lätta atomkärnor slås samman till en tyngre, och en del av massan frigörs som energi. Det är kärnfusion som får solen och alla andra stjärnor att lysa.',
+    relaterade: ['coulombbarriar', 'tunneleffekt', 'plasma', 'isotop'],
+    body: [
+      { type: 'p', html: 'Slår man ihop två lätta atomkärnor till en enda blir resultatet nästan alltid lite lättare än delarna var för sig. Den massa som ”försvinner” har inte försvunnit — den har blivit energi, enligt <em>E</em>&nbsp;=&nbsp;<em>m</em>&nbsp;·&nbsp;<em>c</em><sup>2</sup>. Eftersom ljushastigheten i kvadrat är ett gigantiskt tal räcker en försvinnande liten massförändring för att frigöra oerhört mycket energi. Ett gram väte som fusioneras till helium ger ungefär lika mycket energi som tio ton kol som brinner upp.' },
+      { type: 'p', html: 'Haken är att kärnorna måste komma varandra oerhört nära innan sammanslagningen kan ske, och de är alla positivt laddade. Positiva laddningar stöter bort varandra, och avstötningen växer brant på korta avstånd. Därför krävs våldsamma förhållanden: i solens kärna är temperaturen omkring 15&nbsp;miljoner grader och trycket ofattbart högt, och materien är där ett plasma, alltså kärnor och elektroner som rör sig fritt från varandra. Även då är fusion en sällsynt händelse för den enskilda kärnan — solen är effektiv först för att den är enormt stor och har enormt gott om tid.' },
+      { type: 'p', html: 'Att bygga en fusionsreaktor på jorden har visat sig svårare än man hoppades på 1950-talet. Det räcker inte att få reaktionerna att ske; man måste hålla kvar det urheta plasmat tillräckligt länge, med magnetfält eller med laserpulser, och få ut mer energi än man stoppar in. Lockelsen är att bränslet — deuterium ur havsvatten — finns i praktiskt taget obegränsad mängd, att processen inte kan skena, och att den inte ger något långlivat radioaktivt avfall av det slag som fission gör.' }
+    ]
+  },
+  {
+    id: 'coulombbarriar',
+    term: 'Coulombbarriär',
+    former: ['coulombbarriär', 'coulombbarriären', 'coulombbarriärer', 'coulombbarriärerna', 'coulombtröskel', 'coulombtröskeln'],
+    kort: 'Den energitröskel två atomkärnor måste ta sig förbi för att komma tillräckligt nära varandra för att kunna reagera, eftersom de stöter bort varandra elektriskt hela vägen in.',
+    relaterade: ['karnfusion', 'tunneleffekt', 'hogladdad-jon'],
+    body: [
+      { type: 'p', html: 'Alla atomkärnor är positivt laddade, och lika laddningar stöter bort varandra. Kraften följer Coulombs lag och växer som ett genom avståndet i kvadrat: halveras avståndet fyrdubblas avstötningen. Två kärnor som närmar sig varandra måste alltså arbeta allt hårdare ju längre in de kommer, ungefär som att cykla uppför en backe som blir brantare för varje meter.' },
+      { type: 'p', html: 'Men riktigt nära, på ett avstånd av några få kärndiametrar, tar en annan kraft över: den starka kärnkraften, som drar kärnpartiklar till sig med väldig styrka men bara på extremt korta håll. Backen har alltså en topp och stupar sedan brant nedåt på andra sidan. Toppens höjd är coulombbarriären. För två vätekärnor ligger den kring några hundra tusen elektronvolt; för tunga kärnor med många protoner är den många gånger högre.' },
+      { type: 'p', html: 'Det märkliga är att barriären inte är någon absolut spärr. Kvantmekaniken tillåter partiklar att ta sig igenom hinder de egentligen inte har råd med, och därför sker kärnreaktioner även vid energier långt under barriärens topp — bara mycket, mycket sällan. Ju lägre energi, desto mer osannolikt, och sambandet är exponentiellt: en halvering av energin kan göra reaktionen tusentals gånger ovanligare. Just den branta kurvan är kärnan i varför fusionsenergi är så svårt att få till på jorden.' }
+    ]
+  },
+  {
+    id: 'tunneleffekt',
+    term: 'Tunneleffekt',
+    former: ['tunneleffekt', 'tunneleffekten', 'tunnling', 'tunnlingen', 'kvanttunnling', 'kvanttunnlingen', 'tunnelsannolikhet', 'tunnelsannolikheten', 'tunnelchans', 'tunnelchansen', 'tunnla', 'tunnlar', 'tunnlade'],
+    kort: 'Kvantfysikaliskt fenomen där en partikel tar sig igenom ett hinder som den enligt klassisk fysik inte har energi nog att ta sig över. Det är tunneleffekten som får solen att lysa.',
+    relaterade: ['coulombbarriar', 'karnfusion', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Rulla en boll mot en kulle. Har den för lite fart rullar den en bit uppför och sedan tillbaka — den kommer aldrig över. Så fungerar vardagen. I kvantvärlden gäller inte riktigt det. En partikel har ingen skarpt bestämd plats utan beskrivs av en vågfunktion som är utsmetad i rummet, och den vågen dör inte tvärt vid hindrets kant. En liten del av den läcker igenom och fortsätter på andra sidan. Det betyder att partikeln ibland helt enkelt dyker upp bortom hindret, utan att någonsin ha befunnit sig på toppen.' },
+      { type: 'p', html: 'Chansen är oftast försvinnande liten, och den beror mycket känsligt på hindrets höjd och bredd. Görs barriären bara något smalare kan tunnelsannolikheten öka med många tiopotenser. Därför är effekten helt obetydlig för en fotboll mot en vägg — där skulle man få vänta oändligt mycket längre än universums ålder — men helt avgörande på atomskalan, där hindren är tunna och partiklarna lätta.' },
+      { type: 'p', html: 'Utan tunneleffekten skulle solen inte lysa: dess kärna är i själva verket för sval för att vätekärnor ska kunna ta sig över sin ömsesidiga avstötning, och det är tunnlandet som räddar situationen. Effekten förklarar också alfasönderfall, där en heliumkärna smiter ut ur en tung atomkärna som den borde vara instängd i. Och den används tekniskt: i sveptunnelmikroskopet mäts en ström av elektroner som tunnlar mellan en nålspets och en yta, en ström så känslig för avståndet att enskilda atomer kan avbildas.' }
+    ]
+  },
+  {
     id: 'hogladdad-jon',
     term: 'Högladdad jon',
     former: ['högladdad jon', 'högladdade joner', 'högladdad', 'högladdade', 'högladdade jonen', 'högladdade jonerna'],
@@ -183,7 +219,7 @@ window.BEGREPP = [
   {
     id: 'gitter',
     term: 'Gitter',
-    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'gitterstruktur', 'gitterstrukturen', 'diffraktionsgitter', 'diffraktionsgittret', 'bikakegitter', 'bikakegittret'],
+    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'diffraktionsgitter', 'diffraktionsgittret', 'bikakegitter', 'bikakegittret'],
     kort: 'Det regelbundna, upprepade mönster som atomerna bildar i en kristall. Ordet används också om optiska gitter — täta mönster av spalter eller spår som delar upp ljus i sina färger.',
     relaterade: ['fotonisk-kristall', 'interferens', 'tidskristall'],
     body: [
@@ -710,7 +746,7 @@ window.BEGREPP = [
   {
     id: 'isotop',
     term: 'Isotop',
-    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'deuterium', 'tritium', 'tungt vatten', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna'],
+    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'deuterium', 'deuteron', 'deuteronen', 'deuteroner', 'deuteronerna', 'tritium', 'tungt vatten', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna'],
     kort: 'Atomer av samma grundämne men med olika många neutroner i kärnan. De uppför sig nästan likadant kemiskt, men skiljer sig i massa och i hur stabila de är.',
     relaterade: ['radioaktivt-sonderfall', 'spektroskopi'],
     body: [

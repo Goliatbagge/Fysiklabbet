@@ -12,9 +12,25 @@ Format per post:
 
 ## Kö
 
+- **Ett galaktiskt PeVatron avslöjat: LHAASO J1912+1014u accelererar protoner
+  över 10^15 eV** (STARK RESERV). Ett lag lett från Hiroshima University visar
+  med Fermi-LAT:s gammadata och FUGIN:s CO-kartläggning att gammastrålningen
+  från källan är hadronisk — den kommer alltså från protoner som krockar med
+  molekylgas, inte från elektroner. Därmed är objektet en av Vintergatans få
+  bekräftade protonacceleratorer upp i PeV-området, gränsen där de galaktiska
+  kosmiska strålarnas spektrum knäcks. Ligger i stjärnbilden Örnen nära Altair,
+  utsträckning över en grad. The Astrophysical Journal 1006:77 (2026),
+  DOI 10.3847/1538-4357/ae680d, publicerad 2026-07-16. Kollegialt granskad.
+  Utmärkta vinklar för gymnasiet: laddade partiklar i magnetfält, elektronvolt
+  som energienhet, kosmisk strålning, och skillnaden mellan att observera och
+  att sluta sig till. OBS RÄKNEORD: engelskans *quadrillion* = 10^15 = svenskans
+  BILJARD, inte biljon. Valdes bort 2026-08-04 enbart för att fusionsstudien var
+  färskare i pressen. Källor:
+  https://www.sciencedaily.com/releases/2026/07/260731034150.htm
+  (tillagd 2026-08-04)
+
 - **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
-  dipolväxelverkan** (STARKASTE RESERVEN — ta denna härnäst om inget färskare
-  dyker upp). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
+  dipolväxelverkan** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
   Chinese University of Hong Kong har gjort det första kondensatet av
   natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
   förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
@@ -27,6 +43,40 @@ Format per post:
   gammalt. Källa:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
+
+## Fynd som inte användes (2026-08-04) — kan tas upp senare
+
+- **Valdes i dag: fusion som planar ut i metallfolier** (UC Davis + Berkeley Lab,
+  Nature Communications) — se publicerat.md för full avvägning, för de tre
+  fällorna (2 keV kontra 2,5 keV, triljon = 10^18, och det felattribuerade
+  ”new knob to turn”-citatet) och för varför ramen ”detta är INTE kall fusion”
+  måste följa med om nyheten någonsin får en uppföljare.
+- **LHAASO J1912+1014u — bekräftat protonaccelererande PeVatron** — flyttad
+  till toppen av kön ovan.
+- **Acceleration i kvark-gluonplasma vid tungjonskrockar** — Song-Ze Zhong,
+  Xian-Gai Deng, Xu-Guang Huang och Yu-Gang Ma (Fudan University) kartlägger med
+  AMPT- och UrQMD-simuleringar var i den urheta materien accelerationen är som
+  störst (kanterna) vid krockenergier från 3,5 GeV till 2,76 TeV, och föreslår
+  att accelerationen fungerar som en termodynamisk styrparameter för QCD-materia.
+  Nuclear Science and Techniques 37 (10), DOI 10.1007/s41365-026-02044-8,
+  ScienceDaily 08-03. Ren modellstudie utan nya mätdata, och ganska teknisk —
+  men en möjlig ingång till kvark-gluonplasma om ämnet ska tas upp.
+  Källa: https://www.sciencedaily.com/releases/2026/08/260802223422.htm
+- **Beräkningsmikroskop fångar 25,2 miljarder bildpunkter i sekunden** —
+  UC Berkeley löser upp den klassiska avvägningen mellan hastighet, synfält och
+  upplösning med beräkningsbaserad avbildning. Bra optik-vinkel.
+  Källa: https://phys.org/news/2026-08-focus-microscope-captures-billion-pixels.html
+- **Ljus styr ”bubbeldomäner” i nanoskala i en ferroelektrisk kristall** —
+  Flinders University, möjlig väg till snålare minnen.
+  Källa: https://phys.org/news/2026-08-nanoscale-domains-ferroelectric-crystal.html
+- **Kvantkryptering som gör kryptotexten omöjlig att kopiera** — bygger på
+  no-cloning-satsen. Kvantämnet har dock prioriterats ner många dagar i rad, och
+  IBM-preprinten nedan ligger före i den kön.
+  Källa: https://phys.org/news/2026-08-quantum-encryption-method-ciphertext-cloned.html
+- **OBS — physics.aps.org svarade HTTP 403 även 2026-08-04** (tredje gången i
+  rad) och kunde inte kontrolleras. Nature kräver fortfarande inloggning via
+  idp.nature.com. Quanta stod stilla sedan myon-artikeln 07-29. Phys.org hade
+  inget publicerat efter 08-02. Physics World var färskast i dag.
 
 ## Fynd som inte användes (2026-08-03) — kan tas upp senare
 

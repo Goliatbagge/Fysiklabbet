@@ -9,7 +9,7 @@ section: '6.6'
 
 # Linjär regression
 
-::: tips "Repetition från Matematik 1c"
+::: tips "Repetition från Matematik nivå 1c"
 Om ett samband finns mellan två variabler har vi en **korrelation**.
 Huruvida ett samband finns, kan undersökas med ett
 **spridningsdiagram**. Om punkterna i ett spridningsdiagram ligger

@@ -9,7 +9,7 @@ section: '6.1'
 
 # Trigonometri i rätvinkliga trianglar
 
-Vi repeterar från Matematik 1c. I en rätvinklig triangel kallas sidan mitt
+Vi repeterar från Matematik nivå 1c. I en rätvinklig triangel kallas sidan mitt
 emot den räta vinkeln **hypotenusa**. De två kortare sidorna kallas
 **kateter**. Katetern mitt emot vinkeln $v$ kallas **motstående katet**,
 och katetern som tillsammans med hypotenusan bildar vinkeln $v$ kallas

@@ -51,7 +51,7 @@ invånare/år.
 Ibland är inte alla konstanter i en modell kända från start. Om vi känner
 till funktionens eller derivatans värde vid en viss tidpunkt kan vi använda
 den informationen för att bestämma en obekant konstant — ofta med hjälp av
-logaritmer, precis som vid exponentialekvationer i Matematik 2.
+logaritmer, precis som vid exponentialekvationer i Matematik nivå 2c.
 
 ::: exempel "Exempel 2 — Bestämma en konstant med hjälp av derivata"
 **Temperaturen $y$ °C hos en maträtt som placerats i en ugn ges av
@@ -82,7 +82,7 @@ $$
 89 = e^{20k} \quad \Longleftrightarrow \quad e^{20k} = 89
 $$
 
-Vi ska nu lösa ut $k$ som finns i exponenten. I Matematik 2 lärde vi oss att
+Vi ska nu lösa ut $k$ som finns i exponenten. I Matematik nivå 2c lärde vi oss att
 lösa exponentialekvationer genom att logaritmera båda led, för att kunna
 multiplicera ner exponenten. I detta fall när vi har $e$ som bas
 logaritmerar vi enklast med den naturliga logaritmen $\ln$ (tänk på att

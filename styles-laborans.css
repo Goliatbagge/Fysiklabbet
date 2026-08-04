@@ -245,6 +245,77 @@ body.laborans a {
     border-bottom-color: transparent;
 }
 
+/* Undermenyer i Ämnes-dropdownen: Fysik / Matematik / Matematik – fortsättning
+   som grupprubriker, med nivåvalen i en utfällbar undermeny till höger.
+   Öppnas på hover och tangentbordsfokus, precis som huvuddropdownen.
+   På smal skärm (se media-blocket längre ned) visas nivåerna i stället
+   alltid, indragna under sin grupprubrik, så ingen meny hamnar utanför
+   skärmen. */
+
+.lab-nav-dd-grupp {
+    position: relative;
+}
+
+.lab-nav-dd-grupp-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 9px 16px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: var(--lab-ink);
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.lab-nav-dd-grupp-caret {
+    flex-shrink: 0;
+    opacity: 0.55;
+}
+
+.lab-nav-dd-grupp:hover > .lab-nav-dd-grupp-trigger,
+.lab-nav-dd-grupp:focus-within > .lab-nav-dd-grupp-trigger {
+    background: var(--lab-bg-raised);
+}
+
+.lab-nav-dd-undermeny {
+    position: absolute;
+    top: -7px; /* 6px meny-padding + 1px kant → första nivåraden linjerar med grupprubriken */
+    left: 100%;
+    min-width: 120px;
+    padding: 6px 0;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: 0 12px 28px rgba(15, 22, 32, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* Osynlig brygga över glappet grupprubrik → undermeny så hovern hålls kvar */
+.lab-nav-dd-undermeny::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9px;
+    width: 9px;
+}
+
+.lab-nav-dd-grupp:hover > .lab-nav-dd-undermeny,
+.lab-nav-dd-grupp:focus-within > .lab-nav-dd-undermeny {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
 /* Breadcrumb (mono) */
 
 .lab-breadcrumb {
@@ -436,6 +507,35 @@ body.laborans a {
 
     .lab-nav-dd.lab-nav-dd-stangd .lab-nav-dd-menu {
         transform: translateX(0) translateY(-4px);
+    }
+
+    /* Undermenyerna får inte flyta ut till höger på smal skärm — visa dem
+       i stället alltid, indragna under sin grupprubrik. */
+    .lab-nav-dd-grupp-trigger {
+        cursor: default;
+    }
+
+    .lab-nav-dd-grupp-caret {
+        display: none;
+    }
+
+    .lab-nav-dd-undermeny {
+        position: static;
+        min-width: 0;
+        padding: 0 0 2px;
+        border: none;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .lab-nav-dd-undermeny::before {
+        display: none;
+    }
+
+    .lab-nav .lab-nav-dd-undermeny a {
+        padding: 7px 16px 7px 32px;
     }
 }
 

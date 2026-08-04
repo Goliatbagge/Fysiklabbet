@@ -473,6 +473,9 @@
     'Δ': { w: 78, strokes: [[[21, 100], [44, 13], [47, 13], [72, 98], [21, 100]]] },
     "'": { w: 24, strokes: [[[27, 8], [19, 30]]] },
     '<': { w: 76, strokes: [[[64, 40], [24, 66], [64, 92]]] },
+    /* '>' som spegelvänt '<' (2026-08-04, ma1c-1.1 olikhetstecken) —
+     * granskad sida vid sida med '<' och '7' så att de inte förväxlas */
+    '>': { w: 76, strokes: [[[24, 40], [64, 66], [24, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
     '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] },
     /* ekvivalenspil ⟺: två parallella streck + spets åt båda hållen.
@@ -493,7 +496,7 @@
                             [[71, 85], [90, 92], [90, 72]]] }
   };
   var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
-  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '⇒': 1, '⟺': 1 };
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1 };
 
   /* Senast skrivna klammergränser (position för övre/undre gräns) — så
    * att insättningssteget kan ringa in dem med en pedagogisk gest. */
@@ -1421,6 +1424,838 @@
     acts.push({ kind: 'stroke', pts: pts, color: opt.color || null });
     acts.push({ kind: 'pause', ms: 110 });
     return xV + 0.10 * F;                     /* innehållets startposition */
+  }
+
+  /* ================ MATTESCENER: Ma 1c kapitel 1 ================
+   * Pennlösningar till exempeluppgifterna i ma1c-1.1 (Talmängder och
+   * negativa tal) och ma1c-1.2 (Bråk). OBS: fysikreglerna om mätvärdes-
+   * klammer, rimlighetsbubbla och svarsrad utan beteckning gäller INTE
+   * här — matteprocedurerna följer i stället teorigenomgångens egen
+   * redovisning: räkneraden skrivs om steg för steg på samma rad
+   * (kollegieblock-stil), det man GÖR med uttrycket (teckenbyte,
+   * förlängning, förkortning) markeras med blåpennan, och svaret skrivs
+   * som uppgiften kräver (t.ex. ett bråk eller en olikhet).
+   *
+   * Gemensamt mönster: tankebubbla (eget steg) → rad → svarsrad med
+   * dubbelstrecksram. Bubblor läggs under senast skrivna rad
+   * (bubbleTop) och aldrig i arkets övre högra hörn (se REGEL). */
+
+  /* ---------------- scen: rationellt tal (ma1c-1.1 ex 1) ----------------
+   * "Ange ett rationellt tal som inte är ett heltal." Pennan väljer 1/3,
+   * markerar talet på en tallinje mellan 0 och 1 (markeringen är en
+   * anteckning av ett VÄRDE → blåpennan) och drar slutsatsen. */
+  function layoutTalmangd(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* ---- steg 1: välj ett bråk ---- */
+    var b1 = bubble(120, 40, 246, [
+      [['Ett rationellt tal kan']],
+      [['skrivas som ett bråk. Jag']],
+      [['väljer en tredjedel.']]
+    ]);
+    tanke(b1);
+    var y = 100;
+    fracH('1', '3', padL, y);
+    stepEnd();
+
+    /* ---- steg 2: markera talet på tallinjen ---- */
+    var b2 = bubble(120, bubbleTop(y + 1.04 * F), 250, [
+      [['Är det ett heltal? Jag']],
+      [['markerar talet på tallinjen.']]
+    ]);
+    tanke(b2);
+    var ty = 236;                             /* tallinjens y */
+    var x0 = 110, u = 360;                    /* 0 vid x0, 1 enhet = u px */
+    line([x0 - 20, ty], [x0 + u + 32, ty]);   /* tallinjen + pilar åt båda håll */
+    line([x0 + u + 22, ty - 5], [x0 + u + 32, ty]);
+    line([x0 + u + 22, ty + 5], [x0 + u + 32, ty]);
+    line([x0 - 10, ty - 5], [x0 - 20, ty]);
+    line([x0 - 10, ty + 5], [x0 - 20, ty]);
+    pause(120);
+    [0, 1].forEach(function (v) {             /* heltalen 0 och 1 */
+      line([x0 + v * u, ty - 7], [x0 + v * u, ty + 7]);
+      var str = '' + v;
+      var w = stringAdvance(str, s * 0.5, F * 0.5);
+      placeString(str, x0 + v * u - w / 2, ty + 26, s * 0.5, F * 0.5, acts);
+    });
+    [1 / 3, 2 / 3].forEach(function (v) {     /* tredjedelarna */
+      line([x0 + v * u, ty - 4], [x0 + v * u, ty + 4]);
+    });
+    stepEnd();
+    /* markeringen (ett VÄRDE) i blått: prick + litet bråk ovanför */
+    var mx = x0 + u / 3;
+    acts.push({ kind: 'stroke', pts: dotPts(mx, ty), color: BLUE });
+    pause(150);
+    var k = 0.55, mybar = ty - 34;
+    var mw = Math.max(stringAdvance('1', s * k, F * k),
+                      stringAdvance('3', s * k, F * k)) + 0.3 * F * k;
+    placeString('1', mx - mw / 2 +
+      (mw - stringAdvance('1', s * k, F * k)) / 2, mybar - 0.14 * F * k,
+      s * k, F * k, acts, BLUE);
+    acts.push({ kind: 'stroke',
+      pts: humanize([[mx - mw / 2, mybar], [mx + mw / 2, mybar]]), color: BLUE });
+    placeString('3', mx - mw / 2 +
+      (mw - stringAdvance('3', s * k, F * k)) / 2, mybar + 1.04 * F * k,
+      s * k, F * k, acts, BLUE);
+    stepEnd();
+
+    /* ---- steg 3: slutsats + svar ---- */
+    var b3 = bubble(120, bubbleTop(ty + 26), 262, [
+      [['En tredjedel ligger mellan']],
+      [['0 och 1. Alltså är det inte']],
+      [['ett heltal!']]
+    ]);
+    tanke(b3);
+    y = 356;
+    var xe = placeString('Svar: ', padL, y, s, F, acts);
+    xe = fracH('1', '3', xe, y);
+    underline(xe, y + 0.95 * F);
+    stepEnd();
+
+    return { acts: acts, contentW: 520, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: olikhetstecken (ma1c-1.1 ex 2) ----------------
+   * "Sätt ut < eller > mellan talen: a) 23 19, b) −20 −3." En tallinje
+   * per deluppgift; de båda talen markeras med blåpennan (givna VÄRDEN)
+   * och tecknet sätts ut i svarsraden. */
+  function layoutOlikhet(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* en tallinje med pilar åt båda håll, heltalssteg och etiketter.
+     * marks = [värde, ...] markeras med blå prick + blå siffra OVANFÖR. */
+    function tallinje(ty, vMin, vMax, x0, u, labels, marks) {
+      var xa = x0 - 20, xb = x0 + (vMax - vMin) * u + 32;
+      line([xa, ty], [xb, ty]);
+      line([xb - 10, ty - 5], [xb, ty]);
+      line([xb - 10, ty + 5], [xb, ty]);
+      line([xa + 10, ty - 5], [xa, ty]);
+      line([xa + 10, ty + 5], [xa, ty]);
+      pause(120);
+      for (var v = vMin; v <= vMax; v++) {
+        var x = x0 + (v - vMin) * u;
+        var big = labels.indexOf(v) >= 0;
+        line([x, ty - (big ? 6 : 4)], [x, ty + (big ? 6 : 4)]);
+      }
+      labels.forEach(function (v) {
+        var str = (v < 0 ? '−' + (-v) : '' + v);
+        var w = stringAdvance(str, s * 0.5, F * 0.5);
+        placeString(str, x0 + (v - vMin) * u - w / 2, ty + 25,
+                    s * 0.5, F * 0.5, acts);
+        pause(80);
+      });
+      stepEnd();
+      marks.forEach(function (v) {
+        var x = x0 + (v - vMin) * u;
+        acts.push({ kind: 'stroke', pts: dotPts(x, ty), color: BLUE });
+        pause(150);
+        var str = (v < 0 ? '−' + (-v) : '' + v);
+        var w = stringAdvance(str, s * 0.55, F * 0.55);
+        placeString(str, x - w / 2, ty - 14, s * 0.55, F * 0.55, acts, BLUE);
+        pause(120);
+      });
+      stepEnd();
+    }
+
+    /* ---- a) 23 eller 19 ---- */
+    var bA = bubble(120, 40, 258, [
+      [['a) Jag ritar tallinjen.']],
+      [['Talet längst till höger']],
+      [['är det största talet.']]
+    ]);
+    tanke(bA);
+    placeString('a)', padL, 62, s * 0.62, F * 0.62, acts);
+    pause(200);
+    tallinje(126, 15, 25, 80, 48, [15, 20, 25], [19, 23]);
+    var bA2 = bubble(120, bubbleTop(152), 264, [
+      [['23 ligger till höger om 19.']],
+      [['Olikhetstecknet gapar mot']],
+      [['det största talet!']]
+    ]);
+    tanke(bA2);
+    var y = 218;
+    var xe = placeString('Svar: 23>19', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- b) −20 eller −3 ---- */
+    var bB = bubble(120, bubbleTop(y), 268, [
+      [['b) Ju längre till vänster ett']],
+      [['tal ligger, desto mindre']],
+      [['är det.']]
+    ]);
+    tanke(bB);
+    placeString('b)', padL, 292, s * 0.62, F * 0.62, acts);
+    pause(200);
+    tallinje(356, -21, 1, 66, 23, [-20, -15, -10, -5, 0], [-20, -3]);
+    var bB2 = bubble(120, bubbleTop(382), 262, [
+      [['−20 ligger längst till']],
+      [['vänster och är alltså']],
+      [['det minsta talet.']]
+    ]);
+    tanke(bB2);
+    y = 448;
+    xe = placeString('Svar: (−20)<(−3)', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: addition/subtraktion av negativa tal
+   * (ma1c-1.1 ex 3): a) 4−(−9), b) 25+(−10). Teckenparet ringas in med
+   * blåpennan medan bubblan förklarar regeln, och omskrivningen
+   * fortsätter på SAMMA rad (kollegieblock-stil). Det nya tecknet som
+   * ersätter paret skrivs med blåpennan. */
+  function layoutNegadd(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* ---- a) 4−(−9) ---- */
+    var y = 64;
+    var xx = placeString('a) 4', padL, y, s, F, acts);
+    var r0 = xx;
+    xx = placeString('-(−', xx, y, s, F, acts);
+    var r1 = xx;
+    xx = placeString('9)', xx, y, s, F, acts);
+    stepEnd();
+    var ringA = { kind: 'stroke', pts: ringBox(r0, r1, y, F), color: BLUE };
+    acts.push(ringA);
+    pause(260);
+    var bA = bubble(120, bubbleTop(y), 262, [
+      [['Två minustecken ihop!']],
+      [['Lika tecken ersätts med']],
+      [['ett plustecken.']]
+    ]);
+    tanke(bA);
+    xx = placeString('=4', xx, y, s, F, acts);
+    xx = placeString('+', xx, y, s, F, acts, BLUE);
+    xx = placeString('9', xx, y, s, F, acts);
+    xx = placeString('=13', xx, y, s, F, acts);
+    acts.push({ kind: 'fade', ref: ringA });
+    stepEnd();
+    y += 1.7 * F;
+    var xe = placeString('Svar: 13', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- b) 25+(−10) ---- */
+    var bB = bubble(120, bubbleTop(y), 260, [
+      [['b) Plus och minus ihop.']],
+      [['Olika tecken ersätts med']],
+      [['ett minustecken.']]
+    ]);
+    tanke(bB);
+    y += 2.4 * F;
+    xx = placeString('b) 25', padL, y, s, F, acts);
+    var q0 = xx;
+    xx = placeString('+(−', xx, y, s, F, acts);
+    var q1 = xx;
+    xx = placeString('10)', xx, y, s, F, acts);
+    stepEnd();
+    var ringB = { kind: 'stroke', pts: ringBox(q0, q1, y, F), color: BLUE };
+    acts.push(ringB);
+    pause(260);
+    xx = placeString('=25', xx, y, s, F, acts);
+    xx = placeString('-', xx, y, s, F, acts, BLUE);
+    xx = placeString('10', xx, y, s, F, acts);
+    xx = placeString('=15', xx, y, s, F, acts);
+    acts.push({ kind: 'fade', ref: ringB });
+    stepEnd();
+    y += 1.7 * F;
+    xe = placeString('Svar: 15', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: multiplikation/division av negativa tal
+   * (ma1c-1.1 ex 4): a) 4·(−3), b) (−5)·(−9), c) 35/(−7), d) (−42)/(−7).
+   * Divisionerna skrivs som bråk med vågrätt streck (se REGEL). */
+  function layoutNegmult(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+    var adv = 1.7 * F;
+
+    /* ---- a) 4·(−3) ---- */
+    var bA = bubble(120, 40, 250, [
+      [['a) Olika tecken ger ett']],
+      [['negativt svar.']]
+    ]);
+    tanke(bA);
+    var y = 96;
+    placeString('a) 4·(−3)=−12', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xe = placeString('Svar: −12', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- b) (−5)·(−9) ---- */
+    var bB = bubble(120, bubbleTop(y), 264, [
+      [['b) Minus gånger minus ger']],
+      [['plus. Lika tecken ger ett']],
+      [['positivt svar!']]
+    ]);
+    tanke(bB);
+    y += 2.4 * F;
+    placeString('b) (−5)·(−9)=45', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    xe = placeString('Svar: 45', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- c) 35/(−7) som bråk ---- */
+    var bC = bubble(120, bubbleTop(y), 256, [
+      [['c) Samma teckenregler']],
+      [['gäller vid division: olika']],
+      [['tecken ger minus.']]
+    ]);
+    tanke(bC);
+    y += 2.4 * F + 0.55 * F;
+    var xx = placeString('c) ', padL, y, s, F, acts);
+    xx = fracH('35', '−7', xx, y);
+    placeString('=−5', xx, y, s, F, acts);
+    stepEnd();
+    y += adv + 0.65 * F;
+    xe = placeString('Svar: −5', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ---- d) (−42)/(−7) som bråk ---- */
+    var bD = bubble(120, bubbleTop(y), 256, [
+      [['d) Lika tecken ger plus,']],
+      [['även vid division.']]
+    ]);
+    tanke(bD);
+    y += 2.4 * F + 0.55 * F;
+    xx = placeString('d) ', padL, y, s, F, acts);
+    xx = fracH('−42', '−7', xx, y);
+    placeString('=6', xx, y, s, F, acts);
+    stepEnd();
+    y += adv + 0.65 * F;
+    xe = placeString('Svar: 6', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 480, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: termometern (ma1c-1.1 ex 5) ----------------
+   * "Beräkna (−5) − 3." Vanligaste felet: eleven läser det som minus
+   * gånger minus och svarar 8. Termometern ritas som grundscen (grafit);
+   * startnivån, sänkningen och slutnivån är ANTECKNINGAR av värden →
+   * blåpennan (se REGEL i filhuvudet). */
+  function layoutTermometer(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* termometerns geometri: grader d → y-nivå */
+    var tubeL = 104, tubeR = 124, tubeC = (tubeL + tubeR) / 2;
+    function lvl(d) { return 78 + (2 - d) * 15; }
+
+    /* ---- steg 1: rita termometern (grundscen i grafit) ---- */
+    var b1 = bubble(280, 110, 264, [
+      [['Termometern visar −5 grader']],
+      [['och temperaturen sjunker']],
+      [['3 grader.']]
+    ]);
+    tanke(b1);
+    line([tubeL, lvl(2.6)], [tubeL, lvl(-9.6)]);       /* röret */
+    line([tubeR, lvl(2.6)], [tubeR, lvl(-9.6)]);
+    pause(120);
+    /* kulan längst ned: cirkel med överlapp */
+    var bx = tubeC, by = lvl(-9.6) + 15, br = 16;
+    var kp = [];
+    for (var i = 0; i <= 20; i++) {
+      var a = -1.2 + (i / 20) * Math.PI * 2.15;
+      kp.push([bx + Math.cos(a) * (br + rnd(-1.2, 1.2)),
+               by + Math.sin(a) * (br + rnd(-1.2, 1.2))]);
+    }
+    acts.push({ kind: 'stroke', pts: kp });
+    pause(150);
+    for (var d = 2; d >= -9; d--) {                    /* gradstreck */
+      line([tubeR, lvl(d)], [tubeR + (d % 5 === 0 ? 12 : 7), lvl(d)]);
+    }
+    placeString('0', tubeR + 18, lvl(0) + 6, s * 0.5, F * 0.5, acts);
+    stepEnd();
+
+    /* ---- steg 2: blå anteckningar — start, sänkning, slut ---- */
+    var b2 = bubble(280, 210, 258, [
+      [['Jag startar på −5 och går']],
+      [['3 steg nedåt på skalan.']]
+    ]);
+    tanke(b2);
+    line([tubeL - 8, lvl(-5)], [tubeR + 8, lvl(-5)], BLUE);   /* startnivån */
+    placeString('−5', tubeR + 18, lvl(-5) + 6, s * 0.55, F * 0.55, acts, BLUE);
+    pause(200);
+    var ax = tubeR + 62;                               /* pil 3 steg nedåt */
+    line([ax, lvl(-5)], [ax, lvl(-8)], BLUE);
+    arrowHead(ax, lvl(-8), ax, lvl(-5), 9, BLUE);
+    placeString('−3', ax + 10, (lvl(-5) + lvl(-8)) / 2 + 6,
+                s * 0.55, F * 0.55, acts, BLUE);
+    pause(200);
+    line([tubeL - 8, lvl(-8)], [tubeR + 8, lvl(-8)], BLUE);   /* slutnivån */
+    placeString('−8', tubeR + 18, lvl(-8) + 6, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- steg 3: varning + uträkning ---- */
+    var b3 = bubble(280, bubbleTop(lvl(-9.6)), 272, [
+      [['Se upp! Svaret är inte 8.']],
+      [['Tecknen står inte ihop, så']],
+      [['det är en vanlig subtraktion.']]
+    ]);
+    tanke(b3);
+    var y = 388;
+    placeString('(−5)-3=−8', padL, y, s, F, acts);
+    stepEnd();
+    y += 1.7 * F;
+    var xe = placeString('Svar: −8', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 570, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förkorta ett bråk (ma1c-1.2 ex 1) ----------
+   * "Förkorta 6/15 med 3." Divisionen med 3 skrivs i både täljare och
+   * nämnare med blåpennan (det man gör i båda), exakt som i teori-
+   * genomgångens egen uppställning 6/3 över 15/3. */
+  function layoutForkorta(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    /* bråk där täljare/nämnare byggs av segment [text, färg] — så att
+     * "det man gör" (/3, ·4 …) kan skrivas med blåpennan */
+    function fracSeg(numSegs, denSegs, x0, yb) {
+      function segW(segs) {
+        var w = 0;
+        segs.forEach(function (sg) { w += stringAdvance(sg[0], s, F); });
+        return w;
+      }
+      var nw = segW(numSegs), dw = segW(denSegs);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var ybar = yb - 0.34 * F;
+      var x = x0 + (w - nw) / 2;
+      numSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar - 0.14 * F, s, F, acts, sg[1] || null);
+      });
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      x = x0 + (w - dw) / 2;
+      denSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar + 1.04 * F, s, F, acts, sg[1] || null);
+      });
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* ---- steg 1: dividera täljare och nämnare med 3 ---- */
+    var b1 = bubble(120, 40, 262, [
+      [['Att förkorta med 3 betyder']],
+      [['att täljare och nämnare']],
+      [['divideras med 3.']]
+    ]);
+    tanke(b1);
+    var y = 104;
+    var xx = fracH('6', '15', padL, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracSeg([['6'], ['/3', BLUE]], [['15'], ['/3', BLUE]], xx, y);
+    stepEnd();
+
+    /* ---- steg 2: resultatet ---- */
+    var b2 = bubble(120, bubbleTop(y + 1.04 * F), 256, [
+      [['Bråkets värde ändras inte,']],
+      [['bara hur det skrivs.']]
+    ]);
+    tanke(b2);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracH('2', '5', xx, y);
+    stepEnd();
+
+    /* ---- svar ---- */
+    y += 1.7 * F + 1.1 * F;
+    var xe = placeString('Svar: ', padL, y, s, F, acts);
+    xe = fracH('2', '5', xe, y);
+    underline(xe, y + 0.95 * F);
+    stepEnd();
+
+    return { acts: acts, contentW: 470, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förläng ett bråk (ma1c-1.2 ex 2) ----------
+   * "Förläng 2/3 så att nämnaren blir 12." Multiplikationen med 4 i
+   * täljare och nämnare skrivs med blåpennan. */
+  function layoutForlanga(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function fracSeg(numSegs, denSegs, x0, yb) {
+      function segW(segs) {
+        var w = 0;
+        segs.forEach(function (sg) { w += stringAdvance(sg[0], s, F); });
+        return w;
+      }
+      var nw = segW(numSegs), dw = segW(denSegs);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var ybar = yb - 0.34 * F;
+      var x = x0 + (w - nw) / 2;
+      numSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar - 0.14 * F, s, F, acts, sg[1] || null);
+      });
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      x = x0 + (w - dw) / 2;
+      denSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar + 1.04 * F, s, F, acts, sg[1] || null);
+      });
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* ---- steg 1: hur mycket ska nämnaren växa? ---- */
+    var b1 = bubble(120, 40, 254, [
+      [['Vad ska 3 multipliceras']],
+      [['med för att bli 12?']],
+      [['Jo, med 4!']]
+    ]);
+    tanke(b1);
+    var y = 104;
+    var xx = fracH('2', '3', padL, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracSeg([['2'], ['·4', BLUE]], [['3'], ['·4', BLUE]], xx, y);
+    stepEnd();
+
+    /* ---- steg 2: resultatet ---- */
+    var b2 = bubble(120, bubbleTop(y + 1.04 * F), 268, [
+      [['Täljare och nämnare måste']],
+      [['multipliceras med samma tal,']],
+      [['annars ändras värdet.']]
+    ]);
+    tanke(b2);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracH('8', '12', xx, y);
+    stepEnd();
+
+    /* ---- svar ---- */
+    y += 1.7 * F + 1.1 * F;
+    var xe = placeString('Svar: ', padL, y, s, F, acts);
+    xe = fracH('8', '12', xe, y);
+    underline(xe, y + 0.95 * F);
+    stepEnd();
+
+    return { acts: acts, contentW: 500, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: jämföra bråk (ma1c-1.2 ex 3) ----------
+   * "Vilket bråk är störst: 4/9 eller 3/7?" Båda bråken förlängs till
+   * samma nämnare 63 (förlängningsfaktorerna med blåpennan), täljarna
+   * jämförs och slutsatsen skrivs med olikhetstecken. */
+  function layoutJamfora(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function fracSeg(numSegs, denSegs, x0, yb) {
+      function segW(segs) {
+        var w = 0;
+        segs.forEach(function (sg) { w += stringAdvance(sg[0], s, F); });
+        return w;
+      }
+      var nw = segW(numSegs), dw = segW(denSegs);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var ybar = yb - 0.34 * F;
+      var x = x0 + (w - nw) / 2;
+      numSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar - 0.14 * F, s, F, acts, sg[1] || null);
+      });
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      x = x0 + (w - dw) / 2;
+      denSegs.forEach(function (sg) {
+        x = placeString(sg[0], x, ybar + 1.04 * F, s, F, acts, sg[1] || null);
+      });
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+    var adv = 1.7 * F;
+
+    /* ---- steg 1: förläng första bråket ---- */
+    var b1 = bubble(120, 40, 280, [
+      [['Olika nämnare! Jag förlänger']],
+      [['varje bråk med det andra']],
+      [['bråkets nämnare.']]
+    ]);
+    tanke(b1);
+    var y = 104;
+    var xx = fracH('4', '9', padL, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracSeg([['4'], ['·7', BLUE]], [['9'], ['·7', BLUE]], xx, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    fracH('28', '63', xx, y);
+    stepEnd();
+
+    /* ---- steg 2: förläng andra bråket ---- */
+    y += adv + 1.6 * F;
+    xx = fracH('3', '7', padL, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    xx = fracSeg([['3'], ['·9', BLUE]], [['7'], ['·9', BLUE]], xx, y);
+    xx = placeString('=', xx, y, s, F, acts);
+    fracH('27', '63', xx, y);
+    stepEnd();
+
+    /* ---- steg 3: jämför täljarna ---- */
+    var b2 = bubble(120, bubbleTop(y + 1.04 * F), 272, [
+      [['Samma nämnare! Nu jämför']],
+      [['jag täljarna: 28 är större']],
+      [['än 27.']]
+    ]);
+    tanke(b2);
+    y += adv + 1.6 * F;
+    xx = fracH('28', '63', padL, y);
+    xx = placeString('>', xx, y, s, F, acts);
+    fracH('27', '63', xx, y);
+    stepEnd();
+
+    /* ---- svar ---- */
+    var b3 = bubble(120, bubbleTop(y + 1.04 * F), 262, [
+      [['Alltså är fyra niondelar']],
+      [['det största bråket.']]
+    ]);
+    tanke(b3);
+    y += adv + 1.1 * F;
+    var xe = placeString('Svar: ', padL, y, s, F, acts);
+    xe = fracH('4', '9', xe, y);
+    underline(xe, y + 0.95 * F);
+    stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
   }
 
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
@@ -6993,6 +7828,10 @@
     injectCSS();
 
     var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
+                   talmangd: layoutTalmangd, olikhet: layoutOlikhet,
+                   negadd: layoutNegadd, negmult: layoutNegmult,
+                   termometer: layoutTermometer, forkorta: layoutForkorta,
+                   forlanga: layoutForlanga, jamfora: layoutJamfora,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,

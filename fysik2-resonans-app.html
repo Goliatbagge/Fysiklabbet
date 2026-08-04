@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonans — Fysiklabbet</title>
+    <meta name="description" content="Skaka en fjäder med en motor och leta upp frekvensen där utslaget växer sig störst. Ändra drivfrekvens, dämpning, massa och fjäderkonstant, se insvängningen i utslag–tid-grafen och bygg själv upp resonanskurvan punkt för punkt.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-resonans-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Resonans — Fysik nivå 2">
+    <meta property="og:description" content="Skaka en fjäder med en motor och leta upp frekvensen där utslaget växer sig störst. Ändra drivfrekvens, dämpning, massa och fjäderkonstant, se insvängningen i utslag–tid-grafen och bygg själv upp resonanskurvan punkt för punkt.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-resonans-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Resonans — Fysik nivå 2">
+    <meta name="twitter:description" content="Skaka en fjäder med en motor och leta upp frekvensen där utslaget växer sig störst. Ändra drivfrekvens, dämpning, massa och fjäderkonstant, se insvängningen i utslag–tid-grafen och bygg själv upp resonanskurvan punkt för punkt.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Mobil: formeln får aldrig radbrytas — behåll EN rad och skrolla
+           kortet i sidled i stället. Hint-chippen får inte täcka
+           avläsningsrutan nere till höger. */
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+            .scene-hint { max-width: calc(100% - 185px); }
+        }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info.res-active { border-color: var(--lab-accent, #c8324a);
+            box-shadow: 0 0 0 2px rgba(200,50,74,0.25), 0 2px 8px rgba(15,22,32,0.12); }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        /* Reglage-rad inom fullskärms-dropdownen (underkant) */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const TAU = 2 * Math.PI;
+
+        // ── Glidarintervall ──
+        const FMIN = 0.05, FMAX = 1.50;      // drivfrekvens f (Hz)
+        const BMIN = 0.3,  BMAX = 3.0;       // dämpningskoefficient b (kg/s)
+        const MMIN = 0.5,  MMAX = 2.0;       // massa m (kg)
+        const KMIN = 5,    KMAX = 20;        // fjäderkonstant k (N/m)
+        const DAMP = 0.08;                   // upphängningens amplitud D (m)
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 860, VBH = 640;
+        const CEIL = 110;                    // takets y
+        const SX = 170;                      // fjäderns lodräta axel
+        const PXM = 200;                     // pixlar per meter (scenen)
+        const SUPY = 190;                    // upphängningsstångens mittläge
+        const EQY = 400;                     // viktens mittpunkt i jämviktsläget
+        const FLOOR = 548;                   // bordets överkant
+
+        // Utslag–tid-grafen (uppe till höger)
+        const GX0 = 340, GXEND = 842;        // y-axelns läge / t-axelns pilspets
+        const GCY = 300;                     // t-axelns y (utslag 0)
+        const GAMP = 96;                     // y-axelns halva höjd (px)
+        const PYT = 110;                     // px per meter i grafen
+        const PXS = 40;                      // px per sekund
+        const TWIN = 12;                     // sekunder som visas
+        const GNOW = 800;                    // "nu"-punktens x — slutar före t-etiketten
+
+        // Resonanskurvan A–f (nere till höger, slutar före avläsningsrutan)
+        const AFX0 = 340, AFXEND = 660;      // A-axelns läge / f-axelns pilspets
+        const AFY = 585;                     // f-axelns y (A = 0)
+        const AFTOP = 417;                   // A-axelns pilspets
+        const PXF = 187.5;                   // px per Hz
+        const PYA = 210;                     // px per meter amplitud
+        const AMAXG = 0.76;                  // största A som ritas (m)
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        const COL = {
+            ink:    '#0f1620',
+            muted:  '#7c828c',
+            vikt:   '#6ba3d6',  // viktens fyllning (samma blå som teorifigurerna)
+            viktK:  '#2f6db0',  // viktens kontur — även mätpunkterna i kurvan
+            spring: '#7c828c',  // fjäderns gråton
+            driv:   '#8a8f99',  // drivningens kurva i utslag–tid-grafen
+            teori:  '#0d9488',  // teal — teoretiska resonanskurvan
+            axel:   '#38bdf8',  // diagramaxlar (svensk standard)
+            f0:     '#c8324a',  // crimson — egenfrekvensmarkeringen
+        };
+
+        // Fjäder som polyline: rak stump — sicksack — rak stump
+        const springPoints = (x, y1, y2, coilW) => {
+            const len = Math.max(24, y2 - y1);
+            const straight = Math.min(10, len * 0.08);
+            const inner = len - 2 * straight;
+            const segs = 12;
+            const pts = [[x, y1], [x, y1 + straight]];
+            for (let i = 1; i <= segs; i++) {
+                const yy = y1 + straight + inner * (i - 0.5) / segs;
+                pts.push([x + (i % 2 ? coilW : -coilW), yy]);
+            }
+            pts.push([x, y2 - straight], [x, y2]);
+            return pts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>
+                        {fmt(value, decimals)} <span style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, decimals)} {unit}</span>
+                    <span>{fmt(max, decimals)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        // Kompakt reglage-rad för fullskärms-dropdownen i underkant
+        const FsSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 150 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 90, textAlign: 'right' }}>
+                    {fmt(value, decimals)} {unit}
+                </span>
+            </div>
+        );
+
+        // Formelkort-hjälpare (samma mönster som fysik2-svangningstid-app)
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FracL = ({ topLbl, top, botLbl, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
+                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
+            </div>
+        );
+        const FracP = ({ top, bot }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25 }}>
+                <span style={{ padding: '0 6px 2px' }}>{top}</span>
+                <span style={{ padding: '2px 6px 0', borderTop: '1.5px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+            </span>
+        );
+        const Sqrt = ({ children }) => (
+            <span style={{ display: 'inline-flex', alignItems: 'stretch' }}>
+                <svg style={{ alignSelf: 'stretch', width: 15, flexShrink: 0 }} viewBox="0 0 15 40"
+                     preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0.8 25 L4.6 21.5 L8 38 L14.6 1" fill="none" stroke="currentColor"
+                          strokeWidth="1.8" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+                </svg>
+                <span style={{ borderTop: '2px solid currentColor', padding: '2px 5px 0 3px' }}>{children}</span>
+            </span>
+        );
+
+        const FormulaCard = () => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Egenfrekvens"><em>f</em>₀</Vbl>
+                <span className="fnum">=</span>
+                <FracL topLbl="&nbsp;" top="1" botLbl="Periodtid" bot={<React.Fragment><em>T</em>₀</React.Fragment>} />
+                <span className="fnum" style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Periodtid"><em>T</em>₀</Vbl>
+                <span className="fnum">=</span>
+                <span className="fnum">2<em>π</em></span>
+                <span className="fnum">·</span>
+                <Sqrt><FracL topLbl="Massa" top={<em>m</em>} botLbl="Fjäderkonstant" bot={<em>k</em>} /></Sqrt>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [fd, setFdRaw] = useState(0.25);   // drivfrekvens (Hz)
+            const [b, setBRaw] = useState(0.8);      // dämpning (kg/s)
+            const [m, setMRaw] = useState(1.0);      // massa (kg)
+            const [k, setKRaw] = useState(10);       // fjäderkonstant (N/m)
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState({
+                driv: true, f0: true, teori: false, snabb: false,
+            });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const simRef = useRef({ y: 0, v: 0, t: 0, acc: 0 });
+            const histRef = useRef([]);              // { t, y, s } för utslag–tid-grafen
+            const measRef = useRef({ cur: 0, last: null, prev: null, idx: 0, stat: false });
+            const pointsRef = useRef({});            // fKey → uppmätt amplitud (m)
+            const pRef = useRef({});
+
+            // ── Härledda storheter (beteckningar enligt fy2-2.3/2.4) ──
+            const om0 = Math.sqrt(k / m);            // vinkelhastighet ω₀ = √(k/m) (rad/s)
+            const T0 = TAU / om0;                    // egen-periodtid T₀ = 2π·√(m/k) (s)
+            const f0 = 1 / T0;                       // egenfrekvens f₀ = 1/T₀ (Hz)
+
+            const sc = (m - MMIN) / (MMAX - MMIN);
+            const WW = 52 + 20 * sc, WH = 42 + 14 * sc;   // viktens bredd/höjd (px)
+            const ylim = (FLOOR - EQY - WH / 2) / PXM;    // utslag där vikten når bordet (m)
+            const nearRes = Math.abs(fd - f0) <= 0.02;
+
+            pRef.current = { fd, b, m, k, running, snabb: show.snabb, ylim };
+
+            // ── Fysikloop: semi-implicit Euler med fasta substeg ──
+            // m·y'' = −k·(y − s) − b·y',   s = D·sin(2π·f·t)  (vibrerande fäste)
+            useEffect(() => {
+                const H = 1 / 240;                   // substeg (s)
+                const step = () => {
+                    const p = pRef.current;
+                    const s = simRef.current;
+                    const omD = TAU * p.fd;
+                    const sup = DAMP * Math.sin(omD * s.t);
+                    const a = (-p.k * (s.y - sup) - p.b * s.v) / p.m;
+                    s.v += a * H;
+                    s.y += s.v * H;
+                    s.t += H;
+                    // vikten slår i bordet — studsar mjukt och tappar fart
+                    if (s.y < -p.ylim) {
+                        s.y = -p.ylim;
+                        if (s.v < 0) s.v = -0.35 * s.v;
+                    }
+                    // amplitudmätning: toppvärde per drivperiod; två lika toppar
+                    // i rad ⟹ stationär svängning ⟹ mätpunkt i resonanskurvan
+                    const mm = measRef.current;
+                    mm.cur = Math.max(mm.cur, Math.abs(s.y));
+                    const idx = Math.floor(s.t * p.fd);
+                    if (idx !== mm.idx) {
+                        mm.idx = idx;
+                        mm.prev = mm.last;
+                        mm.last = mm.cur;
+                        mm.cur = 0;
+                        if (mm.prev !== null && mm.last !== null) {
+                            mm.stat = Math.abs(mm.last - mm.prev) < Math.max(0.02 * mm.last, 0.003);
+                            if (mm.stat) pointsRef.current[p.fd.toFixed(2)] = mm.last;
+                        }
+                    }
+                };
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    if (p.running) {
+                        simRef.current.acc += dt * (p.snabb ? 2 : 1);
+                        let guard = 0;
+                        while (simRef.current.acc >= H && guard < 60) {
+                            step(); simRef.current.acc -= H; guard++;
+                        }
+                        const s = simRef.current;
+                        const omD = TAU * p.fd;
+                        histRef.current.push({ t: s.t, y: s.y, s: DAMP * Math.sin(omD * s.t) });
+                        while (histRef.current.length && histRef.current[0].t < s.t - TWIN - 0.5) {
+                            histRef.current.shift();
+                        }
+                    }
+                    setTick(t => t + 1);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // Glidarändringar: ny frekvens ⟹ ny insvängning (mätningen börjar
+            // om); nytt m/k/b ⟹ nytt system ⟹ även resonanskurvan rensas.
+            const resetMeas = (newFd) => {
+                measRef.current = {
+                    cur: 0, last: null, prev: null,
+                    idx: Math.floor(simRef.current.t * newFd), stat: false,
+                };
+            };
+            const setFd = (v) => { setFdRaw(v); resetMeas(v); };
+            const setB = (v) => { setBRaw(v); resetMeas(fd); pointsRef.current = {}; };
+            const setM = (v) => { setMRaw(v); resetMeas(fd); pointsRef.current = {}; };
+            const setK = (v) => { setKRaw(v); resetMeas(fd); pointsRef.current = {}; };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                    if (fs) setControlsOpen(false);   // starta hopfälld i fullskärm
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            const reset = () => {
+                simRef.current = { y: 0, v: 0, t: 0, acc: 0 };
+                histRef.current = [];
+                pointsRef.current = {};
+                resetMeas(fd);
+                setRunning(true);
+            };
+
+            // ── Aktuellt tillstånd ──
+            const st = simRef.current;
+            const sup = DAMP * Math.sin(TAU * fd * st.t);   // fästets läge (m)
+            const meas = measRef.current;
+            const ampNow = meas.last !== null ? meas.last : meas.cur;
+
+            const barY = SUPY - sup * PXM;           // upphängningsstångens y
+            const wTop = EQY - st.y * PXM - WH / 2;  // viktens överkant
+            const coilW = 14 + 9 * (k - KMIN) / (KMAX - KMIN);
+            const springW = 1.8 + 1.2 * (k - KMIN) / (KMAX - KMIN);
+            const primaryLabel = running ? 'Pausa' : 'Fortsätt';
+            const crank = TAU * fd * st.t;           // vevens fasvinkel
+
+            // ── Kryssrutor (uppe till höger på scenen) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.driv} onChange={() => tShow('driv')} />
+                        <span className="st-swatch" style={{ background: COL.driv }}></span>
+                        <span>Drivningens rörelse i grafen</span></label>
+                    <label><input type="checkbox" checked={show.f0} onChange={() => tShow('f0')} />
+                        <span className="st-swatch" style={{ background: COL.f0 }}></span>
+                        <span>Markera egenfrekvensen <em>f</em>₀</span></label>
+                    <label><input type="checkbox" checked={show.teori} onChange={() => tShow('teori')} />
+                        <span className="st-swatch" style={{ background: COL.teori }}></span>
+                        <span>Hela resonanskurvan (facit)</span></label>
+                    <label><input type="checkbox" checked={show.snabb} onChange={() => tShow('snabb')} />
+                        <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.35)' }}></span>
+                        <span>Snabbare tid (2×)</span></label>
+                    {/* Styrknappar visas här BARA i fullskärm — i normalläget finns
+                        de i sidopanelen (aldrig dubblerade). */}
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{primaryLabel}</button>
+                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            // ── Scenen ──
+            const scene = () => {
+                const ceilHatch = [];
+                for (let x = 82; x <= 290; x += 12) {
+                    ceilHatch.push(<line key={'c' + x} x1={x} y1={CEIL} x2={x - 8} y2={CEIL - 8}
+                                         stroke={COL.ink} strokeWidth="1" strokeLinecap="round" />);
+                }
+                const floorHatch = [];
+                for (let x = 74; x <= 298; x += 12) {
+                    floorHatch.push(<line key={'f' + x} x1={x} y1={FLOOR} x2={x - 8} y2={FLOOR + 8}
+                                          stroke={COL.ink} strokeWidth="1" strokeLinecap="round" />);
+                }
+
+                // Utslag–tid-kurvorna ur historiken (nyaste punkten längst till höger)
+                const ptsY = [], ptsS = [];
+                for (const h of histRef.current) {
+                    const x = GNOW - (st.t - h.t) * PXS;
+                    if (x < GX0 + 2) continue;
+                    ptsY.push(`${x.toFixed(1)},${(GCY - h.y * PYT).toFixed(1)}`);
+                    if (show.driv) ptsS.push(`${x.toFixed(1)},${(GCY - h.s * PYT).toFixed(1)}`);
+                }
+
+                // Teoretisk resonanskurva: A(ω) = (k·D/m) / √((ω₀²−ω²)² + (b·ω/m)²)
+                const teoriPts = [];
+                if (show.teori) {
+                    for (let f = 0.02; f <= 1.6 + 1e-9; f += 0.01) {
+                        const w = TAU * f;
+                        const A = (k * DAMP / m) / Math.sqrt(
+                            Math.pow(om0 * om0 - w * w, 2) + Math.pow(b * w / m, 2));
+                        const x = AFX0 + f * PXF;
+                        if (x > AFXEND - 14) break;
+                        teoriPts.push(`${x.toFixed(1)},${(AFY - Math.min(A, AMAXG) * PYA).toFixed(1)}`);
+                    }
+                }
+
+                // Uppmätta punkter
+                const dots = Object.entries(pointsRef.current).map(([fKey, A]) => ({
+                    f: parseFloat(fKey), A,
+                }));
+
+                const f0x = AFX0 + f0 * PXF;
+                const fdx = AFX0 + fd * PXF;
+                const bordY = AFY - ylim * PYA;
+
+                return (
+                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+
+                        {/* Tak med snedstreck */}
+                        <line x1="74" y1={CEIL} x2="298" y2={CEIL} stroke={COL.ink} strokeWidth="2.2" />
+                        {ceilHatch}
+
+                        {/* Motorn (drivningen) med roterande vev */}
+                        <rect x="140" y={CEIL + 2} width="60" height="38" rx="5"
+                              fill="#e7dfcf" stroke={COL.ink} strokeWidth="1.6" />
+                        <circle cx={SX} cy={CEIL + 21} r="9.5" fill="none" stroke={COL.ink} strokeWidth="1.4" />
+                        <circle cx={SX + 6 * Math.cos(crank)} cy={CEIL + 21 + 6 * Math.sin(crank)}
+                                r="2.6" fill="var(--lab-accent, #c8324a)" />
+                        <text x="208" y={CEIL + 26} fontSize="12.5" fill="var(--lab-ink-muted, #5a6170)">Drivning</text>
+
+                        {/* Vevstake + vibrerande fäste */}
+                        <line x1={SX} y1={CEIL + 40} x2={SX} y2={barY - 3} stroke={COL.ink}
+                              strokeWidth="3" strokeLinecap="butt" />
+                        <rect x={SX - 28} y={barY - 3} width="56" height="6" rx="2.5" fill={COL.ink} />
+
+                        {/* Jämviktsläget */}
+                        <line x1="40" y1={EQY} x2="320" y2={EQY}
+                              stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" strokeDasharray="6 5" />
+                        <text x="40" y={EQY - 23} fontSize="12" fill="var(--lab-ink-muted, #5a6170)">Jämviktsläge</text>
+                        <text x="40" y={EQY - 8} fontSize="12" fill="var(--lab-ink-muted, #5a6170)">(<tspan fontStyle="italic">y</tspan> = 0)</text>
+
+                        {/* Fjäder + vikt */}
+                        <polyline points={springPoints(SX, barY + 3, wTop, coilW)} fill="none"
+                                  stroke={COL.spring} strokeWidth={springW} strokeLinejoin="round" />
+                        <rect x={SX - WW / 2} y={wTop} width={WW} height={WH} rx="6"
+                              fill={COL.vikt} stroke={COL.viktK} strokeWidth="2" />
+                        <line x1={SX - WW / 2 + 8} y1={wTop + 8} x2={SX + WW / 2 - 8} y2={wTop + 8}
+                              stroke="rgba(18,54,92,0.35)" strokeWidth="2" strokeLinecap="round" />
+                        <text x={SX} y={wTop + WH / 2 + 5} textAnchor="middle" fontSize="13"
+                              fill="#12365c">{fmt(m, 2)} kg</text>
+
+                        {/* Bordet som sätter den fysikaliska gränsen */}
+                        <line x1="74" y1={FLOOR} x2="298" y2={FLOOR} stroke={COL.ink} strokeWidth="2.2" />
+                        {floorHatch}
+                        <text x="298" y={FLOOR + 24} fontSize="12" textAnchor="end"
+                              fill="var(--lab-ink-muted, #5a6170)">Bord</text>
+
+                        {/* ── Utslag–tid-grafen ── */}
+                        <g>
+                            {show.driv && ptsS.length > 1 && (
+                                <polyline points={ptsS.join(' ')} fill="none" stroke={COL.driv}
+                                          strokeWidth="1.6" strokeDasharray="6 5" />
+                            )}
+                            {ptsY.length > 1 && (
+                                <polyline points={ptsY.join(' ')} fill="none" stroke={COL.ink} strokeWidth="2.2" />
+                            )}
+
+                            {/* axlar (ljusblå enligt svensk diagramstandard) */}
+                            <line x1={GX0 - 8} y1={GCY} x2={GXEND - 9} y2={GCY} stroke={COL.axel} strokeWidth="1.6" />
+                            <polygon points={`${GXEND},${GCY} ${GXEND - 9},${GCY - 3.6} ${GXEND - 9},${GCY + 3.6}`} fill={COL.axel} />
+                            <line x1={GX0} y1={GCY + GAMP} x2={GX0} y2={GCY - GAMP + 9} stroke={COL.axel} strokeWidth="1.6" />
+                            <polygon points={`${GX0},${GCY - GAMP} ${GX0 - 3.6},${GCY - GAMP + 9} ${GX0 + 3.6},${GCY - GAMP + 9}`} fill={COL.axel} />
+                            <text x={GX0} y={GCY - GAMP - 11} textAnchor="middle" fontSize="13" fill={COL.ink}>
+                                <tspan fontStyle="italic">y</tspan> (m)
+                            </text>
+                            <text x={GXEND - 4} y={GCY + 20} textAnchor="end" fontSize="13" fill={COL.ink}>
+                                <tspan fontStyle="italic">t</tspan> (s)
+                            </text>
+
+                            {/* punkten som följer svängningen */}
+                            {ptsY.length > 0 && (
+                                <circle cx={GNOW} cy={GCY - st.y * PYT} r="6" fill={COL.vikt}
+                                        stroke={COL.viktK} strokeWidth="2" />
+                            )}
+                        </g>
+
+                        {/* ── Resonanskurvan A–f ── */}
+                        <g>
+                            {/* bordets gräns — högre amplitud än så här går inte */}
+                            <line x1={AFX0 + 4} y1={bordY} x2={AFXEND - 16} y2={bordY}
+                                  stroke="rgba(15,22,32,0.30)" strokeWidth="1" strokeDasharray="4 4" />
+                            <text x={AFX0 + 8} y={bordY - 5} fontSize="11"
+                                  fill="var(--lab-ink-muted, #5a6170)">bordet stoppar</text>
+
+                            {/* markering av aktuell drivfrekvens */}
+                            <line x1={fdx} y1={AFY - 2} x2={fdx} y2={AFTOP + 14}
+                                  stroke="rgba(15,22,32,0.25)" strokeWidth="1.2" />
+                            <polygon points={`${fdx},${AFY - 7} ${fdx - 5},${AFY + 2} ${fdx + 5},${AFY + 2}`}
+                                     fill="var(--lab-accent, #c8324a)" />
+
+                            {/* egenfrekvensen f₀ */}
+                            {show.f0 && (
+                                <g>
+                                    <line x1={f0x} y1={AFY - 2} x2={f0x} y2={AFTOP + 14}
+                                          stroke={COL.f0} strokeWidth="1.3" strokeDasharray="6 5" />
+                                    <text x={f0x} y={AFTOP + 6} textAnchor="middle" fontSize="13" fill={COL.f0}>
+                                        <tspan fontStyle="italic">f</tspan>₀
+                                    </text>
+                                </g>
+                            )}
+
+                            {/* teoretiska kurvan (facit) */}
+                            {show.teori && teoriPts.length > 1 && (
+                                <polyline points={teoriPts.join(' ')} fill="none" stroke={COL.teori}
+                                          strokeWidth="2" strokeDasharray="7 5" />
+                            )}
+
+                            {/* uppmätta punkter — byggs upp av eleven */}
+                            {dots.map(d => (
+                                <circle key={d.f} cx={AFX0 + d.f * PXF}
+                                        cy={AFY - Math.min(d.A, AMAXG) * PYA} r="4"
+                                        fill={COL.vikt} stroke={COL.viktK} strokeWidth="1.5" />
+                            ))}
+
+                            {/* axlar */}
+                            <line x1={AFX0 - 8} y1={AFY} x2={AFXEND - 9} y2={AFY} stroke={COL.axel} strokeWidth="1.6" />
+                            <polygon points={`${AFXEND},${AFY} ${AFXEND - 9},${AFY - 3.6} ${AFXEND - 9},${AFY + 3.6}`} fill={COL.axel} />
+                            <line x1={AFX0} y1={AFY} x2={AFX0} y2={AFTOP + 9} stroke={COL.axel} strokeWidth="1.6" />
+                            <polygon points={`${AFX0},${AFTOP} ${AFX0 - 3.6},${AFTOP + 9} ${AFX0 + 3.6},${AFTOP + 9}`} fill={COL.axel} />
+                            <text x={AFX0} y={AFTOP - 10} textAnchor="middle" fontSize="13" fill={COL.ink}>
+                                <tspan fontStyle="italic">A</tspan> (m)
+                            </text>
+                            <text x={AFXEND - 4} y={AFY + 20} textAnchor="end" fontSize="13" fill={COL.ink}>
+                                <tspan fontStyle="italic">f</tspan> (Hz)
+                            </text>
+
+                            {/* skalstreck */}
+                            {[0.5, 1.0].map(f => (
+                                <g key={'ft' + f}>
+                                    <line x1={AFX0 + f * PXF} y1={AFY} x2={AFX0 + f * PXF} y2={AFY + 5}
+                                          stroke={COL.axel} strokeWidth="1.4" />
+                                    <text x={AFX0 + f * PXF} y={AFY + 20} textAnchor="middle" fontSize="11.5"
+                                          fill="var(--lab-ink-muted, #5a6170)">{fmt(f, 1)}</text>
+                                </g>
+                            ))}
+                            {[0.2, 0.4, 0.6].map(A => (
+                                <g key={'at' + A}>
+                                    <line x1={AFX0 - 5} y1={AFY - A * PYA} x2={AFX0} y2={AFY - A * PYA}
+                                          stroke={COL.axel} strokeWidth="1.4" />
+                                    <text x={AFX0 - 9} y={AFY - A * PYA + 4} textAnchor="end" fontSize="11.5"
+                                          fill="var(--lab-ink-muted, #5a6170)">{fmt(A, 1)}</text>
+                                </g>
+                            ))}
+                        </g>
+                    </svg>
+                );
+            };
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Resonans
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Resonans</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Ett system som svänger fritt gör det med sin <strong>egenfrekvens</strong>. Tvingar
+                            man det i stället att svänga i takt med en yttre kraft kallas det en
+                            <strong> tvungen svängning</strong> — här skakar en motor fjäderns fäste med
+                            drivfrekvensen <em>f</em>. Träffar drivfrekvensen egenfrekvensen <em>f</em>₀
+                            växer utslaget kraftigt: det är <strong>resonans</strong>. Svep med reglaget och
+                            bygg själv upp resonanskurvan, punkt för punkt.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className={`scene-info${nearRes ? ' res-active' : ''}`}>
+                                        <span className="si-lbl">Drivfrekvens <em style={{ textTransform: 'none' }}>f</em></span>
+                                        <span className="si-val">{fmt(fd, 2)} Hz</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Egenfrekvens <em style={{ textTransform: 'none' }}>f</em>₀</span>
+                                        <span className="si-val">{fmt(f0, 2)} Hz</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Amplitud <em style={{ textTransform: 'none' }}>A</em></span>
+                                        <span className="si-val">{ampNow > 0 ? `${fmt(ampNow, 2)} m` : '–'}</span>
+                                        {nearRes && (
+                                            <span className="si-val" style={{ color: 'var(--lab-accent)', marginTop: 3 }}>Resonans!</span>
+                                        )}
+                                    </div>
+
+                                    <div className="scene-hint">Dra i reglaget Drivfrekvens och leta upp frekvensen som ger störst utslag</div>
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Drivfrekvens (<em>f</em>)" value={fd}
+                                                          min={FMIN} max={FMAX} step={0.01} unit="Hz" onChange={setFd} decimals={2} />
+                                                <FsSlider label="Dämpning (<em>b</em>)" value={b}
+                                                          min={BMIN} max={BMAX} step={0.1} unit="kg/s" onChange={setB} decimals={1} />
+                                                <FsSlider label="Massa (<em>m</em>)" value={m}
+                                                          min={MMIN} max={MMAX} step={0.05} unit="kg" onChange={setM} decimals={2} />
+                                                <FsSlider label="Fjäderkonstant (<em>k</em>)" value={k}
+                                                          min={KMIN} max={KMAX} step={0.5} unit="N/m" onChange={setK} decimals={1} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Drivfrekvens (<em>f</em>)"
+                                            sub="Frekvensen som motorn skakar fjäderns fäste med — den tvungna svängningens frekvens."
+                                            value={fd} min={FMIN} max={FMAX} step={0.01} unit="Hz" onChange={setFd} decimals={2} />
+                                    <Slider label="Dämpning (<em>b</em>)"
+                                            sub="Friktion och luftmotstånd. Liten dämpning ger en hög och smal resonanstopp."
+                                            value={b} min={BMIN} max={BMAX} step={0.1} unit="kg/s" onChange={setB} decimals={1} />
+                                    <Slider label="Massa (<em>m</em>)"
+                                            sub="Tyngre vikt ger lägre egenfrekvens — resonanstoppen flyttar åt vänster."
+                                            value={m} min={MMIN} max={MMAX} step={0.05} unit="kg" onChange={setM} decimals={2} />
+                                    <Slider label="Fjäderkonstant (<em>k</em>)"
+                                            sub="Styvare fjäder ger högre egenfrekvens — toppen flyttar åt höger."
+                                            value={k} min={KMIN} max={KMAX} step={0.5} unit="N/m" onChange={setK} decimals={1} />
+                                    <div className="flex gap-2 mt-1">
+                                        <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Live-beräkning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Systemets egenfrekvens</div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
+                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>T</em>₀</span>
+                                        <span>=</span>
+                                        <span>2<em>π</em></span>
+                                        <span>·</span>
+                                        <Sqrt><FracP top={`${fmt(m, 2)} kg`} bot={`${fmt(k, 1)} N/m`} /></Sqrt>
+                                        <span>=</span>
+                                        <span className="font-bold">{fmt(T0, 2)}{' '}s</span>
+                                        <span style={{ margin: '0 6px', color: 'var(--lab-ink-muted)' }}>⟹</span>
+                                        <span><em>f</em>₀</span>
+                                        <span>=</span>
+                                        <FracP top="1" bot={<React.Fragment><em>T</em>₀</React.Fragment>} />
+                                        <span>=</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)' }}>{fmt(f0, 2)}{' '}Hz</span>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Drivfrekvens <em>f</em>" value={fmt(fd, 2)} unit="Hz" />
+                                        <Readout label="Egenfrekvens <em>f</em>₀" value={fmt(f0, 2)} unit="Hz" color="var(--lab-accent)" />
+                                        <Readout label="Uppmätt amplitud <em>A</em>" value={ampNow > 0 ? fmt(ampNow, 2) : '–'} unit="m" />
+                                        <Readout label="Svängningen är"
+                                                 value={meas.stat ? 'stationär' : 'på väg in'} unit="" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        En mätpunkt sätts i resonanskurvan först när svängningen hunnit bli
+                                        stationär — håll drivfrekvensen stilla några perioder, så dyker
+                                        punkten upp. Byter du <em>m</em>, <em>k</em> eller dämpning blir det
+                                        ett nytt system, och kurvan rensas.
+                                    </div>
+                                </div>
+
+                                {/* Prova detta */}
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Prova detta</div>
+                                    <ol className="text-sm space-y-2 list-decimal list-inside" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <li>Dra drivfrekvensen sakta från lågt till högt. Vad händer med utslaget på vägen?</li>
+                                        <li>Hitta frekvensen där utslaget blir som störst. Jämför med egenfrekvensen <em>f</em>₀.</li>
+                                        <li>Ändra massan eller fjäderkonstanten. Åt vilket håll flyttar sig toppen — och varför, om du tänker på <em>f</em>₀ = 1/<em>T</em>₀?</li>
+                                        <li>Öka dämpningen och svep igen. Vad händer med toppens höjd och bredd?</li>
+                                        <li>Sänk dämpningen till minsta möjliga och ställ drivfrekvensen på <em>f</em>₀. Vad sätter till slut gränsen för utslaget?</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Egenfrekvensen är systemets egen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Egenfrekvensen <em>f</em>₀ bestäms av systemet självt — här av massan och
+                                    fjäderkonstanten. Drivfrekvensen <em>f</em> väljer du fritt utifrån. Resonans
+                                    uppstår när de två <strong>råkar stämma överens</strong> — det är alltså två
+                                    olika storheter, som blir lika just vid resonans.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Energi i rätt takt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vid resonans ger drivningen vikten en liten knuff i rätt riktning i varje
+                                    svängning — precis som när man puttar på en gunga när den vänt och är på väg
+                                    ner. Varje tillskott är litet, men de samlas på hög: amplituden växer tills
+                                    dämpningens förluster (eller bordet!) sätter stopp.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Dämpningen styr toppen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Liten dämpning ger en hög och smal resonanstopp — systemet hinner samla mycket
+                                    energi innan förlusterna balanserar tillskottet. Stor dämpning ger en låg, bred
+                                    puckel. Därför bygger man in dämpare i broar och höga hus: inte för att flytta
+                                    egenfrekvensen, utan för att kapa toppen.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Resonans i verkligheten</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>Gungan</strong> — puttas i takt med sin egenfrekvens, så att varje putt tillför energi. Puttar i fel takt bromsar i stället.</li>
+                                <li><strong>Gitarrens resonanslåda</strong> — förstärker strängens svängning till en hörbar ton.</li>
+                                <li><strong>Basljud genom väggen</strong> — väggens egenfrekvens är låg, så det är bastonerna som får den att svänga med (till grannarnas förtret).</li>
+                                <li><strong>Vinglaset som spricker</strong> — ett starkt ljud med glasets egenfrekvens kan få utslaget att växa tills glaset brister.</li>
+                                <li><strong>Lösa delar i en bil</strong> — börjar skaka vid just den fart där motorns vibrationer träffar delens egenfrekvens.</li>
+                                <li><strong>Tacoma Bridge (1940)</strong> — vinden satte bron i svängning nära dess egenfrekvens, utslaget växte och bron slets sönder. Simuleringens bord spelar samma roll som brons hållfasthet: i verkligheten växer inget utslag i det oändliga — något går sönder först.</li>
+                                <li><strong>Markresonans</strong> — kan få en helikopter på marken att slitas itu; undviks genom att lyfta.</li>
+                            </ul>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Resonans handlar om ljud."</strong> Nej — resonans gäller alla slags svängningar. Vinglaset och resonanslådan är ljudexempel, men gungan, bron och helikoptern är helt tysta mekaniska svängningar. Ljud är bara ett av sätten vi märker resonans på.</li>
+                                <li><strong>"Vid resonans blir utslaget jättestort direkt."</strong> Nej — titta på utslag–tid-grafen: amplituden byggs upp lite i taget under många svängningar, eftersom varje period bara tillför en liten energiknuff. Därför sätts mätpunkten i kurvan först när insvängningen är klar.</li>
+                                <li><strong>"Högre drivfrekvens ger alltid större utslag."</strong> Nej — resonanskurvan är en topp, inte en backe. Både för låg <em>och</em> för hög drivfrekvens ger litet utslag; bara nära <em>f</em>₀ blir det stort.</li>
+                                <li><strong>"Drivfrekvens och egenfrekvens är samma sak."</strong> Nej — drivfrekvensen väljer du med reglaget, egenfrekvensen är inbyggd i systemet (<em>m</em> och <em>k</em>). Resonans är just det speciella fallet när de två är lika.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

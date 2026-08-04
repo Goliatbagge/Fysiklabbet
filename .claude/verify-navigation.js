@@ -49,6 +49,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-pipor-app.html',
     'fysik2-ljudniva-app.html',
     'fysik2-svangningstid-app.html',
+    'fysik2-resonans-app.html',
     'fysik2-vinkelhastighet-app.html',
     'fysik2-hookes-lag-app.html',
     'fysik2-cirkular-rorelse-app.html',

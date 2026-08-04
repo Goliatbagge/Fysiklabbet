@@ -51,6 +51,79 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-05-rubin-mork-materia",
+    date: "2026-08-05",
+    title: "Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen",
+    deck: "På en bergstopp i Chile tar världens största digitalkamera en ny bild av natthimlen ungefär var fyrtionde sekund. Den första vetenskapliga bilden rymmer över en halv miljon galaxer — men det egentliga målet är att kartlägga något som aldrig kommer att synas på någon bild.",
+    category: "Astronomi",
+    readingTime: "7 min",
+    image: "nyheter/bilder/2026-08-05-rubin-mork-materia.jpg",
+    imageAlt: "Schematisk illustration mot mörk stjärnhimmel: en svagt lysande, diffus klotformig massa i mitten, omgiven av små avlägsna galaxer. Galaxerna längst ut har vanliga runda och ovala former, medan de närmare den osynliga massan är utdragna till bågar som böjer sig runt den, som om de setts genom en ojämn glaslins.",
+    imageCredit: "Illustration: Fysiklabbet",
+    tags: ["astronomi", "kosmologi", "mörk materia", "gravitation", "galaxer", "teleskop", "gravitationslinsning", "rotationskurva", "supernova", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Vera C. Rubin Observatory (pressmeddelande)", url: "https://rubinobservatory.org/news/action-rubin-lsst-begins" },
+      { name: "NSF NOIRLab (pressmeddelande)", url: "https://noirlab.edu/public/news/noirlab2618/" },
+      { name: "SLAC National Accelerator Laboratory", url: "https://www6.slac.stanford.edu/news/2026-07-31-doe-nsf-rubin-observatory-opens-deep-window-famous-cosmic-field" },
+      { name: "Rubin Observatory — Early Data Preview 2", url: "https://rubinobservatory.org/events/edp2-release" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-08-rubin-observatory-deep-window-famous.html" }
+    ],
+    research: {
+      citation: "Željko Ivezić m.fl., ”LSST: From Science Drivers to Reference Design and Anticipated Data Products”, The Astrophysical Journal 873:111 (2019) — genomgångens referensdesign och vetenskapliga mål",
+      url: "https://doi.org/10.3847/1538-4357/ab042c"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 3.5 Gravitationslagen", href: "katalog.html#fy1-3.5" },
+        { label: "Fysik nivå 2 · 1.4 Cirkulär rörelse", href: "katalog.html#fy2-1.4" },
+        { label: "Fysik nivå 2 · 5.1 Universums struktur", href: "katalog.html#fy2-5.1" }
+      ],
+      fragor: [
+        "Rotationskurvorna kan förklaras på två sätt: antingen finns det massa vi inte ser, eller så gäller inte gravitationslagen ute vid galaxernas kanter. Nästan alla astronomer valde det första. Vad är det som gör att man hellre lägger till en okänd ingrediens än ändrar en lag som fungerar överallt annars — och vad skulle krävas för att göra det omvända valet rimligt?",
+        "Enskilda galaxer får sin form förvrängd med någon procent av gravitationslinsningen, men galaxer har högst olika form från början. Ändå går det att mäta massan. Hur kan en effekt som är omöjlig att se på ett objekt bli mätbar på en miljard objekt — och vad är det metoden egentligen antar om galaxernas naturliga former?",
+        "Teleskopet är byggt för att ta om samma bild i tio år i stället för att titta extra länge på utvalda objekt. Vilken sorts upptäckter blir möjliga med den strategin som annars vore omöjliga, och vad förlorar man på att aldrig rikta instrumentet mot något särskilt?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Natten till den 30&nbsp;juni i år började ett teleskop uppe i de chilenska Anderna, drygt 2&nbsp;600 meter över havet, göra precis det som det ska göra varenda klar natt i tio år framåt: ta en bild av himlen, vrida sig några grader, ta en till." },
+      { type: "p", html: "Anläggningen heter Vera C. Rubin Observatory och finansieras av den amerikanska forskningsmyndigheten National Science Foundation tillsammans med landets energidepartement. Teleskopets huvudspegel är 8,4&nbsp;meter i diameter, och i brännpunkten sitter LSST-kameran: 3&nbsp;200&nbsp;megapixel fördelade på 189 bildsensorer, en apparat stor som en liten bil. Varje exponering täcker en bit himmel som rymmer ungefär 40&nbsp;fullmånar, en ny bild blir klar ungefär var 40:e sekund, och på några få nätter hinner teleskopet runt hela den södra stjärnhimlen. Det blir omkring 20&nbsp;terabyte data per natt." },
+      { type: "p", html: "Programmet kallas Legacy Survey of Space and Time, LSST, och går ut på en enda sak: att fotografera samma himmel om och om igen i tio år." },
+      { type: "quote", html: "”I dag börjar vi filma den största kosmiska film som någonsin gjorts.”", cite: "Brian Stone, tillförordnad chef för National Science Foundation" },
+      { type: "p", html: "Att det blev just nu berodde inte på en invigningsdag utan på en avprickad lista. Beslutet att formellt starta genomgången fattades, enligt observatoriets ledning, efter en period av systemoptimering och en noggrann genomgång av teknisk beredskap, datasystemens prestanda och vetenskaplig validering — efter ungefär ett kvarts sekel av planering, bygge och intrimning." },
+
+      { type: "h2", text: "En bild byggd av hundratals bilder" },
+      { type: "p", html: "Den 31&nbsp;juli kom det första vetenskapliga datapaketet från den färdiga kameran, kallat Early Data Preview 2, och med det en bild av det så kallade COSMOS-fältet i stjärnbilden Sextanten. Bilden är inte en enda exponering utan hundratals staplade på varandra, tagna mellan april 2025 och januari 2026." },
+      { type: "p", html: "I den finns mer än 500&nbsp;000 galaxer och mer än 50&nbsp;000 stjärnor: spiraler med tunna armar, släta elliptiska galaxer, kolliderande galaxpar som dragit ut varandra i trassliga former, och svagt röda fläckar så avlägsna att ljuset varit på väg mot oss under en stor del av universums historia." },
+      { type: "p", html: "Valet av fält är ingen slump. COSMOS pekar bort från Vintergatans dammiga plan, så sikten ut ur vår egen galax är ovanligt fri, och området har kartlagts av det ena teleskopet efter det andra i tjugo år. Det gör det till en måttstock: ser Rubin samma saker som alla andra, fast svagare och djupare, då fungerar apparaten." },
+
+      { type: "h2", text: "Kvinnan som såg att något fattades" },
+      { type: "p", html: "Observatoriet är uppkallat efter Vera Rubin, den amerikanska astronom vars mätningar på 1970-talet gjorde frågan om mörk materia omöjlig att vifta bort. Tillsammans med instrumentbyggaren Kent Ford delade hon upp ljuset från lysande gasmoln i spiralgalaxer i dess våglängder och läste av hur spektrallinjerna förskjutits av dopplereffekten. Ur förskjutningen följde hur fort gasen rörde sig — och framför allt hur farten berodde på avståndet till galaxens mitt." },
+      { type: "p", html: "Vad de borde ha sett följer direkt ur Newtons gravitationslag. För en stjärna i cirkelbana ska gravitationen vara precis den centripetalkraft som håller kvar den i banan, alltså <em>G</em>·<em>M</em>·<em>m</em>/<em>r</em><sup>2</sup>&nbsp;=&nbsp;<em>m</em>·<em>v</em><sup>2</sup>/<em>r</em>, och löser man ut farten blir den <em>v</em>&nbsp;=&nbsp;√(<em>G</em>·<em>M</em>/<em>r</em>). Ligger massan samlad i mitten ska farten alltså sjunka ju längre ut man kommer. Så gör planeterna i vårt eget solsystem: Merkurius rusar fram i 47&nbsp;km/s, Neptunus lunkar i 5,4&nbsp;km/s." },
+      { type: "p", html: "Galaxerna vägrade. I Andromedagalaxen, där paret mätte farten i 67 utvalda gasmoln, och sedan i tio spiralgalaxer till, låg hastigheten nästan konstant ända ut i utkanterna — där det knappt finns något ljus kvar att mäta på." },
+      { type: "image", src: "nyheter/bilder/2026-08-05-rubin-mork-materia-2.png", alt: "Diagram med avståndet från galaxens mitt på den vågräta axeln och stjärnornas banfart på den lodräta. En streckad kurva stiger snabbt och avtar sedan utåt — den förväntade farten om bara den synliga massan fanns. En heldragen kurva stiger och planar sedan ut på en hög, nästan konstant nivå — den uppmätta farten. Skillnaden mellan kurvorna växer utåt.", caption: "En platt rotationskurva innebär att den inneslutna massan fortsätter växa ungefär proportionellt mot radien — långt utanför den lysande delen av galaxen.", credit: "Illustration: Fysiklabbet" },
+      { type: "p", html: "En platt rotationskurva har en obehaglig konsekvens. Ska farten hållas uppe måste massan innanför banan fortsätta växa ungefär i takt med radien, också där ljuset tagit slut. Antingen gäller alltså inte gravitationslagen på galaxskala, eller så ligger galaxerna inbäddade i något som väger många gånger mer än allt vi ser — och som inte lyser." },
+
+      { type: "h2", text: "Att fotografera det man inte kan se" },
+      { type: "p", html: "Mörk materia sänder inte ut ljus, absorberar inte ljus och reflekterar inte ljus. Det enda den gör är att dra. Och det är precis den egenskapen Rubin-observatoriet är byggt för att utnyttja." },
+      { type: "p", html: "Massa kröker rummet, och ljus som passerar tillräckligt nära böjs av. Ligger en tung ansamling materia mellan oss och en avlägsen galax blir bilden av bakgrundsgalaxen därför lite utdragen, ungefär som ett föremål sett genom en ojämn glasruta. Fenomenet kallas gravitationslinsning. I sällsynta, spektakulära fall dras galaxen ut till en lysande båge — men i det stora flertalet fall handlar det om någon enstaka procents förvrängning, alltså långt mindre än skillnaden mellan två galaxers naturliga former." },
+      { type: "p", html: "Därför fungerar metoden bara statistiskt. Mäter man formen på tillräckligt många galaxer och letar efter en gemensam, systematisk skevhet — grannar som lutar åt samma håll — går det att räkna baklänges till hur massan är fördelad längs synlinjen, inklusive den del av massan som inte lyser. ”Tillräckligt många” är här ungefär 20&nbsp;miljarder galaxer, vilket är vad genomgången väntas katalogisera under sina tio år." },
+
+      { type: "h2", text: "Poängen med att göra om det" },
+      { type: "p", html: "Den andra halvan av idén är tiden. Varje ny bild jämförs automatiskt med tidigare bilder av samma himmelsfläck, och allt som skiljer sig — en ljuspunkt som tillkommit, en som slocknat, en som flyttat sig — skickas ut som ett larm till astronomer världen över inom någon minut. När genomgången går för full maskin väntas larmen bli miljontals varje natt." },
+      { type: "p", html: "Det som ändrar sig är också det mest upplysande: exploderande stjärnor, asteroider som kryper fram mot stjärnbakgrunden, galaxkärnor som plötsligt blossar upp. Supernovor av en viss typ har dessutom en känd ljusstyrka och fungerar därför som avståndsmätare — det är med dem man följer hur universums utvidgning ändrat takt, alltså den mörka energin." },
+      { type: "quote", html: "”Rubin-observatoriet är en upptäcktsmaskin.”", cite: "Leanne Guy, Vera C. Rubin Observatory" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En enda bild från LSST-kameran skulle behöva 378 4K-skärmar för att visas i full upplösning.",
+        "Huvudspegeln är samtidigt teleskopets tredje spegel — båda spegelytorna är slipade ur ett och samma glasblock, med den yttre ringen och den inre skivan krökta på olika sätt.",
+        "Kameran har sex filter, från ultraviolett till nära infrarött, och byter mellan dem mitt under natten på ett par minuter.",
+        "Trots sin storlek vrider sig teleskopet till nästa fält och står stilla igen på några sekunder. Utan det hade en ny bild var 40:e sekund varit omöjlig."
+      ] },
+
+      { type: "p", html: "Tio år är lång tid, och det mesta som ska komma ut ur observatoriet är ännu bara en plan. Men arbetsordningen är ovanlig: i stället för att en forskare bokar tid för att titta på ett bestämt objekt fotograferas allt, hela tiden, och frågorna ställs i efterhand — även de frågor ingen kommit på än." }
+    ]
+  },
+  {
     id: "2026-08-04-fusion-i-metall",
     date: "2026-08-04",
     title: "Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp",

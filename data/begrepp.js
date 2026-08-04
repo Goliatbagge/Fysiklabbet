@@ -56,6 +56,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'gravitationslinsning',
+    term: 'Gravitationslinsning',
+    former: ['gravitationslinsning', 'gravitationslinsningen', 'gravitationslins', 'gravitationslinsen', 'gravitationslinser', 'gravitationslinserna', 'gravitationslinseffekt', 'gravitationslinseffekten', 'svag gravitationslinsning', 'svaga gravitationslinsningen', 'stark gravitationslinsning', 'linsning', 'linsningen'],
+    kort: 'Ljus som passerar nära en tung massa böjs av, så att bilden av det som ligger bakom förskjuts, dras ut eller dubbleras. Effekten gör det möjligt att väga massa som inte syns.',
+    relaterade: ['mork-materia', 'galaxhop', 'relativitetsteori'],
+    body: [
+      { type: 'p', html: 'Ljus går den snabbaste vägen genom rummet — men rummet självt är krökt kring tunga föremål. Passerar en ljusstråle nära en stor massa följer den därför en böjd bana, precis som om den gått genom en glaslins. Ligger en tung galaxhop mellan oss och en avlägsen galax kommer galaxens ljus alltså fram till oss från lite fel håll, och bilden hamnar på fel plats, blir utdragen eller syns i flera exemplar samtidigt.' },
+      { type: 'p', html: 'Hur kraftig effekten blir beror på hur mycket massa ljuset passerar och hur nära. I de mest spektakulära fallen — stark linsning — dras bakgrundsgalaxen ut till en lysande båge eller till och med en sluten ring runt den tunga hopen. Betydligt vanligare är svag linsning, där formen bara förvrängs med någon procent. Så små förändringar syns inte på en enskild galax, eftersom galaxer har vitt skilda former från början. Men mäter man tiotusentals galaxer i samma område och de visar sig luta systematiskt åt samma håll, går det att räkna ut hur mycket massa som ligger emellan.' },
+      { type: 'p', html: 'Att effekten finns förutsades av Albert Einstein och bekräftades vid en solförmörkelse 1919, då stjärnor nära solskivan visade sig stå en aning fel. I dag är gravitationslinsning ett av de viktigaste verktygen inom astronomin — bland annat för att den mäter <em>all</em> massa, inte bara den som lyser, och därmed avslöjar var den mörka materien finns.' }
+    ]
+  },
+  {
+    id: 'rotationskurva',
+    term: 'Rotationskurva',
+    former: ['rotationskurva', 'rotationskurvan', 'rotationskurvor', 'rotationskurvorna', 'galaxrotation', 'galaxrotationen', 'platt rotationskurva', 'platta rotationskurvor'],
+    kort: 'En graf över hur fort stjärnorna i en galax rör sig, ritad mot avståndet till galaxens mitt. Att kurvorna är platta är det klassiska skälet att tro på mörk materia.',
+    relaterade: ['mork-materia', 'vintergatan'],
+    body: [
+      { type: 'p', html: 'I ett solsystem gäller en enkel regel: ju längre ut en planet ligger, desto långsammare rör den sig. Merkurius far fram i 47&nbsp;km/s medan Neptunus lunkar i 5,4&nbsp;km/s. Det följer direkt av gravitationslagen — nästan all massa sitter i mitten, i solen, och dess dragningskraft avtar med avståndet.' },
+      { type: 'p', html: 'En galax borde bete sig ungefär likadant, eftersom både stjärnorna och ljuset tätnar kraftigt mot mitten. När astronomer på 1960- och 70-talen mätte farten hos gas och stjärnor allt längre ut i spiralgalaxer väntade de sig därför en kurva som stiger nära mitten och sedan sjunker utåt. Det de fick var en kurva som stiger — och sedan lägger sig platt, med i stort sett samma fart ända ut i utkanterna där knappt något ljus finns kvar.' },
+      { type: 'p', html: 'En platt kurva betyder att massan innanför en stjärnas bana fortsätter växa ju längre ut man kommer, trots att ljuset tagit slut. Antingen fungerar gravitationen annorlunda på de här avstånden, eller så är galaxen omgiven av ett stort klot av materia som inte lyser. Den andra tolkningen har fått stöd från flera oberoende håll, och rotationskurvorna räknas i dag som det första riktigt svårslagna beviset för att universum innehåller mer massa än vi kan se.' }
+    ]
+  },
+  {
     id: 'karnfusion',
     term: 'Kärnfusion',
     former: ['kärnfusion', 'kärnfusionen', 'fusion', 'fusionen', 'fusioner', 'fusionerna', 'fusionera', 'fusionerar', 'fusionerade', 'fusionsreaktion', 'fusionsreaktionen', 'fusionsreaktioner', 'fusionsreaktor', 'fusionsreaktorn', 'fusionsreaktorer', 'fusionskraft', 'fusionskraften', 'fusionshastighet', 'fusionshastigheten', 'vätefusion', 'vätefusionen', 'kall fusion', 'kalla fusionen'],

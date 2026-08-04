@@ -247,10 +247,10 @@ body.laborans a {
 
 /* Undermenyer i Ämnes-dropdownen: Fysik / Matematik / Matematik – fortsättning
    som grupprubriker, med nivåvalen i en utfällbar undermeny till höger.
-   Öppnas på hover och tangentbordsfokus, precis som huvuddropdownen.
-   På smal skärm (se media-blocket längre ned) visas nivåerna i stället
-   alltid, indragna under sin grupprubrik, så ingen meny hamnar utanför
-   skärmen. */
+   Öppnas på hover och tangentbordsfokus, precis som huvuddropdownen —
+   på touch öppnar ett tryck på grupprubriken (hover-emulering). På smal
+   skärm släpps undermenyns min-width (se media-blocket längre ned) så
+   att den ryms innanför skärmkanten. */
 
 .lab-nav-dd-grupp {
     position: relative;
@@ -509,33 +509,19 @@ body.laborans a {
         transform: translateX(0) translateY(-4px);
     }
 
-    /* Undermenyerna får inte flyta ut till höger på smal skärm — visa dem
-       i stället alltid, indragna under sin grupprubrik. */
-    .lab-nav-dd-grupp-trigger {
-        cursor: default;
-    }
-
-    .lab-nav-dd-grupp-caret {
-        display: none;
-    }
-
+    /* Undermenyerna fälls ut åt höger även på smal skärm — ett tryck på en
+       grupprubrik öppnar dess nivåer (touch hover-emulerar). min-width
+       släpps så att den smala nivålistan ryms innanför skärmkanten. */
     .lab-nav-dd-undermeny {
-        position: static;
         min-width: 0;
-        padding: 0 0 2px;
-        border: none;
-        box-shadow: none;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
     }
+}
 
-    .lab-nav-dd-undermeny::before {
-        display: none;
-    }
-
-    .lab-nav .lab-nav-dd-undermeny a {
-        padding: 7px 16px 7px 32px;
+/* Riktigt smala skärmar (~320 px): låt undermenyn överlappa gruppradens
+   högerkant något i stället för att klippas av skärmkanten. */
+@media (max-width: 340px) {
+    .lab-nav-dd-undermeny {
+        left: calc(100% - 36px);
     }
 }
 

@@ -36,6 +36,8 @@ matnyttigt att man tar med sig något in i klassrummet.
    - `.claude/nyhetsbrev/planerat.md` — det användaren själv antecknat om vad
      som är på gång (nya simuleringar, funktioner, avsnitt). Detta är enda
      tillåtna källan till teaser-löften utöver nyhetskön.
+   - `.claude/nyhetsbrev/tips.md` — katalogen över tipsbara funktioner och
+     när varje senast tipsades (underlag för "Veckans tips", se nedan).
    - `.claude/nyheter/publicerat.md` + `data/nyheter.js` — veckans publicerade
      fysiknyheter (de med `date` inom brevperioden).
 
@@ -65,6 +67,8 @@ matnyttigt att man tar med sig något in i klassrummet.
      upp småsaker. Har veckan varken nyheter eller uppdateringar värda ett
      brev — säg det till användaren och föreslå att hoppa över veckan, i
      stället för att skriva ett tomt brev.
+   - **Veckans tips:** välj EN befintlig funktion ur `tips.md` att påminna
+     om (se "Veckans tips" under Brevets delar).
 
 4. **Bildsätt brevet** (se "Design och bilder" nedan): välj veckans bästa
    nyhetsbild som hjältebild, ta skärmdumpar av nya simuleringar, och lägg
@@ -88,8 +92,9 @@ matnyttigt att man tar med sig något in i klassrummet.
 
 8. **Uppdatera loggen**: lägg överst i `.claude/nyhetsbrev/logg.md` en post
    med datum, ämnesrad, vilka nyheter/uppdateringar som togs med, vilka
-   bilder som användes och vilken teaser som gavs. Bocka av genomförda
-   punkter i `planerat.md`.
+   bilder som användes, veckans tips och vilken teaser som gavs. Bocka av
+   genomförda punkter i `planerat.md`, och **sätt dagens datum på det valda
+   tipset i `tips.md`** (annars fungerar inte rotationen).
 
 9. **Lämna över till användaren.** Du skickar ALDRIG brevet själv. Utskicket
    görs manuellt i EmailOctopus (anmälningsrutan på `nyheter.html` är kopplad
@@ -111,13 +116,33 @@ matnyttigt att man tar med sig något in i klassrummet.
    bor värmen och glimten. Variera; börja aldrig två veckor i rad likadant.
 3. **Veckans fysiknyheter** — de utvalda artiklarna med egen text + länk.
 4. **Nytt på Fysiklabbet** — veckans sajtuppdateringar med länkar.
-5. **Nästa vecka** (teaser) — 1–2 meningar om något som är på gång: nästa
+5. **Veckans tips** — en kort påminnelse (2–3 meningar + länk) om en
+   funktion som **redan finns** på sajten. Nya prenumeranter har missat
+   den, gamla har glömt den. Regler:
+   - **Välj ur `.claude/nyhetsbrev/tips.md`** — katalogen över tipsbara
+     funktioner med datum för när varje senast tipsades. Välj i första hand
+     något med **aktuell krok**: nationella prov i maj → NP-träningen,
+     skolstart i augusti → repetitionspaketen, mörka november → något
+     mysigt. Finns ingen krok: ta det som väntat längst.
+   - **Tipsa aldrig om samma funktion oftare än var åttonde vecka** —
+     oftare blir tjatigt. Kolla datumkolumnen innan du väljer.
+   - **Verifiera att funktionen finns och beskriv den rätt** — öppna sidan
+     och kontrollera vad den faktiskt gör innan du skriver. Lova inget
+     funktionen inte kan.
+   - Tonfallet är "du har väl inte glömt att …" / "visste du att …" —
+     varmt och hjälpsamt, aldrig säljigt.
+   - Hoppa över sektionen om något annat i brevet redan lyfter samma
+     funktion (dubblera aldrig), eller om brevet redan är långt.
+   - **Fyll på katalogen**: när något som lanserats i "Nytt på
+     Fysiklabbet" mognat är det en framtida tipskandidat — lägg in det i
+     `tips.md` med beskrivning, länk och lämpliga årstidskrokar.
+6. **Nästa vecka** (teaser) — 1–2 meningar om något som är på gång: nästa
    simulering, ett avsnitt som byggs, ett spännande uppslag ur nyhetskön.
    **Teasern måste vara sann och belagd** i `planerat.md` eller `ko.md` —
    lova aldrig något som inte är planerat, och formulera hellre öppet
    ("vi ritar just nu på …") än med datumlöften. Finns inget att teasa:
    hoppa över sektionen helt.
-6. **Avslut** — en varm rad + avsändare ("Fysiklabbet"). Ingen egen
+7. **Avslut** — en varm rad + avsändare ("Fysiklabbet"). Ingen egen
    avanmälningstext — EmailOctopus lägger själv till avanmälningslänken.
 
 Riktlängd: **250–450 ord** brödtext. Ett nyhetsbrev läses på mobilen på två
@@ -238,3 +263,5 @@ fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
   i ett ointressant startläge när ett talande tillstånd går att ställa in.
 - Bryta mot typografi-/emojireglerna i CLAUDE.md.
 - Återanvända förra veckans anslag, formuleringar eller skämt.
+- Tipsa om samma funktion oftare än var åttonde vecka, tipsa om något du
+  inte verifierat på sajten, eller glömma att datera tipset i `tips.md`.

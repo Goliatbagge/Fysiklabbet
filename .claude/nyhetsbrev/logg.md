@@ -19,4 +19,5 @@ Format:
 - Nytt på sajten: pennlösningar (handskrift, med skärmdump), begreppsordlistan
   + teoriavsnittens egna adresser, "För läraren"-rutan, nyhetsbrevets premiär
 - Bilder: nyhetsbilderna (live) + nyheter/brev/2026-08-02-pennlosning-karusell.jpg
+- Veckans tips: repetitionspaketen (krok: skolstarten)
 - Teaser: tomtebloss-minisimen i fy2-1.4 (skeppad 2026-08-03 — uppfylld)

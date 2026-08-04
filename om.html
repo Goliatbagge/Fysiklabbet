@@ -158,6 +158,16 @@
                     Simuleringarna är fria att använda för alla. God fysik åt alla!
                 </p>
             </section>
+
+            <!-- Anmälan till nyhetsbrevet. Rutan byggs av nyhetsbrev.js, som
+                 monterar sig själv i alla [data-nyhetsbrev]-element.
+
+                 Behållaren har MEDVETET ingen .lab-about-block: den klassens
+                 typografiregler (.lab-about-block p är 16 px) träffar även
+                 EmailOctopus egna stycken inuti rutan, och då blir "Powered
+                 by EmailOctopus" lika stor som brödtexten. -->
+            <section data-nyhetsbrev
+                     data-ingress="Veckans fysiknyheter och nytt material på Fysiklabbet, samlat i ett mejl i veckan — utvalt och förklarat så att det går att ta med in i klassrummet."></section>
         </main>
 
         <footer class="lab-section lab-footer">
@@ -166,6 +176,7 @@
         </footer>
     </div>
 
+    <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
 </body>
 </html>

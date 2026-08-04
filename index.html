@@ -85,6 +85,10 @@
     <script>document.write('<scr' + 'ipt src="data/begrepp-sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- Anmälningsrutan för nyhetsbrevet. Laddas UTAN defer, före React:
+         komponenten nedan monterar widgeten i sin useEffect och behöver
+         window.FYSIKNYHETSBREV redan då. -->
+    <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -333,6 +337,22 @@
             );
         }
 
+        // Anmälningsrutan för nyhetsbrevet. Själva rutan bor i nyhetsbrev.js
+        // och delas med nyheter.html, simuleringar.html och om.html — här
+        // behövs bara behållaren som widgeten monterar i.
+        //
+        // Placeringen är medveten: direkt under senaste nyheten, alltså i
+        // samma andetag som det brevet faktiskt handlar om, och långt innan
+        // uppdateringsraden. Rutan får bara förekomma EN gång per sida.
+        function NyhetsbrevRuta() {
+            const holder = React.useRef(null);
+            React.useEffect(() => {
+                if (!window.FYSIKNYHETSBREV) return;
+                return window.FYSIKNYHETSBREV.mount(holder.current);
+            }, []);
+            return <section className="lab-section" ref={holder} />;
+        }
+
         function Updates() {
             const viewportRef = React.useRef(null);
             const [atStart, setAtStart] = React.useState(true);
@@ -412,6 +432,7 @@
                     <Header />
                     <WelcomeHero />
                     <NewsTeaser />
+                    <NyhetsbrevRuta />
                     <Updates />
                     <Footer />
                 </div>

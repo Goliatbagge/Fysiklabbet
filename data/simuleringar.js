@@ -75,6 +75,7 @@ window.SIM_NAMES = {
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': 'Jämförelse av svängningar',
   'fysik2-pendel-app.html': 'Plan pendel (matematisk)',
+  'fysik2-resonans-app.html': 'Resonans (driven svängning)',
   'fysik2-staende-vag-app.html': 'Stående våg i sträng',
   'fysik2-vagsimulator.html': 'Vågsimulator',
   'fysik2-magnetfalt-app.html': 'Magnetfält runt en rak ledare',

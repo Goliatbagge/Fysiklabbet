@@ -16768,7 +16768,7 @@ $$ vB = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = v\\cdot d\\cdot B $$
 
 **Svar:** $U = v\\cdot d\\cdot B$.
 
-**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik nivå 1). Att se den röda tråden mellan kurserna är en kärnkompetens på Fysik nivå 2-nivå.`,
+**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik nivå 1). Att se den röda tråden mellan nivåerna är en kärnkompetens på Fysik nivå 2-nivå.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -20434,7 +20434,7 @@ Efter 6 år är ytan inte riktigt fördubblad (faktor 1,97), men efter 7 år är
 
 **Svar:** Efter 7 år.
 
-**Generell slutsats:** exponentiell tillväxt smyger — 12 % per år fördubblar på ungefär 6–7 år. I senare kurser löses $1{,}12^n = 2$ exakt med logaritmer; här räcker systematisk testning.`,
+**Generell slutsats:** exponentiell tillväxt smyger — 12 % per år fördubblar på ungefär 6–7 år. På senare nivåer löses $1{,}12^n = 2$ exakt med logaritmer; här räcker systematisk testning.`,
         },
     ],
 

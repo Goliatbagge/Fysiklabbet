@@ -88,7 +88,7 @@ $$
    gemensamma nämnaren.
 
 **OBS!** Denna metod kan vara svår med större tal i nämnarna, men då finns
-en annan metod som vi kommer att gå igenom längre fram i kursen.
+en annan metod som vi kommer att gå igenom längre fram på nivån.
 :::
 
 ::: exempel "Exempel 3 — Minsta gemensamma nämnaren"

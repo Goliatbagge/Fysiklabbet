@@ -278,7 +278,7 @@ window.KATALOG = {
       'Matematik nivå 1c': {
         label: 'Matematik nivå 1c',
         intro: {
-          tagline: 'Gymnasiets första matematikkurs för naturvetare och tekniker.',
+          tagline: 'Gymnasiets första matematiknivå för naturvetare och tekniker.',
           paragraphs: [
             'Matematik nivå 1c lägger grunden för all matematik på gymnasiet. Vi börjar med aritmetiken — talmängder, bråk, potenser och prioriteringsregler — och bygger vidare mot algebra och ekvationslösning, procentuella förändringar och privatekonomi, räta linjer och funktioner, statistik och sannolikhetslära samt trigonometri med vektorer.',
             'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
@@ -292,7 +292,7 @@ window.KATALOG = {
         chapters: {
           'Aritmetik': {
             number: 1,
-            intro: 'Om tal och räkning — grunden som resten av kursen vilar på. Vi går igenom talmängderna och räknereglerna för negativa tal, bråkräkningens fyra räknesätt, tal i decimalform, potenser med olika slags exponenter, prefix och prioriteringsregler.',
+            intro: 'Om tal och räkning — grunden som resten av nivån vilar på. Vi går igenom talmängderna och räknereglerna för negativa tal, bråkräkningens fyra räknesätt, tal i decimalform, potenser med olika slags exponenter, prefix och prioriteringsregler.',
             sections: [
               { num: '1.1', title: 'Talmängder och negativa tal', description: 'Naturliga tal, heltal, rationella och reella tal — och räknereglerna för negativa tal.', href: null, icon: null, keywords: ['aritmetik','talmängder','naturliga tal','heltal','rationella tal','reella tal','irrationella tal','negativa tal','tallinje','olikhetstecken','teckenregler'] },
               { num: '1.2', title: 'Bråk', description: 'Täljare och nämnare, förlängning och förkortning — och hur man jämför bråk.', href: null, icon: null, keywords: ['aritmetik','bråk','täljare','nämnare','förlänga','förkorta','förlängning','förkortning','jämföra bråk','andel'] },
@@ -398,9 +398,9 @@ window.KATALOG = {
       'Matematik nivå 2c': {
         label: 'Matematik nivå 2c',
         intro: {
-          tagline: 'Fortsättningskursen — algebra, geometri och logaritmer på djupet.',
+          tagline: 'Nästa nivå — algebra, geometri och logaritmer på djupet.',
           paragraphs: [
-            'Matematik nivå 2c bygger vidare på nivå 1c. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och *pq*-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Kursen avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
+            'Matematik nivå 2c bygger vidare på nivå 1c. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och *pq*-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Nivån avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
             'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
           ],
           bullets: [
@@ -505,9 +505,9 @@ window.KATALOG = {
       'Matematik fortsättning nivå 1c': {
         label: 'Matematik fortsättning nivå 1c',
         intro: {
-          tagline: 'Tredje matematikkursen — derivata, integraler och trigonometri.',
+          tagline: 'Matematikens tredje nivå — derivata, integraler och trigonometri.',
           paragraphs: [
-            'Matematik fortsättning nivå 1c (Ma3c) tar dig vidare in i analysen. Vi börjar med att räkna med rationella uttryck och närma oss gränsvärden, innan derivatan introduceras som en kurvas lutning i en punkt — först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan i handen undersöker vi funktioners grafer: växande och avtagande, extrempunkter, andraderivatan och extremvärdesproblem. Därefter vänder vi på steget och integrerar — primitiva funktioner, area under och mellan kurvor och integralkalkylens fundamentalsats. Kursen avslutas med trigonometri: enhetscirkeln, trigonometriska ekvationer och triangelsatserna.',
+            'Matematik fortsättning nivå 1c (Ma3c) tar dig vidare in i analysen. Vi börjar med att räkna med rationella uttryck och närma oss gränsvärden, innan derivatan introduceras som en kurvas lutning i en punkt — först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan i handen undersöker vi funktioners grafer: växande och avtagande, extrempunkter, andraderivatan och extremvärdesproblem. Därefter vänder vi på steget och integrerar — primitiva funktioner, area under och mellan kurvor och integralkalkylens fundamentalsats. Nivån avslutas med trigonometri: enhetscirkeln, trigonometriska ekvationer och triangelsatserna.',
             'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
           ],
           bullets: [
@@ -609,9 +609,9 @@ window.KATALOG = {
       'Matematik fortsättning nivå 2': {
         label: 'Matematik fortsättning nivå 2',
         intro: {
-          tagline: 'Fjärde matematikkursen — trigonometri, derivata, integraler och komplexa tal.',
+          tagline: 'Matematikens fjärde nivå — trigonometri, derivata, integraler och komplexa tal.',
           paragraphs: [
-            'Matematik fortsättning nivå 2 (Ma4) fördjupar analysen och öppnar en helt ny talvärld. Vi börjar med trigonometrin: enhetscirkeln och radianer, trigonometriska ekvationer och formler, och sinus- och cosinusfunktionernas grafer med amplitud, period och förskjutning. Sedan utvidgas derivatan till trigonometriska, exponential- och logaritmfunktioner, med kedjeregeln, produktregeln och kvotregeln — och vi använder den för kurvkonstruktion och asymptoter. Integralkapitlet tar oss från primitiva funktioner till area mellan kurvor, täthetsfunktioner och rotationskroppar. Kursen avslutas med de komplexa talen: räkning med i, det komplexa talplanet, polär form och de Moivres formel, ekvationen zⁿ = w och Eulers formel.',
+            'Matematik fortsättning nivå 2 (Ma4) fördjupar analysen och öppnar en helt ny talvärld. Vi börjar med trigonometrin: enhetscirkeln och radianer, trigonometriska ekvationer och formler, och sinus- och cosinusfunktionernas grafer med amplitud, period och förskjutning. Sedan utvidgas derivatan till trigonometriska, exponential- och logaritmfunktioner, med kedjeregeln, produktregeln och kvotregeln — och vi använder den för kurvkonstruktion och asymptoter. Integralkapitlet tar oss från primitiva funktioner till area mellan kurvor, täthetsfunktioner och rotationskroppar. Nivån avslutas med de komplexa talen: räkning med i, det komplexa talplanet, polär form och de Moivres formel, ekvationen zⁿ = w och Eulers formel.',
             'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
           ],
           bullets: [

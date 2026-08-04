@@ -737,7 +737,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             nr: 19, del: 'D', poang: [1, 0, 0], omrade: 'Derivata — digitalt verktyg',
             endastSvar: true,
             fraga: 'Funktionen $f$ som ges av $f(x) = (2x - 1)^5$ kan inte deriveras med hjälp av ' +
-                'deriveringsreglerna inom denna kurs.\n\n' +
+                'deriveringsreglerna på den här nivån.\n\n' +
                 'Använd ditt digitala verktyg för att beräkna ett värde på $f\'(2)$.',
             figur: null,
             steg: [
@@ -748,7 +748,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                         'läs av tangentens lutning där.',
                     text: 'Med t.ex. kommandot $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\Big[(2x-1)^5\\Big]_{x=2}$ ' +
                         'ger verktyget:\n\n$$f\'(2) = 810$$\n\n' +
-                        '(Kontroll med kedjeregeln, som hör till nästa kurs: ' +
+                        '(Kontroll med kedjeregeln, som hör till nästa nivå: ' +
                         '$f\'(x) = 10(2x-1)^4$ ger $f\'(2) = 10 \\cdot 3^4 = 810$.)',
                 },
             ],
@@ -905,7 +905,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                 {
                     rubrik: 'Ställ upp ekvationen och lös den digitalt',
                     varfor: 'Ekvationen $-\\dfrac{12}{x^2} + 8 = \\dfrac{1}{2\\sqrt{x}}$ går inte ' +
-                        'att lösa algebraiskt med kursens metoder — här är det digitala verktyget ' +
+                        'att lösa algebraiskt med nivåns metoder — här är det digitala verktyget ' +
                         'tänkt att användas (t.ex. grafisk skärning eller en ekvationslösare).',
                     text: '$$-\\dfrac{12}{x^2} + 8 = 0{,}5 x^{-0{,}5}$$\n\n' +
                         'Verktyget ger $x \\approx 1{,}26$.',

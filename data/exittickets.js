@@ -619,7 +619,7 @@ window.EXITTICKETS = {
     choices: ['10 m/s²', '9,78 m/s²', '9,82 m/s²', '9,83 m/s²'],
     correct: 2,
     why: [
-      '10 m/s² är en grov avrundning som ibland används i andra sammanhang, men i den här kursen används det mer exakta värdet för Sverige.',
+      '10 m/s² är en grov avrundning som ibland används i andra sammanhang, men på den här nivån används det mer exakta värdet för Sverige.',
       '9,78 m/s² är tyngdaccelerationen vid ekvatorn, inte i Sverige.',
       'I Sverige används $g = 9{,}82\\ \\mathrm{m/s^2}$ som standardvärde när inget annat anges.',
       '9,83 m/s² är tyngdaccelerationen vid polerna, inte i Sverige.',
@@ -9577,7 +9577,7 @@ window.EXITTICKETS = {
     why: [
       'Ett avrundat värde kallas närmevärde — det ligger nära, men är inte exakt lika med, det ursprungliga talet.',
       'Ett medelvärde är summan av flera värden delat med antalet — det har inget med avrundning att göra.',
-      'Gränsvärde är ett begrepp som dyker upp först i senare kurser och handlar om vad ett uttryck närmar sig.',
+      'Gränsvärde är ett begrepp som dyker upp först på senare nivåer och handlar om vad ett uttryck närmar sig.',
       'Absolutvärdet av ett tal är talets avstånd till 0 på tallinjen, alltid utan tecken.',
     ],
   },
@@ -10345,7 +10345,7 @@ window.EXITTICKETS = {
     why: [
       'Faktorisering är "distributiva lagen baklänges" — multiplicera in igen och se att det ursprungliga uttrycket kommer tillbaka.',
       '$x = 0$ kollar bara konstanttermen — likheten måste gälla för ALLA $x$, och t.ex. missar testet fel i $x$-koefficienten.',
-      'Derivering hör till senare kurser — och multiplikation är både enklare och tillräcklig.',
+      'Derivering hör till senare nivåer — och multiplikation är både enklare och tillräcklig.',
       'Det går utmärkt — kontrollen är en vanlig utveckling av parentesen.',
     ],
   },
@@ -12764,7 +12764,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'För vilka trianglar gäller de trigonometriska funktionerna tan, sin och cos (i denna kurs)?',
+    question: 'För vilka trianglar gäller de trigonometriska funktionerna tan, sin och cos (på den här nivån)?',
     choices: [
       'Endast rätvinkliga trianglar',
       'Alla trianglar',
@@ -12773,7 +12773,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Definitionerna bygger på hypotenusa och kateter — de kräver en rät vinkel. (Generaliseringar kommer i senare kurser.)',
+      'Definitionerna bygger på hypotenusa och kateter — de kräver en rät vinkel. (Generaliseringar kommer på senare nivåer.)',
       'För allmänna trianglar krävs andra satser — grunddefinitionerna gäller rätvinkliga.',
       'Liksidiga trianglar är inte ens rätvinkliga.',
       'Likbenthet har inget med saken att göra.',
@@ -13158,7 +13158,7 @@ window.EXITTICKETS = {
     why: [
       'Summavektorn kallas resultant.',
       'Komplement hör till sannolikhetsläran.',
-      'Skalärprodukt är en annan operation (senare kurser).',
+      'Skalärprodukt är en annan operation (senare nivåer).',
       'Invers används om funktioner och motsatta vektorer, inte summor.',
     ],
   },
@@ -15006,7 +15006,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Ett bevis avslutas med v.s.b. ("vilket skulle bevisas") eller v.s.v. ("vilket skulle visas").',
-      'Q.E.D. är den latinska motsvarigheten, men kursens konvention är v.s.b./v.s.v.',
+      'Q.E.D. är den latinska motsvarigheten, men vår konvention är v.s.b./v.s.v.',
       'Beviset markeras med en formell avslutning, inte skiljetecken.',
       '"Svar:" hör till beräkningsuppgifter — bevis avslutas med v.s.b./v.s.v.',
     ],

@@ -11,8 +11,8 @@ section: '2.2'
 
 Att skriva om ett uttryck som en multiplikation är att **faktorisera
 uttryck**. Vi har gått igenom faktorisering tidigare i Matematik 1c. Då
-faktoriserade vi genom att "bryta ut" en gemensam faktor. I den här
-kursen ska vi även faktorisera genom att använda oss av
+faktoriserade vi genom att "bryta ut" en gemensam faktor. På den här
+nivån ska vi även faktorisera genom att använda oss av
 kvadreringsreglerna och konjugatregeln baklänges.
 
 ::: tips "Faktorisering med konjugat- och kvadreringsreglerna"

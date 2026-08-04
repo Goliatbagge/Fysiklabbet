@@ -16,9 +16,9 @@ window.NP_PROV['ma1c-vt2017'] = {
     id: 'ma1c-vt2017',
     kurs: 'Matematik nivå 1c',
     termin: 'VT 2017',
-    namn: 'Kursprov Ma 1c, våren 2017',
+    namn: 'Nationellt prov Ma 1c, våren 2017',
     kort: 'NP Ma 1c VT 2017',
-    intro: 'Det här är kursprovet i Matematik 1c från våren 2017 ' +
+    intro: 'Det här är det nationella provet i Matematik 1c från våren 2017 ' +
         '(Skolverket/PRIM-gruppen). Här finns de skriftliga delproven B, C och D — ' +
         'delprov A är ett muntligt gruppdelprov och ingår inte. ' +
         'Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg i taget. ' +

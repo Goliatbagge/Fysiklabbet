@@ -34,7 +34,7 @@ där $C$ och $a$ är konstanter.
 
 Grafen till en potensfunktion kan se väldigt olika ut, beroende på om
 exponenten $a$ är udda/jämn, positiv/negativ eller ett heltal/bråk. Vi
-kommer att utreda dem noggrannare i senare kurser. Nedan ser du några
+kommer att utreda dem noggrannare på senare nivåer. Nedan ser du några
 exempel.
 
 ::: figur

@@ -27,7 +27,7 @@ Standardavvikelsen beräknas på två olika sätt, beroende på om vi har en
 totalundersökning betecknas standardavvikelsen $\sigma$ (lilla sigma)
 och vid en stickprovsundersökning betecknas standardavvikelsen $s$.
 
-I den här kursen räcker det att vi kan beräkna standardavvikelsen med
+På den här nivån räcker det att vi kan beräkna standardavvikelsen med
 ett digitalt verktyg, se exemplet längre fram.
 
 För förståelsens skull tittar vi först på ett enkelt exempel utifrån
@@ -71,7 +71,7 @@ datamängd 1.
 Förklaringen att standardavvikelsen är medelvärdet av avvikelserna är
 något förenklad. För att få standardavvikelsen ska avvikelserna
 dessutom kvadreras och när de har summerats och dividerats med antalet
-värden ska kvadratroten ur kvoten dras. Detta ingår inte i kursen, men
+värden ska kvadratroten ur kvoten dras. Detta ingår inte i nivån, men
 det kan ändå vara intressant att veta vad det är som våra digitala
 hjälpmedel gör.
 

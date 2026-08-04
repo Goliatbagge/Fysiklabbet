@@ -53,8 +53,8 @@ $C$.
 
 Ibland är det lätt att se vilken den primitiva funktionen är. Ibland är det
 svårare. Då finns tre metoder som alltid fungerar beroende på om vi har en
-potensfunktion, en konstant funktion eller en exponentialfunktion. I den
-här kursen kommer vi bara ta fram primitiva funktioner till
+potensfunktion, en konstant funktion eller en exponentialfunktion. På den
+här nivån kommer vi bara ta fram primitiva funktioner till
 exponentialfunktioner med basen $e$.
 
 ## Bestämma primitiva funktioner

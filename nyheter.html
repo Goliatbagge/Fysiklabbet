@@ -24,6 +24,10 @@
     <!-- OpenDyslexic — dyslexivänligt typsnitt (toggle i artikelvyn) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/400.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/700.css">
+    <!-- KaTeX — formler i artikeltexten skrivs som $…$ i data/nyheter.js och
+         sätts med samma matematiksättning som teoriavsnitten (raka
+         divisionsstreck, rotmärken som täcker hela uttrycket). -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <style>
@@ -248,6 +252,16 @@
             font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px;
         }
         .article-body p a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
+        /* Formler (KaTeX). Samma sättning som teoriavsnitten; storleken
+           trimmas mot brödtexten så att en inline-formel inte sticker upp
+           som en främmande kropp i stycket. .katex { white-space: nowrap }
+           i styles-laborans.css håller ihop formeln över radbrytningar. */
+        .article-body .katex { font-size: 1.03em; }
+        .article-body .katex-display {
+            margin: 18px 0 !important; text-align: left !important;
+            overflow-x: auto; overflow-y: hidden;
+        }
+        .article-body .katex-display > .katex { text-align: left; padding-left: 1.5em; }
         .article-body h2 {
             font-family: var(--lab-font-display); font-size: 27px; line-height: 1.15;
             color: var(--lab-ink); margin: 34px 0 14px; letter-spacing: -0.005em;
@@ -439,6 +453,10 @@
          komponenten nedan monterar widgeten i sin useEffect och behöver
          window.FYSIKNYHETSBREV redan då. -->
     <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- KaTeX-motorn + auto-render. Artikeltextens $…$ sätts av renderMath()
+         nedan, före begreppslänkning och bionisk läsning. -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -451,6 +469,35 @@
                 'augusti','september','oktober','november','december'];
             const [y, m, d] = iso.split('-').map(Number);
             return `${d} ${months[m - 1]} ${y}`;
+        }
+
+        // ── Formler (KaTeX) ─────────────────────────────────────────
+        // Artiklarnas formler skrivs som $…$ (och $$…$$ för block) i
+        // data/nyheter.js — exakt samma notation som teoriavsnitten, så att
+        // division blir ett rakt bråkstreck och rotmärket täcker hela
+        // uttrycket. Kom ihåg att backslash måste dubblas i JS-strängar:
+        // "$v = \\sqrt{\\dfrac{GM}{r}}$".
+        //
+        // prepMath() limmar ihop en öppningsparentes med formeln efter den,
+        // så att "(" aldrig blir ensam kvar i radslutet (samma knep som
+        // restoreMath() i katalog.html).
+        function prepMath(html) {
+            if (!html) return html;
+            return html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g,
+                '<span class="math-paren">($1$2</span>');
+        }
+        function renderMath(root) {
+            if (!root || !window.renderMathInElement) return;
+            try {
+                window.renderMathInElement(root, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                    throwOnError: false,
+                });
+            } catch (e) { /* formeln får stå kvar som råtext hellre än att allt dör */ }
         }
 
         // ── Bionisk läsning ─────────────────────────────────────────
@@ -472,6 +519,10 @@
                     if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
                     for (let p = node.parentElement; p && p !== root; p = p.parentElement) {
                         if (SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+                        // Färdigsatta KaTeX-formler lämnas orörda — spann
+                        // inuti dem slår sönder matematiksättningen.
+                        const c = p.classList;
+                        if (c && (c.contains('katex') || c.contains('katex-display'))) return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -835,7 +886,7 @@
             if (b.type === 'h2') return <h2>{b.text}</h2>;
             if (b.type === 'quote') return (
                 <blockquote className="article-quote">
-                    <p dangerouslySetInnerHTML={{ __html: b.html }} />
+                    <p dangerouslySetInnerHTML={{ __html: prepMath(b.html) }} />
                     {b.cite && <cite>{b.cite}</cite>}
                 </blockquote>
             );
@@ -845,7 +896,7 @@
                     {(b.caption || b.credit) && (
                         <figcaption>
                             {b.caption && <span className="fig-caption"
-                                dangerouslySetInnerHTML={{ __html: b.caption }} />}
+                                dangerouslySetInnerHTML={{ __html: prepMath(b.caption) }} />}
                             {b.credit && <span className="fig-credit">{b.credit}</span>}
                         </figcaption>
                     )}
@@ -854,10 +905,10 @@
             if (b.type === 'fact') return (
                 <div className="article-fact">
                     <div className="article-fact-title">{b.title}</div>
-                    <ul>{b.items.map((it, i) => <li key={i} dangerouslySetInnerHTML={{ __html: it }} />)}</ul>
+                    <ul>{b.items.map((it, i) => <li key={i} dangerouslySetInnerHTML={{ __html: prepMath(it) }} />)}</ul>
                 </div>
             );
-            return <p dangerouslySetInnerHTML={{ __html: b.html }} />;
+            return <p dangerouslySetInnerHTML={{ __html: prepMath(b.html) }} />;
         }
 
         // Poddspelare: visar en spelare om det finns en ljudfil för artikeln.
@@ -1042,11 +1093,14 @@
             // den här artikeln (fylls i av autolänkaren nedan).
             const [ordIds, setOrdIds] = React.useState([]);
 
-            // Ordning: begreppslänkning FÖRE bionisk läsning. applyBionic
-            // styckar orden i <span>-taggar, och då hittar ordlistan dem inte
-            // längre. Båda muterar DOM:en direkt; React rör inte blocken igen
+            // Ordning: formler FÖRST, sedan begreppslänkning, sist bionisk
+            // läsning. KaTeX måste få se råtexten innan någon annan rör
+            // DOM:en, och applyBionic styckar orden i <span>-taggar så att
+            // ordlistan inte längre hittar dem. Båda hoppar över .katex.
+            // Alla tre muterar DOM:en direkt; React rör inte blocken igen
             // eftersom deras html-strängar är oförändrade.
             React.useEffect(() => {
+                renderMath(bodyRef.current);
                 setOrdIds(window.BEGREPPSLANK
                     ? window.BEGREPPSLANK.linkify(bodyRef.current) : []);
                 applyBionic(bodyRef.current);

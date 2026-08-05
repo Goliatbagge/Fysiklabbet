@@ -36,8 +36,11 @@
         SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, A: 1, BUTTON: 1, TEXTAREA: 1,
         H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, FIGCAPTION: 1, CITE: 1
     };
-    // Citat återges ordagrant — lägg inga länkar inuti dem.
-    var SKIP_CLASS = /(^|\s)(article-quote|no-begrepp|begrepp-lank)(\s|$)/;
+    // Citat återges ordagrant — lägg inga länkar inuti dem. Färdigsatta
+    // KaTeX-formler (.katex) hoppas också över: en länk inuti dem slår
+    // sönder matematiksättningen, och MathML-delen innehåller dessutom
+    // LaTeX-källan som osynlig text.
+    var SKIP_CLASS = /(^|\s)(article-quote|no-begrepp|begrepp-lank|katex|katex-display)(\s|$)/;
 
     var idx = null;
 

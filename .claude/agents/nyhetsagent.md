@@ -167,9 +167,24 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
   som BÅDE inledande och avslutande tecken: `JUNO ”uppnått exceptionell renhet”`.
   Använd ALDRIG det tyska nedsänkta inledningstecknet `„` (U+201E), och inte heller
   raka `"`. Gäller all citerad text och titlar (t.ex. forskningstiteln i `research`).
-- **Typografi:** fysikaliska variabler kursiva (`<em>v</em>`), enheter raka.
-  Hårt mellanslag (`&nbsp;`) mellan tal och enhet och i tusentalsgrupper
-  (`20&nbsp;000 ton`, `5,0&nbsp;m/s`). Exakt noll skrivs `0`, aldrig `0,0`.
+- **Typografi:** hårt mellanslag (`&nbsp;`) mellan tal och enhet och i
+  tusentalsgrupper (`20&nbsp;000 ton`, `5,0&nbsp;m/s`). Exakt noll skrivs `0`,
+  aldrig `0,0`.
+- **Formler och variabler sätts med KaTeX** — `$…$` i `body`-strängarna, precis
+  som i teoriavsnitten. Division blir då ett rakt bråkstreck och rotmärket
+  täcker hela uttrycket. Skriv ALDRIG en formel med `<em>`, `/` och `√`.
+  - `$v = \\sqrt{\\dfrac{G \\cdot M}{r}}$`, `$P = \\dfrac{\\Delta E}{\\Delta t}$`
+  - En ensam storhet i löptext är också ett math-block: `talet $z$`,
+    `bokstaven $\\eta$ (eta)`.
+  - Variabel + värde (+ enhet) hålls ihop i ETT block:
+    `$c \\approx 2{,}998 \\cdot 10^{8}\\ \\mathrm{m/s}$`, `$z = 7{,}77$` —
+    decimalkomma skrivs `{,}`.
+  - **Dubbla alla backslash** (`\\dfrac`, `\\cdot`, `\\mathrm`) — `data/nyheter.js`
+    är JS, inte markdown.
+  - **Undantag:** rena tiopotenser och enheter utan variabel behåller HTML:
+    `10<sup>−17</sup>&nbsp;Pa·s`, `m<sup>−2</sup>`. Kemiska formler likaså
+    (`Al<sub>0,28</sub>Ga<sub>0,72</sub>As`). `<em>` används bara för
+    kursiverad löptext (tidskriftsnamn, betoning) — inte för variabler.
 - **Standalone-artiklar — hänvisa ALDRIG till gymnasiekurserna eller Fysiklabbet
   självt.** Artikeln ska kunna stå på egna ben i vilken populärvetenskaplig
   tidskrift som helst. Skriv aldrig "se Fysiklabbets genomgång/simulering om …",

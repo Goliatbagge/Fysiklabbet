@@ -363,6 +363,28 @@
                             'K': 'K (kelvin) är SI-grundenheten för temperatur.',
                             'A': 'A (ampere) är SI-grundenheten för elektrisk ström.'
                         }
+                    },
+                    {
+                        quantity: 'Hastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 'm', 's'],
+                        hint: 'Meter per sekund (m/s) — en härledd SI-enhet, byggd av grundenheterna meter och sekund.',
+                        wrongInfo: {
+                            'km/h': 'km/h (kilometer per timme) är en enhet för hastighet, men inte SI.',
+                            'm': 'm (meter) är SI-grundenheten för längd.',
+                            's': 's (sekund) är SI-grundenheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Volym',
+                        correct: 'm³',
+                        options: ['m³', 'liter', 'dm³', 'm²'],
+                        hint: 'Kubikmeter (m³) — en härledd SI-enhet, byggd av grundenheten meter.',
+                        wrongInfo: {
+                            'liter': 'liter är en enhet för volym, men inte SI-enheten.',
+                            'dm³': 'dm³ (kubikdecimeter = 1 liter) är en enhet för volym, men inte SI-enheten.',
+                            'm²': 'm² (kvadratmeter) är SI-enheten för area.'
+                        }
                     }
                 ],
                 symbols: [
@@ -401,6 +423,12 @@
                         correct: 'Volym',
                         options: ['Volym', 'Vikt', 'Ljusstyrka', 'Temperatur'],
                         hint: 'Stort V står för volym, med SI-enheten kubikmeter (m³).'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Hastighet',
+                        options: ['Hastighet', 'Volym', 'Längd', 'Ljusstyrka'],
+                        hint: 'Litet v står för hastighet. Volym betecknas V (stor).'
                     }
                 ],
             },
@@ -451,6 +479,17 @@
                             'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
                             'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
                         }
+                    },
+                    {
+                        quantity: 'Tyngdacceleration',
+                        correct: 'm/s²',
+                        options: ['m/s²', 'm/s', 'N', 'km/h'],
+                        hint: 'I fritt fall accelererar allt med tyngdaccelerationen g = 9,82 m/s² — oberoende av massan.',
+                        wrongInfo: {
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'km/h': 'km/h är en enhet för hastighet, inte acceleration.'
+                        }
                     }
                 ],
                 symbols: [
@@ -483,6 +522,18 @@
                         correct: 'Begynnelsehastighet',
                         options: ['Begynnelsehastighet', 'Sluthastighet', 'Medelfart', 'Acceleration'],
                         hint: 'v₀ (v-noll) är hastigheten vid tiden t = 0 — begynnelsehastigheten i rörelseformlerna.'
+                    },
+                    {
+                        symbol: 'Δv',
+                        correct: 'Hastighetsändring',
+                        options: ['Hastighetsändring', 'Hastighet', 'Acceleration', 'Tidsändring'],
+                        hint: 'Δ (delta) betyder ändring — Δv är skillnaden mellan slut- och starthastighet.'
+                    },
+                    {
+                        symbol: 'g',
+                        correct: 'Tyngdacceleration',
+                        options: ['Tyngdacceleration', 'Gram', 'Gravitationskonstant', 'Massa'],
+                        hint: 'g = 9,82 m/s² är tyngdaccelerationen vid jordytan. Gravitationskonstanten betecknas G (stor).'
                     }
                 ],
             },
@@ -535,6 +586,40 @@
                             'N/kg': 'N/kg är enheten för tyngdfaktorn.',
                             'kg': 'kg (kilogram) är SI-enheten för massa.'
                         }
+                    },
+                    {
+                        quantity: 'Acceleration',
+                        correct: 'm/s²',
+                        options: ['m/s²', 'm/s', 'N', 'kg'],
+                        hint: 'Meter per sekundkvadrat (m/s²) — accelerationen i Newtons andra lag, F = m · a.',
+                        wrongInfo: {
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Avstånd',
+                        correct: 'm',
+                        options: ['m', 'km', 'N', 'm²'],
+                        hint: 'Meter (m) — i gravitationslagen är r avståndet mellan kropparnas tyngdpunkter.',
+                        wrongInfo: {
+                            'km': 'km (kilometer) är en enhet för avstånd, men inte SI-enheten.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'm²': 'm² (kvadratmeter) är SI-enheten för area.'
+                        }
+                    },
+                    {
+                        quantity: 'Gravitationskonstanten',
+                        correct: 'Nm²/kg²',
+                        options: ['Nm²/kg²', 'N/kg', 'N', 'kg'],
+                        ratt: 'Gravitationskonstanten har enheten Nm²/kg²',
+                        hint: 'G = 6,67 · 10^-11 Nm²/kg² — enheten gör att gravitationslagen ger kraften i newton.',
+                        wrongInfo: {
+                            'N/kg': 'N/kg är enheten för tyngdfaktorn g — inte för gravitationskonstanten G.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
                     }
                 ],
                 symbols: [
@@ -567,6 +652,18 @@
                         correct: 'Acceleration',
                         options: ['Acceleration', 'Area', 'Kraft', 'Massa'],
                         hint: 'a står för acceleration — i Newtons andra lag är F = m · a.'
+                    },
+                    {
+                        symbol: 'G',
+                        correct: 'Gravitationskonstanten',
+                        options: ['Gravitationskonstanten', 'Tyngdfaktor', 'Tyngdkraft', 'Massa'],
+                        hint: 'Stort G är gravitationskonstanten i F = G · m₁ · m₂ / r². Tyngdfaktorn betecknas g (liten).'
+                    },
+                    {
+                        symbol: 'r',
+                        correct: 'Avstånd',
+                        options: ['Avstånd', 'Resistans', 'Kraft', 'Densitet'],
+                        hint: 'I gravitationslagen står litet r för avståndet mellan kropparnas tyngdpunkter. Resistans betecknas R (stor).'
                     }
                 ],
             },
@@ -641,6 +738,72 @@
                             'J': 'J (joule) är SI-enheten för energi. Verkningsgraden är en kvot — enheterna tar ut varandra.',
                             'N': 'N (newton) är SI-enheten för kraft.'
                         }
+                    },
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'J', 'W', 'kg'],
+                        hint: 'Newton (N) — kraften i arbetsformeln W = F · s och impulsen I = F · t.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi och arbete.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Sträcka',
+                        correct: 'm',
+                        options: ['m', 'J', 's', 'N'],
+                        hint: 'Meter (m) — s i W = F · s. Även höjden h i lägesenergin E_p = m · g · h mäts i meter.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi och arbete.',
+                            's': 's (sekund) är SI-enheten för tid.',
+                            'N': 'N (newton) är SI-enheten för kraft.'
+                        }
+                    },
+                    {
+                        quantity: 'Hastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'm/s²', 'J', 'm'],
+                        hint: 'Meter per sekund (m/s) — v i rörelseenergin E_k = m · v²/2 och rörelsemängden p = m · v.',
+                        wrongInfo: {
+                            'm/s²': 'm/s² är SI-enheten för acceleration.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'm': 'm (meter) är SI-enheten för sträcka.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'N', 'J', 'g'],
+                        hint: 'Kilogram (kg) — massan i både läges- och rörelseenergin.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'min', 'h', 'W'],
+                        hint: 'Sekund (s) — tiden i effekt P = E/t och impuls I = F · t.',
+                        wrongInfo: {
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                            'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
+                            'W': 'W (watt) är SI-enheten för effekt.'
+                        }
+                    },
+                    {
+                        quantity: 'Tyngdfaktor',
+                        correct: 'N/kg',
+                        options: ['N/kg', 'N', 'kg', 'J'],
+                        hint: 'Newton per kilogram (N/kg) — g = 9,82 N/kg i lägesenergin E_p = m · g · h.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Tyngdfaktorn är kraft PER kilogram.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
                     }
                 ],
                 symbols: [
@@ -679,6 +842,48 @@
                         correct: 'Verkningsgrad',
                         options: ['Verkningsgrad', 'Energi', 'Effekt', 'Friktionstal'],
                         hint: 'Grekiska bokstaven η (eta) står för verkningsgraden — kvoten mellan nyttig och tillförd energi.'
+                    },
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Frekvens', 'Effekt', 'Arbete'],
+                        hint: 'F står för kraft — i arbetet W = F · s och impulsen I = F · t.'
+                    },
+                    {
+                        symbol: 's',
+                        correct: 'Sträcka',
+                        options: ['Sträcka', 'Sekund', 'Effekt', 'Arbete'],
+                        hint: 's (kursiv) står för sträckan i W = F · s. Enheten sekund skrivs också s men rakt.'
+                    },
+                    {
+                        symbol: 'h',
+                        correct: 'Höjd',
+                        options: ['Höjd', 'Hastighet', 'Tid', 'Massa'],
+                        hint: 'h står för höjden i lägesenergin E_p = m · g · h.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Hastighet',
+                        options: ['Hastighet', 'Volym', 'Verkningsgrad', 'Arbete'],
+                        hint: 'v står för hastigheten i rörelseenergin E_k = m · v²/2.'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Meter', 'Rörelsemängd', 'Impuls'],
+                        hint: 'm (kursiv) står för massa. Rörelsemängd betecknas p, impuls I.'
+                    },
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Temperatur', 'Tryck', 'Impuls'],
+                        hint: 'Liten t står för tid — i P = E/t och I = F · t.'
+                    },
+                    {
+                        symbol: 'g',
+                        correct: 'Tyngdfaktor',
+                        options: ['Tyngdfaktor', 'Gram', 'Gravitationskonstant', 'Höjd'],
+                        hint: 'g = 9,82 N/kg är tyngdfaktorn — i lägesenergin E_p = m · g · h.'
                     }
                 ],
             },
@@ -741,6 +946,50 @@
                             'Pa': 'Pa (pascal) är SI-enheten för tryck.',
                             'J': 'J (joule) är SI-enheten för energi.'
                         }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'N', 'm³', 'g'],
+                        hint: 'Kilogram (kg) — massan i densitetsformeln ρ = m/V.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'm³': 'm³ (kubikmeter) är SI-enheten för volym.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'Pa', 'kg', 'J'],
+                        hint: 'Newton (N) — tryckkraften F i tryckformeln p = F/A, och lyftkraften i Arkimedes princip.',
+                        wrongInfo: {
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck — kraft PER area.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Tyngdfaktor',
+                        correct: 'N/kg',
+                        options: ['N/kg', 'N', 'Pa', 'kg'],
+                        hint: 'Newton per kilogram (N/kg) — g i vätsketrycket p = ρ · g · h.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Tyngdfaktorn är kraft PER kilogram.',
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Djup',
+                        correct: 'm',
+                        options: ['m', 'Pa', 'm²', 'kg'],
+                        hint: 'Meter (m) — h i p = ρ · g · h är djupet under vätskeytan.',
+                        wrongInfo: {
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck.',
+                            'm²': 'm² (kvadratmeter) är SI-enheten för area.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
                     }
                 ],
                 symbols: [
@@ -773,6 +1022,30 @@
                         correct: 'Temperatur',
                         options: ['Temperatur', 'Tid', 'Tryck', 'Ton'],
                         hint: 'Stort T står för temperatur (i kelvin i gaslagen). Tid betecknas t (liten).'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Meter', 'Tryck', 'Volym'],
+                        hint: 'm (kursiv) står för massan i ρ = m/V. Enheten meter skrivs också m men rakt.'
+                    },
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Tryck', 'Frekvens', 'Area'],
+                        hint: 'F står för tryckkraften i p = F/A. Tryck betecknas p (liten).'
+                    },
+                    {
+                        symbol: 'g',
+                        correct: 'Tyngdfaktor',
+                        options: ['Tyngdfaktor', 'Gram', 'Densitet', 'Tryck'],
+                        hint: 'g = 9,82 N/kg är tyngdfaktorn — i vätsketrycket p = ρ · g · h.'
+                    },
+                    {
+                        symbol: 'h',
+                        correct: 'Djup',
+                        options: ['Djup', 'Hastighet', 'Massa', 'Tryck'],
+                        hint: 'h är djupet under vätskeytan (höjden av vätskepelaren ovanför) i p = ρ · g · h.'
                     }
                 ],
             },
@@ -823,6 +1096,28 @@
                             'K': 'K (kelvin) är SI-enheten för temperatur.',
                             'J/kg': 'J/kg är ingen enhet för effekt.'
                         }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'J', 'K', 'g'],
+                        hint: 'Kilogram (kg) — massan i värmeformeln E = c · m · ΔT.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'K': 'K (kelvin) är SI-enheten för temperatur.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'W', 'J', 'K'],
+                        hint: 'Sekund (s) — effekt är tillförd energi per tid, P = E/t.',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'K': 'K (kelvin) är SI-enheten för temperatur.'
+                        }
                     }
                 ],
                 symbols: [
@@ -849,6 +1144,24 @@
                         correct: 'Energi',
                         options: ['Energi', 'Effekt', 'Temperatur', 'Massa'],
                         hint: 'E står för energi — i värmeläran ofta värmeenergin i E = c · m · ΔT.'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Meter', 'Temperatur', 'Värmeenergi'],
+                        hint: 'm (kursiv) står för massan i E = c · m · ΔT.'
+                    },
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Temperatur', 'Temperaturändring', 'Effekt'],
+                        hint: 'Liten t står för tid — i P = E/t. Temperatur betecknas T (stor).'
+                    },
+                    {
+                        symbol: 'P',
+                        correct: 'Effekt',
+                        options: ['Effekt', 'Tryck', 'Temperatur', 'Energi'],
+                        hint: 'P (stor) står för effekt — hur snabbt värme tillförs eller avges.'
                     }
                 ],
             },
@@ -933,6 +1246,62 @@
                             'W': 'W (watt) är SI-enheten för effekt.',
                             'Ω': 'Ω (ohm) är SI-enheten för resistans.'
                         }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'A', 'C', 'Ah'],
+                        hint: 'Sekund (s) — ström är laddning per tid, I = Q/t.',
+                        wrongInfo: {
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'C': 'C (coulomb) är SI-enheten för laddning.',
+                            'Ah': 'Ah (amperetimme) är en enhet för laddning, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Energi',
+                        correct: 'J',
+                        options: ['J', 'W', 'eV', 'kWh'],
+                        hint: 'Joule (J) — spänning är energi per laddning, och elektrisk energi är effekt gånger tid.',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'eV': 'eV (elektronvolt) är en enhet för energi, men inte SI.',
+                            'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'C', 'N/C', 'J'],
+                        hint: 'Newton (N) — Coulombs lag ger kraften mellan två laddningar i newton.',
+                        wrongInfo: {
+                            'C': 'C (coulomb) är SI-enheten för laddning.',
+                            'N/C': 'N/C är SI-enheten för elektrisk fältstyrka — kraft PER laddning.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Avstånd',
+                        correct: 'm',
+                        options: ['m', 'C', 'N', 'V'],
+                        hint: 'Meter (m) — r i Coulombs lag är avståndet mellan laddningarna.',
+                        wrongInfo: {
+                            'C': 'C (coulomb) är SI-enheten för laddning.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'V': 'V (volt) är SI-enheten för spänning.'
+                        }
+                    },
+                    {
+                        quantity: 'Coulombs konstant',
+                        correct: 'Nm²/C²',
+                        options: ['Nm²/C²', 'N/C', 'C', 'Nm²/kg²'],
+                        ratt: 'Coulombs konstant har enheten Nm²/C²',
+                        hint: 'k = 8,99 · 10^9 Nm²/C² — enheten gör att Coulombs lag ger kraften i newton.',
+                        wrongInfo: {
+                            'N/C': 'N/C är SI-enheten för elektrisk fältstyrka.',
+                            'C': 'C (coulomb) är SI-enheten för laddning.',
+                            'Nm²/kg²': 'Nm²/kg² är enheten för gravitationskonstanten G.'
+                        }
                     }
                 ],
                 symbols: [
@@ -983,6 +1352,36 @@
                         correct: 'Elementarladdning',
                         options: ['Elementarladdning', 'Energi', 'Spänning', 'Elektrisk fältstyrka'],
                         hint: 'e står för elementarladdningen — laddningen hos en proton (och elektronens laddning med minustecken).'
+                    },
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Temperatur', 'Spänning', 'Laddning'],
+                        hint: 'Liten t står för tid — i I = Q/t.'
+                    },
+                    {
+                        symbol: 'E',
+                        correct: 'Energi',
+                        options: ['Energi', 'Elektrisk fältstyrka', 'Effekt', 'Spänning'],
+                        hint: 'E står för energi. Elektrisk fältstyrka betecknas 𝔼 (dubbel-E), effekt P.'
+                    },
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Fältstyrka', 'Frekvens', 'Laddning'],
+                        hint: 'F står för kraften mellan laddningarna i Coulombs lag.'
+                    },
+                    {
+                        symbol: 'k',
+                        correct: 'Coulombs konstant',
+                        options: ['Coulombs konstant', 'Fjäderkonstant', 'Laddning', 'Resistans'],
+                        hint: 'I elläran är k Coulombs konstant, 8,99 · 10^9 Nm²/C². (I mekaniken betecknar k fjäderkonstanten.)'
+                    },
+                    {
+                        symbol: 'r',
+                        correct: 'Avstånd',
+                        options: ['Avstånd', 'Resistans', 'Ström', 'Laddning'],
+                        hint: 'Litet r är avståndet mellan laddningarna i Coulombs lag. Resistans betecknas R (stor).'
                     }
                 ],
             },
@@ -1033,6 +1432,28 @@
                             'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
                             'm': 'm (meter) är SI-enheten för längd.'
                         }
+                    },
+                    {
+                        quantity: 'Längd',
+                        correct: 'm',
+                        options: ['m', 's', 'm/s', 'ljusår'],
+                        hint: 'Meter (m) — längdkontraktionen gör den uppmätta längden l kortare än vilolängden l₀.',
+                        wrongInfo: {
+                            's': 's (sekund) är SI-enheten för tid.',
+                            'm/s': 'm/s är SI-enheten för hastighet.',
+                            'ljusår': 'ljusår är en enhet för avstånd i astronomin, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Hastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 's', 'm'],
+                        hint: 'Meter per sekund (m/s) — v i formlerna är farten relativt observatören, alltid mindre än c.',
+                        wrongInfo: {
+                            'km/h': 'km/h är en enhet för hastighet, men inte SI.',
+                            's': 's (sekund) är SI-enheten för tid.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1059,6 +1480,18 @@
                         correct: 'Viloenergi',
                         options: ['Viloenergi', 'Rörelseenergi', 'Elektrisk fältstyrka', 'Effekt'],
                         hint: 'E₀ = m₀ · c² är viloenergin — energin ett föremål har enbart genom sin massa.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Hastighet',
+                        options: ['Hastighet', 'Viloenergi', 'Volym', 'Ljusets fart i vakuum'],
+                        hint: 'v är föremålets fart relativt observatören. Ljusets fart betecknas c.'
+                    },
+                    {
+                        symbol: 't₀',
+                        correct: 'Egentid',
+                        options: ['Egentid', 'Vilomassa', 'Vilolängd', 'Viloenergi'],
+                        hint: 't₀ (t-noll) är egentiden — tiden mätt i systemet som följer med klockan.'
                     }
                 ],
             },
@@ -1109,6 +1542,39 @@
                             'Bq': 'Bq (becquerel) är SI-enheten för aktivitet.',
                             'W': 'W (watt) är SI-enheten för effekt.'
                         }
+                    },
+                    {
+                        quantity: 'Energi',
+                        correct: 'J',
+                        options: ['J', 'eV', 'MeV', 'Bq'],
+                        hint: 'Joule (J) är SI-enheten — bindningsenergier anges dock ofta i elektronvolt (eV eller MeV).',
+                        wrongInfo: {
+                            'eV': 'eV (elektronvolt) är en vanlig energienhet i kärnfysiken, men inte SI.',
+                            'MeV': 'MeV (megaelektronvolt) är en vanlig energienhet i kärnfysiken, men inte SI.',
+                            'Bq': 'Bq (becquerel) är SI-enheten för aktivitet.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'u', 'g', 'J'],
+                        hint: 'Kilogram (kg) är SI-enheten — atomkärnors massor anges dock ofta i atommassenheten u.',
+                        wrongInfo: {
+                            'u': 'u (atommassenheten) är vanlig i kärnfysiken, men inte SI-enheten.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Ljusets fart i vakuum',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 'J', 'm'],
+                        hint: 'Meter per sekund (m/s) — c i E = Δm · c² är ungefär 300 000 km/s.',
+                        wrongInfo: {
+                            'km/h': 'km/h är en enhet för fart, men inte SI-enheten.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1141,6 +1607,30 @@
                         correct: 'Massdefekt',
                         options: ['Massdefekt', 'Massa', 'Massändring per sekund', 'Atommassa'],
                         hint: 'Δm (delta-m) är massdefekten — massan som "försvinner" och blir bindningsenergi enligt E = Δm · c².'
+                    },
+                    {
+                        symbol: 'N',
+                        correct: 'Antal atomkärnor',
+                        options: ['Antal atomkärnor', 'Kraft', 'Varvtal', 'Aktivitet'],
+                        hint: 'I sönderfallslagen N = N₀ · 0,5^(t/T½) är N antalet kärnor som ännu inte sönderfallit.'
+                    },
+                    {
+                        symbol: 'c',
+                        correct: 'Ljusets fart i vakuum',
+                        options: ['Ljusets fart i vakuum', 'Specifik värmekapacitet', 'Laddning', 'Aktivitet'],
+                        hint: 'c står för ljusfarten — i E = Δm · c² förvandlar den massdefekt till bindningsenergi.'
+                    },
+                    {
+                        symbol: 'E',
+                        correct: 'Energi',
+                        options: ['Energi', 'Ekvivalent dos', 'Effekt', 'Aktivitet'],
+                        hint: 'E står för energi — bindningsenergin E = Δm · c². Ekvivalent dos betecknas H.'
+                    },
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Halveringstid', 'Temperatur', 'Aktivitet'],
+                        hint: 'Liten t är tiden i sönderfallslagen. Halveringstiden betecknas T₁/₂.'
                     }
                 ],
             },
@@ -1203,6 +1693,72 @@
                             'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
                             'rad/s': 'rad/s (radianer per sekund) är SI-enheten för vinkelhastighet.'
                         }
+                    },
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'Nm', 'kg', 'J'],
+                        hint: 'Newton (N) — F i momentlagen M = F · l och centripetalkraften i cirkelrörelsen.',
+                        wrongInfo: {
+                            'Nm': 'Nm (newtonmeter) är enheten för kraftmoment — kraft GÅNGER hävarm.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Hävarm',
+                        correct: 'm',
+                        options: ['m', 'Nm', 'N', 'rad'],
+                        hint: 'Meter (m) — hävarmen l är kraftens vinkelräta avstånd till vridningspunkten.',
+                        wrongInfo: {
+                            'Nm': 'Nm (newtonmeter) är enheten för kraftmoment.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'rad': 'rad (radian) är SI-enheten för vinkel.'
+                        }
+                    },
+                    {
+                        quantity: 'Radie',
+                        correct: 'm',
+                        options: ['m', 'rad', 'm/s', 'varv'],
+                        hint: 'Meter (m) — cirkelbanans radie r, till exempel i v = ω · r.',
+                        wrongInfo: {
+                            'rad': 'rad (radian) är SI-enheten för vinkel.',
+                            'm/s': 'm/s är SI-enheten för banhastighet.',
+                            'varv': 'varv är ingen SI-enhet.'
+                        }
+                    },
+                    {
+                        quantity: 'Banhastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'rad/s', 'Hz', 'm/s²'],
+                        hint: 'Meter per sekund (m/s) — farten längs cirkelbanan, v = ω · r.',
+                        wrongInfo: {
+                            'rad/s': 'rad/s är SI-enheten för vinkelhastighet — vinkeln per sekund, inte sträckan.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'm/s²': 'm/s² är SI-enheten för acceleration.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'N', 'Nm', 'g'],
+                        hint: 'Kilogram (kg) — massan i centripetalkraften F = m · v²/r.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'Nm': 'Nm (newtonmeter) är enheten för kraftmoment.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Vinkel',
+                        correct: 'rad',
+                        options: ['rad', '°', 'rad/s', 'varv'],
+                        hint: 'Radian (rad) är SI-enheten för vinkel — ett helt varv är 2π rad.',
+                        wrongInfo: {
+                            '°': 'grader är vanliga i vardagen, men SI-enheten för vinkel är radian.',
+                            'rad/s': 'rad/s är SI-enheten för vinkelhastighet — vinkel PER sekund.',
+                            'varv': 'varv är ingen SI-enhet — ett varv är 2π radianer.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1235,6 +1791,30 @@
                         correct: 'Vinkelhastighet',
                         options: ['Vinkelhastighet', 'Frekvens', 'Vinkel', 'Banhastighet'],
                         hint: 'Grekiska bokstaven ω (omega) står för vinkelhastigheten, ω = 2π/T.'
+                    },
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Frekvens', 'Kraftmoment', 'Period'],
+                        hint: 'F står för kraft. Frekvens betecknas f (liten), kraftmoment M.'
+                    },
+                    {
+                        symbol: 'r',
+                        correct: 'Radie',
+                        options: ['Radie', 'Hävarm', 'Varvtal', 'Vinkelhastighet'],
+                        hint: 'r är cirkelbanans radie. Hävarmen i momentlagen betecknas l.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Banhastighet',
+                        options: ['Banhastighet', 'Vinkelhastighet', 'Varvtal', 'Volym'],
+                        hint: 'v är farten längs cirkelbanan, v = ω · r. Vinkelhastigheten betecknas ω.'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Kraftmoment', 'Meter', 'Period'],
+                        hint: 'm (liten) står för massa. Kraftmoment betecknas M (stor).'
                     }
                 ],
             },
@@ -1309,6 +1889,83 @@
                             'Hz': 'Hz (hertz) är SI-enheten för frekvens — den avgör tonhöjden, inte ljudnivån.',
                             'W': 'W (watt) är SI-enheten för effekt.'
                         }
+                    },
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'N/m', 'kg', 'm'],
+                        hint: 'Newton (N) — kraften som spänner fjädern i Hookes lag, F = k · Δl.',
+                        wrongInfo: {
+                            'N/m': 'N/m (newton per meter) är enheten för fjäderkonstant.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
+                    },
+                    {
+                        quantity: 'Förlängning',
+                        correct: 'm',
+                        options: ['m', 'N', 'N/m', 's'],
+                        hint: 'Meter (m) — Δl är fjäderns förlängning från den obelastade längden.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'N/m': 'N/m är enheten för fjäderkonstant.',
+                            's': 's (sekund) är SI-enheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'N', 'N/m', 'Hz'],
+                        hint: 'Kilogram (kg) — massan i svängningstiden T = 2π · √(m/k).',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'N/m': 'N/m är enheten för fjäderkonstant.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    },
+                    {
+                        quantity: 'Period',
+                        correct: 's',
+                        options: ['s', 'Hz', 'm', 'min'],
+                        hint: 'Sekund (s) — perioden T är tiden för en hel svängning.',
+                        wrongInfo: {
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens — antalet svängningar per sekund.',
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Frekvens',
+                        correct: 'Hz',
+                        options: ['Hz', 's', 'm/s', 'dB'],
+                        hint: 'Hertz (Hz) — antalet svängningar per sekund, f = 1/T.',
+                        wrongInfo: {
+                            's': 's (sekund) är SI-enheten för tid — perioden T mäts i sekunder.',
+                            'm/s': 'm/s är SI-enheten för utbredningshastighet.',
+                            'dB': 'dB (decibel) är enheten för ljudnivå.'
+                        }
+                    },
+                    {
+                        quantity: 'Effekt',
+                        correct: 'W',
+                        options: ['W', 'W/m²', 'dB', 'J'],
+                        hint: 'Watt (W) — ljudkällans utsända effekt P i intensiteten I = P/(4π · r²).',
+                        wrongInfo: {
+                            'W/m²': 'W/m² är SI-enheten för ljudintensitet — effekt PER kvadratmeter.',
+                            'dB': 'dB (decibel) är enheten för ljudnivå.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Tyngdfaktor',
+                        correct: 'N/kg',
+                        options: ['N/kg', 'N/m', 'N', 'm/s'],
+                        hint: 'Newton per kilogram (N/kg) — g i pendelns svängningstid T = 2π · √(l/g).',
+                        wrongInfo: {
+                            'N/m': 'N/m är enheten för fjäderkonstant.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'm/s': 'm/s är SI-enheten för hastighet.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1341,6 +1998,42 @@
                         correct: 'Ljudnivå',
                         options: ['Ljudnivå', 'Längd', 'Ljudintensitet', 'Luminositet'],
                         hint: 'L står för ljudnivån i decibel, L = 10 · lg(I/I₀).'
+                    },
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Fjäderkonstant', 'Frekvens', 'Förlängning'],
+                        hint: 'F står för kraften i Hookes lag, F = k · Δl.'
+                    },
+                    {
+                        symbol: 'Δl',
+                        correct: 'Förlängning',
+                        options: ['Förlängning', 'Längd', 'Våglängd', 'Ljudnivå'],
+                        hint: 'Δl (delta-l) är fjäderns förlängning från den obelastade längden.'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Meter', 'Period', 'Fjäderkonstant'],
+                        hint: 'm står för massan som hänger i fjädern — i T = 2π · √(m/k).'
+                    },
+                    {
+                        symbol: 'T',
+                        correct: 'Period',
+                        options: ['Period', 'Temperatur', 'Kraft', 'Frekvens'],
+                        hint: 'T är periodtiden — tiden för en hel svängning. T = 1/f.'
+                    },
+                    {
+                        symbol: 'f',
+                        correct: 'Frekvens',
+                        options: ['Frekvens', 'Kraft', 'Fjäderkonstant', 'Period'],
+                        hint: 'Litet f står för frekvens — i vågformeln v = f · λ. Kraft betecknas F (stor).'
+                    },
+                    {
+                        symbol: 'P',
+                        correct: 'Effekt',
+                        options: ['Effekt', 'Ljudintensitet', 'Tryck', 'Period'],
+                        hint: 'P (stor) är ljudkällans utsända effekt i I = P/(4π · r²).'
                     }
                 ],
             },
@@ -1392,6 +2085,73 @@
                             'Nm': 'Nm (newtonmeter) är enheten för kraftmoment.',
                             'A': 'A (ampere) är SI-enheten för ström.'
                         }
+                    },
+                    {
+                        quantity: 'Ström',
+                        correct: 'A',
+                        options: ['A', 'T', 'V', 'C'],
+                        hint: 'Ampere (A) — strömmen I i F = B · I · l och i spolens flödestäthet.',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'C': 'C (coulomb) är SI-enheten för laddning.'
+                        }
+                    },
+                    {
+                        quantity: 'Laddning',
+                        correct: 'C',
+                        options: ['C', 'A', 'T', 'N'],
+                        hint: 'Coulomb (C) — partikelns laddning q i kraftformeln F = q · v · B.',
+                        wrongInfo: {
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'N': 'N (newton) är SI-enheten för kraft.'
+                        }
+                    },
+                    {
+                        quantity: 'Hastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'T', 'A', 'm'],
+                        hint: 'Meter per sekund (m/s) — partikelns fart i F = q · v · B och ledarens i e = l · v · B.',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
+                    },
+                    {
+                        quantity: 'Ledarens längd',
+                        correct: 'm',
+                        options: ['m', 'T', 'A', 'Wb'],
+                        hint: 'Meter (m) — l i F = B · I · l är längden av ledaren som befinner sig i magnetfältet.',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'Wb': 'Wb (weber) är SI-enheten för magnetiskt flöde.'
+                        }
+                    },
+                    {
+                        quantity: 'Area',
+                        correct: 'm²',
+                        options: ['m²', 'm', 'Wb', 'T'],
+                        hint: 'Kvadratmeter (m²) — arean A som flödet går igenom i Φ = B · A.',
+                        wrongInfo: {
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            'Wb': 'Wb (weber) är SI-enheten för magnetiskt flöde.',
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.'
+                        }
+                    },
+                    {
+                        quantity: 'Permeabiliteten i vakuum',
+                        correct: 'T · m/A',
+                        options: ['T · m/A', 'T', 'Wb', 'A/m'],
+                        ratt: 'Permeabiliteten i vakuum har enheten T · m/A',
+                        hint: 'μ₀ = 4π · 10^-7 T·m/A — konstanten i spolens flödestäthet B = μ₀ · n · I/l.',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'Wb': 'Wb (weber) är SI-enheten för magnetiskt flöde.',
+                            'A/m': 'A/m är ingen enhet för permeabilitet.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1424,6 +2184,36 @@
                         correct: 'Laddning',
                         options: ['Laddning', 'Värmeenergi', 'Kraft', 'Flödestäthet'],
                         hint: 'q står för laddningen hos en partikel — i kraftformeln F = q · v · B.'
+                    },
+                    {
+                        symbol: 'I',
+                        correct: 'Ström',
+                        options: ['Ström', 'Impuls', 'Intensitet', 'Induktans'],
+                        hint: 'I står för strömmen — i F = B · I · l och B = μ₀ · n · I/l.'
+                    },
+                    {
+                        symbol: 'l',
+                        correct: 'Ledarens längd',
+                        options: ['Ledarens längd', 'Ström', 'Flödestäthet', 'Hävarm'],
+                        hint: 'Litet l är ledarens längd i magnetfältet — i F = B · I · l och e = l · v · B.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Hastighet',
+                        options: ['Hastighet', 'Spänning', 'Varvtal', 'Volym'],
+                        hint: 'v är partikelns eller ledarens fart. Spänning betecknas U (eller e för inducerad).'
+                    },
+                    {
+                        symbol: 'A',
+                        correct: 'Area',
+                        options: ['Area', 'Magnetiskt flöde', 'Ström', 'Kraft'],
+                        hint: 'A (kursiv) är arean som flödet går igenom i Φ = B · A. Enheten ampere skrivs också A men rakt.'
+                    },
+                    {
+                        symbol: 'μ₀',
+                        correct: 'Permeabiliteten i vakuum',
+                        options: ['Permeabiliteten i vakuum', 'Friktionstal', 'Magnetisk flödestäthet', 'Magnetiskt flöde'],
+                        hint: 'μ₀ (my-noll) = 4π · 10^-7 T·m/A — naturkonstanten i B = μ₀ · n · I/l.'
                     }
                 ],
             },
@@ -1446,6 +2236,7 @@
                         quantity: 'Plancks konstant',
                         correct: 'Js',
                         options: ['Js', 'J', 'eV', 'Hz'],
+                        ratt: 'Plancks konstant har enheten Js',
                         hint: 'Joulesekund (Js) — h ≈ 6,63 · 10^-34 Js knyter ihop energi och frekvens i E = h · f.',
                         wrongInfo: {
                             'J': 'J (joule) är SI-enheten för energi — Plancks konstant är energi GÅNGER tid.',
@@ -1486,6 +2277,52 @@
                             '°': '° (grader) används för vinklarna i brytningslagen, inte för brytningsindex.',
                             'm/s': 'm/s är SI-enheten för hastighet — brytningsindex är en KVOT mellan två hastigheter.'
                         }
+                    },
+                    {
+                        quantity: 'Ljusets fart i vakuum',
+                        correct: 'm/s',
+                        options: ['m/s', 'nm', 'Hz', 'Js'],
+                        hint: 'Meter per sekund (m/s) — c ≈ 300 000 km/s, och för ljus gäller c = f · λ.',
+                        wrongInfo: {
+                            'nm': 'nm (nanometer) är en enhet för våglängd.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'Js': 'Js (joulesekund) är enheten för Plancks konstant.'
+                        }
+                    },
+                    {
+                        quantity: 'Utträdesarbete',
+                        correct: 'J',
+                        options: ['J', 'eV', 'W', 'Hz'],
+                        hint: 'Joule (J) — W_u är energin som krävs för att lösgöra en elektron ur metallytan. Anges ofta i eV.',
+                        wrongInfo: {
+                            'eV': 'eV (elektronvolt) är vanlig för utträdesarbeten, men inte SI-enheten.',
+                            'W': 'W (watt) är SI-enheten för effekt — blanda inte ihop med beteckningen W för arbete.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    },
+                    {
+                        quantity: 'Rörelsemängd',
+                        correct: 'kg · m/s',
+                        options: ['kg · m/s', 'Js', 'J', 'm/s'],
+                        hint: 'kg · m/s — i de Broglies formel λ = h/p är p partikelns rörelsemängd m · v.',
+                        wrongInfo: {
+                            'Js': 'Js (joulesekund) är enheten för Plancks konstant.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'm/s': 'm/s är SI-enheten för hastighet.'
+                        }
+                    },
+                    {
+                        quantity: 'Infallsvinkel',
+                        correct: '°',
+                        options: ['°', 'rad', 'm', 'saknar enhet'],
+                        fraga: 'Vilken enhet används för denna storhet?',
+                        ratt: 'Vinklarna i brytningslagen anges i grader (°)',
+                        hint: 'Vinklarna i brytningslagen mäts från normalen och anges i grader.',
+                        wrongInfo: {
+                            'rad': 'rad (radian) är SI-enheten för vinkel, men i brytningslagen används grader.',
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            'saknar enhet': 'brytningsINDEX saknar enhet — men infallsvinkeln är en vinkel och anges i grader.'
+                        }
                     }
                 ],
                 symbols: [
@@ -1518,6 +2355,24 @@
                         correct: 'Ljusets fart i vakuum',
                         options: ['Ljusets fart i vakuum', 'Specifik värmekapacitet', 'Laddning', 'Brytningsindex'],
                         hint: 'c står för ljusfarten i vakuum, ungefär 300 000 km/s — c = f · λ för ljus.'
+                    },
+                    {
+                        symbol: 'p',
+                        correct: 'Rörelsemängd',
+                        options: ['Rörelsemängd', 'Effekt', 'Tryck', 'Plancks konstant'],
+                        hint: 'I de Broglies formel λ = h/p är p rörelsemängden m · v.'
+                    },
+                    {
+                        symbol: 'i',
+                        correct: 'Infallsvinkel',
+                        options: ['Infallsvinkel', 'Brytningsvinkel', 'Intensitet', 'Ström'],
+                        hint: 'I brytningslagen n₁ · sin i = n₂ · sin b är i infallsvinkeln mot normalen.'
+                    },
+                    {
+                        symbol: 'b',
+                        correct: 'Brytningsvinkel',
+                        options: ['Brytningsvinkel', 'Infallsvinkel', 'Brytningsindex', 'Flödestäthet'],
+                        hint: 'I brytningslagen är b brytningsvinkeln — vinkeln mot normalen i det nya mediet.'
                     }
                 ],
             },
@@ -1586,6 +2441,40 @@
                             '°C': '°C (celsiusgrad) är vanlig i vardagen, men stjärntemperaturer anges i kelvin.',
                             'W': 'W (watt) är SI-enheten för effekt — stjärnans utstrålade effekt, inte dess temperatur.',
                             'ljusår': 'ljusår är en enhet för avstånd.'
+                        }
+                    },
+                    {
+                        quantity: 'Flykthastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 'ljusår', 'm'],
+                        hint: 'Meter per sekund (m/s) — farten som krävs för att lämna en himlakropp. Vid ett svart hål överstiger den ljusfarten.',
+                        wrongInfo: {
+                            'km/h': 'km/h är en enhet för fart, men inte SI-enheten.',
+                            'ljusår': 'ljusår är en enhet för avstånd, inte fart.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
+                    },
+                    {
+                        quantity: 'Schwarzschildradie',
+                        correct: 'm',
+                        options: ['m', 'ljusår', 'kg', 'm/s'],
+                        ratt: 'Schwarzschildradien är en längd och anges i meter',
+                        hint: 'Meter (m) — händelsehorisontens radie är en längd, ofta angiven i kilometer.',
+                        wrongInfo: {
+                            'ljusår': 'ljusår används för avstånd MELLAN himlakroppar — Schwarzschildradien anges i meter eller kilometer.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'm/s': 'm/s är SI-enheten för hastighet.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'm', 'W', 'K'],
+                        hint: 'Kilogram (kg) — stjärnans eller det svarta hålets massa i gravitationsformlerna.',
+                        wrongInfo: {
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'K': 'K (kelvin) är SI-enheten för temperatur.'
                         }
                     }
                 ],
@@ -1689,7 +2578,11 @@
                     }, question.fraga || questionLabel),
                     React.createElement('h2', {
                         className: 'text-3xl md:text-4xl font-bold text-white',
-                        style: { fontFamily: "'Poppins', sans-serif" }
+                        // Beteckningar sätts i kursiv serif (som variabler i
+                        // teorin) — i Poppins är stort I och litet l identiska.
+                        style: question.symbol
+                            ? { fontFamily: "'Instrument Serif', Georgia, 'Times New Roman', serif", fontStyle: 'italic', letterSpacing: '0.02em' }
+                            : { fontFamily: "'Poppins', sans-serif" }
                     }, question.quantity || question.symbol)
                 ),
                 React.createElement('div', {

@@ -1,36 +1,34 @@
-# Hämtar en fri pressbild till en nyhetsartikel och committar den i
+# Hämtar fria pressbilder till nyhetsartiklar och committar dem i
 # nyheter/bilder/.
 #
 # VARFÖR DEN FINNS
-# Nyhetsagenten kan köras i en miljö vars nätverk bara släpper igenom GitHub
-# (t.ex. Claude Code på webben). Då går det inte att ladda ner pressbilden
-# från NOIRLab, ESO, EurekAlert! eller Wikimedia — och artikeln får en
-# AI-illustration trots att det finns ett äkta foto. Den här körningen gör
-# nedladdningen från en runner som har fri utgående trafik.
+# Nyhetsagenten kan köras i en miljö vars utgående nätverk bara släpper
+# igenom GitHub (t.ex. Claude Code på webben). Då går den fria pressbilden
+# inte att ladda ner från NOIRLab, ESO, EurekAlert! eller Wikimedia — och
+# artikeln får en AI-illustration fastän ett äkta foto finns. Den här
+# körningen gör nedladdningen från en runner med fri nättrafik.
 #
-# ANVÄNDNING (fliken Actions → Hämta nyhetsbild → Run workflow)
-#   url  – bildsida ELLER direktlänk till bildfilen. På en bildsida letas
-#          största jpg/png i sidans HTML upp automatiskt.
-#   fil  – filnamn under nyheter/bilder/, t.ex. 2026-08-05-rubin.jpg
+# ANVÄNDNING
+# Skriv en rad per bild i .github/bildorder.txt och pusha:
 #
-# Licensen kontrolleras INTE av körningen — det ansvaret ligger kvar hos den
-# som väljer bilden. Se Bildregler i .claude/agents/nyhetsagent.md.
+#     <url> <filnamn>
+#
+# url är en bildsida ELLER en direktlänk; på en bildsida letas största
+# jpg/png i sidans HTML upp automatiskt. filnamn hamnar i nyheter/bilder/.
+# Rader som börjar med # hoppas över. Körningen committar bilderna på samma
+# gren och tömmer beställningsfilen.
+#
+# Bilden skalas till högst 1920 px bred, EXIF strippas. Licensen kontrolleras
+# INTE — det ansvaret ligger kvar hos den som väljer bilden. Se Bildregler i
+# .claude/agents/nyhetsagent.md.
 
 name: Hämta nyhetsbild
 
 on:
+  push:
+    paths:
+      - '.github/bildorder.txt'
   workflow_dispatch:
-    inputs:
-      url:
-        description: 'Bildsida eller direktlänk till bilden'
-        required: true
-      fil:
-        description: 'Filnamn under nyheter/bilder/ (t.ex. 2026-08-05-rubin.jpg)'
-        required: true
-      maxbredd:
-        description: 'Skala ner till högst så här många pixlar bred'
-        required: false
-        default: '1920'
 
 jobs:
   hamta:
@@ -42,58 +40,60 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Hämta bilden
-        env:
-          URL: ${{ inputs.url }}
-          FIL: ${{ inputs.fil }}
-          MAXBREDD: ${{ inputs.maxbredd }}
+      - name: Hämta bilderna
         run: |
           set -euo pipefail
           UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36'
+          MAXBREDD=1920
 
-          case "$FIL" in
-            */*|"") echo "fil ska vara ett filnamn utan katalog"; exit 1 ;;
-          esac
+          [ -s .github/bildorder.txt ] || { echo "Ingen beställning"; exit 0; }
 
-          typ=$(curl -sSL -A "$UA" -o /dev/null -w '%{content_type}' "$URL")
-          echo "content-type: $typ"
+          while read -r url fil rest; do
+            case "${url:-}" in ''|'#'*) continue ;; esac
+            case "$fil" in */*|'') echo "fil ska vara ett filnamn utan katalog: $fil"; exit 1 ;; esac
 
-          if [ "${typ#image/}" != "$typ" ]; then
-            bildurl="$URL"
-          else
-            # Bildsida: leta upp arkivets jpg/png. Största varianten först.
-            curl -sSL -A "$UA" "$URL" -o sida.html
-            echo "--- kandidater ---"
-            grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt
-            bildurl=$(grep -E '/(original|fullsize|large)/' kandidater.txt | head -1 || true)
-            [ -n "$bildurl" ] || bildurl=$(grep -E '/(screen|publicationjpg|wallpaper)/' kandidater.txt | head -1 || true)
-            [ -n "$bildurl" ] || { echo "Hittade ingen bildlänk på sidan"; exit 1; }
-            echo "--- bildtext/kredit i sidans metadata ---"
-            grep -oE '<meta[^>]+(og:description|og:title)[^>]*>' sida.html | head -5 || true
-          fi
+            echo "=============================================================="
+            echo "beställning: $url -> nyheter/bilder/$fil"
 
-          echo "laddar ner: $bildurl"
-          curl -sSL -A "$UA" "$bildurl" -o rå.bin
-          file rå.bin
-          case "$(file -b --mime-type rå.bin)" in
-            image/*) ;;
-            *) echo "Nedladdad fil är ingen bild"; exit 1 ;;
-          esac
+            typ=$(curl -sSL -A "$UA" -o /dev/null -w '%{content_type}' "$url")
+            echo "content-type: $typ"
 
-          mkdir -p nyheter/bilder
-          # -strip tar bort EXIF; bredden kapas men bilden förstoras aldrig.
-          convert rå.bin -resize "${MAXBREDD}x>" -strip -quality 84 "nyheter/bilder/$FIL"
-          identify "nyheter/bilder/$FIL"
-          ls -l "nyheter/bilder/$FIL"
+            if [ "${typ#image/}" != "$typ" ]; then
+              bildurl="$url"
+            else
+              # Bildsida: leta upp arkivets jpg/png. Största varianten först.
+              curl -sSL -A "$UA" "$url" -o sida.html
+              echo "--- kandidater ---"
+              grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt
+              bildurl=$(grep -E '/(original|fullsize|large)/' kandidater.txt | head -1 || true)
+              [ -n "$bildurl" ] || bildurl=$(grep -E '/(screen|publicationjpg|wallpaper)/' kandidater.txt | head -1 || true)
+              [ -n "$bildurl" ] || { echo "Hittade ingen bildlänk på sidan"; exit 1; }
+              echo "--- sidans metadata (bildtext/kredit) ---"
+              grep -oE '<meta[^>]+(og:description|og:title)[^>]*>' sida.html | head -5 || true
+            fi
 
-      - name: Committa bilden
-        env:
-          FIL: ${{ inputs.fil }}
+            echo "laddar ner: $bildurl"
+            curl -sSL -A "$UA" "$bildurl" -o rå.bin
+            case "$(file -b --mime-type rå.bin)" in
+              image/*) ;;
+              *) echo "Nedladdad fil är ingen bild"; file rå.bin; exit 1 ;;
+            esac
+
+            mkdir -p nyheter/bilder
+            # Bredden kapas men bilden förstoras aldrig (>), -strip tar bort EXIF.
+            convert rå.bin -resize "${MAXBREDD}x>" -strip -quality 84 "nyheter/bilder/$fil"
+            identify "nyheter/bilder/$fil"
+            ls -l "nyheter/bilder/$fil"
+            rm -f rå.bin sida.html kandidater.txt
+          done < .github/bildorder.txt
+
+      - name: Committa bilderna
         run: |
           set -euo pipefail
+          : > .github/bildorder.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add "nyheter/bilder/$FIL"
-          git diff --cached --quiet && { echo "Bilden var redan identisk"; exit 0; }
-          git commit -m "Hämta pressbild $FIL"
+          git add nyheter/bilder .github/bildorder.txt
+          git diff --cached --quiet && { echo "Inget nytt att committa"; exit 0; }
+          git commit -m "Hämta pressbilder till nyheter"
           git push origin HEAD:${{ github.ref_name }}

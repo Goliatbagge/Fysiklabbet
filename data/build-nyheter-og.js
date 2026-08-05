@@ -276,6 +276,7 @@ const SITEMAP_EXCLUDE = new Set([
   'handskrift-demo.html',        // intern demo för handskriftsmotorn
   'matte-triangel-rektangel.html', // olänkad arbetsfil
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
+  'fysik1-enhetskollen.html',    // redirect-stub → fysik-enhetskoll.html
 ]);
 
 // Ägarverifiering hos sökmotorerna (google<token>.html från Search Console,
@@ -362,10 +363,12 @@ function loadAvsnittData() {
     .filter((s) => KURSKOD[s.course])
     .map((s) => ({
       id: `${KURSKOD[s.course]}-${s.num}`,
-      // Sammanfattningarna heter bara "Sammanfattning" i varje kapitel.
+      // Sammanfattningarna och enhetskollarna heter likadant i varje kapitel.
       namn: String(s.num).endsWith('.S')
         ? `Sammanfattning: ${rent(s.chapter)}`
-        : rent(s.title),
+        : String(s.num).endsWith('.E')
+          ? `Enhetskoll: ${rent(s.chapter)}`
+          : rent(s.title),
       beskrivning: rent(s.description),
       kurs: s.course,
       kapitel: rent(s.chapter),

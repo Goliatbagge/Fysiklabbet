@@ -190,7 +190,7 @@ if (sitemapPaDisk) {
 // tillbaka till standardsidan, så Google indexerar hundratals identiska
 // sidor. Regexpen nedan är kopierad ur katalog.htmls parseInitialState() och
 // måste hållas i takt med den.
-const KATALOG_RE = /^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S))?)?(?::(teori|ovningar|exitticket|visualisering))?$/;
+const KATALOG_RE = /^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering))?$/;
 const avsnitt = B.loadAvsnitt();
 if (!avsnitt.length) {
   fel.push('Inga teoriavsnitt hittades i data/katalog.js — har kursnamnen ändrats? ' +

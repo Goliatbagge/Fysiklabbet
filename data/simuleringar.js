@@ -25,7 +25,6 @@
 
 window.SIM_NAMES = {
   // ── Fysik nivå 1 ────────────────────────────────────────────────────────
-  'fysik1-enhetskollen.html': 'Enhetskollen',
   'fysik1-densitet-app.html': 'Densitet',
   'fysik1-vektoraddition-app.html': 'Vektoraddition',
   'fysik1-stracka-tid-app.html': 'Läge-tid-diagram',

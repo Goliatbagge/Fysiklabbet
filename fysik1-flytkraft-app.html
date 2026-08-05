@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flyta eller sjunka — Fysiklabbet</title>
-    <meta name="description" content="Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.">
+    <meta name="description" content="Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker — Arkimedes princip i praktiken.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-flytkraft-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Flyta eller sjunka — Fysik nivå 1">
-    <meta property="og:description" content="Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.">
+    <meta property="og:description" content="Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker — Arkimedes princip i praktiken.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-flytkraft-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Flyta eller sjunka — Fysik nivå 1">
-    <meta name="twitter:description" content="Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.">
+    <meta name="twitter:description" content="Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker — Arkimedes princip i praktiken.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
 
-        /* ── Lägesflikar (Jämför / Utforska) ─────────────────────── */
+        /* ── Lägesflikar (Utforska / Gissa) ──────────────────────── */
         .tab-button {
             transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
             background: transparent;
@@ -58,13 +58,31 @@
             background: var(--lab-bg-panel, #ffffff);
         }
 
-        /* ── Material-knappar ─────────────────────────────────────── */
-        .material-btn-active {
-            background: rgba(200, 50, 74, 0.10);
-            border: 1px solid var(--lab-accent, #c8324a);
+        /* ── Gissa-lägets svarsknappar ───────────────────────────── */
+        .guess-btn {
+            flex: 1;
+            border: 1.5px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
             color: var(--lab-ink, #0f1620);
-            box-shadow: none;
+            border-radius: 6px; padding: 8px 6px;
+            font-size: 13.5px; font-weight: 600; cursor: pointer;
+            transition: border-color 0.15s ease, background 0.15s ease;
         }
+        .guess-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        .guess-btn:disabled { cursor: default; opacity: 0.9; }
+
+        /* ── Färdiga försök ──────────────────────────────────────── */
+        .preset-btn {
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+            color: var(--lab-ink, #0f1620);
+            border-radius: 6px; padding: 6px 9px; text-align: left;
+            font-size: 12.5px; cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+        .preset-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        .preset-btn .p-title { font-weight: 600; display: block; }
+        .preset-btn .p-desc { color: var(--lab-ink-muted, #8a8579); font-size: 11.5px; }
 
         /* ── Scen ─────────────────────────────────────────────────── */
         .scene-wrap { user-select: none; -webkit-user-select: none; }
@@ -118,20 +136,13 @@
         }
         .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); }
 
-        /* Fullskärm: glidarna direkt synliga uppe till vänster */
-        .fs-sliders {
-            position: absolute; top: 64px; left: 14px; z-index: 6;
-            width: 320px; max-width: 44vw; max-height: 74vh; overflow-y: auto;
-            background: rgba(246,242,234,0.94);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 10px; padding: 11px 13px; color: var(--lab-ink);
-            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            display: flex; flex-direction: column; gap: 10px;
-        }
-        .fs-sliders .fs-panel-title {
+        /* Fullskärm: reglagepanelen (.fs-controls) och handtaget
+           (.fs-toggle-handle) stylas och dockas av styles-laborans-sim.css —
+           här bara paneltitel och maxhöjd så att panelen kan rulla. */
+        .fs-controls { max-height: 70vh; overflow-y: auto; }
+        .fs-controls .fs-panel-title {
             font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
-            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            color: rgba(229,231,235,0.75); font-weight: 600;
         }
 
         /* ── Avläsningstabell ─────────────────────────────────────── */
@@ -149,13 +160,6 @@
         .readout-table td:first-child, .readout-table th:first-child {
             text-align: left; font-weight: 400; color: var(--lab-ink-soft, #3a4151);
         }
-        .rho-bar-track {
-            position: relative; height: 12px; border-radius: 3px;
-            background: var(--lab-bg-panel, #ffffff);
-            border: 1px solid var(--lab-line, rgba(15,22,32,0.14));
-            overflow: hidden;
-        }
-        .rho-bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; }
     </style>
 </head>
 <body class="lab-sim">
@@ -235,7 +239,7 @@
             const s = num.toFixed(decimals);
             if (parseFloat(s) === 0) return '0';
             const parts = s.split('.');
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
             return parts.join(',');
         };
         // Upp till `max` decimaler, avslutande nollor trimmas
@@ -244,28 +248,32 @@
             if (parseFloat(s) === 0) return '0';
             if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
             const parts = s.split('.');
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
             return parts.join(',');
         };
         const fmtForce = (F) => Math.abs(F) >= 100 ? formatNum(F, 0) : formatNum(F, 1);
 
-        // ── Fysikkonstanter ───────────────────────────────────────
-        const G_ACC = 9.82;                 // tyngdfaktor, N/kg
-        const PX = 470;                     // px per meter
-        const VB_W = 900, VB_H = 635;       // viewBox (extra höjd nedtill så att
-                                            // nedåtriktade F_G-pilar + etiketter alltid ryms)
-        const GROUND_Y = 0.5;               // markytans höjd över bassängbotten (m)
-        const PIT_BOTTOM_PY = 510;          // bassängbottens y i px
-        const POOL_L = 304 / PX;            // bassängens inre vänsterkant (m)
-        const POOL_R = 596 / PX;            // bassängens inre högerkant (m)
-        const POOL_DEPTH = 0.40;            // bassängens djup "in i skärmen" (m)
-        const POOL_AREA = (POOL_R - POOL_L) * POOL_DEPTH;   // bottenarea (m²)
-        const WATER_V0 = 0.080;             // vätskevolym utan block (m³) = 80 L
+        // ── Fysikkonstanter och scen-geometri ─────────────────────
+        // Scenen är en labbänk med ett akvarium ovanpå. y = 0 vid bänkskivans
+        // ovansida; akvariets glasbotten lyfter vätskan en aning.
+        const G_ACC = 9.82;                  // tyngdfaktor, N/kg
+        const PX = 470;                      // px per meter
+        const VB_W = 900, VB_H = 635;        // viewBox
+        const BENCH_PY = 520;                // bänkskivans ovansida i px
+        const FLOOR_M = 9 / PX;              // akvariets inre botten (glastjocklek) (m)
+        const TANK_L = 340 / PX;             // akvariets inre vänsterkant (m)
+        const TANK_R = 650 / PX;             // akvariets inre högerkant (m)
+        const WALL_M = 11 / PX;              // glasväggens tjocklek (m)
+        const RIM_M = (BENCH_PY - 245) / PX; // glaskantens höjd över bänken (m)
+        const POOL_DEPTH = 0.40;             // akvariets djup "in i skärmen" (m)
+        const POOL_AREA = (TANK_R - TANK_L) * POOL_DEPTH;   // bottenarea (m²)
+        const WATER_V0 = 0.085;              // vätskevolym utan föremål (m³) = 85 L
         const SCENE_W_M = VB_W / PX;
-        const WALL_M = 11 / PX;             // väggtjocklek (m)
+        const HANG_X = 499 / PX;             // stativets upphängningspunkt (m)
+        const HANG_TOP_PY = 185;             // hängande blockets överkant i px
 
         const toPx = (xm) => xm * PX;
-        const toPy = (ym) => PIT_BOTTOM_PY - ym * PX;
+        const toPy = (ym) => BENCH_PY - ym * PX;
         const side = (V) => Math.cbrt(V);
 
         // ── Vätskor ───────────────────────────────────────────────
@@ -278,9 +286,10 @@
             { id: 'kvicksilver', name: 'Kvicksilver', rho: 13546, fill: 'rgba(158,164,172,0.93)', line: '#6d747d', drop: '#9ea4ac', drag: 2.5 },
         ];
 
-        // ── Material (Utforska-läget) ─────────────────────────────
+        // ── Material ──────────────────────────────────────────────
         const MATERIALS = [
             { name: 'Frigolit',   rho: 50,   fill: '#edeff1', edge: '#aab4bc' },
+            { name: 'Kork',       rho: 240,  fill: '#d9b98a', edge: '#a08050' },
             { name: 'Trä (furu)', rho: 500,  fill: '#d9a55f', edge: '#8a6532' },
             { name: 'Is',         rho: 917,  fill: '#cfeaf4', edge: '#7fc4dd' },
             { name: 'PVC',        rho: 1400, fill: '#8d97a8', edge: '#5a6373' },
@@ -288,20 +297,31 @@
             { name: 'Aluminium',  rho: 2700, fill: '#c3cad3', edge: '#8f99a6' },
             { name: 'Järn',       rho: 7870, fill: '#6a7076', edge: '#3f454c' },
         ];
-        const CUSTOM_FILL = '#bb8f9c', CUSTOM_EDGE = '#8a5f6d';
-        const BLOCK_A_STYLE = { fill: '#e0b64e', edge: '#a8802a' };
-        const BLOCK_B_STYLE = { fill: '#6f94b4', edge: '#46688a' };
+        const CUSTOM_STYLE = { fill: '#bb8f9c', edge: '#8a5f6d' };
+        const MYSTERY_STYLE = { fill: '#ccd3d9', edge: '#8f99a4' };
 
         // Kraftfärger — samma som teorigenomgångens figurer (fy1-5.5)
         const COL_FL = '#d12f2f';   // lyftkraft
         const COL_FG = '#6d4ca8';   // tyngdkraft
         const COL_FN = '#2f9e44';   // normalkraft
+        const COL_OK = '#2f7d46';   // "flyter"/rätt svar
+        const INK = '#0f1620';
+        const INK_SOFT = '#3a4151';
+        const INK_MUTED = '#8a8579';
 
-        // ── Hjälpfunktioner för vatten och block ──────────────────
-        const centerInPool = (b) => b.x >= POOL_L && b.x <= POOL_R;
+        // Flyter/svävar/sjunker med tolerans (svävar = densiteterna matchar
+        // inom 0,5 %, dock minst 2 kg/m³)
+        const statusOf = (rho, fl) => {
+            const tol = Math.max(2, fl.rho * 0.005);
+            if (Math.abs(rho - fl.rho) < tol) return 'Svävar';
+            return rho < fl.rho ? 'Flyter' : 'Sjunker';
+        };
+
+        // ── Hjälpfunktioner för vatten och föremål ────────────────
+        const centerInTank = (b) => b.x >= TANK_L && b.x <= TANK_R;
 
         function submergedVolume(b, h) {
-            if (!centerInPool(b)) return 0;
+            if (!centerInTank(b)) return 0;
             const s = side(b.V);
             const depth = Math.min(h - (b.y - s / 2), s);
             if (depth <= 0) return 0;
@@ -309,33 +329,73 @@
         }
 
         function waterLevel(blocks) {
-            let h = WATER_V0 / POOL_AREA;
+            let h = FLOOR_M + WATER_V0 / POOL_AREA;
             for (let i = 0; i < 4; i++) {
                 let disp = 0;
                 for (const b of blocks) disp += submergedVolume(b, h);
-                h = (WATER_V0 + disp) / POOL_AREA;
+                h = FLOOR_M + (WATER_V0 + disp) / POOL_AREA;
             }
-            return Math.min(h, GROUND_Y);
+            return Math.min(h, RIM_M - 0.012);
         }
 
         // ── Toppnivå-komponenter (definieras ALDRIG inne i App) ───
-        const SliderControl = ({ label, value, min, max, step = 1, unit, onChange, disabled = false, decimals = 1 }) => (
-            <div className={`p-4 glass-card ${disabled ? 'opacity-50' : ''}`} style={{ borderRadius: '6px' }}>
-                <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>{label}</label>
-                    <div className="text-lg font-mono font-semibold" style={{ color: 'var(--lab-accent, #c8324a)' }}>
-                        {formatNum(value, decimals)} <span className="text-sm" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>{unit}</span>
-                    </div>
+        const selectStyle = {
+            width: '100%', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))',
+            background: 'var(--lab-bg-panel, #ffffff)', color: 'var(--lab-ink, #0f1620)',
+            borderRadius: 6, padding: '6px 8px', fontSize: 13.5, cursor: 'pointer',
+        };
+
+        const MiniSlider = ({ label, value, min, max, step = 1, unit, onChange, decimals = 1 }) => (
+            <div>
+                <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>{label}</span>
+                    <span className="font-mono text-sm font-semibold" style={{ color: 'var(--lab-accent, #c8324a)' }}>
+                        {formatNum(value, decimals)}{' '}<span className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>{unit}</span>
+                    </span>
                 </div>
-                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                <input type="range" min={min} max={max} step={step} value={value}
                     onChange={(e) => onChange(parseFloat(e.target.value))}
                     className="w-full rounded appearance-none cursor-pointer transition-all" />
-                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
-                    <span>{formatNum(min, min % 1 !== 0 ? 1 : 0)} {unit}</span>
-                    <span>{formatNum(max, max % 1 !== 0 ? 1 : 0)} {unit}</span>
-                </div>
             </div>
         );
+
+        const matRho = (obj) => {
+            if (!obj.mat) return obj.rho;
+            const m = MATERIALS.find(x => x.name === obj.mat);
+            return m ? m.rho : obj.rho;
+        };
+
+        // Föremålskort: material + volym (+ densitetsglidare för eget material)
+        const ObjectCard = ({ title, obj, onChange }) => {
+            const rho = matRho(obj);
+            const mass = rho * obj.V / 1000;
+            return (
+                <div className="p-4 glass-card flex flex-col gap-3" style={{ borderRadius: '6px' }}>
+                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>{title}</div>
+                    <select value={obj.mat || ''} style={selectStyle}
+                        onChange={(e) => {
+                            const name = e.target.value;
+                            if (!name) onChange({ ...obj, mat: null });
+                            else onChange({ ...obj, mat: name, rho: MATERIALS.find(m => m.name === name).rho });
+                        }}>
+                        <option value="">Eget material — välj densitet</option>
+                        {MATERIALS.map(m => (
+                            <option key={m.name} value={m.name}>{m.name} — {formatNum(m.rho)}{' '}kg/m³</option>
+                        ))}
+                    </select>
+                    <MiniSlider label={<span>Volym <em>V</em></span>} value={obj.V} min={1} max={10} step={0.25} unit="L"
+                        onChange={(v) => onChange({ ...obj, V: v })} decimals={2} />
+                    {!obj.mat && (
+                        <MiniSlider label={<span>Densitet <em>ρ</em></span>} value={obj.rho} min={50} max={8000} step={10} unit="kg/m³"
+                            onChange={(v) => onChange({ ...obj, rho: v })} decimals={0} />
+                    )}
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                        {obj.mat && <span><em>ρ</em> = {formatNum(rho)}{' '}kg/m³ &nbsp;·&nbsp; </span>}
+                        massa <em>m</em> = <em>ρ</em> · <em>V</em> = {fmtSmart(mass, 2)}{' '}kg
+                    </div>
+                </div>
+            );
+        };
 
         // Skalenlig kraftpil: linjen slutar vid pilhuvudets BAS, butt-ändar.
         function ForceArrow({ xPx, fromPy, lenPy, dir, color, sub, value, showValue, dot }) {
@@ -353,14 +413,14 @@
                     <text x={xPx + 8} y={labelPy} textAnchor="start" fontSize="14.5" fill={color}>
                         <tspan fontStyle="italic">F</tspan>
                         <tspan fontSize="10.5" dy="3">{sub}</tspan>
-                        {showValue && <tspan dy="-3">{' = ' + fmtForce(value) + ' N'}</tspan>}
+                        {showValue && <tspan dy="-3">{' = ' + fmtForce(value) + ' N'}</tspan>}
                     </text>
                 </g>
             );
         }
 
         // Etikett-chip på lugn "pappersyta" (läsbar även ovanpå färgat block/vätska)
-        function Chip({ xPx, yPy, text, size = 11.5, bold = false }) {
+        function Chip({ xPx, yPy, text, size = 11.5, bold = false, color = '#0f1620' }) {
             const w = text.length * size * 0.58 + 12;
             const h = size + 8;
             return (
@@ -368,12 +428,51 @@
                     <rect x={xPx - w / 2} y={yPy - h / 2} width={w} height={h} rx="4"
                         fill="rgba(246,242,234,0.95)" stroke="rgba(15,22,32,0.35)" strokeWidth="0.9" />
                     <text x={xPx} y={yPy + size * 0.36} textAnchor="middle" fontSize={size}
-                        fontWeight={bold ? 600 : 400} fill="#0f1620">{text}</text>
+                        fontWeight={bold ? 600 : 400} fill={color}>{text}</text>
                 </g>
             );
         }
 
-        // ── Blockrendering (front + liten 2,5D-avfasning) ─────────
+        // ── Blockrendering (front + liten 2,5D-avfasning + materialkänsla) ──
+        function BlockDeco({ x0, y0, sp, mat, edge }) {
+            if (mat === 'Trä (furu)') return (
+                <g fill="none" stroke={edge} strokeWidth="1.2" opacity="0.4" pointerEvents="none">
+                    <path d={`M ${x0 + sp * 0.08} ${y0 + sp * 0.32} q ${sp * 0.24} ${sp * 0.08} ${sp * 0.46} 0 t ${sp * 0.38} 0`} />
+                    <path d={`M ${x0 + sp * 0.08} ${y0 + sp * 0.66} q ${sp * 0.22} ${-sp * 0.07} ${sp * 0.44} 0 t ${sp * 0.4} 0`} />
+                </g>
+            );
+            if (mat === 'Kork') return (
+                <g fill={edge} opacity="0.3" pointerEvents="none">
+                    {[[0.22, 0.25], [0.55, 0.18], [0.8, 0.38], [0.3, 0.58], [0.68, 0.66], [0.18, 0.82], [0.52, 0.86], [0.84, 0.8]].map(([fx, fy], i) => (
+                        <circle key={i} cx={x0 + sp * fx} cy={y0 + sp * fy} r={Math.max(1.2, sp * 0.03)} />
+                    ))}
+                </g>
+            );
+            if (mat === 'Tegel') return (
+                <g fill="none" stroke={edge} strokeWidth="1.2" opacity="0.35" pointerEvents="none">
+                    <line x1={x0} y1={y0 + sp / 3} x2={x0 + sp} y2={y0 + sp / 3} />
+                    <line x1={x0} y1={y0 + 2 * sp / 3} x2={x0 + sp} y2={y0 + 2 * sp / 3} />
+                    <line x1={x0 + sp * 0.5} y1={y0} x2={x0 + sp * 0.5} y2={y0 + sp / 3} />
+                    <line x1={x0 + sp * 0.25} y1={y0 + sp / 3} x2={x0 + sp * 0.25} y2={y0 + 2 * sp / 3} />
+                    <line x1={x0 + sp * 0.75} y1={y0 + 2 * sp / 3} x2={x0 + sp * 0.75} y2={y0 + sp} />
+                </g>
+            );
+            if (mat === 'Is') return (
+                <g fill="none" stroke="#e8f6fb" strokeLinecap="round" opacity="0.85" pointerEvents="none">
+                    <line x1={x0 + sp * 0.2} y1={y0 + sp * 0.4} x2={x0 + sp * 0.42} y2={y0 + sp * 0.14} strokeWidth={Math.max(2, sp * 0.055)} />
+                    <line x1={x0 + sp * 0.34} y1={y0 + sp * 0.52} x2={x0 + sp * 0.5} y2={y0 + sp * 0.33} strokeWidth={Math.max(1.4, sp * 0.035)} />
+                </g>
+            );
+            if (mat === 'Frigolit') return (
+                <g fill="#c6ccd2" opacity="0.7" pointerEvents="none">
+                    {[[0.25, 0.3], [0.6, 0.2], [0.78, 0.5], [0.35, 0.62], [0.6, 0.8], [0.2, 0.85]].map(([fx, fy], i) => (
+                        <circle key={i} cx={x0 + sp * fx} cy={y0 + sp * fy} r={Math.max(1, sp * 0.022)} />
+                    ))}
+                </g>
+            );
+            return null;
+        }
+
         function BlockShape({ b, style }) {
             const s = side(b.V);
             const sp = s * PX;
@@ -394,26 +493,51 @@
                     {/* frontyta */}
                     <rect x={x0} y={y0} width={sp} height={sp}
                         fill={style.fill} stroke={style.edge} strokeWidth="1.8" />
+                    <BlockDeco x0={x0} y0={y0} sp={sp} mat={style.mat} edge={style.edge} />
+                    {style.mystery && (
+                        <text x={x0 + sp / 2} y={y0 + sp / 2 + sp * 0.18} textAnchor="middle"
+                            fontSize={sp * 0.52} fontWeight="700" fill="#3a4151" pointerEvents="none">?</text>
+                    )}
                 </g>
             );
         }
 
+        // ── Gissa-lägets slumpade utmaningar ──────────────────────
+        function genChallenge() {
+            const r = Math.random();
+            const outcome = r < 0.42 ? 'Flyter' : (r < 0.88 ? 'Sjunker' : 'Svävar');
+            // Vatten viktas upp; övriga vätskor förekommer också
+            const pool = ['vatten', 'vatten', 'vatten', 'bensin', 'olja', 'saltvatten', 'honung', 'kvicksilver'];
+            const fluidId = pool[Math.floor(Math.random() * pool.length)];
+            const fl = FLUIDS.find(f => f.id === fluidId);
+            const V = 2 + Math.round(Math.random() * 12) / 2;   // 2–8 L i halvlitrar
+            let m;
+            if (outcome === 'Svävar') {
+                m = Math.round(fl.rho * V / 1000 * 100) / 100;
+            } else {
+                const factor = outcome === 'Flyter'
+                    ? 0.15 + Math.random() * 0.7
+                    : 1.25 + Math.random() * 1.8;
+                const rho = Math.min(15000, fl.rho * factor);
+                m = Math.max(0.1, Math.round(rho * V / 1000 * 10) / 10);
+            }
+            return { m, V, fluidId };
+        }
+
         // ── Huvudapp ──────────────────────────────────────────────
         const App = () => {
-            const [mode, setMode] = useState('jamfor');            // 'jamfor' | 'utforska'
-            const [compareBy, setCompareBy] = useState('massa');   // 'massa' | 'volym' | 'densitet'
-            const [cmpMass, setCmpMass] = useState(3);             // kg (samma massa)
-            const [cmpVol, setCmpVol] = useState(5);               // L (samma volym)
-            const [cmpRho, setCmpRho] = useState(650);             // kg/m³ (samma densitet)
-            const [expRho, setExpRho] = useState(500);             // kg/m³
-            const [expVol, setExpVol] = useState(5);               // L
-            const [materialName, setMaterialName] = useState('Trä (furu)');
+            const [mode, setMode] = useState('utforska');          // 'utforska' | 'gissa'
+            const [objA, setObjA] = useState({ mat: 'Trä (furu)', rho: 500, V: 5 });
+            const [objB, setObjB] = useState({ mat: 'Tegel', rho: 1900, V: 5 });
+            const [twoObjects, setTwoObjects] = useState(false);
             const [fluidId, setFluidId] = useState('vatten');
+            const [gissa, setGissa] = useState({ ch: null, phase: 'gissa', guess: null, streak: 0, right: 0, total: 0 });
             const [showFG, setShowFG] = useState(true);
             const [showFL, setShowFL] = useState(true);
             const [showFN, setShowFN] = useState(false);
             const [showValues, setShowValues] = useState(false);
             const [isFullscreen, setIsFullscreen] = useState(false);
+            const [fsPanelOpen, setFsPanelOpen] = useState(true);
             const [, setTick] = useState(0);
 
             const sceneWrapRef = useRef(null);
@@ -421,61 +545,54 @@
 
             const fluid = FLUIDS.find(f => f.id === fluidId);
 
-            // Blockkonfiguration (V i m³, m i kg) härledd ur läget
+            // Föremålskonfiguration (V i m³, m i kg) härledd ur läget
             const blockCfg = useMemo(() => {
-                if (mode === 'jamfor') {
-                    if (compareBy === 'massa') {
-                        return [
-                            { id: 'A', V: 0.006, m: cmpMass },
-                            { id: 'B', V: 0.002, m: cmpMass },
-                        ];
-                    } else if (compareBy === 'volym') {
-                        return [
-                            { id: 'A', V: cmpVol / 1000, m: 2 },
-                            { id: 'B', V: cmpVol / 1000, m: 8 },
-                        ];
-                    }
-                    return [
-                        { id: 'A', V: 0.004, m: cmpRho * 0.004 },
-                        { id: 'B', V: 0.008, m: cmpRho * 0.008 },
-                    ];
+                if (mode === 'gissa') {
+                    if (!gissa.ch) return [];
+                    return [{ id: 'A', V: gissa.ch.V / 1000, m: gissa.ch.m }];
                 }
-                return [{ id: 'A', V: expVol / 1000, m: expRho * expVol / 1000 }];
-            }, [mode, compareBy, cmpMass, cmpVol, cmpRho, expRho, expVol]);
+                const cfgs = [{ id: 'A', V: objA.V / 1000, m: matRho(objA) * objA.V / 1000 }];
+                if (twoObjects) cfgs.push({ id: 'B', V: objB.V / 1000, m: matRho(objB) * objB.V / 1000 });
+                return cfgs;
+            }, [mode, objA, objB, twoObjects, gissa.ch]);
 
             // ── Mutabel fysikvärld i refs ──
             const worldRef = useRef({
                 blocks: [],
                 splashes: [],   // {x, y, vx, vy, life}
                 ripples: [],    // {xPx, py, age}
-                h: WATER_V0 / POOL_AREA,
+                h: FLOOR_M + WATER_V0 / POOL_AREA,
                 forceScale: 1,  // px per N (glider mjukt)
+                rhoMax: 1570,   // flytkartans skala (glider mjukt)
             });
             const fluidRef = useRef(fluid);
             fluidRef.current = fluid;
+            const gissaRef = useRef(gissa);
+            gissaRef.current = gissa;
 
-            // Startpositioner valda så att blocken inte hamnar under
-            // visningsrutan (uppe till höger) eller fullskärmsreglagen (vänster).
-            const startX = (id, n) => (n === 1 ? 0.42 : (id === 'A' ? 0.42 : 1.42));
-
+            // Startpositioner: på bänken på var sin sida om akvariet.
+            // I Gissa-läget hänger föremålet i stativet ovanför vattnet.
             const resetBlocks = useCallback(() => {
                 const w = worldRef.current;
+                const hanging = mode === 'gissa' && gissaRef.current.phase === 'gissa';
                 w.blocks = blockCfg.map(cfg => {
                     const s = side(cfg.V);
+                    const hangY = (BENCH_PY - HANG_TOP_PY) / PX - s;
                     return {
                         id: cfg.id, V: cfg.V, m: cfg.m,
-                        x: startX(cfg.id, blockCfg.length),
-                        y: GROUND_Y + s / 2, vy: 0,
-                        grabbed: false, resting: true,
+                        x: hanging ? HANG_X : (cfg.id === 'A' ? 0.50 : 1.68),
+                        y: hanging ? hangY + s / 2 : s / 2, vy: 0,
+                        grabbed: false, resting: !hanging, held: hanging,
                     };
                 });
                 w.splashes = [];
                 w.ripples = [];
-            }, [blockCfg]);
+            }, [blockCfg, mode]);
 
-            // Nytt läge / nytt antal block → börja om. Ändrade värden på
-            // befintliga block → uppdatera V och m men behåll positionerna.
-            const blockIdsKey = blockCfg.map(c => c.id).join(',') + '|' + mode + '|' + compareBy;
+            // Nytt läge / ny utmaning / nytt antal föremål → börja om.
+            // Ändrade värden på befintliga föremål → uppdatera V och m på plats.
+            const blockIdsKey = mode + '|' + blockCfg.map(c => c.id).join(',') +
+                '|' + (mode === 'gissa' && gissa.ch ? gissa.ch.m + '/' + gissa.ch.V + '/' + gissa.ch.fluidId : '');
             useEffect(() => { resetBlocks(); }, [blockIdsKey]);
             useEffect(() => {
                 const w = worldRef.current;
@@ -484,10 +601,40 @@
                     b.V = blockCfg[i].V;
                     b.m = blockCfg[i].m;
                     const s = side(b.V);
-                    const floorY = centerInPool(b) ? 0 : GROUND_Y;
-                    if (b.y - s / 2 < floorY) { b.y = floorY + s / 2; }
+                    const floorY = centerInTank(b) ? FLOOR_M : 0;
+                    if (!b.held && b.y - s / 2 < floorY) { b.y = floorY + s / 2; }
                 });
             }, [blockCfg]);
+
+            // Gissa-läget: se till att det alltid finns en utmaning
+            useEffect(() => {
+                if (mode === 'gissa' && !gissa.ch) {
+                    const ch = genChallenge();
+                    setGissa(g => ({ ...g, ch, phase: 'gissa', guess: null }));
+                    setFluidId(ch.fluidId);
+                }
+            }, [mode]);
+
+            const nextChallenge = () => {
+                const ch = genChallenge();
+                setGissa(g => ({ ...g, ch, phase: 'gissa', guess: null }));
+                setFluidId(ch.fluidId);
+            };
+
+            const answer = (guess) => {
+                const g = gissaRef.current;
+                if (!g.ch || g.phase !== 'gissa') return;
+                const rho = g.ch.m / (g.ch.V / 1000);
+                const actual = statusOf(rho, fluid);
+                const ok = guess === actual;
+                worldRef.current.blocks.forEach(b => { b.held = false; });
+                setGissa(prev => ({
+                    ...prev, phase: 'svar', guess,
+                    total: prev.total + 1,
+                    right: prev.right + (ok ? 1 : 0),
+                    streak: ok ? prev.streak + 1 : 0,
+                }));
+            };
 
             // ── Plask ──
             const spawnSplash = (b, h, speed) => {
@@ -512,7 +659,7 @@
             const maybeSplash = (b, prevBottom, h) => {
                 const s = side(b.V);
                 const bottom = b.y - s / 2;
-                if (centerInPool(b) && prevBottom > h && bottom <= h && b.vy < -0.35) {
+                if (centerInTank(b) && prevBottom > h && bottom <= h && b.vy < -0.35) {
                     spawnSplash(b, h, -b.vy);
                 }
             };
@@ -531,11 +678,11 @@
                         const h = waterLevel(w.blocks);
                         w.h = h;
                         for (const b of w.blocks) {
-                            if (b.grabbed) continue;
+                            if (b.grabbed || b.held) continue;
                             const s = side(b.V);
                             const prevBottom = b.y - s / 2;
-                            const inPool = centerInPool(b);
-                            const floorY = inPool ? 0 : GROUND_Y;
+                            const inTank = centerInTank(b);
+                            const floorY = inTank ? FLOOR_M : 0;
                             const subV = submergedVolume(b, h);
                             const subFrac = subV / b.V;
                             // Krafter: tyngdkraft ned, lyftkraft upp, dämpning.
@@ -546,21 +693,28 @@
                             F -= c * b.vy;
                             b.vy += (F / b.m) * dt;
                             b.y += b.vy * dt;
-                            // Golv (bassängbotten eller marken)
+                            // Golv (akvariets botten eller bänkskivan)
                             if (b.y - s / 2 < floorY) {
                                 b.y = floorY + s / 2;
                                 b.vy = b.vy < 0 ? -b.vy * 0.12 : b.vy;
                                 if (Math.abs(b.vy) < 0.06) b.vy = 0;
                             }
                             b.resting = Math.abs(b.vy) < 0.02 && (b.y - s / 2) <= floorY + 0.002;
-                            // Under marknivå i bassängen → håll blocket innanför väggarna
-                            if (inPool && b.y - s / 2 < GROUND_Y - 0.005) {
-                                b.x = Math.max(POOL_L + s / 2 + 0.004, Math.min(POOL_R - s / 2 - 0.004, b.x));
+                            // Under glaskanten → håll föremålet innanför eller
+                            // helt utanför glasväggarna
+                            if (b.y - s / 2 < RIM_M - 0.005) {
+                                if (inTank) {
+                                    b.x = Math.max(TANK_L + s / 2 + 0.004, Math.min(TANK_R - s / 2 - 0.004, b.x));
+                                } else if (b.x < TANK_L) {
+                                    b.x = Math.min(b.x, TANK_L - WALL_M - s / 2 - 0.004);
+                                } else if (b.x > TANK_R) {
+                                    b.x = Math.max(b.x, TANK_R + WALL_M + s / 2 + 0.004);
+                                }
                             }
                             b.x = Math.max(s / 2 + 0.01, Math.min(SCENE_W_M - s / 2 - 0.01, b.x));
                             maybeSplash(b, prevBottom, h);
                         }
-                        // Enkel block-block-separation i sidled
+                        // Enkel separation i sidled mellan två föremål
                         if (w.blocks.length === 2) {
                             const [a, b2] = w.blocks;
                             const sa = side(a.V), sb = side(b2.V);
@@ -592,6 +746,12 @@
                     }
                     const target = Math.min(1.4, 118 / maxF);
                     w.forceScale += (target - w.forceScale) * 0.12;
+
+                    // Mjuk skala för flytkartan (rymmer vätskan + alla föremål)
+                    let rhoTop = Math.max(1400, fl.rho);
+                    for (const b of w.blocks) rhoTop = Math.max(rhoTop, b.m / b.V);
+                    const rhoTarget = rhoTop * 1.12;
+                    w.rhoMax += (rhoTarget - w.rhoMax) * 0.08;
 
                     setTick(t => t + 1);
                     raf = requestAnimationFrame(step);
@@ -634,10 +794,11 @@
                 const pt = svg.createSVGPoint();
                 pt.x = e.clientX; pt.y = e.clientY;
                 const p = pt.matrixTransform(svg.getScreenCTM().inverse());
-                return { x: p.x / PX, y: (PIT_BOTTOM_PY - p.y) / PX };
+                return { x: p.x / PX, y: (BENCH_PY - p.y) / PX };
             };
 
             const onBlockDown = (b) => (e) => {
+                if (b.held) return;   // hängande mysterieföremål släpps först vid svar
                 e.preventDefault();
                 const p = svgPoint(e);
                 b.grabbed = true;
@@ -654,17 +815,20 @@
                 const prevBottom = b.y - s / 2;
                 let nx = p.x - d.dx;
                 let ny = p.y - d.dy;
-                // Klipp mot scenen (blockets topp ska rymmas i bilden)
+                // Klipp mot scenen (föremålets topp ska rymmas i bilden)
                 nx = Math.max(s / 2 + 0.01, Math.min(SCENE_W_M - s / 2 - 0.01, nx));
-                const topMax = (PIT_BOTTOM_PY - 12) / PX;
+                const topMax = (BENCH_PY - 12) / PX;
                 ny = Math.min(ny, topMax - s / 2 + 0.02);
-                // Under marknivå → antingen i bassängen (innanför väggarna) eller ovanpå marken
-                if (ny - s / 2 < GROUND_Y - 0.005) {
-                    if (nx > POOL_L - 0.02 && nx < POOL_R + 0.02) {
-                        nx = Math.max(POOL_L + s / 2 + 0.004, Math.min(POOL_R - s / 2 - 0.004, nx));
-                        ny = Math.max(s / 2, ny);
+                // Under glaskanten → antingen i akvariet (innanför glaset)
+                // eller utanför på bänken
+                if (ny - s / 2 < RIM_M - 0.005) {
+                    if (nx > TANK_L - 0.02 && nx < TANK_R + 0.02) {
+                        nx = Math.max(TANK_L + s / 2 + 0.004, Math.min(TANK_R - s / 2 - 0.004, nx));
+                        ny = Math.max(FLOOR_M + s / 2, ny);
                     } else {
-                        ny = GROUND_Y + s / 2;
+                        if (nx < TANK_L) nx = Math.min(nx, TANK_L - WALL_M - s / 2 - 0.004);
+                        else nx = Math.max(nx, TANK_R + WALL_M + s / 2 + 0.004);
+                        ny = Math.max(s / 2, ny);
                     }
                 }
                 b.x = nx; b.y = ny;
@@ -686,11 +850,15 @@
             // ── Härledda visningsvärden ──
             const w = worldRef.current;
             const h = w.h;
-            const totalLiters = h * POOL_AREA * 1000;
+            const totalLiters = (h - FLOOR_M) * POOL_AREA * 1000;
             const blockStyle = (b) => {
-                if (mode === 'jamfor') return b.id === 'A' ? BLOCK_A_STYLE : BLOCK_B_STYLE;
-                const mat = MATERIALS.find(m => m.name === materialName);
-                return mat ? { fill: mat.fill, edge: mat.edge } : { fill: CUSTOM_FILL, edge: CUSTOM_EDGE };
+                if (mode === 'gissa') return { ...MYSTERY_STYLE, mystery: true };
+                const obj = b.id === 'A' ? objA : objB;
+                if (obj.mat) {
+                    const mat = MATERIALS.find(m => m.name === obj.mat);
+                    return { fill: mat.fill, edge: mat.edge, mat: mat.name };
+                }
+                return { ...CUSTOM_STYLE };
             };
             const blockData = w.blocks.map(b => {
                 const subV = submergedVolume(b, h);
@@ -698,46 +866,142 @@
                 const FG = b.m * G_ACC;
                 const FL = fluid.rho * G_ACC * subV;
                 const FN = b.resting ? Math.max(0, FG - FL) : 0;
-                let status;
-                if (Math.abs(rho - fluid.rho) < 2) status = 'Svävar';
-                else if (rho < fluid.rho) status = 'Flyter';
-                else status = 'Sjunker';
-                return { b, subV, rho, FG, FL, FN, status, pct: 100 * subV / b.V };
+                return { b, subV, rho, FG, FL, FN, status: statusOf(rho, fluid), pct: 100 * subV / b.V };
             });
 
-            const selectMaterial = (name) => {
-                setMaterialName(name);
-                const mat = MATERIALS.find(m => m.name === name);
-                if (mat) setExpRho(mat.rho);
-            };
-            const onExpRhoChange = (v) => { setExpRho(v); setMaterialName(null); };
+            const masked = mode === 'gissa' && gissa.phase === 'gissa';
 
             // ── Scenens SVG ──
             const time = performance.now() / 1000;
             const hPy = toPy(h);
             const surfPts = [];
-            for (let x = 304; x <= 596; x += 12) {
+            for (let x = 340; x <= 650; x += 12) {
                 const yy = hPy + Math.sin(x * 0.05 + time * 1.9) * 1.1 + Math.sin(x * 0.021 - time * 1.2) * 0.8;
                 surfPts.push(`${x},${yy.toFixed(1)}`);
             }
             const surfLine = 'M ' + surfPts.join(' L ');
-            const fluidPath = surfLine + ` L 596,${PIT_BOTTOM_PY} L 304,${PIT_BOTTOM_PY} Z`;
+            const fluidPath = surfLine + ` L 650,511 L 340,511 Z`;
+
+            // ── Flytkartan (densitetsskala, tätare nedåt) ──
+            const renderFloatMap = () => {
+                const railX = 118, topPy = 178, botPy = 502;
+                const rMax = w.rhoMax;
+                const pyOf = (rho) => topPy + (Math.min(rho, rMax) / rMax) * (botPy - topPy);
+                const steps = [100, 200, 500, 1000, 2000, 5000];
+                const step = steps.find(s => rMax / s <= 8) || 5000;
+                const ticks = [];
+                for (let v = 0; v <= rMax; v += step) ticks.push(v);
+                const fluidPyLine = pyOf(fluid.rho);
+                const showMarkers = !masked;
+                const markers = [];
+                if (showMarkers) {
+                    blockData.forEach((d, i) => {
+                        let py = pyOf(d.rho);
+                        let mx = railX;
+                        // Ligger två markörer på nästan samma densitet → förskjut den andra
+                        if (i > 0 && Math.abs(py - markers[0].py) < 16) mx = railX + 20;
+                        markers.push({ py, mx, d });
+                    });
+                }
+                return (
+                    <g pointerEvents="none">
+                        <text x="95" y="150" textAnchor="middle" fontSize="11" fontWeight="600"
+                            letterSpacing="0.08em" fill={INK_SOFT}>FLYTKARTAN</text>
+                        <text x="95" y="164" textAnchor="middle" fontSize="9.5" fill={INK_MUTED}>
+                            <tspan fontStyle="italic">ρ</tspan> i kg/m³ — tätare nedåt</text>
+                        {/* skalstreck */}
+                        {ticks.map(v => (
+                            <g key={'t' + v}>
+                                <line x1={railX - 6} y1={pyOf(v)} x2={railX + 6} y2={pyOf(v)}
+                                    stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" />
+                                {/* siffran döljs om vätskans linje går genom den */}
+                                {Math.abs(pyOf(v) - fluidPyLine) > 11 && (
+                                    <text x={railX - 12} y={pyOf(v) + 3.5} textAnchor="end" fontSize="10"
+                                        fill={INK_MUTED}>{formatNum(v)}</text>
+                                )}
+                            </g>
+                        ))}
+                        {/* axel med pil nedåt (densiteten ökar nedåt) */}
+                        <line x1={railX} y1={topPy - 6} x2={railX} y2={botPy + 7} stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeLinecap="butt" />
+                        <polygon points={`${railX - 4.5},${botPy + 7} ${railX},${botPy + 15} ${railX + 4.5},${botPy + 7}`} fill="rgba(15,22,32,0.55)" />
+                        {/* vätskans linje */}
+                        <line x1="62" y1={fluidPyLine} x2="154" y2={fluidPyLine}
+                            stroke={fluid.line} strokeWidth="2.6" strokeLinecap="butt" />
+                        <text x="42" y={fluidPyLine - 6} textAnchor="start" fontSize="10.5" fontWeight="600" fill={INK_SOFT}>
+                            {fluid.name}
+                        </text>
+                        {/* zonetiketter: ovanför linjen flyter man, under sjunker man */}
+                        {fluidPyLine - topPy > 40 && (
+                            <text x="152" y={(topPy + fluidPyLine) / 2 + 3} textAnchor="end" fontSize="10"
+                                fontStyle="italic" fill={INK_MUTED}>flyter</text>
+                        )}
+                        {botPy - fluidPyLine > 40 && (
+                            <text x="152" y={(fluidPyLine + botPy) / 2 + 3} textAnchor="end" fontSize="10"
+                                fontStyle="italic" fill={INK_MUTED}>sjunker</text>
+                        )}
+                        {/* föremålens markörer */}
+                        {markers.map(({ py, mx, d }) => {
+                            const st = blockStyle(d.b);
+                            return (
+                                <g key={'m' + d.b.id}>
+                                    <rect x={mx - 7.5} y={py - 7.5} width="15" height="15" rx="3"
+                                        fill={st.fill} stroke={st.edge} strokeWidth="1.4" />
+                                    {w.blocks.length > 1 && (
+                                        <text x={mx} y={py + 3.5} textAnchor="middle" fontSize="10"
+                                            fontWeight="600" fill={INK}>{d.b.id}</text>
+                                    )}
+                                </g>
+                            );
+                        })}
+                    </g>
+                );
+            };
 
             const renderScene = () => (
                 <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet"
-                    role="img" aria-label="Bassäng nedsänkt i marken med block som kan dras, släppas och tryckas ner i vätskan">
-                    {/* Mark på båda sidor om och under bassängen */}
-                    <rect x="0" y="275" width="293" height="360" fill="#e3dac4" />
-                    <rect x="607" y="275" width="293" height="360" fill="#e3dac4" />
-                    <rect x="293" y="521" width="314" height="114" fill="#e3dac4" />
-                    <line x1="0" y1="275" x2="293" y2="275" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" />
-                    <line x1="607" y1="275" x2="900" y2="275" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" />
+                    role="img" aria-label="Akvarium på en labbänk med föremål som kan dras, släppas och tryckas ner i vätskan; till vänster en flytkarta som jämför densiteter">
+                    <defs>
+                        <clipPath id="tankClip">
+                            <rect x="340" y="240" width="310" height="271" />
+                        </clipPath>
+                    </defs>
 
-                    {/* Bassängens inre (bakgrund) — bara under vattenytan, så att
+                    {/* Labbänk: skiva + ben */}
+                    <g pointerEvents="none">
+                        <rect x="20" y="520" width="860" height="28" fill="#dbc79e" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        <line x1="20" y1="527" x2="880" y2="527" stroke="rgba(15,22,32,0.16)" strokeWidth="1" />
+                        <rect x="70" y="548" width="26" height="74" fill="#cdb890" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        <rect x="804" y="548" width="26" height="74" fill="#cdb890" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                    </g>
+
+                    {/* Flytkartan (bakom föremålen) */}
+                    {renderFloatMap()}
+
+                    {/* Labbstativ (endast Gissa-läget) */}
+                    {mode === 'gissa' && (
+                        <g pointerEvents="none">
+                            <rect x="700" y="508" width="100" height="12" rx="2" fill="#b8bfc7" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                            <rect x="746" y="150" width="8" height="358" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                            <rect x="495" y="160" width="255" height="8" rx="3" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                            <rect x="493" y="160" width="12" height="14" rx="2" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                            {gissa.phase === 'gissa' && w.blocks[0] && (
+                                <line x1={toPx(HANG_X)} y1="174" x2={toPx(HANG_X)}
+                                    y2={toPy(w.blocks[0].y + side(w.blocks[0].V) / 2)}
+                                    stroke="#3a4151" strokeWidth="1.6" />
+                            )}
+                        </g>
+                    )}
+
+                    {/* Glasets inre: svag ton + bakre överkant, så att akvariet
+                        läses som en sammanhängande glaslåda och inte två pelare */}
+                    <rect x="340" y="246" width="310" height="265" fill="rgba(201,213,220,0.14)" pointerEvents="none" />
+                    <line x1="340" y1="247" x2="650" y2="247" stroke="rgba(15,22,32,0.28)" strokeWidth="1.2" pointerEvents="none" />
+
+                    {/* Akvariets inre (bakgrund) — bara under vattenytan, så att
                         pappersrutorna fortsätter i luften ovanför ytan */}
                     <path d={fluidPath} fill="#f4efe3" />
 
-                    {/* Block (bakom vätske-överlägget så att nedsänkt del tonas) */}
+                    {/* Föremål (bakom vätske-överlägget så att nedsänkt del tonas) */}
                     {w.blocks.map(b => (
                         <g key={'blk' + b.id}
                             onPointerDown={onBlockDown(b)} onPointerMove={onBlockMove(b)}
@@ -747,7 +1011,7 @@
                     ))}
 
                     {/* Vätskan — halvgenomskinligt överlägg + vågig yta */}
-                    <g pointerEvents="none">
+                    <g pointerEvents="none" clipPath="url(#tankClip)">
                         <path d={fluidPath} fill={fluid.fill} />
                         <path d={surfLine} fill="none" stroke={fluid.line} strokeWidth="1.8" opacity="0.85" />
                         {/* Ringar på ytan */}
@@ -764,32 +1028,46 @@
                         {/* Plaskdroppar */}
                         {w.splashes.map((p, i) => (
                             <circle key={'sp' + i} cx={toPx(p.x)} cy={toPy(p.y)} r={p.r}
-                                fill={p.drop || fluid.drop} opacity={Math.min(0.9, p.life * 1.8)} />
+                                fill={fluid.drop} opacity={Math.min(0.9, p.life * 1.8)} />
                         ))}
                     </g>
 
-                    {/* Bassängväggar och botten */}
+                    {/* Glasväggar, botten och kant */}
                     <g pointerEvents="none">
-                        <rect x="293" y="275" width="11" height="246" fill="#cdc4ae" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
-                        <rect x="596" y="275" width="11" height="246" fill="#cdc4ae" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
-                        <rect x="293" y="510" width="314" height="11" fill="#cdc4ae" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x="329" y="245" width="11" height="275" fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x="650" y="245" width="11" height="275" fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x="340" y="511" width="310" height="9" fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x="326" y="240" width="17" height="6" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <rect x="647" y="240" width="17" height="6" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        {/* Glasreflex */}
+                        <line x1="368" y1="480" x2="452" y2="286" stroke="#e9f1f6" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                        <line x1="390" y1="470" x2="440" y2="355" stroke="#e9f1f6" strokeWidth="3.4" strokeLinecap="round" opacity="0.35" />
                         {/* Litersskala: streck var 20:e liter på insidan av vänster vägg */}
-                        {[20, 40, 60, 80, 100, 120].map(VL => {
-                            const py = toPy((VL / 1000) / POOL_AREA);
-                            if (py < 278) return null;
-                            return <line key={'tick' + VL} x1="304" y1={py} x2="315" y2={py}
+                        {[20, 40, 60, 80, 100, 120, 140].map(VL => {
+                            const py = toPy(FLOOR_M + (VL / 1000) / POOL_AREA);
+                            if (py < 250) return null;
+                            return <line key={'tick' + VL} x1="340" y1={py} x2="351" y2={py}
                                 stroke="rgba(15,22,32,0.4)" strokeWidth="1.2" />;
                         })}
                     </g>
 
-                    {/* Vattennivå-avläsning i liter, till vänster om bassängen */}
+                    {/* Vattennivå-avläsning i liter, till vänster om akvariet */}
                     <g pointerEvents="none">
-                        <polygon points={`293,${hPy} 282,${hPy - 5} 282,${hPy + 5}`} fill="#0f1620" opacity="0.75" />
-                        <Chip xPx={244} yPy={hPy} text={formatNum(totalLiters, 1) + ' L'} size={12} bold />
+                        <polygon points={`329,${hPy} 318,${hPy - 5} 318,${hPy + 5}`} fill="#0f1620" opacity="0.75" />
+                        <Chip xPx={280} yPy={hPy} text={formatNum(totalLiters, 1) + ' L'} size={12} bold />
                     </g>
 
-                    {/* Kraftpilar + blocketiketter (överst) */}
+                    {/* Facit-chip i Gissa-läget */}
+                    {mode === 'gissa' && gissa.phase === 'svar' && blockData[0] && (
+                        <Chip xPx={495} yPy={218} bold size={12.5}
+                            color={gissa.guess === blockData[0].status ? COL_OK : '#c8324a'}
+                            text={(gissa.guess === blockData[0].status ? 'Rätt gissat' : 'Fel gissat') +
+                                ' — föremålet ' + blockData[0].status.toLowerCase()} />
+                    )}
+
+                    {/* Kraftpilar + föremålsetiketter (överst) */}
                     {blockData.map(({ b, FG, FL, FN }) => {
+                        if (b.held) return null;
                         const s = side(b.V);
                         const sp = s * PX;
                         const cx = toPx(b.x);
@@ -809,7 +1087,7 @@
                                     <ForceArrow xPx={cx + sp * 0.28} fromPy={cy + sp / 2} lenPy={FN * sc} dir={-1}
                                         color={COL_FN} sub="N" value={FN} showValue={showValues} />
                                 )}
-                                {/* Blockbokstav + massa-chip */}
+                                {/* Föremålsbokstav */}
                                 {w.blocks.length > 1 && (
                                     <g>
                                         <rect x={cx - sp / 2 + 3} y={cy - sp / 2 + 3} width="16" height="16" rx="3" fill="#0f1620" opacity="0.85" />
@@ -828,67 +1106,115 @@
                             </g>
                         );
                     })}
+
+                    {/* Massa-chip även för hängande mysterieföremål */}
+                    {blockData.filter(d => d.b.held).map(({ b }) => {
+                        const s = side(b.V);
+                        const sp = s * PX;
+                        const cx = toPx(b.x);
+                        const cy = toPy(b.y);
+                        const txt = fmtSmart(b.m, 2) + ' kg';
+                        const cw = txt.length * 11 * 0.58 + 12;
+                        return <Chip key={'hm' + b.id} xPx={cx - sp / 2 - cw / 2 - 8} yPy={cy} text={txt} size={11} />;
+                    })}
                 </svg>
             );
 
             // ── Reglage-JSX (återanvänds i sidopanel och fullskärm) ──
-            // OBS: sidopanelen finns kvar i DOM:en även i fullskärm, så de två
-            // instanserna MÅSTE ha olika radio-name — annars bildar de en enda
-            // grupp och markeringen hamnar i den dolda kopian.
-            const compareRadios = (groupName) => (
-                <div className="flex flex-col gap-1">
-                    {[['massa', 'Samma massa'], ['volym', 'Samma volym'], ['densitet', 'Samma densitet']].map(([val, lbl]) => (
-                        <label key={val} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>
-                            <input type="radio" name={'cmp-' + groupName} checked={compareBy === val}
-                                onChange={() => setCompareBy(val)}
-                                style={{ width: 15, height: 15, accentColor: 'var(--lab-accent, #c8324a)' }} />
-                            <span>{lbl}</span>
-                        </label>
-                    ))}
-                </div>
-            );
-
-            const compareSlider = compareBy === 'massa' ? (
-                <SliderControl label="Massa (båda blocken)" value={cmpMass} min={1} max={10} step={0.25} unit="kg"
-                    onChange={setCmpMass} decimals={2} />
-            ) : compareBy === 'volym' ? (
-                <SliderControl label="Volym (båda blocken)" value={cmpVol} min={1} max={10} step={0.25} unit="L"
-                    onChange={setCmpVol} decimals={2} />
-            ) : (
-                <SliderControl label="Densitet (båda blocken)" value={cmpRho} min={100} max={2500} step={10} unit="kg/m³"
-                    onChange={setCmpRho} decimals={0} />
-            );
-
-            const exploreSliders = (
-                <React.Fragment>
-                    <SliderControl label="Densitet" value={expRho} min={50} max={8000} step={10} unit="kg/m³"
-                        onChange={onExpRhoChange} decimals={0} />
-                    <SliderControl label="Volym" value={expVol} min={1} max={10} step={0.25} unit="L"
-                        onChange={setExpVol} decimals={2} />
-                </React.Fragment>
-            );
-
             const fluidSelect = (extraProps) => (
                 <select value={fluidId} onChange={(e) => setFluidId(e.target.value)} {...(extraProps || {})}>
                     {FLUIDS.map(f => (
-                        <option key={f.id} value={f.id}>{f.name} — {formatNum(f.rho)} kg/m³</option>
+                        <option key={f.id} value={f.id}>{f.name} — {formatNum(f.rho)}{' '}kg/m³</option>
                     ))}
                 </select>
             );
 
-            // ── Densitetsjämförelse (staplar) ──
-            const rhoScaleMax = Math.max(1600, Math.min(3200, 1.15 * Math.max(fluid.rho, ...blockData.map(d => d.rho))));
-            const rhoBar = (label, rho, color) => (
-                <div key={label} className="flex items-center gap-2 text-xs" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
-                    <span style={{ width: 74, flexShrink: 0 }}>{label}</span>
-                    <div className="rho-bar-track flex-grow">
-                        <div className="rho-bar-fill" style={{ width: `${Math.min(100, 100 * rho / rhoScaleMax)}%`, background: color }} />
+            const PRESETS = [
+                { name: 'Samma volym', desc: 'trä och järn, 5 L var — olika massa',
+                  a: { mat: 'Trä (furu)', rho: 500, V: 5 }, b: { mat: 'Järn', rho: 7870, V: 5 } },
+                { name: 'Samma massa', desc: 'båda väger 3 kg — olika volym',
+                  a: { mat: null, rho: 600, V: 5 }, b: { mat: null, rho: 1500, V: 2 } },
+                { name: 'Samma densitet', desc: 'trä i två storlekar — flyter lika djupt',
+                  a: { mat: 'Trä (furu)', rho: 500, V: 2 }, b: { mat: 'Trä (furu)', rho: 500, V: 8 } },
+            ];
+            const applyPreset = (p) => { setObjA({ ...p.a }); setObjB({ ...p.b }); setTwoObjects(true); };
+
+            const utforskaControls = (tag) => (
+                <React.Fragment>
+                    <ObjectCard title={twoObjects ? 'Föremål A' : 'Föremålet'} obj={objA} onChange={setObjA} />
+                    <div className="p-3 glass-card" style={{ borderRadius: '6px' }}>
+                        <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                            <input type="checkbox" checked={twoObjects} onChange={(e) => setTwoObjects(e.target.checked)}
+                                style={{ width: 15, height: 15, accentColor: 'var(--lab-accent, #c8324a)' }} />
+                            <span>Jämför med ett andra föremål</span>
+                        </label>
                     </div>
-                    <span className="font-mono" style={{ width: 92, textAlign: 'right', flexShrink: 0 }}>{formatNum(rho)} kg/m³</span>
+                    {twoObjects && <ObjectCard title="Föremål B" obj={objB} onChange={setObjB} />}
+                    <div className="p-4 glass-card flex flex-col gap-2" style={{ borderRadius: '6px' }}>
+                        <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Färdiga försök</div>
+                        {PRESETS.map(p => (
+                            <button key={p.name + tag} type="button" className="preset-btn" onClick={() => applyPreset(p)}>
+                                <span className="p-title">{p.name}</span>
+                                <span className="p-desc">{p.desc}</span>
+                            </button>
+                        ))}
+                    </div>
+                    <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
+                        <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Vätska</div>
+                        {fluidSelect({ style: selectStyle })}
+                    </div>
+                </React.Fragment>
+            );
+
+            const gissaRho = gissa.ch ? gissa.ch.m / (gissa.ch.V / 1000) : 0;
+            const gissaActual = gissa.ch ? statusOf(gissaRho, fluid) : null;
+            const gissaOk = gissa.guess === gissaActual;
+
+            const gissaCard = (
+                <div className="p-4 glass-card flex flex-col gap-3" style={{ borderRadius: '6px' }}>
+                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Utmaning</div>
+                    {gissa.ch && (
+                        <React.Fragment>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                                Ett okänt föremål hänger i stativet:
+                            </div>
+                            <div className="flex gap-4 text-sm font-mono" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                                <span><em>m</em> = {fmtSmart(gissa.ch.m, 2)}{' '}kg</span>
+                                <span><em>V</em> = {fmtSmart(gissa.ch.V, 1)}{' '}L</span>
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                Vätskan är <strong>{fluid.name.toLowerCase()}</strong> ({formatNum(fluid.rho)}{' '}kg/m³).
+                                Beräkna föremålets densitet och jämför!
+                            </div>
+                            {gissa.phase === 'gissa' ? (
+                                <div className="flex gap-2">
+                                    {['Flyter', 'Svävar', 'Sjunker'].map(g => (
+                                        <button key={g} type="button" className="guess-btn" onClick={() => answer(g)}>{g}</button>
+                                    ))}
+                                </div>
+                            ) : (
+                                <React.Fragment>
+                                    <div className="text-sm font-semibold" style={{ color: gissaOk ? COL_OK : 'var(--lab-accent, #c8324a)' }}>
+                                        {gissaOk ? 'Rätt!' : 'Inte riktigt — du gissade "' + gissa.guess + '".'}
+                                    </div>
+                                    <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                        <em>ρ</em> = <em>m</em>{' '}/{' '}<em>V</em> = {formatNum(gissaRho)}{' '}kg/m³
+                                        {' '}{gissaActual === 'Flyter' ? '< ' : (gissaActual === 'Sjunker' ? '> ' : '≈ ')}
+                                        {formatNum(fluid.rho)}{' '}kg/m³ — föremålet {gissaActual.toLowerCase()}.
+                                        Dra gärna i det och känn efter!
+                                    </div>
+                                    <button type="button" className="guess-btn" onClick={nextChallenge}>Nästa föremål</button>
+                                </React.Fragment>
+                            )}
+                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                                Rätt: {gissa.right} av {gissa.total}{gissa.streak >= 2 ? ' — svit: ' + gissa.streak : ''}
+                            </div>
+                        </React.Fragment>
+                    )}
                 </div>
             );
 
-            const statusColor = (st) => st === 'Flyter' ? '#2f7d46' : (st === 'Sjunker' ? 'var(--lab-accent, #c8324a)' : '#8a6d1f');
+            const statusColor = (st) => st === 'Flyter' ? COL_OK : (st === 'Sjunker' ? 'var(--lab-accent, #c8324a)' : '#8a6d1f');
 
             return (
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-8 pt-4 font-sans" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -926,8 +1252,9 @@
                                 </div>
                             </div>
                             <p className="mt-2" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
-                                Ta tag i blocken: släpp dem i vätskan, tryck ner dem mot botten eller lyft
-                                upp dem ur bassängen — lyftkraften följer Arkimedes princip.
+                                Dra föremålen från bänken ner i akvariet — släpp, tryck ner mot botten eller
+                                lyft upp dem igen. Flytkartan till vänster visar varför det blir som det blir,
+                                och i Gissa-läget förutsäger du resultatet innan föremålet släpps.
                             </p>
                         </div>
 
@@ -937,7 +1264,7 @@
                                 <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
                                 <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
                                     <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
-                                        Flytförmåga
+                                        Flyta eller sjunka
                                     </span>
                                     <a href="fysik1-arkimedes.html"
                                         className="tab-button px-4 py-2 rounded text-sm font-semibold border"
@@ -950,13 +1277,13 @@
                             <div>
                                 <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Läge</div>
                                 <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
-                                    <button onClick={() => setMode('jamfor')}
-                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'jamfor' ? 'tab-active' : ''}`}>
-                                        Jämför
-                                    </button>
                                     <button onClick={() => setMode('utforska')}
                                         className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'utforska' ? 'tab-active' : ''}`}>
                                         Utforska
+                                    </button>
+                                    <button onClick={() => setMode('gissa')}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'gissa' ? 'tab-active' : ''}`}>
+                                        Gissa
                                     </button>
                                 </div>
                             </div>
@@ -990,31 +1317,13 @@
                                             <React.Fragment>
                                                 <div className="st-title">Läge</div>
                                                 <label>
-                                                    <input type="radio" name="fs-mode" checked={mode === 'jamfor'} onChange={() => setMode('jamfor')} />
-                                                    <span>Jämför två block</span>
-                                                </label>
-                                                <label>
                                                     <input type="radio" name="fs-mode" checked={mode === 'utforska'} onChange={() => setMode('utforska')} />
                                                     <span>Utforska</span>
                                                 </label>
-                                                {mode === 'jamfor' && (
-                                                    <React.Fragment>
-                                                        <div className="st-title mt">Blocken</div>
-                                                        {compareRadios('fs')}
-                                                    </React.Fragment>
-                                                )}
-                                                {mode === 'utforska' && (
-                                                    <React.Fragment>
-                                                        <div className="st-title mt">Material</div>
-                                                        <select value={materialName || ''}
-                                                            onChange={(e) => { if (e.target.value) selectMaterial(e.target.value); }}>
-                                                            <option value="">Eget värde</option>
-                                                            {MATERIALS.map(m => <option key={m.name} value={m.name}>{m.name}</option>)}
-                                                        </select>
-                                                    </React.Fragment>
-                                                )}
-                                                <div className="st-title mt">Vätska</div>
-                                                {fluidSelect()}
+                                                <label>
+                                                    <input type="radio" name="fs-mode" checked={mode === 'gissa'} onChange={() => setMode('gissa')} />
+                                                    <span>Gissa</span>
+                                                </label>
                                             </React.Fragment>
                                         )}
                                         <div className={'st-title' + (isFullscreen ? ' mt' : '')}>Visa</div>
@@ -1034,17 +1343,25 @@
                                             <input type="checkbox" checked={showValues} onChange={(e) => setShowValues(e.target.checked)} />
                                             <span>Visa värden</span>
                                         </label>
-                                        <div className="st-actions">
-                                            <button type="button" className="st-btn" onClick={resetBlocks}>Börja om</button>
-                                        </div>
+                                        {mode === 'utforska' && (
+                                            <div className="st-actions">
+                                                <button type="button" className="st-btn" onClick={resetBlocks}>Börja om</button>
+                                            </div>
+                                        )}
                                     </div>
 
-                                    {/* Fullskärm: glidare direkt synliga uppe till vänster */}
+                                    {/* Fullskärm: hopfällbar reglagepanel i underkanten */}
                                     {isFullscreen && (
-                                        <div className="fs-sliders">
-                                            <div className="fs-panel-title">Reglage</div>
-                                            {mode === 'jamfor' ? compareSlider : exploreSliders}
-                                        </div>
+                                        <React.Fragment>
+                                            <div className={'fs-controls' + (fsPanelOpen ? '' : ' collapsed')}>
+                                                <div className="fs-panel-title">{mode === 'gissa' ? 'Gissa' : 'Reglage'}</div>
+                                                {mode === 'gissa' ? gissaCard : utforskaControls('fs')}
+                                            </div>
+                                            <button type="button" className="fs-toggle-handle"
+                                                onClick={() => setFsPanelOpen(o => !o)}>
+                                                {(fsPanelOpen ? 'Dölj ' : 'Visa ') + (mode === 'gissa' ? 'utmaningen' : 'reglage')}
+                                            </button>
+                                        </React.Fragment>
                                     )}
                                 </div>
                             </div>
@@ -1054,51 +1371,29 @@
                                 <div className="font-semibold mb-2" style={{ color: 'var(--lab-ink, #0f1620)' }}>Så hänger det ihop</div>
                                 <ul className="list-disc pl-5 flex flex-col gap-1">
                                     <li>Lyftkraften är lika stor som tyngden av den undanträngda vätskan:
-                                        {' '}<em>F</em><sub>L</sub>{' '}={' '}<em>ρ</em>{' '}·{' '}<em>g</em>{' '}·{' '}<em>V</em>, där <em>ρ</em> är <strong>vätskans</strong> densitet
+                                        {' '}<em>F</em><sub>L</sub>{' '}={' '}<em>ρ</em>{' '}·{' '}<em>g</em>{' '}·{' '}<em>V</em>, där <em>ρ</em> är <strong>vätskans</strong> densitet
                                         och <em>V</em> är volymen under ytan.</li>
-                                    <li>Ett föremål <strong>flyter</strong> om dess densitet är mindre än vätskans.
-                                        Då sjunker det ner precis så långt att <em>F</em><sub>L</sub>{' '}={' '}<em>F</em><sub>G</sub> —
-                                        andelen under ytan blir <em>ρ</em><sub>föremål</sub>{' '}/{' '}<em>ρ</em><sub>vätska</sub>.</li>
-                                    <li>Är föremålets densitet <strong>större</strong> än vätskans räcker lyftkraften inte till
-                                        (<em>F</em><sub>L</sub>{' '}&lt;{' '}<em>F</em><sub>G</sub>) — föremålet sjunker och bottnen
-                                        får bära resten med normalkraften <em>F</em><sub>N</sub>.</li>
-                                    <li>Trycker du ner ett flytande block ökar volymen under ytan — lyftkraften blir större än
-                                        tyngdkraften och blocket skjuts upp igen när du släpper. Följ vattennivån i liter till
+                                    <li><strong>Flytkartan</strong> jämför densiteter med tätare längre ner:
+                                        hamnar föremålets markering <strong>ovanför</strong> vätskans linje flyter det,
+                                        <strong> under</strong> linjen sjunker det, och <strong>på</strong> linjen svävar det.
+                                        Precis som i verkligheten — det som är lättare än vätskan lägger sig ovanpå.</li>
+                                    <li>Ett flytande föremål sjunker ner precis så långt att <em>F</em><sub>L</sub>{' '}={' '}<em>F</em><sub>G</sub> —
+                                        andelen under ytan blir <em>ρ</em><sub>föremål</sub>{' '}/{' '}<em>ρ</em><sub>vätska</sub>.
+                                        Är föremålets densitet större än vätskans räcker lyftkraften inte till och
+                                        botten får bära resten med normalkraften <em>F</em><sub>N</sub>.</li>
+                                    <li>Trycker du ner ett flytande föremål ökar volymen under ytan — lyftkraften blir större än
+                                        tyngdkraften och föremålet skjuts upp igen när du släpper. Följ vattennivån i liter till
                                         vänster: den stiger exakt med den undanträngda volymen.</li>
+                                    <li>I <strong>Gissa-läget</strong> hänger ett okänt föremål i stativet. Räkna ut
+                                        densiteten ur <em>m</em> och <em>V</em>, jämför med vätskans och svara —
+                                        sedan släpps föremålet och du ser direkt om du hade rätt.</li>
                                 </ul>
                             </div>
                         </div>
 
                         {/* Sidopanel */}
                         <div className="lg:w-1/3 flex-shrink-0 order-2 flex flex-col gap-4">
-                            {mode === 'jamfor' ? (
-                                <React.Fragment>
-                                    <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
-                                        <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Blocken</div>
-                                        {compareRadios('panel')}
-                                    </div>
-                                    {compareSlider}
-                                </React.Fragment>
-                            ) : (
-                                <React.Fragment>
-                                    <div className="p-3 glass-card flex flex-wrap gap-1.5" style={{ borderRadius: '6px' }}>
-                                        {MATERIALS.map(mat => (
-                                            <button key={mat.name} onClick={() => selectMaterial(mat.name)}
-                                                className={`px-2 py-1 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 ${materialName === mat.name ? 'material-btn-active' : 'material-btn'}`}
-                                                title={`${mat.name} – ${formatNum(mat.rho)} kg/m³`}>
-                                                <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: mat.fill, boxShadow: '0 0 0 1px rgba(15,22,32,0.25)' }}></span>
-                                                <span>{mat.name}</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                    {exploreSliders}
-                                </React.Fragment>
-                            )}
-
-                            <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
-                                <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Vätska</div>
-                                {fluidSelect({ style: { width: '100%', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', background: 'var(--lab-bg-panel, #ffffff)', color: 'var(--lab-ink, #0f1620)', borderRadius: 6, padding: '6px 8px', fontSize: 14, cursor: 'pointer' } })}
-                            </div>
+                            {mode === 'utforska' ? utforskaControls('panel') : gissaCard}
 
                             {/* Avläsningar */}
                             <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
@@ -1107,60 +1402,46 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            {blockData.map(d => <th key={d.b.id}>{w.blocks.length > 1 ? 'Block ' + d.b.id : 'Blocket'}</th>)}
+                                            {blockData.map(d => <th key={d.b.id}>{w.blocks.length > 1 ? 'Föremål ' + d.b.id : 'Föremålet'}</th>)}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Massa <em>m</em></td>
-                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.b.m, 2)} kg</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.b.m, 2)}{' '}kg</td>)}
                                         </tr>
                                         <tr>
                                             <td>Volym <em>V</em></td>
-                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.b.V * 1000, 2)} L</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.b.V * 1000, 2)}{' '}L</td>)}
                                         </tr>
                                         <tr>
                                             <td>Densitet <em>ρ</em></td>
-                                            {blockData.map(d => <td key={d.b.id}>{formatNum(d.rho)} kg/m³</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{masked ? '?' : formatNum(d.rho) + ' kg/m³'}</td>)}
                                         </tr>
                                         <tr>
                                             <td>Tyngdkraft <em>F</em><sub>G</sub></td>
-                                            {blockData.map(d => <td key={d.b.id}>{fmtForce(d.FG)} N</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{fmtForce(d.FG)}{' '}N</td>)}
                                         </tr>
                                         <tr>
                                             <td>Lyftkraft <em>F</em><sub>L</sub></td>
-                                            {blockData.map(d => <td key={d.b.id}>{fmtForce(d.FL)} N</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{fmtForce(d.FL)}{' '}N</td>)}
                                         </tr>
                                         <tr>
                                             <td>Under ytan</td>
-                                            {blockData.map(d => <td key={d.b.id}>{formatNum(d.pct, 0)} %</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{formatNum(d.pct, 0)}{' '}%</td>)}
                                         </tr>
                                         <tr>
                                             <td>Undanträngd volym</td>
-                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.subV * 1000, 2)} L</td>)}
+                                            {blockData.map(d => <td key={d.b.id}>{fmtSmart(d.subV * 1000, 2)}{' '}L</td>)}
                                         </tr>
                                         <tr>
                                             <td></td>
                                             {blockData.map(d => (
-                                                <td key={d.b.id} style={{ color: statusColor(d.status), fontWeight: 600 }}>{d.status}</td>
+                                                <td key={d.b.id} style={{ color: masked ? 'var(--lab-ink-muted, #8a8579)' : statusColor(d.status), fontWeight: 600 }}>{masked ? '?' : d.status}</td>
                                             ))}
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-
-                            {/* Densitetsjämförelse */}
-                            <div className="p-4 glass-card flex flex-col gap-2" style={{ borderRadius: '6px' }}>
-                                <div className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Densitetsjämförelse</div>
-                                {blockData.map(d => rhoBar(
-                                    w.blocks.length > 1 ? 'Block ' + d.b.id : 'Blocket',
-                                    d.rho,
-                                    blockStyle(d.b).fill
-                                ))}
-                                {rhoBar(fluid.name, fluid.rho, fluid.drop)}
-                                <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
-                                    Lägre densitet än vätskan → flyter. Högre → sjunker.
-                                </div>
                             </div>
                         </div>
                     </main>

@@ -1614,6 +1614,43 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
   (annars skulle den tyst visa standardsidan, och Google indexera hundratals
   identiska sidor). **Hålls regexpen i takt med `parseInitialState()`.**
 
+## Formler i nyhetsartiklar: KaTeX, precis som i teorin
+
+**En formel i en nyhetsartikel sätts med KaTeX — `$…$` i `body`-strängarna i
+`data/nyheter.js`** (uttryckligt önskemål 2026-08-05). Samma matematiksättning
+som teoriavsnitten: **rakt bråkstreck** i stället för snedstreck, och
+**rotmärke som spänner över hela uttrycket**. `nyheter.html` laddar KaTeX och
+renderar artikelkroppen i `ArticleView`.
+
+- ✓ `$v = \\sqrt{\\dfrac{G \\cdot M}{r}}$`, `$\\rho = \\dfrac{m}{V}$`,
+  `$P = \\dfrac{\\Delta E}{\\Delta t}$`
+- ✗ `<em>v</em>&nbsp;=&nbsp;√(<em>G</em>·<em>M</em>/<em>r</em>)`
+
+Regler:
+
+- **`data/nyheter.js` är JS → dubbla alla backslash** (`\\dfrac`, `\\cdot`,
+  `\\mathrm`, `\\approx`). Samma fälla som `data/ovningar.js`.
+- **Decimalkomma skrivs `{,}`** inuti math (`$z = 7{,}77$`) — annars blir
+  kommat en listavgränsare med luft efter.
+- **En ensam storhet i löptext är också ett math-block**: `talet $z$`,
+  `bokstaven $\\eta$ (eta)`, `arbetet $W$`. `<em>` reserveras för kursiverad
+  löptext (tidskriftsnamn, betoning), inte för variabler.
+- **Variabel + värde + enhet i ETT block**:
+  `$c \\approx 2{,}998 \\cdot 10^{8}\\ \\mathrm{m/s}$` — aldrig uppdelat, då
+  kan raden brytas vid likhetstecknet.
+- **Undantag som behåller HTML:** rena tiopotenser och enheter utan variabel
+  (`10<sup>−17</sup>&nbsp;Pa·s`, `m<sup>−2</sup>`) samt kemiska formler
+  (`Al<sub>0,28</sub>Ga<sub>0,72</sub>As`). Att sätta varje siffra i KaTeX
+  skulle göra brödtexten spräcklig.
+- **`title`, `deck` och `research.citation` får ALDRIG innehålla math** — de
+  går ut som ren text i `og:description`, RSS-flödet och delningssidorna, där
+  `$…$` syns bokstavligt.
+
+Ordningen i `ArticleView`s effekt är **formler → begreppslänkning → bionisk
+läsning**: KaTeX måste se råtexten först, och både `begrepp-lank.js` och
+`applyBionic` hoppar över `.katex` (spann inuti en formel slår sönder
+sättningen). **Rör inte den ordningen eller katex-undantagen.**
+
 ## Begreppsordlista
 
 Nyhetsartiklarna innehåller ofta facktermer som ligger över gymnasienivå

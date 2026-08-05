@@ -40,6 +40,9 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
+      - name: Installera Pillow
+        run: python3 -m pip install --quiet --break-system-packages pillow
+
       - name: Hämta bilderna
         run: |
           set -euo pipefail
@@ -80,9 +83,24 @@ jobs:
             esac
 
             mkdir -p nyheter/bilder
-            # Bredden kapas men bilden förstoras aldrig (>), -strip tar bort EXIF.
-            convert rå.bin -resize "${MAXBREDD}x>" -strip -quality 84 "nyheter/bilder/$fil"
-            identify "nyheter/bilder/$fil"
+            # Bredden kapas men bilden förstoras aldrig. Sparas om utan EXIF.
+            MAXBREDD="$MAXBREDD" IN=rå.bin UT="nyheter/bilder/$fil" python3 - <<'PY'
+          import os
+          from PIL import Image
+          Image.MAX_IMAGE_PIXELS = None
+          maxbredd = int(os.environ['MAXBREDD'])
+          bild = Image.open(os.environ['IN'])
+          print('original:', bild.size, bild.mode)
+          if bild.width > maxbredd:
+              höjd = round(bild.height * maxbredd / bild.width)
+              bild = bild.resize((maxbredd, höjd), Image.LANCZOS)
+          ut = os.environ['UT']
+          if ut.lower().endswith(('.jpg', '.jpeg')):
+              bild.convert('RGB').save(ut, 'JPEG', quality=84, optimize=True, progressive=True)
+          else:
+              bild.save(ut, optimize=True)
+          print('sparad:', ut, Image.open(ut).size, os.path.getsize(ut), 'byte')
+          PY
             ls -l "nyheter/bilder/$fil"
             rm -f rå.bin sida.html kandidater.txt
           done < .github/bildorder.txt

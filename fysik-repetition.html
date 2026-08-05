@@ -94,8 +94,27 @@
         }
         .rep-chip:active { cursor: grabbing; }
         .rep-chip.selected { border-color: var(--lab-accent, #c8324a); border-width: 2.2px; box-shadow: 0 0 0 3px rgba(200,50,74,0.14); }
-        .rep-chip.ghosted { opacity: 0.25; }
         .rep-chip.locked { cursor: default; border-color: rgba(47,122,77,0.75); background: #eef4ec; box-shadow: none; }
+
+        /* Brickan som dras lämnar ett tomt "hål" efter sig. I poolen är hålet
+           bara den plats brickan kom ifrån — det ska vara diskret och inte
+           konkurrera med släppytan om blicken. */
+        .rep-chip.ghosted {
+            background: rgba(15,22,32,0.03);
+            border: 2px dashed rgba(15,22,32,0.28);
+            box-shadow: none;
+        }
+        .rep-chip.ghosted > * { opacity: 0; }
+
+        /* I ordna-listan är hålet däremot själva landningsplatsen: det glider
+           till den plats brickan hamnar på och pulsar i accentfärg. */
+        .rep-order-slot .rep-chip.ghosted {
+            animation: rephole 1100ms ease-in-out infinite;
+        }
+        @keyframes rephole {
+            0%, 100% { background: rgba(200,50,74,0.05); border-color: rgba(200,50,74,0.55); }
+            50%      { background: rgba(200,50,74,0.13); border-color: rgba(200,50,74,1); }
+        }
 
         .rep-pool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px auto 20px; max-width: 860px; }
 
@@ -104,10 +123,26 @@
             border: 1.8px dashed rgba(15,22,32,0.35); border-radius: 10px;
             min-height: 46px; display: flex; align-items: center; justify-content: center;
             padding: 4px 8px; background: rgba(255,255,255,0.35);
-            transition: border-color 120ms, background 120ms;
+            transition: border-color 120ms, background 120ms, transform 140ms, box-shadow 140ms;
         }
-        .rep-drop.over { border-color: var(--lab-accent, #c8324a); background: rgba(200,50,74,0.06); }
+        .rep-drop.over {
+            border-color: var(--lab-accent, #c8324a); border-width: 2.4px;
+            background: rgba(200,50,74,0.10);
+            transform: scale(1.035);
+            box-shadow: 0 0 0 4px rgba(200,50,74,0.14);
+            animation: reptarget 900ms ease-in-out infinite;
+        }
+        .rep-drop.over > span { color: var(--lab-accent, #c8324a) !important; font-weight: 600; }
         .rep-drop.filled { border-style: solid; border-color: rgba(47,122,77,0.75); background: #eef4ec; }
+        /* En redan ifylld lucka tar inte emot något — den ska inte lysa upp. */
+        .rep-drop.filled.over {
+            border-color: rgba(47,122,77,0.75); background: #eef4ec;
+            transform: none; box-shadow: none; animation: none;
+        }
+        @keyframes reptarget {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(200,50,74,0.10); }
+            50%      { box-shadow: 0 0 0 7px rgba(200,50,74,0.18); }
+        }
         .rep-drop.wrongflash { animation: repshake 300ms; border-color: var(--lab-accent, #c8324a); }
         @keyframes repshake {
             0%,100% { transform: translateX(0); }
@@ -130,7 +165,13 @@
             border: 1.8px solid rgba(15,22,32,0.35); border-radius: 12px;
             background: rgba(255,255,255,0.4); padding: 10px; min-height: 120px;
         }
-        .rep-bin.over { border-color: var(--lab-accent, #c8324a); background: rgba(200,50,74,0.05); }
+        .rep-bin.over {
+            border-color: var(--lab-accent, #c8324a); border-width: 2.4px;
+            background: rgba(200,50,74,0.09);
+            box-shadow: 0 0 0 4px rgba(200,50,74,0.13);
+            animation: reptarget 900ms ease-in-out infinite;
+        }
+        .rep-bin.over .rep-bin-title { color: var(--lab-accent, #c8324a); border-bottom-color: rgba(200,50,74,0.5); }
         .rep-bin.wrongflash { animation: repshake 300ms; }
         .rep-bin-title {
             font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em;
@@ -141,13 +182,27 @@
         .rep-bin-items { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
 
         /* Ordna-listan */
-        .rep-order { display: flex; flex-direction: column; gap: 8px; max-width: 560px; margin: 0 auto; }
-        .rep-order-row { display: flex; align-items: center; gap: 10px; }
+        /* Raderna ligger kant i kant (luften är radernas padding) så att hela
+           listan är träffyta — annars tappar fingret målet i springorna
+           mellan raderna och förhandsvisningen börjar blinka. */
+        .rep-order { display: flex; flex-direction: column; max-width: 560px; margin: 0 auto; }
+        .rep-order-row { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+        .rep-order-slot { flex-grow: 1; display: flex; }
+        /* Under ett drag flyttas BRICKORNA (.rep-order-slot) med transform —
+           aldrig raden själv och aldrig DOM-ordningen. Raden är släppytan och
+           står därför blick stilla: både layout och träffytor ligger kvar, så
+           listan kan inte börja studsa fram och tillbaka under fingret.
+           Brickorna görs genomsläppliga medan de glider, annars skulle en
+           bricka som svävar över en annan rad stjäla träffen. */
+        .rep-order-slot.shifting {
+            transition: transform 180ms cubic-bezier(0.2, 0.8, 0.3, 1);
+            pointer-events: none;
+        }
         .rep-order-num {
             font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lab-ink-muted, #5a6170);
             width: 22px; text-align: right; flex-shrink: 0;
         }
-        .rep-order-row .rep-chip { flex-grow: 1; }
+        .rep-order-row .rep-chip { flex-grow: 1; width: 100%; }
         .rep-order-row .rep-chip.rightpos { border-color: rgba(47,122,77,0.75); background: #eef4ec; cursor: default; }
         .rep-order-ends { display: flex; justify-content: space-between; max-width: 560px; margin: 4px auto 10px; width: 100%;
             font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -240,11 +295,28 @@
             text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); }
         .rep-choose-card .rc-title { font-weight: 600; font-size: 16px; margin-top: 3px; }
 
-        /* Drag-spöket */
+        /* Drag-spöket — en exakt kopia av brickan (samma bredd och höjd) som
+           hänger med fingret. Den lyfts med skala + skugga så att den tydligt
+           ligger ovanpå sidan, inte i listan. */
         .rep-ghost {
-            position: fixed; z-index: 60; pointer-events: none;
-            transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.04);
-            opacity: 0.92; filter: drop-shadow(0 6px 10px rgba(15,22,32,0.28));
+            position: fixed; z-index: 60; pointer-events: none; left: 0; top: 0;
+            transform: translate(-50%, -50%) rotate(-1.5deg) scale(0.98);
+            transition: transform 130ms cubic-bezier(0.2, 0.8, 0.3, 1);
+            will-change: left, top, transform;
+        }
+        .rep-ghost.lyft { transform: translate(-50%, -50%) rotate(-1.8deg) scale(1.06); }
+        .rep-ghost .rep-chip {
+            box-sizing: border-box; width: 100%; height: 100%;
+            background: #fffdf7;
+            border-color: var(--lab-accent, #c8324a); border-width: 2px;
+            box-shadow: 0 10px 18px rgba(15,22,32,0.30), 0 2px 0 rgba(15,22,32,0.18);
+        }
+
+        /* Den som bett om mindre rörelse slipper pulserandet och glidandet —
+           markeringarna finns kvar, de bara står stilla. */
+        @media (prefers-reduced-motion: reduce) {
+            .rep-drop.over, .rep-bin.over, .rep-order-slot .rep-chip.ghosted { animation: none; }
+            .rep-order-slot.shifting, .rep-ghost { transition: none; }
         }
 
         /* KaTeX i brickor: något mindre */
@@ -402,6 +474,13 @@
             return 1;
         }
 
+        // Vilken yta som ska rullas när fingret dras mot skärmkanten: i
+        // fullskärm är det .rep-stage som scrollar, annars sidan.
+        function scrollHost() {
+            const fs = document.fullscreenElement || document.webkitFullscreenElement;
+            return (fs && fs.scrollHeight > fs.clientHeight) ? fs : null;
+        }
+
         // ── Dra-och-släpp (pointer events) + klick-att-välja ────
         //
         // Robust klassiskt mönster: pointerdown på brickan registrerar
@@ -412,68 +491,124 @@
         // mjuk och inget event går förlorat. En kort tryckning utan rörelse
         // (< 4 px) räknas som klick (välj/avvälj); annars är det ett drag
         // och släpp-ytan hittas via elementFromPoint på [data-drop].
-        function useDragEngine(onDropChip, onClickChip) {
+        //
+        // Spöket är en KOPIA AV BRICKAN i exakt samma storlek, och den hänger
+        // kvar under fingret precis där man tog tag i den — det är den som
+        // "följer med", inte bara en grå markering. Släppytan under fingret
+        // markeras med `over`, och `onHover` säger till stationen när målet
+        // byts, så att den kan rita en förhandsvisning av var brickan hamnar.
+        function useDragEngine(onDropChip, onClickChip, onHover) {
             const ghostRef = useRef(null);
             const activeRef = useRef(false);
+            const hoverRef = useRef(onHover);
+            hoverRef.current = onHover;
 
             const chipHandlers = (chipId, disabled) => ({
                 onPointerDown: (e) => {
                     if (disabled || activeRef.current) return;
                     if (e.button !== undefined && e.button !== 0) return;
                     const el = e.currentTarget;
+                    const r = el.getBoundingClientRect();
                     const st = {
                         pid: e.pointerId, sx: e.clientX, sy: e.clientY,
-                        w: el.getBoundingClientRect().width,
+                        w: r.width, h: r.height,
+                        // Greppunkten bevaras: brickan hänger kvar exakt där
+                        // under fingret som där man tog tag i den.
+                        dx: r.left + r.width / 2 - e.clientX,
+                        dy: r.top + r.height / 2 - e.clientY,
+                        font: getComputedStyle(el).fontSize,
                         html: el.innerHTML, moved: false,
+                        x: e.clientX, y: e.clientY, drop: null, raf: 0,
                     };
                     activeRef.current = true;
 
                     const setGhostPos = (x, y) => {
                         const g = ghostRef.current;
                         if (!g) return;
-                        g.style.left = x + 'px';
-                        g.style.top = y + 'px';
+                        g.style.left = (x + st.dx) + 'px';
+                        g.style.top = (y + st.dy) + 'px';
                     };
+
+                    // Läs av vilken släppyta fingret står över och markera den.
+                    // Rapporteras bara vidare när målet FAKTISKT byts, så att
+                    // stationen kan rita sin förhandsvisning utan att slösa.
+                    const track = () => {
+                        setGhostPos(st.x, st.y);
+                        const t = document.elementFromPoint(st.x, st.y);
+                        const drop = t && t.closest('[data-drop]');
+                        document.querySelectorAll('[data-drop].over').forEach(n => { if (n !== drop) n.classList.remove('over'); });
+                        if (drop) drop.classList.add('over');
+                        const id = drop ? drop.getAttribute('data-drop') : null;
+                        if (id !== st.drop) {
+                            st.drop = id;
+                            if (hoverRef.current) hoverRef.current(chipId, id);
+                        }
+                    };
+
+                    // Rulla sidan när fingret närmar sig över- eller underkant,
+                    // så att man når mål utanför skärmen på mobil.
+                    const autoScroll = () => {
+                        st.raf = 0;
+                        if (!st.moved) return;
+                        const marg = 74, fart = 13;
+                        const h = window.innerHeight;
+                        let d = 0;
+                        if (st.y < marg) d = -fart * (1 - st.y / marg);
+                        else if (st.y > h - marg) d = fart * (1 - (h - st.y) / marg);
+                        if (d) {
+                            const host = scrollHost();
+                            if (host) host.scrollTop += d;
+                            else window.scrollBy(0, d);
+                            track();
+                        }
+                        st.raf = requestAnimationFrame(autoScroll);
+                    };
+
                     const onMove = (ev) => {
                         if (ev.pointerId !== st.pid) return;
+                        st.x = ev.clientX; st.y = ev.clientY;
                         if (!st.moved) {
                             if (Math.hypot(ev.clientX - st.sx, ev.clientY - st.sy) < 4) return;
                             st.moved = true;
                             const g = ghostRef.current;
                             if (g) {
-                                g.firstChild.innerHTML = st.html;
+                                const inner = g.firstChild;
+                                inner.innerHTML = st.html;
+                                inner.style.fontSize = st.font;
                                 g.style.width = st.w + 'px';
+                                g.style.height = st.h + 'px';
                                 g.style.display = 'block';
+                                setGhostPos(st.x, st.y);
+                                // Lyftet ska hinna animeras — därför nästa frame.
+                                requestAnimationFrame(() => g.classList.add('lyft'));
                             }
                             el.classList.add('ghosted');
+                            if (!st.raf) st.raf = requestAnimationFrame(autoScroll);
                         }
-                        setGhostPos(ev.clientX, ev.clientY);
-                        const t = document.elementFromPoint(ev.clientX, ev.clientY);
-                        const drop = t && t.closest('[data-drop]');
-                        document.querySelectorAll('[data-drop].over').forEach(n => { if (n !== drop) n.classList.remove('over'); });
-                        if (drop) drop.classList.add('over');
+                        track();
                         if (ev.cancelable) ev.preventDefault();   // stoppa scroll under touch-drag
                     };
                     const cleanup = () => {
                         window.removeEventListener('pointermove', onMove);
                         window.removeEventListener('pointerup', onUp);
                         window.removeEventListener('pointercancel', onCancel);
+                        if (st.raf) cancelAnimationFrame(st.raf);
                         const g = ghostRef.current;
-                        if (g) g.style.display = 'none';
+                        if (g) { g.style.display = 'none'; g.classList.remove('lyft'); }
                         el.classList.remove('ghosted');
                         document.querySelectorAll('[data-drop].over').forEach(n => n.classList.remove('over'));
+                        if (st.moved && hoverRef.current) hoverRef.current(chipId, null);
                         activeRef.current = false;
                     };
                     const onUp = (ev) => {
                         if (ev.pointerId !== st.pid) return;
+                        const drop = st.drop;
                         cleanup();
                         if (!st.moved) {
                             if (onClickChip) onClickChip(chipId);
                             return;
                         }
-                        const t = document.elementFromPoint(ev.clientX, ev.clientY);
-                        const drop = t && t.closest('[data-drop]');
-                        if (drop && onDropChip) onDropChip(chipId, drop.getAttribute('data-drop'));
+                        if (drop && onDropChip) onDropChip(chipId, drop);
                     };
                     const onCancel = (ev) => {
                         if (ev.pointerId !== st.pid) return;
@@ -660,6 +795,7 @@
             const [mistakes, setMistakes] = useState(0);
             const [checks, setChecks] = useState(0);
             const [complete, setComplete] = useState(false);
+            const baseTops = useRef(null);   // radernas y-läge när draget började
 
             const swap = (p1, p2) => {
                 if (lockedPos[p1] || lockedPos[p2]) return;
@@ -690,6 +826,47 @@
                 setSelected(null);
             };
 
+            // Förhandsvisning under draget: listan visar hela tiden den
+            // ordning man FÅR om man släpper nu. Brickorna glider till sina
+            // nya platser med transform — raderna själva (släppytorna) står
+            // stilla, så listan kan inte börja studsa under fingret. Den
+            // streckade luckan är den dragna brickan: den glider till
+            // målplatsen och visar exakt var brickan landar.
+            const preview = (chipPos, dropId) => {
+                const rows = Array.from(document.querySelectorAll('.rep-order .rep-order-row'));
+                if (!rows.length) return;
+                // Raderna förskjuts aldrig, så deras y-lägen är alltid basläget.
+                if (!baseTops.current || baseTops.current.length !== rows.length) {
+                    baseTops.current = rows.map(r => r.getBoundingClientRect().top);
+                }
+                const tops = baseTops.current;
+                const slot = p => rows[p].querySelector('.rep-order-slot');
+                const clear = () => rows.forEach(r => {
+                    const s = r.querySelector('.rep-order-slot');
+                    if (s) { s.style.transform = ''; s.classList.remove('shifting'); }
+                });
+                if (!dropId || !dropId.startsWith('P')) { clear(); if (!dropId) baseTops.current = null; return; }
+
+                const from = parseInt(chipPos, 10), to = parseInt(dropId.slice(1), 10);
+                if (lockedPos[from] || lockedPos[to]) { clear(); return; }
+
+                // Låsta rader står kvar; bara de olåsta platserna byter plats.
+                const unlocked = rows.map((_, p) => p).filter(p => !lockedPos[p]);
+                const fi = unlocked.indexOf(from), ti = unlocked.indexOf(to);
+                if (fi === -1 || ti === -1) { clear(); return; }
+
+                unlocked.forEach((pos, i) => {
+                    let j = i;                                  // vilken plats raden hamnar på
+                    if (i === fi) j = ti;
+                    else if (fi < ti && i > fi && i <= ti) j = i - 1;
+                    else if (fi > ti && i >= ti && i < fi) j = i + 1;
+                    const dy = tops[unlocked[j]] - tops[pos];
+                    const s = slot(pos);
+                    s.classList.add('shifting');
+                    s.style.transform = dy ? 'translateY(' + dy + 'px)' : '';
+                });
+            };
+
             const { chipHandlers, ghost } = useDragEngine(
                 (chipPos, dropId) => {
                     if (!dropId.startsWith('P')) return;
@@ -704,7 +881,8 @@
                         swap(parseInt(s, 10), p);
                         return null;
                     });
-                }
+                },
+                preview
             );
 
             const check = () => {
@@ -740,11 +918,13 @@
                             <div key={pos} className="rep-order-row"
                                  data-drop={lockedPos[pos] ? undefined : 'P' + pos}>
                                 <span className="rep-order-num">{pos + 1}.</span>
-                                <button type="button"
-                                    className={'rep-chip' + (lockedPos[pos] ? ' rightpos' : '') + (String(selected) === String(pos) ? ' selected' : '')}
-                                    {...chipHandlers(String(pos), !!lockedPos[pos] || complete)}>
-                                    <Rich text={correct[itemIdx]} />
-                                </button>
+                                <div className="rep-order-slot">
+                                    <button type="button"
+                                        className={'rep-chip' + (lockedPos[pos] ? ' rightpos' : '') + (String(selected) === String(pos) ? ' selected' : '')}
+                                        {...chipHandlers(String(pos), !!lockedPos[pos] || complete)}>
+                                        <Rich text={correct[itemIdx]} />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>

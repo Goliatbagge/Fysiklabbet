@@ -170,6 +170,23 @@
  * fracH/valueBracket lyfter därför täljaren respektive sänker nämnaren
  * automatiskt — skriv bråket som vanligt, men granska i skärmdump.
  *
+ * REGEL (FÖRKORTNING SKRIVS I TVÅ DRAG, användarönskemål 2026-08-05):
+ * när ett bråk förkortas får pennan ALDRIG skriva det färdiga uttrycket
+ * ("5/5" över "20/5") i ett svep. Den skriver i stället, i denna ordning:
+ *   1. bråket som det står — 5/20, med rakt divisionsstreck,
+ *   2. drar ut bråkstrecket en bit åt höger så att divisionen får plats,
+ *   3. lägger till "/5" i TÄLJAREN med blåpennan,
+ *   4. lägger till "/5" i NÄMNAREN med blåpennan,
+ * och därefter fortsätter raden som vanligt ("=1/4"). Poängen är att
+ * eleven ska hinna se VILKET bråk som förkortas, och att exakt samma
+ * division läggs på i båda leden — inte få ett hopskrivet uttryck
+ * serverat. Allt är ETT klicksteg; pauserna mellan dragen bär ordningen.
+ * Helper: `fracReduce(numS, denS, divS, x0, yb)` i mathTools. Gäller
+ * ALLA scener — bygger du en ny förkortning ska den använda helpern,
+ * aldrig fracSeg. (Förlängning, "·4" i båda leden, skrivs fortsatt med
+ * fracSeg: där är hela det förlängda bråket en ny uppskrivning av bråket
+ * bredvid, inte en ändring av något som redan står på raden.)
+ *
  * REGEL (DIVIDERA BORT EN GEMENSAM FAKTOR — BARA fysikuppgifter): när
  * samma faktor står i båda leden (t.ex. g i m_P·g·l_P = m_B·g·l_B) delas
  * den bort genom att STRYKAS med ett snett streck direkt i den redan
@@ -1975,96 +1992,42 @@
   }
 
   /* ---------------- scen: förkorta ett bråk (ma1c-1.2 ex 1) ----------
-   * "Förkorta 6/15 med 3." Divisionen med 3 skrivs i både täljare och
-   * nämnare med blåpennan (det man gör i båda), exakt som i teori-
-   * genomgångens egen uppställning 6/3 över 15/3. */
+   * "Förkorta 6/15 med 3." Bråket skrivs först som det står, sedan dras
+   * bråkstrecket ut och divisionen med 3 läggs till i täljare och
+   * nämnare med blåpennan — se REGEL (FÖRKORTNING SKRIVS I TVÅ DRAG).
+   * Slutformen är teorigenomgångens egen uppställning, 6/3 över 15/3. */
   function layoutForkorta(cfg, F) {
-    var s = F / 100;
-    var acts = [];
-    var padL = 30;
-
-    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
-    function bubble(x, y, w, lines) {
-      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
-    }
-    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
-    function tanke(b) {
-      acts.push({ kind: 'show', obj: b });
-      stepEnd();
-      acts.push({ kind: 'hide', obj: b });
-      pause(300);
-    }
-    function underline(xEnd, y) {
-      pause(220);
-      acts.push({ kind: 'stroke',
-        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
-    }
-    function fracH(numS, denS, x0, yb) {
-      var ybar = yb - 0.34 * F;
-      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
-      var w = Math.max(nw, dw) + 0.3 * F;
-      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
-      pause(130);
-      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
-      pause(130);
-      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
-      return x0 + w + 1.5;
-    }
-    /* bråk där täljare/nämnare byggs av segment [text, färg] — så att
-     * "det man gör" (/3, ·4 …) kan skrivas med blåpennan */
-    function fracSeg(numSegs, denSegs, x0, yb) {
-      function segW(segs) {
-        var w = 0;
-        segs.forEach(function (sg) { w += stringAdvance(sg[0], s, F); });
-        return w;
-      }
-      var nw = segW(numSegs), dw = segW(denSegs);
-      var w = Math.max(nw, dw) + 0.3 * F;
-      var ybar = yb - 0.34 * F;
-      var x = x0 + (w - nw) / 2;
-      numSegs.forEach(function (sg) {
-        x = placeString(sg[0], x, ybar - 0.14 * F, s, F, acts, sg[1] || null);
-      });
-      pause(130);
-      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
-      pause(130);
-      x = x0 + (w - dw) / 2;
-      denSegs.forEach(function (sg) {
-        x = placeString(sg[0], x, ybar + 1.04 * F, s, F, acts, sg[1] || null);
-      });
-      return x0 + w + 1.5;
-    }
-    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+    var T = mathTools(F), acts = T.acts, padL = T.padL;
 
     /* ---- steg 1: dividera täljare och nämnare med 3 ---- */
-    var b1 = bubble(120, 40, 262, [
+    var b1 = T.bubble(120, 40, 262, [
       [['Att förkorta med 3 betyder']],
       [['att täljare och nämnare']],
       [['divideras med 3.']]
     ]);
-    tanke(b1);
+    T.tanke(b1);
     var y = 104;
-    var xx = fracH('6', '15', padL, y);
-    xx = placeString('=', xx, y, s, F, acts);
-    xx = fracSeg([['6'], ['/3', BLUE]], [['15'], ['/3', BLUE]], xx, y);
-    stepEnd();
+    var xx = T.fracH('6', '15', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracReduce('6', '15', '/3', xx, y);
+    T.stepEnd();
 
     /* ---- steg 2: resultatet ---- */
-    var b2 = bubble(120, bubbleTop(y + 1.04 * F), 256, [
+    var b2 = T.bubble(120, T.bubbleTop(y + 1.04 * F), 256, [
       [['Bråkets värde ändras inte,']],
       [['bara hur det skrivs.']]
     ]);
-    tanke(b2);
-    xx = placeString('=', xx, y, s, F, acts);
-    xx = fracH('2', '5', xx, y);
-    stepEnd();
+    T.tanke(b2);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2', '5', xx, y);
+    T.stepEnd();
 
     /* ---- svar ---- */
     y += 1.7 * F + 1.1 * F;
-    var xe = placeString('Svar: ', padL, y, s, F, acts);
-    xe = fracH('2', '5', xe, y);
-    underline(xe, y + 0.95 * F);
-    stepEnd();
+    var xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('2', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
 
     return { acts: acts, contentW: 470, lastBase: y + 1.9 * F, padL: padL };
   }
@@ -2372,6 +2335,37 @@
       });
       return x0 + w + 1.5;
     }
+    /* FÖRKORTNING I TVÅ DRAG — se REGEL i filhuvudet. Bråket skrivs
+     * först som det står, sedan dras bråkstrecket ut och divisionen
+     * (divS, t.ex. '/5') läggs till i täljare och nämnare med blåpennan.
+     * Täljare och nämnare står kvar där de hamnade i det ursprungliga,
+     * smalare bråket — precis som när man klämmer in divisionen för hand. */
+    function fracReduce(numS, denS, divS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = adv(numS), dw = adv(denS);
+      var w0 = Math.max(nw, dw) + 0.3 * F;
+      var yNum = ybar - 0.14 * F, yDen = ybar + 1.04 * F;
+      var xNum = x0 + (w0 - nw) / 2, xDen = x0 + (w0 - dw) / 2;
+      /* 1. bråket som det står */
+      str(numS, xNum, yNum);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w0, ybar]]) });
+      pause(130);
+      str(denS, xDen, yDen);
+      pause(340);
+      /* 2. dra ut bråkstrecket; draget börjar strax innanför det gamla
+       *    slutet så att skarven inte syns som ett glapp */
+      var ew = adv(divS);
+      var w1 = Math.max(xNum + nw + ew, xDen + dw + ew) - x0 + 0.15 * F;
+      acts.push({ kind: 'stroke',
+        pts: humanize([[x0 + w0 - 0.12 * F, ybar], [x0 + w1, ybar]]) });
+      pause(320);
+      /* 3–4. divisionen i täljaren, sedan i nämnaren */
+      str(divS, xNum + nw, yNum, BLUE);
+      pause(300);
+      str(divS, xDen + dw, yDen, BLUE);
+      return x0 + w1 + 1.5;
+    }
     /* BRÅK I BRÅK — ett långt huvudstreck med ett litet bråk (eller ett
      * ensamt tal) över och under. Delarna anges som ['3','4'] respektive
      * '5'. Delarnas mittlinjer läggs 1,18·F från huvudstrecket, precis
@@ -2414,7 +2408,7 @@
              bubble: bubble, stepEnd: stepEnd, tanke: tanke,
              underline: underline, bubbleTop: bubbleTop, str: str, adv: adv,
              mul: mul, fracW: fracW, fracH: fracH, fracSeg: fracSeg,
-             bigFrac: bigFrac, strike: strike, ring: ring, fade: fade };
+             fracReduce: fracReduce, bigFrac: bigFrac, strike: strike, ring: ring, fade: fade };
   }
 
   /* ---------------- scen: samma nämnare (ma1c-1.3 ex 1) ----------------
@@ -2473,7 +2467,7 @@
     T.tanke(bB2);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['14'], ['/2', BLUE]], [['6'], ['/2', BLUE]], xx, y);
+    xx = T.fracReduce('14', '6', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('7', '3', xx, y);
     T.stepEnd();
@@ -2531,7 +2525,7 @@
     T.tanke(bA2);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['5'], ['/5', BLUE]], [['20'], ['/5', BLUE]], xx, y);
+    xx = T.fracReduce('5', '20', '/5', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('1', '4', xx, y);
     T.stepEnd();
@@ -2670,7 +2664,7 @@
     T.tanke(b4);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['16'], ['/2', BLUE]], [['30'], ['/2', BLUE]], xx, y);
+    xx = T.fracReduce('16', '30', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('8', '15', xx, y);
     T.stepEnd();
@@ -2769,7 +2763,7 @@
     T.tanke(bA2);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['56'], ['/2', BLUE]], [['6'], ['/2', BLUE]], xx, y);
+    xx = T.fracReduce('56', '6', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('28', '3', xx, y);
     T.stepEnd();
@@ -2937,7 +2931,7 @@
 
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['28'], ['/2', BLUE]], [['10'], ['/2', BLUE]], xx, y);
+    xx = T.fracReduce('28', '10', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('14', '5', xx, y);
     T.stepEnd();
@@ -2995,7 +2989,7 @@
 
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['2'], ['/2', BLUE]], [['36'], ['/2', BLUE]], xx, y);
+    xx = T.fracReduce('2', '36', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('1', '18', xx, y);
     T.stepEnd();
@@ -3038,7 +3032,7 @@
     T.tanke(b2);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracSeg([['5·63'], ['/7', BLUE]], [['7'], ['/7', BLUE]], xx, y);
+    xx = T.fracReduce('5·63', '7', '/7', xx, y);
     xx = T.str('=', xx, y);
     xx = T.fracH('5·9', '1', xx, y);
     xx = T.str('=', xx, y);

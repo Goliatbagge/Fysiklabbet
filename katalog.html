@@ -1780,6 +1780,9 @@
             // Sammanfattningsavsnitt (num 'K.S'): repetitionsspel i stället för
             // exit tickets/övningar — visa inga "Kommer snart"-kort där.
             const isSummary = activeSection && String(activeSection.num).endsWith('.S');
+            // Enhetskollavsnitt (num 'K.E'): quiz på kapitlets storheter och
+            // enheter (fysik-enhetskoll.html) — ingen teori, inga övningar.
+            const isEnhetskoll = activeSection && String(activeSection.num).endsWith('.E');
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
@@ -1939,7 +1942,7 @@
                                                 </h2>
 
                                                 <div className="lab-section-cards">
-                                                    <button type="button"
+                                                    {!isEnhetskoll && <button type="button"
                                                         className={'lab-card ' + (view === 'teori' ? 'lab-card-active' : 'lab-card-clickable')}
                                                         onClick={() => setView('teori')}>
                                                         <div className="lab-card-tag">Läsning</div>
@@ -1947,7 +1950,7 @@
                                                         <div className="lab-card-meta">
                                                             {hasTeori ? 'Genomgång' : 'Kommer snart'}
                                                         </div>
-                                                    </button>
+                                                    </button>}
                                                     {hasExit ? (
                                                         <button type="button"
                                                             className={'lab-card ' + (view === 'exitticket' ? 'lab-card-active' : 'lab-card-clickable')}
@@ -1956,7 +1959,7 @@
                                                             <div className="lab-card-title">Exit ticket</div>
                                                             <div className="lab-card-meta">{EXITTICKETS[tid].length} frågor</div>
                                                         </button>
-                                                    ) : isSummary ? null : (
+                                                    ) : (isSummary || isEnhetskoll) ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Koll</div>
                                                             <div className="lab-card-title">Exit ticket</div>
@@ -1975,9 +1978,9 @@
                                                     {/* Matte har inga simuleringar — visa inte kortet alls där */}
                                                     {!isMath && (activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
-                                                            <div className="lab-card-tag">{isSummary ? 'Spela' : 'Experiment'}</div>
-                                                            <div className="lab-card-title">{isSummary ? 'Repetitionsspel' : 'Simulering'}</div>
-                                                            <div className="lab-card-meta">{isSummary ? 'Interaktivt' : 'Interaktiv'}</div>
+                                                            <div className="lab-card-tag">{isSummary ? 'Spela' : isEnhetskoll ? 'Koll' : 'Experiment'}</div>
+                                                            <div className="lab-card-title">{isSummary ? 'Repetitionsspel' : isEnhetskoll ? 'Enhetskoll' : 'Simulering'}</div>
+                                                            <div className="lab-card-meta">{isSummary ? 'Interaktivt' : isEnhetskoll ? 'Quiz' : 'Interaktiv'}</div>
                                                         </a>
                                                     ) : (
                                                         <div className="lab-card lab-card-disabled">
@@ -1994,7 +1997,7 @@
                                                             <div className="lab-card-title">Övningar</div>
                                                             <div className="lab-card-meta">{OVNINGAR[tid].length} st</div>
                                                         </button>
-                                                    ) : isSummary ? null : (
+                                                    ) : (isSummary || isEnhetskoll) ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Räkna</div>
                                                             <div className="lab-card-title">Övningar</div>
@@ -2020,7 +2023,7 @@
                                                     </button>
                                                 </div>
 
-                                                {view === 'teori' && (
+                                                {view === 'teori' && !isEnhetskoll && (
                                                     <div className="lab-bionic-bar">
                                                         <button type="button"
                                                             className={'lab-bionic-toggle' + (bionic ? ' is-on' : '')}
@@ -2056,8 +2059,21 @@
                                                         )}
                                                     </div>
                                                 )}
-                                                {view === 'teori' && <TtsLyssna id={tid} />}
-                                                {view === 'teori' && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
+                                                {view === 'teori' && !isEnhetskoll && <TtsLyssna id={tid} />}
+                                                {view === 'teori' && !isEnhetskoll && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
+                                                {/* Enhetskollavsnitt: ingen teoritext — en startruta till quizet. */}
+                                                {isEnhetskoll && (
+                                                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                                                        <p style={{ margin: '0 0 14px' }}>
+                                                            Kapitlet avslutas med en enhetskoll — ett snabbt quiz på just
+                                                            de storheter, enheter och beteckningar som kapitlet använder.
+                                                            Svarar du fel får du öva igen tills allt sitter.
+                                                        </p>
+                                                        <a className="lab-btn" href={activeSection.href}>
+                                                            Starta enhetskollen →
+                                                        </a>
+                                                    </div>
+                                                )}
                                                 {presenting && activeSection && (
                                                     <PresentationMode
                                                         id={tid}
@@ -2075,7 +2091,7 @@
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
                                                     {activeSection.href && (
                                                         <a className="lab-btn" href={activeSection.href}>
-                                                            Simulering →
+                                                            {isSummary ? 'Repetitionsspel →' : isEnhetskoll ? 'Enhetskoll →' : 'Simulering →'}
                                                         </a>
                                                     )}
                                                     {delaUrl && (
@@ -2169,7 +2185,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }
@@ -2278,10 +2294,13 @@
                 let beskrivning = '';
 
                 if (avs) {
-                    // Sammanfattningarna heter bara "Sammanfattning" i varje
-                    // kapitel — utan kapitelnamnet blir de omöjliga att skilja åt.
+                    // Sammanfattningarna och enhetskollarna heter likadant i
+                    // varje kapitel — utan kapitelnamnet blir de omöjliga att
+                    // skilja åt.
                     const namn = String(avs.num).endsWith('.S')
                         ? `Sammanfattning: ${rent(state.chapter)}`
+                        : String(avs.num).endsWith('.E')
+                        ? `Enhetskoll: ${rent(state.chapter)}`
                         : rent(avs.title);
                     titel = `${vyPrefix}${namn} — ${state.course} — Fysiklabbet`;
                     beskrivning = rent(avs.description);

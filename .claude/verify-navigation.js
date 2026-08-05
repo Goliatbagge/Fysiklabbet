@@ -83,7 +83,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-brytning-app.html',
     'fysik2-pendel-app.html',
     'fysik2-magnetiskt-flode.html',
-    'fysik1-enhetskollen.html',
+    'fysik-enhetskoll.html',
     'fysik1-faradays-bur.html',
     'fysik1-sonderfall.html',
     'fysik1-massdefekt.html',

@@ -1,0 +1,3 @@
+# <url> <filnamn>  — se .github/workflows/hamta-nyhetsbild.yml
+https://noirlab.edu/public/images/noirlab2618a/ 2026-08-05-rubin-cosmos.jpg
+https://noirlab.edu/public/images/noirlab2618b/ 2026-08-05-rubin-cosmos-utsnitt.jpg

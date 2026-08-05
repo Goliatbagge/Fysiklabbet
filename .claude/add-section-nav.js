@@ -14,7 +14,7 @@ const ROOT = path.join(__dirname, '..');
 // Alla filer som katalogen länkar till (section.href i data/katalog.js).
 const FILES = [
     'fysik1-arkimedes.html', 'fysik1-coulombs-lag.html', 'fysik1-densitet-app.html',
-    'fysik1-elektriska-falt.html', 'fysik1-ellara-app.html', 'fysik1-enhetskollen.html',
+    'fysik1-elektriska-falt.html', 'fysik1-ellara-app.html',
     'fysik1-faradays-bur.html', 'fysik1-halveringstid.html', 'fysik1-hastighet-tid-app.html',
     'fysik1-influens.html', 'fysik1-kirchhoffs-lag.html', 'fysik1-magdeburgska-halvklot.html',
     'fysik1-massdefekt.html', 'fysik1-newtons-gravitationslag.html', 'fysik1-newtons-tredje-app.html',

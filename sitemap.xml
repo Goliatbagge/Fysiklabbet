@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://fysiklabbet.se/avsnitt.html</loc></url>
   <url><loc>https://fysiklabbet.se/begrepp.html</loc></url>
+  <url><loc>https://fysiklabbet.se/fysik-enhetskoll.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik-repetition.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-acceleration-tid-app.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-arkimedes.html</loc></url>
@@ -11,7 +12,6 @@
   <url><loc>https://fysiklabbet.se/fysik1-densitet-app.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-elektriska-falt.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-ellara-app.html</loc></url>
-  <url><loc>https://fysiklabbet.se/fysik1-enhetskollen.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-faradays-bur.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-flytkraft-app.html</loc></url>
   <url><loc>https://fysiklabbet.se/fysik1-friktion-app.html</loc></url>
@@ -85,6 +85,7 @@
   <url><loc>https://fysiklabbet.se/nyheter.html</loc></url>
   <url><loc>https://fysiklabbet.se/om.html</loc></url>
   <url><loc>https://fysiklabbet.se/simuleringar.html</loc></url>
+  <url><loc>https://fysiklabbet.se/nyheter.html?id=2026-08-05-rubin-mork-materia</loc><lastmod>2026-08-05</lastmod></url>
   <url><loc>https://fysiklabbet.se/nyheter.html?id=2026-08-04-fusion-i-metall</loc><lastmod>2026-08-04</lastmod></url>
   <url><loc>https://fysiklabbet.se/nyheter.html?id=2026-08-03-bromsade-atomkarnor</loc><lastmod>2026-08-03</lastmod></url>
   <url><loc>https://fysiklabbet.se/nyheter.html?id=2026-08-02-viskositetens-ovre-grans</loc><lastmod>2026-08-02</lastmod></url>
@@ -211,6 +212,7 @@
   <url><loc>https://fysiklabbet.se/begrepp.html?ord=astronomisk-enhet</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-1.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-1.2</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-1.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-1.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.2</loc></url>
@@ -221,6 +223,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.7</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.8</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.9</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-2.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.2</loc></url>
@@ -232,6 +235,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.8</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.9</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.10</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-3.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.2</loc></url>
@@ -242,6 +246,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.7</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.8</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.9</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-4.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.2</loc></url>
@@ -251,12 +256,14 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.6</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.7</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.8</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-5.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.2</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.3</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.4</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.5</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-6.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.2</loc></url>
@@ -272,14 +279,17 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.12</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.13</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.14</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-7.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-8.1</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-8.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-8.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.2</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.3</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.4</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.5</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy1-9.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.2</loc></url>
@@ -288,6 +298,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.5</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.6</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.7</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-1.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.2</loc></url>
@@ -303,6 +314,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.12</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.13</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.14</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-2.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.2</loc></url>
@@ -318,6 +330,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.12</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.13</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.14</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-3.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.2</loc></url>
@@ -327,6 +340,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.6</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.7</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.8</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-4.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.2</loc></url>
@@ -334,6 +348,7 @@
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.4</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.5</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.6</loc></url>
+  <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.E</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=fy2-5.S</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=ma1c-1.1</loc></url>
   <url><loc>https://fysiklabbet.se/katalog.html?id=ma1c-1.2</loc></url>

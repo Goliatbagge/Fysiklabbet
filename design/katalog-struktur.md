@@ -41,7 +41,7 @@ Avsnittsnumrering följer Laborans-mönstret: `kapitelnr.avsnittsnr`.
 - **5.5** Serie- och parallellkoppling — `fysik1-serie-parallell.html` 💡
 - **5.6** Elektriska fält — `fysik1-elektriska-falt.html` 📐
 - **5.7** Faradays bur — `fysik1-faradays-bur.html` 🛡️
-- **5.8** Enhetskollen — `fysik1-enhetskollen.html` 📝
+- **5.8** Enhetskoll — `fysik-enhetskoll.html` (en per kapitel, näst sist före sammanfattningen)
 
 #### 6. Kärnfysik
 - **6.1** Massdefekt och bindningsenergi — `fysik1-massdefekt.html` ⚖️

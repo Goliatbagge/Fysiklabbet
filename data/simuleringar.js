@@ -45,8 +45,8 @@ window.SIM_NAMES = {
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',
   'fysik1-flytkraft-app.html': [
-    { name: 'Flyta eller sjunka', desc: 'Släpp, tryck ner och lyft block i olika vätskor — jämför massa, volym och densitet och se lyftkraften.',
-      kw: ['lyftkraft','flytkraft','arkimedes','densitet','vätska','vatten','flyta','sjunka','flytförmåga','undanträngd','block','massa','volym'] },
+    { name: 'Flyta eller sjunka', desc: 'Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker.',
+      kw: ['lyftkraft','flytkraft','arkimedes','densitet','vätska','vatten','flyta','sjunka','sväva','flytförmåga','undanträngd','flytkarta','gissa','akvarium','massa','volym'] },
     { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Lyftkraft och undanträngt vatten med dynamometer.',
       kw: ['arkimedes','arkimedes princip','lyftkraft','flytkraft','dynamometer','undanträngt vatten','undanträngd','densitet','vätska'] },
   ],

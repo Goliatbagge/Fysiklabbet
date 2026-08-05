@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 04 Aug 2026 16:50:52 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 07:14:31 GMT</lastBuildDate>
+    <item>
+      <title>Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-05-rubin-mork-materia</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-05-rubin-mork-materia</guid>
+      <pubDate>Wed, 05 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Astronomi</category>
+      <description>På en bergstopp i Chile tar världens största digitalkamera en ny bild av natthimlen ungefär var fyrtionde sekund. Den första vetenskapliga bilden rymmer över en halv miljon galaxer — men det egentliga målet är att kartlägga något som aldrig kommer att synas på någon bild.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-05-rubin-mork-materia.jpg" length="73133" type="image/jpeg"/>
+    </item>
     <item>
       <title>Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-04-fusion-i-metall</link>
@@ -177,15 +186,6 @@
       <category>Mekanik</category>
       <description>En ny studie i tidskriften PNAS räknar ut den exakta energikostnaden, i terajoule, för Hannibals berömda härfärd över Alperna år 218 f.Kr. — och pekar ut vilket av fyra tänkbara bergspass som var billigast att ta sig över. Beräkningarna visar samtidigt varför hans 37 krigselefanter klarade påfrestningen mycket bättre än soldaterna.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-17-hannibal-alperna.jpg" length="93422" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Neutroner får sin första riktiga lins — sju gånger skarpare bild av ett batteri</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-16-neutronlins</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-16-neutronlins</guid>
-      <pubDate>Thu, 16 Jul 2026 07:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>Vid Paul Scherrer-institutet i Schweiz har forskare byggt den första lins som kan fokusera neutroner av olika våglängder till en och samma punkt — en så kallad akromatisk lins. Genom att kombinera brytning och diffraktion i en enda komponent kunde de förstora bilden av ett litiumjonbatteris inre struktur sju gånger, med batteriet placerat sex meter från detektorn.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-16-neutronlins.jpg" length="354180" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

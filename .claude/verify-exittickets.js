@@ -32,10 +32,12 @@ for (const subj of Object.values(WK.KATALOG)) {
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
                    : courseName === 'Matematik fortsättning nivå 2' ? 'ma4' : 'fy1';
         for (const ch of Object.values(course.chapters || {})) {
-            // Sammanfattningsavsnitt (num 'K.S') har repetitionsspel i stället
+            // Sammanfattningsavsnitt (num 'K.S') har repetitionsspel och
+            // enhetskollavsnitt (num 'K.E') har enhetskollsquiz i stället
             // för exit tickets — kräv ingen täckning för dem.
             for (const s of ch.sections || []) {
-                if (!String(s.num).endsWith('.S')) sections.push(code + '-' + s.num);
+                const n = String(s.num);
+                if (!n.endsWith('.S') && !n.endsWith('.E')) sections.push(code + '-' + s.num);
             }
         }
     }

@@ -68,7 +68,11 @@
     const sectionWords = [section.title, section.description, section.course,
       section.chapter].concat(section.keywords || []).join(' ');
 
-    index.push({
+    // Enhetskollavsnitten (num 'K.E') har ingen teoritext — bara quizet.
+    // De får därför ingen TEORI-rad, enbart sin Enhetskoll-rad nedan.
+    const arEnhetskoll = String(section.num).endsWith('.E');
+
+    if (!arEnhetskoll) index.push({
       kind: 'teori',
       kindLabel: 'Teori',
       title: section.title,
@@ -87,9 +91,12 @@
         .concat(s.kw || []).join(' ');
       index.push({
         kind: 'sim',
-        // Kapitelsammanfattningarna länkar till repetitionsspelet, inte till
-        // en simulering — de får sin egen etikett i träfflistan.
-        kindLabel: s.href.indexOf('fysik-repetition.html') === 0 ? 'Repetition' : 'Simulering',
+        // Kapitelsammanfattningarna länkar till repetitionsspelet och
+        // enhetskollavsnitten till enhetskollen, inte till en simulering —
+        // de får sina egna etiketter i träfflistan.
+        kindLabel: s.href.indexOf('fysik-repetition.html') === 0 ? 'Repetition'
+          : s.href.indexOf('fysik-enhetskoll.html') === 0 ? 'Enhetskoll'
+          : 'Simulering',
         title: s.name,
         description: s.desc,
         course: section.course,

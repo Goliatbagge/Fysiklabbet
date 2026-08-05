@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhetskoll — Fysiklabbet</title>
+    <meta name="description" content="Kolla att du kan kapitlets storheter, enheter och beteckningar — en enhetskoll i slutet av varje kapitel i Fysik 1 och Fysik 2.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik-enhetskoll.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Enhetskoll — Fysik 1 &amp; Fysik 2">
+    <meta property="og:description" content="Kolla att du kan kapitlets storheter, enheter och beteckningar — en enhetskoll i slutet av varje kapitel.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik-enhetskoll.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Enhetskoll — Fysik 1 &amp; Fysik 2">
+    <meta name="twitter:description" content="Kolla att du kan kapitlets storheter, enheter och beteckningar — en enhetskoll i slutet av varje kapitel.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .option-btn {
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
+            color: var(--lab-ink);
+            transition: all 0.15s ease;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .option-btn:hover:not(.answered) {
+            background: var(--lab-bg-panel);
+            border-color: var(--lab-ink);
+            box-shadow: none;
+            transform: none;
+        }
+        .option-btn.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.15);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        .option-btn.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+        .mode-tab {
+            transition: all 0.15s ease;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .mode-tab.active {
+            background: var(--lab-ink);
+            border-color: var(--lab-ink);
+            color: var(--lab-bg);
+        }
+        .mode-tab:not(.active) {
+            background: var(--lab-bg);
+            border-color: var(--lab-line-strong);
+            color: var(--lab-ink);
+        }
+        .mode-tab:hover:not(.active) {
+            background: var(--lab-bg-panel);
+            border-color: var(--lab-ink);
+            color: var(--lab-ink);
+        }
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .progress-dot.pending { background: rgba(200, 50, 74, 0.2); border: 1px solid rgba(200, 50, 74, 0.3); }
+        .progress-dot.current { background: #38bdf8; box-shadow: 0 0 10px rgba(200, 50, 74, 0.5); }
+        .progress-dot.correct { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+        .progress-dot.wrong { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes celebrate-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes bonus-pop {
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+            50% { transform: scale(1.03) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .bonus-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 900;
+            animation: bonus-pop 0.4s ease-out;
+        }
+        .bonus-banner {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid rgba(245, 158, 11, 0.6);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
+            max-width: 420px;
+            width: 90%;
+        }
+        .wrong-banner {
+            background: linear-gradient(135deg, #1a1a2e, #1e1028);
+            border: 2px solid rgba(239, 68, 68, 0.6);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.25), 0 0 80px rgba(239, 68, 68, 0.1);
+            max-width: 420px;
+            width: 90%;
+        }
+        @keyframes slide-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in {
+            animation: slide-in 0.4s ease-out;
+        }
+        .celebrate {
+            animation: celebrate-pulse 2s ease-in-out infinite;
+        }
+        /* Kapitelväljaren (visas när ingen kapitel-hash finns i adressen). */
+        .ek-kurs-rubrik {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lab-ink-muted, #5b6472);
+            margin: 1.6rem 0 0.6rem;
+        }
+        .ek-kap-lank {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: var(--lab-ink, #0f1620);
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.15s ease;
+        }
+        .ek-kap-lank:hover { border-color: var(--lab-accent, #c8324a); }
+        .ek-kap-num {
+            font-family: var(--lab-font-mono, monospace);
+            font-size: 0.8rem;
+            color: var(--lab-ink-muted, #5b6472);
+            min-width: 2.4em;
+        }
+        /* Fullskärmsläge: hela quiz-kortet är den interaktiva ytan.
+           Sajtens paper-tema gör .dark-container transparent (!important),
+           så i fullskärm måste kortet uttryckligen få pappersbakgrund
+           (annars svart fullscreen-backdrop) och bli skrollbart. */
+        body.lab-sim .ek-scene:fullscreen {
+            background: var(--lab-bg, #f3eee4) !important;
+            overflow-y: auto;
+            padding: 64px 24px 40px;
+        }
+        body.lab-sim .ek-scene:-webkit-full-screen {
+            background: var(--lab-bg, #f3eee4) !important;
+            overflow-y: auto;
+            padding: 64px 24px 40px;
+        }
+    </style>
+</head>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container" style="padding-top: 100px; padding-bottom: 3rem;">
+        <nav style="margin-bottom: 1rem; font-size: 0.9rem;">
+            <a href="index.html" style="color: var(--lab-ink-muted); text-decoration: none;">Hem</a>
+            <span style="color: #475569; margin: 0 0.5rem;">/</span>
+            <span style="color: #38bdf8;">Enhetskoll</span>
+        </nav>
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useCallback, useMemo, useEffect } = React;
+
+        // === DATA ===
+        //
+        // En enhetskoll per kapitel. Frågorna speglar EXAKT de storheter,
+        // enheter och beteckningar som kapitlets teorigenomgångar använder
+        // (data/teori/fyN-K.*.md) — ändras en genomgång ska frågorna följa med.
+        //
+        // Frågeformat (units): { quantity, correct, options, hint,
+        //   wrongInfo?, bonusInfo?, fraga?, ratt? }
+        //   fraga — ersätter standardfrågan "Vilken är SI-enheten för denna
+        //           storhet?" (används när rätt svar inte är en SI-enhet).
+        //   ratt  — ersätter standardtexten "SI-enheten för X är Y" i
+        //           fel-overlayen.
+        // Frågeformat (symbols): { symbol, correct, options, hint }
+        // Kapitel utan symbols-lista visar bara storhet→enhet-läget.
+
+        const CHAPTERS = {
+            'fy1-1': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 1, kapitel: 'Introduktion',
+                units: [
+                    {
+                        quantity: 'Längd',
+                        correct: 'm',
+                        options: ['m', 'km', 'mil', 'cm'],
+                        hint: 'Meter (m) är en av SI-systemets sju grundenheter. Kilometer, mil och centimeter är längdenheter men inte grundenheten.',
+                        wrongInfo: {
+                            'km': 'km (kilometer) är en enhet för längd, men inte SI-grundenheten.',
+                            'mil': 'mil är en enhet för längd, men inte SI-grundenheten.',
+                            'cm': 'cm (centimeter) är en enhet för längd, men inte SI-grundenheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'g', 'hg', 'ton'],
+                        hint: 'Kilogram (kg) är grundenheten — trots att den redan har prefixet kilo.',
+                        wrongInfo: {
+                            'g': 'g (gram) är en enhet för massa, men grundenheten är kilogram.',
+                            'hg': 'hg (hekto) är en enhet för massa, men inte SI-grundenheten.',
+                            'ton': 'ton är en enhet för massa, men inte SI-grundenheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'min', 'h', 'dygn'],
+                        hint: 'Sekund (s) är SI-enheten. Minut, timme och dygn är vanliga men inte SI.',
+                        wrongInfo: {
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                            'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
+                            'dygn': 'dygn är en enhet för tid, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Temperatur',
+                        correct: 'K',
+                        options: ['K', '°C', '°F', 'J'],
+                        hint: 'Kelvin (K) är SI-grundenheten för temperatur. Celsiusgrader är vanliga i vardagen men inte SI-grundenheten.',
+                        wrongInfo: {
+                            '°C': '°C (celsiusgrad) är en enhet för temperatur, men SI-grundenheten är kelvin.',
+                            '°F': '°F (fahrenheit) är en enhet för temperatur, men inte SI.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Elektrisk ström',
+                        correct: 'A',
+                        options: ['A', 'V', 'W', 'C'],
+                        hint: 'Ampere (A) är SI-grundenheten för elektrisk ström.',
+                        wrongInfo: {
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'C': 'C (coulomb) är SI-enheten för laddning.'
+                        }
+                    },
+                    {
+                        quantity: 'Substansmängd',
+                        correct: 'mol',
+                        options: ['mol', 'g', 'st', 'kg'],
+                        hint: 'Mol (mol) är SI-grundenheten för substansmängd — ett mått på antal partiklar.',
+                        wrongInfo: {
+                            'g': 'g (gram) är en enhet för massa, inte substansmängd.',
+                            'st': 'st (styck) är ingen SI-enhet.',
+                            'kg': 'kg (kilogram) är SI-grundenheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Ljusstyrka',
+                        correct: 'cd',
+                        options: ['cd', 'W', 'K', 'A'],
+                        hint: 'Candela (cd) är SI-grundenheten för ljusstyrka.',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'K': 'K (kelvin) är SI-grundenheten för temperatur.',
+                            'A': 'A (ampere) är SI-grundenheten för elektrisk ström.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Temperatur', 'Tryck', 'Längd'],
+                        hint: 'Liten t står för tid. Temperatur betecknas T (stor), tryck betecknas p.'
+                    },
+                    {
+                        symbol: 'T',
+                        correct: 'Temperatur',
+                        options: ['Temperatur', 'Tid', 'Ton', 'Tryck'],
+                        hint: 'Stort T står för temperatur. Tid betecknas t (liten).'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Längd', 'Meter', 'Substansmängd'],
+                        hint: 'm (kursiv) står för storheten massa. Enheten meter skrivs också m men rakt — sammanhanget avgör.'
+                    },
+                    {
+                        symbol: 'I',
+                        correct: 'Ström',
+                        options: ['Ström', 'Ljusstyrka', 'Längd', 'Temperatur'],
+                        hint: 'I står för elektrisk ström (intensité du courant på franska).'
+                    },
+                    {
+                        symbol: 'l',
+                        correct: 'Längd',
+                        options: ['Längd', 'Ljusstyrka', 'Massa', 'Tid'],
+                        hint: 'Litet l står för längd. Ljusstyrka har enheten candela (cd).'
+                    },
+                    {
+                        symbol: 'V',
+                        correct: 'Volym',
+                        options: ['Volym', 'Vikt', 'Ljusstyrka', 'Temperatur'],
+                        hint: 'Stort V står för volym, med SI-enheten kubikmeter (m³).'
+                    }
+                ],
+            },
+
+            'fy1-2': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 2, kapitel: 'Rörelse',
+                units: [
+                    {
+                        quantity: 'Sträcka',
+                        correct: 'm',
+                        options: ['m', 'km', 'm/s', 's'],
+                        hint: 'Meter (m) är SI-enheten för sträcka.',
+                        wrongInfo: {
+                            'km': 'km (kilometer) är en enhet för sträcka, men inte SI-enheten.',
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
+                            's': 's (sekund) är SI-enheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Hastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 'm/s²', 'm'],
+                        hint: 'Meter per sekund (m/s) är SI-enheten. Km/h är vanligt i trafiken men inte SI.',
+                        wrongInfo: {
+                            'km/h': 'km/h (kilometer per timme) är en enhet för hastighet, men inte SI.',
+                            'm/s²': 'm/s² (meter per sekundkvadrat) är SI-enheten för acceleration.',
+                            'm': 'm (meter) är SI-enheten för sträcka.'
+                        }
+                    },
+                    {
+                        quantity: 'Acceleration',
+                        correct: 'm/s²',
+                        options: ['m/s²', 'm/s', 'N', 'km/h'],
+                        hint: 'Meter per sekundkvadrat (m/s²) — hur mycket hastigheten ändras per sekund.',
+                        wrongInfo: {
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'km/h': 'km/h är en enhet för hastighet, inte acceleration.'
+                        }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'min', 'h', 'Hz'],
+                        hint: 'Sekund (s) är SI-enheten för tid.',
+                        wrongInfo: {
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                            'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 's',
+                        correct: 'Sträcka',
+                        options: ['Sträcka', 'Sekund', 'Hastighet', 'Tid'],
+                        hint: 's (kursiv) står för storheten sträcka. Enheten sekund skrivs också s men rakt.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Hastighet',
+                        options: ['Hastighet', 'Volym', 'Acceleration', 'Sträcka'],
+                        hint: 'v står för hastighet (velocitas). Volym betecknas V (stor).'
+                    },
+                    {
+                        symbol: 'a',
+                        correct: 'Acceleration',
+                        options: ['Acceleration', 'Area', 'Sträcka', 'Hastighet'],
+                        hint: 'a står för acceleration — hastighetsändring per sekund. Area betecknas A (stor).'
+                    },
+                    {
+                        symbol: 't',
+                        correct: 'Tid',
+                        options: ['Tid', 'Temperatur', 'Sträcka', 'Acceleration'],
+                        hint: 'Liten t står för tid. Temperatur betecknas T (stor).'
+                    },
+                    {
+                        symbol: 'v₀',
+                        correct: 'Begynnelsehastighet',
+                        options: ['Begynnelsehastighet', 'Sluthastighet', 'Medelfart', 'Acceleration'],
+                        hint: 'v₀ (v-noll) är hastigheten vid tiden t = 0 — begynnelsehastigheten i rörelseformlerna.'
+                    }
+                ],
+            },
+
+            'fy1-3': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 3, kapitel: 'Krafter',
+                units: [
+                    {
+                        quantity: 'Kraft',
+                        correct: 'N',
+                        options: ['N', 'kg', 'Pa', 'J'],
+                        hint: 'Newton (N) är SI-enheten. Kilogram (kg) är massa, pascal (Pa) är tryck, joule (J) är energi.',
+                        wrongInfo: {
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'N', 'g', 'hg'],
+                        hint: 'Kilogram (kg) är SI-enheten för massa. Blanda inte ihop massa (kg) med tyngdkraft (N)!',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft — tyngdkraften mäts i newton, men massan i kilogram.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.',
+                            'hg': 'hg (hekto) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tyngdfaktor',
+                        correct: 'N/kg',
+                        options: ['N/kg', 'N', 'kg', 'N/m'],
+                        hint: 'Newton per kilogram (N/kg) — tyngdfaktorn g = 9,82 N/kg anger tyngdkraften per kilogram massa.',
+                        bonusInfo: 'N/kg är samma sak som m/s² — tyngdfaktorn är också fallaccelerationen vid fritt fall!',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Tyngdfaktorn är kraft PER kilogram — N/kg.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'N/m': 'N/m (newton per meter) är enheten för fjäderkonstant.'
+                        }
+                    },
+                    {
+                        quantity: 'Friktionstal',
+                        correct: 'saknar enhet',
+                        options: ['saknar enhet', 'N', 'N/kg', 'kg'],
+                        hint: 'Friktionstalet μ är en kvot mellan två krafter (friktionskraft delat med normalkraft) och saknar därför enhet.',
+                        ratt: 'Friktionstalet är en kvot mellan två krafter och saknar enhet',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Friktionstalet är en kvot mellan två krafter — enheterna tar ut varandra.',
+                            'N/kg': 'N/kg är enheten för tyngdfaktorn.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'F',
+                        correct: 'Kraft',
+                        options: ['Kraft', 'Frekvens', 'Friktionstal', 'Massa'],
+                        hint: 'F står för kraft (force). Frekvens betecknas f (liten), friktionstal μ. Massa betecknas m.'
+                    },
+                    {
+                        symbol: 'g',
+                        correct: 'Tyngdfaktor',
+                        options: ['Tyngdfaktor', 'Tyngdkraft', 'Massa', 'Gram'],
+                        hint: 'g = 9,82 N/kg är tyngdfaktorn. Tyngdkraften betecknas F_G — det är kraften, inte faktorn.'
+                    },
+                    {
+                        symbol: 'μ',
+                        correct: 'Friktionstal',
+                        options: ['Friktionstal', 'Massa', 'Kraft', 'Tyngdfaktor'],
+                        hint: 'Grekiska bokstaven μ (my) står för friktionstalet — kvoten mellan friktionskraft och normalkraft.'
+                    },
+                    {
+                        symbol: 'm',
+                        correct: 'Massa',
+                        options: ['Massa', 'Meter', 'Kraft', 'Friktionstal'],
+                        hint: 'm (kursiv) står för storheten massa, med SI-enheten kilogram (kg).'
+                    },
+                    {
+                        symbol: 'a',
+                        correct: 'Acceleration',
+                        options: ['Acceleration', 'Area', 'Kraft', 'Massa'],
+                        hint: 'a står för acceleration — i Newtons andra lag är F = m · a.'
+                    }
+                ],
+            },
+
+            'fy1-4': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 4, kapitel: 'Energi',
+                units: [
+                    {
+                        quantity: 'Energi',
+                        correct: 'J',
+                        options: ['J', 'W', 'eV', 'kWh'],
+                        hint: 'Joule (J) är SI-enheten. Watt (W) är effekt. Elektronvolt (eV) och kilowattimme (kWh) är energi men inte SI.',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'eV': 'eV (elektronvolt) är en enhet för energi, men inte SI.',
+                            'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Arbete',
+                        correct: 'J',
+                        options: ['J', 'N', 'W', 'kg'],
+                        hint: 'Arbete är energi som överförs — SI-enheten är joule (J). 1 J = 1 Nm.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Arbete = kraft · sträcka, med enheten J.',
+                            'W': 'W (watt) är SI-enheten för effekt — arbete per sekund.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Effekt',
+                        correct: 'W',
+                        options: ['W', 'J', 'kWh', 'N'],
+                        hint: 'Watt (W) är SI-enheten — energi per tidsenhet. 1 W = 1 J/s.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.',
+                            'N': 'N (newton) är SI-enheten för kraft.'
+                        }
+                    },
+                    {
+                        quantity: 'Rörelsemängd',
+                        correct: 'kg · m/s',
+                        options: ['kg · m/s', 'N', 'J', 'm/s'],
+                        hint: 'Rörelsemängd p = m · v har enheten kg · m/s (kilogram gånger meter per sekund).',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.'
+                        }
+                    },
+                    {
+                        quantity: 'Impuls',
+                        correct: 'Ns',
+                        options: ['Ns', 'N', 'W', 's'],
+                        hint: 'Impuls I = F · t har enheten newtonsekund (Ns).',
+                        bonusInfo: '1 Ns = 1 kg · m/s — impuls och rörelsemängd har samma enhet. Det är därför impulsen är lika med ändringen i rörelsemängd!',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Impuls = kraft · tid, med enheten Ns.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            's': 's (sekund) är SI-enheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Verkningsgrad',
+                        correct: 'saknar enhet',
+                        options: ['saknar enhet', 'W', 'J', 'N'],
+                        hint: 'Verkningsgraden η är en kvot mellan nyttig och tillförd energi och saknar enhet — den anges ofta i procent.',
+                        ratt: 'Verkningsgraden är en kvot mellan två energier och saknar enhet',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt. Verkningsgraden är en kvot — enheterna tar ut varandra.',
+                            'J': 'J (joule) är SI-enheten för energi. Verkningsgraden är en kvot — enheterna tar ut varandra.',
+                            'N': 'N (newton) är SI-enheten för kraft.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'E',
+                        correct: 'Energi',
+                        options: ['Energi', 'Effekt', 'Arbete', 'Elektrisk fältstyrka'],
+                        hint: 'E står för energi. Effekt betecknas P, arbete W.'
+                    },
+                    {
+                        symbol: 'W',
+                        correct: 'Arbete',
+                        options: ['Arbete', 'Effekt', 'Energi', 'Verkningsgrad'],
+                        hint: 'W står för arbete (work). Enheten watt (W) hör däremot till effekt — blanda inte ihop beteckning och enhet.'
+                    },
+                    {
+                        symbol: 'P',
+                        correct: 'Effekt',
+                        options: ['Effekt', 'Tryck', 'Rörelsemängd', 'Arbete'],
+                        hint: 'P (stor) står för effekt (power). Tryck och rörelsemängd betecknas p (liten).'
+                    },
+                    {
+                        symbol: 'p',
+                        correct: 'Rörelsemängd',
+                        options: ['Rörelsemängd', 'Effekt', 'Impuls', 'Energi'],
+                        hint: 'I mekaniken står p för rörelsemängd, p = m · v. (I tryckkapitlet betecknar p i stället tryck.)'
+                    },
+                    {
+                        symbol: 'I',
+                        correct: 'Impuls',
+                        options: ['Impuls', 'Ström', 'Intensitet', 'Arbete'],
+                        hint: 'I det här kapitlet står I för impuls, I = F · t. (I elläran betecknar I i stället ström.)'
+                    },
+                    {
+                        symbol: 'η',
+                        correct: 'Verkningsgrad',
+                        options: ['Verkningsgrad', 'Energi', 'Effekt', 'Friktionstal'],
+                        hint: 'Grekiska bokstaven η (eta) står för verkningsgraden — kvoten mellan nyttig och tillförd energi.'
+                    }
+                ],
+            },
+
+            'fy1-5': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 5, kapitel: 'Tryck',
+                units: [
+                    {
+                        quantity: 'Densitet',
+                        correct: 'kg/m³',
+                        options: ['kg/m³', 'kg', 'm³', 'g/cm³'],
+                        hint: 'Kilogram per kubikmeter (kg/m³) är SI-enheten. Vatten har densiteten 1 000 kg/m³.',
+                        wrongInfo: {
+                            'kg': 'kg (kilogram) är SI-enheten för massa.',
+                            'm³': 'm³ (kubikmeter) är SI-enheten för volym.',
+                            'g/cm³': 'g/cm³ är en enhet för densitet, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tryck',
+                        correct: 'Pa',
+                        options: ['Pa', 'N', 'bar', 'kg'],
+                        hint: 'Pascal (Pa) är SI-enheten — kraft per area.',
+                        bonusInfo: '1 Pa = 1 N/m² — en newton fördelad över en kvadratmeter!',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Tryck = kraft per area, med enheten Pa.',
+                            'bar': 'bar är en enhet för tryck, men inte SI-enheten.',
+                            'kg': 'kg (kilogram) är SI-enheten för massa.'
+                        }
+                    },
+                    {
+                        quantity: 'Volym',
+                        correct: 'm³',
+                        options: ['m³', 'm²', 'liter', 'dm³'],
+                        hint: 'Kubikmeter (m³) är SI-enheten. Liter och kubikdecimeter är vanliga men inte SI.',
+                        wrongInfo: {
+                            'm²': 'm² (kvadratmeter) är SI-enheten för area.',
+                            'liter': 'liter är en enhet för volym, men inte SI-enheten.',
+                            'dm³': 'dm³ (kubikdecimeter = 1 liter) är en enhet för volym, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Area',
+                        correct: 'm²',
+                        options: ['m²', 'm', 'm³', 'cm²'],
+                        hint: 'Kvadratmeter (m²) är SI-enheten för area.',
+                        wrongInfo: {
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            'm³': 'm³ (kubikmeter) är SI-enheten för volym.',
+                            'cm²': 'cm² (kvadratcentimeter) är en enhet för area, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Temperatur',
+                        correct: 'K',
+                        options: ['K', '°C', 'Pa', 'J'],
+                        hint: 'Kelvin (K) är SI-enheten — i ideala gaslagen måste temperaturen alltid anges i kelvin.',
+                        wrongInfo: {
+                            '°C': '°C (celsiusgrad) är vanlig i vardagen, men i gaslagen används kelvin.',
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck.',
+                            'J': 'J (joule) är SI-enheten för energi.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'ρ',
+                        correct: 'Densitet',
+                        options: ['Densitet', 'Tryck', 'Radie', 'Massa'],
+                        hint: 'Grekiska bokstaven ρ (rho) står för densitet, ρ = m/V.'
+                    },
+                    {
+                        symbol: 'p',
+                        correct: 'Tryck',
+                        options: ['Tryck', 'Effekt', 'Densitet', 'Kraft'],
+                        hint: 'Litet p står för tryck, p = F/A. Effekt betecknas P (stor).'
+                    },
+                    {
+                        symbol: 'V',
+                        correct: 'Volym',
+                        options: ['Volym', 'Hastighet', 'Tryck', 'Area'],
+                        hint: 'Stort V står för volym. Hastighet betecknas v (liten).'
+                    },
+                    {
+                        symbol: 'A',
+                        correct: 'Area',
+                        options: ['Area', 'Ampere', 'Tryck', 'Volym'],
+                        hint: 'A (kursiv) står för storheten area. Enheten ampere skrivs också A men rakt.'
+                    },
+                    {
+                        symbol: 'T',
+                        correct: 'Temperatur',
+                        options: ['Temperatur', 'Tid', 'Tryck', 'Ton'],
+                        hint: 'Stort T står för temperatur (i kelvin i gaslagen). Tid betecknas t (liten).'
+                    }
+                ],
+            },
+
+            'fy1-6': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 6, kapitel: 'Värmelära',
+                units: [
+                    {
+                        quantity: 'Värmeenergi',
+                        correct: 'J',
+                        options: ['J', 'W', '°C', 'K'],
+                        hint: 'Värme är energi som överförs — SI-enheten är joule (J).',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            '°C': '°C (celsiusgrad) är en enhet för temperatur — värme och temperatur är olika storheter!',
+                            'K': 'K (kelvin) är SI-enheten för temperatur — värme och temperatur är olika storheter!'
+                        }
+                    },
+                    {
+                        quantity: 'Specifik värmekapacitet',
+                        correct: 'J/(kg · K)',
+                        options: ['J/(kg · K)', 'J', 'J/kg', 'W/K'],
+                        hint: 'Joule per kilogram och kelvin — energin som krävs för att värma 1 kg av ämnet 1 K.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'J/kg': 'J/kg (joule per kilogram) saknar temperaturdelen — värmekapaciteten anger energi per kilogram OCH kelvin.',
+                            'W/K': 'W/K (watt per kelvin) är ingen enhet för värmekapacitet.'
+                        }
+                    },
+                    {
+                        quantity: 'Temperatur',
+                        correct: 'K',
+                        options: ['K', 'J', '°F', 'W'],
+                        hint: 'Kelvin (K) är SI-enheten. Kelvinskalan börjar vid absoluta nollpunkten, −273,15 °C.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            '°F': '°F (fahrenheit) är en enhet för temperatur, men inte SI.',
+                            'W': 'W (watt) är SI-enheten för effekt.'
+                        }
+                    },
+                    {
+                        quantity: 'Effekt',
+                        correct: 'W',
+                        options: ['W', 'J', 'K', 'J/kg'],
+                        hint: 'Watt (W) är SI-enheten — tillförd energi per sekund, till exempel från en doppvärmare.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'K': 'K (kelvin) är SI-enheten för temperatur.',
+                            'J/kg': 'J/kg är ingen enhet för effekt.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'c',
+                        correct: 'Specifik värmekapacitet',
+                        options: ['Specifik värmekapacitet', 'Värmeenergi', 'Temperatur', 'Ljusets fart'],
+                        hint: 'I värmeläran står c för specifik värmekapacitet — i E = c · m · ΔT.'
+                    },
+                    {
+                        symbol: 'ΔT',
+                        correct: 'Temperaturändring',
+                        options: ['Temperaturändring', 'Temperatur', 'Tidsändring', 'Värmeenergi'],
+                        hint: 'Δ (delta) betyder ändring — ΔT är skillnaden mellan slut- och starttemperatur.'
+                    },
+                    {
+                        symbol: 'T',
+                        correct: 'Temperatur',
+                        options: ['Temperatur', 'Tid', 'Värmeenergi', 'Effekt'],
+                        hint: 'Stort T står för temperatur. Tid betecknas t (liten).'
+                    },
+                    {
+                        symbol: 'E',
+                        correct: 'Energi',
+                        options: ['Energi', 'Effekt', 'Temperatur', 'Massa'],
+                        hint: 'E står för energi — i värmeläran ofta värmeenergin i E = c · m · ΔT.'
+                    }
+                ],
+            },
+
+            'fy1-7': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 7, kapitel: 'Elektricitet',
+                units: [
+                    {
+                        quantity: 'Ström',
+                        correct: 'A',
+                        options: ['A', 'C', 'V', 'mAh'],
+                        hint: 'Ampere (A) är SI-enheten för ström. Coulomb (C) är laddning, volt (V) är spänning.',
+                        wrongInfo: {
+                            'C': 'C (coulomb) är SI-enheten för laddning.',
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'mAh': 'mAh (milliamperetimme) är en enhet för laddning, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Laddning',
+                        correct: 'C',
+                        options: ['C', 'A', 'Ah', 'e'],
+                        hint: 'Coulomb (C) är SI-enheten. Ampere (A) är ström. Amperetimme (Ah) är laddning men inte SI.',
+                        wrongInfo: {
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'Ah': 'Ah (amperetimme) är en enhet för laddning, men inte SI.',
+                            'e': 'e (elementarladdningen) är en enhet för laddning, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Spänning',
+                        correct: 'V',
+                        options: ['V', 'A', 'W', 'Ω'],
+                        hint: 'Volt (V) är SI-enheten. Ampere (A) är ström, watt (W) är effekt, ohm (Ω) är resistans.',
+                        wrongInfo: {
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'Ω': 'Ω (ohm) är SI-enheten för resistans.'
+                        }
+                    },
+                    {
+                        quantity: 'Resistans',
+                        correct: 'Ω',
+                        options: ['Ω', 'S', 'V', 'A'],
+                        hint: 'Ohm (Ω) är SI-enheten. Siemens (S) är konduktans (inverterad resistans).',
+                        wrongInfo: {
+                            'S': 'S (siemens) är SI-enheten för konduktans.',
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'A': 'A (ampere) är SI-enheten för ström.'
+                        }
+                    },
+                    {
+                        quantity: 'Elektrisk effekt',
+                        correct: 'W',
+                        options: ['W', 'J', 'kWh', 'V'],
+                        hint: 'Watt (W) är SI-enheten. Joule (J) och kWh är energi. Volt (V) är spänning.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.',
+                            'V': 'V (volt) är SI-enheten för spänning.'
+                        }
+                    },
+                    {
+                        quantity: 'Elektrisk fältstyrka',
+                        correct: 'N/C',
+                        options: ['N/C', 'V', 'N', 'C/m²'],
+                        hint: 'Newton per coulomb (N/C) är SI-enheten.',
+                        bonusInfo: 'Även V/m är en SI-enhet för elektrisk fältstyrka!',
+                        wrongInfo: {
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'C/m²': 'C/m² (coulomb per kvadratmeter) är SI-enheten för ytladdningstäthet.'
+                        }
+                    },
+                    {
+                        quantity: 'Potential',
+                        correct: 'V',
+                        options: ['V', 'J', 'W', 'Ω'],
+                        hint: 'Volt (V) är SI-enheten för elektrisk potential. Joule (J) är energi, watt (W) är effekt.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'Ω': 'Ω (ohm) är SI-enheten för resistans.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'I',
+                        correct: 'Ström',
+                        options: ['Ström', 'Laddning', 'Intensitet', 'Induktans'],
+                        hint: 'I står för ström (intensité du courant på franska). Laddning betecknas Q.'
+                    },
+                    {
+                        symbol: 'Q',
+                        correct: 'Laddning',
+                        options: ['Laddning', 'Elektrisk fältstyrka', 'Spänning', 'Resistans'],
+                        hint: 'Q står för laddning (quantity of charge). Spänning betecknas U, resistans R.'
+                    },
+                    {
+                        symbol: 'U',
+                        correct: 'Spänning',
+                        options: ['Spänning', 'Inre energi', 'Hastighet', 'Arbete'],
+                        hint: 'U står för spänning. Inre energi betecknas ibland U i termodynamik, men i ellära är det spänning.'
+                    },
+                    {
+                        symbol: 'R',
+                        correct: 'Resistans',
+                        options: ['Resistans', 'Radie', 'Resultant', 'Reaktans'],
+                        hint: 'R står för resistans. Radie betecknas r (liten).'
+                    },
+                    {
+                        symbol: 'P',
+                        correct: 'Effekt',
+                        options: ['Effekt', 'Tryck', 'Potential', 'Laddning'],
+                        hint: 'P (stor) står för effekt (power) — i elläran P = U · I.'
+                    },
+                    {
+                        symbol: '𝔼',
+                        correct: 'Elektrisk fältstyrka',
+                        options: ['Elektrisk fältstyrka', 'Energi', 'Effekt', 'Elasticitet'],
+                        hint: '𝔼 (dubbel-E) står för elektrisk fältstyrka. Energi betecknas E, effekt P.'
+                    },
+                    {
+                        symbol: 'V',
+                        correct: 'Potential',
+                        options: ['Potential', 'Area', 'Hastighet', 'Spänning'],
+                        hint: 'V står för elektrisk potential. Volym betecknas också V men i ellära avses potential. Spänning betecknas U.'
+                    },
+                    {
+                        symbol: 'e',
+                        correct: 'Elementarladdning',
+                        options: ['Elementarladdning', 'Energi', 'Spänning', 'Elektrisk fältstyrka'],
+                        hint: 'e står för elementarladdningen — laddningen hos en proton (och elektronens laddning med minustecken).'
+                    }
+                ],
+            },
+
+            'fy1-8': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 8, kapitel: 'Relativitetsteori',
+                units: [
+                    {
+                        quantity: 'Ljusets fart i vakuum',
+                        correct: 'm/s',
+                        options: ['m/s', 'km/h', 'm', 's'],
+                        hint: 'Meter per sekund (m/s) — ljusfarten c är ungefär 300 000 km/s, alltså 3,00 · 10^8 m/s.',
+                        wrongInfo: {
+                            'km/h': 'km/h är en enhet för fart, men inte SI-enheten.',
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            's': 's (sekund) är SI-enheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Energi',
+                        correct: 'J',
+                        options: ['J', 'kg', 'W', 'eV'],
+                        hint: 'Joule (J) är SI-enheten — i E = m · c² kommer energin ut i joule när massan anges i kg.',
+                        wrongInfo: {
+                            'kg': 'kg (kilogram) är SI-enheten för massa — E = m · c² omvandlar mellan dem, men enheterna är olika.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'eV': 'eV (elektronvolt) är en enhet för energi, men inte SI.'
+                        }
+                    },
+                    {
+                        quantity: 'Massa',
+                        correct: 'kg',
+                        options: ['kg', 'J', 'N', 'g'],
+                        hint: 'Kilogram (kg) är SI-enheten för massa.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi.',
+                            'N': 'N (newton) är SI-enheten för kraft.',
+                            'g': 'g (gram) är en enhet för massa, men inte SI-enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Tid',
+                        correct: 's',
+                        options: ['s', 'min', 'h', 'm'],
+                        hint: 'Sekund (s) är SI-enheten — även när tiden går olika fort i olika referenssystem!',
+                        wrongInfo: {
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                            'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'c',
+                        correct: 'Ljusets fart i vakuum',
+                        options: ['Ljusets fart i vakuum', 'Energi', 'Laddning', 'Specifik värmekapacitet'],
+                        hint: 'c står för ljusfarten i vakuum, ungefär 300 000 km/s — naturens hastighetsgräns.'
+                    },
+                    {
+                        symbol: 'm₀',
+                        correct: 'Vilomassa',
+                        options: ['Vilomassa', 'Massa i rörelse', 'Meter', 'Massdefekt'],
+                        hint: 'm₀ (m-noll) är vilomassan — massan mätt i det system där föremålet är i vila.'
+                    },
+                    {
+                        symbol: 'l₀',
+                        correct: 'Vilolängd',
+                        options: ['Vilolängd', 'Längdkontraktion', 'Ljusstyrka', 'Sträcka'],
+                        hint: 'l₀ (l-noll) är vilolängden — längden mätt i det system där föremålet är i vila.'
+                    },
+                    {
+                        symbol: 'E₀',
+                        correct: 'Viloenergi',
+                        options: ['Viloenergi', 'Rörelseenergi', 'Elektrisk fältstyrka', 'Effekt'],
+                        hint: 'E₀ = m₀ · c² är viloenergin — energin ett föremål har enbart genom sin massa.'
+                    }
+                ],
+            },
+
+            'fy1-9': {
+                kurs: 'Fysik nivå 1', kursHash: 'fy1', nummer: 9, kapitel: 'Kärnfysik',
+                units: [
+                    {
+                        quantity: 'Aktivitet',
+                        correct: 'Bq',
+                        options: ['Bq', 'Sv', 'Gy', 'Hz'],
+                        hint: 'Becquerel (Bq) är SI-enheten — ett sönderfall per sekund.',
+                        wrongInfo: {
+                            'Sv': 'Sv (sievert) är SI-enheten för ekvivalent dos.',
+                            'Gy': 'Gy (gray) är SI-enheten för absorberad dos.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens — Bq används för sönderfall, Hz för svängningar.'
+                        }
+                    },
+                    {
+                        quantity: 'Halveringstid',
+                        correct: 's',
+                        options: ['s', 'Bq', 'år', 'Sv'],
+                        hint: 'Halveringstiden är en tid — SI-enheten är sekund, även om den ofta anges i år.',
+                        wrongInfo: {
+                            'Bq': 'Bq (becquerel) är SI-enheten för aktivitet.',
+                            'år': 'år är en enhet för tid, men inte SI-enheten.',
+                            'Sv': 'Sv (sievert) är SI-enheten för ekvivalent dos.'
+                        }
+                    },
+                    {
+                        quantity: 'Absorberad dos',
+                        correct: 'Gy',
+                        options: ['Gy', 'Sv', 'Bq', 'J'],
+                        hint: 'Gray (Gy) är SI-enheten — absorberad strålningsenergi per kilogram kroppsvikt. 1 Gy = 1 J/kg.',
+                        wrongInfo: {
+                            'Sv': 'Sv (sievert) är SI-enheten för ekvivalent dos — dosen viktad efter strålslagets farlighet.',
+                            'Bq': 'Bq (becquerel) är SI-enheten för aktivitet.',
+                            'J': 'J (joule) är SI-enheten för energi — dosen är energi PER kilogram.'
+                        }
+                    },
+                    {
+                        quantity: 'Ekvivalent dos',
+                        correct: 'Sv',
+                        options: ['Sv', 'Gy', 'Bq', 'W'],
+                        hint: 'Sievert (Sv) är SI-enheten — den absorberade dosen viktad efter hur farligt strålslaget är.',
+                        wrongInfo: {
+                            'Gy': 'Gy (gray) är SI-enheten för absorberad dos — utan viktning för strålslag.',
+                            'Bq': 'Bq (becquerel) är SI-enheten för aktivitet.',
+                            'W': 'W (watt) är SI-enheten för effekt.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'A',
+                        correct: 'Aktivitet',
+                        options: ['Aktivitet', 'Halveringstid', 'Stråldos', 'Energi'],
+                        hint: 'I kärnfysiken står A för aktivitet — antal sönderfall per sekund. (I nuklidbeteckningar är A i stället masstalet.)'
+                    },
+                    {
+                        symbol: 'T₁/₂',
+                        correct: 'Halveringstid',
+                        options: ['Halveringstid', 'Temperatur', 'Aktivitet', 'Period'],
+                        hint: 'T₁/₂ är halveringstiden — tiden det tar för hälften av kärnorna att sönderfalla.'
+                    },
+                    {
+                        symbol: 'D',
+                        correct: 'Absorberad dos',
+                        options: ['Absorberad dos', 'Ekvivalent dos', 'Densitet', 'Aktivitet'],
+                        hint: 'D står för absorberad dos, med enheten gray (Gy).'
+                    },
+                    {
+                        symbol: 'H',
+                        correct: 'Ekvivalent dos',
+                        options: ['Ekvivalent dos', 'Absorberad dos', 'Halveringstid', 'Höjd'],
+                        hint: 'H står för ekvivalent dos, med enheten sievert (Sv).'
+                    },
+                    {
+                        symbol: 'Δm',
+                        correct: 'Massdefekt',
+                        options: ['Massdefekt', 'Massa', 'Massändring per sekund', 'Atommassa'],
+                        hint: 'Δm (delta-m) är massdefekten — massan som "försvinner" och blir bindningsenergi enligt E = Δm · c².'
+                    }
+                ],
+            },
+
+            'fy2-1': {
+                kurs: 'Fysik nivå 2', kursHash: 'fy2', nummer: 1, kapitel: 'Rörelse och krafter',
+                units: [
+                    {
+                        quantity: 'Kraftmoment',
+                        correct: 'Nm',
+                        options: ['Nm', 'N', 'J', 'N/m'],
+                        hint: 'Newtonmeter (Nm) — kraft gånger hävarm, M = F · l.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Kraftmoment = kraft · hävarm, med enheten Nm.',
+                            'J': 'J (joule) används för energi — kraftmoment har samma dimension men skrivs alltid Nm.',
+                            'N/m': 'N/m (newton per meter) är enheten för fjäderkonstant.'
+                        }
+                    },
+                    {
+                        quantity: 'Period',
+                        correct: 's',
+                        options: ['s', 'Hz', 'min', 'rad'],
+                        hint: 'Perioden T är tiden för ett varv (eller en svängning) — SI-enheten är sekund.',
+                        wrongInfo: {
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens — antalet varv per sekund.',
+                            'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                            'rad': 'rad (radian) är enheten för vinkel.'
+                        }
+                    },
+                    {
+                        quantity: 'Frekvens',
+                        correct: 'Hz',
+                        options: ['Hz', 's', 'rad/s', 'varv'],
+                        hint: 'Hertz (Hz) är SI-enheten — antalet varv eller svängningar per sekund.',
+                        bonusInfo: '1 Hz = 1 varv per sekund — och f = 1/T, så frekvensen är periodens invers!',
+                        wrongInfo: {
+                            's': 's (sekund) är SI-enheten för tid — perioden T mäts i sekunder.',
+                            'rad/s': 'rad/s (radianer per sekund) är SI-enheten för vinkelhastighet.',
+                            'varv': 'varv är ingen SI-enhet — frekvensen anges i hertz (Hz).'
+                        }
+                    },
+                    {
+                        quantity: 'Vinkelhastighet',
+                        correct: 'rad/s',
+                        options: ['rad/s', 'Hz', 'm/s', 'rad'],
+                        hint: 'Radianer per sekund (rad/s) — hur snabbt vinkeln växer, ω = 2π/T.',
+                        wrongInfo: {
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för (ban)hastighet.',
+                            'rad': 'rad (radian) är enheten för vinkel — vinkelhastigheten är vinkel PER sekund.'
+                        }
+                    },
+                    {
+                        quantity: 'Centripetalacceleration',
+                        correct: 'm/s²',
+                        options: ['m/s²', 'N', 'm/s', 'rad/s'],
+                        hint: 'Meter per sekundkvadrat (m/s²) — centripetalaccelerationen är en acceleration, riktad in mot cirkelns mitt.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft — centripetalKRAFTEN mäts i newton.',
+                            'm/s': 'm/s (meter per sekund) är SI-enheten för hastighet.',
+                            'rad/s': 'rad/s (radianer per sekund) är SI-enheten för vinkelhastighet.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'M',
+                        correct: 'Kraftmoment',
+                        options: ['Kraftmoment', 'Massa', 'Meter', 'Kraft'],
+                        hint: 'Stort M står för kraftmoment, M = F · l. Massa betecknas m (liten).'
+                    },
+                    {
+                        symbol: 'l',
+                        correct: 'Hävarm',
+                        options: ['Hävarm', 'Längdkontraktion', 'Ljusstyrka', 'Vinkelhastighet'],
+                        hint: 'I momentlagen står l för hävarmen — kraftens vinkelräta avstånd till vridningspunkten.'
+                    },
+                    {
+                        symbol: 'T',
+                        correct: 'Period',
+                        options: ['Period', 'Temperatur', 'Frekvens', 'Vinkelhastighet'],
+                        hint: 'I rörelseläran står T för perioden — tiden för ett varv. T = 1/f.'
+                    },
+                    {
+                        symbol: 'f',
+                        correct: 'Frekvens',
+                        options: ['Frekvens', 'Kraft', 'Period', 'Friktionstal'],
+                        hint: 'Litet f står för frekvens. Kraft betecknas F (stor).'
+                    },
+                    {
+                        symbol: 'ω',
+                        correct: 'Vinkelhastighet',
+                        options: ['Vinkelhastighet', 'Frekvens', 'Vinkel', 'Banhastighet'],
+                        hint: 'Grekiska bokstaven ω (omega) står för vinkelhastigheten, ω = 2π/T.'
+                    }
+                ],
+            },
+
+            'fy2-2': {
+                kurs: 'Fysik nivå 2', kursHash: 'fy2', nummer: 2, kapitel: 'Mekaniska vågor',
+                units: [
+                    {
+                        quantity: 'Fjäderkonstant',
+                        correct: 'N/m',
+                        options: ['N/m', 'N', 'N/kg', 'm'],
+                        hint: 'Newton per meter (N/m) — kraften som krävs per meter förlängning, F = k · Δl.',
+                        wrongInfo: {
+                            'N': 'N (newton) är SI-enheten för kraft. Fjäderkonstanten är kraft PER meter förlängning.',
+                            'N/kg': 'N/kg är enheten för tyngdfaktorn.',
+                            'm': 'm (meter) är SI-enheten för längd.'
+                        }
+                    },
+                    {
+                        quantity: 'Våglängd',
+                        correct: 'm',
+                        options: ['m', 'Hz', 'm/s', 's'],
+                        hint: 'Meter (m) — våglängden λ är avståndet mellan två vågtoppar.',
+                        wrongInfo: {
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'm/s': 'm/s är SI-enheten för utbredningshastighet.',
+                            's': 's (sekund) är SI-enheten för tid.'
+                        }
+                    },
+                    {
+                        quantity: 'Amplitud',
+                        correct: 'm',
+                        options: ['m', 'Hz', 's', 'N'],
+                        hint: 'Meter (m) — amplituden är det största utslaget från jämviktsläget, alltså en längd.',
+                        wrongInfo: {
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            's': 's (sekund) är SI-enheten för tid.',
+                            'N': 'N (newton) är SI-enheten för kraft.'
+                        }
+                    },
+                    {
+                        quantity: 'Utbredningshastighet',
+                        correct: 'm/s',
+                        options: ['m/s', 'm', 'Hz', 'm/s²'],
+                        hint: 'Meter per sekund (m/s) — hur fort vågen rör sig genom mediet, v = f · λ.',
+                        wrongInfo: {
+                            'm': 'm (meter) är SI-enheten för våglängd.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'm/s²': 'm/s² är SI-enheten för acceleration.'
+                        }
+                    },
+                    {
+                        quantity: 'Ljudintensitet',
+                        correct: 'W/m²',
+                        options: ['W/m²', 'W', 'dB', 'Pa'],
+                        hint: 'Watt per kvadratmeter (W/m²) — ljudeffekten som träffar en kvadratmeter, I = P/(4π · r²).',
+                        wrongInfo: {
+                            'W': 'W (watt) är SI-enheten för effekt — intensiteten är effekt PER kvadratmeter.',
+                            'dB': 'dB (decibel) är enheten för ljudNIVÅ — den logaritmiska skalan.',
+                            'Pa': 'Pa (pascal) är SI-enheten för tryck.'
+                        }
+                    },
+                    {
+                        quantity: 'Ljudnivå',
+                        correct: 'dB',
+                        options: ['dB', 'W/m²', 'Hz', 'W'],
+                        fraga: 'Vilken enhet används för denna storhet?',
+                        ratt: 'Ljudnivån anges i dB',
+                        hint: 'Decibel (dB) — en logaritmisk skala där +10 dB betyder tio gånger högre intensitet.',
+                        wrongInfo: {
+                            'W/m²': 'W/m² är SI-enheten för ljudintensitet — ljudnivån är den logaritmiska skalan i dB.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens — den avgör tonhöjden, inte ljudnivån.',
+                            'W': 'W (watt) är SI-enheten för effekt.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'k',
+                        correct: 'Fjäderkonstant',
+                        options: ['Fjäderkonstant', 'Kraft', 'Kinetisk energi', 'Frekvens'],
+                        hint: 'k står för fjäderkonstanten i Hookes lag, F = k · Δl.'
+                    },
+                    {
+                        symbol: 'λ',
+                        correct: 'Våglängd',
+                        options: ['Våglängd', 'Frekvens', 'Ljudnivå', 'Utbredningshastighet'],
+                        hint: 'Grekiska bokstaven λ (lambda) står för våglängden — avståndet mellan två vågtoppar.'
+                    },
+                    {
+                        symbol: 'v',
+                        correct: 'Utbredningshastighet',
+                        options: ['Utbredningshastighet', 'Våglängd', 'Volym', 'Frekvens'],
+                        hint: 'v står för vågens utbredningshastighet, v = f · λ.'
+                    },
+                    {
+                        symbol: 'I',
+                        correct: 'Ljudintensitet',
+                        options: ['Ljudintensitet', 'Ström', 'Impuls', 'Ljudnivå'],
+                        hint: 'I det här kapitlet står I för ljudintensitet, effekt per kvadratmeter. (I elläran betecknar I ström.)'
+                    },
+                    {
+                        symbol: 'L',
+                        correct: 'Ljudnivå',
+                        options: ['Ljudnivå', 'Längd', 'Ljudintensitet', 'Luminositet'],
+                        hint: 'L står för ljudnivån i decibel, L = 10 · lg(I/I₀).'
+                    }
+                ],
+            },
+
+            'fy2-3': {
+                kurs: 'Fysik nivå 2', kursHash: 'fy2', nummer: 3, kapitel: 'Elektromagnetism',
+                units: [
+                    {
+                        quantity: 'Magnetisk flödestäthet',
+                        correct: 'T',
+                        options: ['T', 'Wb', 'V', 'A'],
+                        hint: 'Tesla (T) är SI-enheten — magnetfältets styrka, B i formlerna F = B · I · l och F = q · v · B.',
+                        wrongInfo: {
+                            'Wb': 'Wb (weber) är SI-enheten för magnetiskt flöde — flödestätheten är flöde per kvadratmeter.',
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'A': 'A (ampere) är SI-enheten för ström.'
+                        }
+                    },
+                    {
+                        quantity: 'Magnetiskt flöde',
+                        correct: 'Wb',
+                        options: ['Wb', 'T', 'V', 'Hz'],
+                        hint: 'Weber (Wb) är SI-enheten — flödestätheten gånger arean, Φ = B · A.',
+                        bonusInfo: '1 Wb = 1 T · m² = 1 Vs — det är därför flödesändring per sekund ger en spänning i volt!',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet — flödet är flödestäthet gånger area.',
+                            'V': 'V (volt) är SI-enheten för spänning.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    },
+                    {
+                        quantity: 'Inducerad spänning (ems)',
+                        correct: 'V',
+                        options: ['V', 'A', 'T', 'Wb'],
+                        hint: 'Volt (V) — den inducerade spänningen e = l · v · B är en spänning som alla andra.',
+                        wrongInfo: {
+                            'A': 'A (ampere) är SI-enheten för ström.',
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'Wb': 'Wb (weber) är SI-enheten för magnetiskt flöde.'
+                        }
+                    },
+                    {
+                        quantity: 'Magnetisk kraft',
+                        correct: 'N',
+                        options: ['N', 'T', 'Nm', 'A'],
+                        hint: 'Newton (N) — kraften på en ledare i magnetfält, F = B · I · l, är en kraft som alla andra.',
+                        wrongInfo: {
+                            'T': 'T (tesla) är SI-enheten för magnetisk flödestäthet.',
+                            'Nm': 'Nm (newtonmeter) är enheten för kraftmoment.',
+                            'A': 'A (ampere) är SI-enheten för ström.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'B',
+                        correct: 'Magnetisk flödestäthet',
+                        options: ['Magnetisk flödestäthet', 'Magnetiskt flöde', 'Spänning', 'Bindningsenergi'],
+                        hint: 'B står för magnetisk flödestäthet, med enheten tesla (T).'
+                    },
+                    {
+                        symbol: 'Φ',
+                        correct: 'Magnetiskt flöde',
+                        options: ['Magnetiskt flöde', 'Magnetisk flödestäthet', 'Frekvens', 'Fas'],
+                        hint: 'Grekiska bokstaven Φ (fi) står för magnetiskt flöde, Φ = B · A, med enheten weber (Wb).'
+                    },
+                    {
+                        symbol: 'e',
+                        correct: 'Inducerad spänning',
+                        options: ['Inducerad spänning', 'Elementarladdning', 'Energi', 'Elektrisk fältstyrka'],
+                        hint: 'I induktionsläran står e för den inducerade spänningen (ems), e = l · v · B.'
+                    },
+                    {
+                        symbol: 'N',
+                        correct: 'Varvtal',
+                        options: ['Varvtal', 'Kraft', 'Magnetiskt flöde', 'Normalkraft'],
+                        hint: 'I spol- och transformatorformlerna står N för varvtalet — antalet varv i spolen. Enheten newton (N) skrivs rakt.'
+                    },
+                    {
+                        symbol: 'q',
+                        correct: 'Laddning',
+                        options: ['Laddning', 'Värmeenergi', 'Kraft', 'Flödestäthet'],
+                        hint: 'q står för laddningen hos en partikel — i kraftformeln F = q · v · B.'
+                    }
+                ],
+            },
+
+            'fy2-4': {
+                kurs: 'Fysik nivå 2', kursHash: 'fy2', nummer: 4, kapitel: 'Ljus som våg och partikel',
+                units: [
+                    {
+                        quantity: 'Fotonens energi',
+                        correct: 'J',
+                        options: ['J', 'eV', 'W', 'Hz'],
+                        hint: 'Joule (J) är SI-enheten — fotonens energi E = h · f. I atomfysiken anges den ofta i elektronvolt (eV), men det är inte SI.',
+                        wrongInfo: {
+                            'eV': 'eV (elektronvolt) är en vanlig energienhet i atomfysiken, men inte SI-enheten.',
+                            'W': 'W (watt) är SI-enheten för effekt.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    },
+                    {
+                        quantity: 'Plancks konstant',
+                        correct: 'Js',
+                        options: ['Js', 'J', 'eV', 'Hz'],
+                        hint: 'Joulesekund (Js) — h ≈ 6,63 · 10^-34 Js knyter ihop energi och frekvens i E = h · f.',
+                        wrongInfo: {
+                            'J': 'J (joule) är SI-enheten för energi — Plancks konstant är energi GÅNGER tid.',
+                            'eV': 'eV (elektronvolt) är en enhet för energi, inte för Plancks konstant.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.'
+                        }
+                    },
+                    {
+                        quantity: 'Våglängd',
+                        correct: 'm',
+                        options: ['m', 'nm', 'Hz', 'm/s'],
+                        hint: 'Meter (m) är SI-enheten. Synligt ljus har våglängder kring 400–700 nm, men nanometer är inte SI-enheten.',
+                        wrongInfo: {
+                            'nm': 'nm (nanometer) är en vanlig enhet för ljusets våglängd, men inte SI-enheten.',
+                            'Hz': 'Hz (hertz) är SI-enheten för frekvens.',
+                            'm/s': 'm/s är SI-enheten för hastighet.'
+                        }
+                    },
+                    {
+                        quantity: 'Frekvens',
+                        correct: 'Hz',
+                        options: ['Hz', 's', 'm', 'Js'],
+                        hint: 'Hertz (Hz) — antalet svängningar per sekund. Ljusets frekvens avgör fotonens energi.',
+                        wrongInfo: {
+                            's': 's (sekund) är SI-enheten för tid.',
+                            'm': 'm (meter) är SI-enheten för våglängd.',
+                            'Js': 'Js (joulesekund) är enheten för Plancks konstant.'
+                        }
+                    },
+                    {
+                        quantity: 'Brytningsindex',
+                        correct: 'saknar enhet',
+                        options: ['saknar enhet', 'm', '°', 'm/s'],
+                        hint: 'Brytningsindex n är en kvot mellan ljusets fart i vakuum och i mediet — kvoten saknar enhet.',
+                        ratt: 'Brytningsindex är en kvot mellan två farter och saknar enhet',
+                        wrongInfo: {
+                            'm': 'm (meter) är SI-enheten för längd.',
+                            '°': '° (grader) används för vinklarna i brytningslagen, inte för brytningsindex.',
+                            'm/s': 'm/s är SI-enheten för hastighet — brytningsindex är en KVOT mellan två hastigheter.'
+                        }
+                    }
+                ],
+                symbols: [
+                    {
+                        symbol: 'h',
+                        correct: 'Plancks konstant',
+                        options: ['Plancks konstant', 'Höjd', 'Frekvens', 'Fotonens energi'],
+                        hint: 'h står för Plancks konstant, h ≈ 6,63 · 10^-34 Js — kvantfysikens grundkonstant.'
+                    },
+                    {
+                        symbol: 'λ',
+                        correct: 'Våglängd',
+                        options: ['Våglängd', 'Frekvens', 'Ljusets fart', 'Brytningsindex'],
+                        hint: 'Grekiska bokstaven λ (lambda) står för våglängden.'
+                    },
+                    {
+                        symbol: 'f',
+                        correct: 'Frekvens',
+                        options: ['Frekvens', 'Kraft', 'Fotonens energi', 'Brännvidd'],
+                        hint: 'Litet f står för frekvens — i fotonenergin E = h · f.'
+                    },
+                    {
+                        symbol: 'n',
+                        correct: 'Brytningsindex',
+                        options: ['Brytningsindex', 'Substansmängd', 'Antal fotoner', 'Frekvens'],
+                        hint: 'I optiken står n för brytningsindex — hur mycket långsammare ljuset går i mediet än i vakuum.'
+                    },
+                    {
+                        symbol: 'c',
+                        correct: 'Ljusets fart i vakuum',
+                        options: ['Ljusets fart i vakuum', 'Specifik värmekapacitet', 'Laddning', 'Brytningsindex'],
+                        hint: 'c står för ljusfarten i vakuum, ungefär 300 000 km/s — c = f · λ för ljus.'
+                    }
+                ],
+            },
+
+            'fy2-5': {
+                kurs: 'Fysik nivå 2', kursHash: 'fy2', nummer: 5, kapitel: 'Astronomi',
+                units: [
+                    {
+                        quantity: 'Sträckan ljuset färdas på ett år',
+                        correct: 'ljusår',
+                        options: ['ljusår', 'AU', 'parsec', 'km'],
+                        fraga: 'Vilken enhet definieras så här?',
+                        ratt: 'Sträckan ljuset färdas på ett år är ett ljusår',
+                        hint: 'Ett ljusår (ly) är sträckan ljuset hinner på ett år — knappt tio biljoner kilometer.',
+                        wrongInfo: {
+                            'AU': 'AU (astronomisk enhet) är medelavståndet mellan jorden och solen.',
+                            'parsec': 'parsec (pc) är avståndet där parallaxvinkeln är en bågsekund.',
+                            'km': 'km (kilometer) är en vanlig längdenhet — men definitionen beskriver ljusåret.'
+                        }
+                    },
+                    {
+                        quantity: 'Medelavståndet mellan jorden och solen',
+                        correct: 'AU',
+                        options: ['AU', 'ljusår', 'parsec', 'mil'],
+                        fraga: 'Vilken enhet definieras så här?',
+                        ratt: 'Medelavståndet jorden–solen är en astronomisk enhet (AU)',
+                        hint: 'En astronomisk enhet (AU) är medelavståndet mellan jorden och solen — cirka 150 miljoner kilometer.',
+                        wrongInfo: {
+                            'ljusår': 'Ett ljusår är sträckan ljuset färdas på ett år — mycket längre än jorden–solen.',
+                            'parsec': 'parsec (pc) är avståndet där parallaxvinkeln är en bågsekund.',
+                            'mil': 'mil är en svensk längdenhet — definitionen beskriver den astronomiska enheten.'
+                        }
+                    },
+                    {
+                        quantity: 'Avståndet där parallaxvinkeln är en bågsekund',
+                        correct: 'parsec',
+                        options: ['parsec', 'ljusår', 'AU', 'bågsekund'],
+                        fraga: 'Vilken enhet definieras så här?',
+                        ratt: 'Avståndet där parallaxen är en bågsekund är en parsec',
+                        hint: 'En parsec (pc) — parallax + sekund — är cirka 3,26 ljusår.',
+                        wrongInfo: {
+                            'ljusår': 'Ett ljusår är sträckan ljuset färdas på ett år. 1 parsec ≈ 3,26 ljusår.',
+                            'AU': 'AU (astronomisk enhet) är medelavståndet mellan jorden och solen.',
+                            'bågsekund': 'bågsekund är en enhet för VINKEL — parsec är avståndet som ger just den parallaxvinkeln.'
+                        }
+                    },
+                    {
+                        quantity: 'Parallaxvinkel',
+                        correct: 'bågsekund',
+                        options: ['bågsekund', 'grad', 'radian', 'ljusår'],
+                        fraga: 'Vilken enhet används för denna storhet?',
+                        ratt: 'Parallaxvinkeln anges i bågsekunder',
+                        hint: 'Stjärnparallaxer är pyttesmå vinklar och anges i bågsekunder — en 3600-del av en grad.',
+                        wrongInfo: {
+                            'grad': 'grader används för större vinklar — stjärnparallaxer är bråkdelar av en bågsekund.',
+                            'radian': 'radian är SI-enheten för vinkel, men parallaxer anges i bågsekunder.',
+                            'ljusår': 'ljusår är en enhet för avstånd, inte vinkel.'
+                        }
+                    },
+                    {
+                        quantity: 'Stjärnans yttemperatur',
+                        correct: 'K',
+                        options: ['K', '°C', 'W', 'ljusår'],
+                        hint: 'Kelvin (K) — solens yta håller cirka 5 800 K, och färgen avslöjar temperaturen.',
+                        wrongInfo: {
+                            '°C': '°C (celsiusgrad) är vanlig i vardagen, men stjärntemperaturer anges i kelvin.',
+                            'W': 'W (watt) är SI-enheten för effekt — stjärnans utstrålade effekt, inte dess temperatur.',
+                            'ljusår': 'ljusår är en enhet för avstånd.'
+                        }
+                    }
+                ],
+                symbols: null,
+            },
+        };
+
+        // Kapitelordning för väljaren.
+        const KURSER = [
+            { namn: 'Fysik nivå 1', hash: 'fy1', kapitel: [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+            { namn: 'Fysik nivå 2', hash: 'fy2', kapitel: [1, 2, 3, 4, 5] },
+        ];
+
+        const encouragements = [
+            'Fantastiskt jobbat! Du är en riktig fysikexpert!',
+            'Briljant! Du har koll på alla enheter och beteckningar!',
+            'Strålande resultat! Fysiken sitter som en smäck!',
+            'Imponerande! Du behärskar kapitlets storheter perfekt!',
+            'Toppen! Nu kan ingen enhet eller beteckning lura dig!',
+            'Suveränt! Du är redo för alla fysikprov!'
+        ];
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // Läser kapitel-id ur hash (#fy1-3) eller ?id= (sitemap/delade länkar).
+        function readChapterId() {
+            const hash = (window.location.hash || '').replace(/^#/, '').trim();
+            if (hash && CHAPTERS[hash]) return hash;
+            const params = new URLSearchParams(window.location.search);
+            const id = (params.get('id') || '').trim();
+            if (id && CHAPTERS[id]) return id;
+            return null;
+        }
+
+        // === COMPONENTS ===
+
+        function Confetti() {
+            const pieces = useMemo(() => {
+                const colors = ['#38bdf8', '#22c55e', '#f59e0b', '#ec4899', '#a78bfa', '#f97316'];
+                return Array.from({ length: 60 }, (_, i) => ({
+                    id: i,
+                    color: colors[i % colors.length],
+                    left: Math.random() * 100,
+                    delay: Math.random() * 2,
+                    duration: 2 + Math.random() * 3,
+                    size: 6 + Math.random() * 10
+                }));
+            }, []);
+
+            return React.createElement('div', {
+                style: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1000 }
+            }, pieces.map(p =>
+                React.createElement('div', {
+                    key: p.id,
+                    style: {
+                        position: 'fixed',
+                        top: 0,
+                        left: p.left + '%',
+                        width: p.size + 'px',
+                        height: p.size + 'px',
+                        background: p.color,
+                        borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+                        animation: `confetti-fall ${p.duration}s ease-in ${p.delay}s forwards`
+                    }
+                })
+            ));
+        }
+
+        function ProgressDots({ questions, currentIndex, results }) {
+            return React.createElement('div', {
+                className: 'flex flex-wrap gap-2 justify-center mb-6'
+            }, questions.map((_, i) => {
+                let status = 'pending';
+                if (i === currentIndex) status = 'current';
+                else if (results[i] === true) status = 'correct';
+                else if (results[i] === false) status = 'wrong';
+                return React.createElement('div', {
+                    key: i,
+                    className: `progress-dot ${status}`,
+                    title: `Fråga ${i + 1}`
+                });
+            }));
+        }
+
+        function QuizQuestion({ question, questionLabel, onAnswer, answered, selectedAnswer, correctAnswer }) {
+            const shuffledOptions = useMemo(() => shuffle(question.options), [question]);
+
+            return React.createElement('div', { className: 'slide-in' },
+                React.createElement('div', {
+                    className: 'text-center mb-8'
+                },
+                    React.createElement('p', {
+                        className: 'text-sky-400 text-sm font-semibold mb-2 tracking-wider uppercase'
+                    }, question.fraga || questionLabel),
+                    React.createElement('h2', {
+                        className: 'text-3xl md:text-4xl font-bold text-white',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, question.quantity || question.symbol)
+                ),
+                React.createElement('div', {
+                    className: 'grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto'
+                }, shuffledOptions.map((opt, i) =>
+                    React.createElement('button', {
+                        key: opt,
+                        className: `option-btn rounded-xl px-6 py-4 text-lg font-semibold text-center ${answered ? 'answered' : ''} ${answered && opt === correctAnswer ? 'correct' : ''} ${answered && opt === selectedAnswer && opt !== correctAnswer ? 'wrong' : ''}`,
+                        onClick: () => !answered && onAnswer(opt),
+                        disabled: answered,
+                        style: { color: answered && opt === correctAnswer ? '#16803a' : answered && opt === selectedAnswer && opt !== correctAnswer ? '#c8324a' : '#0f1620' }
+                    }, opt)
+                )),
+                answered && React.createElement('div', {
+                    className: 'mt-6 text-center',
+                    style: { animation: 'slide-in 0.3s ease-out' }
+                },
+                    React.createElement('p', {
+                        className: `text-sm ${selectedAnswer === correctAnswer ? 'text-green-400' : 'text-amber-400'}`,
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, question.hint)
+                )
+            );
+        }
+
+        function RoundSummary({ round, totalQuestions, correctCount, wrongQuestions, onContinue, allDone }) {
+            if (allDone) {
+                const msg = encouragements[Math.floor(Math.random() * encouragements.length)];
+                return React.createElement('div', { className: 'text-center slide-in' },
+                    React.createElement(Confetti),
+                    React.createElement('div', { className: 'celebrate mb-6' },
+                        React.createElement('h2', {
+                            className: 'text-3xl font-bold text-green-400 mb-4',
+                            style: { fontFamily: "'Poppins', sans-serif", textShadow: '0 0 20px rgba(34, 197, 94, 0.5)' }
+                        }, 'Alla rätt!'),
+                        React.createElement('p', {
+                            className: 'text-xl text-sky-300 mb-2',
+                            style: { fontFamily: "'Poppins', sans-serif" }
+                        }, msg)
+                    ),
+                    React.createElement('p', {
+                        className: 'text-slate-400 mb-8'
+                    }, round === 1
+                        ? `Du klarade alla ${totalQuestions} frågor på första försöket!`
+                        : `Du klarade alla ${totalQuestions} frågor på ${round} rundor.`
+                    ),
+                    React.createElement('button', {
+                        className: 'px-8 py-3 rounded-xl font-semibold text-white',
+                        style: {
+                            background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                            boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)',
+                            fontFamily: "'Poppins', sans-serif",
+                            cursor: 'pointer',
+                            border: 'none',
+                            fontSize: '1rem'
+                        },
+                        onClick: onContinue
+                    }, 'Spela igen')
+                );
+            }
+
+            return React.createElement('div', { className: 'text-center slide-in' },
+                React.createElement('h2', {
+                    className: 'text-2xl font-bold text-white mb-4',
+                    style: { fontFamily: "'Poppins', sans-serif" }
+                }, `Runda ${round} klar!`),
+                React.createElement('div', { className: 'flex justify-center gap-8 mb-6' },
+                    React.createElement('div', null,
+                        React.createElement('div', { className: 'text-3xl font-bold text-green-400' }, correctCount),
+                        React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Rätt')
+                    ),
+                    React.createElement('div', null,
+                        React.createElement('div', { className: 'text-3xl font-bold text-red-400' }, wrongQuestions.length),
+                        React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Fel')
+                    )
+                ),
+                React.createElement('p', {
+                    className: 'text-slate-300 mb-2'
+                }, `Du svarade fel på ${wrongQuestions.length} ${wrongQuestions.length === 1 ? 'fråga' : 'frågor'}:`),
+                React.createElement('div', { className: 'flex flex-wrap gap-2 justify-center mb-6' },
+                    wrongQuestions.map((q, i) =>
+                        React.createElement('span', {
+                            key: i,
+                            className: 'px-3 py-1 rounded-full text-sm font-medium',
+                            style: { background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#fca5a5' }
+                        }, q.quantity || q.symbol)
+                    )
+                ),
+                React.createElement('p', {
+                    className: 'text-sky-400 mb-6 text-sm'
+                }, `Runda ${round + 1} innehåller bara de frågor du svarade fel på.`),
+                React.createElement('button', {
+                    className: 'px-8 py-3 rounded-xl font-semibold text-white',
+                    style: {
+                        background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                        boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)',
+                        fontFamily: "'Poppins', sans-serif",
+                        cursor: 'pointer',
+                        border: 'none',
+                        fontSize: '1rem'
+                    },
+                    onClick: onContinue
+                }, `Starta runda ${round + 1}`)
+            );
+        }
+
+        function WrongAnswerOverlay({ wrongUnit, wrongExplanation, correctText, onDismiss }) {
+            return React.createElement('div', {
+                className: 'bonus-overlay',
+                onClick: onDismiss
+            },
+                React.createElement('div', {
+                    className: 'wrong-banner rounded-2xl px-8 py-8 text-center',
+                    onClick: (e) => e.stopPropagation()
+                },
+                    React.createElement('p', {
+                        className: 'text-red-400 font-bold text-lg mb-2',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, `Du valde ${wrongUnit}`),
+                    React.createElement('p', {
+                        className: 'text-slate-300 text-base mb-5',
+                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.6' }
+                    }, wrongExplanation),
+                    React.createElement('div', {
+                        className: 'rounded-xl px-5 py-3 mb-6',
+                        style: { background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)' }
+                    },
+                        React.createElement('p', {
+                            className: 'text-green-400 font-bold text-base',
+                            style: { fontFamily: "'Poppins', sans-serif" }
+                        }, correctText)
+                    ),
+                    React.createElement('button', {
+                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
+                        style: {
+                            background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontFamily: "'Poppins', sans-serif"
+                        },
+                        onClick: onDismiss
+                    }, 'Jag förstår!')
+                )
+            );
+        }
+
+        function BonusOverlay({ text, onDismiss }) {
+            return React.createElement('div', {
+                className: 'bonus-overlay',
+                onClick: onDismiss
+            },
+                React.createElement('div', {
+                    className: 'bonus-banner rounded-2xl px-8 py-8 text-center',
+                    onClick: (e) => e.stopPropagation()
+                },
+                    React.createElement('p', {
+                        className: 'text-amber-300 font-bold text-xl mb-6',
+                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.5' }
+                    }, text),
+                    React.createElement('button', {
+                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
+                        style: {
+                            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontFamily: "'Poppins', sans-serif"
+                        },
+                        onClick: onDismiss
+                    }, 'Uppfattat!')
+                )
+            );
+        }
+
+        function Quiz({ chapterId, mode }) {
+            const chapter = CHAPTERS[chapterId];
+            const allQuestions = mode === 'units' ? chapter.units : (chapter.symbols || []);
+            const [currentQuestions, setCurrentQuestions] = useState(() => shuffle(allQuestions));
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const [results, setResults] = useState({});
+            const [selectedAnswer, setSelectedAnswer] = useState(null);
+            const [round, setRound] = useState(1);
+            const [showSummary, setShowSummary] = useState(false);
+            const [wrongThisRound, setWrongThisRound] = useState([]);
+            const [allDone, setAllDone] = useState(false);
+            const [showBonus, setShowBonus] = useState(null);
+            const [showWrongInfo, setShowWrongInfo] = useState(null);
+            const pendingAdvance = React.useRef(null);
+
+            useEffect(() => {
+                setCurrentQuestions(shuffle(allQuestions));
+                setCurrentIndex(0);
+                setResults({});
+                setSelectedAnswer(null);
+                setRound(1);
+                setShowSummary(false);
+                setWrongThisRound([]);
+                setAllDone(false);
+                setShowBonus(null);
+                setShowWrongInfo(null);
+            }, [mode, chapterId]);
+
+            const question = currentQuestions[currentIndex];
+            const correctAnswer = question ? (question.correct) : null;
+
+            const advanceToNext = useCallback((isCorrect, updatedWrongThisRound) => {
+                if (currentIndex < currentQuestions.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                    setSelectedAnswer(null);
+                } else {
+                    if (updatedWrongThisRound.length === 0) {
+                        setAllDone(true);
+                    }
+                    setShowSummary(true);
+                }
+            }, [currentIndex, currentQuestions]);
+
+            const handleAnswer = useCallback((answer) => {
+                setSelectedAnswer(answer);
+                const isCorrect = answer === correctAnswer;
+                setResults(prev => ({ ...prev, [currentIndex]: isCorrect }));
+                const newWrong = !isCorrect ? [...wrongThisRound, question] : wrongThisRound;
+                if (!isCorrect) {
+                    setWrongThisRound(newWrong);
+                }
+
+                if (isCorrect && question.bonusInfo) {
+                    setTimeout(() => {
+                        setShowBonus(question.bonusInfo);
+                        pendingAdvance.current = () => advanceToNext(isCorrect, newWrong);
+                    }, 800);
+                } else if (!isCorrect && question.wrongInfo && question.wrongInfo[answer]) {
+                    setTimeout(() => {
+                        setShowWrongInfo({
+                            wrongUnit: answer,
+                            wrongExplanation: question.wrongInfo[answer],
+                            correctText: question.ratt
+                                || `SI-enheten för ${question.quantity.toLowerCase()} är ${question.correct}`,
+                        });
+                        pendingAdvance.current = () => advanceToNext(isCorrect, newWrong);
+                    }, 800);
+                } else {
+                    setTimeout(() => {
+                        advanceToNext(isCorrect, newWrong);
+                    }, 1200);
+                }
+            }, [currentIndex, correctAnswer, question, wrongThisRound, advanceToNext]);
+
+            const handleContinue = useCallback(() => {
+                if (allDone) {
+                    setCurrentQuestions(shuffle(allQuestions));
+                    setCurrentIndex(0);
+                    setResults({});
+                    setSelectedAnswer(null);
+                    setRound(1);
+                    setShowSummary(false);
+                    setWrongThisRound([]);
+                    setAllDone(false);
+                } else {
+                    setCurrentQuestions(shuffle(wrongThisRound));
+                    setCurrentIndex(0);
+                    setResults({});
+                    setSelectedAnswer(null);
+                    setRound(prev => prev + 1);
+                    setShowSummary(false);
+                    setWrongThisRound([]);
+                }
+            }, [allDone, wrongThisRound, allQuestions]);
+
+            const correctCount = Object.values(results).filter(Boolean).length;
+            const questionLabel = mode === 'units'
+                ? `Vilken är SI-enheten för denna storhet?`
+                : `Vilken storhet betecknas med denna symbol?`;
+
+            const handleDismissOverlay = useCallback(() => {
+                setShowBonus(null);
+                setShowWrongInfo(null);
+                if (pendingAdvance.current) {
+                    pendingAdvance.current();
+                    pendingAdvance.current = null;
+                }
+            }, []);
+
+            if (showSummary) {
+                return React.createElement(RoundSummary, {
+                    round,
+                    totalQuestions: allQuestions.length,
+                    correctCount,
+                    wrongQuestions: wrongThisRound,
+                    onContinue: handleContinue,
+                    allDone
+                });
+            }
+
+            return React.createElement('div', null,
+                showBonus && React.createElement(BonusOverlay, {
+                    text: showBonus,
+                    onDismiss: handleDismissOverlay
+                }),
+                showWrongInfo && React.createElement(WrongAnswerOverlay, {
+                    wrongUnit: showWrongInfo.wrongUnit,
+                    wrongExplanation: showWrongInfo.wrongExplanation,
+                    correctText: showWrongInfo.correctText,
+                    onDismiss: handleDismissOverlay
+                }),
+                React.createElement('div', { className: 'flex justify-between items-center mb-2' },
+                    React.createElement('span', { className: 'text-slate-400 text-sm' },
+                        `Runda ${round}`
+                    ),
+                    React.createElement('span', { className: 'text-slate-400 text-sm' },
+                        `Fråga ${currentIndex + 1} av ${currentQuestions.length}`
+                    )
+                ),
+                React.createElement(ProgressDots, {
+                    questions: currentQuestions,
+                    currentIndex,
+                    results
+                }),
+                question && React.createElement(QuizQuestion, {
+                    key: `${round}-${currentIndex}`,
+                    question,
+                    questionLabel,
+                    onAnswer: handleAnswer,
+                    answered: selectedAnswer !== null,
+                    selectedAnswer,
+                    correctAnswer
+                })
+            );
+        }
+
+        // Kapitelväljare — visas när adressen saknar giltig kapitel-hash.
+        function ChapterPicker() {
+            return React.createElement('div', { className: 'max-w-2xl mx-auto' },
+                React.createElement('h1', {
+                    className: 'lab-section-title',
+                    style: { marginBottom: 8 }
+                }, 'Enhetskoll'),
+                React.createElement('p', {
+                    style: { fontFamily: "'Poppins', sans-serif", color: 'var(--lab-ink-muted, #5b6472)', maxWidth: '46rem' }
+                }, 'Varje kapitel avslutas med en enhetskoll — ett snabbt quiz på just de storheter, enheter och beteckningar som kapitlet använder. Välj kapitel:'),
+                KURSER.map(kurs =>
+                    React.createElement('div', { key: kurs.hash },
+                        React.createElement('div', { className: 'ek-kurs-rubrik' }, kurs.namn),
+                        kurs.kapitel.map(n => {
+                            const ch = CHAPTERS[`${kurs.hash}-${n}`];
+                            if (!ch) return null;
+                            return React.createElement('a', {
+                                key: n,
+                                className: 'ek-kap-lank',
+                                href: `#${kurs.hash}-${n}`
+                            },
+                                React.createElement('span', { className: 'ek-kap-num' }, `Kap ${n}`),
+                                React.createElement('span', null, ch.kapitel)
+                            );
+                        })
+                    )
+                )
+            );
+        }
+
+        function App() {
+            const [chapterId, setChapterId] = useState(readChapterId);
+            const [mode, setMode] = useState('units');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const sceneWrapRef = React.useRef(null);
+
+            useEffect(() => {
+                const onHashChange = () => {
+                    setChapterId(readChapterId());
+                    setMode('units');
+                };
+                window.addEventListener('hashchange', onHashChange);
+                return () => window.removeEventListener('hashchange', onHashChange);
+            }, []);
+
+            const chapter = chapterId ? CHAPTERS[chapterId] : null;
+
+            useEffect(() => {
+                document.title = chapter
+                    ? `Enhetskoll: ${chapter.kapitel} — ${chapter.kurs} — Fysiklabbet`
+                    : 'Enhetskoll — Fysiklabbet';
+            }, [chapterId]);
+
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
+
+            if (!chapter) {
+                return React.createElement(ChapterPicker);
+            }
+
+            const hasSymbols = chapter.symbols && chapter.symbols.length > 0;
+
+            return React.createElement('div', {
+                className: 'scene-wrap ek-scene dark-container min-h-0 rounded-2xl p-6 md:p-10',
+                ref: sceneWrapRef,
+                style: { fontFamily: "'Poppins', sans-serif", userSelect: 'none' }
+            },
+                React.createElement('button', {
+                    className: 'fs-btn',
+                    onClick: toggleFullscreen,
+                    'aria-label': 'Fullskärm',
+                    title: isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'
+                }, isFullscreen
+                    ? React.createElement('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' },
+                        React.createElement('path', { d: 'M9 3v6H3' }),
+                        React.createElement('path', { d: 'M15 21v-6h6' }),
+                        React.createElement('path', { d: 'M21 9h-6V3' }),
+                        React.createElement('path', { d: 'M3 15h6v6' }))
+                    : React.createElement('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' },
+                        React.createElement('path', { d: 'M3 9V3h6' }),
+                        React.createElement('path', { d: 'M21 9V3h-6' }),
+                        React.createElement('path', { d: 'M3 15v6h6' }),
+                        React.createElement('path', { d: 'M21 15v6h-6' }))
+                ),
+                React.createElement('div', { className: 'text-center mb-8' },
+                    React.createElement('p', {
+                        className: 'text-sky-400 text-xs font-semibold tracking-wider uppercase mb-2'
+                    }, `${chapter.kurs} · Kapitel ${chapter.nummer}`),
+                    React.createElement('h1', {
+                        className: 'text-3xl md:text-4xl font-bold text-white mb-3',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, `Enhetskoll: ${chapter.kapitel}`),
+                    React.createElement('p', {
+                        className: 'text-slate-400 max-w-xl mx-auto'
+                    }, 'Kolla att du kan kapitlets storheter, enheter och beteckningar! Svarar du fel får du öva igen tills allt sitter.')
+                ),
+                hasSymbols && React.createElement('div', {
+                    className: 'flex justify-center gap-3 mb-8 flex-wrap'
+                },
+                    React.createElement('button', {
+                        className: `mode-tab px-5 py-2.5 rounded-xl text-sm font-semibold border-2 ${mode === 'units' ? 'active' : ''}`,
+                        onClick: () => setMode('units')
+                    }, 'Storheter → enheter'),
+                    React.createElement('button', {
+                        className: `mode-tab px-5 py-2.5 rounded-xl text-sm font-semibold border-2 ${mode === 'symbols' ? 'active' : ''}`,
+                        onClick: () => setMode('symbols')
+                    }, 'Beteckningar → storheter')
+                ),
+                React.createElement(Quiz, { key: chapterId, chapterId, mode: hasSymbols ? mode : 'units' })
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            React.createElement(App)
+        );
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+</body>
+</html>

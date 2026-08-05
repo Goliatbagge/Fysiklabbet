@@ -93,16 +93,26 @@
             text-align: center;
         }
         .rep-chip:active { cursor: grabbing; }
-        .rep-chip.selected { border-color: var(--lab-accent, #c8324a); border-width: 2.2px; box-shadow: 0 0 0 3px rgba(200,50,74,0.14); }
+        .rep-chip.selected {
+            border-color: var(--lab-accent, #c8324a);
+            box-shadow: inset 0 0 0 1px var(--lab-accent, #c8324a), 0 0 0 3px rgba(200,50,74,0.14);
+        }
         .rep-chip.locked { cursor: default; border-color: rgba(47,122,77,0.75); background: #eef4ec; box-shadow: none; }
+
+        /* ⚠️ Markeringar nedan får ALDRIG ändra border-width. Brickans mått
+           är innehållsstyrda, så ett par tiondelar tjockare ram krymper
+           textytan: hela listan knuffas till när man tar tag i en bricka, och
+           en text som ligger precis på radbrytningsgränsen viker ner sig på
+           två rader mitt i draget. Ge i stället tyngd med färg och skugga
+           (inset/ring) — de påverkar inte layouten. */
 
         /* Brickan som dras lämnar ett tomt "hål" efter sig. I poolen är hålet
            bara den plats brickan kom ifrån — det ska vara diskret och inte
            konkurrera med släppytan om blicken. */
         .rep-chip.ghosted {
             background: rgba(15,22,32,0.03);
-            border: 2px dashed rgba(15,22,32,0.28);
-            box-shadow: none;
+            border-style: dashed; border-color: rgba(15,22,32,0.30);
+            box-shadow: inset 0 0 0 1px rgba(15,22,32,0.10);
         }
         .rep-chip.ghosted > * { opacity: 0; }
 
@@ -112,8 +122,10 @@
             animation: rephole 1100ms ease-in-out infinite;
         }
         @keyframes rephole {
-            0%, 100% { background: rgba(200,50,74,0.05); border-color: rgba(200,50,74,0.55); }
-            50%      { background: rgba(200,50,74,0.13); border-color: rgba(200,50,74,1); }
+            0%, 100% { background: rgba(200,50,74,0.05); border-color: rgba(200,50,74,0.55);
+                       box-shadow: inset 0 0 0 1px rgba(200,50,74,0.25); }
+            50%      { background: rgba(200,50,74,0.13); border-color: rgba(200,50,74,1);
+                       box-shadow: inset 0 0 0 1px rgba(200,50,74,0.60); }
         }
 
         .rep-pool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px auto 20px; max-width: 860px; }
@@ -126,7 +138,7 @@
             transition: border-color 120ms, background 120ms, transform 140ms, box-shadow 140ms;
         }
         .rep-drop.over {
-            border-color: var(--lab-accent, #c8324a); border-width: 2.4px;
+            border-color: var(--lab-accent, #c8324a);
             background: rgba(200,50,74,0.10);
             transform: scale(1.035);
             box-shadow: 0 0 0 4px rgba(200,50,74,0.14);
@@ -166,7 +178,7 @@
             background: rgba(255,255,255,0.4); padding: 10px; min-height: 120px;
         }
         .rep-bin.over {
-            border-color: var(--lab-accent, #c8324a); border-width: 2.4px;
+            border-color: var(--lab-accent, #c8324a);
             background: rgba(200,50,74,0.09);
             box-shadow: 0 0 0 4px rgba(200,50,74,0.13);
             animation: reptarget 900ms ease-in-out infinite;
@@ -305,11 +317,14 @@
             will-change: left, top, transform;
         }
         .rep-ghost.lyft { transform: translate(-50%, -50%) rotate(-1.8deg) scale(1.06); }
+        /* Kopian måste ha samma rambredd som originalet, annars kan texten
+           brytas på ett annat ställe i spöket än i brickan. */
         .rep-ghost .rep-chip {
             box-sizing: border-box; width: 100%; height: 100%;
             background: #fffdf7;
-            border-color: var(--lab-accent, #c8324a); border-width: 2px;
-            box-shadow: 0 10px 18px rgba(15,22,32,0.30), 0 2px 0 rgba(15,22,32,0.18);
+            border-color: var(--lab-accent, #c8324a);
+            box-shadow: inset 0 0 0 1px var(--lab-accent, #c8324a),
+                        0 10px 18px rgba(15,22,32,0.30), 0 2px 0 rgba(15,22,32,0.18);
         }
 
         /* Den som bett om mindre rörelse slipper pulserandet och glidandet —

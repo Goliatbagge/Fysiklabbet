@@ -197,6 +197,14 @@ riktiga sådana (se punkt 2).
    Ladda ner bilden till `nyheter/bilder/<id>.<ext>` och ange korrekt **bildkälla,
    upphovsperson och licens** i `imageCredit` (t.ex. `"Foto: NTU Singapore (CC&nbsp;BY&nbsp;4.0)"`).
    Generera bara en egen bild om du inte hittar en lämplig, fritt användbar riktig bild.
+   **Går bilden inte att ladda ner?** I miljöer vars utgående nätverk bara släpper
+   igenom GitHub (Claude Code på webben) ger `curl` mot NOIRLab, ESO, EurekAlert!
+   eller Wikimedia bara 403. Det är INTE ett skäl att falla tillbaka på en
+   AI-bild: skriv i stället en rad `<url> <filnamn>` i `.github/bildorder.txt`
+   och pusha, så hämtar och committar `.github/workflows/hamta-nyhetsbild.yml`
+   bilden åt dig från en runner med fri nättrafik. `<url>` får vara bildsidan
+   (t.ex. `https://noirlab.edu/public/images/noirlab2618a/`) — arkivets största
+   jpg letas upp automatiskt.
 2. **Finns det FLERA bra pressbilder — använd gärna flera i artikeln.** Det är
    inget krav, men när pressmaterialet innehåller mer än en användbar bild
    (t.ex. ett foto av apparaten *och* en figur ur studien, eller forskarna och

@@ -58,8 +58,8 @@ const NYHETER_ALL = [
     category: "Astronomi",
     readingTime: "7 min",
     image: "nyheter/bilder/2026-08-05-rubin-mork-materia.jpg",
-    imageAlt: "Schematisk illustration mot mörk stjärnhimmel: en svagt lysande, diffus klotformig massa i mitten, omgiven av små avlägsna galaxer. Galaxerna längst ut har vanliga runda och ovala former, medan de närmare den osynliga massan är utdragna till bågar som böjer sig runt den, som om de setts genom en ojämn glaslins.",
-    imageCredit: "Illustration: Fysiklabbet",
+    imageAlt: "Djup astronomisk bild av COSMOS-fältet. Hela bildrutan är fylld av tusentals ljuspunkter mot svart bakgrund — de flesta är avlägsna galaxer, vita, blåaktiga eller orange, några så stora att spiralform och utdragen skiva går att ana. Ett fåtal skarpa stjärnor i förgrunden hör till Vintergatan, och längs kanterna ligger svaga slöjor av lysande stoft.",
+    imageCredit: "Foto: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA (CC&nbsp;BY&nbsp;4.0)",
     tags: ["astronomi", "kosmologi", "mörk materia", "gravitation", "galaxer", "teleskop", "gravitationslinsning", "rotationskurva", "supernova", "fysik 1", "fysik 2"],
     sources: [
       { name: "Vera C. Rubin Observatory (pressmeddelande)", url: "https://rubinobservatory.org/news/action-rubin-lsst-begins" },
@@ -106,6 +106,7 @@ const NYHETER_ALL = [
       { type: "h2", text: "Att fotografera det man inte kan se" },
       { type: "p", html: "Mörk materia sänder inte ut ljus, absorberar inte ljus och reflekterar inte ljus. Det enda den gör är att dra. Och det är precis den egenskapen Rubin-observatoriet är byggt för att utnyttja." },
       { type: "p", html: "Massa kröker rummet, och ljus som passerar tillräckligt nära böjs av. Ligger en tung ansamling materia mellan oss och en avlägsen galax blir bilden av bakgrundsgalaxen därför lite utdragen, ungefär som ett föremål sett genom en ojämn glasruta. Fenomenet kallas gravitationslinsning. I sällsynta, spektakulära fall dras galaxen ut till en lysande båge — men i det stora flertalet fall handlar det om någon enstaka procents förvrängning, alltså långt mindre än skillnaden mellan två galaxers naturliga former." },
+      { type: "image", src: "nyheter/bilder/2026-08-05-rubin-mork-materia-3.jpg", alt: "Schematisk illustration mot mörk stjärnhimmel: en svagt lysande, diffus klotformig massa i mitten, omgiven av små avlägsna galaxer. Galaxerna längst ut har vanliga runda och ovala former, medan de närmare den osynliga massan är utdragna till bågar som böjer sig runt den, som om de setts genom en ojämn glaslins.", caption: "Principen, kraftigt överdriven: bakgrundsgalaxernas former dras ut runt en tung massa i förgrunden. I verkligheten rör det sig oftast om någon procents förvrängning, som bara syns statistiskt.", credit: "Illustration: Fysiklabbet" },
       { type: "p", html: "Därför fungerar metoden bara statistiskt. Mäter man formen på tillräckligt många galaxer och letar efter en gemensam, systematisk skevhet — grannar som lutar åt samma håll — går det att räkna baklänges till hur massan är fördelad längs synlinjen, inklusive den del av massan som inte lyser. ”Tillräckligt många” är här ungefär 20&nbsp;miljarder galaxer, vilket är vad genomgången väntas katalogisera under sina tio år." },
 
       { type: "h2", text: "Poängen med att göra om det" },

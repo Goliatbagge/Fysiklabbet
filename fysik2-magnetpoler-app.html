@@ -48,6 +48,52 @@
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
 
+        /* ── Växlare mellan avsnittets två simuleringar ──
+           Samma komponent som Influens/Bandgeneratorn och
+           Flytförmåga/Arkimedes princip använder. */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+        /* Smal skärm: växlaren under rubriken, vänsterställd och full bredd */
+        @media (max-width: 600px) {
+            .sim-switch-wrap { width: 100%; margin-bottom: 10px; }
+            .sim-switch-label { text-align: left; }
+            .sim-switch { display: flex; width: 100%; }
+            .sim-switch a, .sim-switch .sim-switch-active {
+                flex: 1; text-align: center; padding: 8px 10px; font-size: 13px;
+            }
+        }
+
         .scene-wrap {
             position: relative;
             width: 100%;
@@ -817,7 +863,17 @@
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Attraktion och repulsion
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Attraktion och repulsion</h1>
+                        <div className="intro-head">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Attraktion och repulsion</h1>
+                            {/* Växlare till avsnittets andra simulering */}
+                            <div className="sim-switch-wrap">
+                                <span className="sim-switch-label">Simulering</span>
+                                <div className="sim-switch">
+                                    <a href="fysik2-stavmagnet-app.html">Stavmagnetens fält</a>
+                                    <span className="sim-switch-active">Attraktion och repulsion</span>
+                                </div>
+                            </div>
+                        </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             <strong>Lika poler repellerar varandra och olika poler attraherar varandra.</strong> Här
                             ligger två stavmagneter på en labbänk: dra dem närmare varandra, vänd polerna på var och

@@ -1,0 +1,98 @@
+# Hämtar fritt filmmaterial (public domain) från archive.org och committar
+# det i media/video/, tillsammans med en affischbild (poster) per film.
+#
+# VARFÖR DEN FINNS
+# Samma skäl som hamta-nyhetsbild.yml: sessioner vars utgående nätverk bara
+# släpper igenom GitHub kan inte ladda ner filmerna själva. Sajten bäddar in
+# filmerna som självhostade <video>-element (::: video-blockets fil:/affisch:)
+# i stället för tredjeparts-iframes, som visat sig opålitliga i mobilen.
+#
+# ANVÄNDNING
+# Skriv en rad per film i .github/videoorder.txt och pusha:
+#
+#     <archive.org-id> <filnamn utan ändelse> <affisch-tidpunkt>
+#
+# t.ex.  FeatherHammerDropOnMoon apollo15-hammare-fjader 00:00:10
+# Resultat: media/video/<filnamn>.mp4 + media/video/<filnamn>.jpg.
+# Minsta fullängds-mp4-derivatet väljs (typiskt "512Kb MPEG4") för att
+# hålla repot lätt. Rader som börjar med # hoppas över. Körningen committar
+# på samma gren och tömmer beställningsfilen.
+#
+# Licensen kontrolleras INTE — beställ bara public domain/CC-material.
+
+name: Hämta videomaterial
+
+on:
+  push:
+    paths:
+      - '.github/videoorder.txt'
+  workflow_dispatch:
+
+jobs:
+  hamta:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Installera ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Hämta filmerna
+        run: |
+          set -euo pipefail
+          [ -s .github/videoorder.txt ] || { echo "Ingen beställning"; exit 0; }
+          mkdir -p media/video
+
+          while read -r id namn poster_ts rest; do
+            case "${id:-}" in ''|'#'*) continue ;; esac
+            case "$namn" in */*|'') echo "namn ska vara ett filnamn utan katalog/ändelse: $namn"; exit 1 ;; esac
+            poster_ts="${poster_ts:-00:00:05}"
+
+            echo "=============================================================="
+            echo "beställning: archive.org/$id -> media/video/$namn.mp4"
+
+            curl -sSL "https://archive.org/metadata/$id" -o meta.json
+            fil=$(python3 - <<'PY'
+          import json
+          m = json.load(open('meta.json'))
+          kand = []
+          for f in m.get('files', []):
+              n = f.get('name', '')
+              fmt = (f.get('format') or '').lower()
+              if not n.lower().endswith('.mp4'):
+                  continue
+              if 'mpeg4' in fmt or 'h.264' in fmt:
+                  kand.append((int(f.get('size') or 0), n))
+          kand.sort()
+          print(kand[0][1] if kand else '')
+          PY
+          )
+            [ -n "$fil" ] || { echo "Ingen mp4 i $id:"; head -c 3000 meta.json; exit 1; }
+
+            echo "laddar ner: $fil"
+            curl -sSL "https://archive.org/download/$id/$fil" -o "media/video/$namn.mp4"
+            typ=$(file -b --mime-type "media/video/$namn.mp4")
+            [ "$typ" = "video/mp4" ] || { echo "Nedladdad fil är ingen mp4: $typ"; file "media/video/$namn.mp4"; exit 1; }
+            ls -l "media/video/$namn.mp4"
+
+            # Affischbild: en bildruta en bit in i filmen, max 960 px bred.
+            ffmpeg -y -loglevel error -ss "$poster_ts" -i "media/video/$namn.mp4" \
+              -frames:v 1 -vf "scale='min(960,iw)':-2" -q:v 4 "media/video/$namn.jpg"
+            ls -l "media/video/$namn.jpg"
+            rm -f meta.json
+          done < .github/videoorder.txt
+
+      - name: Committa filmerna
+        run: |
+          set -euo pipefail
+          : > .github/videoorder.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add media/video .github/videoorder.txt
+          git diff --cached --quiet && { echo "Inget nytt att committa"; exit 0; }
+          git commit -m "Hämta fritt videomaterial från archive.org"
+          git push origin HEAD:${{ github.ref_name }}

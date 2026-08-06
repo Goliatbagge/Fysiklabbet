@@ -77,9 +77,23 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
     (varje träff stäms av mot originalets *billion/trillion* och mot en
     rimlighetsberäkning). Se Skrivregler: svenska facktermer och räkneord.
 
-11. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
-    granskad (redaktionell korrektur + faktakoll av citat, se nedan) och
-    verifieringen är grön: committa och pusha nyheten direkt, utan att invänta
+11. **Utgivargranskning FÖRE publicering (obligatorisk).** Artikeln får inte
+    committas/pushas förrän den oberoende utgivaren har godkänt den:
+    - Körs du i en session som kan starta subagenter: be huvudsessionen köra
+      agenten **`utgivare`** (`.claude/agents/utgivare.md`) på den nya
+      artikeln. Kan du själv inte starta agenter: genomför i stället HELA
+      granskningsprotokollet i `utgivare.md` (abstract + metoddel i
+      originalpublikationen, peer review-status, varje siffra, varje citat)
+      som ett separat, självkritiskt pass — och logga utslaget i
+      `.claude/nyheter/granskningar.md` som utgivaren skulle gjort.
+    - Utslag **GODKÄND** → gå vidare till steg 12. **RÄTTA FÖRST** → åtgärda
+      varje punkt, kör om berörda verifierare och låt granskningen göras om.
+      **STOPPAD** → publicera inte; ta nästa nyhet ur kön eller rapportera
+      till användaren.
+
+12. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
+    granskad och godkänd av utgivaren (steg 11) och verifieringen är grön:
+    committa och pusha nyheten direkt, utan att invänta
     användarens godkännande. Användaren gör eventuella justeringar i efterhand.
     Committa **bara nyhetsfilerna** — `data/nyheter.js`, bilden i
     `nyheter/bilder/`, de genererade `nyheter/dela/*.html`, `feed.xml`,

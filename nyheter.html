@@ -270,15 +270,17 @@
             color: var(--lab-accent); text-decoration: underline;
             text-underline-offset: 2px;
         }
-        /* AI-transparens: rutan överst i varje artikel. Nyheterna skrivs i
-           huvudsak av AI ("AI-redaktören") och granskas av en människa före
-           publicering — det ska läsaren veta innan texten börjar. */
+        /* AI-transparens: rutan allra överst i varje artikel, före rubriken.
+           Nyheterna skrivs i huvudsak av AI ("AI-redaktören") och granskas
+           av en människa före publicering — det ska läsaren veta innan
+           något annat. Vit botten så att rutan lyfter från pappersytan. */
         .article-ai {
-            margin: 20px 0 2px; padding: 13px 17px;
-            background: var(--lab-bg-raised);
+            margin: 0 0 24px; padding: 14px 18px;
+            background: #ffffff;
             border: 1px solid var(--lab-line-strong);
             border-left: 3px solid var(--lab-accent);
             border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(15, 22, 32, 0.07);
         }
         .article-ai-label {
             font-family: var(--lab-font-mono); font-size: 10px; letter-spacing: 0.09em;
@@ -1255,6 +1257,9 @@
             return (
                 <article className="article" ref={articleRef}>
                     <a className="article-back" href="nyheter.html">← Alla nyheter</a>
+
+                    <AiRuta a={a} />
+
                     <MetaRow a={a} byline />
                     <h1 className="article-title">{a.title}</h1>
                     <p className="article-deck">{a.deck}</p>
@@ -1267,8 +1272,6 @@
                         <img src={a.image} alt={a.imageAlt} />
                         {a.imageCredit && <figcaption>{a.imageCredit}</figcaption>}
                     </figure>
-
-                    <AiRuta a={a} />
 
                     <div className="lab-bionic-bar">
                         <button type="button"

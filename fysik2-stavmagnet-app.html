@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stavmagnetens magnetfält — Fysiklabbet</title>
+    <meta name="description" content="Utforska magnetfältet kring en stavmagnet i både 2D och 3D. Dra magneten över en platta med kompassnålar, strö järnfilspån över fältet och följ fältlinjerna från nordända till sydända — eller rotera hela fältbilden fritt i tre dimensioner. Vänd magneten och se varje kompassnål svänga in sig i den nya fältriktningen.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-stavmagnet-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Stavmagnetens magnetfält — Fysik nivå 2">
+    <meta property="og:description" content="Utforska magnetfältet kring en stavmagnet i både 2D och 3D. Dra magneten över en platta med kompassnålar, strö järnfilspån över fältet och följ fältlinjerna från nordända till sydända — eller rotera hela fältbilden fritt i tre dimensioner.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-stavmagnet-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stavmagnetens magnetfält — Fysik nivå 2">
+    <meta name="twitter:description" content="Utforska magnetfältet kring en stavmagnet i både 2D och 3D. Dra magneten över en platta med kompassnålar, strö järnfilspån över fältet och följ fältlinjerna från nordända till sydända — eller rotera hela fältbilden fritt i tre dimensioner.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > canvas { display: block; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 3px; pointer-events: none;
+            min-width: 168px;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 13px; font-weight: 600;
+            color: var(--lab-ink, #0f1620); }
+        .scene-info .si-bar {
+            height: 7px; border-radius: 4px; overflow: hidden;
+            background: rgba(15,22,32,0.10); border: 1px solid rgba(15,22,32,0.16);
+        }
+        .scene-info .si-bar > div { height: 100%; background: #c0392b;
+            border-radius: 4px; transition: width 0.12s linear; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-mode { display: flex; gap: 6px; margin-bottom: 7px; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-mini { padding: 5px 10px; font-size: 12px; flex: 1; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const COL = {
+            falt:  '#c0392b',    // fältlinjer (röda, som i systersimuleringarna)
+            npol:  '#c0392b',    // nordpol röd
+            spol:  '#cfd4da',    // sydpol vit/ljusgrå (aldrig blå) — som teorifigurerna
+            spolText: '#3a3f47',
+            ink:   '#30363f',
+            inkSoft: 'rgba(48,54,63,0.72)',
+            nal:   '#5d646e',    // kompassnålens sydhalva
+        };
+
+        // ── Fältmodell: två magnetpoler (N = källa, S = sänka) ──────────
+        // Varje magnet modelleras som en +pol vid nordändan och en −pol vid
+        // sydändan (1/r²-fält från vardera polen). Det ger den klassiska
+        // stavmagnetsbilden: linjer ut ur N, i stora bågar runt magneten och
+        // in i S — och rätt beteende när magneten flyttas eller vänds.
+        const polesOf = (m) => {
+            const c = Math.cos(m.ang), s = Math.sin(m.ang);
+            return [
+                { x: m.x + c * m.poleDist, y: m.y + s * m.poleDist, q: +1 },  // N
+                { x: m.x - c * m.poleDist, y: m.y - s * m.poleDist, q: -1 },  // S
+            ];
+        };
+        const fieldAt = (x, y, poles) => {
+            let bx = 0, by = 0;
+            for (let i = 0; i < poles.length; i++) {
+                const p = poles[i];
+                const dx = x - p.x, dy = y - p.y;
+                const r2 = dx * dx + dy * dy + 20;      // mjukning nära polen
+                const inv = p.q / (r2 * Math.sqrt(r2));
+                bx += dx * inv; by += dy * inv;
+            }
+            return [bx, by];
+        };
+
+        // Fältlinje från en startpunkt: RK4 längs fältriktningen tills linjen
+        // når en sydpol, lämnar det utökade ritområdet eller tar för många steg.
+        const traceLine = (x0, y0, poles, W, H, sgn = 1) => {
+            const pts = [[x0, y0]];
+            let x = x0, y = y0;
+            const dirAt = (px, py) => {
+                const [bx, by] = fieldAt(px, py, poles);
+                const n = Math.hypot(bx, by) || 1;
+                return [sgn * bx / n, sgn * by / n];
+            };
+            const M = 140;                               // marginal utanför bilden
+            for (let i = 0; i < 1600; i++) {
+                const ds = 3.2;
+                const k1 = dirAt(x, y);
+                const k2 = dirAt(x + 0.5 * ds * k1[0], y + 0.5 * ds * k1[1]);
+                const k3 = dirAt(x + 0.5 * ds * k2[0], y + 0.5 * ds * k2[1]);
+                const k4 = dirAt(x + ds * k3[0], y + ds * k3[1]);
+                x += ds * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6;
+                y += ds * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6;
+                pts.push([x, y]);
+                if (x < -M || x > W + M || y < -M || y > H + M) break;
+                let done = false;
+                for (const p of poles) {
+                    if (p.q * sgn < 0 && Math.hypot(x - p.x, y - p.y) < 13) {
+                        pts.push([p.x, p.y]);
+                        done = true;
+                    }
+                }
+                if (done) break;
+            }
+            return pts;
+        };
+
+        // Pilspetsens plats: där linjen korsar magnetens tvärgående mittplan
+        // (pilspetsen MITT PÅ linjen, aldrig i änden — fältlinjekonvention).
+        const arrowIndexFor = (pts, m) => {
+            const ux = Math.cos(m.ang), uy = Math.sin(m.ang);
+            const hw = 30;
+            let best = -1;
+            for (let i = 1; i < pts.length - 1; i++) {
+                const s0 = (pts[i - 1][0] - m.x) * ux + (pts[i - 1][1] - m.y) * uy;
+                const s1 = (pts[i][0] - m.x) * ux + (pts[i][1] - m.y) * uy;
+                if (s0 * s1 <= 0) {
+                    const px = (pts[i][0] - m.x) * -uy + (pts[i][1] - m.y) * ux;
+                    if (Math.abs(px) > hw) { best = i; break; }
+                }
+            }
+            if (best < 0) best = Math.floor(pts.length / 2);
+            return best;
+        };
+
+        // Slumptal med frö — järnfilspånen ligger stilla mellan omritningar
+        const mulberry = (seed) => () => {
+            seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+            let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+
+        // ── THREE-hjälpare (samma mönster som magnetfält-i-spole) ───────
+        const disposeGroup = (g) => {
+            g.traverse((o) => {
+                if (o.geometry) o.geometry.dispose();
+                if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => {
+                    if (m.map) m.map.dispose();
+                    m.dispose();
+                });
+            });
+            g.clear();
+        };
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((p) => { ctx.font = fontFor(p); w += ctx.measureText(p.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((p) => {
+                ctx.font = fontFor(p);
+                ctx.textBaseline = 'middle';
+                if (p.stroke) {
+                    ctx.strokeStyle = p.stroke;
+                    ctx.lineWidth = p.strokeWidth || 3;
+                    ctx.lineJoin = 'round';
+                    ctx.miterLimit = 2;
+                    ctx.strokeText(p.t, x, c.height / 2 + 2);
+                }
+                ctx.fillStyle = p.color;
+                ctx.fillText(p.t, x, c.height / 2 + 2);
+                x += ctx.measureText(p.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 10;
+            return spr;
+        };
+        const cone3 = (dir, pos, len, rad, color) => {
+            const m = new THREE.Mesh(
+                new THREE.ConeGeometry(rad, len, 14),
+                new THREE.MeshStandardMaterial({ color, roughness: 0.6 })
+            );
+            m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+            m.position.copy(pos);
+            return m;
+        };
+
+        // Fältlinje i (x, ρ)-planet för dipolen (+1 i x = +a, −1 i x = −a):
+        // spåras från ekvatorsplanet (0, rho0) längs fältet ner i sydpolen,
+        // speglas sedan till nordhalvan. Returnerar punkter N-ända → S-ända.
+        const traceDipole3D = (a, rho0, rStop) => {
+            const dir = (x, rho) => {
+                let bx = 0, br = 0;
+                [[+a, +1], [-a, -1]].forEach(([x0, q]) => {
+                    const dx = x - x0;
+                    const r2 = dx * dx + rho * rho + 1e-6;
+                    const inv = q / (r2 * Math.sqrt(r2));
+                    bx += dx * inv; br += rho * inv;
+                });
+                const n = Math.hypot(bx, br) || 1;
+                return [bx / n, br / n];
+            };
+            const half = [[0, rho0]];
+            let x = 0, rho = rho0;
+            for (let s = 0; s < 4000; s++) {
+                const ds = 0.02;
+                const k1 = dir(x, rho);
+                const k2 = dir(x + 0.5 * ds * k1[0], rho + 0.5 * ds * k1[1]);
+                const k3 = dir(x + 0.5 * ds * k2[0], rho + 0.5 * ds * k2[1]);
+                const k4 = dir(x + ds * k3[0], rho + ds * k3[1]);
+                x += ds * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6;
+                rho += ds * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6;
+                if (s % 4 === 0) half.push([x, rho]);
+                if (Math.hypot(x + a, rho) < rStop) { half.push([x, rho]); break; }
+                if (Math.hypot(x, rho) > 30) break;
+            }
+            // spegla S-halvan till N-halvan (x → −x), baklänges, så att
+            // hela linjen går N-ända → ekvator → S-ända
+            const pts = [];
+            for (let i = half.length - 1; i >= 0; i--) pts.push([-half[i][0], half[i][1]]);
+            for (let i = 1; i < half.length; i++) pts.push(half[i]);
+            return pts;
+        };
+
+        // ── Huvudapp ────────────────────────────────────────────────────
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [mode, setMode] = useState(q.get('vy') === '3d' ? '3d' : '2d');
+            const [show, setShow] = useState({
+                linjer: true, kompass: true, span: false, prov: true, poler: true,
+            });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [styrka, setStyrka] = useState({ pct: 60, ord: 'starkt' });
+            const [fontsReady, setFontsReady] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const canvasRef = useRef(null);
+            const threeRef = useRef(null);
+            const stRef = useRef(null);           // 2D-scenens föränderliga tillstånd
+            const pRef = useRef({});
+            pRef.current = { mode, show };
+
+            useEffect(() => {
+                if (document.fonts && document.fonts.ready)
+                    document.fonts.ready.then(() => setFontsReady(1));
+            }, []);
+
+            // ── 2D-scenen ───────────────────────────────────────────────
+            useEffect(() => {
+                const wrap = sceneWrapRef.current;
+                const canvas = canvasRef.current;
+                if (!wrap || !canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                const st = {
+                    W: 0, H: 0, dpr: 1,
+                    magnet: { x: 0, y: 0, ang: 0, half: 82, hw: 24, poleDist: 66 },
+                    angFrom: 0, angTo: 0, angT: 1,     // vändanimation
+                    probe: { x: 0, y: 0, ang: 0, w: 0 },
+                    needles: [],                        // rutnätets kompassnålar
+                    filings: [],
+                    filingsDirty: true, linesDirty: true,
+                    lines: [], arrows: [],
+                    drag: null,
+                    placed: false,
+                    lastInfo: 0,
+                };
+                stRef.current = st;
+
+                // Canvasen ligger I FLÖDET (inte absolut) så att mobil-CSS:ens
+                // dockning (sektion 8) kan lägga verktygsrutorna under scenen.
+                // Höjden bestäms därför här, inte av wrappern:
+                //  - normal bred: wrapperns fasta CSS-höjd
+                //  - normal smal: proportionell mot bredden
+                //  - fullskärm:   hela höjden (bred) / övre delen (smal)
+                const sceneH = (w) => {
+                    const narrow = window.matchMedia('(max-width: 600px)').matches;
+                    const fs = document.fullscreenElement === wrap ||
+                               document.webkitFullscreenElement === wrap;
+                    if (fs) return narrow ? Math.round(window.innerHeight * 0.54) : wrap.clientHeight;
+                    if (narrow) return Math.min(Math.round(w * 0.9), 430);
+                    return wrap.clientHeight;
+                };
+                const resize = () => {
+                    const w = wrap.clientWidth, h = sceneH(wrap.clientWidth);
+                    if (!w || !h) return;
+                    if (w === st.W && h === st.H) return;
+                    st.dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = Math.round(w * st.dpr);
+                    canvas.height = Math.round(h * st.dpr);
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+                    // spara lägen som andelar av scenen, så att en storleks-
+                    // ändring (fullskärm, mobil) behåller uppställningen
+                    if (st.placed && st.pw && st.ph) {
+                        st.magnet.x *= w / st.pw; st.magnet.y *= h / st.ph;
+                        st.probe.x *= w / st.pw; st.probe.y *= h / st.ph;
+                    }
+                    st.pw = w; st.ph = h;
+                    st.W = w; st.H = h;
+                    if (!st.placed) {
+                        st.magnet.x = w * 0.44; st.magnet.y = h * 0.5;
+                        st.probe.x = w * 0.20; st.probe.y = h * 0.22;
+                        st.placed = true;
+                    }
+                    st.magnet.x = Math.min(Math.max(st.magnet.x, 90), w - 90);
+                    st.magnet.y = Math.min(Math.max(st.magnet.y, 60), h - 60);
+                    st.probe.x = Math.min(Math.max(st.probe.x, 34), w - 34);
+                    st.probe.y = Math.min(Math.max(st.probe.y, 34), h - 34);
+                    buildNeedles();
+                    buildFilings();
+                    st.linesDirty = true;
+                };
+
+                const buildNeedles = () => {
+                    st.needles = [];
+                    const gap = 56;
+                    const nx = Math.floor(st.W / gap), ny = Math.floor(st.H / gap);
+                    const ox = (st.W - (nx - 1) * gap) / 2, oy = (st.H - (ny - 1) * gap) / 2;
+                    for (let i = 0; i < nx; i++)
+                        for (let j = 0; j < ny; j++)
+                            st.needles.push({ x: ox + i * gap, y: oy + j * gap, ang: Math.PI / 2, w: 0 });
+                };
+                const buildFilings = () => {
+                    st.filings = [];
+                    const rnd = mulberry(42);
+                    const n = Math.round(st.W * st.H / 210);
+                    for (let i = 0; i < n; i++)
+                        st.filings.push({ x: rnd() * st.W, y: rnd() * st.H, j: 0.6 + 0.8 * rnd() });
+                    st.filingsDirty = true;
+                };
+
+                const rebuildField = () => {
+                    const m = st.magnet;
+                    const poles = polesOf(m);
+                    // fältlinjer: sås strax utanför nordändan i en solfjäder
+                    st.lines = []; st.arrows = [];
+                    const N = poles[0];
+                    const NL = 13;
+                    for (let i = 0; i < NL; i++) {
+                        const rel = (i / (NL - 1) - 0.5) * 2;        // −1 … 1
+                        const th = m.ang + rel * 2.55;
+                        const x0 = N.x + Math.cos(th) * 15, y0 = N.y + Math.sin(th) * 15;
+                        const pts = traceLine(x0, y0, poles, st.W, st.H);
+                        if (pts.length < 8) continue;
+                        st.lines.push(pts);
+                        const ai = arrowIndexFor(pts, m);
+                        const a = pts[ai], b = pts[Math.min(ai + 1, pts.length - 1)];
+                        st.arrows.push({ x: a[0], y: a[1], ang: Math.atan2(b[1] - a[1], b[0] - a[0]) });
+                    }
+                    st.linesDirty = false;
+                };
+
+                // ── Pekare: dra magnet eller provkompass ──
+                const pos = (e) => {
+                    const r = canvas.getBoundingClientRect();
+                    return [e.clientX - r.left, e.clientY - r.top];
+                };
+                const onDown = (e) => {
+                    if (pRef.current.mode !== '2d') return;
+                    const [x, y] = pos(e);
+                    const p = pRef.current;
+                    if (p.show.prov && Math.hypot(x - st.probe.x, y - st.probe.y) < 34) {
+                        st.drag = { what: 'probe', dx: st.probe.x - x, dy: st.probe.y - y };
+                    } else {
+                        const m = st.magnet;
+                        const c = Math.cos(m.ang), s = Math.sin(m.ang);
+                        const lx = (x - m.x) * c + (y - m.y) * s;
+                        const ly = -(x - m.x) * s + (y - m.y) * c;
+                        if (Math.abs(lx) < m.half + 10 && Math.abs(ly) < m.hw + 10)
+                            st.drag = { what: 'magnet', dx: m.x - x, dy: m.y - y };
+                    }
+                    if (st.drag) { canvas.setPointerCapture(e.pointerId); e.preventDefault(); }
+                };
+                const onMove = (e) => {
+                    if (!st.drag) return;
+                    const [x, y] = pos(e);
+                    if (st.drag.what === 'probe') {
+                        st.probe.x = Math.min(Math.max(x + st.drag.dx, 34), st.W - 34);
+                        st.probe.y = Math.min(Math.max(y + st.drag.dy, 34), st.H - 34);
+                    } else {
+                        st.magnet.x = Math.min(Math.max(x + st.drag.dx, 90), st.W - 90);
+                        st.magnet.y = Math.min(Math.max(y + st.drag.dy, 60), st.H - 60);
+                        st.linesDirty = true; st.filingsDirty = true;
+                    }
+                };
+                const onUp = (e) => {
+                    st.drag = null;
+                    try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+                };
+                canvas.addEventListener('pointerdown', onDown);
+                canvas.addEventListener('pointermove', onMove);
+                canvas.addEventListener('pointerup', onUp);
+                canvas.addEventListener('pointercancel', onUp);
+
+                const ro = new ResizeObserver(resize);
+                ro.observe(wrap);
+                resize();
+
+                // ── Ritfunktioner ──
+                const drawPaper = () => {
+                    const g = ctx.createLinearGradient(0, 0, 0, st.H);
+                    g.addColorStop(0, '#f7f2e8');
+                    g.addColorStop(1, '#ece3d2');
+                    ctx.fillStyle = g;
+                    ctx.fillRect(0, 0, st.W, st.H);
+                    ctx.strokeStyle = 'rgba(96,130,175,0.18)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    for (let x = 26; x < st.W; x += 26) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, st.H); }
+                    for (let y = 26; y < st.H; y += 26) { ctx.moveTo(0, y + 0.5); ctx.lineTo(st.W, y + 0.5); }
+                    ctx.stroke();
+                };
+
+                // Järnfilspånen ritas till en offscreen-canvas när fältet
+                // ändrats och blit:as sedan varje frame (billigare än ~2000
+                // streck per frame).
+                const drawFilingsTo = (c2, poles) => {
+                    // referens: fältstyrkan (∝ 1/r² per pol) 46 px från en pol
+                    const ref = 1 / (46 * 46 + 20);
+                    c2.lineCap = 'round';
+                    for (const f of st.filings) {
+                        const [bx, by] = fieldAt(f.x, f.y, poles);
+                        const b = Math.hypot(bx, by);
+                        const s = Math.min(1, b / ref);
+                        const alpha = 0.05 + 0.5 * Math.pow(s, 0.35);
+                        const L = 3.4 * f.j * (0.75 + 0.5 * Math.pow(s, 0.3));
+                        const nx = bx / (b || 1), ny = by / (b || 1);
+                        c2.strokeStyle = 'rgba(42,47,56,' + alpha.toFixed(3) + ')';
+                        c2.lineWidth = 1.25;
+                        c2.beginPath();
+                        c2.moveTo(f.x - nx * L, f.y - ny * L);
+                        c2.lineTo(f.x + nx * L, f.y + ny * L);
+                        c2.stroke();
+                    }
+                };
+
+                const drawLines = () => {
+                    ctx.strokeStyle = COL.falt;
+                    ctx.lineWidth = 1.7;
+                    ctx.lineJoin = 'round';
+                    for (const pts of st.lines) {
+                        ctx.beginPath();
+                        ctx.moveTo(pts[0][0], pts[0][1]);
+                        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+                        ctx.stroke();
+                    }
+                    for (const a of st.arrows) {
+                        ctx.save();
+                        ctx.translate(a.x, a.y);
+                        ctx.rotate(a.ang);
+                        ctx.fillStyle = COL.falt;
+                        ctx.beginPath();
+                        ctx.moveTo(6.5, 0);
+                        ctx.lineTo(-4.5, -4.6);
+                        ctx.lineTo(-4.5, 4.6);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                };
+
+                const needleShape = (r) => {
+                    // romb: spets framåt, spets bakåt — ritas i två halvor
+                    ctx.beginPath();
+                    ctx.moveTo(r, 0); ctx.lineTo(0, -r * 0.26); ctx.lineTo(0, r * 0.26);
+                    ctx.closePath();
+                };
+                const drawCompass = (x, y, ang, r, bezel) => {
+                    ctx.save();
+                    ctx.translate(x, y);
+                    // urtavla
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r, 0, 2 * Math.PI);
+                    ctx.fillStyle = bezel ? '#fdfaf3' : 'rgba(253,250,243,0.66)';
+                    ctx.fill();
+                    ctx.lineWidth = bezel ? 2.2 : 1;
+                    ctx.strokeStyle = bezel ? '#5d646e' : 'rgba(93,100,110,0.55)';
+                    ctx.stroke();
+                    if (bezel) {
+                        // väderstrecksmarkeringar
+                        ctx.strokeStyle = 'rgba(93,100,110,0.5)';
+                        ctx.lineWidth = 1.4;
+                        for (let k = 0; k < 8; k++) {
+                            const t = k * Math.PI / 4;
+                            const l = k % 2 === 0 ? 5 : 3;
+                            ctx.beginPath();
+                            ctx.moveTo(Math.cos(t) * (r - 2.5), Math.sin(t) * (r - 2.5));
+                            ctx.lineTo(Math.cos(t) * (r - 2.5 - l), Math.sin(t) * (r - 2.5 - l));
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.rotate(ang);
+                    // nordhalva (röd) pekar längs fältet
+                    ctx.fillStyle = COL.npol;
+                    needleShape(r * 0.82);
+                    ctx.fill();
+                    // sydhalva (mörkgrå — ljus halva vore osynlig mot pappret)
+                    ctx.rotate(Math.PI);
+                    ctx.fillStyle = COL.nal;
+                    needleShape(r * 0.82);
+                    ctx.fill();
+                    ctx.rotate(-Math.PI);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, bezel ? 2.6 : 1.6, 0, 2 * Math.PI);
+                    ctx.fillStyle = '#30363f';
+                    ctx.fill();
+                    ctx.restore();
+                };
+
+                const drawMagnet = () => {
+                    const m = st.magnet;
+                    ctx.save();
+                    ctx.translate(m.x, m.y);
+                    ctx.rotate(m.ang);
+                    // skugga
+                    ctx.fillStyle = 'rgba(15,22,32,0.14)';
+                    rr(-m.half + 2.5, -m.hw + 4, m.half * 2, m.hw * 2, 5);
+                    ctx.fill();
+                    // sydhalva (vit) och nordhalva (röd)
+                    ctx.fillStyle = COL.spol;
+                    rr(-m.half, -m.hw, m.half, m.hw * 2, 0);
+                    ctx.fill();
+                    ctx.fillStyle = COL.npol;
+                    rr(0, -m.hw, m.half, m.hw * 2, 0);
+                    ctx.fill();
+                    // svag glans upptill
+                    const gl = ctx.createLinearGradient(0, -m.hw, 0, m.hw);
+                    gl.addColorStop(0, 'rgba(255,255,255,0.34)');
+                    gl.addColorStop(0.45, 'rgba(255,255,255,0.05)');
+                    gl.addColorStop(1, 'rgba(15,22,32,0.13)');
+                    ctx.fillStyle = gl;
+                    rr(-m.half, -m.hw, m.half * 2, m.hw * 2, 0);
+                    ctx.fill();
+                    // kant
+                    ctx.strokeStyle = '#5d646e';
+                    ctx.lineWidth = 1.4;
+                    rr(-m.half, -m.hw, m.half * 2, m.hw * 2, 0);
+                    ctx.stroke();
+                    // bokstäver — hålls läsbara även när magneten är vänd
+                    const upright = Math.cos(m.ang) < 0;
+                    ctx.font = '600 21px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.save();
+                    ctx.translate(m.half / 2, 0);
+                    if (upright) ctx.rotate(Math.PI);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText('N', 0, 1.5);
+                    ctx.restore();
+                    ctx.save();
+                    ctx.translate(-m.half / 2, 0);
+                    if (upright) ctx.rotate(Math.PI);
+                    ctx.fillStyle = COL.spolText;
+                    ctx.fillText('S', 0, 1.5);
+                    ctx.restore();
+                    ctx.restore();
+                };
+                const rr = (x, y, w, h, r) => {
+                    ctx.beginPath();
+                    if (!r) { ctx.rect(x, y, w, h); return; }
+                    ctx.moveTo(x + r, y);
+                    ctx.arcTo(x + w, y, x + w, y + h, r);
+                    ctx.arcTo(x + w, y + h, x, y + h, r);
+                    ctx.arcTo(x, y + h, x, y, r);
+                    ctx.arcTo(x, y, x + w, y, r);
+                    ctx.closePath();
+                };
+
+                // ── Animationsloop ──
+                let raf, last = performance.now();
+                const offc = document.createElement('canvas');
+                const offctx = offc.getContext('2d');
+
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    if (pRef.current.mode !== '2d') { last = now; return; }
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    const m = st.magnet;
+
+                    // vändanimation
+                    if (st.angT < 1) {
+                        st.angT = Math.min(1, st.angT + dt / 0.5);
+                        const e = st.angT < 0.5 ? 2 * st.angT * st.angT : 1 - Math.pow(-2 * st.angT + 2, 2) / 2;
+                        m.ang = st.angFrom + (st.angTo - st.angFrom) * e;
+                        st.linesDirty = true; st.filingsDirty = true;
+                    }
+
+                    const poles = polesOf(m);
+                    if (st.linesDirty) rebuildField();
+
+                    // kompassnålarna svänger in sig (fjäder med dämpning)
+                    const settle = (n, r) => {
+                        const [bx, by] = fieldAt(n.x, n.y, poles);
+                        const target = Math.atan2(by, bx);
+                        let d = target - n.ang;
+                        while (d > Math.PI) d -= 2 * Math.PI;
+                        while (d < -Math.PI) d += 2 * Math.PI;
+                        n.w += (d * 130 - n.w * 11) * dt;
+                        n.ang += n.w * dt;
+                    };
+                    st.needles.forEach(settle);
+                    settle(st.probe);
+
+                    // ── rita ──
+                    ctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0);
+                    drawPaper();
+                    if (p.show.span) {
+                        if (st.filingsDirty || offc.width !== canvas.width || offc.height !== canvas.height) {
+                            offc.width = canvas.width; offc.height = canvas.height;
+                            offctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0);
+                            offctx.clearRect(0, 0, st.W, st.H);
+                            drawFilingsTo(offctx, poles);
+                            st.filingsDirty = false;
+                        }
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        ctx.drawImage(offc, 0, 0);
+                        ctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0);
+                    }
+                    if (p.show.linjer) drawLines();
+                    if (p.show.kompass) {
+                        for (const n of st.needles) {
+                            // göm nålar under magneten
+                            const c = Math.cos(m.ang), s = Math.sin(m.ang);
+                            const lx = (n.x - m.x) * c + (n.y - m.y) * s;
+                            const ly = -(n.x - m.x) * s + (n.y - m.y) * c;
+                            if (Math.abs(lx) < m.half + 16 && Math.abs(ly) < m.hw + 16) continue;
+                            if (p.show.prov && Math.hypot(n.x - st.probe.x, n.y - st.probe.y) < 44) continue;
+                            drawCompass(n.x, n.y, n.ang, 10, false);
+                        }
+                    }
+                    drawMagnet();
+                    if (p.show.prov) drawCompass(st.probe.x, st.probe.y, st.probe.ang, 26, true);
+
+                    // avläsning: fältstyrkan vid provkompassen (throttlad)
+                    if (now - st.lastInfo > 140) {
+                        st.lastInfo = now;
+                        const [bx, by] = fieldAt(st.probe.x, st.probe.y, poles);
+                        const b = Math.hypot(bx, by);
+                        // skala: fältet 30 px från en pol = "mycket starkt",
+                        // fältet 560 px bort = "svagt" (1/r² per pol)
+                        const bMax = 1 / (30 * 30 + 20);
+                        const bMin = 1 / (560 * 560 + 20);
+                        let t = (Math.log(b) - Math.log(bMin)) / (Math.log(bMax) - Math.log(bMin));
+                        t = Math.min(1, Math.max(0, t));
+                        const pct = Math.round(t * 100);
+                        const ord = t > 0.78 ? 'mycket starkt' : t > 0.55 ? 'starkt' : t > 0.32 ? 'måttligt' : 'svagt';
+                        setStyrka((old) => (old.pct === pct ? old : { pct, ord }));
+                    }
+                };
+                raf = requestAnimationFrame(loop);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect();
+                    canvas.removeEventListener('pointerdown', onDown);
+                    canvas.removeEventListener('pointermove', onMove);
+                    canvas.removeEventListener('pointerup', onUp);
+                    canvas.removeEventListener('pointercancel', onUp);
+                    stRef.current = null;
+                };
+            }, []);
+
+            // typsnitt klart → rita om bokstäverna på magneten
+            useEffect(() => {
+                const st = stRef.current;
+                if (st) { st.linesDirty = true; st.filingsDirty = true; }
+            }, [fontsReady]);
+
+            // ── 3D-scenen ───────────────────────────────────────────────
+            const [flip3d, setFlip3d] = useState(0);   // räknare: triggar ombyggnad
+            useEffect(() => {
+                const wrap = sceneWrapRef.current;
+                if (!wrap || !window.THREE) return;
+
+                // Saknar enheten WebGL ska 2D-läget ändå fungera
+                let renderer;
+                try {
+                    renderer = new THREE.WebGLRenderer({ antialias: true });
+                } catch (err) {
+                    return;
+                }
+                // Samma höjdlogik som 2D-canvasen (in-flöde + mobildockning)
+                const sceneH3 = () => {
+                    const narrow = window.matchMedia('(max-width: 600px)').matches;
+                    const fs = document.fullscreenElement === wrap ||
+                               document.webkitFullscreenElement === wrap;
+                    if (fs) return narrow ? Math.round(window.innerHeight * 0.54) : wrap.clientHeight;
+                    if (narrow) return Math.min(Math.round(wrap.clientWidth * 0.9), 430);
+                    return wrap.clientHeight;
+                };
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(wrap.clientWidth, sceneH3());
+                renderer.domElement.style.cursor = 'grab';
+                wrap.insertBefore(renderer.domElement, wrap.firstChild);
+
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xf3eee4);
+                const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+                scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+                const key = new THREE.DirectionalLight(0xffffff, 0.85);
+                key.position.set(4, 6, 5);
+                scene.add(key);
+                const fill = new THREE.DirectionalLight(0xffe9d0, 0.25);
+                fill.position.set(-5, -2, -4);
+                scene.add(fill);
+
+                const groups = { magnet: new THREE.Group(), falt: new THREE.Group(), poler: new THREE.Group() };
+                Object.values(groups).forEach((g) => scene.add(g));
+
+                const T = {
+                    renderer, scene, camera, groups, el: renderer.domElement,
+                    az: 0.55, pol: 1.18, radius: wrap.clientWidth < 600 ? 11.5 : 8.6,
+                };
+                threeRef.current = T;
+
+                const updateCam = () => {
+                    camera.position.set(
+                        T.radius * Math.sin(T.pol) * Math.sin(T.az),
+                        T.radius * Math.cos(T.pol),
+                        T.radius * Math.sin(T.pol) * Math.cos(T.az)
+                    );
+                    camera.lookAt(0, 0, 0);
+                };
+                updateCam();
+
+                const el = renderer.domElement;
+                let dragging = false, px = 0, py = 0;
+                const onDown = (e) => { dragging = true; px = e.clientX; py = e.clientY; el.setPointerCapture(e.pointerId); };
+                const onMove = (e) => {
+                    if (!dragging) return;
+                    T.az -= (e.clientX - px) * 0.006;
+                    T.pol = Math.max(0.15, Math.min(Math.PI - 0.15, T.pol - (e.clientY - py) * 0.006));
+                    px = e.clientX; py = e.clientY;
+                    updateCam();
+                };
+                const onUp = (e) => { dragging = false; try { el.releasePointerCapture(e.pointerId); } catch (err) {} };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    T.radius = Math.max(3.5, Math.min(15, T.radius * (1 + e.deltaY * 0.001)));
+                    updateCam();
+                };
+                el.addEventListener('pointerdown', onDown);
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerup', onUp);
+                el.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+
+                const ro = new ResizeObserver(() => {
+                    const w = wrap.clientWidth, h = sceneH3();
+                    if (!w || !h) return;
+                    renderer.setSize(w, h);
+                    camera.aspect = w / h;
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(wrap);
+
+                let raf;
+                const loop = () => {
+                    raf = requestAnimationFrame(loop);
+                    if (pRef.current.mode !== '3d') return;
+                    renderer.render(scene, camera);
+                };
+                raf = requestAnimationFrame(loop);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    el.removeEventListener('pointermove', onMove);
+                    el.removeEventListener('pointerup', onUp);
+                    el.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    Object.values(groups).forEach(disposeGroup);
+                    renderer.dispose();
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                    threeRef.current = null;
+                };
+            }, []);
+
+            // magnetens riktning i 3D följer 2D-magnetens vändningar
+            const flipDirRef = useRef(1);
+
+            // ── Bygg magnet + fält i 3D ──
+            useEffect(() => {
+                const T = threeRef.current;
+                if (!T) return;
+                const { magnet, falt, poler } = T.groups;
+                Object.values(T.groups).forEach(disposeGroup);
+
+                const d = flipDirRef.current;             // +1: N åt +x
+                const HL = 1.2, HW = 0.42;                // halvlängd, halvtjocklek
+                const a = 0.92;                            // polernas läge på axeln
+
+                // ── Magnetkroppen: röd nordhalva + vit sydhalva ──
+                const mkHalf = (color, xc) => {
+                    const mesh = new THREE.Mesh(
+                        new THREE.BoxGeometry(HL, HW * 2, HW * 2),
+                        new THREE.MeshStandardMaterial({ color, roughness: 0.45, metalness: 0.08 })
+                    );
+                    mesh.position.set(xc, 0, 0);
+                    return mesh;
+                };
+                magnet.add(mkHalf(0xc0392b, d * HL / 2));
+                magnet.add(mkHalf(0xe8eaee, -d * HL / 2));
+                // tunn mörk skiljelinje på mitten
+                const seam = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.02, HW * 2 + 0.01, HW * 2 + 0.01),
+                    new THREE.MeshStandardMaterial({ color: 0x5d646e, roughness: 0.8 })
+                );
+                magnet.add(seam);
+
+                // ── Pol-etiketter (N rött, S vitt med tunn svart kontur) ──
+                const nSpr = textSprite([{ t: 'N', weight: 700, color: COL.npol }], 0.6);
+                nSpr.position.set(d * (HL + 0.55), 0.42, 0.3);
+                const sSpr = textSprite([{ t: 'S', weight: 700, color: '#ffffff', stroke: '#0f1620', strokeWidth: 4.6 }], 0.6);
+                sSpr.position.set(-d * (HL + 0.55), 0.42, -0.3);
+                poler.add(nSpr, sSpr);
+
+                // ── Fältlinjer: dipolspår roterade ut i sex halvplan ──
+                const faltMat = new THREE.MeshStandardMaterial({ color: COL.falt, roughness: 0.7 });
+                const phis = [0, 1, 2, 3, 4, 5].map((k) => k * Math.PI / 3);
+                const rTube = 0.024;
+                [1.35, 2.3].forEach((rho0) => {
+                    // stopp-radien 0,12 ligger INNANFÖR magnetkroppen, så att
+                    // linjeändarna göms i kroppen i stället för att sluta i
+                    // luften strax utanför polytan
+                    const base = traceDipole3D(a, rho0, 0.12);
+                    phis.forEach((phi) => {
+                        const u = new THREE.Vector3(0, Math.cos(phi), Math.sin(phi));
+                        const p3 = base.map(([bx, br]) =>
+                            new THREE.Vector3(d * bx, 0, 0).addScaledVector(u, br));
+                        const curve = new THREE.CatmullRomCurve3(p3, false);
+                        falt.add(new THREE.Mesh(
+                            new THREE.TubeGeometry(curve, Math.min(240, p3.length + 8), rTube, 8, false),
+                            faltMat));
+                        // pilspets MITT PÅ linjen — i ekvatorsplanet, riktning N → S
+                        falt.add(cone3(new THREE.Vector3(-d, 0, 0),
+                            u.clone().multiplyScalar(rho0), 0.2, 0.065, COL.falt));
+                    });
+                });
+
+                // mittlinjen längs axeln: "oändlig" (fältet tar inte slut vid
+                // bildkanten) med pilspetsar mitt på linjen utanför magneten
+                const AXH = 30;
+                const axis = new THREE.Mesh(new THREE.CylinderGeometry(rTube, rTube, 2 * AXH, 10), faltMat);
+                axis.rotation.z = Math.PI / 2;
+                falt.add(axis);
+                [3.0, -3.0, 5.6, -5.6].forEach((ax) => {
+                    falt.add(cone3(new THREE.Vector3(d, 0, 0), new THREE.Vector3(ax, 0, 0), 0.22, 0.07, COL.falt));
+                });
+            }, [flip3d, fontsReady]);
+
+            // ── Visa/dölj i 3D ──
+            useEffect(() => {
+                const T = threeRef.current;
+                if (!T) return;
+                T.groups.falt.visible = show.linjer;
+                T.groups.poler.visible = show.poler;
+            }, [show, flip3d, fontsReady]);
+
+            // ── Vänd magneten (båda vyerna) ──
+            const flipMagnet = () => {
+                const st = stRef.current;
+                if (st && st.angT >= 1) {
+                    st.angFrom = st.magnet.ang;
+                    st.angTo = st.magnet.ang + Math.PI;
+                    st.angT = 0;
+                }
+                flipDirRef.current = -flipDirRef.current;
+                setFlip3d((f) => f + 1);
+            };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow((sh) => ({ ...sh, [key]: !sh[key] }));
+
+            // dölj 3D-canvasen i 2D-läget (och tvärtom)
+            useEffect(() => {
+                const T = threeRef.current;
+                const c2 = canvasRef.current;
+                if (T) T.el.style.display = mode === '3d' ? 'block' : 'none';
+                if (c2) c2.style.display = mode === '2d' ? 'block' : 'none';
+                if (mode === '2d') {
+                    const st = stRef.current;
+                    if (st) { st.linesDirty = true; st.filingsDirty = true; }
+                }
+            }, [mode]);
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Stavmagnetens magnetfält
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Stavmagnetens magnetfält</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Kraftfältet runt en magnet kallas <strong>magnetfält</strong>, och det ritas med
+                            <strong> fältlinjer</strong> som går ut ur <strong>nordändan</strong> och in i
+                            <strong> sydändan</strong>. I <strong>2D-läget</strong> ligger magneten på en platta med
+                            kompassnålar — dra magneten över plattan och se varje nål svänga in sig i fältets
+                            riktning, strö järnfilspån över fältet och flytta provkompassen dit du vill mäta.
+                            I <strong>3D-läget</strong> roterar du fritt runt magneten och ser att fältet inte är
+                            en platt figur utan finns i hela rummet. Vänd magneten och se hela fältbilden slå om.
+                        </p>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <canvas ref={canvasRef} />
+
+                                    {mode === '2d' && (
+                                        <div className="scene-info">
+                                            <span className="si-lbl">Fältet vid provkompassen</span>
+                                            <div className="si-bar"><div style={{ width: styrka.pct + '%' }} /></div>
+                                            <span className="si-val">{styrka.ord}</span>
+                                        </div>
+                                    )}
+
+                                    <div className="scene-hint">
+                                        {mode === '2d'
+                                            ? 'Dra i magneten och i provkompassen'
+                                            : 'Dra för att rotera — scrolla för att zooma'}
+                                    </div>
+
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Vy</div>
+                                        <div className="st-mode">
+                                            <button className={`btn-toggle btn-mini ${mode === '2d' ? 'active' : ''}`}
+                                                    onClick={() => setMode('2d')}>2D — platta</button>
+                                            <button className={`btn-toggle btn-mini ${mode === '3d' ? 'active' : ''}`}
+                                                    onClick={() => setMode('3d')}>3D — rummet</button>
+                                        </div>
+                                        <div className="st-title">Visa</div>
+                                        <label><input type="checkbox" checked={show.linjer} onChange={() => tShow('linjer')} />
+                                            <span className="st-swatch" style={{ background: COL.falt }}></span>
+                                            <span>Fältlinjer</span></label>
+                                        {mode === '2d' && (
+                                            <React.Fragment>
+                                                <label><input type="checkbox" checked={show.kompass} onChange={() => tShow('kompass')} />
+                                                    <span className="st-swatch" style={{ background: COL.nal }}></span>
+                                                    <span>Kompassnålar</span></label>
+                                                <label><input type="checkbox" checked={show.span} onChange={() => tShow('span')} />
+                                                    <span className="st-swatch" style={{ background: 'rgba(42,47,56,0.55)' }}></span>
+                                                    <span>Järnfilspån</span></label>
+                                                <label><input type="checkbox" checked={show.prov} onChange={() => tShow('prov')} />
+                                                    <span className="st-swatch" style={{ background: '#fdfaf3', border: '1px solid #5d646e' }}></span>
+                                                    <span>Provkompass</span></label>
+                                            </React.Fragment>
+                                        )}
+                                        {mode === '3d' && (
+                                            <label><input type="checkbox" checked={show.poler} onChange={() => tShow('poler')} />
+                                                <span className="st-swatch" style={{ background: COL.npol }}></span>
+                                                <span>Polerna (N och S)</span></label>
+                                        )}
+                                        <div className="st-actions">
+                                            <button className="btn-toggle" onClick={flipMagnet}>Vänd magneten</button>
+                                        </div>
+                                    </div>
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Sidopanel */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-4 mb-3">
+                                    <div className="flbl mb-2">Utforska</div>
+                                    <ul className="space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <li><strong>Dra magneten</strong> över plattan — kompassnålarna svänger in sig
+                                            i fältets riktning, precis som i demonstrationen i genomgången.</li>
+                                        <li><strong>Flytta provkompassen</strong> runt magneten och läs av hur fältet
+                                            blir svagare ju längre bort från polerna den står.</li>
+                                        <li><strong>Vänd magneten</strong> och se varje nål slå om — fältets riktning
+                                            definieras av åt vilket håll kompassens nordända pekar.</li>
+                                        <li><strong>Slå på järnfilspånen</strong> och jämför mönstret med fältlinjerna
+                                            — spånen blir små kompassnålar som lägger sig längs fältet.</li>
+                                        <li><strong>Byt till 3D</strong> och rotera runt magneten: fältet finns i hela
+                                            rummet, inte bara i pappersplanet.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-4 mb-3">
+                                    <div className="flbl mb-2">Fältlinjernas spelregler</div>
+                                    <ul className="space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <li>Fältlinjerna går <strong>ut ur nordändan</strong> och <strong>in i sydändan</strong>.</li>
+                                        <li><strong>Ju tätare fältlinjer, desto kraftigare magnetfält</strong> — tätast
+                                            är de närmast polerna.</li>
+                                        <li>Fältlinjer <strong>korsar aldrig varandra</strong> — i varje punkt har
+                                            fältet en enda riktning.</li>
+                                        <li>En liten kompass i fältet ställer sin <strong>nordända längs fältets
+                                            riktning</strong> — det är så riktningen definieras.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kompassen definierar riktningen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Placeras en liten kompass i magnetfältet definieras fältets riktning som den
+                                    riktning kompassens nordända pekar åt. Rutnätet av kompassnålar i 2D-läget är
+                                    just demonstrationen ur genomgången: en stavmagnet på en platta med kompassnålar,
+                                    där nålarna tillsammans ritar upp fältbilden.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Fältet finns i hela rummet</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    På papperet ritas fältet som en platt figur, men magnetfältet finns runt om
+                                    magneten åt alla håll — det ser du i 3D-läget, där samma fältlinjebild går igen
+                                    i varje plan genom magnetens axel. Det motsvarar demonstrationen med järnfilspån
+                                    i en trögflytande vätska, som visar fältet i tre dimensioner.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Poler uppträder alltid parvis</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Nordpolen är markerad röd och sydpolen vit. Delas en stavmagnet på mitten fås
+                                    inte en ensam nordpol och en ensam sydpol — utan två nya, kortare magneter med
+                                    var sitt polpar. Det går aldrig att skapa en magnet med endast en pol.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Fältlinjerna är verkliga trådar."</strong> Nej — de är ett sätt att rita fältet. Fältet finns i varje punkt runt magneten; linjerna visar riktningen, och tätheten mellan dem visar styrkan.</li>
+                                <li><strong>"Fältet tar slut där linjerna slutar i bilden."</strong> Nej — fältet fortsätter utåt och blir bara svagare och svagare. Flytta provkompassen långt bort: nålen ställer fortfarande in sig, fast fältet är svagt.</li>
+                                <li><strong>"En pilspets i linjens ände visar var fältet slutar."</strong> Pilarna sitter mitt på linjerna och visar bara fältets riktning — utanför magneten från nordända till sydända.</li>
+                                <li><strong>"Bara magnetens ändar har ett fält."</strong> Fältet finns överallt runt magneten, men det är starkast vid polerna — där är fältlinjerna som tätast.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

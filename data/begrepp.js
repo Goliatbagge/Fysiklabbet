@@ -205,6 +205,54 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'bose-einstein-kondensat',
+    term: 'Bose–Einstein-kondensat',
+    former: ['bose–einstein-kondensat', 'bose-einstein-kondensat', 'bose–einstein-kondensatet', 'bose-einstein-kondensatet', 'bose–einstein-kondensaten', 'bose-einstein-kondensaten', 'kondensat', 'kondensatet', 'kondensaten', 'rubidiumkondensat', 'rubidiumkondensatet', 'rubidiumkondensaten', 'kaliumkondensat', 'kaliumkondensatet', 'atomkondensat'],
+    kort: 'Den kallaste form av materia som går att tillverka: en gas där alla atomer har fallit ner i samma kvanttillstånd och tillsammans beter sig som en enda gemensam våg.',
+    relaterade: ['absoluta-nollpunkten', 'boson', 'superfluid', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'I en vanlig gas far atomerna omkring huller om buller, var och en med sin egen fart och sin egen riktning. Ju kallare gasen blir, desto trögare rör de sig — och kyler man tillräckligt hårt händer något som inte har någon motsvarighet i vardagen: atomerna slutar vara enskilda partiklar. I stället samlas de allihop i det lägsta energitillstånd som finns, och hela molnet beskrivs av en enda gemensam kvantvåg. Det är ett Bose–Einstein-kondensat, ibland kallat materiens femte aggregationstillstånd vid sidan av fast, flytande, gas och plasma.' },
+      { type: 'p', html: 'Att det över huvud taget är möjligt beror på vilken sorts partiklar atomerna är. Naturens partiklar delas i två familjer: fermioner, som vägrar dela tillstånd med varandra, och bosoner, som tvärtom gärna gör det. Atomer med ett jämnt totalt antal byggstenar räknas som bosoner, och det är bara sådana som kan kondensera. Fenomenet förutsades av Satyendra Nath Bose och Albert Einstein 1924–1925, men först 1995 lyckades någon framställa det i ett laboratorium — med hjälp av laserkylning och magnetfällor, som tillsammans kan pressa ner ett litet gasmoln till några miljarddels grader över den absoluta nollpunkten. Upptäckten gav Nobelpriset i fysik 2001.' },
+      { type: 'p', html: 'Ett kondensat är kallare än någon plats som finns naturligt i universum, och just därför användbart. Eftersom alla atomer svänger i takt fungerar molnet som en materievåg som går att dela i två delar, skicka olika vägar och sedan lägga ihop igen — samma trick som med ljus i en interferometer, fast med atomer som har massa och därför känner av tyngdkraften. Sådana mätningar hör i dag till de känsligaste som finns för acceleration, rotation och små skillnader i gravitationen.' }
+    ]
+  },
+  {
+    id: 'boson',
+    term: 'Boson',
+    former: ['boson', 'bosonen', 'bosoner', 'bosonerna'],
+    kort: 'En partikel av den familj som gärna samsas i samma kvanttillstånd — motsatsen till fermionerna, som aldrig kan dela tillstånd med varandra.',
+    relaterade: ['spinn', 'higgsbosonen', 'bose-einstein-kondensat', 'foton'],
+    body: [
+      { type: 'p', html: 'Alla partiklar i naturen tillhör en av två familjer, och gränsen mellan dem dras av en egenskap som kallas spinn — ett slags inbyggd rotation som bara kan ha bestämda värden. Partiklar med halvtaligt spinn kallas fermioner: elektroner, protoner och neutroner hör dit. Partiklar med heltaligt spinn kallas bosoner, och dit hör bland annat ljuspartikeln fotonen.' },
+      { type: 'p', html: 'Skillnaden i beteende är dramatisk. Två fermioner kan aldrig befinna sig i exakt samma tillstånd samtidigt — det är därför elektronerna i en atom tvingas fördela sig på olika skal i stället för att alla lägga sig innerst, och i förlängningen därför materia tar plats. Bosoner har ingen sådan spärr. Tvärtom blir det mer sannolikt att en boson hamnar i ett visst tillstånd ju fler som redan finns där. Laserns skarpa stråle bygger på just den flockningen: alla fotoner marscherar i takt.' },
+      { type: 'p', html: 'Sammansatta objekt räknas efter hur många byggstenar de innehåller. En atom med jämnt totalt antal protoner, neutroner och elektroner beter sig utåt som en boson, och kan därför bilda ett Bose–Einstein-kondensat om den kyls tillräckligt. Med udda antal blir atomen i stället en fermion och vägrar — sådana gaser måste kylas på helt andra sätt, och beter sig då som elektronerna i en metall snarare än som ljus i en laser.' }
+    ]
+  },
+  {
+    id: 'ekvivalensprincipen',
+    term: 'Ekvivalensprincipen',
+    former: ['ekvivalensprincipen', 'ekvivalensprincip', 'ekvivalensprinciper', 'ekvivalensprincipsförsök'],
+    kort: 'Påståendet att den massa som gör ett föremål trögt att sätta i rörelse är exakt samma massa som gör det tungt — och därför faller allting lika fort.',
+    relaterade: ['relativitetsteori'],
+    body: [
+      { type: 'p', html: 'Massa dyker upp på två helt olika ställen i fysiken. Dels bestämmer den hur trögt ett föremål är: ju större massa, desto mer kraft krävs för att ändra dess rörelse. Dels bestämmer den hur hårt jorden drar i föremålet. Det finns ingen självklar anledning till att de två talen skulle vara samma sak — men de är det, och det är innebörden av ekvivalensprincipen.' },
+      { type: 'p', html: 'Följden är den observation som brukar tillskrivas Galileo Galilei: släpper man två föremål samtidigt landar de samtidigt, hur olika de än är, så länge luftmotståndet inte lägger sig i. En tung sten dras visserligen hårdare av jorden, men den är i exakt samma grad trögare att sätta i rörelse, och de två effekterna tar ut varandra. Den mest sedda demonstrationen gjordes 1971 på månen, där en hammare och en fjäder släpptes framför en tv-kamera och landade i samma ögonblick.' },
+      { type: 'p', html: 'Albert Einstein tog principen ett steg längre och gjorde den till grunden för den allmänna relativitetsteorin: eftersom allt faller lika fort går det inte att med något experiment inne i en sluten hiss avgöra om hissen står stilla i ett gravitationsfält eller accelererar ute i rymden. Skulle det någon gång visa sig att två ämnen faller olika fort, om än med en obetydlighet, skulle det peka mot en okänd kraft — och därför mäts saken om och om igen, med allt bättre metoder. Hittills har principen hållit i varje test.' }
+    ]
+  },
+  {
+    id: 'atominterferometri',
+    term: 'Atominterferometri',
+    former: ['atominterferometri', 'atominterferometrin', 'atominterferometer', 'atominterferometern', 'atominterferometrar', 'atominterferometrarna', 'materievåg', 'materievågen', 'materievågor', 'materievågorna'],
+    kort: 'En mätmetod där ett moln av atomer behandlas som en våg: den delas i två delar som går olika vägar och läggs ihop igen, och mönstret som uppstår avslöjar minsta skillnad mellan vägarna.',
+    relaterade: ['interferens', 'bose-einstein-kondensat', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Kvantfysikens kanske mest överraskande besked är att materia beter sig som vågor. En atom som rör sig har en våglängd, precis som ljus, och kan därför göra allt som vågor gör: böja av runt hinder, mötas och förstärka varandra, eller mötas och släcka ut varandra. Våglängden är visserligen försvinnande liten för vardagliga föremål, men för en atom som kylts nästan till stillastående blir den fullt mätbar.' },
+      { type: 'p', html: 'En atominterferometer utnyttjar detta. I stället för halvgenomskinliga speglar används korta laserpulser, som delar atommolnet så att det tar två vägar samtidigt — en aning högre upp och en aning längre ner, eller åt två håll. En stund senare förs delarna ihop igen. Har de två vägarna varit exakt likvärdiga hamnar atomerna i ett bestämt tillstånd; har den ena vägen varit det allra minsta annorlunda syns det direkt som en förskjutning i mönstret.' },
+      { type: 'p', html: 'Eftersom atomer har massa känner de av tyngdkraften, och det gör metoden extremt känslig för acceleration. Med atominterferometrar mäts i dag tyngdaccelerationen med många decimalers noggrannhet, och de används för att kartlägga berggrund, hitta hålrum under mark och navigera utan satellitsignal. Noggrannheten växer snabbt med hur länge atomerna hinner falla fritt — vilket är skälet till att sådana instrument gärna vill upp i tyngdlöshet, där fallet aldrig tar slut.' }
+    ]
+  },
+  {
     id: 'altermagnetism',
     term: 'Altermagnetism',
     former: ['altermagnetism', 'altermagnetismen', 'altermagnet', 'altermagneter', 'altermagneterna', 'altermagnetisk', 'altermagnetiskt', 'altermagnetiska'],
@@ -612,7 +660,7 @@ window.BEGREPP = [
 {
     id: 'laser',
     term: 'Laser',
-    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar'],
+    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar'],
     kort: 'En ljuskälla som skickar ut en smal, skarpt riktad stråle där alla ljusvågor har samma våglängd och svänger i takt. Namnet är en förkortning av engelskans light amplification by stimulated emission of radiation.',
     relaterade: ['foton', 'exciterat-tillstand', 'optisk-fiber'],
     body: [
@@ -709,9 +757,9 @@ window.BEGREPP = [
   {
     id: 'standardmodellen',
     term: 'Standardmodellen',
-    former: ['standardmodellen', 'standardmodell', 'kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'lepton', 'leptonen', 'leptoner', 'leptonerna', 'gluon', 'gluonen', 'gluoner', 'gluonerna', 'boson', 'bosonen', 'bosoner', 'bosonerna', 'fermion', 'fermioner', 'fermionerna', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna', 'nedkvark', 'nedkvarkar', 'uppkvark', 'uppkvarkar', 'pentakvark', 'pentakvarkar'],
+    former: ['standardmodellen', 'standardmodell', 'kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'lepton', 'leptonen', 'leptoner', 'leptonerna', 'gluon', 'gluonen', 'gluoner', 'gluonerna', 'fermion', 'fermioner', 'fermionerna', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna', 'nedkvark', 'nedkvarkar', 'uppkvark', 'uppkvarkar', 'pentakvark', 'pentakvarkar'],
     kort: 'Partikelfysikens grundkarta: en lista över materiens minsta byggstenar och de partiklar som förmedlar krafterna mellan dem. Den beskriver tre av naturens fyra krafter — gravitationen står utanför.',
-    relaterade: ['higgsbosonen', 'neutrino', 'partikelaccelerator'],
+    relaterade: ['higgsbosonen', 'boson', 'neutrino', 'partikelaccelerator'],
     body: [
       { type: 'p', html: 'Allt du kan ta på består av atomer, atomerna av elektroner och atomkärnor, och kärnorna av protoner och neutroner. Där tog uppdelningen slut länge — men protoner och neutroner visade sig i sin tur bestå av kvarkar. Standardmodellen är listan där allt detta samlas: tolv materiepartiklar, nämligen sex kvarkar (upp, ner, sär, charm, botten och topp) och sex leptoner (elektronen, myonen, tauonen och deras tre neutriner). De är ordnade i tre generationer, där varje generation är en tyngre kopia av den föregående. Vanlig materia klarar sig med den lättaste: uppkvark, nedkvark och elektron. De tyngre släktingarna sönderfaller nästan omedelbart.' },
       { type: 'p', html: 'Till detta kommer krafternas budbärare. Elektromagnetismen förmedlas av fotonen, den starka kraften som håller ihop atomkärnan av gluoner, och den svaga kraften — den som driver vissa radioaktiva sönderfall — av W- och Z-partiklarna. Sist i uppställningen står higgsbosonen, som hör ihop med det fält som ger de övriga partiklarna massa. Varje materiepartikel har dessutom en antipartikel med motsatt laddning.' },

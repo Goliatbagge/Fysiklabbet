@@ -51,6 +51,88 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-06-kvantlabb-i-fritt-fall",
+    date: "2026-08-06",
+    title: "Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen",
+    deck: "Rubidium och kalium, nedkylda till några hundra miljarddels grader över absoluta nollpunkten, ska falla exakt lika fort. Problemet var att magnetfällan gav dem varsin liten skjuts på vägen ut. Lösningen blev att stänga av strömmarna i fel ordning — med åttio miljondels sekunders mellanrum.",
+    category: "Kvantfysik",
+    readingTime: "8 min",
+    image: "nyheter/bilder/2026-08-06-kvantlabb-i-fritt-fall.jpg",
+    imageAlt: "Överst en genomskärning av en röd raketkropp där hela nyttolasten syns inifrån: sektioner med batterier, laserelektronik, lasersystem, en inramad fysikmodul, strömdrivare och en ombordsdator. Nederst en detaljerad ritning av fysikmodulen med magnetskärm, ugnar, källkammare, vetenskapskammare, atomchip och pumpsystem, samt tre små skisser som visar hur modulen kan vridas i förhållande till tyngdkraftens riktning.",
+    imageCredit: "Figur: B. Piest m.fl., Nature Communications (2026), CC BY 4.0",
+    tags: ["kvantfysik", "bose-einstein-kondensat", "ultrakalla atomer", "fritt fall", "ekvivalensprincipen", "tyngdlöshet", "laserkylning", "magnetfält", "rymdfysik", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Johannes Gutenberg-universitetet Mainz (pressmeddelande)", url: "https://press.uni-mainz.de/high-precision-laser-system-enables-record-flux-of-quantum-gas-mixtures/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-08-miniaturized-laser-technology-paves-fundamental.html" },
+      { name: "Scientific Frontline", url: "https://www.sflorg.com/2026/08/qs08052601.html" },
+      { name: "Einstein-Elevator, Leibniz-universitetet Hannover (HITec)", url: "https://www.hitec.uni-hannover.de/en/large-scale-equipment/einstein-elevator" },
+      { name: "Swedish Space Corporation om raketstarten från Esrange", url: "https://sscspace.com/universes-coldest-particles-from-esrange-rocket-maius/" }
+    ],
+    research: {
+      citation: "Baptist Piest m.fl., ”Apparatus for quantum-mixture research in microgravity”, Nature Communications (28 juli 2026)",
+      url: "https://doi.org/10.1038/s41467-026-75968-9"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 2.4 Acceleration och fritt fall", href: "katalog.html#fy1-2.4" },
+        { label: "Fysik nivå 1 · 3.2 Newtons andra lag", href: "katalog.html#fy1-3.2" },
+        { label: "Fysik nivå 2 · 4.6 Våg-partikeldualitet och de Broglies hypotes", href: "katalog.html#fy2-4.6" }
+      ],
+      fragor: [
+        "Att alla föremål faller lika fort har testats i fyrahundra år, och varje gång har det stämt. Ändå bygger forskare allt dyrare apparater för att mäta samma sak en gång till. Vad är det egentligen man hoppas hitta — och vad skulle det betyda om en mätning en dag inte stämde?",
+        "Störningen i experimentet ser exakt likadan ut som det man letar efter: två atomsorter som får olika hastighet. Hur kan man då veta vilket som är vilket? Vad är det i forskarnas metod som skiljer den kända störningen från en okänd effekt?",
+        "Ett falltorn ger fyra sekunder tyngdlöshet, en sondraket nästan sex minuter och rymdstationen i princip hur länge som helst — men i den ordningen växer också kostnaden och risken enormt. Vilka frågor är värda ett raketskott, och vilka går att svara på i ett torn?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Ett fyrtio meter högt betongtorn på Leibniz-universitetets område i Hannover ser inte mycket ut för världen. Inuti skjuts en gondol uppåt av linjärmotorer av samma slag som driver berg-och-dalbanor, släpps fri och faller. Under fyra sekunder är allt ombord tyngdlöst, med en kvarvarande acceleration mindre än en miljondel av tyngdaccelerationen. Sedan fångas gondolen upp, sänks ner och gör om det — upp till 300 gånger på ett dygn." },
+      { type: "p", html: "I gondolen låg vid ett av de falltillfällena ett komplett kvantlaboratorium, byggt för att sitta i en sondraket. Mitt i apparaten, inne i en vakuumkammare, svävade två moln av atomer: ungefär 20&nbsp;000 rubidiumatomer och lika många kaliumatomer, nedkylda till några hundra miljarddels grader över den absoluta nollpunkten." },
+      { type: "p", html: "Ett internationellt forskarlag lett från Leibniz-universitetet i Hannover rapporterar i tidskriften <em>Nature Communications</em> att apparaten tillverkar sådana blandningar snabbare än någon jämförbar utrustning tidigare. Minst lika viktigt är det andra resultatet: laget har fått bukt med en systematisk störning som annars hotar att förstöra hela poängen med experimentet." },
+
+      { type: "h2", text: "Materia som blir en enda våg" },
+      { type: "p", html: "Ett Bose–Einstein-kondensat är den kallaste form av materia som går att tillverka. Kyler man en gas av rätt sorts atomer tillräckligt hårt slutar de bete sig som enskilda partiklar. I stället faller de alla ner i samma, lägsta kvanttillstånd och beskrivs av en enda gemensam våg — tiotusentals atomer som svänger i takt, ungefär som ljuspartiklarna i en laserstråle." },
+      { type: "p", html: "Tillståndet förutsades av Satyendra Nath Bose och Albert Einstein redan 1924–1925, men det dröjde till 1995 innan någon lyckades framställa det i ett laboratorium — en bedrift som belönades med Nobelpriset i fysik 2001. Det som gör kondensat användbara utanför den rena grundforskningen är att de är materievågor: de kan delas i två delar, skickas olika vägar och sedan läggas ihop igen, precis som ljus i en interferometer. Och en materievåg känner av tyngdkraften." },
+
+      { type: "h2", text: "Sju lasrar, ett atomchip och 2,3 sekunder" },
+      { type: "p", html: "Apparaten heter MAIUS-B och är i praktiken ett fysiklaboratorium hoppressat till en raketkropp. Atomerna kommer från två små ugnar och fångas först i en tvådimensionell magnetooptisk fälla, som skickar vidare en kall stråle av rubidium- och kaliumatomer till en andra kammare. Där hålls de av fyra laserstrålar, tre spolpar och ett så kallat atomchip — en trelagerskrets med guldledare, ungefär tre gånger tre centimeter stor, vars magnetfält formar själva fällan." },
+      { type: "p", html: "Ljuset kommer från sju separata diodlasrar, inställda på 767,7&nbsp;nm för kalium-41 och 780,2&nbsp;nm för rubidium-87, och leds fram i optiska fibrer. Optikbänkarna, byggda vid Johannes Gutenberg-universitetet i Mainz tillsammans med Humboldt-universitetet i Berlin och Ferdinand-Braun-Institut, är tillverkade av glaskeramen Zerodur, ett material som knappt ändrar storlek när temperaturen växlar." },
+      { type: "quote", html: "”Vår uppgift var att utveckla de optiska gränssnitten mellan lasermodulerna och vakuumsystemet — de som krävs för att kyla och styra atomerna.”", cite: "André Wenzlawski, Johannes Gutenberg-universitetet Mainz" },
+      { type: "quote", html: "”Den stabiliteten är avgörande för att behålla den exakta kontrollen över atomerna även under de extrema mekaniska påfrestningarna vid en raketuppskjutning och vid växlande temperaturer.”", cite: "André Wenzlawski, Johannes Gutenberg-universitetet Mainz" },
+      { type: "p", html: "Kylningen sker i steg. Laserljuset bromsar först atomerna ner till 43&nbsp;miljondels kelvin för 26&nbsp;miljoner kaliumatomer och 10&nbsp;miljondels kelvin för 940&nbsp;miljoner rubidiumatomer. Sedan tar magnetfällan över, och under 1,7&nbsp;sekunder kokas de hetaste rubidiumatomerna bort med mikrovågor — samma princip som när kaffet i muggen svalnar av att ångan lämnar den. Kaliumatomerna kyls inte alls direkt; de kolliderar bara med rubidiumet och följer med nedåt i temperatur. Metoden kallas sympatisk kylning." },
+      { type: "p", html: "Resultatet är upp till 250&nbsp;000 atomer i ett rent rubidiumkondensat, eller ungefär 20&nbsp;000 atomer i vardera kondensatet när blandningen ställs in symmetriskt. Hela cykeln, från tom kammare till färdig blandning, tar 2,3&nbsp;sekunder. Det är den siffran som är nyheten: antalet atomer per beredningscykel — flödet — är omkring tio gånger högre än i andra kompakta och flyttbara uppställningar." },
+
+      { type: "h2", text: "Därför två sorters atomer" },
+      { type: "p", html: "Att alls bry sig om att göra två kondensat samtidigt har ett bestämt skäl. Ett föremåls tyngd är proportionell mot dess massa, $F_\\mathrm{G} = m \\cdot g$, medan accelerationen är kraften delad med massan, $a = \\dfrac{F}{m}$. Sätts det första in i det andra försvinner massan, och kvar blir bara $a = g$: allt faller lika fort, oavsett vad det väger och vad det är gjort av." },
+      { type: "p", html: "Einstein gjorde den observationen till en av hörnstenarna i den allmänna relativitetsteorin. Ekvivalensprincipen säger att den massa som gör ett föremål trögt att sätta i rörelse och den massa som gör det tungt är exakt samma sak. Skulle de skilja sig åt, om än med en obetydlighet, faller inte alla ämnen lika fort — och stora delar av den moderna fysiken skulle behöva skrivas om." },
+      { type: "p", html: "Testet består i att släppa två föremål av olika ämnen samtidigt och jämföra deras acceleration. Skillnaden brukar anges med Eötvösparametern, $\\eta = \\dfrac{2(a_1 - a_2)}{a_1 + a_2}$, som är noll om principen håller. Den skarpaste mätningen hittills gjordes av den franska satelliten MICROSCOPE, som 2022 kunde slå fast att $\\eta$ för titan och platina inte är större än ungefär 10<sup>−15</sup> — en miljondels miljarddel." },
+      { type: "p", html: "Nästa generation vill göra samma jämförelse med atomer i stället för metallcylindrar, och läsa av resultatet med atominterferometri. Då blir provmassorna två olika grundämnen, och mätnoggrannheten växer snabbt med hur länge atomerna hinner falla fritt. På ett laboratoriebord räcker fallet någon tiondels sekund. I tyngdlöshet finns ingen sådan gräns — vilket är hela skälet till att apparaturen byggs för raketer och rymdstationer." },
+
+      { type: "h2", text: "Knuffen som ser ut som ett brott mot naturlagen" },
+      { type: "p", html: "Här dyker problemet upp. Atomerna hålls på plats av ett magnetfält, och för att släppa dem stängs strömmarna av. Men ingenting stängs av ögonblickligt. Ledarna på atomchipet tömmer sin ström på några tiotals miljondels sekunder, de yttre spolarna behöver nästan en tusendels sekund, och dessutom induceras virvelströmmar i kopparhållaren och titankammaren som drar ut förloppet ytterligare. Under den bråkdelen av en millisekund känner atomerna fortfarande av en magnetisk kraft på väg ut." },
+      { type: "p", html: "Båda atomsorterna sitter i tillstånd med samma magnetiska moment, så kraften på dem är lika stor. Men rubidium-87 väger drygt dubbelt så mycket som kalium-41, och enligt $a = \\dfrac{F}{m}$ ger samma kraft då större acceleration åt den lättare atomen. Kaliumet får en hårdare knuff än rubidiumet, molnen lämnar fällan med olika hastighet — och det är exakt den signal ett brott mot ekvivalensprincipen skulle ge. Störningen är alltså förklädd till upptäckt." },
+      { type: "p", html: "Lösningen laget hittade är enkel att beskriva och besvärlig att ställa in: stäng inte av allt samtidigt. Genom att lägga in en justerbar fördröjning mellan avstängningen av det snabba chipet och de tröga spolarna kan de två knuffarna fås att peka åt var sitt håll och ta ut varandra. Forskarna skannade fördröjningen och letade upp nollgenomgången, som ligger vid ungefär 80&nbsp;miljondels sekund." },
+      { type: "p", html: "Vid den inställningen uppmättes i falltornet en kvarvarande hastighetsskillnad på 1,5&nbsp;±&nbsp;0,7&nbsp;mm/s, medan modellen förutsäger 0,3&nbsp;±&nbsp;0,7&nbsp;mm/s. I den betydligt svagare fälla som ett skarpt ekvivalensprincipsförsök skulle använda dämpas effekten dessutom med ytterligare en tiopotens. Med en styrelektronik som håller reda på tiden ner till hundra miljarddels sekunder skulle skillnaden landa på omkring 1,2&nbsp;µm/s — långt under vad tidigare experiment rapporterat, och tillräckligt lågt för mätningar i klassen 10<sup>−15</sup>." },
+
+      { type: "h2", text: "I tyngdlöshet lägger sig molnen på varandra" },
+      { type: "p", html: "Tyngdkraften märks också på ett andra, mer bildmässigt sätt. På marken sjunker det tyngre rubidiumet en aning djupare ner i fällan än kaliumet, och eftersom atomerna dessutom stöter bort varandra hamnar de två kondensaten ovanpå varandra i stället för i varandra. På bilderna av molnen syns de som två tydligt åtskilda klumpar, uppradade längs lodlinjen." },
+      { type: "p", html: "För att skilja den effekten från de magnetiska knuffarna monterade laget hela fysikmodulen i en vridbar ram och lutade den i steg om 2,5&nbsp;grader, ända till 75&nbsp;grader, utan att ändra något annat i sekvensen. Tyngdkraften bytte då riktning i förhållande till atomchipet medan magnetfälten stod stilla." },
+      { type: "image", src: "nyheter/bilder/2026-08-06-kvantlabb-i-fritt-fall-2.jpg", alt: "Fyra mätpaneler i rad. De tre vänstra, märkta Ground, visar kaliummolnet i cyan och rubidiummolnet i rött som två skilda fläckar ovanför varandra, med tyngdkraftens riktning utritad som en pil i olika lutningar. Den högra panelen, märkt Microgravity, visar i stället ett enda runt moln där de båda färgerna ligger centrerade i varandra.", caption: "Absorptionsbilder av de två kondensaten efter fri expansion. På marken (till vänster) skiljs kalium-41 och rubidium-87 åt längs tyngdkraftens riktning, oavsett hur apparaten lutas. I tyngdlöshet (till höger) ligger molnen i stället centrerade i varandra.", credit: "Figur: B. Piest m.fl., Nature Communications (2026), CC BY 4.0 — beskuren" },
+      { type: "p", html: "I fritt fall försvinner nedsjunkningen helt, och bilderna visar i stället ett enda moln där de båda atomsorterna ligger centrerade i varandra. Hela förloppet räknades i efterhand igenom med de kopplade ekvationer som beskriver hur två växelverkande kondensat utvecklas i rummet, utan en enda fri parameter att skruva på — och simuleringen träffade mätningarna." },
+
+      { type: "h2", text: "Nästa anhalt: rymden" },
+      { type: "p", html: "Apparaten är byggd för att lyfta, och den har gjort det. Föregångaren MAIUS-1 sköts upp i januari 2017 från Esrange utanför Kiruna och blev det första Bose–Einstein-kondensat som någonsin tillverkats i rymden. MAIUS-B flög i sin tur inom kampanjen MAIUS-2, som lämnade Esrange klockan 08.30 den 2 december 2023, nådde 234&nbsp;kilometers höjd och gav drygt fem minuters tyngdlöshet." },
+      { type: "p", html: "Under den flygningen bildades rubidiumkondensaten som planerat och kunde studeras i fritt fall, medan kaliumkondensatet uteblev. Mätningarna som nu publiceras kommer därför inte från raketen utan från laboratoriet och från falltornet i Hannover — där apparaten går att köra om och om igen, och där den dessutom kommer tillbaka hel." },
+      { type: "p", html: "Nästa steg är BECCAL, ett tysk-amerikanskt atomlaboratorium som ska sitta permanent på den internationella rymdstationen, och på längre sikt föreslagna satellituppdrag som STE-QUEST. Forskarnas egen slutsats är att det som saknades inte var idéerna, utan atomerna: tillräckligt många, tillräckligt ofta, och släppta utan att någon knuffar dem." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Falltornet Einstein-Elevator i Hannover skjuter i väg en gondol som rymmer utrustning på 1,7&nbsp;meter i diameter och 2&nbsp;meter i höjd, med upp till 1&nbsp;000 kilo last. Bara gondolen töms på luft, inte hela tornet — och det är därför den hinner med hundratals flygningar per dygn i stället för en handfull.",
+        "Zerodur, materialet i optikbänkarna, har en värmeutvidgning nära noll. En meterlång stav växer mindre än en hundradels millimeter om den värms hundra grader — vilket är skälet till att samma glaskeram används i spegelunderlag till stora teleskop.",
+        "Både rubidium-87 och kalium-41 är bosoner, alltså partiklar som gärna samsas i samma kvanttillstånd. Det är just den egenskapen som gör att de kan bilda kondensat; en gas av fermioner vägrar och måste kylas på helt andra sätt.",
+        "Den mest berömda demonstrationen av att allt faller lika fort gjordes 1971 på månen, där Apollo 15:s befälhavare David Scott släppte en hammare och en falkfjäder framför tv-kameran. Utan luft att bromsa fjädern landade de samtidigt."
+      ]}
+    ]
+  },
+  {
     id: "2026-08-05-rubin-mork-materia",
     date: "2026-08-05",
     title: "Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen",

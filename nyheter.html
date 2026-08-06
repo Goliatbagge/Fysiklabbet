@@ -265,9 +265,26 @@
             color: var(--lab-accent); text-decoration: underline;
             text-underline-offset: 2px;
         }
-        /* AI-transparens: inga chip eller rutor i artikelhuvudet — signalen
-           bärs av rubriken "Dagens nyhet från AI-redaktören" på startsidan
-           och av felrapportrutan i artikelns slut. */
+        /* AI-transparens: rutan allra överst i varje artikel, före rubriken.
+           Nyheterna skrivs i huvudsak av AI och granskas av en människa före
+           publicering — det ska läsaren veta innan något annat. Vit botten så
+           att rutan lyfter från pappersytan. Ingen egen etikett i rutan;
+           avsändaren står som rubrik över nyhetssektionen på startsidan. */
+        .article-ai {
+            margin: 0 0 24px; padding: 14px 18px;
+            background: #ffffff;
+            border: 1px solid var(--lab-line-strong);
+            border-left: 3px solid var(--lab-accent);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(15, 22, 32, 0.07);
+        }
+        .article-ai p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--lab-ink-soft); }
+        .article-ai-link {
+            background: none; border: none; padding: 0; cursor: pointer;
+            font: inherit; color: var(--lab-accent);
+            text-decoration: underline; text-underline-offset: 2px;
+        }
+        .article-ai-link:hover { color: var(--lab-ink); }
         /* Felrapportering: rutan i artikelns slut. Öppnar feedback-widgeten
            (feedback.js) förifylld som felrapport för just den här artikeln. */
         .article-felrapport {
@@ -712,6 +729,25 @@
                 window.location.href = 'mailto:kontakt@fysiklabbet.se?subject='
                     + encodeURIComponent(`Felrapport (nyhet): ${a.title}`);
             }
+        }
+
+        // AI-transparens: ligger allra överst i varje artikel, före rubriken.
+        // Nyheterna skrivs i huvudsak av AI — det ska läsaren veta direkt.
+        function AiRuta({ a }) {
+            return (
+                <div className="article-ai">
+                    <p>
+                        Den här artikeln är helt eller till stora delar skapad av AI.
+                        Texten bygger alltid på de ursprungskällor som anges i slutet
+                        av artikeln och granskas av en människa före publicering, men
+                        kan trots det innehålla fel.{' '}
+                        <button type="button" className="article-ai-link"
+                                onClick={() => rapporteraFel(a)}>
+                            Hittar du något som verkar fel? Rapportera det gärna.
+                        </button>
+                    </p>
+                </div>
+            );
         }
 
         // Felrapportering i artikelns slut — samma formulär som AI-rutans länk.
@@ -1225,9 +1261,12 @@
             return (
                 <article className="article" ref={articleRef}>
                     <a className="article-back" href="nyheter.html">← Alla nyheter</a>
-                    {/* Inget AI-chip här: metaraden ska bara vara kategori,
-                        datum och lästid. Transparensen bärs av nyhets-
-                        sektionens rubrik och felrapportrutan i slutet. */}
+
+                    <AiRuta a={a} />
+
+                    {/* Inget AI-chip i metaraden: rutan ovanför säger samma
+                        sak, och metaraden ska bara vara kategori, datum och
+                        lästid. */}
                     <MetaRow a={a} />
                     <h1 className="article-title">{a.title}</h1>
                     <p className="article-deck">{a.deck}</p>

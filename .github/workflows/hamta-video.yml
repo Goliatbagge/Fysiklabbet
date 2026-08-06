@@ -83,7 +83,9 @@ jobs:
             ls -l "media/video/$namn.mp4"
 
             # Affischbild: en bildruta en bit in i filmen, max 960 px bred.
-            ffmpeg -y -loglevel error -ss "$poster_ts" -i "media/video/$namn.mp4" \
+            # -nostdin är KRITISKT: utan den äter ffmpeg loopens stdin och
+            # sväljer början av nästa beställningsrad ("SF121" blev "F121").
+            ffmpeg -nostdin -y -loglevel error -ss "$poster_ts" -i "media/video/$namn.mp4" \
               -frames:v 1 -vf "scale='min(960,iw)':-2" -q:v 4 "media/video/$namn.jpg"
             ls -l "media/video/$namn.jpg"
             rm -f meta.json

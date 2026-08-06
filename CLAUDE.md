@@ -833,6 +833,46 @@ inflätade som separata satser mitt i en mening ("Vilken a) acceleration får
 vikterna, b) spännkraft …?"), eller redan är en uppräknad lista av korta
 alternativ — då behålls inline-formen.
 
+## Designtänk för simuleringar (5/5-arbetssättet)
+
+Detta arbetssätt användes när "Flyta eller sjunka" gjordes om 2026-08-06 och
+fick uttryckligt toppbetyg av användaren ("exakt samma tänk" ska användas
+framöver). Tillämpa det på VARJE ny simulering och varje större revidering:
+
+1. **Eget koncept — aldrig en kopia.** Kolla hur kända simuleringar (PhET
+   m.fl.) brukar visa momentet och gör MEDVETET annorlunda: byt scenmetafor,
+   upplägg och interaktionsmönster så att simuleringen känns som Fysiklabbets
+   egen. Fysiken och beteckningarna följer förstås genomgången som vanligt.
+   (Exempel: PhET:s nedgrävda bassäng + block A/B med radioknappar blev ett
+   akvarium på en labbänk med föremålskort och färdiga försök.)
+2. **Labbautentisk scen i laboranstemat.** Bygg scenen som ett riktigt
+   skolexperiment på papperet: labbänk, akvarium, labbstativ, dynamometer,
+   literskala — hellre än abstrakta lådor i ett tomrum. Små omsorger
+   (glasreflexer, materialtexturer som träådring/tegelfog, plask och ringar)
+   ger karaktär utan att störa pedagogiken.
+3. **En pedagogisk centerpiece som förklarar VARFÖR.** Utöver själva
+   skeendet ska scenen ha en visualisering som bär förklaringen — något
+   eleven kan läsa av och resonera ur. (Exempel: flytkartan — en
+   densitetsskala med "tätare nedåt" där föremål ovanför vätskans linje
+   flyter. Motsvarigheter: energistaplar, vektortriangel, fasdiagram.)
+   Hitta en egen, konkret representation i stället för ännu en siffertabell.
+4. **Gissa-läge (förutsäg–testa–förklara) när momentet passar.** Låt eleven
+   förutsäga utfallet av ett dolt/slumpat fall innan simuleringen visar
+   facit: maskera avläsningar som avslöjar svaret, kräv en liten beräkning
+   (t.ex. ρ = m/V), ge feedback med förklaring och räkna poäng/svit.
+   Detta gör simuleringen till ett självtest, inte bara en demonstration.
+5. **Färdiga försök i stället för lägesradioknappar.** Klassiska jämförelser
+   ("samma volym", "samma massa", "samma densitet") läggs som förvalsknappar
+   som ställer upp scenen med ett klick — eleven kan sedan ändra fritt.
+   Parametrar väljs helst fysiskt begripligt (material + volym) i stället
+   för råa glidare, med härledda värden visade (m = ρ · V = …).
+6. **Husets standarder gäller fullt ut**: layout, fullskärmsmönstret
+   (`.fs-controls`/`.fs-toggle-handle`/`.scene-toggles` från
+   styles-laborans-sim.css — definiera inga egna dubbletter), mobil-dock,
+   skalenliga kraftpilar, typografi och alla verifierare. Testa interaktivt
+   med skärmdumpar (dra föremål, byt läge, fullskärm, mobil 390 px) och
+   kontrollera fysiken numeriskt i jämvikt (t.ex. F_L = F_G) före commit.
+
 ## Simuleringsmönster
 
 Alla simuleringar följer samma struktur:

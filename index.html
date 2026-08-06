@@ -29,6 +29,20 @@
     <style>
         /* ── Senaste nyheten (teaser på startsidan) ────────────────── */
         .home-news { margin-top: 6px; }
+        /* Sektionsbyline: står ALLRA överst i nyhetssektionen, före
+           "Senaste nyheten"-raden, och signalerar att hela sektionen i
+           huvudsak skrivs av AI. Stor display-rubrik i accentfärg så att
+           den läses som avsändaren för allt som följer. */
+        .home-news-byline { margin-bottom: 16px; }
+        .home-news-byline h2 {
+            font-family: var(--lab-font-display);
+            font-size: clamp(26px, 3.2vw, 34px); line-height: 1.05;
+            letter-spacing: -0.01em; color: var(--lab-accent); margin: 0 0 7px;
+        }
+        .home-news-byline p {
+            font-size: 13.5px; line-height: 1.55; color: var(--lab-ink-soft);
+            margin: 0; max-width: 62ch;
+        }
         .home-news-card {
             display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: stretch;
             text-decoration: none; color: var(--lab-ink);
@@ -343,6 +357,14 @@
             if (!latest) return null;
             return (
                 <section className="lab-section home-news">
+                    <div className="home-news-byline">
+                        <h2>AI-redaktören</h2>
+                        <p>
+                            Fysiknyheterna skrivs i huvudsak av AI. Texterna bygger på
+                            de källor som anges i varje artikel och granskas av en
+                            människa före publicering, men kan ändå innehålla fel.
+                        </p>
+                    </div>
                     <div className="lab-updates-header">
                         <span className="lab-mono-label">Senaste nyheten</span>
                         <a className="lab-mono-label" href="nyheter.html"
@@ -360,11 +382,6 @@
                                 <span className="cat">{latest.category}</span>
                                 <span className="dot" />
                                 <span>{formatNewsDate(latest.date)}</span>
-                                <span className="dot" />
-                                <span className="ai"
-                                      title="Nyheten är i huvudsak skriven av AI och granskas av en människa före publicering">
-                                    AI-redaktören
-                                </span>
                             </div>
                             <h3 className="home-news-title">{latest.title}</h3>
                             <p className="home-news-deck">{latest.deck}</p>

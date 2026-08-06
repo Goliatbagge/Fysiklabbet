@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 05 Aug 2026 13:20:59 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2026 01:36:06 GMT</lastBuildDate>
+    <item>
+      <title>Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-06-kvantlabb-i-fritt-fall</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-06-kvantlabb-i-fritt-fall</guid>
+      <pubDate>Thu, 06 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Kvantfysik</category>
+      <description>Rubidium och kalium, nedkylda till några hundra miljarddels grader över absoluta nollpunkten, ska falla exakt lika fort. Problemet var att magnetfällan gav dem varsin liten skjuts på vägen ut. Lösningen blev att stänga av strömmarna i fel ordning — med åttio miljondels sekunders mellanrum.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-06-kvantlabb-i-fritt-fall.jpg" length="344692" type="image/jpeg"/>
+    </item>
     <item>
       <title>Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-05-rubin-mork-materia</link>
@@ -177,15 +186,6 @@
       <category>Kärnfysik</category>
       <description>Vid Caltech har forskare för första gången lyckats bygga molekyler av det sällsynta, radioaktiva grundämnet radium och kyla ner dem till några enstaka kelvin. Knepet för att hantera det farliga ämnet är lånat från godistillverkningen — och molekylerna ska nu bli extremt känsliga kvantsensorer i jakten på svaret på en av fysikens största olösta frågor: varför universum är fyllt av materia, men nästan helt tomt på antimateria.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-18-radium-molekyler.jpg" length="234510" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Fysiker räknar ut vilket bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-17-hannibal-alperna</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-17-hannibal-alperna</guid>
-      <pubDate>Fri, 17 Jul 2026 07:00:00 GMT</pubDate>
-      <category>Mekanik</category>
-      <description>En ny studie i tidskriften PNAS räknar ut den exakta energikostnaden, i terajoule, för Hannibals berömda härfärd över Alperna år 218 f.Kr. — och pekar ut vilket av fyra tänkbara bergspass som var billigast att ta sig över. Beräkningarna visar samtidigt varför hans 37 krigselefanter klarade påfrestningen mycket bättre än soldaterna.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-17-hannibal-alperna.jpg" length="93422" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

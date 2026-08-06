@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-06 | `2026-08-06-kvantlabb-i-fritt-fall` | Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen | Johannes Gutenberg-universitetet Mainz (pressmeddelande 2026-08-05) / Phys.org / Scientific Frontline / HITec Leibniz-universitetet Hannover / SSC (Esrange) / Nature Communications (B. Piest m.fl., 2026-07-28, DOI 10.1038/s41467-026-75968-9, även arXiv:2508.20820 CC BY 4.0) |
 | 2026-08-05 | `2026-08-05-rubin-mork-materia` | Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen | Vera C. Rubin Observatory (pressmeddelanden om LSST-starten 2026-06-30 och COSMOS/EDP2 2026-07-31) / NSF NOIRLab (noirlab2618) / SLAC / Phys.org / The Astrophysical Journal 873:111 (Ž. Ivezić m.fl., 2019, DOI 10.3847/1538-4357/ab042c) |
 | 2026-08-04 | `2026-08-04-fusion-i-metall` | Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp | Physics World / Phys.org / Lawrence Berkeley National Laboratory (pressmeddelande) / Nature Communications (M. E. Karahadian, M. Colborne, A. Persaud, T. Schenkel, J. N. Munday, 2026, DOI 10.1038/s41467-026-74421-1) |
 | 2026-08-03 | `2026-08-03-bromsade-atomkarnor` | Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående | Phys.org / TU Darmstadt (pressmeddelande) / GSI Helmholtzzentrum für Schwerionenforschung / Physical Review X 16, 031022 (S. Rausch m.fl., 2026, DOI 10.1103/961c-j3p5) |
@@ -63,6 +64,37 @@ gånger** — kontrollera den här listan först. Nyast överst.
 | 2026-06-12 | `2026-06-12-jordens-hav` | Var kom jordens hav ifrån? Kanske gjorde jorden dem själv | Quanta Magazine |
 | 2026-06-11 | `2026-06-11-konstgjord-fotosyntes` | Ett konstgjort blad som sköter sig självt | ScienceDaily / SciTechDaily / EES Solar |
 
+> Not 2026-08-06 (MAIUS-B / kvantlabb i fritt fall): vald ur dagens sökning, inte ur
+> kön. Phys.org hade nyheten som sitt färskaste inslag (5 augusti, en timme gammal när
+> sidan lästes); Physics World hade bara forsknings- och anslagspolitik, Quanta stod
+> stilla sedan myon-artikeln 07-29, ScienceDaily hade inget efter 08-04 och
+> physics.aps.org svarade HTTP 403 även denna gång (fjärde dagen i rad). Nature kräver
+> fortfarande inloggning via idp.nature.com — men artikeln är CC BY 4.0, så både
+> Crossref-licensen och arXiv-preprinten (2508.20820v2, HTML-versionen) gick att läsa
+> och användes som primärkälla för alla siffror.
+>
+> Tre fällor att bära med sig om nyheten får en uppföljare:
+> 1. **Mätningarna kommer INTE från rymden.** MAIUS-B-payloaden flög visserligen på
+>    raketkampanjen MAIUS-2 från Esrange 2023-12-02 (apogeum 234 km, drygt fem minuters
+>    tyngdlöshet), men resultaten i den här studien är gjorda i laboratoriet och i
+>    falltornet Einstein-Elevator i Hannover. Under själva raketflygningen bildades
+>    rubidiumkondensaten men INTE kaliumkondensatet.
+> 2. **Två skilda atomtal.** 2,5·10⁵ rubidiumatomer gäller en sekvens optimerad för EN
+>    atomsort; blandningen ger ~2·10⁴ i vardera kondensatet. Blanda inte ihop dem.
+> 3. **Enhetsfällan i lutningen δΔv/δΔt.** Studien skriver 11,8 µm/ms² för den svaga
+>    fällan, men slutsatsen 1,2 µm/s vid 100 ns tidsupplösning går bara ihop om talet
+>    läses som µm/s per µs. Artikeln citerar därför bara slutvärdet, inte lutningen.
+>
+> Bilderna är två figurer ur studien (CC BY 4.0): fig. 1 (nyttolastens genomskärning +
+> fysikmodulen) som toppbild och en beskuren övre rad av fig. 5 (absorptionsbilder,
+> mark kontra tyngdlöshet) i brödtexten. JGU Mainz pressbild av lasersystemet
+> (© Sören Boles) valdes BORT — press.uni-mainz.de/legal-notice/ ger bara "private,
+> academic, and non-commercial use", ingen uttalad press-/återpubliceringsrätt.
+> Fyra nya begrepp: bose-einstein-kondensat, boson, ekvivalensprincipen,
+> atominterferometri. Formerna boson/bosonen/bosoner/bosonerna flyttades från
+> `standardmodellen` till den nya `boson`-posten (spinnstatistiken förklaras där);
+> `diodlaser`-formerna lades till i `laser`.
+>
 > Not 2026-08-05 (Rubin-observatoriet): skriven i förväg 2026-08-04 på användarens
 > begäran, med utgångspunkt i en svensk nyhetsnotis om SVT Vetenskaps reportage
 > från Cerro Pachón. Artikeln bygger uteslutande på primärkällorna: Rubin/NOIRLab/

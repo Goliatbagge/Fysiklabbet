@@ -20,6 +20,14 @@
     const FEEDBACK_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${FEEDBACK_EMAIL}`;
     const CONFIRMATION_TEXT = 'Snyggt! Vi har registrerat din kraftfulla input. Acceleration mot en bättre sida påbörjad!';
 
+    // Standardtexterna återställs varje gång panelen öppnas utan
+    // anpassning — window.FYSIKFEEDBACK.open() kan skriva över dem
+    // tillfälligt (t.ex. nyhetsartiklarnas "Rapportera fel").
+    const DEFAULT_TITLE = 'Lämna feedback';
+    const DEFAULT_SUBJECT = 'Feedback från Fysiklabbet';
+    const DEFAULT_PLACEHOLDER = 'Vad vill du berätta? Hittade du en bugg, har du en idé eller en fråga?';
+    const DEFAULT_SUBMIT = 'Skicka feedback →';
+
     // Feedback-widgetens stil matchar Laborans-paletten (pappersbakgrund,
     // ink-svart text, accent-röd #c8324a). Vit knapp + svart border syns
     // bra både mot Laborans pappersgula bakgrund och mot de mörka
@@ -369,8 +377,18 @@
     const successBox = document.getElementById('fb-success');
     const messageInput = document.getElementById('fb-message');
     const errorBox = document.getElementById('fb-error');
+    const titleEl = document.getElementById('fb-title');
+    const subjectInput = form.querySelector('input[name="_subject"]');
 
-    function openPanel() {
+    // opts (alla valfria): title — panelens rubrik, subject — mailets
+    // ämnesrad, placeholder — textrutans ledtext, submitLabel — knappen.
+    // Utan opts återställs standardtexterna (glödlampsknappen).
+    function openPanel(opts) {
+        opts = opts || {};
+        titleEl.textContent = opts.title || DEFAULT_TITLE;
+        subjectInput.value = opts.subject || DEFAULT_SUBJECT;
+        messageInput.placeholder = opts.placeholder || DEFAULT_PLACEHOLDER;
+        submitBtn.textContent = opts.submitLabel || DEFAULT_SUBMIT;
         urlInput.value = window.location.href;
         panel.classList.add('fb-open');
         panel.setAttribute('aria-hidden', 'false');
@@ -389,7 +407,10 @@
         form.style.display = 'block';
         successBox.style.display = 'none';
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Skicka feedback →';
+        submitBtn.textContent = DEFAULT_SUBMIT;
+        titleEl.textContent = DEFAULT_TITLE;
+        subjectInput.value = DEFAULT_SUBJECT;
+        messageInput.placeholder = DEFAULT_PLACEHOLDER;
         fileName.textContent = '';
         hideError();
     }
@@ -454,4 +475,8 @@
             showError(`Kunde inte skicka: ${err.message}. Försök igen, eller mejla ${FEEDBACK_EMAIL} direkt.`);
         }
     });
+
+    // Publikt API så att sidorna kan öppna widgeten programatiskt med
+    // anpassade texter — används av nyhetsartiklarnas "Rapportera fel".
+    window.FYSIKFEEDBACK = { open: openPanel, close: closePanel };
 })();

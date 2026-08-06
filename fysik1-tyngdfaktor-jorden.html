@@ -826,14 +826,15 @@
                             <div className="mt-3" style={{ position: 'relative', aspectRatio: '4 / 3',
                                  background: '#0f1620', borderRadius: 8, overflow: 'hidden',
                                  border: '1px solid var(--lab-line-strong)' }}>
-                                <iframe src="https://archive.org/embed/FeatherHammerDropOnMoon"
-                                        title="David Scott släpper en hammare och en fjäder på månen (Apollo 15, 1971)"
-                                        loading="lazy" frameBorder="0"
-                                        allow="fullscreen; encrypted-media; picture-in-picture" allowFullScreen
-                                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }} />
+                                <video controls preload="metadata" playsInline
+                                       poster="media/video/apollo15-hammare-fjader.jpg"
+                                       title="David Scott släpper en hammare och en fjäder på månen (Apollo 15, 1971)"
+                                       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }}>
+                                    <source src="media/video/apollo15-hammare-fjader.mp4" type="video/mp4" />
+                                </video>
                             </div>
                             <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                Film: NASA (public domain) · <a href="https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html"
+                                Film: NASA (public domain) · <a href="https://archive.org/details/FeatherHammerDropOnMoon"
                                    target="_blank" rel="noopener noreferrer"
                                    style={{ color: 'var(--lab-accent)', textDecoration: 'underline', textUnderlineOffset: 2 }}>Se filmen i original</a>
                             </p>

@@ -41,17 +41,24 @@
  *                 { type: 'fact', title: '…', items: ['…', …] }   faktaruta
  *                 { type: 'image', src: 'nyheter/bilder/<id>-2.jpg',
  *                   alt: '…', caption: '…', credit: '…' }        bild i brödtexten
- *                 { type: 'video', embed: 'https://archive.org/embed/<id>',
- *                   ratio: '4:3', title: '…', caption: '…', credit: '…',
- *                   url: '…' }   inbäddat FRITT videoklipp i brödtexten.
- *                   Används när artikeln refererar till filmmaterial som är
- *                   fritt tillgängligt (public domain/CC) — läsaren ska kunna
- *                   titta direkt, inte behöva leta. embed = iframe-URL
- *                   (archive.org/embed/<id> eller youtube-nocookie.com/embed/<id>),
- *                   ratio utelämnad = 16:9, url = extern länk till originalet
- *                   (visas som "Se filmen i original"). Bädda ALDRIG in
- *                   upphovsrättsskyddat material — då används i stället en
- *                   vanlig <a>-länk i brödtexten.
+ *                 { type: 'video', src: 'media/video/<namn>.mp4',
+ *                   poster: 'media/video/<namn>.jpg', ratio: '4:3',
+ *                   title: '…', caption: '…', credit: '…', url: '…' }
+ *                   inbäddat FRITT videoklipp i brödtexten. Används när
+ *                   artikeln refererar till filmmaterial som är fritt
+ *                   tillgängligt (public domain/CC) — läsaren ska kunna
+ *                   titta direkt, inte behöva leta. src = självhostad mp4
+ *                   (beställs via .github/videoorder.txt → media/video/,
+ *                   FÖRSTAHANDSVALET — tredjeparts-iframes har visat sig
+ *                   opålitliga i mobilen), poster = affischbild. Alternativt
+ *                   embed = iframe-URL (archive.org/embed/<id> eller
+ *                   youtube-nocookie.com/embed/<id>) när självhosting inte
+ *                   går. ratio utelämnad = 16:9, url = extern länk till
+ *                   originalet (visas som "Se filmen i original") — länka
+ *                   DIREKT till filmens egen sida, inte till en startsida.
+ *                   Bädda ALDRIG in upphovsrättsskyddat material — då används
+ *                   i stället en vanlig <a>-länk i brödtexten. Blocket läggs
+ *                   intill det ställe i artikeln som refererar till filmen.
  *
  * Flera bilder per artikel: har nyheten fler än en fri pressbild får (och bör)
  * de extra bilderna läggas in som 'image'-block mellan styckena i body. Den
@@ -115,11 +122,6 @@ const NYHETER_ALL = [
       { type: "h2", text: "Därför två sorters atomer" },
       { type: "p", html: "Att alls bry sig om att göra två kondensat samtidigt har ett bestämt skäl. Ett föremåls tyngd är proportionell mot dess massa, $F_\\mathrm{G} = m \\cdot g$, medan accelerationen är kraften delad med massan, $a = \\dfrac{F}{m}$. Sätts det första in i det andra försvinner massan, och kvar blir bara $a = g$: allt faller lika fort, oavsett vad det väger och vad det är gjort av." },
       { type: "p", html: "Einstein gjorde den observationen till en av hörnstenarna i den allmänna relativitetsteorin. Ekvivalensprincipen säger att den massa som gör ett föremål trögt att sätta i rörelse och den massa som gör det tungt är exakt samma sak. Skulle de skilja sig åt, om än med en obetydlighet, faller inte alla ämnen lika fort — och stora delar av den moderna fysiken skulle behöva skrivas om." },
-      { type: "video", embed: "https://archive.org/embed/FeatherHammerDropOnMoon", ratio: "4:3",
-        title: "Apollo 15: hammaren och fjädern släpps på månen",
-        caption: "Den mest berömda demonstrationen av att allt faller lika fort gjordes 1971 på månen, där Apollo 15:s befälhavare David Scott släppte en geologhammare och en falkfjäder samtidigt framför tv-kameran. Utan luft att bromsa fjädern landade båda i månstoftet i samma ögonblick.",
-        credit: "Film: NASA (public domain)",
-        url: "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html" },
       { type: "p", html: "Testet består i att släppa två föremål av olika ämnen samtidigt och jämföra deras acceleration. Skillnaden brukar anges med Eötvösparametern, $\\eta = \\dfrac{2(a_1 - a_2)}{a_1 + a_2}$, som är noll om principen håller. Den skarpaste mätningen hittills gjordes av den franska satelliten MICROSCOPE, som 2022 kunde slå fast att $\\eta$ för titan och platina inte är större än ungefär 10<sup>−15</sup> — en miljondels miljarddel." },
       { type: "p", html: "Nästa generation vill göra samma jämförelse med atomer i stället för metallcylindrar, och läsa av resultatet med atominterferometri. Då blir provmassorna två olika grundämnen, och mätnoggrannheten växer snabbt med hur länge atomerna hinner falla fritt. På ett laboratoriebord räcker fallet någon tiondels sekund. I tyngdlöshet finns ingen sådan gräns — vilket är hela skälet till att apparaturen byggs för raketer och rymdstationer." },
 
@@ -143,8 +145,15 @@ const NYHETER_ALL = [
       { type: "fact", title: "Visste du?", items: [
         "Falltornet Einstein-Elevator i Hannover skjuter i väg en gondol som rymmer utrustning på 1,7&nbsp;meter i diameter och 2&nbsp;meter i höjd, med upp till 1&nbsp;000 kilo last. Bara gondolen töms på luft, inte hela tornet — och det är därför den hinner med hundratals flygningar per dygn i stället för en handfull.",
         "Zerodur, materialet i optikbänkarna, har en värmeutvidgning nära noll. En meterlång stav växer mindre än en hundradels millimeter om den värms hundra grader — vilket är skälet till att samma glaskeram används i spegelunderlag till stora teleskop.",
-        "Både rubidium-87 och kalium-41 är bosoner, alltså partiklar som gärna samsas i samma kvanttillstånd. Det är just den egenskapen som gör att de kan bilda kondensat; en gas av fermioner vägrar och måste kylas på helt andra sätt."
-      ]}
+        "Både rubidium-87 och kalium-41 är bosoner, alltså partiklar som gärna samsas i samma kvanttillstånd. Det är just den egenskapen som gör att de kan bilda kondensat; en gas av fermioner vägrar och måste kylas på helt andra sätt.",
+        "Den mest berömda demonstrationen av att allt faller lika fort gjordes 1971 på månen, där Apollo 15:s befälhavare David Scott släppte en hammare och en falkfjäder framför tv-kameran. Utan luft att bromsa fjädern landade de samtidigt — se filmen här nedanför."
+      ]},
+      { type: "video", src: "media/video/apollo15-hammare-fjader.mp4",
+        poster: "media/video/apollo15-hammare-fjader.jpg", ratio: "4:3",
+        title: "Apollo 15: hammaren och fjädern släpps på månen",
+        caption: "David Scott släpper hammaren och falkfjädern på månen, i slutet av Apollo 15:s sista månpromenad 1971.",
+        credit: "Film: NASA (public domain)",
+        url: "https://archive.org/details/FeatherHammerDropOnMoon" }
     ]
   },
   {

@@ -381,20 +381,18 @@
         }
 
         // ::: video-blockets config → färdig HTML. Nycklar:
-        //   arkiv:  archive.org-identifierare (t.ex. FeatherHammerDropOnMoon)
+        //   fil:    självhostad mp4 i media/video/ (FÖRSTAHANDSVALET — 
+        //           tredjeparts-iframes visade sig opålitliga i mobilen)
+        //   affisch: affischbild (poster) till fil:
+        //   arkiv:  archive.org-identifierare (iframe-inbäddning)
         //   youtube: YouTube-video-id (bäddas in via youtube-nocookie.com)
         //   titel:  visas under klippet
         //   källa:  upphov/licens (t.ex. "Film: NASA (public domain)")
         //   länk:   extern länk till originalet ("Se filmen i original")
         //   format: "4:3" för äldre filmmaterial (standard 16:9)
-        // Saknas både arkiv: och youtube: renderas bara en länkrad — så att
+        // Saknas fil:, arkiv: och youtube: renderas bara en länkrad — så att
         // material som inte går att bädda in ändå blir ett klick bort.
         function buildVideoEmbed(cfg) {
-            const src = cfg.arkiv
-                ? 'https://archive.org/embed/' + encodeURIComponent(cfg.arkiv)
-                : (cfg.youtube
-                    ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(cfg.youtube)
-                    : null);
             const ratio = cfg.format === '4:3' ? '4 / 3' : '16 / 9';
             const cap = [];
             if (cfg.titel) cap.push('<span class="lab-video-titel">' + escapeHtml(cfg.titel) + '</span>');
@@ -405,13 +403,26 @@
                 meta.push('<a href="' + url + '" target="_blank" rel="noopener">Se filmen i original</a>');
             }
             if (meta.length) cap.push('<span class="lab-video-kalla">' + meta.join(' · ') + '</span>');
+            const caption = '<figcaption>' + cap.join('') + '</figcaption>';
+            if (cfg.fil) {
+                const poster = (cfg.affisch ? ' poster="' + escapeHtml(cfg.affisch) + '"' : '');
+                return '<figure class="lab-video"><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+                    '<video controls preload="metadata" playsinline' + poster + '>' +
+                    '<source src="' + escapeHtml(cfg.fil) + '" type="video/mp4">' +
+                    '</video></div>' + caption + '</figure>';
+            }
+            const src = cfg.arkiv
+                ? 'https://archive.org/embed/' + encodeURIComponent(cfg.arkiv)
+                : (cfg.youtube
+                    ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(cfg.youtube)
+                    : null);
             if (!src) {
                 return '<div class="lab-video lab-video-lank">' + cap.join('') + '</div>';
             }
             return '<figure class="lab-video"><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
                 '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
                 ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
-                '</div><figcaption>' + cap.join('') + '</figcaption></figure>';
+                '</div>' + caption + '</figure>';
         }
 
         function parseFrontmatter(md) {

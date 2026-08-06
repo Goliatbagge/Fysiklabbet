@@ -73,8 +73,11 @@ jobs:
           )
             [ -n "$fil" ] || { echo "Ingen mp4 i $id:"; head -c 3000 meta.json; exit 1; }
 
+            # Filnamn i arkivet kan innehålla mellanslag och &-tecken —
+            # URL-koda innan nedladdning, annars avvisar curl URL:en.
+            filenc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$fil")
             echo "laddar ner: $fil"
-            curl -sSL "https://archive.org/download/$id/$fil" -o "media/video/$namn.mp4"
+            curl -sSL "https://archive.org/download/$id/$filenc" -o "media/video/$namn.mp4"
             typ=$(file -b --mime-type "media/video/$namn.mp4")
             [ "$typ" = "video/mp4" ] || { echo "Nedladdad fil är ingen mp4: $typ"; file "media/video/$namn.mp4"; exit 1; }
             ls -l "media/video/$namn.mp4"

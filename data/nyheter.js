@@ -78,7 +78,7 @@ const NYHETER_ALL = [
     id: "2026-08-07-virvlar-pa-solens-yta",
     date: "2026-08-07",
     title: "Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het",
-    deck: "Världens största solteleskop har avbildat solytan med 19 kilometers upplösning. Överallt där magnetfältet möter den kokande gasen kröker sig kanterna till fjäderlika fransar med små virvlar i. Instabiliteten räknades ut på papper på 1860-talet, men har aldrig setts på en stjärna förrän nu.",
+    deck: "Världens största solteleskop har avbildat solytan med 19 kilometers upplösning. Överallt där magnetfältet möter den kokande gasen kröker sig kanterna till fjäderlika fransar med små virvlar i. Instabiliteten räknades ut på papper redan på 1800-talet, men har aldrig setts på en stjärna förrän nu.",
     category: "Astrofysik",
     readingTime: "7 min",
     image: "nyheter/bilder/2026-08-07-virvlar-pa-solens-yta.jpg",
@@ -118,7 +118,7 @@ const NYHETER_ALL = [
 
       { type: "h2", text: "Vind som reser vågor" },
       { type: "p", html: "När två skikt av en gas eller vätska glider förbi varandra med olika fart är gränsytan mellan dem instabil. Uppstår den minsta krusning måste strömmen som passerar över krusningens topp ta en längre väg och går därför fortare. Där farten är högre är trycket lägre, så toppen sugs uppåt ytterligare — krusningen blir en våg, vågen växer och rullar till slut ihop sig i en virvel." },
-      { type: "p", html: "Det är samma mekanism som gör att vind reser vågor på en sjö, att flaggor fladdrar i stället för att hänga rakt ut i vinden, och som ibland ritar en rad av likadana krökta vågmoln över himlen. Fenomenet är uppkallat efter William Thomson, senare lord Kelvin, och Hermann von Helmholtz, som beskrev det matematiskt på 1860-talet." },
+      { type: "p", html: "Det är samma mekanism som gör att vind reser vågor på en sjö, att flaggor fladdrar i stället för att hänga rakt ut i vinden, och som ibland ritar en rad av likadana krökta vågmoln över himlen. Fenomenet är uppkallat efter William Thomson, senare lord Kelvin, och Hermann von Helmholtz, som beskrev det matematiskt 1868 respektive 1871." },
       { type: "quote", html: "”Gränsytan kan bli instabil och utveckla vågliknande virvlar som växer tills de bryts sönder — inte helt olikt vågorna ute på en sjö eller på havet en blåsig dag.”", cite: "Friedrich Wöger, National Solar Observatory" },
 
       { type: "h2", text: "Magnetfältet ritar gränsen" },
@@ -143,7 +143,7 @@ const NYHETER_ALL = [
       { type: "fact", title: "Visste du?", items: [
         "Koronan går inte att se för blotta ögat annat än vid en total solförmörkelse. Nästa inträffar den 12&nbsp;augusti&nbsp;2026 och drar fram över östra Grönland, västra Island och norra Spanien, med som mest 2&nbsp;minuter och 18&nbsp;sekunder i totalt mörker.",
         "Kelvin–Helmholtz-instabiliteten är långt ifrån bara ett solfenomen. Den formar vågmolnen i jordens atmosfär, virvlarna längs Jupiters och Saturnus molnband, och krusningarna där solvinden stryker längs jordens magnetfält.",
-        "Fotosfären är bara ett par hundra kilometer tjock, på en gasboll med 1,4&nbsp;miljoner kilometers diameter. Det är därför solen har en så knivskarp kant på himlen trots att den inte har någon yta i vanlig mening."
+        "Fotosfären är bara några hundra kilometer tjock, på en gasboll med 1,4&nbsp;miljoner kilometers diameter. Det är därför solen har en så knivskarp kant på himlen trots att den inte har någon yta i vanlig mening."
       ] }
     ]
   },

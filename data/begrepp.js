@@ -925,5 +925,59 @@ window.BEGREPP = [
       { type: 'p', html: 'Fördelen är att solsystemet plötsligt går att överblicka. Mars ligger 1,5&nbsp;au från solen, Jupiter 5,2&nbsp;au och Neptunus 30&nbsp;au. Kuiperbältet, där de flesta kometer håller till, sträcker sig från ungefär 30 till 50&nbsp;au. Rymdsonden Voyager&nbsp;1, som lämnade jorden 1977, har passerat 160&nbsp;au. Ett ljusår motsvarar drygt 63&nbsp;000&nbsp;au — först då börjar det bli tal om grannstjärnor.' },
       { type: 'p', html: 'Enheten säger också något om tid. Ljuset behöver ungefär 8&nbsp;minuter och 20&nbsp;sekunder för att färdas en astronomisk enhet, vilket är precis så gammal bilden av solen är när den når din näthinna. Att över huvud taget mäta upp avståndet var länge ett av astronomins svåraste problem; i dag görs det med radarekon mot planeter och med hur rymdsonders signaler fördröjs på vägen hem.' }
     ]
+  },
+  {
+    id: 'fotosfar',
+    term: 'Fotosfär',
+    former: ['fotosfär', 'fotosfären', 'fotosfärer', 'fotosfären hos solen',
+             'solens fotosfär'],
+    kort: 'Det tunna skikt i en stjärna där gasen äntligen blir genomskinlig och ljuset kan lämna den. Det är stjärnans synliga ”yta” — men den består av gas, inte av något fast.',
+    relaterade: ['korona', 'granulation', 'plasma', 'svart-hal'],
+    body: [
+      { type: 'p', html: 'Solen har ingen yta i den mening en planet har. Den är gas rakt igenom, allt tätare ju längre in man kommer. Ändå ser den ut att ha en knivskarp kant på himlen, och det beror på fotosfären: det skikt där gasen till slut blir så gles att ljuset kan ta sig ut utan att absorberas på nytt. Ovanför det skiktet är solen genomskinlig, under det ogenomträngligt — och gränsen däremellan är bara ett par hundra kilometer tjock, vilket på en klotformig gasboll med 1,4&nbsp;miljoner kilometers diameter motsvarar skalet på ett äpple.' },
+      { type: 'p', html: 'Det är fotosfären man ser på varje bild av solen och det är dess temperatur, omkring 5&nbsp;500&nbsp;°C, som avgör solljusets färg. Skiktet är i ständig rörelse: het gas väller upp underifrån, strålar bort sin energi i rymden, svalnar och sjunker tillbaka. Solfläckar är områden i fotosfären där starka magnetfält bromsar den rörelsen, så att gasen där blir ett par tusen grader svalare och därför ser mörk ut i jämförelse.' },
+      { type: 'p', html: 'Alla stjärnor har en fotosfär, och dess temperatur är just vad astronomer menar när de talar om en stjärnas temperatur. En röd dvärg har en fotosfär på kanske 3&nbsp;000&nbsp;°C, en het blå stjärna över 30&nbsp;000&nbsp;°C. Eftersom fotosfären är det enda av stjärnan vi ser direkt måste allt vi vet om det som händer längre in läsas ut ur den — ur dess ljus, dess svängningar och dess magnetfält.' }
+    ]
+  },
+  {
+    id: 'korona',
+    term: 'Korona',
+    former: ['korona', 'koronan', 'koronor', 'solkorona', 'solkoronan',
+             'stjärnkorona', 'stjärnkoronan'],
+    kort: 'En stjärnas yttersta atmosfär — hos solen en tunn, miljongradig gasslöja som bara syns för blotta ögat vid en total solförmörkelse.',
+    relaterade: ['fotosfar', 'plasma', 'granulation'],
+    body: [
+      { type: 'p', html: 'Utanför solens synliga yta fortsätter solen, fast så tunt att den drunknar i ytans bländande sken. Först när månen täcker solskivan helt vid en total solförmörkelse träder den fram: en pärlemorskimrande krans av strimmor och slöjor som sträcker sig flera solradier ut i rymden. Det är koronan, solens yttersta atmosfär. Gasen där är oerhört tunn — långt tunnare än det bästa vakuum som går att göra i ett laboratorium — men den lyser ändå, eftersom den är extremt het.' },
+      { type: 'p', html: 'Och det är just hettan som är gåtan. Solens yta håller omkring 5&nbsp;500&nbsp;°C, men några tusen kilometer längre ut stiger temperaturen till över en miljon grader. Att det blir varmare längre bort från värmekällan låter bakvänt, och vore omöjligt om värmen bara leddes utåt på vanligt vis. Energin måste alltså bäras dit på något annat sätt. Sedan 1940-talet, då de miljongradiga temperaturerna först avslöjades genom märkliga spektrallinjer, har misstankarna riktats mot solens magnetfält: vågor som fortplantar sig längs fältlinjerna, och otaliga små omkopplingar i fältet som frigör energi.' },
+      { type: 'p', html: 'Koronan angår oss mer än den kanske verkar. Den avger hela tiden en ström av laddade partiklar, solvinden, och ibland slungas väldiga moln av korongas ut i rymden. Träffar ett sådant moln jorden får vi norrsken — men också magnetiska stormar som kan störa satelliter, radiotrafik, navigationssystem och i värsta fall elnät. Att förstå vad som värmer och driver koronan är därför inte bara en akademisk fråga.' }
+    ]
+  },
+  {
+    id: 'granulation',
+    term: 'Granulation',
+    former: ['granulation', 'granulationen', 'granul', 'granulen', 'granuler',
+             'granulerna', 'solgranul', 'solgranuler'],
+    kort: 'Det bubbelmönster som täcker solens yta: ljusa celler av uppåtströmmande het gas, åtskilda av mörkare fåror där gasen svalnat och sjunker tillbaka.',
+    relaterade: ['fotosfar', 'plasma', 'korona', 'turbulens'],
+    body: [
+      { type: 'p', html: 'Titta på gröt som håller på att koka, eller på misosoppa i en skål. Ytan delas upp i celler: mitt i varje cell väller het vätska upp underifrån, breder ut sig åt sidorna, svalnar och sjunker ner igen längs cellens kant. Solens yta gör exakt samma sak, i gigantisk skala. Mönstret kallas granulation, och de enskilda cellerna granuler.' },
+      { type: 'p', html: 'En granul är mellan ungefär 500 och 2&nbsp;000&nbsp;kilometer bred — en enda av dem kan alltså vara längre än Sverige. Mitten är ljus därför att gasen där kommer direkt underifrån och är några hundra grader hetare, och kanterna mörka därför att gasen där har hunnit svalna. Hela mönstret ritas om på några minuter: en granul lever i storleksordningen tio minuter innan den bryts upp och ersätts. Vid varje ögonblick finns det ett par miljoner granuler på solskivan.' },
+      { type: 'p', html: 'Granulationen är den synliga toppen av konvektionszonen, det yttre tredjedelslagret av solen där energin transporteras utåt genom att gasen strömmar i stället för att strålningen letar sig fram. Fenomenet är därför en direkt fingervisning om hur solen fungerar under ytan. De mörka fårorna mellan granulerna spelar dessutom en särskild roll: där trängs solens magnetfält ihop till smala, starka knippen, och där sker mycket av det som kopplar samman ytan med atmosfären ovanför.' }
+    ]
+  },
+  {
+    id: 'kelvin-helmholtz-instabilitet',
+    term: 'Kelvin–Helmholtz-instabilitet',
+    former: ['kelvin–helmholtz-instabilitet', 'kelvin–helmholtz-instabiliteten',
+             'kelvin–helmholtz-instabiliteter', 'kelvin–helmholtz-instabiliteterna',
+             'kelvin-helmholtz-instabilitet', 'kelvin-helmholtz-instabiliteten',
+             'kelvin-helmholtz-instabiliteter', 'kelvin-helmholtz-instabiliteterna'],
+    kort: 'Det som händer när två skikt av gas eller vätska glider förbi varandra med olika fart: gränsen mellan dem krusar sig, vågorna växer och rullar ihop sig till virvlar.',
+    relaterade: ['turbulens', 'plasma', 'granulation', 'viskositet'],
+    body: [
+      { type: 'p', html: 'Blås över ytan på en kopp kaffe och du har startat den. När två skikt glider förbi varandra med olika fart är gränsytan mellan dem instabil: den minsta krusning växer av sig själv. Anledningen är att strömmen som passerar över krusningens topp måste ta en längre väg och därför går fortare — och där farten är högre är trycket lägre. Det lägre trycket suger upp toppen ytterligare, som gör krusningen större, som ökar farthopet ännu mer. Vågen växer tills den kröker sig framåt och rullar ihop sig till en rad virvlar, alla lika stora och lika spiralformade.' },
+      { type: 'p', html: 'Det är därför vind reser vågor på en sjö och därför en flagga fladdrar i stället för att hänga rakt ut i vinden. Ibland ritas mönstret också upp på himlen: när ett fuktigt luftskikt glider under ett torrare och snabbare kondenserar vattnet i vågtopparna, och resultatet blir en rad likadana krökta vågmoln — läroboksbilden av fenomenet. William Thomson, senare lord Kelvin, och Hermann von Helmholtz beskrev matematiken bakom det på 1860-talet, och deras villkor talar om exakt hur stor fartskillnaden måste vara för att en krusning av en given storlek ska växa i stället för att dö ut.' },
+      { type: 'p', html: 'I rymden är instabiliteten närmast överallt, men med en extra ingrediens: magnetfält. Ett elektriskt ledande gasmoln släpar med sig fältlinjerna, och ett fält längs strömriktningen verkar som en spänd gummisnodd som motverkar krökningen — därför kan magnetfält både dämpa och forma virvlarna. Fenomenet är iakttaget där solvinden stryker längs jordens magnetfält, längs gränserna mellan Jupiters och Saturnus molnband, i gasmoln kring unga stjärnor, och sedan 2026 även på solens egen yta. Betydelsen är att instabiliteten styckar stora, långsamma strömmar i allt mindre virvlar; först på de allra minsta skalorna kan rörelseenergin bli värme.' }
+    ]
   }
 ];

@@ -75,6 +75,79 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-07-virvlar-pa-solens-yta",
+    date: "2026-08-07",
+    title: "Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het",
+    deck: "Världens största solteleskop har avbildat solytan med 19 kilometers upplösning. Överallt där magnetfältet möter den kokande gasen kröker sig kanterna till fjäderlika fransar med små virvlar i. Instabiliteten räknades ut på papper på 1860-talet, men har aldrig setts på en stjärna förrän nu.",
+    category: "Astrofysik",
+    readingTime: "7 min",
+    image: "nyheter/bilder/2026-08-07-virvlar-pa-solens-yta.jpg",
+    imageAlt: "Närbild av solens yta i orange och gult. Ljusa, oregelbundet bubbelformade celler skiljs åt av mörkare fåror, och längs cellernas kanter sitter täta rader av fjäderlika fransar som böjer sig åt sidan som vindpinade grässtrån.",
+    imageCredit: "Bild: NSF/NSO/AURA/MPS",
+    tags: ["astrofysik", "astronomi", "solen", "plasma", "magnetfält", "kelvin-helmholtz", "turbulens", "solteleskop", "korona", "rymdväder", "diffraktion", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "National Solar Observatory (pressmeddelande)", url: "https://nso.edu/press-release/nsf-inouye-solar-telescope-enables-major-discovery-of-a-hidden-solar-process/" },
+      { name: "Max-Planck-Gesellschaft", url: "https://www.mpg.de/26900660/tiny-vortices-discovered-on-the-sun-s-surface" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-08-tiny-vortices-sun-surface.html" },
+      { name: "EurekAlert! (AAAS)", url: "https://www.eurekalert.org/news-releases/1138745" },
+      { name: "ABC News / AP", url: "https://abcnews.com/Technology/wireStory/new-images-sun-show-surface-finest-detail-135390713" }
+    ],
+    research: {
+      citation: "David Kuridze, Friedrich Wöger m.fl., ”Ubiquitous Kelvin–Helmholtz instabilities driving plasma mixing on the Sun”, Nature (5 augusti 2026)",
+      url: "https://doi.org/10.1038/s41586-026-10871-3"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 6.1 Värme och temperatur", href: "katalog.html#fy1-6.1" },
+        { label: "Fysik nivå 2 · 3.1 Magnetism och magnetfält", href: "katalog.html#fy2-3.1" },
+        { label: "Fysik nivå 2 · 2.14 Diffraktion och interferens", href: "katalog.html#fy2-2.14" }
+      ],
+      fragor: [
+        "Instabiliteten var uträknad på papper i över hundrafemtio år innan någon såg den på en stjärna. Vad tillför en observation när teorin redan har förutsagt fenomenet — och vad hade det betytt om bilderna hade visat något annat?",
+        "Solens yta håller omkring 5 500 °C, medan atmosfären ovanför är över en miljon grader. Varför är det inte ett brott mot termodynamikens andra huvudsats att det blir hetare längre bort från värmekällan? Vilken sorts energitransport måste man i så fall tänka sig?",
+        "Gränsen 19 kilometer sitter i ljusets vågnatur, inte i kamerans kvalitet. Vad går då att förbättra med bättre elektronik, och vad går inte? Vilka vägar återstår för den som vill se ännu mindre detaljer på solen?"
+      ]
+    },
+    body: [
+      { type: "p", html: "På toppen av vulkanen Haleakalā på Hawaii står ett teleskop med en fyra meter bred spegel riktad rakt mot solen. Med det har ett internationellt forskarlag tagit den skarpaste bild av solens yta som någonsin gjorts. De minsta detaljer som går att skilja ut i den är omkring 19&nbsp;kilometer stora — på ett föremål som befinner sig 150&nbsp;miljoner kilometer bort." },
+      { type: "p", html: "Bilden visar ett landskap som ingen har sett förut. Överallt där solens magnetfält tränger upp genom ytan är kanterna fransiga och krusiga som fjäderkanter, och i fransarna sitter små virvlar. I tidskriften <em>Nature</em> skriver laget att virvlarna är Kelvin–Helmholtz-instabiliteter, och att de kan vara en pusselbit i en av solfysikens envisaste gåtor." },
+
+      { type: "h2", text: "Ytan kokar" },
+      { type: "p", html: "Det vi kallar solens yta är fotosfären, det tunna skikt där gasen äntligen blir genomskinlig nog att släppa ut sitt ljus. Något fast underlag finns inte: fotosfären är ett plasma på omkring 5&nbsp;500&nbsp;°C, alltså en gas så het att elektronerna har slitits loss från atomkärnorna." },
+      { type: "p", html: "Skiktet kokar, ungefär som gröt i en kastrull. Het gas stiger upp från djupet, breder ut sig på ytan, strålar bort sin energi i rymden, svalnar och sjunker ner igen. Uppåtströmmarna syns som ljusa celler, granuler, på mellan 500 och 2&nbsp;000&nbsp;kilometer i diameter — en enda sådan bubbla kan alltså vara längre än Sverige. Nedåtströmmarna bildar de mörkare, svalare fårorna mellan dem." },
+
+      { type: "h2", text: "Vind som reser vågor" },
+      { type: "p", html: "När två skikt av en gas eller vätska glider förbi varandra med olika fart är gränsytan mellan dem instabil. Uppstår den minsta krusning måste strömmen som passerar över krusningens topp ta en längre väg och går därför fortare. Där farten är högre är trycket lägre, så toppen sugs uppåt ytterligare — krusningen blir en våg, vågen växer och rullar till slut ihop sig i en virvel." },
+      { type: "p", html: "Det är samma mekanism som gör att vind reser vågor på en sjö, att flaggor fladdrar i stället för att hänga rakt ut i vinden, och som ibland ritar en rad av likadana krökta vågmoln över himlen. Fenomenet är uppkallat efter William Thomson, senare lord Kelvin, och Hermann von Helmholtz, som beskrev det matematiskt på 1860-talet." },
+      { type: "quote", html: "”Gränsytan kan bli instabil och utveckla vågliknande virvlar som växer tills de bryts sönder — inte helt olikt vågorna ute på en sjö eller på havet en blåsig dag.”", cite: "Friedrich Wöger, National Solar Observatory" },
+
+      { type: "h2", text: "Magnetfältet ritar gränsen" },
+      { type: "p", html: "Ett plasma leder elektrisk ström utmärkt, och därför följs plasma och magnetfält åt: gasen släpar med sig fältlinjerna, och fältlinjerna håller emot gasen. I de mörka fårorna mellan granulerna trängs solens magnetfält ihop till smala knippen där det är många gånger starkare än i omgivningen. Just där, längs knippenas kanter, möts gas som rör sig olika fort — precis det förhållande instabiliteten kräver." },
+      { type: "p", html: "På bilderna avslöjar den sig på två sätt. Magnetknippenas kanter är deformerade och vågiga i stället för släta, och tvärs över dem löper ultrafina mörka streck på några tiotals kilometers skala. Virvlarna själva mäter från 19&nbsp;kilometer, teleskopets undre gräns, upp till omkring 170&nbsp;kilometer." },
+      { type: "image", src: "nyheter/bilder/2026-08-07-virvlar-pa-solens-yta-2.jpg", alt: "Samma orangefärgade solyta, med en inringad detalj förstorad i en cirkel uppe till höger. I förstoringen syns hur den ljusa kanten mellan två celler böjer sig i en rad krökta flikar. En skalstock i cirkeln motsvarar 100 kilometer.", caption: "Utsnitt ur den nya bilden. I förstoringen syns hur gränsen mellan två granuler krökt sig till en rad virvlar — skalstocken motsvarar 100&nbsp;kilometer, ungefär en timmes bilfärd på motorväg.", credit: "Bild: NSF/NSO/AURA/MPS" },
+      { type: "p", html: "För att vara säkra på tolkningen jämförde laget bilderna med datorsimuleringar av magnetiserat plasma i solens atmosfär, gjorda med programmet MURaM. Simuleringarna gav samma mönster, och därmed kunde forskarna för första gången slå fast att det verkligen är Kelvin–Helmholtz-instabiliteter man ser på en stjärnyta." },
+      { type: "quote", html: "”De nyupptäckta plasmavirvlarna visar på ett slående sätt hur ytterst små processer — vid gränsen för vad vi över huvud taget kan urskilja med tillgänglig teknik — i hög grad avgör vår stjärnas beskaffenhet.”", cite: "Sami K. Solanki, chef för Max Planck-institutet för solsystemforskning" },
+
+      { type: "h2", text: "Gåtan om den heta koronan" },
+      { type: "p", html: "Solens yta håller alltså omkring 5&nbsp;500&nbsp;°C. Men solens yttersta atmosfär, koronan, är över en miljon grader — den pärlemorskimrande krans som blir synlig runt den svarta månskivan vid en total solförmörkelse. Att det blir hetare ju längre bort man kommer från värmekällan låter som en omöjlighet, och vore det också om värmen leddes uppåt på vanligt vis. Energin måste i stället bäras dit på något annat sätt, och misstankarna har länge riktats mot magnetfältet." },
+      { type: "p", html: "Problemet är att energin ska bli värme till slut, och stora, långsamma rörelser värmer ingenting. Den måste först styckas ner i allt mindre virvlar tills skalan är så liten att gasens inre friktion kan omvandla rörelsen till värme. Just den nedbrytningen är instabiliteten skicklig på." },
+      { type: "quote", html: "”Kelvin–Helmholtz-instabiliteten är ett riktigt effektivt sätt för solen att bryta ner stora plasmaströmmar till mindre rörelser. Finns den i systemet blir det mycket lättare att sätta i gång en energikaskad ner mot mikroskopiska skalor — och väl där kan energin enkelt frigöras som värme.”", cite: "David Kuridze, National Solar Observatory" },
+      { type: "p", html: "Samma magnetiska energi driver solens utbrott. När uppdämda fältstrukturer plötsligt gör om sig kastas strålning och laddade partiklar ut i rymden, och träffar de jorden kan de störa satelliter, radiotrafik och elnät. Hur utbrotten utlöses kallar Kuridze en av de stora frontlinjerna i modern solfysik." },
+
+      { type: "h2", text: "Nitton kilometer är fysikens gräns, inte teknikens" },
+      { type: "p", html: "Att skärpan stannar just vid 19&nbsp;kilometer beror inte på att kameran är för dålig. Det är ljusets vågnatur som sätter stoppet: ljus som passerar en öppning böjs, och två punkter som ligger för nära varandra smetas ihop till en enda fläck. Den minsta vinkel två punkter kan ha mellan sig och ändå synas åtskilda ges av" },
+      { type: "p", html: "$$\\theta \\approx 1{,}22 \\cdot \\dfrac{\\lambda}{D}$$" },
+      { type: "p", html: "där $\\lambda$ är ljusets våglängd och $D$ spegelns diameter. Bilderna togs i violett ljus, $\\lambda = 416\\ \\mathrm{nm}$, med en spegel på $D = 4{,}0\\ \\mathrm{m}$, vilket ger $\\theta \\approx 1{,}3 \\cdot 10^{-7}$ radianer. Multiplicerat med avståndet till solen, $1{,}5 \\cdot 10^{11}\\ \\mathrm{m}$, blir det knappt 19&nbsp;kilometer. Teleskopet arbetar alltså på sin teoretiska gräns, och den enda vägen till ännu finare detaljer går genom en ännu större spegel." },
+      { type: "p", html: "Att virvlarna skulle finnas var väntat. Att de skulle finnas överallt var det inte — och just det, säger Kuridze, var vad laget minst av allt hade räknat med. Utomstående kollegor har fastnat mer för hur bilderna ser ut: solfysikern Ruizhu Chen vid Stanforduniversitetet, som inte deltog i arbetet, tycker att de fransiga virvlarna påminner om de virvlande himlarna i van Goghs <em>Stjärnenatt</em>." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Koronan går inte att se för blotta ögat annat än vid en total solförmörkelse. Nästa inträffar den 12&nbsp;augusti&nbsp;2026 och drar fram över östra Grönland, västra Island och norra Spanien, med som mest 2&nbsp;minuter och 18&nbsp;sekunder i totalt mörker.",
+        "Kelvin–Helmholtz-instabiliteten är långt ifrån bara ett solfenomen. Den formar vågmolnen i jordens atmosfär, virvlarna längs Jupiters och Saturnus molnband, och krusningarna där solvinden stryker längs jordens magnetfält.",
+        "Fotosfären är bara ett par hundra kilometer tjock, på en gasboll med 1,4&nbsp;miljoner kilometers diameter. Det är därför solen har en så knivskarp kant på himlen trots att den inte har någon yta i vanlig mening."
+      ] }
+    ]
+  },
+  {
     id: "2026-08-06-kvantlabb-i-fritt-fall",
     date: "2026-08-06",
     title: "Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen",

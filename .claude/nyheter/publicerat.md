@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het | National Solar Observatory (pressmeddelande 2026-08-05) / Max-Planck-Gesellschaft / Phys.org / EurekAlert! / ABC News (AP) / Nature (D. Kuridze, F. Wöger m.fl., 2026-08-05, DOI 10.1038/s41586-026-10871-3) |
 | 2026-08-06 | `2026-08-06-kvantlabb-i-fritt-fall` | Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen | Johannes Gutenberg-universitetet Mainz (pressmeddelande 2026-08-05) / Phys.org / Scientific Frontline / HITec Leibniz-universitetet Hannover / SSC (Esrange) / Nature Communications (B. Piest m.fl., 2026-07-28, DOI 10.1038/s41467-026-75968-9, även arXiv:2508.20820 CC BY 4.0) |
 | 2026-08-05 | `2026-08-05-rubin-mork-materia` | Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen | Vera C. Rubin Observatory (pressmeddelanden om LSST-starten 2026-06-30 och COSMOS/EDP2 2026-07-31) / NSF NOIRLab (noirlab2618) / SLAC / Phys.org / The Astrophysical Journal 873:111 (Ž. Ivezić m.fl., 2019, DOI 10.3847/1538-4357/ab042c) |
 | 2026-08-04 | `2026-08-04-fusion-i-metall` | Fusionen som vägrar slockna — inne i metallfolier smälter atomkärnor samman långt under den energi där teorin säger stopp | Physics World / Phys.org / Lawrence Berkeley National Laboratory (pressmeddelande) / Nature Communications (M. E. Karahadian, M. Colborne, A. Persaud, T. Schenkel, J. N. Munday, 2026, DOI 10.1038/s41467-026-74421-1) |
@@ -301,3 +302,34 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Journal 1006:77, DOI 10.3847/1538-4357/ae680d, publicerad 07-16 — stark
 > astropartikel-vinkel, ligger nu i ko.md), samt kvark-gluonplasma-simuleringen
 > ovan. Se ko.md.
+
+> **2026-08-07 — solvirvlarna (Kelvin–Helmholtz i fotosfären).** Uppslaget kom från
+> användaren, som klistrat in ett Omni-referat av BBC:s text plus DOI:n. Omni-texten
+> användes INTE som källa; artikeln är byggd från NSO:s pressmeddelande,
+> Max-Planck-Gesellschaft, Phys.org, EurekAlert! och AP-telegrammet (ABC News), samt
+> Nature-artikelns titel och figurtext.
+>
+> VIKTIGT om researchmiljön: sessionens utgående nät släppte bara igenom GitHub, så
+> varken WebFetch eller curl nådde nso.edu, nature.com, CNN eller EurekAlert! (403 från
+> egress-proxyn). All faktainhämtning skedde därför via WebSearch, och varje citat
+> stämdes av i mer än en sökning innan det användes. Nature-abstractet gick aldrig att
+> läsa i sin helhet — inga siffror är hämtade därifrån, bara från pressmaterialet.
+>
+> Bilderna hämtades via `.github/bildorder.txt`-arbetsflödet, som behövde två fixar för
+> att fungera mot ett WordPress-pressrum: (a) og:image som fallback när sidan saknar
+> `original/`- eller `screen/`-sökvägar, (b) Referer-huvud vid nedladdningen — NSO:s
+> bunny-CDN svarar annars med en HTML-sida i stället för bilden. Tredje fältet på raden
+> i bildorder.txt är nu referer-URL. Båda bilderna är NSF/NSO/AURA/MPS-pressbilder.
+>
+> Tre saker som lätt blir fel i den här nyheten:
+> (a) Mätningarna ÄR virvlar i FOTOSFÄREN, inte i koronan. Kopplingen till
+>     koronauppvärmningen är forskarnas hypotes om en energikaskad — inte ett resultat.
+>     Skriv aldrig att gåtan är löst.
+> (b) 19 km är teleskopets DIFFRAKTIONSGRÄNS, inte ett godtyckligt mätvärde. Artikeln
+>     räknar efter: 1,22 · 416 nm / 4,0 m · 1,5 · 10^11 m ≈ 19 km. Stämmer.
+> (c) Svenska termen är KORONAN (eller solkoronan), inte ”kronan”. Första utkastet hade
+>     ”kronan”, vilket verify-begrepp.js fångade genom att begreppet saknade träff.
+> Attributionen för Kuridze: pressmaterialet kallar honom omväxlande lead author och
+> co-lead author, och Wöger co-lead. Därför står båda namnen i `research.citation` och
+> ingen av dem utpekas som ensam förstaförfattare i texten.
+> Fyra nya begrepp: fotosfär, korona, granulation, Kelvin–Helmholtz-instabilitet.

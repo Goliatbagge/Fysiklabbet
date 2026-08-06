@@ -44,6 +44,13 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-07) — kan tas upp senare
+
+- **Publicerad 2026-08-07: Kelvin–Helmholtz-virvlar i solens fotosfär** (NSO/MPS/HAO,
+  Nature) — se publicerat.md för avvägningen och för de tre fällorna (fotosfär ≠ korona,
+  19 km är diffraktionsgränsen, koronan heter inte ”kronan”). Uppslaget kom från
+  användaren. Reserverna nedan står kvar orörda.
+
 ## Fynd som inte användes (2026-08-06) — kan tas upp senare
 
 - **Valdes i dag: MAIUS-B, kvantgasblandningar i falltorn** (Leibniz-universitetet

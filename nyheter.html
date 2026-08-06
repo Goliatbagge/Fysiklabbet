@@ -1238,7 +1238,10 @@
             return (
                 <article className="article" ref={articleRef}>
                     <a className="article-back" href="nyheter.html">← Alla nyheter</a>
-                    <MetaRow a={a} byline />
+                    {/* Inget AI-chip här: metaraden ska bara vara kategori,
+                        datum och lästid. Transparensen bärs av nyhets-
+                        sektionens rubrik och felrapportrutan i slutet. */}
+                    <MetaRow a={a} />
                     <h1 className="article-title">{a.title}</h1>
                     <p className="article-deck">{a.deck}</p>
 

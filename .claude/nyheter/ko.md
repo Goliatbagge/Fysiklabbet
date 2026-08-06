@@ -44,6 +44,30 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-06) — kan tas upp senare
+
+- **Valdes i dag: MAIUS-B, kvantgasblandningar i falltorn** (Leibniz-universitetet
+  Hannover m.fl., Nature Communications) — se publicerat.md för full avvägning och
+  för de tre fällorna (mätningarna kommer från falltornet och inte från raketen,
+  de två skilda atomtalen, och enhetsfällan i lutningen δΔv/δΔt).
+- **Luftstabila, ultratunna supraledare** — enkel- till fåatomstjocka supraledande
+  skikt som tål luft, tänkta för kompakta kvantkomponenter. Bra ellära-/materialvinkel
+  (resistans som försvinner), och supraledning har inte tagits upp sedan 2026-07-01.
+  Källa: https://phys.org/news/2026-08-air-stable-ultrathin-superconductors-scalable.html
+- **Attosekund-röntgen kartlägger elektronrörelserna som utlöser kemiska reaktioner**
+  — ligger nära elektronkameran 2026-07-07, men är en egen metodnyhet.
+  Källa: https://phys.org/news/2026-08-attosecond-ray-method-early-electron.html
+- **Sammanflätade fotoner genom fiber i Washingtons förorter** — steg mot ett
+  kvantnätverk. Kvantsammanflätning är välbevakad på sajten; sparad som reserv.
+  Källa: https://phys.org/news/2026-08-spooky-particles-transit-dc-suburbs.html
+- **Molekylorbitaler avbildade i 3D** och **kvantvätska med dolda tillstånd som
+  växlas med magnetfält** — båda från 2026-08-04, obrukade.
+- **OBS — physics.aps.org svarade HTTP 403 även 2026-08-06** (fjärde gången i rad).
+  Nature kräver fortfarande inloggning via idp.nature.com; kringgå det via Crossref
+  (`api.crossref.org/works/<DOI>`) för licens och metadata, och via arXiv:s
+  HTML-version (`arxiv.org/html/<id>`) för brödtexten. Quanta stod stilla sedan
+  myon-artikeln 07-29, Physics World hade bara forsknings-/anslagspolitik.
+
 ## Fynd som inte användes (2026-08-04) — kan tas upp senare
 
 - **Valdes i dag: fusion som planar ut i metallfolier** (UC Davis + Berkeley Lab,

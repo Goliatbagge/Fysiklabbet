@@ -59,6 +59,12 @@
  *                   Bädda ALDRIG in upphovsrättsskyddat material — då används
  *                   i stället en vanlig <a>-länk i brödtexten. Blocket läggs
  *                   intill det ställe i artikeln som refererar till filmen.
+ *                   Refererar en faktaruta filmen: lägg videon som fältet
+ *                   `video: {…}` PÅ fact-blocket (samma fält som ovan) — då
+ *                   renderas den inuti den vita rutan, direkt under
+ *                   punkterna, i stället för som en lös figur under rutan.
+ *                   Ange gärna BÅDE src och embed — embed är reserv som gör
+ *                   att en äldre cachad nyheter.html också kan visa filmen.
  *
  * Flera bilder per artikel: har nyheten fler än en fri pressbild får (och bör)
  * de extra bilderna läggas in som 'image'-block mellan styckena i body. Den
@@ -147,13 +153,14 @@ const NYHETER_ALL = [
         "Zerodur, materialet i optikbänkarna, har en värmeutvidgning nära noll. En meterlång stav växer mindre än en hundradels millimeter om den värms hundra grader — vilket är skälet till att samma glaskeram används i spegelunderlag till stora teleskop.",
         "Både rubidium-87 och kalium-41 är bosoner, alltså partiklar som gärna samsas i samma kvanttillstånd. Det är just den egenskapen som gör att de kan bilda kondensat; en gas av fermioner vägrar och måste kylas på helt andra sätt.",
         "Den mest berömda demonstrationen av att allt faller lika fort gjordes 1971 på månen, där Apollo 15:s befälhavare David Scott släppte en hammare och en falkfjäder framför tv-kameran. Utan luft att bromsa fjädern landade de samtidigt — se filmen här nedanför."
-      ]},
-      { type: "video", src: "media/video/apollo15-hammare-fjader.mp4",
+      ],
+      video: { src: "media/video/apollo15-hammare-fjader.mp4",
         poster: "media/video/apollo15-hammare-fjader.jpg", ratio: "4:3",
+        embed: "https://archive.org/embed/FeatherHammerDropOnMoon",
         title: "Apollo 15: hammaren och fjädern släpps på månen",
         caption: "David Scott släpper hammaren och falkfjädern på månen, i slutet av Apollo 15:s sista månpromenad 1971.",
         credit: "Film: NASA (public domain)",
-        url: "https://archive.org/details/FeatherHammerDropOnMoon" }
+        url: "https://archive.org/details/FeatherHammerDropOnMoon" } }
     ]
   },
   {

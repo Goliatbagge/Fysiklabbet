@@ -2076,6 +2076,45 @@ button.lab-card-disabled { pointer-events: none; }
    window.FYSIKMINISIM.mountAll(); widgeten har egen intern CSS. */
 .lab-minisim { margin: 18px 0 6px; }
 
+/* ── Videoklipp (::: video) ──────────────────────────────────────────
+   Inbäddat fritt filmmaterial (archive.org/youtube-nocookie) med titel-
+   och källrad under. HTML:en byggs av buildVideoEmbed() i katalog.html/
+   avsnitt.html. Ramen får sitt bildförhållande via inline aspect-ratio
+   (16:9 standard, 4:3 för äldre filmmaterial). */
+.lab-video { margin: 22px 0; }
+.lab-video .lab-video-ram {
+    position: relative; width: 100%;
+    background: #0f1620; /* mörk yta bakom spelaren medan den laddar */
+    border: 1px solid var(--lab-line-strong); border-radius: 6px;
+    overflow: hidden;
+}
+.lab-video .lab-video-ram iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    border: 0; display: block;
+}
+.lab-video figcaption {
+    display: flex; flex-direction: column; gap: 4px; margin-top: 8px;
+}
+.lab-video .lab-video-titel {
+    font-size: 14.5px; line-height: 1.5; color: var(--lab-ink);
+    font-style: normal;
+}
+.lab-video .lab-video-kalla {
+    font-family: var(--lab-font-mono); font-size: 11px;
+    letter-spacing: 0.03em; color: var(--lab-ink-muted);
+    font-style: normal;
+}
+.lab-video .lab-video-kalla a {
+    color: var(--lab-accent); text-decoration: underline;
+    text-underline-offset: 2px;
+}
+/* Länk-variant när materialet inte går att bädda in */
+.lab-video-lank {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 12px 14px; border: 1px solid var(--lab-line-strong);
+    border-radius: 6px; background: var(--lab-bg-panel);
+}
+
 /* Textlösning (::: textlosning) — den vanliga textvarianten av en
    handskriven lösning. Renderas som lös brödtext, inte som en blockruta;
    handskrift.js växlar synligheten ("Med penna"/"Som text"). */

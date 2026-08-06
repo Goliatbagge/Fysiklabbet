@@ -247,6 +247,23 @@
             font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.03em;
             color: var(--lab-ink-muted);
         }
+        /* Inbäddat fritt videoklipp — body-block { type: 'video' }. Ramen
+           får bildförhållandet via inline aspect-ratio (4:3 för äldre
+           filmmaterial, annars 16:9). */
+        .article-body .article-video-frame {
+            position: relative; width: 100%;
+            background: #0f1620; /* mörk yta bakom spelaren medan den laddar */
+            border: 1px solid var(--lab-line-strong); border-radius: 4px;
+            overflow: hidden;
+        }
+        .article-body .article-video-frame iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            border: 0; display: block;
+        }
+        .article-body figure.article-video .fig-credit a {
+            color: var(--lab-accent); text-decoration: underline;
+            text-underline-offset: 2px;
+        }
         .article-body { margin-top: 26px; }
         .article-body p {
             font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px;
@@ -900,6 +917,28 @@
                             {b.credit && <span className="fig-credit">{b.credit}</span>}
                         </figcaption>
                     )}
+                </figure>
+            );
+            if (b.type === 'video') return (
+                <figure className="article-figure article-figure-inline article-video">
+                    <div className="article-video-frame"
+                         style={{ aspectRatio: b.ratio === '4:3' ? '4 / 3' : '16 / 9' }}>
+                        <iframe src={b.embed} title={b.title || 'Videoklipp'} loading="lazy"
+                                frameBorder="0" allow="fullscreen; encrypted-media; picture-in-picture"
+                                allowFullScreen />
+                    </div>
+                    <figcaption>
+                        {b.caption && <span className="fig-caption"
+                            dangerouslySetInnerHTML={{ __html: prepMath(b.caption) }} />}
+                        {(b.credit || b.url) && (
+                            <span className="fig-credit">
+                                {b.credit}
+                                {b.credit && b.url ? ' · ' : ''}
+                                {b.url && <a href={b.url} target="_blank"
+                                             rel="noopener noreferrer">Se filmen i original</a>}
+                            </span>
+                        )}
+                    </figcaption>
                 </figure>
             );
             if (b.type === 'fact') return (

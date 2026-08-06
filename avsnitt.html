@@ -259,6 +259,22 @@
                     i = j; // hoppa förbi det avslutande :::
                     continue;
                 }
+                // ::: video — inbäddat fritt videoklipp (archive.org eller
+                // YouTube). Config-raderna görs om direkt till en <figure>
+                // med iframe — ingen JS-mount behövs. Se buildVideoEmbed.
+                const vidOpen = line.match(/^:::\s*video\s*$/i);
+                if (vidOpen) {
+                    const cfg = {};
+                    let j = i + 1;
+                    for (; j < lines.length; j++) {
+                        if (/^:::\s*$/.test(lines[j])) break;
+                        const m = lines[j].match(/^([a-zåäö]+):\s*(.+)$/i);
+                        if (m) cfg[m[1].toLowerCase()] = m[2].trim();
+                    }
+                    out.push(buildVideoEmbed(cfg));
+                    i = j; // hoppa förbi det avslutande :::
+                    continue;
+                }
                 // ::: minisim — inbäddad minisimulering. Samma mönster:
                 // config-raderna → mount-placeholder (minisim.js).
                 const msOpen = line.match(/^:::\s*minisim\s*$/i);
@@ -321,6 +337,40 @@
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;');
+        }
+
+        // ::: video-blockets config → färdig HTML. Nycklar:
+        //   arkiv:  archive.org-identifierare (t.ex. FeatherHammerDropOnMoon)
+        //   youtube: YouTube-video-id (bäddas in via youtube-nocookie.com)
+        //   titel:  visas under klippet
+        //   källa:  upphov/licens (t.ex. "Film: NASA (public domain)")
+        //   länk:   extern länk till originalet ("Se filmen i original")
+        //   format: "4:3" för äldre filmmaterial (standard 16:9)
+        // Saknas både arkiv: och youtube: renderas bara en länkrad — så att
+        // material som inte går att bädda in ändå blir ett klick bort.
+        function buildVideoEmbed(cfg) {
+            const src = cfg.arkiv
+                ? 'https://archive.org/embed/' + encodeURIComponent(cfg.arkiv)
+                : (cfg.youtube
+                    ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(cfg.youtube)
+                    : null);
+            const ratio = cfg.format === '4:3' ? '4 / 3' : '16 / 9';
+            const cap = [];
+            if (cfg.titel) cap.push('<span class="lab-video-titel">' + escapeHtml(cfg.titel) + '</span>');
+            const meta = [];
+            if (cfg['källa'] || cfg.kalla) meta.push(escapeHtml(cfg['källa'] || cfg.kalla));
+            if (cfg['länk'] || cfg.lank) {
+                const url = escapeHtml(cfg['länk'] || cfg.lank);
+                meta.push('<a href="' + url + '" target="_blank" rel="noopener">Se filmen i original</a>');
+            }
+            if (meta.length) cap.push('<span class="lab-video-kalla">' + meta.join(' · ') + '</span>');
+            if (!src) {
+                return '<div class="lab-video lab-video-lank">' + cap.join('') + '</div>';
+            }
+            return '<figure class="lab-video"><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+                '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
+                ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
+                '</div><figcaption>' + cap.join('') + '</figcaption></figure>';
         }
 
         // Kursiverade variabler i titlar: '*pq*-formeln' → <em>pq</em>-formeln.

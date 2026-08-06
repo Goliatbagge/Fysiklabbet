@@ -355,6 +355,10 @@
         .article-fact ul { margin: 0; padding-left: 20px; }
         .article-fact li { font-size: 15.5px; line-height: 1.6; color: var(--lab-ink-soft); margin-bottom: 9px; }
         .article-fact li:last-child { margin-bottom: 0; }
+        /* Videoklipp nästlat i faktarutan (fact.video) — filmen ska ligga
+           i direkt anslutning till punkten som refererar den, inom den
+           vita rutan, inte som en egen lös figur under rutan. */
+        .article-fact figure.article-figure-inline { margin: 18px 0 0; }
 
         /* Ordförklaringar — de begrepp ur ordlistan som artikeln nämner.
            Fylls av begrepp-lank.js autolänkning (se ArticleView). */
@@ -1007,6 +1011,42 @@
             );
         }
 
+        // Inbäddat fritt videoklipp — används både som eget body-block
+        // ({ type: 'video', … }) och nästlat i en faktaruta (fact.video),
+        // så att filmen kan ligga i direkt anslutning till texten som
+        // refererar den. v.src (självhostad mp4) föredras; v.embed
+        // (iframe-URL) är reserv. Saknas båda renderas ingenting — hellre
+        // ingen ruta än en svart.
+        function ArticleVideo({ v }) {
+            if (!v || (!v.src && !v.embed)) return null;
+            return (
+                <figure className="article-figure article-figure-inline article-video">
+                    <div className="article-video-frame"
+                         style={{ aspectRatio: v.ratio === '4:3' ? '4 / 3' : '16 / 9' }}>
+                        {v.src
+                            ? <video controls preload="metadata" playsInline poster={v.poster} title={v.title || 'Videoklipp'}>
+                                  <source src={v.src} type="video/mp4" />
+                              </video>
+                            : <iframe src={v.embed} title={v.title || 'Videoklipp'} loading="lazy"
+                                      frameBorder="0" allow="fullscreen; encrypted-media; picture-in-picture"
+                                      allowFullScreen />}
+                    </div>
+                    <figcaption>
+                        {v.caption && <span className="fig-caption"
+                            dangerouslySetInnerHTML={{ __html: prepMath(v.caption) }} />}
+                        {(v.credit || v.url) && (
+                            <span className="fig-credit">
+                                {v.credit}
+                                {v.credit && v.url ? ' · ' : ''}
+                                {v.url && <a href={v.url} target="_blank"
+                                             rel="noopener noreferrer">Se filmen i original</a>}
+                            </span>
+                        )}
+                    </figcaption>
+                </figure>
+            );
+        }
+
         function Block({ b }) {
             if (b.type === 'h2') return <h2>{b.text}</h2>;
             if (b.type === 'quote') return (
@@ -1027,36 +1067,12 @@
                     )}
                 </figure>
             );
-            if (b.type === 'video') return (
-                <figure className="article-figure article-figure-inline article-video">
-                    <div className="article-video-frame"
-                         style={{ aspectRatio: b.ratio === '4:3' ? '4 / 3' : '16 / 9' }}>
-                        {b.src
-                            ? <video controls preload="metadata" playsInline poster={b.poster} title={b.title || 'Videoklipp'}>
-                                  <source src={b.src} type="video/mp4" />
-                              </video>
-                            : <iframe src={b.embed} title={b.title || 'Videoklipp'} loading="lazy"
-                                      frameBorder="0" allow="fullscreen; encrypted-media; picture-in-picture"
-                                      allowFullScreen />}
-                    </div>
-                    <figcaption>
-                        {b.caption && <span className="fig-caption"
-                            dangerouslySetInnerHTML={{ __html: prepMath(b.caption) }} />}
-                        {(b.credit || b.url) && (
-                            <span className="fig-credit">
-                                {b.credit}
-                                {b.credit && b.url ? ' · ' : ''}
-                                {b.url && <a href={b.url} target="_blank"
-                                             rel="noopener noreferrer">Se filmen i original</a>}
-                            </span>
-                        )}
-                    </figcaption>
-                </figure>
-            );
+            if (b.type === 'video') return <ArticleVideo v={b} />;
             if (b.type === 'fact') return (
                 <div className="article-fact">
                     <div className="article-fact-title">{b.title}</div>
                     <ul>{b.items.map((it, i) => <li key={i} dangerouslySetInnerHTML={{ __html: prepMath(it) }} />)}</ul>
+                    {b.video && <ArticleVideo v={b.video} />}
                 </div>
             );
             return <p dangerouslySetInnerHTML={{ __html: prepMath(b.html) }} />;

@@ -88,8 +88,11 @@ jobs:
               grep -oE '<meta[^>]+(og:description|og:title)[^>]*>' sida.html | head -5 || true
             fi
 
-            echo "laddar ner: $bildurl"
-            curl -sSL -A "$UA" "$bildurl" -o rå.bin
+            # Vissa bild-CDN:er (bunny.net m.fl.) svarar med en HTML-sida i
+            # stället för bilden när Referer saknas. Tredje fältet på raden i
+            # bildorder.txt får ange vilken sida bilden hör till.
+            echo "laddar ner: $bildurl${rest:+ (referer: $rest)}"
+            curl -sSL -A "$UA" ${rest:+-e "$rest"} "$bildurl" -o rå.bin
             case "$(file -b --mime-type rå.bin)" in
               image/*) ;;
               *) echo "Nedladdad fil är ingen bild"; file rå.bin; exit 1 ;;

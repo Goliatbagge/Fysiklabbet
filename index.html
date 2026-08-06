@@ -37,11 +37,7 @@
         .home-news-byline h2 {
             font-family: var(--lab-font-display);
             font-size: clamp(26px, 3.2vw, 34px); line-height: 1.05;
-            letter-spacing: -0.01em; color: var(--lab-accent); margin: 0 0 7px;
-        }
-        .home-news-byline p {
-            font-size: 13.5px; line-height: 1.55; color: var(--lab-ink-soft);
-            margin: 0; max-width: 62ch;
+            letter-spacing: -0.01em; color: var(--lab-accent); margin: 0;
         }
         .home-news-card {
             display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: stretch;
@@ -351,12 +347,7 @@
             return (
                 <section className="lab-section home-news">
                     <div className="home-news-byline">
-                        <h2>Dagens nyhet från AI-redaktören</h2>
-                        <p>
-                            Fysiknyheterna skrivs i huvudsak av AI. Texterna bygger på
-                            de källor som anges i varje artikel och granskas av en
-                            människa före publicering, men kan ändå innehålla fel.
-                        </p>
+                        <h2>Fysiknyheter från AI-redaktören</h2>
                     </div>
                     <div className="lab-updates-header">
                         <span className="lab-mono-label">Senaste nyheten</span>

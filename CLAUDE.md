@@ -491,6 +491,38 @@ raderna får aldrig läsas upp). Marginal-CSS i `styles-laborans.css`
 (`.lab-minisim`), övrig CSS injiceras av widgeten själv. Efter att du lagt
 in ett block: kör `node data/teori/build.js` som vanligt.
 
+## Fritt filmmaterial (`::: video` + video-block i nyheter)
+
+**REGEL: När en text (teoriavsnitt, nyhetsartikel, simulering) refererar
+till filmmaterial som är fritt tillgängligt (public domain/CC) — som
+Apollo 15:s hammare-och-fjäder eller Tacoma-brons kollaps — ska filmen
+bäddas in intill referensen, så att läsaren kan titta direkt.** Går den
+inte att bädda in läggs en extern länk. Bädda ALDRIG in upphovsrätts-
+skyddat material (uttryckligt önskemål 2026-08-06).
+
+- **Självhostad mp4 är FÖRSTAHANDSVALET** — tredjeparts-iframes
+  (archive.org-embed) visade svart ruta i mobilen. Filmerna ligger i
+  `media/video/` (mp4 + affisch-jpg) och hämtas av GitHub Actions-
+  arbetsflödet **Hämta videomaterial**: skriv
+  `<archive.org-id> <filnamn> <affisch-tidpunkt>` i
+  `.github/videoorder.txt` och pusha (samma mönster som `bildorder.txt`
+  för pressbilder; körningen committar filerna och tömmer filen). Håll
+  filerna små — minsta fullängds-mp4-derivatet väljs automatiskt.
+- **Teorin**: `::: video`-block med `titel:`, `fil:`, `affisch:`,
+  `format: 4:3` (äldre filmmaterial; standard 16:9), `källa:` och
+  `länk:`. Byggkedja som `::: graf`: skyddas i `data/teori/build.js`,
+  renderas av `buildVideoEmbed()` i `katalog.html`/`avsnitt.html`
+  (`.lab-video`, CSS i `styles-laborans.css`), hoppas över av TTS-
+  manuset. `arkiv:`/`youtube:` finns som iframe-reserv. Kör
+  `node data/teori/build.js` efteråt. Referens: `fy1-2.4`, `fy2-2.6`.
+- **Nyheter**: body-block `{ type: 'video', src, poster, ratio, title,
+  caption, credit, url }` — dokumenterat i huvudet på `data/nyheter.js`.
+  Blocket läggs intill det ställe i artikeln som refererar filmen.
+- **`länk:`/`url` ska peka DIREKT på filmens egen sida** (t.ex.
+  `archive.org/details/<id>`), aldrig på en startsida — och undvik
+  NSSDC-länkar (nssdc.gsfc.nasa.gov låg nere 2026-08-06 och visade en
+  underhållssida i stället för filmen).
+
 ## Projektstruktur
 
 ```

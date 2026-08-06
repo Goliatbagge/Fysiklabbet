@@ -70,6 +70,19 @@ jobs:
               grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt
               bildurl=$(grep -E '/(original|fullsize|large)/' kandidater.txt | head -1 || true)
               [ -n "$bildurl" ] || bildurl=$(grep -E '/(screen|publicationjpg|wallpaper)/' kandidater.txt | head -1 || true)
+              # Vanliga pressrum (WordPress, EurekAlert!) har inga sådana
+              # sökvägar — där är og:image sidans egen huvudbild.
+              [ -n "$bildurl" ] || bildurl=$(grep -oE '<meta[^>]+og:image[^>]*>' sida.html \
+                | grep -oE 'content=("[^"]+"|'"'"'[^'"'"']+'"'"')' | head -1 \
+                | sed -E 's/^content=.//; s/.$//' || true)
+              # Sista utväg: den största av sidans bilder (mätt med HEAD).
+              if [ -z "$bildurl" ]; then
+                bildurl=$(head -40 kandidater.txt | while read -r k; do
+                  n=$(curl -sSLI -A "$UA" -o /dev/null -w '%{size_download}\n%{content_length}' "$k" 2>/dev/null | tail -1)
+                  case "$n" in ''|*[!0-9]*) n=0 ;; esac
+                  printf '%s %s\n' "$n" "$k"
+                done | sort -rn | head -1 | cut -d' ' -f2-)
+              fi
               [ -n "$bildurl" ] || { echo "Hittade ingen bildlänk på sidan"; exit 1; }
               echo "--- sidans metadata (bildtext/kredit) ---"
               grep -oE '<meta[^>]+(og:description|og:title)[^>]*>' sida.html | head -5 || true

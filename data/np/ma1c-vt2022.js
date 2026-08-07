@@ -62,6 +62,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         // ================= DELPROV B =================
         {
             nr: 1, del: 'B', poang: [1, 0, 0], omrade: 'Algebra — faktorisering',
+            genomgangar: ['ma1c-2.4'],
             endastSvar: true,
             fraga: 'Faktorisera uttrycket $5x + 25$ genom att bryta ut största möjliga faktor.',
             figur: null,
@@ -90,6 +91,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 2, del: 'B', poang: [1, 0, 0], omrade: 'Räta linjen — avläsa graf',
+            genomgangar: ['ma1c-4.4', 'ma1c-4.5'],
             endastSvar: true,
             fraga: 'Vilket funktionsuttryck motsvarar grafen i koordinatsystemet?\n\n' +
                 '$y = -2x + 1{,}5$\n\n$y = -2x + 3$\n\n$y = -0{,}5x + 3$\n\n$y = 2x - 1{,}5$\n\n$y = 1{,}5x + 3$',
@@ -124,6 +126,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 3, del: 'B', poang: [1, 0, 0], omrade: 'Sannolikhet — utan återläggning',
+            genomgangar: ['ma1c-5.4', 'ma1c-5.6'],
             endastSvar: true,
             fraga: 'Lena har en påse med 2 gula och 3 blå vantar. ' +
                 'Hon tar 2 stycken vantar utan att titta vilken färg de har. ' +
@@ -164,6 +167,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 4, del: 'B', poang: [1, 0, 0], omrade: 'Potenser — förenkling',
+            genomgangar: ['ma1c-1.6', 'ma1c-2.2'],
             endastSvar: true,
             fraga: 'Förenkla uttrycket $\\dfrac{3a^7}{12a^5}$ så långt som möjligt.',
             figur: null,
@@ -192,6 +196,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 5, del: 'B', poang: [1, 0, 0], omrade: 'Statistik — korrelation',
+            genomgangar: ['ma1c-5.3'],
             endastSvar: true,
             fraga: 'I diagrammen visas sex olika korrelationer mellan variablerna $x$ och $y$. ' +
                 'Vilket av diagrammen A–F visar starkast korrelation?',
@@ -226,6 +231,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 6, del: 'B', poang: [1, 1, 0], omrade: 'Funktioner — avläsa graf',
+            genomgangar: ['ma1c-4.7', 'ma1c-4.8'],
             endastSvar: true,
             fraga: 'Nedan visas grafen till funktionen $y = f(x)$\n\n' +
                 '**a)** Bestäm $f(2)$\n\n' +
@@ -263,6 +269,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 7, del: 'B', poang: [1, 1, 0], omrade: 'Vektorer',
+            genomgangar: ['ma1c-6.6', 'ma1c-6.8'],
             endastSvar: true,
             fraga: 'För vektorerna $\\vec{u}$, $\\vec{v}$ och $\\vec{w}$ gäller följande:\n\n' +
                 '$$\\vec{u} = (2,\\ 3) \\qquad \\vec{v} = (1,\\ 2) \\qquad \\vec{w} = \\vec{u} + \\vec{v}$$\n\n' +
@@ -297,6 +304,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 8, del: 'B', poang: [0, 2, 0], omrade: 'Matematiska modeller',
+            genomgangar: ['ma1c-4.1', 'ma1c-4.10', 'ma1c-4.11'],
             endastSvar: true,
             fraga: 'Nedan presenteras fyra olika situationer. Ange för varje situation ' +
                 'om den kan beskrivas med en linjär modell, exponentiell modell eller potensmodell.\n\n' +
@@ -339,6 +347,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 9, del: 'B', poang: [0, 1, 0], omrade: 'Trigonometri',
+            genomgangar: ['ma1c-6.2'],
             endastSvar: true,
             fraga: 'Vilket uttryck har samma värde som $\\sin 20\\degree$?\n\n' +
                 '$\\cos 20\\degree \\qquad \\tan 20\\degree \\qquad \\sin 70\\degree \\qquad \\cos 70\\degree \\qquad \\tan 70\\degree$',
@@ -369,6 +378,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 10, del: 'B', poang: [0, 1, 0], omrade: 'Algebra — omskrivning',
+            genomgangar: ['ma1c-2.3', 'ma1c-2.4'],
             endastSvar: true,
             fraga: 'Skriv ett uttryck i den tomma parentesen så att likheten gäller.\n\n' +
                 '$$3(4x - 10) = 2(\\qquad\\qquad)$$',
@@ -394,6 +404,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 11, del: 'B', poang: [0, 1, 0], omrade: 'Sannolikhet',
+            genomgangar: ['ma1c-5.6', 'ma1c-2.10'],
             endastSvar: true,
             fraga: 'På en tärning har alla sidor olika färg. En sida är röd. ' +
                 'Sannolikheten att få röd tre gånger i rad när man kastar tärningen är $\\dfrac{1}{64}$\n\n' +
@@ -419,6 +430,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 12, del: 'B', poang: [0, 0, 1], omrade: 'Algebra — substitution',
+            genomgangar: ['ma1c-2.5', 'ma1c-2.2'],
             endastSvar: true,
             fraga: 'Skriv $2a + b$ uttryckt i $a$ om\n\n$$a + b = 2$$\n\nFörenkla så långt som möjligt.',
             figur: null,
@@ -440,6 +452,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 13, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — sammansatt',
+            genomgangar: ['ma1c-4.7'],
             endastSvar: true,
             fraga: '$f(x) = 2x - 4$ och $g(x) = 3x + 1$\n\nBestäm $f(g(2))$',
             figur: null,
@@ -461,6 +474,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 14, del: 'B', poang: [0, 0, 1], omrade: 'Potenser — rationella exponenter',
+            genomgangar: ['ma1c-1.8', 'ma1c-2.10'],
             endastSvar: true,
             fraga: 'Uttrycken nedan har samma positiva värde på $a$. ' +
                 'Vilka tal ska stå i rutorna så att likheterna stämmer?\n\n' +
@@ -490,6 +504,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 15, del: 'B', poang: [0, 0, 1], omrade: 'Olikheter',
+            genomgangar: ['ma1c-2.11'],
             endastSvar: true,
             fraga: 'Bestäm värdet på $a$ så att olikheten $2x - a < 5$ har lösningen $x < 7$',
             figur: null,
@@ -516,6 +531,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 16, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — grafisk olikhet',
+            genomgangar: ['ma1c-2.11', 'ma1c-4.7'],
             endastSvar: true,
             fraga: 'Skugga det område i koordinatsystemet där $f(x) \\leq y \\leq g(x)$',
             figur: 'u16',
@@ -551,6 +567,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         // ================= DELPROV C =================
         {
             nr: 17, del: 'C', poang: [3, 2, 4], omrade: 'Exponentiell modell — Koch-kurvan',
+            genomgangar: ['ma1c-2.13', 'ma1c-3.2', 'ma1c-4.10'],
             endastSvar: false,
             fraga: 'För att konstruera ett mönster som liknar snöflingor kan man göra som ' +
                 'den svenska matematikern Helge von Koch. Utgå från en liksidig triangel med sidan 3, se bild.\n\n' +
@@ -642,6 +659,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 18, del: 'C', poang: [2, 0, 0], omrade: 'Räta linjen — genom två punkter',
+            genomgangar: ['ma1c-4.5'],
             endastSvar: false,
             fraga: 'Bestäm ekvationen för den räta linje som går genom punkterna $(2,\\ 10)$ och $(12,\\ 30)$.',
             figur: null,
@@ -676,6 +694,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 19, del: 'C', poang: [1, 1, 0], omrade: 'Algebra — ekvation',
+            genomgangar: ['ma1c-2.3', 'ma1c-2.5'],
             endastSvar: false,
             fraga: 'Utgå från uttrycket $3(x + 4) - (8 + x)$\n\nBestäm $x$ så att uttryckets värde blir 3.',
             figur: null,
@@ -705,6 +724,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 20, del: 'C', poang: [0, 2, 0], omrade: 'Algebra — ekvation med parenteser',
+            genomgangar: ['ma1c-2.3', 'ma1c-2.6'],
             endastSvar: false,
             fraga: 'Lös ekvationen $(2x - 5)(x + 3) = 2x^2 - 9$',
             figur: null,
@@ -740,6 +760,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 21, del: 'C', poang: [0, 2, 1], omrade: 'Funktioner — definitionsmängd',
+            genomgangar: ['ma1c-4.9', 'ma1c-2.12'],
             endastSvar: false,
             fraga: 'Ali går på naturbruksprogrammet och ska markera ett $20\\ \\text{m}^2$ stort område ' +
                 'att odla på. Området ska ha formen av en triangel med basen $b$ meter och höjden $h$ meter. ' +
@@ -788,6 +809,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         // ================= DELPROV D =================
         {
             nr: 22, del: 'D', poang: [2, 0, 0], omrade: 'Exponentialfunktion — ränta',
+            genomgangar: ['ma1c-3.4', 'ma1c-3.2', 'ma1c-4.10'],
             endastSvar: true,
             fraga: 'Stina har satt in pengar på ett bankkonto med fast årsränta. Följande funktion ' +
                 'kan användas för att beräkna hur mycket pengar, i kronor, som finns på bankkontot:\n\n' +
@@ -824,6 +846,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 23, del: 'D', poang: [2, 2, 0], omrade: 'Trigonometri — tillämpning',
+            genomgangar: ['ma1c-6.1', 'ma1c-6.2'],
             endastSvar: false,
             fraga: 'Jonas ska borra ett hål för bergvärme och behöver borra ner till djupet 125 m. ' +
                 'Lutningen på borrhålet måste vara $10{,}0\\degree$ enligt en borrplan, se figur.\n\n' +
@@ -883,6 +906,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 24, del: 'D', poang: [2, 1, 0], omrade: 'Kalkylblad',
+            genomgangar: ['ma1c-3.5', 'ma1c-3.4'],
             endastSvar: true,
             fraga: 'Aida tar ett lån på $20\\,000$ kr. Månadsräntan är $3\\ \\%$ och hon ska amortera ' +
                 '$1\\,000$ kr varje månad. För att beräkna hur stor månadsbetalningen blir gör Aida ett kalkylblad.\n\n' +
@@ -928,6 +952,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 25, del: 'D', poang: [0, 3, 0], omrade: 'Ekvation — vinklar i triangel',
+            genomgangar: ['ma1c-3.2', 'ma1c-2.8', 'ma2c-4.2'],
             endastSvar: false,
             fraga: 'En triangel har vinklarna $A$, $B$ och $C$.\n\n' +
                 'Vinkel $B$ är $72\\ \\%$ *mindre* än vinkel $A$.\n\n' +
@@ -969,6 +994,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 26, del: 'D', poang: [0, 2, 0], omrade: 'Potensmodell — jämförelse',
+            genomgangar: ['ma1c-4.11', 'ma1c-3.1'],
             endastSvar: false,
             fraga: 'Energibehovet hos hundar kan beräknas med två olika formler.\n\n' +
                 '$$\\text{Formel 1:} \\quad y_1 = 70x^{0{,}75}$$\n\n' +
@@ -1008,6 +1034,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 27, del: 'D', poang: [0, 2, 0], omrade: 'Procent — årlig förändringsfaktor',
+            genomgangar: ['ma1c-3.3', 'ma1c-2.10'],
             endastSvar: false,
             fraga: 'Moa har en bil som hon köpt för $230\\,000$ kr. Hon säljer bilen efter 6 år ' +
                 'för $157\\,000$ kr. Hur mycket har bilens värde minskat procentuellt i genomsnitt per år?',
@@ -1049,6 +1076,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 29, del: 'D', poang: [1, 2, 1], omrade: 'Sannolikhet — flera försök',
+            genomgangar: ['ma1c-5.6', 'ma1c-5.8'],
             endastSvar: false,
             fraga: 'Hugo är på en nöjespark och spelar på ett nummer på chokladhjulet. ' +
                 'Chokladhjulet har 20 fält där ett av fälten ger vinst vid varje spelomgång.\n\n' +
@@ -1092,6 +1120,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 30, del: 'D', poang: [1, 2, 2], omrade: 'Formler — ekvationslösning',
+            genomgangar: ['ma1c-2.12', 'ma1c-2.7'],
             endastSvar: false,
             fraga: 'I en tidningsartikel presenteras en formel för att beräkna tidsskillnaden i minuter ' +
                 'om man kör samma sträcka med två olika hastigheter.\n\n' +
@@ -1158,6 +1187,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 31, del: 'D', poang: [0, 0, 3], omrade: 'Procent — ekvationssystem',
+            genomgangar: ['ma1c-3.2', 'ma1c-2.8'],
             endastSvar: false,
             fraga: 'Talet $x$ ligger någonstans mellan talen 17 och 23.\n\n' +
                 '$x$ är $p\\ \\%$ *större* än 17 och $p\\ \\%$ *mindre* än 23.\n\n' +
@@ -1198,6 +1228,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 32, del: 'D', poang: [0, 0, 3], omrade: 'Geometri — area med variabel',
+            genomgangar: ['ma2c-4.5'],
             endastSvar: false,
             fraga: 'Figuren visar en mindre cirkel som är inskriven i en kvadrat, som i sin tur är ' +
                 'inskriven i en större cirkel. Bestäm ett exakt uttryck för det skuggade områdets area ' +

@@ -14,6 +14,25 @@ Gäller alla prov under `data/np/`. Pilot och referensimplementation:
 - Uppgifter som är borttagna ur det frisläppta provet (sekretess) läggs in
   med `sekretess: true` så att numreringen stämmer.
 
+## Genomgångar högst upp i lösningen (`genomgangar`)
+
+Varje uppgift har `genomgangar: ['fy2-1.4', 'fy2-2.5']` — en lista med
+teori-id (`<kurskod>-<num>`, samma id som `katalog.html#…`). `np.html` visar
+dem som rutan **"Teori du behöver"** överst i lösningen, så att den som kör
+fast kan läsa på innan stegen klickas fram (önskemål 2026-08-07).
+
+- **Välj de avsnitt lösningen faktiskt använder** — 1–3 stycken, viktigaste
+  först. Fler än tre blir en länklista ingen läser.
+- **Länka gärna över kursgränsen** när teorin bor i en annan kurs (ett
+  Ma1c-prov vars geometri finns i Ma2c). UI:t sätter då ut kursetiketten
+  ("Ma 2c · 4.5") automatiskt.
+- **Saknas teorin helt: lämna listan tom** (`genomgangar: []` eller utelämna
+  fältet) — rutan visas då inte alls. Länka ALDRIG ett avsnitt som inte
+  täcker uppgiften; en felaktig hänvisning är sämre än ingen. Notera i
+  stället luckan så att genomgången kan kompletteras.
+- Id:t måste finnas i `data/katalog.js` — okända id:n hoppas tyst över av
+  `TeoriLankar`, så en felstavning syns bara som en länk som försvann.
+
 ## Lösningsstegen
 
 - 2–7 steg per uppgift (deluppgifter kan ge fler). Varje steg gör EN sak

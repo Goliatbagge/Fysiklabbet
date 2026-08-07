@@ -52,6 +52,7 @@ window.NP_PROV['ma3c-vt2022'] = {
         // ================= DELPROV B =================
         {
             nr: 1, del: 'B', poang: [1, 0, 0], omrade: 'Integraler — primitiv funktion',
+            genomgangar: ['ma3c-5.1'],
             endastSvar: true,
             fraga: 'Ett av alternativen A–D är ett exempel på en primitiv funktion till ' +
                 'funktionen $f(x) = x^3 - 2x$. Vilket?\n\n' +
@@ -85,6 +86,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 2, del: 'B', poang: [1, 0, 0], omrade: 'Derivata — genomsnittlig förändringshastighet',
+            genomgangar: ['ma3c-2.1'],
             endastSvar: true,
             fraga: 'Den 1 augusti varje sommar inventeras (räknas) antalet gråsälar i Östersjön. ' +
                 'Tabellen visar resultatet.\n\n' +
@@ -116,6 +118,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 3, del: 'B', poang: [1, 0, 0], omrade: 'Derivata — grafisk avläsning',
+            genomgangar: ['ma3c-2.2'],
             endastSvar: true,
             fraga: 'Figuren visar grafen till funktionen $f$.\n\n' +
                 'Använd grafen och ange vilket av alternativen A–F som är det bästa värdet ' +
@@ -147,6 +150,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 4, del: 'B', poang: [1, 0, 0], omrade: 'Absolutbelopp',
+            genomgangar: ['ma3c-2.5'],
             endastSvar: true,
             fraga: 'Beräkna värdet av uttrycket $\\left| 3x - 7 \\right|$ då $x = 2$',
             figur: null,
@@ -170,6 +174,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 5, del: 'B', poang: [1, 1, 0], omrade: 'Trigonometri — enhetscirkeln',
+            genomgangar: ['ma3c-6.2'],
             endastSvar: true,
             fraga: 'Figuren visar en enhetscirkel där en punkt och en vinkel är markerade.\n\n' +
                 'Använd figuren och bestäm värdet för<br>' +
@@ -214,6 +219,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 6, del: 'B', poang: [1, 1, 1], omrade: 'Derivata — deriveringsregler',
+            genomgangar: ['ma3c-3.2', 'ma3c-3.3', 'ma3c-3.5'],
             endastSvar: true,
             fraga: 'Bestäm $f\'(x)$ då<br>' +
                 '**a)** $f(x) = 4x^3 - 12x$<br>' +
@@ -273,6 +279,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 7, del: 'B', poang: [1, 1, 1], omrade: 'Algebra — förenkling',
+            genomgangar: ['ma3c-1.1', 'ma2c-2.1'],
             endastSvar: true,
             fraga: 'Förenkla uttrycken så långt som möjligt.<br>' +
                 '**a)** $\\dfrac{5x^3 - x^6}{x^3}$<br>' +
@@ -335,6 +342,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 8, del: 'B', poang: [0, 1, 0], omrade: 'Ekvationer — faktorisering',
+            genomgangar: ['ma2c-2.3', 'ma2c-2.2'],
             endastSvar: true,
             fraga: 'Lös ekvationen $3x^4 - 8x = 2x^4$',
             figur: null,
@@ -366,6 +374,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 9, del: 'B', poang: [0, 1, 0], omrade: 'Derivatans graf',
+            genomgangar: ['ma3c-4.2', 'ma3c-4.1'],
             endastSvar: true,
             fraga: 'Figuren visar grafen till funktionen $f$.\n\n' +
                 'Ett av alternativen A–F visar grafen till funktionens derivata $f\'$. Vilket?',
@@ -397,6 +406,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 10, del: 'B', poang: [0, 2, 0], omrade: 'Derivata — teckenstudium',
+            genomgangar: ['ma3c-4.1', 'ma3c-4.2'],
             endastSvar: true,
             fraga: 'Figuren visar huvuddragen av grafen till funktionen $p$.\n\n' +
                 'Bestäm för vilka värden på $x$ som<br>' +
@@ -436,6 +446,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 11, del: 'B', poang: [0, 0, 1], omrade: 'Integraler — analysens huvudsats',
+            genomgangar: ['ma3c-5.4'],
             endastSvar: true,
             fraga: 'Figuren visar grafen till funktionen $f$.\n\n' +
                 'Bestäm ett värde på $a$ så att $\\displaystyle\\int_{-1}^{a} f\'(x)\\,\\mathrm{d}x = 3$',
@@ -472,6 +483,7 @@ window.NP_PROV['ma3c-vt2022'] = {
         // ================= DELPROV C =================
         {
             nr: 12, del: 'C', poang: [1, 0, 0], omrade: 'Derivata — exponentialfunktion',
+            genomgangar: ['ma3c-3.5'],
             fraga: 'Tilde deriverar funktionen $f(x) = \\mathrm{e}^{2x}$ och ställer upp kvoten ' +
                 '$\\dfrac{f\'(x)}{f(x)}$\n\n' +
                 'Hon påstår följande: "För alla värden på $x$ kommer kvoten alltid att få värdet 2".\n\n' +
@@ -500,6 +512,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 13, del: 'C', poang: [2, 0, 0], omrade: 'Integraler — beräkning',
+            genomgangar: ['ma3c-5.1', 'ma3c-5.4'],
             fraga: 'Beräkna $\\displaystyle\\int_{1}^{2} 3x^2\\,\\mathrm{d}x$',
             figur: null,
             steg: [
@@ -526,6 +539,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 14, del: 'C', poang: [3, 1, 0], omrade: 'Derivata — extrempunkter',
+            genomgangar: ['ma3c-4.2', 'ma3c-4.3'],
             fraga: 'Funktionen $f$ ges av $f(x) = x^3 - 3x^2 + 7$\n\n' +
                 'Använd derivata och bestäm koordinaterna för eventuella maximi-, minimi- och ' +
                 'terrasspunkter för funktionens graf.\n\n' +
@@ -573,6 +587,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 15, del: 'C', poang: [0, 2, 0], omrade: 'Integraler — area med parameter',
+            genomgangar: ['ma3c-5.3', 'ma3c-5.4'],
             fraga: 'Figuren visar ett gråmarkerat område som begränsas av grafen till funktionen ' +
                 '$g$, den räta linjen $x = 3$ samt de positiva koordinataxlarna.\n\n' +
                 'Funktionen $g$ ges av $g(x) = 5 + px - x^2$ där $p$ är en konstant.\n\n' +
@@ -610,6 +625,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 16, del: 'C', poang: [0, 2, 0], omrade: 'Derivata — resonemang om extrempunkter',
+            genomgangar: ['ma3c-4.2', 'ma3c-4.1'],
             fraga: 'Funktionen $f$ ges av $f(x) = x^3 + 3x$\n\n' +
                 'Jaana påstår att funktionen $f$ har två extrempunkter.\n\n' +
                 'Har Jaana rätt? Motivera ditt svar.',
@@ -640,6 +656,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 17, del: 'C', poang: [0, 1, 3], omrade: 'Derivatans definition',
+            genomgangar: ['ma3c-2.3', 'ma3c-1.2'],
             fraga: 'Funktionen $f$ ges av $f(x) = \\dfrac{5}{a^2 x}$ där $x \\neq 0$ och $a \\neq 0$\n\n' +
                 'Bestäm $f\'(x)$ med hjälp av derivatans definition.',
             figur: null,
@@ -686,6 +703,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 18, del: 'C', poang: [0, 0, 3], omrade: 'Tangent och area',
+            genomgangar: ['ma3c-2.4', 'ma3c-3.6'],
             fraga: 'Figuren visar grafen till tredjegradsfunktionen $f$ som ges av $f(x) = x^3$ och ' +
                 'en tangent till grafen i den punkt där $x = a$. Tangenten, den positiva $x$-axeln ' +
                 'och linjen $x = a$ begränsar ett område som har formen av en triangel.\n\n' +
@@ -735,6 +753,7 @@ window.NP_PROV['ma3c-vt2022'] = {
         // ================= DELPROV D =================
         {
             nr: 19, del: 'D', poang: [1, 0, 0], omrade: 'Derivata — digitalt verktyg',
+            genomgangar: ['ma3c-3.7'],
             endastSvar: true,
             fraga: 'Funktionen $f$ som ges av $f(x) = (2x - 1)^5$ kan inte deriveras med hjälp av ' +
                 'deriveringsreglerna på den här nivån.\n\n' +
@@ -758,6 +777,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 20, del: 'D', poang: [2, 0, 0], omrade: 'Triangelsatserna — areasatsen',
+            genomgangar: ['ma3c-6.5'],
             fraga: 'I en triangel är en sida 6,6 cm och en annan sida 5,1 cm. Två av triangelns ' +
                 'vinklar är $42\\degree$ och $120\\degree$. Se figur.\n\n' +
                 'Bestäm triangelns area genom att använda någon eller några av triangelsatserna ' +
@@ -790,6 +810,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 21, del: 'D', poang: [3, 1, 0], omrade: 'Exponentialmodell — tillväxt',
+            genomgangar: ['ma3c-3.5', 'ma3c-3.6', 'ma2c-5.4'],
             fraga: 'Pojkars längd kan beskrivas med den enkla modellen ' +
                 '$f(x) = 78 \\cdot \\mathrm{e}^{0{,}07x}$ där $f(x)$ är längden i centimeter och ' +
                 '$x$ är pojkars ålder i år.<br>' +
@@ -856,6 +877,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 22, del: 'D', poang: [2, 0, 0], omrade: 'Tangentens ekvation',
+            genomgangar: ['ma3c-2.4', 'ma3c-3.2'],
             fraga: 'Grafen till funktionen $f(x) = 3x^2 + 4x$ har en tangent i den punkt där $x = 2$\n\n' +
                 'Tangentens ekvation kan skrivas $y = kx - 12$\n\n' +
                 'Bestäm $k$.',
@@ -888,6 +910,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 23, del: 'D', poang: [0, 2, 0], omrade: 'Derivata — ekvation med digitalt verktyg',
+            genomgangar: ['ma3c-3.3', 'ma3c-3.7'],
             fraga: 'Funktionerna $f$ och $g$ ges av $f(x) = \\dfrac{12}{x} + 8x$ och ' +
                 '$g(x) = \\sqrt{x}$\n\n' +
                 'Lös ekvationen $f\'(x) = g\'(x)$. Svara med minst två decimaler.',
@@ -920,6 +943,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 24, del: 'D', poang: [0, 3, 0], omrade: 'Triangelsatserna — sinus- och cosinussatsen',
+            genomgangar: ['ma3c-6.6', 'ma3c-6.7'],
             fraga: 'Figuren visar triangeln $ABC$ där en punkt $D$ är markerad på sidan $AC$. ' +
                 'Några mått och vinklar finns givna i figuren.\n\n' +
                 'Bestäm längden av sträckan $BD$ genom att använda någon eller några av ' +
@@ -966,6 +990,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 25, del: 'D', poang: [0, 2, 0], omrade: 'Sekant och tangent',
+            genomgangar: ['ma3c-2.1', 'ma3c-3.5'],
             fraga: 'Funktionen $f$ ges av $f(x) = 2^x$. Figuren visar grafen till funktionen $f$ ' +
                 'samt en sekant mellan två punkter på grafen.\n\n' +
                 'Till grafen dras en tangent som är parallell med sekanten. Bestäm $x$-koordinaten ' +
@@ -1003,6 +1028,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 26, del: 'D', poang: [0, 0, 2], omrade: 'Polynomfunktion — bevis',
+            genomgangar: ['ma3c-3.2', 'ma3c-2.4'],
             fraga: 'Funktionen $f$ ges av\n\n' +
                 '$$f(x) = a(x - a)(x - 2a)(x - 3a) = ax^3 - 6a^2x^2 + 11a^3x - 6a^4$$\n\n' +
                 'där $a$ är en konstant, $a > 0$\n\n' +
@@ -1053,6 +1079,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 27, del: 'D', poang: [0, 0, 2], omrade: 'Integralmodell — bensinförbrukning',
+            genomgangar: ['ma3c-5.7', 'ma3c-5.5'],
             fraga: 'Wilma har en gammal moped.\n\n' +
                 'Bensinförbrukningen för mopeden kan beskrivas med den förenklade modellen ' +
                 '$f(x) = 0{,}3 + 0{,}5\\mathrm{e}^{-0{,}76x}$ där $f(x)$ är bensinförbrukningen i ' +
@@ -1096,6 +1123,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 28, del: 'D', poang: [0, 0, 3], omrade: 'Optimering — minsta trådlängd',
+            genomgangar: ['ma3c-4.6', 'ma3c-4.7', 'ma2c-4.5'],
             fraga: 'Konstsmeden Suzanna tänker göra smycken av silver och guld. Varje smycke ska ' +
                 'bestå av en rektangulär silverplatta och en guldtråd. Guldtråden ska lödas fast ' +
                 '8 mm från silverplattans hörn. Se figur.\n\n' +

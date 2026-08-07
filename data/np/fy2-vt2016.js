@@ -42,6 +42,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 1 =================
         {
             nr: 1, del: 'A', poang: [2, 0, 0], omrade: 'Värmestrålning — Stefan–Boltzmanns lag',
+            genomgangar: ['fy2-4.3'],
             endastSvar: true,
             fraga: 'Med ett teleskop upptäcker forskare en ny exoplanet. Via mätningar fås att planetens ' +
                 'emittans är $230\\ \\mathrm{W/m^2}$. Antag att exoplaneten strålar som en svart kropp.\n\n' +
@@ -87,6 +88,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 2 =================
         {
             nr: 2, del: 'A', poang: [1, 0, 0], omrade: 'Cirkulär rörelse — krafter i pendelrörelse',
+            genomgangar: ['fy2-1.4', 'fy2-2.5'],
             endastSvar: true,
             fraga: 'I en film svänger en tecknad seriefigur i ett rep från A till B. I filmen brister ' +
                 'repet i läge B (se figur). Förklara varför det i verkligheten är osannolikt att repet ' +
@@ -135,6 +137,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 3 =================
         {
             nr: 3, del: 'A', poang: [1, 1, 0], omrade: 'Dopplereffekt — rödförskjutning',
+            genomgangar: ['fy2-2.12', 'fy2-4.7'],
             endastSvar: true,
             fraga: 'Vid uppmätning av spektrallinjer från en stjärna förekommer en rödförskjutning av ' +
                 'spektrumet. I diagrammet nedan visas rödförskjutningen för två absorptionslinjer ' +
@@ -178,6 +181,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 4 =================
         {
             nr: 4, del: 'A', poang: [1, 0, 0], omrade: 'Elektromagnetisk induktion',
+            genomgangar: ['fy2-3.7', 'fy2-3.9'],
             endastSvar: true,
             fraga: 'I vilket eller vilka av följande fall A – D uppstår en elektrisk ström i en ' +
                 'horisontellt placerad metallring?\n\n' +
@@ -215,6 +219,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 5 =================
         {
             nr: 5, del: 'A', poang: [1, 1, 0], omrade: 'Magnetfält kring strömförande ledare',
+            genomgangar: ['fy2-3.2'],
             endastSvar: true,
             fraga: 'Två långa, raka ledare är placerade vinkelrätt mot varandra i samma plan (se figur). ' +
                 'Lika stora strömmar flyter genom dem i angivna riktningar.\n\n' +
@@ -261,6 +266,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 6 =================
         {
             nr: 6, del: 'A', poang: [1, 1, 0], omrade: 'Induktion — virvelströmmar',
+            genomgangar: ['fy2-3.13', 'fy1-7.9'],
             endastSvar: true,
             fraga: 'En induktionshäll fungerar på så sätt att ett varierande magnetfält i hällen påverkar ' +
                 'metallen i den kastrull som står på hällen.\n\n' +
@@ -296,6 +302,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 7 =================
         {
             nr: 7, del: 'A', poang: [2, 0, 0], omrade: 'Ljusets brytning',
+            genomgangar: ['fy2-4.4', 'fy2-2.13'],
             fraga: 'Figuren visar hur de tre ljusstrålarna A, B och C infaller mot ett halvcirkelformat ' +
                 'genomskinligt fast material.\n\n' +
                 '**a)** Vilken av de inkommande strålarna A, B eller C hör ihop med den brutna strålen D? ' +
@@ -356,6 +363,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 8 =================
         {
             nr: 8, del: 'A', poang: [2, 1, 0], omrade: 'Experimentell metod — plan pendel',
+            genomgangar: ['fy2-2.5'],
             fraga: 'Du ska planera ett experiment för att bestämma värdet på tyngdaccelerationen $g$ ' +
                 'med hjälp av en plan pendel.\n\n' +
                 'Din planering ska vara så tydlig att någon annan kan använda den för att genomföra ' +
@@ -409,6 +417,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 9 =================
         {
             nr: 9, del: 'A', poang: [2, 1, 0], omrade: 'Fotoelektrisk effekt',
+            genomgangar: ['fy2-4.5'],
             fraga: 'Under ett experiment undersöktes den fotoelektriska effekten då en metallyta belystes ' +
                 'med elektromagnetisk strålning. När strålningens våglängd var kortare än $300\\ \\mathrm{nm}$ ' +
                 'började elektroner emitteras från metallytan.\n\n' +
@@ -489,6 +498,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 10 =================
         {
             nr: 10, del: 'A', poang: [2, 0, 1], omrade: 'Värmestrålning — Wiens förskjutningslag',
+            genomgangar: ['fy2-4.3', 'fy2-4.7', 'fy2-5.4'],
             fraga: 'Med en digital spektrometer har nedanstående solspektrum tagits upp. På $x$-axeln ' +
                 'visas våglängd och på $y$-axeln (relativ) spektral emittans.\n\n' +
                 '**a)** Använd diagrammet för att bestämma solens yttemperatur.\n\n' +
@@ -546,6 +556,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 11 =================
         {
             nr: 11, del: 'A', poang: [0, 2, 0], omrade: 'de Broglie-våglängd',
+            genomgangar: ['fy2-4.6', 'fy2-3.12'],
             fraga: 'Elektrondiffraktion uppstår då en elektronstråle träffar en kristall. Diffraktion ' +
                 'äger rum då elektronernas de Broglievåglängd är jämförbar med avståndet mellan atomerna ' +
                 'i kristallen.\n\n' +
@@ -608,6 +619,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 12 =================
         {
             nr: 12, del: 'A', poang: [0, 2, 0], omrade: 'Kaströrelse',
+            genomgangar: ['fy2-1.6'],
             fraga: 'En grupp simhoppare tränar för en uppvisning i en simbassäng med ett hopptorn. För en ' +
                 'del hopp vill de ta sats, men det är förstås livsfarligt om simhopparna skulle hoppa över ' +
                 'bassängen och slå i kanten på andra sidan.\n\n' +
@@ -672,6 +684,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 13 =================
         {
             nr: 13, del: 'A', poang: [0, 3, 0], omrade: 'Stående vågor — resonans',
+            genomgangar: ['fy2-2.10', 'fy2-2.9', 'fy2-2.6'],
             fraga: 'En orgel och en cello befinner sig i samma rum. Då en orgelpipa ljuder med sin ' +
                 'grundton uppstår resonans i en av cellons strängar som då svänger med sin grundsvängning.\n\n' +
                 'Orgelpipan, som har längden $0{,}80\\ \\mathrm{m}$, är sluten i ena änden och öppen i den ' +
@@ -733,6 +746,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 14 =================
         {
             nr: 14, del: 'A', poang: [0, 2, 1], omrade: 'Transformatorn',
+            genomgangar: ['fy2-3.11'],
             fraga: 'Till en elektronikkrets behövs en transformator. Du har fått i uppgift att konstruera ' +
                 'en transformator som ska transformera ner växelspänningen från $230\\ \\mathrm{V}$ till en ' +
                 'spänning som är högst $12\\ \\mathrm{V}$ och minst $4\\ \\mathrm{V}$.\n\n' +
@@ -799,6 +813,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 15 =================
         {
             nr: 15, del: 'A', poang: [2, 1, 2], omrade: 'Gitter och energinivåer',
+            genomgangar: ['fy2-4.2', 'fy2-4.8'],
             fraga: 'I en traditionell gitterspektrometer sitter ett gitter med $600$ linjer/mm. Vid en ' +
                 'laboration med ljus från ett okänt ämne ser Stina ljus i andra ordningens spektrum vid ' +
                 'vinklarna $30°$, $47°$ och $51°$ från centralmax.\n\n' +
@@ -890,6 +905,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 16 =================
         {
             nr: 16, del: 'A', poang: [0, 1, 3], omrade: 'Experimentell metod — ljudets hastighet',
+            genomgangar: ['fy2-2.14', 'fy2-2.7'],
             fraga: 'Du ska planera ett experiment för att bestämma värdet på ljudets hastighet i luft. ' +
                 'Din planering ska vara så tydlig att en klasskamrat kan använda den för att genomföra ' +
                 'experimentet.\n\n' +
@@ -947,6 +963,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 17 =================
         {
             nr: 17, del: 'A', poang: [0, 0, 3], omrade: 'Masspektrometer — laddade partiklar i fält',
+            genomgangar: ['fy2-3.12', 'fy2-3.4'],
             fraga: 'Institutionen där Anders, Kalle och Ulrika forskar har fått en leverans av argon. ' +
                 'De använder en masspektrometer för att bestämma vilka argonisotoper som finns i ' +
                 'leveransen. I masspektrometern skickas envärt positiva argonjoner, $\\mathrm{Ar}^+$, ' +
@@ -1027,6 +1044,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 18 =================
         {
             nr: 18, del: 'A', poang: [0, 1, 3], omrade: 'Harmonisk svängning',
+            genomgangar: ['fy2-2.4', 'fy2-2.1', 'fy2-2.3'],
             fraga: 'En stålkula hänger i en fjäder som sätts i svängning. Kraften i fjädern mäts under ' +
                 'svängningen, se nedan. Fjäderns massa och dämpningen av rörelsen kan försummas.\n\n' +
                 '**a)** Beräkna fjäderkonstanten.\n\n' +
@@ -1114,6 +1132,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 19 =================
         {
             nr: 19, del: 'A', poang: [0, 1, 3], omrade: 'Elektriskt fält — avlänkning av elektroner',
+            genomgangar: ['fy1-7.11', 'fy2-1.6'],
             fraga: 'Katodstrålerör används i en TV av äldre modell, så kallad tjock-TV. Principen för ett ' +
                 'katodstrålerör är att elektroner accelereras till hög hastighet för att därefter passera ' +
                 'ett homogent elektriskt fält där de avlänkas och träffar en plats på skärmen.\n\n' +

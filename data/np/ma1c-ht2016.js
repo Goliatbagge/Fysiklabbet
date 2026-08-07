@@ -52,6 +52,7 @@ window.NP_PROV['ma1c-ht2016'] = {
         // ================= DELPROV B =================
         {
             nr: 1, del: 'B', poang: [1, 0, 0], omrade: 'Algebra — insättning',
+            genomgangar: ['ma1c-2.1'],
             endastSvar: true,
             fraga: 'Bestäm värdet av $4x + 3$ om $x = 3$.',
             figur: null,
@@ -69,6 +70,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 2, del: 'B', poang: [2, 0, 0], omrade: 'Olikheter',
+            genomgangar: ['ma1c-2.11'],
             endastSvar: true,
             fraga: 'Vilket värde på $x$ uppfyller *inte* villkoret $2x + 1 > 5$? Ringa in ditt svar.\n\n' +
                 '$7 \\qquad 5 \\qquad 4 \\qquad 3 \\qquad 2$',
@@ -94,6 +96,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 3, del: 'B', poang: [1, 0, 0], omrade: 'Logik — ekvivalens och implikation',
+            genomgangar: ['ma2c-4.3'],
             endastSvar: true,
             fraga: 'Följande samband är ekvivalenser eller implikationer. Markera ekvivalens med ' +
                 'ekvivalenspil $\\Leftrightarrow$ och enbart implikation med korrekt implikationspil ' +
@@ -126,6 +129,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 4, del: 'B', poang: [1, 0, 0], omrade: 'Potensekvationer',
+            genomgangar: ['ma1c-2.9', 'ma1c-2.10'],
             endastSvar: true,
             fraga: 'Lös ekvationen $4x^3 = 32$',
             figur: null,
@@ -148,6 +152,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 5, del: 'B', poang: [1, 0, 0], omrade: 'Andelar — ppm och decimalform',
+            genomgangar: ['ma1c-3.1'],
             endastSvar: true,
             fraga: 'Koldioxidhalten i luften är $393$ ppm. Skriv denna halt i decimalform.',
             figur: null,
@@ -195,6 +200,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 7, del: 'B', poang: [0, 2, 0], omrade: 'Funktioner — avläsa graf',
+            genomgangar: ['ma1c-4.7', 'ma1c-4.8'],
             endastSvar: true,
             fraga: 'I figuren visas grafen till funktionen $y = f(x)$.\n\n' +
                 '**a)** Bestäm $f(2)$ med hjälp av grafen.\n\n' +
@@ -227,6 +233,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 8, del: 'B', poang: [1, 1, 1], omrade: 'Algebraiska uttryck — resonemang',
+            genomgangar: ['ma1c-2.1', 'ma1c-1.2'],
             endastSvar: false,
             fraga: '$A = \\dfrac{B}{B + 1}$ där $B$ är ett positivt tal. Blir $A$ större eller mindre ' +
                 'om $B$ dubbleras? Motivera ditt svar.',
@@ -261,6 +268,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 9, del: 'B', poang: [0, 2, 0], omrade: 'Ekvationer med bråk',
+            genomgangar: ['ma1c-2.7'],
             endastSvar: false,
             fraga: 'Lös ekvationen $\\dfrac{3x + 1}{4} - \\dfrac{2x + 3}{3} = 2$. Redovisa din lösning.',
             figur: null,
@@ -295,6 +303,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 10, del: 'B', poang: [0, 1, 1], omrade: 'Andelar — jämförelse',
+            genomgangar: ['ma1c-3.1', 'ma1c-1.5'],
             endastSvar: true,
             fraga: 'Vilket eller vilka tal av alternativen nedan är större än $2$ promille? ' +
                 'Ringa in ditt/dina svar.\n\n' +
@@ -333,6 +342,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 12, del: 'B', poang: [0, 0, 1], omrade: 'Algebra — tabell',
+            genomgangar: ['ma1c-2.1', 'ma1c-1.6'],
             endastSvar: true,
             fraga: 'Vilket tal ska stå i den tomma rutan i tabellen?\n\n' +
                 '| $x$ | $xy$ | $xy^2$ |\n| :---: | :---: | :---: |\n| $2$ | $-10$ | ? |',
@@ -358,6 +368,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 13, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — beteckning',
+            genomgangar: ['ma1c-4.7'],
             endastSvar: true,
             fraga: 'En istapp har volymen $V(t)$ cm³, där $t$ är tiden i minuter efter klockan 08.00. ' +
                 'Klockan 09.00 har istappen volymen $21$ cm³. Använd funktionen $V(t)$ och skriv detta ' +
@@ -383,6 +394,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 14, del: 'B', poang: [0, 0, 1], omrade: 'Rötter och potenser',
+            genomgangar: ['ma1c-1.8', 'ma1c-1.6'],
             endastSvar: true,
             fraga: 'Skriv $\\sqrt{a^6} \\cdot \\sqrt{a^6}$ som en potens med basen $a$.',
             figur: null,
@@ -407,6 +419,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 15, del: 'B', poang: [0, 0, 1], omrade: 'Trigonometri — med tabell',
+            genomgangar: ['ma1c-6.2', 'ma1c-6.1'],
             endastSvar: true,
             fraga: 'Bestäm längden på sidan $a$ i triangeln med hjälp av tabellen över $\\sin$, $\\cos$ ' +
                 'och $\\tan$. Triangeln är rätvinklig med den räta vinkeln nere till vänster, ' +
@@ -437,6 +450,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 16, del: 'B', poang: [0, 0, 2], omrade: 'Potenslagar',
+            genomgangar: ['ma1c-1.6'],
             endastSvar: true,
             fraga: 'Bestäm $n$ om $2^4 \\cdot 3^8 = 9^n \\cdot 6^4$.',
             figur: null,
@@ -465,6 +479,7 @@ window.NP_PROV['ma1c-ht2016'] = {
         // ================= DELPROV C =================
         {
             nr: 17, del: 'C', poang: [3, 5, 3], omrade: 'Sannolikhet — spela kula',
+            genomgangar: ['ma1c-5.5', 'ma1c-5.7', 'ma1c-5.8'],
             endastSvar: false,
             fraga: 'På en skolgård spelar barnen kula. Barnen kastar kulor mot pyramider som består av ' +
                 'fyra kulor. Spelregler:\n\n' +
@@ -597,6 +612,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 19, del: 'D', poang: [2, 1, 0], omrade: 'Formler — bromssträcka',
+            genomgangar: ['ma1c-2.12'],
             endastSvar: false,
             fraga: 'För en bil med bra däck och bromsar kan den ungefärliga bromssträckan på torr asfalt ' +
                 'beräknas med formeln\n\n$$s = \\dfrac{v^2}{200}$$\n\n' +
@@ -632,6 +648,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 20, del: 'D', poang: [2, 2, 0], omrade: 'Diagram — källkritik',
+            genomgangar: ['ma1c-5.1', 'ma1c-3.1'],
             endastSvar: false,
             fraga: 'Diagrammet visar antalet miljarder mejl som i genomsnitt skickas i världen varje dag ' +
                 '(åren 2002, 2004, 2005, 2006, 2007 och 2010).\n\n' +
@@ -689,6 +706,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 21, del: 'D', poang: [2, 2, 0], omrade: 'Trigonometri — takvinkel',
+            genomgangar: ['ma1c-6.1', 'ma1c-6.3'],
             endastSvar: false,
             fraga: 'Förr i tiden angavs lutningen på ett tak som ett förhållande mellan två sträckor. ' +
                 '"Förhållandet 1 till 3" (1:3) betyder att takstolen är $1$ hög och $3$ bred (hela bredden). ' +
@@ -746,6 +764,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 22, del: 'D', poang: [0, 2, 0], omrade: 'Procent — baklängesräkning',
+            genomgangar: ['ma1c-3.2'],
             endastSvar: false,
             fraga: 'År $2014$ var elpriset $27$ öre per kWh. Det var $40\\ \\%$ lägre än året innan. ' +
                 'Hur mycket kostade $1$ kWh år $2013$?',
@@ -774,6 +793,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 23, del: 'D', poang: [0, 2, 0], omrade: 'Procent — genomsnittlig årlig förändring',
+            genomgangar: ['ma1c-3.3', 'ma1c-2.10'],
             endastSvar: false,
             fraga: 'År $1750$ var världens befolkning $750$ miljoner. År $1870$ var världens befolkning ' +
                 'dubbelt så stor. Med hur många procent ökade befolkningen i genomsnitt per år?',
@@ -807,6 +827,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 24, del: 'D', poang: [1, 1, 1], omrade: 'Linjära modeller — funktion',
+            genomgangar: ['ma1c-4.1', 'ma1c-4.9'],
             endastSvar: false,
             fraga: 'Kalles klass ska samla in pengar till klasskassan och vill ordna ett skoldisco. ' +
                 'De har hittat en lokal att hyra som kostar $500$ kr och en DJ med musikanläggning som ' +
@@ -859,6 +880,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 25, del: 'D', poang: [0, 2, 1], omrade: 'Exponentiell förändring — ränta',
+            genomgangar: ['ma1c-3.3', 'ma1c-3.5'],
             endastSvar: false,
             fraga: 'Frida tar ett sms-lån på $1\\,000$ kr. Lånet ska betalas tillbaka efter en månad och ' +
                 'den procentuella månadsräntan är $20\\ \\%$. När månaden är slut har Frida inte råd att ' +
@@ -899,6 +921,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 26, del: 'D', poang: [0, 2, 2], omrade: 'Geometri — area och bevis',
+            genomgangar: ['ma2c-4.5'],
             endastSvar: false,
             fraga: 'Figuren visar två cirklar som skär varandra. Visa att den stora cirkeln har dubbelt så ' +
                 'stor area som den lilla cirkeln. $M$ är mittpunkten i den stora cirkeln och $m$ är ' +
@@ -948,6 +971,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 27, del: 'D', poang: [0, 1, 2], omrade: 'Vektorer — associativa lagen',
+            genomgangar: ['ma1c-6.6'],
             endastSvar: false,
             fraga: 'Vid addition av tal gäller den associativa lagen, dvs. $(a + b) + c = a + (b + c)$. ' +
                 'Till exempel är $(3 + 2) + 5 = 5 + 5 = 10$ och $3 + (2 + 5) = 3 + 7 = 10$. ' +
@@ -993,6 +1017,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 28, del: 'D', poang: [0, 0, 2], omrade: 'Index',
+            genomgangar: ['ma1c-3.2'],
             endastSvar: false,
             fraga: 'Diagrammet visar prisutvecklingen för ett kilogram kaffe i Sverige (åren 1921–2011). ' +
                 'Enligt en indexserie var index för kaffepriset $330$ år $2011$. Vilket år var indexseriens basår?',

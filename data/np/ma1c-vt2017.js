@@ -52,6 +52,7 @@ window.NP_PROV['ma1c-vt2017'] = {
         // ================= DELPROV B =================
         {
             nr: 1, del: 'B', poang: [1, 0, 0], omrade: 'Ekvationer',
+            genomgangar: ['ma1c-2.5'],
             endastSvar: true,
             fraga: 'Lös ekvationen $12x + 5 = 12 - 2x$',
             figur: null,
@@ -77,6 +78,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 2, del: 'B', poang: [1, 0, 0], omrade: 'Vektorer',
+            genomgangar: ['ma1c-6.6'],
             endastSvar: true,
             fraga: 'Addera vektorerna $\\vec{u} = (3,\\ 4)$ och $\\vec{v} = (2,\\ -5)$',
             figur: null,
@@ -94,6 +96,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 3, del: 'B', poang: [2, 0, 0], omrade: 'Räta linjen — Celsius/Fahrenheit',
+            genomgangar: ['ma1c-4.1', 'ma1c-4.4'],
             endastSvar: false,
             fraga: 'Sambandet mellan temperatur i grader Celsius ($\\degree$C) och grader Fahrenheit ' +
                 '($\\degree$F) är linjärt. Temperaturen $-18\\degree$C motsvarar ungefär $0\\degree$F ' +
@@ -138,6 +141,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 4, del: 'B', poang: [1, 1, 0], omrade: 'Algebraiska uttryck',
+            genomgangar: ['ma1c-2.3', 'ma1c-2.5'],
             endastSvar: false,
             fraga: 'Utgå från uttrycket $4(x + 2) - 3(2x - 2)$\n\n' +
                 '**a)** Beräkna uttryckets värde om $x = 1$.\n\n' +
@@ -176,6 +180,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 5, del: 'B', poang: [1, 1, 0], omrade: 'Andelar — promille och ppm',
+            genomgangar: ['ma1c-3.1'],
             endastSvar: true,
             fraga: 'Vilket eller vilka av följande alternativ motsvarar $0{,}12\\ \\%$? Ringa in ditt/dina svar.\n\n' +
                 '$12\\ ‰ \\qquad 1{,}2\\ ‰ \\qquad 120\\ ‰ \\qquad 120\\ \\text{ppm} \\qquad 1200\\ \\text{ppm}$',
@@ -206,6 +211,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 6, del: 'B', poang: [0, 1, 0], omrade: 'Räta linjen — avläsning ur graf',
+            genomgangar: ['ma1c-4.4', 'ma1c-4.1'],
             endastSvar: true,
             fraga: 'Hamed är dykare. När han dyker nedåt från vattenytan gör han det med samma hastighet ' +
                 'hela tiden. Vid ett dyk startar han dykdatorn när han är 6 meter under vattenytan. ' +
@@ -269,6 +275,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 8, del: 'B', poang: [0, 1, 0], omrade: 'Potenser',
+            genomgangar: ['ma1c-1.6', 'ma1c-1.7'],
             endastSvar: true,
             fraga: 'Ringa in de potenser som har samma värde.\n\n' +
                 '$0^5 \\qquad 1^4 \\qquad 2^3 \\qquad 3^2 \\qquad 4^1 \\qquad 5^0$',
@@ -292,6 +299,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 9, del: 'B', poang: [0, 1, 0], omrade: 'Algebra',
+            genomgangar: ['ma1c-2.1', 'ma1c-2.4'],
             endastSvar: true,
             fraga: 'Vilket värde får uttrycket $3x + 12$ om $x + 4 = 12$?',
             figur: null,
@@ -343,6 +351,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 11, del: 'B', poang: [1, 1, 1], omrade: 'Funktioner — definitions- och värdemängd',
+            genomgangar: ['ma1c-4.9', 'ma1c-4.7'],
             endastSvar: false,
             fraga: 'Rita en möjlig graf till funktionen $f$ i koordinatsystemet. För funktionen $f$ gäller att:\n\n' +
                 '- Definitionsmängden är $-5 \\leq x \\leq 6$\n' +
@@ -380,6 +389,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 12, del: 'B', poang: [0, 0, 1], omrade: 'Ekvationer med två variabler',
+            genomgangar: ['ma1c-2.5', 'ma1c-2.12'],
             endastSvar: true,
             fraga: 'Det finns många olika värden på $x$ och $y$ som löser ekvationen $8x - y = 10$.\n\n' +
                 'Hitta en lösning till ekvationen där $x$ och $y$ har samma värde.',
@@ -404,6 +414,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 13, del: 'B', poang: [0, 1, 2], omrade: 'Trigonometri',
+            genomgangar: ['ma1c-6.2', 'ma2c-4.5'],
             endastSvar: false,
             fraga: 'De två kortaste sidorna i en rätvinklig triangel har längderna $\\sqrt{3}$ och 2. ' +
                 'Låt $v$ vara den minsta vinkeln i triangeln. Vilket värde har $\\sin v$? ' +
@@ -446,6 +457,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 14, del: 'B', poang: [0, 0, 2], omrade: 'Vektorer',
+            genomgangar: ['ma1c-6.6', 'ma1c-6.7'],
             endastSvar: false,
             fraga: 'I rutnätet visas representanter för vektorerna $\\vec{u}$ och $\\vec{w}$. ' +
                 'Rita i samma rutnät en representant för vektorn $\\vec{v}$ som uppfyller ' +
@@ -484,6 +496,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 15, del: 'B', poang: [0, 1, 1], omrade: 'Potenser och rötter',
+            genomgangar: ['ma1c-1.8', 'ma1c-2.10'],
             endastSvar: false,
             fraga: 'Lös ekvationen $\\left(\\left(\\sqrt{3}\\right)^x\\right)^4 = 3^6$. Redovisa din lösning.',
             figur: null,
@@ -513,6 +526,7 @@ window.NP_PROV['ma1c-vt2017'] = {
         // ================= DELPROV C =================
         {
             nr: 16, del: 'C', poang: [4, 4, 4], omrade: 'Sannolikhet — tärningsspelet Azaloo',
+            genomgangar: ['ma1c-5.4', 'ma1c-5.6', 'ma1c-5.7'],
             endastSvar: false,
             fraga: 'I ett tärningsspel som kallas Azaloo kastar man två sexsidiga tärningar samtidigt.\n\n' +
                 '- Om tärningarna visar *olika* antal prickar får man lika många poäng som antalet prickar ' +
@@ -626,6 +640,7 @@ window.NP_PROV['ma1c-vt2017'] = {
         // ================= DELPROV D =================
         {
             nr: 17, del: 'D', poang: [2, 0, 0], omrade: 'Trigonometri — tillämpning',
+            genomgangar: ['ma1c-6.1'],
             endastSvar: false,
             fraga: 'När man ska fälla ett träd är det viktigt att veta hur högt trädet är. ' +
                 'Petra mäter avståndet fram till trädet och vinkeln till toppen med ett instrument (se figur). ' +
@@ -668,6 +683,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 18, del: 'D', poang: [2, 1, 0], omrade: 'Formler — insättning och ekvation',
+            genomgangar: ['ma1c-2.12', 'ma1c-2.5'],
             endastSvar: false,
             fraga: 'Afrikas högsta berg Kilimanjaro har en höjd på $5\\,892$ meter över havet. ' +
                 'Johan vandrar mot toppen. När han kokar tevatten konstaterar han att vattnet kokar vid ' +
@@ -709,6 +725,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 19, del: 'D', poang: [2, 3, 0], omrade: 'Diagram och procent',
+            genomgangar: ['ma1c-3.1', 'ma1c-3.2', 'ma1c-4.4'],
             endastSvar: false,
             fraga: 'Diagrammet visar antal elever i gymnasieskolan åren 1996–2015 (blå linje) och en ' +
                 'prognos för åren 2016–2024 (röd linje).\n\n' +
@@ -775,6 +792,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 20, del: 'D', poang: [2, 2, 1], omrade: 'Linjära modeller',
+            genomgangar: ['ma1c-4.1', 'ma1c-2.8'],
             endastSvar: false,
             fraga: 'Albin ska lägga nytt golv i sin lägenhet och väljer mellan två olika golv.\n\n' +
                 'Golv A: $345$ kr/m². Golv B: $395$ kr/m².\n\n' +
@@ -828,6 +846,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 21, del: 'D', poang: [0, 2, 0], omrade: 'Bevis och resonemang',
+            genomgangar: ['ma2c-4.4', 'ma2c-4.2'],
             endastSvar: false,
             fraga: 'Erik, Carina och Sara har fått i uppgift att bevisa yttervinkelsatsen $c = a + b$ ' +
                 '(se figuren). Vilken eller vilka av elevlösningarna är bevis och vilken eller vilka är ' +
@@ -886,6 +905,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 22, del: 'D', poang: [1, 1, 1], omrade: 'Procent — jämförelse',
+            genomgangar: ['ma1c-3.2'],
             endastSvar: false,
             fraga: 'Oskar vinner $x$ kr i en tävling. Ahmed vinner $40\\ \\%$ mer än Oskar. ' +
                 'Stina vinner $20\\ \\%$ mindre än Oskar. Hur många procent större är Ahmeds vinst ' +
@@ -924,6 +944,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 23, del: 'D', poang: [1, 1, 1], omrade: 'Procent och procentenheter',
+            genomgangar: ['ma1c-3.1', 'ma1c-3.2'],
             endastSvar: false,
             fraga: 'I en opinionsundersökning fick Socialdemokraterna $33{,}4\\ \\%$ av rösterna. ' +
                 'Detta motsvarade en ökning med $1{,}7$ procentenheter från förra undersökningen. ' +
@@ -965,6 +986,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 24, del: 'D', poang: [1, 1, 1], omrade: 'Formler och ekvationer',
+            genomgangar: ['ma1c-2.12', 'ma1c-2.8'],
             endastSvar: false,
             fraga: 'Musikklassen på en skola ska ha en konsert. Biljettpriset för en vuxen är $100$ kr och ' +
                 'för barn $50$ kr. Eleverna ställer upp en formel för hur intäkten för biljettförsäljningen ' +
@@ -1049,6 +1071,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 26, del: 'D', poang: [0, 3, 2], omrade: 'Geometrisk talföljd',
+            genomgangar: ['ma1c-3.2', 'ma1c-3.3', 'ma1c-2.13'],
             endastSvar: false,
             fraga: 'Bilden visar en skiss av en skulptur. De horisontella pinnarnas längd minskar med ' +
                 '$20\\ \\%$ för varje steg och avståndet mellan pinnarna är $25$ cm. Den första pinnen ' +
@@ -1103,6 +1126,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 27, del: 'D', poang: [0, 3, 2], omrade: 'Exponentiell förändring',
+            genomgangar: ['ma1c-3.3', 'ma1c-2.10'],
             endastSvar: false,
             fraga: 'Befolkningen i en stadsdel ökar. Tiden det tar för befolkningen att fördubblas beror på ' +
                 'den genomsnittliga procentuella ökningen per år. En tumregel säger att fördubblingstiden är ' +

@@ -428,6 +428,45 @@
             margin: 30px 0 6px;
         }
         .np-losning-head .np-sektionsrubrik { margin: 0; }
+
+        /* Genomgångarna som täcker uppgiftens teori — högst upp i lösningen,
+           så att den som kör fast kan läsa på innan stegen klickas fram. */
+        .np-teori {
+            background: var(--lab-bg-raised);
+            border: 1px solid var(--lab-line);
+            border-radius: 10px;
+            padding: 13px 16px 14px;
+            margin: 12px 0 14px;
+        }
+        .np-teori-lankar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .np-teori-lank {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 13.5px;
+            line-height: 1.35;
+            color: var(--lab-ink);
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 999px;
+            padding: 6px 14px;
+        }
+        .np-teori-lank:hover {
+            border-color: var(--lab-accent);
+            color: var(--lab-accent);
+        }
+        .np-teori-num {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            letter-spacing: .04em;
+            color: var(--lab-ink-muted);
+        }
+        .np-teori-lank:hover .np-teori-num { color: var(--lab-accent); }
         .np-pres-btn {
             display: inline-flex;
             align-items: center;
@@ -487,6 +526,9 @@
 <body class="laborans">
     <div id="root"></div>
 
+    <!-- Katalogen används bara för att slå upp titel/kapitel till uppgifternas
+         `genomgangar`-länkar (se TeoriLankar nedan). -->
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
@@ -510,6 +552,37 @@
         const NP_INDEX = window.NP_INDEX || [];
         const NP_PROV = window.NP_PROV || {};
         const NP_FIGURER = window.NP_FIGURER || {};
+
+        // Uppslag teori-id (t.ex. 'fy2-1.4') → avsnittet i data/katalog.js, så
+        // att uppgifternas `genomgangar`-lista kan visas med titel och kapitel.
+        // Kurskoderna MÅSTE matcha KURSKOD i data/build-nyheter-og.js.
+        const KURSKOD = {
+            'Fysik nivå 1': 'fy1',
+            'Fysik nivå 2': 'fy2',
+            'Matematik nivå 1c': 'ma1c',
+            'Matematik nivå 2c': 'ma2c',
+            'Matematik fortsättning nivå 1c': 'ma3c',
+            'Matematik fortsättning nivå 2': 'ma4',
+        };
+        // Kort kursetikett — sätts ut på länkar som pekar UTANFÖR provets egen
+        // kurs (t.ex. ett Ma1c-prov vars geometriteori bor i Ma2c).
+        const KURSKORT = {
+            'Fysik nivå 1': 'Fy 1', 'Fysik nivå 2': 'Fy 2',
+            'Matematik nivå 1c': 'Ma 1c', 'Matematik nivå 2c': 'Ma 2c',
+            'Matematik fortsättning nivå 1c': 'Ma 3c',
+            'Matematik fortsättning nivå 2': 'Ma 4',
+        };
+        const AVSNITT = (function () {
+            const ut = {};
+            for (const s of (window.KATALOG_FLAT || [])) {
+                const kod = KURSKOD[s.course];
+                if (!kod) continue;
+                ut[kod + '-' + s.num] = {
+                    num: s.num, titel: s.title, kurs: s.course, kapitel: s.chapter,
+                };
+            }
+            return ut;
+        })();
 
         // Breda tabeller lindas i en scroll-ruta (.lab-tabell) — annars
         // klipps de yttre kolumnerna bort på mobil. Samma som katalog.html.
@@ -540,6 +613,42 @@
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
             return html;
+        }
+
+        // Kursiv variabeldel i titlar (*pq*-formeln) — samma helper som i
+        // katalog.html.
+        function emTitle(s) {
+            if (!s || s.indexOf('*') === -1) return s;
+            return s.split(/\*([^*]+)\*/g).map((del, i) =>
+                i % 2 ? <em key={i}>{del}</em> : del);
+        }
+
+        // Genomgångarna som täcker uppgiftens teori. `genomgangar` är en lista
+        // med teori-id (t.ex. 'fy2-1.4') på uppgiften i data/np/<prov>.js.
+        // Okända id:n hoppas tyst över — hellre ingen länk än en trasig.
+        function TeoriLankar({ ids, kurs }) {
+            const avsnitt = (ids || [])
+                .map(id => (AVSNITT[id] ? { id, ...AVSNITT[id] } : null))
+                .filter(Boolean);
+            if (!avsnitt.length) return null;
+            return (
+                <div className="np-teori">
+                    <span className="np-kortlabel" style={{ color: 'var(--lab-ink-muted)' }}>
+                        Teori du behöver
+                    </span>
+                    <div className="np-teori-lankar">
+                        {avsnitt.map(a => (
+                            <a className="np-teori-lank" key={a.id} href={'katalog.html#' + a.id}
+                               title={a.kurs + ' · ' + a.kapitel}>
+                                <span className="np-teori-num">
+                                    {a.kurs !== kurs && (KURSKORT[a.kurs] || a.kurs) + ' · '}{a.num}
+                                </span>
+                                <span>{emTitle(a.titel)}</span>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            );
         }
 
         function MdBlock({ source, className }) {
@@ -1088,6 +1197,7 @@
                             Presentationsläge
                         </button>
                     </div>
+                    <TeoriLankar ids={uppgift.genomgangar} kurs={prov.kurs} />
                     {visadeSteg === 0 && (
                         <p className="np-hint" style={{ margin: '4px 0 14px' }}>
                             Försök lösa uppgiften själv först — klicka sedan fram lösningen ett steg i taget.

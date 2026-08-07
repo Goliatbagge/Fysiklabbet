@@ -43,6 +43,15 @@
             line-height: 1.6;
             margin: 0 0 26px;
         }
+        /* Ämnesplansnotisen på startvyn — samma lede-typografi, men avgränsad
+           så att den läses som en upplysning och inte som brödtext. */
+        .np-lede-obs {
+            border-left: 3px solid var(--lab-ink-muted);
+            padding: 2px 0 2px 15px;
+            font-size: 15px;
+            margin: -10px 0 26px;
+        }
+        .np-lede-obs strong { color: var(--lab-ink); }
         .np-provkort-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -429,6 +438,32 @@
         }
         .np-losning-head .np-sektionsrubrik { margin: 0; }
 
+        /* Uppgift vars innehåll utgick ur ämnesplanen 2021 — rutan ligger före
+           uppgiftstexten så att ingen räknar den i onödan. */
+        .np-utgatt {
+            border: 1px solid var(--lab-line-strong);
+            border-left: 3px solid var(--lab-ink-muted);
+            border-radius: 10px;
+            background: var(--lab-bg-raised);
+            padding: 14px 18px 15px;
+            margin: 0 0 14px;
+        }
+        .np-utgatt-rubrik {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: var(--lab-ink-muted);
+            display: block;
+            margin-bottom: 7px;
+        }
+        .np-utgatt p {
+            margin: 0;
+            font-size: 14.5px;
+            line-height: 1.55;
+            color: var(--lab-ink-soft);
+        }
+
         /* Genomgångarna som täcker uppgiftens teori — högst upp i lösningen,
            så att den som kör fast kan läsa på innan stegen klickas fram. */
         .np-teori {
@@ -814,6 +849,11 @@
                         så att du förstår både <em>vad</em> som görs och <em>varför</em>. Försök alltid
                         lösa uppgiften själv innan du tittar på nästa steg.
                     </p>
+                    <p className="np-lede np-lede-obs">
+                        <strong>Obs!</strong> Endast proven för våren 2022 följer aktuell ämnesplan.
+                        Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kurserna vid
+                        revideringen 2021 — de uppgifterna är märkta.
+                    </p>
                     <div className="np-provkort-grid">
                         {/* dold: true i data/np/index.js döljer provet här —
                             djuplänken np.html#<id> fungerar fortfarande. */}
@@ -1173,6 +1213,13 @@
                         <span className="np-chip">{uppgift.endastSvar ? 'Endast svar krävs' : 'Redovisning krävs'}</span>
                         {dp && <span className="np-chip">{dp.hjalpmedelKort}</span>}
                     </div>
+
+                    {uppgift.utgatt && (
+                        <div className="np-utgatt">
+                            <span className="np-utgatt-rubrik">Ingår inte längre i kursen</span>
+                            <p>{uppgift.utgatt}</p>
+                        </div>
+                    )}
 
                     <div className="np-fraga np-fraga-fast" ref={fragaEl}>
                         <span className="np-kortlabel">Uppgift</span>

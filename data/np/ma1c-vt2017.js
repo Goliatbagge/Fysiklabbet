@@ -241,6 +241,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 7, del: 'B', poang: [0, 1, 0], omrade: 'Talteori',
+            utgatt: 'Talteori med primtal och delbarhet ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: true,
             fraga: 'Lisa tänker på ett heltal mellan 40 och 50.\n\n' +
                 '- Talet är *inte* delbart med 2.\n' +
@@ -322,6 +323,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 10, del: 'B', poang: [0, 1, 0], omrade: 'Talbaser — binära tal',
+            utgatt: 'Andra talbaser än tio ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: true,
             fraga: 'Matematikläraren fyller år och eleverna vill överraska henne med en tårta. ' +
                 'Läraren undrar först varför bara tre av sex ljus är tända, men förstår sedan att eleverna ' +
@@ -1029,6 +1031,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 25, del: 'D', poang: [0, 2, 2], omrade: 'Geometri — area och bevis',
+            utgatt: 'Cirkelns area och omkrets ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Figuren visar en cirkel och en rätvinklig triangel. Cirkelns radie är lika lång som ' +
                 'triangelns höjd. Om cirkeln skulle rulla ett varv så skulle sträckan motsvara triangelns bas. ' +

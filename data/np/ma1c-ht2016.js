@@ -175,6 +175,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 6, del: 'B', poang: [0, 2, 0], omrade: 'Talbaser',
+            utgatt: 'Andra talbaser än tio ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Talet $113$ är skrivet i bas 7. Skriv talet i bas 10. Redovisa din lösning.',
             figur: null,
@@ -582,6 +583,7 @@ window.NP_PROV['ma1c-ht2016'] = {
         // ================= DELPROV D =================
         {
             nr: 18, del: 'D', poang: [2, 0, 0], omrade: 'Tid och rest',
+            utgatt: 'Division med rest ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Antag att klockan är 9 på morgonen. Vad är då klockan $1\\,000$ timmar senare?',
             figur: null,
@@ -922,6 +924,7 @@ window.NP_PROV['ma1c-ht2016'] = {
         {
             nr: 26, del: 'D', poang: [0, 2, 2], omrade: 'Geometri — area och bevis',
             genomgangar: ['ma2c-4.5'],
+            utgatt: 'Cirkelns area tillsammans med geometriska bevis ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Figuren visar två cirklar som skär varandra. Visa att den stora cirkeln har dubbelt så ' +
                 'stor area som den lilla cirkeln. $M$ är mittpunkten i den stora cirkeln och $m$ är ' +
@@ -1018,6 +1021,7 @@ window.NP_PROV['ma1c-ht2016'] = {
         {
             nr: 28, del: 'D', poang: [0, 0, 2], omrade: 'Index',
             genomgangar: ['ma1c-3.2'],
+            utgatt: 'Index och basår ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Diagrammet visar prisutvecklingen för ett kilogram kaffe i Sverige (åren 1921–2011). ' +
                 'Enligt en indexserie var index för kaffepriset $330$ år $2011$. Vilket år var indexseriens basår?',

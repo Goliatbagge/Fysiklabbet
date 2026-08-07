@@ -33,6 +33,18 @@ fast kan läsa på innan stegen klickas fram (önskemål 2026-08-07).
 - Id:t måste finnas i `data/katalog.js` — okända id:n hoppas tyst över av
   `TeoriLankar`, så en felstavning syns bara som en länk som försvann.
 
+## Uppgifter på utgånget stoff (`utgatt`)
+
+Ämnesplanerna reviderades 2021 — **bara proven från våren 2022 följer den
+aktuella planen.** Uppgifter i äldre prov som prövar stoff som utgick får
+`utgatt: 'Andra talbaser än tio ingår inte längre i Matematik 1c. …'`, en
+mening om vad som utgått plus varför eleven kan hoppa över uppgiften.
+`np.html` visar texten i en ruta **före uppgiftstexten**, så att ingen
+räknar den i onödan. Startvyn har motsvarande notis i ingressen.
+
+Märk bara det som verkligen strukits — en uppgift som fortfarande prövar
+kursinnehåll ska aldrig få rutan, även om genomgången råkar saknas.
+
 ## Lösningsstegen
 
 - 2–7 steg per uppgift (deluppgifter kan ge fler). Varje steg gör EN sak

@@ -52,6 +52,34 @@
             margin: -10px 0 26px;
         }
         .np-lede-obs strong { color: var(--lab-ink); }
+
+        /* Proven grupperas under en rubrik per kurs. scroll-margin gör att
+           rubriken får luft ovanför sig när brödsmulans kurslänk skrollar hit
+           — annars klistras den mot skärmens överkant. */
+        .np-kursgrupp {
+            margin: 0 0 34px;
+            scroll-margin-top: 28px;
+        }
+        .np-kursrubrik {
+            font-family: var(--lab-font-display);
+            font-weight: 400;
+            font-size: 22px;
+            color: var(--lab-ink);
+            margin: 0 0 16px;
+            padding-bottom: 9px;
+            border-bottom: 1px solid var(--lab-line);
+        }
+
+        /* Klickbara brödsmulor (basens .lab-breadcrumb har ingen länkstil). */
+        .lab-breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .lab-breadcrumb a:hover {
+            color: var(--lab-accent);
+            border-bottom-color: var(--lab-accent);
+        }
         .np-provkort-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -797,11 +825,19 @@
         function Breadcrumb({ prov, uppgift }) {
             return (
                 <div className="lab-breadcrumb">
-                    <span className="lab-breadcrumb-current">NATIONELLA PROV</span>
+                    {/* På startvyn är smulan bara en etikett; inne i ett prov
+                        leder den tillbaka dit (och kursen till sin rubrik). */}
+                    <span className="lab-breadcrumb-current">
+                        {prov ? <a href="np.html">NATIONELLA PROV</a> : 'NATIONELLA PROV'}
+                    </span>
                     {prov && (
                         <React.Fragment>
                             <span className="lab-breadcrumb-sep">/</span>
-                            <span className="lab-breadcrumb-current">{prov.kurs.toUpperCase()}</span>
+                            <span className="lab-breadcrumb-current">
+                                <a href={'np.html#kurs:' + (KURSKOD[prov.kurs] || '')}>
+                                    {prov.kurs.toUpperCase()}
+                                </a>
+                            </span>
                             <span className="lab-breadcrumb-sep">/</span>
                             <span className="lab-breadcrumb-tail">{uppgift ? `${prov.termin} · Uppgift ${uppgift}` : prov.termin}</span>
                         </React.Fragment>
@@ -838,8 +874,24 @@
             return `Uppgiften kan ge högst ${p[0]} E-poäng, ${p[1]} C-poäng och ${p[2]} A-poäng`;
         }
 
-        // --- Startvy: lista över prov ---
-        function Landing() {
+        // --- Startvy: lista över prov, grupperade per kurs ---
+        function Landing({ kurs }) {
+            // Kurserna kommer i den ordning de först dyker upp i NP_INDEX —
+            // en ny kurs får alltså sin rubrik utan att något ändras här.
+            const grupper = [];
+            for (const p of NP_INDEX.filter(x => !x.dold)) {
+                let g = grupper.find(x => x.kurs === p.kurs);
+                if (!g) { g = { kurs: p.kurs, prov: [] }; grupper.push(g); }
+                g.prov.push(p);
+            }
+
+            // Kurslänken i brödsmulan (#kurs:<kod>) skrollar hit.
+            useEffect(() => {
+                if (!kurs) return;
+                const el = document.querySelector('[data-kurs="' + kurs + '"]');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, [kurs]);
+
             return (
                 <main className="np-main">
                     <h1 className="np-hero-title">Nationella prov — <em>lösningar steg för steg</em></h1>
@@ -854,17 +906,22 @@
                         Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kurserna vid
                         revideringen 2021 — de uppgifterna är märkta.
                     </p>
-                    <div className="np-provkort-grid">
-                        {/* dold: true i data/np/index.js döljer provet här —
-                            djuplänken np.html#<id> fungerar fortfarande. */}
-                        {NP_INDEX.filter(p => !p.dold).map(p => (
-                            <a key={p.id} className="lab-card lab-card-clickable" href={'#' + p.id}>
-                                <span className="lab-card-tag">{p.kurs.toUpperCase()}</span>
-                                <span className="lab-card-title">{p.namn}</span>
-                                <span className="lab-card-meta">{p.meta}</span>
-                            </a>
-                        ))}
-                    </div>
+                    {/* dold: true i data/np/index.js döljer provet här —
+                        djuplänken np.html#<id> fungerar fortfarande. */}
+                    {grupper.map(g => (
+                        <section className="np-kursgrupp" key={g.kurs}
+                                 data-kurs={KURSKOD[g.kurs] || g.kurs}>
+                            <h2 className="np-kursrubrik">{g.kurs}</h2>
+                            <div className="np-provkort-grid">
+                                {g.prov.map(p => (
+                                    <a key={p.id} className="lab-card lab-card-clickable" href={'#' + p.id}>
+                                        <span className="lab-card-title">{p.namn}</span>
+                                        <span className="lab-card-meta">{p.meta}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </section>
+                    ))}
                     <p className="np-hint" style={{ marginTop: 18 }}>
                         Fler prov läggs till efter hand.
                     </p>
@@ -1347,13 +1404,17 @@
         // osynligt för sökmotorer, så alla prov räknades som samma sida.
         // Hashen vinner när båda finns, så befintliga länkar och bokmärken
         // beter sig exakt som förut.
+        // #kurs:<kurskod> är en tredje form: startvyn, skrollad till kursens
+        // rubrik. Den bär inget eget innehåll och hör därför inte i sitemapen.
         function parseHash() {
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (new URLSearchParams(window.location.search).get('id') || '');
-            if (!hash) return { provId: null, nr: null };
+            if (!hash) return { provId: null, nr: null, kurs: null };
+            const k = hash.match(/^kurs:([a-z0-9]+)$/);
+            if (k) return { provId: null, nr: null, kurs: k[1] };
             const m = hash.match(/^([a-z0-9-]+?)(?::(\d+))?$/);
-            if (!m || !NP_PROV[m[1]]) return { provId: null, nr: null };
-            return { provId: m[1], nr: m[2] ? parseInt(m[2], 10) : null };
+            if (!m || !NP_PROV[m[1]]) return { provId: null, nr: null, kurs: null };
+            return { provId: m[1], nr: m[2] ? parseInt(m[2], 10) : null, kurs: null };
         }
 
         function App() {
@@ -1385,7 +1446,7 @@
                     <Topbar />
                     <Header />
                     <Breadcrumb prov={prov} uppgift={uppgift ? uppgift.nr : null} />
-                    {!prov && <Landing />}
+                    {!prov && <Landing kurs={route.kurs} />}
                     {prov && !uppgift && <ProvView prov={prov} />}
                     {prov && uppgift && <UppgiftView prov={prov} uppgift={uppgift} />}
                     <Footer />

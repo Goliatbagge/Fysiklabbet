@@ -93,10 +93,14 @@ node data/build-nyheter-og.js
 # Bygger om vad filerna BORDE innehålla och jämför med disk — fångar den tysta
 # missen att byggskriptet ovan aldrig kördes (artikeln syns på sajten men
 # saknas i RSS och sitemap, utan att något ser trasigt ut).
-# Körs dessutom automatiskt av GitHub Actions vid varje push till main OCH
-# dagligen 06:00 UTC — se .github/workflows/verifiera-sitemap.yml. Den dagliga
-# körningen fångar datumgrindade artiklar som blir synliga vid midnatt utan
-# att någon pushar. Ägarverifieringsfiler (google<token>.html) hålls medvetet
+# Körs dessutom automatiskt av GitHub Actions — se
+# .github/workflows/verifiera-sitemap.yml, som gör olika saker beroende på
+# vem som är närvarande: vid PUSH till main bara kontroll (rött kryss om du
+# glömt byggskriptet), medan den DAGLIGA körningen (06:00 UTC) och manuell
+# start från fliken Actions bygger om, committar och pushar själva. Den
+# dagliga körningen finns för datumgrindade artiklar som blir synliga vid
+# midnatt utan att någon pushar — där finns ingen människa att säga till.
+# Ägarverifieringsfiler (google<token>.html) hålls medvetet
 # utanför sitemapen men MÅSTE ligga kvar i roten.
 node .claude/verify-sitemap.js
 

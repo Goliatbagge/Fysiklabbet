@@ -1,5 +1,5 @@
-# Kontrollerar att feed.xml, sitemap.xml och delningssidorna är i takt med
-# data/nyheter.js och data/begrepp.js.
+# Håller feed.xml, sitemap.xml och delningssidorna i takt med data/nyheter.js
+# och data/begrepp.js.
 #
 # VARFÖR DEN LIGGER HÄR OCH INTE HOS NYHETSAGENTEN
 # Poängen är att fånga misstag som agenten själv gör. En kontroll som agenten
@@ -7,7 +7,19 @@
 # hoppas kontrollen över av precis samma skäl. Den här körs av GitHub, utan
 # att någon behöver komma ihåg något.
 #
-# Misslyckas körningen mejlar GitHub repots ägare automatiskt.
+# TVÅ BETEENDEN, EFTER VEM SOM ÄR NÄRVARANDE
+#   push/PR   → bara kontroll, rött kryss vid drift. Här står författaren
+#               kvar vid tangentbordet och ska få veta att byggskriptet inte
+#               kördes. Att i stället tyst committa ovanpå någons push är
+#               förvirrande, och går ändå inte för PR:er från forkar.
+#   schema    → bygger om, committar och pushar själv. Ingen människa är
+#   /manuell    inblandad: en framtidsdaterad artikel blir synlig på sajten
+#               vid midnatt utan att någon pushar, och då är feed.xml och
+#               sitemap.xml plötsligt inaktuella av sig själva. Fixen är
+#               deterministisk (kör byggskriptet), så den behöver inte gå
+#               omvägen via ett mejl och en människa.
+#
+# Misslyckas körningen ändå mejlar GitHub repots ägare automatiskt.
 
 name: Verifiera sitemap och RSS
 
@@ -20,15 +32,23 @@ on:
   # fånga: en framtidsdaterad artikel som passerar sin datumgrind blir synlig
   # på sajten vid midnatt, men hamnar inte i sitemapen förrän byggskriptet
   # körs igen. Kör inte nyhetsagenten den dagen förblir artikeln osynlig för
-  # Google — helt tyst. Den här körningen säger till.
+  # Google — helt tyst.
   schedule:
     - cron: '0 6 * * *'
-  # Går även att starta för hand från fliken Actions.
+  # Går även att starta för hand från fliken Actions ("bygg om nu"-knappen).
   workflow_dispatch:
 
 jobs:
+  # ── Push och PR: kontrollera bara ────────────────────────────────────────
   verifiera:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    # Datumgrinden i build-nyheter-og.js läser LOKAL klocka, och runnern går i
+    # UTC — två timmar efter svensk tid på sommaren. Utan detta räknas en
+    # artikel med time: "07:00" som opublicerad här fastän den redan syns på
+    # sajten. Måste vara samma tidszon i båda jobben.
+    env:
+      TZ: Europe/Stockholm
     steps:
       - uses: actions/checkout@v4
 
@@ -38,3 +58,49 @@ jobs:
 
       - name: Kontrollera feed.xml, sitemap.xml och delningssidor
         run: node .claude/verify-sitemap.js
+
+  # ── Schema och manuell start: laga vid drift ─────────────────────────────
+  lag-i-takt:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TZ: Europe/Stockholm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bygg om vid drift och committa
+        run: |
+          set -euo pipefail
+
+          # Gatea på VERIFIERAREN, aldrig på `git diff`. feed.xml innehåller
+          # <lastBuildDate>, en tidsstämpel som ändras varje gång byggskriptet
+          # körs; verifieraren ignorerar den men git gör det inte. Byggde vi om
+          # ovillkorligt skulle det bli en skräpcommit varje dygn — och en
+          # Pages-omdeploy på köpet.
+          if node .claude/verify-sitemap.js; then
+            echo "Allt i takt — ingenting att göra."
+            exit 0
+          fi
+
+          echo "== Drift upptäckt, bygger om =="
+          node data/build-nyheter-og.js
+
+          # Andra rundan får inte fela. Gör den det är driften något annat än
+          # ett oskrivet bygge, och då ska körningen bli röd och mejla.
+          node .claude/verify-sitemap.js
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add feed.xml sitemap.xml nyheter/dela katalog/dela data/begrepp-sok.js
+          git diff --cached --quiet && { echo "Inget att committa"; exit 0; }
+          git commit -m "Bygg om RSS och sitemap (automatisk körning)"
+          # Pushas någonting till main mitt i körningen avvisas den här pushen
+          # och jobbet blir rött. Det är avsikten: nästa dygns körning gör om
+          # jobbet, och under tiden har den pushen ändå kört push-kontrollen.
+          git push origin HEAD:main

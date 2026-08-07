@@ -42,8 +42,20 @@ mening om vad som utgått plus varför eleven kan hoppa över uppgiften.
 `np.html` visar texten i en ruta **före uppgiftstexten**, så att ingen
 räknar den i onödan. Startvyn har motsvarande notis i ingressen.
 
-Märk bara det som verkligen strukits — en uppgift som fortfarande prövar
-kursinnehåll ska aldrig få rutan, även om genomgången råkar saknas.
+**Märk bara det som verkligen lämnat kursen.** Att en genomgång saknas är
+inget skäl i sig — luckorna har tre olika orsaker och bara två av dem
+motiverar en ruta:
+
+| Orsak | Ruta? | Exempel |
+|---|---|---|
+| Utgick 2021 | Ja — "…ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen…" | Talbaser, talteori med primtal och delbarhet, index och basår |
+| Flyttade en kurs uppåt | Ja — nämn vart, och att eleven möter det i nästa kurs | Implikation och ekvivalens, geometriska satser och bevis (Ma1c → Ma2c) |
+| Förkunskap från grundskolan | **Nej** | Cirkelns och triangelns area, vinkelsumman, Pythagoras sats |
+
+Den sista raden är den lätta att gå vilse på: stoffet får förekomma i
+uppgifterna och behöver ingen genomgång — men det är inte det uppgiften
+prövar, och en ruta där skulle be eleven hoppa över något som fortfarande
+gäller.
 
 ## Lösningsstegen
 

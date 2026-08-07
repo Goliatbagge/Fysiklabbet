@@ -97,6 +97,9 @@ window.NP_PROV['ma1c-ht2016'] = {
         {
             nr: 3, del: 'B', poang: [1, 0, 0], omrade: 'Logik — ekvivalens och implikation',
             genomgangar: ['ma2c-4.3'],
+            utgatt: 'Implikation och ekvivalens flyttade till Matematik 2c vid revideringen av ' +
+                'ämnesplanerna 2021 och ingår alltså inte längre i Matematik 1c. Du möter stoffet ' +
+                'i nästa kurs — genomgången nedan hör dit.',
             endastSvar: true,
             fraga: 'Följande samband är ekvivalenser eller implikationer. Markera ekvivalens med ' +
                 'ekvivalenspil $\\Leftrightarrow$ och enbart implikation med korrekt implikationspil ' +
@@ -583,7 +586,6 @@ window.NP_PROV['ma1c-ht2016'] = {
         // ================= DELPROV D =================
         {
             nr: 18, del: 'D', poang: [2, 0, 0], omrade: 'Tid och rest',
-            utgatt: 'Division med rest ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Antag att klockan är 9 på morgonen. Vad är då klockan $1\\,000$ timmar senare?',
             figur: null,
@@ -924,7 +926,6 @@ window.NP_PROV['ma1c-ht2016'] = {
         {
             nr: 26, del: 'D', poang: [0, 2, 2], omrade: 'Geometri — area och bevis',
             genomgangar: ['ma2c-4.5'],
-            utgatt: 'Cirkelns area tillsammans med geometriska bevis ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Figuren visar två cirklar som skär varandra. Visa att den stora cirkeln har dubbelt så ' +
                 'stor area som den lilla cirkeln. $M$ är mittpunkten i den stora cirkeln och $m$ är ' +

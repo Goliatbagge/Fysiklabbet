@@ -849,6 +849,9 @@ window.NP_PROV['ma1c-vt2017'] = {
         {
             nr: 21, del: 'D', poang: [0, 2, 0], omrade: 'Bevis och resonemang',
             genomgangar: ['ma2c-4.4', 'ma2c-4.2'],
+            utgatt: 'Geometriska satser och bevis flyttade till Matematik 2c vid revideringen av ' +
+                'ämnesplanerna 2021 och ingår alltså inte längre i Matematik 1c. Du möter stoffet ' +
+                'i nästa kurs — genomgångarna nedan hör dit.',
             endastSvar: false,
             fraga: 'Erik, Carina och Sara har fått i uppgift att bevisa yttervinkelsatsen $c = a + b$ ' +
                 '(se figuren). Vilken eller vilka av elevlösningarna är bevis och vilken eller vilka är ' +
@@ -1031,7 +1034,6 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 25, del: 'D', poang: [0, 2, 2], omrade: 'Geometri — area och bevis',
-            utgatt: 'Cirkelns area och omkrets ingår inte längre i Matematik 1c. Stoffet utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet — lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: false,
             fraga: 'Figuren visar en cirkel och en rätvinklig triangel. Cirkelns radie är lika lång som ' +
                 'triangelns höjd. Om cirkeln skulle rulla ett varv så skulle sträckan motsvara triangelns bas. ' +

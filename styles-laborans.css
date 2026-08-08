@@ -665,6 +665,32 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
     flex-wrap: wrap;
 }
 
+/* Notis i heron om att sajten fortfarande byggs ut. Diskret ton: samma
+   mjuka bläckfärg som ingressen, avgränsad med en tunn linje till vänster
+   i stället för en ruta — den ska informera, inte konkurrera med
+   knappraden ovanför. */
+.lab-welcome-notis {
+    margin-top: 26px;
+    max-width: 640px;
+    padding-left: 14px;
+    border-left: 2px solid var(--lab-line-strong);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--lab-ink-soft);
+}
+
+.lab-welcome-notis .lab-mono-label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Notisens länk får sin accentfärg via inline-stil i index.html — precis som
+   nyhetslänken i ingressen strax ovanför. Skäl: den globala regeln
+   `body.laborans a:not(.lab-tab-3):not(.lab-section-item)` (rad 80) sätter
+   color: inherit, och :not() räknas in i specificiteten → (0,3,2). En
+   klassregel här skulle alltså tyst förlora och länken renderas i
+   brödtextfärg. Lägg inte tillbaka någon `.lab-welcome-notis a { color: … }`. */
+
 /* Hero-logotypen till höger om texten. mix-blend-mode: multiply låter
    bildens egen pappersvita bakgrund smälta in i sidbakgrunden utan skarv. */
 .lab-welcome-inner {

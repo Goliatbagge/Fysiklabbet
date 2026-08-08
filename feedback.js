@@ -9,13 +9,21 @@
  * från en ny domän mailar Formsubmit en aktiveringslänk till
  * mottagaradressen — klicka den för att börja ta emot feedback.
  *
- * För att byta mottagaradress, ändra FEEDBACK_ENDPOINT nedan.
+ * ⚠️ ADRESSEN SYNS I KÄLLKODEN. Formsubmit lägger mottagaradressen rakt i
+ * URL:en, så den går att läsa för vem som helst som tittar på feedback.js.
+ * Använd därför ALLTID en roll-adress på egen domän här — aldrig en privat
+ * e-postadress. (Bytt från privat gmail-adress 2026-08-08.)
+ *
+ * För att byta mottagaradress, ändra FEEDBACK_EMAIL nedan. Kom ihåg att
+ * Formsubmit kräver en NY aktivering per adress: första meddelandet efter
+ * bytet skickas inte vidare förrän aktiveringslänken (som mailas till den
+ * nya adressen) har klickats.
  */
 (function () {
     'use strict';
     if (document.getElementById('fb-feedback-widget')) return;
 
-    const FEEDBACK_EMAIL = 'kontakt@fysiklabbet.se';
+    const FEEDBACK_EMAIL = 'nyhetsbrev@fysiklabbet.se';
     const FEEDBACK_ENDPOINT = `https://formsubmit.co/${FEEDBACK_EMAIL}`;
     const FEEDBACK_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${FEEDBACK_EMAIL}`;
     const CONFIRMATION_TEXT = 'Snyggt! Vi har registrerat din kraftfulla input. Acceleration mot en bättre sida påbörjad!';

@@ -450,6 +450,42 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'magnetometer',
+    term: 'Magnetometer',
+    former: ['magnetometer', 'magnetometern', 'magnetometrar', 'magnetometrarna', 'magnetometri', 'magnetfältsmätare', 'magnetfältsmätaren'],
+    kort: 'Ett instrument som mäter magnetfält. De känsligaste varianterna registrerar fält som är hundratals miljoner gånger svagare än jordens.',
+    relaterade: ['squid', 'diamagnetism', 'supraledare'],
+    body: [
+      { type: 'p', html: 'En magnetometer mäter hur starkt ett magnetfält är, och ofta också åt vilket håll det pekar. Den enklaste modellen har funnits i tusen år och heter kompass: en liten magnet som får vrida sig fritt ställer in sig efter fältet. Mobiltelefonen har en modern släkting inbyggd, ett par kvadratmillimeter kisel som känner av jordens fält så att kartappen vet vilket håll du tittar åt.' },
+      { type: 'p', html: 'De vetenskapliga magnetometrarna är av ett helt annat slag. Magnetfält mäts i enheten tesla, och jordens fält är omkring 50&nbsp;mikrotesla — ungefär en tjugotusendels tesla. En kylskåpsmagnet ger några millitesla vid ytan. De känsligaste instrumenten arbetar i stället i femtotesla, som är en miljondels miljarddels tesla, alltså i storleksordningen en miljard gånger svagare än jordens fält. Vid den nivån hörs signaler som annars är omöjliga att uppfatta: strömmarna i en hjärna eller ett hjärta, järnhaltiga mineral djupt nere i berggrunden, eller små föroreningar i ett materialprov.' },
+      { type: 'p', html: 'Svårigheten är sällan att förstärka signalen, utan att skilja den från allt annat. En buss som passerar utanför fönstret, en hiss i huset och den elektriska ledningen i väggen ger alla ifrån sig magnetfält som är många tusen gånger starkare än det man vill mäta. Därför byggs de känsligaste mätningarna in i rum med väggar av magnetiskt skyddsmaterial, och därför är det en nyhet i sig varje gång någon lyckas göra en lika känslig mätare som klarar sig utan sådana rum.' }
+    ]
+  },
+  {
+    id: 'diamagnetism',
+    term: 'Diamagnetism',
+    former: ['diamagnetism', 'diamagnetismen', 'diamagnetisk', 'diamagnetiskt', 'diamagnetiska'],
+    kort: 'Alla ämnens svaga benägenhet att stötas bort från ett magnetfält i stället för att dras in i det. Effekten är oftast omärklig, men räcker för att få grafit — och grodor — att sväva.',
+    relaterade: ['magnetometer', 'supraledare', 'spinn'],
+    body: [
+      { type: 'p', html: 'De flesta tänker på magnetism som något järn har och trä saknar. I själva verket reagerar allt material på ett magnetfält, bara olika mycket. När fältet slås på ändras elektronernas rörelse i varje atom en aning, och ändringen sker alltid så att atomen bygger upp ett eget litet magnetfält som är riktat <em>mot</em> det yttre. Följden är att ämnet stöts bort från fältet. Det kallas diamagnetism, och det gäller vatten, glas, plast, koppar, kött och nästan allt annat.' },
+      { type: 'p', html: 'I järn och andra ferromagnetiska ämnen är effekten helt överröstad av en mycket starkare mekanism som drar materialet in mot fältet i stället. Men i ämnen utan den mekanismen finns bara frånstötningen kvar — och den går faktiskt att se. Pyrolytisk grafit, där kolatomerna ligger ordnade i plana skikt, är ovanligt starkt diamagnetisk, och en tunn flisa av materialet svävar av sig själv några millimeter ovanför en samling starka permanentmagneter, utan kylning och utan ström. 1997 lät fysikern Andre Geim på samma sätt en levande groda flyta fritt i ett fält på omkring 16&nbsp;tesla; grodan består mest av vatten, och vatten är diamagnetiskt.' },
+      { type: 'p', html: 'Frånstötningen har en egenskap som gör den ovanligt användbar: den blir starkare ju närmare fältets starkaste punkt föremålet kommer. Ett magnetiskt föremål som balanseras av andra magneter befinner sig alltid i en vinglig jämvikt som spårar ur vid minsta störning, men ett diamagnetiskt material puttar tillbaka åt vilket håll föremålet än råkar glida. Därför används diamagnetiska ytor för att stabilisera svävande föremål i känsliga instrument, där varje kontaktpunkt annars skulle betyda friktion och störningar.' }
+    ]
+  },
+  {
+    id: 'squid',
+    term: 'SQUID',
+    former: ['squid', 'squiden', 'squidar', 'squidarna', 'squidmagnetometer', 'squidmagnetometrar', 'kvantinterferensmagnetometer', 'kvantinterferensmagnetometrar'],
+    kort: 'En magnetfältsmätare byggd av en supraledande ring — under årtionden den känsligaste som fanns, men den måste hållas nerkyld till några grader över absoluta nollpunkten.',
+    relaterade: ['supraledare', 'magnetometer', 'kvantsammanflatning'],
+    body: [
+      { type: 'p', html: 'Namnet är en förkortning av engelskans <em>superconducting quantum interference device</em>, ungefär ”supraledande kvantinterferensinstrument”. Hjärtat är en ring av supraledande material, alltså ett material som under en viss temperatur leder ström helt utan motstånd. Ringen är bruten på ett eller två ställen av ett tunt isolerande skikt som strömmen ändå tar sig igenom, tack vare att elektronparen i en supraledare uppför sig som en enda gemensam våg som kan läcka igenom barriären.' },
+      { type: 'p', html: 'Det speciella med en sådan ring är att magnetfältet genom den inte kan anta vilket värde som helst. Det kommer i bestämda portioner, ungefär som trappsteg, och strömmen i ringen ändras med en tydlig rytm varje gång fältet ökar med ett steg. Att räkna trappsteg är något man kan göra mycket noggrant, och det är därför en SQUID kan mäta så otroligt svaga fält: ner mot några tiotals femtotesla, alltså miljardtals gånger svagare än jordens magnetfält.' },
+      { type: 'p', html: 'Priset är kylningen. Supraledningen försvinner om materialet blir för varmt, så instrumentet måste hållas nerkylt, i praktiken med flytande helium, och behöver dessutom oftast stå i ett magnetiskt avskärmat rum. Det gör en SQUID dyr, tung och besvärlig att flytta — vilket förklarar varför hjärnmagnetkameror finns på ett fåtal sjukhus i världen, och varför forskare länge har letat efter lika känsliga mätare som fungerar i rumstemperatur.' }
+    ]
+  },
+  {
     id: 'supraledare',
     term: 'Supraledare',
     former: ['supraledare', 'supraledaren', 'supraledarna', 'supraledning', 'supraledningen', 'supraledande'],

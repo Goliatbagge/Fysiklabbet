@@ -50,6 +50,11 @@ c) Undersökningen upprepades efter tre år. Av 100 tillfrågade svarade då
 säkerställd, dvs. är det säkert att det har skett en minskning av andelen
 som har matematik som favoritämne?**
 
+::: handskrift
+typ: felmarginal
+:::
+
+::: textlosning
 **a)** Vi ställer upp formeln för felmarginal:
 
 $$
@@ -94,4 +99,5 @@ Detta ligger inom felmarginalen från föregående undersökning (52 % ligger
 mellan 50,4 % och 69,6 %).
 
 **Svar:** Nej, förändringen är inte statistiskt säkerställd.
+:::
 :::

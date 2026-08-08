@@ -80,11 +80,17 @@ i en enkät:**
 
 **Finns det några problem med undersökningen?**
 
+::: handskrift
+typ: enkatfraga
+:::
+
+::: textlosning
 **Svar:** Ja, svarsalternativen täcker inte in alla möjliga svar. Det är
 inte säkert att en svarande föredrar något av språken. Det är inte heller
 säkert att en svarande vet hur t.ex. katalanska låter. Alternativen
 "Inget" och "Vet ej" saknas alltså. (Dessutom nämner frågan *spanska*, men
 alternativet som ges är *katalanska*.)
+:::
 :::
 
 ::: exempel "Exempel 2 — Ta hänsyn till bortfallet"
@@ -104,6 +110,11 @@ kärnkraft?<br>b) Hur stort var bortfallet procentuellt?<br>c) Om vi tar
 hänsyn till bortfallet, mellan vilka värden kan andelen positiva till
 utbyggnad av kärnkraft ligga?**
 
+::: handskrift
+typ: bortfall
+:::
+
+::: textlosning
 **a)** Vi har 420 positiva av $(420 + 380 + 80) = 880$ svarande. Andelen
 positiva är då
 
@@ -137,4 +148,5 @@ $$
 $$
 
 **Svar:** Mellan 42 % och 54 %.
+:::
 :::

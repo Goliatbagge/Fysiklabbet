@@ -38,6 +38,11 @@ a) stor blir amorteringen varje månad?<br>
 b) mycket ska hon betala totalt vid första inbetalningen?<br>
 c) mycket kommer hon att betala totalt för lånet?**
 
+::: handskrift
+typ: billan
+:::
+
+::: textlosning
 **a)** Om hon ska amortera varje månad i 5 år, så kommer hon att göra
 $5 \cdot 12 = 60$ stycken inbetalningar. Om hon ska amortera samma belopp
 vid varje inbetalning blir amorteringen varje månad
@@ -107,4 +112,5 @@ kolumn D, och texten i cellen blir då `=SUM(D2:D61)`, vilket ger den
 totala summan av alla inbetalningar 168 300 kr.
 
 **Svar:** 168 300 kr
+:::
 :::

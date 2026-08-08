@@ -51,6 +51,11 @@ Vid jämförelser motsvarar det vi JÄMFÖR MED det gamla värdet.
 **En begagnad bil kostar 72 000 kr för sedan sänkas i pris med 8 %.
 Vilket blir det nya priset?**
 
+::: handskrift
+typ: prissankning
+:::
+
+::: textlosning
 Förändringsfaktorn är
 
 $$
@@ -66,11 +71,17 @@ $$
 
 **Svar:** 66 240 kr
 :::
+:::
 
 ::: exempel "Exempel 2 — Hur stor är ökningen?"
 **Ett pris ökar från 175 kr till 231 kr. Hur många procents prisökning
 motsvarar det?**
 
+::: handskrift
+typ: prisokning
+:::
+
+::: textlosning
 Vi bestämmer prisökningen med en enda uträkning genom att bestämma
 förändringsfaktorn:
 
@@ -84,6 +95,7 @@ $(132\ \% - 100\ \%) = 32\ \%$.
 
 **Svar:** 32 %
 :::
+:::
 
 ::: exempel "Exempel 3 — Jämföra två butiker"
 **Butik A säljer en chokladkaka för 18 kr. Butik B säljer en likadan
@@ -91,6 +103,11 @@ chokladkaka för 22 kr. Hur många procent<br>a) dyrare är chokladkakan i
 butik B jämfört med butik A?<br>b) billigare är chokladkakan i butik A
 jämfört med butik B?**
 
+::: handskrift
+typ: jamforbutik
+:::
+
+::: textlosning
 **a)** Vi löser uppgiften med förändringsfaktor. Vi *jämför med butik A*,
 vars pris (18 kr) då motsvarar "gamla värdet" i formeln:
 
@@ -115,4 +132,5 @@ $$
 
 Lägg märke till att svaren i a) och b) *inte* är samma tal — procentsatsen
 beror på vad vi jämför med!
+:::
 :::

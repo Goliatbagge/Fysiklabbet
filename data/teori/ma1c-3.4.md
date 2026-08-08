@@ -33,6 +33,11 @@ a) sätter in 30 000 kr med räntan 3,5 %<br>
 b) sätter in 40 000 kr med räntan 3,5 %<br>
 c) sätter in 40 000 kr med räntan 4,5 %**
 
+::: handskrift
+typ: kalkylranta
+:::
+
+::: textlosning
 **a)** Vi öppnar ett kalkylark och gör en kolumn för "År" och en kolumn
 för "Behållning (kr)". Vi fyller i kolumnen från år 0 till och med år 8.
 Vi fyller också i insättningen 30 000 kr (i cell B2) samt
@@ -67,14 +72,20 @@ automatiskt (automagiskt!). Efter 8 år är behållningen 52 672,36 kr.
 
 **c)** Om räntan istället är 4,5 % går vi nu bara till cell B12 och
 ändrar förändringsfaktorn till 1,045. De resterande värdena ändras
-återigen automatiskt. Med 30 000 kr insatta blir behållningen efter 8 år
-42 663,02 kr.
+återigen automatiskt. Med 40 000 kr insatta blir behållningen efter 8 år
+56 884,02 kr.
+:::
 :::
 
 ::: exempel "Exempel 2 — Årligt sparande"
 **Du sätter in 5 000 kr i slutet av varje år på ett konto med 2,8 %
 ränta. Vad är behållningen på kontot direkt efter 10:e insättningen?**
 
+::: handskrift
+typ: arligtsparande
+:::
+
+::: textlosning
 Vi öppnar ett kalkylark och gör en kolumn för "Insättning" och en kolumn
 för "Behållning (kr)". Vi fyller i kolumnen från insättning 1 till och
 med insättning 10. Vi fyller också i insättningen 5 000 kr för den första
@@ -102,4 +113,5 @@ Vi tar tag i fyllnadshandtaget och drar ner till och med insättning 10:
 | 10 | 56 794,24 kr |
 
 **Svar:** 56 794,24 kr
+:::
 :::

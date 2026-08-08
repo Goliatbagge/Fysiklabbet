@@ -65,6 +65,11 @@ $f(x) = 2x + 3$ betyder alltså samma sak som $g(x) = 2x + 3$.
 ::: exempel "Exempel 1 — Beräkna funktionsvärden"
 **Låt $f(x) = 5x - 3$. Bestäm<br>a) $f(4)$&emsp;&emsp;b) $f(-2)$&emsp;&emsp;c) $f(3a)$&emsp;&emsp;d) $f(7) - f(6)$**
 
+::: handskrift
+typ: funktionsvarde
+:::
+
+::: textlosning
 **a)** För att beräkna $f(4)$ ersätter vi alla $x$ med 4 i funktionen
 $f(x) = 5x - 3$:
 
@@ -118,6 +123,7 @@ $$
 
 **Svar:** 5
 :::
+:::
 
 ::: exempel "Exempel 2 — Är graferna funktioner?"
 **Är $f(x)$ och $g(x)$, som är uppritade nedan, funktioner? Motivera ditt
@@ -127,6 +133,11 @@ svar.**
 <svg viewBox="-26 -20 293 203" width="293" height="203" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett koordinatsystem med en liggande parabel f som öppnar sig åt höger och en lodrät blå linje g vid x lika med minus 2."><line x1="14.4" y1="0.0" x2="14.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="38.4" y1="0.0" x2="38.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="62.4" y1="0.0" x2="62.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="86.4" y1="0.0" x2="86.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="110.4" y1="0.0" x2="110.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="134.4" y1="0.0" x2="134.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.4" y1="0.0" x2="158.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182.4" y1="0.0" x2="182.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="206.4" y1="0.0" x2="206.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="230.4" y1="0.0" x2="230.4" y2="172.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="158.4" x2="244.8" y2="158.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="134.4" x2="244.8" y2="134.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="110.4" x2="244.8" y2="110.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="86.4" x2="244.8" y2="86.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="62.4" x2="244.8" y2="62.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="38.4" x2="244.8" y2="38.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="14.4" x2="244.8" y2="14.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="86.4" x2="252.8" y2="86.4" stroke="#1f2530" stroke-width="1.6"/><polygon points="260.8,86.4 250.8,81.9 250.8,90.9" fill="#1f2530"/><line x1="86.4" y1="172.8" x2="86.4" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="86.4,-16.0 81.9,-6.0 90.9,-6.0" fill="#1f2530"/><text x="258.8" y="104.4" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="95.4" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="14.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="38.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="62.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="110.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="134.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="158.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="182.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="206.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">5</text><text x="230.4" y="102.4" font-size="12" text-anchor="middle" fill="#1f2530">6</text><text x="80.4" y="162.4" font-size="12" text-anchor="end" fill="#1f2530">−3</text><text x="80.4" y="138.4" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="80.4" y="114.4" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="80.4" y="66.4" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="80.4" y="42.4" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="80.4" y="18.4" font-size="12" text-anchor="end" fill="#1f2530">3</text><path d="M172.8,144.0 L168.5,142.6 L164.4,141.1 L160.3,139.7 L156.4,138.2 L152.6,136.8 L148.8,135.4 L145.2,133.9 L141.7,132.5 L138.3,131.0 L135.0,129.6 L131.8,128.2 L128.7,126.7 L125.8,125.3 L122.9,123.8 L120.1,122.4 L117.5,121.0 L115.0,119.5 L112.5,118.1 L110.2,116.6 L108.0,115.2 L105.9,113.8 L103.9,112.3 L102.0,110.9 L100.2,109.4 L98.6,108.0 L97.0,106.6 L95.5,105.1 L94.2,103.7 L92.9,102.2 L91.8,100.8 L90.8,99.4 L89.9,97.9 L89.0,96.5 L88.3,95.0 L87.8,93.6 L87.3,92.2 L86.9,90.7 L86.6,89.3 L86.5,87.8 L86.4,86.4 L86.5,85.0 L86.6,83.5 L86.9,82.1 L87.3,80.6 L87.8,79.2 L88.3,77.8 L89.0,76.3 L89.9,74.9 L90.8,73.4 L91.8,72.0 L92.9,70.6 L94.2,69.1 L95.5,67.7 L97.0,66.2 L98.6,64.8 L100.2,63.4 L102.0,61.9 L103.9,60.5 L105.9,59.0 L108.0,57.6 L110.2,56.2 L112.5,54.7 L115.0,53.3 L117.5,51.8 L120.1,50.4 L122.9,49.0 L125.8,47.5 L128.7,46.1 L131.8,44.6 L135.0,43.2 L138.3,41.8 L141.7,40.3 L145.2,38.9 L148.8,37.4 L152.6,36.0 L156.4,34.6 L160.3,33.1 L164.4,31.7 L168.5,30.2 L172.8,28.8" fill="none" stroke="#c8324a" stroke-width="2"/><line x1="38.4" y1="168.0" x2="38.4" y2="4.8" stroke="#2563c9" stroke-width="2"/><text x="32.4" y="12.0" font-size="14" text-anchor="end" fill="#2563c9"><tspan font-style="italic">g</tspan></text><text x="211.2" y="14.4" font-size="14" text-anchor="start" fill="#c8324a"><tspan font-style="italic">f</tspan></text></svg>
 :::
 
+::: handskrift
+typ: arfunktion
+:::
+
+::: textlosning
 För att graferna ska vara funktioner ska varje giltigt *x*-värde ge *ett
 enda* *y*-värde. Grafen till $g(x)$ har oändligt många *y*-värden för
 $x = -2$ och är därför inte någon funktion.
@@ -143,6 +154,7 @@ alltså inte heller en funktion.
 **Svar:** Nej, de är inte funktioner eftersom ett *x*-värde kan ge flera
 *y*-värden.
 :::
+:::
 
 ::: exempel "Exempel 3 — Läs av funktionsvärden ur grafen"
 **Grafen till funktionen $f$ är uppritad.**
@@ -153,6 +165,11 @@ alltså inte heller en funktion.
 
 **a) Bestäm $f(2)$&emsp;&emsp;b) Bestäm $f(0)$&emsp;&emsp;c) Lös ekvationen $f(x) = 0$**
 
+::: handskrift
+typ: lasavgraf
+:::
+
+::: textlosning
 **a)** $f(2)$ motsvarar funktionsvärdet (*y*-värdet) då $x = 2$:
 
 ::: figur
@@ -186,4 +203,5 @@ Vi läser av grafen vid $y = 0$ (vilket motsvarar skärningarna med
 Ekvationen har alltså tre lösningar.
 
 **Svar:** $x_1 = -1$, $x_2 = 1$ och $x_3 = 3$
+:::
 :::

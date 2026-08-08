@@ -23,6 +23,11 @@ b) utan återläggning drar två svarta strumpor?<br>
 c) utan återläggning drar en svart och en vit strumpa (ordningen
 oviktig)?**
 
+::: handskrift
+typ: traddiagram
+:::
+
+::: textlosning
 **a)** Vi börjar med att rita upp träddiagrammet och skriver
 sannolikheterna vid varje gren. *Med återläggning* ändras inte
 sannolikheterna för varje utfall:
@@ -78,4 +83,5 @@ P(\text{en svart, en vit}) = \frac{7}{10} \cdot \frac{3}{9} + \frac{3}{10} \cdot
 $$
 
 **Svar:** $\dfrac{7}{15}$ eller ca 47 %
+:::
 :::

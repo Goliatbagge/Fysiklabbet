@@ -49,6 +49,11 @@ Linjära modeller kan beskrivas med formel, tabell eller graf.
 per timme utfört arbete. Visa sambandet mellan kostnaden $y$ kr för $x$
 arbetade timmar med en<br>a) formel&emsp;&emsp;b) värdetabell&emsp;&emsp;c) graf.**
 
+::: handskrift
+typ: bilverkstad
+:::
+
+::: textlosning
 **a)** Eftersom 500 kr är en fast kostnad måste termen 500 finnas med i
 formeln. Eftersom kostnaden 400 kr multipliceras med varje timme $x$ måste
 även termen $400 \cdot x = 400x$ finnas med.
@@ -82,5 +87,6 @@ Därefter förbinder vi punkterna med en rät linje, vilket ger vår graf:
 <svg viewBox="-42 -20 303 187" width="303" height="187" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma koordinatsystem där de fem punkterna har förbundits med en rät linje: grafen till y lika med 500 plus 400 x."><line x1="0.0" y1="0.0" x2="0.0" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52.0" y1="0.0" x2="52.0" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104.0" y1="0.0" x2="104.0" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156.0" y1="0.0" x2="156.0" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="208.0" y1="0.0" x2="208.0" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="142.6" x2="239.2" y2="142.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="111.6" x2="239.2" y2="111.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="80.6" x2="239.2" y2="80.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="49.6" x2="239.2" y2="49.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="18.6" x2="239.2" y2="18.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="142.6" x2="247.2" y2="142.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="255.2,142.6 245.2,138.1 245.2,147.1" fill="#1f2530"/><line x1="0.0" y1="142.6" x2="0.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="0.0,-16.0 -4.5,-6.0 4.5,-6.0" fill="#1f2530"/><text x="253.2" y="160.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="52.0" y="158.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="104.0" y="158.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="156.0" y="158.6" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="208.0" y="158.6" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="-6.0" y="115.6" font-size="12" text-anchor="end" fill="#1f2530">500</text><text x="-6.0" y="84.6" font-size="12" text-anchor="end" fill="#1f2530">1000</text><text x="-6.0" y="53.6" font-size="12" text-anchor="end" fill="#1f2530">1500</text><text x="-6.0" y="22.6" font-size="12" text-anchor="end" fill="#1f2530">2000</text><line x1="0.0" y1="111.6" x2="231.4" y2="1.2" stroke="#4a7d3a" stroke-width="2"/><circle cx="0.0" cy="111.6" r="3.4" fill="#2563c9"/><circle cx="52.0" cy="86.8" r="3.4" fill="#2563c9"/><circle cx="104.0" cy="62.0" r="3.4" fill="#2563c9"/><circle cx="156.0" cy="37.2" r="3.4" fill="#2563c9"/><circle cx="208.0" cy="12.4" r="3.4" fill="#2563c9"/></svg>
 
 Grafen till $y = 500 + 400x$ är en rät linje.
+:::
 :::
 :::

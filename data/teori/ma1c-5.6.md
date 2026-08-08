@@ -54,6 +54,11 @@ Om sannolikheten för en händelse
 ::: exempel "Exempel 1 — Två sexor i rad"
 **Vad är sannolikheten att slå två sexor i rad med tärning?**
 
+::: handskrift
+typ: tvasexor
+:::
+
+::: textlosning
 Kasten är oberoende — multiplicera sannolikheterna:
 
 $$
@@ -63,11 +68,17 @@ $$
 
 **Svar:** $\dfrac{1}{36}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Yatzy!"
 **Vad är sannolikheten att slå fem sexor vid ett kast med fem tärningar?
 Yatzy!**
 
+::: handskrift
+typ: yatzy
+:::
+
+::: textlosning
 $$
 P(\text{fem sexor}) = P(\text{sexa}) \cdot P(\text{sexa}) \cdot P(\text{sexa}) \cdot P(\text{sexa}) \cdot P(\text{sexa})
 = \left(\frac{1}{6}\right)^5 = \frac{1^5}{6^5} = \frac{1}{7\,776}
@@ -76,11 +87,17 @@ $$
 
 **Svar:** 0,013 %
 :::
+:::
 
 ::: exempel "Exempel 3 — Kulor med och utan återläggning"
 **I en skål ligger 6 röda och 4 blå kulor. Vad är sannolikheten att dra
 två blå kulor<br>a) med återläggning?&emsp;&emsp;b) utan återläggning?**
 
+::: handskrift
+typ: aterlaggning
+:::
+
+::: textlosning
 **a)** Med återläggning påverkas inte sannolikheterna av föregående
 händelser:
 
@@ -103,4 +120,5 @@ P(\text{två blå}) = P(\text{blå}) \cdot P(\text{blå})
 $$
 
 **Svar:** 13 %
+:::
 :::

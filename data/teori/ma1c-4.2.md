@@ -60,6 +60,11 @@ y: -6, 6
 mellan kostnaden $y$ kr och mängden bensin $x$ liter han tankar med en<br>
 a) formel, och ange proportionalitetskonstanten&emsp;&emsp;b) värdetabell&emsp;&emsp;c) graf.**
 
+::: handskrift
+typ: tankamoped
+:::
+
+::: textlosning
 **a)** Eftersom literpriset 20,00 kr ska multipliceras med varje liter $x$
 han tankar för att få kostnaden måste termen $20{,}00x$ finnas med. Vi har
 inget startvärde/ingen startavgift eller liknande, så ingen konstantterm
@@ -96,6 +101,7 @@ Därefter förbinder vi punkterna med en rät linje, vilket ger vår graf:
 Grafen till proportionaliteten $y = 20x$ är en rät linje genom origo.
 :::
 :::
+:::
 
 ::: exempel "Exempel 2 — Vilka grafer visar proportionalitet?"
 **Vilken eller vilka av graferna nedan visar en proportionalitet?**
@@ -104,6 +110,11 @@ Grafen till proportionaliteten $y = 20x$ är en rät linje genom origo.
 <svg viewBox="0 0 484 124" width="484" height="124" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Tre grafer. Graf A är en rät linje genom origo. Graf B är en rät linje som skär y-axeln ovanför origo. Graf C är en böjd kurva genom origo."><text x="22" y="14" font-size="15" font-weight="600" fill="#1f2530">A</text><line x1="20" y1="104" x2="132" y2="104" stroke="#1f2530" stroke-width="1.5"/><polygon points="139,104 130,100.2 130,107.8" fill="#1f2530"/><line x1="20" y1="104" x2="20" y2="26" stroke="#1f2530" stroke-width="1.5"/><polygon points="20,19 16.2,28 23.8,28" fill="#1f2530"/><text x="134" y="118" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="27" y="28" font-size="12" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="20" y1="104" x2="118" y2="30" stroke="#2563c9" stroke-width="2"/><text x="192" y="14" font-size="15" font-weight="600" fill="#1f2530">B</text><line x1="190" y1="104" x2="302" y2="104" stroke="#1f2530" stroke-width="1.5"/><polygon points="309,104 300,100.2 300,107.8" fill="#1f2530"/><line x1="190" y1="104" x2="190" y2="26" stroke="#1f2530" stroke-width="1.5"/><polygon points="190,19 186.2,28 193.8,28" fill="#1f2530"/><text x="304" y="118" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="197" y="28" font-size="12" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="190" y1="82" x2="298" y2="46" stroke="#2563c9" stroke-width="2"/><text x="362" y="14" font-size="15" font-weight="600" fill="#1f2530">C</text><line x1="360" y1="104" x2="472" y2="104" stroke="#1f2530" stroke-width="1.5"/><polygon points="479,104 470,100.2 470,107.8" fill="#1f2530"/><line x1="360" y1="104" x2="360" y2="26" stroke="#1f2530" stroke-width="1.5"/><polygon points="360,19 356.2,28 363.8,28" fill="#1f2530"/><text x="474" y="118" font-size="12" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="367" y="28" font-size="12" fill="#1f2530"><tspan font-style="italic">y</tspan></text><path d="M360,104 Q436,98 460,28" fill="none" stroke="#2563c9" stroke-width="2"/></svg>
 :::
 
+::: handskrift
+typ: proportionalitet
+:::
+
+::: textlosning
 För att grafen ska motsvara en proportionalitet ska den vara en *rät
 linje* OCH *gå genom origo*. Graf B är en rät linje, men går inte genom
 origo och är därför inte en proportionalitet. Graf C går visserligen genom
@@ -111,4 +122,5 @@ origo, men är inte en rät linje och därför inte en proportionalitet.
 Endast graf A uppfyller kriterierna för en proportionalitet.
 
 **Svar:** A
+:::
 :::

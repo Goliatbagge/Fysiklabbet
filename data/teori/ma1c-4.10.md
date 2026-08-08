@@ -16,6 +16,11 @@ t.ex. $x$, är i **exponenten**.
 **Ett kapital på 25 000 kr ökar varje år med 2 %. Ange en formel för
 kapitalet $K$ kr efter $x$ år.**
 
+::: handskrift
+typ: kapitalvaxer
+:::
+
+::: textlosning
 Förändringsfaktorn för en ökning med 2 % är 1,02. Efter
 
 | Tid | Kapital (kr) |
@@ -29,6 +34,7 @@ Förändringsfaktorn för en ökning med 2 % är 1,02. Efter
 så $K(x) = 25\,000 \cdot 1{,}02^x$.
 
 **Svar:** $K(x) = 25\,000 \cdot 1{,}02^x$
+:::
 :::
 
 ::: formel "Exponentiell förändring"
@@ -52,11 +58,17 @@ där
 $V(t) = 180\,000 \cdot 0{,}85^t$. Vad står 180 000 respektive 0,85
 för?**
 
+::: handskrift
+typ: tolkaexp
+:::
+
+::: textlosning
 Jämför med formeln $y = Ca^x$ ovan: 180 000 motsvarar $C$ (det
 ursprungliga värdet) och 0,85 motsvarar $a$ (förändringsfaktorn).
 
 **Svar:** Bilens nyvärde (ursprungliga värde) är 180 000 kr och värdet
 minskar varje år med 15 % (förändringsfaktorn är 0,85).
+:::
 :::
 
 ## Exponentialfunktioners utseende
@@ -97,6 +109,11 @@ y: -1, 7
 <svg viewBox="-26 -20 219 195" width="219" height="195" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En exponentialkurva som passerar 0 komma 1 och 1 komma 2 och stiger brant: grafen till g av x lika med 2 upphöjt till x."><line x1="3.0" y1="0.0" x2="3.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="151.2" x2="171.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="123.2" x2="171.0" y2="123.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="95.2" x2="171.0" y2="95.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="67.2" x2="171.0" y2="67.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="39.2" x2="171.0" y2="39.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="11.2" x2="171.0" y2="11.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="151.2" x2="179.0" y2="151.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,151.2 177.0,146.7 177.0,155.7" fill="#1f2530"/><line x1="93.0" y1="151.2" x2="93.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="93.0,-16.0 88.5,-6.0 97.5,-6.0" fill="#1f2530"/><text x="185.0" y="169.2" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="102.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="33.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="63.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="123.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="153.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="87.0" y="127.2" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="87.0" y="99.2" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="87.0" y="71.2" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="87.0" y="43.2" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="87.0" y="15.2" font-size="12" text-anchor="end" fill="#1f2530">5</text><path d="M1.5,147.8 L2.9,147.7 L4.2,147.6 L5.6,147.5 L7.0,147.4 L8.4,147.2 L9.7,147.1 L11.1,147.0 L12.5,146.8 L13.8,146.7 L15.2,146.6 L16.6,146.4 L17.9,146.3 L19.3,146.1 L20.7,145.9 L22.1,145.8 L23.4,145.6 L24.8,145.4 L26.2,145.2 L27.5,145.0 L28.9,144.8 L30.3,144.6 L31.6,144.4 L33.0,144.2 L34.4,144.0 L35.8,143.7 L37.1,143.5 L38.5,143.3 L39.9,143.0 L41.2,142.7 L42.6,142.5 L44.0,142.2 L45.3,141.9 L46.7,141.6 L48.1,141.3 L49.5,141.0 L50.8,140.6 L52.2,140.3 L53.6,139.9 L54.9,139.6 L56.3,139.2 L57.7,138.8 L59.0,138.4 L60.4,138.0 L61.8,137.6 L63.2,137.2 L64.5,136.7 L65.9,136.2 L67.3,135.8 L68.6,135.3 L70.0,134.7 L71.4,134.2 L72.7,133.7 L74.1,133.1 L75.5,132.5 L76.9,131.9 L78.2,131.3 L79.6,130.7 L81.0,130.0 L82.3,129.3 L83.7,128.6 L85.1,127.9 L86.4,127.1 L87.8,126.4 L89.2,125.6 L90.6,124.7 L91.9,123.9 L93.3,123.0 L94.7,122.1 L96.0,121.2 L97.4,120.2 L98.8,119.2 L100.1,118.2 L101.5,117.1 L102.9,116.0 L104.3,114.9 L105.6,113.7 L107.0,112.5 L108.4,111.3 L109.7,110.0 L111.1,108.7 L112.5,107.3 L113.8,105.9 L115.2,104.4 L116.6,102.9 L118.0,101.4 L119.3,99.8 L120.7,98.1 L122.1,96.4 L123.4,94.6 L124.8,92.8 L126.2,90.9 L127.5,89.0 L128.9,87.0 L130.3,84.9 L131.7,82.8 L133.0,80.6 L134.4,78.3 L135.8,76.0 L137.1,73.6 L138.5,71.1 L139.9,68.5 L141.2,65.8 L142.6,63.1 L144.0,60.3 L145.4,57.3 L146.7,54.3 L148.1,51.2 L149.5,48.0 L150.8,44.7 L152.2,41.3 L153.6,37.7 L154.9,34.1 L156.3,30.3 L157.7,26.4 L159.1,22.4 L160.4,18.3 L161.8,14.0 L163.2,9.6 L164.5,5.0 L165.9,0.3" fill="none" stroke="#2563c9" stroke-width="2"/></svg>
 :::
 
+::: handskrift
+typ: vilkenexp
+:::
+
+::: textlosning
 Testar att beräkna några punkter på $f(x) = 3^x$:
 
 $f(0) = 3^0 = 1$, så (0, 1) ska vara på kurvan (stämmer).
@@ -114,4 +131,5 @@ $g(1) = 2^1 = 2$, så (1, 2) ska vara på kurvan (stämmer).
 Slutsats: $g(x) = 2^x$ är uppritad!
 
 **Svar:** $g(x) = 2^x$
+:::
 :::

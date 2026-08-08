@@ -70,6 +70,11 @@ l.e. (längdenheter). Se en av exempeluppgifterna nedan.
 <svg viewBox="34 22 226 152" width="226" height="152" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rätvinklig triangel med lodräta kateten 3 centimeter, vågräta kateten 4 centimeter och hypotenusan 5 centimeter. Vinkeln u ligger överst och vinkeln v nere till höger."><polygon points="90,30 90,150 250,150" fill="#cfe3f2" stroke="#1f2530" stroke-width="1.5"/><polyline points="90.0,138.0 102.0,138.0 102.0,150.0" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M106.0,42.0 A20,20 0 0 1 90.0,50.0" fill="none" stroke="#1f2530" stroke-width="1.3"/><path d="M228.0,150.0 A22,22 0 0 1 232.4,136.8" fill="none" stroke="#1f2530" stroke-width="1.3"/><text x="104" y="58" font-size="13" fill="#1f2530"><tspan font-style="italic">u</tspan></text><text x="212" y="142" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">v</tspan></text><text x="78" y="95" font-size="13" text-anchor="end" fill="#1f2530">3 cm</text><text x="170" y="168" font-size="13" text-anchor="middle" fill="#1f2530">4 cm</text><text x="182" y="80" font-size="13" fill="#1f2530">5 cm</text></svg>
 :::
 
+::: handskrift
+typ: tangenssidor
+:::
+
+::: textlosning
 **a)** Vi ska titta på förhållandet mellan motstående och närliggande
 katet till vinkeln $u$:
 
@@ -88,10 +93,16 @@ $$
 
 **Svar:** $\dfrac{3}{4}$ eller 0,75
 :::
+:::
 
 ::: exempel "Exempel 2 — Tangens med räknaren"
 **Bestäm tan 29° med din räknare.**
 
+::: handskrift
+typ: tangensraknare
+:::
+
+::: textlosning
 Vi slår tan 29° på räknaren och får
 
 $$
@@ -99,6 +110,7 @@ $$
 $$
 
 **Svar:** 0,554
+:::
 :::
 
 ::: exempel "Exempel 3 — Bestäm en okänd sida"
@@ -110,6 +122,11 @@ $$
 <svg viewBox="40 20 200 154" width="200" height="154" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rätvinklig triangel med vinkeln 30 grader överst, den lodräta kateten 1,3 meter och den okända vågräta kateten x."><polygon points="100,28 100,150 230,150" fill="#b5d68f" stroke="#1f2530" stroke-width="1.5"/><polyline points="100.0,138.0 112.0,138.0 112.0,150.0" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M114.6,41.7 A20,20 0 0 1 100.0,48.0" fill="none" stroke="#1f2530" stroke-width="1.3"/><text x="112" y="58" font-size="12" fill="#1f2530">30°</text><text x="88" y="95" font-size="13" text-anchor="end" fill="#1f2530">1,3 m</text><text x="165" y="168" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text></svg>
 :::
 
+::: handskrift
+typ: okandsida
+:::
+
+::: textlosning
 Vinkeln 30° har den motstående kateten $x$ och den närliggande kateten
 1,3 m:
 
@@ -146,4 +163,5 @@ $$
 längdenheter.)
 
 **Svar:** 12 l.e.
+:::
 :::

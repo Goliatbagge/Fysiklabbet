@@ -43,6 +43,11 @@ sannolikheten för **minst en** eller **åtminstone en**.
 ::: exempel "Exempel 1 — Ange komplementhändelsen"
 **Vad är komplementhändelsen till att<br>a) det regnar?&emsp;&emsp;b) dra ett hjärter ur en kortlek?&emsp;&emsp;c) slå minst en femma på en tärning?**
 
+::: handskrift
+typ: komplementhandelse
+:::
+
+::: textlosning
 **a)** "Att det snöar"? Nej, bara för att det inte regnar behöver det
 inte snöa. Det kan ju vara uppehåll. "Att det är soligt"? Nej, bara för
 att det inte regnar behöver det inte vara soligt. Det kan ju vara mulet
@@ -64,11 +69,17 @@ ett spader, klöver eller ruter.
 
 **Svar:** Att slå högst en fyra.
 :::
+:::
 
 ::: exempel "Exempel 2 — Minst en sexa med fem tärningar"
 **Vad är sannolikheten att få minst en sexa vid kast med fem vanliga
 tärningar?**
 
+::: handskrift
+typ: minstensexa
+:::
+
+::: textlosning
 Att beräkna denna uppgift utan komplementhändelse är jobbigt eftersom det
 finns så många kombinationer. Men med komplementhändelse blir det lätt!
 
@@ -89,12 +100,18 @@ $$
 
 **Svar:** ca 60 %
 :::
+:::
 
 ::: exempel "Exempel 3 — Minst en dotter"
 **Vad är sannolikheten att få minst en dotter om man skaffar fyra barn?
 (Vi räknar med att det är samma sannolikhet att få en flicka som en
 pojke.)**
 
+::: handskrift
+typ: minstendotter
+:::
+
+::: textlosning
 Komplementhändelsen är "ingen dotter":
 
 $$
@@ -106,6 +123,7 @@ P(\text{minst en dotter}) = 1 - 0{,}0625 = 0{,}9375 = 93{,}75\ \%
 $$
 
 **Svar:** Ca 94 %
+:::
 :::
 
 ::: kuriosa "Kuriosa — Födelsedagsparadoxen"

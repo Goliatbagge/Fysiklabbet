@@ -24,6 +24,11 @@ Vi har en ekvation VL = HL.
 ::: exempel "Exempel 1 — Grafisk lösning av en ekvation"
 **Lös med grafritande hjälpmedel ekvationen $3x - 5 = -x + 3$.**
 
+::: handskrift
+typ: grafiskekv
+:::
+
+::: textlosning
 VL = $3x - 5$ och HL = $-x + 3$.
 
 Vi öppnar GeoGebra och ritar $y = 3x - 5$ och $y = -x + 3$. Vi får
@@ -47,10 +52,16 @@ Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.
 
 **Svar:** $x = 2$
 :::
+:::
 
 ::: exempel "Exempel 2 — Grafisk lösning av en olikhet"
 **Lös olikheten $-2x + 5 < x - 4$.**
 
+::: handskrift
+typ: grafiskolikhet
+:::
+
+::: textlosning
 Vi gör på motsvarande sätt som med en ekvation och ritar upp graferna
 $y = -2x + 5$ och $y = x - 4$ (vi sätter "$y$ =" före vänster och höger
 led). Vi markerar därefter skärningspunkten:
@@ -69,6 +80,7 @@ linjen $y = x - 4$. Det gör den *till höger* om skärningspunkten, dvs.
 när $x > 3$.
 
 **Svar:** $x > 3$
+:::
 :::
 
 ::: härledning "GeoGebra — Tips"

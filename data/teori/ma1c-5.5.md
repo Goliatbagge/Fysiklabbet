@@ -61,6 +61,11 @@ tabellen nedan.**
 
 **Vad är sannolikheten i procent att nästa straff<br>a) blir mål?&emsp;&emsp;b) inte blir mål?**
 
+::: handskrift
+typ: relativfrekvens
+:::
+
+::: textlosning
 **a)** Vi tittar på den relativa frekvensen för alla straffar och ser att
 den är ungefär 70 %.
 
@@ -72,11 +77,17 @@ komplementet. Mer om det framöver.)
 
 **Svar:** 30 %
 :::
+:::
 
 ::: exempel "Exempel 2 — Flicka eller pojke?"
 **Under 2022 föddes 50 901 flickor och 53 833 pojkar i Sverige. Om du får
 ett barn, vad är sannolikheten att det blir en flicka?**
 
+::: handskrift
+typ: flickapojke
+:::
+
+::: textlosning
 Antalet födda flickor är 50 901 av totalt
 $(50\,901 + 53\,833) = 104\,734$ barn. Det ger
 
@@ -85,4 +96,5 @@ P(\text{flicka}) = \frac{50\,901}{104\,734} = 0{,}4860\ldots \approx 48{,}6\ \%
 $$
 
 **Svar:** Cirka 48,6 %
+:::
 :::

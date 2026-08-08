@@ -43,6 +43,11 @@ sats, på samma sätt som sträckor i koordinatsystem.
 
 **Vilka vektorer är<br>a) samma&emsp;&emsp;b) motsatta&emsp;&emsp;c) parallella?**
 
+::: handskrift
+typ: vektorjamfor
+:::
+
+::: textlosning
 **a)** Eftersom $\vec{v}_1$ och $\vec{v}_4$ har samma storlek och
 riktning är de samma vektor, så $\vec{v}_1 = \vec{v}_4$.
 
@@ -58,6 +63,7 @@ har samma lutning är de parallella vektorer.
 
 **Svar:** $\vec{v}_1$, $\vec{v}_2$, $\vec{v}_3$ och $\vec{v}_4$
 :::
+:::
 
 ::: exempel "Exempel 2 — Vektorns längd"
 **Beräkna längden av vektorn $\overrightarrow{AB}$. En ruta motsvarar
@@ -67,6 +73,11 @@ har samma lutning är de parallella vektorer.
 <svg viewBox="-14 -8 268 158" width="268" height="158" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Vektorn AB dras från punkten A snett uppåt höger till punkten B i ett rutnät. En ruta motsvarar 1 längdenhet."><line x1="0" y1="0" x2="0" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24" y1="0" x2="24" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="0" x2="48" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="0" x2="72" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="96" y1="0" x2="96" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="120" y1="0" x2="120" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="144" y1="0" x2="144" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168" y1="0" x2="168" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="192" y1="0" x2="192" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="216" y1="0" x2="216" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="240" y1="0" x2="240" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="0" x2="240" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="24" x2="240" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="48" x2="240" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="72" x2="240" y2="72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="96" x2="240" y2="96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="120" x2="240" y2="120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="144" x2="240" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24.0" y1="120.0" x2="207.1" y2="28.5" stroke="#1f2530" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(216.0,24.0) rotate(-26.6)" fill="#1f2530"/><circle cx="24" cy="120" r="3" fill="#1f2530"/><text x="16" y="134" font-size="14" fill="#1f2530"><tspan font-style="italic">A</tspan></text><text x="222" y="18" font-size="14" fill="#1f2530"><tspan font-style="italic">B</tspan></text><text x="90" y="76" font-size="15" fill="#1f2530"><tspan font-style="italic">AB</tspan></text><line x1="86" y1="60" x2="106" y2="60" stroke="#1f2530" stroke-width="1.1"/><polygon points="110,60 105,57.8 105,62.2" fill="#1f2530"/></svg>
 :::
 
+::: handskrift
+typ: vektorlangd
+:::
+
+::: textlosning
 Vi bildar en rätvinklig triangel:
 
 ::: figur
@@ -94,4 +105,5 @@ $$
 Den negativa lösningen kan bortses.
 
 **Svar:** $\sqrt{80}$ l.e.
+:::
 :::

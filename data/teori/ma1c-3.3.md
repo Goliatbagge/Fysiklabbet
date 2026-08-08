@@ -25,6 +25,11 @@ $$
 **Ett pris höjs med 15 % för att sedan sänkas med 15 %. Med hur många
 procent har det ursprungliga priset ändrats?**
 
+::: handskrift
+typ: upprepad
+:::
+
+::: textlosning
 Vi skriver upp de olika förändringsfaktorerna:
 
 $$
@@ -49,11 +54,17 @@ $$
 en förändring på 0 %. Detta beror på att värdet som vi räknar 15 % av
 ändras.**
 :::
+:::
 
 ::: exempel "Exempel 2 — Sparkontot"
 **Axel sätter in 80 000 kr på ett sparkonto med årsräntan 2,5 % och tar
 inte ut några pengar. Hur mycket pengar finns på kontot om 18 år?**
 
+::: handskrift
+typ: sparkonto
+:::
+
+::: textlosning
 I det här fallet är förändringsfaktorn densamma för varje år:
 
 $$
@@ -68,4 +79,5 @@ $$
 $$
 
 **Svar:** 124 773 kr
+:::
 :::

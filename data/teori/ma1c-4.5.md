@@ -68,6 +68,11 @@ $$
 **Beräkna riktningskoefficienten för linjen som går genom punkterna
 (−6, −1) och (2, 3).**
 
+::: handskrift
+typ: tvapunkter
+:::
+
+::: textlosning
 Vi ställer upp formeln för riktningskoefficienten:
 
 $$
@@ -83,11 +88,17 @@ $$
 
 **Svar:** $k = \dfrac{1}{2}$ eller 0,5
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm ekvationen ur punkt och lutning"
 **Bestäm ekvationen för den räta linjen som går genom punkten (4, −3) och
 har riktningskoefficienten 2.**
 
+::: handskrift
+typ: punktlutning
+:::
+
+::: textlosning
 Vi ställer upp räta linjens ekvation:
 
 $$
@@ -125,4 +136,5 @@ $$
 Insättning av $k = 2$ och $m = -11$ i RLE ger $y = 2x - 11$.
 
 **Svar:** $y = 2x - 11$
+:::
 :::

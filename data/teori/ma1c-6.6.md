@@ -37,6 +37,11 @@ vektorn fås som vektorn från startpunkten till slutpunkten
 **Figurerna visar vektorerna $\vec{u}$ och $\vec{v}$. Rita vektorn
 $\vec{w} = \vec{u} + \vec{v}$.**
 
+::: handskrift
+typ: adderavektorer
+:::
+
+::: textlosning
 **a)**
 
 ::: figur
@@ -69,5 +74,6 @@ startpunkten till slutpunkten:
 
 ::: figur
 <svg viewBox="20 6 186 156" width="186" height="156" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Vektorn v har flyttats så att den börjar vid spetsen av u. Resultanten w lika med u plus v är dragen som en blå pil från startpunkten av u till slutpunkten av v."><line x1="0" y1="0" x2="0" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="22" y1="0" x2="22" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="44" y1="0" x2="44" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="66" y1="0" x2="66" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="88" y1="0" x2="88" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="110" y1="0" x2="110" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132" y1="0" x2="132" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="154" y1="0" x2="154" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="176" y1="0" x2="176" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="198" y1="0" x2="198" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="0" x2="198" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="22" x2="198" y2="22" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="44" x2="198" y2="44" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="66" x2="198" y2="66" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="88" x2="198" y2="88" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="110" x2="198" y2="110" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="132" x2="198" y2="132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="154" x2="198" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="66.0" y1="28.0" x2="145.8" y2="130.1" stroke="#1f2530" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(152.0,138.0) rotate(52.0)" fill="#1f2530"/><text x="122" y="72" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">u</tspan></text><line x1="118.0" y1="58" x2="126.0" y2="58" stroke="#1f2530" stroke-width="1"/><polygon points="129.0,58 125.0,56 125.0,60" fill="#1f2530"/><line x1="152.0" y1="138.0" x2="129.2" y2="148.0" stroke="#1f2530" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(120.0,152.0) rotate(156.4)" fill="#1f2530"/><text x="102" y="146" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">v</tspan></text><line x1="98.0" y1="132" x2="106.0" y2="132" stroke="#1f2530" stroke-width="1"/><polygon points="109.0,132 105.0,130 105.0,134" fill="#1f2530"/><line x1="66.0" y1="28.0" x2="116.0" y2="142.8" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(120.0,152.0) rotate(66.5)" fill="#2563c9"/><text x="66" y="110" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(66 66 110)"><tspan font-style="italic">w</tspan> = <tspan font-style="italic">u</tspan> + <tspan font-style="italic">v</tspan></text></svg>
+:::
 :::
 :::

@@ -36,6 +36,11 @@ ovan.
 ::: exempel "Exempel 1 — Bestäm andelen"
 **Hur många promille är 120 g av 15 kg?**
 
+::: handskrift
+typ: andelpromille
+:::
+
+::: textlosning
 Det frågas efter *andelen*. För att vi ska få korrekt andel krävs att vi
 har samma enhet på delen och det hela. Vi gör om t.ex. 15 kg till gram och
 får $15\ \mathrm{kg} = 15\,000\ \mathrm{g}$. Så delen = 120 g och
@@ -54,10 +59,16 @@ $$
 
 **Svar:** 8 ‰
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm delen"
 **Vad är 3,5 ‰ av 32 000 kr?**
 
+::: handskrift
+typ: andeldelen
+:::
+
+::: textlosning
 Det frågas efter *delen*. Vi löser ut delen från formeln för andelen och
 får
 
@@ -81,11 +92,17 @@ $$
 
 **Svar:** 112 kr
 :::
+:::
 
 ::: exempel "Exempel 3 — Bestäm det hela"
 **Koncentrationen av ett visst ämne i havsvatten är 5 ppm. Hur mycket
 vatten behövs för att samla in 30 gram av ämnet?**
 
+::: handskrift
+typ: andelhela
+:::
+
+::: textlosning
 Det frågas efter det *hela*. Vi löser ut det hela från formeln för andelen
 och får
 
@@ -104,6 +121,7 @@ $$
 $$
 
 **Svar:** 6 ton
+:::
 :::
 
 ::: härledning "Hjälpmedel — Procenttriangeln"

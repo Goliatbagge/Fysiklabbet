@@ -36,6 +36,11 @@ sats. Vinkeln beräknas med trigonometri.
 ::: exempel "Exempel 1 — Sträcka och vinkel i koordinatsystemet"
 **En sträcka dras mellan punkterna (−2, 1) och (2, 4). Bestäm<br>a) sträckans längd&emsp;&emsp;b) vinkeln mellan sträckan och *x*-axeln.**
 
+::: handskrift
+typ: strackavinkel
+:::
+
+::: textlosning
 **a)** Vi börjar med att rita upp punkterna i ett koordinatsystem och
 drar sträckan mellan dem:
 
@@ -100,4 +105,5 @@ v = \tan^{-1}\left(\frac{3}{4}\right) = 36{,}869\ldots\degree \approx 37\degree
 $$
 
 **Svar:** 37°
+:::
 :::

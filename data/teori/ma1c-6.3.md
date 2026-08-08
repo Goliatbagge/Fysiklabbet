@@ -60,6 +60,11 @@ De inversa funktionerna slås på räknare. Lär dig att slå dem!
 ::: exempel "Exempel 1 — Bestäm vinkeln ur cosinusvärdet"
 **Bestäm vinkeln $v$ om cos $v$ = 0,753.**
 
+::: handskrift
+typ: inverscos
+:::
+
+::: textlosning
 $$
 \cos v = 0{,}753
 $$
@@ -70,11 +75,17 @@ $$
 
 **Svar:** 41°
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm triangelns alla vinklar"
 **Den ena kateten i en rätvinklig triangel är 3 cm och hypotenusan är
 5 cm. Bestäm triangelns vinklar med de inversa funktionerna.**
 
+::: handskrift
+typ: allavinklar
+:::
+
+::: textlosning
 Vi ritar en skiss av triangeln och kallar de okända vinklarna $u$ och
 $v$:
 
@@ -107,4 +118,5 @@ v = \sin^{-1}\left(\frac{3}{5}\right) = 36{,}869\ldots\degree \approx 37\degree
 $$
 
 **Svar:** 90°, 53° och 37°
+:::
 :::

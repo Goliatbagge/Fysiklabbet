@@ -78,6 +78,11 @@ y: -2, 6
 ::: exempel "Exempel 1 — Funktionsvärde och ekvation"
 **Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.&emsp;&emsp;b) Lös ekvationen $f(x) = 2$**
 
+::: handskrift
+typ: potensfunktion
+:::
+
+::: textlosning
 **a)** Vi sätter in $x = 2$ i funktionsuttrycket och beräknar värdet:
 
 $$
@@ -100,10 +105,16 @@ $$
 
 **Svar:** $x = \pm\sqrt[4]{2}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Funktion i funktion"
 **Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Bestäm $f(g(2))$.**
 
+::: handskrift
+typ: funktionifunktion
+:::
+
+::: textlosning
 Nu har vi en funktion i en funktion. Då räknar vi "inifrån och ut". Vi
 beräknar alltså först den inre funktionen, alltså $g(2)$:
 
@@ -118,4 +129,5 @@ f(g(2)) = f(16) = 16^{1/2} = \sqrt{16} = 4
 $$
 
 **Svar:** 4
+:::
 :::

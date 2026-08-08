@@ -76,6 +76,11 @@ strumpor är 1."
 ::: exempel "Exempel 1 — Tre klassiska sannolikheter"
 **Vad är sannolikheten att<br>a) få klave vid slantsingling?&emsp;&emsp;b) slå minst 5 med en (vanlig) tärning?&emsp;&emsp;c) dra ett klätt hjärter ur en kortlek?**
 
+::: handskrift
+typ: klassisksannolikhet
+:::
+
+::: textlosning
 **a)** Antalet gynnsamma utfall = 1 (klave). Antalet möjliga utfall = 2
 (krona, klave):
 
@@ -104,6 +109,7 @@ $$
 
 **Svar:** $\dfrac{1}{13}$, alternativt ca 7,7 % eller ca 0,077
 :::
+:::
 
 ## Sannolikheter med två föremål
 
@@ -115,6 +121,11 @@ singla *två* mynt osv.) är oftast enklast att lösa genom att rita upp
 **Du kastar två tärningar. Vad är sannolikheten att få<br>a) minst
 summan 10?&emsp;&emsp;b) en summa större än 10?**
 
+::: handskrift
+typ: tvatarningar
+:::
+
+::: textlosning
 Vi ritar upp utfallsrummet för summan av två tärningar och markerar alla
 gynnsamma utfall för a-uppgiften (de som ger summan 10, 11 eller 12):
 
@@ -141,4 +152,5 @@ P(\text{större än 10}) = \frac{3}{36} = \frac{1}{12} \approx 0{,}08 = 8\ \%
 $$
 
 **Svar:** $\dfrac{1}{12}$, alternativt ca 8 % eller ca 0,08
+:::
 :::

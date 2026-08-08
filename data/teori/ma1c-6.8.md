@@ -63,9 +63,15 @@ $$
 **Bestäm längden hos vektorn $\vec{u} = (11,\ -5)$. Svara exakt och
 avrundat till två decimaler.**
 
+::: handskrift
+typ: koordinatlangd
+:::
+
+::: textlosning
 $$
 |\vec{u}| = \sqrt{11^2 + (-5)^2} = \sqrt{121 + 25} = \sqrt{146}\ \text{l.e.} \approx 12{,}08\ \text{l.e.}
 $$
 
 **Svar:** $\sqrt{146}$ l.e. ≈ 12,08 l.e.
+:::
 :::

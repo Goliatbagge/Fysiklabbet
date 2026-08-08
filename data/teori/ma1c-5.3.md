@@ -65,6 +65,11 @@ till internet (%, *x*-axeln) för några olika länder visar punkter spridda
 kring en stigande linje. Avgör om det råder<br>a) korrelation, och i så
 fall vilken typ&emsp;&emsp;b) kausalitet.**
 
+::: handskrift
+typ: korrelation
+:::
+
+::: textlosning
 **a)** Mätvärdena ligger spridda kring en linje med positiv lutning.
 
 **Svar:** Svag positiv korrelation.
@@ -79,4 +84,5 @@ till internet) i större utsträckning har en bättre sjukvård, som i sin
 tur ger längre livslängd.
 
 **Svar:** Nej, ingen kausalitet råder.
+:::
 :::

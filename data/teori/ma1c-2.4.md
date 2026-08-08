@@ -22,6 +22,11 @@ baklänges".
 ::: exempel "Exempel 1 — Faktorisera så långt som möjligt"
 **Faktorisera så långt som möjligt<br>a) $27x^2 - 18x$&emsp;&emsp;b) $5x^3 + 20x^5$&emsp;&emsp;c) $21x^2 - 14$&emsp;&emsp;d) $4x^3 - 6x^2 + 10x$&emsp;&emsp;e) $81y - 45x^2y + 27xy^2$**
 
+::: handskrift
+typ: faktoriseraut
+:::
+
+::: textlosning
 **a)** Vi börjar med att titta på koefficienterna. Det största tal som 27
 och 18 båda är delbara med är 9 (de finns i 9:ans gångertabell) och därför
 är 9 en gemensam faktor. Alltså kan vi bryta ut **9**.
@@ -100,4 +105,5 @@ $$
 $$
 
 **Svar:** $9y(9 - 5x^2 + 3xy)$
+:::
 :::

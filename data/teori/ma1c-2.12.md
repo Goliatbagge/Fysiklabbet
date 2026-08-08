@@ -20,6 +20,11 @@ att färdas en viss sträcka $s$ är $v = \dfrac{s}{t}$. Lös ut $t$ och
 beräkna hur lång tid det tar att åka 35 mil med medelhastigheten
 70 km/h.**
 
+::: handskrift
+typ: hastighetsformel
+:::
+
+::: textlosning
 Vi börjar med att lösa ut $t$ från formeln:
 
 $$
@@ -49,6 +54,7 @@ $$
 
 **Svar:** 5 timmar
 :::
+:::
 
 ::: exempel "Exempel 2 — Hyrbilen"
 **Den totala kostnaden $H$ kr för att hyra en bil under ett år är en fast
@@ -58,6 +64,11 @@ $H = 21\,000 + 2{,}5m$.<br>
 a) Vad blir kostnaden för bilen om man kör 2 000 mil under året?<br>
 b) Hur långt kan du köra för 30 000 kr?**
 
+::: handskrift
+typ: hyrbil
+:::
+
+::: textlosning
 **a)** Enheterna är viktiga! Observera att $m$ står för sträckan i
 *kilometer*. Sträckan 2 000 mil motsvarar 20 000 km. Det betyder att
 $m = 20\,000$. Insättning av $m = 20\,000$ i formeln ger
@@ -94,4 +105,5 @@ $$
 Sträckan blir 3 600 km, vilket motsvarar 360 mil.
 
 **Svar:** 360 mil (3 600 km)
+:::
 :::

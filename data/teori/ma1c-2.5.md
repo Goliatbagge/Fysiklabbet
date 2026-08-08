@@ -73,6 +73,11 @@ $$
 ::: exempel "Exempel 1 — Lös ekvationerna"
 **Lös<br>a) $4x + 7 = 35$&emsp;&emsp;b) $\dfrac{7x}{6} - 15 = -11$**
 
+::: handskrift
+typ: ekvgrund
+:::
+
+::: textlosning
 **a)** Vi subtraherar först 7 från båda led:
 
 $$
@@ -139,4 +144,5 @@ x = \frac{24}{7}
 $$
 
 **Svar:** $x = \dfrac{24}{7}$ (avrunda inte!)
+:::
 :::

@@ -58,6 +58,11 @@ med negativa tal.
 ::: exempel "Exempel 1 — Lös olikheterna"
 **Lös<br>a) $3x - 5 < 22$&emsp;&emsp;b) $7(6 - x) \leq 105$&emsp;&emsp;c) $\dfrac{6a}{5} > 3a - 18$**
 
+::: handskrift
+typ: losolikhet
+:::
+
+::: textlosning
 **a)** Vi adderar 5 till båda led:
 
 $$
@@ -149,10 +154,16 @@ olikhetstecknet vändas, dvs. $a < 10$.
 
 **Svar:** $a < 10$
 :::
+:::
 
 ::: exempel "Exempel 2 — Olikheter av andra graden"
 **Lös<br>a) $x^2 < 9$&emsp;&emsp;b) $x^2 > 9$**
 
+::: handskrift
+typ: andragradsolikhet
+:::
+
+::: textlosning
 **a)** Att lösa olikheter av andra graden gör vi på ett annat sätt. Vi
 undersöker vad som gäller på gränsen av intervallet.
 
@@ -185,4 +196,5 @@ För att $x^2 > 9$ gäller nu att $x$ måste vara *större än 3* eller
 Dessa intervall beskrivs av $x < -3$ och $x > 3$.
 
 **Svar:** $x < -3$ och $x > 3$.
+:::
 :::

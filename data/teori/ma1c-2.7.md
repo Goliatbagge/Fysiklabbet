@@ -26,6 +26,11 @@ ekvationen ser ut. Det finns tre vanliga varianter.
 ::: exempel "Exempel 1 — En bråkterm"
 **Lös $\dfrac{130}{3x} = 5$.**
 
+::: handskrift
+typ: enbrakterm
+:::
+
+::: textlosning
 Vi har $3x$ i nämnaren, så $3x \neq 0$, vilket ger $x \neq 0$.
 
 Täljaren är lika med produkten av kvoten och nämnaren:
@@ -48,6 +53,7 @@ $$
 
 **Svar:** $x = \dfrac{26}{3}$
 :::
+:::
 
 ::: formel "2. En bråkterm i ena ledet, en bråkterm i andra ledet"
 **Metod:** Korsvis multiplikation.
@@ -56,6 +62,11 @@ $$
 ::: exempel "Exempel 2 — Korsvis multiplikation"
 **Lös $\dfrac{9}{2x} = \dfrac{3}{8}$.**
 
+::: handskrift
+typ: korsvis
+:::
+
+::: textlosning
 Vi har $2x$ i nämnaren så $2x \neq 0$, vilket ger $x \neq 0$.
 
 Vi multiplicerar "korsvis", dvs. vi multiplicerar täljaren i ena bråket
@@ -84,6 +95,7 @@ $$
 
 **Svar:** $x = 12$
 :::
+:::
 
 ::: formel "3. Tre eller fler bråktermer i en ekvation"
 **Metod:** Multiplicera båda led med MGN (minsta gemensamma nämnaren)
@@ -93,6 +105,11 @@ eller skriv om båda led som ett bråk och använd korsvis multiplikation.
 ::: exempel "Exempel 3 — Tre bråktermer"
 **Lös $\dfrac{x}{3} + \dfrac{1}{4} = \dfrac{5}{6}$.**
 
+::: handskrift
+typ: trebrak
+:::
+
+::: textlosning
 **Alternativ 1: Multiplicera med MGN (eller någon gemensam nämnare)**
 
 För att hitta MGN eller en gemensam nämnare kan man göra på lite olika
@@ -177,10 +194,16 @@ $$
 
 **Svar:** $x = \dfrac{7}{4}$
 :::
+:::
 
 ::: exempel "Exempel 4 — Variabler i nämnarna"
 **Lös $\dfrac{5}{3x} - \dfrac{1}{2x} = \dfrac{1}{6}$.**
 
+::: handskrift
+typ: variabelnamnare
+:::
+
+::: textlosning
 Vi har $3x$ och $2x$ i nämnarna, vilka båda ger att $x \neq 0$.
 
 Det här är en variant med tre bråk, så vi löser den genom att multiplicera
@@ -208,10 +231,16 @@ $$
 
 **Svar:** $x = 7$
 :::
+:::
 
 ::: exempel "Exempel 5 — När lösningen inte är tillåten"
 **Lös $\dfrac{5x - 35}{x - 7} = 4$.**
 
+::: handskrift
+typ: ejtillaten
+:::
+
+::: textlosning
 Vi har $(x - 7)$ i nämnaren, så $x \neq 7$.
 
 Täljaren är lika med produkten av kvoten och nämnaren:
@@ -239,4 +268,5 @@ $$
 Men $x \neq 7$, så ekvationen saknar lösning.
 
 **Svar:** Saknar lösning.
+:::
 :::

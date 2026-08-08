@@ -34,6 +34,11 @@ formel**.
 ::: exempel "Exempel 1 — Hitta en sluten formel"
 **Vi har talföljden 3, 7, 11, 15, 19, …<br>a) Ange en sluten formel för talföljden.&emsp;&emsp;b) Vilket är det 100:e talet i talföljden?**
 
+::: handskrift
+typ: slutenformel
+:::
+
+::: textlosning
 **a)** Vi kallar det $n$:te talet i talföljden $a_n$. Vi ser att varje tal
 i talföljden fås genom att addera 4 till det föregående talet. Då måste
 termen $4n$ finnas med i formeln, så
@@ -82,6 +87,7 @@ $$
 
 **Svar:** 399
 :::
+:::
 
 ::: exempel "Exempel 2 — Prickmönstret"
 **Nedanstående figurer byggs.**
@@ -92,6 +98,11 @@ $$
 
 **a) Ange en sluten formel för antalet prickar i figur $n$.&emsp;&emsp;b) Hur många prickar finns det i figur 1 000?**
 
+::: handskrift
+typ: prickmonster
+:::
+
+::: textlosning
 **a)** Vi studerar antalet prickar i varje figur:
 
 $$
@@ -145,4 +156,5 @@ a_{1000} = 3 \cdot 1\,000 + 1 = 3\,001
 $$
 
 **Svar:** 3 001
+:::
 :::

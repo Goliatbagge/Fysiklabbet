@@ -24,6 +24,11 @@ vi oss åt **problemlösning**.
 mycket som Arielle och Samuel ska få 300 kr mindre än Rayan. Hur stort
 belopp får Arielle?**
 
+::: handskrift
+typ: delabelopp
+:::
+
+::: textlosning
 **1. Översätt**
 
 Vi tittar först på vad som efterfrågas. Arielles belopp efterfrågas. Då
@@ -84,4 +89,5 @@ $$
 $x$ var Arielles belopp, och 860 kr av 4 000 kr är rimligt.
 
 **Svar:** 860 kr
+:::
 :::

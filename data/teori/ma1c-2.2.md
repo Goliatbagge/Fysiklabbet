@@ -21,6 +21,11 @@ och så vidare. Var noga med att titta på tecknet framför varje term!
 ::: exempel "Exempel 1 — Lägg ihop likadana termer"
 **Förenkla<br>a) $8x + 3y - 2x + 9y$&emsp;&emsp;b) $5x^2 + 3x - x^2$**
 
+::: handskrift
+typ: likatermer
+:::
+
+::: textlosning
 **a)** Vi samlar $x$-termerna för sig och $y$-termerna för sig. Vi ser att
 $x$-termerna bildar $8x - 2x = 6x$ och $y$-termerna bildar $3y + 9y = 12y$:
 
@@ -38,6 +43,7 @@ $$
 
 **Svar:** $4x^2 + 3x$
 :::
+:::
 
 ::: formel "Addition och subtraktion med parentesuttryck"
 När ett
@@ -54,6 +60,11 @@ När ett
 ::: exempel "Exempel 2 — Minustecken framför parentes"
 **Förenkla $20x - (5 + 3x - 7y)$.**
 
+::: handskrift
+typ: minusparentes
+:::
+
+::: textlosning
 Minustecknet framför parentesen gör att alla tecken inuti parentesen byts
 när parentesen tas bort:
 
@@ -63,6 +74,7 @@ $$
 
 **Svar:** $17x - 5 + 7y$
 :::
+:::
 
 ::: exempel "Exempel 3 — Rektangelns omkrets"
 **Teckna ett förenklat uttryck för omkretsen till rektangeln nedan.**
@@ -71,6 +83,11 @@ $$
 <svg viewBox="16 4 206 118" width="206" height="118" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med höjden x och bredden 2x plus 3."><rect x="20" y="8" width="180" height="84" fill="#9ccfae" stroke="#4f7d47" stroke-width="1.4"/><text x="208" y="55" font-size="15" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="110" y="114" font-size="15" text-anchor="middle" fill="#1f2530">2<tspan font-style="italic">x</tspan> + 3</text></svg>
 :::
 
+::: handskrift
+typ: omkrets
+:::
+
+::: textlosning
 Eftersom motstående sidor i en rektangel är lika långa måste vänstersidan
 vara $x$ och ovansidan vara $2x + 3$. Omkretsen fås genom att lägga ihop
 alla sidor, dvs. som
@@ -80,4 +97,5 @@ $$
 $$
 
 **Svar:** $6x + 6$
+:::
 :::

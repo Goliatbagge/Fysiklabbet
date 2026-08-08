@@ -543,6 +543,57 @@
      * skrivs inline utan radikand. Riktiga rötter ritas med T.rot(), som
      * drar rotstrecket över hela radikanden. */
     '√': { w: 78, strokes: [[[10, 58], [22, 52], [34, 96], [54, 8], [74, 8]]] },
+    /* tillagda 2026-08-08 (ma1c kapitel 2, Algebra och ekvationer) */
+    /* plus/minus: plustecknet med ett streck under — för x=±8 i enkla
+     * andragrads- och potensekvationer. Står som PREFIX till ett tal och
+     * ligger därför medvetet UTANFÖR OPS (ingen operatorluft). */
+    '±': { w: 84, strokes: [[[22, 52], [72, 51]], [[47, 28], [47, 74]],
+                            [[22, 92], [72, 91]]] },
+    /* mindre än eller lika med / större än eller lika med: samma vinkel som
+     * < och > (granskade sida vid sida med dem) plus ett streck under */
+    '≤': { w: 80, strokes: [[[64, 30], [24, 55], [64, 80]], [[24, 95], [66, 93]]] },
+    '≥': { w: 80, strokes: [[[24, 30], [64, 55], [24, 80]], [[24, 95], [66, 93]]] },
+    /* skilt från: likhetstecknet med ett snedstreck igenom */
+    '≠': { w: 88, strokes: [[[22, 56], [74, 55]], [[22, 76], [74, 76]],
+                            [[64, 36], [32, 96]]] },
+    /* versalt I med serifer upptill och nedtill — utan dem läses den som
+     * en etta eller ett gement l (granskad sida vid sida med '1' och 'l') */
+    'I': { w: 56, strokes: [[[44, 13], [39, 100]], [[26, 13], [62, 12]],
+                            [[22, 100], [58, 99]]] },
+    /* versalt O: högre och smalare än siffran 0, i EN dragning */
+    'O': { w: 86, strokes: [[[54, 11], [33, 19], [22, 43], [21, 70], [31, 92],
+                             [52, 99], [70, 89], [78, 64], [75, 36], [63, 16],
+                             [54, 11]]] },
+    /* versalt U: skål med två ben — jämför med gement u vid granskning */
+    'U': { w: 84, strokes: [[[24, 12], [22, 70], [31, 91], [49, 99], [67, 90],
+                             [73, 68], [74, 11]]] },
+    'Ö': { w: 86, strokes: [[[54, 26], [33, 34], [22, 55], [21, 77], [31, 94],
+                             [52, 100], [70, 91], [78, 70], [75, 46], [63, 30],
+                             [54, 26]],
+                            [[38, 6], [39, 8]], [[62, 6], [63, 8]]] },
+    /* utropstecken: stapel + punkt — för "Stämmer!" i kontrollraderna */
+    '!': { w: 38, strokes: [[[30, 12], [27, 74]], [[26, 92], [27, 94]]] },
+    /* tillagda 2026-08-08 (ma1c kapitel 3, Procentuella förändringar) */
+    /* procent: ring uppe till vänster, snedstreck, ring nere till höger.
+     * Ringarna ritas i EN dragning var (som gemena o) och är medvetet
+     * små — blir de lika stora som en nolla läses tecknet som "0/0". */
+    '%': { w: 102, strokes: [[[31, 13], [20, 20], [18, 33], [27, 40],
+                              [39, 35], [41, 22], [32, 13]],
+                             [[80, 10], [24, 98]],
+                             [[75, 67], [64, 74], [62, 87], [71, 94],
+                              [83, 89], [85, 76], [76, 67]]] },
+    /* promille: som procent men med en tredje ring — tusendelar */
+    '‰': { w: 142, strokes: [[[31, 13], [20, 20], [18, 33], [27, 40],
+                              [39, 35], [41, 22], [32, 13]],
+                             [[80, 10], [24, 98]],
+                             [[75, 67], [64, 74], [62, 87], [71, 94],
+                              [83, 89], [85, 76], [76, 67]],
+                             [[117, 67], [106, 74], [104, 87], [113, 94],
+                              [125, 89], [127, 76], [118, 67]]] },
+    /* versalt Å: A med ring över — för "År" och "Årsränta" */
+    'Å': { w: 80, strokes: [[[22, 100], [46, 12], [70, 100]], [[32, 68], [61, 68]],
+                            [[47, -9], [39, -6], [37, 1], [43, 8], [52, 6],
+                             [55, -2], [48, -9]]] },
     /* MOMENTPILAR (svensk kurslitteratur): moment moturs/medurs skrivs som
      * ett M med en vridpil ÖVER bokstaven. Pilarna är KOMBINERANDE tecken
      * — de har inget advance och placeString ritar dem ovanför föregående
@@ -555,7 +606,10 @@
                             [[71, 85], [90, 92], [90, 72]]] }
   };
   var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
-  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1 };
+  /* '±' står som PREFIX till ett tal (x=±8) och ingår därför INTE — den
+   * ska klistra ihop med talet, inte få operatorluft åt båda håll. */
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1,
+              '≤': 1, '≥': 1, '≠': 1 };
 
   /* Senast skrivna klammergränser (position för övre/undre gräns) — så
    * att insättningssteget kan ringa in dem med en pedagogisk gest. */
@@ -4720,6 +4774,3169 @@
     T.stepEnd();
 
     return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ==================================================================
+   * MATEMATIK NIVÅ 1C — KAPITEL 2, ALGEBRA OCH EKVATIONER
+   * ------------------------------------------------------------------
+   * Alla scener nedan följer REGEL (EN TANKE PER LED, DIREKT FÖRE
+   * LEDET): varje led i räknekedjan är ett eget klicksteg och den tanke
+   * som motiverar just det ledet visas steget innan. Avskriften av
+   * uppgiften och rent mekaniska led (en hopmultiplikation, en addition)
+   * går utan bubbla.
+   *
+   * Gemensam hjälpare: `mkTanke(T)` ger en `tanke(yb, rader, dyn)` som
+   * lägger bubblan under den rad som just skrivits (där nästa rad ska
+   * hamna). Bubblan är 268 bred och börjar på x=120, alltså långt från
+   * arkets övre högra hörn där inställningsrutan ligger.
+   * ================================================================== */
+  function mkTanke(T) {
+    return function (yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    };
+  }
+
+  /* Bågpil mellan två punkter på en rad (distributiva lagen): en båge som
+   * buktar uppåt från faktorn till den term den multipliceras med, med
+   * pilspets i bågens slutriktning. */
+  function mkArc(T) {
+    var acts = T.acts;
+    return function (x1, x2, yTop, hojd, col) {
+      var mx = (x1 + x2) / 2, my = yTop - hojd;
+      acts.push({ kind: 'stroke',
+                  pts: [[x1, yTop], [mx, my], [x2, yTop - 3]],
+                  color: col || null });
+      /* pilspets längs tangenten i slutpunkten */
+      var dx = x2 - mx, dy = (yTop - 3) - my, L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), len = 11;
+      T.line([x2 - (dx * ca - dy * sa) * len, (yTop - 3) - (dx * sa + dy * ca) * len],
+             [x2, yTop - 3], col || null);
+      T.line([x2 - (dx * ca + dy * sa) * len, (yTop - 3) - (-dx * sa + dy * ca) * len],
+             [x2, yTop - 3], col || null);
+      T.pause(240);
+    };
+  }
+
+  /* ---------------- scen: teckna uttryck för ålder (ma1c-2.1 ex 1) ----
+   * Linn är x år, Albin är 3 gånger så gammal som Linn var för 4 år
+   * sedan. Poängen är att ÖVERSÄTTA orden ett steg i taget: "för … år
+   * sedan" blir en subtraktion, "gånger så gammal som" blir en faktor
+   * framför ett parentesuttryck. */
+  function layoutTecknaalder(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    y = 122;
+    T.str('a) Linns ålder nu: x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För 12 år sedan var Linn']],
+      [['12 år yngre än nu. Då']],
+      [['subtraherar jag 12.']]
+    ]);
+    y += 2.1 * F;
+    T.str('För 12 år sedan: x-12', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x-12', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Albin jämförs inte med']],
+      [['Linns ålder NU, utan med']],
+      [['hennes ålder för 4 år']],
+      [['sedan. Den skriver jag']],
+      [['först.']]
+    ]);
+    y += 3.4 * F;
+    var xb0 = T.str('b) Linn för 4 år sedan: ', padL, y);
+    var xb1 = T.str('x-4', xb0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Albin är 3 gånger så']],
+      [['gammal som det. Parentes']],
+      [['runt hela uttrycket, så']],
+      [['att HELA åldern']],
+      [['multipliceras med 3.']]
+    ]);
+    var rb = T.ring(xb0, xb1, y);
+    y += 2.3 * F;
+    T.str('Albin: 3(x-4)', padL, y);
+    T.fade(rb);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag kan också utveckla']],
+      [['uttrycket. Distributiva']],
+      [['lagen: 3 multipliceras']],
+      [['med varje term i']],
+      [['parentesen.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('3(x-4)=3·x-3·4', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=3x-12', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 3(x-4)=3x-12', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tolka uttryck (ma1c-2.1 ex 2) ---------------
+   * Äpplen a kr/st, päron b kr/st. Uppgiften är att LÄSA ett uttryck,
+   * så pennan ringar in en term i taget med blåpennan och skriver vad
+   * just den termen betyder under den. */
+  function layoutTolkauttryck(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    /* liten blå förklaring under en inringad term */
+    function forklara(x0, x1, yb, text) {
+      var w = T.adv(text, 0.55);
+      T.str(text, (x0 + x1) / 2 - w / 2, yb + 1.05 * F, BLUE, 0.55);
+    }
+
+    /* ---- a) 3a+4b ----
+     * Termerna skrivs med EXTRA luft kring operatorn (LUFT px): de blå
+     * förklaringarna under dem är bredare än termerna själva, och utan
+     * luften växer "3 äpplen" och "4 päron" ihop till en enda rad. */
+    var LUFT = 30;
+    y = 78;
+    var x3a = T.str('a) ', padL, y);
+    var xa1 = T.str('3a', x3a, y);
+    var xPlus = T.str('+', xa1 + LUFT, y);
+    var x4b = xPlus + LUFT, xa2 = T.str('4b', x4b, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['a är priset för ETT']],
+      [['äpple. 3a är alltså']],
+      [['priset för tre äpplen.']]
+    ], 1.4);
+    var r1 = T.ring(x3a, xa1, y);
+    forklara(x3a, xa1, y, '3 äpplen');
+    T.stepEnd();
+
+    tanke(y, [
+      [['b är priset för ETT']],
+      [['päron, så 4b är priset']],
+      [['för fyra päron.']]
+    ], 1.4);
+    var r2 = T.ring(x4b, xa2, y);
+    forklara(x4b, xa2, y, '4 päron');
+    T.stepEnd();
+
+    tanke(y, [
+      [['Plustecknet lägger ihop']],
+      [['de två kostnaderna till']],
+      [['en total kostnad.']]
+    ], 1.4);
+    y += 3.6 * F;
+    T.str('Svar: Kostnaden för 3 äpplen', padL, y);
+    T.fade(r1);
+    T.fade(r2);
+    y += 1.8 * F;
+    xe = T.str('och 4 päron', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 10a-7b ---- */
+    tanke(y, [
+      [['Nu står ett minustecken']],
+      [['mellan termerna. Då']],
+      [['jämförs kostnaderna i']],
+      [['stället för att läggas']],
+      [['ihop.']]
+    ]);
+    y += 3.4 * F;
+    var x10a = T.str('b) ', padL, y);
+    var xb1 = T.str('10a', x10a, y);
+    var xMin = T.str('-', xb1 + LUFT, y);
+    var x7b = xMin + LUFT, xb2 = T.str('7b', x7b, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['10a är priset för tio']],
+      [['äpplen och 7b priset för']],
+      [['sju päron.']]
+    ], 1.4);
+    var r3 = T.ring(x10a, xb1, y);
+    forklara(x10a, xb1, y, '10 äpplen');
+    T.pause(300);
+    var r4 = T.ring(x7b, xb2, y);
+    forklara(x7b, xb2, y, '7 päron');
+    T.stepEnd();
+
+    tanke(y, [
+      [['En differens svarar på']],
+      [['frågan hur mycket']],
+      [['dyrare det ena är än']],
+      [['det andra.']]
+    ], 1.4);
+    y += 3.6 * F;
+    T.str('Svar: Prisskillnaden mellan', padL, y);
+    T.fade(r3);
+    T.fade(r4);
+    y += 1.8 * F;
+    xe = T.str('10 äpplen och 7 päron', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: beräkna uttryckets värde (ma1c-2.1 ex 3) ----
+   * 20-3x för x=4 och x=-5. Insättningsgesten (se REGEL i filhuvudet):
+   * värdet ringas in där det står och sedan uttrycket det sätts in i,
+   * innan insättningsraden skrivs. I b) är parentesen kring det negativa
+   * talet hela poängen. */
+  function layoutUttryckvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* uttrycket står överst och används av båda deluppgifterna */
+    var yU = 70;
+    var xu0 = T.str('Uttrycket: ', padL, yU);
+    var xu1 = T.str('20-3x', xu0, yU);
+    T.stepEnd();
+
+    /* ---- a) x=4 ---- */
+    y = yU + 2.2 * F;
+    var xa0 = T.str('a) x=', padL, y);
+    var xa1 = T.str('4', xa0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag byter ut x mot 4 där']],
+      [['x står i uttrycket.']]
+    ]);
+    var rings = substRings(acts, [[xa0, xa1, y, F], [xu0, xu1, yU, F]]);
+    y += 2.3 * F;
+    xx = T.str('20-3·4', padL + 30, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Multiplikation före']],
+      [['subtraktion: 3·4=12']],
+      [['räknas först.']]
+    ]);
+    T.str('=20-12=8', xx, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) x=-5 ---- */
+    tanke(y, [
+      [['Nu är värdet negativt.']],
+      [['Då sätter jag parentes']],
+      [['runt det, så att']],
+      [['minustecknet hänger med']],
+      [['in i multiplikationen.']]
+    ]);
+    y += 3.4 * F;
+    var xb0 = T.str('b) x=', padL, y);
+    var xb1 = T.str('−5', xb0, y);
+    T.stepEnd();
+
+    var rings2 = substRings(acts, [[xb0, xb1, y, F], [xu0, xu1, yU, F]]);
+    y += 2.3 * F;
+    xx = T.str('20-3·(−5)', padL + 30, y);
+    fadeRings(acts, rings2);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus gånger minus ger']],
+      [['plus. Alltså blir']],
+      [['-3·(−5) lika med +15.']]
+    ]);
+    T.str('=20+15', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=35', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 35', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lägg ihop likadana termer (ma1c-2.2 ex 1) ---
+   * a) 8x+3y-2x+9y och b) 5x²+3x-x². Blåpennan ringar in de termer som
+   * hör ihop INNAN de slås samman — det är just den grupperingen eleven
+   * ska lära sig att se. Tecknet framför termen ingår i ringen. */
+  function layoutLikatermer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) 8x+3y-2x+9y ---- */
+    y = 74;
+    var xa = T.str('a) ', padL, y);
+    var p1 = xa; xa = T.str('8x', xa, y);           var p1b = xa;
+    xa = T.str('+', xa, y);   var p2 = xa - 0.26 * F;
+    xa = T.str('3y', xa, y);  var p2b = xa;
+    var p3 = xa; xa = T.str('-2x', xa, y);          var p3b = xa;
+    xa = T.str('+', xa, y);   var p4 = xa - 0.26 * F;
+    xa = T.str('9y', xa, y);  var p4b = xa;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bara LIKADANA termer får']],
+      [['läggas ihop. Först']],
+      [['x-termerna: 8x-2x=6x.']]
+    ]);
+    var rA1 = T.ring(p1, p1b, y);
+    T.pause(280);
+    var rA2 = T.ring(p3, p3b, y);
+    y += 2.4 * F;
+    xx = T.str('=6x', padL + 30, y);
+    T.fade(rA1);
+    T.fade(rA2);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sedan y-termerna:']],
+      [['3y+9y=12y.']]
+    ]);
+    var rA3 = T.ring(p2, p2b, y - 2.4 * F);
+    T.pause(280);
+    var rA4 = T.ring(p4, p4b, y - 2.4 * F);
+    T.str('+12y', xx, y);
+    T.fade(rA3);
+    T.fade(rA4);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 6x+12y', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 5x²+3x-x² ---- */
+    tanke(y, [
+      [['x i kvadrat och x är']],
+      [['INTE likadana termer.']],
+      [['De kan aldrig slås ihop']],
+      [['till en enda term.']]
+    ]);
+    y += 3.4 * F;
+    var xb = T.str('b) ', padL, y);
+    var q1 = xb; xb = T.str('5x^2', xb, y);   var q1b = xb;
+    xb = T.str('+3x', xb, y);
+    var q2 = xb; xb = T.str('-x^2', xb, y);   var q2b = xb;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Framför x i kvadrat står']],
+      [['en osynlig etta. Alltså']],
+      [['blir det 5 minus 1, dvs.']],
+      [['4 stycken x i kvadrat.']]
+    ]);
+    var rB1 = T.ring(q1, q1b, y);
+    T.pause(280);
+    var rB2 = T.ring(q2, q2b, y);
+    y += 2.4 * F;
+    T.str('=4x^2+3x', padL + 30, y);
+    T.fade(rB1);
+    T.fade(rB2);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 4x^2+3x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: minustecken framför parentes (ma1c-2.2 ex 2) -
+   * 20x-(5+3x-7y). Alla tecken inuti parentesen byts när parentesen tas
+   * bort — de nya tecknen skrivs med blåpennan, eftersom det är just de
+   * som ÄNDRAS. */
+  function layoutMinusparentes(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 74;
+    var xp0 = T.str('20x', padL, y);
+    var xm = T.str('-', xp0, y);
+    T.str('(5+3x-7y)', xm, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet framför']],
+      [['parentesen byter tecken']],
+      [['på ALLA termer inuti när']],
+      [['parentesen tas bort.']]
+    ]);
+    var rM = T.ring(xp0 + 0.16 * F, xm - 0.16 * F, y);
+    y += 2.4 * F;
+    xx = T.str('=20x', padL + 30, y);
+    xx = T.str('-5', xx, y, BLUE);
+    xx = T.str('-3x', xx, y, BLUE);
+    T.str('+7y', xx, y, BLUE);
+    T.fade(rM);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu samlar jag']],
+      [['x-termerna: 20x-3x=17x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=17x-5+7y', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 17x-5+7y', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rektangelns omkrets (ma1c-2.2 ex 3) ---------
+   * Rektangel med höjden x och bredden 2x+3. Figuren ritas i grafit,
+   * måtten skrivs med blåpennan (se REGEL: TAL/VÄRDEN i figurer är
+   * blå). De två mått som INTE står i uppgiften — motstående sidor —
+   * läggs till som eget steg, eftersom det är hela poängen. */
+  function layoutOmkrets(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- figuren ---- */
+    var fx = padL + 40, fy = 56, fw = 300, fh = 130;
+    tanke(15, [
+      [['Först ritar jag']],
+      [['rektangeln och sätter ut']],
+      [['de mått som är givna.']]
+    ], 0);
+    T.line([fx, fy], [fx + fw, fy]);
+    T.line([fx + fw, fy], [fx + fw, fy + fh]);
+    T.line([fx + fw, fy + fh], [fx, fy + fh]);
+    T.line([fx, fy + fh], [fx, fy]);
+    T.pause(200);
+    T.str('x', fx + fw + 14, fy + fh / 2 + 0.2 * F, BLUE, 0.62);
+    var wB = T.adv('2x+3', 0.62);
+    T.str('2x+3', fx + fw / 2 - wB / 2, fy + fh + 0.9 * F, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(fy + fh + 0.9 * F, [
+      [['Motstående sidor i en']],
+      [['rektangel är lika långa.']],
+      [['Alltså är vänstersidan']],
+      [['också x och ovansidan']],
+      [['2x+3.']]
+    ], 0.3);
+    /* vänstersidans mått läggs UTANFÖR rektangeln, inte på kantlinjen —
+     * glyfen ritas från sin x och framåt, så hela bredden måste dras av */
+    T.str('x', fx - T.adv('x', 0.62) - 12, fy + fh / 2 + 0.2 * F, BLUE, 0.62);
+    T.pause(220);
+    T.str('2x+3', fx + fw / 2 - wB / 2, fy - 0.25 * F, BLUE, 0.62);
+    T.stepEnd();
+
+    /* ---- uträkningen ---- */
+    tanke(fy + fh + 0.9 * F, [
+      [['Omkretsen är alla fyra']],
+      [['sidorna adderade.']]
+    ], 0.3);
+    y = fy + fh + 3.2 * F;
+    T.str('O=(2x+3)+(2x+3)+x+x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Plustecken framför en']],
+      [['parentes: parenteserna']],
+      [['kan tas bort utan att']],
+      [['något ändras inuti.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=2x+3+2x+3+x+x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-termerna:']],
+      [['2x+2x+x+x=6x.']],
+      [['Konstanterna: 3+3=6.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=6x+6', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 6x+6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: multiplicera in i parentesen (ma1c-2.3 ex 1) -
+   * a) 2(2x-1) och b) 8(3x+4)-2(5x-7). Bågpilarna visar distributiva
+   * lagen: faktorn utanför parentesen träffar VARJE term inuti. I b) är
+   * poängen att minustecknet framför 2:an gäller hela produkten, så en
+   * parentes måste stå kvar ett steg till. */
+  function layoutMultiplicerain(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), arc = mkArc(T);
+
+    /* ---- a) 2(2x-1) ---- */
+    y = 92;
+    var xa = T.str('a) ', padL, y);
+    var f1 = xa; xa = T.str('2', xa, y);  var f1b = xa;
+    xa = T.str('(', xa, y);
+    var t1 = xa; xa = T.str('2x', xa, y); var t1b = xa;
+    xa = T.str('-', xa, y);
+    var t2 = xa; xa = T.str('1', xa, y);  var t2b = xa;
+    T.str(')', xa, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Distributiva lagen: 2']],
+      [['multipliceras med VARJE']],
+      [['term i parentesen, inte']],
+      [['bara den första.']]
+    ]);
+    var yArc = y - 0.95 * F;
+    arc((f1 + f1b) / 2, (t1 + t1b) / 2, yArc, 26, BLUE);
+    arc((f1 + f1b) / 2 + 4, (t2 + t2b) / 2, yArc, 44, BLUE);
+    y += 2.5 * F;
+    xx = T.str('=2·2x-2·1', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=4x-2', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 4x-2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 8(3x+4)-2(5x-7) ---- */
+    tanke(y, [
+      [['Här finns två']],
+      [['parenteser. Jag tar en i']],
+      [['taget och börjar med']],
+      [['8:an.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 8(3x+4)-2(5x-7)', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=24x+32-2(5x-7)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Framför 2:an står ett']],
+      [['minustecken. Det gäller']],
+      [['HELA produkten, så jag']],
+      [['behåller en parentes runt']],
+      [['den ett steg till.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=24x+32-(10x-14)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus framför parentesen']],
+      [['byter tecken på båda']],
+      [['termerna inuti.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('=24x+32', padL + 30, y);
+    xx = T.str('-10x', xx, y, BLUE);
+    T.str('+14', xx, y, BLUE);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samlar x-termerna och']],
+      [['konstanterna:']],
+      [['24x-10x=14x och']],
+      [['32+14=46.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=14x+46', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 14x+46', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: utveckla två parenteser (ma1c-2.3 ex 2) -----
+   * a) (x+7)(x+3), b) (3x-5)(8x+9) och c) 10-(x-2)(x-3). Bågpilarna
+   * ritas i a) så att multiplikationsmönstret syns; i b) och c) sitter
+   * det i handen och pennan går direkt på termerna. I c) måste en stor
+   * parentes stå kvar runt hela produkten. */
+  function layoutUtveckla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), arc = mkArc(T);
+
+    /* ---- a) (x+7)(x+3) ---- */
+    y = 104;
+    var xa = T.str('a) (', padL, y);
+    var a1 = xa; xa = T.str('x', xa, y);   var a1b = xa;
+    xa = T.str('+', xa, y);
+    var a2 = xa; xa = T.str('7', xa, y);   var a2b = xa;
+    xa = T.str(')(', xa, y);
+    var b1 = xa; xa = T.str('x', xa, y);   var b1b = xa;
+    xa = T.str('+', xa, y);
+    var b2 = xa; xa = T.str('3', xa, y);   var b2b = xa;
+    T.str(')', xa, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje term i den första']],
+      [['parentesen ska']],
+      [['multipliceras med varje']],
+      [['term i den andra. Det']],
+      [['blir fyra produkter.']]
+    ]);
+    var yArc = y - 0.95 * F;
+    arc((a1 + a1b) / 2, (b1 + b1b) / 2, yArc, 26, BLUE);
+    arc((a1 + a1b) / 2 + 3, (b2 + b2b) / 2, yArc, 48, BLUE);
+    arc((a2 + a2b) / 2, (b1 + b1b) / 2 + 4, yArc, 20, BLUE);
+    arc((a2 + a2b) / 2 + 3, (b2 + b2b) / 2 + 4, yArc, 38, BLUE);
+    y += 2.6 * F;
+    T.str('=x·x+x·3+7·x+7·3', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=x^2+3x+7x+21', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3x och 7x är likadana']],
+      [['termer och slås ihop:']],
+      [['3x+7x=10x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=x^2+10x+21', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x^2+10x+21', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) (3x-5)(8x+9) ---- */
+    tanke(y, [
+      [['Samma metod. Nu måste']],
+      [['jag hålla ordning på']],
+      [['tecknen: minustecknet']],
+      [['hör till 5:an och följer']],
+      [['med in i produkterna.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) (3x-5)(8x+9)', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=3x·8x+3x·9-5·8x-5·9', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=24x^2+27x-40x-45', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-termerna slås ihop:']],
+      [['27x-40x=-13x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=24x^2-13x-45', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 24x^2-13x-45', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) 10-(x-2)(x-3) ---- */
+    tanke(y, [
+      [['Minustecknet står framför']],
+      [['HELA produkten. Därför']],
+      [['måste en stor parentes']],
+      [['stå kvar runt det']],
+      [['utvecklade uttrycket.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) 10-(x-2)(x-3)', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=10-(x^2-3x-2x+6)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Inne i parentesen:']],
+      [['-3x-2x=-5x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=10-(x^2-5x+6)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu tas parentesen bort,']],
+      [['och då byter alla tre']],
+      [['termerna inuti tecken.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('=10', padL + 30, y);
+    xx = T.str('-x^2', xx, y, BLUE);
+    xx = T.str('+5x', xx, y, BLUE);
+    T.str('-6', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=4-x^2+5x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 4-x^2+5x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvation med parenteser (ma1c-2.3 ex 3) -----
+   * (1+4x)(3x-2)=x(12x-6). Andragradstermen 12x² finns i BÅDA led och
+   * försvinner när den subtraheras bort — kvar blir en förstagrads-
+   * ekvation. */
+  function layoutParentesekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    y = 182;
+    T.str('(1+4x)(3x-2)=x(12x-6)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag utvecklar båda leden']],
+      [['var för sig, precis som']],
+      [['vanligt.']]
+    ]);
+    y += 2.3 * F;
+    T.str('3x-2+12x^2-8x=12x^2-6x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först förenklar jag']],
+      [['vänsterledet:']],
+      [['3x-8x=-5x.']]
+    ]);
+    y += 2.3 * F;
+    var xv1 = padL;
+    var xv2 = T.str('12x^2', xv1, y);
+    var xrest = T.str('-5x-2=', xv2, y);
+    var xh1 = xrest;
+    var xh2 = T.str('12x^2', xh1, y);
+    T.str('-6x', xh2, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Termen med x i kvadrat']],
+      [['står i båda led.']],
+      [['Subtraherar jag bort den']],
+      [['försvinner']],
+      [['andragradstermen helt.']]
+    ]);
+    var r1 = T.ring(xv1, xv2, y);
+    T.pause(280);
+    var r2 = T.ring(xh1, xh2, y);
+    y += 2.4 * F;
+    T.str('-5x-2=-6x', padL + 30, y);
+    T.fade(r1);
+    T.fade(r2);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu samlar jag x-termerna']],
+      [['och adderar 6x till båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x-2=0', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist adderar jag 2 till']],
+      [['båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x=2', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorisera (ma1c-2.4 ex 1) -----------------
+   * a)–e). Arbetsgången är alltid densamma: (1) största gemensamma tal,
+   * (2) minsta potensen av varje variabel, (3) skriv den utbrutna
+   * faktorn med en TOM parentes efter och fyll på den term för term
+   * ("distributiva lagen baklänges"). Den tomma parentesen ritas på
+   * riktigt — det är så man gör för hand, och den visar att man tänker
+   * en term i taget. */
+  function layoutFaktoriseraut(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    /* skriv "=<faktor>(" … ")" med en lucka som rymmer `innehall`, och
+     * returnera x där luckan börjar */
+    function tomParentes(faktor, innehall, x0, yb) {
+      var x = T.str('=' + faktor + '(', x0, yb);
+      var lucka = T.adv(innehall) + 0.16 * F;
+      T.str(')', x + lucka, yb);
+      return { x: x, slut: x + lucka + T.adv(')') };
+    }
+
+    /* ---- a) 27x²-18x ---- */
+    y = 74;
+    T.str('a) 27x^2-18x', padL, y);
+    T.stepEnd();
+
+    /* EN bubbla, inte två: koefficienten och variabeln leder fram till
+     * ETT led — den utbrutna faktorn 9x — och hör därför till samma
+     * klicksteg (se REGEL: en tanke per led). */
+    tanke(y, [
+      [['Först koefficienterna:']],
+      [['största tal som både 27']],
+      [['och 18 är delbara med är']],
+      [['9. Sedan variablerna:']],
+      [['båda termerna har x, så']],
+      [['minsta potensen x kan']],
+      [['brytas ut. Alltså 9x.']]
+    ]);
+    y += 2.3 * F;
+    var pa = tomParentes('9x', '3x-2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['9x gånger vad blir 27']],
+      [['gånger x i kvadrat? Jo']],
+      [['3x, för 9·3=27 och x·x']],
+      [['blir x i kvadrat.']]
+    ]);
+    var xa = T.str('3x', pa.x, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Efter första termen']],
+      [['kommer ett minustecken.']],
+      [['Och 9x']],
+      [['gånger vad blir 18x? Jo']],
+      [['2.']]
+    ]);
+    T.str('-2', xa, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 9x(3x-2)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 5x³+20x⁵ ---- */
+    tanke(y, [
+      [['5 och 20 har 5 som']],
+      [['största gemensamma']],
+      [['faktor, och den minsta']],
+      [['potensen av x är x']],
+      [['upphöjt till 3.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 5x^3+20x^5', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    var pb = tomParentes('5x^3', '1+4x^2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den utbrutna faktorn']],
+      [['gånger vad blir första']],
+      [['termen? Jo 1. Glöm aldrig']],
+      [['ettan, utan den']],
+      [['försvinner en hel term!']]
+    ]);
+    var xb = T.str('1', pb.x, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Faktorn gånger vad blir']],
+      [['andra termen? Jo 4x i']],
+      [['kvadrat, för 5·4=20 och']],
+      [['exponenterna 3+2 blir 5.']]
+    ]);
+    T.str('+4x^2', xb, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 5x^3(1+4x^2)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) 21x²-14 ---- */
+    tanke(y, [
+      [['21 och 14 har 7 som']],
+      [['gemensam faktor. Men']],
+      [['konstanttermen 14']],
+      [['innehåller inget x, så']],
+      [['ingen variabel kan brytas']],
+      [['ut.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) 21x^2-14', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=7(3x^2-2)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 7(3x^2-2)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) 4x³-6x²+10x ---- */
+    tanke(y, [
+      [['Tre termer nu. Den']],
+      [['gemensamma faktorn måste']],
+      [['passa ALLA tre: 4, 6 och']],
+      [['10 är delbara med 2, och']],
+      [['minsta potensen av x är']],
+      [['x.']]
+    ]);
+    y += 3.4 * F;
+    T.str('d) 4x^3-6x^2+10x', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=2x(2x^2-3x+5)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 2x(2x^2-3x+5)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- e) 81y-45x²y+27xy² ---- */
+    tanke(y, [
+      [['Två variabler. Då tittar']],
+      [['jag på en variabel i']],
+      [['taget. 81, 45 och 27 är']],
+      [['alla delbara med 9.']]
+    ]);
+    y += 3.4 * F;
+    T.str('e) 81y-45x^2y+27xy^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Första termen saknar x,']],
+      [['så inget x kan brytas ut.']],
+      [['Men alla tre termerna har']],
+      [['y. Alltså bryter jag ut']],
+      [['9y.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=9y(9-5x^2+3xy)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 9y(9-5x^2+3xy)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvationslösningens grunder (ma1c-2.5 ex 1) --
+   * a) 4x+7=35 med KONTROLL, b) 7x/6-15=-11. Grundprincipen är att det
+   * man gör i ena ledet måste göras i det andra också — därför skrivs
+   * operationen ut i BÅDA led med blåpennan innan raden förenklas. */
+  function layoutEkvgrund(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) 4x+7=35 ---- */
+    y = 74;
+    T.str('a) 4x+7=35', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sjuan adderas i']],
+      [['vänsterledet. För att få']],
+      [['bort den subtraherar jag']],
+      [['7 från BÅDA led.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('4x+7', padL + 30, y);
+    xx = T.str('-7', xx, y, BLUE);
+    xx = T.str('=35', xx, y);
+    T.str('-7', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('4x=28', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu multipliceras x med']],
+      [['4. För att få bort']],
+      [['faktorn dividerar jag med']],
+      [['4 i båda led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('4x', '4', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('28', '4', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('x=7', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- kontrollen ---- */
+    tanke(y, [
+      [['Jag kontrollerar genom']],
+      [['att sätta in x=7 i den']],
+      [['ursprungliga ekvationen.']],
+      [['Blir leden lika är']],
+      [['lösningen rätt.']]
+    ]);
+    y += 3.5 * F;
+    T.str('Kontroll', padL, y - 1.5 * F, null, 0.62);
+    T.str('VL=4·7+7=28+7=35', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('HL=35', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('VL=HL ⇒ Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 7x/6-15=-11 ---- */
+    tanke(y, [
+      [['Här står x i en täljare.']],
+      [['Jag tar bort termerna']],
+      [['först och nämnaren sedan.']]
+    ]);
+    y += 4.0 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('7x', '6', xx, y);
+    T.str('-15=-11', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['15 subtraheras, så jag']],
+      [['adderar 15 till båda led.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.fracH('7x', '6', padL + 30, y);
+    xx = T.str('-15', xx, y);
+    xx = T.str('+15', xx, y, BLUE);
+    xx = T.str('=-11', xx, y);
+    T.str('+15', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.fracH('7x', '6', padL + 30, y);
+    T.str('=4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren 6 försvinner om']],
+      [['jag multiplicerar båda']],
+      [['led med 6.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.fracH('7x', '6', padL + 30, y);
+    xx = T.str('·6', xx, y, BLUE);
+    xx = T.str('=4', xx, y);
+    T.str('·6', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('7x=24', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist dividerar jag med 7']],
+      [['i båda led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('7x', '7', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('24', '7', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['24 delat med 7 går inte']],
+      [['jämnt ut. Då lämnar jag']],
+      [['svaret som ett bråk och']],
+      [['avrundar inte.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.str('x=', padL + 30, y);
+    T.fracH('24', '7', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('24', '7', xe, y);
+    T.underline(xe, y + 0.95 * F);   /* under nämnaren, inte genom den */
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: variabler i båda led (ma1c-2.6 ex 1) --------
+   * a), b) och c). Metoden är alltid: förenkla båda led först, ta sedan
+   * bort variabeltermen från det led som har MINST koefficient, och lös
+   * som vanligt. I c) leder ekvationen till en motsägelse — då saknas
+   * lösning. */
+  function layoutVariabelbada(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) 5x+8-3x=9x-20 ---- */
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    y = 182;
+    T.str('a) 5x+8-3x=9x-20', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först förenklar jag']],
+      [['vänsterledet:']],
+      [['5x-3x=2x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('2x+8=9x-20', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står x i båda led. Jag']],
+      [['tar bort den term som har']],
+      [['MINST koefficient, alltså']],
+      [['2x, från båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('8=7x-20', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['20 subtraheras i']],
+      [['högerledet, så jag']],
+      [['adderar 20 till båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('28=7x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist dividerar jag med 7']],
+      [['i båda led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('28', '7', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7x', '7', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('4=x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 54-4(3x-5)=25x ---- */
+    tanke(y, [
+      [['Här finns en parentes.']],
+      [['Den multiplicerar jag in']],
+      [['först.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 54-4(3x-5)=25x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Framför parentesen står']],
+      [['-4. Tänk på tecknen:']],
+      [['-4·(−5) blir +20.']]
+    ]);
+    y += 2.3 * F;
+    T.str('54-12x+20=25x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Konstanterna i']],
+      [['vänsterledet slås ihop:']],
+      [['54+20=74.']]
+    ]);
+    y += 2.3 * F;
+    T.str('74-12x=25x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['-12 är mindre än 25, så']],
+      [['jag tar bort x-termen från']],
+      [['vänsterledet: adderar 12x']],
+      [['till båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('74=37x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 37 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('74', '37', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('37x', '37', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('2=x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) 3(7x-4)=7(9+3x) ---- */
+    tanke(y, [
+      [['Två parenteser, en i']],
+      [['varje led. Jag utvecklar']],
+      [['båda.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) 3(7x-4)=7(9+3x)', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    var yc = y;
+    var xc1 = T.str('', padL + 30, y);
+    xc1 = padL + 30;
+    var xc2 = T.str('21x', xc1, y);
+    var xrest = T.str('-12=63+', xc2, y);
+    var xc3 = xrest;
+    var xc4 = T.str('21x', xc3, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['21x står i båda led. Jag']],
+      [['subtraherar 21x från båda']],
+      [['led. Då försvinner']],
+      [['variabeln helt.']]
+    ]);
+    var r1 = T.ring(xc1, xc2, yc);
+    T.pause(280);
+    var r2 = T.ring(xc3, xc4, yc);
+    y += 2.4 * F;
+    T.str('-12=63', padL + 30, y);
+    T.fade(r1);
+    T.fade(r2);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men -12 är ju inte lika']],
+      [['med 63! Påståendet är']],
+      [['falskt oavsett vad x är.']]
+    ]);
+    y += 2.3 * F;
+    T.str('-12≠63', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: Saknar lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: en bråkterm (ma1c-2.7 ex 1) -----------------
+   * 130/(3x)=5. Först villkoret på nämnaren, sedan metoden "täljaren är
+   * lika med produkten av kvoten och nämnaren". */
+  function layoutEnbrakterm(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 88;
+    xx = T.fracH('130', '3x', padL, y);
+    T.str('=5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x står i nämnaren. En']],
+      [['nämnare får aldrig bli 0,']],
+      [['för division med 0 är inte']],
+      [['definierat.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('3x≠0 ⇒ x≠0', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu blir jag av med']],
+      [['nämnaren: täljaren är']],
+      [['lika med produkten av']],
+      [['kvoten och nämnaren.']]
+    ]);
+    y += 2.4 * F;
+    T.str('130=5·3x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('130=15x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 15 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('130', '15', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('15x', '15', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['130/15 kan förkortas: både']],
+      [['130 och 15 är delbara med']],
+      [['5.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.fracOp('130', '15', '/5', padL + 30, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('26', '3', xx, y);
+    T.str('=x', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('26', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);   /* under nämnaren, inte genom den */
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: korsvis multiplikation (ma1c-2.7 ex 2) ------
+   * 9/(2x)=3/8. När ETT bråk står i vardera ledet multiplicerar man
+   * korsvis. Korspilarna ritas med blåpennan över de två bråken innan
+   * produkterna skrivs — det är gesten som gör metoden begriplig. */
+  function layoutKorsvis(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* rak pil mellan två punkter, med spets i slutänden */
+    function pil(p1, p2) {
+      T.line(p1, p2, BLUE);
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1], L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 26 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), len = 12;
+      T.line([p2[0] - (dx * ca - dy * sa) * len, p2[1] - (dx * sa + dy * ca) * len],
+             p2, BLUE);
+      T.line([p2[0] - (dx * ca + dy * sa) * len, p2[1] - (-dx * sa + dy * ca) * len],
+             p2, BLUE);
+      T.pause(260);
+    }
+
+    y = 92;
+    var xf1 = padL;
+    var xf1w = T.fracW('9', '2x');
+    xx = T.fracH('9', '2x', xf1, y);
+    /* extra luft kring likhetstecknet: korspilarna ska korsa varandra i
+     * en tydlig lucka mellan bråken, inte ovanpå dem */
+    xx = T.str('=', xx + 26, y) + 26;
+    var xf2 = xx;
+    var xf2w = T.fracW('3', '8');
+    T.fracH('3', '8', xf2, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2x står i nämnaren, så']],
+      [['nämnaren får inte bli 0.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('2x≠0 ⇒ x≠0', padL + 30, y);
+    T.stepEnd();
+
+    /* korspilarna ritas över det FÖRSTA bråket, som står kvar högst upp */
+    tanke(y, [
+      [['Ett bråk i vardera ledet.']],
+      [['Då multiplicerar jag']],
+      [['korsvis: täljaren i det']],
+      [['ena med nämnaren i det']],
+      [['andra.']]
+    ]);
+    /* Pilarna korsar varandra i luckan MELLAN bråken och slutar precis
+     * vid det andra bråkets kant — inte ovanpå siffrorna, som annars
+     * skyms av pilspetsarna. */
+    var yTal = y - 3.2 * F - 0.48 * F;      /* täljarnas höjd i rad 1 */
+    var yNam = y - 3.2 * F + 0.62 * F;      /* nämnarnas höjd i rad 1 */
+    var xStart = xf1 + xf1w - 8, xSlut = xf2 + 8;
+    pil([xStart, yTal], [xSlut, yNam]);
+    pil([xStart, yNam], [xSlut, yTal]);
+    y += 2.4 * F;
+    T.str('3·2x=9·8', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('6x=72', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 6 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('6x', '6', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('72', '6', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('x=12', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=12', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tre bråktermer (ma1c-2.7 ex 3) --------------
+   * x/3+1/4=5/6. Två vägar går till målet, och enligt REGEL (ALTERNATIVA
+   * LÖSNINGAR) visas den ENKLASTE först — multiplikation med MGN — och
+   * alternativet (skriv om VL som ett bråk + korsvis multiplikation)
+   * efteråt, med en metodrubrik före varje lösning. */
+  function layoutTrebrak(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- alternativ 1: MGN ---- */
+    y = 96;
+    /* rubriken läggs 2,2·F över baslinjen — ett bråk når ~1,05·F upp,
+     * så 1,6·F skulle lägga rubriken direkt på täljaren */
+    T.str('Med MGN', padL, y - 2.2 * F, null, 0.62);
+    xx = T.fracH('x', '3', padL, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '4', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnarna är 3, 4 och 6.']],
+      [['Vilket är det minsta tal']],
+      [['som alla tre går jämnt upp']],
+      [['i? Jo 12.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('MGN=12', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag multiplicerar båda led']],
+      [['med 12. Snabbast går det']],
+      [['om jag multiplicerar varje']],
+      [['TÄLJARE med 12.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.fracH('12x', '3', padL + 30, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('12·1', '4', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('12·5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu går varje bråk jämnt']],
+      [['ut: 12/3=4, 12/4=3 och']],
+      [['12/6=2, så högerledet blir']],
+      [['2·5=10.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('4x+3=10', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 3 från båda']],
+      [['led.']]
+    ]);
+    y += 2.4 * F;
+    T.str('4x=7', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 4 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('x=', padL + 30, y);
+    T.fracH('7', '4', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('7', '4', xe, y);
+    T.underline(xe, y + 0.95 * F);   /* under nämnaren, inte genom den */
+    T.stepEnd();
+
+    /* ---- alternativ 2: ett bråk i vardera ledet + korsvis ---- */
+    tanke(y, [
+      [['Uppgiften går också att']],
+      [['lösa åt andra hållet: gör']],
+      [['vänsterledet till ETT']],
+      [['bråk först.']]
+    ], 1.05);
+    y += 5.8 * F;
+    T.str('Med korsvis multiplikation', padL, y - 2.2 * F, null, 0.62);
+    xx = T.fracOp('x', '3', '·4', padL, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracOp('1', '4', '·3', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '6', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.fracH('4x', '12', padL + 30, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('3', '12', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma nämnare, så']],
+      [['täljarna kan läggas ihop']],
+      [['till ett enda bråk.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.fracH('4x+3', '12', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett bråk i vardera ledet.']],
+      [['Nu kan jag multiplicera']],
+      [['korsvis.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('6(4x+3)=12·5', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('24x+18=60', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 18 från båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('24x=42', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 24 i båda']],
+      [['led och förkortar sedan']],
+      [['bråket med 6.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('x=', padL + 30, y);
+    xx = T.fracOp('42', '24', '/6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7', '4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma svar som med MGN,']],
+      [['precis som det ska vara.']]
+    ], 1.05);
+
+    return { acts: acts, contentW: 620, lastBase: y + 2.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: variabler i nämnarna (ma1c-2.7 ex 4) --------
+   * 5/(3x) - 1/(2x) = 1/6. MGN måste vara delbar med 3, 2 och 6 OCH
+   * innehålla x, alltså 6x. */
+  function layoutVariabelnamnare(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 92;
+    xx = T.fracH('5', '3x', padL, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('1', '2x', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3x och 2x står i']],
+      [['nämnarna. Båda ger samma']],
+      [['villkor: x får inte vara']],
+      [['0.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('x≠0', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre bråk, så jag']],
+      [['multiplicerar med MGN. Den']],
+      [['måste vara delbar med 3, 2']],
+      [['och 6 och dessutom']],
+      [['innehålla x. Alltså 6x.']]
+    ]);
+    y += 2.4 * F;
+    T.str('MGN=6x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag multiplicerar varje']],
+      [['täljare med 6x.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.fracH('6x·5', '3x', padL + 30, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('6x·1', '2x', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('6x·1', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu förkortas nämnarna']],
+      [['bort: 6x/3x=2, 6x/2x=3']],
+      [['och 6x/6=x.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('2·5-3·1=x·1', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('10-3=x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('7=x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x=7 är tillåtet, för det']],
+      [['gör ingen nämnare 0.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: x=7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: otillåten lösning (ma1c-2.7 ex 5) -----------
+   * (5x-35)/(x-7)=4. Räkningen ger x=7 — precis det värde som villkoret
+   * förbjuder. Därför ringas villkoret och svaret in mot varandra innan
+   * slutsatsen dras: ekvationen saknar lösning. */
+  function layoutEjtillaten(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 92;
+    xx = T.fracH('5x-35', 'x-7', padL, y);
+    T.str('=4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren x-7 får inte bli']],
+      [['0. Det inträffar när x är']],
+      [['7, så det värdet är']],
+      [['förbjudet.']]
+    ], 1.05);
+    y += 3.2 * F;
+    var yVillkor = y;
+    var xv0 = padL + 30;
+    var xv1 = T.str('x≠7', xv0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren är lika med']],
+      [['produkten av kvoten och']],
+      [['nämnaren.']]
+    ]);
+    y += 2.4 * F;
+    T.str('5x-35=4(x-7)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('5x-35=4x-28', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 4x från båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x-35=-28', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 35 till båda led.']]
+    ]);
+    y += 2.3 * F;
+    var ySvar = y;
+    var xs0 = padL + 30;
+    var xs1 = T.str('x=7', xs0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men 7 var ju förbjudet!']],
+      [['Sätter jag in 7 blir']],
+      [['nämnaren 0, och då']],
+      [['existerar inte kvoten.']]
+    ]);
+    var r1 = T.ring(xv0, xv1, yVillkor);
+    T.pause(320);
+    var r2 = T.ring(xs0, xs1, ySvar);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: Saknar lösning', padL, y);
+    T.fade(r1);
+    T.fade(r2);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: dela upp ett belopp (ma1c-2.8 ex 1) ---------
+   * Rayan, Arielle och Samuel delar på 4 000 kr. Problemlösningens tre
+   * steg får varsin liten rubrik i grafit (se REGEL: INLEDANDE
+   * MOTIVERING): 1. Översätt, 2. Lös ekvationen, 3. Tolka och svara. */
+  function layoutDelabelopp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- 1. Översätt ---- */
+    tanke(20, [
+      [['Det som EFTERFRÅGAS får']],
+      [['heta x. Det är Arielles']],
+      [['belopp. Skriv ner det!']]
+    ], 0);
+    y = 96;
+    T.str('1. Översätt', padL, y - 1.6 * F, null, 0.62);
+    T.str('x=Arielles belopp', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rayan får dubbelt så']],
+      [['mycket som Arielle,']],
+      [['alltså 2x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('2x=Rayans belopp', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samuel får 300 kr mindre']],
+      [['än Rayan, alltså 300']],
+      [['mindre än 2x.']]
+    ]);
+    y += 2.3 * F;
+    T.str('2x-300=Samuels belopp', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tillsammans delar de på']],
+      [['4 000 kr. Summan av de tre']],
+      [['beloppen blir alltså']],
+      [['ekvationen.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x+2x+(2x-300)=4 000', padL, y);
+    T.stepEnd();
+
+    /* ---- 2. Lös ekvationen ---- */
+    tanke(y, [
+      [['Plustecken framför']],
+      [['parentesen: den kan tas']],
+      [['bort som den står. Sedan']],
+      [['slås x-termerna ihop:']],
+      [['x+2x+2x=5x.']]
+    ]);
+    y += 3.6 * F;
+    T.str('2. Lös ekvationen', padL, y - 1.6 * F, null, 0.62);
+    T.str('5x-300=4 000', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 300 till båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('5x=4 300', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 5 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('5x', '5', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4 300', '5', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('x=860', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- 3. Tolka och svara ---- */
+    tanke(y, [
+      [['x var Arielles belopp, så']],
+      [['svaret är 860 kr. Av']],
+      [['4 000 kr är det rimligt:']],
+      [['hon får minst av de tre.']]
+    ]);
+    y += 3.6 * F;
+    T.str('3. Tolka och svara', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('Svar: 860 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: enkla andra-/tredjegradsekvationer ----------
+   * (ma1c-2.9 ex 1) a)–f). Genomgående poäng: JÄMN exponent ger två
+   * lösningar (± framför roten), UDDA exponent ger en. Rötterna ritas
+   * med T.rot() så att rotstrecket går över hela radikanden. */
+  function layoutEnklagrad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) x²=64 ---- */
+    y = 74;
+    T.str('a) x^2=64', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vilket tal gånger sig']],
+      [['självt blir 64? Både 8']],
+      [['och -8, för minus gånger']],
+      [['minus ger plus. Därför']],
+      [['skrivs ± framför roten.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('64', xx, y);
+    T.str('=±8', xx, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=±8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) x²=10 ---- */
+    tanke(y, [
+      [['Nu går roten inte jämnt']],
+      [['ut. Då slår jag den på']],
+      [['räknaren.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) x^2=10', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('10', xx, y);
+    T.str('=±3,162...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först i sista steget']],
+      [['avrundar jag, här till två']],
+      [['decimaler.']]
+    ]);
+    y += 2.3 * F;
+    T.str('≈±3,16', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x≈±3,16', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) x²=−9 ---- */
+    tanke(y, [
+      [['Ett tal i kvadrat kan']],
+      [['aldrig bli negativt,']],
+      [['varken av ett positivt']],
+      [['eller ett negativt tal.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) x^2=-9', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: Saknar reella lösningar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) x³=343 ---- */
+    tanke(y, [
+      [['Tredjegradsekvation. Ett']],
+      [['tal upphöjt till 3']],
+      [['behåller sitt tecken, så']],
+      [['det finns bara EN lösning']],
+      [['och inget ±.']]
+    ]);
+    y += 3.4 * F;
+    T.str('d) x^3=343', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vilket tal gånger sig']],
+      [['självt tre gånger blir']],
+      [['343? Jo 7, för']],
+      [['7·7·7=343.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('x=', padL + 30, y);
+    xx = T.rot('343', xx + 9, y, 3);
+    T.str('=7', xx, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- e) x³=−27 ---- */
+    tanke(y, [
+      [['Tredjeroten ur ett']],
+      [['negativt tal går utmärkt:']],
+      [['(−3)·(−3)·(−3)=-27.']]
+    ]);
+    y += 3.4 * F;
+    T.str('e) x^3=-27', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('x=', padL + 30, y);
+    xx = T.rot('−27', xx + 9, y, 3);
+    T.str('=-3', xx, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=-3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- f) 3x²−2,31=17,97 ---- */
+    tanke(y, [
+      [['Här står mer än bara']],
+      [['x i kvadrat. Först löser']],
+      [['jag ut det, sedan gör jag']],
+      [['som vanligt.']]
+    ]);
+    y += 3.4 * F;
+    T.str('f) 3x^2-2,31=17,97', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 2,31 till båda']],
+      [['led.']]
+    ]);
+    y += 2.4 * F;
+    T.str('3x^2=20,28', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 3 i båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x^2=6,76', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('6,76', xx, y);
+    T.str('=±2,6', xx, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=±2,6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kvadraten och kuben (ma1c-2.9 ex 2) ---------
+   * a) kvadrat med arean 4 096 cm², b) kub med volymen 4 096 cm³.
+   * Figuren ritas i grafit och måtten skrivs med blåpennan. Poängen i
+   * a) är att den negativa roten förkastas — en sida kan inte vara
+   * negativ — medan b) bara har en lösning från början. */
+  function layoutKvadratkub(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) kvadraten ---- */
+    tanke(15, [
+      [['Först ritar jag']],
+      [['kvadraten och kallar']],
+      [['sidan x.']]
+    ], 0);
+    var kx = padL + 40, ky = 56, ks = 132;
+    T.line([kx, ky], [kx + ks, ky]);
+    T.line([kx + ks, ky], [kx + ks, ky + ks]);
+    T.line([kx + ks, ky + ks], [kx, ky + ks]);
+    T.line([kx, ky + ks], [kx, ky]);
+    T.pause(200);
+    T.str('x', kx + ks + 14, ky + ks / 2 + 0.2 * F, BLUE, 0.62);
+    var wx = T.adv('x', 0.62);
+    T.str('x', kx + ks / 2 - wx / 2, ky + ks + 0.9 * F, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(ky + ks + 0.9 * F, [
+      [['Kvadratens area är sidan']],
+      [['gånger sidan, alltså x']],
+      [['gånger x.']]
+    ], 0.3);
+    y = ky + ks + 3.1 * F;
+    T.str('a) A=x·x=x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Arean är känd: 4 096']],
+      [['kvadratcentimeter.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x^2=4 096', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('4 096', xx, y);
+    T.str('=±64', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En sida kan inte vara']],
+      [['negativ, så -64 förkastar']],
+      [['jag. Kvar blir 64 cm.']]
+    ]);
+    y += 2.3 * F;
+    xe = T.str('Svar: 64 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) kuben ---- */
+    tanke(y, [
+      [['Nu en kub. Volymen är']],
+      [['sidan gånger sidan gånger']],
+      [['sidan.']]
+    ]);
+    var bx = padL + 40, by = y + 2.6 * F, bs = 116, dd = 42;
+    T.line([bx, by], [bx + bs, by]);                      /* framsidan */
+    T.line([bx + bs, by], [bx + bs, by + bs]);
+    T.line([bx + bs, by + bs], [bx, by + bs]);
+    T.line([bx, by + bs], [bx, by]);
+    T.pause(160);
+    T.line([bx, by], [bx + dd, by - dd]);                 /* djupled */
+    T.line([bx + bs, by], [bx + bs + dd, by - dd]);
+    T.line([bx + bs, by + bs], [bx + bs + dd, by + bs - dd]);
+    T.line([bx + dd, by - dd], [bx + bs + dd, by - dd]);  /* ovansidan bak */
+    T.line([bx + bs + dd, by - dd], [bx + bs + dd, by + bs - dd]);
+    T.pause(200);
+    T.str('x', bx + bs + dd + 14, by + bs / 2 - dd / 2, BLUE, 0.62);
+    T.str('x', bx + bs / 2 - wx / 2, by + bs + 0.9 * F, BLUE, 0.62);
+    T.stepEnd();
+
+    y = by + bs + 3.1 * F;
+    T.str('b) V=x·x·x=x^3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Volymen är känd: 4 096']],
+      [['kubikcentimeter.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x^3=4 096', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tredjegradsekvation, så']],
+      [['bara EN lösning och inget']],
+      [['±. Vilket tal gånger sig']],
+      [['självt tre gånger blir']],
+      [['4 096? Jo 16.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('x=', padL + 30, y);
+    xx = T.rot('4 096', xx + 9, y, 3);
+    T.str('=16', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 16 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös potensekvationer (ma1c-2.10 ex 1) -------
+   * a)–e). Två likvärdiga metoder finns; a) visar båda (upphöj båda led
+   * till exponentens invers ELLER dra n:te roten) och resten använder
+   * den kortare. ± sätts ut när exponenten är jämn. */
+  function layoutPotensekvlos(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) x¹⁴=80 000 ---- */
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    y = 118;
+    T.str('a) x^1^4=80 000', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För att bli av med']],
+      [['exponenten 14 upphöjer']],
+      [['jag båda led till dess']],
+      [['invers, 1/14.']]
+    ]);
+    y += 2.4 * F;
+    T.str('(x^1^4)^1^/^1^4=80 000^1^/^1^4', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 14 är JÄMN, så']],
+      [['både ett positivt och ett']],
+      [['negativt x löser']],
+      [['ekvationen. Därför ±.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x=±2,239...≈±2,24', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak kan skrivas med']],
+      [['rotuttryck: att upphöja']],
+      [['till 1/14 ÄR att dra']],
+      [['fjortonderoten.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=±', padL + 30, y);
+    /* ROTINDEX EFTER ±: indexsiffran skrivs i kilens vinkel, alltså vid
+     * rotens x0 — utan luft växer den ihop med plusminustecknet */
+    xx = T.rot('80 000', xx + 9, y, 14);
+    T.str('≈±2,24', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x≈±2,24', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 3x⁵−21=0 ---- */
+    tanke(y, [
+      [['Potensen står inte ensam.']],
+      [['Först löser jag ut x']],
+      [['upphöjt till 5.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 3x^5-21=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 21 till båda led.']]
+    ]);
+    y += 2.4 * F;
+    T.str('3x^5=21', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 3 i båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x^5=7', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 5 är UDDA. Då']],
+      [['finns exakt en lösning,']],
+      [['och inget ± ska skrivas.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('x=7^1^/^5=', padL + 30, y);
+    xx = T.rot('7', xx + 9, y, 5);
+    T.str('≈1,48', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x≈1,48', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) x^3,4=98 ---- */
+    tanke(y, [
+      [['Exponenten behöver inte']],
+      [['vara ett heltal. Metoden']],
+      [['är exakt densamma.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) x^3^,^4=98', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x=98^1^/^3^,^4=3,851...≈3,85', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x≈3,85', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) x^(1/2)=4 ---- */
+    tanke(y, [
+      [['Nu står ett BRÅK i']],
+      [['exponenten. Då börjar jag']],
+      [['med att bli av med']],
+      [['nämnaren: upphöj båda led']],
+      [['till 2.']]
+    ]);
+    y += 3.4 * F;
+    T.str('d) x^1^/^2=4', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('(x^1^/^2)^2=4^2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I vänsterledet blir']],
+      [['exponenten 1/2·2=1, så']],
+      [['bara x står kvar.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x=16', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=16', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- e) x^(2/5)=10 ---- */
+    tanke(y, [
+      [['Bråk i exponenten igen.']],
+      [['Jag upphöjer båda led till']],
+      [['nämnaren 5.']]
+    ]);
+    y += 3.4 * F;
+    T.str('e) x^2^/^5=10', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('(x^2^/^5)^5=10^5', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten i']],
+      [['vänsterledet blir']],
+      [['2/5·5=2. Kvar står en']],
+      [['vanlig andragradsekvation.']]
+    ]);
+    y += 2.3 * F;
+    T.str('x^2=100 000', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 2 är jämn, så']],
+      [['± ska med.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('100 000', xx, y);
+    T.str('≈±316,23', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x≈±316,23', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: antal lösningar (ma1c-2.10 ex 2) ------------
+   * a)–d). Här ska ingen ekvation lösas — bara ANTALET lösningar
+   * bestämmas ur exponentens jämnhet och högerledets tecken. */
+  function layoutAntallosningar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) x¹²=154 ---- */
+    y = 74;
+    T.str('a) x^1^2=154', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 12 är jämn och']],
+      [['högerledet är positivt. Då']],
+      [['finns både en positiv och']],
+      [['en negativ lösning.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('x=±', padL + 30, y);
+    T.rot('154', xx + 9, y, 12);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: Två lösningar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) x⁴=0 ---- */
+    tanke(y, [
+      [['Jämn exponent, men']],
+      [['högerledet är 0. Och 0 har']],
+      [['ingen negativ motsvarighet']],
+      [['bara 0 självt.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) x^4=0', padL, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    xx = T.str('x=', padL + 30, y);
+    xx = T.rot('0', xx + 9, y, 4);
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: En lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) x¹⁰⁰=−50 ---- */
+    tanke(y, [
+      [['Jämn exponent gör alltid']],
+      [['resultatet positivt, hur']],
+      [['x än väljs. Ett negativt']],
+      [['högerled är då omöjligt.']]
+    ]);
+    y += 3.4 * F;
+    T.str('c) x^1^0^0=-50', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: Saknar lösningar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) x⁹⁹=−5 ---- */
+    tanke(y, [
+      [['Udda exponent behåller']],
+      [['tecknet, så ett negativt x']],
+      [['ger ett negativt']],
+      [['högerled. Det går alltid,']],
+      [['och bara på ett sätt.']]
+    ]);
+    y += 3.4 * F;
+    T.str('d) x^9^9=-5', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: En lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös olikheter (ma1c-2.11 ex 1) --------------
+   * a) 3x-5<22, b) 7(6-x)≤105, c) 6a/5>3a-18. Olikheter löses som
+   * ekvationer MEN tecknet vänds vid multiplikation/division med
+   * negativa tal — och när leden byter plats. Vändningen skrivs med
+   * blåpennan, eftersom det är den som är "det man gör". */
+  function layoutLosolikhet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) 3x-5<22 ---- */
+    y = 74;
+    T.str('a) 3x-5<22', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En olikhet löses precis']],
+      [['som en ekvation. Adderar']],
+      [['5 till båda led.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('3x-5', padL + 30, y);
+    xx = T.str('+5', xx, y, BLUE);
+    xx = T.str('<22', xx, y);
+    T.str('+5', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('3x<27', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 3 i båda']],
+      [['led. 3 är positivt, så']],
+      [['olikhetstecknet står kvar']],
+      [['som det är.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('3x', '3', padL + 30, y);
+    xx = T.str('<', xx, y);
+    T.fracH('27', '3', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('x<9', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x<9', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 7(6-x)≤105 ---- */
+    tanke(y, [
+      [['Här måste parentesen']],
+      [['utvecklas först.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 7(6-x)≤105', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('42-7x≤105', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 42 från båda']],
+      [['led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('-7x≤63', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu ska jag dividera med']],
+      [['-7. Vid division med ett']],
+      [['NEGATIVT tal vänds']],
+      [['olikhetstecknet!']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('-7x', '-7', padL + 30, y);
+    xx = T.str('≥', xx, y, BLUE);
+    T.fracH('63', '-7', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('x≥-9', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x≥-9', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) 6a/5>3a-18 ---- */
+    tanke(y, [
+      [['Nu heter variabeln a, men']],
+      [['det ändrar ingenting.']],
+      [['Nämnaren tas bort först.']]
+    ]);
+    y += 3.6 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('6a', '5', xx, y);
+    T.str('>3a-18', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren är lika med']],
+      [['produkten av kvoten och']],
+      [['nämnaren, alltså']],
+      [['multiplicerar jag båda led']],
+      [['med 5.']]
+    ], 1.05);
+    y += 3.2 * F;
+    T.str('6a>5(3a-18)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('6a>15a-90', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['a-termer i båda led. Jag']],
+      [['tar bort den med minst']],
+      [['koefficient: subtraherar']],
+      [['6a från båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('0>9a-90', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 90 till båda led.']]
+    ]);
+    y += 2.3 * F;
+    T.str('90>9a', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 9 i båda']],
+      [['led. 9 är positivt, så']],
+      [['tecknet står kvar.']]
+    ]);
+    y += 2.3 * F;
+    T.str('10>a', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I ett svar vill vi ha']],
+      [['variabeln till vänster. När']],
+      [['leden byter plats måste']],
+      [['tecknet vändas: 10 är']],
+      [['större än a betyder att a']],
+      [['är mindre än 10.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('a', padL + 30, y);
+    xx = T.str('<', xx, y, BLUE);
+    T.str('10', xx, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: a<10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: olikheter av andra graden (ma1c-2.11 ex 2) --
+   * a) x²<9 och b) x²>9. Metoden är en annan än för förstagradsolikheter:
+   * undersök GRÄNSEN (där x²=9) och avgör sedan med en tallinje vilket
+   * intervall som uppfyller olikheten. Gränserna ritas som ÖPPNA ringar,
+   * eftersom likhet inte ingår. */
+  function layoutAndragradsolikhet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* tallinje från -6 till 6; öppna ringar vid gränserna */
+    var x0 = 96, u = 44, vMin = -6, vMax = 6;
+    function xAt(v) { return x0 + (v - vMin) * u; }
+    function tallinje(ty) {
+      var xa = xAt(vMin) - 22, xb = xAt(vMax) + 30;
+      T.line([xa, ty], [xb, ty]);
+      T.line([xb - 10, ty - 5], [xb, ty]);
+      T.line([xb - 10, ty + 5], [xb, ty]);
+      T.line([xa + 10, ty - 5], [xa, ty]);
+      T.line([xa + 10, ty + 5], [xa, ty]);
+      T.pause(120);
+      for (var v = vMin; v <= vMax; v++) {
+        var big = (v % 3 === 0);
+        T.line([xAt(v), ty - (big ? 6 : 4)], [xAt(v), ty + (big ? 6 : 4)]);
+        if (big) {
+          var txt = (v < 0 ? '−' + (-v) : '' + v);
+          var w = T.adv(txt, 0.5);
+          T.str(txt, xAt(v) - w / 2, ty + 25, null, 0.5);
+        }
+      }
+      T.stepEnd();
+    }
+    function oppenRing(v, ty) {
+      acts.push({ kind: 'stroke', pts: ringPts(xAt(v), ty, 7, 7), color: BLUE });
+      T.pause(160);
+    }
+    /* blått band längs tallinjen: tre tätt liggande drag som tillsammans
+     * täcker grafitlinjen (ett enskilt streck ovanpå den syns knappt) */
+    function markera(xa, xb, ty) {
+      [-2.5, 0, 2.5].forEach(function (dy) {
+        acts.push({ kind: 'stroke',
+                    pts: humanize([[xa, ty + dy], [xb, ty + dy]]),
+                    color: BLUE });
+      });
+    }
+
+    /* ---- a) x²<9 ---- */
+    y = 74;
+    T.str('a) x^2<9', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andragradsolikheter löses']],
+      [['på ett annat sätt. Jag']],
+      [['undersöker GRÄNSEN, där']],
+      [['leden är lika.']]
+    ]);
+    y += 2.4 * F;
+    T.str('Gränsen: x^2=9', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    xx = T.rot('9', xx, y);
+    T.str('=±3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu ritar jag en tallinje']],
+      [['och sätter ut gränserna']],
+      [['-3 och 3 som öppna']],
+      [['ringar, för likhet ingår']],
+      [['inte.']]
+    ]);
+    var ty1 = y + 2.9 * F;
+    tallinje(ty1);
+    oppenRing(-3, ty1);
+    oppenRing(3, ty1);
+    T.stepEnd();
+
+    tanke(ty1 + 25, [
+      [['Vilka x gör x i kvadrat']],
+      [['mindre än 9?']],
+      [['Testa x=0: 0<9, stämmer.']],
+      [['Testa x=4: 16<9, stämmer']],
+      [['inte. Alltså talen MELLAN']],
+      [['gränserna.']]
+    ], 0.4);
+    /* Markeringen ritas som tre tätt liggande blå drag CENTRERADE på
+     * tallinjen, så att det blå bandet täcker grafitlinjen — ett enda
+     * tunt streck ovanpå den syns knappt. */
+    markera(xAt(-3) + 9, xAt(3) - 9, ty1);
+    T.stepEnd();
+
+    y = ty1 + 3.0 * F;
+    xe = T.str('Svar: -3<x<3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) x²>9 ---- */
+    tanke(y, [
+      [['Samma gräns, men nu vänd']],
+      [['fråga: vilka x gör']],
+      [['x i kvadrat STÖRRE än 9?']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) x^2>9', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('Gränsen: x=±3', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Testa x=4: 16>9, stämmer.']],
+      [['Testa x=-4: 16>9, stämmer']],
+      [['också. Testa x=0: 0>9,']],
+      [['stämmer inte. Alltså']],
+      [['talen UTANFÖR gränserna.']]
+    ]);
+    var ty2 = y + 2.9 * F;
+    tallinje(ty2);
+    oppenRing(-3, ty2);
+    oppenRing(3, ty2);
+    T.stepEnd();
+
+    /* strålarna utåt, med pilspets i vardera änden */
+    /* strålarna slutar VID ytterhacken, inte ute vid tallinjens egna
+     * pilspetsar — annars hamnar två pilspetsar ovanpå varandra */
+    var xvA = xAt(-3) - 9, xvB = xAt(vMin) + 2;
+    markera(xvA, xvB, ty2);
+    T.line([xvB + 11, ty2 - 6], [xvB, ty2], BLUE);
+    T.line([xvB + 11, ty2 + 6], [xvB, ty2], BLUE);
+    T.pause(260);
+    var xhA = xAt(3) + 9, xhB = xAt(vMax) - 2;
+    markera(xhA, xhB, ty2);
+    T.line([xhB - 11, ty2 - 6], [xhB, ty2], BLUE);
+    T.line([xhB - 11, ty2 + 6], [xhB, ty2], BLUE);
+    T.stepEnd();
+
+    y = ty2 + 3.0 * F;
+    xe = T.str('Svar: x<-3 och x>3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hastighetsformeln (ma1c-2.12 ex 1) ----------
+   * v=s/t. Först löses t ut med ekvivalenspilar på SAMMA rad (se REGEL:
+   * OMSKRIVNING MED EKVIVALENSPIL), sedan skrivs mätvärdena i en
+   * klammer — där sträckan görs om från mil till km, eftersom
+   * hastigheten är given i km/h — och sist sätts värdena in. */
+  function layoutHastighetsformel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), s = T.s;
+
+    tanke(20, [
+      [['Formeln ger hastigheten,']],
+      [['men jag söker tiden. Då']],
+      [['löser jag ut t först.']]
+    ], 0);
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    y = 182;
+    T.str('Hastighetsformeln', padL, y - 2.2 * F, null, 0.62);
+    xx = T.str('v=', padL, y);
+    xx = T.fracH('s', 't', xx, y);
+    xx = T.str('⟺', xx, y);
+    xx = T.str('s=v·t', xx, y);
+    xx = T.str('⟺', xx, y);
+    xx = T.str('t=', xx, y);
+    T.fracH('s', 'v', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hastigheten är given i']],
+      [['km/h. Då MÅSTE sträckan']],
+      [['vara i km och tiden i']],
+      [['timmar. Annars blir']],
+      [['svaret fel.']]
+    ], 1.05);
+    y += 3.4 * F;
+    var kl = valueBracket(acts, [
+      's=35 mil=350 km',
+      'v=70 km/h'
+    ], padL + 20, y, s, F);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.8 * F;
+    xx = T.str('t=', padL, y);
+    xx = T.fracH('s', 'v', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('350', '70', xx, y);
+    T.str('=5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['5 timmar för 35 mil i 70']],
+      [['km/h. Rimligt, det är']],
+      [['ungefär en halv dag i']],
+      [['bilen.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xe = T.str('Svar: 5 timmar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hyrbilen (ma1c-2.12 ex 2) -------------------
+   * H=21 000+2,5m. I a) är sträckan känd och kostnaden söks (ren
+   * insättning, med insättningsgest), i b) är det tvärtom och formeln
+   * blir en ekvation. Enheten är fällan: m är sträckan i KILOMETER. */
+  function layoutHyrbil(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* formeln står överst och används av båda deluppgifterna */
+    /* Första raden läggs under y=150: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
+     * bred nog att nå in i den zonen. */
+    var yF = 196;
+    var xf0 = T.str('Formeln: ', padL, yF);
+    var xf1 = T.str('H=21 000+2,5m', xf0, yF);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(yF, [
+      [['Enheterna är viktiga! m']],
+      [['står för sträckan i']],
+      [['KILOMETER, och 2 000 mil']],
+      [['är 20 000 km.']]
+    ]);
+    y = yF + 2.4 * F;
+    var xa0 = T.str('a) m=', padL, y);
+    var xa1 = T.str('20 000', xa0, y);
+    T.stepEnd();
+
+    var rings = substRings(acts, [[xa0, xa1, y, F], [xf0, xf1, yF, F]]);
+    y += 2.3 * F;
+    T.str('H=21 000+2,5·20 000', padL + 30, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Multiplikationen först:']],
+      [['2,5·20 000=50 000.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=21 000+50 000=71 000', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: 71 000 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Nu är det tvärtom:']],
+      [['kostnaden är känd och']],
+      [['sträckan söks. Då blir']],
+      [['formeln en ekvation.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) 30 000=21 000+2,5m', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 21 000 från']],
+      [['båda led.']]
+    ]);
+    y += 2.4 * F;
+    T.str('9 000=2,5m', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 2,5 i båda']],
+      [['led.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.fracH('9 000', '2,5', padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('2,5m', '2,5', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('m=3 600', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['m var sträckan i km, så']],
+      [['3 600 km. Frågan gällde']],
+      [['mil: 3 600 km är 360 mil.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: 360 mil', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sluten formel (ma1c-2.13 ex 1) --------------
+   * Talföljden 3, 7, 11, 15, 19, … Metoden: se hur mycket talen ökar
+   * (differensen ritas ut som blå bågar med +4), gissa termen 4n, testa
+   * n=1 och justera konstanten tills det stämmer. */
+  function layoutSlutenformel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), arc = mkArc(T);
+
+    /* ---- talföljden med differenser ----
+     * Raden läggs på y=118: differensbågarna och deras +4-etiketter ritas
+     * ~60 px ovanför raden och skulle annars klippas mot arkets överkant. */
+    y = 178;
+    var tal = ['3', '7', '11', '15', '19'], mitt = [];
+    var xt = padL + 20;
+    tal.forEach(function (t, i) {
+      var a = xt;
+      xt = T.str(t, xt, y);
+      mitt.push((a + xt) / 2);
+      /* luckan hålls liten: differens-etiketterna ovanför raden ska
+       * hamna VÄNSTER om inställningsrutans mobilzon (x > 420) */
+      if (i < tal.length - 1) xt = T.str(',', xt, y) + 20;
+    });
+    T.str(', ...', xt, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hur mycket ökar talen?']],
+      [['Jag räknar differensen']],
+      [['mellan grannarna.']]
+    ]);
+    var yArc = y - 0.95 * F;
+    for (var i = 0; i < mitt.length - 1; i++) {
+      arc(mitt[i], mitt[i + 1], yArc, 30, BLUE);
+      var w4 = T.adv('+4', 0.55);
+      T.str('+4', (mitt[i] + mitt[i + 1]) / 2 - w4 / 2, yArc - 34, BLUE, 0.55);
+      T.pause(200);
+    }
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ökningen är 4 varje steg.']],
+      [['Då måste termen 4n finnas']],
+      [['med i formeln.']]
+    ]);
+    y += 2.6 * F;
+    T.str('a_n=4n', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag testar n=1. Det ska']],
+      [['bli 3, för det är']],
+      [['talföljdens första tal.']]
+    ]);
+    y += 2.3 * F;
+    T.str('a_1=4·1=4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det blev 4, alltså 1 för']],
+      [['mycket. Då subtraherar']],
+      [['jag 1 i formeln.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('a_n=4n', padL, y);
+    T.str('-1', xx, y, BLUE);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu testar jag igen, och']],
+      [['med flera tal. En formel']],
+      [['ska ju stämma för hela']],
+      [['talföljden.']]
+    ]);
+    y += 2.3 * F;
+    T.str('a_1=4·1-1=3 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('a_2=4·2-1=7 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('a_3=4·3-1=11 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: a_n=4n-1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) det 100:e talet ---- */
+    tanke(y, [
+      [['Med en sluten formel']],
+      [['behöver jag inte räkna mig']],
+      [['fram tal för tal. Jag']],
+      [['sätter bara in n=100.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) a_1_0_0=4·100-1=399', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: 399', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: prickmönstret (ma1c-2.13 ex 2) --------------
+   * Tre figurer av prickar: 4, 7 och 10 prickar. Prickarna ritas i
+   * grafit (scenen) och antalen skrivs med blåpennan (VÄRDEN), sedan
+   * samma metod som i ex 1: hitta ökningen, gissa 3n, testa och
+   * justera. */
+  function layoutPrickmonster(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), arc = mkArc(T);
+
+    /* ---- figurerna ---- */
+    tanke(15, [
+      [['Först räknar jag']],
+      [['prickarna i varje figur.']]
+    ], 0);
+    /* Figurerna hålls VÄNSTER om x=420: arkets övre högra hörn är
+     * reserverat för inställningsrutan, som på mobil täcker allt med
+     * x > paperW−310 och y < 150 (se REGEL i filhuvudet). */
+    var d = 15, gy = 132;                    /* pricksteg, radens y */
+    var start = [padL + 16, padL + 150, padL + 296];
+    var antalRad = [3, 5, 7], antalUpp = [1, 2, 3];
+    var centrum = [];
+    for (var f = 0; f < 3; f++) {
+      var bredd = (antalRad[f] - 1) * d;
+      var x0 = start[f];
+      for (var k = 0; k < antalRad[f]; k++) {
+        acts.push({ kind: 'stroke', pts: dotPts(x0 + k * d, gy) });
+      }
+      var cx = x0 + bredd / 2;
+      for (var k2 = 1; k2 <= antalUpp[f]; k2++) {
+        acts.push({ kind: 'stroke', pts: dotPts(cx, gy - k2 * d) });
+      }
+      var lbl = 'Figur ' + (f + 1);
+      var wl = T.adv(lbl, 0.55);
+      T.str(lbl, cx - wl / 2, gy + 1.05 * F, null, 0.55);
+      centrum.push(cx);
+      T.pause(200);
+    }
+    T.stepEnd();
+
+    /* ---- antalen ----
+     * 4,2·F ned: +3-bågarnas etiketter ritas ~62 px ovanför raden och
+     * hamnar annars mitt i figurernas "Figur n"-texter. */
+    y = gy + 4.2 * F;
+    var mitt = [];
+    var xt = padL + 20;
+    ['a_1=4', 'a_2=7', 'a_3=10'].forEach(function (t, i) {
+      var a = xt;
+      xt = T.str(t, xt, y);
+      mitt.push((a + xt) / 2);
+      if (i < 2) xt = T.str(',', xt, y) + 40;
+    });
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hur mycket ökar antalet']],
+      [['från figur till figur?']]
+    ]);
+    var yArc = y - 0.95 * F;
+    for (var i2 = 0; i2 < 2; i2++) {
+      arc(mitt[i2], mitt[i2 + 1], yArc, 30, BLUE);
+      var w3 = T.adv('+3', 0.55);
+      T.str('+3', (mitt[i2] + mitt[i2 + 1]) / 2 - w3 / 2, yArc - 34, BLUE, 0.55);
+      T.pause(200);
+    }
+    T.stepEnd();
+
+    tanke(y, [
+      [['Antalet ökar med 3 varje']],
+      [['gång. Då ska termen 3n']],
+      [['finnas med i formeln.']]
+    ]);
+    y += 2.6 * F;
+    T.str('a_n=3n', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Testar n=1. Det ska bli']],
+      [['4, för figur 1 har fyra']],
+      [['prickar.']]
+    ]);
+    y += 2.3 * F;
+    T.str('a_1=3·1=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det blev 3, alltså 1 för']],
+      [['lite. Då adderar jag 1 i']],
+      [['formeln.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('a_n=3n', padL, y);
+    T.str('+1', xx, y, BLUE);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Testar med alla tre']],
+      [['figurerna.']]
+    ]);
+    y += 2.3 * F;
+    T.str('a_1=3·1+1=4 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('a_2=3·2+1=7 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('a_3=3·3+1=10 Stämmer!', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: a_n=3n+1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) figur 1 000 ---- */
+    tanke(y, [
+      [['Med formeln slipper jag']],
+      [['rita tusen figurer. Jag']],
+      [['sätter in n=1 000.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) a_1_0_0_0=3·1 000+1=3 001', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: 3 001', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
@@ -10348,6 +13565,35 @@
                    utanprefix: layoutUtanprefix,
                    harddisk: layoutHarddisk,
                    prioritering: layoutPrioritering,
+                   /* ma1c kapitel 2 — Algebra och ekvationer */
+                   tecknaalder: layoutTecknaalder,
+                   tolkauttryck: layoutTolkauttryck,
+                   uttryckvarde: layoutUttryckvarde,
+                   likatermer: layoutLikatermer,
+                   minusparentes: layoutMinusparentes,
+                   omkrets: layoutOmkrets,
+                   multiplicerain: layoutMultiplicerain,
+                   utveckla: layoutUtveckla,
+                   parentesekv: layoutParentesekv,
+                   faktoriseraut: layoutFaktoriseraut,
+                   ekvgrund: layoutEkvgrund,
+                   variabelbada: layoutVariabelbada,
+                   enbrakterm: layoutEnbrakterm,
+                   korsvis: layoutKorsvis,
+                   trebrak: layoutTrebrak,
+                   variabelnamnare: layoutVariabelnamnare,
+                   ejtillaten: layoutEjtillaten,
+                   delabelopp: layoutDelabelopp,
+                   enklagrad: layoutEnklagrad,
+                   kvadratkub: layoutKvadratkub,
+                   potensekvlos: layoutPotensekvlos,
+                   antallosningar: layoutAntallosningar,
+                   losolikhet: layoutLosolikhet,
+                   andragradsolikhet: layoutAndragradsolikhet,
+                   hastighetsformel: layoutHastighetsformel,
+                   hyrbil: layoutHyrbil,
+                   slutenformel: layoutSlutenformel,
+                   prickmonster: layoutPrickmonster,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,

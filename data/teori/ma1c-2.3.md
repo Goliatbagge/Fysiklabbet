@@ -44,6 +44,11 @@ Regeln verkar stämma.
 ::: exempel "Exempel 1 — Multiplicera in i parentesen"
 **Förenkla<br>a) $2(2x - 1)$&emsp;&emsp;b) $8(3x + 4) - 2(5x - 7)$**
 
+::: handskrift
+typ: multiplicerain
+:::
+
+::: textlosning
 **a)** Faktorn 2 multipliceras med varje term i parentesen:
 
 $$
@@ -67,6 +72,7 @@ $$
 
 **Svar:** $14x + 46$
 :::
+:::
 
 När två parentespar multipliceras med varandra ska den **första termen** i
 den **första parentesen** multipliceras med **alla termer i den andra
@@ -84,6 +90,11 @@ multiplicerat in alla termer i den första parentesen in i den andra.
 ::: exempel "Exempel 2 — Utveckla och förenkla"
 **Utveckla och förenkla<br>a) $(x + 7)(x + 3)$&emsp;&emsp;b) $(3x - 5)(8x + 9)$&emsp;&emsp;c) $10 - (x - 2)(x - 3)$**
 
+::: handskrift
+typ: utveckla
+:::
+
+::: textlosning
 **a)** Varje term i den första parentesen multipliceras med varje term i
 den andra:
 
@@ -118,10 +129,16 @@ $$
 **Svar:** $4 - x^2 + 5x$, alternativt $-x^2 + 5x + 4$ (ofta vill man ha
 termerna med störst exponent först, men inget måste).
 :::
+:::
 
 ::: exempel "Exempel 3 — Ekvation med parentesmultiplikation"
 **Lös ekvationen $(1 + 4x)(3x - 2) = x(12x - 6)$.**
 
+::: handskrift
+typ: parentesekv
+:::
+
+::: textlosning
 Utvecklar parenteserna:
 
 $$
@@ -147,4 +164,5 @@ x = 2
 $$
 
 **Svar:** $x = 2$
+:::
 :::

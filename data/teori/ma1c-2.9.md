@@ -41,6 +41,11 @@ $$
 ::: exempel "Exempel 1 — Enkla andra- och tredjegradsekvationer"
 **Lös<br>a) $x^2 = 64$&emsp;&emsp;b) $x^2 = 10$&emsp;&emsp;c) $x^2 = -9$&emsp;&emsp;d) $x^3 = 343$&emsp;&emsp;e) $x^3 = -27$&emsp;&emsp;f) $3x^2 - 2{,}31 = 17{,}97$**
 
+::: handskrift
+typ: enklagrad
+:::
+
+::: textlosning
 **a)** Glöm inte den negativa lösningen:
 
 $$
@@ -94,10 +99,16 @@ $$
 
 **Svar:** $x = \pm 2{,}6$
 :::
+:::
 
 ::: exempel "Exempel 2 — Kvadraten och kuben"
 **Bestäm sidan hos en<br>a) kvadrat med arean $4\,096\ \mathrm{cm^2}$&emsp;&emsp;b) kub med volymen $4\,096\ \mathrm{cm^3}$**
 
+::: handskrift
+typ: kvadratkub
+:::
+
+::: textlosning
 **a)** Kvadratens area $A$ ges av sidan · sidan. Vi kallar sidan $x$.
 Detta ger $A = x \cdot x = x^2$. Se figur:
 
@@ -138,4 +149,5 @@ x = \sqrt[3]{4\,096} = 16\ \mathrm{cm}
 $$
 
 **Svar:** 16 cm
+:::
 :::

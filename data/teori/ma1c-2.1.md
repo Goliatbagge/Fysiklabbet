@@ -49,6 +49,11 @@ Kostnaden blir alltså 2 600 kr, där 2 600 kallas uttryckets **värde**.
 **Linn är $x$ år. Albin är 3 gånger så gammal som Linn var för 4 år sedan.
 Ställ upp ett uttryck för<br>a) Linns ålder för 12 år sedan&emsp;&emsp;b) Albins ålder.**
 
+::: handskrift
+typ: tecknaalder
+:::
+
+::: textlosning
 **a)** Om Linn är $x$ år nu, måste vi subtrahera 12 för att få hennes ålder
 för 12 år sedan.
 
@@ -65,10 +70,16 @@ $$
 
 **Svar:** $3(x - 4)$ eller $3x - 12$
 :::
+:::
 
 ::: exempel "Exempel 2 — Tolka uttryck"
 **Äpplen kostar $a$ kr/st och päron $b$ kr/st. Tolka<br>a) $3a + 4b$&emsp;&emsp;b) $10a - 7b$**
 
+::: handskrift
+typ: tolkauttryck
+:::
+
+::: textlosning
 **a)** Tre äpplen kostar $3a$ kr och fyra päron kostar $4b$ kr — summan är
 den totala kostnaden.
 
@@ -78,10 +89,16 @@ den totala kostnaden.
 
 **Svar:** Prisskillnaden mellan 10 äpplen och 7 päron.
 :::
+:::
 
 ::: exempel "Exempel 3 — Beräkna uttryckets värde"
 **Beräkna värdet för $20 - 3x$ om<br>a) $x = 4$&emsp;&emsp;b) $x = -5$**
 
+::: handskrift
+typ: uttryckvarde
+:::
+
+::: textlosning
 **a)** Ersätt $x$ med 4 i uttrycket och beräkna:
 
 $$
@@ -98,4 +115,5 @@ $$
 $$
 
 **Svar:** 35
+:::
 :::

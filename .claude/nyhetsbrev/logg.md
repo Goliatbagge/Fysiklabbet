@@ -13,7 +13,7 @@ Format:
 
 ## 2026-08-09 — "Solytan har fransar — och en magnet som svävar"
 - Status: UTKAST (skrivet lördag 2026-08-08, för utskick söndag 2026-08-09 kl 17.00)
-- Nyheter: 2026-08-07-virvlar-pa-solens-yta (hjälte), 2026-08-08-svavande-magnet
+- Nyheter: 2026-08-08-virvlar-pa-solens-yta (hjälte), 2026-08-07-svavande-magnet
   + 2026-08-05-rubin-mork-materia (miniatyrer); bromsade atomkärnor, fusion i
   metall, kvantlabb i fritt fall som textlänkar
 - Nytt på sajten: två magnetism-simuleringar (stavmagnetens fält + attraktion och

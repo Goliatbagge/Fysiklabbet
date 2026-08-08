@@ -5,11 +5,11 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
-| 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
+| 2026-08-07 | `2026-08-08-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
 
 ---
 
-## 2026-08-07 — `2026-08-07-virvlar-pa-solens-yta`
+## 2026-08-07 — `2026-08-08-virvlar-pa-solens-yta`
 
 **Granskningsläge:** utfört som självständigt granskningspass enligt fallbacken i
 nyhetsagentens steg 11 (sessionen fick inte starta subagenter). Hela protokollet i
@@ -86,7 +86,7 @@ MURaM-simuleringarna faktiskt visar stämmas av mot metoddelen.
 
 ---
 
-## 2026-08-08 | 2026-08-08-svavande-magnet | GODKÄND efter rättning
+## 2026-08-08 | 2026-08-07-svavande-magnet | GODKÄND efter rättning
 
 **Granskningsform.** Sessionen fick inte starta subagenter, så granskningen är
 genomförd som ett separat, självkritiskt pass enligt hela protokollet i

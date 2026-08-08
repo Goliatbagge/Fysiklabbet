@@ -134,14 +134,30 @@
         // de spiller över. Om så är fallet bryter vi vid en top-level = i
         // taget och renderar om — repeat tills den ryms. Skala som fallback.
         function findTopLevelEquals(latex) {
+            // "=" inuti \left…\right-par och \begin{…}…\end{…}-miljöer
+            // (värdeklamrarnas array) får inte bli brytpunkter — ett
+            // insprutat "&="/"\\" där slår sönder miljön. Sådana formler
+            // faller i stället igenom till scaleDownDisplay.
             const positions = [];
-            let depth = 0;
+            let depth = 0, fence = 0, env = 0;
             for (let i = 0; i < latex.length; i++) {
                 const ch = latex[i];
-                if (ch === '\\') { i++; continue; }
+                if (ch === '\\') {
+                    const m = /^[a-zA-Z]+/.exec(latex.slice(i + 1));
+                    if (m) {
+                        if (m[0] === 'left') fence++;
+                        else if (m[0] === 'right') fence = Math.max(0, fence - 1);
+                        else if (m[0] === 'begin') env++;
+                        else if (m[0] === 'end') env = Math.max(0, env - 1);
+                        i += m[0].length;
+                    } else {
+                        i++;
+                    }
+                    continue;
+                }
                 if (ch === '{') depth++;
                 else if (ch === '}') depth--;
-                else if (ch === '=' && depth === 0) positions.push(i);
+                else if (ch === '=' && depth === 0 && fence === 0 && env === 0) positions.push(i);
             }
             return positions;
         }
@@ -185,7 +201,9 @@
             const natural = Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth);
             if (avail === 0 || natural <= avail + 0.5) return;
             const scale = avail / natural;
-            inner.style.transformOrigin = 'center top';
+            // 'left top': formlerna är vänsterställda (padding-left på .katex),
+            // en center-origin lämnar högerkanten utanför rutan efter skalning.
+            inner.style.transformOrigin = 'left top';
             inner.style.transform = 'scale(' + scale + ')';
             disp.style.height = Math.ceil(inner.offsetHeight * scale) + 'px';
         }

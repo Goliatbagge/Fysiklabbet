@@ -1678,8 +1678,29 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
 - **I `fysik-repetition.html` gäller `?id=` bara första inläsningen.**
   `read()` körs även vid `hashchange`; faller den tillbaka på `?id=` när
   användaren går tillbaka till listan dras hen in i paketet igen.
-- **Intern länkning fortsätter använda hash** (`data/sok.js` bygger
-  `katalog.html#…`). Byt inte — `?id=` är till för sitemapen.
+- **Katalogens egen navigation länkar med `?id=`** (kapitelflikarna och
+  avsnittsraderna i `katalog.html`, samt Ämne-menyns kurslänkar). Det var
+  tidigare `<button>`-element utan adress, och det visade sig vara orsaken
+  till att sajten inte indexerades: Google kände till avsnittens adresser
+  enbart genom `sitemap.xml`, och en adress utan en enda inlänk hamnar
+  sist i genomsökningskön. I Search Console låg 393 av 408 icke-indexerade
+  sidor som **"Upptäckt – inte indexerad"** (2026-08-08) — alltså aldrig
+  ens hämtade — medan bara 3 var dubbletter. Ta ALDRIG bort `href` från
+  de listorna igen; en robot kan inte klicka på en knapp.
+  - Elementen fångar vanligt vänsterklick (`preventDefault` + `setState`)
+    så vyn byts utan omladdning precis som förr. Modifierarklick släpps
+    igenom, så "öppna i ny flik" fungerar.
+  - **De måste stylas som knapparna de ersatte.** Reglerna ligger överst i
+    `styles-laborans.css`: `a.lab-tab-3`/`a.lab-section-item` får
+    `font: inherit` med **exakt** samma vikt som `body.laborans button`
+    (en klass + ett element), och undantas från `body.laborans a { color:
+    inherit }`. Skrivs font-regeln tyngre (t.ex. `body.laborans
+    .lab-tab-3`) nollställs `font-weight: 600` på den aktiva fliken, hela
+    flikraden byter radbrytning och sidan hoppar 40 px. Läs kommentaren
+    där innan du rör reglerna.
+- **`data/sok.js` bygger fortfarande `katalog.html#…`** för sökrutans
+  träffar. Det är oförändrat och behöver inte ändras — sökrutan är JS-only
+  och ger ändå inga länkar en robot kan följa.
 - **Adresserna räknas upp i `data/build-nyheter-og.js`** av `loadAvsnitt()`
   (ur `KATALOG_FLAT`), `loadProv()` (ur `data/np/index.js`) och
   `loadRepetition()` (filnamnen i `data/repetition/`). Kursnamn → kurskod

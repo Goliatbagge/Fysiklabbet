@@ -50,11 +50,34 @@ body.laborans *::after {
     box-sizing: border-box;
 }
 
-body.laborans button {
+/* Kapitelflikarna (.lab-tab-3) och avsnittsraderna (.lab-section-item) i
+   katalogen är <a href="katalog.html?id=…"> sedan 2026-08-08 — riktiga
+   länkar, så att sökrobotar (och "öppna i ny flik") når avsnitten. De var
+   <button> förut och måste se ut EXAKT likadant, vilket kräver två saker
+   av reglerna här:
+
+   1. De ska ärva typsnittet precis som knappar gör. Utan det slår
+      .lab-tab-3 { font-size: 14px } plötsligt igenom — den regeln har
+      aldrig gällt för knapparna, eftersom `body.laborans button` väger
+      tyngre — och flikraden krymper från 16 px till 14 px och byter
+      radbrytning.
+   2. De ska INTE fångas av color: inherit nedan. Den väger tyngre än
+      .lab-tab-3/.lab-section-item och skulle annars slå ut både grundfärg,
+      hover och .active. Därför undantas de i selektorn.
+
+   Selektorerna skrivs `a.lab-tab-3` och INTE `body.laborans .lab-tab-3`.
+   Vikten måste ligga på exakt samma nivå som knappregeln hade (en klass +
+   ett element): tyngre än .lab-tab-3, men lättare än .lab-tab-3.active.
+   Skrivs den tyngre nollställer `font: inherit` även font-weight: 600 på
+   den aktiva fliken — den blir 10 px smalare, hela flikraden får plats på
+   en rad i stället för två, och allt under hoppar upp 40 px. */
+body.laborans button,
+a.lab-tab-3,
+a.lab-section-item {
     font: inherit;
 }
 
-body.laborans a {
+body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
     color: inherit;
     text-decoration: none;
 }
@@ -1095,8 +1118,12 @@ body.laborans a {
     border-bottom: 1px solid var(--lab-line);
 }
 
+/* Kapitelflikarna är <a href="katalog.html?id=…"> — riktiga länkar, så att
+   sökrobotar (och "öppna i ny flik") når avsnitten. De ska se ut exakt som
+   knapparna de ersatte: ingen understrykning, ingen länkfärg. */
 .lab-tab-3 {
     background: transparent;
+    text-decoration: none;
     color: var(--lab-ink-soft);
     border: none;
     padding: 4px 14px;
@@ -1304,11 +1331,14 @@ body.laborans a {
     }
 }
 
+/* Avsnittsraderna är <a href="katalog.html?id=…"> av samma skäl som
+   .lab-tab-3 ovan — och ska likaså se ut precis som knapparna gjorde. */
 .lab-section-item {
     width: 100%;
     min-width: 0;
     text-align: left;
     background: transparent;
+    text-decoration: none;
     color: var(--lab-ink);
     border: none;
     border-top: 1px solid var(--lab-line);

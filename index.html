@@ -156,6 +156,17 @@
             );
         }
 
+        function UnderUtveckling() {
+            return (
+                <div className="lab-utveckling">
+                    <div className="lab-utveckling-inner">
+                        <span className="lab-utveckling-etikett">Under utveckling</span>
+                        <span>Sajten byggs ut och förbättras varje vecka — innehåll kan tillkomma, ändras eller vara ofärdigt. Hittar du något som är fel eller saknas, <a href="kontakt.html">hör gärna av dig</a>.</span>
+                    </div>
+                </div>
+            );
+        }
+
         function Header() {
             return (
                 <div className="lab-header">
@@ -476,6 +487,7 @@
             return (
                 <div className="lab-page">
                     <Topbar />
+                    <UnderUtveckling />
                     <Header />
                     <WelcomeHero />
                     <NewsTeaser />

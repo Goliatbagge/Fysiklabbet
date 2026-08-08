@@ -1914,30 +1914,47 @@
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
             const sectionContentRef = useRef(null);
-            const scrollPendingRef = useRef(false);
+            const scrollPendingRef = useRef(null);   // null | 'auto' | 'smooth'
+
+            const scrollTillAvsnitt = (behavior) => {
+                const el = sectionContentRef.current;
+                if (!el) { window.scrollTo({ top: 0 }); return; }
+                const top = el.getBoundingClientRect().top + window.scrollY - 16;
+                window.scrollTo({ top, behavior });
+            };
+
             const goPrev = () => {
                 if (sectionIdx > 0) {
-                    scrollPendingRef.current = true;
+                    scrollPendingRef.current = 'auto';
                     setState({ ...state, section: sections[sectionIdx - 1].num, view: 'teori' });
                 }
             };
             const goNext = () => {
                 if (sectionIdx >= 0 && sectionIdx < sections.length - 1) {
-                    scrollPendingRef.current = true;
+                    scrollPendingRef.current = 'auto';
                     setState({ ...state, section: sections[sectionIdx + 1].num, view: 'teori' });
                 }
             };
 
+            // Klick i avsnittslistan. På smal skärm (≤820 px) ligger listan
+            // OVANFÖR genomgången i stället för bredvid den, så utan detta
+            // står vyn stilla och det ser ut som att ingenting hände — rulla
+            // därför ned till avsnittets innehåll (kort + rubrik).
+            const pickSection = (num) => {
+                const mobil = window.matchMedia('(max-width: 820px)').matches;
+                if (mobil) {
+                    if (num === section) { scrollTillAvsnitt('smooth'); return; }
+                    scrollPendingRef.current = 'smooth';
+                }
+                setState({ ...state, section: num, view: 'teori' });
+            };
+
             useEffect(() => {
-                if (!scrollPendingRef.current) return;
-                scrollPendingRef.current = false;
+                const behavior = scrollPendingRef.current;
+                if (!behavior) return;
+                scrollPendingRef.current = null;
                 // Vänta ett frame så att den nya genomgången har renderats.
-                requestAnimationFrame(() => {
-                    const el = sectionContentRef.current;
-                    if (!el) { window.scrollTo({ top: 0 }); return; }
-                    const top = el.getBoundingClientRect().top + window.scrollY - 16;
-                    window.scrollTo({ top, behavior: 'auto' });
-                });
+                requestAnimationFrame(() => scrollTillAvsnitt(behavior));
             }, [section]);
 
             return (
@@ -1977,7 +1994,7 @@
                                         {sections.map(s => (
                                             <button key={s.num}
                                                 className={'lab-section-item' + (section === s.num ? ' active' : '')}
-                                                onClick={() => setState({ ...state, section: s.num, view: 'teori' })}>
+                                                onClick={() => pickSection(s.num)}>
                                                 <span className="lab-section-item-num">{s.num}</span>
                                                 <span className="lab-section-item-title">{emTitle(s.title)}</span>
                                                 <span className="lab-section-item-arrow">

@@ -4,4 +4,23 @@ Disallow: /.shot-0264ac28/
 Disallow: /.claude/
 Disallow: /design/
 
+# Mappar med utvecklingskällkod (App.tsx, index.tsx, Vite-skal). De ligger
+# kvar för att simuleringarna byggdes ur dem, men index.html i dem laddar
+# .tsx-filer som ingen webbläsare kan köra utan bundler — de blir alltså
+# tomma sidor om Google indexerar dem.
+#
+# OBS: standalone.html i fysik1-tryck-pa/ och fysik2-magnetfalt/ används
+# på riktigt — de bäddas in i en iframe av fysik1-tryck-pa-app.html och
+# fysik2-magnetfalt-app.html. De måste därför förbli genomsökbara, annars
+# kan Google inte rendera de två simuleringssidorna.
+Disallow: /fysik1-ellara/
+Disallow: /fysik1-newtons-tredje/
+Disallow: /fysik2-brytning/
+Disallow: /fysik2-magnetisk-kraft/
+Disallow: /fysik2-rorelse/
+Disallow: /fysik1-tryck-pa/
+Allow: /fysik1-tryck-pa/standalone.html
+Disallow: /fysik2-magnetfalt/
+Allow: /fysik2-magnetfalt/standalone.html
+
 Sitemap: https://fysiklabbet.se/sitemap.xml

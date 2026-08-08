@@ -37,6 +37,7 @@
     <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="handskrift.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="minisim.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -2434,6 +2435,22 @@
                         document.head.appendChild(el);
                     }
                     el.setAttribute('content', beskrivning);
+                }
+
+                // Kanonisk adress = avsnittets ?id=-adress, samma som i
+                // sitemap.xml. Utan den ser Google 347 identiska HTML-skal
+                // och grupperar dem som dubbletter (se kanonisk.js).
+                // Vyerna (:ovningar, :exitticket, :visualisering) är flikar
+                // på SAMMA avsnitt och pekar därför på avsnittets adress —
+                // de står inte som egna rader i sitemapen.
+                if (window.sattKanonisk) {
+                    const kurskod = Object.keys(HASH_COURSES)
+                        .find(k => HASH_COURSES[k][1] === state.course);
+                    window.sattKanonisk(
+                        (avs && kurskod)
+                            ? `katalog.html?id=${kurskod}-${avs.num}`
+                            : 'katalog.html'
+                    );
                 }
             }, [state.subject, state.course, state.chapter, state.section, state.view]);
 

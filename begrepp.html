@@ -194,6 +194,7 @@
     <script>document.write('<scr' + 'ipt src="data/begrepp.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="begrepp-lank.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -533,6 +534,14 @@
                 document.title = b
                     ? `${b.term} — Begreppsordlistan — Fysiklabbet`
                     : 'Begreppsordlistan — Fysiklabbet';
+
+                // Kanonisk adress = uppslagets ?ord=-adress, samma som i
+                // sitemap.xml (se kanonisk.js).
+                if (window.sattKanonisk) {
+                    window.sattKanonisk(b
+                        ? `begrepp.html?ord=${b.id}`
+                        : 'begrepp.html');
+                }
             }, [b]);
 
             return (

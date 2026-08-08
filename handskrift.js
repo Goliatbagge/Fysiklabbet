@@ -41,10 +41,13 @@
  *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela,
  *                  steg, nasta, forra, boundaries }
  *
- *   STEGNING (användarönskemål 2026-07-30): pilknappar ligger stickande i
- *   arkets vänster-/högerkant vid halva skärmhöjden — man ska aldrig
+ *   STEGNING (användarönskemål 2026-07-30): pilknappar ligger i ARKETS
+ *   vänster-/högerkant, mitt i den synliga delen av arket — man ska aldrig
  *   behöva rulla ned till knappraden för att stega. Bottenraden har därför
  *   inga Nästa/Föregående-knappar (bara Skriv/Paus, Börja om, Tempo).
+ *   Placeringen räknas ut av placeNav() (JS), inte av position:sticky —
+ *   se kommentaren vid .hk-navrail i injectCSS(). Pilen får ALDRIG hamna
+ *   nedanför arket, där knappraden ligger (påpekat 2026-08-08).
  *   Piltangent höger/vänster stegar också fram/tillbaka — i den SENAST
  *   ANVÄNDA widgeten (hovring/klick avgör när flera ligger på samma sida).
  *
@@ -9873,18 +9876,26 @@
     st.textContent =
       '.hk-wrap{max-width:760px;margin:0 auto;position:relative;' +
         'font-family:Poppins,system-ui,sans-serif}' +
-      /* navpilar: stickande i vänster-/högerkanten vid halva skärmhöjden —
-       * railen spänner hela widgeten, knappen är sticky i den så att den
-       * följer med när man rullar (aldrig behöva rulla ned för att stega) */
-      /* railen börjar under helskärmsknappen/inställningsrutan (uppe till
-       * höger) — annars landar sticky-pilen ovanpå dem när widgeten ligger
-       * högt upp i vyn (påpekat 2026-07-30) */
-      '.hk-navrail{position:absolute;top:56px;bottom:0;pointer-events:none;z-index:6}' +
+      /* navpilar: i vänster-/högerkanten av ARKET, mitt i den synliga delen
+       * av det, så att man aldrig behöver rulla ned till knappraden för att
+       * stega. Railen spänner bara arket (top:0 = arkets överkant, arket är
+       * wrappens första barn) — INTE hela widgeten: sträckte den sig ned till
+       * wrappens botten hamnade pilen ovanpå "Börja om"/tempoknapparna
+       * (påpekat 2026-08-08).
+       * ⚠️ Knappen är INTE position:sticky. Sticky räknas mot närmaste
+       * skroll-container, och teorisidans .lab-block har overflow-x:hidden →
+       * den blir scrollport, så "50vh" mättes från blockets överkant och
+       * tryckte ned pilen till railens botten. Placeringen sköts i stället av
+       * placeNav() i JS, som räknar mot den faktiska vyn. */
+      /* railen måste ha EGEN bredd: knappen ligger absolut i den och kan
+       * därför inte längre bredda den (då hamnade högerpilen utanför arket) */
+      '.hk-navrail{position:absolute;top:0;bottom:0;width:26px;' +
+        'pointer-events:none;z-index:6}' +
       '.hk-navrail.hk-left{left:2px}' +
       '.hk-navrail.hk-right{right:2px}' +
       /* max 26 px bred + 2 px kant: skriften börjar vid padL=30 — knappen
        * får inte nå in över radernas första tecken/svarsramen */
-      '.hk-nav{position:sticky;top:calc(50vh - 26px);pointer-events:auto;' +
+      '.hk-nav{position:absolute;left:0;top:66px;pointer-events:auto;' +
         'display:flex;align-items:center;justify-content:center;' +
         'width:26px;height:52px;border-radius:10px;background:' + PAPER + ';' +
         'border:1.5px solid rgba(15,22,32,.55);color:' + LABINK + ';' +
@@ -9934,10 +9945,10 @@
       '.hk-wrap:fullscreen .hk-settings,.hk-wrap:-webkit-full-screen .hk-settings' +
         '{position:fixed;top:12px;right:56px}' +
       /* helskärm: railen fixeras mot skärmen (en absolut rail i den
-       * rullande wrappen når bara första skärmhöjden — sticky-knappen
-       * skulle fastna i railens botten efter en skärms rullning) */
+       * rullande wrappen når bara första skärmhöjden — knappen skulle
+       * fastna i railens botten efter en skärms rullning) */
       '.hk-wrap:fullscreen .hk-navrail,.hk-wrap:-webkit-full-screen .hk-navrail' +
-        '{position:fixed}' +
+        '{position:fixed;top:0;bottom:0}' +
       '.hk-wrap:fullscreen .hk-controls,.hk-wrap:-webkit-full-screen .hk-controls' +
         '{position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 18px;' +
         'justify-content:center;background:rgba(243,238,228,.93);' +
@@ -9977,6 +9988,25 @@
     e.preventDefault();
     if (e.key === 'ArrowRight') ACTIVE.fwd(); else ACTIVE.back();
   });
+
+  /* ---------------- navpilarnas placering ----------------
+   * Varje widget registrerar en placeringsfunktion; en gemensam,
+   * rAF-strypt lyssnare kör dem vid rullning/storleksändring (capture=true
+   * så att även rullning i en inre behållare fångas — händelsen bubblar
+   * inte). Funktionen returnerar false när dess widget lämnat DOM:en och
+   * plockas då bort ur listan. */
+  var NAVPLACERS = [], navRaf = 0;
+  function runNavPlacers() {
+    navRaf = 0;
+    NAVPLACERS = NAVPLACERS.filter(function (f) { return f(); });
+  }
+  function scheduleNav() {
+    if (!navRaf) navRaf = requestAnimationFrame(runNavPlacers);
+  }
+  document.addEventListener('scroll', scheduleNav,
+    { passive: true, capture: true });
+  window.addEventListener('resize', scheduleNav);
+  document.addEventListener('fullscreenchange', scheduleNav);
 
   /* ---------------- mount ---------------- */
   var UID = 0;   /* unika radiogruppnamn (flera widgets per sida) */
@@ -10506,6 +10536,32 @@
     }
     var navPrev = navBtn(-1), navNext = navBtn(1);
 
+    /* Pilarna placeras mitt i den SYNLIGA delen av arket, men aldrig
+     * ovanpå inställningsrutan/helskärmsknappen (överst) och aldrig nedanför
+     * arkets underkant — knappraden under arket ska alltid gå fri.
+     * Returnerar false när widgeten inte längre finns i DOM:en. */
+    var NAV_H = 52, NAV_TOP = 66;   /* knapphöjd resp. fri höjd i toppen */
+    function placeNav() {
+      if (!document.body.contains(wrap)) return false;
+      var vh = window.innerHeight, y;
+      if (document.fullscreenElement === wrap) {
+        y = vh / 2 - NAV_H / 2;          /* railen är fixed: 0 = vyns topp */
+      } else {
+        var r = paperDiv.getBoundingClientRect();
+        var top = Math.max(r.top, 0), bot = Math.min(r.bottom, vh);
+        /* mitten av den synliga arkdelen (arkets egen mitt när nästan
+         * inget syns, så pilen inte klistras mot en kant) */
+        var mid = (bot - top > 90) ? (top + bot) / 2 : r.top + r.height / 2;
+        y = mid - r.top - NAV_H / 2;
+        var hi = r.height - NAV_H - 6;
+        y = hi < NAV_TOP ? Math.max(0, (r.height - NAV_H) / 2)
+                         : Math.min(Math.max(y, NAV_TOP), hi);
+      }
+      navPrev.style.top = navNext.style.top = Math.round(y) + 'px';
+      return true;
+    }
+    NAVPLACERS.push(placeNav);
+
     /* piltangenterna styr senast använda widget (se ACTIVE ovan) */
     var keyApi = { fwd: stepFwd, back: stepBack };
     if (!ACTIVE) ACTIVE = keyApi;
@@ -10634,6 +10690,7 @@
         svg.style.width = '';
         svg.style.height = '';
       }
+      placeNav();
       followPen(true);
     }
     document.addEventListener('fullscreenchange', fitFS);
@@ -10677,6 +10734,9 @@
 
     render(0);
     updateBtns();
+    placeNav();
+    /* arkets höjd är känd först när svg:n fått sin layout */
+    requestAnimationFrame(placeNav);
     if (opts.instant) jumpToEnd();
     else if (opts.at != null) { tNow = opts.at; render(tNow); updateBtns(); }
     else if (opts.autostart) play();
@@ -10730,6 +10790,7 @@
     p.pennaBtn.classList.toggle('hk-active', !text);
     p.textBtn.classList.toggle('hk-active', text);
     if (text && p.ctl && p.ctl.pause) p.ctl.pause();
+    scheduleNav();   /* arket kan just ha visats igen → placera om pilarna */
   }
   function buildVyval(div, ctl) {
     var textEl = div.nextElementSibling;

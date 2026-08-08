@@ -83,79 +83,13 @@
  */
 const NYHETER_ALL = [
   {
-    id: "2026-08-08-svavande-magnet",
+    id: "2026-08-08-virvlar-pa-solens-yta",
     date: "2026-08-08",
-    title: "En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens",
-    deck: "De känsligaste magnetfältsmätarna kräver flytande helium eller ett magnetiskt avskärmat rum. Ett lag från Peking och Mainz har i stället låtit en pytteliten permanentmagnet hänga fritt i luften och läst av hur den vrider sig — med en laserstråle, vid rumstemperatur, mitt i jordens eget magnetfält.",
-    category: "Magnetism",
-    readingTime: "6 min",
-    image: "nyheter/bilder/2026-08-08-svavande-magnet.jpg",
-    imageAlt: "Schematisk ritning av försöksuppställningen: en laser skickar en stråle genom linser och speglar in i en vakuumkammare, där den studsar mot en liten sensormagnet som svävar mellan en lyftmagnet ovanför och en grafitplatta under, och vidare ut till en fyrdelad fotodiod. Ett inzoomat foto i nedre vänstra hörnet visar den verkliga magneten ovanför grafiten, med en skalstock på 500 mikrometer.",
-    imageCredit: "Figur: Wei Ji m.fl., arXiv:2504.21524 (CC BY 4.0)",
-    tags: ["magnetism", "magnetfält", "magnetometer", "diamagnetism", "sensor", "laser", "kraftmoment", "resonans", "supraledare", "mätteknik", "fysik 2"],
-    sources: [
-      { name: "Phys.org", url: "https://phys.org/news/2026-08-tiny-magnet-ultrafaint-magnetic-fields.html" },
-      { name: "Science (tidskriftsartikeln)", url: "https://www.science.org/doi/10.1126/science.adx1707" },
-      { name: "arXiv (fritt tillgänglig version av studien)", url: "https://arxiv.org/abs/2504.21524" }
-    ],
-    research: {
-      citation: "Wei Ji, Changhao Xu, Guofeng Qu och Dmitry Budker, ”Levitated sensor for magnetometry in ambient environment”, Science 393, 607–610 (6 augusti 2026)",
-      url: "https://doi.org/10.1126/science.adx1707"
-    },
-    larare: {
-      moment: [
-        { label: "Fysik nivå 2 · 3.1 Magnetism och magnetfält", href: "katalog.html#fy2-3.1" },
-        { label: "Fysik nivå 2 · 1.1 Kraftmoment", href: "katalog.html#fy2-1.1" },
-        { label: "Fysik nivå 2 · 2.6 Resonans", href: "katalog.html#fy2-2.6" }
-      ],
-      fragor: [
-        "Sensorn är som känsligast i ett smalt frekvensband kring 305 hertz och betydligt trubbigare utanför det. Varför kan en mätare bli bättre av att vara kräsen med vilka signaler den svarar på — och vilka mätuppgifter blir den då oanvändbar för?",
-        "Grafitplattan behövs för att magneten ska sväva stabilt, men det var samtidigt grafiten som gav det största bruset. Hur går man till väga när den komponent man inte kan ta bort är den som stör mest? Jämför med hur laget faktiskt löste det.",
-        "En kompassnål vrider sig mot norr, och samma kraftmoment är det som får sensormagneten att röra sig. Varför blir en fritt svävande magnet så mycket känsligare än en kompassnål på en spets — trots att fysiken bakom vridningen är densamma?"
-      ]
-    },
-    body: [
-      { type: "p", html: "I en vakuumkammare hänger en liten skiva av magnetiskt material fritt i luften. Den är 0,82&nbsp;millimeter i diameter och 0,38&nbsp;millimeter tjock — mindre än ett knappnålshuvud. Ingenting rör vid den: ingen tråd, ingen fjäder, ingen spets att balansera på. En laserstråle träffar skivans blanka ovansida och studsar vidare mot en detektor några meter bort." },
-      { type: "p", html: "Skivan är en magnetometer, alltså en mätare av magnetfält, och enligt en studie i tidskriften <em>Science</em> hör den till de känsligaste som byggts. Den reagerar på fältändringar ner mot 32&nbsp;femtotesla, $3{,}2 \\cdot 10^{-14}\\ \\mathrm{T}$. Jordens magnetfält är omkring $50\\ \\mathrm{\\mu T}$. Sensorn känner alltså av fält som är ungefär en och en halv miljard gånger svagare än det som får en kompassnål att peka norrut." },
-      { type: "p", html: "Fackuttrycket för känsligheten är $32\\ \\mathrm{fT}/\\sqrt{\\mathrm{Hz}}$ — ”32&nbsp;femtotesla per kvadratrot-hertz”. Det är ett mått på hur mycket brus mätaren själv bidrar med: mäter man i en sekund syns signaler ner till omkring 32&nbsp;femtotesla, och mäter man i hundra sekunder sjunker gränsen till en tiondel av det. Slumpmässigt brus medelvärdesbildas nämligen bort med tiden, medan en verklig signal ligger kvar." },
-
-      { type: "h2", text: "Varför en magnet inte kan sväva av sig själv" },
-      { type: "p", html: "Att få en magnet att stå stilla i luften är svårare än det låter. Samuel Earnshaw bevisade redan 1842 att ett system av laddningar inte kan hållas i stabil jämvikt av enbart sina egna krafter, och samma slutsats gäller magnetiska dipoler i ett fast magnetfält. Man kan visserligen balansera tyngdkraften med en magnet ovanför — men jämvikten blir som en kula på toppen av en kulle: minsta lilla knuff åt sidan, och magneten far i väg." },
-      { type: "p", html: "Undantaget heter diamagnetism. Allt material påverkas svagt av ett magnetfält, och i ett diamagnetiskt ämne induceras ett magnetiskt moment riktat <em>mot</em> fältet, så att ämnet stöts bort i stället för att dras in. Oftast är effekten försvinnande liten. Men i pyrolytisk grafit, där kolatomerna ligger ordnade i plana skikt, är den stark nog att synas med blotta ögat." },
-      { type: "p", html: "Forskarna utnyttjade båda sakerna på en gång. En kraftig lyftmagnet ovanför bär sensorskivans tyngd, och en platta av pyrolytisk grafit strax under stöter bort den så fort den försöker driva åt sidan. Tillsammans blir det en verklig, stabil jämvikt — magneten hänger fritt utan att röra vid någonting." },
-      { type: "image", src: "nyheter/bilder/2026-08-08-svavande-magnet-2.jpg", alt: "Två foton av samma försök. Uppifrån syns en mörk fyrkantig grafitflisa som svävar över fyra guldfärgade kubformade magneter på en stålplatta. Från sidan syns tydligt en luftspalt mellan flisan och magneterna.", caption: "Diamagnetisk frånstötning i klassrumsformat: en flisa pyrolytisk grafit svävar över fyra neodymmagneter, utan något som håller uppe den. Det är samma frånstötning som stabiliserar den svävande sensormagneten — fast där sitter grafiten under och magneten ovanpå.", credit: "Foto: Splarka / Wikimedia Commons (public domain)" },
-
-      { type: "h2", text: "Från svävning till mätning" },
-      { type: "p", html: "En magnet i ett magnetfält känner av ett kraftmoment. Pekar fältet inte åt samma håll som magnetens eget magnetiska moment $m$ vrids den mot fältet med momentet $M = m \\cdot B \\cdot \\sin \\theta$ — samma vridning som riktar in en kompassnål mot norr." },
-      { type: "p", html: "I den svävande skivan sitter magnetiseringen låst i kristallgittret. Elektronernas spinn kan inte vrida sig undan på egen hand utan att dra med sig hela skivan, och därför översätts varje liten ändring i det yttre fältet till en vridning av hela magneten. Vridningen läses av optiskt: laserstrålen studsar mot skivan och träffar en fyrdelad fotodiod först efter 3,4&nbsp;meter. Ju längre den optiska armen är, desto större blir utslaget på detektorn för en och samma lilla vinkeländring — samma trick som när man riktar en ficklampa mot en avlägsen vägg och ser strålen svepa långa sträckor vid minsta ryck i handen." },
-      { type: "p", html: "Att magneten svävar är avgörande för känsligheten. Utan upphängning finns nästan ingenting som dämpar vridningen, och skivan blir en utomordentligt god svängare: resonansfrekvensen ligger kring 305&nbsp;hertz och Q-värdet på ungefär 12&nbsp;000, vilket betyder att resonanstoppen bara är 0,025&nbsp;hertz bred. Ett magnetfält som pulserar i precis den takten bygger därför upp svängningen gång på gång, tills även ett obetydligt kraftmoment ger ett läsbart utslag. Resonansfrekvensen går dessutom att flytta mellan 260 och 318&nbsp;hertz genom att ändra ett statiskt fält, så att mätaren kan ställas in på den takt signalen har." },
-
-      { type: "h2", text: "Bruset som satt gränsen" },
-      { type: "p", html: "Grafitplattan som håller svävningen stabil visade sig samtidigt vara sensorns värsta fiende. Grafit leder ström, och i varje ledare rör sig elektronerna slumpmässigt av ren värmerörelse. Rörelserna bildar små virvelströmmar, och varje sådan ström har sitt eget magnetfält. Sorlet av dem — magnetiskt Johnsonbrus — låg på 110&nbsp;femtotesla per kvadratrot-hertz och dränkte allt som var svagare." },
-      { type: "p", html: "Lösningen var enkel i princip och knepig i praktiken: grafiten maldes till pulver och bakades ihop med epoxi till en ny platta. Kornen ligger då elektriskt isolerade från varandra, så att virvelströmmarna stängs in i varje enskilt korn i stället för att löpa runt i stora slingor. Bruset sjönk till 30&nbsp;femtotesla per kvadratrot-hertz, en minskning med drygt 70&nbsp;%, utan att den diamagnetiska frånstötningen gick förlorad. Kvar blev bara mindre bidrag: krockar med de luftmolekyler som ändå finns i kammaren, vid ett tryck på 0,025&nbsp;millibar — ungefär en fyrtiotusendel av lufttrycket vid marken — och vibrationer från omgivningen." },
-
-      { type: "h2", text: "Rumstemperatur är hela poängen" },
-      { type: "p", html: "Känslighet i den här klassen är inte ny i sig. SQUID-magnetometrar, som bygger på supraledande ringar, når omkring 20&nbsp;femtotesla per kvadratrot-hertz — men de måste kylas med flytande helium till några grader över absoluta nollpunkten. Atomära magnetometrar av så kallad SERF-typ är minst lika känsliga, men kräver i stället uppvärmd alkalimetallånga och fungerar bara i fält nära noll, alltså inne i ett magnetiskt avskärmat rum. Båda är dyra, skrymmande och svårflyttade." },
-      { type: "p", html: "Den svävande magneten behöver ingetdera. Den arbetar vid rumstemperatur och mitt i jordens magnetfält, vilket är den egentliga nyheten: samma prestanda, utan kryoteknik och utan avskärmat rum." },
-      { type: "quote", html: "”Vi uppnådde en känslighet på 32&nbsp;femtotesla per kvadratrot-hertz, vilket räcker för en lång rad tillämpningar inom biologi, kemi och grundläggande fysik. Den matchar prestandan hos supraledande kvantinterferensinstrument och atomära magnetometrar, men har fördelen att fungera vid rumstemperatur och i jordens magnetfält.”", cite: "Ur sammanfattningen av studien i Science" },
-      { type: "p", html: "Det finns en hake, och forskarna är öppna med den. Den höga känsligheten gäller i ett smalt band kring resonansen. Utanför det är sensorn betydligt trubbigare — omkring 200&nbsp;pikotesla per kvadratrot-hertz mellan 80 och 200&nbsp;hertz, och kring en nanotesla under 15&nbsp;hertz. Mätaren passar alltså bäst för signaler som svänger i en känd takt, och sämre för att följa ett långsamt driftande fält." },
-      { type: "p", html: "Vad ska man då ha den till? Både hjärtat och hjärnan alstrar magnetfält när nerv- och muskelceller leder ström. Hjärnans signaler ligger typiskt mellan 50 och 500&nbsp;femtotesla, hjärtats i storleksordningen hundra gånger starkare — och i dag krävs kylda sensorer i avskärmade rum för att fånga dem. Samma slags mätare används också i grundforskningen, där de får leta efter fält som enligt de kända naturlagarna inte borde finnas alls: svaga signaler från mörk materia, eller från hittills okända krafter mellan partiklars spinn." },
-
-      { type: "fact", title: "Visste du?", items: [
-        "Diamagnetism räcker för att få levande varelser att sväva. 1997 lät fysikern Andre Geim en groda flyta fritt i ett magnetfält på omkring 16&nbsp;tesla — vatten är svagt diamagnetiskt, och grodan består mest av vatten. Experimentet gav honom ett Ig Nobelpris år 2000, tio år innan han fick det riktiga Nobelpriset för upptäckten av grafen.",
-        "En tesla är ett mycket starkt magnetfält. En kylskåpsmagnet ger några millitesla vid ytan, en magnetkamera på sjukhus 1,5–3&nbsp;tesla, och jordens fält bara omkring 50&nbsp;mikrotesla. En femtotesla är en miljondels miljarddels tesla.",
-        "Kvadratroten i enheten är ingen krånglighet för sakens skull. Slumpmässigt brus växer med kvadratroten ur mätbandbredden, vilket är samma sak som att bruset minskar med kvadratroten ur mättiden: fyra gånger längre mätning ger dubbelt så bra känslighet."
-      ] }
-    ]
-  },
-  {
-    id: "2026-08-07-virvlar-pa-solens-yta",
-    date: "2026-08-07",
     title: "Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het",
     deck: "Världens största solteleskop har avbildat solytan med 19 kilometers upplösning. Överallt där magnetfältet möter den kokande gasen kröker sig kanterna till fjäderlika fransar med små virvlar i. Instabiliteten räknades ut på papper redan på 1800-talet, men har aldrig setts på en stjärna förrän nu.",
     category: "Astrofysik",
     readingTime: "7 min",
-    image: "nyheter/bilder/2026-08-07-virvlar-pa-solens-yta.jpg",
+    image: "nyheter/bilder/2026-08-08-virvlar-pa-solens-yta.jpg",
     imageAlt: "Närbild av solens yta i orange och gult. Ljusa, oregelbundet bubbelformade celler skiljs åt av mörkare fåror, och längs cellernas kanter sitter täta rader av fjäderlika fransar som böjer sig åt sidan som vindpinade grässtrån.",
     imageCredit: "Bild: NSF/NSO/AURA/MPS",
     tags: ["astrofysik", "astronomi", "solen", "plasma", "magnetfält", "kelvin-helmholtz", "turbulens", "solteleskop", "korona", "rymdväder", "diffraktion", "fysik 1", "fysik 2"],
@@ -198,7 +132,7 @@ const NYHETER_ALL = [
       { type: "h2", text: "Magnetfältet ritar gränsen" },
       { type: "p", html: "Ett plasma leder elektrisk ström utmärkt, och därför följs plasma och magnetfält åt: gasen släpar med sig fältlinjerna, och fältlinjerna håller emot gasen. I de mörka fårorna mellan granulerna trängs solens magnetfält ihop till smala knippen där det är många gånger starkare än i omgivningen. Just där, längs knippenas kanter, möts gas som rör sig olika fort — precis det förhållande instabiliteten kräver." },
       { type: "p", html: "På bilderna avslöjar den sig på två sätt. Magnetknippenas kanter är deformerade och vågiga i stället för släta, och tvärs över dem löper ultrafina mörka streck på några tiotals kilometers skala. Virvlarna själva mäter från 19&nbsp;kilometer, teleskopets undre gräns, upp till omkring 170&nbsp;kilometer." },
-      { type: "image", src: "nyheter/bilder/2026-08-07-virvlar-pa-solens-yta-2.jpg", alt: "Samma orangefärgade solyta, med en inringad detalj förstorad i en cirkel uppe till höger. I förstoringen syns hur den ljusa kanten mellan två celler böjer sig i en rad krökta flikar. En skalstock i cirkeln motsvarar 100 kilometer.", caption: "Utsnitt ur den nya bilden. I förstoringen syns hur gränsen mellan två granuler krökt sig till en rad virvlar — skalstocken motsvarar 100&nbsp;kilometer, ungefär en timmes bilfärd på motorväg.", credit: "Bild: NSF/NSO/AURA/MPS" },
+      { type: "image", src: "nyheter/bilder/2026-08-08-virvlar-pa-solens-yta-2.jpg", alt: "Samma orangefärgade solyta, med en inringad detalj förstorad i en cirkel uppe till höger. I förstoringen syns hur den ljusa kanten mellan två celler böjer sig i en rad krökta flikar. En skalstock i cirkeln motsvarar 100 kilometer.", caption: "Utsnitt ur den nya bilden. I förstoringen syns hur gränsen mellan två granuler krökt sig till en rad virvlar — skalstocken motsvarar 100&nbsp;kilometer, ungefär en timmes bilfärd på motorväg.", credit: "Bild: NSF/NSO/AURA/MPS" },
       { type: "p", html: "För att vara säkra på tolkningen jämförde laget bilderna med datorsimuleringar av magnetiserat plasma i solens atmosfär, gjorda med programmet MURaM. Simuleringarna gav samma mönster, och därmed kunde forskarna för första gången slå fast att det verkligen är Kelvin–Helmholtz-instabiliteter man ser på en stjärnyta." },
       { type: "quote", html: "”De nyupptäckta plasmavirvlarna visar på ett slående sätt hur ytterst små processer — vid gränsen för vad vi över huvud taget kan urskilja med tillgänglig teknik — i hög grad avgör vår stjärnas beskaffenhet.”", cite: "Sami K. Solanki, chef för Max Planck-institutet för solsystemforskning" },
 
@@ -218,6 +152,72 @@ const NYHETER_ALL = [
         "Koronan går inte att se för blotta ögat annat än vid en total solförmörkelse. Nästa inträffar den 12&nbsp;augusti&nbsp;2026 och drar fram över östra Grönland, västra Island och norra Spanien, med som mest 2&nbsp;minuter och 18&nbsp;sekunder i totalt mörker.",
         "Kelvin–Helmholtz-instabiliteten är långt ifrån bara ett solfenomen. Den formar vågmolnen i jordens atmosfär, virvlarna längs Jupiters och Saturnus molnband, och krusningarna där solvinden stryker längs jordens magnetfält.",
         "Fotosfären är bara några hundra kilometer tjock, på en gasboll med 1,4&nbsp;miljoner kilometers diameter. Det är därför solen har en så knivskarp kant på himlen trots att den inte har någon yta i vanlig mening."
+      ] }
+    ]
+  },
+  {
+    id: "2026-08-07-svavande-magnet",
+    date: "2026-08-07",
+    title: "En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens",
+    deck: "De känsligaste magnetfältsmätarna kräver flytande helium eller ett magnetiskt avskärmat rum. Ett lag från Peking och Mainz har i stället låtit en pytteliten permanentmagnet hänga fritt i luften och läst av hur den vrider sig — med en laserstråle, vid rumstemperatur, mitt i jordens eget magnetfält.",
+    category: "Magnetism",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-07-svavande-magnet.jpg",
+    imageAlt: "Schematisk ritning av försöksuppställningen: en laser skickar en stråle genom linser och speglar in i en vakuumkammare, där den studsar mot en liten sensormagnet som svävar mellan en lyftmagnet ovanför och en grafitplatta under, och vidare ut till en fyrdelad fotodiod. Ett inzoomat foto i nedre vänstra hörnet visar den verkliga magneten ovanför grafiten, med en skalstock på 500 mikrometer.",
+    imageCredit: "Figur: Wei Ji m.fl., arXiv:2504.21524 (CC BY 4.0)",
+    tags: ["magnetism", "magnetfält", "magnetometer", "diamagnetism", "sensor", "laser", "kraftmoment", "resonans", "supraledare", "mätteknik", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-08-tiny-magnet-ultrafaint-magnetic-fields.html" },
+      { name: "Science (tidskriftsartikeln)", url: "https://www.science.org/doi/10.1126/science.adx1707" },
+      { name: "arXiv (fritt tillgänglig version av studien)", url: "https://arxiv.org/abs/2504.21524" }
+    ],
+    research: {
+      citation: "Wei Ji, Changhao Xu, Guofeng Qu och Dmitry Budker, ”Levitated sensor for magnetometry in ambient environment”, Science 393, 607–610 (6 augusti 2026)",
+      url: "https://doi.org/10.1126/science.adx1707"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 3.1 Magnetism och magnetfält", href: "katalog.html#fy2-3.1" },
+        { label: "Fysik nivå 2 · 1.1 Kraftmoment", href: "katalog.html#fy2-1.1" },
+        { label: "Fysik nivå 2 · 2.6 Resonans", href: "katalog.html#fy2-2.6" }
+      ],
+      fragor: [
+        "Sensorn är som känsligast i ett smalt frekvensband kring 305 hertz och betydligt trubbigare utanför det. Varför kan en mätare bli bättre av att vara kräsen med vilka signaler den svarar på — och vilka mätuppgifter blir den då oanvändbar för?",
+        "Grafitplattan behövs för att magneten ska sväva stabilt, men det var samtidigt grafiten som gav det största bruset. Hur går man till väga när den komponent man inte kan ta bort är den som stör mest? Jämför med hur laget faktiskt löste det.",
+        "En kompassnål vrider sig mot norr, och samma kraftmoment är det som får sensormagneten att röra sig. Varför blir en fritt svävande magnet så mycket känsligare än en kompassnål på en spets — trots att fysiken bakom vridningen är densamma?"
+      ]
+    },
+    body: [
+      { type: "p", html: "I en vakuumkammare hänger en liten skiva av magnetiskt material fritt i luften. Den är 0,82&nbsp;millimeter i diameter och 0,38&nbsp;millimeter tjock — mindre än ett knappnålshuvud. Ingenting rör vid den: ingen tråd, ingen fjäder, ingen spets att balansera på. En laserstråle träffar skivans blanka ovansida och studsar vidare mot en detektor några meter bort." },
+      { type: "p", html: "Skivan är en magnetometer, alltså en mätare av magnetfält, och enligt en studie i tidskriften <em>Science</em> hör den till de känsligaste som byggts. Den reagerar på fältändringar ner mot 32&nbsp;femtotesla, $3{,}2 \\cdot 10^{-14}\\ \\mathrm{T}$. Jordens magnetfält är omkring $50\\ \\mathrm{\\mu T}$. Sensorn känner alltså av fält som är ungefär en och en halv miljard gånger svagare än det som får en kompassnål att peka norrut." },
+      { type: "p", html: "Fackuttrycket för känsligheten är $32\\ \\mathrm{fT}/\\sqrt{\\mathrm{Hz}}$ — ”32&nbsp;femtotesla per kvadratrot-hertz”. Det är ett mått på hur mycket brus mätaren själv bidrar med: mäter man i en sekund syns signaler ner till omkring 32&nbsp;femtotesla, och mäter man i hundra sekunder sjunker gränsen till en tiondel av det. Slumpmässigt brus medelvärdesbildas nämligen bort med tiden, medan en verklig signal ligger kvar." },
+
+      { type: "h2", text: "Varför en magnet inte kan sväva av sig själv" },
+      { type: "p", html: "Att få en magnet att stå stilla i luften är svårare än det låter. Samuel Earnshaw bevisade redan 1842 att ett system av laddningar inte kan hållas i stabil jämvikt av enbart sina egna krafter, och samma slutsats gäller magnetiska dipoler i ett fast magnetfält. Man kan visserligen balansera tyngdkraften med en magnet ovanför — men jämvikten blir som en kula på toppen av en kulle: minsta lilla knuff åt sidan, och magneten far i väg." },
+      { type: "p", html: "Undantaget heter diamagnetism. Allt material påverkas svagt av ett magnetfält, och i ett diamagnetiskt ämne induceras ett magnetiskt moment riktat <em>mot</em> fältet, så att ämnet stöts bort i stället för att dras in. Oftast är effekten försvinnande liten. Men i pyrolytisk grafit, där kolatomerna ligger ordnade i plana skikt, är den stark nog att synas med blotta ögat." },
+      { type: "p", html: "Forskarna utnyttjade båda sakerna på en gång. En kraftig lyftmagnet ovanför bär sensorskivans tyngd, och en platta av pyrolytisk grafit strax under stöter bort den så fort den försöker driva åt sidan. Tillsammans blir det en verklig, stabil jämvikt — magneten hänger fritt utan att röra vid någonting." },
+      { type: "image", src: "nyheter/bilder/2026-08-07-svavande-magnet-2.jpg", alt: "Två foton av samma försök. Uppifrån syns en mörk fyrkantig grafitflisa som svävar över fyra guldfärgade kubformade magneter på en stålplatta. Från sidan syns tydligt en luftspalt mellan flisan och magneterna.", caption: "Diamagnetisk frånstötning i klassrumsformat: en flisa pyrolytisk grafit svävar över fyra neodymmagneter, utan något som håller uppe den. Det är samma frånstötning som stabiliserar den svävande sensormagneten — fast där sitter grafiten under och magneten ovanpå.", credit: "Foto: Splarka / Wikimedia Commons (public domain)" },
+
+      { type: "h2", text: "Från svävning till mätning" },
+      { type: "p", html: "En magnet i ett magnetfält känner av ett kraftmoment. Pekar fältet inte åt samma håll som magnetens eget magnetiska moment $m$ vrids den mot fältet med momentet $M = m \\cdot B \\cdot \\sin \\theta$ — samma vridning som riktar in en kompassnål mot norr." },
+      { type: "p", html: "I den svävande skivan sitter magnetiseringen låst i kristallgittret. Elektronernas spinn kan inte vrida sig undan på egen hand utan att dra med sig hela skivan, och därför översätts varje liten ändring i det yttre fältet till en vridning av hela magneten. Vridningen läses av optiskt: laserstrålen studsar mot skivan och träffar en fyrdelad fotodiod först efter 3,4&nbsp;meter. Ju längre den optiska armen är, desto större blir utslaget på detektorn för en och samma lilla vinkeländring — samma trick som när man riktar en ficklampa mot en avlägsen vägg och ser strålen svepa långa sträckor vid minsta ryck i handen." },
+      { type: "p", html: "Att magneten svävar är avgörande för känsligheten. Utan upphängning finns nästan ingenting som dämpar vridningen, och skivan blir en utomordentligt god svängare: resonansfrekvensen ligger kring 305&nbsp;hertz och Q-värdet på ungefär 12&nbsp;000, vilket betyder att resonanstoppen bara är 0,025&nbsp;hertz bred. Ett magnetfält som pulserar i precis den takten bygger därför upp svängningen gång på gång, tills även ett obetydligt kraftmoment ger ett läsbart utslag. Resonansfrekvensen går dessutom att flytta mellan 260 och 318&nbsp;hertz genom att ändra ett statiskt fält, så att mätaren kan ställas in på den takt signalen har." },
+
+      { type: "h2", text: "Bruset som satt gränsen" },
+      { type: "p", html: "Grafitplattan som håller svävningen stabil visade sig samtidigt vara sensorns värsta fiende. Grafit leder ström, och i varje ledare rör sig elektronerna slumpmässigt av ren värmerörelse. Rörelserna bildar små virvelströmmar, och varje sådan ström har sitt eget magnetfält. Sorlet av dem — magnetiskt Johnsonbrus — låg på 110&nbsp;femtotesla per kvadratrot-hertz och dränkte allt som var svagare." },
+      { type: "p", html: "Lösningen var enkel i princip och knepig i praktiken: grafiten maldes till pulver och bakades ihop med epoxi till en ny platta. Kornen ligger då elektriskt isolerade från varandra, så att virvelströmmarna stängs in i varje enskilt korn i stället för att löpa runt i stora slingor. Bruset sjönk till 30&nbsp;femtotesla per kvadratrot-hertz, en minskning med drygt 70&nbsp;%, utan att den diamagnetiska frånstötningen gick förlorad. Kvar blev bara mindre bidrag: krockar med de luftmolekyler som ändå finns i kammaren, vid ett tryck på 0,025&nbsp;millibar — ungefär en fyrtiotusendel av lufttrycket vid marken — och vibrationer från omgivningen." },
+
+      { type: "h2", text: "Rumstemperatur är hela poängen" },
+      { type: "p", html: "Känslighet i den här klassen är inte ny i sig. SQUID-magnetometrar, som bygger på supraledande ringar, når omkring 20&nbsp;femtotesla per kvadratrot-hertz — men de måste kylas med flytande helium till några grader över absoluta nollpunkten. Atomära magnetometrar av så kallad SERF-typ är minst lika känsliga, men kräver i stället uppvärmd alkalimetallånga och fungerar bara i fält nära noll, alltså inne i ett magnetiskt avskärmat rum. Båda är dyra, skrymmande och svårflyttade." },
+      { type: "p", html: "Den svävande magneten behöver ingetdera. Den arbetar vid rumstemperatur och mitt i jordens magnetfält, vilket är den egentliga nyheten: samma prestanda, utan kryoteknik och utan avskärmat rum." },
+      { type: "quote", html: "”Vi uppnådde en känslighet på 32&nbsp;femtotesla per kvadratrot-hertz, vilket räcker för en lång rad tillämpningar inom biologi, kemi och grundläggande fysik. Den matchar prestandan hos supraledande kvantinterferensinstrument och atomära magnetometrar, men har fördelen att fungera vid rumstemperatur och i jordens magnetfält.”", cite: "Ur sammanfattningen av studien i Science" },
+      { type: "p", html: "Det finns en hake, och forskarna är öppna med den. Den höga känsligheten gäller i ett smalt band kring resonansen. Utanför det är sensorn betydligt trubbigare — omkring 200&nbsp;pikotesla per kvadratrot-hertz mellan 80 och 200&nbsp;hertz, och kring en nanotesla under 15&nbsp;hertz. Mätaren passar alltså bäst för signaler som svänger i en känd takt, och sämre för att följa ett långsamt driftande fält." },
+      { type: "p", html: "Vad ska man då ha den till? Både hjärtat och hjärnan alstrar magnetfält när nerv- och muskelceller leder ström. Hjärnans signaler ligger typiskt mellan 50 och 500&nbsp;femtotesla, hjärtats i storleksordningen hundra gånger starkare — och i dag krävs kylda sensorer i avskärmade rum för att fånga dem. Samma slags mätare används också i grundforskningen, där de får leta efter fält som enligt de kända naturlagarna inte borde finnas alls: svaga signaler från mörk materia, eller från hittills okända krafter mellan partiklars spinn." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Diamagnetism räcker för att få levande varelser att sväva. 1997 lät fysikern Andre Geim en groda flyta fritt i ett magnetfält på omkring 16&nbsp;tesla — vatten är svagt diamagnetiskt, och grodan består mest av vatten. Experimentet gav honom ett Ig Nobelpris år 2000, tio år innan han fick det riktiga Nobelpriset för upptäckten av grafen.",
+        "En tesla är ett mycket starkt magnetfält. En kylskåpsmagnet ger några millitesla vid ytan, en magnetkamera på sjukhus 1,5–3&nbsp;tesla, och jordens fält bara omkring 50&nbsp;mikrotesla. En femtotesla är en miljondels miljarddels tesla.",
+        "Kvadratroten i enheten är ingen krånglighet för sakens skull. Slumpmässigt brus växer med kvadratroten ur mätbandbredden, vilket är samma sak som att bruset minskar med kvadratroten ur mättiden: fyra gånger längre mätning ger dubbelt så bra känslighet."
       ] }
     ]
   },

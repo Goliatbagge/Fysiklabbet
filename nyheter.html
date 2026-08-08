@@ -1342,14 +1342,14 @@
 
                     <FelRuta a={a} />
 
-                    {/* Rutan ligger direkt efter källorna och felrapporten —
-                        alltså så snart artikeln är utläst, och FÖRE lärarrutan
-                        och dela-raden. Sist på sidan hamnade den under en
-                        lärarruta som kan vara flera skärmhöjder lång, och sågs
-                        sällan. */}
-                    <NyhetsbrevBox />
-
                     {a.larare && <LararRuta l={a.larare} />}
+
+                    {/* Nyhetsbrevsrutan ligger efter lärarrutan, precis före
+                        dela-raden: läsaren möter först det som hör till
+                        artikeln (källor, felrapport, lärarens
+                        diskussionsunderlag) och därefter erbjudandet att
+                        prenumerera. */}
+                    <NyhetsbrevBox />
 
                     <ShareBar a={a} />
                 </article>

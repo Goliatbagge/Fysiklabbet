@@ -31,6 +31,14 @@
  *               Frågorna ska kräva resonemang, inte faktakoll: sikta på
  *               "varför fungerar vetenskapen så här", inte "vad stod det".
  *               `href` är valfri; utan den blir momentet bara en etikett.
+ *               OBS: `fragor` och `label` renderas som REN TEXT — skriv
+ *               literalt hårt mellanslag (U+00A0), aldrig `&nbsp;` (då syns
+ *               entiteten bokstavligt på skärmen). Samma sak gäller `title`,
+ *               `deck`, `imageAlt`, `imageCredit`, `research.citation`,
+ *               h2-blockens `text`, faktarutans `title`, citatets `cite`
+ *               samt bild-/videoblockens `alt` och `credit`. Endast fälten
+ *               `html`, faktarutans `items` och bildtexternas `caption` är
+ *               HTML — där hör `&nbsp;`, `<em>` och `<sup>` hemma.
  *   audio     – (valfritt) sökväg till en poddfil. Utelämnas oftast: lägg bara
  *               ljudfilen som nyheter/podd/<id>.<ext> så hittar spelaren den.
  *               Se nyheter/podd/README.md för det manuella NotebookLM-flödet.
@@ -101,7 +109,7 @@ const NYHETER_ALL = [
         { label: "Fysik nivå 2 · 2.6 Resonans", href: "katalog.html#fy2-2.6" }
       ],
       fragor: [
-        "Sensorn är som känsligast i ett smalt frekvensband kring 305&nbsp;hertz och betydligt trubbigare utanför det. Varför kan en mätare bli bättre av att vara kräsen med vilka signaler den svarar på — och vilka mätuppgifter blir den då oanvändbar för?",
+        "Sensorn är som känsligast i ett smalt frekvensband kring 305 hertz och betydligt trubbigare utanför det. Varför kan en mätare bli bättre av att vara kräsen med vilka signaler den svarar på — och vilka mätuppgifter blir den då oanvändbar för?",
         "Grafitplattan behövs för att magneten ska sväva stabilt, men det var samtidigt grafiten som gav det största bruset. Hur går man till väga när den komponent man inte kan ta bort är den som stör mest? Jämför med hur laget faktiskt löste det.",
         "En kompassnål vrider sig mot norr, och samma kraftmoment är det som får sensormagneten att röra sig. Varför blir en fritt svävande magnet så mycket känsligare än en kompassnål på en spets — trots att fysiken bakom vridningen är densamma?"
       ]
@@ -135,7 +143,7 @@ const NYHETER_ALL = [
 
       { type: "fact", title: "Visste du?", items: [
         "Diamagnetism räcker för att få levande varelser att sväva. 1997 lät fysikern Andre Geim en groda flyta fritt i ett magnetfält på omkring 16&nbsp;tesla — vatten är svagt diamagnetiskt, och grodan består mest av vatten. Experimentet gav honom ett Ig Nobelpris år 2000, tio år innan han fick det riktiga Nobelpriset för upptäckten av grafen.",
-        "Tesla är en stor enhet. En kylskåpsmagnet ger några millitesla vid ytan, en magnetkamera på sjukhus 1,5–3&nbsp;tesla, och jordens fält bara omkring 50&nbsp;mikrotesla. En femtotesla är en miljondels miljarddels tesla.",
+        "En tesla är ett mycket starkt magnetfält. En kylskåpsmagnet ger några millitesla vid ytan, en magnetkamera på sjukhus 1,5–3&nbsp;tesla, och jordens fält bara omkring 50&nbsp;mikrotesla. En femtotesla är en miljondels miljarddels tesla.",
         "Kvadratroten i enheten är ingen krånglighet för sakens skull. Slumpmässigt brus växer med kvadratroten ur mätbandbredden, vilket är samma sak som att bruset minskar med kvadratroten ur mättiden: fyra gånger längre mätning ger dubbelt så bra känslighet."
       ] }
     ]
@@ -2159,7 +2167,7 @@ const NYHETER_ALL = [
     readingTime: "4 min",
     image: "nyheter/bilder/2026-07-01-grafen-supraledning.jpg",
     imageAlt: "Grafisk illustration av tre supraledande tillstånd i romboedrisk pentalagers grafen — tre varianter av elektronparning visualiseras i rött, grönt och blått som Cooperpar flödar utan motstånd.",
-    imageCredit: "Illustration: Amy Pan, RLE/MIT (CC&nbsp;BY-NC-ND)",
+    imageCredit: "Illustration: Amy Pan, RLE/MIT (CC BY-NC-ND)",
     tags: ["supraledning", "grafen", "grafit", "magnetfält", "modern fysik", "kondenserade materiens fysik", "materialfysik", "kvantfysik", "cooperpar"],
     sources: [
       { name: "MIT News", url: "https://news.mit.edu/2026/graphene-can-hold-multiple-states-of-superconductivity-0629" },

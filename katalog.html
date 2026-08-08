@@ -1914,24 +1914,44 @@
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
             const sectionContentRef = useRef(null);
-            const scrollPendingRef = useRef(null);   // null | 'auto' | 'smooth'
+            const scrollPendingRef = useRef(false);
 
-            const scrollTillAvsnitt = (behavior) => {
-                const el = sectionContentRef.current;
-                if (!el) { window.scrollTo({ top: 0 }); return; }
-                const top = el.getBoundingClientRect().top + window.scrollY - 16;
-                window.scrollTo({ top, behavior });
+            // Rullar upp till avsnittets innehåll (rubrik + korten).
+            //
+            // Hoppar DIREKT i stället för mjukt, och lägger om positionen
+            // några gånger den närmaste halvsekunden. Skälet är mobilen:
+            // genomgången (marked + KaTeX + figurer) och webbtypsnitten
+            // renderas strax EFTER klicket, så sidans höjd ändras medan
+            // rullningen pågår — en mjuk rullning hinner då avbrytas, och
+            // ett engångshopp landar på en position som redan hunnit bli
+            // fel. Rör användaren sidan själv avbryts efterjusteringen.
+            const scrollTillAvsnitt = () => {
+                let senast = -1;
+                const justera = () => {
+                    const el = sectionContentRef.current;
+                    if (!el) { if (senast < 0) window.scrollTo({ top: 0 }); return; }
+                    // Har sidan flyttat sig utan att vi bett om det har
+                    // användaren rullat — låt den vara.
+                    if (senast >= 0 && Math.abs(window.scrollY - senast) > 4) return;
+                    const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 16);
+                    if (senast < 0 || Math.abs(top - window.scrollY) > 2) {
+                        window.scrollTo({ top, behavior: 'auto' });
+                    }
+                    senast = window.scrollY;
+                };
+                justera();
+                [60, 180, 350, 600].forEach(ms => setTimeout(justera, ms));
             };
 
             const goPrev = () => {
                 if (sectionIdx > 0) {
-                    scrollPendingRef.current = 'auto';
+                    scrollPendingRef.current = true;
                     setState({ ...state, section: sections[sectionIdx - 1].num, view: 'teori' });
                 }
             };
             const goNext = () => {
                 if (sectionIdx >= 0 && sectionIdx < sections.length - 1) {
-                    scrollPendingRef.current = 'auto';
+                    scrollPendingRef.current = true;
                     setState({ ...state, section: sections[sectionIdx + 1].num, view: 'teori' });
                 }
             };
@@ -1941,20 +1961,18 @@
             // står vyn stilla och det ser ut som att ingenting hände — rulla
             // därför ned till avsnittets innehåll (kort + rubrik).
             const pickSection = (num) => {
-                const mobil = window.matchMedia('(max-width: 820px)').matches;
-                if (mobil) {
-                    if (num === section) { scrollTillAvsnitt('smooth'); return; }
-                    scrollPendingRef.current = 'smooth';
+                if (window.matchMedia('(max-width: 820px)').matches) {
+                    if (num === section) { scrollTillAvsnitt(); return; }
+                    scrollPendingRef.current = true;
                 }
                 setState({ ...state, section: num, view: 'teori' });
             };
 
             useEffect(() => {
-                const behavior = scrollPendingRef.current;
-                if (!behavior) return;
-                scrollPendingRef.current = null;
+                if (!scrollPendingRef.current) return;
+                scrollPendingRef.current = false;
                 // Vänta ett frame så att den nya genomgången har renderats.
-                requestAnimationFrame(() => scrollTillAvsnitt(behavior));
+                requestAnimationFrame(scrollTillAvsnitt);
             }, [section]);
 
             return (

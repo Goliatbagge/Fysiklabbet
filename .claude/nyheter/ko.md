@@ -44,6 +44,53 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-08) — kan tas upp senare
+
+- **Publicerad 2026-08-08: den svävande magneten (LeMaMa)** — se publicerat.md för
+  avvägningen och för de tre fällorna (miljard ≠ biljon, femtotesla = miljondels
+  miljarddels tesla, och att grafiten stabiliserar snarare än bär).
+- **XENONnT skärper jakten på lätt mörk materia** — XENON-samarbetet har med
+  7,8 tonår joniseringsdata från detektorn i Gran Sasso gjort en blindanalys utan
+  någon oförklarad signal, och sätter nya gränser för axionliknande partiklar och
+  mörka fotoner. De närmar sig dessutom den punkt där solneutriner blir omöjliga
+  att skilja från en äkta signal — en gräns ingen detektor nått förut, och en
+  utmärkt pedagogisk poäng om vad ”känsligare” till slut betyder.
+  Physical Review Letters (E. Aprile m.fl., ”Light Dark Matter Search with
+  7.8 Tonne-Year of Ionization-Only Data in XENONnT”, 2026-08-07),
+  DOI 10.1103/2lrq-f6bk. Valdes bort 2026-08-08 enbart för att mörk materia
+  kördes 08-05 (Rubin). Källa:
+  https://phys.org/news/2026-08-xenonnt-detector-narrows-dark.html
+  (tillagd 2026-08-08)
+- **Fermium-255:s kärna är formad som en rugbyboll** — Mitzi Urquiza-González
+  m.fl. (18 institutioner, ledda från Johannes Gutenberg-universitetet Mainz och
+  Helmholtzinstitutet Mainz, med Göteborgs universitet) har med laserspektroskopi
+  på hyperfinstrukturen bestämt formen hos fermium-255 och rättat felaktiga värden
+  på det magnetiska dipolmomentet i standardtabellerna. Provet räckte med tiotals
+  miljoner atomer i RISIKO-separatorn; isotopen tillverkades i flera steg via
+  neutronbestrålning vid Oak Ridge och Institut Laue-Langevin.
+  Physical Review Letters, DOI 10.1103/2813-b49x (2026-08-07). Kollegialt granskad.
+  Valdes bort 2026-08-08 för ämnesspridning (kärnfysik kördes 08-03 och 08-04).
+  Källa: https://phys.org/news/2026-08-laser-spectroscopy-reveal-hidden-nuclear.html
+  (tillagd 2026-08-08)
+- **Geoneutriner ger en ny bild av jordens mantel** — Quanta (2026-08-07) beskriver
+  hur ett växande nät av neutrindetektorer kartlägger de radioaktiva grundämnen som
+  driver jordens värmemotor. Fin brygga mellan kärnfysik och geofysik, men en
+  översiktsartikel snarare än en enskild upptäckt — kräver att man letar upp en
+  konkret studie att hänga upp den på. Källa:
+  https://www.quantamagazine.org/neutrinos-from-deep-inside-earth-provide-a-new-picture-of-the-mantle-20260807/
+  (tillagd 2026-08-08)
+- **Borskikt kan sätta supraledningsrekord** (teoretisk studie) och **UCLA styr
+  värme som ljus i rumstemperatur** (ScienceDaily 08-07, fononstrålar i kristaller)
+  — två obrukade uppslag. Källor:
+  https://phys.org/news/2026-08-boron-layers-superconductivity-theoretical.html ,
+  https://www.sciencedaily.com/releases/2026/08/260805082506.htm
+  (tillagd 2026-08-08)
+- **OBS — nyttig genväg upptäckt 2026-08-08:** när science.org/nature.com svarar 403
+  ger `api.crossref.org/works/<DOI>` hela abstractet plus exakt volym, sidor,
+  utgåva, datum och författarlista med affiliationer. Kombinerat med arXiv-versionen
+  (`arxiv.org/abs/<id>` för licens, `arxiv.org/html/<id>` för metoddelen) räcker det
+  för en fullständig granskning utan åtkomst till betalväggen.
+
 ## Fynd som inte användes (2026-08-07) — kan tas upp senare
 
 - **Publicerad 2026-08-07: Kelvin–Helmholtz-virvlar i solens fotosfär** (NSO/MPS/HAO,

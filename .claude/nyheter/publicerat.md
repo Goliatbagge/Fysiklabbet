@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-08 | `2026-08-08-svavande-magnet` | En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens | Phys.org / Science 393, 607–610 (W. Ji, C. Xu, G. Qu, D. Budker, 2026-08-06, DOI 10.1126/science.adx1707) / arXiv:2504.21524 (CC BY 4.0) |
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het | National Solar Observatory (pressmeddelande 2026-08-05) / Max-Planck-Gesellschaft / Phys.org / EurekAlert! / ABC News (AP) / Nature (D. Kuridze, F. Wöger m.fl., 2026-08-05, DOI 10.1038/s41586-026-10871-3) |
 | 2026-08-06 | `2026-08-06-kvantlabb-i-fritt-fall` | Kvantlabbet som får plats i en raket släpper två sorters atomer samtidigt — och stoppar knuffen som ser ut som ett brott mot naturlagen | Johannes Gutenberg-universitetet Mainz (pressmeddelande 2026-08-05) / Phys.org / Scientific Frontline / HITec Leibniz-universitetet Hannover / SSC (Esrange) / Nature Communications (B. Piest m.fl., 2026-07-28, DOI 10.1038/s41467-026-75968-9, även arXiv:2508.20820 CC BY 4.0) |
 | 2026-08-05 | `2026-08-05-rubin-mork-materia` | Kameran som ska väga det osynliga — i tio år ska Rubin-observatoriet fotografera samma himmel om och om igen | Vera C. Rubin Observatory (pressmeddelanden om LSST-starten 2026-06-30 och COSMOS/EDP2 2026-07-31) / NSF NOIRLab (noirlab2618) / SLAC / Phys.org / The Astrophysical Journal 873:111 (Ž. Ivezić m.fl., 2019, DOI 10.3847/1538-4357/ab042c) |
@@ -333,3 +334,40 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > co-lead author, och Wöger co-lead. Därför står båda namnen i `research.citation` och
 > ingen av dem utpekas som ensam förstaförfattare i texten.
 > Fyra nya begrepp: fotosfär, korona, granulation, Kelvin–Helmholtz-instabilitet.
+
+> **2026-08-08 — den svävande magneten (LeMaMa).** Vald framför tre andra färska
+> Phys.org-nyheter samma morgon: XENONnT:s nya gräns för lätt mörk materia (valdes
+> bort — mörk materia kördes 08-05), laserspektroskopi på fermium-255 (kärnfysik
+> kördes 08-03 och 08-04) och borskikt som supraledare (ren teoristudie). Magnetism
+> hade inte tagits upp sedan altermagnetismen 07-26, och den här nyheten är dessutom
+> ovanligt konkret: en magnet man kan se, som svävar, och ett resultat som går att
+> förstå utan kvantformalism.
+>
+> Researchen: science.org ger HTTP 403, men HELA studien finns fritt som
+> arXiv:2504.21524 under CC BY 4.0 — därifrån kommer alla tekniska värden
+> (magnetens mått, Q-värde, 3,4 m optisk arm, 0,025 mbar, brusbudget). Crossref
+> (`api.crossref.org/works/10.1126/science.adx1707`) gav både det kompletta
+> Science-abstractet och exakt volym/sidor/datum/författare — den vägen är klart
+> snabbare än att slåss med betalväggen, och bör användas rutinmässigt.
+>
+> Bilder: BÅDA är riktiga och fria, ingen AI. Bild 1 är figur 1 ur preprintet
+> (CC BY 4.0, innehåller ett äkta mikroskopfoto av sensormagneten över grafiten).
+> Bild 2 är den klassiska Commons-bilden på pyrolytisk grafit som svävar över fyra
+> neodymmagneter (public domain) — den visar fenomenet, inte apparaten, vilket
+> bildtexten säger rakt ut.
+>
+> Tre fällor i just den här nyheten:
+> (a) RÄKNEORD: 32 fT mot jordens 50 μT är en faktor 1,6 · 10⁹ — MILJARD, inte
+>     biljon. Skriv aldrig av en engelsk *billion* rakt av.
+> (b) Femtotesla är 10⁻¹⁵ T = en MILJONDELS miljarddels tesla. Första utkastet hade
+>     ”tusendels miljarddels”, vilket är pikotesla — tusen gånger fel. Granskningen
+>     fångade det; se granskningar.md.
+> (c) Magneten levitera INTE diamagnetiskt av sig själv. Den bärs av en lyftmagnet
+>     ovanför; grafiten under STABILISERAR bara (Earnshaws sats). Skriver man
+>     ”grafiten får magneten att sväva” blir fysiken fel.
+>
+> Tre nya begrepp: magnetometer, diamagnetism, SQUID.
+>
+> Bifynd som inte användes: XENONnT (Physical Review Letters, DOI 10.1103/2lrq-f6bk)
+> och fermium-255 (Physical Review Letters, DOI 10.1103/2813-b49x) — båda lagda i
+> ko.md.

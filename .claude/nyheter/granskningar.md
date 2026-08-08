@@ -83,3 +83,70 @@ med skalstock.
 originalpublikationen kunnat läsas. Skulle någon senare få åtkomst till paperet bör
 särskilt virvlarnas storleksintervall (19–170 km) och beskrivningen av vad
 MURaM-simuleringarna faktiskt visar stämmas av mot metoddelen.
+
+---
+
+## 2026-08-08 | 2026-08-08-svavande-magnet | GODKÄND efter rättning
+
+**Granskningsform.** Sessionen fick inte starta subagenter, så granskningen är
+genomförd som ett separat, självkritiskt pass enligt hela protokollet i
+`utgivare.md` (samma fallback som nyhetsagent.md steg 11 anvisar).
+
+**Peer review-status.** Publicerad i *Science* 393 (6811), 607–610, tryckdatum
+6 augusti 2026, DOI 10.1126/science.adx1707. Kollegialt granskad. Metadata
+verifierade direkt mot Crossref (`api.crossref.org/works/10.1126/science.adx1707`):
+titel, volym, sidor, utgåva, datum och samtliga fyra författare med affiliationer
+stämmer med `research.citation`.
+
+**Originalpublikationen.** science.org svarade HTTP 403 (betalvägg/botspärr).
+Abstractet lästes i stället i sin helhet via Crossref, och metoddelen via
+författarnas egen fritt tillgängliga version, arXiv:2504.21524 (CC BY 4.0), i
+HTML-form. Där finns samtliga tekniska värden artikeln bygger på. Studien är ett
+EXPERIMENT, inte en simulering — beskrivningen i artikeln stämmer.
+
+**Verifierade siffror**
+- 0,82 mm diameter / 0,38 mm tjocklek — arXiv: ”410±2 μm radius and 380±2 μm
+  thickness” ✓ (radie → diameter omräknad korrekt)
+- 32 fT/√Hz — Science-abstract + arXiv (”32±3 fT/√Hz”) ✓
+- 3,2 · 10⁻¹⁴ T — omräkning av 32 fT ✓
+- jordfältet 50 μT och kvoten ”en och en halv miljard” — 5·10⁻⁵/3,2·10⁻¹⁴ =
+  1,56·10⁹ ✓. RÄKNEORDSKONTROLL: engelskans *billion* = miljard. Artikeln
+  innehåller inga träffar på biljon/biljard/triljon.
+- resonans 305 Hz, ställbar 260–318 Hz — arXiv brödtext + figur 4 ✓
+- Q ≈ 12 000 och linjebredd 0,025 Hz — arXiv ✓ (kontrollräknat: 305/12 000 = 0,025)
+- optisk arm 3,4 m, fyrdelad fotodiod (QPD), 852 nm — arXiv ✓
+- brus 110 → 30 fT/√Hz, ”drygt 70 %” — (110−30)/110 = 72,7 % ✓
+- vakuum 0,025 mbar och ”en fyrtiotusendel av lufttrycket” — 1013/0,025 = 40 520 ✓
+- SQUID ≈ 20 fT/√Hz, bredbandsvärdena ≈ 200 pT/√Hz (80–200 Hz) och ≈ 1 nT/√Hz
+  (< 15 Hz) — arXiv:s jämförelse respektive figur 3 ✓
+- hjärnans fält 50–500 fT, hjärtats ≈ 100 gånger starkare — MEG-/MKG-litteratur ✓
+- Geim, groda, ~16 T, Nijmegen 1997, Ig Nobel 2000, Nobelpris 2010 ✓
+
+**Citat.** Ett enda citatblock, en översättning av slutmeningen i Science-abstractet
+(hämtat ordagrant från Crossref). Ingen forskare citeras direkt — de formuleringar
+som cirkulerade i pressreferaten gick inte att härleda till en namngiven person och
+användes därför inte alls.
+
+**Bild och licens.** Bild 1 är figur 1 ur arXiv:2504.21524, som ligger under
+CC BY 4.0 (verifierat på arXiv:s abstract-sida). Bild 2 är
+`Diamagnetic graphite levitation.jpg` från Wikimedia Commons, public domain
+(verifierat via Commons API, upphovsperson en:User:Splarka). Ingen AI-bild.
+Bildtexten till bild 2 säger uttryckligen att den visar fenomenet i klassrumsformat
+och inte forskarnas apparat.
+
+**Rättningar som krävdes (åtgärdade före publicering)**
+1. `Femtotesla är en tusendels miljarddels tesla` → `En femtotesla är en miljondels
+   miljarddels tesla`. Tusendels miljarddel är 10⁻¹², alltså pikotesla — felet var
+   tusen gånger. Samma rättning i begreppsposten ”Magnetometer”.
+2. Citatet: `grundforskning` → `grundläggande fysik` och
+   `supraledande kvantinterferensmagnetometrar` → `supraledande
+   kvantinterferensinstrument`, för att ligga närmare originalets
+   ”fundamental physics” respektive ”superconducting quantum interference devices”.
+3. `johnsonbrus` → `magnetiskt Johnsonbrus` (egennamn, och det är den magnetiska
+   varianten som avses).
+4. `imageCredit` innehöll `&nbsp;`-entiteter. Fältet renderas som REN TEXT i
+   `nyheter.html`, så entiteterna syntes bokstavligt under bilden — bytt mot
+   literalt hårt mellanslag. Samma fel fanns sedan tidigare i artikeln
+   2026-08-05-rubin-mork-materia och rättades samtidigt.
+
+**Utslag efter rättning: GODKÄND.**

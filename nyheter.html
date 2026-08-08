@@ -718,6 +718,8 @@
 
         // Öppnar feedback-widgeten (feedback.js) förifylld som felrapport
         // för artikeln. Nödfallsutväg om skriptet inte hunnit ladda: mailto.
+        // Adressen är en roll-adress på egen domän — lägg ALDRIG en privat
+        // e-postadress här, den syns i sidans källkod.
         function rapporteraFel(a) {
             if (window.FYSIKFEEDBACK) {
                 window.FYSIKFEEDBACK.open({
@@ -727,7 +729,7 @@
                     submitLabel: 'Skicka felrapport →'
                 });
             } else {
-                window.location.href = 'mailto:sam.skoglund83@gmail.com?subject='
+                window.location.href = 'mailto:nyhetsbrev@fysiklabbet.se?subject='
                     + encodeURIComponent(`Felrapport (nyhet): ${a.title}`);
             }
         }

@@ -80,10 +80,42 @@
             color: var(--lab-ink); border-bottom: 2px solid var(--lab-accent);
             padding-bottom: 2px; align-self: flex-start;
         }
+        /* Näst senaste nyheterna — samma innehåll som huvudkortet men i
+           mindre format, så att startsidan visar ett par dagars nyheter
+           utan att konkurrera med "Senaste nytt". Bild + kategori/datum +
+           rubrik; ingen ingress (den hör hemma på nyhetssidan). */
+        .home-news-rest {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 20px;
+        }
+        .home-news-mini {
+            display: flex; flex-direction: column; gap: 10px;
+            text-decoration: none; color: var(--lab-ink);
+        }
+        .home-news-mini-media {
+            aspect-ratio: 16 / 9; overflow: hidden; border-radius: 4px;
+            border: 1px solid var(--lab-line); background: var(--lab-bg-raised);
+        }
+        .home-news-mini-media img { width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+        .home-news-mini:hover .home-news-mini-media img { transform: scale(1.04); }
+        .home-news-mini:hover .home-news-mini-title { color: var(--lab-accent); }
+        .home-news-mini .home-news-meta { margin-bottom: 6px; font-size: 9.5px; }
+        .home-news-mini-title {
+            font-family: var(--lab-font-display); font-size: 18px; line-height: 1.15;
+            letter-spacing: -0.01em; color: var(--lab-ink); margin: 0;
+        }
+        .home-news-rest-head { margin-top: 26px; }
         @media (max-width: 720px) {
             .home-news-card { grid-template-columns: 1fr; }
             .home-news-media { min-height: 0; aspect-ratio: 16 / 9; }
             .home-news-text { padding: 20px 22px; }
+            /* På smal skärm blir de mindre nyheterna en radlista med
+               miniatyr till vänster — tre staplade 16:9-kort hade tagit
+               lika mycket plats som huvudkortet självt. */
+            .home-news-rest { grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
+            .home-news-mini { flex-direction: row; gap: 14px; align-items: flex-start; }
+            .home-news-mini-media { flex: 0 0 104px; }
+            .home-news-mini-title { font-size: 16px; }
         }
     </style>
 </head>
@@ -363,10 +395,11 @@
         function NewsTeaser() {
             const latest = NYHETER[0];
             if (!latest) return null;
+            const rest = NYHETER.slice(1, 4);
             return (
                 <section className="lab-section home-news">
                     <div className="home-news-byline">
-                        <h2>Fysiknyheter från AI-redaktören</h2>
+                        <h2>Fysiknyheter</h2>
                     </div>
                     <div className="lab-updates-header">
                         <span className="lab-mono-label">Senaste nyheten</span>
@@ -391,6 +424,31 @@
                             <span className="home-news-more">Läs nyheten →</span>
                         </div>
                     </a>
+                    {rest.length > 0 && (
+                        <React.Fragment>
+                            <div className="lab-updates-header home-news-rest-head">
+                                <span className="lab-mono-label">Tidigare nyheter</span>
+                            </div>
+                            <div className="home-news-rest">
+                                {rest.map(a => (
+                                    <a className="home-news-mini" key={a.id}
+                                       href={`nyheter.html?id=${a.id}`}>
+                                        <div className="home-news-mini-media">
+                                            <img src={a.image} alt={a.imageAlt} loading="lazy" />
+                                        </div>
+                                        <div className="home-news-mini-text">
+                                            <div className="home-news-meta">
+                                                <span className="cat">{a.category}</span>
+                                                <span className="dot" />
+                                                <span>{formatNewsDate(a.date)}</span>
+                                            </div>
+                                            <h3 className="home-news-mini-title">{a.title}</h3>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </React.Fragment>
+                    )}
                 </section>
             );
         }

@@ -44,6 +44,30 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-09, förhandsskriven 08-08 kväll) — kan tas upp senare
+
+- **Publicerad 2026-08-09: flygande fokus i en laserplasmaaccelerator** (LLE,
+  University of Rochester, Nature Physics) — skriven kvällen före och datumgrindad
+  till midnatt. Se publicerat.md och granskningar.md för avvägningen och för de
+  tre fällorna (fig. 2 visar överskridande även vid 6,1 · 10^18, fördubblingen ≠
+  ”hela effekten” försvann vid 4,8 J, och 2004 gällde smal energitopp — inte första
+  gången metoden fungerade). OBS för en ev. uppföljare: Phys.org:s formulering att
+  fokushastigheten är oberoende av plasmats grupphastighet är en förenkling —
+  studien säger att den beror på BÅDE fokusgeometrin och grupphastigheten, vilket
+  är just skälet till det smala tätintervallet.
+- **Nyttig genväg (bekräftad 2026-08-08 kväll):** en betalvägg på nature.com hindrar
+  inte alltid. Är artikeln öppet tillgänglig går PDF:en att hämta direkt med curl
+  mot `https://www.nature.com/articles/<id>.pdf` även när HTML-sidan skickar 303
+  till idp.nature.com — och figurerna ligger fritt på
+  `https://media.springernature.com/full/springer-static/image/art%3A<DOI url-kodad>/MediaObjects/<tidskrift>_<år>_<nr>_Fig<N>_HTML.png`.
+  Öppen licens kollas snabbast med `api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=openAccessPdf`.
+- **Kvarvarande obrukade fynd från 08-08-listan nedan står orörda** (XENONnT,
+  fermium-255, geoneutriner, borskikt, UCLA:s fononstrålar). Nya obrukade från den
+  här sökningen: **X(2370) — den tydligaste glueball-kandidaten på 50 år**
+  (BESIII, tillkännagivet vid ICHEP i Brasilien, phys.org 2026-08-06; stark
+  partikelfysikvinkel, men bara konferenspresenterad ännu) och **kvantsammanflätning
+  skapad direkt ur solljus** (phys.org 2026-08-06).
+
 ## Fynd som inte användes (2026-08-08) — kan tas upp senare
 
 - **Publicerad 2026-08-08: den svävande magneten (LeMaMa)** — se publicerat.md för

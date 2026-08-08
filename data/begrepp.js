@@ -1015,5 +1015,35 @@ window.BEGREPP = [
       { type: 'p', html: 'Det är därför vind reser vågor på en sjö och därför en flagga fladdrar i stället för att hänga rakt ut i vinden. Ibland ritas mönstret också upp på himlen: när ett fuktigt luftskikt glider under ett torrare och snabbare kondenserar vattnet i vågtopparna, och resultatet blir en rad likadana krökta vågmoln — läroboksbilden av fenomenet. William Thomson, senare lord Kelvin, och Hermann von Helmholtz beskrev matematiken bakom det 1868 respektive 1871, och deras villkor talar om exakt hur stor fartskillnaden måste vara för att en krusning av en given storlek ska växa i stället för att dö ut.' },
       { type: 'p', html: 'I rymden är instabiliteten närmast överallt, men med en extra ingrediens: magnetfält. Ett elektriskt ledande gasmoln släpar med sig fältlinjerna, och ett fält längs strömriktningen verkar som en spänd gummisnodd som motverkar krökningen — därför kan magnetfält både dämpa och forma virvlarna. Fenomenet är iakttaget där solvinden stryker längs jordens magnetfält, längs gränserna mellan Jupiters och Saturnus molnband, i gasmoln kring unga stjärnor, och sedan 2026 även på solens egen yta. Betydelsen är att instabiliteten styckar stora, långsamma strömmar i allt mindre virvlar; först på de allra minsta skalorna kan rörelseenergin bli värme.' }
     ]
+  },
+  {
+    id: 'kolvattenacceleration',
+    term: 'Kölvattenacceleration',
+    former: ['kölvattenacceleration', 'kölvattenaccelerationen', 'kölvattenfält',
+             'kölvattenfältet', 'kölvattenvåg', 'kölvattenvågen', 'plasmaaccelerator',
+             'plasmaacceleratorn', 'plasmaacceleratorer', 'plasmaacceleratorerna',
+             'plasmaacceleration', 'plasmaaccelerationen', 'plasmavåg', 'plasmavågen',
+             'plasmavågor', 'plasmavågorna', 'enstegsaccelerator', 'enstegsacceleratorn',
+             'enstegsacceleratorer', 'enstegsacceleratorerna'],
+    kort: 'Ett sätt att ge laddade partiklar enorm fart på mycket kort sträcka: en kraftig laserpuls skjuts genom ett plasma och lämnar efter sig en våg av laddning, som elektroner kan surfa på.',
+    relaterade: ['plasma', 'partikelaccelerator', 'laser'],
+    body: [
+      { type: 'p', html: 'En vanlig accelerator knuffar partiklarna framåt med elektriska fält inuti metallhålrum. Det sätter en gräns: blir fältet för starkt slår det gnistor mellan metallytorna. Därför måste maskinerna vara långa — hundratals meter, ibland kilometer — för att summan av många måttliga knuffar ska bli en hög energi.' },
+      { type: 'p', html: 'Kölvattenacceleration kringgår gränsen genom att byta ut metallen mot ett plasma, alltså en gas vars atomer redan slitits isär i fria elektroner och positiva joner. Ett plasma kan inte slå gnistor, för det är just en gnista. När en extremt kort och intensiv laserpuls far genom plasmat trycker dess ljus undan de lätta elektronerna åt sidorna, medan de tunga jonerna blir kvar. Bakom pulsen bildas en bubbla som är nästan tömd på elektroner, och de undanträngda elektronerna faller tillbaka i ett skal runt den. Bubblan följer med pulsen framåt som kölvattnet efter en båt — därav namnet.' },
+      { type: 'p', html: 'Skillnaden i laddning mellan bubblans inre och skalet ger ett elektriskt fält som är tusentals gånger starkare än vad ett metallhålrum tål. En elektron som råkar fångas in i bubblans bakre del dras med och kan på några millimeter få lika mycket energi som den annars hade behövt tiotals meter för. Toshiki Tajima och John Dawson föreslog idén 1979, men först på 2000-talet fanns lasrar korta och starka nog att förverkliga den. Svårigheterna i dag handlar mindre om att nå hög energi än om att få strålen jämn: alla elektroner ska helst ha nästan samma energi och hålla ihop i en smal stråle.' }
+    ]
+  },
+  {
+    id: 'grupphastighet',
+    term: 'Grupphastighet',
+    former: ['grupphastighet', 'grupphastigheten', 'gruppfart', 'gruppfarten',
+             'fashastighet', 'fashastigheten'],
+    kort: 'Farten hos en vågpuls som helhet — att skilja från fashastigheten, som är farten hos de enskilda vågtopparna inuti pulsen. De två är sällan lika stora.',
+    relaterade: ['vaglangd', 'plasma', 'optisk-fiber'],
+    body: [
+      { type: 'p', html: 'Kasta en sten i en damm och titta noga på ringen som breder ut sig. Ringen som helhet rör sig med en viss fart, men vågtopparna inuti den rör sig med en annan: de föds i ringens bakkant, vandrar framåt genom knippet och försvinner i framkanten. Knippets fart kallas grupphastighet, de enskilda toppornas fart fashastighet.' },
+      { type: 'p', html: 'Skillnaden uppstår så fort vågor med olika våglängd färdas olika fort i mediet. En verklig ljuspuls är nämligen aldrig en enda ren våglängd utan en blandning av många, och det är blandningen som formar pulsen. Går de olika våglängderna i otakt förskjuts pulsens tyngdpunkt i en annan takt än vågtopparnas — precis som en klunga cyklister kan förflytta sig långsammare än de enskilda cyklisterna, om de hela tiden växlar om vem som ligger först.' },
+      { type: 'p', html: 'Att hålla isär de två farterna är avgörande i praktiken. Det är alltid grupphastigheten som bär energi och information, och den kan aldrig överstiga ljushastigheten i vakuum. Fashastigheten får däremot gärna göra det: i ett plasma glider vågtopparna fram fortare än ljuset samtidigt som pulsen som helhet kryper fram långsammare, och ingen naturlag tar skada av det — en ensam vågtopp bär ingenting med sig. I en optisk fiber är det grupphastigheten som avgör hur snabbt en datapuls når fram, och skillnaden mellan olika våglängders grupphastighet som gör att pulsen breddas och till slut flyter ihop med nästa.' }
+    ]
   }
 ];

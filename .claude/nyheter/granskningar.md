@@ -5,7 +5,98 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-09 | `2026-08-09-flygande-fokus` | RÄTTA FÖRST → GODKÄND | Tre formuleringar rättade (bildtextens ”tre mellersta”, ”hela effekten” vid 4,8 J, 2004 som årtal). Hela originalartikeln lästes i PDF — samtliga siffror verifierade mot den. |
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
+
+---
+
+## 2026-08-09 — `2026-08-09-flygande-fokus`
+
+**Granskningsläge:** självständigt granskningspass enligt fallbacken i
+nyhetsagentens steg 11 (sessionen skulle inte starta subagenter). Artikeln är
+förhandsskriven kvällen 2026-08-08 och datumgrindad till midnatt.
+
+**1. Originalpublikationen — LÄST I SIN HELHET.** `nature.com/articles/...`
+gav 303 mot inloggningen, men artikeln är öppet tillgänglig och
+PDF:en (`.../s41567-026-03352-x.pdf`, 13 sidor) laddades ner utan hinder och
+lästes i original — abstract, brödtext, samtliga figurtexter och referenslistan.
+Ingen uppgift i artikeln vilar alltså på Phys.org-referatet.
+
+**2. Peer review-status:** *Nature Physics*, mottagen 6 december 2025, accepterad
+29 maj 2026, publicerad online 10 juli 2026. Kollegialt granskad. Licens
+CC BY-NC-ND 4.0, © The Author(s) 2026 — vilket också är grunden för bildbruket.
+Phys.org:s referat (2026-08-08) är alltså en månad efter publiceringen; artikeln
+utger sig inte för att beskriva ett nyare datum, och `research.citation` anger
+10 juli.
+
+**3. Siffror — verifieringslista (allt mot PDF:en)**
+- 396 ± 14 MeV vid $n_e$ = (5,0 ± 0,5) · 10¹⁸ cm⁻³ ✓ s. 3
+- Dephasing-gränsen 185 MeV (+40/−39) ✓ s. 3 — felmarginalen utelämnad i texten
+- Tätintervallet 4,5–5,4 · 10¹⁸ cm⁻³ ✓ s. 3
+- 21 fs, 4 J; H₂:Ar = 95:5; injektion från Ar⁹⁻¹⁶⁺ ✓ s. 3
+- Acceleratorlängd 7 mm ✓ s. 2–3 (fokusets utbredningssträcka = gascellens längd)
+- Fält >1 GV/cm ✓ s. 1; ⟨ϵz⟩ ≈ 1–1,5 GV/cm ✓ s. 4
+- 1 GV/cm = 100 000 MV/m — efterräknat ✓; kvoten mot ”några tiotals MV/m”
+  ger ~3 000 ⇒ ”tusentals gånger” ✓
+- ”Drygt tio meter rör” för 400 MeV vid 30 MV/m — efterräknat: 13,3 m ✓
+- 10 GeV i ett steg vid ne ≈ 10¹⁷ cm⁻³ ✓ s. 1
+- ”Ungefär tio meter plasma” för 100 GeV traditionellt ✓ s. 2 (”plasma lengths
+  of 10 m”)
+- Skalningen: 0,66 m mot 13,5 m, ~20× ✓ s. 5 (formlerna insatta för 100 GeV)
+- 6 · 10⁶ elektroner = 0,9 ± 0,2 pC ✓ s. 3 — korskontrollerat mot elementar-
+  laddningen: 6 · 10⁶ · 1,602 · 10⁻¹⁹ C = 0,96 pC ✓
+- Fördubblingen försvann när pulsenergin höjdes 4,0 → 4,8 J ✓ s. 3
+- 1 GeV ”borde” ha nåtts: 1,5 GV/cm · 0,7 cm = 1,05 GeV ✓ s. 4
+- NSF-OPAL 2 × 25 PW ✓ s. 2
+- DLWFA föreslaget teoretiskt 2020 ✓ ref. 32 (Palastro m.fl., PRL 124, 134802)
+- Tajima & Dawson 1979 ✓ ref. 1 (PRL 43, 267)
+- 2004 års genombrott ✓ ref. 3–5 (Mangles, Geddes, Faure — samtliga Nature 431)
+- LEP: ”skulle motsvara de högsta elektronenergier som producerats vid CERN:s
+  LEP” ✓ s. 1; ringen 27 km och nedstängningen år 2000 är allmänt kända fakta
+- **Räkneord:** artikeln innehåller inga träffar på biljon/biljard/triljon.
+  ”Tusentals”, ”sex miljoner” och ”100 000” är efterräknade ovan.
+
+**4. Citat:** ett enda, Arrowsmith till Phys.org. Originalet (”…this was one of
+those thrilling occasions where the data started coming out just as predicted”)
+återgivet troget i översättning; `cite` anger korrekt att det sagts till Phys.org
+och inte står i studien. Froula-citatet i LLE:s pressmeddelande används inte.
+
+**5. Facktermer:** inga träffar på ”upphets”. Falska vänner genomgångna —
+*wakefield* → kölvattenfält, *group velocity* → grupphastighet, *beam* → stråle,
+*dephasing* behållet på engelska i kursiv med svensk förklaring (”i otakt med
+vågen”), eftersom någon etablerad svensk term inte finns.
+
+**6. Fysikalisk rimlighetskontroll av den pedagogiska framställningen:** påståendet
+att en ljuspunkt får röra sig med eller över ljushastigheten är korrekt — det är
+gruppfarten som bär energi och information. Framställningen av varför tätheten
+ändå spelar roll (ljuset på väg till fokuspunkterna passerar plasmat) är hämtad
+ur s. 2, där fokushastigheten anges bero på både fokusgeometrin och plasmats
+grupphastighet. Phys.org:s formulering att fokusfarten är ”oberoende av” hur
+snabbt ljuset går i plasmat är alltså en förenkling som INTE följts.
+
+**7. Bild och licens:** två figurer ur studien (fig. 1 och fig. 2), oförändrade
+frånsett formatkonvertering PNG → JPEG, hämtade från förlagets egen bildserver.
+CC BY-NC-ND 4.0 tillåter spridning i oförändrat skick med angiven upphovsperson;
+krediteringen anger författare, tidskrift, år och licens. Ingen beskärning har
+gjorts (skulle räknas som bearbetning). Inga AI-bilder. Bägge är äkta figurer,
+och brödtexten hänvisar till dem som just mätfigurer.
+
+**Rättningar som krävdes (åtgärdade före publicering)**
+
+1. **Bildtexten till fig. 2 sade fel sak.** ”Bara i de tre mellersta tätheterna
+   finns det elektroner långt till höger om linjen” stämmer inte — även vid
+   6,1 · 10¹⁸ cm⁻³ ligger den uppmätta maxenergin till höger om gränsen, fast
+   mindre än dubbelt så långt. Omskrivet till att de tre mellersta har en samlad
+   fläck *mer än dubbelt så långt* till höger. Alt-texten justerad på samma sätt.
+2. **”Försvann hela effekten” vid 4,8 J** kunde läsas som att inga elektroner
+   alls kom ut. Studien säger att elektroner vid dubbla dephasing-gränsen inte
+   längre observerades. Ändrat till ”försvann fördubblingen”.
+3. **Faktarutans 2004-påstående** (”innan lasrarna var korta och starka nog att
+   göra det på riktigt”) var missvisande — kölvattenacceleration demonstrerades
+   redan på 1990-talet, men med utsmetad energi. Ändrat till att 2004 var året då
+   tre lag oberoende visade strålar med en smal energitopp.
+
+**Utslag: GODKÄND** efter rättningarna.
 
 ---
 

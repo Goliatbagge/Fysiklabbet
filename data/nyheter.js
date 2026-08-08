@@ -83,6 +83,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-09-flygande-fokus",
+    date: "2026-08-09",
+    title: "Elektronerna sprang alltid i från vågen de surfade på — nu har fysiker lärt laserns fokus att flyga i kapp dem",
+    deck: "I en laserdriven plasmaaccelerator får elektroner surfa på en våg av laddning och kan nå enorm fart på några millimeter. Haken är att vågen alltid är en aning långsammare än surfarna. Ett lag i Rochester har nu format en laserpuls vars ljusstarkaste punkt förflyttar sig framåt med precis ljushastighet — och fick därmed ut elektroner med mer än dubbelt så hög energi som gränsen tillåter.",
+    category: "Partikelfysik",
+    readingTime: "7 min",
+    image: "nyheter/bilder/2026-08-09-flygande-fokus.jpg",
+    imageAlt: "Schematisk ritning av försöket. Till vänster en stor rund spegel, axiparabolan, som kastar en röd, konformad laserstråle mot en liten gascell i mitten. Ur cellen fortsätter ett blått elektronknippe genom en folie in mellan polerna på en stor spektrometermagnet, som böjer av elektronerna ner mot en bildplatta. Infällda diagram visar spegelns brännvidd, tre bilder av den ringformade fokusfläcken och en interferensmätning av plasmats täthet.",
+    imageCredit: "Figur: C. D. Arrowsmith m.fl., Nature Physics (2026), CC BY-NC-ND 4.0",
+    tags: ["partikelfysik", "acceleratorfysik", "plasma", "laser", "optik", "elektron", "elektriska fält", "kölvattenacceleration", "ljushastighet", "elektronvolt", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-08-flying-focus-laser-key-limitation.html" },
+      { name: "Laboratory for Laser Energetics, University of Rochester", url: "https://www.lle.rochester.edu/news/flying-focus-laser-plasma-acceleration/" },
+      { name: "Nature Physics (studien, fritt tillgänglig)", url: "https://www.nature.com/articles/s41567-026-03352-x" }
+    ],
+    research: {
+      citation: "C. D. Arrowsmith, K. G. Miller m.fl., ”Dephasingless laser wakefield acceleration of electrons using a flying focus”, Nature Physics (10 juli 2026)",
+      url: "https://doi.org/10.1038/s41567-026-03352-x"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 7.10 Elektriska fält och elektrisk fältstyrka", href: "katalog.html#fy1-7.10" },
+        { label: "Fysik nivå 1 · 8.1 Relativitetsteori", href: "katalog.html#fy1-8.1" },
+        { label: "Fysik nivå 2 · 2.7 Pulser, vågor och utbredningshastighet", href: "katalog.html#fy2-2.7" }
+      ],
+      fragor: [
+        "Den ljusstarkaste punkten i ett flygande fokus kan fås att röra sig fortare än ljuset, utan att någon naturlag bryts. Vad är det egentligen som inte får överskrida ljushastigheten — och hur avgör man om något ”rör sig” i den meningen?",
+        "Effekten uppträdde bara i ett smalt tätintervall. Ett resultat som kräver att man träffar rätt på en hundradel kan ses både som ett tecken på svaghet och som ett starkt stöd för teorin. Vilket är det här, och varför?",
+        "Forskarna kallar själva resultatet ett principbevis, inte en färdig accelerator, och redovisar öppet att strålen har stor energispridning och liten laddning. Varför är det värt att publicera ett resultat som ännu är sämre än de bästa befintliga acceleratorerna?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Idén är gammal och lockande: skjut i väg en kort, våldsamt intensiv laserpuls genom en gas, och låt elektroner surfa på vågen som bildas bakom den. Fälten i en sådan plasmavåg är tusentals gånger starkare än i en vanlig accelerator, så på några millimeter kan elektronerna få lika mycket fart som de annars behöver tiotals meter för. Haken har hela tiden varit densamma: surfarna hinner i kapp vågen." },
+      { type: "p", html: "I en studie i <em>Nature Physics</em> rapporterar ett lag vid University of Rochesters Laboratory for Laser Energetics att de kommit runt det. Genom att forma laserpulsen så att dess ljusstarkaste punkt förflyttar sig framåt med precis ljushastighet fick de ut elektroner med energin $396 \\pm 14\\ \\mathrm{MeV}$ ur en plasmasträcka på 7&nbsp;millimeter. Den klassiska gränsen för samma sträcka ligger på $185\\ \\mathrm{MeV}$." },
+
+      { type: "h2", text: "Varför metallrör inte räcker" },
+      { type: "p", html: "En konventionell accelerator driver partiklarna framåt med elektriska fält i metallhålrum, där en radiovåg svänger fram och tillbaka. Fältet kan inte göras hur starkt som helst: blir det för kraftigt slår det gnistor mellan metallytorna, och hela hålrummet slutar fungera. I praktiken hamnar taket kring några tiotals megavolt per meter. En elektron som ska nå 400&nbsp;megaelektronvolt behöver därför drygt tio meter rör." },
+      { type: "p", html: "Ett plasma har inte det problemet. Gasen är redan sönderdelad i fria elektroner och positiva joner, så det finns ingenting kvar att slå sönder — en gnista är just en gas som blir plasma, och där har det redan hänt. Ett laserdrivet plasma kan bära fält på över 1&nbsp;GV/cm, alltså 100&nbsp;000&nbsp;megavolt per meter." },
+
+      { type: "h2", text: "Vågen bakom pulsen" },
+      { type: "p", html: "Själva laserpulsen accelererar inte elektronerna direkt. Den sliter först loss dem från atomerna och skapar sitt eget plasma. Sedan knuffar ljustrycket från pulsen undan de fria elektronerna åt sidorna, medan jonerna — tusentals gånger tyngre — knappt hinner röra sig under de femtosekunder pulsen varar." },
+      { type: "p", html: "Bakom pulsen blir det därför en bubbla nästan tömd på elektroner, med de positiva jonerna kvar. De undanknuffade elektronerna svänger tillbaka och samlas i ett tunt skal runt bubblan. Laddningsuppdelningen mellan skalet och jonerna sätter upp ett väldigt elektriskt fält inuti bubblan, och eftersom bubblan följer med pulsen framåt bildar den ett kölvatten — precis som vågen bakom en båt. Några elektroner fångas in i bubblans bakre del och dras med. Det är där accelerationen sker, och det är den processen som gett metoden namnet kölvattenacceleration. Toshiki Tajima och John Dawson föreslog den redan 1979." },
+
+      { type: "h2", text: "Problemet: elektronerna hinner i kapp" },
+      { type: "p", html: "En infångad elektron är uppe i nästan ljusets fart efter en bråkdel av en millimeter. Bubblan, däremot, rör sig med laserpulsens grupphastighet, och ljus i ett plasma går alltid en aning långsammare än i vakuum. Skillnaden är futtig, men den samlas på hög." },
+      { type: "p", html: "Millimeter för millimeter glider elektronknippet framåt inuti bubblan. Till slut passerar det mitten och hamnar i den främre halvan, där fältet pekar åt andra hållet och bromsar i stället för att driva på. Accelerationen tar slut — på engelska <em>dephasing</em>, att elektronerna hamnar i otakt med vågen." },
+      { type: "p", html: "Det vanliga motmedlet är att späda ut plasmat. Ju glesare gas, desto närmare ljushastigheten kommer grupphastigheten, och desto längre hinner elektronerna innan de hamnar i otakt. Så har dagens bästa enstegsacceleratorer nått 10&nbsp;GeV. Men fältstyrkan avtar samtidigt som roten ur tätheten, så vinsten äts upp: att nå 100&nbsp;GeV den vägen skulle kräva ungefär tio meter plasma och orimligt mycket laserenergi." },
+
+      { type: "h2", text: "Ett fokus som flyger" },
+      { type: "p", html: "Lösningen laget använde heter flygande fokus, och den börjar i en spegel som kallas axiparabola. Till skillnad från en vanlig hålspegel har den olika brännvidd på olika avstånd från mitten: ljus som träffar nära centrum samlas i en punkt strax framför spegeln, ljus som träffar ytterkanten samlas längre bort. I stället för en enda fokuspunkt får man en utdragen fokuslinje, i det här fallet 7&nbsp;millimeter lång." },
+      { type: "p", html: "Eftersom ljuset från de olika ringarna når sina respektive fokuspunkter vid olika tidpunkter sveper den ljusstarkaste punkten framåt längs linjen. Farten hos den punkten bestäms i första hand av spegelns form — inte av hur snabbt en ljuspuls tar sig genom plasmat. Den går alltså att ställa in, och forskarna ställde in den på exakt ljushastigheten i vakuum. Då rör sig plasmavågen lika fort som elektronerna, och de kan aldrig glida fram i bubblan." },
+      { type: "p", html: "Att en ljuspunkt förflyttar sig med ljusets fart, eller till och med fortare, bryter inte mot någon naturlag. Punkten är ingen sak utan ett möte: den uppstår där ljus från olika delar av spegeln råkar komma fram samtidigt. Samma sak händer i en sax — skärningspunkten mellan bladen kan svepa längs saxen fortare än bladen själva rör sig, utan att någonting alls färdas i den farten. Ingen materia och inget meddelande följer med punkten." },
+      { type: "p", html: "Metoden föreslogs teoretiskt 2020, men det har varit en öppen fråga om den fungerar i praktiken. Axiparabolans fokusfläck är inte en prydlig prick utan har ringar runt sig, och ringarna driver egna småvågor i plasmat som kan stjäla energi ur pulsen och förvrida bubblan." },
+
+      { type: "h2", text: "Ett smalt fönster i tätheten" },
+      { type: "p", html: "Försöket gjordes på lasersystemet MTW-OPAL vid laboratoriet, med pulser på 21&nbsp;femtosekunder och 4&nbsp;joule. Gascellen fylldes med en blandning av 95&nbsp;% väte och 5&nbsp;% argon. Vätet joniseras lätt och bildar själva plasmavågen. Argonets inre elektroner sitter hårdare och slits loss först i pulsens allra intensivaste ögonblick — alltså mitt inne i vågen, precis där de behöver hamna för att fångas in. Tätheten mättes med interferometri vid varje skott, och elektronernas energi lästes av med en spektrometermagnet som böjer av dem olika mycket beroende på hur snabba de är." },
+      { type: "p", html: "Vid tätheten $n_\\mathrm{e} = (5{,}0 \\pm 0{,}5) \\cdot 10^{18}\\ \\mathrm{cm^{-3}}$ nådde elektronerna $396 \\pm 14\\ \\mathrm{MeV}$ — mer än dubbelt så mycket som de $185\\ \\mathrm{MeV}$ som otakten annars sätter stopp vid. Effekten fanns bara i ett smalt intervall, mellan 4,5 och 5,4&nbsp;·&nbsp;10<sup>18</sup>&nbsp;elektroner per kubikcentimeter." },
+      { type: "p", html: "Det smala fönstret är i sig ett kvitto på förklaringen. Ljuset på väg till de olika fokuspunkterna passerar ju genom plasmat, så tätheten påverkar ändå fokuspunktens fart en aning. Bara vid en viss täthet blir farten exakt ljushastigheten. Var plasmat glesare försvann laddningen — bubblans bakkant hann i kapp elektronerna och kastade ut dem åt sidorna. Var det tätare kom elektronerna i otakt ändå, om än senare än vanligt." },
+      { type: "image", src: "nyheter/bilder/2026-08-09-flygande-fokus-2.jpg", alt: "Sex vågräta mätremsor under varandra, en för varje plasmatäthet, med elektronernas energi på den vågräta axeln. I de tre mellersta remsorna syns en tydlig, samlad fläck långt till höger om den streckade linje som markerar den klassiska gränsen. I den översta och de två understa remsorna är signalen utsmetad och slutar tidigare.", caption: "Mätningen, remsa för remsa. Varje rad är ett skott vid en viss plasmatäthet, och den streckade linjen markerar den klassiska gränsen. I de tre mellersta tätheterna sitter en samlad fläck mer än dubbelt så långt till höger — där har elektronerna fortsatt att accelerera långt efter att de borde ha stannat av.", credit: "Figur: C. D. Arrowsmith m.fl., Nature Physics (2026), CC BY-NC-ND 4.0" },
+      { type: "p", html: "Forskarna är öppna med att strålen ännu inte är någon skönhet. Topparna mellan 300 och 400&nbsp;MeV innehåller omkring sex miljoner elektroner, en laddning på 0,9&nbsp;pikocoulomb, och energispridningen är bred. Höjde de pulsenergin från 4,0 till 4,8&nbsp;joule försvann fördubblingen: pulsen började dra ihop sig själv i plasmat och förstörde bubblan. Och räknar man på fältstyrkan borde 7&nbsp;millimeter ha gett en hel gigaelektronvolt — simuleringarna visar att knippet stannar av i perioder på vägen, eftersom vågens fart ännu inte är perfekt anpassad." },
+
+      { type: "h2", text: "Hundra gigaelektronvolt på en halvmeter" },
+      { type: "p", html: "Det är skalningen framåt som gör resultatet intressant. Enligt lagets beräkningar skulle samma princip kunna ge 100&nbsp;GeV på under en meter plasma — mot omkring 13&nbsp;meter för traditionell kölvattenacceleration, en tjugofaldig förkortning. 100&nbsp;GeV är samma energi som elektronerna hade i LEP, acceleratorn som fram till år 2000 gick i den 27&nbsp;kilometer långa ringen vid CERN där LHC ligger i dag." },
+      { type: "quote", html: "”Som experimentell forskare stöter man ibland på saker som inte blir som man tänkt sig. Men det här var ett av de där härliga tillfällena när mätdatan började komma in precis som förutsagt.”", cite: "Charlie Arrowsmith, förstaförfattare, till Phys.org" },
+      { type: "p", html: "Nästa steg är en andra specialslipad spegel, en så kallad echelon, som ska styra ljusets ankomsttider längs fokuslinjen ännu noggrannare. Då kan vågens fart matchas mot elektronerna i detalj, så att knippet kan placeras i den starkaste delen av fältet i stället för att glida omkring. Anläggningen som ska pröva det, NSF-OPAL, byggs vid samma laboratorium och ska ge två laserstrålar på 25&nbsp;petawatt vardera." },
+      { type: "p", html: "Om det håller hela vägen skulle en accelerator som i dag kräver en tunnel få plats i ett laboratorium — och användas till annat än partikelkrockar: kompakta källor för positroner, myoner och gammastrålning, och experiment där man låter en elektronstråle möta en annan laserpuls för att pröva om kvantelektrodynamiken håller även i de allra starkaste fält vi kan tillverka." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Idén är från 1979. Toshiki Tajima och John Dawson skissade då i en kort artikel hur en laserpuls kan väcka en plasmavåg som elektroner surfar på. Det dröjde till 2004 innan tre lag oberoende av varandra kunde visa strålar där elektronerna faktiskt höll ihop i en smal energitopp i stället för att spridas över alla energier.",
+        "En elektronvolt är den energi en elektron får när den passerar en volts spänning. De 396&nbsp;megaelektronvolterna motsvarar alltså en färd genom 396 miljoner volt — hopvikt till sju millimeter.",
+        "Ljus i ett plasma är en dubbelnatur: pulsen som helhet kryper fram långsammare än ljushastigheten, medan vågtopparna inuti den glider framåt fortare än ljuset. Det senare är tillåtet eftersom en enskild vågtopp inte bär med sig vare sig energi eller information."
+      ] }
+    ]
+  },
+  {
     id: "2026-08-08-svavande-magnet",
     date: "2026-08-08",
     title: "En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens",

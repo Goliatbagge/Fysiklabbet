@@ -100,6 +100,30 @@
  * raden och gör redan jobbet. Ringar är till för värden som står
  * utspridda (i figuren eller i en tidigare rad).
  *
+ * ⚠️ REGEL (EN TANKE PER LED, DIREKT FÖRE LEDET — användarkrav
+ * 2026-08-08): en tankebubbla förklarar ETT steg och visas i steget
+ * DIREKT INNAN det steget skrivs. Den får ALDRIG föregripa flera steg på
+ * en gång. Samla alltså inte hela deluppgiftens resonemang i en bubbla
+ * före första pennstrecket ("Nämnaren 3 betyder tredjeroten. Vilket tal
+ * … blir 8? Femman står utanför potensen.") och skriv sedan hela kedjan
+ * 5·8^(1/3)=5·∛8=5·2=10 i ett svep. Då kommer tanken före det den handlar
+ * om, eleven ska hålla tre saker i huvudet samtidigt, och när ledet väl
+ * skrivs är bubblan borta. Rätt rytm:
+ *   1. skriv av uppgiften                     — INGEN tanke (inget har hänt än)
+ *   2. tanke: "Att upphöja till 1/3 är detsamma som att ta tredjeroten."
+ *      → ledet =5·∛8
+ *   3. tanke: "Tredjeroten ur 8 är det tal som multiplicerat med sig
+ *      självt tre gånger blir 8. Alltså 2, för 2·2·2=8."  → ledet =5·2
+ *   4. ledet =10                              — INGEN tanke (självklart)
+ * Varje led i kedjan blir alltså ett eget klicksteg (fortsättning på
+ * samma rad, kollegieblock-stil) med sin tanke i steget före.
+ * SJÄLVKLARA LED GÅR UTAN TANKE: avskrift av uppgiften, en ren
+ * hopmultiplikation (5·2=10), en ren addition. En bubbla på ett steg som
+ * inte behöver den späder ut de bubblor som faktiskt betyder något.
+ * Skriv bubblan i PRESENS om det som är på väg att göras, aldrig som en
+ * sammanfattning av flera kommande rader. Gäller ALLA scener.
+ * Referensimpl: layoutRotberakna (ma1c-1.8 ex 1).
+ *
  * REGEL (BUBBELTEXT — INGA TANKSTRECK): en tankebubbla får ALDRIG
  * innehålla tankstreck (—). I en text full av formler läses strecket som
  * ett minustecken (påpekat 2026-07-29). Dela i stället meningen med
@@ -3821,22 +3845,40 @@
   /* ---------------- scen: rationella exponenter (ma1c-1.8 ex 1) -------
    * a) 49^(1/2), b) 5·8^(1/3) och c) 27^(2/3). Nämnaren i exponenten
    * talar om VILKEN rot, täljaren vilken potens roten sedan upphöjs
-   * till. Rotstrecket ritas med T.rot(). */
+   * till. Rotstrecket ritas med T.rot().
+   *
+   * REFERENSIMPL för REGEL (EN TANKE PER LED, DIREKT FÖRE LEDET): varje
+   * led i kedjan är ett eget klicksteg, och tanken som motiverar just det
+   * ledet visas steget innan. Avskriften av uppgiften och det sista
+   * självklara ledet (=10) går utan tanke. */
   function layoutRotberakna(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
 
-    /* ---- a) ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['a) Nämnaren 2 i']],
-      [['exponenten betyder']],
-      [['kvadratroten. Vilket']],
-      [['tal gånger sig självt']],
-      [['blir 49?']]
+    /* bubbla under den rad som just skrivs (där nästa rad ska hamna) */
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
+
+    /* ---- a) ---- steg 1: skriv av uppgiften, ingen tanke ---- */
+    y = 70;
+    xx = T.str('a) 49^1^/^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att upphöja till 1/2 är']],
+      [['detsamma som att ta']],
+      [['kvadratroten.']]
     ]);
-    T.tanke(bA);
-    y = 162;
-    xx = T.str('a) 49^1^/^2=', padL, y);
+    xx = T.str('=', xx, y);
     xx = T.rot('49', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvadratroten ur 49 är det']],
+      [['tal som gånger sig självt']],
+      [['blir 49. Alltså 7, för']],
+      [['7·7=49.']]
+    ]);
     T.str('=7', xx, y);
     T.stepEnd();
 
@@ -3846,19 +3888,31 @@
     T.stepEnd();
 
     /* ---- b) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['b) Nämnaren 3 betyder']],
-      [['tredjeroten. Vilket tal']],
-      [['multiplicerat med sig']],
-      [['självt tre gånger blir']],
-      [['8? Femman står utanför']],
-      [['potensen.']]
-    ]);
-    T.tanke(bB);
     y += 3.4 * F;
-    xx = T.str('b) 5·8^1^/^3=5·', padL, y);
+    xx = T.str('b) 5·8^1^/^3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att upphöja till 1/3 är']],
+      [['detsamma som att ta']],
+      [['tredjeroten. Femman']],
+      [['står utanför potensen.']]
+    ]);
+    xx = T.str('=5·', xx, y);
     xx = T.rot('8', xx, y, 3);
-    T.str('=5·2=10', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tredjeroten ur 8 är det']],
+      [['tal som multiplicerat med']],
+      [['sig självt tre gånger blir']],
+      [['8. Alltså 2, för 2·2·2=8.']]
+    ]);
+    xx = T.str('=5·2', xx, y);
+    T.stepEnd();
+
+    /* sista ledet är så enkelt att det inte behöver någon tanke */
+    T.str('=10', xx, y);
     T.stepEnd();
 
     y += 2.1 * F;
@@ -3867,22 +3921,38 @@
     T.stepEnd();
 
     /* ---- c) ---- */
-    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['c) Exponenten 2/3 delar']],
-      [['jag upp med potenslagen']],
-      [['för potens av potens:']],
-      [['först tredjeroten,']],
-      [['sedan i kvadrat.']]
-    ]);
-    T.tanke(bC);
     y += 3.4 * F;
-    T.str('c) 27^2^/^3=(27^1^/^3)^2', padL, y);
+    xx = T.str('c) 27^2^/^3', padL, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['I exponenten 2/3 är']],
+      [['nämnaren 3 roten och']],
+      [['täljaren 2 potensen. Jag']],
+      [['delar upp med potenslagen']],
+      [['för potens av potens.']]
+    ]);
+    T.str('=(27^1^/^3)^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['27 upphöjt till 1/3 är']],
+      [['tredjeroten ur 27.']]
+    ]);
     y += 2.2 * F;
     xx = T.str('=(', padL + 30, y);
     xx = T.rot('27', xx, y, 3);
-    T.str(')^2=3^2=9', xx, y);
+    xx = T.str(')^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tredjeroten ur 27 är 3,']],
+      [['för 3·3·3=27.']]
+    ]);
+    xx = T.str('=3^2', xx, y);
+    T.stepEnd();
+
+    T.str('=9', xx, y);
     T.stepEnd();
 
     y += 2.1 * F;

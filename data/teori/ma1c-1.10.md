@@ -72,6 +72,11 @@ delarna heter vid olika räknesätt. Lär dig dessa utantill!
 ::: exempel "Exempel 1 — Räkna i rätt ordning"
 **Beräkna<br>a) $5 \cdot (3 + 6)$&emsp;&emsp;b) $8 \cdot 10 - (4 \cdot 2 - 3)$&emsp;&emsp;c) $9 \cdot 5 - (10 - 7)^2$&emsp;&emsp;d) $\dfrac{15}{5 - 2}$**
 
+::: handskrift
+typ: prioritering
+:::
+
+::: textlosning
 **a)** Beräkna parentesen först:
 
 $$
@@ -106,4 +111,5 @@ $$
 $$
 
 **Svar:** 5
+:::
 :::

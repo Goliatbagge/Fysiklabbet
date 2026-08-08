@@ -51,6 +51,11 @@ dvs. $27^{1/3} = \sqrt[3]{27}$.
 ::: exempel "Exempel 1 — Beräkna utan räknare"
 **Beräkna utan räknare<br>a) $49^{1/2}$&emsp;&emsp;b) $5 \cdot 8^{1/3}$&emsp;&emsp;c) $27^{2/3}$**
 
+::: handskrift
+typ: rotberakna
+:::
+
+::: textlosning
 **a)** Exponenten $\frac{1}{2}$ betyder kvadratroten:
 
 $$
@@ -75,10 +80,16 @@ $$
 
 **Svar:** 9
 :::
+:::
 
 ::: exempel "Exempel 2 — Förenkla med potenslagarna"
 **Förenkla $\dfrac{x^{7/2}}{x^3}$.**
 
+::: handskrift
+typ: rotforenkla
+:::
+
+::: textlosning
 Vi använder potenslagen för division och räknar med exponenterna som med
 vanliga bråk:
 
@@ -87,4 +98,5 @@ $$
 $$
 
 **Svar:** $\sqrt{x}$
+:::
 :::

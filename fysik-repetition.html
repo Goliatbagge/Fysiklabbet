@@ -422,6 +422,7 @@
     <script src="data/repetition/fy2-3.js"></script>
     <script src="data/repetition/fy2-4.js"></script>
     <script src="data/repetition/fy2-5.js"></script>
+    <script src="kanonisk.js"></script>
 
     <script type="text/babel">
         const { useState, useEffect, useRef, useMemo, useCallback } = React;
@@ -1307,7 +1308,15 @@
                 document.title = pack
                     ? `Repetition: ${pack.chapter} — ${pack.course} — Fysiklabbet`
                     : 'Repetition inför provet — Fysiklabbet';
-            }, [pack]);
+
+                // Kanonisk adress = paketets ?id=-adress, samma som i
+                // sitemap.xml (se kanonisk.js).
+                if (window.sattKanonisk) {
+                    window.sattKanonisk(pack
+                        ? `fysik-repetition.html?id=${id}`
+                        : 'fysik-repetition.html');
+                }
+            }, [pack, id]);
             if (!pack) return <Chooser />;
             return <GameView key={id} packId={id} pack={pack} />;
         }

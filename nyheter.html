@@ -516,6 +516,7 @@
          komponenten nedan monterar widgeten i sin useEffect och behöver
          window.FYSIKNYHETSBREV redan då. -->
     <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <!-- KaTeX-motorn + auto-render. Artikeltextens $…$ sätts av renderMath()
          nedan, före begreppslänkning och bionisk läsning. -->
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -1399,6 +1400,15 @@
                 document.title = article
                     ? `${article.title} — Fysiklabbet`
                     : 'Nyheter — Fysiklabbet';
+
+                // Kanonisk adress = artikelns ?id=-adress, samma som i
+                // sitemap.xml och i RSS-flödet (se kanonisk.js). Det är
+                // också den adress delningssidorna i nyheter/dela/ pekar på.
+                if (window.sattKanonisk) {
+                    window.sattKanonisk(article
+                        ? `nyheter.html?id=${article.id}`
+                        : 'nyheter.html');
+                }
             }, [article]);
 
             return (

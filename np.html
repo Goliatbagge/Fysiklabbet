@@ -603,6 +603,7 @@
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -1439,7 +1440,16 @@
                     : prov
                         ? `${prov.namn} — lösningar steg för steg — Fysiklabbet`
                         : 'Fysiklabbet — Nationella prov med lösningar steg för steg';
-            }, [prov, uppgift]);
+
+                // Kanonisk adress = provets ?id=-adress, samma som i
+                // sitemap.xml (se kanonisk.js). De enskilda uppgifterna
+                // (:7) är delar av provet och pekar på provets adress.
+                if (window.sattKanonisk) {
+                    window.sattKanonisk(route.provId
+                        ? `np.html?id=${route.provId}`
+                        : 'np.html');
+                }
+            }, [prov, uppgift, route.provId]);
 
             return (
                 <div className="lab-page">

@@ -1918,32 +1918,74 @@
             const sectionsAsideRef = useRef(null);
             const scrollPendingRef = useRef(null);   // null | ref till elementet vi ska landa på
 
-            // Rullar upp till ett element (avsnittets innehåll, eller
+            // Rullar mjukt till ett element (avsnittets innehåll, eller
             // avsnittslistan efter ett kapitelklick).
             //
-            // Hoppar DIREKT i stället för mjukt, och lägger om positionen
-            // några gånger den närmaste halvsekunden. Skälet är mobilen:
-            // genomgången (marked + KaTeX + figurer) och webbtypsnitten
-            // renderas strax EFTER klicket, så sidans höjd ändras medan
-            // rullningen pågår — en mjuk rullning hinner då avbrytas, och
-            // ett engångshopp landar på en position som redan hunnit bli
-            // fel. Rör användaren sidan själv avbryts efterjusteringen.
+            // Animationen körs för hand, bildruta för bildruta, i stället
+            // för med `behavior: 'smooth'`. Skälet är mobilen: genomgången
+            // (marked + KaTeX + figurer) och webbtypsnitten renderas strax
+            // EFTER klicket, så sidans höjd ändras mitt under rullningen.
+            // Webbläsarens egen mjuka rullning siktar på en position som
+            // räknades ut vid start och kan avbrytas av den förskjutningen;
+            // här räknas målet om varje bildruta, så rullningen följer med
+            // och landar rätt. Efter framme hålls positionen kvar en stund
+            // ifall innehåll dyker upp sent. Rör användaren sidan själv
+            // avbryts alltihop direkt.
             const scrollTill = (ref) => {
-                let senast = -1;
-                const justera = () => {
+                const mal = () => {
                     const el = ref.current;
-                    if (!el) { if (senast < 0) window.scrollTo({ top: 0 }); return; }
-                    // Har sidan flyttat sig utan att vi bett om det har
-                    // användaren rullat — låt den vara.
-                    if (senast >= 0 && Math.abs(window.scrollY - senast) > 4) return;
-                    const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 16);
-                    if (senast < 0 || Math.abs(top - window.scrollY) > 2) {
-                        window.scrollTo({ top, behavior: 'auto' });
-                    }
-                    senast = window.scrollY;
+                    if (!el) return null;
+                    return Math.max(0, el.getBoundingClientRect().top + window.scrollY - 16);
                 };
-                justera();
-                [60, 180, 350, 600].forEach(ms => setTimeout(justera, ms));
+                const start = window.scrollY;
+                const forsta = mal();
+                if (forsta === null) { window.scrollTo({ top: 0 }); return; }
+
+                // Respektera systemets "minska rörelse"-inställning.
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    window.scrollTo({ top: forsta, behavior: 'auto' });
+                    return;
+                }
+
+                // Längre sträcka får ta något längre tid, men aldrig segt.
+                const tid = Math.min(560, Math.max(280, 260 + Math.abs(forsta - start) * 0.12));
+                const efterHall = 400;          // håll kvar positionen efteråt
+                const t0 = performance.now();
+                let fran = start;               // kurvans startpunkt (kan flyttas, se nedan)
+                let forraMal = forsta;
+                let stoppad = false;
+
+                // Avbryts av användarens EGNA rörelser — inte av att sidans
+                // höjd ändras. (Att jämföra scrollY mot ett väntat värde går
+                // inte: när innehåll dyker upp ovanför vyn flyttar webb-
+                // läsarens scroll-ankring sidan själv, vilket då hade lästs
+                // som att användaren rullat och rullningen hade avbrutits
+                // halvvägs.) Alla dessa inträffar efter klicket, så tappet
+                // som startade rullningen avbryter den inte.
+                const handelser = ['touchstart', 'wheel', 'keydown', 'pointerdown'];
+                const slappTaget = () => handelser.forEach(t => window.removeEventListener(t, avbryt));
+                function avbryt() { stoppad = true; slappTaget(); }
+                handelser.forEach(t => window.addEventListener(t, avbryt, { passive: true }));
+
+                const steg = (nu) => {
+                    if (stoppad) return;
+                    const m = mal();
+                    if (m === null) { slappTaget(); return; }
+                    // Flyttade sig målet (sent renderat innehåll ovanför)?
+                    // Flytta kurvans startpunkt lika mycket, så att resten av
+                    // rörelsen fortsätter mjukt i stället för att rycka till.
+                    if (Math.abs(m - forraMal) > 1) fran += m - forraMal;
+                    forraMal = m;
+
+                    const gatt = nu - t0;
+                    const t = Math.min(1, gatt / tid);
+                    const mjuk = 1 - Math.pow(1 - t, 3);       // ease-out
+                    const y = t < 1 ? fran + (m - fran) * mjuk : Math.round(m);
+                    if (Math.abs(y - window.scrollY) > 0.5) window.scrollTo(0, y);
+                    if (gatt < tid + efterHall) requestAnimationFrame(steg);
+                    else slappTaget();
+                };
+                requestAnimationFrame(steg);
             };
 
             const mobilLayout = () => window.matchMedia('(max-width: 820px)').matches;

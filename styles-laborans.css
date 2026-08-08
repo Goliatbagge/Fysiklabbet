@@ -112,6 +112,44 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
     letter-spacing: 0.18em;
 }
 
+/* Remsa under topp-bandet: sajten är under utveckling */
+
+.lab-utveckling {
+    background: var(--lab-accent-soft);
+    border-bottom: 1px solid rgba(200, 50, 74, 0.28);
+    color: var(--lab-ink-soft);
+}
+
+.lab-utveckling-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 7px 56px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 13px;
+}
+
+.lab-utveckling-etikett {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lab-accent);
+    white-space: nowrap;
+}
+
+.lab-utveckling a {
+    color: var(--lab-accent);
+    border-bottom: 1px solid rgba(200, 50, 74, 0.4);
+}
+
+.lab-utveckling a:hover {
+    border-bottom-color: var(--lab-accent);
+}
+
 /* Logotyp-rad (under topp-bandet) */
 
 .lab-header {
@@ -465,12 +503,18 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
 
 @media (max-width: 720px) {
     .lab-topbar-inner,
+    .lab-utveckling-inner,
     .lab-header-inner,
     .lab-breadcrumb,
     .lab-hero,
     .lab-footer {
         padding-left: 24px;
         padding-right: 24px;
+    }
+
+    .lab-utveckling-inner {
+        font-size: 12px;
+        justify-content: flex-start;
     }
 
     .lab-hero-title {

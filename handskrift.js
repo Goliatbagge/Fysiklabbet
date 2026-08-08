@@ -2118,19 +2118,24 @@
   function layoutJamfora(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL;
     var rad = 1.7 * F;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- steg 1: förläng första bråket ---- */
-    var b1 = T.bubble(120, 40, 260, [
-      [['Olika nämnare! Jag']],
-      [['förlänger varje bråk']],
-      [['med det andra']],
-      [['bråkets nämnare.']]
-    ]);
-    T.tanke(b1);
-    var y = 104;
+    var y = 96;
     var xx = T.fracH('4', '9', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Olika nämnare! Jag förlänger']],
+      [['första bråket med 7, det andra']],
+      [['bråkets nämnare.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracOp('4', '9', '·7', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('28', '63', xx, y);
     T.stepEnd();
@@ -2138,19 +2143,25 @@
     /* ---- steg 2: förläng andra bråket ---- */
     y += rad + 1.6 * F;
     xx = T.fracH('3', '7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och det andra bråket med 9.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracOp('3', '7', '·9', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('27', '63', xx, y);
     T.stepEnd();
 
     /* ---- steg 3: jämför täljarna ---- */
-    var b2 = T.bubble(120, T.bubbleTop(y + 1.04 * F), 272, [
+    tanke(y, [
       [['Samma nämnare! Nu jämför']],
       [['jag täljarna: 28 är större']],
       [['än 27.']]
-    ]);
-    T.tanke(b2);
+    ], 1.05);
     y += rad + 1.6 * F;
     xx = T.fracH('28', '63', padL, y);
     xx = T.str('>', xx, y);
@@ -2158,11 +2169,10 @@
     T.stepEnd();
 
     /* ---- svar ---- */
-    var b3 = T.bubble(120, T.bubbleTop(y + 1.04 * F), 262, [
+    tanke(y, [
       [['Alltså är fyra niondelar']],
       [['det största bråket.']]
-    ]);
-    T.tanke(b3);
+    ], 1.05);
     y += rad + 1.1 * F;
     var xe = T.str('Svar: ', padL, y);
     xe = T.fracH('4', '9', xe, y);
@@ -2422,21 +2432,27 @@
    * med 2 (divisionen skrivs med blåpennan i båda leden av bråkstrecket). */
   function layoutSamnamnare(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) 1/13 + 2/13 ---- */
-    var bA = T.bubble(120, 40, 262, [
-      [['a) Nämnarna är redan lika!']],
-      [['Då adderar jag täljarna och']],
-      [['behåller nämnaren.']]
-    ]);
-    T.tanke(bA);
-    y = 150;
+    y = 92;
     xx = T.str('a) ', padL, y);
     xx = T.fracH('1', '13', xx, y);
     xx = T.str('+', xx, y);
     xx = T.fracH('2', '13', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnarna är redan lika! Då']],
+      [['adderar jag täljarna och']],
+      [['behåller nämnaren.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('1+2', '13', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('3', '13', xx, y);
     T.stepEnd();
@@ -2448,31 +2464,35 @@
     T.stepEnd();
 
     /* ---- b) 19/6 − 5/6 ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 266, [
-      [['b) Samma sak vid subtraktion:']],
-      [['täljarna dras ifrån varandra,']],
-      [['nämnaren står kvar.']]
-    ]);
-    T.tanke(bB);
     y += 3.8 * F;
     xx = T.str('b) ', padL, y);
     xx = T.fracH('19', '6', xx, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak vid subtraktion:']],
+      [['täljarna dras ifrån varandra,']],
+      [['nämnaren står kvar.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('19-5', '6', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('14', '6', xx, y);
     T.stepEnd();
 
-    var bB2 = T.bubble(120, T.bubbleTop(y, 1.05), 258, [
+    tanke(y, [
       [['14 och 6 är båda jämna, så']],
       [['bråket går att förkorta med 2.']]
-    ]);
-    T.tanke(bB2);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('14', '6', '/2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('7', '3', xx, y);
     T.stepEnd();
@@ -2493,19 +2513,23 @@
    * blåpennan. */
   function layoutOlikanamnare(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) metod 1 ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['a) Olika nämnare! 5 blir 20']],
-      [['om jag förlänger med 4,']],
-      [['eftersom 5·4=20.']]
-    ]);
-    T.tanke(bA);
-    y = 150;
+    y = 92;
     xx = T.str('a) ', padL, y);
     xx = T.fracH('3', '5', xx, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('7', '20', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Olika nämnare! 5 blir 20']],
+      [['om jag förlänger med 4,']],
+      [['eftersom 5·4=20.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracOp('3', '5', '·4', xx, y);
     xx = T.str('-', xx, y);
@@ -2517,20 +2541,29 @@
     xx = T.fracH('12', '20', xx, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('7', '20', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är nämnarna lika. Då drar']],
+      [['jag täljarna ifrån varandra.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('12-7', '20', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('5', '20', xx, y);
     T.stepEnd();
 
-    var bA2 = T.bubble(120, T.bubbleTop(y, 1.05), 262, [
+    tanke(y, [
       [['5 går i både 5 och 20, så']],
       [['jag förkortar med 5.']]
-    ]);
-    T.tanke(bA2);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('5', '20', '/5', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('1', '4', xx, y);
     T.stepEnd();
@@ -2542,18 +2575,19 @@
     T.stepEnd();
 
     /* ---- b) metod 2 ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 272, [
-      [['b) 3 kan inte multipliceras']],
-      [['med ett heltal och bli 5.']],
-      [['Då förlänger jag varje bråk']],
-      [['med det andra bråkets nämnare.']]
-    ]);
-    T.tanke(bB);
-    y += 4.1 * F;
+    y += 3.8 * F;
     xx = T.str('b) ', padL, y);
     xx = T.fracH('2', '5', xx, y);
     xx = T.str('+', xx, y);
     xx = T.fracH('1', '3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3 kan inte multipliceras med']],
+      [['ett heltal och bli 5. Då']],
+      [['förlänger jag varje bråk med']],
+      [['det andra bråkets nämnare.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracOp('2', '5', '·3', xx, y);
     xx = T.str('+', xx, y);
@@ -2565,8 +2599,16 @@
     xx = T.fracH('6', '15', xx, y);
     xx = T.str('+', xx, y);
     xx = T.fracH('5', '15', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma nämnare nu, så']],
+      [['täljarna adderas.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('6+5', '15', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('11', '15', xx, y);
     T.stepEnd();
@@ -2589,19 +2631,18 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var M10 = ['10', '20', '30', '40', '50', '60', '70', '80'];
     var M6 = ['6', '12', '18', '24', '30', '36', '42', '48'];
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- steg 1: två kolumner med multiplar ---- */
     var b1 = T.bubble(120, 40, 274, [
       [['Jag skriver upp multiplarna']],
-      [['till 10 och till 6 i varsin']],
-      [['kolumn och letar efter den']],
-      [['första som finns i båda.']]
+      [['till 10 i en kolumn.']]
     ]);
     T.tanke(b1);
     var cy0 = 200, rowH = 31, c1 = 80, c2 = 380;
     T.str('Multiplar av 10', c1, cy0 - 36, null, 0.62);
-    T.pause(160);
-    T.str('Multiplar av 6', c2, cy0 - 36, null, 0.62);
     T.pause(200);
     var box10 = null, box6 = null;
     M10.forEach(function (m, i) {
@@ -2610,6 +2651,8 @@
       T.pause(90);
     });
     T.stepEnd();
+    T.str('Multiplar av 6', c2, cy0 - 36, null, 0.62);
+    T.pause(200);
     M6.forEach(function (m, i) {
       var x1 = T.str(m, c2, cy0 + i * rowH, null, 0.62);
       if (m === '30') box6 = [c2, x1, cy0 + i * rowH];
@@ -2618,6 +2661,12 @@
     T.stepEnd();
 
     /* ---- steg 2: ringa in 30 i båda kolumnerna ---- */
+    y = cy0 + 7 * rowH;                    /* sista raden i kolumnerna */
+    tanke(y, [
+      [['Nu letar jag efter den första']],
+      [['multipeln som finns i BÅDA']],
+      [['kolumnerna. Det är 30.']]
+    ]);
     T.ring(box10[0], box10[1], box10[2],
            { ry: 0.48 * F, cy: box10[2] - 0.27 * F });
     T.pause(280);
@@ -2625,26 +2674,21 @@
            { ry: 0.48 * F, cy: box6[2] - 0.27 * F });
     T.stepEnd();
 
-    y = cy0 + 7 * rowH;                    /* sista raden i kolumnerna */
-    var b2 = T.bubble(120, T.bubbleTop(y), 262, [
-      [['30 är den första multipeln']],
-      [['som finns i båda kolumnerna.']]
-    ]);
-    T.tanke(b2);
     y += 2.6 * F;
     T.str('MGN=30', padL, y);
     T.stepEnd();
 
     /* ---- steg 3: förläng båda bråken till nämnaren 30 ---- */
-    var b3 = T.bubble(120, T.bubbleTop(y), 274, [
-      [['10·3=30 och 6·5=30, så jag']],
-      [['förlänger med 3 respektive 5.']]
-    ]);
-    T.tanke(b3);
     y += 3.4 * F;
     xx = T.fracH('7', '10', padL, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('1', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['10·3=30 och 6·5=30, så jag']],
+      [['förlänger med 3 respektive 5.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracOp('7', '10', '·3', xx, y);
     xx = T.str('-', xx, y);
@@ -2656,20 +2700,29 @@
     xx = T.fracH('21', '30', xx, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('5', '30', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma nämnare, så täljarna']],
+      [['dras ifrån varandra.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('21-5', '30', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('16', '30', xx, y);
     T.stepEnd();
 
-    var b4 = T.bubble(120, T.bubbleTop(y, 1.05), 254, [
-      [['16 och 30 är jämna —']],
-      [['förkorta med 2!']]
-    ]);
-    T.tanke(b4);
+    tanke(y, [
+      [['16 och 30 är jämna. Förkorta']],
+      [['med 2!']]
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('16', '30', '/2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('8', '15', xx, y);
     T.stepEnd();
@@ -2689,20 +2742,26 @@
    * talet, så täljaren skrivs med blåpennan. */
   function layoutBrakform(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) 1 4/5 ---- */
-    var bA = T.bubble(120, 40, 276, [
-      [['a) Talet framför bråket (1)']],
+    y = 92;
+    xx = T.str('a) 1', padL, y);
+    xx = T.fracH('4', '5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet framför bråket (1)']],
       [['gånger nämnaren (5), plus']],
       [['täljaren (4). Allt delat']],
       [['med nämnaren.']]
-    ]);
-    T.tanke(bA);
-    y = 175;
-    xx = T.str('a) 1', padL, y);
-    xx = T.fracH('4', '5', xx, y);
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracSeg([['1·5+4', BLUE]], [['5']], xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('9', '5', xx, y);
     T.stepEnd();
@@ -2714,16 +2773,19 @@
     T.stepEnd();
 
     /* ---- b) 3 1/7 ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 264, [
-      [['b) Precis som i a-uppgiften:']],
-      [['3·7 och sedan plus 1.']]
-    ]);
-    T.tanke(bB);
     y += 3.8 * F;
     xx = T.str('b) 3', padL, y);
     xx = T.fracH('1', '7', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Precis som i a-uppgiften:']],
+      [['3·7 och sedan plus 1.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracSeg([['3·7+1', BLUE]], [['7']], xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('22', '7', xx, y);
     T.stepEnd();
@@ -2742,33 +2804,39 @@
    * förkortas med 2) och b) 3 · 4/5 (heltalet gånger TÄLJAREN). */
   function layoutBrakmult(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) 8/3 · 7/2 ---- */
-    var bA = T.bubble(120, 40, 272, [
-      [['a) Täljare gånger']],
-      [['täljare, nämnare gånger']],
-      [['nämnare.']]
-    ]);
-    T.tanke(bA);
-    y = 150;
+    y = 92;
     xx = T.str('a) ', padL, y);
     xx = T.fracH('8', '3', xx, y);
     xx = T.mul(xx, y);
     xx = T.fracH('7', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljare gånger täljare,']],
+      [['nämnare gånger nämnare.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('8·7', '3·2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('56', '6', xx, y);
     T.stepEnd();
 
-    var bA2 = T.bubble(120, T.bubbleTop(y, 1.05), 258, [
+    tanke(y, [
       [['56 och 6 är jämna, så jag']],
       [['förkortar svaret med 2.']]
-    ]);
-    T.tanke(bA2);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('56', '6', '/2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('28', '3', xx, y);
     T.stepEnd();
@@ -2780,18 +2848,21 @@
     T.stepEnd();
 
     /* ---- b) 3 · 4/5 ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 274, [
-      [['b) Ett heltal gånger ett bråk:']],
-      [['heltalet multipliceras med']],
-      [['täljaren. Nämnaren står kvar.']]
-    ]);
-    T.tanke(bB);
     y += 3.8 * F;
     xx = T.str('b) 3', padL, y);
     xx = T.mul(xx, y);
     xx = T.fracH('4', '5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett heltal gånger ett bråk:']],
+      [['heltalet multipliceras med']],
+      [['täljaren. Nämnaren står kvar.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('3·4', '5', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('12', '5', xx, y);
     T.stepEnd();
@@ -2811,28 +2882,31 @@
    * finns i BÅDA förkortas bort — stryks hela täljaren blir 1 kvar. */
   function layoutFaktorisera(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 278, rader));
+    }
 
     /* ---- steg 1: multiplicera ihop täljare och nämnare ---- */
-    var b1 = T.bubble(120, 40, 276, [
-      [['Talen blir stora om jag']],
-      [['räknar ut nämnaren direkt.']],
-      [['Jag faktoriserar i stället!']]
-    ]);
-    T.tanke(b1);
-    y = 160;
+    y = 92;
     xx = T.fracH('7', '36', padL, y);
     xx = T.mul(xx, y);
     xx = T.fracH('6', '21', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talen blir stora om jag']],
+      [['räknar ut nämnaren direkt.']],
+      [['Jag faktoriserar i stället!']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('7·6', '36·21', xx, y);
     T.stepEnd();
 
     /* ---- steg 2: faktorisera nämnaren ---- */
-    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+    tanke(y, [
       [['36=6·6 och 21=7·3. Nu syns']],
       [['både 7 och 6 i nämnaren!']]
-    ]);
-    T.tanke(b2);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     var nx0 = xx;
@@ -2842,12 +2916,11 @@
     /* ---- steg 3: förkorta bort 7 och 6 ----
      * strykningarnas x-lägen räknas ur segmentbredderna på exakt samma
      * sätt som fracSeg placerade tecknen */
-    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 278, [
+    tanke(y, [
       [['7 och 6 finns i både täljare']],
       [['och nämnare, så de förkortas']],
       [['bort. I täljaren blir 1 kvar.']]
-    ]);
-    T.tanke(b3);
+    ], 1.05);
     var wNum = T.adv('7·6'), wDen = T.adv('6·6·7·3');
     var fw = Math.max(wNum, wDen) + 0.3 * F;
     var ybar = y - 0.34 * F;
@@ -2868,6 +2941,8 @@
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracH('1', '6·3', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('1', '18', xx, y);
     T.stepEnd();
@@ -2890,22 +2965,27 @@
    * bubblan i b) kopplar ihop de två skrivsätten. */
   function layoutBrakdiv(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 280, rader));
+    }
 
     /* ---- a) (3/4)/(2/5) ---- */
-    var bA = T.bubble(120, 40, 280, [
-      [['a) Division med bråk: byt']],
-      [['till multiplikation och vänd']],
-      [['upp och ned på bråket i']],
-      [['nämnaren.']]
-    ]);
-    T.tanke(bA);
-    y = 215;
+    y = 118;
     xx = T.str('a) ', padL, y);
     xx = T.bigFrac(['3', '4'], ['2', '5'], xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Division med bråk: byt till']],
+      [['multiplikation och vänd upp']],
+      [['och ned på bråket i nämnaren.']]
+    ], 1.9);
     xx = T.str('=', xx, y);
     xx = T.fracH('3', '4', xx, y);
     xx = T.mul(xx, y);
     xx = T.fracH('5', '2', xx, y, BLUE);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('15', '8', xx, y);
     T.stepEnd();
@@ -2917,26 +2997,34 @@
     T.stepEnd();
 
     /* ---- b) (4/5)/(2/7) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 282, [
-      [['b) Snett divisionstecken']],
-      [['betyder samma sak. Jag ritar']],
-      [['det som ett stort bråkstreck.']]
-    ]);
-    T.tanke(bB);
     y += 5.4 * F;
     xx = T.str('b) ', padL, y);
     xx = T.bigFrac(['4', '5'], ['2', '7'], xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma regel här: multiplicera']],
+      [['med det inverterade bråket.']]
+    ], 1.9);
     xx = T.str('=', xx, y);
     xx = T.fracH('4', '5', xx, y);
     xx = T.mul(xx, y);
     xx = T.fracH('7', '2', xx, y, BLUE);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('28', '10', xx, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['28 och 10 är jämna, så jag']],
+      [['förkortar med 2.']]
+    ], 1.9);
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('28', '10', '/2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('14', '5', xx, y);
     T.stepEnd();
@@ -2948,22 +3036,29 @@
     T.stepEnd();
 
     /* ---- c) 5/(3/4) ---- */
-    var bC = T.bubble(120, T.bubbleTop(y, 1.4), 278, [
-      [['c) Ett heltal är också ett']],
-      [['bråk. Skriver jag 5 som en']],
-      [['femma delat med ett blir']],
-      [['regeln precis densamma.']]
-    ]);
-    T.tanke(bC);
     y += 6.0 * F;
     xx = T.str('c) ', padL, y);
     xx = T.bigFrac('5', ['3', '4'], xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett heltal är också ett bråk:']],
+      [['5 är fem delat med ett.']]
+    ], 1.9);
     xx = T.str('=', xx, y);
     xx = T.bigFrac(['5', '1'], ['3', '4'], xx, y, { numCol: BLUE });
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är det ett bråk delat med']],
+      [['ett bråk, precis som i a).']]
+    ], 1.9);
     xx = T.str('=', xx, y);
     xx = T.fracH('5', '1', xx, y);
     xx = T.mul(xx, y);
     xx = T.fracH('4', '3', xx, y, BLUE);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('20', '3', xx, y);
     T.stepEnd();
@@ -2975,26 +3070,35 @@
     T.stepEnd();
 
     /* ---- d) (2/3)/12 ---- */
-    var bD = T.bubble(120, T.bubbleTop(y, 1.4), 276, [
-      [['d) Nu står heltalet i']],
-      [['nämnaren. Inverterat blir']],
-      [['12 till ett delat med 12.']]
-    ]);
-    T.tanke(bD);
     y += 5.4 * F;
     xx = T.str('d) ', padL, y);
     xx = T.bigFrac(['2', '3'], '12', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står heltalet i nämnaren.']],
+      [['Inverterat blir 12 till ett']],
+      [['delat med 12.']]
+    ], 1.9);
     xx = T.str('=', xx, y);
     xx = T.fracH('2', '3', xx, y);
     xx = T.mul(xx, y);
     xx = T.fracH('1', '12', xx, y, BLUE);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('2', '36', xx, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['2 och 36 är jämna, så jag']],
+      [['förkortar med 2.']]
+    ], 1.9);
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('2', '36', '/2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('1', '18', xx, y);
     T.stepEnd();
@@ -3013,6 +3117,9 @@
    * multiplikation; 63 hamnar i täljaren och 7 förkortas bort. */
   function layoutBrakdel(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- steg 1: "av" betyder gånger ---- */
     var b1 = T.bubble(120, 40, 268, [
@@ -3025,21 +3132,30 @@
     xx = T.fracH('5', '7', padL, y);
     xx = T.mul(xx, y);
     xx = T.str('63', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Heltalet multipliceras med']],
+      [['täljaren, nämnaren står kvar.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('5·63', '7', xx, y);
     T.stepEnd();
 
     /* ---- steg 2: förkorta med 7 ---- */
-    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 264, [
+    tanke(y, [
       [['63 är delbart med 7, så jag']],
       [['förkortar bråket med 7.']]
-    ]);
-    T.tanke(b2);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('5·63', '7', '/7', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     xx = T.fracH('5·9', '1', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.str('45', xx, y);
     T.stepEnd();
@@ -3159,7 +3275,7 @@
   function layoutVardesiffror(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
 
-    /* ---- steg 1: uppställning + uträkning ---- */
+    /* ---- steg 1: uppställning ---- */
     var b1 = T.bubble(120, 40, 272, [
       [['Framsidan är en']],
       [['rektangel, så arean']],
@@ -3181,7 +3297,9 @@
     var x24 = xx;
     xx = T.str('24', xx, y);
     var x24e = xx;
-    T.str('=468 cm^2', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=468 cm^2', xx, y);
     T.stepEnd();
 
     /* ---- steg 2: räkna värdesiffrorna i faktorerna ---- */
@@ -3376,6 +3494,9 @@
    * fyror som multipliceras blir exponenten. */
   function layoutPotensskriv(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     var b1 = T.bubble(120, 40, 268, [
       [['Hur många fyror ska jag']],
@@ -3391,18 +3512,23 @@
     T.str('  för litet', xx + 0.20 * F, y, null, 0.62);
     T.stepEnd();
 
+    tanke(y, [
+      [['Två fyror gav 16, för lite.']],
+      [['Jag provar med tre fyror.']]
+    ]);
     y += 1.9 * F;
-    xx = T.str('4·4·4=16·4=64', padL, y);
+    xx = T.str('4·4·4=16·4', padL, y);
+    T.stepEnd();
+
+    xx = T.str('=64', xx, y);
     T.str('  stämmer', xx + 0.20 * F, y, null, 0.62);
     T.stepEnd();
 
-    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
-      [['Tre fyror']],
-      [['multiplicerade ger 64.']],
-      [['Antalet faktorer är']],
-      [['exponenten.']]
+    tanke(y, [
+      [['Tre fyror multiplicerade']],
+      [['ger 64. Antalet faktorer']],
+      [['är exponenten.']]
     ]);
-    T.tanke(b2);
     y += 2.2 * F;
     T.str('64=4^3', padL + 30, y);
     T.stepEnd();
@@ -3457,21 +3583,24 @@
    * Faktorn 42 hör inte till potensen och följer med oförändrad. */
   function layoutPotensforenkla(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
-    var b1 = T.bubble(120, 40, 268, [
-      [['Samma bas x i täljare']],
-      [['och nämnare. Då']],
-      [['subtraherar jag']],
-      [['exponenterna. Faktorn']],
-      [['42 är ingen potens av x']],
-      [['och står kvar.']]
-    ]);
-    T.tanke(b1);
-    y = 202;
+    y = 122;
     T.str('Potenslagen för division', padL, y - 2.35 * F, null, 0.62);
     xx = T.fracH('42x^5', 'x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma bas x i täljare och']],
+      [['nämnare, så exponenterna']],
+      [['subtraheras. 42 står kvar.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.str('42x^5^-^2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.str('42x^3', xx, y);
     T.stepEnd();
@@ -3490,18 +3619,19 @@
    * innan de sätts lika. */
   function layoutPotensekvation(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
-    var b1 = T.bubble(120, 40, 268, [
-      [['Två potenser med samma']],
-      [['bas multipliceras. Då']],
-      [['adderar jag']],
-      [['exponenterna.']]
-    ]);
-    T.tanke(b1);
-    y = 158;
+    y = 76;
     T.str('8^m·8^5=8^7', padL, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Två potenser med samma bas']],
+      [['multipliceras. Då adderar']],
+      [['jag exponenterna.']]
+    ]);
     y += 2.0 * F;
     var xv = T.str('8', padL + 30, y);
     var xv1 = xv;
@@ -3513,13 +3643,11 @@
     var xh2 = xv;
     T.stepEnd();
 
-    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
-      [['Nu är båda leden EN']],
-      [['potens av 8. Samma bas']],
-      [['och samma värde betyder']],
-      [['samma exponent.']]
+    tanke(y, [
+      [['Nu är båda leden EN potens']],
+      [['av 8. Samma bas och samma']],
+      [['värde betyder samma exponent.']]
     ]);
-    T.tanke(b2);
     var rOpt = { cy: y - 0.86 * F, ry: 0.38 * F };
     var r1 = T.ring(xv1, xv2, y, rOpt);
     T.pause(300);
@@ -3532,9 +3660,15 @@
     T.fade(r2);
     T.stepEnd();
 
+    tanke(y, [
+      [['Jag drar bort 5 från båda']],
+      [['leden.']]
+    ]);
     y += 2.0 * F;
     xx = T.str('m=7', padL + 30, y);
     xx = T.str('-5', xx, y, BLUE);
+    T.stepEnd();
+
     T.str('=2', xx, y);
     T.stepEnd();
 
@@ -3552,58 +3686,74 @@
    * potenslagen för division. */
   function layoutPotensbrak(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
-    var b1 = T.bubble(120, 40, 268, [
+    y = 96;
+    xx = T.fracH('27^5^x', '3^x+3^x+3^x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
       [['Nämnaren är tre lika']],
       [['termer. Tre lika termer']],
       [['adderade är samma sak']],
       [['som 3 gånger termen.']]
-    ]);
-    T.tanke(b1);
-    y = 172;
-    xx = T.fracH('27^5^x', '3^x+3^x+3^x', padL, y);
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('27^5^x', '3·3^x', xx, y);
     T.stepEnd();
 
-    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
-      [['3 är ju 3 upphöjt till']],
-      [['1, så nämnaren blir en']],
-      [['enda potens av 3.']]
-    ]);
-    T.tanke(b2);
+    tanke(y, [
+      [['3 är ju 3 upphöjt till 1.']]
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracH('27^5^x', '3^1·3^x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma bas multiplicerad:']],
+      [['exponenterna adderas.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('27^5^x', '3^1^+^x', xx, y);
     T.stepEnd();
 
-    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
-      [['Nu ska baserna bli']],
-      [['lika. 27 är 3·3·3,']],
-      [['alltså 3 upphöjt till']],
-      [['3.']]
-    ]);
-    T.tanke(b3);
+    tanke(y, [
+      [['Nu ska baserna bli lika.']],
+      [['27 är 3·3·3, alltså 3']],
+      [['upphöjt till 3.']]
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracH('(3^3)^5^x', '3^1^+^x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Potens av potens: exponen-']],
+      [['terna multipliceras, 3·5x=15x.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('3^1^5^x', '3^1^+^x', xx, y);
     T.stepEnd();
 
-    var b4 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+    tanke(y, [
       [['Samma bas i täljare och']],
       [['nämnare. Subtrahera']],
-      [['exponenterna.']],
-      [['Parentesen behövs kring']],
-      [['hela nämnarens']],
+      [['exponenterna. Parentesen']],
+      [['behövs kring hela nämnarens']],
       [['exponent.']]
-    ]);
-    T.tanke(b4);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('=3^1^5^x^-^(^1^+^x^)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus framför parentesen']],
+      [['byter tecken på båda']],
+      [['termerna inuti.']]
+    ]);
     T.str('=3^1^5^x^-^1^-^x', xx, y);
     T.stepEnd();
 
@@ -3671,19 +3821,25 @@
    * minustecknet. */
   function layoutNegexponent(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['a) Negativ exponent']],
-      [['betyder 1 delat med']],
-      [['potensen, utan']],
-      [['minustecknet i']],
+    y = 80;
+    xx = T.str('a) 4^-^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Negativ exponent betyder']],
+      [['1 delat med potensen,']],
+      [['utan minustecknet i']],
       [['exponenten.']]
     ]);
-    T.tanke(bA);
-    y = 170;
-    xx = T.str('a) 4^-^2=', padL, y);
+    xx = T.str('=', xx, y);
     xx = T.fracH('1', '4^2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('1', '16', xx, y);
     T.stepEnd();
@@ -3695,16 +3851,21 @@
     T.stepEnd();
 
     /* ---- b) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 268, [
-      [['b) Samma regel. 5']],
-      [['upphöjt till 1 är ju']],
-      [['bara 5, så nämnaren']],
-      [['blir 5.']]
-    ]);
-    T.tanke(bB);
     y += 3.9 * F;
-    xx = T.str('b) 5^-^1=', padL, y);
+    xx = T.str('b) 5^-^1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma regel.']]
+    ]);
+    xx = T.str('=', xx, y);
     xx = T.fracH('1', '5^1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['5 upphöjt till 1 är ju']],
+      [['bara 5.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.fracH('1', '5', xx, y);
     T.stepEnd();
@@ -3750,20 +3911,28 @@
    * byter samtidigt tecken på exponenten. */
   function layoutFlyttaupp(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
-    var b1 = T.bubble(120, 40, 268, [
-      [['x utan exponent är x']],
-      [['upphöjt till 1. Flyttar']],
-      [['jag upp den i täljaren']],
-      [['byter exponenten']],
-      [['tecken.']]
-    ]);
-    T.tanke(b1);
-    y = 182;
+    y = 112;
     T.str('Flytta upp nämnaren', padL, y - 2.05 * F, null, 0.62);
     xx = T.fracH('5', 'x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x utan exponent är x']],
+      [['upphöjt till 1.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('5', 'x^1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Flyttar jag upp potensen']],
+      [['i täljaren byter']],
+      [['exponenten tecken.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.str('5x^-^1', xx, y);
     T.stepEnd();
@@ -3782,18 +3951,21 @@
    * invertera och byta tecken på exponenten. */
   function layoutBrakinvers(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['a) Upphöjt till −1']],
-      [['betyder att bråket']],
-      [['inverteras. Det vänds']],
-      [['upp och ner.']]
-    ]);
-    T.tanke(bA);
-    y = 186;
+    y = 106;
     xx = T.str('a) ', padL, y);
     xx = T.parenFrac('3', '4', '−1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Upphöjt till −1 betyder']],
+      [['att bråket inverteras.']],
+      [['Det vänds upp och ner.']]
+    ], 1.4);
     xx = T.str('=', xx, y);
     T.fracH('4', '3', xx, y);
     T.stepEnd();
@@ -3805,30 +3977,29 @@
     T.stepEnd();
 
     /* ---- b) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 268, [
-      [['b) Först inverterar jag']],
-      [['bråket och byter tecken']],
-      [['på exponenten. Sedan är']],
-      [['det en helt vanlig']],
-      [['potens.']]
-    ]);
-    T.tanke(bB);
     y += 4.6 * F;
     xx = T.str('b) ', padL, y);
     xx = T.parenFrac('4', '5', '−2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först inverterar jag']],
+      [['bråket och byter tecken']],
+      [['på exponenten.']]
+    ], 1.4);
     xx = T.str('=', xx, y);
     T.parenFrac('5', '4', '2', xx, y);
     T.stepEnd();
 
-    var bB2 = T.bubble(120, T.bubbleTop(y, 1.15), 268, [
+    tanke(y, [
       [['Både täljaren och']],
-      [['nämnaren upphöjs till']],
-      [['2.']]
-    ]);
-    T.tanke(bB2);
+      [['nämnaren upphöjs till 2.']]
+    ], 1.4);
     y += 3.5 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracH('5^2', '4^2', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.fracH('25', '16', xx, y);
     T.stepEnd();
@@ -3968,34 +4139,40 @@
    * är bråk som behöver samma nämnare. */
   function layoutRotforenkla(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
-    var b1 = T.bubble(120, 40, 268, [
-      [['Samma bas x i täljare']],
-      [['och nämnare, så']],
-      [['exponenterna']],
-      [['subtraheras.']],
-      [['Exponenterna är bråk']],
-      [['och behöver samma']],
-      [['nämnare.']]
-    ]);
-    T.tanke(b1);
-    y = 206;
+    y = 122;
     T.str('Potenslagen för division', padL, y - 2.35 * F, null, 0.62);
     xx = T.fracH('x^7^/^2', 'x^3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma bas x i täljare och']],
+      [['nämnare, så exponenterna']],
+      [['subtraheras.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     T.str('x^7^/^2^-^3', xx, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Exponenterna är bråk och']],
+      [['behöver samma nämnare.']],
+      [['3 är samma sak som 6/2.']]
+    ], 1.05);
     y += 2.6 * F;
     xx = T.str('=x^7^/^2^-^6^/^2', padL + 30, y);
+    T.stepEnd();
+
     T.str('=x^1^/^2', xx, y);
     T.stepEnd();
 
-    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+    tanke(y, [
       [['Exponenten 1/2 är ju']],
       [['kvadratroten.']]
     ]);
-    T.tanke(b2);
     y += 2.2 * F;
     xx = T.str('=', padL + 30, y);
     T.rot('x', xx, y);
@@ -4135,23 +4312,29 @@
    * tiopotensen — då justeras exponenten till närmaste prefix och talet
    * framför kompenseras åt andra hållet. */
   function layoutPrefix(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['Först grundpotensform,']],
-      [['sedan byte av']],
-      [['tiopotensen mot prefix.']],
-      [['a) Exponenten 12 heter']],
-      [['tera och skrivs T.']]
-    ]);
-    T.tanke(bA);
-    y = 158;
-    T.str('a) 2 000 000 000 000 B', padL, y);
+    y = 76;
+    xx = T.str('a) 2 000 000 000 000 B', padL, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Först skriver jag talet i']],
+      [['grundpotensform.']]
+    ]);
     y += 2.1 * F;
-    T.str('=2,0·10^1^2 B=2,0 TB', padL + 30, y);
+    xx = T.str('=2,0·10^1^2 B', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 12 heter tera']],
+      [['och skrivs T.']]
+    ]);
+    T.str('=2,0 TB', xx, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -4160,18 +4343,21 @@
     T.stepEnd();
 
     /* ---- b) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['b) Talet är mindre än']],
-      [['1, så exponenten blir']],
-      [['negativ. Exponenten −3']],
-      [['heter milli och skrivs']],
-      [['m.']]
-    ]);
-    T.tanke(bB);
     y += 3.2 * F;
-    T.str('b) 0,0047 l=4,7·10^-^3 l', padL, y);
+    xx = T.str('b) 0,0047 l', padL, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Talet är mindre än 1, så']],
+      [['exponenten blir negativ.']]
+    ]);
+    xx = T.str('=4,7·10^-^3 l', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten −3 heter milli']],
+      [['och skrivs m.']]
+    ]);
     y += 2.1 * F;
     T.str('=4,7 ml', padL + 30, y);
     T.stepEnd();
@@ -4182,28 +4368,33 @@
     T.stepEnd();
 
     /* ---- c) ---- */
-    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['c) Det finns inget']],
-      [['prefix för exponenten']],
-      [['5. Närmaste prefix har']],
-      [['exponenten 6.']]
-    ]);
-    T.tanke(bC);
     y += 3.2 * F;
-    T.str('c) 270 000 N=2,7·10^5 N', padL, y);
+    xx = T.str('c) 270 000 N', padL, y);
     T.stepEnd();
 
-    var bC2 = T.bubble(120, T.bubbleTop(y), 268, [
-      [['Gör jag tiopotensen 10']],
-      [['gånger större måste']],
-      [['talet framför bli 10']],
-      [['gånger mindre, annars']],
-      [['ändrar jag talets']],
-      [['värde.']]
+    tanke(y, [
+      [['Grundpotensform först.']]
     ]);
-    T.tanke(bC2);
+    xx = T.str('=2,7·10^5 N', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det finns inget prefix för']],
+      [['exponenten 5. Närmaste har']],
+      [['exponenten 6, och gör jag']],
+      [['tiopotensen 10 gånger större']],
+      [['måste talet framför bli 10']],
+      [['gånger mindre.']]
+    ]);
     y += 2.1 * F;
-    T.str('=0,27·10^6 N=0,27 MN', padL + 30, y);
+    xx = T.str('=0,27·10^6 N', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 6 heter mega']],
+      [['och skrivs M.']]
+    ]);
+    T.str('=0,27 MN', xx, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -4212,23 +4403,33 @@
     T.stepEnd();
 
     /* ---- d) ---- */
-    var bD = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['d) Inget prefix för']],
-      [['exponenten −5. Går jag']],
-      [['till −6 blir']],
-      [['tiopotensen 10 gånger']],
-      [['mindre, så talet']],
-      [['framför blir 10 gånger']],
-      [['större. Exponenten −6']],
-      [['heter mikro.']]
-    ]);
-    T.tanke(bD);
-    y += 3.9 * F;
-    T.str('d) 0,000082 g=8,2·10^-^5 g', padL, y);
+    y += 3.2 * F;
+    xx = T.str('d) 0,000082 g', padL, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Litet tal igen, så']],
+      [['exponenten blir negativ.']]
+    ]);
+    xx = T.str('=8,2·10^-^5 g', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Inget prefix för exponenten']],
+      [['−5. Går jag till −6 blir']],
+      [['tiopotensen 10 gånger mindre,']],
+      [['så talet framför blir 10']],
+      [['gånger större.']]
+    ]);
     y += 2.1 * F;
-    T.str('=82·10^-^6 g=82 µg', padL + 30, y);
+    xx = T.str('=82·10^-^6 g', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten −6 heter mikro']],
+      [['och skrivs µ.']]
+    ]);
+    T.str('=82 µg', xx, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -4282,6 +4483,9 @@
    * först skrivas om till tiopotenser av samma enhet. */
   function layoutHarddisk(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     var b1 = T.bubble(120, 40, 268, [
       [['Hur många gånger ryms']],
@@ -4296,28 +4500,28 @@
     T.fracH('2,0 TB', '4,0 GB', xx, y);
     T.stepEnd();
 
-    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+    tanke(y, [
       [['Olika prefix i täljare']],
       [['och nämnare går inte']],
       [['att förkorta. Jag']],
       [['skriver om båda i byte.']]
-    ]);
-    T.tanke(b2);
+    ], 1.05);
     y += 3.4 * F;
     xx = T.str('=', padL + 30, y);
     T.fracH('2,0·10^1^2 B', '4,0·10^9 B', xx, y);
     T.stepEnd();
 
-    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+    tanke(y, [
       [['2,0 delat med 4,0 är']],
       [['0,5, och tiopotenserna']],
       [['divideras genom att']],
       [['exponenterna']],
       [['subtraheras.']]
-    ]);
-    T.tanke(b3);
+    ], 1.05);
     y += 3.4 * F;
     xx = T.str('=0,5·10^3', padL + 30, y);
+    T.stepEnd();
+
     T.str('=500 st', xx, y);
     T.stepEnd();
 
@@ -4336,28 +4540,31 @@
    * innan nästa rad skrivs. */
   function layoutPrioritering(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, b0, b1, r;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
 
     /* ---- a) ---- */
-    var bA = T.bubble(120, 40, 268, [
-      [['Räkneordningen:']],
-      [['parenteser, potenser,']],
-      [['multiplikation och']],
-      [['division, sedan']],
-      [['addition och']],
-      [['subtraktion. a)']],
-      [['Parentesen först.']]
-    ]);
-    T.tanke(bA);
-    y = 178;
+    y = 76;
     xx = T.str('a) 5·', padL, y);
     b0 = xx;
     xx = T.str('(3+6)', xx, y);
     b1 = xx;
     T.stepEnd();
+
+    tanke(y, [
+      [['Räkneordningen: parenteser,']],
+      [['potenser, multiplikation och']],
+      [['division, sedan addition och']],
+      [['subtraktion. Parentesen först.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
-    xx = T.str('=5·9=45', xx, y);
+    xx = T.str('=5·9', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=45', xx, y);
     T.stepEnd();
 
     y += 2.1 * F;
@@ -4366,13 +4573,6 @@
     T.stepEnd();
 
     /* ---- b) ---- */
-    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['b) Inne i parentesen']],
-      [['gäller samma ordning,']],
-      [['så multiplikationen 4·2']],
-      [['räknas allra först.']]
-    ]);
-    T.tanke(bB);
     y += 3.3 * F;
     xx = T.str('b) 8·10-(', padL, y);
     b0 = xx;
@@ -4380,6 +4580,13 @@
     b1 = xx;
     xx = T.str('-3)', xx, y);
     T.stepEnd();
+
+    tanke(y, [
+      [['Inne i parentesen gäller']],
+      [['samma ordning, så']],
+      [['multiplikationen 4·2 räknas']],
+      [['allra först.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
@@ -4390,6 +4597,12 @@
     xx = T.str('(8-3)', xx, y);
     b1 = xx;
     T.stepEnd();
+
+    tanke(y, [
+      [['Nu är parentesen en enda']],
+      [['subtraktion. Den räknas ut']],
+      [['före multiplikationen.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
@@ -4401,12 +4614,20 @@
     b1 = xx;
     xx = T.str('-5', xx, y);
     T.stepEnd();
+
+    tanke(y, [
+      [['Multiplikationen före']],
+      [['subtraktionen.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
 
     y += 2.1 * F;
-    T.str('=80-5=75', padL + 30, y);
+    xx = T.str('=80-5', padL + 30, y);
+    T.stepEnd();
+
+    T.str('=75', xx, y);
     T.stepEnd();
 
     y += 2.1 * F;
@@ -4415,13 +4636,6 @@
     T.stepEnd();
 
     /* ---- c) ---- */
-    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['c) Parentesen först,']],
-      [['sedan potensen, sedan']],
-      [['multiplikationen och']],
-      [['sist subtraktionen.']]
-    ]);
-    T.tanke(bC);
     y += 3.3 * F;
     xx = T.str('c) 9·5-', padL, y);
     b0 = xx;
@@ -4429,6 +4643,11 @@
     b1 = xx;
     xx = T.str('^2', xx, y);
     T.stepEnd();
+
+    tanke(y, [
+      [['Parentesen först, före']],
+      [['potensen.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
@@ -4439,6 +4658,11 @@
     xx = T.str('3^2', xx, y);
     b1 = xx;
     T.stepEnd();
+
+    tanke(y, [
+      [['Potensen står före']],
+      [['multiplikationen i ordningen.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
@@ -4450,12 +4674,20 @@
     b1 = xx;
     xx = T.str('-9', xx, y);
     T.stepEnd();
+
+    tanke(y, [
+      [['Multiplikationen före']],
+      [['subtraktionen.']]
+    ]);
     r = T.ring(b0, b1, y);
     T.stepEnd();
     T.fade(r);
 
     y += 2.1 * F;
-    T.str('=45-9=36', padL + 30, y);
+    xx = T.str('=45-9', padL + 30, y);
+    T.stepEnd();
+
+    T.str('=36', xx, y);
     T.stepEnd();
 
     y += 2.1 * F;
@@ -4464,20 +4696,20 @@
     T.stepEnd();
 
     /* ---- d) ---- */
-    var bD = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
-      [['d) I ett bråk finns']],
-      [['osynliga parenteser']],
-      [['runt täljaren och']],
-      [['nämnaren. Nämnaren']],
-      [['räknas ut först, sedan']],
-      [['divisionen.']]
-    ]);
-    T.tanke(bD);
-    y += 4.2 * F;
+    y += 3.3 * F;
     xx = T.str('d) ', padL, y);
     xx = T.fracH('15', '5-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I ett bråk finns osynliga']],
+      [['parenteser runt täljare och']],
+      [['nämnare. Nämnaren först.']]
+    ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('15', '3', xx, y);
+    T.stepEnd();
+
     xx = T.str('=', xx, y);
     T.str('5', xx, y);
     T.stepEnd();

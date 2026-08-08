@@ -58,6 +58,11 @@ För att räkna med potenser ska vi använda **potenslagarna**.
 ::: exempel "Exempel 1 — Tecken och potenser"
 **Beräkna<br>a) $(-9)^2$&emsp;&emsp;b) $-9^2$**
 
+::: handskrift
+typ: potenstecken
+:::
+
+::: textlosning
 **a)** Hela talet −9 är basen, så
 
 $$
@@ -77,10 +82,16 @@ $$
 
 **Svar:** −81
 :::
+:::
 
 ::: exempel "Exempel 2 — Skriv som en potens"
 **Skriv 64 som en potens med basen 4.**
 
+::: handskrift
+typ: potensskriv
+:::
+
+::: textlosning
 Tänk "4 upphöjt till något ska bli 64", alternativt "hur många fyror ska
 multipliceras för att produkten ska bli 64?".
 
@@ -96,10 +107,16 @@ $$
 
 **Svar:** $4^3$
 :::
+:::
 
 ::: exempel "Exempel 3 — Utveckla en parentes"
 **Utveckla $(7x)^2$.**
 
+::: handskrift
+typ: potensutveckla
+:::
+
+::: textlosning
 *Alla faktorer* inne i parentesen ska upphöjas till 2:
 
 $$
@@ -108,10 +125,16 @@ $$
 
 **Svar:** $49x^2$
 :::
+:::
 
 ::: exempel "Exempel 4 — Förenkla ett bråk med potenser"
 **Förenkla $\dfrac{42x^5}{x^2}$.**
 
+::: handskrift
+typ: potensforenkla
+:::
+
+::: textlosning
 Vi använder potenslagen för division:
 
 $$
@@ -120,10 +143,16 @@ $$
 
 **Svar:** $42x^3$
 :::
+:::
 
 ::: exempel "Exempel 5 — Potensekvation med samma bas"
 **Lös ekvationen $8^m \cdot 8^5 = 8^7$.**
 
+::: handskrift
+typ: potensekvation
+:::
+
+::: textlosning
 Skriv om båda led som en enda potens av 8. Sedan kan man sätta exponenterna
 lika och lösa ekvationen därifrån:
 
@@ -148,10 +177,16 @@ $$
 
 **Svar:** $m = 2$
 :::
+:::
 
 ::: exempel "Exempel 6 — Förenkla ett bråkuttryck med potenser"
 **Förenkla $\dfrac{27^{5x}}{3^x + 3^x + 3^x}$.**
 
+::: handskrift
+typ: potensbrak
+:::
+
+::: textlosning
 När vi ska förenkla bråkuttryck med potenser ska vi först sikta på att
 skriva om både täljare och nämnare som *en* potens. Därefter skriver vi om
 potenserna, så att de får samma bas. Därefter brukar det bli enkelt. Vi
@@ -176,4 +211,5 @@ $$
 $$
 
 **Svar:** $3^{14x-1}$
+:::
 :::

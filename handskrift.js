@@ -508,6 +508,14 @@
     '⟺': { w: 158, strokes: [[[54, 56], [104, 57]], [[54, 74], [104, 73]],
                               [[58, 44], [38, 65], [58, 88]],
                               [[100, 44], [120, 65], [100, 88]]] },
+    /* µ (mikro, ma1c-1.9): som u men med nedstapel på vänstra staven */
+    'µ': { w: 66, strokes: [[[23, 52], [25, 90], [28, 126]],
+                            [[25, 84], [32, 96], [46, 92], [56, 80]],
+                            [[58, 52], [60, 100]]] },
+    /* rottecken (ma1c-1.8) — ENDAST som reservglyf när ett rotuttryck
+     * skrivs inline utan radikand. Riktiga rötter ritas med T.rot(), som
+     * drar rotstrecket över hela radikanden. */
+    '√': { w: 78, strokes: [[[10, 58], [22, 52], [34, 96], [54, 8], [74, 8]]] },
     /* MOMENTPILAR (svensk kurslitteratur): moment moturs/medurs skrivs som
      * ett M med en vridpil ÖVER bokstaven. Pilarna är KOMBINERANDE tecken
      * — de har inget advance och placeString ritar dem ovanför föregående
@@ -2207,7 +2215,12 @@
       acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
                   color: col || null });
       pause(130);
-      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, col);
+      /* NÄMNARE MED EXPONENT (ma1c-1.7/1.8): en upphöjd siffra i nämnaren
+       * hamnar 0,5·F över nämnarens baslinje och skär då bråkstrecket.
+       * Nämnaren sänks därför en aning när den innehåller ett upphöjt
+       * tecken (påverkar inte vanliga nämnare). */
+      var dsink = denS.indexOf('^') >= 0 ? 0.20 * F : 0;
+      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, col);
       return x0 + w + 1.5;
     }
     /* bråk där täljare/nämnare byggs av segment [text, färg] — så att
@@ -2304,11 +2317,76 @@
     }
     function fade(st) { acts.push({ kind: 'fade', ref: st }); }
 
+    /* ROT (ma1c-1.8): rottecknet ritas som för hand — liten ansats, ned i
+     * kilen, upp till toppen och sedan rotstrecket HELA vägen över
+     * radikanden, innan radikanden skrivs under strecket. Ett eventuellt
+     * rotindex (3 för tredjeroten) skrivs först, litet, i kilens vinkel.
+     * Returnerar nästa x. */
+    function rotW(innerS, idx) {
+      return (idx ? adv(String(idx), 0.55) * 0.8 : 0) +
+             0.46 * F + adv(innerS) + 0.16 * F;
+    }
+    function rot(innerS, x0, yb, idx) {
+      var x = x0;
+      if (idx != null) {
+        str(String(idx), x, yb - 0.52 * F, null, 0.55);
+        x += adv(String(idx), 0.55) * 0.8;
+        pause(120);
+      }
+      var iw = adv(innerS);
+      var top = yb - 1.02 * F;
+      acts.push({ kind: 'stroke', pts: [
+        [x, yb - 0.40 * F], [x + 0.09 * F, yb - 0.46 * F],
+        [x + 0.20 * F, yb + 0.06 * F], [x + 0.38 * F, top],
+        [x + 0.46 * F + iw + 0.10 * F, top]] });
+      pause(150);
+      str(innerS, x + 0.46 * F, yb);
+      return x + 0.46 * F + iw + 0.16 * F;
+    }
+
+    /* STORA PARENTESER runt ett bråk, med exponent utanför (ma1c-1.7).
+     * Parentesen måste vara högre än en vanlig glyf — bråket når ~1,05·F
+     * över och ~1,05·F under raden — så den ritas som en egen båge i
+     * stället för med parentesglyfen. expS skrivs upphöjt efter den högra
+     * parentesen (t.ex. '−1'). Returnerar nästa x. */
+    /* x = bågens YTTERSTA punkt (vänsterkant för '(', högerkant för ')');
+     * ändarna böjer in mot uttrycket. */
+    function parenPts(x, yb, right) {
+      var yTop = yb - 1.42 * F, yBot = yb + 1.06 * F, ym = (yTop + yBot) / 2;
+      var d = (right ? -1 : 1) * 0.17 * F;
+      return [[x + d, yTop],
+              [x + d * 0.45, yTop + (ym - yTop) * 0.36],
+              [x + d * 0.04, ym - (ym - yTop) * 0.22],
+              [x, ym],
+              [x + d * 0.04, ym + (yBot - ym) * 0.22],
+              [x + d * 0.45, yBot - (yBot - ym) * 0.36],
+              [x + d, yBot]];
+    }
+    function parenFracW(numS, denS, expS) {
+      return 0.27 * F + fracW(numS, denS) + 0.30 * F +
+             (expS ? adv(expS, 0.62) : 0) + 0.10 * F;
+    }
+    function parenFrac(numS, denS, expS, x0, yb) {
+      acts.push({ kind: 'stroke', pts: parenPts(x0 + 0.04 * F, yb, false) });
+      pause(130);
+      var xr = fracH(numS, denS, x0 + 0.27 * F, yb);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: parenPts(xr + 0.21 * F, yb, true) });
+      var xe = xr + 0.27 * F;
+      if (expS) {
+        pause(150);
+        xe = str(expS, xe, yb - 1.24 * F, null, 0.62);
+      }
+      return xe + 0.10 * F;
+    }
+
     return { acts: acts, s: s, padL: padL, pause: pause, line: line,
              bubble: bubble, stepEnd: stepEnd, tanke: tanke,
              underline: underline, bubbleTop: bubbleTop, str: str, adv: adv,
              mul: mul, fracW: fracW, fracH: fracH, fracSeg: fracSeg,
-             fracOp: fracOp, bigFrac: bigFrac, strike: strike, ring: ring, fade: fade };
+             fracOp: fracOp, bigFrac: bigFrac, strike: strike, ring: ring,
+             fade: fade, rot: rot, rotW: rotW,
+             parenFrac: parenFrac, parenFracW: parenFracW };
   }
 
   /* ---------------- scen: samma nämnare (ma1c-1.3 ex 1) ----------------
@@ -3180,6 +3258,1163 @@
     T.stepEnd();
 
     return { acts: acts, contentW: 520, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ==================================================================
+   * ma1c kapitel 1, avsnitt 1.6–1.10 — potenser, rötter,
+   * grundpotensform/prefix och prioriteringsregler.
+   * ================================================================== */
+
+  /* ---------------- scen: tecken och potenser (ma1c-1.6 ex 1) ---------
+   * a) (−9)² och b) −9². Poängen är VAD SOM ÄR BASEN: parentesen tar med
+   * minustecknet, utan parentes gör den inte det. Basen ringas därför in
+   * med blåpennan i båda deluppgifterna innan produkten skrivs. */
+  function layoutPotenstecken(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, b0, b1;
+
+    /* ---- a) (−9)² ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Parentesen tar med']],
+      [['minustecknet, så hela']],
+      [['talet −9 är basen. Den']],
+      [['ska multipliceras med']],
+      [['sig själv två gånger.']]
+    ]);
+    T.tanke(bA);
+    y = 168;
+    xx = T.str('a) ', padL, y);
+    b0 = xx;
+    xx = T.str('(−9)', xx, y);
+    b1 = xx;
+    xx = T.str('^2', xx, y);
+    T.stepEnd();
+    T.ring(b0, b1, y);
+    T.pause(300);
+    T.str('basen', b0 + 0.16 * F, y + 1.05 * F, BLUE, 0.62);
+    T.stepEnd();
+    xx = T.str('=(−9)·(−9)', xx, y);
+    T.stepEnd();
+
+    var bA2 = T.bubble(120, T.bubbleTop(y, 1.35), 268, [
+      [['Två negativa faktorer']],
+      [['ger en positiv produkt.']]
+    ]);
+    T.tanke(bA2);
+    y += 2.7 * F;
+    T.str('=81', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 81', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) −9² ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Ingen parentes här.']],
+      [['Minustecknet står']],
+      [['utanför potensen, så']],
+      [['bara 9 är basen.']]
+    ]);
+    T.tanke(bB);
+    y += 3.1 * F;
+    xx = T.str('b) −', padL, y);
+    b0 = xx;
+    xx = T.str('9', xx, y);
+    b1 = xx;
+    xx = T.str('^2', xx, y);
+    T.stepEnd();
+    /* ringen dras tajt om NIAN — minustecknet ska tydligt hamna utanför */
+    T.ring(b0 + 0.12 * F, b1 - 0.02 * F, y);
+    T.pause(300);
+    T.str('basen', b0, y + 1.05 * F, BLUE, 0.62);
+    T.stepEnd();
+    xx = T.str('=−9·9', xx, y);
+    T.stepEnd();
+
+    y += 2.7 * F;
+    T.str('=−81', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: −81', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv som en potens (ma1c-1.6 ex 2) ---------
+   * 64 skrivet som en potens med basen 4. Man PROVAR sig fram: antalet
+   * fyror som multipliceras blir exponenten. */
+  function layoutPotensskriv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Hur många fyror ska jag']],
+      [['multiplicera för att']],
+      [['produkten ska bli 64?']],
+      [['Jag provar mig fram.']]
+    ]);
+    T.tanke(b1);
+    y = 150;
+    T.str('Provar', padL, y, null, 0.62);
+    y += 1.5 * F;
+    xx = T.str('4·4=16', padL, y);
+    T.str('  för litet', xx + 0.20 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xx = T.str('4·4·4=16·4=64', padL, y);
+    T.str('  stämmer', xx + 0.20 * F, y, null, 0.62);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['Tre fyror']],
+      [['multiplicerade ger 64.']],
+      [['Antalet faktorer är']],
+      [['exponenten.']]
+    ]);
+    T.tanke(b2);
+    y += 2.2 * F;
+    T.str('64=4^3', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 4^3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: utveckla en parentes (ma1c-1.6 ex 3) --------
+   * (7x)². Potenslagen (a·b)^x = a^x·b^x: ALLA faktorer inne i
+   * parentesen upphöjs — inte bara den ena. */
+  function layoutPotensutveckla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Parentesen innehåller']],
+      [['två faktorer, 7 och x.']],
+      [['Båda ska upphöjas till']],
+      [['2, inte bara den ena.']]
+    ]);
+    T.tanke(b1);
+    y = 168;
+    T.str('Potenslagen (a·b)^x=a^x·b^x', padL, y, null, 0.62);
+    y += 1.6 * F;
+    xx = T.str('(7x)^2=7^2·x^2', padL, y);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['7 i kvadrat är 7·7=49.']],
+      [['x i kvadrat står kvar']],
+      [['som det är.']]
+    ]);
+    T.tanke(b2);
+    y += 2.1 * F;
+    T.str('=49x^2', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 49x^2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förenkla bråk med potenser (ma1c-1.6 ex 4) --
+   * 42x⁵/x². Samma bas i täljare och nämnare ⇒ exponenterna subtraheras.
+   * Faktorn 42 hör inte till potensen och följer med oförändrad. */
+  function layoutPotensforenkla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Samma bas x i täljare']],
+      [['och nämnare. Då']],
+      [['subtraherar jag']],
+      [['exponenterna. Faktorn']],
+      [['42 är ingen potens av x']],
+      [['och står kvar.']]
+    ]);
+    T.tanke(b1);
+    y = 202;
+    T.str('Potenslagen för division', padL, y - 2.35 * F, null, 0.62);
+    xx = T.fracH('42x^5', 'x^2', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.str('42x^5^-^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.str('42x^3', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 42x^3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: potensekvation (ma1c-1.6 ex 5) --------------
+   * 8^m · 8^5 = 8^7. Båda leden skrivs som EN potens av 8; då måste
+   * exponenterna vara lika, och exponenterna ringas in med blåpennan
+   * innan de sätts lika. */
+  function layoutPotensekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Två potenser med samma']],
+      [['bas multipliceras. Då']],
+      [['adderar jag']],
+      [['exponenterna.']]
+    ]);
+    T.tanke(b1);
+    y = 158;
+    T.str('8^m·8^5=8^7', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    var xv = T.str('8', padL + 30, y);
+    var xv1 = xv;
+    xv = T.str('^m^+^5', xv, y);
+    var xv2 = xv;
+    xv = T.str('=8', xv, y);
+    var xh1 = xv;
+    xv = T.str('^7', xv, y);
+    var xh2 = xv;
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['Nu är båda leden EN']],
+      [['potens av 8. Samma bas']],
+      [['och samma värde betyder']],
+      [['samma exponent.']]
+    ]);
+    T.tanke(b2);
+    var rOpt = { cy: y - 0.86 * F, ry: 0.38 * F };
+    var r1 = T.ring(xv1, xv2, y, rOpt);
+    T.pause(300);
+    var r2 = T.ring(xh1, xh2, y, rOpt);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('m+5=7', padL + 30, y);
+    T.fade(r1);
+    T.fade(r2);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xx = T.str('m=7', padL + 30, y);
+    xx = T.str('-5', xx, y, BLUE);
+    T.str('=2', xx, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: m=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bråkuttryck med potenser (ma1c-1.6 ex 6) ----
+   * 27^(5x) / (3^x + 3^x + 3^x). Arbetsgången: skriv täljare och nämnare
+   * som VAR SIN enda potens, gör om dem till SAMMA bas och använd sedan
+   * potenslagen för division. */
+  function layoutPotensbrak(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Nämnaren är tre lika']],
+      [['termer. Tre lika termer']],
+      [['adderade är samma sak']],
+      [['som 3 gånger termen.']]
+    ]);
+    T.tanke(b1);
+    y = 172;
+    xx = T.fracH('27^5^x', '3^x+3^x+3^x', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('27^5^x', '3·3^x', xx, y);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['3 är ju 3 upphöjt till']],
+      [['1, så nämnaren blir en']],
+      [['enda potens av 3.']]
+    ]);
+    T.tanke(b2);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('27^5^x', '3^1·3^x', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('27^5^x', '3^1^+^x', xx, y);
+    T.stepEnd();
+
+    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['Nu ska baserna bli']],
+      [['lika. 27 är 3·3·3,']],
+      [['alltså 3 upphöjt till']],
+      [['3.']]
+    ]);
+    T.tanke(b3);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('(3^3)^5^x', '3^1^+^x', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('3^1^5^x', '3^1^+^x', xx, y);
+    T.stepEnd();
+
+    var b4 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['Samma bas i täljare och']],
+      [['nämnare. Subtrahera']],
+      [['exponenterna.']],
+      [['Parentesen behövs kring']],
+      [['hela nämnarens']],
+      [['exponent.']]
+    ]);
+    T.tanke(b4);
+    y += 3.3 * F;
+    xx = T.str('=3^1^5^x^-^(^1^+^x^)', padL + 30, y);
+    T.str('=3^1^5^x^-^1^-^x', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=3^1^4^x^-^1', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 3^1^4^x^-^1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: exponenten noll (ma1c-1.7 ex 1) -------------
+   * a) 25⁰ och b) 4⁰ + (−7)⁰. Regeln a⁰ = 1 gäller varje bas utom 0 —
+   * även en negativ bas. */
+  function layoutExponentnoll(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Varje tal utom 0']],
+      [['upphöjt till 0 är 1,']],
+      [['oavsett hur stor basen']],
+      [['är.']]
+    ]);
+    T.tanke(bA);
+    y = 158;
+    T.str('a) 25^0=1', padL, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Båda termerna har']],
+      [['exponenten 0, så båda']],
+      [['är 1, också den med']],
+      [['negativ bas.']]
+    ]);
+    T.tanke(bB);
+    y += 3.1 * F;
+    T.str('b) 4^0+(−7)^0=1+1', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('=2', padL + 30, y);
+    T.stepEnd();
+
+    y += 1.9 * F;
+    xe = T.str('Svar: 2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: negativa exponenter (ma1c-1.7 ex 2) ---------
+   * a) 4⁻² och b) 5⁻¹. Negativ exponent = 1 delat med potensen utan
+   * minustecknet. */
+  function layoutNegexponent(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Negativ exponent']],
+      [['betyder 1 delat med']],
+      [['potensen, utan']],
+      [['minustecknet i']],
+      [['exponenten.']]
+    ]);
+    T.tanke(bA);
+    y = 170;
+    xx = T.str('a) 4^-^2=', padL, y);
+    xx = T.fracH('1', '4^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '16', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('1', '16', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 268, [
+      [['b) Samma regel. 5']],
+      [['upphöjt till 1 är ju']],
+      [['bara 5, så nämnaren']],
+      [['blir 5.']]
+    ]);
+    T.tanke(bB);
+    y += 3.9 * F;
+    xx = T.str('b) 5^-^1=', padL, y);
+    xx = T.fracH('1', '5^1', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '5', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('1', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv i potensform (ma1c-1.7 ex 3) ----------
+   * 1/3⁵ skrivet som EN potens. Regeln för negativa exponenter läses
+   * baklänges. */
+  function layoutPotensform(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Regeln baklänges: 1']],
+      [['delat med en potens är']],
+      [['samma potens med']],
+      [['negativ exponent.']]
+    ]);
+    T.tanke(b1);
+    y = 182;
+    T.str('Negativ exponent', padL, y - 2.05 * F, null, 0.62);
+    xx = T.fracH('1', '3^5', padL, y);
+    T.str('=3^-^5', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: 3^-^5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 520, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: flytta upp nämnaren (ma1c-1.7 ex 4) ---------
+   * 5/x som en potens med basen x. Nämnaren "flyttas upp" i täljaren och
+   * byter samtidigt tecken på exponenten. */
+  function layoutFlyttaupp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['x utan exponent är x']],
+      [['upphöjt till 1. Flyttar']],
+      [['jag upp den i täljaren']],
+      [['byter exponenten']],
+      [['tecken.']]
+    ]);
+    T.tanke(b1);
+    y = 182;
+    T.str('Flytta upp nämnaren', padL, y - 2.05 * F, null, 0.62);
+    xx = T.fracH('5', 'x', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('5', 'x^1', xx, y);
+    xx = T.str('=', xx, y);
+    T.str('5x^-^1', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: 5x^-^1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bråk med negativ exponent (ma1c-1.7 ex 5) ---
+   * a) (3/4)⁻¹ och b) (4/5)⁻². Upphöjt till −1 är samma sak som att
+   * invertera bråket; en annan negativ exponent hanteras genom att först
+   * invertera och byta tecken på exponenten. */
+  function layoutBrakinvers(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Upphöjt till −1']],
+      [['betyder att bråket']],
+      [['inverteras. Det vänds']],
+      [['upp och ner.']]
+    ]);
+    T.tanke(bA);
+    y = 186;
+    xx = T.str('a) ', padL, y);
+    xx = T.parenFrac('3', '4', '−1', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4', '3', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('4', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 1.4), 268, [
+      [['b) Först inverterar jag']],
+      [['bråket och byter tecken']],
+      [['på exponenten. Sedan är']],
+      [['det en helt vanlig']],
+      [['potens.']]
+    ]);
+    T.tanke(bB);
+    y += 4.6 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.parenFrac('4', '5', '−2', xx, y);
+    xx = T.str('=', xx, y);
+    T.parenFrac('5', '4', '2', xx, y);
+    T.stepEnd();
+
+    var bB2 = T.bubble(120, T.bubbleTop(y, 1.15), 268, [
+      [['Både täljaren och']],
+      [['nämnaren upphöjs till']],
+      [['2.']]
+    ]);
+    T.tanke(bB2);
+    y += 3.5 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('5^2', '4^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('25', '16', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('25', '16', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rationella exponenter (ma1c-1.8 ex 1) -------
+   * a) 49^(1/2), b) 5·8^(1/3) och c) 27^(2/3). Nämnaren i exponenten
+   * talar om VILKEN rot, täljaren vilken potens roten sedan upphöjs
+   * till. Rotstrecket ritas med T.rot(). */
+  function layoutRotberakna(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['a) Nämnaren 2 i']],
+      [['exponenten betyder']],
+      [['kvadratroten. Vilket']],
+      [['tal gånger sig självt']],
+      [['blir 49?']]
+    ]);
+    T.tanke(bA);
+    y = 162;
+    xx = T.str('a) 49^1^/^2=', padL, y);
+    xx = T.rot('49', xx, y);
+    T.str('=7', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Nämnaren 3 betyder']],
+      [['tredjeroten. Vilket tal']],
+      [['multiplicerat med sig']],
+      [['självt tre gånger blir']],
+      [['8? Femman står utanför']],
+      [['potensen.']]
+    ]);
+    T.tanke(bB);
+    y += 3.4 * F;
+    xx = T.str('b) 5·8^1^/^3=5·', padL, y);
+    xx = T.rot('8', xx, y, 3);
+    T.str('=5·2=10', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['c) Exponenten 2/3 delar']],
+      [['jag upp med potenslagen']],
+      [['för potens av potens:']],
+      [['först tredjeroten,']],
+      [['sedan i kvadrat.']]
+    ]);
+    T.tanke(bC);
+    y += 3.4 * F;
+    T.str('c) 27^2^/^3=(27^1^/^3)^2', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xx = T.str('=(', padL + 30, y);
+    xx = T.rot('27', xx, y, 3);
+    T.str(')^2=3^2=9', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 9', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 580, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förenkla med rot (ma1c-1.8 ex 2) ------------
+   * x^(7/2) / x³. Samma bas ⇒ exponenterna subtraheras, och exponenterna
+   * är bråk som behöver samma nämnare. */
+  function layoutRotforenkla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Samma bas x i täljare']],
+      [['och nämnare, så']],
+      [['exponenterna']],
+      [['subtraheras.']],
+      [['Exponenterna är bråk']],
+      [['och behöver samma']],
+      [['nämnare.']]
+    ]);
+    T.tanke(b1);
+    y = 206;
+    T.str('Potenslagen för division', padL, y - 2.35 * F, null, 0.62);
+    xx = T.fracH('x^7^/^2', 'x^3', padL, y);
+    xx = T.str('=', xx, y);
+    T.str('x^7^/^2^-^3', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=x^7^/^2^-^6^/^2', padL + 30, y);
+    T.str('=x^1^/^2', xx, y);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['Exponenten 1/2 är ju']],
+      [['kvadratroten.']]
+    ]);
+    T.tanke(b2);
+    y += 2.2 * F;
+    xx = T.str('=', padL + 30, y);
+    T.rot('x', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.rot('x', xe, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: grundpotensform (ma1c-1.9 ex 1) -------------
+   * a) 8 000 000 000, b) 743 000, c) 0,0009 och d) 0,000024. Exponenten
+   * RÄKNAS fram i talet: för tal över 1 antalet siffror efter den första,
+   * för tal under 1 antalet nollor före den första siffran. Siffrorna
+   * som räknas stryks under med blåpennan. */
+  function layoutGrundpotens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    /* skriv "x) <tal>" tecken för tecken och returnera x-gränserna */
+    function talrad(prefix, tal, yb) {
+      var x = T.str(prefix, padL, yb), pos = [];
+      for (var i = 0; i < tal.length; i++) {
+        var x0 = x;
+        x = T.str(tal[i], x, yb);
+        pos.push([x0, x]);
+      }
+      return { pos: pos, end: x };
+    }
+    /* blått streck under tecknen i0..i1 + en liten räkne-etikett */
+    function rakna(pos, i0, i1, yb, text) {
+      T.line([pos[i0][0] + 1, yb + 0.30 * F],
+             [pos[i1][1] - 1, yb + 0.30 * F], BLUE);
+      T.pause(240);
+      T.str(text, pos[i0][0] + 2, yb + 0.95 * F, BLUE, 0.62);
+    }
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['Grundpotensform: ett']],
+      [['tal mellan 1 och 10']],
+      [['gånger en tiopotens. a)']],
+      [['Första siffran är 8.']],
+      [['Sedan räknar jag']],
+      [['siffrorna efter den.']]
+    ]);
+    T.tanke(bA);
+    y = 178;
+    var A = talrad('a) ', '8 000 000 000', y);
+    T.stepEnd();
+    rakna(A.pos, 1, 12, y, '9 siffror efter den första');
+    T.stepEnd();
+    T.str('=8·10^9', A.end, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 8·10^9', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Talet framför']],
+      [['tiopotensen blir 7,43.']],
+      [['Exponenten räknas']],
+      [['fortfarande på ALLA']],
+      [['siffror efter den']],
+      [['första, inte 3.']]
+    ]);
+    T.tanke(bB);
+    y += 3.6 * F;
+    var B = talrad('b) ', '743 000', y);
+    T.stepEnd();
+    rakna(B.pos, 1, 6, y, '5 siffror efter den första');
+    T.stepEnd();
+    T.str('=7,43·10^5', B.end, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 7,43·10^5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['c) Talet är mindre än']],
+      [['1. Då räknar jag']],
+      [['nollorna före den']],
+      [['första siffran som inte']],
+      [['är 0, och exponenten']],
+      [['blir negativ.']]
+    ]);
+    T.tanke(bC);
+    y += 3.6 * F;
+    var C = talrad('c) ', '0,0009', y);
+    T.stepEnd();
+    rakna(C.pos, 0, 4, y, '4 nollor före nian');
+    T.stepEnd();
+    T.str('=9·10^-^4', C.end, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 9·10^-^4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    var bD = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['d) Samma sak här. Talet']],
+      [['framför tiopotensen']],
+      [['blir 2,4.']]
+    ]);
+    T.tanke(bD);
+    y += 3.2 * F;
+    var D = talrad('d) ', '0,000024', y);
+    T.stepEnd();
+    rakna(D.pos, 0, 5, y, '5 nollor före tvåan');
+    T.stepEnd();
+    T.str('=2,4·10^-^5', D.end, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 2,4·10^-^5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv med prefix (ma1c-1.9 ex 2) ------------
+   * a) 2 000 000 000 000 B, b) 0,0047 l, c) 270 000 N och d) 0,000082 g.
+   * Arbetsgången är alltid densamma: grundpotensform först, sedan byt
+   * tiopotensen mot sitt prefix. I c) och d) finns inget prefix för
+   * tiopotensen — då justeras exponenten till närmaste prefix och talet
+   * framför kompenseras åt andra hållet. */
+  function layoutPrefix(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['Först grundpotensform,']],
+      [['sedan byte av']],
+      [['tiopotensen mot prefix.']],
+      [['a) Exponenten 12 heter']],
+      [['tera och skrivs T.']]
+    ]);
+    T.tanke(bA);
+    y = 158;
+    T.str('a) 2 000 000 000 000 B', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=2,0·10^1^2 B=2,0 TB', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 2,0 TB', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Talet är mindre än']],
+      [['1, så exponenten blir']],
+      [['negativ. Exponenten −3']],
+      [['heter milli och skrivs']],
+      [['m.']]
+    ]);
+    T.tanke(bB);
+    y += 3.2 * F;
+    T.str('b) 0,0047 l=4,7·10^-^3 l', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=4,7 ml', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 4,7 ml', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['c) Det finns inget']],
+      [['prefix för exponenten']],
+      [['5. Närmaste prefix har']],
+      [['exponenten 6.']]
+    ]);
+    T.tanke(bC);
+    y += 3.2 * F;
+    T.str('c) 270 000 N=2,7·10^5 N', padL, y);
+    T.stepEnd();
+
+    var bC2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['Gör jag tiopotensen 10']],
+      [['gånger större måste']],
+      [['talet framför bli 10']],
+      [['gånger mindre, annars']],
+      [['ändrar jag talets']],
+      [['värde.']]
+    ]);
+    T.tanke(bC2);
+    y += 2.1 * F;
+    T.str('=0,27·10^6 N=0,27 MN', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 0,27 MN', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    var bD = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['d) Inget prefix för']],
+      [['exponenten −5. Går jag']],
+      [['till −6 blir']],
+      [['tiopotensen 10 gånger']],
+      [['mindre, så talet']],
+      [['framför blir 10 gånger']],
+      [['större. Exponenten −6']],
+      [['heter mikro.']]
+    ]);
+    T.tanke(bD);
+    y += 3.9 * F;
+    T.str('d) 0,000082 g=8,2·10^-^5 g', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=82·10^-^6 g=82 µg', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 82 µg', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv utan prefix (ma1c-1.9 ex 3) -----------
+   * 5 MHz. Prefixet byts mot sin tiopotens — åt andra hållet jämfört med
+   * föregående exempel. */
+  function layoutUtanprefix(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Prefixet M heter mega']],
+      [['och betyder tiopotensen']],
+      [['med exponenten 6. Jag']],
+      [['byter ut bokstaven mot']],
+      [['tiopotensen.']]
+    ]);
+    T.tanke(b1);
+    y = 158;
+    T.str('5 MHz=5·10^6 Hz', padL, y);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y), 268, [
+      [['Tiopotensen med']],
+      [['exponenten 6 är en etta']],
+      [['med sex nollor, alltså']],
+      [['en miljon.']]
+    ]);
+    T.tanke(b2);
+    y += 2.1 * F;
+    T.str('=5 000 000 Hz', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 5·10^6 Hz', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hårddisken (ma1c-1.9 ex 4) ------------------
+   * Hur många filer på 4,0 GB ryms på en hårddisk på 2,0 TB? Antalet =
+   * hårddiskens storlek delat med filens storlek — men prefixen måste
+   * först skrivas om till tiopotenser av samma enhet. */
+  function layoutHarddisk(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+
+    var b1 = T.bubble(120, 40, 268, [
+      [['Hur många gånger ryms']],
+      [['4,0 GB i 2,0 TB? Det är']],
+      [['en division: hårddisken']],
+      [['delat med en fil.']]
+    ]);
+    T.tanke(b1);
+    y = 194;
+    T.str('Antal filer', padL, y - 2.05 * F, null, 0.62);
+    xx = T.str('=', padL, y);
+    T.fracH('2,0 TB', '4,0 GB', xx, y);
+    T.stepEnd();
+
+    var b2 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['Olika prefix i täljare']],
+      [['och nämnare går inte']],
+      [['att förkorta. Jag']],
+      [['skriver om båda i byte.']]
+    ]);
+    T.tanke(b2);
+    y += 3.4 * F;
+    xx = T.str('=', padL + 30, y);
+    T.fracH('2,0·10^1^2 B', '4,0·10^9 B', xx, y);
+    T.stepEnd();
+
+    var b3 = T.bubble(120, T.bubbleTop(y, 1.05), 268, [
+      [['2,0 delat med 4,0 är']],
+      [['0,5, och tiopotenserna']],
+      [['divideras genom att']],
+      [['exponenterna']],
+      [['subtraheras.']]
+    ]);
+    T.tanke(b3);
+    y += 3.4 * F;
+    xx = T.str('=0,5·10^3', padL + 30, y);
+    T.str('=500 st', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 500 st', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: prioriteringsregler (ma1c-1.10 ex 1) --------
+   * a) 5·(3+6), b) 8·10−(4·2−3), c) 9·5−(10−7)² och d) 15/(5−2). Ordning:
+   * parenteser, potenser, multiplikation och division, addition och
+   * subtraktion. Det som räknas ut i varje steg ringas in med blåpennan
+   * innan nästa rad skrivs. */
+  function layoutPrioritering(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, b0, b1, r;
+
+    /* ---- a) ---- */
+    var bA = T.bubble(120, 40, 268, [
+      [['Räkneordningen:']],
+      [['parenteser, potenser,']],
+      [['multiplikation och']],
+      [['division, sedan']],
+      [['addition och']],
+      [['subtraktion. a)']],
+      [['Parentesen först.']]
+    ]);
+    T.tanke(bA);
+    y = 178;
+    xx = T.str('a) 5·', padL, y);
+    b0 = xx;
+    xx = T.str('(3+6)', xx, y);
+    b1 = xx;
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+    xx = T.str('=5·9=45', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 45', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    var bB = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['b) Inne i parentesen']],
+      [['gäller samma ordning,']],
+      [['så multiplikationen 4·2']],
+      [['räknas allra först.']]
+    ]);
+    T.tanke(bB);
+    y += 3.3 * F;
+    xx = T.str('b) 8·10-(', padL, y);
+    b0 = xx;
+    xx = T.str('4·2', xx, y);
+    b1 = xx;
+    xx = T.str('-3)', xx, y);
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    xx = T.str('=8·10-', padL + 30, y);
+    b0 = xx;
+    xx = T.str('(8-3)', xx, y);
+    b1 = xx;
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    xx = T.str('=', padL + 30, y);
+    b0 = xx;
+    xx = T.str('8·10', xx, y);
+    b1 = xx;
+    xx = T.str('-5', xx, y);
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    T.str('=80-5=75', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 75', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    var bC = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['c) Parentesen först,']],
+      [['sedan potensen, sedan']],
+      [['multiplikationen och']],
+      [['sist subtraktionen.']]
+    ]);
+    T.tanke(bC);
+    y += 3.3 * F;
+    xx = T.str('c) 9·5-', padL, y);
+    b0 = xx;
+    xx = T.str('(10-7)', xx, y);
+    b1 = xx;
+    xx = T.str('^2', xx, y);
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    xx = T.str('=9·5-', padL + 30, y);
+    b0 = xx;
+    xx = T.str('3^2', xx, y);
+    b1 = xx;
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    xx = T.str('=', padL + 30, y);
+    b0 = xx;
+    xx = T.str('9·5', xx, y);
+    b1 = xx;
+    xx = T.str('-9', xx, y);
+    T.stepEnd();
+    r = T.ring(b0, b1, y);
+    T.stepEnd();
+    T.fade(r);
+
+    y += 2.1 * F;
+    T.str('=45-9=36', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 36', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    var bD = T.bubble(120, T.bubbleTop(y, 0.5), 268, [
+      [['d) I ett bråk finns']],
+      [['osynliga parenteser']],
+      [['runt täljaren och']],
+      [['nämnaren. Nämnaren']],
+      [['räknas ut först, sedan']],
+      [['divisionen.']]
+    ]);
+    T.tanke(bD);
+    y += 4.2 * F;
+    xx = T.str('d) ', padL, y);
+    xx = T.fracH('15', '5-2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('15', '3', xx, y);
+    xx = T.str('=', xx, y);
+    T.str('5', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    xe = T.str('Svar: 5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
   }
 
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
@@ -8763,6 +9998,24 @@
                    brakdel: layoutBrakdel, avrundning: layoutAvrundning,
                    vardesiffror: layoutVardesiffror,
                    decimaler: layoutDecimaler,
+                   potenstecken: layoutPotenstecken,
+                   potensskriv: layoutPotensskriv,
+                   potensutveckla: layoutPotensutveckla,
+                   potensforenkla: layoutPotensforenkla,
+                   potensekvation: layoutPotensekvation,
+                   potensbrak: layoutPotensbrak,
+                   exponentnoll: layoutExponentnoll,
+                   negexponent: layoutNegexponent,
+                   potensform: layoutPotensform,
+                   flyttaupp: layoutFlyttaupp,
+                   brakinvers: layoutBrakinvers,
+                   rotberakna: layoutRotberakna,
+                   rotforenkla: layoutRotforenkla,
+                   grundpotens: layoutGrundpotens,
+                   prefix: layoutPrefix,
+                   utanprefix: layoutUtanprefix,
+                   harddisk: layoutHarddisk,
+                   prioritering: layoutPrioritering,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,

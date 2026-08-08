@@ -48,6 +48,11 @@ definierat.
 ::: exempel "Exempel 1 — Exponenten noll"
 **Beräkna<br>a) $25^0$&emsp;&emsp;b) $4^0 + (-7)^0$**
 
+::: handskrift
+typ: exponentnoll
+:::
+
+::: textlosning
 **a)** Varje tal (utom 0) upphöjt till 0 är 1:
 
 $$
@@ -63,6 +68,7 @@ $$
 $$
 
 **Svar:** 2
+:::
 :::
 
 ## Negativa exponenter
@@ -103,6 +109,11 @@ exponenten".
 ::: exempel "Exempel 2 — Negativa exponenter"
 **Beräkna utan räknare<br>a) $4^{-2}$&emsp;&emsp;b) $5^{-1}$**
 
+::: handskrift
+typ: negexponent
+:::
+
+::: textlosning
 **a)** Negativ exponent betyder "1 delat med potensen utan minustecken":
 
 $$
@@ -119,10 +130,16 @@ $$
 
 **Svar:** $\dfrac{1}{5}$
 :::
+:::
 
 ::: exempel "Exempel 3 — Skriv i potensform"
 **Skriv $\dfrac{1}{3^5}$ i potensform.**
 
+::: handskrift
+typ: potensform
+:::
+
+::: textlosning
 Vi ska skriva $\dfrac{1}{3^5}$ som *en* potens. Eftersom
 $3^{-5} = \dfrac{1}{3^5}$ måste givetvis det omvända gälla. Så
 
@@ -132,10 +149,16 @@ $$
 
 **Svar:** $3^{-5}$
 :::
+:::
 
 ::: exempel "Exempel 4 — Flytta upp nämnaren"
 **Skriv $\dfrac{5}{x}$ som en potens med basen $x$.**
 
+::: handskrift
+typ: flyttaupp
+:::
+
+::: textlosning
 Ett alternativt sätt att tänka när vi ska skriva om bråk som potenser är
 att "flytta upp" nämnaren till täljaren. Samtidigt som vi gör det ska vi
 byta tecken på exponenten, så
@@ -145,6 +168,7 @@ $$
 $$
 
 **Svar:** $5x^{-1}$
+:::
 :::
 
 ## Upphöja bråk till −1
@@ -171,6 +195,11 @@ dvs. $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
 ::: exempel "Exempel 5 — Bråk med negativa exponenter"
 **Beräkna<br>a) $\left(\dfrac{3}{4}\right)^{-1}$&emsp;&emsp;b) $\left(\dfrac{4}{5}\right)^{-2}$**
 
+::: handskrift
+typ: brakinvers
+:::
+
+::: textlosning
 **a)** Att upphöja till −1 är samma sak som att invertera bråket:
 
 $$
@@ -188,4 +217,5 @@ $$
 $$
 
 **Svar:** $\dfrac{25}{16}$
+:::
 :::

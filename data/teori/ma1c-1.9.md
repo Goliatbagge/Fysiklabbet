@@ -35,6 +35,11 @@ Om ett tal är skrivet i grundpotensform gäller för tal
 ::: exempel "Exempel 1 — Skriv i grundpotensform"
 **Skriv i grundpotensform<br>a) 8 000 000 000&emsp;&emsp;b) 743 000&emsp;&emsp;c) 0,0009&emsp;&emsp;d) 0,000024**
 
+::: handskrift
+typ: grundpotens
+:::
+
+::: textlosning
 **a)** Det inledande talet ska vara mellan 1 och 10. I detta fall är det 8.
 Antalet siffror efter den första ger tiopotensens exponent. I detta fall är
 det 9.
@@ -58,6 +63,7 @@ den första icke-nollan ger tiopotensens negativa exponent. I detta fall är
 det 5 nollor.
 
 **Svar:** $2{,}4 \cdot 10^{-5}$
+:::
 :::
 
 ## Prefix
@@ -85,6 +91,11 @@ En bokstav som ersätter en tiopotens och sätts framför en enhet kallas
 ::: exempel "Exempel 2 — Skriv med lämpligt prefix"
 **Skriv med lämpligt prefix<br>a) 2 000 000 000 000 B&emsp;&emsp;b) 0,0047 l&emsp;&emsp;c) 270 000 N&emsp;&emsp;d) 0,000082 g**
 
+::: handskrift
+typ: prefix
+:::
+
+::: textlosning
 **a)** Ett bra första steg är att skriva talet i grundpotensform:
 
 $$
@@ -128,10 +139,16 @@ $$
 
 **Svar:** 82 µg
 :::
+:::
 
 ::: exempel "Exempel 3 — Skriv utan prefix"
 **Skriv 5 MHz utan prefix.**
 
+::: handskrift
+typ: utanprefix
+:::
+
+::: textlosning
 Ersätt prefixet med sin tiopotens:
 
 $$
@@ -140,11 +157,17 @@ $$
 
 **Svar:** $5 \cdot 10^6$ Hz (5 000 000 Hz)
 :::
+:::
 
 ::: exempel "Exempel 4 — Hårddisken"
 **Josefin har köpt en extern hårddisk på 2,0 TB. Hur många videofiler får
 plats på den om en fil i genomsnitt är 4,0 GB?**
 
+::: handskrift
+typ: harddisk
+:::
+
+::: textlosning
 Vi ska ta reda på hur många filer med storleken 4,0 GB som får plats på en
 hårddisk med storleken 2,0 TB. Vi ska alltså dividera hårddiskens storlek
 med storleken hos en fil för att få antalet. För att få det korrekta
@@ -158,4 +181,5 @@ $$
 $$
 
 **Svar:** 500 st
+:::
 :::

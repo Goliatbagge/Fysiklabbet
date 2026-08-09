@@ -1,0 +1,86 @@
+<!--
+  VÄLKOMSTMEJL (automatiskt utskick i EmailOctopus)
+  ÄMNESRAD:  Välkommen till Fysiklabbet
+  PREHEADER: Det här kan du vänta dig — och tre bra ställen att börja på.
+  Utskick:   automatiskt, direkt när en ny prenumerant bekräftat sin anmälan.
+  Obs:       mejlet är avsiktligt bildfritt och tidlöst — det ska kunna ligga
+             oförändrat i automationen länge. Uppdatera det om sajtens
+             huvuddelar (simuleringar, katalog, nyheter, repetition) ändras.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Välkommen till Fysiklabbet</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<!-- Preheader: visas efter ämnesraden i inkorgen, aldrig i själva brevet.
+     {{PreviewText}} fylls av EmailOctopus från fältet "Preview text". -->
+<div style="display:none; max-height:0; overflow:hidden;">{{PreviewText}}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+
+<!-- Ytterbakgrunden är papper med kollegieblocks-rutnät (26 px, samma ton som
+     sajtens minisimuleringar). Blockeras bilder i klienten faller den tillbaka
+     på background-color, så brevet ser rätt ut ändå. background-attributet
+     behövs för Outlooks Word-motor, som ignorerar background-image i CSS. -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" background="https://fysiklabbet.se/nyheter/brev/kollegieblock.png" style="padding:28px 12px 40px; background-color:#f7f2e8; background-image:url('https://fysiklabbet.se/nyheter/brev/kollegieblock.png'); background-repeat:repeat;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <!-- ── Sidhuvud ─────────────────────────────────────────── -->
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">V&auml;lkommen</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <!-- ── Brevet ───────────────────────────────────────────── -->
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Hej, och v&auml;lkommen!</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Din prenumeration &auml;r ig&aring;ng. Fr&aring;n och med nu landar Fysiklabbets nyhetsbrev i din inkorg en g&aring;ng i veckan &mdash; oftast p&aring; s&ouml;ndagskv&auml;llen, lagom till veckoplaneringen.</p>
+
+      <!-- ── DET HÄR FÅR DU ─────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Det h&auml;r f&aring;r du</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Varje brev samlar <strong>veckans fysiknyheter</strong> &mdash; utvalda, f&ouml;rklarade p&aring; svenska och skrivna s&aring; att de g&aring;r att ta med in i klassrummet &mdash; och <strong>det nya p&aring; sajten</strong>: simuleringar, teoriavsnitt och funktioner som tillkommit under veckan. D&auml;rtill ett litet tips om n&aring;got som redan finns p&aring; sajten men &auml;r l&auml;tt att missa.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Ett mejl i veckan, inget annat. Och skulle det inte passa l&auml;ngre finns en avanm&auml;lningsl&auml;nk l&auml;ngst ner i varje brev.</p>
+
+      <!-- ── BÖRJA HÄR ──────────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Medan du v&auml;ntar p&aring; f&ouml;rsta brevet</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Simuleringarna</strong> &auml;r sajtens hj&auml;rta: interaktiva experiment f&ouml;r Fysik&nbsp;1 och Fysik&nbsp;2 d&auml;r du drar i reglagen sj&auml;lv &mdash; fr&aring;n kraftm&auml;tare och lutande plan till magnetf&auml;lt och st&aring;ende v&aring;gor. <a href="https://fysiklabbet.se/simuleringar.html" style="color:#2563a8; text-decoration:underline;">Hela listan finns h&auml;r</a>.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">I <strong>teorikatalogen</strong> ligger genomg&aring;ngar avsnitt f&ouml;r avsnitt, med &ouml;vningar och en kort exit ticket efter varje. Den rymmer sex kurser: fysik <a href="https://fysiklabbet.se/katalog.html?id=fy1" style="color:#2563a8; text-decoration:underline;">niv&aring;&nbsp;1</a> och <a href="https://fysiklabbet.se/katalog.html?id=fy2" style="color:#2563a8; text-decoration:underline;">niv&aring;&nbsp;2</a>, matematik <a href="https://fysiklabbet.se/katalog.html?id=ma1c" style="color:#2563a8; text-decoration:underline;">niv&aring;&nbsp;1c</a> och <a href="https://fysiklabbet.se/katalog.html?id=ma2c" style="color:#2563a8; text-decoration:underline;">2c</a>, samt fortsättningskurserna <a href="https://fysiklabbet.se/katalog.html?id=ma3c" style="color:#2563a8; text-decoration:underline;">niv&aring;&nbsp;1c</a> och <a href="https://fysiklabbet.se/katalog.html?id=ma4" style="color:#2563a8; text-decoration:underline;">niv&aring;&nbsp;2</a>. Beh&ouml;ver du fr&auml;scha upp ett helt kapitel finns <a href="https://fysiklabbet.se/fysik-repetition.html" style="color:#2563a8; text-decoration:underline;">repetitionspaketen</a>.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Matematiken &auml;r ingen bisak</strong> &mdash; trots sajtens namn &auml;r den katalogens st&ouml;rsta del. I avsnitten om <a href="https://fysiklabbet.se/katalog.html?id=ma1c-4.5" style="color:#2563a8; text-decoration:underline;">r&auml;ta linjens ekvation</a>, <a href="https://fysiklabbet.se/katalog.html?id=ma2c-3.1" style="color:#2563a8; text-decoration:underline;">andragradsfunktioner</a> och <a href="https://fysiklabbet.se/katalog.html?id=ma4-1.11" style="color:#2563a8; text-decoration:underline;">trigonometri</a> sitter dessutom interaktiva grafritare mitt i texten: dra i <em>k</em> och <em>m</em> och se linjen sv&auml;nga med, medan ekvationen skrivs om under grafen.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 22px;">Och p&aring; <a href="https://fysiklabbet.se/nyheter.html" style="color:#2563a8; text-decoration:underline;"><strong>nyhetssidan</strong></a> publiceras fysiknyheter fr&aring;n forskningsv&auml;rlden &mdash; de som sedan f&aring;r plats i breven.</p>
+
+      <p style="margin:0 0 28px;"><a href="https://fysiklabbet.se/simuleringar.html" style="display:inline-block; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; font-weight:bold; color:#f7f2e8; background-color:#0f1620; padding:10px 22px; border-radius:6px; text-decoration:none;">Utforska simuleringarna</a></p>
+
+      <!-- ── Avslut ─────────────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:4px; padding-top:22px;">
+        <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 4px;">Trevligt att ha dig med. Vi h&ouml;rs p&aring; s&ouml;ndag.</p>
+        <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+      </div>
+
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML — ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva fysiksimuleringar f&ouml;r gymnasiet</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du f&aring;r det h&auml;r brevet f&ouml;r att du prenumererar p&aring; Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

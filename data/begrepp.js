@@ -830,13 +830,31 @@ window.BEGREPP = [
   {
     id: 'partikelaccelerator',
     term: 'Partikelaccelerator',
-    former: ['partikelaccelerator', 'partikelacceleratorn', 'partikelacceleratorer', 'partikelacceleratorerna', 'lagringsring', 'lagringsringen', 'lagringsringar', 'lagringsringarna', 'acceleratorn', 'acceleratorer', 'acceleratorerna', 'synkrotron', 'synkrotronen', 'synkrotroner', 'synkrotronljus', 'synkrotronljuset', 'cyklotron', 'cyklotronen', 'kollisionsenergi', 'kollisionsenergin', 'elektronvolt', 'gigaelektronvolt', 'megaelektronvolt', 'protonsynkrotron', 'protonsynkrotronen', 'synkrocyklotron', 'synkrocyklotronen'],
+    former: ['partikelaccelerator', 'partikelacceleratorn', 'partikelacceleratorer', 'partikelacceleratorerna', 'lagringsring', 'lagringsringen', 'lagringsringar', 'lagringsringarna', 'acceleratorn', 'acceleratorer', 'acceleratorerna', 'synkrotron', 'synkrotronen', 'synkrotroner', 'synkrotronljus', 'synkrotronljuset', 'cyklotron', 'cyklotronen', 'kollisionsenergi', 'kollisionsenergin', 'protonsynkrotron', 'protonsynkrotronen', 'synkrocyklotron', 'synkrocyklotronen'],
     kort: 'En maskin som driver upp laddade partiklar till nära ljushastigheten med elektriska fält och styr dem med magneter. Används för att utforska materiens minsta byggstenar — men allra mest inom sjukvård och materialforskning.',
-    relaterade: ['standardmodellen', 'higgsbosonen', 'antimateria'],
+    relaterade: ['standardmodellen', 'higgsbosonen', 'antimateria', 'elektronvolt'],
     body: [
       { type: 'p', html: 'Principen är enkel och gammal: en laddad partikel i ett elektriskt fält känner en kraft och accelereras. Bildröret i en gammaldags tv var faktiskt en liten accelerator — elektroner som fick fart av en spänning och slog i skärmen. Skillnaden i en forskningsanläggning är att partiklarna får passera samma accelererande fält om och om igen. I en ringaccelerator böjer kraftfulla elektromagneter partikelknippet runt ett cirkelformat vakuumrör, medan snabbt växlande elektriska fält ger en knuff varje varv. Efter miljontals varv rör sig partiklarna med bara några miljondels procent lägre fart än ljuset.' },
       { type: 'p', html: 'Energin anges i elektronvolt (eV) — den energi en elektron får av en volts spänning. Världens största maskin, LHC vid CERN, ligger i en tunnel med 27&nbsp;km omkrets och krockar protoner med en sammanlagd energi på drygt 13&nbsp;TeV, alltså över 13&nbsp;·&nbsp;10<sup>12</sup>&nbsp;eV. Hög energi behövs av två skäl. Dels beter sig snabba partiklar som vågor med kort våglängd, och bara korta vågor kan avbilda små detaljer — acceleratorn är i den meningen ett mikroskop. Dels kan energin enligt <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup> omvandlas till nya, tyngre partiklar som annars bara fanns i universums första ögonblick.' },
       { type: 'p', html: 'Partikelfysik är ändå en liten minoritet av verksamheten. Av världens tiotusentals acceleratorer används de allra flesta till helt andra saker: strålbehandling av cancer, tillverkning av kortlivade spårämnen till medicinska undersökningar, härdning av plaster och sterilisering av utrustning. En särskilt viktig gren är synkrotronljuskällor, där elektroner som tvingas runt en ring sänder ut extremt intensivt röntgenljus. Det ljuset används för att kartlägga proteiners form, se vad som händer inuti ett batteri under drift och till och med läsa texten i förkolnade antika bokrullar utan att rulla upp dem.' }
+    ]
+  },
+  {
+    id: 'elektronvolt',
+    term: 'Elektronvolt',
+    former: ['elektronvolt', 'elektronvolten', 'elektronvolter', 'elektronvolterna',
+             'kiloelektronvolt', 'kiloelektronvolten', 'kiloelektronvolter',
+             'megaelektronvolt', 'megaelektronvolten', 'megaelektronvolter',
+             'megaelektronvolterna', 'gigaelektronvolt', 'gigaelektronvolten',
+             'gigaelektronvolter', 'gigaelektronvolterna', 'teraelektronvolt',
+             'teraelektronvolten', 'teraelektronvolter'],
+    kort: 'Energienheten som används när man räknar på enskilda partiklar: den energi en elektron får när den passerar spänningen en volt. Den är försvinnande liten i vardagsmått — en enda joule motsvarar drygt sex triljoner elektronvolt.',
+    relaterade: ['partikelaccelerator', 'foton', 'exciterat-tillstand'],
+    body: [
+      { type: 'p', html: 'Joule är en utmärkt enhet för sådant vi kan ta på, men hopplös i partiklarnas värld. En enda elektron bär så lite energi att talen fylls av nollor: 0,000000000000000000160&nbsp;J för det allra vanligaste fallet. Fysiker gör därför som alla andra som arbetar med små saker — byter måttstock. En elektronvolt (eV) är den energi en elektron får när den accelereras genom spänningen en volt.' },
+      { type: 'p', html: 'Definitionen är alltså inte en abstrakt omräkning utan en beskrivning av något man faktiskt gör i labbet. Kopplar du en elektron mellan polerna på ett vanligt 1,5&nbsp;V-batteri och låter den falla genom spänningen har den fått 1,5&nbsp;eV. Släpper du den genom 396&nbsp;miljoner volt har den fått 396&nbsp;megaelektronvolt. Just därför är enheten så bekväm: det man ställer in på spänningsaggregatet är också det tal man skriver ner som energi. Omräknat blir 1&nbsp;eV ungefär 1,602&nbsp;·&nbsp;10<sup>−19</sup>&nbsp;J. Att lyfta ett äpple en meter kostar runt en joule — drygt sex triljoner elektronvolt.' },
+      { type: 'p', html: 'Med prefixen kilo (k), mega (M), giga (G) och tera (T) täcker enheten hela naturens skala med små, läsbara tal. En foton i synligt ljus bär omkring 2–3&nbsp;eV, ungefär lika mycket som binder ihop en molekyl — det är därför just synligt ljus kan driva kemi som fotosyntes och syn. Röntgenfotoner ligger på tiotusentals eV, alltså några tiotals keV, och river därför loss elektroner ur atomer. Ur en sönderfallande atomkärna kommer några MeV, vilket är miljontals gånger mer än ur en kemisk reaktion — hela skillnaden mellan kärnkraft och eldning i ett enda tal. Och i de största acceleratorerna krockar protoner med flera TeV.' },
+      { type: 'p', html: 'Enheten används också för massa, vilket kan verka underligt tills man tar Einsteins samband <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup> på allvar: massa är en form av energi, så en massa kan anges genom den energi den motsvarar. En elektron har massan 511&nbsp;keV/<em>c</em><sup>2</sup> och en proton 938&nbsp;MeV/<em>c</em><sup>2</sup>. Skrivsättet gör det direkt avläsbart hur mycket rörelseenergi som krävs för att skapa en viss partikel ur ingenting — vilket är precis den räkning en partikelfysiker gör hela dagarna.' }
     ]
   },
   {

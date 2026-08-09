@@ -16,7 +16,9 @@
 # url är en bildsida ELLER en direktlänk; på en bildsida letas största
 # jpg/png i sidans HTML upp automatiskt. filnamn hamnar i nyheter/bilder/.
 # Rader som börjar med # hoppas över. Körningen committar bilderna på samma
-# gren och tömmer beställningsfilen.
+# gren och tömmer beställningsfilen. En rad som misslyckas (död länk, ingen
+# bild på sidan) hoppas över och loggas — övriga beställningar hämtas och
+# committas ändå, så beställ gärna flera kandidater på en gång.
 #
 # Bilden skalas till högst 1920 px bred, EXIF strippas. Licensen kontrolleras
 # INTE — det ansvaret ligger kvar hos den som väljer bilden. Se Bildregler i
@@ -51,21 +53,27 @@ jobs:
 
           [ -s .github/bildorder.txt ] || { echo "Ingen beställning"; exit 0; }
 
+          # En beställning som misslyckas får INTE stoppa de övriga: då hade en
+          # enda död länk gjort att inga bilder alls committades. Raden hoppas
+          # över, felet loggas, och körningen fortsätter med nästa.
+          fel=0
+
           while read -r url fil rest; do
             case "${url:-}" in ''|'#'*) continue ;; esac
-            case "$fil" in */*|'') echo "fil ska vara ett filnamn utan katalog: $fil"; exit 1 ;; esac
+            case "$fil" in */*|'') echo "fil ska vara ett filnamn utan katalog: $fil"; fel=1; continue ;; esac
 
             echo "=============================================================="
             echo "beställning: $url -> nyheter/bilder/$fil"
 
-            typ=$(curl -sSL -A "$UA" -o /dev/null -w '%{content_type}' "$url")
+            typ=$(curl -sSL -A "$UA" -o /dev/null -w '%{content_type}' "$url" || true)
             echo "content-type: $typ"
 
             if [ "${typ#image/}" != "$typ" ]; then
               bildurl="$url"
             else
               # Bildsida: leta upp arkivets jpg/png. Största varianten först.
-              curl -sSL -A "$UA" "$url" -o sida.html
+              curl -sSL -A "$UA" "$url" -o sida.html \
+                || { echo "Kunde inte hämta sidan"; fel=1; continue; }
               echo "--- kandidater ---"
               grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt
               bildurl=$(grep -E '/(original|fullsize|large)/' kandidater.txt | head -1 || true)
@@ -83,7 +91,7 @@ jobs:
                   printf '%s %s\n' "$n" "$k"
                 done | sort -rn | head -1 | cut -d' ' -f2-)
               fi
-              [ -n "$bildurl" ] || { echo "Hittade ingen bildlänk på sidan"; exit 1; }
+              [ -n "$bildurl" ] || { echo "Hittade ingen bildlänk på sidan"; fel=1; continue; }
               echo "--- sidans metadata (bildtext/kredit) ---"
               grep -oE '<meta[^>]+(og:description|og:title)[^>]*>' sida.html | head -5 || true
             fi
@@ -92,10 +100,11 @@ jobs:
             # stället för bilden när Referer saknas. Tredje fältet på raden i
             # bildorder.txt får ange vilken sida bilden hör till.
             echo "laddar ner: $bildurl${rest:+ (referer: $rest)}"
-            curl -sSL -A "$UA" ${rest:+-e "$rest"} "$bildurl" -o rå.bin
+            curl -sSL -A "$UA" ${rest:+-e "$rest"} "$bildurl" -o rå.bin \
+              || { echo "Nedladdningen misslyckades"; fel=1; continue; }
             case "$(file -b --mime-type rå.bin)" in
               image/*) ;;
-              *) echo "Nedladdad fil är ingen bild"; file rå.bin; exit 1 ;;
+              *) echo "Nedladdad fil är ingen bild"; file rå.bin; fel=1; continue ;;
             esac
 
             mkdir -p nyheter/bilder
@@ -120,6 +129,8 @@ jobs:
             ls -l "nyheter/bilder/$fil"
             rm -f rå.bin sida.html kandidater.txt
           done < .github/bildorder.txt
+
+          [ "$fel" = 0 ] || echo "OBS: minst en beställning misslyckades — se loggen ovan. Övriga bilder committas ändå."
 
       - name: Committa bilderna
         run: |

@@ -1,0 +1,9 @@
+# Kandidater till nya huvudbilder (diagram-huvudbilder byts ut) — granskas
+# och döps om för hand efteråt; oanvända kandidater tas bort.
+https://www.lle.rochester.edu/news/flying-focus-laser-plasma-acceleration/ kand-a1-lle.jpg
+https://www.eurekalert.org/multimedia/680390 kand-a2-lux.jpg
+https://commons.wikimedia.org/wiki/File:CERN_LHC_Tunnel1.jpg kand-a3-lhc.jpg
+https://commons.wikimedia.org/wiki/File:Diamagnetic_graphite_levitation.jpg kand-b1-grafit.jpg
+https://www.quantumfrontiers.de/en/current/news/news-details/news/maius-2-sounding-rocket-launched kand-c1-maius.jpg
+https://www.dlr.de/en/latest/news/2023/04/maius-2-ultracold-atoms-in-a-space-mini-laboratory kand-c2-dlr.jpg
+https://sscspace.com/universes-coldest-particles-from-esrange-rocket-maius/ kand-c3-ssc.jpg

@@ -244,9 +244,11 @@
                 framför solen västerifrån, dagsljuset blir stålgrått och månskuggan sveper in — och i
                 totalitetens ögonblick tänds koronan, solens yttre atmosfär, kring den svarta månskivan.
                 Precis vid kontakterna blixtrar Bailys pärlor och diamantringen till där solljuset silar
-                genom månens dalar. Dra i tidsreglaget eller tryck på start, flytta månen närmare eller
-                längre bort för att växla mellan total och ringformig förmörkelse, och ställ dig vid
-                sidan av centrallinjen för att se en partiell förmörkelse i stället.
+                genom månens dalar. Himlen visas som för blotta ögat — solen är bara en halv grad bred —
+                men med förstoringsreglaget zoomar du in som genom ett teleskop och ser korona, pärlor
+                och protuberanser i detalj. Dra i tidsreglaget eller tryck på start, flytta månen
+                närmare eller längre bort för att växla mellan total och ringformig förmörkelse, och
+                ställ dig vid sidan av centrallinjen för att se en partiell förmörkelse i stället.
             </p>
             <div class="formula-box">
                 <div style="display:flex;flex-direction:column;align-items:center;">
@@ -477,8 +479,10 @@ function drawScene(ctx, W, H, state, nowSec) {
     const g = geometry(t, dm, b);
     const { rs, rm, d, f, obsc, typ } = g;
 
-    // Skala: px per bågminut. Solen ritas i "teleskopfält" ovanför landskapet.
-    const rsPx = Math.min(H * 0.26, W * 0.18);
+    // Skala: px per bågminut. Vid förstoring 1× motsvarar himlen ungefär
+    // synfältet för blotta ögat (solens halva grad blir en liten skiva);
+    // förstoringsreglaget zoomar upp till "teleskopfält" för detaljerna.
+    const rsPx = Math.min(H * 0.008 * state.zoom, H * 0.26, W * 0.18);
     const scale = rsPx / rs;
     const sx = W / 2, sy = H * 0.40;
     const mx = sx + g.x * scale, my = sy - b * scale;
@@ -640,7 +644,7 @@ function drawScene(ctx, W, H, state, nowSec) {
         // hel ring — månskivan (ritas efteråt) täcker allt utom den smala
         // sektor som just håller på att täckas/avtäckas vid C2/C3.
         ctx.strokeStyle = `rgba(255,72,58,${0.85 * coronaA})`;
-        ctx.lineWidth = Math.max(2, 0.06 * scale);
+        ctx.lineWidth = Math.min(Math.max(2, 0.06 * scale), Math.max(1, rsPx * 0.06));
         ctx.beginPath();
         ctx.arc(sx, sy, rsPx + ctx.lineWidth * 0.4, 0, TAU);
         ctx.stroke();
@@ -771,7 +775,9 @@ function drawScene(ctx, W, H, state, nowSec) {
         if (d > 1e-6) { ex = (sx - mx) / (d * scale); ey = (sy - my) / (d * scale); }
         const pcx = sx + ex * rsPx * 0.5 * obsc;
         const pcy = sy + ey * rsPx * 0.5 * obsc;
-        const rB = rsPx * (1.3 + 2.4 * f);
+        // + H-term: även en liten (oförstorad) sol ska blända som den gör
+        // för blotta ögat — glorian krymper inte linjärt med skivan.
+        const rB = rsPx * (1.3 + 2.4 * f) + H * 0.05 * bloomA;
         const gBl = ctx.createRadialGradient(pcx, pcy, 0, pcx, pcy, rB);
         gBl.addColorStop(0, `rgba(255,250,235,${0.8 * bloomA})`);
         gBl.addColorStop(0.35, `rgba(255,225,170,${0.28 * bloomA})`);
@@ -848,10 +854,12 @@ function App() {
     const t0 = q.has('t') ? parseFloat(q.get('t')) : -70;
     const dm0 = q.has('dm') ? clamp(parseFloat(q.get('dm')), DM_MIN, DM_MAX) : DM_DEFAULT;
     const b0 = q.has('b') ? clamp(parseFloat(q.get('b')), 0, 40) : 0;
+    const z0 = q.has('z') ? clamp(parseFloat(q.get('z')), 1, 32) : 1;
 
     const [tUi, setTUi] = useState(t0);
     const [dm, setDm] = useState(dm0);
     const [bSep, setBSep] = useState(b0);
+    const [zoom, setZoom] = useState(z0);
     const [speed, setSpeed] = useState(60);
     const [playing, setPlaying] = useState(false);
     const [stars, setStars] = useState(true);
@@ -866,6 +874,7 @@ function App() {
     const dmRef = useRef(dm0);
     const bRef = useRef(b0);
     const speedRef = useRef(60);
+    const zoomRef = useRef(z0);
     const playingRef = useRef(false);
     const starsRef = useRef(true);
     const slowmoRef = useRef(true);
@@ -874,6 +883,7 @@ function App() {
     useEffect(() => { dmRef.current = dm; }, [dm]);
     useEffect(() => { bRef.current = bSep; }, [bSep]);
     useEffect(() => { speedRef.current = speed; }, [speed]);
+    useEffect(() => { zoomRef.current = zoom; }, [zoom]);
     useEffect(() => { playingRef.current = playing; }, [playing]);
     useEffect(() => { starsRef.current = stars; }, [stars]);
     useEffect(() => { slowmoRef.current = slowmo; }, [slowmo]);
@@ -950,7 +960,7 @@ function App() {
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             const g = drawScene(ctx, w, h, {
                 t: tRef.current, dm: dmRef.current, b: bRef.current,
-                stars: starsRef.current,
+                stars: starsRef.current, zoom: zoomRef.current,
             }, now / 1000);
 
             acc += dt;
@@ -1051,6 +1061,12 @@ function App() {
                         <input type="range" min={0} max={40} step={0.5} value={bSep}
                                onChange={e => setBSep(parseFloat(e.target.value))} />
                         <span className="fs-value">{fmt(bSep, 1)}′</span>
+                    </div>
+                    <div className="fs-row">
+                        <span className="fs-label">Förstoring</span>
+                        <input type="range" min={1} max={32} step={1} value={zoom}
+                               onChange={e => setZoom(parseFloat(e.target.value))} />
+                        <span className="fs-value">{fmt(zoom, 0)}×</span>
                     </div>
                     <div className="fs-row">
                         <span className="fs-label">Uppspelningsfart</span>
@@ -1168,8 +1184,9 @@ function App() {
                 <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.6, fontSize: '0.85rem' }}>
                     <strong>Om skalorna:</strong> solens och månens vinkeldiametrar, deras inbördes
                     rörelse (cirka 0,5° per timme), kontakttiderna och täckningsgraden beräknas ur
-                    verklig geometri — men solen visas i teleskopförstoring ovanför ett
-                    vidvinkellandskap, och uppspelningen är snabbare än verkligheten (ställbar med
+                    verklig geometri. Vid förstoring 1× motsvarar himlen ungefär synintrycket för
+                    blotta ögat — dra upp reglaget Förstoring för att se detaljerna som genom ett
+                    teleskop. Uppspelningen är snabbare än verkligheten (ställbar med
                     reglaget). <strong>I verkligheten:</strong> titta aldrig mot solen utan godkänt
                     solfilter — vanliga solglasögon räcker inte. Bara under totalitetens minuter är
                     det säkert att titta utan skydd.

@@ -26,6 +26,20 @@ matnyttigt att man tar med sig något in i klassrummet.
 - Projektets typografiregler gäller fullt ut: **inga emojis eller dekorativa
   piktogram**, kommatecken som decimalavskiljare, hårt mellanslag mellan tal
   och enhet (`5,0&nbsp;m/s`), ingen title case, svenska citattecken ”…”.
+- **⛔ INGA TANKSTRECK i brevet** (uttryckligt önskemål 2026-08-09, gäller
+  både veckobrevet och välkomstmejlet). Varken em-streck `—`/`&mdash;` eller
+  tankstreck-i-mening av annat slag får förekomma i brödtext, rubriker,
+  bildtexter, ämnesrad eller preheader. Skriv om satsen i stället: sätt punkt
+  och börja ny mening, använd komma, kolon eller parentes. Ett inskott som
+  `veckans fysiknyheter — utvalda och förklarade` blir
+  `veckans fysiknyheter, utvalda och förklarade`; ett tillägg som
+  `fysiknyheter från forskningsvärlden — de som får plats i breven` blir
+  en egen mening.
+  **Undantag:** streck som ingår i ett *namn*, som ämnet
+  `Matematik – fortsättning`, samt intervall- och minustecken i notation
+  (`10<sup>−17</sup>`, `2016–2020`). Kontrollera före leverans:
+  `grep -c "mdash\|—" .claude/nyhetsbrev/utkast/ÅÅÅÅ-MM-DD.html` ska ge 0
+  bortsett från sådana namn.
 
 ## Arbetsflöde varje gång du körs
 
@@ -262,6 +276,7 @@ fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
 - Använda bild utan kredit/klar licens, eller en skärmdump av en simulering
   i ett ointressant startläge när ett talande tillstånd går att ställa in.
 - Bryta mot typografi-/emojireglerna i CLAUDE.md.
+- Använda tankstreck i brevet (se Ton och röst). Skriv om satsen i stället.
 - Återanvända förra veckans anslag, formuleringar eller skämt.
 - Tipsa om samma funktion oftare än var åttonde vecka, tipsa om något du
   inte verifierat på sajten, eller glömma att datera tipset i `tips.md`.

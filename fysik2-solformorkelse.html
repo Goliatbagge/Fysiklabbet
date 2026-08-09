@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solförmörkelse — Fysiklabbet</title>
+    <meta name="description" content="Upplev en total solförmörkelse sedd från jorden — partiell fas, Bailys pärlor, diamantring, kromosfär, protuberanser och koronan, med fysikaliskt korrekt geometri.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-solformorkelse.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Solförmörkelse — Fysik nivå 2">
+    <meta property="og:description" content="Upplev en total solförmörkelse sedd från jorden — partiell fas, Bailys pärlor, diamantring, kromosfär, protuberanser och koronan, med fysikaliskt korrekt geometri.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-solformorkelse.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Solförmörkelse — Fysik nivå 2">
+    <meta name="twitter:description" content="Upplev en total solförmörkelse sedd från jorden — partiell fas, Bailys pärlor, diamantring, kromosfär, protuberanser och koronan, med fysikaliskt korrekt geometri.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">')</script>
+    <style>
+        /* Scen-wrapper: mörk himmel motiveras av fysiken (förmörkelsen).
+           Fast höjd på desktop — mobilsektionen i styles-laborans-sim.css
+           skriver över den. */
+        .scene-wrap {
+            height: 560px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .scene-wrap > canvas { display: block; width: 100%; height: 100%; }
+        /* Mobil: sektion 8 i styles-laborans-sim.css sätter height:auto på
+           scenramen — ge då canvasen en egen proportion så att ramen hugger
+           scenen (annars kollapsar 100%-höjden och bitmappen ritas beskuren). */
+        @media (max-width: 600px) {
+            .scene-wrap { height: auto; }
+            .scene-wrap > canvas { height: auto; aspect-ratio: 3 / 4; }
+            /* Docka reglagepanelen under scenen även i NORMALLÄGE (sektion 8
+               i styles-laborans-sim.css gör det bara i fullskärm) — annars
+               lägger den bottenankrade panelen sig över knapprutan. */
+            body.lab-sim .scene-wrap .fs-controls {
+                position: static; transform: none; left: auto; bottom: auto;
+                width: auto; max-height: none; margin: 6px 8px;
+            }
+            body.lab-sim .scene-wrap .fs-toggle-handle {
+                position: static; transform: none; margin: 4px auto 6px;
+            }
+            /* Smal skärm: etikett + värde på en rad, reglaget under */
+            .fs-controls .fs-row { flex-wrap: wrap; row-gap: 2px; }
+            .fs-controls .fs-label { min-width: 0; flex: 1 1 auto; }
+            .fs-controls .fs-value { min-width: 0; }
+            .fs-controls .fs-row input[type="range"] { flex: 1 1 100%; order: 3; }
+        }
+
+        /* Avläsningsruta uppe till vänster (under fullskärmsknappen) */
+        .scene-info {
+            position: absolute; top: 62px; left: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 14px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+        .scene-info .si-val.si-tot { color: var(--lab-accent, #c8324a); }
+
+        /* "Visa"-ruta + styrknappar uppe till höger */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(243,238,228,0.92);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 8px 12px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+            font-family: 'Poppins', sans-serif;
+        }
+        .scene-toggles input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-actions { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+        .scene-toggles .st-actions button {
+            font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+            padding: 5px 10px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            transition: all 0.15s ease;
+        }
+        .scene-toggles .st-actions button:hover { border-color: var(--lab-accent, #c8324a); }
+        .scene-toggles .st-actions button.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        /* Reglage-rad i fullskärms-dropdownen */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+        .fs-controls .fs-label { min-width: 172px; font-size: 12.5px; }
+        .fs-controls .fs-value { min-width: 96px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; }
+
+        /* Värdekort */
+        .value-card {
+            background: var(--lab-panel, rgba(255,255,255,0.55));
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px; padding: 12px 16px;
+        }
+        .value-card .value-label {
+            font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .value-card .value-number {
+            font-size: 1.12rem; font-weight: 700; color: var(--lab-ink, #0f1620);
+            font-family: 'Poppins', sans-serif;
+        }
+        .value-card .unit { font-size: 0.8em; font-weight: 500; margin-left: 5px; color: var(--lab-ink-soft, #333c4d); }
+
+        /* Formelkort i headern */
+        .formula-box {
+            display: inline-flex; align-items: center; gap: 18px; flex-wrap: wrap;
+            background: var(--lab-panel, rgba(255,255,255,0.55));
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px; padding: 14px 22px;
+            font-family: 'Poppins', sans-serif; color: var(--lab-ink, #0f1620);
+        }
+        .formula-box .flbl {
+            font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.2;
+            font-family: 'Poppins', sans-serif;
+        }
+        .formula-box .fnum { font-size: 1.25rem; font-weight: 600; line-height: 1.25; }
+        .formula-box em { font-style: italic; font-family: inherit; }
+        .italic-var { font-style: italic; }
+    </style>
+</head>
+<body class="lab-sim">
+
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+<div class="page-wrapper">
+    <div style="max-width:1120px;margin:0 auto;padding:28px 20px 60px;">
+
+        <nav style="margin-bottom:20px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:#64748b;">
+            <a href="index.html" style="color:#38bdf8;text-decoration:none;">Hem</a>
+            <span style="margin:0 7px;">/</span>
+            <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik nivå 2</a>
+            <span style="margin:0 7px;">/</span>
+            <span style="color:var(--lab-ink-muted);">Solförmörkelse</span>
+        </nav>
+
+        <div style="margin-bottom:28px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:var(--lab-ink);margin-bottom:8px;">
+                Solförmörkelse
+            </h1>
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:var(--lab-ink-muted);max-width:780px;line-height:1.65;margin-bottom:16px;">
+                Följ en solförmörkelse precis som den ser ut från jorden. Månen glider långsamt in
+                framför solen västerifrån, dagsljuset blir stålgrått och månskuggan sveper in — och i
+                totalitetens ögonblick tänds koronan, solens yttre atmosfär, kring den svarta månskivan.
+                Precis vid kontakterna blixtrar Bailys pärlor och diamantringen till där solljuset silar
+                genom månens dalar. Dra i tidsreglaget eller tryck på start, flytta månen närmare eller
+                längre bort för att växla mellan total och ringformig förmörkelse, och ställ dig vid
+                sidan av centrallinjen för att se en partiell förmörkelse i stället.
+            </p>
+            <div class="formula-box">
+                <div style="display:flex;flex-direction:column;align-items:center;">
+                    <span class="flbl">Vinkeldiameter</span>
+                    <span class="fnum"><em>θ</em></span>
+                    <span class="flbl" aria-hidden="true" style="visibility:hidden;">Vinkeldiameter</span>
+                </div>
+                <span class="fnum">=</span>
+                <div style="display:flex;flex-direction:column;align-items:center;">
+                    <span class="flbl">Kroppens radie</span>
+                    <span class="fnum">2 · <em>R</em></span>
+                    <span class="fnum" style="border-top:2px solid currentColor;padding:0 10px;"><em>d</em></span>
+                    <span class="flbl">Avstånd till kroppen</span>
+                </div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--lab-ink-soft);line-height:1.5;">
+                    Solen:&nbsp;<em>θ</em> ≈ 0,53°<br>
+                    Månen:&nbsp;<em>θ</em> ≈ 0,50°–0,56°
+                </span>
+            </div>
+        </div>
+
+        <div id="root"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+</footer>
+
+<script type="text/babel">
+const { useState, useRef, useEffect, useMemo, useCallback } = React;
+
+// ── Fysikaliska konstanter ──────────────────────────────────────────────────
+const R_SUN  = 696340;      // solens radie, km
+const D_SUN  = 149600000;   // medelavstånd jorden–solen, km
+const R_MOON = 1737.4;      // månens radie, km
+const RAD_TILL_BAGMIN = 180 / Math.PI * 60;   // radianer → bågminuter
+
+// Solens vinkelRADIE sedd från jorden (bågminuter) ≈ 16,0′
+const THETA_S = R_SUN / D_SUN * RAD_TILL_BAGMIN;
+
+// Månens rörelse relativt solen på himlen ≈ 30,5′/h (månen rör sig österut
+// i sin bana ~0,55°/h medan solen själv driver österut ~0,04°/min mindre).
+const OMEGA = 30.5 / 60;    // bågminuter per minut
+
+// Månavstånd: perigeum–apogeum (km, center till center)
+const DM_MIN = 356500, DM_MAX = 406700, DM_DEFAULT = 360000;
+
+const TAU = Math.PI * 2;
+
+// Månens vinkelradie (bågminuter) vid avståndet dm (km)
+function thetaM(dm) { return R_MOON / dm * RAD_TILL_BAGMIN; }
+
+// Täckningsgrad: hur stor andel av solskivans AREA som månen täcker.
+// Standardformeln för överlappande cirklar (radier rs, rm, separation d).
+function obscuration(rs, rm, d) {
+    if (d >= rs + rm) return 0;
+    if (d <= Math.abs(rm - rs)) return rm >= rs ? 1 : (rm * rm) / (rs * rs);
+    const a1 = rs * rs * Math.acos((d * d + rs * rs - rm * rm) / (2 * d * rs));
+    const a2 = rm * rm * Math.acos((d * d + rm * rm - rs * rs) / (2 * d * rm));
+    const a3 = 0.5 * Math.sqrt(Math.max(0,
+        (-d + rs + rm) * (d + rs - rm) * (d - rs + rm) * (d + rs + rm)));
+    return (a1 + a2 - a3) / (Math.PI * rs * rs);
+}
+
+// Förmörkelsens geometri vid tiden t (minuter från max), månavstånd dm (km)
+// och minsta separation b (bågminuter — avståndet från centrallinjen).
+function geometry(t, dm, b) {
+    const rs = THETA_S;
+    const rm = thetaM(dm);
+    const x = -t * OMEGA;                 // månens läge: + = väster (höger) om solen
+    const d = Math.hypot(x, b);           // separation sol–måne, bågminuter
+    const obsc = obscuration(rs, rm, d);
+    const f = Math.max(0, 1 - obsc);      // synlig andel av solskivan
+    const inner = rm - rs;                // > 0 → total möjlig, < 0 → ringformig
+    const outer = rm + rs;
+    const central = b < Math.abs(inner);
+    const typ = (b >= outer) ? 'ingen'
+        : (!central) ? 'partiell'
+        : (inner > 0) ? 'total' : 'ringformig';
+    const tC1 = (b < outer) ? Math.sqrt(outer * outer - b * b) / OMEGA : null;
+    const tC2 = central ? Math.sqrt(inner * inner - b * b) / OMEGA : null;
+    return { rs, rm, x, d, obsc, f, inner, outer, central, typ, tC1, tC2 };
+}
+
+// ── Formatering (svensk standard) ───────────────────────────────────────────
+const NBSP = ' ';
+function fmt(num, decimals = 2) {
+    if (!isFinite(num)) return '—';
+    const s = num.toFixed(decimals);
+    if (parseFloat(s) === 0) return '0';
+    return s.replace('.', ',').replace('-', '−');
+}
+function fmtInt(n) {
+    const s = Math.round(n).toString();
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, NBSP);
+}
+// Varaktighet i minuter → "12 min 30 s" / "45 s"
+function fmtDur(min) {
+    if (!isFinite(min)) return '—';
+    const tot = Math.max(0, Math.round(min * 60));
+    const m = Math.floor(tot / 60), s = tot % 60;
+    if (m === 0) return s + NBSP + 's';
+    return m + NBSP + 'min ' + s + NBSP + 's';
+}
+// Tidpunkt relativt max → "−12 min 30 s"
+function fmtTid(t) {
+    const sign = t < -1 / 120 ? '−' : '+';
+    const a = Math.abs(t);
+    if (Math.round(a * 60) === 0) return '0 s';
+    return sign + fmtDur(a);
+}
+
+// ── Frö-slumpade scendetaljer (stabila mellan bildrutor) ────────────────────
+function mulberry32(seed) {
+    let a = seed >>> 0;
+    return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+const rng = mulberry32(20260809);
+
+// Stjärnor (relativa koordinater i himmelsytan)
+const STARS = Array.from({ length: 130 }, () => ({
+    x: rng(), y: rng() * 0.78,
+    r: 0.4 + rng() * 1.1,
+    b: 0.45 + rng() * 0.55,
+    tw: rng() * TAU,
+}));
+const VENUS = { x: 0.775, y: 0.30 };
+
+// Koronans strömmar (streamers): breda kronblad längs solekvatorn
+// (vågrätt i bilden) — typiskt utseende nära solfläcksminimum.
+const STREAMERS = [];
+[0, 180].forEach(base => {
+    const n = 3 + Math.floor(rng() * 2);
+    for (let i = 0; i < n; i++) {
+        STREAMERS.push({
+            ang: base + (rng() * 74 - 37),
+            len: 2.1 + rng() * 1.6,          // i solradier
+            halfw: 5 + rng() * 8,             // grader
+            bend: (rng() - 0.5) * 0.5,
+            a: 0.26 + rng() * 0.2,
+        });
+    }
+});
+// Polarplymer: korta, smala borstlinjer vid polerna
+const PLUMES = [];
+[90, 270].forEach(base => {
+    for (let i = 0; i < 7; i++) {
+        PLUMES.push({
+            ang: base + (rng() * 46 - 23),
+            len: 1.3 + rng() * 0.55,
+            halfw: 1.6,
+            a: 0.13 + rng() * 0.1,
+        });
+    }
+});
+// Fina hårlinjer i koronan
+const HAIRS = Array.from({ length: 80 }, () => {
+    const ang = rng() * 360;
+    const eq = Math.abs(Math.cos(ang * Math.PI / 180));   // längre vid ekvatorn
+    return { ang, len: 1.15 + rng() * (1.0 + 1.6 * eq), a: 0.04 + rng() * 0.04 };
+});
+// Protuberanser: rosaröda vätgasbågar strax utanför solranden
+// (höjd i bågminuter — stora protuberanser når ~50 000 km ≈ 1,2′)
+const PROMS = [
+    { ang: -38, h: 1.05, w: 8 },
+    { ang: 14,  h: 0.55, w: 5 },
+    { ang: 108, h: 0.8,  w: 7 },
+    { ang: 196, h: 0.45, w: 5 },
+    { ang: 262, h: 0.7,  w: 6 },
+];
+// Månranden: dalar och berg som släpper igenom Bailys pärlor.
+// Vinkelposition runt randen + dalens djup (bågminuter).
+const BEADS = Array.from({ length: 26 }, (_, i) => ({
+    ang: (i / 26) * 360 + (rng() - 0.5) * 10,
+    depth: (rng() - 0.3) * 0.12,
+    size: 0.7 + rng() * 0.9,
+}));
+// Landskapets kullar (relativa x, höjd)
+const HILLS1 = Array.from({ length: 9 }, (_, i) => ({ x: i / 8, h: 0.35 + rng() * 0.65 }));
+const HILLS2 = Array.from({ length: 7 }, (_, i) => ({ x: i / 6, h: 0.3 + rng() * 0.7 }));
+const TREES = Array.from({ length: 6 }, () => ({ x: rng(), s: 0.6 + rng() * 0.7 }));
+
+// ── Färghjälp ───────────────────────────────────────────────────────────────
+function mix(c1, c2, t) {
+    return [
+        Math.round(c1[0] + (c2[0] - c1[0]) * t),
+        Math.round(c1[1] + (c2[1] - c1[1]) * t),
+        Math.round(c1[2] + (c2[2] - c1[2]) * t),
+    ];
+}
+function rgb(c, a) {
+    return a === undefined ? `rgb(${c[0]},${c[1]},${c[2]})` : `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+}
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+// Himlens färger: dag → djup skymning. Mellansteget dras mot stålgrått —
+// det kusliga metalliska ljuset strax före totaliteten.
+const SKY_TOP_DAY = [62, 136, 214], SKY_BOT_DAY = [166, 204, 240];
+const SKY_TOP_NIGHT = [5, 7, 20],   SKY_BOT_NIGHT = [24, 30, 56];
+function skyColors(vis) {
+    const t = 1 - vis;
+    let top = mix(SKY_TOP_DAY, SKY_TOP_NIGHT, t);
+    let bot = mix(SKY_BOT_DAY, SKY_BOT_NIGHT, t);
+    // Stålgrå avmattning i mellanläget (mest kring vis ≈ 0,35)
+    const steel = clamp(1 - Math.abs(vis - 0.35) / 0.3, 0, 1) * 0.35;
+    const grayT = [(top[0] + top[1] + top[2]) / 3, (top[0] + top[1] + top[2]) / 3, (top[0] + top[1] + top[2]) / 3];
+    const grayB = [(bot[0] + bot[1] + bot[2]) / 3, (bot[0] + bot[1] + bot[2]) / 3, (bot[0] + bot[1] + bot[2]) / 3];
+    top = mix(top, grayT, steel);
+    bot = mix(bot, grayB, steel);
+    return { top, bot };
+}
+
+// ── Ritfunktionen ───────────────────────────────────────────────────────────
+function polar(cx, cy, r, angDeg) {
+    const a = angDeg * Math.PI / 180;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+}
+
+function drawScene(ctx, W, H, state, nowSec) {
+    const { t, dm, b, stars } = state;
+    const g = geometry(t, dm, b);
+    const { rs, rm, d, f, obsc, typ } = g;
+
+    // Skala: px per bågminut. Solen ritas i "teleskopfält" ovanför landskapet.
+    const rsPx = Math.min(H * 0.26, W * 0.18);
+    const scale = rsPx / rs;
+    const sx = W / 2, sy = H * 0.40;
+    const mx = sx + g.x * scale, my = sy - b * scale;
+    const rmPx = rm * scale;
+    const yHor = H * 0.865;
+
+    // Synligt himmelsljus: ytljusheten hos den fria solskivan är konstant,
+    // så himlens ljus ∝ synlig andel f. Ögat uppfattar ungefär f^0,4.
+    const vis = Math.max(Math.pow(f, 0.38), 0.045);
+
+    // Hur djupt inne i den centrala fasen vi är (bågminuter)
+    const inTot = (typ === 'total') ? (g.inner - d) : -1;      // > 0 under totalitet
+    // Koronans synlighet: tänds först när fotosfären är helt täckt;
+    // glimtar fram under diamantring-sekunderna strax intill.
+    let coronaA = 0;
+    if (typ === 'total') {
+        if (inTot >= 0) coronaA = 1;
+        else {
+            const w = d - g.inner;                              // avstånd utanför C2/C3
+            coronaA = clamp((0.20 - w) / 0.30, 0, 0.72);
+        }
+    }
+
+    // ── 1. Himmel ──────────────────────────────────────────────────────────
+    const sky = skyColors(vis);
+    const gSky = ctx.createLinearGradient(0, 0, 0, yHor);
+    gSky.addColorStop(0, rgb(sky.top));
+    gSky.addColorStop(1, rgb(sky.bot));
+    ctx.fillStyle = gSky;
+    ctx.fillRect(0, 0, W, H);
+
+    // Månskuggans vägg: umbran kommer in västerifrån (höger) och drar
+    // vidare österut (vänster) — himlen mörknar asymmetriskt.
+    if (typ === 'total' && g.tC2 !== null && inTot < 0) {
+        const dtIn = (-g.tC2) - t;      // minuter kvar till C2
+        const dtUt = t - g.tC2;         // minuter sedan C3
+        if (dtIn > 0 && dtIn < 8) {
+            const a = 0.42 * (1 - dtIn / 8);
+            const gU = ctx.createLinearGradient(W, 0, W * 0.4, 0);
+            gU.addColorStop(0, rgb(SKY_TOP_NIGHT, a));
+            gU.addColorStop(1, rgb(SKY_TOP_NIGHT, 0));
+            ctx.fillStyle = gU;
+            ctx.fillRect(0, 0, W, yHor);
+        } else if (dtUt > 0 && dtUt < 8) {
+            const a = 0.42 * (1 - dtUt / 8);
+            const gU = ctx.createLinearGradient(0, 0, W * 0.6, 0);
+            gU.addColorStop(0, rgb(SKY_TOP_NIGHT, a));
+            gU.addColorStop(1, rgb(SKY_TOP_NIGHT, 0));
+            ctx.fillStyle = gU;
+            ctx.fillRect(0, 0, W, yHor);
+        }
+    }
+
+    // ── 2. Stjärnor och Venus ──────────────────────────────────────────────
+    if (stars) {
+        const aSt = clamp((0.16 - vis) / 0.12, 0, 1);
+        if (aSt > 0) {
+            for (const s of STARS) {
+                const tw = 0.75 + 0.25 * Math.sin(nowSec * 1.7 + s.tw);
+                ctx.fillStyle = `rgba(230,238,252,${(aSt * s.b * tw).toFixed(3)})`;
+                ctx.beginPath();
+                ctx.arc(s.x * W, s.y * yHor, s.r, 0, TAU);
+                ctx.fill();
+            }
+        }
+        // Venus syns några minuter före totaliteten, väster (höger) om solen
+        const aV = clamp((0.34 - vis) / 0.22, 0, 1);
+        if (aV > 0) {
+            const vx = VENUS.x * W, vy = VENUS.y * yHor;
+            const gV = ctx.createRadialGradient(vx, vy, 0, vx, vy, 7);
+            gV.addColorStop(0, `rgba(250,250,240,${0.95 * aV})`);
+            gV.addColorStop(0.35, `rgba(240,242,235,${0.4 * aV})`);
+            gV.addColorStop(1, 'rgba(240,242,235,0)');
+            ctx.fillStyle = gV;
+            ctx.beginPath(); ctx.arc(vx, vy, 7, 0, TAU); ctx.fill();
+            ctx.fillStyle = `rgba(252,252,246,${aV})`;
+            ctx.beginPath(); ctx.arc(vx, vy, 1.6, 0, TAU); ctx.fill();
+        }
+    }
+
+    // ── 3. Skymningsglöd vid horisonten (360°-solnedgången) ────────────────
+    const aGlow = clamp((0.22 - vis) / 0.17, 0, 1);
+    if (aGlow > 0) {
+        const hGlow = H * 0.17;
+        const gG = ctx.createLinearGradient(0, yHor, 0, yHor - hGlow);
+        gG.addColorStop(0, `rgba(255,146,54,${0.5 * aGlow})`);
+        gG.addColorStop(0.45, `rgba(236,96,90,${0.22 * aGlow})`);
+        gG.addColorStop(1, 'rgba(236,96,90,0)');
+        ctx.fillStyle = gG;
+        ctx.fillRect(0, yHor - hGlow, W, hGlow);
+    }
+
+    // ── 4. Koronan (additiv — mörk scen) ───────────────────────────────────
+    if (coronaA > 0) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+
+        // Yttre mjukt sken
+        const gO = ctx.createRadialGradient(sx, sy, rsPx, sx, sy, rsPx * 4.6);
+        gO.addColorStop(0, `rgba(210,220,245,${0.13 * coronaA})`);
+        gO.addColorStop(1, 'rgba(210,220,245,0)');
+        ctx.fillStyle = gO;
+        ctx.beginPath(); ctx.arc(sx, sy, rsPx * 4.6, 0, TAU); ctx.fill();
+
+        // Inre korona: ljus ring närmast randen, avtar snabbt utåt
+        const gI = ctx.createRadialGradient(sx, sy, rsPx * 0.98, sx, sy, rsPx * 3.1);
+        gI.addColorStop(0, `rgba(255,250,240,${0.82 * coronaA})`);
+        gI.addColorStop(0.16, `rgba(235,238,252,${0.3 * coronaA})`);
+        gI.addColorStop(0.5, `rgba(220,228,250,${0.09 * coronaA})`);
+        gI.addColorStop(1, 'rgba(220,228,250,0)');
+        ctx.fillStyle = gI;
+        ctx.beginPath(); ctx.arc(sx, sy, rsPx * 3.1, 0, TAU); ctx.fill();
+
+        // Streamers: avsmalnande kronblad längs ekvatorn
+        for (const s of STREAMERS) {
+            const tipAng = s.ang + s.bend * 30;
+            const [bx1, by1] = polar(sx, sy, rsPx * 1.02, s.ang - s.halfw);
+            const [bx2, by2] = polar(sx, sy, rsPx * 1.02, s.ang + s.halfw);
+            const [tx, ty]   = polar(sx, sy, rsPx * s.len, tipAng);
+            const [c1x, c1y] = polar(sx, sy, rsPx * s.len * 0.55, s.ang - s.halfw * 0.55);
+            const [c2x, c2y] = polar(sx, sy, rsPx * s.len * 0.55, s.ang + s.halfw * 0.55);
+            const gS = ctx.createLinearGradient(sx, sy, tx, ty);
+            gS.addColorStop(0, `rgba(250,250,252,${s.a * coronaA})`);
+            gS.addColorStop(0.4, `rgba(235,240,252,${s.a * 0.45 * coronaA})`);
+            gS.addColorStop(1, 'rgba(235,240,252,0)');
+            ctx.fillStyle = gS;
+            ctx.beginPath();
+            ctx.moveTo(bx1, by1);
+            ctx.quadraticCurveTo(c1x, c1y, tx, ty);
+            ctx.quadraticCurveTo(c2x, c2y, bx2, by2);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Polarplymer: smala borst vid polerna
+        for (const p of PLUMES) {
+            const [bx1, by1] = polar(sx, sy, rsPx * 1.02, p.ang - p.halfw);
+            const [bx2, by2] = polar(sx, sy, rsPx * 1.02, p.ang + p.halfw);
+            const [tx, ty]   = polar(sx, sy, rsPx * p.len, p.ang);
+            const gP = ctx.createLinearGradient(sx, sy, tx, ty);
+            gP.addColorStop(0, `rgba(240,244,252,${p.a * coronaA})`);
+            gP.addColorStop(1, 'rgba(240,244,252,0)');
+            ctx.fillStyle = gP;
+            ctx.beginPath();
+            ctx.moveTo(bx1, by1); ctx.lineTo(tx, ty); ctx.lineTo(bx2, by2);
+            ctx.closePath(); ctx.fill();
+        }
+
+        // Hårfina strålar
+        ctx.lineWidth = 1;
+        for (const h of HAIRS) {
+            const [x1, y1] = polar(sx, sy, rsPx * 1.04, h.ang);
+            const [x2, y2] = polar(sx, sy, rsPx * h.len, h.ang);
+            ctx.strokeStyle = `rgba(232,238,250,${(h.a * coronaA).toFixed(3)})`;
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+        }
+
+        // Kromosfären: tunn röd rand alldeles utanför fotosfären. Ritas som
+        // hel ring — månskivan (ritas efteråt) täcker allt utom den smala
+        // sektor som just håller på att täckas/avtäckas vid C2/C3.
+        ctx.strokeStyle = `rgba(255,72,58,${0.85 * coronaA})`;
+        ctx.lineWidth = Math.max(2, 0.06 * scale);
+        ctx.beginPath();
+        ctx.arc(sx, sy, rsPx + ctx.lineWidth * 0.4, 0, TAU);
+        ctx.stroke();
+
+        // Protuberanser: rosaröda bågar från solranden. Delar som ligger
+        // innanför månranden döljs av månskivan som ritas efteråt.
+        for (const p of PROMS) {
+            const hPx = p.h * scale;
+            const [px, py] = polar(sx, sy, rsPx, p.ang);
+            const gPr = ctx.createRadialGradient(px, py, 0, px, py, hPx * 1.6);
+            gPr.addColorStop(0, `rgba(255,120,130,${0.9 * coronaA})`);
+            gPr.addColorStop(0.4, `rgba(238,52,80,${0.55 * coronaA})`);
+            gPr.addColorStop(1, 'rgba(238,52,80,0)');
+            ctx.fillStyle = gPr;
+            ctx.beginPath();
+            const a0 = (p.ang - p.w) * Math.PI / 180;
+            const a1 = (p.ang + p.w) * Math.PI / 180;
+            ctx.arc(sx, sy, rsPx + hPx, a0, a1);
+            ctx.arc(sx, sy, rsPx * 0.985, a1, a0, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        ctx.restore();
+    }
+
+    // ── 5. Fotosfären (med randfördunkling) ────────────────────────────────
+    if (f > 0) {
+        const gF = ctx.createRadialGradient(sx, sy, 0, sx, sy, rsPx);
+        gF.addColorStop(0, '#fffdf4');
+        gF.addColorStop(0.55, '#fff3cd');
+        gF.addColorStop(0.82, '#ffe09e');
+        gF.addColorStop(0.95, '#fbbf69');
+        gF.addColorStop(1, '#e69340');
+        ctx.fillStyle = gF;
+        ctx.beginPath(); ctx.arc(sx, sy, rsPx, 0, TAU); ctx.fill();
+    }
+
+    // ── 6. Månskivan ───────────────────────────────────────────────────────
+    // Mot himlen är månens nattsida i praktiken osynlig — den lyser med
+    // samma ljus som himlen framför den. Därför fylls skivan med EXAKT
+    // samma himmelsgradient (annars syns en falsk cirkel mot himlen).
+    // Först nära och under totaliteten framträder den som ett svart hål.
+    ctx.save();
+    ctx.beginPath(); ctx.arc(mx, my, rmPx, 0, TAU); ctx.clip();
+    ctx.fillStyle = gSky;
+    ctx.fillRect(0, 0, W, Math.min(H, yHor + 2));
+    const moonDarkA = Math.max(coronaA, clamp((0.14 - vis) / 0.14, 0, 1) * 0.75);
+    if (moonDarkA > 0) {
+        ctx.fillStyle = `rgba(4,5,10,${moonDarkA.toFixed(3)})`;
+        ctx.fillRect(0, 0, W, H);
+    }
+    ctx.restore();
+    if (f > 0) {
+        // Snittet måne ∩ sol: svart silhuett mot den bländande fotosfären
+        ctx.save();
+        ctx.beginPath(); ctx.arc(mx, my, rmPx, 0, TAU); ctx.clip();
+        ctx.fillStyle = '#04050a';
+        ctx.beginPath(); ctx.arc(sx, sy, rsPx + 1.5, 0, TAU); ctx.fill();
+        ctx.restore();
+    }
+    // Svagt jordsken på månskivan under totaliteten (månhaven skymtar)
+    if (coronaA > 0.5) {
+        ctx.save();
+        ctx.beginPath(); ctx.arc(mx, my, rmPx, 0, TAU); ctx.clip();
+        ctx.fillStyle = `rgba(150,158,178,${0.022 * coronaA})`;
+        [[-0.32, -0.2, 0.3], [0.15, -0.36, 0.22], [0.05, 0.2, 0.3], [-0.1, 0.48, 0.18]].forEach(mArr => {
+            ctx.beginPath();
+            ctx.arc(mx + mArr[0] * rmPx, my + mArr[1] * rmPx, mArr[2] * rmPx, 0, TAU);
+            ctx.fill();
+        });
+        ctx.restore();
+    }
+
+    // ── 7. Bailys pärlor och diamantringen (additivt, ovanpå månranden) ────
+    if (typ === 'total' && f > 0 && f < 0.03) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        let best = null;
+        for (const bead of BEADS) {
+            // Solranden vid pärlans vinkel — hur långt utanför månranden?
+            const [lx, ly] = polar(sx, sy, rsPx, bead.ang);
+            const expo = (Math.hypot(lx - mx, ly - my) - rmPx) / scale;  // bågminuter
+            const lys = clamp((expo + bead.depth) / 0.09, 0, 1) *
+                        clamp(1 - expo / 0.35, 0, 1);
+            if (lys <= 0.02) continue;
+            const rGl = (2.2 + 4.5 * lys) * bead.size;
+            const gB = ctx.createRadialGradient(lx, ly, 0, lx, ly, rGl);
+            gB.addColorStop(0, `rgba(255,252,240,${0.95 * lys})`);
+            gB.addColorStop(0.4, `rgba(255,236,190,${0.45 * lys})`);
+            gB.addColorStop(1, 'rgba(255,236,190,0)');
+            ctx.fillStyle = gB;
+            ctx.beginPath(); ctx.arc(lx, ly, rGl, 0, TAU); ctx.fill();
+            if (!best || lys > best.lys) best = { x: lx, y: ly, lys };
+        }
+        // Diamantringen: när bara en dominerande pärla återstår
+        const ring = clamp(1 - f / 0.012, 0, 1);
+        if (best && ring > 0) {
+            const rGl = rsPx * (0.35 + 0.55 * ring) * best.lys;
+            const gD = ctx.createRadialGradient(best.x, best.y, 0, best.x, best.y, rGl);
+            gD.addColorStop(0, `rgba(255,253,246,${0.95 * ring})`);
+            gD.addColorStop(0.25, `rgba(255,244,214,${0.5 * ring})`);
+            gD.addColorStop(1, 'rgba(255,244,214,0)');
+            ctx.fillStyle = gD;
+            ctx.beginPath(); ctx.arc(best.x, best.y, rGl, 0, TAU); ctx.fill();
+            // Fyruddig gnistra
+            ctx.strokeStyle = `rgba(255,250,235,${0.55 * ring * best.lys})`;
+            ctx.lineWidth = 1.4;
+            const L = rsPx * 0.55 * ring;
+            [[0, 1], [1, 0], [0.7, 0.7], [0.7, -0.7]].forEach(dir => {
+                ctx.beginPath();
+                ctx.moveTo(best.x - dir[0] * L, best.y - dir[1] * L);
+                ctx.lineTo(best.x + dir[0] * L, best.y + dir[1] * L);
+                ctx.stroke();
+            });
+        }
+        ctx.restore();
+    }
+
+    // ── 8. Bländning kring den fria solskivan ──────────────────────────────
+    // Så länge en bit fotosfär är fri dränker dess sken koronan — därför
+    // syns koronan aldrig före andra kontakten.
+    if (f > 0.0005) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        const bloomA = Math.pow(f, 0.55);
+        let ex = 1, ey = 0;
+        if (d > 1e-6) { ex = (sx - mx) / (d * scale); ey = (sy - my) / (d * scale); }
+        const pcx = sx + ex * rsPx * 0.5 * obsc;
+        const pcy = sy + ey * rsPx * 0.5 * obsc;
+        const rB = rsPx * (1.3 + 2.4 * f);
+        const gBl = ctx.createRadialGradient(pcx, pcy, 0, pcx, pcy, rB);
+        gBl.addColorStop(0, `rgba(255,250,235,${0.8 * bloomA})`);
+        gBl.addColorStop(0.35, `rgba(255,225,170,${0.28 * bloomA})`);
+        gBl.addColorStop(1, 'rgba(255,225,170,0)');
+        ctx.fillStyle = gBl;
+        ctx.beginPath(); ctx.arc(pcx, pcy, rB, 0, TAU); ctx.fill();
+        ctx.restore();
+    }
+
+    // ── 9. Landskapet (siluett som mörknar med himlen) ─────────────────────
+    const lm = clamp(0.05 + 0.95 * vis, 0, 1);
+    const groundDay = [64, 82, 60], groundNight = [7, 9, 14];
+    const hill2Day = [50, 66, 50], hill1Day = [38, 52, 42];
+    const ground = mix(groundNight, groundDay, lm);
+    // Bortre kullar
+    ctx.fillStyle = rgb(mix(groundNight, hill2Day, lm));
+    ctx.beginPath();
+    ctx.moveTo(0, yHor);
+    HILLS2.forEach(hh => ctx.lineTo(hh.x * W, yHor - hh.h * H * 0.05));
+    ctx.lineTo(W, yHor); ctx.lineTo(W, H); ctx.lineTo(0, H);
+    ctx.closePath(); ctx.fill();
+    // Främre kullar
+    ctx.fillStyle = rgb(mix(groundNight, hill1Day, lm));
+    ctx.beginPath();
+    ctx.moveTo(0, yHor + H * 0.02);
+    HILLS1.forEach(hh => ctx.lineTo(hh.x * W, yHor + H * 0.02 - hh.h * H * 0.035));
+    ctx.lineTo(W, yHor + H * 0.02); ctx.lineTo(W, H); ctx.lineTo(0, H);
+    ctx.closePath(); ctx.fill();
+    // Mark
+    ctx.fillStyle = rgb(ground);
+    ctx.fillRect(0, yHor + H * 0.05, W, H - yHor);
+    // Granar i siluett
+    ctx.fillStyle = rgb(mix([4, 6, 10], [22, 32, 26], lm));
+    for (const tr of TREES) {
+        const tx = tr.x * W, base = yHor + H * 0.022, s = tr.s * H * 0.055;
+        for (let k = 0; k < 3; k++) {
+            const w = s * (1 - k * 0.26), yTop = base - s * (0.55 + k * 0.42);
+            ctx.beginPath();
+            ctx.moveTo(tx, yTop - s * 0.45);
+            ctx.lineTo(tx - w * 0.42, yTop + s * 0.28);
+            ctx.lineTo(tx + w * 0.42, yTop + s * 0.28);
+            ctx.closePath(); ctx.fill();
+        }
+    }
+
+    return g;
+}
+
+// ── Fasbeskrivning + nedräkning ─────────────────────────────────────────────
+function phaseInfo(t, g) {
+    const { typ, tC1, tC2 } = g;
+    if (typ === 'ingen' || tC1 === null) {
+        return { fas: 'Ingen förmörkelse', next: 'Månen passerar vid sidan av solen' };
+    }
+    const centralNamn = typ === 'total' ? 'Totalitet' : 'Ringformig fas';
+    if (t < -tC1) return { fas: 'Före förmörkelsen', next: 'Första kontakten om ' + fmtDur(-tC1 - t) };
+    if (t > tC1) return { fas: 'Förmörkelsen är slut', next: 'Fjärde kontakten var för ' + fmtDur(t - tC1) + ' sedan' };
+    if (tC2 !== null && t >= -tC2 && t <= tC2) {
+        return { fas: centralNamn, next: centralNamn + ' slutar om ' + fmtDur(tC2 - t), central: true };
+    }
+    if (t < 0) {
+        const nextText = (tC2 !== null)
+            ? centralNamn + ' börjar om ' + fmtDur(-tC2 - t)
+            : 'Störst täckning om ' + fmtDur(-t);
+        return { fas: 'Partiell fas (växande)', next: nextText };
+    }
+    return { fas: 'Partiell fas (avtagande)', next: 'Förmörkelsen slutar om ' + fmtDur(tC1 - t) };
+}
+
+// ── React-appen ─────────────────────────────────────────────────────────────
+function App() {
+    // Startvärden (kan styras med ?t=&dm=&b= för test/delning)
+    const q = new URLSearchParams(window.location.search);
+    const t0 = q.has('t') ? parseFloat(q.get('t')) : -70;
+    const dm0 = q.has('dm') ? clamp(parseFloat(q.get('dm')), DM_MIN, DM_MAX) : DM_DEFAULT;
+    const b0 = q.has('b') ? clamp(parseFloat(q.get('b')), 0, 40) : 0;
+
+    const [tUi, setTUi] = useState(t0);
+    const [dm, setDm] = useState(dm0);
+    const [bSep, setBSep] = useState(b0);
+    const [speed, setSpeed] = useState(60);
+    const [playing, setPlaying] = useState(false);
+    const [stars, setStars] = useState(true);
+    const [slowmo, setSlowmo] = useState(true);
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [controlsOpen, setControlsOpen] = useState(true);
+    const [readout, setReadout] = useState({ fas: '', next: '', obsc: 0 });
+
+    const wrapRef = useRef(null);
+    const canvasRef = useRef(null);
+    const tRef = useRef(t0);
+    const dmRef = useRef(dm0);
+    const bRef = useRef(b0);
+    const speedRef = useRef(60);
+    const playingRef = useRef(false);
+    const starsRef = useRef(true);
+    const slowmoRef = useRef(true);
+    const visibleRef = useRef(true);
+
+    useEffect(() => { dmRef.current = dm; }, [dm]);
+    useEffect(() => { bRef.current = bSep; }, [bSep]);
+    useEffect(() => { speedRef.current = speed; }, [speed]);
+    useEffect(() => { playingRef.current = playing; }, [playing]);
+    useEffect(() => { starsRef.current = stars; }, [stars]);
+    useEffect(() => { slowmoRef.current = slowmo; }, [slowmo]);
+
+    // Fullskärm
+    useEffect(() => {
+        const handler = () => {
+            setIsFullscreen(
+                document.fullscreenElement === wrapRef.current ||
+                document.webkitFullscreenElement === wrapRef.current
+            );
+        };
+        document.addEventListener('fullscreenchange', handler);
+        document.addEventListener('webkitfullscreenchange', handler);
+        return () => {
+            document.removeEventListener('fullscreenchange', handler);
+            document.removeEventListener('webkitfullscreenchange', handler);
+        };
+    }, []);
+    const toggleFullscreen = () => {
+        const el = wrapRef.current;
+        if (!el) return;
+        const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+        if (isFs) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+    };
+
+    // Canvas-storlek + rit-loop
+    useEffect(() => {
+        const canvas = canvasRef.current, wrap = wrapRef.current;
+        if (!canvas || !wrap) return;
+        const ctx = canvas.getContext('2d');
+        let raf = 0, last = performance.now(), acc = 999;   // 999 → avläsning fylls direkt
+
+        // Mät CANVASENS visningsyta (inte scenramens) — på mobil rymmer
+        // ramen även de dockade verktygsrutorna under scenen.
+        const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const w = canvas.clientWidth, h = canvas.clientHeight;
+            if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+                canvas.width = Math.round(w * dpr);
+                canvas.height = Math.round(h * dpr);
+            }
+            return { w, h, dpr };
+        };
+        const ro = new ResizeObserver(resize);
+        ro.observe(canvas);
+
+        const io = new IntersectionObserver(entries => {
+            visibleRef.current = entries[0] ? entries[0].isIntersecting : true;
+        });
+        io.observe(wrap);
+
+        const loop = (now) => {
+            raf = requestAnimationFrame(loop);
+            const dt = Math.min(0.1, (now - last) / 1000);
+            last = now;
+            if (!visibleRef.current || document.hidden) return;
+
+            const gPre = geometry(tRef.current, dmRef.current, bRef.current);
+            if (playingRef.current) {
+                let eff = speedRef.current;
+                if (slowmoRef.current && gPre.tC2 !== null) {
+                    const nearC2 = Math.abs(Math.abs(tRef.current) - gPre.tC2) < 0.7;
+                    const inside = Math.abs(tRef.current) < gPre.tC2;
+                    if (nearC2) eff = Math.min(eff, 6);
+                    else if (inside) eff = Math.min(eff, 30);
+                }
+                tRef.current += dt * eff / 60;
+                if (tRef.current > 80) { tRef.current = 80; playingRef.current = false; setPlaying(false); }
+            }
+
+            const { w, h, dpr } = resize();
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const g = drawScene(ctx, w, h, {
+                t: tRef.current, dm: dmRef.current, b: bRef.current,
+                stars: starsRef.current,
+            }, now / 1000);
+
+            acc += dt;
+            if (acc > 0.12) {
+                acc = 0;
+                const info = phaseInfo(tRef.current, g);
+                // Utanför den centrala fasen finns alltid en strimma sol kvar —
+                // visa aldrig "100,0 %" av ren avrundning.
+                const obscVisad = info.central ? g.obsc : Math.min(g.obsc, 0.999);
+                setReadout({ fas: info.fas, next: info.next, obsc: obscVisad, central: !!info.central });
+                setTUi(tRef.current);
+            }
+        };
+        raf = requestAnimationFrame(loop);
+        return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); };
+    }, []);
+
+    // Härledda värden för korten (räknas om när reglagen ändras)
+    const gNow = useMemo(() => geometry(0, dm, bSep), [dm, bSep]);
+    const maxObsc = useMemo(() => obscuration(THETA_S, thetaM(dm), bSep), [dm, bSep]);
+    const centralLen = gNow.tC2 !== null ? 2 * gNow.tC2 : null;
+    const typNamn = { total: 'Total', ringformig: 'Ringformig', partiell: 'Partiell', ingen: 'Ingen förmörkelse' }[gNow.typ];
+
+    const setTid = (v) => { tRef.current = v; setTUi(v); };
+    const hoppaTillMax = () => {
+        const g = geometry(0, dmRef.current, bRef.current);
+        setTid(g.tC2 !== null ? -g.tC2 - 0.8 : -0.8);
+        setPlaying(true);
+    };
+    const borjaOm = () => {
+        const g = geometry(0, dmRef.current, bRef.current);
+        setTid(g.tC1 !== null ? -(g.tC1 + 6) : -70);
+        setPlaying(true);
+    };
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+
+            <div className="scene-wrap" ref={wrapRef}>
+                <canvas ref={canvasRef} />
+
+                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                    {isFullscreen ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                        </svg>
+                    ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                    )}
+                </button>
+
+                <div className="scene-info">
+                    <span className="si-lbl">Fas</span>
+                    <span className={'si-val' + (readout.central ? ' si-tot' : '')}>{readout.fas}</span>
+                    <span className="si-lbl" style={{ marginTop: 4 }}>Täckningsgrad</span>
+                    <span className="si-val">{fmt(readout.obsc * 100, 1)}{NBSP}%</span>
+                    <span className="si-lbl" style={{ marginTop: 4 }}>Nästa händelse</span>
+                    <span className="si-val" style={{ fontSize: 12 }}>{readout.next}</span>
+                </div>
+
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label>
+                        <input type="checkbox" checked={stars} onChange={e => setStars(e.target.checked)} />
+                        <span>Stjärnor och Venus</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={slowmo} onChange={e => setSlowmo(e.target.checked)} />
+                        <span>Sakta ner vid kontakterna</span>
+                    </label>
+                    <div className="st-actions">
+                        <button className={playing ? 'active' : ''} onClick={() => setPlaying(p => !p)}>
+                            {playing ? 'Paus' : 'Start'}
+                        </button>
+                        <button onClick={hoppaTillMax}>Strax före totaliteten</button>
+                        <button onClick={borjaOm}>Börja om</button>
+                    </div>
+                </div>
+
+                <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                    <div className="fs-row">
+                        <span className="fs-label">Tid (relativt max)</span>
+                        <input type="range" min={-80} max={80} step={0.05} value={tUi}
+                               onChange={e => setTid(parseFloat(e.target.value))} />
+                        <span className="fs-value">{fmtTid(tUi)}</span>
+                    </div>
+                    <div className="fs-row">
+                        <span className="fs-label">Månens avstånd</span>
+                        <input type="range" min={DM_MIN} max={DM_MAX} step={100} value={dm}
+                               onChange={e => setDm(parseFloat(e.target.value))} />
+                        <span className="fs-value">{fmtInt(dm)}{NBSP}km</span>
+                    </div>
+                    <div className="fs-row">
+                        <span className="fs-label">Avstånd från centrallinjen</span>
+                        <input type="range" min={0} max={40} step={0.5} value={bSep}
+                               onChange={e => setBSep(parseFloat(e.target.value))} />
+                        <span className="fs-value">{fmt(bSep, 1)}′</span>
+                    </div>
+                    <div className="fs-row">
+                        <span className="fs-label">Uppspelningsfart</span>
+                        <input type="range" min={1} max={240} step={1} value={speed}
+                               onChange={e => setSpeed(parseFloat(e.target.value))} />
+                        <span className="fs-value">{fmt(speed, 0)}×</span>
+                    </div>
+                </div>
+                <button
+                    className="fs-toggle-handle"
+                    onClick={() => setControlsOpen(o => !o)}
+                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                    aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                    aria-expanded={controlsOpen}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                         style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                    <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                </button>
+            </div>
+
+            {/* Värdekort */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 12 }}>
+                <div className="value-card">
+                    <div className="value-label">Solens vinkeldiameter</div>
+                    <div className="value-number"><em className="italic-var">θ</em><sub style={{ fontSize: '0.7em' }}>S</sub> = {fmt(2 * THETA_S, 1)}′</div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Månens vinkeldiameter</div>
+                    <div className="value-number"><em className="italic-var">θ</em><sub style={{ fontSize: '0.7em' }}>M</sub> = {fmt(2 * thetaM(dm), 1)}′</div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Storleksförhållande</div>
+                    <div className="value-number"><em className="italic-var">k</em> = {fmt(thetaM(dm) / THETA_S, 3)}</div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Typ av förmörkelse</div>
+                    <div className="value-number">{typNamn}</div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Största täckningsgrad</div>
+                    <div className="value-number">{fmt(maxObsc * 100, 1)}<span className="unit">%</span></div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">{gNow.typ === 'ringformig' ? 'Ringfasens längd' : 'Totalitetens längd'}</div>
+                    <div className="value-number">{centralLen !== null ? fmtDur(centralLen) : '—'}</div>
+                </div>
+            </div>
+
+            {/* Förklaringar */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 14 }}>
+                <div className="glass-card" style={{ padding: 22 }}>
+                    <h3 style={{ fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '1.05rem', color: 'var(--lab-ink)', marginBottom: 10 }}>
+                        En kosmisk slump
+                    </h3>
+                    <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.65, fontSize: '0.92rem' }}>
+                        Solens diameter är ungefär 400 gånger större än månens — men solen ligger
+                        också ungefär 400 gånger längre bort. Därför får båda nästan exakt samma
+                        vinkeldiameter på himlen, omkring en halv grad, och månen kan täcka solskivan
+                        precis. Ingen annan känd planet har en måne där det stämmer så väl.
+                        Eftersom månens bana är en ellips varierar månens vinkeldiameter mellan
+                        cirka 0,49° och 0,57° — ibland räcker den till en total förmörkelse,
+                        ibland inte.
+                    </p>
+                </div>
+                <div className="glass-card" style={{ padding: 22 }}>
+                    <h3 style={{ fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '1.05rem', color: 'var(--lab-ink)', marginBottom: 10 }}>
+                        Koronan — en miljon gånger svagare än solskivan
+                    </h3>
+                    <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.65, fontSize: '0.92rem' }}>
+                        Koronan är solens yttersta atmosfär: ett glest plasma med en temperatur på
+                        över en miljon grader, format av solens magnetfält till strålar och plymer.
+                        Dess ljus är bara ungefär en miljondel av fotosfärens — så länge minsta
+                        strimma av solskivan är fri dränks koronan helt i bländningen. Det är därför
+                        den blir synlig först i samma ögonblick som totaliteten börjar, och försvinner
+                        lika tvärt när den slutar. Den tunna röda randen som blixtrar förbi vid
+                        kontakterna är kromosfären, och de rosa lågorna utanför månranden är
+                        protuberanser — bågar av vätgas som kan resa sig tiotusentals kilometer
+                        över solytan.
+                    </p>
+                </div>
+                <div className="glass-card" style={{ padding: 22 }}>
+                    <h3 style={{ fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '1.05rem', color: 'var(--lab-ink)', marginBottom: 10 }}>
+                        Bailys pärlor och diamantringen
+                    </h3>
+                    <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.65, fontSize: '0.92rem' }}>
+                        Månens rand är inte slät — den kantas av berg och dalar. Sekunderna före och
+                        efter totaliteten silar de sista solstrålarna genom dalarna, och solranden
+                        bryts upp i en rad lysande punkter: Bailys pärlor. När bara en enda pärla
+                        återstår, samtidigt som den inre koronan börjat framträda runt månskivan,
+                        ser det ut som en gnistrande ring med en diamant — diamantringen. Slå på
+                        "Sakta ner vid kontakterna" för att hinna se förloppet.
+                    </p>
+                </div>
+                <div className="glass-card" style={{ padding: 22 }}>
+                    <h3 style={{ fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '1.05rem', color: 'var(--lab-ink)', marginBottom: 10 }}>
+                        Total, ringformig eller partiell?
+                    </h3>
+                    <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.65, fontSize: '0.92rem' }}>
+                        Månens avstånd till jorden varierar mellan cirka 356{NBSP}500 och
+                        406{NBSP}700{NBSP}km. Står månen nära (perigeum) är dess skiva större än
+                        solens och förmörkelsen kan bli total. Står den långt bort (apogeum) räcker
+                        skivan inte till — en ring av fotosfär blir kvar runt månen och förmörkelsen
+                        blir ringformig. Då förblir himlen för ljus för både korona och stjärnor.
+                        Och bara den som står nära centrallinjen, i månens smala kärnskugga
+                        (umbran), ser den centrala fasen — flytta reglaget "Avstånd från
+                        centrallinjen" så ser du hur förmörkelsen blir partiell en bit vid sidan av.
+                    </p>
+                </div>
+            </div>
+
+            <div className="glass-card" style={{ padding: '16px 22px' }}>
+                <p style={{ fontFamily: 'Poppins,sans-serif', color: 'var(--lab-ink-soft)', lineHeight: 1.6, fontSize: '0.85rem' }}>
+                    <strong>Om skalorna:</strong> solens och månens vinkeldiametrar, deras inbördes
+                    rörelse (cirka 0,5° per timme), kontakttiderna och täckningsgraden beräknas ur
+                    verklig geometri — men solen visas i teleskopförstoring ovanför ett
+                    vidvinkellandskap, och uppspelningen är snabbare än verkligheten (ställbar med
+                    reglaget). <strong>I verkligheten:</strong> titta aldrig mot solen utan godkänt
+                    solfilter — vanliga solglasögon räcker inte. Bara under totalitetens minuter är
+                    det säkert att titta utan skydd.
+                </p>
+            </div>
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

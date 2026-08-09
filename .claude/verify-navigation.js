@@ -94,6 +94,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-em-stralning.html',
     'fysik2-dubbelspalt.html',
     'fysik2-manens-faser.html',
+    'fysik2-solformorkelse.html',
     'fysik2-wiens-lag.html',
     'fysik2-solens-farg.html',
     'fysik2-fotoelektrisk-effekt.html',

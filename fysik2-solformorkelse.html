@@ -864,6 +864,7 @@ function App() {
     const [playing, setPlaying] = useState(false);
     const [stars, setStars] = useState(true);
     const [slowmo, setSlowmo] = useState(true);
+    const [visaInfo, setVisaInfo] = useState(true);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsOpen, setControlsOpen] = useState(true);
     const [readout, setReadout] = useState({ fas: '', next: '', obsc: 0 });
@@ -1015,14 +1016,16 @@ function App() {
                     )}
                 </button>
 
-                <div className="scene-info">
-                    <span className="si-lbl">Fas</span>
-                    <span className={'si-val' + (readout.central ? ' si-tot' : '')}>{readout.fas}</span>
-                    <span className="si-lbl" style={{ marginTop: 4 }}>Täckningsgrad</span>
-                    <span className="si-val">{fmt(readout.obsc * 100, 1)}{NBSP}%</span>
-                    <span className="si-lbl" style={{ marginTop: 4 }}>Nästa händelse</span>
-                    <span className="si-val" style={{ fontSize: 12 }}>{readout.next}</span>
-                </div>
+                {visaInfo && (
+                    <div className="scene-info">
+                        <span className="si-lbl">Fas</span>
+                        <span className={'si-val' + (readout.central ? ' si-tot' : '')}>{readout.fas}</span>
+                        <span className="si-lbl" style={{ marginTop: 4 }}>Täckningsgrad</span>
+                        <span className="si-val">{fmt(readout.obsc * 100, 1)}{NBSP}%</span>
+                        <span className="si-lbl" style={{ marginTop: 4 }}>Nästa händelse</span>
+                        <span className="si-val" style={{ fontSize: 12 }}>{readout.next}</span>
+                    </div>
+                )}
 
                 <div className="scene-toggles">
                     <div className="st-title">Visa</div>
@@ -1033,6 +1036,10 @@ function App() {
                     <label>
                         <input type="checkbox" checked={slowmo} onChange={e => setSlowmo(e.target.checked)} />
                         <span>Sakta ner vid kontakterna</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={visaInfo} onChange={e => setVisaInfo(e.target.checked)} />
+                        <span>Avläsning</span>
                     </label>
                     <div className="st-actions">
                         <button className={playing ? 'active' : ''} onClick={() => setPlaying(p => !p)}>

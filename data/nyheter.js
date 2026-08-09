@@ -109,6 +109,7 @@ const NYHETER_ALL = [
     research: null,
     larare: {
       moment: [
+        { label: "Simulering — Solförmörkelse", href: "fysik2-solformorkelse.html" },
         { label: "Fysik nivå 2 — 5.3 Månens faser", href: "katalog.html#fy2-5.3" },
         { label: "Fysik nivå 2 — 5.2 Mäta avstånd i rymden", href: "katalog.html#fy2-5.2" },
         { label: "Fysik nivå 2 — 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }

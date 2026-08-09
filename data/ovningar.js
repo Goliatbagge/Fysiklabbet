@@ -4939,6 +4939,45 @@ $$
 
 **Svar:** Alternativ B.`,
         },
+        {
+            level: 1,
+            question: `En varmluftsballong påverkas av två vertikala krafter enligt figuren: lyftkraften $F_\\text{lyft} = 8\\,400\\ \\mathrm{N}$ riktad uppåt och tyngdkraften $F_G = 7\\,900\\ \\mathrm{N}$ riktad nedåt. Beräkna den resulterande kraften på ballongen.
+
+${makeForceDiagram({
+    vectors: [
+        { label: 'F_lyft', magnitude: '8 400 N', angle: 90, length: 168 },
+        { label: 'F_G', magnitude: '7 900 N', angle: 270, length: 158, color: '#1c3d6b' },
+    ],
+})}`,
+            answer: { value: 500, unit: 'N', tol: 0.02 },
+            solution: `Krafterna verkar längs samma (vertikala) linje men åt motsatt håll. Resultanten är skillnaden mellan dem, riktad åt det håll den större kraften pekar:
+
+$$
+F_R = F_\\text{lyft} - F_G = 8\\,400 - 7\\,900 = 500\\ \\mathrm{N}
+$$
+
+**Svar:** Resultanten är 500 N riktad **uppåt** — ballongen accelererar alltså uppåt (den lättar).`,
+        },
+        {
+            level: 1,
+            question: `En buss bromsar hastigt in och passagerarna "kastas" framåt i sätena. Hur förklaras detta bäst med Newtons första lag?`,
+            choices: [
+                `En framåtriktad kraft slungar passagerarna framåt när bussen bromsar.`,
+                `Passagerarna fortsätter i sin likformiga rörelse framåt när bussen saktar in — det krävs en kraft för att bromsa in även dem.`,
+                `Tyngdkraften på passagerarna byter riktning när bussen bromsar.`,
+                `Bromskraftens motkraft enligt Newtons tredje lag verkar på passagerarna.`,
+            ],
+            correct: 1,
+            solution: `Det finns ingen kraft som "kastar" passagerarna framåt — tvärtom är det **frånvaron** av en tillräcklig bromsande kraft som är förklaringen. Enligt Newtons första lag fortsätter passagerarna i sin likformiga rörelse (samma fart, samma riktning) tills en kraft ändrar den.
+
+När bussen bromsar verkar bromskraften på **bussen**, inte direkt på passagerarna. Passagerarna fortsätter därför framåt med sin gamla fart tills säkerhetsbältet eller sätet framför utövar den kraft som bromsar in dem.
+
+- Alternativ A beskriver en kraft som inte existerar — klassisk missuppfattning.
+- Alternativ C är fel — tyngdkraften pekar alltid mot jordens centrum.
+- Alternativ D blandar ihop Newtons tredje lag: motkraften till bromskraften verkar på vägbanan, inte på passagerarna.
+
+**Svar:** Alternativ B.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -4982,6 +5021,66 @@ $$
 
 **Generell slutsats:** Detta är formeln för "nyttig" drag­kraft — t.ex. när man drar en kälke i ett rep, är det $F \\cos \\alpha$ som driver kälken framåt, inte hela kraften $F$. Den vertikala komposanten $F \\sin \\alpha$ lyfter kälken något (minskar normalkraften och därmed friktionen).`,
         },
+        {
+            level: 2,
+            question: `Två snöskotrar drar en timmersläde med var sitt rep enligt figuren (sedd uppifrån). Vardera repet spänns med kraften 900 N, och repen bildar vinkeln 25° med färdriktningen åt var sitt håll. Beräkna den resulterande kraften på släden.
+
+${makeForceDiagram({
+    box: true, boxSize: 30,
+    vectors: [
+        { label: 'F_1', magnitude: '900 N', angle: 25, length: 180, showAngle: true },
+        { label: 'F_2', magnitude: '900 N', angle: -25, length: 180, showAngle: true },
+    ],
+})}`,
+            answer: { value: 1631, unit: 'N', tol: 0.03 },
+            solution: `Vi delar upp varje kraft i komposanter längs färdriktningen och vinkelrätt mot den.
+
+**Vinkelrätt mot färdriktningen:** komposanterna $F_1 \\sin 25^{\\circ}$ och $F_2 \\sin 25^{\\circ}$ pekar åt var sitt håll och är lika stora — de **tar ut varandra**.
+
+**Längs färdriktningen:** komposanterna samverkar:
+
+$$
+F_R = F_1 \\cos 25^{\\circ} + F_2 \\cos 25^{\\circ} = 2 \\cdot 900 \\cdot \\cos 25^{\\circ}
+$$
+
+$$
+F_R = 1\\,800 \\cdot 0{,}906 \\approx 1\\,630\\ \\mathrm{N} \\approx 1{,}6\\ \\mathrm{kN}
+$$
+
+${makeForceDiagram({
+    box: true, boxSize: 30,
+    vectors: [
+        { label: 'F_1', angle: 25, length: 180 },
+        { label: 'F_2', angle: -25, length: 180 },
+        { label: 'F_R', magnitude: '≈ 1,6 kN', angle: 0, length: 326, dashed: true, color: '#1c3d6b' },
+    ],
+})}
+
+**Svar:** Resultanten är ca 1,6 kN riktad rakt framåt i färdriktningen.
+
+**Generell slutsats:** Vid symmetrisk dragning ($\\pm\\alpha$ kring färdriktningen) är resultanten alltid $2F\\cos\\alpha$ rakt framåt — sidokomposanterna tar ut varandra. Ju större vinkel, desto mer kraft "slösas" i sidled.`,
+        },
+        {
+            level: 2,
+            question: `En person kör en gräsklippare genom att trycka längs handtaget med kraften 90 N. Handtaget lutar 40° mot marken, så kraften riktas snett nedåt–framåt enligt figuren. Hur stor är den komposant som trycker gräsklipparen **mot marken**?
+
+${makeForceDiagram({
+    box: true, boxSize: 30,
+    vectors: [
+        { label: 'F', magnitude: '90 N', angle: -40, length: 200, showAngle: true, angleLabel: '40°' },
+    ],
+})}`,
+            answer: { value: 57.9, unit: 'N', tol: 0.03 },
+            solution: `Kraften bildar vinkeln 40° med marken. Den vertikala komposanten (motstående katet till vinkeln) ges av sinus:
+
+$$
+F_y = F \\cdot \\sin 40^{\\circ} = 90 \\cdot 0{,}643 \\approx 58\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 58 N trycker gräsklipparen mot marken.
+
+**Generell slutsats:** Detta är skillnaden mellan att **skjuta** och att **dra** ett föremål med ett snett handtag: när man skjuter pressar $F \\sin \\alpha$ föremålet mot marken (ökar normalkraften och därmed friktionen), men när man drar lyfter samma komposant i stället föremålet (minskar friktionen). Därför är det lättare att dra en kälke än att skjuta den.`,
+        },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
@@ -5014,6 +5113,40 @@ För kraftjämvikt: $F_3 = F_{12} \\approx 58{,}3$ N, riktad i exakt motsatt rik
 **Svar:** $F_3 \\approx 58$ N (riktad sydväst).
 
 **Generell slutsats:** Vid kraftjämvikt med tre eller fler krafter kan vi alltid hitta den okända kraften genom att räkna ut resultanten av de kända, och sedan välja $F_\\text{okänd}$ som lika stor och motriktad. Geometriskt bildar tre balanserande krafter en sluten triangel.`,
+        },
+        {
+            level: 3,
+            question: `En bil har kört fast i leran. Föraren spänner ett rep hårt mellan bilen och ett träd, och trycker sedan **mitt på repet, vinkelrätt mot repets riktning**, med kraften 300 N. Repet viker sig då 5,0° vid mittpunkten enligt figuren (sedd uppifrån). Hur stor kraft drar repet i bilen med?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 200" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><circle cx="48" cy="70" r="26" fill="rgba(90,125,90,0.28)" stroke="#0f1620" stroke-width="1.6"/><circle cx="48" cy="70" r="4" fill="#0f1620"/><text x="48" y="114" text-anchor="middle" font-size="12" fill="#0f1620">träd</text><rect x="452" y="42" width="64" height="56" rx="10" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><line x1="468" y1="48" x2="468" y2="92" stroke="#0f1620" stroke-width="1.2"/><line x1="500" y1="48" x2="500" y2="92" stroke="#0f1620" stroke-width="1.2"/><text x="484" y="114" text-anchor="middle" font-size="12" fill="#0f1620">bil</text><line x1="74" y1="70" x2="452" y2="70" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="6 5"/><polyline points="74,70 263,120 452,70" fill="none" stroke="#0f1620" stroke-width="2.2"/><path d="M 134 70 A 60 60 0 0 1 132 85.3" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="178" y="84" text-anchor="middle" font-size="12" fill="#8a8579" dominant-baseline="middle">5,0°</text><line x1="263" y1="120" x2="263" y2="161" stroke="#c8324a" stroke-width="2.6"/><polygon points="263,168 258,157 268,157" fill="#c8324a"/><text x="275" y="164" text-anchor="start" font-size="14" fill="#c8324a"><tspan font-style="italic">F</tspan> = 300 N</text></svg>
+
+*Vinkeln är överdriven i figuren för tydlighets skull.*`,
+            answer: { value: 1721, unit: 'N', tol: 0.03 },
+            solution: `Betrakta repets mittpunkt. Tre krafter verkar där: spännkraften $T$ längs repet mot trädet, spännkraften $T$ längs repet mot bilen, och tryckkraften $F = 300\\ \\mathrm{N}$ vinkelrätt mot repets ursprungliga riktning. Mittpunkten är i jämvikt.
+
+${makeForceDiagram({
+    vectors: [
+        { label: 'T', angle: 175, length: 200 },
+        { label: 'T', angle: 5, length: 200 },
+        { label: 'F', magnitude: '300 N', angle: 270, length: 66, color: '#1c3d6b' },
+    ],
+})}
+
+Vardera spännkraften bildar bara vinkeln 5,0° med den ursprungliga replinjen. Komposanterna **längs** replinjen tar ut varandra (de pekar åt var sitt håll). Komposanterna **vinkelrätt** mot replinjen måste tillsammans balansera $F$:
+
+$$
+2 \\cdot T \\cdot \\sin 5{,}0^{\\circ} = F
+\\quad\\Leftrightarrow\\quad
+T = \\frac{F}{2 \\sin 5{,}0^{\\circ}}
+$$
+
+$$
+T = \\frac{300}{2 \\cdot 0{,}0872} \\approx 1\\,720\\ \\mathrm{N} \\approx 1{,}7\\ \\mathrm{kN}
+$$
+
+**Svar:** Repet drar i bilen med ca 1,7 kN.
+
+**Generell slutsats:** Repet fungerar som en **kraftväxel**: en måttlig kraft på 300 N växlas upp nästan 6 gånger. Ju mindre vinkeln är, desto större blir spännkraften ($T \\to \\infty$ när $\\alpha \\to 0$) — det är därför tricket fungerar så bra på ett nästan rakt rep, och därför man aldrig kan spänna en tvättlina helt rak när något hänger på den.`,
         },
     ],
 
@@ -5087,6 +5220,61 @@ $$
 
 **Svar:** 15 kg.`,
         },
+        {
+            level: 1,
+            question: `Ett godståg har massan $4{,}0 \\cdot 10^{6}\\ \\mathrm{kg}$. Lokets dragkraft ger den resulterande kraften $3{,}2 \\cdot 10^{5}\\ \\mathrm{N}$ på tåget. Vilken acceleration får tåget?`,
+            answer: { value: 0.08, unit: 'm/s²', tol: 0.02 },
+            solution: `Newtons andra lag med accelerationen utlöst:
+
+$$
+a = \\frac{F_R}{m} = \\frac{3{,}2 \\cdot 10^{5}}{4{,}0 \\cdot 10^{6}} = 0{,}080\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 0,080 m/s².
+
+**Generell slutsats:** Trots en dragkraft på 320 kN blir accelerationen liten — massan i nämnaren är enorm. Med denna acceleration tar det tåget över fem minuter att nå 90 km/h. Det är därför godståg behöver mycket långa sträckor för att komma upp i fart (och lika långa för att bromsa).`,
+        },
+        {
+            level: 1,
+            question: `Vid en serve verkar racketen på en tennisboll med massan 58 g med den genomsnittliga kraften 130 N. Vilken acceleration får bollen under träffen?`,
+            answer: { value: 2241, unit: 'm/s²', tol: 0.03 },
+            solution: `Massan måste först göras om till SI-enheten kilogram:
+
+$$
+\\left[ \\begin{array}{l}
+m = 58\\ \\mathrm{g} = 0{,}058\\ \\mathrm{kg} \\\\
+F_R = 130\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+Newtons andra lag:
+
+$$
+a = \\frac{F_R}{m} = \\frac{130}{0{,}058} \\approx 2\\,200\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Ca 2 200 m/s² — mer än 200 gånger tyngdaccelerationen. Lätta föremål kan få enorma accelerationer även av måttliga krafter.`,
+        },
+        {
+            level: 1,
+            question: `En tom kundvagn får accelerationen 2,0 m/s² när den puttas med kraften *F*. Vilken acceleration får en **dubbelt så tung** vagn om den puttas med **samma** kraft *F*?`,
+            choices: [
+                `4,0 m/s²`,
+                `2,0 m/s²`,
+                `1,0 m/s²`,
+                `0,50 m/s²`,
+            ],
+            correct: 2,
+            solution: `Enligt Newtons andra lag är $a = F_R/m$. Vid oförändrad kraft är accelerationen **omvänt proportionell** mot massan:
+
+$$
+a \\propto \\frac{1}{m}
+$$
+
+Dubbel massa ger alltså halv acceleration: $2{,}0 / 2 = 1{,}0\\ \\mathrm{m/s^2}$.
+
+**Svar:** Alternativ C (1,0 m/s²).`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -5134,6 +5322,69 @@ $$
 
 **Svar:** Ca 2,5 kN.`,
         },
+        {
+            level: 2,
+            question: `Diagrammet visar hastigheten för en motorbåt med massan 750 kg som accelererar från stillastående. Beräkna den resulterande kraften på båten under de första 8,0 sekunderna.
+
+${makeDiagram({
+    xMax: 12, yMax: 12,
+    xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yTicks: [0, 2, 4, 6, 8, 10, 12],
+    paths: [{ points: [[0, 0], [8, 10], [12, 10]] }],
+})}`,
+            answer: { value: 938, unit: 'N', tol: 0.03 },
+            solution: `Accelerationen är grafens **lutning** under accelerationsfasen. Vi läser av i rutnätet: hastigheten ökar från 0 till 10 m/s på 8,0 s.
+
+${makeDiagram({
+    xMax: 12, yMax: 12,
+    xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yTicks: [0, 2, 4, 6, 8, 10, 12],
+    paths: [
+        { points: [[0, 0], [8, 10], [12, 10]] },
+        { points: [[8, 0], [8, 10]], color: '#8a8579', width: 1.4, dash: '5 4' },
+        { points: [[0, 0], [8, 0]], color: '#8a8579', width: 1.4, dash: '5 4' },
+    ],
+})}
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{10}{8{,}0} = 1{,}25\\ \\mathrm{m/s^2}
+$$
+
+Newtons andra lag ger kraften:
+
+$$
+F_R = m \\cdot a = 750 \\cdot 1{,}25 \\approx 940\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 940 N.
+
+**Generell slutsats:** Efter $t = 8{,}0\\ \\mathrm{s}$ är grafen vågrät — hastigheten är konstant och den resulterande kraften därför **noll** (motorns dragkraft balanserar exakt vattnets motstånd). En resulterande kraft behövs för att *ändra* hastigheten, inte för att *hålla* den.`,
+        },
+        {
+            level: 2,
+            question: `En delfin med massan 150 kg saktar in från 12 m/s till 7,5 m/s på 2,3 s för att ansluta till en lekkamrat. Hur stor är den genomsnittliga resulterande bromskraften på delfinen? (Tyngdkraften balanseras av vattnets lyftkraft.)`,
+            answer: { value: 293, unit: 'N', tol: 0.03 },
+            solution: `Först retardationen, sedan Newtons andra lag.
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 150\\ \\mathrm{kg} \\\\
+\\Delta v = 12 - 7{,}5 = 4{,}5\\ \\mathrm{m/s} \\\\
+\\Delta t = 2{,}3\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{4{,}5}{2{,}3} \\approx 1{,}96\\ \\mathrm{m/s^2}
+$$
+
+$$
+F_R = m \\cdot a = 150 \\cdot 1{,}96 \\approx 290\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 290 N, riktad mot rörelseriktningen (bromsande).`,
+        },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
@@ -5161,6 +5412,36 @@ $$
 **Svar:** a) Accelerationen är 3,0 m/s². b) Spännkraften är 6,0 N.
 
 **Generell slutsats:** När flera kroppar är ihopkopplade har de samma acceleration men *olika netto-krafter* — varje kropp har sin egen Newton 2-ekvation. Tricket är att välja en lämplig **delkropp** (ofta den lättare av de två) där spännkraften är den enda obekanta horisontella kraften.`,
+        },
+        {
+            level: 3,
+            question: `En bil med massan 1 300 kg bogserar en husvagn med massan 900 kg enligt figuren. Bogserlinan tål högst spännkraften 1 100 N innan den brister.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 130" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="100" x2="520" y2="100" stroke="#0f1620" stroke-width="1.6"/><line x1="32" y1="100" x2="26" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="72" y1="100" x2="66" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="100" x2="106" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="152" y1="100" x2="146" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="192" y1="100" x2="186" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="100" x2="226" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="272" y1="100" x2="266" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="312" y1="100" x2="306" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="100" x2="346" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="392" y1="100" x2="386" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="432" y1="100" x2="426" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="472" y1="100" x2="466" y2="108" stroke="#0f1620" stroke-width="1"/><line x1="512" y1="100" x2="506" y2="108" stroke="#0f1620" stroke-width="1"/><rect x="40" y="40" width="130" height="42" rx="4" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><text x="105" y="65" text-anchor="middle" font-size="13" fill="#0f1620">900 kg</text><text x="105" y="32" text-anchor="middle" font-size="12" fill="#8a8579">husvagn</text><circle cx="105" cy="91" r="9" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><line x1="170" y1="62" x2="240" y2="62" stroke="#0f1620" stroke-width="2"/><text x="205" y="50" text-anchor="middle" font-size="12" fill="#8a8579">bogserlina</text><rect x="240" y="48" width="150" height="34" rx="6" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><path d="M 268 48 L 276 30 L 340 30 L 348 48" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><text x="315" y="68" text-anchor="middle" font-size="13" fill="#0f1620">1 300 kg</text><text x="315" y="22" text-anchor="middle" font-size="12" fill="#8a8579">bil</text><circle cx="270" cy="91" r="9" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><circle cx="360" cy="91" r="9" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><line x1="398" y1="62" x2="463" y2="62" stroke="#c8324a" stroke-width="2.4" stroke-dasharray="6 4"/><polygon points="470,62 459,57 459,67" fill="#c8324a"/><text x="478" y="66" text-anchor="start" font-size="14" fill="#c8324a" font-style="italic">F</text></svg>
+
+a) Hur stor är den största acceleration ekipaget kan ha utan att linan brister?
+
+b) Hur stor är bilens drivkraft *F* vid just den accelerationen? (Bortse från luft- och rullmotstånd.)
+
+*Ange drivkraften (b) som ditt numeriska svar i N.*`,
+            answer: { value: 2689, unit: 'N', tol: 0.03 },
+            solution: `**a) Linan drar bara husvagnen.** Nyckelinsikten är att spännkraften i linan är den enda horisontella kraften på **husvagnen** — det är alltså husvagnens massa (inte hela ekipagets) som avgör hur stor kraft linan måste överföra:
+
+$$
+T = m_\\text{husvagn} \\cdot a
+\\quad\\Leftrightarrow\\quad
+a_\\text{max} = \\frac{T_\\text{max}}{m_\\text{husvagn}} = \\frac{1\\,100}{900} \\approx 1{,}22\\ \\mathrm{m/s^2}
+$$
+
+**b) Drivkraften accelererar hela ekipaget.** Newtons andra lag på systemet bil + husvagn (linkraften är intern):
+
+$$
+F = (m_\\text{bil} + m_\\text{husvagn}) \\cdot a_\\text{max} = (1\\,300 + 900) \\cdot 1{,}22 \\approx 2\\,700\\ \\mathrm{N}
+$$
+
+**Svar:** a) Ca 1,2 m/s². b) Ca 2,7 kN.
+
+**Generell slutsats:** Samma teknik som i vagnproblemet: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration — det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
         },
     ],
 
@@ -5206,6 +5487,42 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
 **Svar:** Alternativ B.`,
         },
         {
+            level: 1,
+            question: `En simmare tar ett simtag och för handen bakåt genom vattnet. Vilken kraft är det som driver simmaren framåt?`,
+            choices: [
+                `Simmarens muskelkraft, som verkar direkt framåt på kroppen.`,
+                `Vattnets motkraft på handen — när handen trycker vattnet bakåt trycker vattnet handen framåt.`,
+                `Lyftkraften från vattnet.`,
+                `Handens kraft på vattnet.`,
+            ],
+            correct: 1,
+            solution: `Muskelkraften är en **inre** kraft — den kan inte accelerera kroppen som helhet (lika lite som man kan lyfta sig själv i håret). Det som behövs är en **yttre** kraft, och den kommer från vattnet.
+
+Handen trycker vattnet **bakåt** med en kraft. Enligt Newtons tredje lag trycker vattnet då handen (och därmed simmaren) **framåt** med en lika stor kraft. Det är denna motkraft som driver simmaren.
+
+Alternativ D är lömskt: handens kraft på vattnet är visserligen halva kraftparet, men den verkar på **vattnet** — inte på simmaren. En kraft kan bara accelerera det föremål den verkar på.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** All framdrivning fungerar så här — gång (foten trycker marken bakåt), bilhjul (däcket trycker vägen bakåt), raket (motorn trycker avgaserna bakåt). Man rör sig framåt genom att trycka något annat bakåt.`,
+        },
+        {
+            level: 1,
+            question: `En mygga kolliderar med vindrutan på en lastbil i full fart. Hur förhåller sig kraften från lastbilen på myggan till kraften från myggan på lastbilen under kollisionen?`,
+            choices: [
+                `Lastbilen påverkar myggan med en mycket större kraft än tvärtom.`,
+                `Krafterna är exakt lika stora men motriktade.`,
+                `Myggan påverkar inte lastbilen med någon kraft alls.`,
+                `Det beror på hur fort lastbilen kör.`,
+            ],
+            correct: 1,
+            solution: `Newtons tredje lag gäller **alltid** och **utan undantag** — även när föremålen är extremt olika stora. Kraften från lastbilen på myggan och kraften från myggan på lastbilen är exakt lika stora och motriktade, i varje ögonblick av kollisionen.
+
+Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en massa på kanske $10^{-6}$ kg och får därför en enorm acceleration ($a = F/m$), medan lastbilens acceleration av samma kraft är fullständigt omätbar. Det är accelerationerna som är olika — inte krafterna.
+
+**Svar:** Alternativ B.`,
+        },
+        {
             level: 2,
             question: `Två lag drar i ett rep i en dragkamp. Lag *A* vinner och drar lag *B* mot sig. Vilken av följande utsagor är korrekt om **spännkraften** i repet?`,
             choices: [
@@ -5225,11 +5542,65 @@ Det som avgör vem som vinner dragkampen är därför inte spännkraften i repet
 
 **Generell slutsats:** I alla problem med rep, snören och trissor (utan massa och friktionsfria) är spännkraften samma längs hela snöret — annars skulle delar av snöret accelerera av sig själva, vilket bryter mot Newtons andra lag.`,
         },
+        {
+            level: 2,
+            question: `Astrid (55 kg) och Bo (75 kg) står stilla mitt emot varandra på blank is. Astrid puttar Bo, som under själva putten får accelerationen 1,2 m/s² bakåt. Vilken acceleration får Astrid under putten? (Bortse från friktionen mot isen.)`,
+            answer: { value: 1.64, unit: 'm/s²', tol: 0.03 },
+            solution: `**Steg 1 — kraften på Bo.** Newtons andra lag på Bo ger kraften Astrid puttar med:
+
+$$
+F = m_\\text{Bo} \\cdot a_\\text{Bo} = 75 \\cdot 1{,}2 = 90\\ \\mathrm{N}
+$$
+
+**Steg 2 — motkraften på Astrid.** Enligt Newtons tredje lag puttar Bo tillbaka på Astrid med en **lika stor** kraft, 90 N, i motsatt riktning. Newtons andra lag på Astrid:
+
+$$
+a_\\text{Astrid} = \\frac{F}{m_\\text{Astrid}} = \\frac{90}{55} \\approx 1{,}6\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Astrid får ca 1,6 m/s² — riktad åt motsatt håll mot Bos acceleration.
+
+**Generell slutsats:** Den som puttar puttas alltid tillbaka. Eftersom krafterna är lika stora är accelerationerna omvänt proportionella mot massorna: $a_\\text{Astrid}/a_\\text{Bo} = m_\\text{Bo}/m_\\text{Astrid}$. Den lättare personen glider alltid iväg fortast.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En astronaut med massan 90 kg (inklusive dräkt) svävar stilla 15 m från rymdstationens luftsluss — utan säkerhetslina. För att ta sig tillbaka kastar hon sin verktygslåda (4,0 kg) rakt **bort** från stationen. Under kastet, som varar 0,40 s, verkar hon på lådan med den genomsnittliga kraften 54 N.
+
+a) Vilken fart får astronauten av kastet?
+
+b) Hur lång tid tar det henne sedan att glida tillbaka till luftslussen?
+
+*Ange tiden (b) som ditt numeriska svar i s.*`,
+            answer: { value: 62.5, unit: 's', tol: 0.03 },
+            solution: `**a) Motkraften ger astronauten fart.** Enligt Newtons tredje lag verkar lådan tillbaka på astronauten med kraften 54 N — riktad **mot stationen**. Astronautens acceleration under kastet:
+
+$$
+a = \\frac{F}{m} = \\frac{54}{90} = 0{,}60\\ \\mathrm{m/s^2}
+$$
+
+Farten efter kastet ($\\Delta t = 0{,}40\\ \\mathrm{s}$):
+
+$$
+v = a \\cdot \\Delta t = 0{,}60 \\cdot 0{,}40 = 0{,}24\\ \\mathrm{m/s}
+$$
+
+**b) Likformig rörelse tillbaka.** Efter kastet verkar inga krafter på astronauten (Newtons första lag) — hon glider med konstant fart 0,24 m/s:
+
+$$
+t = \\frac{s}{v} = \\frac{15}{0{,}24} \\approx 63\\ \\mathrm{s}
+$$
+
+**Svar:** a) 0,24 m/s. b) Ca 63 s — en dryg minut.
+
+**Generell slutsats:** I rymden finns inget att ta spjärn mot — det enda sättet att ändra sin rörelse är att kasta massa åt motsatt håll. Det är exakt raketmotorns princip: avgaserna är "verktygslådan" som kastas bakåt, kontinuerligt. Notera kedjan i lösningen: Newtons tredje lag (motkraften) → Newtons andra lag (accelerationen) → kinematik (fart och tid).`,
+        },
     ],
 
     // ═══════════════════════════════════════════════════════════════════
     // fy1-3.4  Tyngdkraft och normalkraft
-    // Formler: F_G = m·g (g = 9,82 N/kg), F_N = F_G på plant underlag,
+    // Formler: F_G = m·g (g = 9,82 N/kg), F_N = F_G på plant underlag,
     // F_N olika vid acceleration uppåt/nedåt (hisseffekt).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.4': [
@@ -5272,6 +5643,58 @@ $$
 
 **Svar:** Normalkraften är ca 49 N.`,
         },
+        {
+            level: 1,
+            question: `På månens yta är tyngdfaktorn $g_\\text{månen} = 1{,}62\\ \\mathrm{N/kg}$. Hur stor är tyngdkraften på en utrustningsväska med massan 24 kg som en astronaut bär på månen?`,
+            answer: { value: 38.9, unit: 'N', tol: 0.02 },
+            solution: `Samma formel som på jorden — men med månens tyngdfaktor:
+
+$$
+F_G = m \\cdot g_\\text{månen} = 24 \\cdot 1{,}62 \\approx 39\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 39 N.
+
+**Generell slutsats:** På jorden väger samma väska $24 \\cdot 9{,}82 \\approx 236\\ \\mathrm{N}$ — sex gånger mer. Massan (24 kg) är däremot exakt densamma på båda platserna. Det är därför astronauter kan bära utrustning på månen som de knappt kan rubba på jorden.`,
+        },
+        {
+            level: 1,
+            question: `Ett spädbarn vägs i en korg som hängs i en fjädervåg. Vågen visar 51 N. Korgen ensam har tyngden 12 N. Vilken massa har barnet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 3.97, unit: 'kg', tol: 0.03 },
+            solution: `Barnets tyngd är skillnaden mellan vågens utslag och korgens tyngd:
+
+$$
+F_G = 51 - 12 = 39\\ \\mathrm{N}
+$$
+
+Massan löses ut ur tyngdkraftsformeln:
+
+$$
+F_G = m \\cdot g \\quad\\Leftrightarrow\\quad m = \\frac{F_G}{g} = \\frac{39}{9{,}82} \\approx 4{,}0\\ \\mathrm{kg}
+$$
+
+**Svar:** Barnet har massan ca 4,0 kg.`,
+        },
+        {
+            level: 1,
+            question: `Vilket av följande påståenden om **massa** och **tyngd** är korrekt?`,
+            choices: [
+                `Massan minskar när man reser till månen.`,
+                `Tyngd mäts i kilogram och massa i newton.`,
+                `Massan är densamma överallt, men tyngden beror på tyngdfaktorn där man befinner sig.`,
+                `Massa och tyngd är två namn på samma storhet.`,
+            ],
+            correct: 2,
+            solution: `**Massa** är ett mått på mängden materia (och trögheten) hos ett föremål. Den mäts i kilogram och är densamma överallt i universum.
+
+**Tyngd** (tyngdkraften $F_G = m \\cdot g$) är den gravitationskraft som verkar på föremålet. Den mäts i newton och beror på tyngdfaktorn $g$ på platsen — 9,82 N/kg på jordytan, 1,62 N/kg på månen, nästan noll långt ute i rymden.
+
+- Alternativ A: fel — massan ändras inte av platsen.
+- Alternativ B: enheterna är omkastade.
+- Alternativ D: fel — i vardagsspråk blandas de ihop ("jag väger 70 kilo"), men fysikaliskt är de olika storheter.
+
+**Svar:** Alternativ C.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -5312,6 +5735,53 @@ $$
 **Svar:** Spännkraften är ca 118 N.
 
 **Generell slutsats:** I en hängande, stillastående vikt är spännkraften alltid lika med tyngdkraften. Om vikten istället accelererar uppåt blir spännkraften *större* än tyngdkraften, om den accelererar nedåt blir spännkraften *mindre*.`,
+        },
+        {
+            level: 2,
+            question: `I studsens lägsta punkt trycker en trampolinduk på en gymnast med massan 45 kg så att gymnasten får accelerationen 7,0 m/s² rakt uppåt. Hur stor är normalkraften från duken på gymnasten i det ögonblicket? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 757, unit: 'N', tol: 0.02 },
+            solution: `Två krafter verkar på gymnasten: normalkraften $F_N$ från duken uppåt och tyngdkraften $F_G = m g$ nedåt. Newtons andra lag med uppåt som positiv riktning:
+
+$$
+F_N - m g = m \\cdot a
+\\quad\\Leftrightarrow\\quad
+F_N = m \\cdot (g + a)
+$$
+
+$$
+F_N = 45 \\cdot (9{,}82 + 7{,}0) = 45 \\cdot 16{,}82 \\approx 760\\ \\mathrm{N}
+$$
+
+${makeForceDiagram({
+    vectors: [
+        { label: 'F_N', magnitude: '≈ 760 N', angle: 90, length: 152 },
+        { label: 'F_G', magnitude: '≈ 440 N', angle: 270, length: 88, color: '#1c3d6b' },
+    ],
+})}
+
+**Svar:** Ca 760 N.
+
+**Generell slutsats:** Duken måste både **bära** gymnasten (motverka $m g \\approx 440\\ \\mathrm{N}$) och dessutom **accelerera** henne uppåt (ytterligare $m a \\approx 320\\ \\mathrm{N}$). Notera i figuren att pilarnas längder är proportionella mot krafterna — det är obalansen mellan dem som ger accelerationen uppåt.`,
+        },
+        {
+            level: 2,
+            question: `En lyftkran lyfter en container med massan 2 400 kg. Under lyftets första fas accelererar containern uppåt med 0,60 m/s². Hur stor är spännkraften i vajern då? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 25008, unit: 'N', tol: 0.02 },
+            solution: `Två krafter verkar på containern: spännkraften *T* uppåt och tyngdkraften $F_G = m g$ nedåt. Newtons andra lag med uppåt som positiv riktning:
+
+$$
+T - m g = m \\cdot a
+\\quad\\Leftrightarrow\\quad
+T = m \\cdot (g + a)
+$$
+
+$$
+T = 2\\,400 \\cdot (9{,}82 + 0{,}60) = 2\\,400 \\cdot 10{,}42 \\approx 25\\,000\\ \\mathrm{N} = 25\\ \\mathrm{kN}
+$$
+
+**Svar:** Ca 25 kN.
+
+**Generell slutsats:** Vajern belastas alltid som mest i början av lyftet (accelerationsfasen). När containern sedan höjs med **konstant** fart är spännkraften bara $m g \\approx 23{,}6\\ \\mathrm{kN}$ — det är därför lyftanordningar dimensioneras med marginal för just accelerationen.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -5360,6 +5830,52 @@ Vågen visar mindre — personen känner sig "lättare".
 **Svar:** a) 687 N, b) 814 N, c) 603 N.
 
 **Generell slutsats:** Vågens utslag $F_N = m(g + a)$ kallas ofta för *skenbar vikt* (apparent weight). När en hiss i fritt fall (*a* = −*g*) skulle vågen visa noll — eftersom då accelererar både person och våg lika fort nedåt, ingen normalkraft behövs. Detta är samma fenomen som astronauter upplever i kretsande rymdfarkoster.`,
+        },
+        {
+            level: 3,
+            question: `En basketspelare med massan 78 kg hoppar rakt upp för att blocka ett skott. Han böjer först knäna så att tyngdpunkten sänks 0,40 m, och trycker sedan ifrån genom just denna sträcka. Han lämnar golvet med en fart som räcker för att lyfta tyngdpunkten 0,85 m.
+
+a) Med vilken fart lämnar han golvet?
+
+b) Vilken (konstant antagen) acceleration har han under frånskjutet?
+
+c) Hur stor normalkraft trycker golvet på honom under frånskjutet?
+
+*Ange normalkraften (c) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 2394, unit: 'N', tol: 0.03 },
+            solution: `Detta är en kedja av tre delproblem: fritt fall (uppåt), kinematik under frånskjutet, och Newtons andra lag.
+
+**a) Farten vid frånskjutet.** I luften bromsas han av tyngdaccelerationen. Torricellis ekvation med sluthastighet 0 vid höjden 0,85 m:
+
+$$
+0 - v_0^{2} = -2 g h
+\\quad\\Leftrightarrow\\quad
+v_0 = \\sqrt{2 g h} = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}85} \\approx 4{,}1\\ \\mathrm{m/s}
+$$
+
+**b) Accelerationen under frånskjutet.** Han går från stillastående till 4,1 m/s på sträckan 0,40 m. Torricelli igen:
+
+$$
+v_0^{2} = 2 a s
+\\quad\\Leftrightarrow\\quad
+a = \\frac{v_0^{2}}{2 s} = \\frac{16{,}7}{2 \\cdot 0{,}40} \\approx 21\\ \\mathrm{m/s^2}
+$$
+
+**c) Normalkraften.** Under frånskjutet verkar normalkraften $F_N$ uppåt och tyngdkraften $m g$ nedåt. Newtons andra lag (uppåt positiv):
+
+$$
+F_N - m g = m \\cdot a
+\\quad\\Leftrightarrow\\quad
+F_N = m \\cdot (g + a)
+$$
+
+$$
+F_N = 78 \\cdot (9{,}82 + 20{,}9) \\approx 78 \\cdot 30{,}7 \\approx 2\\,400\\ \\mathrm{N}
+$$
+
+**Svar:** a) Ca 4,1 m/s. b) Ca 21 m/s². c) Ca 2,4 kN — drygt tre gånger hans egen tyngd.
+
+**Generell slutsats:** Ju kortare sträcka frånskjutet sker på, desto större måste kraften vara för samma hopphöjd — det är därför man hoppar högre med djup knäböj än med styva ben. Samma resonemang (fast omvänt) förklarar varför man ska **böja på benen vid landning**: en längre bromssträcka ger mindre kraft på kroppen.`,
         },
     ],
 
@@ -5434,6 +5950,69 @@ $$
 
 **Svar:** Alternativ B.`,
         },
+        {
+            level: 1,
+            question: `Beräkna gravitationskraften mellan jorden och månen. Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$, månens massa $7{,}35 \\cdot 10^{22}\\ \\mathrm{kg}$ och avståndet mellan deras centrum $3{,}84 \\cdot 10^{8}\\ \\mathrm{m}$. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
+            answer: { value: 1.99e20, unit: 'N', tol: 0.03 },
+            solution: `Direkt insättning i Newtons gravitationslag:
+
+$$
+F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{5{,}972 \\cdot 10^{24} \\cdot 7{,}35 \\cdot 10^{22}}{(3{,}84 \\cdot 10^{8})^{2}}
+$$
+
+$$
+F = \\frac{6{,}67 \\cdot 10^{-11} \\cdot 4{,}39 \\cdot 10^{47}}{1{,}47 \\cdot 10^{17}}
+\\approx 2{,}0 \\cdot 10^{20}\\ \\mathrm{N}
+$$
+
+**Svar:** Ca $2{,}0 \\cdot 10^{20}$ N.
+
+**Generell slutsats:** Det är denna enorma kraft som håller kvar månen i sin bana — och som (via månens lika stora motkraft på jorden, Newtons tredje lag) skapar tidvattnet i jordens hav.`,
+        },
+        {
+            level: 1,
+            question: `Två fullastade supertankrar, vardera med massan $1{,}5 \\cdot 10^{8}\\ \\mathrm{kg}$, ligger förtöjda med tyngdpunkterna 100 m från varandra. Hur stor är gravitationskraften mellan fartygen? Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
+            answer: { value: 150, unit: 'N', tol: 0.03 },
+            solution: `Newtons gravitationslag:
+
+$$
+F = G \\cdot \\frac{m^{2}}{r^{2}}
+= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{(1{,}5 \\cdot 10^{8})^{2}}{100^{2}}
+$$
+
+$$
+F = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{2{,}25 \\cdot 10^{16}}{10^{4}}
+= 6{,}67 \\cdot 10^{-11} \\cdot 2{,}25 \\cdot 10^{12}
+\\approx 150\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 150 N.
+
+**Generell slutsats:** Här är gravitationen mellan två vardagsföremål faktiskt märkbar — 150 N motsvarar tyngden av en full resväska! Det krävs dock extrema massor (150 000 ton vardera) för att komma dit. Mellan två personer på samma avstånd är kraften bara ~$10^{-11}$ N. I praktiken märks fartygens attraktion ändå inte, eftersom vattenmotstånd och förtöjningar är många storleksordningar större.`,
+        },
+        {
+            level: 1,
+            question: `Avståndet mellan två rymdsonder **fördubblas**. Vad händer med gravitationskraften mellan dem?`,
+            choices: [
+                `Den halveras.`,
+                `Den minskar till en fjärdedel.`,
+                `Den fördubblas.`,
+                `Den är oförändrad — kraften beror bara på massorna.`,
+            ],
+            correct: 1,
+            solution: `Gravitationslagen har avståndet i **kvadrat** i nämnaren:
+
+$$
+F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+$$
+
+Om $r$ ersätts med $2r$ blir nämnaren $(2r)^{2} = 4r^{2}$ — kraften minskar alltså till en fjärdedel.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Detta kallas den **omvända kvadratlagen**: dubbla avståndet → 1/4 av kraften, tredubbla → 1/9, tiodubbla → 1/100. Samma matematiska form dyker upp igen i ellärans Coulomblag och för ljusintensitet från en punktkälla.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -5498,7 +6077,71 @@ $$
 **Svar:** Ca $1{,}7 \\cdot 10^{7}$ m, alltså ungefär 17 000 km från jordens centrum (cirka 10 000 km över jordytan).`,
         },
 
+        {
+            level: 2,
+            question: `Inom astrologin påstås planeternas positioner vid födseln påverka våra liv. Låt oss räkna på det!
+
+a) Beräkna gravitationskraften från en förälder med massan 80 kg på ett nyfött barn med massan 3,5 kg, när föräldern står 0,50 m från barnet.
+
+b) Jämför med gravitationskraften från planeten Mars (massa $6{,}42 \\cdot 10^{23}\\ \\mathrm{kg}$) på samma barn, när Mars står som närmast jorden ($5{,}6 \\cdot 10^{10}\\ \\mathrm{m}$ bort).
+
+*Ange kraften från föräldern (a) som ditt numeriska svar i N. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.*`,
+            answer: { value: 7.47e-8, unit: 'N', tol: 0.03 },
+            solution: `**a) Kraften från föräldern:**
+
+$$
+F_\\text{förälder} = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{80 \\cdot 3{,}5}{0{,}50^{2}}
+$$
+
+$$
+F_\\text{förälder} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{280}{0{,}25}
+\\approx 7{,}5 \\cdot 10^{-8}\\ \\mathrm{N}
+$$
+
+**b) Kraften från Mars:**
+
+$$
+F_\\text{Mars} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{6{,}42 \\cdot 10^{23} \\cdot 3{,}5}{(5{,}6 \\cdot 10^{10})^{2}}
+\\approx 4{,}8 \\cdot 10^{-8}\\ \\mathrm{N}
+$$
+
+**Svar:** a) Ca $7{,}5 \\cdot 10^{-8}$ N. b) Föräldern i förlossningsrummet drar i barnet med **större** gravitationskraft än planeten Mars — trots att Mars är nästan $10^{22}$ gånger tyngre.
+
+**Generell slutsats:** Avståndet i kvadrat i nämnaren straffar avlägsna föremål brutalt: Mars enorma massa räcker inte på $5{,}6 \\cdot 10^{10}$ m avstånd. Om planeterna verkligen styrde våra liv via gravitationen skulle barnmorskan ha större inflytande än hela solsystemet — ett fint exempel på hur en enkel beräkning kan granska ett påstående.`,
+        },
+
         // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `På vilken höjd över jordytan är tyngdfaktorn hälften så stor som vid jordytan? Jordens radie är 6 371 km.
+
+*Tips: du behöver varken jordens massa eller $G$ — ställ upp en kvot.*`,
+            answer: { value: 2639, unit: 'km', tol: 0.03 },
+            solution: `Tyngdfaktorn på avståndet $r$ från jordens centrum är $g(r) = G m_j / r^{2}$. I stället för att räkna ut den bildar vi **kvoten** mellan tyngdfaktorn på höjden $h$ och vid ytan (radien $R$):
+
+$$
+\\frac{g(R+h)}{g(R)} = \\frac{G m_j / (R+h)^{2}}{G m_j / R^{2}} = \\frac{R^{2}}{(R+h)^{2}}
+$$
+
+Både $G$ och jordmassan stryker bort sig! Villkoret att tyngdfaktorn ska halveras:
+
+$$
+\\frac{R^{2}}{(R+h)^{2}} = \\frac{1}{2}
+\\quad\\Leftrightarrow\\quad
+(R+h)^{2} = 2 R^{2}
+\\quad\\Leftrightarrow\\quad
+R + h = R\\sqrt{2}
+$$
+
+$$
+h = R(\\sqrt{2} - 1) = 6\\,371 \\cdot 0{,}414 \\approx 2\\,600\\ \\mathrm{km}
+$$
+
+**Svar:** På ca 2 600 km höjd — knappt en halv jordradie upp.
+
+**Generell slutsats:** Kvotmetoden är ett kraftfullt A-nivå-verktyg: när samma konstanter förekommer i täljare och nämnare försvinner de, och problemet löses utan att man ens behöver slå upp deras värden. Notera också att satelliter på låg bana (400 km, som ISS) har nästan full tyngdfaktor — "tyngdlösheten" ombord beror på det fria fallet runt jorden, inte på avståndet.`,
+        },
         {
             level: 3,
             question: `Mars har massan $6{,}39 \\cdot 10^{23}\\ \\mathrm{kg}$ och radien $3\\,389\\ \\mathrm{km}$. Beräkna **tyngdfaktorn $g_\\text{Mars}$** vid Mars yta (i N/kg). Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
@@ -5592,6 +6235,40 @@ $$
 
 **Generell slutsats:** Friktionstalet är dimensionslöst — det är en ren proportionalitetsfaktor mellan friktionskraft och normalkraft.`,
         },
+        {
+            level: 1,
+            question: `En stekspade av stål glider mot en teflonpanna med friktionskraften 0,60 N. Friktionstalet mellan stål och teflon är bara 0,040 — ett av de lägsta som finns mellan fasta material. Hur stor är normalkraften mellan spaden och pannan?`,
+            answer: { value: 15, unit: 'N', tol: 0.02 },
+            solution: `Lös ut normalkraften ur friktionsformeln:
+
+$$
+F_f = \\mu \\cdot F_N \\quad\\Leftrightarrow\\quad F_N = \\frac{F_f}{\\mu} = \\frac{0{,}60}{0{,}040} = 15\\ \\mathrm{N}
+$$
+
+**Svar:** Normalkraften är 15 N.
+
+**Generell slutsats:** Teflonets extremt låga friktionstal är hela poängen med beläggningen — maten glider i pannan i stället för att fastna. Samma princip (fast ännu lägre $\\mu$) används i skidvalla och i ledbrosket i människans knän.`,
+        },
+        {
+            level: 1,
+            question: `En tung packlåda står stilla på golvet. Du puttar horisontellt på lådan med kraften 50 N — den står fortfarande stilla. Hur stor är friktionskraften på lådan i det ögonblicket?`,
+            choices: [
+                `0 N — lådan rör sig ju inte, så det finns ingen friktion.`,
+                `Exakt 50 N, riktad mot din puttkraft.`,
+                `$\\mu \\cdot F_N$, oavsett hur hårt man puttar.`,
+                `Större än 50 N — det är därför lådan inte rör sig.`,
+            ],
+            correct: 1,
+            solution: `Lådan står stilla — den är i **kraftjämvikt**. Då måste friktionskraften vara exakt lika stor som puttkraften, alltså 50 N (Newtons första lag).
+
+**Vilofriktionen är en "smart" kraft**: den anpassar sig automatiskt efter behovet. Puttar du med 20 N håller den emot med 20 N; puttar du med 50 N håller den emot med 50 N — ända tills du når dess **maximala** värde $F_{f,\\max} = \\mu \\cdot F_N$. Först då börjar lådan glida.
+
+- Alternativ A: fel — utan friktion skulle lådan accelerera av din 50-newtonskraft.
+- Alternativ C: $\\mu F_N$ är friktionens **maximum**, inte dess aktuella värde.
+- Alternativ D: omöjligt — då skulle lådan accelerera **mot** dig!
+
+**Svar:** Alternativ B.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -5656,6 +6333,54 @@ $$
 
 **Generell slutsats:** Bromssträckan beror **inte på bilens massa** (vid given $\\mu$ och $v_0$). Massa-beroendet av $F_f = \\mu m g$ tar ut massa-beroendet i $F_R = m a$. Däremot fördubblas bromssträckan om friktionstalet halveras (våt väg!) och fyrdubblas om hastigheten dubblas.`,
         },
+        {
+            level: 2,
+            question: `Ett hundspann med åtta draghundar drar en släde över snö. Släden med förare och last har massan 210 kg (hundarnas egen massa räknas inte hit — de bär sig själva). Varje hund drar med kraften 60 N i färdriktningen, och friktionstalet mellan medarna och snön är 0,14. Vilken acceleration får släden vid starten? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 0.91, unit: 'm/s²', tol: 0.04 },
+            solution: `**Steg 1 — total dragkraft:**
+
+$$
+F_\\text{drag} = 8 \\cdot 60 = 480\\ \\mathrm{N}
+$$
+
+**Steg 2 — friktionskraften.** På plan mark är normalkraften lika med slädens tyngdkraft:
+
+$$
+F_f = \\mu \\cdot F_N = \\mu \\cdot m g = 0{,}14 \\cdot 210 \\cdot 9{,}82 \\approx 289\\ \\mathrm{N}
+$$
+
+**Steg 3 — Newtons andra lag:**
+
+$$
+a = \\frac{F_R}{m} = \\frac{F_\\text{drag} - F_f}{m} = \\frac{480 - 289}{210} \\approx 0{,}91\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Ca 0,91 m/s².
+
+**Generell slutsats:** Notera att över hälften av hundarnas samlade dragkraft går åt bara till att övervinna friktionen. Det är därför slädförare vallar medarna — sänks $\\mu$ från 0,14 till 0,05 mer än fördubblas accelerationen.`,
+        },
+        {
+            level: 2,
+            question: `En curlingsten släpps iväg med farten 2,2 m/s och glider 28 m på isen innan den stannar av sig själv. Bestäm friktionstalet mellan stenen och isen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 0.0088, unit: '', tol: 0.05 },
+            solution: `**Steg 1 — retardationen** ur Torricellis ekvation ($v = 0$ när stenen stannar):
+
+$$
+v^{2} - v_0^{2} = 2 a s
+\\quad\\Leftrightarrow\\quad
+a = \\frac{-v_0^{2}}{2 s} = \\frac{-2{,}2^{2}}{2 \\cdot 28} \\approx -0{,}086\\ \\mathrm{m/s^2}
+$$
+
+**Steg 2 — friktionstalet.** Den enda horisontella kraften är friktionen, så $F_f = m \\cdot |a|$. Samtidigt är $F_f = \\mu m g$. Massan stryker bort sig:
+
+$$
+\\mu = \\frac{|a|}{g} = \\frac{0{,}086}{9{,}82} \\approx 0{,}0088
+$$
+
+**Svar:** Friktionstalet är ca 0,009 — ungefär en hundradel av trä mot trä.
+
+**Generell slutsats:** Isens extremt låga friktionstal är hela förutsättningen för curling: stenen "minns" sin fart i tiotals meter. Sopningen framför stenen sänker $\\mu$ ytterligare en aning — det räcker för att förlänga glidsträckan flera meter och styra stenen.`,
+        },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
@@ -5719,6 +6444,40 @@ $$
 **Svar:** Lådans acceleration är ca 1,3 m/s².
 
 **Generell slutsats:** När en kraft drar i en vinkel uppåt på ett friktions­belastat föremål påverkar den **både** den drivande komposanten och normalkraften. Det finns alltid en **optimal vinkel** $\\alpha_\\text{opt}$ som maximerar accelerationen — för stora vinklar lyfter man föremålet effektivt men drar inte framåt; för små vinklar drar man bra framåt men maximerar friktionen.`,
+        },
+        {
+            level: 3,
+            question: `En framhjulsdriven bil med massan 1 400 kg står på torr asfalt, där friktionstalet mellan däck och väg är 0,90. Hälften av bilens tyngd vilar på de drivande framhjulen.
+
+a) Hur stor är den största acceleration bilen kan få utan att drivhjulen spinner loss?
+
+b) Hur kort kan tiden 0–100 km/h då som bäst bli?
+
+*Ange tiden (b) som ditt numeriska svar i s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 6.29, unit: 's', tol: 0.03 },
+            solution: `**a) Bara drivhjulens normalkraft räknas.** Den drivande kraften är friktionen mellan drivhjulen och vägen — och den begränsas av normalkraften på **just drivhjulen**, som bara bär halva tyngden:
+
+$$
+F_\\text{max} = \\mu \\cdot \\frac{m g}{2} = 0{,}90 \\cdot \\frac{1\\,400 \\cdot 9{,}82}{2} \\approx 6\\,190\\ \\mathrm{N}
+$$
+
+Newtons andra lag (hela bilens massa ska accelereras):
+
+$$
+a_\\text{max} = \\frac{F_\\text{max}}{m} = \\frac{\\mu \\cdot m g / 2}{m} = \\frac{\\mu \\cdot g}{2} = \\frac{0{,}90 \\cdot 9{,}82}{2} \\approx 4{,}4\\ \\mathrm{m/s^2}
+$$
+
+Notera att massan **stryker bort sig** — maxaccelerationen beror bara på $\\mu$ och viktfördelningen.
+
+**b) Kortaste tiden till 100 km/h.** Med $v = 100\\ \\mathrm{km/h} = 27{,}8\\ \\mathrm{m/s}$:
+
+$$
+t = \\frac{v}{a_\\text{max}} = \\frac{27{,}8}{4{,}4} \\approx 6{,}3\\ \\mathrm{s}
+$$
+
+**Svar:** a) Ca 4,4 m/s². b) Ca 6,3 s.
+
+**Generell slutsats:** Det är **friktionen, inte motorn**, som sätter den yttersta gränsen för acceleration — en starkare motor hjälper inte om hjulen spinner. Formeln $a_\\text{max} = \\mu g \\cdot (\\text{andel av tyngden på drivhjulen})$ förklarar varför sportbilar ofta har bakhjulsdrift och motorn baktill (tyngden förskjuts bakåt vid acceleration → mer normalkraft på drivhjulen) och varför fyrhjulsdrift ($\\text{andelen} = 1$) accelererar bäst.`,
         },
     ],
 
@@ -5785,6 +6544,46 @@ För att $F_R = 0$ måste de vara lika stora: $F_f = F_1$.
 
 **Svar:** Alternativ B.`,
         },
+        {
+            level: 1,
+            question: `En skidåkare med massan 65 kg (inklusive utrustning) står stilla i en backe enligt figuren. Hur stor är tyngdkraftens komposant **längs backen**? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeInclinePlane({ angle: 15, mass: '65 kg' })}`,
+            answer: { value: 165, unit: 'N', tol: 0.03 },
+            solution: `Komposanten längs planet ges av:
+
+$$
+F_1 = m \\cdot g \\cdot \\sin \\alpha = 65 \\cdot 9{,}82 \\cdot \\sin 15^{\\circ}
+$$
+
+$$
+F_1 \\approx 638 \\cdot 0{,}259 \\approx 165\\ \\mathrm{N}
+$$
+
+**Svar:** Ca 165 N.
+
+**Generell slutsats:** Det är denna kraft skidåkarens skidor (via kantgrepp eller stavar) måste hålla emot för att hen ska stå stilla i backen — och samma kraft som accelererar åkaren nedför när hen släpper taget.`,
+        },
+        {
+            level: 1,
+            question: `Ett lutande plan görs allt **brantare**. Vad händer med tyngdkraftens komposanter $F_1$ (längs planet) och $F_2$ (vinkelrätt mot planet)?`,
+            choices: [
+                `Båda komposanterna ökar.`,
+                `$F_1$ ökar och $F_2$ minskar.`,
+                `$F_1$ minskar och $F_2$ ökar.`,
+                `Båda är oförändrade — tyngdkraften ändras ju inte.`,
+            ],
+            correct: 1,
+            solution: `Komposanterna är $F_1 = m g \\sin\\alpha$ och $F_2 = m g \\cos\\alpha$. När vinkeln $\\alpha$ växer ökar $\\sin\\alpha$ medan $\\cos\\alpha$ minskar — alltså växer $F_1$ och krymper $F_2$.
+
+Kontrollera gärna med ytterlighetsfallen:
+- **Plant golv** ($\\alpha = 0^{\\circ}$): $F_1 = 0$ (inget glider på plant golv) och $F_2 = m g$ (hela tyngden bärs av underlaget).
+- **Lodrät vägg** ($\\alpha = 90^{\\circ}$): $F_1 = m g$ (fritt fall längs väggen) och $F_2 = 0$ (inget tryck mot väggen).
+
+Alternativ D blandar ihop tyngdkraften (som mycket riktigt är oförändrad) med dess **komposanter** (som beror på hur vi delar upp den).
+
+**Svar:** Alternativ B.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -5828,6 +6627,61 @@ $$
 **Svar:** Accelerationen är ca 3,7 m/s².
 
 **Generell slutsats:** På ett friktionsfritt lutande plan beror accelerationen **bara på vinkeln**, inte på massan. Detta var en av Galileos genialiska insikter — han använde lutande plan med små lutningar för att "späda ut" tyngdaccelerationen och kunna mäta tider med dåtidens primitiva instrument.`,
+        },
+        {
+            level: 2,
+            question: `Flaket på en lastbil tippas långsamt allt brantare för att lasten ska glida av. Vilofriktionstalet mellan lastlådorna och flaket är 0,42. Vid vilken lutningsvinkel börjar lådorna glida?`,
+            answer: { value: 22.8, unit: '°', tol: 0.03 },
+            solution: `Lådorna börjar glida när tyngdkraftens komposant längs flaket precis överstiger den maximala vilofriktionen:
+
+$$
+m g \\sin\\alpha = \\mu \\cdot m g \\cos\\alpha
+$$
+
+Massan och tyngdfaktorn stryker bort sig:
+
+$$
+\\tan\\alpha = \\mu
+\\quad\\Leftrightarrow\\quad
+\\alpha = \\arctan 0{,}42 \\approx 23^{\\circ}
+$$
+
+${makeInclinePlane({ angle: 23, forces: { G: 1, N: 1, F1: 1, f: 1 } })}
+
+**Svar:** Vid ca 23° börjar lådorna glida.
+
+**Generell slutsats:** Gränsvinkeln $\\alpha = \\arctan\\mu$ kallas **friktionsvinkeln** och beror varken på lastens massa eller på flakets material i övrigt — bara på friktionstalet. Sambandet används baklänges som en enkel mätmetod: tippa underlaget tills föremålet börjar glida och läs av vinkeln, så är $\\mu = \\tan\\alpha$.`,
+        },
+        {
+            level: 2,
+            question: `En snowboardåkare glider från stillastående nedför en backe som lutar 12° mot horisontalplanet. Friktionstalet mellan brädan och snön är 0,10.
+
+a) Vilken acceleration får åkaren?
+
+b) Vilken fart har åkaren efter 80 m i backen?
+
+*Ange farten (b) som ditt numeriska svar i m/s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 13.2, unit: 'm/s', tol: 0.03 },
+            solution: `**a) Accelerationen.** Längs planet verkar $F_1 = m g \\sin\\alpha$ nedför och friktionen $F_f = \\mu m g \\cos\\alpha$ uppför. Newtons andra lag — massan stryker bort sig:
+
+$$
+a = g \\cdot (\\sin\\alpha - \\mu \\cos\\alpha)
+= 9{,}82 \\cdot (\\sin 12^{\\circ} - 0{,}10 \\cdot \\cos 12^{\\circ})
+$$
+
+$$
+a = 9{,}82 \\cdot (0{,}208 - 0{,}098) \\approx 1{,}1\\ \\mathrm{m/s^2}
+$$
+
+**b) Farten efter 80 m.** Torricellis ekvation från stillastående:
+
+$$
+v = \\sqrt{2 a s} = \\sqrt{2 \\cdot 1{,}1 \\cdot 80} \\approx 13\\ \\mathrm{m/s}
+$$
+
+**Svar:** a) Ca 1,1 m/s². b) Ca 13 m/s — ungefär 47 km/h.
+
+**Generell slutsats:** En till synes blygsam backe (12°) och lång glidsträcka räcker alltså för rejäl fart. Jämför gärna med det friktionsfria fallet: utan friktion hade accelerationen varit $g \\sin 12^{\\circ} \\approx 2{,}0\\ \\mathrm{m/s^2}$ — snöns friktion "äter" nästan halva accelerationen.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -5891,6 +6745,49 @@ $$
 - Om $\\tan\\alpha < \\mu$ — lådan står stilla.
 
 Notera massan stryker bort sig — accelerationen på ett lutande plan med friktion beror **inte på lådans massa**.`,
+        },
+        {
+            level: 3,
+            question: `En kloss skjuts iväg **uppför** ett lutande plan med utgångsfarten 5,0 m/s. Planet lutar 28° mot horisontalplanet och friktionstalet mellan kloss och plan är 0,25.
+
+${makeInclinePlane({ angle: 28, mass: '' })}
+
+a) Hur långt upp längs planet glider klossen innan den vänder?
+
+b) Blir klossen liggande i vändpunkten, eller glider den ner igen? Motivera med en beräkning.
+
+*Ange sträckan (a) som ditt numeriska svar i m. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 1.84, unit: 'm', tol: 0.03 },
+            solution: `**Fällan i uppgiften:** friktionen verkar alltid **mot rörelseriktningen**. På vägen upp glider klossen uppför — då pekar friktionen *nedför* planet och **samverkar** med tyngdkraftskomposanten i att bromsa klossen. Det är alltså inte samma acceleration som när en kloss glider nedför!
+
+**a) Sträckan uppför.** På vägen upp bromsas klossen av både $F_1 = m g \\sin\\alpha$ och $F_f = \\mu m g \\cos\\alpha$, båda riktade nedför planet. Massan stryker bort sig:
+
+$$
+a = g \\cdot (\\sin\\alpha + \\mu \\cos\\alpha)
+= 9{,}82 \\cdot (\\sin 28^{\\circ} + 0{,}25 \\cdot \\cos 28^{\\circ})
+$$
+
+$$
+a = 9{,}82 \\cdot (0{,}469 + 0{,}221) \\approx 6{,}8\\ \\mathrm{m/s^2} \\quad (\\text{riktad nedför planet})
+$$
+
+Torricellis ekvation med $v = 0$ i vändpunkten:
+
+$$
+s = \\frac{v_0^{2}}{2 a} = \\frac{5{,}0^{2}}{2 \\cdot 6{,}8} \\approx 1{,}8\\ \\mathrm{m}
+$$
+
+**b) Glider den ner igen?** I vändpunkten står klossen stilla ett ögonblick. Den glider ner om tyngdkraftskomposanten längs planet överstiger den maximala vilofriktionen, dvs. om $\\tan\\alpha > \\mu$:
+
+$$
+\\tan 28^{\\circ} \\approx 0{,}53 > 0{,}25
+$$
+
+Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* planet, och den mindre accelerationen $a = g(\\sin\\alpha - \\mu\\cos\\alpha) \\approx 3{,}5\\ \\mathrm{m/s^2}$.
+
+**Svar:** a) Ca 1,8 m. b) Ja — eftersom $\\tan 28^{\\circ} > \\mu$ glider den ner igen.
+
+**Generell slutsats:** Uppför och nedför är **inte** symmetriska när friktion finns: uppför bromsar $g(\\sin\\alpha + \\mu\\cos\\alpha)$, nedför driver bara $g(\\sin\\alpha - \\mu\\cos\\alpha)$. Klossen kommer därför tillbaka till startpunkten med **lägre** fart än den sköts iväg med — mellanskillnaden i rörelseenergi har friktionen omvandlat till värme. Att teckna friktionens riktning fel i uppförsfasen är ett av de vanligaste felen på prov.`,
         },
     ],
 

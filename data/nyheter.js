@@ -83,6 +83,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-10-solformorkelse-sverige",
+    date: "2026-08-10",
+    title: "På onsdag tar månen fyra femtedelar av solen — och nästan ingen kommer att se det på ljuset",
+    deck: "Den 12 augusti skyms drygt 80 procent av solskivan sett från Sverige, strax före solnedgången. Det är den största solförmörkelsen här sedan 2015. Ögat kommer knappt att märka att något händer — och just därför är det farligare än det låter att kika upp.",
+    category: "Astronomi",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-10-solformorkelse-sverige.jpg",
+    imageAlt: "En djupt förmörkad sol står som en tunn orange skära strax över havshorisonten. Solskäran speglar sig i vattnet, och till vänster syns silhuetten av en fyr mot en gråblå gryningshimmel.",
+    imageCredit: "Foto: NASA/Aubrey Gemignani (public domain)",
+    tags: ["astronomi", "solförmörkelse", "solen", "månen", "optik", "geometri", "ljus", "meteorer", "perseiderna", "ögonskydd", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Astroinfo.se — Partiell solförmörkelse 12 augusti 2026", url: "https://www.astroinfo.se/2026-08-12-partiell-solformorkelse/" },
+      { name: "NASA — Eclipses During 2026 (Fred Espenak)", url: "https://eclipse.gsfc.nasa.gov/OH/OH2026.html" },
+      { name: "Instituto Geográfico Nacional — Eclipse total de Sol de 12 de agosto de 2026", url: "https://eclipses.ign.es/eclipse-total-sol-de-12-de-agosto-2026.html" },
+      { name: "NASA — Eclipse safety", url: "https://science.nasa.gov/eclipses/safety/" },
+      { name: "Populär Astronomi — Dubbelt himmelskådespel", url: "https://www.popularastronomi.se/2026/06/dubbelt-himmelskadespel-solformorkelse-och-meteorskur-samma-dag/" },
+      { name: "International Meteor Organization — Perseiderna", url: "https://www.imo.net/resources/calendar/" }
+    ],
+    research: null,
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 — 5.3 Månens faser", href: "katalog.html#fy2-5.3" },
+        { label: "Fysik nivå 2 — 5.2 Mäta avstånd i rymden", href: "katalog.html#fy2-5.2" },
+        { label: "Fysik nivå 2 — 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }
+      ],
+      fragor: [
+        "Samma förmörkelse beskrivs på olika håll som 81 procent och som 86 procent. Båda siffrorna är riktigt uträknade. Vad säger det om hur man bör läsa en procentsiffra i en nyhetstext, och vilken av de två är mest relevant för hur ljust det blir ute?",
+        "Månen är ungefär 400 gånger mindre än solen och råkar samtidigt stå ungefär 400 gånger närmare. Vore det ett problem för vetenskapen om den slumpen inte fanns — alltså skulle vi veta mindre om solen då, eller bara se mindre?",
+        "Ögat klarar inte av att avgöra när solen är farlig att titta på, eftersom både obehaget och pupillreflexen styrs av hur ljust det känns. Vilka andra situationer känner ni till där en kroppslig varningssignal saknas just när risken är som störst — och hur hanterar man det?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Onsdagen den 12 augusti skjuter månen in sig framför solen, och för första gången på elva år blir bortfallet stort nog att någon skulle kunna ana det. Från Sverige är förmörkelsen partiell: månen tar en bit ur solskivan, aldrig hela. Den börjar strax före kvart i sju på kvällen längst i norr och strax efter klockan tio över sju i Skåne, kulminerar mellan ungefär 19.40 och 20.05 beroende på var man står, och pågår i en och en halv till knappt två timmar." },
+      { type: "p", html: "Enligt beräkningarna hos Astroinfo skyms som mest 83,3&nbsp;procent av solens yta i Malmö, 83,0&nbsp;procent i Göteborg, 80,9&nbsp;procent i Stockholm och 81,7&nbsp;procent i Kiruna. Det är den största solförmörkelsen över Sverige sedan mars 2015. Haken är höjden: när förmörkelsen är som djupast står solen bara runt fem grader över horisonten i södra Sverige — en halv knytnäve på utsträckt arm. Utan fri sikt åt väster blir det ingen förmörkelse alls, och längst i sydost hinner solen gå ner medan månen fortfarande ligger kvar över den." },
+
+      { type: "h2", text: "En skugga som bara är 294 kilometer bred" },
+      { type: "p", html: "Månens skugga har två delar. Ytterst ligger halvskuggan, där månen skymmer en del av solskivan — den är tusentals kilometer bred, och det är i den Sverige hamnar. Innerst ligger kärnskuggan, där månen täcker solen helt. Den är den 12 augusti bara 294&nbsp;kilometer bred där den träffar jordytan, och den sveper från Sibirien över Arktis, östra Grönland och västra Island, ut över Atlanten och in över norra Spanien." },
+      { type: "p", html: "Djupast blir förmörkelsen klockan 17.46 världstid vid en punkt i havet knappt fem mil väster om Island, där totaliteten varar 2&nbsp;minuter och 18&nbsp;sekunder. I Spanien inträffar den strax efter halv nio svensk tid — samma klockslag som här, eftersom länderna delar tidszon — men där slocknar solen helt i drygt en och en halv minut. Även spanjorerna får kämpa med horisonten: solen står 12&nbsp;grader upp i A&nbsp;Coruña, omkring 8&nbsp;grader i Oviedo och Zaragoza och futtiga 2&nbsp;grader på Mallorca." },
+      { type: "p", html: "Det är den första totala solförmörkelsen över det europeiska fastlandet sedan 1999, och den första över Spanien sedan 1905. Sverige fick sin senaste den 30&nbsp;juni 1954. Nästa gång kärnskuggan sveper över landet är den 16&nbsp;oktober 2126." },
+
+      { type: "image", src: "nyheter/bilder/2026-08-10-solformorkelse-sverige-2.jpg", alt: "En svart månskiva täcker solen. Runt kanten syns en tunn pärlemorskimrande krans, och i nederkanten blixtrar en enda bländande ljuspunkt fram.", caption: "Det som Sverige missar: sekunden då den sista solstrimman försvinner bakom månen och koronan träder fram. Bilden är tagen vid den totala solförmörkelsen över Oregon 2017.", credit: "Foto: NASA/Aubrey Gemignani (public domain)" },
+
+      { type: "h2", text: "Slumpen som gör totala förmörkelser möjliga" },
+      { type: "p", html: "Att månen över huvud taget kan täcka solen är en tillfällighet. Solen är ungefär 400&nbsp;gånger större i diameter än månen, och råkar just nu stå ungefär 400&nbsp;gånger längre bort. Därför ser båda ut att vara omkring en halv grad breda på himlen — ungefär som en ärta på drygt en meters håll. Den 12 augusti är månskivan knappt fyra procent bredare än solskivan, tillräckligt för att täcka den helt, men bara nätt och jämnt." },
+      { type: "p", html: "Att det inte blir förmörkelse vid varje nymåne beror på att månens bana lutar drygt fem grader mot jordens bana runt solen. För det mesta passerar månen alltså strax ovanför eller nedanför solskivan sett från oss. Bara när nymånen infaller nära en av de två punkter där banorna korsas hamnar de tre kropparna på tillräckligt rak linje." },
+
+      { type: "h2", text: "81 procent eller 86 — båda stämmer" },
+      { type: "p", html: "Olika källor uppger olika siffror för samma förmörkelse, och de har alla rätt. Det ena måttet är hur stor <em>andel av solens yta</em> som är dold; det andra är hur långt in över solskivan månens kant har trängt, mätt <em>längs diametern</em>. I Malmö är det första 83,3&nbsp;procent och det andra 86,2&nbsp;procent. Skillnaden är ren geometri: den kvarvarande ljusa skäran är tunn men lång, och en tunn skära rymmer mer yta än vad ögonmåttet längs diametern antyder. När något beskrivs i procent är det alltså värt att fråga: procent av vad?" },
+
+      { type: "h2", text: "Fyra femtedelar borta — och ändå ljust" },
+      { type: "p", html: "Den som inte vet om förmörkelsen kommer med stor sannolikhet att missa den. Direkt solljus ger omkring 100&nbsp;000&nbsp;lux; med 81&nbsp;procent av solen borta återstår ungefär 19&nbsp;000&nbsp;lux, vilket fortfarande är en ljus mulen dag. Ögat mäter inte ljus linjärt utan ungefär logaritmiskt — samma egenskap som låter oss se både i månsken och i middagssol — så ett bortfall på fyra femtedelar upplevs som en aning grådaskigt, inte som skymning. Först över ungefär 99&nbsp;procent börjar det kännas som att kvällen kommit på fel tid." },
+      { type: "p", html: "Det är den upplevelsen som gör en förmörkelse riskabel. Den smala solskära som är kvar lyser tiotusentals gånger starkare än fullmånen, men eftersom omgivningen inte känns bländande försvinner den reflex som annars får oss att vända bort blicken. Näthinnan saknar dessutom smärtreceptorer: en skada gör inte ont när den sker, utan visar sig som en suddig fläck mitt i synfältet timmar senare, och kan bli bestående." },
+
+      { type: "h2", text: "Så tittar du utan att bränna näthinnan" },
+      { type: "p", html: "Godkända förmörkelseglasögon följer standarden ISO&nbsp;12312-2 och släpper igenom högst 0,00032&nbsp;procent av solljuset — mindre än en trehundratusendel — samtidigt som de stoppar ultraviolett och infraröd strålning. Vanliga solglasögon släpper igenom i storleksordningen tio procent av ljuset — tiotusentals gånger för mycket — och duger inte, hur mörka de än är. Och glasögonen får aldrig kombineras med kikare, teleskop eller kameraobjektiv: optiken samlar ihop solljuset och bränner rakt igenom filtret på ett ögonblick." },
+
+      { type: "image", src: "nyheter/bilder/2026-08-10-solformorkelse-sverige-3.jpg", alt: "En person på en strand bär vita förmörkelseglasögon av papp med mörka filter och tittar snett uppåt mot himlen.", caption: "Förmörkelseglasögon är inte solglasögon — filtret ska släppa igenom mindre än en trehundratusendel av solljuset.", credit: "Foto: NASA/Aubrey Gemignani (public domain)" },
+
+      { type: "p", html: "Det säkraste sättet kräver ingen utrustning alls. Stick ett litet hål i en kartongbit, vänd hålet mot solen och fånga upp ljuset på ett papper i skuggan bakom: hålet fungerar som en enkel kamera och avbildar solen. Bilden blir $d = L \\cdot \\theta$ stor, där $L$ är avståndet mellan hål och papper och $\\theta \\approx 0{,}0093$ är solens vinkelstorlek i radianer — två meter ger alltså en solskiva på knappt två centimeter, tydligt naggad i kanten. Samma sak sker gratis under ett lövträd, där varje glugg mellan bladen kastar sin egen lilla solskära på marken." },
+
+      { type: "h2", text: "Samma natt faller perseiderna" },
+      { type: "p", html: "Att meteorsvärmen perseiderna kulminerar natten mellan den 12 och 13 augusti, precis när himlen är helt månlös, är ingen slump. En solförmörkelse kan bara inträffa vid nymåne — månen måste stå mellan jorden och solen — och vid nymåne finns det inget månljus kvar att blekna ut de svagaste meteorerna med. Årets bästa förmörkelse och årets bästa meteornatt hänger alltså ihop." },
+      { type: "p", html: "Perseiderna är stoft som kometen 109P/Swift–Tuttle lämnat efter sig längs sin bana. Kornen är oftast inte större än ett sandkorn, men de möter jordens atmosfär i omkring 59&nbsp;km/s och glöder upp på 80–100&nbsp;kilometers höjd. Under en riktigt mörk himmel kan det bli 60–100 meteorer i timmen efter midnatt. Den siffran förutsätter dock idealiska förhållanden — de högsta talen som brukar citeras gäller en helt mörk himmel med svärmens utstrålningspunkt rakt ovanför, vilket nästan aldrig är fallet. Räkna hellre med några tiotal i timmen, och med att de blir fler ju närmare gryningen man orkar hålla ut." },
+
+      { type: "fact", title: "Solförmörkelsen 12 augusti 2026", items: [
+        "Partiell i hela Sverige: 80–83&nbsp;procent av solens yta skyms, mest i Skåne.",
+        "Maximum mellan ungefär 19.40 (Kiruna) och 20.05 (Malmö) — solen står då bara några grader över horisonten.",
+        "Total i ett 294&nbsp;kilometer brett band över Arktis, östra Grönland, västra Island och norra Spanien.",
+        "Längsta totalitet: 2&nbsp;minuter och 18&nbsp;sekunder, i havet väster om Island.",
+        "Sveriges senaste totala solförmörkelse inträffade 1954; nästa kommer 2126.",
+        "Titta aldrig direkt mot solen utan filter enligt ISO&nbsp;12312-2 — och aldrig genom kikare eller teleskop, ens med sådana glasögon."
+      ] }
+    ]
+  },
+  {
     id: "2026-08-09-flygande-fokus",
     date: "2026-08-09",
     title: "Elektronerna sprang alltid i från vågen de surfade på — nu har fysiker lärt laserns fokus att flyga i kapp dem",

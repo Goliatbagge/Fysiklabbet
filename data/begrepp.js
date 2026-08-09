@@ -1045,5 +1045,66 @@ window.BEGREPP = [
       { type: 'p', html: 'Skillnaden uppstår så fort vågor med olika våglängd färdas olika fort i mediet. En verklig ljuspuls är nämligen aldrig en enda ren våglängd utan en blandning av många, och det är blandningen som formar pulsen. Går de olika våglängderna i otakt förskjuts pulsens tyngdpunkt i en annan takt än vågtopparnas — precis som en klunga cyklister kan förflytta sig långsammare än de enskilda cyklisterna, om de hela tiden växlar om vem som ligger först.' },
       { type: 'p', html: 'Att hålla isär de två farterna är avgörande i praktiken. Det är alltid grupphastigheten som bär energi och information, och den kan aldrig överstiga ljushastigheten i vakuum. Fashastigheten får däremot gärna göra det: i ett plasma glider vågtopparna fram fortare än ljuset samtidigt som pulsen som helhet kryper fram långsammare, och ingen naturlag tar skada av det — en ensam vågtopp bär ingenting med sig. I en optisk fiber är det grupphastigheten som avgör hur snabbt en datapuls når fram, och skillnaden mellan olika våglängders grupphastighet som gör att pulsen breddas och till slut flyter ihop med nästa.' }
     ]
+  },
+  {
+    id: 'axiparabola',
+    term: 'Axiparabola',
+    former: ['axiparabola', 'axiparabolan', 'axiparabolor', 'axiparabolorna',
+             'axiparaboler', 'axiparabolspegel', 'axiparabolspegeln'],
+    kort: 'En spegel som är slipad så att olika delar av ytan har olika brännvidd. I stället för att samla ljuset i en enda punkt drar den ut fokus till en lång, smal linje.',
+    relaterade: ['laser', 'kolvattenacceleration', 'grupphastighet'],
+    body: [
+      { type: 'p', html: 'En vanlig hålspegel — eller ett förstoringsglas — har en enda brännvidd: allt ljus som träffar ytan samlas i samma punkt. Där blir det mycket ljusstarkt, men bara i en mycket kort sträcka längs strålen. Flyttar man en skärm någon tiondels millimeter framåt eller bakåt är den skarpa fläcken redan borta. För en stark laserpuls är det ett verkligt problem: det man vill använda pulsen till, till exempel att driva en våg genom en gas, hinner knappt börja innan ljuset spretar isär igen.' },
+      { type: 'p', html: 'En axiparabola löser det genom att ge upp den enda brännpunkten. Ytan är slipad så att brännvidden växer utåt: ljus som träffar närmast mitten samlas strax framför spegeln, ljus som träffar en bit längre ut samlas lite längre bort, och ljuset från ytterkanten längst bort av alla. Varje ring i spegeln har alltså sin egen brännpunkt, och tillsammans lägger de fokus efter varandra på en rak linje som kan vara många millimeter lång — tusen gånger längre än den vanliga spegelns. Priset är att ljuset måste delas upp på hela sträckan i stället för att samlas på ett ställe, och att den skarpa fläcken får svaga ringar omkring sig i stället för att vara en ren prick.' },
+      { type: 'p', html: 'Det verkligt användbara är att den ljusstarkaste punkten inte står stilla. Ljuset till de olika brännpunkterna har olika lång väg att gå och kommer alltså fram vid olika tidpunkter, så den ljusa fläcken sveper framåt längs linjen. Hur fort den sveper bestäms av spegelns form och kan ställas in — den kan till och med fås att gå fortare än ljuset, eftersom en fokuspunkt inte är ett föremål utan bara en plats där ljus från olika håll råkar mötas samtidigt. Ett sådant styrbart, vandrande fokus kallas flygande fokus, och används bland annat för att låta en plasmavåg hålla jämna steg med de elektroner som ska surfa på den. Namnet kommer av att spegeln kombinerar en <em>axicon</em> — en konformad optik som ger utdraget fokus — med en parabolspegel; formen beskrevs 2019.' }
+    ]
+  },
+  {
+    id: 'karnskugga',
+    term: 'Kärnskugga',
+    former: ['kärnskugga', 'kärnskuggan', 'kärnskuggor', 'kärnskuggorna', 'umbra', 'umbran'],
+    kort: 'Den innersta delen av en skugga, dit inget ljus alls från ljuskällan når. Står du i månens kärnskugga är solen helt täckt.',
+    relaterade: ['halvskugga', 'korona', 'fotosfar'],
+    body: [
+      { type: 'p', html: 'En skugga har skarp kant bara om ljuskällan är en punkt. Verkliga ljuskällor har utsträckning — solen är en skiva på himlen, en lampa är en glödande yta — och då delar sig skuggan i två zoner. I den yttre når ljus från en del av källan fram, men inte från hela: det är halvskuggan. I den inre når inget ljus alls fram, eftersom det skuggande föremålet skymmer hela källan sett därifrån. Den inre zonen kallas kärnskugga, eller umbra på latin.' },
+      { type: 'p', html: 'Skillnaden är lätt att se hemma. Håll handen tätt över ett bord med taklampan tänd och skuggan blir mörk och skarp — bordet ligger i kärnskuggan. Lyft handen mot taket och skuggan blir stor, suddig och grå: nu ligger nästan hela bordet i halvskuggan, där en del av lampans lysande yta fortfarande syns förbi handen. Kärnskuggan är en kon som pekar bort från ljuskällan och tar slut på ett bestämt avstånd.' },
+      { type: 'p', html: 'Just den avslutningen är det som avgör om en solförmörkelse blir total. Månens kärnskugga är precis så lång att spetsen nätt och jämnt når fram till jordytan — ibland gör den det inte alls, och då ser man i stället en ljus ring runt månen. Där konen träffar jorden blir fläcken bara några hundra kilometer bred, och den sveper fram över jordytan i tusentals kilometer i timmen. Därför är en total solförmörkelse alltid något som gäller ett smalt band, medan halvskuggan täcker en halv kontinent.' }
+    ]
+  },
+  {
+    id: 'halvskugga',
+    term: 'Halvskugga',
+    former: ['halvskugga', 'halvskuggan', 'halvskuggor', 'halvskuggorna', 'penumbra', 'penumbran'],
+    kort: 'Den yttre, grå delen av en skugga, dit ljus från en del av ljuskällan når men inte från hela. I månens halvskugga ser man solen delvis täckt.',
+    relaterade: ['karnskugga', 'fotosfar'],
+    body: [
+      { type: 'p', html: 'Ställ dig i en skugga från en lampa med stor lysande yta och titta uppåt. I skuggans mitt är lampan helt dold, men en bit ut åt sidan tittar en kant av den fram. Där är det inte mörkt, bara dunklare — en del av ljuset når fram, resten är blockerat. Den zonen kallas halvskugga, eller penumbra. Den är alltid ljusare i ytterkanten än in mot mitten, vilket är hela förklaringen till att skuggor har suddiga kanter.' },
+      { type: 'p', html: 'Hur bred halvskuggan blir beror på hur stor ljuskällan ser ut från föremålet och hur långt bort skärmen ligger. En liten LED nära en hand ger en nästan knivskarp skugga; en molnig himmel, som lyser från alla håll, ger nästan ingen skugga alls utan bara en svag mörkning. Fotografer utnyttjar detta medvetet när de sätter en stor mjuk skärm framför en lampa för att bli av med hårda skuggkanter.' },
+      { type: 'p', html: 'Vid en solförmörkelse är det halvskuggan som de allra flesta hamnar i. Månen skymmer då bara en del av solskivan, och hur stor del beror på var i halvskuggan man står — nära mitten nästan allt, längst ut nästan ingenting. Eftersom ögat uppfattar ljusstyrka ungefär logaritmiskt märks det förvånansvärt lite: även när fyra femtedelar av solen är borta ser en sommarkväll ganska normal ut.' }
+    ]
+  },
+  {
+    id: 'meteor',
+    term: 'Meteor',
+    former: ['meteor', 'meteoren', 'meteorer', 'meteorerna', 'stjärnfall', 'stjärnfallet', 'meteorsvärm', 'meteorsvärmen', 'meteorsvärmar', 'meteorsvärmarna', 'meteorskur', 'meteorskuren', 'meteoroid', 'meteoroider', 'meteorit', 'meteoriten', 'meteoriter'],
+    kort: 'Ljusstrimman efter ett stoftkorn som brinner upp högt i atmosfären. Själva kornet heter meteoroid, och det som eventuellt når marken heter meteorit.',
+    relaterade: ['komet', 'asteroid', 'plasma'],
+    body: [
+      { type: 'p', html: 'Ett stjärnfall är inte en stjärna och inte heller en sten som glöder av friktion i vanlig mening. Det som kommer in är oftast ett korn i storleksordningen ett sandkorn, och det färdas i tiotals kilometer per sekund. På ungefär tio mils höjd är luften fortfarande extremt tunn, men i den farten hinner kornet ändå slå in i luftmolekylerna så våldsamt att både kornet och luften framför det slits sönder till glödande, joniserad gas. Ljusstrimman vi ser är den gasen som lyser — därför syns strimman långt bredare än det lilla kornet.' },
+      { type: 'p', html: 'Tre ord som lätt blandas ihop håller isär saken: kornet ute i rymden är en <em>meteoroid</em>, ljusfenomenet i atmosfären är en <em>meteor</em>, och den klump som mot förmodan överlever hela vägen ner till marken är en <em>meteorit</em>. De allra flesta meteoroider förångas fullständigt på några sekunder, och det enda som når marken är mikroskopiskt stoft som dalar ner under veckor.' },
+      { type: 'p', html: 'Ibland kommer meteorerna i skurar. En komet som passerat nära solen lämnar ett band av stoft längs sin bana, och när jorden varje år korsar bandet vid samma tid får vi en meteorsvärm. Eftersom kornen i en svärm rör sig parallellt ser strimmorna ut att stråla ut från en enda punkt på himlen, precis som järnvägsspår tycks mötas vid horisonten. Den punkten kallas radiant, och svärmen får namn efter stjärnbilden den ligger i.' }
+    ]
+  },
+  {
+    id: 'perseiderna',
+    term: 'Perseiderna',
+    former: ['perseiderna', 'perseider', 'perseidsvärmen', 'perseidsvärm'],
+    kort: 'Årets mest tillförlitliga meteorsvärm, som kulminerar kring den 12 augusti. Stoftet kommer från kometen 109P/Swift–Tuttle.',
+    relaterade: ['meteor', 'komet'],
+    body: [
+      { type: 'p', html: 'Varje år i mitten av augusti passerar jorden genom ett band av stoft som kometen 109P/Swift–Tuttle lämnat efter sig under tusentals varv kring solen. Kometkärnan själv är omkring 26&nbsp;kilometer bred och kommer tillbaka in i det inre solsystemet först på 2120-talet, men skräpet ligger kvar längs hela banan. Kornen möter atmosfären i ungefär 59&nbsp;km/s, vilket är snabbt även med meteormått, och därför är perseiderna kända för ovanligt många ljusstarka strimmor.' },
+      { type: 'p', html: 'Namnet kommer av att strimmorna tycks stråla ut från stjärnbilden Perseus. Det är ett perspektivfenomen: kornen rör sig i själva verket parallellt, och eftersom Perseus står lågt i nordost på kvällen och klättrar under natten blir det fler synliga meteorer ju närmare gryningen man kommer. Man tittar därför inte mot radianten utan gärna en bit vid sidan av den, där strimmorna hinner bli längre.' },
+      { type: 'p', html: 'Antalet meteorer per timme brukar anges som ett så kallat zenitalt timtal. Det är en beräknad idealsiffra: hur många en observatör skulle se om radianten stod rakt upp och himlen vore helt mörk och klar. Verkligheten bjuder nästan aldrig på det, så det praktiska utfallet blir betydligt lägre — några tiotal i timmen är en god natt. Månens fas avgör mycket: infaller kulminationen vid fullmåne dränks de svaga meteorerna i månsken, medan en nymåne ger perfekt mörker.' }
+    ]
   }
 ];

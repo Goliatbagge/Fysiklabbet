@@ -5,8 +5,80 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-10 | `2026-08-10-solformorkelse-sverige` | RÄTTA FÖRST → GODKÄND | Två räknefel funna och åtgärdade före publicering (vinkelstorlekens vardagsjämförelse, solglasögonens transmission). Alla svenska siffror verifierade mot Astroinfos råtabell, inte mot en referatsammanfattning. |
 | 2026-08-09 | `2026-08-09-flygande-fokus` | RÄTTA FÖRST → GODKÄND | Tre formuleringar rättade (bildtextens ”tre mellersta”, ”hela effekten” vid 4,8 J, 2004 som årtal). Hela originalartikeln lästes i PDF — samtliga siffror verifierade mot den. |
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
+
+---
+
+## 2026-08-10 — `2026-08-10-solformorkelse-sverige`
+
+**Granskningsläge:** självständigt granskningspass enligt fallbacken i
+nyhetsagentens steg 11 (sessionen fick inte starta subagenter). Artikeln är
+beställd av användaren och datumgrindad till 2026-08-10.
+
+**0. Ursprunget.** Uppslaget kom från en TT-text publicerad i Falköpings
+tidning. Den texten är upphovsrättsskyddad och har INTE använts som underlag —
+varken formuleringar, disposition eller de citat den innehåller (Peter Linde,
+Erik Ryderberg). Inget citat förekommer i artikeln. Samtliga sakuppgifter är
+hämtade från ursprungskällor och kontrollerade där.
+
+**1. Svenska hålltider och täckningsgrader — verifierade i RÅKÄLLAN.**
+Astroinfos tabell hämtades med curl och lästes som text, inte via ett
+sammanfattande referat: Kiruna 18.48/19.42/81,7&nbsp;%/0,8495, Stockholm
+19.03/19.56/80,9&nbsp;%/0,8433, Göteborg 20.00/83,0&nbsp;%, Malmö
+19.10/20.03/83,3&nbsp;%/0,8623. Tabellens egna kolumnrubriker är ”%yta” och
+”storlek”, och sidan påpekar själv att diameterandelen normalt är större än
+ytandelen — vilket är exakt den poäng artikelns avsnitt ”81 procent eller 86”
+bygger på. Detta är också förklaringen till att andra svenska sajter uppger
+86–88&nbsp;procent: de anger diameterandelen.
+
+**2. Förmörkelsens tekniska data** (17.46 UT, magnitud 1,0386, 294&nbsp;km
+skuggbredd, 2&nbsp;min 18&nbsp;s, saros 126) kommer från NASA/GSFC:s
+eclipse-katalog (Espenak) och stäms av mot Wikipedias artikel, som ger samma
+värden plus positionen 45&nbsp;km väster om Island. Spaniens solhöjder
+(12°/8°/8°/2°) och lokala klockslag är från Instituto Geográfico Nacional.
+
+**3. Historiken kontrollerad:** första totala över europeiska fastlandet sedan
+1999 och över Spanien sedan 1905; Sveriges senaste 1954-06-30, nästa
+2126-10-16. ”Största över Sverige sedan mars 2015” stämmer — mellanliggande
+förmörkelser (2021, 2022, 2025) nådde bara 20–40&nbsp;procent i Sverige, medan
+2015 nådde 80–95&nbsp;procent och alltså var djupare. Formuleringen ”största
+sedan 2015”, inte ”första sedan 2015”, är därför den korrekta (TT-texten
+skriver ”första gången sedan 2015”, vilket inte stämmer).
+
+**4. Ögonsäkerheten:** ISO&nbsp;12312-2:s gräns 0,00032&nbsp;procent
+transmittans är kontrollerad; ”mindre än en trehundratusendel” stämmer
+(3,2&nbsp;·&nbsp;10⁻⁶ = 1/312&nbsp;500). NASA:s säkerhetssida är källa för
+förbudet mot kikare/teleskop även med glasögon, och för hålkameran.
+
+**5. Två fel funna och rättade före publicering:**
+(a) ”en drygt centimeterstor knapp på tio meters håll” som bild av en halv grad
+    var fel med nästan en tiopotens — 0,5° på 10&nbsp;m är 8,7&nbsp;cm. Ändrat
+    till en ärta på drygt en meters håll.
+(b) ”Vanliga solglasögon ligger många tiopotenser fel” preciserat: solglasögon
+    släpper igenom storleksordningen tio procent, alltså tiotusentals gånger
+    för mycket (0,1 / 3,2&nbsp;·&nbsp;10⁻⁶ ≈ 31&nbsp;000).
+
+**6. Rimlighetskontroller som gjordes:** 19&nbsp;000&nbsp;lux vid
+81&nbsp;procents täckning (100&nbsp;000&nbsp;lux fullt solljus) och kvoten mot
+fullmånens ~0,25&nbsp;lux ⇒ ”tiotusentals gånger starkare”, hålkamerans
+bildstorlek 2&nbsp;m&nbsp;·&nbsp;0,0093 ≈ 1,9&nbsp;cm, samt solhöjden i södra
+Sverige vid maximum (~5°, konsistent med att förmörkelsen slutar ungefär vid
+solnedgången). Inga räkneord av typen biljon/biljard förekommer i artikeln.
+
+**7. Bilder:** alla tre är äkta NASA-foton i public domain, hämtade ur NASA:s
+bildbank och granskade var för sig — ingen AI-bild. Toppbilden visar en djupt
+förmörkad sol strax över horisonten, vilket är just den situation Sverige får.
+Bildtexten till diamantringen anger uttryckligen att bilden är från Oregon 2017,
+så ingen kan tro att den visar den kommande förmörkelsen.
+
+**8. Nya begrepp:** kärnskugga, halvskugga, meteor och perseiderna. Ordet
+”magnitud” undveks medvetet i artikeln — ordlistan har redan ett uppslag om
+stjärnors magnitud, och autolänkningen hade då kopplat förmörkelsemagnituden
+till fel begrepp.
+
+**Utslag: GODKÄND** efter rättelserna i punkt 5.
 
 ---
 

@@ -12,7 +12,16 @@ Format:
 ```
 
 ## 2026-08-09 — "Solytan har fransar — och en magnet som svävar"
-- Status: UTKAST (skrivet lördag 2026-08-08, för utskick söndag 2026-08-09 kl 17.00)
+- Status: **ALDRIG SKICKAT.** Skrevs för utskick söndag 2026-08-09 kl 17.00,
+  men användaren avstod eftersom listan ännu inte hade några prenumeranter.
+  **Konsekvenser för nästa brev:** (1) ingen har sett detta innehåll, så
+  brevperioden börjar 2026-08-03 (dagen efter förra brevet) och inte
+  2026-08-10 — magnetism-simuleringarna, Flyta eller sjunka, tomteblosset,
+  resonansen, enhetskollen och filmerna är alltså fortfarande osagda;
+  (2) teasern nedan är inte utlovad till någon och behöver inte följas upp;
+  (3) återanvänds text härifrån måste den skrivas om utan tankstreck
+  (regeln infördes 2026-08-09, se agentens instruktioner) — ämnesraden och
+  brödtexten nedan bryter mot den.
 - Nyheter: 2026-08-07-virvlar-pa-solens-yta (hjälte), 2026-08-08-svavande-magnet
   + 2026-08-05-rubin-mork-materia (miniatyrer); bromsade atomkärnor, fusion i
   metall, kvantlabb i fritt fall som textlänkar

@@ -94,6 +94,11 @@ window.SIM_NAMES = {
   'fysik2-fotoelektrisk-effekt.html': 'Fotoelektrisk effekt',
   'fysik2-spektrallinjer.html': 'Spektrallinjer',
   'fysik2-energinivaer.html': 'Energinivåer i väteatomen',
-  'fysik2-manens-faser.html': 'Månens faser',
+  'fysik2-manens-faser.html': [
+    { name: 'Månens faser', desc: 'Månens position i banan ger de olika månfaserna.',
+      kw: ['astronomi','måne','månens faser','faser','nymåne','fullmåne','halvmåne','skära','omloppsbana','jorden','sol','3d'] },
+    { name: 'Solförmörkelse', href: 'fysik2-solformorkelse.html', desc: 'Total solförmörkelse sedd från jorden — partiell fas, Bailys pärlor, diamantring och koronan.',
+      kw: ['astronomi','solförmörkelse','förmörkelse','måne','sol','korona','totalitet','kromosfär','protuberans','bailys pärlor','diamantring','umbra','kärnskugga','skugga','ringformig','partiell','vinkeldiameter','centrallinje'] },
+  ],
   'fysik2-solens-farg.html': 'Solens färg',
 };

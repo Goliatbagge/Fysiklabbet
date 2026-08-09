@@ -54,6 +54,18 @@ node .claude/verify-kopplingsschema.js
 # börja med "Rätt!"/"Fel!" (UI:t sätter etiketterna).
 node .claude/verify-exittickets.js
 
+# Verifiera pennlösningarna (::: handskrift-scenerna i handskrift.js) —
+# KÖR FÖRE COMMIT vid nya eller ändrade scener! Bygger varje scens
+# aktlista i Node (utan webbläsare, via HANDSKRIFT.scen) och mäter att
+# allt bläck ligger innanför arket, att inget hamnar i inställningsrutans
+# mobilzon (arkets övre högra hörn), att tankebubblorna inte skymmer något
+# som redan skrivits — och att inget tecken saknar glyf i GLYPHS (en
+# saknad bokstav ritas inte alls men tar plats: "FÖRSTÄRKS" blev
+# "FÖRST RKS"). Utan argument granskas alla scener som teorin länkar.
+# Reglerna står i handskrift.js filhuvud. Ersätter INTE skärmdumps-
+# granskningen — etiketter som ligger på linjer syns bara där.
+node .claude/verify-handskrift.js
+
 # Verifiera sökindexet efter nya simuleringar eller ändringar i
 # data/simuleringar.js (KÖR FÖRE COMMIT!) — varje länkad simulering (även
 # href2 och djuplänkar) ska finnas som egen rad i sökrutan, med eget namn

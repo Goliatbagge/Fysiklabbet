@@ -535,6 +535,9 @@
     '⟺': { w: 158, strokes: [[[54, 56], [104, 57]], [[54, 74], [104, 73]],
                               [[58, 44], [38, 65], [58, 88]],
                               [[100, 44], [120, 65], [100, 88]]] },
+    /* ⟹ (medför) — samma dubbelstreck som ⟺ men bara en spets, åt höger */
+    '⟹': { w: 158, strokes: [[[38, 56], [104, 57]], [[38, 74], [104, 73]],
+                              [[100, 44], [120, 65], [100, 88]]] },
     /* µ (mikro, ma1c-1.9): som u men med nedstapel på vänstra staven */
     'µ': { w: 66, strokes: [[[23, 52], [25, 90], [28, 126]],
                             [[25, 84], [32, 96], [46, 92], [56, 80]],
@@ -593,10 +596,92 @@
     /* tillagt 2026-08-08 (ma1c kapitel 6, Trigonometri och vektorer) */
     /* lodrätt streck: beloppstecken kring en vektor, |AB| */
     '|': { w: 34, strokes: [[[17, 8], [15, 104]]] },
+    /* beta (β-sönderfall): ögla med nedstapel och dubbelbuk — jämför
+     * med gemena 'b' vid granskning, betat har en spets upptill */
+    'β': { w: 68, strokes: [[[26, 40], [30, 84], [28, 126]],
+                            [[28, 50], [42, 40], [56, 46], [58, 62],
+                             [46, 72], [30, 74]],
+                            [[30, 74], [50, 78], [60, 90], [54, 104],
+                             [38, 108], [28, 100]]] },
+    /* gamma (γ-strålning): en v-form vars högra ben fortsätter ned */
+    'γ': { w: 62, strokes: [[[20, 52], [30, 82], [40, 96]],
+                            [[58, 50], [46, 84], [38, 112], [28, 126]]] },
+    /* ny (neutrinon ν): som ett litet v med rundad botten — granskad
+     * sida vid sida med gemena 'v' */
+    'ν': { w: 58, strokes: [[[22, 52], [28, 84], [38, 96], [50, 78],
+                             [58, 52]]] },
+    /* upphöjt plus — för β⁺ */
+    '⁺': { w: 52, strokes: [[[14, 30], [44, 30]], [[29, 16], [29, 45]]] },
+    /* rho (densitet): en ögla med rakt nedstaplat ben till vänster */
+    'ρ': { w: 66, strokes: [[[26, 52], [27, 126]],
+                            [[27, 62], [40, 50], [54, 56], [58, 74],
+                             [52, 92], [38, 98], [27, 90]]] },
+    /* eta (verkningsgrad): som ett 'n' men med nedstapel på högra benet */
+    'η': { w: 66, strokes: [[[24, 52], [25, 100]],
+                            [[25, 60], [36, 50], [48, 50], [58, 60],
+                             [59, 100], [57, 126]]] },
+    /* tankstreck (en dash, U+2013) i sammansatta namn som
+     * "Stefan–Boltzmanns lag". Tight, utan operatorluft — till skillnad
+     * från minustecknet '-' som är en räkneoperator. */
+    '–': { w: 56, strokes: [[[14, 66], [46, 66]]] },
+    /* högerpil för kvantsprång och övergångar: "3→1" */
+    '→': { w: 92, strokes: [[[16, 66], [76, 66]], [[58, 50], [78, 66], [58, 82]]] },
+    /* versalt Y: gaffel ned till mitten och sedan en rak stapel —
+     * granskad sida vid sida med 'V' och gemena 'y' */
+    'Y': { w: 76, strokes: [[[18, 12], [44, 56], [70, 11]], [[44, 56], [40, 100]]] },
+    /* versalt Ä: A med två prickar — för versaler i figur- och
+     * resonemangsrader ("FÖRSTÄRKS", "FÖRSVAGAS") */
+    'Ä': { w: 80, strokes: [[[22, 100], [46, 12], [70, 100]], [[32, 68], [61, 68]],
+                            [[36, -6], [37, -4]], [[58, -6], [59, -4]]] },
     /* versalt Å: A med ring över — för "År" och "Årsränta" */
     'Å': { w: 80, strokes: [[[22, 100], [46, 12], [70, 100]], [[32, 68], [61, 68]],
                             [[47, -9], [39, -6], [37, 1], [43, 8], [52, 6],
                              [55, -2], [48, -9]]] },
+    /* tillagda 2026-08-09 (Fysik 2 kapitel 2–5: vågor, elektromagnetism,
+     * ljus och universum) */
+    /* lambda (våglängd) — det överlägset vanligaste tecknet i vågkapitlen.
+     * Skrivs som för hand i två drag: först huvudbenet med den lilla
+     * kroken upptill (den skiljer λ från ett gement 'r' eller ett '1'),
+     * sedan vänsterbenet ut från mitten. Granskad sida vid sida med 'l',
+     * 'A' och 'x' — förväxlingsrisken sitter i om benen möts i en spets
+     * (då läses tecknet som ett 'A' utan tvärstreck), så vänsterbenet
+     * måste utgå UNDER apex, inte från den. */
+    'λ': { w: 74, strokes: [[[22, 16], [31, 9], [40, 17], [47, 39], [56, 68],
+                             [66, 100]],
+                            [[49, 45], [38, 70], [26, 100]]] },
+    /* versalt fi (magnetiskt flöde Φ): oval + lodrät stapel rakt igenom.
+     * Stapeln skrivs sist och sticker ut lika mycket över som under
+     * ovalen — annars läses tecknet som ett 'O' med ett streck i. */
+    'Φ': { w: 96, strokes: [[[48, 24], [28, 32], [21, 55], [28, 79], [48, 87],
+                             [68, 79], [75, 55], [68, 32], [48, 24]],
+                            [[50, 8], [47, 102]]] },
+    /* sigma (Stefan–Boltzmanns konstant): ögla som gemena 'o' men med en
+     * vågrät svans ut åt höger från toppen. Skrivs i EN dragning med
+     * svansen sist — börjar där svansen möter öglan, runt varvet, ut. */
+    'σ': { w: 92, strokes: [[[58, 52], [42, 47], [28, 54], [21, 69], [24, 86],
+                             [38, 97], [55, 93], [63, 78], [60, 60], [54, 52],
+                             [84, 50]]] },
+    /* versalt omega (enheten ohm): hästskoform med två fötter, i EN
+     * dragning från vänster fot upp runt och ner till höger fot.
+     * Jämför med gemena 'ω' vid granskning — den har två skålar UPPÅT,
+     * denna en båge NEDÅT. */
+    'Ω': { w: 96, strokes: [[[18, 99], [34, 97], [39, 86], [28, 72], [21, 54],
+                             [26, 31], [44, 16], [64, 17], [79, 33], [80, 56],
+                             [71, 74], [61, 87], [66, 97], [82, 99]]] },
+    /* versalt W (watt, weber): som två V:n — granskad sida vid sida med
+     * 'V' och gemena 'w', vars mittspets når högre upp */
+    'W': { w: 104, strokes: [[[16, 12], [35, 100], [52, 32], [69, 100], [88, 11]]] },
+    /* gemena q (laddning): som 'a'/'d'-bukten med en rak nedstapel till
+     * HÖGER — spegelbilden av 'p'. Jämför med '9' vid granskning: nian
+     * har ingen rak stapel utan en svans som viker av åt vänster. */
+    'q': { w: 66, strokes: [[[58, 57], [45, 49], [31, 56], [26, 73], [31, 89],
+                             [46, 97], [58, 87]],
+                            [[60, 50], [61, 100], [59, 126]]] },
+    /* û (toppspänning i växelströmskretsar): 'u' med cirkumflex ovanför.
+     * Hatten skrivs sist, som en egen liten vinkel över x-höjden. */
+    'û': { w: 66, strokes: [[[24, 52], [25, 82], [32, 96], [46, 92], [56, 80]],
+                            [[58, 52], [60, 100]],
+                            [[30, 34], [42, 20], [54, 34]]] },
     /* MOMENTPILAR (svensk kurslitteratur): moment moturs/medurs skrivs som
      * ett M med en vridpil ÖVER bokstaven. Pilarna är KOMBINERANDE tecken
      * — de har inget advance och placeString ritar dem ovanför föregående
@@ -612,6 +697,7 @@
   /* '±' står som PREFIX till ett tal (x=±8) och ingår därför INTE — den
    * ska klistra ihop med talet, inte få operatorluft åt båda håll. */
   var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1,
+              '⟹': 1,
               '≤': 1, '≥': 1, '≠': 1 };
 
   /* Senast skrivna klammergränser (position för övre/undre gräns) — så
@@ -656,9 +742,15 @@
 
   /* Placera ett tecken: skala, lätt lutning, jitter, rotation.
    * Returnerar nästa x. Strecken läggs i out-listan. */
+  /* Tecken som saknats i GLYPHS under sessionen. En saknad glyf ritas
+   * INTE alls men tar plats — "FÖRSTÄRKS" blev "FÖRST RKS" innan versalt
+   * Ä fanns, och det syns bara i skärmdump. Granskningsskriptet
+   * (.claude/verify-handskrift.js) läser listan via HANDSKRIFT.saknadeGlyfer()
+   * och larmar, så att felet fångas maskinellt. */
+  var SAKNADE = {};
   function placeGlyph(ch, x, baseline, s, out, color) {
     var g = GLYPHS[ch];
-    if (!g) return x + 40 * s;
+    if (!g) { SAKNADE[ch] = (SAKNADE[ch] || 0) + 1; return x + 40 * s; }
     var rot = rnd(-0.022, 0.022);
     var dyPx = rnd(-1.4, 1.4) * s;
     var cx = x + g.w * s / 2, cy = baseline - 45 * s;
@@ -18117,6 +18209,15496 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ================ FYSIKVERKTYG: physTools ================
+   * Fysikscenerna ovan (gungbrada … sekundpendel) definierar var för sig
+   * samma ~60 rader lokala hjälpare: line, dash, arrow, rect, figurBubble,
+   * fracH med nedstapel-lyft och så vidare. physTools samlar dem i EN
+   * verktygslåda ovanpå mathTools, så att en ny scen börjar med
+   *
+   *   var T = physTools(F), acts = T.acts, padL = T.padL;
+   *
+   * och sedan bara innehåller sin egen pedagogik. Alla husets regler
+   * gäller precis som förut — verktygen ändrar bara var koden bor.
+   * De äldre scenerna är medvetet orörda: de är granskade rad för rad i
+   * skärmdump, och en refaktorering av dem skulle behöva samma granskning
+   * en gång till utan att eleven ser någon skillnad.
+   *
+   * Tillägg utöver mathTools:
+   *   line(p1, p2, col)        rakt streck (humaniserat)
+   *   dash(p1, p2)             streckad linje mellan två punkter
+   *   dashPts(pts)             streckad kurva ur en punktlista
+   *   arrowHead(tip, from, len, col) / arrow(p1, p2, col)
+   *   dblArrow(p1, p2, col)    måttpil med spets i BÅDA ändar
+   *   rect(x0, y0, x1, y1, col)
+   *   circle(cx, cy, r, col)   handritad ring (öppen cirkel)
+   *   dot(cx, cy, col)         ifylld prick
+   *   hatch(p1, p2, n, col)    skraffering (tak/vägg/mark)
+   *   figurBubble(w, lines)    bubbla UNDER figuren (se REGEL)
+   *   fracH(num, den, x0, yb, col)  bråk som mathTools men med
+   *                            nedstapel-lyft i täljaren och sänkt
+   *                            nämnare när den har exponent
+   *   lbl(text, x, yb, col, sc)  figuretikett (standardskala 0,55) */
+  function physTools(F) {
+    var T = mathTools(F), acts = T.acts;
+
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]),
+                  color: color || null });
+    }
+    function dash(p1, p2, color) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1], color);
+      }
+    }
+    function dashPts(pts, color) {
+      for (var i = 0; i + 1 < pts.length; i += 2) line(pts[i], pts[i + 1], color);
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color, len) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], len || 10, color);
+    }
+    function dblArrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 9, color);
+      arrowHead(p1[0], p1[1], p2[0], p2[1], 9, color);
+    }
+    function rect(x0, y0, x1, y1, color) {
+      line([x0, y0], [x1, y0], color);
+      line([x1, y0], [x1, y1], color);
+      line([x1, y1], [x0, y1], color);
+      line([x0, y1], [x0, y0], color);
+    }
+    function circle(cx, cy, r, color) {
+      var pts = [];
+      for (var i = 0; i <= 13; i++) {
+        var a = -1.2 + (i / 13) * Math.PI * 2.12;
+        pts.push([cx + Math.cos(a) * (r + rnd(-0.7, 0.7)),
+                  cy + Math.sin(a) * (r + rnd(-0.7, 0.7))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: color || null });
+    }
+    function dot(cx, cy, color) {
+      acts.push({ kind: 'stroke', pts: dotPts(cx, cy), color: color || null });
+    }
+    /* skraffering längs en sträcka: korta snedstreck på "insidan" */
+    function hatch(p1, p2, n, color, len) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var ux = dx / L, uy = dy / L, nx = uy, ny = -ux, d = len || 9;
+      for (var i = 0; i < n; i++) {
+        var t = (i + 0.5) / n;
+        var bx = p1[0] + dx * t, by = p1[1] + dy * t;
+        line([bx, by], [bx - ux * d + nx * d, by - uy * d + ny * d], color);
+      }
+    }
+    /* ⊗ och ⊙ — ström (eller fält) IN i respektive UT ur papperet, samma
+     * symboler som teorifigurerna använder. r ≈ 11 passar en ledare i
+     * genomskärning. */
+    function symIn(cx, cy, r, color) {
+      circle(cx, cy, r, color);
+      var d = r * 0.68;
+      line([cx - d, cy - d], [cx + d, cy + d], color);
+      line([cx + d, cy - d], [cx - d, cy + d], color);
+    }
+    function symUt(cx, cy, r, color) {
+      circle(cx, cy, r, color);
+      dot(cx, cy, color);
+    }
+    /* ett fält IN i papperet ritas som ett rutnät av kryss (fält UT som
+     * prickar) — så markeras B i kursens figurer */
+    function kryssfalt(x0, y0, x1, y1, nx, ny, color) {
+      for (var i = 0; i < nx; i++) {
+        for (var j = 0; j < ny; j++) {
+          var x = x0 + (x1 - x0) * (i + 0.5) / nx;
+          var y = y0 + (y1 - y0) * (j + 0.5) / ny;
+          line([x - 4, y - 4], [x + 4, y + 4], color);
+          line([x + 4, y - 4], [x - 4, y + 4], color);
+        }
+      }
+    }
+    /* bubbla som hör till FIGUREN läggs UNDER den (se REGEL) */
+    var FIGB_Y = 300;
+    function figurBubble(w, lines, y) {
+      return T.bubble(120, y == null ? FIGB_Y : y, w, lines);
+    }
+    function lbl(t, x, yb, color, sc) {
+      return T.str(t, x, yb, color || null, sc == null ? 0.55 : sc);
+    }
+    function lblW(t, sc) { return T.adv(t, sc == null ? 0.55 : sc); }
+    /* bråk med rakt divisionsstreck. Skiljer sig från mathTools.fracH på
+     * två punkter som fysikuttrycken behöver: en täljare med NEDSTAPEL
+     * (g, y, j, p) lyfts så att svansen inte går rakt igenom strecket,
+     * och en nämnare med EXPONENT (4π²) sänks så att exponenten inte
+     * trycks upp i strecket. Se REGEL om division med vågrätt streck. */
+    function fracH(numS, denS, x0, yb, col) {
+      var ybar = yb - 0.34 * F;
+      var nw = T.adv(numS), dw = T.adv(denS);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      var dy = /\^/.test(denS) ? 1.26 : 1.04;
+      var ny = /[gyjp]/.test(numS) ? -0.36 : -0.14;
+      T.str(numS, x0 + (w - nw) / 2, ybar + ny * F, col);
+      T.pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: col || null });
+      T.pause(130);
+      T.str(denS, x0 + (w - dw) / 2, ybar + dy * F, col);
+      return x0 + w + 1.5;
+    }
+
+    T.line = line; T.dash = dash; T.dashPts = dashPts;
+    T.arrowHead = arrowHead; T.arrow = arrow; T.dblArrow = dblArrow;
+    T.rect = rect; T.circle = circle; T.dot = dot; T.hatch = hatch;
+    T.symIn = symIn; T.symUt = symUt; T.kryssfalt = kryssfalt;
+    T.figurBubble = figurBubble; T.lbl = lbl; T.lblW = lblW;
+    T.fracH = fracH;
+    return T;
+  }
+
+  /* ================ FYSIKSCENER: Fysik 2 kapitel 2 ================
+   * Pennlösningar till exempeluppgifterna från 2.6 Resonans och framåt.
+   * Husets regler gäller som i de tidigare fysikscenerna: figuren först i
+   * grafit med givna värden och vektorer i blått, sedan rubrik + formel,
+   * mätvärdesklammer DIREKT under formeln, insättning, avrundning,
+   * rimlighetsbedömning och svarsrad. Verktygen kommer från physTools(). */
+
+  /* ---------------- scen: gitarrsträngens egenfrekvens (fy2-2.6 Ex 1) ---
+   * 100 svängningar på 1,22 s ger periodtiden. Periodtiden är INTE given
+   * — den räknas därför ut som en DELUTRÄKNING på sin rad inne i
+   * klammern (se REGEL), inte som en egen formel med egen klammer före
+   * huvudformeln. */
+  function layoutEgenfrekvens(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var xA = 200, xB = 470, ybF = 180, amp = 40;
+    var adv = 1.7 * F, bw = 292;
+
+    function bulge(sign, dashed) {
+      var pts = [];
+      for (var i = 0; i <= 30; i++) {
+        var u = i / 30;
+        pts.push([xA + (xB - xA) * u,
+                  ybF - sign * amp * Math.sin(Math.PI * u)]);
+      }
+      if (dashed) T.dashPts(pts);
+      else acts.push({ kind: 'stroke', pts: pts });
+    }
+
+    /* ---- steg 1: rita strängen ---- */
+    T.tanke(T.figurBubble(280, [
+      [['Ritar gitarrsträngen mellan']],
+      [['sadeln och stallet, med']],
+      [['svängningens båda ytterlägen.']]
+    ], 296));
+    T.line([xA, ybF - 28], [xA, ybF + 28]);
+    T.line([xB, ybF - 28], [xB, ybF + 28]);
+    T.line([xA, ybF], [xB, ybF]);
+    T.pause(140);
+    bulge(1, false);
+    T.pause(140);
+    bulge(-1, true);
+    T.dot(xA, ybF);
+    T.dot(xB, ybF);
+    T.stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in det jag vet: 100']],
+      [['svängningar tog 1,22 s.']],
+      [['Egenfrekvensen ', 0], ['f', 1], [' är det jag', 0]],
+      [['söker.']]
+    ], 296));
+    T.lbl('f', 322, ybF - amp - 16, BLUE);
+    T.pause(160);
+    T.lbl('100 svängningar', xA, ybF + 72, BLUE);
+    T.pause(160);
+    T.lbl('t=1,22 s', xA + 196, ybF + 72, BLUE);
+    T.stepEnd();
+
+    /* ---- frekvensen ---- */
+    var y = 384;
+    T.tanke(T.bubble(120, T.bubbleTop(ybF + 72), bw, [
+      [['Frekvensen är antalet']],
+      [['svängningar per sekund — ett']],
+      [['delat med periodtiden.']]
+    ]));
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    T.str('Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('1', 'T', T.str('f=', padL, y), y);
+    T.stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Periodtiden är tiden för EN']],
+      [['svängning. Jag delar därför']],
+      [['tiden med antalet svängningar.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['T=', { frac: ['1,22 s', '100'] }, '=0,0122 s']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in periodtiden']],
+      [['ur klammern i formeln.']]
+    ]));
+    var xIns = T.str('=81,967... Hz',
+                     T.fracH('1', '0,0122', T.str('f=', padL, y), y) + 0.15 * F,
+                     y);
+    T.stepEnd();
+
+    /* AVRUNDNING (se REGEL) */
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['81,967... Hz blir 82 Hz.']]
+    ]));
+    var avrS = '≈82 Hz';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.0 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['82 svängningar i sekunden.']],
+      [['Gitarrens lägsta sträng ligger']],
+      [['just där, rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 82 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två pulser möts (fy2-2.8 Ex 1) ----------------
+   * Ritövning: åtta ögonblicksbilder av snöret — t=0 (given i uppgiften)
+   * och t=1…7 s. Rutorna följer PAPPERETS EGET rutnät (27 px), precis som
+   * när man ritar på rutat papper: triangelpulsen är 3 rutor bred och går
+   * 1 ruta åt höger per sekund, rektangelpulsen 3 rutor bred och 1 ruta åt
+   * vänster. De två pulserna ritas streckade i grafit och snörets
+   * FAKTISKA form — summan — dras med blåpennan ovanpå, så att eleven ser
+   * att superposition är en addition av höjder. */
+  function layoutSuperposition(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var sq = 27, x0 = 189, W = 13;        /* x0 = 7 rutor in på papperet */
+
+    function px(u) { return x0 + u * sq; }
+    function tri(x, t) {                  /* triangelpulsens höjd i rutor */
+      var L = 1.5 + t, A = 3 + t, R = 4.5 + t;
+      if (x <= L || x >= R) return 0;
+      return x <= A ? (x - L) / 1.5 : (R - x) / 1.5;
+    }
+    function recL(t) { return 8.5 - t; }
+    function recR(t) { return 11.5 - t; }
+    /* summan är styckvis rät — brytpunkterna räcker som hörnlista. Vid
+     * rektangelns kanter HOPPAR summan en ruta, så där läggs två punkter
+     * på samma x. */
+    function verts(t) {
+      var rl = recL(t), rr = recR(t);
+      var xs = [0, 1.5 + t, 3 + t, 4.5 + t, rl, rr, W]
+        .filter(function (x, i, a) {
+          return x >= 0 && x <= W && a.indexOf(x) === i;
+        })
+        .sort(function (a, b) { return a - b; });
+      var out = [];
+      xs.forEach(function (x) {
+        var h = tri(x, t);
+        if (x === rl) { out.push([x, h]); out.push([x, h + 1]); }
+        else if (x === rr) { out.push([x, h + 1]); out.push([x, h]); }
+        else out.push([x, h + (x > rl && x < rr ? 1 : 0)]);
+      });
+      return out;
+    }
+    function strip(t, yb) {
+      T.str('t=' + t + ' s', 52, yb, null, 0.62);
+      T.pause(140);
+      T.line([px(0), yb], [px(W), yb]);                  /* snöret i vila */
+      for (var k = 0; k <= W; k++) {
+        T.line([px(k), yb - 4], [px(k), yb + 4]);        /* rutmarkering */
+      }
+      T.pause(150);
+      T.dash([px(1.5 + t), yb], [px(3 + t), yb - sq]);   /* triangelpulsen */
+      T.dash([px(3 + t), yb - sq], [px(4.5 + t), yb]);
+      T.pause(120);
+      T.dash([px(recL(t)), yb], [px(recL(t)), yb - sq]); /* rektangelpulsen */
+      T.dash([px(recL(t)), yb - sq], [px(recR(t)), yb - sq]);
+      T.dash([px(recR(t)), yb - sq], [px(recR(t)), yb]);
+      T.pause(160);
+      var v = verts(t);                          /* snörets verkliga form */
+      for (var i = 0; i + 1 < v.length; i++) {
+        T.line([px(v[i][0]), yb - v[i][1] * sq],
+               [px(v[i + 1][0]), yb - v[i + 1][1] * sq], BLUE);
+      }
+    }
+
+    T.str('Superposition: addera höjderna', padL, 64, null, 0.62);
+    T.stepEnd();
+
+    /* Remsorna är 13 rutor breda och når x=540 — bortom mobilzonens
+     * vänsterkant (PAPER_W−310≈420). Den ÖVERSTA remsan börjar därför
+     * först vid y=214, så att inget bläck hamnar i arkets övre högra hörn
+     * där inställningsrutan sitter (se REGEL i filhuvudet). */
+    var yb0 = 214, dy = 81;
+    var tankar = {
+      0: [[['Så här ser det ut från början.']],
+          [['De streckade pulserna är de']],
+          [['två pulserna var för sig, den']],
+          [['blå är snöret på riktigt.']]],
+      2: [[['Nu nuddar pulserna varandra.']],
+          [['Ännu har ingen höjd lagts']],
+          [['till någon annan.']]],
+      3: [[['Här börjar de överlappa. I']],
+          [['varje punkt lägger jag ihop']],
+          [['de två höjderna.']]],
+      4: [[['Nu ligger triangelns topp inne']],
+          [['i rektangeln: 1 ruta plus 1']],
+          [['ruta blir 2 rutor högt.']]],
+      6: [[['Pulserna har precis lämnat']],
+          [['varandra och ser ut precis']],
+          [['som innan de möttes.']]]
+    };
+    for (var t = 0; t <= 7; t++) {
+      if (tankar[t]) {
+        T.tanke(T.bubble(120, t === 0 ? 182 : yb0 + dy * (t - 1) + 46,
+                         292, tankar[t]));
+      }
+      strip(t, yb0 + dy * t);
+      T.stepEnd();
+    }
+
+    var y = yb0 + dy * 7 + 74;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    T.tanke(T.bubble(120, yb0 + dy * 7 + 40, 292, [
+      [['Efter mötet är pulserna precis']],
+      [['som före det. Vågor går rakt']],
+      [['igenom varandra utan att ta']],
+      [['skada — rimligt!']]
+    ]));
+    T.underline(T.str('Svar: se figurerna ovan', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: stående våg i ett snöre (fy2-2.9 Ex 1) --------
+   * a) våghastigheten vid en buk, b) frekvensen vid två bukar,
+   * c) vid tre bukar. Våglängden är i alla tre fallen ett HÄRLETT MÅTT
+   * som läses ur figuren (avståndet mellan två noder är en halv
+   * våglängd) och räknas därför ut som en deluträkning inne i klammern.
+   * Varje deluppgift får sin egen figur — det är figuren som bär hela
+   * poängen med uppgiften. */
+  function layoutStaendevag(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xA = 155, xB = 415, LL = xB - xA;
+
+    function staende(n, yb, amp, hFast) {
+      T.line([xA, yb - hFast], [xA, yb + hFast]);
+      T.line([xB, yb - hFast], [xB, yb + hFast]);
+      T.line([xA, yb], [xB, yb]);
+      T.pause(130);
+      var pts = [], d = [], i, u;
+      for (i = 0; i <= 60; i++) {
+        u = i / 60;
+        pts.push([xA + LL * u, yb - amp * Math.sin(n * Math.PI * u)]);
+        d.push([xA + LL * u, yb + amp * Math.sin(n * Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.pause(130);
+      T.dashPts(d);
+      for (i = 0; i <= n; i++) T.dot(xA + LL * i / n, yb);
+    }
+
+    /* ---- steg 1: figuren med EN buk ---- */
+    T.tanke(T.figurBubble(284, [
+      [['Ritar snöret med en buk —']],
+      [['grundtonen. Ändarna sitter fast']],
+      [['och blir noder.']]
+    ], 288));
+    staende(1, 150, 40, 40);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(288, [
+      [['Skriver in snörets längd och']],
+      [['frekvensen. Våghastigheten ', 0], ['v', 1]],
+      [['är det jag söker i a).']]
+    ], 288));
+    T.dblArrow([xA, 216], [xB, 216], BLUE);
+    T.pause(150);
+    T.lbl('l=1,08 m', 226, 246, BLUE);
+    T.pause(150);
+    T.lbl('f=28 Hz', 434, 246, BLUE);
+    T.stepEnd();
+
+    /* ---- a) våghastigheten ---- */
+    var y = 372;
+    T.tanke(T.bubble(120, T.bubbleTop(246), bw, [
+      [['Våghastigheten binder ihop']],
+      [['frekvens och våglängd.']]
+    ]));
+    T.str('a) Våghastighet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('v=f·λ', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Avståndet mellan två noder är']],
+      [['en halv våglängd. Snöret är en']],
+      [['halv våglängd långt, så hela']],
+      [['våglängden är dubbelt så lång.']]
+    ]));
+    var klam = valueBracket(acts, ['f=28 Hz', 'λ=2·l=2·1,08 m=2,16 m'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('v=28·2,16=60,48 m/s', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Både']],
+      [['28 Hz och 1,08 m ger två']],
+      [['värdesiffror i svaret.']]
+    ]));
+    T.str('≈60 m/s', xIns, y);
+    T.stepEnd();
+
+    y += adv + 1.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['60 m/s — ungefär som en bil på']],
+      [['landsväg. Rimligt för en våg i']],
+      [['ett spänt snöre!']]
+    ]));
+    T.underline(T.str('Svar: 60 m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) två bukar ---- */
+    var ybB = y + 122;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Nu ritar jag samma snöre med']],
+      [['två bukar. Det ger en ny']],
+      [['våglängd.']]
+    ]));
+    staende(2, ybB, 32, 32);
+    T.stepEnd();
+
+    y = ybB + 112;
+    T.tanke(T.bubble(120, ybB + 70, bw, [
+      [['Spännkraften är oförändrad, så']],
+      [['våghastigheten är densamma som']],
+      [['i a). Jag löser ut frekvensen.']]
+    ]));
+    T.str('b) Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Två halva våglängder är en hel']],
+      [['våglängd, så nu är våglängden']],
+      [['lika lång som snöret.']]
+    ]));
+    klam = valueBracket(acts, ['v=60,48 m/s (från a)', 'λ=l=1,08 m'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=56 Hz',
+          T.fracH('60,48', '1,08', T.str('f=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Halverad våglängd ger dubbel']],
+      [['frekvens: 2·28=56 Hz. Precis']],
+      [['vad jag fick, rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 56 Hz', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) tre bukar ---- */
+    var ybC = y + 122;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Sist ritar jag snöret med tre']],
+      [['bukar.']]
+    ]));
+    staende(3, ybC, 32, 32);
+    T.stepEnd();
+
+    y = ybC + 112;
+    T.tanke(T.bubble(120, ybC + 70, bw, [
+      [['Samma formel som i b) — bara']],
+      [['våglängden ändras.']]
+    ]));
+    T.str('c) Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu ryms tre halva våglängder']],
+      [['på snöret, så en hel våglängd']],
+      [['är två tredjedelar av längden.']]
+    ]));
+    klam = valueBracket(acts, [
+      'v=60,48 m/s (från a)',
+      ['λ=', { frac: ['2·l', '3'] }, '=', { frac: ['2·1,08 m', '3'] }, '=0,72 m']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=84 Hz',
+          T.fracH('60,48', '0,72', T.str('f=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tre bukar ger tre gånger']],
+      [['grundtonen: 3·28=84 Hz.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 84 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: halvöppen pipa (fy2-2.10 Ex 1) ---------------
+   * Första övertonen i en 24 cm lång halvöppen pipa. Våglängden är inte
+   * given utan räknas ut ur piplängdsformeln som en deluträkning inne i
+   * huvudformelns klammer (se REGEL). */
+  function layoutHalvoppenpipa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var pA = 150, pB = 410, yM = 172, amp = 32;
+
+    T.tanke(T.figurBubble(288, [
+      [['Ritar pipan: stängd i vänster']],
+      [['ände, öppen i höger. Vid den']],
+      [['stängda änden blir det en nod,']],
+      [['vid den öppna en buk.']]
+    ], 306));
+    T.line([pA, yM - 42], [pB, yM - 42]);       /* pipans väggar */
+    T.line([pA, yM + 42], [pB, yM + 42]);
+    T.line([pA, yM - 42], [pA, yM + 42]);       /* stängda änden */
+    T.hatch([pA, yM + 42], [pA, yM - 42], 6);
+    T.pause(150);
+    (function () {
+      var pts = [], d = [], i, u;
+      for (i = 0; i <= 60; i++) {
+        u = i / 60;
+        pts.push([pA + (pB - pA) * u,
+                  yM - amp * Math.sin(1.5 * Math.PI * u)]);
+        d.push([pA + (pB - pA) * u,
+                yM + amp * Math.sin(1.5 * Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.pause(130);
+      T.dashPts(d);
+    })();
+    T.dot(pA, yM);
+    T.dot(pA + (pB - pA) * 2 / 3, yM);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(288, [
+      [['Skriver in piplängden. Första']],
+      [['övertonen är ', 0], ['n', 1], ['=2. Frekvensen', 0]],
+      [['är det jag söker.']]
+    ], 306));
+    T.dblArrow([pA, 236], [pB, 236], BLUE);
+    T.pause(150);
+    T.lbl('l=24 cm', 222, 266, BLUE);
+    T.pause(150);
+    T.lbl('n=2', 434, 266, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(266), bw, [
+      [['Ljudets hastighet i luft och']],
+      [['tonens våglängd ger frekvensen.']]
+    ]));
+    T.str('Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Våglängden är inte given. Jag']],
+      [['räknar ut den ur formeln för']],
+      [['en halvöppen pipa, på en egen']],
+      [['rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'v=340 m/s',
+      'l=24 cm=0,24 m',
+      ['λ=', { frac: ['4·l', '2n-1'] }, '=', { frac: ['4·0,24 m', '3'] },
+       '=0,32 m']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1 062,5 Hz',
+                     T.fracH('340', '0,32', T.str('f=', padL, y), y) + 0.15 * F,
+                     y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Piplängden 24 cm har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈1 100 Hz=1,1 kHz';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En liten pipa ger en ljus ton.']],
+      [['Drygt en kilohertz ligger högt']],
+      [['upp i tonregistret — rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1,1 kHz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: öppen pipa för 440 Hz (fy2-2.10 Ex 2) ---------
+   * Hur lång måste en öppen pipa vara för grundtonen 440 Hz? Våglängden
+   * är inte given — den räknas ut som en deluträkning i klammern. */
+  function layoutOppenpipa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var pA = 150, pB = 410, yM = 172, amp = 26;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar en öppen pipa: öppen i']],
+      [['båda ändar. Då blir det en buk']],
+      [['i varje ände och en nod på']],
+      [['mitten — det är grundtonen.']]
+    ], 306));
+    T.line([pA, yM - 42], [pB, yM - 42]);
+    T.line([pA, yM + 42], [pB, yM + 42]);
+    T.pause(150);
+    (function () {
+      var pts = [], d = [], i, u;
+      for (i = 0; i <= 60; i++) {
+        u = i / 60;
+        pts.push([pA + (pB - pA) * u, yM - amp * Math.cos(Math.PI * u)]);
+        d.push([pA + (pB - pA) * u, yM + amp * Math.cos(Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.pause(130);
+      T.dashPts(d);
+    })();
+    T.dot((pA + pB) / 2, yM);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in tonens frekvens.']],
+      [['Grundtonen är ', 0], ['n', 1], ['=1. Piplängden', 0]],
+      [['', 0], ['l', 1], [' är det jag söker.', 0]]
+    ], 306));
+    T.dblArrow([pA, 236], [pB, 236], BLUE);
+    T.pause(150);
+    T.lbl('l', 274, 266, BLUE);
+    T.pause(150);
+    T.lbl('f=440 Hz', 172, 112, BLUE);
+    T.pause(150);
+    T.lbl('n=1', 330, 112, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(266), bw, [
+      [['Formeln för en öppen pipa ger']],
+      [['längden direkt ur våglängden.']]
+    ]));
+    T.str('Öppen pipa', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('n·λ', '2', T.str('l=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Våglängden är inte given. Jag']],
+      [['räknar ut den ur våghastigheten']],
+      [['på en egen rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'n=1 (grundtonen)',
+      ['λ=', { frac: ['v', 'f'] }, '=', { frac: ['340 m/s', '440 Hz'] },
+       '=0,772... m']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=0,386... m',
+                     T.fracH('1·0,772...', '2', T.str('l=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Frekvensen 440 Hz har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈0,39 m=39 cm';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fyra decimeter — ungefär en']],
+      [['flöjtlängd. Rimligt för det']],
+      [['ettstrukna a:et!']]
+    ]));
+    T.underline(T.str('Svar: 39 cm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: ljudintensitet och ljudnivå (fy2-2.11 Ex 1) ---
+   * a) intensiteten 10 m från en 5,0 W-källa, b) ljudnivån i decibel.
+   * Klotytan är inte given utan räknas ut på sin rad i klammern. */
+  function layoutLjudintensitet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var cx = 250, cy = 160, R = 92;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ljudet sprids lika åt alla håll,']],
+      [['så effekten fördelas över ett']],
+      [['klot med radien 10 m.']]
+    ], 296));
+    T.circle(cx, cy, R);                     /* klotytan */
+    T.dot(cx, cy);
+    T.pause(140);
+    /* ljudet som utgående vågfronter — ritas bara på VÄNSTER halva, så
+     * att radien och dess mått får ligga ostört till höger */
+    [20, 32, 44].forEach(function (r) {
+      var pts = [];
+      for (var i = 0; i <= 14; i++) {
+        var a = Math.PI * (0.56 + (i / 14) * 0.88);
+        pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    });
+    T.pause(140);
+    T.line([cx, cy], [cx + R, cy]);          /* radien */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in effekten och']],
+      [['avståndet. Intensiteten ', 0], ['I', 1]],
+      [['är det jag söker i a).']]
+    ], 296));
+    T.lbl('P=5,0 W', 196, cy - R - 16, BLUE);
+    T.pause(150);
+    T.lbl('r=10 m', cx + 16, cy - 14, BLUE);
+    T.stepEnd();
+
+    /* ---- a) ljudintensiteten ---- */
+    var y = 380;
+    T.tanke(T.bubble(120, T.bubbleTop(cy + R + 14), bw, [
+      [['Intensiteten är effekten per']],
+      [['kvadratmeter av ytan.']]
+    ]));
+    T.str('a) Ljudintensitet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('P', 'A', T.str('I=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ytan är inte given. Klotets']],
+      [['area räknar jag ut på en egen']],
+      [['rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'P=5,0 W',
+      'A=4π·r^2=4π·(10 m)^2=1 256,637... m^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=0,00397... W/m^2',
+                     T.fracH('5,0', '1 256,637...', T.str('I=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Effekten']],
+      [['5,0 W har två värdesiffror.']]
+    ]));
+    var avrA = '≈0,0040 W/m^2=4,0 mW/m^2';
+    if (xIns + T.adv(avrA) < PAPER_W - 6) T.str(avrA, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrA, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Några tusendels watt per']],
+      [['kvadratmeter — litet, men örat']],
+      [['hör mycket svagare ljud än så.']]
+    ]));
+    T.underline(T.str('Svar: 4,0 mW/m^2', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) ljudnivån ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ljudnivån i decibel jämför']],
+      [['intensiteten med hörtröskeln.']]
+    ]));
+    T.str('b) Ljudnivå', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.7 * F;
+    T.parenFrac('I', 'I_0', null, T.str('L=10·lg', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag använder det OAVRUNDADE']],
+      [['värdet från a). Hörtröskeln']],
+      [['är en konstant.']]
+    ]));
+    klam = valueBracket(acts, [
+      'I=0,00397... W/m^2 (från a)',
+      'I_0=10^−^1^2 W/m^2 (hörtröskeln)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.parenFrac('0,00397...', '10^−^1^2', null,
+                         T.str('L=10·lg', padL, y), y) + 0.15 * F;
+    var restS = '=95,997... dB';
+    if (xb + T.adv(restS) < PAPER_W - 6) {
+      xb = T.str(restS, xb, y);
+    } else {
+      y += adv + 1.8 * F;
+      xb = T.str(restS, padL, y);
+    }
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Ljudnivåer anges i hela']],
+      [['decibel: 95,997... dB blir']],
+      [['96 dB.']]
+    ]));
+    var avrB = '≈96 dB';
+    if (xb + T.adv(avrB) < PAPER_W - 6) T.str(avrB, xb, y);
+    else { y += adv + 1.4 * F; T.str(avrB, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['96 dB är ungefär en gräsklippare']],
+      [['på nära håll. Starkt men inte']],
+      [['smärtsamt — rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 96 dB', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: ljudintensitet vid 93 dB (fy2-2.11 Ex 2) ------
+   * Ljudnivån är given och intensiteten söks. Logaritmen görs ensam genom
+   * att båda led divideras med 10, och uttrycket skrivs sedan om på
+   * potensform. */
+  function layoutLjudniva(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 96;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Ljudnivån är given och']],
+      [['intensiteten söks, så jag']],
+      [['börjar med ljudnivåformeln.']]
+    ]));
+    T.str('Ljudnivå', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    T.parenFrac('I', 'I_0', null, T.str('L=10·lg', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag dividerar båda led med 10']],
+      [['så att logaritmen står ensam.']]
+    ]));
+    T.parenFrac('I', 'I_0', null,
+                T.str('=lg', T.fracH('L', '10', padL, y), y) + 0.02 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Logaritmen svarar på frågan']],
+      [['"tio upphöjt till vad?". Jag']],
+      [['skriver om på potensform och']],
+      [['löser ut ', 0], ['I', 1]]
+    ]));
+    var xp = T.str('10^L^/^1^0=', padL, y);
+    xp = T.fracH('I', 'I_0', xp, y);
+    T.str('⟺I=I_0·10^L^/^1^0', xp + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Hörtröskeln är en konstant, och']],
+      [['ljudnivån är given i uppgiften.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'I_0=10^−^1^2 W/m^2 (hörtröskeln)',
+      'L=93 dB'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern. 93 delat med 10 är']],
+      [['9,3, så exponenten blir 9,3.']]
+    ]));
+    var xIns = T.str('I=10^−^1^2·10^9^,^3=0,00199... W/m^2', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Ljudnivån 93 dB har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈0,0020 W/m^2=2,0 mW/m^2';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ungefär hälften av intensiteten']],
+      [['i förra exemplets 96 dB. Tre']],
+      [['decibel mindre är just halva']],
+      [['intensiteten — rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 2,0 mW/m^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: vattenvåg mot grundare vatten (fy2-2.13 Ex 1)
+   * a) brytningsvinkeln ur brytningslagen med våglängder, b) frekvensen,
+   * som är densamma i båda vattendjupen. */
+  function layoutVattenbrytning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gx = 250, gy = 190;                 /* träffpunkten på gränsen */
+    var vi = 40 * Math.PI / 180, vb = 25.37 * Math.PI / 180;
+
+    function arc(r, a0, a1, color) {
+      var pts = [], n = 16;
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (a1 - a0) * i / n;
+        pts.push([gx + r * Math.cos(a), gy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: color || null });
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar gränsen mellan djupt och']],
+      [['grunt vatten, normalen och den']],
+      [['infallande vågstrålen.']]
+    ], 300));
+    T.line([90, gy], [420, gy]);                    /* gränsytan */
+    T.pause(130);
+    T.dash([gx, gy - 116], [gx, gy + 80]);          /* normalen */
+    T.pause(130);
+    T.arrow([gx - 130 * Math.sin(vi), gy - 130 * Math.cos(vi)],
+            [gx - 12 * Math.sin(vi), gy - 12 * Math.cos(vi)]);
+    T.pause(130);
+    T.arrow([gx, gy], [gx + 76 * Math.sin(vb), gy + 76 * Math.cos(vb)]);
+    T.dot(gx, gy);
+    T.pause(130);
+    T.lbl('djupt vatten', 95, gy - 14, null, 0.5);
+    T.lbl('grunt vatten', 330, gy + 26, null, 0.5);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in våglängderna och']],
+      [['infallsvinkeln. Brytnings-']],
+      [['vinkeln ', 0], ['b', 1], [' är det jag söker i a).', 0]]
+    ], 300));
+    arc(86, -Math.PI / 2, -Math.PI / 2 - vi);       /* infallsvinkeln */
+    T.lbl('i=40°', 168, 74, BLUE);
+    T.pause(150);
+    arc(48, Math.PI / 2, Math.PI / 2 - vb);         /* brytningsvinkeln */
+    T.lbl('b', 258, 262, BLUE);
+    T.pause(150);
+    T.lbl('λ_1=15 m', 96, 152, BLUE);
+    T.pause(150);
+    T.lbl('λ_2=10 m', 330, 236, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(300), bw, [
+      [['Brytningslagen kopplar ihop']],
+      [['vinklarna med våglängderna.']]
+    ]));
+    T.str('a) Brytningslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('sin i', 'sin b', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('λ_1', 'λ_2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut brytningsvinkeln:']],
+      [['först ', 0], ['sin b', 1], [', sedan vinkeln själv', 0]],
+      [['med inversa sinusfunktionen.']]
+    ]));
+    var xb2 = T.fracH('λ_2·sin i', 'λ_1', T.str('sin b=', padL, y), y);
+    xb2 = T.str('⟺b=sin^−^1', xb2 + 0.12 * F, y);
+    T.parenFrac('λ_2·sin i', 'λ_1', null, xb2, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Vågen bromsas in, så våglängden']],
+      [['blir kortare i det grunda']],
+      [['vattnet.']]
+    ]));
+    var klam = valueBracket(acts, ['λ_1=15 m', 'λ_2=10 m', 'i=40°'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.parenFrac('10·sin 40°', '15', null,
+                           T.str('b=sin^−^1', padL, y), y) + 0.15 * F;
+    xIns = T.str('=25,373...°', xIns, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag. Vinkeln']],
+      [['40° har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈25°';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vågen bromsas in och bryts mot']],
+      [['normalen, så brytningsvinkeln']],
+      [['ska vara mindre än 40°.']],
+      [['Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 25°', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) frekvensen ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Frekvensen bestäms av källan']],
+      [['och ändras aldrig vid en gräns.']],
+      [['Jag räknar därför på det djupa']],
+      [['vattnet, där jag har ', 0], ['v', 1], [' och ', 0], ['λ', 1]]
+    ]));
+    T.str('b) Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Värdena gäller det djupa']],
+      [['vattnet, där vågen kom ifrån.']]
+    ]));
+    klam = valueBracket(acts, ['v=8,0 m/s', 'λ=15 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns2 = T.str('=0,533... Hz',
+                      T.fracH('8,0', '15', T.str('f=', padL, y), y) + 0.15 * F,
+                      y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['8,0 m/s har två värdesiffror,']],
+      [['så svaret får två.']]
+    ]));
+    var avrB = '≈0,53 Hz';
+    if (xIns2 + T.adv(avrB) < PAPER_W - 6) T.str(avrB, xIns2, y);
+    else { y += adv + 1.2 * F; T.str(avrB, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En halv våg per sekund — knappt']],
+      [['två sekunder mellan vågtopparna.']],
+      [['Rimligt för havsvågor!']]
+    ]));
+    T.underline(T.str('Svar: 0,53 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två högtalare och första tysta punkten
+   * (fy2-2.14 Ex 1). Figuren följer teorins orientering (se REGEL):
+   * högtalarna till vänster, väggen till höger, C–D–E uppifrån och ned.
+   * Lösningen har tre led som var och en följer mönstret formel →
+   * klammer → insättning: vägskillnaden ur Pythagoras sats, våglängden ur
+   * villkoret för destruktiv interferens och till sist frekvensen ur
+   * våghastigheten. */
+  function layoutHogtalare(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    /* skala 20 px/m, precis som teorifiguren: AB=6,4 m=128 px,
+     * BD=12 m=240 px */
+    var hx = 150, wx = 390, yA = 110, yB = 238, yC = 174, yE = 290;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar rummet uppifrån:']],
+      [['högtalarna A och B till']],
+      [['vänster, väggen till höger med']],
+      [['punkterna C, D och E.']]
+    ], 340));
+    T.line([wx, 64], [wx, 310]);                  /* väggen */
+    T.hatch([wx, 64], [wx, 310], 9);
+    T.pause(140);
+    T.rect(hx - 13, yA - 10, hx + 13, yA + 10);   /* högtalare A */
+    T.rect(hx - 13, yB - 10, hx + 13, yB + 10);   /* högtalare B */
+    T.str('A', 172, yA - 6, null, 0.62);
+    T.str('B', 172, yB - 10, null, 0.62);
+    T.pause(140);
+    T.dash([hx, yC], [wx, yC]);                   /* mittlinjen */
+    T.dot(wx, yC);
+    T.dot(wx, yB);
+    T.dot(wx, yE);
+    T.str('C', 400, yC + 6, null, 0.62);
+    T.str('D', 400, yB + 6, null, 0.62);
+    T.str('E', 400, yE + 6, null, 0.62);
+    T.pause(140);
+    T.line([hx + 13, yB], [wx, yB]);              /* BD */
+    T.line([hx + 13, yA + 5], [wx, yB]);          /* AD */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in måtten. C ligger mitt']],
+      [['emellan A och B, och CD är']],
+      [['3,2 m, så AB är dubbelt så']],
+      [['långt: 6,4 m.']]
+    ], 340));
+    T.dblArrow([124, yA], [124, yB], BLUE);
+    T.lbl('AB=6,4 m', 30, 180, BLUE, 0.46);
+    T.pause(150);
+    T.lbl('CD=3,2 m', 412, 212, BLUE, 0.5);
+    T.pause(150);
+    T.lbl('BD=12 m', 244, yB + 26, BLUE);
+    T.pause(150);
+    T.lbl('AD', 252, 150, BLUE);
+    T.stepEnd();
+
+    /* ---- vägskillnaden ---- */
+    var y = 424;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 96), bw, [
+      [['Vid D är ljudet svagast. Det']],
+      [['beror på hur mycket längre']],
+      [['ljudet från A har gått.']]
+    ]));
+    T.str('Vägskillnad', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('Δs=AD-BD', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Triangeln ABD är rätvinklig, så']],
+      [['AD får jag med Pythagoras sats.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'AD=√(AB^2+BD^2)=√(6,4^2+12^2) m=13,6 m',
+      'BD=12 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('Δs=13,6-12=1,6 m', padL, y);
+    T.stepEnd();
+
+    /* ---- våglängden ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vid D är ljudet som svagast, så']],
+      [['där möts vågorna i motfas.']]
+    ]));
+    T.str('Destruktiv interferens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var xd = T.str('Δs=(n+', padL, y);
+    xd = T.fracH('1', '2', xd, y);
+    T.str(')·λ', xd, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['D är den FÖRSTA tysta punkten,']],
+      [['alltså 0:e nodlinjen: ', 0], ['n', 1], ['=0.', 0]],
+      [['Då är vägskillnaden en halv']],
+      [['våglängd.']]
+    ]));
+    var xn = T.str('n=0:  Δs=', padL, y);
+    xn = T.fracH('λ', '2', xn, y);
+    T.str('⟺λ=2·Δs', xn + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Vägskillnaden räknade jag ut']],
+      [['nyss.']]
+    ]));
+    klam = valueBracket(acts, ['Δs=1,6 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdet ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('λ=2·1,6=3,2 m', padL, y);
+    T.stepEnd();
+
+    /* ---- frekvensen ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Med våglängden och ljudets']],
+      [['hastighet får jag frekvensen.']]
+    ]));
+    T.str('Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ljudets hastighet i luft slår']],
+      [['jag upp i tabellen.']]
+    ]));
+    klam = valueBracket(acts, ['v=340 m/s', 'λ=3,2 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=106,25 Hz',
+                     T.fracH('340', '3,2', T.str('f=', padL, y), y) + 0.15 * F,
+                     y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Måttet']],
+      [['3,2 m har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈110 Hz';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['110 Hz är en mörk baston med']],
+      [['drygt tre meters våglängd —']],
+      [['just den storleksordning som']],
+      [['rummets mått har. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 110 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 2 kapitel 3 ================
+   * Elektromagnetism — magnetfält kring ledare och spolar, magnetisk
+   * kraft, induktion, växelström och transformatorn. Samma husregler som
+   * kapitel 2. Riktningar (tumregeln, högerhandsregeln, Lenz lag) ritas
+   * i figuren i stället för att bara påstås i text: den inducerade
+   * strömmen och kraften är ANTECKNINGAR i figuren och dras därför med
+   * blåpennan (se REGEL i filhuvudet). */
+
+  /* ---------------- scen: magnetfältet i tre punkter (fy2-3.2 Ex 1) ----
+   * a) rakt ovanför en ledare, b) snett ut från en ledare vinkelrätt mot
+   * papperet, c) mellan två ledare där fälten samverkar. Varje deluppgift
+   * får sin egen figur, ritad direkt före sin uträkning. */
+  function layoutFaltpunkter(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* ---- a) punkten P rakt ovanför en vågrät ledare ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar ledaren och punkten P']],
+      [['rakt ovanför den.']]
+    ], 244));
+    T.arrow([120, 172], [400, 172]);
+    T.dot(262, 112);
+    T.str('P', 272, 106, null, 0.62);
+    T.pause(140);
+    T.dash([262, 118], [262, 168]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in strömmen och']],
+      [['avståndet. Tumregeln: med']],
+      [['tummen åt höger kröker']],
+      [['fingrarna UT ur planet vid P.']]
+    ], 244));
+    T.lbl('I=1,2 A', 132, 200, BLUE);
+    T.pause(150);
+    T.lbl('d=1,5 cm', 274, 148, BLUE);
+    T.stepEnd();
+
+    var y = 336;
+    T.tanke(T.bubble(120, T.bubbleTop(200), bw, [
+      [['Fältet kring en rak ledare']],
+      [['avtar med avståndet.']]
+    ]));
+    T.str('a) Magnetfält kring rak ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('I', 'd', T.str('B=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Konstanten står i tabellen, och']],
+      [['avståndet görs om till meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'k=2·10^−^7 T·m/A', 'I=1,2 A', 'd=1,5 cm=0,015 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1,6·10^−^5 T',
+                     T.fracH('1,2', '0,015', T.str('B=2·10^−^7·', padL, y), y)
+                       + 0.12 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Hundratusendels tesla är']],
+      [['obekvämt att läsa. Jag skriver']],
+      [['om det i mikrotesla.']]
+    ]));
+    var omS = '=16 µT';
+    if (xIns + T.adv(omS) < PAPER_W - 6) T.str(omS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(omS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['16 µT är av samma storlek som']],
+      [['jordens eget fält. Rimligt så']],
+      [['nära en ledare!']]
+    ]));
+    T.underline(T.str('Svar: 16 µT rakt ut ur planet', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) punkten Q snett ut från en ledare in i planet ---- */
+    var fy = y + 150;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Nu ritar jag ledaren i']],
+      [['genomskärning, med strömmen in']],
+      [['i planet, och punkten Q snett']],
+      [['uppåt vänster.']]
+    ]));
+    T.symIn(280, fy, 12);
+    T.dot(180, fy - 72);
+    T.str('Q', 166, fy - 78, null, 0.62);
+    T.dash([188, fy - 65], [270, fy - 8]);
+    T.pause(150);
+    T.lbl('I=2,2 A', 302, fy + 6, BLUE);
+    /* måttet läggs UNDER den streckade linjen, inte på den (se REGEL om
+       etiketter i fri yta) */
+    T.lbl('d=2,0 cm', 150, fy + 24, BLUE);
+    T.stepEnd();
+
+    y = fy + 110;
+    T.tanke(T.bubble(120, fy + 58, bw, [
+      [['Samma formel som i a) — bara']],
+      [['ström och avstånd ändras.']],
+      [['Tumregeln: med tummen in i']],
+      [['planet pekar fältet NO vid Q.']]
+    ]));
+    T.str('b) Magnetfält kring rak ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('I', 'd', T.str('B=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Avståndet görs om till meter,']],
+      [['som alltid.']]
+    ]));
+    klam = valueBracket(acts, [
+      'k=2·10^−^7 T·m/A', 'I=2,2 A', 'd=2,0 cm=0,020 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    xIns = T.str('=2,2·10^−^5 T=22 µT',
+                 T.fracH('2,2', '0,020', T.str('B=2·10^−^7·', padL, y), y)
+                   + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Något större ström och lite']],
+      [['längre avstånd — samma']],
+      [['storleksordning som i a).']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 22 µT åt nordost', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) punkten R mellan två ledare ---- */
+    fy = y + 150;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Nu två ledare: ström UT ur']],
+      [['planet till vänster, IN i planet']],
+      [['till höger, och punkten R']],
+      [['mellan dem.']]
+    ]));
+    T.symUt(150, fy, 12);
+    T.symIn(400, fy, 12);
+    T.dot(272, fy);
+    T.str('R', 264, fy - 22, null, 0.62);
+    T.pause(150);
+    T.dash([164, fy], [262, fy]);
+    T.dash([282, fy], [386, fy]);
+    T.pause(150);
+    T.lbl('I=3,2 A', 112, fy - 34, BLUE);
+    T.lbl('I=1,2 A', 356, fy - 34, BLUE);
+    T.lbl('d=2,9 cm', 168, fy + 32, BLUE);
+    T.lbl('d=3,3 cm', 290, fy + 32, BLUE);
+    T.stepEnd();
+
+    y = fy + 132;
+    T.tanke(T.bubble(120, fy + 78, bw, [
+      [['Tumregeln på var ledare för']],
+      [['sig: BÅDA fälten pekar uppåt']],
+      [['vid R. Då samverkar de, och']],
+      [['fältstyrkorna kan adderas.']]
+    ]));
+    T.str('c) Fälten från de två ledarna adderas', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('B=B_v+B_h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ingen av de två fältstyrkorna']],
+      [['är given, så jag räknar ut dem']],
+      [['på var sin rad i klammern.']]
+    ]));
+    klam = valueBracket(acts, [
+      ['B_v=k·', { frac: ['I_v', 'd_v'] }, '=2·10^−^7·',
+       { frac: ['3,2 A', '0,029 m'] }, '=2,206...·10^−^5 T'],
+      ['B_h=k·', { frac: ['I_h', 'd_h'] }, '=2·10^−^7·',
+       { frac: ['1,2 A', '0,033 m'] }, '=7,272...·10^−^6 T']
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu adderar jag de två']],
+      [['fältstyrkorna. Båda skrivs i']],
+      [['mikrotesla först, så blir']],
+      [['additionen enkel.']]
+    ]));
+    xIns = T.str('B=22,1+7,3=29,4 µT', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Strömmarna har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈29 µT';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Den närmaste och starkaste']],
+      [['ledaren dominerar, och den']],
+      [['andra lägger på en dryg']],
+      [['tredjedel. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 29 µT uppåt', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: flödestäthet i en spole (fy2-3.3 Ex 1) -------
+   * 600 varv, 7,5 cm lång, 1,5 A. Rakt på formeln för fältet inuti en
+   * spole; hela poängen är att hålla ordning på enheterna. */
+  function layoutSpolfalt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sx = 160, sB = 400, syM = 168;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar spolen från sidan — ett']],
+      [['antal varv lindade tätt intill']],
+      [['varandra.']]
+    ], 288));
+    (function () {                          /* spolens varv */
+      for (var i = 0; i < 9; i++) {
+        var x = sx + (sB - sx) * (i + 0.5) / 9;
+        T.circle(x, syM, 26);
+      }
+    })();
+    T.pause(150);
+    T.line([sx - 30, syM], [sx + 4, syM]);   /* anslutningar */
+    T.line([sB - 4, syM], [sB + 30, syM]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in antalet varv,']],
+      [['spolens längd och strömmen.']],
+      [['Flödestätheten ', 0], ['B', 1], [' söker jag.', 0]]
+    ], 288));
+    T.dblArrow([sx, 224], [sB, 224], BLUE);
+    T.lbl('l=7,5 cm', 224, 252, BLUE);
+    T.pause(150);
+    T.lbl('n=600 varv', 176, 110, BLUE);
+    T.pause(150);
+    T.lbl('I=1,5 A', 320, 110, BLUE);
+    T.stepEnd();
+
+    var y = 380;
+    T.tanke(T.bubble(120, T.bubbleTop(252), bw, [
+      [['Inuti en spole är fältet']],
+      [['likformigt och beror på hur']],
+      [['tätt varven sitter.']]
+    ]));
+    T.str('Magnetfält inuti en spole', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('n·I', 'l', T.str('B=µ_0·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Permeabiliteten i vakuum står']],
+      [['i tabellen. Längden görs om']],
+      [['till meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'µ_0=4π·10^−^7 T·m/A', 'n=600', 'I=1,5 A', 'l=7,5 cm=0,075 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=0,0150... T',
+                     T.fracH('600·1,5', '0,075',
+                             T.str('B=4π·10^−^7·', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Strömmen 1,5 A har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈0,015 T=15 mT';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['15 mT är tusen gånger jordens']],
+      [['fält men långt under en stark']],
+      [['permanentmagnet. Rimligt för en']],
+      [['spole utan järnkärna!']]
+    ]));
+    T.underline(T.str('Svar: 15 mT', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: magnetisk kraft på en elektron (fy2-3.4 Ex 1)
+   * Beloppet ur F = q·v·B och riktningen ur högerhandsregeln. Elektronen
+   * är NEGATIV, så strömriktningen är motsatt hastigheten — det är den
+   * vanligaste fällan och får en egen tanke. */
+  function layoutKraftelektron(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ex = 262, ey = 168;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar fältet som kryss — det']],
+      [['går IN i papperet — och']],
+      [['elektronen som rör sig nedåt.']]
+    ], 300));
+    T.kryssfalt(120, 82, 404, 258, 6, 4);
+    T.pause(150);
+    T.circle(ex, ey, 13);
+    T.line([ex - 6, ey], [ex + 6, ey]);       /* minustecknet */
+    T.pause(150);
+    T.arrow([ex, ey + 16], [ex, ey + 62]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in hastigheten och']],
+      [['flödestätheten. Kraften ', 0], ['F', 1]],
+      [['är det jag söker.']]
+    ], 300));
+    T.lbl('v=2,4 Mm/s', ex + 16, ey + 56, BLUE);
+    T.pause(150);
+    T.lbl('B=0,080 T', 120, 62, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(300), bw, [
+      [['En laddning som rör sig tvärs']],
+      [['ett magnetfält känner en kraft.']]
+    ]));
+    T.str('Magnetisk kraft på laddning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('F=q·v·B', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Elementarladdningen står i']],
+      [['tabellen, och megameter per']],
+      [['sekund görs om till m/s.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'q≈1,602·10^−^1^9 C',
+      'v=2,4 Mm/s=2,4·10^6 m/s',
+      'B=0,080 T'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln. Raden blir']],
+      [['lång, så jag bryter före']],
+      [['likhetstecknet.']]
+    ]));
+    T.str('F=1,602·10^−^1^9·2,4·10^6·0,080', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.7 * F;
+    T.str('=3,076·10^−^1^4 N', padL + 24, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Hastigheten 2,4 Mm/s har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    y += adv + 0.9 * F;
+    T.str('≈3,1·10^−^1^4 N=31 fN', padL + 24, y);
+    T.stepEnd();
+
+    /* ---- riktningen ---- */
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu riktningen. Elektronen är']],
+      [['NEGATIV, så strömriktningen är']],
+      [['motsatt rörelsen: uppåt.']]
+    ]));
+    T.str('Högerhandsregeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('tummen: strömmen uppåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('pekfingret: fältet in i planet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('långfingret: kraften åt vänster', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    /* kraftpilen ritas in i figuren när riktningen är klar */
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in kraften i figuren:']],
+      [['den pekar åt vänster, vinkelrätt']],
+      [['mot både hastigheten och']],
+      [['fältet.']]
+    ]));
+    /* pilen dras ut UR kryssfältet, så att etiketten hamnar i fri yta
+       vid spetsen i stället för ovanpå ett fältkryss (se REGEL) */
+    T.arrow([ex - 16, ey], [ex - 134, ey], BLUE);
+    T.lbl('F', ex - 168, ey + 6, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Femtonewton är en försvinnande']],
+      [['liten kraft — men elektronen är']],
+      [['också försvinnande lätt.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 31 fN åt vänster', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kraftens riktning (fy2-3.5 Ex 1) -------------
+   * Ren riktningsuppgift utan räkning: högerhandsregeln i två fall.
+   * Kraften ritas in i figuren med blåpennan när den bestämts. */
+  function layoutHogerhand(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* ---- a) fältet åt höger, strömmen in i planet ---- */
+    T.tanke(T.figurBubble(290, [
+      [['a) Ritar fältet som pilar åt']],
+      [['höger och ledaren i']],
+      [['genomskärning, med strömmen in']],
+      [['i planet.']]
+    ], 268));
+    (function () {
+      for (var j = 0; j < 4; j++) {
+        var yy = 90 + j * 38;
+        T.line([130, yy], [380, yy]);
+        T.arrowHead(268, yy, 236, yy, 9);     /* spets MITT på fältlinjen */
+      }
+    })();
+    T.pause(150);
+    T.symIn(300, 166, 13);
+    T.lbl('B', 392, 96, BLUE);
+    T.lbl('I', 300, 202, BLUE);
+    T.stepEnd();
+
+    var y = 340;
+    T.tanke(T.bubble(120, T.bubbleTop(268 + 96), bw, [
+      [['Högerhanden: tummen längs']],
+      [['strömmen, pekfingret längs']],
+      [['fältet, så pekar långfingret']],
+      [['åt kraftens håll.']]
+    ]));
+    T.str('a) Högerhandsregeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('tummen: strömmen in i planet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('pekfingret: fältet åt höger', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('långfingret: kraften nedåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in kraften i figuren.']]
+    ]));
+    T.arrow([300, 182], [300, 236], BLUE);
+    T.lbl('F', 312, 226, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: nedåt', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) fältet nedåt, strömmen ut ur planet ---- */
+    var fy = y + 130;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu pekar fältet nedåt och']],
+      [['strömmen ut ur planet.']]
+    ]));
+    (function () {
+      for (var i = 0; i < 4; i++) {
+        var xx = 150 + i * 46;
+        T.line([xx, fy - 60], [xx, fy + 60]);
+        T.arrowHead(xx, fy, xx, fy - 32, 9);  /* spets MITT på fältlinjen */
+      }
+    })();
+    T.pause(150);
+    T.symUt(330, fy, 13);
+    T.lbl('B', 150, fy + 84, BLUE);
+    T.lbl('I', 330, fy + 34, BLUE);
+    T.stepEnd();
+
+    y = fy + 140;
+    T.tanke(T.bubble(120, fy + 116, bw, [
+      [['Samma regel igen, men med']],
+      [['handen vriden till de nya']],
+      [['riktningarna.']]
+    ]));
+    T.str('b) Högerhandsregeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('tummen: strömmen ut ur planet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('pekfingret: fältet nedåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('långfingret: kraften åt höger', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in kraften i figuren.']]
+    ]));
+    T.arrow([346, fy], [402, fy], BLUE);
+    T.lbl('F', 404, fy - 12, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kraften är alltid vinkelrät mot']],
+      [['både strömmen och fältet. Det']],
+      [['stämmer i båda fallen.']]
+    ]));
+    T.underline(T.str('Svar: åt höger', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: flödestäthet ur känd kraft (fy2-3.5 Ex 2) ---- */
+  function layoutFlodestathet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var wy = 168;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar ledaren i fältet, med']],
+      [['strömmen genom den och kraften']],
+      [['den känner.']]
+    ], 288));
+    (function () {
+      for (var j = 0; j < 4; j++) {
+        var yy = wy - 57 + j * 38;
+        T.line([130, yy], [390, yy]);
+        T.arrowHead(266, yy, 234, yy, 9);
+      }
+    })();
+    T.pause(150);
+    T.line([300, wy - 74], [300, wy + 74]);       /* ledaren */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in ledarens längd,']],
+      [['strömmen och kraften.']],
+      [['Flödestätheten ', 0], ['B', 1], [' söker jag.', 0]]
+    ], 288));
+    T.arrow([300, wy - 74], [300, wy - 100], BLUE);
+    T.lbl('I=2,2 A', 312, wy - 92, BLUE);
+    T.pause(150);
+    T.dblArrow([272, wy - 74], [272, wy + 74], BLUE);
+    T.lbl('l=25 mm', 164, wy + 96, BLUE);
+    T.pause(150);
+    T.lbl('F=75 mN', 288, wy + 96, BLUE);
+    T.stepEnd();
+
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(wy + 96), bw, [
+      [['Kraften på en strömförande']],
+      [['ledare i ett magnetfält.']]
+    ]));
+    T.str('Magnetisk kraft på ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('F', 'I·l', T.str('F=B·I·l⟺B=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Millinewton blir newton och']],
+      [['millimeter blir meter, så att']],
+      [['allt står i SI-enheter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F=75 mN=0,075 N', 'I=2,2 A', 'l=25 mm=0,025 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1,363... T',
+                     T.fracH('0,075', '2,2·0,025', T.str('B=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Alla']],
+      [['mätvärden har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈1,4 T';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1,4 T är ett kraftigt fält — som']],
+      [['i en MR-kamera. Rimligt att det']],
+      [['krävs för en märkbar kraft på']],
+      [['en så kort ledare!']]
+    ]));
+    T.underline(T.str('Svar: 1,4 T', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kraft mellan två ledare (fy2-3.5 Ex 3) -------
+   * Beloppet ur formeln för kraften mellan två parallella ledare, och
+   * riktningen ur den vänstra ledarens fält + högerhandsregeln. */
+  function layoutTvaledare(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var lx = 190, rx = 340, yT = 78, yB = 246;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar de två parallella']],
+      [['ledarna med strömmarna åt']],
+      [['samma håll.']]
+    ], 296));
+    T.line([lx, yB], [lx, yT]);
+    T.arrowHead(lx, yT, lx, yT + 40, 10);
+    T.line([rx, yB], [rx, yT]);
+    T.arrowHead(rx, yT, rx, yT + 40, 10);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in strömmarna och']],
+      [['avståndet mellan ledarna. Jag']],
+      [['räknar på en meter av dem.']]
+    ], 296));
+    T.lbl('I_1=1,5 A', lx - 100, yT + 92, BLUE);
+    T.lbl('I_2=1,5 A', rx + 16, yT + 92, BLUE);
+    T.pause(150);
+    T.dblArrow([lx, yB + 26], [rx, yB + 26], BLUE);
+    T.lbl('d=3,0 cm', lx + 8, yB + 54, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(yB + 54), bw, [
+      [['Två strömförande ledare drar i']],
+      [['varandra. Kraften beror på båda']],
+      [['strömmarna och på avståndet.']]
+    ]));
+    T.str('Kraft mellan två parallella ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('I_1·I_2·l', 'd', T.str('F=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Uppgiften frågar efter kraften']],
+      [['per meter, så jag sätter']],
+      [['längden till 1,0 m.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'k=2,0·10^−^7 T·m/A', 'I_1=I_2=1,5 A', 'l=1,0 m',
+      'd=3,0 cm=0,030 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1,5·10^−^5 N',
+                     T.fracH('1,5·1,5·1,0', '0,030',
+                             T.str('F=2,0·10^−^7·', padL, y), y) + 0.12 * F,
+                     y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Hundratusendels newton skrivs']],
+      [['bekvämare i mikronewton.']]
+    ]));
+    var omS = '=15 µN';
+    if (xIns + T.adv(omS) < PAPER_W - 6) T.str(omS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(omS, padL, y); }
+    T.stepEnd();
+
+    /* ---- riktningen ---- */
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu riktningen. Den vänstra']],
+      [['ledarens fält kröker sig medurs']],
+      [['och pekar IN i planet vid den']],
+      [['högra ledaren.']]
+    ]));
+    T.str('Högerhandsregeln på den högra ledaren', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('tummen: strömmen uppåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('pekfingret: fältet in i planet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('långfingret: kraften åt vänster', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in kraften i figuren.']],
+      [['Newtons tredje lag ger en lika']],
+      [['stor motriktad kraft på den']],
+      [['vänstra ledaren.']]
+    ]));
+    T.arrow([rx - 10, 160], [rx - 62, 160], BLUE);
+    T.lbl('F', rx - 80, 154, BLUE);
+    T.pause(150);
+    T.arrow([lx + 10, 200], [lx + 62, 200], BLUE);
+    T.lbl('F', lx + 68, 194, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Krafterna pekar mot varandra:']],
+      [['ledarna dras ihop. Strömmar åt']],
+      [['samma håll attraherar — det']],
+      [['stämmer med kursboken!']]
+    ]));
+    T.underline(T.str('Svar: 15 µN, attraherande', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: jordfältets horisontalkomposant (fy2-3.6) ----
+   * Kompassnålen ställer in sig längs resultanten av jordfältet och
+   * ledarens fält, som är vinkelräta mot varandra. Ledarens fält är inte
+   * givet utan räknas ut på sin rad i klammern. */
+  function layoutKompassnal(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 300, oy = 240, LN = 110;
+    var alfa = 44 * Math.PI / 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kompassen uppifrån.']],
+      [['Jordfältets horisontalkomposant']],
+      [['pekar mot norr, ledarens fält']],
+      [['åt väster.']]
+    ], 340));
+    T.arrow([ox, oy], [ox, oy - LN]);                 /* norr */
+    T.str('N', ox - 8, oy - LN - 14, null, 0.62);
+    T.pause(150);
+    T.arrow([ox, oy], [ox - LN * Math.tan(alfa), oy]); /* väster */
+    T.str('V', ox - LN * Math.tan(alfa) - 26, oy + 6, null, 0.62);
+    T.dot(ox, oy);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Kompassnålen ställer in sig']],
+      [['längs resultanten, 44° från']],
+      [['norr. Rektangeln visar hur de']],
+      [['två fälten läggs ihop.']]
+    ], 340));
+    var rxp = ox - LN * Math.tan(alfa), ryp = oy - LN;
+    T.dash([rxp, oy], [rxp, ryp]);
+    T.dash([ox, ryp], [rxp, ryp]);
+    T.pause(150);
+    T.arrow([ox, oy], [rxp, ryp], BLUE);
+    T.pause(150);
+    T.lbl('B_j_h', ox + 12, oy - LN + 30, BLUE);
+    T.lbl('B', ox - 68, oy - 12, BLUE);
+    T.pause(150);
+    (function () {                                     /* vinkelbågen */
+      var pts = [], n = 14, a0 = -Math.PI / 2, a1 = -Math.PI / 2 - alfa;
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (a1 - a0) * i / n;
+        pts.push([ox + 52 * Math.cos(a), oy + 52 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl('α=44°', ox - 78, oy - 68, BLUE);
+    T.stepEnd();
+
+    var y = 424;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['De två fälten är vinkelräta,']],
+      [['så tangens för vinkeln är']],
+      [['motstående genom närliggande.']]
+    ]));
+    T.str('Trigonometri i rektangeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xt = T.fracH('B', 'B_j_h', T.str('tan α=', padL, y), y);
+    xt = T.str('⟺B_j_h=', xt + 0.12 * F, y);
+    T.fracH('B', 'tan α', xt, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ledarens fält är inte givet.']],
+      [['Jag räknar ut det ur strömmen']],
+      [['och avståndet på en egen rad i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['B=k·', { frac: ['I', 'd'] }, '=2·10^−^7·',
+       { frac: ['2,6 A', '0,030 m'] }, '=1,733...·10^−^5 T'],
+      'α=44°'
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1,794...·10^−^5 T',
+                     T.fracH('1,733...·10^−^5', 'tan 44°',
+                             T.str('B_j_h=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Strömmen 2,6 A har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈1,8·10^−^5 T=18 µT';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Jordens fält är omkring 50 µT']],
+      [['totalt, och horisontaldelen är']],
+      [['bara en del av det. 18 µT är']],
+      [['rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 18 µT', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: inducerad ems i två fall (fy2-3.7 Ex 1) ------
+   * a) ledaren rör sig tvärs sin egen längdriktning — ems induceras.
+   * b) ledaren rör sig LÄNGS sin egen riktning — ingen ems. Poängen är
+   * att alla tre riktningarna måste vara vinkelräta mot varandra. */
+  function layoutInduceradems(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ay = 160;
+
+    T.tanke(T.figurBubble(290, [
+      [['a) Ritar fältet in i papperet']],
+      [['och ledaren CD, som rör sig']],
+      [['uppåt.']]
+    ], 296));
+    T.kryssfalt(120, 82, 404, 244, 6, 4);
+    T.pause(150);
+    T.line([200, ay], [330, ay]);
+    T.str('C', 182, ay + 6, null, 0.62);
+    T.str('D', 338, ay + 6, null, 0.62);
+    T.pause(150);
+    T.arrow([265, ay - 10], [265, ay - 58], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in ledarens längd,']],
+      [['farten och flödestätheten.']]
+    ], 296));
+    T.lbl('v=80 cm/s', 276, ay - 44, BLUE);
+    T.pause(150);
+    T.dblArrow([200, ay + 30], [330, ay + 30], BLUE);
+    T.lbl('l=20 cm', 208, ay + 58, BLUE);
+    T.pause(150);
+    T.lbl('B=0,85 mT', 120, 62, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(296 + 66), bw, [
+      [['Fältet, ledaren och rörelsen']],
+      [['är vinkelräta mot varandra —']],
+      [['då induceras en ems.']]
+    ]));
+    T.str('a) Inducerad ems i rak ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('e=l·v·B', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Centimeter blir meter och']],
+      [['millitesla blir tesla, så att']],
+      [['allt står i SI-enheter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'l=20 cm=0,20 m', 'v=80 cm/s=0,80 m/s', 'B=0,85 mT=0,85·10^−^3 T'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('e=0,20·0,80·0,85·10^−^3=1,36·10^−^4 V', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.6 * F), bw, [
+      [['Tiotusendels volt är obekvämt.']],
+      [['Jag skriver om i millivolt och']],
+      [['avrundar till två värdesiffror.']]
+    ]));
+    y += adv + 0.9 * F;
+    T.str('=0,136 mV≈0,14 mV', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett svagt fält och en långsam']],
+      [['rörelse ger en pytteliten']],
+      [['spänning. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,14 mV', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) rörelse längs ledaren ---- */
+    var fy = y + 148;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu rör sig samma ledare åt']],
+      [['höger — alltså längs sin egen']],
+      [['längdriktning.']]
+    ]));
+    T.kryssfalt(120, fy - 78, 404, fy + 78, 6, 4);
+    T.pause(150);
+    T.line([200, fy], [330, fy]);
+    T.str('C', 182, fy + 6, null, 0.62);
+    T.str('D', 338, fy + 6, null, 0.62);
+    T.pause(150);
+    T.arrow([340, fy - 26], [396, fy - 26], BLUE);
+    T.lbl('v', 400, fy - 32, BLUE);
+    T.stepEnd();
+
+    y = fy + 126;
+    T.tanke(T.bubble(120, fy + 100, bw, [
+      [['Ledarens riktning och rörelsens']],
+      [['riktning är nu DENSAMMA.']],
+      [['Elektronerna knuffas längs']],
+      [['ledaren, inte tvärs över den.']]
+    ]));
+    T.str('b) Ingen ems induceras', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('rörelsen är parallell med ledaren', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('ingen laddningsseparation mellan C och D', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Alla tre riktningarna måste']],
+      [['vara vinkelräta för att en ems']],
+      [['ska uppstå. Här är två av dem']],
+      [['parallella — då blir det noll.']]
+    ]));
+    T.underline(T.str('Svar: 0 V', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: inducerad ström och kraft (fy2-3.8 Ex 1) -----
+   * a) strömmen ur Ohms lag, där emsen är en deluträkning i klammern,
+   * b) kraften på ledaren och dess riktning. */
+  function layoutInduceradstrom(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var yT = 96, yB = 232, xL = 150, xR = 330;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar kretsen: fältet in i']],
+      [['papperet och den glidande']],
+      [['ledaren som dras åt höger.']]
+    ], 300));
+    T.kryssfalt(120, 76, 404, 252, 6, 4);
+    T.pause(150);
+    T.line([xL, yT], [xR, yT]);              /* U-kretsen */
+    T.line([xL, yT], [xL, yB]);
+    T.line([xL, yB], [xR, yB]);
+    T.pause(150);
+    T.line([xR, yT], [xR, yB]);              /* den glidande ledaren */
+    T.arrow([xR + 12, (yT + yB) / 2], [xR + 66, (yT + yB) / 2], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in ledarens längd,']],
+      [['farten, fältet och kretsens']],
+      [['resistans.']]
+    ], 300));
+    T.lbl('v=2,5 m/s', xR + 8, yT + 84, BLUE);
+    T.pause(150);
+    T.dblArrow([xR - 26, yT], [xR - 26, yB], BLUE);
+    T.lbl('l=15 cm', xR - 118, (yT + yB) / 2 + 6, BLUE);
+    T.pause(150);
+    T.lbl('B=0,80 T', 120, 62, BLUE);
+    T.lbl('R=0,75 Ω', xL - 12, yB + 32, BLUE);
+    T.stepEnd();
+
+    /* ---- a) strömmen ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(yB + 32), bw, [
+      [['Den inducerade spänningen']],
+      [['driver en ström genom kretsen.']],
+      [['Ohms lag ger strömmen.']]
+    ]));
+    T.str('a) Ohms lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('e', 'R', T.str('e=R·I⟺I=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Emsen är inte given. Jag räknar']],
+      [['ut den på en egen rad i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'e=l·v·B=0,15 m·2,5 m/s·0,80 T=0,30 V', 'R=0,75 Ω'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,40 A',
+          T.fracH('0,30', '0,75', T.str('I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Knappt en halv ampere ur en']],
+      [['tredjedels volt över mindre än']],
+      [['ett ohm. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,40 A', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) kraften ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Strömmen går genom ledaren, som']],
+      [['ligger i fältet. Då känner den']],
+      [['en magnetisk kraft.']]
+    ]));
+    T.str('b) Magnetisk kraft på ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('F=B·I·l', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Strömmen tar jag oavrundad']],
+      [['från a).']]
+    ]));
+    klam = valueBracket(acts, [
+      'B=0,80 T', 'I=0,40 A (från a)', 'l=15 cm=0,15 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F=0,80·0,40·0,15=0,048 N=48 mN', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu riktningen. Strömmen går']],
+      [['uppåt i den glidande ledaren']],
+      [['och fältet in i planet.']]
+    ]));
+    T.str('Högerhandsregeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('tummen: strömmen uppåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('pekfingret: fältet in i planet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('långfingret: kraften åt vänster', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in strömmen och']],
+      [['kraften i figuren. Kraften']],
+      [['BROMSAR rörelsen — precis vad']],
+      [['Lenz lag säger.']]
+    ]));
+    T.arrow([xR, yB - 20], [xR, yT + 20], BLUE);
+    T.lbl('I', xR + 10, (yT + yB) / 2 - 40, BLUE);
+    T.pause(150);
+    T.arrow([xR - 6, yB - 46], [xR - 62, yB - 46], BLUE);
+    T.lbl('F', xR - 80, yB - 52, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kraften är motriktad rörelsen.']],
+      [['Annars hade ledaren fått fart']],
+      [['av sig själv — energi ur']],
+      [['ingenting. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 48 mN åt vänster', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: strömriktningen i en slinga (fy2-3.8 Ex 2) ---
+   * Lenz lag i två fall: magneten närmar sig respektive avlägsnar sig.
+   * Ingen räkning — resonemanget "vad ändras → vad motverkar ändringen"
+   * skrivs ut led för led och strömriktningen ritas in i figuren. */
+  function layoutLenzslinga(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    function slinga(cx, cy, rx, ry) {           /* slingan sedd snett */
+      var pts = [];
+      for (var i = 0; i <= 22; i++) {
+        var a = (i / 22) * Math.PI * 2;
+        pts.push([cx + rx * Math.cos(a), cy + ry * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+    function magnet(x0, y0, x1, y1, vanster, hoger) {
+      T.rect(x0, y0, x1, y1);
+      T.line([(x0 + x1) / 2, y0], [(x0 + x1) / 2, y1]);
+      T.str(vanster, x0 + 12, (y0 + y1) / 2 + 8, null, 0.62);
+      T.str(hoger, (x0 + x1) / 2 + 14, (y0 + y1) / 2 + 8, null, 0.62);
+    }
+
+    /* ---- a) magneten närmar sig ---- */
+    T.tanke(T.figurBubble(292, [
+      [['a) Ritar magneten som närmar sig']],
+      [['slingan med nordänden först.']]
+    ], 290));
+    magnet(130, 130, 250, 186, 'S', 'N');
+    T.pause(150);
+    T.arrow([258, 158], [304, 158], BLUE);
+    T.lbl('magneten rör sig hitåt', 150, 252, BLUE, 0.5);
+    T.pause(150);
+    slinga(360, 158, 26, 62);
+    T.pause(150);
+    for (var j = 0; j < 3; j++) {              /* fältlinjer genom slingan */
+      var yy = 128 + j * 30;
+      T.line([256, yy], [400, yy]);
+      T.arrowHead(330, yy, 300, yy, 9);        /* spets MITT på linjen */
+    }
+    T.lbl('B', 406, 108, BLUE);
+    T.stepEnd();
+
+    var y = 342;
+    T.tanke(T.bubble(120, T.bubbleTop(290 + 66), bw, [
+      [['Lenz lag: den inducerade']],
+      [['strömmen motverkar alltid den']],
+      [['ändring som skapar den.']]
+    ]));
+    T.str('a) Lenz lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('ändringen: det högerriktade fältet FÖRSTÄRKS',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('strömmen vill alltså FÖRSVAGA fältet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('den skapar ett vänsterriktat fält i slingan',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('tumregeln: strömmen går uppåt i framkanten',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in strömmen i']],
+      [['slingans framkant.']]
+    ]));
+    T.arrow([334, 206], [334, 122], BLUE);
+    T.lbl('I', 316, 116, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: uppåt i slingans framkant', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) magneten avlägsnar sig ---- */
+    var fy = y + 150;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu står slingan till vänster']],
+      [['och magneten rör sig BORT från']],
+      [['den, med nordänden mot slingan.']]
+    ]));
+    slinga(190, fy, 26, 62);
+    T.pause(150);
+    magnet(250, fy - 28, 370, fy + 28, 'N', 'S');
+    T.pause(150);
+    T.arrow([378, fy], [420, fy], BLUE);
+    T.lbl('magneten rör sig bort', 250, fy + 56, BLUE, 0.5);
+    T.pause(150);
+    for (var k = 0; k < 3; k++) {
+      var yk = fy - 30 + k * 30;
+      T.line([150, yk], [252, yk]);
+      T.arrowHead(180, yk, 210, yk, 9);        /* fältet åt vänster */
+    }
+    T.lbl('B', 124, fy - 54, BLUE);
+    T.stepEnd();
+
+    y = fy + 142;
+    T.tanke(T.bubble(120, fy + 100, bw, [
+      [['Samma lag, men nu FÖRSVAGAS']],
+      [['fältet i stället. Då vill']],
+      [['strömmen hålla kvar det.']]
+    ]));
+    T.str('b) Lenz lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('ändringen: det vänsterriktade fältet FÖRSVAGAS',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('strömmen vill alltså FÖRSTÄRKA fältet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('den skapar ett vänsterriktat fält i slingan',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('tumregeln: strömmen går uppåt i framkanten',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
+      [['Jag ritar in strömmen. Den går']],
+      [['åt samma håll som i a) — men av']],
+      [['motsatt anledning!']]
+    ]));
+    T.arrow([164, fy + 48], [164, fy - 36], BLUE);
+    T.lbl('I', 208, fy - 56, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma strömriktning i båda']],
+      [['fallen, fast magneten vänds och']],
+      [['går åt andra hållet. Det är']],
+      [['värt att stanna upp vid!']]
+    ]));
+    T.underline(T.str('Svar: uppåt i slingans framkant', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: likformig flödesändring (fy2-3.9 Ex 1) ------- */
+  function layoutFlodesandring(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar spolen som flödet går']],
+      [['igenom. Flödet växer jämnt']],
+      [['under 0,23 sekunder.']]
+    ], 288));
+    (function () {
+      for (var i = 0; i < 7; i++) {
+        T.circle(180 + i * 32, 160, 24);
+      }
+    })();
+    T.pause(150);
+    for (var j = 0; j < 3; j++) {
+      var yy = 140 + j * 20;
+      T.line([140, yy], [420, yy]);
+      T.arrowHead(300, yy, 268, yy, 9);        /* spets MITT på fältlinjen */
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in antalet varv,']],
+      [['flödesändringen och tiden.']]
+    ], 288));
+    T.lbl('N=370 varv', 176, 220, BLUE);
+    T.pause(150);
+    T.lbl('ΔΦ=0,17 mWb', 176, 108, BLUE);
+    T.pause(150);
+    T.lbl('Δt=0,23 s', 344, 220, BLUE);
+    T.stepEnd();
+
+    var y = 380;
+    T.tanke(T.bubble(120, T.bubbleTop(220), bw, [
+      [['Ett flöde som ändras genom en']],
+      [['spole inducerar en spänning i']],
+      [['varje varv.']]
+    ]));
+    T.str('Inducerad spänning i spole', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('ΔΦ', 'Δt', T.str('e=−N·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Milliweber görs om till weber.']],
+      [['Flödet börjar på noll, så']],
+      [['ändringen är hela 0,17 mWb.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'N=370', 'ΔΦ=(0,17-0) mWb=0,17·10^−^3 Wb', 'Δt=0,23 s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=−0,273... V',
+                     T.fracH('0,17·10^−^3', '0,23',
+                             T.str('e=−370·', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Flödet 0,17 mWb har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈−0,27 V';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet är Lenz lag: den']],
+      [['inducerade spänningen motverkar']],
+      [['ändringen. Beloppet, en knapp']],
+      [['tredjedels volt, är rimligt.']]
+    ]));
+    T.underline(T.str('Svar: −0,27 V', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: inducerad spänning ur Φ–t-graf (fy2-3.9 Ex 2)
+   * Spänningen är grafens LUTNING. a) i det växande partiet, b) i det
+   * vågräta, där lutningen — och därmed spänningen — är noll. */
+  function layoutFlodesgraf(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    /* diagram: origo (140, 268), 44 px per sekund, 12 px per mWb */
+    var ox = 140, oy = 268, kx = 40, ky = 13;
+    function P(t, fi) { return [ox + t * kx, oy - fi * ky]; }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av diagrammet: flödet']],
+      [['växer, ligger stilla och']],
+      [['minskar sedan igen.']]
+    ], 306));
+    T.arrow([ox, oy], [ox + 8 * kx, oy]);            /* t-axeln */
+    T.arrow([ox, oy], [ox, oy - 13.4 * ky]);         /* Φ-axeln */
+    T.str('t (s)', ox + 8 * kx - 46, oy + 30, null, 0.55);
+    T.str('Φ (mWb)', ox + 8, oy - 13.4 * ky - 8, null, 0.55);
+    T.pause(150);
+    [2, 4, 6].forEach(function (t) {                 /* skalstreck */
+      T.line([ox + t * kx, oy - 4], [ox + t * kx, oy + 4]);
+      T.str(String(t), ox + t * kx - 8, oy + 26, null, 0.55);
+    });
+    [5, 10].forEach(function (fi) {
+      T.line([ox - 4, oy - fi * ky], [ox + 4, oy - fi * ky]);
+      T.str(String(fi), ox - 30, oy - fi * ky + 6, null, 0.55);
+    });
+    T.pause(150);
+    T.line(P(0, 0), P(2, 10));                       /* grafen */
+    T.line(P(2, 10), P(5, 10));
+    T.line(P(5, 10), P(7, 0));
+    T.stepEnd();
+
+    /* ---- a) t = 1 s ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(306 + 90), bw, [
+      [['Den inducerade spänningen är']],
+      [['grafens LUTNING. Vid ', 0], ['t', 1], ['=1 s är', 0]],
+      [['jag mitt i det växande']],
+      [['partiet.']]
+    ]));
+    T.str('a) Spänningen är lutningen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('ΔΦ', 'Δt', T.str('e=−', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag läser av ändringen mellan']],
+      [['', 0], ['t', 1], ['=0 och ', 0], ['t', 1], ['=2 s — hela det raka', 0]],
+      [['partiet har samma lutning.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ΔΦ=10 mWb=10·10^−^3 Wb', 'Δt=2 s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    /* markera avläsningen i grafen */
+    T.tanke(T.bubble(140, T.bubbleTop(y, 1.0), bw, [
+      [['Jag ritar in trappsteget i']],
+      [['diagrammet, så att avläsningen']],
+      [['syns.']]
+    ]));
+    T.dash(P(0, 0), P(2, 0));
+    T.dash(P(2, 0), P(2, 10));
+    T.lbl('Δt=2 s', ox + 6, oy + 52, BLUE);
+    T.lbl('ΔΦ=10 mWb', ox + 2.2 * kx, oy - 5 * ky, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=−0,005 V=−5,0 mV',
+          T.fracH('10·10^−^3', '2', T.str('e=−', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Några millivolt ur ett flöde']],
+      [['på tiotals milliweber i EN']],
+      [['slinga. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: −5,0 mV', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) t = 4 s ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vid ', 0], ['t', 1], ['=4 s ligger grafen helt', 0]],
+      [['vågrätt. Flödet ändras inte']],
+      [['alls.']]
+    ]));
+    T.str('b) Vågrät graf: ingen ändring', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('ΔΦ=0 mellan t=2 s och t=5 s', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lutningen är noll, alltså e=0', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Det är ÄNDRINGEN av flödet som']],
+      [['inducerar spänning — inte']],
+      [['flödet självt. Här är flödet']],
+      [['stort men stilla.']]
+    ]));
+    T.underline(T.str('Svar: 0 V', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: amerikanska elnätet (fy2-3.10 Ex 1) ----------
+   * Ett uttryck för momentanspänningen ska tecknas. Varken toppspänningen
+   * eller vinkelhastigheten är given — båda räknas ut på var sin rad i
+   * huvudformelns klammer (se REGEL). */
+  function layoutElnat(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 150, oy = 176, A = 60, per = 108;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar en sinuskurva: så']],
+      [['varierar spänningen i ett']],
+      [['växelströmsnät.']]
+    ], 300));
+    T.arrow([ox, oy], [ox + 2.6 * per, oy]);
+    T.arrow([ox, oy + A + 26], [ox, oy - A - 26]);
+    T.str('t', ox + 2.6 * per - 22, oy + 28, null, 0.55);
+    T.str('u', ox + 10, oy - A - 30, null, 0.55);
+    T.pause(150);
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 80; i++) {
+        var u = (i / 80) * 2.4;
+        pts.push([ox + u * per, oy - A * Math.sin(2 * Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in nätspänningen och']],
+      [['frekvensen. Toppspänningen ', 0], ['û', 1]],
+      [['är kurvans högsta värde.']]
+    ], 300));
+    T.dash([ox, oy - A], [ox + 0.25 * per, oy - A]);
+    T.lbl('û', ox - 24, oy - A + 6, BLUE);
+    T.pause(150);
+    T.lbl('U=110 V', ox + 1.6 * per - 40, oy - A - 6, BLUE);
+    T.pause(150);
+    T.lbl('f=60 Hz', ox + 20, oy + A + 44, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(oy + A + 44), bw, [
+      [['Momentanspänningen svänger']],
+      [['som en sinus, med']],
+      [['toppspänningen som amplitud.']]
+    ]));
+    T.str('Momentanspänning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('u=û·sin(ωt)', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Varken toppspänningen eller']],
+      [['vinkelhastigheten är given.']],
+      [['Jag räknar ut båda på var sin']],
+      [['rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'û=√2·U=√2·110 V=155,563... V≈156 V',
+      'ω=2π·f=2π·60 Hz=120π rad/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('u=156·sin(120π·t)', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Toppspänningen är drygt 40 %']],
+      [['högre än de 110 V man mäter,']],
+      [['och 60 svängningar i sekunden']],
+      [['stämmer med nätfrekvensen.']]
+    ]));
+    T.underline(T.str('Svar: u=156·sin(120π·t)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: transformator till dator (fy2-3.11 Ex 1) -----
+   * Uppgiften har inget entydigt svar — den frågar efter ett FÖRSLAG. Det
+   * enda som är bestämt är FÖRHÅLLANDET mellan varvtalen; ett av dem
+   * väljs sedan fritt. */
+  function layoutTransformator(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var kx = 262, kT = 96, kB = 240;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar transformatorn: två']],
+      [['spolar på samma järnkärna,']],
+      [['primärspolen till vänster och']],
+      [['sekundärspolen till höger.']]
+    ], 300));
+    T.rect(kx - 22, kT, kx + 22, kB);            /* järnkärnan */
+    T.pause(150);
+    for (var i = 0; i < 5; i++) {                /* primärlindningen */
+      T.circle(kx - 44, kT + 26 + i * 24, 15);
+    }
+    for (var j = 0; j < 5; j++) {                /* sekundärlindningen */
+      T.circle(kx + 44, kT + 26 + j * 24, 15);
+    }
+    T.pause(150);
+    T.line([kx - 44, kT + 8], [kx - 130, kT + 8]);
+    T.line([kx - 44, kB - 8], [kx - 130, kB - 8]);
+    T.line([kx + 44, kT + 8], [kx + 130, kT + 8]);
+    T.line([kx + 44, kB - 8], [kx + 130, kB - 8]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningarna:']],
+      [['vägguttagets 230 V in och']],
+      [['datorns 20 V ut.']]
+    ], 300));
+    T.lbl('U_1=230 V', 120, kT - 14, BLUE);
+    T.lbl('N_1', 120, kB + 30, BLUE);
+    T.pause(150);
+    T.lbl('U_2=20 V', 316, kT - 14, BLUE);
+    T.lbl('N_2', 316, kB + 30, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(kB + 30), bw, [
+      [['I en transformator förhåller']],
+      [['sig spänningarna som varvtalen.']]
+    ]));
+    T.str('Transformatorsambandet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xt = T.fracH('U_1', 'U_2', padL, y);
+    xt = T.str('=', xt + 0.10 * F, y);
+    xt = T.fracH('N_1', 'N_2', xt, y);
+    xt = T.str('⟺N_1=N_2·', xt + 0.12 * F, y);
+    T.fracH('U_1', 'U_2', xt, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Bara spänningarna är givna.']],
+      [['Varvtalen är det uppgiften']],
+      [['frågar efter.']]
+    ]));
+    var klam = valueBracket(acts, ['U_1=230 V', 'U_2=20 V'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=N_2·11,5',
+          T.fracH('230', '20', T.str('N_1=N_2·', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Sambandet ger bara']],
+      [['FÖRHÅLLANDET mellan varvtalen.']],
+      [['Ett av dem får jag välja själv —']],
+      [['jag tar ett jämnt hundratal.']]
+    ]));
+    T.str('Väljer ett varvtal', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('N_2=100 ⇒ N_1=11,5·100=1 150 varv', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Primärspolen ska ha elva och en']],
+      [['halv gånger fler varv, eftersom']],
+      [['spänningen ska ned från 230 V']],
+      [['till 20 V. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: N_1=1 150 och N_2=100 varv', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 2 kapitel 4 och 5 ================
+   * Ljus, kvantfysik och universum. Samma husregler som tidigare kapitel.
+   * Här förekommer ofta rötter över bråk (Stefan–Boltzmann, rörelseenergi)
+   * — de ritas med rootSign() över ett fracH(), aldrig med snedstreck. */
+
+  /* rot över ett BRÅK, med valfritt rotindex (4 för fjärderoten).
+   * Returnerar nästa x. */
+  function rotFrac(T, F, numS, denS, x0, yb, idx) {
+    var x = x0;
+    if (idx != null) {
+      T.str(String(idx), x, yb - 0.86 * F, null, 0.55);
+      x += T.adv(String(idx), 0.55) * 0.85;
+      T.pause(120);
+    }
+    var fw = T.fracW(numS, denS);
+    var xs = rootSign(T.acts, x, yb, fw, F,
+                      { yTop: yb - 1.62 * F, yBot: yb + 1.32 * F });
+    return T.fracH(numS, denS, xs, yb);
+  }
+
+  /* ---------------- scen: ficklampans utstrålade effekt (fy2-4.1 Ex 1) - */
+  function layoutFicklampa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var wx = 300, wy = 182, R = 62;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar ficklampan och den ljusa']],
+      [['cirkeln den lyser upp på']],
+      [['väggen.']]
+    ], 322));
+    T.line([120, wy - 96], [120, wy + 96]);        /* väggen */
+    T.hatch([120, wy + 96], [120, wy - 96], 8);
+    T.pause(150);
+    T.circle(wx, wy, R);
+    T.pause(150);
+    T.rect(wx + 108, wy - 16, wx + 150, wy + 16);  /* ficklampan */
+    T.line([wx + 108, wy - 16], [wx + 88, wy - 26]);
+    T.line([wx + 108, wy + 16], [wx + 88, wy + 26]);
+    T.line([wx + 88, wy - 26], [wx + 88, wy + 26]);
+    T.pause(150);
+    T.dash([wx + 84, wy - 26], [wx + 4, wy - R]);  /* ljuskäglan */
+    T.dash([wx + 84, wy + 26], [wx + 4, wy + R]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in cirkelns area och']],
+      [['ljusintensiteten. Effekten ', 0], ['P', 1]],
+      [['är det jag söker.']]
+    ], 322));
+    T.lbl('A=30 cm^2', wx - 44, wy + 4, BLUE);
+    T.pause(150);
+    T.lbl('I=500 W/m^2', 140, wy - R - 24, BLUE);
+    T.stepEnd();
+
+    var y = 414;
+    T.tanke(T.bubble(120, T.bubbleTop(322 + 90), bw, [
+      [['Intensiteten är effekten per']],
+      [['kvadratmeter. Effekten är alltså']],
+      [['intensiteten gånger arean.']]
+    ]));
+    T.str('Ljusintensitet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('⟺P=I·A',
+          T.fracH('P', 'A', T.str('I=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kvadratcentimeter görs om till']],
+      [['kvadratmeter: en kvadratmeter']],
+      [['är 10 000 kvadratcentimeter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'I=500 W/m^2', 'A=30 cm^2=30·10^−^4 m^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('P=500·30·10^−^4=1,5 W', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett par watt ljus — ungefär vad']],
+      [['en ficklampa drar. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1,5 W', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: solens intensitet vid jorden (fy2-4.1 Ex 2) -- */
+  function layoutSolintensitet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sx = 150, sy = 168;
+
+    T.tanke(T.figurBubble(290, [
+      [['Solen strålar lika åt alla']],
+      [['håll, så effekten fördelas över']],
+      [['ett klot med jordbanans radie.']]
+    ], 300));
+    T.circle(sx, sy, 30);
+    for (var i = 0; i < 8; i++) {                   /* solstrålarna */
+      var a = (i / 8) * Math.PI * 2;
+      T.line([sx + 36 * Math.cos(a), sy + 36 * Math.sin(a)],
+             [sx + 50 * Math.cos(a), sy + 50 * Math.sin(a)]);
+    }
+    T.pause(150);
+    (function () {                                  /* klotytan */
+      var pts = [];
+      for (var k = 0; k <= 26; k++) {
+        var b = -0.78 + (k / 26) * 1.56;
+        pts.push([sx + 172 * Math.cos(b), sy + 172 * Math.sin(b)]);
+      }
+      T.dashPts(pts);
+    })();
+    T.circle(sx + 172, sy, 11);                     /* jorden */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in solens effekt och']],
+      [['avståndet till jorden.']],
+      [['Intensiteten ', 0], ['I', 1], [' är det jag söker.', 0]]
+    ], 320));
+    T.line([sx + 32, sy], [sx + 160, sy]);
+    /* etiketten läggs UTANFÖR klotytan — mellan solen och bågen finns
+       inte plats för den utan att den hamnar ovanpå något */
+    T.lbl('r=149,6·10^6 km', sx + 190, sy + 34, BLUE);
+    T.pause(150);
+    T.lbl('P=3,9·10^2^6 W', sx - 40, sy - 74, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 90), bw, [
+      [['Effekten fördelas över hela']],
+      [['klotytan, 4π gånger radien i']],
+      [['kvadrat.']]
+    ]));
+    T.str('Intensitet från punktformig källa', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('P', '4π·r^2', T.str('I=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kilometer görs om till meter —']],
+      [['det är tre tiopotenser till.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'P=3,9·10^2^6 W', 'r=149,6·10^6 km=149,6·10^9 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('3,9·10^2^6', '4π·(149,6·10^9)^2',
+            T.str('I=', padL, y), y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag. Effekten']],
+      [['3,9·10^2^6 W har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    y += adv + 1.8 * F;
+    T.str('=1 386,728... W/m^2≈1 400 W/m^2', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=1,4 kW/m^2', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1,4 kW på varje kvadratmeter —']],
+      [['det är solarkonstanten, och']],
+      [['just den siffran står i']],
+      [['tabellen. Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 1,4 kW/m^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: gitter och våglängd (fy2-4.2 Ex 1) -----------
+   * a) våglängden ur gitterformeln, b) färgen ur spektrumtabellen.
+   * Avböjningsvinkeln ritas MEDVETET större än 9,4° — annars går de två
+   * strålarna inte att skilja åt, och etiketten får ingen fri yta. */
+  function layoutGitter(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gx = 220, gy = 186, vRit = 22 * Math.PI / 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar gittret, det infallande']],
+      [['ljuset och de två strålarna:']],
+      [['rakt fram och andra ordningens']],
+      [['maximum.']]
+    ], 300));
+    T.line([gx, gy - 88], [gx, gy + 88]);            /* gittret */
+    for (var i = 0; i < 11; i++) {
+      var yy = gy - 80 + i * 16;
+      T.line([gx - 6, yy], [gx + 6, yy]);
+    }
+    T.pause(150);
+    for (var j = 0; j < 3; j++) {                    /* infallande ljus */
+      T.arrow([110, gy - 40 + j * 40], [gx - 12, gy - 40 + j * 40]);
+    }
+    T.pause(150);
+    T.arrow([gx, gy], [gx + 190, gy]);               /* rakt fram, n=0 */
+    T.arrow([gx, gy], [gx + 190 * Math.cos(vRit), gy - 190 * Math.sin(vRit)]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in gittrets täthet och']],
+      [['avböjningsvinkeln. Våglängden']],
+      [['söker jag i a).']]
+    ], 318));
+    (function () {                                   /* vinkelbågen */
+      var pts = [], n = 14;
+      for (var k = 0; k <= n; k++) {
+        var a = -(k / n) * vRit;
+        pts.push([gx + 92 * Math.cos(a), gy + 92 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl('α_2=9,4°', 300, 156, BLUE);
+    T.pause(150);
+    T.lbl('120 spalter/mm', 112, gy + 74, BLUE);
+    T.stepEnd();
+
+    var y = 418;
+    T.tanke(T.bubble(120, T.bubbleTop(318 + 90), bw, [
+      [['Gitterformeln kopplar ihop']],
+      [['spaltavståndet, ordningen och']],
+      [['avböjningsvinkeln.']]
+    ]));
+    T.str('a) Gitterformeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('d·sin α_n', 'n', T.str('n·λ=d·sin α_n⟺λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Spaltavståndet är inte givet.']],
+      [['120 spalter per millimeter']],
+      [['betyder att varje spalt tar en']],
+      [['hundratjugondels millimeter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['d=', { frac: ['1', '120'] }, ' mm=8,333...·10^−^6 m'],
+      'α_2=9,4°',
+      'n=2 (andra ordningen)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('8,333...·10^−^6·sin 9,4°', '2', T.str('λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=6,805...·10^−^7 m', padL + 24, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag. Vinkeln']],
+      [['9,4° har två värdesiffror, men']],
+      [['nanometer är det bekvämaste']],
+      [['måttet för ljus.']]
+    ]));
+    y += adv + 1.4 * F;
+    T.str('≈6,81·10^−^7 m=681 nm', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Synligt ljus ligger mellan']],
+      [['omkring 400 och 700 nm. 681 nm']],
+      [['hamnar precis innanför — det']],
+      [['går att se. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 681 nm', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) färgen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu slår jag upp våglängden i']],
+      [['tabellen över det']],
+      [['elektromagnetiska spektrumet.']]
+    ]));
+    T.str('b) Färgen ur spektrumtabellen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('rött ljus: 625 nm - 740 nm', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('681 nm ligger mitt i det röda området',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: rött', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: exoplanetens yttemperatur (fy2-4.3 Ex 1) -----
+   * Stefan–Boltzmanns lag löses ut för temperaturen — fjärde roten ur ett
+   * bråk — och kelvin räknas till sist om till celsius. */
+  function layoutExoplanet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var px = 250, py = 170;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar exoplaneten som strålar']],
+      [['ut värme åt alla håll.']]
+    ], 296));
+    T.circle(px, py, 66);
+    for (var i = 0; i < 12; i++) {
+      var a = (i / 12) * Math.PI * 2;
+      T.arrow([px + 74 * Math.cos(a), py + 74 * Math.sin(a)],
+              [px + 100 * Math.cos(a), py + 100 * Math.sin(a)]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in emittansen — den']],
+      [['effekt per kvadratmeter som']],
+      [['ytan strålar ut. Temperaturen']],
+      [['söker jag.']]
+    ], 296));
+    /* emittansen skrivs UTANFÖR strålpilarna — inne i cirkeln hamnade
+       den ovanpå planetens kant (se REGEL om etiketter i fri yta) */
+    T.lbl('M=1,5 kW/m^2', px + 118, py + 6, BLUE);
+    T.pause(150);
+    T.lbl('T', px - 8, py + 6, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(py + 106), bw, [
+      [['En svart kropps utstrålning']],
+      [['växer med temperaturen upphöjt']],
+      [['till fyra.']]
+    ]));
+    T.str('Stefan–Boltzmanns lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('M=σ·T^4⟺T=', padL, y);
+    rotFrac(T, F, 'M', 'σ', xa, y, 4);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Kilowatt görs om till watt.']],
+      [['Stefan–Boltzmanns konstant står']],
+      [['i tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'M=1,5 kW/m^2=1 500 W/m^2',
+      'σ≈5,67·10^−^8 W/(m^2·K^4)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xi = T.str('T=', padL, y);
+    var xe = rotFrac(T, F, '1 500', '5,67·10^−^8', xi, y, 4);
+    T.str('=403,298... K', xe + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Svaret ska vara i celsius.']],
+      [['Kelvinskalan börjar 273 grader']],
+      [['lägre, så jag drar bort 273.']]
+    ]));
+    T.str('T≈403 K=403-273=130 °C', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['130 °C är hetare än kokande']],
+      [['vatten men långt under en']],
+      [['stjärnas yta. Rimligt för en']],
+      [['planet nära sin sol!']]
+    ]));
+    T.underline(T.str('Svar: 130 °C', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: solens maxvåglängd (fy2-4.3 Ex 2) ----------- */
+  function layoutWienlag(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 150, oy = 268, kx = 0.5, ky = 1.55;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar strålningskurvan: en svart']],
+      [['kropp strålar mest vid EN viss']],
+      [['våglängd, och den flyttar sig']],
+      [['med temperaturen.']]
+    ], 300));
+    T.arrow([ox, oy], [ox + 300, oy]);
+    T.arrow([ox, oy], [ox, oy - 170]);
+    T.str('λ', ox + 268, oy + 30, null, 0.55);
+    T.str('intensitet', ox + 10, oy - 176, null, 0.55);
+    T.pause(150);
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 70; i++) {
+        var u = 4 + (i / 70) * 500;
+        var v = Math.pow(500 / u, 5) *
+                1 / (Math.exp(500 / u * 0.9) - 1) * 340;
+        pts.push([ox + u * kx, oy - Math.min(150, v * ky)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in solytans temperatur.']],
+      [['Toppens våglängd är det jag']],
+      [['söker.']]
+    ], 336));
+    T.dash([ox + 100 * kx, oy], [ox + 100 * kx, oy - 150]);
+    T.lbl('λ_m_a_x', ox + 100 * kx + 10, oy - 158, BLUE);
+    T.pause(150);
+    T.lbl('T=5 800 K', ox + 150, oy - 96, BLUE);
+    T.stepEnd();
+
+    var y = 430;
+    T.tanke(T.bubble(120, T.bubbleTop(336 + 90), bw, [
+      [['Wiens förskjutningslag: ju']],
+      [['varmare kropp, desto kortare']],
+      [['våglängd i toppen.']]
+    ]));
+    T.str('Wiens förskjutningslag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('λ_m_a_x·T=2,8978·10^−^3', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.fracH('2,8978·10^−^3', 'T', T.str('⟺λ_m_a_x=', padL + 24, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Temperaturen måste vara i']],
+      [['kelvin — den är det redan.']]
+    ]));
+    var klam = valueBracket(acts, ['T=5 800 K'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdet ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=4,996...·10^−^7 m',
+          T.fracH('2,8978·10^−^3', '5 800', T.str('λ_m_a_x=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag, och']],
+      [['skriver om i nanometer.']]
+    ]));
+    y += adv + 1.4 * F;
+    T.str('≈5,00·10^−^7 m=500 nm', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['500 nm ligger mitt i det']],
+      [['synliga ljuset. Att våra ögon']],
+      [['är känsligast just där är']],
+      [['ingen slump!']]
+    ]));
+    T.underline(T.str('Svar: 500 nm', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) strålningstypen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu slår jag upp våglängden i']],
+      [['spektrumtabellen.']]
+    ]));
+    T.str('b) Färgen ur spektrumtabellen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('blått: 435 nm - 500 nm', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('cyan: 500 nm - 520 nm', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('500 nm ligger precis på gränsen', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: blått/cyan (blågrönt ljus)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: brytning luft → glas (fy2-4.4 Ex 1) --------- */
+  function layoutBrytningglas(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gx = 250, gy = 200;
+    var vi = 50 * Math.PI / 180, vb = 30.71 * Math.PI / 180;
+
+    function arc(r, a0, a1) {
+      var pts = [], n = 16;
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (a1 - a0) * i / n;
+        pts.push([gx + r * Math.cos(a), gy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar glasytan, normalen och']],
+      [['den infallande strålen.']]
+    ], 300));
+    T.line([100, gy], [415, gy]);
+    T.hatch([415, gy], [100, gy], 12);
+    T.pause(130);
+    T.dash([gx, gy - 128], [gx, gy + 78]);
+    T.pause(130);
+    T.arrow([gx - 140 * Math.sin(vi), gy - 140 * Math.cos(vi)],
+            [gx - 12 * Math.sin(vi), gy - 12 * Math.cos(vi)]);
+    T.pause(130);
+    T.arrow([gx, gy], [gx + 74 * Math.sin(vb), gy + 74 * Math.cos(vb)]);
+    T.dot(gx, gy);
+    T.pause(130);
+    T.lbl('luft', 104, gy - 14, null, 0.5);
+    T.lbl('glas', 330, gy + 28, null, 0.5);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in brytningsindexen och']],
+      [['infallsvinkeln. Brytnings-']],
+      [['vinkeln ', 0], ['b', 1], [' är det jag söker.', 0]]
+    ], 300));
+    arc(80, -Math.PI / 2, -Math.PI / 2 - vi);
+    T.lbl('i=50°', 128, 96, BLUE);
+    T.pause(150);
+    arc(48, Math.PI / 2, Math.PI / 2 - vb);
+    T.lbl('b', 262, 276, BLUE);
+    T.pause(150);
+    T.lbl('n_1=1,00', 96, 158, BLUE);
+    T.lbl('n_2=1,50', 330, 250, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Brytningslagen kopplar ihop']],
+      [['vinklarna med de två']],
+      [['brytningsindexen.']]
+    ]));
+    T.str('Brytningslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('n_1·sin i=n_2·sin b', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag löser ut brytningsvinkeln:']],
+      [['först ', 0], ['sin b', 1], [', sedan vinkeln själv', 0]],
+      [['med inversa sinusfunktionen.']]
+    ]));
+    var xb = T.fracH('n_1·sin i', 'n_2', T.str('sin b=', padL, y), y);
+    xb = T.str('⟺b=sin^−^1', xb + 0.12 * F, y);
+    T.parenFrac('n_1·sin i', 'n_2', null, xb, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Brytningsindex för luft är i']],
+      [['praktiken 1,00.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'n_1=1,00 (luft)', 'i=50°', 'n_2=1,50 (glas)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.parenFrac('1,00·sin 50°', '1,50', null,
+                           T.str('b=sin^−^1', padL, y), y) + 0.15 * F;
+    xIns = T.str('=30,710...°', xIns, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag. Vinkeln']],
+      [['50° har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈31°';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ljuset går in i ett tätare']],
+      [['medium och bryts MOT normalen,']],
+      [['så brytningsvinkeln ska vara']],
+      [['mindre än 50°. Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 31°', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: fotoelektrisk effekt (fy2-4.5 Ex 1) ---------
+   * a) fotonens energi i elektronvolt, b) elektronens hastighet. */
+  function layoutFotoelektron(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var my = 200;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar metallytan, laserstrålen']],
+      [['som träffar den och elektronen']],
+      [['som slås ut.']]
+    ], 300));
+    T.line([120, my], [400, my]);
+    T.hatch([120, my], [400, my], 12, null, -9);
+    T.pause(150);
+    (function () {                                  /* ljusvågen in */
+      var pts = [];
+      for (var i = 0; i <= 60; i++) {
+        var u = i / 60;
+        pts.push([140 + u * 116, my - 130 + u * 118 +
+                  9 * Math.sin(u * 9 * Math.PI)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.arrowHead(256, my - 12, 244, my - 24, 10);
+    })();
+    T.pause(150);
+    T.circle(300, my - 60, 12);                     /* elektronen */
+    T.line([294, my - 60], [306, my - 60]);
+    T.arrow([310, my - 70], [356, my - 108], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in laserns våglängd och']],
+      [['metallens utträdesenergi.']]
+    ], 300));
+    T.lbl('λ=633 nm', 122, my - 128, BLUE);
+    T.pause(150);
+    T.lbl('W_u=1,82 eV', 130, my + 34, BLUE);
+    T.pause(150);
+    T.lbl('v', 362, my - 112, BLUE);
+    T.stepEnd();
+
+    /* ---- a) fotonens energi ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(my + 34), bw, [
+      [['En fotons energi bestäms helt']],
+      [['av ljusets våglängd.']]
+    ]));
+    T.str('a) Fotonens energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('h·c', 'λ', T.str('E=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Plancks konstant och ljus-']],
+      [['hastigheten står i tabellen.']],
+      [['Nanometer görs om till meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'h≈6,626·10^−^3^4 Js', 'c=2,998·10^8 m/s',
+      'λ=633 nm=633·10^−^9 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('6,626·10^−^3^4·2,998·10^8', '633·10^−^9',
+            T.str('E=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=3,138...·10^−^1^9 J', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Svaret ska vara i elektronvolt.']],
+      [['En elektronvolt är just']],
+      [['1,602·10^−^1^9 J, så jag delar']],
+      [['med det talet.']]
+    ]));
+    T.fracH('3,138...·10^−^1^9', '1,602·10^−^1^9',
+            T.str('E=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=1,958... eV≈1,96 eV', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett par elektronvolt — precis']],
+      [['den storleksordning som synligt']],
+      [['ljus har. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1,96 eV', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) elektronens hastighet ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fotonens energi går dels åt']],
+      [['att slita loss elektronen,']],
+      [['dels till dess rörelse.']]
+    ]));
+    T.str('b) Fotoelektrisk effekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('h·f=W_u+E_k⟺E_k=h·f-W_u', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Fotonens energi tar jag']],
+      [['oavrundad från a).']]
+    ]));
+    klam = valueBracket(acts, [
+      'h·f=1,958... eV (från a)', 'W_u=1,82 eV'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('E_k=1,958...-1,82=0,138... eV', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu hastigheten. Jag löser ut ', 0], ['v', 1]],
+      [['ur formeln för rörelseenergi.']]
+    ]));
+    T.str('Rörelseenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var xv = T.fracH('m·v^2', '2', T.str('E_k=', padL, y), y);
+    xv = T.str('⟺v=', xv + 0.12 * F, y);
+    rotFrac(T, F, '2·E_k', 'm', xv, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Rörelseenergin måste vara i']],
+      [['JOULE i formeln, så jag']],
+      [['multiplicerar med']],
+      [['1,602·10^−^1^9 igen.']]
+    ]));
+    klam = valueBracket(acts, [
+      'E_k=0,138... eV=2,225...·10^−^2^0 J',
+      'm≈9,11·10^−^3^1 kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    rotFrac(T, F, '2·2,225...·10^−^2^0', '9,11·10^−^3^1',
+            T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.8 * F;
+    T.str('=221 039,772... m/s', padL + 24, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.6 * F), bw, [
+      [['Först nu avrundar jag, och']],
+      [['skriver om i megameter per']],
+      [['sekund.']]
+    ]));
+    y += adv + 1.8 * F;
+    T.str('≈2,21·10^5 m/s=0,221 Mm/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['0,2 Mm/s är under en tusendel']],
+      [['av ljushastigheten, så vi']],
+      [['slipper relativitetsteorin.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,221 Mm/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: foton absorberas av kväveatom (fy2-4.5 Ex 2)
+   * Rörelsemängden bevaras: fotonens h/λ blir atomens m·v. */
+  function layoutFotonatom(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ay = 176;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar före och efter: fotonen']],
+      [['kommer in mot atomen i vila,']],
+      [['och efteråt rör sig atomen.']]
+    ], 300));
+    T.str('före', 120, ay - 76, null, 0.62);
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 44; i++) {
+        var u = i / 44;
+        pts.push([124 + u * 108, ay + 9 * Math.sin(u * 8 * Math.PI)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.arrowHead(232, ay, 218, ay, 10);
+    })();
+    T.circle(268, ay, 18);
+    T.pause(150);
+    T.str('efter', 330, ay - 76, null, 0.62);
+    T.circle(374, ay, 18);
+    T.arrow([394, ay], [440, ay], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in fotonens våglängd']],
+      [['och atomens massa. Farten ', 0], ['v', 1]],
+      [['är det jag söker.']]
+    ], 300));
+    T.lbl('λ=450 nm', 124, ay - 34, BLUE);
+    T.pause(150);
+    T.lbl('m=14,003074 u', 250, ay + 46, BLUE);
+    T.pause(150);
+    T.lbl('v', 446, ay - 8, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(ay + 46), bw, [
+      [['Rörelsemängden bevaras: det']],
+      [['fotonen har före stöten har']],
+      [['atomen efter.']]
+    ]));
+    T.str('Rörelsemängden bevaras', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xp = T.fracH('h', 'λ', T.str('p_f_ö_r_e=p_e_f_t_e_r⟺', padL, y), y);
+    T.str('=m·v', xp + 0.06 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut farten genom att']],
+      [['dividera båda led med massan.']]
+    ]));
+    T.fracH('h', 'λ·m', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Massan är given i']],
+      [['atommassenheter. En u är']],
+      [['1,66·10^−^2^7 kg.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'h≈6,626·10^−^3^4 Js',
+      'λ=450 nm=450·10^−^9 m',
+      'm=14,003074 u=2,324...·10^−^2^6 kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('6,626·10^−^3^4', '450·10^−^9·2,324...·10^−^2^6',
+            T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=0,06334... m/s', padL + 24, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag, och']],
+      [['skriver om i centimeter per']],
+      [['sekund.']]
+    ]));
+    y += adv + 1.4 * F;
+    T.str('≈0,0633 m/s=6,33 cm/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En knapp decimeter i sekunden']],
+      [['— sakta, men ändå mätbart. En']],
+      [['enda foton kan alltså putta']],
+      [['iväg en hel atom!']]
+    ]));
+    T.underline(T.str('Svar: 6,33 cm/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: de Broglie-våglängd (fy2-4.6 Ex 1) ---------- */
+  function layoutDebroglie(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var py = 176;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två plattorna som']],
+      [['elektronen accelereras mellan.']]
+    ], 300));
+    T.line([170, py - 74], [170, py + 74]);
+    T.line([360, py - 74], [360, py + 74]);
+    T.str('+', 148, py + 6, null, 0.62);
+    T.str('-', 372, py + 6, null, 0.62);
+    T.pause(150);
+    T.circle(196, py, 11);
+    T.line([190, py], [202, py]);
+    T.arrow([212, py], [286, py], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningen.']],
+      [['Elektronen startar från vila.']],
+      [['de Broglie-våglängden söker jag.']]
+    ], 300));
+    T.lbl('U=200 V', 218, py - 34, BLUE);
+    T.pause(150);
+    T.lbl('v', 292, py - 8, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(py + 84), bw, [
+      [['Varje partikel har en våglängd']],
+      [['som beror på dess rörelsemängd.']]
+    ]));
+    T.str('de Broglie-våglängden', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('h', 'm·v', T.str('λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Hastigheten är inte given. Den']],
+      [['räknar jag ut ur att den']],
+      [['elektriska energin blir']],
+      [['rörelseenergi.']]
+    ]));
+    T.str('Elektrisk energi blir rörelseenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var xv = T.fracH('m·v^2', '2', T.str('Q·U=', padL, y), y);
+    xv = T.str('⟺v=', xv + 0.12 * F, y);
+    rotFrac(T, F, '2·Q·U', 'm', xv, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Elementarladdningen, Plancks']],
+      [['konstant och elektronens massa']],
+      [['står alla i tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'h≈6,626·10^−^3^4 Js',
+      'm≈9,11·10^−^3^1 kg',
+      ['v=√', { frac: ['2·1,602·10^−^1^9·200', '9,11·10^−^3^1'] },
+       '=8,386...·10^6 m/s']
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('6,626·10^−^3^4', '9,11·10^−^3^1·8,386...·10^6',
+            T.str('λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=8,672...·10^−^1^1 m', padL + 24, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag, och']],
+      [['skriver om i pikometer.']]
+    ]));
+    y += adv + 1.4 * F;
+    T.str('≈8,7·10^−^1^1 m=87 pm', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['87 pm är mindre än en atom.']],
+      [['Just därför kan elektroner']],
+      [['användas för att se atomer i']],
+      [['ett elektronmikroskop!']]
+    ]));
+    T.underline(T.str('Svar: 87 pm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tennisbollens vågegenskaper (fy2-4.6 Ex 2) -- */
+  function layoutTennisboll(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 168;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar tennisbollen på väg iväg']],
+      [['efter slaget.']]
+    ], 288));
+    T.circle(220, by, 34);
+    (function () {                                 /* sömmen */
+      var pts = [];
+      for (var i = 0; i <= 16; i++) {
+        var u = i / 16;
+        pts.push([220 - 34 + u * 68, by - 22 * Math.sin(Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    T.arrow([262, by], [352, by], BLUE);
+    T.pause(150);
+    T.dblArrow([186, by + 54], [254, by + 54], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in diametern, massan']],
+      [['och farten.']]
+    ], 288));
+    T.lbl('d=6,7 cm', 166, by + 82, BLUE);
+    T.pause(150);
+    T.lbl('m=58 g', 196, by - 54, BLUE);
+    T.pause(150);
+    T.lbl('v=108 km/h', 268, by - 12, BLUE);
+    T.stepEnd();
+
+    var y = 380;
+    T.tanke(T.bubble(120, T.bubbleTop(by + 82), bw, [
+      [['Vågegenskaper märks bara om']],
+      [['våglängden är minst lika stor']],
+      [['som föremålet självt.']]
+    ]));
+    T.str('de Broglie-våglängden', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('h', 'm·v', T.str('λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Gram blir kilogram, och']],
+      [['kilometer i timmen blir meter']],
+      [['per sekund genom division med']],
+      [['3,6.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'h≈6,626·10^−^3^4 Js',
+      'm=58 g=0,058 kg',
+      ['v=108 km/h=', { frac: ['108', '3,6'] }, ' m/s=30 m/s']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=3,808...·10^−^3^4 m',
+          T.fracH('6,626·10^−^3^4', '0,058·30', T.str('λ=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu jämför jag med bollens egen']],
+      [['storlek — det är hela frågan.']]
+    ]));
+    T.str('Jämförelse', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('λ=3,8·10^−^3^4 m', padL + 20, y);
+    T.stepEnd();
+    y += 1.9 * F;
+    T.str('d=6,7 cm=6,7·10^−^2 m', padL + 20, y);
+    T.stepEnd();
+    y += 1.9 * F;
+    T.str('λ är 10^3^2 gånger mindre än bollen', padL + 20, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Trettiotvå tiopotenser är ett']],
+      [['ofattbart avstånd. Vågnaturen']],
+      [['finns där, men den går aldrig']],
+      [['att mäta på en tennisboll.']]
+    ]));
+    T.underline(T.str('Svar: nej, inga vågegenskaper', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kvantsprång i väte (fy2-4.8 Ex 1) -----------
+   * a) vilket hopp som ger kortast våglängd, b) de tre möjliga
+   * våglängderna. Energinivådiagrammet ritas av först — det är ur det
+   * alla energier läses. */
+  function layoutKvantsprang(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var nx = 170, nB = 380, y1 = 330, y2 = 210, y3 = 160;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av energinivådiagrammet']],
+      [['med de tre understa nivåerna i']],
+      [['väteatomen.']]
+    ], 372));
+    T.line([nx, y1], [nB, y1]);
+    T.line([nx, y2], [nB, y2]);
+    T.line([nx, y3], [nB, y3]);
+    T.str('n=1', nB + 12, y1 + 6, null, 0.55);
+    T.str('n=2', nB + 12, y2 + 6, null, 0.55);
+    T.str('n=3', nB + 12, y3 + 6, null, 0.55);
+    T.pause(150);
+    T.lbl('−13,6 eV', nx - 106, y1 + 6, BLUE);
+    T.lbl('−3,40 eV', nx - 106, y2 + 6, BLUE);
+    T.lbl('−1,51 eV', nx - 106, y3 + 6, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Elektronen sitter på nivå 3 och']],
+      [['ska ned. Två vägar finns: rakt']],
+      [['ned till nivå 1, eller via']],
+      [['nivå 2.']]
+    ], 372));
+    T.arrow([212, y3 + 6], [212, y1 - 6], BLUE);
+    T.arrow([288, y3 + 6], [288, y2 - 6], BLUE);
+    T.arrow([344, y2 + 6], [344, y1 - 6], BLUE);
+    T.lbl('3→1', 176, (y1 + y3) / 2, BLUE, 0.5);
+    T.lbl('3→2', 296, (y2 + y3) / 2 + 4, BLUE, 0.5);
+    T.lbl('2→1', 352, (y1 + y2) / 2, BLUE, 0.5);
+    T.stepEnd();
+
+    /* ---- a) kortast våglängd ---- */
+    var y = 492;
+    T.tanke(T.bubble(120, T.bubbleTop(372 + 114), bw, [
+      [['Störst energihopp ger fotonen']],
+      [['mest energi — och mest energi']],
+      [['betyder kortast våglängd.']]
+    ]));
+    T.str('a) Störst energihopp ger kortast våglängd',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('3→1: 12,09 eV är det största hoppet', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('stor fotonenergi ger kort våglängd',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: linjen från nivå 3 till nivå 1', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) de tre våglängderna ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu våglängderna. Samma formel']],
+      [['tre gånger — bara energin']],
+      [['ändras.']]
+    ]));
+    T.str('b) Fotonens energi ger våglängden', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xf = T.fracH('h·c', 'λ', T.str('E=', padL, y), y);
+    xf = T.str('⟺λ=', xf + 0.12 * F, y);
+    T.fracH('h·c', 'E', xf, y);
+    T.stepEnd();
+
+    var hopp = [
+      ['3→1', 'E_3-E_1=(−1,51)-(−13,6)=12,09 eV', '1,936...·10^−^1^8',
+       '1,0256...·10^−^7', '≈103 nm'],
+      ['3→2', 'E_3-E_2=(−1,51)-(−3,40)=1,89 eV', '3,027...·10^−^1^9',
+       '6,5608...·10^−^7', '≈656 nm'],
+      ['2→1', 'E_2-E_1=(−3,40)-(−13,6)=10,2 eV', '1,634...·10^−^1^8',
+       '1,215...·10^−^7', '≈122 nm']
+    ];
+    hopp.forEach(function (h, i) {
+      y += adv + (i === 0 ? 1.9 : 2.2) * F;
+      if (i === 0) {
+        T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+          [['Energin är skillnaden mellan']],
+          [['nivåerna, och den görs om från']],
+          [['elektronvolt till joule.']]
+        ]));
+      }
+      var klam = valueBracket(acts, [
+        'Hopp ' + h[0], h[1], 'E=' + h[2] + ' J'
+      ], padL, y, T.s, F, { rs: 0.72 });
+      y = klam.yEnd;
+      T.stepEnd();
+
+      y += adv + 1.7 * F;
+      T.fracH('6,626·10^−^3^4·2,998·10^8', h[2],
+              T.str('λ=', padL, y), y);
+      T.stepEnd();
+
+      y += adv + 1.7 * F;
+      T.str('=' + h[3] + ' m' + h[4], padL + 24, y);
+      T.stepEnd();
+    });
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['656 nm är rött och syns —']],
+      [['det är vätets välkända röda']],
+      [['linje. De två andra är']],
+      [['ultraviolett och osynliga.']]
+    ]));
+    T.underline(T.str('Svar: 103 nm, 656 nm och 122 nm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: avstånd ur parallax (fy2-5.2 Ex 1) ----------
+   * a) med trigonometri, b) med parallaxformeln. Att de två vägarna ger
+   * samma svar är hela poängen (se REGEL om alternativa lösningar). */
+  function layoutParallax(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var solx = 130, soly = 220, jx = 130, jy = 130, stx = 400;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar solen, jorden ett halvår']],
+      [['isär och stjärnan. Triangeln är']],
+      [['rätvinklig vid solen.']]
+    ], 320));
+    T.circle(solx, soly, 16);
+    T.str('sol', solx - 62, soly + 6, null, 0.55);
+    T.pause(150);
+    T.circle(jx, jy, 8);
+    T.str('jorden', jx - 96, jy + 6, null, 0.55);
+    T.pause(150);
+    T.dot(stx, soly);
+    T.str('stjärna', stx + 12, soly + 6, null, 0.55);
+    T.pause(150);
+    T.line([solx, soly - 16], [jx, jy + 8]);       /* 1 AU */
+    T.line([solx + 16, soly], [stx - 8, soly]);    /* r */
+    T.line([jx + 8, jy + 4], [stx - 6, soly - 6]); /* siktlinjen */
+    T.pause(150);
+    T.line([stx - 34, soly - 12], [stx - 34, soly]);   /* rät vinkel */
+    T.line([solx + 16, soly - 14], [solx + 30, soly - 14]);
+    T.line([solx + 30, soly - 14], [solx + 30, soly]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in parallaxvinkeln och']],
+      [['avståndet jorden–solen.']],
+      [['Avståndet ', 0], ['r', 1], [' är det jag söker.', 0]]
+    ], 320));
+    T.lbl('1 AU', solx + 8, (soly + jy) / 2, BLUE);
+    T.pause(150);
+    T.lbl('r', (solx + stx) / 2, soly + 26, BLUE);
+    T.pause(150);
+    (function () {                                 /* vinkeln vid stjarnan */
+      var pts = [], n = 12;
+      var a1 = Math.atan2(jy + 4 - soly, jx + 8 - stx);
+      for (var i = 0; i <= n; i++) {
+        var a = Math.PI + (i / n) * (a1 + Math.PI);
+        pts.push([stx + 46 * Math.cos(a), soly + 46 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl("p=0,40''", stx - 106, soly - 44, BLUE);
+    T.stepEnd();
+
+    /* ---- a) med trigonometri ---- */
+    var y = 424;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 90), bw, [
+      [['I den rätvinkliga triangeln är']],
+      [['1 AU motstående katet till ', 0], ['p', 1]],
+      [['och avståndet ', 0], ['r', 1], [' närliggande.', 0]]
+    ]));
+    T.str('a) Med trigonometri', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('1 AU', 'r', T.str('tan p=', padL, y), y);
+    xa = T.str('⟺r=', xa + 0.12 * F, y);
+    T.fracH('1 AU', 'tan p', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['En bågsekund är en 3 600-del av']],
+      [['en grad. Räknaren vill ha']],
+      [['grader.']]
+    ]));
+    var klam = valueBracket(acts, [
+      '1 AU=1,50·10^1^1 m',
+      ["p=0,40''=", { frac: ['0,40', '3 600'] }, ' °=1,111...·10^−^4 °']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('≈7,7·10^1^6 m',
+          T.fracH('1,50·10^1^1', 'tan(1,111...·10^−^4 °)',
+                  T.str('r=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Meter säger ingenting om']],
+      [['stjärnavstånd. Jag räknar om']],
+      [['till ljusår: ett ljusår är']],
+      [['9,5·10^1^5 m.']]
+    ]));
+    T.str('≈8,2 ljusår',
+          T.fracH('7,7·10^1^6', '9,5·10^1^5', T.str('r≈', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.underline(T.str('Svar: cirka 8,2 ljusår', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) med parallaxformeln ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Parsec är just definierad så']],
+      [['att formeln blir så här enkel:']],
+      [['ett delat med vinkeln i']],
+      [['bågsekunder.']]
+    ]));
+    T.str('b) Med parallaxformeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xb = T.fracH('1', 'p', T.str('r=', padL, y), y);
+    xb = T.str('=', xb + 0.06 * F, y);
+    T.str('=2,5 pc', T.fracH('1', '0,40', xb, y) + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['En parsec är 3,26 ljusår.']]
+    ]));
+    T.str('r=2,5·3,26≈8,2 ljusår', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Båda vägarna ger 8,2 ljusår —']],
+      [['som det ska vara. Parallax-']],
+      [['formeln är bara trigonometrin']],
+      [['i förklädnad.']]
+    ]));
+    T.underline(T.str('Svar: 2,5 pc ≈ 8,2 ljusår', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: solens Schwarzschildradie (fy2-5.5 Ex 1) ---- */
+  function layoutSchwarzschild(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var cx = 230, cy = 168;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar solen som den är i dag,']],
+      [['och det svarta hål den skulle']],
+      [['bli med samma massa.']]
+    ], 300));
+    T.circle(cx, cy, 76);
+    for (var i = 0; i < 10; i++) {
+      var a = (i / 10) * Math.PI * 2;
+      T.line([cx + 84 * Math.cos(a), cy + 84 * Math.sin(a)],
+             [cx + 100 * Math.cos(a), cy + 100 * Math.sin(a)]);
+    }
+    T.pause(150);
+    T.circle(cx, cy, 5);
+    T.dot(cx, cy);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in solens massa.']],
+      [['Schwarzschildradien ', 0], ['r_s', 1], [' är', 0]],
+      [['det jag söker.']]
+    ], 300));
+    T.lbl('M=1,99·10^3^0 kg', 268, cy + 112, BLUE);
+    T.pause(150);
+    T.arrow([390, cy + 30], [cx + 14, cy + 6], BLUE);
+    T.lbl('r_s', 396, cy + 42, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(cy + 106), bw, [
+      [['Schwarzschildradien är den']],
+      [['radie inom vilken inte ens']],
+      [['ljuset kommer loss.']]
+    ]));
+    T.str('Schwarzschildradien', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('2·G·M', 'c^2', T.str('r_s=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Gravitationskonstanten och']],
+      [['ljushastigheten står i']],
+      [['tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'G=6,67·10^−^1^1 N·m^2/kg^2',
+      'M=1,99·10^3^0 kg',
+      'c=3,00·10^8 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('≈2,9·10^3 m',
+          T.fracH('2·6,67·10^−^1^1·1,99·10^3^0', '(3,00·10^8)^2',
+                  T.str('r_s=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tre kilometer! Hela solen —']],
+      [['1,99·10^3^0 kg — skulle rymmas']],
+      [['innanför en händelsehorisont']],
+      [['stor som en småstad.']]
+    ]));
+    T.underline(T.str('Svar: cirka 3,0 km', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 1–2 ================
+   * Storheter och enheter samt rörelse. Husreglerna är desamma som i
+   * Fysik 2-scenerna: figur i grafit med givna värden i blått, sedan
+   * rubrik + formel, mätvärdesklammer, insättning, avrundning,
+   * rimlighetsbedömning och svarsrad. Verktygen kommer från physTools(). */
+
+  /* ---------------- gemensam graf-hjälpare för rörelsekapitlet ---------
+   * Ritar ett koordinatsystem i papperets anda: axlar med pilspets,
+   * skalstreck med tal och axeletiketter. Returnerar en P(x, y)-funktion
+   * som räknar om diagramkoordinater till papperskoordinater.
+   * cfg = { ox, oy, kx, ky, xMax, yMax, yMin, xTicks, yTicks, xLbl, yLbl } */
+  function diagram(T, cfg) {
+    var ox = cfg.ox, oy = cfg.oy, kx = cfg.kx, ky = cfg.ky;
+    var yMin = cfg.yMin || 0;
+    function P(x, y) { return [ox + x * kx, oy - y * ky]; }
+    T.arrow([ox - 10, oy], [ox + cfg.xMax * kx + 18, oy]);
+    T.arrow([ox, oy - yMin * ky + 12], [ox, oy - cfg.yMax * ky - 18]);
+    /* axelnamnen läggs BORTOM pilspetsen respektive ovanför den, så att de
+       aldrig krockar med skalstrecken (se diagramkonventionerna) */
+    if (cfg.xLbl) {
+      T.str(cfg.xLbl, ox + cfg.xMax * kx + 24, oy + 30, null, 0.55);
+    }
+    if (cfg.yLbl) T.str(cfg.yLbl, ox + 12, oy - cfg.yMax * ky - 26, null, 0.55);
+    T.pause(140);
+    /* skalstreckens tal: x-talen CENTRERADE under sitt streck, y-talen
+       högerställda innanför axeln — annars skriver de över axellinjen */
+    (cfg.xTicks || []).forEach(function (t) {
+      var txt = String(t).replace('.', ',');
+      T.line([ox + t * kx, oy - 4], [ox + t * kx, oy + 4]);
+      T.str(txt, ox + t * kx - T.adv(txt, 0.55) / 2, oy + 28, null, 0.55);
+    });
+    (cfg.yTicks || []).forEach(function (v) {
+      var txt = String(v).replace('.', ',');
+      T.line([ox - 4, oy - v * ky], [ox + 4, oy - v * ky]);
+      T.str(txt, ox - 12 - T.adv(txt, 0.55), oy - v * ky + 6, null, 0.55);
+    });
+    return P;
+  }
+
+  /* ---------------- scen: SI-enhet för hastighet och volym (fy1-1.2 Ex 1)
+   * Ingen räkning — poängen är att en enhet HÄRLEDS ur definitionen av
+   * storheten. Därför skrivs definitionen först, och enheten faller ut. */
+  function layoutSienhet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 96;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['En enhet kommer alltid ur']],
+      [['storhetens DEFINITION. Hastighet']],
+      [['är sträcka per tid, så enheten']],
+      [['blir längdenhet per tidsenhet.']]
+    ]));
+    T.str('a) Hastighet=sträcka per tid', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('sträcka', 'tid', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['SI-enheten för sträcka är meter']],
+      [['och för tid sekund. Jag byter ut']],
+      [['orden mot enheterna.']]
+    ]));
+    var xa = T.fracH('meter', 'sekund', T.str('[v]=', padL, y), y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    xa = T.fracH('m', 's', xa, y);
+    T.str('=m/s', xa + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.underline(T.str('Svar: m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) volym ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Volym är sträcka i tre']],
+      [['riktningar: längd gånger bredd']],
+      [['gånger höjd.']]
+    ]));
+    T.str('b) Volym=sträcka i tre riktningar', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('V=sträcka·sträcka·sträcka', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tre meter multiplicerade med']],
+      [['varandra blir kubikmeter.']]
+    ]));
+    T.str('[V]=m·m·m=m^3', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En kubikmeter är en kub med']],
+      [['sidan en meter — ungefär en']],
+      [['stor flyttkartong. Rimlig']],
+      [['storlek på grundenheten!']]
+    ]));
+    T.underline(T.str('Svar: m^3', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Svetlanas medelfart (fy1-1.2 Ex 2) ----------
+   * Enkel insättning — hela poängen är avrundningen till rätt antal
+   * värdesiffror. */
+  function layoutMedelfart(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 168;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar löparbanan med start och']],
+      [['mål.']]
+    ], 268));
+    T.line([120, by], [400, by]);
+    T.line([120, by - 26], [120, by + 12]);
+    T.line([400, by - 26], [400, by + 12]);
+    T.str('start', 106, by + 34, null, 0.55);
+    T.str('mål', 388, by + 34, null, 0.55);
+    T.pause(150);
+    T.circle(180, by - 22, 10);
+    T.line([180, by - 12], [180, by + 6]);
+    T.line([180, by - 6], [168, by + 2]);
+    T.line([180, by - 6], [194, by - 2]);
+    T.line([180, by + 6], [170, by + 22]);
+    T.line([180, by + 6], [192, by + 22]);
+    T.arrow([206, by - 14], [258, by - 14], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in sträckan och tiden.']],
+      [['Medelfarten ', 0], ['v_m', 1], [' är det jag söker.', 0]]
+    ], 268));
+    T.dblArrow([120, by + 62], [400, by + 62], BLUE);
+    T.lbl('s=56 m', 200, by + 90, BLUE);
+    T.pause(150);
+    T.lbl('t=7,12 s', 266, by - 12, BLUE);
+    T.stepEnd();
+
+    var y = 372;
+    T.tanke(T.bubble(120, T.bubbleTop(268 + 66), bw, [
+      [['Medelfarten är hela sträckan']],
+      [['delad med hela tiden.']]
+    ]));
+    T.str('Medelfart', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('s', 't', T.str('v_m=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Båda värdena står redan i']],
+      [['SI-enheter.']]
+    ]));
+    var klam = valueBracket(acts, ['s=56 m', 't=7,12 s'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=7,865... m/s',
+                     T.fracH('56', '7,12', T.str('v_m=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. 56 har']],
+      [['TVÅ värdesiffror och 7,12 har']],
+      [['tre. Det minsta antalet styr:']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈7,9 m/s';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Knappt 8 m/s är ungefär']],
+      [['28 km/h — full fart för en']],
+      [['människa. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 7,9 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: grundpotensform och prefix (fy1-1.2 Ex 3) ---
+   * 0,000 002 4 m skrivs om. Nollorna räknas i talet självt, så pennan
+   * skriver ut talet och räknar dem med blåpennan. */
+  function layoutPrefixmeter(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 96;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['I grundpotensform står först ett']],
+      [['tal mellan 1 och 10, sedan en']],
+      [['tiopotens. Här blir första']],
+      [['faktorn 2,4.']]
+    ]));
+    T.str('a) Grundpotensform', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    var xa = T.str('0,000 002 4 m', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Nu räknar jag nollorna före']],
+      [['tvåan: sex stycken. Exponenten']],
+      [['blir minus sex, eftersom talet']],
+      [['är MINDRE än ett.']]
+    ]));
+    /* markera nollorna med blåpennan */
+    T.pause(200);
+    (function () {
+      var x0 = padL + T.adv('0,');
+      for (var i = 0; i < 6; i++) {
+        var w = T.adv('0');
+        T.line([x0 + 2, y + 0.30 * F], [x0 + w - 2, y + 0.30 * F], BLUE);
+        x0 += w;
+        if (i === 2 || i === 5) x0 += T.adv(' ');
+      }
+    })();
+    T.lbl('6 nollor', xa + 16, y, BLUE);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu skriver jag om talet.']]
+    ]));
+    T.str('0,000 002 4 m=2,4·10^−^6 m', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 2,4·10^−^6 m', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) prefix ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett prefix är bara ett annat sätt']],
+      [['att skriva tiopotensen. Jag']],
+      [['slår upp 10 upphöjt till minus']],
+      [['sex i prefixtabellen.']]
+    ]));
+    T.str('b) Byt tiopotens mot prefix', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('10^−^6 = µ (mikro)', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.str('2,4·10^−^6 m=2,4 µm', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett par mikrometer — ungefär en']],
+      [['bakteries storlek. Så små tal']],
+      [['är just vad prefixen är till']],
+      [['för.']]
+    ]));
+    T.underline(T.str('Svar: 2,4 µm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: km/h och m/s (fy1-2.1 Ex 1) -----------------
+   * Omvandlingen åt båda hållen. Faktorn 3,6 härleds i bubblan, så att
+   * eleven vet VARFÖR man delar respektive multiplicerar. */
+  function layoutKmhms(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 156;
+    T.tanke(T.bubble(96, 62, bw, [
+      [['En kilometer är 1 000 meter och']],
+      [['en timme är 3 600 sekunder.']],
+      [['1 km/h är alltså 1 000 delat']],
+      [['med 3 600 m/s — det vill säga']]
+    ]));
+    T.str('Varifrån kommer 3,6?', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xh = T.fracH('1 000 m', '3 600 s', T.str('1 km/h=', padL, y), y);
+    xh = T.str('=', xh + 0.10 * F, y);
+    T.fracH('1', '3,6', xh, y);
+    T.str(' m/s', T.fracW('1', '3,6') + xh + 0.10 * F, y);
+    T.stepEnd();
+
+    /* ---- a) km/h → m/s ---- */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Från km/h till m/s DIVIDERAR']],
+      [['jag med 3,6 — talet blir']],
+      [['mindre, för meter per sekund är']],
+      [['en större portion.']]
+    ]));
+    T.str('a) km/h till m/s: dividera med 3,6', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.str('=25 m/s',
+          T.fracH('90', '3,6', T.str('90 km/h=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.underline(T.str('Svar: 25 m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) m/s → km/h ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Åt andra hållet MULTIPLICERAR']],
+      [['jag i stället med 3,6.']]
+    ]));
+    T.str('b) m/s till km/h: multiplicera med 3,6', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('20 m/s=20·3,6 km/h=72 km/h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['90 km/h blev 25 m/s och 20 m/s']],
+      [['blev 72 km/h. Siffran i km/h är']],
+      [['alltid störst — det stämmer.']]
+    ]));
+    T.underline(T.str('Svar: 72 km/h', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Falköping–Skövde (fy1-2.1 Ex 2) -------------
+   * Tidsvinsten mellan 100 och 90 km/h. Två tider räknas ut och jämförs;
+   * båda farterna görs om till m/s på var sin rad i klammern. */
+  function layoutFalkoping(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 170;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar vägen mellan orterna med']],
+      [['de två bilarna.']]
+    ], 268));
+    T.line([130, vy], [410, vy]);
+    T.line([130, vy - 24], [130, vy + 24]);
+    T.line([410, vy - 24], [410, vy + 24]);
+    T.str('Falköping', 100, vy + 46, null, 0.5);
+    T.str('Skövde', 384, vy + 46, null, 0.5);
+    T.pause(150);
+    T.rect(176, vy - 40, 226, vy - 18);
+    T.circle(188, vy - 14, 7);
+    T.circle(214, vy - 14, 7);
+    T.arrow([236, vy + 2], [286, vy + 2], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in sträckan och de två']],
+      [['farterna. Tidsvinsten ', 0], ['Δt', 1], [' är', 0]],
+      [['det jag söker.']]
+    ], 268));
+    T.dblArrow([130, vy + 66], [410, vy + 66], BLUE);
+    T.lbl('s=30 km', 210, vy + 94, BLUE);
+    T.pause(150);
+    T.lbl('v_m_1=100 km/h', 236, vy - 62, BLUE);
+    T.pause(150);
+    T.lbl('v_m_2=90 km/h', 236, vy - 34, BLUE);
+    T.stepEnd();
+
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(268 + 66), bw, [
+      [['Jag löser ut tiden ur formeln']],
+      [['för medelfart, och räknar sedan']],
+      [['ut den för båda farterna.']]
+    ]));
+    T.str('Tid vid konstant fart', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xf = T.fracH('s', 't', T.str('v_m=', padL, y), y);
+    T.fracH('s', 'v_m', T.str('⟺t=', xf + 0.12 * F, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Allt måste stå i SI-enheter:']],
+      [['kilometer blir meter och km/h']],
+      [['blir m/s.']]
+    ]));
+    var klam = valueBracket(acts, [
+      's=30 km=30 000 m',
+      ['v_m_1=100 km/h=', { frac: ['100', '3,6'] }, ' m/s=27,777... m/s'],
+      ['v_m_2=90 km/h=', { frac: ['90', '3,6'] }, ' m/s=25 m/s']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först tiden med den högre']],
+      [['farten.']]
+    ]));
+    T.str('=1 080 s',
+          T.fracH('30 000', '27,777...', T.str('t_1=', padL, y), y)
+            + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Och sedan tiden med den lägre']],
+      [['farten.']]
+    ]));
+    T.str('=1 200 s',
+          T.fracH('30 000', '25', T.str('t_2=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tidsvinsten är skillnaden']],
+      [['mellan de två tiderna.']]
+    ]));
+    T.str('Δt=t_2-t_1=1 200-1 080=120 s', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=2,0 minuter', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Två minuter på tre mil — och']],
+      [['ändå tio kilometer i timmen']],
+      [['fortare. Tidsvinsten är']],
+      [['förvånansvärt liten!']]
+    ]));
+    T.underline(T.str('Svar: 2,0 minuter', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: banansnigeln (fy1-2.1 Ex 3) ----------------- */
+  function layoutBanansnigel(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sy = 176;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar snigeln på sin väg.']]
+    ], 262));
+    T.line([120, sy], [400, sy]);
+    (function () {                              /* snigelkroppen */
+      var pts = [];
+      for (var i = 0; i <= 20; i++) {
+        var u = i / 20;
+        pts.push([160 + u * 62, sy - 8 - 10 * Math.sin(Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.circle(212, sy - 20, 14);                 /* skalet */
+    T.circle(212, sy - 20, 7);
+    T.line([160, sy - 8], [150, sy - 22]);      /* känselspröt */
+    T.line([160, sy - 8], [156, sy - 26]);
+    T.arrow([238, sy - 30], [292, sy - 30], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in topphastigheten och']],
+      [['tiden. Sträckan ', 0], ['s', 1], [' är det jag', 0]],
+      [['söker.']]
+    ], 262));
+    T.lbl('v_m=0,0023 cm/s', 126, sy + 40, BLUE);
+    T.pause(150);
+    T.lbl('t=1,0 h', 302, sy + 40, BLUE);
+    T.stepEnd();
+
+    var y = 380;
+    T.tanke(T.bubble(120, T.bubbleTop(sy + 40), bw, [
+      [['Jag löser ut sträckan ur']],
+      [['formeln för medelfart.']]
+    ]));
+    T.str('Sträcka vid konstant fart', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xf = T.fracH('s', 't', T.str('v_m=', padL, y), y);
+    T.str('⟺s=v_m·t', xf + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Centimeter per sekund görs om']],
+      [['till meter per sekund, och']],
+      [['timmen till sekunder.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['v_m=0,0023 cm/s=', { frac: ['0,0023', '100'] },
+       ' m/s=0,000 023 m/s'],
+      't=1,0 h=60·60 s=3 600 s'
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('s=0,000 023·3 600=0,0828 m', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Farten']],
+      [['har två värdesiffror, så svaret']],
+      [['får två — och centimeter är ett']],
+      [['bekvämare mått här.']]
+    ]));
+    var avrS = '≈0,083 m=8,3 cm';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Åtta centimeter på en hel timme.']],
+      [['Långsammaste djuret i världen —']],
+      [['det stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 8,3 cm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Kayla i tågvagnen (fy1-2.2 Ex 1) ------------
+   * Hastigheter är VEKTORER: går man åt andra hållet får farten ett
+   * minustecken. Det är hela poängen, och den ritas i figuren. */
+  function layoutTagvagn(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    function vagn(yb) {
+      T.rect(140, yb - 46, 400, yb);
+      T.circle(186, yb + 12, 12);
+      T.circle(354, yb + 12, 12);
+      T.line([120, yb + 24], [420, yb + 24]);
+      /* streckgubbe i vagnen */
+      T.circle(270, yb - 36, 7);
+      T.line([270, yb - 29], [270, yb - 14]);
+      T.line([270, yb - 25], [260, yb - 18]);
+      T.line([270, yb - 25], [280, yb - 18]);
+      T.line([270, yb - 14], [262, yb - 4]);
+      T.line([270, yb - 14], [278, yb - 4]);
+    }
+
+    /* ---- a) samma riktning ---- */
+    T.tanke(T.figurBubble(290, [
+      [['a) Ritar vagnen och Kayla som']],
+      [['går ÅT SAMMA HÅLL som tåget.']]
+    ], 268));
+    vagn(196);
+    T.pause(150);
+    T.arrow([410, 232], [468, 232], BLUE);
+    T.lbl('v_1=10 m/s', 380, 258, BLUE);
+    T.pause(150);
+    T.arrow([286, 172], [322, 172], BLUE);
+    T.lbl('v_2=2 m/s', 250, 148, BLUE);
+    T.stepEnd();
+
+    var y = 372;
+    T.tanke(T.bubble(120, T.bubbleTop(268 + 66), bw, [
+      [['Går hon åt samma håll som']],
+      [['tåget läggs farterna ihop.']],
+      [['Båda vektorerna har samma']],
+      [['tecken.']]
+    ]));
+    T.str('a) Hastigheter i samma riktning adderas', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('v_t_o_t=v_1+v_2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Båda farterna är positiva, för']],
+      [['båda pekar framåt.']]
+    ]));
+    var klam = valueBracket(acts, ['v_1=10 m/s', 'v_2=2 m/s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.str('v_t_o_t=10+2=12 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 12 m/s i tågets riktning', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) motsatt riktning ---- */
+    var fy = y + 160;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu går hon MOT tågets']],
+      [['riktning. Då pekar hennes']],
+      [['hastighetsvektor åt andra']],
+      [['hållet.']]
+    ]));
+    vagn(fy);
+    T.pause(150);
+    T.arrow([410, fy + 36], [468, fy + 36], BLUE);
+    T.lbl('v_1=10 m/s', 380, fy + 62, BLUE);
+    T.pause(150);
+    T.arrow([286, fy - 24], [250, fy - 24], BLUE);
+    T.lbl('v_2=−2 m/s', 236, fy - 48, BLUE);
+    T.stepEnd();
+
+    y = fy + 132;
+    T.tanke(T.bubble(120, fy + 92, bw, [
+      [['Samma formel — men nu får ', 0], ['v_2', 1]],
+      [['ett MINUSTECKEN, eftersom den']],
+      [['pekar bakåt.']]
+    ]));
+    T.str('b) Motsatt riktning ger minustecken', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.str('v_t_o_t=v_1+v_2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['OBS! Minustecknet framför']],
+      [['tvåan — det är det som gör']],
+      [['hastigheten till en vektor.']]
+    ]));
+    klam = valueBracket(acts, ['v_1=10 m/s', 'v_2=−2 m/s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.str('v_t_o_t=10+(−2)=8 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Hon rör sig fortfarande framåt']],
+      [['relativt marken, bara lite']],
+      [['långsammare än vagnen.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 8 m/s i tågets riktning', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: David över forsen (fy1-2.2 Ex 2) ------------
+   * a) tiden bestäms BARA av den vinkelräta hastigheten, b) den
+   * resulterande hastigheten fås ur Pythagoras sats. */
+  function layoutOversforsen(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 150, xR = 370, yN = 96, yS = 246;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar floden med sina två']],
+      [['stränder, och David som simmar']],
+      [['rakt över.']]
+    ], 300));
+    T.line([xL - 20, yN], [xR + 20, yN]);
+    T.hatch([xR + 20, yN], [xL - 20, yN], 12);
+    T.line([xL - 20, yS], [xR + 20, yS]);
+    T.hatch([xL - 20, yS], [xR + 20, yS], 12);
+    T.pause(150);
+    for (var i = 0; i < 3; i++) {              /* strömmen */
+      var yy = 130 + i * 40;
+      T.line([xL + 10, yy], [xL + 90, yy]);
+      T.arrowHead(xL + 60, yy, xL + 34, yy, 9);
+    }
+    T.pause(150);
+    T.circle(250, yS - 16, 9);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in Davids fart, flodens']],
+      [['fart och bredden.']]
+    ], 300));
+    T.arrow([250, yS - 30], [250, yS - 96], BLUE);
+    T.lbl('v_1=1,5 m/s', 258, yS - 70, BLUE);
+    T.pause(150);
+    T.arrow([300, yS - 16], [366, yS - 16], BLUE);
+    T.lbl('v_2=4,0 m/s', 296, yS + 12, BLUE);
+    T.pause(150);
+    T.dblArrow([xR + 30, yN], [xR + 30, yS], BLUE);
+    T.lbl('s_1=45 m', xR + 40, (yN + yS) / 2, BLUE);
+    T.stepEnd();
+
+    /* ---- a) tiden ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Bara den hastighet som går']],
+      [['RAKT ÖVER floden för honom']],
+      [['närmare andra stranden.']],
+      [['Strömmen tar honom bara nedåt.']]
+    ]));
+    T.str('a) Tiden bestäms av hastigheten tvärs floden',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('s_1', 't', T.str('v_1=', padL, y), y);
+    xa = T.str('⟺t=', xa + 0.12 * F, y);
+    T.fracH('s_1', 'v_1', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Flodens fart 4,0 m/s är inte']],
+      [['med här — den påverkar inte']],
+      [['tiden alls.']]
+    ]));
+    var klam = valueBracket(acts, ['s_1=45 m', 'v_1=1,5 m/s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.str('=30 s',
+          T.fracH('45', '1,5', T.str('t=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 30 s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) resulterande hastighet ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu lägger jag ihop de två']],
+      [['hastighetsvektorerna. De är']],
+      [['vinkelräta, så de bildar en']],
+      [['rätvinklig triangel.']]
+    ]));
+    T.str('b) Vektoraddition med Pythagoras sats', padL, y, null, 0.62);
+    T.stepEnd();
+
+    /* vektortriangeln ritas som en egen liten figur */
+    var ty = y + 128;
+    T.arrow([180, ty], [180, ty - 66], BLUE);
+    T.lbl('v_1', 152, ty - 34, BLUE);
+    T.pause(150);
+    T.arrow([180, ty - 66], [356, ty - 66], BLUE);
+    T.lbl('v_2', 258, ty - 78, BLUE);
+    T.pause(150);
+    T.arrow([180, ty], [356, ty - 66], BLUE);
+    T.lbl('v', 286, ty - 14, BLUE);
+    T.line([180, ty - 52], [194, ty - 52]);      /* rät vinkel */
+    T.line([194, ty - 52], [194, ty - 66]);
+    T.stepEnd();
+
+    y = ty + 100;
+    T.tanke(T.bubble(120, ty + 48, bw, [
+      [['Hypotenusan är den']],
+      [['resulterande hastigheten.']]
+    ]));
+    var xb = T.str('v^2=v_1^2+v_2^2⟺v=', padL, y);
+    rootSign(acts, xb, y, T.adv('v_1^2+v_2^2'), F);
+    T.str('v_1^2+v_2^2', xb + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Båda farterna står redan i']],
+      [['meter per sekund.']]
+    ]));
+    klam = valueBracket(acts, ['v_1=1,5 m/s', 'v_2=4,0 m/s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xc = T.str('v=', padL, y);
+    rootSign(acts, xc, y, T.adv('1,5^2+4,0^2'), F);
+    var xd = T.str('1,5^2+4,0^2', xc + 0.56 * F, y);
+    xd = T.str('=', xd + 0.16 * F, y);
+    rootSign(acts, xd, y, T.adv('18,25'), F);
+    T.str('18,25', xd + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Båda']],
+      [['farterna har två värdesiffror,']],
+      [['så svaret får två.']]
+    ]));
+    T.str('=4,272...≈4,3 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Resultanten är längre än båda']],
+      [['delarna var för sig, men']],
+      [['kortare än deras summa 5,5.']],
+      [['Precis som det ska vara!']]
+    ]));
+    T.underline(T.str('Svar: 4,3 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: konstant hastighet ur s–t-graf (fy1-2.3 Ex 1)
+   * Hastigheten är grafens LUTNING. Trappsteget ritas in i diagrammet så
+   * att avläsningen syns. */
+  function layoutKonstanthast(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var P;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen: en rät linje,']],
+      [['alltså konstant hastighet.']]
+    ], 320));
+    P = diagram(T, { ox: 150, oy: 268, kx: 380, ky: 220, xMax: 0.62,
+                     yMax: 0.86, xTicks: [0.15, 0.5], yTicks: [0.22, 0.72],
+                     xLbl: 't (s)', yLbl: 's (m)' });
+    T.pause(150);
+    T.line(P(0.02, 0.13), P(0.6, 0.955));
+    T.dot(P(0.15, 0.22)[0], P(0.15, 0.22)[1]);
+    T.dot(P(0.5, 0.72)[0], P(0.5, 0.72)[1]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar in trappsteget mellan de']],
+      [['två markerade punkterna — det']],
+      [['är ändringen i sträcka och tid.']]
+    ], 344));
+    T.dash(P(0.15, 0.22), P(0.5, 0.22));
+    T.dash(P(0.5, 0.22), P(0.5, 0.72));
+    T.lbl('Δt', P(0.3, 0.22)[0], P(0.3, 0.22)[1] + 26, BLUE);
+    T.lbl('Δs', P(0.5, 0.47)[0] + 12, P(0.5, 0.47)[1], BLUE);
+    T.stepEnd();
+
+    var y = 452;
+    T.tanke(T.bubble(120, T.bubbleTop(344 + 90), bw, [
+      [['Hastigheten är hur mycket']],
+      [['sträckan ändras per sekund —']],
+      [['alltså grafens lutning.']]
+    ]));
+    T.str('Hastighet=grafens lutning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('Δs', 'Δt', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag läser av de två punkternas']],
+      [['koordinater och tar skillnaden.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'Δs=(0,72-0,22) m=0,50 m',
+      'Δt=(0,50-0,15) s=0,35 s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1,428... m/s',
+                     T.fracH('0,50', '0,35', T.str('v=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Båda']],
+      [['avläsningarna har två']],
+      [['värdesiffror.']]
+    ]));
+    var avrS = '≈1,4 m/s';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En halv meter på en tredjedels']],
+      [['sekund — knappt en och en halv']],
+      [['meter i sekunden. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1,4 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Adam och Bertil cyklar (fy1-2.3 Ex 2) -------
+   * Bertils medelhastighet blir NEGATIV, eftersom han rör sig tillbaka
+   * mot origo. Minustecknet är hela poängen. */
+  function layoutAdambertil(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen. Adam går uppåt']],
+      [['(hemifrån) och Bertil nedåt']],
+      [['(hem till sig).']]
+    ], 320));
+    var P = diagram(T, { ox: 150, oy: 268, kx: 9.6, ky: 26, xMax: 27,
+                         yMax: 7, xTicks: [10, 20, 25], yTicks: [3, 6],
+                         xLbl: 't (min)', yLbl: 's (km)' });
+    T.pause(150);
+    T.line(P(0, 0), P(25, 6));                 /* Adam */
+    T.line(P(0, 6), P(25, 0));                 /* Bertil */
+    T.str('Adam', P(20, 4.2)[0], P(20, 4.2)[1], null, 0.55);
+    T.str('Bertil', P(18, 2.6)[0], P(18, 2.6)[1], null, 0.55);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Markerar Bertils två punkter:']],
+      [['han startar vid 6 km och slutar']],
+      [['vid 0 km.']]
+    ], 344));
+    T.dot(P(0, 6)[0], P(0, 6)[1]);
+    T.dot(P(25, 0)[0], P(25, 0)[1]);
+    T.lbl('(0, 6)', P(0, 6)[0] + 14, P(0, 6)[1] - 10, BLUE);
+    T.lbl('(25, 0)', P(25, 0)[0] - 30, P(25, 0)[1] - 16, BLUE);
+    T.stepEnd();
+
+    var y = 452;
+    T.tanke(T.bubble(120, T.bubbleTop(344 + 90), bw, [
+      [['Medelhastigheten är ändringen i']],
+      [['sträcka delad med ändringen i']],
+      [['tid — slutvärde minus']],
+      [['startvärde.']]
+    ]));
+    T.str('Medelhastighet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xa = T.fracH('Δs', 'Δt', T.str('v_m=', padL, y), y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('s_2-s_1', 't_2-t_1', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Minuter blir sekunder och']],
+      [['kilometer blir meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      't_1=0', 't_2=25 min=25·60 s=1 500 s',
+      's_1=6 km=6 000 m', 's_2=0'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('0-6 000', '1 500-0', T.str('v_m=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('−6 000', '1 500', xb, y);
+    T.str('=−4,0 m/s', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet betyder att Bertil']],
+      [['rör sig TILLBAKA, mot origo.']],
+      [['Farten är 4,0 m/s, men']],
+      [['hastigheten är negativ.']]
+    ]));
+    T.underline(T.str('Svar: −4,0 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Cecilias momentanhastighet (fy1-2.3 Ex 3) ---
+   * Momentanhastigheten är TANGENTENS lutning. Tangenten ritas in och
+   * två punkter på den läses av. */
+  function layoutMomentanhast(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen. Den kröker sig,']],
+      [['så hastigheten ändras hela']],
+      [['tiden.']]
+    ], 330));
+    var P = diagram(T, { ox: 150, oy: 278, kx: 24, ky: 2.6, xMax: 11,
+                         yMax: 72, xTicks: [2, 5, 8, 10],
+                         yTicks: [20, 40, 60],
+                         xLbl: 't (s)', yLbl: 's (m)' });
+    T.pause(150);
+    (function () {
+      var pts = [];
+      /* kurvan är vald så att tangenten vid t=5 s är s=5t+10 — då går
+         punkterna (2, 20) och (8, 50) att läsa av exakt */
+      for (var i = 0; i <= 40; i++) {
+        var t = (i / 40) * 10.4, d = t - 5;
+        pts.push(P(t, 18.75 + 5 * d + 0.25 * d * d));
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Slår en tangent vid ', 0], ['t', 1], ['=5,0 s —', 0]],
+      [['en linje som snuddar grafen och']],
+      [['lutar precis som den gör där.']]
+    ], 354));
+    T.line(P(1, 15), P(9.4, 57));
+    T.dot(P(2, 20)[0], P(2, 20)[1]);
+    T.dot(P(8, 50)[0], P(8, 50)[1]);
+    T.lbl('(2, 20)', P(2, 20)[0] - 20, P(2, 20)[1] + 34, BLUE);
+    T.lbl('(8, 50)', P(8, 50)[0] - 24, P(8, 50)[1] - 16, BLUE);
+    T.stepEnd();
+
+    var y = 462;
+    T.tanke(T.bubble(120, T.bubbleTop(354 + 90), bw, [
+      [['Momentanhastigheten är']],
+      [['TANGENTENS lutning, inte']],
+      [['grafens medellutning.']]
+    ]));
+    T.str('Momentanhastighet=tangentens lutning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('s_2-s_1', 't_2-t_1', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag väljer två punkter som är']],
+      [['lätta att läsa av PÅ TANGENTEN']],
+      [['— inte på grafen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      't_1=2 s', 't_2=8 s', 's_1=20 m', 's_2=50 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('50-20', '8-2', T.str('v=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('30', '6', xb, y);
+    T.str('=5 m/s', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['5 m/s är löptempo — och grafen']],
+      [['stiger just brantast där.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 5 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: sten i fritt fall (fy1-2.4 Ex 1) ------------
+   * Tecknet är hela poängen: g räknas negativt när uppåt är positiv
+   * riktning, och stenen startar från vila. */
+  function layoutFrittfall(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sx = 250;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar handen som släpper stenen']],
+      [['och stenens väg nedåt.']]
+    ], 300));
+    T.line([200, 84], [300, 84]);
+    T.hatch([200, 84], [300, 84], 6);
+    T.circle(sx, 104, 12);
+    T.pause(150);
+    T.dash([sx, 120], [sx, 244]);
+    T.circle(sx, 256, 12);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in falltiden. Stenen']],
+      [['SLÄPPS, så starthastigheten är']],
+      [['noll.']]
+    ], 300));
+    T.lbl('v_0=0', sx + 20, 104, BLUE);
+    T.pause(150);
+    T.arrow([sx - 44, 130], [sx - 44, 236], BLUE);
+    T.lbl('g', sx - 74, 186, BLUE);
+    T.pause(150);
+    T.lbl('t=2,0 s', sx + 20, 200, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Accelerationen är hastighets-']],
+      [['ändringen per sekund. Jag löser']],
+      [['ut hastighetsändringen.']]
+    ]));
+    T.str('Konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('Δv', 'Δt', T.str('a=', padL, y), y);
+    T.str('⟺Δv=a·Δt', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag räknar uppåt som positiv']],
+      [['riktning. Tyngdaccelerationen']],
+      [['pekar NEDÅT och blir därför']],
+      [['negativ.']]
+    ]));
+    var klam = valueBracket(acts, ['a=g≈−9,82 m/s^2', 'Δt=2,0 s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('Δv=(−9,82)·2,0=−19,64 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Stenen startade från vila, så']],
+      [['sluthastigheten är noll plus']],
+      [['hastighetsändringen.']]
+    ]));
+    T.str('v=v_0+Δv=0+(−19,64)=−19,64 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Tiden']],
+      [['2,0 s har två värdesiffror.']]
+    ]));
+    T.str('≈−20 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['20 m/s är 72 km/h efter bara två']],
+      [['sekunders fall. Minustecknet']],
+      [['betyder att farten är riktad']],
+      [['nedåt.']]
+    ]));
+    T.underline(T.str('Svar: −20 m/s (20 m/s nedåt)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bilen på parkeringen (fy1-2.5 Ex 1) ---------
+   * a) avläsning, b) lutning, c) AREAN under v–t-grafen. Areorna ritas in
+   * i diagrammet och namnges A, B, C och D innan de räknas ut. */
+  function layoutParkering(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var P;
+
+    function graf() {
+      P = diagram(T, { ox: 150, oy: 288, kx: 16, ky: 9.6, xMax: 24,
+                       yMax: 19, xTicks: [5, 9, 13, 17, 21],
+                       yTicks: [6, 11, 16],
+                       xLbl: 't (s)', yLbl: 'v (m/s)' });
+      T.pause(150);
+      T.line(P(0, 16), P(5, 16));
+      T.line(P(5, 16), P(13, 6));
+      T.line(P(13, 6), P(17, 6));
+      T.line(P(17, 6), P(21, 0));
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen: bilen rullar in']],
+      [['med 16 m/s, bromsar, rullar en']],
+      [['bit och stannar.']]
+    ], 356));
+    graf();
+    T.stepEnd();
+
+    /* ---- a) avläsning ---- */
+    var y = 464;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Vid ', 0], ['t', 1], ['=9 s läser jag bara av', 0]],
+      [['grafens höjd — ingen räkning']],
+      [['behövs.']]
+    ]));
+    T.str('a) Avläsning i grafen', padL, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y, 0.5), bw, [
+      [['Jag drar streckade linjer från']],
+      [['tidsaxeln upp till grafen och']],
+      [['vidare ut till hastighetsaxeln.']]
+    ]));
+    T.dash(P(9, 0), P(9, 11));
+    T.dash(P(9, 11), P(0, 11));
+    T.dot(P(9, 11)[0], P(9, 11)[1]);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.str('t=9 s ger v=11 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 11 m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) lutningen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vid ', 0], ['t', 1], ['=7 s är grafen RÄT, så', 0]],
+      [['accelerationen är konstant där.']],
+      [['Den är grafens lutning.']]
+    ]));
+    T.str('b) Acceleration=v–t-grafens lutning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v_2-v_1', 't_2-t_1', T.str('a=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag väljer två punkter på den']],
+      [['räta delen: (5, 16) och (13, 6).']]
+    ]));
+    var klam = valueBracket(acts, [
+      't_1=5 s', 't_2=13 s', 'v_1=16 m/s', 'v_2=6 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('6-16', '13-5', T.str('a=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('−10', '8', xb, y);
+    T.str('=−1,25 m/s^2', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet betyder att bilen']],
+      [['BROMSAR — hastigheten minskar.']]
+    ]));
+    T.underline(T.str('Svar: −1,25 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) arean ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Sträckan är AREAN under']],
+      [['v–t-grafen. Jag delar in ytan i']],
+      [['två rektanglar och två']],
+      [['trianglar.']]
+    ]));
+    T.str('c) Sträckan=arean under v–t-grafen', padL, y, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y, 0.5), bw, [
+      [['Jag ritar in delarna i grafen och']],
+      [['döper dem till A, B, C och D.']]
+    ]));
+    T.dash(P(5, 0), P(5, 16));
+    T.dash(P(13, 0), P(13, 6));
+    T.dash(P(17, 0), P(17, 6));
+    T.dash(P(5, 6), P(17, 6));
+    T.lbl('A', P(2.4, 7)[0], P(2.4, 7)[1], BLUE);
+    T.lbl('B', P(10, 2.4)[0], P(10, 2.4)[1], BLUE);
+    T.lbl('C', P(6.6, 9.6)[0], P(6.6, 9.6)[1], BLUE);
+    T.lbl('D', P(18, 1.6)[0], P(18, 1.6)[1], BLUE);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.str('s=A+B+C+D', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Rektangelns area är basen gånger']],
+      [['höjden, triangelns detsamma']],
+      [['delat med två.']]
+    ]));
+    klam = valueBracket(acts, [
+      'A=5·16=80 m',
+      'B=(17-5)·6=72 m',
+      ['C=', { frac: ['(13-5)·(16-6)', '2'] }, '=', { frac: ['80', '2'] },
+       '=40 m'],
+      ['D=', { frac: ['(21-17)·6', '2'] }, '=', { frac: ['24', '2'] },
+       '=12 m']
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu lägger jag ihop de fyra']],
+      [['delarna.']]
+    ]));
+    T.str('s=80+72+40+12=204 m', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Drygt 200 meter på 21 sekunder']],
+      [['ger medelfarten ungefär 10 m/s,']],
+      [['mitt emellan 16 och 0.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 204 m', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: förflyttning och sträcka (fy1-2.5 Ex 2) -----
+   * Arean UNDER tidsaxeln räknas negativ för förflyttningen men positiv
+   * för den tillryggalagda sträckan. Det är hela skillnaden mellan de
+   * två begreppen. */
+  function layoutForflyttning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen. Hastigheten går']],
+      [['från +10 m/s ned till −10 m/s —']],
+      [['föremålet vänder vid ', 0], ['t', 1], ['=5 s.', 0]]
+    ], 380));
+    var P = diagram(T, { ox: 160, oy: 250, kx: 26, ky: 8.4, xMax: 11,
+                         yMax: 12, yMin: -12,
+                         xTicks: [5, 10], yTicks: [-10, 10],
+                         xLbl: 't (s)', yLbl: 'v (m/s)' });
+    T.pause(150);
+    T.line(P(0, 10), P(10, -10));
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['De två trianglarna får varsitt']],
+      [['namn. ', 0], ['A_1', 1], [' ligger ÖVER tidsaxeln', 0]],
+      [['och ', 0], ['A_2', 1], [' UNDER den.', 0]]
+    ], 412));
+    T.lbl('A_1', P(1.8, 3.4)[0], P(1.8, 3.4)[1], BLUE);
+    T.lbl('A_2', P(7.6, -3.8)[0], P(7.6, -3.8)[1], BLUE);
+    T.stepEnd();
+
+    /* ---- a) förflyttningen ---- */
+    var y = 512;
+    T.tanke(T.bubble(120, T.bubbleTop(412 + 90), bw, [
+      [['Förflyttningen är arean MED']],
+      [['tecken: ytan under axeln räknas']],
+      [['negativ, för då rör sig']],
+      [['föremålet tillbaka.']]
+    ]));
+    T.str('a) Förflyttning=area med tecken', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('Δs=A_1+A_2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Båda trianglarna har basen 5 s']],
+      [['och höjden 10 m/s — men den']],
+      [['undre får minustecken.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['A_1=', { frac: ['5·10', '2'] }, '=25 m'],
+      ['A_2=−', { frac: ['5·10', '2'] }, '=−25 m']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.str('Δs=25+(−25)=0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Föremålet slutar precis där det']],
+      [['startade. Förflyttningen är']],
+      [['noll — men det har ju rört sig!']]
+    ]));
+    T.underline(T.str('Svar: förflyttningen är 0', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) tillryggalagd sträcka ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Den tillryggalagda sträckan']],
+      [['bryr sig inte om riktningen.']],
+      [['Då räknas båda areorna']],
+      [['positivt.']]
+    ]));
+    T.str('b) Sträcka=areornas belopp', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('s=|A_1|+|A_2|=25+25=50 m', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['25 meter bort och 25 meter']],
+      [['tillbaka: 50 meter gånget, men']],
+      [['noll meter förflyttat.']]
+    ]));
+    T.underline(T.str('Svar: 50 m', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: area under a–t-grafen (fy1-2.6 Ex 1) --------
+   * Arean under en a–t-graf är HASTIGHETSÄNDRINGEN, inte hastigheten.
+   * Utgångshastigheten måste läggas till efteråt. */
+  function layoutArearvt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen: accelerationen']],
+      [['är konstant 5 m/s² under de']],
+      [['första fyra sekunderna.']]
+    ], 356));
+    var P = diagram(T, { ox: 160, oy: 288, kx: 42, ky: 30, xMax: 6,
+                         yMax: 7, xTicks: [2, 4], yTicks: [5],
+                         xLbl: 't (s)', yLbl: 'a (m/s^2)' });
+    T.pause(150);
+    T.line(P(0, 5), P(4, 5));
+    T.line(P(4, 5), P(4, 0));
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Arean under en a–t-graf är']],
+      [['hastighetsÄNDRINGEN. Jag ritar']],
+      [['in rektangeln.']]
+    ], 356));
+    T.dash(P(0, 5), P(0, 0));
+    T.lbl('A', P(1.9, 2.4)[0], P(1.9, 2.4)[1], BLUE);
+    T.stepEnd();
+
+    var y = 464;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Rektangelns area är basen']],
+      [['(tiden) gånger höjden']],
+      [['(accelerationen).']]
+    ]));
+    T.str('Hastighetsändring=arean under a–t-grafen',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('Δv=A=4·5=20 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Det här är ÄNDRINGEN, inte']],
+      [['sluthastigheten. Kroppen hade']],
+      [['redan 8,0 m/s från början.']]
+    ]));
+    T.str('v=v_0+Δv=8,0+20=28 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fem meter per sekund snabbare']],
+      [['för varje sekund, i fyra']],
+      [['sekunder — plus de 8 den redan']],
+      [['hade. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 28 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bilen som kör om (fy1-2.7 Ex 1) -------------
+   * a) sluthastighet, b) sträcka, c) tid för inbromsning. Tecknet på
+   * accelerationen i c) är poängen: en retardation är negativ. */
+  function layoutOmkorning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 176;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar vägen med bilen som ökar']],
+      [['farten för att köra om.']]
+    ], 268));
+    T.line([120, vy + 30], [410, vy + 30]);
+    T.dash([120, vy - 34], [410, vy - 34]);
+    T.pause(150);
+    T.rect(170, vy - 8, 244, vy + 18);
+    T.line([186, vy - 8], [200, vy - 24]);
+    T.line([228, vy - 8], [216, vy - 24]);
+    T.line([200, vy - 24], [216, vy - 24]);
+    T.circle(188, vy + 18, 9);
+    T.circle(228, vy + 18, 9);
+    T.arrow([258, vy + 4], [330, vy + 4], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in starthastigheten och']],
+      [['accelerationen.']]
+    ], 268));
+    T.lbl('v_0=18 m/s', 132, vy - 48, BLUE);
+    T.pause(150);
+    T.lbl('a=2,0 m/s^2', 268, vy - 14, BLUE);
+    T.stepEnd();
+
+    /* ---- a) hastigheten ---- */
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(268 + 66), bw, [
+      [['Vid konstant acceleration växer']],
+      [['hastigheten lika mycket varje']],
+      [['sekund.']]
+    ]));
+    T.str('a) Hastighet vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('v=v_0+a·t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    var klam = valueBracket(acts, ['v_0=18 m/s', 'a=2,0 m/s^2', 't=3,0 s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('v=18+2,0·3,0=18+6=24 m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 24 m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) sträckan ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Sträckan består av två delar:']],
+      [['den bilen hade hunnit med']],
+      [['oförändrad fart, plus det']],
+      [['accelerationen lägger till.']]
+    ]));
+    T.str('b) Sträcka vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('a·t^2', '2', T.str('s=v_0·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Samma värden som i a).']]
+    ]));
+    klam = valueBracket(acts, ['v_0=18 m/s', 'a=2,0 m/s^2', 't=3,0 s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('2,0·3,0^2', '2', T.str('s=18·3,0+', padL, y), y);
+    xb = T.str('=54+', xb + 0.10 * F, y);
+    T.fracH('18', '2', xb, y);
+    T.stepEnd();
+
+    y += adv + 1.8 * F;
+    T.str('=54+9=63 m', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.underline(T.str('Svar: 63 m', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) inbromsningen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu bromsar bilen. Samma formel']],
+      [['som i a), men jag löser ut']],
+      [['tiden i stället.']]
+    ]));
+    T.str('c) Tid vid inbromsning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('v-v_0', 'a', T.str('v=v_0+a·t⟺t=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Starthastigheten är nu de']],
+      [['24 m/s bilen kommit upp i, och']],
+      [['retardationen får MINUSTECKEN —']],
+      [['farten minskar.']]
+    ]));
+    klam = valueBracket(acts, [
+      'v=16 m/s', 'v_0=24 m/s (från a)', 'a=−4,0 m/s^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xc = T.fracH('16-24', '−4,0', T.str('t=', padL, y), y);
+    xc = T.str('=', xc + 0.10 * F, y);
+    xc = T.fracH('−8,0', '−4,0', xc, y);
+    T.str('=2,0 s', xc + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minus delat med minus blir']],
+      [['plus — tiden blir positiv, som']],
+      [['den ska. Två sekunder för att']],
+      [['tappa 8 m/s. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 2,0 s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm din reaktionstid (fy1-2.7 Ex 2) ------
+   * Linjalen faller från vila, så v_0-termen försvinner och sträckan ger
+   * tiden direkt. */
+  function layoutReaktionstid(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var lx = 250, lT = 70, lB = 250;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar linjalen och fingrarna']],
+      [['som nyper ihop om den.']]
+    ], 300));
+    T.rect(lx - 16, lT, lx + 16, lB);
+    for (var i = 1; i < 9; i++) {
+      T.line([lx - 16, lT + i * 20], [lx - 4, lT + i * 20]);
+    }
+    T.pause(150);
+    T.line([lx + 20, lT + 116], [lx + 76, lT + 108]);   /* tumme */
+    T.line([lx + 20, lT + 132], [lx + 76, lT + 140]);   /* pekfinger */
+    T.line([lx + 76, lT + 108], [lx + 96, lT + 124]);
+    T.line([lx + 76, lT + 140], [lx + 96, lT + 124]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Fingrarna började vid nollan och']],
+      [['hamnade vid 12,0 cm. Så långt']],
+      [['hann linjalen falla.']]
+    ], 300));
+    T.lbl('0', lx - 40, lT + 6, BLUE);
+    T.pause(150);
+    T.dblArrow([lx - 34, lT], [lx - 34, lT + 116], BLUE);
+    T.lbl('s=12,0 cm', 104, lT + 70, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Linjalen SLÄPPS, så']],
+      [['starthastigheten är noll. Då']],
+      [['faller den första termen bort']],
+      [['ur sträckformeln.']]
+    ]));
+    T.str('Sträcka vid fritt fall från vila', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('g·t^2', '2', T.str('s=', padL, y), y);
+    xa = T.str('⟺t=', xa + 0.12 * F, y);
+    rotFrac(T, F, '2·s', 'g', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Centimeter görs om till meter.']],
+      [['Här bryr jag mig inte om']],
+      [['tecken — det är sträckan som']],
+      [['räknas.']]
+    ]));
+    var klam = valueBracket(acts, ['s=12,0 cm=0,120 m', 'g=9,82 m/s^2'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.str('t=', padL, y);
+    xb = rotFrac(T, F, '2·0,120', '9,82', xb, y);
+    T.str('=0,1563... s', xb + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Måttet']],
+      [['12,0 cm har tre värdesiffror,']],
+      [['så svaret får tre.']]
+    ]));
+    T.str('≈0,156 s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ungefär en sjättedels sekund —']],
+      [['precis vad en människas']],
+      [['reaktionstid brukar ligga på.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,156 s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bil som accelererar 400 m (fy1-2.8 Ex 1) ----
+   * Två okända (a och t) kräver två ekvationer. Teorin löser systemet i
+   * GeoGebra — med penna går det lika bra att substituera: ur ekvation
+   * (2) fås a·t, som sätts in i (1). */
+  function layoutAccel400(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 176;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar sträckan där bilen']],
+      [['accelererar, med farten före']],
+      [['och efter.']]
+    ], 268));
+    T.line([130, vy + 30], [410, vy + 30]);
+    T.rect(140, vy - 6, 200, vy + 16);
+    T.circle(154, vy + 16, 8);
+    T.circle(188, vy + 16, 8);
+    T.rect(342, vy - 6, 402, vy + 16);
+    T.circle(356, vy + 16, 8);
+    T.circle(390, vy + 16, 8);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in farterna och']],
+      [['sträckan. Accelerationen ', 0], ['a', 1], [' är', 0]],
+      [['det jag söker.']]
+    ], 268));
+    T.arrow([206, vy + 4], [246, vy + 4], BLUE);
+    T.lbl('v_0=15 m/s', 130, vy - 46, BLUE);
+    T.pause(150);
+    T.lbl('v=28 m/s', 300, vy - 46, BLUE);
+    T.pause(150);
+    T.dblArrow([170, vy + 56], [372, vy + 56], BLUE);
+    T.lbl('s=400 m', 232, vy + 84, BLUE);
+    T.stepEnd();
+
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(vy + 84), bw, [
+      [['Sträckformeln innehåller både']],
+      [['accelerationen och tiden — och']],
+      [['tiden känner jag inte. En']],
+      [['ekvation räcker alltså inte.']]
+    ]));
+    T.str('Två okända kräver två ekvationer', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var x1 = T.fracH('a·t^2', '2', T.str('(1) 400=15·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den andra ekvationen får jag ur']],
+      [['hastighetsformeln — den']],
+      [['innehåller samma två okända.']]
+    ]));
+    T.str('(2) 28=15+a·t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ur (2) får jag produkten ', 0], ['a·t', 1]],
+      [['direkt. Den sätter jag sedan']],
+      [['in i (1).']]
+    ]));
+    T.str('(2) ger a·t=28-15=13', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['I (1) står ', 0], ['a·t²', 1], [', alltså ', 0], ['a·t', 1], [' gånger', 0]],
+      [['', 0], ['t', 1], ['. Jag byter ut ', 0], ['a·t', 1], [' mot 13 och', 0]],
+      [['får en ekvation med bara ', 0], ['t', 1]]
+    ]));
+    var x2 = T.fracH('13·t', '2', T.str('400=15·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag multiplicerar båda led med']],
+      [['2 för att bli av med bråket.']]
+    ]));
+    T.str('800=30·t+13·t=43·t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu står bara ', 0], ['t', 1], [' kvar. Jag', 0]],
+      [['dividerar båda led med 43.']]
+    ]));
+    T.str('=18,604... s',
+          T.fracH('800', '43', T.str('t=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Med tiden känd får jag']],
+      [['accelerationen ur ', 0], ['a·t', 1], ['=13.', 0]]
+    ]));
+    var x3 = T.fracH('13', 't', T.str('a=', padL, y), y);
+    x3 = T.str('=', x3 + 0.10 * F, y);
+    x3 = T.fracH('13', '18,604...', x3, y);
+    T.str('=0,69875 m/s^2', x3 + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Farterna']],
+      [['har två värdesiffror, så svaret']],
+      [['får två.']]
+    ]));
+    T.str('≈0,70 m/s^2', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['13 m/s snabbare på nästan 19']],
+      [['sekunder — en mjuk acceleration.']],
+      [['Rimligt för 400 meter landsväg!']]
+    ]));
+    T.underline(T.str('Svar: 0,70 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 3 ================
+   * Krafter och Newtons lagar. Kraftpilarna ritas SKALENLIGT (pilens
+   * längd står i proportion till kraftens belopp) och med rätt
+   * angreppspunkt: tyngdkraften i tyngdpunkten med en prick,
+   * normalkraften i kontaktytan, friktionen i kroppens bakkant. */
+
+  /* ---------------- scen: resulterande kraft i tre fall (fy1-3.1 Ex 1)
+   * a) samverkande, b) motverkande, c) vinkelräta krafter. Pilarna ritas
+   * skalenligt: 15 N blir 60 px och 25 N blir 100 px i alla tre fallen. */
+  function layoutResultantkraft(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var K = 4;                                  /* px per newton */
+
+    /* ---- a) samma håll ---- */
+    T.tanke(T.figurBubble(292, [
+      [['a) Ritar de två krafterna åt']],
+      [['SAMMA håll, skalenligt: 25 N']],
+      [['blir en längre pil än 15 N.']]
+    ], 236));
+    T.dot(170, 150);
+    T.arrow([170, 150], [170 + 15 * K, 150], BLUE);
+    T.lbl('F_1=15 N', 176, 138, BLUE);
+    T.pause(150);
+    T.arrow([170, 182], [170 + 25 * K, 182], BLUE);
+    T.lbl('F_2=25 N', 176, 206, BLUE);
+    T.dot(170, 182);
+    T.stepEnd();
+
+    var y = 344;
+    T.tanke(T.bubble(120, T.bubbleTop(236 + 90), bw, [
+      [['Krafter åt samma håll SAMVERKAR']],
+      [['— då adderas beloppen.']]
+    ]));
+    T.str('a) Samverkande krafter', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_R=F_1+F_2=15+25=40 N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 40 N åt samma håll', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) motsatt håll ---- */
+    var fy = y + 130;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu pekar krafterna åt VAR']],
+      [['SITT håll.']]
+    ]));
+    T.dot(280, fy);
+    T.arrow([280, fy], [280 - 15 * K, fy], BLUE);
+    T.lbl('F_1=15 N', 176, fy - 14, BLUE);
+    T.pause(150);
+    T.arrow([280, fy + 32], [280 + 25 * K, fy + 32], BLUE);
+    T.lbl('F_2=25 N', 292, fy + 56, BLUE);
+    T.dot(280, fy + 32);
+    T.stepEnd();
+
+    y = fy + 142;
+    T.tanke(T.bubble(120, fy + 100, bw, [
+      [['Krafter åt motsatt håll']],
+      [['MOTVERKAR varandra — då tar man']],
+      [['skillnaden, och resultanten']],
+      [['pekar åt den störstas håll.']]
+    ]));
+    T.str('b) Motverkande krafter', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_R=F_2-F_1=25-15=10 N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 10 N åt den största kraftens håll', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) vinkelräta ---- */
+    fy = y + 168;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['c) Nu står krafterna VINKELRÄTT']],
+      [['mot varandra. Då bildar de en']],
+      [['rätvinklig krafttriangel.']]
+    ]));
+    T.arrow([200, fy], [200, fy - 15 * K], BLUE);
+    T.lbl('F_1=15 N', 118, fy - 30, BLUE);
+    T.pause(150);
+    T.arrow([200, fy], [200 + 25 * K, fy], BLUE);
+    T.lbl('F_2=25 N', 220, fy + 26, BLUE);
+    T.pause(150);
+    T.dash([200, fy - 15 * K], [200 + 25 * K, fy - 15 * K]);
+    T.dash([200 + 25 * K, fy], [200 + 25 * K, fy - 15 * K]);
+    T.arrow([200, fy], [200 + 25 * K, fy - 15 * K], BLUE);
+    T.lbl('F_R', 262, fy - 44, BLUE);
+    T.line([200, fy - 16], [216, fy - 16]);
+    T.line([216, fy - 16], [216, fy]);
+    T.dot(200, fy);
+    T.stepEnd();
+
+    y = fy + 116;
+    T.tanke(T.bubble(120, fy + 68, bw, [
+      [['Resultanten är hypotenusan, så']],
+      [['jag använder Pythagoras sats.']]
+    ]));
+    T.str('c) Vinkelräta krafter: Pythagoras sats', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xc = T.str('F_R^2=F_1^2+F_2^2⟺F_R=', padL, y);
+    rootSign(acts, xc, y, T.adv('F_1^2+F_2^2'), F);
+    T.str('F_1^2+F_2^2', xc + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klam = valueBracket(acts, ['F_1=15 N', 'F_2=25 N'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xd = T.str('F_R=', padL, y);
+    rootSign(acts, xd, y, T.adv('15^2+25^2'), F);
+    var xe = T.str('15^2+25^2', xd + 0.56 * F, y);
+    xe = T.str('=', xe + 0.16 * F, y);
+    rootSign(acts, xe, y, T.adv('850'), F);
+    T.str('850', xe + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Båda']],
+      [['krafterna har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('=29,154...≈29 N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['29 N är mer än 25 men mindre än']],
+      [['40. Vinkelrätt ger alltså en']],
+      [['resultant mellan de andra två']],
+      [['fallen — precis som väntat!']]
+    ]));
+    T.underline(T.str('Svar: 29 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: komposant i y-led (fy1-3.1 Ex 2) ------------
+   * Bara EN kraft är känd, så Pythagoras räcker inte — trigonometrin
+   * ställs upp ur figuren enligt REGEL (torrsvep + tonande ord). */
+  function layoutKomposanty(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 170, oy = 240, LL = 200;
+    var v = 25 * Math.PI / 180;
+    var tipX = ox + LL * Math.cos(v), tipY = oy - LL * Math.sin(v);
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kraften 20 N som lutar 25°']],
+      [['mot horisontalplanet.']]
+    ], 300));
+    T.line([ox - 30, oy], [ox + 240, oy]);
+    T.hatch([ox + 240, oy], [ox - 30, oy], 11);
+    T.pause(150);
+    T.arrow([ox, oy], [tipX, tipY], BLUE);
+    T.lbl('F=20 N', tipX - 60, tipY - 14, BLUE);
+    T.dot(ox, oy);
+    T.pause(150);
+    (function () {
+      var pts = [], n = 14;
+      for (var i = 0; i <= n; i++) {
+        var a = -(i / n) * v;
+        pts.push([ox + 66 * Math.cos(a), oy + 66 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl('25°', ox + 76, oy - 12, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Komposanten i ', 0], ['y', 1], ['-led är den', 0]],
+      [['lodräta sidan i triangeln —']],
+      [['motstående katet till vinkeln.']]
+    ], 300));
+    T.dash([tipX, tipY], [tipX, oy]);
+    T.arrow([ox, oy], [ox, tipY], BLUE);
+    T.lbl('F_y', ox - 40, (oy + tipY) / 2, BLUE);
+    T.line([ox, oy - 16], [ox + 16, oy - 16]);
+    T.line([ox + 16, oy - 16], [ox + 16, oy]);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Jag känner bara EN kraft, så']],
+      [['Pythagoras sats går inte att']],
+      [['använda. Då får trigonometrin']],
+      [['ta över.']]
+    ]));
+    T.str('Trigonometri i krafttriangeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('motstående katet', 'hypotenusan', T.str('sin v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Motstående katet är ', 0], ['F_y', 1], [' och', 0]],
+      [['hypotenusan är kraften 20 N.']]
+    ]));
+    var xa = T.fracH('F_y', '20', T.str('sin 25°=', padL, y), y);
+    T.str('⟺F_y=20·sin 25°', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu räknar jag ut värdet.']]
+    ]));
+    T.str('F_y=20·sin 25°=8,452... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Kraften']],
+      [['20 N har två värdesiffror.']]
+    ]));
+    T.str('≈8,5 N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En liten vinkel ger en liten']],
+      [['lodrät del: 8,5 N av 20 N. Det']],
+      [['mesta av kraften verkar i']],
+      [['sidled. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 8,5 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: lådan som puttas (fy1-3.2 Ex 1) -------------
+   * a) accelerationen ur Newtons andra lag, b) sträckan. Den
+   * resulterande kraften är inte given utan räknas ut på sin rad i
+   * klammern. */
+  function layoutLadaputt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bx = 250, by = 200, bw2 = 60, bh = 52;
+    var K = 3;                                  /* px per newton */
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar lådan på golvet med de två']],
+      [['vågräta krafterna: putten framåt']],
+      [['och friktionen bakåt.']]
+    ], 300));
+    T.line([120, by + bh / 2], [400, by + bh / 2]);
+    T.hatch([120, by + bh / 2], [400, by + bh / 2], 12);
+    T.rect(bx - bw2 / 2, by - bh / 2, bx + bw2 / 2, by + bh / 2);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan och de två']],
+      [['krafterna. Pilarna ritas']],
+      [['skalenligt: 50 N blir längre än']],
+      [['20 N.']]
+    ], 300));
+    T.arrow([bx + bw2 / 2, by], [bx + bw2 / 2 + 50 * K, by], BLUE);
+    T.lbl('F=50 N', bx + bw2 / 2 + 8, by - 16, BLUE);
+    T.pause(150);
+    T.arrow([bx - bw2 / 2, by + 16], [bx - bw2 / 2 - 20 * K, by + 16], BLUE);
+    T.lbl('F_f=20 N', bx - bw2 / 2 - 84, by + 42, BLUE);
+    T.pause(150);
+    T.lbl('m=5 000 g', bx - 42, by + 4, BLUE);
+    T.stepEnd();
+
+    /* ---- a) accelerationen ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 90), bw, [
+      [['Newtons andra lag: den']],
+      [['RESULTERANDE kraften ger']],
+      [['accelerationen.']]
+    ]));
+    T.str('a) Newtons andra lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('F_R=m·a⟺a=', padL, y);
+    T.fracH('F_R', 'm', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den resulterande kraften är']],
+      [['inte given — den är skillnaden']],
+      [['mellan putten och friktionen.']],
+      [['Gram görs om till kilogram.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_R=(50-20) N=30 N', 'm=5 000 g=5,0 kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=6,0 m/s^2',
+          T.fracH('30', '5,0', T.str('a=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 6,0 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) sträckan ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Lådan står stilla från början,']],
+      [['så begynnelsehastigheten är']],
+      [['noll. Då faller ', 0], ['v_0·t', 1], ['-termen', 0]],
+      [['bort ur sträckformeln.']]
+    ]));
+    T.str('b) Sträcka vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('a·t^2', '2', T.str('s=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Accelerationen tar jag från a).']]
+    ]));
+    klam = valueBracket(acts, ['a=6,0 m/s^2 (från a)', 't=2,0 s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('6,0·2,0^2', '2', T.str('s=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('24', '2', xb, y);
+    T.str('=12 m', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tolv meter på två sekunder —']],
+      [['lådan får rejäl fart. Rimligt']],
+      [['med 30 N på bara fem kilo!']]
+    ]));
+    T.underline(T.str('Svar: 12 m', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: resulterande kraft på bilen (fy1-3.2 Ex 2) --
+   * Accelerationen är inte given utan räknas ut på sin rad i klammern,
+   * där km/h också görs om till m/s. */
+  function layoutBilkraft(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 176;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar bilen som accelererar från']],
+      [['stillastående.']]
+    ], 268));
+    T.line([120, vy + 30], [410, vy + 30]);
+    T.rect(170, vy - 8, 244, vy + 18);
+    T.line([186, vy - 8], [200, vy - 24]);
+    T.line([228, vy - 8], [216, vy - 24]);
+    T.line([200, vy - 24], [216, vy - 24]);
+    T.circle(188, vy + 18, 9);
+    T.circle(228, vy + 18, 9);
+    T.arrow([258, vy + 4], [340, vy + 4], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in massan och de två']],
+      [['hastigheterna. Den resulterande']],
+      [['kraften ', 0], ['F_R', 1], [' är det jag söker.', 0]]
+    ], 268));
+    T.lbl('v_0=0', 134, vy - 32, BLUE);
+    T.pause(150);
+    T.lbl('v=90 km/h', 268, vy - 20, BLUE);
+    T.pause(150);
+    T.lbl('m=1,2 ton', 268, vy + 44, BLUE);
+    T.lbl('t=15 s', 140, vy + 44, BLUE);
+    T.stepEnd();
+
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(vy + 44), bw, [
+      [['Newtons andra lag ger kraften']],
+      [['direkt ur massan och']],
+      [['accelerationen.']]
+    ]));
+    T.str('Newtons andra lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_R=m·a', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Accelerationen är inte given.']],
+      [['Jag räknar ut den på en egen']],
+      [['rad i klammern — och gör om']],
+      [['km/h till m/s på vägen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm=1,2 ton=1 200 kg',
+      ['a=', { frac: ['Δv', 'Δt'] }, '=', { frac: ['25 m/s', '15 s'] },
+       '=1,666... m/s^2']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F_R=1 200·1,666...=2 000 N=2,0 kN', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Två kilonewton är ungefär']],
+      [['tyngden av 200 kg. Rimligt för']],
+      [['en bil som ska upp i 90 km/h!']]
+    ]));
+    T.underline(T.str('Svar: 2,0 kN', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: motkraften till tyngdkraften (fy1-3.3 Ex 1) -
+   * Ren resonemangsuppgift. Poängen är att kraft–motkraft alltid verkar
+   * på OLIKA kroppar, och att motkraften till en gravitationskraft också
+   * är en gravitationskraft. */
+  function layoutMotkraftapple(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var jx = 250, jy = 250, R = 74;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar jordklotet och äpplet, och']],
+      [['de två kropparna som drar i']],
+      [['varandra.']]
+    ], 336));
+    T.circle(jx, jy, R);
+    T.str('jorden', jx - 34, jy + 20, null, 0.55);
+    T.pause(150);
+    T.circle(jx, jy - R - 46, 16);
+    T.line([jx, jy - R - 62], [jx + 8, jy - R - 74]);
+    T.str('äpplet', jx + 24, jy - R - 40, null, 0.55);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Kraften på äpplet pekar NEDÅT.']],
+      [['Motkraften verkar på JORDEN och']],
+      [['pekar uppåt — lika stor, motsatt']],
+      [['riktad.']]
+    ], 356));
+    T.arrow([jx, jy - R - 30], [jx, jy - R + 6], BLUE);
+    T.lbl('F_G', jx + 12, jy - R - 12, BLUE);
+    T.pause(150);
+    T.arrow([jx - 44, jy - R + 6], [jx - 44, jy - R - 30], BLUE);
+    T.lbl('motkraft', jx - 160, jy - R - 12, BLUE);
+    T.stepEnd();
+
+    var y = 466;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 114), bw, [
+      [['Newtons tredje lag: krafter']],
+      [['kommer alltid i par, och de två']],
+      [['krafterna verkar på OLIKA']],
+      [['kroppar.']]
+    ]));
+    T.str('Newtons tredje lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('kraft på äpplet: jorden drar äpplet nedåt',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('motkraft: äpplet drar jorden uppåt', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lika stora, motsatt riktade, olika kroppar',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Jorden dras alltså uppåt lika']],
+      [['hårt som äpplet nedåt — men']],
+      [['jorden är så tung att det inte']],
+      [['märks.']]
+    ]));
+    T.underline(T.str('Svar: äpplets tyngdkraft på jorden',
+                      padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bom med motvikt (fy1-3.4 Ex 1) -------------
+   * Normalkraften bär BÅDA tyngderna. De två tyngdkrafterna räknas ut på
+   * var sin rad i klammern, med enheter vid varje tal. */
+  function layoutBommotvikt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sx = 250, sy = 250, K = 0.34;          /* px per newton */
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar stolpen med bommen och']],
+      [['motvikten. Allt vilar på']],
+      [['marken.']]
+    ], 336));
+    T.line([140, sy], [400, sy]);
+    T.hatch([140, sy], [400, sy], 11);
+    T.line([sx, sy], [sx, 150]);
+    T.line([sx - 8, 150], [sx + 130, 150]);    /* bommen */
+    T.rect(sx - 60, 138, sx - 20, 162);        /* motvikten */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in de två massorna.']],
+      [['Normalkraften från marken är']],
+      [['det jag söker.']]
+    ], 336));
+    T.lbl('m_b_o_m=12 kg', sx + 42, 138, BLUE);
+    T.pause(150);
+    T.lbl('m_v_i_k_t=24 kg', sx - 190, 152, BLUE);
+    T.pause(150);
+    T.arrow([sx, sy], [sx, sy - 353 * K], BLUE);
+    T.lbl('F_N', sx + 12, sy - 60, BLUE);
+    T.stepEnd();
+
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(336 + 90), bw, [
+      [['Marken måste bära BÅDA']],
+      [['tyngderna — bommens och']],
+      [['motviktens.']]
+    ]));
+    T.str('Kraftjämvikt mot marken', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_N=F_G_b_o_m+F_G_v_i_k_t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ingen av tyngderna är given.']],
+      [['Jag räknar ut båda på var sin']],
+      [['rad i klammern, med enheter vid']],
+      [['varje tal.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_G_b_o_m=m·g=12 kg·9,82 N/kg=117,84 N',
+      'F_G_v_i_k_t=m·g=24 kg·9,82 N/kg=235,68 N'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('F_N=117,84+235,68=353,52 N', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Massorna']],
+      [['har två värdesiffror, så svaret']],
+      [['får två.']]
+    ]));
+    var avrS = '≈350 N=0,35 kN';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['36 kg sammanlagt väger ungefär']],
+      [['350 N. Normalkraften bär hela']],
+      [['tyngden — rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,35 kN', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: gravitationskraft mellan kompisar (3.5 Ex 1)
+   * a) kraften ur gravitationslagen, b) om den är kännbar — genom att
+   * räkna om kraften till den massa som väger lika mycket. */
+  function layoutGravkompisar(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ay = 200;
+
+    function gubbe(cx, spegel) {
+      T.circle(cx, ay - 54, 12);
+      T.line([cx, ay - 42], [cx, ay - 12]);
+      T.line([cx, ay - 34], [cx - 18 * spegel, ay - 24]);
+      T.line([cx, ay - 34], [cx + 18 * spegel, ay - 26]);
+      T.line([cx, ay - 12], [cx - 14, ay + 12]);
+      T.line([cx, ay - 12], [cx + 14, ay + 12]);
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar er två som sitter en meter']],
+      [['från varandra.']]
+    ], 300));
+    T.line([120, ay + 12], [400, ay + 12]);
+    gubbe(190, 1);
+    gubbe(330, -1);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna och']],
+      [['avståndet. Gravitationskraften']],
+      [['drar er mot varandra.']]
+    ], 300));
+    T.dblArrow([190, ay + 40], [330, ay + 40], BLUE);
+    T.lbl('r=1,0 m', 226, ay + 68, BLUE);
+    T.pause(150);
+    T.lbl('m_1=60 kg', 130, ay - 78, BLUE);
+    T.lbl('m_2=60 kg', 300, ay - 78, BLUE);
+    T.stepEnd();
+
+    /* ---- a) kraften ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Newtons gravitationslag gäller']],
+      [['mellan ALLA massor, inte bara']],
+      [['himlakroppar.']]
+    ]));
+    T.str('a) Newtons gravitationslag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('m_1·m_2', 'r^2', T.str('F_G=G·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Gravitationskonstanten står i']],
+      [['tabellen. Den är MYCKET liten.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'G=6,67·10^−^1^1 Nm^2/kg^2', 'm_1=60 kg', 'm_2=60 kg', 'r=1,00 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=2,4·10^−^7 N',
+          T.fracH('60·60', '1,00^2', T.str('F_G=6,67·10^−^1^1·', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.underline(T.str('Svar: 2,4·10^−^7 N', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) kännbar? ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En kraft i newton säger inte']],
+      [['mycket. Jag räknar om den till']],
+      [['den MASSA som väger lika']],
+      [['mycket — då blir den begriplig.']]
+    ]));
+    T.str('b) Vilken massa väger så lite?', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.str('F_G=m·g⟺m=', padL, y);
+    T.fracH('F_G', 'g', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Här räcker ett grovt värde på']],
+      [['tyngdfaktorn — jag vill bara ha']],
+      [['storleksordningen.']]
+    ]));
+    klam = valueBracket(acts, ['F_G=2,4·10^−^7 N (från a)', 'g≈10 N/kg'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=2,4·10^−^8 kg',
+          T.fracH('2,4·10^−^7', '10', T.str('m≈', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag skriver om i milligram, så']],
+      [['att talet blir gripbart.']]
+    ]));
+    T.str('=2,4·10^−^5 g=0,024 mg', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kraften motsvarar tyngden av ett']],
+      [['par hundradels milligram —']],
+      [['mindre än ett dammkorn. Den går']],
+      [['inte att känna.']]
+    ]));
+    T.underline(T.str('Svar: nej, kraften är inte kännbar', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tyngdfaktorn vid jordytan (fy1-3.5 Ex 2) ---
+   * Tyngdkraften tecknas på TVÅ sätt och sätts lika. Massan m förkortas
+   * bort — den divideras bort ur båda led (fysikkonventionen: den
+   * stryks). */
+  function layoutTyngdfaktor(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var jx = 250, jy = 260, R = 90;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar jorden med ett föremål på']],
+      [['ytan. Avståndet räknas från']],
+      [['jordens MEDELPUNKT.']]
+    ], 346));
+    T.circle(jx, jy, R);
+    T.dot(jx, jy);
+    T.rect(jx - 14, jy - R - 22, jx + 14, jy - R);
+    T.pause(150);
+    T.line([jx, jy], [jx, jy - R]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in jordens massa och']],
+      [['radie ur tabellen. Föremålets']],
+      [['massa ', 0], ['m', 1], [' behöver jag inte veta.', 0]]
+    ], 380));
+    T.lbl('m', jx + 22, jy - R - 6, BLUE);
+    T.pause(150);
+    T.lbl('r=6 378 km', jx + 14, jy - 40, BLUE);
+    T.pause(150);
+    T.lbl('m_j=5,972·10^2^4 kg', 30, jy + 74, BLUE);
+    T.stepEnd();
+
+    var y = 484;
+    T.tanke(T.bubble(120, T.bubbleTop(380 + 90), bw, [
+      [['Tyngdkraften på föremålet kan']],
+      [['skrivas på TVÅ sätt: med']],
+      [['tyngdfaktorn och med']],
+      [['gravitationslagen.']]
+    ]));
+    T.str('Samma kraft, två uttryck', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('F_G=m·g  och  F_G=G·', padL, y);
+    T.fracH('m·m_j', 'r^2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Eftersom det är SAMMA kraft kan']],
+      [['jag sätta uttrycken lika. Massan']],
+      [['', 0], ['m', 1], [' står i båda led och kan', 0]],
+      [['divideras bort.']]
+    ]));
+    var xb = T.str('m·g=G·', padL, y);
+    var xc = T.fracH('m·m_j', 'r^2', xb, y);
+    T.pause(250);
+    T.line([padL - 4, y + 0.28 * F], [padL + T.adv('m') + 4, y - 0.72 * F],
+           BLUE);                                    /* stryk m i vänsterled */
+    T.line([xb + 0.06 * F, y - 0.20 * F], [xb + 0.06 * F + T.adv('m') + 8,
+           y - 1.10 * F], BLUE);                     /* och i täljaren */
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Kvar står tyngdfaktorn ensam.']]
+    ]));
+    T.fracH('m_j', 'r^2', T.str('g=G·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Kilometer görs om till meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'G=6,67·10^−^1^1 Nm^2/kg^2',
+      'm_j=5,972·10^2^4 kg (jordens massa)',
+      'r=6 378 km=6 378·10^3 m (jordens radie)'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('5,972·10^2^4', '(6 378·10^3)^2',
+            T.str('g=6,67·10^−^1^1·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.str('=9,792... N/kg≈9,8 N/kg', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['9,8 N/kg — precis det värde vi']],
+      [['använder hela tiden. Tyngd-']],
+      [['faktorn är alltså inget']],
+      [['mystiskt: den följer direkt ur']],
+      [['gravitationslagen.']]
+    ]));
+    T.underline(T.str('Svar: 9,8 N/kg', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- lutande plan: gemensam figurhjälpare --------------
+   * Ritar planet, lådan och tyngdkraftens två komposanter enligt REGEL
+   * (skalenliga pilar, prick i tyngdpunkten, streckad parallellogram).
+   * Returnerar lådans mittpunkt. */
+  function lutandePlan(T, F, grader, opt) {
+    opt = opt || {};
+    var ax = 120, ay = 300, LL = 300;
+    var a = grader * Math.PI / 180;
+    var toppX = ax + LL * Math.cos(a), toppY = ay - LL * Math.sin(a);
+    T.line([ax, ay], [ax + LL * Math.cos(a) + 10, ay]);      /* marken */
+    T.line([ax, ay], [toppX, toppY]);                        /* planet */
+    T.line([toppX, toppY], [toppX, ay]);
+    T.hatch([ax, ay], [toppX, ay], 10);
+    T.pause(140);
+    (function () {                                           /* vinkelbågen */
+      var pts = [], n = 12;
+      for (var i = 0; i <= n; i++) {
+        var b = -(i / n) * a;
+        pts.push([ax + 56 * Math.cos(b), ay + 56 * Math.sin(b)]);
+      }
+      acts_push(T, pts);
+    })();
+    T.lbl(opt.vinkelText || (grader + '°'), ax + 78, ay - 16, BLUE);
+    T.pause(140);
+    /* lådan mitt på planet, roterad med planet */
+    var t = 0.52, cx = ax + LL * t * Math.cos(a), cy = ay - LL * t * Math.sin(a);
+    var ux = Math.cos(a), uy = -Math.sin(a);                 /* uppför planet */
+    var nx = Math.sin(a), ny = Math.cos(a);                  /* in i planet */
+    var h = 26, w = 34;
+    function P(du, dn) {
+      return [cx + du * ux - dn * nx, cy + du * uy - dn * ny];
+    }
+    T.line(P(-w, 0), P(w, 0));
+    T.line(P(w, 0), P(w, h));
+    T.line(P(w, h), P(-w, h));
+    T.line(P(-w, h), P(-w, 0));
+    return { cx: cx, cy: cy, ux: ux, uy: uy, nx: nx, ny: ny, P: P,
+             ax: ax, ay: ay, a: a };
+  }
+  function acts_push(T, pts) {
+    T.acts.push({ kind: 'stroke', pts: pts });
+  }
+
+  /* ---------------- scen: Anna och Per puttar bilen (fy1-3.6 Ex 1) ---
+   * Normalkraften är hela bilens tyngd; friktionskraften den ska
+   * övervinna räknas ut på sin rad i klammern. */
+  function layoutPuttabilen(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bilen på plant underlag']],
+      [['och de två som putter bakifrån.']]
+    ], 292));
+    T.line([110, vy + 30], [410, vy + 30]);
+    T.hatch([110, vy + 30], [410, vy + 30], 12);
+    T.rect(210, vy - 10, 300, vy + 16);
+    T.line([228, vy - 10], [244, vy - 30]);
+    T.line([282, vy - 10], [268, vy - 30]);
+    T.line([244, vy - 30], [268, vy - 30]);
+    T.circle(230, vy + 16, 10);
+    T.circle(282, vy + 16, 10);
+    T.pause(150);
+    T.circle(178, vy - 30, 8);                    /* streckgubbe */
+    T.line([178, vy - 22], [178, vy + 2]);
+    T.line([178, vy - 16], [200, vy - 8]);
+    T.line([178, vy + 2], [168, vy + 22]);
+    T.line([178, vy + 2], [188, vy + 22]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in bilens massa och']],
+      [['friktionstalet. Puttkraften är']],
+      [['det jag söker.']]
+    ], 292));
+    T.arrow([204, vy + 2], [186, vy + 2], BLUE);
+    T.lbl('F_p_u_t_t', 130, vy - 44, BLUE);
+    T.pause(150);
+    T.lbl('m=1 200 kg', 216, vy - 44, BLUE);
+    T.pause(150);
+    T.lbl('µ=0,70', 300, vy + 56, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['För att bilen ska börja rulla']],
+      [['måste putten minst matcha']],
+      [['friktionskraften.']]
+    ]));
+    T.str('Friktionskraft', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_p_u_t_t=F_f=µ·F_N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Normalkraften är inte given.']],
+      [['På plant underlag bär marken']],
+      [['hela bilens tyngd, så den']],
+      [['räknar jag ut i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'µ=0,70', 'F_N=F_G=m·g=1 200 kg·9,82 N/kg=11 784 N'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('F_p_u_t_t=0,70·11 784=8 248,8 N', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Friktionstalet 0,70 har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈8,2 kN';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['8 kN är tyngden av nästan ett']],
+      [['ton — omöjligt för två personer.']],
+      [['Bra att bilar rullar på hjul, med']],
+      [['mycket mindre friktionstal!']]
+    ]));
+    T.underline(T.str('Svar: 8,2 kN', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bokhylla med friktion (fy1-3.6 Ex 2) -------
+   * a) friktionskraften ur kraftekvationen — den går INTE att få ur
+   * µ·F_N, eftersom friktionstalet är okänt, b) friktionstalet. */
+  function layoutBokhylla(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 200, K = 0.5;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bokhyllan som dras åt']],
+      [['höger, med friktionen som']],
+      [['motverkar.']]
+    ], 300));
+    T.line([110, by + 40], [410, by + 40]);
+    T.hatch([110, by + 40], [410, by + 40], 12);
+    T.rect(200, by - 60, 290, by + 40);
+    T.line([200, by - 20], [290, by - 20]);
+    T.line([200, by + 10], [290, by + 10]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, dragkraften']],
+      [['och accelerationen. Pilarna']],
+      [['ritas skalenligt.']]
+    ], 300));
+    T.arrow([290, by - 30], [290 + 325 * K * 0.28, by - 30], BLUE);
+    T.lbl('F_d_r_a_g=325 N', 236, by - 78, BLUE);
+    T.pause(150);
+    T.arrow([200, by + 34], [200 - 125 * K * 0.28, by + 34], BLUE);
+    T.lbl('F_f', 168, by + 62, BLUE);
+    T.pause(150);
+    T.lbl('m=50 kg', 210, by - 4, BLUE);
+    T.lbl('a=4,0 m/s^2', 118, by - 46, BLUE);
+    T.stepEnd();
+
+    /* ---- a) friktionskraften ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 90), bw, [
+      [['Friktionstalet är okänt, så']],
+      [['µ·F_N går inte att använda.']],
+      [['I stället tar jag krafterna:']],
+      [['drag minus friktion ger']]
+    ]));
+    T.str('a) Resulterande kraft', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_R=F_d_r_a_g-F_f⟺F_f=F_d_r_a_g-F_R', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Den resulterande kraften är inte']],
+      [['given — den räknar jag ut ur']],
+      [['Newtons andra lag i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_d_r_a_g=325 N',
+      'F_R=m·a=50 kg·4,0 m/s^2=200 N'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('F_f=325-200=125 N', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['och accelerationen har två']],
+      [['värdesiffror.']]
+    ]));
+    var avrS = '≈130 N=0,13 kN';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 0,13 kN (130 N)', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) friktionstalet ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu när friktionskraften är känd']],
+      [['kan jag få friktionstalet ur']],
+      [['friktionsformeln.']]
+    ]));
+    T.str('b) Friktionstal', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.str('F_f=µ·F_N⟺µ=', padL, y);
+    T.fracH('F_f', 'F_N', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Friktionskraften tar jag']],
+      [['OAVRUNDAD från a). Normalkraften']],
+      [['är hyllans tyngd, eftersom']],
+      [['underlaget är plant.']]
+    ]));
+    klam = valueBracket(acts, [
+      'F_f=125 N (från a)',
+      'F_N=F_G=m·g=50 kg·9,82 N/kg=491 N'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,2545...≈0,25',
+          T.fracH('125', '491', T.str('µ=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Friktionstalet saknar enhet —']],
+      [['det är en kvot mellan två']],
+      [['krafter. 0,25 är ett vanligt']],
+      [['värde för trä mot golv.']]
+    ]));
+    T.underline(T.str('Svar: 0,25', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: konstant hastighet nedför plan (3.7 Ex 1) --
+   * a) normalkraften, b) friktionskraften. Tyngdkraften delas upp i två
+   * komposanter — det är hela nyckeln till lutande plan. */
+  function layoutLutandeplan(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar planet med lådan på. Alla']],
+      [['lutande plan börjar likadant:']],
+      [['rita planet, lådan och vinkeln.']]
+    ], 356));
+    var G = lutandePlan(T, F, 34);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Tyngdkraften pekar rakt nedåt.']],
+      [['Jag delar upp den i en del']],
+      [['NEDFÖR planet och en VINKELRÄTT']],
+      [['mot planet.']]
+    ], 356));
+    var L = 70;
+    T.arrow([G.cx, G.cy + 13], [G.cx, G.cy + 13 + L], BLUE);
+    T.dot(G.cx, G.cy + 13);
+    T.lbl('F_G', G.cx - 16, G.cy + 13 + L + 26, BLUE);
+    T.pause(150);
+    var s1 = L * Math.sin(G.a), s2 = L * Math.cos(G.a);
+    T.arrow([G.cx, G.cy + 13],
+            [G.cx - s1 * G.ux, G.cy + 13 - s1 * G.uy], BLUE);
+    T.lbl('F_1', G.cx - s1 * G.ux - 34, G.cy + 13 - s1 * G.uy - 8, BLUE);
+    T.pause(150);
+    T.arrow([G.cx, G.cy + 13],
+            [G.cx + s2 * G.nx, G.cy + 13 + s2 * G.ny], BLUE);
+    T.lbl('F_2', G.cx + s2 * G.nx + 10, G.cy + 13 + s2 * G.ny + 14, BLUE);
+    T.pause(150);
+    T.lbl('m=0,30 kg', G.cx - 168, G.cy - 74, BLUE);
+    T.stepEnd();
+
+    /* ---- a) normalkraften ---- */
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 114), bw, [
+      [['Lådan sjunker inte ned i planet,']],
+      [['så normalkraften balanserar den']],
+      [['VINKELRÄTA komposanten ', 0], ['F_2', 1]]
+    ]));
+    T.str('a) Normalkraften balanserar F_2', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_N=F_2=m·g·cos α', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    var klam = valueBracket(acts, ['m=0,30 kg', 'g=9,82 N/kg', 'α=34°'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F_N=0,30·9,82·cos 34°=2,442... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈2,4 N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 2,4 N', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) friktionskraften ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Lådan glider med KONSTANT']],
+      [['hastighet, så den resulterande']],
+      [['kraften är noll. Friktionen']],
+      [['måste balansera ', 0], ['F_1', 1]]
+    ]));
+    T.str('b) Kraftjämvikt längs planet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_f=F_1=m·g·sin α', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    klam = valueBracket(acts, ['m=0,30 kg', 'g=9,82 N/kg', 'α=34°'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln. Enda']],
+      [['skillnaden mot a) är att sinus']],
+      [['ersätter cosinus.']]
+    ]));
+    T.str('F_f=0,30·9,82·sin 34°=1,647... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈1,6 N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vid 34° är den vinkelräta delen']],
+      [['större än den nedför planet —']],
+      [['och 2,4 N är mer än 1,6 N.']],
+      [['Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 1,6 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Elviras låda accelererar (fy1-3.7 Ex 2) ----
+   * Nu är friktionen MINDRE än kraften nedför planet, så lådan
+   * accelererar. Båda krafterna räknas ut på var sin rad i klammern. */
+  function layoutElviralada(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar planet med lådan, precis']],
+      [['som förra gången men med']],
+      [['vinkeln 31°.']]
+    ], 356));
+    var G = lutandePlan(T, F, 31);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Nu är friktionen MINDRE än']],
+      [['kraften nedför planet — därför']],
+      [['glider lådan iväg och']],
+      [['accelererar.']]
+    ], 356));
+    var L = 70;
+    T.arrow([G.cx, G.cy + 13], [G.cx, G.cy + 13 + L], BLUE);
+    T.dot(G.cx, G.cy + 13);
+    T.lbl('F_G', G.cx - 16, G.cy + 13 + L + 26, BLUE);
+    T.pause(150);
+    var s1 = L * Math.sin(G.a), s2 = L * Math.cos(G.a);
+    T.arrow([G.cx, G.cy + 13],
+            [G.cx - s1 * G.ux, G.cy + 13 - s1 * G.uy], BLUE);
+    T.lbl('F_1', G.cx - s1 * G.ux - 34, G.cy + 13 - s1 * G.uy - 8, BLUE);
+    T.pause(150);
+    T.arrow([G.cx, G.cy + 13],
+            [G.cx + s2 * G.nx, G.cy + 13 + s2 * G.ny], BLUE);
+    T.lbl('F_2', G.cx + s2 * G.nx + 10, G.cy + 13 + s2 * G.ny + 14, BLUE);
+    T.pause(150);
+    T.lbl('m=6,0 kg', G.cx - 158, G.cy - 74, BLUE);
+    T.lbl('µ=0,35', G.cx - 158, G.cy - 46, BLUE);
+    T.stepEnd();
+
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 114), bw, [
+      [['Accelerationen beror på den']],
+      [['RESULTERANDE kraften längs']],
+      [['planet.']]
+    ]));
+    T.str('Newtons andra lag längs planet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('F_R=m·a⟺a=', padL, y);
+    T.fracH('F_R', 'm', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den resulterande kraften är']],
+      [['kraften nedför planet minus']],
+      [['friktionen. Ingen av dem är']],
+      [['given — båda räknas i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_1=m·g·sin α=6,0·9,82·sin 31°=30,346... N',
+      'F_f=µ·m·g·cos α=0,35·6,0·9,82·cos 31°=17,676... N',
+      'm=6,0 kg'
+    ], padL, y, T.s, F, { rs: 0.6 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först den resulterande kraften.']]
+    ]));
+    T.str('F_R=F_1-F_f=30,346...-17,676...', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=12,669... N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Och sedan accelerationen.']]
+    ]));
+    T.str('=2,111... m/s^2',
+          T.fracH('12,669...', '6,0', T.str('a=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Alla']],
+      [['mätvärden har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈2,1 m/s^2', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['2,1 m/s² är mycket mindre än']],
+      [['fritt fall (9,82). Både']],
+      [['lutningen och friktionen bromsar']],
+      [['— rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 2,1 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: boll rakt upp (fy1-3.9 Ex 1) ---------------
+   * Accelerationens TECKEN under hela kastet. Hastigheten skrivs in vid
+   * tre lägen så att eleven ser att den hela tiden MINSKAR. */
+  function layoutBollrakt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bx = 250, mark = 300;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bollens bana: upp,']],
+      [['vändläge och ned igen. Positiv']],
+      [['riktning är uppåt.']]
+    ], 340));
+    T.line([120, mark], [400, mark]);
+    T.hatch([120, mark], [400, mark], 12);
+    T.pause(150);
+    T.circle(bx - 60, mark - 40, 11);
+    T.circle(bx, mark - 190, 11);
+    T.circle(bx + 60, mark - 40, 11);
+    T.pause(150);
+    T.arrow([120, mark - 20], [120, mark - 200], BLUE);
+    T.lbl('+', 100, mark - 200, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in hastigheten i de tre']],
+      [['lägena. Den går från +6 via 0']],
+      [['till −6 — den MINSKAR hela']],
+      [['tiden.']]
+    ], 340));
+    T.arrow([bx - 60, mark - 54], [bx - 60, mark - 104], BLUE);
+    T.lbl('v=6 m/s', bx - 148, mark - 76, BLUE);
+    T.pause(150);
+    T.lbl('v=0', bx + 16, mark - 190, BLUE);
+    T.pause(150);
+    T.arrow([bx + 60, mark - 54], [bx + 60, mark - 4], BLUE);
+    T.lbl('v=−6 m/s', bx + 74, mark - 76, BLUE);
+    T.stepEnd();
+
+    /* ---- a) tecknet ---- */
+    var y = 450;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['Accelerationen är']],
+      [['hastighetsÄNDRINGEN. Går']],
+      [['hastigheten från 6 till −6 har']],
+      [['den minskat — alltså negativ.']]
+    ]));
+    T.str('a) Hastigheten minskar hela tiden', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('på väg upp: 6 m/s blir 0', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('i vändläget: 0 blir negativ', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('på väg ner: 0 blir −6 m/s', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('hastigheten minskar hela tiden ⇒ a<0',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: negativ', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) värdet ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Under HELA kastet är det bara']],
+      [['tyngdkraften som verkar']],
+      [['(luftmotståndet försummas), så']],
+      [['accelerationen är ', 0], ['g', 1]]
+    ]));
+    T.str('b) Accelerationen är tyngdaccelerationen',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('a=g=−9,82 m/s^2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet kommer av att jag']],
+      [['valde uppåt som positiv']],
+      [['riktning — inte av att bollen']],
+      [['råkar vara på väg upp eller ner.']]
+    ]));
+    T.underline(T.str('Svar: −9,82 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: hissens acceleration (fy1-3.9 Ex 2) --------
+   * Fyra fall, samma resonemang varje gång: jämför sluthastigheten med
+   * starthastigheten MED TECKEN. */
+  function layoutHissen(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 110;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Jag väljer uppåt som positiv']],
+      [['riktning i alla fyra fallen.']],
+      [['Sedan jämför jag sluthastigheten']],
+      [['med starthastigheten.']]
+    ]));
+    T.str('Positiv riktning: uppåt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('Δv', 'Δt', T.str('a=', padL, y), y);
+    T.str('  där Δv=v_s_l_u_t-v_s_t_a_r_t',
+          T.adv('a=') + padL + T.fracW('Δv', 'Δt') + 0.15 * F, y, null, 0.62);
+    T.stepEnd();
+
+    var fall = [
+      ['a) ökar farten på väg upp', 'v: +2 m/s blir +5 m/s',
+       'hastigheten ÖKAR', 'Svar: positiv'],
+      ['b) bromsar in på väg upp', 'v: +5 m/s blir +2 m/s',
+       'hastigheten MINSKAR', 'Svar: negativ'],
+      ['c) ökar farten på väg ner', 'v: −2 m/s blir −5 m/s',
+       'hastigheten MINSKAR (blir mer negativ)', 'Svar: negativ'],
+      ['d) bromsar in på väg ner', 'v: −5 m/s blir −2 m/s',
+       'hastigheten ÖKAR (blir mindre negativ)', 'Svar: positiv']
+    ];
+    var bubblor = [
+      [[['Hissen är på väg upp och blir']], [['snabbare. Hastigheten är']],
+       [['positiv och växer.']]],
+      [[['Fortfarande på väg upp, men']], [['nu minskar farten. Då minskar']],
+       [['också hastigheten.']]],
+      [[['Nu är hastigheten NEGATIV och']], [['blir ännu mer negativ. −5 är']],
+       [['MINDRE än −2, så hastigheten']], [['minskar.']]],
+      [[['Här är den vanligaste fällan:']], [['farten minskar, men']],
+       [['hastigheten VÄXER — från −5']], [['upp mot −2.']]]
+    ];
+
+    fall.forEach(function (f, i) {
+      y += adv + (i === 0 ? 2.4 : 2.0) * F;
+      T.tanke(T.bubble(120, T.bubbleTop(y - adv, i === 0 ? 1.2 : 0.3), bw,
+                       bubblor[i]));
+      T.str(f[0], padL, y, null, 0.62);
+      T.stepEnd();
+      y += 1.35 * F;
+      T.str(f[1], padL + 20, y, null, 0.62);
+      T.stepEnd();
+      y += 1.35 * F;
+      T.str(f[2], padL + 20, y, null, 0.62);
+      T.stepEnd();
+      y += adv + 0.9 * F;
+      T.underline(T.str(f[3], padL, y), y);
+      T.stepEnd();
+    });
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Lägg märke till att']],
+      [['accelerationens tecken INTE']],
+      [['följer färdriktningen — det']],
+      [['följer hastighetens ändring.']]
+    ]));
+    T.str('Tecknet följer hastighetens ändring, inte färdriktningen',
+          padL, y, null, 0.55);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två trissor med vikter (fy1-3.10 Ex 1) -----
+   * a) accelerationen ur HELA systemet, b) spännkraften ur EN av
+   * vikterna. Att byta perspektiv mellan system och delkropp är hela
+   * poängen. */
+  function layoutTrissor(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bordY = 170, xL = 160, xR = 360;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bordet med de två']],
+      [['trissorna och vikterna som']],
+      [['hänger i snöret.']]
+    ], 356));
+    T.line([xL - 30, bordY], [xR + 30, bordY]);
+    T.line([xL - 10, bordY], [xL - 10, bordY + 110]);
+    T.line([xR + 10, bordY], [xR + 10, bordY + 110]);
+    T.pause(150);
+    T.circle(xL, bordY - 14, 14);
+    T.circle(xR, bordY - 14, 14);
+    T.pause(150);
+    T.line([xL, bordY - 28], [xR, bordY - 28]);      /* snöret över bordet */
+    T.line([xL - 14, bordY - 14], [xL - 14, bordY + 60]);
+    T.line([xR + 14, bordY - 14], [xR + 14, bordY + 60]);
+    T.rect(xL - 34, bordY + 60, xL + 6, bordY + 96);
+    T.rect(xR - 6, bordY + 60, xR + 34, bordY + 96);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in de två massorna.']],
+      [['Den tyngre vikten drar systemet']],
+      [['åt sitt håll.']]
+    ], 356));
+    T.lbl('m_1=1,0 kg', xL - 134, bordY + 122, BLUE);
+    T.pause(150);
+    T.lbl('m_3=3,0 kg', xR + 46, bordY + 122, BLUE);
+    T.pause(150);
+    T.arrow([xL - 54, bordY + 96], [xL - 54, bordY + 40], BLUE);
+    T.arrow([xR + 54, bordY + 40], [xR + 54, bordY + 96], BLUE);
+    T.stepEnd();
+
+    /* ---- a) accelerationen ---- */
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Jag tittar först på HELA']],
+      [['systemet. Då är snörets']],
+      [['spännkraft en inre kraft och']],
+      [['syns inte alls.']]
+    ]));
+    T.str('a) Newtons andra lag på hela systemet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('F_R=m·a⟺a=', padL, y);
+    T.fracH('F_R', 'm_t_o_t', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den resulterande kraften är']],
+      [['skillnaden mellan de två']],
+      [['tyngderna, och massan är båda']],
+      [['vikterna tillsammans.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_R=m_3·g-m_1·g=3,0·9,82-1,0·9,82=19,64 N',
+      'm_t_o_t=m_3+m_1=3,0+1,0=4,0 kg'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=4,91 m/s^2≈4,9 m/s^2',
+          T.fracH('19,64', '4,0', T.str('a=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Halva tyngdaccelerationen — och']],
+      [['skillnaden i massa är just']],
+      [['hälften av totalmassan.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 4,9 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) spännkraften ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Spännkraften syns inte i']],
+      [['systemet — jag måste titta på']],
+      [['EN vikt. Jag väljer den lätta,']],
+      [['som accelererar UPPÅT.']]
+    ]));
+    T.str('b) Newtons andra lag på 1-kilosvikten',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_R=F_S-F_G_1⟺F_S=F_R+F_G_1', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Accelerationen tar jag']],
+      [['oavrundad från a).']]
+    ]));
+    klam = valueBracket(acts, [
+      'F_R=m_1·a=1,0 kg·4,91 m/s^2=4,91 N',
+      'F_G_1=m_1·g=1,0 kg·9,82 N/kg=9,82 N'
+    ], padL, y, T.s, F, { rs: 0.78 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F_S=4,91+9,82=14,73 N≈15 N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Spännkraften är STÖRRE än']],
+      [['1-kilosviktens tyngd (9,82 N) —']],
+      [['annars skulle den inte']],
+      [['accelerera uppåt. Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 15 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 4 ================
+   * Energi och arbete. Genomgående poäng: arbete uträttas bara av den
+   * kraftkomposant som pekar i RÖRELSENS riktning. */
+
+  /* ---------------- scen: energiomvandlingar (fy1-4.1 Ex 1) ----------
+   * Ren resonemangsuppgift. Kedjorna skrivs med pilar, precis som man
+   * gör för hand. */
+  function layoutEnergiomvandling(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 110;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Energi försvinner aldrig — den']],
+      [['byter bara form. Jag följer']],
+      [['kedjan från början till slut.']]
+    ]));
+    T.str('a) Att skjuta en låda över golvet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('musklerna: kemisk energi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lådan rör sig: rörelseenergi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('friktion mot golvet: värmeenergi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Friktionsvärmen får aldrig']],
+      [['glömmas bort — det är dit det']],
+      [['mesta av energin tar vägen.']]
+    ]));
+    T.underline(T.str('Svar: kemisk→rörelse+värme', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) lampan ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Här är den vanligaste fällan:']],
+      [['fingrarnas kemiska energi blir']],
+      [['INTE elektrisk energi — den']],
+      [['flyttar bara knappen.']]
+    ]));
+    T.str('b) Att trycka på en knapp så en lampa tänds',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('lampan matas med elektrisk energi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lampan lyser: strålningsenergi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lampan blir varm: värmeenergi', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En glödlampa ger mest värme och']],
+      [['bara en liten del ljus. Därför']],
+      [['är den utbytt mot LED i dag.']]
+    ]));
+    T.underline(T.str('Svar: elektrisk→strålning+värme', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Sanna puttar en parkbänk (fy1-4.1 Ex 2) ---- */
+  function layoutParkbank(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bänken och Sanna som']],
+      [['puttar den framåt.']]
+    ], 292));
+    T.line([110, by + 40], [410, by + 40]);
+    T.line([250, by - 20], [340, by - 20]);       /* sitsen */
+    T.line([250, by - 20], [250, by + 40]);
+    T.line([340, by - 20], [340, by + 40]);
+    T.line([250, by - 50], [340, by - 50]);       /* ryggstödet */
+    T.line([250, by - 50], [250, by - 20]);
+    T.pause(150);
+    T.circle(196, by - 44, 9);                    /* streckgubbe */
+    T.line([196, by - 35], [196, by - 6]);
+    T.line([196, by - 28], [222, by - 20]);
+    T.line([196, by - 6], [186, by + 22]);
+    T.line([196, by - 6], [208, by + 22]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in kraften och sträckan.']],
+      [['Kraften pekar ÅT SAMMA HÅLL som']],
+      [['rörelsen — då gör hela kraften']],
+      [['arbete.']]
+    ], 292));
+    T.arrow([228, by - 20], [268, by - 20], BLUE);
+    T.lbl('F_s=240 N', 168, by - 62, BLUE);
+    T.pause(150);
+    T.dblArrow([250, by + 66], [400, by + 66], BLUE);
+    T.lbl('s=3,0 m', 274, by + 94, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(by + 94), bw, [
+      [['Arbete är kraften i rörelsens']],
+      [['riktning gånger sträckan.']]
+    ]));
+    T.str('Arbete', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=F_s·s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    var klam = valueBracket(acts, ['F_s=240 N', 's=3,0 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('W=240·3,0=720 Nm', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['720 newtonmeter är samma sak']],
+      [['som 720 joule — ungefär vad det']],
+      [['kostar att lyfta 10 kg en meter,']],
+      [['sju gånger. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 720 Nm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Hosni drar en vagn snett (fy1-4.1 Ex 3) ----
+   * Bara komposanten LÄNGS rörelsen uträttar arbete. Den räknas ut på
+   * sin rad i klammern. */
+  function layoutDravagn(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 210, hx = 230;
+    var v = 26 * Math.PI / 180, LK = 130;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar vagnen och dragkraften,']],
+      [['som lutar 26° uppåt.']]
+    ], 300));
+    T.line([110, vy + 26], [410, vy + 26]);
+    T.rect(hx - 44, vy - 16, hx + 44, vy + 14);
+    T.circle(hx - 26, vy + 14, 12);
+    T.circle(hx + 26, vy + 14, 12);
+    T.pause(150);
+    T.arrow([hx + 44, vy - 10],
+            [hx + 44 + LK * Math.cos(v), vy - 10 - LK * Math.sin(v)], BLUE);
+    T.lbl('F=35 N', hx + 60, vy - 76, BLUE);
+    T.pause(150);
+    (function () {
+      var pts = [], n = 12;
+      for (var i = 0; i <= n; i++) {
+        var a = -(i / n) * v;
+        pts.push([hx + 44 + 56 * Math.cos(a), vy - 10 + 56 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl('26°', hx + 108, vy - 4, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Vagnen rör sig ÅT HÖGER, så det']],
+      [['är bara den vågräta komposanten']],
+      [['', 0], ['F_2', 1], [' som uträttar arbete.', 0]]
+    ], 300));
+    T.dash([hx + 44 + LK * Math.cos(v), vy - 10 - LK * Math.sin(v)],
+           [hx + 44 + LK * Math.cos(v), vy - 10]);
+    T.arrow([hx + 44, vy - 10], [hx + 44 + LK * Math.cos(v), vy - 10], BLUE);
+    T.lbl('F_2', hx + 128, vy + 14, BLUE);
+    T.pause(150);
+    T.dblArrow([120, vy + 62], [400, vy + 62], BLUE);
+    T.lbl('s=100 m', 214, vy + 90, BLUE);
+    T.stepEnd();
+
+    var y = 410;
+    T.tanke(T.bubble(120, T.bubbleTop(vy + 90), bw, [
+      [['Arbete = kraften i rörelsens']],
+      [['riktning gånger sträckan.']]
+    ]));
+    T.str('Arbete', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=F_s·s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kraften i rörelsens riktning är']],
+      [['inte given. Den räknar jag ut']],
+      [['med cosinus på en egen rad i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_s=F_2=F·cos v=35 N·cos 26°=31,457... N', 's=100 m'
+    ], padL, y, T.s, F, { rs: 0.78 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('W=31,457...·100=3 145,779... Nm', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Kraften']],
+      [['35 N har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈3 100 Nm=3,1 kNm';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Snedheten kostar: bara 31 av de']],
+      [['35 newtonen gör nytta. Ju']],
+      [['brantare dragvinkel, desto mer']],
+      [['går till spillo.']]
+    ]));
+    T.underline(T.str('Svar: 3,1 kNm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Martin bär lådan (fy1-4.1 Ex 4) ------------
+   * Kraften är LODRÄT och rörelsen VÅGRÄT — då är kraften i rörelsens
+   * riktning noll, och arbetet blir noll. */
+  function layoutBarlada(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var my = 220;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar Martin som bär lådan rakt']],
+      [['fram med konstant fart.']]
+    ], 300));
+    T.line([110, my + 40], [410, my + 40]);
+    T.circle(220, my - 66, 10);
+    T.line([220, my - 56], [220, my - 16]);
+    T.line([220, my - 48], [252, my - 48]);
+    T.line([220, my - 16], [208, my + 40]);
+    T.line([220, my - 16], [234, my + 40]);
+    T.rect(252, my - 70, 306, my - 26);
+    T.pause(150);
+    T.arrow([326, my - 30], [386, my - 30], BLUE);
+    T.lbl('rörelsen', 330, my - 44, BLUE, 0.5);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Kraften pekar RAKT UPPÅT men']],
+      [['rörelsen går ÅT HÖGER. De står']],
+      [['vinkelrätt mot varandra.']]
+    ], 300));
+    T.arrow([279, my - 74], [279, my - 128], BLUE);
+    T.lbl('F=180 N', 292, my - 120, BLUE);
+    T.pause(150);
+    T.dblArrow([120, my + 64], [400, my + 64], BLUE);
+    T.lbl('s=30 m', 224, my + 92, BLUE);
+    T.stepEnd();
+
+    var y = 420;
+    T.tanke(T.bubble(120, T.bubbleTop(my + 92), bw, [
+      [['Arbete kräver en kraft i']],
+      [['RÖRELSENS riktning. Martin tar i']],
+      [['uppåt, men rör sig inte uppåt.']]
+    ]));
+    T.str('Arbete', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=F_s·s', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kraften i rörelsens riktning är']],
+      [['NOLL — hela kraften är lodrät.']]
+    ]));
+    var klam = valueBracket(acts, ['F_s=0', 's=30 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.str('W=0·30=0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fysikaliskt arbete är alltså inte']],
+      [['samma sak som ansträngning.']],
+      [['Martin blir trött — men uträttar']],
+      [['inget arbete på lådan.']]
+    ]));
+    T.underline(T.str('Svar: 0 (inget arbete)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: vagn upp på lutande plan (fy1-4.2 Ex 1) ----
+   * Arbetet blir lägesenergi. Nyckeln: det är HÖJDEN som räknas, inte
+   * sträckan längs planet. */
+  function layoutVagnplan(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar planet med vagnen som dras']],
+      [['uppför.']]
+    ], 356));
+    var G = lutandePlan(T, F, 30, { vinkelText: '30°' });
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, sträckan']],
+      [['LÄNGS planet och HÖJDEN. Det är']],
+      [['höjden som avgör lägesenergin.']]
+    ], 356));
+    T.dblArrow([G.ax, G.ay + 26],
+               [G.ax + 300 * Math.cos(G.a), G.ay + 26], BLUE);
+    T.lbl('s=5,0 m', G.ax + 90, G.ay + 54, BLUE);
+    T.pause(150);
+    T.dblArrow([G.ax + 300 * Math.cos(G.a) + 26, G.ay],
+               [G.ax + 300 * Math.cos(G.a) + 26,
+                G.ay - 300 * Math.sin(G.a)], BLUE);
+    T.lbl('h=2,5 m', G.ax + 300 * Math.cos(G.a) + 36,
+          G.ay - 150 * Math.sin(G.a), BLUE);
+    T.pause(150);
+    T.lbl('m=32 kg', G.cx - 28, G.cy - 46, BLUE);
+    T.stepEnd();
+
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Vagnen rullar friktionsfritt, så']],
+      [['ingen energi går till värme.']],
+      [['Hela arbetet blir lägesenergi.']]
+    ]));
+    T.str('Arbetet blir lägesenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=E_p=m·g·h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Det är HÖJDEN 2,5 m som ska in,']],
+      [['inte de 5,0 m längs planet.']]
+    ]));
+    var klam = valueBracket(acts, ['m=32 kg', 'g≈9,82 N/kg', 'h=2,5 m'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('W=32·9,82·2,5=785,6 Nm', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['och höjden har två']],
+      [['värdesiffror.']]
+    ]));
+    var avrS = '≈790 Nm=0,79 kJ';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Lutande plan ger ingen "gratis"']],
+      [['energi — man drar med mindre']],
+      [['kraft, men över längre sträcka.']],
+      [['Arbetet blir detsamma.']]
+    ]));
+    T.underline(T.str('Svar: 0,79 kJ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bilens rörelseenergi (fy1-4.3 Ex 1) -------- */
+  function layoutBilenergi(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 176;
+
+    T.tanke(T.figurBubble(290, [
+      [['Ritar bilen i rörelse.']]
+    ], 268));
+    T.line([120, vy + 30], [410, vy + 30]);
+    T.rect(200, vy - 8, 290, vy + 18);
+    T.line([218, vy - 8], [234, vy - 28]);
+    T.line([272, vy - 8], [258, vy - 28]);
+    T.line([234, vy - 28], [258, vy - 28]);
+    T.circle(218, vy + 18, 10);
+    T.circle(272, vy + 18, 10);
+    T.arrow([304, vy + 2], [372, vy + 2], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(290, [
+      [['Skriver in massan och farten.']],
+      [['Rörelseenergin är det jag']],
+      [['söker.']]
+    ], 268));
+    T.lbl('m=1,2 ton', 196, vy - 44, BLUE);
+    T.pause(150);
+    T.lbl('v=72 km/h', 306, vy - 12, BLUE);
+    T.stepEnd();
+
+    var y = 386;
+    T.tanke(T.bubble(120, T.bubbleTop(vy + 44), bw, [
+      [['Rörelseenergin växer med']],
+      [['hastigheten i KVADRAT — det är']],
+      [['därför fart är så farligt.']]
+    ]));
+    T.str('Rörelseenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('m·v^2', '2', T.str('E_k=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Ton görs om till kilogram och']],
+      [['km/h till m/s — annars blir']],
+      [['svaret inte i joule.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm=1,2 ton=1 200 kg',
+      ['v=72 km/h=', { frac: ['72', '3,6'] }, ' m/s=20 m/s']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('1 200·20^2', '2', T.str('E_k=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('=240 000 J=0,24 MJ', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En kvarts megajoule. Dubblas']],
+      [['farten till 144 km/h blir det']],
+      [['FYRA gånger så mycket —']],
+      [['kvadraten slår hårt.']]
+    ]));
+    T.underline(T.str('Svar: 0,24 MJ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bromsande cyklist (fy1-4.3 Ex 2) -----------
+   * Arbetssatsen: bromsarbetet är lika med rörelseenergins ändring. */
+  function layoutBromscyklist(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var cy = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar cyklisten före och efter']],
+      [['inbromsningen.']]
+    ], 292));
+    T.line([110, cy + 40], [410, cy + 40]);
+    T.circle(170, cy + 26, 14);
+    T.circle(210, cy + 26, 14);
+    T.line([170, cy + 26], [190, cy - 2]);
+    T.line([190, cy - 2], [210, cy + 26]);
+    T.circle(190, cy - 18, 9);
+    T.pause(150);
+    T.circle(330, cy + 26, 14);
+    T.circle(370, cy + 26, 14);
+    T.line([330, cy + 26], [350, cy - 2]);
+    T.line([350, cy - 2], [370, cy + 26]);
+    T.circle(350, cy - 18, 9);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, de två']],
+      [['farterna och bromssträckan.']]
+    ], 292));
+    T.arrow([228, cy - 10], [286, cy - 10], BLUE);
+    T.lbl('v_1=10 m/s', 140, cy - 52, BLUE);
+    T.lbl('v_2=7,0 m/s', 300, cy - 52, BLUE);
+    T.pause(150);
+    T.lbl('m=85 kg', 176, cy + 74, BLUE);
+    T.pause(150);
+    T.dblArrow([190, cy + 100], [350, cy + 100], BLUE);
+    T.lbl('s=30 m', 234, cy + 128, BLUE);
+    T.stepEnd();
+
+    var y = 420;
+    T.tanke(T.bubble(120, T.bubbleTop(cy + 128), bw, [
+      [['Bromsarbetet är precis den']],
+      [['rörelseenergi som försvinner.']],
+      [['Det är arbetssatsen.']]
+    ]));
+    T.str('Arbetet är rörelseenergins ändring', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=ΔE_k', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag skriver ut båda sidorna:']],
+      [['arbetet som kraft gånger']],
+      [['sträcka, ändringen som efter']],
+      [['minus före.']]
+    ]));
+    T.str('F_s·s=E_k_e_f_t_e_r-E_k_f_ö_r_e', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu löser jag ut bromskraften']],
+      [['genom att dividera med']],
+      [['sträckan.']]
+    ]));
+    T.fracH('E_k_e_f_t_e_r-E_k_f_ö_r_e', 's', T.str('F_s=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Ingen av rörelseenergierna är']],
+      [['given — jag räknar ut båda på']],
+      [['var sin rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['E_k_f_ö_r_e=', { frac: ['m·v_1^2', '2'] }, '=',
+       { frac: ['85·10^2', '2'] }, '=4 250 J'],
+      ['E_k_e_f_t_e_r=', { frac: ['m·v_2^2', '2'] }, '=',
+       { frac: ['85·7,0^2', '2'] }, '=2 082,5 J'],
+      's=30 m'
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=72,25 N',
+                     T.fracH('4 250-2 082,5', '30', T.str('F_s=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Farten']],
+      [['7,0 m/s har två värdesiffror.']]
+    ]));
+    var avrS = '≈72 N';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['72 N är en mjuk inbromsning —']],
+      [['knappt en tiondel av cyklistens']],
+      [['egen tyngd. Rimligt över trettio']],
+      [['meter!']]
+    ]));
+    T.underline(T.str('Svar: 72 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Brachiosaurus kräks (fy1-4.4 Ex 1) ---------
+   * Energiprincipen: lägesenergi blir rörelseenergi. Massan förkortas
+   * bort — det är hela poängen. */
+  function layoutBrachiosaurus(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var mark = 300;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar dinosaurien och fallet ned']],
+      [['till marken.']]
+    ], 340));
+    T.line([110, mark], [410, mark]);
+    T.hatch([110, mark], [410, mark], 12);
+    T.pause(150);
+    (function () {                              /* kropp och hals */
+      T.circle(200, mark - 60, 34);
+      var pts = [];
+      for (var i = 0; i <= 16; i++) {
+        var u = i / 16;
+        pts.push([200 + u * 60 + 8 * Math.sin(u * 3),
+                  mark - 88 - u * 100]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.circle(266, mark - 194, 13);
+      T.line([200, mark - 30], [196, mark]);
+      T.line([220, mark - 28], [224, mark]);
+    })();
+    T.pause(150);
+    T.dash([280, mark - 194], [280, mark]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in höjden.']],
+      [['Utgångshastigheten är noll —']],
+      [['spyan bara faller.']]
+    ], 340));
+    T.dblArrow([300, mark - 194], [300, mark], BLUE);
+    T.lbl('h=14 m', 312, mark - 100, BLUE);
+    T.pause(150);
+    T.lbl('v_1=0', 292, mark - 210, BLUE);
+    T.lbl('v', 250, mark - 20, BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 90), bw, [
+      [['Energiprincipen: summan av']],
+      [['läges- och rörelseenergi är']],
+      [['densamma före och efter.']]
+    ]));
+    T.str('Energiprincipen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E_p_1+E_k_1=E_p_2+E_k_2', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nollnivån lägger jag vid']],
+      [['marken. Uppe finns bara']],
+      [['lägesenergi, nere bara']],
+      [['rörelseenergi.']]
+    ]));
+    T.fracH('m·v^2', '2', T.str('m·g·h+0=0+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Massan står i BÅDA led och kan']],
+      [['divideras bort. Därför spelar']],
+      [['det ingen roll hur mycket']],
+      [['spyan väger!']]
+    ]));
+    var xa = T.str('m·g·h=', padL, y);
+    T.fracH('m·v^2', '2', xa, y);
+    T.pause(250);
+    T.line([padL - 4, y + 0.28 * F], [padL + T.adv('m') + 4, y - 0.72 * F],
+           BLUE);
+    T.line([xa + 0.06 * F, y - 0.20 * F],
+           [xa + 0.06 * F + T.adv('m') + 8, y - 1.10 * F], BLUE);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag multiplicerar båda led med']],
+      [['2 och drar sedan roten ur.']]
+    ]));
+    var xb = T.str('v^2=2·g·h⟺v=', padL, y);
+    rootSign(acts, xb, y, T.adv('2·g·h'), F);
+    T.str('2·g·h', xb + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klam = valueBracket(acts, ['g≈9,82 N/kg', 'h=14 m'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xc = T.str('v=', padL, y);
+    rootSign(acts, xc, y, T.adv('2·9,82·14'), F);
+    var xd = T.str('2·9,82·14', xc + 0.56 * F, y);
+    xd = T.str('=', xd + 0.16 * F, y);
+    rootSign(acts, xd, y, T.adv('274,96'), F);
+    T.str('274,96', xd + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Höjden']],
+      [['14 m har två värdesiffror.']]
+    ]));
+    T.str('=16,58... m/s≈17 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['17 m/s är ungefär 60 km/h efter']],
+      [['bara fjorton meters fall. Fritt']],
+      [['fall går fort!']]
+    ]));
+    T.underline(T.str('Svar: 17 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: sten från klippan (fy1-4.4 Ex 2) -----------
+   * Nu finns rörelseenergi kvar även uppe — kastriktningen spelar ingen
+   * roll, bara FARTEN. */
+  function layoutStenklippa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var havY = 300, klippX = 200, klippY = 150;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar klippan, havet och stenens']],
+      [['bana.']]
+    ], 340));
+    T.line([110, klippY], [klippX, klippY]);
+    T.line([klippX, klippY], [klippX, havY]);
+    T.hatch([110, klippY], [klippX, klippY], 5);
+    T.pause(150);
+    T.line([klippX, havY], [410, havY]);
+    (function () {                              /* vågor */
+      var pts = [];
+      for (var i = 0; i <= 40; i++) {
+        var u = i / 40;
+        pts.push([klippX + u * 210, havY + 5 * Math.sin(u * 10)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    (function () {                              /* kastbanan */
+      var pts = [];
+      for (var i = 0; i <= 30; i++) {
+        var u = i / 30;
+        pts.push([klippX - 10 + u * 190,
+                  klippY - 60 * Math.sin(Math.PI * u * 0.72) +
+                  (havY - klippY) * u * u]);
+      }
+      T.dashPts(pts);
+    })();
+    T.circle(klippX - 10, klippY, 8);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in kasthöjden och']],
+      [['farten. Riktningen spelar ingen']],
+      [['roll — energiprincipen bryr sig']],
+      [['bara om FARTEN.']]
+    ], 340));
+    T.arrow([klippX - 4, klippY - 12], [klippX + 42, klippY - 48], BLUE);
+    T.lbl('v_1=14 m/s', klippX + 48, klippY - 42, BLUE);
+    T.pause(150);
+    T.dblArrow([160, klippY], [160, havY], BLUE);
+    T.lbl('h_1=12 m', 62, (klippY + havY) / 2, BLUE);
+    T.pause(150);
+    T.lbl('v_2', 356, havY - 22, BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['Nollnivån lägger jag vid']],
+      [['havsytan. Uppe finns BÅDE läges-']],
+      [['och rörelseenergi, nere bara']],
+      [['rörelseenergi.']]
+    ]));
+    T.str('Energiprincipen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E_p_1+E_k_1=E_p_2+E_k_2', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Massan står i alla termer och']],
+      [['divideras bort direkt.']]
+    ]));
+    var xa = T.fracH('v_1^2', '2', T.str('g·h_1+', padL, y), y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('v_2^2', '2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag multiplicerar båda led med']],
+      [['2 och drar roten ur.']]
+    ]));
+    var xb = T.str('2·g·h_1+v_1^2=v_2^2⟺v_2=', padL, y);
+    rootSign(acts, xb, y, T.adv('2·g·h_1+v_1^2'), F);
+    T.str('2·g·h_1+v_1^2', xb + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klam = valueBracket(acts, ['g≈9,82 N/kg', 'h_1=12 m', 'v_1=14 m/s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xc = T.str('v_2=', padL, y);
+    rootSign(acts, xc, y, T.adv('2·9,82·12+14^2'), F);
+    var xd = T.str('2·9,82·12+14^2', xc + 0.56 * F, y);
+    xd = T.str('=', xd + 0.16 * F, y);
+    rootSign(acts, xd, y, T.adv('431,68'), F);
+    T.str('431,68', xd + 0.56 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Höjden']],
+      [['12 m har två värdesiffror.']]
+    ]));
+    T.str('=20,776... m/s≈21 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['21 m/s är mer än de 14 den']],
+      [['kastades med — fallet har lagt']],
+      [['till fart. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 21 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Eddie i backen (fy1-4.4 Ex 3) --------------
+   * Här försvinner energi till friktionsvärme — den blir en extra term i
+   * energiprincipen. */
+  function layoutEddiebacken(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var toppY = 140, botY = 290;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar backen med Eddie på krönet']],
+      [['och längst ned.']]
+    ], 340));
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 30; i++) {
+        var u = i / 30;
+        pts.push([150 + u * 230,
+                  toppY + (botY - toppY) * u * u * (3 - 2 * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.line([380, botY], [410, botY]);
+    T.line([120, toppY], [150, toppY]);
+    T.pause(150);
+    T.circle(160, toppY - 14, 11);
+    T.circle(392, botY - 14, 11);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, höjden och de']],
+      [['två farterna.']]
+    ], 340));
+    T.arrow([176, toppY - 26], [222, toppY - 26], BLUE);
+    T.lbl('v_1=10 m/s', 176, toppY - 42, BLUE);
+    T.pause(150);
+    T.lbl('v_2=19 m/s', 300, botY - 46, BLUE);
+    T.pause(150);
+    T.dblArrow([128, toppY], [128, botY], BLUE);
+    T.lbl('h=20 m', 34, (toppY + botY) / 2, BLUE);
+    T.lbl('m=82 kg', 176, toppY - 60, BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 66), bw, [
+      [['En del av energin blir']],
+      [['friktionsvärme. Den måste med i']],
+      [['bokföringen, annars stämmer']],
+      [['inte energiprincipen.']]
+    ]));
+    T.str('Energiprincipen med friktionsvärme', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E_p_1+E_k_1=E_p_2+E_k_2+E_v', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nollnivån lägger jag längst ned,']],
+      [['så lägesenergin där är noll.']],
+      [['Sedan löser jag ut värmen.']]
+    ]));
+    var xa = T.fracH('m·v_1^2', '2', T.str('E_v=m·g·h+', padL, y), y);
+    xa = T.str('-', xa + 0.06 * F, y);
+    T.fracH('m·v_2^2', '2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Alla fem värdena står i']],
+      [['uppgiften.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm=82 kg', 'g≈9,82 N/kg', 'h=20 m', 'v_1=10 m/s', 'v_2=19 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('82·10^2', '2', T.str('E_v=82·9,82·20+', padL, y), y);
+    xb = T.str('-', xb + 0.06 * F, y);
+    T.fracH('82·19^2', '2', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.str('=16 104,8+4 100-14 801', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=5 403,8 J', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈5 400 J=5,4 kJ', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['5,4 kJ av de 16 kJ lägesenergin']],
+      [['blev värme — ungefär en']],
+      [['tredjedel. Rimligt för en']],
+      [['cykel med luftmotstånd!']]
+    ]));
+    T.underline(T.str('Svar: 5,4 kJ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Emilia i trappan (fy1-4.5 Ex 1) ------------
+   * Samma energiomvandling, olika tid — effekten är energi PER SEKUND.
+   * Fjärdedelen av tiden ger fyra gånger effekten. */
+  function layoutTrappan(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var tx = 180, ty = 290, steg = 6;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar trappan och Emilia som tar']],
+      [['sig upp.']]
+    ], 340));
+    (function () {
+      var dx = 26, dy = 22;
+      for (var i = 0; i < steg; i++) {
+        T.line([tx + i * dx, ty - i * dy], [tx + (i + 1) * dx, ty - i * dy]);
+        T.line([tx + (i + 1) * dx, ty - i * dy],
+               [tx + (i + 1) * dx, ty - (i + 1) * dy]);
+      }
+      T.line([tx, ty], [tx + steg * dx, ty]);
+    })();
+    T.pause(150);
+    T.circle(tx + 108, ty - 130, 10);
+    T.line([tx + 108, ty - 120], [tx + 108, ty - 92]);
+    T.line([tx + 108, ty - 112], [tx + 88, ty - 104]);
+    T.line([tx + 108, ty - 112], [tx + 128, ty - 118]);
+    T.line([tx + 108, ty - 92], [tx + 94, ty - 68]);
+    T.line([tx + 108, ty - 92], [tx + 124, ty - 70]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan och trappans']],
+      [['HÖJD — det är höjden som avgör']],
+      [['lägesenergin, inte längden.']]
+    ], 340));
+    T.dblArrow([tx - 34, ty], [tx - 34, ty - 132], BLUE);
+    T.lbl('Δh=4,0 m', 30, ty - 60, BLUE);
+    T.pause(150);
+    T.lbl('m=60 kg', tx + 128, ty - 140, BLUE);
+    T.stepEnd();
+
+    /* ---- a) gå ---- */
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 66), bw, [
+      [['Effekt är energi per sekund —']],
+      [['hur SNABBT energin omvandlas.']]
+    ]));
+    T.str('a) Effekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('ΔE', 'Δt', T.str('P=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Energin som omvandlas är']],
+      [['ökningen av lägesenergi. Den']],
+      [['räknar jag ut på en egen rad i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ΔE=m·g·Δh=60 kg·9,82 N/kg·4,0 m=2 356,8 J', 'Δt=10 s'
+    ], padL, y, T.s, F, { rs: 0.68 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=235,68 W',
+                     T.fracH('2 356,8', '10', T.str('P=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    var avrS = '≈240 W=0,24 kW';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 0,24 kW', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) springa ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma trappa och samma person,']],
+      [['så energin är EXAKT densamma.']],
+      [['Bara tiden ändras.']]
+    ]));
+    T.str('b) Samma energi, kortare tid', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('ΔE', 'Δt', T.str('P=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    klam = valueBracket(acts, ['ΔE=2 356,8 J (från a)', 'Δt=2,5 s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=942,72 W',
+          T.fracH('2 356,8', '2,5', T.str('P=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('≈940 W=0,94 kW', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En fjärdedel av tiden ger FYRA']],
+      [['gånger effekten: 0,24 kW blev']],
+      [['0,94 kW. Precis som väntat!']]
+    ]));
+    T.underline(T.str('Svar: 0,94 kW', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: glömd glödlampa (fy1-4.5 Ex 2) -------------
+   * a) energin i joule, b) kostnaden — där energin först görs om till
+   * kilowattimmar. */
+  function layoutGlodlampa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var lx = 250, ly = 170;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar lampan som står och lyser.']]
+    ], 292));
+    T.circle(lx, ly, 32);
+    T.rect(lx - 12, ly + 30, lx + 12, ly + 56);
+    T.line([lx - 12, ly + 40], [lx + 12, ly + 40]);
+    T.line([lx - 12, ly + 48], [lx + 12, ly + 48]);
+    T.pause(150);
+    (function () {                              /* glödtråden */
+      var pts = [];
+      for (var i = 0; i <= 20; i++) {
+        var u = i / 20;
+        pts.push([lx - 12 + u * 24, ly + 6 - 16 * Math.sin(u * 5 * Math.PI)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    for (var k = 0; k < 8; k++) {               /* ljusstrålar */
+      var a = (k / 8) * Math.PI * 2;
+      T.line([lx + 40 * Math.cos(a), ly + 40 * Math.sin(a)],
+             [lx + 56 * Math.cos(a), ly + 56 * Math.sin(a)]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in effekten och tiden.']]
+    ], 292));
+    T.lbl('P=8,5 W', lx + 70, ly - 20, BLUE);
+    T.pause(150);
+    T.lbl('Δt=2,0 dygn', lx + 70, ly + 20, BLUE);
+    T.stepEnd();
+
+    /* ---- a) energin ---- */
+    var y = 390;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['Effekt är energi per sekund, så']],
+      [['energin är effekten gånger']],
+      [['tiden.']]
+    ]));
+    T.str('a) Omvandlad energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('ΔE', 'Δt', T.str('P=', padL, y), y);
+    T.str('⟺ΔE=P·Δt', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Dygn görs om till sekunder —']],
+      [['annars blir svaret inte i']],
+      [['joule.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'P=8,5 W', 'Δt=2,0 d=48 h=48·3 600 s=172 800 s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('ΔE=8,5·172 800=1 468 800 J', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Effekten']],
+      [['8,5 W har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]));
+    var avrS = '≈1,5 MJ';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 1,5 MJ', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) kostnaden ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Elpriset räknas i kilowattimmar,']],
+      [['inte joule. En kWh är']],
+      [['3,6 miljoner joule.']]
+    ]));
+    T.str('b) Gör om till kilowattimmar', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    T.str(' kWh',
+          T.fracH('1 468 800', '3,6·10^6', T.str('1 468 800 J=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('=0,408 kWh', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu multiplicerar jag med priset']],
+      [['per kilowattimme.']]
+    ]));
+    T.str('1,50 kr/kWh·0,408 kWh=0,612 kr', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈0,61 kr', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['61 öre för två dygn. En glömd']],
+      [['lampa kostar inte mycket — men']],
+      [['1,5 MJ är ändå ren']],
+      [['energiförlust.']]
+    ]));
+    T.underline(T.str('Svar: 0,61 kr (61 öre)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: verkningsgrad hos en motor (fy1-4.6 Ex 1) --
+   * Verkningsgraden är en KVOT och saknar enhet. Energiflödet ritas som
+   * ett Sankey-liknande diagram: in, nyttigt ut och förluster. */
+  function layoutVerkningsgrad(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var mx = 250, my = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar motorn med energin som går']],
+      [['in och det som kommer ut.']]
+    ], 300));
+    T.rect(mx - 44, my - 40, mx + 44, my + 40);
+    T.circle(mx, my, 22);
+    T.pause(150);
+    T.arrow([110, my], [mx - 52, my], BLUE);
+    T.arrow([mx + 52, my - 16], [mx + 150, my - 16], BLUE);
+    T.pause(150);
+    T.arrow([mx, my - 48], [mx, my - 104], BLUE);   /* förlusterna */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in tillförd och nyttig']],
+      [['energi. Skillnaden går bort som']],
+      [['värme.']]
+    ], 300));
+    T.lbl('E_t=252 kJ', 112, my - 16, BLUE);
+    T.pause(150);
+    T.lbl('E_n=88 kJ', mx + 56, my - 32, BLUE);
+    T.pause(150);
+    T.lbl('värme', mx + 10, my - 96, BLUE, 0.5);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Verkningsgraden är hur stor']],
+      [['ANDEL av den tillförda energin']],
+      [['som blir nyttig.']]
+    ]));
+    T.str('Verkningsgrad', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('E_n', 'E_t', T.str('η=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Båda energierna är i kilojoule,']],
+      [['så jag behöver inte göra om dem']],
+      [['— enheterna tar ut varandra i']],
+      [['kvoten.']]
+    ]));
+    var klam = valueBracket(acts, ['E_n=88 kJ', 'E_t=252 kJ'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,349...',
+          T.fracH('88', '252', T.str('η=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Verkningsgraden saknar enhet och']],
+      [['skrivs ofta i procent.']]
+    ]));
+    T.str('≈0,35=35 %', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['35 % nyttigt och 65 % värme —']],
+      [['helt normalt för en']],
+      [['förbränningsmotor. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,35 (35 %)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: hissens verkningsgrad (fy1-4.6 Ex 2) ------
+   * Den NYTTIGA energin är inte given — den är lägesenergin hissen får,
+   * och räknas ut på sin rad i klammern. */
+  function layoutHissverkning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var hx = 260, hT = 96, hB = 280;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar hisschaktet med hissen som']],
+      [['lyfts.']]
+    ], 320));
+    T.line([hx - 60, hT], [hx - 60, hB]);
+    T.line([hx + 60, hT], [hx + 60, hB]);
+    T.line([hx - 60, hB], [hx + 60, hB]);
+    T.pause(150);
+    T.rect(hx - 40, hT + 96, hx + 40, hB - 8);
+    T.line([hx, hT + 96], [hx, hT + 30]);
+    T.circle(hx, hT + 18, 12);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, lyfthöjden']],
+      [['och den energi hissen']],
+      [['förbrukar.']]
+    ], 320));
+    T.lbl('m=220 kg', hx - 30, hB - 44, BLUE);
+    T.pause(150);
+    T.dblArrow([hx + 80, hT + 20], [hx + 80, hB], BLUE);
+    T.lbl('h=15 m', hx + 92, (hT + hB) / 2, BLUE);
+    T.pause(150);
+    T.lbl('E_t=43 kJ', 100, hT + 40, BLUE);
+    T.stepEnd();
+
+    var y = 430;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 66), bw, [
+      [['Verkningsgraden är nyttig energi']],
+      [['delat med tillförd.']]
+    ]));
+    T.str('Verkningsgrad', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('E_n', 'E_t', T.str('η=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den NYTTIGA energin är den']],
+      [['lägesenergi hissen får. Den']],
+      [['räknar jag ut i klammern, och']],
+      [['gör om kilojoule till joule.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'E_n=m·g·h=220·9,82·15=32 406 J',
+      'E_t=43 kJ=43 000 J'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,753...',
+          T.fracH('32 406', '43 000', T.str('η=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈0,75=75 %', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['75 % är högt — elmotorer är']],
+      [['mycket effektivare än']],
+      [['förbränningsmotorer. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,75 (75 %)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: kraftverkets effekt (fy1-4.6 Ex 3) --------
+   * Verkningsgraden gäller lika bra för EFFEKT som för energi. Den
+   * tillförda effekten räknas ut ur vattnets lägesenergi per sekund. */
+  function layoutKraftverket(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var dY = 110, botY = 290;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar dammen med fallhöjden och']],
+      [['turbinen längst ned.']]
+    ], 330));
+    T.line([120, dY], [230, dY]);
+    T.line([230, dY], [230, botY]);
+    T.line([120, botY], [410, botY]);
+    T.hatch([120, dY], [230, dY], 5);
+    T.pause(150);
+    (function () {                              /* vattenstrålen */
+      var pts = [];
+      for (var i = 0; i <= 24; i++) {
+        var u = i / 24;
+        pts.push([230 + u * 60, dY + (botY - dY) * u * u]);
+      }
+      T.dashPts(pts);
+    })();
+    T.circle(310, botY - 30, 26);
+    for (var k = 0; k < 6; k++) {               /* turbinbladen */
+      var a = (k / 6) * Math.PI * 2;
+      T.line([310, botY - 30],
+             [310 + 26 * Math.cos(a), botY - 30 + 26 * Math.sin(a)]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in fallhöjden,']],
+      [['vattenmängden per sekund och']],
+      [['turbinernas verkningsgrad.']]
+    ], 330));
+    T.dblArrow([160, dY], [160, botY], BLUE);
+    T.lbl('h=107 m', 42, (dY + botY) / 2, BLUE);
+    T.pause(150);
+    T.lbl('275 ton/s', 244, dY + 34, BLUE);
+    T.pause(150);
+    T.lbl('η=0,92', 348, botY - 30, BLUE);
+    T.stepEnd();
+
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 90), bw, [
+      [['Verkningsgraden gäller lika bra']],
+      [['för EFFEKT som för energi — båda']],
+      [['är kvoter mellan nyttigt och']],
+      [['tillfört.']]
+    ]));
+    T.str('Verkningsgrad för effekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('P_n', 'P_t', T.str('η=', padL, y), y);
+    T.str('⟺P_n=η·P_t', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Den tillförda effekten är inte']],
+      [['given. Varje sekund faller']],
+      [['275 ton vatten 107 meter — det']],
+      [['är lägesenergi per sekund.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'E_t=m·g·h=275 000·9,82·107=2,889...·10^8 J',
+      ['P_t=', { frac: ['E_t', 't'] }, '=', { frac: ['2,889...·10^8 J', '1 s'] },
+       '=2,889...·10^8 W'],
+      'η=0,92'
+    ], padL, y, T.s, F, { rs: 0.68 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('P_n=0,92·2,889...·10^8=2,658...·10^8 W', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Verkningsgraden 0,92 har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈2,7·10^8 W=0,27 GW', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['0,27 GW är i klass med ett']],
+      [['stort svenskt vattenkraftverk.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,27 GW', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: rörelsemängd och rörelseenergi (4.7 Ex 1) --
+   * Rörelsemängden är en VEKTOR och får minustecken; rörelseenergin är
+   * en skalär och gör det inte. Det är hela poängen. */
+  function layoutRorelsemangd(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var oy = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar föremålet som rör sig åt']],
+      [['VÄNSTER, och pilen för positiv']],
+      [['riktning åt höger.']]
+    ], 292));
+    T.line([110, oy + 40], [410, oy + 40]);
+    T.rect(230, oy - 4, 300, oy + 40);
+    T.pause(150);
+    T.arrow([222, oy + 18], [156, oy + 18], BLUE);
+    T.pause(150);
+    T.arrow([300, oy - 40], [370, oy - 40], BLUE);
+    T.lbl('+', 378, oy - 34, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan och farten.']],
+      [['Eftersom rörelsen går åt vänster']],
+      [['blir hastigheten NEGATIV.']]
+    ], 292));
+    T.lbl('m=48 kg', 234, oy + 26, BLUE);
+    T.pause(150);
+    T.lbl('v=−7,0 m/s', 118, oy - 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) rörelsemängd ---- */
+    var y = 392;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['Rörelsemängden är massa gånger']],
+      [['hastighet — och hastigheten är']],
+      [['en VEKTOR.']]
+    ]));
+    T.str('a) Rörelsemängd', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('p=m·v', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet följer med —']],
+      [['riktningen är åt vänster.']]
+    ]));
+    var klam = valueBracket(acts, ['m=48 kg', 'v=−7,0 m/s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('p=48·(−7,0)=−336 kg·m/s', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈−340 kg·m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: −340 kg·m/s', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) rörelseenergi ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Rörelseenergi är INGEN vektor.']],
+      [['Den kan aldrig bli negativ —']],
+      [['hastigheten kvadreras ju.']]
+    ]));
+    T.str('b) Rörelseenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('m·v^2', '2', T.str('E_k=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Här skriver jag INGET']],
+      [['minustecken — rörelseenergi är']],
+      [['inte en vektor.']]
+    ]));
+    klam = valueBracket(acts, ['m=48 kg', 'v=7,0 m/s'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=1 176 J≈1,1 kJ',
+          T.fracH('48·7,0^2', '2', T.str('E_k=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Rörelsemängden blev negativ men']],
+      [['energin positiv. Samma rörelse,']],
+      [['två helt olika storheter!']]
+    ]));
+    T.underline(T.str('Svar: 1,1 kJ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: världens hårdaste spark (fy1-4.7 Ex 2) ----
+   * Impulsen är inte given — den räknas ut med impulslagen på sin rad i
+   * klammern, där km/h också görs om till m/s. */
+  function layoutFotbollsspark(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 200;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar foten som träffar bollen.']]
+    ], 292));
+    T.line([110, by + 46], [410, by + 46]);
+    T.circle(270, by + 22, 24);
+    (function () {                              /* sömmarna */
+      var pts = [];
+      for (var i = 0; i <= 14; i++) {
+        var u = i / 14;
+        pts.push([246 + u * 48, by + 22 - 14 * Math.sin(Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    T.line([170, by - 10], [214, by + 10]);     /* benet */
+    T.line([214, by + 10], [244, by + 26]);     /* foten */
+    T.line([244, by + 26], [238, by + 40]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in bollens massa,']],
+      [['sluthastigheten och']],
+      [['kontakttiden.']]
+    ], 292));
+    T.lbl('m=0,45 kg', 236, by - 20, BLUE);
+    T.pause(150);
+    T.arrow([300, by + 22], [370, by + 22], BLUE);
+    T.lbl('v=211 km/h', 300, by - 4, BLUE);
+    T.pause(150);
+    T.lbl('Δt=20 ms', 120, by + 84, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(by + 84), bw, [
+      [['Impulsen är kraften gånger den']],
+      [['tid den verkar. Jag löser ut']],
+      [['kraften.']]
+    ]));
+    T.str('Impuls', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('I=F·Δt⟺F=', padL, y);
+    T.fracH('I', 'Δt', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Impulsen är inte given. Den']],
+      [['räknar jag ut med impulslagen —']],
+      [['massa gånger hastighetsändring']],
+      [['— på en egen rad i klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['I=m·Δv=0,45·', { frac: ['211', '3,6'] }, ' m/s=26,375 Ns'],
+      'Δt=20 ms=0,020 s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=1 318,75 N',
+                     T.fracH('26,375', '0,020', T.str('F=', padL, y), y)
+                       + 0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['0,45 kg har två värdesiffror.']]
+    ]));
+    var avrS = '≈1 300 N=1,3 kN';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1,3 kN är tyngden av 130 kg —']],
+      [['på en boll som väger ett halvt']],
+      [['kilo. Men bara i två']],
+      [['hundradels sekund!']]
+    ]));
+    T.underline(T.str('Svar: 1,3 kN', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: impuls ur F–t-graf (fy1-4.7 Ex 3) ---------
+   * Impulsen är AREAN under kraft–tid-grafen. Ytan delas i tre delar som
+   * ritas in och namnges innan de räknas ut. */
+  function layoutImpulsgraf(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar av grafen: kraften växer,']],
+      [['ligger still och avtar.']]
+    ], 356));
+    var P = diagram(T, { ox: 160, oy: 288, kx: 40, ky: 42, xMax: 9,
+                         yMax: 4.4, xTicks: [3, 7, 8], yTicks: [3],
+                         xLbl: 't (s)', yLbl: 'F (N)' });
+    T.pause(150);
+    T.line(P(0, 0), P(3, 3));
+    T.line(P(3, 3), P(7, 3));
+    T.line(P(7, 3), P(8, 0));
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Impulsen är AREAN under grafen.']],
+      [['Jag delar ytan i en triangel, en']],
+      [['rektangel och en triangel till.']]
+    ], 356));
+    T.dash(P(3, 0), P(3, 3));
+    T.dash(P(7, 0), P(7, 3));
+    T.lbl('A', P(2, 0.9)[0], P(2, 0.9)[1], BLUE);
+    T.lbl('B', P(5, 1.4)[0], P(5, 1.4)[1], BLUE);
+    T.lbl('C', P(7.3, 0.7)[0], P(7.3, 0.7)[1], BLUE);
+    T.stepEnd();
+
+    var y = 464;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Triangelns area är basen gånger']],
+      [['höjden delat med två,']],
+      [['rektangelns basen gånger']],
+      [['höjden.']]
+    ]));
+    T.str('Impulsen är arean under F–t-grafen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('I=A+B+C', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag läser av baser och höjder']],
+      [['direkt i diagrammet.']]
+    ]));
+    var klam = valueBracket(acts, [
+      ['A=', { frac: ['3·3', '2'] }, '=4,5 Ns'],
+      'B=4·3=12 Ns',
+      ['C=', { frac: ['1·3', '2'] }, '=1,5 Ns']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu lägger jag ihop de tre']],
+      [['delarna.']]
+    ]));
+    T.str('I=4,5+12+1,5=18 Ns', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kraften är som mest 3 N under']],
+      [['8 sekunder, så impulsen kan inte']],
+      [['bli mer än 24 Ns. 18 Ns är']],
+      [['rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 18 Ns', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Agnes och Boel på inlines (fy1-4.8 Ex 1) ---
+   * a) Boels hastighet ur rörelsemängdslagen, b) impulsen på Agnes,
+   * c) medelkraften. Att den totala rörelsemängden är NOLL både före och
+   * efter är hela nyckeln. */
+  function layoutInlines(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gy = 210;
+
+    function gubbe(cx, namn) {
+      T.circle(cx, gy - 62, 11);
+      T.line([cx, gy - 51], [cx, gy - 18]);
+      T.line([cx, gy - 42], [cx - 20, gy - 34]);
+      T.line([cx, gy - 42], [cx + 20, gy - 34]);
+      T.line([cx, gy - 18], [cx - 14, gy + 4]);
+      T.line([cx, gy - 18], [cx + 14, gy + 4]);
+      T.circle(cx - 16, gy + 10, 6);
+      T.circle(cx + 16, gy + 10, 6);
+      T.str(namn, cx - 8, gy + 42, null, 0.62);
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar Agnes och Boel på inlines,']],
+      [['precis efter knuffen.']]
+    ], 300));
+    T.line([110, gy + 18], [410, gy + 18]);
+    gubbe(200, 'A');
+    gubbe(330, 'B');
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna och Agnes']],
+      [['hastighet. Positiv riktning är']],
+      [['åt höger.']]
+    ], 300));
+    T.arrow([214, gy - 90], [274, gy - 90], BLUE);
+    T.lbl('v_A=0,50 m/s', 200, gy - 104, BLUE);
+    T.pause(150);
+    T.lbl('m_A=60 kg', 130, gy + 42, BLUE);
+    T.lbl('m_B=85 kg', 356, gy + 42, BLUE);
+    T.stepEnd();
+
+    /* ---- a) Boels hastighet ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Båda stod still före knuffen, så']],
+      [['den totala rörelsemängden var']],
+      [['NOLL. Den måste vara noll också']],
+      [['efteråt.']]
+    ]));
+    T.str('a) Rörelsemängdslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('m_A·v_A_0+m_B·v_B_0=', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=m_A·v_A+m_B·v_B', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag löser ut Boels hastighet.']]
+    ]));
+    T.fracH('m_A·v_A_0+m_B·v_B_0-m_A·v_A', 'm_B',
+            T.str('v_B=', padL, y), y);   /* smalare än raden ovan */
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Båda stod stilla från början, så']],
+      [['de två starthastigheterna är']],
+      [['noll.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm_A=60 kg', 'v_A_0=0', 'm_B=85 kg', 'v_B_0=0', 'v_A=0,50 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('60·0+85·0-60·0,50', '85', T.str('v_B=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('=−0,352... m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈−0,35 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet betyder åt vänster —']],
+      [['åt motsatt håll mot Agnes. Och']],
+      [['Boel är tyngre, så hon får']],
+      [['mindre fart. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: −0,35 m/s (åt vänster)', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) impulsen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Impulsen på Agnes är hennes']],
+      [['ändring av rörelsemängd — hon']],
+      [['gick från stillastående till']],
+      [['0,50 m/s.']]
+    ]));
+    T.str('b) Impulslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('I=m·Δv', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    klam = valueBracket(acts, [
+      'm=60 kg', 'Δv=v_2-v_1=(0,50-0) m/s=0,50 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.str('I=60·0,50=30 Ns', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 30 Ns', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) medelkraften ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma impuls, fördelad på den']],
+      [['tid knuffen varade, ger']],
+      [['medelkraften.']]
+    ]));
+    T.str('c) Impuls är kraft gånger tid', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xc = T.str('I=F·Δt⟺F=', padL, y);
+    T.fracH('I', 'Δt', xc, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    klam = valueBracket(acts, ['I=30 Ns (från b)', 'Δt=0,15 s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=200 N=0,20 kN',
+          T.fracH('30', '0,15', T.str('F=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['200 N är ungefär tyngden av']],
+      [['20 kg — en rejäl men fullt']],
+      [['möjlig knuff. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,20 kN (200 N)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tågvagnar som hakar i (fy1-4.8 Ex 2) ------
+   * Fullkomligt oelastisk stöt: vagnarna fortsätter TILLSAMMANS, så
+   * massorna adderas i högerledet. */
+  function layoutTagvagnar(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 190;
+
+    function vagn(cx) {
+      T.rect(cx - 46, vy - 34, cx + 46, vy);
+      T.circle(cx - 26, vy + 10, 10);
+      T.circle(cx + 26, vy + 10, 10);
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två vagnarna på väg mot']],
+      [['varandra.']]
+    ], 300));
+    T.line([110, vy + 20], [410, vy + 20]);
+    vagn(180);
+    vagn(330);
+    T.str('A', 172, vy - 46, null, 0.62);
+    T.str('B', 322, vy - 46, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna och']],
+      [['hastigheterna. Vagn B kommer']],
+      [['från höger, så dess hastighet']],
+      [['är NEGATIV.']]
+    ], 300));
+    T.arrow([230, vy - 18], [270, vy - 18], BLUE);
+    T.lbl('v_A=5,0 m/s', 130, vy - 66, BLUE);
+    T.pause(150);
+    T.arrow([282, vy + 44], [242, vy + 44], BLUE);
+    T.lbl('v_B=−3,0 m/s', 286, vy - 66, BLUE);
+    T.pause(150);
+    T.lbl('m_A=10 ton', 118, vy + 76, BLUE);
+    T.lbl('m_B=15 ton', 292, vy + 76, BLUE);
+    T.stepEnd();
+
+    var y = 420;
+    T.tanke(T.bubble(120, T.bubbleTop(vy + 76), bw, [
+      [['Vagnarna hakar i varandra — det']],
+      [['är en fullkomligt oelastisk']],
+      [['stöt. Efteråt rör de sig']],
+      [['TILLSAMMANS med samma fart.']]
+    ]));
+    T.str('Rörelsemängdslagen vid oelastisk stöt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('m_A·v_A+m_B·v_B=(m_A+m_B)·v', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag löser ut den gemensamma']],
+      [['sluthastigheten.']]
+    ]));
+    T.fracH('m_A·v_A+m_B·v_B', 'm_A+m_B', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Ton görs om till kilogram, och']],
+      [['vagn B får minustecken eftersom']],
+      [['den kommer från andra hållet.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm_A=10 ton=10 000 kg', 'v_A=5,0 m/s',
+      'm_B=15 ton=15 000 kg', 'v_B=−3,0 m/s'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('10 000·5,0+15 000·(−3,0)', '10 000+15 000',
+            T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.str('=0,2 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Svaret blev positivt, alltså åt']],
+      [['höger — den tunga vagnen B']],
+      [['bromsades men vann inte. Och']],
+      [['farten blev liten. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,2 m/s åt höger', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: vagn uppför plan med friktion (4.9 Ex 1) --
+   * Samma vagn som i 4.2, men nu glider den — då blir arbetet BÅDE
+   * lägesenergi OCH friktionsvärme. */
+  function layoutVagnfriktion(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar planet med vagnen, precis']],
+      [['som i avsnitt 4.2 — men nu med']],
+      [['friktion.']]
+    ], 356));
+    var G = lutandePlan(T, F, 30, { vinkelText: '30°' });
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan, sträckan']],
+      [['längs planet, höjden och']],
+      [['friktionstalet.']]
+    ], 356));
+    T.dblArrow([G.ax, G.ay + 26],
+               [G.ax + 300 * Math.cos(G.a), G.ay + 26], BLUE);
+    T.lbl('s=5,0 m', G.ax + 90, G.ay + 54, BLUE);
+    T.pause(150);
+    T.dblArrow([G.ax + 300 * Math.cos(G.a) + 26, G.ay],
+               [G.ax + 300 * Math.cos(G.a) + 26,
+                G.ay - 300 * Math.sin(G.a)], BLUE);
+    T.lbl('h=2,5 m', G.ax + 300 * Math.cos(G.a) + 36,
+          G.ay - 150 * Math.sin(G.a), BLUE);
+    T.pause(150);
+    T.lbl('m=32 kg', G.cx - 28, G.cy - 46, BLUE);
+    T.lbl('µ=0,35', G.cx + 76, G.cy - 46, BLUE);
+    T.stepEnd();
+
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 90), bw, [
+      [['Nu glider vagnen, så en del av']],
+      [['arbetet blir friktionsvärme.']],
+      [['Arbetet räcker alltså till TVÅ']],
+      [['saker.']]
+    ]));
+    T.str('Arbetet blir lägesenergi OCH värme', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('W=E_p+E_v=m·g·h+F_f·s', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Friktionskraften är inte given.']],
+      [['Jag skriver den som']],
+      [['friktionstalet gånger']],
+      [['normalkraften.']]
+    ]));
+    T.str('W=m·g·h+µ·F_N·s', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Normalkraften på ett lutande']],
+      [['plan är tyngdkraftens VINKELRÄTA']],
+      [['komposant — den räknar jag ut i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm=32 kg', 'g≈9,82 N/kg', 'h=2,5 m', 'µ=0,35',
+      'F_N=m·g·cos α=32·9,82·cos 30°=272,139... N',
+      's=5,0 m'
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('W=32·9,82·2,5+0,35·272,139...·5,0', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=1 261,844... Nm', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['och höjden har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈1 300 Nm=1,3 kNm', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Utan friktion krävdes 0,79 kJ']],
+      [['(avsnitt 4.2). Friktionen lägger']],
+      [['på ungefär en halv kilojoule —']],
+      [['den kostar rejält!']]
+    ]));
+    T.underline(T.str('Svar: 1,3 kNm', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 5 ================
+   * Densitet och tryck. Genomgående fälla: volym- och areaenheter måste
+   * göras om med tiopotensen UPPHÖJD till 3 respektive 2. */
+
+  /* ---------------- scen: guldtärningen (fy1-5.1 Ex 1) --------------- */
+  function layoutGuldtarning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var kx = 250, ky = 180, sida = 84, dj = 34;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar guldtärningen — en kub med']],
+      [['sidan 1,5 cm.']]
+    ], 300));
+    T.rect(kx - sida / 2, ky - sida / 2, kx + sida / 2, ky + sida / 2);
+    T.line([kx - sida / 2, ky - sida / 2],
+           [kx - sida / 2 + dj, ky - sida / 2 - dj]);
+    T.line([kx + sida / 2, ky - sida / 2],
+           [kx + sida / 2 + dj, ky - sida / 2 - dj]);
+    T.line([kx + sida / 2, ky + sida / 2],
+           [kx + sida / 2 + dj, ky + sida / 2 - dj]);
+    T.line([kx - sida / 2 + dj, ky - sida / 2 - dj],
+           [kx + sida / 2 + dj, ky - sida / 2 - dj]);
+    T.line([kx + sida / 2 + dj, ky - sida / 2 - dj],
+           [kx + sida / 2 + dj, ky + sida / 2 - dj]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in sidan. Densiteten för']],
+      [['guld slår jag upp i tabellen.']],
+      [['Massan är det jag söker.']]
+    ], 300));
+    T.dblArrow([kx - sida / 2, ky + sida / 2 + 24],
+               [kx + sida / 2, ky + sida / 2 + 24], BLUE);
+    T.lbl('1,5 cm', kx - 34, ky + sida / 2 + 52, BLUE);
+    T.pause(150);
+    T.lbl('ρ=19,3·10^3 kg/m^3', 100, ky - sida / 2 - 46, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Densiteten är massa per volym.']],
+      [['Jag löser ut massan.']]
+    ]));
+    T.str('Densitet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('m', 'V', T.str('ρ=', padL, y), y);
+    T.str('⟺m=ρ·V', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Volymen är sidan i kubik. OBS:']],
+      [['en meter är 100 cm, men en']],
+      [['KUBIKmeter är en MILJON']],
+      [['kubikcentimeter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ρ=19,3·10^3 kg/m^3 (tabell)',
+      'V=1,5^3 cm^3=3,375 cm^3=3,375·10^−^6 m^3'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('m=19,3·10^3·3,375·10^−^6=0,0651... kg', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Sidan']],
+      [['1,5 cm har två värdesiffror.']]
+    ]));
+    T.str('≈0,065 kg=65 g', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['65 gram på en tärning som ryms']],
+      [['i handen — guld är extremt']],
+      [['tungt. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 65 g', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: damen mot pansarvagnen (fy1-5.2 Ex 1) -----
+   * Två tryck räknas ut och jämförs. Poängen: det är AREAN, inte
+   * tyngden, som avgör trycket. */
+  function layoutDamenpansar(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var my = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två: en dam på klack']],
+      [['och en stridsvagn på larvfötter.']]
+    ], 320));
+    T.line([110, my], [410, my]);
+    T.circle(180, my - 118, 10);                /* damen */
+    T.line([180, my - 108], [180, my - 68]);
+    T.line([180, my - 96], [162, my - 84]);
+    T.line([180, my - 96], [198, my - 84]);
+    T.line([180, my - 68], [174, my - 8]);
+    T.line([180, my - 68], [190, my - 8]);
+    T.line([174, my - 8], [172, my]);
+    T.pause(150);
+    T.rect(290, my - 44, 386, my - 14);         /* stridsvagnen */
+    T.line([300, my - 44], [340, my - 62]);
+    T.line([340, my - 62], [372, my - 44]);
+    T.line([286, my - 14], [390, my - 14]);
+    T.line([286, my], [390, my]);
+    T.line([286, my - 14], [286, my]);
+    T.line([390, my - 14], [390, my]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna och de två']],
+      [['kontaktytorna. Skillnaden i AREA']],
+      [['är enorm.']]
+    ], 320));
+    T.lbl('m=60 kg', 106, my - 140, BLUE);
+    T.lbl('A=1,0 cm^2', 106, my + 30, BLUE);
+    T.pause(150);
+    T.lbl('m=60 ton', 296, my - 84, BLUE);
+    T.lbl('A=6,0 m^2', 296, my + 30, BLUE);
+    T.stepEnd();
+
+    var y = 428;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 66), bw, [
+      [['Tryck är kraft per area. Jag']],
+      [['räknar ut båda trycken och']],
+      [['jämför.']]
+    ]));
+    T.str('Tryck från damen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('F_d_a_m', 'A_d_a_m', T.str('p_d_a_m=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Kraften är hennes tyngd.']],
+      [['Kvadratcentimeter blir']],
+      [['kvadratmeter — tiopotensen']],
+      [['upphöjd till TVÅ.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_d_a_m=m·g=60·10=600 N',
+      'A_d_a_m=1,0 cm^2=1,0·10^−^4 m^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.fracH('600', '1,0·10^−^4', T.str('p_d_a_m=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('=6 000 000 Pa=6,0 MPa', padL + 24, y);
+    T.stepEnd();
+
+    /* ---- pansarvagnen ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma formel för stridsvagnen —']],
+      [['tusen gånger tyngre, men']],
+      [['sextiotusen gånger större yta.']]
+    ]));
+    T.str('Tryck från stridsvagnen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('F_p_a_n_s_a_r', 'A_p_a_n_s_a_r',
+            T.str('p_p_a_n_s_a_r=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    klam = valueBracket(acts, [
+      'F_p_a_n_s_a_r=m·g=60 000·10=600 000 N',
+      'A_p_a_n_s_a_r=6,0 m^2'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.fracH('600 000', '6,0', T.str('p_p_a_n_s_a_r=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('=100 000 Pa=0,10 MPa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['6,0 MPa mot 0,10 MPa — klacken']],
+      [['ger sextio gånger högre tryck!']],
+      [['Det är arean, inte tyngden, som']],
+      [['avgör.']]
+    ]));
+    T.underline(T.str('Svar: damen, ca 60 ggr högre tryck', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Herbert Nitsch på 253 m (fy1-5.3 Ex 1) ---- */
+  function layoutFridyk(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ytY = 96, botY = 300;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar havsytan och dykaren långt']],
+      [['ned i djupet.']]
+    ], 340));
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 40; i++) {
+        var u = i / 40;
+        pts.push([110 + u * 300, ytY + 5 * Math.sin(u * 12)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    T.circle(260, botY - 44, 10);
+    T.line([260, botY - 34], [260, botY - 6]);
+    T.line([260, botY - 26], [242, botY - 34]);
+    T.line([260, botY - 26], [278, botY - 34]);
+    T.line([260, botY - 6], [252, botY + 16]);
+    T.line([260, botY - 6], [268, botY + 16]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in djupet och']],
+      [['saltvattnets densitet.']]
+    ], 356));
+    T.dblArrow([160, ytY], [160, botY - 50], BLUE);
+    T.lbl('h=253,2 m', 40, (ytY + botY) / 2 - 30, BLUE);
+    T.pause(150);
+    T.lbl('ρ=1 028 kg/m^3', 236, ytY + 84, BLUE);
+    T.stepEnd();
+
+    var y = 456;
+    T.tanke(T.bubble(120, T.bubbleTop(356 + 66), bw, [
+      [['Vätsketrycket beror bara på']],
+      [['densiteten och DJUPET — inte på']],
+      [['hur brett havet är.']]
+    ]));
+    T.str('Vätsketryck', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('p=ρ·g·h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Han dök i Medelhavet, inte i']],
+      [['Sverige, så tyngdfaktorn är']],
+      [['9,8 N/kg.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ρ=1 028 kg/m^3', 'g=9,8 N/kg', 'h=253,2 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('p=1 028·9,8·253,2', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=2 550 838,08 Pa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Tyngdfaktorn 9,8 har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈2,6·10^6 Pa=2,6 MPa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['2,6 MPa är 25 gånger normalt']],
+      [['lufttryck. Att kroppen klarar']],
+      [['det utan tuber är närmast']],
+      [['ofattbart.']]
+    ]));
+    T.underline(T.str('Svar: 2,6 MPa', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: dyk på 3 meters djup (fy1-5.4 Ex 1) -------
+   * a) vätsketrycket, b) totala trycket, c) kraften på trumhinnan — där
+   * BARA vätsketrycket räknas, eftersom lufttrycket finns på båda sidor
+   * om hinnan. */
+  function layoutDyktryck(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ytY = 120, djY = 270;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar sjöytan och dykaren tre']],
+      [['meter ned.']]
+    ], 330));
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 40; i++) {
+        var u = i / 40;
+        pts.push([110 + u * 300, ytY + 5 * Math.sin(u * 12)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    T.circle(280, djY - 30, 11);
+    T.line([280, djY - 19], [280, djY + 6]);
+    T.line([280, djY - 12], [260, djY - 20]);
+    T.line([280, djY - 12], [300, djY - 20]);
+    T.line([280, djY + 6], [270, djY + 26]);
+    T.line([280, djY + 6], [290, djY + 26]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in djupet, lufttrycket']],
+      [['och trumhinnans area.']]
+    ], 330));
+    T.dblArrow([180, ytY], [180, djY - 36], BLUE);
+    T.lbl('h=3,0 m', 92, (ytY + djY) / 2 - 22, BLUE);
+    T.pause(150);
+    T.lbl('p_0=101,3 kPa', 112, ytY - 26, BLUE);
+    T.pause(150);
+    T.lbl('A=80 mm^2', 306, djY - 34, BLUE);
+    T.stepEnd();
+
+    /* ---- a) vätsketrycket ---- */
+    var y = 430;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 66), bw, [
+      [['Vätsketrycket är trycket som']],
+      [['vattnet självt ger, utan']],
+      [['lufttrycket.']]
+    ]));
+    T.str('a) Vätsketryck', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('p=ρ·g·h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    var klam = valueBracket(acts, ['ρ=998 kg/m^3', 'g≈9,82 N/kg', 'h=3,0 m'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('p=998·9,82·3,0=29 401,08 Pa', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.str('≈29 000 Pa=29 kPa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 29 kPa', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) totala trycket ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Det TOTALA trycket är']],
+      [['lufttrycket ovanpå plus']],
+      [['vattnets eget tryck.']]
+    ]));
+    T.str('b) Totalt tryck', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('p=p_0+ρ·g·h', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kilopascal görs om till pascal.']]
+    ]));
+    klam = valueBracket(acts, [
+      'p_0=101,3 kPa=101 300 Pa', 'ρ=998 kg/m^3',
+      'g≈9,82 N/kg', 'h=3,0 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('p=101 300+998·9,82·3,0', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=130 701,08 Pa≈0,13 MPa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 0,13 MPa', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) kraften på trumhinnan ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Här är den kluriga poängen:']],
+      [['lufttrycket finns även INUTI']],
+      [['örat och tar ut sig självt.']],
+      [['Bara vätsketrycket trycker.']]
+    ]));
+    T.str('c) Tryckkraft på trumhinnan', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xc = T.fracH('F', 'A', T.str('p=', padL, y), y);
+    T.str('⟺F=p·A', xc + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag använder VÄTSKETRYCKET från']],
+      [['a), oavrundat. Kvadratmillimeter']],
+      [['blir kvadratmeter — tiopotensen']],
+      [['upphöjd till två.']]
+    ]));
+    klam = valueBracket(acts, [
+      'p=29 401,08 Pa (vätsketrycket från a)',
+      'A=80 mm^2=80·10^−^6 m^2'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F=29 401,08·80·10^−^6=2,352... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈2,4 N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['2,4 N på en yta mindre än en']],
+      [['nagel — det är därför öronen']],
+      [['värker redan på några meters']],
+      [['djup.']]
+    ]));
+    T.underline(T.str('Svar: 2,4 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: båt på 450 kg (fy1-5.5 Ex 1) --------------
+   * a) lyftkraften ur kraftjämvikt, b) den undanträngda vattenvolymen ur
+   * Arkimedes princip. */
+  function layoutBatlyft(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ytY = 190, bx = 260;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar båten som flyter i']],
+      [['vattnet.']]
+    ], 300));
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 40; i++) {
+        var u = i / 40;
+        pts.push([110 + u * 300, ytY + 5 * Math.sin(u * 12)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.pause(150);
+    T.line([bx - 70, ytY - 26], [bx - 52, ytY + 26]);
+    T.line([bx - 52, ytY + 26], [bx + 52, ytY + 26]);
+    T.line([bx + 52, ytY + 26], [bx + 70, ytY - 26]);
+    T.line([bx - 70, ytY - 26], [bx + 70, ytY - 26]);
+    T.line([bx, ytY - 26], [bx, ytY - 78]);
+    T.line([bx, ytY - 78], [bx + 44, ytY - 46]);
+    T.line([bx + 44, ytY - 46], [bx, ytY - 40]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan. Båten FLYTER,']],
+      [['så lyftkraften uppåt är precis']],
+      [['lika stor som tyngden nedåt.']]
+    ], 300));
+    T.lbl('m=450 kg', bx - 42, ytY + 12, BLUE);
+    T.pause(150);
+    T.arrow([bx - 100, ytY + 30], [bx - 100, ytY - 30], BLUE);
+    T.lbl('F_L', bx - 138, ytY - 12, BLUE);
+    T.pause(150);
+    T.arrow([bx + 100, ytY - 30], [bx + 100, ytY + 30], BLUE);
+    T.lbl('F_G', bx + 110, ytY + 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) lyftkraften ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Båten varken sjunker eller']],
+      [['stiger, så krafterna är i']],
+      [['jämvikt. Lyftkraften är alltså']],
+      [['lika med tyngden.']]
+    ]));
+    T.str('a) Kraftjämvikt för en flytande kropp', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_L=F_G=m·g', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    var klam = valueBracket(acts, ['m=450 kg', 'g≈9,82 N/kg'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F_L=450·9,82=4 419 N≈4,4 kN', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 4,4 kN', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) undanträngd volym ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Arkimedes princip: lyftkraften']],
+      [['är lika stor som tyngden av det']],
+      [['vatten båten tränger undan.']]
+    ]));
+    T.str('b) Arkimedes princip', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.str('F_L=ρ·g·V⟺V=', padL, y);
+    T.fracH('F_L', 'ρ·g', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Lyftkraften tar jag oavrundad']],
+      [['från a). Vattnets densitet slår']],
+      [['jag upp i tabellen.']]
+    ]));
+    klam = valueBracket(acts, [
+      'F_L=4 419 N (från a)', 'ρ=998 kg/m^3', 'g≈9,82 N/kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,4509... m^3',
+          T.fracH('4 419', '998·9,82', T.str('V=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['450 kg har två värdesiffror.']]
+    ]));
+    T.str('≈0,45 m^3=450 liter', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['450 liter vatten väger just']],
+      [['450 kg — lika mycket som båten.']],
+      [['Det är precis vad Arkimedes']],
+      [['princip säger!']]
+    ]));
+    T.underline(T.str('Svar: 0,45 m^3 (450 liter)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: järnkista på havets botten (fy1-5.5 Ex 2) --
+   * Den kraft man måste ta i med är tyngden MINUS lyftkraften. Fällan:
+   * i Arkimedes princip används VATTNETS densitet, inte järnets. */
+  function layoutJarnkista(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var botY = 280, kx = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kistan på havsbottnen.']]
+    ], 330));
+    T.line([110, botY], [410, botY]);
+    T.hatch([110, botY], [410, botY], 12);
+    T.pause(150);
+    T.rect(kx - 62, botY - 56, kx + 62, botY);
+    T.line([kx - 62, botY - 56], [kx - 40, botY - 82]);
+    T.line([kx + 62, botY - 56], [kx + 84, botY - 82]);
+    T.line([kx - 40, botY - 82], [kx + 84, botY - 82]);
+    T.line([kx + 62, botY], [kx + 84, botY - 26]);
+    T.line([kx + 84, botY - 82], [kx + 84, botY - 26]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in måtten och massan.']],
+      [['Två krafter drar i kistan:']],
+      [['tyngden nedåt och lyftkraften']],
+      [['uppåt.']]
+    ], 330));
+    T.lbl('70·90·40 cm', kx - 52, botY - 22, BLUE);
+    T.pause(150);
+    T.lbl('m=260 kg', kx - 44, botY + 30, BLUE);
+    T.pause(150);
+    T.arrow([kx - 100, botY - 92], [kx - 100, botY - 30], BLUE);
+    T.lbl('F_G', kx - 138, botY - 56, BLUE);
+    T.arrow([kx + 118, botY - 30], [kx + 118, botY - 92], BLUE);
+    T.lbl('F_L', kx + 130, botY - 60, BLUE);
+    T.stepEnd();
+
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 114), bw, [
+      [['Kistan ligger kvar, så tyngden']],
+      [['är störst. Jag behöver bara ta i']],
+      [['med SKILLNADEN mellan de två']],
+      [['krafterna.']]
+    ]));
+    T.str('Kraften jag måste ta i med', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F=F_G-F_L', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Här är fällan: i lyftkraften']],
+      [['används VATTNETS densitet, inte']],
+      [['järnets. Det är vattnet som']],
+      [['trängs undan.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_G=m·g=260·9,82=2 553,2 N',
+      'F_L=ρ·g·V=998·9,82·(0,70·0,90·0,40)=2 469,690... N'
+    ], padL, y, T.s, F, { rs: 0.6 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('F=2 553,2-2 469,690...', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=83,509... N', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['83 newton säger inte så mycket.']],
+      [['Jag räknar om till den massa']],
+      [['som väger lika mycket — då blir']],
+      [['svaret gripbart.']]
+    ]));
+    T.str('Hur tungt känns det?', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.fracH('F', 'g', T.str('m=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('83,509...', '9,82', xb, y);
+    T.str('=8,5 kg', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kistan väger 260 kg men känns']],
+      [['som 8,5 kg i vattnet — nästan']],
+      [['hela tyngden bärs av']],
+      [['lyftkraften!']]
+    ]));
+    T.underline(T.str('Svar: ja, den känns som 8,5 kg', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Algot med heliumballonger (fy1-5.6 Ex 1) ---
+   * a) spännkraften i snöret, b) hur många ballonger som krävs. Varken
+   * lyftkraften eller tyngden är given — båda räknas ut på var sin rad i
+   * klammern. Fällan: heliumets egen massa får inte glömmas bort. */
+  function layoutHeliumballong(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bx = 300, by = 140, gy = 300;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar Algot som håller i']],
+      [['heliumballongen.']]
+    ], 340));
+    T.line([110, gy], [410, gy]);
+    T.circle(200, gy - 118, 11);                /* Algot */
+    T.line([200, gy - 107], [200, gy - 66]);
+    T.line([200, gy - 98], [180, gy - 84]);
+    T.line([200, gy - 98], [252, gy - 116]);
+    T.line([200, gy - 66], [188, gy]);
+    T.line([200, gy - 66], [212, gy]);
+    T.pause(150);
+    T.circle(bx, by, 40);                       /* ballongen */
+    T.line([bx - 6, by + 40], [bx + 6, by + 40]);
+    T.line([bx, by + 40], [bx - 46, gy - 118]);  /* snöret */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in volymen, ballongens']],
+      [['massa och Algots. Tre krafter']],
+      [['verkar: lyftkraft uppåt, tyngd']],
+      [['och snörkraft nedåt.']]
+    ], 340));
+    T.arrow([bx + 66, by + 30], [bx + 66, by - 30], BLUE);
+    T.lbl('F_L', bx + 76, by, BLUE);
+    T.pause(150);
+    T.arrow([bx - 66, by - 30], [bx - 66, by + 30], BLUE);
+    T.lbl('F_G', bx - 100, by, BLUE);
+    T.pause(150);
+    T.lbl('V=11 liter', bx - 44, by + 6, BLUE);
+    T.lbl('m_b=4,0 g', bx - 44, by + 74, BLUE);
+    T.lbl('m=20 kg', 118, gy - 60, BLUE);
+    T.stepEnd();
+
+    /* ---- a) spännkraften ---- */
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['Ballongen hänger still, så']],
+      [['krafterna är i jämvikt: lyft']],
+      [['uppåt mot tyngd och snörkraft']],
+      [['nedåt.']]
+    ]));
+    T.str('a) Kraftjämvikt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_S+F_G=F_L⟺F_S=F_L-F_G', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Lyftkraften är tyngden av den']],
+      [['LUFT ballongen tränger undan —']],
+      [['luftens densitet, inte']],
+      [['heliumets.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ρ_l_u_f_t=1,293 kg/m^3',
+      'V=11 liter=0,011 m^3',
+      'F_L=ρ_l_u_f_t·V·g=1,293·0,011·9,82=0,1396... N'
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tyngden är ballongens gummi PLUS']],
+      [['heliumet inuti. Heliumet väger']],
+      [['lite, men inte noll — det är den']],
+      [['vanligaste glömskan här.']]
+    ]));
+    klam = valueBracket(acts, [
+      'm_b_a_l_l_o_n_g=4,0 g=0,0040 kg',
+      'm_h_e_l_i_u_m=ρ·V=0,178·0,011=0,001958 kg',
+      'F_G=(0,0040+0,001958)·9,82=0,0585... N'
+    ], padL, y, T.s, F, { rs: 0.7 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in de två']],
+      [['krafterna i formeln.']]
+    ]));
+    T.str('F_S=0,1396...-0,0585...=0,0811... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈0,081 N=81 mN', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['81 millinewton är knappt']],
+      [['märkbart i handen — en']],
+      [['heliumballong drar väldigt']],
+      [['svagt. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 81 mN', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) antalet ballonger ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Varje ballong drar uppåt med']],
+      [['0,0811... N. För att lyfta Algot']],
+      [['måste alla tillsammans matcha']],
+      [['hans tyngd.']]
+    ]));
+    T.str('b) Så många ballongers dragkraft som Algots tyngd',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.str('m·g=n·F_S⟺n=', padL, y);
+    T.fracH('m·g', 'F_S', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Snörkraften tar jag OAVRUNDAD']],
+      [['från a) — annars växer felet']],
+      [['när jag delar med ett så litet']],
+      [['tal.']]
+    ]));
+    klam = valueBracket(acts, [
+      'm=20 kg', 'g≈9,82 N/kg', 'F_S=0,0811... N (från a)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=2 419,613...',
+          T.fracH('20·9,82', '0,0811...', T.str('n=', padL, y), y)
+            + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['20 kg har två värdesiffror.']]
+    ]));
+    T.str('≈2 400 ballonger', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['2 400 ballonger! Filmen "Upp"']],
+      [['hade behövt många fler för ett']],
+      [['helt hus. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 2 400 ballonger', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: luftmassa stiger uppåt (fy1-5.7 Ex 1) -----
+   * Ideala gaslagen. Fällan: temperaturen MÅSTE räknas i kelvin. */
+  function layoutLuftmassa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var lowY = 350, highY = 130;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar luftmassan nere och uppe.']],
+      [['Uppe är trycket lägre, så bubblan']],
+      [['sväller.']]
+    ], 416));
+    T.line([110, lowY + 30], [410, lowY + 30]);
+    T.hatch([110, lowY + 30], [410, lowY + 30], 12);
+    T.pause(150);
+    T.circle(170, lowY - 50, 28);
+    T.circle(320, highY, 42);
+    T.pause(150);
+    (function () {                              /* uppåtpilen */
+      var pts = [];
+      for (var i = 0; i <= 16; i++) {
+        var u = i / 16;
+        pts.push([200 + u * 80, lowY - 78 - u * 92]);
+      }
+      T.dashPts(pts);
+    })();
+    T.arrowHead(280, lowY - 170, 274, lowY - 152, 10);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in tryck, volym och']],
+      [['temperatur före och efter.']]
+    ], 416));
+    T.lbl('p_1=101 kPa', 232, lowY - 68, BLUE);
+    T.lbl('V_1=1 200 m^3', 232, lowY - 40, BLUE);
+    T.lbl('T_1=15 °C', 232, lowY - 12, BLUE);
+    T.pause(150);
+    /* etiketterna läggs UNDER den övre luftmassan — arkets övre högra
+       hörn är reserverat för inställningsrutan (se REGEL) */
+    T.lbl('p_2=80 kPa', 380, highY + 80, BLUE);
+    T.lbl('V_2=1 400 m^3', 380, highY + 108, BLUE);
+    T.lbl('T_2', 380, highY + 136, BLUE);
+    T.stepEnd();
+
+    var y = 524;
+    T.tanke(T.bubble(120, T.bubbleTop(416 + 90), bw, [
+      [['Ideala gaslagen binder ihop']],
+      [['tryck, volym och temperatur']],
+      [['före och efter.']]
+    ]));
+    T.str('Ideala gaslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('p_1·V_1', 'T_1', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('p_2·V_2', 'T_2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut den nya']],
+      [['temperaturen.']]
+    ]));
+    T.fracH('p_2·V_2·T_1', 'p_1·V_1', T.str('T_2=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Temperaturen MÅSTE vara i']],
+      [['kelvin — celsius fungerar inte i']],
+      [['gaslagen. Trycken får däremot']],
+      [['gärna stå kvar i kilopascal.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'p_1=101 kPa', 'V_1=1 200 m^3', 'T_1=15 °C=288 K',
+      'p_2=80 kPa', 'V_2=1 400 m^3'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('80·1 400·288', '101·1 200', T.str('T_2=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=266,138... K≈266 K', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Svaret ska vara i celsius, så']],
+      [['jag drar bort 273 till sist.']]
+    ]));
+    T.str('T_2=266-273=−7 °C', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Luften kyls från +15 till −7 °C']],
+      [['när den stiger och sväller. Just']],
+      [['därför är det kallt högt upp!']]
+    ]));
+    T.underline(T.str('Svar: −7 °C', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: klassrum med uppvärmning (fy1-5.7 Ex 2) ---
+   * Volymen är oförändrad, så V förkortas bort ur gaslagen. */
+  function layoutKlassrum(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ry = 240;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar klassrummet med eleverna']],
+      [['som värmer upp luften.']]
+    ], 330));
+    T.rect(140, ry - 120, 380, ry);
+    T.pause(150);
+    for (var i = 0; i < 4; i++) {
+      var x = 180 + i * 56;
+      T.circle(x, ry - 46, 8);
+      T.line([x, ry - 38], [x, ry - 18]);
+      T.line([x, ry - 32], [x - 12, ry - 24]);
+      T.line([x, ry - 32], [x + 12, ry - 24]);
+      T.line([x, ry - 18], [x - 8, ry]);
+      T.line([x, ry - 18], [x + 8, ry]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in trycket och de två']],
+      [['temperaturerna. Rummet är']],
+      [['detsamma, så volymen ändras']],
+      [['inte.']]
+    ], 330));
+    T.lbl('p_1=103 kPa', 154, ry - 90, BLUE);
+    T.lbl('T_1=20 °C', 154, ry - 62, BLUE);
+    T.pause(150);
+    T.lbl('T_2=28 °C', 288, ry - 90, BLUE);
+    T.lbl('p_2', 288, ry - 62, BLUE);
+    T.stepEnd();
+
+    var y = 438;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 114), bw, [
+      [['Ideala gaslagen igen — men nu']],
+      [['söker jag trycket.']]
+    ]));
+    T.str('Ideala gaslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('p_1·V_1', 'T_1', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('p_2·V_2', 'T_2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Rummets volym är densamma före']],
+      [['och efter, så ', 0], ['V_1', 1], ['=', 0], ['V_2', 1], ['. Då', 0]],
+      [['kan volymen divideras bort ur']],
+      [['båda led.']]
+    ]));
+    var xb = T.fracH('p_1·V_1·T_2', 'T_1·V_2', T.str('p_2=', padL, y), y);
+    T.pause(250);
+    /* stryk V i täljare och nämnare — divideras bort (se REGEL) */
+    T.line([padL + 96, y - 1.06 * F], [padL + 140, y - 1.62 * F], BLUE);
+    T.line([padL + 96, y + 0.86 * F], [padL + 140, y + 0.30 * F], BLUE);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.fracH('p_1·T_2', 'T_1', T.str('p_2=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Temperaturerna görs om till']],
+      [['kelvin, som alltid i gaslagen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'p_1=103 kPa', 'T_1=20 °C=293 K', 'T_2=28 °C=301 K'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=105,812... kPa',
+          T.fracH('103·301', '293', T.str('p_2=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Temperaturerna har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈110 kPa', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Åtta graders uppvärmning höjde']],
+      [['trycket knappt tre procent — ett']],
+      [['klassrum är inte lufttätt, men']],
+      [['räkneövningen håller.']]
+    ]));
+    T.underline(T.str('Svar: 110 kPa', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: hydraulisk domkraft (fy1-5.8 Ex 1) --------
+   * Pascals princip: trycket är detsamma i hela vätskan, så en liten
+   * kraft på en liten yta blir en stor kraft på en stor yta. Areorna
+   * behöver bara ha SAMMA enhet — de förkortas mot varandra. */
+  function layoutDomkraft(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 250, lx = 180, rx = 330;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar domkraften: en smal']],
+      [['cylinder till vänster och en']],
+      [['bred till höger, sammankopplade']],
+      [['med olja.']]
+    ], 330));
+    T.line([lx - 16, vy - 60], [lx - 16, vy]);      /* smala cylindern */
+    T.line([lx + 16, vy - 60], [lx + 16, vy]);
+    T.line([lx - 16, vy], [rx - 48, vy]);
+    T.line([rx - 48, vy], [rx - 48, vy - 40]);     /* breda cylindern */
+    T.line([rx + 48, vy - 40], [rx + 48, vy]);
+    T.line([rx + 48, vy], [rx - 48, vy]);
+    T.pause(150);
+    T.rect(lx - 16, vy - 66, lx + 16, vy - 58);    /* kolvarna */
+    T.rect(rx - 48, vy - 46, rx + 48, vy - 38);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in kraften och de två']],
+      [['plattornas areor.']]
+    ], 330));
+    T.arrow([lx, vy - 108], [lx, vy - 72], BLUE);
+    T.lbl('F_1=0,10 kN', lx - 130, vy - 100, BLUE);
+    T.pause(150);
+    T.lbl('A_1=0,50 dm^2', lx - 138, vy + 28, BLUE);
+    T.pause(150);
+    T.arrow([rx, vy - 52], [rx, vy - 96], BLUE);
+    T.lbl('F_2', rx + 12, vy - 92, BLUE);
+    T.lbl('A_2=100 dm^2', rx - 40, vy + 28, BLUE);
+    T.stepEnd();
+
+    var y = 438;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 90), bw, [
+      [['Pascals princip: trycket är']],
+      [['detsamma i hela vätskan. Alltså']],
+      [['är kraft delat med area lika']],
+      [['stort på båda sidor.']]
+    ]));
+    T.str('Pascals princip', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('F_1', 'A_1', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('F_2', 'A_2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut den kraft']],
+      [['domkraften ger.']]
+    ]));
+    T.fracH('F_1·A_2', 'A_1', T.str('F_2=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Areorna behöver INTE göras om']],
+      [['till kvadratmeter — de står i']],
+      [['täljare och nämnare och tar ut']],
+      [['varandra. Bara samma enhet.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'F_1=0,10 kN=100 N', 'A_1=0,50 dm^2', 'A_2=100 dm^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=20 000 N=20 kN',
+          T.fracH('100·100', '0,50', T.str('F_2=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Du trycker med tyngden av 10 kg']],
+      [['och lyfter tyngden av 2 ton —']],
+      [['200 gånger mer, precis som']],
+      [['ytorna förhåller sig.']]
+    ]));
+    T.underline(T.str('Svar: 20 kN', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 6 ================
+   * Värme och fasövergångar. Genomgående mönster: "avgiven energi =
+   * upptagen energi", och att en fasövergång sker vid KONSTANT
+   * temperatur och kräver sin egen energipost. */
+
+  /* ---------------- scen: varmvattenberedaren (fy1-6.2 Ex 1) --------
+   * a) energin för uppvärmningen, b) tiden det tar med given effekt. */
+  function layoutVarmvatten(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var tx = 250, tT = 100, tB = 270;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar varmvattenberedaren med']],
+      [['värmeslingan i.']]
+    ], 320));
+    T.rect(tx - 56, tT, tx + 56, tB);
+    T.line([tx - 56, tT + 14], [tx + 56, tT + 14]);
+    T.pause(150);
+    (function () {                              /* värmeslingan */
+      var pts = [];
+      for (var i = 0; i <= 30; i++) {
+        var u = i / 30;
+        pts.push([tx - 34 + 68 * Math.sin(u * 5 * Math.PI),
+                  tT + 50 + u * 150]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in effekten, mängden']],
+      [['vatten och de två']],
+      [['temperaturerna.']]
+    ], 340));
+    T.lbl('P=5,0 kW', tx - 46, tT - 14, BLUE);
+    T.pause(150);
+    T.lbl('25 liter', tx + 70, tT + 60, BLUE);
+    T.pause(150);
+    T.lbl('10 °C', 118, tT + 110, BLUE);
+    T.arrow([176, tT + 104], [220, tT + 104], BLUE);
+    T.lbl('40 °C', tx + 70, tT + 120, BLUE);
+    T.stepEnd();
+
+    /* ---- a) energin ---- */
+    var y = 452;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 90), bw, [
+      [['Energin för att värma ett ämne']],
+      [['beror på massan, hur många']],
+      [['grader det ska värmas och']],
+      [['ämnets värmekapacitet.']]
+    ]));
+    T.str('a) Energi för uppvärmning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E=c·m·ΔT', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['En liter vatten väger ungefär']],
+      [['ett kilo. Temperaturändringen är']],
+      [['30 grader — och en grads ändring']],
+      [['är lika stor i °C som i K.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'c=4,18 kJ/(kg·K)=4 180 J/(kg·K)',
+      'm=25 kg (1 liter vatten väger ca 1 kg)',
+      'ΔT=T_2-T_1=40-10=30 K'
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('E=4 180·25·30=3,135·10^6 J', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Effekten']],
+      [['och volymen har två']],
+      [['värdesiffror.']]
+    ]));
+    var avrS = '≈3,1 MJ';
+    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 3,1 MJ', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) tiden ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['All energi beredaren avger tas']],
+      [['upp av vattnet. Effekt gånger']],
+      [['tid är just avgiven energi.']]
+    ]));
+    T.str('b) Avgiven energi = upptagen energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('P·t=E_u_p_p', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag löser ut tiden.']]
+    ]));
+    T.fracH('E_u_p_p', 'P', T.str('t=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Energin tar jag OAVRUNDAD från']],
+      [['a), och kilowatt görs om till']],
+      [['watt.']]
+    ]));
+    klam = valueBracket(acts, [
+      'E_u_p_p=3,135·10^6 J (från a)', 'P=5,0 kW=5 000 W'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=627 s',
+          T.fracH('3,135·10^6', '5 000', T.str('t=', padL, y), y)
+            + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Sekunder säger inte så mycket.']],
+      [['627 s är 10 minuter och']],
+      [['27 sekunder.']]
+    ]));
+    T.str('627 s=10 min 27 s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tio minuter för en hink varmt']],
+      [['vatten med en 5 kW-beredare —']],
+      [['ungefär så länge man får vänta']],
+      [['i verkligheten. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: ca 10 minuter', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: blandning varmt och kallt (fy1-6.2 Ex 2) --
+   * Avgiven energi = upptagen energi. Värmekapaciteten är samma vätska i
+   * båda leden och divideras bort. Sluttemperaturen blir en obekant som
+   * står i BÅDA temperaturändringarna — därför en ekvation. */
+  function layoutBlandvatten(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gy = 250;
+
+    function glas(cx, h, txt) {
+      T.line([cx - 30, gy - h], [cx - 24, gy]);
+      T.line([cx + 30, gy - h], [cx + 24, gy]);
+      T.line([cx - 24, gy], [cx + 24, gy]);
+      T.line([cx - 27, gy - h + 16], [cx + 27, gy - h + 16]);
+      T.lbl(txt, cx - 34, gy + 30, BLUE);
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två vattenmängderna']],
+      [['som ska blandas.']]
+    ], 330));
+    T.line([110, gy], [410, gy]);
+    glas(190, 96, '');
+    glas(320, 70, '');
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in mängderna och']],
+      [['temperaturerna. Sluttemperaturen']],
+      [['', 0], ['T', 1], [' är det jag söker.', 0]]
+    ], 330));
+    T.lbl('5,0 dl', 158, gy + 30, BLUE);
+    T.lbl('80 °C', 158, gy - 60, BLUE);
+    T.pause(150);
+    T.lbl('3,0 dl', 288, gy + 30, BLUE);
+    T.lbl('20 °C', 288, gy - 34, BLUE);
+    T.pause(150);
+    T.arrow([228, gy - 76], [282, gy - 76], BLUE);
+    T.lbl('T', 356, gy - 40, BLUE);
+    T.stepEnd();
+
+    var y = 438;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 90), bw, [
+      [['Värme flödar från varmt till']],
+      [['kallt. Det varma vattnet AVGER']],
+      [['precis den energi det kalla']],
+      [['UPPTAR.']]
+    ]));
+    T.str('Avgiven energi = upptagen energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('c·m_v·ΔT_v=c·m_k·ΔT_k', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Det är samma vätska i båda led,']],
+      [['så värmekapaciteten ', 0], ['c', 1], [' står i', 0]],
+      [['båda och kan divideras bort.']]
+    ]));
+    var xa = T.str('c·m_v·ΔT_v=c·m_k·ΔT_k', padL, y);
+    T.pause(250);
+    T.line([padL - 4, y + 0.28 * F], [padL + T.adv('c') + 4, y - 0.72 * F],
+           BLUE);
+    var xc = padL + T.adv('c·m_v·ΔT_v=');
+    T.line([xc - 4, y + 0.28 * F], [xc + T.adv('c') + 4, y - 0.72 * F], BLUE);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.str('m_v·ΔT_v=m_k·ΔT_k', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Sluttemperaturen ', 0], ['T', 1], [' står i BÅDA', 0]],
+      [['temperaturändringarna: det varma']],
+      [['kyls från 80 ned till ', 0], ['T', 1], [', det', 0]],
+      [['kalla värms från 20 upp till ', 0], ['T', 1]]
+    ]));
+    var klam = valueBracket(acts, [
+      'm_v=0,50 kg', 'm_k=0,30 kg', 'ΔT_v=80-T', 'ΔT_k=T-20'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena — och']],
+      [['får en ekvation med ', 0], ['T', 1], [' som enda', 0]],
+      [['obekanta.']]
+    ]));
+    T.str('0,50·(80-T)=0,30·(T-20)', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag multiplicerar in i']],
+      [['parenteserna.']]
+    ]));
+    T.str('40-0,50T=0,30T-6', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Sedan samlar jag ', 0], ['T', 1], ['-termerna i', 0]],
+      [['ena ledet och talen i det andra.']]
+    ]));
+    T.str('46=0,80T', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Till sist dividerar jag båda led']],
+      [['med 0,80.']]
+    ]));
+    T.str('=57,5 °C≈58 °C',
+          T.fracH('46', '0,80', T.str('T=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['58 °C ligger mellan 20 och 80,']],
+      [['och närmare 80 eftersom det var']],
+      [['mer varmvatten. Precis som det']],
+      [['ska vara!']]
+    ]));
+    T.underline(T.str('Svar: 58 °C', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: smälta tenn (fy1-6.3 Ex 1) ----------------
+   * Två energiposter: först UPPVÄRMNING till smältpunkten, sedan
+   * SMÄLTNING vid konstant temperatur. Smältpunkten slås upp i tabell. */
+  function layoutSmaltatenn(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 160, oy = 280;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar en temperaturkurva:']],
+      [['tennet värms först, och smälter']],
+      [['sedan vid konstant temperatur.']]
+    ], 340));
+    var P = diagram(T, { ox: ox, oy: oy, kx: 34, ky: 0.62, xMax: 7.4,
+                         yMax: 300, xTicks: [], yTicks: [20, 232],
+                         xLbl: 'tillförd energi', yLbl: 'T (°C)' });
+    T.pause(150);
+    T.line(P(0, 20), P(3.4, 232));
+    T.line(P(3.4, 232), P(6.6, 232));
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Första delen är uppvärmningen,']],
+      [['den vågräta delen är']],
+      [['smältningen — där stiger inte']],
+      [['temperaturen alls.']]
+    ], 340));
+    T.dash(P(3.4, 20), P(3.4, 232));
+    T.lbl('E_u', P(1.4, 150)[0], P(1.4, 150)[1], BLUE);
+    T.lbl('E_s', P(4.6, 250)[0], P(4.6, 250)[1], BLUE);
+    T.pause(150);
+    T.lbl('m=50 g', P(4.6, 120)[0], P(4.6, 120)[1], BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['Energin går åt till TVÅ saker:']],
+      [['först värma tennet till']],
+      [['smältpunkten, sedan smälta det.']]
+    ]));
+    T.str('Uppvärmning plus smältning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E=E_u+E_s=c·m·ΔT+l_s·m', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tenns smältpunkt står inte i']],
+      [['uppgiften — den slår jag upp i']],
+      [['tabellen: 232 °C. Det är dit']],
+      [['tennet ska värmas.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'c=0,23 kJ/(kg·K) (tenn)',
+      'm=50 g=0,050 kg',
+      'ΔT=232-20=212 K',
+      'l_s=59 kJ/kg (tenn)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Både värmekapaciteten och']],
+      [['smältentalpin står i kJ, så']],
+      [['svaret blir i kilojoule.']]
+    ]));
+    T.str('E=0,23·0,050·212+59·0,050', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=5,388 kJ≈5,4 kJ', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nästan hela energin, 2,95 av']],
+      [['5,4 kJ, går åt till själva']],
+      [['smältningen. Fasövergången']],
+      [['kostar mest!']]
+    ]));
+    T.underline(T.str('Svar: 5,4 kJ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: varmvatten i is (fy1-6.3 Ex 2) ------------
+   * Vattnet avger energi; isen både värms OCH smälter delvis. Att
+   * sluttemperaturen är 0 °C är nyckeln — så länge is finns kvar kan
+   * blandningen inte bli varmare. */
+  function layoutVarmvattenis(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var hy = 280, hx = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar hinken med is, och']],
+      [['varmvattnet som hälls i.']]
+    ], 340));
+    T.line([hx - 70, hy - 90], [hx - 56, hy]);
+    T.line([hx + 70, hy - 90], [hx + 56, hy]);
+    T.line([hx - 56, hy], [hx + 56, hy]);
+    T.pause(150);
+    for (var i = 0; i < 5; i++) {               /* isbitar */
+      var bx = hx - 40 + (i % 3) * 40, by = hy - 22 - Math.floor(i / 3) * 26;
+      T.rect(bx - 14, by - 16, bx + 14, by);
+    }
+    T.pause(150);
+    (function () {                              /* vattenstrålen */
+      var pts = [];
+      for (var k = 0; k <= 20; k++) {
+        var u = k / 20;
+        pts.push([hx - 6 + u * 12, hy - 176 + u * 66]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in vattnets mängd och']],
+      [['temperatur, och isens.']]
+    ], 340));
+    T.lbl('1,0 liter', hx + 20, hy - 168, BLUE);
+    T.lbl('56 °C', hx + 20, hy - 140, BLUE);
+    T.pause(150);
+    T.lbl('2,0 kg is', hx - 208, hy - 50, BLUE);
+    T.lbl('−8 °C', hx - 208, hy - 22, BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 66), bw, [
+      [['Vattnet avger energi. Isen tar']],
+      [['upp den — dels för att VÄRMAS']],
+      [['till 0 °C, dels för att SMÄLTA.']]
+    ]));
+    T.str('Avgiven energi = upptagen energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('c_v·m_v·ΔT_v=c_i·m_i·ΔT_i+l_s·m_s', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag löser ut massan smält is —']],
+      [['det är den uppgiften frågar']],
+      [['efter.']]
+    ]));
+    T.fracH('c_v·m_v·ΔT_v-c_i·m_i·ΔT_i', 'l_s',
+            T.str('m_s=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Så länge det finns is kvar kan']],
+      [['blandningen inte bli varmare än']],
+      [['0 °C. Därifrån får jag båda']],
+      [['temperaturändringarna.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'c_v=4,18 kJ/(kg·K)', 'm_v=1,0 kg', 'ΔT_v=56-0=56 K',
+      'c_i=2,2 kJ/(kg·K)', 'm_i=2,0 kg', 'ΔT_i=0-(−8)=8 K',
+      'l_s=334 kJ/kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('4,18·1,0·56-2,2·2,0·8', '334', T.str('m_s=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=0,595... kg≈0,60 kg', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Bara 0,6 kg av de 2 kg isen']],
+      [['smälter — resten ligger kvar.']],
+      [['Att smälta is kostar enormt']],
+      [['mycket energi.']]
+    ]));
+    T.underline(T.str('Svar: 0,60 kg', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 7 ================
+   * Ellära. Genomgående: laddning i coulomb är ett HUGE tal räknat i
+   * elektroner, prefixen (n, µ, m, k) måste göras om till tiopotenser,
+   * och kretsresonemang bygger på Kirchhoffs lagar. */
+
+  /* ---------------- scen: metallkulor som vidrör varandra (7.1 Ex 1) --
+   * a) antalet överskottselektroner, b) laddningen efter kontakt. Två
+   * lika stora ledande kulor delar laddningen lika — medelvärdet. */
+  function layoutMetallkulor(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ky = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två metallkulorna som']],
+      [['nuddar varandra.']]
+    ], 300));
+    T.circle(210, ky, 44);
+    T.circle(300, ky, 44);
+    T.pause(150);
+    T.str('+', 200, ky + 8, null, 0.8);
+    T.line([288, ky], [312, ky]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in laddningarna. Den ena']],
+      [['har överskott på elektroner, den']],
+      [['andra underskott.']]
+    ], 300));
+    T.lbl('Q_1=+5,0 nC', 148, ky - 66, BLUE);
+    T.pause(150);
+    T.lbl('Q_2=−3,0 nC', 268, ky + 82, BLUE);
+    T.stepEnd();
+
+    /* ---- a) antalet elektroner ---- */
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Laddningen 3,0 nC består av ett']],
+      [['helt antal elektroner. Jag delar']],
+      [['laddningen med en elektrons']],
+      [['laddning.']]
+    ]));
+    T.str('a) Antal elektroner', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('Q', 'q_e', T.str('n=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Nanocoulomb görs om till']],
+      [['coulomb. Tecknet struntar jag i —']],
+      [['jag vill bara veta ANTALET.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'Q=3,0 nC=3,0·10^−^9 C', 'q_e≈1,602·10^−^1^9 C'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=1,872...·10^1^0 st',
+          T.fracH('3,0·10^−^9', '1,602·10^−^1^9', T.str('n=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.str('≈1,9·10^1^0 st', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['19 miljarder elektroner för en']],
+      [['laddning man knappt kan mäta.']],
+      [['En enskild elektron bär']],
+      [['försvinnande lite laddning.']]
+    ]));
+    T.underline(T.str('Svar: 1,9·10^1^0 st', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) laddningen efter kontakt ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kulorna är lika stora och leder']],
+      [['ström, så laddningen fördelar']],
+      [['sig jämnt. Slutladdningen är']],
+      [['medelvärdet.']]
+    ]));
+    T.str('b) Laddningen fördelas jämnt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('Q_1+Q_2', '2', T.str('Q=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Här MÅSTE tecknen med — den ena']],
+      [['laddningen är negativ.']]
+    ]));
+    klam = valueBracket(acts, ['Q_1=+5,0 nC', 'Q_2=−3,0 nC'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xb = T.fracH('+5,0+(−3,0)', '2', T.str('Q=', padL, y), y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('+2,0', '2', xb, y);
+    T.str('=+1,0 nC', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Elektronöverskottet på den ena']],
+      [['kulan fyller underskottet på den']],
+      [['andra. Kvar blir hälften av det']],
+      [['som blev över.']]
+    ]));
+    T.underline(T.str('Svar: +1,0 nC på varje kula', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två kulor 30 cm isär (fy1-7.2 Ex 1) -------
+   * Coulombs lag. a) kraften på den negativa kulan, b) på den positiva —
+   * lika stor enligt Newtons tredje lag. */
+  function layoutCoulombkulor(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ky = 190, aX = 180, bX = 340;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två kulorna på 30 cm']],
+      [['avstånd.']]
+    ], 300));
+    T.circle(aX, ky, 24);
+    T.line([aX - 12, ky], [aX + 12, ky]);
+    T.circle(bX, ky, 24);
+    T.str('+', bX - 10, ky + 8, null, 0.8);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in laddningarna och']],
+      [['avståndet. Olika tecken betyder']],
+      [['att kulorna DRAS mot varandra.']]
+    ], 336));
+    T.lbl('Q_1=−5,0 nC', aX - 60, ky - 44, BLUE);
+    T.lbl('Q_2=+3,0 nC', bX - 40, ky + 108, BLUE);
+    T.pause(150);
+    T.dblArrow([aX, ky + 54], [bX, ky + 54], BLUE);
+    T.lbl('r=30 cm', aX + 32, ky + 82, BLUE);
+    T.pause(150);
+    T.arrow([aX + 30, ky], [aX + 76, ky], BLUE);
+    T.arrow([bX - 30, ky], [bX - 76, ky], BLUE);
+    T.stepEnd();
+
+    var y = 436;
+    T.tanke(T.bubble(120, T.bubbleTop(336 + 90), bw, [
+      [['Coulombs lag ser precis ut som']],
+      [['gravitationslagen — men med']],
+      [['laddningar i stället för massor.']]
+    ]));
+    T.str('a) Coulombs lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('Q_1·Q_2', 'r^2', T.str('F=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nanocoulomb blir coulomb och']],
+      [['centimeter blir meter.']],
+      [['Coulombs konstant står i']],
+      [['tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'Q_1=5,0 nC=5,0·10^−^9 C', 'Q_2=3,0 nC=3,0·10^−^9 C',
+      'r=30 cm=0,30 m', 'k≈8,99·10^9 N·m^2/C^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('5,0·10^−^9·3,0·10^−^9', '0,30^2',
+            T.str('F=8,99·10^9·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=1,498...·10^−^6 N≈1,5 µN', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Olika tecken ger dragning, så']],
+      [['den negativa kulan dras mot den']],
+      [['positiva.']]
+    ]));
+    T.underline(T.str('Svar: 1,5 µN mot den positiva kulan', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) kraften på den positiva ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ingen ny räkning behövs.']],
+      [['Newtons tredje lag: krafterna i']],
+      [['ett kraftpar är alltid lika']],
+      [['stora och motriktade.']]
+    ]));
+    T.str('b) Newtons tredje lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('lika stor kraft, motsatt riktning', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 1,5 µN mot den negativa kulan', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: hur ändras kraften? (fy1-7.2 Ex 2) --------
+   * Ingen mätdata — uppgiften löses generellt genom att sätta in de nya
+   * uttrycken i Coulombs lag och förenkla. */
+  function layoutAndradkraft(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 110;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Uppgiften ger inga mätvärden, så']],
+      [['jag räknar med symboler. Först']],
+      [['kraften som den var från']],
+      [['början.']]
+    ]));
+    T.str('Kraften före', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('Q_1·Q_2', 'r^2', T.str('F_1=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Nu byter jag ut ', 0], ['Q_1', 1], [' mot 2', 0], ['Q_1', 1]],
+      [['och ', 0], ['r', 1], [' mot ', 0], ['r', 1], ['/2. Halva avståndet', 0]],
+      [['står i KVADRAT — det är där']],
+      [['effekten blir stor.']]
+    ]));
+    var xa = T.str('F_2=k·', padL, y);
+    T.bigFrac('(2Q_1)·Q_2', ['r^2', '4'], xa, y);
+    T.stepEnd();
+
+    y += adv + 3.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.6), bw, [
+      [['Att dividera med ett bråk är']],
+      [['samma sak som att multiplicera']],
+      [['med dess invers — nämnarens 4']],
+      [['flyttar upp i täljaren.']]
+    ]));
+    T.fracH('8·Q_1·Q_2', 'r^2', T.str('F_2=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jämför de två uttrycken: allt är']],
+      [['sig likt utom faktorn 8.']]
+    ]));
+    T.str('F_2=8·F_1', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Dubbla laddningen ger 2 gånger,']],
+      [['halva avståndet ger 4 gånger —']],
+      [['tillsammans 8. Avståndet väger']],
+      [['tyngst, för det står i kvadrat.']]
+    ]));
+    T.underline(T.str('Svar: kraften blir 8 gånger större', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: antal elektroner per sekund (7.3 Ex 1) ---- */
+  function layoutElektronflode(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ly = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar ledaren med ett tvärsnitt']],
+      [['som elektronerna passerar.']]
+    ], 292));
+    T.line([120, ly - 26], [400, ly - 26]);
+    T.line([120, ly + 26], [400, ly + 26]);
+    T.pause(150);
+    T.dash([270, ly - 40], [270, ly + 40]);
+    for (var i = 0; i < 4; i++) {
+      T.circle(160 + i * 40, ly, 8);
+      T.line([154 + i * 40, ly], [166 + i * 40, ly]);
+    }
+    T.arrow([320, ly], [376, ly], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in strömmen och tiden.']],
+      [['Ström är laddning per sekund.']]
+    ], 292));
+    T.lbl('I=0,24 A', 300, ly - 44, BLUE);
+    T.pause(150);
+    T.lbl('t=1,0 s', 300, ly + 60, BLUE);
+    T.stepEnd();
+
+    var y = 392;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['Först laddningen som passerar på']],
+      [['en sekund. Ström är just']],
+      [['laddning per tid.']]
+    ]));
+    T.str('Laddning per sekund', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('Q', 't', T.str('I=', padL, y), y);
+    T.str('⟺Q=I·t=0,24·1,0=0,24 C', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Sedan delar jag laddningen med']],
+      [['en elektrons laddning för att få']],
+      [['antalet.']]
+    ]));
+    T.fracH('Q', 'q_e', T.str('n=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    var klam = valueBracket(acts, ['Q=0,24 C', 'q_e≈1,602·10^−^1^9 C'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=1,498...·10^1^8 st',
+          T.fracH('0,24', '1,602·10^−^1^9', T.str('n=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.str('≈1,5·10^1^8 st', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En och en halv triljon']],
+      [['elektroner varje sekund — i en']],
+      [['helt vanlig liten ström.']],
+      [['Rimligt, de är ju pyttesmå.']]
+    ]));
+    T.underline(T.str('Svar: 1,5·10^1^8 st', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Kirchhoffs första lag (fy1-7.3 Ex 2) ------
+   * Allt som går IN i en knutpunkt måste också gå UT. */
+  function layoutKirchhoff(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var kx = 260, ky = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar knutpunkten med de tre']],
+      [['ledarna.']]
+    ], 300));
+    T.line([130, ky], [kx, ky]);
+    T.line([kx, ky], [390, ky]);
+    T.line([kx, ky], [kx, ky + 90]);
+    T.dot(kx, ky);
+    T.pause(150);
+    T.arrowHead(200, ky, 170, ky, 10);
+    T.arrowHead(340, ky, 310, ky, 10);
+    T.arrowHead(kx, ky + 70, kx, ky + 40, 10);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in strömmarna. ', 0], ['I_1', 1], [' går IN,', 0]],
+      [['', 0], ['I_2', 1], [' och ', 0], ['I_3', 1], [' går UT.', 0]]
+    ], 330));
+    T.lbl('I_1=0,25 A', 140, ky - 20, BLUE);
+    T.pause(150);
+    T.lbl('I_2', 320, ky - 20, BLUE);
+    T.pause(150);
+    T.lbl('I_3=0,08 A', kx + 14, ky + 70, BLUE);
+    T.stepEnd();
+
+    var y = 424;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 66), bw, [
+      [['Kirchhoffs första lag: laddning']],
+      [['försvinner inte i en knutpunkt.']],
+      [['Allt som kommer in måste komma']],
+      [['ut igen.']]
+    ]));
+    T.str('Kirchhoffs första lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('I_1=I_2+I_3⟺I_2=I_1-I_3', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    var klam = valueBracket(acts, ['I_1=0,25 A', 'I_3=0,08 A'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('I_2=0,25-0,08=0,17 A', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['0,17 plus 0,08 blir 0,25 —']],
+      [['precis det som kom in.']],
+      [['Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 0,17 A', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: accelererad elektron (fy1-7.4 Ex 1) -------
+   * Elektrisk energi blir rörelseenergi — samma resonemang som i
+   * de Broglie-uppgiften i Fysik 2. */
+  function layoutAccelelektron(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var py = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två plattorna som']],
+      [['elektronen accelereras mellan.']]
+    ], 300));
+    T.line([170, py - 74], [170, py + 74]);
+    T.line([360, py - 74], [360, py + 74]);
+    T.str('+', 148, py + 6, null, 0.62);
+    T.str('-', 372, py + 6, null, 0.62);
+    T.pause(150);
+    T.circle(196, py, 11);
+    T.line([190, py], [202, py]);
+    T.arrow([212, py], [286, py], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningen.']],
+      [['Elektronen startar från vila.']]
+    ], 300));
+    T.lbl('U=1,5 V', 226, py - 34, BLUE);
+    T.pause(150);
+    T.lbl('v', 292, py - 8, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Den elektriska energin']],
+      [['omvandlas helt till']],
+      [['rörelseenergi.']]
+    ]));
+    T.str('Elektrisk energi blir rörelseenergi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    T.fracH('m·v^2', '2', T.str('Q·U=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut hastigheten:']],
+      [['multiplicera med 2, dividera med']],
+      [['massan och dra roten ur.']]
+    ]));
+    rotFrac(T, F, '2·Q·U', 'm', T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Elementarladdningen och']],
+      [['elektronens massa står båda i']],
+      [['tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'q≈1,602·10^−^1^9 C', 'U=1,5 V', 'm≈9,11·10^−^3^1 kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    rotFrac(T, F, '2·1,602·10^−^1^9·1,5', '9,11·10^−^3^1',
+            T.str('v=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=726 327,846... m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Spänningen 1,5 V har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈730 000 m/s=0,73 Mm/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['0,73 Mm/s är en fjärdedels']],
+      [['procent av ljushastigheten —']],
+      [['snabbt, men långt under']],
+      [['relativitetens gräns. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,73 Mm/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: skyddande resistans (fy1-7.5 Ex 1) -------- */
+  function layoutSkyddsresistans(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 160, xR = 380, yT = 120, yB = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen: batteri,']],
+      [['skyddsresistor och komponenten i']],
+      [['serie.']]
+    ], 300));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    T.line([xR, yT], [xR, yB]);
+    T.pause(150);
+    T.rect(240, yT - 12, 300, yT + 12);        /* resistorn */
+    T.line([240, yT], [230, yT]);
+    T.line([300, yT], [310, yT]);
+    T.pause(150);
+    T.line([xL - 14, (yT + yB) / 2 - 16], [xL + 14, (yT + yB) / 2 - 16]);
+    T.line([xL - 8, (yT + yB) / 2 - 8], [xL + 8, (yT + yB) / 2 - 8]);
+    T.circle(xR, (yT + yB) / 2, 16);           /* komponenten */
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningen och den']],
+      [['största ström komponenten tål.']]
+    ], 300));
+    T.lbl('U=1,5 V', 40, (yT + yB) / 2 - 6, BLUE);
+    T.pause(150);
+    T.lbl('I=0,12 mA', 254, yT - 34, BLUE);
+    T.pause(150);
+    T.lbl('R', 262, yT + 44, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Ohms lag binder ihop spänning,']],
+      [['ström och resistans. Jag löser']],
+      [['ut resistansen.']]
+    ]));
+    T.str('Ohms lag', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('U=R·I⟺R=', padL, y);
+    T.fracH('U', 'I', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Milliampere görs om till']],
+      [['ampere — annars blir svaret']],
+      [['tusen gånger fel.']]
+    ]));
+    var klam = valueBracket(acts, ['U=1,5 V', 'I=0,12 mA=0,12·10^−^3 A'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=12 500 Ω',
+          T.fracH('1,5', '0,12·10^−^3', T.str('R=', padL, y), y) + 0.12 * F,
+          y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Båda']],
+      [['mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈13 000 Ω=13 kΩ', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En liten ström kräver en stor']],
+      [['resistans. 13 kΩ är ett vanligt']],
+      [['värde på en skyddsresistor.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 13 kΩ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: aluminiumledare (fy1-7.5 Ex 2) -----------
+   * Resistansen beror på materialet, längden och tvärsnittsarean. */
+  function layoutAluminiumledare(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ly = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar ledaren i genomskärning.']]
+    ], 292));
+    T.line([140, ly - 22], [380, ly - 22]);
+    T.line([140, ly + 22], [380, ly + 22]);
+    T.pause(150);
+    (function () {                              /* tvärsnittet */
+      var pts = [];
+      for (var i = 0; i <= 22; i++) {
+        var a = (i / 22) * Math.PI * 2;
+        pts.push([380 + 10 * Math.cos(a), ly + 22 * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in längden och']],
+      [['tvärsnittsarean. Resistiviteten']],
+      [['för aluminium slår jag upp i']],
+      [['tabellen.']]
+    ], 292));
+    T.dblArrow([140, ly + 54], [380, ly + 54], BLUE);
+    T.lbl('l=2,0 m', 220, ly + 82, BLUE);
+    T.pause(150);
+    T.lbl('A=0,15 cm^2', 400, ly + 6, BLUE);
+    T.pause(150);
+    T.lbl('aluminium', 190, ly + 6, BLUE);
+    T.stepEnd();
+
+    var y = 392;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 90), bw, [
+      [['Lång och smal ledare ger hög']],
+      [['resistans; kort och tjock ger']],
+      [['låg. Materialet bestämmer']],
+      [['resistiviteten.']]
+    ]));
+    T.str('Resistans i en ledare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('l', 'A', T.str('R=ρ·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Mikroohmmeter görs om till']],
+      [['ohmmeter, och kvadratcentimeter']],
+      [['till kvadratmeter — tiopotensen']],
+      [['upphöjd till TVÅ.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'ρ=0,027 µΩ·m=0,027·10^−^6 Ω·m (tabell)',
+      'l=2,0 m',
+      'A=0,15 cm^2=0,15·10^−^4 m^2'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('2,0', '0,15·10^−^4', T.str('R=0,027·10^−^6·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=0,0036 Ω=3,6 mΩ', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Några tusendels ohm — en grov']],
+      [['aluminiumledare leder nästan']],
+      [['motståndslöst. Det är just']],
+      [['därför kraftledningar ser ut så.']]
+    ]));
+    T.underline(T.str('Svar: 3,6 mΩ', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- kopplingsschema: gemensamma symboler -------------
+   * Batteriet ritas som ett långt och ett kort streck, lampan som en
+   * ring med ett kryss, resistorn som en avlång rektangel. Komponenterna
+   * placeras JÄMNT FÖRDELADE på sin ledarsträcka (se REGEL om
+   * kopplingsscheman). */
+  function kretsBatteri(T, x, y, lodrat) {
+    if (lodrat) {
+      T.line([x - 16, y - 6], [x + 16, y - 6]);
+      T.line([x - 8, y + 6], [x + 8, y + 6]);
+    } else {
+      T.line([x - 6, y - 16], [x - 6, y + 16]);
+      T.line([x + 6, y - 8], [x + 6, y + 8]);
+    }
+  }
+  function kretsLampa(T, x, y, r) {
+    r = r || 16;
+    T.circle(x, y, r);
+    var d = r * 0.7;
+    T.line([x - d, y - d], [x + d, y + d]);
+    T.line([x + d, y - d], [x - d, y + d]);
+  }
+  function kretsResistor(T, x, y, w, h) {
+    w = w || 54; h = h || 22;
+    T.rect(x - w / 2, y - h / 2, x + w / 2, y + h / 2);
+  }
+
+  /* ---------------- scen: koppla in en till lampa (fy1-7.6 Ex 1) ----
+   * Ren resonemangsuppgift. a) serie — dubbel resistans, halva strömmen,
+   * svagare. b) parallellt — samma spänning över lampan, oförändrat. */
+  function layoutEnTillLampa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* ---- a) seriekoppling ---- */
+    T.tanke(T.figurBubble(292, [
+      [['a) Ritar kretsen med den nya']],
+      [['lampan i SERIE — all ström måste']],
+      [['gå genom båda.']]
+    ], 300));
+    (function () {
+      var xL = 160, xR = 400, yT = 120, yB = 240;
+      T.line([xL, yT], [xR, yT]);
+      T.line([xL, yB], [xR, yB]);
+      T.line([xL, yT], [xL, yB]);
+      T.line([xR, yT], [xR, yB]);
+      kretsBatteri(T, xL, (yT + yB) / 2, false);
+      /* två lampor jämnt fördelade på översträckan */
+      kretsLampa(T, xL + (xR - xL) / 3, yT);
+      kretsLampa(T, xL + 2 * (xR - xL) / 3, yT);
+      T.str('1', xL + (xR - xL) / 3 - 6, yT + 44, null, 0.62);
+      T.str('2', xL + 2 * (xR - xL) / 3 - 6, yT + 44, null, 0.62);
+    })();
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Två lampor efter varandra ger']],
+      [['dubbelt så stor resistans. Med']],
+      [['samma spänning ger Ohms lag då']],
+      [['halva strömmen.']]
+    ]));
+    T.str('a) Seriekoppling', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('resistansen fördubblas', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('Ohms lag: dubbel R ger halva strömmen',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('svagare ström genom lampa 1', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: svagare', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) parallellkoppling ---- */
+    var fy = y + 190;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu kopplas den nya lampan']],
+      [['PARALLELLT — var och en sitter']],
+      [['direkt över batteriet.']]
+    ]));
+    (function () {
+      var xL = 160, xR = 400, yT = fy - 60, yB = fy + 60;
+      T.line([xL, yT], [xR, yT]);
+      T.line([xL, yB], [xR, yB]);
+      T.line([xL, yT], [xL, yB]);
+      kretsBatteri(T, xL, fy, false);
+      /* två grenar på LIKA avstånd från topp- och bottenledning */
+      var g1 = yT + (yB - yT) / 3, g2 = yT + 2 * (yB - yT) / 3;
+      T.line([300, yT], [300, yB]);
+      T.line([xR, yT], [xR, yB]);
+      kretsLampa(T, 300, (yT + yB) / 2);
+      kretsLampa(T, xR, (yT + yB) / 2);
+      T.str('1', 282, (yT + yB) / 2 + 44, null, 0.62);
+      T.str('2', 382, (yT + yB) / 2 + 44, null, 0.62);
+    })();
+    T.stepEnd();
+
+    y = fy + 160;
+    T.tanke(T.bubble(120, fy + 112, bw, [
+      [['Varje lampa ligger direkt över']],
+      [['batteriet, så spänningen över']],
+      [['lampa 1 är oförändrad.']]
+    ]));
+    T.str('b) Parallellkoppling', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('samma spänning över lampa 1 som förut',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('samma resistans i lampa 1 som förut',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('Ohms lag ger då samma ström', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Batteriet får däremot lämna']],
+      [['dubbelt så mycket ström totalt —']],
+      [['men lampa 1 märker ingenting.']]
+    ]));
+    T.underline(T.str('Svar: oförändrat', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: fyra lampor i blandkoppling (7.6 Ex 2) ----
+   * a) starkast lyser den lampa som all ström passerar, b) svagast den
+   * gren som har störst resistans. */
+  function layoutFyralampor(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 140, xR = 420, yT = 110, yB = 280;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen: lampa 1 i serie']],
+      [['med en förgrening där lampa 2']],
+      [['sitter i ena grenen och lampa 3']],
+      [['och 4 i den andra.']]
+    ], 340));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    kretsBatteri(T, xL, (yT + yB) / 2, false);
+    kretsLampa(T, 210, yT);
+    T.str('1', 204, yT - 32, null, 0.62);
+    T.pause(150);
+    /* förgreningen: två grenar på lika avstånd */
+    var gx = 290, hx = xR;
+    var g1 = yT + (yB - yT) / 3, g2 = yT + 2 * (yB - yT) / 3;
+    T.line([gx, yT], [gx, yB]);
+    T.line([gx, g1], [hx, g1]);
+    T.line([gx, g2], [hx, g2]);
+    T.line([hx, yT], [hx, yB]);
+    T.dot(gx, g1);
+    T.dot(gx, g2);
+    kretsLampa(T, (gx + hx) / 2, g1, 14);
+    kretsLampa(T, gx + (hx - gx) / 3, g2, 14);
+    kretsLampa(T, gx + 2 * (hx - gx) / 3, g2, 14);
+    T.str('2', (gx + hx) / 2 - 6, g1 - 24, null, 0.62);
+    T.str('3', gx + (hx - gx) / 3 - 6, g2 + 34, null, 0.62);
+    T.str('4', gx + 2 * (hx - gx) / 3 - 6, g2 + 34, null, 0.62);
+    T.stepEnd();
+
+    /* ---- a) starkast ---- */
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 114), bw, [
+      [['Den lampa som lyser starkast är']],
+      [['den som får störst ström. All']],
+      [['ström från batteriet passerar']],
+      [['lampa 1.']]
+    ]));
+    T.str('a) Störst ström lyser starkast', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('strömmen delar sig först EFTER lampa 1',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('lampa 1 får hela strömmen', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: lampa 1', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) svagast ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Svagast lyser den gren som har']],
+      [['störst resistans — där tar sig']],
+      [['minst ström fram.']]
+    ]));
+    T.str('b) Störst resistans ger minst ström', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('övre grenen: en lampa', padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('undre grenen: två lampor, dubbel resistans',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('minst ström genom undre grenen', padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Lampa 3 och 4 sitter i samma']],
+      [['gren, så de får exakt samma']],
+      [['ström — och lyser lika svagt.']]
+    ]));
+    T.underline(T.str('Svar: lampa 3 och 4', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två resistorer (fy1-7.7 Ex 1) ------------
+   * a) seriekopplade, b) parallellkopplade. Poängen: serie ökar den
+   * totala resistansen, parallell MINSKAR den under den minsta. */
+  function layoutTvaresistorer(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* ---- a) serie ---- */
+    T.tanke(T.figurBubble(292, [
+      [['a) Ritar de två resistorerna i']],
+      [['SERIE med batteriet.']]
+    ], 300));
+    (function () {
+      var xL = 160, xR = 400, yT = 120, yB = 240;
+      T.line([xL, yT], [xR, yT]);
+      T.line([xL, yB], [xR, yB]);
+      T.line([xL, yT], [xL, yB]);
+      T.line([xR, yT], [xR, yB]);
+      kretsBatteri(T, xL, (yT + yB) / 2, false);
+      kretsResistor(T, xL + (xR - xL) / 3, yT);
+      kretsResistor(T, xL + 2 * (xR - xL) / 3, yT);
+      T.lbl('R_1=20 Ω', xL + (xR - xL) / 3 - 40, yT + 44, BLUE);
+      T.lbl('R_2=30 Ω', xL + 2 * (xR - xL) / 3 - 30, yT + 44, BLUE);
+      T.lbl('U=9,0 V', 44, (yT + yB) / 2 + 6, BLUE);
+    })();
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Vid seriekoppling ADDERAS']],
+      [['resistanserna — strömmen måste']],
+      [['ta sig genom båda.']]
+    ]));
+    T.str('a) Ohms lag med seriekoppling', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('U=R·I⟺I=', padL, y);
+    T.fracH('U', 'R', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    var klam = valueBracket(acts, [
+      'U=9,0 V', 'R=R_1+R_2=20+30=50 Ω (seriekoppling)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,18 A',
+          T.fracH('9,0', '50', T.str('I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.underline(T.str('Svar: 0,18 A', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) parallell ---- */
+    var fy = y + 180;
+    T.tanke(T.bubble(120, T.bubbleTop(y + 0.3 * F), bw, [
+      [['b) Nu kopplas resistorerna']],
+      [['PARALLELLT — strömmen kan välja']],
+      [['väg.']]
+    ]));
+    (function () {
+      var xL = 160, xR = 400, yT = fy - 60, yB = fy + 60;
+      T.line([xL, yT], [xR, yT]);
+      T.line([xL, yB], [xR, yB]);
+      T.line([xL, yT], [xL, yB]);
+      kretsBatteri(T, xL, fy, false);
+      T.line([300, yT], [300, yB]);
+      T.line([xR, yT], [xR, yB]);
+      kretsResistor(T, 300, fy);
+      kretsResistor(T, xR, fy);
+      T.lbl('R_1=20 Ω', 246, fy + 50, BLUE);
+      T.lbl('R_2=30 Ω', 372, fy + 50, BLUE);
+    })();
+    T.stepEnd();
+
+    y = fy + 140;
+    T.tanke(T.bubble(120, fy + 88, bw, [
+      [['Vid parallellkoppling adderas']],
+      [['INVERSERNA. Den totala']],
+      [['resistansen blir mindre än den']],
+      [['minsta av dem!']]
+    ]));
+    T.str('b) Parallellkopplade resistorer', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var xb = T.fracH('1', 'R', padL, y);
+    xb = T.str('=', xb + 0.10 * F, y);
+    xb = T.fracH('1', 'R_1', xb, y);
+    xb = T.str('+', xb + 0.06 * F, y);
+    T.fracH('1', 'R_2', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag sätter in de två']],
+      [['resistanserna.']]
+    ]));
+    var xc = T.fracH('1', 'R', padL, y);
+    xc = T.str('=', xc + 0.10 * F, y);
+    xc = T.fracH('1', '20', xc, y);
+    xc = T.str('+', xc + 0.06 * F, y);
+    xc = T.fracH('1', '30', xc, y);
+    T.str('=0,0833...', xc + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['OBS! Nu har jag räknat ut 1/R,']],
+      [['inte R. Jag måste invertera en']],
+      [['gång till — den vanligaste']],
+      [['fällan i hela kapitlet.']]
+    ]));
+    T.str('=12 Ω',
+          T.fracH('1', '0,0833...', T.str('R=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu Ohms lag igen, med den nya']],
+      [['totala resistansen.']]
+    ]));
+    T.str('=0,75 A',
+          T.fracH('9,0', '12', T.str('I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['12 Ω är mindre än både 20 och']],
+      [['30 — och strömmen blev fyra']],
+      [['gånger så stor som i serie.']],
+      [['Precis som väntat!']]
+    ]));
+    T.underline(T.str('Svar: 0,75 A', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tre resistorer i blandkoppling (7.8 Ex 1) --
+   * a) totala resistansen, b) strömmen genom seriedelen, c) strömmen i
+   * en av grenarna — där delspänningen först måste bestämmas. */
+  function layoutTreresistorer(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 140, xR = 410, yT = 110, yB = 270;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen: 18 Ω i serie med']],
+      [['en parallellkoppling av 20 Ω och']],
+      [['30 Ω.']]
+    ], 340));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    kretsBatteri(T, xL, (yT + yB) / 2, false);
+    kretsResistor(T, 216, yT);
+    T.pause(150);
+    var gx = 300;
+    var g1 = yT + (yB - yT) / 3, g2 = yT + 2 * (yB - yT) / 3;
+    T.line([gx, yT], [gx, yB]);
+    T.line([gx, g1], [xR, g1]);
+    T.line([gx, g2], [xR, g2]);
+    T.line([xR, yT], [xR, yB]);
+    T.dot(gx, g1);
+    T.dot(gx, g2);
+    kretsResistor(T, (gx + xR) / 2, g1, 46, 18);
+    kretsResistor(T, (gx + xR) / 2, g2, 46, 18);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in resistanserna och']],
+      [['spänningen.']]
+    ], 340));
+    T.lbl('R_1=18 Ω', 176, yT - 26, BLUE);
+    T.lbl('R_2=20 Ω', (gx + xR) / 2 - 108, g1 - 26, BLUE);
+    T.lbl('R_3=30 Ω', (gx + xR) / 2 - 30, g2 + 34, BLUE);
+    T.lbl('U=20 V', 34, (yT + yB) / 2 + 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) totala resistansen ---- */
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 66), bw, [
+      [['Jag börjar INIFRÅN: först']],
+      [['ersättningsresistansen för']],
+      [['parallellkopplingen, sedan']],
+      [['serien.']]
+    ]));
+    T.str('a) Först parallelldelen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var xa = T.fracH('1', 'R_2_,_3', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    xa = T.fracH('1', '20', xa, y);
+    xa = T.str('+', xa + 0.06 * F, y);
+    xa = T.fracH('1', '30', xa, y);
+    T.str('=0,0833...', xa + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Inverterar för att få']],
+      [['resistansen själv.']]
+    ]));
+    T.str('=12 Ω',
+          T.fracH('1', '0,0833...', T.str('R_2_,_3=', padL, y), y)
+            + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Den ersättningsresistansen']],
+      [['sitter i SERIE med 18 Ω, så nu']],
+      [['adderar jag.']]
+    ]));
+    T.str('R_t_o_t=R_1+R_2_,_3=18+12=30 Ω', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 30 Ω', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) strömmen genom 18 Ω ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['All ström från batteriet måste']],
+      [['gå genom 18 Ω-resistorn — den']],
+      [['sitter ensam i serie.']]
+    ]));
+    T.str('b) Ohms lag på hela kretsen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xb = T.str('U=R·I⟺I=', padL, y);
+    T.fracH('U', 'R', xb, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    var klam = valueBracket(acts, ['U=20 V', 'R_t_o_t=30 Ω (från a)'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=0,666... A≈0,67 A',
+          T.fracH('20', '30', T.str('I_1=I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.underline(T.str('Svar: 0,67 A', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) strömmen i grenarna ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['För att få strömmen i en gren']],
+      [['behöver jag SPÄNNINGEN över den']],
+      [['grenen — inte hela batteriets']],
+      [['spänning.']]
+    ]));
+    T.str('c) Ohms lag på 20 Ω-resistorn', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xc = T.str('U_2=R_2·I_2⟺I_2=', padL, y);
+    T.fracH('U_2', 'R_2', xc, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Spänningen över grenen är det']],
+      [['som blir kvar när 18 Ω-resistorn']],
+      [['tagit sin del.']]
+    ]));
+    klam = valueBracket(acts, [
+      'U=20 V',
+      'U_1=R_1·I_1=18 Ω·0,666... A=12 V'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.str('U_2=U-U_1=20-12=8 V', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu kan jag räkna strömmen genom']],
+      [['var och en av de två grenarna.']]
+    ]));
+    T.str('=0,40 A',
+          T.fracH('8', '20', T.str('I_2=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.str('≈0,27 A',
+          T.fracH('8', '30', T.str('I_3=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['0,40 plus 0,27 blir 0,67 —']],
+      [['precis strömmen som kom in i']],
+      [['förgreningen. Kirchhoffs första']],
+      [['lag stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 0,40 A och 0,27 A', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: LED-lampan (fy1-7.9 Ex 1) ---------------- */
+  function layoutLedlampa(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 160, xR = 400, yT = 120, yB = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen: två batterier i']],
+      [['serie som driver LED-lampan.']]
+    ], 300));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    T.line([xR, yT], [xR, yB]);
+    kretsBatteri(T, xL, yT + (yB - yT) / 3, false);
+    kretsBatteri(T, xL, yT + 2 * (yB - yT) / 3, false);
+    kretsLampa(T, (xL + xR) / 2, yT);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in effekten och de två']],
+      [['batterispänningarna.']]
+    ], 300));
+    T.lbl('1,5 V', xL - 84, yT + (yB - yT) / 3 + 6, BLUE);
+    T.lbl('1,5 V', xL - 84, yT + 2 * (yB - yT) / 3 + 6, BLUE);
+    T.pause(150);
+    T.lbl('P=5,0 W', (xL + xR) / 2 - 40, yT - 34, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Elektrisk effekt är spänning']],
+      [['gånger ström. Jag löser ut']],
+      [['strömmen.']]
+    ]));
+    T.str('Elektrisk effekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('P=U·I⟺I=', padL, y);
+    T.fracH('P', 'U', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Seriekopplade batterier ADDERAS,']],
+      [['så spänningen blir 3,0 V.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'P=5,0 W', 'U=(1,5+1,5) V=3,0 V (seriekopplade)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=1,666... A≈1,7 A',
+          T.fracH('5,0', '3,0', T.str('I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nästan två ampere ur små']],
+      [['batterier — de skulle ta slut']],
+      [['fort. Rimligt för en så stark']],
+      [['lampa på låg spänning.']]
+    ]));
+    T.underline(T.str('Svar: 1,7 A', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: värmeelementet (fy1-7.9 Ex 2) ------------
+   * Effektformeln väljs efter VILKA storheter man har: här spänning och
+   * resistans, alltså P = U²/R. */
+  function layoutVarmeelement(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 160, xR = 400, yT = 120, yB = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar värmeelementet kopplat']],
+      [['till vägguttaget.']]
+    ], 300));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    T.line([xR, yT], [xR, yB]);
+    kretsBatteri(T, xL, (yT + yB) / 2, false);
+    kretsResistor(T, (xL + xR) / 2, yT, 70, 26);
+    T.pause(150);
+    for (var i = 0; i < 3; i++) {               /* värmestrålning */
+      T.line([(xL + xR) / 2 - 20 + i * 20, yT - 22],
+             [(xL + xR) / 2 - 20 + i * 20, yT - 44]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningen och']],
+      [['resistansen. Effekten är det jag']],
+      [['söker.']]
+    ], 300));
+    T.lbl('U=230 V', 40, (yT + yB) / 2 + 6, BLUE);
+    T.pause(150);
+    T.lbl('R=50 Ω', (xL + xR) / 2 - 34, yT + 48, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Det finns tre effektformler.']],
+      [['Jag väljer den som innehåller']],
+      [['just de storheter jag HAR:']],
+      [['spänning och resistans.']]
+    ]));
+    T.str('Elektrisk effekt ur spänning och resistans',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('U^2', 'R', T.str('P=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    var klam = valueBracket(acts, ['U=230 V', 'R=50 Ω'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=1 058 W',
+          T.fracH('230^2', '50', T.str('P=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Resistansen 50 Ω har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈1 100 W=1,1 kW', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Drygt en kilowatt — precis vad']],
+      [['ett vanligt element drar.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1,1 kW', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: fältstyrka från laddat klot (7.10 Ex 1) -- */
+  function layoutFaltstyrka(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var cx = 220, cy = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar den laddade kulan och']],
+      [['punkten P där fältet ska']],
+      [['bestämmas.']]
+    ], 300));
+    T.circle(cx, cy, 34);
+    T.str('+', cx - 10, cy + 8, null, 0.8);
+    T.dot(cx, cy);
+    T.pause(150);
+    for (var i = 0; i < 8; i++) {               /* fältlinjer utåt */
+      var a = (i / 8) * Math.PI * 2;
+      T.line([cx + 40 * Math.cos(a), cy + 40 * Math.sin(a)],
+             [cx + 74 * Math.cos(a), cy + 74 * Math.sin(a)]);
+      T.arrowHead(cx + 62 * Math.cos(a), cy + 62 * Math.sin(a),
+                  cx + 48 * Math.cos(a), cy + 48 * Math.sin(a), 7);
+    }
+    T.dot(cx + 150, cy);
+    T.str('P', cx + 144, cy - 20, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in laddningen och']],
+      [['avståndet från kulans']],
+      [['MEDELPUNKT.']]
+    ], 300));
+    T.lbl('Q=20 nC', cx - 44, cy - 96, BLUE);
+    T.pause(150);
+    T.dblArrow([cx, cy + 56], [cx + 150, cy + 56], BLUE);
+    T.lbl('r=12 cm', cx + 32, cy + 84, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 90), bw, [
+      [['Fältstyrkan avtar med avståndet']],
+      [['i KVADRAT — precis som']],
+      [['gravitationsfältet.']]
+    ]));
+    T.str('Elektrisk fältstyrka från laddat klot',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('Q', 'r^2', T.str('E=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nanocoulomb blir coulomb och']],
+      [['centimeter blir meter.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'k≈8,99·10^9 N·m^2/C^2', 'Q=20 nC=20·10^−^9 C', 'r=12 cm=0,12 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('20·10^−^9', '0,12^2', T.str('E=8,99·10^9·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=12 486,111... N/C', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Mätvärdena har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈12 000 N/C=12 kN/C', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['12 kN/C låter mycket, men på en']],
+      [['laddning i nanocoulomb blir']],
+      [['kraften ändå bara mikronewton.']]
+    ]));
+    T.underline(T.str('Svar: 12 kN/C', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: resulterande fält i P (fy1-7.10 Ex 2) ----
+   * Två fält som råkar peka åt SAMMA håll adderas. Riktningsresonemanget
+   * är hela poängen: fältet går IN i minus och UT från plus. */
+  function layoutResulterandefalt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var py = 180, aX = 150, pX = 250, bX = 400;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två laddningarna och']],
+      [['punkten P mellan dem.']]
+    ], 320));
+    T.circle(aX, py, 22);
+    T.line([aX - 11, py], [aX + 11, py]);
+    T.circle(bX, py, 22);
+    T.str('+', bX - 10, py + 8, null, 0.8);
+    T.dot(pX, py);
+    T.str('P', pX - 6, py - 22, null, 0.62);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in laddningarna och de']],
+      [['två avstånden till P.']]
+    ], 320));
+    T.lbl('Q_1=−8,0 nC', aX - 74, py - 76, BLUE);
+    T.lbl('Q_2=+6,0 nC', bX - 130, py - 76, BLUE);
+    T.pause(150);
+    T.dblArrow([aX, py + 48], [pX, py + 48], BLUE);
+    T.lbl('r_1=2,0 cm', aX - 10, py + 76, BLUE);
+    T.dblArrow([pX, py + 48], [bX, py + 48], BLUE);
+    T.lbl('r_2=5,0 cm', pX + 40, py + 76, BLUE);
+    T.stepEnd();
+
+    var y = 420;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 66), bw, [
+      [['Fältet går IN i en negativ']],
+      [['laddning och UT från en positiv.']],
+      [['I P pekar BÅDA fälten åt']],
+      [['vänster — de samverkar.']]
+    ]));
+    T.str('Fält från vardera laddningen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('Q_1', 'r_1^2', T.str('E_1=k·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    var klam = valueBracket(acts, [
+      'k≈8,99·10^9 N·m^2/C^2', 'Q_1=8,0 nC=8,0·10^−^9 C',
+      'r_1=2,0 cm=0,020 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('8,0·10^−^9', '0,020^2', T.str('E_1=8,99·10^9·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=179 800 N/C åt vänster', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Samma räkning för den andra']],
+      [['laddningen — större avstånd ger']],
+      [['mycket svagare fält.']]
+    ]));
+    T.fracH('6,0·10^−^9', '0,050^2', T.str('E_2=8,99·10^9·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=21 576 N/C åt vänster', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Båda fälten pekar åt SAMMA håll,']],
+      [['så jag adderar dem rakt av.']]
+    ]));
+    T.str('E=E_1+E_2=179 800+21 576', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=201 376 N/C', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈0,20 MN/C åt vänster', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Den närmaste laddningen står för']],
+      [['nästan allt — avståndet i']],
+      [['kvadrat slår hårt. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,20 MN/C åt vänster', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: spänning mellan plattor (fy1-7.11 Ex 1) -- */
+  function layoutPlattspanning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var py = 190, pT = 130, pB = 250;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två plattorna med']],
+      [['fältlinjerna mellan dem.']]
+    ], 300));
+    T.line([160, pT], [400, pT]);
+    T.line([160, pB], [400, pB]);
+    T.pause(150);
+    for (var i = 0; i < 5; i++) {
+      var x = 190 + i * 50;
+      T.line([x, pT], [x, pB]);
+      T.arrowHead(x, (pT + pB) / 2, x, (pT + pB) / 2 - 22, 8);
+    }
+    T.str('+', 140, pT + 8, null, 0.7);
+    T.str('-', 140, pB + 8, null, 0.7);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in fältstyrkan och']],
+      [['plattavståndet. Spänningen är']],
+      [['det jag söker.']]
+    ], 300));
+    T.dblArrow([414, pT], [414, pB], BLUE);
+    T.lbl('d=8,0 cm', 300, pB + 40, BLUE);
+    T.pause(150);
+    T.lbl('E=5,0·10^4 V/m', 120, pB + 40, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Mellan två plattor är fältet']],
+      [['homogent, och fältstyrkan är']],
+      [['spänningen delad med avståndet.']]
+    ]));
+    T.str('Fältstyrka mellan plattor', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('U', 'd', T.str('E=', padL, y), y);
+    T.str('⟺U=E·d', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Centimeter görs om till meter —']],
+      [['fältstyrkan är ju angiven i volt']],
+      [['per METER.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'E=5,0·10^4 V/m', 'd=8,0 cm=0,080 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('U=5,0·10^4·0,080=4 000 V=4,0 kV', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fyra kilovolt över åtta']],
+      [['centimeter — det räcker gott för']],
+      [['att slå gnistor. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 4,0 kV', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tre punkter i en krets (fy1-7.12 Ex 1) ----
+   * Potentialvandring: starta i den JORDADE punkten och gå runt. Mot
+   * strömmen genom en resistor stiger potentialen, med strömmen sjunker
+   * den. */
+  function layoutPotentialer(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 150, xR = 400, yT = 110, yB = 270;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen med de tre']],
+      [['punkterna A, B och C.']]
+    ], 336));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    T.line([xR, yT], [xR, yB]);
+    kretsBatteri(T, xL, (yT + yB) / 2, false);
+    kretsResistor(T, xL + (xR - xL) / 3, yT);
+    kretsResistor(T, xL + 2 * (xR - xL) / 3, yT);
+    T.pause(150);
+    T.dot(xR, yT);
+    T.dot(xL + (xR - xL) / 2, yT);
+    T.dot(xL, yT);
+    T.str('A', xR + 8, yT - 12, null, 0.62);
+    T.str('B', xL + (xR - xL) / 2 - 6, yT - 22, null, 0.62);
+    T.str('C', xL - 20, yT - 12, null, 0.62);
+    T.pause(150);
+    /* jordsymbolen vid B */
+    T.line([xL + (xR - xL) / 2, yT - 34], [xL + (xR - xL) / 2, yT - 54]);
+    T.line([xL + (xR - xL) / 2 - 16, yT - 54], [xL + (xR - xL) / 2 + 16, yT - 54]);
+    T.line([xL + (xR - xL) / 2 - 10, yT - 60], [xL + (xR - xL) / 2 + 10, yT - 60]);
+    T.line([xL + (xR - xL) / 2 - 4, yT - 66], [xL + (xR - xL) / 2 + 4, yT - 66]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in resistanserna,']],
+      [['strömmen och batterispänningen.']],
+      [['Punkten B är JORDAD — där är']],
+      [['potentialen noll.']]
+    ], 336));
+    T.lbl('3,0 Ω', xL + 2 * (xR - xL) / 3 - 26, yT + 44, BLUE);
+    T.lbl('9,0 Ω', xL + (xR - xL) / 3 - 26, yT + 44, BLUE);
+    T.pause(150);
+    T.lbl('I=2,0 A', xL + 34, yB - 30, BLUE);
+    T.lbl('U=24 V', 34, (yT + yB) / 2 + 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) potentialerna ---- */
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(336 + 114), bw, [
+      [['Jag startar i den jordade']],
+      [['punkten B, där potentialen är 0,']],
+      [['och vandrar ut åt var sitt håll.']]
+    ]));
+    T.str('a) Potentialvandring från jord', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('V_B=0 (jordad punkt)', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Från B till A går jag MOT']],
+      [['strömmen genom 3,0 Ω. Då STIGER']],
+      [['potentialen.']]
+    ]));
+    T.str('V_A=0+3,0·2,0=+6,0 V', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Från B till C går jag MED']],
+      [['strömmen genom 9,0 Ω. Då SJUNKER']],
+      [['potentialen i stället.']]
+    ]));
+    T.str('V_C=0-9,0·2,0=−18 V', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Potentialen kan mycket väl vara']],
+      [['negativ — den mäts alltid']],
+      [['RELATIVT jordpunkten.']]
+    ]));
+    T.underline(T.str('Svar: V_A=+6,0 V, V_B=0, V_C=−18 V', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) spänningen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Spänning är SKILLNADEN i']],
+      [['potential mellan två punkter —']],
+      [['aldrig ett värde i en enda punkt.']]
+    ]));
+    T.str('b) Spänning = potentialskillnad', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('U=|V_C-V_A|=|−18-6,0|=|−24|=24 V', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['24 V — precis batteriets']],
+      [['spänning, som väntat. Hela']],
+      [['spänningen ligger ju över de två']],
+      [['resistorerna.']]
+    ]));
+    T.underline(T.str('Svar: 24 V', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: potentialen vid batteriet (7.12 Ex 2) ---- */
+  function layoutPunktvidbatteri(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bx = 260, by = 190;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar batteriet med minuspolen']],
+      [['jordad och punkten P vid']],
+      [['pluspolen.']]
+    ], 320));
+    kretsBatteri(T, bx, by, true);
+    T.line([bx, by - 6], [bx, by - 54]);
+    T.line([bx, by + 6], [bx, by + 54]);
+    T.dot(bx, by - 54);
+    T.str('P', bx + 10, by - 60, null, 0.62);
+    T.pause(150);
+    T.line([bx - 20, by + 54], [bx + 20, by + 54]);
+    T.line([bx - 13, by + 62], [bx + 13, by + 62]);
+    T.line([bx - 6, by + 70], [bx + 6, by + 70]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in batterispänningen.']],
+      [['Jordpunkten har alltid']],
+      [['potentialen noll.']]
+    ], 320));
+    T.lbl('U=9,0 V', bx + 30, by + 6, BLUE);
+    T.pause(150);
+    T.lbl('V=0', bx + 30, by + 62, BLUE);
+    T.stepEnd();
+
+    var y = 428;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 90), bw, [
+      [['Jag startar i jordpunkten och']],
+      [['går genom batteriet till']],
+      [['pluspolen — då stiger']],
+      [['potentialen med hela spänningen.']]
+    ]));
+    T.str('Potentialvandring genom batteriet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('V_P=0+9,0 V=+9,0 V', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Hade minuspolen inte varit']],
+      [['jordad hade svaret varit ett helt']],
+      [['annat — potential är alltid']],
+      [['relativ.']]
+    ]));
+    T.underline(T.str('Svar: +9,0 V', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Kirchhoffs andra lag (fy1-7.12 Ex 3) -----
+   * Ett varv runt kretsen: summan av alla potentialändringar är noll. */
+  function layoutKirchhoff2(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var xL = 150, xR = 400, yT = 120, yB = 270;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kretsen med de två']],
+      [['batterierna och de två']],
+      [['resistorerna.']]
+    ], 336));
+    T.line([xL, yT], [xR, yT]);
+    T.line([xL, yB], [xR, yB]);
+    T.line([xL, yT], [xL, yB]);
+    T.line([xR, yT], [xR, yB]);
+    kretsBatteri(T, xL, (yT + yB) / 2, false);
+    kretsBatteri(T, xR, (yT + yB) / 2, false);
+    kretsResistor(T, xL + (xR - xL) / 3, yT);
+    kretsResistor(T, xL + 2 * (xR - xL) / 3, yT);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in spänningarna och']],
+      [['resistanserna. Batterierna är']],
+      [['MOTRIKTADE — 15 V driver, 5,0 V']],
+      [['motverkar.']]
+    ], 336));
+    T.lbl('U=15 V', 34, (yT + yB) / 2 + 6, BLUE);
+    T.lbl('U=5,0 V', xR + 20, (yT + yB) / 2 + 6, BLUE);
+    T.pause(150);
+    T.lbl('4,0 Ω', xL + (xR - xL) / 3 - 26, yT + 44, BLUE);
+    T.lbl('6,0 Ω', xL + 2 * (xR - xL) / 3 - 26, yT + 44, BLUE);
+    T.pause(150);
+    T.arrow([xL + 30, yB - 22], [xL + 90, yB - 22], BLUE);
+    T.lbl('I', xL + 100, yB - 16, BLUE);
+    T.stepEnd();
+
+    var y = 440;
+    T.tanke(T.bubble(120, T.bubbleTop(336 + 114), bw, [
+      [['Kirchhoffs andra lag: går man ett']],
+      [['helt varv i en krets är summan']],
+      [['av alla potentialändringar noll.']],
+      [['Man kommer ju tillbaka.']]
+    ]));
+    T.str('Kirchhoffs andra lag: ett varv i kretsen',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('−R_4·I-U_5-R_6·I+U_1_5=0', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Genom en resistor MED strömmen']],
+      [['sjunker potentialen (minus).']],
+      [['Det drivande batteriet höjer den']],
+      [['(plus), det motriktade sänker.']]
+    ]));
+    T.str('−4I-5-6I+15=0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag samlar ihop termerna.']]
+    ]));
+    T.str('−10I+10=0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Och löser ut strömmen.']]
+    ]));
+    T.str('=1 A',
+          T.fracH('10', '10', T.str('I=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nettospänningen är 15−5=10 V']],
+      [['över 4+6=10 Ω. Ohms lag ger']],
+      [['direkt 1 A — samma svar.']],
+      [['Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 1 A', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: Millikans oljedroppe (fy1-7.14 Ex 1) -----
+   * Droppen svävar, alltså kraftjämvikt. Ur laddningen fås antalet
+   * elektroner — och det blir ett HELTAL, vilket är hela poängen med
+   * Millikans försök. */
+  function layoutOljedroppe(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var pT = 120, pB = 260, dx = 260;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar de två plattorna och']],
+      [['oljedroppen som svävar mellan']],
+      [['dem.']]
+    ], 330));
+    T.line([150, pT], [400, pT]);
+    T.line([150, pB], [400, pB]);
+    T.str('+', 130, pT + 8, null, 0.7);
+    T.str('-', 130, pB + 8, null, 0.7);
+    T.pause(150);
+    T.circle(dx, (pT + pB) / 2, 10);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Droppen SVÄVAR, så den']],
+      [['uppåtriktade elektriska kraften']],
+      [['balanserar tyngdkraften.']]
+    ], 330));
+    T.arrow([dx, (pT + pB) / 2 - 12], [dx, (pT + pB) / 2 - 44], BLUE);
+    T.lbl('F_e', dx + 10, (pT + pB) / 2 - 36, BLUE);
+    T.arrow([dx, (pT + pB) / 2 + 12], [dx, (pT + pB) / 2 + 44], BLUE);
+    T.lbl('F_G', dx + 10, (pT + pB) / 2 + 42, BLUE);
+    T.dot(dx, (pT + pB) / 2);
+    T.pause(150);
+    T.dblArrow([414, pT], [414, pB], BLUE);
+    T.lbl('d=5,0 mm', 150, pB + 40, BLUE);
+    T.lbl('U=2,2 kV', 300, pB + 40, BLUE);
+    T.stepEnd();
+
+    var y = 420;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 90), bw, [
+      [['Kraftjämvikt: den elektriska']],
+      [['kraften uppåt är precis lika stor']],
+      [['som tyngden nedåt.']]
+    ]));
+    T.str('Kraftjämvikt för den svävande droppen',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.str('Q·E=m·g⟺Q=', padL, y);
+    T.fracH('m·g', 'E', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Fältstyrkan är inte given. Den']],
+      [['räknar jag ut ur spänningen och']],
+      [['plattavståndet på en egen rad i']],
+      [['klammern.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm=2,15·10^−^1^4 kg', 'g≈9,82 N/kg',
+      ['E=', { frac: ['U', 'd'] }, '=',
+       { frac: ['2,2·10^3 V', '5,0·10^−^3 m'] }, '=440 000 V/m']
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('2,15·10^−^1^4·9,82', '440 000', T.str('Q=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('=4,798...·10^−^1^9 C', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu delar jag droppens laddning']],
+      [['med en elektrons laddning för att']],
+      [['få antalet.']]
+    ]));
+    T.str('=2,995...',
+          T.fracH('4,798...·10^−^1^9', '1,602·10^−^1^9',
+                  T.str('n=', padL, y), y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nästan exakt 3 — och det MÅSTE']],
+      [['bli ett heltal, för laddning']],
+      [['finns bara i hela elektroner.']],
+      [['Det var Millikans upptäckt!']]
+    ]));
+    T.underline(T.str('Svar: 3 st', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 8 ================ */
+
+  /* ---------------- scen: rymdskepp med strålkastare (fy1-8.1 Ex 1) -
+   * Ljushastigheten är densamma för alla observatörer — hur källan rör
+   * sig spelar ingen roll alls. */
+  function layoutRymdskepp(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var sy = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar rymdskeppet med']],
+      [['strålkastare fram och bak, och']],
+      [['dig som står stilla.']]
+    ], 300));
+    (function () {
+      T.line([200, sy], [280, sy - 22]);
+      T.line([280, sy - 22], [320, sy]);
+      T.line([320, sy], [280, sy + 22]);
+      T.line([280, sy + 22], [200, sy]);
+    })();
+    T.pause(150);
+    for (var i = 0; i < 3; i++) {
+      T.line([330 + i * 16, sy - 14 + i * 4], [346 + i * 16, sy - 14 + i * 4]);
+      T.line([190 - i * 16, sy - 14 + i * 4], [174 - i * 16, sy - 14 + i * 4]);
+    }
+    T.circle(120, sy + 60, 9);
+    T.line([120, sy + 69], [120, sy + 92]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in rymdskeppets fart.']]
+    ], 300));
+    T.lbl('v=0,70c', 240, sy - 44, BLUE);
+    T.pause(150);
+    T.arrow([200, sy + 46], [270, sy + 46], BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 42), bw, [
+      [['Ljushastigheten är en KONSTANT.']],
+      [['Den är densamma oavsett hur']],
+      [['källan eller observatören rör']],
+      [['sig — det är relativitetens kärna.']]
+    ]));
+    T.str('a) Ljushastigheten är konstant', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('rymdskeppets fart spelar ingen roll',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+    y += 1.35 * F;
+    T.str('ljuset träffar dig med hastigheten c',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: c', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma sak åt andra hållet.']],
+      [['Hastigheterna adderas INTE — det']],
+      [['är just det som skiljer ljus']],
+      [['från allt annat.']]
+    ]));
+    T.str('b) Samma svar åt andra hållet', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('hastigheter adderas inte för ljus',
+          padL + 20, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: c', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: bussen i 87 % av c (fy1-8.1 Ex 2) --------
+   * Tidsdilatation. Poängen: c förkortas bort ur uttrycket, så bara
+   * kvoten v/c spelar roll. */
+  function layoutTidsdilatation(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var by = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar bussen med passageraren']],
+      [['inuti och observatören utanför.']]
+    ], 300));
+    T.rect(180, by - 40, 340, by + 20);
+    T.circle(206, by + 30, 12);
+    T.circle(314, by + 30, 12);
+    T.line([180, by - 16], [340, by - 16]);
+    T.pause(150);
+    T.circle(250, by - 2, 8);                   /* passageraren */
+    T.circle(110, by + 30, 9);                  /* observatören */
+    T.line([110, by + 39], [110, by + 62]);
+    T.pause(150);
+    T.arrow([352, by - 10], [412, by - 10], BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in farten. ', 0], ['t_0', 1], [' är', 0]],
+      [['passagerarens klocka, ', 0], ['t', 1], [' är', 0]],
+      [['observatörens.']]
+    ], 300));
+    T.lbl('v=0,87c', 226, by - 56, BLUE);
+    T.pause(150);
+    T.lbl('t_0', 244, by + 12, BLUE);
+    T.lbl('t', 104, by + 84, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Tidsdilatationen säger hur mycket']],
+      [['långsammare en klocka i rörelse']],
+      [['går, sett utifrån.']]
+    ]));
+    T.str('Tidsdilatation', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.8 * F;
+    var fw = T.fracW('v^2', 'c^2');
+    var xs = rootSign(acts, padL + T.adv('t=') + 0.1 * F, y - 0.1 * F,
+                      T.adv('1-') + fw, F,
+                      { yTop: y - 1.7 * F, yBot: y + 1.4 * F });
+    T.str('t=', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Jag sätter in ', 0], ['v', 1], ['=0,87', 0], ['c', 1], ['. Då står', 0]],
+      [['', 0], ['c', 1], [' i både täljare och nämnare i', 0]],
+      [['bråket under roten — och']],
+      [['divideras bort.']]
+    ]));
+    var xa = T.str('1-', padL, y);
+    xa = T.fracH('(0,87c)^2', 'c^2', xa, y);
+    xa = T.str('=1-0,87^2=0,2431', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Roten ur 0,2431 blir ungefär']],
+      [['0,493. Det är det talet ', 0], ['t_0', 1]],
+      [['delas med.']]
+    ]));
+    T.str('=2,028...·t_0',
+          T.fracH('t_0', '0,493...', T.str('t=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.str('t≈2·t_0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Observatören åldras två år medan']],
+      [['passageraren åldras ett.']],
+      [['Tidsdilatationen är på riktigt —']],
+      [['den mäts i GPS-satelliter.']]
+    ]));
+    T.underline(T.str('Svar: t≈2·t_0', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================ FYSIKSCENER: Fysik 1 kapitel 9 ================
+   * Kärnfysik. Genomgående: masstal minus atomnummer ger antalet
+   * neutroner, massdefekt gånger 931,49 ger energin i MeV, och
+   * sönderfallslagen är en exponentialfunktion med basen 0,5. */
+
+  /* ---------------- scen: rita modeller av kärnor (fy1-9.1 Ex 1) ----
+   * Fyra skrivsätt för samma sak. Kärnan ritas som en cirkel med
+   * protoner (+) och neutroner (tomma) inuti. */
+  function layoutKarnmodeller(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* kärnan växer med antalet nukleoner — annars trängs partiklarna
+     * ihop till ett kladd vid nio nukleoner */
+    function karna(cx, cy, p, n) {
+      var tot = p + n, i;
+      var r = 24 + 2.4 * tot;
+      T.circle(cx, cy, r);
+      for (i = 0; i < tot; i++) {
+        var a = tot === 1 ? 0 : (i / tot) * Math.PI * 2 - Math.PI / 2;
+        var rr = tot === 1 ? 0 : r * 0.52;
+        var x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
+        T.circle(x, y, 7);
+        if (i < p) {                            /* proton: plustecken */
+          T.line([x - 4, y], [x + 4, y]);
+          T.line([x, y - 4], [x, y + 4]);
+        }
+      }
+    }
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Talet NERE till vänster är']],
+      [['atomnumret — antalet protoner.']],
+      [['Talet UPPE är masstalet —']],
+      [['protoner PLUS neutroner.']]
+    ]));
+    T.str('Masstal minus atomnummer', padL, y, null, 0.62);
+    T.stepEnd();
+
+    var rader = [
+      ['a) ^1_1H', 1, 0, 'en proton', '1-1=0 neutroner'],
+      ['b) ^2_1H', 1, 1, 'en proton och en neutron', '2-1=1 neutron'],
+      ['c) ^4He', 2, 2, 'två protoner och två neutroner',
+       'He: 4-2=2 neutroner'],
+      ['d) Beryllium-9', 4, 5, 'fyra protoner och fem neutroner',
+       'Be: 9-4=5 neutroner']
+    ];
+    var bubblor = [
+      [[['Väte-1: masstal 1 och']], [['atomnummer 1. Alla nukleoner är']],
+       [['protoner — här finns ingen']], [['neutron alls.']]],
+      [[['Väte-2 har samma atomnummer']], [['men masstal 2. Skillnaden är']],
+       [['en neutron. Det är en ISOTOP av']], [['väte.']]],
+      [[['Här saknas atomnumret. Då slår']], [['jag upp helium i']],
+       [['grundämnestabellen: atomnummer']], [['2.']]],
+      [[['Här står grundämnet med namn och']], [['masstalet efter. Beryllium']],
+       [['har atomnummer 4.']]]
+    ];
+
+    rader.forEach(function (r, i) {
+      y += adv + (i === 0 ? 2.0 : 2.4) * F;
+      T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, bubblor[i]));
+      T.str(r[0], padL, y);
+      T.pause(200);
+      karna(380, y - 0.3 * F, r[1], r[2]);
+      T.pause(150);
+      T.lbl(r[4], 470, y + 0.2 * F, BLUE, 0.5);
+      T.stepEnd();
+      y += 2.6 * F;
+      T.underline(T.str('Svar: ' + r[3], padL + 20, y), y);
+      T.stepEnd();
+      y += 1.2 * F;
+    });
+
+    y += adv;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Fyra olika skrivsätt — men samma']],
+      [['fråga varje gång: hur många']],
+      [['protoner, och hur många']],
+      [['neutroner?']]
+    ]));
+    T.str('Samma räkning varje gång: masstal minus atomnummer',
+          padL, y, null, 0.5);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: frigiven energi vid sönderfall (9.2 Ex 1) -
+   * Massdefekten i u multipliceras med 931,49 för att ge MeV. */
+  function layoutSonderfallsenergi(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ky = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar kärnan före och de två']],
+      [['produkterna efter sönderfallet.']]
+    ], 300));
+    T.circle(190, ky, 34);
+    T.arrow([240, ky], [292, ky], BLUE);
+    T.circle(340, ky - 22, 24);
+    T.circle(356, ky + 30, 16);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna före och']],
+      [['efter. Produkterna väger MER —']],
+      [['det är därför energi frigörs.']]
+    ], 300));
+    T.lbl('128,13822 u', 128, ky + 72, BLUE);
+    T.pause(150);
+    T.lbl('128,25449 u', 300, ky + 88, BLUE);
+    T.stepEnd();
+
+    var y = 400;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 66), bw, [
+      [['Massdefekten är skillnaden i']],
+      [['massa före och efter. Den']],
+      [['massan har blivit energi.']]
+    ]));
+    T.str('Massdefekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('Δm=(128,25449-128,13822) u', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=0,11627 u', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['En atommassenhet motsvarar']],
+      [['931,49 MeV. Multiplicerar jag']],
+      [['massdefekten med det talet får']],
+      [['jag energin direkt i MeV.']]
+    ]));
+    T.str('E=0,11627·931,49=108,304... MeV', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈108,30 MeV', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['En tiondels atommassenhet blev']],
+      [['över hundra megaelektronvolt.']],
+      [['Kärnreaktioner frigör enormt']],
+      [['mycket mer än kemiska.']]
+    ]));
+    T.underline(T.str('Svar: 108,30 MeV', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: aktiviteten om 10 år (fy1-9.4 Ex 1) ------
+   * Sönderfallslagen med basen 0,5 och exponenten t/T½. */
+  function layoutAktivitet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar sönderfallskurvan: efter']],
+      [['varje halveringstid är hälften']],
+      [['kvar.']]
+    ], 340));
+    var P = diagram(T, { ox: 160, oy: 280, kx: 2.4, ky: 190, xMax: 100,
+                         yMax: 1.15, xTicks: [30, 60, 90],
+                         yTicks: [0.5, 1],
+                         xLbl: 't (år)', yLbl: 'A/A_0' });
+    T.pause(150);
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 50; i++) {
+        var t = (i / 50) * 100;
+        pts.push(P(t, Math.pow(0.5, t / 30.08)));
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Markerar avläsningen vid 10 år.']],
+      [['Halveringstiden för Cs-137 slår']],
+      [['jag upp i tabellen: 30,08 år.']]
+    ], 340));
+    T.dash(P(10, 0), P(10, Math.pow(0.5, 10 / 30.08)));
+    T.dash(P(10, Math.pow(0.5, 10 / 30.08)), P(0, Math.pow(0.5, 10 / 30.08)));
+    T.lbl('t=10 år', P(12, 0.12)[0], P(12, 0.12)[1], BLUE);
+    T.lbl('A_0=0,25 MBq', P(40, 1.0)[0], P(40, 1.0)[1], BLUE);
+    T.stepEnd();
+
+    var y = 448;
+    T.tanke(T.bubble(120, T.bubbleTop(340 + 90), bw, [
+      [['Sönderfallslagen: aktiviteten']],
+      [['halveras för varje']],
+      [['halveringstid som går.']]
+    ]));
+    T.str('Sönderfallslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('A=A_0·0,5^t^/^T', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tiden och halveringstiden måste']],
+      [['ha SAMMA enhet — här år — för']],
+      [['att exponenten ska bli rätt.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'A_0=0,25 MBq=0,25·10^6 Bq', 't=10 år',
+      'T=30,08 år (tabell)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('A=0,25·10^6·0,5^1^0^/^3^0^,^0^8', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=198 547,099... Bq', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag.']],
+      [['Aktiviteten 0,25 MBq har två']],
+      [['värdesiffror.']]
+    ]));
+    T.str('≈200 000 Bq=0,20 MBq', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tio år är bara en tredjedels']],
+      [['halveringstid, så det mesta ska']],
+      [['finnas kvar. 0,20 av 0,25 —']],
+      [['rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 0,20 MBq', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: brandvarnaren (fy1-9.4 Ex 2) -------------
+   * Här frågas efter en ANDEL, så N_0 står kvar som symbol hela vägen. */
+  function layoutBrandvarnare(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var bx = 260, by = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar brandvarnaren med sitt']],
+      [['lilla americiumpreparat.']]
+    ], 292));
+    T.circle(bx, by, 56);
+    T.circle(bx, by, 14);
+    for (var i = 0; i < 8; i++) {
+      var a = (i / 8) * Math.PI * 2;
+      T.line([bx + 24 * Math.cos(a), by + 24 * Math.sin(a)],
+             [bx + 44 * Math.cos(a), by + 44 * Math.sin(a)]);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in tiden. Halveringstiden']],
+      [['för Am-241 slår jag upp i']],
+      [['tabellen.']]
+    ], 292));
+    T.lbl('Am-241', bx + 70, by - 20, BLUE);
+    T.lbl('t=100 år', bx + 70, by + 12, BLUE);
+    T.stepEnd();
+
+    var y = 392;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['Frågan gäller en ANDEL, inte ett']],
+      [['antal. Då låter jag ', 0], ['N_0', 1], [' stå kvar', 0]],
+      [['som symbol hela vägen.']]
+    ]));
+    T.str('Sönderfallslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('N=N_0·0,5^t^/^T', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klam = valueBracket(acts, ['t=100 år', 'T=432,6 år (tabell)'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('N=N_0·0,5^1^0^0^/^4^3^2^,^6=N_0·0,8519...', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.str('≈N_0·0,85', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Hundra år är knappt en fjärdedels']],
+      [['halveringstid, så nästan allt är']],
+      [['kvar. Brandvarnaren slutar inte']],
+      [['fungera av den anledningen!']]
+    ]));
+    T.underline(T.str('Svar: ca 85 % återstår', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: skeppsvraket (fy1-9.4 Ex 3) --------------
+   * Nu är TIDEN obekant och står i exponenten — då måste man logaritmera
+   * båda led. */
+  function layoutSkeppsvrak(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var vy = 230;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar vraket på havsbotten.']]
+    ], 300));
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 30; i++) {
+        var u = i / 30;
+        pts.push([150 + u * 220, vy + 26 * Math.sin(Math.PI * u)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.line([150, vy], [370, vy - 14]);
+    T.line([240, vy - 8], [250, vy - 80]);      /* masten */
+    T.line([250, vy - 80], [300, vy - 56]);
+    T.line([300, vy - 56], [250, vy - 44]);
+    T.pause(150);
+    T.line([120, vy + 46], [400, vy + 46]);
+    T.hatch([120, vy + 46], [400, vy + 46], 12);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in kol-14-halten.']],
+      [['Halveringstiden för kol-14 slår']],
+      [['jag upp i tabellen.']]
+    ], 330));
+    T.lbl('N=0,832·N_0', 130, vy - 120, BLUE);
+    T.pause(150);
+    T.lbl('T=5 730 år', 130, vy - 92, BLUE);
+    T.stepEnd();
+
+    var y = 430;
+    T.tanke(T.bubble(120, T.bubbleTop(330 + 90), bw, [
+      [['Nu är TIDEN obekant, och den']],
+      [['står i exponenten. Då räcker det']],
+      [['inte att flytta om — jag måste']],
+      [['logaritmera.']]
+    ]));
+    T.str('Sönderfallslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('0,832·N_0=N_0·0,5^t^/^5^7^3^0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['', 0], ['N_0', 1], [' står i båda led och', 0]],
+      [['divideras bort — därför behöver']],
+      [['jag aldrig veta hur mycket kol']],
+      [['som fanns från början.']]
+    ]));
+    var xa = T.str('0,832·N_0=N_0·0,5^t^/^5^7^3^0', padL, y);
+    T.pause(250);
+    var x1 = padL + T.adv('0,832·');
+    T.line([x1 - 4, y + 0.28 * F], [x1 + T.adv('N_0') + 4, y - 0.72 * F],
+           BLUE);
+    var x2 = padL + T.adv('0,832·N_0=');
+    T.line([x2 - 4, y + 0.28 * F], [x2 + T.adv('N_0') + 4, y - 0.72 * F],
+           BLUE);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.str('0,832=0,5^t^/^5^7^3^0', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag logaritmerar båda led.']],
+      [['Logaritmlagen låter mig flytta']],
+      [['ned exponenten framför']],
+      [['logaritmen.']]
+    ]));
+    var xb = T.str('lg 0,832=', padL, y);
+    xb = T.fracH('t', '5 730', xb, y);
+    T.str('·lg 0,5', xb + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Nu står ', 0], ['t', 1], [' ensamt kvar som en', 0]],
+      [['vanlig faktor — då går det att']],
+      [['lösa ut.']]
+    ]));
+    T.str('=1 520,424... år',
+          T.fracH('5 730·lg 0,832', 'lg 0,5', T.str('t=', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.str('≈1 520 år', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1 520 år är drygt en fjärdedel']],
+      [['av halveringstiden, och 83 % är']],
+      [['kvar. Det hänger ihop —']],
+      [['rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 1 520 år', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: stråldos (fy1-9.5 Ex 1) ------------------
+   * a) energin ur absorberad dos, b) ekvivalent dos med kvalitetsfaktorn
+   * för alfastrålning. */
+  function layoutStraldos(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gy = 260;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar personen som utsätts för']],
+      [['strålningen.']]
+    ], 320));
+    T.line([110, gy], [410, gy]);
+    T.circle(300, gy - 120, 13);
+    T.line([300, gy - 107], [300, gy - 60]);
+    T.line([300, gy - 96], [276, gy - 74]);
+    T.line([300, gy - 96], [324, gy - 74]);
+    T.line([300, gy - 60], [286, gy]);
+    T.line([300, gy - 60], [314, gy]);
+    T.pause(150);
+    for (var i = 0; i < 4; i++) {               /* strålningen */
+      var yy = gy - 130 + i * 26;
+      T.line([150, yy], [258, yy]);
+      T.arrowHead(214, yy, 186, yy, 9);
+    }
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massan och den']],
+      [['absorberade dosen.']]
+    ], 320));
+    T.lbl('m=75 kg', 316, gy - 60, BLUE);
+    T.pause(150);
+    T.lbl('D=0,50 mGy', 130, gy - 148, BLUE);
+    T.lbl('α-strålning', 130, gy + 30, BLUE);
+    T.stepEnd();
+
+    /* ---- a) energin ---- */
+    var y = 428;
+    T.tanke(T.bubble(120, T.bubbleTop(320 + 66), bw, [
+      [['Absorberad dos är energi per']],
+      [['kilo kropp. Jag löser ut']],
+      [['energin.']]
+    ]));
+    T.str('a) Absorberad dos', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('E', 'm', T.str('D=', padL, y), y);
+    T.str('⟺E=D·m', xa + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Milligray görs om till gray.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'D=0,50 mGy=0,50·10^−^3 Gy', 'm=75 kg'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('E=0,50·10^−^3·75=0,0375 J≈38 mJ', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['38 millijoule är försvinnande']],
+      [['lite energi — men det är inte']],
+      [['energimängden som är farlig, utan']],
+      [['vad strålningen gör i cellerna.']]
+    ]));
+    T.underline(T.str('Svar: 38 mJ', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) ekvivalent dos ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ekvivalent dos väger in hur']],
+      [['skadlig strålningen är.']],
+      [['Alfastrålning har den högsta']],
+      [['kvalitetsfaktorn av alla.']]
+    ]));
+    T.str('b) Ekvivalent dos', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('H=D·Q', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    klam = valueBracket(acts, [
+      'D=0,50 mGy=0,50·10^−^3 Gy', 'Q=20 (α-strålning, tabell)'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('H=0,50·10^−^3·20=0,010 Sv=10 mSv', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['10 mSv är ungefär fyra års']],
+      [['normal bakgrundsstrålning på en']],
+      [['gång. Alfastrålning är farlig —']],
+      [['om den kommer innanför huden.']]
+    ]));
+    T.underline(T.str('Svar: 10 mSv', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- nuklidbeteckning med FÖRE-index ------------------
+   * placeString sätter ^ och _ EFTER bastecknet, men en nuklid skrivs
+   * med masstalet och atomnumret FÖRE symbolen. Helpern skriver därför
+   * de två talen i en egen kolumn och symbolen efter dem.
+   * Returnerar nästa x. */
+  function nuklid(T, F, A, Z, sym, x, y, sc) {
+    sc = sc || 1;
+    var wA = T.adv(String(A), 0.62 * sc), wZ = T.adv(String(Z), 0.62 * sc);
+    var w = Math.max(wA, wZ);
+    T.str(String(A), x + (w - wA), y - 0.50 * F * sc, null, 0.62 * sc);
+    if (Z !== '') T.str(String(Z), x + (w - wZ), y + 0.22 * F * sc, null,
+                        0.62 * sc);
+    return T.str(sym, x + w + 0.06 * F * sc, y, null, sc);
+  }
+
+  /* ---------------- scen: väte-2:s bindningsenergi (fy1-9.2 Ex 2) ---
+   * a) massdefekten, b) bindningsenergin, c) frigjord energi vid
+   * sönderfall, d) bindningsenergi per nukleon. Fällan: nuklidmassan i
+   * tabellen gäller ATOMEN, elektronernas massa måste dras bort. */
+  function layoutBindningsenergi(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var kx = 250, ky = 180;
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar deuteronen: en proton och']],
+      [['en neutron som hålls ihop.']]
+    ], 292));
+    T.circle(kx, ky, 44);
+    T.circle(kx - 16, ky, 15);
+    T.line([kx - 21, ky], [kx - 11, ky]);
+    T.line([kx - 16, ky - 5], [kx - 16, ky + 5]);
+    T.circle(kx + 16, ky, 15);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in massorna ur tabellen.']],
+      [['Nuklidmassan gäller HELA ATOMEN,']],
+      [['alltså med elektronen.']]
+    ], 292));
+    T.lbl('m_p=1,00728 u', 120, ky - 76, BLUE);
+    T.lbl('m_n=1,00866 u', 300, ky + 84, BLUE);
+    T.pause(150);
+    T.lbl('nuklid: 2,01410 u', 108, ky + 116, BLUE);
+    T.stepEnd();
+
+    /* ---- a) massdefekten ---- */
+    var y = 392;
+    T.tanke(T.bubble(120, T.bubbleTop(292 + 66), bw, [
+      [['Massdefekten är skillnaden']],
+      [['mellan byggstenarnas massa och']],
+      [['kärnans. Den skillnaden är']],
+      [['bindningsenergin.']]
+    ]));
+    T.str('a) Massdefekt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('Δm=m_p_a_r_t_i_k_l_a_r-m_k_ä_r_n_a', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Kärnans massa är nuklidmassan']],
+      [['MINUS elektronernas — tabellen']],
+      [['ger hela atomen. Det är den']],
+      [['vanligaste missen här.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'm_p_a_r_t=1,00728+1,00866=2,01594 u',
+      'm_k_ä_r_n_a=2,01410-1·0,00055=2,01355 u'
+    ], padL, y, T.s, F, { rs: 0.72 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.str('Δm=2,01594-2,01355=0,00239 u', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Svaret ska också anges i kilo.']],
+      [['En atommassenhet är']],
+      [['1,66·10^−^2^7 kg.']]
+    ]));
+    T.str('Δm=0,00239·1,66·10^−^2^7', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=3,97·10^−^3^0 kg', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 0,00239 u (3,97·10^−^3^0 kg)', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) bindningsenergin ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Massa och energi är samma sak.']],
+      [['Einsteins samband ger']],
+      [['bindningsenergin ur']],
+      [['massdefekten.']]
+    ]));
+    T.str('b) Massa blir energi', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E=Δm·c^2=3,9674·10^−^3^0·(2,998·10^8)^2', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=3,5659...·10^−^1^3 J≈3,57·10^−^1^3 J', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['I kärnfysik anges energin nästan']],
+      [['alltid i megaelektronvolt. Det']],
+      [['går snabbast direkt från']],
+      [['massdefekten i u.']]
+    ]));
+    T.str('E=0,00239·931,49=2,226... MeV', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈2,23 MeV', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.underline(T.str('Svar: 3,57·10^−^1^3 J (2,23 MeV)', padL, y), y);
+    T.stepEnd();
+
+    /* ---- c) frigjord energi ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Bindningsenergin är precis den']],
+      [['energi som krävs för att slita']],
+      [['isär kärnan — och den som']],
+      [['frigörs när den bildas.']]
+    ]));
+    T.str('c) Samma energi som bindningsenergin', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E=2,23 MeV', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: 2,23 MeV', padL, y), y);
+    T.stepEnd();
+
+    /* ---- d) per nukleon ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Bindningsenergi per nukleon']],
+      [['säger hur hårt varje partikel']],
+      [['sitter. Kärnan har två']],
+      [['nukleoner.']]
+    ]));
+    T.str('d) Bindningsenergi per nukleon', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.str('=1,113...≈1,11 MeV',
+          T.fracH('2,226... MeV', '2', padL, y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1,11 MeV per nukleon är lågt —']],
+      [['järn ligger kring 8,8. Deuteronen']],
+      [['är en av de löst bundna']],
+      [['kärnorna.']]
+    ]));
+    T.underline(T.str('Svar: 1,11 MeV/nukleon', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: sönderfallsformler (fy1-9.3 Ex 1) --------
+   * Fem sönderfall. Regeln är alltid densamma: masstalen ska summera
+   * lika i båda led, och atomnumren likaså. */
+  function layoutSonderfallsformler(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['I varje sönderfall gäller två']],
+      [['balanser: masstalen ska bli lika']],
+      [['i båda led, och atomnumren']],
+      [['också.']]
+    ]));
+    T.str('Masstal och atomnummer balanserar', padL, y, null, 0.55);
+    T.stepEnd();
+
+    /* a) alfasönderfall */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+      [['a) Vid α-sönderfall sänds en']],
+      [['heliumkärna ut: 4 masstal och']],
+      [['2 atomnummer försvinner.']]
+    ]));
+    T.str('a) α-sönderfall av Radium-226', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    var x = nuklid(T, F, 226, 88, 'Ra', padL, y);
+    x = T.str('→', x + 0.10 * F, y);
+    x = nuklid(T, F, 4, 2, 'He', x + 0.10 * F, y);
+    x = T.str('+', x + 0.06 * F, y);
+    nuklid(T, F, 222, 86, 'Rn', x + 0.06 * F, y);
+    T.stepEnd();
+
+    /* b) beta-minus */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.6), bw, [
+      [['b) Vid β⁻-sönderfall blir en']],
+      [['neutron till en proton.']],
+      [['Masstalet står still men']],
+      [['atomnumret ÖKAR med 1.']]
+    ]));
+    T.str('b) β-sönderfall av Kol-14', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    x = nuklid(T, F, 14, 6, 'C', padL, y);
+    x = T.str('→', x + 0.10 * F, y);
+    x = nuklid(T, F, 14, 7, 'N', x + 0.10 * F, y);
+    x = T.str('+', x + 0.06 * F, y);
+    x = nuklid(T, F, 0, '−1', 'e', x + 0.06 * F, y);
+    T.str('+ν', x + 0.06 * F, y);
+    T.stepEnd();
+
+    /* c) beta-plus */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.6), bw, [
+      [['c) Vid β⁺-sönderfall blir en']],
+      [['proton till en neutron —']],
+      [['atomnumret MINSKAR med 1 i']],
+      [['stället.']]
+    ]));
+    T.str('c) β⁺-sönderfall av Aluminium-25', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    x = nuklid(T, F, 25, 13, 'Al', padL, y);
+    x = T.str('→', x + 0.10 * F, y);
+    x = nuklid(T, F, 25, 12, 'Mg', x + 0.10 * F, y);
+    x = T.str('+', x + 0.06 * F, y);
+    x = nuklid(T, F, 0, 1, 'e', x + 0.06 * F, y);
+    T.str('+ν', x + 0.06 * F, y);
+    T.stepEnd();
+
+    /* d) gamma */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.6), bw, [
+      [['d) Vid γ-sönderfall ändras']],
+      [['ingenting i kärnan — bara']],
+      [['energin. Fotonen tar']],
+      [['mellanskillnaden.']]
+    ]));
+    T.str('d) γ-sönderfall av Kobolt-60', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('Co (1,33 MeV)→Co (1,17 MeV)+γ (0,16 MeV)', padL, y, null, 0.8);
+    T.stepEnd();
+
+    /* e) neutroninfångning */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+      [['e) Först fångas en neutron in,']],
+      [['sedan sker ett β-sönderfall. Jag']],
+      [['balanserar masstal och']],
+      [['atomnummer som vanligt.']]
+    ]));
+    T.str('e) Kobolt-59 fångar en neutron', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    x = nuklid(T, F, 59, 27, 'Co', padL, y);
+    x = T.str('+', x + 0.06 * F, y);
+    x = nuklid(T, F, 1, 0, 'n', x + 0.06 * F, y);
+    x = T.str('→', x + 0.10 * F, y);
+    x = nuklid(T, F, 60, 28, 'Ni', x + 0.10 * F, y);
+    x = T.str('+', x + 0.06 * F, y);
+    nuklid(T, F, 0, '−1', 'e', x + 0.06 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Kontrollera alltid: 59+1=60 och']],
+      [['27+0=28+(−1). Båda balanserna']],
+      [['stämmer.']]
+    ]));
+    T.underline(T.str('Svar: se formlerna ovan', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: energi vid β⁺-sönderfall (fy1-9.3 Ex 2) --
+   * Vid β-sönderfall ändras elektronantalet, så nuklidmassorna måste
+   * korrigeras för elektronernas massa. */
+  function layoutBetaenergi(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Vid β-sönderfall ändras antalet']],
+      [['elektroner. Då MÅSTE jag räkna']],
+      [['bort elektronmassorna ur']],
+      [['nuklidmassorna.']]
+    ]));
+    T.str('Sönderfallsformeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.2 * F;
+    var x = nuklid(T, F, 13, 7, 'N', padL, y);
+    x = T.str('→', x + 0.10 * F, y);
+    x = nuklid(T, F, 13, 6, 'C', x + 0.10 * F, y);
+    x = T.str('+', x + 0.06 * F, y);
+    x = nuklid(T, F, 0, 1, 'e', x + 0.06 * F, y);
+    T.str('+ν', x + 0.06 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 0.6), bw, [
+      [['Vänsterledet: kvävekärnan. Jag']],
+      [['tar nuklidmassan och drar bort']],
+      [['de 7 elektronerna.']]
+    ]));
+    T.str('m_v=13,005739-7·0,000549', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=13,001896 u', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Högerledet: kolkärnan med sina 6']],
+      [['elektroner bortdragna, PLUS']],
+      [['positronen. Neutrinons massa är']],
+      [['försumbar.']]
+    ]));
+    T.str('m_h=(13,003355-6·0,000549)', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('+0,000549', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=13,000610 u', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Massdefekten är skillnaden']],
+      [['mellan leden — den massa som']],
+      [['blivit energi.']]
+    ]));
+    T.str('Δm=13,001896-13,000610', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('=0,001286 u', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Och så omvandlingsfaktorn 931,49']],
+      [['för att få energin i']],
+      [['megaelektronvolt.']]
+    ]));
+    T.str('E=0,001286·931,49=1,197... MeV', padL, y);
+    T.stepEnd();
+
+    y += adv + 0.9 * F;
+    T.str('≈1,20 MeV', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Drygt en MeV — typiskt för ett']],
+      [['β-sönderfall. Energin delas']],
+      [['mellan positronen och neutrinon.']]
+    ]));
+    T.underline(T.str('Svar: 1,20 MeV', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* fy2-1.4 Exempel 2 — den fatala gungan: energiprincipen ger farten,
+   * kraftekvationen i lägsta punkten ger spännkraften. */
+  function layoutGungan(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    /* 60 px per meter: r = 2,5 m → 150 px, h = 1,0 m → 60 px */
+    var px = 60, cx = 250, cyT = 70, R = 2.5 * px;
+    var yLow = cyT + R;                       /* lägsta punkten, y = 220 */
+    var start = { x: cx + R * 0.8, y: cyT + R * 0.6 };   /* 1,0 m högre */
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar gungans bana: fästet']],
+      [['överst, repet är banans radie']],
+      [['2,5 m. Startläget ligger 1,0 m']],
+      [['ovanför lägsta punkten.']]
+    ], 300));
+    T.dot(cx, cyT);
+    T.pause(140);
+    /* streckad cirkelbåge från startläget ned genom lägsta punkten */
+    (function () {
+      var a0 = Math.atan2(start.x - cx, start.y - cyT);   /* från lodrätt */
+      /* 43 punkter = 4·10+3, så att SISTA strecket slutar exakt i bågens
+       * vänstra ände — annars blir bågen kortare åt vänster än åt höger */
+      var pts = [], i;
+      for (i = 0; i <= 42; i++) {
+        var t = a0 - (i / 42) * a0 * 2;
+        pts.push([cx + Math.sin(t) * R, cyT + Math.cos(t) * R]);
+      }
+      for (var k = 0; k + 2 < pts.length; k += 4) {
+        acts.push({ kind: 'stroke', pts: pts.slice(k, k + 3) });
+      }
+    })();
+    T.pause(140);
+    T.line([cx, cyT], [cx, yLow - 10]);              /* repet i lägsta läget */
+    T.rect(cx - 11, yLow - 10, cx + 11, yLow + 10);  /* gungsitsen */
+    T.pause(140);
+    T.dash([cx, cyT], [start.x - 7, start.y - 5]);   /* repet i startläget */
+    T.rect(start.x - 11, start.y - 10, start.x + 11, start.y + 10);
+    T.pause(160);
+    /* etiketterna i fri yta: radien innanför bågens vänstra gren, startläget
+     * i rummet mellan bågen och höjdmåttet */
+    T.lbl('r=2,5 m', 148, 150, BLUE, 0.5);
+    T.lbl('startläge', 368, 200, BLUE, 0.5);
+    T.pause(160);
+    /* höjdmåttet i fri yta till höger, med streckade projektionslinjer */
+    T.dash([start.x + 13, start.y], [482, start.y]);
+    T.dash([300, yLow], [482, yLow]);
+    T.dblArrow([470, start.y], [470, yLow]);
+    T.lbl('h=1,0 m', 492, (start.y + yLow) / 2 + 5, BLUE, 0.5);
+    T.stepEnd();
+
+    /* ---- a) farten längst ned ur energiprincipen ---- */
+    var y = 430;
+    T.tanke(T.bubble(120, T.bubbleTop(300 + 4 * 26), bw, [
+      [['a) Spännkraften beror på farten,']],
+      [['så farten först. Lägesenergin']],
+      [['uppe blir rörelseenergi nere.']]
+    ]));
+    T.str('a) Farten i lägsta punkten', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('E_p=E_k', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    var xx = T.str('m·g·h=', padL, y);
+    T.fracH('m·v^2', '2', xx, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Massan finns i BÅDA leden och']],
+      [['försvinner. Farten beror alltså']],
+      [['inte alls på hur tung gungaren är.']]
+    ]));
+    xx = T.str('g·h=', padL, y);
+    xx = T.fracH('v^2', '2', xx, y);
+    T.str('⟺v^2=2·g·h', xx + 0.2 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    xx = T.str('v=', padL + 24, y);
+    T.rot('2·g·h', xx, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klam = valueBracket(acts, [
+      'g≈9,82 m/s^2',
+      'h=1,0 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    xx = T.str('v=', padL, y);
+    xx = T.rot('2·9,82·1,0', xx, y);
+    T.str('=4,431... m/s', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    /* ---- kraftekvationen i lägsta punkten ---- */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['I lägsta punkten pekar']],
+      [['centripetalkraften UPPÅT, in mot']],
+      [['fästet. Spännkraften drar uppåt']],
+      [['och tyngdkraften nedåt.']]
+    ]));
+    T.str('F_C=F_S-F_G', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.str('⟺F_S=F_C+F_G', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Sätter in centripetalkraften och']],
+      [['tyngdkraften var för sig.']]
+    ]));
+    xx = T.str('F_S=', padL, y);
+    xx = T.fracH('m·v^2', 'r', xx, y);
+    T.str('+m·g', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    klam = valueBracket(acts, [
+      'm=80 kg',
+      'v=4,431... m/s',
+      'r=2,5 m',
+      'g≈9,82 m/s^2'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.4 * F;
+    xx = T.str('F_S=', padL, y);
+    xx = T.fracH('80·4,431...^2', '2,5', xx, y);
+    T.str('+80·9,82', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.str('=1414,08 N≈1,4 kN', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['1,4 kN — repet bär nästan två']],
+      [['gånger personens tyngd i']],
+      [['bottenläget.']]
+    ]));
+    T.underline(T.str('Svar: 1,4 kN', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) minsta farten i översta läget ---- */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['b) Precis när repet slaknar är']],
+      [['spännkraften noll. Då är']],
+      [['tyngdkraften ENSAM']],
+      [['centripetalkraft.']]
+    ]));
+    T.str('b) Minsta farten i toppen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_S=0⟹F_C=F_G', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    xx = T.fracH('m·v^2', 'r', padL, y);
+    T.str('=m·g', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Massan försvinner igen — minsta']],
+      [['farten är densamma oavsett hur']],
+      [['tung gungan är.']]
+    ]));
+    xx = T.fracH('v^2', 'r', padL, y);
+    T.str('=g⟺v^2=g·r', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    xx = T.str('v=', padL + 24, y);
+    xx = T.rot('g·r', xx, y);
+    T.str('=', xx + 0.1 * F, y);
+    xx = T.rot('9,82·2,5', T.adv('=') + xx + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.str('=4,954... m/s≈5,0 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Knappt 5 m/s i toppen räcker.']],
+      [['Går gungan långsammare faller']],
+      [['den inåt och repet slaknar.']]
+    ]));
+    T.underline(T.str('Svar: 5,0 m/s', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
   function dotPts(cx, cy) {
     var pts = [];
@@ -18725,15 +34307,11 @@
   window.addEventListener('resize', scheduleNav);
   document.addEventListener('fullscreenchange', scheduleNav);
 
-  /* ---------------- mount ---------------- */
   var UID = 0;   /* unika radiogruppnamn (flera widgets per sida) */
-  function mount(container, spec, opts) {
-    opts = opts || {};
-    var F = FSIZE;   /* alltid samma — se KONSEKVENT SKRIFTSTORLEK ovan */
-    var speed = opts.speed || 1;
-    injectCSS();
-
-    var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
+  /* Scenregistret ligger på modulnivå (inte inne i mount) så att
+   * granskningsskripten kan nå det utan webbläsare — se HANDSKRIFT.scen
+   * längst ned och .claude/verify-handskrift.js. */
+  var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
                    termometer: layoutTermometer, forkorta: layoutForkorta,
@@ -18869,7 +34447,164 @@
                    dampning: layoutDampning, harmonisk: layoutHarmonisk,
                    periodfjader: layoutPeriodfjader,
                    massafjader: layoutMassafjader,
-                   sekundpendel: layoutSekundpendel };
+                   sekundpendel: layoutSekundpendel,
+                   /* Fysik 2 kapitel 2 — Mekaniska vågor (2.6 och framåt) */
+                   egenfrekvens: layoutEgenfrekvens,
+                   superposition: layoutSuperposition,
+                   staendevag: layoutStaendevag,
+                   halvoppenpipa: layoutHalvoppenpipa,
+                   oppenpipa: layoutOppenpipa,
+                   ljudintensitet: layoutLjudintensitet,
+                   ljudniva: layoutLjudniva,
+                   vattenbrytning: layoutVattenbrytning,
+                   hogtalare: layoutHogtalare,
+                   /* Fysik 2 kapitel 3 — Elektromagnetism */
+                   faltpunkter: layoutFaltpunkter,
+                   spolfalt: layoutSpolfalt,
+                   kraftelektron: layoutKraftelektron,
+                   hogerhand: layoutHogerhand,
+                   flodestathet: layoutFlodestathet,
+                   tvaledare: layoutTvaledare,
+                   kompassnal: layoutKompassnal,
+                   induceradems: layoutInduceradems,
+                   induceradstrom: layoutInduceradstrom,
+                   lenzslinga: layoutLenzslinga,
+                   flodesandring: layoutFlodesandring,
+                   flodesgraf: layoutFlodesgraf,
+                   elnat: layoutElnat,
+                   transformator: layoutTransformator,
+                   /* Fysik 2 kapitel 4 — Ljus och kvantfysik */
+                   ficklampa: layoutFicklampa,
+                   solintensitet: layoutSolintensitet,
+                   gitter: layoutGitter,
+                   exoplanet: layoutExoplanet,
+                   wienlag: layoutWienlag,
+                   brytningglas: layoutBrytningglas,
+                   fotoelektron: layoutFotoelektron,
+                   fotonatom: layoutFotonatom,
+                   debroglie: layoutDebroglie,
+                   tennisboll: layoutTennisboll,
+                   kvantsprang: layoutKvantsprang,
+                   /* Fysik 2 kapitel 5 — Universum */
+                   parallax: layoutParallax,
+                   schwarzschild: layoutSchwarzschild,
+                   /* Fysik 1 kapitel 1–2 — storheter, enheter och rörelse */
+                   sienhet: layoutSienhet,
+                   medelfart: layoutMedelfart,
+                   prefixmeter: layoutPrefixmeter,
+                   kmhms: layoutKmhms,
+                   falkoping: layoutFalkoping,
+                   banansnigel: layoutBanansnigel,
+                   tagvagn: layoutTagvagn,
+                   oversforsen: layoutOversforsen,
+                   konstanthast: layoutKonstanthast,
+                   adambertil: layoutAdambertil,
+                   momentanhast: layoutMomentanhast,
+                   frittfall: layoutFrittfall,
+                   parkering: layoutParkering,
+                   forflyttning: layoutForflyttning,
+                   arearvt: layoutArearvt,
+                   omkorning: layoutOmkorning,
+                   reaktionstid: layoutReaktionstid,
+                   accel400: layoutAccel400,
+                   /* Fysik 1 kapitel 3 — krafter och Newtons lagar */
+                   resultantkraft: layoutResultantkraft,
+                   komposanty: layoutKomposanty,
+                   ladaputt: layoutLadaputt,
+                   bilkraft: layoutBilkraft,
+                   motkraftapple: layoutMotkraftapple,
+                   bommotvikt: layoutBommotvikt,
+                   gravkompisar: layoutGravkompisar,
+                   tyngdfaktor: layoutTyngdfaktor,
+                   puttabilen: layoutPuttabilen,
+                   bokhylla: layoutBokhylla,
+                   lutandeplan: layoutLutandeplan,
+                   elviralada: layoutElviralada,
+                   bollrakt: layoutBollrakt,
+                   hissen: layoutHissen,
+                   trissor: layoutTrissor,
+                   /* Fysik 1 kapitel 4 — energi och arbete */
+                   energiomvandling: layoutEnergiomvandling,
+                   parkbank: layoutParkbank,
+                   dravagn: layoutDravagn,
+                   barlada: layoutBarlada,
+                   vagnplan: layoutVagnplan,
+                   bilenergi: layoutBilenergi,
+                   bromscyklist: layoutBromscyklist,
+                   brachiosaurus: layoutBrachiosaurus,
+                   stenklippa: layoutStenklippa,
+                   eddiebacken: layoutEddiebacken,
+                   trappan: layoutTrappan,
+                   glodlampa: layoutGlodlampa,
+                   verkningsgrad: layoutVerkningsgrad,
+                   hissverkning: layoutHissverkning,
+                   kraftverket: layoutKraftverket,
+                   rorelsemangd: layoutRorelsemangd,
+                   fotbollsspark: layoutFotbollsspark,
+                   impulsgraf: layoutImpulsgraf,
+                   inlines: layoutInlines,
+                   tagvagnar: layoutTagvagnar,
+                   vagnfriktion: layoutVagnfriktion,
+                   /* Fysik 1 kapitel 5 — densitet och tryck */
+                   guldtarning: layoutGuldtarning,
+                   damenpansar: layoutDamenpansar,
+                   fridyk: layoutFridyk,
+                   dyktryck: layoutDyktryck,
+                   batlyft: layoutBatlyft,
+                   jarnkista: layoutJarnkista,
+                   heliumballong: layoutHeliumballong,
+                   luftmassa: layoutLuftmassa,
+                   klassrum: layoutKlassrum,
+                   domkraft: layoutDomkraft,
+                   /* Fysik 1 kapitel 6 — värme och fasövergångar */
+                   varmvatten: layoutVarmvatten,
+                   blandvatten: layoutBlandvatten,
+                   smaltatenn: layoutSmaltatenn,
+                   varmvattenis: layoutVarmvattenis,
+                   /* Fysik 1 kapitel 7 — ellära */
+                   metallkulor: layoutMetallkulor,
+                   coulombkulor: layoutCoulombkulor,
+                   andradkraft: layoutAndradkraft,
+                   elektronflode: layoutElektronflode,
+                   kirchhoff: layoutKirchhoff,
+                   accelelektron: layoutAccelelektron,
+                   skyddsresistans: layoutSkyddsresistans,
+                   aluminiumledare: layoutAluminiumledare,
+                   entilllampa: layoutEnTillLampa,
+                   fyralampor: layoutFyralampor,
+                   tvaresistorer: layoutTvaresistorer,
+                   treresistorer: layoutTreresistorer,
+                   ledlampa: layoutLedlampa,
+                   varmeelement: layoutVarmeelement,
+                   faltstyrka: layoutFaltstyrka,
+                   resulterandefalt: layoutResulterandefalt,
+                   plattspanning: layoutPlattspanning,
+                   potentialer: layoutPotentialer,
+                   punktvidbatteri: layoutPunktvidbatteri,
+                   kirchhoff2: layoutKirchhoff2,
+                   oljedroppe: layoutOljedroppe,
+                   /* Fysik 1 kapitel 8 — relativitetsteori */
+                   rymdskepp: layoutRymdskepp,
+                   tidsdilatation: layoutTidsdilatation,
+                   /* Fysik 1 kapitel 9 — kärnfysik */
+                   karnmodeller: layoutKarnmodeller,
+                   sonderfallsenergi: layoutSonderfallsenergi,
+                   aktivitet: layoutAktivitet,
+                   brandvarnare: layoutBrandvarnare,
+                   skeppsvrak: layoutSkeppsvrak,
+                   straldos: layoutStraldos,
+                   bindningsenergi: layoutBindningsenergi,
+                   sonderfallsformler: layoutSonderfallsformler,
+                   betaenergi: layoutBetaenergi,
+                   gungan: layoutGungan };
+
+  /* ---------------- mount ---------------- */
+  function mount(container, spec, opts) {
+    opts = opts || {};
+    var F = FSIZE;   /* alltid samma — se KONSEKVENT SKRIFTSTORLEK ovan */
+    var speed = opts.speed || 1;
+    injectCSS();
+
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](spec, F) : layout(spec, F);
 
@@ -19683,5 +35418,18 @@
     });
   }
 
-  window.HANDSKRIFT = { mount: mount, mountAll: mountAll, version: 1 };
+  /* `scen` bygger en scens råa aktlista UTAN att rendera något — den rör
+   * varken DOM eller CSS. Den finns för granskningsskripten
+   * (.claude/verify-handskrift.js), som därmed kan mäta arkbredd,
+   * bläckets utbredning och bubblornas placering i Node i stället för i
+   * en webbläsare. `typer` listar registrerade scennamn. */
+  window.HANDSKRIFT = {
+    mount: mount, mountAll: mountAll, version: 1,
+    scen: function (typ, F) {
+      return SCENES[typ] ? SCENES[typ]({ typ: typ }, F || FSIZE) : null;
+    },
+    typer: function () { return Object.keys(SCENES); },
+    saknadeGlyfer: function () { return SAKNADE; },
+    PAPER_W: PAPER_W, FSIZE: FSIZE
+  };
 })();

@@ -57,3 +57,7 @@ NP/
 
 # Skarmbilder inklistrade fran HP_KONTOR via snabbtangent - alltid lokala
 skarmbilder/
+
+# WeBWorK Open Problem Library — egen git-klon, uppgiftskälla för fysikuppgifter
+# (~2 GB, ska aldrig med i Fysiklabbets repo)
+webwork-open-problem-library/

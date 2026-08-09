@@ -655,6 +655,13 @@
     'Φ': { w: 96, strokes: [[[48, 24], [28, 32], [21, 55], [28, 79], [48, 87],
                              [68, 79], [75, 55], [68, 32], [48, 24]],
                             [[50, 8], [47, 102]]] },
+    /* theta (vinkeldiameter, vinklar): hög smal ögla från versalhöjd ned
+     * till baslinjen, sedan tvärstrecket på mitten. Smalare än 'o' så att
+     * den inte läses som ett o med streck. */
+    'θ': { w: 66, strokes: [[[48, 20], [38, 14], [29, 20], [22, 36], [19, 57],
+                             [22, 79], [29, 94], [38, 100], [48, 94],
+                             [55, 79], [57, 57], [55, 36], [48, 20]],
+                            [[21, 58], [55, 56]]] },
     /* sigma (Stefan–Boltzmanns konstant): ögla som gemena 'o' men med en
      * vågrät svans ut åt höger från toppen. Skrivs i EN dragning med
      * svansen sist — börjar där svansen möter öglan, runt varvet, ut. */
@@ -22779,6 +22786,177 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: vinkeldiameter (fy2-5.3 Ex 1) ---------------
+   * a) månen, b) solen — samma formel två gånger, och poängen är att de
+   * två svaren blir nästan lika (därför kan månen täcka solen). Figuren
+   * är generisk: jorden, himlakroppen, vinkeln θ, diametern 2R och
+   * avståndet d. Värdena kommer in i var sin mätvärdesklammer. */
+  function layoutVinkeldiameter(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var ox = 86, oy = 262, orr = 10;          /* jorden (betraktaren) */
+    var bx = 430, by = 262, br = 52;          /* himlakroppen */
+    var mx = 500, dy = 357;                   /* måttlinjernas lägen */
+
+    /* ---- figuren ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar jorden och himlakroppen.']],
+      [['Vinkeldiametern är den vinkel']],
+      [['kroppen upptar på himlen.']]
+    ], 395));
+    T.circle(ox, oy, orr);
+    T.lbl('jorden', 52, 234);
+    T.pause(150);
+    T.circle(bx, by, br);
+    T.lbl('himlakroppen', 452, 336);
+    T.pause(150);
+    /* synlinjerna ritas RADIELLT ut från betraktaren, så att vinkelbågen
+     * nedan (samma vinklar, samma medelpunkt) landar exakt på dem */
+    var aTop = Math.atan2(by - br - oy, bx - ox);
+    var aBot = Math.atan2(by + br - oy, bx - ox);
+    T.line([ox + orr * Math.cos(aTop), oy + orr * Math.sin(aTop)],
+           [bx, by - br]);
+    T.line([ox + orr * Math.cos(aBot), oy + orr * Math.sin(aBot)],
+           [bx, by + br]);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in beteckningarna:']],
+      [['diametern ', 0], ['2R', 1], [' och avståndet ', 0], ['d', 1]],
+      [['Vinkeln ', 0], ['θ', 1], [' är den jag söker', 0]]
+    ], 395));
+    (function () {                              /* vinkelbågen vid jorden */
+      var pts = [], n = 14, r = 150;
+      for (var i = 0; i <= n; i++) {
+        var a = aTop + (i / n) * (aBot - aTop);
+        pts.push([ox + r * Math.cos(a), oy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    T.lbl('θ', 252, oy + 8, BLUE);
+    T.pause(150);
+    T.dash([bx, by - br], [mx + 8, by - br]);
+    T.dash([bx, by + br], [mx + 8, by + br]);
+    T.dblArrow([mx, by - br], [mx, by + br], BLUE);
+    T.lbl('2R', mx + 14, by + 6, BLUE);
+    T.pause(150);
+    T.dash([ox, oy + orr], [ox, dy + 8]);
+    T.dash([bx, by + br], [bx, dy + 8]);
+    T.dblArrow([ox, dy], [bx, dy], BLUE);
+    T.lbl('d', (ox + bx) / 2, dy - 10, BLUE);
+    T.stepEnd();
+
+    /* ---- a) månen ---- */
+    var y = 470;
+    T.tanke(T.bubble(120, T.bubbleTop(dy), bw, [
+      [['För små vinklar är vinkel-']],
+      [['diametern kroppens diameter']],
+      [['delad med avståndet, i radianer.']]
+    ]));
+    T.str('a) Månen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('2·R', 'd', T.str('θ≈', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Månens radie och avstånd']],
+      [['står i uppgiften.']]
+    ]));
+    var klamA = valueBracket(acts, [
+      'R=1,74·10^6 m',
+      'd=3,84·10^8 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klamA.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=9,0625·10^−^3 rad',
+          T.fracH('2·1,74·10^6', '3,84·10^8', T.str('θ≈', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.05), bw, [
+      [['Radianer säger inget om hur']],
+      [['stor kroppen ser ut. Ett halvt']],
+      [['varv är ', 0], ['π', 1], [' radianer, alltså 180°', 0]]
+    ]));
+    var xa = T.mul(T.str('θ≈9,0625·10^−^3', padL, y), y);
+    T.str('=0,5192...°', T.fracH('180°', 'π', xa, y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Mätvärdena har tre värde-']],
+      [['siffror, så svaret avrundas']],
+      [['till tre. En halv grad, ungefär']],
+      [['som en ärta på en meters håll.']]
+    ]));
+    T.str('≈0,519°', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.underline(T.str('Svar: 0,519°', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) solen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma formel för solen, med']],
+      [['solens radie och avstånd.']]
+    ]));
+    T.str('b) Solen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('2·R', 'd', T.str('θ≈', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var klamB = valueBracket(acts, [
+      'R=6,96·10^8 m',
+      'd=1,50·10^1^1 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klamB.yEnd;
+
+    y += adv + 1.9 * F;
+    T.str('=9,28·10^−^3 rad',
+          T.fracH('2·6,96·10^8', '1,50·10^1^1', T.str('θ≈', padL, y), y)
+            + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.05), bw, [
+      [['Och samma omräkning till']],
+      [['grader som i a).']]
+    ]));
+    var xb = T.mul(T.str('θ≈9,28·10^−^3', padL, y), y);
+    T.str('=0,5317...°', T.fracH('180°', 'π', xb, y) + 0.12 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Solen är 400 gånger större än']],
+      [['månen men också 400 gånger']],
+      [['längre bort, så vinklarna ska']],
+      [['bli nästan lika. Det stämmer.']]
+    ]));
+    T.str('≈0,532°', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.underline(T.str('Svar: 0,532°', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: solens Schwarzschildradie (fy2-5.5 Ex 1) ---- */
   function layoutSchwarzschild(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
@@ -34487,6 +34665,7 @@
                    kvantsprang: layoutKvantsprang,
                    /* Fysik 2 kapitel 5 — Universum */
                    parallax: layoutParallax,
+                   vinkeldiameter: layoutVinkeldiameter,
                    schwarzschild: layoutSchwarzschild,
                    /* Fysik 1 kapitel 1–2 — storheter, enheter och rörelse */
                    sienhet: layoutSienhet,

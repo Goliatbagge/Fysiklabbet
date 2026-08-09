@@ -261,6 +261,66 @@ härledningsruta direkt före/efter en formelruta.
 - Layoutkoden i `katalog.html` (`buildFormelLayouts`) flyttar alla
   `details.formel-harledning` sist i rutan — rör inte den ordningen.
 
+## ⚠️ KRITISK: En exempellösning i teorin ska ALLTID ha en pennlösning
+
+**Varje `::: exempel` i `data/teori/*.md` som får en `::: textlosning` ska
+också få en `::: handskrift`-scen — en animerad pennlösning.** Det räcker
+alltså aldrig att skriva lösningen i text: eleven ska kunna se HUR den
+skrivs, steg för steg, med penna på rutat papper (uttryckligt önskemål
+2026-08-09). Gäller nya exempel såväl som gamla exempel som skrivs om, i
+alla kurser.
+
+Ordningen i md-filen är alltid:
+
+```
+::: exempel "Exempel — …"
+**frågestammen … a) …&emsp;&emsp;b) …**
+
+::: figur          ← om uppgiften har en figur (frivilligt)
+…
+:::
+
+::: handskrift
+typ: <scennamn>
+:::
+
+::: textlosning
+…
+:::
+:::
+```
+
+Så här bygger du scenen:
+
+1. **Skriv layoutfunktionen i `handskrift.js`** (`layoutMittScennamn(cfg, F)`)
+   och registrera namnet i `SCENES`-objektet längst ned i filen. Lägg
+   funktionen bland scenerna för samma kurs/kapitel, i avsnittsordning.
+2. **Följ reglerna i `handskrift.js` filhuvud** — de är många och
+   uttryckliga (figur i grafit med värden och vektorer i blått, rubrik +
+   formel, mätvärdesklammer DIREKT under formeln, insättning, aldrig
+   avrundning i mellanled, rimlighetsbedömning i en bubbla före svarsraden,
+   division med vågrätt streck, en tanke per led). **Läs filhuvudet innan
+   du skriver en ny scen** — kopiera rytmen från en närliggande scen
+   (`layoutParallax`, `layoutVinkeldiameter`, `layoutSchwarzschild`).
+3. **Saknas ett tecken i `GLYPHS`** ritas det inte alls men tar plats
+   ("FÖRSTÄRKS" blev "FÖRST RKS"). Lägg då till glyfen som enstreckad
+   handstil bland de andra (θ lades till 2026-08-09) — och granska den
+   sida vid sida med den bokstav den kan förväxlas med.
+4. **Håll siffrorna identiska** i pennlösningen och `::: textlosning` —
+   användaren växlar mellan dem med "Med penna"/"Som text", och olika
+   avrundning i de två lägena läses som ett fel. Det är pennlösningens
+   regler (inga avrundade mellanled, värdesiffror i sista steget) som
+   gäller för BÅDA.
+5. **Kör `node .claude/verify-handskrift.js <scennamn>`** — den mäter att
+   allt bläck ligger på arket, att inget hamnar i inställningsrutans
+   mobilzon, att tankebubblorna inte skymmer något och att inget tecken
+   saknar glyf.
+6. **Granska i skärmdump** (verifieraren fångar inte etiketter som ligger
+   på linjer): mounta scenen i en liten testsida under `.shots/` med
+   `HANDSKRIFT.mount(el, {typ:'…'}, {instant:true, stegvis:false})` och
+   kontrollera figuren, bråkstrecken och att vinkelbågen landar på sina
+   ben.
+
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
 **En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara
@@ -276,6 +336,9 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
    `OVNINGAR.md`); ta bort/ersätt uppgifter som testar borttaget stoff.
 3. **Exit tickets** — `data/exittickets.js`, samma id. Frågorna ska förhöra
    det nya innehållet. Kör `node .claude/verify-exittickets.js`.
+3b. **Pennlösningar** — varje nytt eller omskrivet `::: exempel` med
+   `::: textlosning` ska ha en `::: handskrift`-scen (se avsnittet ovan).
+   Kör `node .claude/verify-handskrift.js`.
 4. **Uppläsning (TTS)** — ⛔ **PAUSAT tills vidare** (se Kommandon):
    generera inget nytt ljud och committa inga ljudkedje-artefakter;
    ljudet löses separat. (Normalt: `node data/tts/build-manus.js` +

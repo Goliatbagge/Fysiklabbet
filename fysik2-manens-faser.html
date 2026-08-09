@@ -35,6 +35,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
+        /* ── Växlare mellan avsnittets två simuleringar ── */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
@@ -160,12 +194,24 @@
         </div>
 
         <section class="intro-section">
-            <h1 class="section-title">Månens faser</h1>
-            <p class="intro-text">
-                Månen lyser inte med eget ljus utan reflekterar solens strålar. Beroende på var månen befinner sig
-                i sin bana runt jorden ser vi olika stor del av den belysta sidan. Det tar cirka 29,5 dygn
-                för månen att fullborda en hel cykler av faser.
-            </p>
+            <div class="intro-head">
+                <div>
+                    <h1 class="section-title">Månens faser</h1>
+                    <p class="intro-text">
+                        Månen lyser inte med eget ljus utan reflekterar solens strålar. Beroende på var månen befinner sig
+                        i sin bana runt jorden ser vi olika stor del av den belysta sidan. Det tar cirka 29,5 dygn
+                        för månen att fullborda en hel cykel av faser.
+                    </p>
+                </div>
+                <!-- Växlare till avsnittets andra simulering -->
+                <div class="sim-switch-wrap">
+                    <span class="sim-switch-label">Simulering</span>
+                    <div class="sim-switch">
+                        <span class="sim-switch-active">Månens faser</span>
+                        <a href="fysik2-solformorkelse.html">Solförmörkelse</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <div id="root"></div>

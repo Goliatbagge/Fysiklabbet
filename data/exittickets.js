@@ -8916,6 +8916,38 @@ window.EXITTICKETS = {
     ],
   },
   {
+    question: 'Du befinner dig i månens **halvskugga** under en solförmörkelse. Vad ser du?',
+    choices: [
+      'En bit av solskivan är bortskymd — en partiell förmörkelse',
+      'Solskivan är helt täckt och koronan syns',
+      'En lysande ring runt en svart månskiva',
+      'Ingenting alls, himlen ser precis vanlig ut',
+    ],
+    correct: 0,
+    why: [
+      'I halvskuggan når ljus från en del av solskivan fram, så månen skymmer bara en bit av solen — förmörkelsen är partiell.',
+      'Total förmörkelse ser man bara i kärnskuggan, det smala band där inget direkt solljus alls når fram.',
+      'En ring syns vid en ringformig förmörkelse, när kärnskuggans spets inte når ända fram till jordytan — inte i halvskuggan.',
+      'Något händer visst: en del av solskivan är bortskymd. Däremot är ljusförändringen ofta så liten att man inte märker den utan att titta med skyddsglasögon.',
+    ],
+  },
+  {
+    question: 'Varför lyser månen kopparröd under en **total månförmörkelse**?',
+    choices: [
+      'Månens yta glöder av värmen från jordens skugga',
+      'Rött solljus bryts i jordens atmosfär och böjs in i kärnskuggan, medan blått ljus sprids bort',
+      'Månen reflekterar ljuset från jordens eldar och städer',
+      'Jordens magnetfält böjer av det blå ljuset från solen',
+    ],
+    correct: 1,
+    why: [
+      'Månytan blir tvärtom snabbt kallare i skuggan, och den är alldeles för kall för att glöda av egen värme.',
+      'Solljus som stryker förbi jordranden bryts i atmosfären och böjs in i kärnskuggan. På vägen sprids det kortvågiga (blå) ljuset bort genom Rayleighspridning, så det som når månen är rött — i praktiken ljuset från alla jordens soluppgångar och solnedgångar samtidigt.',
+      'Stadsljus och eldar är försvinnande svaga jämfört med solljuset och räcker inte alls till för att lysa upp månen.',
+      'Magnetfält påverkar bara laddade partiklar, inte ljus — färgen beror på brytning och spridning i atmosfären.',
+    ],
+  },
+  {
     question: 'På norra halvklotet ser månen ut som ett D (ljus höger sida). Vad innebär det?',
     choices: [
       'Månen växer mot fullmåne',

@@ -1806,6 +1806,17 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
   klistras in för hand i EmailOctopus: Automations → Välkomstmejl → steget
   Send email → Content (mallen "Code your own"), markera allt och ersätt.
   Redigerar du bara filen händer ingenting med det som faktiskt skickas.
+- **⚠️ Pausa automationen först.** Är den aktiv öppnas e-poststeget
+  skrivskyddat ("To make changes, pause your automation first") och alla
+  fält är gråa. Pausa via statusknappen uppe till höger, gör ändringen,
+  starta igen. Räkna med det: mejlet går ut automatiskt, så en paus är ett
+  litet fönster där en ny prenumerant kan hamna fel. Gör därför alla
+  ändringar i ETT svep, och verifiera i förhandsvisningen innan du sparar —
+  inklistringen har misslyckats tyst en gång och lämnade rutan tom, vilket
+  hade skickat ett blankt brev om det inte upptäckts.
+- **Kodkommentarer behöver inte synkas.** Filen är källan; att den
+  EmailOctopus-lagrade kopian saknar en kommentarsrad är ofarligt och inte
+  värt en paus. Innehåll och struktur MÅSTE däremot stämma överens.
 - Ändra inget i sidfoten: `{{UnsubscribeURL}}`, `{{SenderInfo}}` och
   `{{RewardsURL}}` krävs av EmailOctopus, och rutnätsbrickan måste förbli
   genomskinlig (skälet står i filens egen kommentar).

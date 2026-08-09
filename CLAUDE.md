@@ -1786,6 +1786,31 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
   (annars skulle den tyst visa standardsidan, och Google indexera hundratals
   identiska sidor). **Hålls regexpen i takt med `parseInitialState()`.**
 
+## ⚠️ Nytt ämne eller ny nivå? Uppdatera välkomstmejlet också
+
+**Välkomstmejlet räknar upp katalogens ämnen och nivåer i klartext.** Lägger
+du till ett ämne, en nivå eller byter namn på något i `data/katalog.js`
+(`course`-fältet och Ämne-menyn i `katalog.html`) blir mejlet fel tills det
+uppdateras — och till skillnad från sajten *märks* det inte, eftersom mejlet
+går ut automatiskt till varje ny prenumerant utan att någon läser det först.
+
+- Källan är `.claude/nyhetsbrev/valkomstmejl.html`, stycket som börjar
+  "Den rymmer tre ämnen på olika nivåer". Varje nivå är en egen länk till
+  `katalog.html?id=<kurskod>` (`fy1`, `fy2`, `ma1c`, `ma2c`, `ma3c`, `ma4`).
+  Länka ALDRIG bara `katalog.html` — utan `?id=` landar man på Fysik nivå 1,
+  vilket får katalogen att se ut som om den bara rymmer fysik.
+- Nämns antalet avsnitt någonstans (i dag "matematiken är katalogens största
+  del") måste påståendet stämma. Räkna om:
+  `ls data/teori/ma*.md | wc -l` mot `ls data/teori/fy*.md | wc -l`.
+- **Filen är inte kopplad till sajten** — den är ett utkast som måste
+  klistras in för hand i EmailOctopus: Automations → Välkomstmejl → steget
+  Send email → Content (mallen "Code your own"), markera allt och ersätt.
+  Redigerar du bara filen händer ingenting med det som faktiskt skickas.
+- Ändra inget i sidfoten: `{{UnsubscribeURL}}`, `{{SenderInfo}}` och
+  `{{RewardsURL}}` krävs av EmailOctopus, och rutnätsbrickan måste förbli
+  genomskinlig (skälet står i filens egen kommentar).
+- Inga tankstreck, se `.claude/agents/nyhetsbrev.md`.
+
 ## Formler i nyhetsartiklar: KaTeX, precis som i teorin
 
 **En formel i en nyhetsartikel sätts med KaTeX — `$…$` i `body`-strängarna i

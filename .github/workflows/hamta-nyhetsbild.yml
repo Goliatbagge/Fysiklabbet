@@ -75,7 +75,10 @@ jobs:
               curl -sSL -A "$UA" "$url" -o sida.html \
                 || { echo "Kunde inte hämta sidan"; fel=1; continue; }
               echo "--- kandidater ---"
-              grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt
+              # `|| true`: hittas ingen bildlänk alls returnerar grep 1, och med
+              # pipefail hade hela körningen dött här i stället för att hoppa
+              # över raden nedan.
+              grep -oE 'https?://[^"'"'"' ]+\.(jpg|jpeg|png)' sida.html | sort -u | tee kandidater.txt || true
               bildurl=$(grep -E '/(original|fullsize|large)/' kandidater.txt | head -1 || true)
               [ -n "$bildurl" ] || bildurl=$(grep -E '/(screen|publicationjpg|wallpaper)/' kandidater.txt | head -1 || true)
               # Vanliga pressrum (WordPress, EurekAlert!) har inga sådana

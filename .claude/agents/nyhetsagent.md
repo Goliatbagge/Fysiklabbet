@@ -210,9 +210,37 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 ## Bildregler
 
 Varje artikel ska ha **minst en bild**. Fler bilder är välkomna — men bara
-riktiga sådana (se punkt 2).
+riktiga sådana (se punkt 3).
 
-1. **Leta efter en RIKTIG forskningsbild först — och ansträng dig på riktigt.**
+1. **⛔ HUVUDBILDEN FÅR ALDRIG VARA ETT SCHEMA ELLER ETT DIAGRAM.**
+   `image`-fältet är det första — ofta det enda — läsaren ser: det fyller
+   toppen av artikeln, kortet i nyhetslistan, delningsbilden på Facebook/X
+   och bilden i RSS-flödet. En principskiss av försöksuppställningen eller
+   ett mätdiagram fungerar inte där. De är gjorda för att läsas nära, med
+   bildtext och i sitt sammanhang, och blir en grå plutt som ingen vill
+   klicka på. (Uttryckligt önskemål 2026-08-09: tre av fyra senaste nyheter
+   hade sådana huvudbilder och kändes ”tråkiga”.)
+
+   **Duger som huvudbild:** foto av apparaten, anläggningen, provet, platsen
+   eller forskarna; äkta observationsbild (teleskop-, mikroskop-,
+   absorptions- eller detektorbild); konstnärlig gestaltning/pressbild från
+   institutionen; i sista hand en AI-illustration (punkt 4).
+
+   **Duger INTE som huvudbild:** principskisser, strålgångar,
+   kopplingsscheman, CAD-ritningar, grafer, spektra, mätremsor, tabeller,
+   figurpaneler märkta a/b/c — kort sagt allt som behöver en bildtext för
+   att bli begripligt, eller som mest består av linjer, axlar och etiketter.
+
+   **Figuren ska ändå med — flytta den till brödtexten.** Skisser och
+   mätdiagram ur studien är fortfarande värdefulla och illustrativa; de hör
+   bara hemma som `image`-block inne i `body`, intill det stycke de förklarar
+   och med en bildtext som säger vad man ser (punkt 3). Byt alltså inte bort
+   figuren — flytta ner den och sätt ett foto överst i stället.
+
+   Hittar du ingen fri fotografisk bild alls: generera hellre en AI-bild
+   (punkt 4) än att sätta ett diagram överst.
+
+2. **Leta efter en RIKTIG forskningsbild först — och ansträng dig på riktigt.**
    Finns det ett äkta foto, en figur eller en pressbild från själva forskningen
    som är fri att använda → föredra ALLTID den framför en AI-genererad bild. En
    verklig bild av apparaten/upptäckten/forskarna ger artikeln mer trovärdighet och
@@ -234,7 +262,7 @@ riktiga sådana (se punkt 2).
    bilden åt dig från en runner med fri nättrafik. `<url>` får vara bildsidan
    (t.ex. `https://noirlab.edu/public/images/noirlab2618a/`) — arkivets största
    jpg letas upp automatiskt.
-2. **Finns det FLERA bra pressbilder — använd gärna flera i artikeln.** Det är
+3. **Finns det FLERA bra pressbilder — använd gärna flera i artikeln.** Det är
    inget krav, men när pressmaterialet innehåller mer än en användbar bild
    (t.ex. ett foto av apparaten *och* en figur ur studien, eller forskarna och
    deras mätdata) blir artikeln bättre av att bildsättas löpande:
@@ -254,7 +282,7 @@ riktiga sådana (se punkt 2).
    - Rimlig omfattning: 1–3 bilder totalt i en normal artikel. Har källan bara
      **en** bra pressbild är det helt i sin ordning — kör på den och lägg inte
      till något extra.
-3. **Annars: generera en egen bild** med Gemini-bildgeneratorn
+4. **Annars: generera en egen bild** med Gemini-bildgeneratorn
    (skill `gemini-imagegen`, kör scriptet med projektets system-Python — se nedan).
    Beskriv en ren, professionell, redaktionell illustration **utan text, utan
    vattenstämpel, utan logotyper**. Spara som `nyheter/bilder/<id>.jpg`.
@@ -271,11 +299,11 @@ riktiga sådana (se punkt 2).
      -p "<engelsk, detaljerad, ren redaktionell prompt, 16:9>" \
      -o "nyheter/bilder/<id>.jpg"
    ```
-4. **Granska varje bild** (öppna den) innan publicering: den ska vara ren, skarp
+5. **Granska varje bild** (öppna den) innan publicering: den ska vara ren, skarp
    och relevant. Innehåller den text/vattenstämpel/skräp → generera om eller välj
    en annan. `imageAlt` (och `alt` på bilder i brödtexten) ska beskriva bilden
    för skärmläsare.
-5. **Brödtexten får ALDRIG hänvisa till en AI-genererad bild som om den vore ett
+6. **Brödtexten får ALDRIG hänvisa till en AI-genererad bild som om den vore ett
    äkta foto** — skriv inte ”på bilden ovan ser du…”, ”som syns på bilden” e.d. om
    en illustration. En slarvig läsare kan då tro att illustrationen visar den
    verkliga apparaten/upptäckten, och en AI-bild kan dessutom vara felaktig i

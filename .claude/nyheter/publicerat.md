@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | Fysiker har byggt en spegel som ljuger — vad man än håller framför den svarar den med en åtta | Phys.org (2026-08-10, UCLA Engineering Institute for Technology Advancement) / Nature Communications (Y. Li, S. Chen, B. Bai, A. Ozcan, 2026-08-07, DOI 10.1038/s41467-026-76488-2, CC BY 4.0) / arXiv:2410.15521 (metoddelen läst i PDF) |
 | 2026-08-10 | `2026-08-10-solformorkelse-sverige` | På onsdag tar månen fyra femtedelar av solen — och nästan ingen kommer att se det på ljuset | Beställd av användaren (uppslag via TT/Falköpings tidning — texten INTE använd, artikeln skriven från ursprungskällor). Astroinfo.se (svenska hålltider och täckningsgrader, tabellen läst i råkällan) / NASA GSFC, Eclipses During 2026 (Espenak) / Instituto Geográfico Nacional, Spanien / NASA Eclipse safety / Populär Astronomi / IMO |
 | 2026-08-09 | `2026-08-09-flygande-fokus` | Elektronerna sprang alltid i från vågen de surfade på — nu har fysiker lärt laserns fokus att flyga i kapp dem | Phys.org (2026-08-08) / Laboratory for Laser Energetics, University of Rochester (2026-07-10) / Nature Physics (C. D. Arrowsmith m.fl., 2026-07-10, DOI 10.1038/s41567-026-03352-x, öppet tillgänglig CC BY-NC-ND 4.0) |
 | 2026-08-08 | `2026-08-08-svavande-magnet` | En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens | Phys.org / Science 393, 607–610 (W. Ji, C. Xu, G. Qu, D. Budker, 2026-08-06, DOI 10.1126/science.adx1707) / arXiv:2504.21524 (CC BY 4.0) |
@@ -373,3 +374,43 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Bifynd som inte användes: XENONnT (Physical Review Letters, DOI 10.1103/2lrq-f6bk)
 > och fermium-255 (Physical Review Letters, DOI 10.1103/2813-b49x) — båda lagda i
 > ko.md.
+
+> **2026-08-11 — den ljugande spegeln (UCLA).** Vald framför fyra andra färska
+> Phys.org-nyheter: synkroniserade tidskristaller i galliumarsenid (bortvald —
+> tidskristall kördes 07-31), antiferromagnetiska skyrmioner (skyrmioner kördes
+> 06-24), ”långsamma” elektroner i ett 2D-material och kvantvärmekretsar som
+> delar strömkälla. Optiknyheten vann på att den är omedelbart begriplig och
+> visuell, och att den vilar på reflexion, diffraktion, fas och våglängd —
+> alltså kärnan i vågoptiken, inte på kvantformalism.
+>
+> Researchen: hela studien är öppet tillgänglig (CC BY 4.0). Nature-sidan ger 303
+> till idp.nature.com, men `api.crossref.org/works/<DOI>` gav abstract, datum
+> (2026-08-07), författarlista och licens, och arXiv-PDF:en (2410.15521v2)
+> gav hela metoddelen — utdragen med pypdf. Samtliga siffror i artikeln är
+> hämtade därifrån, inte ur Phys.org-referatet.
+>
+> Bilder: BÅDA är riktiga och fria (CC BY 4.0, figur 8 i studien), ingen AI.
+> Huvudbilden är ett utsnitt ur panel c — äkta kamerabilder, tio siffror in och
+> tio åttor ut — beskuret så att panelens engelska etiketter och färgskalan
+> hamnar utanför. Bild 2 är panel b: fotot av det optiska bordet plus
+> förstoringen av spegelmönstret.
+>
+> Fyra saker som lätt blir fel i den här nyheten:
+> (a) Experimentet använde den ENKLARE varianten (mönstret direkt på spegeln,
+>     inget mellanrum). Korrelationerna 0,87/0,84/0,79 för den varianten är
+>     SIMULERADE värden ur figur 7 — skriv aldrig att de är uppmätta.
+> (b) Attacken med neuronnät: originalet säger att ett litet träningsunderlag
+>     inte kom åt de FINARE detaljerna, och att just de finare dragen började
+>     träda fram vid 500 par. Första utkastet skrev ”gick det inte alls” och
+>     ”grova drag” — båda fel åt var sitt håll.
+> (c) 53,3λ är hela anordningens djup, och blir en konkret längd först när man
+>     anger vilken våglängd som avses (grönt, 550 nm ⇒ 0,029 mm).
+> (d) Spegeln är passiv — men i FÖRSÖKET satt motivet på en elektroniskt styrd
+>     ljusmodulator. ”Ingen elektronik” i ingressen var därför en överdrift och
+>     ströks.
+>
+> Tre nya begrepp: diffraktion, koherens, fasförskjutning.
+>
+> Bifynd som inte användes: DESI:s största 2D-karta över universum, X(2370) som
+> glueball-dominerad partikel (BESIII), kosmiska filament som gräns för mörk
+> materias sönderfall till gravitoner, samt de fyra bortvalda ovan — lagda i ko.md.

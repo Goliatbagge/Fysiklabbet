@@ -88,6 +88,79 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-11-spegeln-som-ljuger",
+    date: "2026-08-11",
+    title: "Fysiker har byggt en spegel som ljuger — vad man än håller framför den svarar den med en åtta",
+    deck: "Ytan ser slät ut men är kuperad i steg som mäts i ljusets våglängder. Ett lag vid UCLA visade tio olika handskrivna siffror för sin spegel, och varje gång kom samma bild tillbaka. Mönstret räknades fram med maskininlärning — men själva förvandlingen sker i ljusets egen gång genom det.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-11-spegeln-som-ljuger.jpg",
+    imageAlt: "En bildmatris. Översta raden visar tio vita handskrivna siffror, 0 till 9, mot svart bakgrund. Under dem ligger fyra rader kamerabilder i rött, grönt, blått och blandfärg — och i varenda ruta syns samma sak: en handskriven åtta.",
+    imageCredit: "Bild: Y. Li, S. Chen, B. Bai och A. Ozcan, Nature Communications 2026 (CC BY 4.0)",
+    tags: ["optik", "ljus", "diffraktion", "interferens", "vågor", "laser", "våglängd", "maskininlärning", "fysik 2"],
+    sources: [
+      { name: "Phys.org — ”Lying mirror” uses structured surfaces to conceal optical information", url: "https://phys.org/news/2026-08-mirror-surfaces-conceal-optical.html" },
+      { name: "Nature Communications — Lying mirror using structured surfaces (öppet tillgänglig)", url: "https://www.nature.com/articles/s41467-026-76488-2" },
+      { name: "arXiv:2410.15521 — Lying mirror (förhandsversion med metoddel)", url: "https://arxiv.org/abs/2410.15521" }
+    ],
+    research: {
+      citation: "Y. Li, S. Chen, B. Bai och A. Ozcan, ”Lying mirror using structured surfaces”, Nature Communications, 7 augusti 2026 (DOI 10.1038/s41467-026-76488-2, CC BY 4.0)",
+      url: "https://doi.org/10.1038/s41467-026-76488-2"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 — 4.2 Ljus, diffraktion och interferens", href: "katalog.html#fy2-4.2" },
+        { label: "Fysik nivå 2 — 2.14 Diffraktion och interferens", href: "katalog.html#fy2-2.14" },
+        { label: "Fysik nivå 2 — 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" },
+        { label: "Simulering — Vågsimulator", href: "fysik2-vagsimulator.html" }
+      ],
+      fragor: [
+        "En skrattspegel och den här spegeln ändrar båda ljusets fas. Varför känner man ändå igen sig i den ena men inte i den andra? Vad är det som skiljer en mjuk faskurva över hela ytan från abrupta hopp mellan grannrutor?",
+        "Mönstrets rutor är ungefär en halv våglängd breda. Vad skulle hända med spegelns förmåga att dölja om rutorna i stället var en tiondels millimeter breda — alltså hundratals våglängder — och varför?",
+        "Ett neuronnät kunde återskapa originalbilderna när det fått se omkring 10 000 par av in- och utbild. Betyder det att spegeln misslyckas med sin uppgift? Diskutera skillnaden mellan att dölja något för en betraktare och att göra det omöjligt att återskapa."
+      ]
+    },
+    body: [
+      { type: "p", html: "Ett tivolis skrattspeglar ljuger, men de ljuger klumpigt. Den buktande ytan drar ut en på längden eller trycker ihop en på bredden, och man känner ändå igen sig. Ett forskarlag vid University of California, Los Angeles har nu byggt något annat: en spegel som inte förvränger motivet utan byter ut det. Vad man än håller framför den kommer samma bild tillbaka." },
+      { type: "p", html: "I försöket visade laget tio handskrivna siffror, 0 till 9, för sin spegel — bilder som den aldrig hade mött när den konstruerades. Kameran på andra sidan fångade tio gånger samma sak: en handskriven åtta. Det fungerade i rött, grönt och blått ljus var för sig ($\\lambda = 600$, 550 respektive 480&nbsp;nm) och när alla tre färgerna lyste samtidigt. Arbetet publicerades den 7&nbsp;augusti i <em>Nature Communications</em>." },
+
+      { type: "quote", html: "”I stället för att bara förvränga en spegelbild är den ljugande spegeln konstruerad för att optiskt ersätta den visuella informationen från många olika, okända motiv med ett förutbestämt vilseledande mönster.”", cite: "Aydogan Ozcan, UCLA, till Phys.org" },
+
+      { type: "h2", text: "Varför en vanlig spegel inte kan ljuga" },
+      { type: "p", html: "En slät spegel bevarar bilden därför att den bevarar vågens form. Ljuset från varje punkt på ett föremål når spegeln som en vågfront, kastas tillbaka enligt reflexionslagen och behåller sina inbördes fasförhållanden — vilken del av vågen som ligger före och vilken som släpar efter. Det är den informationen ögat sedan tolkar som en bild." },
+      { type: "p", html: "En buktig spegel ändrar visserligen också fasen, men mjukt och gradvis över ytan: hela vågfronten böjs som en enhet, så bilden förstoras, förminskas eller sträcks ut. Motivet finns kvar. För att verkligen radera det måste fasen ändras abrupt, ruta för ruta, på en skala som är jämförbar med ljusets våglängd." },
+
+      { type: "h2", text: "Ett mönster i våglängdens skala" },
+      { type: "p", html: "Det är precis vad den ljugande spegeln gör. I grundutförandet sitter ett rutmönster av 120&nbsp;×&nbsp;120 fält framför en vanlig spegel, och varje fält fördröjer ljuset en egen bestämd bit. Fälten är ungefär en halv våglängd breda — för grönt ljus knappt 0,3&nbsp;mikrometer. Hela anordningen, från mönstret till spegelytan bakom, sträcker sig bara 53,3 våglängder i djupled — med samma gröna ljus knappt tre hundradels millimeter." },
+      { type: "p", html: "Fasförskjutningen kommer av en ren vägskillnad. En spegelruta som ligger höjden $h$ lägre än sina grannar tvingar ljuset att gå sträckan $2h$ längre, ner och upp igen, vilket svarar mot faskiftet $\\Delta\\varphi = \\dfrac{2\\pi \\cdot 2h}{\\lambda}$. Ligger rutan en kvarts våglängd djupare kommer ljuset därifrån tillbaka i motfas mot grannarnas och släcker ut dem. Att uttrycket innehåller $\\lambda$ är också skälet till att ett mönster som ljuger perfekt i rött ljus inte automatiskt gör det i blått — varje färg måste vägas in när mönstret räknas fram." },
+      { type: "p", html: "Sedan sköter diffraktionen resten. Ljuset från varje enskild ruta breder ut sig när det fortsätter framåt, så varje punkt i bildplanet får bidrag från hela ytan. Vad som blir ljust och vad som blir mörkt avgörs av hur alla dessa delvågor interfererar. Med över tiotusen fördröjningar att skruva på finns tillräckligt många frihetsgrader för att bygga nästan vilket utfall som helst." },
+
+      { type: "h2", text: "Datorn räknade ut mönstret, ljuset gör jobbet" },
+      { type: "p", html: "Vilken fördröjning varje ruta skulle ha togs fram med maskininlärning. Laget skickade tusentals bilder — klädesplagg, siffror, klotter — genom en datormodell av spegeln och justerade mönstret steg för steg tills utbilden liknade måltavlan så mycket som möjligt, mätt som korrelationen mellan de två." },
+      { type: "p", html: "Poängen är att spegeln inte lär sig bilderna utantill. Testad med nya, osedda bilder av samma slag nådde de tre modellerna korrelationerna 0,97, 0,97 och 0,95 mot måltavlan. En spegel som bara tränats på klädesplagg klarade sig till och med bra på fotografier ur en helt annan bilddatabas — korrelation 0,92 — trots att den aldrig mött något liknande. Den tålde dessutom att motivet vreds, flyttades, skalades om eller doldes i brus, den var okänslig för ljusets polarisation, och den fungerade inom ±5 grader från den tänkta betraktningsvinkeln." },
+      { type: "p", html: "När mönstret väl är tillverkat behövs varken ström eller beräkningar. Omvandlingen sker under ljusets egen färd genom mönstret — spegeln är en helt passiv bit optik." },
+
+      { type: "image", src: "nyheter/bilder/2026-08-11-spegeln-som-ljuger-2.jpg", alt: "Ett optiskt bord fotograferat rakt uppifrån, med laser, polarisator, stråldelare och en liten mikrospegelmodul. Till höger en förstoring av spegelns yta som ett grynigt gråskalemönster.", caption: "Uppställningen sedd uppifrån: lasern kommer in från höger, motivet läggs in i strålen vid ingångsplanet och stråldelaren skickar det reflekterade ljuset ner mot kameran. Till höger syns mönstret som lades på mikrospegelytan — det ser ut som brus, men varje ruta har en uträknad fördröjning.", credit: "Bild: Y. Li, S. Chen, B. Bai och A. Ozcan, Nature Communications 2026 (CC BY 4.0)" },
+
+      { type: "h2", text: "Från simulering till optiskt bord" },
+      { type: "p", html: "Själva försöket gjordes med en enklare variant, där mönstret lagts direkt på spegelytan utan mellanrum. Rollen spelades av en matris med 150&nbsp;×&nbsp;150 rörliga mikrospeglar — samma sorts mikromekanik som sitter i bildchippet i en videoprojektor, men här ställd så att varje spegel skjuts i djupled och ändrar ljusets väglängd, i stället för att vippa undan det. Motivet visades som ett fasmönster på en ljusmodulator, och en kamera fångade utbilden. Varianten utan mellanrum är enklare att bygga och lättare att rikta in, men den presterar sämre: i simuleringarna sjönk korrelationerna till 0,87, 0,84 och 0,79, eftersom ljuset inte längre hinner breda ut sig mellan de två passagerna genom mönstret." },
+      { type: "p", html: "Laget byggde också en bredbandig version, tränad över hela intervallet 520–570&nbsp;nm. Den höll korrelationen över 0,85 i ett ännu bredare band, 500–600&nbsp;nm — alltså även vid färger den aldrig tränats på." },
+
+      { type: "h2", text: "Men det är ingen kryptering" },
+      { type: "p", html: "Forskarna angrep sin egen konstruktion för att se hur väl den egentligen döljer. De lät ett neuronnät träna på par av in- och utbilder och försöka räkna sig tillbaka till originalet. Med ett litet träningsunderlag kom nätet inte åt originalens finare detaljer; vid omkring 500 par började de träda fram; och med ungefär 10&nbsp;000 par återskapade nätet originalbilderna i god kvalitet." },
+      { type: "p", html: "Slutsatsen är alltså inte att informationen förintats, utan att den flyttats någon annanstans än till det öga eller den kamera som tittar. Det räcker för kamouflage. Det räcker inte som säkerhetsgaranti." },
+      { type: "p", html: "Och det är fortfarande långt till en spegel att hänga i hallen. Försöket krävde koherent laserljus, ett motiv som visades elektroniskt i strålens väg och en kamera i ett noga inställt bildplan, och utbilderna mätte bråkdelar av en millimeter. Att samma princip skulle fungera i vanligt, spretigt dagsljus har laget än så länge bara visat i simuleringar." },
+
+      { type: "fact", title: "Kort om den ljugande spegeln", items: [
+        "Består av en vanlig reflekterande spegel plus ett mönster av fasfördröjande fält, vart och ett ungefär en halv våglängd brett.",
+        "Mönstret räknas fram med maskininlärning, men själva omvandlingen är rent optisk — ingen ström och inga beräkningar när den väl är tillverkad.",
+        "I försöket blev tio olika handskrivna siffror alla till samma åtta, i rött (600&nbsp;nm), grönt (550&nbsp;nm) och blått (480&nbsp;nm) ljus.",
+        "Tål vridning, förflyttning, skalning och brus i motivet, och fungerar inom ±5 graders betraktningsvinkel.",
+        "Ett neuronnät med omkring 10&nbsp;000 träningspar kunde ändå återskapa originalbilderna — döljandet är kamouflage, inte kryptering."
+      ] }
+    ]
+  },
+  {
     id: "2026-08-10-solformorkelse-sverige",
     date: "2026-08-10",
     title: "På onsdag tar månen fyra femtedelar av solen — och nästan ingen kommer att se det på ljuset",

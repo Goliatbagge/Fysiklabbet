@@ -5,9 +5,77 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | RÄTTA FÖRST → GODKÄND | Fyra rättelser före publicering (simulerade kontra uppmätta korrelationer, neuronnätsattackens två felformuleringar, 53,3λ utan angiven våglängd, ”ingen elektronik” i ingressen). Hela metoddelen läst i arXiv-PDF:en; datum, författare och CC BY-licens verifierade via Crossref. Kollegialt granskad, öppet tillgänglig. |
 | 2026-08-10 | `2026-08-10-solformorkelse-sverige` | RÄTTA FÖRST → GODKÄND | Två räknefel funna och åtgärdade före publicering (vinkelstorlekens vardagsjämförelse, solglasögonens transmission). Alla svenska siffror verifierade mot Astroinfos råtabell, inte mot en referatsammanfattning. |
 | 2026-08-09 | `2026-08-09-flygande-fokus` | RÄTTA FÖRST → GODKÄND | Tre formuleringar rättade (bildtextens ”tre mellersta”, ”hela effekten” vid 4,8 J, 2004 som årtal). Hela originalartikeln lästes i PDF — samtliga siffror verifierade mot den. |
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
+
+---
+
+## 2026-08-11 — `2026-08-11-spegeln-som-ljuger`
+
+**Granskningsläge:** självständigt granskningspass enligt fallbacken i
+nyhetsagentens steg 11 (sessionen fick inte starta subagenter).
+
+**0. Publikationens status.** ”Lying mirror using structured surfaces”,
+Nature Communications, publicerad 7 augusti 2026, DOI 10.1038/s41467-026-76488-2.
+Kollegialt granskad tidskriftsartikel, alltså inte ett preprint eller en
+konferenspresentation. Öppet tillgänglig under CC BY 4.0 — licensen, datumet,
+författarlistan (Yuhang Li, Shiqi Chen, Bijie Bai, Aydogan Ozcan; de två första
+med lika stort bidrag) och abstractet hämtade via `api.crossref.org/works/<DOI>`,
+eftersom nature.com svarar med 303 till inloggningssidan. Metoddelen lästes i
+sin helhet i arXiv-versionen (2410.15521v2), utdragen ur PDF:en med pypdf.
+
+**1. Varje siffra i artikeln kontrollerad mot originalet.**
+120 × 120 fasfält à ~λ/2 i grunddesignen ✓; 53,3λ axiellt ✓; korrelationerna
+(Pearson) 0,97 / 0,97 / 0,95 för Fashion-MNIST, MNIST och QuickDraw ✓;
+0,92 för Fashion-MNIST-modellen blindtestad på ImageNet ✓;
+0,87 / 0,84 / 0,79 för varianten utan mellanrum ✓; 150 × 150 fält i
+mikrospegelmatrisen ✓; 480 / 550 / 600 nm ✓ (blå/grön/röd — kontrollerat att
+inte färgerna kastats om); bredbandsversionen tränad 520–570 nm med korrelation
+över 0,85 i intervallet 500–600 nm ✓; ±5° betraktningsvinkel ✓;
+polarisationsokänslig ✓; neuronnätsattacken 500 respektive ~10 000 par ✓.
+Inga stora räkneord förekommer i artikeln, så miljard/biljon-fällan är inte
+aktuell; ”10 000” är skrivet med hårt mellanslag.
+
+**2. Fyra rättelser krävdes.**
+(a) *Simulering framställd som mätning.* Korrelationerna 0,87 / 0,84 / 0,79
+gäller de NUMERISKA designerna av varianten utan mellanrum (figur 7), medan
+stycket handlade om det fysiska försöket. ”I simuleringarna” infogat.
+(b) *Neuronnätsattacken beskriven fel åt två håll.* Originalet säger att ett
+litet träningsunderlag inte kunde återskapa de FINARE detaljerna, och att just
+de finare dragen började framträda vid 500 par. Utkastet skrev ”gick det inte
+alls” respektive ”grova drag”. Båda omskrivna.
+(c) *53,3λ utan referensvåglängd* blir ingen längd alls. Meningen anger nu
+uttryckligen att omräkningen till 0,029 mm gäller det gröna ljuset.
+(d) *”Ingen elektronik” i ingressen.* Spegeln som komponent är passiv, men i
+själva försöket satt motivet på en elektroniskt styrd ljusmodulator. Ingressen
+lovar nu i stället att förvandlingen sker i ljusets gång genom mönstret.
+
+**3. Citatet.** Ozcans mening är återgiven i svensk översättning och
+attribuerad till Phys.org, som är där den publicerades. Inga andra citat
+förekommer. Ingen formulering är hämtad ur Phys.org-texten som sådan.
+
+**4. Överdrifter prövade.** Rubrikens ”vad man än håller framför den” speglar
+studiens uttryckliga konstruktionsmål — designen ska fungera för oändligt många
+okända motiv, inte memorera ett fåtal — och underbyggs numeriskt av
+generaliseringstesterna. Andra stycket anger ändå direkt det faktiska
+försökets omfattning (tio osedda handskrivna siffror), så läsaren blir inte
+vilseledd om vad som är uppmätt. Godkänt.
+
+**5. Begränsningarna står i texten**, inte bara i granskningen: koherent
+laserljus, elektroniskt visat motiv, noga inställt bildplan, utbilder på
+bråkdelar av en millimeter, och att drift i vanligt dagsljus hittills bara
+visats i simuleringar. Likaså att döljandet är kamouflage och inte kryptering.
+
+**6. Bilderna.** Båda är figur 8 ur studien, CC BY 4.0, med upphovsangivelse.
+Huvudbilden är ett utsnitt ur panel c och innehåller enbart äkta kamerabilder —
+beskuret så att panelbeteckningar, färgskala och skalstreck faller utanför, och
+alltså utan inbränd text. Bild 2 är panel b med sina engelska etiketter, vilket
+är i sin ordning för en figur i brödtexten; bildtexten förklarar vad man ser.
+Ingen AI-bild behövdes.
+
+**Utslag: GODKÄND** efter rättelserna i punkt 2.
 
 ---
 

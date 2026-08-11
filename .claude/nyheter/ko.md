@@ -44,6 +44,38 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-11) — kan tas upp senare
+
+- **Publicerad 2026-08-11: den ljugande spegeln** (UCLA, Nature Communications,
+  DOI 10.1038/s41467-026-76488-2) — se publicerat.md och granskningar.md för
+  avvägningen och för de fyra fällorna (simulerade kontra uppmätta
+  korrelationer, neuronnätsattackens formuleringar, 53,3λ utan angiven
+  våglängd, och att försöket ändå använde elektronik).
+- **DESI släpper den största 2D-kartan över universum** — Dark Energy
+  Spectroscopic Instrument. Stark kosmologivinkel med mycket bildmaterial, men
+  mörk materia/kosmologi kördes 08-05 (Rubin) och 08-01 (IC 1101). Passar bra
+  när det gått några veckor. Källa: phys.org, 2026-08-10.
+  (tillagd 2026-08-11)
+- **X(2370) framstår som glueball-dominerad partikel** — BESIII-samarbetet, nu
+  med en publikation bakom sig efter tillkännagivandet vid ICHEP. Den tydligaste
+  kandidaten på 50 år till en partikel byggd enbart av gluoner, alltså av
+  kraftbärare utan materia. Utmärkt vinkel: den starka kraften, kvarkar och vad
+  ”partikel” egentligen betyder. Bortvald 08-11 enbart för att optiknyheten var
+  mer omedelbart begriplig. Källa: phys.org, 2026-08-06 och 2026-08-10.
+  (tillagd 2026-08-11)
+- **Synkroniserade tidskristaller i galliumarsenid** — Alex Greilichs grupp
+  (TU Dortmund) visar att elektron- och kärnspinnens självsvängningar låser
+  frekvens över upp till 40 mikrometer, mer än tusen gånger en enskild
+  oscillators storlek, förmedlat av elektronspinndiffusion. Nature
+  Communications, DOI 10.1038/s41467-026-75714-1. Bortvald 08-11 därför att
+  tidskristaller kördes 07-31. Källa:
+  https://phys.org/news/2026-08-distant-crystals-oscillate-unison-paving.html
+  (tillagd 2026-08-11)
+- **Kosmiska filament ger första gränsen för mörk materias sönderfall till
+  gravitoner** och **antiferromagnetiska skyrmioner följer strömmen i
+  realtidsmätningar** — två obrukade uppslag från samma svep.
+  (tillagd 2026-08-11)
+
 ## Fynd som inte användes (2026-08-09, förhandsskriven 08-08 kväll) — kan tas upp senare
 
 - **Publicerad 2026-08-09: flygande fokus i en laserplasmaaccelerator** (LLE,

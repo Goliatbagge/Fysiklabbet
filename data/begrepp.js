@@ -289,6 +289,42 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'diffraktion',
+    term: 'Diffraktion',
+    former: ['diffraktion', 'diffraktionen', 'diffraktera', 'diffrakterar', 'diffrakterat', 'diffraktiv', 'diffraktivt', 'diffraktiva', 'ljusdiffraktion', 'ljusdiffraktionen', 'elektrondiffraktion', 'elektrondiffraktionen', 'röntgendiffraktion', 'röntgendiffraktionen'],
+    kort: 'Vågors förmåga att böja av runt kanter och breda ut sig efter en öppning i stället för att gå spikrakt fram. Effekten blir tydlig först när öppningen eller hindret är ungefär lika stort som våglängden.',
+    relaterade: ['interferens', 'gitter'],
+    body: [
+      { type: 'p', html: 'Stå i ett rum bredvid det där någon pratar och du hör vad som sägs, trots att du inte kan se personen. Ljudet kommer inte rakt igenom väggen — det böjer av runt dörrkarmen och sprider sig in i rummet. Samma sak händer med vågorna i en hamn: de smiter in genom hamninloppet och fortsätter som halvcirklar innanför, i stället för att bara fortsätta rakt fram i en smal remsa. Fenomenet kallas diffraktion, och det är något alla vågor gör.' },
+      { type: 'p', html: 'Att böjningen sker beror på att varje punkt i vågfronten fungerar som en egen liten källa till nya vågor. Där öppningen är bred tar de nya vågorna nästan ut varandra åt sidorna och vågen fortsätter mest rakt fram. Där öppningen är smal finns det för få punkter för att det ska ske, och vågen vecklar ut sig som en solfjäder. Tumregeln är att avböjningen blir märkbar när öppningen krymper ner mot våglängdens storlek.' },
+      { type: 'p', html: 'För ljus är våglängden bara några hundradels mikrometer, och därför märks diffraktionen sällan i vardagen — en dörröppning är miljontals våglängder bred. Men den finns där. Den är förklaringen till färgspelet på en cd-skiva, till varför gatlyktor får taggiga strålar i en kameras bilder, och till varför inget mikroskop kan visa detaljer mycket mindre än ljusets våglängd, hur bra linserna än är. Elektroner och neutroner diffrakterar också, vilket både bevisar att materia har vågegenskaper och används för att kartlägga atomernas placering i kristaller.' }
+    ]
+  },
+  {
+    id: 'koherens',
+    term: 'Koherens',
+    former: ['koherens', 'koherensen', 'koherent', 'koherenta', 'koherent ljus', 'inkoherent', 'inkoherenta', 'inkoherent ljus', 'partiellt koherent', 'koherenslängd', 'koherenslängden'],
+    kort: 'Hur väl vågorna i en ljusstråle håller takten med varandra. Koherent ljus har en fast fasrelation mellan olika delar av strålen och kan därför ge tydliga interferensmönster.',
+    relaterade: ['interferens', 'laser', 'diffraktion'],
+    body: [
+      { type: 'p', html: 'Tänk på en läktare där publiken gör vågen. Om alla följer samma taktkänsla rullar vågen jämnt runt arenan — det är koherens. Om var och en reser sig när det faller hen in blir det bara ett myller. Ljus fungerar likadant: vågorna kan svänga i en gemensam takt eller helt oberoende av varandra.' },
+      { type: 'p', html: 'En glödlampa och solen ger inkoherent ljus. Där skickar miljarder atomer ut korta vågtåg oberoende av varandra, med slumpmässiga starttider och en salig blandning av våglängder. En laser gör tvärtom: alla atomer förmås att skicka ut sitt ljus i takt, med samma våglängd och samma fas. Sådant ljus kan färdas långt innan takten går förlorad — avståndet kallas koherenslängd och kan vara allt från några mikrometer till många kilometer.' },
+      { type: 'p', html: 'Koherensen avgör om interferens går att se. Två koherenta strålar som möts ger ett stabilt mönster av ljusa och mörka band, eftersom vilka delar som förstärker och släcker varandra ligger fast. Två inkoherenta strålar ger också interferens i varje ögonblick, men mönstret hoppar omkring så snabbt att ögat och kameran bara ser ett jämngrått medelvärde. Det är därför precisionsmätningar med interferometrar, holografi och de flesta optiska experiment behöver laserljus — och därför man inte ser interferensränder från två vanliga taklampor.' }
+    ]
+  },
+  {
+    id: 'fasforskjutning',
+    term: 'Fasförskjutning',
+    former: ['fasförskjutning', 'fasförskjutningen', 'fasförskjutningar', 'faskift', 'faskiftet', 'fasfördröjning', 'fasfördröjningen', 'fasfördröjande', 'motfas', 'fasförhållande', 'fasförhållanden', 'fasrelation', 'fasrelationen', 'fasmönster', 'fasmönstret'],
+    kort: 'Hur mycket en våg ligger före eller efter en annan i sin svängning. En halv våglängds förskjutning gör att två annars lika vågor släcker ut varandra helt.',
+    relaterade: ['interferens', 'koherens', 'diffraktion'],
+    body: [
+      { type: 'p', html: 'Två barn i varsin gunga kan gunga precis lika högt och lika snabbt och ändå se helt olika ut: antingen åker de fram och tillbaka tillsammans, eller så möts de på mitten hela tiden. Skillnaden är var i svängningen de befinner sig — deras fas. Ligger den ena ett halvt varv efter den andra säger man att de går i motfas.' },
+      { type: 'p', html: 'För vågor mäts fasförskjutningen oftast i grader eller i delar av en våglängd. Två vågor i fas har toppar på samma ställen och förstärker varandra; två vågor i motfas har topp mot dal och tar ut varandra. Det vanligaste sättet att skapa en fasförskjutning är att låta den ena vågen gå en längre väg. En extra väglängd på en halv våglängd svarar mot ett halvt varvs förskjutning, en hel våglängd mot ett helt varv — och ett helt varv syns inte alls, eftersom vågen då ser likadan ut igen.' },
+      { type: 'p', html: 'Just kopplingen mellan väg och fas gör fasförskjutningen till ett verktyg. Antireflexbehandlingen på ett par glasögon är ett skikt vars tjocklek är vald så att ljuset som studsar på ovansidan och ljuset som studsar på undersidan möts i motfas och släcker varandra. Ljudet i ett par brusreducerande hörlurar tystas på samma sätt, med en motvåg. Och eftersom faskiftet från en given väglängd beror på våglängden fungerar sådana knep bara i ett begränsat färg- eller frekvensband — resten smiter förbi.' }
+    ]
+  },
+  {
     id: 'gitter',
     term: 'Gitter',
     former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'diffraktionsgitter', 'diffraktionsgittret', 'bikakegitter', 'bikakegittret'],

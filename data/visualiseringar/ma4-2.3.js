@@ -456,16 +456,14 @@
         svg.addEventListener('pointerup', endDrag);
         svg.addEventListener('pointercancel', endDrag);
 
-        // ── Rita en tallinje: axel med pilspetsar, ticks, etikett till vänster ──
+        // ── Rita en tallinje: axel med pilspets, ticks, etikett till vänster ──
+        // Pilspetsen sitter ENBART i den positiva änden (höger) — en tallinje
+        // eller koordinataxel får aldrig pil åt det negativa hållet.
         function drawNumberLine(Y, min, max, step, labelParts) {
             var mapper = function (v) { return L + (v - min) / (max - min) * PW; };
             svg.appendChild(svgEl('line', { x1: L - 10, y1: Y, x2: L + PW + 10, y2: Y, stroke: COL.axis, 'stroke-width': 1.6 }));
             svg.appendChild(svgEl('polygon', {
                 points: (L + PW + 14) + ',' + Y + ' ' + (L + PW + 4) + ',' + (Y - 4.5) + ' ' + (L + PW + 4) + ',' + (Y + 4.5),
-                fill: COL.axis
-            }));
-            svg.appendChild(svgEl('polygon', {
-                points: (L - 14) + ',' + Y + ' ' + (L - 4) + ',' + (Y - 4.5) + ' ' + (L - 4) + ',' + (Y + 4.5),
                 fill: COL.axis
             }));
             var ticks = ticksFor(min, max, step);

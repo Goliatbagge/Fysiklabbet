@@ -1589,6 +1589,21 @@ mäter mellanrummen i teorifigurerna och i schemana som
 1. **Axelfärg**: x-axel (y=0) och y-axel (x=0) ljusblå/cyan (`#38bdf8`).
 2. **X-axel-etiketter** placeras direkt **under x-axeln (y=0)**, inte
    längst ned i diagrammet.
+2b. **Pilspets BARA åt det positiva hållet — aldrig åt båda.** En tallinje
+   och en koordinataxel har pilspets i **en enda** ände: tallinjen och
+   x-axeln åt **höger**, y-axeln **uppåt**. Den negativa änden lämnas
+   öppen, utan pilspets. Pilen talar om åt vilket håll talen växer; sätter
+   man en pil i vardera änden säger den ingenting, och det är inte så
+   läroböckerna ritar (uttryckligt önskemål 2026-08-11). Gäller överallt:
+   teori-figurer (`::: figur`), övningsfigurer, `data/visualiseringar/*.js`,
+   simuleringar (SVG och canvas) och pennlösningarnas tallinjer i
+   `handskrift.js`.
+   **Detta gäller AXELN — inte allt som råkar ligga på den.** Pilar som
+   bär egen information behåller sin riktning: en **lösningsmängds stråle**
+   ($x < -3$) pekar åt vänster, en **riktningsmarkör** ("negativa tal" ←)
+   pekar åt vänster, och en **måttlinje** har spets i båda ändar (se
+   "Måttsättning av hävarm och avstånd"). Fråga: är pilen axelns egen? Då
+   en pil, åt det positiva hållet.
 3. **Symmetrisk skala** om negativa värden visas (-12 till +12, inte
    -12 till +2).
 4. **Axeletiketter måste få plats INOM viewBox/ramen.** Vanlig fälla:

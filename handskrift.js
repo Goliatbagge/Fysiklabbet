@@ -30,6 +30,13 @@
  *            "Utan tankar" (användarönskemål 2026-08-02); tankar:true
  *            startar i "Med tankar" (se nedan).
  *
+ *   PENNAN TONAR BORT — SVEPER ALDRIG UT UR BILD (önskemål 2026-08-11):
+ *   när ett steg är färdigskrivet (och när hela lösningen är klar) tonar
+ *   pennan bort på stället i stället för att glida ut åt höger; svepet
+ *   drog blicken bort från det som just skrivits. Vid nästa steg tonar
+ *   pennan fram direkt där nästa streck börjar — ingen synlig förflyttning
+ *   mellan stegen. Rör inte den ordningen (hidePen/showPenAt + penRamps).
+ *
  *   Lösningar MED tankebubblor får en inställningsruta uppe till höger
  *   på arket med radioknapparna "Utan tankar"/"Med tankar" — "Utan tankar"
  *   överst och förvald (användarönskemål 2026-07-30 + 2026-08-02).
@@ -61,6 +68,16 @@
  * hjälplinjer utan pilspets (streckade projektionslinjer) räknas inte
  * som vektor/tal och förblir grafit. Syftet är att synligt skilja "given
  * data/vektorer" från den ritade scenen.
+ *
+ * REGEL (TALLINJER OCH AXLAR — PIL BARA ÅT DET POSITIVA HÅLLET): en
+ * tallinje och en koordinataxel ritas med pilspets i ENDAST en ände —
+ * den positiva (tallinje/x-axel: höger, y-axel: uppåt). Den negativa
+ * änden lämnas öppen, utan pilspets. Pilen anger åt vilket håll talen
+ * växer; en pil i vardera änden gör den upplysningen meningslös och är
+ * inte hur läroböckerna ritar (påpekat 2026-08-11). Undantag: pilar som
+ * inte tillhör axeln — en LÖSNINGSMÄNGDS stråle (x<−3) eller en
+ * riktningsmarkör ("negativa tal" ←) behåller förstås sin pil åt det
+ * håll den pekar, och en MÅTTLINJE har spets i båda ändar.
  *
  * REGEL (TANKEBUBBLOR SKYMMER ALDRIG NÅGOT): en tankebubbla får aldrig
  * ligga över figuren, en skriven rad eller något annat på arket — varken
@@ -1715,11 +1732,11 @@
     tanke(b2);
     var ty = 236;                             /* tallinjens y */
     var x0 = 110, u = 360;                    /* 0 vid x0, 1 enhet = u px */
-    line([x0 - 20, ty], [x0 + u + 32, ty]);   /* tallinjen + pilar åt båda håll */
+    /* tallinjen med pilspets ENBART åt höger (positiva hållet) — se REGEL
+     * i filhuvudet; vänsteränden lämnas öppen utan pilspets */
+    line([x0 - 20, ty], [x0 + u + 32, ty]);
     line([x0 + u + 22, ty - 5], [x0 + u + 32, ty]);
     line([x0 + u + 22, ty + 5], [x0 + u + 32, ty]);
-    line([x0 - 10, ty - 5], [x0 - 20, ty]);
-    line([x0 - 10, ty + 5], [x0 - 20, ty]);
     pause(120);
     [0, 1].forEach(function (v) {             /* heltalen 0 och 1 */
       line([x0 + v * u, ty - 7], [x0 + v * u, ty + 7]);
@@ -1794,15 +1811,14 @@
     }
     function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
 
-    /* en tallinje med pilar åt båda håll, heltalssteg och etiketter.
+    /* en tallinje med pilspets ENBART åt höger (positiva hållet — se REGEL
+     * i filhuvudet), heltalssteg och etiketter.
      * marks = [värde, ...] markeras med blå prick + blå siffra OVANFÖR. */
     function tallinje(ty, vMin, vMax, x0, u, labels, marks) {
       var xa = x0 - 20, xb = x0 + (vMax - vMin) * u + 32;
       line([xa, ty], [xb, ty]);
       line([xb - 10, ty - 5], [xb, ty]);
       line([xb - 10, ty + 5], [xb, ty]);
-      line([xa + 10, ty - 5], [xa, ty]);
-      line([xa + 10, ty + 5], [xa, ty]);
       pause(120);
       for (var v = vMin; v <= vMax; v++) {
         var x = x0 + (v - vMin) * u;
@@ -7501,7 +7517,8 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
-    /* tallinje från -6 till 6; öppna ringar vid gränserna */
+    /* tallinje från -6 till 6; öppna ringar vid gränserna. Pilspets ENBART
+     * åt höger (positiva hållet) — se REGEL i filhuvudet. */
     var x0 = 96, u = 44, vMin = -6, vMax = 6;
     function xAt(v) { return x0 + (v - vMin) * u; }
     function tallinje(ty) {
@@ -7509,8 +7526,6 @@
       T.line([xa, ty], [xb, ty]);
       T.line([xb - 10, ty - 5], [xb, ty]);
       T.line([xb - 10, ty + 5], [xb, ty]);
-      T.line([xa + 10, ty - 5], [xa, ty]);
-      T.line([xa + 10, ty + 5], [xa, ty]);
       T.pause(120);
       for (var v = vMin; v <= vMax; v++) {
         var big = (v % 3 === 0);
@@ -7618,8 +7633,10 @@
     T.stepEnd();
 
     /* strålarna utåt, med pilspets i vardera änden */
-    /* strålarna slutar VID ytterhacken, inte ute vid tallinjens egna
-     * pilspetsar — annars hamnar två pilspetsar ovanpå varandra */
+    /* strålarna slutar VID ytterhacken, inte ute vid tallinjens egen
+     * pilspets — annars hamnar två pilspetsar ovanpå varandra. (Strålarnas
+     * pilspetsar är lösningsmängdens, inte axelns, och får därför peka åt
+     * BÅDA håll — se REGEL i filhuvudet.) */
     var xvA = xAt(-3) - 9, xvB = xAt(vMin) + 2;
     markera(xvA, xvB, ty2);
     T.line([xvB + 11, ty2 - 6], [xvB, ty2], BLUE);
@@ -34904,15 +34921,19 @@
     var SWEEP = 0.19;    /* px per ms vid torrsvep längs en figursträcka */
     var stegvis = opts.stegvis !== false;
     var tankar = opts.tankar === true;   /* standard: "Utan tankar" */
+    var FADE = 300;      /* ms — pennan tonar bort/fram i stället för att
+                            svepa ut ur bild (önskemål 2026-08-11) */
     var events = [];
     var boundaries = [];   /* tider där stegvis uppspelning pausar —
                               MUTERAS på plats (controllern delar referensen) */
+    var penRamps = [];     /* {t0,t1,a0,a1} — pennans opacitet över tid */
     var TOTAL = 0;
     var startPos = [W / 2, H / 2];
 
     function buildTimeline(actsArr) {
       events = [];
       boundaries.length = 0;
+      penRamps = [{ t0: 0, t1: 260, a0: 0, a1: 1 }];
       strokes.forEach(function (a) {
         a._t0 = Infinity; a._t1 = Infinity;
         a.fade0 = null; a.fade1 = null;
@@ -34921,19 +34942,35 @@
       objs.forEach(function (o) { o.wins.length = 0; });
       var t = 350;
       var pen = null;
+      var penHidden = false;   /* pennan bortstonad (steggräns eller slut) */
       var drew = false;   /* skrevs något sedan förra steggränsen? */
+
+      /* Pennan TONAR BORT på stället när ett steg är klart — den glider
+       * ALDRIG ut ur bild (uttryckligt önskemål 2026-08-11: svepet drog
+       * blicken bort från det nyskrivna). Den tonar sedan fram igen där
+       * nästa streck börjar, utan synlig förflyttning däremellan. */
+      function hidePen() {
+        if (penHidden) return;
+        if (pen) events.push({ type: 'wait', t0: t, t1: t + FADE, at: pen });
+        penRamps.push({ t0: t, t1: t + FADE, a0: 1, a1: 0 });
+        t += FADE;
+        penHidden = true;
+      }
+      function showPenAt(p) {
+        var to = [p[0], p[1]];
+        events.push({ type: 'wait', t0: t, t1: t + FADE, at: to });
+        penRamps.push({ t0: t, t1: t + FADE, a0: 0, a1: 1 });
+        t += FADE;
+        pen = to;
+        penHidden = false;
+      }
 
       actsArr.forEach(function (a) {
         if (a.kind === 'lineEnd') {
-          /* handen dras bort åt höger vid steggränsen så att den inte
-           * skymmer det nyskrivna medan man läser — men bara om något
-           * faktiskt skrevs (rena tankebubbel-steg lämnar handen i vila) */
-          if (pen && drew) {
-            var rest = [W + 40, Math.min(pen[1] + 60, H - 20)];
-            events.push({ type: 'move', t0: t, t1: t + 550, from: pen, to: rest });
-            t += 550;
-            pen = rest;
-          }
+          /* pennan tonar bort vid steggränsen så att den inte skymmer det
+           * nyskrivna medan man läser — men bara om något faktiskt skrevs
+           * (rena tankebubbel-steg lämnar pennan i vila) */
+          if (pen && drew) hidePen();
           boundaries.push(t);
           drew = false;
           return;
@@ -34946,6 +34983,7 @@
         }
         if (a.kind === 'fade') { a.ref.fade0 = t; a.ref.fade1 = t + 600; return; }
         if (a.kind === 'jump') {
+          if (penHidden) { pen = a.to.slice(); return; }  /* osynlig → teleport */
           if (pen) {
             var jd = Math.hypot(a.to[0] - pen[0], a.to[1] - pen[1]);
             var jdur = Math.max(100, Math.min(520, jd / LIFT));
@@ -34970,7 +35008,9 @@
                                sp[si][1] - sp[si - 1][1]);
             cum.push(sLen);
           }
-          if (pen) {
+          if (penHidden) {
+            showPenAt([sp[0][0], sp[0][1]]);
+          } else if (pen) {
             var sd = Math.hypot(sp[0][0] - pen[0], sp[0][1] - pen[1]);
             if (sd > 1.5) {
               var sdur = Math.max(80, Math.min(480, sd / LIFT));
@@ -34989,7 +35029,9 @@
         }
         var start = [a.pts[0][0], a.pts[0][1]];
         var end = [a.pts[a.pts.length - 1][0], a.pts[a.pts.length - 1][1]];
-        if (pen) {
+        if (penHidden) {
+          showPenAt(start);
+        } else if (pen) {
           var d = Math.hypot(start[0] - pen[0], start[1] - pen[1]);
           if (d > 1.5) {
             var mdur = Math.max(80, Math.min(480, d / LIFT));
@@ -35003,12 +35045,11 @@
         pen = end;
         drew = true;
       });
-      /* handen glider av papperet när allt är klart */
-      var exitTo = [W + 60, L.lastBase + 2 * F];
-      events.push({ type: 'move', t0: t, t1: t + 800, from: pen || [W / 2, H / 2],
-                    to: exitTo });
-      TOTAL = t + 800;
-      /* sista radens steggräns slopas: sista steget löper ut i handens sorti */
+      /* pennan tonar bort på stället när allt är klart — den lämnar aldrig
+       * bilden i ett svep (se hidePen ovan) */
+      hidePen();
+      TOTAL = t;
+      /* sista radens steggräns slopas: sista steget löper ut i pennans sorti */
       boundaries.pop();
 
       /* penColor per event: vad pennan skriver/ska skriva härnäst — pennan
@@ -35085,6 +35126,20 @@
       pc.lo.setAttribute('stroke', blue ? '#2e569c' : '#c9882a');
     }
 
+    /* pennans opacitet: intoning vid start, borttoning vid varje steggräns
+     * och vid slutet (penRamps byggs i buildTimeline, i tidsordning) */
+    function penOpacity(time) {
+      var o = penRamps.length ? penRamps[0].a0 : 1;
+      for (var i = 0; i < penRamps.length; i++) {
+        var r = penRamps[i];
+        if (time >= r.t1) { o = r.a1; continue; }
+        if (time <= r.t0) break;
+        o = r.a0 + (r.a1 - r.a0) * (time - r.t0) / (r.t1 - r.t0);
+        break;
+      }
+      return o;
+    }
+
     function winOpacity(wins, time) {
       var o = 0;
       for (var i = 0; i < wins.length; i++) {
@@ -35117,17 +35172,16 @@
       var pp = penPosAt(time);
       setPencil(pp.col === BLUE);
       /* före start (tomt ark) syns ingen hand; den tonar in när skrivandet
-       * börjar */
-      hand.setAttribute('opacity', time <= 0 ? 0 : Math.min(1, time / 260));
-      var wob = (time < TOTAL - 800)
-        ? Math.sin(time * 0.011) * 1.4 : 0;
+       * börjar och tonar bort vid steggränser och vid slutet */
+      hand.setAttribute('opacity', penOpacity(time).toFixed(3));
+      var wob = Math.sin(time * 0.011) * 1.4;
       var lx = pp.pos[0] + pp.lift * 2;
       var ly = pp.pos[1] - pp.lift * 9;
       hand.setAttribute('transform',
         'translate(' + lx.toFixed(1) + ' ' + ly.toFixed(1) + ') ' +
         'rotate(' + (wob - pp.lift * 4).toFixed(2) + ')');
       /* mobil sidledsskroll (se .hk-scroll): följ pennan i x-led med
-       * dödzon. Handens viloläge (W+40) jagas inte — klampa till arket. */
+       * dödzon. Klampa till arket (pennan ska aldrig dra vyn utanför). */
       if (scroller.scrollWidth - scroller.clientWidth > 8) {
         var scx = svg.clientWidth / W;
         var px = Math.min(pp.pos[0], W - 40) * scx;
@@ -35440,7 +35494,7 @@
         return;
       }
       var sc = svg.clientWidth / W;
-      var pp = penPosAt(Math.min(tNow, TOTAL - 810));  /* ej slutglidningen */
+      var pp = penPosAt(tNow);
       var py = pp.pos[1] * sc;
       var vh = window.innerHeight;
       var maxScroll = Math.max(0, wrap.scrollHeight - vh);

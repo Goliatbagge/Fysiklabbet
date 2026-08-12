@@ -88,6 +88,80 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-12-magnetisk-tratt",
+    date: "2026-08-12",
+    title: "Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen",
+    deck: "Sedan 1980-talet har teorin sagt att unga stjärnor gör sig av med sin rotation genom gasstrålar som ett vridet magnetfält både driver och håller ihop. Nu har radioteleskopet ALMA mätt det fältet kring en stjärna under bildning 960 ljusår bort — och fått den elektriska strömmen som håller uppe det på köpet.",
+    category: "Astronomi",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-12-magnetisk-tratt.jpg",
+    imageAlt: "Konstnärlig gestaltning av en ung stjärna: en glödande, dammig skiva sedd snett uppifrån, och ur dess mitt skjuter en smal gasstråle upp åt vänster. Runt strålen ligger vita spirallinjer lindade som en utdragen fjäder, mot ett rödbrunt stjärnstoftsmoln.",
+    imageCredit: "Illustration: NSF/AUI/NSF NRAO/M. Weiss (CC BY 4.0)",
+    tags: ["astronomi", "stjärnbildning", "protostjärna", "magnetfält", "elektromagnetism", "polarisation", "radioastronomi", "alma", "fysik 2"],
+    sources: [
+      { name: "NSF NRAO — Twisted physics: astronomers solve 30-year-old stellar mystery", url: "https://public.nrao.edu/news/twisted-physics-astronomers-solve-30-year-old-stellar-mystery/" },
+      { name: "Phys.org — Twisted magnetic field around newborn star confirms decades-old jet theory", url: "https://phys.org/news/2026-08-magnetic-field-newborn-star-decades.html" },
+      { name: "Nature Communications — Unveiling dominant toroidal magnetic fields in a protostellar outflow", url: "https://www.nature.com/articles/s41467-026-75950-5" },
+      { name: "arXiv:2604.12597 — förhandsversion med hela metoddelen", url: "https://arxiv.org/abs/2604.12597" }
+    ],
+    research: {
+      citation: "T.-C. Ching, Z.-Y. Li, Q. Zhang, J. M. Girart, S.-P. Lai, C.-F. Lee, D. Li, R. Rao och E. Momjian, ”Unveiling dominant toroidal magnetic fields in a protostellar outflow”, Nature Communications, 11 augusti 2026 (DOI 10.1038/s41467-026-75950-5)",
+      url: "https://doi.org/10.1038/s41467-026-75950-5"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 — 5.6 Stjärnbildning", href: "katalog.html#fy2-5.6" },
+        { label: "Fysik nivå 2 — 3.1 Magnetism och magnetfält", href: "katalog.html#fy2-3.1" },
+        { label: "Fysik nivå 2 — 3.2 Magnetfält kring lång rak ledare", href: "katalog.html#fy2-3.2" },
+        { label: "Simulering — Magnetfält kring lång rak ledare", href: "fysik2-magnetfalt-app.html" }
+      ],
+      fragor: [
+        "Ingen har sett magnetfältet i sig — det som mättes var att en halv procent av radiovågorna från kolmonoxid svängde i en viss riktning. Vad krävs för att ett sådant indirekt spår ska räknas som ett bevis, och vilka andra antaganden vilar slutsatsen på?",
+        "Runt en rak ledare bildar magnetfältet cirklar, och här ligger fältet i cirklar runt gasstrålen. Vad säger det om vad som måste finnas inuti strålen — och varför är just det svårt att få ihop med att rymden brukar beskrivas som tom?",
+        "Gasstrålarna bär bort rotation så att stjärnan ska kunna växa färdigt. Diskutera vilka andra situationer i fysiken där ett system måste göra sig av med något för att kunna nå ett lägre, stabilare tillstånd."
+      ]
+    },
+    body: [
+      { type: "p", html: "En stjärna föds ur ett gasmoln som faller ihop av sin egen tyngd, och det som sätter käppar i hjulet är rotationen. Molnet snurrar en aning från början, och precis som en konståkare snurrar fortare när armarna dras in snurrar molnet fortare ju mindre det blir. Till slut går den innersta gasen så fort runt att den inte kan falla vidare inåt. Den lägger sig i en roterande skiva runt den blivande stjärnan — en ackretionsskiva — och blir liggande där." },
+      { type: "p", html: "Ska stjärnan bli färdig måste alltså någon ta hand om rotationen. Den misstänkte har länge varit de gasstrålar som nyfödda stjärnor skjuter ut åt två håll längs sin rotationsaxel: de bär i väg rörelsemängdsmoment, och gasen som blir kvar kan falla in. Men vad skjuter i väg strålarna, och vad håller ihop dem till smala pelare i stället för att låta dem yra ut åt alla håll? Svaret har sedan 1980- och 1990-talen stått i läroböckerna — magnetfältet — utan att någon kunnat mäta det på plats." },
+      { type: "p", html: "Det har nu ett internationellt lag lett av Tao-Chung Ching, tidigare Jansky-stipendiat vid det amerikanska radioobservatoriet NSF NRAO, gjort. Med teleskopanläggningen ALMA i norra Chile kartlade de fältet runt gasströmmen från NGC 1333 IRAS 4A, ett par nyfödda stjärnor inbäddade i Perseusmolnet omkring 960&nbsp;ljusår bort. Resultaten publicerades den 11&nbsp;augusti i <em>Nature Communications</em>." },
+
+      { type: "quote", html: "”För första gången har de här ALMA-observationerna fångat den osynliga tratten av magnetfält. Det är spännande, för det bevisar en decenniegammal teori om hur stjärnor som vår egen sol föds och skjuter i väg mäktiga kosmiska strålar.”", cite: "Tao-Chung Ching, NSF NRAO" },
+
+      { type: "h2", text: "Fältlinjer som vrids till ringar" },
+      { type: "p", html: "Gasen närmast en ung stjärna är inte helt neutral. Kosmisk strålning slår loss elektroner här och var, och även om bara ungefär en partikel på en miljon bär laddning räcker det för att gasen ska hänga fast i magnetfältet och släpa med sig fältlinjerna när den rör sig." },
+      { type: "p", html: "Från början går fältlinjerna rakt igenom skivan, ut från stjärnan som ekrarna i ett hjul. När skivan snurrar dras deras yttre ändar med i rotationen medan de inre sitter fast, och linjerna vrids upp till en spiral — ungefär som när man skruvar på en telefonsladd. Det ger fältet en ny riktning: en komponent som går <em>runt</em> strålen, i ringar vinkelrätt mot dess färdriktning." },
+      { type: "p", html: "Och en fältlinje som ligger i en ring vill dra ihop sig, precis som gummisnodden runt en blombukett. Den kramar gasen inåt mot axeln och håller ihop strömmen till en smal pelare, samtidigt som vridningen fortplantar sig utåt och knuffar gasen framåt. Ett fält i ringar är alltså både motorn och formen — men bara om det verkligen ligger på det viset, och det var just det ingen kunnat visa." },
+
+      { type: "h2", text: "Så mäter man ett fält som ingen kan se" },
+      { type: "p", html: "Ett magnetfält i rymden skickar inte ut något ljus. Det man kan komma åt är hur fältet påverkar ljuset från något annat — här kolmonoxidmolekylerna i gasen, som lyser i millimetervågor. I en magnetiserad omgivning fördelas molekylernas energitillstånd en aning ojämnt, och strålningen de sänder ut blir svagt linjärt polariserad, med svängningsriktningen låst till fältets riktning. Effekten förutsades 1981 och är oerhört liten: här handlade det om en halv procent av strålningen." },
+      { type: "p", html: "Att fånga något så svagt kräver en mycket stor teleskopanläggning, och ALMA:s upplösning i den här mätningen — motsvarande 147&nbsp;×&nbsp;99 astronomiska enheter, alltså ungefär hundra till hundrafemtio gånger avståndet mellan jorden och solen — var omkring 30&nbsp;gånger skarpare än vad tidigare kartläggningar orkat med." },
+
+      { type: "h2", text: "Fältet låg tvärs över strålen" },
+      { type: "p", html: "Resultatet blev tydligt: de uppmätta fältriktningarna låg nästan vinkelrätt mot utflödets axel längs hela dess längd, och följde gasens rotation. Det är signaturen av ett fält lindat i ringar. Ett fält som i stället gick längs med strålen skulle ha gett polarisation i en annan riktning, och en betydligt svagare sådan än den som mättes." },
+      { type: "p", html: "Styrkan landade på mellan 0,3 och 6,0 tusendels gauss, alltså mellan 30 och 600&nbsp;nanotesla. Det låter försvinnande lite: jordens magnetfält vid marken är ungefär en halv gauss — närmare hundra gånger mer än det starkaste som mättes här, och närmare tusen gånger mer än det svagaste. En kylskåpsmagnet är starkare än jordens fält igen. Men i den tunna rymdgasen är det gott om kraft. Fältet var starkast nära stjärnan — över 3&nbsp;tusendels gauss på 300&nbsp;astronomiska enheters avstånd, under 2&nbsp;tusendels gauss vid 500." },
+      { type: "p", html: "Ett sätt att avgöra om ett fält är starkt <em>nog</em> är att jämföra hur fort störningar rör sig i det med hur fort gasen rör sig. Den hastigheten, Alfvénhastigheten, blev här omkring 4,1&nbsp;km/s på 400 astronomiska enheters avstånd — praktiskt taget exakt gasens egen rotationsfart på samma ställe, 4,0&nbsp;km/s. Fältet hinner alltså med. Det kan både styra och driva utflödet, som i sin helhet rör sig utåt med ungefär 10&nbsp;km/s." },
+
+      { type: "h2", text: "Ampères lag, 960 ljusår bort" },
+      { type: "p", html: "Ett vridet magnetfält kommer inte gratis. Redan på 1820-talet visade André-Marie Ampère att fältet kring en strömförande ledare bildar cirklar runt den, och i modern form säger sambandet att fältets vridning i en punkt är proportionell mot strömtätheten just där. Ligger fältet i ringar måste det alltså flyta en ström längs strålen." },
+      { type: "p", html: "Laget vände på steken och räknade fram vridningen ur sina egna mätpunkter, och jämförde den med hur mycket laddning som fanns tillgänglig på samma ställen — uppskattat ur gasens täthet och joniseringsgrad. Punkterna föll på en rät linje, med en statistisk säkerhet på 3,3 standardavvikelser. Linjens lutning ger den storhet som annars är nästan omöjlig att komma åt: hur fort elektronerna glider förbi jonerna. Svaret blev $v = 5{,}9 \\pm 1{,}8\\ \\mathrm{m/s}$ — cykelfart." },
+      { type: "p", html: "Det är alltså inte fråga om något dramatiskt strömrytande. Men laddningarna är många, volymen är svindlande, och summan räcker för att hålla uppe fältet. Framför allt öppnar knepet en ny väg: den som kan mäta polarisationen i ett stjärnbildningsområde kan hädanefter också uppskatta strömmarna i det." },
+
+      { type: "quote", html: "”Vi visste att IRAS 4A var ett läroboksfall: för 20 år sedan, i ett arbete publicerat i <em>Science</em> 2006, fann vi att den här regionen följde den teoretiskt väntade magnetiskt drivna kollapsen.”", cite: "Josep Miquel Girart, Institut de Ciències de l’Espai (ICE-CSIC) och IEEC" },
+
+      { type: "h2", text: "Samma knep i det stora och det lilla" },
+      { type: "p", html: "Bilden som växer fram är att en stjärna inte kan födas utan att samtidigt kasta ut en del av sig själv, och att magnetfältet är verktyget. Mekanismen som nu mätts kring en nyfödd stjärna är i grunden densamma som astronomer tror ligger bakom de långt större strålarna från materia på väg ner i svarta hål — en snurrande skiva, ett fält som vrids upp av rotationen, och en stråle som skjuts ut längs axeln. Att den håller på skalan några hundra astronomiska enheter runt en stjärna som knappt börjat lysa gör det rimligare att den också håller där ingen kommer att kunna mäta." },
+
+      { type: "fact", title: "Kort om mätningen", items: [
+        "Målet: NGC 1333 IRAS 4A, ett par stjärnor under bildning i Perseusmolnet, omkring 960&nbsp;ljusår från jorden.",
+        "Metoden: ALMA mätte den svaga linjära polarisationen — cirka 0,5&nbsp;% — hos millimetervågorna från kolmonoxid i utflödet.",
+        "Fyndet: fältriktningarna låg nästan vinkelrätt mot utflödets axel, alltså lindade i ringar runt det, med styrkan 0,3–6,0 tusendels gauss (30–600&nbsp;nanotesla).",
+        "Bonusen: en rät linje mellan fältets vridning och strömtätheten gav elektronernas drifthastighet i förhållande till jonerna, 5,9&nbsp;±&nbsp;1,8&nbsp;m/s.",
+        "Betydelsen: den första upplösta mätningen av ett sådant fält kring en protostjärna, och ett direkt stöd för att gasstrålarna drivs magnetiskt."
+      ] }
+    ]
+  },
+  {
     id: "2026-08-11-spegeln-som-ljuger",
     date: "2026-08-11",
     title: "Fysiker har byggt en spegel som ljuger — vad man än håller framför den svarar den med en åtta",

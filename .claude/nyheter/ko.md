@@ -44,6 +44,51 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-12) — kan tas upp senare
+
+- **Publicerad 2026-08-12: den lindade magnetfältstratten kring en nyfödd
+  stjärna** (NSF NRAO/ALMA, Nature Communications, DOI
+  10.1038/s41467-026-75950-5) — se publicerat.md och granskningar.md för
+  avvägningen och för de tre fällorna (lobstorleken 147 × 99 au beskriven med
+  bara den kortare axeln, jämförelsen mot jordens magnetfält som inte höll i
+  båda ändarna, och den inre ackretionsskivans temperatur). OBS för en
+  ev. uppföljare: nature.com-sidan är inloggningsspärrad — hela metoddelen
+  finns i arXiv:2604.12597v1.
+
+- **Wigner-kristallens inre dynamik avläst med ljus** (STARK RESERV, valdes
+  bort 2026-08-12 enbart för att stjärnbildningsnyheten var mer omedelbart
+  begriplig). Ett lag lett av Tomasz Smoleński vid Universitetet i Basel, med
+  teori från Michael Knaps grupp vid TU München, har visat att ljus kan läsa
+  av inte bara ATT elektronerna i ett enda atomlager volframdiselenid (WSe₂)
+  ordnat sig i en kristall, utan också hur den kristallen svänger inuti. Nya
+  kvasipartiklar — Wigner-kristallpolaroner — uppstår när optiskt skapade
+  excitoner kopplar till elektronkristallens kollektiva rörelse. Nature
+  Physics, 11 augusti 2026, DOI 10.1038/s41567-026-03395-0. Kollegialt
+  granskad. Utmärkta vinklar för gymnasiet: Coulombs lag, aggregationstillstånd
+  och vad ”kristall” egentligen betyder när det inte finns några atomer i
+  gittret. Pressbild finns (Enrique Sahagún, Scixel / Universitetet i Basel,
+  fysikinstitutionen) — kontrollera licensen. Källor:
+  https://www.eurekalert.org/news-releases/1139253 och
+  https://phys.org/news/2026-08-optical-method-reveals-internal-dynamics.html
+  (tillagd 2026-08-12)
+
+- **Reflect Orbital får tillstånd för sin rymdspegel Eärendil-1** — 18 × 18 m
+  aluminiserad mylar i låg omloppsbana som ska lysa upp en fläck på marken
+  omkring 5 km bred med fullmånens ljusstyrka; bolaget planerar 1 000 satelliter
+  2028 och 5 000 till 2030. Amerikanska astronomiska sällskapet varnar för
+  skadad forskningsutrustning och bländade piloter. Ovanlig vinkel: ljusstyrka,
+  magnitud, ljusförorening och vem som äger natthimlen. Bortvald 08-12 eftersom
+  det är en policynyhet snarare än en forskningsnyhet. Källa:
+  https://physicsworld.com/a/astronomers-express-outrage-after-regulators-approve-space-mirror-permit/
+  (tillagd 2026-08-12)
+
+- **Övriga obrukade fynd från samma svep 2026-08-12:** ”Webb reveals
+  oxygen-rich dust and water surviving near Milky Way's central black hole”,
+  ”Star cluster discovery could change how scientists measure the universe”,
+  ”Quantum heat circuits learn electronics' oldest trick: sharing a power
+  supply” och ”Discovery of 'slow' electrons in 2D material could lead to new
+  memory device” (samtliga phys.org, 10–11 augusti 2026).
+
 ## Fynd som inte användes (2026-08-11) — kan tas upp senare
 
 - **Publicerad 2026-08-11: den ljugande spegeln** (UCLA, Nature Communications,

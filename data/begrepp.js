@@ -1160,5 +1160,53 @@ window.BEGREPP = [
       { type: 'p', html: 'Namnet kommer av att strimmorna tycks stråla ut från stjärnbilden Perseus. Det är ett perspektivfenomen: kornen rör sig i själva verket parallellt, och eftersom Perseus står lågt i nordost på kvällen och klättrar under natten blir det fler synliga meteorer ju närmare gryningen man kommer. Man tittar därför inte mot radianten utan gärna en bit vid sidan av den, där strimmorna hinner bli längre.' },
       { type: 'p', html: 'Antalet meteorer per timme brukar anges som ett så kallat zenitalt timtal. Det är en beräknad idealsiffra: hur många en observatör skulle se om radianten stod rakt upp och himlen vore helt mörk och klar. Verkligheten bjuder nästan aldrig på det, så det praktiska utfallet blir betydligt lägre — några tiotal i timmen är en god natt. Månens fas avgör mycket: infaller kulminationen vid fullmåne dränks de svaga meteorerna i månsken, medan en nymåne ger perfekt mörker.' }
     ]
+  },
+  {
+    id: 'protostjarna',
+    term: 'Protostjärna',
+    former: ['protostjärna', 'protostjärnan', 'protostjärnor', 'protostjärnorna', 'protostellär', 'protostellärt', 'protostellära'],
+    kort: 'En stjärna som håller på att bildas: en tät klump i ett kollapsande gasmoln som redan lyser av sammanpressningens värme, men ännu inte har tänt någon kärnreaktion i mitten.',
+    relaterade: ['ackretionsskiva', 'rorelsemangdsmoment', 'karnfusion', 'plasma'],
+    body: [
+      { type: 'p', html: 'Stjärnor bildas inte ur tomma intet utan ur kalla, mörka moln av gas och stoft. Ett sådant moln hänger ihop så länge gastrycket orkar bära upp tyngden, men får det en knuff — från en närpasserande stjärna, en tryckvåg från en supernova — kan en del av det ge vika och börja falla ihop mot sin egen mittpunkt. Klumpen som växer i mitten är protostjärnan.' },
+      { type: 'p', html: 'Den lyser redan, men av fel skäl. All gas som störtar inåt tappar lägesenergi, och den energin blir värme. Protostjärnan glöder alltså av sammanpressning, inte av kärnreaktioner, och strålar mest i infrarött eftersom den fortfarande ligger begravd i det stoft som är på väg ner mot den. Först när mitten hettats upp till omkring tio miljoner grader börjar vätekärnor slås samman till helium, och då — och inte förr — är den en riktig stjärna.' },
+      { type: 'p', html: 'Steget däremellan tar hundratusentals till miljontals år, och det är en stökig period. Gasen kan inte falla rakt in, eftersom den snurrar, utan lägger sig först i en platt skiva runt klumpen. Ur mitten skjuter samtidigt smala strålar av gas ut åt två håll längs rotationsaxeln. Det är i den här fasen planeter börjar klumpa ihop sig i skivan, så en protostjärna är i praktiken ett solsystem under uppbyggnad.' }
+    ]
+  },
+  {
+    id: 'ackretionsskiva',
+    term: 'Ackretionsskiva',
+    former: ['ackretionsskiva', 'ackretionsskivan', 'ackretionsskivor', 'ackretionsskivorna', 'ackretion', 'ackretionen'],
+    kort: 'En roterande skiva av gas och stoft på väg in mot en tung central kropp — en ung stjärna, en vit dvärg eller ett svart hål. Friktionen i skivan hettar upp materien så att den lyser.',
+    relaterade: ['protostjarna', 'rorelsemangdsmoment', 'svart-hal', 'kvasar'],
+    body: [
+      { type: 'p', html: 'Materia som dras mot en tung kropp faller nästan aldrig rakt in. Den har nästan alltid en aning sidled i rörelsen från början, och när avståndet krymper förstärks den rörelsen — precis som en konståkare snurrar fortare när armarna dras in. Resultatet är att gasen missar målet och i stället går i bana runt det. Bidragen från alla håll jämnar med tiden ut varandra utom i ett plan, och kvar blir en platt, snurrande skiva.' },
+      { type: 'p', html: 'I skivan går den inre delen fortare än den yttre, så gaslagren gnider mot varandra. Friktionen gör två saker samtidigt: den omvandlar rörelseenergi till värme, och den flyttar rörelse utåt så att gasen närmast mitten kan sjunka lite djupare. Skivan matar alltså kroppen i mitten långsamt, och lyser under tiden. Hur het den blir beror på hur tung kroppen är: kring en ung stjärna handlar det om några hundra till några tusen grader, kring ett svart hål om miljontals.' },
+      { type: 'p', html: 'Just därför är ackretionsskivor ofta det enda man ser av objekt som annars är osynliga. Ett svart hål sänder inte ut något ljus alls, men skivan utanför lyser starkt i röntgen. Många skivor skjuter dessutom ut smala strålar av materia vinkelrätt mot skivplanet, drivna av magnetfält som skivans rotation vrider upp — ett mönster som återkommer i allt från nyfödda stjärnor till hela galaxers ljusstarka kärnor.' }
+    ]
+  },
+  {
+    id: 'rorelsemangdsmoment',
+    term: 'Rörelsemängdsmoment',
+    former: ['rörelsemängdsmoment', 'rörelsemängdsmomentet', 'impulsmoment', 'impulsmomentet', 'rotationsrörelsemängd'],
+    kort: 'Ett mått på hur mycket rotation ett system innehåller — massan, farten och avståndet till rotationsaxeln multiplicerat. Storheten kan inte försvinna, bara flyttas någon annanstans.',
+    relaterade: ['ackretionsskiva', 'protostjarna', 'spinn'],
+    body: [
+      { type: 'p', html: 'Att stoppa något som snurrar är svårare ju tyngre det är, ju fortare det går och ju längre ut från axeln massan sitter. De tre sakerna slås ihop i en enda storhet: rörelsemängdsmomentet. En cykelhjulsfälg och en lika tung klump i navet har helt olika rörelsemängdsmoment vid samma varvtal, eftersom fälgens massa sitter långt ut.' },
+      { type: 'p', html: 'Det avgörande är att storheten är bevarad. I ett system som inget yttre vrider på kan rörelsemängdsmomentet varken skapas eller förstöras — bara fördelas om. Det är därför en konståkare snurrar snabbare när armarna dras in: massan kommer närmare axeln, och farten måste öka för att produkten ska hålla sig konstant. Samma sak får en pirueterande dykare att rotera fortare i hopkrupen ställning.' },
+      { type: 'p', html: 'I astronomin är bevarandet ofta ett hinder snarare än ett kuriosum. Ett gasmoln som faller ihop till en stjärna snurrar allt fortare ju mindre det blir, och till slut går den innersta gasen så fort runt att den inte kan falla längre inåt. Stjärnan kan inte bli färdig förrän rotationen skickats i väg någon annanstans — ut i en skiva, eller ut med de gasstrålar som unga stjärnor skjuter ut längs sin axel.' }
+    ]
+  },
+  {
+    id: 'polarisation',
+    term: 'Polarisation',
+    former: ['polarisation', 'polarisationen', 'polariserad', 'polariserat', 'polariserade', 'linjärt polariserad', 'linjär polarisation', 'cirkulär polarisation', 'polarisationsriktning', 'polarisationsriktningen', 'polarisationsgrad', 'polarisationsgraden'],
+    kort: 'Vilken riktning en ljusvågs elektriska fält svänger i. Vanligt ljus svänger huller om buller åt alla håll, men speglingar, spridning och magnetfält kan sortera fram en riktning.',
+    relaterade: ['foton', 'vaglangd', 'kiralitet'],
+    body: [
+      { type: 'p', html: 'Ljus är en våg där ett elektriskt fält svänger fram och tillbaka tvärs mot färdriktningen. Tänk på ett rep som någon vickar på: du kan vicka det upp och ner, i sidled eller i vilken vinkel som helst däremellan. Den vinkeln är ljusets polarisationsriktning. En glödlampa eller solen sänder ut oräkneliga vågor med slumpmässiga riktningar samtidigt, och sammanlagt blir ljuset opolariserat — ingen riktning är vanligare än någon annan.' },
+      { type: 'p', html: 'Vissa förlopp sorterar. Ett polarisationsfilter släpper bara igenom svängningar i en riktning, ungefär som ett galler av spjälor. Ljus som studsar snett mot en vattenyta eller en våt asfalt blir till stor del polariserat i sidled, vilket är hela idén bakom polariserade solglasögon: de har spjälorna ställda upp och ner och släcker därför reflexerna. Även ljus som sprids i himlen blir delvis polariserat, något humlor och honungsbin använder för att navigera.' },
+      { type: 'p', html: 'Inom astronomin är polarisationen ofta det enda spår som finns av något osynligt. Stoftkorn som ställer in sig efter ett magnetfält, eller molekyler som strålar i ett magnetiserat gasmoln, sänder ut ljus som är en aning polariserat, med en riktning som är kopplad till fältets. Andelen kan vara nere på någon enstaka procent, men mäter man den över ett helt område träder magnetfältets form fram — utan att någon någonsin sett fältet i sig.' }
+    ]
   }
 ];

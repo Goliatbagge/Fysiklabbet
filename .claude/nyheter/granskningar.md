@@ -5,10 +5,73 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-12 | `2026-08-12-magnetisk-tratt` | RÄTTA FÖRST → GODKÄND | Tre precisionsrättelser före publicering (ALMA-lobens storlek i jord–sol-avstånd, jämförelsen mot jordens magnetfält, temperaturintervallet i ordlisteposten om ackretionsskivor). Samtliga siffror verifierade mot arXiv-versionens metoddel, inte mot pressreferatet. Kollegialt granskad i Nature Communications. |
 | 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | RÄTTA FÖRST → GODKÄND | Fyra rättelser före publicering (simulerade kontra uppmätta korrelationer, neuronnätsattackens två felformuleringar, 53,3λ utan angiven våglängd, ”ingen elektronik” i ingressen). Hela metoddelen läst i arXiv-PDF:en; datum, författare och CC BY-licens verifierade via Crossref. Kollegialt granskad, öppet tillgänglig. |
 | 2026-08-10 | `2026-08-10-solformorkelse-sverige` | RÄTTA FÖRST → GODKÄND | Två räknefel funna och åtgärdade före publicering (vinkelstorlekens vardagsjämförelse, solglasögonens transmission). Alla svenska siffror verifierade mot Astroinfos råtabell, inte mot en referatsammanfattning. |
 | 2026-08-09 | `2026-08-09-flygande-fokus` | RÄTTA FÖRST → GODKÄND | Tre formuleringar rättade (bildtextens ”tre mellersta”, ”hela effekten” vid 4,8 J, 2004 som årtal). Hela originalartikeln lästes i PDF — samtliga siffror verifierade mot den. |
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
+
+---
+
+## 2026-08-12 — `2026-08-12-magnetisk-tratt`
+
+**Granskningsläge:** självständigt granskningspass enligt fallbacken i
+nyhetsagentens steg 11 (sessionen fick inte starta subagenter).
+
+**0. Publikationens status.** T.-C. Ching m.fl., ”Unveiling dominant toroidal
+magnetic fields in a protostellar outflow”, Nature Communications,
+11 augusti 2026, DOI 10.1038/s41467-026-75950-5. Kollegialt granskad.
+HTML-sidan på nature.com kräver inloggning och PDF:en gick inte att hämta
+(303 till idp.nature.com; Semantic Scholar rapporterar ingen öppen PDF), så
+metoddelen lästes i stället i förhandsversionen arXiv:2604.12597v1
+(inlämnad 14 april 2026, licens CC BY-NC-ND 4.0). Titel, författarlista och
+DOI stämmer mellan de två.
+
+**1. Varje siffra mot originalet.** Kontrollerade mot arXiv-versionen:
+fältstyrkan 0,3–6,0 mG (>3 mG vid 300 au, <2 mG vid 500 au), lobstorleken
+147 × 99 au, upplösningsförbättringen 31 gånger (pressen skriver ”ungefär
+30”), polarisationsgraden ~0,5 %, utflödeshastigheten ~10 km/s,
+rotationsfarten 4,0 km/s och Alfvénhastigheten 4,1 km/s vid 400 au,
+joniseringsgraden ~10⁻⁶, anpassningens signifikans 3,3σ och drifthastigheten
+(5,9 ± 1,8) · 10² cm/s. Enhetsomräkningen 0,3–6,0 mG → 30–600 nT
+kontrollräknad (1 G = 10⁻⁴ T). Avståndet 960 ljusår stämmer mot artikelns
+293 ± 22 pc.
+
+**2. Räkneordskontroll.** Inga *billion/trillion*-ord i källorna och inga
+biljon/biljard/triljon i texten. Storleksordningarna uttrycks i stället som
+nanotesla och tusendels gauss.
+
+**3. Citaten.** Två citat, båda från NRAO:s pressmeddelande och hämtade i sin
+helhet (den första hämtningen trunkerade dem vid 125 tecken, så sidan hämtades
+om med uttrycklig instruktion att återge dem oavkortat). Översättningarna
+kontrollerade mening för mening mot engelskan. Girarts affiliering och
+hänvisningen till Science 2006 stämmer.
+
+**4. Rättat före publicering.**
+- ”ungefär hundra gånger avståndet mellan jorden och solen” beskrev bara
+  lobens kortaste axel (99 au) — ändrat till ”hundra till hundrafemtio”, som
+  täcker 147 × 99 au.
+- ”jordens magnetfält … hundra till tusen gånger mer” stämde inte i båda
+  ändarna (0,5 G / 6,0 mG ≈ 83). Omskrivet till ”närmare hundra gånger mer än
+  det starkaste som mättes här, och närmare tusen gånger mer än det svagaste”.
+- Ordlisteposten om ackretionsskivor angav ”några hundra grader” kring en ung
+  stjärna; den inre skivan är betydligt hetare. Ändrat till ”några hundra till
+  några tusen grader”.
+
+**5. Överdrifter som kontrollerades men höll.** Förstahetsanspråket
+(”den första upplösta mätningen”) står i artikelns egen abstract
+(”toroidal fields in protostellar winds remain observationally unresolved”)
+och i Chings citat. Jämförelsen med jetstrålar från svarta hål är hedgad
+(”som astronomer tror ligger bakom”). Rubrikens ”lindat som en fjäder”
+speglar pressens ”magnetic corkscrew” och motsägs inte av texten, som
+korrekt säger att den uppmätta komponenten är den som går *runt* strålen.
+
+**6. Bilden.** Konstnärlig gestaltning från NSF NRAO
+(NSF/AUI/NSF NRAO/M. Weiss), CC BY 4.0 enligt NRAO:s bildpolicy. Ingen text,
+ingen vattenstämpel. Brödtexten hänvisar aldrig till bilden som om den vore
+en mätning.
+
+**Utslag: GODKÄND** efter de tre rättelserna.
 
 ---
 

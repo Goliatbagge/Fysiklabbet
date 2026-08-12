@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 11 Aug 2026 01:29:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 01:28:08 GMT</lastBuildDate>
+    <item>
+      <title>Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-12-magnetisk-tratt</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-12-magnetisk-tratt</guid>
+      <pubDate>Wed, 12 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Astronomi</category>
+      <description>Sedan 1980-talet har teorin sagt att unga stjärnor gör sig av med sin rotation genom gasstrålar som ett vridet magnetfält både driver och håller ihop. Nu har radioteleskopet ALMA mätt det fältet kring en stjärna under bildning 960 ljusår bort — och fått den elektriska strömmen som håller uppe det på köpet.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-12-magnetisk-tratt.jpg" length="92849" type="image/jpeg"/>
+    </item>
     <item>
       <title>Fysiker har byggt en spegel som ljuger — vad man än håller framför den svarar den med en åtta</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-11-spegeln-som-ljuger</link>
@@ -177,15 +186,6 @@
       <category>Vågor</category>
       <description>En vätskefylld optisk fiber blir spröd och svårhanterlig i en vanlig labbmiljö. Genom att frysa den i flytande kväve har forskare vid Max Planck-institutet för ljusets fysik i Tyskland i stället gjort den robust — och samtidigt kopplat ihop ljus och ljud mer än tusen gånger starkare än i en vanlig glasfiber.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-24-fryst-optisk-fiber.jpg" length="60626" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Astronomer löser 25 år gammal novagåta — och hittar mystiska ”kulor” av gas ingen sett förut</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-23-heliumnova-kulor</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-23-heliumnova-kulor</guid>
-      <pubDate>Thu, 23 Jul 2026 07:00:00 GMT</pubDate>
-      <category>Astronomi</category>
-      <description>V445 Puppis är den enda kända heliumnovan i Vintergatan — en stjärnexplosion år 2000 som till skillnad från alla andra kända novor helt saknade väte. En doktorand vid University of Warwick har nu, med hjälp av flera av världens största teleskop, bekräftat orsaken — och samtidigt upptäckt snabba klumpar av gas som aldrig setts i någon annan nova.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-23-heliumnova-kulor.jpg" length="65729" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

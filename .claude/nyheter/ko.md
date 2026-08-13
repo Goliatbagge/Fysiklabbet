@@ -44,6 +44,47 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-13) — kan tas upp senare
+
+- **Publicerad 2026-08-13: rugbybollen i atomkärnan** (JGU Mainz/GSI/Göteborgs
+  universitet, Physical Review Letters 136, 192501, DOI 10.1103/2813-b49x) — se
+  publicerat.md och granskningar.md. OBS för en ev. uppföljare: PRL-sidan är
+  betalspärrad, hela metoddelen finns i arXiv:2511.20921. Pressbilderna från
+  Mainz är båda illustrationer/scheman och dög inte som huvudbild; artikeln
+  bildsattes i stället med ett CC BY 2.0-foto av HFIR-reaktorn vid Oak Ridge
+  (Wikimedia Commons), där einsteiniumet faktiskt bryggdes.
+
+- **JWST hittar det tidigaste kända ”svarta hål-stjärnan” MoM-BH*-1**
+  (MYCKET STARK RESERV — publicera snart). Ett lag lett av Jorryt Matthee vid
+  Institute of Science and Technology Austria har med James Webb-teleskopet
+  hittat ett objekt sett bara 660 miljoner år efter Big Bang: ett snabbt växande
+  svart hål inbäddat i ett tätt gashölje, som därför lyser med stjärnlika drag i
+  stället för som en vanlig ackretionsskiva. Balmer-språnget är omkring 7,7
+  gånger djupare än hos stjärnan Vega. Kan förklara de hundratals mystiska
+  ”little red dots” i JWST-datan och därmed hur supermassiva svarta hål hann bli
+  så tunga så tidigt (”problematiska kvasarer”). Utmärkta vinklar för gymnasiet:
+  väteatomens Balmer-serie, absorptionsspektrum, rödförskjutning och svarta hål.
+  Bortvald 08-13 enbart för att 08-12 redan var en astronominyhet — kontrollera
+  peer review-status före publicering. Källor:
+  https://phys.org/news/2026-08-mirage-miracle-jwst-earliest-black.html och
+  https://www.cfa.harvard.edu/news/little-red-dots-may-be-pulsating-monster-stars-created-early-universe-black-holes-study-finds
+  (tillagd 2026-08-13)
+
+- **Ny CERN-mätning utmanar bilden av hur gluoner beter sig inne i atomkärnan** —
+  lett av en fysiker vid University of Kansas; skiljer mellan konkurrerande
+  teorier om gluontätheten i tunga kärnor. Stark partikelfysikvinkel (den starka
+  kraften, kvarkar och gluoner), men mer tekniskt krävande än dagens val.
+  Källa: https://phys.org/news/2026-08-cern-conventional-gluons-atomic-nuclei.html
+  (tillagd 2026-08-13)
+
+- **Övriga obrukade fynd från samma svep 2026-08-13:** ”Spontaneous magnons
+  synchronize with external signals at room temperature” (phys.org 2026-08-12),
+  ”New contactless method reveals how mirror-image materials respond differently
+  to light” (phys.org 2026-08-11) och ALPHA-samarbetets 100 gånger skarpare
+  mätning av antivätets hyperfinstruktur (Nature, DOI 10.1038/s41586-026-10581-w,
+  Physics World 2026-07-27 — för gammal för dagsnyhet, men en utmärkt tidlös
+  antimaterievinkel att ta till vid nyhetstorka).
+
 ## Fynd som inte användes (2026-08-12) — kan tas upp senare
 
 - **Publicerad 2026-08-12: den lindade magnetfältstratten kring en nyfödd

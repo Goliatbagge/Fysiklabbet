@@ -732,7 +732,7 @@ window.BEGREPP = [
 {
     id: 'laser',
     term: 'Laser',
-    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar'],
+    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar', 'titan-safirlaser', 'titan-safirlasern', 'titan-safirlasrar', 'titan-safirlasrarna'],
     kort: 'En ljuskälla som skickar ut en smal, skarpt riktad stråle där alla ljusvågor har samma våglängd och svänger i takt. Namnet är en förkortning av engelskans light amplification by stimulated emission of radiation.',
     relaterade: ['foton', 'exciterat-tillstand', 'optisk-fiber'],
     body: [
@@ -1207,6 +1207,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Ljus är en våg där ett elektriskt fält svänger fram och tillbaka tvärs mot färdriktningen. Tänk på ett rep som någon vickar på: du kan vicka det upp och ner, i sidled eller i vilken vinkel som helst däremellan. Den vinkeln är ljusets polarisationsriktning. En glödlampa eller solen sänder ut oräkneliga vågor med slumpmässiga riktningar samtidigt, och sammanlagt blir ljuset opolariserat — ingen riktning är vanligare än någon annan.' },
       { type: 'p', html: 'Vissa förlopp sorterar. Ett polarisationsfilter släpper bara igenom svängningar i en riktning, ungefär som ett galler av spjälor. Ljus som studsar snett mot en vattenyta eller en våt asfalt blir till stor del polariserat i sidled, vilket är hela idén bakom polariserade solglasögon: de har spjälorna ställda upp och ner och släcker därför reflexerna. Även ljus som sprids i himlen blir delvis polariserat, något humlor och honungsbin använder för att navigera.' },
       { type: 'p', html: 'Inom astronomin är polarisationen ofta det enda spår som finns av något osynligt. Stoftkorn som ställer in sig efter ett magnetfält, eller molekyler som strålar i ett magnetiserat gasmoln, sänder ut ljus som är en aning polariserat, med en riktning som är kopplad till fältets. Andelen kan vara nere på någon enstaka procent, men mäter man den över ett helt område träder magnetfältets form fram — utan att någon någonsin sett fältet i sig.' }
+    ]
+  },
+  {
+    id: 'hyperfinstruktur',
+    term: 'Hyperfinstruktur',
+    former: ['hyperfinstruktur', 'hyperfinstrukturen', 'hyperfinstrukturer', 'hyperfin', 'hyperfina', 'hyperfinnivå', 'hyperfinnivåer', 'hyperfinnivåerna', 'hyperfinövergång', 'hyperfinövergången', 'hyperfinövergångar', 'hyperfinsplittring', 'hyperfinsplittringen'],
+    kort: 'En ytterst liten uppdelning av en atoms energinivåer, orsakad av att atomkärnan har ett eget magnetfält och en laddning som inte sitter i en enda punkt. Uppdelningen gör att varje spektrallinje egentligen är ett knippe linjer.',
+    relaterade: ['spektroskopi', 'kvadrupolmoment', 'spinn'],
+    body: [
+      { type: 'p', html: 'En atoms elektroner får bara ha vissa bestämda energier, och när en elektron hoppar mellan två av dem sänds eller absorberas ljus med en bestämd våglängd. Det är de hoppen som ger grundämnena deras streckkodsliknande spektrum. Tittar man tillräckligt noga visar det sig dock att en enskild ”linje” inte är en linje alls, utan flera mycket tätt liggande linjer. Den finaste av dessa uppdelningar kallas hyperfinstruktur.' },
+      { type: 'p', html: 'Orsaken sitter i kärnan. En atomkärna med udda antal kärnpartiklar beter sig som en liten magnet och har dessutom en positiv laddning som är utsmetad över ett litet område i stället för samlad i en punkt. Elektronerna närmast kärnan känner av båda sakerna: kärnans magnetfält drar lite olika beroende på hur elektronens och kärnans magnetnålar är riktade mot varandra, och en avlång laddningsfördelning drar annorlunda än en klotrund. Varje energinivå spjälkas därför upp i ett antal nivåer som ligger nästan, men inte riktigt, på samma energi. Skillnaderna är futtiga — ofta en miljondel av avståndet mellan de vanliga nivåerna — men fullt mätbara med en tillräckligt smalbandig laser.' },
+      { type: 'p', html: 'Just för att uppdelningen kommer från kärnan är den ett fönster in i den. Ur hur brett knippet är går kärnans magnetism att räkna fram, och ur hur linjerna ligger inbördes går kärnans form att bestämma — utan att någon behöver komma i närheten av kärnan. Hyperfinstrukturen har också praktisk nytta: övergången mellan de två hyperfinnivåerna i cesium svarar mot en frekvens på 9&nbsp;192&nbsp;631&nbsp;770&nbsp;Hz, och det är precis det talet som i dag definierar en sekund.' }
+    ]
+  },
+  {
+    id: 'kvadrupolmoment',
+    term: 'Kvadrupolmoment',
+    former: ['kvadrupolmoment', 'kvadrupolmomentet', 'kvadrupolmomenten', 'kvadrupol', 'kvadrupolen', 'elektriskt kvadrupolmoment', 'elektriska kvadrupolmomentet'],
+    kort: 'Ett mått på hur mycket en laddningsfördelning avviker från att vara klotrund. Positivt värde betyder utdragen som en rugbyboll, negativt betyder tillplattad som en lins, och noll betyder en perfekt kula.',
+    relaterade: ['hyperfinstruktur', 'aktinid', 'spinn'],
+    body: [
+      { type: 'p', html: 'Ett laddat föremål påverkar sin omgivning på olika sätt beroende på hur laddningen är fördelad. Det enklaste är den sammanlagda laddningen — långt bort ser vilken laddningsklump som helst ut som en punkt. Nästa steg är dipolmomentet, som beskriver om plus och minus ligger åtskilda åt olika håll. Steget efter det heter kvadrupolmoment, och det är först där formen börjar synas.' },
+      { type: 'p', html: 'Kvadrupolmomentet svarar på frågan: är laddningen utsmetad som ett klot, eller är den utdragen åt något håll? Ett klot ger noll. Är fördelningen utdragen längs sin rotationsaxel, som en rugbyboll, blir kvadrupolmomentet positivt; är den tillplattad som en lins blir det negativt. Ju kraftigare avvikelsen är, desto större blir talet. Effekten på omgivningen är svag och avtar snabbt med avståndet, vilket är precis därför den bara märks riktigt nära laddningen.' },
+      { type: 'p', html: 'Inom kärnfysiken är det här det viktigaste sättet att få reda på hur en atomkärna ser ut. Kärnan går inte att avbilda, men elektronerna som passerar genom och intill den känner av dess kvadrupolmoment, och det syns som en liten förskjutning av atomens energinivåer. Många tunga kärnor visar sig vara påtagligt utdragna, och formen är inte en detalj: den avgör bland annat hur benägen kärnan är att spontant falla isär i två delar.' }
+    ]
+  },
+  {
+    id: 'aktinid',
+    term: 'Aktinid',
+    former: ['aktinid', 'aktiniden', 'aktinider', 'aktiniderna', 'aktinoid', 'aktinoider', 'fermium', 'fermiumet', 'einsteinium', 'californium', 'supertungt grundämne', 'supertunga grundämnen', 'transuran', 'transuraner', 'transuranerna'],
+    kort: 'De femton grundämnena från aktinium till lawrencium, längst ner i det periodiska systemet. Alla är radioaktiva, och de tyngsta av dem finns inte i naturen utan måste tillverkas.',
+    relaterade: ['isotop', 'radioaktivt-sonderfall', 'kvadrupolmoment'],
+    body: [
+      { type: 'p', html: 'Längst ner i det periodiska systemet står en rad som ofta bryts ut och placeras för sig: aktiniderna, de femton ämnena med atomnummer 89 till 103, från aktinium till lawrencium. De hör ihop därför att de fyller på samma svårtillgängliga elektronskal och därför beter sig kemiskt ganska likt. Torium och uran finns i berggrunden, plutonium i spårmängder, men allt tyngre än så är i praktiken människotillverkat.' },
+      { type: 'p', html: 'Gemensamt för hela gruppen är att kärnorna är radioaktiva. Ju fler protoner en kärna har, desto hårdare trycker deras inbördes elektriska frånstötning isär den, och till slut vinner frånstötningen över den starka kraft som håller ihop kärnpartiklarna. Livslängderna faller därför dramatiskt uppåt i listan: uran-238 har en halveringstid på 4,5 miljarder år, medan flera fermiumisotoper klarar sig i timmar eller mindre. Utöver alfa- och betasönderfall dyker ett nytt sätt att gå sönder upp — spontan fission, där kärnan helt enkelt delar sig i två ungefär lika stora delar.' },
+      { type: 'p', html: 'De tyngsta aktiniderna tillverkas genom att ett tungt ämne bombarderas med neutroner i en reaktor. Varje infångad neutron kan följas av ett betasönderfall som höjer grundämnesnumret med ett steg, och på så vis kan man klättra uppåt — men bara till en gräns. Vid fermium, nummer 100, tar metoden slut, eftersom nästa steg i kedjan sönderfaller alldeles för snabbt. Tyngre ämnen än så måste i stället byggas genom att slå ihop två kärnor i en accelerator, och då bildas de en atom i taget.' }
     ]
   }
 ];

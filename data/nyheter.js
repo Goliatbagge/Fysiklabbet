@@ -88,6 +88,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-13-rugbybollen-i-atomkarnan",
+    date: "2026-08-13",
+    title: "Ingen har sett in i en atomkärna — ändå vet fysiker nu att kärnan i grundämne 100 är formad som en rugbyboll",
+    deck: "Provet vägde mindre än en biljondels gram och halverades var tjugonde timme. Ändå har ett forskarlag med förstaförfattare i Göteborg lyckats läsa av formen på fermiumkärnan — inte genom att titta på den, utan på ljuset från elektronerna runt omkring. På köpet föll ett mätvärde från 2005 som egentligen var fysikaliskt omöjligt.",
+    category: "Kärnfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-13-rugbybollen-i-atomkarnan.jpg",
+    imageAlt: "Bränsleelement i djupt vatten, sedda snett uppifrån. Vattnet lyser i intensivt blått av Tjerenkovstrålning, och ett av elementen glöder betydligt starkare än de övriga.",
+    imageCredit: "Foto: Oak Ridge National Laboratory (CC BY 2.0)",
+    tags: ["kärnfysik", "atomkärna", "fermium", "isotoper", "spektroskopi", "laser", "hyperfinstruktur", "periodiska systemet", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Johannes Gutenberg-universitetet Mainz — Laser spectroscopy helps reveal hidden nuclei properties in fermium", url: "https://press.uni-mainz.de/laser-spectroscopy-helps-reveal-hidden-nuclei-properties-in-fermium/" },
+      { name: "Phys.org — Laser spectroscopy helps reveal hidden nuclear properties in fermium", url: "https://phys.org/news/2026-08-laser-spectroscopy-reveal-hidden-nuclear.html" },
+      { name: "EurekAlert! — pressmeddelandet i original", url: "https://www.eurekalert.org/news-releases/1139277" },
+      { name: "Physical Review Letters — originalartikeln", url: "https://journals.aps.org/prl/abstract/10.1103/2813-b49x" },
+      { name: "arXiv:2511.20921 — fritt tillgänglig förhandsversion med hela metoddelen", url: "https://arxiv.org/abs/2511.20921" }
+    ],
+    research: {
+      citation: "M. Urquiza-González, M. Stemmler, T. E. Albrecht, B. Bally och M. Bender m.fl. (39 författare), ”High-Resolution Laser Spectroscopy on the Hyperfine Structure of 255Fm (Z = 100)”, Physical Review Letters 136, 192501, 15 maj 2026 (DOI 10.1103/2813-b49x)",
+      url: "https://doi.org/10.1103/2813-b49x"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 — 9.1 Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Fysik nivå 1 — 9.4 Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" },
+        { label: "Fysik nivå 2 — 4.7 Spektrallinjer", href: "katalog.html?id=fy2-4.7" },
+        { label: "Simulering — Spektrallinjer", href: "fysik2-spektrallinjer.html" }
+      ],
+      fragor: [
+        "Ingen har sett fermiumkärnan. Slutsatsen om dess form vilar på ett mönster av spektrallinjer plus kvantmekaniska beräkningar av elektronmolnet. Vad krävs för att en sådan indirekt kedja ska räknas som en mätning — och vad skulle behöva vara fel för att slutsatsen skulle falla?",
+        "Det gamla värdet från 2005 låg utanför vad den enklaste kärnmodellen tillåter, men fanns ändå kvar i tabellverken i över tjugo år. Varför plockas inte ett sådant värde bort direkt, och vad säger det om hur mätdata används i forskningen?",
+        "Provet innehöll som mest omkring en miljard atomer och halverades var tjugonde timme. Vilka krav ställer det på en mätmetod, och varför räcker det inte att bara mäta längre för att få bättre precision?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Det finns en gräns för hur långt in i det lilla man kan titta. En atom är omkring 10<sup>−10</sup>&nbsp;m tvärs över, vilket redan är långt bortom vad något ljusmikroskop klarar. Kärnan inne i atomen är ytterligare tiotusen gånger mindre. Att fotografera den är uteslutet. Ändå har en internationell forskargrupp nu kunnat slå fast att kärnan i fermium-255 inte är rund. Den är utdragen — formad som en rugbyboll.' },
+
+      { type: 'h2', text: 'Grundämnet som tar slut i vågskålen' },
+      { type: 'p', html: 'Fermium är grundämne nummer 100, uppkallat efter Enrico Fermi, och det tyngsta ämne som över huvud taget går att framställa i vägbara mängder. Även då rör det sig om pikogram. Allt tyngre än så tillverkas atom för atom, i antal som räknas på fingrarna.' },
+      { type: 'p', html: 'Att få fram tillräckligt med fermium-255 tog flera år och tre länder. Råvaran var 34&nbsp;ng einsteinium-254 — 8,8&nbsp;·&nbsp;10<sup>13</sup> atomer — från Oak Ridge National Laboratory i USA. Provet bestrålades med neutroner i sju dygn i högflödesreaktorn vid Institut Laue-Langevin i Grenoble, fick svalna i fyra dygn och fördes till Mainz i Tyskland. Kvar fanns 7,5&nbsp;·&nbsp;10<sup>10</sup> atomer einsteinium-255.' },
+      { type: 'p', html: 'Den isotopen har halveringstiden 39,8&nbsp;dygn och fungerade som en outsinlig kran: den sönderfaller till största delen genom betasönderfall, där en neutron i kärnan görs om till en proton så att ämnet stiger ett steg i det periodiska systemet — från nummer 99 till nummer 100. Med jämna mellanrum separerades den färska fermiumfraktionen kemiskt, droppades på en zirkoniumfolie och torkades in. Varje färdigt prov innehöll mellan 10<sup>8</sup> och 10<sup>9</sup> atomer, alltså mindre än en biljondels gram. Och eftersom fermium-255 självt har halveringstiden 20&nbsp;timmar tickade klockan från första sekunden.' },
+
+      { type: 'h2', text: 'Formen läses av i elektronernas ljus' },
+      { type: 'p', html: 'Tricket är att kärnan aldrig är ensam. Runt den kretsar elektronerna, och några av dem passerar rakt genom kärnområdet. Där känner de av två saker som en punktformig laddning aldrig skulle ge upphov till: kärnans eget magnetfält, och det faktum att dess positiva laddning inte sitter samlad i en punkt utan är utsmetad i en bestämd form.' },
+      { type: 'p', html: 'Båda sakerna rubbar elektronernas energinivåer. Rubbningen är ytterst liten, men den finns: varje nivå spjälkas upp i ett knippe närliggande nivåer, en hyperfinstruktur, och varje spektrallinje blir därmed ett helt mönster av tätt liggande linjer. Hur brett mönstret är styrs av kärnans magnetiska dipolmoment. Hur linjerna ligger inbördes styrs av dess elektriska kvadrupolmoment — måttet på hur mycket laddningen avviker från en perfekt kula. Ett positivt kvadrupolmoment betyder en kärna som är utdragen längs sin axel, ett negativt en som är tillplattad. Ungefär som att avgöra formen på en sten under en presenning genom att titta på hur duken buktar.' },
+      { type: 'p', html: 'Fermium-255 har kärnspinnet $I = 7/2$, vilket gör att varje atomär energinivå delas i åtta hyperfinnivåer. I de två övergångar laget använde — vid 398,4&nbsp;nm och 398,2&nbsp;nm, alltså violett ljus — väntas 22 respektive 21 linjekomponenter. Laget lyckades skilja ut 15 av de 22 och 13 av de 21.' },
+
+      { type: 'h2', text: 'En laser som korsar atomstrålen på tvären' },
+      { type: 'p', html: 'Mätningen gjordes vid masseparatorn RISIKO i Mainz. Provet värmdes till omkring 900&nbsp;°C så att fermiumatomerna ångade av fria. Två titan-safirlasrar riktades mot atomerna: den första ställdes in på en bestämd hyperfinövergång, den andra hade bara en uppgift — att slita loss en elektron från just de atomer som den första lasern redan hade träffat. Bara de blev joner. Jonerna accelererades till 30&nbsp;keV, sorterades efter massa i en magnet och räknades sedan en och en i en detektor. Genom att svepa den första laserns frekvens och räkna joner vid varje steg byggdes spektrumet upp punkt för punkt.' },
+      { type: 'p', html: 'Det svåraste var att inte sudda ut linjerna innan de ens hunnit synas. En atom som rör sig mot lasern möter ljuset med något högre frekvens än en som rör sig bort — dopplereffekten, samma sak som gör att en ambulanssiren låter ljusare på väg mot en. I en het ånga far atomerna åt alla håll, och linjerna smetas ut till en enda suddig puckel. Lösningen heter PI-LIST: den mätande lasern skickas in vinkelrätt mot atomstrålen, så att atomernas hastighet längs laserstrålen nästan är noll. Dopplerbreddningen krympte därmed till ungefär 50&nbsp;MHz. Det som blev kvar av linjebredden — 230&nbsp;MHz i den ena övergången och 350&nbsp;MHz i den andra — berodde mest på att lasern måste köras hårt för att över huvud taget ge tillräckligt med signal från så få atomer.' },
+
+      { type: 'h2', text: 'Rugbybollen — och värdet som var omöjligt' },
+      { type: 'p', html: 'Ur linjemönstret, kombinerat med kvantmekaniska beräkningar av hur elektronmolnet ser ut hos just fermium, föll två tal ut. Det elektriska kvadrupolmomentet blev $Q_S = +5{,}84 \\pm 0{,}13\\ \\mathrm{eb}$ (elektronbarn) — stort och positivt, vilket betyder en kraftigt och stabilt utdragen kärna. Det magnetiska dipolmomentet blev $\\mu = -0{,}75 \\pm 0{,}05\\ \\mu_\\mathrm{N}$, räknat i kärnmagnetoner, den naturliga enheten för magnetism hos atomkärnor.' },
+      { type: 'p', html: 'Det senare talet är samtidigt en rättelse. Ett tidigare försök från 2005, gjort med betydligt sämre upplösning, hade gett ett värde som låg bortom den så kallade Schmidt-gränsen. Den gränsen följer av den enklaste tänkbara skalmodellen, där hela kärnans magnetism antas komma från en enda oparad neutron; för fermium-255 hamnar den vid $-1{,}913\\ \\mu_\\mathrm{N}$, exakt det värde en fri neutron har. Ett mätvärde utanför gränsen är alltså inte bara ovanligt, utan svårt att få ihop över huvud taget — och ändå stod det kvar i tabellverken i över tjugo år. Den nya mätningen landar tryggt innanför.' },
+      { type: 'p', html: 'Att det nya värdet håller stöds av grannkärnan californium-253, som har lika många neutroner, 155, och nästan exakt samma två värden: $\\mu = -0{,}731 \\pm 0{,}035\\ \\mu_\\mathrm{N}$ och $Q_S = 5{,}53 \\pm 0{,}51\\ \\mathrm{eb}$. Överensstämmelsen tyder på att det är samma neutronbana som ger upphov till magnetismen i båda kärnorna.' },
+
+      { type: 'h2', text: 'Varför formen avgör kärnans öde' },
+      { type: 'p', html: 'Hos de allra tyngsta kärnorna hänger formen ihop med hur väl de står emot spontan fission — att helt enkelt falla isär i två delar av sig själva. Där ligger också nyckeln till en av kärnfysikens öppna frågor: hur långt kan det periodiska systemet sträcka sig? Att förutsäga var eventuella långlivade supertunga grundämnen finns kräver modeller av kärnans inre, och modeller måste stämmas av mot verkligheten.' },
+      { type: 'p', html: 'Två sådana modeller prövades mot de nya siffrorna. Den ena, byggd på Hartree–Fock–Bogoljubov-metoden, hamnade inom fem procent av båda de uppmätta värdena. Den andra överskattade det magnetiska momentet med ungefär 25&nbsp;procent och kvadrupolmomentet med omkring 6&nbsp;procent. Skillnaden är precis den sorts besked teoretiker behöver för att veta vilken beskrivning som bär.' },
+      { type: 'p', html: 'Fermium-255 blir därmed en referenspunkt att mäta mot i fortsättningen. Nästa steg väntar redan: en uppgraderad apparatur vid GSI i Darmstadt och en ny anläggningsdel vid acceleratorn GANIL i Frankrike ska göra samma sorts mätning möjlig på kärnor som är ännu tyngre — och ännu mer kortlivade.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Fermium upptäcktes inte i ett laboratorium utan i resterna efter det första vätebombsprovet, Ivy Mike, 1952. Grannen einsteinium hittades i samma stoft.',
+        'Råvaran till hela försöket vägde 34&nbsp;ng. Det låter som många atomer — 8,8&nbsp;·&nbsp;10<sup>13</sup> stycken — men är i storleksordningen en tiotusendel av antalet atomer i ett enda saltkorn.',
+        'Ljuset som användes hade våglängderna 398,4&nbsp;nm och 398,2&nbsp;nm, alltså violett, precis i kanten av vad ögat uppfattar.',
+        'Bakom artikeln står 39 forskare vid 18 institutioner i sju länder. Förstaförfattaren, Mitzi Urquiza-González, arbetar vid Göteborgs universitet.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-12-magnetisk-tratt",
     date: "2026-08-12",
     title: "Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen",

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 12 Aug 2026 01:28:08 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 01:41:43 GMT</lastBuildDate>
+    <item>
+      <title>Ingen har sett in i en atomkärna — ändå vet fysiker nu att kärnan i grundämne 100 är formad som en rugbyboll</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-13-rugbybollen-i-atomkarnan</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-13-rugbybollen-i-atomkarnan</guid>
+      <pubDate>Thu, 13 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Kärnfysik</category>
+      <description>Provet vägde mindre än en biljondels gram och halverades var tjugonde timme. Ändå har ett forskarlag med förstaförfattare i Göteborg lyckats läsa av formen på fermiumkärnan — inte genom att titta på den, utan på ljuset från elektronerna runt omkring. På köpet föll ett mätvärde från 2005 som egentligen var fysikaliskt omöjligt.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-13-rugbybollen-i-atomkarnan.jpg" length="148560" type="image/jpeg"/>
+    </item>
     <item>
       <title>Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-12-magnetisk-tratt</link>
@@ -177,15 +186,6 @@
       <category>Termodynamik</category>
       <description>I vanliga material sprids värme åt alla håll, ungefär som ringar på vattnet. I en kristall av bor-arsenid har forskare vid University of California, Los Angeles i stället sett värmen forma sig till skarpa, riktade strålar — ett beteende som tidigare bara observerats nära den absoluta nollpunkten.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-25-varmestralar.jpg" length="139101" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Forskare fryser en optisk fiber till −196 °C — och kopplar ihop ljus och ljud tusen gånger starkare</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-24-fryst-optisk-fiber</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-24-fryst-optisk-fiber</guid>
-      <pubDate>Fri, 24 Jul 2026 07:00:00 GMT</pubDate>
-      <category>Vågor</category>
-      <description>En vätskefylld optisk fiber blir spröd och svårhanterlig i en vanlig labbmiljö. Genom att frysa den i flytande kväve har forskare vid Max Planck-institutet för ljusets fysik i Tyskland i stället gjort den robust — och samtidigt kopplat ihop ljus och ljud mer än tusen gånger starkare än i en vanlig glasfiber.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-24-fryst-optisk-fiber.jpg" length="60626" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

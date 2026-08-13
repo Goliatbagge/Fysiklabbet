@@ -5,6 +5,7 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-13 | `2026-08-13-rugbybollen-i-atomkarnan` | GODKAND | Alla siffror i produktionskedjan, matuppstallningen (RISIKO/PI-LIST), karnmomenten (Q_S, mu), Schmidt-gransen, californium-jamforelsen och modelljamforelsen verifierade mot arXiv:2511.20921. Peer-reviewad, PRL 136, 192501 (15 maj 2026). Inga citat i artikeln. Bilden ar CC BY 2.0 fran Oak Ridge (HFIR), korrekt krediterad.
 | 2026-08-12 | `2026-08-12-magnetisk-tratt` | RÄTTA FÖRST → GODKÄND | Tre precisionsrättelser före publicering (ALMA-lobens storlek i jord–sol-avstånd, jämförelsen mot jordens magnetfält, temperaturintervallet i ordlisteposten om ackretionsskivor). Samtliga siffror verifierade mot arXiv-versionens metoddel, inte mot pressreferatet. Kollegialt granskad i Nature Communications. |
 | 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | RÄTTA FÖRST → GODKÄND | Fyra rättelser före publicering (simulerade kontra uppmätta korrelationer, neuronnätsattackens två felformuleringar, 53,3λ utan angiven våglängd, ”ingen elektronik” i ingressen). Hela metoddelen läst i arXiv-PDF:en; datum, författare och CC BY-licens verifierade via Crossref. Kollegialt granskad, öppet tillgänglig. |
 | 2026-08-10 | `2026-08-10-solformorkelse-sverige` | RÄTTA FÖRST → GODKÄND | Två räknefel funna och åtgärdade före publicering (vinkelstorlekens vardagsjämförelse, solglasögonens transmission). Alla svenska siffror verifierade mot Astroinfos råtabell, inte mot en referatsammanfattning. |
@@ -12,6 +13,119 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 | 2026-08-07 | `2026-08-07-virvlar-pa-solens-yta` | RÄTTA FÖRST → GODKÄND | Två fel funna och åtgärdade (Kelvin/Helmholtz-datering, fotosfärens tjocklek). Originalpublikationen gick INTE att öppna — se anteckningen nedan. |
 
 ---
+
+## 2026-08-13 — `2026-08-13-rugbybollen-i-atomkarnan`
+
+**Granskningslage:** sjalvstandig slutgranskning (utgivarrollen), samtliga
+kallor oppnade via WebFetch/WebSearch.
+
+**0. Peer review-status.** Publicerad, kollegialt granskad, i Physical
+Review Letters 136, 192501, 15 maj 2026 (DOI 10.1103/2813-b49x). DOI:n
+loste upp till link.aps.org (302-redirect bekraftad); PRL-sidan sjalv ar
+betalsparrad (403), sa samtliga siffror och metodbeskrivningar ar i stallet
+verifierade mot den fritt tillgangliga forhandsversionen arXiv:2511.20921
+(v1, inskickad 25 nov 2025). En oberoende soktraff citerade exakt samma
+mu- och Q_S-varden ur den publicerade PRL-versionen.
+
+**1. Produktionskedjan — allt stammer mot arXiv-metoddelen:** 34 ng /
+8,8e13 atomer Es-254 fran Oak Ridge, 7 dygns neutronbestralning vid ILL
+Grenoble, 4 dygns avsvalning, 7,5e10 atomer Es-255 (T1/2 = 39,8 dygn) som
+generator, fermiumfraktionen deponerad pa zirkoniumfolie, prov om 1e8-1e9
+atomer Fm-255 per matning, Fm-255 halveringstid 20 timmar. Samtliga siffror
+funna ordagrant i arXiv-texten.
+
+**2. "Mindre an en biljondels gram" — rimlighetsberaknat:** 1e9 atomer
+Fm-255 x 255 u x 1,6605e-24 g/u = ca 4,2e-13 g = 0,42 pg, vilket ar MINDRE
+an 1e-12 g (en biljondels gram; biljon = 1e12 i svensk betydelse). Pastaendet
+haller. Grep pa "biljon/biljard/triljon" i hela data/nyheter.js gav bara
+denna artikels egna, korrekta traffar (inga "billion/trillion"-fellan).
+
+**3. "En tiotusendel av ett saltkorn" — egen illustration, ej kallbelagd
+men matematiskt forsvarbar.** Ett saltkorn pa ca 0,3 mm sida (densitet
+2,16 g/cm3) vager ca 58 mikrogram och innehaller ca 1,2e18 joner.
+8,8e13 / 1,2e18 = 7,3e-5, samma tiopotens som 1e-4 ("en tiotusendel").
+Skribentens egen jamforelse, hedgead med "i storleksordningen" — ingen
+rattning kravs, men beroende av antagen saltkornsstorlek.
+
+**4. Matuppstallningen — verifierat mot arXiv:** RISIKO-masseparatorn i
+Mainz, PI-LIST (spektroskopilaser vinkelratt mot atomstralen), ugnstemp.
+900 grader C (OBS: Mainz pressmeddelande skriver lost "ungefar 1000 grader
+C" — artikeln foljer korrekt forskningsartikelns precisa siffra, inte
+pressreferatets avrundning), 398,4 nm och 398,2 nm (25099 resp. 25111
+cm-1 omraknat), 30 keV accelerationsspanning, dopplerbreddning ca 50 MHz,
+linjebredder 230 MHz och 350 MHz med ratt angiven orsak (effektbreddning —
+arXiv: "power broadening dominated").
+
+**5. Hyperfinstruktur.** Karnspinn I = 7/2, ger 2I+1 = 8 hyperfinnivaer
+per atomar niva (arXiv-formulering). 22 forvantade/15 uplosta komponenter
+i R1 och 21/13 i R2 — matchar arXiv exakt.
+
+**6. Karnmomenten.** Q_S = +5,84 +/- 0,13 eb och mu = -0,75 +/- 0,05 muN —
+detta ar arXiv-abstraktets egen huvudsiffra, atergiven ordagrant. Artikelns
+brodtext later denna siffra sta oemotsagd; det mer precisa, kombinerade
+resultatet -0,743(49) muN star pa ett annat stalle i arXiv-artikelns
+resultatdel/tabell. Bagge siffrorna finns alltsa i originalet, i olika
+delar (abstrakt kontra resultattabell), och nyhetsartikeln ateger korrekt
+abstraktets citerbara varde. Ingen diskrepans att ratta.
+
+**7. Schmidt-gransen.** -1,913 muN, foljer av enpartikel-skalmodellen med
+en enda oparad neutron (arXiv: "simplified single-particle shell model
+that assumes the total nuclear magnetic moment equals the moment of its
+single unpaired nucleon"). Att detta exakta varde ocksa ar en fri neutrons
+magnetiska moment stammer (CODATA: mu_n = -1,91304 muN): for en oparad
+neutron i tillstand med j = l + 1/2 forsvinner banbidraget (g_l = 0 for
+neutronen) och Schmidt-vardet blir per definition identiskt med neutronens
+egen spinn-g-faktor, dvs. det fria vardet. Fysikaliskt korrekt
+tillaggsinformation. 2005 ars varde (Backe m.fl., Hyperfine Interactions,
+2005) lag bevisligen utanfor/nedanfor gransen ("in fact, it is below the
+Schmidt line ... hence in unphysical space").
+
+**8. Californium-253.** N = 253 - 98 = 155 (isoton med Fm-255). mu = -0,731
++/- 0,035 muN, Q_S = 5,53 +/- 0,51 eb — exakt de varden som star i
+arXiv-artikelns tabell.
+
+**9. Modelljamforelsen.** Hartree-Fock-Bogoljubov inom 5 % pa bada
+storheterna ("deviation from the HFB results remains below 5% in both
+cases"). Den andra modellen (MREDF, ej namngiven i artikeln, vilket ar
+okej) overskattar mu med ca 25 % och Q_S med ca 6 % — matchar arXiv exakt.
+
+**10. Faktarutan.** Ivy Mike 1952 som upptacktsplats for bade fermium och
+einsteinium — oberoende bekraftat via sokning. Fermium som tyngsta
+grundamne i vagbara (pikogram-)mangder — vedertagen beskrivning i
+karnkemilitteraturen. 39 forskare (raknat i hela forfattarlistan pa
+arXiv — exakt 39 namn), 18 institutioner, sju lander (Tyskland, Sverige,
+USA, Frankrike, Polen, Belgien, Schweiz — raknat ur affilieringslistan).
+Forstaforfattaren Mitzi Urquiza-Gonzalez vid Goteborgs universitet —
+bekraftat i bade Mainz pressmeddelande och soktraff.
+
+**11. Peer review och dagsfarskhet.** Se punkt 0. Artikeln pastar aldrig
+att forskningen ar "ny idag"; research.citation anger korrekt datum
+(15 maj 2026), och artikelns eget publiceringsdatum (2026-08-13) ligger
+tre manader senare — samma cykel som Mainz/Phys.org/EurekAlert-
+pressbevakningen, en normal fordrojning for uppfoljande popularvetenskaplig
+bevakning.
+
+**12. Bilden.** HFIR reactor pool (4092138191).jpg, Oak Ridge National
+Laboratory, CC BY 2.0 — bekraftat pa Flickr-originalet. imageCredit
+("Foto: Oak Ridge National Laboratory (CC BY 2.0)") ar korrekt och
+tillrackligt. Bilden foreställer branslelement i reaktorbassangen, vilket
+stammer med imageAlt. Redlig: pastar inget om Mainz-matningen, och Oak
+Ridge (HFIR) ar en akta del av produktionskedjan (ursprunget till
+Es-254-ravaran) — ingen vilseledande koppling.
+
+**Noterat men INTE rattningskravande:**
+1. research.citation listar "S. Raeder, D. Hanstorp, C. E. Duellmann och
+   K. Wendt" efter de fem forsta forfattarna. Alla fyra ar verkliga
+   medforfattare, men den inbordes ordningen foljer inte originalets
+   byline-ordning (Raeder ar #32, Hanstorp #17, Duellmann #13, Wendt #39
+   av 39) — sannolikt ett medvetet val att lyfta fram gruppledare, vanlig
+   praxis i kortciterade storsamarbeten, men inte bokstavstrogen atergivning
+   av forfattarordningen.
+2. "Ett tjugo ar gammalt matvarde" (2005 till 2026) ar egentligen 21 ar.
+
+**Utslag: GODKAND.** Inga citat forekommer i artikeln (inget att
+kontrollera enligt punkt 4 i granskningsmallen). Samtliga siffror,
+peer review-status, kallanlankar, facktermer och bildkreditering haller.
 
 ## 2026-08-12 — `2026-08-12-magnetisk-tratt`
 

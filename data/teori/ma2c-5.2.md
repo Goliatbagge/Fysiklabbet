@@ -80,7 +80,7 @@ eller negativt: $10^{-3} = \frac{1}{1\,000} = 0{,}001$ och
 $10^{-6} = \frac{1}{1\,000\,000} = 0{,}000\,001$ och så vidare.
 
 ::: exempel "Exempel 1 — Bestäm utan räknare"
-**Bestäm utan räknare<br>a) $\lg 10\,000$&emsp;&emsp;b) $\lg 10^{-5}$&emsp;&emsp;c) $\lg \sqrt{10}$**
+**Bestäm utan räknare<br>a) $\lg 10\,000$<br>b) $\lg 10^{-5}$<br>c) $\lg \sqrt{10}$**
 
 **a)** Vi tänker "Vad ska vi upphöja 10 till för att det ska bli
 10 000? Jo, 4."
@@ -102,7 +102,7 @@ $\frac{1}{2}$ för att svaret ska bli $\sqrt{10}$.
 :::
 
 ::: exempel "Exempel 2 — Skriv som en potens med basen 10"
-**Skriv som en potens med basen 10.<br>a) 4&emsp;&emsp;b) 75**
+**Skriv som en potens med basen 10.<br>a) 4<br>b) 75**
 
 **a)** Den exponent vi ska upphöja 10 till för att det ska bli 4 kan
 skrivas lg 4. Så

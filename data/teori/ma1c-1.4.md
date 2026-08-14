@@ -17,7 +17,7 @@ Vid multiplikation av
 :::
 
 ::: exempel "Exempel 1 — Multiplikation"
-**Beräkna<br>a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$&emsp;&emsp;b) $3 \cdot \dfrac{4}{5}$**
+**Beräkna<br>a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$<br>b) $3 \cdot \dfrac{4}{5}$**
 
 ::: handskrift
 typ: brakmult
@@ -111,7 +111,7 @@ vsv. (vilket skulle visas).
 :::
 
 ::: exempel "Exempel 3 — Division"
-**Beräkna<br>a) $\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$&emsp;&emsp;b) $\dfrac{4}{5} \Big/ \dfrac{2}{7}$&emsp;&emsp;c) $5 \Big/ \dfrac{3}{4}$&emsp;&emsp;d) $\dfrac{2}{3} \Big/ 12$**
+**Beräkna<br>a) $\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$<br>b) $\dfrac{4}{5} \Big/ \dfrac{2}{7}$<br>c) $5 \Big/ \dfrac{3}{4}$<br>d) $\dfrac{2}{3} \Big/ 12$**
 
 ::: handskrift
 typ: brakdiv

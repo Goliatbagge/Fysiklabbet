@@ -404,6 +404,11 @@ window.KATALOG = {
           },
         },
       },
+      // Matematik nivå 1b HÄRLEDS programmatiskt ur nivå 1c — se byggaren
+      // längst ned i filen (sök på MA1B_SPEC). Platshållaren här styr bara
+      // ORDNINGEN bland kurserna (1c, 1b, 2c …). Redigera ALDRIG 1b-avsnitt
+      // för hand: delade avsnitt ändras i 1c och följer med automatiskt.
+      'Matematik nivå 1b': {},
       // Matematik nivå 2c byggs ut avsnitt för avsnitt från genomgångarna i
       // Genomgångar/Matematik nivå 2c/ — se .claude/matematik-2c-plan.md för
       // plan, kapitelmappning och status. Avsnitt läggs in här FÖRST när
@@ -715,6 +720,123 @@ window.KATALOG = {
     },
   },
 };
+
+// ═══════════════════════════════════════════════════════════════════════
+// Matematik nivå 1b — HÄRLEDD ur Matematik nivå 1c.
+//
+// Nästan alla genomgångar i 1b är IDENTISKA med 1c och delas därför på
+// riktigt: katalogposterna (titel, beskrivning, nyckelord) kopieras härifrån
+// vid sidladdning, och innehållet (teori-md, övningar, exit tickets,
+// visualiseringar) slås upp via aliaskartan window.MA1B_ALIAS
+// (ma1b-id → ma1c-id). En ändring i ett delat 1c-avsnitt slår alltså
+// automatiskt igenom i 1b — redigera ALDRIG delade 1b-avsnitt separat.
+//
+// MA1B_SPEC nedan är HELA definitionen av 1b:
+//   • 'alla'            — kapitlet delas rakt av med 1c (alla avsnitt).
+//   • '3.2' (sträng)    — kopiera 1c-avsnittet med num 3.2; nytt nummer
+//                         sätts av positionen i listan (ordningen får
+//                         alltså skilja sig från 1c).
+//   • { fran: '3.S', egenTeori: true }
+//                       — katalogposten kopieras från 1c men teorin är en
+//                         EGEN md-fil (ma1b-<nytt num>.md) — används för
+//                         kapitelsammanfattningar som skiljer sig åt.
+//   • { title: … }      — helt eget 1b-avsnitt (egen md, egna övningar och
+//                         exit tickets under ma1b-id).
+//
+// Skillnader mot 1c (2026-08-14): trigonometri + vektorer (kap 6) och
+// "Parallella och vertikala linjer samt allmän form" (1c 4.6) utgår;
+// "KPI och index" (3.4) och "Tolka och granska tabeller och diagram" (5.1)
+// tillkommer. Kapitel 3/4/5 får egna sammanfattningar.
+// ═══════════════════════════════════════════════════════════════════════
+window.MA1B_ALIAS = {};
+(function () {
+  const ma1c = window.KATALOG['Matematik'].courses['Matematik nivå 1c'];
+  const kopia = (o) => JSON.parse(JSON.stringify(o));
+
+  // Avsnitt som bara finns i 1b — teori i data/teori/ma1b-<num>.md,
+  // övningar/exit tickets under ma1b-id i data/ovningar.js/exittickets.js.
+  const NYA = {
+    kpi: {
+      title: 'KPI och index',
+      description: 'Indextal jämför värden med ett basår — konsumentprisindex mäter prisläget, och med index räknar vi om priser och löner mellan olika år.',
+      href: null, icon: null,
+      keywords: ['procent','index','indextal','basår','basåret','kpi','konsumentprisindex','inflation','prisutveckling','real','reallön','jämföra priser'],
+    },
+    tolkaDiagram: {
+      title: 'Tolka och granska tabeller och diagram',
+      description: 'Läs av tabeller, stapel-, cirkel- och linjediagram — och avslöja vilseledande diagram med avhuggna axlar och missvisande skalor.',
+      href: null, icon: null,
+      keywords: ['statistik','tabell','tabeller','diagram','stapeldiagram','cirkeldiagram','linjediagram','frekvenstabell','relativ frekvens','vilseledande diagram','avhuggen axel','tolka','granska','källkritik'],
+    },
+  };
+
+  const MA1B_SPEC = [
+    { kapitel: 'Aritmetik', sektioner: 'alla' },
+    { kapitel: 'Algebra och ekvationer', sektioner: 'alla' },
+    { kapitel: 'Procentuella förändringar',
+      intro: 'Procent i praktiken — från promille och ppm till förändringsfaktorer som gör upprepade höjningar och sänkningar till en enda multiplikation. Med indextal jämför vi priser och löner över tid, och kapitlet avslutas med privatekonomi: sparande, lån och ränta.',
+      sektioner: ['3.1', '3.2', '3.3', NYA.kpi, '3.4', '3.5',
+                  { fran: '3.S', egenTeori: true }] },
+    { kapitel: 'Räta linjer och funktioner',
+      sektioner: ['4.1', '4.2', '4.3', '4.4', '4.5', '4.7', '4.8', '4.9',
+                  '4.10', '4.11', { fran: '4.S', egenTeori: true }] },
+    { kapitel: 'Statistik och sannolikhetslära',
+      intro: 'Att dra slutsatser av data — vi börjar med att tolka och granska tabeller och diagram, och går vidare till undersökningar, urval och felkällor, felmarginaler och skillnaden mellan korrelation och kausalitet. Sedan sannolikhetslärans grunder: den klassiska definitionen, experiment, produktregeln, träddiagram och komplementhändelser.',
+      sektioner: [NYA.tolkaDiagram, '5.1', '5.2', '5.3', '5.4', '5.5',
+                  '5.6', '5.7', '5.8', { fran: '5.S', egenTeori: true }] },
+  ];
+
+  const chapters = {};
+  MA1B_SPEC.forEach((kap, ki) => {
+    const src = ma1c.chapters[kap.kapitel];
+    if (!src) throw new Error('MA1B_SPEC: kapitlet "' + kap.kapitel + '" finns inte i 1c');
+    const nr = ki + 1;
+    const items = kap.sektioner === 'alla'
+      ? src.sections.map((s) => String(s.num))
+      : kap.sektioner;
+    let lopnr = 0;
+    const sections = items.map((item) => {
+      const spec = (typeof item === 'string') ? { fran: item } : item;
+      let sec;
+      if (spec.fran) {
+        const srcSec = src.sections.find((s) => String(s.num) === spec.fran);
+        if (!srcSec) throw new Error('MA1B_SPEC: hittar inte 1c-avsnittet ' + spec.fran);
+        sec = kopia(srcSec);
+      } else {
+        sec = kopia(spec);
+      }
+      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // bokstav; övriga numreras löpande efter positionen i listan.
+      const suffix = spec.fran && /\.(S|E)$/.test(spec.fran)
+        ? spec.fran.split('.')[1] : null;
+      sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
+      if (spec.fran && !spec.egenTeori) {
+        window.MA1B_ALIAS['ma1b-' + sec.num] = 'ma1c-' + spec.fran;
+      }
+      return sec;
+    });
+    chapters[kap.kapitel] = { number: nr, intro: kap.intro || src.intro, sections };
+  });
+
+  // Platshållaren i kurslistan ovan fylls här — ordningen (1c, 1b, 2c)
+  // bevaras eftersom nyckeln redan finns.
+  window.KATALOG['Matematik'].courses['Matematik nivå 1b'] = {
+    label: 'Matematik nivå 1b',
+    intro: {
+      tagline: 'Gymnasiets första matematiknivå för dig som läser samhällsvetenskap eller ekonomi.',
+      paragraphs: [
+        'Matematik nivå 1b lägger grunden för gymnasiets matematik och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi börjar med aritmetiken — talmängder, bråk, potenser och prioriteringsregler — och bygger vidare mot algebra och ekvationslösning, procentuella förändringar med index och privatekonomi, räta linjer och funktioner samt statistik och sannolikhetslära.',
+        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+      ],
+      bullets: [
+        'Du lär dig: taluppfattning, algebra, procent och funktioner',
+        'Du tränar på: ekvationslösning, procenträkning och problemlösning',
+        'Du möter: index, statistik och sannolikhetslära',
+      ],
+    },
+    chapters,
+  };
+})();
 
 // Platt lista — full kontext per avsnitt. Används för sök och listvyer.
 window.KATALOG_FLAT = (function () {

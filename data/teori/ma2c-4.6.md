@@ -81,7 +81,7 @@ $(x_2, y_2)$.
 :::
 
 ::: exempel "Exempel 1 — Avstånd och mittpunkt"
-**Vi har punkterna (−3, −5) och (7, −1). Bestäm<br>a) avståndet mellan punkterna&emsp;&emsp;b) mittpunkten**
+**Vi har punkterna (−3, −5) och (7, −1). Bestäm<br>a) avståndet mellan punkterna<br>b) mittpunkten**
 
 **a)** Vi använder avståndsformeln och sätter in värdena $x_1 = -3$,
 $y_1 = -5$, $x_2 = 7$ och $y_2 = -1$. Detta ger

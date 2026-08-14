@@ -21,7 +21,7 @@ variabeln".
 
 ::: exempel "Exempel 1 — Tolka derivatan"
 **En bil färdas $s(t)$ km på $t$ timmar. Tolka<br>
-a) $s(2) = 120$&emsp;&emsp;b) $s'(2) = 90$**
+a) $s(2) = 120$<br>b) $s'(2) = 90$**
 
 **a)** $s$ står för sträckan i kilometer (120 km). $t$ står för tiden i
 timmar (2 timmar).
@@ -53,7 +53,7 @@ Talet $0{,}3$ skrivs alltså som `0.3` när du matar in en funktion.
 ::: exempel "Exempel 2 — Beräkna derivata med Geogebra"
 **En vårdag ges temperaturen $f(x)$ °C av formeln $f(x) = 0{,}3x^2 - 5$, där
 $x$ är tiden i timmar efter 6.00.<br>
-a) Beräkna $f'(5)$ med symbolhanterande hjälpmedel.&emsp;&emsp;b) Tolka
+a) Beräkna $f'(5)$ med symbolhanterande hjälpmedel.<br>b) Tolka
 svaret i a) med ord.**
 
 **a)** I Geogebras inmatningsfält skriver vi

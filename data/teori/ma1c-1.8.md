@@ -49,7 +49,7 @@ dvs. $27^{1/3} = \sqrt[3]{27}$.
 :::
 
 ::: exempel "Exempel 1 — Beräkna utan räknare"
-**Beräkna utan räknare<br>a) $49^{1/2}$&emsp;&emsp;b) $5 \cdot 8^{1/3}$&emsp;&emsp;c) $27^{2/3}$**
+**Beräkna utan räknare<br>a) $49^{1/2}$<br>b) $5 \cdot 8^{1/3}$<br>c) $27^{2/3}$**
 
 ::: handskrift
 typ: rotberakna

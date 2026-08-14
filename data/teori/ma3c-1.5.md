@@ -66,7 +66,7 @@ $$
 
 ::: exempel "Exempel 3 — Lös en tredjegradsekvation"
 **Lös ekvationen $x^3 - x^2 - 3x + 3 = 0$ med symbolhanterande hjälpmedel.
-Svara<br>a) med två decimaler&emsp;&emsp;b) exakt.**
+Svara<br>a) med två decimaler<br>b) exakt.**
 
 **a)** I Geogebras inmatningsfält skriver vi "nlös" och väljer
 *NLös( Ekvation )* i menyn *NLös*. Vi skriver in ekvationen och slår Enter.
@@ -98,7 +98,7 @@ kommandot.
 
 ::: exempel "Exempel 4 — Funktionsvärde och ekvationslösning"
 **Funktionen $f(x) = x^3 - 4x^2$ är given. Med symbolhanterande hjälpmedel,
-bestäm<br>a) $f(7)$&emsp;&emsp;b) lösningen till $f(x) = 7$.**
+bestäm<br>a) $f(7)$<br>b) lösningen till $f(x) = 7$.**
 
 **a)** Vi definierar funktionen genom att skriva $f(x) = x^3 - 4x^2$ i
 Geogebras inmatningsfält. Därefter skriver vi $f(7)$ på raden under och får

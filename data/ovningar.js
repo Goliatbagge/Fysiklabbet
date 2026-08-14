@@ -18535,7 +18535,7 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a) $a \\cdot b$&emsp;&emsp;b) $a + b$&emsp;&emsp;c) $a - b$&emsp;&emsp;d) $b - a$`,
+            question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a) $a \\cdot b$<br>b) $a + b$<br>c) $a - b$<br>d) $b - a$`,
             choices: [
                 `a och d`,
                 `a och c`,
@@ -21528,6 +21528,198 @@ Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, me
 **Svar:** 18 300 kr — räntan räknas på den krympande skulden, inte på det ursprungliga lånebeloppet.
 
 **Generell slutsats:** total kostnad − lånat belopp = total ränta. Och vid rak amortering är genomsnittsräntan ungefär hälften av den första månadens, eftersom skulden i snitt är halva lånet.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1b — egna avsnitt (delade avsnitt hämtar sina
+    // övningar från ma1c via aliaskartan MA1B_ALIAS i data/katalog.js)
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1b-3.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Priset på en vara har indextalet 132, med 2015 som basår. Vad betyder det?`,
+            choices: [
+                `Priset är 32 % högre än år 2015`,
+                `Priset är 132 % högre än år 2015`,
+                `Priset är 32 % av priset år 2015`,
+                `Priset är 132 kr`,
+            ],
+            correct: 0,
+            solution: `Basåret har alltid index 100. Indextalet 132 ligger $132 - 100 = 32$ enheter över basåret — priset är alltså 32 % högre än år 2015 (förändringsfaktorn är $\\frac{132}{100} = 1{,}32$).
+
+Ett indextal säger ingenting om priset i kronor — bara om förhållandet till basåret.
+
+**Svar:** Priset är 32 % högre än år 2015.`,
+        },
+        {
+            level: 1,
+            question: `Ett månadskort för bussen kostade 550 kr under basåret och kostar i år 715 kr. Vilket indextal har priset i år?`,
+            answer: { value: 130, unit: '', tol: 0.005 },
+            solution: `Insättning i formeln för indextal:
+
+$$ \\text{index} = \\frac{715}{550} \\cdot 100 = 1{,}30 \\cdot 100 = 130 $$
+
+**Svar:** Index 130 — priset är 30 % högre än under basåret.`,
+        },
+        {
+            level: 1,
+            question: `KPI var 337,0 år 2020, med 1980 som basår. Vad säger det om prisnivån?`,
+            choices: [
+                `Prisnivån år 2020 var 237 % högre än år 1980`,
+                `Prisnivån år 2020 var 337 % högre än år 1980`,
+                `Prisnivån år 2020 var 37 % högre än år 1980`,
+                `Priserna ökade med 337 kr mellan 1980 och 2020`,
+            ],
+            correct: 0,
+            solution: `Basåret 1980 har index 100. Indextalet 337,0 ligger $337 - 100 = 237$ enheter över basåret, så prisnivån var 237 % högre — det som kostade 100 kr år 1980 kostade i genomsnitt 337 kr år 2020.
+
+Den vanligaste felläsningen är att ta hela indextalet som procentuell ökning — men de första 100 enheterna är basårets egen nivå.
+
+**Svar:** Prisnivån år 2020 var 237 % högre än år 1980.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En chokladkaka kostar 65 kr i år, och prisets indextal är 125. Vad kostade chokladkakan under basåret?`,
+            answer: { value: 52, unit: 'kr', tol: 0.005 },
+            solution: `Index 125 betyder att dagens pris är basårets pris multiplicerat med förändringsfaktorn $\\frac{125}{100} = 1{,}25$. Kalla basårets pris $x$:
+
+$$ 1{,}25 \\cdot x = 65 $$
+
+$$ x = \\frac{65}{1{,}25} = 52\\ \\mathrm{kr} $$
+
+**Svar:** 52 kr`,
+        },
+        {
+            level: 2,
+            question: `En bok kostade 249 kr år 2010, när KPI var 303,5. Vad motsvarar det priset i 2023 års penningvärde, när KPI var 391,3? Avrunda till hela kronor.`,
+            answer: { value: 321, unit: 'kr', tol: 0.005 },
+            solution: `Kvoten mellan årens indextal är förändringsfaktorn mellan åren:
+
+$$ 249 \\cdot \\frac{391{,}3}{303{,}5} = 249 \\cdot 1{,}2892\\ldots = 321{,}0\\ldots \\approx 321\\ \\mathrm{kr} $$
+
+**Svar:** Ungefär 321 kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Linneas månadslön höjdes från 28 000 kr år 2020 till 30 000 kr år 2023. Under samma tid steg KPI från 337,0 till 391,3. Med hur många procent minskade hennes köpkraft (reallön)? Avrunda till tiondels procent.`,
+            answer: { value: 7.7, unit: '%', tol: 0.02 },
+            solution: `**Insikten:** lönen ska jämföras med prisnivån — köpkraften ändras med kvoten mellan lönens och prisernas förändringsfaktorer.
+
+Lönens förändringsfaktor:
+
+$$ \\frac{30\\ 000}{28\\ 000} = 1{,}0714\\ldots $$
+
+Prisnivåns förändringsfaktor:
+
+$$ \\frac{391{,}3}{337{,}0} = 1{,}1611\\ldots $$
+
+Reallönens förändringsfaktor är kvoten:
+
+$$ \\frac{1{,}0714\\ldots}{1{,}1611\\ldots} = 0{,}9227\\ldots $$
+
+Faktorn 0,923 ligger under 1 — köpkraften minskade med $1 - 0{,}9227\\ldots = 0{,}0772\\ldots \\approx 7{,}7\\ \\%$.
+
+**Svar:** Ungefär 7,7 %.
+
+**Generell slutsats:** en lönehöjning i kronor kan ändå vara en sänkning i köpkraft — det är kvoten mot prisutvecklingen som avgör. Höjs priserna snabbare än lönen sjunker reallönen.`,
+        },
+    ],
+
+    'ma1b-5.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken diagramtyp passar bäst för att visa hur en aktiekurs har ändrats dag för dag under ett år?`,
+            choices: [
+                `Linjediagram`,
+                `Cirkeldiagram`,
+                `Stapeldiagram`,
+                `Frekvenstabell`,
+            ],
+            correct: 0,
+            solution: `Aktiekursen är ett värde som följs **över tid** — då binds mätpunkterna samman med linjer så att utvecklingen syns som en kurva. Cirkeldiagram visar andelar av en helhet och stapeldiagram jämför kategorier; ingen av dem visar ett förlopp i tiden. En frekvenstabell är ingen bild alls.
+
+**Svar:** Linjediagram`,
+        },
+        {
+            level: 1,
+            question: `I en undersökning fick 50 personer frågan vad de helst dricker till frukost. 12 av dem svarade te. Vilken är den relativa frekvensen för te, i procent?`,
+            answer: { value: 24, unit: '%', tol: 0.005 },
+            solution: `Relativ frekvens är frekvensen delad med det totala antalet:
+
+$$ \\frac{12}{50} = 0{,}24 = 24\\ \\% $$
+
+**Svar:** 24 %`,
+        },
+        {
+            level: 1,
+            question: `Linjediagrammet visar antalet besökare på ett bibliotek under en dag. Hur många fler besökare var där klockan 15 än klockan 9?
+
+${makeDiagram({
+    xMin: 9, xMax: 18, yMin: 0, yMax: 120,
+    xTicks: [9, 12, 15, 18], yTicks: [0, 20, 40, 60, 80, 100, 120],
+    xLabel: 'Klockslag', yLabel: 'Antal besökare',
+    paths: [{ points: [[9, 40], [12, 80], [15, 100], [18, 60]] }],
+})}`,
+            answer: { value: 60, unit: 'besökare', tol: 0.005 },
+            solution: `Avläsning i diagrammet: klockan 9 var antalet 40 och klockan 15 var det 100.
+
+$$ 100 - 40 = 60 $$
+
+**Svar:** 60 fler besökare`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I ett cirkeldiagram över en enkät med 450 svarande motsvarar sektorn för "nej" 81 personer. Hur många procent av cirkeln upptar nej-sektorn?`,
+            answer: { value: 18, unit: '%', tol: 0.005 },
+            solution: `Sektorns andel av cirkeln är gruppens relativa frekvens:
+
+$$ \\frac{81}{450} = 0{,}18 = 18\\ \\% $$
+
+**Svar:** 18 %`,
+        },
+        {
+            level: 2,
+            question: `En tidning visar två staplar: 490 och 520 enheter. Diagrammets *y*-axel är avhuggen och börjar vid 480. Vilket påstående stämmer?`,
+            choices: [
+                `Den verkliga ökningen är cirka 6 %, men staplarnas höjder får den att se ut som en fyrdubbling`,
+                `Den verkliga ökningen är 300 %, precis som staplarna visar`,
+                `Diagrammet är fel ritat — staplar får aldrig börja vid 480`,
+                `Den verkliga ökningen är 30 %`,
+            ],
+            correct: 0,
+            solution: `Ovanför brytpunkten 480 blir staplarna $490 - 480 = 10$ respektive $520 - 480 = 40$ enheter höga — den andra ser $\\frac{40}{10} = 4$ gånger så hög ut. Den verkliga förändringsfaktorn är
+
+$$ \\frac{520}{490} = 1{,}061\\ldots $$
+
+alltså en ökning med cirka 6 %. Diagrammet är inte "fel ritat" — en avhuggen axel kan vara motiverad — men den som läser måste se var axeln börjar.
+
+**Svar:** Den verkliga ökningen är cirka 6 %, men staplarna får den att se ut som en fyrdubbling.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en enkät svarade 60 % av de 300 tillfrågade eleverna på Åskolan ja, och 40 % av de 700 tillfrågade på Bäckskolan. En rubrik påstår: "I snitt svarade hälften ja." Hur många procent av samtliga tillfrågade svarade egentligen ja?`,
+            answer: { value: 46, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** procentsatser från olika stora grupper kan inte medelvärdesbildas rakt av — de måste vägas med gruppernas storlek. Räkna i stället antal personer.
+
+Antal ja-svar per skola:
+
+$$ 0{,}60 \\cdot 300 = 180 \\qquad 0{,}40 \\cdot 700 = 280 $$
+
+Totalt svarade $180 + 280 = 460$ av $300 + 700 = 1\\ 000$ personer ja:
+
+$$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
+
+**Svar:** 46 %
+
+**Generell slutsats:** medelvärdet av två procentsatser ($\\frac{60 + 40}{2} = 50\\ \\%$) stämmer bara när grupperna är exakt lika stora. Här väger Bäckskolans 700 svar tyngre än Åskolans 300 — den viktade andelen hamnar närmare 40 % än 60 %.`,
         },
     ],
 
@@ -29362,7 +29554,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En tangent till grafen $y = f(x)$ i punkten där $x = 3$ går genom punkterna $(1, 2)$ och $(3, 8)$.<br>a) Beräkna tangentens lutning $k$ i punkten.&emsp;&emsp;b) Avgör om funktionen växer eller avtar där.`,
+            question: `En tangent till grafen $y = f(x)$ i punkten där $x = 3$ går genom punkterna $(1, 2)$ och $(3, 8)$.<br>a) Beräkna tangentens lutning $k$ i punkten.<br>b) Avgör om funktionen växer eller avtar där.`,
             choices: [
                 `$k = 3$; funktionen växer`,
                 `$k = 3$; funktionen avtar`,
@@ -29515,7 +29707,7 @@ $$
         {
             level: 2,
             question: `Funktionen $f(x) = x^2 - 3x$ är given.<br>
-a) Använd derivatans definition för att bestämma en generell formel för $f'(x)$.&emsp;&emsp;b) Beräkna $f'(4)$.`,
+a) Använd derivatans definition för att bestämma en generell formel för $f'(x)$.<br>b) Beräkna $f'(4)$.`,
             choices: [
                 `$5$`,
                 `$8$`,
@@ -32847,7 +33039,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.&emsp;&emsp;b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
+            question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.<br>b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
             answer: { value: 10, unit: 'cm' },
             solution: `Vi utnyttjar att $h + r = 15$, alltså $h = 15 - r$. Vi sätter in detta i volymformeln $V = \\pi r^2 h$:
 
@@ -32865,7 +33057,7 @@ $$
         },
         {
             level: 2,
-            question: `Summan av två positiva tal är 24. Låt det ena talet vara $x$.<br>a) Skriv produkten $P$ av talen som funktion av $x$.&emsp;&emsp;b) I Geogebra hittas extrempunkten $(12, 144)$ på grafen till $P(x)$. Vilken är den maximala produkten?`,
+            question: `Summan av två positiva tal är 24. Låt det ena talet vara $x$.<br>a) Skriv produkten $P$ av talen som funktion av $x$.<br>b) I Geogebra hittas extrempunkten $(12, 144)$ på grafen till $P(x)$. Vilken är den maximala produkten?`,
             answer: { value: 144, unit: '' },
             solution: `Om det ena talet är $x$ är det andra talet $24 - x$, så produkten blir
 
@@ -32884,7 +33076,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.&emsp;&emsp;b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
+            question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
             answer: { value: 3, unit: 'cm' },
             solution: `**a)** Lådans bottenyta får sidorna $(24 - 2x)$ och $(15 - 2x)$, eftersom en kvadrat med sidan $x$ klipps bort i varje hörn, och höjden blir $x$ när de fyra sidorna viks upp:
 
@@ -32943,7 +33135,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.&emsp;&emsp;b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
+            question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.<br>b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
             choices: [
                 `4,7 m; 7,6 m`,
                 `7,6 m; 4,7 m`,
@@ -32967,7 +33159,7 @@ $$
         },
         {
             level: 2,
-            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).&emsp;&emsp;b) Bestäm rutschkanans egen längd, dvs. hypotenusan (avrunda till en decimal).`,
+            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, dvs. hypotenusan (avrunda till en decimal).`,
             choices: [
                 `31°; 4,1 m`,
                 `31°; 3,5 m`,
@@ -33934,7 +34126,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).&emsp;&emsp;b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
+            question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).<br>b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
             choices: [
                 `59°; 2,6 m`,
                 `31°; 2,6 m`,
@@ -33958,7 +34150,7 @@ $$
         },
         {
             level: 2,
-            question: `Från en punkt på marken 25 m från ett torn ser man tornets topp i höjdvinkeln 34°. Ögonhöjden är 1,6 m.<br>a) Bestäm höjden från ögonhöjd upp till toppen.&emsp;&emsp;b) Bestäm tornets totala höjd över marken. Avrunda till en decimal.`,
+            question: `Från en punkt på marken 25 m från ett torn ser man tornets topp i höjdvinkeln 34°. Ögonhöjden är 1,6 m.<br>a) Bestäm höjden från ögonhöjd upp till toppen.<br>b) Bestäm tornets totala höjd över marken. Avrunda till en decimal.`,
             choices: [
                 `16,9 m; 18,5 m`,
                 `18,5 m; 16,9 m`,
@@ -34055,7 +34247,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.&emsp;&emsp;b) Bestäm $\\sin(-v)$.`,
+            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.<br>b) Bestäm $\\sin(-v)$.`,
             choices: [
                 `0,77 och −0,77`,
                 `−0,77 och 0,77`,
@@ -34517,12 +34709,12 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a) $\\sin(-50^\\circ)$&emsp;&emsp;b) $\\sin 130^\\circ$`,
+            question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a) $\\sin(-50^\\circ)$<br>b) $\\sin 130^\\circ$`,
             choices: [
-                `a) $-0{,}77$&emsp;&emsp;b) $0{,}77$`,
-                `a) $0{,}77$&emsp;&emsp;b) $0{,}77$`,
-                `a) $-0{,}77$&emsp;&emsp;b) $-0{,}77$`,
-                `a) $0{,}77$&emsp;&emsp;b) $-0{,}77$`,
+                `a) $-0{,}77$<br>b) $0{,}77$`,
+                `a) $0{,}77$<br>b) $0{,}77$`,
+                `a) $-0{,}77$<br>b) $-0{,}77$`,
+                `a) $0{,}77$<br>b) $-0{,}77$`,
             ],
             correct: 0,
             solution: `**a)** En negativ vinkel speglar punkten i $x$-axeln, så sinus byter tecken:

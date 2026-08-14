@@ -58,7 +58,7 @@ y: -6, 6
 ::: exempel "Exempel 1 — Tanka mopeden"
 **Fabian tankar sin moped med bensin för 20,00 kr/liter. Visa sambandet
 mellan kostnaden $y$ kr och mängden bensin $x$ liter han tankar med en<br>
-a) formel, och ange proportionalitetskonstanten&emsp;&emsp;b) värdetabell&emsp;&emsp;c) graf.**
+a) formel, och ange proportionalitetskonstanten<br>b) värdetabell<br>c) graf.**
 
 ::: handskrift
 typ: tankamoped

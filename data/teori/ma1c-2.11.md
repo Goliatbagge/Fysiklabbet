@@ -56,7 +56,7 @@ med negativa tal.
 :::
 
 ::: exempel "Exempel 1 — Lös olikheterna"
-**Lös<br>a) $3x - 5 < 22$&emsp;&emsp;b) $7(6 - x) \leq 105$&emsp;&emsp;c) $\dfrac{6a}{5} > 3a - 18$**
+**Lös<br>a) $3x - 5 < 22$<br>b) $7(6 - x) \leq 105$<br>c) $\dfrac{6a}{5} > 3a - 18$**
 
 ::: handskrift
 typ: losolikhet
@@ -157,7 +157,7 @@ olikhetstecknet vändas, dvs. $a < 10$.
 :::
 
 ::: exempel "Exempel 2 — Olikheter av andra graden"
-**Lös<br>a) $x^2 < 9$&emsp;&emsp;b) $x^2 > 9$**
+**Lös<br>a) $x^2 < 9$<br>b) $x^2 > 9$**
 
 ::: handskrift
 typ: andragradsolikhet

@@ -16,7 +16,7 @@ Om en ekvation leder till en motsägelse, t.ex. $1 = 2$, så betyder det att
 ekvationen **saknar lösning**.
 
 ::: exempel "Exempel 1 — Variabler i båda led"
-**Lös<br>a) $5x + 8 - 3x = 9x - 20$&emsp;&emsp;b) $54 - 4(3x - 5) = 25x$&emsp;&emsp;c) $3(7x - 4) = 7(9 + 3x)$**
+**Lös<br>a) $5x + 8 - 3x = 9x - 20$<br>b) $54 - 4(3x - 5) = 25x$<br>c) $3(7x - 4) = 7(9 + 3x)$**
 
 ::: handskrift
 typ: variabelbada

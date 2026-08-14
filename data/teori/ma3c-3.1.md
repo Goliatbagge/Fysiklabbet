@@ -155,8 +155,8 @@ $$
 :::
 
 ::: exempel "Exempel 1 — Derivera med deriveringsreglerna"
-**Derivera<br>a) $f(x) = x^7$&emsp;&emsp;b) $y = 3x^5$&emsp;&emsp;
-c) $f(x) = 27$&emsp;&emsp;d) $g(x) = 12x$&emsp;&emsp;e)
+**Derivera<br>a) $f(x) = x^7$<br>b) $y = 3x^5$&emsp;&emsp;
+c) $f(x) = 27$<br>d) $g(x) = 12x$<br>e)
 $f(x) = \dfrac{x^4}{5}$**
 
 **a)** Vi multiplicerar ned exponenten 7 och minskar den sedan med 1.

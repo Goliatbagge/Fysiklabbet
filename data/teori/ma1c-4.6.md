@@ -42,7 +42,7 @@ där $a$, $b$ och $c$ är konstanter.
 
 ::: exempel "Exempel 1 — Parallell linje och allmän form"
 **En linje beskrivs av $y = 3x - 5$. Ange ekvationen för<br>a) en parallell
-linje som går genom (1, 2)&emsp;&emsp;b) linjen i allmän form.**
+linje som går genom (1, 2)<br>b) linjen i allmän form.**
 
 ::: handskrift
 typ: parallell

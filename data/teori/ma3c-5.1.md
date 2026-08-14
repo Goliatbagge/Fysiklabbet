@@ -38,7 +38,7 @@ Om vi till $f(x) = 2x$ ska ange
 :::
 
 ::: exempel "Exempel 1 — En och samtliga primitiva funktioner"
-**Ange för funktionen $f(x) = 3x^2$<br>a) en primitiv funktion&emsp;&emsp;b) samtliga primitiva funktioner**
+**Ange för funktionen $f(x) = 3x^2$<br>a) en primitiv funktion<br>b) samtliga primitiva funktioner**
 
 **a)** Om vi deriverar $F(x) = x^3$ så får vi $f(x) = 3x^2$ enligt
 deriveringsreglerna. Alltså är $F(x) = x^3$ en primitiv funktion.
@@ -68,7 +68,7 @@ exponentialfunktioner med basen $e$.
 :::
 
 ::: exempel "Exempel 2 — Bestäm en primitiv funktion"
-**Bestäm en primitiv funktion till<br>a) $f(x) = 5$&emsp;&emsp;b) $f(x) = 14x^2 - 3$&emsp;&emsp;c) $f(x) = e^{4x}$**
+**Bestäm en primitiv funktion till<br>a) $f(x) = 5$<br>b) $f(x) = 14x^2 - 3$<br>c) $f(x) = e^{4x}$**
 
 **a)** Vi har en konstant funktion, så vi multiplicerar konstanten med $x$
 och får $F(x) = 5x$. (Eftersom vi bara ska ta fram en primitiv funktion och
@@ -102,7 +102,7 @@ $$
 :::
 
 ::: exempel "Exempel 3 — Bestäm samtliga primitiva funktioner"
-**Bestäm samtliga primitiva funktioner till<br>a) $f(x) = 6x$&emsp;&emsp;b) $f(x) = 6e^{3x}$**
+**Bestäm samtliga primitiva funktioner till<br>a) $f(x) = 6x$<br>b) $f(x) = 6e^{3x}$**
 
 **a)** Vi har en potensfunktion ($x$ i basen) och ska då öka exponenten med
 1 och dividera med den nya exponenten. Eftersom vi ska ha samtliga

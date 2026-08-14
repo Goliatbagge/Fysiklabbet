@@ -31,7 +31,7 @@ resultat i problemets sammanhang.
 ::: exempel "Exempel 1 — Maximal intäkt"
 **Per anordnar en fest. Intäkten $I$ kr med biljettpriset $x$ kr ges av
 formeln $I(x) = 300x - 2x^2$.<br>a) Vilket biljettpris ger maximal intäkt
-och vad blir då intäkten?&emsp;&emsp;b) Förklara varför formeln ser ut
+och vad blir då intäkten?<br>b) Förklara varför formeln ser ut
 som den gör.**
 
 **a)** Vi börjar med att ta reda på vilket biljettpris $x$ som ger
@@ -104,7 +104,7 @@ biljettpriset ökar säljs 2 biljetter färre.
 ::: exempel "Exempel 2 — Maximal area"
 **Vanja har köpt 60 meter stängsel för att göra en rektangulär hästhage
 där en av sidorna ska utgöras av en mur (inget stängsel behövs där). Se
-figur.<br>a) Teckna ett uttryck för hagens area.&emsp;&emsp;b) Vilken är
+figur.<br>a) Teckna ett uttryck för hagens area.<br>b) Vilken är
 den maximala area hagen kan få?**
 
 ::: figur

@@ -132,7 +132,7 @@ vanligt.
 :::
 
 ::: exempel "Exempel 1 — Beräkna utan räknare"
-**Beräkna utan räknare<br>a) $\lg 25 + \lg 4$&emsp;&emsp;b) $\lg 3\,000 - \lg 3$**
+**Beräkna utan räknare<br>a) $\lg 25 + \lg 4$<br>b) $\lg 3\,000 - \lg 3$**
 
 **a)** Vi utnyttjar första logaritmlagen och får
 
@@ -152,7 +152,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Lös med tredje logaritmlagen"
-**Lös ekvationerna med tredje logaritmlagen.<br>a) $5^x = 136$&emsp;&emsp;b) $4 \cdot 5^x = 3 \cdot 2^x$**
+**Lös ekvationerna med tredje logaritmlagen.<br>a) $5^x = 136$<br>b) $4 \cdot 5^x = 3 \cdot 2^x$**
 
 **a)** Vi logaritmerar båda led:
 

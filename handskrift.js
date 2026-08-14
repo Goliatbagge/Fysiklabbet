@@ -98,6 +98,20 @@
  * ("23" på olikhets-tallinjen hamnade bakom rutan i mobil, påpekat
  * 2026-08-04). Kontrollera alltid i skärmdump.
  *
+ * ⚠️ REGEL (PILZONEN — INGET BLÄCK VID ARKETS HÖGERKANT, användarkrav
+ * 2026-08-14): stega-pilarna ligger som smala band i arkets vänster- och
+ * högerkant (26 px-knapp + 2 px kant) och FÖLJER SKROLLEN i höjdled —
+ * de kan alltså hamna på VILKEN rad som helst. Hela kantremsan är därför
+ * förbjuden yta för bläck, oavsett y. Vänsterkanten klaras automatiskt
+ * av padL=30; på högerkanten får inget bläck nå förbi PAPER_W−30
+ * (= x 700). Sista nollan i "≈27 700" hamnade bakom framåtknappen när
+ * raden skrevs ända ut till x 722. En rad som inte ryms bryts FÖRE ett
+ * led enligt avrundnings-/radbrytningsregeln ovan (nya raden börjar med
+ * operatorn). Villkorliga fortsättningar ("på samma rad om papperet
+ * räcker") ska testa mot PAPER_W−34, inte mot arkkanten — detta
+ * ERSÄTTER det äldre önskemålet (2026-08-02) att utnyttja hela arkets
+ * bredd. verify-handskrift.js ger fel på bläck i banden.
+ *
  * REGEL (INSÄTTNING): varje gång något SÄTTS IN i något annat — ett
  * värde i en funktion/formel, ett uttryck i en ekvation, mätvärden i ett
  * samband — ska handen göra en hjälpande gest FÖRE den nya raden skrivs:
@@ -1587,6 +1601,32 @@
              (hasFrac(rows[rows.length - 1]) ? 1.15 : 0.4) * sF;
     var xT = x0 + tick + 0.45 * sF;          /* radernas vänsterkant */
     var xR = xT + wMax + 0.45 * sF + tick;   /* högerklammerns streck */
+    /* PILZONEN (se REGEL 2026-08-14): högerklammern får aldrig nå in i
+     * stega-pilens band vid arkets högerkant (x > PAPER_W−34). Hela
+     * klammerbredden är proportionell mot radskalan rs, så EN exakt
+     * nedskalning räcker — geometrin räknas sedan om med nya rs. */
+    if (xR > PAPER_W - 40) {
+      /* mål PAPER_W−40, inte −34: pennjittret (humanize) lägger på ett
+       * par enheter, och klammern ska inte vippa på zongränsen */
+      rs = rs * (PAPER_W - 40 - x0) / (xR - x0);
+      ss = s * rs; sF = F * rs;
+      widths = rows.map(rowW);
+      wMax = Math.max.apply(null, widths);
+      ys = []; yCur = yTop;
+      rows.forEach(function (r, i) {
+        if (i > 0) {
+          yCur += 1.5 * sF + (hasFrac(r) ? 0.7 * sF : 0) +
+                  (hasFrac(rows[i - 1]) ? 0.55 * sF : 0);
+        }
+        ys.push(yCur);
+      });
+      tick = 0.34 * sF;
+      yA = yTop - (hasFrac(rows[0]) ? 1.55 : 0.95) * sF;
+      yB = ys[ys.length - 1] +
+           (hasFrac(rows[rows.length - 1]) ? 1.15 : 0.4) * sF;
+      xT = x0 + tick + 0.45 * sF;
+      xR = xT + wMax + 0.45 * sF + tick;
+    }
     /* vänsterklammern [ : klack, lodrätt streck, klack */
     acts.push({ kind: 'stroke', pts: humanize([[x0 + tick, yA], [x0, yA]]) });
     acts.push({ kind: 'stroke', pts: humanize([[x0, yA], [x0, yB]]) });
@@ -9086,6 +9126,230 @@
     return v;
   }
 
+  /* ---------------- scen: bestäm indextal (ma1b-3.4 ex 1) -------------
+   * Biobiljetten: 80 kr basåret 2010, 140 kr år 2023. a) indextalet är
+   * kvoten mot basåret gånger 100; b) enheterna över 100 ÄR den
+   * procentuella ökningen. (Avsnittet finns bara i Matematik nivå 1b.) */
+  function layoutIndextal(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Basåret 2010 får index 100.']],
+      [['Priset 2023 jämförs med']],
+      [['basårets pris.']]
+    ], 0);
+    y = 120;
+    T.str('a) Indextal år 2023', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('index=', padL, y);
+    xx = T.fracH('140', '80', xx, y);
+    xx = T.str('·100', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvoten är förändringsfaktorn']],
+      [['från basåret: 1,75.']]
+    ], 1.05);
+    y += 2.6 * F;
+    T.str('=1,75·100=175', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: index 175', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Basåret har alltid index 100.']],
+      [['Hur långt över 100 ligger']],
+      [['175?']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) Ökning sedan basåret', padL, y - 1.6 * F, null, 0.62);
+    T.str('175-100=75', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje enhet över 100 är en']],
+      [['procent över basårets pris.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: priset har ökat med 75 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: räkna om med KPI (ma1b-3.4 ex 2) ------------
+   * Månadslönen 21 500 kr år 2010 räknas om till 2023 års penningvärde.
+   * Kvoten mellan årens KPI är förändringsfaktorn mellan åren; det
+   * oavrundade bråket följer med in i multiplikationen (avrunda aldrig i
+   * mellanled). */
+  function layoutKpiomrakning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['KPI mäter prisnivån jämfört']],
+      [['med basåret 1980. Kvoten']],
+      [['mellan två års KPI ger']],
+      [['faktorn mellan just de åren.']]
+    ], 0);
+    y = 122;
+    T.str('Förändringsfaktor 2010 → 2023', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('f=', padL, y);
+    xx = T.fracH('391,3', '303,5', xx, y);
+    T.stepEnd();
+
+    T.str('=1,2892...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lönen räknas om med samma']],
+      [['faktor som prisnivån. Jag']],
+      [['räknar med bråket, inte det']],
+      [['avrundade värdet.']]
+    ], 1.05);
+    y += 3.8 * F;
+    T.str('Lönen i 2023 års penningvärde', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('21 500·', padL, y);
+    xx = T.fracH('391,3', '303,5', xx, y);
+    T.stepEnd();
+
+    T.str('=27 719,7...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En lön anges lagom noggrant.']],
+      [['Jag avrundar till hundratal']],
+      [['kronor.']]
+    ], 1.05);
+    /* Avrundningen radbryts FÖRE ledet (börjar med operatorn) — på samma
+     * rad hade den nått in i högerpilens zon vid arkkanten. */
+    y += 2.6 * F;
+    T.str('≈27 700', padL + 30, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: ca 27 700 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: från andel till antal (ma1b-5.1 ex 1) -------
+   * Cirkeldiagrammet: 240 biobesökare, popcorn 45 %, godis 25 %, inget
+   * 10 %. Andelen gånger det hela ger antalet; i b) tas skillnaden i
+   * procentenheter först. */
+  function layoutCirkelandel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Hela cirkeln är 100 %.']],
+      [['Popcornsektorn är 45 % av']],
+      [['de 240 besökarna.']]
+    ], 0);
+    y = 122;
+    T.str('a) Antal som valde popcorn', padL, y - 1.6 * F, null, 0.62);
+    T.str('0,45·240=108', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: 108 besökare', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Godis 25 % och inget 10 %.']],
+      [['Först skillnaden i']],
+      [['procentenheter.']]
+    ]);
+    y += 3.4 * F;
+    T.str('b) Godis jämfört med inget', padL, y - 1.6 * F, null, 0.62);
+    T.str('0,25-0,10=0,15', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Skillnaden 15 % räknas på']],
+      [['det hela, 240 besökare.']]
+    ]);
+    y += 2.6 * F;
+    T.str('0,15·240=36', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: 36 fler valde godis', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: avhuggen axel (ma1b-5.1 ex 2) ---------------
+   * Hyran 9 600 → 10 400 kr. I diagrammet med axeln avhuggen vid 9 400
+   * jämförs bara det som sticker upp (200 mot 1 000) — den verkliga
+   * höjningen är kvoten mellan hela hyrorna. */
+  function layoutAvhuggenaxel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['I diagrammet syns bara det']],
+      [['som sticker upp ovanför']],
+      [['brytpunkten 9 400 kr.']]
+    ], 0);
+    y = 126;
+    T.str('a) Höjderna i diagrammet', padL, y - 2.1 * F, null, 0.62);
+    xx = T.fracH('1 000', '200', padL, y);
+    T.str('=5', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 5 gånger så hög', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den verkliga jämförelsen är']],
+      [['hela hyran mot hela hyran,']],
+      [['inte stapelstumparna.']]
+    ]);
+    y += 4.0 * F;
+    T.str('b) Verklig höjning', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('f=', padL, y);
+    xx = T.fracH('10 400', '9 600', xx, y);
+    T.stepEnd();
+
+    T.str('=1,0833...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Faktorn ligger 0,0833 över']],
+      [['1. Det är höjningen, skriven']],
+      [['som decimaltal.']]
+    ], 1.05);
+    y += 2.6 * F;
+    xx = T.str('1,0833...-1=0,0833...', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['0,0833 är 8,33 hundradelar.']],
+      [['Jag avrundar till 8,3 %.']]
+    ]);
+    T.str('≈8,3 %', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: hyran höjdes med ca 8,3 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: bilverkstaden (ma1c-4.1 ex 1) ---------------
    * Fast avgift 500 kr + 400 kr/timme, redovisad som a) formel,
    * b) värdetabell och c) graf. Poängen: den fasta avgiften är den term
@@ -13969,7 +14233,9 @@
      * Insättning → Uträkning → Avrundning → Svar. Deluträkningen skrivs
      * som i textlösningen: cos 45°=l/1,0 ⟺ l=1,0·cos 45°=0,707... m */
     y += adv + 0.9 * F;
-    var ssK = 0.8 * s, sFK = 0.8 * F;     /* klammerrader: 0.8 av huvudskala */
+    /* klammerrader: 0,75 av huvudskalan — med 0,8 nådde högerklammern in
+     * i högerpilens zon vid arkkanten (se REGEL: PILZONEN) */
+    var ssK = 0.75 * s, sFK = 0.75 * F;
     var tick = 0.34 * sFK;
     var yK1 = y, yK2 = y + 2.5 * sFK;     /* rad 1 / rad 2 (med bråk) */
     var yKA = yK1 - 0.95 * sFK, yKB = yK2 + 1.1 * sFK;
@@ -14755,7 +15021,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈0,63 rad/s';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       /* raden ovanför innehåller bråk — nämnaren sticker ned 1,04·F under
@@ -15006,7 +15272,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈0,35 m/s';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv;
@@ -15235,9 +15501,9 @@
 
     /* AVRUNDNING (se REGEL): fortsättning på samma rad om möjligt.
      * Raden ovanför har rot + bråk — extra lucka till bubblan.
-     * Gränsen är bläckbaserad (PAPER_W−6 ≈ 8 px marginal när advance-
-     * måttets efterluft räknats bort): utnyttja HELA arkets bredd innan
-     * raden bryts (användarönskemål 2026-08-02). */
+     * Gränsen PAPER_W−34 håller bläcket ute ur högerpilens zon (se
+     * REGEL: PILZONEN, 2026-08-14 — ersatte den äldre gränsen PAPER_W−6
+     * som utnyttjade hela arkets bredd). */
     var bAvr = bubble(140, bubbleTop(y + 1.35 * F), bw, [
       [['Först NU avrundar jag. Både']],
       [['5,0 m och 30° har två']],
@@ -15245,7 +15511,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈4,2 s';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;                     /* raden ovanför har rot+bråk */
@@ -15939,7 +16205,7 @@
     ]);
     tanke(bAvrA);
     var avrA = '≈1,2 s';
-    if (xInsA + stringAdvance(avrA, s, F) < PAPER_W - 6) {
+    if (xInsA + stringAdvance(avrA, s, F) < PAPER_W - 34) {
       placeString(avrA, xInsA, y, s, F, acts);
     } else {
       y += adv + 0.9 * F;
@@ -15991,7 +16257,7 @@
     ]);
     tanke(bAvrB);
     var avrB = '≈6,7 m';
-    if (xInsB + stringAdvance(avrB, s, F) < PAPER_W - 6) {
+    if (xInsB + stringAdvance(avrB, s, F) < PAPER_W - 34) {
       placeString(avrB, xInsB, y, s, F, acts);
     } else {
       y += adv + 0.9 * F;
@@ -16049,7 +16315,7 @@
     ]);
     tanke(bAvrC);
     var avrC = '≈23 m';
-    if (xInsC + stringAdvance(avrC, s, F) < PAPER_W - 6) {
+    if (xInsC + stringAdvance(avrC, s, F) < PAPER_W - 34) {
       placeString(avrC, xInsC, y, s, F, acts);
     } else {
       y += adv + 0.9 * F;
@@ -16631,7 +16897,7 @@
     ]);
     tanke(bAvr1);
     var avrA = '≈31 N/m';
-    if (xIns1 + stringAdvance(avrA, s, F) < PAPER_W - 6) {
+    if (xIns1 + stringAdvance(avrA, s, F) < PAPER_W - 34) {
       placeString(avrA, xIns1, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -16718,7 +16984,7 @@
     ]);
     tanke(bAvr2);
     var avrB = '≈6,1 m/s^2';
-    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 6) {
+    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 34) {
       placeString(avrB, xIns2, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -17132,7 +17398,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈26 J';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv;
@@ -17403,7 +17669,7 @@
     ]);
     tanke(bAvr2);
     var avrB = '≈0,63 s';
-    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 6) {
+    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 34) {
       placeString(avrB, xIns2, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -17727,7 +17993,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈0,60 s';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -17949,7 +18215,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈0,14 kg=140 g';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -18209,7 +18475,7 @@
     ]);
     tanke(bAvr);
     var avrS = '≈0,995 m=99,5 cm';
-    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 6) {
+    if (xIns + stringAdvance(avrS, s, F) < PAPER_W - 34) {
       placeString(avrS, xIns, y, s, F, acts);
     } else {
       y += adv + 1.0 * F;
@@ -18495,7 +18761,7 @@
       [['81,967... Hz blir 82 Hz.']]
     ]));
     var avrS = '≈82 Hz';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.0 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -18918,7 +19184,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈1 100 Hz=1,1 kHz';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19020,7 +19286,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈0,39 m=39 cm';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19116,7 +19382,7 @@
       [['5,0 W har två värdesiffror.']]
     ]));
     var avrA = '≈0,0040 W/m^2=4,0 mW/m^2';
-    if (xIns + T.adv(avrA) < PAPER_W - 6) T.str(avrA, xIns, y);
+    if (xIns + T.adv(avrA) < PAPER_W - 34) T.str(avrA, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrA, padL, y); }
     T.stepEnd();
 
@@ -19162,7 +19428,7 @@
     var xb = T.parenFrac('0,00397...', '10^−^1^2', null,
                          T.str('L=10·lg', padL, y), y) + 0.15 * F;
     var restS = '=95,997... dB';
-    if (xb + T.adv(restS) < PAPER_W - 6) {
+    if (xb + T.adv(restS) < PAPER_W - 34) {
       xb = T.str(restS, xb, y);
     } else {
       y += adv + 1.8 * F;
@@ -19176,7 +19442,7 @@
       [['96 dB.']]
     ]));
     var avrB = '≈96 dB';
-    if (xb + T.adv(avrB) < PAPER_W - 6) T.str(avrB, xb, y);
+    if (xb + T.adv(avrB) < PAPER_W - 34) T.str(avrB, xb, y);
     else { y += adv + 1.4 * F; T.str(avrB, padL, y); }
     T.stepEnd();
 
@@ -19260,7 +19526,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈0,0020 W/m^2=2,0 mW/m^2';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19381,7 +19647,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈25°';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19434,7 +19700,7 @@
       [['så svaret får två.']]
     ]));
     var avrB = '≈0,53 Hz';
-    if (xIns2 + T.adv(avrB) < PAPER_W - 6) T.str(avrB, xIns2, y);
+    if (xIns2 + T.adv(avrB) < PAPER_W - 34) T.str(avrB, xIns2, y);
     else { y += adv + 1.2 * F; T.str(avrB, padL, y); }
     T.stepEnd();
 
@@ -19619,7 +19885,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈110 Hz';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19713,7 +19979,7 @@
       [['om det i mikrotesla.']]
     ]));
     var omS = '=16 µT';
-    if (xIns + T.adv(omS) < PAPER_W - 6) T.str(omS, xIns, y);
+    if (xIns + T.adv(omS) < PAPER_W - 34) T.str(omS, xIns, y);
     else { y += adv + 1.2 * F; T.str(omS, padL, y); }
     T.stepEnd();
 
@@ -19774,9 +20040,12 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    xIns = T.str('=2,2·10^−^5 T=22 µT',
+    /* µT-ledet radbryts — på samma rad nådde det in i högerpilens zon */
+    xIns = T.str('=2,2·10^−^5 T',
                  T.fracH('2,2', '0,020', T.str('B=2·10^−^7·', padL, y), y)
                    + 0.12 * F, y);
+    y += 3.0 * F;
+    xIns = T.str('=22 µT', padL + 30, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -19855,7 +20124,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈29 µT';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -19949,7 +20218,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈0,015 T=15 mT';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -20279,7 +20548,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈1,4 T';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -20368,7 +20637,7 @@
       [['bekvämare i mikronewton.']]
     ]));
     var omS = '=15 µN';
-    if (xIns + T.adv(omS) < PAPER_W - 6) T.str(omS, xIns, y);
+    if (xIns + T.adv(omS) < PAPER_W - 34) T.str(omS, xIns, y);
     else { y += adv + 1.2 * F; T.str(omS, padL, y); }
     T.stepEnd();
 
@@ -20513,7 +20782,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈1,8·10^−^5 T=18 µT';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -20594,7 +20863,10 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    var xIns = T.str('e=0,20·0,80·0,85·10^−^3=1,36·10^−^4 V', padL, y);
+    /* slutledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('e=0,20·0,80·0,85·10^−^3', padL, y);
+    y += 2.1 * F;
+    T.str('=1,36·10^−^4 V', padL + 24, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.6 * F), bw, [
@@ -20770,7 +21042,10 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('F=0,80·0,40·0,15=0,048 N=48 mN', padL, y);
+    /* mN-ledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('F=0,80·0,40·0,15=0,048 N', padL, y);
+    y += 2.1 * F;
+    T.str('=48 mN', padL + 30, y);
     T.stepEnd();
 
     y += adv + 1.7 * F;
@@ -21038,7 +21313,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈−0,27 V';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -21350,7 +21625,11 @@
     T.str('Väljer ett varvtal', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('N_2=100 ⇒ N_1=11,5·100=1 150 varv', padL, y);
+    /* uträkningen radbryts efter ⇒-ledet — på samma rad nådde den in i
+     * högerpilens zon vid arkkanten */
+    T.str('N_2=100 ⇒ N_1=11,5·100', padL, y);
+    y += 2.1 * F;
+    T.str('=1 150 varv', padL + 30, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -22004,7 +22283,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈31°';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -23038,9 +23317,12 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('≈2,9·10^3 m',
-          T.fracH('2·6,67·10^−^1^1·1,99·10^3^0', '(3,00·10^8)^2',
-                  T.str('r_s=', padL, y), y) + 0.12 * F, y);
+    /* avrundningen radbryts FÖRE ledet — efter det breda bråket nådde
+     * den in i högerpilens zon vid arkkanten */
+    T.fracH('2·6,67·10^−^1^1·1,99·10^3^0', '(3,00·10^8)^2',
+            T.str('r_s=', padL, y), y);
+    y += 3.0 * F;
+    T.str('≈2,9·10^3 m', padL + 30, y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
@@ -23239,7 +23521,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈7,9 m/s';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -23587,7 +23869,7 @@
       [['bekvämare mått här.']]
     ]));
     var avrS = '≈0,083 m=8,3 cm';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -23956,7 +24238,7 @@
       [['värdesiffror.']]
     ]));
     var avrS = '≈1,4 m/s';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -25013,7 +25295,8 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: 10 N åt den största kraftens håll', padL, y), y);
+    /* kortad svarsrad — den längre lydelsen nådde in i högerpilens zon */
+    T.underline(T.str('Svar: 10 N åt största kraftens håll', padL, y), y);
     T.stepEnd();
 
     /* ---- c) vinkelräta ---- */
@@ -25373,7 +25656,11 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('F_R=1 200·1,666...=2 000 N=2,0 kN', padL, y);
+    /* omvandlingen till kN radbryts FÖRE ledet — på samma rad nådde den
+     * in i högerpilens zon vid arkkanten (se REGEL: PILZONEN) */
+    T.str('F_R=1 200·1,666...=2 000 N', padL, y);
+    y += 2.1 * F;
+    T.str('=2,0 kN', padL + 30, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -25531,7 +25818,7 @@
       [['får två.']]
     ]));
     var avrS = '≈350 N=0,35 kN';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -25911,7 +26198,7 @@
       [['värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈8,2 kN';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -26004,7 +26291,7 @@
       [['värdesiffror.']]
     ]));
     var avrS = '≈130 N=0,13 kN';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -26826,7 +27113,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈3 100 Nm=3,1 kNm';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -26985,7 +27272,7 @@
       [['värdesiffror.']]
     ]));
     var avrS = '≈790 Nm=0,79 kJ';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -27182,7 +27469,7 @@
       [['7,0 m/s har två värdesiffror.']]
     ]));
     var avrS = '≈72 N';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -27655,7 +27942,7 @@
       [['värdesiffror.']]
     ]));
     var avrS = '≈240 W=0,24 kW';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -27786,7 +28073,7 @@
       [['svaret får två.']]
     ]));
     var avrS = '≈1,5 MJ';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -28095,7 +28382,10 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('P_n=0,92·2,889...·10^8=2,658...·10^8 W', padL, y);
+    /* slutledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('P_n=0,92·2,889...·10^8', padL, y);
+    y += 2.1 * F;
+    T.str('=2,658...·10^8 W', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -28316,7 +28606,7 @@
       [['0,45 kg har två värdesiffror.']]
     ]));
     var avrS = '≈1 300 N=1,3 kN';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -28771,7 +29061,11 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('W=32·9,82·2,5+0,35·272,139...·5,0', padL, y);
+    /* friktionsledet radbryts FÖRE operatorn — på samma rad nådde det
+     * in i högerpilens zon vid arkkanten */
+    T.str('W=32·9,82·2,5', padL, y);
+    y += 2.1 * F;
+    T.str('+0,35·272,139...·5,0', padL + 24, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
@@ -28870,7 +29164,10 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('m=19,3·10^3·3,375·10^−^6=0,0651... kg', padL, y);
+    /* slutledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('m=19,3·10^3·3,375·10^−^6', padL, y);
+    y += 2.1 * F;
+    T.str('=0,0651... kg', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -29608,7 +29905,10 @@
       [['Nu sätter jag in de två']],
       [['krafterna i formeln.']]
     ]));
-    T.str('F_S=0,1396...-0,0585...=0,0811... N', padL, y);
+    /* slutledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('F_S=0,1396...-0,0585...', padL, y);
+    y += 2.1 * F;
+    T.str('=0,0811... N', padL + 24, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
@@ -30091,7 +30391,7 @@
       [['värdesiffror.']]
     ]));
     var avrS = '≈3,1 MJ';
-    if (xIns + T.adv(avrS) < PAPER_W - 6) T.str(avrS, xIns, y);
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
     T.stepEnd();
 
@@ -30604,7 +30904,9 @@
     var xb = T.fracH('+5,0+(−3,0)', '2', T.str('Q=', padL, y), y);
     xb = T.str('=', xb + 0.10 * F, y);
     xb = T.fracH('+2,0', '2', xb, y);
-    T.str('=+1,0 nC', xb + 0.10 * F, y);
+    /* slutledet radbryts — efter bråken nådde det in i högerpilens zon */
+    y += 3.0 * F;
+    T.str('=+1,0 nC', padL + 24, y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -32190,7 +32492,10 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('U=5,0·10^4·0,080=4 000 V=4,0 kV', padL, y);
+    /* kV-ledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('U=5,0·10^4·0,080=4 000 V', padL, y);
+    y += 2.1 * F;
+    T.str('=4,0 kV', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -32303,7 +32608,10 @@
     T.str('b) Spänning = potentialskillnad', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('U=|V_C-V_A|=|−18-6,0|=|−24|=24 V', padL, y);
+    /* slutleden radbryts — på samma rad nådde de in i högerpilens zon */
+    T.str('U=|V_C-V_A|=|−18-6,0|', padL, y);
+    y += 2.1 * F;
+    T.str('=|−24|=24 V', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -32786,7 +33094,9 @@
       ['b) ^2_1H', 1, 1, 'en proton och en neutron', '2-1=1 neutron'],
       ['c) ^4He', 2, 2, 'två protoner och två neutroner',
        'He: 4-2=2 neutroner'],
-      ['d) Beryllium-9', 4, 5, 'fyra protoner och fem neutroner',
+      /* "fyra protoner, fem neutroner" — med "och" nådde svarsraden in
+       * i högerpilens zon vid arkkanten */
+      ['d) Beryllium-9', 4, 5, 'fyra protoner, fem neutroner',
        'Be: 9-4=5 neutroner']
     ];
     var bubblor = [
@@ -33157,9 +33467,11 @@
       [['vanlig faktor — då går det att']],
       [['lösa ut.']]
     ]));
-    T.str('=1 520,424... år',
-          T.fracH('5 730·lg 0,832', 'lg 0,5', T.str('t=', padL, y), y)
-            + 0.12 * F, y);
+    /* uträkningsledet radbryts — efter bråket nådde det in i höger-
+     * pilens zon vid arkkanten */
+    T.fracH('5 730·lg 0,832', 'lg 0,5', T.str('t=', padL, y), y);
+    y += 3.0 * F;
+    T.str('=1 520,424... år', padL + 24, y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
@@ -33375,7 +33687,10 @@
     y = klam.yEnd;
 
     y += adv + 2.2 * F;
-    T.str('Δm=2,01594-2,01355=0,00239 u', padL, y);
+    /* slutledet radbryts — på samma rad nådde det in i högerpilens zon */
+    T.str('Δm=2,01594-2,01355', padL, y);
+    y += 2.1 * F;
+    T.str('=0,00239 u', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
@@ -34577,6 +34892,13 @@
                    kalkylranta: layoutKalkylranta,
                    arligtsparande: layoutArligtsparande,
                    billan: layoutBillan,
+                   /* ma1b kapitel 3 — KPI och index (bara nivå 1b) */
+                   indextal: layoutIndextal,
+                   kpiomrakning: layoutKpiomrakning,
+                   /* ma1b kapitel 5 — Tolka och granska tabeller och
+                    * diagram (bara nivå 1b) */
+                   cirkelandel: layoutCirkelandel,
+                   avhuggenaxel: layoutAvhuggenaxel,
                    /* ma1c kapitel 4 — Räta linjer och funktioner */
                    bilverkstad: layoutBilverkstad,
                    tankamoped: layoutTankamoped,

@@ -196,5 +196,3 @@ andelen = delen/hela och hela = delen/andelen.
   rak amortering?
 - Kan du summera en kolumn i ett kalkylblad, t.ex. med SUM-funktionen,
   för att få lånets totala kostnad?
-</content>
-</invoke>

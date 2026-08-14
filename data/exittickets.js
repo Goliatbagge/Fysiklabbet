@@ -11403,6 +11403,143 @@ window.EXITTICKETS = {
   },
 ],
 
+// ── Matematik nivå 1b: egna avsnitt (delade avsnitt hämtar sina
+// exit tickets från ma1c via aliaskartan MA1B_ALIAS) ────────────
+
+'ma1b-3.4': [
+  {
+    question: 'Vilket indextal har basåret i en indexserie?',
+    choices: [
+      '100',
+      '0',
+      '1',
+      'Det beror på vilket år som väljs',
+    ],
+    correct: 0,
+    why: [
+      'Basårets värde divideras med sig självt och multipliceras med 100 — det blir alltid 100.',
+      'Index 0 skulle betyda att värdet var noll under basåret.',
+      'Kvoten är 1, men indextal anges gånger 100 — alltså 100.',
+      'Vilket år som helst kan väljas till basår, men basåret får ändå alltid index 100.',
+    ],
+  },
+  {
+    question: 'Priset på en vara har indextalet 140, med 2015 som basår. Vad betyder det?',
+    choices: [
+      'Priset är 40 % högre än år 2015',
+      'Priset är 140 % högre än år 2015',
+      'Priset är 140 kr',
+      'Priset är 40 kr högre än år 2015',
+    ],
+    correct: 0,
+    why: [
+      'Index 140 ligger 40 enheter över basårets 100 — en ökning med 40 % (förändringsfaktor 1,40).',
+      'De första 100 enheterna är basårets egen nivå — bara det som ligger över 100 är ökning.',
+      'Ett indextal är en jämförelse med basåret, inte ett pris i kronor.',
+      'Indexenheterna är procent av basårets pris, inte kronor.',
+    ],
+  },
+  {
+    question: 'Vad mäter konsumentprisindex (KPI)?',
+    choices: [
+      'Den allmänna prisnivån på hushållens varor och tjänster, jämförd med basåret',
+      'Hur mycket lönerna har ökat sedan basåret',
+      'Statens inkomster från skatter',
+      'Räntan på ett genomsnittligt sparkonto',
+    ],
+    correct: 0,
+    why: [
+      'SCB prissätter en stor varukorg med det hushållen köper och jämför med basåret 1980 — stiger KPI råder inflation.',
+      'Löneutvecklingen mäts separat — KPI handlar om priser. Kvoten lön/KPI ger reallönen.',
+      'KPI byggs av butikspriser, hyror och taxor — inte av skatteintäkter.',
+      'Räntor är inte varupriser — de ingår inte som sparränta i KPI.',
+    ],
+  },
+  {
+    question: 'En lön på 25 000 kr från år A ska räknas om till år B:s penningvärde. KPI är 300 år A och 360 år B. Vilket uttryck är rätt?',
+    choices: [
+      '$25\\ 000 \\cdot \\dfrac{360}{300}$',
+      '$25\\ 000 \\cdot \\dfrac{300}{360}$',
+      '$25\\ 000 + (360 - 300)$',
+      '$25\\ 000 \\cdot 360$',
+    ],
+    correct: 0,
+    why: [
+      'Kvoten nya årets index genom gamla årets index är förändringsfaktorn mellan åren — här $\\frac{360}{300} = 1{,}2$.',
+      'Den kvoten räknar åt fel håll — den skulle ta lönen bakåt i tiden, från år B till år A.',
+      'Indexenheter kan inte adderas till kronor — omräkningen är en multiplikation med en faktor.',
+      'Att multiplicera med hela indextalet ger ett orimligt stort belopp — det är kvoten mellan indextalen som är faktorn.',
+    ],
+  },
+],
+
+'ma1b-5.1': [
+  {
+    question: 'Vad är den relativa frekvensen för ett svar i en undersökning?',
+    choices: [
+      'Frekvensen delad med det totala antalet',
+      'Frekvensen multiplicerad med det totala antalet',
+      'Antalet gånger svaret förekommer',
+      'Skillnaden mellan största och minsta frekvensen',
+    ],
+    correct: 0,
+    why: [
+      'Relativ frekvens = frekvens/totalt antal — andelen av alla svar, ofta angiven i procent.',
+      'Multiplikation ger ett stort tal utan tolkning — andelar fås genom division.',
+      'Det är den vanliga frekvensen. Den relativa frekvensen sätter antalet i förhållande till helheten.',
+      'Det måttet beskriver spridning, inte hur vanligt ett enskilt svar är.',
+    ],
+  },
+  {
+    question: 'Vilken diagramtyp passar bäst när delarna tillsammans utgör en helhet, som andelen röster per parti?',
+    choices: [
+      'Cirkeldiagram',
+      'Linjediagram',
+      'Spridningsdiagram',
+      'Frekvenstabell',
+    ],
+    correct: 0,
+    why: [
+      'Hela cirkeln är 100 % och varje sektor en andel — perfekt när delarna summerar till en helhet.',
+      'Linjediagram visar hur ett värde ändras över tid, inte hur en helhet fördelas.',
+      'Spridningsdiagram visar samband mellan två variabler, inte andelar.',
+      'En tabell kan förstås visa samma data, men frågan gäller diagramtyp — och tabellen ger ingen visuell jämförelse av andelarna.',
+    ],
+  },
+  {
+    question: 'Ett stapeldiagram har en y-axel som börjar vid 90 i stället för 0. Vad blir effekten?',
+    choices: [
+      'Små skillnader mellan staplarna ser mycket större ut än de är',
+      'Staplarna blir för låga och skillnaderna försvinner',
+      'Ingen effekt — förhållandet mellan staplarna bevaras alltid',
+      'Värdena i diagrammet blir felaktiga',
+    ],
+    correct: 0,
+    why: [
+      'Bara det som sticker upp ovanför 90 syns — en ökning från 96 till 104 kan se ut som en flerdubbling.',
+      'Effekten är den motsatta — skillnaderna blåses upp, inte krymper.',
+      'Förhållandet mellan staplarnas HÖJDER ändras just för att basen kapas bort.',
+      'Värdena är korrekta — det är det visuella intrycket som blir skevt. Därför måste man alltid kolla var axeln börjar.',
+    ],
+  },
+  {
+    question: 'Vad ska de relativa frekvenserna i en undersökning summera till?',
+    choices: [
+      '1, alltså 100 %',
+      'Det totala antalet svar',
+      '50 %',
+      'Det beror på antalet kategorier',
+    ],
+    correct: 0,
+    why: [
+      'Alla andelar tillsammans utgör hela undersökningen — summan är alltid 1. Bra som räknekontroll.',
+      'Det är de vanliga frekvensernas summa. De relativa frekvenserna är andelar och summerar till 1.',
+      'Hälften är bara en godtycklig andel — helheten är alltid 100 %.',
+      'Oavsett hur många kategorier som finns delar de på samma helhet.',
+    ],
+  },
+],
+
 // ── Kapitel 4: Räta linjer och funktioner ─────────────────────
 
 'ma1c-4.1': [

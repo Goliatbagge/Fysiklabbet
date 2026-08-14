@@ -34,7 +34,7 @@ exemplet nedan.
 
 ::: exempel "Exempel 1 — Släktmiddagen i Geogebra"
 **På en släktmiddag är åldrarna 1, 3, 4, 8, 15, 27, 30, 33, 36, 41,
-42, 44, 46, 72 och 72 år. Använd ett digitalt verktyg för att<br>a) bestämma minsta värdet, nedre kvartil, median, övre kvartil och största värdet&emsp;&emsp;b) avgöra hur gammal man ska vara för att tillhöra de 10 % äldsta&emsp;&emsp;c) rita ett lådagram över åldrarna**
+42, 44, 46, 72 och 72 år. Använd ett digitalt verktyg för att<br>a) bestämma minsta värdet, nedre kvartil, median, övre kvartil och största värdet<br>b) avgöra hur gammal man ska vara för att tillhöra de 10 % äldsta<br>c) rita ett lådagram över åldrarna**
 
 **a)** Vi startar Geogebra, klickar på knappen "Växla till kalkylblad"
 i den översta menyraden och skriver in värdena i den vänstra kolumnen.

@@ -31,7 +31,7 @@ leda till A.
 :::
 
 ::: exempel "Exempel 1 — Taxen och hunden"
-**Betrakta meningen "Om det är en tax, så är det en hund".<br>a) Skriv meningen med logiska symboler.&emsp;&emsp;b) Är meningen en implikation eller en ekvivalens?**
+**Betrakta meningen "Om det är en tax, så är det en hund".<br>a) Skriv meningen med logiska symboler.<br>b) Är meningen en implikation eller en ekvivalens?**
 
 **a)** Påståendena som kopplas ihop är "det är en tax" och "det är en
 hund".
@@ -77,7 +77,7 @@ Implikationen gäller alltså åt båda håll och vi har då en ekvivalens.
 :::
 
 ::: exempel "Exempel 3 — Stämmer implikationerna?"
-**Avgör om följande implikationer stämmer.<br>a) $2x + 5 = 11 \implies x = 3$&emsp;&emsp;b) man äter godis ⟹ man får hål i tänderna&emsp;&emsp;c) $x^2 = 25 \implies x = 5$&emsp;&emsp;d) $x^3 = 27 \implies x = 3$**
+**Avgör om följande implikationer stämmer.<br>a) $2x + 5 = 11 \implies x = 3$<br>b) man äter godis ⟹ man får hål i tänderna<br>c) $x^2 = 25 \implies x = 5$<br>d) $x^3 = 27 \implies x = 3$**
 
 **a)** Vi löser ekvationen för att undersöka om lösningen entydigt är
 $x = 3$:

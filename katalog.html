@@ -54,6 +54,19 @@
         const EXITTICKETS = window.EXITTICKETS || {};
         const VIS_INDEX = window.VISUALISERINGAR_INDEX || {};
 
+        // Matematik nivå 1b delar innehåll med 1c (se MA1B_SPEC i
+        // data/katalog.js): spegla teori, övningar, exit tickets och
+        // visualiseringar via aliaskartan så att ALLA uppslag på ma1b-id
+        // träffar 1c-innehållet. Egna 1b-avsnitt (t.ex. ma1b-3.4) saknas i
+        // kartan och slås upp direkt som vanligt.
+        const MA1B_ALIAS = window.MA1B_ALIAS || {};
+        for (const [bId, cId] of Object.entries(MA1B_ALIAS)) {
+            if (TEORI[bId] === undefined && TEORI[cId] !== undefined) TEORI[bId] = TEORI[cId];
+            if (OVNINGAR[bId] === undefined && OVNINGAR[cId] !== undefined) OVNINGAR[bId] = OVNINGAR[cId];
+            if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
+            if (VIS_INDEX[bId] === undefined && VIS_INDEX[cId] !== undefined) VIS_INDEX[bId] = VIS_INDEX[cId];
+        }
+
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
         // Annars tolkar marked LaTeX-escape som \; \, \! och dyl. som vanlig
         // text, vilket gör att t.ex. \; blir ";". Vi byter ut math mot
@@ -485,6 +498,7 @@
         function courseCode(courseName) {
             if (courseName === 'Fysik nivå 1') return 'fy1';
             if (courseName === 'Fysik nivå 2') return 'fy2';
+            if (courseName === 'Matematik nivå 1b') return 'ma1b';
             if (courseName === 'Matematik nivå 1c') return 'ma1c';
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
             if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
@@ -586,6 +600,7 @@
                                             <svg className="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
                                         </button>
                                         <div className="lab-nav-dd-undermeny">
+                                            <a href="katalog.html?id=ma1b">Nivå 1b</a>
                                             <a href="katalog.html?id=ma1c">Nivå 1c</a>
                                             <a href="katalog.html?id=ma2c">Nivå 2c</a>
                                         </div>
@@ -1793,7 +1808,10 @@
                 setError(null);
                 loadVisModule(meta.fil).then(() => {
                     if (cancelled || !hostRef.current) return;
-                    const mod = (window.VISUALISERINGAR || {})[id];
+                    // Aliasade 1b-avsnitt: modulen registrerar sig under sitt
+                    // eget (1c-)id — fall tillbaka på det.
+                    const mod = (window.VISUALISERINGAR || {})[id]
+                        || (window.VISUALISERINGAR || {})[MA1B_ALIAS[id]];
                     if (mod && mod.mount) {
                         instance = mod.mount(hostRef.current);
                     } else {
@@ -2374,6 +2392,7 @@
         const HASH_COURSES = {
             fy1: ['Fysik', 'Fysik nivå 1'],
             fy2: ['Fysik', 'Fysik nivå 2'],
+            ma1b: ['Matematik', 'Matematik nivå 1b'],
             ma1c: ['Matematik', 'Matematik nivå 1c'],
             ma2c: ['Matematik', 'Matematik nivå 2c'],
             ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
@@ -2395,7 +2414,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

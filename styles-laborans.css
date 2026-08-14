@@ -702,38 +702,61 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
     line-height: 1.55;
 }
 
-.lab-welcome-actions {
-    margin-top: 28px;
+/* Kursväljaren i heron: ett ämne per grupp — serifrubrik ovanpå en tunn
+   linjal med ett kort accentstreck, nivåknapparna i rad under. Ersatte
+   den platta raden med sju likadana knappar när Matematik nivå 1b kom
+   till (2026-08-14) — ämnesrubriken bär ämnesnamnet så att knapparna
+   kan vara korta ("Nivå 1b" i stället för "Matematik nivå 1b"). */
+.lab-welcome-courses {
+    margin-top: 30px;
     display: flex;
-    gap: 12px;
+    gap: 20px 40px;
     flex-wrap: wrap;
 }
 
-/* Notis i heron om att sajten fortfarande byggs ut. Diskret ton: samma
-   mjuka bläckfärg som ingressen, avgränsad med en tunn linje till vänster
-   i stället för en ruta — den ska informera, inte konkurrera med
-   knappraden ovanför. */
-.lab-welcome-notis {
-    margin-top: 26px;
-    max-width: 640px;
-    padding-left: 14px;
-    border-left: 2px solid var(--lab-line-strong);
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--lab-ink-soft);
+.lab-course-group {
+    min-width: 0;
 }
 
-.lab-welcome-notis .lab-mono-label {
+.lab-course-subject {
     display: block;
-    margin-bottom: 2px;
+    font-family: var(--lab-font-display);
+    font-size: 21px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--lab-ink);
+    padding-bottom: 9px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--lab-line-strong);
+    position: relative;
 }
 
-/* Notisens länk får sin accentfärg via inline-stil i index.html — precis som
-   nyhetslänken i ingressen strax ovanför. Skäl: den globala regeln
-   `body.laborans a:not(.lab-tab-3):not(.lab-section-item)` (rad 80) sätter
-   color: inherit, och :not() räknas in i specificiteten → (0,3,2). En
-   klassregel här skulle alltså tyst förlora och länken renderas i
-   brödtextfärg. Lägg inte tillbaka någon `.lab-welcome-notis a { color: … }`. */
+.lab-course-subject::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 28px;
+    height: 2px;
+    background: var(--lab-accent);
+}
+
+.lab-course-levels {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Flera nivårader i samma ämnesgrupp = olika spår (b-spåret, c-spåret …)
+   som separeras i höjdled. */
+.lab-course-levels + .lab-course-levels {
+    margin-top: 8px;
+}
+
+.lab-course-levels .lab-btn {
+    padding: 9px 16px;
+    font-size: 13.5px;
+}
 
 /* Hero-logotypen till höger om texten. mix-blend-mode: multiply låter
    bildens egen pappersvita bakgrund smälta in i sidbakgrunden utan skarv. */

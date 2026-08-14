@@ -33,7 +33,7 @@ Om ett tal är skrivet i grundpotensform gäller för tal
 :::
 
 ::: exempel "Exempel 1 — Skriv i grundpotensform"
-**Skriv i grundpotensform<br>a) 8 000 000 000&emsp;&emsp;b) 743 000&emsp;&emsp;c) 0,0009&emsp;&emsp;d) 0,000024**
+**Skriv i grundpotensform<br>a) 8 000 000 000<br>b) 743 000<br>c) 0,0009<br>d) 0,000024**
 
 ::: handskrift
 typ: grundpotens
@@ -89,7 +89,7 @@ En bokstav som ersätter en tiopotens och sätts framför en enhet kallas
 :::
 
 ::: exempel "Exempel 2 — Skriv med lämpligt prefix"
-**Skriv med lämpligt prefix<br>a) 2 000 000 000 000 B&emsp;&emsp;b) 0,0047 l&emsp;&emsp;c) 270 000 N&emsp;&emsp;d) 0,000082 g**
+**Skriv med lämpligt prefix<br>a) 2 000 000 000 000 B<br>b) 0,0047 l<br>c) 270 000 N<br>d) 0,000082 g**
 
 ::: handskrift
 typ: prefix

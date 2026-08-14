@@ -166,4 +166,3 @@ möjliga fall:
   bara med siffror?
 - Kontrollerar du ditt svar genom att sätta in båda värdena i båda de
   ursprungliga ekvationerna?
-</content>

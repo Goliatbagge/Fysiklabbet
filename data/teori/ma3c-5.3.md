@@ -114,7 +114,7 @@ $$
 **Grafen till den räta linjen $f(x) = 0{,}5x + 2$ är ritad i ett
 koordinatsystem. Tillsammans med $x$-axeln, linjen $x = 2$ och linjen
 $x = 6$ bildar grafen ett skuggat område.<br>
-a) Beräkna den skuggade arean.&emsp;&emsp;b) Beräkna
+a) Beräkna den skuggade arean.<br>b) Beräkna
 $\displaystyle\int_2^6 (0{,}5x + 2)\, dx$ utifrån grafen.**
 
 **a)** Vi delar in det skuggade området i en rektangel och en triangel,
@@ -141,7 +141,7 @@ anges med någon enhet).
 **Grafen till $f(x) = 1 - x$ är ritad i ett koordinatsystem. Tillsammans
 med $x$-axeln och linjen $x = 6$ bildar grafen ett skuggat område mellan
 $x = 1$ och $x = 6$. Bestäm<br>
-a) den skuggade arean&emsp;&emsp;b) $\displaystyle\int_1^6 (1 - x)\, dx$.**
+a) den skuggade arean<br>b) $\displaystyle\int_1^6 (1 - x)\, dx$.**
 
 **a)** Området är en triangel. Grafen skär $x$-axeln vid $x = 1$ (då
 $f(1) = 1 - 1 = 0$), så triangelns bas sträcker sig från $x = 1$ till

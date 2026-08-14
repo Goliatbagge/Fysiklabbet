@@ -46,7 +46,7 @@ definierat.
 :::
 
 ::: exempel "Exempel 1 — Exponenten noll"
-**Beräkna<br>a) $25^0$&emsp;&emsp;b) $4^0 + (-7)^0$**
+**Beräkna<br>a) $25^0$<br>b) $4^0 + (-7)^0$**
 
 ::: handskrift
 typ: exponentnoll
@@ -107,7 +107,7 @@ exponenten".
 :::
 
 ::: exempel "Exempel 2 — Negativa exponenter"
-**Beräkna utan räknare<br>a) $4^{-2}$&emsp;&emsp;b) $5^{-1}$**
+**Beräkna utan räknare<br>a) $4^{-2}$<br>b) $5^{-1}$**
 
 ::: handskrift
 typ: negexponent
@@ -193,7 +193,7 @@ dvs. $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
 :::
 
 ::: exempel "Exempel 5 — Bråk med negativa exponenter"
-**Beräkna<br>a) $\left(\dfrac{3}{4}\right)^{-1}$&emsp;&emsp;b) $\left(\dfrac{4}{5}\right)^{-2}$**
+**Beräkna<br>a) $\left(\dfrac{3}{4}\right)^{-1}$<br>b) $\left(\dfrac{4}{5}\right)^{-2}$**
 
 ::: handskrift
 typ: brakinvers

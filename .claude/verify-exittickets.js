@@ -27,6 +27,7 @@ const sections = [];
 for (const subj of Object.values(WK.KATALOG)) {
     for (const [courseName, course] of Object.entries(subj.courses || {})) {
         const code = courseName === 'Fysik nivå 2' ? 'fy2'
+                   : courseName === 'Matematik nivå 1b' ? 'ma1b'
                    : courseName === 'Matematik nivå 1c' ? 'ma1c'
                    : courseName === 'Matematik nivå 2c' ? 'ma2c'
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
@@ -43,14 +44,19 @@ for (const subj of Object.values(WK.KATALOG)) {
     }
 }
 
-// Täckning
+// Täckning. Matematik nivå 1b delar innehåll med 1c: aliasade avsnitt
+// (WK.MA1B_ALIAS, ma1b-id → ma1c-id) täcks av 1c-posten och ska INTE ha
+// någon egen post i exittickets.js.
+const ALIAS = WK.MA1B_ALIAS || {};
 for (const id of sections) {
-    if (!ET[id] || !Array.isArray(ET[id]) || ET[id].length === 0) {
+    const cid = ALIAS[id] || id;
+    if (!ET[cid] || !Array.isArray(ET[cid]) || ET[cid].length === 0) {
         errors.push(`SAKNAS: ${id} har ingen exit ticket`);
     }
 }
 for (const id of Object.keys(ET)) {
     if (!sections.includes(id)) warnings.push(`OKÄND: ${id} finns inte i katalogen`);
+    if (ALIAS[id]) errors.push(`DUBBLETT: ${id} är aliasat till ${ALIAS[id]} — posten ska ligga där, inte under ma1b-id`);
 }
 
 // Regexar

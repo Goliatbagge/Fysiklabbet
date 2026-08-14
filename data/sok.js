@@ -26,6 +26,7 @@
   function courseCode(courseName) {
     if (courseName === 'Fysik nivå 1') return 'fy1';
     if (courseName === 'Fysik nivå 2') return 'fy2';
+    if (courseName === 'Matematik nivå 1b') return 'ma1b';
     if (courseName === 'Matematik nivå 1c') return 'ma1c';
     if (courseName === 'Matematik nivå 2c') return 'ma2c';
     if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';

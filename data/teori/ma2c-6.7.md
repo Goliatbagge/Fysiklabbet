@@ -60,7 +60,7 @@ nedan.**
 | 2010 | 6,922 |
 | 2020 | 7,794 |
 
-**Skapa ett spridningsdiagram och ta fram en regressionsmodell som är<br>a) linjär&emsp;&emsp;b) exponentiell&emsp;&emsp;c) Vilken av modellerna beskriver sambandet bäst?**
+**Skapa ett spridningsdiagram och ta fram en regressionsmodell som är<br>a) linjär<br>b) exponentiell<br>c) Vilken av modellerna beskriver sambandet bäst?**
 
 **a)** Vi matar in värdena i Geogebras kalkylblad (tänk på att
 decimaltal skrivs med punkt), markerar värdena, klickar på "blå

@@ -57,7 +57,7 @@ logaritmer, precis som vid exponentialekvationer i Matematik nivå 2c.
 **Temperaturen $y$ °C hos en maträtt som placerats i en ugn ges av
 $y = e^{kx} - 19$, där $x$ är antalet minuter i ugnen och $k$ en
 konstant.<br>
-a) Efter 20 minuter är maten 70 °C. Bestäm konstanten $k$.&emsp;&emsp;b)
+a) Efter 20 minuter är maten 70 °C. Bestäm konstanten $k$.<br>b)
 Bestäm och tolka $y'(15)$.**
 
 **a)** Att maten efter 20 minuter är 70 °C betyder att när $x = 20$ är

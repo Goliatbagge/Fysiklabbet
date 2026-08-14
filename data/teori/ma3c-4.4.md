@@ -76,7 +76,7 @@ I en punkt där
 
 ::: exempel "Exempel 1 — Inflexionspunkt och konvexitet"
 **Funktionen $f(x) = x^3 - 6x^2 + 7x$ är given.<br>
-a) Bestäm inflexionspunktens koordinater.&emsp;&emsp;b) I vilket
+a) Bestäm inflexionspunktens koordinater.<br>b) I vilket
 intervall är funktionen konvex?**
 
 **a)** I inflexionspunkten är andraderivatan lika med noll. Vi tar fram
@@ -133,7 +133,7 @@ $$
 ::: exempel "Exempel 2 — Inflexionspunkt från grafen till $f(x)$ eller $f'(x)$"
 **Ange $x$-koordinaten för inflexionspunkten till funktionen $f(x)$.<br>
 a) Grafen till $y = f(x)$ har extrempunkter där $x = -1$ och
-$x = 1$.&emsp;&emsp;b) Grafen till $y = f'(x)$ har en extrempunkt
+$x = 1$.<br>b) Grafen till $y = f'(x)$ har en extrempunkt
 (minimum) där $x = 1$.**
 
 **a)** Inflexionspunkten för funktionen $f(x)$ ges av när grafen till

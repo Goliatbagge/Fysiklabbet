@@ -58,7 +58,7 @@ $$
 
 ::: exempel "Exempel 1 — Derivatans definition"
 **Funktionen $f(x) = x^2$ är given. Bestäm<br>
-a) $f'(5)$&emsp;&emsp;b) tangentens lutning då $x = 5$.**
+a) $f'(5)$<br>b) tangentens lutning då $x = 5$.**
 
 **a)** Vi ställer upp derivatans definition, sätter därefter $a = 5$ och
 förenklar.

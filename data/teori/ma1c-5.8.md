@@ -41,7 +41,7 @@ Komplementhändelser är användbara i uppgifter där vi ska beräkna
 sannolikheten för **minst en** eller **åtminstone en**.
 
 ::: exempel "Exempel 1 — Ange komplementhändelsen"
-**Vad är komplementhändelsen till att<br>a) det regnar?&emsp;&emsp;b) dra ett hjärter ur en kortlek?&emsp;&emsp;c) slå minst en femma på en tärning?**
+**Vad är komplementhändelsen till att<br>a) det regnar?<br>b) dra ett hjärter ur en kortlek?<br>c) slå minst en femma på en tärning?**
 
 ::: handskrift
 typ: komplementhandelse

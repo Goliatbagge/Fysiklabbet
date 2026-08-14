@@ -58,7 +58,10 @@ node .claude/verify-exittickets.js
 # KÖR FÖRE COMMIT vid nya eller ändrade scener! Bygger varje scens
 # aktlista i Node (utan webbläsare, via HANDSKRIFT.scen) och mäter att
 # allt bläck ligger innanför arket, att inget hamnar i inställningsrutans
-# mobilzon (arkets övre högra hörn), att tankebubblorna inte skymmer något
+# mobilzon (arkets övre högra hörn) eller i stega-pilarnas kantband
+# (pilzonen: x > PAPER_W−34 — pilarna följer skrollen i höjdled, så hela
+# högerremsan är förbjuden; "27 700" blev "27 70" bakom framåtknappen),
+# att tankebubblorna inte skymmer något
 # som redan skrivits — och att inget tecken saknar glyf i GLYPHS (en
 # saknad bokstav ritas inte alls men tar plats: "FÖRSTÄRKS" blev
 # "FÖRST RKS"). Utan argument granskas alla scener som teorin länkar.
@@ -350,6 +353,40 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
    till avsnittet ("förra avsnittet", gamla titeln, begrepp som flyttats).
 7. **Verifierare före commit**: `node .claude/verify-figur-bounds.js` och
    `node .claude/verify-no-white-outline.js` om figurer ändrats.
+
+## ⚠️ KRITISK: Matematik nivå 1b delar innehåll med nivå 1c
+
+**Matematik nivå 1b är en HÄRLEDD kurs — nästan alla genomgångar är
+identiska med nivå 1c och lagras bara EN gång, i ma1c-filerna.** Kursen
+byggs programmatiskt av `MA1B_SPEC` i slutet av `data/katalog.js`, som
+också genererar aliaskartan `window.MA1B_ALIAS` (`ma1b-id → ma1c-id`,
+t.ex. `ma1b-4.6 → ma1c-4.7` — numreringen SKILJER sig där avsnitt
+tagits bort eller lagts till). Sidorna (`katalog.html`) speglar teori,
+övningar, exit tickets och visualiseringar via kartan vid sidladdning.
+
+- **Ändra ALDRIG ett delat avsnitt "för 1b"** — en ändring i ma1c-filen
+  (md, övningar, exit tickets, visualisering, pennlösning) slår
+  automatiskt igenom i 1b. Det är hela poängen: inget dubbelarbete.
+- **Skapa ALDRIG poster med ma1b-id** i `data/ovningar.js`/
+  `data/exittickets.js`/`data/teori/` för ett avsnitt som finns i
+  aliaskartan — `verify-exittickets.js` ger DUBBLETT-fel.
+- **Egna 1b-filer finns bara för:** `ma1b-3.4` (KPI och index),
+  `ma1b-5.1` (Tolka och granska tabeller och diagram) samt
+  sammanfattningarna `ma1b-3.S`, `ma1b-4.S`, `ma1b-5.S` (kapitlen
+  skiljer sig där). Dessa underhålls som vanligt under sina ma1b-id.
+- **Sammanfattningarna är det enda manuella synkstället:** ändras
+  gemensamt kapitelinnehåll i `ma1c-3.S`/`4.S`/`5.S` ska samma ändring
+  göras i ma1b-versionen (en kommentar i filerna påminner).
+- **Skillnaderna mot 1c** (styrs helt av `MA1B_SPEC`): kapitel 6
+  (Trigonometri + vektorer) och 1c-avsnittet 4.6 (Parallella och
+  vertikala linjer samt allmän form) ingår inte; 3.4 KPI och index samt
+  5.1 Tolka och granska tabeller och diagram är egna 1b-avsnitt;
+  efterföljande avsnitt är omnumrerade.
+- **Nytt/borttaget avsnitt i 1b?** Redigera ENDAST `MA1B_SPEC` (ordning,
+  `fran:`-nummer, egna avsnitt) — numrering och aliaskartan räknas om
+  automatiskt. Lägger 1c till ett nytt avsnitt i kapitel 3–5 måste det
+  manuellt läggas in i spec-listan (kapitel 1–2 använder `'alla'` och
+  följer med av sig självt).
 
 ## ⚠️ KRITISK: Navigation i ALLA HTML-filer
 
@@ -916,33 +953,34 @@ function fmtNum(n, d) {
 }
 ```
 
-### Deluppgifter (a, b, c …) i frågor
+### Deluppgifter (a, b, c …) i frågor — VARJE deluppgift på EGEN rad
 
-När en frågestam fortsätter i punkter a), b), c) … som **bygger vidare på
-stammen** (t.ex. "Vad är SI-enheten för a) hastighet, b) volym?") ska
-deluppgifterna stå på **ny rad** efter stammen — inte inbäddade i samma
-mening. Lägg en hård radbrytning **`<br>`** direkt före "a)". Markdown-
+**Varje deluppgift börjar på en egen rad — b) får ALDRIG ligga på samma
+rad som a)** (uttryckligt önskemål 2026-08-14, ersätter den tidigare
+regeln där deluppgifterna flödade med `&emsp;&emsp;` emellan: en lång
+a-uppgift fick då b) att börja i slutet av samma rad och radbrytas mitt
+i meningen). Lägg en hård radbrytning **`<br>`** direkt före **varje**
+deluppgiftsbokstav — före "a)", före "b)", före "c)" osv. Markdown-
 pipelinen kör `marked` med `breaks: false` (se `katalog.html`), så ett
-vanligt radslut räcker *inte* — det måste vara `<br>` (eller två avslutande
-blanksteg).
+vanligt radslut räcker *inte* — det måste vara `<br>` (eller två
+avslutande blanksteg).
 
-Deluppgifterna *flödar* sedan som löptext på nästa rad: korta alternativ
-(`a) hastighet b) volym`) ryms bredvid varandra; om de inte får plats
-bryter nästa deluppgift automatiskt till egen rad. Skriv dem alltså som
-vanlig text efter brytningen — inte tvunget en per rad.
-
-**Inget komma mellan deluppgifterna.** Skilj dem i stället åt med en
-tab-liknande lucka **`&emsp;&emsp;`** (två em-blanksteg, ≈ 2 em) så de får
-luft i sidled. Ett vanligt tabbtecken ger ingen synlig bredd i HTML.
-
-- ✓ `**Vad är SI-enheten för<br>a) hastighet&emsp;&emsp;b) volym?**`
-- ✗ `**Vad är SI-enheten för a) hastighet, b) volym?**`
+- ✓ `**Priset var 80 kr år 2010 och 140 kr år 2023.<br>a) Bestäm indextalet år 2023.<br>b) Med hur många procent har priset ökat?**`
+- ✗ `**…<br>a) Bestäm indextalet år 2023.&emsp;&emsp;b) Med hur många procent …**`
+- ✗ `**Vad är SI-enheten för a) hastighet, b) volym?**` (inbäddat i meningen)
 
 Gäller både teori-exemplens frågor (`::: exempel` i `data/teori/*.md`) och
-`question`-strängarna i `data/ovningar.js`. **Undantag:** när a)/b) är
-inflätade som separata satser mitt i en mening ("Vilken a) acceleration får
-vikterna, b) spännkraft …?"), eller redan är en uppräknad lista av korta
-alternativ — då behålls inline-formen.
+`question`-strängarna i `data/ovningar.js` — även när deluppgifterna är
+korta ettordsalternativ (`<br>a) hastighet<br>b) volym`).
+
+**Undantag som behåller inline-formen:**
+
+- **Svarsrader**: den kompakta sammanfattningen i slutet av en lösning
+  skrivs fortfarande på EN rad med `&emsp;&emsp;` som avskiljare —
+  `**Svar:** a) Index 175&emsp;&emsp;b) Priset har ökat med 75 %.`
+  (En svarsrad är kort och är inte en uppgift.)
+- När a)/b) är **inflätade som separata satser mitt i en mening**
+  ("Vilken a) acceleration får vikterna, b) spännkraft …?").
 
 ## Designtänk för simuleringar (5/5-arbetssättet)
 

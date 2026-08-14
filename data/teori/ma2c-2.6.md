@@ -58,7 +58,7 @@ Vi sammanfattar undersökningen:
 | negativ | noll lösningar |
 
 ::: exempel "Exempel 1 — Ange antalet lösningar"
-**Ange antalet lösningar till<br>a) $x^2 + 12x - 13 = 0$&emsp;&emsp;b) $x^2 + 5x + 8 = 0$**
+**Ange antalet lösningar till<br>a) $x^2 + 12x - 13 = 0$<br>b) $x^2 + 5x + 8 = 0$**
 
 **a)** *pq*-formeln ger
 

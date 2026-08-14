@@ -39,7 +39,7 @@ där $e^k = a$ (förändringsfaktorn).
 ::: exempel "Exempel 1 — Tillväxthastighet hos en kaninpopulation"
 **Antalet kaniner $N(t)$ i en population ges av
 $N(t) = 30 \cdot 1{,}84^t$ där $t$ är tiden räknat i veckor.<br>a)
-Beräkna tillväxthastigheten efter 4 veckor.&emsp;&emsp;b) Efter hur lång
+Beräkna tillväxthastigheten efter 4 veckor.<br>b) Efter hur lång
 tid är tillväxthastigheten 100 kaniner/vecka?**
 
 **a)** Tillväxthastigheten efter 4 veckor motsvaras av $N'(4)$. Vi

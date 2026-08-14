@@ -28,7 +28,7 @@ En ekvation där variabeln, t.ex. $x$, är under ett rottecken kallas
 :::
 
 ::: exempel "Exempel 1 — Lös rotekvationerna"
-**Lös<br>a) $\sqrt{x} = 8$&emsp;&emsp;b) $\sqrt{x + 2} = 17$&emsp;&emsp;c) $x + 3\sqrt{x} - 4 = 0$**
+**Lös<br>a) $\sqrt{x} = 8$<br>b) $\sqrt{x + 2} = 17$<br>c) $x + 3\sqrt{x} - 4 = 0$**
 
 **a)** Vi kvadrerar båda led och löser ekvationen:
 

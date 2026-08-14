@@ -47,7 +47,7 @@ v.s.b.
 :::
 
 ::: exempel "Exempel 1 — Utveckla med kvadreringsreglerna"
-**Utveckla<br>a) $(x + 4)^2$&emsp;&emsp;b) $(7 - b)^2$&emsp;&emsp;c) $(3y - 4x)^2$**
+**Utveckla<br>a) $(x + 4)^2$<br>b) $(7 - b)^2$<br>c) $(3y - 4x)^2$**
 
 **a)** Första kvadreringsregeln med $a = x$ och $b = 4$:
 
@@ -81,7 +81,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Utveckla med konjugatregeln"
-**Utveckla<br>a) $(x + 8)(x - 8)$&emsp;&emsp;b) $(3x - 5y)(3x + 5y)$&emsp;&emsp;c) $(9 + 2x)(2x - 9)$**
+**Utveckla<br>a) $(x + 8)(x - 8)$<br>b) $(3x - 5y)(3x + 5y)$<br>c) $(9 + 2x)(2x - 9)$**
 
 **a)** Vi ser att innehållet i parenteserna är lika och att det enda som
 skiljer är tecknet mellan termerna (plus i ena och minus i andra).

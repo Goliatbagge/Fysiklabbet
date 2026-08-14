@@ -56,7 +56,7 @@ För att räkna med potenser ska vi använda **potenslagarna**.
 :::
 
 ::: exempel "Exempel 1 — Tecken och potenser"
-**Beräkna<br>a) $(-9)^2$&emsp;&emsp;b) $-9^2$**
+**Beräkna<br>a) $(-9)^2$<br>b) $-9^2$**
 
 ::: handskrift
 typ: potenstecken

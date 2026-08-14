@@ -22,7 +22,7 @@ Om bråken har
 :::
 
 ::: exempel "Exempel 1 — Samma nämnare"
-**Beräkna<br>a) $\dfrac{1}{13} + \dfrac{2}{13}$&emsp;&emsp;b) $\dfrac{19}{6} - \dfrac{5}{6}$**
+**Beräkna<br>a) $\dfrac{1}{13} + \dfrac{2}{13}$<br>b) $\dfrac{19}{6} - \dfrac{5}{6}$**
 
 ::: handskrift
 typ: samnamnare
@@ -60,7 +60,7 @@ nödvändigtvis den *minsta* gemensamma nämnaren.
 :::
 
 ::: exempel "Exempel 2 — Olika nämnare"
-**Beräkna<br>a) $\dfrac{3}{5} - \dfrac{7}{20}$&emsp;&emsp;b) $\dfrac{2}{5} + \dfrac{1}{3}$**
+**Beräkna<br>a) $\dfrac{3}{5} - \dfrac{7}{20}$<br>b) $\dfrac{2}{5} + \dfrac{1}{3}$**
 
 ::: handskrift
 typ: olikanamnare
@@ -160,7 +160,7 @@ $3\frac{3}{4}$ (3 hela och 3 fjärdedelar). Så $\frac{15}{4}$ (bråkform)
 $= 3\frac{3}{4}$ (blandad form).
 
 ::: exempel "Exempel 4 — Skriv i bråkform"
-**Skriv i bråkform<br>a) $1\dfrac{4}{5}$&emsp;&emsp;b) $3\dfrac{1}{7}$**
+**Skriv i bråkform<br>a) $1\dfrac{4}{5}$<br>b) $3\dfrac{1}{7}$**
 
 ::: handskrift
 typ: brakform

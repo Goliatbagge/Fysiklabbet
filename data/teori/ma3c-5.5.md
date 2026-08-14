@@ -50,7 +50,7 @@ välj läge efter vilken sorts svar uppgiften efterfrågar.
 
 ::: exempel "Exempel 1 — Beräkna en bestämd integral med digitalt hjälpmedel"
 **Beräkna $\displaystyle\int_1^5 (x^2 - 4)\, dx$ med ett digitalt
-hjälpmedel. Svara<br>a) med ett närmevärde&emsp;&emsp;b) exakt.**
+hjälpmedel. Svara<br>a) med ett närmevärde<br>b) exakt.**
 
 **a)** I Geogebras standardläge skriver vi "Integral" och väljer
 *Integral( Funktion, Från x-värde, Till x-värde )* i menyn *Integral*. I

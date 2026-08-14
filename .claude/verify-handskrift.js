@@ -18,6 +18,12 @@
  *      inställningsrutan och helskärmsknappen. Rutan är HTML och behåller
  *      sin pixelstorlek när arket krymper, så på mobil täcker den
  *      x > PAPER_W−310, y < 150. Där får inget bläck ligga.
+ *   2b. PILZONEN — stega-pilarna ligger som smala band i arkets vänster-
+ *      och högerkant (26 px-knapp + 2 px kant) och FÖLJER SKROLLEN i
+ *      höjdled, så hela kantremsan är förbjuden yta oavsett y. Vänster
+ *      band klaras av padL=30 (underlinjer når x≈27); höger band kräver
+ *      att inget bläck når förbi PAPER_W−NAVZON (x > 700 döljs bakom
+ *      framåtknappen — "27 700" blev "27 70", påpekat 2026-08-14).
  *   3. BUBBLOR SKYMMER INGET — en tankebubbla (moln + bulor) får aldrig
  *      ligga över bläck som redan är skrivet när den visas. Skriptet
  *      går igenom akterna i ordning, håller reda på vad som ritats och
@@ -43,6 +49,14 @@ const ROOT = path.resolve(__dirname, '..');
 const BUMP = 25;          /* molnbulornas utstick utanför rektangeln */
 const LINE_H = 24, PAD_H = 18;
 const ZON_X = 310, ZON_Y = 150;   /* inställningsrutans mobilzon */
+const NAVZON = 34;        /* stega-pilarnas band vid höger arkkant.
+                             Knappen är 26 px + 2 px kant i CSS-pixlar;
+                             i en smal spalt (ark renderat ~600 px brett)
+                             motsvarar det ~34 viewBox-enheter. Samma
+                             gräns som motorns radbrytningsvillkor
+                             (PAPER_W−34) i handskrift.js. */
+const NAVZON_V = 24;      /* vänster gräns: padL=30 minus underlinjens
+                             och jittrets utstick (~27) med marginal */
 const MARGINAL = 2;       /* tillåten överskjutning i px (pennbredd) */
 
 /* Scener som fanns FÖRE den här kontrollen skrevs (2026-08-09) och som
@@ -164,6 +178,20 @@ function granska(HK, typ) {
         fel.push('bläck i inställningsrutans mobilzon (x>' + zonX +
                  ', y<' + ZON_Y + '): [' +
                  p[0].toFixed(0) + ',' + p[1].toFixed(0) + ']');
+      }
+      /* pilzonen (2b): kantbanden är förbjudna oavsett y — pilarna
+       * följer skrollen och kan hamna på vilken rad som helst */
+      for (const pt of a.pts) {
+        if (pt[0] > W - NAVZON + MARGINAL) {
+          fel.push('bläck i högerpilens zon (x>' + (W - NAVZON) + '): [' +
+                   pt[0].toFixed(0) + ',' + pt[1].toFixed(0) + ']');
+          break;
+        }
+        if (pt[0] < NAVZON_V - MARGINAL) {
+          fel.push('bläck i vänsterpilens zon (x<' + NAVZON_V + '): [' +
+                   pt[0].toFixed(0) + ',' + pt[1].toFixed(0) + ']');
+          break;
+        }
       }
     } else if (a.kind === 'show' && a.obj && a.obj.bubble) {
       const o = a.obj;

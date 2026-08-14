@@ -66,7 +66,7 @@ standardavvikelser" = $181 - 8 - 8 = 165$. Vi markerar området mellan
 <svg viewBox="6 22 280 134" width="280" height="134" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En normalfördelningskurva för mäns längder med markerat område mellan 173 och 189 centimeter, som täcker 68,2 procent."><path d="M 100,130 L 100,69.4 L 110,54.5 L 120,41.8 L 130,33.1 L 140,30 L 150,33.1 L 160,41.8 L 170,54.5 L 180,69.4 L 180,130 Z" fill="#8fb8d8" opacity="0.6"/><line x1="10" y1="130" x2="270" y2="130" stroke="#1f2530" stroke-width="1.4"/><polygon points="278,130 269,126 269,134" fill="#1f2530"/><path d="M 20,128.9 L 30,127.7 L 40,125.6 L 50,122 L 60,116.5 L 70,108.4 L 80,97.5 L 90,84.2 L 100,69.4 L 110,54.5 L 120,41.8 L 130,33.1 L 140,30 L 150,33.1 L 160,41.8 L 170,54.5 L 180,69.4 L 190,84.2 L 200,97.5 L 210,108.4 L 220,116.5 L 230,122 L 240,125.6 L 250,127.7 L 260,128.9" fill="none" stroke="#1f2530" stroke-width="1.8"/><text x="60" y="146" font-size="10" text-anchor="middle" fill="#1f2530">165</text><text x="100" y="146" font-size="10" text-anchor="middle" fill="#1f2530">173</text><text x="140" y="146" font-size="10" text-anchor="middle" fill="#1f2530">181</text><text x="180" y="146" font-size="10" text-anchor="middle" fill="#1f2530">189</text><text x="220" y="146" font-size="10" text-anchor="middle" fill="#1f2530">197</text><text x="284" y="146" font-size="10" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
-**Hur stor andel är<br>a) mellan 173 cm och 189 cm?&emsp;&emsp;b) längre än 197 cm?**
+**Hur stor andel är<br>a) mellan 173 cm och 189 cm?<br>b) längre än 197 cm?**
 
 **a)** Vi ser då att mellan 173 cm och 181 cm ligger 34,1 %. Mellan 181 cm
 och 189 cm ligger också 34,1 %. Mellan 173 cm och 189 cm ligger alltså
@@ -86,7 +86,7 @@ standardavvikelser" och över detta ligger 2,3 %.
 
 ::: exempel "Exempel 2 — Längden hos vuxna kvinnor (Geogebra)"
 **Vuxna kvinnor har medellängden 165,5 cm med standardavvikelsen
-6,15 cm. Hur<br>a) stor andel av kvinnorna är mellan 160 och 170 cm?&emsp;&emsp;b) lång ska en kvinna vara för att vara längre än 99 % av alla kvinnor?**
+6,15 cm. Hur<br>a) stor andel av kvinnorna är mellan 160 och 170 cm?<br>b) lång ska en kvinna vara för att vara längre än 99 % av alla kvinnor?**
 
 **a)** Vi löser uppgiften med Geogebra.
 

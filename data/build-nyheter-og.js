@@ -331,6 +331,7 @@ function loadBegrepp() {
 const KURSKOD = {
   'Fysik nivå 1': 'fy1',
   'Fysik nivå 2': 'fy2',
+  'Matematik nivå 1b': 'ma1b',
   'Matematik nivå 1c': 'ma1c',
   'Matematik nivå 2c': 'ma2c',
   'Matematik fortsättning nivå 1c': 'ma3c',

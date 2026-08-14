@@ -62,7 +62,7 @@ $f'(x) = 4e^{4x}$ och att $f(x) = e^{5x}$ har derivatan $f'(x) = 5e^{5x}$.
 
 ::: exempel "Exempel 1 — Derivera exponentialfunktioner med basen e"
 **Derivera<br>
-a) $f(x) = 3e^x$&emsp;&emsp;b) $f(x) = e^{4x}$&emsp;&emsp;c) $f(x) = 2e^{5x}$&emsp;&emsp;d) $f(x) = 12e^{x/3}$**
+a) $f(x) = 3e^x$<br>b) $f(x) = e^{4x}$<br>c) $f(x) = 2e^{5x}$<br>d) $f(x) = 12e^{x/3}$**
 
 **a)** När vi deriverar en exponentialfunktion med basen $e$ **utan**
 koefficient i exponenten blir derivatan densamma som funktionen.
@@ -195,7 +195,7 @@ fungerar.
 
 ::: exempel "Exempel 2 — Derivera exponentialfunktioner med annan bas än e"
 **Derivera<br>
-a) $f(x) = 12^x$&emsp;&emsp;b) $f(x) = 3 \cdot 7^x$&emsp;&emsp;c) $f(x) = 4^{3x}$&emsp;&emsp;d) $f(x) = 5 \cdot 8^{6x}$**
+a) $f(x) = 12^x$<br>b) $f(x) = 3 \cdot 7^x$<br>c) $f(x) = 4^{3x}$<br>d) $f(x) = 5 \cdot 8^{6x}$**
 
 **a)** Vi har en exponentialfunktion, så vi skriver först av funktionen.
 Eftersom vi har en annan bas än $e$ multiplicerar vi med $\ln$ för basen,

@@ -64,7 +64,7 @@ Om vi ska ange en sträcka, men enhet saknas, så används beteckningen
 l.e. (längdenheter). Se en av exempeluppgifterna nedan.
 
 ::: exempel "Exempel 1 — Tangens ur sidorna"
-**Beräkna för triangeln nedan<br>a) tan $u$&emsp;&emsp;b) tan $v$.**
+**Beräkna för triangeln nedan<br>a) tan $u$<br>b) tan $v$.**
 
 ::: figur
 <svg viewBox="34 22 226 152" width="226" height="152" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rätvinklig triangel med lodräta kateten 3 centimeter, vågräta kateten 4 centimeter och hypotenusan 5 centimeter. Vinkeln u ligger överst och vinkeln v nere till höger."><polygon points="90,30 90,150 250,150" fill="#cfe3f2" stroke="#1f2530" stroke-width="1.5"/><polyline points="90.0,138.0 102.0,138.0 102.0,150.0" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M106.0,42.0 A20,20 0 0 1 90.0,50.0" fill="none" stroke="#1f2530" stroke-width="1.3"/><path d="M228.0,150.0 A22,22 0 0 1 232.4,136.8" fill="none" stroke="#1f2530" stroke-width="1.3"/><text x="104" y="58" font-size="13" fill="#1f2530"><tspan font-style="italic">u</tspan></text><text x="212" y="142" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">v</tspan></text><text x="78" y="95" font-size="13" text-anchor="end" fill="#1f2530">3 cm</text><text x="170" y="168" font-size="13" text-anchor="middle" fill="#1f2530">4 cm</text><text x="182" y="80" font-size="13" fill="#1f2530">5 cm</text></svg>

@@ -39,7 +39,7 @@ $$
 :::
 
 ::: exempel "Exempel 1 — Enkla andra- och tredjegradsekvationer"
-**Lös<br>a) $x^2 = 64$&emsp;&emsp;b) $x^2 = 10$&emsp;&emsp;c) $x^2 = -9$&emsp;&emsp;d) $x^3 = 343$&emsp;&emsp;e) $x^3 = -27$&emsp;&emsp;f) $3x^2 - 2{,}31 = 17{,}97$**
+**Lös<br>a) $x^2 = 64$<br>b) $x^2 = 10$<br>c) $x^2 = -9$<br>d) $x^3 = 343$<br>e) $x^3 = -27$<br>f) $3x^2 - 2{,}31 = 17{,}97$**
 
 ::: handskrift
 typ: enklagrad
@@ -102,7 +102,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Kvadraten och kuben"
-**Bestäm sidan hos en<br>a) kvadrat med arean $4\,096\ \mathrm{cm^2}$&emsp;&emsp;b) kub med volymen $4\,096\ \mathrm{cm^3}$**
+**Bestäm sidan hos en<br>a) kvadrat med arean $4\,096\ \mathrm{cm^2}$<br>b) kub med volymen $4\,096\ \mathrm{cm^3}$**
 
 ::: handskrift
 typ: kvadratkub

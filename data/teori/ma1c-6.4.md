@@ -34,7 +34,7 @@ punkterna. Sträckan motsvarar hypotenusan som beräknas med Pythagoras
 sats. Vinkeln beräknas med trigonometri.
 
 ::: exempel "Exempel 1 — Sträcka och vinkel i koordinatsystemet"
-**En sträcka dras mellan punkterna (−2, 1) och (2, 4). Bestäm<br>a) sträckans längd&emsp;&emsp;b) vinkeln mellan sträckan och *x*-axeln.**
+**En sträcka dras mellan punkterna (−2, 1) och (2, 4). Bestäm<br>a) sträckans längd<br>b) vinkeln mellan sträckan och *x*-axeln.**
 
 ::: handskrift
 typ: strackavinkel

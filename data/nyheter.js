@@ -91,7 +91,7 @@ const NYHETER_ALL = [
     id: "2026-08-14-diamant-i-flytande-kol",
     date: "2026-08-14",
     title: "Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori",
-    deck: "Ett laserskott förångade ytterlagret på en pytteliten diamant och skickade en tryckvåg rakt genom den: omkring tio miljoner atmosfärer, hetare än solens yta, alltihop på en miljarddels sekund. Först nu stämmer den uppmätta smälttemperaturen med kvantmekanikens beräkningar — och mätningen bekräftar att kolet beter sig som vatten, med den fasta formen flytande ovanpå vätskan.",
+    deck: "Ett laserskott förångade ytterlagret på en pytteliten diamant och skickade en tryckvåg rakt genom den: omkring tio miljoner atmosfärer, hetare än solens yta, alltihop på en miljarddels sekund. Först nu stämmer den uppmätta smälttemperaturen med kvantmekanikens beräkningar — och mätningen bekräftar att diamant beter sig som vatten: den fasta formen flyter ovanpå vätskeformen.",
     category: "Materialfysik",
     readingTime: "6 min",
     image: "nyheter/bilder/2026-08-14-diamant-i-flytande-kol.jpg",

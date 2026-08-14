@@ -744,7 +744,7 @@ window.BEGREPP = [
   {
     id: 'foton',
     term: 'Foton',
-    former: ['foton', 'fotonen', 'fotoner', 'fotonerna', 'ljuspartikel', 'ljuspartikeln', 'ljuspartiklar'],
+    former: ['foton', 'fotonen', 'fotoner', 'fotonerna', 'ljuspartikel', 'ljuspartikeln', 'ljuspartiklar', 'röntgenfoton', 'röntgenfotonen', 'röntgenfotoner', 'röntgenfotonerna'],
     kort: 'Ljusets minsta odelbara energipaket — en partikel utan massa som alltid rör sig med ljusets hastighet. Energin bestäms av ljusets frekvens, alltså av färgen.',
     relaterade: ['vaglangd', 'laser', 'exciterat-tillstand'],
     body: [
@@ -1243,6 +1243,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Längst ner i det periodiska systemet står en rad som ofta bryts ut och placeras för sig: aktiniderna, de femton ämnena med atomnummer 89 till 103, från aktinium till lawrencium. De hör ihop därför att de fyller på samma svårtillgängliga elektronskal och därför beter sig kemiskt ganska likt. Torium och uran finns i berggrunden, plutonium i spårmängder, men allt tyngre än så är i praktiken människotillverkat.' },
       { type: 'p', html: 'Gemensamt för hela gruppen är att kärnorna är radioaktiva. Ju fler protoner en kärna har, desto hårdare trycker deras inbördes elektriska frånstötning isär den, och till slut vinner frånstötningen över den starka kraft som håller ihop kärnpartiklarna. Livslängderna faller därför dramatiskt uppåt i listan: uran-238 har en halveringstid på 4,5 miljarder år, medan flera fermiumisotoper klarar sig i timmar eller mindre. Utöver alfa- och betasönderfall dyker ett nytt sätt att gå sönder upp — spontan fission, där kärnan helt enkelt delar sig i två ungefär lika stora delar.' },
       { type: 'p', html: 'De tyngsta aktiniderna tillverkas genom att ett tungt ämne bombarderas med neutroner i en reaktor. Varje infångad neutron kan följas av ett betasönderfall som höjer grundämnesnumret med ett steg, och på så vis kan man klättra uppåt — men bara till en gräns. Vid fermium, nummer 100, tar metoden slut, eftersom nästa steg i kedjan sönderfaller alldeles för snabbt. Tyngre ämnen än så måste i stället byggas genom att slå ihop två kärnor i en accelerator, och då bildas de en atom i taget.' }
+    ]
+  },
+  {
+    id: 'chockvag',
+    term: 'Chockvåg',
+    former: ['chockvåg', 'chockvågen', 'chockvågor', 'chockvågorna', 'stötvåg', 'stötvågen', 'stötvågor', 'stötvågorna', 'chockkomprimera', 'chockkomprimerad', 'chockkomprimerat', 'chockkomprimerade', 'chockkompression', 'chockkompressionen'],
+    kort: 'En tryckvåg som går fortare än ljudet i materialet den färdas genom. I stället för att bygga upp trycket mjukt slår den till som en vägg: tryck, densitet och temperatur hoppar nästan omedelbart till ett nytt värde.',
+    relaterade: ['plasma', 'laser'],
+    body: [
+      { type: 'p', html: 'En vanlig ljudvåg är en mild förtätning som vandrar genom luft, vatten eller ett fast ämne. Trycket stiger en aning, sjunker tillbaka, och materialet är oförändrat efteråt. Men en förtätning färdas fortare där ämnet redan är hoptryckt, och det får en kraftig våg att hinna ikapp sig själv: framkanten brantar upp tills den är i praktiken lodrät. Då har man en chockvåg. Det är ljudbangen från ett överljudsplan, tryckvågen från en explosion och smällen när en piska knäpper.' },
+      { type: 'p', html: 'Det som gör chockvågen speciell är att den inte bara flyttar materialet, den ändrar det. En partikel som vågen passerar går på bråkdelen av en miljondels sekund från ett tillstånd till ett annat: högre tryck, högre densitet och betydligt högre temperatur. Uppvärmningen är oundviklig — en del av rörelseenergin blir kvar som värme i stället för att lämnas tillbaka. Därför kan en tillräckligt kraftig chockvåg smälta, förånga eller till och med jonisera ett ämne den går igenom.' },
+      { type: 'p', html: 'Just den egenskapen gör chockvågor till ett av få sätt att studera materia vid tryck som annars bara finns inne i planeter och stjärnor. I laboratoriet skapas de genom att en laserpuls förångar ytan på ett prov, så att resten trycks inåt av rekylen, eller genom att extremt starka magnetfält slungar en metallplatta mot provet. Tillståndet varar bara en miljarddels sekund innan allt faller isär, så alla mätinstrument måste utlösas i samma ögonblick.' }
+    ]
+  },
+  {
+    id: 'fasdiagram',
+    term: 'Fasdiagram',
+    former: ['fasdiagram', 'fasdiagrammet', 'fasdiagrammen', 'smältkurva', 'smältkurvan', 'smältkurvor', 'faslinje', 'faslinjen', 'faslinjer', 'trippelpunkt', 'trippelpunkten'],
+    kort: 'En karta över vilken form ett ämne antar — fast, flytande eller gas — vid olika tryck och temperaturer. Linjerna på kartan visar exakt var ämnet byter form.',
+    relaterade: ['absoluta-nollpunkten', 'plasma'],
+    body: [
+      { type: 'p', html: 'Vatten kokar vid 100&nbsp;°C, men bara vid normalt lufttryck. På ett högt berg kokar det tidigare, i en tryckkokare senare. Kokpunkten är alltså inte en egenskap hos vattnet ensamt, utan hos vattnet vid ett visst tryck. Ritar man upp trycket på ena axeln och temperaturen på den andra får man en karta där varje punkt svarar mot ett tryck och en temperatur, och där man kan färglägga vilken form ämnet har just där. Den kartan är ett fasdiagram.' },
+      { type: 'p', html: 'Kartan delas av linjer. Smältkurvan skiljer det fasta från det flytande, ångkurvan skiljer vätska från gas, och där alla tre möts ligger trippelpunkten — det enda tryck och den enda temperatur där ämnet kan vara fast, flytande och gasformigt samtidigt. Att korsa en linje kostar energi utan att temperaturen ändras: all tillförd värme går åt till att bryta bindningarna i stället för att öka rörelsen.' },
+      { type: 'p', html: 'De flesta ämnens smältkurva lutar uppåt åt höger — höjer man trycket krävs högre temperatur för att smälta. Vatten är det berömda undantaget och lutar åt andra hållet, eftersom is tar större plats än vattnet det bildas av. Vid riktigt höga tryck kan dessutom helt nya fasta former dyka upp, med atomerna staplade på ett annat sätt, så att ett fasdiagram ofta har långt fler områden än de tre man först väntar sig.' }
+    ]
+  },
+  {
+    id: 'isjatte',
+    term: 'Isjätte',
+    former: ['isjätte', 'isjätten', 'isjättar', 'isjättarna', 'isjätteplanet', 'isjätteplaneten', 'diamantregn', 'diamantregnet'],
+    kort: 'En planet av Neptunus och Uranus typ: betydligt större än jorden, men uppbyggd mest av vatten, metan och ammoniak i stället för av väte och helium som gasjättarna.',
+    relaterade: ['exoplanet', 'fasdiagram'],
+    body: [
+      { type: 'p', html: 'I vårt solsystem finns fyra stora planeter bortom asteroidbältet, men de är inte av samma sort. Jupiter och Saturnus består nästan helt av väte och helium och kallas gasjättar. Neptunus och Uranus är mindre och tyngre per volym, och huvuddelen av deras massa är i stället vatten, metan och ammoniak. Astronomerna kallar de ämnena ”is”, trots att det inte är någon is i vardaglig mening — därav namnet isjätte.' },
+      { type: 'p', html: 'Namnet lurar. Inne i en isjätte är det varmt: temperaturen räknas i tusentals grader och trycket i miljontals gånger jordens lufttryck. Vattnet där är varken is eller vätska i vanlig bemärkelse utan en het, tät och elektriskt ledande vätska. Att den leder ström är förmodligen förklaringen till planeternas märkligt sneda och krokiga magnetfält, som inte alls är prydligt riktade som jordens.' },
+      { type: 'p', html: 'Under de förhållandena förväntas metanet brytas sönder. Kolet som blir över kan klumpa ihop sig till kristaller som sjunker inåt genom den lättare omgivningen — ett ”diamantregn”, som har återskapats i laboratorium men aldrig setts direkt. Ingen sond har flugit in i en isjätte, så nästan allt vi tror oss veta om deras inre kommer från beräkningar plus högtrycksförsök på jorden. Utanför solsystemet verkar planeter i den här storleksklassen dessutom vara den allra vanligaste sorten.' }
     ]
   }
 ];

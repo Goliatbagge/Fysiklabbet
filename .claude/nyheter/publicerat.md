@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-14 | `2026-08-14-diamant-i-flytande-kol` | Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori | Lawrence Livermore National Laboratory (pressmeddelande 2026-08-13) / Phys.org (2026-08-13) / Nature Physics (M. Millot, F. Coppari, A. Lazicki, Y.-J. Kim, O. L. Landen, V. A. Smalyuk, P. M. Celliers, J. H. Eggert, 2026-08-13, DOI 10.1038/s41567-026-03413-1) / Crossref (titel, författarlista och publiceringsdatum) |
 | 2026-08-13 | `2026-08-13-rugbybollen-i-atomkarnan` | Ingen har sett in i en atomkärna — ändå vet fysiker nu att kärnan i grundämne 100 är formad som en rugbyboll | Johannes Gutenberg-universitetet Mainz (pressmeddelande 2026-08-07) / Phys.org (2026-08-07) / EurekAlert! / Physical Review Letters 136, 192501 (M. Urquiza-González m.fl., 15 maj 2026, DOI 10.1103/2813-b49x) / arXiv:2511.20921 (hela metoddelen läst i förhandsversionen) |
 | 2026-08-12 | `2026-08-12-magnetisk-tratt` | Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen | NSF NRAO (pressmeddelande 2026-08-11) / Phys.org (2026-08-11) / Nature Communications (T.-C. Ching, Z.-Y. Li, Q. Zhang, J. M. Girart m.fl., 2026-08-11, DOI 10.1038/s41467-026-75950-5) / arXiv:2604.12597 (metoddelen läst i förhandsversionen) |
 | 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | Fysiker har byggt en spegel som ljuger — vad man än håller framför den svarar den med en åtta | Phys.org (2026-08-10, UCLA Engineering Institute for Technology Advancement) / Nature Communications (Y. Li, S. Chen, B. Bai, A. Ozcan, 2026-08-07, DOI 10.1038/s41467-026-76488-2, CC BY 4.0) / arXiv:2410.15521 (metoddelen läst i PDF) |
@@ -416,3 +417,49 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Bifynd som inte användes: DESI:s största 2D-karta över universum, X(2370) som
 > glueball-dominerad partikel (BESIII), kosmiska filament som gräns för mörk
 > materias sönderfall till gravitoner, samt de fyra bortvalda ovan — lagda i ko.md.
+
+> **2026-08-14 — diamanten som flyter i sin egen smälta (LLNL).** Vald ur
+> Phys.org-svepet för 13 augusti framför fyra andra dagsfärska fysiknyheter:
+> Muon g-2:s nya gräns för myonens elektriska dipolmoment (bortvald — bara
+> arXiv-preprint, ingen kollegial granskning ännu; lagd i ko.md), koppars
+> smältbeteende för fusionsdesign (samma tema men tunnare), enaxlig töjning i
+> en altermagnet (altermagnetism kördes 07-26) och en teoretisk ram för
+> riktad ljusstyrning. Diamantnyheten vann på tre saker: den är kollegialt
+> granskad (Nature Physics, publicerad samma dag), den vilar på densitet,
+> tryck och fasövergångar — alltså begripligt utan formalism — och den har en
+> vardagsjämförelse som bär hela artikeln (isbiten i vattenglaset).
+>
+> Researchen: Nature-sidan är inloggningsspärrad som vanligt. Titel,
+> författarlista (åtta LLNL-namn) och publiceringsdatum hämtades ur
+> `api.crossref.org/works/10.1038/s41567-026-03413-1`. Ingen arXiv-version
+> hittades och Semantic Scholar hade inte indexerat artikeln än, så
+> sakinnehållet vilar på LLNL:s pressmeddelande, som återges ordagrant i
+> Phys.org-referatet (skrapat i sin helhet) — samtliga fem citat är översatta
+> därifrån.
+>
+> Bilder: BÅDA är riktiga foton, ingen AI. Huvudbilden är laserhallen vid
+> Omega-anläggningen på LLE i Rochester, alltså den anläggning försöken
+> gjordes vid (Daniel Penfield, Wikimedia Commons, CC BY-SA 4.0). Bild 2 är
+> Voyager 2:s klassiska Neptunusporträtt (NASA/JPL, public domain) vid
+> avsnittet om diamantregn.
+>
+> Fyra saker som lätt blir fel i den här nyheten:
+> (a) DEN SKENBARA MOTSÄGELSEN: diamant FLYTER på rent flytande kol, men
+>     SJUNKER som ”diamantregn” inne i en isjätte. Det är inte samma vätska —
+>     inne i planeten faller kristallerna genom en mycket lättare blandning av
+>     väte, metan och het ”is”. Utan den meningen läser artikeln som självmotsägande.
+> (b) Det var MÄTNINGEN som låg fel, inte teorin. Eggert säger rakt ut att de
+>     ursprungliga temperaturvärdena var mer än tusen grader fel (~20 %).
+>     Skriver man ”teorin har rättats” blir hela poängen omvänd.
+> (c) TREDUBBLINGEN av fusionsutbytet är en FÖRUTSÄGELSE ur beräkningar,
+>     villkorad av att övriga felkällor hålls i schack — inte ett uppmätt
+>     resultat. Måste stå uttryckligen.
+> (d) Att inget mellansteg syns gäller EN ENDA chockvåg. Sandias motsatta
+>     resultat är inte motbevisat — poängen är att vägen dit spelar roll, inte
+>     bara tryck och temperatur.
+>
+> Tre nya begrepp: chockvåg, fasdiagram, isjätte (plus röntgenfoton-formerna
+> tillagda i den befintliga foton-posten).
+>
+> Bifynd som inte användes: Muon g-2:s EDM-gräns, koppars smältbeteende och
+> altermagnet-töjningen — lagda i ko.md.

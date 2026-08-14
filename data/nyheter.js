@@ -88,6 +88,87 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-14-diamant-i-flytande-kol",
+    date: "2026-08-14",
+    title: "Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori",
+    deck: "Ett laserskott förångade ytterlagret på en pytteliten diamant och skickade en tryckvåg rakt genom den: omkring tio miljoner atmosfärer, hetare än solens yta, alltihop på en miljarddels sekund. Först nu stämmer den uppmätta smälttemperaturen med kvantmekanikens beräkningar — och mätningen bekräftar att kolet beter sig som vatten, med den fasta formen flytande ovanpå vätskan.",
+    category: "Materialfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-14-diamant-i-flytande-kol.jpg",
+    imageAlt: "Laserhallen vid Omega-anläggningen: långa metallrör i knallblå stativ löper genom en smal hall med orange golv och rack av elektronik längs väggarna.",
+    imageCredit: "Foto: Daniel Penfield / Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["materialfysik", "diamant", "kol", "högtryck", "densitet", "fasövergång", "fusion", "laser", "neptunus", "uranus", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Lawrence Livermore National Laboratory — Melting diamond could unlock triple fusion gain and the secrets of ice giant planets", url: "https://www.llnl.gov/article/54801/melting-diamond-could-unlock-triple-fusion-gain-secrets-ice-giant-planets" },
+      { name: "Phys.org — Melting diamond could unlock triple fusion gain and the secrets of ice giant planets", url: "https://phys.org/news/2026-08-diamond-triple-fusion-gain-secrets.html" },
+      { name: "Nature Physics — originalartikeln", url: "https://www.nature.com/articles/s41567-026-03413-1" }
+    ],
+    research: {
+      citation: "Marius Millot, Federica Coppari, Amy Lazicki, Yong-Jae Kim, Otto L. Landen, Vladimir A. Smalyuk, Peter M. Celliers och Jon H. Eggert, ”Diamond melting in shock compression experiments at 1 TPa pressures”, Nature Physics, publicerad 13 augusti 2026 (DOI 10.1038/s41567-026-03413-1)",
+      url: "https://doi.org/10.1038/s41567-026-03413-1"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 — 5.1 Densitet", href: "katalog.html?id=fy1-5.1" },
+        { label: "Fysik nivå 1 — 5.2 Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Fysik nivå 1 — 6.3 Faser och fasövergångar", href: "katalog.html?id=fy1-6.3" },
+        { label: "Simulering — Densitet", href: "fysik1-densitet-app.html" }
+      ],
+      fragor: [
+        "I tjugo år låg mätvärdet och beräkningen omkring 20 % från varandra, och båda lägren stod fast vid sitt. Vad är det som avgör vilken sida som till slut får ge sig — och varför räckte det inte att bara räkna om?",
+        "Samma diamant, samma tryck och samma temperatur gav olika resultat beroende på om den träffades av en enda chockvåg eller flera. Vad betyder det för tanken att ett ämnes tillstånd bestäms av tryck och temperatur allena?",
+        "Slutsatsen om diamantens smältpunkt vilar på ett svagt röntgenmönster som fanns i ungefär en miljarddels sekund. Vad krävs för att en så kort och svag signal ska duga som bevis?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Diamant är ett av de hårdaste material vi känner till, och ett av de mest motsträviga. Men allt smälter om man pressar och hettar upp det tillräckligt — även diamant. Frågan är bara vid vilken temperatur, och där har experiment och beräkningar varit oense i tjugo år. Nu har ett forskarlag vid Lawrence Livermore National Laboratory i Kalifornien mätt om saken, med ett resultat som ligger i stort sett ovanpå det datorsimuleringarna hela tiden förutsagt.' },
+      { type: 'p', html: 'Frågan är inte akademisk. Diamant är materialet i den lilla kapsel som omsluter bränslet i laserdriven fusionsforskning, och kol antas kristallisera djupt inne i isjättarna Neptunus och Uranus. På båda ställena utsätts ämnet för tryck som saknar all vardaglig motsvarighet.' },
+
+      { type: 'h2', text: 'Tio miljoner atmosfärer på en miljarddels sekund' },
+      { type: 'p', html: 'Försöken gjordes vid Omega-anläggningen på Laboratory for Laser Energetics vid University of Rochester. Principen är brutalt enkel: en kraftig laserpuls förångar det yttersta lagret på ett litet diamantprov. Ångan skjuter utåt, och enligt Newtons tredje lag trycks resten av provet lika hårt inåt. Det som far genom diamanten är en chockvåg.' },
+      { type: 'p', html: 'Trycket bakom vågen nådde omkring $1\\ \\mathrm{TPa}$, alltså 10<sup>12</sup>&nbsp;Pa — ungefär tio miljoner gånger lufttrycket vid havsytan, grovt räknat tre gånger trycket i jordens innersta kärna och mer än i mittpunkten av Neptunus och Uranus. Temperaturen översteg solytans.' },
+      { type: 'quote', html: 'Vi kunde ta pyttesmå diamantprover och chockkomprimera dem till temperaturer hetare än solens yta och tryck högre än i Neptunus och Uranus mittpunkter — och ändå mäta atomstruktur, temperatur, densitet och optisk reflektivitet.', cite: 'Marius Millot, fysiker vid Lawrence Livermore National Laboratory' },
+      { type: 'p', html: 'Haken är att tillståndet inte varar. Det hoptryckta provet håller sig i ungefär en miljarddels sekund innan vågen passerat och allt faller isär. Hela mätningen — röntgendiffraktionen som avslöjar hur atomerna sitter, temperaturen, densiteten — måste rymmas i det fönstret.' },
+
+      { type: 'h2', text: 'Isbitens hemlighet, fast med kol' },
+      { type: 'p', html: 'Densitet är massa per volym, $\\rho = \\dfrac{m}{V}$. Nästan alla ämnen krymper när de stelnar: den fasta formen blir tätare än vätskan och sjunker i sin egen smälta. Vatten är det berömda undantaget. Is har densiteten 0,92&nbsp;g/cm³ mot vattnets 1,00&nbsp;g/cm³, och därför flyter isbitarna i glaset.' },
+      { type: 'p', html: 'För tjugo år sedan visade Jon Eggert och kollegor vid samma laboratorium att kol under extremt tryck gör likadant: diamantens densitet <em>ökar</em> när den smälter. Vätskan är alltså tätare än kristallen.' },
+      { type: 'quote', html: 'Flytande vatten är tätare än is, vilket gör att isbitar flyter. Jons upptäckt betyder att diamant skulle flyta i flytande kol vid höga tryck.', cite: 'Marius Millot' },
+      { type: 'p', html: 'De nya mätningarna bekräftar den slutsatsen. Vätskan är dessutom metallisk — kolatomerna släpper ifrån sig elektroner som kan röra sig fritt, ungefär som i en metall. Det syns i hur väl provet speglar ljus, och just den optiska reflektiviteten var en av storheterna laget mätte under den korta stunden.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-08-14-diamant-i-flytande-kol-2.jpg', alt: 'Neptunus som en jämnt blå glob mot svart bakgrund, med ljusa slöjformade moln och en mörk oval storm strax söder om ekvatorn.', caption: 'Neptunus fotograferad av rymdsonden Voyager 2 år 1989. Djupt inne i isjättar som denna tros kol kristallisera till diamant och sjunka mot centrum.', credit: 'Foto: NASA/JPL (public domain)' },
+
+      { type: 'p', html: 'Just isjättarna är ett av skälen till att någon över huvud taget bryr sig om kolets smältkurva. I Neptunus och Uranus inre bryts metan sönder av trycket, och kolet antas klumpa ihop sig till kristaller som faller inåt — ett ”diamantregn”. Att kristallerna sjunker där men flyter på rent flytande kol är ingen motsägelse: inne i planeten faller de genom en mycket lättare blandning av väte, metan och het ”is”, inte genom smält kol.' },
+      { type: 'p', html: 'Eftersom försöken nådde förbi trycket i isjättarnas mittpunkter finns det nu ett mätunderlag som modellerna av planeternas inre kan vila på i stället för ren extrapolation.' },
+
+      { type: 'h2', text: 'Tusen grader fel' },
+      { type: 'p', html: 'De gamla mätningarna var ett landmärke i sitt fält, men de lämnade efter sig ett problem som inte gick att vifta bort: uppmätt och beräknad smälttemperatur skilde sig åt med omkring 20 %.' },
+      { type: 'quote', html: 'Oavsett vad teoretikerna gjorde — även med de mest avancerade simuleringsteknikerna — kunde de inte återskapa experimenten.', cite: 'Marius Millot' },
+      { type: 'p', html: 'Med kraftigt förbättrade mätinstrument vid Rochester föll gåtan. Den nya smälttemperaturen stämmer nästan perfekt med simuleringarna, och det var alltså mätningen som legat fel hela tiden — med mer än tusen grader.' },
+      { type: 'p', html: 'Avgörande var att laget för första gången kunde följa en chockkomprimerad diamant med röntgendiffraktion ända fram till smältningen. Det är svårare än det låter. Kol är en liten och lätt atom som sprider få röntgenfotoner, så signalen man ska fånga under sin miljarddels sekund är svag.' },
+      { type: 'quote', html: 'Det var frustrerande att upptäcka att våra ursprungliga temperaturmätningar låg mer än tusen grader fel, men det är spännande att se en så dramatisk förbättring av datakvaliteten med våra nya instrument. Ännu bättre: vår ursprungliga slutsats om smältningen har nu bekräftats direkt med röntgendiffraktion.', cite: 'Jon Eggert, fysiker vid Lawrence Livermore National Laboratory' },
+
+      { type: 'h2', text: 'Ingen mellanstation på vägen' },
+      { type: 'p', html: 'Den andra oenigheten gällde vägen till vätskan. Vid Sandia National Laboratories har man pressat ihop diamant med hjälp av extremt starka magnetfält, och de försöken lämnade spår som antydde att kolet tar ett mellansteg: från diamantstruktur till en annan kristallstruktur, och först därefter till vätska. Simuleringar gav samma bild, men ingen hade kunnat mäta atomernas placering direkt och avgöra saken.' },
+      { type: 'p', html: 'De nya röntgenmätningarna visar inget sådant mellansteg. Kolet behåller sin diamantstruktur ända fram till smältningen.' },
+      { type: 'quote', html: 'Vi tror att det beror på att provet inte hinner ändra sig när det bara utsätts för en enda chockvåg. Det förblir fångat i diamantstrukturen.', cite: 'Marius Millot' },
+      { type: 'p', html: 'Det är i sig ett resultat värt att stanna vid. Materialets svar beror inte bara på hur högt trycket och temperaturen är, utan på <em>hur</em> det pressats dit — på vägen genom fasdiagrammet, inte bara på slutpunkten.' },
+
+      { type: 'h2', text: 'Därför bryr sig fusionsforskarna' },
+      { type: 'p', html: 'I laserdriven fusion driver kraftiga laserpulser chockvågor inåt genom en liten diamantkapsel. Kapseln imploderar och pressar ihop bränslet inuti till de tryck och temperaturer som krävs för att atomkärnor ska smälta samman.' },
+      { type: 'p', html: 'För att implosionen ska bli jämn måste den första chockvågen smälta diamanten till en slät, likformig vätska. Blir smältningen ofullständig växer ojämnheterna under implosionen och reaktionen tynar bort. Därför har man tagit det säkra före det osäkra och använt en förhållandevis kraftig första chock.' },
+      { type: 'quote', html: 'Vårt arbete visar att vi skulle kunna använda något långsammare inledande chockvågor och ändå få diamanten att smälta helt i våra implosioner. Det är spännande, eftersom en långsammare chock skulle göra fusionsbränslet mer hoptryckbart. Det ökar i sin tur den största energiutvinning vi kan få ut med samma laserenergi.', cite: 'Marius Millot' },
+      { type: 'p', html: 'Hur mycket? Beräkningarna pekar på en tredubbling av energiutbytet — förutsatt att övriga felkällor går att hålla i schack. Det är alltså en förutsägelse, inte ett uppmätt resultat, och nästa steg blir att pröva den.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Trycket i försöken, omkring 10<sup>12</sup>&nbsp;Pa, motsvarar ungefär tio miljoner gånger lufttrycket vid havsytan.',
+        'Det hoptryckta tillståndet varade omkring en miljarddels sekund. På den tiden hinner ljuset bara 30&nbsp;cm.',
+        'Diamant och grafit består av exakt samma sorts atomer. Hela skillnaden — hårdast respektive så mjukt att det lossnar mot papper — sitter i hur kolatomerna är staplade.',
+        'Härnäst vill laget pressa diamant vid National Ignition Facility för att se var gränsen går när provet träffas av flera chockvågor i följd.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-13-rugbybollen-i-atomkarnan",
     date: "2026-08-13",
     title: "Ingen har sett in i en atomkärna — ändå vet fysiker nu att kärnan i grundämne 100 är formad som en rugbyboll",

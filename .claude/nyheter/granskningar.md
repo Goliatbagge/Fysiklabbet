@@ -5,6 +5,7 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-14 | `2026-08-14-diamant-i-flytande-kol` | RÄTTA FÖRST → GODKÄND | Tre rättelser före publicering (ingressen påstod att flytförmågan var ny — den visades för tjugo år sedan och bekräftas nu; en mening lät läsaren tro att artikeln kände till lagets motiv för reflektivitetsmätningen; ett genusfel i första meningen). Samtliga fem citat och varje siffra stämda av mot LLNL:s pressmeddelande i den ordagranna Phys.org-återgivningen. Titel, författarlista och publiceringsdatum verifierade via Crossref. Kollegialt granskad, Nature Physics 2026-08-13. |
 | 2026-08-13 | `2026-08-13-rugbybollen-i-atomkarnan` | GODKAND | Alla siffror i produktionskedjan, matuppstallningen (RISIKO/PI-LIST), karnmomenten (Q_S, mu), Schmidt-gransen, californium-jamforelsen och modelljamforelsen verifierade mot arXiv:2511.20921. Peer-reviewad, PRL 136, 192501 (15 maj 2026). Inga citat i artikeln. Bilden ar CC BY 2.0 fran Oak Ridge (HFIR), korrekt krediterad.
 | 2026-08-12 | `2026-08-12-magnetisk-tratt` | RÄTTA FÖRST → GODKÄND | Tre precisionsrättelser före publicering (ALMA-lobens storlek i jord–sol-avstånd, jämförelsen mot jordens magnetfält, temperaturintervallet i ordlisteposten om ackretionsskivor). Samtliga siffror verifierade mot arXiv-versionens metoddel, inte mot pressreferatet. Kollegialt granskad i Nature Communications. |
 | 2026-08-11 | `2026-08-11-spegeln-som-ljuger` | RÄTTA FÖRST → GODKÄND | Fyra rättelser före publicering (simulerade kontra uppmätta korrelationer, neuronnätsattackens två felformuleringar, 53,3λ utan angiven våglängd, ”ingen elektronik” i ingressen). Hela metoddelen läst i arXiv-PDF:en; datum, författare och CC BY-licens verifierade via Crossref. Kollegialt granskad, öppet tillgänglig. |
@@ -558,3 +559,72 @@ och inte forskarnas apparat.
    2026-08-05-rubin-mork-materia och rättades samtidigt.
 
 **Utslag efter rättning: GODKÄND.**
+
+
+---
+
+## 2026-08-14 — `2026-08-14-diamant-i-flytande-kol`
+
+**Granskningsläge:** självständig slutgranskning (utgivarrollen), utförd i
+huvudsessionen enligt protokollet i `utgivare.md`.
+
+**Peer review-status:** kollegialt granskad. Nature Physics, ”Diamond melting
+in shock compression experiments at 1 TPa pressures”, publicerad online
+13 augusti 2026, DOI 10.1038/s41567-026-03413-1.
+
+**Källäge:** nature.com omdirigerar till inloggning (303 mot idp.nature.com).
+Ingen arXiv-version finns, och Semantic Scholar hade inte indexerat artikeln
+vid granskningstillfället. Titel, åtta författarnamn, tidskrift och
+publiceringsdatum hämtades därför ur Crossrefs metadata; sakinnehållet vilar
+på LLNL:s pressmeddelande, som Phys.org återger ordagrant och som skrapades i
+sin helhet. Detta är en svaghet och noteras uttryckligen: artikeln bygger inte
+på metoddelen i originalet.
+
+**Verifierat mot källorna:**
+
+- 1 TPa — från originalartikelns egen titel. Omräkningen till ”tio miljoner
+  atmosfärer” kontrollerad: 10^12 / 1,013 · 10^5 = 9,9 · 10^6. OK.
+- ”Tre gånger trycket i jordens innersta kärna” — pressmeddelandets egen
+  formulering; jordens centrum ligger på ~0,36 TPa, alltså 2,8 gånger. OK.
+- ”Hetare än solens yta” och ”högre tryck än i Neptunus och Uranus
+  mittpunkter” — ordagrant ur Millots citat.
+- ”En miljarddels sekund” — pressmeddelandet: ”lasting only a billionth of a
+  second”. Ljusets sträcka på den tiden, 30 cm, kontrollräknad (29,98 cm).
+- ~20 % skillnad mellan uppmätt och beräknad smälttemperatur, och ”mer än
+  tusen grader fel” — båda ordagrant ur pressmeddelandet respektive Eggerts
+  citat. RÄKNEORDSKONTROLL: inga *billion/trillion* förekommer i källan och
+  inga biljon/biljard/triljon i artikeln.
+- Isens och vattnets densiteter (0,92 respektive 1,00 g/cm³) — standardvärden,
+  kontrollerade.
+- Samtliga fem citat (fyra Millot, ett Eggert) jämförda ord för ord mot den
+  engelska källtexten.
+
+**Rättat före publicering:**
+
+1. Ingressen skrev att kolet ”visar sig” bete sig som vatten. Flytförmågan
+   visades av Eggert m.fl. för tjugo år sedan; det nya är att den bekräftas.
+   Ändrat till ”mätningen bekräftar att kolet beter sig som vatten”.
+2. En mening påstod att laget mätte reflektiviteten *därför att* vätskan är
+   metallisk — ett motiv som inte står i källan. Omskriven till att
+   reflektiviteten var en av de storheter som mättes.
+3. ”Diamant är ett av de hårdaste material vi känner till, och den envisaste”
+   — genusfel (material är neutrum). Omskrivet.
+
+**Fällor som bevakades särskilt:**
+
+- Att diamant flyter på rent flytande kol men sjunker som diamantregn inne i
+  en isjätte är ingen motsägelse — det är olika vätskor. Artikeln säger det
+  uttryckligen; utan den meningen läser texten som självmotsägande.
+- Tredubblingen av fusionsutbytet är en beräknad förutsägelse, villkorad av
+  att övriga felkällor hålls i schack. Artikeln skriver ut villkoret och
+  markerar att det inte är ett uppmätt resultat.
+- Att inget kristallint mellansteg syns gäller en ENDA chockvåg. Sandias
+  motsatta resultat är inte motbevisat, och artikeln påstår inte det.
+
+**Bilder:** båda äkta foton med fri licens. Huvudbilden visar laserhallen vid
+Omega-anläggningen på LLE i Rochester — den anläggning där försöken gjordes
+(Daniel Penfield, Wikimedia Commons, CC BY-SA 4.0). Bild 2 är Voyager 2:s
+Neptunusporträtt från 1989 (NASA/JPL, public domain). Ingen AI-bild.
+Brödtexten hänvisar inte till någon bild.
+
+**Utslag: GODKÄND** efter de tre rättelserna.

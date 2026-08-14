@@ -44,6 +44,41 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-14) — kan tas upp senare
+
+- **Publicerad 2026-08-14: diamanten som flyter i sin egen smälta** (LLNL,
+  Nature Physics, DOI 10.1038/s41567-026-03413-1) — se publicerat.md och
+  granskningar.md. OBS för en ev. uppföljare: nature.com är
+  inloggningsspärrad och ingen arXiv-version finns; hela sakinnehållet ligger
+  i LLNL:s pressmeddelande, som Phys.org återger ordagrant.
+
+- **Muon g-2 sätter den skarpaste gränsen hittills för myonens elektriska
+  dipolmoment** (STARK RESERV — men kontrollera peer review-status först).
+  Fermilab-samarbetet har med 25 % av mätdatan fått
+  d_my = (−0,35 ± 0,39) · 10^−19 e·cm, alltså förenligt med noll, och därmed
+  en övre gräns |d_my| < 1,1 · 10^−19 e·cm vid 95 % konfidensnivå — ungefär
+  1,5 gånger skarpare än Brookhavens värde från 2009. Bara den tredje direkta
+  sökningen på femtio år. Ett elektriskt dipolmoment hos myonen vore ett brott
+  mot tidsspegling och skulle peka mot ny fysik bortom standardmodellen, och
+  kopplar till frågan varför universum innehåller mer materia än antimateria.
+  Utmärkta vinklar för gymnasiet: laddade partiklar i magnetfält, spinn,
+  precession, symmetrier och vad det innebär att mäta noll. Bortvald 08-14
+  ENBART för att den bara låg som arXiv-preprint (DOI 10.48550/arxiv.2608.11124)
+  utan kollegial granskning — kolla om den hunnit publiceras. Källa:
+  https://phys.org/news/2026-08-muon-constraints-forbidden-property-muons.html
+  (tillagd 2026-08-14)
+
+- **Koppar smälter inte som man trott — betydelse för framtida fusionsdesign**
+  (phys.org 2026-08-13). Samma familj som diamantnyheten (högtrycks-
+  smältkurvor för fusionskomponenter) men tunnare i pressmaterialet. Källa:
+  https://phys.org/news/2026-08-copper-behavior-insights-future-fusion.html
+  (tillagd 2026-08-14)
+
+- **Enaxlig töjning som ratt för elektronflödet i en altermagnet**
+  (phys.org 2026-08-13). Bortvald för att altermagnetism kördes 2026-07-26.
+  Källa: https://phys.org/news/2026-08-uniaxial-strain-reveals-tune-electron.html
+  (tillagd 2026-08-14)
+
 ## Fynd som inte användes (2026-08-13) — kan tas upp senare
 
 - **Publicerad 2026-08-13: rugbybollen i atomkärnan** (JGU Mainz/GSI/Göteborgs

@@ -81,6 +81,16 @@ node .claude/verify-sok.js
 # nyhetsartiklarna. Se "Begreppsordlista" nedan.
 node .claude/verify-begrepp.js
 
+# Verifiera att fullskärmsknappen ligger ENSAM på sin yta (KÖR FÖRE
+# COMMIT vid nya/ändrade scenknappar eller overlays!) — laddar varje
+# simulering på bred skärm (1280×800), i normalläge OCH fullskärm, och
+# mäter att inget annat interaktivt element (knapp, label, länk, reglage)
+# överlappar .fs-btn:s ruta. Felet har hänt: en äldre sim lade sin egen
+# Play-knapp på 24,24 — rakt bakom .fs-btn (40 px vid 14,14). Se "Inga
+# överlappande objekt" nedan. Kräver dev-servern på port 8000 +
+# puppeteer-core i %TEMP%\pptr-test.
+node .claude/verify-fs-btn.js
+
 # Verifiera mobil-dispositionen i simuleringarna (KÖR FÖRE COMMIT vid
 # ändringar i scener, verktygsrutor eller sektion 8 i
 # styles-laborans-sim.css) — startar 390×744, går in i fullskärm i varje
@@ -323,6 +333,21 @@ Så här bygger du scenen:
    `HANDSKRIFT.mount(el, {typ:'…'}, {instant:true, stegvis:false})` och
    kontrollera figuren, bråkstrecken och att vinkelbågen landar på sina
    ben.
+7. **MATTESCENER SOM LÖSER EKVATIONER ska stödja BÅDA
+   redovisningslägena** — "Båda led" (operationen skrivs med blåpennan i
+   båda led) och "Väggen" (lodrätt blått streck + operationen till höger
+   om raden; elevens val i inställningsrutan, infört 2026-08-15). Läs
+   EKVATIONSREDOVISNING i `handskrift.js` filhuvud: layoutfunktionen
+   läser `cfg.vagg`, använder `T.vaggOp()` för väggstegen och sätter
+   `ekvval: 1` i returobjektet. Kravet är SAMMA ANTAL klicksteg i båda
+   lägena (positionen bevaras via stegindex vid växling). Väggen gäller
+   term-/faktoroperationer (+, −, ·, /) — rotdragningar och
+   upphöjningar skrivs likadant i båda lägena, och ryms inte väggen på
+   raden (pilzonen!) får det steget behålla ledformen. Gäller ENDAST
+   matematik — fysikscener redovisar alltid med båda led.
+   `verify-handskrift.js` granskar båda lägena automatiskt, och
+   ekvval-scener har en HÖGRE inställningsruta: inget bläck med x > 420
+   får ligga ovanför y = 210 (i stället för 150).
 
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
@@ -1220,6 +1245,13 @@ UI-element får aldrig ligga ovanpå varandra. Testa både normalt OCH
 fullskärmsläge på både bred och smal skärm innan klart.
 
 Vanliga fällor:
+- **Övre vänstra hörnet tillhör `.fs-btn` — ensam.** Den globala CSS:en
+  lägger fullskärmsknappen absolut på `top: 14px; left: 14px` (40×40 px;
+  32×32 vid ≤600 px), så en egen absolut-positionerad knapp/etikett på
+  ~`24,24` hamnar RAKT BAKOM den (hänt: en Play-knapp doldes helt).
+  Placera egna overlays till höger om (`left: 66px`) eller under
+  (`top: 66px`) knappen — och kör `node .claude/verify-fs-btn.js`, som
+  mäter just detta i både normalläge och fullskärm.
 - SVG-etikett (t.ex. "Medium 1") kolliderar med fullskärmsknappen i samma
   hörn → flytta etiketten åt höger/nedåt.
 - Flytande panel täcker det eleven faktiskt vill se → toggle-knapp.

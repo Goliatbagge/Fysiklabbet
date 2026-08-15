@@ -403,6 +403,143 @@
                 ctx.stroke();
             }, []);
 
+            // Förrenderad jordglob (2x-supersamplad offscreen-canvas).
+            // Solljuset kommer från höger i scenen, så dagsidan ligger åt
+            // höger och nattsidan tonas mörk åt vänster. Ritas om bara när
+            // radien ändras (t.ex. vid resize/fullskärm).
+            const earthSpriteRef = useRef({ r: 0, canvas: null });
+            const getEarthSprite = (earthRIn) => {
+                const R = Math.max(8, Math.round(earthRIn));
+                const cache = earthSpriteRef.current;
+                if (cache.canvas && cache.r === R) return cache.canvas;
+
+                const S = 2;                              // supersampling
+                const glow = Math.ceil(R * 0.45);
+                const size = (R + glow) * 2 * S;
+                const c = document.createElement('canvas');
+                c.width = c.height = size;
+                const g = c.getContext('2d');
+                const ox = size / 2, oy = size / 2, r = R * S;
+
+                // Atmosfärsglöd utanför skivan
+                const atm = g.createRadialGradient(ox, oy, r * 0.85, ox, oy, r + glow * S);
+                atm.addColorStop(0, 'rgba(96, 165, 250, 0.18)');
+                atm.addColorStop(0.45, 'rgba(96, 165, 250, 0.06)');
+                atm.addColorStop(1, 'rgba(96, 165, 250, 0)');
+                g.fillStyle = atm;
+                g.fillRect(0, 0, size, size);
+
+                // Tona ut glöden mot nattsidan (vänster) — bara halon finns
+                // på canvasen här, så destination-out raderar enbart den
+                g.globalCompositeOperation = 'destination-out';
+                const atmFade = g.createLinearGradient(ox - r - glow * S, 0, ox + r * 0.3, 0);
+                atmFade.addColorStop(0, 'rgba(0, 0, 0, 0.9)');
+                atmFade.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                g.fillStyle = atmFade;
+                g.fillRect(0, 0, size, size);
+                g.globalCompositeOperation = 'source-over';
+
+                g.save();
+                g.beginPath();
+                g.arc(ox, oy, r, 0, Math.PI * 2);
+                g.clip();
+
+                // Hav — ljusast mot solen (höger)
+                const ocean = g.createRadialGradient(ox + r * 0.5, oy - r * 0.2, r * 0.1, ox, oy, r * 1.3);
+                ocean.addColorStop(0, '#4f8fdf');
+                ocean.addColorStop(0.35, '#2e63c0');
+                ocean.addColorStop(0.7, '#1d418f');
+                ocean.addColorStop(1, '#132b5e');
+                g.fillStyle = ocean;
+                g.fillRect(0, 0, size, size);
+
+                // Kontinenter — mjuka kvadratiska kurvor genom punktlistor
+                // i enhetskoordinater (andel av radien)
+                const land = (pts, fill) => {
+                    const P = pts.map(([x, y]) => [ox + x * r, oy + y * r]);
+                    const last = P[P.length - 1];
+                    g.beginPath();
+                    g.moveTo((P[0][0] + last[0]) / 2, (P[0][1] + last[1]) / 2);
+                    for (let i = 0; i < P.length; i++) {
+                        const a = P[i], b = P[(i + 1) % P.length];
+                        g.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+                    }
+                    g.closePath();
+                    g.fillStyle = fill;
+                    g.fill();
+                };
+
+                // "Nordamerika"
+                land([[-0.62,-0.52],[-0.42,-0.62],[-0.24,-0.55],[-0.20,-0.40],[-0.33,-0.30],[-0.28,-0.16],[-0.44,-0.10],[-0.60,-0.18],[-0.70,-0.34]], '#3f8a4f');
+                // "Sydamerika"
+                land([[-0.36,0.02],[-0.26,0.06],[-0.20,0.20],[-0.24,0.38],[-0.32,0.54],[-0.42,0.55],[-0.47,0.40],[-0.46,0.22],[-0.42,0.08]], '#357a43');
+                // "Europa"
+                land([[0.08,-0.52],[0.24,-0.57],[0.36,-0.49],[0.28,-0.40],[0.14,-0.37],[0.03,-0.44]], '#43904f');
+                // "Afrika"
+                land([[0.14,-0.32],[0.32,-0.35],[0.46,-0.21],[0.49,-0.03],[0.42,0.17],[0.31,0.37],[0.19,0.42],[0.11,0.28],[0.06,0.06],[0.06,-0.16]], '#3f8a4f');
+                // "Asien" (skymtar vid högerranden)
+                land([[0.42,-0.46],[0.62,-0.44],[0.76,-0.28],[0.70,-0.14],[0.55,-0.18],[0.44,-0.32]], '#357a43');
+
+                // Polarisar — klipps mot skivans kant så bara en kalott syns
+                g.fillStyle = 'rgba(226, 236, 248, 0.75)';
+                g.beginPath();
+                g.ellipse(ox - r * 0.03, oy - r * 0.98, r * 0.44, r * 0.16, -0.08, 0, Math.PI * 2);
+                g.fill();
+                g.fillStyle = 'rgba(220, 232, 246, 0.6)';
+                g.beginPath();
+                g.ellipse(ox + r * 0.03, oy + r * 1.0, r * 0.38, r * 0.13, 0.06, 0, Math.PI * 2);
+                g.fill();
+
+                // Molnslöjor (deterministiska — gyllene vinkeln sprider dem)
+                g.globalAlpha = 0.11;
+                g.fillStyle = '#ffffff';
+                for (let i = 0; i < 8; i++) {
+                    const a = i * 2.399;
+                    const rr = r * (0.3 + ((i * 37) % 50) / 100);
+                    const x = ox + Math.cos(a) * rr * 0.85;
+                    const y = oy + Math.sin(a) * rr * 0.7;
+                    const w = r * (0.16 + ((i * 53) % 40) / 250);
+                    g.beginPath();
+                    g.ellipse(x, y, w, w * 0.22, a * 0.4, 0, Math.PI * 2);
+                    g.fill();
+                }
+                g.globalAlpha = 1;
+
+                // Nattsida — solen ligger åt höger, vänstra halvan i skugga.
+                // Inte helt svart: skivan ska fortfarande gå att läsa som en
+                // hel glob mot rymden (jämför månens mörka halva).
+                const night = g.createLinearGradient(ox - r, 0, ox + r * 0.1, 0);
+                night.addColorStop(0, 'rgba(11, 15, 36, 0.87)');
+                night.addColorStop(0.6, 'rgba(11, 15, 36, 0.8)');
+                night.addColorStop(1, 'rgba(11, 15, 36, 0)');
+                g.fillStyle = night;
+                g.fillRect(0, 0, size, size);
+
+                // Randmörkning mot skivans kant
+                const limb = g.createRadialGradient(ox, oy, r * 0.75, ox, oy, r);
+                limb.addColorStop(0, 'rgba(0, 0, 0, 0)');
+                limb.addColorStop(1, 'rgba(2, 4, 14, 0.4)');
+                g.fillStyle = limb;
+                g.fillRect(0, 0, size, size);
+                g.restore();
+
+                // Diskret silhuett runt hela skivan (så nattsidan inte
+                // försvinner i rymden) + tydlig atmosfärsrand på dagsidan
+                g.lineWidth = 1.2 * S;
+                g.strokeStyle = 'rgba(170, 190, 230, 0.16)';
+                g.beginPath();
+                g.arc(ox, oy, r + S, 0, Math.PI * 2);
+                g.stroke();
+                g.lineWidth = 2.2 * S;
+                g.strokeStyle = 'rgba(160, 210, 255, 0.5)';
+                g.beginPath();
+                g.arc(ox, oy, r + S, -Math.PI * 0.44, Math.PI * 0.44);
+                g.stroke();
+
+                earthSpriteRef.current = { r: R, canvas: c };
+                return c;
+            };
+
             // Main canvas drawing
             const draw = useCallback(() => {
                 const canvas = canvasRef.current;
@@ -507,44 +644,11 @@
                 ctx.fill();
                 ctx.restore();
 
-                // Draw Earth at center
+                // Draw Earth at center (förrenderad glob, se getEarthSprite)
                 const earthR = Math.min(W, H) * 0.065;
-                // Earth gradient
-                const earthGrad = ctx.createRadialGradient(cx - earthR * 0.3, cy - earthR * 0.3, 0, cx, cy, earthR);
-                earthGrad.addColorStop(0, '#4a9eff');
-                earthGrad.addColorStop(0.4, '#2563eb');
-                earthGrad.addColorStop(0.8, '#1e40af');
-                earthGrad.addColorStop(1, '#1e3a5f');
-                ctx.beginPath();
-                ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
-                ctx.fillStyle = earthGrad;
-                ctx.fill();
-
-                // Landmasses
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
-                ctx.clip();
-                ctx.fillStyle = '#22c55e';
-                // Simplified continents
-                // "Europe/Africa"
-                ctx.beginPath();
-                ctx.ellipse(cx + earthR * 0.1, cy - earthR * 0.15, earthR * 0.15, earthR * 0.25, 0.2, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(cx + earthR * 0.05, cy + earthR * 0.25, earthR * 0.12, earthR * 0.2, -0.1, 0, Math.PI * 2);
-                ctx.fill();
-                // "Americas"
-                ctx.beginPath();
-                ctx.ellipse(cx - earthR * 0.35, cy - earthR * 0.1, earthR * 0.12, earthR * 0.3, 0.15, 0, Math.PI * 2);
-                ctx.fill();
-                // Atmosphere glow
-                ctx.beginPath();
-                ctx.arc(cx, cy, earthR + 2, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
-                ctx.lineWidth = 3;
-                ctx.stroke();
-                ctx.restore();
+                const earthSprite = getEarthSprite(earthR);
+                const earthDrawSize = earthSprite.width / 2;
+                ctx.drawImage(earthSprite, cx - earthDrawSize / 2, cy - earthDrawSize / 2, earthDrawSize, earthDrawSize);
 
                 // Earth label
                 ctx.font = '600 14px Poppins, sans-serif';
@@ -1415,11 +1519,13 @@
                                 aria-label={playing ? 'Pausa' : 'Spela'}
                                 title={playing ? 'Pausa' : 'Spela'}
                                 style={{
+                                    // Till höger om .fs-btn (40 px vid 14,14)
+                                    // — samma hörn, aldrig samma yta
                                     position: 'absolute',
-                                    top: '24px',
-                                    left: '24px',
-                                    width: '46px',
-                                    height: '46px',
+                                    top: '14px',
+                                    left: '66px',
+                                    width: '40px',
+                                    height: '40px',
                                     borderRadius: '50%',
                                     background: playing ? 'var(--lab-accent)' : 'var(--lab-bg)',
                                     border: `1px solid ${playing ? 'var(--lab-accent)' : 'var(--lab-line-strong)'}`,
@@ -1446,8 +1552,8 @@
 
                             <label style={{
                                 position: 'absolute',
-                                top: '84px',
-                                left: '24px',
+                                top: '66px',
+                                left: '14px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '8px',

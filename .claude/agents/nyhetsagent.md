@@ -14,9 +14,22 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
    - `.claude/nyheter/ko.md` — kön av kommande/uppslag (nyheter som väntar).
    - `.claude/nyheter/publicerat.md` — logg över redan publicerade nyheter.
    - `data/nyheter.js` — den faktiska datafilen (nyast först).
+   - `.claude/nyhetsbrev/logg.md` — **bara det översta brevets teaser-rad.**
+     Se teaser-skuldregeln i steg 2.
    Du får **aldrig** publicera samma nyhet två gånger — kolla loggen.
 
 2. **Bestäm dagens nyhet.**
+   - **⚠️ TEASER-SKULD GÅR FÖRE ALLT ANNAT.** Har det senaste nyhetsbrevet
+     (översta posten i `.claude/nyhetsbrev/logg.md`) teasat ett uppslag ur
+     `ko.md` under "Nästa vecka", är det ett löfte till prenumeranterna som
+     MÅSTE infrias innan nästa brev går ut (söndag). Publicera det teasade
+     uppslaget **senast onsdag** samma vecka — tidigare om nyhetsdagen ändå
+     är mager. En färsk dagsnyhet får gå före någon enstaka dag, men aldrig
+     så att teasern riskerar att bli oinfriad. Visar granskningen att
+     uppslaget spruckit (indraget, faktafel, går inte att belägga):
+     publicera det INTE — skriv i stället en rad om detta i
+     `.claude/nyhetsbrev/planerat.md`, så att nästa brev kan lösa in löftet
+     snyggt ("vi lovade X — så här gick det") i stället för att tiga.
    - Står det redan en stark, dagsfärsk nyhet överst i kön → använd den.
    - Annars: sök källorna (se nedan) efter dagens mest relevanta nyhet.
    - **Relevanskriterier (i prioritetsordning):**

@@ -156,6 +156,17 @@ matnyttigt att man tar med sig något in i klassrummet.
    lova aldrig något som inte är planerat, och formulera hellre öppet
    ("vi ritar just nu på …") än med datumlöften. Finns inget att teasa:
    hoppa över sektionen helt.
+   - **Teasas ett uppslag ur nyhetskön blir det ett LÖFTE**: nyhetsagenten
+     har en spegelvänd teaser-skuldregel (steg 2 i
+     `.claude/agents/nyhetsagent.md`) som tvingar den att publicera det
+     teasade uppslaget senast onsdag samma vecka. Flytta därför uppslaget
+     till **toppen av `ko.md`** när du teasar det, om det inte redan ligger
+     där, och skriv i loggposten exakt vilket uppslag som teasades.
+   - **Avsluta nyhets-teasern med den stående signaturen "Vi läser på."**
+     (uttryckligt önskemål 2026-08-15) — den bär tonen: löftet är att vi
+     sätter oss in i saken, inte ett datumlöfte. Gäller teasrar om uppslag
+     ur nyhetskön; en teaser om en kommande simulering/funktion behöver
+     den inte.
 7. **Avslut** — en varm rad + avsändare ("Fysiklabbet"). Ingen egen
    avanmälningstext — EmailOctopus lägger själv till avanmälningslänken.
 

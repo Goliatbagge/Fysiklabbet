@@ -1875,6 +1875,37 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
   genomskinlig (skälet står i filens egen kommentar).
 - Inga tankstreck, se `.claude/agents/nyhetsbrev.md`.
 
+## ⚠️ Schemalagda routines MÅSTE skapas via claude.ai — annars saknar de repot
+
+**En routine (schemalagd trigger) som ska arbeta i Fysiklabbet-repot måste
+skapas från claude.ai → Routines, där repot väljs som källa.** Skapas den i
+stället inifrån en session, med MCP-verktyget `create_trigger`, får den
+**inget `sources`-fält** — och varje körning startar då en tom molnsession
+utan repo. Agentfilerna under `.claude/agents/`, `data/nyheter.js` och
+git-loggen finns helt enkelt inte där, så jobbet kan inte utföras.
+
+Det värsta är att det inte ser trasigt ut: routinen står som `enabled`,
+`last_fired_at` uppdateras, och den fyller på `next_run_at` som vanligt.
+Bara utebliven produkt avslöjar felet. Det hände nyhetsbrevsroutinen
+("Nyhetsbrevsutkast — lördag morgon"), som brann varje lördag utan att
+någonsin kunna skriva ett brev, upptäckt 2026-08-15.
+
+- **Kontrollera en misstänkt routine** med `list_triggers` och titta efter
+  `job_config.ccr.session_context.sources`. Saknas fältet är routinen
+  blind — jämför med "Fysiklabbet — veckoavstämning säkerhetspunkter",
+  som har `sources: Goliatbagge/Fysiklabbet` och därför fungerar.
+  Fältet `created_via` skvallrar också: `http_api` = skapad via claude.ai
+  (har källor), `meta_mcp` = skapad från en session (har inga).
+- **`update_trigger` kan INTE laga det** — den ändrar bara namn, cron,
+  prompt, modell och på/av. Källorna går inte att lägga till i efterhand,
+  så en trasig routine måste skapas om från claude.ai och den gamla
+  raderas.
+- **Trigger-startade sessioner syns inte i sessionslistan.** Misslyckas en
+  körning finns det ingen session att leta upp i efterhand; felsök därför
+  mot routinens konfiguration, inte mot körningen.
+- Routines skapade från en session ärver dessutom **inga connectors**
+  (Gmail m.fl.) — samma sak där: skapa dem via claude.ai.
+
 ## Formler i nyhetsartiklar: KaTeX, precis som i teorin
 
 **En formel i en nyhetsartikel sätts med KaTeX — `$…$` i `body`-strängarna i

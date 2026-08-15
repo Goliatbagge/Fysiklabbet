@@ -88,6 +88,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-15-spokglod-fran-avstallt-karnkraftverk",
+    date: "2026-08-15",
+    title: "Reaktorerna stod stilla — ändå räknade detektorn hundra neutriner ur bränslet",
+    deck: "När ett kärnkraftverk stängs av dör kedjereaktionen på några sekunder. Men klyvningsresterna i bränslet fortsätter sönderfalla i åratal och sänder ut en svag ström av antineutriner. Nu har den efterglöden mätts för första gången — från en detektor 400 meter från två stillastående franska reaktorer.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-15-spokglod-fran-avstallt-karnkraftverk.jpg",
+    imageAlt: "Kärnkraftverket Chooz sett från en skogsklädd höjd: två breda kyltorn med vita ångplymer och två kupolformade reaktorbyggnader i en grön floddal.",
+    imageCredit: "Foto: Raimond Spekking / Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["partikelfysik", "kärnfysik", "neutrino", "antineutrino", "radioaktivt sönderfall", "betasönderfall", "halveringstid", "kärnkraft", "detektor", "fysik 1"],
+    sources: [
+      { name: "Max-Planck-Institut für Kernphysik — First measurement of antineutrinos from spent nuclear fuel", url: "https://www.mpi-hd.mpg.de/mpi/en/public-relations/news/news-item/first-measurement-of-antineutrinos-from-spent-nuclear-fuel" },
+      { name: "Phys.org — First measurement of antineutrinos from spent nuclear fuel confirms emissions persist after reactor shutdown", url: "https://phys.org/news/2026-08-antineutrinos-spent-nuclear-fuel-emissions.html" },
+      { name: "Physical Review Letters — originalartikeln", url: "https://doi.org/10.1103/dr26-j19g" }
+    ],
+    research: {
+      citation: "Double Chooz-samarbetet, ”First measurement of neutrino emissions from spent nuclear fuel by the Double Chooz experiment”, Physical Review Letters 137, 061803, publicerad 4 augusti 2026 (DOI 10.1103/dr26-j19g). Preprint: arXiv:2510.04869",
+      url: "https://doi.org/10.1103/dr26-j19g"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 — 9.1 Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Fysik nivå 1 — 9.3 Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Fysik nivå 1 — 9.4 Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" },
+        { label: "Simulering — Aktivitet och halveringstid", href: "fysik1-halveringstid.html" }
+      ],
+      fragor: [
+        "Laget räknade 106 händelser där beräkningen sa 88, och kallar det ett utmärkt resultat. Vad är det som avgör om en skillnad mellan mätning och förutsägelse är ett brus eller en upptäckt?",
+        "De kortlivade kärnorna som sänder ut den mätbara strålningen har halveringstider på sekunder och minuter, ändå finns de kvar i bränsle som legat i tio år. Hur går det ihop?",
+        "Signalen är mindre än en procent av vad reaktorn ger i drift, och detektorn ligger bara 115 meter vattenekvivalenter under marken. Vilka krav ställer det på hur man skiljer en verklig händelse från en falsk?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett kärnkraftverk som stängs av blir aldrig riktigt tyst. Kedjereaktionen upphör inom sekunder när styrstavarna åker in, men bränslet är då fullt av klyvningsrester — atomkärnor som blev över när uran och plutonium sprack, och som är instabila. De fortsätter sönderfalla i månader, år och årtionden. Varje sådant betasönderfall skickar i väg en antineutrino.' },
+      { type: 'p', html: 'Att den efterglöden finns har fysiker vetat i decennier. Ingen hade mätt den. Nu har Double Chooz-experimentet vid kärnkraftverket Chooz B i franska Ardennerna gjort det, och resultatet publicerades i <em>Physical Review Letters</em> den 4 augusti.' },
+
+      { type: 'h2', text: 'Mindre än en procent av signalen' },
+      { type: 'p', html: 'Detektorn byggdes för något helt annat. Double Chooz var ett oscillationsexperiment: två i det närmaste identiska detektorer, en 400&nbsp;meter och en 1,05&nbsp;km från reaktorhärdarna, som mellan 2011 och 2017 jämförde antineutrinoflödet på de två avstånden för att mäta hur neutriner byter skepnad på vägen.' },
+      { type: 'p', html: 'Det gav en sidoeffekt. Vid sällsynta tillfällen stod båda reaktorerna stilla samtidigt för bränslebyte eller underhåll — ovanligt, eftersom de två härdarna normalt byter bränsle omlott — och då stod en färdig, välkalibrerad neutrinodetektor och tittade rakt på ett avstängt kraftverk. Under 2017 inträffade fyra sådana perioder på sammanlagt 24,4&nbsp;dygn. Efter avdrag för den tid då detektorn var blockerad av kosmiska myoner återstod 17,2&nbsp;dygns mättid för den närmaste detektorn.' },
+      { type: 'p', html: 'Hur svag signalen är framgår av jämförelsen: vid full effekt registrerade samma detektor omkring 900&nbsp;neutrinohändelser per dygn. Efterglöden efter avstängning motsvarar mindre än en procent av det.' },
+      { type: 'p', html: 'Detektorns hjärta var 10,3&nbsp;m³ vätskescintillator med 1&nbsp;gram gadolinium per liter, omgivet av ytterligare 22,6&nbsp;m³ oblandad scintillatorvätska och en tank med mineralolja, allt betraktat av 390 ljuskänsliga rör.' },
+
+      { type: 'h2', text: 'Två blixtar med mikrosekunder emellan' },
+      { type: 'p', html: 'En antineutrino känner varken av elektriska krafter eller den starka kärnkraften. Den kan passera genom hela jordklotet utan att märka det, och den enda anledningen till att man alls kan fånga någon är att det passerar ofantligt många. Fångstmetoden heter invers betasönderfall: antineutrinon träffar en proton i vätskan och omvandlar den till en neutron, samtidigt som en positron flyger i väg, $\\bar{\\nu}_e + p \\rightarrow e^+ + n$.' },
+      { type: 'quote', html: 'Antineutriner växelverkar bara ytterst sällan med materia. Men när en av dem växelverkar inne i Double Chooz-detektorn uppstår en karakteristisk dubbel ljussignal som går att skilja från bakgrundshändelser.', cite: 'Thierry Lasserre, Max-Planck-Institut für Kernphysik' },
+      { type: 'p', html: 'Positronen möter nästan omedelbart en elektron och de förintar varandra — det ger den första ljusblixten. Neutronen studsar omkring i vätskan i några mikrosekunder tills en gadoliniumkärna fångar in den och sänder ut gammastrålning — den andra blixten. Det är just tidsavståndet mellan de två blixtarna, tillsammans med hur nära varandra de sker, som skiljer en äkta antineutrino från slumpmässigt brus.' },
+      { type: 'p', html: 'Metoden har ett pris. Reaktionen kräver en antineutrinoenergi på minst $1{,}8\\ \\mathrm{MeV}$, så merparten av alla antineutriner som lämnar bränslet är osynliga för detektorn. Bara de allra energirikaste sönderfallen syns.' },
+
+      { type: 'h2', text: 'Moderkärnan håller takten' },
+      { type: 'p', html: 'Vilka kärnor är det då som lyser? Direkt efter avstängningen bidrar hundratals olika klyvningsprodukter, men efter några timmar tar ett fåtal över. Efter några månader står tre kortlivade kärnor för nästan alltihop ovanför detektorns tröskel: yttrium-90 ($2{,}28\\ \\mathrm{MeV}$), rodium-106 (halveringstid 30,1&nbsp;s, $3{,}54\\ \\mathrm{MeV}$) och praseodym-144 (17,3&nbsp;min, $3{,}00\\ \\mathrm{MeV}$).' },
+      { type: 'p', html: 'Där uppstår en skenbar motsägelse. Kärnor med halveringstider på sekunder och minuter borde vara borta för länge sedan i bränsle som legat i åratal. Förklaringen är att de fylls på hela tiden. Var och en av dem har en långlivad moderkärna som sakta sönderfaller till den: cerium-144 med 285&nbsp;dygns halveringstid, rutenium-106 med 372&nbsp;dygn och strontium-90 med 28,9&nbsp;år. Det är moderkärnan som bestämmer takten — dotterkärnan sönderfaller i praktiken i samma stund den bildas. Efter tio år svarar yttrium-90 ensam för mer än 90&nbsp;% av flödet.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-08-15-spokglod-fran-avstallt-karnkraftverk-2.jpg', alt: 'Blick ned i en bassäng med använt kärnbränsle i en reaktorhall: bränsleknippen står i ett rutmönster under klart vatten, med en gul travers över och människor i skyddshjälmar i förgrunden.', caption: 'Bassäng för använt kärnbränsle vid kärnkraftverket Brunswick i USA. Enligt beräkningarna kom 44 procent av den förväntade signalen från bassänger som denna, vid sidan av härdarna.', credit: 'Foto: U.S. Nuclear Regulatory Commission (public domain)' },
+
+      { type: 'p', html: 'Signalen kommer nämligen från två håll. Dels från bränsle som fortfarande sitter kvar i härdarna, dels från de knippen som redan plockats ut och står och kyls i vattenbassänger intill. Beräkningarna ger 56 procent från härdarna och 44 procent från bassängerna. Balansen förskjuts med tiden: härdarna dominerar de första dygnen, medan bassängerna — där knippen med vitt skilda kyltider samlas — tar över ju längre stilleståndet varar.' },
+
+      { type: 'h2', text: '106 mot 88' },
+      { type: 'p', html: 'I energiintervallet 1–3&nbsp;MeV, där efterglöden förväntas vara som tydligast, räknade den närmaste detektorn 106&nbsp;±&nbsp;18 kandidater. Beräkningen, byggd på simuleringar av vilka klyvningsprodukter som fanns i bränslet och hur de sönderfaller, gav 88&nbsp;±&nbsp;7. Utslaget mot noll motsvarar 5,9 standardavvikelser, och mätningen stämmer med förutsägelsen både i antal och i hur händelserna fördelar sig över energin.' },
+      { type: 'p', html: 'Siffran 106 är vad som återstår sedan bakgrunden räknats bort från 244 registrerade händelser. Det är där svårigheten ligger. Detektorn befinner sig relativt grunt — motsvarande 115&nbsp;meter vatten under markytan — så kosmiska myoner slår igenom och skapar snabba neutroner och kortlivade kärnor som härmar signalen nästan perfekt.' },
+      { type: 'quote', html: 'Hittills har experiment med reaktorantineutriner främst inriktat sig på reaktorer i drift, där flödet är mycket större. Att upptäcka den lilla kvarvarande signalen efter avstängning krävde exceptionellt låga bakgrunder och noggranna analysmetoder som Double Chooz-samarbetet utvecklat under många år.', cite: 'Anthony Onillon, Max-Planck-Institut für Kernphysik' },
+      { type: 'p', html: 'Ett tidigare försök visar hur tunn marginalen är. En analys av 7,5&nbsp;dygns avstängningsdata från 2011 och 2012, med enbart den bortre detektorn, gav ungefär 20 kandidater — för få för att säga något om vare sig antal eller energifördelning.' },
+
+      { type: 'h2', text: 'Att inventera bränsle utan att öppna dörren' },
+      { type: 'p', html: 'Bakom det hela ligger en idé som är nästan femtio år gammal. Antineutriner går inte att skärma av, inte att härma och inte att stänga inne: de bär direkt vittnesbörd om vilka kärnreaktioner som pågår, oavsett vad någon påstår i en rapport. Tanken att använda dem för att övervaka reaktorer formulerades av Lev Mikaelyan och Aleksandr Borovoj 1978 och prövades första gången vid kraftverket Rivne 1985.' },
+      { type: 'p', html: 'Sedan dess har metoden handlat om reaktorer i drift. Det nya resultatet visar att en detektor kan säga något även när anläggningen står stilla — exempelvis bekräfta hur mycket använt bränsle som faktiskt finns i bassängerna, eller uppskatta den kvarvarande värmeeffekten i en härd efter en olycka. Med 17,2&nbsp;dygns data och hundra händelser är det ännu långt till ett praktiskt verktyg. Men det som tidigare bara var uträknat har nu blivit uppmätt.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Chooz B har två tryckvattenreaktorer på 4,25&nbsp;GW värmeeffekt vardera, med 205 bränsleknippen i varje härd.',
+        'Antineutrinon måste ha minst $1{,}8\\ \\mathrm{MeV}$ för att kunna fångas genom invers betasönderfall. Nästan 99&nbsp;% av den mätbara efterglöden ligger under $3\\ \\mathrm{MeV}$.',
+        'Neutriner går inte att skärma av. Ett blylager tjockt som ett ljusår skulle stoppa ungefär hälften av dem.',
+        'Double Chooz lades ned 2017. Datan från de fyra stilleståndsperioderna det året har alltså legat och väntat på en analys som ingen från början planerat för.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-14-diamant-i-flytande-kol",
     date: "2026-08-14",
     title: "Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori",

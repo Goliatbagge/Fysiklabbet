@@ -44,6 +44,61 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-15) — kan tas upp senare
+
+- **Publicerad 2026-08-15: spökglöden från ett avställt kärnkraftverk**
+  (Double Chooz/MPIK, Physical Review Letters 137, 061803,
+  DOI 10.1103/dr26-j19g) — se publicerat.md och granskningar.md. OBS för en
+  ev. uppföljare: PRL-sidan är betalspärrad, men hela metoddelen och
+  resultattabellerna finns i arXiv:2510.04869. Preprintens uppgift att
+  yttrium-90 har halveringstiden 3,19 h avviker från standardvärdet ~64 h och
+  bör kontrolleras mot den publicerade versionen innan den citeras.
+
+- **Cygnus-bubblan kan komma från mikrokvasaren Cygnus X-3** (STARK RESERV).
+  Ett lag lett av Zhaodong Shi vid University of Science and Technology of
+  China föreslår att den enorma gammastrålningsbubblan i Svanen — tusentals
+  ljusår tvärs över, hittills tillskriven stjärnbildningsområdet Cygnus X på
+  4 600 ljusårs avstånd — i själva verket får sina energirikaste bidrag från
+  mikrokvasaren Cygnus X-3, 31 600 ljusår bort. Cygnus X-3 bekräftades nyligen
+  som Vintergatans första ”super-PeVatron” och accelererar partiklar till minst
+  30 PeV; modellen kräver bara 1–3 % verkningsgrad för att återge bubblans
+  ljusstyrka och avtagande. Ett dubbelstjärnsystem med svart hål eller
+  neutronstjärna och 4,8 timmars omloppstid. The Astrophysical Journal Letters
+  (2026-07-21), DOI 10.3847/2041-8213/ae878e. Kollegialt granskad. Bortvald
+  08-15 enbart för ämnesspridning (tre astronominyheter de senaste åtta
+  dagarna). OBS RÄKNEORD: *quadrillion* = 10^15 = svenskans BILJARD.
+  Överlappar delvis med PeVatron-posten ovan — publicera inte båda. Källa:
+  https://phys.org/news/2026-08-mysterious-cygnus-microquasar-astronomers.html
+  (tillagd 2026-08-15)
+
+- **Flygande observatorium fotograferade solkoronan genom molntäcket under
+  förmörkelsen 12 augusti** (phys.org 2026-08-15). NASA:s WB-57 flög över
+  molnen nära Island och räddade koronaobservationen när marktittarna blev
+  utan. Fin uppföljare på förmörkelsen, men 08-10 var redan en
+  förmörkelseartikel. Källa:
+  https://phys.org/news/2026-08-airborne-observatory-views-solar-corona.html
+  (tillagd 2026-08-15)
+
+- **Vindsnurrestrukturer får ljus att snurra åt valfritt håll — utan nya
+  material** (KAIST m.fl., Nature Communications, DOI 10.1038/s41467-026-76089-z,
+  phys.org 2026-08-14). Symmetriska molekyler ordnas med elektriska fält och
+  under 1 % kiral tillsats till mikroskopiska vindsnurror; rotationsriktningen
+  bestäms av strukturen, inte av emittern. Bortvald för att kiralt ljus kördes
+  07-30 och speglingsmaterial 08-13. Källa:
+  https://phys.org/news/2026-08-rotation-complex-materials.html
+  (tillagd 2026-08-15)
+
+- **Världens första cykliska superledande kvantvärmemotor** (Aalto University,
+  Nature Communications, DOI 10.1038/s41467-026-72651-x). En transmonqubit som
+  arbetsmedium i en Otto-cykel, körd i kryostat nära absoluta nollpunkten, med
+  en kvantkretskylare som både värmer och kyler på beställning. Utmärkt
+  gymnasietema (värmemotorer, energiomvandling, absoluta nollpunkten), men
+  pressmeddelandet är från **13 juli 2026** — för gammalt för en dagsnyhet när
+  det upptäcktes via ScienceDailys återpublicering 14 augusti. Duger som
+  tidlös ”fysiken bakom”-vinkel vid nyhetstorka. Källa:
+  https://www.eurekalert.org/news-releases/1135527
+  (tillagd 2026-08-15)
+
 ## Fynd som inte användes (2026-08-14) — kan tas upp senare
 
 - **Publicerad 2026-08-14: diamanten som flyter i sin egen smälta** (LLNL,

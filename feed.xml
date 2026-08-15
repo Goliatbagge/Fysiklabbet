@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Fri, 14 Aug 2026 20:12:27 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 01:35:29 GMT</lastBuildDate>
+    <item>
+      <title>Reaktorerna stod stilla — ändå räknade detektorn hundra neutriner ur bränslet</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-15-spokglod-fran-avstallt-karnkraftverk</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-15-spokglod-fran-avstallt-karnkraftverk</guid>
+      <pubDate>Sat, 15 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Partikelfysik</category>
+      <description>När ett kärnkraftverk stängs av dör kedjereaktionen på några sekunder. Men klyvningsresterna i bränslet fortsätter sönderfalla i åratal och sänder ut en svag ström av antineutriner. Nu har den efterglöden mätts för första gången — från en detektor 400 meter från två stillastående franska reaktorer.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-15-spokglod-fran-avstallt-karnkraftverk.jpg" length="246548" type="image/jpeg"/>
+    </item>
     <item>
       <title>Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-14-diamant-i-flytande-kol</link>
@@ -177,15 +186,6 @@
       <category>Kärnfysik</category>
       <description>I decennier har vissa atomkärnor avgett fler lågenergetiska gammastrålar än teorin kunnat förklara. Nu har ett internationellt forskarlag lett från Michigan State University spårat överskottet till magnetiska – inte elektriska – övergångar inuti kärnan zink-70, ett fynd som kan skärpa beräkningarna av hur tunga grundämnen som guld och platina bildas i supernovor och kolliderande neutronstjärnor.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-27-zink-70-magnetisk-gata.jpg" length="244085" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Fysiker hedras för en tredje sorts magnetism — dold i över hundra år</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-26-altermagnetism</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-26-altermagnetism</guid>
-      <pubDate>Sun, 26 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Magnetism</category>
-      <description>I mer än ett sekel har magnetiska material delats in i två familjer: ferromagneter, som kylskåpsmagneten, och antiferromagneter, som inte drar till sig ett gem. Nu tilldelas tre forskare ett av Europas finaste fysikpris för att ha bevisat att det finns en tredje, tidigare dold klass — altermagnetism.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-26-altermagnetism.jpg" length="117889" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

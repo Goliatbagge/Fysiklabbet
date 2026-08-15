@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-15 | `2026-08-15-spokglod-fran-avstallt-karnkraftverk` | Reaktorerna stod stilla — ändå räknade detektorn hundra neutriner ur bränslet | Max-Planck-Institut für Kernphysik (pressmeddelande 2026-08-04) / Phys.org (2026-08-04) / EurekAlert! / ScienceDaily (2026-08-14, som lyfte nyheten på nytt) / Physical Review Letters 137, 061803 (Double Chooz-samarbetet, 94 författare, 2026-08-04, DOI 10.1103/dr26-j19g) / arXiv:2510.04869 (hela metoddelen och resultattabellerna lästa i PDF) / Crossref (volym, artikelnummer, publiceringsdatum) |
 | 2026-08-14 | `2026-08-14-diamant-i-flytande-kol` | Diamant flyter i sin egen smälta — laserförsök stänger en tjugo år gammal lucka mellan mätning och teori | Lawrence Livermore National Laboratory (pressmeddelande 2026-08-13) / Phys.org (2026-08-13) / Nature Physics (M. Millot, F. Coppari, A. Lazicki, Y.-J. Kim, O. L. Landen, V. A. Smalyuk, P. M. Celliers, J. H. Eggert, 2026-08-13, DOI 10.1038/s41567-026-03413-1) / Crossref (titel, författarlista och publiceringsdatum) |
 | 2026-08-13 | `2026-08-13-rugbybollen-i-atomkarnan` | Ingen har sett in i en atomkärna — ändå vet fysiker nu att kärnan i grundämne 100 är formad som en rugbyboll | Johannes Gutenberg-universitetet Mainz (pressmeddelande 2026-08-07) / Phys.org (2026-08-07) / EurekAlert! / Physical Review Letters 136, 192501 (M. Urquiza-González m.fl., 15 maj 2026, DOI 10.1103/2813-b49x) / arXiv:2511.20921 (hela metoddelen läst i förhandsversionen) |
 | 2026-08-12 | `2026-08-12-magnetisk-tratt` | Runt den nyfödda stjärnans gasstråle ligger magnetfältet lindat som en fjäder — och det är fjädern som skjuter i väg gasen | NSF NRAO (pressmeddelande 2026-08-11) / Phys.org (2026-08-11) / Nature Communications (T.-C. Ching, Z.-Y. Li, Q. Zhang, J. M. Girart m.fl., 2026-08-11, DOI 10.1038/s41467-026-75950-5) / arXiv:2604.12597 (metoddelen läst i förhandsversionen) |
@@ -463,3 +464,57 @@ gånger** — kontrollera den här listan först. Nyast överst.
 >
 > Bifynd som inte användes: Muon g-2:s EDM-gräns, koppars smältbeteende och
 > altermagnet-töjningen — lagda i ko.md.
+
+> **2026-08-15 — spökglöden från ett avställt kärnkraftverk (Double Chooz).**
+> Dagens svep gav tre dagsfärska fysikfynd på Phys.org (bundna
+> gravitationsvågor som analogi till fotoniska BIC, kondensatfysik i celler,
+> och KAIST:s vindsnurrestrukturer för cirkulärpolariserat ljus) samt två
+> ScienceDaily-toppar från 14 augusti. Ingen av de färskaste dög: BIC-artikeln
+> är en enförfattad teoretisk uppsats i Physica Scripta utan experiment,
+> cellfysiken ligger utanför området, och kiralt ljus krockar med både 07-30
+> och 08-13. ScienceDailys ”superledande kvantvärmemotor” (Aalto, Nature
+> Communications) visade sig vid kontroll vara ett **pressmeddelande från
+> 13 juli** — en månad gammalt, alltså bortvalt trots utmärkt tema.
+> Kvar stod Double Chooz, som ScienceDaily lyfte 14 augusti.
+>
+> Ämnesspridning vägde tungt i valet: de senaste åtta dagarna hade tre
+> astronomi- och två optiknyheter, medan neutrinofysik senast förekom
+> 2026-06-18 (JUNO — och då om att bygga en detektor, inte om en mätning).
+>
+> Researchen: PRL-sidan är betalspärrad, men hela metoddelen och samtliga
+> resultattabeller finns i arXiv:2510.04869. PDF:en laddades ned och
+> textextraherades med pypdf, så alla siffror i artikeln är lästa i
+> originalets egen formulering, inte i ett referat. Crossref bekräftade
+> volym 137, artikelnummer 061803, publicerat 2026-08-04, 94 författare.
+> Båda citaten är översatta från MPIK:s pressmeddelande.
+>
+> Bilder: BÅDA är riktiga foton, ingen AI. Huvudbilden visar kärnkraftverket
+> Chooz B — alltså exakt den anläggning mätningen gjordes vid (Raimond
+> Spekking, Wikimedia Commons, CC BY-SA 4.0). Bild 2 är en bassäng för använt
+> kärnbränsle vid Brunswick (U.S. NRC, public domain) vid avsnittet om att
+> 44 % av signalen kom från bassängerna. MPIK:s egen pressbild på Lasserre och
+> Onillon valdes bort eftersom licensen inte anges någonstans.
+>
+> Fyra saker som lätt blir fel i den här nyheten:
+> (a) HALVERINGSTIDEN FÖR YTTRIUM-90. Preprinten skriver ”90Y (T1/2 = 3,19 h)”,
+>     men det vedertagna värdet är cirka 64 timmar. Eftersom det inte gick att
+>     avgöra om siffran rättats i den publicerade PRL-versionen utelämnades
+>     yttrium-90:s halveringstid HELT ur artikeln. Moderkärnornas värden
+>     (285 dygn, 372 dygn, 28,9 år) och 30,1 s för rodium-106 samt 17,3 min
+>     för praseodym-144 stämmer däremot med standardtabeller.
+> (b) 106 ± 18 gäller ENERGIINTERVALLET 1–3 MeV, inte hela spektrumet, och är
+>     nettotalet efter bakgrundsavdrag från 244 råhändelser. Skriver man bara
+>     ”detektorn såg 106 neutriner” tappar man båda förbehållen.
+> (c) Datan är från 2017 och experimentet är nedlagt — detta är en ny ANALYS
+>     av gammal data, inte en ny mätkampanj. Måste framgå.
+> (d) Mätningen är ett första steg mot reaktorövervakning, inte ett färdigt
+>     verktyg. Hundra händelser på 17,2 dygn räcker inte för safeguards i
+>     praktiken, och artikeln säger det uttryckligen.
+>
+> Fyra nya begrepp: invers betasönderfall, klyvningsprodukt, scintillator och
+> myon (plus antineutrino-böjningar och solneutrin-formerna tillagda i den
+> befintliga neutrino-posten).
+>
+> Bifynd som inte användes: Cygnus-bubblan/mikrokvasaren Cygnus X-3, NASA:s
+> flygburna koronaobservation under förmörkelsen 12 augusti, KAIST:s
+> vindsnurrestrukturer och Aaltos kvantvärmemotor — lagda i ko.md.

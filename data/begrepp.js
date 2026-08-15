@@ -431,7 +431,7 @@ window.BEGREPP = [
   {
     id: 'neutrino',
     term: 'Neutrino',
-    former: ['neutrino', 'neutrinon', 'neutriner', 'neutrinerna', 'antineutrino', 'antineutriner', 'elektronneutrino', 'myonneutrino', 'tauneutrino', 'tauneutrinon'],
+    former: ['neutrino', 'neutrinon', 'neutriner', 'neutrinerna', 'antineutrino', 'antineutrinon', 'antineutriner', 'antineutrinerna', 'reaktorantineutrin', 'reaktorantineutriner', 'solneutrin', 'solneutriner', 'elektronneutrino', 'myonneutrino', 'tauneutrino', 'tauneutrinon'],
     kort: 'Universums skyggaste partikel: elektriskt neutral, nästan masslös och passerar rakt genom hela jordklotet utan att märka det. Varje sekund far tiotals miljarder neutriner genom din tumnagel.',
     body: [
       { type: 'p', html: 'Neutriner föds i kärnreaktioner: i solens inre, i kärnkraftverk, i radioaktiva sönderfall och i exploderande stjärnor. De saknar elektrisk laddning och känner varken av elektriska krafter eller den starka kärnkraften — bara den svaga växelverkan och (ytterst lite) gravitationen. Därför flyger de rakt igenom nästan allt: av de tiotals miljarder solneutriner som varje sekund passerar genom en tumnagel fastnar i praktiken ingen. Ett ljusårs­tjockt blylager skulle bara stoppa ungefär hälften.' },
@@ -1279,6 +1279,54 @@ window.BEGREPP = [
       { type: 'p', html: 'I vårt solsystem finns fyra stora planeter bortom asteroidbältet, men de är inte av samma sort. Jupiter och Saturnus består nästan helt av väte och helium och kallas gasjättar. Neptunus och Uranus är mindre och tyngre per volym, och huvuddelen av deras massa är i stället vatten, metan och ammoniak. Astronomerna kallar de ämnena ”is”, trots att det inte är någon is i vardaglig mening — därav namnet isjätte.' },
       { type: 'p', html: 'Namnet lurar. Inne i en isjätte är det varmt: temperaturen räknas i tusentals grader och trycket i miljontals gånger jordens lufttryck. Vattnet där är varken is eller vätska i vanlig bemärkelse utan en het, tät och elektriskt ledande vätska. Att den leder ström är förmodligen förklaringen till planeternas märkligt sneda och krokiga magnetfält, som inte alls är prydligt riktade som jordens.' },
       { type: 'p', html: 'Under de förhållandena förväntas metanet brytas sönder. Kolet som blir över kan klumpa ihop sig till kristaller som sjunker inåt genom den lättare omgivningen — ett ”diamantregn”, som har återskapats i laboratorium men aldrig setts direkt. Ingen sond har flugit in i en isjätte, så nästan allt vi tror oss veta om deras inre kommer från beräkningar plus högtrycksförsök på jorden. Utanför solsystemet verkar planeter i den här storleksklassen dessutom vara den allra vanligaste sorten.' }
+    ]
+  },
+  {
+    id: 'invers-betasonderfall',
+    term: 'Invers betasönderfall',
+    former: ['invers betasönderfall', 'inverst betasönderfall', 'invers betaomvandling'],
+    kort: 'Reaktionen som gör det möjligt att alls fånga en antineutrino: den träffar en proton, gör om den till en neutron och skickar i väg en positron. Nästan alla neutrinodetektorer vid kärnkraftverk bygger på den.',
+    relaterade: ['neutrino', 'radioaktivt-sonderfall', 'antimateria', 'scintillator'],
+    body: [
+      { type: 'p', html: 'Vid ett vanligt betasönderfall gör en neutron inne i en atomkärna om sig till en proton, och ut flyger en elektron och en antineutrino. Invers betasönderfall är samma sak baklänges: en antineutrino kommer utifrån, träffar en fri proton — alltså en vätekärna — och omvandlar den till en neutron, samtidigt som en positron flyger i väg. Namnet ”invers” syftar just på att reaktionen läses åt andra hållet.' },
+      { type: 'p', html: 'Detta är det vanligaste sättet att upptäcka antineutriner, och skälet är att reaktionen lämnar ett spår som är svårt att förväxla med något annat. Först förintas positronen mot en elektron i omgivningen och det blir en ljusblixt. Neutronen, som saknar laddning, driver sedan omkring i vätskan i några mikrosekunder innan en atomkärna fångar in den och sänder ut gammastrålning — en andra blixt. Två blixtar på rätt avstånd i tid och rum är en signatur som slumpmässigt brus ytterst sällan lyckas härma. För att förkorta väntan mellan blixtarna blandar man ofta i gadolinium eller litium, ämnen som är särskilt giriga på neutroner.' },
+      { type: 'p', html: 'Reaktionen har ett pris: den kräver en viss minsta energi. Neutronen är tyngre än protonen, och positronen ska dessutom skapas ur ingenting, så antineutrinon måste ha minst omkring 1,8 megaelektronvolt för att reaktionen ska kunna ske alls. Alla antineutriner med mindre energi än så passerar rakt igenom detektorn utan att synas — och det är merparten av dem. En detektor av det här slaget ser alltså bara toppen av flödet.' }
+    ]
+  },
+  {
+    id: 'klyvningsprodukt',
+    term: 'Klyvningsprodukt',
+    former: ['klyvningsprodukt', 'klyvningsprodukten', 'klyvningsprodukter', 'klyvningsprodukterna', 'klyvningsrest', 'klyvningsrester', 'klyvningsresterna', 'fissionsprodukt', 'fissionsprodukten', 'fissionsprodukter', 'fissionsprodukterna'],
+    kort: 'Bitarna som blir kvar när en tung atomkärna som uran klyvs. De är nästan alltid radioaktiva, och det är de — inte uranet — som gör använt kärnbränsle farligt och varmt i århundraden.',
+    relaterade: ['radioaktivt-sonderfall', 'isotop', 'neutrino'],
+    body: [
+      { type: 'p', html: 'När en urankärna träffas av en neutron och klyvs delar den inte upp sig i två lika halvor. Den spricker på ett slumpartat sätt, och resultatet blir två mellanstora kärnor av vitt skilda slag — strontium, jod, cesium, cerium, rutenium och ett par hundra andra möjligheter. Just dessa bitar kallas klyvningsprodukter.' },
+      { type: 'p', html: 'Nästan alla är radioaktiva, och orsaken är enkel att förstå. Tunga kärnor behöver proportionellt fler neutroner än lätta för att hålla ihop. När en tung kärna klyvs ärver bitarna den tunga kärnans neutronöverskott, och de hamnar därför med för många neutroner för sin storlek. Kärnan rättar till obalansen genom betasönderfall: en neutron görs om till en proton, och ut flyger en elektron och en antineutrino. Ofta krävs flera sådana steg i rad innan kärnan blivit stabil.' },
+      { type: 'p', html: 'Det är detta som gör att en avstängd reaktor inte blir kall. Kedjereaktionen upphör inom sekunder, men klyvningsprodukterna fortsätter sönderfalla och avge värme — de första timmarna med flera procent av den effekt reaktorn hade i drift, vilket är skälet till att kylningen aldrig får sluta fungera. Halveringstiderna spänner över hela skalan: sekunder för somliga, årtionden för strontium-90 och cesium-137, som är de som dominerar efter att årtiondena gått.' }
+    ]
+  },
+  {
+    id: 'scintillator',
+    term: 'Scintillator',
+    former: ['scintillator', 'scintillatorn', 'scintillatorer', 'scintillatorerna', 'scintillatorvätska', 'scintillatorvätskan', 'vätskescintillator', 'vätskescintillatorn', 'scintillation', 'scintillationen'],
+    kort: 'Ett ämne som blinkar till med en liten ljusglimt varje gång en partikel far igenom det. Genom att mäta glimtarna kan man räkna partiklar som annars är helt osynliga.',
+    relaterade: ['invers-betasonderfall', 'neutrino', 'radioaktivt-sonderfall'],
+    body: [
+      { type: 'p', html: 'En laddad partikel som far genom ett material knuffar till elektronerna i atomerna den passerar och lämnar dem i ett exciterat tillstånd. I de flesta ämnen blir energin till värme och försvinner. I en scintillator går en del av den i stället tillbaka som synligt ljus när elektronerna faller ner till sina ursprungliga energinivåer. Resultatet är en glimt som varar någon miljarddels sekund — svag, men mätbar.' },
+      { type: 'p', html: 'Runt scintillatorn sitter därför ljuskänsliga rör som förvandlar ett fåtal ljuspartiklar till en elektrisk puls stor nog att registrera. Ju starkare glimt, desto mer energi lämnade partikeln efter sig, så scintillatorn mäter inte bara att något hänt utan också ungefär hur energirikt det var. Materialet kan vara en genomskinlig kristall, en plast eller en vätska.' },
+      { type: 'p', html: 'Just vätskan är vanlig i de stora experimenten, av det enkla skälet att den går att ha mycket av: en tank fylls med tiotals eller tusentals kubikmeter, och hela volymen blir på en gång måltavla och mätinstrument. Det behövs när partiklarna man jagar nästan aldrig växelverkar. Vätskan kan dessutom blandas med tillsatser som gadolinium, som fångar in neutroner och gör att just neutronhändelser sticker ut. Mindre scintillatorer sitter i sjukhusens gammakameror och i handburna strålningsmätare.' }
+    ]
+  },
+  {
+    id: 'myon',
+    term: 'Myon',
+    former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår'],
+    kort: 'En tyngre släkting till elektronen, ungefär 207 gånger så tung. Den lever bara ett par miljondels sekunder, men regnar ständigt ner över oss från kosmisk strålning — omkring en per sekund genom en utsträckt handflata.',
+    relaterade: ['neutrino', 'standardmodellen', 'invers-betasonderfall'],
+    body: [
+      { type: 'p', html: 'Myonen är en av standardmodellens tolv materiepartiklar. Den har exakt samma laddning som elektronen och beter sig i stort sett likadant, men väger omkring 207 gånger mer. När den upptäcktes 1936 var den så oväntad att fysikern Isidor Rabi lär ha frågat: ”Vem beställde den?” Ingen hade sett något behov av en tyngre kopia av elektronen, och frågan varför naturen ändå har tre generationer av materiepartiklar är fortfarande obesvarad.' },
+      { type: 'p', html: 'Myoner bildas högt uppe i atmosfären när partiklar från rymden krockar med luftmolekyler. De är instabila och sönderfaller efter i genomsnitt ett par miljondels sekunder — så kort tid att de även i nästan ljusets hastighet borde hinna någon halvkilometer innan de var borta. Ändå når de marken i stora mängder. Förklaringen är relativitetsteorin: sett från vårt perspektiv går myonens inre klocka långsammare, och sett från myonens eget perspektiv är sträckan ner till marken hoptryckt. Kosmiska myoner är därför ett av de tydligaste vardagsbevisen för att tid och längd inte är absoluta.' },
+      { type: 'p', html: 'För den som bygger känsliga detektorer djupt under jord är samma myoner ett problem. De tränger igenom berg bättre än någon annan laddad partikel och slår loss neutroner och kortlivade kärnor i omgivningen, vilket kan ge signaler som liknar dem man letar efter. Därför förläggs experimenten i gruvor och tunnlar, omges av vetoskikt som larmar när en myon passerar, och räknar bort den tid då en myon nyss varit framme. Samma genomträngningsförmåga används också med flit: genom att mäta hur många myoner som tar sig igenom ett föremål kan man röntga sådant som pyramider och vulkaner.' }
     ]
   }
 ];

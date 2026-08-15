@@ -5,6 +5,7 @@ Protokollet finns i `.claude/agents/utgivare.md`. Nyast överst.
 
 | Datum | Artikel-id | Utslag | Motivering |
 |-------|-----------|--------|------------|
+| 2026-08-15 | `2026-08-15-spokglod-fran-avstallt-karnkraftverk` | RÄTTA FÖRST → GODKÄND | Tre rättelser före publicering (författarantalet 94→borttaget efter tvetydig Crossref-räkning, bildtextens ”uppmätta” 44 % ändrat till ”förväntade” för att stämma med brödtextens modellberäkning, obelagd frekvensuppgift ”ett par gånger om året” ändrad till källans ”sällsynta tillfällen”). Citat, halveringstider och övriga tal verifierade mot arXiv:2510.04869. Kollegialt granskad, PRL 137, 061803 (4 augusti 2026).
 | 2026-08-14 | `2026-08-14-diamant-i-flytande-kol` | RÄTTA FÖRST → GODKÄND | Tre rättelser före publicering (ingressen påstod att flytförmågan var ny — den visades för tjugo år sedan och bekräftas nu; en mening lät läsaren tro att artikeln kände till lagets motiv för reflektivitetsmätningen; ett genusfel i första meningen). Samtliga fem citat och varje siffra stämda av mot LLNL:s pressmeddelande i den ordagranna Phys.org-återgivningen. Titel, författarlista och publiceringsdatum verifierade via Crossref. Kollegialt granskad, Nature Physics 2026-08-13. |
 | 2026-08-13 | `2026-08-13-rugbybollen-i-atomkarnan` | GODKAND | Alla siffror i produktionskedjan, matuppstallningen (RISIKO/PI-LIST), karnmomenten (Q_S, mu), Schmidt-gransen, californium-jamforelsen och modelljamforelsen verifierade mot arXiv:2511.20921. Peer-reviewad, PRL 136, 192501 (15 maj 2026). Inga citat i artikeln. Bilden ar CC BY 2.0 fran Oak Ridge (HFIR), korrekt krediterad.
 | 2026-08-12 | `2026-08-12-magnetisk-tratt` | RÄTTA FÖRST → GODKÄND | Tre precisionsrättelser före publicering (ALMA-lobens storlek i jord–sol-avstånd, jämförelsen mot jordens magnetfält, temperaturintervallet i ordlisteposten om ackretionsskivor). Samtliga siffror verifierade mot arXiv-versionens metoddel, inte mot pressreferatet. Kollegialt granskad i Nature Communications. |
@@ -628,3 +629,66 @@ Neptunusporträtt från 1989 (NASA/JPL, public domain). Ingen AI-bild.
 Brödtexten hänvisar inte till någon bild.
 
 **Utslag: GODKÄND** efter de tre rättelserna.
+
+
+---
+
+## 2026-08-15 — `2026-08-15-spokglod-fran-avstallt-karnkraftverk`
+
+**Granskningsläge:** självständig slutgranskning enligt `utgivare.md`, med en
+efterföljande omgranskning sedan skribenten åtgärdat tre rättningar.
+
+**Peer review-status:** kollegialt granskad. *Physical Review Letters* 137,
+061803, "First Measurement of Neutrino Emissions from Spent Nuclear Fuel by
+the Double Chooz Experiment", publicerad 4 augusti 2026, DOI 10.1103/dr26-j19g.
+APS-sidan svarar 403 vid direkthämtning (betalvägg); metoddelen lästes i
+stället i sin helhet i preprintet arXiv:2510.04869 (extraherat till
+`.shots/dc.txt`).
+
+**Första passet — tre fel funna:**
+1. `research.citation` angav "94 författare". Manuell räkning av
+   författarlistan i preprintet (dc.txt rad 3–15) gav 93, bekräftat av en
+   oberoende sökträff ("T. Abrahão and 92 other authors").
+2. Bildtexten till bassängbilden påstod att 44 % var en del av "den uppmätta
+   signalen" — men 56/44-fördelningen härd/bassäng är en modellberäkning
+   ("An energy-integrated contribution of 56% … and of 44% … is obtained",
+   dc.txt rad 452–453), inte en uppdelning av det faktiska mätdatat.
+   Motsade brödtextens egna, korrekta "Beräkningarna ger …".
+3. "Ett par gånger om året stod båda reaktorerna stilla samtidigt" saknade
+   stöd — källan beskriver tvärtom scenariot som sällsynt/ovanligt
+   ("rare reactor-off periods … uncommon due to the plant's alternating
+   refueling schedules", dc.txt rad 206–209).
+
+**Omgranskning efter rättning:**
+1. Författarantalet är nu helt struket ur citationen ("Double
+   Chooz-samarbetet, …" utan siffra) — sidesteppar den tvetydiga
+   Crossref/preprint-diskrepansen (Crossref räknar kollektivet "Double Chooz
+   Collaboration" som en egen post, preprintet gör det inte) i stället för
+   att hävda ett omtvistat tal. Rimlig lösning.
+2. Bildtexten lyder nu "Enligt beräkningarna kom 44 procent av den
+   förväntade signalen från bassänger som denna …" — stämmer med
+   brödtextens "Beräkningarna ger 56 procent från härdarna och 44 procent
+   från bassängerna" och med källan.
+3. Meningen lyder nu "Vid sällsynta tillfällen stod båda reaktorerna stilla
+   samtidigt för bränslebyte eller underhåll — ovanligt, eftersom de två
+   härdarna normalt byter bränsle omlott —" — matchar källans
+   "rare … uncommon due to the plant's alternating refueling schedules"
+   ordagrant i sak.
+
+**Kontrollfråga (a): "Double Chooz lades ned 2017" i faktarutan.** Källan
+själv säger bara "operated from 2011 to 2017". Oberoende sökning bekräftar
+att båda detektorerna slutade ta data i slutet av december 2017 ("both
+detectors stopped taking data in late December 2017"). "Lades ned" är en
+rimlig, läsbar återgivning av att experimentet upphörde 2017 för en
+gymnasiepublik — ingen ändring krävs.
+
+**Kontrollfråga (b): inga andra tal eller formuleringar rubbade.**
+Genomläst rad för rad mot föregående granskning. Enda ytterligare ändring
+är en stilistisk justering på raden om moderkärnor: "dottern sönderfaller i
+samma stund hon bildas" → "dotterkärnan sönderfaller i praktiken i samma
+stund den bildas" — tar bort en personifiering och lägger till hedge-ordet
+"i praktiken", vilket är fysikaliskt mer precist (sekulär jämvikt är inte
+bokstavligen momentan) och inte en sakförändring. Övriga siffror, citat och
+källor oförändrade och redan verifierade i första passet.
+
+**Utslag: GODKÄND.**

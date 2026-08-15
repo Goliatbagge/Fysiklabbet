@@ -605,7 +605,12 @@ typ: tomtebloss
   tangentiellt enligt Newtons första lag. Samma kontrolluppsättning som
   tomteblosset: varvtalsglidare, paus som fryser bilden, "Ultrarapid",
   fullskärm och syntetiserat ljud — motorton + vattenfräs. Ritad i
-  laboranstemat: ljus pappersbakgrund med kollegieblocks-rutnät).
+  laboranstemat: ljus pappersbakgrund med kollegieblocks-rutnät). Senare
+  tillkomna typer dokumenteras i filhuvudet på `minisim.js` (bl.a.
+  `fjaderpendel` i fy2-2.1, `linjal` i fy2-1.2 — linjalen på två
+  pekfingrar som växelvis glider tills de möts under tyngdpunkten — och
+  `valtning` i fy2-1.2: en kloss med tyngdpunktsvisare på en lutbar
+  planka som välter när visaren passerar utanför stödytan).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
   inuti en `::: demo`-ruta som redan har titel).
 - Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).

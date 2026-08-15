@@ -16,7 +16,8 @@
  *
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
- *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel
+ *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel,
+ *           skiftnyckel, valtning, linjal
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -59,6 +60,34 @@
  * accelerationen är störst i vändlägena (v = 0 där), alltid riktad mot
  * jämviktsläget. Ritad i laboranstemat (ljust papper med rutnät), samma
  * färger som teorifigurerna: v = #2563c9, a = #c0392b. Pausknapp,
+ * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
+ *
+ * ── typ: linjal ──────────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-1.2 (Mer kraftmoment): en linjal vilar vågrätt på
+ * två pekfingrar. "Dra ihop fingrarna" — fingret närmast tyngdpunkten bär
+ * större normalkraft och därmed större friktionskraft, så det FJÄRMARE
+ * fingret glider. När det glidande fingret kommit tillräckligt nära
+ * tyngdpunkten (kvoten N_glid/N_still ≥ μs/μk) tar det andra fingret över,
+ * växelvis, tills fingrarna möts — alltid precis under tyngdpunkten.
+ * Skalenliga normalkraftspilar (blå, pillängd ∝ N, från kontaktytan uppåt
+ * genom linjalen) bär förklaringen. Kryssrutan "Lägg en vikt på linjalen"
+ * lägger en flyttbar (draggbar) mässingsvikt på linjalen som förskjuter
+ * tyngdpunkten — fingrarna möts då i det NYA tyngdpunktsläget. "Visa
+ * tyngdpunkten" markerar läget i förväg; annars avslöjas det först när
+ * fingrarna möts. Ritad i laboranstemat; pausknapp, "Ultrarapid" och
+ * fullskärm som övriga minisims; inget ljud.
+ *
+ * ── typ: valtning ────────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-1.2 (Vältning): en kloss står på en planka som
+ * lutas med en glidare (0–45°). I klossens tyngdpunkt (grön prick) sitter
+ * en metallvisare som alltid hänger lodrätt och illustrerar tyngdkraftens
+ * riktning; klossens stödyta är markerad lila på plankan (samma färger som
+ * teorifigurerna intill). Så länge visaren träffar plankan innanför
+ * stödytan står klossen stabilt — när lutningen passerar den kritiska
+ * vinkeln (tan θ = b/h, tyngdpunkten rakt ovanför det nedre hörnet) välter
+ * klossen kring hörnet med fysikalisk vinkelacceleration. Knappval mellan
+ * "Hög kloss" (välter vid ≈23°) och "Låg kloss" (står kvar upp till
+ * glidarens max) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  */
 (function () {
@@ -2063,9 +2092,1499 @@
         updateInfo();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: skiftnyckel
+    //  Mini-varianten av fysik2-skiftnyckel-app.html: en skiftnyckel greppar
+    //  en trög mutter, kraften F angriper skaftet och kan vridas ett helt
+    //  varv genom att dra i pilspetsen. Hävarmen (det vinkelräta avståndet
+    //  från vridningspunkten till kraftens riktningslinje) och kraftmomentet
+    //  M = F · l uppdateras i realtid. Statisk scen — ritas om vid drag,
+    //  ingen rAF-loop behövs.
+    // ══════════════════════════════════════════════════════════════════════
+    function buildSkiftnyckel(node, cfg) {
+        var W = 560, H = 430;              // logisk ritstorlek
+        var P = { x: 140, y: 205 };        // vridningspunkten (mutterns mitt)
+        var S = 1.6, ROT = -10;            // grafikens skala/vridning (som stora simmen)
+        var HANDLE_DEG = 12;               // skaftets riktning (22° i grafiken + ROT)
+        var RAD = Math.PI / 180;
+        var U = { x: Math.cos(HANDLE_DEG * RAD), y: Math.sin(HANDLE_DEG * RAD) };
+        var D = 0.25;                      // kraftens angreppspunkt (m från muttern)
+        var PXM = 860;                     // px per meter (0,40 m ≈ 344 px längs skaftet)
+        var F_N = 34;                      // kraftens storlek (N) — fast i minisimmen
+        var L_ARROW = 92;                  // kraftpilens längd (px)
+        var G = { x: P.x + D * PXM * U.x, y: P.y + D * PXM * U.y };
+        var COL_F = '#2563c9', COL_ARM = '#0d9488', INK = '#1f2530';
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En skiftnyckel greppar en mutter. Vridningspunkten i mutterns mitt ' +
+            'är markerad med en röd prick. Kraften F angriper skaftet och kan ' +
+            'vridas ett helt varv genom att dra i pilspetsen. Kraftens streckade ' +
+            'riktningslinje och hävarmen — det vinkelräta avståndet från ' +
+            'vridningspunkten till riktningslinjen — ritas om i realtid, och ' +
+            'kraftmomentet M lika med F gånger l visas med rotationsriktning.');
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisimmar) ──────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var alpha = 65;                    // vinkel mot skaftet (grader, 0–360, moturs)
+        var dragging = false, dragPtr = -1;
+
+        function forceDir() {
+            var c = Math.cos(alpha * RAD), s = Math.sin(alpha * RAD);
+            return { x: U.x * c + U.y * s, y: -U.x * s + U.y * c };
+        }
+
+        // ── Skiftnyckelgrafiken — samma paths som teorifigurerna ──────────
+        var PATH_HEX = new Path2D('M95.9 104.1 L82.7 114.8 L66.8 108.7 L64.1 91.9 L77.3 81.2 L93.2 87.3 Z');
+        var PATH_BODY = new Path2D('M 62.8,75.9 Q 62.3,73 64.1,71 Q 78.5,68.5 103.2,71 Q 113.4,72.3 118,77.2 Q 130,90.4 130.3,106.6 Q 131,107.5 132.8,108.3 L 283,169 A 6.5 6.5 0 0 1 278.4,181.1 L 126.1,125.7 Q 120.3,124.2 114.8,127.4 L 108.1,142 Q 105.6,148.5 98.1,145.7 L 89.7,142.4 Q 84.1,140.3 86.3,134.7 L 102.9,91.3 L 62.8,75.9 Z');
+        var PATH_WORM = new Path2D('M 93.4,129.9 L 102.8,133.5 Q 106.1,134.8 104.8,138 L 103.5,141.3 Q 102.3,144.6 99,143.3 L 89.7,139.7 Q 86.4,138.5 87.7,135.2 L 88.9,132 Q 90.2,128.7 93.4,129.9 Z');
+        var PATH_JAW = new Path2D('M 52.4,102.9 L 95.3,119.4 L 89.8,133.9 Q 88.5,137.2 85,135.3 Q 65.3,125 53.4,108.7 Q 50.9,105.6 52.4,102.9 Z');
+        var WORM_LINES = [[94.8, 131.5, 91.7, 139.5], [97.6, 132.6, 94.5, 140.5],
+                          [100.4, 133.7, 97.3, 141.6], [103.2, 134.7, 100.1, 142.7]];
+
+        function drawWrench() {
+            ctx.save();
+            ctx.translate(P.x, P.y);
+            ctx.scale(S, S);
+            ctx.rotate(ROT * RAD);
+            ctx.translate(-80, -98);
+            ctx.lineJoin = 'round';
+            ctx.fillStyle = '#cfd4da';
+            ctx.strokeStyle = '#7c828c';
+            ctx.lineWidth = 1.4;
+            ctx.fill(PATH_HEX);
+            ctx.stroke(PATH_HEX);
+            ctx.fillStyle = '#b3b9c1';
+            ctx.strokeStyle = '#6b7178';
+            ctx.fill(PATH_BODY);
+            ctx.stroke(PATH_BODY);
+            ctx.fillStyle = '#969ea7';
+            ctx.strokeStyle = '#666c74';
+            ctx.lineWidth = 1.3;
+            ctx.fill(PATH_WORM);
+            ctx.stroke(PATH_WORM);
+            ctx.lineWidth = 1.1;
+            ctx.beginPath();
+            for (var i = 0; i < WORM_LINES.length; i++) {
+                ctx.moveTo(WORM_LINES[i][0], WORM_LINES[i][1]);
+                ctx.lineTo(WORM_LINES[i][2], WORM_LINES[i][3]);
+            }
+            ctx.stroke();
+            ctx.fillStyle = '#a6adb5';
+            ctx.strokeStyle = '#6b7178';
+            ctx.lineWidth = 1.4;
+            ctx.fill(PATH_JAW);
+            ctx.stroke(PATH_JAW);
+            ctx.restore();
+        }
+
+        // ── Ritverktyg ────────────────────────────────────────────────────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+            for (var y = 26; y < H; y += 26) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+            ctx.stroke();
+        }
+
+        function arrow(x1, y1, x2, y2, color, width, head, dash) {
+            var ang = Math.atan2(y2 - y1, x2 - x1);
+            var len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 1) return;
+            var h = Math.max(8, Math.min(head, len * 0.9));
+            var bx = x2 - h * 0.82 * Math.cos(ang);
+            var by = y2 - h * 0.82 * Math.sin(ang);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.lineCap = 'butt';
+            ctx.setLineDash(dash || []);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(bx, by);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            var hw = 0.42;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - h * Math.cos(ang - hw), y2 - h * Math.sin(ang - hw));
+            ctx.lineTo(x2 - h * Math.cos(ang + hw), y2 - h * Math.sin(ang + hw));
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // text i delar — kursiva variabler, rak omgivande text (Poppins)
+        function drawParts(parts, x, y, size, color, align) {
+            var widths = [], total = 0, i;
+            for (i = 0; i < parts.length; i++) {
+                ctx.font = (parts[i].i ? 'italic ' : '') + '600 ' + size + 'px Poppins, sans-serif';
+                widths[i] = ctx.measureText(parts[i].t).width;
+                total += widths[i];
+            }
+            var cx = align === 'center' ? x - total / 2 : (align === 'right' ? x - total : x);
+            ctx.fillStyle = color;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            for (i = 0; i < parts.length; i++) {
+                ctx.font = (parts[i].i ? 'italic ' : '') + '600 ' + size + 'px Poppins, sans-serif';
+                ctx.fillText(parts[i].t, cx, y);
+                cx += widths[i];
+            }
+        }
+
+        function tipPos() {
+            var f = forceDir();
+            return { x: G.x + L_ARROW * f.x, y: G.y + L_ARROW * f.y };
+        }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function render() {
+            var f = forceDir();
+            var sinA = Math.sin(alpha * RAD);
+            var l = D * Math.abs(sinA);
+            var M = F_N * l;
+            var medurs = sinA < -1e-9;
+            var moturs = sinA > 1e-9;
+            var tip = tipPos();
+
+            drawBackground();
+            drawWrench();
+
+            // rotationsbåge kring muttern — pilspetsen i rörelsens riktning
+            var rot0 = -78 * RAD, rot1 = -192 * RAD, rR = 46;
+            ctx.save();
+            ctx.globalAlpha = (moturs || medurs) ? 0.85 : 0.3;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2.2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.arc(P.x, P.y, rR, rot1, rot0);   // canvas ritar medurs rot1→rot0
+            ctx.stroke();
+            var endAng = medurs ? rot0 : rot1;
+            var sgn = medurs ? -1 : 1;
+            var ex = P.x + rR * Math.cos(endAng), ey = P.y + rR * Math.sin(endAng);
+            var vx = sgn * Math.sin(endAng), vy = -sgn * Math.cos(endAng);
+            ctx.fillStyle = INK;
+            ctx.beginPath();
+            ctx.moveTo(ex + vx * 10, ey + vy * 10);
+            ctx.lineTo(ex - vy * 5, ey + vx * 5);
+            ctx.lineTo(ex + vy * 5, ey - vx * 5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+
+            // vridningspunkten — röd prick + etikett i fri yta
+            ctx.strokeStyle = 'rgba(31,37,48,0.7)';
+            ctx.lineWidth = 1.1;
+            ctx.beginPath();
+            ctx.moveTo(P.x - 34, P.y - 66);
+            ctx.lineTo(P.x - 7, P.y - 13);
+            ctx.stroke();
+            ctx.fillStyle = '#d13b2e';
+            ctx.beginPath();
+            ctx.arc(P.x, P.y, 4.4, 0, 2 * Math.PI);
+            ctx.fill();
+            drawParts([{ t: 'Vridningspunkt' }], P.x - 38, P.y - 74, 13, INK, 'center');
+
+            // kraftens riktningslinje + hävarmen
+            ctx.save();
+            ctx.globalAlpha = 0.7;
+            ctx.strokeStyle = COL_F;
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([8, 5]);
+            ctx.beginPath();
+            ctx.moveTo(G.x - 700 * f.x, G.y - 700 * f.y);
+            ctx.lineTo(G.x + 700 * f.x, G.y + 700 * f.y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.restore();
+
+            var lpx = l * PXM;
+            if (lpx > 7) {
+                // fotpunkten: vinkelrät projektion av P på riktningslinjen
+                var tproj = -(D * PXM) * (U.x * f.x + U.y * f.y);
+                var foot = { x: G.x + tproj * f.x, y: G.y + tproj * f.y };
+                var m = { x: (P.x - foot.x) / lpx, y: (P.y - foot.y) / lpx };
+                arrow(P.x, P.y, foot.x, foot.y, COL_ARM, 2.4, 9, [7, 5]);
+                arrow(foot.x, foot.y, P.x, P.y, COL_ARM, 2.4, 9, [7, 5]);
+                // rät vinkel vid fotpunkten
+                ctx.strokeStyle = INK;
+                ctx.lineWidth = 1.3;
+                ctx.beginPath();
+                ctx.moveTo(foot.x + 8 * m.x, foot.y + 8 * m.y);
+                ctx.lineTo(foot.x + 8 * m.x + 8 * f.x, foot.y + 8 * m.y + 8 * f.y);
+                ctx.lineTo(foot.x + 8 * f.x, foot.y + 8 * f.y);
+                ctx.stroke();
+                // etikettens plats: strax bortom fotpunkten; nära 90°/270° ligger
+                // hävarmen längs skaftet — då i stället vid mitten, på motsatt
+                // sida mot kraften. Hamnar bortom-fot-läget nära pilspetsen
+                // eller angreppspunkten flyttas etiketten också till mittläget.
+                var n = { x: m.y, y: -m.x };
+                var uDot = n.x * U.x + n.y * U.y;
+                var lx = foot.x - 44 * m.x, ly = foot.y - 44 * m.y;
+                var nearArrow = Math.hypot(lx - tip.x, ly - tip.y) < 64 ||
+                                Math.hypot(lx - G.x, ly - G.y) < 44;
+                if (Math.abs(uDot) < 0.2 || nearArrow) {
+                    var n2 = { x: m.y, y: -m.x };
+                    if (Math.abs(uDot) < 0.2) {
+                        // motsatt kraftens sida (fri yta ovan/under skaftet)
+                        if (n2.x * f.x + n2.y * f.y > 0) n2 = { x: -n2.x, y: -n2.y };
+                    } else {
+                        // kraftens sida — bort från skaftet
+                        if (n2.x * f.x + n2.y * f.y < 0) n2 = { x: -n2.x, y: -n2.y };
+                    }
+                    lx = P.x + 0.55 * (foot.x - P.x) + 32 * n2.x;
+                    ly = P.y + 0.55 * (foot.y - P.y) + 32 * n2.y;
+                }
+                drawParts([{ t: 'Hävarm ' }, { t: 'l', i: true }, { t: ' = ' + fmt(l, 2) + ' m' }],
+                          lx, ly + 4, 13, COL_ARM, 'center');
+            } else {
+                drawParts([{ t: 'Hävarm ' }, { t: 'l', i: true },
+                           { t: ' = 0 — riktningslinjen går genom vridningspunkten' }],
+                          P.x + 24, P.y + 112, 12.5, COL_ARM, 'left');
+            }
+
+            // kraften F med draghandtag i spetsen
+            arrow(G.x, G.y, tip.x, tip.y, COL_F, 5, 16);
+            ctx.fillStyle = COL_F;
+            ctx.beginPath();
+            ctx.arc(G.x, G.y, 4.6, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(37,99,201,0.13)';
+            ctx.strokeStyle = COL_F;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.arc(tip.x, tip.y, 11, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            // F-etikett strax bortom spetsen, vinkelrätt ut från riktningslinjen
+            var away = { x: tip.x - P.x, y: tip.y - P.y };
+            var perp = { x: f.y, y: -f.x };
+            var aDot = perp.x * away.x + perp.y * away.y;
+            if (Math.abs(aDot) < 8) { if (perp.y > 0) perp = { x: -perp.x, y: -perp.y }; }
+            else if (aDot < 0) perp = { x: -perp.x, y: -perp.y };
+            var po = Math.abs(aDot) < 8 ? 30 : 15;
+            drawParts([{ t: 'F', i: true }, { t: ' = ' + fmt(F_N, 0) + ' N' }],
+                      tip.x + 24 * f.x + po * perp.x, tip.y + 24 * f.y + po * perp.y + 4,
+                      13.5, COL_F, perp.x >= 0 ? 'left' : 'right');
+
+            // avläsning överst + ledtråd nederst
+            var riktn = moturs ? ' (moturs)' : medurs ? ' (medurs)' : '';
+            drawParts([{ t: 'M', i: true }, { t: ' = ' }, { t: 'F', i: true }, { t: ' · ' },
+                       { t: 'l', i: true },
+                       { t: ' = ' + fmt(F_N, 0) + ' · ' + fmt(l, 2) + ' = ' + fmt(M, 1) + ' Nm' + riktn }],
+                      W / 2, 28, 15, INK, 'center');
+            ctx.font = '500 12px Poppins, sans-serif';
+            ctx.fillStyle = '#6a7180';
+            ctx.textAlign = 'left';
+            ctx.fillText('Dra i pilspetsen och vrid kraften — hela varvet runt.', 12, H - 12);
+        }
+
+        // ── Drag i pilspetsen ─────────────────────────────────────────────
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return { x: (e.clientX - r.left) * W / r.width,
+                     y: (e.clientY - r.top) * H / r.height };
+        }
+        function overTip(p) {
+            var tip = tipPos();
+            return Math.hypot(p.x - tip.x, p.y - tip.y) < 26;
+        }
+        function setAlphaFrom(p) {
+            var a = HANDLE_DEG - Math.atan2(p.y - G.y, p.x - G.x) / RAD;
+            alpha = ((a % 360) + 360) % 360;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!overTip(p)) return;
+            e.preventDefault();
+            dragging = true;
+            dragPtr = e.pointerId;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            setAlphaFrom(p);
+            render();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = overTip(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            setAlphaFrom(p);
+            render();
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            canvas.style.cursor = 'default';
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            render();
+        });
+
+        // Poppins kan laddas efter första render — rita om när fonterna är klara.
+        if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+            document.fonts.ready.then(function () { render(); });
+        }
+
+        // Test-handtag för skärmdumpsskript: ställ vinkeln exakt.
+        card._setAlpha = function (a) { alpha = ((a % 360) + 360) % 360; render(); };
+
+        render();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: valtning
+    // ══════════════════════════════════════════════════════════════════════
+    // Demonstrationen ur fy2-1.2 (Tyngdpunkt/vältning): en kloss står på en
+    // planka som kan lutas med en glidare. I klossens tyngdpunkt (grön
+    // prick) sitter en metallvisare som alltid hänger lodrätt och visar
+    // tyngdkraftens riktning. Klossens stödyta är markerad lila på plankan.
+    // Så länge visaren träffar plankan innanför stödytan står klossen
+    // stabilt — när lutningen blir så stor att visaren passerar utanför
+    // vridningspunkten (klossens nedre hörn) välter klossen kring hörnet.
+    // Två klossformer: hög/smal (välter tidigt) och låg/bred (står kvar
+    // ända upp till glidarens max). Ritad i laboranstemat.
+    function buildValtning(node, cfg) {
+        var W = 560, H = 430;              // logisk ritstorlek
+        var HX = 105, HY = 344;            // gångjärnet (plankans vridpunkt)
+        var LEN = 370;                     // plankans längd (px)
+        var PLANK_T = 10;                  // plankans tjocklek (px)
+        var GROUND_Y = HY + PLANK_T;       // marklinjen (plankan vilar på den)
+        var S0 = 170;                      // klossens nedre (vänstra) hörn längs plankan
+        var TILT_MAX = 45;                 // glidarens maxlutning (grader)
+        var TILT_RATE = 16;                // plankans vridfart mot målet (grader/s)
+        var GPX = 1500;                    // "g" i px/s² för vältdynamiken
+        var RAD = Math.PI / 180;
+        var INK = '#1f2530';
+        var COL_STOD = '#8b5cf6';          // stödytan (som teorifigurerna)
+        var COL_TP = '#2e9e4f';            // tyngdpunkten (grön, som figurerna)
+        var SHAPES = {
+            hog: { b: 64, h: 150 },        // hög/smal — välter vid ≈23°
+            lag: { b: 120, h: 64 }         // låg/bred — välter först vid ≈62°
+        };
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En kloss står på en planka som kan lutas med en glidare. I ' +
+            'klossens tyngdpunkt sitter en metallvisare som alltid hänger ' +
+            'lodrätt och visar tyngdkraftens riktning. Klossens stödyta är ' +
+            'markerad på plankan. När lutningen blir så stor att visaren ' +
+            'passerar utanför klossens nedre hörn välter klossen kring ' +
+            'hörnet. En hög smal kloss välter tidigt, en låg bred står kvar.');
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var hogBtn = document.createElement('button');
+        hogBtn.type = 'button';
+        hogBtn.className = 'minisim-btn ms-primar';
+        hogBtn.textContent = 'Hög kloss';
+
+        var lagBtn = document.createElement('button');
+        lagBtn.type = 'button';
+        lagBtn.className = 'minisim-btn';
+        lagBtn.textContent = 'Låg kloss';
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+
+        var slowLbl = document.createElement('label');
+        slowLbl.className = 'minisim-check';
+        var slowCb = document.createElement('input');
+        slowCb.type = 'checkbox';
+        slowLbl.appendChild(slowCb);
+        slowLbl.appendChild(document.createTextNode('Ultrarapid'));
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(hogBtn);
+        controls.appendChild(lagBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(slowLbl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // Lutningsglidare
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Lutning';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '0';
+        slider.max = String(TILT_MAX);
+        slider.step = '0.5';
+        slider.value = '0';
+        slider.setAttribute('aria-label', 'Plankans lutning i grader');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisimmar) ──────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var shape = SHAPES.hog;
+        var tiltCur = 0;                   // plankans lutning nu (grader)
+        var tiltTarget = 0;                // glidarens mål (grader)
+        var mode = 'star';                 // 'star' | 'valter' | 'ligger'
+        var phi = 0;                       // vältvinkel kring hörnet (rad)
+        var phiVel = 0;                    // vältvinkelns fart (rad/s)
+        var tippedAt = 0;                  // lutningen då vältningen började
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        function critDeg() { return Math.atan(shape.b / shape.h) / RAD; }
+        function timeScale() { return slowCb.checked ? 0.3 : 1; }
+
+        // Tyngdpunktens världsläge. Plankriktning dir=(cosθ,−sinθ),
+        // plank-normal (uppåt) perp=(−sinθ,−cosθ); en punkt (s,u) i
+        // plankans koordinater (s längs plankan, u vinkelrätt uppåt)
+        // ligger i världen på hinge + s·dir + u·perp.
+        function cogWorld() {
+            var th = tiltCur * RAD;
+            var dirX = Math.cos(th), dirY = -Math.sin(th);
+            var perpX = -Math.sin(th), perpY = -Math.cos(th);
+            // tyngdpunkten relativt vridhörnet (S0,0), CCW-roterad phi
+            var xr = shape.b / 2 * Math.cos(phi) - shape.h / 2 * Math.sin(phi);
+            var ur = shape.b / 2 * Math.sin(phi) + shape.h / 2 * Math.cos(phi);
+            return {
+                x: HX + (S0 + xr) * dirX + ur * perpX,
+                y: HY + (S0 + xr) * dirY + ur * perpY
+            };
+        }
+
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        function drawGround() {
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(60, GROUND_Y);
+            ctx.lineTo(500, GROUND_Y);
+            ctx.stroke();
+            // snedstreck under marken (fast yta)
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            for (var x = 70; x <= 500; x += 15) {
+                ctx.moveTo(x, GROUND_Y);
+                ctx.lineTo(x - 9, GROUND_Y + 9);
+            }
+            ctx.stroke();
+        }
+
+        function drawAngle() {
+            if (tiltCur < 3) return;
+            var th = tiltCur * RAD;
+            // bågen ritas i hörnet där plankans UNDERSIDA möter marken —
+            // marklinjen är bågens undre ben, plankans undersida det övre
+            var vx = HX + PLANK_T * Math.sin(th);
+            var vy = HY + PLANK_T * Math.cos(th);
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.arc(vx, vy, 52, 0, -th, true);
+            ctx.stroke();
+            // gradtal i fri yta vänster om gångjärnet (kilen är för smal
+            // för texten vid små vinklar — aldrig ovanpå plankan/klossen)
+            ctx.fillStyle = INK;
+            ctx.font = '14px ' + FONT;
+            ctx.textAlign = 'right';
+            ctx.fillText(Math.round(tiltCur) + '°', HX - 14, GROUND_Y - 6);
+        }
+
+        function drawPlankAndBlock() {
+            var th = tiltCur * RAD;
+            ctx.save();
+            ctx.translate(HX, HY);
+            ctx.rotate(-th);
+            // plankan (ovansidan ligger på y = 0)
+            ctx.fillStyle = '#d8c39a';
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 1.8;
+            ctx.fillRect(0, 0, LEN, PLANK_T);
+            ctx.strokeRect(0, 0, LEN, PLANK_T);
+            // stödytan (lila) — kontaktsträckan mot plankan
+            var b0 = S0, b1 = S0 + shape.b;
+            if (mode === 'ligger') { b0 = S0 - shape.h; b1 = S0; }
+            ctx.strokeStyle = COL_STOD;
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(b0, 0);
+            ctx.lineTo(b1, 0);
+            ctx.stroke();
+            // klossen — vrids kring nedre hörnet (S0, 0) när den välter
+            ctx.translate(S0, 0);
+            ctx.rotate(-phi);
+            ctx.fillStyle = '#e8d3ae';
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 2;
+            ctx.fillRect(0, -shape.h, shape.b, shape.h);
+            ctx.strokeRect(0, -shape.h, shape.b, shape.h);
+            // träådring — svaga linjer längs klossens långsida
+            ctx.strokeStyle = 'rgba(138,106,58,0.35)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            if (shape.h >= shape.b) {
+                ctx.moveTo(shape.b * 0.32, -shape.h + 8);
+                ctx.lineTo(shape.b * 0.26, -8);
+                ctx.moveTo(shape.b * 0.68, -shape.h + 10);
+                ctx.lineTo(shape.b * 0.74, -10);
+            } else {
+                ctx.moveTo(8, -shape.h * 0.36);
+                ctx.lineTo(shape.b - 8, -shape.h * 0.30);
+                ctx.moveTo(10, -shape.h * 0.70);
+                ctx.lineTo(shape.b - 10, -shape.h * 0.74);
+            }
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Metallvisaren: fritt upphängd i tyngdpunkten, hänger alltid
+        // lodrätt och visar tyngdkraftens riktning (pil nedåt).
+        function drawPointer() {
+            var cog = cogWorld();
+            var th = tiltCur * RAD;
+            // plankans ovansida rakt under tyngdpunkten
+            var footY = HY - (cog.x - HX) * Math.tan(th);
+            var endY = Math.min(footY + 24, GROUND_Y - 2);
+            var headLen = 9;
+            ctx.strokeStyle = '#3a4049';
+            ctx.lineWidth = 2.4;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(cog.x, cog.y);
+            ctx.lineTo(cog.x, endY - headLen);
+            ctx.stroke();
+            ctx.fillStyle = '#3a4049';
+            ctx.beginPath();
+            ctx.moveTo(cog.x, endY);
+            ctx.lineTo(cog.x - 4.5, endY - headLen);
+            ctx.lineTo(cog.x + 4.5, endY - headLen);
+            ctx.closePath();
+            ctx.fill();
+            // tyngdpunkten (grön prick, som teorifigurerna)
+            ctx.fillStyle = COL_TP;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(cog.x, cog.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function render() {
+            drawBackground();
+            drawGround();
+            drawPlankAndBlock();
+            drawAngle();
+            drawPointer();
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        function step(dt) {
+            // plankan glider mjukt mot glidarens mål
+            if (tiltCur !== tiltTarget) {
+                var d = tiltTarget - tiltCur;
+                var maxStep = TILT_RATE * dt;
+                if (Math.abs(d) <= maxStep) tiltCur = tiltTarget;
+                else tiltCur += (d > 0 ? maxStep : -maxStep);
+            }
+            // vältning: startar när tyngdpunktens lodlinje passerar hörnet
+            if (mode === 'star' && tiltCur > critDeg() + 0.05) {
+                mode = 'valter';
+                phi = 0;
+                phiVel = 0;
+                tippedAt = tiltCur;
+            }
+            if (mode === 'valter') {
+                // vridning kring hörnet: vinkelaccelerationen växer med
+                // tyngdpunktens hävarm kring vridningspunkten
+                var r = Math.hypot(shape.b, shape.h) / 2;
+                var acc = GPX / r *
+                    Math.sin((tiltCur - critDeg()) * RAD + phi);
+                phiVel += acc * dt;
+                phi += phiVel * dt;
+                if (phi >= Math.PI / 2) {
+                    phi = Math.PI / 2;
+                    phiVel = 0;
+                    mode = 'ligger';
+                }
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden) return false;
+            return mode === 'valter' || tiltCur !== tiltTarget;
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            sliderVal.textContent = fmt(tiltTarget, 1) + '°';
+            if (mode === 'valter') info.textContent = 'Klossen välter!';
+            else if (mode === 'ligger')
+                info.textContent = 'Välte vid ' + fmt(tippedAt, 1) + '°';
+            else info.textContent = 'Klossen står stabilt';
+        }
+
+        // ── UI-logik ──────────────────────────────────────────────────────
+        function setShape(key) {
+            shape = SHAPES[key];
+            hogBtn.className = 'minisim-btn' + (key === 'hog' ? ' ms-primar' : '');
+            lagBtn.className = 'minisim-btn' + (key === 'lag' ? ' ms-primar' : '');
+            mode = 'star';
+            phi = 0;
+            phiVel = 0;
+            render();
+            updateInfo();
+            kick();
+        }
+        hogBtn.addEventListener('click', function () { setShape('hog'); });
+        lagBtn.addEventListener('click', function () { setShape('lag'); });
+        omBtn.addEventListener('click', function () {
+            mode = 'star';
+            phi = 0;
+            phiVel = 0;
+            tiltTarget = 0;
+            slider.value = '0';
+            render();
+            updateInfo();
+            kick();
+        });
+        slider.addEventListener('input', function () {
+            tiltTarget = parseFloat(slider.value);
+            updateInfo();
+            kick();
+        });
+        slowCb.addEventListener('change', kick);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Test-handtag för skärmdumpsskript: ställ lutning/vältvinkel exakt.
+        card._set = function (tiltDeg, phiDeg, newMode) {
+            tiltCur = tiltDeg;
+            tiltTarget = tiltDeg;
+            slider.value = String(tiltDeg);
+            phi = (phiDeg || 0) * RAD;
+            if (newMode) mode = newMode;
+            if (mode !== 'star') tippedAt = tiltDeg;
+            render();
+            updateInfo();
+        };
+
+        render();
+        updateInfo();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: linjal
+    // ══════════════════════════════════════════════════════════════════════
+    function buildLinjal(node, cfg) {
+        var W = 560, H = 430;           // logisk ritstorlek
+        var R_X0 = 70, R_X1 = 490;      // linjalens vänstra/högra ände
+        var R_TOP = 238, R_BOT = 264;   // linjalens över-/underkant
+        var PX_PER_CM = (R_X1 - R_X0) / 30;   // 30 cm-linjal
+        var MID = (R_X0 + R_X1) / 2;    // linjalens mitt (tyngdpunkt utan vikt)
+        var X1_START = 120, X2_START = 472;   // fingrarnas startlägen
+        var FINGER_W = 21;
+        var MEET_GAP = FINGER_W + 6;    // fingrarna "möts" vid detta gap
+        var MU_S = 0.5, MU_K = 0.3;     // vilo- resp. glidfriktionstal
+        var V_FINGER = 42;              // fingerfart (px/s)
+        var M_VIKT = 0.5;               // viktens massa i linjalmassor
+        var N_LEN = 120;                // total pillängd för linjalens tyngd
+        var COL_N = '#2563c9';          // normalkraftens färg (som teorin)
+        var INK = '#1f2530';
+        var SKIN = '#ecc19c', SKIN_D = '#b98a5e';
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En linjal vilar vågrätt på två pekfingrar. När fingrarna dras mot ' +
+            'varandra glider alltid det finger som är längst från tyngdpunkten, ' +
+            'eftersom det bär mindre normalkraft och därmed mindre friktion. ' +
+            'Fingrarna turas om att glida och möts till slut precis under ' +
+            'linjalens tyngdpunkt.');
+        scene.appendChild(canvas);
+
+        // Fullskärmsknapp — samma ikon som .fs-btn på simuleringssidorna.
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.className = 'minisim-btn ms-primar';
+        startBtn.textContent = 'Dra ihop fingrarna';
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+
+        var pausBtn = document.createElement('button');
+        pausBtn.type = 'button';
+        pausBtn.className = 'minisim-btn';
+        pausBtn.textContent = 'Pausa';
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(startBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(pausBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // Rad 2: visningsval.
+        var toggles = document.createElement('div');
+        toggles.className = 'minisim-controls';
+        function makeCheck(text, checked, accent) {
+            var lbl = document.createElement('label');
+            lbl.className = 'minisim-check';
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = checked;
+            if (accent) cb.style.accentColor = accent;
+            lbl.appendChild(cb);
+            lbl.appendChild(document.createTextNode(text));
+            return { lbl: lbl, cb: cb };
+        }
+        var nChk = makeCheck('Visa normalkrafterna', true, COL_N);
+        var viktChk = makeCheck('Lägg en vikt på linjalen', false, null);
+        var tpChk = makeCheck('Visa tyngdpunkten', false, null);
+        var slowChk = makeCheck('Ultrarapid', false, null);
+        toggles.appendChild(nChk.lbl);
+        toggles.appendChild(viktChk.lbl);
+        toggles.appendChild(tpChk.lbl);
+        toggles.appendChild(slowChk.lbl);
+        card.appendChild(toggles);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisims) ────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var mode = 'rest';          // 'rest' | 'kor' | 'klar'
+        var x1 = X1_START;          // vänstra fingrets läge
+        var x2 = X2_START;          // högra fingrets läge
+        var slid = 2;               // vilket finger glider (1 = vänster)
+        var xw = 400;               // viktens läge på linjalen
+        var paused = false;
+        var dragging = false;
+        var dragPtr = -1;
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        function timeScale() { return slowChk.cb.checked ? 0.25 : 1; }
+        function viktPa() { return viktChk.cb.checked; }
+        // Tyngdpunktens läge: linjalen (massa 1) + ev. vikten (massa M_VIKT).
+        function tyngdX() {
+            return viktPa() ? (MID + M_VIKT * xw) / (1 + M_VIKT) : MID;
+        }
+        // Normalkrafternas andelar av totala tyngden (momentjämvikt kring
+        // motstående finger): fingret NÄRMAST tyngdpunkten bär störst andel.
+        function frac1() { return (x2 - tyngdX()) / (x2 - x1); }
+
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        function rr(x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.arcTo(x + w, y, x + w, y + h, r);
+            ctx.arcTo(x + w, y + h, x, y + h, r);
+            ctx.arcTo(x, y + h, x, y, r);
+            ctx.arcTo(x, y, x + w, y, r);
+            ctx.closePath();
+        }
+
+        function drawLinjal() {
+            // träfärgad skollinjal med cm-gradering
+            rr(R_X0, R_TOP, R_X1 - R_X0, R_BOT - R_TOP, 3);
+            ctx.fillStyle = '#f0e2b8';
+            ctx.fill();
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            for (var cm = 0; cm <= 30; cm++) {
+                var x = R_X0 + cm * PX_PER_CM;
+                var len = (cm % 5 === 0) ? 9 : 5.5;
+                ctx.moveTo(x, R_TOP);
+                ctx.lineTo(x, R_TOP + len);
+            }
+            ctx.stroke();
+            ctx.fillStyle = INK;
+            ctx.font = '9px ' + FONT;
+            ctx.textAlign = 'center';
+            for (cm = 5; cm <= 25; cm += 5) {
+                ctx.fillText(String(cm), R_X0 + cm * PX_PER_CM, R_BOT - 4);
+            }
+        }
+
+        function drawVikt() {
+            if (!viktPa()) return;
+            // mässingsvikt (labbvikt med knopp) stående på linjalen
+            rr(xw - 15, R_TOP - 30, 30, 30, 3);
+            ctx.fillStyle = '#c8a24a';
+            ctx.fill();
+            ctx.strokeStyle = '#8a6a2a';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+            rr(xw - 5, R_TOP - 39, 10, 9, 2);
+            ctx.fillStyle = '#c8a24a';
+            ctx.fill();
+            ctx.stroke();
+            ctx.strokeStyle = 'rgba(138,106,42,0.55)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(xw - 11, R_TOP - 24);
+            ctx.lineTo(xw + 11, R_TOP - 24);
+            ctx.stroke();
+        }
+
+        function drawTyngdpunkt() {
+            if (!(tpChk.cb.checked || mode === 'klar')) return;
+            var xc = tyngdX();
+            // Etiketten läggs i fri yta: ovanför vikten om den är nära, och
+            // ovanför varje normalkraftspil vars spets ligger inom textens
+            // bredd (annars hamnar texten på pilen när fingrarna närmar sig).
+            var yLbl = R_TOP - 22;
+            if (viktPa() && Math.abs(xc - xw) < 64) yLbl = R_TOP - 54;
+            if (nChk.cb.checked) {
+                var tot = (1 + (viktPa() ? M_VIKT : 0)) * N_LEN;
+                var f1 = frac1();
+                var arms = [[x1, f1 * tot], [x2, (1 - f1) * tot]];
+                for (var i = 0; i < 2; i++) {
+                    if (Math.abs(arms[i][0] - xc) < 46) {
+                        yLbl = Math.min(yLbl, R_BOT - arms[i][1] - 16);
+                    }
+                }
+                yLbl = Math.max(14, yLbl);
+            }
+            ctx.fillStyle = INK;
+            ctx.beginPath();
+            ctx.arc(xc, (R_TOP + R_BOT) / 2, 2.8, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 3]);
+            ctx.beginPath();
+            ctx.moveTo(xc, R_TOP - 2);
+            ctx.lineTo(xc, yLbl + 6);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.font = '13px ' + FONT;
+            ctx.textAlign = 'center';
+            ctx.fillText('Tyngdpunkt', xc, yLbl);
+        }
+
+        // En stiliserad fingertopp: rundad kapsel i hudton som bär linjalen
+        // underifrån — avsiktligt enkel (ingen hel hand), med en mjuk
+        // ljusare kant som ger volym och två små veck vid leden.
+        function drawFinger(fx) {
+            var tipY = R_BOT;
+            var hw = FINGER_W / 2;
+            var len = 74;               // kapselns höjd under linjalen
+            ctx.fillStyle = SKIN;
+            ctx.strokeStyle = SKIN_D;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(fx - hw, tipY + len - hw);
+            ctx.lineTo(fx - hw, tipY + hw);
+            ctx.quadraticCurveTo(fx - hw, tipY, fx, tipY);
+            ctx.quadraticCurveTo(fx + hw, tipY, fx + hw, tipY + hw);
+            ctx.lineTo(fx + hw, tipY + len - hw);
+            ctx.quadraticCurveTo(fx + hw, tipY + len, fx, tipY + len);
+            ctx.quadraticCurveTo(fx - hw, tipY + len, fx - hw, tipY + len - hw);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            // mjuk ljusare kant längs ena sidan (volym)
+            ctx.strokeStyle = 'rgba(255,240,220,0.7)';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(fx - hw + 4, tipY + len - 14);
+            ctx.lineTo(fx - hw + 4, tipY + 12);
+            ctx.quadraticCurveTo(fx - hw + 4, tipY + 4.5, fx - 2, tipY + 4);
+            ctx.stroke();
+            // två små veck vid fingerleden
+            ctx.strokeStyle = 'rgba(185,138,94,0.55)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(fx - hw + 4, tipY + 46);
+            ctx.quadraticCurveTo(fx, tipY + 49, fx + hw - 4, tipY + 46);
+            ctx.moveTo(fx - hw + 4, tipY + 53);
+            ctx.quadraticCurveTo(fx, tipY + 56, fx + hw - 4, tipY + 53);
+            ctx.stroke();
+        }
+
+        // Rörelsestrimmor bakom det glidande fingret (dir = rörelseriktning).
+        function drawStreaks(fx, dir) {
+            ctx.strokeStyle = 'rgba(31,37,48,0.30)';
+            ctx.lineWidth = 1.6;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            for (var k = 0; k < 3; k++) {
+                var y = R_BOT + 16 + k * 11;
+                var x0 = fx - dir * (20 + k * 4);
+                ctx.moveTo(x0, y);
+                ctx.lineTo(x0 - dir * (14 - k * 3), y);
+            }
+            ctx.stroke();
+        }
+
+        // "F" med N-subscript (normalkraftens beteckning) intill pilspetsen.
+        function drawFN(x, y, align, color) {
+            ctx.fillStyle = color;
+            ctx.font = 'italic 15px ' + FONT;
+            var wF = ctx.measureText('F').width;
+            var x0 = align === 'right'
+                ? x - wF - 7
+                : x;
+            ctx.textAlign = 'left';
+            ctx.fillText('F', x0, y);
+            ctx.font = '10px ' + FONT;
+            ctx.fillText('N', x0 + wF, y + 3);
+        }
+
+        // Skalenlig normalkraftspil: från kontaktytan (fingertoppen) uppåt
+        // genom linjalen, längd ∝ N. side: -1 = etikett åt vänster.
+        function drawNormal(x, len, side) {
+            len = Math.max(10, len);
+            var yTail = R_BOT, yTip = yTail - len;
+            var head = Math.max(9, Math.min(14, len * 0.5));
+            var yBase = yTip + head;
+            ctx.strokeStyle = COL_N;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(x, yTail);
+            ctx.lineTo(x, yBase);
+            ctx.stroke();
+            ctx.fillStyle = COL_N;
+            ctx.beginPath();
+            ctx.moveTo(x, yTip);
+            ctx.lineTo(x - 5.5, yBase);
+            ctx.lineTo(x + 5.5, yBase);
+            ctx.closePath();
+            ctx.fill();
+            drawFN(x + side * 10, yTip + 12, side < 0 ? 'right' : 'left', COL_N);
+        }
+
+        function drawNormals() {
+            if (!nChk.cb.checked) return;
+            var tot = (1 + (viktPa() ? M_VIKT : 0)) * N_LEN;
+            var f1 = frac1();
+            drawNormal(x1, f1 * tot, -1);
+            drawNormal(x2, (1 - f1) * tot, 1);
+        }
+
+        function render() {
+            drawBackground();
+            drawFinger(x1);
+            drawFinger(x2);
+            drawLinjal();
+            drawVikt();
+            drawTyngdpunkt();
+            if (mode === 'kor') {
+                if (slid === 1) drawStreaks(x1, 1);
+                else drawStreaks(x2, -1);
+            }
+            drawNormals();
+        }
+
+        // ── Simulationssteg (stick–slip) ──────────────────────────────────
+        function step(dt) {
+            if (mode !== 'kor') return;
+            var f1 = frac1(), f2 = 1 - f1;
+            // Glidande finger byts när dess glidfriktion hunnit ikapp det
+            // stillastående fingrets vilofriktion: μk·N_glid ≥ μs·N_still.
+            if (slid === 1 && MU_K * f1 >= MU_S * f2) slid = 2;
+            else if (slid === 2 && MU_K * f2 >= MU_S * f1) slid = 1;
+            if (slid === 1) x1 += V_FINGER * dt;
+            else x2 -= V_FINGER * dt;
+            if (x2 - x1 <= MEET_GAP) {
+                var xc = tyngdX();
+                x1 = xc - MEET_GAP / 2;
+                x2 = xc + MEET_GAP / 2;
+                mode = 'klar';
+                syncUi();
+            }
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return mode === 'kor';
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            if (mode === 'kor') {
+                info.textContent = slid === 1 ? 'Vänster finger glider'
+                                              : 'Höger finger glider';
+            } else if (mode === 'klar') {
+                info.textContent = 'Tyngdpunkten hittad!';
+            } else {
+                info.textContent = 'Fingrarna står stilla';
+            }
+        }
+
+        // ── UI-logik ──────────────────────────────────────────────────────
+        function syncUi() {
+            pausBtn.textContent = paused ? 'Fortsätt' : 'Pausa';
+            pausBtn.disabled = mode !== 'kor';
+            startBtn.disabled = mode !== 'rest';
+            omBtn.disabled = mode === 'rest';
+        }
+
+        function reset() {
+            mode = 'rest';
+            x1 = X1_START;
+            x2 = X2_START;
+            paused = false;
+            syncUi();
+            render();
+            updateInfo();
+        }
+
+        startBtn.addEventListener('click', function () {
+            if (mode !== 'rest') return;
+            // fingret längst från tyngdpunkten (minst normalkraft och därmed
+            // minst friktion) börjar glida
+            slid = frac1() < 0.5 ? 1 : 2;
+            mode = 'kor';
+            paused = false;
+            syncUi();
+            kick();
+        });
+        omBtn.addEventListener('click', reset);
+        pausBtn.addEventListener('click', function () {
+            paused = !paused;
+            syncUi();
+            if (!paused) kick();
+            else render();
+        });
+        nChk.cb.addEventListener('change', render);
+        tpChk.cb.addEventListener('change', render);
+        slowChk.cb.addEventListener('change', kick);
+        // Att lägga på/ta av vikten flyttar tyngdpunkten — börja om från
+        // startläget så att fingrarna säkert står på var sin sida om den.
+        viktChk.cb.addEventListener('change', reset);
+
+        // ── Dra vikten längs linjalen (pekare/touch/mus) ──────────────────
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - r.left) * W / r.width,
+                y: (e.clientY - r.top) * H / r.height
+            };
+        }
+        function overVikt(p) {
+            return viktPa() && Math.abs(p.x - xw) < 22 &&
+                   p.y > R_TOP - 48 && p.y < R_BOT;
+        }
+        function clampVikt(x) {
+            var lo = R_X0 + 16, hi = R_X1 - 16;
+            if (mode === 'kor') {
+                // tyngdpunkten måste stanna mellan fingrarna
+                lo = Math.max(lo, ((1 + M_VIKT) * (x1 + 12) - MID) / M_VIKT);
+                hi = Math.min(hi, ((1 + M_VIKT) * (x2 - 12) - MID) / M_VIKT);
+            }
+            return Math.max(lo, Math.min(hi, x));
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!overVikt(p)) return;
+            e.preventDefault();
+            if (mode === 'klar') reset();   // flyttad vikt = nytt försök
+            dragging = true;
+            dragPtr = e.pointerId;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = overVikt(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            xw = clampVikt(p.x);
+            if (!running) { render(); updateInfo(); }
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            canvas.style.cursor = 'default';
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Test-handtag för skärmdumpsskript: frys ett läge mitt i förloppet.
+        card._setLage = function (nx1, nx2, nslid) {
+            x1 = nx1;
+            x2 = nx2;
+            slid = nslid;
+            mode = 'kor';
+            paused = true;
+            syncUi();
+            render();
+            updateInfo();
+        };
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
     // ── Register + publikt API ────────────────────────────────────────────
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
-                  fjaderpendel: buildFjaderpendel };
+                  fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
+                  valtning: buildValtning, linjal: buildLinjal };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

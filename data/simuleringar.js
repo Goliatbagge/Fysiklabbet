@@ -70,6 +70,14 @@ window.SIM_NAMES = {
   'fysik1-stralning-genomtranglighet.html': 'Strålningens genomtränglighet',
 
   // ── Fysik nivå 2 ──────────────────────────────────────────
+  'fysik2-cirkular-rorelse-app.html': [
+    { name: 'Cirkulär rörelse', desc: 'En bil i cirkelbana ovanifrån och en bil i loop. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie — och hitta gränsfarten där bilen precis klarar loopen.',
+      kw: ['rörelse','krafter','cirkulär','cirkelbana','centripetal','centripetalkraft','centripetalacceleration','vinkelhastighet','omega','banhastighet','banfart','radie','loop','looping','normalkraft','tyngdkraft','friktion','gränsfart','bil','kurva','mekanik'] },
+    { name: 'Tomtebloss i skruvdragare', href: 'fysik2-tomtebloss-app.html', desc: 'Tänd ett tomtebloss fäst i en skruvdragare, i mörker — gnistorna lämnar cirkelbanan tangentiellt, precis som Newtons första lag säger. Med varvtalsglidare, ultrarapid och ljud.',
+      kw: ['rörelse','cirkulär','cirkelbana','tomtebloss','gnistor','skruvdragare','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
+    { name: 'Tvättsvamp i centrifug', href: 'fysik2-tomtebloss-app.html?sim=centrifug', desc: 'En blöt tvättsvamp i en roterande centrifugkorg sedd rakt uppifrån — vattendropparna lämnar banan tangentiellt enligt Newtons första lag.',
+      kw: ['rörelse','cirkulär','cirkelbana','centrifug','tvättsvamp','vattendroppar','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
+  ],
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': 'Jämförelse av svängningar',

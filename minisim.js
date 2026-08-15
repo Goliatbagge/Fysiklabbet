@@ -2519,24 +2519,20 @@
     // ══════════════════════════════════════════════════════════════════════
     //  typ: valtning
     // ══════════════════════════════════════════════════════════════════════
-    // Demonstrationen ur fy2-1.2 (Tyngdpunkt/vältning): en kloss står på en
-    // planka som kan lutas med en glidare. I klossens tyngdpunkt (grön
-    // prick) sitter en metallvisare som alltid hänger lodrätt och visar
-    // tyngdkraftens riktning. Klossens stödyta är markerad lila på plankan.
-    // Så länge visaren träffar plankan innanför stödytan står klossen
-    // stabilt — när lutningen blir så stor att visaren passerar utanför
-    // vridningspunkten (klossens nedre hörn) välter klossen kring hörnet.
-    // Två klossformer: hög/smal (välter tidigt) och låg/bred (står kvar
-    // ända upp till glidarens max). Ritad i laboranstemat.
+    // Demonstrationen ur fy2-1.2 (Vältning): en kloss står på ett vågrätt
+    // underlag och LUTAS med en glidare kring sitt nedre hörn — som när man
+    // tippar klossen för hand (underlaget lutas aldrig, så glidfriktion
+    // spelar ingen roll). I klossens tyngdpunkt (grön prick) sitter en
+    // metallvisare som alltid hänger lodrätt och visar tyngdkraftens
+    // riktning. "Släpp klossen": hänger visaren innanför vridningspunkten
+    // faller klossen tillbaka, hänger den utanför välter klossen. Två
+    // klossformer: hög/smal (välter tidigt) och låg/bred (kräver stor
+    // lutning). Ritad i laboranstemat.
     function buildValtning(node, cfg) {
         var W = 560, H = 430;              // logisk ritstorlek
-        var HX = 105, HY = 344;            // gångjärnet (plankans vridpunkt)
-        var LEN = 370;                     // plankans längd (px)
-        var PLANK_T = 10;                  // plankans tjocklek (px)
-        var GROUND_Y = HY + PLANK_T;       // marklinjen (plankan vilar på den)
-        var S0 = 170;                      // klossens nedre (vänstra) hörn längs plankan
-        var TILT_MAX = 45;                 // glidarens maxlutning (grader)
-        var TILT_RATE = 16;                // plankans vridfart mot målet (grader/s)
+        var PX = 300;                      // vridningspunkten (nedre högra hörnet)
+        var GROUND_Y = 354;                // marklinjen (underlaget, alltid vågrätt)
+        var TILT_MAX = 70;                 // glidarens maxlutning (grader)
         var GPX = 1500;                    // "g" i px/s² för vältdynamiken
         var RAD = Math.PI / 180;
         var INK = '#1f2530';
@@ -2562,12 +2558,13 @@
         canvas.className = 'minisim-canvas';
         canvas.setAttribute('role', 'img');
         canvas.setAttribute('aria-label',
-            'En kloss står på en planka som kan lutas med en glidare. I ' +
-            'klossens tyngdpunkt sitter en metallvisare som alltid hänger ' +
-            'lodrätt och visar tyngdkraftens riktning. Klossens stödyta är ' +
-            'markerad på plankan. När lutningen blir så stor att visaren ' +
-            'passerar utanför klossens nedre hörn välter klossen kring ' +
-            'hörnet. En hög smal kloss välter tidigt, en låg bred står kvar.');
+            'En kloss står på ett vågrätt underlag och lutas med en glidare ' +
+            'kring sitt nedre hörn. I klossens tyngdpunkt sitter en ' +
+            'metallvisare som alltid hänger lodrätt och visar tyngdkraftens ' +
+            'riktning. Släpps klossen medan visaren hänger innanför ' +
+            'vridningspunkten faller den tillbaka — hänger visaren utanför ' +
+            'välter klossen. En hög smal kloss välter vid liten lutning, en ' +
+            'låg bred kräver mycket större lutning.');
         scene.appendChild(canvas);
 
         var ICON_EXPAND =
@@ -2590,9 +2587,14 @@
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
 
+        var slappBtn = document.createElement('button');
+        slappBtn.type = 'button';
+        slappBtn.className = 'minisim-btn ms-primar';
+        slappBtn.textContent = 'Släpp klossen';
+
         var hogBtn = document.createElement('button');
         hogBtn.type = 'button';
-        hogBtn.className = 'minisim-btn ms-primar';
+        hogBtn.className = 'minisim-btn ms-vald';
         hogBtn.textContent = 'Hög kloss';
 
         var lagBtn = document.createElement('button');
@@ -2615,6 +2617,7 @@
         var info = document.createElement('span');
         info.className = 'minisim-info';
 
+        controls.appendChild(slappBtn);
         controls.appendChild(hogBtn);
         controls.appendChild(lagBtn);
         controls.appendChild(omBtn);
@@ -2635,7 +2638,7 @@
         slider.max = String(TILT_MAX);
         slider.step = '0.5';
         slider.value = '0';
-        slider.setAttribute('aria-label', 'Plankans lutning i grader');
+        slider.setAttribute('aria-label', 'Klossens lutning i grader');
         var sliderVal = document.createElement('span');
         sliderVal.className = 'minisim-slider-val';
         sliderRow.appendChild(sliderLbl);
@@ -2660,36 +2663,32 @@
         resizeCanvas();
 
         // ── Tillstånd ─────────────────────────────────────────────────────
+        // "Handen" (glidaren) håller klossen i vinkeln phi kring det nedre
+        // högra hörnet (vridningspunkten). "Släpp klossen" lämnar över till
+        // fysiken: klossen roterar fritt kring hörnet och faller tillbaka
+        // eller välter beroende på var tyngdpunktens lodlinje hänger.
         var shape = SHAPES.hog;
-        var tiltCur = 0;                   // plankans lutning nu (grader)
-        var tiltTarget = 0;                // glidarens mål (grader)
-        var mode = 'star';                 // 'star' | 'valter' | 'ligger'
-        var phi = 0;                       // vältvinkel kring hörnet (rad)
-        var phiVel = 0;                    // vältvinkelns fart (rad/s)
-        var tippedAt = 0;                  // lutningen då vältningen började
+        var mode = 'hall';                 // 'hall' | 'anim' | 'ligger'
+        var phi = 0;                       // klossens lutning kring hörnet (rad)
+        var phiVel = 0;                    // vinkelfart under 'anim' (rad/s)
+        var animTips = false;              // åt vilket håll släppet slutar
+        var tippedAt = 0;                  // lutningen (grader) då klossen släpptes
         var running = false;
         var visible = true;
         var lastTs = 0;
         var rafId = 0;
 
-        function critDeg() { return Math.atan(shape.b / shape.h) / RAD; }
+        function critRad() { return Math.atan(shape.b / shape.h); }
         function timeScale() { return slowCb.checked ? 0.3 : 1; }
 
-        // Tyngdpunktens världsläge. Plankriktning dir=(cosθ,−sinθ),
-        // plank-normal (uppåt) perp=(−sinθ,−cosθ); en punkt (s,u) i
-        // plankans koordinater (s längs plankan, u vinkelrätt uppåt)
-        // ligger i världen på hinge + s·dir + u·perp.
+        // En punkt (x, u) i klossens koordinater (x åt höger från
+        // vridningspunkten, u uppåt; klossen upptar x i [−b, 0], u i
+        // [0, h]) hamnar efter medurs rotation phi kring hörnet i världen på
+        //   (PX + x·cos phi + u·sin phi, GROUND_Y − (−x·sin phi + u·cos phi))
         function cogWorld() {
-            var th = tiltCur * RAD;
-            var dirX = Math.cos(th), dirY = -Math.sin(th);
-            var perpX = -Math.sin(th), perpY = -Math.cos(th);
-            // tyngdpunkten relativt vridhörnet (S0,0), CCW-roterad phi
-            var xr = shape.b / 2 * Math.cos(phi) - shape.h / 2 * Math.sin(phi);
+            var xr = -shape.b / 2 * Math.cos(phi) + shape.h / 2 * Math.sin(phi);
             var ur = shape.b / 2 * Math.sin(phi) + shape.h / 2 * Math.cos(phi);
-            return {
-                x: HX + (S0 + xr) * dirX + ur * perpX,
-                y: HY + (S0 + xr) * dirY + ur * perpY
-            };
+            return { x: PX + xr, y: GROUND_Y - ur };
         }
 
         // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
@@ -2733,81 +2732,83 @@
         }
 
         function drawAngle() {
-            if (tiltCur < 3) return;
-            var th = tiltCur * RAD;
-            // bågen ritas i hörnet där plankans UNDERSIDA möter marken —
-            // marklinjen är bågens undre ben, plankans undersida det övre
-            var vx = HX + PLANK_T * Math.sin(th);
-            var vy = HY + PLANK_T * Math.cos(th);
+            var deg = phi / RAD;
+            if (deg < 3) return;
+            // bågen i vridningspunkten: marklinjen (åt vänster) är det
+            // undre benet, klossens lyfta underkant det övre
             ctx.strokeStyle = INK;
             ctx.lineWidth = 1.4;
             ctx.beginPath();
-            ctx.arc(vx, vy, 52, 0, -th, true);
+            ctx.arc(PX, GROUND_Y, 44, Math.PI, Math.PI + phi, false);
             ctx.stroke();
-            // gradtal i fri yta vänster om gångjärnet (kilen är för smal
-            // för texten vid små vinklar — aldrig ovanpå plankan/klossen)
-            ctx.fillStyle = INK;
-            ctx.font = '14px ' + FONT;
-            ctx.textAlign = 'right';
-            ctx.fillText(Math.round(tiltCur) + '°', HX - 14, GROUND_Y - 6);
+            // gradtal på bisektrisen, strax utanför bågen — bara när kilen
+            // är bred nog för texten (glidarens avläsning finns alltid)
+            if (deg >= 10) {
+                var mid = Math.PI + phi / 2;
+                ctx.fillStyle = INK;
+                ctx.font = '14px ' + FONT;
+                ctx.textAlign = 'center';
+                ctx.fillText(Math.round(deg) + '°',
+                    PX + Math.cos(mid) * 74, GROUND_Y + Math.sin(mid) * 74 + 5);
+            }
         }
 
-        function drawPlankAndBlock() {
-            var th = tiltCur * RAD;
+        function drawBlock() {
+            // stödytan (lila) på marken — klossens kontaktsträcka: hela
+            // basen när den står/ligger plant, annars bara vridningspunkten
+            var flat = phi < 0.01 || mode === 'ligger';
+            if (flat) {
+                var b0 = mode === 'ligger' ? PX : PX - shape.b;
+                var b1 = mode === 'ligger' ? PX + shape.h : PX;
+                ctx.strokeStyle = COL_STOD;
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'butt';
+                ctx.beginPath();
+                ctx.moveTo(b0, GROUND_Y);
+                ctx.lineTo(b1, GROUND_Y);
+                ctx.stroke();
+            }
+            // klossen — vrids medurs kring nedre högra hörnet (PX, GROUND_Y)
             ctx.save();
-            ctx.translate(HX, HY);
-            ctx.rotate(-th);
-            // plankan (ovansidan ligger på y = 0)
-            ctx.fillStyle = '#d8c39a';
-            ctx.strokeStyle = '#8a6a3a';
-            ctx.lineWidth = 1.8;
-            ctx.fillRect(0, 0, LEN, PLANK_T);
-            ctx.strokeRect(0, 0, LEN, PLANK_T);
-            // stödytan (lila) — kontaktsträckan mot plankan
-            var b0 = S0, b1 = S0 + shape.b;
-            if (mode === 'ligger') { b0 = S0 - shape.h; b1 = S0; }
-            ctx.strokeStyle = COL_STOD;
-            ctx.lineWidth = 5;
-            ctx.lineCap = 'butt';
-            ctx.beginPath();
-            ctx.moveTo(b0, 0);
-            ctx.lineTo(b1, 0);
-            ctx.stroke();
-            // klossen — vrids kring nedre hörnet (S0, 0) när den välter
-            ctx.translate(S0, 0);
-            ctx.rotate(-phi);
+            ctx.translate(PX, GROUND_Y);
+            ctx.rotate(phi);
             ctx.fillStyle = '#e8d3ae';
             ctx.strokeStyle = '#8a6a3a';
             ctx.lineWidth = 2;
-            ctx.fillRect(0, -shape.h, shape.b, shape.h);
-            ctx.strokeRect(0, -shape.h, shape.b, shape.h);
+            ctx.fillRect(-shape.b, -shape.h, shape.b, shape.h);
+            ctx.strokeRect(-shape.b, -shape.h, shape.b, shape.h);
             // träådring — svaga linjer längs klossens långsida
             ctx.strokeStyle = 'rgba(138,106,58,0.35)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             if (shape.h >= shape.b) {
-                ctx.moveTo(shape.b * 0.32, -shape.h + 8);
-                ctx.lineTo(shape.b * 0.26, -8);
-                ctx.moveTo(shape.b * 0.68, -shape.h + 10);
-                ctx.lineTo(shape.b * 0.74, -10);
+                ctx.moveTo(-shape.b + shape.b * 0.32, -shape.h + 8);
+                ctx.lineTo(-shape.b + shape.b * 0.26, -8);
+                ctx.moveTo(-shape.b + shape.b * 0.68, -shape.h + 10);
+                ctx.lineTo(-shape.b + shape.b * 0.74, -10);
             } else {
-                ctx.moveTo(8, -shape.h * 0.36);
-                ctx.lineTo(shape.b - 8, -shape.h * 0.30);
-                ctx.moveTo(10, -shape.h * 0.70);
-                ctx.lineTo(shape.b - 10, -shape.h * 0.74);
+                ctx.moveTo(-shape.b + 8, -shape.h * 0.36);
+                ctx.lineTo(-8, -shape.h * 0.30);
+                ctx.moveTo(-shape.b + 10, -shape.h * 0.70);
+                ctx.lineTo(-10, -shape.h * 0.74);
             }
             ctx.stroke();
             ctx.restore();
+            // vridningspunkten markeras när klossen är lyft ur planläget
+            if (!flat || mode === 'ligger') {
+                ctx.fillStyle = INK;
+                ctx.beginPath();
+                ctx.arc(PX, GROUND_Y, 3.4, 0, 2 * Math.PI);
+                ctx.fill();
+            }
         }
 
         // Metallvisaren: fritt upphängd i tyngdpunkten, hänger alltid
         // lodrätt och visar tyngdkraftens riktning (pil nedåt).
         function drawPointer() {
             var cog = cogWorld();
-            var th = tiltCur * RAD;
-            // plankans ovansida rakt under tyngdpunkten
-            var footY = HY - (cog.x - HX) * Math.tan(th);
-            var endY = Math.min(footY + 24, GROUND_Y - 2);
+            // visaren hänger lodrätt från tyngdpunkten ner mot marken
+            var endY = GROUND_Y - 2;
             var headLen = 9;
             ctx.strokeStyle = '#3a4049';
             ctx.lineWidth = 2.4;
@@ -2836,46 +2837,44 @@
         function render() {
             drawBackground();
             drawGround();
-            drawPlankAndBlock();
+            drawBlock();
             drawAngle();
             drawPointer();
         }
 
-        // ── Simulationssteg ───────────────────────────────────────────────
+        // ── Simulationssteg (endast efter "Släpp klossen") ────────────────
         function step(dt) {
-            // plankan glider mjukt mot glidarens mål
-            if (tiltCur !== tiltTarget) {
-                var d = tiltTarget - tiltCur;
-                var maxStep = TILT_RATE * dt;
-                if (Math.abs(d) <= maxStep) tiltCur = tiltTarget;
-                else tiltCur += (d > 0 ? maxStep : -maxStep);
-            }
-            // vältning: startar när tyngdpunktens lodlinje passerar hörnet
-            if (mode === 'star' && tiltCur > critDeg() + 0.05) {
-                mode = 'valter';
-                phi = 0;
+            if (mode !== 'anim') return;
+            // fri rotation kring vridningspunkten: vinkelaccelerationen
+            // följer tyngdpunktens hävarm — noll när tyngdpunkten står rakt
+            // ovanför hörnet (phi = kritiska vinkeln), tillbakadrivande
+            // innanför, vältande utanför
+            var r = Math.hypot(shape.b, shape.h) / 2;
+            var acc = GPX / r * Math.sin(phi - critRad());
+            phiVel += acc * dt;
+            phi += phiVel * dt;
+            if (phi >= Math.PI / 2) {
+                // klossen landar på sin sida
+                phi = Math.PI / 2;
                 phiVel = 0;
-                tippedAt = tiltCur;
-            }
-            if (mode === 'valter') {
-                // vridning kring hörnet: vinkelaccelerationen växer med
-                // tyngdpunktens hävarm kring vridningspunkten
-                var r = Math.hypot(shape.b, shape.h) / 2;
-                var acc = GPX / r *
-                    Math.sin((tiltCur - critDeg()) * RAD + phi);
-                phiVel += acc * dt;
-                phi += phiVel * dt;
-                if (phi >= Math.PI / 2) {
-                    phi = Math.PI / 2;
+                mode = 'ligger';
+                syncUi();
+            } else if (phi <= 0) {
+                // klossen slår i underlaget — en liten dämpad studs
+                phi = 0;
+                phiVel = -phiVel * 0.22;
+                if (Math.abs(phiVel) < 0.3) {
                     phiVel = 0;
-                    mode = 'ligger';
+                    mode = 'hall';
+                    slider.value = '0';
+                    syncUi();
                 }
             }
         }
 
         function shouldRun() {
             if (!visible || document.hidden) return false;
-            return mode === 'valter' || tiltCur !== tiltTarget;
+            return mode === 'anim';
         }
 
         function frame(ts) {
@@ -2903,41 +2902,67 @@
         }
 
         function updateInfo() {
-            sliderVal.textContent = fmt(tiltTarget, 1) + '°';
-            if (mode === 'valter') info.textContent = 'Klossen välter!';
-            else if (mode === 'ligger')
+            sliderVal.textContent = fmt(phi / RAD, 1) + '°';
+            if (mode === 'anim') {
+                info.textContent = animTips ? 'Klossen välter!'
+                                            : 'Klossen faller tillbaka';
+            } else if (mode === 'ligger') {
                 info.textContent = 'Välte vid ' + fmt(tippedAt, 1) + '°';
-            else info.textContent = 'Klossen står stabilt';
+            } else if (phi < 0.01) {
+                info.textContent = 'Klossen står stabilt';
+            } else if (phi < critRad()) {
+                info.textContent = 'Faller tillbaka om du släpper';
+            } else {
+                info.textContent = 'Välter om du släpper';
+            }
         }
 
         // ── UI-logik ──────────────────────────────────────────────────────
+        function syncUi() {
+            slappBtn.disabled = !(mode === 'hall' && phi > 0.01);
+            slider.disabled = mode !== 'hall';
+        }
         function setShape(key) {
             shape = SHAPES[key];
-            hogBtn.className = 'minisim-btn' + (key === 'hog' ? ' ms-primar' : '');
-            lagBtn.className = 'minisim-btn' + (key === 'lag' ? ' ms-primar' : '');
-            mode = 'star';
-            phi = 0;
-            phiVel = 0;
+            hogBtn.className = 'minisim-btn' + (key === 'hog' ? ' ms-vald' : '');
+            lagBtn.className = 'minisim-btn' + (key === 'lag' ? ' ms-vald' : '');
+            if (mode !== 'hall') {
+                mode = 'hall';
+                phi = 0;
+                phiVel = 0;
+                slider.value = '0';
+            }
+            syncUi();
             render();
             updateInfo();
-            kick();
         }
         hogBtn.addEventListener('click', function () { setShape('hog'); });
         lagBtn.addEventListener('click', function () { setShape('lag'); });
-        omBtn.addEventListener('click', function () {
-            mode = 'star';
-            phi = 0;
+        slappBtn.addEventListener('click', function () {
+            if (mode !== 'hall' || phi <= 0.01) return;
+            mode = 'anim';
             phiVel = 0;
-            tiltTarget = 0;
-            slider.value = '0';
-            render();
+            animTips = phi > critRad();
+            tippedAt = phi / RAD;
+            syncUi();
             updateInfo();
             kick();
         });
-        slider.addEventListener('input', function () {
-            tiltTarget = parseFloat(slider.value);
+        omBtn.addEventListener('click', function () {
+            mode = 'hall';
+            phi = 0;
+            phiVel = 0;
+            slider.value = '0';
+            syncUi();
+            render();
             updateInfo();
-            kick();
+        });
+        slider.addEventListener('input', function () {
+            if (mode !== 'hall') return;
+            phi = parseFloat(slider.value) * RAD;
+            syncUi();
+            render();
+            updateInfo();
         });
         slowCb.addEventListener('change', kick);
 
@@ -3009,8 +3034,9 @@
         var PX_PER_CM = (R_X1 - R_X0) / 30;   // 30 cm-linjal
         var MID = (R_X0 + R_X1) / 2;    // linjalens mitt (tyngdpunkt utan vikt)
         var X1_START = 124, X2_START = 452;   // fingrarnas startlägen (skärm)
-        var FINGER_W = 21;
-        var MEET_GAP = FINGER_W + 6;    // fingrarna "möts" vid detta gap
+        var FINGER_W = 30;              // fingertoppens bredd (platt ellips)
+        var FINGER_H = 24;              // fingertoppens höjd
+        var MEET_GAP = FINGER_W + 2;    // fingrarna "möts" vid detta gap
         var MU_S = 0.5, MU_K = 0.3;     // vilo- resp. glidfriktionstal
         var V_FINGER = 30;              // varje fingers fart mot mitten (px/s)
         var M_VIKT = 0.5;               // viktens massa i linjalmassor
@@ -3269,43 +3295,31 @@
             ctx.fillText('Tyngdpunkt', xc, yLbl);
         }
 
-        // En stiliserad fingertopp: rundad kapsel i hudton som bär linjalen
-        // underifrån — avsiktligt enkel (ingen hel hand), med en mjuk
-        // ljusare kant som ger volym och två små veck vid leden.
+        // En stiliserad fingertopp sedd rakt framifrån: en platt ellips i
+        // hudton vars ovansida trycker mot linjalens undersida — avsiktligt
+        // enkel (ingen hel hand), med en mjuk skuggbåge i underkanten och en
+        // liten ljusare reflex som ger volym.
         function drawFinger(fx) {
-            var tipY = R_BOT;
-            var hw = FINGER_W / 2;
-            var len = 74;               // kapselns höjd under linjalen
+            var rx = FINGER_W / 2, ry = FINGER_H / 2;
+            var cy = R_BOT + ry - 1;    // lätt "intryckt" mot linjalen
             ctx.fillStyle = SKIN;
             ctx.strokeStyle = SKIN_D;
             ctx.lineWidth = 1.6;
             ctx.beginPath();
-            ctx.moveTo(fx - hw, tipY + len - hw);
-            ctx.lineTo(fx - hw, tipY + hw);
-            ctx.quadraticCurveTo(fx - hw, tipY, fx, tipY);
-            ctx.quadraticCurveTo(fx + hw, tipY, fx + hw, tipY + hw);
-            ctx.lineTo(fx + hw, tipY + len - hw);
-            ctx.quadraticCurveTo(fx + hw, tipY + len, fx, tipY + len);
-            ctx.quadraticCurveTo(fx - hw, tipY + len, fx - hw, tipY + len - hw);
-            ctx.closePath();
+            ctx.ellipse(fx, cy, rx, ry, 0, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
-            // mjuk ljusare kant längs ena sidan (volym)
-            ctx.strokeStyle = 'rgba(255,240,220,0.7)';
-            ctx.lineWidth = 2.4;
+            // skuggbåge i underkanten (volym)
+            ctx.strokeStyle = 'rgba(185,138,94,0.45)';
+            ctx.lineWidth = 1.6;
             ctx.beginPath();
-            ctx.moveTo(fx - hw + 4, tipY + len - 14);
-            ctx.lineTo(fx - hw + 4, tipY + 12);
-            ctx.quadraticCurveTo(fx - hw + 4, tipY + 4.5, fx - 2, tipY + 4);
+            ctx.ellipse(fx, cy - 1, rx - 4.5, ry - 4.5, 0, 0.2 * Math.PI, 0.8 * Math.PI);
             ctx.stroke();
-            // två små veck vid fingerleden
-            ctx.strokeStyle = 'rgba(185,138,94,0.55)';
-            ctx.lineWidth = 1.2;
+            // liten ljus reflex uppe till vänster
+            ctx.strokeStyle = 'rgba(255,240,220,0.8)';
+            ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(fx - hw + 4, tipY + 46);
-            ctx.quadraticCurveTo(fx, tipY + 49, fx + hw - 4, tipY + 46);
-            ctx.moveTo(fx - hw + 4, tipY + 53);
-            ctx.quadraticCurveTo(fx, tipY + 56, fx + hw - 4, tipY + 53);
+            ctx.ellipse(fx, cy + 1, rx - 4.5, ry - 4.5, 0, 1.15 * Math.PI, 1.55 * Math.PI);
             ctx.stroke();
         }
 

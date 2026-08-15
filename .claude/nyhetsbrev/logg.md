@@ -52,6 +52,12 @@ Format:
   fortfarande osagt.
 - Teaser: PeVatron-uppslaget i nyhetskön (objektet i Örnen som accelererar
   protoner)
+- EmailOctopus: kampanjen "Nyhetsbrev nr 1 - 2026-08-16" upplagd 2026-08-15
+  (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad + preheader ur
+  utkastet, HTML inklistrad med {{PreviewText}}-div, alla fyra bilder
+  verifierade i förhandsvisningen). ÅTERSTÅR för användaren: testskick +
+  schemaläggning söndag 17.00 svensk tid (tidszonen default:ar till London!).
+  Flödet är dokumenterat som slash-kommandot /brev-till-octopus.
 
 ## 2026-08-09 — "Solytan har fransar — och en magnet som svävar"
 - Status: **ALDRIG SKICKAT.** Skrevs för utskick söndag 2026-08-09 kl 17.00,

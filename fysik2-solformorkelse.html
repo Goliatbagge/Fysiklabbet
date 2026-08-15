@@ -98,6 +98,26 @@
             .fs-controls .fs-label { min-width: 0; flex: 1 1 auto; }
             .fs-controls .fs-value { min-width: 0; }
             .fs-controls .fs-row input[type="range"] { flex: 1 1 100%; order: 3; }
+
+            /* Ark-läget (mobil fullskärm): avläsningen ritas som diskret
+               text uppe till vänster (si-diskret, sektion 8 i
+               styles-laborans-sim.css). Textfärgerna sätts här: ljus text
+               mot himlen med en tunn MÖRK textskugga så den håller genom
+               hela spannet dag → djup skymning. (Mörk scen — ingen
+               vit-halo-problematik.) */
+            body.lab-sim .scene-wrap.dock-overlay .scene-info.si-diskret .si-lbl {
+                color: rgba(246, 242, 234, 0.72);
+                text-shadow: 0 1px 3px rgba(5, 7, 20, 0.6);
+            }
+            body.lab-sim .scene-wrap.dock-overlay .scene-info.si-diskret .si-val {
+                color: #f6f2ea;
+                text-shadow: 0 1px 3px rgba(5, 7, 20, 0.6);
+            }
+            /* Totalitetsaccenten: husets röda drunknar mot mörk himmel —
+               använd koronans varma gult i stället. */
+            body.lab-sim .scene-wrap.dock-overlay .scene-info.si-diskret .si-val.si-tot {
+                color: #ffd27a;
+            }
         }
 
         /* Avläsningsruta uppe till vänster (under fullskärmsknappen) */
@@ -1063,7 +1083,7 @@ function App() {
                 </button>
 
                 {visaInfo && (
-                    <div className="scene-info">
+                    <div className="scene-info si-diskret">
                         <span className="si-lbl">Fas</span>
                         <span className={'si-val' + (readout.central ? ' si-tot' : '')}>{readout.fas}</span>
                         <span className="si-lbl" style={{ marginTop: 4 }}>Täckningsgrad</span>

@@ -71,8 +71,16 @@ const MAT = function () {
             })),
             // Avläsningsrutan hör på scenen — får aldrig hamna bakom verktygen
             info: (() => { const e = w.querySelector('.scene-info');
-                           return e && getComputedStyle(e).display !== 'none'
-                               ? { box: rect(e) } : null; })(),
+                           if (!e) return null;
+                           const ics = getComputedStyle(e);
+                           if (ics.display === 'none') return null;
+                           // "ruta" = har synlig bakgrund, ram eller skugga
+                           const bg = ics.backgroundColor;
+                           const ruta = !(bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)')
+                                     || parseFloat(ics.borderTopWidth) > 0
+                                     || ics.boxShadow !== 'none';
+                           return { box: rect(e), ruta,
+                                    diskret: e.classList.contains('si-diskret') }; })(),
             handtag: (() => { const h = w.querySelector('.fs-dock-handle, .fs-toggle-handle');
                               return h ? { cls: h.className, box: rect(h) } : null; })(),
             fsbtn: (() => { const b = w.querySelector('.fs-btn'); return b ? rect(b) : null; })()
@@ -142,6 +150,16 @@ function granska(m, lage) {
                 fel.push(`${lage}: .${p.cls} utanför skärmen i ${namn} (x ${p.box.x}–${p.box.right}, skärm ${m.vp.w})`);
             }
         });
+        // 4b. I ark-läget får avläsningen ALDRIG ligga som en RUTA över
+        //     scenen — den ska gömmas/visas med docken, eller ritas som
+        //     diskret text (klassen si-diskret, utan bakgrund/ram/skugga).
+        //     (Solförmörkelsen: rutan centrerades mitt över scenen och
+        //     skymde hela sikten, påpekat 2026-08-15.)
+        if (s.ark && s.info && s.info.ruta && s.media) {
+            const o = overlapp(s.info.box, s.media.box);
+            if (o > 400) fel.push(`${lage}: .scene-info ligger som ruta över scenen i ${namn} (${o} px²)`
+                + ' — göm den med docken eller använd si-diskret (ren text)');
+        }
         // 4. Avläsningsrutan får inte hamna under/bakom en verktygsruta
         if (s.info) {
             s.paneler.forEach(p => {

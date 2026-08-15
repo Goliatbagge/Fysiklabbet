@@ -1379,6 +1379,13 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay {
         justify-content: flex-end !important;
     }
+    /* Även HOPFÄLLT ark: handtaget ligger i underkanten, inte mitt över
+       scenen (8.5:s centrering är tänkt för scener i flödet — i ark-läget
+       är scenen absolut, så center lämnade handtaget svävande mitt i
+       bilden). Högre specificitet än 8.5-regeln, så ordningen kvittar. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay.dock-collapsed {
+        justify-content: flex-end !important;
+    }
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay > .dock-media {
         position: absolute !important;
         top: 0;
@@ -1395,6 +1402,36 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay .scene-hint {
         display: none;                 /* skulle hamna mitt över scenen */
     }
+    /* Avläsningsrutan (.scene-info) följer arket: hopfälld dock ⇒ ren scen.
+       Utan detta blev rutan kvar som flödesbarn när verktygen gömdes och
+       centrerades av justify-content MITT ÖVER scenen (solförmörkelsen,
+       påpekat 2026-08-15 — "skymmer hela sikten"). En simulering som vill
+       ha avläsningen ständigt synlig i ark-läget sätter i stället klassen
+       si-diskret på .scene-info — se regeln nedanför. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay.dock-collapsed .scene-info:not(.si-diskret) {
+        display: none;
+    }
+    /* si-diskret: avläsningen som REN TEXT på scenen — ingen ruta, ingen
+       ram, ingen skugga — uppe till vänster under fullskärmsknappen, där
+       den kommer undan. Simuleringen ansvarar SJÄLV för textfärger som
+       håller mot dess scenbakgrund (ljus text + tunn mörk textskugga på
+       mörk himmel; bläck på ljus pappersscen — aldrig vit halo på ljus
+       botten). */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay .scene-info.si-diskret {
+        position: absolute;
+        top: 62px; left: 14px; right: auto; bottom: auto;
+        margin: 0; padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: 3;
+        max-width: 55vw;
+    }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay .scene-info.si-diskret .si-lbl { font-size: 9px; }
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay .scene-info.si-diskret .si-val { font-size: 12px; }
 
     /* ── 8.5 Hopfälld dock: scenen får hela skärmen ─────────────
        Handtaget lämnas kvar (annars går läget inte att ångra) och

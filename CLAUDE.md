@@ -1168,6 +1168,18 @@ mobil-CSS i en ny simulering; du behöver däremot **inte motarbeta** reglerna:
   efter ramen) blir den 100vh i fullskärm och det finns ingen yta under att
   docka i. Då lägger `sim-dock.js` verktygen som ett ark över scenens nedre
   del (max ~60 % av skärmen) och fäller ihop det som utgångsläge.
+- **Avläsningsrutan (`.scene-info`) får ALDRIG ligga som en ruta över
+  scenen i ark-läget** (uttryckligt önskemål 2026-08-15: rutan centrerades
+  mitt över solförmörkelsen och "skymde hela sikten"). Standard: sektion 8
+  gömmer/visar den ihop med docken, precis som verktygsrutorna — du behöver
+  inte göra något. Ska avläsningen synas HELA tiden även i ark-läget (t.ex.
+  en nedräkning): sätt klassen **`si-diskret`** på `.scene-info` — då ritas
+  den som ren text utan ruta/ram/skugga uppe till vänster under
+  fullskärmsknappen. Simuleringen sätter då SJÄLV textfärger som håller mot
+  sin scenbakgrund (ljus text + tunn mörk textskugga på mörk himmel; bläck
+  på ljus pappersscen — aldrig vit halo på ljus botten). Referens:
+  `fysik2-solformorkelse.html`. `verify-mobil-scen.js` ger fel om en
+  avläsning med bakgrund/ram ligger över scenen i ark-läget.
 
 Fällor som redan kostat tid (finns som kommentarer i CSS:en — läs dem innan
 du ändrar):

@@ -275,6 +275,16 @@ fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
 OBS vid schemaläggningen i EmailOctopus: tidszonen default:ar till London —
 06.00 med fel tidszon blir 07.00 svensk tid.
 
+**⚠️ DEADLINE: utkastet ska vara granskningsklart LÖRDAG FÖRMIDDAG.**
+Brevet går 06.00 på söndagen, så användarens hela granskning — läsning,
+testskick till egen adress och schemaläggningen i EmailOctopus — måste
+hinnas med under lördagen; det finns ingen söndagsbuffert. Granskningsklart
+betyder: utkastfilen skriven och pushad, bilderna i `nyheter/brev/` live på
+sajten, loggposten skriven och alla kontroller (tankstreck, sidfotstaggar,
+bildlänkar) gröna. Blir utkastet försenat till lördag eftermiddag/kväll:
+säg det uttryckligen till användaren, så att hen vet att granskningsfönstret
+är kort — hellre ett ärligt sent besked än en tyst försening.
+
 ## Får ALDRIG
 
 - Skicka, schemalägga eller på annat sätt distribuera brevet själv — du

@@ -57,9 +57,9 @@ emailoctopus.com i Chrome.
 5. **Send-steget**: välj gärna radioknappen "Send at a specific time" —
    **men fyll INTE i leveransfälten och tryck ALDRIG på
    Schedule/Send/Preview & test.** Skicka-steget är användarens:
-   testskick till egen adress, datum/tid (söndag 17.00 **svensk** tid —
-   kontrollera att tidszonen står på Stockholm, inte London) och
-   Schedule-knappen.
+   testskick till egen adress, datum/tid (söndag **06.00 svensk tid**,
+   standard sedan 2026-08-15 — kontrollera att tidszonen står på Stockholm,
+   inte London) och Schedule-knappen.
 
 ## Efterarbete
 
@@ -72,7 +72,7 @@ emailoctopus.com i Chrome.
 
 - EmailOctopus API v2 kan INTE skapa kampanjer (bara läsa/rapportera) —
   webbläsarvägen är enda vägen. Kontrollerat 2026-08-15.
-- Tidszonen på Send-steget default:ar till London (UTC+1). 17.00 svensk
-  sommartid = 16.00 London — byt hellre tidszon till Stockholm.
+- Tidszonen på Send-steget default:ar till London (UTC+1). 06.00 svensk
+  sommartid = 05.00 London — byt hellre tidszon till Stockholm än att räkna om.
 - En aktiv automation (välkomstmejlet) ska INTE röras — den är skrivskyddad
   när den är aktiv, och så ska den förbli.

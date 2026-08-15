@@ -265,12 +265,15 @@ E-postklienter är inte webbläsare — utkastet måste vara gammaldags robust:
 
 ## Rekommenderad utskickstid
 
-**Söndag kl 17.00** är standardtiden — då planerar lärare veckans lektioner,
-inkorgen är lugn och brevets "ta med in i klassrummet"-innehåll landar precis
-när det behövs. Veckans nyheter är dessutom kompletta och teasern pekar framåt
-mot veckan som börjar. Andrahandsval: torsdag kl 06.45 (läses över
-morgonkaffet före skoldagen). Undvik måndag morgon (inkorgstopp) och
+**Söndag kl 06.00 (svensk tid)** är standardtiden — användarens uttryckliga
+val 2026-08-15: morgonpigga läser nyheten i lugn och ro på söndagsmorgonen,
+inför måndagen. Brevet ligger då överst i en lugn inkorg hela söndagen, när
+lärare planerar veckans lektioner. Veckans nyheter är kompletta och teasern
+pekar framåt mot veckan som börjar. Andrahandsval: torsdag kl 06.45 (läses
+över morgonkaffet före skoldagen). Undvik måndag morgon (inkorgstopp) och
 fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
+OBS vid schemaläggningen i EmailOctopus: tidszonen default:ar till London —
+06.00 med fel tidszon blir 07.00 svensk tid.
 
 ## Får ALDRIG
 

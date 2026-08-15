@@ -12,7 +12,9 @@ Format:
 ```
 
 ## 2026-08-16 — "Reaktorn var avstängd. Detektorn såg den ändå."
-- Status: utkast för utskick söndag 2026-08-16 kl 17.00. Brevperiod 2026-08-03
+- Status: SCHEMALAGT i EmailOctopus för söndag 2026-08-16 kl 06.00 svensk tid
+  (användaren valde 06.00 i stället för 17.00: morgonpigga läser i lugn och ro
+  inför måndagen — detta är ny standardtid framåt). Brevperiod 2026-08-03
   till 2026-08-15, alltså TVÅ veckor, eftersom brevet 2026-08-09 aldrig
   skickades. **Detta är det första brev som faktiskt går ut till
   prenumeranter** (2026-08-02 var ett testbrev, 2026-08-09 ställdes in) —
@@ -56,7 +58,8 @@ Format:
   (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad + preheader ur
   utkastet, HTML inklistrad med {{PreviewText}}-div, alla fyra bilder
   verifierade i förhandsvisningen). ÅTERSTÅR för användaren: testskick +
-  schemaläggning söndag 17.00 svensk tid (tidszonen default:ar till London!).
+  schemaläggning (tidszonen default:ar till London!). Schemalagt av
+  användaren 2026-08-15 till söndag 06.00.
   Flödet är dokumenterat som slash-kommandot /brev-till-octopus.
 
 ## 2026-08-09 — "Solytan har fransar — och en magnet som svävar"

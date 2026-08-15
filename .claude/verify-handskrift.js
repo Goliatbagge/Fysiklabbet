@@ -134,27 +134,27 @@ function overlappar(a, b) {
 }
 /* första punkten på en polylinje som hamnar i mobilzonen (samplat var
  * ~3:e px längs varje segment), eller null */
-function zonPunkt(pts, zonX) {
+function zonPunkt(pts, zonX, zonY) {
   for (let i = 0; i + 1 < pts.length; i++) {
     const a = pts[i], b = pts[i + 1];
     const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 3));
     for (let k = 0; k <= n; k++) {
       const x = a[0] + (b[0] - a[0]) * k / n;
       const y = a[1] + (b[1] - a[1]) * k / n;
-      if (x > zonX + MARGINAL && y < ZON_Y - MARGINAL) return [x, y];
+      if (x > zonX + MARGINAL && y < zonY - MARGINAL) return [x, y];
     }
   }
   if (pts.length === 1 && pts[0][0] > zonX + MARGINAL &&
-      pts[0][1] < ZON_Y - MARGINAL) return pts[0];
+      pts[0][1] < zonY - MARGINAL) return pts[0];
   return null;
 }
 
-function granska(HK, typ) {
+function granska(HK, typ, cfg) {
   const fel = [];
   const varn = [];
   let L;
   try {
-    L = HK.scen(typ);
+    L = HK.scen(typ, undefined, cfg);
   } catch (e) {
     return { fel: ['scenen kraschade: ' + e.message], varn: [] };
   }
@@ -162,6 +162,9 @@ function granska(HK, typ) {
 
   const W = HK.PAPER_W;
   const zonX = W - ZON_X;
+  /* ekvval-scener har en HÖGRE inställningsruta (tankar + "Ekvationer")
+   * — zonen sträcker sig då ned till y=210 (se OBS i handskrift.js) */
+  const zonY = L.ekvval ? 210 : ZON_Y;
   const total = nyBox();
   /* bläck som ritats FÖRE varje tidpunkt — byggs upp medan vi går */
   const hittills = nyBox();
@@ -173,10 +176,10 @@ function granska(HK, typ) {
       /* mobilzonen: sampla LÄNGS strecket. En bbox räcker inte — en lång
        * sned linje kan ha ett hörn i zonens x-intervall och ett annat i
        * dess y-intervall utan att någon punkt på linjen ligger i zonen. */
-      const p = zonPunkt(a.pts, zonX);
+      const p = zonPunkt(a.pts, zonX, zonY);
       if (p) {
         fel.push('bläck i inställningsrutans mobilzon (x>' + zonX +
-                 ', y<' + ZON_Y + '): [' +
+                 ', y<' + zonY + '): [' +
                  p[0].toFixed(0) + ',' + p[1].toFixed(0) + ']');
       }
       /* pilzonen (2b): kantbanden är förbjudna oavsett y — pilarna
@@ -202,7 +205,7 @@ function granska(HK, typ) {
         varn.push('bubbla utanför arket i sidled: x ' +
                   b.x0.toFixed(0) + '–' + b.x1.toFixed(0));
       }
-      if (b.x1 > zonX && b.y0 < ZON_Y) {
+      if (b.x1 > zonX && b.y0 < zonY) {
         fel.push('bubbla i inställningsrutans mobilzon: x ' +
                  b.x0.toFixed(0) + '–' + b.x1.toFixed(0) + ', y ' +
                  b.y0.toFixed(0) + '–' + b.y1.toFixed(0));
@@ -246,7 +249,7 @@ function granska(HK, typ) {
               L.lastBase.toFixed(0) + ' — höj lastBase');
   }
   return {
-    fel, varn,
+    fel, varn, ekvval: !!L.ekvval,
     info: 'bläck x ' + total.x0.toFixed(0) + '–' + total.x1.toFixed(0) +
           ', y ' + total.y0.toFixed(0) + '–' + total.y1.toFixed(0) +
           ', ark ' + W + '×' + Math.round(L.lastBase + 40) +
@@ -263,25 +266,31 @@ const valda = process.argv.slice(2).length
 
 let felTot = 0, varnTot = 0, gamlaTot = 0;
 for (const typ of valda) {
-  const r = granska(HK, typ);
   const var_ = anvanda.get(typ);
   const varifran = var_ ? ' (' + [...new Set(var_)].join(', ') + ')' : '';
   const gammal = TIDIGARE_GRANSKADE.has(typ);
-  if (r.fel.length && gammal) {
-    gamlaTot++;
-    console.log('gml  ' + typ + varifran + '  ' + r.fel.length +
-                ' avvikelse(r), granskad för hand tidigare');
-  } else if (r.fel.length) {
-    felTot += r.fel.length;
-    console.log('\n\x1b[31mFEL\x1b[0m  ' + typ + varifran);
-    r.fel.forEach(f => console.log('      - ' + f));
-  } else {
-    console.log('ok   ' + typ + varifran + '  ' + (r.info || ''));
-    if (gammal) {
-      console.log('      ! städad — ta bort ur TIDIGARE_GRANSKADE');
+  /* scener med två ekvationsredovisningslägen (ekvval) granskas i BÅDA:
+   * "Båda led" (standard) och "Väggen" (cfg.vagg) — strecken skiljer sig */
+  const r0 = granska(HK, typ);
+  const varianter = [[typ, r0]];
+  if (r0.ekvval) varianter.push([typ + ' [väggen]', granska(HK, typ, { vagg: true })]);
+  for (const [namn, r] of varianter) {
+    if (r.fel.length && gammal) {
+      gamlaTot++;
+      console.log('gml  ' + namn + varifran + '  ' + r.fel.length +
+                  ' avvikelse(r), granskad för hand tidigare');
+    } else if (r.fel.length) {
+      felTot += r.fel.length;
+      console.log('\n\x1b[31mFEL\x1b[0m  ' + namn + varifran);
+      r.fel.forEach(f => console.log('      - ' + f));
+    } else {
+      console.log('ok   ' + namn + varifran + '  ' + (r.info || ''));
+      if (gammal && namn === typ) {
+        console.log('      ! städad — ta bort ur TIDIGARE_GRANSKADE');
+      }
     }
+    r.varn.forEach(v => { varnTot++; console.log('      ! ' + v); });
   }
-  r.varn.forEach(v => { varnTot++; console.log('      ! ' + v); });
 }
 
 /* FLERTECKENSINDEX — placeString tar bara ETT tecken efter '_' och '^'.

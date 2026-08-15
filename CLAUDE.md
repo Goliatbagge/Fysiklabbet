@@ -312,7 +312,9 @@ Så här bygger du scenen:
    uttryckliga (figur i grafit med värden och vektorer i blått, rubrik +
    formel, mätvärdesklammer DIREKT under formeln, insättning, aldrig
    avrundning i mellanled, rimlighetsbedömning i en bubbla före svarsraden,
-   division med vågrätt streck, en tanke per led). **Läs filhuvudet innan
+   division med vågrätt streck, en tanke per led, blå båge från faktorn
+   till varje term när en parentes utvecklas — produkttermen skrivs direkt
+   efter sin båge). **Läs filhuvudet innan
    du skriver en ny scen** — kopiera rytmen från en närliggande scen
    (`layoutParallax`, `layoutVinkeldiameter`, `layoutSchwarzschild`).
 3. **Saknas ett tecken i `GLYPHS`** ritas det inte alls men tar plats

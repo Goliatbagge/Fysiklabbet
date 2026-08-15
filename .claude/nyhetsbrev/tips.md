@@ -19,15 +19,15 @@ för någon månad sedan är en perfekt tipskandidat nu).
 | Interaktiva grafer i teorin | katalog.html | Dra i glidare och se grafen ändras live, med ekvationen uppdaterad under | När ett graf-tungt avsnitt är i säsong | – |
 | Minisimuleringar i genomgångarna | katalog.html?id=fy2-1.4 | Klassrumsdemonstrationer körbara direkt i teoritexten (tomtebloss, centrifug) | Alltid; mörka årstider för tomteblosset | 2026-08-02 (teaser) |
 | Begreppsordlistan | begrepp.html | Svåra ord i nyheterna är klickbara; hela ordlistan A–Ö med enkla förklaringar | Alltid | 2026-08-02 |
-| Sökrutan | index.html | Sök över allt: simuleringar, teoriavsnitt, prov, begrepp — normaliserar å/ä/ö | Alltid | – |
+| Sökrutan | index.html | Sök över genomgångar, simuleringar, enhetskollar och begrepp — normaliserar å/ä/ö ("rorelsemangd" ger träff). Prov och minisimuleringar ingår INTE i indexet | Alltid | 2026-08-16 |
 | "För läraren"-rutorna | nyheter.html | Diskussionsfrågor och momentkoppling på nyhetsartiklarna — färdig lektionsstart | Terminsstart, måndagar | 2026-08-02 |
 | RSS-flödet | feed.xml | Prenumerera på nyheterna i valfri RSS-läsare | När nyhetsflödet nämns | – |
 | Delningslänkar | katalog.html | Varje avsnitt, prov och simulering har egen adress med delningskort — länka en elev rakt in i rätt genomgång | Alltid; lärare som planerar | 2026-08-02 |
-| Fullskärmsläge i simuleringarna | simuleringar.html | Alla simuleringar körs i fullskärm — gjort för projektor och mobil | Alltid; bra på projektor | 2026-08-16 |
+| Fullskärmsläge i simuleringarna | simuleringar.html | Alla simuleringar körs i fullskärm — gjort för projektor och mobil | Alltid; bra på projektor | – |
 | Poddspelare på vissa nyheter | nyheter.html | Utvalda artiklar har en ljudöversikt att lyssna på (kolla att aktuella artiklar faktiskt har en innan du tipsar!) | Pendling, lov | – |
 | Magnetfältet i 3D | fysik2-stavmagnet-app.html | Stavmagnetens fält går att rotera fritt i 3D — fältet finns i hela rummet, inte bara på papperet | När magnetism är i säsong; bra på projektor | 2026-08-16 (nämnd i brevet) |
 | Gissa-läget i Flyta eller sjunka | fysik1-flytkraft-app.html | Förutsäg om ett okänt föremål flyter, svävar eller sjunker — räkna ut densiteten först, se svaret direkt | Densitet/tryck-momentet; självtest | 2026-08-16 (nämnd i brevet) |
-| Inbäddade filmer i teorin | katalog.html?id=fy1-2.4 | Fritt filmmaterial spelas direkt i genomgången (Apollo 15 på månen, Tacoma Narrows-bron) | Fritt fall, resonans; lektionsstart | 2026-08-16 (nämnd i brevet) |
+| Inbäddade filmer i teorin | katalog.html?id=fy1-2.4 | Fritt filmmaterial spelas direkt i genomgången (Apollo 15 på månen, Tacoma Narrows-bron) | Fritt fall, resonans; lektionsstart | 2026-08-09 (brevet skickades aldrig, tipset är alltså osagt) |
 | Solförmörkelse-simuleringen | fysik2-solformorkelse.html | Hela förloppet från marken: korona, Bailys pärlor, diamantring; flytta månen mellan perigeum och apogeum för total eller ringformig förmörkelse | Inför en förmörkelse; astronomikapitlet | 2026-08-16 (lansering) |
 | Enhetskoll per kapitel | fysik-enhetskoll.html | Varje kapitel avslutas med ett förhör på just dess storheter, enheter och beteckningar | Terminsstart, inför prov | 2026-08-16 (nämnd i brevet) |
 | Matematik nivå 1b | katalog.html?id=ma1b | Egen nivå för SA och EK, med KPI och index samt att granska tabeller och diagram | Terminsstart; SA/EK-lärare | 2026-08-16 (lansering) |

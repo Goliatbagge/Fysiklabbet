@@ -11,38 +11,47 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
-## 2026-08-16 — "Kraftverket var avstängt. Ändå kom neutrinerna."
-- Status: utkast skrivet lördag 2026-08-15 (den schemalagda körningen samma
-  morgon misslyckades — molnsessionen saknade repo-åtkomst), för utskick
-  söndag 2026-08-16 kl 17.00. Brevperiod 2026-08-03 till 2026-08-15, alltså
-  TVÅ veckor, eftersom brevet 2026-08-09 aldrig skickades.
+## 2026-08-16 — "Reaktorn var avstängd. Detektorn såg den ändå."
+- Status: utkast för utskick söndag 2026-08-16 kl 17.00. Brevperiod 2026-08-03
+  till 2026-08-15, alltså TVÅ veckor, eftersom brevet 2026-08-09 aldrig
+  skickades. **Detta är det första brev som faktiskt går ut till
+  prenumeranter** (2026-08-02 var ett testbrev, 2026-08-09 ställdes in) —
+  därför är brevet skrivet som ett premiärbrev: sidhuvudet säger "Nyhetsbrev
+  nr 1", anslaget välkomnar och önskar god start på läsåret, och avslutet
+  tackar för att man blev en av de första.
+- Två konkurrerande utkast fanns för samma datum: ett som pushades
+  2026-08-15 (commit 9570885) och ett som kom in som patch. Patchversionen
+  valdes, eftersom den pushade öppnade med "Sedan förra brevet har det hunnit
+  gå två veckor ... fylligare än vanligt", vilket är obegripligt för en läsare
+  som aldrig fått ett brev. Två saker återfördes dock från den pushade
+  versionen: hjältebilden pekar på den nedskalade brevkopian
+  (nyheter/brev/2026-08-16-spokglod-hero.jpg, 101 kB) i stället för originalet
+  i nyheter/bilder/ (246 kB, för tungt för ett mejl), och sidfoten säger
+  "simuleringar, teori och övningar i fysik och matematik" i stället för
+  "fysiksimuleringar för gymnasiet" — brevets egen toppnyhet är ju att
+  matematiken fått en nivå till.
 - Nyheter: 2026-08-15-spokglod-fran-avstallt-karnkraftverk (hjälte),
-  2026-08-14-diamant-i-flytande-kol + 2026-08-11-spegeln-som-ljuger
-  (miniatyrer); rugbybollen i atomkärnan, magnetiska tratten och solvirvlarna
-  som textlänkar. Bortvalda denna gång: bromsade atomkärnor, fusion i metall,
-  rubin/mörk materia, kvantlabb i fritt fall, svävande magnet, flygande fokus,
+  2026-08-14-diamant-i-flytande-kol + 2026-08-13-rugbybollen-i-atomkarnan
+  (miniatyrer). Bortvalda denna gång: spegeln som ljuger, magnetiska tratten,
+  solvirvlarna, bromsade atomkärnor, fusion i metall, rubin/mörk materia,
+  kvantlabb i fritt fall, svävande magnet, flygande fokus,
   solförmörkelseartikeln (den ligger i stället bakom sajtpunkten om
   simuleringen).
-- Nytt på sajten: solförmörkelsesimuleringen + förmörkelserna i genomgången om
-  månens faser (med skärmdump), Matematik nivå 1b, pennlösningar till alla
-  exempel i Fysik 1 och 2 samt Matematik 1c, och en "kort och gott"-rad med
-  magnetism-simuleringarna, Flyta eller sjunka, resonans, tomteblosset,
-  enhetskollen och de 36 nya kraftövningarna.
-- Bilder: nedskalade brevkopior av tre nyhetsbilder
-  (nyheter/brev/2026-08-16-spokglod-hero.jpg, -diamant.jpg, -spegeln.jpg;
-  originalen var 250–730 kB styck, för tunga för ett mejl) samt ny skärmdump
-  nyheter/brev/2026-08-16-solformorkelse-totalitet.jpg (totaliteten med korona,
-  stjärnor och Venus, reglagepanelen ihopfälld).
-- Veckans tips: fullskärmsläget i simuleringarna (krok: terminsstart,
-  projektor)
+- Nytt på sajten: Matematik nivå 1b leder sektionen med egen rubrik och knapp
+  (5 kapitel, 54 avsnitt — kontrollerat mot katalogen), sedan
+  solförmörkelsesimuleringen med skärmdump, pennlösningarna till alla exempel
+  i Fysik 1 och 2 samt Matematik 1c, och en "kort och gott"-rad med
+  stavmagneten, Flyta eller sjunka, resonansen och enhetskollen.
+- Bilder: nyheter/brev/2026-08-16-spokglod-hero.jpg (från förra utkastet),
+  -omega-laserhall.jpg, -tjerenkovglod.jpg och -solformorkelse.jpg (24 sekunder
+  före totaliteten). Kvar i mappen men OANVÄNDA av det här brevet:
+  -diamant.jpg, -spegeln.jpg och -solformorkelse-totalitet.jpg, som hörde till
+  det bortvalda utkastet.
+- Veckans tips: sökrutan (krok: länka en elev rakt in i rätt avsnitt mitt i en
+  lektion). Fullskärmsläget, som var tips i det bortvalda utkastet, är alltså
+  fortfarande osagt.
 - Teaser: PeVatron-uppslaget i nyhetskön (objektet i Örnen som accelererar
   protoner)
-- OBS: 634 ord brödtext, samma längd som förra utkastet — motiverat av att
-  brevet täcker två veckor. Miljönot: CDN:erna (unpkg, Tailwind) var blockerade
-  i molnsessionen, så React-simuleringarna renderade inte förrän react/react-dom/
-  babel hämtats via npm och lagts i .shots/vendor/ med CDN-URL:erna
-  ompekade i en temporär kopia av sim-sidan. Skärmdumpen togs med playwright
-  (globalt installerat), inte med chrome --screenshot, som bara gav tom scen.
 
 ## 2026-08-09 — "Solytan har fransar — och en magnet som svävar"
 - Status: **ALDRIG SKICKAT.** Skrevs för utskick söndag 2026-08-09 kl 17.00,

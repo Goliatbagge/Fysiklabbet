@@ -57,6 +57,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-cirkular-rorelse-app.html',
     'fysik2-tomtebloss-app.html',
     'fysik2-kraftmoment-app.html',
+    'fysik2-skiftnyckel-app.html',
     'fysik2-brada-tva-stod-app.html',
     'fysik1-lutande-plan-app.html',
     'fysik1-flytkraft-app.html',

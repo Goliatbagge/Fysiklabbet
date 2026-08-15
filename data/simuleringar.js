@@ -78,6 +78,12 @@ window.SIM_NAMES = {
     { name: 'Tvättsvamp i centrifug', href: 'fysik2-tomtebloss-app.html?sim=centrifug', desc: 'En blöt tvättsvamp i en roterande centrifugkorg sedd rakt uppifrån — vattendropparna lämnar banan tangentiellt enligt Newtons första lag.',
       kw: ['rörelse','cirkulär','cirkelbana','centrifug','tvättsvamp','vattendroppar','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
   ],
+  'fysik2-kraftmoment-app.html': [
+    { name: 'Gungbrädan — momentjämvikt', desc: 'Placera vikter på en gungbräda, dra i dem och se när kraftmomentet moturs balanserar kraftmomentet medurs (M = F · l).',
+      kw: ['krafter','kraftmoment','vridmoment','moment','hävarm','hävstång','gungbräda','jämvikt','momentjämvikt','vridning','balans','statik','mekanik'] },
+    { name: 'Skiftnyckeln och hävarmen', href: 'fysik2-skiftnyckel-app.html', desc: 'Flytta kraftens angreppspunkt längs skaftet, vrid kraften ett helt varv och se hävarmen — det vinkelräta avståndet till riktningslinjen — ändras i realtid. Lossnar den tröga muttern?',
+      kw: ['krafter','kraftmoment','vridmoment','moment','hävarm','skiftnyckel','mutter','riktningslinje','angreppspunkt','vinkel','vinkelrät','vridningspunkt','vridning','medurs','moturs','verktyg','statik','mekanik'] },
+  ],
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': 'Jämförelse av svängningar',

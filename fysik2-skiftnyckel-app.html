@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skiftnyckeln och hävarmen — Fysiklabbet</title>
+    <meta name="description" content="Dra i kraftpilen på en skiftnyckel: flytta angreppspunkten längs skaftet, vinkla kraften och se hävarmen — det vinkelräta avståndet från vridningspunkten till kraftens riktningslinje — ändras i realtid. Räcker kraftmomentet M = F · l för att lossa den tröga muttern?">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-skiftnyckel-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Skiftnyckeln och hävarmen — Fysik nivå 2">
+    <meta property="og:description" content="Dra i kraftpilen på en skiftnyckel: flytta angreppspunkten längs skaftet, vinkla kraften och se hävarmen — det vinkelräta avståndet från vridningspunkten till kraftens riktningslinje — ändras i realtid. Räcker kraftmomentet M = F · l för att lossa den tröga muttern?">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-skiftnyckel-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Skiftnyckeln och hävarmen — Fysik nivå 2">
+    <meta name="twitter:description" content="Dra i kraftpilen på en skiftnyckel: flytta angreppspunkten längs skaftet, vinkla kraften och se hävarmen — det vinkelräta avståndet från vridningspunkten till kraftens riktningslinje — ändras i realtid. Räcker kraftmomentet M = F · l för att lossa den tröga muttern?">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .tab-button {
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
+        }
+        .tab-button.tab-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
+        }
+        .tab-button:hover:not(.tab-active) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 72px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 540px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-preset {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 6px 10px; font-weight: 600; font-size: 12px;
+            cursor: pointer; transition: all 0.15s ease;
+        }
+        .btn-preset:hover { border-color: var(--lab-accent, #c8324a); }
+
+        .ctl-row { border: 1px solid var(--lab-line, rgba(15,22,32,0.16));
+            border-radius: 10px; padding: 9px 10px; margin-bottom: 9px;
+            background: rgba(255,255,255,0.35); }
+        .ctl-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .ctl-chip { width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+            color: #fff; font-size: 12px; font-weight: 700; display: flex;
+            align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; }
+        .ctl-name { font-size: 14px; color: var(--lab-ink); font-weight: 600; flex-grow: 1; }
+        .ctl-line { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .ctl-line .ctl-lbl { font-size: 11px; color: var(--lab-ink-soft);
+            min-width: 92px; flex-shrink: 0; }
+        .ctl-line input[type="range"] { flex: 1; cursor: pointer; min-width: 40px; }
+
+        .fs-sliders {
+            position: absolute; top: 64px; left: 14px; z-index: 6;
+            width: 340px; max-width: 46vw; max-height: 62vh; overflow-y: auto;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 11px 13px; color: var(--lab-ink);
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+        }
+        .fs-sliders .ctl-row { background: rgba(255,255,255,0.5); }
+        .fs-sliders .fs-title { font-size: 11px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted); font-weight: 600;
+            margin-bottom: 8px; }
+
+        /* marscherande streck på rotationsbågen när muttern lossnar */
+        @keyframes lossnar-dash { to { stroke-dashoffset: -26; } }
+        @keyframes lossnar-dash-cw { to { stroke-dashoffset: 26; } }
+        .spin-arc { animation: lossnar-dash 0.55s linear infinite; }
+        .spin-arc-cw { animation: lossnar-dash-cw 0.55s linear infinite; }
+
+        /* momentmätaren i resultatkortet */
+        .m-gauge { position: relative; flex-basis: 100%; height: 10px; border-radius: 5px;
+                   background: rgba(15,22,32,0.10); overflow: visible; margin-top: 2px; }
+        .m-gauge-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px;
+                        transition: width 0.12s ease, background 0.2s ease; }
+        .m-gauge-tick { position: absolute; top: -4px; bottom: -4px; width: 2px;
+                        background: var(--lab-ink, #0f1620); }
+        .m-gauge-ticklbl { position: absolute; top: -20px; transform: translateX(-50%);
+                           font-size: 10px; font-weight: 600; color: var(--lab-ink-soft);
+                           white-space: nowrap; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+
+        const COL = {
+            kraft: '#2563c9',   // blå — kraften F (samma som teorifiguren)
+            arm:   '#0d9488',   // teal — hävarmen l
+            ink:   '#0f1620',
+            soft:  '#5a6170',
+            pivot: '#d13b2e',   // röd — vridningspunkten
+            ok:    '#0d7a52',   // grön — muttern lossnar
+            moment:'#c8324a',   // crimson — kraftmomentet M
+        };
+
+        // ── Geometri ─────────────────────────────────────────────
+        const VBW = 860, VBH = 520;
+        const PX = 195, PY = 231;          // vridningspunkten (mutterns mitt)
+        const S = 2.2, ROT = -10;          // skiftnyckel-grafikens skala/vridning
+        const HANDLE_DEG = 12;             // skaftets riktning i världen (22° + ROT)
+        const RAD = Math.PI / 180;
+        const U = { x: Math.cos(HANDLE_DEG * RAD), y: Math.sin(HANDLE_DEG * RAD) };
+        const PXM = 1188;                  // px per meter (0,40 m ≈ 475 px längs skaftet)
+        const FSC = 2.0;                   // px per newton på kraftpilen
+        const M_KRAV = 8.0;                // muttern kärvar — lossnar vid detta moment (Nm)
+        const D_MIN = 0.10, D_MAX = 0.40;
+        const F_MIN = 10, F_MAX = 100;
+
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        // kraftens riktning: skaftets riktning vriden vinkeln a (grader) "uppåt"
+        // (SVG har y nedåt, så en vridning moturs på skärmen är −a)
+        const forceDir = (aDeg) => {
+            const c = Math.cos(aDeg * RAD), s = Math.sin(aDeg * RAD);
+            return { x: U.x * c + U.y * s, y: -U.x * s + U.y * c };
+        };
+
+        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, opacity = 1, dash = null }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 1) return null;
+            const h = Math.max(10, Math.min(head, len * 0.9));
+            const hw = 0.42;
+            const bx = x2 - h * 0.82 * Math.cos(ang);
+            const by = y2 - h * 0.82 * Math.sin(ang);
+            const pL = [x2 - h * Math.cos(ang - hw), y2 - h * Math.sin(ang - hw)];
+            const pR = [x2 - h * Math.cos(ang + hw), y2 - h * Math.sin(ang + hw)];
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash || undefined} />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
+                             stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>
+                {children}
+            </text>
+        );
+
+        const Slider = ({ value, min, max, step, onChange }) => (
+            <input type="range" min={min} max={max} step={step} value={value}
+                   onChange={(e) => onChange(parseFloat(e.target.value))} />
+        );
+
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+
+        // ── Skiftnyckeln — samma grafik som teorigenomgångens figurer ──
+        const Wrench = () => (
+            <g transform={`translate(${PX} ${PY}) scale(${S}) rotate(${ROT}) translate(-80 -98)`}>
+                <polygon points="95.9,104.1 82.7,114.8 66.8,108.7 64.1,91.9 77.3,81.2 93.2,87.3"
+                         fill="#cfd4da" stroke="#7c828c" strokeWidth="1.4" strokeLinejoin="round" />
+                <path d="M 62.8,75.9 Q 62.3,73 64.1,71 Q 78.5,68.5 103.2,71 Q 113.4,72.3 118,77.2 Q 130,90.4 130.3,106.6 Q 131,107.5 132.8,108.3 L 283,169 A 6.5 6.5 0 0 1 278.4,181.1 L 126.1,125.7 Q 120.3,124.2 114.8,127.4 L 108.1,142 Q 105.6,148.5 98.1,145.7 L 89.7,142.4 Q 84.1,140.3 86.3,134.7 L 102.9,91.3 L 62.8,75.9 Z"
+                      fill="#b3b9c1" stroke="#6b7178" strokeWidth="1.4" strokeLinejoin="round" />
+                <path d="M 93.4,129.9 L 102.8,133.5 Q 106.1,134.8 104.8,138 L 103.5,141.3 Q 102.3,144.6 99,143.3 L 89.7,139.7 Q 86.4,138.5 87.7,135.2 L 88.9,132 Q 90.2,128.7 93.4,129.9 Z"
+                      fill="#969ea7" stroke="#666c74" strokeWidth="1.3" />
+                <line x1="94.8" y1="131.5" x2="91.7" y2="139.5" stroke="#666c74" strokeWidth="1.1" />
+                <line x1="97.6" y1="132.6" x2="94.5" y2="140.5" stroke="#666c74" strokeWidth="1.1" />
+                <line x1="100.4" y1="133.7" x2="97.3" y2="141.6" stroke="#666c74" strokeWidth="1.1" />
+                <line x1="103.2" y1="134.7" x2="100.1" y2="142.7" stroke="#666c74" strokeWidth="1.1" />
+                <path d="M 52.4,102.9 L 95.3,119.4 L 89.8,133.9 Q 88.5,137.2 85,135.3 Q 65.3,125 53.4,108.7 Q 50.9,105.6 52.4,102.9 Z"
+                      fill="#a6adb5" stroke="#6b7178" strokeWidth="1.4" strokeLinejoin="round" />
+            </g>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  Scenen
+        // ════════════════════════════════════════════════════════
+        const Scene = ({ svgRef, F, d, alpha, show, phys, loose, drag, onDown, onMove, onUp }) => {
+            const { l, M, medurs, moturs } = phys;
+            const P = { x: PX, y: PY };
+            const G = { x: P.x + d * PXM * U.x, y: P.y + d * PXM * U.y };   // angreppspunkten
+            const f = forceDir(alpha);
+            const L = F * FSC;
+            const tip = { x: G.x + L * f.x, y: G.y + L * f.y };
+            // hävarmens fotpunkt: vinkelrät projektion av P på riktningslinjen
+            const t = -(d * PXM) * (U.x * f.x + U.y * f.y);
+            const foot = { x: G.x + t * f.x, y: G.y + t * f.y };
+            const lpx = Math.hypot(foot.x - P.x, foot.y - P.y);
+            // riktning längs hävarmen (fot → pivot) och dess normal
+            const m = lpx > 1 ? { x: (P.x - foot.x) / lpx, y: (P.y - foot.y) / lpx } : { x: 0, y: 0 };
+            // hävarmsetikettens sida: mot skaftets ytterände (kilen mellan hävarm
+            // och skaft är fri pappersyta); nära 90° är sidorna likvärdiga — ta nedåt
+            let n = { x: m.y, y: -m.x };
+            const uDot = n.x * U.x + n.y * U.y;
+            if (Math.abs(uDot) < 0.2) { if (n.y < 0) n = { x: -n.x, y: -n.y }; }
+            else if (uDot < 0) n = { x: -n.x, y: -n.y };
+            const nH = { x: -U.y, y: U.x };                  // skaftets normal, nedåt
+            // hävarmsetiketten: nära 90° ligger hävarmen längs skaftet — etiketten
+            // läggs då under skaftet; annars strax bortom fotpunkten (fri yta)
+            const armNear90 = Math.abs(uDot) < 0.2;
+            const armLblRaw = armNear90
+                ? { x: P.x + 0.72 * (foot.x - P.x) + 38 * n.x, y: P.y + 0.72 * (foot.y - P.y) + 38 * n.y }
+                : { x: foot.x - 30 * m.x, y: foot.y - 30 * m.y };
+            const armLbl = { x: clamp(armLblRaw.x, 76, VBW - 76),
+                             y: clamp(armLblRaw.y, 26, VBH - 12) };
+            // måttlinjen för d flyttas längre ned när hävarmen ligger nära skaftet,
+            // så att de två etiketterna inte trängs under skaftet
+            const dOff = show.arm && ((alpha > 65 && alpha < 115) || (alpha > 245 && alpha < 295)) ? 38 : 0;
+
+            // kraftetikettens placering: strax bortom spetsen, förskjuten vinkelrätt
+            // UT från riktningslinjen (bort från vridningspunkten) så att texten
+            // aldrig hamnar på den streckade linjen
+            const away = { x: tip.x - P.x, y: tip.y - P.y };
+            let perp = { x: f.y, y: -f.x };
+            const awayDot = perp.x * away.x + perp.y * away.y;
+            if (Math.abs(awayDot) < 8) { if (perp.y > 0) perp = { x: -perp.x, y: -perp.y }; }
+            else if (awayDot < 0) perp = { x: -perp.x, y: -perp.y };
+            // vid nästan parallell kraft ligger pilen på skaftet — lyft etiketten högre
+            const perpOff = Math.abs(awayDot) < 8 ? 34 : 16;
+            const labelP = { x: tip.x + 30 * f.x + perpOff * perp.x, y: tip.y + 30 * f.y + perpOff * perp.y };
+            const labelAnchor = perp.x >= 0 ? 'start' : 'end';
+            // pekar kraften nedåt ligger d-måttlinjen i vägen under skaftet —
+            // skjut etiketten vidare längs pilen tills den passerat måttbandet
+            const nHf = f.x * nH.x + f.y * nH.y;
+            if (show.dist && nHf > 0.25) {
+                const axDist = (labelP.x - P.x) * nH.x + (labelP.y - P.y) * nH.y;
+                const need = 106 + dOff - axDist;
+                if (need > 0) { labelP.x += (need / nHf) * f.x; labelP.y += (need / nHf) * f.y; }
+            }
+            // håll etiketten inom scenen (stora nedåtriktade krafter når kanten)
+            labelP.x = clamp(labelP.x, 66, VBW - 14);
+            labelP.y = clamp(labelP.y, 24, VBH - 12);
+
+            // vinkelbågen vid angreppspunkten (från skaftet till kraften, moturs)
+            const a0 = HANDLE_DEG;                 // skaftets vinkel (SVG-grader)
+            const a1 = a0 - alpha;                 // kraftens vinkel
+            const rA = 34;
+            const arcP = (r, deg) => ({ x: G.x + r * Math.cos(deg * RAD), y: G.y + r * Math.sin(deg * RAD) });
+            const A0 = arcP(rA, a0), A1 = arcP(rA, a1);
+            // vinkeletiketten: på bisektrisen, så långt ut att den går fri från
+            // skaftet — för mycket spetsiga vinklar läggs den i stället strax
+            // bortom kraftlinjen där ytan är fri
+            const halfSin = Math.sin(clamp(alpha, 6, 354) / 2 * RAD);
+            const rLbl = clamp(30 / halfSin, 46, 110);
+            const largeA = alpha > 180 ? 1 : 0;
+            const Albl = rLbl * halfSin >= 20
+                ? arcP(rLbl, a0 - alpha / 2)
+                : arcP(54, a1 + (alpha < 180 ? -16 : 16));
+
+            // rotationsbågen kring muttern (uppe till vänster om huvudet) — pilspetsen
+            // sitter i den ände som rörelsen pekar mot: moturs eller medurs
+            const rot0 = -78, rot1 = -192, rR = 56;
+            const R0 = { x: P.x + rR * Math.cos(rot0 * RAD), y: P.y + rR * Math.sin(rot0 * RAD) };
+            const R1 = { x: P.x + rR * Math.cos(rot1 * RAD), y: P.y + rR * Math.sin(rot1 * RAD) };
+            const rotEnd = medurs ? R0 : R1;
+            const rotAng = medurs ? rot0 : rot1;
+            const rotSgn = medurs ? -1 : 1;      // tangentriktning i pilens ände
+            const vel = { x: rotSgn * Math.sin(rotAng * RAD), y: -rotSgn * Math.cos(rotAng * RAD) };
+            const headL = 11;
+            const rotHead = `${rotEnd.x + vel.x * headL},${rotEnd.y + vel.y * headL} ` +
+                            `${rotEnd.x - vel.y * 5.5},${rotEnd.y + vel.x * 5.5} ` +
+                            `${rotEnd.x + vel.y * 5.5},${rotEnd.y - vel.x * 5.5}`;
+
+            const showArmLine = lpx > 7;
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#skyG)" />
+
+                    {/* status överst — vänster om visa-rutan uppe till höger */}
+                    <Tag x={300} y={36} color={COL.ink} size={21}>
+                        <tspan>Kraftmoment </tspan>
+                        <tspan fontStyle="italic">M</tspan>
+                        <tspan> = {fmt(M, 1)} Nm</tspan>
+                        {M > 0.05 && <tspan> ({medurs ? 'medurs' : 'moturs'})</tspan>}
+                    </Tag>
+                    <Tag x={300} y={60} color={loose ? COL.ok : COL.soft} size={15} weight={600}>
+                        {loose ? `Muttern lossnar! (den kärvar upp till ${fmt(M_KRAV, 1)} Nm)`
+                               : `Muttern sitter fast — det krävs ${fmt(M_KRAV, 1)} Nm för att lossa den`}
+                    </Tag>
+
+                    {/* skiftnyckeln */}
+                    <Wrench />
+
+                    {/* rotationsbåge kring muttern */}
+                    <g opacity={loose ? 1 : 0.35}>
+                        <path d={`M ${R0.x} ${R0.y} A ${rR} ${rR} 0 0 0 ${R1.x} ${R1.y}`}
+                              fill="none" stroke={loose ? COL.ok : COL.ink} strokeWidth="2.6"
+                              strokeDasharray={loose ? '9 4' : undefined}
+                              className={loose ? (medurs ? 'spin-arc-cw' : 'spin-arc') : undefined} />
+                        <polygon points={rotHead} fill={loose ? COL.ok : COL.ink} />
+                    </g>
+
+                    {/* vridningspunkten — röd prick + etikett i fri yta */}
+                    <line x1={P.x - 46} y1={P.y - 84} x2={P.x - 8} y2={P.y - 16}
+                          stroke={COL.ink} strokeWidth="1.1" opacity="0.7" />
+                    <circle cx={P.x} cy={P.y} r="5" fill={COL.pivot} />
+                    <Tag x={P.x - 52} y={P.y - 92} color={COL.ink} size={15} weight={600}>Vridningspunkt</Tag>
+
+                    {/* avstånd längs skaftet — måttlinje i fri yta under skaftet */}
+                    {show.dist && (
+                        <g>
+                            <line x1={P.x + 20 * nH.x} y1={P.y + 20 * nH.y}
+                                  x2={P.x + (76 + dOff) * nH.x} y2={P.y + (76 + dOff) * nH.y}
+                                  stroke={COL.ink} strokeWidth="1" strokeDasharray="4 3" />
+                            <line x1={G.x + 16 * nH.x} y1={G.y + 16 * nH.y}
+                                  x2={G.x + (76 + dOff) * nH.x} y2={G.y + (76 + dOff) * nH.y}
+                                  stroke={COL.ink} strokeWidth="1" strokeDasharray="4 3" />
+                            <Arrow x1={P.x + (68 + dOff) * nH.x} y1={P.y + (68 + dOff) * nH.y}
+                                   x2={G.x + (68 + dOff) * nH.x} y2={G.y + (68 + dOff) * nH.y}
+                                   color={COL.ink} width={1.4} head={9} />
+                            <Arrow x1={G.x + (68 + dOff) * nH.x} y1={G.y + (68 + dOff) * nH.y}
+                                   x2={P.x + (68 + dOff) * nH.x} y2={P.y + (68 + dOff) * nH.y}
+                                   color={COL.ink} width={1.4} head={9} />
+                            <Tag x={(P.x + G.x) / 2 + (88 + dOff) * nH.x} y={(P.y + G.y) / 2 + (88 + dOff) * nH.y}
+                                 color={COL.ink} size={14} weight={600}>
+                                <tspan fontStyle="italic">d</tspan>
+                                <tspan> = {fmt(d, 2)} m</tspan>
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* kraftens riktningslinje + hävarmen */}
+                    {show.arm && (
+                        <g>
+                            <line x1={G.x - 900 * f.x} y1={G.y - 900 * f.y}
+                                  x2={G.x + 900 * f.x} y2={G.y + 900 * f.y}
+                                  stroke={COL.kraft} strokeWidth="1.6" strokeDasharray="8 5" opacity="0.7" />
+                            {showArmLine ? (
+                                <g>
+                                    <Arrow x1={P.x} y1={P.y} x2={foot.x} y2={foot.y}
+                                           color={COL.arm} width={2.8} head={11} dash="7 5" />
+                                    <Arrow x1={foot.x} y1={foot.y} x2={P.x} y2={P.y}
+                                           color={COL.arm} width={2.8} head={11} dash="7 5" />
+                                    {/* rät vinkel vid fotpunkten */}
+                                    <polyline points={`${foot.x + 9 * m.x},${foot.y + 9 * m.y} ${foot.x + 9 * m.x + 9 * f.x},${foot.y + 9 * m.y + 9 * f.y} ${foot.x + 9 * f.x},${foot.y + 9 * f.y}`}
+                                              fill="none" stroke={COL.ink} strokeWidth="1.4" />
+                                    <Tag x={armLbl.x} y={armLbl.y + 5}
+                                         color={COL.arm} size={14}>
+                                        <tspan>Hävarm </tspan>
+                                        <tspan fontStyle="italic">l</tspan>
+                                        <tspan> = {fmt(l, 2)} m</tspan>
+                                    </Tag>
+                                </g>
+                            ) : (
+                                <Tag x={P.x + 30} y={P.y + 158} color={COL.arm} size={14} anchor="start">
+                                    <tspan>Hävarm </tspan>
+                                    <tspan fontStyle="italic">l</tspan>
+                                    <tspan> = 0 — riktningslinjen går genom vridningspunkten</tspan>
+                                </Tag>
+                            )}
+                        </g>
+                    )}
+
+                    {/* vinkeln mellan skaftet och kraften */}
+                    {show.angle && alpha > 1 && alpha < 359 && (
+                        <g>
+                            <path d={`M ${A0.x} ${A0.y} A ${rA} ${rA} 0 ${largeA} 0 ${A1.x} ${A1.y}`}
+                                  fill="none" stroke={COL.ink} strokeWidth="1.5" />
+                            <Tag x={Albl.x} y={Albl.y + 5} color={COL.ink} size={14} weight={600}>
+                                <tspan fontStyle="italic">α</tspan>
+                                <tspan> = {fmt(alpha, 0)}°</tspan>
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* kraften F */}
+                    <Arrow x1={G.x} y1={G.y} x2={tip.x} y2={tip.y} color={COL.kraft} width={6} head={18} />
+                    <circle cx={G.x} cy={G.y} r="5.5" fill={COL.kraft} />
+                    <Tag x={labelP.x} y={labelP.y + 5} color={COL.kraft} size={16} anchor={labelAnchor}>
+                        <tspan fontStyle="italic">F</tspan>
+                        <tspan> = {fmt(F, 0)} N</tspan>
+                    </Tag>
+
+                    {/* dragytor: angreppspunkten på skaftet + pilspetsen */}
+                    <circle cx={G.x} cy={G.y} r="22" fill="transparent"
+                            style={{ cursor: drag === 'grepp' ? 'grabbing' : 'grab' }}
+                            onPointerDown={(e) => onDown(e, 'grepp')}
+                            onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} />
+                    <circle cx={tip.x} cy={tip.y} r="24" fill="transparent"
+                            style={{ cursor: drag === 'spets' ? 'grabbing' : 'grab' }}
+                            onPointerDown={(e) => onDown(e, 'spets')}
+                            onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} />
+                </svg>
+            );
+        };
+
+        // ── Formelkort M = F · l ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-3 flex flex-wrap items-center gap-x-3 gap-y-2" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Kraftmoment"><em>M</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Kraft"><em>F</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Hävarm"><em>l</em></Vbl>
+                <span className="fnum" style={{ fontSize: 14, color: 'var(--lab-ink-soft)' }}>
+                    &nbsp;&nbsp;[ Nm = N · m ]
+                </span>
+            </div>
+        );
+
+        // ── Resultatkort: hävarm, moment och momentmätare ──
+        const GAUGE_MAX = 40;   // mätarens fulla skala (Nm)
+        const ResultCard = ({ l, M, medurs, moturs, loose }) => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
+                 style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-col items-center">
+                    <span className="flbl">Hävarm</span>
+                    <span className="fnum" style={{ fontWeight: 700, color: COL.arm }}>
+                        <em>l</em> = {fmt(l, 2)} m
+                    </span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <span className="flbl">Kraftmoment</span>
+                    <span className="fnum" style={{ fontWeight: 700, color: COL.moment }}>
+                        <em>M</em> = {fmt(M, 1)} Nm
+                    </span>
+                </div>
+                <div className="flex flex-col items-center">
+                    <span className="flbl">Riktning</span>
+                    <span className="fnum" style={{ fontWeight: 700 }}>
+                        {moturs ? 'moturs (+)' : medurs ? 'medurs (−)' : '–'}
+                    </span>
+                </div>
+                <span className="px-3 py-1 rounded-full text-sm font-semibold"
+                      style={{ background: loose ? 'rgba(13,122,82,0.14)' : 'rgba(15,22,32,0.08)',
+                               color: loose ? COL.ok : 'var(--lab-ink-soft)' }}>
+                    {loose ? 'Muttern lossnar!' : 'Muttern sitter fast'}
+                </span>
+                <div className="m-gauge" style={{ maxWidth: 520, margin: '10px auto 0' }}>
+                    <div className="m-gauge-fill"
+                         style={{ width: `${Math.min(M / GAUGE_MAX, 1) * 100}%`,
+                                  background: loose ? COL.ok : 'rgba(90,97,112,0.55)' }} />
+                    <div className="m-gauge-tick" style={{ left: `${(M_KRAV / GAUGE_MAX) * 100}%` }} />
+                    <div className="m-gauge-ticklbl" style={{ left: `${(M_KRAV / GAUGE_MAX) * 100}%` }}>
+                        kärvar till {fmt(M_KRAV, 1)} Nm
+                    </div>
+                </div>
+            </div>
+        );
+
+        // ── Beräkningspanel ──
+        const CalcPanel = ({ F, d, alpha, l, M, medurs, moturs }) => {
+            const sinAbs = Math.abs(Math.sin(alpha * RAD));
+            return (
+                <div className="glass-card rounded-xl p-3 mb-3" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flbl mb-2">Beräkning</div>
+                    <p className="text-sm mb-3" style={{ color: 'var(--lab-ink-soft)' }}>
+                        Hävarmen är det <strong>vinkelräta</strong> avståndet från vridningspunkten till
+                        kraftens riktningslinje. Med vinkeln <em>α</em> mellan kraften och skaftet blir den
+                    </p>
+                    <div className="text-sm space-y-2" style={{ lineHeight: 1.9 }}>
+                        <div>
+                            <em>l</em> = <em>d</em> · {medurs ? <span>|sin <em>α</em>|</span> : <span>sin <em>α</em></span>}
+                            &nbsp;= {fmt(d, 2)} · {medurs ? `|sin ${fmt(alpha, 0)}°|` : `sin ${fmt(alpha, 0)}°`}
+                            &nbsp;= <strong style={{ color: COL.arm }}>{fmt(l, 2)} m</strong>
+                        </div>
+                        <div>
+                            <em>M</em> = <em>F</em> · <em>l</em> = {fmt(F, 0)} · {fmt(l, 2)}
+                            &nbsp;= <strong style={{ color: COL.moment }}>{fmt(M, 1)} Nm</strong>
+                            {moturs && <span style={{ color: 'var(--lab-ink-soft)' }}> moturs (+{fmt(M, 1)} Nm)</span>}
+                            {medurs && <span style={{ color: 'var(--lab-ink-soft)' }}> medurs (−{fmt(M, 1)} Nm)</span>}
+                        </div>
+                        <div style={{ paddingTop: 6, borderTop: '1px solid var(--lab-line)', color: 'var(--lab-ink-soft)' }}>
+                            {sinAbs > 0.9999
+                                ? <span>Vinkelrät kraft ger den längsta möjliga hävarmen — hela avståndet <em>d</em>.</span>
+                                : sinAbs < 0.26
+                                    ? <span>Nästan parallell kraft — riktningslinjen går nära vridningspunkten och hävarmen krymper mot noll.</span>
+                                    : <span>Kraften drar snett — bara komposanten vinkelrät mot skaftet bidrar till vridningen.</span>}
+                            {medurs && <span> Kraften drar på skaftets andra sida — momentet vrider <strong>medurs</strong> och räknas negativt.</span>}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ── Kontrollrader ──
+        const Controls = ({ F, setF, d, setD, alpha, setAlpha, preset }) => (
+            <div>
+                <div className="ctl-row">
+                    <div className="ctl-head">
+                        <span className="ctl-chip" style={{ background: COL.kraft }}>F</span>
+                        <span className="ctl-name">Kraften på skaftet</span>
+                    </div>
+                    <div className="ctl-line">
+                        <span className="ctl-lbl">Kraft <em>F</em></span>
+                        <Slider value={F} min={F_MIN} max={F_MAX} step={1} onChange={setF} />
+                        <NumInput value={F} min={F_MIN} max={F_MAX} fmtFn={(v) => fmt(v, 0)} unit="N"
+                                  color={COL.kraft} onCommit={setF} />
+                    </div>
+                    <div className="ctl-line">
+                        <span className="ctl-lbl">Angreppspunkt <em>d</em></span>
+                        <Slider value={d} min={D_MIN} max={D_MAX} step={0.005} onChange={setD} />
+                        <NumInput value={d} min={D_MIN} max={D_MAX} fmtFn={(v) => fmt(v, 2)} unit="m"
+                                  color="#7c5a2a" onCommit={setD} />
+                    </div>
+                    <div className="ctl-line">
+                        <span className="ctl-lbl">Vinkel mot skaftet <em>α</em></span>
+                        <Slider value={alpha} min={0} max={360} step={1} onChange={setAlpha} />
+                        <NumInput value={alpha} min={0} max={360} fmtFn={(v) => fmt(v, 0)} unit="°"
+                                  color="var(--lab-ink)" onCommit={setAlpha} />
+                    </div>
+                </div>
+                <div className="ctl-row">
+                    <div className="ctl-head">
+                        <span className="ctl-name">Färdiga försök</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        <button className="btn-preset" onClick={() => preset(34, 0.38, 90)}>Längst ut</button>
+                        <button className="btn-preset" onClick={() => preset(34, 0.12, 90)}>Nära muttern</button>
+                        <button className="btn-preset" onClick={() => preset(34, 0.25, 40)}>Sned kraft</button>
+                        <button className="btn-preset" onClick={() => preset(34, 0.25, 0)}>Parallell kraft</button>
+                        <button className="btn-preset" onClick={() => preset(34, 0.25, 270)}>Medurs (nedåt)</button>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const DEF = { F: 34, d: 0.25, alpha: 90 };
+
+        // startläge kan styras via URL: ?f=34&d=0.25&a=60&visa=arm,vinkel,d
+        const Q = new URLSearchParams(location.search);
+        const qNum = (key, fallback, lo, hi) => {
+            const v = parseFloat((Q.get(key) || '').replace(',', '.'));
+            return isFinite(v) ? clamp(v, lo, hi) : fallback;
+        };
+        const qShow = () => {
+            const raw = Q.get('visa');
+            if (raw == null) return { arm: true, angle: true, dist: false };
+            const on = raw.split(',');
+            return { arm: on.includes('arm'), angle: on.includes('vinkel'), dist: on.includes('d') };
+        };
+
+        const App = () => {
+            const [F, setFraw] = useState(() => qNum('f', DEF.F, F_MIN, F_MAX));
+            const [d, setDraw] = useState(() => qNum('d', DEF.d, D_MIN, D_MAX));
+            const [alpha, setAlphaRaw] = useState(() => qNum('a', DEF.alpha, 0, 360));
+            const [show, setShow] = useState(qShow);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [drag, setDrag] = useState(null);
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const dragRef = useRef(null);
+
+            const setF = (v) => setFraw(clamp(Math.round(v), F_MIN, F_MAX));
+            const setD = (v) => setDraw(clamp(Math.round(v * 200) / 200, D_MIN, D_MAX));
+            const setAlpha = (v) => setAlphaRaw(clamp(Math.round(v), 0, 360));
+            const preset = (pF, pD, pA) => { setF(pF); setD(pD); setAlpha(pA); };
+            const reset = () => preset(DEF.F, DEF.d, DEF.alpha);
+
+            // ── Fysik ──
+            const sinA = Math.sin(alpha * RAD);
+            const l = d * Math.abs(sinA);          // hävarmen är alltid ett avstånd
+            const M = F * l;                        // momentets belopp
+            const medurs = sinA < -1e-9;            // kraft på andra sidan → medurs
+            const moturs = sinA > 1e-9;
+            const loose = M >= M_KRAV - 1e-9;
+            const phys = { l, M, medurs, moturs };
+
+            // ── fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── dra i scenen ──
+            const localPt = (clientX, clientY) => {
+                const svg = svgRef.current;
+                if (!svg) return null;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX; pt.y = clientY;
+                return pt.matrixTransform(ctm.inverse());
+            };
+            const applyDrag = (what, p) => {
+                if (what === 'grepp') {
+                    const t = (p.x - PX) * U.x + (p.y - PY) * U.y;
+                    setD(t / PXM);
+                } else if (what === 'spets') {
+                    const G = { x: PX + d * PXM * U.x, y: PY + d * PXM * U.y };
+                    const vx = p.x - G.x, vy = p.y - G.y;
+                    const len = Math.hypot(vx, vy);
+                    if (len < 4) return;
+                    let a = HANDLE_DEG - Math.atan2(vy, vx) / RAD;
+                    a = ((a % 360) + 360) % 360;
+                    setAlpha(a);
+                    setF(len / FSC);
+                }
+            };
+            const moveTo = (e) => {
+                const what = dragRef.current;
+                if (!what) return;
+                const p = localPt(e.clientX, e.clientY);
+                if (p) applyDrag(what, p);
+            };
+            const onDown = (e, what) => {
+                e.preventDefault(); e.stopPropagation();
+                dragRef.current = what; setDrag(what);
+                e.currentTarget.setPointerCapture?.(e.pointerId);
+            };
+            const onMove = (e) => { if (dragRef.current) moveTo(e); };
+            const onUp = (e) => {
+                dragRef.current = null; setDrag(null);
+                e.currentTarget.releasePointerCapture?.(e.pointerId);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.arm} onChange={() => tShow('arm')} /><span>Hävarm och riktningslinje</span></label>
+                    <label><input type="checkbox" checked={show.angle} onChange={() => tShow('angle')} /><span>Vinkel <em>α</em></span></label>
+                    <label><input type="checkbox" checked={show.dist} onChange={() => tShow('dist')} /><span>Avstånd <em>d</em> längs skaftet</span></label>
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Skiftnyckeln och hävarmen
+                        </div>
+                        <header className="flex flex-col md:flex-row justify-between items-start gap-4">
+                            <div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Skiftnyckeln och hävarmen</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En trög mutter ska lossas med en skiftnyckel. Flytta kraftens{' '}
+                            <strong>angreppspunkt</strong> längs skaftet, vrid kraften ett helt varv och ändra
+                            dess storlek — och se <strong>hävarmen</strong> ändras i realtid. Hävarmen <em>l</em> är det{' '}
+                            <strong>kortaste avståndet</strong> från vridningspunkten till kraftens streckade{' '}
+                            <strong>riktningslinje</strong>: bara när kraften drar vinkelrätt mot skaftet är
+                            hävarmen lika lång som avståndet till angreppspunkten. Drar du på skaftets andra
+                            sida vrider momentet <strong>medurs</strong> i stället för moturs — positivt moment
+                            är moturs, negativt är medurs. Räcker kraftmomentet{' '}
+                            <em>M</em> = <em>F</em> · <em>l</em> för att muttern ska lossna?
+                        </p>
+                            </div>
+                            {/* Växla mellan avsnittets två simuleringar */}
+                            <div className="flex-shrink-0">
+                                <div className="mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
+                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                    <a href="fysik2-kraftmoment-app.html"
+                                        className="tab-button px-4 py-2 rounded text-sm font-semibold border"
+                                        style={{ textDecoration: 'none' }}>
+                                        Gungbrädan
+                                    </a>
+                                    <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
+                                        Skiftnyckeln
+                                    </span>
+                                </div>
+                            </div>
+                        </header>
+
+                        <FormulaCard />
+                        <ResultCard l={l} M={M} medurs={medurs} moturs={moturs} loose={loose} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scene svgRef={svgRef} F={F} d={d} alpha={alpha} show={show}
+                                           phys={phys} loose={loose} drag={drag}
+                                           onDown={onDown} onMove={onMove} onUp={onUp} />
+                                    <div className="scene-hint">
+                                        Dra i den blå pilspetsen (riktning och styrka) eller i punkten på skaftet.
+                                    </div>
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+
+                                    {isFullscreen && (
+                                        <div className="fs-sliders">
+                                            <div className="fs-title">Kraften</div>
+                                            <Controls F={F} setF={setF} d={d} setD={setD}
+                                                      alpha={alpha} setAlpha={setAlpha} preset={preset} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Kraften</div>
+                                    <Controls F={F} setF={setF} d={d} setD={setD}
+                                              alpha={alpha} setAlpha={setAlpha} preset={preset} />
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Visa i scenen</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        <button className={`btn-toggle ${show.arm ? 'active' : ''}`} onClick={() => tShow('arm')}>Hävarm</button>
+                                        <button className={`btn-toggle ${show.angle ? 'active' : ''}`} onClick={() => tShow('angle')}>Vinkel</button>
+                                        <button className={`btn-toggle ${show.dist ? 'active' : ''}`} onClick={() => tShow('dist')}>Avstånd</button>
+                                        <button className="btn-toggle" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <CalcPanel F={F} d={d} alpha={alpha} l={l} M={M} medurs={medurs} moturs={moturs} />
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hävarmen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Hävarmen är inte avståndet till angreppspunkten, utan det vinkelräta
+                                    avståndet från vridningspunkten till kraftens riktningslinje. Slå på
+                                    ”Hävarm” och vinkla kraften — hävarmen är alltid det kortaste avståndet,
+                                    och det markeras med en rät vinkel mot riktningslinjen.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vinkeln spelar roll</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Bara den del av kraften som drar vinkelrätt mot skaftet vrider. Med
+                                    vinkeln <em>α</em> mellan kraft och skaft är hävarmen{' '}
+                                    <em>l</em> = <em>d</em> · sin <em>α</em>. Vid 90° är hela avståndet
+                                    hävarm — vid 0° går riktningslinjen genom vridningspunkten och
+                                    momentet blir 0, hur stor kraften än är.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Därför är långa verktyg starka</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Kraftmomentet <em>M</em> = <em>F</em> · <em>l</em> kan ökas på två sätt:
+                                    ta i mer, eller flytta handen längre ut. Dubbelt så lång hävarm ger
+                                    dubbelt så stort moment med samma kraft — därför har hjulmutternycklar
+                                    långa skaft och dörrhandtag sitter långt från gångjärnen.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Hävarmen är avståndet till handen.”</strong> Bara när kraften är
+                                    vinkelrät mot skaftet. Drar du snett är hävarmen kortare — det är det
+                                    vinkelräta avståndet till riktningslinjen som räknas.</li>
+                                <li><strong>”Mer kraft är enda sättet att vrida hårdare.”</strong> Nej — samma
+                                    moment nås med halva kraften om hävarmen görs dubbelt så lång. Prova
+                                    försöken ”Längst ut” och ”Nära muttern” med samma kraft.</li>
+                                <li><strong>”En kraft längs skaftet vrider också, bara lite.”</strong> Inte
+                                    alls: riktningslinjen går då genom vridningspunkten, hävarmen är 0 och
+                                    momentet blir exakt 0 — muttern rubbas inte.</li>
+                                <li><strong>”Vinkeln gör bara liten skillnad.”</strong> sin 30° = 0,5 — drar
+                                    du i 30° mot skaftet halveras hävarmen, och momentet med den.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

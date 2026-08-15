@@ -45,6 +45,24 @@
         }
         input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
 
+        .tab-button {
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
+        }
+        .tab-button.tab-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
+        }
+        .tab-button:hover:not(.tab-active) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 19px; }
@@ -849,14 +867,32 @@
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Kraftmoment
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kraftmoment</h1>
-                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            En kraft kan få något att <strong>vrida sig</strong>. Hur kraftigt vridet blir beror både på
-                            kraftens storlek och på <strong>hävarmen</strong> — det vinkelräta avståndet från vridpunkten
-                            till kraftens verkningslinje. Produkten kallas <strong>kraftmoment</strong>,
-                            <em> M</em> = <em>F</em> · <em>l</em>. Gungbrädan är i <strong>jämvikt</strong> när momentet
-                            moturs är lika stort som momentet medurs. Placera vikterna, dra i dem och få brädan i balans.
-                        </p>
+                        <header className="flex flex-col md:flex-row justify-between items-start gap-4">
+                            <div>
+                                <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kraftmoment</h1>
+                                <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                                    En kraft kan få något att <strong>vrida sig</strong>. Hur kraftigt vridet blir beror både på
+                                    kraftens storlek och på <strong>hävarmen</strong> — det vinkelräta avståndet från vridpunkten
+                                    till kraftens verkningslinje. Produkten kallas <strong>kraftmoment</strong>,
+                                    <em> M</em> = <em>F</em> · <em>l</em>. Gungbrädan är i <strong>jämvikt</strong> när momentet
+                                    moturs är lika stort som momentet medurs. Placera vikterna, dra i dem och få brädan i balans.
+                                </p>
+                            </div>
+                            {/* Växla mellan avsnittets två simuleringar */}
+                            <div className="flex-shrink-0">
+                                <div className="mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
+                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                    <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
+                                        Gungbrädan
+                                    </span>
+                                    <a href="fysik2-skiftnyckel-app.html"
+                                        className="tab-button px-4 py-2 rounded text-sm font-semibold border"
+                                        style={{ textDecoration: 'none' }}>
+                                        Skiftnyckeln
+                                    </a>
+                                </div>
+                            </div>
+                        </header>
 
                         <FormulaCard />
                         <BalanceCard mLeft={mLeft} mRight={mRight} balanced={balanced} />

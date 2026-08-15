@@ -64,11 +64,14 @@
  *
  * ── typ: linjal ──────────────────────────────────────────────────────────
  * Demonstrationen ur fy2-1.2 (Mer kraftmoment): en linjal vilar vågrätt på
- * två pekfingrar. "Dra ihop fingrarna" — fingret närmast tyngdpunkten bär
- * större normalkraft och därmed större friktionskraft, så det FJÄRMARE
- * fingret glider. När det glidande fingret kommit tillräckligt nära
- * tyngdpunkten (kvoten N_glid/N_still ≥ μs/μk) tar det andra fingret över,
- * växelvis, tills fingrarna möts — alltid precis under tyngdpunkten.
+ * två pekfingrar. "Dra ihop fingrarna" — BÅDA fingrarna förs mot mitten
+ * (som när man gör försöket själv), och linjalen åker med det finger som
+ * håller fast: fingret närmast tyngdpunkten bär större normalkraft och
+ * därmed större friktionskraft, så det FJÄRMARE fingret glider mot
+ * linjalen. När det glidande fingret kommit tillräckligt nära
+ * tyngdpunkten (kvoten N_glid/N_fast ≥ μs/μk) byter fingrarna roll,
+ * växelvis, tills de möts — och linjalen har då förskjutit sig så att
+ * tyngdpunkten ligger precis mitt emellan dem.
  * Skalenliga normalkraftspilar (blå, pillängd ∝ N, från kontaktytan uppåt
  * genom linjalen) bär förklaringen. Kryssrutan "Lägg en vikt på linjalen"
  * lägger en flyttbar (draggbar) mässingsvikt på linjalen som förskjuter
@@ -2998,15 +3001,18 @@
     // ══════════════════════════════════════════════════════════════════════
     function buildLinjal(node, cfg) {
         var W = 560, H = 430;           // logisk ritstorlek
-        var R_X0 = 70, R_X1 = 490;      // linjalens vänstra/högra ände
+        // Linjalens geometri anges i LINJALENS eget system; på skärmen ritas
+        // den förskjuten med offseten xr, eftersom linjalen "åker med" det
+        // finger som håller fast medan båda fingrarna förs mot mitten.
+        var R_X0 = 100, R_X1 = 460;     // linjalens vänstra/högra ände
         var R_TOP = 238, R_BOT = 264;   // linjalens över-/underkant
         var PX_PER_CM = (R_X1 - R_X0) / 30;   // 30 cm-linjal
         var MID = (R_X0 + R_X1) / 2;    // linjalens mitt (tyngdpunkt utan vikt)
-        var X1_START = 120, X2_START = 472;   // fingrarnas startlägen
+        var X1_START = 124, X2_START = 452;   // fingrarnas startlägen (skärm)
         var FINGER_W = 21;
         var MEET_GAP = FINGER_W + 6;    // fingrarna "möts" vid detta gap
         var MU_S = 0.5, MU_K = 0.3;     // vilo- resp. glidfriktionstal
-        var V_FINGER = 42;              // fingerfart (px/s)
+        var V_FINGER = 30;              // varje fingers fart mot mitten (px/s)
         var M_VIKT = 0.5;               // viktens massa i linjalmassor
         var N_LEN = 120;                // total pillängd för linjalens tyngd
         var COL_N = '#2563c9';          // normalkraftens färg (som teorin)
@@ -3122,10 +3128,11 @@
 
         // ── Tillstånd ─────────────────────────────────────────────────────
         var mode = 'rest';          // 'rest' | 'kor' | 'klar'
-        var x1 = X1_START;          // vänstra fingrets läge
-        var x2 = X2_START;          // högra fingrets läge
-        var slid = 2;               // vilket finger glider (1 = vänster)
-        var xw = 400;               // viktens läge på linjalen
+        var x1 = X1_START;          // vänstra fingrets läge (skärm)
+        var x2 = X2_START;          // högra fingrets läge (skärm)
+        var xr = 0;                 // linjalens förskjutning på skärmen
+        var slid = 2;               // vilket finger som GLIDER MOT LINJALEN
+        var xw = 380;               // viktens läge (i linjalens system)
         var paused = false;
         var dragging = false;
         var dragPtr = -1;
@@ -3136,13 +3143,16 @@
 
         function timeScale() { return slowChk.cb.checked ? 0.25 : 1; }
         function viktPa() { return viktChk.cb.checked; }
-        // Tyngdpunktens läge: linjalen (massa 1) + ev. vikten (massa M_VIKT).
+        // Tyngdpunktens läge i linjalens system: linjalen (massa 1) + ev.
+        // vikten (massa M_VIKT).
         function tyngdX() {
             return viktPa() ? (MID + M_VIKT * xw) / (1 + M_VIKT) : MID;
         }
+        // …och på skärmen (linjalen är förskjuten xr).
+        function tyngdScreenX() { return tyngdX() + xr; }
         // Normalkrafternas andelar av totala tyngden (momentjämvikt kring
         // motstående finger): fingret NÄRMAST tyngdpunkten bär störst andel.
-        function frac1() { return (x2 - tyngdX()) / (x2 - x1); }
+        function frac1() { return (x2 - tyngdScreenX()) / (x2 - x1); }
 
         // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
         function drawBackground() {
@@ -3225,12 +3235,12 @@
 
         function drawTyngdpunkt() {
             if (!(tpChk.cb.checked || mode === 'klar')) return;
-            var xc = tyngdX();
+            var xc = tyngdScreenX();    // ritas i skärmkoordinater
             // Etiketten läggs i fri yta: ovanför vikten om den är nära, och
             // ovanför varje normalkraftspil vars spets ligger inom textens
             // bredd (annars hamnar texten på pilen när fingrarna närmar sig).
             var yLbl = R_TOP - 22;
-            if (viktPa() && Math.abs(xc - xw) < 64) yLbl = R_TOP - 54;
+            if (viktPa() && Math.abs(xc - (xw + xr)) < 64) yLbl = R_TOP - 54;
             if (nChk.cb.checked) {
                 var tot = (1 + (viktPa() ? M_VIKT : 0)) * N_LEN;
                 var f1 = frac1();
@@ -3364,8 +3374,13 @@
             drawBackground();
             drawFinger(x1);
             drawFinger(x2);
+            // linjalen (och vikten som står på den) ritas förskjuten xr —
+            // den följer med det finger som håller fast
+            ctx.save();
+            ctx.translate(xr, 0);
             drawLinjal();
             drawVikt();
+            ctx.restore();
             drawTyngdpunkt();
             if (mode === 'kor') {
                 if (slid === 1) drawStreaks(x1, 1);
@@ -3375,19 +3390,28 @@
         }
 
         // ── Simulationssteg (stick–slip) ──────────────────────────────────
+        // BÅDA fingrarna förs mot mitten med farten V_FINGER — som när man
+        // gör försöket själv. Linjalen följer med det finger som håller fast
+        // (störst normalkraft → friktionen räcker), medan det andra fingret
+        // GLIDER mot linjalen. Glidande finger byts när dess glidfriktion
+        // hunnit ikapp det fastnande fingrets vilofriktion:
+        // μk·N_glid ≥ μs·N_fast.
         function step(dt) {
             if (mode !== 'kor') return;
             var f1 = frac1(), f2 = 1 - f1;
-            // Glidande finger byts när dess glidfriktion hunnit ikapp det
-            // stillastående fingrets vilofriktion: μk·N_glid ≥ μs·N_still.
             if (slid === 1 && MU_K * f1 >= MU_S * f2) slid = 2;
             else if (slid === 2 && MU_K * f2 >= MU_S * f1) slid = 1;
-            if (slid === 1) x1 += V_FINGER * dt;
-            else x2 -= V_FINGER * dt;
+            x1 += V_FINGER * dt;
+            x2 -= V_FINGER * dt;
+            // linjalen åker med det FASTNANDE fingret (motsatt det glidande)
+            xr += (slid === 1 ? -1 : 1) * V_FINGER * dt;
+            xr = Math.max(4 - R_X0, Math.min(W - 4 - R_X1, xr));
             if (x2 - x1 <= MEET_GAP) {
-                var xc = tyngdX();
-                x1 = xc - MEET_GAP / 2;
-                x2 = xc + MEET_GAP / 2;
+                var mitt = (x1 + x2) / 2;
+                x1 = mitt - MEET_GAP / 2;
+                x2 = mitt + MEET_GAP / 2;
+                // tyngdpunkten hamnar exakt mitt emellan fingrarna
+                xr = mitt - tyngdX();
                 mode = 'klar';
                 syncUi();
             }
@@ -3445,6 +3469,7 @@
             mode = 'rest';
             x1 = X1_START;
             x2 = X2_START;
+            xr = 0;
             paused = false;
             syncUi();
             render();
@@ -3484,15 +3509,17 @@
             };
         }
         function overVikt(p) {
-            return viktPa() && Math.abs(p.x - xw) < 22 &&
+            // vikten står på linjalen och ritas förskjuten xr
+            return viktPa() && Math.abs(p.x - (xw + xr)) < 22 &&
                    p.y > R_TOP - 48 && p.y < R_BOT;
         }
         function clampVikt(x) {
+            // x i linjalens system
             var lo = R_X0 + 16, hi = R_X1 - 16;
             if (mode === 'kor') {
-                // tyngdpunkten måste stanna mellan fingrarna
-                lo = Math.max(lo, ((1 + M_VIKT) * (x1 + 12) - MID) / M_VIKT);
-                hi = Math.min(hi, ((1 + M_VIKT) * (x2 - 12) - MID) / M_VIKT);
+                // tyngdpunkten måste stanna mellan fingrarna (skärm → linjal)
+                lo = Math.max(lo, ((1 + M_VIKT) * (x1 + 12 - xr) - MID) / M_VIKT);
+                hi = Math.min(hi, ((1 + M_VIKT) * (x2 - 12 - xr) - MID) / M_VIKT);
             }
             return Math.max(lo, Math.min(hi, x));
         }
@@ -3513,7 +3540,7 @@
                 return;
             }
             if (e.pointerId !== dragPtr) return;
-            xw = clampVikt(p.x);
+            xw = clampVikt(p.x - xr);
             if (!running) { render(); updateInfo(); }
         });
         function endDrag(e) {
@@ -3565,10 +3592,11 @@
         });
 
         // Test-handtag för skärmdumpsskript: frys ett läge mitt i förloppet.
-        card._setLage = function (nx1, nx2, nslid) {
+        card._setLage = function (nx1, nx2, nslid, nxr) {
             x1 = nx1;
             x2 = nx2;
             slid = nslid;
+            xr = nxr || 0;
             mode = 'kor';
             paused = true;
             syncUi();

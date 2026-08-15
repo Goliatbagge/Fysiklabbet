@@ -275,15 +275,18 @@ fredag–lördag (läses aldrig). Datera utkastet efter tänkt utskicksdag.
 OBS vid schemaläggningen i EmailOctopus: tidszonen default:ar till London —
 06.00 med fel tidszon blir 07.00 svensk tid.
 
-**⚠️ DEADLINE: utkastet ska vara granskningsklart LÖRDAG FÖRMIDDAG.**
-Brevet går 06.00 på söndagen, så användarens hela granskning — läsning,
-testskick till egen adress och schemaläggningen i EmailOctopus — måste
-hinnas med under lördagen; det finns ingen söndagsbuffert. Granskningsklart
-betyder: utkastfilen skriven och pushad, bilderna i `nyheter/brev/` live på
-sajten, loggposten skriven och alla kontroller (tankstreck, sidfotstaggar,
-bildlänkar) gröna. Blir utkastet försenat till lördag eftermiddag/kväll:
-säg det uttryckligen till användaren, så att hen vet att granskningsfönstret
-är kort — hellre ett ärligt sent besked än en tyst försening.
+**⚠️ DEADLINE: utkastet ska vara granskningsklart LÖRDAG KL 08.00 (svensk
+tid).** Användaren vill kunna kika redan på lördagsmorgonen (uttryckligt
+önskemål 2026-08-15), och brevet går 06.00 på söndagen — så granskning,
+testskick och schemaläggning ska rymmas bekvämt i lördagen utan
+söndagsbuffert. Granskningsklart betyder: utkastfilen skriven och pushad,
+bilderna i `nyheter/brev/` live på sajten, loggposten skriven och alla
+kontroller (tankstreck, sidfotstaggar, bildlänkar) gröna. Blir utkastet
+försenat: säg det uttryckligen till användaren, så att hen vet att
+granskningsfönstret krymper — hellre ett ärligt sent besked än en tyst
+försening. (Körs du som schemalagd routine måste routinens starttid i
+claude.ai → Routines ligga tidigt nog för att hinna klart till 08.00 —
+räkna med att en körning tar upp till en timme.)
 
 ## Får ALDRIG
 

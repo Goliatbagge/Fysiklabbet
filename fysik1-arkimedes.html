@@ -1,78 +1,91 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arkimedes princip — Fysiklabbet</title>
-    <meta name="description" content="Lyftkraft och undanträngt vatten med dynamometer.">
+    <meta name="description" content="Sänk en sten med dynamometer i ett bräddkärl — tyngdminskningen är exakt lika stor som det undanträngda vattnets tyngd. Arkimedes princip som labbförsök.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-arkimedes.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Arkimedes princip — Fysik nivå 1">
-    <meta property="og:description" content="Lyftkraft och undanträngt vatten med dynamometer.">
+    <meta property="og:description" content="Sänk en sten med dynamometer i ett bräddkärl — tyngdminskningen är exakt lika stor som det undanträngda vattnets tyngd.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-arkimedes.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Arkimedes princip — Fysik nivå 1">
-    <meta name="twitter:description" content="Lyftkraft och undanträngt vatten med dynamometer.">
+    <meta name="twitter:description" content="Sänk en sten med dynamometer i ett bräddkärl — tyngdminskningen är exakt lika stor som det undanträngda vattnets tyngd.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        /* Mobil: stapla scen över kontrollpanel och förklaringsspalter */
-        @media (max-width: 600px) {
-            .ark-layout { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
-            .ark-cols2 { grid-template-columns: 1fr !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
 
         /* ── Växlare mellan avsnittets två simuleringar ── */
-        .intro-head {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            gap: 18px; flex-wrap: wrap;
-        }
-        .sim-switch-wrap { flex-shrink: 0; }
-        .sim-switch-label {
-            display: block; text-align: right; margin-bottom: 4px;
-            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
-            font-family: var(--lab-font-mono, monospace);
-        }
-        .sim-switch {
-            display: inline-flex; gap: 4px; padding: 4px;
-            background: var(--lab-bg, #f3eee4);
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 6px;
-        }
-        .sim-switch a, .sim-switch .sim-switch-active {
-            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
-            font-size: 14px; font-weight: 600; text-decoration: none;
-            color: var(--lab-ink-soft, #3a4151);
+        .tab-button {
             transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
         }
-        .sim-switch .sim-switch-active {
+        .tab-button.tab-active {
             background: var(--lab-ink, #0f1620);
             border-color: var(--lab-ink, #0f1620);
             color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
         }
-        .sim-switch a:hover {
+        .tab-button:hover:not(.tab-active) {
             color: var(--lab-ink, #0f1620);
             border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
             background: var(--lab-bg-panel, #ffffff);
         }
 
-        /* ── Fullskärmsläge ── */
-        .scene-wrap { user-select: none; }
-        .scene-wrap:fullscreen > svg,
-        .scene-wrap:-webkit-full-screen > svg { height: 100% !important; }
+        /* ── Färdiga försök ── */
+        .preset-btn {
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+            color: var(--lab-ink, #0f1620);
+            border-radius: 6px; padding: 6px 9px; text-align: left;
+            font-size: 12.5px; cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+        .preset-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        .preset-btn .p-title { font-weight: 600; display: block; }
+        .preset-btn .p-desc { color: var(--lab-ink-muted, #8a8579); font-size: 11.5px; }
 
-        /* Ruta uppe till höger (styrknappar) */
+        /* ── Scen ── */
+        .scene-wrap { user-select: none; -webkit-user-select: none; }
+        .scene-wrap > svg { width: 100%; height: auto; display: block; touch-action: none; }
+        body.lab-sim .scene-wrap:fullscreen {
+            display: flex !important; align-items: center; justify-content: center;
+        }
+        body.lab-sim .scene-wrap:-webkit-full-screen {
+            display: flex !important; align-items: center; justify-content: center;
+        }
+        body.lab-sim .scene-wrap:fullscreen > svg,
+        body.lab-sim .scene-wrap:-webkit-full-screen > svg {
+            width: auto; height: 100%; max-width: 100%; max-height: 100%;
+        }
+
+        /* Ruta uppe till höger (visningsval + styrknappar) */
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
             background: rgba(246,242,234,0.94);
@@ -81,38 +94,49 @@
             border-radius: 10px; padding: 9px 11px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 230px;
+            max-width: 240px;
         }
-        .scene-toggles .st-actions {
-            display: flex; flex-direction: column; gap: 7px;
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600; margin-bottom: 2px;
         }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions { margin-top: 8px; display: flex; gap: 6px; }
         .scene-toggles .st-btn {
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            flex: 1; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             background: var(--lab-bg-panel, #ffffff); color: var(--lab-ink, #0f1620);
-            border-radius: 7px; padding: 5px 12px; font-size: 13px; font-weight: 600;
-            cursor: pointer;
+            border-radius: 6px; padding: 5px 8px; font-size: 12.5px; font-weight: 600;
+            cursor: pointer; transition: border-color 0.15s ease;
         }
-        .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); color: var(--lab-accent, #c8324a); }
+        .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); }
 
-        /* Fullskärm: glidarna direkt synliga i scenens övre vänstra yta */
-        .fs-sliders {
-            position: absolute; top: 64px; left: 14px; z-index: 6;
-            width: 330px; max-width: 44vw; max-height: 70vh; overflow-y: auto;
-            background: rgba(246,242,234,0.94);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 10px; padding: 13px 15px 1px; color: var(--lab-ink);
-            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-        }
-        .fs-sliders .fs-panel-title {
+        /* Fullskärm: reglagepanelen (.fs-controls) och handtaget
+           (.fs-toggle-handle) stylas och dockas av styles-laborans-sim.css —
+           här bara paneltitel och maxhöjd så att panelen kan rulla. */
+        .fs-controls { max-height: 70vh; overflow-y: auto; }
+        .fs-controls .fs-panel-title {
             font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
-            color: var(--lab-ink-muted, #8a8579); font-weight: 600; margin-bottom: 10px;
+            color: rgba(229,231,235,0.75); font-weight: 600;
+        }
+
+        /* ── Avläsningstabell ── */
+        .readout-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .readout-table td {
+            padding: 4px 6px; text-align: right;
+            border-bottom: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+            color: var(--lab-ink, #0f1620);
+            font-variant-numeric: tabular-nums;
+        }
+        .readout-table td:first-child {
+            text-align: left; font-weight: 400; color: var(--lab-ink-soft, #3a4151);
         }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
 </head>
 <body class="lab-sim">
         <div class="lab-topbar lab-topbar--on-sim">
@@ -182,462 +206,238 @@
         </div>
     </div>
 
-    <main class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik nivå 1</a> / <span>Arkimedes princip</span>
-        </div>
-
-        <section class="intro-section">
-            <div class="intro-head">
-                <div>
-                    <h1 class="section-title">Arkimedes princip</h1>
-                    <p class="intro-text">
-                        Utforska förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
-                    </p>
-                </div>
-                <div class="sim-switch-wrap">
-                    <span class="sim-switch-label">Simulering</span>
-                    <div class="sim-switch">
-                        <a href="fysik1-flytkraft-app.html">Flytförmåga</a>
-                        <span class="sim-switch-active">Arkimedes princip</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="root"></div>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
-    </footer>
+    <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef, useMemo } = React;
+        const { useState, useEffect, useMemo, useRef, useCallback } = React;
 
-        // Constants
-        const DENSITY_OF_WATER_G_PER_CM3 = 1.0;
-        const GRAVITY_N_PER_G = 0.00980665;
+        // ── Formatering ────────────────────────────────────────────
+        const formatNum = (num, decimals = 0) => {
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            const parts = s.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return parts.join(',');
+        };
+        const fmtSmart = (num, max = 2) => {
+            let s = num.toFixed(max);
+            if (parseFloat(s) === 0) return '0';
+            if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
+            const parts = s.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return parts.join(',');
+        };
+        // Krafter: två decimaler under 10 N, en decimal däröver — samma
+        // formaterare överallt så att F_L och vattnets tyngd visar
+        // identiska strängar (det ÄR poängen med simuleringen).
+        const fmtN = (F) => formatNum(F, Math.abs(F) >= 10 ? 1 : 2);
 
-        // Helper function to format numbers with comma
-        const formatNumber = (num, decimals = 2) => {
-            return num.toFixed(decimals).replace('.', ',');
+        // ── Fysikkonstanter (synkade med fy1-5.5) ─────────────────
+        const G_ACC = 9.82;      // tyngdfaktor, N/kg
+        const RHO_W = 998;       // vattnets densitet, kg/m³
+        const DYN_MAX = 50;      // dynamometerns mätområde, N
+
+        // ── Scen-geometri (viewBox-pixlar) ────────────────────────
+        const VB_W = 900, VB_H = 630;
+        const PX = 470;                     // px per meter (samma som systersimuleringen)
+        const BENCH_Y = 520;                // bänkskivans ovansida
+        const STONE_X = 420;                // stenens/dynamometerns mittlinje
+        const SURF_Y = 386;                 // vattenytan (bräddkärlet fyllt till pipen)
+        const TANK_IL = 310, TANK_IR = 530; // bräddkärlets inre kanter
+        const TANK_TOP = 300, TANK_FLOOR = 511;
+        const SPOUT_Y1 = 372, SPOUT_Y2 = 390;   // pipöppningen i höger vägg
+        const BK_IL = 562, BK_IR = 642;     // uppsamlingsbägarens inre kanter
+        const BK_RIM = 404, BK_FLOOR = 472; // bägarens rand och inre botten
+        const BK_MAXH = 56;                 // px vattenhöjd vid 1 000 cm³
+        const STREAM_X = 574;               // var strålen landar i bägaren
+
+        // Kraftfärger — samma som teorigenomgångens figurer (fy1-5.5/5.6)
+        const COL_FL = '#d12f2f';   // lyftkraft
+        const COL_FG = '#6d4ca8';   // tyngdkraft
+        const COL_FS = '#2563c9';   // spännkraft (dynamometern)
+        const WATER_FILL = 'rgba(127,180,212,0.45)';
+        const WATER_LINE = '#5b86a8';
+        const WATER_DROP = '#7fb4d4';
+        const INK = '#0f1620';
+        const INK_SOFT = '#3a4151';
+        const INK_MUTED = '#8a8579';
+
+        const INITIAL_STONE = { V: 400, rho: 2700 };   // cm³, kg/m³ (granit)
+        const ARM_MIN_Y = 48;                          // stativarmens översta läge (klämman vid stångens topp)
+
+        // Stenens ritmått ur volymen (kubroten ger den fysiska skalan)
+        const stoneDims = (Vcm3) => {
+            const s = Math.cbrt(Vcm3 / 1e6) * PX;
+            return { w: s * 1.3, h: s * 0.95 };
+        };
+        // Sänkningsgraden får vara negativ (stenen hänger i luften ovanför
+        // ytan). Nedre gränsen är där stativarmen når stångens topp.
+        const subMinOf = (st) => {
+            const { h } = stoneDims(st.V);
+            const FG = st.rho * (st.V / 1e6) * G_ACC;
+            const extAir = (FG / DYN_MAX) * 94;
+            return 1 + (ARM_MIN_Y + 201 + extAir - SURF_Y) / h;
+        };
+        const clampSub = (v, st) => Math.max(subMinOf(st), Math.min(1, v));
+        // Stenens färg mörknar med densiteten
+        const stoneColors = (rho) => {
+            const t = Math.max(0, Math.min(1, (rho - 1500) / 3500));
+            const mix = (a, b) => Math.round(a + (b - a) * t);
+            const f = [mix(169, 74), mix(173, 79), mix(179, 88)];
+            const e = f.map(v => Math.round(v * 0.62));
+            return { fill: `rgb(${f[0]},${f[1]},${f[2]})`, edge: `rgb(${e[0]},${e[1]},${e[2]})` };
         };
 
-        // Initial state
-        const INITIAL_DYNAMOMETER_STATE = {
-            volume: 400,
-            density: 2.55,
-            submersion: 0,
-        };
-
-        // Scale Component
-        const Scale = ({ value, label, x, y, width }) => (
-            <g transform={`translate(${x}, ${y})`}>
-                <rect x={0} y={0} width={width} height={50} rx={5} fill="#e4dac6" stroke="#475569" />
-                <text x={width / 2} y={20} textAnchor="middle" fill="var(--lab-ink-muted)" fontSize="12">{label}</text>
-                <text x={width / 2} y={40} textAnchor="middle" fill="#c8324a" fontSize="16" fontWeight="bold">
-                    {formatNumber(value)} N
-                </text>
-            </g>
-        );
-
-        // Dynamometer Visual Component
-        const DynamometerVisual = ({ calculations, state, setDynamometerState }) => {
-            const { volume } = state;
-            const { apparentWeight, submergedVolume, weightOfDisplacedWater, stoneCurrentY } = calculations;
-
-            const [isAnimatingOverflow, setIsAnimatingOverflow] = useState(false);
-            const animationTimeoutRef = useRef(null);
-            const prevSubmergedVolumeRef = useRef(submergedVolume);
-
-            const [isDragging, setIsDragging] = useState(false);
-            const dragStartRef = useRef({ y: 0, submersion: 0 });
-
-            useEffect(() => {
-                const prevVolume = prevSubmergedVolumeRef.current;
-                prevSubmergedVolumeRef.current = submergedVolume;
-
-                if (submergedVolume > prevVolume) {
-                    setIsAnimatingOverflow(true);
-
-                    if (animationTimeoutRef.current) {
-                        clearTimeout(animationTimeoutRef.current);
-                    }
-
-                    animationTimeoutRef.current = setTimeout(() => {
-                        setIsAnimatingOverflow(false);
-                    }, 500);
-                } else if (submergedVolume <= 0) {
-                    setIsAnimatingOverflow(false);
-                    if (animationTimeoutRef.current) {
-                        clearTimeout(animationTimeoutRef.current);
-                    }
-                }
-
-                return () => {
-                    if (animationTimeoutRef.current) {
-                        clearTimeout(animationTimeoutRef.current);
-                    }
-                };
-            }, [submergedVolume]);
-
-            const handleDragStart = (e) => {
-                e.preventDefault();
-                setIsDragging(true);
-                const y = e.touches ? e.touches[0].clientY : e.clientY;
-                dragStartRef.current = { y, submersion: state.submersion };
-            };
-
-            useEffect(() => {
-                if (!isDragging) return;
-
-                const handleDragMove = (e) => {
-                    const y = e.touches ? e.touches[0].clientY : e.clientY;
-                    const deltaY = y - dragStartRef.current.y;
-
-                    const { travelStartY, travelEndY } = calculations;
-                    const travelDistance = travelEndY - travelStartY;
-
-                    if (travelDistance === 0) return;
-
-                    const submersionDelta = deltaY / travelDistance;
-                    let newSubmersion = dragStartRef.current.submersion + submersionDelta;
-
-                    newSubmersion = Math.max(0, Math.min(1, newSubmersion));
-
-                    setDynamometerState(prev => ({ ...prev, submersion: newSubmersion }));
-                };
-
-                const handleDragEnd = () => {
-                    setIsDragging(false);
-                };
-
-                window.addEventListener('mousemove', handleDragMove);
-                window.addEventListener('touchmove', handleDragMove);
-                window.addEventListener('mouseup', handleDragEnd);
-                window.addEventListener('touchend', handleDragEnd);
-
-                return () => {
-                    window.removeEventListener('mousemove', handleDragMove);
-                    window.removeEventListener('touchmove', handleDragMove);
-                    window.removeEventListener('mouseup', handleDragEnd);
-                    window.removeEventListener('touchend', handleDragEnd);
-                };
-            }, [isDragging, calculations, setDynamometerState]);
-
-            const stoneSize = Math.cbrt(volume) * 4.5;
-            const stonePath = `M 0 -${stoneSize*0.6} L ${stoneSize*0.5} 0 L ${stoneSize*0.3} ${stoneSize*0.7} L -${stoneSize*0.3} ${stoneSize*0.7} L -${stoneSize*0.5} 0 Z`;
-
-            const waterLevelY = 80;
-            const stoneTopHookY = stoneCurrentY - stoneSize * 0.6;
-            const dynamometerCenterY = stoneTopHookY - 100;
-
-            const maxOverflowVolume = 1000;
-            const overflowWaterHeight = (submergedVolume / maxOverflowVolume) * 100;
-
-            const bodyWidth = 22;
-            const bodyHeight = 150;
-            const maxWeight = 50;
-
-            const scaleTopMargin = 15;
-            const scaleBottomMargin = 25;
-            const scaleHeight = bodyHeight - scaleTopMargin - scaleBottomMargin;
-            const scaleStartY = -bodyHeight / 2 + scaleTopMargin;
-
-            const plungerExtension = Math.min(scaleHeight, Math.max(0, (apparentWeight / maxWeight) * scaleHeight));
-
-            const markings = [];
-            for (let i = 0; i <= 5; i++) {
-                const newtons = i * 10;
-                const yPos = scaleStartY + (newtons / maxWeight) * scaleHeight;
-                markings.push(
-                    <g key={`mark-${newtons}`}>
-                        <line x1={-bodyWidth/2} y1={yPos} x2={-bodyWidth/2 - 5} y2={yPos} stroke="var(--lab-ink-muted)" strokeWidth="1" />
-                        <text x={-bodyWidth/2 - 8} y={yPos + 3} textAnchor="end" fontSize="9" fill="var(--lab-ink)">{newtons}</text>
-                    </g>
-                );
-            }
-
+        // Skalenlig kraftpil: skaftet slutar vid pilhuvudets BAS, butt-ändar.
+        // labelSide −1 lägger etiketten till vänster om pilen (fri yta).
+        function ForceArrow({ xPx, fromPy, lenPy, dir, color, sub, value, showValue, dot, labelSide = 1 }) {
+            if (lenPy < 3) return null;
+            const HEAD = Math.max(9, Math.min(13, lenPy * 0.5));
+            const HALF = HEAD * 0.62;
+            const tipPy = fromPy + dir * lenPy;
+            const basePy = tipPy - dir * HEAD;
+            const labelPy = tipPy + dir * 14 + (dir > 0 ? 4 : 0);
             return (
-                <>
-                    <g
-                        onMouseDown={handleDragStart}
-                        onTouchStart={handleDragStart}
-                        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-                    >
-                        {/* Dynamometer */}
-                        <g transform={`translate(175, ${dynamometerCenterY})`} style={{ transition: 'transform 0.2s ease-out' }}>
-                            <path d={`M 0 ${-bodyHeight/2 - 25} C -12 ${-bodyHeight/2 - 35}, 12 ${-bodyHeight/2 - 35}, 0 ${-bodyHeight/2 - 25} L 0 ${-bodyHeight/2 - 12}`} stroke="var(--lab-ink)" strokeWidth="2.5" fill="none" />
-                            <rect x={-bodyWidth/2 - 3} y={-bodyHeight/2 - 12} width={bodyWidth + 6} height={12} rx="3" fill="var(--lab-ink-muted)" />
-                            <rect x={-bodyWidth/2} y={-bodyHeight/2} width={bodyWidth} height={bodyHeight} rx="6" fill="#0E7490" stroke="#475569" strokeWidth="1.5" />
-                            <rect x={-2.5} y={-bodyHeight/2 + 10} width="5" height={bodyHeight - 20} fill="#e4dac6" rx="2" />
-                            {markings}
-
-                            <g transform={`translate(0, ${plungerExtension})`}>
-                                <path d={`M -8 ${scaleStartY} H 8`} stroke="#F87171" strokeWidth="2" />
-                                <path
-                                    d={`M 0 ${scaleStartY} V ${bodyHeight/2 + 5} C -10 ${bodyHeight/2 + 15}, 10 ${bodyHeight/2 + 15}, 0 ${bodyHeight/2 + 5}`}
-                                    stroke="var(--lab-ink)" strokeWidth="2.5" fill="none"
-                                />
-                            </g>
-
-                            <g transform={`translate(${bodyWidth / 2 + 10}, 0)`}>
-                                <rect x={0} y={-25} width={70} height={50} rx={5} fill="#e4dac6" stroke="#475569" />
-                                <text x={35} y={-5} textAnchor="middle" fill="var(--lab-ink-muted)" fontSize="12">Avläsning</text>
-                                <text x={35} y={15} textAnchor="middle" fill="#c8324a" fontSize="16" fontWeight="bold">
-                                    {formatNumber(apparentWeight)} N
-                                </text>
-                            </g>
-                        </g>
-
-                        <line
-                            x1="175"
-                            y1={dynamometerCenterY + (bodyHeight/2 + 5) + plungerExtension}
-                            x2="175"
-                            y2={stoneTopHookY}
-                            stroke="var(--lab-ink-muted)"
-                            strokeWidth="2"
-                        />
-
-                        <g transform={`translate(175, ${stoneCurrentY})`} style={{ transition: 'transform 0.2s ease-out' }}>
-                            <path d={stonePath} fill="#64748B" stroke="#f3eee4" strokeWidth="2"/>
-                        </g>
-                    </g>
-
-                    {/* Overflow Beaker */}
-                    <g transform="translate(50, 50)">
-                        <path d="M0,0 V200 H200 V80 M200,60 V0" fill="none" stroke="#475569" strokeWidth="2"/>
-                        <path d="M200,60 L230,70 M200,80 L230,90" fill="none" stroke="#475569" strokeWidth="2"/>
-                        <rect x="1" y={waterLevelY} width="198" height={200 - waterLevelY} fill="#0891B2" fillOpacity="0.4" />
-                        <line x1="0" y1={waterLevelY} x2="200" y2={waterLevelY} stroke="#c8324a" strokeWidth="2" />
-                        {isAnimatingOverflow &&
-                            <path d="M230 90 Q 240 90, 250 140" stroke="#0E7490" strokeWidth="4" fill="none">
-                                <animate attributeName="stroke-dasharray" from="0, 200" to="200, 0" dur="2s" repeatCount="indefinite" />
-                            </path>
-                        }
-                    </g>
-
-                    {/* Catch Beaker */}
-                    <g transform="translate(280, 140)">
-                        <path d="M0,0 V100 H120 V0" fill="none" stroke="#475569" strokeWidth="2" />
-                        <rect
-                            x="1"
-                            y={100 - overflowWaterHeight}
-                            width="118"
-                            height={overflowWaterHeight}
-                            fill="#0E7490"
-                            style={{ transition: 'y 0.5s ease-in-out, height 0.5s ease-in-out' }}
-                        />
-                        <text x="60" y="-8" textAnchor="middle" fill="var(--lab-ink-muted)" fontSize="12">Undanträngt vatten</text>
-                    </g>
-
-                    <Scale value={weightOfDisplacedWater} label="Vattnets tyngd" x={280} y={250} width={120} />
-                </>
+                <g>
+                    {dot && <circle cx={xPx} cy={fromPy} r="2.6" fill={color} />}
+                    <line x1={xPx} y1={fromPy} x2={xPx} y2={basePy} stroke={color} strokeWidth="3.4" strokeLinecap="butt" />
+                    <polygon points={`${xPx - HALF},${basePy} ${xPx},${tipPy} ${xPx + HALF},${basePy}`} fill={color} />
+                    <text x={xPx + labelSide * 8} y={labelPy} textAnchor={labelSide > 0 ? 'start' : 'end'} fontSize="14.5" fill={color}>
+                        <tspan fontStyle="italic">F</tspan>
+                        <tspan fontSize="10.5" dy="3">{sub}</tspan>
+                        {showValue && <tspan dy="-3">{' = ' + fmtN(value) + ' N'}</tspan>}
+                    </text>
+                </g>
             );
-        };
+        }
 
-        // Simulation Component (scen med fullskärmsläge)
-        const Simulation = ({ dynamometerCalculations, dynamometerState, setDynamometerState, initialDynamometerState, isFullscreen, toggleFullscreen, sceneWrapRef }) => {
-            const handleSubmersion = (e) => setDynamometerState(prev => ({ ...prev, submersion: Number(e.target.value) / 100 }));
-            const handleVolume = (e) => setDynamometerState(prev => ({ ...prev, volume: Number(e.target.value) }));
-            const handleDensity = (e) => setDynamometerState(prev => ({ ...prev, density: Number(e.target.value) }));
+        // Etikett-chip på lugn "pappersyta"
+        function Chip({ xPx, yPy, text, size = 11.5, bold = false, color = '#0f1620' }) {
+            const w = text.length * size * 0.58 + 12;
+            const h = size + 8;
             return (
-                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                    <svg viewBox="0 -130 480 480" style={{ width: '100%', height: 'auto', display: 'block' }} aria-labelledby="sim-title" role="img">
-                        <title id="sim-title">Simulering av Arkimedes princip - Dynamometer</title>
-                        <DynamometerVisual calculations={dynamometerCalculations} state={dynamometerState} setDynamometerState={setDynamometerState}/>
-                    </svg>
-                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
-                        {isFullscreen ? (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                            </svg>
-                        ) : (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                            </svg>
-                        )}
-                    </button>
-                    <div className="scene-toggles">
-                        <div className="st-actions">
-                            <button className="st-btn" onClick={() => setDynamometerState(initialDynamometerState)}>Återställ</button>
-                        </div>
-                    </div>
-                    {isFullscreen && (
-                        <div className="fs-sliders">
-                            <div className="fs-panel-title">Reglage</div>
-                            <Slider id="fs-submersion" label="Sänkningsgrad" value={dynamometerState.submersion * 100}
-                                    onChange={handleSubmersion} min={0} max={100} step={1} unit="%" />
-                            <Slider id="fs-volume" label="Stenens volym" value={dynamometerState.volume}
-                                    onChange={handleVolume} min={100} max={1000} step={25} unit="cm³" />
-                            <Slider id="fs-density" label="Stenens densitet" value={dynamometerState.density}
-                                    onChange={handleDensity} min={1.5} max={5.0} step={0.05} unit="g/cm³" />
-                        </div>
-                    )}
-                </div>
+                <g pointerEvents="none">
+                    <rect x={xPx - w / 2} y={yPy - h / 2} width={w} height={h} rx="4"
+                        fill="rgba(246,242,234,0.95)" stroke="rgba(15,22,32,0.35)" strokeWidth="0.9" />
+                    <text x={xPx} y={yPy + size * 0.36} textAnchor="middle" fontSize={size}
+                        fontWeight={bold ? 600 : 400} fill={color}>{text}</text>
+                </g>
             );
-        };
+        }
 
-        // Slider Component
-        const Slider = ({ label, value, min, max, step, unit, onChange, id }) => (
-            <div style={{ marginBottom: '1.5rem' }}>
-                <label htmlFor={id || label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', color: 'var(--lab-ink-soft)', marginBottom: '0.5rem' }}>
-                    <span>{label}</span>
-                    <span style={{ fontFamily: 'monospace', color: 'var(--lab-accent)', fontSize: '1.125rem' }}>
-                        {formatNumber(value, label === 'Sänkningsgrad' ? 0 : 2)} {unit}
+        const MiniSlider = ({ label, value, min, max, step = 1, unit, onChange, decimals = 0 }) => (
+            <div>
+                <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>{label}</span>
+                    <span className="font-mono text-sm font-semibold" style={{ color: 'var(--lab-accent, #c8324a)' }}>
+                        {formatNum(value, decimals)}{' '}<span className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>{unit}</span>
                     </span>
-                </label>
-                <input
-                    id={id || label}
-                    type="range"
-                    min={min}
-                    max={max}
-                    step={step}
-                    value={value}
-                    onChange={onChange}
-                    style={{ width: '100%', cursor: 'pointer' }}
-                />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                    onChange={(e) => onChange(parseFloat(e.target.value))}
+                    className="w-full rounded appearance-none cursor-pointer transition-all" />
             </div>
         );
 
-        // Controls Component
-        const Controls = ({ dynamometerState, setDynamometerState, initialDynamometerState }) => {
-            const handleDynamometerVolumeChange = (e) => {
-                setDynamometerState(prev => ({...prev, volume: Number(e.target.value)}));
-            };
-
-            const handleDynamometerDensityChange = (e) => {
-                setDynamometerState(prev => ({...prev, density: Number(e.target.value)}));
-            };
-
-            const handleDynamometerSubmersionChange = (e) => {
-                setDynamometerState(prev => ({...prev, submersion: Number(e.target.value) / 100}));
-            };
-
-            return (
-                <div style={{ padding: '1.5rem', backgroundColor: 'var(--lab-bg)', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--lab-ink)', borderBottom: '2px solid var(--lab-line-strong)', paddingBottom: '0.5rem', marginBottom: '1.5rem' }}>Kontrollpanel</h2>
-
-                    <Slider
-                        label="Sänkningsgrad"
-                        value={dynamometerState.submersion * 100}
-                        onChange={handleDynamometerSubmersionChange}
-                        min={0}
-                        max={100}
-                        step={1}
-                        unit="%"
-                    />
-                    <Slider
-                        label="Stenens volym"
-                        value={dynamometerState.volume}
-                        onChange={handleDynamometerVolumeChange}
-                        min={100}
-                        max={1000}
-                        step={25}
-                        unit="cm³"
-                    />
-
-                    <Slider
-                        label="Stenens densitet"
-                        value={dynamometerState.density}
-                        onChange={handleDynamometerDensityChange}
-                        min={1.5}
-                        max={5.0}
-                        step={0.05}
-                        unit="g/cm³"
-                    />
-                    <div style={{ paddingTop: '1rem' }}>
-                        <button
-                            onClick={() => setDynamometerState(initialDynamometerState)}
-                            style={{
-                                width: '100%',
-                                backgroundColor: 'var(--lab-accent)',
-                                color: 'var(--lab-ink)',
-                                fontWeight: 'bold',
-                                padding: '0.75rem 1rem',
-                                borderRadius: '8px',
-                                border: 'none',
-                                cursor: 'pointer',
-                                transition: 'background-color 0.2s'
-                            }}
-                            onMouseOver={(e) => e.target.style.backgroundColor = '#ad2b41'}
-                            onMouseOut={(e) => e.target.style.backgroundColor = 'var(--lab-accent)'}
-                        >
-                            Återställ
-                        </button>
-                    </div>
-                </div>
-            );
-        };
-
-        // Result Row Component
-        const ResultRow = ({ label, value, isHighlighted }) => (
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.5rem',
-                borderRadius: '6px',
-                backgroundColor: isHighlighted ? 'rgba(6, 182, 212, 0.2)' : 'transparent'
-            }}>
-                <span style={{ color: 'var(--lab-ink-muted)' }}>{label}</span>
-                <span style={{ fontFamily: 'monospace', fontSize: '1.125rem', fontWeight: 600, whiteSpace: 'nowrap', color: isHighlighted ? '#0E7490' : 'var(--lab-ink)' }}>{value}</span>
-            </div>
-        );
-
-        // Results Component
-        const Results = ({ dynamometerCalculations }) => {
-            return (
-                <div style={{ padding: '1.5rem', backgroundColor: 'var(--lab-bg)', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--lab-ink)', borderBottom: '2px solid var(--lab-line-strong)', paddingBottom: '0.5rem', marginBottom: '1.5rem' }}>Resultat</h2>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                        <ResultRow label="Stenens tyngd (luft)" value={`${formatNumber(dynamometerCalculations.weightInAir)} N`} />
-                        <ResultRow label="Uppmätt tyngd (Dynamometer)" value={`${formatNumber(dynamometerCalculations.apparentWeight)} N`} />
-                        <ResultRow label="Tyngdminskning (Lyftkraft)" value={`${formatNumber(dynamometerCalculations.buoyantForce)} N`} isHighlighted={true} />
-                        <ResultRow label="Undanträngt vattens tyngd" value={`${formatNumber(dynamometerCalculations.weightOfDisplacedWater)} N`} isHighlighted={true} />
-                    </div>
-                    <p style={{ fontSize: '0.875rem', textAlign: 'center', paddingTop: '0.5rem', color: 'var(--lab-accent)' }}>
-                        Notera: Tyngdminskningen (lyftkraften) är lika med det undanträngda vattnets tyngd!
-                    </p>
-                </div>
-            );
-        };
-
-        // Explanation Component
-        const Explanation = () => {
-            return (
-                <div style={{ padding: '1.5rem', backgroundColor: 'var(--lab-bg)', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', marginTop: '2rem' }}>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--lab-ink)', borderBottom: '2px solid var(--lab-line-strong)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>Vad är Arkimedes princip?</h2>
-                    <p style={{ color: 'var(--lab-ink-soft)', marginBottom: '1rem' }}>
-                        Arkimedes princip säger att <strong style={{ color: 'var(--lab-accent)' }}>den lyftkraft som verkar på ett föremål nedsänkt i en vätska är lika stor som tyngden av den vätska som föremålet tränger undan.</strong>
-                    </p>
-                    <div className="ark-cols2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', color: 'var(--lab-ink-muted)' }}>
-                        <div>
-                            <h3 style={{ fontWeight: '600', fontSize: '1.125rem', color: 'var(--lab-ink)', marginBottom: '0.5rem' }}>Hur fungerar det?</h3>
-                            <p>
-                                När ett objekt sänks ner i en vätska, minskar dess uppmätta tyngd på grund av en uppåtriktad lyftkraft. Ju mer av objektet som är under ytan, desto mer vatten trängs undan och desto större blir lyftkraften.
-                            </p>
-                            <p style={{ marginTop: '0.5rem' }}>
-                                I detta experiment kan du se hur avläsningen på dynamometern minskar i takt med att stenen sänks ner. Tyngdminskningen är exakt lika stor som tyngden av det vatten som samlas upp i den mindre bägaren.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 style={{ fontWeight: '600', fontSize: '1.125rem', color: 'var(--lab-ink)', marginBottom: '0.5rem' }}>Testa själv!</h3>
-                            <p>Använd reglagen för att ändra stenens <strong style={{ color: 'var(--lab-ink-soft)' }}>volym</strong>, <strong style={{ color: 'var(--lab-ink-soft)' }}>densitet</strong> och <strong style={{ color: 'var(--lab-ink-soft)' }}>sänkningsgrad</strong>. Se hur <strong style={{ color: 'var(--lab-accent)' }}>Tyngdminskningen (Lyftkraften)</strong> i resultatpanelen alltid matchar tyngden av det <strong style={{ color: 'var(--lab-accent)' }}>Undanträngda Vattnet</strong>.</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // Main App Component
+        // ── Huvudapp ──────────────────────────────────────────────
         const App = () => {
-            const [dynamometerState, setDynamometerState] = useState(INITIAL_DYNAMOMETER_STATE);
+            const [stone, setStone] = useState(INITIAL_STONE);
+            const [sub, setSub] = useState(0);            // sänkningsgrad 0..1 (mål)
+            const [showFG, setShowFG] = useState(true);
+            const [showFL, setShowFL] = useState(true);
+            const [showFS, setShowFS] = useState(false);
+            const [showValues, setShowValues] = useState(false);
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const sceneWrapRef = useRef(null);
+            const [fsPanelOpen, setFsPanelOpen] = useState(true);
+            const [, setTick] = useState(0);
 
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const subRef = useRef(sub);
+            subRef.current = sub;
+            const stoneRef = useRef(stone);
+            stoneRef.current = stone;
+
+            // Mutabel animationsvärld: visad sänkningsgrad glider mjukt mot
+            // målet; hällström, droppar och ringar lever här.
+            const worldRef = useRef({
+                disp: 0,          // visad (mjukad) sänkningsgrad 0..1
+                pour: 0,          // hällströmmens styrka 0..1
+                drops: [],        // {x, y, vy} fallande droppar vid pipen
+                ripples: [],      // ringar i bräddkärlet {age, w}
+                bkRipples: [],    // ringar i bägaren {age}
+                rippleTimer: 0,
+                forceScale: 3,    // px per N för kraftpilarna (glider mjukt)
+                balScale: 20,     // px per N för kraftbalansens staplar
+                grabbed: false,
+            });
+
+            // ── Animationsloop ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const step = (now) => {
+                    const w = worldRef.current;
+                    const dt = Math.min(0.05, (now - last) / 1000);
+                    last = now;
+                    const st = stoneRef.current;
+
+                    // Om stenen bytt storlek/densitet kan målet ha hamnat under
+                    // armens översta läge — klipp tillbaka det.
+                    const mn = subMinOf(st);
+                    if (subRef.current < mn - 0.001) setSub(mn);
+
+                    // Sänkningsgraden glider mot målet
+                    const prevSub = Math.max(0, Math.min(1, w.disp));
+                    const target = subRef.current;
+                    w.disp += (target - w.disp) * Math.min(1, dt * 7);
+                    if (Math.abs(target - w.disp) < 0.0006) w.disp = target;
+                    // Andelen under ytan (0..1) — bara den driver vattnet
+                    const curSub = Math.max(0, Math.min(1, w.disp));
+                    const velSub = dt > 0 ? (curSub - prevSub) / dt : 0;
+
+                    // Hällström: bara när vatten trängs undan (nedsänkning ökar)
+                    const rate = Math.max(0, velSub) * st.V;       // cm³/s
+                    w.pour += (Math.min(1, rate / 220) - w.pour) * Math.min(1, dt * 9);
+                    if (w.pour < 0.02) w.pour = 0;
+
+                    // Droppar längs strålen
+                    if (w.pour > 0.12 && Math.random() < dt * 30 * w.pour) {
+                        w.drops.push({ x: STREAM_X + (Math.random() - 0.5) * 5, y: 402 + Math.random() * 8, vy: 60 + Math.random() * 70 });
+                    }
+                    const bkLevel = BK_FLOOR - (st.V * curSub / 1000) * BK_MAXH;
+                    for (const d of w.drops) { d.vy += 900 * dt; d.y += d.vy * dt; }
+                    w.drops = w.drops.filter(d => {
+                        if (d.y >= bkLevel - 2) { w.bkRipples.push({ age: 0 }); return false; }
+                        return true;
+                    });
+                    w.bkRipples.forEach(r => { r.age += dt; });
+                    w.bkRipples = w.bkRipples.filter(r => r.age < 0.7).slice(-4);
+
+                    // Ringar i bräddkärlet när stenen rör sig genom ytan
+                    w.rippleTimer -= dt;
+                    if (Math.abs(velSub) > 0.12 && curSub > 0.01 && curSub < 0.999 && w.rippleTimer <= 0) {
+                        const { w: sw } = stoneDims(st.V);
+                        w.ripples.push({ age: 0, w: sw });
+                        w.rippleTimer = 0.22;
+                    }
+                    w.ripples.forEach(r => { r.age += dt; });
+                    w.ripples = w.ripples.filter(r => r.age < 0.9);
+
+                    // Mjuka skalor: kraftpilar och kraftbalans
+                    const FG = st.rho * (st.V / 1e6) * G_ACC;
+                    const fTarget = Math.min(4.2, 132 / Math.max(FG, 4));
+                    w.forceScale += (fTarget - w.forceScale) * Math.min(1, dt * 5);
+                    const bTarget = 175 / Math.max(FG, 8);
+                    w.balScale += (bTarget - w.balScale) * Math.min(1, dt * 5);
+
+                    setTick(t => t + 1);
+                    raf = requestAnimationFrame(step);
+                };
+                raf = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Fullskärm ──
             useEffect(() => {
                 const handler = () => {
                     setIsFullscreen(
@@ -664,70 +464,576 @@
                 }
             };
 
-            const dynamometerCalculations = useMemo(() => {
-                const { volume, density, submersion } = dynamometerState;
+            const reset = () => { setStone(INITIAL_STONE); setSub(0); };
 
-                const stoneSize = Math.cbrt(volume) * 4.5;
-                const stoneHeight = stoneSize * 1.3;
-                const stoneCenterToBottom = stoneSize * 0.7;
+            // ── Dra stenen upp/ner (pointer events) ──
+            const dragRef = useRef(null);
+            const svgPointY = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(svg.getScreenCTM().inverse()).y;
+            };
+            const onStoneDown = (e) => {
+                e.preventDefault();
+                const { h } = stoneDims(stoneRef.current.V);
+                const bottomY = SURF_Y + worldRef.current.disp * h;
+                dragRef.current = { off: svgPointY(e) - bottomY };
+                worldRef.current.grabbed = true;
+                e.target.setPointerCapture(e.pointerId);
+            };
+            const onStoneMove = (e) => {
+                if (!dragRef.current) return;
+                const { h } = stoneDims(stoneRef.current.V);
+                const newBottom = svgPointY(e) - dragRef.current.off;
+                setSub(clampSub((newBottom - SURF_Y) / h, stoneRef.current));
+            };
+            const onStoneUp = () => { dragRef.current = null; worldRef.current.grabbed = false; };
 
-                const waterLevelY = 130;
-                const travelStartY = 100;
-                const travelEndY = waterLevelY + stoneSize * 1.5;
+            // ── Dra stativarmen upp/ner (samma sak som att flytta klämman) ──
+            const armDragRef = useRef(null);
+            const onArmDown = (e) => {
+                e.preventDefault();
+                armDragRef.current = { y0: svgPointY(e), sub0: subRef.current };
+                worldRef.current.grabbed = true;
+                e.target.setPointerCapture(e.pointerId);
+            };
+            const onArmMove = (e) => {
+                const d = armDragRef.current;
+                if (!d) return;
+                const { h } = stoneDims(stoneRef.current.V);
+                setSub(clampSub(d.sub0 + (svgPointY(e) - d.y0) / h, stoneRef.current));
+            };
+            const onArmUp = () => { armDragRef.current = null; worldRef.current.grabbed = false; };
 
-                const stoneCurrentY = travelStartY + (travelEndY - travelStartY) * submersion;
+            // ── Härledda värden (ur den mjukade sänkningsgraden) ──
+            const w = worldRef.current;
+            const disp = w.disp;                               // kan vara negativ (i luften)
+            const dispSub = Math.max(0, Math.min(1, disp));    // andel under ytan
+            const Vm3 = stone.V / 1e6;
+            const FG = stone.rho * Vm3 * G_ACC;
+            const Vsub = stone.V * dispSub;                    // cm³
+            const FL = RHO_W * (Vsub / 1e6) * G_ACC;
+            const FS = FG - FL;
+            const mass = stone.rho * Vm3;                      // kg
 
-                const stoneBottomTipY = stoneCurrentY + stoneCenterToBottom;
-                const submergedHeight = Math.max(0, stoneBottomTipY - waterLevelY);
-                const submergedRatio = Math.min(1, submergedHeight / stoneHeight);
+            // ── Scenens geometri denna frame ──
+            const { w: sw, h: sh } = stoneDims(stone.V);
+            const sc = stoneColors(stone.rho);
+            const stoneTop = SURF_Y + (disp - 1) * sh;
+            const cy = stoneTop + sh / 2;
+            const ext = (FS / DYN_MAX) * 94;                   // fjäderns förlängning
+            const armY = stoneTop - 201 - ext;                 // klämmans/armens höjd
+            const bodyTop = armY + 25;
+            const bodyBot = bodyTop + 118;
+            const slotTop = bodyTop + 10;
+            const markerY = slotTop + (FS / DYN_MAX) * 94;
+            const hookBot = bodyBot + 12 + ext + 10;
+            const bkLevelY = BK_FLOOR - (Vsub / 1000) * BK_MAXH;
 
-                const stoneMass = volume * density;
-                const weightInAir = stoneMass * GRAVITY_N_PER_G;
-                const submergedVolume = volume * submergedRatio;
-                const massOfDisplacedWater = submergedVolume * DENSITY_OF_WATER_G_PER_CM3;
-                const weightOfDisplacedWater = massOfDisplacedWater * GRAVITY_N_PER_G;
-                const buoyantForce = weightOfDisplacedWater;
-                const apparentWeight = weightInAir - buoyantForce;
+            // Vågig vattenyta i bräddkärlet
+            const time = performance.now() / 1000;
+            const surfPts = [];
+            for (let x = TANK_IL; x <= TANK_IR; x += 11) {
+                const yy = SURF_Y + Math.sin(x * 0.055 + time * 1.9) * 1.2 + Math.sin(x * 0.023 - time * 1.2) * 0.8;
+                surfPts.push(`${x},${yy.toFixed(1)}`);
+            }
+            const surfLine = 'M ' + surfPts.join(' L ');
+            const fluidPath = surfLine + ` L ${TANK_IR},${TANK_FLOOR} L ${TANK_IL},${TANK_FLOOR} Z`;
 
-                return { weightInAir, submergedVolume, weightOfDisplacedWater, buoyantForce, apparentWeight, stoneCurrentY, submergedRatio, travelStartY, travelEndY };
-            }, [dynamometerState]);
+            // Stenens oregelbundna kontur
+            const stonePts = [
+                [-0.48, -0.10], [-0.30, -0.38], [-0.05, -0.48], [0.28, -0.42],
+                [0.50, -0.15], [0.45, 0.18], [0.22, 0.45], [-0.12, 0.50], [-0.42, 0.28],
+            ].map(([fx, fy]) => `${(STONE_X + fx * sw).toFixed(1)},${(cy + fy * sh).toFixed(1)}`).join(' ');
+            const speckles = [[-0.25, -0.15], [0.1, -0.28], [0.28, 0.05], [-0.05, 0.22], [-0.32, 0.1], [0.12, 0.32]];
+
+            // ── Dynamometerns skala ──
+            // Skalan ligger HELT INUTI kroppen (x 402–438): siffror t.o.m. x 412,
+            // streck 413,5–420, mätfönster från 421.
+            const dynTicks = [];
+            for (let f = 0; f <= DYN_MAX; f += 5) {
+                const y = slotTop + (f / DYN_MAX) * 94;
+                const major = f % 10 === 0;
+                dynTicks.push(
+                    <g key={'dt' + f}>
+                        <line x1={major ? 413.5 : 416} y1={y} x2={420} y2={y} stroke="rgba(15,22,32,0.5)" strokeWidth={major ? 1.1 : 0.7} />
+                        {major && <text x={412} y={y + 2.5} textAnchor="end" fontSize="6.8" fill={INK_SOFT}>{f}</text>}
+                    </g>
+                );
+            }
+            // Fjäder-zigzag i fönstret ner till markören
+            const springPts = [`425,${slotTop - 4}`];
+            const nCoil = Math.max(2, Math.floor((markerY - slotTop) / 6));
+            for (let i = 1; i <= nCoil; i++) {
+                const y = slotTop - 4 + ((markerY - slotTop + 4) * i) / nCoil;
+                springPts.push(`${i % 2 ? 428 : 422},${y.toFixed(1)}`);
+            }
+            springPts.push(`425,${markerY.toFixed(1)}`);
+
+            // ── Kraftbalansen ──
+            const bs = w.balScale;
+            const balBase = 470;
+            const hFGb = FG * bs, hFLb = FL * bs;
+            const b1x = 718, b1w = 44, b2x = 812, b2w = 44;
+
+            const renderScene = () => (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet"
+                    role="img" aria-label="Ett bräddkärl med vatten på en labbänk. En sten hänger i en dynamometer på ett stativ och kan sänkas ner i vattnet; undanträngt vatten rinner genom pipen ner i en bägare som står på en digital våg. Till höger jämför två staplar kraften på stenen med det undanträngda vattnets tyngd.">
+                    <defs>
+                        <clipPath id="tankClip">
+                            <rect x={TANK_IL} y={TANK_TOP} width={TANK_IR - TANK_IL} height={TANK_FLOOR - TANK_TOP} />
+                        </clipPath>
+                        <clipPath id="beakerClip">
+                            <rect x={BK_IL} y={BK_RIM} width={BK_IR - BK_IL} height={BK_FLOOR - BK_RIM} />
+                        </clipPath>
+                    </defs>
+
+                    {/* Labbänk: skiva + ben */}
+                    <g pointerEvents="none">
+                        <rect x="20" y={BENCH_Y} width="860" height="28" fill="#dbc79e" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        <line x1="20" y1={BENCH_Y + 7} x2="880" y2={BENCH_Y + 7} stroke="rgba(15,22,32,0.16)" strokeWidth="1" />
+                        <rect x="70" y="548" width="26" height="74" fill="#cdb890" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        <rect x="804" y="548" width="26" height="74" fill="#cdb890" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                    </g>
+
+                    {/* Kraftbalansen (bakgrundspanel till höger) */}
+                    <g pointerEvents="none">
+                        {/* Rubriken ligger under visningsrutans overlay-zon (uppe till
+                            höger) — flytta den inte över y ≈ 240 utan att prova smala
+                            desktopbredder. */}
+                        <text x="787" y="248" textAnchor="middle" fontSize="11" fontWeight="600"
+                            letterSpacing="0.08em" fill={INK_SOFT}>KRAFTBALANSEN</text>
+                        <text x="787" y="262" textAnchor="middle" fontSize="9.5" fill={INK_MUTED}>tyngd i newton — samma skala</text>
+                        {/* Stapel 1: krafterna på stenen (F_L nederst, F_S överst) */}
+                        {hFLb > 1 && (
+                            <rect x={b1x} y={balBase - hFLb} width={b1w} height={hFLb}
+                                fill="rgba(209,47,47,0.18)" stroke={COL_FL} strokeWidth="1.6" />
+                        )}
+                        {hFGb - hFLb > 1 && (
+                            <rect x={b1x} y={balBase - hFGb} width={b1w} height={hFGb - hFLb}
+                                fill="rgba(37,99,201,0.14)" stroke={COL_FS} strokeWidth="1.6" />
+                        )}
+                        {/* Segmentetiketter till höger om stapel 1 */}
+                        {hFGb - hFLb > 12 && (
+                            <text x="768" y={balBase - hFLb - (hFGb - hFLb) / 2 + 4} textAnchor="start" fontSize="12" fill={COL_FS}>
+                                <tspan fontStyle="italic">F</tspan><tspan fontSize="9" dy="2.5">S</tspan>
+                            </text>
+                        )}
+                        {hFLb > 12 && (
+                            <text x="768" y={balBase - hFLb / 2 + 4} textAnchor="start" fontSize="12" fill={COL_FL}>
+                                <tspan fontStyle="italic">F</tspan><tspan fontSize="9" dy="2.5">L</tspan>
+                            </text>
+                        )}
+                        {/* F_G-klammer till vänster */}
+                        <line x1="706" y1={balBase} x2="706" y2={balBase - hFGb} stroke={COL_FG} strokeWidth="1.4" />
+                        <line x1="702" y1={balBase} x2="710" y2={balBase} stroke={COL_FG} strokeWidth="1.4" />
+                        <line x1="702" y1={balBase - hFGb} x2="710" y2={balBase - hFGb} stroke={COL_FG} strokeWidth="1.4" />
+                        <text x="698" y={balBase - hFGb / 2} textAnchor="end" fontSize="12.5" fill={COL_FG}>
+                            <tspan fontStyle="italic">F</tspan><tspan fontSize="9.5" dy="2.5">G</tspan>
+                        </text>
+                        <text x="698" y={balBase - hFGb / 2 + 13} textAnchor="end" fontSize="9.5" fill={INK_SOFT}>{fmtN(FG)} N</text>
+                        {/* Stapel 2: undanträngda vattnets tyngd */}
+                        {hFLb > 1 && (
+                            <rect x={b2x} y={balBase - hFLb} width={b2w} height={hFLb}
+                                fill={WATER_FILL} stroke={WATER_LINE} strokeWidth="1.6" />
+                        )}
+                        {hFLb > 2 && (
+                            <text x={b2x + b2w / 2} y={balBase - hFLb - 6} textAnchor="middle" fontSize="10" fill={INK_SOFT}>{fmtN(FL)} N</text>
+                        )}
+                        {/* Streckad linje: lyftkraften och vattnets tyngd är lika höga */}
+                        {hFLb > 2 && (
+                            <line x1={b1x + b1w} y1={balBase - hFLb} x2={b2x} y2={balBase - hFLb}
+                                stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" strokeDasharray="3 3" />
+                        )}
+                        <line x1="700" y1={balBase} x2="872" y2={balBase} stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeLinecap="butt" />
+                        <text x={b1x + b1w / 2} y={balBase + 15} textAnchor="middle" fontSize="9.5" fill={INK_MUTED}>stenen</text>
+                        <text x={b2x + b2w / 2} y={balBase + 15} textAnchor="middle" fontSize="9.5" fill={INK_MUTED}>undanträngt vatten</text>
+                    </g>
+
+                    {/* Labbstativ: fotplatta och stång */}
+                    <g pointerEvents="none">
+                        <rect x="60" y="508" width="200" height="12" rx="2" fill="#b8bfc7" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                        <rect x="146" y="44" width="8" height="464" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                    </g>
+                    {/* Klämma + arm — dras upp/ner för att höja/sänka stenen */}
+                    <g onPointerDown={onArmDown} onPointerMove={onArmMove}
+                        onPointerUp={onArmUp} onPointerCancel={onArmUp}
+                        style={{ cursor: w.grabbed ? 'grabbing' : 'grab' }}>
+                        <rect x="150" y={armY} width="294" height="8" rx="3" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                        <rect x="139" y={armY - 4} width="22" height="16" rx="2" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <circle cx="134" cy={armY + 4} r="4" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        {/* osynlig, bredare träffyta så armen är lätt att ta tag i */}
+                        <rect x="132" y={armY - 10} width="312" height="28" fill="transparent" />
+                    </g>
+
+                    {/* Dynamometer */}
+                    <g pointerEvents="none">
+                        <circle cx={STONE_X} cy={armY + 14} r="5" fill="none" stroke={INK_SOFT} strokeWidth="2" />
+                        <line x1={STONE_X} y1={armY + 19} x2={STONE_X} y2={bodyTop} stroke={INK_SOFT} strokeWidth="2" />
+                        <rect x="402" y={bodyTop} width="36" height="118" rx="7" fill="#d7dbe0" stroke="rgba(15,22,32,0.55)" strokeWidth="1.4" />
+                        <rect x="402" y={bodyTop} width="36" height="7" rx="3" fill="#b8bfc7" stroke="rgba(15,22,32,0.35)" strokeWidth="0.8" />
+                        {/* mätfönster med fjäder och röd markör */}
+                        <rect x="421" y={slotTop - 6} width="8" height="106" rx="3" fill="#f2efe6" stroke="rgba(15,22,32,0.4)" strokeWidth="0.9" />
+                        <polyline points={springPts.join(' ')} fill="none" stroke="#8a93a0" strokeWidth="1.1" />
+                        {dynTicks}
+                        <rect x="418.5" y={markerY - 1.2} width="13" height="2.6" fill={COL_FL} />
+                        {/* kolv + krok */}
+                        <rect x="418.5" y={bodyBot - 2} width="3" height={14 + ext} fill="#6a7076" />
+                        <path d={`M ${STONE_X} ${bodyBot + 12 + ext} C ${STONE_X - 7} ${bodyBot + 14 + ext}, ${STONE_X - 7} ${bodyBot + 20 + ext}, ${STONE_X} ${bodyBot + 22 + ext} C ${STONE_X + 5} ${bodyBot + 20 + ext}, ${STONE_X + 5} ${bodyBot + 16 + ext}, ${STONE_X + 1} ${bodyBot + 15 + ext}`}
+                            fill="none" stroke={INK_SOFT} strokeWidth="2" strokeLinecap="round" />
+                    </g>
+
+                    {/* Avläsningschip vid dynamometern */}
+                    <g pointerEvents="none">
+                        <text x="489" y={bodyTop + 12} textAnchor="middle" fontSize="9" fill={INK_MUTED}>dynamometern visar</text>
+                        <Chip xPx={489} yPy={bodyTop + 28} text={fmtN(FS) + ' N'} size={12.5} bold color={COL_FS} />
+                    </g>
+
+                    {/* Tråd + sten (före vattenöverlägget så att nedsänkt del tonas) */}
+                    <line x1={STONE_X} y1={hookBot} x2={STONE_X} y2={stoneTop - 6} stroke="#3a4151" strokeWidth="1.6" pointerEvents="none" />
+                    <circle cx={STONE_X} cy={stoneTop - 3} r="3.4" fill="none" stroke="#6a7076" strokeWidth="2" pointerEvents="none" />
+                    <g onPointerDown={onStoneDown} onPointerMove={onStoneMove}
+                        onPointerUp={onStoneUp} onPointerCancel={onStoneUp}
+                        style={{ cursor: w.grabbed ? 'grabbing' : 'grab' }}>
+                        <polygon points={stonePts} fill={sc.fill} stroke={sc.edge} strokeWidth="2" strokeLinejoin="round" />
+                        <polyline points={`${STONE_X - sw * 0.22},${cy - sh * 0.3} ${STONE_X - sw * 0.05},${cy - sh * 0.12} ${STONE_X + sw * 0.18},${cy - sh * 0.2}`}
+                            fill="none" stroke={sc.edge} strokeWidth="1" opacity="0.45" pointerEvents="none" />
+                        {speckles.map(([fx, fy], i) => (
+                            <circle key={'spk' + i} cx={STONE_X + fx * sw} cy={cy + fy * sh}
+                                r={Math.max(1, sw * 0.022)} fill={sc.edge} opacity="0.4" pointerEvents="none" />
+                        ))}
+                    </g>
+
+                    {/* Vattnet i bräddkärlet — överlägg + vågig yta + ringar */}
+                    <g pointerEvents="none" clipPath="url(#tankClip)">
+                        <path d={fluidPath} fill={WATER_FILL} />
+                        <path d={surfLine} fill="none" stroke={WATER_LINE} strokeWidth="1.8" opacity="0.85" />
+                        {w.ripples.map((r, i) => {
+                            const rx = Math.min(105, r.w * 0.55 + r.age * 140);
+                            const op = Math.max(0, 0.5 * (1 - r.age / 0.9));
+                            return <ellipse key={'rip' + i} cx={STONE_X} cy={SURF_Y} rx={rx} ry={rx * 0.14}
+                                fill="none" stroke={WATER_LINE} strokeWidth="1.3" opacity={op} />;
+                        })}
+                    </g>
+
+                    {/* Bräddkärlets glas: väggar, botten, kanter, pip och reflex */}
+                    <g pointerEvents="none">
+                        <rect x={TANK_IL} y={TANK_TOP + 1} width={TANK_IR - TANK_IL} height={TANK_FLOOR - TANK_TOP - 1} fill="rgba(201,213,220,0.12)" />
+                        <line x1={TANK_IL} y1={TANK_TOP + 1} x2={TANK_IR} y2={TANK_TOP + 1} stroke="rgba(15,22,32,0.28)" strokeWidth="1.2" />
+                        <rect x="299" y={TANK_TOP} width="11" height={BENCH_Y - TANK_TOP} fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        {/* höger vägg i två delar — pipöppningen däremellan */}
+                        <rect x={TANK_IR} y={TANK_TOP} width="11" height={SPOUT_Y1 - TANK_TOP} fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x={TANK_IR} y={SPOUT_Y2} width="11" height={BENCH_Y - SPOUT_Y2} fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x={TANK_IL} y={TANK_FLOOR} width={TANK_IR - TANK_IL} height="9" fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1.1" />
+                        <rect x="296" y="294" width="17" height="6" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <rect x="527" y="294" width="17" height="6" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        {/* pipen (rännan) genom väggen */}
+                        <path d={`M ${TANK_IR} ${SPOUT_Y1} L 566 384`} fill="none" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        <path d={`M ${TANK_IR} ${SPOUT_Y2} L 566 398`} fill="none" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+                        {/* vatten i rännan när det rinner */}
+                        {w.pour > 0.03 && (
+                            <polygon points={`${TANK_IR},379 566,391 566,397 ${TANK_IR},388`} fill={WATER_DROP} opacity={0.7 * w.pour} />
+                        )}
+                        {/* glasreflex */}
+                        <line x1="336" y1="482" x2="404" y2="330" stroke="#e9f1f6" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                        <line x1="356" y1="472" x2="398" y2="376" stroke="#e9f1f6" strokeWidth="3.4" strokeLinecap="round" opacity="0.35" />
+                    </g>
+
+                    {/* Hällström + droppar ner i bägaren */}
+                    <g pointerEvents="none">
+                        {w.pour > 0.03 && (
+                            <path d={`M 564 395 C 572 400, ${STREAM_X} 410, ${STREAM_X} ${bkLevelY - 2}`}
+                                fill="none" stroke={WATER_DROP} strokeWidth={2.2 + w.pour * 1.6} opacity={Math.min(0.85, w.pour + 0.15)} strokeLinecap="round" />
+                        )}
+                        {w.drops.map((d, i) => (
+                            <circle key={'dr' + i} cx={d.x} cy={d.y} r="1.9" fill={WATER_DROP} opacity="0.85" />
+                        ))}
+                    </g>
+
+                    {/* Uppsamlingsbägare med vatten, på digital våg */}
+                    <g pointerEvents="none">
+                        <g clipPath="url(#beakerClip)">
+                            <rect x={BK_IL} y={bkLevelY} width={BK_IR - BK_IL} height={BK_FLOOR - bkLevelY} fill={WATER_FILL} />
+                            {Vsub > 4 && <line x1={BK_IL} y1={bkLevelY} x2={BK_IR} y2={bkLevelY} stroke={WATER_LINE} strokeWidth="1.5" opacity="0.85" />}
+                            {w.bkRipples.map((r, i) => {
+                                const rx = 4 + r.age * 46;
+                                const op = Math.max(0, 0.5 * (1 - r.age / 0.7));
+                                return <ellipse key={'br' + i} cx={STREAM_X} cy={bkLevelY} rx={rx} ry={rx * 0.2}
+                                    fill="none" stroke={WATER_LINE} strokeWidth="1.1" opacity={op} />;
+                            })}
+                        </g>
+                        {/* graderade streck var 250 cm³ */}
+                        {[250, 500, 750, 1000].map(v => (
+                            <line key={'bt' + v} x1={BK_IL} y1={BK_FLOOR - (v / 1000) * BK_MAXH} x2={BK_IL + 9} y2={BK_FLOOR - (v / 1000) * BK_MAXH}
+                                stroke="rgba(15,22,32,0.4)" strokeWidth="1.1" />
+                        ))}
+                        <rect x="556" y={BK_RIM} width="6" height={BK_FLOOR + 6 - BK_RIM} fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <rect x={BK_IR} y={BK_RIM} width="6" height={BK_FLOOR + 6 - BK_RIM} fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <rect x={BK_IL} y={BK_FLOOR} width={BK_IR - BK_IL} height="6" fill="#c9d3da" opacity="0.8" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                        <rect x="553" y="400" width="12" height="5" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="0.9" />
+                        <rect x="639" y="400" width="12" height="5" rx="2" fill="#b6c2ca" stroke="rgba(15,22,32,0.5)" strokeWidth="0.9" />
+                        <line x1="590" y1="466" x2="612" y2="416" stroke="#e9f1f6" strokeWidth="3.4" strokeLinecap="round" opacity="0.4" />
+                        {/* digital våg */}
+                        <rect x="548" y="478" width="108" height="36" rx="5" fill="#b8bfc7" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                        <rect x="558" y="514" width="12" height="6" fill="#8f99a4" />
+                        <rect x="634" y="514" width="12" height="6" fill="#8f99a4" />
+                        <rect x="566" y="484" width="72" height="24" rx="3" fill="#232830" stroke="rgba(15,22,32,0.6)" strokeWidth="1" />
+                        <text x="602" y="493.5" textAnchor="middle" fontSize="7.5" fill="#9fb3a8"
+                            fontFamily="var(--lab-font-mono, monospace)">{formatNum(Vsub, 0)} cm³</text>
+                        <text x="602" y="504.5" textAnchor="middle" fontSize="11" fontWeight="600" fill="#d8ecdd"
+                            fontFamily="var(--lab-font-mono, monospace)">{fmtN(FL)} N</text>
+                    </g>
+
+                    {/* Etikett över bägaren */}
+                    <Chip xPx={622} yPy={362} text="Undanträngt vatten" size={11} />
+
+                    {/* Kraftpilar på stenen (överst) */}
+                    <g pointerEvents="none">
+                        {showFL && FL > 0.15 && (
+                            <ForceArrow xPx={STONE_X} fromPy={cy} lenPy={FL * w.forceScale} dir={-1}
+                                color={COL_FL} sub="L" value={FL} showValue={showValues} labelSide={-1} />
+                        )}
+                        {showFG && (
+                            <ForceArrow xPx={STONE_X} fromPy={cy} lenPy={FG * w.forceScale} dir={1}
+                                color={COL_FG} sub="G" value={FG} showValue={showValues} dot />
+                        )}
+                        {showFS && FS > 0.15 && (
+                            <ForceArrow xPx={STONE_X + 12} fromPy={stoneTop} lenPy={FS * w.forceScale} dir={-1}
+                                color={COL_FS} sub="S" value={FS} showValue={showValues} />
+                        )}
+                    </g>
+                </svg>
+            );
+
+            // ── Reglage-JSX (sidopanel + fullskärmspanel) ──
+            const sliders = (
+                <React.Fragment>
+                    <MiniSlider label="Sänkningsgrad" value={Math.max(0, sub) * 100} min={0} max={100} step={1} unit="%"
+                        onChange={(v) => setSub(v / 100)} />
+                    <MiniSlider label={<span>Volym <em>V</em></span>} value={stone.V} min={100} max={1000} step={25} unit="cm³"
+                        onChange={(v) => setStone(s => ({ ...s, V: v }))} />
+                    <MiniSlider label={<span>Densitet <em style={{ textTransform: 'none' }}>ρ</em></span>} value={stone.rho} min={1500} max={5000} step={50} unit="kg/m³"
+                        onChange={(v) => setStone(s => ({ ...s, rho: v }))} />
+                </React.Fragment>
+            );
+
+            const PRESETS = [
+                { name: 'Sänk stenen helt', desc: 'hela volymen under ytan — full lyftkraft',
+                  apply: () => setSub(1) },
+                { name: 'Dubbelt så stor sten', desc: '800 cm³ i stället för 400 — lyftkraften fördubblas',
+                  apply: () => { setStone({ V: 800, rho: 2700 }); setSub(1); } },
+                { name: 'Tyngre sten, samma volym', desc: 'högre densitet — men lyftkraften ändras inte',
+                  apply: () => { setStone({ V: 400, rho: 5000 }); setSub(1); } },
+            ];
 
             return (
-                <div style={{ minHeight: '100vh', backgroundColor: 'transparent', color: 'var(--lab-ink)', fontFamily: 'system-ui, -apple-system, sans-serif', padding: '1rem' }}>
-                    <main style={{ maxWidth: '1280px', margin: '0 auto' }}>
-                        <div className="ark-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginTop: '3rem' }}>
-                            <div style={{ backgroundColor: 'var(--lab-bg)', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-                                <Simulation
-                                    dynamometerCalculations={dynamometerCalculations}
-                                    dynamometerState={dynamometerState}
-                                    setDynamometerState={setDynamometerState}
-                                    initialDynamometerState={INITIAL_DYNAMOMETER_STATE}
-                                    isFullscreen={isFullscreen}
-                                    toggleFullscreen={toggleFullscreen}
-                                    sceneWrapRef={sceneWrapRef}
-                                />
-                            </div>
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-8 pt-4 font-sans" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto">
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Arkimedes princip
+                        </div>
+                    </div>
 
-                            <aside style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                                <Controls
-                                    dynamometerState={dynamometerState}
-                                    setDynamometerState={setDynamometerState}
-                                    initialDynamometerState={INITIAL_DYNAMOMETER_STATE}
-                                />
-                                <Results
-                                    dynamometerCalculations={dynamometerCalculations}
-                                />
-                            </aside>
+                    <header className="max-w-6xl mx-auto mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight glow-text">
+                                Arkimedes princip
+                            </h1>
+                            {/* Formelkort: F_L = ρ · g · V med ord-etiketter */}
+                            <div className="mt-3 flex items-end gap-3 flex-wrap" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink, #0f1620)' }}>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="text-xs font-semibold mb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Lyftkraft</div>
+                                    <div className="text-2xl font-bold"><em>F</em><sub className="text-base">L</sub></div>
+                                </div>
+                                <div className="text-xl pb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>=</div>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="text-xs font-semibold mb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Vätskans densitet</div>
+                                    <div className="text-2xl font-bold"><em>ρ</em></div>
+                                </div>
+                                <div className="text-xl pb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>·</div>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="text-xs font-semibold mb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Tyngdfaktor</div>
+                                    <div className="text-2xl font-bold"><em>g</em></div>
+                                </div>
+                                <div className="text-xl pb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>·</div>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="text-xs font-semibold mb-1" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Undanträngd volym</div>
+                                    <div className="text-2xl font-bold"><em>V</em></div>
+                                </div>
+                            </div>
+                            <p className="mt-2" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                Sänk stenen i bräddkärlet — dra den i scenen eller använd reglaget. Dynamometern
+                                visar mindre, det undanträngda vattnet rinner ner i bägaren på vågen, och
+                                kraftbalansen avslöjar sambandet: tyngdminskningen är exakt vattnets tyngd.
+                            </p>
                         </div>
 
-                        <Explanation />
+                        <div className="flex flex-col items-start md:items-end gap-2 flex-shrink-0">
+                            <div>
+                                <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
+                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                    <a href="fysik1-flytkraft-app.html"
+                                        className="tab-button px-4 py-2 rounded text-sm font-semibold border"
+                                        style={{ textDecoration: 'none' }}>
+                                        Flyta eller sjunka
+                                    </a>
+                                    <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
+                                        Arkimedes princip
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
+                        {/* Scen */}
+                        <div className="flex-grow lg:w-2/3 order-1">
+                            <div className="glass-card rounded-2xl overflow-hidden">
+                                <div className="scene-wrap relative" data-theme="ljusPapper" ref={sceneWrapRef}
+                                    style={{ backgroundImage: 'linear-gradient(rgba(200, 50, 74, 0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 50, 74, 0.13) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+                                    {renderScene()}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+
+                                    {/* Visningsval + Återställ — uppe till höger, alltid synlig */}
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Visa</div>
+                                        <label>
+                                            <input type="checkbox" checked={showFG} onChange={(e) => setShowFG(e.target.checked)} />
+                                            <span>Tyngdkraft <em>F</em><sub>G</sub></span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={showFL} onChange={(e) => setShowFL(e.target.checked)} />
+                                            <span>Lyftkraft <em>F</em><sub>L</sub></span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={showFS} onChange={(e) => setShowFS(e.target.checked)} />
+                                            <span>Spännkraft <em>F</em><sub>S</sub></span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={showValues} onChange={(e) => setShowValues(e.target.checked)} />
+                                            <span>Visa värden</span>
+                                        </label>
+                                        <div className="st-actions">
+                                            <button type="button" className="st-btn" onClick={reset}>Återställ</button>
+                                        </div>
+                                    </div>
+
+                                    {/* Fullskärm: hopfällbar reglagepanel i underkanten */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={'fs-controls' + (fsPanelOpen ? '' : ' collapsed')}>
+                                                <div className="fs-panel-title">Reglage</div>
+                                                <div className="flex flex-col gap-4">{sliders}</div>
+                                            </div>
+                                            <button type="button" className="fs-toggle-handle"
+                                                onClick={() => setFsPanelOpen(o => !o)}>
+                                                {fsPanelOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Förklaring under scenen */}
+                            <div className="mt-6 p-4 text-sm glass-card" style={{ borderRadius: '6px', color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                <div className="font-semibold mb-2" style={{ color: 'var(--lab-ink, #0f1620)' }}>Så hänger det ihop</div>
+                                <ul className="list-disc pl-5 flex flex-col gap-1">
+                                    <li>Dynamometern mäter spännkraften <em>F</em><sub>S</sub> i tråden. I luft bär den
+                                        hela tyngden: <em>F</em><sub>S</sub>{' '}={' '}<em>F</em><sub>G</sub>.</li>
+                                    <li>När stenen sänks ner trycker vattnet upp med lyftkraften
+                                        {' '}<em>F</em><sub>L</sub>{' '}={' '}<em>ρ</em>{' '}·{' '}<em>g</em>{' '}·{' '}<em>V</em> — dynamometern
+                                        visar då bara <em>F</em><sub>S</sub>{' '}={' '}<em>F</em><sub>G</sub>{' '}−{' '}<em>F</em><sub>L</sub>.
+                                        Skillnaden är "tyngdminskningen".</li>
+                                    <li>Bräddkärlet är fyllt exakt till pipen, så det vatten stenen tränger undan
+                                        rinner ner i bägaren. Vågen visar det undanträngda vattnets tyngd — och den är
+                                        <strong> alltid exakt lika stor som lyftkraften</strong>. Det är Arkimedes princip.</li>
+                                    <li><strong>Kraftbalansen</strong> till höger visar samma sak som staplar: stenens
+                                        tyngd <em>F</em><sub>G</sub> bärs av tråden (<em>F</em><sub>S</sub>) och vattnet
+                                        (<em>F</em><sub>L</sub>) tillsammans — och vattenstapeln bredvid är alltid precis
+                                        lika hög som <em>F</em><sub>L</sub>-delen.</li>
+                                    <li>Testa: gör stenen dubbelt så stor och lyftkraften fördubblas — men gör den
+                                        tyngre (högre densitet) och lyftkraften ändras inte alls. Lyftkraften beror bara
+                                        på den undanträngda volymen.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Sidopanel */}
+                        <div className="lg:w-1/3 flex-shrink-0 order-2 flex flex-col gap-4">
+                            <div className="p-4 glass-card flex flex-col gap-4" style={{ borderRadius: '6px' }}>
+                                <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Reglage</div>
+                                {sliders}
+                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                                    Du kan också dra stenen eller stativarmen uppåt och nedåt
+                                    direkt i scenen — armen går att hissa ända upp till stångens topp.
+                                </div>
+                            </div>
+
+                            <div className="p-4 glass-card flex flex-col gap-2" style={{ borderRadius: '6px' }}>
+                                <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Färdiga försök</div>
+                                {PRESETS.map(p => (
+                                    <button key={p.name} type="button" className="preset-btn" onClick={p.apply}>
+                                        <span className="p-title">{p.name}</span>
+                                        <span className="p-desc">{p.desc}</span>
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
+                                <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Avläsningar</div>
+                                <table className="readout-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Massa <em>m</em></td>
+                                            <td>{fmtSmart(mass, 2)}{' '}kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tyngd i luft <em>F</em><sub>G</sub></td>
+                                            <td>{fmtN(FG)}{' '}N</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dynamometern visar <em>F</em><sub>S</sub></td>
+                                            <td>{fmtN(FS)}{' '}N</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tyngdminskning (lyftkraft <em>F</em><sub>L</sub>)</td>
+                                            <td style={{ color: COL_FL, fontWeight: 600 }}>{fmtN(FL)}{' '}N</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Undanträngd volym</td>
+                                            <td>{formatNum(Vsub, 0)}{' '}cm³</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Undanträngt vattens tyngd</td>
+                                            <td style={{ color: WATER_LINE, fontWeight: 600 }}>{fmtN(FL)}{' '}N</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                                    Tyngdminskningen och det undanträngda vattnets tyngd är alltid exakt lika
+                                    stora — det är Arkimedes princip.
+                                </p>
+                            </div>
+                        </div>
                     </main>
                 </div>
             );
         };
 
-        const container = document.getElementById('root');
-        const root = ReactDOM.createRoot(container);
+        const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
     <script src="feedback.js" defer></script>

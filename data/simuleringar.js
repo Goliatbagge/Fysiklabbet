@@ -47,8 +47,8 @@ window.SIM_NAMES = {
   'fysik1-flytkraft-app.html': [
     { name: 'Flyta eller sjunka', desc: 'Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker.',
       kw: ['lyftkraft','flytkraft','arkimedes','densitet','vätska','vatten','flyta','sjunka','sväva','flytförmåga','undanträngd','flytkarta','gissa','akvarium','massa','volym'] },
-    { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Lyftkraft och undanträngt vatten med dynamometer.',
-      kw: ['arkimedes','arkimedes princip','lyftkraft','flytkraft','dynamometer','undanträngt vatten','undanträngd','densitet','vätska'] },
+    { name: 'Arkimedes princip', href: 'fysik1-arkimedes.html', desc: 'Sänk en sten med dynamometer i ett bräddkärl — tyngdminskningen är exakt det undanträngda vattnets tyngd.',
+      kw: ['arkimedes','arkimedes princip','lyftkraft','flytkraft','dynamometer','undanträngt vatten','undanträngd','densitet','vätska','bräddkärl','tyngdminskning','spännkraft'] },
   ],
   'fysik1-tryck.html': 'Ideala gaslagen',
   'fysik1-varme-app.html': 'Uppvärmning och avsvalning',

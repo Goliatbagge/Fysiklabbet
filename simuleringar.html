@@ -269,6 +269,13 @@
             );
         }
 
+        // Kapitlens Enhetskoll (.E) och Sammanfattning (.S) länkar till quizet
+        // respektive repetitionsspelet — de är inte simuleringar och ska INTE
+        // listas här (uttryckligt önskemål 2026-08-15). De finns kvar i
+        // katalogen och i sökrutan, med egna etiketter.
+        const EJ_SIM = ['fysik-enhetskoll.html', 'fysik-repetition.html'];
+        const arSimulering = (href) => !EJ_SIM.some(f => href.indexOf(f) === 0);
+
         // Bygg en lista per kurs: områden (kapitel) i teori-ordning, var och en
         // med sina simuleringar (avsnitt med href). En simulering som återkommer
         // under flera avsnitt visas bara vid sin FÖRSTA förekomst i kursen.
@@ -280,9 +287,9 @@
                 const chapter = course.chapters[chapterName];
                 const sims = [];
                 for (const s of (chapter.sections || [])) {
-                    if (!s.href || seen.has(s.href)) continue;
+                    if (!s.href || seen.has(s.href) || !arSimulering(s.href)) continue;
                     seen.add(s.href);
-                    sims.push(...simEntries(s));
+                    sims.push(...simEntries(s).filter(e => arSimulering(e.href)));
                 }
                 if (sims.length) areas.push({ name: chapterName, number: chapter.number, sims });
             }

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomtebloss och centrifug — Fysiklabbet</title>
+    <meta name="description" content="Tänd ett tomtebloss i en skruvdragare eller slunga vattnet ur en tvättsvamp i en centrifug — gnistorna och dropparna lämnar cirkelbanan tangentiellt, precis som Newtons första lag säger.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-tomtebloss-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Tomtebloss och centrifug — Fysik nivå 2">
+    <meta property="og:description" content="Tänd ett tomtebloss i en skruvdragare eller slunga vattnet ur en tvättsvamp i en centrifug — gnistorna och dropparna lämnar cirkelbanan tangentiellt, precis som Newtons första lag säger.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-tomtebloss-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tomtebloss och centrifug — Fysik nivå 2">
+    <meta name="twitter:description" content="Tänd ett tomtebloss i en skruvdragare eller slunga vattnet ur en tvättsvamp i en centrifug — gnistorna och dropparna lämnar cirkelbanan tangentiellt, precis som Newtons första lag säger.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ── Lägesflikar (Tomtebloss / Centrifug) — samma stil som
+           fysik1-tyngdfaktor-jorden.html ── */
+        .sim-tabs {
+            display: flex; justify-content: center; gap: 8px;
+            flex-wrap: wrap; margin: 0 0 18px;
+        }
+        .tab-button {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px; font-weight: 600; line-height: 1;
+            padding: 10px 18px; border-radius: 8px;
+            border: 1px solid transparent; cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+        }
+        .tab-button.active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .tab-button:hover:not(.active) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
+        /* ── Stort format: minisim-motorns kort får bre ut sig ──
+           Kortets logiska rityta är 560×430; canvasen skalar sig själv
+           efter sin visade bredd (DPR-medveten), så det är bara
+           max-bredden som behöver släppas. */
+        .stor-minisim .minisim-card { max-width: 880px; }
+
+        .sim-forklaring {
+            max-width: 880px; margin: 26px auto 0;
+        }
+        .sim-forklaring h2 {
+            font-size: 20px; margin: 0 0 10px;
+        }
+        .sim-forklaring p { margin: 0 0 12px; }
+    </style>
+</head>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik nivå 2</a> / <span>Tomtebloss och centrifug</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Tomtebloss och centrifug</h1>
+            <p class="intro-text">
+                Två klassiska demonstrationer av samma princip: fäst ett tomtebloss i en
+                skruvdragare och tänd det i mörkret, eller lägg en blöt tvättsvamp i en
+                centrifug. När rotationen startar lämnar gnistorna och vattendropparna
+                inte banan rakt ut — de fortsätter <strong>tangentiellt</strong> i
+                rörelsens riktning, precis som Newtons första lag säger. Växla fritt
+                mellan de två försöken, ställ varvtalet, pausa och frys bilden eller se
+                förloppet i ultrarapid.
+            </p>
+        </section>
+
+        <div class="sim-tabs" role="tablist" aria-label="Välj demonstration">
+            <button type="button" class="tab-button active" id="tab-tomtebloss" role="tab" aria-selected="true">Tomtebloss i skruvdragare</button>
+            <button type="button" class="tab-button" id="tab-centrifug" role="tab" aria-selected="false">Tvättsvamp i centrifug</button>
+        </div>
+
+        <div class="stor-minisim">
+            <div id="panel-tomtebloss"></div>
+            <div id="panel-centrifug" style="display: none;"></div>
+        </div>
+
+        <section class="sim-forklaring">
+            <h2>Varför tangentiellt?</h2>
+            <p>
+                Newtons första lag (tröghetslagen) säger att en kropp fortsätter rakt
+                fram med konstant hastighet om ingen resulterande kraft verkar på den. Så
+                länge gnistan sitter kvar på tomteblosset — eller droppen i svampen —
+                tvingas den runt i cirkelbanan av centripetalkraften. I samma ögonblick
+                som den släpper försvinner den kraften, och gnistan eller droppen
+                behåller den hastighet den hade just då: riktad längs banans tangent.
+                Strålen av gnistor blir därför en tangent till cirkeln, inte en stråle
+                rakt ut från centrum.
+            </p>
+            <p>
+                Hela teorin, med formler för centripetalkraft och centripetalacceleration,
+                finns i genomgången
+                <a href="katalog.html?id=fy2-1.4">Cirkulär rörelse (Fysik nivå 2, 1.4)</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script>document.write('<scr' + 'ipt src="minisim.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>
+        (function () {
+            'use strict';
+
+            // Montera båda demonstrationerna via minisim-motorn (samma widgets
+            // som i teorigenomgången fy2-1.4, här i stort format).
+            var paneler = {
+                tomtebloss: document.getElementById('panel-tomtebloss'),
+                centrifug: document.getElementById('panel-centrifug')
+            };
+            Object.keys(paneler).forEach(function (typ) {
+                var mount = document.createElement('div');
+                mount.className = 'lab-minisim';
+                mount.setAttribute('data-minisim-src', btoa('typ: ' + typ));
+                paneler[typ].appendChild(mount);
+            });
+            window.FYSIKMINISIM.mountAll(document);
+
+            // Lägesflikar + ?sim=-djuplänk (?sim=centrifug öppnar centrifugen).
+            var tabs = {
+                tomtebloss: document.getElementById('tab-tomtebloss'),
+                centrifug: document.getElementById('tab-centrifug')
+            };
+            function visa(typ) {
+                Object.keys(paneler).forEach(function (t) {
+                    paneler[t].style.display = (t === typ) ? '' : 'none';
+                    tabs[t].classList.toggle('active', t === typ);
+                    tabs[t].setAttribute('aria-selected', t === typ ? 'true' : 'false');
+                });
+                // Canvasen mäter sin visade bredd först nu — be widgeten rita om.
+                window.dispatchEvent(new Event('resize'));
+            }
+            tabs.tomtebloss.addEventListener('click', function () { visa('tomtebloss'); });
+            tabs.centrifug.addEventListener('click', function () { visa('centrifug'); });
+            if (new URLSearchParams(location.search).get('sim') === 'centrifug') {
+                visa('centrifug');
+            }
+        })();
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="section-nav.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+</body>
+</html>

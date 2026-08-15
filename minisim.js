@@ -81,16 +81,18 @@
  * fullskärm som övriga minisims; inget ljud.
  *
  * ── typ: valtning ────────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.2 (Vältning): en kloss står på en planka som
- * lutas med en glidare (0–45°). I klossens tyngdpunkt (grön prick) sitter
- * en metallvisare som alltid hänger lodrätt och illustrerar tyngdkraftens
- * riktning; klossens stödyta är markerad lila på plankan (samma färger som
- * teorifigurerna intill). Så länge visaren träffar plankan innanför
- * stödytan står klossen stabilt — när lutningen passerar den kritiska
- * vinkeln (tan θ = b/h, tyngdpunkten rakt ovanför det nedre hörnet) välter
- * klossen kring hörnet med fysikalisk vinkelacceleration. Knappval mellan
- * "Hög kloss" (välter vid ≈23°) och "Låg kloss" (står kvar upp till
- * glidarens max) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
+ * Demonstrationen ur fy2-1.2 (Vältning): en kloss på ett vågrätt underlag
+ * lutas med en glidare (0–70°) kring sitt nedre hörn — som när man tippar
+ * klossen för hand. Underlaget lutas aldrig, så glidfriktion spelar ingen
+ * roll. I klossens tyngdpunkt (grön prick) sitter en metallvisare som
+ * alltid hänger lodrätt och illustrerar tyngdkraftens riktning; stödytan
+ * är markerad lila på marken och vridningspunkten (hörnet) med en prick.
+ * "Släpp klossen": hänger visaren innanför vridningspunkten faller
+ * klossen tillbaka (med en liten studs), hänger den utanför — lutningen
+ * har passerat den kritiska vinkeln tan θ = b/h där tyngdpunkten står
+ * rakt ovanför hörnet — välter klossen med fysikalisk vinkelacceleration.
+ * Knappval mellan "Hög kloss" (välter redan vid ≈23°) och "Låg kloss"
+ * (kräver ≈62°) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  */
 (function () {
@@ -174,6 +176,9 @@
         '.minisim-card.ms-ljus .minisim-btn:hover{background:#f3ecdd;border-color:#b4a88e;}',
         '.minisim-card.ms-ljus .minisim-btn.ms-primar{background:#b8531f;border-color:#a04617;color:#fff4e8;}',
         '.minisim-card.ms-ljus .minisim-btn.ms-primar:hover{background:#c95f26;}',
+        /* Vald-markering för växelknappar (t.ex. klossform i valtning) —
+           ms-primar är reserverad för huvudåtgärden. */
+        '.minisim-card.ms-ljus .minisim-btn.ms-vald{border-color:#b8531f;color:#8a3c12;background:#f7e7d8;}',
         '.minisim-card.ms-ljus .minisim-check{color:#4a5160;}',
         '.minisim-card.ms-ljus .minisim-info{color:#6a7180;}',
         '.minisim-card.ms-ljus .minisim-slider-lbl{color:#4a5160;}',
@@ -3005,18 +3010,20 @@
             if (!document.hidden) kick();
         });
 
-        // Test-handtag för skärmdumpsskript: ställ lutning/vältvinkel exakt.
-        card._set = function (tiltDeg, phiDeg, newMode) {
-            tiltCur = tiltDeg;
-            tiltTarget = tiltDeg;
-            slider.value = String(tiltDeg);
-            phi = (phiDeg || 0) * RAD;
-            if (newMode) mode = newMode;
-            if (mode !== 'star') tippedAt = tiltDeg;
+        // Test-handtag för skärmdumpsskript: ställ lutning/läge exakt.
+        card._set = function (tiltDeg, newMode) {
+            mode = newMode || 'hall';
+            phi = (mode === 'ligger' ? 90 : tiltDeg) * RAD;
+            phiVel = 0;
+            animTips = tiltDeg * RAD > critRad();
+            tippedAt = tiltDeg;
+            slider.value = String(Math.min(tiltDeg, TILT_MAX));
+            syncUi();
             render();
             updateInfo();
         };
 
+        syncUi();
         render();
         updateInfo();
     }

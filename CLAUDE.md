@@ -609,8 +609,9 @@ typ: tomtebloss
   tillkomna typer dokumenteras i filhuvudet på `minisim.js` (bl.a.
   `fjaderpendel` i fy2-2.1, `linjal` i fy2-1.2 — linjalen på två
   pekfingrar som växelvis glider tills de möts under tyngdpunkten — och
-  `valtning` i fy2-1.2: en kloss med tyngdpunktsvisare på en lutbar
-  planka som välter när visaren passerar utanför stödytan).
+  `valtning` i fy2-1.2: en kloss med tyngdpunktsvisare som lutas kring
+  sitt nedre hörn på vågrätt underlag och välter när visaren släpps
+  utanför vridningspunkten).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
   inuti en `::: demo`-ruta som redan har titel).
 - Blocket kan nästlas inuti andra `:::`-rutor (som `::: figur`).

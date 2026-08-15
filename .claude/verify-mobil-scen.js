@@ -37,7 +37,7 @@ const files = argv.length ? argv : fs.readdirSync(ROOT)
 
 // Mäter alla scenramar och deras verktygsrutor i sidan.
 const MAT = function () {
-    const PANELER = ['scene-toggles', 'fs-sliders', 'fs-controls', 'scene-hint'];
+    const PANELER = ['scene-toggles', 'fs-sliders', 'fs-controls', 'scene-hint', 'fs-quick'];
     const IGNORERA = ['fs-btn', 'fs-toggle-handle', 'fs-dock-handle'];
     const rect = e => { const r = e.getBoundingClientRect();
         return { x: +r.x.toFixed(1), y: +r.y.toFixed(1), w: +r.width.toFixed(1), h: +r.height.toFixed(1),

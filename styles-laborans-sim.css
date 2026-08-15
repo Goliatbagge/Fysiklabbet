@@ -812,6 +812,54 @@ body.lab-sim .fs-toggle-handle:hover {
 }
 body.lab-sim .fs-toggle-handle svg { transition: transform 0.3s ease; }
 
+/* Snabbverktygsraden (.fs-quick): gömd överallt UTOM i mobil-fullskärmens
+   ark-läge med hopfälld dock, där sektion 8 visar den (desktop och dockat
+   läge har reglagen på sina vanliga platser — dubbleringsregeln). De inre
+   stilarna ligger här globalt eftersom raden ändå bara syns i det läget. */
+body.lab-sim .fs-quick { display: none; }
+body.lab-sim .fs-quick .fq-play {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--lab-bg, #f3eee4);
+    color: var(--lab-ink, #0f1620);
+    border: 1px solid var(--lab-line-strong, rgba(15, 22, 32, 0.28));
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+}
+body.lab-sim .fs-quick .fq-play:active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+body.lab-sim .fs-quick .fq-rows {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+body.lab-sim .fs-quick .fq-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+body.lab-sim .fs-quick .fq-lbl {
+    min-width: 68px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--lab-ink-muted, #5a6170);
+    font-family: 'Poppins', var(--lab-font-sans, sans-serif);
+}
+body.lab-sim .fs-quick .fq-row input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    min-height: 26px;
+    accent-color: var(--lab-accent, #c8324a);
+}
+
 /* Handtag för den dockade verktygsraden på mobil (skapas av sim-dock.js;
    placeras i flödet av sektion 8.3). Samma vita pill-look som .fs-btn så
    att den fungerar mot både ljus pappersscen och mörk rymdscen. */
@@ -1385,6 +1433,36 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
        bilden). Högre specificitet än 8.5-regeln, så ordningen kvittar. */
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay.dock-collapsed {
         justify-content: flex-end !important;
+    }
+
+    /* ── Snabbverktyg i ark-läget (.fs-quick) ──────────────────
+       En kompakt rad med simuleringens VIKTIGASTE reglage (t.ex.
+       start/paus + tid + förstoring) som ligger kvar i underkanten,
+       ovanför handtaget, när docken är HOPFÄLLD — så att eleven kan
+       styra skeendet utan att öppna hela verktygsarket (uttryckligt
+       önskemål 2026-08-15). Visas ENDAST i ark-läge + hopfälld dock:
+       när arket fälls ut göms raden (reglagen finns då i .fs-controls/
+       .scene-toggles), så inget reglage är någonsin synligt på två
+       ställen samtidigt — dubbleringsregeln hålls. Markup:
+       <div className="fs-quick"><button className="fq-play">…</button>
+       <div className="fq-rows"><div className="fq-row">
+       <span className="fq-lbl">Tid</span><input type="range"…/></div>…
+       Referens: fysik2-solformorkelse.html. */
+    body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay.dock-collapsed .fs-quick {
+        display: flex;
+        order: 1;
+        flex: 0 0 auto;
+        position: static;
+        align-items: center;
+        gap: 10px;
+        margin: 0 8px 6px;
+        padding: 8px 12px;
+        background: rgba(243, 238, 228, 0.92);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border: 1px solid var(--lab-line-strong, rgba(15, 22, 32, 0.28));
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(15, 22, 32, 0.18);
     }
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):is(:fullscreen, :-webkit-full-screen).dock-overlay > .dock-media {
         position: absolute !important;

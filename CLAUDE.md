@@ -1180,6 +1180,19 @@ mobil-CSS i en ny simulering; du behöver däremot **inte motarbeta** reglerna:
   på ljus pappersscen — aldrig vit halo på ljus botten). Referens:
   `fysik2-solformorkelse.html`. `verify-mobil-scen.js` ger fel om en
   avläsning med bakgrund/ram ligger över scenen i ark-läget.
+- **Snabbverktyg i ark-läget (`.fs-quick`)**: de VIKTIGASTE reglagen
+  (start/paus + 1–2 glidare, t.ex. tid och förstoring) ska vara åtkomliga
+  även med hopfälld dock (uttryckligt önskemål 2026-08-15) — annars måste
+  eleven öppna hela verktygsarket för att alls styra skeendet. Lägg en
+  `<div className="fs-quick">` i scen-wrappern: `.fq-play`-knapp
+  (SVG-ikon, currentColor) + `.fq-rows` > `.fq-row` med `.fq-lbl` +
+  range-input (samma state som huvudreglagen — ingen egen kopia av
+  värdet). CSS:en är central (bas + sektion 8 i styles-laborans-sim.css);
+  raden visas BARA i ark-läge med hopfälld dock, så inget reglage är
+  synligt på två ställen samtidigt — när arket fälls ut tar
+  `.fs-controls`/`.scene-toggles` över. Etiketterna ska matcha
+  huvudreglagens namn ("Förstoring", inte "Zoom"). Referens:
+  `fysik2-solformorkelse.html`.
 
 Fällor som redan kostat tid (finns som kommentarer i CSS:en — läs dem innan
 du ändrar):

@@ -1148,6 +1148,40 @@ function App() {
                         <span className="fs-value">{fmt(speed, 0)}×</span>
                     </div>
                 </div>
+                {/* Snabbverktyg i mobil-fullskärmens ark-läge (hopfälld
+                    dock): de viktigaste reglagen utan att öppna hela
+                    verktygsarket. Syns bara där — styrs av sektion 8 i
+                    styles-laborans-sim.css, så inget reglage dubbleras. */}
+                <div className="fs-quick">
+                    <button className="fq-play" onClick={() => setPlaying(p => !p)}
+                            aria-label={playing ? 'Paus' : 'Start'} title={playing ? 'Paus' : 'Start'}>
+                        {playing ? (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <rect x="6" y="5" width="4" height="14" rx="1"/>
+                                <rect x="14" y="5" width="4" height="14" rx="1"/>
+                            </svg>
+                        ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5.5v13l11-6.5z"/>
+                            </svg>
+                        )}
+                    </button>
+                    <div className="fq-rows">
+                        <div className="fq-row">
+                            <span className="fq-lbl">Tid</span>
+                            <input type="range" min={-80} max={80} step={0.05} value={tUi}
+                                   onChange={e => setTid(parseFloat(e.target.value))}
+                                   aria-label="Tid (relativt max)" />
+                        </div>
+                        <div className="fq-row">
+                            <span className="fq-lbl">Förstoring</span>
+                            <input type="range" min={1} max={32} step={1} value={zoom}
+                                   onChange={e => setZoom(parseFloat(e.target.value))}
+                                   aria-label="Förstoring" />
+                        </div>
+                    </div>
+                </div>
+
                 <button
                     className="fs-toggle-handle"
                     onClick={() => setControlsOpen(o => !o)}

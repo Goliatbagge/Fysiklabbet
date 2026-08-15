@@ -38,7 +38,7 @@
     var MOBIL = '(max-width: 600px)';
     var WRAPPERS = ['scene-wrap', 'canvas-wrap', 'wave-stage'];
     var VERKTYG = '.fs-sliders, .scene-toggles, .fs-controls';
-    var PANELER = ['fs-sliders', 'scene-toggles', 'fs-controls', 'scene-hint'];
+    var PANELER = ['fs-sliders', 'scene-toggles', 'fs-controls', 'scene-hint', 'fs-quick'];
     var KNAPPAR = ['fs-btn', 'fs-toggle-handle', 'fs-dock-handle'];
     // Över så stor andel av skärmhöjden räknas scenen som "fyller skärmen"
     // och docken läggs som ark i nederkanten i stället för under scenen.

@@ -7,6 +7,13 @@
 //      ungefärlig bounding-box av geometrin (line, rect, circle/ellipse,
 //      polygon/polyline, path, text-ankarpunkter) jämförs med viewBoxen.
 //
+//  (1b) AVKLIPPT TEXT — en etikett vars glyfer hamnar utanför viewBoxen
+//      klipps bort i renderingen. Höjden kommer ur font-metriken, BREDDEN ur
+//      den uppmätta teckentabellen i .claude/teckenbredd.js kombinerad med
+//      text-anchor. Klassiskt fel: y-axelns värden ("100", "200", "300") satta
+//      med text-anchor="end" tätt intill viewBoxens vänsterkant — den bredaste
+//      siffergruppen sticker då ut och får sin första siffra avhuggen.
+//
 //  (2) SKALA — figuren ska renderas i naturlig storlek (1 viewBox-enhet =
 //      1 CSS-px) så att texten/beteckningarna i figuren är lika stora som
 //      brödtexten (16 px). Kräver width/height = viewBox-måtten på <svg>
@@ -21,6 +28,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { collectTexts } = require('./teckenbredd.js');
 
 const dir = path.join(__dirname, '..', 'data', 'teori');
 const files = fs.readdirSync(dir).filter(f => /^(fy\d|ma\dc|ma4)-.*\.md$/.test(f)).sort();
@@ -115,6 +123,10 @@ let problems = 0, figures = 0, sizeProblems = 0, clipProblems = 0;
 // Innehåll som sticker UT över viewBox-kanten klipps bort i renderingen.
 // Tolerans i px för konturer/strokes som får spilla en aning utanför.
 const CLIP_TOL = 3;
+// I sidled är mätningen exakt nog för en snävare gräns (breddmodellens fel är
+// ~0,1 px i snitt, som mest ~3 px på långa etiketter). 2 px räcker för att
+// slippa falsklarm och fångar ändå de avhuggna axelvärdena.
+const CLIP_TOL_X = 2;
 for (const f of files) {
     const raw = fs.readFileSync(path.join(dir, f), 'utf-8').replace(/\r\n?/g, '\n');
     const reFig = /::: figur\n([\s\S]*?)\n:::/g;
@@ -152,11 +164,12 @@ for (const f of files) {
                 `x[${bb.minX.toFixed(0)},${bb.maxX.toFixed(0)}] y[${bb.minY.toFixed(0)},${bb.maxY.toFixed(0)}]`);
         }
 
-        // Avklippt TEXT: en etikett vars glyfer sträcker sig över topp-/
-        // nederkanten klipps bort (t.ex. "80 kg" i gungbräde-figuren). Vi
-        // kontrollerar bara VERTIKALT och bara text — font-metriken ger en
-        // pålitlig höjd, medan text-bredd (okänd, beror på text-anchor) och
-        // <path>-geometri inte kan mätas exakt av number-heuristiken.
+        // Avklippt TEXT: en etikett vars glyfer sträcker sig utanför viewBoxen
+        // klipps bort i renderingen (t.ex. "80 kg" i gungbräde-figuren, eller
+        // y-axelns "300" som skars av till vänster). Vi mäter varje etikett
+        // för sig: höjden ur font-metriken, BREDDEN ur den uppmätta
+        // teckentabellen i .claude/teckenbredd.js (samma typsnittsstack som
+        // katalogen renderar figurerna i) tillsammans med text-anchor.
         const tb = textBboxOfSvgBody(svg[2]);
         if (isFinite(tb.minY)) {
             const overTop = vy - tb.minY;
@@ -170,6 +183,20 @@ for (const f of files) {
                     `— viewBox ${vx} ${vy} ${vw} ${vh}, text y[${tb.minY.toFixed(0)},${tb.maxY.toFixed(0)}]. ` +
                     `Utöka viewBoxen (och width/height) uppåt/nedåt.`);
             }
+        }
+
+        for (const t of collectTexts(svg[2])) {
+            const overL = vx - t.left;
+            const overR = t.right - (vx + vw);
+            if (overL <= CLIP_TOL_X && overR <= CLIP_TOL_X) continue;
+            const side = overL > overR
+                ? `vänster=${overL.toFixed(0)}px`
+                : `höger=${overR.toFixed(0)}px`;
+            clipProblems++;
+            console.log(`  ✗ ${f} figur #${idx}: etiketten ${JSON.stringify(t.text.slice(0, 28))} ` +
+                `AVKLIPPT i sidled (${side}) — bredd ${t.width.toFixed(0)}px vid x=${t.x} ` +
+                `(text-anchor="${t.anchor}") mot viewBox ${vx}…${vx + vw}. ` +
+                `Utöka viewBoxen (och width/height) i sidled, eller flytta etiketten inåt.`);
         }
 
         // (3) Skala: figuren ska renderas i naturlig storlek (1 viewBox-enhet

@@ -30,7 +30,10 @@ node .claude/verify-navigation.js
 node .claude/verify-no-white-outline.js
 
 # Verifiera att teori-figurer (::: figur) har tät viewBox utan tom "luft"
-# i kanterna (KÖR FÖRE COMMIT!)
+# i kanterna — och att INGEN etikett klipps av viewBox-kanten, i höjdled
+# eller i sidled (KÖR FÖRE COMMIT!). Sidledsmåttet använder den uppmätta
+# teckentabellen i .claude/teckenbredd.js. Se "Etiketter får aldrig klippas
+# av viewBox-kanten" nedan.
 node .claude/verify-figur-bounds.js
 
 # Verifiera vinkelbågar och likhetsstreck i teori-figurernas SVG (KÖR FÖRE
@@ -935,8 +938,45 @@ HELA geometrin ryms med ~3 px marginal (räkna `cx±r`, `cy±r` — inte på
 ögonmått). Lägg axeletiketten (`x`/`y`) vid pilspetsen, **ovanför/bredvid**
 kurvan, och kontrollera numeriskt att glyfboxen inte överlappar cirkeln (vid
 etikettens x är cirkelns rand `cy − √(r² − (x−cx)²)`). `verify-figur-bounds.js`
-fångar INTE detta (mäter text-bbox för klipp, inte geometri; phantom-punkter i
-0,0 gör vänster/topp-marginal negativ) — granska ALLTID skärmdump.
+fångar INTE detta (den mäter TEXTENS klipp — se avsnittet om etiketter nedan —
+inte geometrins; phantom-punkter i 0,0 gör vänster/topp-marginal negativ) —
+granska ALLTID skärmdump.
+
+### ⚠️ Etiketter får aldrig klippas av viewBox-kanten — räkna på TEXTENS BREDD
+
+En SVG-etikett har en bredd, och den bredden ryms inte alltid innanför
+viewBoxen. Klassikern är **diagrammets y-värden**: de sätts med
+`text-anchor="end"` några px till vänster om y-axeln, och då sticker den
+BREDASTE siffergruppen ut åt vänster — "300" fick sin första siffra avhuggen
+i `ma2c-3.5` (påpekat 2026-08-15), och samma fel fanns i tio figurer till
+(bl.a. y-värdena i `ma3c-2.1` och `ma4-2.5` samt hela x-axelpilen i
+`fy2-2.12`). Det ser inte trasigt ut i källan — bara i renderingen.
+
+Räkna alltid ut etikettens ytterkanter innan du sätter viewBoxen:
+
+- `text-anchor="end"` → texten går från `x − bredd` till `x`
+- `text-anchor="middle"` → `x ± bredd/2`
+- `text-anchor="start"` → `x` till `x + bredd`
+
+Bredden är ≈ `0,54 · font-size` per siffra, ≈ `0,50` per gemen och
+≈ `0,68` per versal — exakta värden finns i **`.claude/teckenbredd.js`**
+(uppmätta i Chrome i figurernas typsnittsstack). Behöver du bredden i ett
+skript: `require('.claude/teckenbredd.js').textWidth(str, fontSize)`.
+
+- **Dimensionera efter den bredaste etiketten**, inte efter den första:
+  y-skalans "300" är bredare än "0", och "10 000" bredare än "500".
+- **Utöka hellre viewBoxen (och `width`/`height`) än att krympa gapet till
+  axeln** — 4–6 px luft mellan tal och axel ska finnas kvar.
+- **Ryms etiketten inte ens då: flytta den in i en fri yta i stället**
+  (t.ex. in i figuren med `text-anchor="start"`), och kontrollera att den
+  inte hamnar på en linje.
+- Detsamma gäller **geometrin**: `fy2-2.12` hade axelpilens spets 36 px
+  utanför viewBoxen, så hela pilen försvann.
+
+`node .claude/verify-figur-bounds.js` mäter detta automatiskt (både i
+höjd- och sidled) för alla `::: figur` — men bara för text utan egen
+`transform`; roterade etiketter och simuleringarnas scener måste du
+fortfarande granska i skärmdump.
 
 ### JS-strängar: dubbla alla backslash
 

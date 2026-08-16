@@ -77,10 +77,12 @@ a.lab-section-item {
     font: inherit;
 }
 
-/* .lab-start-btn (Starta-knappen på kursöversikten) undantas av samma skäl
-   som flikarna: den har mörk botten och sätter sin egen ljusa textfärg, som
-   color: inherit annars skulle slå ut. */
-body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
+/* .lab-btn undantas av samma skäl: en knapp ska se likadan ut oavsett om den
+   är ett <button> eller ett <a>. Utan undantaget vann color: inherit över
+   .lab-btn-primary { color: #fff }, så länk-knapparna ("Nivå 1 →" på
+   startsidan) fick mörk bläcktext på den accentröda bottnen medan
+   knapp-elementen i katalogen hade vit text — samma klass, två utseenden. */
+body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn) {
     color: inherit;
     text-decoration: none;
 }
@@ -447,6 +449,9 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
 
 /* Knappar */
 
+/* Husets knapp — KANTIG (ingen border-radius). Gäller både <button> och
+   <a class="lab-btn">; de undantas från color: inherit högst upp i filen och
+   måste därför sätta sin egen textfärg och stryka understrykningen här. */
 .lab-btn {
     display: inline-flex;
     align-items: center;
@@ -457,6 +462,7 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
     padding: 12px 22px;
     font-size: 14px;
     font-family: var(--lab-font-sans);
+    text-decoration: none;
     cursor: pointer;
     transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -1205,7 +1211,9 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
 }
 
 /* "Starta" — genväg högst upp på kursöversikten (visas bara när inget
-   kapitel är valt) som tar eleven raka vägen in i första kapitlet. */
+   kapitel är valt) som tar eleven raka vägen in i första kapitlet. Själva
+   knappen är husets vanliga .lab-btn .lab-btn-primary (kantig, accentröd) —
+   här sätts bara raden den ligger på. */
 .lab-start-row {
     display: flex;
     align-items: center;
@@ -1213,38 +1221,6 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
     gap: 8px 16px;
     margin-bottom: 22px;
 }
-
-.lab-start-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--lab-ink);
-    color: var(--lab-bg-panel);
-    border: 1px solid var(--lab-ink);
-    border-radius: 999px;
-    padding: 11px 26px;
-    font-family: var(--lab-font-sans);
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.005em;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.18s ease, border-color 0.18s ease;
-}
-
-.lab-start-btn:hover {
-    background: var(--lab-accent);
-    border-color: var(--lab-accent);
-    color: var(--lab-bg-panel);
-}
-
-.lab-start-btn-arrow {
-    font-size: 16px;
-    transition: transform 0.18s ease;
-}
-
-.lab-start-btn:hover .lab-start-btn-arrow { transform: translateX(3px); }
 
 /* På smal skärm hamnar mono-etiketten på egen rad direkt ovanför
    KAPITEL-etiketten — två mono-rader på raken blir rörigt. Knappen ensam

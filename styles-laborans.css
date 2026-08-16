@@ -2265,6 +2265,17 @@ button.lab-card-disabled { pointer-events: none; }
    window.FYSIKMINISIM.mountAll(); widgeten har egen intern CSS. */
 .lab-minisim { margin: 18px 0 6px; }
 
+/* En minisimulering inne i en blockruta (t.ex. ::: fördjupning) får gå ända
+   ut i rutans kant på en telefon — samma grepp som .lab-tabell använder.
+   Utan det äter rutans vågräta padding 44 px av en scen som ändå bara har
+   ~250 px att ta av, och etiketterna i scenen krymper med den. */
+@media (max-width: 560px) {
+    .lab-block .lab-minisim {
+        margin-left: -22px;
+        margin-right: -22px;
+    }
+}
+
 /* ── Videoklipp (::: video) ──────────────────────────────────────────
    Inbäddat fritt filmmaterial (archive.org/youtube-nocookie) med titel-
    och källrad under. HTML:en byggs av buildVideoEmbed() i katalog.html/

@@ -17,7 +17,7 @@
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel,
- *           skiftnyckel, valtning, linjal
+ *           skiftnyckel, valtning, linjal, fodelsedag
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -94,6 +94,17 @@
  * Knappval mellan "Hög kloss" (välter redan vid ≈23°) och "Låg kloss"
  * (kräver ≈62°) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
+ *
+ * ── typ: fodelsedag ──────────────────────────────────────────────────────
+ * Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst två
+ * personer i en grupp delar födelsedag, ritad som funktion av gruppens
+ * storlek. Dra den röda punkten längs kurvan (eller använd glidaren) och läs
+ * av sannolikheten och antalet möjliga par för varje gruppstorlek — kurvan
+ * passerar 50 % redan vid 23 personer. Kryssrutan "Jämför med DIN
+ * födelsedag" lägger in kurvan 1 − (364/365)^(n−1); avståndet mellan
+ * kurvorna är hela förklaringen till att paradoxen känns omöjlig. Ritad i
+ * laboranstemat men med grafens eget rutnät i stället för kollegierutorna
+ * (två rutnät ovanpå varandra gör en graf oläslig); inget ljud.
  */
 (function () {
     'use strict';
@@ -3630,10 +3641,478 @@
         updateInfo();
     }
 
+    // ── typ: fodelsedag ───────────────────────────────────────────────────
+    // Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst
+    // två personer i en grupp delar födelsedag, som funktion av gruppens
+    // storlek. Eleven drar den röda punkten längs kurvan (eller använder
+    // glidaren) och läser av P för varje gruppstorlek — poängen är att se
+    // hur brant kurvan stiger och att 50 % passeras redan vid 23 personer.
+    //
+    // Kryssrutan "Jämför med DIN födelsedag" lägger in kurvan
+    // 1 − (364/365)^(n−1), alltså sannolikheten att någon delar just din dag.
+    // Skillnaden mellan de två kurvorna ÄR förklaringen till paradoxen: den
+    // blå räknar alla n(n−1)/2 par, den orange bara de n−1 par du själv
+    // ingår i.
+    //
+    // Ritad i laboranstemat, men med grafens EGET rutnät (var 10:e person,
+    // var 25:e procent) i stället för kollegieblocksrutorna — två rutnät
+    // ovanpå varandra gör en graf oläslig. Ingen rAF-loop i viloläge: allt
+    // ritas om vid interaktion, och tweenen när man hoppar till 23 personer
+    // stänger av sig själv när den är framme.
+    function buildFodelsedag(node, cfg) {
+        // Till skillnad från de andra minisimuleringarna ritas den här i
+        // CSS-PIXLAR i stället för en fast 560×430-rymd. Skälet är texten:
+        // inne i en ::: fördjupning-ruta får widgeten bara ~250 px på en
+        // telefon, och en fast rymd hade krympt varje etikett med faktor 0,45
+        // (en 15 px-siffra blir 7 px — oläsbar). Nu är 1 ritenhet = 1 CSS-px,
+        // så avläsningen är lika stor på mobilen som på datorn.
+        //
+        // PAD_T håller y-skalans översta tal och y-etiketten UNDER
+        // fullskärmsknappen, som äger scenens övre vänstra hörn (40 px på
+        // 8,8 — husregel). Knappen är lika stor i CSS-px på alla skärmar,
+        // vilket är just därför toppmarginalen måste mätas i CSS-px.
+        var PAD_L = 40, PAD_R = 18, PAD_T = 62, PAD_B = 48;
+        var W = 560, H = 430;                      // sätts av layout()
+        var PX0 = PAD_L, PX1 = W - PAD_R;          // x för n = 0 … n = NMAX
+        var PY0 = H - PAD_B, PY1 = PAD_T;          // y för 0 % … 100 %
+        var NMAX = 70;
+        var INK = '#1f2530', INK_SOFT = '#5a6270';
+        var GRID = 'rgba(96,130,175,0.28)';
+        var BLUE = '#2563c9', RED = '#c8324a', GREEN = '#4a7d3a', ORANGE = '#b8531f';
+
+        // Sannolikheten att minst två av n personer delar födelsedag —
+        // komplementhändelsen, precis som i genomgången:
+        // 1 − 365/365 · 364/365 · … · (365−n+1)/365
+        function pDela(n) {
+            var q = 1;
+            for (var k = 0; k < n; k++) q *= (365 - k) / 365;
+            return 1 - q;
+        }
+        // Sannolikheten att någon av de övriga delar DIN födelsedag.
+        function pDin(n) { return n < 2 ? 0 : 1 - Math.pow(364 / 365, n - 1); }
+        function antalPar(n) { return n * (n - 1) / 2; }
+
+        function X(n) { return PX0 + n / NMAX * (PX1 - PX0); }
+        function Y(p) { return PY0 - p * (PY0 - PY1); }   // p som andel 0–1
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        // Draget är rent vågrätt: pan-y låter fingret fortfarande scrolla
+        // sidan i höjdled, medan vågräta rörelser når vår pointer-hantering
+        // i stället för att ätas av webbläsarens egen panorering.
+        canvas.style.touchAction = 'pan-y';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'Graf över sannolikheten att minst två personer i en grupp delar ' +
+            'födelsedag, som funktion av antalet personer. Kurvan stiger brant, ' +
+            'passerar 50 procent vid 23 personer och närmar sig 100 procent runt ' +
+            '60 personer. Dra den röda punkten längs kurvan för att läsa av ' +
+            'sannolikheten vid andra gruppstorlekar.');
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        // Rad 1: glidaren (samma värde som punkten — ger tangentbordsstyrning).
+        var srow = document.createElement('div');
+        srow.className = 'minisim-slider-row';
+        var slbl = document.createElement('span');
+        slbl.className = 'minisim-slider-lbl';
+        slbl.textContent = 'Antal personer';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '1';
+        slider.max = String(NMAX);
+        slider.step = '1';
+        slider.value = '23';
+        slider.setAttribute('aria-label', 'Antal personer i gruppen');
+        var sval = document.createElement('span');
+        sval.className = 'minisim-slider-val';
+        srow.appendChild(slbl);
+        srow.appendChild(slider);
+        srow.appendChild(sval);
+        card.appendChild(srow);
+
+        // Rad 2: snabbval + jämförelsekurva + kommentar.
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var btn23 = document.createElement('button');
+        btn23.type = 'button';
+        btn23.className = 'minisim-btn ms-primar';
+        btn23.textContent = 'Visa 23 personer';
+        var dinLbl = document.createElement('label');
+        dinLbl.className = 'minisim-check';
+        var dinCb = document.createElement('input');
+        dinCb.type = 'checkbox';
+        dinCb.style.accentColor = ORANGE;
+        dinLbl.appendChild(dinCb);
+        dinLbl.appendChild(document.createTextNode('Jämför med DIN födelsedag'));
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+        // Avläsningen i klartext: enda vägen in för en skärmläsare (canvas
+        // är bara en bild), och på smal skärm den enda avläsningen som visas.
+        info.setAttribute('aria-live', 'polite');
+        info.style.whiteSpace = 'normal';
+        controls.appendChild(btn23);
+        controls.appendChild(dinLbl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        var ctx = canvas.getContext('2d');
+        // Ritrymden följer elementets faktiska bredd. På en smal skärm görs
+        // grafen dessutom STÅENDE — annars blir plotytan bara ett par
+        // centimeter hög när fullskärmsknappens toppmarginal och x-axelns
+        // etiketter tagit sitt.
+        function smal() { return W < 430; }
+        function layout() {
+            var cssW = Math.round(canvas.clientWidth || 560);
+            W = Math.max(240, Math.min(760, cssW || 560));
+            var kvot = W < 400 ? 1.3 : (W < 480 ? 1.0 : 430 / 560);
+            H = Math.round(W * kvot);
+            PX0 = PAD_L;
+            PX1 = W - PAD_R;
+            PY0 = H - PAD_B;
+            PY1 = PAD_T;
+            // Trångt: glidarens egen etikett får stryka på foten (raden
+            // säger ändå "st"), och avläsningsraden lägger sig på egen rad
+            // i stället för att klippas i högerkanten.
+            slbl.style.display = smal() ? 'none' : '';
+            info.style.marginLeft = smal() ? '0' : 'auto';
+            info.style.flexBasis = smal() ? '100%' : '';
+        }
+        function resizeCanvas() {
+            layout();
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var n = 23;              // vald gruppstorlek (heltal — diskret storhet)
+        var animFrom = 23, animTo = 23, animT = 1, rafId = 0;
+        var dragging = false, dragPtr = -1;
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function drawPaper() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        function drawGrid() {
+            ctx.strokeStyle = GRID;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var k = 10; k <= NMAX; k += 10) {
+                ctx.moveTo(Math.round(X(k)) + 0.5, PY1 - 4);
+                ctx.lineTo(Math.round(X(k)) + 0.5, PY0);
+            }
+            for (var p = 0.25; p <= 1.0001; p += 0.25) {
+                ctx.moveTo(PX0, Math.round(Y(p)) + 0.5);
+                ctx.lineTo(PX1 + 4, Math.round(Y(p)) + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        // Axlar med pilspets BARA åt det positiva hållet (husregel).
+        function drawAxes() {
+            ctx.strokeStyle = INK;
+            ctx.fillStyle = INK;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(PX0 - 8, PY0);
+            ctx.lineTo(PX1 + 14, PY0);
+            ctx.moveTo(PX0, PY0 + 8);
+            ctx.lineTo(PX0, PY1 - 16);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(PX1 + 22, PY0);
+            ctx.lineTo(PX1 + 12, PY0 - 4.5);
+            ctx.lineTo(PX1 + 12, PY0 + 4.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(PX0, PY1 - 24);
+            ctx.lineTo(PX0 - 4.5, PY1 - 14);
+            ctx.lineTo(PX0 + 4.5, PY1 - 14);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.font = '12px ' + FONT;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            // Var tionde person ryms inte i sidled på en telefon.
+            var steg = W < 400 ? 20 : 10;
+            for (var k = steg; k <= NMAX; k += steg) ctx.fillText(String(k), X(k), PY0 + 8);
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            for (var p = 0.25; p <= 1.0001; p += 0.25) {
+                ctx.fillText(String(Math.round(p * 100)), PX0 - 7, Y(p));
+            }
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillText('antal personer', PX1 + 18, PY0 + 40);
+            // y-etikett: variabeln P kursiv, resten rakt (husets typografi).
+            // x = PX0 + 18 håller rubriken till höger om fullskärmsknappen.
+            // På smal skärm kortas svansen — den långa varianten skulle
+            // annars skjuta ut genom högerkanten.
+            var kursiv = 'italic 13px ' + FONT, rakt = '13px ' + FONT;
+            var svans = W < 430 ? ' (%)' : '(minst två delar) (%)';
+            ctx.textAlign = 'left';
+            ctx.font = kursiv;
+            ctx.fillText('P', PX0 + 18, PY1 - 18);
+            var wP = ctx.measureText('P').width;
+            ctx.font = rakt;
+            ctx.fillText(svans, PX0 + 18 + wP + 1, PY1 - 18);
+        }
+
+        function drawHalvlinje() {
+            ctx.save();
+            ctx.strokeStyle = GREEN;
+            ctx.lineWidth = 1.6;
+            ctx.setLineDash([6, 4]);
+            ctx.beginPath();
+            ctx.moveTo(PX0, Y(0.5));
+            ctx.lineTo(PX1 + 4, Y(0.5));
+            ctx.stroke();
+            ctx.restore();
+            ctx.fillStyle = GREEN;
+            ctx.font = '12px ' + FONT;
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'top';
+            ctx.fillText('50 %', PX1 + 2, Y(0.5) + 6);
+        }
+
+        function drawKurva(fn, color, bredd) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = bredd;
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            for (var k = 0; k <= NMAX; k++) {
+                var x = X(k), y = Y(fn(k));
+                if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        function drawPunkt(nv, fn, color, stor) {
+            var x = X(nv), y = Y(fn(nv));
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([4, 3]);
+            ctx.beginPath();
+            ctx.moveTo(x, PY0);
+            ctx.lineTo(x, y);
+            ctx.moveTo(PX0, y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.restore();
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, stor ? 6.5 : 4.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Avläsningen ligger i scenens övre vänstra del — ytan över kurvan
+        // där till vänster är alltid fri, oavsett var punkten står. Ren text
+        // på pappret: ingen ruta och ingen halo (husregel för ljus botten).
+        // Bara på bred skärm: där är ytan över kurvan uppe till vänster
+        // säkert fri. På en smal, stående graf skär kurvan rakt igenom den —
+        // då står avläsningen i klartext under scenen i stället.
+        function drawAvlasning(nv) {
+            if (smal()) return;
+            var x = PX0 + 12, y = PY1 + 15;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = INK;
+            ctx.font = '600 14px ' + FONT;
+            ctx.fillText(nv + (nv === 1 ? ' person' : ' personer'), x, y);
+            ctx.fillStyle = BLUE;
+            ctx.font = '600 18px ' + FONT;
+            ctx.fillText(fmt(pDela(nv) * 100, 1) + ' %', x, y + 24);
+            ctx.fillStyle = INK_SOFT;
+            ctx.font = '12px ' + FONT;
+            var par = antalPar(nv);
+            ctx.fillText(par + (par === 1 ? ' möjligt par' : ' möjliga par'), x, y + 44);
+            if (dinCb.checked) {
+                ctx.fillStyle = ORANGE;
+                ctx.font = '600 13px ' + FONT;
+                ctx.fillText('din dag: ' + fmt(pDin(nv) * 100, 1) + ' %', x, y + 64);
+            }
+        }
+
+        function visadN() {
+            if (animT >= 1) return n;
+            var e = 1 - Math.pow(1 - animT, 3);     // mjuk inbromsning
+            return Math.round(animFrom + (animTo - animFrom) * e);
+        }
+
+        function render() {
+            var nv = visadN();
+            drawPaper();
+            drawGrid();
+            drawHalvlinje();
+            drawAxes();
+            if (dinCb.checked) drawKurva(pDin, ORANGE, 2);
+            drawKurva(pDela, BLUE, 2.6);
+            if (dinCb.checked) drawPunkt(nv, pDin, ORANGE, false);
+            drawPunkt(nv, pDela, RED, true);
+            drawAvlasning(nv);
+        }
+
+        function updateUi() {
+            var nv = visadN();
+            sval.textContent = nv + ' st';
+            var par = antalPar(nv);
+            info.textContent = nv + (nv === 1 ? ' person · ' : ' personer · ') +
+                fmt(pDela(nv) * 100, 1) + ' % · ' +
+                par + (par === 1 ? ' möjligt par' : ' möjliga par') +
+                (dinCb.checked ? ' · din dag: ' + fmt(pDin(nv) * 100, 1) + ' %' : '');
+        }
+
+        function draw() { render(); updateUi(); }
+
+        // ── Tween till ett valt antal (knappen) ───────────────────────────
+        function frame() {
+            rafId = 0;
+            animT = Math.min(1, animT + 0.055);
+            draw();
+            if (animT < 1) rafId = requestAnimationFrame(frame);
+        }
+        function animeraTill(mal) {
+            animFrom = visadN();
+            animTo = mal;
+            n = mal;
+            slider.value = String(mal);
+            animT = animFrom === animTo ? 1 : 0;
+            if (!rafId) rafId = requestAnimationFrame(frame);
+        }
+        function sattN(nyN) {
+            nyN = Math.max(1, Math.min(NMAX, Math.round(nyN)));
+            if (nyN === n && animT >= 1) return;
+            n = nyN;
+            animT = 1;
+            if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+            slider.value = String(n);
+            draw();
+        }
+
+        slider.addEventListener('input', function () { sattN(parseInt(slider.value, 10)); });
+        btn23.addEventListener('click', function () { animeraTill(23); });
+        dinCb.addEventListener('change', draw);
+
+        // ── Dra punkten (pekare/touch/mus) ────────────────────────────────
+        // Hela ritytan tar emot draget, inte bara den lilla pricken — på en
+        // telefon är punkten annars nästan omöjlig att träffa.
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - r.left) * W / r.width,
+                y: (e.clientY - r.top) * H / r.height
+            };
+        }
+        function iPlot(p) {
+            return p.x > PX0 - 16 && p.x < PX1 + 16 && p.y > PY1 - 20 && p.y < PY0 + 16;
+        }
+        function nAvX(x) { return (x - PX0) / (PX1 - PX0) * NMAX; }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!iPlot(p)) return;
+            e.preventDefault();
+            dragging = true;
+            dragPtr = e.pointerId;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            sattN(nAvX(p.x));
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = iPlot(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            sattN(nAvX(p.x));
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            canvas.style.cursor = 'grab';
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            draw();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () { resizeCanvas(); draw(); });
+
+        // Test-handtag för skärmdumpsskript.
+        card._setN = function (v) { sattN(v); };
+
+        draw();
+    }
+
     // ── Register + publikt API ────────────────────────────────────────────
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
-                  valtning: buildValtning, linjal: buildLinjal };
+                  valtning: buildValtning, linjal: buildLinjal,
+                  fodelsedag: buildFodelsedag };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

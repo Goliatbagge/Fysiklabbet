@@ -946,18 +946,67 @@
             });
         }
 
-        function TeoriBody({ id, bionic, dyslexia }) {
+        // ── Fördjupning ─────────────────────────────────────────────────
+        // Ett ::: fördjupning-block i md-filen hör INTE till genomgången —
+        // det är ett eget kort ("Utblick · Fördjupning") bredvid Teori,
+        // Visualisering och Övningar. Här delas teorikroppen i två delar:
+        // blocken plockas ut till fördjupningsvyn, resten blir genomgången.
+        // Nästlade block (::: figur, ::: formel, ::: handskrift) räknas med
+        // så att uppdelningen sker vid rätt avslutande ':::'-rad.
+        const fordjupningCache = {};
+        function splitFordjupning(body) {
+            const lines = body.split('\n');
+            const kvar = [];
+            const delar = [];
+            for (let i = 0; i < lines.length; i++) {
+                const m = lines[i].match(/^:::\s*f(?:ö|o)rdjupning(?:\s+"([^"]*)")?\s*$/i);
+                if (!m) { kvar.push(lines[i]); continue; }
+                let depth = 1;
+                let j = i + 1;
+                const block = [lines[i]];
+                for (; j < lines.length; j++) {
+                    if (/^:::\s*[a-zåäöA-ZÅÄÖ]/.test(lines[j])) depth++;
+                    else if (/^:::\s*$/.test(lines[j])) depth--;
+                    block.push(lines[j]);
+                    if (depth === 0) break;
+                }
+                delar.push({
+                    // Kortets meta visar namnet utan "Fördjupning — "-prefixet.
+                    namn: (m[1] || 'Fördjupning').replace(/^\s*f(ö|o)rdjupning\s*[—–-]\s*/i, ''),
+                    md: block.join('\n'),
+                });
+                i = j;
+            }
+            return { teori: kvar.join('\n'), delar };
+        }
+        function getFordjupning(id) {
+            if (fordjupningCache[id] === undefined) {
+                const raw = TEORI[id];
+                fordjupningCache[id] = raw
+                    ? splitFordjupning(parseFrontmatter(raw).body)
+                    : { teori: '', delar: [] };
+            }
+            return fordjupningCache[id];
+        }
+
+        // del: 'teori' (genomgången utan fördjupningsblocken) eller
+        // 'fordjupning' (bara blocken — kortets egen vy).
+        function TeoriBody({ id, bionic, dyslexia, del }) {
             const ref = useRef(null);
             const html = useMemo(() => {
                 const raw = TEORI[id];
                 if (!raw) return null;
-                const { body } = parseFrontmatter(raw);
+                const delad = getFordjupning(id);
+                const body = del === 'fordjupning'
+                    ? delad.delar.map(d => d.md).join('\n\n')
+                    : delad.teori;
+                if (!body.trim()) return null;
                 const { md, tokens } = protectMath(body);
                 let processed = preprocessSuperscripts(md);
                 processed = preprocessSubproblems(processed);
                 processed = preprocessBlocks(processed);
                 return restoreMath(marked.parse(processed), tokens);
-            }, [id]);
+            }, [id, del]);
             useEffect(() => {
                 if (!ref.current || !html) return;
                 renderMathInElement(ref.current, {
@@ -1007,7 +1056,9 @@
             if (!html) {
                 return (
                     <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
-                        <em>Teorigenomgång kommer snart.</em>
+                        <em>{del === 'fordjupning'
+                            ? 'Fördjupning kommer snart.'
+                            : 'Teorigenomgång kommer snart.'}</em>
                     </div>
                 );
             }
@@ -1136,8 +1187,9 @@
             const html = useMemo(() => {
                 const raw = TEORI[id];
                 if (!raw) return null;
-                const { body } = parseFrontmatter(raw);
-                const { md, tokens } = protectMath(body);
+                // Genomgången utan ::: fördjupning-blocken — de har ett eget
+                // kort och hör inte till lektionens genomgång.
+                const { md, tokens } = protectMath(getFordjupning(id).teori);
                 let processed = preprocessSuperscripts(md);
                 processed = preprocessSubproblems(processed);
                 processed = preprocessBlocks(processed);
@@ -1890,11 +1942,20 @@
             // visualisering (inget "Kommer snart" — de flesta avsnitt ska
             // inte ha något kort alls).
             const vis = tid ? VIS_INDEX[tid] : null;
+            // Fördjupning-kortet renderas BARA när avsnittets md-fil har minst
+            // ett ::: fördjupning-block (inget "Kommer snart" — de flesta
+            // avsnitt ska inte ha kortet alls).
+            const fordjupning = tid ? getFordjupning(tid).delar : [];
+            const harFordjupning = fordjupning.length > 0;
 
             // View-tab: 'teori' eller 'ovningar' (Simulering öppnar extern länk).
             // Ligger i top-state så att hashen (#fy2-1.5:ovningar) kan djuplänka hit.
             // Nollställs till 'teori' när man byter avsnitt (i navigations-handlers).
-            const view = state.view || 'teori';
+            // En djuplänk till :fordjupning på ett avsnitt som saknar
+            // fördjupningsblock faller tillbaka på genomgången — annars hade
+            // sidan visat en tom vy utan att något kort var markerat.
+            const rawView = state.view || 'teori';
+            const view = (rawView === 'fordjupning' && !harFordjupning) ? 'teori' : rawView;
             const setView = (v) => setState(s => ({ ...s, view: v }));
 
             // Bionisk läsning (lässtöd) — på/av sparas mellan besök.
@@ -2203,6 +2264,19 @@
                                                             <div className="lab-card-meta">{vis.titel}</div>
                                                         </button>
                                                     )}
+                                                    {harFordjupning && (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'fordjupning' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('fordjupning')}>
+                                                            <div className="lab-card-tag">Utblick</div>
+                                                            <div className="lab-card-title">Fördjupning</div>
+                                                            <div className="lab-card-meta">
+                                                                {fordjupning.length === 1
+                                                                    ? fordjupning[0].namn
+                                                                    : fordjupning.length + ' delar'}
+                                                            </div>
+                                                        </button>
+                                                    )}
                                                     {/* Matte har inga simuleringar — visa inte kortet alls där */}
                                                     {!isMath && (activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
@@ -2251,7 +2325,9 @@
                                                     </button>
                                                 </div>
 
-                                                {view === 'teori' && !isEnhetskoll && (
+                                                {/* Lässtöden gäller all löpande text — alltså både
+                                                    genomgången och fördjupningen. */}
+                                                {(view === 'teori' || view === 'fordjupning') && !isEnhetskoll && (
                                                     <div className="lab-bionic-bar">
                                                         <button type="button"
                                                             className={'lab-bionic-toggle' + (bionic ? ' is-on' : '')}
@@ -2269,7 +2345,7 @@
                                                             <span className="lab-bionic-knob" />
                                                             <span className="lab-dys-label">Dyslexivänligt</span>
                                                         </button>
-                                                        {hasTeori && (
+                                                        {hasTeori && view === 'teori' && (
                                                             <button type="button" className="lab-pres-launch"
                                                                 onClick={() => setPresenting(true)}
                                                                 aria-label="Presentationsläge"
@@ -2311,6 +2387,10 @@
                                                         chapterNumber={chapterNumber}
                                                         course={course}
                                                         onClose={() => setPresenting(false)} />
+                                                )}
+                                                {view === 'fordjupning' && (
+                                                    <TeoriBody id={tid} del="fordjupning"
+                                                        bionic={bionic} dyslexia={dyslexia} />
                                                 )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
                                                 {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
@@ -2414,7 +2494,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }
@@ -2517,6 +2597,7 @@
                     ovningar: 'Övningar: ',
                     exitticket: 'Exit ticket: ',
                     visualisering: 'Visualisering: ',
+                    fordjupning: 'Fördjupning: ',
                 }[state.view] || '';
 
                 let titel = 'Fysiklabbet — Teori, simuleringar och övningar i fysik';

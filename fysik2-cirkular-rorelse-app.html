@@ -34,6 +34,51 @@
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
     <style>
+        /* ── Växlare mellan avsnittets två simuleringar ──
+           Samma komponent som Stavmagneten/Magnetpoler och
+           Flytförmåga/Arkimedes princip använder. */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+        @media (max-width: 600px) {
+            .sim-switch-wrap { width: 100%; margin-bottom: 10px; }
+            .sim-switch-label { text-align: left; }
+            .sim-switch { display: flex; width: 100%; }
+            .sim-switch a, .sim-switch .sim-switch-active {
+                flex: 1; text-align: center; padding: 8px 10px; font-size: 13px;
+            }
+        }
+
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
         html.embed-mode #fb-feedback-widget { display: none !important; }
         html.embed-mode .pt-6 { padding-top: 0.5rem; }
@@ -1061,7 +1106,17 @@
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Cirkulär rörelse
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Cirkulär rörelse</h1>
+                        <div className="intro-head">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Cirkulär rörelse</h1>
+                            {/* Växlare till avsnittets andra simulering */}
+                            <div className="sim-switch-wrap">
+                                <span className="sim-switch-label">Simulering</span>
+                                <div className="sim-switch">
+                                    <span className="sim-switch-active">Cirkulär rörelse</span>
+                                    <a href="fysik2-tomtebloss-app.html">Tomtebloss och centrifug</a>
+                                </div>
+                            </div>
+                        </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En kropp i cirkelbana påverkas av en resulterande kraft som ständigt pekar in mot
                             cirkelns medelpunkt — <strong>centripetalkraften</strong> <em>F</em><sub>C</sub>. Den är

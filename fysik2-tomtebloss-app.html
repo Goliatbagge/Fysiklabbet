@@ -26,6 +26,51 @@
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <style>
+        /* ── Växlare mellan avsnittets två simuleringar ──
+           Samma komponent som Månens faser/Solförmörkelse och
+           Flytförmåga/Arkimedes princip använder. */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
+        }
+        .sim-switch-wrap { flex-shrink: 0; }
+        .sim-switch-label {
+            display: block; text-align: right; margin-bottom: 4px;
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600;
+            font-family: var(--lab-font-mono, monospace);
+        }
+        .sim-switch {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 6px;
+        }
+        .sim-switch a, .sim-switch .sim-switch-active {
+            padding: 8px 16px; border-radius: 4px; border: 1px solid transparent;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            color: var(--lab-ink-soft, #3a4151);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .sim-switch .sim-switch-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+        }
+        .sim-switch a:hover {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+        @media (max-width: 600px) {
+            .sim-switch-wrap { width: 100%; margin-bottom: 10px; }
+            .sim-switch-label { text-align: left; }
+            .sim-switch { display: flex; width: 100%; }
+            .sim-switch a, .sim-switch .sim-switch-active {
+                flex: 1; text-align: center; padding: 8px 10px; font-size: 13px;
+            }
+        }
+
         /* ── Lägesflikar (Tomtebloss / Centrifug) — samma stil som
            fysik1-tyngdfaktor-jorden.html ── */
         .sim-tabs {
@@ -141,16 +186,28 @@
         </div>
 
         <section class="intro-section">
-            <h1 class="section-title">Tomtebloss och centrifug</h1>
-            <p class="intro-text">
-                Två klassiska demonstrationer av samma princip: fäst ett tomtebloss i en
-                skruvdragare och tänd det i mörkret, eller lägg en blöt tvättsvamp i en
-                centrifug. När rotationen startar lämnar gnistorna och vattendropparna
-                inte banan rakt ut — de fortsätter <strong>tangentiellt</strong> i
-                rörelsens riktning, precis som Newtons första lag säger. Växla fritt
-                mellan de två försöken, ställ varvtalet, pausa och frys bilden eller se
-                förloppet i ultrarapid.
-            </p>
+            <div class="intro-head">
+                <div>
+                    <h1 class="section-title">Tomtebloss och centrifug</h1>
+                    <p class="intro-text">
+                        Två klassiska demonstrationer av samma princip: fäst ett tomtebloss i en
+                        skruvdragare och tänd det i mörkret, eller lägg en blöt tvättsvamp i en
+                        centrifug. När rotationen startar lämnar gnistorna och vattendropparna
+                        inte banan rakt ut — de fortsätter <strong>tangentiellt</strong> i
+                        rörelsens riktning, precis som Newtons första lag säger. Växla fritt
+                        mellan de två försöken, ställ varvtalet, pausa och frys bilden eller se
+                        förloppet i ultrarapid.
+                    </p>
+                </div>
+                <!-- Växlare till avsnittets andra simulering -->
+                <div class="sim-switch-wrap">
+                    <span class="sim-switch-label">Simulering</span>
+                    <div class="sim-switch">
+                        <a href="fysik2-cirkular-rorelse-app.html">Cirkulär rörelse</a>
+                        <span class="sim-switch-active">Tomtebloss och centrifug</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <div class="sim-tabs" role="tablist" aria-label="Välj demonstration">

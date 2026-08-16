@@ -307,3 +307,20 @@ räkna med att en körning tar upp till en timme.)
 - Återanvända förra veckans anslag, formuleringar eller skämt.
 - Tipsa om samma funktion oftare än var åttonde vecka, tipsa om något du
   inte verifierat på sajten, eller glömma att datera tipset i `tips.md`.
+
+## Samarbete med Facebook-agenten
+
+Fysiklabbet har en daglig Facebook-agent (instruktion:
+`.claude/commands/fb-daglig.md`, arbetslogg: `.claude/facebook/logg.md`)
+som varje morgon postar dagens fysiknyhet på sidan facebook.com/fysiklabbet
+och gör extrainlägg om lanseringar. De två agenterna ska återanvända
+varandras material i stället för att göra om samma jobb (uttryckligt
+önskemål 2026-08-16):
+
+- **Läs `.claude/facebook/logg.md`** innan du skriver brevet: den visar
+  vilka nyheter och lanseringar Facebook-agenten redan lyft under veckan,
+  med sökvägar till de bilder den använt. Ett bra grepp eller en bra bild
+  därifrån får gärna återanvändas i brevet.
+- **Dina bilder är delade.** Skärmdumparna du lägger i `nyheter/brev/`
+  (t.ex. simuleringsbilder i talande tillstånd) används även av
+  Facebook-agenten — namnge dem beskrivande och låt dem ligga kvar.

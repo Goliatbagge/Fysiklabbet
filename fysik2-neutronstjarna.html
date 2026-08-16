@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutronstjärnan i skala — Fysiklabbet</title>
+    <meta name="description" content="Hur stor är en neutronstjärna? Rotera en 3D-jord och flyg in till en skalenlig neutronstjärna — liten som en stad, men tyngre än solen.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-neutronstjarna.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Neutronstjärnan i skala — Fysik nivå 2">
+    <meta property="og:description" content="Hur stor är en neutronstjärna? Rotera en 3D-jord och flyg in till en skalenlig neutronstjärna — liten som en stad, men tyngre än solen.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-neutronstjarna.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Neutronstjärnan i skala — Fysik nivå 2">
+    <meta name="twitter:description" content="Hur stor är en neutronstjärna? Rotera en 3D-jord och flyg in till en skalenlig neutronstjärna — liten som en stad, men tyngre än solen.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+    <style>
+        .sim-container {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px);
+        }
+
+        @media (min-width: 1024px) {
+            .sim-container {
+                flex-direction: row;
+            }
+        }
+
+        #rymd-container {
+            flex: 1;
+            min-height: 50vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, #0a1024 0%, #04040d 100%);
+            user-select: none;
+            overflow: hidden;
+        }
+
+        #rymd-container:fullscreen,
+        #rymd-container:-webkit-full-screen {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        @media (min-width: 1024px) {
+            #rymd-container {
+                min-height: calc(100vh - 80px);
+            }
+        }
+
+        .controls-panel {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--lab-bg);
+            border-left: 1px solid var(--lab-line-strong);
+            overflow-y: auto;
+            color: var(--lab-ink);
+        }
+
+        @media (min-width: 1024px) {
+            .controls-panel {
+                width: 380px;
+                max-height: calc(100vh - 80px);
+            }
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--lab-ink);
+            border-bottom: 2px solid var(--lab-line-strong);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* On-scene visningsval (uppe till höger) — samma mönster som övriga sims */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 10;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input {
+            width: 15px; height: 15px;
+            accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+            cursor: pointer;
+        }
+        .scene-toggles .st-actions {
+            margin-top: 7px; padding-top: 8px;
+            border-top: 1px solid rgba(15,22,32,0.14);
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .scene-toggles .st-actions button {
+            font-family: 'Poppins', system-ui, sans-serif;
+            font-size: 12.5px; font-weight: 600;
+            color: var(--lab-ink, #0f1620);
+            background: #fdfbf6;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 7px;
+            padding: 6px 10px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .scene-toggles .st-actions button:hover { background: #f1ebdd; }
+        .scene-toggles .st-actions button:disabled {
+            opacity: 0.55; cursor: default;
+        }
+
+        .info-box {
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
+            border-left: 3px solid var(--lab-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .info-box:first-of-type { margin-top: 0; }
+
+        .info-box h3 {
+            color: var(--lab-ink);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: var(--lab-ink-soft);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--lab-accent);
+            font-weight: 600;
+        }
+
+        /* Jämförelsetabell i sidopanelen */
+        .cmp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .cmp-table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--lab-ink);
+            padding: 0.35rem 0.4rem;
+            border-bottom: 2px solid var(--lab-line-strong);
+        }
+        .cmp-table td {
+            color: var(--lab-ink-soft);
+            padding: 0.35rem 0.4rem;
+            border-bottom: 1px solid rgba(15,22,32,0.12);
+            vertical-align: top;
+        }
+        .cmp-table tr:last-child td { border-bottom: none; }
+
+        .scene-title {
+            position: absolute;
+            top: 0.9rem;
+            left: 4.4rem;   /* till höger om fullskärmsknappen */
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .scene-title h1 {
+            font-size: 1.75rem;
+            font-weight: 400;
+            font-family: var(--lab-font-display);
+            color: #e8e2d4;
+            background: none;
+            -webkit-text-fill-color: #e8e2d4;
+            margin-bottom: 0.25rem;
+        }
+
+        .scene-title p {
+            color: rgba(232,226,212,0.65);
+            font-size: 0.9rem;
+        }
+
+        /* Avläsning nere till vänster (mörk scen → ljus text) */
+        .legend {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+            background: rgba(8,12,24,0.72);
+            border: 1px solid rgba(232,226,212,0.22);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            max-width: 300px;
+        }
+
+        .legend-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            color: rgba(232,226,212,0.85);
+            font-size: 0.82rem;
+            margin-bottom: 0.35rem;
+        }
+        .legend-row:last-child { margin-bottom: 0; }
+        .legend-row .lg-label { color: rgba(232,226,212,0.6); }
+        .legend-row .lg-value { font-weight: 600; white-space: nowrap; }
+        .legend-dist {
+            margin-top: 0.55rem;
+            padding-top: 0.55rem;
+            border-top: 1px solid rgba(232,226,212,0.18);
+        }
+
+        /* Objektetiketter i scenen (projicerade) */
+        .obj-tag {
+            position: absolute;
+            z-index: 9;
+            pointer-events: none;
+            transform: translate(-50%, -100%);
+            color: #e8e2d4;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            text-shadow: 0 1px 4px rgba(4,6,14,0.9);
+            white-space: nowrap;
+            padding-bottom: 10px;
+        }
+        .obj-tag::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 1px;
+            height: 9px;
+            background: rgba(232,226,212,0.5);
+        }
+        .obj-tag small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.7rem;
+            color: rgba(232,226,212,0.7);
+        }
+
+        /* Mobil: kompakta overlays så de inte täcker scenen */
+        @media (max-width: 600px) {
+            .legend {
+                bottom: 0.5rem;
+                left: 0.5rem;
+                padding: 0.5rem 0.6rem;
+                max-width: 220px;
+            }
+            .legend-row { font-size: 0.68rem; margin-bottom: 0.2rem; }
+            .scene-title {
+                top: 0.5rem;
+                left: 3rem;   /* fs-btn är 32 px på mobil */
+            }
+            .scene-title h1 { font-size: 1.2rem; }
+            .scene-title p { font-size: 0.75rem; }
+            .scene-toggles {
+                top: 8px; right: 8px;
+                padding: 6px 9px;
+                max-width: 180px;
+            }
+            .scene-toggles label { font-size: 11.5px; }
+            .scene-toggles .st-actions button { font-size: 11.5px; padding: 5px 8px; }
+            .obj-tag { font-size: 0.7rem; }
+            .obj-tag small { font-size: 0.62rem; }
+        }
+    </style>
+</head>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <main class="sim-container">
+        <div id="rymd-container">
+            <button class="fs-btn" id="fsBtn" aria-label="Fullskärm" title="Fullskärm">
+                <svg id="fsIconExpand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                </svg>
+                <svg id="fsIconCompress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                </svg>
+            </button>
+            <div class="scene-title">
+                <h1>Neutronstjärnan i skala</h1>
+                <p>Dra för att rotera — scrolla för att zooma</p>
+            </div>
+            <div class="scene-toggles">
+                <div class="st-title">Visa</div>
+                <label><input type="checkbox" id="showBeams" checked> Pulsarstrålar</label>
+                <label><input type="checkbox" id="showLabels" checked> Etiketter</label>
+                <label><input type="checkbox" id="showClouds" checked> Moln</label>
+                <div class="st-actions">
+                    <button type="button" id="flyBtn">Flyg till neutronstjärnan</button>
+                </div>
+            </div>
+            <div class="legend" id="legend">
+                <div class="legend-row"><span class="lg-label">Jordens diameter</span><span class="lg-value">12&nbsp;742&nbsp;km</span></div>
+                <div class="legend-row"><span class="lg-label">Neutronstjärnans diameter</span><span class="lg-value">ca 22&nbsp;km</span></div>
+                <div class="legend-row"><span class="lg-label">Neutronstjärnans massa</span><span class="lg-value">1,4 solmassor</span></div>
+                <div class="legend-row legend-dist"><span class="lg-label">Avstånd till stjärnan</span><span class="lg-value" id="distReadout">–</span></div>
+            </div>
+            <div class="obj-tag" id="tagEarth" style="display:none">Jorden<small>diameter 12&nbsp;742&nbsp;km</small></div>
+            <div class="obj-tag" id="tagStar" style="display:none">Neutronstjärna<small>diameter ca 22&nbsp;km</small></div>
+        </div>
+
+        <div class="controls-panel">
+            <h2 class="panel-title">Om simuleringen</h2>
+
+            <div class="info-box">
+                <h3>Allt är i rätt skala</h3>
+                <p>
+                    Jorden och neutronstjärnan visas i <span class="highlight">exakt samma skala</span>.
+                    Den lysande punkten ovanför jordklotet är hela stjärnan — ett klot med
+                    en diameter på ungefär 22&nbsp;km, ungefär som en storstad. På det här
+                    avståndet är själva stjärnkroppen mindre än en bildpunkt; det du ser är
+                    dess ljus.
+                </p>
+                <p>
+                    Tryck på <span class="highlight">Flyg till neutronstjärnan</span> så tar
+                    kameran dig hela vägen in. Först då syns hur ofattbart liten den är —
+                    det skulle få plats nästan 580 neutronstjärnor på rad tvärs över jorden.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Liten men ofattbart tung</h3>
+                <table class="cmp-table">
+                    <tr><th></th><th>Jorden</th><th>Neutronstjärnan</th></tr>
+                    <tr><td>Diameter</td><td>12&nbsp;742&nbsp;km</td><td>ca 22&nbsp;km</td></tr>
+                    <tr><td>Massa</td><td>5,97&nbsp;·&nbsp;10<sup>24</sup>&nbsp;kg</td><td>ca 2,8&nbsp;·&nbsp;10<sup>30</sup>&nbsp;kg</td></tr>
+                    <tr><td>Densitet</td><td>5,5&nbsp;g/cm³</td><td>ca 4&nbsp;·&nbsp;10<sup>14</sup>&nbsp;g/cm³</td></tr>
+                </table>
+                <p style="margin-top:0.75rem">
+                    I det lilla klotet ryms alltså <span class="highlight">1,4 solmassor</span> —
+                    nästan en halv miljon jordmassor. En enda kubikcentimeter neutronstjärna
+                    väger omkring <span class="highlight">400 miljoner ton</span>, lika mycket
+                    som ett helt berg.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Var kommer den ifrån?</h3>
+                <p>
+                    En neutronstjärna är resten efter en <span class="highlight">supernova</span> —
+                    kärnan i en tung stjärna som kollapsat när bränslet tagit slut.
+                    Gravitationen pressar ihop materien så hårt att atomernas tomrum
+                    försvinner och nästan allt blir neutroner. Är resten ännu tyngre
+                    fortsätter kollapsen hela vägen till ett svart hål.
+                </p>
+                <p>
+                    Många neutronstjärnor roterar blixtsnabbt och sveper runt två strålar
+                    av strålning — en <span class="highlight">pulsar</span>. Strålarna i
+                    modellen är illustrativa, och rotationen visas kraftigt nedsaktad:
+                    en riktig pulsar kan hinna rotera hundratals varv per sekund.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Interaktion</h3>
+                <p>
+                    <span class="highlight">Vänsterklick + dra</span> — rotera vyn
+                </p>
+                <p>
+                    <span class="highlight">Scrollhjul / nyp</span> — zooma in och ut
+                </p>
+                <p>
+                    <span class="highlight">Flyg till neutronstjärnan</span> — kameran flyger
+                    ända fram till stjärnan, och tillbaka igen med samma knapp
+                </p>
+                <p>
+                    <span class="highlight">Fullskärm</span> — knappen uppe till vänster i scenen
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // ---------- Skala ----------
+        // 1 scenenhet = 3 185,5 km  (jordradien 6 371 km = 2,0 enheter)
+        const EARTH_RADIUS_KM = 6371;
+        const EARTH_R = 2.0;
+        const KM_TO_UNITS = EARTH_R / EARTH_RADIUS_KM;
+        const NS_RADIUS_KM = 11;                       // typisk neutronstjärna
+        const NS_R = NS_RADIUS_KM * KM_TO_UNITS;       // ≈ 0,00345 enheter
+        const NS_ALTITUDE_KM = 1100;                   // höjd över jordytan i modellen
+        const NS_DIR = new THREE.Vector3(0.42, 0.52, 0.74).normalize();
+        const NS_POS = NS_DIR.clone().multiplyScalar((EARTH_RADIUS_KM + NS_ALTITUDE_KM) * KM_TO_UNITS);
+
+        // ---------- Scen ----------
+        const container = document.getElementById('rymd-container');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.001, 200);
+        camera.position.set(3.6, 1.7, 4.6);
+        if (container.clientWidth < 600) camera.position.set(4.8, 2.3, 6.1);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, logarithmicDepthBuffer: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.enablePan = false;
+        controls.minDistance = 2.1;
+        controls.maxDistance = 25;
+
+        // ---------- Ljus ----------
+        const ambientLight = new THREE.AmbientLight(0x28304a, 0.85);
+        scene.add(ambientLight);
+
+        const sunLight = new THREE.DirectionalLight(0xfff4e0, 2.1);
+        sunLight.position.set(6, 2.5, 4);
+        scene.add(sunLight);
+
+        // Svagt blått återsken från "rymden" på nattsidan
+        const backLight = new THREE.DirectionalLight(0x3350a0, 0.25);
+        backLight.position.set(-6, -2, -4);
+        scene.add(backLight);
+
+        // Neutronstjärnan lyser själv upp sin omgivning
+        const starLight = new THREE.PointLight(0xcfe4ff, 1.6, 3.5, 2);
+        starLight.position.copy(NS_POS);
+        scene.add(starLight);
+
+        // ---------- Stjärnhimmel ----------
+        (function buildStars() {
+            const N = 2600;
+            const positions = new Float32Array(N * 3);
+            const colors = new Float32Array(N * 3);
+            const col = new THREE.Color();
+            for (let i = 0; i < N; i++) {
+                const v = new THREE.Vector3().randomDirection().multiplyScalar(60 + Math.random() * 40);
+                positions.set([v.x, v.y, v.z], i * 3);
+                const t = Math.random();
+                // varma och kalla stjärnor om vartannat
+                col.setHSL(t < 0.3 ? 0.08 : 0.6, 0.25, 0.55 + Math.random() * 0.4);
+                colors.set([col.r, col.g, col.b], i * 3);
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            const mat = new THREE.PointsMaterial({ size: 0.14, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.9, depthWrite: false });
+            scene.add(new THREE.Points(geo, mat));
+        })();
+
+        // ---------- Jorden ----------
+        // Fotorealistiska texturer (three.js exempeltexturer via jsDelivr).
+        // Misslyckas hämtningen ritas en canvas-jord med riktiga kustlinjer
+        // (world-atlas), och i sista hand förenklade kontinenter.
+        const TEX_BASE = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/';
+        const texLoader = new THREE.TextureLoader();
+        texLoader.setCrossOrigin('anonymous');
+
+        const earthGroup = new THREE.Group();
+        scene.add(earthGroup);
+
+        const earthMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            shininess: 14,
+            specular: new THREE.Color(0x2a2a2a),
+        });
+        const earth = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 96, 96), earthMaterial);
+        earthGroup.add(earth);
+
+        // Molnlager
+        const cloudMaterial = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.0, depthWrite: false });
+        const clouds = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R * 1.006, 96, 96), cloudMaterial);
+        earthGroup.add(clouds);
+
+        // Atmosfärglöd (fresnel i vy-rymd, ritas på baksidan)
+        const atmosphere = new THREE.Mesh(
+            new THREE.SphereGeometry(EARTH_R * 1.045, 64, 64),
+            new THREE.ShaderMaterial({
+                vertexShader: `
+                    varying vec3 vNormal;
+                    void main() {
+                        vNormal = normalize(normalMatrix * normal);
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    varying vec3 vNormal;
+                    void main() {
+                        float intensity = pow(0.74 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.4);
+                        gl_FragColor = vec4(0.35, 0.62, 1.0, 1.0) * intensity;
+                    }
+                `,
+                blending: THREE.AdditiveBlending,
+                side: THREE.BackSide,
+                transparent: true,
+                depthWrite: false,
+            })
+        );
+        scene.add(atmosphere);
+
+        function loadRealEarth() {
+            texLoader.load(TEX_BASE + 'earth_atmos_2048.jpg', tex => {
+                tex.colorSpace = THREE.SRGBColorSpace;
+                earthMaterial.map = tex;
+                earthMaterial.needsUpdate = true;
+            }, undefined, () => buildFallbackEarth());
+            texLoader.load(TEX_BASE + 'earth_normal_2048.jpg', tex => {
+                earthMaterial.normalMap = tex;
+                earthMaterial.normalScale = new THREE.Vector2(0.8, 0.8);
+                earthMaterial.needsUpdate = true;
+            }, undefined, () => {});
+            texLoader.load(TEX_BASE + 'earth_specular_2048.jpg', tex => {
+                earthMaterial.specularMap = tex;
+                earthMaterial.needsUpdate = true;
+            }, undefined, () => {});
+            texLoader.load(TEX_BASE + 'earth_clouds_1024.png', tex => {
+                tex.colorSpace = THREE.SRGBColorSpace;
+                cloudMaterial.map = tex;
+                cloudMaterial.opacity = 0.85;
+                cloudMaterial.needsUpdate = true;
+            }, undefined, () => {});
+        }
+
+        // Reserv: canvas-jord med riktiga kustlinjer
+        function buildFallbackEarth() {
+            const cv = document.createElement('canvas');
+            cv.width = 2048; cv.height = 1024;
+            const ctx = cv.getContext('2d');
+
+            function toCanvas(lon, lat) {
+                return [(lon + 180) * (cv.width / 360), (90 - lat) * (cv.height / 180)];
+            }
+            function drawOcean() {
+                const g = ctx.createLinearGradient(0, 0, 0, cv.height);
+                g.addColorStop(0, '#1c3f6e');
+                g.addColorStop(0.5, '#123055');
+                g.addColorStop(1, '#1c3f6e');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, cv.width, cv.height);
+            }
+            drawOcean();
+            const fallbackTex = new THREE.CanvasTexture(cv);
+            fallbackTex.colorSpace = THREE.SRGBColorSpace;
+            earthMaterial.map = fallbackTex;
+            earthMaterial.needsUpdate = true;
+
+            function drawLand(geometries) {
+                ctx.fillStyle = '#4a6b45';
+                ctx.strokeStyle = '#4a6b45';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                const addRing = (ring, shift) => {
+                    let prevLon = 0, lonUnwrapped = 0;
+                    ring.forEach(([lon, lat], i) => {
+                        if (i === 0) { lonUnwrapped = lon; }
+                        else {
+                            let d = lon - prevLon;
+                            if (d > 180) d -= 360; else if (d < -180) d += 360;
+                            lonUnwrapped += d;
+                        }
+                        prevLon = lon;
+                        const [x, y] = toCanvas(lonUnwrapped + shift, lat);
+                        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    });
+                    ctx.closePath();
+                };
+                geometries.forEach(geometry => {
+                    const polygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+                    polygons.forEach(polygon => polygon.forEach(ring => {
+                        [-360, 0, 360].forEach(shift => addRing(ring, shift));
+                    }));
+                });
+                ctx.fill('evenodd');
+                ctx.stroke();
+                // polarisar
+                ctx.fillStyle = 'rgba(235,242,248,0.92)';
+                ctx.fillRect(0, 0, cv.width, cv.height * (90 - 83) / 180);
+                ctx.fillRect(0, cv.height * (90 + 70) / 180, cv.width, cv.height);
+                fallbackTex.needsUpdate = true;
+            }
+
+            fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
+                .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(topology => {
+                    const land = window.topojson.feature(topology, topology.objects.land);
+                    const geometries = land.type === 'FeatureCollection'
+                        ? land.features.map(f => f.geometry)
+                        : [land.geometry];
+                    drawLand(geometries);
+                })
+                .catch(() => { /* havsklotet får duga */ });
+        }
+
+        loadRealEarth();
+
+        // ---------- Neutronstjärnan ----------
+        const nsGroup = new THREE.Group();
+        nsGroup.position.copy(NS_POS);
+        scene.add(nsGroup);
+
+        // Själva stjärnkroppen — vitglödgad
+        const nsCore = new THREE.Mesh(
+            new THREE.SphereGeometry(NS_R, 48, 48),
+            new THREE.MeshBasicMaterial({ color: 0xf4faff })
+        );
+        nsGroup.add(nsCore);
+
+        // Glöd-sprite (radiell gradient). Skalas per bildruta så att stjärnan
+        // aldrig blir mindre än några pixlar — på jordavstånd är det bara
+        // ljuset som syns, precis som i verkligheten.
+        function makeGlowTexture() {
+            const cv = document.createElement('canvas');
+            cv.width = cv.height = 256;
+            const ctx = cv.getContext('2d');
+            const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+            g.addColorStop(0, 'rgba(255,255,255,1)');
+            g.addColorStop(0.12, 'rgba(214,232,255,0.9)');
+            g.addColorStop(0.35, 'rgba(140,180,255,0.35)');
+            g.addColorStop(0.7, 'rgba(90,130,255,0.08)');
+            g.addColorStop(1, 'rgba(60,90,255,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 256, 256);
+            const tex = new THREE.CanvasTexture(cv);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            return tex;
+        }
+        const glow = new THREE.Sprite(new THREE.SpriteMaterial({
+            map: makeGlowTexture(),
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            depthWrite: false,
+        }));
+        nsGroup.add(glow);
+
+        // Pulsarstrålar — två koner längs en lutad rotationsaxel (illustrativa)
+        const beamGroup = new THREE.Group();
+        beamGroup.rotation.z = 0.42;   // axellutning
+        nsGroup.add(beamGroup);
+
+        function makeBeamTexture() {
+            const cv = document.createElement('canvas');
+            cv.width = 64; cv.height = 256;
+            const ctx = cv.getContext('2d');
+            const g = ctx.createLinearGradient(0, 0, 0, 256);
+            g.addColorStop(0, 'rgba(190,220,255,0)');
+            g.addColorStop(0.25, 'rgba(190,220,255,0.5)');
+            g.addColorStop(1, 'rgba(240,248,255,0.95)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 64, 256);
+            const tex = new THREE.CanvasTexture(cv);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            return tex;
+        }
+        const beamTex = makeBeamTexture();
+        function makeBeam(sign) {
+            const len = NS_R * 90;   // långt utsvept ljusstråle
+            const geo = new THREE.ConeGeometry(NS_R * 4.5, len, 24, 1, true);
+            const mat = new THREE.MeshBasicMaterial({
+                map: beamTex,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                opacity: 0.55,
+                depthWrite: false,
+                side: THREE.DoubleSide,
+            });
+            const cone = new THREE.Mesh(geo, mat);
+            // konens spets mot stjärnan, mynningen utåt
+            cone.position.y = sign * len / 2;
+            if (sign > 0) cone.rotation.z = Math.PI;
+            return cone;
+        }
+        beamGroup.add(makeBeam(1));
+        beamGroup.add(makeBeam(-1));
+
+        // ---------- Kameraflygning ----------
+        const flyBtn = document.getElementById('flyBtn');
+        const EARTH_VIEW = {
+            target: new THREE.Vector3(0, 0, 0),
+            minDistance: 2.1,
+            maxDistance: 25,
+        };
+        const STAR_VIEW = {
+            target: NS_POS.clone(),
+            minDistance: NS_R * 2.2,
+            maxDistance: 25,
+        };
+        let atStar = false;
+        let flight = null;   // { t0, dur, fromPos, toPos, fromTarget, toTarget }
+
+        function startFlight(toStar) {
+            const toTarget = toStar ? STAR_VIEW.target.clone() : EARTH_VIEW.target.clone();
+            let toPos;
+            if (toStar) {
+                // sida om stjärnan, så att jordens horisont fyller bakgrunden
+                const side = new THREE.Vector3().crossVectors(NS_DIR, new THREE.Vector3(0, 1, 0)).normalize();
+                toPos = NS_POS.clone()
+                    .add(NS_DIR.clone().multiplyScalar(NS_R * 14))
+                    .add(side.multiplyScalar(NS_R * 7));
+            } else {
+                toPos = new THREE.Vector3(3.6, 1.7, 4.6);
+            }
+            flight = {
+                t0: performance.now(),
+                dur: 3200,
+                fromPos: camera.position.clone(),
+                toPos,
+                fromTarget: controls.target.clone(),
+                toTarget,
+            };
+            atStar = toStar;
+            flyBtn.disabled = true;
+            controls.enabled = false;
+        }
+
+        function updateFlight(now) {
+            if (!flight) return;
+            let u = Math.min(1, (now - flight.t0) / flight.dur);
+            u = u * u * (3 - 2 * u);   // smoothstep
+            // logaritmisk blandning av avståndet ger en jämn "rymdflygning"
+            const target = flight.fromTarget.clone().lerp(flight.toTarget, u);
+            const fromD = flight.fromPos.distanceTo(flight.fromTarget);
+            const toD = flight.toPos.distanceTo(flight.toTarget);
+            const d = Math.exp(THREE.MathUtils.lerp(Math.log(fromD), Math.log(toD), u));
+            const fromDir = flight.fromPos.clone().sub(flight.fromTarget).normalize();
+            const toDir = flight.toPos.clone().sub(flight.toTarget).normalize();
+            const dir = fromDir.lerp(toDir, u).normalize();
+            camera.position.copy(target).add(dir.multiplyScalar(d));
+            controls.target.copy(target);
+            if (u >= 1) {
+                const view = atStar ? STAR_VIEW : EARTH_VIEW;
+                controls.minDistance = view.minDistance;
+                controls.maxDistance = view.maxDistance;
+                controls.enabled = true;
+                flyBtn.disabled = false;
+                flyBtn.textContent = atStar ? 'Tillbaka till jorden' : 'Flyg till neutronstjärnan';
+                flight = null;
+            }
+        }
+
+        flyBtn.addEventListener('click', () => {
+            controls.minDistance = 0;   // släpp gränserna under flygningen
+            startFlight(!atStar);
+        });
+
+        // Djuplänk: ?vy=stjarna startar vyn framme vid neutronstjärnan
+        if (new URLSearchParams(location.search).get('vy') === 'stjarna') {
+            const side = new THREE.Vector3().crossVectors(NS_DIR, new THREE.Vector3(0, 1, 0)).normalize();
+            camera.position.copy(NS_POS)
+                .add(NS_DIR.clone().multiplyScalar(NS_R * 14))
+                .add(side.multiplyScalar(NS_R * 7));
+            controls.target.copy(STAR_VIEW.target);
+            controls.minDistance = STAR_VIEW.minDistance;
+            atStar = true;
+            flyBtn.textContent = 'Tillbaka till jorden';
+        }
+
+        // ---------- Visningsval ----------
+        document.getElementById('showBeams').addEventListener('change', e => {
+            beamGroup.visible = e.target.checked;
+        });
+        document.getElementById('showClouds').addEventListener('change', e => {
+            clouds.visible = e.target.checked;
+        });
+        const tagEarth = document.getElementById('tagEarth');
+        const tagStar = document.getElementById('tagStar');
+        let labelsOn = true;
+        document.getElementById('showLabels').addEventListener('change', e => {
+            labelsOn = e.target.checked;
+        });
+
+        // ---------- Etiketter och avläsning ----------
+        const distReadout = document.getElementById('distReadout');
+        const projected = new THREE.Vector3();
+
+        function fmtKm(km) {
+            const rounded = km >= 100 ? Math.round(km) : Math.round(km * 10) / 10;
+            let s = rounded.toString().replace('.', ',');
+            // tusentalsavgränsare (NBSP)
+            const parts = s.split(',');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return parts.join(',') + ' km';
+        }
+
+        function placeTag(el, worldPos, show) {
+            if (!show) { el.style.display = 'none'; return; }
+            projected.copy(worldPos).project(camera);
+            const behind = projected.z > 1;
+            if (behind || projected.x < -0.98 || projected.x > 0.98 || projected.y < -0.98 || projected.y > 0.98) {
+                el.style.display = 'none';
+                return;
+            }
+            const x = (projected.x * 0.5 + 0.5) * container.clientWidth;
+            const y = (-projected.y * 0.5 + 0.5) * container.clientHeight;
+            el.style.display = '';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+        }
+
+        const earthLabelPos = new THREE.Vector3();
+        const starLabelPos = new THREE.Vector3();
+
+        function updateOverlays() {
+            // Jord-etikett vid klotets överkant, stjärnans strax ovanför glöden
+            earthLabelPos.set(0, EARTH_R * 1.06, 0);
+            const camDistToStar = camera.position.distanceTo(NS_POS);
+            starLabelPos.copy(NS_POS).add(new THREE.Vector3(0, Math.max(NS_R * 3, camDistToStar * 0.045), 0));
+
+            const nearStar = camDistToStar < 0.35;
+            placeTag(tagEarth, earthLabelPos, labelsOn && !nearStar);
+            placeTag(tagStar, starLabelPos, labelsOn);
+
+            // Avläsning: kamerans avstånd till stjärnans yta
+            const distKm = Math.max(0, camDistToStar / KM_TO_UNITS - NS_RADIUS_KM);
+            distReadout.textContent = fmtKm(distKm);
+
+            // Glödens storlek: fysisk halo, men aldrig mindre än ~12 px
+            const worldPerPixel = 2 * camDistToStar * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / container.clientHeight;
+            const minWorld = 14 * worldPerPixel;
+            const s = Math.max(NS_R * 10, minWorld);
+            glow.scale.set(s, s, 1);
+        }
+
+        // ---------- Animationsloop ----------
+        function animate(now) {
+            requestAnimationFrame(animate);
+            updateFlight(now || performance.now());
+            controls.update();
+
+            earth.rotation.y += 0.00035;
+            clouds.rotation.y += 0.00046;
+            beamGroup.rotation.y += 0.012;   // kraftigt nedsaktad pulsarrotation
+            nsCore.rotation.y += 0.012;
+
+            updateOverlays();
+            renderer.render(scene, camera);
+        }
+        requestAnimationFrame(animate);
+
+        // ---------- Storleksändring ----------
+        function handleResize() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+        window.addEventListener('resize', handleResize);
+
+        // ---------- Fullskärm ----------
+        const fsBtn = document.getElementById('fsBtn');
+        const fsIconExpand = document.getElementById('fsIconExpand');
+        const fsIconCompress = document.getElementById('fsIconCompress');
+
+        fsBtn.addEventListener('click', () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
+            }
+        });
+
+        function onFullscreenChange() {
+            const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            fsIconExpand.style.display = isFullscreen ? 'none' : '';
+            fsIconCompress.style.display = isFullscreen ? '' : 'none';
+            fsBtn.title = isFullscreen ? 'Lämna fullskärm' : 'Fullskärm';
+            requestAnimationFrame(handleResize);
+        }
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

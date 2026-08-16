@@ -115,4 +115,5 @@ window.SIM_NAMES = {
       kw: ['astronomi','solförmörkelse','förmörkelse','måne','sol','korona','totalitet','kromosfär','protuberans','bailys pärlor','diamantring','umbra','kärnskugga','skugga','ringformig','partiell','vinkeldiameter','centrallinje'] },
   ],
   'fysik2-solens-farg.html': 'Solens färg',
+  'fysik2-neutronstjarna.html': 'Neutronstjärnan i skala',
 };

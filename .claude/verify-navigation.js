@@ -77,6 +77,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-konisk-pendel.html',
     'fysik2-konisk-pendel-app.html',
     'fysik2-jordmagnetiska-faltet.html',
+    'fysik2-neutronstjarna.html',
     'fysik1-rorelsediagram.html',
     'fysik1-coulombs-lag.html',
     'fysik1-kirchhoffs-lag.html',

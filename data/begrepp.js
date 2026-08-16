@@ -1328,5 +1328,57 @@ window.BEGREPP = [
       { type: 'p', html: 'Myoner bildas högt uppe i atmosfären när partiklar från rymden krockar med luftmolekyler. De är instabila och sönderfaller efter i genomsnitt ett par miljondels sekunder — så kort tid att de även i nästan ljusets hastighet borde hinna någon halvkilometer innan de var borta. Ändå når de marken i stora mängder. Förklaringen är relativitetsteorin: sett från vårt perspektiv går myonens inre klocka långsammare, och sett från myonens eget perspektiv är sträckan ner till marken hoptryckt. Kosmiska myoner är därför ett av de tydligaste vardagsbevisen för att tid och längd inte är absoluta.' },
       { type: 'p', html: 'För den som bygger känsliga detektorer djupt under jord är samma myoner ett problem. De tränger igenom berg bättre än någon annan laddad partikel och slår loss neutroner och kortlivade kärnor i omgivningen, vilket kan ge signaler som liknar dem man letar efter. Därför förläggs experimenten i gruvor och tunnlar, omges av vetoskikt som larmar när en myon passerar, och räknar bort den tid då en myon nyss varit framme. Samma genomträngningsförmåga används också med flit: genom att mäta hur många myoner som tar sig igenom ett föremål kan man röntga sådant som pyramider och vulkaner.' }
     ]
+  },
+
+  {
+    id: 'kosmisk-stralning',
+    term: 'Kosmisk strålning',
+    former: ['kosmisk strålning', 'kosmiska strålningen', 'kosmiska strålar', 'kosmiska strålarna', 'kosmiska partiklar', 'kosmiska partiklarna'],
+    kort: 'Laddade partiklar — mest protoner — som kommer farande genom rymden med enorma hastigheter och ständigt regnar ner över jorden. Namnet är missvisande: det handlar inte om strålning i vanlig mening utan om partiklar.',
+    relaterade: ['pevatron', 'myon', 'supernova', 'elektronvolt', 'vintergatan'],
+    body: [
+      { type: 'p', html: 'Trots namnet är kosmisk strålning inte ljus. Det är materia: ungefär nio partiklar av tio är protoner, resten är tyngre atomkärnor och en liten andel elektroner. De rör sig så nära ljusets hastighet att en enda partikel kan bära lika mycket rörelseenergi som ett fallande riskorn — all den energin samlad i en enda atomkärna. Namnet fastnade på 1920-talet, innan någon visste vad det var för något.' },
+      { type: 'p', html: 'Att partiklarna är laddade får en obehaglig följd för den som vill veta varifrån de kommer. Rymden mellan stjärnorna är genomdragen av svaga magnetfält, och ett magnetfält böjer av en laddad partikel. Efter miljontals års irrfärd genom galaxen har en kosmisk proton bytt riktning så många gånger att den anländer från ett helt slumpmässigt håll. Man kan alltså räkna partiklarna men inte peka ut deras hem. Det är därför astronomer i stället letar efter gammastrålningen som uppstår där partiklarna accelereras — gammafotoner är oladdade och går rakt fram.' },
+      { type: 'p', html: 'De partiklar som faktiskt når marken är sällan originalen. Högt uppe i atmosfären krockar den kosmiska partikeln med en luftmolekyl, och ur krocken sprutar en kaskad av nya partiklar som i sin tur krockar vidare — ett partikelregn som kan vara flera kilometer brett när det når marken. Det mesta som passerar genom din kropp just nu är sådana andrahandspartiklar, framför allt myoner.' }
+    ]
+  },
+
+  {
+    id: 'pevatron',
+    term: 'PeVatron',
+    former: ['pevatron', 'pevatronen', 'pevatroner', 'pevatronerna', 'protonpevatron', 'protonpevatroner'],
+    kort: 'Ett naturligt objekt i rymden som klarar av att accelerera partiklar till en biljard elektronvolt eller mer — ungefär hundra gånger kraftigare än de största acceleratorer människan byggt.',
+    relaterade: ['kosmisk-stralning', 'partikelaccelerator', 'elektronvolt', 'supernova', 'gammastralning'],
+    body: [
+      { type: 'p', html: 'Namnet är ihopsatt av PeV — peta-elektronvolt, alltså 10<sup>15</sup>&nbsp;elektronvolt — och ändelsen från äldre acceleratornamn som Bevatron och Tevatron. En PeVatron är helt enkelt något ute i rymden som gör samma sak som en partikelaccelerator, fast bättre. Protonerna i den största maskin människan byggt, LHC vid CERN, får omkring en hundrafemtiondels PeV var.' },
+      { type: 'p', html: 'Varför just den energin är intressant beror på en knyck i statistiken. Sorterar man kosmiska partiklar efter energi faller antalet stadigt, men nära 10<sup>15</sup>&nbsp;elektronvolt viker kurvan av brantare. Böjen kallas knäet, och den vanliga tolkningen är att den egna galaxens acceleratorer inte orkar högre. Att hitta objekten som når ända dit är därför att hitta gränsfallen — de kraftfullaste maskiner vår galax har.' },
+      { type: 'p', html: 'Man ser dem aldrig direkt. Själva partiklarna kommer fram utan adress, så jakten går ut på att leta efter gammastrålning med extremt hög energi och sedan avgöra om det är protoner eller elektroner som ligger bakom. De två alternativen ger nästan samma ljus, och att skilja dem åt kräver ofta att man jämför flera olika sorters mätningar av samma fläck på himlen. Drygt fyrtio kandidater i Vintergatan är kända; bara en handfull är någorlunda säkert avgjorda.' }
+    ]
+  },
+
+  {
+    id: 'pion',
+    term: 'Pion',
+    former: ['pion', 'pionen', 'pioner', 'pionerna', 'neutral pion', 'neutrala pioner', 'pionsönderfall'],
+    kort: 'En kortlivad partikel som bildas när protoner och atomkärnor krockar hårt. Den neutrala varianten faller nästan omedelbart sönder till två gammafotoner, och är därför den lilla mellanhand som avslöjar var i rymden protoner accelereras.',
+    relaterade: ['pevatron', 'gammastralning', 'standardmodellen', 'foton'],
+    body: [
+      { type: 'p', html: 'Pionen är den lättaste av de partiklar som byggs av en kvark och en antikvark. Den finns i tre varianter: en positivt laddad, en negativt laddad och en neutral. Alla tre är instabila. Den neutrala pionen är den bråttomaste av dem — den existerar i ungefär 10<sup>−16</sup>&nbsp;sekunder innan den faller sönder, oftast till exakt två gammafotoner.' },
+      { type: 'p', html: 'Just det sönderfallet gör pionen användbar långt utanför partikelfysiken. När en snabb proton krockar med en atomkärna i gasen mellan stjärnorna bildas pioner, och de neutrala förvandlas genast till gammastrålning. Ser man alltså gammastrålning från ett moln av gas kan det vara ett kvitto på att protoner far omkring där. Fördelningen av strålningens energier har till och med en igenkännbar form som brukar kallas pionpuckeln, och den är svår att förväxla med något annat.' },
+      { type: 'p', html: 'Historiskt var pionen efterlängtad. Hideki Yukawa förutsade 1935 en partikel som skulle förmedla den kraft som håller ihop atomkärnan, och räknade ut ungefär hur tung den måste vara. Det dröjde till 1947 innan pionen hittades i kosmisk strålning på ett bergstopp i Pyrenéerna — och när den väl var funnen fick Yukawa Nobelpriset.' }
+    ]
+  },
+
+  {
+    id: 'invers-comptonspridning',
+    term: 'Invers comptonspridning',
+    former: ['invers comptonspridning', 'invers comptonspridningen', 'comptonspridning', 'comptonspridningen', 'compton-spridning'],
+    kort: 'När en mycket snabb elektron krockar med en ljuspartikel och sparkar upp den till mycket högre energi. Vanligt ljus kan på det viset förvandlas till röntgen- eller gammastrålning.',
+    relaterade: ['foton', 'gammastralning', 'pevatron', 'kosmisk-stralning'],
+    body: [
+      { type: 'p', html: 'Vanlig Comptonspridning upptäcktes 1923: skjuter man röntgenstrålning mot en stillastående elektron studsar strålningen i väg med lite lägre energi, eftersom en del av den gått åt till att sätta elektronen i rörelse. Det var ett av de tydligaste bevisen för att ljus uppträder som partiklar och inte bara som vågor.' },
+      { type: 'p', html: 'Vänder man på rollerna vänder också energiflödet. Är det i stället elektronen som far fram i nästan ljusets hastighet, och fotonen som ligger stilla och är energifattig, så är det elektronen som förlorar och fotonen som vinner. En foton av vanligt synligt ljus, eller till och med av den svaga kosmiska bakgrundsstrålningen, kan då kastas upp till röntgen- eller gammaenergier i en enda krock. Därav namnet: invers, alltså omvänd.' },
+      { type: 'p', html: 'Processen är en av de vanligaste förklaringarna till varför det lyser i gamma på håll ute i universum, kring pulsarer, aktiva galaxkärnor och chockvågor efter stjärnexplosioner. Det gör den också till en irriterande dubbelgångare: gammastrålning från snabba elektroner kan se förvillande lik ut den som kommer av att protoner krockar med gas, och att avgöra vilken av processerna man ser är ett återkommande problem i högenergiastrofysiken.' }
+    ]
   }
 ];

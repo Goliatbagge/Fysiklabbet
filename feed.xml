@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 15 Aug 2026 18:25:41 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 01:23:11 GMT</lastBuildDate>
+    <item>
+      <title>Något i stjärnbilden Örnen slungar i väg protoner hundra gånger hårdare än LHC — nu vet fysikerna att det verkligen är protoner</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-16-protonaccelerator-i-ornen</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-16-protonaccelerator-i-ornen</guid>
+      <pubDate>Sun, 16 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Astropartikelfysik</category>
+      <description>Vintergatan har ett fåtal naturliga acceleratorer som driver upp partiklar till en biljard elektronvolt. Problemet har varit att gammastrålningen de sänder ut ser likadan ut oavsett om det är protoner eller elektroner som accelereras. Ett japanskt lag har nu jämfört femton års gammadata med en kartläggning av gasmolnen i samma riktning — och mönstren följs åt.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-16-protonaccelerator-i-ornen.jpg" length="302086" type="image/jpeg"/>
+    </item>
     <item>
       <title>Reaktorerna stod stilla — ändå räknade detektorn hundra neutriner ur bränslet</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-15-spokglod-fran-avstallt-karnkraftverk</link>
@@ -177,15 +186,6 @@
       <category>Optik</category>
       <description>Normalt spelar det ingen roll åt vilket håll ljus passerar genom ett material — resultatet blir detsamma. Forskare vid Cornell University har nu visat att tunna filmer av vanliga halvledarkristaller kan bryta den regeln, så att samma film ser fullständigt olika ut beroende på om man betraktar den framifrån eller bakifrån.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-28-ljusets-envagsgata.jpg" length="858387" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Fysiker löser en decennier gammal gåta i atomkärnan — och skärper receptet för hur guld bildas i rymden</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-27-zink-70-magnetisk-gata</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-27-zink-70-magnetisk-gata</guid>
-      <pubDate>Mon, 27 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Kärnfysik</category>
-      <description>I decennier har vissa atomkärnor avgett fler lågenergetiska gammastrålar än teorin kunnat förklara. Nu har ett internationellt forskarlag lett från Michigan State University spårat överskottet till magnetiska – inte elektriska – övergångar inuti kärnan zink-70, ett fynd som kan skärpa beräkningarna av hur tunga grundämnen som guld och platina bildas i supernovor och kolliderande neutronstjärnor.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-27-zink-70-magnetisk-gata.jpg" length="244085" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

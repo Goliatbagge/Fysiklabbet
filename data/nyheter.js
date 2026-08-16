@@ -88,6 +88,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-16-protonaccelerator-i-ornen",
+    date: "2026-08-16",
+    title: "Något i stjärnbilden Örnen slungar i väg protoner hundra gånger hårdare än LHC — nu vet fysikerna att det verkligen är protoner",
+    deck: "Vintergatan har ett fåtal naturliga acceleratorer som driver upp partiklar till en biljard elektronvolt. Problemet har varit att gammastrålningen de sänder ut ser likadan ut oavsett om det är protoner eller elektroner som accelereras. Ett japanskt lag har nu jämfört femton års gammadata med en kartläggning av gasmolnen i samma riktning — och mönstren följs åt.",
+    category: "Astropartikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-16-protonaccelerator-i-ornen.jpg",
+    imageAlt: "Hela himlen i gammastrålning, avbildad som en blå oval med ett lysande gulrött band tvärs över mitten: Vintergatans skiva. Enskilda ljuspunkter är starka gammakällor.",
+    imageCredit: "Bild: NASA:s Scientific Visualization Studio / NASA, DOE och Fermi LAT-samarbetet (public domain)",
+    tags: ["astrofysik", "astropartikelfysik", "kosmisk strålning", "gammastrålning", "partikelaccelerator", "elektronvolt", "supernova", "vintergatan", "fysik 2"],
+    sources: [
+      { name: "Hiroshima University — A source of extremely high-energy particles in the Milky Way identified", url: "https://www.hiroshima-u.ac.jp/en/news/98115" },
+      { name: "Phys.org — A source of extremely high-energy particles in the Milky Way identified", url: "https://phys.org/news/2026-07-source-extremely-high-energy-particles.html" },
+      { name: "ScienceDaily — referat av samma studie", url: "https://www.sciencedaily.com/releases/2026/07/260731034150.htm" },
+      { name: "The Astrophysical Journal — originalartikeln", url: "https://doi.org/10.3847/1538-4357/ae680d" }
+    ],
+    research: {
+      citation: "T. Mizuno, H. Sano, T. Murase, T. Oka, H. Suzuki, N. Nakahara, ”Hadronic Scenario for Galactic PeVatron LHAASO J1912+1014u Supported by Fermi-LAT γ-Ray Data and FUGIN CO Data”, The Astrophysical Journal 1006:77, publicerad 16 juli 2026 (DOI 10.3847/1538-4357/ae680d). Preprint: arXiv:2605.02208 (CC BY 4.0)",
+      url: "https://doi.org/10.3847/1538-4357/ae680d"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 — 3.4 Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" },
+        { label: "Fysik nivå 1 — 9.1 Atomkärnan (elektronvolt som energienhet)", href: "katalog.html?id=fy1-9.1" },
+        { label: "Simulering — Laddade partiklar i magnetfält", href: "fysik2-laddade-partiklar-app.html" }
+      ],
+      fragor: [
+        "Ingen har fångat en enda partikel från den här källan. Ändå påstår forskarna att det är protoner och inte elektroner som accelereras. Vad är det egentligen som utgör beviset, och hur starkt är det?",
+        "Att INTE hitta något — röntgenstrålningen som lyste med sin frånvaro — vägde tungt i slutsatsen. Hur kan en utebliven mätning bära lika mycket information som en mätning som ger utslag?",
+        "Laget kunde inte peka ut vilket objekt som är acceleratorn, bara att den finns. Är en upptäckt fullständig då, eller är den halv?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Varje sekund passerar laddade partiklar från rymden genom din kropp. De flesta är protoner, de har färdats i tusentals år genom Vintergatan, och de kallas kosmisk strålning. De allra energirikaste av dem bär omkring en biljard elektronvolt — 10<sup>15</sup>&nbsp;eV, eller en peta-elektronvolt, PeV. Det är ungefär hundrafemtio gånger mer än vad protonerna i LHC vid CERN har när de skickas runt i acceleratorringen.' },
+      { type: 'p', html: 'Frågan som har hängt i luften i decennier är enkel att ställa och svår att besvara: <em>var</em> i vår galax får partiklarna den energin? Objekt som klarar av det kallas PeVatroner, och de är sällsynta. Nu har ett lag lett från Hiroshima University pekat ut en av dem — och, viktigare, visat vilken sorts partikel den accelererar.' },
+
+      { type: 'h2', text: 'Ett knä i spektrumet' },
+      { type: 'p', html: 'Räknar man kosmiska partiklar och sorterar dem efter energi får man en kurva som faller stadigt — tills den nära 10<sup>15</sup>&nbsp;eV plötsligt viker av brantare. Böjen kallas knäet, och den brukar tolkas som att galaxens egna acceleratorer tar slut där: kraftigare partiklar än så antas komma utifrån. PeV är alltså inte en godtycklig siffra utan Vintergatans egen övre gräns.' },
+      { type: 'p', html: 'Den kinesiska anläggningen LHAASO, ett detektorfält som täcker en kvadratkilometer på 4&nbsp;400&nbsp;meters höjd i Sichuan, har rapporterat 43 källor som sänder ut gammastrålning i det så kallade sub-PeV-området. Var och en av dem är en kandidat till att vara en PeVatron. En av dem heter LHAASO J1912+1014u och ligger i stjärnbilden Örnen, inte långt från Altair. Den är utsträckt: mer än en grad tvärs över, alltså dubbelt så bred som fullmånen på himlen.' },
+
+      { type: 'h2', text: 'Två misstänkta som lämnar samma spår' },
+      { type: 'p', html: 'Här börjar svårigheten. Gammastrålning är inte laddad, så den går rakt fram och pekar tillbaka mot sin källa — till skillnad från de kosmiska partiklarna själva, som magnetfälten i galaxen böjer av så grundligt att all riktningsinformation är borta när de når oss. Gammastrålningen är därför enda sättet att se var acceleratorn ligger. Men den avslöjar inte utan vidare <em>vad</em> som accelereras.' },
+      { type: 'p', html: 'Två helt olika processer ger nämligen samma sorts ljus. I det ena fallet krockar snabba protoner med atomkärnor i interstellär gas. Ur krocken kommer neutrala pioner, kortlivade partiklar som nästan omedelbart faller sönder till två gammafotoner. Det kallas det hadroniska scenariot. I det andra fallet accelereras i stället elektroner, som sparkar upp energin hos vanliga ljuspartiklar de råkar träffa — invers Comptonspridning, det leptoniska scenariot. Utifrån räknar man inte partiklar. Man ser bara gammastrålning.' },
+
+      { type: 'h2', text: 'Gasen förrådde protonerna' },
+      { type: 'p', html: 'Lagets grepp var att skaffa fram fler sorters data om samma fläck på himlen. Femton års mätningar från NASA:s rymdteleskop Fermi och dess huvudinstrument LAT plockades fram, i energiområdet 0,4–409,6&nbsp;GeV — alltså långt under det LHAASO ser, och i en del av spektrumet där bakgrunden från Vintergatans diffusa strålning är besvärlig. Genom att förbättra modellen för den bakgrunden kunde forskarna få fram ett tydligt överskott av gammastrålning i just den riktningen.' },
+      { type: 'p', html: 'Sedan lades överskottet bredvid en helt annan karta: FUGIN, en genomsökning av Vintergatans plan efter kolmonoxid, gjord med det 45&nbsp;meter breda radioteleskopet i Nobeyama i Japan. Kolmonoxid är en spårgas — den lyser där det finns täta molekylmoln, och visar alltså var gasen är som tjockast.' },
+      { type: 'p', html: 'De två kartorna följdes åt. Där gasen var tät lyste gammastrålningen starkt, och där gasen tunnades ut avtog den. Det är precis vad man väntar sig om strålningen uppstår när protoner krockar med gas: ju mer gas, desto fler krockar. En elektronbaserad källa har ingen anledning att bry sig om var gasmolnen råkar ligga.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-08-16-protonaccelerator-i-ornen-2.jpg', alt: 'Ett stort vitt parabolformat radioteleskop lutat mot en blå himmel, omgivet av barrskog och låga observatoriebyggnader.', caption: 'Radioteleskopet i Nobeyama i Japan, 45 meter i diameter. Dess kartläggning av kolmonoxid i Vintergatans plan visade var gasmolnen ligger — kartan som avgjorde tolkningen.', credit: 'Foto: Lapinov / Wikimedia Commons (CC BY 4.0)' },
+
+      { type: 'h2', text: 'Elektronerna orkar inte hela vägen' },
+      { type: 'p', html: 'Två andra iakttagelser pekade åt samma håll. Den ena är att gammastrålningen sträcker sig obruten över ett enormt energiområde: från drygt hundra biljoner elektronvolt (10<sup>14</sup>&nbsp;eV) ner till 400&nbsp;miljoner elektronvolt. Elektroner har svårt att hålla igång ett så brett och så platt spektrum, eftersom de förlorar energi snabbt — de kyls, som fysikerna säger. Överskottet i GeV-området har ett hårt spektrum med fotonindex omkring 2,1, och det passar dåligt med elektroner som hunnit tappa fart.' },
+      { type: 'p', html: 'Den andra iakttagelsen är en icke-observation. Snabba elektroner i ett magnetfält lyser oundvikligen i röntgen. Mätningar med rymdteleskopet Chandra sätter en sträng övre gräns för hur mycket diffus röntgenstrålning som får finnas i området — och den gränsen är låg. Elektronerna som skulle behövas finns helt enkelt inte där. Kvar står protonerna.' },
+
+      { type: 'h2', text: 'Så mycket energi krävs det' },
+      { type: 'p', html: 'Ur mätningarna kunde laget räkna baklänges till hur mycket rörelseenergi som måste sitta i protonerna: mellan 10<sup>49</sup> och 5&nbsp;·&nbsp;10<sup>49</sup>&nbsp;erg, alltså ungefär 10<sup>42</sup>–5&nbsp;·&nbsp;10<sup>42</sup>&nbsp;joule, beroende på vilket avstånd man antar. Det låter ofattbart, men i sammanhanget är det blygsamt: en supernovaexplosion frigör i storleksordningen 10<sup>44</sup>&nbsp;joule. Ett par procent av en enda stjärnexplosion räcker alltså.' },
+      { type: 'p', html: 'Vilket objekt som gör jobbet är fortfarande inte klarlagt. Källan har tidigare föreslagits vara en supernovarest eller en pulsarvindnebulosa, och i närheten ligger pulsaren PSR&nbsp;J1913+1011. Avståndet är osäkert på ett sätt som är typiskt för den här sortens arbete: gasen i riktningen rör sig med två olika hastigheter, och beroende på vilken av dem som hör ihop med källan hamnar den antingen omkring 5&nbsp;500 ljusår bort eller flera gånger längre.' },
+      { type: 'p', html: 'Att det är protoner som slungas i väg därifrån är däremot svårt att komma undan — och det gör LHAASO J1912+1014u till en av de få platser i Vintergatan där vi vet att naturen driver en partikelaccelerator som får mänsklighetens största maskin att framstå som ett övningsexemplar.' },
+      { type: 'quote', html: 'Det här resultatet är en laginsats. Det finns ett gammalt japanskt ordspråk: en pil är lätt att bryta, men tre pilar i knippe är det inte.', cite: 'Tsunefumi Mizuno, Hiroshima University' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'En enda kosmisk proton på 1&nbsp;PeV bär omkring 1,6&nbsp;·&nbsp;10<sup>−4</sup>&nbsp;J — ungefär lika mycket rörelseenergi som ett riskorn som ramlar ner från en bordskant. Skillnaden är att riskornet väger tiotusen miljarder miljarder gånger mer.',
+        'Kosmisk strålning kommer inte i raka linjer. Galaxens magnetfält böjer av de laddade partiklarna så mycket att de kan irra omkring i miljontals år innan de når oss, och all information om varifrån de kom är då borta.',
+        'Gasen kring källan är ändå extremt tunn: omkring 10 protoner per kubikcentimeter. Ett lika bra vakuum går inte att åstadkomma i ett jordiskt laboratorium — men på flera hundra ljusårs sträcka blir det ändå tillräckligt mycket materia att krocka med.',
+        'Enheten erg som används i astrofysiken är ingen SI-enhet: 1&nbsp;erg = 10<sup>−7</sup>&nbsp;J. Den lever kvar av tradition, ungefär som sjömil till sjöss.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-15-spokglod-fran-avstallt-karnkraftverk",
     date: "2026-08-15",
     title: "Reaktorerna stod stilla — ändå räknade detektorn hundra neutriner ur bränslet",

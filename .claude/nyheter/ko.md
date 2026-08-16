@@ -12,23 +12,6 @@ Format per post:
 
 ## Kö
 
-- **Ett galaktiskt PeVatron avslöjat: LHAASO J1912+1014u accelererar protoner
-  över 10^15 eV** (STARK RESERV). Ett lag lett från Hiroshima University visar
-  med Fermi-LAT:s gammadata och FUGIN:s CO-kartläggning att gammastrålningen
-  från källan är hadronisk — den kommer alltså från protoner som krockar med
-  molekylgas, inte från elektroner. Därmed är objektet en av Vintergatans få
-  bekräftade protonacceleratorer upp i PeV-området, gränsen där de galaktiska
-  kosmiska strålarnas spektrum knäcks. Ligger i stjärnbilden Örnen nära Altair,
-  utsträckning över en grad. The Astrophysical Journal 1006:77 (2026),
-  DOI 10.3847/1538-4357/ae680d, publicerad 2026-07-16. Kollegialt granskad.
-  Utmärkta vinklar för gymnasiet: laddade partiklar i magnetfält, elektronvolt
-  som energienhet, kosmisk strålning, och skillnaden mellan att observera och
-  att sluta sig till. OBS RÄKNEORD: engelskans *quadrillion* = 10^15 = svenskans
-  BILJARD, inte biljon. Valdes bort 2026-08-04 enbart för att fusionsstudien var
-  färskare i pressen. Källor:
-  https://www.sciencedaily.com/releases/2026/07/260731034150.htm
-  (tillagd 2026-08-04)
-
 - **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
   dipolväxelverkan** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
   Chinese University of Hong Kong har gjort det första kondensatet av
@@ -45,6 +28,13 @@ Format per post:
   (tillagd 2026-08-03)
 
 ## Fynd som inte användes (2026-08-15) — kan tas upp senare
+
+- **Publicerad 2026-08-16: protonacceleratorn i Örnen** (LHAASO J1912+1014u,
+  Hiroshima University, The Astrophysical Journal 1006:77,
+  DOI 10.3847/1538-4357/ae680d) — löste in nyhetsbrevets teaser från
+  2026-08-16. Se publicerat.md och granskningar.md. OBS: Cygnus-posten nedan
+  överlappar delvis och bör inte publiceras som egen nyhet utan en tydligt
+  annan vinkel.
 
 - **Publicerad 2026-08-15: spökglöden från ett avställt kärnkraftverk**
   (Double Chooz/MPIK, Physical Review Letters 137, 061803,

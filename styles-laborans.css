@@ -2116,6 +2116,19 @@ button.lab-card-disabled { pointer-events: none; }
 }
 .lab-block-kuriosa .lab-block-title { color: #8a4a18; }
 
+/* Fördjupning — blå. Ett längre, inspirerande sidospår som går bortom
+   kursens kärna (t.ex. födelsedagsparadoxen i ma1c-5.8). Egen färg så att
+   rutan utmärker sig från formel/tips-grönt och kuriosa-persika.
+   Md-filerna skriver "::: fördjupning" (med ö → klassen
+   lab-block-fördjupning), så båda stavningarna måste träffas. */
+.lab-block-fordjupning,
+.lab-block-fördjupning {
+    background: #e3ebf4;
+    border-color: #a9c1d8;
+}
+.lab-block-fordjupning .lab-block-title,
+.lab-block-fördjupning .lab-block-title { color: #2b5a8c; }
+
 /* Exempel — vit/grå */
 .lab-block-exempel {
     background: var(--lab-bg-panel);

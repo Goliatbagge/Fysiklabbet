@@ -77,7 +77,10 @@ a.lab-section-item {
     font: inherit;
 }
 
-body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
+/* .lab-start-btn (Starta-knappen på kursöversikten) undantas av samma skäl
+   som flikarna: den har mörk botten och sätter sin egen ljusa textfärg, som
+   color: inherit annars skulle slå ut. */
+body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-start-btn) {
     color: inherit;
     text-decoration: none;
 }
@@ -1199,6 +1202,56 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item) {
     border: 1px solid var(--lab-line);
     border-radius: 18px;
     box-shadow: 0 1px 2px rgba(15, 22, 32, 0.03);
+}
+
+/* "Starta" — genväg högst upp på kursöversikten (visas bara när inget
+   kapitel är valt) som tar eleven raka vägen in i första kapitlet. */
+.lab-start-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 22px;
+}
+
+.lab-start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--lab-ink);
+    color: var(--lab-bg-panel);
+    border: 1px solid var(--lab-ink);
+    border-radius: 999px;
+    padding: 11px 26px;
+    font-family: var(--lab-font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.lab-start-btn:hover {
+    background: var(--lab-accent);
+    border-color: var(--lab-accent);
+    color: var(--lab-bg-panel);
+}
+
+.lab-start-btn-arrow {
+    font-size: 16px;
+    transition: transform 0.18s ease;
+}
+
+.lab-start-btn:hover .lab-start-btn-arrow { transform: translateX(3px); }
+
+/* På smal skärm hamnar mono-etiketten på egen rad direkt ovanför
+   KAPITEL-etiketten — två mono-rader på raken blir rörigt. Knappen ensam
+   räcker; kapitellistan står ändå direkt under. */
+@media (max-width: 600px) {
+    .lab-start-row .lab-mono-label { display: none; }
+    .lab-start-row { margin-bottom: 18px; }
 }
 
 .lab-tabs-3 {

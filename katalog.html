@@ -2162,6 +2162,29 @@
                 <section className="lab-section lab-catalog">
                     {/* Kurs-nivån borttagen — kurserna nås via Ämne-menyn i headern */}
                     <div className="lab-level-3">
+                            {/* Starta-knapp: syns bara på kursöversikten (inget
+                                kapitel valt) och tar eleven raka vägen in i
+                                första kapitlet — samma sak som att klicka på
+                                den första kapitelfliken. Riktig länk (?id=…)
+                                så att sökrobotar och "öppna i ny flik"
+                                fungerar, precis som kapitelflikarna. */}
+                            {!chapter && chapters.length > 0 && (
+                                <div className="lab-start-row">
+                                    <a className="lab-start-btn" href={kapitelUrl(chapters[0])}
+                                        onClick={(e) => {
+                                            if (!vanligtKlick(e)) return;
+                                            e.preventDefault();
+                                            pickChapter(chapters[0]);
+                                        }}>
+                                        Starta
+                                        <span className="lab-start-btn-arrow" aria-hidden="true">→</span>
+                                    </a>
+                                    <span className="lab-mono-label">
+                                        Kapitel 01 · {chapters[0]}
+                                    </span>
+                                </div>
+                            )}
+
                             {/* Nivå 1: Kapitel */}
                             <div className="lab-mono-label" style={{ marginBottom: 12 }}>KAPITEL</div>
                                 <div className="lab-tabs-3">

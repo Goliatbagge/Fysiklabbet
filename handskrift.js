@@ -35412,9 +35412,15 @@
       '.hk-uppgift{display:none}' +
       '.hk-wrap:fullscreen .hk-uppgift,.hk-wrap:-webkit-full-screen .hk-uppgift' +
         '{display:block;position:sticky;top:0;z-index:6;align-self:stretch;' +
-        'margin:-12px -12px 16px;background:rgba(246,241,230,.97);' +
+        'margin:-12px -12px 16px;background:#f5f0e4;' +
         'border-bottom:1px solid rgba(15,22,32,.18);' +
         'box-shadow:0 2px 8px rgba(15,22,32,.06)}' +
+      /* sticky fäster vid skrollportens paddingkant — täck remsan ovanför
+       * (wrappens 12 px topp-padding) så arket inte skymtar bakom den */
+      '.hk-wrap:fullscreen .hk-uppgift::before,' +
+      '.hk-wrap:-webkit-full-screen .hk-uppgift::before' +
+        '{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;' +
+        'background:#f5f0e4}' +
       /* de fixerade knapparna uppe till höger ska ligga ÖVER panelen
        * (panelens högerpadding lämnar plats åt dem) */
       '.hk-wrap:fullscreen .hk-fsbtn,.hk-wrap:-webkit-full-screen .hk-fsbtn,' +
@@ -35440,8 +35446,12 @@
       '.hk-upg-inner::after{content:"";display:block;clear:both}' +
       '.hk-upg-inner svg{max-height:17vh;width:auto;max-width:100%}' +
       '.hk-uppgift.hk-hopfalld .hk-upg-inner{display:none}' +
-      '@media (max-width:600px){.hk-upg-inner{padding-right:90px;font-size:14.5px}' +
-        '.hk-upg-inner .lab-block-figur{float:none;max-width:100%;margin:0}}';
+      /* MOBIL: panelen får inte äta halva skärmen — figuren göms (scenen
+       * ritar ändå sin egen figur på arket) och texten skrollar i en
+       * begränsad ruta */
+      '@media (max-width:600px){.hk-upg-inner{padding-right:90px;' +
+        'font-size:14.5px;max-height:24vh}' +
+        '.hk-upg-inner .lab-block-figur{display:none}}';
     document.head.appendChild(st);
   }
 
@@ -36565,7 +36575,15 @@
       upgPanel.appendChild(head);
       var inner = document.createElement('div');
       inner.className = 'hk-upg-inner';
-      parts.forEach(function (p) { inner.appendChild(p.cloneNode(true)); });
+      /* figurer klonas FÖRST — de floatas till höger, och en float lägger
+       * sig bredvid EFTERFÖLJANDE text, aldrig bredvid föregående */
+      var figs = [], texts = [];
+      parts.forEach(function (p) {
+        (p.classList.contains('lab-block-figur') ? figs : texts).push(p);
+      });
+      figs.concat(texts).forEach(function (p) {
+        inner.appendChild(p.cloneNode(true));
+      });
       upgPanel.appendChild(inner);
       wrap.insertBefore(upgPanel, wrap.firstChild);
     })();
@@ -36615,16 +36633,25 @@
                 wrap.getBoundingClientRect().top + wrap.scrollTop;
       var py = pp.pos[1] * sc + off;
       var vh = window.innerHeight;
+      /* den sticky uppgiftspanelen täcker skärmens ÖVRE del — pennan
+       * ska hållas i sikte i den fria ytan NEDANFÖR panelen, annars
+       * rullar skriften in bakom uppgiften (påpekat 2026-08-17) */
+      var ph = 0;
+      if (upgPanel) {
+        var pr = upgPanel.getBoundingClientRect();
+        ph = Math.max(0, Math.min(pr.bottom, vh * 0.6));
+      }
+      var fri = vh - ph;
       var maxScroll = Math.max(0, wrap.scrollHeight - vh);
       function clampT(t) { return Math.max(0, Math.min(t, maxScroll)); }
       if (instant) {
-        scrollTarget = clampT(py - 0.45 * vh);
+        scrollTarget = clampT(py - (ph + 0.45 * fri));
         wrap.scrollTop = scrollTarget;
         return;
       }
       var onScreen = py - wrap.scrollTop;
-      if (onScreen > 0.72 * vh || onScreen < 0.12 * vh) {
-        scrollTarget = clampT(py - 0.40 * vh);
+      if (onScreen > ph + 0.72 * fri || onScreen < ph + 0.12 * fri) {
+        scrollTarget = clampT(py - (ph + 0.40 * fri));
       }
       if (scrollTarget != null && Math.abs(scrollTarget - wrap.scrollTop) > 1) {
         wrap.scrollTop += (scrollTarget - wrap.scrollTop) * 0.08;

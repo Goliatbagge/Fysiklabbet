@@ -27,6 +27,7 @@ const CITIES = [
   { id: 'umea',      name: 'Umeå',      lat: 63.8258, lon: 20.2630 },
   { id: 'karlstad',  name: 'Karlstad',  lat: 59.3793, lon: 13.5036 },
   { id: 'stockholm', name: 'Stockholm', lat: 59.3293, lon: 18.0686 },
+  { id: 'falkoping', name: 'Falköping', lat: 58.1735, lon: 13.5531 },
   { id: 'goteborg',  name: 'Göteborg',  lat: 57.7089, lon: 11.9746 },
   { id: 'visby',     name: 'Visby',     lat: 57.6348, lon: 18.2948 },
   { id: 'malmo',     name: 'Malmö',     lat: 55.6050, lon: 13.0038 },

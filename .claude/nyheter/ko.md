@@ -27,6 +27,45 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+## Fynd som inte användes (2026-08-17) — kan tas upp senare
+
+- **Publicerad 2026-08-17: gluonknuten i protonen** (STAR-samarbetet vid
+  Brookhaven, Science 393 (6812) 727–731, DOI 10.1126/science.ads5962) — se
+  publicerat.md och granskningar.md. OBS för en ev. uppföljare: Science-sidan
+  är betalspärrad, men hela metoddelen och samtliga resultatvärden finns i
+  arXiv:2408.15441 v2 (CC BY 4.0), som uppdaterades samma dag som
+  publiceringen. Fällor: (a) kvoten 1,84 gäller ⟨B⟩/ΔQ × ΔZ/A i de 10 %
+  mest centrala isobarkrockarna, inte hela datamängden, och har tre skilda
+  osäkerheter varav den från sönderfall (±0,16) är störst; (b) för γ+Au
+  förutsäger valenskvarkmodellerna en BRANTARE lutning än den uppmätta
+  α_B = 1,04 ± 0,22 — skriv inte att de förutsäger ett lägre värde;
+  (c) resultatet är ett indicium, inte en observation av en knut: slutsatsen
+  är att valenskvarkbilden inte klarar båda mätningarna samtidigt.
+
+- **Nyhetsläget 2026-08-17:** Phys.org hade inget publicerat efter fredagen
+  15 augusti (senaste: volfram i fusionsreaktorer, icke-repeterande fotonisk
+  kristall). Quanta stod stilla sedan geoneutrinerna 08-07, Physics World
+  sedan 08-14 (seismiska vågor som flyttade Japan 5 mm, ”kinetisk
+  elektronik”, vätetunnling styrd av kristallsymmetri — tre möjliga
+  reservuppslag). ScienceDailys topp 16 augusti var gluonknuten, som därför
+  valdes trots att Science-artikeln kom 13 augusti.
+
+- **Vätetunnling styrs av kristallsymmetri** (Physics World 2026-08-14) —
+  obrukat, utmärkt kvantfysikvinkel (tunneleffekten finns redan som begrepp).
+  Källa: https://physicsworld.com/a/crystal-symmetry-controls-hydrogens-quantum-tunnelling/
+  (tillagd 2026-08-17)
+
+- **Seismiska vågor reflekterade från jordens kärna flyttade delar av Japan
+  5 mm österut** (Physics World 2026-08-14) — geofysik med tydlig
+  vågfysikvinkel (reflektion vid gränsskikt). Källa:
+  https://physicsworld.com/a/seismic-waves-reflected-from-earths-core-moved-parts-of-japan-5-mm-east/
+  (tillagd 2026-08-17)
+
+- **Volfram tar mer strålskada i fusionsreaktorer än väntat** (phys.org
+  2026-08-15) — materialfysik nära kopparsmältnyheten 08-13, obrukad. Källa:
+  https://phys.org/news/2026-08-tungsten-fusion-reactors.html
+  (tillagd 2026-08-17)
+
 ## Fynd som inte användes (2026-08-15) — kan tas upp senare
 
 - **Publicerad 2026-08-16: protonacceleratorn i Örnen** (LHAASO J1912+1014u,

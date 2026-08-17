@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 16 Aug 2026 14:02:46 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 01:24:25 GMT</lastBuildDate>
+    <item>
+      <title>Protonens identitet sitter kanske inte i kvarkarna — utan i en Y-formad knut av gluoner</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-17-gluonknuten-i-protonen</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-17-gluonknuten-i-protonen</guid>
+      <pubDate>Mon, 17 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Partikelfysik</category>
+      <description>Läroboken säger att en protons baryontal är jämnt fördelat på dess tre kvarkar, en tredjedel på var och en. Nu har STAR-detektorn vid Brookhaven mätt hur baryontalet flyttar sig i partikelkrockar, och det rör sig nästan dubbelt så villigt som kvarkarna kan förklara. Kandidaten som blir kvar är en gammal och underlig idé: en knut av gluoner.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-17-gluonknuten-i-protonen.jpg" length="766363" type="image/jpeg"/>
+    </item>
     <item>
       <title>Något i stjärnbilden Örnen slungar i väg protoner hundra gånger hårdare än LHC — nu vet fysikerna att det verkligen är protoner</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-16-protonaccelerator-i-ornen</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>En snart sjuttio år gammal hypotes i partikelfysiken föreslår att varje partikel har en osynlig spegelpartner i en parallell materievärld som bara märks via gravitationen — och som räknas som en kandidat för mörk materia. Vid Paul Scherrer-institutet i Schweiz har forskare med hittills oöverträffad precision letat efter tecken på att neutroner läcker in i denna spegelvärld, genom att studera omkring 25 miljarder neutroner under flera månader — utan att hitta ett enda spår.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-29-neutronernas-spegelvarld.jpg" length="389339" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Forskare bryter en av ljusets grundregler — med en film som läser ”Y” framifrån och ”N” bakifrån</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-28-ljusets-envagsgata</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-28-ljusets-envagsgata</guid>
-      <pubDate>Tue, 28 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>Normalt spelar det ingen roll åt vilket håll ljus passerar genom ett material — resultatet blir detsamma. Forskare vid Cornell University har nu visat att tunna filmer av vanliga halvledarkristaller kan bryta den regeln, så att samma film ser fullständigt olika ut beroende på om man betraktar den framifrån eller bakifrån.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-28-ljusets-envagsgata.jpg" length="858387" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

@@ -839,6 +839,54 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'baryon',
+    term: 'Baryon',
+    former: ['baryon', 'baryonen', 'baryoner', 'baryonerna', 'baryontal', 'baryontalet', 'baryontalen', 'antibaryon', 'antibaryonen', 'antibaryoner', 'valenskvark', 'valenskvarken', 'valenskvarkar', 'valenskvarkarna'],
+    kort: 'Samlingsnamn för partiklar byggda av tre kvarkar — protonen och neutronen är de två vanliga. Varje baryon tilldelas baryontalet 1, ett bokföringstal som aldrig har observerats ändra sig.',
+    relaterade: ['standardmodellen', 'baryonknut', 'stark-vaxelverkan', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Nästan all massa omkring dig sitter i baryoner. Ordet betyder ungefär ”de tunga” och står för partiklar som är byggda av tre kvarkar, till skillnad från exempelvis pioner som består av en kvark och en antikvark. Protonen (två uppkvarkar och en nedkvark) och neutronen (en uppkvark och två nedkvarkar) är de enda baryoner som är stabila nog att bygga materia av. Det finns ett femtiotal tyngre släktingar med namn som lambda, sigma och omega, men de sönderfaller inom bråkdelar av en mikrosekund.' },
+      { type: 'p', html: 'De tre kvarkarna som ger baryonen dess identitet kallas valenskvarkar. Inne i partikeln bubblar dessutom ett hav av kortlivade kvark–antikvarkpar och gluoner, men de tar ut varandra i räkningen: nettot är alltid tre kvarkar. Varje baryon får därför baryontalet 1, och varje antibaryon −1. Alla andra partiklar — elektroner, neutriner, fotoner — har baryontalet 0.' },
+      { type: 'p', html: 'Poängen med talet är att det verkar bevaras. I varenda reaktion som någonsin har mätts är summan av baryontalen densamma före och efter. Det är just den regeln som gör protonen odödlig: den är den lättaste baryonen, så det finns ingenting lättare med samma baryontal att sönderfalla till. Regeln är dock ingen härledd naturlag utan ett mönster, och flera teorier bortom standardmodellen förutsäger att den ändå bryts, ytterst sällan. Utan ett sådant brott någon gång i det tidiga universum är det svårt att förklara varför det finns materia men nästan ingen antimateria.' }
+    ]
+  },
+  {
+    id: 'baryonknut',
+    term: 'Baryonknut',
+    former: ['baryonknut', 'baryonknuten', 'baryonknutar', 'gluonknut', 'gluonknuten', 'gluonsträng', 'gluonsträngen', 'gluonsträngar', 'gluonsträngarna'],
+    kort: 'En Y-formad punkt inne i en proton eller neutron, där de tre kraftfälten från kvarkarna möts. Enligt en omdiskuterad idé är det knuten, inte kvarkarna, som bär partikelns baryontal.',
+    relaterade: ['baryon', 'stark-vaxelverkan', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'Kraften mellan två kvarkar avtar inte med avståndet, utan är i stort sett konstant — som ett gummiband. Därför brukar man rita kraftfältet som en smal sträng i stället för som ett fält som breder ut sig. I en partikel med tre kvarkar behövs tre sådana strängar, och de kan inte bara sluta i tomma intet. De måste mötas i en gemensam punkt, och mötespunkten blir en Y-formad knut av gluoner.' },
+      { type: 'p', html: 'Knuten föreslogs 1977 i en strängteoretisk beskrivning av hur baryoner hänger ihop. Länge sågs den som en ritteknisk detalj. År 1996 kom förslaget att den kan vara något mer: att det är knuten, och inte de tre kvarkarna, som bär baryontalet. Skillnaden går att pröva, eftersom kvarkarna bär nästan all rörelsemängd medan knuten bär nästan ingen. I en kollision plöjer kvarkarna vidare framåt, medan en knut lätt kan bromsas in och bli kvar mitt i kollisionszonen.' },
+      { type: 'p', html: 'Ingen har sett en knut direkt, och det går heller inte — den är inte en partikel som kan fångas i en detektor, utan en egenskap hos kraftfältet inne i en annan partikel. Det man kan göra är att räkna var baryontalet hamnar efter en krock och jämföra med vad de två bilderna förutsäger. Frågan hör till de mest grundläggande som finns i fysiken: vad är det egentligen som gör en proton till en proton?' }
+    ]
+  },
+  {
+    id: 'stark-vaxelverkan',
+    term: 'Stark växelverkan',
+    former: ['stark växelverkan', 'starka växelverkan', 'stark kärnkraft', 'starka kärnkraften', 'starka kraften', 'färgladdning', 'färgladdningen', 'färgladdningar', 'kvantkromodynamik', 'kvantkromodynamiken', 'gluonfält', 'gluonfältet'],
+    kort: 'Den kraft som håller ihop kvarkarna inne i protoner och neutroner, och som i förlängningen håller ihop atomkärnan. Den är starkast av naturens fyra krafter men når bara några få kärndiametrar.',
+    relaterade: ['baryon', 'baryonknut', 'standardmodellen', 'karnfusion'],
+    body: [
+      { type: 'p', html: 'En atomkärna borde inte finnas. Protonerna i den är positivt laddade och stöter bort varandra kraftfullt på så korta avstånd. Att kärnan ändå håller ihop beror på en kraft som är ungefär hundra gånger starkare än den elektriska, men som bara verkar över ungefär en kärndiameter. Den kallas den starka växelverkan. Egentligen verkar den mellan kvarkarna inne i protoner och neutroner; det som håller ihop kärnpartiklarna med varandra är ett slags läckage av den kraften utanför partiklarnas kant.' },
+      { type: 'p', html: 'Kraftens bärare heter gluoner, och den egenskap de reagerar på kallas färgladdning. Namnet har ingenting med färg att göra — det är bara en etikett för tre sorters laddning, ungefär som plus och minus i elektriciteten men med tre varianter i stället för två. Teorin för alltihop heter kvantkromodynamik. Det märkliga är att gluonerna själva bär färgladdning, till skillnad från fotonen som är elektriskt neutral. Därför drar kraftfältet ihop sig till smala strängar i stället för att breda ut sig.' },
+      { type: 'p', html: 'Det ger kraften dess mest kända egenhet: den avtar inte med avståndet. Drar man i en kvark växer energin i fältet stadigt, tills det finns tillräckligt mycket energi för att skapa ett nytt kvarkpar — och i stället för en lös kvark står man med två partiklar. En ensam kvark har därför aldrig observerats. Energin i det här fältet svarar dessutom för omkring 99 procent av protonens massa; kvarkarnas egen massa är närmast försumbar i sammanhanget.' }
+    ]
+  },
+  {
+    id: 'isobar',
+    term: 'Isobar',
+    former: ['isobar', 'isobaren', 'isobarer', 'isobarerna', 'isobarkärna', 'isobarkärnor'],
+    kort: 'Två atomkärnor som innehåller lika många kärnpartiklar totalt, men olika många protoner. De väger nästan exakt lika mycket och är ändå olika grundämnen.',
+    relaterade: ['isotop', 'baryon', 'radioaktivt-sonderfall'],
+    body: [
+      { type: 'p', html: 'En atomkärna beskrivs med två tal: antalet protoner, som avgör vilket grundämne det är, och det totala antalet kärnpartiklar. Isotoper av samma grundämne har lika många protoner men olika många neutroner. Isobarer är det motsatta greppet: de har samma totala antal kärnpartiklar men olika många protoner, och är alltså olika grundämnen med nästan samma massa. Rutenium-96 och zirkonium-96 är ett par — båda har 96 kärnpartiklar, men rutenium har 44 protoner och zirkonium 40.' },
+      { type: 'p', html: 'Ofta hänger isobarer ihop genom betasönderfall. När en neutron i en kärna omvandlas till en proton, eller tvärtom, ändras antalet protoner medan totalantalet är oförändrat — kärnan hoppar alltså till sin granne i isobarkedjan. Bland isobarerna med ett givet masstal finns i regel bara en eller två som är stabila; de övriga sönderfaller i riktning mot dem.' },
+      { type: 'p', html: 'I acceleratorförsök är isobarer värdefulla just för att de går att jämföra. Kör man två sådana kärnor i samma maskin, med samma detektor och samma inställningar, är den enda väsentliga skillnaden mellan försöken hur mycket elektrisk laddning som är inblandad. Nästan alla felkällor tar ut sig själva i jämförelsen, och det som blir kvar i skillnaden kan tillskrivas laddningen. Det är ett vanligt sätt att pressa fram precision där en enskild mätning skulle drunkna i osäkerheter.' }
+    ]
+  },
+  {
     id: 'higgsbosonen',
     term: 'Higgsbosonen',
     former: ['higgsbosonen', 'higgsboson', 'higgsbosoner', 'higgspartikeln', 'higgspartikel', 'higgsfältet', 'higgsfält', 'higgsmekanismen', 'higgsmekanism'],

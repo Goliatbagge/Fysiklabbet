@@ -693,3 +693,4 @@ bokstavligen momentan) och inte en sakförändring. Övriga siffror, citat och
 källor oförändrade och redan verifierade i första passet.
 
 **Utslag: GODKÄND.**
+2026-08-17 | 2026-08-17-gluonknuten-i-protonen | GODKÄND | Alla siffror (1,84±0,02±0,09±0,16; 0,5–0,7; alpha_B=1,04±0,22; 0,42–1; 0,64±0,05; 0,65±0,08; Ru-96/Zr-96 44/40; ~9 GeV) verifierade mot arXiv:2408.15441v2 metoddel. Citat Zhangbu Xu verifierat ordagrant mot BNL/sci.news-referat, trogen översättning. Peer review-status (Science, granskad, publ. 13 aug 2026) korrekt angiven i research.citation. RHIC sista strålar 6 feb 2026 och EIC tidigt 2030-tal bekräftade. Kharzeev/Rossi-Veneziano-attribueringar och årtal stämmer. Inga falska vänner (upphetsad osv.) funna.

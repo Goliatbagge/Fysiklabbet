@@ -88,6 +88,82 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-17-gluonknuten-i-protonen",
+    date: "2026-08-17",
+    title: "Protonens identitet sitter kanske inte i kvarkarna — utan i en Y-formad knut av gluoner",
+    deck: "Läroboken säger att en protons baryontal är jämnt fördelat på dess tre kvarkar, en tredjedel på var och en. Nu har STAR-detektorn vid Brookhaven mätt hur baryontalet flyttar sig i partikelkrockar, och det rör sig nästan dubbelt så villigt som kvarkarna kan förklara. Kandidaten som blir kvar är en gammal och underlig idé: en knut av gluoner.",
+    category: "Partikelfysik",
+    readingTime: "7 min",
+    image: "nyheter/bilder/2026-08-17-gluonknuten-i-protonen.jpg",
+    imageAlt: "STAR-detektorn vid Relativistic Heavy Ion Collider sedd underifrån: en husstor apparat i blå och gula stålsektioner, tätt packad med kabelknippen, rör och elektronik, med en byggnadsställning framför.",
+    imageCredit: "Foto: Z22 / Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["partikelfysik", "kvarkar", "gluoner", "proton", "baryontal", "stark växelverkan", "standardmodellen", "partikelaccelerator", "antimateria", "fysik 1"],
+    sources: [
+      { name: "Brookhaven National Laboratory — Gluons may play central role in baryon number conservation", url: "https://www.bnl.gov/newsroom/news.php?a=122692" },
+      { name: "Rice University — Scientists uncover new clue to how protons maintain their identity", url: "https://news.rice.edu/news/2026/scientists-uncover-new-clue-how-protons-maintain-their-identity" },
+      { name: "EurekAlert! — Gluons carry a proton's baryon number", url: "https://www.eurekalert.org/news-releases/1139404" },
+      { name: "ScienceDaily — referat av samma studie", url: "https://www.sciencedaily.com/releases/2026/08/260815064805.htm" },
+      { name: "Science — originalartikeln", url: "https://doi.org/10.1126/science.ads5962" }
+    ],
+    research: {
+      citation: "STAR-samarbetet, ”Tracking the baryon number with nuclear collisions”, Science 393 (6812), s. 727–731, publicerad 13 augusti 2026 (DOI 10.1126/science.ads5962). Preprint: arXiv:2408.15441 (CC BY 4.0)",
+      url: "https://doi.org/10.1126/science.ads5962"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 — 9.1 Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Fysik nivå 1 — 9.2 Massdefekt och bindningsenergi", href: "katalog.html?id=fy1-9.2" },
+        { label: "Simulering — Laddade partiklar i magnetfält", href: "fysik2-laddade-partiklar-app.html" }
+      ],
+      fragor: [
+        "Ingen har sett en gluonknut. Slutsatsen bygger på att de vanliga modellerna inte klarar av att beskriva två mätningar samtidigt. Hur stark är en sådan slutsats jämfört med en direkt observation?",
+        "Försöket jämför två atomkärnor som väger lika mycket men har olika många protoner. Varför blir en jämförelse mellan två nästan identiska system ofta säkrare än en enda noggrann mätning?",
+        "Bevarandet av baryontalet är ingen lag som någon har härlett, utan ett mönster som alltid har hållit i alla försök. Vad krävs för att fysiker ska våga lita på en sådan regel, och vad skulle få dem att överge den?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Protonen är det mest uthålliga föremål vi känner till. Försök att fånga en proton i färd med att falla sönder har pågått i decennier utan att någon enda har setts göra det, och gränsen har pressats till att en genomsnittlig proton måste leva längre än 10<sup>34</sup>&nbsp;år. Universum har hittills existerat i knappt 1,4&nbsp;·&nbsp;10<sup>10</sup>&nbsp;år. Protonen är alltså inte bara långlivad, den är i praktiken evig — och det är tur, för allt som finns är byggt av dem.' },
+      { type: 'p', html: 'Förklaringen som brukar ges är ett bokföringstal: baryontalet. Men vad i protonen det är som faktiskt <em>bär</em> det talet har ingen kunnat visa. Ett lag inom STAR-samarbetet vid Brookhaven National Laboratory har nu mätt hur baryontalet förflyttar sig när atomkärnor krockar, och svaret pekar bort från kvarkarna.' },
+
+      { type: 'h2', text: 'Ett tal som aldrig får ändras' },
+      { type: 'p', html: 'Protoner och neutroner, och deras tyngre släktingar, kallas baryoner. Var och en av dem tilldelas baryontalet $B = 1$, deras antipartiklar $B = -1$, och alla andra partiklar — elektroner, neutriner, fotoner — noll. Regeln är att summan är densamma före och efter varje reaktion som någonsin har observerats.' },
+      { type: 'p', html: 'Det är den regeln som låser fast protonen. Den är den lättaste av alla baryoner, så det finns ingenting lättare med $B = 1$ att sönderfalla till. En proton som blev till en positron och en pion skulle bryta mot bokföringen, och därför sker det inte — trots att ingenting annat i fysikens lagar hindrar det, och trots att energiräkningen skulle gå ihop galant.' },
+      { type: 'p', html: 'Sedan kvarkmodellen kom på 1960-talet har svaret på var talet sitter varit rakt fram: en baryon består av tre valenskvarkar, och var och en av dem bär $\\dfrac{1}{3}$ av baryontalet. Tre tredjedelar blir en hel. Det står i läroböckerna och det fungerar utmärkt för att räkna ut vilka reaktioner som är tillåtna. Frågan är om det är sant.' },
+
+      { type: 'h2', text: 'Rossi och Veneziano såg en knut' },
+      { type: 'p', html: 'Kvarkar sitter ihop genom den starka växelverkan, och kraften mellan dem beter sig inte som gravitation eller elektriska krafter. Den avtar inte med avståndet — den är i stort sett konstant, som om kvarkarna satt fast i varsitt gummiband. Drar man isär dem växer energin i bandet tills det går av, och i brottytan bildas ett nytt kvarkpar. Därför finns aldrig en ensam kvark.' },
+      { type: 'p', html: 'I en baryon finns tre sådana band, och de måste mötas någonstans. Rossi och Veneziano påpekade 1977 att mötespunkten är ett eget objekt: en Y-formad knut där tre gluonsträngar går ihop. Den kallas baryonknut, på engelska <em>baryon junction</em>. År 1996 tog Dmitri Kharzeev — i dag verksam vid Stony Brook University och Brookhaven — steget att föreslå att det är knuten, inte kvarkarna, som bär baryontalet. Uppsatsens titel var en fråga: kan gluoner spåra baryontalet?' },
+      { type: 'p', html: 'Skillnaden är inte akademisk, för de två kandidaterna beter sig helt olika i en krock. Valenskvarkarna bär huvuddelen av rörelsemängden och plöjer i stort sett rakt fram genom kollisionen. Knuten är en gluonstruktur som bär nästan ingen rörelsemängd alls och som därför är lätt att stoppa. Om det är knuten som bär baryontalet ska talet alltså kunna bromsas in och lämnas kvar mitt i kollisionszonen — långt ifrån de framrusande kvarkarna.' },
+
+      { type: 'h2', text: 'Två kärnor som väger lika men laddar olika' },
+      { type: 'p', html: 'Problemet är att mäta baryontal och elektrisk laddning var för sig. I vanlig materia följs de åt: protonen bär både en positiv laddning och ett baryontal. STAR-laget löste det med ett trick som acceleratorn redan hade data för — krockar mellan så kallade isobarer.' },
+      { type: 'p', html: 'Rutenium-96 och zirkonium-96 innehåller lika många kärnpartiklar, 96 stycken, men olika många protoner: 44 respektive 40. Två system som väger lika mycket och innehåller lika många baryoner, men skiljer sig med fyra enheter i laddning. Kör man dem i samma accelerator med samma detektor och samma inställningar tar det mesta som kan gå fel ut sig självt i jämförelsen.' },
+      { type: 'p', html: 'Sedan räknades vad som blev kvar mitt emellan strålarna: hur mycket baryontal ($B$) som stannat där, dividerat med skillnaden i elektrisk laddning ($\\Delta Q$) mellan de två systemen. Om kvarkarna bär baryontalet ska de två storheterna transporteras lika villigt, och kvoten hamna på 1. Mätningen gav 1,84&nbsp;±&nbsp;0,02 (statistiskt) ±&nbsp;0,09 (systematiskt) ±&nbsp;0,16 (från sönderfall av andra partiklar). Simuleringsprogram som bygger på valenskvarkar landar ännu lägre, mellan 0,5 och 0,7.' },
+      { type: 'p', html: 'Baryontalet flyttade sig alltså in mot mitten nästan dubbelt så lätt som laddningen. Något annat än kvarkarna hade tagit det dit.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-08-17-gluonknuten-i-protonen-2.jpg', alt: 'Detektorbild av en frontalkrock mellan två guldkärnor: tusentals färgade spår strålar ut från en punkt i mitten och bildar ett tätt blågrönt solfjädermönster inom detektorns tolvkantiga ram.', caption: 'En av de första fullenergikrockarna mellan guldkärnor i STAR-detektorn. Varje spår är en partikel som bildats i kollisionen; det är i det här myllret baryontalet ska bokföras.', credit: 'Bild: Brookhaven National Laboratory / STAR (CC BY 2.0), beskuren' },
+
+      { type: 'h2', text: 'Fotonen som slog mot guld' },
+      { type: 'p', html: 'En enda mätning räcker inte, så laget gjorde ett andra försök av ett helt annat slag. När två guldkärnor passerar tätt förbi varandra utan att träffa kan det elektriska fältet kring den ena skicka i väg en foton som slår in i den andra. Det blir en mycket renare kollision: ljus mot kärna, vid en rörelseenergi som i medeltal motsvarar omkring 9&nbsp;GeV i mötet mellan fotonen och en enskild kärnpartikel.' },
+      { type: 'p', html: 'Här mättes i stället hur överskottet av protoner fördelar sig i längdled, alltså hur långt bort från strålriktningen baryontalet hamnar. Fördelningen avtar ungefär som en avtagande exponentialfunktion, och brantheten sammanfattas i ett tal, $\\alpha_B$. Modeller som lägger baryontalet hos valenskvarkarna förutsäger en brantare kurva än den som uppmättes. Knutbilden förutsäger i stället ett värde mellan 0,42 och 1. Mätningen gav $\\alpha_B = 1{,}04 \\pm 0{,}22$.' },
+      { type: 'p', html: 'I vanliga krockar mellan guldkärnor, och i krockar mellan enskilda protoner, ligger samma tal kring 0,64&nbsp;±&nbsp;0,05 respektive 0,65&nbsp;±&nbsp;0,08 — också de inom knutbildens intervall. Två olika sorters försök, i två olika delar av apparaten, drar alltså åt samma håll.' },
+
+      { type: 'h2', text: 'Vad som egentligen är visat' },
+      { type: 'p', html: 'Det är värt att vara noggrann med vad slutsatsen består av. Ingen har sett en gluonknut. Det som har hänt är att två oberoende mätningar tillsammans inte går att beskriva med modeller där baryontalet sitter i valenskvarkarna, medan bilden med en knut klarar båda. Artikeln i <em>Science</em>, publicerad 13 augusti och undertecknad av över fyrahundra forskare, formulerar det försiktigt: resultaten talar <em>emot</em> valenskvarkbilden.' },
+      { type: 'quote', html: 'Våra resultat stöder starkt tanken att baryontalet hellre bärs och transporteras av gluoner — partiklarna som håller ihop kvarkarna — när de är arrangerade i just den här konfigurationen.', cite: 'Zhangbu Xu, Kent State University och Brookhaven National Laboratory' },
+      { type: 'p', html: 'Om det håller är det en omskrivning av en av de mest grundläggande bilderna i fysiken: protonen som tre kvarkar med varsin tredjedel av identiteten. I stället skulle identiteten sitta i själva sammanhållningen — i kraftfältet mellan kvarkarna snarare än i kvarkarna.' },
+      { type: 'p', html: 'Det finns en större fråga i bakgrunden. Universum innehåller materia men nästan ingen antimateria, och för att den obalansen ska ha kunnat uppstå måste baryontalet ha ändrats någon gång i det tidiga universum. Att veta vad som bär talet är ett rimligt första steg mot att förstå hur det kan ha brutits.' },
+      { type: 'p', html: 'Svaret får dröja. RHIC sköt sina sista strålar den 6&nbsp;februari 2026, efter ett kvarts sekel, och anläggningen byggs nu om till en ny maskin — Electron-Ion Collider — där elektroner ska skickas mot atomkärnor för att kartlägga just gluonerna. De första försöken väntas i början av 2030-talet. Frågan om knuten finns är då trettio år gammal, och den datan är redan insamlad.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kvarkarnas egen massa svarar för omkring en procent av protonens massa. Resten är energin i gluonfältet som håller ihop dem — i praktiken väger du mest bindningsenergi.',
+        'Baryontalets bevarande är ingen härledd lag. Det är ett mönster som aldrig har brutits i något försök, och som därför har fått status av regel. Flera teorier bortom standardmodellen förutsäger att det ändå bryts, ytterst sällan.',
+        'En enda kvark går inte att plocka ut. Drar man i den växer energin i kraftfältet tills det räcker till ett nytt kvarkpar, och man står med två partiklar i stället för en lös kvark.',
+        'Artikeln har fler än 400 författare. Det är normalt inom experimentell partikelfysik: hela samarbetet står som författare, i bokstavsordning, oavsett vem som gjorde vad.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-16-protonaccelerator-i-ornen",
     date: "2026-08-16",
     title: "Något i stjärnbilden Örnen slungar i väg protoner hundra gånger hårdare än LHC — nu vet fysikerna att det verkligen är protoner",

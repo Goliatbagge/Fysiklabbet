@@ -597,14 +597,16 @@ typ: tomtebloss
   typer: `tomtebloss` (demonstrationen i fy2-1.4 Cirkulär rörelse: tänd ett
   tomtebloss fäst i en skruvdragare, i mörker, och se gnistorna lämna
   cirkelbanan tangentiellt; varvtalsglidare, pausknapp som fryser bilden,
-  "Ultrarapid"-kryssruta för slow motion, fullskärmsläge samt syntetiserat
+  "Ultrarapid"-kryssruta för slow motion, "Visa spår"-kryssruta som ritar
+  gnistornas banor som en långsamt borttonande lång exponering (tangenterna
+  syns i efterhand), fullskärmsläge samt syntetiserat
   ljud via Web Audio — motorton som följer varvtalet + sprakande gnistor,
   inga ljudfiler — med ljudknapp uppe till höger) och `centrifug`
   (demonstrationen i fy2-1.4: en blöt tvättsvamp i en roterande
   centrifugkorg sedd rakt uppifrån; vattendropparna lämnar banan
   tangentiellt enligt Newtons första lag. Samma kontrolluppsättning som
   tomteblosset: varvtalsglidare, paus som fryser bilden, "Ultrarapid",
-  fullskärm och syntetiserat ljud — motorton + vattenfräs. Ritad i
+  "Visa spår", fullskärm och syntetiserat ljud — motorton + vattenfräs. Ritad i
   laboranstemat: ljus pappersbakgrund med kollegieblocks-rutnät). Senare
   tillkomna typer dokumenteras i filhuvudet på `minisim.js` (bl.a.
   `fjaderpendel` i fy2-2.1, `linjal` i fy2-1.2 — linjalen på två

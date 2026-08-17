@@ -30,7 +30,10 @@
  * eftersom varje gnista behåller spetsens hastighet i frigörelseögonblicket
  * (Newtons första lag). Gnistornas utkastfart (~tiotals px/s) är liten
  * jämfört med spetsens banfart (ω·r, tusentals px/s), så strålen blir en
- * tangent till cirkeln.
+ * tangent till cirkeln. Kryssrutan "Visa spår" ritar gnistornas banor som
+ * en lång exponering (långsamt borttonande spårlager), så att man i
+ * efterhand ser att spåren är TANGENTER till cirkeln — och pausknappen
+ * fryser spåren för avläsning.
  *
  * TEMA: minisimuleringar ska generellt gå i laboranstemat — ljus
  * pappersbakgrund med ett blått kollegieblocks-rutnät, som om simuleringen
@@ -47,8 +50,10 @@
  * (Newtons första lag). Droppens lilla radiella läckfart (~tiotals px/s) är
  * försumbar mot banfarten (ω·r, tusentals px/s), så banan blir en tangent
  * till cirkeln. Varvtalsglidare, pausknapp som fryser bilden, "Ultrarapid"
- * för slow motion, fullskärm samt syntetiserat ljud (motorton som följer
- * varvtalet + vattenfräs som följer utslungningen — inga ljudfiler).
+ * för slow motion, "Visa spår" (dropparnas banor som långsamt borttonande
+ * spårlager — tangenterna syns i efterhand), fullskärm samt syntetiserat
+ * ljud (motorton som följer varvtalet + vattenfräs som följer
+ * utslungningen — inga ljudfiler).
  *
  * ── typ: fjaderpendel ────────────────────────────────────────────────────
  * Demonstrationen ur fy2-2.1 (Hookes lag): en vikt som hänger i en
@@ -325,6 +330,13 @@
         slowLbl.appendChild(slowCb);
         slowLbl.appendChild(document.createTextNode('Ultrarapid'));
 
+        var trailLbl = document.createElement('label');
+        trailLbl.className = 'minisim-check';
+        var trailCb = document.createElement('input');
+        trailCb.type = 'checkbox';
+        trailLbl.appendChild(trailCb);
+        trailLbl.appendChild(document.createTextNode('Visa spår'));
+
         var info = document.createElement('span');
         info.className = 'minisim-info';
         info.textContent = 'Varvtal: 0 varv/s';
@@ -334,6 +346,7 @@
         controls.appendChild(pausBtn);
         controls.appendChild(nyBtn);
         controls.appendChild(slowLbl);
+        controls.appendChild(trailLbl);
         controls.appendChild(info);
         card.appendChild(controls);
 
@@ -381,6 +394,37 @@
             ctx.setTransform(scale, 0, 0, scale, 0, 0);
         }
         resizeCanvas();
+
+        // ── Spårlager ("Visa spår") ───────────────────────────────────────
+        // Gnistornas banor ackumuleras på en egen offscreen-canvas i logiska
+        // koordinater (2× för skärpa) och tonas långsamt bort — som en lång
+        // exponering. Då syns det i efterhand att gnistorna lämnar
+        // cirkelbanan TANGENTIELLT, inte radiellt.
+        var TRAIL_SS = 2;
+        var trailCanvas = document.createElement('canvas');
+        trailCanvas.width = W * TRAIL_SS;
+        trailCanvas.height = H * TRAIL_SS;
+        var tctx = trailCanvas.getContext('2d');
+        tctx.setTransform(TRAIL_SS, 0, 0, TRAIL_SS, 0, 0);
+        tctx.lineCap = 'round';
+        var trailFadeAcc = 0;
+
+        function clearTrails() {
+            tctx.save();
+            tctx.setTransform(1, 0, 0, 1, 0, 0);
+            tctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+            tctx.restore();
+        }
+        function fadeTrails(dt) {
+            // tonas i klumpar om ≥0,05 alfa — mindre steg avrundas bort
+            trailFadeAcc += 0.22 * dt;
+            if (trailFadeAcc < 0.05) return;
+            tctx.globalCompositeOperation = 'destination-out';
+            tctx.fillStyle = 'rgba(0,0,0,' + Math.min(1, trailFadeAcc).toFixed(3) + ')';
+            tctx.fillRect(0, 0, W, H);
+            tctx.globalCompositeOperation = 'source-over';
+            trailFadeAcc = 0;
+        }
 
         // ── Tillstånd ─────────────────────────────────────────────────────
         var lit = false;        // brinner blosset?
@@ -544,6 +588,11 @@
 
         function stepParticles(dt) {
             var kd = Math.exp(-DRAG * dt);
+            var trails = trailCb.checked;
+            if (trails) {
+                tctx.strokeStyle = 'rgba(255,196,120,0.22)';
+                tctx.lineWidth = 1;
+            }
             for (var i = particles.length - 1; i >= 0; i--) {
                 var p = particles[i];
                 p.px = p.x; p.py = p.y;
@@ -552,6 +601,12 @@
                 p.x += p.vx * dt;
                 p.y += p.vy * dt;
                 p.age += dt;
+                if (trails && p.main) {
+                    tctx.beginPath();
+                    tctx.moveTo(p.px, p.py);
+                    tctx.lineTo(p.x, p.y);
+                    tctx.stroke();
+                }
                 var t = p.age / p.life;
                 if (t >= p.popAt) {
                     // gnistan brister i en liten stjärna av kortlivade barn
@@ -762,6 +817,11 @@
             drawDrill();
             drawStick();
             drawGlow();
+            if (trailCb.checked) {
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.drawImage(trailCanvas, 0, 0, W, H);
+                ctx.globalCompositeOperation = 'source-over';
+            }
             drawParticles();
         }
 
@@ -787,6 +847,7 @@
             }
             emit(dt, thPrev);
             stepParticles(dt);
+            if (trailCb.checked) fadeTrails(dt);
         }
 
         function frame(ts) {
@@ -871,6 +932,11 @@
             updateAudio();
         });
         slowCb.addEventListener('change', kick);
+        trailCb.addEventListener('change', function () {
+            if (!trailCb.checked) clearTrails();
+            render();
+            kick();
+        });
         slider.addEventListener('input', function () {
             syncSliderVal();
             kick();
@@ -1021,6 +1087,13 @@
         slowLbl.appendChild(slowCb);
         slowLbl.appendChild(document.createTextNode('Ultrarapid'));
 
+        var trailLbl = document.createElement('label');
+        trailLbl.className = 'minisim-check';
+        var trailCb = document.createElement('input');
+        trailCb.type = 'checkbox';
+        trailLbl.appendChild(trailCb);
+        trailLbl.appendChild(document.createTextNode('Visa spår'));
+
         var info = document.createElement('span');
         info.className = 'minisim-info';
 
@@ -1028,6 +1101,7 @@
         controls.appendChild(startBtn);
         controls.appendChild(pausBtn);
         controls.appendChild(slowLbl);
+        controls.appendChild(trailLbl);
         controls.appendChild(info);
         card.appendChild(controls);
 
@@ -1073,6 +1147,36 @@
             ctx.setTransform(scale, 0, 0, scale, 0, 0);
         }
         resizeCanvas();
+
+        // ── Spårlager ("Visa spår") ───────────────────────────────────────
+        // Dropparnas banor ackumuleras på en egen offscreen-canvas (2× för
+        // skärpa) och tonas långsamt bort — som en lång exponering. Då syns
+        // det i efterhand att dropparna lämnar cirkelbanan TANGENTIELLT.
+        var TRAIL_SS = 2;
+        var trailCanvas = document.createElement('canvas');
+        trailCanvas.width = W * TRAIL_SS;
+        trailCanvas.height = H * TRAIL_SS;
+        var tctx = trailCanvas.getContext('2d');
+        tctx.setTransform(TRAIL_SS, 0, 0, TRAIL_SS, 0, 0);
+        tctx.lineCap = 'round';
+        var trailFadeAcc = 0;
+
+        function clearTrails() {
+            tctx.save();
+            tctx.setTransform(1, 0, 0, 1, 0, 0);
+            tctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+            tctx.restore();
+        }
+        function fadeTrails(dt) {
+            // tonas i klumpar om ≥0,05 alfa — mindre steg avrundas bort
+            trailFadeAcc += 0.16 * dt;
+            if (trailFadeAcc < 0.05) return;
+            tctx.globalCompositeOperation = 'destination-out';
+            tctx.fillStyle = 'rgba(0,0,0,' + Math.min(1, trailFadeAcc).toFixed(3) + ')';
+            tctx.fillRect(0, 0, W, H);
+            tctx.globalCompositeOperation = 'source-over';
+            trailFadeAcc = 0;
+        }
 
         // ── Tillstånd ─────────────────────────────────────────────────────
         var wet = 0;                // vatten kvar i svampen, 0–1 (startar torr)
@@ -1229,6 +1333,11 @@
 
         function stepParticles(dt) {
             var kd = Math.exp(-DRAG * dt);
+            var trails = trailCb.checked;
+            if (trails) {
+                tctx.strokeStyle = 'rgba(43,105,180,0.20)';
+                tctx.lineWidth = 1.1;
+            }
             for (var i = particles.length - 1; i >= 0; i--) {
                 var p = particles[i];
                 p.px = p.x; p.py = p.y;
@@ -1237,6 +1346,12 @@
                 p.x += p.vx * dt;
                 p.y += p.vy * dt;
                 p.age += dt;
+                if (trails) {
+                    tctx.beginPath();
+                    tctx.moveTo(p.px, p.py);
+                    tctx.lineTo(p.x, p.y);
+                    tctx.stroke();
+                }
                 if (p.age >= p.life ||
                     p.x < -50 || p.x > W + 50 || p.y < -50 || p.y > H + 50) {
                     particles.splice(i, 1);
@@ -1418,6 +1533,13 @@
 
         function render() {
             drawBackground();
+            if (trailCb.checked) {
+                // mörkblå spår mot ljust papper — ingen additiv blending.
+                // Ritas UNDER korgen så att inga spår hamnar över dess insida;
+                // tangenterna ligger ändå helt utanför cirkeln.
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.drawImage(trailCanvas, 0, 0, W, H);
+            }
             drawBasket();
             drawSponge();
             drawWall();
@@ -1437,6 +1559,7 @@
             var rate = emit(dt, thPrev);
             emitRateSm += (rate - emitRateSm) * Math.min(1, 6 * dt);
             stepParticles(dt);
+            if (trailCb.checked) fadeTrails(dt);
         }
 
         function frame(ts) {
@@ -1512,6 +1635,11 @@
             updateAudio();
         });
         slowCb.addEventListener('change', kick);
+        trailCb.addEventListener('change', function () {
+            if (!trailCb.checked) clearTrails();
+            render();
+            kick();
+        });
         slider.addEventListener('input', function () {
             syncSliderVal();
             kick();

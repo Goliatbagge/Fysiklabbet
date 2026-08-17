@@ -746,10 +746,13 @@
             const cv = document.createElement('canvas');
             cv.width = 64; cv.height = 256;
             const ctx = cv.getContext('2d');
+            // Canvas-y 0 = konens spets (v=1, flipY): starkast vid stjärnan,
+            // avtar sedan mot helt genomskinligt vid mynningen — inget tvärt slut.
             const g = ctx.createLinearGradient(0, 0, 0, 256);
-            g.addColorStop(0, 'rgba(190,220,255,0)');
-            g.addColorStop(0.25, 'rgba(190,220,255,0.5)');
-            g.addColorStop(1, 'rgba(240,248,255,0.95)');
+            g.addColorStop(0, 'rgba(240,248,255,0.95)');
+            g.addColorStop(0.3, 'rgba(200,225,255,0.4)');
+            g.addColorStop(0.65, 'rgba(190,220,255,0.14)');
+            g.addColorStop(1, 'rgba(190,220,255,0)');
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, 64, 256);
             const tex = new THREE.CanvasTexture(cv);

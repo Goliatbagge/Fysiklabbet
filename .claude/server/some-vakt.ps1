@@ -35,27 +35,42 @@ function Logga($txt) {
     Add-Content -Path $logFil -Value "[$stamp] $txt" -Encoding utf8
 }
 
-# Dagens avsnitt i den delade publiceringsloggen = allt från SISTA
-# förekomsten av dagens datum till filslutet (loggen fylls på kronologiskt).
+# Dagens avsnitt i den delade publiceringsloggen: raderna från dagens rubrik
+# ("## 2026-08-17") till filslutet. Rubriken matchas på RADENS BÖRJAN — inte
+# som fritext någonstans i filen: datumet förekommer även inuti artikel-id:n
+# och bildvägar ("nyheter/bilder/2026-08-17-….jpg"), och en fritextsökning
+# hade då klippt sektionen mitt i en rad och tappat raderna före den.
 function DagensSektion {
-    if (-not (Test-Path $someLogg)) { return '' }
-    $innehall = Get-Content $someLogg -Raw -Encoding utf8
-    $idag = Get-Date -Format 'yyyy-MM-dd'
-    $i = $innehall.LastIndexOf($idag)
-    if ($i -lt 0) { return '' }
-    return $innehall.Substring($i)
+    if (-not (Test-Path $someLogg)) { return @() }
+    $rader = @(Get-Content $someLogg -Encoding utf8)
+    $idag  = Get-Date -Format 'yyyy-MM-dd'
+    $start = -1
+    for ($i = 0; $i -lt $rader.Count; $i++) {
+        if ($rader[$i] -match "^\s*#*\s*$idag\b") { $start = $i }
+    }
+    if ($start -lt 0) { return @() }
+    return $rader[$start..($rader.Count - 1)]
 }
 
-# Ett jobb räknas som avklarat så snart dess nyhetsrad finns för i dag —
-# även "nyhet: ingen artikel i dag" är ett avklarat jobb (inget att posta).
-# Radbaserat: Instagram-rader bär prefixet "ig" ("ig-nyhet:" eller "ig: …"),
-# rader med "nyhet:" utan ig-prefix är Facebookens.
+# Ett jobb räknas som avklarat först när dess NYHETSRAD för i dag säger att
+# något faktiskt hänt: "postad …" eller "ingen artikel i dag".
+# Två fällor som loggen från 2026-08-17 avslöjade:
+#   1. Agenten skriver en rad även när den MISSLYCKAS ("nyhet: FEL kl 07:33
+#      (Chrome-verktygen saknades)"). Att bara leta efter en rad hade alltså
+#      lästs som ett lyckat inlägg — vakten hade tigit still vid exakt det
+#      fel den finns till för att fånga. Därför krävs ordet "postad".
+#      Samma nyckelord som agenternas eget dubbelpostningsskydd använder.
+#   2. Lanseringsrader ("lansering: postad …", "ig-lansering: postad …") får
+#      INTE räknas som dagens nyhetsinlägg — därför ankras prefixen till
+#      radens början: "nyhet:" för Facebook, "ig-nyhet:" för Instagram.
 function JobbStatus {
     $fb = $false
     $ig = $false
-    foreach ($rad in (DagensSektion) -split "`n") {
-        if ($rad -notmatch 'nyhet\s*:') { continue }
-        if ($rad -match '(?i)\big-?')   { $ig = $true } else { $fb = $true }
+    foreach ($rad in (DagensSektion)) {
+        $r = $rad.Trim()
+        if (($r -notmatch '(?i)postad') -and ($r -notmatch '(?i)ingen artikel')) { continue }
+        if     ($r -match '(?i)^ig-?nyhet\s*:') { $ig = $true }
+        elseif ($r -match '(?i)^nyhet\s*:')     { $fb = $true }
     }
     [pscustomobject]@{ fb = $fb; ig = $ig }
 }

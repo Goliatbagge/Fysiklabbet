@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Testsida för widgeten: kopiera till .shots/ och öppna via dev-servern,
+     t.ex. http://localhost:8000/.shots/fse-test.html?t=76&valj=5 -->
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test — förmörkelsewidget</title>
+<link rel="stylesheet" href="../styles-laborans.css">
+<style>
+    .article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
+    .article-widget { margin: 30px 0; }
+</style>
+</head>
+<body class="laborans">
+<div class="article">
+    <div class="article-widget" id="w"></div>
+</div>
+<script src="../formorkelse-sverige.js"></script>
+<script>
+    window.FORMORKELSE_SVERIGE.mount(document.getElementById('w'));
+    // ?t=<minuter> ställer tidslinjen, ?spela=1 testar uppspelning
+    var q = new URLSearchParams(location.search);
+    if (q.get('t') !== null) {
+        var slider = document.querySelector('.fse-slider');
+        slider.value = q.get('t');
+        slider.dispatchEvent(new Event('input'));
+    }
+    if (q.get('valj')) {
+        var i = parseInt(q.get('valj'), 10);
+        document.querySelectorAll('.fse-tab tbody tr')[i].click();
+    }
+</script>
+</body>
+</html>

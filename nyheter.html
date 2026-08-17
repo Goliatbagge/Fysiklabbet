@@ -336,6 +336,11 @@
             font-family: var(--lab-font-mono); font-size: 11.5px; letter-spacing: 0.06em;
             color: var(--lab-ink-muted); font-style: normal; text-transform: uppercase;
         }
+        /* Behållare för interaktiva widgetar i brödtexten (Block:
+           { type: 'widget' } → ArticleWidget). Själva innehållets CSS
+           injiceras av widget-skriptet (t.ex. formorkelse-sverige.js). */
+        .article-widget { margin: 30px 0; }
+
         .article-fact {
             margin: 30px 0; padding: 22px 24px; border-radius: 5px;
             background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
@@ -512,6 +517,10 @@
          klickbara (begrepp.html?ord=…) med förhandsvisning vid hovring. -->
     <script>document.write('<scr' + 'ipt src="data/begrepp-sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="begrepp-lank.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- Interaktiva artikelwidgetar (body-block { type: 'widget', widget: … }).
+         Laddas utan defer, före React: ArticleWidget monterar i sin useEffect
+         och behöver window.FORMORKELSE_SVERIGE redan då. -->
+    <script>document.write('<scr' + 'ipt src="formorkelse-sverige.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <!-- Anmälningsrutan för nyhetsbrevet. Laddas UTAN defer, före React:
          komponenten nedan monterar widgeten i sin useEffect och behöver
          window.FYSIKNYHETSBREV redan då. -->
@@ -584,9 +593,11 @@
                     for (let p = node.parentElement; p && p !== root; p = p.parentElement) {
                         if (SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
                         // Färdigsatta KaTeX-formler lämnas orörda — spann
-                        // inuti dem slår sönder matematiksättningen.
+                        // inuti dem slår sönder matematiksättningen. Samma
+                        // sak för interaktiva widgetar: ett <span> inuti en
+                        // SVG-<text> renderas inte alls.
                         const c = p.classList;
-                        if (c && (c.contains('katex') || c.contains('katex-display'))) return NodeFilter.FILTER_REJECT;
+                        if (c && (c.contains('katex') || c.contains('katex-display') || c.contains('article-widget'))) return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -1036,8 +1047,29 @@
             );
         }
 
+        // Interaktiv widget i brödtexten ({ type: 'widget', widget: '<namn>' }).
+        // Registret pekar på globala mount-funktioner från script laddade i
+        // sidfoten (t.ex. formorkelse-sverige.js). Behållaren har no-begrepp
+        // och undantas dessutom i applyBionic — widgetens DOM (SVG-texter,
+        // knappar) får aldrig styckas av lässtöden.
+        const ARTICLE_WIDGETS = {
+            'formorkelse-sverige': () => window.FORMORKELSE_SVERIGE,
+        };
+        function ArticleWidget({ b }) {
+            const ref = React.useRef(null);
+            React.useEffect(() => {
+                const get = ARTICLE_WIDGETS[b.widget];
+                const api = get && get();
+                if (ref.current && api) api.mount(ref.current);
+                const el = ref.current;
+                return () => { if (el) el.innerHTML = ''; };
+            }, [b.widget]);
+            return <div className="article-widget no-begrepp" ref={ref} />;
+        }
+
         function Block({ b }) {
             if (b.type === 'h2') return <h2>{b.text}</h2>;
+            if (b.type === 'widget') return <ArticleWidget b={b} />;
             if (b.type === 'quote') return (
                 <blockquote className="article-quote">
                     <p dangerouslySetInnerHTML={{ __html: prepMath(b.html) }} />

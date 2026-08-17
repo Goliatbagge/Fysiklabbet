@@ -14632,7 +14632,7 @@
       [['så momentet är positivt!']]
     ]);
     tanke(b10);
-    var xe = placeString('Svar: 8,5 Nm moturs', padL, y, s, F, acts);
+    var xe = placeString('Svar: 8,5 Nm moturs (eller +8,5 Nm)', padL, y, s, F, acts);
     underline(xe, y);
     stepEnd();
 
@@ -14904,11 +14904,17 @@
     var b10 = bubble(120, bubbleTop(y - adv), bw, [
       [['Hävarmen är kortare än spettet,']],
       [['så momentet blir mindre än']],
-      [['800 Nm. Rimligt!']]
+      [['800 Nm. Rimligt! Och kraften']],
+      [['vrider medurs — negativt tecken.']]
     ]);
     tanke(b10);
-    var xe = placeString('Svar: 0,57 kNm', padL, y, s, F, acts);
+    /* svaret ryms inte på en rad (pilzonen!) — tecken-parentesen på egen */
+    var xe = placeString('Svar: 0,57 kNm medurs', padL, y, s, F, acts);
     underline(xe, y);
+    pause(220);
+    y += 1.45 * F;
+    var xe2 = placeString('(eller -0,57 kNm)', padL, y, s, F, acts);
+    underline(xe2, y);
     stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -35397,7 +35403,45 @@
       '.hk-sbtn.hk-active{background:' + LABINK + ';color:' + PAPER + ';border-color:' + LABINK + '}' +
       /* växeln "Med penna"/"Som text" ovanför arket (se mountAll) */
       '.hk-vyval{display:flex;gap:8px;align-items:center;margin:0 0 12px;flex-wrap:wrap}' +
-      '.hk-vyval-label{font-size:12.5px;color:rgba(15,22,32,.62);margin-right:2px}';
+      '.hk-vyval-label{font-size:12.5px;color:rgba(15,22,32,.62);margin-right:2px}' +
+      /* uppgiftspanel i helskärm: frågestammen (klonad ur exempel-rutan)
+       * ligger sticky överst så att värden och frågeformulering alltid
+       * syns medan lösningen skrivs (användarönskemål 2026-08-17).
+       * Syns ENDAST i helskärm — i normalläget står uppgiften ju redan
+       * strax ovanför arket. */
+      '.hk-uppgift{display:none}' +
+      '.hk-wrap:fullscreen .hk-uppgift,.hk-wrap:-webkit-full-screen .hk-uppgift' +
+        '{display:block;position:sticky;top:0;z-index:6;align-self:stretch;' +
+        'margin:-12px -12px 16px;background:rgba(246,241,230,.97);' +
+        'border-bottom:1px solid rgba(15,22,32,.18);' +
+        'box-shadow:0 2px 8px rgba(15,22,32,.06)}' +
+      /* de fixerade knapparna uppe till höger ska ligga ÖVER panelen
+       * (panelens högerpadding lämnar plats åt dem) */
+      '.hk-wrap:fullscreen .hk-fsbtn,.hk-wrap:-webkit-full-screen .hk-fsbtn,' +
+      '.hk-wrap:fullscreen .hk-settings,.hk-wrap:-webkit-full-screen .hk-settings,' +
+      '.hk-wrap:fullscreen .hk-setbtn,.hk-wrap:-webkit-full-screen .hk-setbtn' +
+        '{z-index:7}' +
+      '.hk-upg-head{display:flex;align-items:center;gap:10px;padding:8px 20px 0}' +
+      '.hk-upg-cap{font-size:10.5px;font-weight:600;letter-spacing:.8px;' +
+        'text-transform:uppercase;color:rgba(15,22,32,.55);user-select:none}' +
+      '.hk-upg-btn{border:1.5px solid rgba(15,22,32,.35);background:' + PAPER + ';' +
+        'color:' + LABINK + ';border-radius:7px;padding:2px 10px;font-weight:600;' +
+        'font-size:12px;cursor:pointer;font-family:inherit}' +
+      '.hk-upg-btn:hover{background:#efe8d8}' +
+      /* höger padding lämnar plats åt de fixerade knapparna (helskärm +
+       * ev. inställningsruta) uppe till höger */
+      '.hk-upg-inner{padding:2px 210px 12px 20px;font-size:16.5px;' +
+        'line-height:1.55;color:' + LABINK + ';max-height:42vh;overflow-y:auto}' +
+      '.hk-uppgift.hk-smal .hk-upg-inner{padding-right:64px}' +
+      '.hk-upg-inner p{margin:6px 0}' +
+      /* figuren läggs till höger om frågetexten så panelen hålls låg */
+      '.hk-upg-inner .lab-block-figur{float:right;max-width:40%;' +
+        'margin:0 0 4px 18px}' +
+      '.hk-upg-inner::after{content:"";display:block;clear:both}' +
+      '.hk-upg-inner svg{max-height:17vh;width:auto;max-width:100%}' +
+      '.hk-uppgift.hk-hopfalld .hk-upg-inner{display:none}' +
+      '@media (max-width:600px){.hk-upg-inner{padding-right:90px;font-size:14.5px}' +
+        '.hk-upg-inner .lab-block-figur{float:none;max-width:100%;margin:0}}';
     document.head.appendChild(st);
   }
 
@@ -36472,6 +36516,60 @@
     });
     paperDiv.appendChild(fsBtn);
 
+    /* ---------------- uppgiftspanel i helskärm ----------------
+     * I helskärm syns inte exempel-rutans frågetext, så värden och exakt
+     * frågeformulering glöms bort (användarönskemål 2026-08-17). Panelen
+     * klonar frågestammen — allt i den omgivande .lab-block-exempel som
+     * står FÖRE widgeten (stam + ev. figur), utom rubriken — och ligger
+     * sticky överst i helskärmen, hopfällbar med en Dölj/Visa-knapp.
+     * KaTeX är redan renderad i klonen; bionic-spannen är neutrala
+     * utanför .bionic-on. Utanför en exempel-ruta byggs ingen panel. */
+    var upgPanel = null;
+    (function buildUppgift() {
+      if (!container.closest) return;
+      var ex = container.closest('.lab-block-exempel');
+      if (!ex) return;
+      var parts = [];
+      for (var c = ex.firstElementChild; c; c = c.nextElementSibling) {
+        var cl = c.classList || { contains: function () { return false; } };
+        if (cl.contains('lab-block-title')) continue;
+        /* stanna vid första lösningsdelen — vid flera widgets i samma
+         * ruta hör bara den inledande stammen till uppgiften */
+        if (cl.contains('lab-handskrift') ||
+            cl.contains('lab-block-textlosning')) break;
+        parts.push(c);
+      }
+      if (!parts.length) return;
+      upgPanel = document.createElement('div');
+      upgPanel.className = 'hk-uppgift';
+      /* utan inställningsruta uppe till höger behövs mindre högermarginal */
+      if (!(typeof setBox !== 'undefined' && setBox)) {
+        upgPanel.classList.add('hk-smal');
+      }
+      var head = document.createElement('div');
+      head.className = 'hk-upg-head';
+      var cap = document.createElement('span');
+      cap.className = 'hk-upg-cap';
+      cap.textContent = 'Uppgift';
+      head.appendChild(cap);
+      var tBtn = document.createElement('button');
+      tBtn.type = 'button';
+      tBtn.className = 'hk-upg-btn';
+      tBtn.textContent = 'Dölj';
+      tBtn.addEventListener('click', function () {
+        var av = upgPanel.classList.toggle('hk-hopfalld');
+        tBtn.textContent = av ? 'Visa' : 'Dölj';
+        scheduleNav();
+      });
+      head.appendChild(tBtn);
+      upgPanel.appendChild(head);
+      var inner = document.createElement('div');
+      inner.className = 'hk-upg-inner';
+      parts.forEach(function (p) { inner.appendChild(p.cloneNode(true)); });
+      upgPanel.appendChild(inner);
+      wrap.insertBefore(upgPanel, wrap.firstChild);
+    })();
+
     function fitFS() {
       var fs = document.fullscreenElement === wrap;
       fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
@@ -36510,7 +36608,12 @@
       }
       var sc = svg.clientWidth / W;
       var pp = penPosAt(tNow);
-      var py = pp.pos[1] * sc;
+      /* uppgiftspanelen (och vyval-raden) knuffar ned arket i wrappens
+       * skrollflöde — räkna om pennans y till skrollkoordinater via
+       * arkets faktiska offset, annars siktar följningen för högt */
+      var off = paperDiv.getBoundingClientRect().top -
+                wrap.getBoundingClientRect().top + wrap.scrollTop;
+      var py = pp.pos[1] * sc + off;
       var vh = window.innerHeight;
       var maxScroll = Math.max(0, wrap.scrollHeight - vh);
       function clampT(t) { return Math.max(0, Math.min(t, maxScroll)); }

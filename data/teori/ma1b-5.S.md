@@ -115,7 +115,7 @@ $$
 där
 
 - $p$ = den uppmätta andelen (%)
-- $f$ = felmarginalen (procentenheter)
+- $f$ = felmarginal (procentenheter)
 
 **Den klassiska sannolikhetsdefinitionen**
 

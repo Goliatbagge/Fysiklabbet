@@ -117,7 +117,7 @@ för hand.
 
 där
 
-- $r$ = korrelationskoefficienten (mellan −1 och 1)
+- $r$ = korrelationskoefficient (mellan −1 och 1)
 - $r^2$ = kvadraten på korrelationskoefficienten (mellan 0 och 1)
 
 Ju närmare 1 (eller −1 för $r$) dessa värden ligger, desto bättre beskriver

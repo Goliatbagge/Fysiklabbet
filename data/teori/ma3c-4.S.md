@@ -109,8 +109,8 @@ $$
 
 där
 
-- $f'(x)$ = förstaderivatan (kurvans lutning)
-- $f''(x)$ = andraderivatan (hur lutningen ändras)
+- $f'(x)$ = förstaderivata (kurvans lutning)
+- $f''(x)$ = andraderivata (hur lutningen ändras)
 :::
 
 ## Viktiga samband och metoder

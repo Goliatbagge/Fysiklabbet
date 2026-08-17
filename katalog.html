@@ -893,11 +893,17 @@
                 if (!right) return;                                       // ingen variabelförklaring → lämna
                 const cell = document.createElement('div');
                 cell.className = 'formel-cell';
+                // Innehåll som i källan står EFTER variabellistan (t.ex. en
+                // anmärkning om teckenkonvention) ska ligga kvar efter den —
+                // inte flyttas in i formelcellen ovanför listan.
+                const after = [];
+                let passedRight = false;
                 for (const el of Array.from(box.children)) {
                     if (el.classList && el.classList.contains('lab-block-title')) continue;
                     if (el.tagName === 'DETAILS') continue;               // härlednings-dropdownen stannar under layouten
-                    if (el === right) continue;
+                    if (el === right) { passedRight = true; continue; }
                     if (el.tagName === 'P' && el.textContent.trim().toLowerCase() === 'där') { el.remove(); continue; }
+                    if (passedRight) { after.push(el); continue; }        // stannar under layouten, i källordning
                     cell.appendChild(el);                                 // flytta in formelinnehållet
                 }
                 if (isProse) {
@@ -916,6 +922,7 @@
                 layout.appendChild(rule);
                 layout.appendChild(right);
                 box.appendChild(layout);
+                after.forEach(el => box.appendChild(el));                 // innehåll efter variabellistan
                 // Härlednings-dropdownerna ska ligga SIST i rutan (under
                 // layouten), i källordning — en formel kan ha flera.
                 box.querySelectorAll(':scope > details.formel-harledning')

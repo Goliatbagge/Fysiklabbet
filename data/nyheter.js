@@ -88,6 +88,73 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-18-tredjedels-laddning",
+    date: "2026-08-18",
+    title: "En elektron går inte att dela — ändå har fysiker nu räknat tredjedelar av en i en bit grafen",
+    deck: "Elementarladdningen är fysikens minsta valör: all laddning kommer i hela sådana. Men i ett tvådimensionellt elektronhav nära absoluta nollpunkten dyker det upp objekt som bär en tredjedel av den. Ett lag vid EPFL har byggt en pytteliten kulle i grafen som räknar dem, en i taget.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-18-tredjedels-laddning.jpg",
+    imageAlt: "Illustration: ett tvådimensionellt honungskaksmönster av kolatomer sträcker sig mot horisonten i mörkblått. Mitt i mönstret höjer sig en ljus kupol, och en lysande gulorange ring löper runt kupolens fot. Ovanifrån faller svaga blå strimmor ner mot ytan.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantfysik", "elementarladdning", "grafen", "kvasipartiklar", "kvant-halleffekten", "magnetfält", "tunneleffekt", "topologisk materia", "kvantdator", "ellära"],
+    sources: [
+      { name: "Phys.org — Graphene device measures fractional electric charges carried by some of quantum physics' strangest objects", url: "https://phys.org/news/2026-08-graphene-device-fractional-electric-quantum.html" },
+      { name: "Mirage News — EPFL:s pressmeddelande i återpublicering, ”How do you measure one third of an electron?”", url: "https://www.miragenews.com/how-do-you-measure-one-third-of-electron-1728104/" },
+      { name: "Nature Physics — originalartikeln", url: "https://doi.org/10.1038/s41567-026-03412-2" },
+      { name: "arXiv:2509.04209 — förhandsversionen med hela metoddelen (CC BY 4.0)", url: "https://arxiv.org/abs/2509.04209" }
+    ],
+    research: {
+      citation: "M. Di Luca, E. Hajigeorgiou, Z. Zhou, T. Lotrič, T. Feng, K. Watanabe, T. Taniguchi, S. H. Simon, M. Banerjee, ”Quantum Hall antidot as a fractional coulombmeter”, Nature Physics, publicerad 14 augusti 2026 (DOI 10.1038/s41567-026-03412-2). Förhandsversion: arXiv:2509.04209 (CC BY 4.0)",
+      url: "https://doi.org/10.1038/s41567-026-03412-2"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 — 7.1 Laddning och influens", href: "katalog.html?id=fy1-7.1" },
+        { label: "Fysik nivå 2 — magnetisk kraft på laddade partiklar", href: "fysik2-laddade-partiklar-app.html" }
+      ],
+      fragor: [
+        "Ingen har fångat in en kvasipartikel och vägt den. Slutsatsen om en tredjedels laddning bygger på hur tätt en elektrisk signal upprepar sig. Vad krävs för att en indirekt mätning ska räknas som ett svar på frågan ”hur stor är laddningen”?",
+        "Elementarladdningen brukar beskrivas som odelbar. Kvasipartiklarna delar inte någon elektron, utan uppstår ur många elektroners gemensamma rörelse. Var går gränsen mellan en riktig partikel och ett mönster som beter sig som en partikel?",
+        "Samma mätning har gjorts förut med betydligt mer komplicerad utrustning. Varför är det värt att publicera ett enklare sätt att mäta något som redan är känt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Elektrisk laddning kommer i hela valörer. Ladda upp en ballong mot håret, gnid en glasstav mot siden eller mät strömmen genom en lampa — hur du än gör blir laddningen ett helt antal elementarladdningar, $e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Robert Millikan visade det för drygt hundra år sedan genom att låta små oljedroppar sväva i ett elektriskt fält, och sedan dess har ingen hittat en fri laddning som är mindre. En halv elektron finns inte att köpa.' },
+      { type: 'p', html: 'Ändå har fysiker vid EPFL i Lausanne just publicerat en mätserie där instrumentet gång på gång svarar ”en tredjedel”. Och de har inte delat någon elektron.' },
+
+      { type: 'h2', text: 'När elektronerna slutar vara enskilda' },
+      { type: 'p', html: 'Knepet är att tvinga in elektronerna i ett tillstånd där de inte längre går att räkna en och en. Fångar man dem i ett skikt som är så tunt att de bara kan röra sig i två riktningar, kyler ner alltihop till en hundradels grad över absoluta nollpunkten och sätter på ett magnetfält hundratusentals gånger starkare än jordens, slutar elektronerna bete sig som ett myller av oberoende partiklar. De organiserar sig i stället i ett enda stelt, ordnat kvanttillstånd — en sorts elektronvätska.' },
+      { type: 'p', html: 'Det är kvant-Halleffekten, och den är känd sedan 1980. Det märkliga upptäcktes två år senare: i vissa av dessa tillstånd svarar vätskan på en störning inte genom att flytta en hel elektron, utan genom att skicka i väg en liten krusning som bär exakt en tredjedel av en elektrons laddning. Robert Laughlin förklarade 1983 varför, och han delade Nobelpriset i fysik 1998 med Horst Störmer och Daniel Tsui för just detta.' },
+      { type: 'p', html: 'Krusningarna kallas kvasipartiklar. De består inte av något — de <em>är</em> ett mönster i hur miljarder elektroner rör sig tillsammans, ungefär som en våg på en sjö inte är gjord av något annat än vatten som redan fanns där. Men mönstret uppför sig som en partikel: det har en bestämd plats, det kan flyttas, det kan studsa, och det bär en bestämd laddning. Bara att laddningen är en bråkdel av den minsta laddning som existerar.' },
+
+      { type: 'h2', text: 'En kulle mitt i elektronhavet' },
+      { type: 'p', html: 'Att mäta en sådan laddning har hittills krävt känslig och tålamodskrävande apparatur — antingen genom att lyssna på det svaga bruset i strömmen, eftersom brus förråder hur stora paket laddningen kommer i, eller genom att bygga en interferometer där kvasipartiklarna får gå två vägar och störa varandra. Bägge metoderna fungerar, och bägge är svåra.' },
+      { type: 'p', html: 'Laget kring Mitali Banerjee vid Laboratoriet för kvantfysik, topologi och korrelationer på EPFL valde en annan väg. De byggde sitt elektronhav i tvålagersgrafen — två atomtunna skikt av kolatomer — inbäddat mellan skivor av bornitrid och omgivet av elektroder av grafit. Med elektroderna reste de sedan en liten elektrisk kulle mitt i havet: ett område dit kvasipartiklarna inte kommer in. En sådan kulle kallas en antidot, ungefär som en kvantprick vänd ut och in. Den var omkring 190&nbsp;nanometer i diameter — några hundra gånger tunnare än ett hårstrå. Hela chipet kyldes till ungefär 0,01&nbsp;K och sattes i magnetfält på mellan 5&nbsp;T och 13,5&nbsp;T.' },
+      { type: 'p', html: 'Runt kullen springer kvasipartiklarna i slutna banor, och där kommer kvantmekaniken in. En laddad partikel som går ett varv runt ett inneslutet magnetfält får sin våg fasförskjuten — Aharonov–Bohm-effekten. Skruvar man långsamt upp magnetfältet eller spänningen på elektroderna passerar banan därför omväxlande genom lägen där det är lätt respektive svårt för en kvasipartikel att tunnla tvärs över kullen. Resultatet är en elektrisk signal som svänger fram och tillbaka, fullständigt regelbundet, med en tick för varje kvasipartikel som tar sig över.' },
+      { type: 'p', html: 'Och det är i takten svaret sitter. Hur mycket magnetfält eller spänning som krävs mellan två tick beror direkt på hur stor laddning den tunnlande krusningen bär. En bärare med liten laddning ger tätare tick. Antidoten blir därmed en laddningsmätare som avläses med en helt vanlig ledningsförmågemätning — en fraktionell coulombmeter, som forskarna kallar den i artikelns titel.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-08-18-tredjedels-laddning-2.jpg', alt: 'Två paneler. Till vänster en tredimensionell ritning av chipet: ett rutmönstrat grafenskikt mellan blå och lila plattor, med guldfärgade kontakter och en röd ringformad bana kring ett hål i mitten. Till höger ett svartvitt elektronmikroskopfoto av det färdiga chipet, färglagt i lila, gult och blått, med mätinstrument inritade runt om.', caption: 'Till vänster försökets uppbyggnad: grafenskiktet mellan bornitrid, med den ringformade banan runt antidoten. Till höger det verkliga chipet i svepelektronmikroskop, färglagt i efterhand, med mätkretsen inritad.', credit: 'Bild: M. Di Luca m.fl., arXiv:2509.04209 (CC BY 4.0), beskuren' },
+
+      { type: 'h2', text: 'Vad mätaren svarade' },
+      { type: 'p', html: 'Elektronvätskan kan låsa sig i många olika ordnade tillstånd, och vilket det blir styrs av hur många elektroner som finns per magnetisk flödesvirvel. Det talet kallas fyllnadsfaktor och skrivs $\\nu$ (ny). Vid $\\nu = 2$ är två nivåer prydligt fyllda; det är i de tillstånd där $\\nu$ är ett bråk som de fraktionella laddningarna dyker upp.' },
+      { type: 'p', html: 'Antidoten fick avläsa flera av dem. Vid $\\nu = 4/3$, $5/3$ och $7/3$ svarade den en tredjedels elektronladdning, alltså ungefär $5{,}3 \\cdot 10^{-20}\\ \\mathrm{C}$. Vid $\\nu = 2/3$ blev svaret två tredjedelar, och vid $\\nu = 3/5$ tre femtedelar. Ett av tillstånden vägrade ge ett entydigt besked: vid $\\nu = 8/3$ visade mätningen tecken på både en tredjedel och två tredjedelar samtidigt. Forskarna går igenom flera möjliga förklaringar — bland annat att kanten på elektronvätskan kan ha en mer sammansatt struktur där, och att två olika sorters tunnling pågår parallellt — utan att slå fast vilken som stämmer.' },
+      { type: 'p', html: 'Att en mätning inte ger ett rent svar är för övrigt inte ett misslyckande. Det är oftast där nästa försök börjar.' },
+      { type: 'quote', html: 'Samma geometri skulle också kunna användas som byggsten i en topologisk kvantdator.', cite: 'Mario Di Luca, EPFL, förstaförfattare till studien' },
+
+      { type: 'h2', text: 'Varför en enklare mätare spelar roll' },
+      { type: 'p', html: 'Citatet syftar på att kvasipartiklarna i de här tillstånden inte bara har udda laddning. De har också en annan egenskap: byter man plats på två av dem minns systemet att det skett. I en tänkt topologisk kvantdator skulle information lagras i just sådana ombytesmönster, vilket skulle göra den okänslig för de småstörningar som är dagens kvantdatorers värsta fiende — fast då krävs en mer svårfångad sort av kvasipartiklar än dem som mätts här. Att bygga en sådan maskin ligger dock långt fram, och det här försöket är inte ett steg på vägen dit utan ett bättre instrument för att undersöka materialen den skulle kräva.' },
+      { type: 'p', html: 'Det är också hela poängen. Antidoten är liten, den styrs elektriskt, och den avläses med en mätning vilket välutrustat lågtemperaturlabb som helst redan behärskar. Forskarna påpekar att samma upplägg borde gå att flytta över till andra tvådimensionella material än grafen. Ett enklare instrument gör inte en ny upptäckt i sig — men det gör att fler kan leta.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kvasipartiklarna bryter inte mot regeln att laddning kommer i hela elementarladdningar. Räknar man ihop hela elektronvätskan är summan alltid ett helt antal — bråkdelarna finns bara i de krusningar systemet kan bilda.',
+        'Grafen är ett enda lager kolatomer i ett honungskaksmönster, och det tillverkades första gången genom att man drog av lager efter lager från en grafitbit med tejp. Metoden gav Andre Geim och Konstantin Novoselov Nobelpriset i fysik 2010.',
+        'Vid 0,01&nbsp;K är chipet kallare än något som finns naturligt i universum. Rymdens bakgrundsstrålning håller 2,7&nbsp;K, alltså nästan trehundra gånger varmare.',
+        'Kvant-Halleffekten är så exakt att resistansen i de fyllda tillstånden bara beror på två naturkonstanter, Plancks konstant och elementarladdningen. Sedan 1990 används den därför som internationell normal för elektrisk resistans.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-17-gluonknuten-i-protonen",
     date: "2026-08-17",
     title: "Protonens identitet sitter kanske inte i kvarkarna — utan i en Y-formad knut av gluoner",

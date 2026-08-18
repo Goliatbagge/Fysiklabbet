@@ -27,6 +27,37 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+- **Ljusslutaren som ser genom dimma och vävnad** (STARK). Yang Xu, Robert
+  Boyd m.fl. vid University of Rochester har byggt en tidsgrind av en
+  submikrometertunn film av indiumtennoxid vid dess epsilon-nära-noll-
+  våglängd (~1515 nm): två 100 fs-pulser blandas i filmen så att bara de
+  fotoner som INTE spridits — de ballistiska — släpps igenom, under knappt
+  en pikosekund, och samtidigt konverteras från nära-infrarött till grönt
+  (517 nm) så att en billig kiseldetektor kan läsa av bilden.
+  Scintillationen i rörlig spridning dämpas hundrafalt. Nature Communications
+  17, 5674 (2026-03-19), DOI 10.1038/s41467-026-71039-1; preprint
+  arXiv:2503.21113 (CC BY 4.0, figurerna användbara). En andra artikel med
+  neuronnät som vidgar synfältet: Light: Science & Applications 15, 327
+  (2026-07-21), DOI 10.1038/s41377-026-02375-6. Nyhetsanslaget är
+  Rochesters pressmeddelande 2026-08-17. Utmärkta gymnasievinklar: ljusets
+  hastighet som mätverktyg, spridning, infrarött ljus, lidar i dimma.
+  OBS bild: Rochesters pressfoto kräver skriftligt tillstånd — använd
+  arXiv-figurerna eller en egen illustration. Källa:
+  https://phys.org/news/2026-08-gating-technique-deep-tissue-dense.html
+  (tillagd 2026-08-18)
+
+- **Jorden vrider rymdtiden med sig — nu mätt till en femtedels procent**
+  (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
+  ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
+  tiopotens bättre än tidigare bestämningar i solsystemet. Ungefär 200 000
+  laseravståndsmätningar under 1 050 dygn, juli 2022 till juni 2025.
+  Ciufolini m.fl., Nature 655, 332–335, publicerad online 2026-07-08,
+  DOI 10.1038/s41586-026-10715-0. Physics World lyfte den på nytt
+  2026-08-17. Perfekt gymnasievinkel: gravitation, satellitbanor,
+  ljusets gång tur och retur som linjal. Källa:
+  https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
+  (tillagd 2026-08-18)
+
 ## Fynd som inte användes (2026-08-17) — kan tas upp senare
 
 - **Publicerad 2026-08-17: gluonknuten i protonen** (STAR-samarbetet vid

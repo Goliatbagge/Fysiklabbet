@@ -1428,5 +1428,57 @@ window.BEGREPP = [
       { type: 'p', html: 'Vänder man på rollerna vänder också energiflödet. Är det i stället elektronen som far fram i nästan ljusets hastighet, och fotonen som ligger stilla och är energifattig, så är det elektronen som förlorar och fotonen som vinner. En foton av vanligt synligt ljus, eller till och med av den svaga kosmiska bakgrundsstrålningen, kan då kastas upp till röntgen- eller gammaenergier i en enda krock. Därav namnet: invers, alltså omvänd.' },
       { type: 'p', html: 'Processen är en av de vanligaste förklaringarna till varför det lyser i gamma på håll ute i universum, kring pulsarer, aktiva galaxkärnor och chockvågor efter stjärnexplosioner. Det gör den också till en irriterande dubbelgångare: gammastrålning från snabba elektroner kan se förvillande lik ut den som kommer av att protoner krockar med gas, och att avgöra vilken av processerna man ser är ett återkommande problem i högenergiastrofysiken.' }
     ]
+  },
+
+  {
+    id: 'elementarladdning',
+    term: 'Elementarladdning',
+    former: ['elementarladdning', 'elementarladdningen', 'elementarladdningar', 'elementarladdningarna'],
+    kort: 'Den minsta fria elektriska laddning som finns i naturen. All laddning man kan mäta på ett föremål är ett helt antal sådana, och elektronens och protonens laddning är precis en var.',
+    relaterade: ['kvasipartikel', 'kvant-halleffekten', 'grafen'],
+    body: [
+      { type: 'p', html: 'Elektrisk laddning går inte att dela hur fint som helst. En elektron bär en negativ laddning av en bestämd storlek, en proton en lika stor positiv, och allt laddat man kan hålla i handen har en laddning som är ett helt antal gånger den storleken. Man kan ha två, sjutton eller en miljard elementarladdningar på en ballong — men aldrig två och en halv. Storheten betecknas med bokstaven <em>e</em>.' },
+      { type: 'p', html: 'Att det förhåller sig så visades i början av 1900-talet av Robert Millikan, som lät små oljedroppar falla mellan två laddade plattor och justerade spänningen tills en droppe stod stilla i luften. Då balanserar den elektriska kraften tyngdkraften exakt, och droppens laddning går att räkna ut. När han samlat tillräckligt många droppar visade det sig att laddningarna aldrig låg hur som helst, utan alltid nära en multipel av ett och samma litet tal.' },
+      { type: 'p', html: 'Sedan 2019 är elementarladdningen inte längre någonting man mäter upp, utan ett tal som är bestämt en gång för alla: den är exakt 1,602&nbsp;176&nbsp;634&nbsp;·&nbsp;10<sup>−19</sup>&nbsp;coulomb, och det är i stället amperen som definieras utifrån den. Det finns ett känt undantag från odelbarheten: kvarkarna inuti protoner och neutroner bär en tredjedels eller två tredjedelars elementarladdning. Men en ensam kvark går inte att plocka ut, så någon fri bråkdelsladdning stöter man aldrig på.' }
+    ]
+  },
+
+  {
+    id: 'kvasipartikel',
+    term: 'Kvasipartikel',
+    former: ['kvasipartikel', 'kvasipartikeln', 'kvasipartiklar', 'kvasipartiklarna'],
+    kort: 'Ett mönster i hur väldigt många partiklar rör sig tillsammans, som beter sig precis som om det vore en egen partikel med bestämd plats, massa och laddning — fast det inte är gjort av något eget.',
+    relaterade: ['kvant-halleffekten', 'elementarladdning', 'topologiskt-skydd'],
+    body: [
+      { type: 'p', html: 'Titta på en våg som rullar över en sjö. Vågen rör sig från en strand till en annan, den har en riktning och en fart, och den kan studsa mot en klippa. Ändå färdas inget vatten med den — vattnet guppar bara upp och ner på stället. Vågen är ett mönster, inte ett ting. Det är precis den sortens sak en kvasipartikel är, fast i ett material fullt av elektroner eller atomer.' },
+      { type: 'p', html: 'Poängen med att kalla mönstret för en partikel är att räknandet blir enormt mycket enklare. Ett gram metall innehåller så många elektroner att ingen dator i världen kan hålla reda på dem var för sig. Men om deras gemensamma rörelser går att beskriva som ett fåtal kvasipartiklar som far omkring nästan oberoende av varandra, då kan man använda samma sorts fysik som för vanliga partiklar. Ljud i ett fast material behandlas till exempel som kvasipartiklar som kallas fononer, och ett hål där en elektron saknas i en halvledare behandlas som en positivt laddad partikel — det är så transistorer beskrivs.' },
+      { type: 'p', html: 'Det märkliga är att kvasipartiklar kan ha egenskaper som ingen riktig partikel har. I vissa tvådimensionella elektronsystem i starka magnetfält uppträder krusningar som bär en tredjedel av en elektrons laddning, trots att ingen elektron har delats. De kan också reagera på att byta plats med varandra på sätt som varken elektroner eller ljuspartiklar gör. Just den egenheten är det som gör dem intressanta för framtidens beräkningsmaskiner.' }
+    ]
+  },
+
+  {
+    id: 'kvant-halleffekten',
+    term: 'Kvant-Halleffekten',
+    former: ['kvant-halleffekten', 'kvant-halleffekt', 'kvanthalleffekten', 'kvanthalleffekt', 'halleffekten', 'halleffekt', 'kvant-halltillstånd', 'kvant-halltillståndet', 'fyllnadsfaktor', 'fyllnadsfaktorn'],
+    kort: 'Vad som händer när elektroner tvingas in i ett tunt skikt, kyls nästan till absoluta nollpunkten och utsätts för ett starkt magnetfält: de ordnar sig i ett stelt kvanttillstånd där resistansen antar exakta, bestämda värden.',
+    relaterade: ['kvasipartikel', 'elementarladdning', 'grafen', 'tunneleffekt'],
+    body: [
+      { type: 'p', html: 'Skickar man en ström genom en metallplatta och lägger ett magnetfält vinkelrätt mot plattan trycks laddningarna åt sidan, så att det uppstår en spänning tvärs över strömriktningen. Det är den vanliga Halleffekten, känd sedan 1879, och den spänningen växer jämnt när magnetfältet ökar. Så ser det ut i vardagen.' },
+      { type: 'p', html: 'Klaus von Klitzing upptäckte 1980 att det slutar se ut så under extrema förhållanden. Är elektronerna instängda i ett skikt så tunt att de bara kan röra sig i två riktningar, är temperaturen nära absoluta nollpunkten och magnetfältet mycket starkt, växer spänningen inte längre jämnt. Den hoppar mellan platåer och står helt still däremellan. På varje platå har resistansen ett värde som bara beror på två naturkonstanter och ett heltal — inte på materialet, inte på provbitens form och inte på hur noggrant någon tillverkat den. Exaktheten är så stor att effekten används som världens normal för elektrisk resistans.' },
+      { type: 'p', html: 'Två år senare hittades platåer som svarade mot bråktal i stället för heltal, och det var en långt större överraskning: den varianten går inte att förklara med elektroner som rör sig var för sig, utan bara med att alla elektroner låser sig i ett gemensamt tillstånd. Talet som säger vilket tillstånd systemet hamnat i kallas fyllnadsfaktor. I de tillstånd där fyllnadsfaktorn är ett bråk uppstår krusningar som bär bråkdelar av en elektronladdning, och både heltalsvarianten och bråkvarianten har belönats med varsitt Nobelpris i fysik, 1985 respektive 1998.' }
+    ]
+  },
+
+  {
+    id: 'grafen',
+    term: 'Grafen',
+    former: ['grafen', 'grafenet', 'tvålagersgrafen', 'grafenskikt', 'grafenskiktet', 'grafenlager', 'grafenlagret'],
+    kort: 'Ett enda lager kolatomer, ordnade i ett honungskaksmönster. Det är det tunnaste material som går att tillverka — en atom tjockt — och samtidigt ett av de starkaste och mest elektriskt ledande.',
+    relaterade: ['kvant-halleffekten', 'kvasipartikel', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Grafit, alltså det svarta i en blyertspenna, består av tunna skivor kolatomer som ligger löst staplade på varandra. Att skivorna glider isär är hela anledningen till att en penna lämnar ett streck på papperet. Ett enda sådant skikt, en atom tjockt, kallas grafen. Atomerna sitter i ett sexkantigt mönster som ser ut som ett honungskakemönster eller ett hönsnät.' },
+      { type: 'p', html: 'Länge trodde man att ett material som var en atom tjockt omöjligen kunde vara stabilt — det borde vecka ihop sig. År 2004 visade Andre Geim och Konstantin Novoselov att det gick, med en metod som är närmast pinsamt enkel: de tryckte en bit tejp mot en grafitbit och drog av, om och om igen, tills bara ett enda lager satt kvar. Sex år senare fick de Nobelpriset i fysik för upptäckten.' },
+      { type: 'p', html: 'Egenskaperna är extrema åt flera håll samtidigt. Grafen är starkare än stål i förhållande till sin vikt, leder ström och värme utmärkt och är nästan genomskinligt. För fysiker är det dessutom en ovanligt ren lekplats: elektronerna kan bara röra sig i två riktningar, de rör sig ovanligt obehindrat, och lägger man två lager på varandra går materialets egenskaper att styra med en pålagd spänning. Därför används grafen ofta som provbit när man vill studera hur elektroner beter sig kollektivt.' }
+    ]
   }
 ];

@@ -27,6 +27,34 @@
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <style>
+        /* ── Följ oss-notis (Facebook + Instagram) ─────────────────────
+           Tidsbegränsad nyhetsruta — visas t.o.m. 2026-09-17 (en månad),
+           därefter renderas den inte alls (datumgrind i SocialNotis).
+           Ta bort komponenten + denna CSS vid tillfälle efter det. */
+        .home-social {
+            display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+            border: 1px solid var(--lab-line-strong); border-left: 3px solid var(--lab-accent);
+            border-radius: 6px; background: var(--lab-bg-panel);
+            padding: 14px 18px; margin-top: 6px;
+        }
+        .home-social-etikett {
+            font-family: var(--lab-font-mono); font-size: 9.5px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #fff; background: var(--lab-accent);
+            padding: 5px 9px; border-radius: 2px; flex-shrink: 0;
+        }
+        .home-social-text { font-size: 14.5px; line-height: 1.5; color: var(--lab-ink-soft); margin: 0; flex: 1 1 260px; }
+        .home-social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .home-social-links a {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-ink); text-decoration: none;
+            border: 1px solid var(--lab-line-strong); border-radius: 4px;
+            padding: 8px 12px; background: var(--lab-bg-raised);
+            transition: border-color 160ms ease, color 160ms ease;
+        }
+        .home-social-links a:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+        .home-social-links svg { flex-shrink: 0; }
+
         /* ── Senaste nyheten (teaser på startsidan) ────────────────── */
         .home-news { margin-top: 6px; }
         /* Sektionsbyline: står ALLRA överst i nyhetssektionen, före
@@ -400,6 +428,43 @@
             );
         }
 
+        // Tidsbegränsad notis: Fysiklabbet finns nu på Facebook och Instagram.
+        // Visas t.o.m. 2026-09-17 (en månad från publiceringen 2026-08-18) —
+        // därefter renderar komponenten ingenting och kan tas bort ur koden
+        // tillsammans med .home-social-CSS:en i <style> ovan.
+        function SocialNotis() {
+            const idag = new Date();
+            const sista = new Date(2026, 8, 18); // 18 september 2026 (månad 8 = september)
+            if (idag >= sista) return null;
+            return (
+                <section className="lab-section">
+                    <div className="home-social">
+                        <span className="home-social-etikett">Nytt</span>
+                        <p className="home-social-text">
+                            Nu går det att följa Fysiklabbet på Facebook och Instagram —
+                            dagliga fysiknyheter och nya simuleringar direkt i flödet.
+                        </p>
+                        <div className="home-social-links">
+                            <a href="https://www.facebook.com/fysiklabbet" target="_blank" rel="noopener">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M13.5 21.5v-8.3h2.8l.4-3.2h-3.2V8c0-.9.3-1.6 1.6-1.6h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3.2h2.8v8.3h3.4z"/>
+                                </svg>
+                                Facebook
+                            </a>
+                            <a href="https://www.instagram.com/fysiklabbet" target="_blank" rel="noopener">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                                    <circle cx="12" cy="12" r="4.2"/>
+                                    <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+                                </svg>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
         function NewsTeaser() {
             const latest = NYHETER[0];
             if (!latest) return null;
@@ -556,6 +621,7 @@
                     <UnderUtveckling />
                     <Header />
                     <WelcomeHero />
+                    <SocialNotis />
                     <NewsTeaser />
                     <NyhetsbrevRuta />
                     <Updates />

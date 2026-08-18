@@ -1566,12 +1566,17 @@ de ska inte behöva påpekas av användaren:
    kropp som borde rotera. Räkna, gissa aldrig:
    - **Motriktade lika stora krafter (`F_N`/`F_G`, `F`/`F_N` mot vägg) ska
      ligga på SAMMA verkningslinje** — annars bildar de ett kraftpar.
-     Förskjut ALDRIG `F_N` i sidled för att särskilja den från `F_G` (den
-     gamla anvisningen om det är upphävd — den gav ett synligt kraftpar och
-     påpekades av en besökare). Läsbarheten löses genom att skaften ritas
-     precis INTILL varandra på verkningslinjen (centrum ≈ en skaftbredd
-     isär, ~4 px vid bredd 3,6) med pilspetsarna åt var sitt håll —
-     referens: bordsfiguren i `fy1-3.4.md`.
+     Förskjut inte `F_N` i sidled för att särskilja den från `F_G` — det
+     gav ett synligt kraftpar och påpekades av en besökare. Läsbarheten
+     löses i första hand genom att skaften ritas precis INTILL varandra på
+     verkningslinjen (centrum ≈ en skaftbredd isär, ~4 px vid bredd 3,6)
+     med pilspetsarna åt var sitt håll.
+     **Sanktionerat undantag (användarbeslut 2026-08-18):** i 3D-/sned-
+     projektion där tyngdpunkten ligger inne i kroppen (t.ex. bordsfiguren
+     i `fy1-3.4.md`) får en liten sidledsförskjutning behållas när
+     intill-varandra-ritningen blir för tät och svårläst — läsbarheten går
+     då före. I platta 2D-figurer gäller samma verkningslinje utan undantag
+     (referens: väggfiguren i `fy1-3.4.md`).
    - **Hävstångsgeometrier (bom, gungbräda, spett) ritas så att momenten
      kring vridpunkten/stödet faktiskt balanserar**: räkna F·l för varje
      kraft kring stödet och välj x-koordinaterna så att summorna blir lika

@@ -183,6 +183,16 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 - **Glimten i ögat är tillåten — sparsamt.** Max en–två lättsamma formuleringar per
   artikel, och aldrig på bekostnad av sakligheten. Humorn får krydda, inte styra.
   Om du tvekar: stryk skämtet.
+- **Ge inte döda ting ett uppsåt — och använd ALDRIG verbet ”förråda”.**
+  Ett brus, en gas eller ett instrument har ingen vilja och inget att dölja:
+  ”bruset förråder laddningen”, ”gasen förrådde protonerna” läser som
+  angiveri i stället för som fysik. (Ordet är inte en anglicism, men det bär
+  alltid en avsikt.) Skriv **avslöjar, visar, röjer, pekar ut, vittnar om**.
+  Samma fälla i annan form: lägg inte mänskliga egenskaper på utrustningen —
+  ”tålamodskrävande apparatur” ska vara ”känsliga instrument och gott om
+  tålamod”. Gå igenom artikeln och fråga vid varje verb med ett dött ting som
+  subjekt: kräver det här ett uppsåt? Då ska verbet bytas. Substantivet
+  *förråd* (bränsleförråd, ordförråd) berörs inte.
 - **Längd:** ca 350–600 ord. Mellanrubriker (`h2`) som delar upp texten.
   Avsluta gärna med en faktaruta ("Visste du?") eller en blick framåt.
 - **Källa anges ALLTID** i `sources` (minst en). **Direktlänk till

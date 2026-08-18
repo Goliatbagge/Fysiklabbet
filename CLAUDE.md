@@ -2050,6 +2050,27 @@ läsning**: KaTeX måste se råtexten först, och både `begrepp-lank.js` och
 `applyBionic` hoppar över `.katex` (spann inuti en formel slår sönder
 sättningen). **Rör inte den ordningen eller katex-undantagen.**
 
+## Ordval i nyhetsartiklar: ge inte döda ting ett uppsåt
+
+**Verbet ”förråda” får aldrig användas i artiklarna** (uttryckligt önskemål
+2026-08-18). Ett brus, en gas eller ett mätinstrument har ingen vilja och
+inget att dölja — ”bruset förråder hur stor laddningen är” och ”gasen
+förrådde protonerna” läser som angiveri i stället för som fysik. (Ordet är
+inte en anglicism; *förråda* i betydelsen röja är gammal svenska. Men det
+bär alltid en avsikt, och därför personifierar det.)
+
+Skriv i stället **avslöjar, visar, röjer, pekar ut, vittnar om** — eller
+formulera om så att egenskapen hamnar hos den som mäter.
+
+Samma fälla i annan form: **egenskaper som bara en människa kan ha ska inte
+läggas på utrustningen.** ”Tålamodskrävande apparatur” säger att apparaten
+har tålamod; rätt är ”känsliga instrument och gott om tålamod”. Gå igenom
+den färdiga artikeln och fråga vid varje verb med ett dött ting som subjekt:
+kräver det här ett uppsåt? Då ska verbet bytas.
+
+Substantivet **förråd** (bränsleförråd, ordförråd, värmeförråd) berörs
+förstås inte — regeln gäller verbet.
+
 ## Begreppsordlista
 
 Nyhetsartiklarna innehåller ofta facktermer som ligger över gymnasienivå

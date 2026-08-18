@@ -26329,8 +26329,10 @@
     T.line([140, sy], [400, sy]);
     T.hatch([140, sy], [400, sy], 11);
     T.line([sx, sy], [sx, 150]);
-    T.line([sx - 8, 150], [sx + 130, 150]);    /* bommen */
-    T.rect(sx - 60, 138, sx - 20, 162);        /* motvikten */
+    /* Momentjämvikt kring stolpen: motvikten (24 kg) på halva avståndet
+       mot bommens tyngdpunkt (12 kg) — armar 30 respektive 60 px. */
+    T.line([sx - 30, 150], [sx + 150, 150]);   /* bommen, mitt i sx+60 */
+    T.rect(sx - 50, 138, sx - 10, 162);        /* motvikten vid bomänden */
     T.stepEnd();
 
     T.tanke(T.figurBubble(292, [

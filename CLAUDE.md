@@ -1557,8 +1557,28 @@ de ska inte behöva påpekas av användaren:
    på fel kropp. Lägg pilen så att huvudet pekar in i/ligger på objektet.
 2. **Tyngdkraften `F_G` ritas ALLTID från tyngdpunkten** (kroppens mitt),
    aldrig sidoförskjuten. Markera tyngdpunkten med en liten ifylld prick
-   (`<circle r="2.6">`) vid pilens svans. Behöver `F_N` särskiljas från `F_G`
-   på vågrätt underlag → förskjut **`F_N`** i sidled, inte `F_G`.
+   (`<circle r="2.6">`) vid pilens svans. OBS: i sned-/3D-projektion
+   projiceras tyngdpunkten till frontytans mitt + halva djupvektorn — inte
+   till frontytans mitt.
+2b. **VRIDMOMENTSKONTROLL — Στ = 0 i varje jämviktsfigur (kontrollregel,
+   infördes efter besökarpåpekande 2026-08-18).** En kropp som ritas i vila
+   får inte ha krafter som ger ett nettovridmoment — då visar figuren en
+   kropp som borde rotera. Räkna, gissa aldrig:
+   - **Motriktade lika stora krafter (`F_N`/`F_G`, `F`/`F_N` mot vägg) ska
+     ligga på SAMMA verkningslinje** — annars bildar de ett kraftpar.
+     Förskjut ALDRIG `F_N` i sidled för att särskilja den från `F_G` (den
+     gamla anvisningen om det är upphävd — den gav ett synligt kraftpar och
+     påpekades av en besökare). Läsbarheten löses genom att skaften ritas
+     precis INTILL varandra på verkningslinjen (centrum ≈ en skaftbredd
+     isär, ~4 px vid bredd 3,6) med pilspetsarna åt var sitt håll —
+     referens: bordsfiguren i `fy1-3.4.md`.
+   - **Hävstångsgeometrier (bom, gungbräda, spett) ritas så att momenten
+     kring vridpunkten/stödet faktiskt balanserar**: räkna F·l för varje
+     kraft kring stödet och välj x-koordinaterna så att summorna blir lika
+     (dubbelt så stor kraft → halva hävarmen, exakt). Referens: bom-figuren
+     i `fy1-3.4.md` (armar 47/94 px för krafter 2:1).
+   - Kontrollen gäller överallt: teori-figurer, övningsfigurer,
+     simuleringsscener och pennlösningarnas skisser i `handskrift.js`.
 3. **SKALENLIGA KRAFTVEKTORER — pilens längd ∝ kraftens belopp (viktig
    princip, upprepat påpekad).** Rita ALDRIG alla kraftpilar "lagom långa".
    Räkna ut beloppen, välj en skala (px per N) som rymmer alla pilar, och
@@ -1812,8 +1832,11 @@ Vid varje skärmdumpsgranskning, kontrollera **systematiskt**:
    scenbakgrund** — kontrollera att texter och pilar inte har en suddig vit
    gloria runt sig (se "⛔ FÖRBJUDET: vit kontur/halo..." ovan). Kör även
    `node .claude/verify-no-white-outline.js`.
+8. **Στ = 0 i jämviktsfigurer** — motriktade lika stora krafter på samma
+   verkningslinje, hävarmar som balanserar momenten numeriskt (se
+   "Vridmomentskontroll" punkt 2b under Kraftfigurer).
 
-Markera först som klart när skärmdumpen passerar alla sju kontroller.
+Markera först som klart när skärmdumpen passerar alla åtta kontroller.
 
 ## Fysikämnen
 

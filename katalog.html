@@ -1150,16 +1150,25 @@
                         blocks.push(el);
                         for (const c of subs) {
                             c.classList.add('pres-sub');
+                            const prev = steps[steps.length - 1];
+                            // Uppgiftens figur (::: figur direkt i exempel-
+                            // rutan) hör till SAMMA steg som frågestammen —
+                            // eleven ska se figuren samtidigt som uppgiften,
+                            // inte ett klick senare.
+                            if (c.classList.contains('lab-block-figur') &&
+                                prev && prev.block === el) {
+                                (prev.twins || (prev.twins = [])).push(c);
+                                continue;
+                            }
                             // Textlösningen är en alternativ vy av handskrift-
                             // lösningen (växeln "Med penna"/"Som text") — den
                             // hör till SAMMA steg som widgeten, inte ett eget
                             // (annars blir det ett tomt klick i det dolda läget).
-                            const prev = steps[steps.length - 1];
                             if (c.classList.contains('lab-block-textlosning') &&
                                 c.previousElementSibling &&
                                 c.previousElementSibling.classList.contains('lab-handskrift') &&
                                 prev && prev.el === c.previousElementSibling) {
-                                prev.twin = c;
+                                (prev.twins || (prev.twins = [])).push(c);
                                 continue;
                             }
                             steps.push({ el: c, block: el });
@@ -1292,9 +1301,9 @@
                     // Tvilling (textlösningen till en handskrift-widget) följer
                     // sitt steg — vilken av dem som faktiskt syns styrs av
                     // växeln "Med penna"/"Som text" (inline display).
-                    if (st.twin) {
-                        st.twin.classList.toggle('is-on', i < step);
-                        st.twin.classList.toggle('is-current', i === step - 1);
+                    if (st.twins) for (const tw of st.twins) {
+                        tw.classList.toggle('is-on', i < step);
+                        tw.classList.toggle('is-current', i === step - 1);
                     }
                 });
                 blocksRef.current.forEach(b => {

@@ -1,6 +1,7 @@
 # Kör det dagliga Instagram-jobbet: startar en headless Claude Code-session
-# som följer .claude/commands/ig-daglig.md (dagens fysiknyhet + ev.
-# lanseringsinlägg på Fysiklabbets Instagram-konto).
+# som följer .claude/commands/ig-daglig.md (dagens fysiknyhet på
+# Fysiklabbets Instagram-konto; lanseringsinlägg sköts av
+# eftermiddagsjobbet ig-lansering.ps1 kl 13:18).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Instagram-inlagg"
 # (07:48 varje dag, efter Facebook-jobbet; endast när användaren är

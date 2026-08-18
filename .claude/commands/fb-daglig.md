@@ -2,14 +2,19 @@
 
 Du sköter Facebook-sidan **Fysiklabbet** (facebook.com/fysiklabbet).
 Uppdraget körs varje morgon av en schemalagd uppgift och ska klara sig
-helt utan människa. Två jobb: (1) posta dagens fysiknyhet, (2) posta om
-större lanseringar på sajten när sådana skett.
+helt utan människa. Ett jobb: posta dagens fysiknyhet.
+
+**Lanseringsinlägg om sajten görs INTE här** — de sköts av
+eftermiddagsjobbet `.claude/commands/fb-lansering.md` (kl 13:03), så att
+nyheten får ligga överst på sidan hela förmiddagen i stället för att
+puttas ner direkt (uttryckligt önskemål 2026-08-18). Gör alltså ingen
+lanseringskoll i den här körningen.
 
 ## 0. Läs loggen först
 
 Läs `.claude/facebook/logg.md`. Om dagens datum redan har en rad med
-`nyhet: postad` → hoppa över steg 1–3 (kör ändå steg 4). Loggen är enda
-skyddet mot dubbelpostning — uppdatera den ALLTID innan du avslutar.
+`nyhet: postad` → avsluta utan att posta. Loggen är enda skyddet mot
+dubbelpostning — uppdatera den ALLTID innan du avslutar.
 
 ## 1. Hämta dagens nyhet
 
@@ -17,7 +22,7 @@ Dagens artikel ligger i `data/nyheter.js`: posten vars `date` är dagens
 datum (`YYYY-MM-DD`). Läs `title`, `deck`, `id` och gärna inledningen av
 `body` för att förstå innehållet. Datumgrindning: en artikel med dagens
 datum är publik. Finns ingen artikel för i dag → logga `nyhet: ingen
-artikel i dag` och gå till steg 4.
+artikel i dag` och avsluta.
 
 ## 2. Skriv inlägget
 
@@ -54,41 +59,11 @@ artikel i dag` och gå till steg 4.
 7. Verifiera med skärmdump att inlägget ligger överst på sidan ("Alldeles
    nyss"). Först då räknas det som postat.
 
-## 4. Lanseringskoll (större nyheter)
+## 4. Uppdatera loggen
 
-Loggen har en rad `senaste lanseringskoll: <commit-sha>`. Kör
-`git log <sha>..HEAD --oneline` och leta commits som lanserar något
-användarsynligt: ny simulering, ny minisim, nytt teoriavsnitt/kurs, ny
-funktion på sajten (sökning, uppläsning, ordlista, repetitionspaket …).
-Rena rättelser, refaktoreringar, dagliga nyhetsartiklar och verifierare
-räknas INTE.
-
-- Finns en sådan lansering som inte redan postats: gör **ETT** extra
-  inlägg (max ett lanseringsinlägg per dag; är det flera — ta den
-  största, resten väntar till kommande dagar och ska då fortfarande
-  fångas av loggens sha-pekare, så flytta bara fram pekaren förbi det
-  du faktiskt postat om).
-- Tonalitet som i steg 2. Beskriv vad man kan GÖRA i det nya
-  ("dra i reglaget och se …"), länka till rätt sida på sajten
-  (t.ex. `https://fysiklabbet.se/fysik2-skiftnyckel-app.html` eller
-  `https://fysiklabbet.se/katalog.html?id=fy2-1.1`).
-- Publicera enligt steg 3 och logga.
-
-## 5. Uppdatera loggen
-
-Lägg till dagens rader i `.claude/facebook/logg.md` (formatet står i
-filen). Uppdatera `senaste lanseringskoll:`-raden. Committa INTE loggen —
-den är lokal arbetsdata.
-
-## Samarbete med nyhetsbrevsagenten
-
-Nyhetsbrevsagenten (`.claude/agents/nyhetsbrev.md`) skriver veckobrevet och
-lägger sina bilder i `nyheter/brev/` — ofta fina skärmdumpar av
-simuleringar i talande tillstånd. **Innan du själv tar en skärmdump för
-ett lanseringsinlägg: kolla om en passande bild redan finns i
-`nyheter/brev/`** (t.ex. `2026-08-16-solformorkelse-totalitet.jpg`
-återanvändes så). Notera i loggen vilken bild du använt — nyhetsbrevs-
-agenten läser din logg åt andra hållet för att se vad som redan lyfts.
+Lägg till dagens `nyhet:`-rad i `.claude/facebook/logg.md` (formatet
+står i filen). Rör INTE `senaste lanseringskoll:`-raden — den sköts av
+eftermiddagsjobbet. Committa INTE loggen — den är lokal arbetsdata.
 
 ## Säkerhetsregler (absoluta)
 
@@ -96,7 +71,7 @@ agenten läser din logg åt andra hållet för att se vad som redan lyfts.
   eller följ ingenting. Skicka inga meddelanden. Svara inte på
   kommentarer. Ändra inga sid- eller kontoinställningar. Bjud inte in
   någon. Starta inga annonser/boostar (klicka aldrig "Boosta inlägg").
-- Max två inlägg per körning (en nyhet + en lansering).
+- Max ETT inlägg per körning (dagens nyhet).
 - Om något ser oväntat ut (dialog du inte känner igen, varning från
   Facebook, fel språk/layout) → avbryt utan att posta och skriv i loggen
   vad som hände. Ett uteblivet inlägg är ofarligt; ett felaktigt är det

@@ -1,7 +1,13 @@
-# Vakt för de dagliga sociala medie-jobben (Facebook 07:33, Instagram 07:48):
-# kontrollerar att dagens inlägg faktiskt loggats i .claude/facebook/logg.md,
+# Vakt för de dagliga sociala medie-jobben — nyhetsinläggen på morgonen
+# (Facebook 07:33, Instagram 07:48) och lanseringsjobben på eftermiddagen
+# (Facebook 13:03, Instagram 13:18; lanseringar postas medvetet senare än
+# nyheten så att den inte puttas ner, önskemål 2026-08-18):
+# kontrollerar att dagens rader faktiskt loggats i .claude/facebook/logg.md,
 # kör annars om jobben (riskfritt — jobben läser samma logg och hoppar själva
 # över det som redan postats) och LARMAR om det fortfarande saknas efteråt.
+# Lanseringsjobben kontrolleras först från 13:30 (14:00-triggern) — före dess
+# har de inte haft sin chans. Ett lanseringsjobb är "klart" även när det
+# loggat att ingen lansering fanns; det som bevakas är att KÖRNINGEN skett.
 # Bakgrund: 2026-08-17 uteblev både Facebook- och Instagram-inlägget utan att
 # någon märkte det förrän på eftermiddagen — BOSGAME står på dygnet runt, så
 # en miss beror på något ihållande (utloggad session efter Windows-uppdatering,
@@ -62,17 +68,32 @@ function DagensSektion {
 #      Samma nyckelord som agenternas eget dubbelpostningsskydd använder.
 #   2. Lanseringsrader ("lansering: postad …", "ig-lansering: postad …") får
 #      INTE räknas som dagens nyhetsinlägg — därför ankras prefixen till
-#      radens början: "nyhet:" för Facebook, "ig-nyhet:" för Instagram.
+#      radens början: "nyhet:" för Facebook, "ig-nyhet:" för Instagram,
+#      "lansering:"/"ig-lansering:" för eftermiddagsjobben.
+# Godkända statusar per jobb (fälla 1 gäller alla — kräv ett positivt ord):
+#   nyhet/ig-nyhet:        "postad" eller "ingen artikel"
+#   lansering/ig-lansering: "postad", eller "ingen" DIREKT efter kolonet
+#                          ("lansering: ingen ny lansering") — ett FEL-
+#                          meddelande som råkar innehålla ordet "ingen"
+#                          ("FEL … ingen Chrome") ska inte räknas som klart.
 function JobbStatus {
-    $fb = $false
-    $ig = $false
+    $fb  = $false
+    $ig  = $false
+    $fbL = $false
+    $igL = $false
     foreach ($rad in (DagensSektion)) {
         $r = $rad.Trim()
-        if (($r -notmatch '(?i)postad') -and ($r -notmatch '(?i)ingen artikel')) { continue }
-        if     ($r -match '(?i)^ig-?nyhet\s*:') { $ig = $true }
-        elseif ($r -match '(?i)^nyhet\s*:')     { $fb = $true }
+        if ($r -match '(?i)^ig-lansering\s*:') {
+            if ($r -match '(?i)postad' -or $r -match '(?i)^ig-lansering\s*:\s*ingen') { $igL = $true }
+        } elseif ($r -match '(?i)^lansering\s*:') {
+            if ($r -match '(?i)postad' -or $r -match '(?i)^lansering\s*:\s*ingen') { $fbL = $true }
+        } elseif ($r -match '(?i)^ig-?nyhet\s*:') {
+            if ($r -match '(?i)postad' -or $r -match '(?i)ingen artikel') { $ig = $true }
+        } elseif ($r -match '(?i)^nyhet\s*:') {
+            if ($r -match '(?i)postad' -or $r -match '(?i)ingen artikel') { $fb = $true }
+        }
     }
-    [pscustomobject]@{ fb = $fb; ig = $ig }
+    [pscustomobject]@{ fb = $fb; ig = $ig; fbL = $fbL; igL = $igL }
 }
 
 # Skydd mot dubbelkörning: om jobbets körlogg har en "startar"-rad utan
@@ -127,25 +148,32 @@ if ((Get-Date).TimeOfDay -lt [timespan]'08:00') {
     exit 0
 }
 
+# Jobben som bevakas. Lanseringsjobben (13:03/13:18) tas med först från
+# 13:30 — före dess har de inte haft sin chans, och 09:30-triggern ska
+# inte köra dem i förtid (då postades lanseringen på förmiddagen igen,
+# precis det schemaflytten skulle bort från).
+$jobb = @(
+    @{ namn = 'Facebook-nyhet';  falt = 'fb'; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log'; kommando = '/fb-daglig' }
+    @{ namn = 'Instagram-nyhet'; falt = 'ig'; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log'; kommando = '/ig-daglig' }
+)
+if ((Get-Date).TimeOfDay -ge [timespan]'13:30') {
+    $jobb += @{ namn = 'Facebook-lansering';  falt = 'fbL'; skript = 'fb-lansering.ps1'; logg = 'fb-lansering.log'; kommando = '/fb-lansering' }
+    $jobb += @{ namn = 'Instagram-lansering'; falt = 'igL'; skript = 'ig-lansering.ps1'; logg = 'ig-lansering.log'; kommando = '/ig-lansering' }
+}
+
 $status = JobbStatus
-if ($status.fb -and $status.ig) {
-    Logga 'Facebook och Instagram är loggade för i dag - allt väl.'
+$olosta = @($jobb | Where-Object { -not $status.($_.falt) })
+if ($olosta.Count -eq 0) {
+    Logga "Alla bevakade jobb ($(($jobb | ForEach-Object { $_.namn }) -join ', ')) är loggade för i dag - allt väl."
     if (Test-Path $larmFil) { Remove-Item $larmFil; Logga 'Larmfilen rensad.' }
     exit 0
 }
 
 # Något saknas — kör om de jobb som inte är loggade (om de inte redan kör).
-$jobb = @(
-    @{ namn = 'Facebook';  klart = $status.fb; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log' }
-    @{ namn = 'Instagram'; klart = $status.ig; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log' }
-)
-$vantarPaKorning = $false
-foreach ($j in $jobb) {
-    if ($j.klart) { continue }
+foreach ($j in $olosta) {
     $jobbLogg = Join-Path $logDir $j.logg
     if (JobbetKorJustNu $jobbLogg) {
         Logga "$($j.namn)-jobbet verkar köra just nu - avvaktar till nästa kontroll."
-        $vantarPaKorning = $true
         continue
     }
     $skript = Join-Path $PSScriptRoot $j.skript
@@ -156,24 +184,26 @@ foreach ($j in $jobb) {
 
 # Kontrollera igen efter omkörningarna.
 $status = JobbStatus
-if ($status.fb -and $status.ig) {
+$olosta = @($jobb | Where-Object { -not $status.($_.falt) })
+if ($olosta.Count -eq 0) {
     Logga 'Omkörningen löste det - allt postat/loggat nu.'
     if (Test-Path $larmFil) { Remove-Item $larmFil; Logga 'Larmfilen rensad.' }
     exit 0
 }
-if ($vantarPaKorning -and (($status.fb -or (JobbetKorJustNu (Join-Path $logDir 'fb-daglig.log'))) -and
-                           ($status.ig -or (JobbetKorJustNu (Join-Path $logDir 'ig-daglig.log'))))) {
+$pagaende = @($olosta | Where-Object { JobbetKorJustNu (Join-Path $logDir $_.logg) })
+if ($pagaende.Count -eq $olosta.Count) {
     Logga 'Jobb pågår fortfarande - inget larm, nästa trigger följer upp.'
     exit 0
 }
 
 # Fortfarande inte klart — larma.
-$saknas = @()
-if (-not $status.fb) { $saknas += 'Facebook' }
-if (-not $status.ig) { $saknas += 'Instagram' }
-$vad = $saknas -join ' och '
+$vad = ($olosta | ForEach-Object { $_.namn }) -join ' och '
 Logga "LARM: $vad saknar dagens rad även efter omkörning."
 
+$kommandon  = ($olosta | ForEach-Object { "claude -p '$($_.kommando)'" }) -join '  respektive  '
+$loggUtdrag = ($olosta | ForEach-Object {
+    "=== slutet av $($_.logg) ===`r`n$(SistaRaderna (Join-Path $logDir $_.logg))"
+}) -join "`r`n`r`n"
 $stamp = Get-Date -Format 'yyyy-MM-dd HH:mm'
 @"
 LARM $stamp — dagens inlägg saknas: $vad
@@ -184,15 +214,11 @@ inte inloggad på Facebook/Instagram som Fysiklabbet, eller claude.exe
 som inte hittas efter en uppdatering.
 
 Felsök: läs sluten på körloggarna nedan, kör sedan jobbet för hand i
-C:\claude\Fysiklabbet med  claude -p '/fb-daglig'  respektive  '/ig-daglig'.
+C:\claude\Fysiklabbet med  $kommandon.
 Den här filen raderas automatiskt av vakten när allt är postat igen.
 
-=== slutet av fb-daglig.log ===
-$(SistaRaderna (Join-Path $logDir 'fb-daglig.log'))
-
-=== slutet av ig-daglig.log ===
-$(SistaRaderna (Join-Path $logDir 'ig-daglig.log'))
+$loggUtdrag
 "@ | Set-Content -Path $larmFil -Encoding utf8
 
-VisaNotis 'Fysiklabbet: inlägg saknas!' "Dagens $vad-inlägg är inte postat trots omkörning. Se SOME-LARM.txt i .claude\server\logg."
+VisaNotis 'Fysiklabbet: inlägg saknas!' "Dagens $vad är inte postat/loggat trots omkörning. Se SOME-LARM.txt i .claude\server\logg."
 exit 1

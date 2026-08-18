@@ -1,21 +1,20 @@
-# Kör det dagliga Facebook-jobbet: startar en headless Claude Code-session
-# som följer .claude/commands/fb-daglig.md (dagens fysiknyhet på sidan
-# facebook.com/fysiklabbet; lanseringsinlägg sköts av eftermiddagsjobbet
-# fb-lansering.ps1 kl 13:03).
+# Kör Facebook-lanseringsjobbet: startar en headless Claude Code-session
+# som följer .claude/commands/fb-lansering.md (ev. inlägg om större
+# lanseringar på sajten, på sidan facebook.com/fysiklabbet).
 #
-# Körs av den schemalagda uppgiften "Fysiklabbet Facebook-inlagg"
-# (07:33 varje dag, endast när användaren är inloggad — Chrome med
+# Körs av den schemalagda uppgiften "Fysiklabbet Facebook-lansering"
+# (13:03 varje dag, endast när användaren är inloggad — Chrome med
 # Claude-utökningen måste finnas i den interaktiva sessionen).
-# Registrering: se installera-fb-task.ps1 i samma mapp.
+# Registrering: se installera-lansering-tasks.ps1 i samma mapp.
 #
-# Behörigheter: sessionen får ENDAST de verktyg som räknas upp i
-# --allowedTools nedan (webbläsarverktygen, läsning, git log samt
-# skrivning av loggfilen). Ingen generell bypass.
+# Jobbet ligger medvetet på eftermiddagen: morgonjobbet fb-daglig.ps1
+# (07:33) postar dagens fysiknyhet, och ett lanseringsinlägg direkt
+# efter puttade tidigare ner nyheten från sidans topp.
 
 $ErrorActionPreference = 'Continue'
 $repo   = 'C:\claude\Fysiklabbet'
 $logDir = Join-Path $repo '.claude\server\logg'
-$logFil = Join-Path $logDir 'fb-daglig.log'
+$logFil = Join-Path $logDir 'fb-lansering.log'
 if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Force $logDir | Out-Null }
 
 function Logga($txt) {
@@ -23,7 +22,7 @@ function Logga($txt) {
     Add-Content -Path $logFil -Value "[$stamp] $txt" -Encoding utf8
 }
 
-Logga '--- fb-daglig startar ---'
+Logga '--- fb-lansering startar ---'
 
 # Chrome måste vara igång för att Claude-in-Chrome-utökningen ska svara.
 if (-not (Get-Process chrome -ErrorAction SilentlyContinue)) {
@@ -50,7 +49,7 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
-$ut = & $claude -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
+$ut = & $claude -p '/fb-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- fb-daglig klar (exit $LASTEXITCODE) ---"
+Logga "--- fb-lansering klar (exit $LASTEXITCODE) ---"
 exit $LASTEXITCODE

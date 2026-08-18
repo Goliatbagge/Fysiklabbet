@@ -1,21 +1,16 @@
-# Kör det dagliga Facebook-jobbet: startar en headless Claude Code-session
-# som följer .claude/commands/fb-daglig.md (dagens fysiknyhet på sidan
-# facebook.com/fysiklabbet; lanseringsinlägg sköts av eftermiddagsjobbet
-# fb-lansering.ps1 kl 13:03).
+# Kör Instagram-lanseringsjobbet: startar en headless Claude Code-session
+# som följer .claude/commands/ig-lansering.md (Instagram-versionen av det
+# lanseringsinlägg Facebook-jobbet postat i dag, om något).
 #
-# Körs av den schemalagda uppgiften "Fysiklabbet Facebook-inlagg"
-# (07:33 varje dag, endast när användaren är inloggad — Chrome med
-# Claude-utökningen måste finnas i den interaktiva sessionen).
-# Registrering: se installera-fb-task.ps1 i samma mapp.
-#
-# Behörigheter: sessionen får ENDAST de verktyg som räknas upp i
-# --allowedTools nedan (webbläsarverktygen, läsning, git log samt
-# skrivning av loggfilen). Ingen generell bypass.
+# Körs av den schemalagda uppgiften "Fysiklabbet Instagram-lansering"
+# (13:18 varje dag, efter Facebook-lanseringsjobbet 13:03; endast när
+# användaren är inloggad — Chrome med Claude-utökningen krävs).
+# Registrering: se installera-lansering-tasks.ps1 i samma mapp.
 
 $ErrorActionPreference = 'Continue'
 $repo   = 'C:\claude\Fysiklabbet'
 $logDir = Join-Path $repo '.claude\server\logg'
-$logFil = Join-Path $logDir 'fb-daglig.log'
+$logFil = Join-Path $logDir 'ig-lansering.log'
 if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Force $logDir | Out-Null }
 
 function Logga($txt) {
@@ -23,9 +18,8 @@ function Logga($txt) {
     Add-Content -Path $logFil -Value "[$stamp] $txt" -Encoding utf8
 }
 
-Logga '--- fb-daglig startar ---'
+Logga '--- ig-lansering startar ---'
 
-# Chrome måste vara igång för att Claude-in-Chrome-utökningen ska svara.
 if (-not (Get-Process chrome -ErrorAction SilentlyContinue)) {
     Logga 'Chrome kör inte - startar (minimerat).'
     Start-Process 'chrome.exe' -WindowStyle Minimized
@@ -34,7 +28,6 @@ if (-not (Get-Process chrome -ErrorAction SilentlyContinue)) {
 
 $claude = 'C:\Users\sam_s\AppData\Local\Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'
 if (-not (Test-Path $claude)) {
-    # Winget-sökvägen kan ändras vid uppdatering - falla tillbaka på PATH.
     $cmd = Get-Command claude -ErrorAction SilentlyContinue
     if ($cmd) { $claude = $cmd.Source } else { Logga 'FEL: claude.exe hittas inte.'; exit 1 }
 }
@@ -50,7 +43,7 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
-$ut = & $claude -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
+$ut = & $claude -p '/ig-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- fb-daglig klar (exit $LASTEXITCODE) ---"
+Logga "--- ig-lansering klar (exit $LASTEXITCODE) ---"
 exit $LASTEXITCODE

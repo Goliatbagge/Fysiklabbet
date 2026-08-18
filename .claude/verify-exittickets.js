@@ -89,6 +89,7 @@ function checkStr(id, qi, field, s) {
 
 let totalQ = 0;
 const correctDist = {};
+const courseDist = {}; // kurskod → { index → antal } för balanskontrollen
 for (const [id, list] of Object.entries(ET)) {
     if (!Array.isArray(list)) { errors.push(`${id}: inte en array`); continue; }
     if (list.length < 3) warnings.push(`${id}: bara ${list.length} frågor`);
@@ -105,6 +106,9 @@ for (const [id, list] of Object.entries(ET)) {
             errors.push(`${id} f${qi + 1}: correct=${q.correct} utanför intervallet`);
         } else {
             correctDist[q.correct] = (correctDist[q.correct] || 0) + 1;
+            const kurs = id.split('-')[0];
+            courseDist[kurs] = courseDist[kurs] || {};
+            courseDist[kurs][q.correct] = (courseDist[kurs][q.correct] || 0) + 1;
         }
         if (!Array.isArray(q.why) || q.why.length !== (q.choices || []).length) {
             errors.push(`${id} f${qi + 1}: why har ${q.why && q.why.length} poster, choices ${q.choices && q.choices.length}`);
@@ -116,6 +120,21 @@ for (const [id, list] of Object.entries(ET)) {
             });
         }
     });
+}
+
+// Balanskontroll: rätt svar får inte klumpa sig på ett index (felet har
+// hänt — alla ma2c/ma3c/ma4-frågor hade correct: 0, så rätt svar var alltid
+// alternativ A och en elev kunde gissa sig igenom; påpekat av besökare
+// 2026-08-18). Slumpvis jämn fördelning ger ~25–33 % per index; över 45 %
+// inom en kurs är systematiskt, inte slump.
+for (const [kurs, dist] of Object.entries(courseDist)) {
+    const n = Object.values(dist).reduce((a, b) => a + b, 0);
+    if (n < 20) continue; // för litet underlag för statistik
+    for (const [idx, cnt] of Object.entries(dist)) {
+        if (cnt / n > 0.45) {
+            errors.push(`${kurs}: rätt svar ligger på index ${idx} i ${cnt} av ${n} frågor (${Math.round(100 * cnt / n)} %) — blanda om alternativen så att rätt-index blir jämnt fördelat`);
+        }
+    }
 }
 
 console.log(`Avsnitt i katalogen: ${sections.length}, med exit ticket: ${Object.keys(ET).filter(id => sections.includes(id)).length}`);

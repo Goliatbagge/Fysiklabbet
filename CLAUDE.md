@@ -54,7 +54,11 @@ node .claude/verify-kopplingsschema.js
 # COMMIT!) — syntax, täckning mot katalogen, choices/why-längder, emoji,
 # tappade KaTeX-backslash. Dataformatet dokumenteras i filens huvud;
 # why[correct] = varför rätt, övriga = varför fel; förklaringar får inte
-# börja med "Rätt!"/"Fel!" (UI:t sätter etiketterna).
+# börja med "Rätt!"/"Fel!" (UI:t sätter etiketterna). Rätt svar får ALDRIG
+# systematiskt ligga först (correct: 0) — blanda alternativen så att
+# rätt-index blir jämnt fördelat; verifieraren ger fel vid > 45 % på ett
+# index inom en kurs (felet har hänt: hela ma2c/ma3c/ma4 hade alltid
+# alternativ A rätt, påpekat av en besökare 2026-08-18).
 node .claude/verify-exittickets.js
 
 # Verifiera pennlösningarna (::: handskrift-scenerna i handskrift.js) —

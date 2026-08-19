@@ -1,4 +1,4 @@
-# Vakt för de dagliga sociala medie-jobben — nyhetsinläggen på morgonen
+﻿# Vakt för de dagliga sociala medie-jobben — nyhetsinläggen på morgonen
 # (Facebook 07:33, Instagram 07:48) och lanseringsjobben på eftermiddagen
 # (Facebook 13:03, Instagram 13:18; lanseringar postas medvetet senare än
 # nyheten så att den inte puttas ner, önskemål 2026-08-18):
@@ -58,24 +58,49 @@ function DagensSektion {
     return $rader[$start..($rader.Count - 1)]
 }
 
-# Ett jobb räknas som avklarat först när dess NYHETSRAD för i dag säger att
-# något faktiskt hänt: "postad …" eller "ingen artikel i dag".
-# Två fällor som loggen från 2026-08-17 avslöjade:
+# Ett jobb räknas som avklarat först när dess rad för i dag säger att något
+# faktiskt hänt. Statusen läses ur radens BÖRJAN, direkt efter kolonet —
+# ALDRIG som en fritextsökning i hela raden. Tre fällor, alla ur skarp logg:
 #   1. Agenten skriver en rad även när den MISSLYCKAS ("nyhet: FEL kl 07:33
-#      (Chrome-verktygen saknades)"). Att bara leta efter en rad hade alltså
-#      lästs som ett lyckat inlägg — vakten hade tigit still vid exakt det
-#      fel den finns till för att fånga. Därför krävs ordet "postad".
-#      Samma nyckelord som agenternas eget dubbelpostningsskydd använder.
-#   2. Lanseringsrader ("lansering: postad …", "ig-lansering: postad …") får
-#      INTE räknas som dagens nyhetsinlägg — därför ankras prefixen till
-#      radens början: "nyhet:" för Facebook, "ig-nyhet:" för Instagram,
-#      "lansering:"/"ig-lansering:" för eftermiddagsjobben.
-# Godkända statusar per jobb (fälla 1 gäller alla — kräv ett positivt ord):
-#   nyhet/ig-nyhet:        "postad" eller "ingen artikel"
-#   lansering/ig-lansering: "postad", eller "ingen" DIREKT efter kolonet
-#                          ("lansering: ingen ny lansering") — ett FEL-
-#                          meddelande som råkar innehålla ordet "ingen"
-#                          ("FEL … ingen Chrome") ska inte räknas som klart.
+#      (Chrome-verktygen saknades)"). Att bara kontrollera att en rad finns
+#      läser alltså ett misslyckande som ett lyckat inlägg.
+#   2. Ett FEL-meddelande innehåller ofta självaste nyckelordet i sin
+#      förklaring — 2026-08-19 stod både Facebook och Instagram som FEL,
+#      men raderna nämnde ordet "postad" i sin egen felbeskrivning, och den
+#      dåvarande fritextsökningen `-match 'postad'` läste dem som klara.
+#      Vakten teg alltså still vid exakt det fel den finns till för att
+#      fånga (den sa "allt väl" kl 09:30 medan inget var postat). Därför
+#      ankras statusen: `^postad`, inte "innehåller postad".
+#   3. Lanseringsrader ("lansering: postad …") får inte räknas som dagens
+#      nyhetsinlägg — därför ankras även prefixen till radens början.
+# Godkända statusar (ankrade direkt efter kolonet):
+#   nyhet/ig-nyhet:         "postad …" eller "ingen artikel …"
+#   lansering/ig-lansering: "postad …" eller "ingen …"
+# Plus ikappkörningskonventionen `FEL … — RÄTTAD: postad …` (även ÅTGÄRDAT/
+# ÅTGÄRDAD), som räknas som klar — inlägget gick ju ut till slut. Den och
+# bara den får bryta ankringen, eftersom markören är uttrycklig.
+# OBS teckenkodning: markörorden RÄTTAD/ÅTGÄRDAT innehåller å/ä, och den här
+# filen läses av Windows PowerShell 5.1 — som tolkar en UTF-8-fil UTAN BOM
+# som ANSI, så att källkodens "Ä" blir två skräptecken och regexen aldrig kan
+# matcha loggens korrekt lästa rad. Filen sparas därför med BOM, men logiken
+# görs dessutom oberoende av det: BÅDA sidor rensas på icke-ASCII före
+# jämförelsen, vilket ger samma sträng ("RTTAD") oavsett hur filen lästs.
+# Ser mönstret nedan konstigt ut — det är avsiktligt. Skriv inte tillbaka
+# det till bokstavliga å/ä; då tystnar skyddsnätet igen så fort någon sparar
+# filen utan BOM, och tyst är precis vad det aldrig får vara.
+function AsciiSkelett([string]$s) {
+    return ($s -replace '[^\x00-\x7F]', '')
+}
+
+function StatusKlar($status, [string[]]$godkanda) {
+    foreach ($ord in $godkanda) {
+        if ($status -match "(?i)^$ord\b") { return $true }
+    }
+    # RÄTTAD/ÅTGÄRDAT/ÅTGÄRDAD utan sina icke-ASCII-tecken — de valfria
+    # A:na täcker in den prickfria stavningen (RATTAD, ATGARDAT).
+    return ((AsciiSkelett $status) -match '(?i)\b(RA?TTAD|A?TGA?RD(AT|AD))\s*:\s*postad\b')
+}
+
 function JobbStatus {
     $fb  = $false
     $ig  = $false
@@ -83,14 +108,14 @@ function JobbStatus {
     $igL = $false
     foreach ($rad in (DagensSektion)) {
         $r = $rad.Trim()
-        if ($r -match '(?i)^ig-lansering\s*:') {
-            if ($r -match '(?i)postad' -or $r -match '(?i)^ig-lansering\s*:\s*ingen') { $igL = $true }
-        } elseif ($r -match '(?i)^lansering\s*:') {
-            if ($r -match '(?i)postad' -or $r -match '(?i)^lansering\s*:\s*ingen') { $fbL = $true }
-        } elseif ($r -match '(?i)^ig-?nyhet\s*:') {
-            if ($r -match '(?i)postad' -or $r -match '(?i)ingen artikel') { $ig = $true }
-        } elseif ($r -match '(?i)^nyhet\s*:') {
-            if ($r -match '(?i)postad' -or $r -match '(?i)ingen artikel') { $fb = $true }
+        if ($r -match '(?i)^ig-lansering\s*:\s*(.*)$') {
+            if (StatusKlar $Matches[1] @('postad', 'ingen')) { $igL = $true }
+        } elseif ($r -match '(?i)^lansering\s*:\s*(.*)$') {
+            if (StatusKlar $Matches[1] @('postad', 'ingen')) { $fbL = $true }
+        } elseif ($r -match '(?i)^ig-?nyhet\s*:\s*(.*)$') {
+            if (StatusKlar $Matches[1] @('postad', 'ingen artikel')) { $ig = $true }
+        } elseif ($r -match '(?i)^nyhet\s*:\s*(.*)$') {
+            if (StatusKlar $Matches[1] @('postad', 'ingen artikel')) { $fb = $true }
         }
     }
     [pscustomobject]@{ fb = $fb; ig = $ig; fbL = $fbL; igL = $igL }

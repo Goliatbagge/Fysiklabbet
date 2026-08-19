@@ -81,28 +81,43 @@ får inte räknas som ett.
 **Postar någon manuellt utanför agenterna måste loggen få en rad**, annars
 tror vakten att inget är gjort och kör om jobben.
 
+## Åtgärdat 2026-08-19
+
+Grundorsaken var enkel när den väl syntes: **jobbskripten startade Claude
+utan flaggan `--chrome`.** `claude -p` kopplar aldrig in Chrome-tillägget av
+sig självt, och `--allowedTools` hjälper inte — att tillåta ett verktyg är
+inte att koppla in MCP-anslutningen. Flaggan är nu inlagd i alla fyra
+jobbskripten, och samma skript postade dagens inlägg skarpt samma dag.
+
+Samtidigt hittades två fel i skyddsnätet, båda åtgärdade:
+
+- **Vakten läste ett misslyckande som ett lyckat inlägg.** Den sökte
+  fritext efter ordet "postad" var som helst i raden, och morgonens
+  FEL-rader nämnde ordet i sin egen felbeskrivning. Kl 09:30 loggade
+  vakten "allt väl" medan ingenting var postat. Statusen läses nu ur
+  radens början (`^postad`), med `RÄTTAD: postad` som enda undantag. Se
+  kommentaren över `JobbStatus`.
+- **Lanseringsuppgifterna var aldrig registrerade** i Schemaläggaren —
+  `installera-lansering-tasks.ps1` hade inte körts på maskinen, så
+  13:03/13:18 inträffade aldrig och lanseringarna kördes bara indirekt av
+  vakten kl 14:00. Båda uppgifterna är nu registrerade.
+
 ## Öppna punkter
 
-1. **Ta reda på varför `mcp__claude-in-chrome__*` saknas i den schemalagda
-   sessionen.** Diagnoser att börja med:
-   ```powershell
-   claude mcp list
-   claude -p 'Lista med ToolSearch alla verktyg vars namn börjar med mcp__claude-in-chrome. Svara bara med namnen, eller INGA.' --allowedTools 'ToolSearch'
-   ```
-   Ger den andra verktygsnamn när den körs för hand, men inte från den
-   schemalagda uppgiften, sitter skillnaden i sessionskontexten — troligen
-   att Claude in Chrome-tillägget måste vara aktivt anslutet och att en
-   headless bakgrundssession inte får den anslutningen. Testa i så fall att
-   köra samma kommando från en schemalagd uppgift för att bekräfta.
-2. **Överväg Meta Graph API i stället för webbläsarstyrning.** Graph API kan
+1. **Överväg Meta Graph API i stället för webbläsarstyrning.** Graph API kan
    posta till Facebook-sidor och Instagram Business-konton utan Chrome, utan
    tillägg och utan inloggad session — då kan jobbet flyttas till en GitHub
    Action och blir helt oberoende av BOSGAME. Kräver en Meta-utvecklarapp,
    sidtoken och att Instagram-kontot är ett företagskonto. Bedömningen efter
    17 augusti är att detta troligen är den rätta långsiktiga lösningen,
    eftersom webbläsarvägen ser ut att vara ostabil just i automatiserat läge.
-3. **Luckan vakten inte täcker:** startar datorn om efter en
+2. **Luckan vakten inte täcker:** startar datorn om efter en
    Windows-uppdatering och ingen loggar in, kör varken jobben eller vakten
-   (alla tre är registrerade `LogonType Interactive`). Slå på Windows
+   (alla är registrerade `LogonType Interactive`). Slå på Windows
    inställning för automatisk återinloggning efter uppdatering, eller flytta
-   publiceringen till Graph API enligt punkt 2.
+   publiceringen till Graph API enligt punkt 1.
+3. **Facebooks Publicera-knapp fryser återkommande** i renderaren
+   (2026-08-17, -18 och -19): första klicket går aldrig ut. Agenten
+   hanterar det redan — verifierar i omladdad vy att inget publicerats och
+   postar om — men felet är så pass regelbundet att det bör vägas in om
+   Graph API-frågan tas upp.

@@ -159,6 +159,11 @@
                     form.style.display = 'none';
                     successMessage.style.display = 'block';
                     form.reset();
+                } else {
+                    // Formspree avvisade AJAX-inskickningen (t.ex. CAPTCHA-krav).
+                    // Fall tillbaka på vanlig inskickning så meddelandet aldrig
+                    // försvinner tyst.
+                    form.submit();
                 }
             } catch (error) {
                 form.submit();

@@ -17,7 +17,7 @@
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel,
- *           skiftnyckel, valtning, linjal, fodelsedag
+ *           skiftnyckel, valtning, linjal, fodelsedag, talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -110,6 +110,18 @@
  * kurvorna är hela förklaringen till att paradoxen känns omöjlig. Ritad i
  * laboranstemat men med grafens eget rutnät i stället för kollegierutorna
  * (två rutnät ovanpå varandra gör en graf oläslig); inget ljud.
+ *
+ * ── typ: talmangder ──────────────────────────────────────────────────────
+ * Figuren i ma1c-1.1 (Talmängder och negativa tal): talmängderna ℕ ⊂ ℤ ⊂
+ * ℚ ⊂ ℝ som ovaler inuti varandra — men interaktiv. Pekar man på en
+ * talmängd "poppar" den: ringen tonas i mängdens egen färg, konturen blir
+ * kraftigare och symbolen växer. Klickar man på en mängd låses markeringen,
+ * FLER exempeltal tonas fram inne i just den ringen, och en panel under
+ * figuren förklarar mängden (beteckning, beskrivning, ringens exempel och
+ * hur mängden ingår i de större). Klick på samma mängd igen släpper
+ * markeringen. Regionerna är tangentbordsnåbara (tab + Enter/mellanslag).
+ * Ritad i laboranstemat (SVG på papper med kollegierutnät); inga knappar,
+ * inget ljud, ingen fullskärm — figuren ÄR interaktionen.
  */
 (function () {
     'use strict';
@@ -207,6 +219,28 @@
         '  border:1px solid #d8cdb8;}',
         '.minisim-card.ms-ljus:fullscreen{background:#f2ebdc;}',
         '.minisim-card.ms-ljus:-webkit-full-screen{background:#f2ebdc;}',
+        /* typ: talmangder — interaktiv talmängdsfigur. Varje mängd är en
+           <g class="ms-tm-grupp"> med mängdens färg i CSS-variabeln --tmf;
+           hover/vald styr tint, konturvikt, symbol-popp och extra-talen. */
+        '.ms-tm-scene{background:linear-gradient(180deg,#f7f2e8,#ece3d2);}',
+        '.ms-tm-svg{display:block;width:100%;height:auto;}',
+        '.ms-tm-region{fill:var(--tmf);fill-opacity:0;pointer-events:fill;cursor:pointer;',
+        '  transition:fill-opacity .18s ease;outline:none;}',
+        '.ms-tm-grupp.ms-tm-hover .ms-tm-region{fill-opacity:.12;}',
+        '.ms-tm-grupp.ms-tm-vald .ms-tm-region{fill-opacity:.2;}',
+        '.ms-tm-ellips{transition:stroke .18s ease,stroke-width .18s ease;pointer-events:none;}',
+        '.ms-tm-grupp.ms-tm-hover .ms-tm-ellips,',
+        '.ms-tm-grupp.ms-tm-vald .ms-tm-ellips{stroke:var(--tmf);stroke-width:2.6;}',
+        '.ms-tm-sym{transition:transform .18s ease,fill .18s ease;pointer-events:none;',
+        '  transform-box:fill-box;transform-origin:center;}',
+        '.ms-tm-grupp.ms-tm-hover .ms-tm-sym,',
+        '.ms-tm-grupp.ms-tm-vald .ms-tm-sym{transform:scale(1.35);fill:var(--tmf);}',
+        '.ms-tm-extra{opacity:0;transition:opacity .35s ease;pointer-events:none;}',
+        '.ms-tm-grupp.ms-tm-vald .ms-tm-extra{opacity:1;}',
+        '.ms-tm-panel{margin-top:10px;font-family:' + FONT + ';font-style:normal;',
+        '  font-size:14px;line-height:1.55;color:#2c3340;background:#fdfaf3;',
+        '  border:1px solid #ddd3c0;border-radius:4px;padding:10px 13px;min-height:82px;}',
+        '.ms-tm-panel b{color:inherit;}',
         /* (.lab-minisim-marginalen ligger i styles-laborans.css, som
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
         '.lab-minisim p{margin:0;}'
@@ -4236,11 +4270,214 @@
         draw();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: talmangder
+    // ══════════════════════════════════════════════════════════════════════
+    var tmRaknare = 0;
+    function buildTalmangder(node, cfg) {
+        tmRaknare++;
+        var gridId = 'ms-tm-grid-' + tmRaknare;
+
+        // Samma geometri som den gamla statiska figuren i ma1c-1.1.
+        // Ordningen yttre → inre: regionerna ritas i den ordningen så att
+        // de inre ringarna hamnar överst i träffytan (evenodd-hålet i en
+        // ring släpper igenom pekaren till ringen under).
+        var SETS = [
+            { id: 'R', sym: 'ℝ', symX: 40, symY: 132, symSize: 17,
+              e: [225, 120, 218, 113], inre: [255, 126, 165, 84],
+              farg: '#7b52c4', namn: 'Reella tal',
+              aria: 'Reella tal, R. Klicka för fler exempel.',
+              besk: 'Alla tal som finns på tallinjen. Här ingår även de ' +
+                    'irrationella talen — tal som inte kan skrivas som bråk ' +
+                    'och vars decimalutveckling är oändlig utan att upprepa sig.',
+              ring: 'I den yttersta ringen ligger tal som är reella men inte ' +
+                    'rationella: π, √3, √2 och −π.',
+              kedja: 'ℝ rymmer alla de andra talmängderna: ℚ, ℤ och ℕ.',
+              extra: [{ t: '√2', x: 80, y: 120 }, { t: '−π', x: 150, y: 40 }] },
+            { id: 'Q', sym: 'ℚ', symX: 118, symY: 136, symSize: 16,
+              e: [255, 126, 165, 84], inre: [290, 130, 112, 60],
+              farg: '#2563c9', namn: 'Rationella tal',
+              aria: 'Rationella tal, Q. Klicka för fler exempel.',
+              besk: 'Alla tal som kan skrivas som ett bråk — en kvot av två ' +
+                    'heltal. Även tal med ändligt antal decimaler, som 0,25, ' +
+                    'är rationella.',
+              ring: 'Mellan ℚ och ℤ ligger rationella tal som inte är heltal: ' +
+                    '<sup>2</sup>⁄<sub>3</sub>, −<sup>5</sup>⁄<sub>9</sub>, ' +
+                    '0,25 och −1,5.',
+              kedja: 'Alla heltal och naturliga tal är också rationella.',
+              extra: [{ t: '0,25', x: 168, y: 130 }, { t: '−1,5', x: 240, y: 58 }] },
+            { id: 'Z', sym: 'ℤ', symX: 202, symY: 140, symSize: 15,
+              e: [290, 130, 112, 60], inre: [322, 133, 62, 38],
+              farg: '#1f7a4d', namn: 'Heltal',
+              aria: 'Heltal, Z. Klicka för fler exempel.',
+              besk: 'Samtliga heltal — de negativa, nollan och de positiva.',
+              ring: 'Mellan ℤ och ℕ ligger de negativa heltalen: −2, −7, ' +
+                    '−11 och −573.',
+              kedja: 'Alla naturliga tal är också heltal, och varje heltal ' +
+                     'är i sin tur rationellt och reellt.',
+              extra: [{ t: '−7', x: 300, y: 86 }, { t: '−573', x: 300, y: 185 }] },
+            { id: 'N', sym: 'ℕ', symX: 273, symY: 142, symSize: 14,
+              e: [322, 133, 62, 38], inre: null,
+              farg: '#c0392b', namn: 'Naturliga tal',
+              aria: 'Naturliga tal, N. Klicka för fler exempel.',
+              besk: 'Alla icke-negativa heltal: 0, 1, 2, 3 … och så vidare.',
+              ring: 'I den innersta ringen ser du de naturliga talen 0, 2, ' +
+                    '6, 9 och 31.',
+              kedja: 'Varje naturligt tal är också ett heltal (ℤ), ett ' +
+                     'rationellt tal (ℚ) och ett reellt tal (ℝ).',
+              extra: [{ t: '0', x: 302, y: 148 }, { t: '31', x: 338, y: 114 }] }
+        ];
+
+        // En ellips som sluten path-subbana (för evenodd-ringar).
+        function ellipsPath(e) {
+            var cx = e[0], cy = e[1], rx = e[2], ry = e[3];
+            return 'M ' + (cx - rx) + ' ' + cy +
+                   ' a ' + rx + ' ' + ry + ' 0 1 0 ' + (2 * rx) + ' 0' +
+                   ' a ' + rx + ' ' + ry + ' 0 1 0 ' + (-2 * rx) + ' 0 Z';
+        }
+
+        var svgDelar = [];
+        svgDelar.push(
+            '<svg class="ms-tm-svg" viewBox="5 5 442 232" ' +
+            'xmlns="http://www.w3.org/2000/svg" ' +
+            'font-family="Poppins, system-ui, sans-serif" ' +
+            'aria-label="Talmängderna som ovaler inuti varandra: den största ' +
+            'ovalen är de reella talen R, inuti den de rationella talen Q, ' +
+            'sedan heltalen Z och innerst de naturliga talen N. Peka och ' +
+            'klicka på en talmängd för fler exempel.">');
+        // Kollegieblocks-rutnät (papperstonen ligger som CSS-gradient på scenen).
+        svgDelar.push(
+            '<defs><pattern id="' + gridId + '" width="24" height="24" ' +
+            'patternUnits="userSpaceOnUse">' +
+            '<path d="M24 0H0V24" fill="none" stroke="rgba(37,99,201,0.10)" ' +
+            'stroke-width="1"/></pattern></defs>' +
+            '<rect x="5" y="5" width="442" height="232" fill="url(#' + gridId + ')"/>');
+
+        SETS.forEach(function (s) {
+            var d = ellipsPath(s.e) + (s.inre ? ' ' + ellipsPath(s.inre) : '');
+            svgDelar.push(
+                '<g class="ms-tm-grupp" data-tm="' + s.id + '" style="--tmf:' + s.farg + '">' +
+                '<path class="ms-tm-region" fill-rule="evenodd" d="' + d + '" ' +
+                'role="button" tabindex="0" aria-pressed="false" ' +
+                'aria-label="' + s.aria + '"/>' +
+                '<ellipse class="ms-tm-ellips" cx="' + s.e[0] + '" cy="' + s.e[1] +
+                '" rx="' + s.e[2] + '" ry="' + s.e[3] +
+                '" fill="none" stroke="#1f2530" stroke-width="1.6"/>' +
+                '<text class="ms-tm-sym" x="' + s.symX + '" y="' + s.symY +
+                '" font-size="' + s.symSize + '" font-weight="600" fill="#1f2530">' +
+                s.sym + '</text>' +
+                '<g class="ms-tm-extra" fill="' + s.farg + '" font-size="14" ' +
+                'font-weight="600" text-anchor="middle">' +
+                s.extra.map(function (p) {
+                    return '<text x="' + p.x + '" y="' + p.y + '">' + p.t + '</text>';
+                }).join('') +
+                '</g></g>');
+        });
+
+        // Exempeltalen ur den gamla figuren — alltid synliga, i bläck.
+        svgDelar.push(
+            '<g fill="#1f2530" pointer-events="none">' +
+            '<text x="62" y="66" font-size="16" text-anchor="middle">π</text>' +
+            '<text x="60" y="190" font-size="15" text-anchor="middle">√3</text>' +
+            '<text x="140" y="81" font-size="13" text-anchor="middle">2</text>' +
+            '<line x1="132" y1="85.5" x2="148" y2="85.5" stroke="#1f2530" stroke-width="1.2"/>' +
+            '<text x="140" y="99" font-size="13" text-anchor="middle">3</text>' +
+            '<text x="124" y="172" font-size="14" text-anchor="end">−</text>' +
+            '<text x="136" y="163" font-size="13" text-anchor="middle">5</text>' +
+            '<line x1="128" y1="167.5" x2="144" y2="167.5" stroke="#1f2530" stroke-width="1.2"/>' +
+            '<text x="136" y="181" font-size="13" text-anchor="middle">9</text>' +
+            '<text x="243" y="97" font-size="15" text-anchor="middle">−11</text>' +
+            '<text x="237" y="168" font-size="15" text-anchor="middle">−2</text>' +
+            '<text x="303" y="125" font-size="15" text-anchor="middle">2</text>' +
+            '<text x="329" y="153" font-size="15" text-anchor="middle">6</text>' +
+            '<text x="352" y="128" font-size="15" text-anchor="middle">9</text>' +
+            '</g></svg>');
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-tm-scene';
+        scene.innerHTML = svgDelar.join('');
+        card.appendChild(scene);
+
+        var panel = document.createElement('div');
+        panel.className = 'ms-tm-panel';
+        card.appendChild(panel);
+
+        var STANDARDTEXT =
+            'Talmängderna ligger inuti varandra: varje naturligt tal är också ' +
+            'ett heltal, varje heltal är också ett rationellt tal och varje ' +
+            'rationellt tal är också ett reellt tal. ' +
+            '<b>Peka på figuren och klicka på en talmängd</b> för att se fler ' +
+            'tal som ingår i den.';
+
+        var vald = null;
+        function visaPanel(s) {
+            if (!s) { panel.innerHTML = STANDARDTEXT; return; }
+            panel.innerHTML =
+                '<b style="color:' + s.farg + '">' + s.sym + ' — ' + s.namn +
+                '</b><br>' + s.besk + ' ' + s.ring + ' ' + s.kedja;
+        }
+        visaPanel(null);
+
+        var grupper = scene.querySelectorAll('.ms-tm-grupp');
+        function valj(id) {
+            vald = (vald === id) ? null : id;
+            var valdSet = null;
+            for (var i = 0; i < grupper.length; i++) {
+                var g = grupper[i];
+                var traff = g.getAttribute('data-tm') === vald;
+                g.classList.toggle('ms-tm-vald', traff);
+                g.querySelector('.ms-tm-region')
+                 .setAttribute('aria-pressed', traff ? 'true' : 'false');
+            }
+            SETS.forEach(function (s) { if (s.id === vald) valdSet = s; });
+            visaPanel(valdSet);
+        }
+
+        for (var i = 0; i < grupper.length; i++) {
+            (function (g) {
+                var id = g.getAttribute('data-tm');
+                var region = g.querySelector('.ms-tm-region');
+                region.addEventListener('pointerenter', function () {
+                    g.classList.add('ms-tm-hover');
+                });
+                region.addEventListener('pointerleave', function () {
+                    g.classList.remove('ms-tm-hover');
+                });
+                region.addEventListener('focus', function () {
+                    g.classList.add('ms-tm-hover');
+                });
+                region.addEventListener('blur', function () {
+                    g.classList.remove('ms-tm-hover');
+                });
+                region.addEventListener('click', function () { valj(id); });
+                region.addEventListener('keydown', function (ev) {
+                    if (ev.key === 'Enter' || ev.key === ' ') {
+                        ev.preventDefault();
+                        valj(id);
+                    }
+                });
+            })(grupper[i]);
+        }
+
+        // Test-handtag för skärmdumpsskript.
+        card._valj = valj;
+
+        node.appendChild(card);
+    }
+
     // ── Register + publikt API ────────────────────────────────────────────
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, linjal: buildLinjal,
-                  fodelsedag: buildFodelsedag };
+                  fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

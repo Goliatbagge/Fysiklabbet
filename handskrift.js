@@ -1847,20 +1847,42 @@
       s * k, F * k, acts, BLUE);
     stepEnd();
 
-    /* ---- steg 3: slutsats + svar ---- */
-    var b3 = bubble(120, bubbleTop(ty + 26), 262, [
+    /* ---- steg 3: fler tal som duger som svar ---- */
+    var b3 = bubble(120, bubbleTop(ty + 26), 268, [
       [['En tredjedel ligger mellan']],
-      [['0 och 1. Alltså är det inte']],
-      [['ett heltal!']]
+      [['0 och 1. Alla bråk som inte']],
+      [['går jämnt ut duger lika bra.']]
     ]);
     tanke(b3);
     y = 356;
-    var xe = placeString('Svar: ', padL, y, s, F, acts);
+    var xf = placeString('Duger: ', padL, y, s, F, acts);
+    xf = fracH('5', '2', xf, y);
+    xf = placeString(', ', xf, y, s, F, acts);
+    xf = fracH('−3', '4', xf, y);
+    xf = placeString(', 0,7', xf, y, s, F, acts);
+    stepEnd();
+
+    /* ---- steg 4: tal som INTE duger (bråk som går jämnt ut) ---- */
+    var b4 = bubble(120, 404, 268, [
+      [['Går bråket jämnt ut blir']],
+      [['talet ett heltal. Sådana']],
+      [['svar duger inte här.']]
+    ]);
+    tanke(b4);
+    y = 462;
+    var xg = placeString('Duger inte: 4, −6, ', padL, y, s, F, acts);
+    xg = fracH('8', '2', xg, y);
+    xg = placeString('=4', xg, y, s, F, acts);
+    stepEnd();
+
+    /* ---- steg 5: svar ---- */
+    y = 546;
+    var xe = placeString('Svar: t.ex. ', padL, y, s, F, acts);
     xe = fracH('1', '3', xe, y);
     underline(xe, y + 0.95 * F);
     stepEnd();
 
-    return { acts: acts, contentW: 520, lastBase: y + 1.9 * F, padL: padL };
+    return { acts: acts, contentW: 560, lastBase: y + 1.9 * F, padL: padL };
   }
 
   /* ---------------- scen: olikhetstecken (ma1c-1.1 ex 2) ----------------

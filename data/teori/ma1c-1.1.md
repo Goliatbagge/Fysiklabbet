@@ -35,14 +35,11 @@ betecknas $\mathbb{R}$ och kan skrivas $\mathbb{R} = \{$alla tal på
 tallinjen$\}$.
 :::
 
-Talmängderna kan illustreras enligt figuren nedan:
+Talmängderna kan illustreras enligt figuren nedan — peka på en talmängd så
+lyfter den fram sig, och klicka på den för att se fler tal som ingår:
 
-::: figur
-<svg viewBox="5 5 442 232" width="442" height="232" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Talmängderna som ovaler inuti varandra: den största ovalen är de reella talen R, inuti den de rationella talen Q, sedan heltalen Z och innerst de naturliga talen N. Exempeltal: pi och roten ur 3 ligger i R utanför Q, bråken 2/3 och minus 5/9 i Q utanför Z, minus 11 och minus 2 i Z utanför N samt 2, 6 och 9 i N."><ellipse cx="225" cy="120" rx="218" ry="113" fill="none" stroke="#1f2530" stroke-width="1.6"/><ellipse cx="255" cy="126" rx="165" ry="84" fill="none" stroke="#1f2530" stroke-width="1.6"/><ellipse cx="290" cy="130" rx="112" ry="60" fill="none" stroke="#1f2530" stroke-width="1.6"/><ellipse cx="322" cy="133" rx="62" ry="38" fill="none" stroke="#1f2530" stroke-width="1.6"/><text x="40" y="132" font-size="17" font-weight="600" fill="#1f2530">ℝ</text><text x="118" y="136" font-size="16" font-weight="600" fill="#1f2530">ℚ</text><text x="202" y="140" font-size="15" font-weight="600" fill="#1f2530">ℤ</text><text x="273" y="142" font-size="14" font-weight="600" fill="#1f2530">ℕ</text><text x="62" y="66" font-size="16" text-anchor="middle" fill="#1f2530">π</text><text x="60" y="190" font-size="15" text-anchor="middle" fill="#1f2530">√3</text><text x="140" y="81" font-size="13" text-anchor="middle" fill="#1f2530">2</text><line x1="132" y1="85.5" x2="148" y2="85.5" stroke="#1f2530" stroke-width="1.2"/><text x="140" y="99" font-size="13" text-anchor="middle" fill="#1f2530">3</text><text x="124" y="172" font-size="14" text-anchor="end" fill="#1f2530">−</text><text x="136" y="163" font-size="13" text-anchor="middle" fill="#1f2530">5</text><line x1="128" y1="167.5" x2="144" y2="167.5" stroke="#1f2530" stroke-width="1.2"/><text x="136" y="181" font-size="13" text-anchor="middle" fill="#1f2530">9</text><text x="243" y="97" font-size="15" text-anchor="middle" fill="#1f2530">−11</text><text x="237" y="168" font-size="15" text-anchor="middle" fill="#1f2530">−2</text><text x="303" y="125" font-size="15" text-anchor="middle" fill="#1f2530">2</text><text x="329" y="153" font-size="15" text-anchor="middle" fill="#1f2530">6</text><text x="352" y="128" font-size="15" text-anchor="middle" fill="#1f2530">9</text></svg>
-
-Talmängderna ligger inuti varandra: varje naturligt tal är också ett heltal,
-varje heltal är också ett rationellt tal och varje rationellt tal är också
-ett reellt tal.
+::: minisim
+typ: talmangder
 :::
 
 Alla naturliga tal är alltså även heltal, rationella tal och reella tal.
@@ -62,7 +59,25 @@ $a$ och $b$ är heltal och $b \neq 0$. Väljer vi t.ex. $\frac{1}{3}$ får vi
 ett tal som ligger mellan heltalen 0 och 1 — det är alltså rationellt men
 inte ett heltal.
 
-**Svar:** T.ex. $\frac{1}{3}$
+Uppgiften har oändligt många rätta svar: varje bråk som **inte går jämnt ut**
+duger, och det spelar ingen roll om talet skrivs som bråk eller som decimaltal.
+
+Tal som duger som svar:
+
+- $\frac{5}{2}$, som är samma tal som 2,5
+- $-\frac{3}{4}$, eftersom negativa tal också är rationella
+- 0,7, som kan skrivas $\frac{7}{10}$
+- $-1{,}25$, som kan skrivas $-\frac{5}{4}$
+
+Tal som **inte** duger som svar:
+
+- 4 och $-6$, som är heltal
+- $\frac{8}{2}$, eftersom bråket går jämnt ut och alltså är heltalet 4
+- $\sqrt{2}$ och $\pi$, som inte går att skriva som ett bråk med heltal och
+  därför inte ens är rationella
+
+**Svar:** T.ex. $\frac{1}{3}$ (även $\frac{5}{2}$, $-\frac{3}{4}$ och 0,7 är
+rätta svar)
 :::
 :::
 

@@ -1877,7 +1877,7 @@
 
     /* ---- steg 5: svar ---- */
     y = 546;
-    var xe = placeString('Svar: t.ex. ', padL, y, s, F, acts);
+    var xe = placeString('Svar: T.ex. ', padL, y, s, F, acts);
     xe = fracH('1', '3', xe, y);
     underline(xe, y + 0.95 * F);
     stepEnd();

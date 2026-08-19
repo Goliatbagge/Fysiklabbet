@@ -43,7 +43,7 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
-$ut = & $claude -p '/ig-lansering' --allowedTools $verktyg 2>&1 | Out-String
+$ut = & $claude --chrome -p '/ig-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 Logga "--- ig-lansering klar (exit $LASTEXITCODE) ---"
 exit $LASTEXITCODE

@@ -49,7 +49,7 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
-$ut = & $claude -p '/fb-lansering' --allowedTools $verktyg 2>&1 | Out-String
+$ut = & $claude --chrome -p '/fb-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 Logga "--- fb-lansering klar (exit $LASTEXITCODE) ---"
 exit $LASTEXITCODE

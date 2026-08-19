@@ -200,7 +200,7 @@ if ($pagaende.Count -eq $olosta.Count) {
 $vad = ($olosta | ForEach-Object { $_.namn }) -join ' och '
 Logga "LARM: $vad saknar dagens rad även efter omkörning."
 
-$kommandon  = ($olosta | ForEach-Object { "claude -p '$($_.kommando)'" }) -join '  respektive  '
+$kommandon  = ($olosta | ForEach-Object { "claude --chrome -p '$($_.kommando)'" }) -join '  respektive  '
 $loggUtdrag = ($olosta | ForEach-Object {
     "=== slutet av $($_.logg) ===`r`n$(SistaRaderna (Join-Path $logDir $_.logg))"
 }) -join "`r`n`r`n"

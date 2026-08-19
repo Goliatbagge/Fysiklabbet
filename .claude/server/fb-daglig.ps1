@@ -50,7 +50,9 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
-$ut = & $claude -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
+# --chrome är obligatoriskt: utan flaggan får en headless session aldrig
+# Chrome-MCP-verktygen, oavsett --allowedTools (missarna 2026-08-17/19).
+$ut = & $claude --chrome -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 Logga "--- fb-daglig klar (exit $LASTEXITCODE) ---"
 exit $LASTEXITCODE

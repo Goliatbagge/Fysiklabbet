@@ -58,6 +58,38 @@ Format per post:
   https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
   (tillagd 2026-08-18)
 
+## Fynd som inte användes (2026-08-19) — kan tas upp senare
+
+- **Publicerad 2026-08-19: vakuumdubbelbrytningen kring magnetaren 1E 1547.0−5408**
+  (Stewart m.fl., Nature, DOI 10.1038/s41586-026-10859-z) — se publicerat.md och
+  granskningar.md. Kom INTE från kön; valdes för att den var det starkaste uppslaget
+  på en mager nyhetsdag och gav ämnesvariation efter tre dagar i rad med kärn-,
+  partikel- och kondenserad materia-fysik. Nature-sidan är betalspärrad, men hela
+  metoddelen och alla mätvärden finns i arXiv:2509.19446 v5. Fällor för en ev.
+  uppföljare: (a) NASA skriver ”more than 140 hours” om observationsfönstret medan
+  IXPE:s effektiva mättid är 499,5 ks = 138,75 h — skilj på de två; (b) NASA:s
+  jämförelse ”a trillion times stronger than the strongest permanent magnets” går
+  inte ihop med 2,2·10^10 T mot ~1,5 T (det blir ~15 miljarder) — räkna egna
+  jämförelser i stället för att översätta NASA:s; (c) resultatet är ett indicium,
+  inte en bekräftad observation — forskarna skriver själva ”may have”.
+
+- **Nyhetsläget 2026-08-19:** Phys.org hade inget nytt efter måndagen 17 augusti.
+  Physics World låg kvar på policy- och fusionsekonomistoff. APS Physics gav 403.
+  ScienceDaily lyfte däremot magnetarnyheten på nytt 2026-08-18, vilket blev
+  anslaget för dagens artikel.
+
+- **Kvantminne sammanflätat över 420 km fiber** — nytt på Phys.org (18/8), ännu
+  inte påläst. Bra vinkel på kvantsammanflätning och optisk fiber, men vi har haft
+  mycket kvantstoff senaste veckan — låt det svalna några dagar.
+
+- **Kvantdroppar i en resonant Bose–Fermi-blandning** — teoretisk förutsägelse av en
+  ny form av kvantmateria som håller ihop sig själv utan kärl.
+  https://phys.org/news/2026-08-physicists-quantum.html . Ligger nära det redan köade
+  BEC-uppslaget om polära molekyler — ta ETT av dem, inte båda.
+
+- **Caltech: fiberoptisk prestanda på kiselchip** (ScienceDaily 17/8) — ultralåga
+  förluster i vågledare på kisel. Optikvinkel, men tekniskt inkrementell; spara som
+  reserv.
 ## Fynd som inte användes (2026-08-17) — kan tas upp senare
 
 - **Publicerad 2026-08-17: gluonknuten i protonen** (STAR-samarbetet vid

@@ -1480,5 +1480,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Länge trodde man att ett material som var en atom tjockt omöjligen kunde vara stabilt — det borde vecka ihop sig. År 2004 visade Andre Geim och Konstantin Novoselov att det gick, med en metod som är närmast pinsamt enkel: de tryckte en bit tejp mot en grafitbit och drog av, om och om igen, tills bara ett enda lager satt kvar. Sex år senare fick de Nobelpriset i fysik för upptäckten.' },
       { type: 'p', html: 'Egenskaperna är extrema åt flera håll samtidigt. Grafen är starkare än stål i förhållande till sin vikt, leder ström och värme utmärkt och är nästan genomskinligt. För fysiker är det dessutom en ovanligt ren lekplats: elektronerna kan bara röra sig i två riktningar, de rör sig ovanligt obehindrat, och lägger man två lager på varandra går materialets egenskaper att styra med en pålagd spänning. Därför används grafen ofta som provbit när man vill studera hur elektroner beter sig kollektivt.' }
     ]
+  },
+  {
+    id: 'neutronstjarna',
+    term: 'Neutronstjärna',
+    former: ['neutronstjärna', 'neutronstjärnan', 'neutronstjärnor', 'neutronstjärnorna', 'pulsar', 'pulsaren', 'pulsarer', 'pulsarerna'],
+    kort: 'Den hoppressade kärna som blir kvar när en tung stjärna exploderat. Den väger mer än solen men är bara ett par mil bred, vilket gör den till det tätaste föremål som finns utan att vara ett svart hål.',
+    relaterade: ['supernova', 'magnetar', 'svart-hal'],
+    body: [
+      { type: 'p', html: 'En stjärna håller ihop genom en dragkamp: gravitationen drar allt inåt, medan trycket från fusionen i mitten trycker utåt. När bränslet tar slut i en stjärna som väger mer än ungefär åtta gånger solen upphör mottrycket på några sekunder, och kärnan faller ihop. De yttre lagren studsar ut i en supernova. Det som ligger kvar i mitten är en neutronstjärna.' },
+      { type: 'p', html: 'Sammanpressningen är svår att ta in. Ungefär en och en halv solmassa hamnar i en kula som är omkring två mil tvärs över — ungefär en storstads bredd. Materialet är så tätt att atomerna inte längre finns kvar som atomer: elektronerna har tryckts in i protonerna, och kvar är i huvudsak neutroner tätt packade som i en enda jättelik atomkärna. En tesked av materialet skulle väga ett par miljarder ton. Ytans gravitation är hundratals miljarder gånger starkare än jordens.' },
+      { type: 'p', html: 'Kollapsen bevarar två saker från den ursprungliga stjärnan: rotationen och magnetfältet, båda hopträngda till en mycket mindre kropp. Därför snurrar en nyfödd neutronstjärna ofta flera varv i sekunden, och den har ett magnetfält miljardtals gånger starkare än solens. Sitter magnetaxeln snett kan strålningen svepa förbi jorden som ljuset från en fyr, och då kallas stjärnan pulsar. De upptäcktes 1967 av Jocelyn Bell Burnell, som först skämtsamt märkte signalen ”LGM-1” — för ”little green men”, innan det stod klart att den kom från en roterande stjärnrest.' }
+    ]
+  },
+  {
+    id: 'magnetar',
+    term: 'Magnetar',
+    former: ['magnetar', 'magnetaren', 'magnetarer', 'magnetarerna'],
+    kort: 'En sällsynt sorts neutronstjärna med det starkaste magnetfält som är känt i universum, tusen gånger kraftigare än hos vanliga neutronstjärnor. Fältet är så starkt att det spräcker stjärnans skorpa och driver våldsamma strålningsutbrott.',
+    relaterade: ['neutronstjarna', 'gammastralning', 'polarisation'],
+    body: [
+      { type: 'p', html: 'Av alla neutronstjärnor som är kända är ett par dussin av ett eget slag. De snurrar långsammare än de andra, några sekunder per varv i stället för bråkdelar av en sekund, och de bromsar in ovanligt snabbt. Förklaringen är deras magnetfält, som är omkring tusen gånger starkare än hos en vanlig neutronstjärna. Sådana stjärnor kallas magnetarer.' },
+      { type: 'p', html: 'Fältstyrkan är svår att jämföra med något i vardagen. En kylskåpsmagnet ligger på några hundradels tesla och en sjukhusmagnetkamera på några tesla, medan en magnetars yta kan nå tiotals miljarder tesla. Ett fält av den storleken är inte längre bara starkt, utan börjar förändra fysiken omkring sig: atomer dras ut till tunna spolar, och till och med det tomma rummet får optiska egenskaper det annars inte har.' },
+      { type: 'p', html: 'Fältet är också stjärnans undergång. Det är inte i jämvikt utan omorganiserar sig ryckvis, och när det gör det spricker den stenhårda skorpan och energi frigörs i utbrott av röntgen- och gammastrålning. Ett enda sådant utbrott kan på en tiondels sekund stråla ut mer energi än solen gör på hundratusen år; ett utbrott år 2004 var starkt nog att märkbart störa jordens övre atmosfär, trots att källan låg femtiotusen ljusår bort. Eftersom fältet tär på sig självt varar magnetarstadiet bara i storleksordningen tiotusen år, varefter stjärnan lugnar ner sig till en vanlig neutronstjärna.' }
+    ]
+  },
+  {
+    id: 'vakuumdubbelbrytning',
+    term: 'Vakuumdubbelbrytning',
+    former: ['vakuumdubbelbrytning', 'vakuumdubbelbrytningen', 'dubbelbrytning', 'dubbelbrytningen', 'dubbelbrytande', 'kritiska fältstyrkan', 'kritisk fältstyrka', 'vakuumresonans', 'vakuumresonansen'],
+    kort: 'Kvantfysikens förutsägelse att ett mycket starkt magnetfält gör tomrummet till ett optiskt material, som bryter ljus olika mycket beroende på hur ljusvågen svänger. Effekten förutsades 1936 och har aldrig kunnat framställas i ett laboratorium.',
+    relaterade: ['kvantelektrodynamik', 'polarisation', 'magnetar'],
+    body: [
+      { type: 'p', html: 'Vissa kristaller, som kalcit, har olika brytningsförmåga åt olika håll. Lägger man en kalcitbit över en textrad ser man två rader i stället för en, eftersom ljus som svänger i den ena riktningen bryts annorlunda än ljus som svänger i den andra. Egenskapen kallas dubbelbrytning, och den kräver normalt ett material med en inre ordning — atomer som sitter uppradade åt ett bestämt håll.' },
+      { type: 'p', html: 'Enligt kvantelektrodynamiken kan även ett tomrum få en sådan ordning. Vakuum är nämligen inte stilla: par av elektroner och positroner uppstår hela tiden, existerar en ofattbart kort stund och försvinner igen. Vanligtvis märks de inte alls. Men i ett tillräckligt starkt magnetfält hinner paren rikta in sig efter fältet innan de slocknar, och då har tomrummet en riktning. Ljus som svänger längs fältet möter något annat än ljus som svänger tvärs över det, och de två går fram olika fort. Werner Heisenberg och Hans Euler räknade ut detta 1936.' },
+      { type: 'p', html: 'Problemet är hur starkt fältet måste vara. Effekten blir påtaglig först i närheten av den kritiska fältstyrkan, ungefär fyra miljarder tesla — omkring hundra miljoner gånger mer än de kraftigaste magneter som byggts på jorden. Laboratorieförsök försöker i stället samla ihop en försvinnande liten effekt genom att skicka laserljus fram och tillbaka tusentals gånger genom en magnet, men signalen har hittills varit för svag. Därför riktas hoppet mot magnetarer, vars ytfält ligger flera gånger över den kritiska gränsen och som därmed är de enda kända platserna där fenomenet borde vara tydligt.' }
+    ]
   }
 ];

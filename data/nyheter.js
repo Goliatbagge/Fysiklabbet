@@ -88,6 +88,80 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-19-tomrummets-dubbelbrytning",
+    date: "2026-08-19",
+    title: "Tomrummet är inte tomt — kring en död stjärna beter sig rymden som en kristall",
+    deck: "Kvantfysiken har i nittio år påstått att ett tillräckligt starkt magnetfält gör själva vakuumet till ett optiskt material som delar upp ljuset. Ingen har kunnat bygga ett sådant fält på jorden. Nu har tre teleskop tillsammans mätt något kring en magnetar som är svårt att förklara på något annat sätt.",
+    category: "Astrofysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-19-tomrummets-dubbelbrytning.jpg",
+    imageAlt: "Illustration av en magnetar: ett bländande blåvitt klot mot svart stjärnhimmel, omgivet av vida blå bågar som markerar magnetfältets linjer. Ur klotet skjuter två strålar snett uppåt höger, och två genomskinliga koner med vågmönster inuti visar var radiovågorna respektive röntgenstrålningen sänds ut.",
+    imageCredit: "Illustration: NASA/Pablo Garcia (public domain), beskuren",
+    tags: ["astrofysik", "kvantfysik", "kvantelektrodynamik", "magnetar", "neutronstjärna", "polarisation", "magnetfält", "röntgenstrålning", "vakuum", "optik"],
+    sources: [
+      { name: "NASA — NASA’s IXPE May Have Proven 90-Year-Old Theory (pressmeddelande 5 augusti 2026)", url: "https://science.nasa.gov/missions/ixpe/nasas-ixpe-may-have-proven-90-year-old-theory/" },
+      { name: "ScienceDaily — Scientists may have finally proved that ”empty” space isn’t really empty", url: "https://www.sciencedaily.com/releases/2026/08/260815065007.htm" },
+      { name: "CSIRO/ATNF — X-ray and radio evidence for vacuum birefringence", url: "https://www.atnf.csiro.au/daily-picture/2026/08/07/x-ray-and-radio-evidence-for-vacuum-birefringence/" },
+      { name: "Nature — originalartikeln", url: "https://doi.org/10.1038/s41586-026-10859-z" },
+      { name: "arXiv:2509.19446 — förhandsversionen med hela metoddelen och alla mätvärden", url: "https://arxiv.org/abs/2509.19446" }
+    ],
+    research: {
+      citation: "R. E. Stewart, H. Dinh Thi, G. Younes, M. E. Lower, M. G. Baring, M. Negro, F. Camilo, J. B. Coley, T. Enoto, A. K. Harding, W. C. G. Ho, C.-P. Hu, P. Kaaret, P. Scholz, A. Van Kooten, Z. Wadiasingh, ”Vacuum birefringence and the polarized X-ray emission from a radio magnetar”, Nature, publicerad online 5 augusti 2026 (DOI 10.1038/s41586-026-10859-z). Förhandsversion: arXiv:2509.19446",
+      url: "https://doi.org/10.1038/s41586-026-10859-z"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 — magnetfält och magnetisk flödestäthet" },
+        { label: "Fysik nivå 2 — ljus som elektromagnetisk våg" },
+        { label: "Fysik nivå 1 — stjärnornas slutstadier och atomkärnan" }
+      ],
+      fragor: [
+        "Forskarna kan inte se vakuumet bryta ljuset. De ser bara att strålningen är mer ordnad än den borde vara, och att ingen av de vanliga modellerna klarar av att förklara det. När räcker ett ”ingenting annat fungerar” som stöd för en teori, och när är det i stället ett tecken på att någon förklaring ännu saknas?",
+        "Effekten kräver magnetfält långt bortom de starkaste vi kan bygga. Vad innebär det för vetenskapen att vissa förutsägelser bara går att pröva på objekt vi aldrig kan besöka, och där försöket inte går att göra om?",
+        "Mätningen bygger på tre helt olika instrument: två rymdteleskop för röntgen och en radioantenn på marken. Vad tillför radiomätningen, som inte hade gått att få ut ur de två andra?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett vakuum är per definition ingenting: inga atomer, inga molekyler, inget som ljuset kan studsa emot. Ljus som färdas genom tomrum ska därför färdas rakt, med en och samma hastighet, oavsett hur vågen råkar svänga.' },
+      { type: 'p', html: 'Kvantfysiken håller inte med. Enligt kvantelektrodynamiken bubblar tomrummet ständigt av par av elektroner och positroner som lånar energi, existerar en ofattbart kort stund och försvinner igen. Vanligtvis märks de inte. Men lägg ett tillräckligt starkt magnetfält över tomrummet, och paren hinner ställa in sig efter fältet innan de slocknar. Vakuumet får då en struktur — och struktur är precis vad optiska material är gjorda av.' },
+      { type: 'p', html: 'Werner Heisenberg och hans student Hans Euler räknade ut konsekvensen redan 1936: ett magnetiserat vakuum ska bryta ljus olika mycket beroende på hur ljusvågen svänger, alldeles som en kalcitkristall gör. Håller man en sådan kristall över en textrad ser man två rader. Fenomenet heter dubbelbrytning, och i vakuum har det aldrig kunnat visas.' },
+      { type: 'p', html: 'Ett lag med Rachael Stewart vid George Washington University i spetsen rapporterar nu i <em>Nature</em> den hittills starkaste indikationen på att det ändå sker — inte i ett laboratorium, utan runt kvarlevan efter en död stjärna.' },
+
+      { type: 'h2', text: 'Varför ingen kan göra försöket på jorden' },
+      { type: 'p', html: 'Effekten blir påtaglig först i närheten av den kritiska fältstyrkan, $B_\\mathrm{c} \\approx 4{,}4 \\cdot 10^{9}\\ \\mathrm{T}$. Det är ett tal utan motstycke i mänsklig teknik. En magnetkamera på ett sjukhus arbetar vid några tesla, och de kraftigaste labbmagneter som finns når några tiotal. Vi ligger alltså inte en faktor tio från målet, utan ungefär hundra miljoner.' },
+      { type: 'p', html: 'Försök har gjorts ändå. I experiment som PVLAS i Italien har laserljus i tjugo år skickats fram och tillbaka tusentals gånger genom en stark magnet, för att en försvinnande liten effekt ska hinna samlas ihop till något mätbart. Signalen är fortfarande för svag. Vill man se dubbelbrytning i vakuum får man alltså leta upp någon annan som redan har fältet.' },
+
+      { type: 'h2', text: 'Stjärnan som har fältet' },
+      { type: 'p', html: 'När en tung stjärna har bränt slut kollapsar dess kärna. Kvar blir en neutronstjärna: mer massa än solen packad i en kula på ett par mil, så tät att en tesked av materialet skulle väga ett par miljarder ton. En liten grupp av dem har dessutom magnetfält långt bortom det vanliga, och kallas magnetarer.' },
+      { type: 'p', html: 'Studiens objekt heter 1E 1547.0−5408, ligger omkring 15&nbsp;000 ljusår bort och snurrar ett varv på 2,09&nbsp;s. Vid ytan är dess magnetfält ungefär $2{,}2 \\cdot 10^{10}\\ \\mathrm{T}$ — drygt sju miljarder gånger starkare än en magnetkamera, och ungefär fem gånger över den kritiska fältstyrkan. Om dubbelbrytning i vakuum över huvud taget förekommer i naturen, så förekommer den här.' },
+      { type: 'p', html: 'Stjärnan har ytterligare en egenskap som visade sig avgörande: den lyser starkt både i röntgen och i radio, vilket är sällsynt bland magnetarer.' },
+
+      { type: 'h2', text: 'Tre teleskop, elva dygn' },
+      { type: 'p', html: 'Mellan den 26 mars och den 5 april 2025 riktades tre instrument mot stjärnan samtidigt. NASA:s IXPE, som är byggt för att mäta åt vilket håll röntgenstrålning svänger, samlade 499,5&nbsp;ks — knappt 140&nbsp;timmars effektiv mättid. NICER ombord på rymdstationen höll reda på stjärnans rotation, och Murriyang, den 64&nbsp;m breda radioskålen i Parkes i Australien, lyssnade i bandet 2,5–4,0&nbsp;GHz. Det var första gången någon mätt polarisationen hos en magnetar i radio och röntgen samtidigt.' },
+      { type: 'p', html: 'Strålningen visade sig vara påfallande välordnad. Över hela bandet 2–8&nbsp;keV var 46&nbsp;±&nbsp;4&nbsp;% av röntgenljuset polariserat åt ett och samma håll, och i det mjukaste bandet steg andelen till omkring 60&nbsp;%. Under vissa delar av rotationen nådde den 74&nbsp;±&nbsp;11&nbsp;%. Det är ungefär två och en halv gånger mer än vad andra magnetarer brukar visa.' },
+
+      { type: 'h2', text: 'Varför siffran är svår att förklara bort' },
+      { type: 'p', html: 'Höga värden är i sig inget bevis. Det avgörande var vad radioteleskopet bidrog med. Ur hur radiovågornas svängningsriktning vrider sig under ett varv går stjärnans geometri att räkna fram, och den visade sig ovanlig: magnetaxeln lutar bara ett par grader mot rotationsaxeln, och vi tittar nästan rakt ner i den ena magnetpolen.' },
+      { type: 'p', html: 'Just den geometrin gör mätningen besvärlig att förklara. Tittar man rakt ner i en magnetpol ser man en yta där fältet pekar åt alla håll runt mitten. Ljus från olika delar av ytan skulle då svänga åt olika håll och till stor del ta ut varandra, så att den sammanlagda polarisationen blev låg — i praktiken nära noll under delar av varvet. I stället var den hög hela varvet igenom.' },
+      { type: 'p', html: 'Dubbelbrytning i vakuum löser knuten. Är tomrummet runt stjärnan optiskt aktivt följer varje ljusstråles svängningsriktning det lokala magnetfältet ut genom magnetosfären, i stället för att ligga kvar som den var vid ytan. Först långt ute, där fältet tunnats ut och blivit i det närmaste enhetligt över hela synfältet, släpper kopplingen. Ljus som lämnade ytan åt vilket håll som helst når därför fram med sina svängningar inbördes uppradade. Sorteringen sker alltså på vägen, inte vid utsändningen.' },
+      { type: 'p', html: 'Laget körde sina data mot simuleringar både med och utan den effekten. Utan blev anpassningen dålig, med blev den god. Ett ytterligare tecken finns i hur polarisationen dippar mellan 3&nbsp;keV och 4&nbsp;keV, ungefär där teorin placerar en resonans som får ljusets två svängningsmoder att byta plats med varandra.' },
+      { type: 'quote', html: 'Vår modell säger att man måste ha med dubbelbrytning i vakuum runt neutronstjärnan för att återge de uppmätta röntgenpolarisationerna och samtidigt klara de villkor radioobservationerna sätter.', cite: 'Hoa Dinh Thi, Rice University, en av studiens huvudförfattare' },
+
+      { type: 'h2', text: 'Fortfarande ett indicium' },
+      { type: 'p', html: 'Forskarna själva, och NASA i sitt pressmeddelande, väljer sina ord med omsorg: mätningen <em>kan</em> vara den första direkta observationen av effekten. Det är inte samma sak som att saken är avgjord.' },
+      { type: 'p', html: 'Invändningarna är kända och rimliga. Ovanför omkring 4&nbsp;keV blir signalen svag och slutsatserna osäkra. Jämförelsen mellan data och teori vilar på en modell av stjärnans yta och atmosfär som i sig innehåller antaganden. Och det finns en oförklarad förskjutning mellan var radiopulsen och röntgenpulsen infaller, som antingen betyder att strålningen sänds ut på olika höjd eller att magnetfältet inte är fullt så prydligt som modellen förutsätter.' },
+      { type: 'p', html: 'Vad som skulle avgöra saken är känt: en djupare mätning som fångar dippen vid vakuumresonansen med bättre säkerhet, samma mönster hos fler magnetarer, eller — någon gång — ett laboratorium som lyckas. Tills dess står påståendet på ett indicium som är starkt, men ett indicium.' },
+      { type: 'p', html: 'Det är ändå värt att stanna upp vid vad som mättes. Ljuset lämnade stjärnan för femtontusen år sedan, passerade genom ett område där tomrummet självt kanske uppträdde som glas, och landade till slut i en detektor i omloppsbana kring jorden.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kalcit, eller isländsk spat, var det första dubbelbrytande materialet som beskrevs vetenskapligt. Vikingarna har föreslagits ha använt kristallen som ”solsten” för att hitta solens läge en mulen dag — men det är en hypotes, inte något som är belagt.',
+        'Att ljus kan påverka ljus i tomrum har faktiskt setts på jorden, fast på ett annat sätt: 2017 rapporterade ATLAS-experimentet vid LHC att två fotoner kan studsa mot varandra i de starka elektriska fälten kring blyjoner som passerar tätt förbi. Det är samma underliggande kvanteffekt.',
+        'IXPE sköts upp i december 2021 och var det första röntgenpolarimetriska teleskopet på decennier. Föregångaren OSO-8 gjorde motsvarande mätningar på 1970-talet, och därefter låg tekniken i praktiken nere i fyrtio år.',
+        'Magnetarer är korta episoder i en stjärnas liv. Fälten är så starka att de bryter ner sig själva, och efter kanske tiotusen år har magnetaren mattats av till en helt vanlig neutronstjärna.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-18-tredjedels-laddning",
     date: "2026-08-18",
     title: "En elektron går inte att dela — ändå har fysiker nu räknat tredjedelar av en i en bit grafen",

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 18 Aug 2026 05:22:19 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 01:25:41 GMT</lastBuildDate>
+    <item>
+      <title>Tomrummet är inte tomt — kring en död stjärna beter sig rymden som en kristall</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-19-tomrummets-dubbelbrytning</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-19-tomrummets-dubbelbrytning</guid>
+      <pubDate>Wed, 19 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Astrofysik</category>
+      <description>Kvantfysiken har i nittio år påstått att ett tillräckligt starkt magnetfält gör själva vakuumet till ett optiskt material som delar upp ljuset. Ingen har kunnat bygga ett sådant fält på jorden. Nu har tre teleskop tillsammans mätt något kring en magnetar som är svårt att förklara på något annat sätt.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-19-tomrummets-dubbelbrytning.jpg" length="193241" type="image/jpeg"/>
+    </item>
     <item>
       <title>En elektron går inte att dela — ändå har fysiker nu räknat tredjedelar av en i en bit grafen</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-18-tredjedels-laddning</link>
@@ -177,15 +186,6 @@
       <category>Vågor</category>
       <description>En vanlig kristall — som salt eller diamant — upprepar exakt samma mönster om och om igen genom rummet. Nu har ett internationellt forskarlag för första gången byggt kristallens tidsmässiga motsvarighet: ett material vars optiska egenskaper i stället upprepar sig i tiden — och använt det för att nästan halvera hur mycket energi terahertzljus förlorar på väg genom det.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-31-fotonisk-tidskristall.jpg" length="168778" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Matematikens ökända ”hatt”-form gömmer en extra hemlighet — den får ljus att bilda mönster som aldrig speglar sig själva</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-30-hattformens-kirala-ljus</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-30-hattformens-kirala-ljus</guid>
-      <pubDate>Thu, 30 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>2023 chockade en hobbymatematiker världen med en enda kakelform som kan täcka ett golv i oändlighet utan att mönstret någonsin upprepas — en lösning på det femtio år gamla Einstein-problemet i matematiken. Nu har fysiker i Tokyo skickat laserljus genom nanostrukturer byggda av samma form och upptäckt att den bryter mot en optisk grundregel: ljuset som diffrakteras bildar ett mönster som aldrig går att lägga exakt ovanpå sin egen spegelbild.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-30-hattformens-kirala-ljus.jpg" length="274923" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

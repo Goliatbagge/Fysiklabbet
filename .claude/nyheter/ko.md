@@ -27,25 +27,6 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
-- **Ljusslutaren som ser genom dimma och vävnad** (STARK). Yang Xu, Robert
-  Boyd m.fl. vid University of Rochester har byggt en tidsgrind av en
-  submikrometertunn film av indiumtennoxid vid dess epsilon-nära-noll-
-  våglängd (~1515 nm): två 100 fs-pulser blandas i filmen så att bara de
-  fotoner som INTE spridits — de ballistiska — släpps igenom, under knappt
-  en pikosekund, och samtidigt konverteras från nära-infrarött till grönt
-  (517 nm) så att en billig kiseldetektor kan läsa av bilden.
-  Scintillationen i rörlig spridning dämpas hundrafalt. Nature Communications
-  17, 5674 (2026-03-19), DOI 10.1038/s41467-026-71039-1; preprint
-  arXiv:2503.21113 (CC BY 4.0, figurerna användbara). En andra artikel med
-  neuronnät som vidgar synfältet: Light: Science & Applications 15, 327
-  (2026-07-21), DOI 10.1038/s41377-026-02375-6. Nyhetsanslaget är
-  Rochesters pressmeddelande 2026-08-17. Utmärkta gymnasievinklar: ljusets
-  hastighet som mätverktyg, spridning, infrarött ljus, lidar i dimma.
-  OBS bild: Rochesters pressfoto kräver skriftligt tillstånd — använd
-  arXiv-figurerna eller en egen illustration. Källa:
-  https://phys.org/news/2026-08-gating-technique-deep-tissue-dense.html
-  (tillagd 2026-08-18)
-
 - **Jorden vrider rymdtiden med sig — nu mätt till en femtedels procent**
   (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
   ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
@@ -57,6 +38,39 @@ Format per post:
   ljusets gång tur och retur som linjal. Källa:
   https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
   (tillagd 2026-08-18)
+
+## Fynd som inte användes (2026-08-20) — kan tas upp senare
+
+- **Publicerad 2026-08-20: ljusslutaren av epsilon-nära-noll-material** (University of
+  Rochester, Nature Communications 17, 5674, DOI 10.1038/s41467-026-71039-1) — kom från kön
+  (tillagd 2026-08-18), se publicerat.md och granskningar.md. Valdes för ämnesvariation efter
+  två dagar med astrofysik och kondenserad materia. OBS för en ev. uppföljare: nature.com är
+  inloggningsspärrad, men hela metoddelen ligger i arXiv:2503.21113 (CC BY 4.0). Fällor:
+  (a) originalstudien är från 19 mars 2026 — nyhetsanslaget är Rochesters pressmeddelande
+  17 augusti; (b) ”dimma och vävnad” är i försöken frostade glasskivor (1500- och 600-grit)
+  och en vätska med rörliga latexkulor på 7,7 µm, inte riktig dimma eller riktig vävnad;
+  (c) ordet *scintillation* i studien betyder optiskt flimmer och ska INTE skrivas så i
+  artikeln — begreppet ”scintillation” är i ordlistan upptaget av scintillatordetektorer.
+  Bild: Rochesters pressfoton kräver skriftligt tillstånd, och arXiv blockerar nedladdning av
+  figurerna, så artikeln fick en AI-illustration.
+
+- **Universums saknade materia ligger fyra miljoner ljusår ut från galaxerna** (STARK).
+  Haochen Wang och Kiyoshi Masui vid MIT har korsat 2 870 snabba radioskurar från CHIME med
+  positionerna för omkring sex miljoner galaxer ur DESI. Utsmetningen av varje skur mäter hur
+  mycket materia den passerat, och materian visar sig ligga betydligt mer utspridd än
+  simuleringarna förutsäger. Physical Review Letters, DOI 10.1103/9th9-qc51. MIT:s
+  pressmeddelande är från 2026-07-21, men Physics World lyfte nyheten 2026-08-19. Bortvald
+  denna dag enbart för ämnesspridning (2026-08-19 var också astrofysik). Källa:
+  https://physicsworld.com/a/fast-radio-bursts-reveal-that-the-universes-missing-matter-is-found-far-from-galaxies/
+  (tillagd 2026-08-20)
+
+- **Kvantmotorn som hittar nyttigt arbete i det som kallats spillvärme** (Universität Basel,
+  Patrick Potts och Marcelo Janovitch, Physical Review Letters 137(7), DOI 10.1103/y6h7-sx93,
+  ScienceDaily 2026-08-19). En atom i en optisk kavitet som drivs av en laser; teorin visar
+  vilken del av det utsända ljuset som kan uträtta arbete och vilken som är värme. Fin
+  termodynamikvinkel, men helt teoretisk — och ligger nära det redan köade uppslaget om
+  Aaltos superledande kvantvärmemotor. Ta ETT av dem, inte båda.
+  (tillagd 2026-08-20)
 
 ## Fynd som inte användes (2026-08-19) — kan tas upp senare
 

@@ -1506,6 +1506,54 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'ballistiska-fotoner',
+    term: 'Ballistiska fotoner',
+    former: ['ballistiska fotoner', 'ballistiska fotonerna', 'ballistisk foton', 'ballistiska fotonen', 'ballistisk', 'ballistiska'],
+    kort: 'De ljuspartiklar som tar sig rakt igenom ett grumligt material utan att studsa mot något på vägen. De är få, men de är de enda som bär med sig en skarp bild av vad som fanns bakom.',
+    relaterade: ['fyrvagsblandning'],
+    body: [
+      { type: 'p', html: 'Lys med en ficklampa mot handflatan i mörker och fingrarna glöder rött. Ljuset tar sig alltså igenom, men bilden av lampan är borta. Förklaringen är att nästan varje ljuspartikel har krockat med tusentals celler och bytt riktning om och om igen, ungefär som en biljardboll på ett bord fullt av andra bollar. Ett sådant ljus kallas diffust: det säger att något lyser, men inte vad.' },
+      { type: 'p', html: 'En liten andel av ljuset klarar sig ändå fram utan en enda krock. De partiklarna kallas ballistiska, efter en kula som går rakt fram, och de har kvar all information om riktningen de kom ifrån. Skulle man kunna plocka ut bara dem ur röran skulle bilden bli skarp igen. Problemet är att de kan vara färre än en på en miljon.' },
+      { type: 'p', html: 'Det finns ändå ett sätt att skilja dem åt: tiden. Ljus rör sig med ändlig fart, så en omväg kostar tid. De ballistiska partiklarna gick den kortaste möjliga vägen och kommer därför fram först, medan de kringstudsande släpar efter med en biljondels sekund eller mer. Den som kan öppna och stänga en slutare tillräckligt fort får alltså med sig bilden men slipper suddet. Just den idén ligger bakom flera metoder för att avbilda genom dimma, mjölkiga vätskor och levande vävnad.' }
+    ]
+  },
+  {
+    id: 'epsilon-nara-noll',
+    term: 'Epsilon-nära-noll',
+    former: ['epsilon-nära-noll', 'epsilon nära noll', 'epsilon-nära-noll-material', 'epsilon-nära-noll-materialet', 'permittivitet', 'permittiviteten'],
+    kort: 'Ett tillstånd där ett material nästan inte alls svarar elektriskt på en ljusvåg av en viss våglängd. Materialet blir då ovanligt känsligt för starkt ljus, så att en ljusstråle kan styras med en annan.',
+    relaterade: ['ballistiska-fotoner', 'fyrvagsblandning', 'metamaterial'],
+    body: [
+      { type: 'p', html: 'Hur ett material påverkar ljus beskrivs av dess permittivitet, som brukar betecknas med den grekiska bokstaven epsilon. Storheten talar om hur starkt materialets elektroner förskjuts av ljusvågens elektriska fält. I glas och vatten är den ordentligt större än noll, och ljuset saktar ner och bryts på det välkända sättet.' },
+      { type: 'p', html: 'I vissa material passerar permittiviteten genom noll vid en bestämd våglängd. Det gäller framför allt genomskinliga metalloxider som leder ström, till exempel indiumtennoxid, där gränsen ligger i det nära infraröda området. Där svarar materialet knappt alls elektriskt på ljuset, och de vanliga tumreglerna slutar gälla: vågen får en mycket lång våglängd inuti materialet och fasen ändras nästan inte alls när ljuset tar sig igenom.' },
+      { type: 'p', html: 'Det intressanta är vad som händer när ljuset är starkt. Nära den här punkten blir materialets svar kraftigt olinjärt, alltså inte längre proportionellt mot ljusets styrka. En intensiv laserpuls kan då ändra materialets optiska egenskaper på några femtosekunder, och en annan stråle som passerar samtidigt påverkas. Man kan alltså styra ljus med ljus, i ett skikt som bara är några hundra nanometer tjockt. Egenskapen används i försök med extremt snabba optiska omkopplare, frekvensomvandling och avbildning genom grumliga material.' }
+    ]
+  },
+  {
+    id: 'fyrvagsblandning',
+    term: 'Fyrvågsblandning',
+    former: ['fyrvågsblandning', 'fyrvågsblandningen', 'olinjär optik', 'olinjära optiken'],
+    kort: 'En optisk process där tre ljusvågor växelverkar i ett material och tillsammans skapar en fjärde våg med en ny frekvens. Den fungerar bara när ljuset är mycket starkt.',
+    relaterade: ['epsilon-nara-noll', 'ballistiska-fotoner'],
+    body: [
+      { type: 'p', html: 'Två ljusstrålar som korsar varandra i luft går rakt igenom varandra utan att märka något. Ljus växelverkar nämligen inte med ljus. Men inne i ett material kan strålarna påverka varandra indirekt: den ena strålen rubbar materialets elektroner, och den andra strålen känner av att materialet har ändrat sig. Vid vanliga ljusstyrkor är effekten försvinnande liten, men i en kort och intensiv laserpuls blir den mätbar. Området kallas olinjär optik.' },
+      { type: 'p', html: 'Fyrvågsblandning är ett av de tydligaste exemplen. Tre ljusvågor växelverkar i materialet och skapar tillsammans en fjärde. Energin bevaras hela tiden, så den nya vågens fotonenergi är summan eller skillnaden av de andras. Läggs tre lika stora fotonenergier ihop får den nya fotonen tre gånger så hög frekvens, vilket betyder en tredjedel så lång våglängd: infrarött ljus kan på det sättet komma ut som synligt grönt.' },
+      { type: 'p', html: 'Eftersom processen kräver att alla vågorna finns på samma ställe samtidigt fungerar den också som ett tidtagarur. Skickar man in en styrpuls som varar hundra femtosekunder blir den nya vågen till bara under de hundra femtosekunderna, och ingenting annat som passerar filmen syns. Fyrvågsblandning används därför både för att skapa nya laserfärger, för att förstärka signaler i optiska fibrer och som ultrasnabb slutare.' }
+    ]
+  },
+  {
+    id: 'lidar',
+    term: 'Lidar',
+    former: ['lidar', 'lidarn', 'lidarsystem', 'lidarsystemet', 'lidarsystemen'],
+    kort: 'En avståndsmätare som skickar ut korta laserpulser och tar tid på ekot. Den bygger upp en tredimensionell karta av omgivningen, punkt för punkt.',
+    relaterade: ['ballistiska-fotoner'],
+    body: [
+      { type: 'p', html: 'Namnet är bildat efter radar, men i stället för radiovågor används ljus. En lidar skickar i väg en mycket kort laserpuls, väntar på att den ska studsa mot något och komma tillbaka, och mäter hur lång tid det tog. Eftersom ljusets fart är känd ger tiden avståndet direkt: ljuset hinner ungefär 30&nbsp;cm på en miljarddels sekund, så en tur och retur på en miljarddels sekund betyder att föremålet står 15&nbsp;cm bort.' },
+      { type: 'p', html: 'Genom att svepa strålen över omgivningen, eller skicka ut tusentals strålar samtidigt, byggs ett moln av mätpunkter upp — en tredimensionell bild av allt inom räckhåll. Självkörande fordon använder det för att se var bilar och gångtrafikanter finns, arkeologer för att hitta byggnader under tät skog, och satelliter för att mäta isarnas tjocklek på några centimeter när.' },
+      { type: 'p', html: 'Den stora svagheten är dimma, snöfall och damm. Då studsar pulsen mot droppar redan på vägen ut, ekot dränks i det spridda ljuset och räckvidden faller kraftigt. Att skilja det ljus som verkligen kom från målet från allt annat är därför ett av de mest aktiva forskningsområdena kring tekniken.' }
+    ]
+  },
+  {
     id: 'vakuumdubbelbrytning',
     term: 'Vakuumdubbelbrytning',
     former: ['vakuumdubbelbrytning', 'vakuumdubbelbrytningen', 'dubbelbrytning', 'dubbelbrytningen', 'dubbelbrytande', 'kritiska fältstyrkan', 'kritisk fältstyrka', 'vakuumresonans', 'vakuumresonansen'],

@@ -88,6 +88,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-20-ljusslutaren",
+    date: "2026-08-20",
+    title: "Slutaren som står öppen en biljondels sekund — så plockas ljuset som inte gått vilse ut ur dimman",
+    deck: "I dimma och i vävnad studsar nästan allt ljus fram och tillbaka innan det når fram, och bilden dränks i gröt. Ett skikt metalloxid tunnare än en tusendels millimeter fungerar nu som en slutare som hinner öppna och stänga igen innan det bortspridda ljuset ens har kommit fram.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-20-ljusslutaren.jpg",
+    imageAlt: "Ett optiskt bord i ett mörklagt laboratorium. En röd laserstråle far genom dimma från vänster och träffar en tunn genomskinlig platta i ett svart hållarfäste, där en grön ljuspunkt lyser upp och en skarp grön stråle fortsätter åt höger.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["optik", "laser", "ljus", "spridning", "avbildning", "lidar"],
+    sources: [
+      { name: "University of Rochester (pressmeddelande, 17 augusti 2026)", url: "https://www.rochester.edu/newscenter/lidar-systems-cancer-imaging-time-gating-technology-715012/" },
+      { name: "Phys.org (17 augusti 2026)", url: "https://phys.org/news/2026-08-gating-technique-deep-tissue-dense.html" },
+      { name: "arXiv:2503.21113 (förhandsversion, CC BY 4.0 — metoddel och mätvärden)", url: "https://arxiv.org/abs/2503.21113" },
+      { name: "Light: Science & Applications (uppföljaren med maskininlärning, 21 juli 2026)", url: "https://doi.org/10.1038/s41377-026-02375-6" }
+    ],
+    research: {
+      citation: "Yang Xu, Saumya Choudhary, Long D. Nguyen, Matthew Klein, Shivashankar Vangala, J. Keith Miller, Eric G. Johnson, Joshua R. Hendrickson, M. Zahirul Alam och Robert W. Boyd, ”Epsilon-near-zero time-gate for high-fidelity spatial information transfer through dynamic scattering media”, Nature Communications 17, 5674 (2026)",
+      url: "https://doi.org/10.1038/s41467-026-71039-1"
+    },
+    body: [
+      { type: 'p', html: 'Slå på helljuset i tät dimma och sikten blir sämre, inte bättre. Ljuset försvinner inte — det tar bara aldrig den väg du hoppades på. Varje liten vattendroppe kastar strålarna åt ett nytt håll, och det som når ögat är en jämngrå vägg av ljus som varit överallt utom där du tittade. Samma sak händer i hud och vävnad: rött och infrarött ljus tar sig faktiskt flera centimeter in i kroppen, men det kommer ut som ett diffust sken utan minsta spår av vad det passerade på vägen.' },
+      { type: 'p', html: 'Ett lag optikforskare vid University of Rochester har nu byggt ett sätt att sortera bort allt det där — och sorteringen görs inte efter färg eller riktning, utan efter ankomsttid.' },
+      { type: 'h2', text: 'Fotonerna som gick rakaste vägen' },
+      { type: 'p', html: 'När en kort ljuspuls skickas in i dimma delar den upp sig i två sällskap. En liten andel fotoner slinker rakt igenom utan att träffa något; de kallas <em>ballistiska</em> och bär hela bilden av det som ligger bakom. Resten studsar runt bland dropparna och kommer fram lite senare, från alla möjliga håll, som ett efterföljande brus.' },
+      { type: 'p', html: 'Och ”lite senare” är hela poängen. Ljus rör sig med ändlig fart, så en omväg kostar tid enligt $s = c \\cdot t$. På 100&nbsp;femtosekunder — en tiondels biljondels sekund — hinner ljus i luft bara 30&nbsp;µm, ungefär en tredjedels hårstrå. En slutare som öppnar precis när de ballistiska fotonerna anländer och stänger igen inom en biljondels sekund släpper alltså in bilden och stänger ute gröten.' },
+      { type: 'p', html: 'Problemet har alltid varit att bygga en sådan slutare. Ingen mekanisk kamerakonstruktion i världen rör sig så fort.' },
+      { type: 'h2', text: 'En slutare byggd av ljus' },
+      { type: 'p', html: 'Lösningen är ett skikt av indiumtennoxid, samma genomskinliga och strömledande material som sitter i pekskärmar, här bara några hundra nanometer tjockt. Vid en viss våglängd — omkring 1&nbsp;515&nbsp;nm för just den här filmen — går materialets elektriska permittivitet nästan ner till noll — materialet sägs vara epsilon-nära-noll. I det tillståndet reagerar materialet ovanligt kraftigt på starkt ljus, och det blir möjligt att styra ljus med ljus.' },
+      { type: 'p', html: 'Forskarna lyser in bilden med en infraröd puls på 1&nbsp;550&nbsp;nm och skickar samtidigt in en styrpuls på 100&nbsp;fs. Bara i det ögonblick de två pulserna överlappar i filmen sker en fyrvågsblandning där energin från tre infraröda fotoner läggs ihop till en enda ny foton — med tre gånger så hög frekvens och därmed våglängden 517&nbsp;nm, alltså grönt synligt ljus. Utanför det ögonblicket händer ingenting. Grinden är öppen kortare än en biljondels sekund.' },
+      { type: 'quote', html: 'Tidsgrindning fungerar i princip som slutaren i en kamera. I en vanlig kamera är slutaren mekanisk — när den öppnas kommer ljus in, och när den stängs stoppas ljuset. Här använder vi ljus för att styra ljus.', cite: 'Yang Xu, doktor i optik vid University of Rochester och studiens förstaförfattare' },
+      { type: 'h2', text: 'Grönt i stället för infrarött — och en bild som slutar flimra' },
+      { type: 'p', html: 'Att bilden byter färg på vägen är ingen bieffekt utan en av vinsterna. Infraröda kameror bygger på dyra halvledare som indiumgalliumarsenid, medan grönt ljus läses av vilken vanlig kiselsensor som helst — samma sorts chip som i en mobilkamera. Försöken lästes just av med en enkel svartvit kiselkamera.' },
+      { type: 'p', html: 'Den andra vinsten syns när det som skymmer sikten är i rörelse, som verklig dimma eller strömmande blod. Då flimrar en vanlig bild kraftigt från ögonblick till ögonblick. Med tidsgrinden dämpades det flimret med två tiopotenser, alltså ungefär hundra gånger. Forskarna provade både frostade glasskivor av två olika grovlekar och en vätska full av rörliga plastkulor på några mikrometer — laboratoriets ersättning för dimma och vävnad. Bilden av ett testmönster gick från oläslig till skarp.' },
+      { type: 'p', html: 'Kvar finns två hinder. Omvandlingen är extremt ineffektiv: bara ungefär en foton på åttiotusen tar sig igenom som grön. Och synfältet är litet. Det senare har laget angripit tillsammans med forskare vid UCLA, som lärde ett neuronnät fysiken bakom avbildningen och därmed kunde räcka ut bilden över en betydligt större yta än grinden själv täcker.' },
+      { type: 'h2', text: 'Vad det kan bli' },
+      { type: 'p', html: 'De tilltänkta användningarna ligger där spritt ljus i dag sätter gränsen: bilddiagnostik som vill se djupare in i vävnad, och lidar i självkörande fordon, som mäter avstånd med laserpulser och tappar räckvidd så fort dimman lägger sig. Ingetdera är demonstrerat än — försöken är gjorda på ett optiskt bord, inte på en dimmig landsväg eller en patient. Men principen bakom är slående enkel: när ljuset inte längre kan sorteras på färg eller riktning, sortera det på klockan.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Ljus färdas ungefär 0,3&nbsp;mm på en pikosekund (en biljondels sekund) och 30&nbsp;µm på 100&nbsp;femtosekunder. Ljusets ändliga fart blir därmed en linjal för mycket korta sträckor.',
+        'Indiumtennoxid är genomskinligt och leder ström samtidigt, vilket är ovanligt. Därför sitter det som osynliga elektroder i pekskärmar och solceller.',
+        'Att lägga ihop tre fotoners energi till en ger tre gånger så hög frekvens: 1&nbsp;550&nbsp;nm delat på tre blir 517&nbsp;nm, som ögat uppfattar som grönt.',
+        'Rött och nära-infrarött ljus tar sig längst in i mänsklig vävnad. Det är därför pulsoximetern på fingret lyser rött.'
+      ] },
+      { type: 'p', html: 'Arbetet publicerades i <em>Nature Communications</em> och uppföljningen med maskininlärning i <em>Light: Science &amp; Applications</em>. Bakom det står Robert Boyds laboratorium i Rochester, som enligt universitetet arbetat med tidsgrindning i över tio år.' }
+    ]
+  },
+  {
     id: "2026-08-19-tomrummets-dubbelbrytning",
     date: "2026-08-19",
     title: "Tomrummet är inte tomt — kring en död stjärna beter sig rymden som en kristall",

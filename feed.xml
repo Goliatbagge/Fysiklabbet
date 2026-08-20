@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 19 Aug 2026 01:25:41 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 01:29:06 GMT</lastBuildDate>
+    <item>
+      <title>Slutaren som står öppen en biljondels sekund — så plockas ljuset som inte gått vilse ut ur dimman</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-20-ljusslutaren</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-20-ljusslutaren</guid>
+      <pubDate>Thu, 20 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Optik</category>
+      <description>I dimma och i vävnad studsar nästan allt ljus fram och tillbaka innan det når fram, och bilden dränks i gröt. Ett skikt metalloxid tunnare än en tusendels millimeter fungerar nu som en slutare som hinner öppna och stänga igen innan det bortspridda ljuset ens har kommit fram.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-20-ljusslutaren.jpg" length="588436" type="image/jpeg"/>
+    </item>
     <item>
       <title>Tomrummet är inte tomt — kring en död stjärna beter sig rymden som en kristall</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-19-tomrummets-dubbelbrytning</link>
@@ -177,15 +186,6 @@
       <category>Astronomi</category>
       <description>Vintergatan är ungefär 100 000 ljusår bred. Galaxen IC 1101 är sjutton gånger så stor — men exakt var den tar slut har ingen kunnat säga, eftersom en galax inte har någon skarp kant. Nu har ett forskarlag på Kanarieöarna samlat drygt åtta timmars ljus med ett teleskop på La Palma, räknat bort ljusspillet från 250 förgrundsstjärnor och för första gången pekat ut gränsen.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-01-storsta-galaxen.jpg" length="435347" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Fysiker bygger en kristall som upprepar sig i tiden i stället för i rummet — och halverar hur mycket energi ljuset läcker på vägen</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-07-31-fotonisk-tidskristall</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-07-31-fotonisk-tidskristall</guid>
-      <pubDate>Fri, 31 Jul 2026 04:00:00 GMT</pubDate>
-      <category>Vågor</category>
-      <description>En vanlig kristall — som salt eller diamant — upprepar exakt samma mönster om och om igen genom rummet. Nu har ett internationellt forskarlag för första gången byggt kristallens tidsmässiga motsvarighet: ett material vars optiska egenskaper i stället upprepar sig i tiden — och använt det för att nästan halvera hur mycket energi terahertzljus förlorar på väg genom det.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-07-31-fotonisk-tidskristall.jpg" length="168778" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

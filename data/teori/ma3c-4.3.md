@@ -111,7 +111,7 @@ $\to$ avtagande) och en **minimipunkt** i $(1, -2)$ (avtagande $\to$
 växande). Vi förbinder nu de fyra punkterna med en jämn kurva.
 
 ::: figur
-<svg viewBox="4 0 240 242" width="240" height="242" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till f av x lika med x upphöjt till tre minus tre x, ritad på intervallet minus två till tre. Ändpunkterna vid x lika med minus två och x lika med tre är markerade med ohyllda cirklar. Maximipunkten vid minus ett, två och minimipunkten vid ett, minus två är markerade med fyllda röda punkter.">
+<svg viewBox="4 0 240 242" width="351" height="354" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till f av x lika med x upphöjt till tre minus tre x, ritad på intervallet minus två till tre. Ändpunkterna vid x lika med minus två och x lika med tre är markerade med ohyllda cirklar. Maximipunkten vid minus ett, två och minimipunkten vid ett, minus två är markerade med fyllda röda punkter.">
 <line x1="16" y1="155" x2="206" y2="155" stroke="rgba(31,37,48,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
 <line x1="16" y1="105" x2="206" y2="105" stroke="rgba(31,37,48,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
 <line x1="16" y1="55" x2="206" y2="55" stroke="rgba(31,37,48,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
@@ -130,7 +130,7 @@ växande). Vi förbinder nu de fyra punkterna med en jämn kurva.
 <text x="134" y="219" font-size="11" text-anchor="middle" fill="#1f2530">1</text>
 <text x="168" y="219" font-size="11" text-anchor="middle" fill="#1f2530">2</text>
 <text x="202" y="219" font-size="11" text-anchor="middle" fill="#1f2530">3</text>
-<path d="M32,225 L40.5,206.1 L49,193.8 L57.5,187 L66,185 L74.5,186.7 L83,191.3 L91.5,197.7 L100,205 L108.5,212.3 L117,218.8 L125.5,223.3 L134,225 L142.5,223 L151,216.3 L159.5,203.9 L168,185 L176.5,158.6 L185,123.8 L193.5,79.5 L202,25" fill="none" stroke="#2563c9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 32,225 C 33.42,221.85 37.67,211.3 40.5,206.1 C 43.33,200.9 46.17,196.98 49,193.8 C 51.83,190.62 54.67,188.47 57.5,187 C 60.33,185.53 63.17,185.05 66,185 C 68.83,184.95 71.67,185.65 74.5,186.7 C 77.33,187.75 80.17,189.47 83,191.3 C 85.83,193.13 88.67,195.42 91.5,197.7 C 94.33,199.98 97.17,202.57 100,205 C 102.83,207.43 105.67,210 108.5,212.3 C 111.33,214.6 114.17,216.97 117,218.8 C 119.83,220.63 122.67,222.27 125.5,223.3 C 128.33,224.33 131.17,225.05 134,225 C 136.83,224.95 139.67,224.45 142.5,223 C 145.33,221.55 148.17,219.48 151,216.3 C 153.83,213.12 156.67,209.12 159.5,203.9 C 162.33,198.68 165.17,192.55 168,185 C 170.83,177.45 173.67,168.8 176.5,158.6 C 179.33,148.4 182.17,136.98 185,123.8 C 187.83,110.62 190.67,95.97 193.5,79.5 C 196.33,63.03 200.58,34.08 202,25" fill="none" stroke="#2563c9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="32" cy="225" r="3.4" fill="#f7f2e8" stroke="#1f2530" stroke-width="1.6"/>
 <circle cx="202" cy="25" r="3.4" fill="#f7f2e8" stroke="#1f2530" stroke-width="1.6"/>
 <circle cx="66" cy="185" r="3.4" fill="#c8324a"/>

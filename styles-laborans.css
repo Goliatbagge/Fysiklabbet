@@ -2218,12 +2218,23 @@ button.lab-card-disabled { pointer-events: none; }
 /* Kort bildtext under figuren. */
 .lab-block-figur .lab-figur-cap,
 .lab-block-figur p {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--lab-ink-muted);
     font-style: italic;
     margin: 12px auto 0;
     max-width: 46ch;
+}
+/* ⚠️ marked lindar <svg> i ett <p>, så bildtextens max-width: 46ch träffade
+   även SJÄLVA FIGUREN och kapade varje figur till 405 px — en 540 px bred
+   figur krympte då till 0,75× och dess 12 px-etiketter renderades som 9 px
+   ("alldeles för smått", påpekat 2026-08-20). Paragrafen som bär figuren
+   undantas därför från både bredd- och textreglerna; figurens egen
+   width/height styr storleken (se "Figurernas storlek" i CLAUDE.md).
+   RÖR INTE detta undantag utan att mäta figurbredderna i webbläsaren. */
+.lab-block-figur p:has(> svg) {
+    max-width: none;
+    margin-top: 0;
 }
 
 /* ── Interaktiv grafritare (::: graf → graf.js) ──────────────────────

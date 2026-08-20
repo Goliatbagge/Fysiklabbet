@@ -42,6 +42,12 @@ node .claude/verify-figur-bounds.js
 # Se "Geometrifigurer" nedan för reglerna.
 node .claude/verify-vinkelbagar.js
 
+# Verifiera att KURVOR i teori-figurerna är mjuka och inte ritade som en grov
+# polylinje med synliga facetter (KÖR FÖRE COMMIT vid figurändringar!) — en
+# kurva ska samplas tätt ur sin funktion eller ritas med C/Q-kommandon.
+# Se "Kurvor ska ritas ur sin funktion" nedan.
+node .claude/verify-kurvor.js
+
 # Verifiera BALANSEN i kopplingsscheman (KÖR FÖRE COMMIT vid ändringar i
 # kopplingsscheman!) — komponenterna ska ha lika stora mellanrum på sin
 # ledarsträcka, batteriet sitta centrerat och parallellgrenarna ligga på
@@ -953,6 +959,73 @@ etikettens x är cirkelns rand `cy − √(r² − (x−cx)²)`). `verify-figur-
 fångar INTE detta (den mäter TEXTENS klipp — se avsnittet om etiketter nedan —
 inte geometrins; phantom-punkter i 0,0 gör vänster/topp-marginal negativ) —
 granska ALLTID skärmdump.
+
+### ⚠️ Kurvor ska ritas UR SIN FUNKTION — aldrig på fri hand
+
+**En graf är en matematisk kurva, inte en teckning.** Rita den genom att
+räkna ut punkter ur funktionen och sampla TÄTT — aldrig genom att gissa
+några punkter och dra raka streck emellan. En polylinje med långa segment
+ger synliga facetter och en spetsig topp där kurvan ska vara rund
+(uttryckligt önskemål 2026-08-20: normalfördelningskurvorna i `ma2c-6.5`
+var "spetsigt och hackigt" i stället för "fina och jämna klockkurvor").
+
+- **Sampla ur formeln med steg ≤ 4 enheter** och skriv ut punkterna som en
+  polylinje, ELLER rita med riktiga kurvkommandon (`C`, `Q`, `A`). Ett
+  litet genereringsskript i scratchpad är alltid rätt väg — skriv aldrig
+  koordinaterna för hand.
+- **Toppar och vändpunkter måste ha en punkt PÅ SIG och punkter tätt
+  omkring**, annars blir extrempunkten ett hörn. Det är där facetteringen
+  syns värst.
+- **`node .claude/verify-kurvor.js` före commit.** Den flaggar paths som
+  bara har `M`/`L`, svänger mjukt i minst tre hörn och har segment längre
+  än 10 px renderat.
+- **Avsiktligt raka grafer är undantagna** — en v–t-graf med konstant
+  acceleration, en styckvis linjär funktion, en area-polygon. Verifieraren
+  skiljer dem åt på svängvinkeln: knäckar skarpare än 40° räknas som
+  avsiktliga hörn.
+
+**Fysiken ska stämma i kurvans form, inte bara i dess etiketter.** Tre
+normalfördelningskurvor med samma medelvärde men olika spridning har
+**samma area** (arean under en täthetsfunktion är alltid 1), så höjden är
+omvänt proportionell mot spridningen: $h = C/\sigma$. Ritar man dem på
+ögonmått blir "högre och smalare" fel i förhållande till "lägre och
+bredare", och figuren motsäger texten bredvid.
+
+### ⚠️ Figurernas storlek: skala upp `width`/`height`, aldrig 1:1
+
+**En teori-figur ska renderas STÖRRE än sin viewBox**, så att etiketterna
+hamnar i nivå med brödtexten (17 px) i stället för de 9–13 px de ritas i.
+Figurerna ritas alltså fortfarande i bekväma viewBox-koordinater, men
+`<svg>`-taggens `width`/`height` sätts till viewBox-måtten **gånger en
+skalfaktor** (uttryckligt önskemål 2026-08-20: "alla har inte så bra syn").
+
+Räkna faktorn så här — den minsta av fyra gränser:
+
+```
+k = min( 664 / viewBoxBredd,      // får inte bli bredare än spalten
+         520 / viewBoxHöjd,       // rimligt tak i höjdled
+         19  / största font-size, // texten ska inte svälla förbi brödtexten
+         1.8 )                    // generellt tak
+width = round(viewBoxBredd · k)   height = round(viewBoxHöjd · k)
+```
+
+- **Spalten är 664 px** (figurblockets innehållsbredd på bred skärm). En
+  figur som sätts bredare krymps av `max-width: 100%`, och då blir skalan en
+  annan än den avsedda — `verify-figur-bounds.js` ger fel på det.
+- **Samma k i båda led**, annars förvrängs figuren. Aldrig k < 1.
+- **Rör aldrig viewBoxen eller koordinaterna** när du skalar — bara de två
+  attributen. Geometri, etiketter och streckbredder följer med av sig
+  själva, så inga nya kollisioner kan uppstå.
+- **Hover-etiketter räknas som text**: en dold etikett i font-size 10 i en
+  figur med k = 1,2 renderas som 12 px och är för liten. Sikta på minst
+  ~13 px renderat — dela hellre etiketten på två rader i större grad än att
+  låta den ligga på en rad i mikroskopisk stil. (Upphöjda exponent-`tspan`
+  är förstås mindre än sin bastext, som sig bör.)
+- **CSS:en har en fälla**: `marked` lindar `<svg>` i ett `<p>`, och
+  bildtextens `max-width: 46ch` träffade därför även figuren och kapade
+  varje figur till 405 px. Undantaget `.lab-block-figur p:has(> svg)` i
+  `styles-laborans.css` löser det — **ta inte bort det**, då blir alla
+  figurer små igen oavsett vad `width` säger.
 
 ### ⚠️ Etiketter får aldrig klippas av viewBox-kanten — räkna på TEXTENS BREDD
 

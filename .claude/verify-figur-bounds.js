@@ -199,26 +199,51 @@ for (const f of files) {
                 `Utöka viewBoxen (och width/height) i sidled, eller flytta etiketten inåt.`);
         }
 
-        // (3) Skala: figuren ska renderas i naturlig storlek (1 viewBox-enhet
-        // = 1 CSS-px) så att text-storleken matchar brödtexten (16 px). Det
-        // kräver width/height = viewBox-måtten (annars sträcks SVG:n till
-        // spaltbredden och texten blir för stor), och att ingen etikett är
-        // större än brödtexten.
+        // (3) Skala: figuren ska renderas STOR NOG att läsas utan
+        // förstoringsglas. width/height sätts till viewBox-måtten gånger en
+        // uppskalningsfaktor k, så att figurens etiketter hamnar i nivå med
+        // brödtexten (17 px) i stället för de 9–13 px de ritas i.
+        // Kraven: k ≥ 1 (aldrig nedskalad), samma k i båd led (ingen
+        // förvrängning), figuren får inte bli bredare än spalten (664 px)
+        // och den största etiketten får inte bli mycket större än brödtexten.
+        // Se "Figurernas storlek" i CLAUDE.md.
         const wAttr = parseFloat(attr(openTag, 'width'));
         const hAttr = parseFloat(attr(openTag, 'height'));
-        if (!(Math.abs(wAttr - vw) <= 1 && Math.abs(hAttr - vh) <= 1)) {
+        const KOL = 664, MAX_RENDERAD_FONT = 20;
+        if (!isFinite(wAttr) || !isFinite(hAttr)) {
             sizeProblems++;
-            console.log(`  ✗ ${f} figur #${idx}: saknar/felaktig width/height ` +
-                `(width="${isFinite(wAttr) ? wAttr : ''}" height="${isFinite(hAttr) ? hAttr : ''}" ` +
-                `mot viewBox ${vw}×${vh}). Sätt width/height = viewBox-måtten så figuren renderas 1:1.`);
-        }
-        const fsizes = (svg[2].match(/font-size="\d+(?:\.\d+)?"/g) || [])
-            .map(s => parseFloat(s.match(/[\d.]+/)[0]));
-        const maxFs = fsizes.length ? Math.max(...fsizes) : 0;
-        if (maxFs > 17) {
-            sizeProblems++;
-            console.log(`  ✗ ${f} figur #${idx}: text-storlek ${maxFs}px > brödtext (16px). ` +
-                `Etiketter ska vara ~16px (samma storlek som uppgiftstexten).`);
+            console.log(`  ✗ ${f} figur #${idx}: saknar width/height på <svg>. ` +
+                `Sätt dem till viewBox-måtten (${vw}×${vh}) gånger skalfaktorn.`);
+        } else {
+            const kw = wAttr / vw, kh = hAttr / vh;
+            if (Math.abs(kw - kh) > 0.02) {
+                sizeProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: width/height (${wAttr}×${hAttr}) har inte ` +
+                    `samma skala som viewBox ${vw}×${vh} (${kw.toFixed(2)}× mot ${kh.toFixed(2)}×) ` +
+                    `— figuren förvrängs.`);
+            } else if (kw < 0.99) {
+                sizeProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: nedskalad (${kw.toFixed(2)}×) — texten blir ` +
+                    `mindre än den ritats. Sätt width/height ≥ viewBox-måtten.`);
+            } else if (wAttr > KOL + 1) {
+                sizeProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: bredd ${wAttr}px > spalten (${KOL}px) — ` +
+                    `figuren krymps av max-width och skalan blir en annan än den avsedda.`);
+            }
+            const fsizes = (svg[2].match(/font-size="\d+(?:\.\d+)?"/g) || [])
+                .map(s => parseFloat(s.match(/[\d.]+/)[0]));
+            const maxFs = fsizes.length ? Math.max(...fsizes) : 0;
+            const renderad = maxFs * kw;
+            if (renderad > MAX_RENDERAD_FONT + 0.5) {
+                sizeProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: största etiketten renderas ${renderad.toFixed(1)}px ` +
+                    `(${maxFs}px × ${kw.toFixed(2)}) > ${MAX_RENDERAD_FONT}px. Sänk skalfaktorn.`);
+            }
+            if (maxFs && renderad < 12) {
+                sizeProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: största etiketten renderas bara ` +
+                    `${renderad.toFixed(1)}px — för smått att läsa. Höj font-size i viewBox-enheter.`);
+            }
         }
     }
 }

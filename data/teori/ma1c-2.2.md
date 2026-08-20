@@ -80,7 +80,7 @@ $$
 **Teckna ett förenklat uttryck för omkretsen till rektangeln nedan.**
 
 ::: figur
-<svg viewBox="16 4 206 118" width="206" height="118" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med höjden x och bredden 2x plus 3."><rect x="20" y="8" width="180" height="84" fill="#9ccfae" stroke="#4f7d47" stroke-width="1.4"/><text x="208" y="55" font-size="15" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="110" y="114" font-size="15" text-anchor="middle" fill="#1f2530">2<tspan font-style="italic">x</tspan> + 3</text></svg>
+<svg viewBox="16 4 206 118" width="261" height="149" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med höjden x och bredden 2x plus 3."><rect x="20" y="8" width="180" height="84" fill="#9ccfae" stroke="#4f7d47" stroke-width="1.4"/><text x="208" y="55" font-size="15" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="110" y="114" font-size="15" text-anchor="middle" fill="#1f2530">2<tspan font-style="italic">x</tspan> + 3</text></svg>
 :::
 
 ::: handskrift

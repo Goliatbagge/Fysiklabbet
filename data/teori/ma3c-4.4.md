@@ -56,7 +56,7 @@ I en punkt där
 :::
 
 ::: figur
-<svg viewBox="12 6 280 173" width="280" height="173" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Graf som visar övergången mellan en konkav och en konvex kurva. Vänster del av kurvan är blå och konkav, med andraderivatan negativ. Höger del är röd och konvex, med andraderivatan positiv. Mitt emellan, där kurvans lutning inte ändras, ligger inflexionspunkten. Peka eller tryck på en kurvdel eller inflexionspunkten så visas andraderivatans tecken." style="overflow:visible">
+<svg viewBox="12 6 280 173" width="409" height="253" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Graf som visar övergången mellan en konkav och en konvex kurva. Vänster del av kurvan är blå och konkav, med andraderivatan negativ. Höger del är röd och konvex, med andraderivatan positiv. Mitt emellan, där kurvans lutning inte ändras, ligger inflexionspunkten. Peka eller tryck på en kurvdel eller inflexionspunkten så visas andraderivatans tecken." style="overflow:visible">
 <style>.q44s{cursor:pointer;outline:none}.q44s .q44-cv{transition:stroke-width .18s ease}.q44s:hover .q44-cv,.q44s:focus .q44-cv{stroke-width:3.6}.q44s .q44-lbl{opacity:0;transition:opacity .18s ease;pointer-events:none}.q44s:hover .q44-lbl,.q44s:focus .q44-lbl{opacity:1}.q44s .q44-pt{transition:transform .18s ease;transform-box:fill-box;transform-origin:center}.q44s:hover .q44-pt,.q44s:focus .q44-pt{transform:scale(1.5)}</style>
 <line x1="16" y1="105" x2="275" y2="105" stroke="#1f2530" stroke-width="1.6"/>
 <polygon points="288,105 275,100.5 275,109.5" fill="#1f2530"/>
@@ -65,14 +65,14 @@ I en punkt där
 <text x="283" y="122" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text>
 <text x="160" y="20" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text>
 <g class="q44s" tabindex="0">
-<path d="M29,169.8 L40,137 L51,111.9 L62,93.7 L73,81.7 L84,75.1 L95,73 L106,74.8 L117,79.7 L128,86.8 L139,95.5 L150,105" fill="none" stroke="transparent" stroke-width="16"/>
-<path class="q44-cv" d="M29,169.8 L40,137 L51,111.9 L62,93.7 L73,81.7 L84,75.1 L95,73 L106,74.8 L117,79.7 L128,86.8 L139,95.5 L150,105" fill="none" stroke="#2563c9" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 29,169.8 C 30.83,164.33 36.33,146.65 40,137 C 43.67,127.35 47.33,119.12 51,111.9 C 54.67,104.68 58.33,98.73 62,93.7 C 65.67,88.67 69.33,84.8 73,81.7 C 76.67,78.6 80.33,76.55 84,75.1 C 87.67,73.65 91.33,73.05 95,73 C 98.67,72.95 102.33,73.68 106,74.8 C 109.67,75.92 113.33,77.7 117,79.7 C 120.67,81.7 124.33,84.17 128,86.8 C 131.67,89.43 135.33,92.47 139,95.5 C 142.67,98.53 148.17,103.42 150,105" fill="none" stroke="transparent" stroke-width="16"/>
+<path class="q44-cv" d="M 29,169.8 C 30.83,164.33 36.33,146.65 40,137 C 43.67,127.35 47.33,119.12 51,111.9 C 54.67,104.68 58.33,98.73 62,93.7 C 65.67,88.67 69.33,84.8 73,81.7 C 76.67,78.6 80.33,76.55 84,75.1 C 87.67,73.65 91.33,73.05 95,73 C 98.67,72.95 102.33,73.68 106,74.8 C 109.67,75.92 113.33,77.7 117,79.7 C 120.67,81.7 124.33,84.17 128,86.8 C 131.67,89.43 135.33,92.47 139,95.5 C 142.67,98.53 148.17,103.42 150,105" fill="none" stroke="#2563c9" stroke-width="2.4" stroke-linecap="round"/>
 <text x="50" y="60" font-size="13" text-anchor="start" fill="#2563c9">Konkav</text>
 <g class="q44-lbl"><rect x="47" y="64" width="58" height="16" rx="4" fill="#f3eee4"/><text x="50" y="76" font-size="12" text-anchor="start" fill="#2563c9"><tspan font-style="italic">f</tspan>&#8243;(<tspan font-style="italic">x</tspan>) &lt; 0</text></g>
 </g>
 <g class="q44s" tabindex="0">
-<path d="M150,105 L161,114.5 L172,123.2 L183,130.3 L194,135.2 L205,137 L216,135 L227,128.3 L238,116.3 L249,98.1 L260,73 L271,40.2" fill="none" stroke="transparent" stroke-width="16"/>
-<path class="q44-cv" d="M150,105 L161,114.5 L172,123.2 L183,130.3 L194,135.2 L205,137 L216,135 L227,128.3 L238,116.3 L249,98.1 L260,73 L271,40.2" fill="none" stroke="#c8324a" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M 150,105 C 151.83,106.58 157.33,111.47 161,114.5 C 164.67,117.53 168.33,120.57 172,123.2 C 175.67,125.83 179.33,128.3 183,130.3 C 186.67,132.3 190.33,134.08 194,135.2 C 197.67,136.32 201.33,137.03 205,137 C 208.67,136.97 212.33,136.45 216,135 C 219.67,133.55 223.33,131.42 227,128.3 C 230.67,125.18 234.33,121.33 238,116.3 C 241.67,111.27 245.33,105.32 249,98.1 C 252.67,90.88 256.33,82.65 260,73 C 263.67,63.35 269.17,45.67 271,40.2" fill="none" stroke="transparent" stroke-width="16"/>
+<path class="q44-cv" d="M 150,105 C 151.83,106.58 157.33,111.47 161,114.5 C 164.67,117.53 168.33,120.57 172,123.2 C 175.67,125.83 179.33,128.3 183,130.3 C 186.67,132.3 190.33,134.08 194,135.2 C 197.67,136.32 201.33,137.03 205,137 C 208.67,136.97 212.33,136.45 216,135 C 219.67,133.55 223.33,131.42 227,128.3 C 230.67,125.18 234.33,121.33 238,116.3 C 241.67,111.27 245.33,105.32 249,98.1 C 252.67,90.88 256.33,82.65 260,73 C 263.67,63.35 269.17,45.67 271,40.2" fill="none" stroke="#c8324a" stroke-width="2.4" stroke-linecap="round"/>
 <text x="210" y="155" font-size="13" text-anchor="start" fill="#c8324a">Konvex</text>
 <g class="q44-lbl"><text x="210" y="171" font-size="12" text-anchor="start" fill="#c8324a"><tspan font-style="italic">f</tspan>&#8243;(<tspan font-style="italic">x</tspan>) &gt; 0</text></g>
 </g>

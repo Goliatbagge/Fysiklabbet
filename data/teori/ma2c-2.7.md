@@ -99,7 +99,7 @@ Kontroll: $45 - 24 = 21$ och $24 \cdot 45 = 1\,080$. Stämmer!
 respektive $(x - 18)$ cm.
 
 ::: figur
-<svg viewBox="24 6 268 158" width="268" height="158" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med basen x centimeter och höjden x minus 18 centimeter."><rect x="30" y="24" width="180" height="110" fill="none" stroke="#1f2530" stroke-width="1.8"/><text x="120" y="156" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="220" y="84" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan> − 18</text><text x="290" y="18" font-size="12" text-anchor="end" fill="#1f2530">(cm)</text></svg>
+<svg viewBox="24 6 268 158" width="364" height="214" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med basen x centimeter och höjden x minus 18 centimeter."><rect x="30" y="24" width="180" height="110" fill="none" stroke="#1f2530" stroke-width="1.8"/><text x="120" y="156" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="220" y="84" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan> − 18</text><text x="290" y="18" font-size="12" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
 **2. Omkretsen $O$ är då**

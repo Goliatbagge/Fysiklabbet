@@ -56,22 +56,35 @@ I en punkt där
 :::
 
 ::: figur
-<svg viewBox="12 6 280 173" width="280" height="173" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Graf som visar övergången mellan en konkav och en konvex kurva. Vänster del av kurvan är blå och konkav, med andraderivatan negativ. Höger del är röd och konvex, med andraderivatan positiv. Mitt emellan, där kurvans lutning inte ändras, ligger inflexionspunkten.">
+<svg viewBox="12 6 280 173" width="280" height="173" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Graf som visar övergången mellan en konkav och en konvex kurva. Vänster del av kurvan är blå och konkav, med andraderivatan negativ. Höger del är röd och konvex, med andraderivatan positiv. Mitt emellan, där kurvans lutning inte ändras, ligger inflexionspunkten. Peka eller tryck på en kurvdel eller inflexionspunkten så visas andraderivatans tecken." style="overflow:visible">
+<style>.q44s{cursor:pointer;outline:none}.q44s .q44-cv{transition:stroke-width .18s ease}.q44s:hover .q44-cv,.q44s:focus .q44-cv{stroke-width:3.6}.q44s .q44-lbl{opacity:0;transition:opacity .18s ease;pointer-events:none}.q44s:hover .q44-lbl,.q44s:focus .q44-lbl{opacity:1}.q44s .q44-pt{transition:transform .18s ease;transform-box:fill-box;transform-origin:center}.q44s:hover .q44-pt,.q44s:focus .q44-pt{transform:scale(1.5)}</style>
 <line x1="16" y1="105" x2="275" y2="105" stroke="#1f2530" stroke-width="1.6"/>
 <polygon points="288,105 275,100.5 275,109.5" fill="#1f2530"/>
 <line x1="150" y1="175" x2="150" y2="25" stroke="#1f2530" stroke-width="1.6"/>
 <polygon points="150,14 145.5,25 154.5,25" fill="#1f2530"/>
 <text x="283" y="122" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text>
 <text x="160" y="20" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text>
-<path d="M29,169.8 L40,137 L51,111.9 L62,93.7 L73,81.7 L84,75.1 L95,73 L106,74.8 L117,79.7 L128,86.8 L139,95.5 L150,105" fill="none" stroke="#2563c9" stroke-width="2.4" stroke-linecap="round"/>
-<path d="M150,105 L161,114.5 L172,123.2 L183,130.3 L194,135.2 L205,137 L216,135 L227,128.3 L238,116.3 L249,98.1 L260,73 L271,40.2" fill="none" stroke="#c8324a" stroke-width="2.4" stroke-linecap="round"/>
-<line x1="160" y1="52" x2="152" y2="99" stroke="rgba(31,37,48,0.5)" stroke-width="1.2" stroke-dasharray="3 3"/>
-<circle cx="150" cy="105" r="3.5" fill="#f3eee4" stroke="#1f2530" stroke-width="1.6"/>
-<text x="163" y="42" font-size="12" text-anchor="start" fill="#1f2530">Inflexionspunkt</text>
+<g class="q44s" tabindex="0">
+<path d="M29,169.8 L40,137 L51,111.9 L62,93.7 L73,81.7 L84,75.1 L95,73 L106,74.8 L117,79.7 L128,86.8 L139,95.5 L150,105" fill="none" stroke="transparent" stroke-width="16"/>
+<path class="q44-cv" d="M29,169.8 L40,137 L51,111.9 L62,93.7 L73,81.7 L84,75.1 L95,73 L106,74.8 L117,79.7 L128,86.8 L139,95.5 L150,105" fill="none" stroke="#2563c9" stroke-width="2.4" stroke-linecap="round"/>
 <text x="50" y="60" font-size="13" text-anchor="start" fill="#2563c9">Konkav</text>
+<g class="q44-lbl"><rect x="47" y="64" width="58" height="16" rx="4" fill="#f3eee4"/><text x="50" y="76" font-size="12" text-anchor="start" fill="#2563c9"><tspan font-style="italic">f</tspan>&#8243;(<tspan font-style="italic">x</tspan>) &lt; 0</text></g>
+</g>
+<g class="q44s" tabindex="0">
+<path d="M150,105 L161,114.5 L172,123.2 L183,130.3 L194,135.2 L205,137 L216,135 L227,128.3 L238,116.3 L249,98.1 L260,73 L271,40.2" fill="none" stroke="transparent" stroke-width="16"/>
+<path class="q44-cv" d="M150,105 L161,114.5 L172,123.2 L183,130.3 L194,135.2 L205,137 L216,135 L227,128.3 L238,116.3 L249,98.1 L260,73 L271,40.2" fill="none" stroke="#c8324a" stroke-width="2.4" stroke-linecap="round"/>
 <text x="210" y="155" font-size="13" text-anchor="start" fill="#c8324a">Konvex</text>
+<g class="q44-lbl"><text x="210" y="171" font-size="12" text-anchor="start" fill="#c8324a"><tspan font-style="italic">f</tspan>&#8243;(<tspan font-style="italic">x</tspan>) &gt; 0</text></g>
+</g>
+<g class="q44s" tabindex="0">
+<circle cx="150" cy="105" r="15" fill="transparent"/>
+<line x1="160" y1="52" x2="152" y2="99" stroke="rgba(31,37,48,0.5)" stroke-width="1.2" stroke-dasharray="3 3"/>
+<circle class="q44-pt" cx="150" cy="105" r="3.5" fill="#f3eee4" stroke="#1f2530" stroke-width="1.6"/>
+<text x="163" y="42" font-size="12" text-anchor="start" fill="#1f2530">Inflexionspunkt</text>
+<g class="q44-lbl"><text x="163" y="57" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">f</tspan>&#8243;(<tspan font-style="italic">x</tspan>) = 0</text></g>
+</g>
 </svg>
-<p class="lab-figur-cap">Andraderivatan är negativ för hela den blå delen av kurvan ("ledsen" kurva, konkav) och positiv för hela den röda delen ("glad" kurva, konvex). I inflexionspunkten, där kurvan varken är konkav eller konvex, är andraderivatan lika med noll.</p>
+<p class="lab-figur-cap">Andraderivatan är negativ för hela den blå delen av kurvan ("ledsen" kurva, konkav) och positiv för hela den röda delen ("glad" kurva, konvex). I inflexionspunkten, där kurvan varken är konkav eller konvex, är andraderivatan lika med noll. Peka eller tryck på en kurvdel eller inflexionspunkten så visas andraderivatans tecken.</p>
 :::
 
 ::: exempel "Exempel 1 — Inflexionspunkt och konvexitet"

@@ -20,11 +20,35 @@ Om dagens datum redan har `ig-nyhet: postad` → avsluta utan att posta.
 Loggen delas med Facebook-agenten så att båda ser vad den andra gjort;
 uppdatera den ALLTID innan du avslutar.
 
-## 1. Hämta dagens nyhet
+Läs också `.claude/facebook/nyhetsbank.md` — den delas också med
+Facebook-agenten och avgör vad du postar en dag utan ny artikel.
 
-Som Facebook-agenten: posten i `data/nyheter.js` med `date` = dagens
-datum. Läs `title`, `deck`, `id`, `image`-fälten. Ingen artikel i dag →
-logga `ig-nyhet: ingen artikel i dag` och avsluta.
+## 1. Välj dagens artikel — och spara överskottet
+
+Kandidaterna är posterna i `data/nyheter.js` med `date` = dagens datum.
+Läs `title`, `deck`, `id`, `image`-fälten.
+
+Urvalet följer samma nyhetsbanksregler som Facebook-agenten
+(`.claude/commands/fb-daglig.md` § 1) — ett inlägg per dag, överskottet
+sparas i `.claude/facebook/nyhetsbank.md`, och en dag utan ny artikel
+hämtas den äldsta raden med `ig: väntar` därifrån i stället för att
+hoppa över dagen. Två skillnader:
+
+- **Håll dig i takt med Facebook.** Jobbet körs efter FB-jobbet, så
+  börja med dagens `nyhet:`-rad i loggen: har FB postat en artikel i dag,
+  posta **samma** artikel här (även om den kom ur banken) och lägg inte
+  in några nya bankrader — FB har redan gjort det. Saknas FB-raden
+  (fel, eller inte kört än) gör du hela urvalet själv enligt fb-reglerna,
+  inklusive att lägga in överskottet i banken.
+- **Rör bara `ig:`-fältet** på en bankrad: sätt `ig: postad <dagens
+  datum>`, och ta bort hela raden först när även `fb:` är postad.
+
+Ingen artikel i dag och tom bank → logga `ig-nyhet: ingen artikel i dag
+(banken tom)` och avsluta.
+
+Postar du ur banken: skriv bildtexten kring själva fysiken och anspela
+inte på att nyheten är färsk ("i dag", "nyss") — den kan vara några
+dagar gammal.
 
 ## 2. Skriv bildtexten och välj bild
 
@@ -61,6 +85,11 @@ logga `ig-nyhet: ingen artikel i dag` och avsluta.
 Lägg till dagens `ig-nyhet:`-rad i `.claude/facebook/logg.md`. Rör INTE
 `senaste lanseringskoll:`-raden — den sköts av eftermiddagsjobben.
 Committa inte loggen.
+
+Skriv ut i raden om artikeln kom ur banken (`ig-nyhet: postad <id> (ur
+nyhetsbanken, publicerad YYYY-MM-DD)`), och uppdatera
+`.claude/facebook/nyhetsbank.md` — `ig:`-status och rader som är klara i
+båda kanalerna. Banken committas inte heller.
 
 ## Säkerhetsregler (absoluta)
 

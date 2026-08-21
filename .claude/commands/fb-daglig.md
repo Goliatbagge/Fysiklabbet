@@ -16,13 +16,42 @@ Läs `.claude/facebook/logg.md`. Om dagens datum redan har en rad med
 `nyhet: postad` → avsluta utan att posta. Loggen är enda skyddet mot
 dubbelpostning — uppdatera den ALLTID innan du avslutar.
 
-## 1. Hämta dagens nyhet
+Läs också `.claude/facebook/nyhetsbank.md` — artiklar som sparats från
+tidigare dagar med flera nyheter. Den avgör vad du postar en dag utan ny
+artikel (steg 1).
 
-Dagens artikel ligger i `data/nyheter.js`: posten vars `date` är dagens
-datum (`YYYY-MM-DD`). Läs `title`, `deck`, `id` och gärna inledningen av
-`body` för att förstå innehållet. Datumgrindning: en artikel med dagens
-datum är publik. Finns ingen artikel för i dag → logga `nyhet: ingen
-artikel i dag` och avsluta.
+## 1. Välj dagens artikel — och spara överskottet
+
+Kandidaterna är posterna i `data/nyheter.js` vars `date` är dagens datum
+(`YYYY-MM-DD`) — datumgrindningen gör dem publika i dag. Läs `title`,
+`deck`, `id` och gärna inledningen av `body` för att förstå innehållet.
+
+**Ett inlägg per dag — varken fler eller färre.** Kommer det flera
+artiklar samma dag ska de övriga inte brinna inne, och en dag utan ny
+artikel ska inte lämna flödet tomt. Det sköts med nyhetsbanken,
+`.claude/facebook/nyhetsbank.md` (formatet står i filen). Läs den
+tillsammans med loggen i steg 0.
+
+1. **Flera artiklar i dag** → posta den som håller bäst som ensamt
+   inlägg (bredast intresse, tydligast bild). Lägg **var och en av de
+   övriga** som en egen rad i nyhetsbanken med `fb: väntar | ig: väntar`,
+   i den ordning de står i `data/nyheter.js`.
+2. **Exakt en artikel i dag** → posta den. Banken rörs inte; de sparade
+   artiklarna får ligga kvar till nästa torra dag.
+3. **Ingen artikel i dag (nyhetstorka)** → ta den ÄLDSTA raden i banken
+   som har `fb: väntar` och posta den artikeln. Skriv inlägget som
+   vanligt, men **anspela inte på att nyheten är färsk** ("i dag",
+   "nyss", "i veckan") — den kan vara flera dagar gammal. Ordna
+   istället texten kring själva fysiken, som är lika intressant ändå.
+   Är banken tom → logga `nyhet: ingen artikel i dag (banken tom)` och
+   avsluta utan att posta.
+4. **Rensa gamla rader.** En bankrad som är äldre än **10 dagar** tas
+   bort oanvänd (skriv `utgången` i loggen) — en gammal nyhet ska hellre
+   falla bort än postas som färsk. Detsamma gäller en artikel vars
+   innehåll hunnit bli inaktuellt eller motsagt.
+
+Postar du från banken: sätt `fb: postad <dagens datum>` på raden, och ta
+bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
 
 ## 2. Skriv inlägget
 
@@ -64,6 +93,12 @@ artikel i dag` och avsluta.
 Lägg till dagens `nyhet:`-rad i `.claude/facebook/logg.md` (formatet
 står i filen). Rör INTE `senaste lanseringskoll:`-raden — den sköts av
 eftermiddagsjobbet. Committa INTE loggen — den är lokal arbetsdata.
+
+Skriv ut i loggraden om artikeln kom från banken (`nyhet: postad <id>
+(ur nyhetsbanken, publicerad YYYY-MM-DD)`) och vilka artiklar du lämnat
+kvar i banken i dag. Uppdatera `.claude/facebook/nyhetsbank.md` i samma
+veva — nya rader, `fb:`-status och borttagna/utgångna rader. Inte heller
+banken committas.
 
 ## Säkerhetsregler (absoluta)
 

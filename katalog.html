@@ -2681,13 +2681,18 @@
                 // Vyerna (:ovningar, :exitticket, :visualisering) är flikar
                 // på SAMMA avsnitt och pekar därför på avsnittets adress —
                 // de står inte som egna rader i sitemapen.
+                // En KURSVY (?id=fy1, ?id=ma1b …) är en egen sida med eget
+                // innehåll och ska peka på sig själv — pekade den på
+                // katalog.html hamnade den under "Alternativ sida med korrekt
+                // kanonisk tagg" och kunde aldrig indexeras, trots att Ämne-
+                // menyn och välkomstmejlet länkar dit (upptäckt 2026-08-21).
                 if (window.sattKanonisk) {
                     const kurskod = Object.keys(HASH_COURSES)
                         .find(k => HASH_COURSES[k][1] === state.course);
                     window.sattKanonisk(
-                        (avs && kurskod)
-                            ? `katalog.html?id=${kurskod}-${avs.num}`
-                            : 'katalog.html'
+                        !kurskod ? 'katalog.html'
+                            : avs ? `katalog.html?id=${kurskod}-${avs.num}`
+                            : `katalog.html?id=${kurskod}`
                     );
                 }
             }, [state.subject, state.course, state.chapter, state.section, state.view]);

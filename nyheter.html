@@ -824,7 +824,18 @@
             const [cat, setCat] = React.useState(init.get('kategori') || '');
 
             // Spegla filtren i URL:en så att en filtrerad vy går att länka/bokmärka.
+            //
+            // ⚠️ ALDRIG vid första renderingen. ListView visas nämligen också när
+            // ?id= pekar på en artikel som inte finns i window.NYHETER — och det
+            // händer för Googlebot: datumgrinden i data/nyheter.js jämför mot
+            // renderarens klocka (UTC), så dagens artikel kan vara osynlig när
+            // roboten renderar sidan. Skrev vi då om adressen till nyheter.html
+            // tolkade Google det som en klientomdirigering, och artikeln hamnade
+            // under "Sida med omdirigering" i Search Console — permanent utanför
+            // indexet. 22 artiklar hade fastnat så när det upptäcktes 2026-08-21.
+            const forstaRenderingen = React.useRef(true);
             React.useEffect(() => {
+                if (forstaRenderingen.current) { forstaRenderingen.current = false; return; }
                 const p = new URLSearchParams();
                 if (cat) p.set('kategori', cat);
                 if (query.trim()) p.set('sok', query.trim());

@@ -277,6 +277,11 @@ const SITEMAP_EXCLUDE = new Set([
   'matte-triangel-rektangel.html', // olänkad arbetsfil
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
   'fysik1-enhetskollen.html',    // redirect-stub → fysik-enhetskoll.html
+  // Omdirigeringssidor hör inte hemma i en sitemap — Google rapporterar dem
+  // som "Sida med omdirigering". De ligger kvar som filer eftersom hela
+  // navigationen länkar dit; målet katalog.html?id=fy1/fy2 står i sitemapen.
+  'fysik1.html',                 // redirect-stub → katalog.html?id=fy1
+  'fysik2.html',                 // redirect-stub → katalog.html?id=fy2
 ]);
 
 // Ägarverifiering hos sökmotorerna (google<token>.html från Search Console,
@@ -352,6 +357,13 @@ function loadAvsnitt() {
   return loadAvsnittData().map((a) => a.id);
 }
 
+// Kursvyerna → katalog.html?id=<kurskod>. De är egna landningssidor (hela
+// kursens kapitellista) och länkas från Ämne-menyn, startsidans
+// uppdateringsrad och välkomstmejlet — men saknades i sitemapen.
+function loadKurser() {
+  return [...new Set(loadAvsnittData().map((a) => KURSKOD[a.kurs]))].filter(Boolean);
+}
+
 // Samma avsnitt, men med den text delningssidorna behöver.
 function loadAvsnittData() {
   const flat = korIFil('data/katalog.js', 'KATALOG_FLAT');
@@ -413,6 +425,9 @@ function buildSitemap(published) {
   for (const b of loadBegrepp()) {
     if (!b || !b.id) continue;
     entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/begrepp.html?ord=${encodeURIComponent(b.id)}`)}</loc></url>`);
+  }
+  for (const id of loadKurser()) {
+    entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/katalog.html?id=${encodeURIComponent(id)}`)}</loc></url>`);
   }
   for (const id of loadAvsnitt()) {
     entries.push(`  <url><loc>${esc(`${SITE_ORIGIN}/katalog.html?id=${encodeURIComponent(id)}`)}</loc></url>`);
@@ -507,6 +522,6 @@ if (require.main === module) build();
 module.exports = {
   ROOT, SITE_ORIGIN, OUT_DIR, FEED_MAX,
   loadArticles, publishedOnly, loadBegrepp, buildFeed, buildSitemap, pageHtml,
-  loadAvsnitt, loadAvsnittData, loadProv, loadRepetition,
+  loadAvsnitt, loadAvsnittData, loadKurser, loadProv, loadRepetition,
   AVSNITT_DELA_DIR, avsnittDelaHtml,
 };

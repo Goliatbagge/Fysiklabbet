@@ -88,6 +88,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-21-infrarod-farg",
+    date: "2026-08-21",
+    title: "Ögat kan inte se värmestrålning — nu finns ett par glasögon som målar den i rött och cyan",
+    deck: "Mörkerseende har alltid varit grönt eller gråtonat, eftersom en infraröd bild inte bär någon färg ögat kan läsa. Ett skikt kvantprickar ovanpå en organisk lysdiod ger nu varje infraröd våglängd sin egen kulör — i ett par genomskinliga glasögon som väger 23 gram.",
+    category: "Fotonik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-21-infrarod-farg.jpg",
+    imageAlt: "Ett par tunna glasögon står på en mörk labbänk. Genom det ena glaset syns rummet bakom i lysande rött och cyan, som om värmestrålning gjorts synlig, medan det andra glaset är klart.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["fotonik", "optik", "infrarött", "kvantprickar", "lysdiod", "syn", "nanoteknik"],
+    sources: [
+      { name: "Physics World (20 augusti 2026)", url: "https://physicsworld.com/a/upconverting-colloidal-quantum-dots-bring-colour-vision-to-the-infrared/" },
+      { name: "Tech Xplore (3 augusti 2026)", url: "https://techxplore.com/news/2026-08-prototype-glasses-infrared-vision.html" },
+      { name: "Popular Science (om samma studie)", url: "https://www.popsci.com/technology/infrared-glasses-human-eyesight/" },
+      { name: "Crossref (volym, artikelnummer, författarlista, publiceringsdatum)", url: "https://api.crossref.org/works/10.1126/sciadv.aed0245" }
+    ],
+    research: {
+      citation: "Chengchang Fu, Jintao Zou, Xiaoxue Yang, Qun Hao, Xin Tang och Ge Mu, ”Multispectral infrared-to-full-color upconversion expanding human vision”, Science Advances 12 (31), eaed0245 (2026)",
+      url: "https://doi.org/10.1126/sciadv.aed0245"
+    },
+    body: [
+      { type: 'p', html: 'Allt som är varmare än sin omgivning lyser. En människa, en nyss avstängd spisplatta, en katt under en buske — alla skickar de ut infraröd strålning dygnet runt, i mängder. Vi ser bara ingenting av det. Ögats synliga fönster är smalt, ungefär 400 till 700&nbsp;nm, och utanför det är världen kolsvart hur mycket den än strålar.' },
+      { type: 'p', html: 'Att kika ut genom fönstret går sedan länge, men bilden har alltid haft samma brist: den blir enfärgad. Mörkerglasögon lyser grönt, och värmekameror målar i falska färger som en dator lagt på i efterhand. Ett forskarlag vid Beijing Institute of Technology rapporterar nu en omvandlare som gör något annat — den låter den infraröda våglängden själv bestämma vilken färg ögat får se.' },
+      { type: 'h2', text: 'Varför värmestrålning aldrig når fram' },
+      { type: 'p', html: 'Att ögat missar det infraröda beror inte på att strålningen är för svag. Den är för lågenergisk per ljuspartikel. Energin i en foton ges av $E = \\dfrac{h \\cdot c}{\\lambda}$, alltså desto mindre ju längre våglängden är. En foton med våglängden 2&nbsp;µm bär omkring $0{,}62\\ \\mathrm{eV}$, medan färgämnet i näthinnans tappar och stavar behöver närmare $2\\ \\mathrm{eV}$ för att ändra form och utlösa en nervsignal.' },
+      { type: 'p', html: 'Skillnaden går inte att kompensera med styrka. Miljarder infraröda fotoner uträttar lika lite som en enda — var och en av dem är för klen. Det behövs något som tar emot de svaga fotonerna och skickar vidare kraftigare i deras ställe.' },
+      { type: 'h2', text: 'Prickar så små att storleken blir en färg' },
+      { type: 'p', html: 'Fångstsidan i den nya konstruktionen består av kvantprickar av kvicksilvertellurid — nanokristaller så små att elektronerna inuti dem tvingas in i bestämda energinivåer, ungefär som i en atom. Vilka våglängder pricken kan absorbera bestäms då inte bara av vilket ämne den är gjord av utan också av hur stor den är, och den saken går att styra i tillverkningen. Materialet i studien tar upp infrarött ända bortom 2&nbsp;µm.' },
+      { type: 'p', html: 'Ovanpå detektorskiktet sitter en organisk lysdiod med två olika lysande lager, ett rött och ett cyanfärgat. Laddningarna som den infraröda fotonen frigör leds upp i dioden, och tunna barriärer i lagren avgör var de får återförenas och skicka ut sitt ljus. Långvågigt, svagt infrarött tänder bara det röda lagret; kortvågigare och starkare tänder även det cyanfärgade. Färgen blir därmed en avläsning av vilken sorts infrarött som kommer in, inte bara av hur mycket.' },
+      { type: 'quote', html: 'De exciterade laddningsbärarna transporteras och återförenas i olika lysande lager tack vare de hålfångande barriärer som byggts in i lagren.', cite: 'Xin Tang, Beijing Institute of Technology, en av studiens ansvariga forskare' },
+      { type: 'p', html: 'Namnet på tricket är uppkonvertering, men det ska inte läsas som att energi skapas ur ingenting. Lysdioden drivs av en pålagd spänning, och den infraröda fotonen fungerar som en avtryckare som släpper fram det ljus spänningen betalar för. Verkningsgraden visar hur svårt det är: 3,85&nbsp;% av de infraröda fotonerna ger upphov till en synlig foton, alltså knappt fyra av hundra. Ljusstyrkan räcker ändå gott — över 700&nbsp;cd/m², i nivå med en ljusstark mobilskärm.' },
+      { type: 'h2', text: 'Tjugotre gram på näsan' },
+      { type: 'p', html: 'För att pröva saken byggde laget ett par lätta, halvgenomskinliga glasögon på 23&nbsp;gram, med omvandlaren i det ena glaset. Bäraren ser rummet som vanligt genom glaset samtidigt som den infraröda bilden ligger inlagd ovanpå i färg. Försöken gjordes med figurer och rörliga föremål som belystes med infrarött ljus, och konturerna kom fram skarpt.' },
+      { type: 'p', html: 'Poängen med färgerna är mätbar. Förmågan att skilja små skillnader i den infraröda signalen blev över hundra gånger bättre än i ett vanligt enfärgat läge — inte för att detektorn blev känsligare, utan för att ögat är betydligt bättre på att skilja kulörer åt än på att bedöma om något är lite ljusare eller lite mörkare.' },
+      { type: 'h2', text: 'Vad som återstår' },
+      { type: 'p', html: 'Det här är en prototyp på en labbänk, inte en produkt. Ett enda öga täcks, verkningsgraden är låg, och kvicksilvertellurid är inte ett material man utan vidare sätter på tusentals människors ansikten. Forskarna pekar ändå ut ett andra spår som är både mer långsökt och mer lockande: en omvandlare tunn nog att placeras mot näthinnan och stimulera dess ljuskänsliga celler direkt, som en konstgjord synreceptor för den som förlorat sina egna.' },
+      { type: 'p', html: 'Kvar står en fin liten tankeställare. Gropormar, vampyrfladdermöss och vissa skalbaggar har sedan länge egna organ för att känna av värmestrålning, medan vårt eget synsinne stannade vid regnbågens färger. Nu ligger skillnaden i ett skikt nanokristaller, inte i evolutionen.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'En fotons energi hänger ihop med våglängden: 400&nbsp;nm motsvarar ungefär 3,1&nbsp;eV, 700&nbsp;nm ungefär 1,8&nbsp;eV och 2&nbsp;µm bara 0,62&nbsp;eV. Det är därför blått ljus kan starta kemiska reaktioner som rött inte rår på.',
+        'Mörkerglasögon lyser grönt av en anledning: ögat är som känsligast kring 555&nbsp;nm, så en given mängd ljus syns bäst just där.',
+        'Kvantprickar är så små att elektronerna inuti dem bara får ha bestämda energier. Storleken blir då en ratt för färgen — samma princip används i kvantpricksskärmar.',
+        'Gropormar som skallerormar har en grop på var sida om nosen med ett membran som känner av värmestrålning. Den informationen vävs samman med synintrycken i hjärnan.'
+      ] },
+      { type: 'p', html: 'Arbetet publicerades i <em>Science Advances</em> och lyftes fram på nytt av <em>Physics World</em> i augusti.' }
+    ]
+  },
+  {
     id: "2026-08-20-ljusslutaren",
     date: "2026-08-20",
     title: "Slutaren som står öppen en biljondels sekund — så plockas ljuset som inte gått vilse ut ur dimman",

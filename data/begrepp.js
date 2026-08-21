@@ -980,7 +980,7 @@ window.BEGREPP = [
   {
     id: 'nanoskala',
     term: 'Nanoskala',
-    former: ['nanoskala', 'nanoskalan', 'nanometer', 'nanometern', 'nanoteknik', 'nanotekniken', 'nanostruktur', 'nanostrukturer', 'nanopartikel', 'nanopartiklar', 'nanopartiklarna', 'kvantprick', 'kvantprickar', 'kvantprickarna'],
+    former: ['nanoskala', 'nanoskalan', 'nanometer', 'nanometern', 'nanoteknik', 'nanotekniken', 'nanostruktur', 'nanostrukturer', 'nanopartikel', 'nanopartiklar', 'nanopartiklarna'],
     kort: 'Storleksordningen några miljarddels meter, där enstaka atomer och molekyler är byggstenarna. Väl kända material får ofta helt nya egenskaper när de krymps ner hit.',
     relaterade: ['halvledare', 'metamaterial', 'fotonisk-kristall'],
     body: [
@@ -1563,6 +1563,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Vissa kristaller, som kalcit, har olika brytningsförmåga åt olika håll. Lägger man en kalcitbit över en textrad ser man två rader i stället för en, eftersom ljus som svänger i den ena riktningen bryts annorlunda än ljus som svänger i den andra. Egenskapen kallas dubbelbrytning, och den kräver normalt ett material med en inre ordning — atomer som sitter uppradade åt ett bestämt håll.' },
       { type: 'p', html: 'Enligt kvantelektrodynamiken kan även ett tomrum få en sådan ordning. Vakuum är nämligen inte stilla: par av elektroner och positroner uppstår hela tiden, existerar en ofattbart kort stund och försvinner igen. Vanligtvis märks de inte alls. Men i ett tillräckligt starkt magnetfält hinner paren rikta in sig efter fältet innan de slocknar, och då har tomrummet en riktning. Ljus som svänger längs fältet möter något annat än ljus som svänger tvärs över det, och de två går fram olika fort. Werner Heisenberg och Hans Euler räknade ut detta 1936.' },
       { type: 'p', html: 'Problemet är hur starkt fältet måste vara. Effekten blir påtaglig först i närheten av den kritiska fältstyrkan, ungefär fyra miljarder tesla — omkring hundra miljoner gånger mer än de kraftigaste magneter som byggts på jorden. Laboratorieförsök försöker i stället samla ihop en försvinnande liten effekt genom att skicka laserljus fram och tillbaka tusentals gånger genom en magnet, men signalen har hittills varit för svag. Därför riktas hoppet mot magnetarer, vars ytfält ligger flera gånger över den kritiska gränsen och som därmed är de enda kända platserna där fenomenet borde vara tydligt.' }
+    ]
+  },
+  {
+    id: 'kvantprick',
+    term: 'Kvantprick',
+    former: ['kvantprick', 'kvantpricken', 'kvantprickar', 'kvantprickarna', 'kvantpricksskärm', 'kvantpricksskärmar'],
+    kort: 'En kristall så liten att elektronerna inuti den bara får ha vissa bestämda energier. Storleken bestämmer då vilken färg pricken kan absorbera och sända ut.',
+    relaterade: ['nanoskala', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'En kvantprick är en kristall av halvledarmaterial med en diameter på några nanometer — så liten att den rymmer kanske några tusen atomer. Vid den storleken får elektronerna inuti inte längre röra sig fritt. De är instängda på alla håll, ungefär som en boll i en mycket liten låda, och en instängd partikel kan bara ha vissa bestämda energier. Kvantpricken beter sig därför mer som en jättelik konstgjord atom än som en bit vanligt material.' },
+      { type: 'p', html: 'Det praktiska med saken är att avstånden mellan de tillåtna energierna beror på hur stor lådan är. Krymper pricken flyttas nivåerna längre isär, och då krävs mer energi — alltså kortare våglängd — för att lyfta en elektron. Samma ämne kan på så vis göras att lysa rött, grönt eller blått enbart genom att prickarna tillverkas i olika storlek. Färgen sitter i geometrin, inte i kemin, vilket är ovanligt.' },
+      { type: 'p', html: 'Kvantprickar sitter i dag i tv-apparater och datorskärmar, där de ger renare och mättade färger än vanliga vita lysdioder med filter. De används också som lysande markörer i biologiska prov, i solceller och i infraröda detektorer, där prickar av till exempel kvicksilvertellurid kan ställas in på att fånga just den våglängd man är ute efter. Nobelpriset i kemi 2023 gick till upptäckten och framställningen av dem.' }
+    ]
+  },
+  {
+    id: 'uppkonvertering',
+    term: 'Uppkonvertering',
+    former: ['uppkonvertering', 'uppkonverteringen', 'uppkonvertera', 'uppkonverterar', 'uppkonverterad', 'uppkonverterat', 'uppkonverterare'],
+    kort: 'Att göra om ljus med låg fotonenergi till ljus med högre, till exempel infrarött till synligt. Den extra energin måste alltid komma någonstans ifrån.',
+    relaterade: ['kvantprick', 'exciterat-tillstand'],
+    body: [
+      { type: 'p', html: 'Ljus kommer i paket, och varje paket bär en bestämd energi som hänger ihop med våglängden: ju längre våg, desto mindre energi per foton. Infrarött ljus har därför för klena fotoner för att synas, hur mycket av det som än strömmar in. Uppkonvertering är samlingsnamnet på knep som gör om sådana svaga fotoner till kraftigare, kortvågigare fotoner som ögat eller en billig kiselsensor kan uppfatta.' },
+      { type: 'p', html: 'Energi kan inte skapas ur ingenting, så räkenskapen måste gå ihop. I ett rent optiskt fall får ett material ta emot två eller tre svaga fotoner och skicka ut en enda kraftig i stället — antalet minskar medan den samlade energin bevaras. I en elektrisk uppkonverterare är det i stället en pålagd spänning som betalar för det utsända ljuset, och den infraröda fotonen fungerar bara som avtryckare som avgör var och när ljuset ska tändas.' },
+      { type: 'p', html: 'Verkningsgraden är nästan alltid det svåra: bara en liten andel av de infraröda fotonerna resulterar i en synlig. Ändå är tekniken lockande, eftersom den flyttar informationen till våglängder där detektorer är billiga och känsliga. Den prövas i mörkerseende, i bildgivare för värmestrålning och i solceller, där sådant ljus som annars passerar rakt igenom skulle kunna lyftas upp till en energi cellen faktiskt kan ta vara på.' }
     ]
   }
 ];

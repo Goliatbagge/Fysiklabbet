@@ -39,6 +39,48 @@ Format per post:
   https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
   (tillagd 2026-08-18)
 
+## Fynd som inte användes (2026-08-21) — kan tas upp senare
+
+- **Publicerad 2026-08-21: glasögonen som gör infrarött ljus till färg** (Beijing Institute
+  of Technology, Science Advances 12 (31), eaed0245, DOI 10.1126/sciadv.aed0245) — kom INTE
+  från kön; valdes för ämnesvariation (kondenserad materia/optik i tillämpad form) och för att
+  Physics World lyfte den 2026-08-20. Fällor för en ev. uppföljare: (a) originalartikeln är
+  betalspärrad och saknar arXiv-version, så metoddelen går inte att läsa — bygg på Crossref +
+  Europe PMC:s abstract; (b) källorna motsäger varandra om det biologiska försöket (möss
+  kontra mänsklig näthinna) — belägg det innan det skrivs ut; (c) paperet publicerades redan
+  31 juli, nyhetsanslaget är Physics Worlds bevakning.
+
+- **”Svart håls-stjärnan” MoM-BH*-1 — en helt ny sorts astrofysiskt objekt** (MYCKET STARK,
+  men inte längre dagsfärsk). Rohan Naidu m.fl. i MoM-genomgången med JWST har hittat ett
+  svart hål på omkring 100 000 solmassor, insvept i ett tätt hölje av väte ungefär så stort
+  som vårt solsystem, 660 miljoner år efter Big Bang. Höljet ger objektet spektrala drag av en
+  jättestjärna, med ett Balmer-brott tre till fyra gånger starkare än något tidigare uppmätt —
+  vilket kan förklara de hundratals ”little red dots” JWST hittat i det tidiga universum.
+  Nature, publicerad 2026-08-12, MIT News samma dag. Bortvald 2026-08-21 enbart på ålder
+  (nio dagar) och för att astrofysik gått två gånger den senaste veckan. Källa:
+  https://news.mit.edu/2026/astronomers-discover-brand-new-type-astrophysical-object-black-hole-star-0812
+  (tillagd 2026-08-21)
+
+- **Candelan mäter fel — ljusstyrkan hos färgat ljus upplevs inte som SI-enheten säger**
+  (Justus Liebig-universitetet Giessen, Karl Gegenfurtner, PNAS, DOI 10.1073/pnas.2610398123,
+  Phys.org 2026-08-20). En enkel regel — ta det största viktade värdet av rött, grönt och blått
+  i stället för att summera alla tre — förklarar över 95 % av försökspersonernas bedömningar,
+  där den nuvarande fotometriska standarden missar. 144 färger rangordnades först, sedan 486
+  deltagare på nätet. Fin vinkel på hur SI-enheter definieras och varför mättat och blått ljus
+  ser starkare ut än standarden förutsäger. (tillagd 2026-08-21)
+
+- **Gas som ultrasnabb lins för intensiva XUV-pulser** (MPIK Heidelberg, Yu He och Thomas
+  Pfeifer, Science Advances, DOI 10.1126/sciadv.aef5300, Phys.org 2026-08-21). Heliumgas som
+  tidsberoende optiskt element vid FLASH: nära atomresonansen kring 21,2 eV böjs strålen av
+  och spektrumet får en dubbeltopp. Bra brytnings- och resonansvinkel — men ligger ämnesmässigt
+  nära både den här dagens artikel och ljusslutaren 2026-08-20. (tillagd 2026-08-21)
+
+- **Magnetiskt svävande kvantbit** (FAMU-FSU/National High Magnetic Field Laboratory, Wei Guo
+  m.fl., PRX Quantum, DOI 10.1103/j7mn-x9f2, Phys.org 2026-08-20). Supraledande slingor håller
+  små neonpartiklar svävande ovanför chipet så att elektronkvantbitarna slipper substratets
+  ojämnheter. OBS: det är en konstruktionsstudie, ingen byggd prototyp — och ligger nära den
+  svävande magneten som publicerades 2026-08-08. (tillagd 2026-08-21)
+
 ## Fynd som inte användes (2026-08-20) — kan tas upp senare
 
 - **Publicerad 2026-08-20: ljusslutaren av epsilon-nära-noll-material** (University of

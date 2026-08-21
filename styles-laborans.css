@@ -17,10 +17,11 @@
     --lab-bg-panel:    #ffffff;  /* vita kort, aktiva paneler */
     --lab-ink:         #0f1620;  /* primär text */
     --lab-ink-soft:    #3f4a5c;  /* sekundär text */
-    --lab-ink-muted:   #8a8579;  /* mono-etiketter, breadcrumb */
+    --lab-ink-muted:   #69655c;  /* mono-etiketter, breadcrumb */
     --lab-line:        rgba(15, 22, 32, 0.12);  /* tunna linjer */
     --lab-line-strong: rgba(15, 22, 32, 0.28);  /* tydliga linjer, flikkanter */
     --lab-accent:      #c8324a;  /* primär accent (italic, aktiva markeringar) */
+    --lab-accent-dark: #ae243a;  /* accent mot rosa botten (utvecklingsbannern) */
     --lab-accent-soft: rgba(200, 50, 74, 0.10);
     --lab-accent-2:    #1c3d6b;  /* djupblå sekundär */
 
@@ -142,12 +143,13 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn) {
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--lab-accent);
+    /* Mörkare accent: mot bannerns rosa botten ger --lab-accent bara 3,9:1. */
+    color: var(--lab-accent-dark);
     white-space: nowrap;
 }
 
 .lab-utveckling a {
-    color: var(--lab-accent);
+    color: var(--lab-accent-dark);
     border-bottom: 1px solid rgba(200, 50, 74, 0.4);
 }
 

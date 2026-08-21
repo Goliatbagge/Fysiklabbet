@@ -345,7 +345,8 @@
             <input type="hidden" name="_subject" value="Feedback från Fysiklabbet">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="URL" id="fb-url" value="">
-            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+            <!-- Spamfälla: dold för både öga och skärmläsare (WAVE: "missing form label"). -->
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Lämna tomt" style="display:none">
 
             <div class="fb-field">
                 <label class="fb-label" for="fb-message">Meddelande</label>

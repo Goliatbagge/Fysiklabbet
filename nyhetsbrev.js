@@ -92,7 +92,7 @@
         '    max-width: 58ch; margin: 0 0 18px;',
         '}',
         '.nb-box .nb-fine {',
-        '    font-family: var(--lab-font-mono); font-size: 10.5px;',
+        '    font-family: var(--lab-font-mono); font-size: 11px;',
         '    letter-spacing: 0.04em; line-height: 1.6;',
         '    color: var(--lab-ink-muted); margin: 13px 0 0;',
         '}',

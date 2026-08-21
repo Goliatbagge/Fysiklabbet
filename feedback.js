@@ -161,7 +161,7 @@
     .fb-label {
         display: block;
         font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
-        font-size: 10px;
+        font-size: 11px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: #69655c;
@@ -169,7 +169,7 @@
     }
     .fb-optional {
         font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 500;
         color: #c8324a;
         margin-left: 0.5rem;

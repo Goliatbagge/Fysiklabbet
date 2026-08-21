@@ -147,7 +147,7 @@
     .fb-close {
         background: transparent;
         border: none;
-        color: #8a8579;
+        color: #69655c;
         font-size: 18px;
         cursor: pointer;
         padding: 4px 8px;
@@ -164,7 +164,7 @@
         font-size: 10px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: #8a8579;
+        color: #69655c;
         margin-bottom: 0.45rem;
     }
     .fb-optional {
@@ -190,7 +190,7 @@
         transition: border-color 0.15s ease, background 0.15s ease;
         box-sizing: border-box;
     }
-    .fb-input::placeholder, .fb-textarea::placeholder { color: #8a8579; }
+    .fb-input::placeholder, .fb-textarea::placeholder { color: #69655c; }
     .fb-input:focus, .fb-textarea:focus {
         border-color: #0f1620;
     }
@@ -232,7 +232,7 @@
         display: inline-block;
         margin-left: 0.6rem;
         font-size: 12px;
-        color: #8a8579;
+        color: #69655c;
         vertical-align: middle;
         max-width: 180px;
         overflow: hidden;

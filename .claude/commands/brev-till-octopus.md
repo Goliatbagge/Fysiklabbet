@@ -14,13 +14,18 @@ emailoctopus.com i Chrome.
 
 1. **Utkastet finns**: `.claude/nyhetsbrev/utkast/<datum>.html`. Läs dess
    HTML-kommentar överst — den innehåller ÄMNESRAD, PREHEADER och utskickstid.
-2. **Streckkoll**: grep `mdash|—|–` i utkastet ska ge noll träffar
+2. **Kör verifieraren** — `node .claude/verify-nyhetsbrev.js <datum>`. Den
+   granskar ämnesrad/preheader, tankstreck, EmailOctopus-taggarna, absoluta
+   bild-URL:er, tre-plus-"Läs även"-upplägget och att brevet faktiskt har
+   sin **obligatoriska nyhetsteaser med "Vi läser på."**. Ger den fel:
+   ladda INTE upp brevet förrän de är rättade.
+3. **Streckkoll**: grep `mdash|—|–` i utkastet ska ge noll träffar
    (tankstrecksregeln, se `.claude/agents/nyhetsbrev.md`).
-3. **Sidfoten har EmailOctopus-taggarna**: `{{UnsubscribeURL}}`,
+4. **Sidfoten har EmailOctopus-taggarna**: `{{UnsubscribeURL}}`,
    `{{SenderInfo}}` och `{{RewardsURL}}` måste finnas i utkastet — annars
    vägrar EmailOctopus skicka. Saknas de: kopiera sidfotsblocket från
    `.claude/nyhetsbrev/valkomstmejl.html`, committa och pusha.
-4. **Bilderna är live**: varje `https://fysiklabbet.se/...`-bild-URL i
+5. **Bilderna är live**: varje `https://fysiklabbet.se/...`-bild-URL i
    utkastet ska svara 200 (Invoke-WebRequest -Method Head). Om inte: pusha
    main först — mejlet visar annars trasiga bildrutor.
 

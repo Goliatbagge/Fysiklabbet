@@ -40,6 +40,22 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
      3. Är aktuell (helst senaste dygnet/veckan) och från en trovärdig källa.
      4. Variation över tid — undvik fem kvantdatornyheter i rad; sprid över ämnen.
 
+2b. **Nominera veckans BREVTEASER (varje körning, aldrig hoppa över).**
+   Nyhetsbrevsagenten kan inte gissa vilket av kösens ~180 uppslag som är
+   veckans roligaste — den bedömningen är DIN, du har läst dem alla. Se
+   därför till att det **alltid finns exakt en post i `ko.md` märkt**
+   `**[BREVTEASER]**`, direkt efter rubriken `## Kö`:
+   - Välj det uppslag som är mest **spännande eller udda** för en 16-åring,
+     inte nödvändigtvis det mest nyhetsvärdiga. Det ska gå att sammanfatta i
+     en mening som får någon att vilja läsa vidare.
+   - Det måste vara **belagt och publicerbart** — teasern blir ett löfte som
+     du själv måste lösa in senast onsdag (se teaser-skuldregeln ovan). Märk
+     aldrig ett uppslag du är osäker på.
+   - **Publicerar du det märkta uppslaget**: flytta märkningen till ett nytt
+     uppslag i samma körning. Kön får aldrig lämnas utan brevteaser.
+   - Skriv datum i märkningen när brevet väl teasat den, så att skulden syns:
+     `**[BREVTEASER — teasad i brevet ÅÅÅÅ-MM-DD, publiceras senast onsdag ÅÅÅÅ-MM-DD]**`
+
 3. **Hantera "nyhetstorka" och dubblar med kön.**
    - Hittar du **två** starka nyheter samma dag: publicera den bästa idag och
      **lägg den andra överst i `ko.md`** för imorgon (med länk + kort motivering).

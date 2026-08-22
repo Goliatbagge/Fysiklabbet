@@ -53,6 +53,46 @@ Format:
   mergas separat), testskick och schemaläggning i EmailOctopus (kom ihåg
   tidszonen — default London, 06.00 där blir 07.00 svensk tid).
 
+## 2026-08-23 — "Neonkärnan är formad som en kägla"
+- Status: UPPLAGD i EmailOctopus 2026-08-22 som kampanjen "Nyhetsbrev nr 2 -
+  2026-08-23" (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad +
+  preheader ur utkastet, HTML inklistrad med {{PreviewText}}-div, alla tre
+  bilder verifierade i förhandsvisningen). Listan har vuxit från 4 till **16**
+  prenumeranter. ÅTERSTÅR för användaren: schemaläggning till söndag 06.00
+  svensk tid (tidszonen default:ar till London!).
+- Nyheter: 2026-08-22-lilla-smallen (hjälte),
+  2026-08-19-tomrummets-dubbelbrytning + 2026-08-17-gluonknuten-i-protonen
+  (miniatyrer). **Nytt upplägg från och med detta brev:** exakt TRE nyheter
+  lyfts, och veckans övriga listas som korta klickbara rader under "Läs även"
+  — här 2026-08-21-infrarod-farg, 2026-08-20-ljusslutaren,
+  2026-08-18-tredjedels-laddning och 2026-08-16-protonaccelerator-i-ornen
+  (den sista infriar förra brevets PeVatron-teaser). Regeln är inskriven som
+  punkt 3 i "Brevets delar" i .claude/agents/nyhetsbrev.md.
+- Nytt på sajten: neutronstjärnesimuleringen (jorden och neutronstjärnan i
+  samma skala, med flyg-till-knapp), 64 interaktiva teori-figurer i
+  matematiken, födelsedagsparadoxens fördjupning med dragbar kurva, och
+  solförmörkelseartikelns interaktiva Sverigekarta.
+- Bilder: nyheter/brev/2026-08-23-alice-detektor-hero.jpg (134 kB),
+  -magnetar-thumb.jpg (24 kB) och -star-detektor-thumb.jpg (57 kB).
+- Veckans tips: exit tickets (krok: terminen i full gång).
+- Teaser: (1) fler fördjupningar på gång i både matematiken och fysiken
+  (öppen formulering, ur planerat.md); (2) NYHETSUPPSLAG: ramsläpningen,
+  jorden som vrider rymdtiden med sig, mätt till ett par tiondels procent
+  (LARES-2/LAGEOS, Ciufolini m.fl., Nature 655, 332–335). Avslutas med
+  signaturen "Vi läser på." **TEASER-SKULD: nyhetsagenten måste publicera
+  uppslaget senast onsdag 2026-08-26.** Posten ligger överst i ko.md,
+  märkt [BREVTEASER].
+- **Kedjefel upptäckt 2026-08-22:** brevet hade först INGEN nyhetsteaser och
+  därmed ingen "Vi läser på." — sajt-teasern om fördjupningarna räknades som
+  uppfylld punkt 6. Orsak: nyhetsagenten hade ingen plikt att peka ut ett
+  uppslag åt brevet, och brevagentens teaser var formellt valfri. Åtgärdat i
+  tre lager: steg 2b i nyhetsagent.md (märk alltid ett uppslag [BREVTEASER]),
+  obligatorisk nyhetsteaser i punkt 6 i nyhetsbrev.md, och den nya
+  .claude/verify-nyhetsbrev.js som fäller brev utan "Vi läser på.".
+- Användarens ändringar 2026-08-22 efter första genomläsningen: kortare
+  anslag, "komplext talplan" i stället för "Argand-diagram", bråklänken
+  flyttad från ma1c-1.1 till ma1c-1.2, och "du har väl inte glömt" i tipset.
+
 ## 2026-08-16 — "Reaktorn var avstängd. Detektorn såg den ändå."
 - Status: SCHEMALAGT i EmailOctopus för söndag 2026-08-16 kl 06.00 svensk tid
   (användaren valde 06.00 i stället för 17.00: morgonpigga läser i lugn och ro

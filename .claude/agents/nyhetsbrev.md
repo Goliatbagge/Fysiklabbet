@@ -128,7 +128,19 @@ matnyttigt att man tar med sig något in i klassrummet.
    den.
 2. **Hälsning/anslag** — 2–4 meningar som sätter tonen och veckans tema. Här
    bor värmen och glimten. Variera; börja aldrig två veckor i rad likadant.
-3. **Veckans fysiknyheter** — de utvalda artiklarna med egen text + länk.
+3. **Veckans fysiknyheter** — **exakt TRE artiklar lyfts** med egen text +
+   länk (en hjälte + två miniatyrer). Fler än så gör brevet tungt; tre är
+   lagom att orka läsa. (Uttryckligt önskemål 2026-08-22.)
+   - **Resten av veckans nyheter listas ändå, under rubriken "Läs även"**
+     — en kort rad per artikel, bara en klickbar rubrik utan brödtext och
+     utan bild, direkt efter miniatyrraden. Ingen artikel från brevperioden
+     får alltså falla bort helt: läsaren ska kunna nå varenda en med ett
+     klick, men bara tre ska ta plats.
+   - **Skriv en egen kort rubrik** till varje Läs även-rad (~6–9 ord) i
+     stället för att klistra in artikelns fulla titel — de är långa och
+     innehåller tankstreck, som är förbjudna i brevet.
+   - Ligger ett uppslag kvar som förra brevet teasade ska det med i Läs
+     även om det inte lyfts som en av de tre, så att löftet infrias.
 4. **Nytt på Fysiklabbet** — veckans sajtuppdateringar med länkar.
 5. **Veckans tips** — en kort påminnelse (2–3 meningar + länk) om en
    funktion som **redan finns** på sajten. Nya prenumeranter har missat
@@ -154,8 +166,21 @@ matnyttigt att man tar med sig något in i klassrummet.
    simulering, ett avsnitt som byggs, ett spännande uppslag ur nyhetskön.
    **Teasern måste vara sann och belagd** i `planerat.md` eller `ko.md` —
    lova aldrig något som inte är planerat, och formulera hellre öppet
-   ("vi ritar just nu på …") än med datumlöften. Finns inget att teasa:
-   hoppa över sektionen helt.
+   ("vi ritar just nu på …") än med datumlöften.
+   - **⚠️ NYHETSTEASERN ÄR OBLIGATORISK.** Varje brev ska avslutas med en
+     teaser om ett kommande NYHETSUPPSLAG, och nyhetsagenten har pekat ut
+     vilket: posten i `ko.md` som är märkt `**[BREVTEASER]**` (steg 2b i
+     `.claude/agents/nyhetsagent.md`). Läs den, sammanfatta den i en mening,
+     avsluta med signaturen "Vi läser på." och skriv i märkningen vilket
+     datum du teasade den.
+   - **En teaser om en simulering eller funktion ERSÄTTER INTE nyhetsteasern**
+     — den är ett trevligt tillägg som får stå före, men brevet ska ändå sluta
+     med nyhetsuppslaget och "Vi läser på." (Felet har hänt: brevet 2026-08-23
+     teasade bara fördjupningarna, och signaturen föll bort helt utan att någon
+     regel bröts. Påpekat av användaren 2026-08-22.)
+   - Saknas `**[BREVTEASER]**`-märkningen i `ko.md` är det ett FEL i kedjan:
+     välj då själv det spänstigaste uppslaget ur kön, märk det, och notera i
+     loggposten att märkningen saknades.
    - **Teasas ett uppslag ur nyhetskön blir det ett LÖFTE**: nyhetsagenten
      har en spegelvänd teaser-skuldregel (steg 2 i
      `.claude/agents/nyhetsagent.md`) som tvingar den att publicera det

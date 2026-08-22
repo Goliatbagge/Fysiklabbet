@@ -12,6 +12,18 @@ Format per post:
 
 ## Kö
 
+- **Jorden vrider rymdtiden med sig — nu mätt till en femtedels procent**  **[BREVTEASER — teasad i brevet 2026-08-23, publiceras senast onsdag 2026-08-26]**
+  (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
+  ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
+  tiopotens bättre än tidigare bestämningar i solsystemet. Ungefär 200 000
+  laseravståndsmätningar under 1 050 dygn, juli 2022 till juni 2025.
+  Ciufolini m.fl., Nature 655, 332–335, publicerad online 2026-07-08,
+  DOI 10.1038/s41586-026-10715-0. Physics World lyfte den på nytt
+  2026-08-17. Perfekt gymnasievinkel: gravitation, satellitbanor,
+  ljusets gång tur och retur som linjal. Källa:
+  https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
+  (tillagd 2026-08-18)
+
 - **Ett dolt elektroniskt tillstånd föds på 30 femtosekunder** — ljuspuls
   utlöser en fasövergång i ett material och forskarna hinner följa hur det nya
   elektroniska tillståndet växer fram, steg för steg. Fin gymnasievinkel:
@@ -49,18 +61,6 @@ Format per post:
   gammalt. Källa:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
-
-- **Jorden vrider rymdtiden med sig — nu mätt till en femtedels procent**
-  (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
-  ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
-  tiopotens bättre än tidigare bestämningar i solsystemet. Ungefär 200 000
-  laseravståndsmätningar under 1 050 dygn, juli 2022 till juni 2025.
-  Ciufolini m.fl., Nature 655, 332–335, publicerad online 2026-07-08,
-  DOI 10.1038/s41586-026-10715-0. Physics World lyfte den på nytt
-  2026-08-17. Perfekt gymnasievinkel: gravitation, satellitbanor,
-  ljusets gång tur och retur som linjal. Källa:
-  https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
-  (tillagd 2026-08-18)
 
 ## Fynd som inte användes (2026-08-21) — kan tas upp senare
 

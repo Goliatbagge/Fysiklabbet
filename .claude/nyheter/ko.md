@@ -12,6 +12,29 @@ Format per post:
 
 ## Kö
 
+- **Ett dolt elektroniskt tillstånd föds på 30 femtosekunder** — ljuspuls
+  utlöser en fasövergång i ett material och forskarna hinner följa hur det nya
+  elektroniska tillståndet växer fram, steg för steg. Fin gymnasievinkel:
+  energinivåer, fotonens energi, och hur man alls mäter något som är över på
+  30 miljondels miljarddels sekund. Källa (ScienceDaily 2026-08-20):
+  https://www.sciencedaily.com/releases/2026/08/260820202856.htm
+  (tillagd 2026-08-22)
+
+- **Dold magnetism inuti atomer kan förklara oväntad gammastrålning** — ett
+  försök kopplar oväntad gammastrålning från atomkärnor till magnetiska
+  förändringar inne i atomen. Anknyter till kärnfysik, exciterade tillstånd och
+  elektronskal. Kontrollera originalpublikationen innan den används — referatet
+  är kortfattat. Källa (ScienceDaily 2026-08-20):
+  https://www.sciencedaily.com/releases/2026/08/260820202849.htm
+  (tillagd 2026-08-22)
+
+- **Mörk energi och kvantgravitation kan hänga ihop** — teoretiskt arbete som
+  knyter universums accelererande utvidgning till kvantgravitationen. Tung
+  materia, men rubriken bär. Kräver en riktigt konkret ingång för att fungera
+  för gymnasiet; hoppa hellre över än att skriva luddigt. Källa (Phys.org
+  2026-08-21): https://phys.org/news/2026-08-dark-energy-quantum-gravity-deeply.html
+  (tillagd 2026-08-22)
+
 - **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
   dipolväxelverkan** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
   Chinese University of Hong Kong har gjort det första kondensatet av

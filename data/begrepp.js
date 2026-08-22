@@ -1588,5 +1588,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Energi kan inte skapas ur ingenting, så räkenskapen måste gå ihop. I ett rent optiskt fall får ett material ta emot två eller tre svaga fotoner och skicka ut en enda kraftig i stället — antalet minskar medan den samlade energin bevaras. I en elektrisk uppkonverterare är det i stället en pålagd spänning som betalar för det utsända ljuset, och den infraröda fotonen fungerar bara som avtryckare som avgör var och när ljuset ska tändas.' },
       { type: 'p', html: 'Verkningsgraden är nästan alltid det svåra: bara en liten andel av de infraröda fotonerna resulterar i en synlig. Ändå är tekniken lockande, eftersom den flyttar informationen till våglängder där detektorer är billiga och känsliga. Den prövas i mörkerseende, i bildgivare för värmestrålning och i solceller, där sådant ljus som annars passerar rakt igenom skulle kunna lyftas upp till en energi cellen faktiskt kan ta vara på.' }
     ]
+  },
+  {
+    id: 'kvark-gluonplasma',
+    term: 'Kvark-gluonplasma',
+    former: ['kvark-gluonplasma', 'kvark-gluonplasman', 'kvark-gluonplasmat', 'kvarkgluonplasma', 'kvarkgluonplasman', 'urmateria', 'urmaterien'],
+    kort: 'Ett materietillstånd så hett och tätt att kvarkarna och gluonerna inte längre sitter fast inuti varsin proton eller neutron, utan rör sig fritt om varandra. Universum bestod av det under sina första miljondels sekunder.',
+    relaterade: ['standardmodellen', 'stark-vaxelverkan', 'plasma', 'baryon'],
+    body: [
+      { type: 'p', html: 'Under vanliga förhållanden kommer en kvark aldrig loss. Kraften mellan två kvarkar avtar nämligen inte med avståndet utan är i stort sett konstant, som ett gummiband, så ju längre isär man drar dem desto mer energi krävs. Till slut blir energin så stor att ett nytt kvarkpar bildas ur den, och man står där med två partiklar i stället för en lös kvark. Kvarkarna är därför alltid inlåsta, tre och tre i protoner och neutroner eller två och två i lättare partiklar.' },
+      { type: 'p', html: 'Låsningen går ändå att bryta, men bara genom att angripa hela klumpen på en gång. Pressas materia ihop tillräckligt hårt och värms upp tillräckligt mycket börjar kärnpartiklarna överlappa varandra, och då blir det meningslöst att fråga vilken proton en viss kvark tillhör. Kvar blir en gemensam soppa av kvarkar och gluoner: en kvark-gluonplasma. Namnet plasma används för att tillståndet liknar en vanlig plasma, där elektronerna slitits loss från atomerna — här är det kvarkarna som slitits loss från kärnpartiklarna.' },
+      { type: 'p', html: 'Universum var fyllt av kvark-gluonplasma under sina allra första miljondels sekunder, innan det svalnade tillräckligt för att protoner och neutroner skulle kunna bildas. I dag återskapas tillståndet i partikelacceleratorer genom att atomkärnor skjuts mot varandra i nästan ljusets hastighet. Droppen som bildas är mindre än en atomkärna och faller sönder nästan omedelbart, så den kan aldrig observeras direkt — allt man har att gå på är de tusentals partiklar som slungas ut, och riktningarna de flyger i. Mätningarna visar att plasman inte alls beter sig som en gas utan flyter som en vätska, dessutom med den lägsta inre friktion som är känd i naturen.' }
+    ]
+  },
+  {
+    id: 'elliptiskt-flode',
+    term: 'Elliptiskt flöde',
+    former: ['elliptiskt flöde', 'elliptiska flödet', 'anisotropt flöde', 'anisotropa flödet', 'triangulärt flöde', 'triangulära flödet'],
+    kort: 'Ett mått på hur ojämnt partiklarna sprutas ut åt olika håll efter en kollision mellan två atomkärnor. Ojämnheten visar att materien som bildades flöt som en vätska — och vilken form krocken hade.',
+    relaterade: ['kvark-gluonplasma', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'När två atomkärnor träffar varandra snett är det bara en del av dem som möts. Överlappet blir format som en mandel: brett åt ett håll, smalt åt det andra. Vad som händer sedan beror helt på vad materien i mitten är för något. Är den ett moln av partiklar som far rakt fram utan att bry sig om varandra, spelar formen ingen roll — då flyger lika många partiklar åt alla håll.' },
+      { type: 'p', html: 'Är materien i stället en sammanhängande vätska uppstår ett tryck, och trycket faller snabbast där vägen ut är kortast. Fler partiklar slungas därför ut åt mandelns smala håll än åt det breda. Skillnaden mäts som ett tal, och eftersom mönstret har två motsatta riktningar kallas det elliptiskt flöde och betecknas <em>v</em><sub>2</sub>. Motsvarande tal för ett tresidigt mönster kallas triangulärt flöde, <em>v</em><sub>3</sub>, och kommer av att kärnpartiklarna aldrig ligger helt jämnt fördelade utan ger krocken små slumpmässiga ojämnheter.' },
+      { type: 'p', html: 'Måttet har blivit ett av de viktigaste verktygen i studiet av heta kärnkollisioner, av två skäl. Ett starkt flöde är i sig ett tecken på att en vätska bildats. Och eftersom mönstret formas av krockens geometri går det att vända på resonemanget och läsa av något om själva kärnorna: en avlång kärna ger en plattare mandel än en rund, och alltså ett kraftigare flöde.' }
+    ]
   }
 ];

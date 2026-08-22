@@ -88,6 +88,56 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-22-lilla-smallen",
+    date: "2026-08-22",
+    title: "Urmaterien från universums första ögonblick har återskapats i de minsta atomkärnor någon prövat — och den kom ut formad som en kägla",
+    deck: "I tjugo år har det krävts bly för att koka fram kvark-gluonplasma, materien som fyllde universum de första miljondelarna av en sekund. Nu har LHC lyckats med kärnor som bara rymmer 16 respektive 20 kärnpartiklar — och strömmen av partiklar som rann ut visade att neonkärnan inte är rund inuti utan avlång, som en bowlingkägla.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-22-lilla-smallen.jpg",
+    imageAlt: "Den knallröda, åttkantiga magneten kring ALICE-detektorn fyller en stor bergsal under jord, omgiven av gröna räcken, betongblock och gula travershissar.",
+    imageCredit: "Foto: Miljenko Šuljić / Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["partikelfysik", "kärnfysik", "kvark-gluonplasma", "cern", "lhc", "alice", "atomkärnan", "kosmologi"],
+    sources: [
+      { name: "Københavns Universitet, Niels Bohr-institutet (pressmeddelande 20 augusti 2026)", url: "https://news.ku.dk/all_news/2026/08/researchers-create-a-little-big-bang-bowling-pin-shaped-nuclei-shed-new-light-on-the-universes-first-moments" },
+      { name: "Phys.org (21 augusti 2026, om ALICE-mätningen)", url: "https://phys.org/news/2026-08-big-bowling-pin-nuclei-universe.html" },
+      { name: "Phys.org (21 augusti 2026, om CMS-mätningen)", url: "https://phys.org/news/2026-08-lhc-collisions-reveal-oxygen-neon.html" },
+      { name: "CERN Courier — First oxygen and neon collisions at the LHC", url: "https://cerncourier.com/first-oxygen-and-neon-collisions-at-the-lhc/" }
+    ],
+    research: {
+      citation: "ALICE-samarbetet, ”Evidence of Nuclear Geometry-Driven Anisotropic Flow in OO and Ne-Ne Collisions at sqrt(sNN) = 5.36 TeV”, Physical Review Letters 137, 082301 (2026), DOI 10.1103/gymp-vp87. Preprint: arXiv:2509.06428 (CC BY 4.0). Den oberoende parallellmätningen: CMS-samarbetet, ”Observation of Long-Range Collective Flow in OO and NeNe Collisions and Implications for Nuclear Structure Studies”, Physical Review Letters 137 (2026), DOI 10.1103/26wx-tg6f, arXiv:2510.02580",
+      url: "https://doi.org/10.1103/gymp-vp87"
+    },
+    body: [
+      { type: 'p', html: 'Under de första miljondelarna av en sekund efter Big Bang fanns inga atomkärnor, inga protoner och inga neutroner. Universum var fyllt av något annat: en het, tät soppa där kvarkarna och gluonerna — de byggstenar som annars sitter inlåsta inuti protoner och neutroner — rörde sig fritt om varandra. Materietillståndet kallas kvark-gluonplasma, och det är den äldsta form av materia fysiken känner till.' },
+      { type: 'p', html: 'Sedan början av 2000-talet går det att göra om. Receptet: skjut två blykärnor mot varandra i nästan ljusets hastighet och låt dem krocka. I den lilla droppe som bildas smälter kärnpartiklarna upp, kvarkarna kommer loss, och droppen flyter isär på omkring 10<sup>−23</sup>&nbsp;sekunder. Blyet har hela tiden ansetts nödvändigt — det behövdes 208 kärnpartiklar för att få tillräckligt mycket materia på tillräckligt liten yta.' },
+      { type: 'p', html: 'Nu har den gränsen flyttats rejält. Under elva dagar sommaren 2025 lät CERN för första gången LHC krocka syrekärnor mot syrekärnor och neonkärnor mot neonkärnor, vid energin $\\sqrt{s_\\mathrm{NN}} = 5{,}36\\ \\mathrm{TeV}$ per kärnpartikelpar. Syre-16 rymmer 16 kärnpartiklar, neon-20 rymmer 20. Det är en tiondel eller mindre av vad en blykärna rymmer. Ändå bildades plasman.' },
+      { type: 'quote', html: 'Vi har flyttat gränsen för hur små atomkärnorna kan vara och ändå återskapa den här urmaterien — det man skulle kunna kalla en liten Big Bang.', cite: 'You Zhou, docent vid Niels Bohr-institutet, som ledde ALICE-analysen' },
+      { type: 'h2', text: 'Droppen är borta på ett ögonblick — ändå går den att mäta' },
+      { type: 'p', html: 'Ingen ser plasman. Den hinner varken fotograferas eller vidröras, och det enda som når detektorn är de tusentals partiklar som droppen sprutar ut när den faller sönder. Men riktningarna de flyger i bär på information, och det är hela knepet.' },
+      { type: 'p', html: 'När två kärnor träffar varandra snett överlappar de i ett område format som en mandel. Är materien i mitten en verklig vätska, som flyter, blir tryckskillnaden i mandelns smala led brantare än i det långa — och då slungas fler partiklar ut åt det smala hållet. Ojämnheten i utflödet mäts som ett tal som kallas elliptiskt flöde, $v_2$. Ett moln av oberoende partiklar som aldrig krockar med varandra skulle inte ge något sådant mönster alls. En vätska gör det.' },
+      { type: 'p', html: 'ALICE-detektorn samlade in ungefär 3&nbsp;miljarder syrekollisioner och 400&nbsp;miljoner neonkollisioner, och i båda systemen växer $v_2$ på precis det sätt en vätskemodell förutsäger, med ett tydligt beroende av hur rakt på kärnorna träffade varandra. Något liknande hade aldrig setts i krockar mellan enstaka protoner. CMS-detektorn såg samma sak, oberoende, i sina egna data.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-22-lilla-smallen-2.jpg', alt: 'Insidan av en stor cylindrisk detektor: en blå, tårtbitsindelad ändplatta i metall med hundratals kabelringar och stödbalkar, sedd snett framifrån.', caption: 'Ändplattan på ALICE:s spårkammare, den gasfyllda cylinder där de utslungade partiklarnas banor läses av. Det är riktningarna på dessa spår som bär informationen om kollisionens form.', credit: 'Foto: Stefan A. Gärtner / Wikimedia Commons (CC BY-SA 3.0)' },
+      { type: 'h2', text: 'Käglan och pyramiden' },
+      { type: 'p', html: 'Det verkligt oväntade kom när de två kärnsorterna jämfördes. Neonkollisionerna gav ett större elliptiskt flöde än syrekollisionerna: kvoten mellan dem toppar kring 1,08 i de allra rakaste krockarna och sjunker till omkring 1,05 en bit därifrån. Åtta procent låter futtigt, men osäkerheten på just kvoten ligger inom 1,5&nbsp;%, så skillnaden är verklig.' },
+      { type: 'p', html: 'Förklaringen sitter i kärnornas inre form. Kärnfysikens modeller beskriver syre-16 som fyra tätt bundna heliumklumpar placerade i hörnen på en pyramid — en tetraeder — medan neon-20 snarare ser ut som en heliumklump som sitter fast på en syrekärna. Resultatet är en avlång kropp, och liknelsen kärnfysikerna själva använder är en bowlingkägla. En kägla som träffas på snedden ger en plattare mandel än en pyramid gör, alltså ett kraftigare utflöde åt sidorna.' },
+      { type: 'quote', html: 'Partiklarna från urmaterien styrs direkt av atomkärnans geometriska form.', cite: 'Emil Gorm Dahlbæk Nielsen, postdoktor vid Niels Bohr-institutet' },
+      { type: 'p', html: 'Här finns en finess som är lätt att missa. En syre- eller neonkärna i sitt grundtillstånd har ingen bestämd riktning i rummet — mätt utifrån är den fullkomligt rund. Den avlånga formen finns bara i kärnans inre struktur, och den pekar åt ett slumpmässigt håll i varje enskild kärna. Att den ändå går att komma åt beror på tempot: kärnan behöver mellan hundra och tusen gånger längre tid på sig för att vrida sig än vad en kollision tar. Under själva krocken står formen därför stilla, som en frusen ögonblicksbild, och statistiken över miljarder krockar plockar fram den.' },
+      { type: 'h2', text: 'Varför syre och neon, av allt i periodiska systemet' },
+      { type: 'p', html: 'Valet var inte slumpartat. Frågan fysikerna vill komma åt är var gränsen går för att en vätska alls ska kunna bildas. I droppen måste partiklarna hinna krocka med varandra många gånger innan alltihop flyger isär, annars uppstår aldrig något tryck att tala om. Blykollisioner ligger med god marginal på rätt sida om den gränsen och protonkollisioner långt på fel sida. Syre och neon förväntades ligga ungefär mitt emellan, alltså precis där det är intressant att titta.' },
+      { type: 'p', html: 'Att det blev just dessa två grundämnen har också en praktisk sida. Kosmisk strålning som träffar jordens atmosfär möter till stor del syrekärnor, och för att tolka vad de gigantiska partikelskurar som följer egentligen betyder behövs mätdata från precis den sortens krockar. Sommarens elva dagar gav sådana data för första gången.' },
+      { type: 'p', html: 'Något återstår att förstå. Det triangulära flödet $v_3$, som mäter en tresidig obalans i utflödet, stämmer inte lika väl med beräkningarna som det elliptiska gör. Innan den luckan är täppt går det inte att räkna bakvägen från kollisionsdata till exakta mått på kärnornas form. Att två helt oberoende detektorer vid samma accelerator ser samma mönster gör däremot huvudslutsatsen svår att komma ifrån.' },
+      { type: 'p', html: 'Kvar står något som få hade väntat sig av ett och samma försök: det säger både något om hur materien betedde sig strax efter universums födelse och något om hur kärnpartiklarna sitter arrangerade inuti en helt vanlig neonatom.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kvarkar kommer aldrig loss en och en. Ju längre isär man drar två kvarkar, desto hårdare drar gluonfältet tillbaka — till slut går det åt så mycket energi att ett nytt kvarkpar bildas i stället. Enda sättet att befria dem är att värma upp och pressa ihop hela klumpen på en gång, som i en kvark-gluonplasma.',
+        'Bly-208 är dubbelt magisk: både antalet protoner (82) och antalet neutroner (126) fyller precis ett helt skal. Sådana kärnor är ovanligt stabila och nästan perfekt runda.',
+        'Att atomkärnor kan ha andra former än klot visades av bland andra Aage Bohr, som fick Nobelpriset i fysik 1975 för sitt arbete vid samma institut som nu lett ALICE-analysen.',
+        'Heliumkärnan — två protoner och två neutroner — är så hårt bunden att den fungerar som en byggkloss i lätta kärnor. Syre-16 kan beskrivas som fyra sådana klossar, neon-20 som fem.'
+      ] },
+      { type: 'p', html: 'Båda mätningarna publicerades i <em>Physical Review Letters</em>, där ALICE-arbetet lyftes fram som redaktionens tips.' }
+    ]
+  },
+  {
     id: "2026-08-21-infrarod-farg",
     date: "2026-08-21",
     title: "Ögat kan inte se värmestrålning — nu finns ett par glasögon som målar den i rött och cyan",

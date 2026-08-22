@@ -134,7 +134,7 @@ const NYHETER_ALL = [
         'Att atomkärnor kan ha andra former än klot visades av bland andra Aage Bohr, som fick Nobelpriset i fysik 1975 för sitt arbete vid samma institut som nu lett ALICE-analysen.',
         'Heliumkärnan — två protoner och två neutroner — är så hårt bunden att den fungerar som en byggkloss i lätta kärnor. Syre-16 kan beskrivas som fyra sådana klossar, neon-20 som fem.'
       ] },
-      { type: 'p', html: 'Båda mätningarna publicerades i <em>Physical Review Letters</em>. ALICE-arbetet fick dessutom tidskriftens egen redaktionella utmärkelse ”Editors’ Suggestion”: ungefär var sjätte artikel plockas ut av redaktörerna och lyfts fram på tidskriftens förstasida som särskilt viktig, intressant och välskriven för läsare även utanför det egna specialområdet.' }
+      { type: 'p', html: 'Båda mätningarna publicerades i <em>Physical Review Letters</em>. ALICE-arbetet fick dessutom tidskriftens egen redaktionella utmärkelse ”Editors’ Suggestion”.' }
     ]
   },
   {

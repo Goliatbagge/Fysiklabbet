@@ -119,7 +119,13 @@ node data/teori/build.js
 # data/nyheter.js ELLER data/begrepp.js (KÖR FÖRE COMMIT!) Genererar
 # (1) nyheter/dela/<id>.html med rätt og:*-taggar för delningsförhandsvisning
 # (Facebook/X/LinkedIn), (2) feed.xml — RSS-flödet med de 20 senaste
-# publicerade artiklarna (datumgrindat), (3) sitemap.xml — alla publika sidor,
+# publicerade artiklarna (datumgrindat). OBS: feed.xml är sedan 2026-08-22
+# INSKICKAD SOM WEBBPLATSKARTA i Search Console (typ RSS), vid sidan av
+# sitemap.xml. Det är den snabba kanalen för dagens nyhet: Google hämtar
+# ett litet, färskt flöde betydligt oftare än en sitemap med 700+ adresser.
+# Går flödet sönder eller slutar byggas märks det alltså inte bara i
+# RSS-läsare — dagens artikel blir också långsammare att hitta på Google.
+# (3) sitemap.xml — alla publika sidor,
 # artiklarnas ?id=-URL:er, begreppens ?ord=-URL:er samt teoriavsnittens,
 # de nationella provens och repetitionspaketens ?id=-URL:er (robots.txt pekar
 # hit; se "Adresser till teoriavsnitt" nedan),
@@ -1075,6 +1081,38 @@ KaTeX får råtext. I `.md`-filer används enkla backslash.
 Gäller alla KaTeX-kommandon: `\\cdot`, `\\frac`, `\\sqrt`, `\\left`,
 `\\right`, `\\sin`, `\\alpha`, `\\mathrm`, `\\,` osv. Titta i grannraderna
 — om de använder `\\cdot` ska din också göra det.
+
+### Värdesiffror: räkna om avrundningen, gissa aldrig
+
+**Slutsvaret avrundas till lika många värdesiffror som den minst
+noggranna given — och avrundningen ska räknas ut, inte "kännas rimlig".**
+Felet som utlöste regeln (påpekat 2026-08-22): $78{,}56\ \mathrm{N}$
+skrevs $\approx 80\ \mathrm{N}$ i pennlösningen till `fy2-1.2`, trots att
+givna 20 kg, 1,0 m och 2,5 m ger **två** värdesiffror — rätt svar är
+**79 N**. Talet såg ut att "höra hemma" vid 80 eftersom grannsvaret i
+uppgiften var 120 N, och ingen verifierare fångar det.
+
+- **Räkna avrundningen som ett eget steg.** Skriv ut det oavrundade värdet,
+  bestäm antalet värdesiffror ur givna data, och avrunda sedan siffra för
+  siffra: 78,56 → två värdesiffror → 7 och 8 behålls, nästa siffra är 5 →
+  **79**. Runda ALDRIG "till närmaste tiotal" bara för att talet är tvåsiffrigt
+  — 79 har redan två värdesiffror.
+- **Nollor räknas inte som värdesiffror i början av talet.** 117,84 med två
+  värdesiffror blir 120 N (= 1,2 · 10²) — där är tiotalsavrundningen rätt,
+  och just den likheten gör 78,56 → 80 lätt att skriva av misstag.
+- **Samma tal, samma avrundning överallt.** Pennlösningen
+  (`::: handskrift`), `::: textlosning`, svarsraden, tankebubblorna,
+  figurens etiketter och eventuella övningar/exit tickets måste visa
+  identiskt avrundat svar. Ändras ett svar: grepa på BÅDA formerna (det
+  oavrundade och det avrundade) i `data/teori/`, `handskrift.js`,
+  `data/ovningar.js` och `data/exittickets.js`.
+- **Överslag ska märkas ut som överslag.** Resonerar texten med grovt
+  avrundade värden ("ungefär 200 N minus ungefär 120 N ger 80 N") måste det
+  stå att det är ett överslag, och den exakta räkningen redovisas separat —
+  annars ser två olika svar (80 N och 79 N) ut som ett fel.
+- **Mellanled avrundas aldrig** (redan regel i `handskrift.js` filhuvud):
+  196,4 och 117,84 bärs vidare oavrundade, och avrundningen sker först i
+  sista steget.
 
 ### Decimalformatering
 

@@ -379,6 +379,11 @@
  * avrundas svaret, med ≈, till så många värdesiffror som det ingående
  * mätvärde som har MINST antal värdesiffror (här 1,0 m → två). En
  * tankebubbla motiverar avrundningen. Punktglyfen '.' finns i GLYPHS.
+ * RÄKNA avrundningen siffra för siffra — gissa aldrig till närmaste
+ * tiotal: 78,56 N med två värdesiffror blir 79 N, inte 80 N (felet
+ * fanns i brada c) och påpekades 2026-08-22). Att grannsvaret i samma
+ * uppgift råkar bli ett jämnt tiotal (117,84 N → 120 N) betyder inget.
+ * Samma avrundade svar måste stå i pennlösningen OCH i ::: textlosning.
  * Avrundningen är en FORTSÄTTNING på uträkningsraden och skrivs på SAMMA
  * rad så långt papperet räcker ("=117,84 N ≈ 120 N"). Radbryt ENDAST när
  * högerkanten tar slut, och bryt då FÖRE ett led (nya raden börjar med
@@ -15297,16 +15302,16 @@
     stepEnd();
 
     var bcAvr1 = bubble(140, bubbleTop(y), bw, [
-      [['Avrundat: 80 N. Rimligt att P']],
+      [['Avrundat: 79 N. Rimligt att P']],
       [['bär minst — den sitter längst']],
       [['från tyngdpunkten!']]
     ]);
     tanke(bcAvr1);
-    placeString('≈80 N', xC1, y, s, F, acts);
+    placeString('≈79 N', xC1, y, s, F, acts);
     stepEnd();
 
     y += adv + 0.65 * F;
-    var xe2 = placeString('Svar: 80 N', padL, y, s, F, acts);
+    var xe2 = placeString('Svar: 79 N', padL, y, s, F, acts);
     underline(xe2, y);
     stepEnd();
 
@@ -15388,11 +15393,11 @@
     /* alternativet avslutas UTAN ny svarsrad (svaret är redan givet) —
      * bubblan konstaterar att metoderna ger samma svar */
     var bcAvr = bubble(140, bubbleTop(y), bw, [
-      [['Avrundat: 80 N — momentlagen']],
+      [['Avrundat: 79 N — momentlagen']],
       [['ger samma svar!']]
     ]);
     tanke(bcAvr);
-    placeString('≈80 N', xx, y, s, F, acts);
+    placeString('≈79 N', xx, y, s, F, acts);
     stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };

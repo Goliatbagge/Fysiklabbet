@@ -530,6 +530,11 @@
     '.': { w: 28, strokes: [[[24, 92], [26, 94]]] },
     /* snedstreck för sammansatta enheter (N/kg, m/s) */
     '/': { w: 52, strokes: [[[46, 8], [16, 102]]] },
+    /* asterisk — behövs för kalkylbladsformler (=B3*C3+D3) i NP-scenerna.
+     * Tre streck genom samma mittpunkt, i skrivordning: lodrätt, sedan
+     * de två snedställda. Ligger högt på raden, som i tryckt text. */
+    '*': { w: 62, strokes: [[[31, 20], [31, 58]], [[15, 28], [47, 50]],
+                            [[47, 28], [15, 50]]] },
     '?': { w: 68, strokes: [[[26, 30], [33, 14], [50, 10], [63, 17], [66, 31], [58, 45], [47, 53], [45, 64]], [[45, 86], [46, 88]]] },
     '(': { w: 42, strokes: [[[36, 8], [26, 34], [23, 60], [26, 85], [36, 106]]] },
     ')': { w: 42, strokes: [[[22, 8], [32, 34], [35, 60], [32, 85], [22, 106]]] },

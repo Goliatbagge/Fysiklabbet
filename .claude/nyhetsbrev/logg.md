@@ -11,6 +11,48 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-08-23 — "Neonkärnan är formad som en kägla"
+- Status: UTKAST skrivet 2026-08-22 (lördag, klart gott om marginal före 08.00-deadline).
+  Tänkt utskick söndag 2026-08-23 kl 06.00 svensk tid. Brevperiod (nyheter)
+  2026-08-17 till 2026-08-22; sajtuppdateringar sedan förra utkastets datum
+  2026-08-16 (git log --since="2026-08-16", eftersom föregående brev redan
+  frystes innan de sista 08-16-commiten hann med). Skrivet i en molnsession
+  utan tillgång till CDN:erna (jsdelivr/unpkg/cdnjs blockerade av
+  organisationens nätverkspolicy) — därför inga nya skärmdumpar av
+  React/Three.js-simuleringar denna vecka (försök gjordes på
+  fysik2-neutronstjarna.html men canvasen renderade tomt utan Three.js).
+  Bildsättningen vilar i stället helt på riktiga nyhetsfoton, vilket gav ett
+  starkt resultat ändå (ALICE-detektorns röda magnet som hjältebild).
+- Nyheter: 2026-08-22-lilla-smallen (hjälte — dagens artikel, publicerad
+  03:15 samma morgon, obligatorisk enligt uppdraget), 2026-08-19-tomrummets-dubbelbrytning
+  + 2026-08-17-gluonknuten-i-protonen (miniatyrer). Bortvalda: 2026-08-21-infrarod-farg
+  och 2026-08-20-ljusslutaren (båda AI-illustrerade och tunnare på egen krok
+  för gymnasiefysiken), 2026-08-18-tredjedels-laddning (kvantfysik låg nära
+  gluonknuten tematiskt, en av de två fick stryka på foten).
+- Nytt på sajten: Neutronstjärnan i skala (ny 3D-simulering i fy2-5.5,
+  Svarta hål — jorden och en skalenlig neutronstjärna, kameraflygning,
+  huvudpunkten med CTA-knapp), 64 interaktiva teori-figurer i matematiken
+  (alla fem nivåer, peka/tryck-interaktion), fördjupningskortets nya
+  interaktiva födelsedagskurva (uppfyller planerat.md-punkten om att
+  fördjupningen hör hemma i "Nytt på sajten"), solförmörkelseartikelns
+  interaktiva karta ort för ort. Bortvalt: sim-växlaren mellan Cirkulär
+  rörelse/Tomtebloss (för litet för att ta plats bredvid de fyra andra).
+- Bilder: nyheter/brev/2026-08-23-alice-detektor-hero.jpg (beskuren från
+  nyheter/bilder/2026-08-22-lilla-smallen.jpg, 137 kB), -magnetar-thumb.jpg
+  och -star-detektor-thumb.jpg (miniatyrer ur befintliga nyhetsbilder,
+  25+59 kB). Inga nya skärmdumpar denna vecka, se status ovan.
+- Veckans tips: exit tickets (senast tipsad 2026-08-09, men det brevet
+  skickades aldrig — tipset var alltså osagt sedan tidigare. Krok:
+  terminsstart, "kolla att genomgången satt"). Länkad till fy1-9.1 (Atomkärnan)
+  som en tematisk brygga till veckans kärnfysiknyheter.
+- Teaser: fler fördjupningar på gång i matematik och fysik (öppen
+  formulering, belagd i planerat.md, inget datumlöfte). Ingen
+  nyhetskö-teaser denna vecka, så "Vi läser på."-signaturen används inte.
+- ÅTERSTÅR: användarens granskning + godkännande, ny push av bilderna i
+  nyheter/brev/ till main (denna gren har ~40 andra opushade commits som
+  mergas separat), testskick och schemaläggning i EmailOctopus (kom ihåg
+  tidszonen — default London, 06.00 där blir 07.00 svensk tid).
+
 ## 2026-08-16 — "Reaktorn var avstängd. Detektorn såg den ändå."
 - Status: SCHEMALAGT i EmailOctopus för söndag 2026-08-16 kl 06.00 svensk tid
   (användaren valde 06.00 i stället för 17.00: morgonpigga läser i lugn och ro

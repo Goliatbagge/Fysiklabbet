@@ -18,6 +18,9 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   och läser av sannolikheten för valfri gruppstorlek:
   `https://fysiklabbet.se/katalog.html?id=ma1c-5.8:fordjupning`
   Själva kortet och den första fördjupningen lanserades 2026-08-16 och hör
-  alltså hemma under "Nytt på Fysiklabbet". Att det **kommer fler
-  fördjupningar i andra avsnitt**, i både matematiken och fysiken, är
-  teasningsbart (formulera öppet, utan datumlöften).
+  alltså hemma under "Nytt på Fysiklabbet". **[AVKLARAT 2026-08-23]** Kortet
+  och den interaktiva födelsedagskurvan (dra punkten, läs av sannolikheten)
+  nämndes i brevet 2026-08-23. Att det **kommer fler fördjupningar i andra
+  avsnitt**, i både matematiken och fysiken, teasades i samma brev (öppen
+  formulering, inget datumlöfte) — håll teasern öppen tills fler fördjupningar
+  faktiskt lanserats, då blir den nästa gång "Nytt på sajten" i stället.

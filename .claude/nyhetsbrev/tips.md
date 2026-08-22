@@ -13,7 +13,7 @@ för någon månad sedan är en perfekt tipskandidat nu).
 |---|---|---|---|---|
 | Nationella prov med lösningar | np.html | Träna på tidigare NP i matematik, uppgift för uppgift med fullständiga lösningar och förklaringar | Inför NP-perioden (april–maj), inför omprov | – |
 | Repetitionspaketen | fysik-repetition.html | Repetera ett kapitel i spelform: para ihop formler, sortera begrepp, ordna i följd, sant/falskt | Skolstart (aug), inför prov, terminsslut | 2026-08-02 |
-| Exit tickets | katalog.html | Snabbförhör efter varje teoriavsnitt — några klick, direkt facit med förklaringar | Hela läsåret; "kolla att genomgången satt" | 2026-08-09 (brevet skickades aldrig, tipset är alltså osagt) |
+| Exit tickets | katalog.html | Snabbförhör efter varje teoriavsnitt — några klick, direkt facit med förklaringar | Hela läsåret; "kolla att genomgången satt" | 2026-08-23 |
 | Övningar i tre nivåer | katalog.html | Varje avsnitt har övningsuppgifter N1–N3 med lösningar, kalibrerade mot kursprovsnivå | Inför prov | – |
 | Handskrivna lösningar (växling penna/text) | katalog.html?id=fy2-1.3 | Lösningar som skrivs för hand steg för steg — och knappen som växlar till vanlig text | Alltid; bra på projektor | 2026-08-16 (nämnd i brevet) |
 | Interaktiva grafer i teorin | katalog.html | Dra i glidare och se grafen ändras live, med ekvationen uppdaterad under | När ett graf-tungt avsnitt är i säsong | – |

@@ -1325,5 +1325,10 @@
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
     <script src="feedback.js" defer></script>
+
+    <!-- Nyhetsbrevets slide-in. Villkoren för när den alls visas står i
+         nyhetsbrev-slidein.js; nyhetsbrev.js bygger själva formuläret. -->
+    <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="nyhetsbrev-slidein.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
 </body>
 </html>

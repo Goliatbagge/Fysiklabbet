@@ -477,6 +477,11 @@
     'a': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]]] },
     'r': { w: 46, strokes: [[[27, 50], [29, 100]], [[29, 64], [38, 53], [50, 47], [57, 52]]] },
     ':': { w: 34, strokes: [[[26, 58], [27, 60]], [[26, 88], [27, 90]]] },
+    /* semikolon — avgränsare i koordinatpar när kommat redan är
+     * decimaltecken: (0,64; 0,77) */
+    ';': { w: 34, strokes: [[[26, 58], [27, 60]], [[27, 88], [22, 106]]] },
+    /* vinkeltecken ∠ — "∠ABC är 35°" i triangelsatserna */
+    '∠': { w: 76, strokes: [[[68, 30], [16, 100]], [[16, 100], [70, 100]]] },
     ' ': { w: 46, strokes: [] },
     'd': { w: 68, strokes: [[[58, 58], [45, 49], [31, 56], [26, 73], [31, 89], [46, 97], [58, 87]], [[61, 12], [60, 80], [63, 95], [70, 93]]] },
     'y': { w: 62, strokes: [[[24, 52], [32, 72], [42, 96]], [[64, 52], [52, 88], [38, 118], [26, 130]]] },
@@ -530,6 +535,12 @@
     '.': { w: 28, strokes: [[[24, 92], [26, 94]]] },
     /* snedstreck för sammansatta enheter (N/kg, m/s) */
     '/': { w: 52, strokes: [[[46, 8], [16, 102]]] },
+    /* PRIM — derivatans märke. Ett kort snedstreck högt upp, med smal
+     * advance så att f'(x) hålls ihop. Genomgående i Matematik 3c.
+     * Både ASCII-apostrofen och primtecknet U+2032 ritas likadant. */
+    "'": { w: 24, strokes: [[[15, 12], [10, 42]]] },
+    '′': { w: 24, strokes: [[[15, 12], [10, 42]]] },
+    '\u2019': { w: 24, strokes: [[[15, 12], [10, 42]]] },
     /* asterisk — behövs för kalkylbladsformler (=B3*C3+D3) i NP-scenerna.
      * Tre streck genom samma mittpunkt, i skrivordning: lodrätt, sedan
      * de två snedställda. Ligger högt på raden, som i tryckt text. */

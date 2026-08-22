@@ -1160,4 +1160,1349 @@
     return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
   });
 
+
+  /* ================= DELPROV C ================= */
+
+  /* ---- Uppgift 16: tärningsspelet Azaloo ----
+   * Hela uppgiften vilar på EN bild: en tabell med poängen för alla 36
+   * utfall. Den ritas först, och sedan besvaras I–V genom att räkna
+   * rutor i tabellen. */
+  reg(16, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i, j;
+    var tanke = mkTanke(T);
+    var tx = padL + 70, ty = 150, c = 46;      /* tabellens hörn, rutstorlek */
+    function cellX(j) { return tx + j * c; }   /* j = 0 för radrubriken */
+    function cellY(i) { return ty + i * c; }
+    function poang(a, b) { return a === b ? -2 * a : Math.min(a, b); }
+    function mitt(t, a, b, col) {
+      var w = T.adv(t, 0.55);
+      T.str(t, cellX(b) + (c - w) / 2, cellY(a) + c / 2 + 0.2 * F,
+            col || null, 0.55);
+    }
+    function ringCell(a, b) {
+      acts.push({ kind: 'stroke', color: BLUE,
+        pts: V.ringPts(cellX(b) + c / 2, cellY(a) + c / 2, c * 0.44, c * 0.40) });
+    }
+
+    /* ---- steg 1: rutnätet med tärningarnas siffror ---- */
+    for (i = 0; i <= 7; i++) {
+      T.line([tx, cellY(i)], [tx + 7 * c, cellY(i)]);
+      T.pause(40);
+    }
+    for (j = 0; j <= 7; j++) {
+      T.line([cellX(j), ty], [cellX(j), ty + 7 * c]);
+      T.pause(40);
+    }
+    T.pause(160);
+    for (i = 1; i <= 6; i++) { mitt(String(i), i, 0); mitt(String(i), 0, i); }
+    T.stepEnd();
+
+    tanke(ty + 7 * c + 30, [
+      [['I varje ruta skriver jag']],
+      [['poängen för det utfallet: minsta']],
+      [['antalet prickar, eller minus']],
+      [['summan när tärningarna är lika.']]
+    ], 0);
+    for (i = 1; i <= 6; i++) {
+      for (j = 1; j <= 6; j++) {
+        mitt(String(poang(i, j)).replace('-', '−'), i, j,
+             i === j ? BLUE : null);
+        T.pause(30);
+      }
+    }
+    T.stepEnd();
+
+    /* ---- I ---- */
+    tanke(ty + 7 * c + 30, [
+      [['Tabellen har 6 rader och 6']],
+      [['kolumner: 36 lika sannolika']],
+      [['utfall. Bara en enda ruta']],
+      [['visar −8.']]
+    ], 0);
+    ringCell(4, 4);
+    T.pause(220);
+    y = 620;
+    xx = T.str('I. P(-8)=', padL, y);
+    T.fracH('1', '36', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar I: ', padL, y);
+    xe = T.fracH('1', '36', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- II ---- */
+    tanke(y, [
+      [['Minuspoäng ger bara de utfall']],
+      [['där tärningarna visar lika —']],
+      [['tabellens diagonal.']]
+    ], 1.4);
+    for (i = 1; i <= 6; i++) { ringCell(i, i); T.pause(120); }
+    T.pause(200);
+    y += 4.2 * F;
+    xx = T.str('II. P(minus)=', padL, y);
+    xx = T.fracOp('6', '36', '/6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '6', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar II: ', padL, y);
+    xe = T.fracH('1', '6', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- III ---- */
+    tanke(y, [
+      [['Precis +1 poäng får man när']],
+      [['den minsta tärningen visar 1.']],
+      [['Det är hela första raden och']],
+      [['hela första kolumnen, utom (1,1).']]
+    ], 1.4);
+    y += 4.4 * F;
+    T.str('III. 5 rutor i raden + 5 i', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('kolumnen = 10 rutor', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('P(+1)=', padL, y);
+    xx = T.fracOp('10', '36', '/2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5', '18', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar III: ', padL, y);
+    xe = T.fracH('5', '18', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- IV ---- */
+    tanke(y, [
+      [['+10 på två omgångar. Högsta']],
+      [['möjliga i en omgång är +5, så']],
+      [['det måste bli +5 båda gångerna.']]
+    ], 1.4);
+    y += 4.2 * F;
+    xx = T.str('IV. P(+5)=', padL, y);
+    T.fracH('2', '36', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['+5 ges av rutorna (5,6) och']],
+      [['(6,5) — två av 36. Omgångarna']],
+      [['är oberoende, så sannolikheterna']],
+      [['multipliceras.']]
+    ], 1.05);
+    y += 3.6 * F;
+    xx = T.str('P(+10)=', padL, y);
+    xx = T.fracH('2', '36', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('2', '36', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4', '1 296', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=', padL + 30, y);
+    T.fracH('1', '324', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar IV: ', padL, y);
+    xe = T.fracH('1', '324', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- V ---- */
+    tanke(y, [
+      [['I längden blir varje ruta lika']],
+      [['vanlig. Då räcker det att']],
+      [['summera alla 36 rutor och dela']],
+      [['med 36.']]
+    ], 1.4);
+    y += 4.4 * F;
+    T.str('V. Plusrutor:', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('10·1+8·2+6·3+4·4+2·5=70', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('Minusrutor:', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('2+4+6+8+10+12=42', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Summan av alla rutor blir']],
+      [['70-42=28 poäng, fördelat på']],
+      [['36 utfall.']]
+    ]);
+    y += 2.8 * F;
+    xx = T.str('Genomsnitt=', padL, y);
+    xx = T.fracH('70-42', '36', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracOp('28', '36', '/4', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7', '9', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('≈0,78 poäng per omgång', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Genomsnittet är positivt, så']],
+      [['den som spelar länge samlar']],
+      [['poäng i stället för att tappa.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar V: totalpoängen ökar,', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    xe = T.str('ungefär 0,78 poäng per omgång', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ================= DELPROV D ================= */
+
+  /* ---- Uppgift 17: trädets höjd ----
+   * Tangens ger höjden OVANFÖR ögat; ögonhöjden måste läggas till. */
+  reg(17, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r, i;
+    var tanke = mkTanke(T);
+    /* ögat i O, trädets fot i B, toppen i C. 30 m = 300 px */
+    var O = [padL + 40, 300], B = [padL + 340, 300];
+    var C = [B[0], B[1] - 300 * Math.tan(20 * Math.PI / 180)];
+
+    /* ---- steg 1: figuren ---- */
+    T.line([padL + 20, 340], [padL + 380, 340]);      /* marken */
+    T.pause(140);
+    T.line([B[0], 340], [C[0], C[1]]);                /* trädstammen */
+    T.pause(140);
+    T.line(O, [O[0], 340]);                           /* Petra */
+    T.pause(140);
+    T.line(O, B); T.pause(120);
+    T.line(O, C); T.pause(160);
+    V.ratVinkel(T, B, [-1, 0], [0, -1], 13);
+    T.pause(140);
+    V.vinkelBage(T, O, -0.349, 0, 60);
+    T.str('20°', O[0] + 68, O[1] - 12, null, 0.62);
+    T.pause(180);
+    T.str('30 m', (O[0] + B[0]) / 2 - 24, O[1] + 0.95 * F, BLUE, 0.62);
+    T.pause(140);
+    T.str('h', B[0] + 12, (O[1] + C[1]) / 2, BLUE, 0.62);
+    T.pause(140);
+    T.str('1,6 m', O[0] - 4, 328, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(370, [
+      [['Instrumentet sitter vid ögat,']],
+      [['1,6 m över marken. Triangeln ger']],
+      [['alltså bara höjden OVANFÖR']],
+      [['ögat — kalla den h.']]
+    ], 0);
+    y = 470;
+    r = V.trigKvot(T, F, { fn: 'tan 20°=', x: padL, y: y,
+      ring: [O[0] + 34, O[1] - 12, 34, 24],
+      num: { txt: 'h', ord: 'motstående katet',
+             svep: [[B[0] + 7, B[1] - 8], [C[0] + 7, C[1] + 8]] },
+      den: { txt: '30', ord: 'närliggande katet',
+             svep: [[O[0] + 8, O[1] + 7], [B[0] - 8, B[1] + 7]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    tanke(y, [
+      [['h står i täljaren, så jag']],
+      [['multiplicerar båda led med 30.']]
+    ], 1.05);
+    y += 3.6 * F;
+    T.str('h=30·tan 20°=10,919...', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu lägger jag till ögonhöjden,']],
+      [['annars fattas de nedersta']],
+      [['1,6 metrarna av stammen.']]
+    ]);
+    y += 2.6 * F;
+    T.str('höjd=10,919...+1,6=12,519...', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['30 m och 1,6 m har två']],
+      [['värdesiffror, så svaret får']],
+      [['också två.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar: ungefär 13 m', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 18: koktemperaturen på höjden ----
+   * a) insättning i formeln, b) samma formel men nu är t känd och h
+   * söks — alltså en ekvation. */
+  reg(18, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xwB = padL + 30 + T.adv('85=100-') + T.fracW('h', '300') + 0.9 * F;
+
+    y = 238;
+    var e0 = padL; xx = T.str('t=100-', padL, y);
+    xx = T.fracH('h', '300', xx, y);
+    var e1 = xx, yE = y;
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(y, [
+      [['I a) är höjden känd: 5 892 m.']],
+      [['Den sätts in där h står.']]
+    ], 1.05);
+    y += 3.4 * F;
+    var v0 = padL, v1 = T.str('a) h=5 892 m', padL, y), yV = y;
+    T.stepEnd();
+
+    var ringar = substRings(acts, [[v0, v1, yV, F], [e0, e1, yE, F]]);
+    y += 2.6 * F;
+    xx = T.str('t=100-', padL, y);
+    xx = T.fracH('5 892', '300', xx, y);
+    T.str('=100-19,64', xx, y);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    T.str('=80,36≈80,4 °C', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt? Vatten kokar vid 100 °C']],
+      [['vid havsytan, och lägre högre']],
+      [['upp. Nästan 6 km ger 20 grader']],
+      [['lägre.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: ungefär 80,4 °C', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) är det tvärtom: temperaturen']],
+      [['är känd och höjden söks. Då blir']],
+      [['formeln en ekvation.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('b) 85=100-', padL, y);
+    T.fracH('h', '300', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hundra adderas i högerledet, så']],
+      [['jag subtraherar 100 från båda']],
+      [['led.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('-100', xwB, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.2 * F;
+    } else {
+      y += 3.4 * F;
+      xx = T.str('85', padL + 30, y);
+      xx = T.str('-100', xx, y, BLUE);
+      xx = T.str('=100-', xx, y);
+      xx = T.fracH('h', '300', xx, y);
+      T.str('-100', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.4 * F;
+    }
+    xx = T.str('-15=-', padL + 30, y);
+    T.fracH('h', '300', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda leden är negativa. Jag']],
+      [['multiplicerar med -300: det']],
+      [['tar bort både nämnaren och']],
+      [['minustecknen.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('·(-300)', xwB, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.2 * F;
+    } else {
+      y += 3.4 * F;
+      xx = T.str('-15', padL + 30, y);
+      xx = T.str('·(-300)', xx, y, BLUE);
+      xx = T.str('=-', xx, y);
+      xx = T.fracH('h', '300', xx, y);
+      T.str('·(-300)', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.4 * F;
+    }
+    T.str('4 500=h', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 4 500 delat med 300']],
+      [['är 15, och 100-15=85. Stämmer.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar: 4 500 m över havet', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 19: elevantalet i gymnasieskolan ----
+   * Allt bygger på avläsningar ur diagrammet, så svaren blir intervall.
+   * Kurvan ritas av på fri hand i samma fönster som provets figur. */
+  reg(19, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* x = år efter 1996, y = elever i tusental */
+    var A = mkAxes(T, F, { ox: padL + 60, oy: 300, u: 26, xsc: 4, ysc: 50,
+                           xmin: 0, xmax: 30, ymin: 0, ymax: 400,
+                           xlab: 'r', ylab: 'e' });
+    function ar(v) { return A.X(v - 1996); }
+
+    A.axes();
+    A.ticks(V.heltal(0, 28, 4), V.heltal(0, 400, 50),
+            [4, 8, 12, 16, 20, 24, 28], [100, 200, 300, 400]);
+    T.pause(200);
+    /* kurvan 1996–2015 (uppmätt) och prognosen 2016–2024 */
+    var matt = [[1996, 305], [1999, 300], [2001, 310], [2003, 320],
+                [2005, 350], [2007, 380], [2009, 390], [2011, 375],
+                [2013, 325], [2015, 300]];
+    acts.push({ kind: 'stroke', pts: matt.map(function (p) {
+      return [ar(p[0]), A.Y(p[1])]; }) });
+    T.pause(220);
+    var prog = [[2015, 300], [2017, 305], [2019, 325], [2021, 345],
+                [2023, 365], [2024, 372]];
+    acts.push({ kind: 'stroke', color: BLUE, pts: prog.map(function (p) {
+      return [ar(p[0]), A.Y(p[1])]; }) });
+    T.pause(160);
+    T.str('år', A.X(30) - 10, A.Y(0) + 1.6 * F, null, 0.55);
+    T.str('tusen elever', A.X(0) + 8, A.Y(400) - 6, null, 0.55);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(430, [
+      [['Först läser jag av hur många']],
+      [['elever det var 2013, och drar']],
+      [['en vågrät linje därifrån till']],
+      [['prognosen.']]
+    ], 0);
+    A.dot(2013 - 1996, 325, BLUE);
+    T.pause(160);
+    A.rule([ar(2013), A.Y(325)], [ar(2024), A.Y(325)], BLUE);
+    T.pause(200);
+    y = 520;
+    T.str('a) 2013: ungefär 325 000 elever', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Prognoslinjen når samma höjd']],
+      [['någonstans kring 2019–2022.']],
+      [['Avläsningen är ungefärlig, så']],
+      [['svaret blir ett intervall.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar a: något år 2019-2022', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) läser jag av två år och']],
+      [['jämför. Ökningen delas med']],
+      [['värdet vi utgår FRÅN.']]
+    ]);
+    y += 2.8 * F;
+    T.str('b) 2003: 320 000 elever', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('2007: 380 000 elever', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('ökning=', padL, y);
+    T.fracH('380 000-320 000', '320 000', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('60 000', '320 000', xx, y);
+    T.str('=0,1875', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('≈0,19=19 %', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Avläsningarna är ungefärliga,']],
+      [['så allt mellan 15 och 20 % är']],
+      [['ett rimligt svar.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar b: ungefär 19 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) ska prognosens ökningstakt']],
+      [['fortsätta. Jag räknar ut hur']],
+      [['många elever den ökar per år.']]
+    ]);
+    y += 2.8 * F;
+    T.str('c) 2019: 325 000 elever', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('2023: 365 000 elever', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('takt=', padL, y);
+    xx = T.fracH('365 000-325 000', '4 år', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('=10 000 elever/år', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Från 365 000 år 2023 fattas']],
+      [['35 000 elever upp till 400 000.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('tid=', padL, y);
+    T.fracH('400 000-365 000', '10 000', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('=3,5 år', padL + 30, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('2023+3,5 ≈2027', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Också här bygger allt på']],
+      [['avläsningar, så svaret ges']],
+      [['som ett intervall.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar c: något år 2027-2030', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+
+  /* ---- Uppgift 20: två golv ----
+   * a) rakt pris, b) formeln för golv A, c) ekvationen där golven kostar
+   * lika mycket — rabatten gäller bara över 50 m², vilket måste
+   * kontrolleras till slut. */
+  reg(20, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xwC = padL + 30 + T.adv('345x=395x-4 000') + 0.9 * F;
+
+    y = 238;
+    T.str('Golv A: 345 kr/m^2', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('Golv B: 395 kr/m^2', padL, y);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(y, [
+      [['20 m^2 är mindre än 50, så']],
+      [['rabatten på golv B gäller inte.']],
+      [['Båda golven kostar priset per']],
+      [['kvadratmeter gånger ytan.']]
+    ]);
+    y += 2.9 * F;
+    T.str('a) A: 345·20=6 900 kr', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('B: 395·20=7 900 kr', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar a: 6 900 kr och 7 900 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Kostnaden är priset per']],
+      [['kvadratmeter gånger antalet']],
+      [['kvadratmeter, oavsett hur många']],
+      [['de är.']]
+    ]);
+    y += 2.9 * F;
+    T.str('b) K=345x', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('K=kronor, x=antal m^2', padL + 30, y, null, 0.7);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar b: K=345x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) handlar det om stora ytor,']],
+      [['så rabatten på 4 000 kr dras']],
+      [['från golv B:s pris.']]
+    ]);
+    y += 2.8 * F;
+    T.str('c) A: 345x   B: 395x-4 000', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lika mycket betyder att']],
+      [['uttrycken är lika stora.']]
+    ]);
+    y += 2.5 * F;
+    T.str('345x=395x-4 000', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag samlar x-termerna i']],
+      [['högerledet: subtrahera 345x']],
+      [['från båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-345x', xwC, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      /* raden ryms inte i ett svep — den bryts före högerledet, men är
+       * ETT klicksteg (stegantalet måste vara lika i båda lägena) */
+      y += 2.4 * F;
+      xx = T.str('345x', padL + 30, y);
+      T.str('-345x', xx, y, BLUE);
+      y += 2.2 * F;
+      xx = T.str('=395x-4 000', padL + 60, y);
+      T.str('-345x', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('0=50x-4 000', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sedan adderar jag 4 000 till']],
+      [['båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('+4 000', xwC, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('0', padL + 30, y);
+      xx = T.str('+4 000', xx, y, BLUE);
+      xx = T.str('=50x-4 000', xx, y);
+      T.str('+4 000', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('4 000=50x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist dividerar jag båda led']],
+      [['med 50.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/50', xwC, y);
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('4 000', '50', padL + 30, y);
+      xx = T.str('=', xx, y);
+      T.fracH('50x', '50', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    T.str('80=x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Viktigt: 80 m^2 är MER än 50,']],
+      [['så rabatten gäller verkligen.']],
+      [['Kontroll: 345·80=27 600 och']],
+      [['395·80-4 000=27 600.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar c: vid 80 m^2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 21: vilken elevlösning är ett bevis? ----
+   * Figuren ritas först, och Saras resonemang skrivs ut — det är det som
+   * gäller för ALLA trianglar. */
+  reg(21, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+    var A = [padL + 30, 300], B = [padL + 140, 190], C = [padL + 260, 300];
+    var D = [padL + 360, 300];
+
+    /* ---- steg 1: figuren ---- */
+    T.line(A, B); T.pause(130);
+    T.line(B, C); T.pause(130);
+    T.line(C, A); T.pause(130);
+    T.line(C, D); T.pause(160);
+    V.vinkelBage(T, A, -0.785, 0, 30);
+    T.str('a', A[0] + 44, A[1] - 14, null, 0.62);
+    T.pause(160);
+    V.vinkelBage(T, B, 0.735, 2.31, 26);
+    T.str('b', B[0] - 4, B[1] + 52, null, 0.62);
+    T.pause(160);
+    V.vinkelBage(T, C, Math.PI, Math.PI + 0.735, 24);
+    T.str('x', C[0] - 44, C[1] - 12, null, 0.62);
+    T.pause(160);
+    V.vinkelBage(T, C, -0.735, 0, 30);
+    T.str('c', C[0] + 34, C[1] - 26, null, 0.62);
+    T.stepEnd();
+
+    tanke(340, [
+      [['Ett bevis måste gälla för ALLA']],
+      [['trianglar. Talexempel visar bara']],
+      [['att satsen stämmer i just de']],
+      [['fallen.']]
+    ], 0);
+    y = 430;
+    T.str('Carina: många exempel i en', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('tabell. Inget bevis.', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('Erik: ett enda talexempel.', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('Inget bevis.', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sara använder i stället två']],
+      [['samband som gäller i varje']],
+      [['triangel, med bokstäver i']],
+      [['stället för siffror.']]
+    ]);
+    y += 2.8 * F;
+    T.str('Sara: a+b+x=180°', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('vinkelsumman', padL + 60, y, null, 0.62);
+    T.pause(200);
+    y += 2.0 * F;
+    T.str('x+c=180°', padL + 40, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('rak vinkel', padL + 60, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda summorna är 180°, alltså']],
+      [['är vänsterleden lika stora.']]
+    ]);
+    y += 2.6 * F;
+    T.str('a+b+x=x+c', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x finns i båda leden och kan']],
+      [['subtraheras bort. Kvar står']],
+      [['själva satsen.']]
+    ]);
+    y += 2.5 * F;
+    T.str('a+b=c', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: bara Saras lösning är', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    xe = T.str('ett bevis', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 22: Ahmeds vinst jämfört med Stinas ----
+   * Båda vinsterna uttrycks med Oskars x; kvoten mellan dem är svaret,
+   * och x förkortas bort. */
+  reg(22, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 182;
+    T.str('Oskar: x kr', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['40 % mer betyder 100+40=140 %']],
+      [['av Oskars vinst, alltså faktorn']],
+      [['1,4.']]
+    ]);
+    y += 2.5 * F;
+    T.str('Ahmed: 1,4x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['20 % mindre betyder 100-20=80 %,']],
+      [['alltså faktorn 0,8.']]
+    ]);
+    y += 2.5 * F;
+    T.str('Stina: 0,8x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jämförelsen görs MED STINA som']],
+      [['utgångspunkt, så hennes vinst']],
+      [['står i nämnaren.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('Andelen: ', padL, y);
+    xx = T.fracH('1,4x', '0,8x', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('1,4', '0,8', xx, y);
+    T.str('=1,75', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x fanns i både täljare och']],
+      [['nämnare och förkortades bort —']],
+      [['svaret beror inte på hur mycket']],
+      [['Oskar vann.']]
+    ], 1.05);
+    y += 3.6 * F;
+    T.str('1,75-1=0,75=75 %', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 75 % större', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 23: procent eller procentenheter? ----
+   * Ökningen i procentenheter jämförs med partiets TIDIGARE stöd — då
+   * blir de två ökningarna lika stora. */
+  reg(23, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 182;
+    T.str('S: 33,4 %   ökning 1,7 enheter', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('M: 23,6 %   ökning 1,2 enheter', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I procentenheter ökade S mer.']],
+      [['Men Kalle måste ha jämfört med']],
+      [['vad partierna hade FÖRUT.']]
+    ]);
+    y += 2.6 * F;
+    T.str('Förut: S 33,4-1,7=31,7 %', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('M 23,6-1,2=22,4 %', padL + 60, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den procentuella ökningen är']],
+      [['ökningen delad med det man']],
+      [['utgick från.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.str('S: ', padL, y);
+    xx = T.fracH('1,7', '31,7', xx, y);
+    T.str('=0,0536...≈5,4 %', xx, y);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('M: ', padL, y);
+    xx = T.fracH('1,2', '22,4', xx, y);
+    T.str('=0,0535...≈5,4 %', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nästan exakt samma tal! Sett så']],
+      [['ökade partierna lika mycket.']]
+    ], 1.05);
+    y += 3.4 * F;
+    T.str('Båda ökade med ungefär 5 %', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('av sitt tidigare stöd.', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: Kalle jämförde den', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    xe = T.str('procentuella ökningen', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 24: biljetterna till konserten ----
+   * Formeln ger en ekvation i x (vuxenbiljetter); barnbiljetterna är
+   * det som återstår av de 650. */
+  reg(24, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T);
+    var vagg = !!cfg.vagg;
+    var xwA = padL + 30 + T.adv('52 500=50x+32 500') + 0.9 * F;
+
+    y = 238;
+    var e0 = padL; xx = T.str('I=100x+', padL, y);
+    var f0 = xx; xx = T.str('50', xx, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t1 = xx; xx = T.str('650', xx, y); var t1b = xx;
+    var t2 = xx; xx = T.str('-x', xx, y); var t2b = xx;
+    xx = T.str(')', xx, y);
+    var e1 = xx, yE = y, yK = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Intäkten är känd: 52 500 kr.']],
+      [['Den sätts in där I står, och']],
+      [['då blir formeln en ekvation.']]
+    ]);
+    y += 2.6 * F;
+    var v0 = padL, v1 = T.str('I=52 500 kr', padL, y), yV = y;
+    T.stepEnd();
+
+    var ringar = substRings(acts, [[v0, v1, yV, F], [e0, e1, yE, F]]);
+    y += 2.4 * F;
+    T.str('52 500=100x+50(650-x)', padL, y);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Femtio multipliceras med varje']],
+      [['term i parentesen.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('52 500=100x', padL + 30, y);
+    multIn(xx, y, yK - 0.95 * F, [
+      { fran: [f0, f1], till: [t1, t1b], skriv: '+32 500', hojd: 26 },
+      { fran: [f0, f1], till: [t2, t2b], skriv: '-50x', hojd: 46, dx: 4 }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['100x-50x=50x. Nu står bara en']],
+      [['x-term kvar.']]
+    ]);
+    y += 2.5 * F;
+    T.str('52 500=50x+32 500', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['32 500 adderas, så jag']],
+      [['subtraherar det från båda led.']]
+    ]);
+    /* Väggen ryms inte på den här raden (talen är breda och operationen
+     * lång), så steget behåller ledformen i BÅDA lägena — se
+     * EKVATIONSREDOVISNING i handskrift.js. Raden bryts före högerledet
+     * men är ETT klicksteg. */
+    y += 2.4 * F;
+    xx = T.str('52 500', padL + 30, y);
+    T.str('-32 500', xx, y, BLUE);
+    y += 2.2 * F;
+    xx = T.str('=50x+32 500', padL + 60, y);
+    T.str('-32 500', xx, y, BLUE);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('20 000=50x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar båda led med 50.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/50', xwA, y);
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('20 000', '50', padL + 30, y);
+      xx = T.str('=', xx, y);
+      T.fracH('50x', '50', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    T.str('400=x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x var antalet VUXENbiljetter.']],
+      [['Frågan gällde barnbiljetterna,']],
+      [['alltså resten av de 650.']]
+    ]);
+    y += 2.6 * F;
+    T.str('barnbiljetter=650-400=250', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 250 barnbiljetter', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 25: cirkeln och triangeln ----
+   * Basen är cirkelns omkrets och höjden är radien — då blir triangelns
+   * area exakt cirkelns area, oavsett hur stor cirkeln är. */
+  reg(25, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var cx = padL + 110, cy = 230, rr = 70;
+    var P = [cx, cy + rr], Q = [cx + 300, cy + rr], R = [cx, cy];
+
+    acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, rr, rr) });
+    T.pause(220);
+    T.line(P, Q); T.pause(140);
+    T.line(Q, R); T.pause(140);
+    T.line(R, P); T.pause(160);
+    V.ratVinkel(T, P, [1, 0], [0, -1], 13);
+    T.pause(160);
+    T.str('r', cx + 26, cy - 8, BLUE, 0.62);
+    T.line([cx, cy], [cx + rr, cy]);
+    T.pause(180);
+    T.str('basen', (P[0] + Q[0]) / 2 - 26, P[1] + 0.95 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(cy + rr + 40, [
+      [['Höjden i triangeln är lika lång']],
+      [['som radien, och basen är lika']],
+      [['lång som cirkelns omkrets — det']],
+      [['står i uppgiften.']]
+    ], 0);
+    y = 420;
+    T.str('höjden=r', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('basen=omkretsen=2πr', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in det i formeln']],
+      [['för triangelns area.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('A=', padL, y);
+    xx = T.fracH('basen·höjden', '2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('2πr·r', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tvåan i täljaren och tvåan i']],
+      [['nämnaren tar ut varandra, och']],
+      [['r·r är r^2.']]
+    ], 1.05);
+    y += 3.6 * F;
+    T.str('=πr^2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och cirkelns area är ju också']],
+      [['πr^2. Areorna är lika stora.']]
+    ]);
+    y += 2.6 * F;
+    T.str('Cirkeln: A=πr^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uträkningen använde bara r,']],
+      [['aldrig något bestämt tal. Alltså']],
+      [['gäller den för alla cirklar.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: ja, påståendet stämmer', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    xe = T.str('alltid', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 26: skulpturen ----
+   * a) geometrisk talföljd med faktorn 0,8, b) pröva vilken pinne som
+   * först blir kortare än 15 cm — höjden räknas på MELLANRUMMEN. */
+  reg(26, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
+    var tanke = mkTanke(T);
+
+    /* ---- steg 1: skissen ---- */
+    var mx = padL + 200, ybot = 320, dh = 26, w = 100;
+    for (i = 0; i < 7; i++) {
+      var b = w * Math.pow(0.8, i);
+      T.line([mx - b, ybot - i * dh], [mx + b, ybot - i * dh]);
+      T.pause(70);
+    }
+    T.line([mx - w, ybot], [mx - w * Math.pow(0.8, 6), ybot - 6 * dh]);
+    T.pause(120);
+    T.line([mx + w, ybot], [mx + w * Math.pow(0.8, 6), ybot - 6 * dh]);
+    T.pause(180);
+    T.str('2,0 m', mx - 26, ybot + 0.95 * F, BLUE, 0.62);
+    T.pause(140);
+    T.str('25 cm', mx + w + 16, ybot - 12, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(ybot + 50, [
+      [['Varje pinne är 20 % kortare än']],
+      [['den förra, alltså 80 % av den.']],
+      [['Faktorn är 0,8.']]
+    ], 0);
+    y = 420;
+    T.str('a) pinne n=2,0·0,8^n^-^1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Pinne 1 är 2,0 m, alltså']],
+      [['multipliceras 2,0 med 0,8 en']],
+      [['gång FÄRRE än pinnens nummer.']],
+      [['Pinne 6 ger exponenten 5.']]
+    ]);
+    y += 2.8 * F;
+    T.str('pinne 6=2,0·0,8^5=2,0·0,32768', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=0,655...m=65,5 cm', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar a: ungefär 65,5 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) provar jag mig fram: vilken']],
+      [['pinne är den sista som är minst']],
+      [['15 cm lång?']]
+    ]);
+    y += 2.9 * F;
+    T.str('b) pinne 12=2,0·0,8^1^1=0,1717...m', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=17,2 cm   OK', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('pinne 13=2,0·0,8^1^2=0,1374...m', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=13,7 cm   för kort', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alltså 12 pinnar. Men höjden']],
+      [['räknas på MELLANRUMMEN, och de']],
+      [['är ett färre än pinnarna: 11.']]
+    ]);
+    y += 2.8 * F;
+    T.str('höjd=11·25=275 cm=2,75 m', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt? En skulptur på knappt']],
+      [['tre meter, ungefär takhöjd.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar b: 275 cm=2,75 m', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 27: fördubblingstiden ----
+   * a) tumregeln som formel, b) tumregeln använd baklänges, c) den
+   * exakta räkningen med förändringsfaktorn. */
+  reg(27, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xwB = padL + 30 + T.adv('14=') + T.fracW('70', 'p') + 0.9 * F;
+
+    tanke(60, [
+      [['Tumregeln säger: fördubblings-']],
+      [['tiden är 70 delat med den']],
+      [['procentuella ökningen.']]
+    ], 0);
+    y = 200;
+    xx = T.str('a) T=', padL, y);
+    T.fracH('70', 'p', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar a: T=', padL, y);
+    xe = T.fracH('70', 'p', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) är fördubblingstiden känd']],
+      [['och ökningen söks. Jag sätter']],
+      [['in T=14 i tumregeln.']]
+    ], 1.4);
+    y += 4.2 * F;
+    xx = T.str('b) 14=', padL, y);
+    T.fracH('70', 'p', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['p står i nämnaren, så jag']],
+      [['multiplicerar båda led med p.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('·p', xwB, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.3 * F;
+      xx = T.str('14', padL + 30, y);
+      xx = T.str('·p', xx, y, BLUE);
+      xx = T.str('=', xx, y);
+      xx = T.fracH('70', 'p', xx, y);
+      T.str('·p', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    T.str('14p=70', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och dividerar med 14.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/14', xwB, y);
+      T.stepEnd();
+      y += 2.2 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.fracH('14p', '14', padL + 30, y);
+      xx = T.str('=', xx, y);
+      T.fracH('70', '14', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    T.str('p=5', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar b: ungefär 5 % per år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) räknar jag exakt i stället']],
+      [['för med tumregeln: att fördubbla']],
+      [['betyder att faktorn a upphöjd']],
+      [['till 14 blir 2.']]
+    ]);
+    y += 2.9 * F;
+    T.str('c) a^1^4=2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Motsatsen till att upphöja till']],
+      [['14 är att dra fjortonderoten.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('a=', padL, y);
+    xx = T.rot('2', xx, y, 14);
+    T.str('=1,05076...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Faktorn 1,0508 betyder en ökning']],
+      [['med drygt 5 hundradelar, alltså']],
+      [['drygt 5 procent.']]
+    ]);
+    y += 2.6 * F;
+    T.str('1,05076...-1=0,05076...', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uppgiften ber om två decimaler']],
+      [['i procentform.']]
+    ]);
+    y += 2.5 * F;
+    T.str('≈5,08 %', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar c: 5,08 % per år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
 })();

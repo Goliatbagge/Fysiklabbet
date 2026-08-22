@@ -316,6 +316,30 @@ for (const typ of valda) {
   }
 }
 
+/* EKVVAL — en scen som stödjer båda redovisningslägena MÅSTE ha exakt
+ * samma antal klicksteg i båda (positionen bevaras via stegindex när
+ * användaren växlar läge, se EKVATIONSREDOVISNING i handskrift.js).
+ * Steggränserna är akterna av typen 'lineEnd'. */
+{
+  const olika = [];
+  for (const typ of valda) {
+    let a, b;
+    try {
+      a = HK.scen(typ);
+      if (!a || !a.ekvval) continue;
+      b = HK.scen(typ, undefined, { vagg: true });
+    } catch (e) { continue; }
+    const n = L => L.acts.filter(k => k.kind === 'lineEnd').length;
+    if (n(a) !== n(b)) olika.push(typ + ': ' + n(a) + ' mot ' + n(b));
+  }
+  if (olika.length) {
+    felTot += olika.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  olika antal klicksteg i de två ' +
+                'ekvationsredovisningarna:');
+    olika.forEach(r => console.log('      - ' + r));
+  }
+}
+
 /* FLERTECKENSINDEX — placeString tar bara ETT tecken efter '_' och '^'.
  * "v_tot" skrivs alltså som v med index t, följt av vanliga bokstäver
  * "ot" — ett fel som bara syns i skärmdump. Ett index med flera tecken

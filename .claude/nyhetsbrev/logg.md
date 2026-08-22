@@ -77,7 +77,7 @@ Format:
 - Veckans tips: exit tickets (krok: terminen i full gång).
 - Teaser: (1) fler fördjupningar på gång i både matematiken och fysiken
   (öppen formulering, ur planerat.md); (2) NYHETSUPPSLAG: ramsläpningen,
-  jorden som vrider rymdtiden med sig, mätt till ett par tiondels procent
+  jorden som vrider rumtiden med sig, mätt till ett par tiondels procent
   (LARES-2/LAGEOS, Ciufolini m.fl., Nature 655, 332–335). Avslutas med
   signaturen "Vi läser på." **TEASER-SKULD: nyhetsagenten måste publicera
   uppslaget senast onsdag 2026-08-26.** Posten ligger överst i ko.md,

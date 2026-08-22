@@ -12,7 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Jorden vrider rymdtiden med sig — nu mätt till en femtedels procent**  **[BREVTEASER — teasad i brevet 2026-08-23, publiceras senast onsdag 2026-08-26]**
+- **Jorden vrider rumtiden med sig — nu mätt till en femtedels procent**  **[BREVTEASER — teasad i brevet 2026-08-23, publiceras senast onsdag 2026-08-26]**
   (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
   ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
   tiopotens bättre än tidigare bestämningar i solsystemet. Ungefär 200 000

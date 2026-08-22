@@ -133,6 +133,313 @@
     return { acts: acts, contentW: 560, lastBase: y + 1.4 * F, padL: padL };
   });
 
+  /* ---- Uppgift 2: vilket funktionsuttryck hör till grafen? ----
+   * Linjen ritas av först (samma fönster som provets figur), sedan läses
+   * m av vid y-axeln och k med ett trappsteg. */
+  reg(2, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var A = mkAxes(T, F, { ox: padL + 128, oy: 222, u: 27,
+                           xmin: -4, xmax: 5, ymin: -3, ymax: 6 });
+
+    /* ---- steg 1: rita av koordinatsystemet och linjen ---- */
+    A.axes();
+    A.ticks(V.heltal(-4, 5), V.heltal(-3, 6), [-2, 2, 4], [-2, 2, 4, 6]);
+    T.pause(200);
+    A.graphKM(-2, 3, null, -1.5, 3);
+    T.stepEnd();
+
+    tanke(316, [
+      [['m är y-värdet där linjen']],
+      [['skär y-axeln, alltså där']],
+      [['x=0. Det är lättast att']],
+      [['läsa av först.']]
+    ], 0);
+    /* avläsningen är ett VÄRDE ur figuren → blåpennan */
+    A.dot(0, 3, BLUE);
+    A.tag(0, 3, '(0, 3)', 10, -12, BLUE);
+    T.pause(240);
+    y = 396;
+    T.str('m=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k säger hur mycket y ändras']],
+      [['när x ökar med 1. Jag går ett']],
+      [['steg åt höger från (0, 3) och']],
+      [['ser hur långt linjen faller.']]
+    ]);
+    A.stair(0, 3, 1, 1, '1', '−2', { dxOff: [7, 0], dyOff: [6, 0] });
+    T.pause(200);
+    y += 2.9 * F;
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('−2', '1', xx, y);
+    T.str('=-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in k och m i']],
+      [['räta linjens ekvation.']]
+    ], 1.05);
+    y += 3.3 * F;
+    var e0 = padL, e1 = T.str('y=kx+m', padL, y);
+    var yE = y;
+    T.stepEnd();
+
+    var ringar = substRings(acts, [[padL, padL + T.adv('m=3'), 396, F],
+                                   [padL, padL + T.adv('k=-2'), yE - 3.3 * F, F],
+                                   [e0, e1, yE, F]]);
+    y += 2.3 * F;
+    T.str('y=-2x+3', padL + 30, y);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: y=-2x+3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 5: vilket diagram visar starkast korrelation? ----
+   * Pennan ritar två egna minidiagram — spridda punkter mot punkter
+   * nästan på en linje — så att "stark korrelation" blir något man SER,
+   * och går sedan igenom provets sex diagram. */
+  reg(5, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    /* två små koordinatsystem sida vid sida */
+    function minidiagram(ox, oy, w, h, punkter, rubrik) {
+      T.acts.push({ kind: 'stroke', pts: humanize([[ox, oy - h], [ox, oy]]) });
+      T.acts.push({ kind: 'stroke', pts: humanize([[ox, oy], [ox + w, oy]]) });
+      T.pause(160);
+      punkter.forEach(function (p) {
+        T.acts.push({ kind: 'stroke', color: BLUE,
+                      pts: V.dotPts(ox + p[0] * w, oy - p[1] * h) });
+      });
+      T.pause(160);
+      var tw = T.adv(rubrik, 0.55);
+      T.str(rubrik, ox + w / 2 - tw / 2, oy + 0.95 * F, null, 0.55);
+    }
+
+    /* spridda punkter: ingen tydlig riktning */
+    minidiagram(padL + 20, 190, 150, 120,
+      [[0.10, 0.62], [0.22, 0.24], [0.34, 0.80], [0.46, 0.40],
+       [0.58, 0.68], [0.70, 0.28], [0.82, 0.55], [0.92, 0.18]],
+      'svag korrelation');
+    T.pause(300);
+    /* punkter nästan på en fallande linje */
+    minidiagram(padL + 280, 190, 150, 120,
+      [[0.08, 0.92], [0.20, 0.80], [0.32, 0.72], [0.44, 0.58],
+       [0.56, 0.50], [0.68, 0.36], [0.80, 0.26], [0.92, 0.12]],
+      'stark korrelation');
+    T.stepEnd();
+
+    tanke(214, [
+      [['Stark korrelation betyder att']],
+      [['punkterna ligger tätt samlade']],
+      [['kring en rät linje. Riktningen']],
+      [['spelar ingen roll.']]
+    ], 0);
+    y = 300;
+    T.str('B och E: punkterna sprider sig,', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('ingen korrelation.', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('A och F: tydlig riktning men', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('spretiga punkter, måttlig.', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvar är C och D. Båda följer']],
+      [['en rät linje, så jag jämför']],
+      [['hur tätt punkterna ligger.']]
+    ]);
+    y += 2.6 * F;
+    T.str('C: stark, punkterna spretar lite.', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('D: nästan exakt på en linje.', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: D', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 6: avläsning ur en graf ----
+   * a) f(2) läses av rakt upp från x=2, b) f(x)=14 löses genom att dra
+   * linjen y=14 och se var den skär kurvan. Kurvan ritas i samma fönster
+   * som provets figur (x från −16 till 17, y från −5 till 16). */
+  reg(6, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* fönstret är brett (33 enheter i x-led) — u=20 med två enheter per
+     * ruta håller hela figuren innanför arkets vänstra två tredjedelar,
+     * så att inget hamnar i inställningsrutans hörn */
+    var A = mkAxes(T, F, { ox: padL + 176, oy: 250, u: 20, xsc: 2, ysc: 2,
+                           xmin: -16, xmax: 17, ymin: -5, ymax: 16 });
+
+    /* ---- steg 1: rita av grafen ---- */
+    A.axes();
+    A.ticks(V.heltal(-16, 16, 2), V.heltal(-4, 16, 2),
+            [-12, -8, -4, 4, 8, 12, 16], [4, 8, 12, 16]);
+    T.pause(220);
+    /* kurvan: strecket ritas som en mjuk kurva genom punkterna
+     * (pathFrom är en Catmull-Rom-spline, så ett fåtal punkter räcker) */
+    var kurva = [[-15.8, -5.0], [-13, 1.5], [-11, 5.0], [-9, 9.0],
+                 [-7, 12.0], [-5, 11.6], [-3, 10.6], [0, 9.2], [2, 8.0],
+                 [5, 6.5], [7, 5.6], [9, 5.0], [11, 6.0], [12, 6.8],
+                 [14, 10.0], [16, 14.0], [17.2, 17.0]];
+    acts.push({ kind: 'stroke',
+                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }) });
+    T.stepEnd();
+
+    /* ---- a) f(2) ---- */
+    /* bubblan läggs UNDER hela figuren (y-axeln når ned till 310) */
+    tanke(322, [
+      [['f(2) är kurvans höjd vid']],
+      [['x=2. Jag går upp från 2 på']],
+      [['x-axeln till kurvan och sedan']],
+      [['vågrätt in till y-axeln.']]
+    ], 0);
+    A.guides(2, 8);
+    T.pause(180);
+    A.dot(2, 8, BLUE);
+    T.pause(200);
+    y = 440;
+    T.str('a) f(2)=8', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: f(2)=8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) f(x)=14 ---- */
+    tanke(y, [
+      [['f(x)=14 betyder: var ligger']],
+      [['kurvan på höjden 14? Jag drar']],
+      [['en vågrät linje vid y=14 och']],
+      [['ser var den skär kurvan.']]
+    ]);
+    A.rule([A.X(-16), A.Y(14)], [A.X(17), A.Y(14)], BLUE);
+    T.pause(220);
+    y += 3.4 * F;
+    T.str('b) y=14 skär kurvan på ett ställe.', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kullen till vänster når bara']],
+      [['upp till 12, så där finns']],
+      [['ingen skärning. Den enda']],
+      [['ligger långt till höger.']]
+    ]);
+    A.dot(16, 14, BLUE);
+    T.pause(160);
+    A.guides(16, 14);
+    T.pause(200);
+    y += 2.5 * F;
+    T.str('x=16', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=16', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 8: linjär, exponentiell eller potensmodell? ----
+   * Först skrivs kännetecknen upp, sedan prövas de fyra situationerna
+   * mot dem en i taget. */
+  reg(8, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    y = 96;
+    T.str('Linjär: y=kx+m', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('lika mycket per steg', padL + 40, y, null, 0.7);
+    T.pause(200);
+    y += 2.0 * F;
+    T.str('Exponentiell: y=C·a^x', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('lika många procent per steg', padL + 40, y, null, 0.7);
+    T.pause(200);
+    y += 2.0 * F;
+    T.str('Potens: y=C·x^n', padL, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('variabeln står i en potens', padL + 40, y, null, 0.7);
+    T.stepEnd();
+
+    tanke(y, [
+      [['1. Varje kilo sand väger lika']],
+      [['mycket, så vikten ökar lika']],
+      [['mycket per kilo.']]
+    ]);
+    y += 2.5 * F;
+    T.str('1. Linjär modell', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2. Bromssträckan beror på']],
+      [['hastigheten i kvadrat, alltså']],
+      [['y=C·x^2. Variabeln i en potens.']]
+    ]);
+    y += 2.5 * F;
+    T.str('2. Potensmodell', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3. Degen växer med 5 % var']],
+      [['tionde minut, alltså lika']],
+      [['många PROCENT per steg.']]
+    ]);
+    y += 2.5 * F;
+    T.str('3. Exponentiell modell', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['4. Det rinner ut 2 cl varje']],
+      [['minut, lika mycket per steg.']],
+      [['Vattnet minskar, så k<0.']]
+    ]);
+    y += 2.5 * F;
+    T.str('4. Linjär modell', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 1 linjär, 2 potens,', padL, y);
+    T.stepEnd();
+    y += 2.0 * F;
+    xe = T.str('3 exponentiell, 4 linjär', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  });
+
   /* ---- Uppgift 3: två gula vantar utan återläggning ----
    * Poängen är att nämnaren minskar i det andra draget: vanten läggs
    * inte tillbaka, så det finns 4 vantar kvar. */
@@ -343,6 +650,181 @@
     T.stepEnd();
 
     return { acts: acts, contentW: 560, lastBase: y + 1.6 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 9: vilket uttryck har samma värde som sin 20°? ----
+   * Samma triangel, två olika vinklar: sidan a är motstående till 20°
+   * och närliggande till 70°, medan hypotenusan är densamma. Kvoterna
+   * blir därför lika. Triangeln ritas i provfigurens orientering. */
+  reg(9, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe, r;
+    var tanke = mkTanke(T);
+    /* rät vinkel i A (nere till vänster), 20° i B (nere till höger) */
+    var A = [padL + 30, 300], B = [padL + 330, 300], C = [padL + 30, 191];
+
+    /* ---- steg 1: rita av triangeln ---- */
+    T.line(A, B); T.pause(140);
+    T.line(B, C); T.pause(140);
+    T.line(C, A); T.pause(180);
+    V.ratVinkel(T, A, [1, 0], [0, -1], 15);
+    T.pause(160);
+    /* vinkelns inre ligger OVANFÖR basen, och y växer nedåt i scenen —
+     * bågen går därför från -π (mot A) till -(π-0,349) (mot C) */
+    V.vinkelBage(T, B, -Math.PI, -(Math.PI - 0.349), 46);
+    /* 20° är en spetsig vinkel: kilen är bara 0,35·r hög, så talet läggs
+     * långt ut på bisektrisen där kilen hunnit bli bred nog (~40 px vid
+     * r=118) — annars hamnar det ovanpå basen eller hypotenusan */
+    T.str('20°', B[0] - 118 - T.adv('20°', 0.62) / 2, B[1] - 9, null, 0.62);
+    T.stepEnd();
+
+    tanke(330, [
+      [['Vinkelsumman i en triangel är']],
+      [['180°. Den räta vinkeln tar 90°,']],
+      [['och 20° är given.']]
+    ], 0);
+    y = 396;
+    T.str('180°-90°-20°=70°', padL, y);
+    T.pause(220);
+    var mid2 = V.vinkelBage(T, C, 0.349, Math.PI / 2, 40);
+    T.str('70°', C[0] + Math.cos(mid2) * 58 - T.adv('70°', 0.62) / 2,
+          C[1] + Math.sin(mid2) * 58 + 0.2 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag döper sidorna: a är sidan']],
+      [['mellan den räta vinkeln och']],
+      [['70°-vinkeln, c är hypotenusan.']]
+    ]);
+    T.str('a', A[0] - 24, (A[1] + C[1]) / 2 + 0.2 * F, null, 0.62);
+    T.pause(200);
+    T.str('c', (B[0] + C[0]) / 2 + 6, (B[1] + C[1]) / 2 - 12, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sett från 20°-vinkeln är a']],
+      [['motstående katet, och c är']],
+      [['hypotenusan.']]
+    ]);
+    y += 3.4 * F;
+    r = V.trigKvot(T, F, { fn: 'sin 20°=', x: padL, y: y,
+      ring: [B[0] - 34, B[1] - 16, 32, 24],
+      num: { txt: 'a', ord: 'motstående katet',
+             svep: [[A[0] - 7, A[1] - 6], [C[0] - 7, C[1] + 6]] },
+      den: { txt: 'c', ord: 'hypotenusan',
+             svep: [[C[0] + 6, C[1] + 6], [B[0] - 6, B[1] - 6]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sett från 70°-vinkeln är samma']],
+      [['sida a i stället NÄRLIGGANDE.']],
+      [['Hypotenusan är förstås densamma.']]
+    ], 1.05);
+    y += 4.2 * F;
+    r = V.trigKvot(T, F, { fn: 'cos 70°=', x: padL, y: y,
+      ring: [C[0] + 30, C[1] + 22, 30, 24],
+      num: { txt: 'a', ord: 'närliggande katet',
+             svep: [[A[0] - 7, A[1] - 6], [C[0] - 7, C[1] + 6]] },
+      den: { txt: 'c', ord: 'hypotenusan',
+             svep: [[C[0] + 6, C[1] + 6], [B[0] - 6, B[1] - 6]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda uttrycken är samma kvot,']],
+      [['a delat med c. Alltså är de']],
+      [['lika stora.']]
+    ], 1.05);
+    y += 4.0 * F;
+    T.str('sin 20°=cos 70°', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: cos 70°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 10: fyll i den tomma parentesen ----
+   * Vänsterledet utvecklas (blå bågar till varje term) och divideras
+   * sedan med tvåan framför den tomma parentesen. */
+  reg(10, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T);
+
+    y = 96;
+    var f0 = padL; xx = T.str('3', padL, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t1 = xx; xx = T.str('4x', xx, y); var t1b = xx;
+    var t2 = xx; xx = T.str('-10', xx, y); var t2b = xx;
+    T.str(')=2(      )', xx, y);
+    var yKalla = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag börjar med att utveckla']],
+      [['vänsterledet: trean multipli-']],
+      [['ceras med VARJE term.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('3(4x-10)=', padL, y);
+    multIn(xx, y, yKalla - 0.95 * F, [
+      { fran: [f0, f1], till: [t1, t1b], skriv: '12x', hojd: 26 },
+      { fran: [f0, f1], till: [t2, t2b], skriv: '-30', hojd: 42, dx: 4 }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu vet jag att 2 gånger']],
+      [['parentesen ska bli 12x-30.']],
+      [['Då får jag parentesen genom']],
+      [['att dividera med 2.']]
+    ]);
+    y += 3.1 * F;
+    xx = T.str('Parentesen: ', padL, y);
+    T.fracH('12x-30', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bråkstrecket gäller hela']],
+      [['täljaren, så BÅDA termerna']],
+      [['delas med 2.']]
+    ], 1.05);
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('12x', '2', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('30', '2', xx, y);
+    xx = T.str('=6x-15', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    T.str('Kontroll', padL, y - 1.5 * F, null, 0.62);
+    var g0 = padL; xx = T.str('2', padL, y); var g1 = xx;
+    xx = T.str('(', xx, y);
+    var s1 = xx; xx = T.str('6x', xx, y); var s1b = xx;
+    var s2 = xx; xx = T.str('-15', xx, y); var s2b = xx;
+    T.str(')', xx, y);
+    var yK2 = y;
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = multIn(xx, y, yK2 - 0.95 * F, [
+      { fran: [g0, g1], till: [s1, s1b], skriv: '12x', hojd: 26 },
+      { fran: [g0, g1], till: [s2, s2b], skriv: '-30', hojd: 42, dx: 4 }
+    ]);
+    T.str('  stämmer', xx, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 6x-15', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL };
   });
 
   /* ---- Uppgift 11: hur många sidor har tärningen? ----
@@ -584,4 +1066,219 @@
 
     return { acts: acts, contentW: 580, lastBase: y + 1.4 * F, padL: padL };
   });
+  /* ---- Uppgift 15: bestäm a så att 2x-a<5 har lösningen x<7 ----
+   * Olikheten löses med a kvar som bokstav; lösningen jämförs sedan med
+   * den önskade. Scenen stödjer båda redovisningslägena. */
+  reg(15, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xw1 = Math.max(padL + T.adv('2x-a<5'),
+                       padL + 30 + T.adv('2x<5+a')) + 0.9 * F;
+    var xw2 = padL + 30 + T.fracW('5+a', '2') + T.adv('=7') + 0.9 * F;
+
+    y = 118;
+    T.str('2x-a<5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En olikhet löses som en']],
+      [['ekvation. a subtraheras i']],
+      [['vänsterledet, så jag adderar']],
+      [['a till båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('+a', xw1, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('2x-a', padL + 30, y);
+      xx = T.str('+a', xx, y, BLUE);
+      xx = T.str('<5', xx, y);
+      T.str('+a', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('2x<5+a', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x multipliceras med 2, så jag']],
+      [['dividerar båda led med 2. Två']],
+      [['är positivt, alltså står']],
+      [['olikhetstecknet kvar.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/2', xw1, y);
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('2x', '2', padL + 30, y);
+      xx = T.str('<', xx, y);
+      T.fracH('5+a', '2', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    xx = T.str('x<', padL + 30, y);
+    T.fracH('5+a', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lösningen ska vara x<7. Samma']],
+      [['olikhetstecken står redan där,']],
+      [['så bråket måste vara just 7.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xx = T.fracH('5+a', '2', padL + 30, y);
+    T.str('=7', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är det en vanlig ekvation.']],
+      [['Nämnaren 2 försvinner om jag']],
+      [['multiplicerar båda led med 2.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('·2', xw2, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('5+a', '2', padL + 30, y);
+      xx = T.str('·2', xx, y, BLUE);
+      xx = T.str('=7', xx, y);
+      T.str('·2', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.0 * F;
+    }
+    T.str('5+a=14', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist subtraherar jag 5 från']],
+      [['båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-5', xw1, y);
+      T.stepEnd();
+    } else {
+      y += 2.3 * F;
+      xx = T.str('5+a', padL + 30, y);
+      xx = T.str('-5', xx, y, BLUE);
+      xx = T.str('=14', xx, y);
+      T.str('-5', xx, y, BLUE);
+      T.stepEnd();
+    }
+    y += 2.2 * F;
+    T.str('a=9', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 2x-9<5 ger 2x<14,']],
+      [['alltså x<7. Precis den']],
+      [['lösning uppgiften ville ha.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar: a=9', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 16: skugga området där f(x) ≤ y ≤ g(x) ----
+   * Linjen f(x)=-x+7 och parabeln g(x)=(x-2)^2-1 skär varandra i (4, 3);
+   * till höger om skärningen ligger parabeln över linjen och området
+   * finns. Skuggningen ritas med snedstreck, som för hand. */
+  reg(16, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe, i;
+    var tanke = mkTanke(T);
+    var A = mkAxes(T, F, { ox: padL + 37, oy: 420, u: 34,
+                           xmin: -0.5, xmax: 5.6, ymin: -1.5, ymax: 9 });
+    function f(x) { return -x + 7; }
+    function g(x) { return (x - 2) * (x - 2) - 1; }
+
+    /* ---- steg 1: rita av figuren ---- */
+    A.axes();
+    /* parabeln skär x-axeln exakt vid 1 och 3 — talen knuffas i sidled
+     * så att de inte hamnar på kurvan */
+    A.ticks(V.heltal(0, 5), V.heltal(-1, 9), V.heltal(1, 5),
+            [2, 4, 6, 8], { x: { 1: -13, 3: 13 } });
+    T.pause(200);
+    A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))]);
+    /* etiketten i den fria ytan mellan linjen och parabeln */
+    T.str('f(x)', A.X(0.45), A.Y(4.4), null, 0.62);
+    T.pause(220);
+    var par = [];
+    for (i = -0.5; i <= 5.15; i += 0.25) par.push([A.X(i), A.Y(g(i))]);
+    acts.push({ kind: 'stroke', pts: par });
+    T.str('g(x)', A.X(4.2) - T.adv('g(x)', 0.62), A.Y(8.6), null, 0.62);
+    T.stepEnd();
+
+    tanke(500, [
+      [['Den dubbla olikheten säger att']],
+      [['y ska ligga över f(x) och under']],
+      [['g(x). Området ligger alltså']],
+      [['MELLAN graferna.']]
+    ], 0);
+    y = 590;
+    T.str('Linjen är golv, parabeln är tak.', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Var ligger parabeln ÖVER']],
+      [['linjen? De skär varandra i']],
+      [['en punkt, som jag läser av.']]
+    ]);
+    A.dot(4, 3, BLUE);
+    T.pause(160);
+    /* etiketten läggs i den fria ytan under linjen, till vänster om
+     * skärningen — uppe till höger ligger både parabeln och skuggningen */
+    A.tag(4, 3, '(4, 3)', -78, 18, BLUE);
+    T.pause(220);
+    y += 2.5 * F;
+    T.str('Skärning: (4, 3)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Till vänster om skärningen']],
+      [['ligger parabeln UNDER linjen.']],
+      [['Där finns inget område alls.']]
+    ]);
+    y += 2.5 * F;
+    T.str('x<4: parabeln under linjen.', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Till höger om skärningen']],
+      [['ligger parabeln över linjen.']],
+      [['Där skuggar jag ytan mellan']],
+      [['graferna.']]
+    ]);
+    /* skuggning: lodräta streck från linjen upp till parabeln */
+    for (i = 4.08; i <= 5.15; i += 0.16) {
+      acts.push({ kind: 'stroke', color: BLUE,
+                  pts: V.humanize([[A.X(i), A.Y(f(i))], [A.X(i), A.Y(g(i))]]) });
+      T.pause(60);
+    }
+    T.pause(200);
+    y += 2.8 * F;
+    T.str('Området: mellan graferna, från', padL, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('(4, 3) och åt höger.', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: se skuggningen i figuren', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
 })();

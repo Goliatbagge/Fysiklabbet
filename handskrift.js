@@ -34883,6 +34883,42 @@
    * och högra kant, yBase = radens baslinje. `opt` = { ry, cy } när
    * partiet är högre än en vanlig rad (bråk, exponenter) eller sitter
    * på annan höjd (figuretiketter). */
+  /* BRÅKEXPONENT — a^(2/3) skrivs med ett litet bråk med VÅGRÄTT streck
+   * i upphöjt läge (division ritas aldrig med snedstreck, se REGEL).
+   * Returnerar nästa x. expFracW ger bredden utan att rita. */
+  function expFrac(T, F, numS, denS, x0, yb, sc) {
+    sc = sc == null ? 0.42 : sc;
+    var nw = T.adv(numS, sc), dw = T.adv(denS, sc);
+    var w = Math.max(nw, dw) + 0.10 * F;
+    var ybar = yb - 0.62 * F;
+    T.str(numS, x0 + (w - nw) / 2, ybar - 0.10 * F, null, sc);
+    T.pause(90);
+    T.acts.push({ kind: 'stroke',
+                  pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+    T.pause(90);
+    T.str(denS, x0 + (w - dw) / 2, ybar + 0.48 * F, null, sc);
+    return x0 + w + 1.5;
+  }
+  function expFracW(T, F, numS, denS, sc) {
+    sc = sc == null ? 0.42 : sc;
+    return Math.max(T.adv(numS, sc), T.adv(denS, sc)) + 0.10 * F + 1.5;
+  }
+
+  /* STOR PARENTES runt ett uttryck som är högre än en rad (t.ex. en
+   * skillnad mellan två bråk) — parentesglyfen är bara en rad hög.
+   * right=true ger den högra parentesen. Returnerar nästa x. */
+  function bigParen(T, F, x, yb, right) {
+    var yTop = yb - 1.42 * F, yBot = yb + 1.06 * F, ym = (yTop + yBot) / 2;
+    var d = (right ? -1 : 1) * 0.17 * F;
+    T.acts.push({ kind: 'stroke', pts: [
+      [x + d, yTop], [x + d * 0.45, yTop + (ym - yTop) * 0.36],
+      [x + d * 0.04, ym - (ym - yTop) * 0.22], [x, ym],
+      [x + d * 0.04, ym + (yBot - ym) * 0.22],
+      [x + d * 0.45, yBot - (yBot - ym) * 0.36], [x + d, yBot]] });
+    T.pause(120);
+    return x + 0.24 * F;
+  }
+
   function ringBox(x0, x1, yBase, F, opt) {
     opt = opt || {};
     var ry = opt.ry != null ? opt.ry : 0.72 * F;
@@ -36949,6 +36985,7 @@
       kretsResistor: kretsResistor,
       valueBracket: valueBracket, rootSign: rootSign,
       substRings: substRings, fadeRings: fadeRings, ringBox: ringBox,
+      expFrac: expFrac, expFracW: expFracW, bigParen: bigParen,
       ringPts: ringPts, ringAlongPts: ringAlongPts, dotPts: dotPts,
       underlinePts: underlinePts, bracePts: bracePts,
       humanize: humanize, placeString: placeString,

@@ -92,6 +92,12 @@ Format:
 - Användarens ändringar 2026-08-22 efter första genomläsningen: kortare
   anslag, "komplext talplan" i stället för "Argand-diagram", bråklänken
   flyttad från ma1c-1.1 till ma1c-1.2, och "du har väl inte glömt" i tipset.
+- **Anslaget skärpt 2026-08-22 (efter att kampanjen redan lagts upp):**
+  "tomrummet inte är tomt" var ingen nyhet (vakuumfluktuationer är
+  läroboksstoff) och byttes mot det som faktiskt mättes, "tomrummet självt
+  bryter ljus när magnetfältet blir starkt nog"; andra ledet fick "rund
+  inuti". **Kampanjen i EmailOctopus har därmed gammal HTML** och måste
+  uppdateras i Content-steget innan testskick och schemaläggning.
 
 ## 2026-08-16 — "Reaktorn var avstängd. Detektorn såg den ändå."
 - Status: SCHEMALAGT i EmailOctopus för söndag 2026-08-16 kl 06.00 svensk tid

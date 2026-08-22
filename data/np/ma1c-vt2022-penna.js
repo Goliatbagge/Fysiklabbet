@@ -1281,4 +1281,624 @@
     return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
   });
 
+
+  /* ================= DELPROV C ================= */
+
+  /* ---- Uppgift 17: Kochkurvan ----
+   * a)–b) omkretsen växer med faktorn 4/3 per figur, c) faktorn läses ur
+   * kvoten, d) exponentiell formel, e) formeln skrivs om med potenslagar
+   * och exponenterna jämförs. */
+  reg(17, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
+    var tanke = mkTanke(T);
+
+    /* ---- a) vad händer med EN sida? ---- */
+    var x0 = padL + 40, yl = 150, d = 56;
+    T.line([x0, yl], [x0 + 3 * d, yl]);
+    T.pause(160);
+    for (i = 1; i < 3; i++) T.line([x0 + i * d, yl - 7], [x0 + i * d, yl + 7]);
+    T.pause(160);
+    for (i = 0; i < 3; i++) {
+      T.str('1', x0 + (i + 0.5) * d - T.adv('1', 0.55) / 2, yl + 0.95 * F,
+            null, 0.55);
+    }
+    T.str('3 sträckor', x0 + 3 * d + 20, yl + 0.2 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(yl + 40, [
+      [['Mittdelen byts mot två sidor i']],
+      [['en ny liksidig triangel. Tre']],
+      [['sträckor blir alltså fyra,']],
+      [['alla lika långa.']]
+    ], 0);
+    var y2 = 320;
+    T.line([x0, y2], [x0 + d, y2]);
+    T.pause(120);
+    T.line([x0 + d, y2], [x0 + 1.5 * d, y2 - d * 0.866]);
+    T.pause(120);
+    T.line([x0 + 1.5 * d, y2 - d * 0.866], [x0 + 2 * d, y2]);
+    T.pause(120);
+    T.line([x0 + 2 * d, y2], [x0 + 3 * d, y2]);
+    T.pause(160);
+    T.str('4 sträckor', x0 + 3 * d + 20, y2 + 0.2 * F, null, 0.62);
+    T.stepEnd();
+
+    y = 400;
+    xx = T.str('a) Sidan blir ', padL, y);
+    xx = T.fracH('4', '3', xx, y);
+    T.str(' av sin längd.', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje sida växer lika mycket,']],
+      [['så hela omkretsen växer med']],
+      [['samma faktor.']]
+    ], 1.05);
+    y += 3.3 * F;
+    xx = T.str('O_1=9', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('4', '3', xx, y);
+    T.str('=12', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: O_1=12', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Samma sak en gång till: figur']],
+      [['2 får omkretsen 12 gånger']],
+      [['samma faktor.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('b) O_2=12', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('4', '3', xx, y);
+    T.str('=16', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: O_2=16', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['Förändringsfaktorn är den nya']],
+      [['omkretsen delad med den gamla.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('O_2', 'O_1', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracOp('16', '12', '/4', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4', '3', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('4', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    tanke(y, [
+      [['Omkretsen multipliceras med']],
+      [['4/3 en gång per figur. Efter n']],
+      [['figurer har den multiplicerats']],
+      [['n gånger, alltså (4/3) upphöjt n.']]
+    ], 1.5);
+    y += 3.8 * F;
+    xx = T.str('d) O=9', padL, y);
+    xx = T.mul(xx, y);
+    T.parenFrac('4', '3', 'n', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: n=1 ger 9·4/3=12 och']],
+      [['n=2 ger 9·16/9=16. Stämmer med']],
+      [['a) och b).']]
+    ], 1.4);
+    y += 4.2 * F;
+    xe = T.str('Svar: O=9', padL, y);
+    xe = T.mul(xe, y);
+    xe = T.parenFrac('4', '3', 'n', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- e) ---- */
+    tanke(y, [
+      [['Den sökta omkretsen är skriven']],
+      [['med potenser av 2 och 3. Då']],
+      [['skriver jag om min formel på']],
+      [['samma sätt.']]
+    ], 1.4);
+    y += 4.6 * F;
+    xx = T.str('e) O=9', padL, y);
+    xx = T.mul(xx, y);
+    T.fracH('4^n', '3^n', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['9=3^2 och 4=2^2, så 4 upphöjt']],
+      [['till n blir 2 upphöjt till 2n.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('3^2·2^2^n', '3^n', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Treorna i täljare och nämnare']],
+      [['förkortas: exponenterna']],
+      [['subtraheras, 2-n blir kvar i']],
+      [['nämnaren som n-2.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('2^2^n', '3^n^-^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('2^1^6', '3^6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma bas i båda bråken, så']],
+      [['exponenterna måste vara lika.']],
+      [['Tvåorna ger 2n=16.']]
+    ], 1.05);
+    y += 3.4 * F;
+    T.str('2n=16 ⟹ n=8', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll med treorna: n-2 ska']],
+      [['vara 6, och 8-2=6. Stämmer.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar: figur nummer 8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
+  });
+
+  /* ---- Uppgift 18: linjen genom (2, 10) och (12, 30) ----
+   * Lutningen ur förändringskvoten, m ur en av punkterna. */
+  reg(18, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xwA = padL + 30 + T.adv('10=4+m') + 0.9 * F;
+
+    /* ekvval-scen: inget bläck med x>420 ovanför y=210 (den högre
+     * inställningsrutan), och raderna här är breda */
+    y = 238;
+    T.str('(2, 10) och (12, 30)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lutningen k är hur mycket y']],
+      [['ändras delat med hur mycket x']],
+      [['ändras mellan punkterna.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('Δy', 'Δx', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('30-10', '12-2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('20', '10', xx, y);
+    T.str('=2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu vet jag k. m får jag genom']],
+      [['att sätta in en av punkterna i']],
+      [['räta linjens ekvation.']]
+    ], 1.05);
+    y += 3.4 * F;
+    T.str('y=kx+m', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('10=2·2+m', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('10=4+m', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Fyran adderas i högerledet,']],
+      [['så jag subtraherar 4 från']],
+      [['båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-4', xwA, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('10', padL + 30, y);
+      xx = T.str('-4', xx, y, BLUE);
+      xx = T.str('=4+m', xx, y);
+      T.str('-4', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('6=m', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll med den andra punkten:']],
+      [['x=12 ska ge y=30.']]
+    ]);
+    y += 2.5 * F;
+    T.str('y=2·12+6=30', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: y=2x+6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 19: bestäm x så att 3(x+4)-(8+x) blir 3 ----
+   * Uttrycket sätts lika med 3, vänsterledet utvecklas (blå bågar och
+   * teckenbyten) och ekvationen löses. */
+  reg(19, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T);
+    var vagg = !!cfg.vagg;
+    var xwA = Math.max(padL + 30 + T.adv('3x+12-8-x=3'),
+                       padL + 30 + T.adv('2x+4=3')) + 0.9 * F;
+
+    y = 210;
+    var f0 = padL; xx = T.str('3', padL, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t1 = xx; xx = T.str('x', xx, y); var t1b = xx;
+    var t2 = xx; xx = T.str('+4', xx, y); var t2b = xx;
+    T.str(')-(8+x)=3', xx, y);
+    var yK = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först utvecklar jag den första']],
+      [['parentesen: trean multipliceras']],
+      [['med varje term.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = multIn(xx, y, yK - 0.95 * F, [
+      { fran: [f0, f1], till: [t1, t1b], skriv: '3x', hojd: 26 },
+      { fran: [f0, f1], till: [t2, t2b], skriv: '+12', hojd: 44, dx: 4 }
+    ]);
+    T.str('-(8+x)=3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Framför den andra parentesen']],
+      [['står ett minus. Då byter BÅDA']],
+      [['termerna i den tecken.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('3x+12', padL + 30, y);
+    xx = T.str('-8', xx, y, BLUE);
+    xx = T.str('-x', xx, y, BLUE);
+    T.str('=3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu slår jag ihop lika termer:']],
+      [['3x-x=2x och 12-8=4.']]
+    ]);
+    y += 2.4 * F;
+    T.str('2x+4=3', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Fyran adderas, så jag']],
+      [['subtraherar 4 i båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-4', xwA, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('2x+4', padL + 30, y);
+      xx = T.str('-4', xx, y, BLUE);
+      xx = T.str('=3', xx, y);
+      T.str('-4', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('2x=-1', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist dividerar jag båda led']],
+      [['med 2.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/2', xwA, y);
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('2x', '2', padL + 30, y);
+      xx = T.str('=', xx, y);
+      T.fracH('-1', '2', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    xx = T.str('x=', padL + 30, y);
+    T.fracH('-1', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 3·(-0,5+4) blir 10,5']],
+      [['och (8-0,5) blir 7,5.']],
+      [['10,5-7,5=3. Stämmer.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('-1', '2', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.9 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 20: lös (2x-5)(x+3)=2x^2-9 ----
+   * Dubbla parenteser: en blå båge per produkt. Andragradstermerna tar
+   * ut varandra, så ekvationen är i själva verket av första graden. */
+  reg(20, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T);
+    var vagg = !!cfg.vagg;
+    var xwA = Math.max(padL + 30 + T.adv('2x^2+x-15=2x^2-9'),
+                       padL + 30 + T.adv('x-15=-9')) + 0.9 * F;
+
+    y = 238;
+    xx = T.str('(', padL, y);
+    var a1 = xx; xx = T.str('2x', xx, y); var a1b = xx;
+    var a2 = xx; xx = T.str('-5', xx, y); var a2b = xx;
+    xx = T.str(')(', xx, y);
+    var b1 = xx; xx = T.str('x', xx, y); var b1b = xx;
+    var b2 = xx; xx = T.str('+3', xx, y); var b2b = xx;
+    T.str(')=2x^2-9', xx, y);
+    var yK = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje term i den första']],
+      [['parentesen multipliceras med']],
+      [['varje term i den andra.']],
+      [['Fyra produkter alltså.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = multIn(xx, y, yK - 0.95 * F, [
+      { fran: [a1, a1b], till: [b1, b1b], skriv: '2x^2', hojd: 26 },
+      { fran: [a1, a1b], till: [b2, b2b], skriv: '+6x', hojd: 46, dx: 4 },
+      { fran: [a2, a2b], till: [b1, b1b], skriv: '-5x', hojd: 26, dx: 4 },
+      { fran: [a2, a2b], till: [b2, b2b], skriv: '-15', hojd: 46, dx: 6 }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['6x-5x=x. Nu står hela']],
+      [['ekvationen utvecklad.']]
+    ]);
+    y += 2.5 * F;
+    T.str('2x^2+x-15=2x^2-9', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2x^2 finns i BÅDA led. Jag']],
+      [['subtraherar bort det, och då']],
+      [['försvinner andragradstermen']],
+      [['helt.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-2x^2', xwA, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('2x^2+x-15', padL + 30, y);
+      xx = T.str('-2x^2', xx, y, BLUE);
+      xx = T.str('=2x^2-9', xx, y);
+      T.str('-2x^2', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('x-15=-9', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist adderar jag 15 till']],
+      [['båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('+15', xwA, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.4 * F;
+      xx = T.str('x-15', padL + 30, y);
+      xx = T.str('+15', xx, y, BLUE);
+      xx = T.str('=-9', xx, y);
+      T.str('+15', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.2 * F;
+    }
+    T.str('x=6', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: VL blir 7·9=63 och']],
+      [['HL blir 72-9=63. Stämmer.']]
+    ]);
+    y += 2.5 * F;
+    xe = T.str('Svar: x=6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
+  /* ---- Uppgift 21: triangelodlingen ----
+   * a) areaformeln löses ut för basen, b) villkoret b ≥ 1 ger den övre
+   * gränsen för höjden — och höjden måste vara positiv. */
+  reg(21, function (cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xwA = Math.max(padL + 30 + T.fracW('b·h', '2') + T.adv('=20'),
+                       padL + 30 + T.adv('b·h=40')) + 0.9 * F;
+    var xwB = padL + 30 + T.fracW('40', 'h') + T.adv('≥1') + 0.9 * F;
+
+    /* ---- figuren: triangel med bas b och höjd h ---- */
+    var P = [padL + 30, 300], Q = [padL + 320, 300], R = [padL + 200, 180];
+    T.line(P, Q); T.pause(140);
+    T.line(Q, R); T.pause(140);
+    T.line(R, P); T.pause(180);
+    /* höjden: streckad lodrät hjälplinje */
+    for (i = 0; i < 8; i++) {
+      if (i % 2) continue;
+      T.line([R[0], R[1] + (P[1] - R[1]) * (i / 8)],
+             [R[0], R[1] + (P[1] - R[1]) * ((i + 1) / 8)]);
+    }
+    V.ratVinkel(T, [R[0], P[1]], [1, 0], [0, -1], 12);
+    T.pause(160);
+    /* beteckningar och värden i figuren skrivs med blåpennan */
+    T.str('b', (P[0] + Q[0]) / 2, P[1] + 0.95 * F, BLUE, 0.62);
+    T.pause(140);
+    T.str('h', R[0] + 10, (R[1] + P[1]) / 2, BLUE, 0.62);
+    T.pause(140);
+    T.str('Area 20 m^2', P[0] + 30, P[1] - 22, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(330, [
+      [['Triangelns area är basen gånger']],
+      [['höjden delat med 2. Den ska']],
+      [['vara 20 kvadratmeter.']]
+    ], 0);
+    y = 424;
+    xx = T.str('a) A=', padL, y);
+    xx = T.fracH('b·h', '2', xx, y);
+    T.str('=20', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag vill ha b ensamt. Först']],
+      [['bort med nämnaren: multiplicera']],
+      [['båda led med 2.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('·2', xwA, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('b·h', '2', padL + 30, y);
+      xx = T.str('·2', xx, y, BLUE);
+      xx = T.str('=20', xx, y);
+      T.str('·2', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.0 * F;
+    }
+    T.str('b·h=40', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu multipliceras b med h.']],
+      [['Alltså dividerar jag båda led']],
+      [['med h.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('/h', xwA, y);
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('b·h', 'h', padL + 30, y);
+      xx = T.str('=', xx, y);
+      T.fracH('40', 'h', xx, y);
+      T.stepEnd();
+      y += 3.2 * F;
+    }
+    xx = T.str('b=', padL + 30, y);
+    T.fracH('40', 'h', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: b=', padL, y);
+    xe = T.fracH('40', 'h', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Basen ska vara minst 1 meter,']],
+      [['alltså b större än eller lika']],
+      [['med 1.']]
+    ], 1.4);
+    y += 4.2 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('40', 'h', xx, y);
+    T.str('≥1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Höjden är en längd och därmed']],
+      [['positiv. Multiplicerar jag båda']],
+      [['led med h står olikhetstecknet']],
+      [['kvar åt samma håll.']]
+    ], 1.05);
+    if (vagg) {
+      T.vaggOp('·h', xwB, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+      y += 3.0 * F;
+    } else {
+      y += 3.2 * F;
+      xx = T.fracH('40', 'h', padL + 30, y);
+      xx = T.str('·h', xx, y, BLUE);
+      xx = T.str('≥1', xx, y);
+      T.str('·h', xx, y, BLUE);
+      T.stepEnd();
+      y += 3.0 * F;
+    }
+    T.str('40≥h', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Höjden kan alltså vara högst']],
+      [['40 m. Och den måste vara större']],
+      [['än 0, annars finns ingen']],
+      [['triangel.']]
+    ]);
+    y += 2.6 * F;
+    T.str('0<h≤40', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 0<h≤40', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 1.4 * F, padL: padL,
+             ekvval: 1 };
+  });
+
 })();

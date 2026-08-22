@@ -466,6 +466,56 @@
         }
         .np-losning-head .np-sektionsrubrik { margin: 0; }
 
+        /* ---- Pennlösning ("Med penna" / "Som text") ----
+           Växeln ligger direkt under teorilänkarna, i samma formspråk som
+           motsvarande växel i teorin (.hk-vyval i handskrift.js). */
+        .np-vyval {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 10px 0 14px;
+        }
+        .np-vyval-label {
+            font-size: 12.5px;
+            color: var(--lab-ink-muted);
+            margin-right: 2px;
+        }
+        .np-vyval-btn.is-on {
+            background: var(--lab-ink);
+            border-color: var(--lab-ink);
+            color: var(--lab-bg);
+        }
+        /* Wrappern finns bara för att handskrift.js ska hitta frågestammen
+           att klona till helskärmens uppgiftspanel — den ska inte rita
+           någon egen ruta på sidan. */
+        .np-penna-ex {
+            background: none;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+        .np-penna-ex > .np-penna-fraga { display: none; }
+        .hk-uppgift .np-penna-fraga { display: block; }
+        .np-penna { margin: 0 0 18px; }
+        /* Bedömningen ligger hopfälld: i pennläget finns ingen stegknapp
+           som gömmer facit, och en utfälld poängtabell hade avslöjat
+           svaret innan arket ens börjat skrivas. */
+        .np-bedomning-fall {
+            border-top: 1px solid var(--lab-line);
+            padding-top: 10px;
+            margin: 6px 0 18px;
+        }
+        .np-bedomning-fall > summary {
+            cursor: pointer;
+            font-size: 12.5px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--lab-ink-muted);
+        }
+        .np-bedomning-fall .np-bedomning { margin-top: 10px; }
+
         /* Uppgift vars innehåll utgick ur ämnesplanen 2021 — rutan ligger före
            uppgiftstexten så att ingen räknar den i onödan. */
         .np-utgatt {
@@ -603,6 +653,12 @@
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- Pennlösningarna: motorn + en scenfil per prov. Scenfilerna
+         registrerar sina layouter med HANDSKRIFT.registrera() och måste
+         därför laddas EFTER handskrift.js. Saknar en uppgift scen visas
+         bara textlösningen — växeln dyker upp först när scenen finns. -->
+    <script>document.write('<scr' + 'ipt src="handskrift.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -1204,9 +1260,61 @@
             );
         }
 
+        // --- Pennlösning: samma animerade handskrift som i teorin ------
+        // Scenerna bor i data/np/<prov>-penna.js och registrerar sig i
+        // handskrift.js scenregister under namnet "<provId>-u<nr>". Finns
+        // ingen scen för uppgiften returnerar pennaTyp null och växeln
+        // visas inte alls — sidan beter sig då exakt som förut.
+        function pennaTyp(prov, uppgift) {
+            if (uppgift.sekretess) return null;
+            if (!window.HANDSKRIFT || !window.HANDSKRIFT.typer) return null;
+            const typ = uppgift.penna || (prov.id + '-u' + uppgift.nr);
+            return window.HANDSKRIFT.typer().indexOf(typ) >= 0 ? typ : null;
+        }
+
+        // Vyvalet delas med teorisidorna (samma localStorage-nyckel), så
+        // den som föredrar textlösningar slipper välja om på varje sida.
+        const VY_KEY = 'hkLosningsvy';
+        function lasVy() {
+            try {
+                return localStorage.getItem(VY_KEY) === 'text' ? 'text' : 'penna';
+            } catch (e) { return 'penna'; }
+        }
+        function skrivVy(v) {
+            try { localStorage.setItem(VY_KEY, v); } catch (e) {}
+        }
+
+        // Wrappern bär klassen lab-block-exempel: handskrift.js letar efter
+        // den och klonar allt som står FÖRE arket till en fastnålad
+        // uppgiftspanel i helskärm (annars syns varken frågan eller
+        // figuren när arket fyller skärmen). Frågekopian är dold på sidan
+        // — där står uppgiften redan strax ovanför — men visas i klonen.
+        function PennaVy({ typ, prov, uppgift }) {
+            const host = useRef(null);
+            useEffect(() => {
+                const el = host.current;
+                if (!el || !window.HANDSKRIFT) return;
+                el.innerHTML = '';
+                window.HANDSKRIFT.mount(el, { typ }, {});
+                return () => { el.innerHTML = ''; };
+            }, [typ]);
+            return (
+                <div className="np-penna-ex lab-block-exempel">
+                    <div className="np-penna-fraga">
+                        <MdBlock source={uppgift.fraga} />
+                        <Figur provId={prov.id} figurKey={uppgift.figur} />
+                    </div>
+                    <div className="np-penna lab-handskrift" ref={host} />
+                </div>
+            );
+        }
+
         function UppgiftView({ prov, uppgift }) {
             const [visadeSteg, setVisadeSteg] = useState(LOS_DIREKT ? 999 : 0);
             const [presenting, setPresenting] = useState(PRES_START != null);
+            const penna = pennaTyp(prov, uppgift);
+            const [vy, setVy] = useState(lasVy);
+            const pennaVy = penna && vy === 'penna';
             const stegEls = useRef([]);
             const svarEl = useRef(null);
             const fragaEl = useRef(null);
@@ -1304,13 +1412,48 @@
                         </button>
                     </div>
                     <TeoriLankar ids={uppgift.genomgangar} kurs={prov.kurs} />
-                    {visadeSteg === 0 && (
+                    {penna && (
+                        <div className="np-vyval" role="group" aria-label="Välj hur lösningen visas">
+                            <span className="np-vyval-label">Lösning</span>
+                            <button type="button"
+                                className={'lab-btn lab-btn-quiet np-vyval-btn' + (pennaVy ? ' is-on' : '')}
+                                onClick={() => { setVy('penna'); skrivVy('penna'); }}
+                                title="Se hur lösningen skrivs för hand, steg för steg">Med penna</button>
+                            <button type="button"
+                                className={'lab-btn lab-btn-quiet np-vyval-btn' + (pennaVy ? '' : ' is-on')}
+                                onClick={() => { setVy('text'); skrivVy('text'); }}
+                                title="Visa lösningen som vanlig text">Som text</button>
+                        </div>
+                    )}
+                    {pennaVy && (
+                        <React.Fragment>
+                            <PennaVy typ={penna} prov={prov} uppgift={uppgift} />
+                            {uppgift.bedomning && uppgift.bedomning.length > 0 && (
+                                <details className="np-bedomning-fall">
+                                    <summary>Så bedöms uppgiften</summary>
+                                    <div className="np-bedomning np-bedomning-ensam">
+                                        <table>
+                                            <tbody>
+                                                {uppgift.bedomning.map((rad, i) => (
+                                                    <tr key={i}>
+                                                        <td><MdBlock source={rad[0]} /></td>
+                                                        <td>{rad[1]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </details>
+                            )}
+                        </React.Fragment>
+                    )}
+                    {!pennaVy && visadeSteg === 0 && (
                         <p className="np-hint" style={{ margin: '4px 0 14px' }}>
                             Försök lösa uppgiften själv först — klicka sedan fram lösningen ett steg i taget.
                         </p>
                     )}
 
-                    {visadeSteg > 0 && (
+                    {!pennaVy && visadeSteg > 0 && (
                         <div className="np-losning-flode">
                             {uppgift.steg.slice(0, visadeSteg).map((s, i) => (
                                 <div className="np-steg" key={i} ref={el => { stegEls.current[i] = el; }}>
@@ -1335,7 +1478,7 @@
                         </div>
                     )}
 
-                    {alltVisat && (
+                    {!pennaVy && alltVisat && (
                         <div className="np-svar" ref={svarEl}>
                             {/* Har deluppgifterna egna delsvar är det samlade
                                 svaret överflödigt — visa bara bedömningen. */}
@@ -1363,7 +1506,7 @@
                         </div>
                     )}
 
-                    <div className="np-steg-knappar">
+                    <div className="np-steg-knappar" style={pennaVy ? { display: 'none' } : null}>
                         {!alltVisat && (
                             <button className="lab-btn lab-btn-primary" onClick={() => setVisadeSteg(v => v + 1)}>
                                 {visadeSteg === 0 ? 'Visa första steget' : 'Visa nästa steg'}

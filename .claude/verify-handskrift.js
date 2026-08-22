@@ -97,7 +97,23 @@ function loadHandskrift() {
   new Function('window', 'document', 'requestAnimationFrame', src)(
     win, doc, noop);
   if (!win.HANDSKRIFT) throw new Error('handskrift.js exporterade inget');
+  /* Scenfiler i egna filer (pennlösningarna till de nationella proven)
+   * registrerar sig med HANDSKRIFT.registrera() — ladda dem också, annars
+   * granskas de aldrig. */
+  for (const f of pennaFiler()) {
+    // eslint-disable-next-line no-new-func
+    new Function('window', 'document', 'requestAnimationFrame',
+                 fs.readFileSync(f, 'utf8'))(win, doc, noop);
+  }
   return win.HANDSKRIFT;
+}
+
+/* data/np/<prov>-penna.js — en fil per nationellt prov */
+function pennaFiler() {
+  const dir = path.join(ROOT, 'data', 'np');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(n => n.endsWith('-penna.js')).sort()
+    .map(n => path.join(dir, n));
 }
 
 /* ---------- vilka scener används i teorin? ---------- */
@@ -260,9 +276,16 @@ function granska(HK, typ, cfg) {
 /* ---------- huvudprogram ---------- */
 const HK = loadHandskrift();
 const anvanda = scenerITeorin();
+/* NP-scenerna hittas i registret: de heter <provId>-u<nr> och kommer ur
+ * en penna-fil, inte ur ett teoriavsnitt. */
+const npScener = HK.typer().filter(t => /^[a-z0-9]+-[a-z]{2}\d{4}-u\d+$/.test(t))
+  .sort((a, b) => {
+    const na = +a.split('-u')[1], nb = +b.split('-u')[1];
+    return a.replace(/-u\d+$/, '').localeCompare(b.replace(/-u\d+$/, '')) || na - nb;
+  });
 const valda = process.argv.slice(2).length
   ? process.argv.slice(2)
-  : [...anvanda.keys()].sort();
+  : [...anvanda.keys()].sort().concat(npScener);
 
 let felTot = 0, varnTot = 0, gamlaTot = 0;
 for (const typ of valda) {
@@ -300,7 +323,8 @@ for (const typ of valda) {
  * en KÄLLKODSGRANSKNING (aktlistan minns inte längre vilken sträng den
  * kom ur), och tittar bara på strängar som skickas till pennan. */
 {
-  const src = fs.readFileSync(path.join(ROOT, 'handskrift.js'), 'utf8');
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
   const rader = src.split('\n');
   const pennStr = /(?:T\.str|T\.lbl|placeString|frac:\s*\[|valueBracket)/;
   const flerteckens = [];

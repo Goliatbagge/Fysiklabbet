@@ -36909,6 +36909,49 @@
     },
     typer: function () { return Object.keys(SCENES); },
     saknadeGlyfer: function () { return SAKNADE; },
-    PAPER_W: PAPER_W, FSIZE: FSIZE
+    PAPER_W: PAPER_W, FSIZE: FSIZE,
+
+    /* ---------------- SCENER I EGNA FILER ----------------------------
+     * Pennlösningarna till de nationella proven (data/np/<prov>-penna.js)
+     * bor INTE i den här filen — de är hundratals scener som hör ihop med
+     * sitt prov, inte med ett teoriavsnitt. En sådan fil registrerar sina
+     * layoutfunktioner med
+     *
+     *   HANDSKRIFT.registrera('ma1c-vt2022-u1', function (cfg, F) { … });
+     *
+     * och bygger dem med verktygslådan nedan (samma helpers som scenerna
+     * här inne använder: mathTools/physTools, mkTanke, mkArc, mkMultIn,
+     * mkAxes, valueBracket, substRings …). ALLA regler i filhuvudet
+     * gäller förstås även dem, och .claude/verify-handskrift.js laddar
+     * filerna och granskar scenerna på exakt samma sätt.
+     *
+     * Registret är öppet men INTE ett ställe att skriva över befintliga
+     * scener på: ett namn som redan finns avvisas, så att en NP-scen
+     * aldrig kan kapa en teoriscen av misstag. */
+    registrera: function (namn, fn) {
+      if (typeof namn !== 'string' || typeof fn !== 'function') return false;
+      if (SCENES[namn]) return false;
+      SCENES[namn] = fn;
+      return true;
+    },
+    verktyg: {
+      mathTools: mathTools, physTools: physTools,
+      mkTanke: mkTanke, mkArc: mkArc, mkMultIn: mkMultIn, mkAxes: mkAxes,
+      diagram: diagram, trigKvot: trigKvot, vinkelBage: vinkelBage,
+      ratVinkel: ratVinkel, vecPil: vecPil, figurPil: figurPil,
+      lutandePlan: lutandePlan, nuklid: nuklid,
+      kretsBatteri: kretsBatteri, kretsLampa: kretsLampa,
+      kretsResistor: kretsResistor,
+      valueBracket: valueBracket, rootSign: rootSign,
+      substRings: substRings, fadeRings: fadeRings, ringBox: ringBox,
+      ringPts: ringPts, ringAlongPts: ringAlongPts, dotPts: dotPts,
+      underlinePts: underlinePts, bracePts: bracePts,
+      humanize: humanize, placeString: placeString,
+      placeGlyph: placeGlyph, stringAdvance: stringAdvance,
+      rotFrac: rotFrac, rotFracW: rotFracW,
+      tusen: tusen, heltal: heltal, rnd: rnd,
+      INK: INK, BLUE: BLUE, LABINK: LABINK, GRID: GRID,
+      PAPER_W: PAPER_W, FSIZE: FSIZE
+    }
   };
 })();

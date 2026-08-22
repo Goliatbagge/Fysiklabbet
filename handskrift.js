@@ -612,6 +612,9 @@
     '>': { w: 76, strokes: [[[24, 40], [64, 66], [24, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
     '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] },
+    /* implikation åt vänster ⇐ — spegelbilden av ⇒. Behövs när ett
+     * samband bara gäller åt det hållet ("rektangel ⇐ kvadrat"). */
+    '⇐': { w: 96, strokes: [[[80, 56], [36, 57]], [[80, 74], [36, 73]], [[40, 44], [20, 65], [40, 88]]] },
     /* ekvivalenspil ⟺: två parallella streck + spets åt båda hållen.
      * Bred advance med luft åt båda hållen — raden ska inte bli kompakt
      * kring pilen (användarönskemål 2026-07-30) */
@@ -786,7 +789,8 @@
   var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
   /* '±' står som PREFIX till ett tal (x=±8) och ingår därför INTE — den
    * ska klistra ihop med talet, inte få operatorluft åt båda håll. */
-  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1,
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⇐': 1,
+              '⟺': 1,
               '⟹': 1,
               '≤': 1, '≥': 1, '≠': 1 };
 

@@ -39,7 +39,12 @@ window.SIM_NAMES = {
   'fysik1-rorelsediagram.html': 'Rörelsediagram',
   'fysik1-newtons-forsta-app.html': 'Newtons första lag',
   'fysik1-newtons-andra-app.html': 'Newtons andra lag',
-  'fysik1-newtons-tredje-app.html': 'Newtons tredje lag',
+  'fysik1-newtons-tredje-app.html': [
+    { name: 'Brandsläckaren i rymden', desc: 'Aktion och reaktion — navigera en astronaut med brandsläckare i rymden.',
+      kw: ['krafter','newton','tredje lagen','aktion','reaktion','motkraft','rymd','raket','astronaut','brandsläckare','rekyl','impuls','mekanik'] },
+    { name: 'Flugan i bägaren', href: 'fysik1-flugan-i-bagaren-app.html', desc: 'En fluga lyfter inne i en bägare på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.',
+      kw: ['krafter','newton','tredje lagen','aktion','reaktion','motkraft','fluga','bägare','våg','vågutslag','laboratorievåg','rörelsemängd','lyftkraft','hovra','hovring','luft','nedsvep','vakuum','lock','impuls','fritt fall','mekanik'] },
+  ],
   'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',

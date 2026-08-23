@@ -67,6 +67,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-varme-app.html',
     'fysik1-densitet-app.html',
     'fysik1-newtons-tredje-app.html',
+    'fysik1-flugan-i-bagaren-app.html',
     'fysik1-tryck-pa-app.html',
     'fysik1-ellara-app.html',
     'fysik1-tyngdfaktor-jorden.html',

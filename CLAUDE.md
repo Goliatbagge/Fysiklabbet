@@ -88,6 +88,14 @@ node .claude/verify-handskrift.js
 # uppgifter räknas inte. Se data/np/RIKTLINJER.md.
 node .claude/np-penna-tacktning.js
 
+# Fysiktester för simuleringen Flugan i bägaren (KÖR vid ändringar i
+# fysikmotorn i fysik1-flugan-i-bagaren-app.html!) — driver motorn direkt
+# i headless Chrome och kontrollerar gränsfallen: hovring/stigning/mynning/
+# vakuum, acceleration, fritt fall, impulsbalansen över ett helt förlopp
+# samt att masscentrumsatsen N − M·g = Δp/Δt uppfylls i varje tidssteg.
+# Kräver dev-servern på port 8000 + puppeteer-core i %TEMP%\pptr-test.
+node .claude/test-fluga-fysik.js
+
 # Verifiera sökindexet efter nya simuleringar eller ändringar i
 # data/simuleringar.js (KÖR FÖRE COMMIT!) — varje länkad simulering (även
 # href2 och djuplänkar) ska finnas som egen rad i sökrutan, med eget namn

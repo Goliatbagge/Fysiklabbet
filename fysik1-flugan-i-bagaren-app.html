@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flugan i bägaren — Fysiklabbet</title>
+    <meta name="description" content="En fluga lyfter inne i en bägare som står på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-flugan-i-bagaren-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Flugan i bägaren — Fysik nivå 1">
+    <meta property="og:description" content="En fluga lyfter inne i en bägare som står på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-flugan-i-bagaren-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Flugan i bägaren — Fysik nivå 1">
+    <meta name="twitter:description" content="En fluga lyfter inne i en bägare som står på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <style>
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+
+        /* ── Lägesflikar (Utforska / Förutsäg) ───────────────────── */
+        .tab-button {
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
+        }
+        .tab-button.tab-active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
+        }
+        .tab-button:hover:not(.tab-active) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
+        /* ── Förutsäg-lägets svarsknappar ────────────────────────── */
+        .guess-btn {
+            flex: 1;
+            border: 1.5px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+            color: var(--lab-ink, #0f1620);
+            border-radius: 6px; padding: 8px 6px;
+            font-size: 13.5px; font-weight: 600; cursor: pointer;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+        .guess-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        .guess-btn:disabled { cursor: default; opacity: 0.9; }
+
+        /* ── Förloppsknappar ─────────────────────────────────────── */
+        .preset-btn {
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+            color: var(--lab-ink, #0f1620);
+            border-radius: 6px; padding: 6px 9px; text-align: left;
+            font-size: 12.5px; cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+        .preset-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        .preset-btn.p-active { border-color: var(--lab-accent, #c8324a); box-shadow: inset 0 0 0 1px var(--lab-accent, #c8324a); }
+        .preset-btn .p-title { font-weight: 600; display: block; }
+        .preset-btn .p-desc { color: var(--lab-ink-muted, #8a8579); font-size: 11.5px; }
+
+        /* ── Scen ─────────────────────────────────────────────────── */
+        .scene-wrap { user-select: none; -webkit-user-select: none; }
+        .scene-wrap > canvas { width: 100%; height: auto; display: block; touch-action: none; }
+        body.lab-sim .scene-wrap:fullscreen {
+            display: flex !important; align-items: center; justify-content: center;
+        }
+        body.lab-sim .scene-wrap:-webkit-full-screen {
+            display: flex !important; align-items: center; justify-content: center;
+        }
+        body.lab-sim .scene-wrap:fullscreen > canvas,
+        body.lab-sim .scene-wrap:-webkit-full-screen > canvas {
+            width: 100%; height: 100%; max-width: 100%; max-height: 100%;
+        }
+
+        /* Ruta uppe till höger (visningsval + styrknappar) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 11px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 235px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #8a8579); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"],
+        .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions { margin-top: 8px; display: flex; gap: 6px; }
+        .scene-toggles .st-btn {
+            flex: 1; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff); color: var(--lab-ink, #0f1620);
+            border-radius: 6px; padding: 5px 8px; font-size: 12.5px; font-weight: 600;
+            cursor: pointer; transition: border-color 0.15s ease;
+        }
+        .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); }
+
+        /* Fullskärm: reglagepanelen dockas av styles-laborans-sim.css —
+           här bara paneltitel och maxhöjd så att panelen kan rulla. */
+        .fs-controls { max-height: 70vh; overflow-y: auto; }
+        .fs-controls .fs-panel-title {
+            font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: rgba(229,231,235,0.75); font-weight: 600;
+        }
+
+        /* ── Avläsningstabell ─────────────────────────────────────── */
+        .readout-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .readout-table td {
+            padding: 4px 6px; text-align: right;
+            border-bottom: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+            color: var(--lab-ink, #0f1620);
+            font-variant-numeric: tabular-nums;
+            font-family: var(--lab-font-mono, monospace);
+            white-space: nowrap;
+        }
+        .readout-table td:first-child {
+            text-align: left; font-weight: 400; color: var(--lab-ink-soft, #3a4151);
+            font-family: var(--lab-font-sans, sans-serif);
+            white-space: normal;
+        }
+
+        /* ── Analogier (details) ─────────────────────────────────── */
+        .analogi details {
+            border: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+            border-radius: 6px; padding: 6px 10px; margin-bottom: 6px;
+            background: var(--lab-bg-panel, #ffffff);
+        }
+        .analogi summary {
+            cursor: pointer; font-weight: 600; font-size: 13.5px;
+            color: var(--lab-ink, #0f1620);
+        }
+        .analogi p { font-size: 13px; color: var(--lab-ink-soft, #3a4151); margin-top: 6px; line-height: 1.55; }
+    </style>
+</head>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+        // ── Formatering ────────────────────────────────────────────
+        const formatNum = (num, decimals = 0) => {
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            const neg = s.startsWith('-');
+            const parts = (neg ? s.slice(1) : s).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (neg ? '−' : '') + parts.join(',');
+        };
+        // Upp till `max` decimaler, avslutande nollor trimmas
+        const fmtSmart = (num, max = 2) => {
+            let s = num.toFixed(max);
+            if (parseFloat(s) === 0) return '0';
+            if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
+            const neg = s.startsWith('-');
+            const parts = (neg ? s.slice(1) : s).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (neg ? '−' : '') + parts.join(',');
+        };
+
+        // ════════════════════════════════════════════════════════════
+        //  FYSIKMOTORN
+        //  ----------------------------------------------------------
+        //  Reducerad men rörelsemängdskorrekt modell av flugan i
+        //  bägaren. Vågutslaget hårdkodas ALDRIG till M·g — det räknas
+        //  fram ur kontaktkraften och luftens rörelsemängdsbudget, så
+        //  att "oförändrat utslag" uppstår ur modellen:
+        //
+        //    Flugan (masscentrumsatsen, vertikalt):
+        //        m·dv/dt = T + D + F_kontakt − m·g
+        //      T  = lyftkraft från vingarna (aktuatorskiva, reaktionen
+        //           accelererar luft nedåt), D = luftmotstånd (signerat
+        //           uppåt), F_kontakt = normalkraft från botten/locket.
+        //
+        //    Luften i bägaren (nedåtriktad rörelsemängd p_air):
+        //        dp_air/dt = f·(T + D) − p_air/τ
+        //      f = infångningsfaktor (andel av nedsvepet som stannar i
+        //          bägaren; 1 med lock, →0 vid mynningen),
+        //      τ = transporttid för strålen ner till botten ≈ z / v_i,
+        //      p_air/τ = rörelsemängdsflödet som botten och väggarna
+        //      tar emot = luftens extra kraft på bägaren.
+        //
+        //    Vågen:  N = (M_bägare + m_luft)·g + F_kontakt + p_air/τ
+        //
+        //  Ur dessa tre följer identiteten N − M_tot·g = d(p_z,tot)/dt
+        //  exakt (plus läckagetermen (1−f)·(T+D) när bägaren är öppen)
+        //  — se bokföringen som visas i gränssnittet.
+        // ════════════════════════════════════════════════════════════
+
+        const G_ACC = 9.82;              // tyngdfaktor (N/kg)
+        const RHO0 = 1.204;              // luftens densitet vid 20 °C (kg/m³)
+        const A_DISK = Math.PI * 0.0065 * 0.0065;  // vingarnas svepta yta (m²), vinglängd 6,5 mm
+        const CDA_BODY = 3.9e-5;         // C_d·A för flugkroppen (m²) → gränsfart ≈ 2,2 m/s
+        const F_WING = 200;              // vingslagsfrekvens (Hz)
+        const D_BEAKER = 0.08;           // bägarens inre diameter (m)
+        const A_BOTTOM = Math.PI * 0.04 * 0.04;    // bottenarea (m²)
+        const M_BEAKER = 0.150;          // bägarens + vågskålens massa (kg)
+        const DT = 1 / 2400;             // fast tidssteg (s) — 12 steg per vingslag
+        const K_CONTACT = 0.8;           // kontaktfjäder (N/m)
+        const C_CONTACT = 3e-3;          // kontaktdämpning (N·s/m)
+        const SPEEDS = [1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.004, 0.002];
+
+        const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+        const smoother = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
+
+        // ── Förloppen (scenarier) ─────────────────────────────────
+        // svar: vad vågen visar under förloppets karakteristiska fas,
+        // jämfört med när flugan sitter stilla på botten.
+        const SCENARIOS = [
+            { id: 'sitter', name: 'Sitter still på botten', svar: 'Oförändrat',
+              desc: 'Flugan står kvar på bägarens botten.',
+              explain: 'Flugans tyngd går som vanlig kontaktkraft genom benen till botten. Vågen bär hela systemet: bägare, luft och fluga.' },
+            { id: 'fullt', name: 'Lyfter, hovrar och landar', svar: 'Oförändrat',
+              desc: 'Hela förloppet: avstamp, hovring och landning.',
+              explain: 'Avstampet ger en kort spik uppåt, sedan kommer en lika stor dipp medan luftströmmen byggs upp (0,1–0,2 s) — och under hovringen är utslaget oförändrat. Landningen ger en ny spik. Impulsöverskottet, ytan under avvikelsekurvan, summerar till noll över hela förloppet.' },
+            { id: 'hovrar', name: 'Hovrar stilla i bägaren', svar: 'Oförändrat',
+              desc: 'Stationär hovring mitt i den slutna bägaren.',
+              explain: 'Flugan accelererar luft nedåt med ett rörelsemängdsflöde som exakt motsvarar dess tyngd. I en sluten bägare tas hela flödet upp av botten och väggarna — vågen visar samma som när flugan satt still.' },
+            { id: 'stiger', name: 'Stiger med konstant fart', svar: 'Oförändrat',
+              desc: 'Flugan klättrar uppåt med jämn hastighet.',
+              explain: 'Konstant fart betyder acceleration noll — flugans rörelsemängd ändras inte, så vingarna bär exakt tyngden precis som vid hovring. Utslaget är i princip oförändrat. (Den lilla dippen som syns är vakens eftersläpning: luftpelaren under flugan blir längre och hinner lagra lite mer rörelsemängd under klättringen.)' },
+            { id: 'accelererar', name: 'Accelererar uppåt', svar: 'Ökar',
+              desc: 'Flugan drar på och ökar farten uppåt.',
+              explain: 'För att accelerera uppåt med a måste vingarna trycka ner luften hårdare än flugans tyngd — utslaget ökar medan accelerationen pågår, med upp till m·a. En del av ökningen når botten med strålens fördröjning och kommer som en efterpuckel när flugan bromsar in där uppe. Impulserna tar ut varandra.' },
+            { id: 'dyker', name: 'Dyker mot botten', svar: 'Minskar',
+              desc: 'Flugan accelererar nedåt i en dykning.',
+              explain: 'I dykningen bär vingarna mindre än tyngden — utslaget minskar med m·a. Lägg märke till inbromsningen strax ovanför botten: där ökar utslaget i stället, och impulserna tar ut varandra.' },
+            { id: 'dod', name: 'Spelar död — fritt fall', svar: 'Minskar',
+              desc: 'Vingarna stannar och flugan faller fritt.',
+              explain: 'Utan lyftkraft överförs nästan ingenting av flugans tyngd till bägaren — utslaget faller mot −m·g. Dippen växer under fallet: nedsvepet som redan är på väg fortsätter trycka på botten en kort stund (vakens eftersläpning). Vid gränsfarten hade luftmotståndet gjort utslaget oförändrat igen, men dit hinner flugan inte i en kort bägare. Nedslaget ger en kraftig spik som återställer impulsbalansen.' },
+            { id: 'mynning', name: 'Hovrar i mynningen (utan lock)', svar: 'Minskar',
+              desc: 'Öppen bägare — flugan hovrar precis vid kanten.',
+              explain: 'Vid mynningen sprider sig nedsvepet ut i rummet i stället för ner i bägaren — rörelsemängden hamnar på bordet runt omkring. Infångningen f går mot noll och utslaget minskar med nästan hela m·g.' },
+            { id: 'vakuum', name: 'Vakuum i bägaren', svar: 'Minskar',
+              desc: 'Luften pumpas ut — flugan försöker lyfta.',
+              explain: 'Utan luft finns inget att trycka ner — vingarna ger ingen kraft alls. Flugan kan bara hoppa med benen och faller sedan fritt: under hoppet minskar utslaget med m·g (ingen luft kan föra över tyngden), och avstamp plus nedslag ger spikar som tar ut varandra.' },
+        ];
+        const GUESS_POOL = ['hovrar', 'stiger', 'accelererar', 'dyker', 'dod', 'mynning', 'vakuum', 'fullt'];
+
+        // ── Simulatorklassen (fysik + rendering) ──────────────────
+        // Scen-geometri (logiska koordinater 900×620)
+        const VB_W = 900, VB_H = 620;
+        const PX = 2000;                 // px per meter
+        const BENCH_Y = 585;             // bänkskivans ovansida
+        const CX = 470;                  // bägarens mittlinje
+        const PLAT_Y = 486;              // vågplattans ovansida
+        const BOT_Y = PLAT_Y - 8;        // bägarens inre botten (y-px)
+        const WALL = 8;                  // glasväggens tjocklek (px)
+
+        // Vågens fysiska knappar (klickbara i scenen)
+        const BTN_NOLL = { id: 'noll', x: 330, y: 521, w: 58, h: 18 };
+        const BTN_ONOFF = { id: 'onoff', x: 394, y: 521, w: 40, h: 18 };
+
+        const INK = '#0f1620';
+        const INK_SOFT = '#3a4151';
+        const INK_MUTED = '#8a8579';
+        const COL_DOWN = '#2a5a7c';      // luft på väg nedåt
+        const COL_UP = '#b0642a';        // luft på väg uppåt
+        const COL_ACCENT = '#c8324a';
+        const COL_BLUE = '#2563c9';
+        const COL_TEAL = '#0d9488';
+
+        class FlySim {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.cfg = {
+                    massMg: 12, rho: RHO0, hoverH: 0.06, beakerH: 0.12,
+                    lid: false, scaleType: 'lab', speedIdx: 0,
+                    showAir: true, showPressure: true, boundary: 'ingen',
+                    paused: false, tareG: 0, sound: true,
+                };
+                this.onReadout = null;
+                this.scaleOn = true;      // vågens ON/OFF-knapp
+                this.btnFlash = { id: null, until: 0 };
+                this.audio = null;
+                this.dragTarget = null;      // manuell hovringshöjd vid dragning
+                this.trail = [];             // skärmpositioner för rörelseoskärpa
+                this.initParticles();
+                this.reset('hovrar');
+                this._raf = null;
+                this._last = performance.now();
+                this._readoutLast = 0;
+                this.running = true;
+                const loop = (now) => {
+                    if (!this.running) return;
+                    this.frame(now);
+                    this._raf = requestAnimationFrame(loop);
+                };
+                this._raf = requestAnimationFrame(loop);
+            }
+
+            dispose() {
+                this.running = false;
+                if (this._raf) cancelAnimationFrame(this._raf);
+                if (this.audio) { try { this.audio.ctx.close(); } catch (e) {} this.audio = null; }
+            }
+
+            // ── Ljud: flugans surr (Web Audio, helt syntetiserat) ──
+            // Det som gör ett riktigt flugsurr igenkännligt är inte tonen i
+            // sig utan ojämnheterna:
+            //   1. Två vingar som aldrig är exakt samstämda → långsam
+            //      svävning (två sågtandsoscillatorer, ~1,4 % isär).
+            //   2. Vingslagsfrekvensen vandrar hela tiden (slumpvandring
+            //      ±5 %) och stiger när flugan drar på.
+            //   3. Ojämn tremolo — volymen vaggar på två osammanhängande
+            //      LFO-frekvenser (flugan vrider sig mot/från lyssnaren).
+            //   4. Formant kring ~480 Hz (kroppens resonans) + lågpass.
+            //   5. Svagt bandpassat luftbrus under tonen.
+            //   6. Stereopanorering som följer flugans vandring i sidled.
+            // Skapas lazy vid första användargesten (autoplay-policyn).
+            // Tonhöjden följer uppspelningshastigheten — i ultrarapid
+            // pitchas surret ner under hörtröskeln — och volymen skalar
+            // med lufttätheten: i vakuum hörs ingenting, hur flugan än
+            // flaxar.
+            ensureAudio() {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (this.audio || !AC) return;
+                const actx = new AC();
+
+                const master = actx.createGain();
+                master.gain.value = 0;
+                let pan = null;
+                if (actx.createStereoPanner) {
+                    pan = actx.createStereoPanner();
+                    master.connect(pan); pan.connect(actx.destination);
+                } else {
+                    master.connect(actx.destination);
+                }
+
+                // ojämn tremolo: basnivå 1 moduleras av två LFO:er
+                const trem = actx.createGain();
+                trem.gain.value = 1;
+                trem.connect(master);
+                const lfo1 = actx.createOscillator();
+                lfo1.frequency.value = 7.3;
+                const lfo1g = actx.createGain(); lfo1g.gain.value = 0.14;
+                lfo1.connect(lfo1g); lfo1g.connect(trem.gain);
+                const lfo2 = actx.createOscillator();
+                lfo2.frequency.value = 1.13;
+                const lfo2g = actx.createGain(); lfo2g.gain.value = 0.2;
+                lfo2.connect(lfo2g); lfo2g.connect(trem.gain);
+
+                // formant + lågpass
+                const peak = actx.createBiquadFilter();
+                peak.type = 'peaking'; peak.frequency.value = 480; peak.Q.value = 1.1; peak.gain.value = 7;
+                const lp = actx.createBiquadFilter();
+                lp.type = 'lowpass'; lp.frequency.value = 2400; lp.Q.value = 0.6;
+                peak.connect(lp); lp.connect(trem);
+
+                // de två "vingarna"
+                const oL = actx.createOscillator();
+                oL.type = 'sawtooth'; oL.frequency.value = F_WING;
+                const oR = actx.createOscillator();
+                oR.type = 'sawtooth'; oR.frequency.value = F_WING * 1.014;
+                const oG = actx.createGain(); oG.gain.value = 0.5;
+                oL.connect(oG); oR.connect(oG); oG.connect(peak);
+
+                // luftbrus (bandpassat vitt brus, loopat)
+                const nLen = Math.floor(actx.sampleRate * 2);
+                const nBuf = actx.createBuffer(1, nLen, actx.sampleRate);
+                const nd = nBuf.getChannelData(0);
+                for (let i = 0; i < nLen; i++) nd[i] = Math.random() * 2 - 1;
+                const nSrc = actx.createBufferSource();
+                nSrc.buffer = nBuf; nSrc.loop = true;
+                const nBp = actx.createBiquadFilter();
+                nBp.type = 'bandpass'; nBp.frequency.value = 1100; nBp.Q.value = 0.7;
+                const nG = actx.createGain(); nG.gain.value = 0.045;
+                nSrc.connect(nBp); nBp.connect(nG); nG.connect(trem);
+
+                oL.start(); oR.start(); lfo1.start(); lfo2.start(); nSrc.start();
+                this._buzzJit = 0;
+                this.audio = { ctx: actx, master, pan, oL, oR };
+            }
+            resumeAudio() {
+                this.ensureAudio();
+                if (this.audio && this.audio.ctx.state === 'suspended') this.audio.ctx.resume();
+            }
+            updateAudio() {
+                if (!this.audio) return;
+                const a = this.audio, t = a.ctx.currentTime;
+                const speed = SPEEDS[this.cfg.speedIdx];
+                const thrust = clamp(this.Tcmd / Math.max(this.m * G_ACC, 1e-12), 0, 3);
+                const flying = thrust > 0.05;
+                // vingslagsfrekvensens slumpvandring (±5 %)
+                this._buzzJit = clamp((this._buzzJit || 0) * 0.985 + (Math.random() - 0.5) * 0.012, -0.05, 0.05);
+                const f = F_WING * speed * (0.88 + 0.18 * clamp(thrust, 0, 2)) * (1 + this._buzzJit);
+                const vol = (this.cfg.sound && flying && f > 24 && !this.cfg.paused && !document.hidden)
+                    ? 0.24 * clamp(this.cfg.rho / RHO0, 0, 1) * (0.5 + 0.5 * clamp(thrust, 0, 1.6))
+                    : 0;
+                a.master.gain.setTargetAtTime(vol, t, 0.07);
+                a.oL.frequency.setTargetAtTime(Math.max(f, 8), t, 0.04);
+                a.oR.frequency.setTargetAtTime(Math.max(f, 8) * 1.014, t, 0.04);
+                if (a.pan) a.pan.pan.setTargetAtTime(clamp(this.wander / 0.006, -1, 1) * 0.45, t, 0.1);
+            }
+
+            get m() { return this.cfg.massMg * 1e-6; }         // kg
+            get H() { return this.cfg.beakerH; }               // m
+            get mAir() { return this.cfg.rho * A_BOTTOM * this.H; }
+            get Nref() { return (M_BEAKER + this.mAir + this.m) * G_ACC; }
+
+            reset(scenarioId) {
+                const sc = SCENARIOS.find(s => s.id === (scenarioId || this.scenario?.id)) || SCENARIOS[0];
+                this.scenario = sc;
+                this.t = 0;
+                this.phase = 'sitter';
+                this.phaseT = 0;
+                this.z = 0; this.vz = 0;
+                this.pAir = 0;
+                this.Tcmd = 0; this.Tinst = 0; this.D = 0; this.Fc = this.m * G_ACC;
+                this.f = 1; this.tau = 0.1; this.vi = 0; this.viS = 0; this.zS = 0;
+                this.wander = 0;
+                this.impulse = 0;
+                this.facitAt = Infinity;
+                this.done = false;
+                this.dragTarget = null;
+                // bokföringens EMA-utjämnade termer (µN)
+                this.ema = { fly: 0, air: 0, leak: 0, dev: 0 };
+                // vågfiltret startar i jämvikt
+                this.scaleX = this.Nref; this.scaleV = 0;
+                this.lcdG = this.scaleX / G_ACC * 1000;
+                this.lcdT = 0;
+                this.samples = [];       // { t, devI, devS } i µN
+                this.trail = [];
+            }
+
+            startScenario(id) { this.reset(id); }
+
+            tare() { if (this.scaleOn) this.cfg.tareG = this.lcdG; }
+
+            // ── Infångningsfaktor: hur stor andel av nedsvepet som
+            //    stannar i bägaren. Med lock: allt. Öppen bägare: beror
+            //    på flugans djup under mynningen (strålen sprider sig
+            //    med ungefär bägardiameterns skala). ──
+            captureF() {
+                if (this.cfg.lid) return 1;
+                const d = this.H - this.z;           // djup under mynningen
+                if (d <= 0) return 0;                // ovanför mynningen
+                return smoother(d / (0.55 * D_BEAKER));
+            }
+
+            // ── Förloppens tillståndsmaskin → önskad lyftkraft ──
+            controller() {
+                const m = this.m, g = G_ACC;
+                const hoverTo = (zT, kp = 90, kd = 17) =>
+                    m * (g + kp * (zT - this.z) + kd * (0 - this.vz));
+                const climbAt = (vT) => m * (g + 22 * (vT - this.vz));
+                const topZ = () => (this.cfg.lid ? this.H - 0.025 : this.H - 0.02);
+                const s = this.scenario.id;
+                const next = (ph) => { this.phase = ph; this.phaseT = 0; };
+
+                // Manuell dragning tar över: hovra mot dragmålet
+                if (this.dragTarget !== null) return hoverTo(this.dragTarget);
+
+                switch (s) {
+                    case 'sitter':
+                        this.facitAt = Math.min(this.facitAt, 1.0);
+                        return 0;
+                    case 'hovrar':
+                    case 'fullt':
+                    case 'stiger':
+                    case 'accelererar':
+                    case 'dyker':
+                    case 'dod':
+                    case 'mynning':
+                    case 'vakuum':
+                        break;
+                    default:
+                        return hoverTo(this.cfg.hoverH);
+                }
+
+                switch (this.phase) {
+                    case 'sitter': {
+                        const wait = 0.5;
+                        if (this.phaseT > wait) {
+                            if (s === 'vakuum') next('hopp');
+                            else next('avstamp');
+                        }
+                        return 0;
+                    }
+                    case 'avstamp': {   // benen trycker ifrån, vingarna startar
+                        if (this.phaseT > 0.05) next('stig');
+                        return this.m * G_ACC * 1.4 * (this.phaseT / 0.05);
+                    }
+                    case 'hopp': {      // vakuum: bara ben, inga fungerande vingar
+                        if (this.phaseT > 0.05) { next('faller'); this.facitAt = Math.min(this.facitAt, this.t + 0.05); }
+                        return 2 * m * g;   // önskad vingkraft — klipps av T_max ≈ 0
+                    }
+                    case 'faller':
+                        if (this.z <= 0.0005 && this.vz >= -0.01 && this.phaseT > 0.3) { next('klar'); this.done = true; }
+                        return 0;
+                    case 'stig': {
+                        switch (s) {
+                            case 'stiger':
+                                next('klattra');
+                                this.facitAt = Math.min(this.facitAt, this.t + 0.6);
+                                return climbAt(0.05);
+                            case 'accelererar':
+                                next('lagHovring');
+                                return hoverTo(0.025);
+                            case 'dyker':
+                            case 'dod':
+                                next('hogHovring');
+                                return hoverTo(topZ());
+                            case 'mynning':
+                                next('mynningHovring');
+                                this.facitAt = Math.min(this.facitAt, this.t + 1.1);
+                                return hoverTo(this.H);
+                            case 'fullt':
+                                next('hovrar');
+                                this.facitAt = Math.min(this.facitAt, this.t + 1.2);
+                                return hoverTo(this.cfg.hoverH);
+                            default:
+                                next('hovrar');
+                                this.facitAt = Math.min(this.facitAt, this.t + 1.2);
+                                return hoverTo(this.cfg.hoverH);
+                        }
+                    }
+                    case 'hovrar': {
+                        if (s === 'fullt' && this.phaseT > 2.4) next('landa');
+                        return hoverTo(this.cfg.hoverH);
+                    }
+                    case 'klattra': {   // konstant stighastighet
+                        if (this.z >= topZ()) next('topphovring');
+                        return climbAt(0.05);
+                    }
+                    case 'lagHovring': {
+                        if (this.phaseT > 1.0) { next('acc'); this.facitAt = Math.min(this.facitAt, this.t + 0.06); }
+                        return hoverTo(0.025);
+                    }
+                    case 'acc': {       // ren feedforward: T = m(g + a)
+                        if (this.z >= topZ() - 0.01) next('topphovring');
+                        return m * (g + 6);
+                    }
+                    case 'hogHovring': {
+                        if (this.phaseT > 1.0) {
+                            if (s === 'dod') { next('dodFaller'); this.facitAt = Math.min(this.facitAt, this.t + 0.06); }
+                            else { next('dyk'); this.facitAt = Math.min(this.facitAt, this.t + 0.05); }
+                        }
+                        return hoverTo(topZ());
+                    }
+                    case 'dyk': {
+                        if (this.z <= 0.032) next('broms');
+                        return m * (g - 6);
+                    }
+                    case 'broms': {
+                        if (this.vz >= -0.03) next('lagHovring2');
+                        return m * (g + 8);
+                    }
+                    case 'lagHovring2':
+                        return hoverTo(0.025);
+                    case 'dodFaller':
+                        if (this.z <= 0.0005 && Math.abs(this.vz) < 0.01 && this.phaseT > 0.3) { next('klar'); this.done = true; }
+                        return 0;
+                    case 'mynningHovring':
+                        return hoverTo(this.H);
+                    case 'topphovring':
+                        return hoverTo(topZ());
+                    case 'landa': {
+                        if (this.z <= 0.003 && this.vz > -0.02) { next('klar'); this.done = true; }
+                        return hoverTo(0.001, 60, 20);
+                    }
+                    case 'klar':
+                        return 0;
+                    default:
+                        return hoverTo(this.cfg.hoverH);
+                }
+            }
+
+            // ── Ett fysiksteg med fast tidssteg DT ──
+            step() {
+                const m = this.m, g = G_ACC, rho = Math.max(1e-4, this.cfg.rho);
+                this.phaseT += DT;
+
+                // 1. Önskad lyftkraft från förloppet
+                this.Tcmd = clamp(this.controller(), 0, 4 * m * g);
+
+                // 2. Max lyftkraft skalar med luftens densitet (aktuatorskiva:
+                //    utan luft finns inget att accelerera nedåt)
+                const Tmax = 4 * m * g * (this.cfg.rho / RHO0);
+                const Tmean = Math.min(this.Tcmd, Tmax);
+
+                // 3. Vingslagscykeln: kraften varierar kraftigt inom cykeln
+                //    (två lyftpulser per slag, medelvärdet = Tmean)
+                const flying = Tmean > 0.02 * m * g;
+                const mod = flying ? (1 + 0.85 * Math.sin(2 * 2 * Math.PI * F_WING * this.t)) : 1;
+                this.Tinst = Tmean * mod;
+
+                // 4. Inducerad hastighet ur aktuatorskivan: v_i = sqrt(T/(2ρA)).
+                //    Vakens egen fart (viS) följer med tröghet — luft som redan
+                //    är i rörelse saktar inte in för att vingarna stannar.
+                this.vi = Math.sqrt(Math.max(Tmean, 1e-12) / (2 * rho * A_DISK));
+                this.viS += (this.vi - this.viS) * (DT / 0.12);
+
+                // 5. Luftmotstånd på kroppen (signerat uppåt: bromsar fall)
+                const kD = 0.5 * this.cfg.rho * CDA_BODY;
+                this.D = -kD * this.vz * Math.abs(this.vz);
+
+                // 6. Kontakt mot botten (fjäder + dämpare) och ev. locket
+                let Fc = 0;
+                if (this.z <= 0) Fc = Math.max(0, -K_CONTACT * this.z - C_CONTACT * this.vz);
+                const zLid = this.H - 0.006;
+                if (this.cfg.lid && this.z >= zLid) {
+                    // locket trycker nedåt på flugan — och flugan uppåt på locket,
+                    // dvs. kraften går in i bägaren med omvänt tecken
+                    Fc = -Math.max(0, K_CONTACT * (this.z - zLid) + C_CONTACT * this.vz);
+                }
+                this.Fc = Fc;
+
+                // 7. Flugans rörelseekvation
+                const a = (this.Tinst + this.D + Fc - m * g) / m;
+                this.vz += a * DT;
+                this.z += this.vz * DT;
+                const zMax = this.cfg.lid ? this.H - 0.004 : this.H + 0.05;
+                if (this.z > zMax) { this.z = zMax; this.vz = Math.min(this.vz, 0); }
+                if (this.z < -0.002) this.z = -0.002;
+
+                // 8. Luftens rörelsemängdsbudget. Vingslagens OSCILLATION
+                //    överförs nästan momentant till botten (tryckfältet rör
+                //    sig med ljudhastigheten — 0,2 ms mot vingslagets 5 ms),
+                //    medan MEDELKRAFTEN transporteras med strålen (tiden τ).
+                this.f = this.captureF();
+                // Vakens källhöjd zS följer flugan bara medan vingarna är igång
+                // — en död fluga som faller drar inte med sig vaken den lämnat.
+                if (flying) this.zS += (this.z - this.zS) * (DT / 0.05);
+                this.tau = clamp((this.zS + 0.012) / Math.max(this.viS, 0.12), 0.02, 0.4);
+                const ripple = this.Tinst - Tmean;             // vingslagets växeldel
+                const inject = this.f * (Tmean + this.D);      // medeldelen in i vaken
+                const outflux = this.pAir / this.tau;
+                this.pAir += (inject - outflux) * DT;
+
+                // 9. Vågens verkliga kraft — INTE M_tot·g, utan summan av
+                //    det som faktiskt trycker på den (identiteten
+                //    N − M·g = Δp/Δt uppfylls fortfarande exakt)
+                const N = (M_BEAKER + this.mAir) * G_ACC + Fc + outflux + this.f * ripple;
+                this.N = N;
+                const dev = N - this.Nref;
+                this.impulse += dev * DT;
+
+                // 10. Laboratorievågens dämpade andra ordningens svar
+                const tauS = 0.30;
+                const acc = (N - this.scaleX) / (tauS * tauS) - 2 * this.scaleV / tauS;
+                this.scaleV += acc * DT;
+                this.scaleX += this.scaleV * DT;
+
+                // 11. LCD uppdateras 5 ggr/s (i simulerad tid — i ultrarapid
+                //     uppdateras displayen sällan, precis som i verkligheten)
+                this.lcdT += DT;
+                if (this.lcdT >= 0.2) {
+                    this.lcdT = 0;
+                    const shown = this.cfg.scaleType === 'lab' ? this.scaleX : N;
+                    this.lcdG = Math.round(shown / G_ACC * 1000 * 10000) / 10000;
+                }
+
+                // 12. Bokföring: N − M_tot·g = flugans + luftens
+                //     rörelsemängdsändring + läckage (µN, EMA-utjämnat)
+                const em = 1 - Math.exp(-DT / 0.05);
+                const flyC = m * a;                       // = T + D + Fc − mg
+                const airC = -(inject - outflux);         // luftens dp/dt, uppåt räknat
+                const leakC = -(1 - this.f) * (this.Tinst + this.D);
+                this.ema.fly += (flyC * 1e6 - this.ema.fly) * em;
+                this.ema.air += (airC * 1e6 - this.ema.air) * em;
+                this.ema.leak += (leakC * 1e6 - this.ema.leak) * em;
+                this.ema.dev += (dev * 1e6 - this.ema.dev) * em;
+
+                // 13. Grafprover (4 000 per simulerad sekund så att 400 Hz-ripplet
+                //     kan ritas i ultrarapid; ringbuffert ~5 s)
+                if (!this._sampleAcc) this._sampleAcc = 0;
+                this._sampleAcc += DT;
+                if (this._sampleAcc >= 0.00025) {
+                    this._sampleAcc -= 0.00025;
+                    const devS = this.scaleOn
+                        ? ((this.cfg.scaleType === 'lab' ? this.scaleX : N) - this.Nref) * 1e6
+                        : null;   // avstängd våg ritar ingen kurva
+                    this.samples.push({ t: this.t, devI: dev * 1e6, devS });
+                    if (this.samples.length > 20000) this.samples.splice(0, this.samples.length - 20000);
+                }
+
+                this.t += DT;
+            }
+
+            // ── Partiklar: luftströmningen inne i och utanför bägaren ──
+            initParticles() {
+                this.parts = [];
+                for (let i = 0; i < 300; i++) {
+                    this.parts.push({
+                        x: (Math.random() - 0.5) * D_BEAKER,
+                        z: Math.random() * 0.12,
+                        vx: 0, vz: 0,
+                    });
+                }
+                this.outParts = [];
+            }
+
+            // Analytiskt strömningsfält (m/s) i bägarkoordinater
+            airField(x, z) {
+                const R = D_BEAKER / 2, H = this.H;
+                const zf = clamp(this.z, 0.004, H + 0.05);
+                const s = clamp(this.pAir / Math.max(this.m * G_ACC * this.tau, 1e-9), 0, 1.6);
+                const pulse = this.Tcmd > 1e-9 ? clamp(this.Tinst / Math.max(this.Tcmd, 1e-12), 0.2, 2) : 1;
+                const vi = this.viS * s * pulse;   // vakens fart lever kvar en stund
+                let vx = 0, vz = 0;
+                if (vi > 0.01) {
+                    // nedsvepets stråle under flugan
+                    const dz = zf - z;
+                    if (dz > 0) {
+                        const rj = 0.007 + 0.38 * dz;
+                        const u = Math.exp(-(x * x) / (2 * (rj * 0.55) * (rj * 0.55)));
+                        vz -= vi * (0.009 / rj) * u * 2.4;
+                        // strålen böjer av utåt nära botten
+                        if (z < 0.02) vx += Math.sign(x || (Math.random() - 0.5)) * vi * 0.8 * Math.exp(-z / 0.012) * u;
+                    }
+                    // återströmning uppåt längs väggarna
+                    const wf = smoother((Math.abs(x) - 0.5 * R) / (0.45 * R));
+                    if (z < zf + 0.015) vz += vi * 0.4 * wf;
+                    // sluter cirkulationen: inåt mot flugan i höjd med den
+                    if (z > zf - 0.015 && z < zf + 0.02) vx -= Math.sign(x) * vi * 0.3 * wf;
+                }
+                return [vx, vz];
+            }
+
+            stepParticles(dtVis) {
+                const R = D_BEAKER / 2, H = this.H;
+                const leak = (1 - this.f) * this.Tcmd;
+                for (const p of this.parts) {
+                    const [fx, fz] = this.airField(p.x, p.z);
+                    // partiklarna följer fältet med lite tröghet + termisk darrning
+                    p.vx += (fx - p.vx) * Math.min(1, dtVis * 14) + (Math.random() - 0.5) * 0.004;
+                    p.vz += (fz - p.vz) * Math.min(1, dtVis * 14) + (Math.random() - 0.5) * 0.004;
+                    p.x += p.vx * dtVis;
+                    p.z += p.vz * dtVis;
+                    // läcker partikeln ut genom mynningen?
+                    if (p.z > H) {
+                        if (!this.cfg.lid && this.cfg.rho > 0.25 && leak > 0.15 * this.m * G_ACC && this.outParts.length < 90) {
+                            this.outParts.push({
+                                x: CX + p.x * PX, y: BOT_Y - H * PX,
+                                vx: (Math.sign(p.x) || (Math.random() < 0.5 ? -1 : 1)) * (0.25 + Math.random() * 0.3) * PX * (this.vi || 0.3) / 0.7,
+                                vy: (0.1 + Math.random() * 0.25) * PX * (this.vi || 0.3) / 0.7,
+                                life: 1.1,
+                            });
+                        }
+                        p.z = Math.random() * 0.3 * H;
+                        p.x = (Math.random() - 0.5) * D_BEAKER;
+                        p.vx = 0; p.vz = 0;
+                    }
+                    if (p.z < 0.001) { p.z = 0.001; p.vz = Math.abs(p.vz) * 0.3; }
+                    if (p.x > R - 0.002) { p.x = R - 0.002; p.vx = -Math.abs(p.vx) * 0.3; }
+                    if (p.x < -R + 0.002) { p.x = -R + 0.002; p.vx = Math.abs(p.vx) * 0.3; }
+                }
+                // nedsvep ovanför mynningen (flugan i/över mynningen): spawn direkt
+                if (!this.cfg.lid && this.cfg.rho > 0.25 && this.z > H - 0.012 && this.Tcmd > 0.3 * this.m * G_ACC) {
+                    if (Math.random() < clamp(dtVis * 30, 0, 1) && this.outParts.length < 90) {
+                        const dir = Math.random() < 0.5 ? -1 : 1;
+                        this.outParts.push({
+                            x: CX + (this.wander * PX) + dir * (6 + Math.random() * 10),
+                            y: BOT_Y - this.z * PX + 8,
+                            vx: dir * (0.15 + Math.random() * 0.35) * PX * this.vi / 0.7,
+                            vy: (0.3 + Math.random() * 0.4) * PX * this.vi / 0.7,
+                            life: 1.1,
+                        });
+                    }
+                }
+                const rimYpx = BOT_Y - H * PX;
+                const spanPx = R * PX + WALL + 3;
+                for (const q of this.outParts) {
+                    q.x += q.vx * dtVis;
+                    q.y += q.vy * dtVis;
+                    // luften viker av runt mynningskanten — aldrig genom glaset:
+                    // ovanför bägaröppningen glider strömmen längs mynningen
+                    // tills den passerat kanten, sedan faller den utanför väggen
+                    if (q.y > rimYpx - 5 && Math.abs(q.x - CX) < spanPx) {
+                        q.y = rimYpx - 5;
+                        const dir = Math.sign(q.x - CX) || (Math.random() < 0.5 ? -1 : 1);
+                        q.vx = dir * Math.max(Math.abs(q.vx), 260);
+                        q.vy = Math.max(q.vy, 140);
+                    }
+                    // träffar bänken eller vågen → sprids i sidled
+                    const floorY = (q.x > CX - 160 && q.x < CX + 160) ? PLAT_Y : BENCH_Y;
+                    if (q.y > floorY - 4) { q.y = floorY - 4; q.vy = 0; }
+                    q.life -= dtVis;
+                }
+                this.outParts = this.outParts.filter(q => q.life > 0 && q.x > 0 && q.x < VB_W);
+            }
+
+            // ── Huvudloopen: stega fysiken, rita, rapportera ──
+            frame(now) {
+                const dtReal = Math.min(0.06, (now - this._last) / 1000);
+                this._last = now;
+                const speed = SPEEDS[this.cfg.speedIdx];
+                if (!this.cfg.paused) {
+                    let adv = dtReal * speed;
+                    // flugans lilla vandring i sidled (bara visuell)
+                    if (this.Tcmd > 0.3 * this.m * G_ACC && this.dragTarget === null) {
+                        this.wander = Math.sin(this.t * 1.3) * 0.004 + Math.sin(this.t * 2.9) * 0.0018;
+                    }
+                    this._acc = (this._acc || 0) + adv;
+                    let steps = Math.floor(this._acc / DT);
+                    if (steps > 1500) { steps = 1500; this._acc = 0; }
+                    else this._acc -= steps * DT;
+                    for (let i = 0; i < steps; i++) this.step();
+                    if (this.cfg.showAir) this.stepParticles(adv);
+                }
+                this.updateAudio();
+                this.draw(dtReal);
+                if (now - this._readoutLast > 120 && this.onReadout) {
+                    this._readoutLast = now;
+                    this.onReadout({
+                        grams: this.scaleOn ? this.lcdG : null,
+                        devuN: this.ema.dev,
+                        FcuN: this.Fc * 1e6,
+                        airuN: (this.pAir / this.tau) * 1e6,
+                        leakuN: -this.ema.leak,
+                        mguN: this.m * G_ACC * 1e6,
+                        f: this.f,
+                        impulse: this.impulse * 1e6,
+                        flyuN: this.ema.fly,
+                        airDpuN: this.ema.air,
+                        phase: this.phase,
+                        facitReady: this.t >= this.facitAt,
+                        done: this.done,
+                        scenarioId: this.scenario.id,
+                    });
+                }
+            }
+
+            // ════════════════ RENDERING ════════════════
+            draw(dtReal) {
+                const c = this.canvas, ctx = this.ctx;
+                const w = c.clientWidth, h = c.clientHeight;
+                if (w <= 0) return;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) {
+                    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+                }
+                const S = Math.min(c.width / VB_W, c.height / VB_H);
+                const ox = (c.width - VB_W * S) / 2, oy = (c.height - VB_H * S) / 2;
+                this._view = { S, ox, oy, dpr };
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                // papperston över hela ytan (även ev. letterbox)
+                ctx.fillStyle = '#f4efe3';
+                ctx.fillRect(0, 0, c.width, c.height);
+                ctx.setTransform(S, 0, 0, S, ox, oy);
+
+                this.drawPaperGrid(ctx);
+                this.drawBench(ctx);
+                this.drawScaleBody(ctx);
+                this.drawBeakerBack(ctx);
+                if (this.cfg.showPressure) this.drawPressure(ctx);
+                if (this.cfg.showAir) this.drawParticles(ctx);
+                this.drawFly(ctx, dtReal);
+                this.drawBeakerFront(ctx);
+                if (this.cfg.lid) this.drawLid(ctx);
+                if (this.cfg.showAir) this.drawOutParticles(ctx);
+                this.drawLeakArrows(ctx);
+                this.drawLCD(ctx);
+                this.drawGraph(ctx);
+                this.drawStatus(ctx);
+                this.drawBoundary(ctx);
+            }
+
+            drawPaperGrid(ctx) {
+                ctx.strokeStyle = 'rgba(42,90,124,0.07)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                for (let x = 0; x <= VB_W; x += 24) { ctx.moveTo(x, 0); ctx.lineTo(x, VB_H); }
+                for (let y = 0; y <= VB_H; y += 24) { ctx.moveTo(0, y); ctx.lineTo(VB_W, y); }
+                ctx.stroke();
+            }
+
+            drawBench(ctx) {
+                ctx.fillStyle = '#dbc79e';
+                ctx.strokeStyle = 'rgba(15,22,32,0.5)';
+                ctx.lineWidth = 1.4;
+                ctx.beginPath(); ctx.rect(20, BENCH_Y, 860, 28); ctx.fill(); ctx.stroke();
+                ctx.strokeStyle = 'rgba(15,22,32,0.16)';
+                ctx.beginPath(); ctx.moveTo(20, BENCH_Y + 7); ctx.lineTo(880, BENCH_Y + 7); ctx.stroke();
+                ctx.fillStyle = '#cdb890';
+                ctx.strokeStyle = 'rgba(15,22,32,0.5)';
+                ctx.beginPath(); ctx.rect(70, BENCH_Y + 28, 26, 10); ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.rect(804, BENCH_Y + 28, 26, 10); ctx.fill(); ctx.stroke();
+            }
+
+            roundRect(ctx, x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            }
+
+            drawScaleBody(ctx) {
+                // fötter
+                ctx.fillStyle = '#8f959c';
+                ctx.beginPath(); ctx.rect(345, BENCH_Y - 8, 22, 8); ctx.fill();
+                ctx.beginPath(); ctx.rect(573, BENCH_Y - 8, 22, 8); ctx.fill();
+                // kropp
+                ctx.fillStyle = '#d3d8dd';
+                ctx.strokeStyle = 'rgba(15,22,32,0.5)';
+                ctx.lineWidth = 1.4;
+                this.roundRect(ctx, 320, 502, 300, BENCH_Y - 8 - 502, 8);
+                ctx.fill(); ctx.stroke();
+                // pelare + vågskål (rostfri platta)
+                ctx.fillStyle = '#aeb5bc';
+                ctx.beginPath(); ctx.rect(CX - 16, PLAT_Y + 12, 32, 502 - PLAT_Y - 12 + 2); ctx.fill();
+                ctx.fillStyle = '#c4cbd2';
+                ctx.strokeStyle = 'rgba(15,22,32,0.55)';
+                this.roundRect(ctx, CX - 120, PLAT_Y, 240, 12, 4);
+                ctx.fill(); ctx.stroke();
+                ctx.strokeStyle = 'rgba(233,241,246,0.9)';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(CX - 100, PLAT_Y + 3); ctx.lineTo(CX + 60, PLAT_Y + 3); ctx.stroke();
+                // märkning
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '600 10px "JetBrains Mono", monospace';
+                ctx.textAlign = 'left';
+                ctx.fillText('FYSIKLABBET FX-120', 334, 570);
+                // knappar (klickbara — se scaleButtonAt)
+                const now = performance.now();
+                ctx.strokeStyle = 'rgba(15,22,32,0.4)';
+                ctx.lineWidth = 1;
+                for (const b of [BTN_NOLL, BTN_ONOFF]) {
+                    const pressed = this.btnFlash.id === b.id && now < this.btnFlash.until;
+                    ctx.fillStyle = pressed ? '#8f959c' : '#b7bdc4';
+                    this.roundRect(ctx, b.x, b.y, b.w, b.h, 3); ctx.fill(); ctx.stroke();
+                }
+                ctx.fillStyle = INK_SOFT;
+                ctx.font = '600 7.5px "JetBrains Mono", monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText('NOLLSTÄLL', BTN_NOLL.x + BTN_NOLL.w / 2, BTN_NOLL.y + 12);
+                ctx.fillText('ON/OFF', BTN_ONOFF.x + BTN_ONOFF.w / 2, BTN_ONOFF.y + 12);
+            }
+
+            drawLCD(ctx) {
+                // display på vågkroppen — mörk panel med ljusgröna siffror
+                // (LED-display: legitimt undantag från halo-regeln)
+                ctx.fillStyle = this.scaleOn ? '#18231d' : '#141a17';
+                ctx.strokeStyle = 'rgba(15,22,32,0.6)';
+                ctx.lineWidth = 1.4;
+                this.roundRect(ctx, 438, 514, 172, 52, 4);
+                ctx.fill(); ctx.stroke();
+                if (!this.scaleOn) return;   // avstängd våg: släckt display
+                const gShown = this.lcdG - this.cfg.tareG;
+                let txt = gShown.toFixed(4).replace('.', ',').replace('-', '−');
+                if (parseFloat(gShown.toFixed(4)) === 0) txt = '0,0000';
+                ctx.fillStyle = '#93ecab';
+                ctx.font = '500 23px "JetBrains Mono", monospace';
+                ctx.textAlign = 'right';
+                ctx.fillText(txt, 578, 548);
+                ctx.font = '500 12px "JetBrains Mono", monospace';
+                ctx.fillText('g', 598, 548);
+                // stabilitetsindikator + tara-markör
+                const stable = Math.abs(this.scaleV) < 2e-4;
+                ctx.font = '500 9px "JetBrains Mono", monospace';
+                ctx.textAlign = 'left';
+                ctx.fillStyle = stable ? '#93ecab' : 'rgba(147,236,171,0.35)';
+                ctx.fillText(stable ? '● stabil' : '○', 444, 526);
+                if (this.cfg.tareG !== 0) {
+                    ctx.fillStyle = '#93ecab';
+                    ctx.fillText('NOLL', 444, 560);
+                }
+                ctx.fillStyle = 'rgba(147,236,171,0.65)';
+                ctx.textAlign = 'right';
+                ctx.fillText(this.cfg.scaleType === 'lab' ? 'VÅG 0,1 mg' : 'IDEAL GIVARE', 604, 526);
+            }
+
+            beakerGeom() {
+                const R = D_BEAKER / 2 * PX;      // 80 px
+                const Hpx = this.H * PX;
+                return {
+                    innerL: CX - R, innerR: CX + R,
+                    rimY: BOT_Y - Hpx,
+                    botY: BOT_Y,
+                };
+            }
+
+            drawBeakerBack(ctx) {
+                const g = this.beakerGeom();
+                // svag glaston inuti
+                ctx.fillStyle = 'rgba(201,213,220,0.13)';
+                ctx.fillRect(g.innerL, g.rimY, g.innerR - g.innerL, g.botY - g.rimY);
+                // graderingar (100 ml-steg) med etiketter utanför vänsterväggen
+                const mlStep = 100e-6 / A_BOTTOM;   // m per 100 ml
+                ctx.strokeStyle = 'rgba(15,22,32,0.35)';
+                ctx.lineWidth = 1.1;
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 9.5px Poppins, sans-serif';
+                ctx.textAlign = 'right';
+                for (let i = 1; i * mlStep < this.H - 0.008; i++) {
+                    const y = g.botY - i * mlStep * PX;
+                    ctx.beginPath(); ctx.moveTo(g.innerL, y); ctx.lineTo(g.innerL + 10, y); ctx.stroke();
+                    ctx.fillText(String(i * 100), g.innerL - WALL - 5, y + 3);
+                }
+                ctx.fillText('ml', g.innerL - WALL - 5, g.rimY + 3);
+            }
+
+            drawBeakerFront(ctx) {
+                const g = this.beakerGeom();
+                ctx.fillStyle = 'rgba(201,211,218,0.8)';
+                ctx.strokeStyle = 'rgba(15,22,32,0.5)';
+                ctx.lineWidth = 1.1;
+                // väggar
+                ctx.beginPath(); ctx.rect(g.innerL - WALL, g.rimY - 4, WALL, g.botY - g.rimY + 4 + WALL); ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.rect(g.innerR, g.rimY - 4, WALL, g.botY - g.rimY + 4 + WALL); ctx.fill(); ctx.stroke();
+                // botten
+                ctx.beginPath(); ctx.rect(g.innerL, g.botY, g.innerR - g.innerL, WALL); ctx.fill(); ctx.stroke();
+                // förstärkt mynningskant
+                ctx.fillStyle = 'rgba(182,194,202,0.95)';
+                ctx.beginPath(); ctx.rect(g.innerL - WALL - 3, g.rimY - 6, WALL + 4, 6); ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.rect(g.innerR - 1, g.rimY - 6, WALL + 4, 6); ctx.fill(); ctx.stroke();
+                // glasreflex på vänsterväggen
+                ctx.strokeStyle = 'rgba(233,241,246,0.55)';
+                ctx.lineWidth = 3.5;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(g.innerL + 12, g.botY - 22);
+                ctx.lineTo(g.innerL + 26, g.rimY + 40);
+                ctx.stroke();
+                ctx.lineCap = 'butt';
+            }
+
+            drawLid(ctx) {
+                const g = this.beakerGeom();
+                ctx.fillStyle = 'rgba(198,214,224,0.72)';
+                ctx.strokeStyle = 'rgba(15,22,32,0.55)';
+                ctx.lineWidth = 1.2;
+                this.roundRect(ctx, g.innerL - WALL - 6, g.rimY - 13, (g.innerR - g.innerL) + 2 * WALL + 12, 8, 3);
+                ctx.fill(); ctx.stroke();
+                // knopp
+                ctx.fillStyle = 'rgba(182,194,202,0.95)';
+                ctx.beginPath(); ctx.arc(CX, g.rimY - 17, 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            }
+
+            drawPressure(ctx) {
+                // övertrycket mot botten: gaussisk fördelning kring strålens
+                // träffpunkt, integralen = luftens kraft p_air/τ
+                const g = this.beakerGeom();
+                const F = this.pAir / this.tau;              // N
+                if (F < 1e-8) return;
+                const sig = Math.max(0.010, 0.007 + 0.38 * this.z * 0.55);  // m
+                const p0 = F / (2 * Math.PI * sig * sig);    // maxtryck (Pa)
+                const xf = CX + this.wander * PX;
+                const maxA = clamp(F / (this.m * G_ACC), 0, 1.3);
+                for (let x = g.innerL; x < g.innerR; x += 4) {
+                    const r = (x + 2 - xf) / PX;
+                    const val = Math.exp(-(r * r) / (2 * sig * sig));
+                    ctx.fillStyle = 'rgba(200,50,74,' + (0.55 * val * maxA).toFixed(3) + ')';
+                    ctx.fillRect(x, g.botY - 6, 4, 6);
+                }
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 10.5px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                const pTxt = p0 < 0.001 ? '< 0,001' : fmtSmart(p0, p0 < 0.01 ? 3 : 2);
+                ctx.fillText('övertryck max ' + pTxt + ' Pa', CX, g.botY - 13);
+            }
+
+            drawParticles(ctx) {
+                const g = this.beakerGeom();
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(g.innerL, g.rimY - (this.cfg.lid ? 0 : 60), g.innerR - g.innerL, g.botY - g.rimY + (this.cfg.lid ? 0 : 60));
+                ctx.clip();
+                // antalet synliga molekyler skalar med lufttätheten —
+                // i vakuum finns ingen luft att se
+                const nVis = Math.round(this.parts.length * clamp(this.cfg.rho / RHO0, 0, 1));
+                for (let pi = 0; pi < nVis; pi++) {
+                    const p = this.parts[pi];
+                    const x = CX + p.x * PX;
+                    const y = BOT_Y - p.z * PX;
+                    const sp = Math.hypot(p.vx, p.vz);
+                    const al = clamp(sp / 0.4, 0, 1) * 0.62 + 0.1;
+                    let dx = p.vx * PX * 0.03, dy = -p.vz * PX * 0.03;
+                    const len = Math.hypot(dx, dy);
+                    if (len > 13) { dx *= 13 / len; dy *= 13 / len; }
+                    ctx.strokeStyle = (p.vz < -0.01 ? 'rgba(42,90,124,' : 'rgba(176,100,42,') + al.toFixed(2) + ')';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(x - dx, y - dy);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    if (sp < 0.02) {
+                        ctx.fillStyle = 'rgba(90,110,125,0.22)';
+                        ctx.fillRect(x - 0.8, y - 0.8, 1.6, 1.6);
+                    }
+                }
+                ctx.restore();
+            }
+
+            drawOutParticles(ctx) {
+                for (const q of this.outParts) {
+                    const al = clamp(q.life, 0, 1) * 0.5;
+                    let dx = q.vx * 0.03, dy = q.vy * 0.03;
+                    const len = Math.hypot(dx, dy);
+                    if (len > 12) { dx *= 12 / len; dy *= 12 / len; }
+                    ctx.strokeStyle = 'rgba(42,90,124,' + al.toFixed(2) + ')';
+                    ctx.lineWidth = 1.4;
+                    ctx.beginPath();
+                    ctx.moveTo(q.x - dx, q.y - dy);
+                    ctx.lineTo(q.x, q.y);
+                    ctx.stroke();
+                }
+            }
+
+            drawLeakArrows(ctx) {
+                // små pilar vid mynningen som visar läckaget (öppen bägare)
+                const leak = (1 - this.f) * this.Tcmd;
+                if (this.cfg.lid || leak < 0.1 * this.m * G_ACC) return;
+                const g = this.beakerGeom();
+                const al = clamp(leak / (this.m * G_ACC), 0, 1) * 0.7;
+                ctx.strokeStyle = 'rgba(42,90,124,' + al.toFixed(2) + ')';
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.lineWidth = 2;
+                for (const dir of [-1, 1]) {
+                    const x0 = CX + dir * (D_BEAKER / 2 * PX + 4);
+                    const y0 = g.rimY - 8;
+                    ctx.beginPath();
+                    ctx.moveTo(x0, y0);
+                    ctx.quadraticCurveTo(x0 + dir * 22, y0 + 2, x0 + dir * 30, y0 + 20);
+                    ctx.stroke();
+                    // pilspets
+                    ctx.beginPath();
+                    ctx.moveTo(x0 + dir * 30 - dir * 5, y0 + 12);
+                    ctx.lineTo(x0 + dir * 31, y0 + 22);
+                    ctx.lineTo(x0 + dir * 24, y0 + 20);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 10.5px Poppins, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText('läckage ' + formatNum((1 - this.f) * 100, 0) + ' %', CX - D_BEAKER / 2 * PX - WALL - 8, g.rimY - 18);
+                ctx.textAlign = 'left';
+            }
+
+            // ── Flugan ──
+            drawFly(ctx, dtReal) {
+                const speed = SPEEDS[this.cfg.speedIdx];
+                const fx = CX + this.wander * PX;
+                const fy = BOT_Y - this.z * PX - 4;
+                const flying = this.Tcmd > 0.02 * this.m * G_ACC && this.cfg.rho > 0.3;
+                const trying = this.Tcmd > 0.02 * this.m * G_ACC;   // vingar rör sig även i vakuum
+
+                // rörelseoskärpa: spökbilder längs den verkliga skärmrörelsen
+                this.trail.push({ x: fx, y: fy });
+                if (this.trail.length > 4) this.trail.shift();
+                if (!this.cfg.paused && this.trail.length >= 2) {
+                    const a = this.trail[0], b = this.trail[this.trail.length - 1];
+                    if (Math.hypot(b.x - a.x, b.y - a.y) > 2.5) {
+                        for (let i = 0; i < this.trail.length - 1; i++) {
+                            const t = this.trail[i];
+                            ctx.globalAlpha = 0.10 + 0.05 * i;
+                            this.drawFlyBody(ctx, t.x, t.y, flying, trying, speed, true);
+                        }
+                        ctx.globalAlpha = 1;
+                    }
+                }
+                this.drawFlyBody(ctx, fx, fy, flying, trying, speed, false);
+            }
+
+            drawFlyBody(ctx, fx, fy, flying, trying, speed, ghost) {
+                ctx.save();
+                ctx.translate(fx, fy);
+                const standing = !trying && this.z <= 0.001;
+                const pitch = flying ? clamp(-this.vz * 0.25, -0.35, 0.3) - 0.12 : 0;
+                ctx.rotate(pitch);
+
+                // vingar BAKOM kroppen när de är hopfällda/blur
+                const slowMode = speed <= 0.02 && trying;
+                if (trying && !slowMode && !ghost) {
+                    // realtid: vingarna syns bara som ett suddigt fält
+                    for (const dir of [-1, 1]) {
+                        ctx.fillStyle = 'rgba(100,110,120,0.20)';
+                        ctx.beginPath();
+                        ctx.ellipse(dir * 6, -5, 9, 5.5, dir * 0.5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = 'rgba(100,110,120,0.28)';
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.ellipse(dir * 6, -5, 9, 5.5, dir * 0.5, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                } else if (slowMode && !ghost) {
+                    // ultrarapid: rita vingarna i sitt verkliga slagläge
+                    const ang = 1.25 * Math.sin(2 * Math.PI * F_WING * this.t);
+                    for (const dir of [-1, 1]) {
+                        ctx.save();
+                        ctx.translate(dir * 1.5, -2.6);
+                        ctx.rotate(dir * (-0.35 - ang * 0.75));
+                        ctx.fillStyle = 'rgba(165,175,185,0.55)';
+                        ctx.strokeStyle = 'rgba(70,80,92,0.55)';
+                        ctx.lineWidth = 0.7;
+                        ctx.beginPath();
+                        ctx.ellipse(dir * 6.5, 0, 6.8, 2.1, 0, 0, Math.PI * 2);
+                        ctx.fill(); ctx.stroke();
+                        // vingribba
+                        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(dir * 12, -0.4); ctx.stroke();
+                        ctx.restore();
+                    }
+                } else if (standing && !ghost) {
+                    // hopfällda vingar längs ryggen
+                    ctx.fillStyle = 'rgba(165,175,185,0.5)';
+                    ctx.strokeStyle = 'rgba(70,80,92,0.45)';
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath(); ctx.ellipse(-3.5, -2.2, 6, 1.8, 0.1, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                }
+
+                // ben
+                if (standing && !ghost) {
+                    ctx.strokeStyle = '#2f3338';
+                    ctx.lineWidth = 0.9;
+                    for (const [x0, x1, x2] of [[-3, -5.5, -7], [0, -1, -2.5], [3, 5, 6.5]]) {
+                        ctx.beginPath();
+                        ctx.moveTo(x0, 1.5); ctx.lineTo(x1, 3.2); ctx.lineTo(x2, 4.6);
+                        ctx.stroke();
+                    }
+                } else if (trying && !ghost) {
+                    ctx.strokeStyle = '#2f3338';
+                    ctx.lineWidth = 0.8;
+                    for (const xx of [-2, 0.5, 3]) {
+                        ctx.beginPath(); ctx.moveTo(xx, 1.5); ctx.lineTo(xx - 1.5, 3.6); ctx.stroke();
+                    }
+                }
+
+                // kropp: bakkropp, mellankropp, huvud
+                ctx.fillStyle = '#2f3338';
+                ctx.strokeStyle = '#1a1e24';
+                ctx.lineWidth = 0.6;
+                ctx.beginPath(); ctx.ellipse(-3.6, 0.2, 4.6, 2.7, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                // ränder på bakkroppen
+                ctx.strokeStyle = 'rgba(110,118,128,0.6)';
+                ctx.lineWidth = 0.7;
+                for (const xx of [-5.6, -3.9, -2.2]) {
+                    ctx.beginPath(); ctx.moveTo(xx, -1.9); ctx.lineTo(xx - 0.6, 1.9); ctx.stroke();
+                }
+                ctx.fillStyle = '#3a3f47';
+                ctx.strokeStyle = '#1a1e24';
+                ctx.lineWidth = 0.6;
+                ctx.beginPath(); ctx.ellipse(1.2, -0.4, 3, 2.5, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                ctx.beginPath(); ctx.arc(4.8, -0.5, 1.9, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                // ögon
+                ctx.fillStyle = '#7a3028';
+                ctx.beginPath(); ctx.arc(5.4, -1.1, 0.9, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(5.6, 0.2, 0.8, 0, Math.PI * 2); ctx.fill();
+                ctx.restore();
+            }
+
+            // ── Grafpanel: vågens utslag mot tid ──
+            drawGraph(ctx) {
+                const gx = 20, gy = 92, gw = 310, gh = 252;
+                ctx.fillStyle = 'rgba(246,242,234,0.9)';
+                ctx.strokeStyle = 'rgba(15,22,32,0.28)';
+                ctx.lineWidth = 1.2;
+                this.roundRect(ctx, gx, gy, gw, gh, 6);
+                ctx.fill(); ctx.stroke();
+
+                ctx.fillStyle = INK_SOFT;
+                ctx.font = '600 11px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('VÅGENS UTSLAG', gx + 12, gy + 18);
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 9.5px Poppins, sans-serif';
+                ctx.fillText('avvikelse från vilovärdet, i µN', gx + 12, gy + 31);
+
+                const px0 = gx + 40, px1 = gx + gw - 10;
+                const py0 = gy + 44, py1 = gy + gh - 22;
+                const midY = (py0 + py1) / 2;
+                const speed = SPEEDS[this.cfg.speedIdx];
+                const W = clamp(4 * speed, 0.08, 5);          // fönster i simulerad tid
+                const t1 = this.t, t0 = t1 - W;
+
+                // y-skala: minst ± flugans tyngd, växer vid större avvikelser
+                const mg = this.m * G_ACC * 1e6;
+                let maxDev = mg * 1.15;
+                for (let i = this.samples.length - 1; i >= 0; i--) {
+                    const sm = this.samples[i];
+                    if (sm.t < t0) break;
+                    maxDev = Math.max(maxDev, Math.abs(sm.devI) * 1.05, Math.abs(sm.devS) * 1.05);
+                }
+                maxDev = Math.min(maxDev, mg * 6);
+                const yOf = (v) => midY - (v / maxDev) * (py1 - py0) / 2;
+
+                // referenslinje 0 = som när flugan sitter still
+                ctx.strokeStyle = 'rgba(15,22,32,0.4)';
+                ctx.setLineDash([4, 3]);
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(px0, midY); ctx.lineTo(px1, midY); ctx.stroke();
+                // ± flugans tyngd
+                ctx.strokeStyle = 'rgba(200,50,74,0.3)';
+                ctx.setLineDash([2, 3]);
+                ctx.beginPath(); ctx.moveTo(px0, yOf(mg)); ctx.lineTo(px1, yOf(mg)); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(px0, yOf(-mg)); ctx.lineTo(px1, yOf(-mg)); ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 9px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('0', px0 - 10, midY + 3);
+                ctx.fillText('+mg', px0 - 34, yOf(mg) + 3);
+                ctx.fillText('−mg', px0 - 34, yOf(-mg) + 3);
+                // y-max (bara när den inte krockar med +mg-etiketten)
+                if (yOf(mg) - py0 > 14) ctx.fillText('+' + formatNum(maxDev, 0), px0 - 36, py0 + 3);
+
+                // kurvor: ideal givare (tunn, ink) + vald våg (accent)
+                if (this.samples.length > 1) {
+                    let i0 = this.samples.length - 1;
+                    while (i0 > 0 && this.samples[i0 - 1].t >= t0) i0--;
+                    const n = this.samples.length - i0;
+                    const stride = Math.max(1, Math.floor(n / 560));
+                    const xOf = (t) => px0 + ((t - t0) / W) * (px1 - px0);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = 'rgba(15,22,32,0.4)';
+                    ctx.beginPath();
+                    let first = true;
+                    for (let i = i0; i < this.samples.length; i += stride) {
+                        const sm = this.samples[i];
+                        const x = xOf(sm.t), y = clamp(yOf(sm.devI), py0, py1);
+                        if (first) { ctx.moveTo(x, y); first = false; } else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    ctx.lineWidth = 1.8;
+                    ctx.strokeStyle = COL_ACCENT;
+                    ctx.beginPath();
+                    first = true;
+                    for (let i = i0; i < this.samples.length; i += stride) {
+                        const sm = this.samples[i];
+                        if (sm.devS === null) { first = true; continue; }   // vågen avstängd
+                        const x = xOf(sm.t), y = clamp(yOf(sm.devS), py0, py1);
+                        if (first) { ctx.moveTo(x, y); first = false; } else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+
+                // teckenförklaring + tidsfönster
+                ctx.font = '400 9.5px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.strokeStyle = 'rgba(15,22,32,0.4)';
+                ctx.lineWidth = 1.6;
+                ctx.beginPath(); ctx.moveTo(px0, gy + gh - 8); ctx.lineTo(px0 + 14, gy + gh - 8); ctx.stroke();
+                ctx.fillStyle = INK_MUTED;
+                ctx.fillText('ideal givare', px0 + 18, gy + gh - 5);
+                ctx.strokeStyle = COL_ACCENT;
+                ctx.beginPath(); ctx.moveTo(px0 + 82, gy + gh - 8); ctx.lineTo(px0 + 96, gy + gh - 8); ctx.stroke();
+                ctx.fillText(!this.scaleOn ? 'vågen avstängd' : (this.cfg.scaleType === 'lab' ? 'laboratorievåg' : 'vald: ideal'), px0 + 100, gy + gh - 5);
+                ctx.textAlign = 'right';
+                ctx.fillText('fönster ' + fmtSmart(W, 2) + ' s', px1, gy + gh - 5);
+            }
+
+            drawStatus(ctx) {
+                // förloppsstatus under grafpanelen
+                const PHASE_TXT = {
+                    sitter: 'Sitter på botten', avstamp: 'Avstamp — benen trycker ifrån',
+                    hopp: 'Hoppar (inga fungerande vingar)', faller: 'Faller fritt',
+                    stig: 'Lyfter', hovrar: 'Hovrar — stationärt', klattra: 'Stiger med konstant fart',
+                    lagHovring: 'Hovrar lågt', acc: 'Accelererar uppåt',
+                    hogHovring: 'Hovrar högt', dyk: 'Dyker', broms: 'Bromsar in',
+                    lagHovring2: 'Hovrar lågt', dodFaller: 'Fritt fall — vingarna står stilla',
+                    mynningHovring: 'Hovrar i mynningen', topphovring: 'Hovrar högt',
+                    landa: 'Landar', klar: 'Förloppet klart',
+                };
+                ctx.fillStyle = INK_SOFT;
+                ctx.font = '600 12px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(this.scenario.name, 22, 372);
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 11px Poppins, sans-serif';
+                const ph = this.dragTarget !== null ? 'Du styr flugan' : (PHASE_TXT[this.phase] || '');
+                ctx.fillText(ph + (this.cfg.paused ? ' — pausad' : ''), 22, 389);
+                // uppspelningshastighet
+                const speed = SPEEDS[this.cfg.speedIdx];
+                const sTxt = speed === 1 ? 'realtid' : 'ultrarapid 1/' + formatNum(1 / speed, 0);
+                ctx.fillText('Uppspelning: ' + sTxt, 22, 406);
+
+                // avvikelse-läsning (i vänstra friytan, klar från overlay-rutorna)
+                const dev = this.ema.dev;
+                ctx.font = '500 15px "JetBrains Mono", monospace';
+                ctx.fillStyle = Math.abs(dev) < 6 ? '#2d6a3e' : COL_ACCENT;
+                const devTxt = (dev > 0 ? '+' : dev < 0 ? '−' : '') + fmtSmart(Math.abs(dev), 1) + ' µN';
+                ctx.fillText('Avvikelse: ' + (Math.abs(dev) < 1.5 ? '≈ 0 µN' : devTxt), 22, 427);
+                ctx.fillStyle = INK_MUTED;
+                ctx.font = '400 10.5px Poppins, sans-serif';
+                ctx.fillText('flugans tyngd ' + fmtSmart(this.m * G_ACC * 1e6, 0) + ' µN — infångning f = ' + formatNum(this.f * 100, 0) + ' %', 22, 443);
+            }
+
+            // ── Systemgränser (frilagd kropp) ──
+            arrow(ctx, x, y0, y1, color, lw = 3) {
+                // lodrät pil med spetsen vid y1, skaftet slutar vid spetsens bas
+                const dir = Math.sign(y1 - y0) || 1;
+                const head = Math.max(8, Math.min(12, Math.abs(y1 - y0) * 0.4));
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = lw;
+                ctx.lineCap = 'butt';
+                ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1 - dir * head); ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x - 5, y1 - dir * head);
+                ctx.lineTo(x, y1);
+                ctx.lineTo(x + 5, y1 - dir * head);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            drawBoundary(ctx) {
+                const b = this.cfg.boundary;
+                if (b === 'ingen') return;
+                const g = this.beakerGeom();
+                const fx = CX + this.wander * PX;
+                const fy = BOT_Y - this.z * PX - 4;
+                const mg = this.m * G_ACC;
+                ctx.setLineDash([6, 4]);
+                ctx.strokeStyle = 'rgba(94,69,118,0.85)';
+                ctx.lineWidth = 1.6;
+
+                const capW = 292;
+                const caption = (lines) => {
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = 'rgba(246,242,234,0.92)';
+                    ctx.strokeStyle = 'rgba(94,69,118,0.5)';
+                    ctx.lineWidth = 1;
+                    this.roundRect(ctx, 16, 462, capW + 10, 15 + lines.length * 14, 5);
+                    ctx.fill(); ctx.stroke();
+                    ctx.fillStyle = INK_SOFT;
+                    ctx.font = '400 10.5px Poppins, sans-serif';
+                    ctx.textAlign = 'left';
+                    lines.forEach((ln, i) => ctx.fillText(ln, 24, 478 + i * 14));
+                };
+
+                if (b === 'fluga') {
+                    ctx.beginPath(); ctx.arc(fx, fy, 26, 0, Math.PI * 2); ctx.stroke();
+                    ctx.setLineDash([]);
+                    const sc = 34 / mg;   // px per N — flugans krafter har egen skala
+                    this.arrow(ctx, fx - 8, fy + 8, fy + 8 + mg * sc, COL_ACCENT, 2.6);
+                    if (this.Tcmd > 0.02 * mg) {
+                        const T = Math.min(this.Tcmd, 4 * mg * (this.cfg.rho / RHO0));
+                        this.arrow(ctx, fx + 8, fy - 8, fy - 8 - T * sc, COL_BLUE, 2.6);
+                        ctx.fillStyle = COL_BLUE;
+                        ctx.font = 'italic 12px Poppins, sans-serif';
+                        ctx.textAlign = 'left';
+                        ctx.fillText('T', fx + 15, fy - 14 - T * sc);
+                    }
+                    if (this.Fc > 0.05 * mg) {
+                        this.arrow(ctx, fx + 8, fy + 6, fy + 6 - this.Fc * sc, COL_TEAL, 2.6);
+                    }
+                    ctx.fillStyle = COL_ACCENT;
+                    ctx.font = 'italic 12px Poppins, sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('F', fx - 24, fy + 20 + mg * sc);
+                    ctx.font = '9px Poppins, sans-serif';
+                    ctx.fillText('G', fx - 17, fy + 23 + mg * sc);
+                    caption([
+                        'Systemgräns: bara flugan. Tyngden m·g nedåt och',
+                        'lyftkraften T från luften uppåt. Vid hovring är T = m·g',
+                        '— luften bär flugan, och flugan trycker ner luften.',
+                    ]);
+                } else if (b === 'luft') {
+                    ctx.strokeRect(g.innerL + 2, g.rimY + 2, g.innerR - g.innerL - 4, g.botY - g.rimY - 4);
+                    ctx.setLineDash([]);
+                    const sc = 34 / mg;
+                    if (this.Tcmd > 0.02 * mg) {
+                        const T = Math.min(this.Tcmd, 4 * mg * (this.cfg.rho / RHO0));
+                        this.arrow(ctx, fx, fy + 10, fy + 10 + T * sc, COL_BLUE, 2.6);
+                    }
+                    const Fb = this.pAir / this.tau;
+                    if (Fb > 0.03 * mg) {
+                        this.arrow(ctx, CX + 34, g.botY - 8 - Math.min(Fb, 2 * mg) * sc, g.botY - 8, COL_TEAL, 2.6);
+                    }
+                    caption([
+                        'Systemgräns: luften i bägaren. Flugan trycker ner luften',
+                        'med T (blå), och luften trycker mot botten och väggarna',
+                        'med rörelsemängdsflödet p/τ (turkos). Stationärt är de lika.',
+                    ]);
+                } else if (b === 'hela') {
+                    ctx.strokeRect(324, Math.min(g.rimY, fy - 30) - 24, 330, BENCH_Y - 8 - (Math.min(g.rimY, fy - 30) - 24));
+                    ctx.setLineDash([]);
+                    // tyngd och normalkraft är (nästan exakt) lika stora — rita lika långa
+                    const L = 62;
+                    this.arrow(ctx, CX - 40, (g.rimY + g.botY) / 2, (g.rimY + g.botY) / 2 + L, COL_ACCENT, 3.2);
+                    this.arrow(ctx, CX + 168, BENCH_Y - 10, BENCH_Y - 10 - L, COL_TEAL, 3.2);
+                    ctx.fillStyle = COL_TEAL;
+                    ctx.font = 'italic 13px Poppins, sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('N', CX + 176, BENCH_Y - 16 - L);
+                    ctx.fillStyle = COL_ACCENT;
+                    ctx.fillText('M', CX - 76, (g.rimY + g.botY) / 2 + L + 14);
+                    ctx.font = '11px Poppins, sans-serif';
+                    ctx.fillText('·g', CX - 63, (g.rimY + g.botY) / 2 + L + 14);
+                    caption([
+                        'Systemgräns: hela systemet — bägare, luft och fluga.',
+                        'Bara två yttre krafter: tyngden M·g och normalkraften N',
+                        'från vågen. Så länge ingen rörelsemängd ändras där inne',
+                        'är N = M·g, oavsett vad flugan har för sig.',
+                    ]);
+                }
+                ctx.setLineDash([]);
+            }
+
+            // ── Pekare: vågens knappar + dra flugan i höjdled ──
+            scaleButtonAt(e) {
+                const p = this.pointerToLogical(e);
+                if (!p) return null;
+                for (const b of [BTN_NOLL, BTN_ONOFF]) {
+                    if (p.x >= b.x - 2 && p.x <= b.x + b.w + 2 &&
+                        p.y >= b.y - 2 && p.y <= b.y + b.h + 2) return b.id;
+                }
+                return null;
+            }
+
+            pressButton(id) { this.btnFlash = { id, until: performance.now() + 160 }; }
+
+            hoverCursor(e) {
+                const p = this.pointerToLogical(e);
+                if (!p) return;
+                let cur = '';
+                if (this.scaleButtonAt(e)) cur = 'pointer';
+                else {
+                    const fx = CX + this.wander * PX;
+                    const fy = BOT_Y - this.z * PX - 4;
+                    if (Math.hypot(p.x - fx, p.y - fy) < 34) cur = 'grab';
+                }
+                this.canvas.style.cursor = cur;
+            }
+
+            pointerToLogical(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const v = this._view;
+                if (!v) return null;
+                const cx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
+                const cy = (e.clientY - rect.top) * (this.canvas.height / rect.height);
+                return { x: (cx - v.ox) / v.S, y: (cy - v.oy) / v.S };
+            }
+
+            tryGrab(e) {
+                const p = this.pointerToLogical(e);
+                if (!p) return false;
+                const fx = CX + this.wander * PX;
+                const fy = BOT_Y - this.z * PX - 4;
+                if (Math.hypot(p.x - fx, p.y - fy) < 34) {
+                    this.dragTarget = this.z;
+                    return true;
+                }
+                return false;
+            }
+
+            dragTo(e) {
+                const p = this.pointerToLogical(e);
+                if (!p || this.dragTarget === null) return;
+                const zMaxDrag = this.cfg.lid ? this.H - 0.012 : this.H + 0.03;
+                this.dragTarget = clamp((BOT_Y - p.y) / PX, 0.002, zMaxDrag);
+            }
+
+            release() {
+                // stanna kvar och hovra på släppt höjd (om flugan flyger)
+                if (this.dragTarget !== null && this.dragTarget > 0.008) {
+                    this.cfg.hoverH = clamp(this.dragTarget, 0.01, this.H + 0.02);
+                }
+                this.dragTarget = null;
+            }
+        }
+
+        // ── Toppnivå-komponenter ──────────────────────────────────
+        const MiniSlider = ({ label, value, min, max, step = 1, unit, onChange, decimals = 1, fmt }) => (
+            <div>
+                <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>{label}</span>
+                    <span className="font-mono text-sm font-semibold" style={{ color: 'var(--lab-accent, #c8324a)' }}>
+                        {fmt ? fmt(value) : (formatNum(value, decimals) + (unit ? ' ' : ''))}{fmt ? '' : <span className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>{unit}</span>}
+                    </span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                    onChange={(e) => onChange(parseFloat(e.target.value))}
+                    className="w-full rounded appearance-none cursor-pointer transition-all" />
+            </div>
+        );
+
+        const selectStyle = {
+            width: '100%', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))',
+            background: 'var(--lab-bg-panel, #ffffff)', color: 'var(--lab-ink, #0f1620)',
+            borderRadius: 6, padding: '6px 8px', fontSize: 13.5, cursor: 'pointer',
+        };
+
+        // ── Huvudapp ──────────────────────────────────────────────
+        const App = () => {
+            const [mode, setMode] = useState('utforska');           // 'utforska' | 'gissa'
+            const [scenarioId, setScenarioId] = useState('hovrar');
+            const [massMg, setMassMg] = useState(12);
+            const [rho, setRho] = useState(RHO0);
+            const [hoverH, setHoverH] = useState(0.06);
+            const [beakerH, setBeakerH] = useState(0.12);
+            const [lid, setLid] = useState(false);
+            const [scaleType, setScaleType] = useState('lab');
+            const [speedIdx, setSpeedIdx] = useState(0);
+            const [showAir, setShowAir] = useState(true);
+            const [sound, setSound] = useState(true);
+            const [showPressure, setShowPressure] = useState(true);
+            const [boundary, setBoundary] = useState('ingen');
+            const [paused, setPaused] = useState(false);
+            const [readout, setReadout] = useState(null);
+            const [gissa, setGissa] = useState({ ch: null, phase: 'gissa', guess: null, streak: 0, right: 0, total: 0 });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [fsPanelOpen, setFsPanelOpen] = useState(true);
+
+            const sceneWrapRef = useRef(null);
+            const canvasRef = useRef(null);
+            const simRef = useRef(null);
+            const tareRef = useRef(0);
+
+            // Skapa simulatorn en gång
+            useEffect(() => {
+                const sim = new FlySim(canvasRef.current);
+                simRef.current = sim;
+                window.__flySim = sim;   // för fysiktesterna (.claude/test-fluga-fysik.js)
+                sim.onReadout = (r) => setReadout(r);
+                // Ljudet får bara starta efter en användargest (autoplay-
+                // policyn) — lås upp vid FÖRSTA interaktionen var som helst
+                // på sidan, inte bara i scenen. pointerup/keydown räknas som
+                // gest i alla webbläsare (pointerdown gör det inte vid touch).
+                const unlock = () => sim.resumeAudio();
+                document.addEventListener('pointerdown', unlock, { passive: true });
+                document.addEventListener('pointerup', unlock, { passive: true });
+                document.addEventListener('keydown', unlock);
+                return () => {
+                    document.removeEventListener('pointerdown', unlock);
+                    document.removeEventListener('pointerup', unlock);
+                    document.removeEventListener('keydown', unlock);
+                    sim.dispose();
+                };
+            }, []);
+
+            // Spegla UI-läget in i simulatorn
+            useEffect(() => {
+                const sim = simRef.current;
+                if (!sim) return;
+                Object.assign(sim.cfg, {
+                    massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx,
+                    showAir, showPressure, boundary, paused, sound,
+                });
+            }, [massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx, showAir, showPressure, boundary, paused, sound]);
+
+            // Starta ett förlopp (med ev. förloppsspecifika förutsättningar)
+            const runScenario = useCallback((id) => {
+                const sim = simRef.current;
+                if (!sim) return;
+                setScenarioId(id);
+                sim.resumeAudio();
+                if (id === 'vakuum') { setRho(0); setLid(true); }
+                else if (id === 'mynning') { setLid(false); if (rho < 0.3) setRho(RHO0); }
+                else if (rho < 0.3) setRho(RHO0);
+                // cfg uppdateras av effekten ovan först nästa render — sätt direkt också
+                if (id === 'vakuum') { sim.cfg.rho = 0; sim.cfg.lid = true; }
+                else if (id === 'mynning') { sim.cfg.lid = false; if (sim.cfg.rho < 0.3) sim.cfg.rho = RHO0; }
+                else if (sim.cfg.rho < 0.3) sim.cfg.rho = RHO0;
+                sim.startScenario(id);
+                setPaused(false);
+                sim.cfg.paused = false;
+            }, [rho]);
+
+            // Gissa-läget: se till att det finns en utmaning
+            useEffect(() => {
+                if (mode === 'gissa' && !gissa.ch) {
+                    const id = GUESS_POOL[Math.floor(Math.random() * GUESS_POOL.length)];
+                    setGissa(g => ({ ...g, ch: id, phase: 'gissa', guess: null }));
+                    // ställ scenen: flugan sitter still tills eleven gissat
+                    const sim = simRef.current;
+                    if (sim) { sim.startScenario('sitter'); setScenarioId('sitter'); }
+                }
+            }, [mode, gissa.ch]);
+
+            const nextChallenge = () => {
+                let id = GUESS_POOL[Math.floor(Math.random() * GUESS_POOL.length)];
+                if (id === gissa.ch && GUESS_POOL.length > 1) {
+                    id = GUESS_POOL[(GUESS_POOL.indexOf(id) + 1) % GUESS_POOL.length];
+                }
+                setGissa(g => ({ ...g, ch: id, phase: 'gissa', guess: null }));
+                const sim = simRef.current;
+                if (sim) { sim.startScenario('sitter'); setScenarioId('sitter'); }
+            };
+
+            const answer = (guess) => {
+                if (gissa.phase !== 'gissa' || !gissa.ch) return;
+                setGissa(g => ({ ...g, phase: 'kor', guess }));
+                runScenario(gissa.ch);
+            };
+
+            // När förloppet nått sin karakteristiska fas → visa facit
+            useEffect(() => {
+                if (mode !== 'gissa' || gissa.phase !== 'kor' || !readout) return;
+                if (readout.scenarioId === gissa.ch && readout.facitReady) {
+                    const sc = SCENARIOS.find(s => s.id === gissa.ch);
+                    const ok = gissa.guess === sc.svar;
+                    setGissa(g => ({
+                        ...g, phase: 'svar',
+                        total: g.total + 1,
+                        right: g.right + (ok ? 1 : 0),
+                        streak: ok ? g.streak + 1 : 0,
+                    }));
+                }
+            }, [readout, mode, gissa.phase, gissa.ch, gissa.guess]);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Dra flugan ──
+            const dragging = useRef(false);
+            const onPointerDown = (e) => {
+                const sim = simRef.current;
+                if (!sim) return;
+                sim.resumeAudio();
+                const btn = sim.scaleButtonAt(e);
+                if (btn === 'noll') { sim.pressButton('noll'); sim.tare(); return; }
+                if (btn === 'onoff') { sim.pressButton('onoff'); sim.scaleOn = !sim.scaleOn; return; }
+                if (sim.tryGrab(e)) {
+                    dragging.current = true;
+                    e.target.setPointerCapture(e.pointerId);
+                }
+            };
+            const onPointerMove = (e) => {
+                const sim = simRef.current;
+                if (!sim) return;
+                if (dragging.current) { sim.dragTo(e); return; }
+                sim.hoverCursor(e);
+            };
+            const onPointerUp = () => {
+                if (!dragging.current) return;
+                dragging.current = false;
+                simRef.current?.release();
+            };
+
+            const sim = simRef.current;
+            const mg_uN = massMg * G_ACC;   // flugans tyngd i µN (1 mg ↔ 9,82 µN)
+            const speed = SPEEDS[speedIdx];
+            const currentScenario = SCENARIOS.find(s => s.id === scenarioId);
+
+            // ── Reglage-JSX (sidopanel + fullskärm) ──
+            const sliders = (tag) => (
+                <div className="p-4 glass-card flex flex-col gap-3" style={{ borderRadius: '6px' }}>
+                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Reglage</div>
+                    <MiniSlider label="Uppspelning" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1}
+                        onChange={setSpeedIdx}
+                        fmt={(v) => SPEEDS[v] === 1 ? 'realtid' : '1/' + formatNum(1 / SPEEDS[v], 0) + '×'} />
+                    <MiniSlider label={<span>Flugans massa <em>m</em></span>} value={massMg} min={5} max={30} step={1} unit="mg"
+                        onChange={setMassMg} decimals={0} />
+                    <MiniSlider label={<span>Lufttäthet <em>ρ</em></span>} value={rho} min={0} max={1.3} step={0.01} unit="kg/m³"
+                        onChange={setRho} decimals={2} />
+                    <MiniSlider label="Hovringshöjd" value={hoverH * 100} min={1} max={beakerH * 100 - 1} step={0.5} unit="cm"
+                        onChange={(v) => setHoverH(v / 100)} decimals={1} />
+                    <MiniSlider label="Bägarens höjd" value={beakerH * 100} min={8} max={16} step={0.5} unit="cm"
+                        onChange={(v) => { setBeakerH(v / 100); if (hoverH > v / 100 - 0.01) setHoverH(v / 100 - 0.02); }} decimals={1} />
+                    <div>
+                        <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Systemgräns (frilagd kropp)</div>
+                        <select value={boundary} onChange={(e) => setBoundary(e.target.value)} style={selectStyle}>
+                            <option value="ingen">Ingen</option>
+                            <option value="fluga">Bara flugan</option>
+                            <option value="luft">Bara luften i bägaren</option>
+                            <option value="hela">Hela systemet (bägare + luft + fluga)</option>
+                        </select>
+                    </div>
+                </div>
+            );
+
+            const scenarioButtons = (tag) => (
+                <div className="p-4 glass-card flex flex-col gap-2" style={{ borderRadius: '6px' }}>
+                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Förlopp</div>
+                    {SCENARIOS.map(sc => (
+                        <button key={sc.id + tag} type="button"
+                            className={'preset-btn' + (scenarioId === sc.id ? ' p-active' : '')}
+                            onClick={() => runScenario(sc.id)}>
+                            <span className="p-title">{sc.name}</span>
+                            <span className="p-desc">{sc.desc}</span>
+                        </button>
+                    ))}
+                    {currentScenario && mode === 'utforska' && (
+                        <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-soft, #3a4151)', lineHeight: 1.55 }}>
+                            {currentScenario.explain}
+                        </div>
+                    )}
+                </div>
+            );
+
+            const gissaSc = gissa.ch ? SCENARIOS.find(s => s.id === gissa.ch) : null;
+            const gissaOk = gissaSc && gissa.guess === gissaSc.svar;
+            const gissaCard = (
+                <div className="p-4 glass-card flex flex-col gap-3" style={{ borderRadius: '6px' }}>
+                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Förutsäg</div>
+                    {gissaSc && (
+                        <React.Fragment>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                                <strong>{gissaSc.name}.</strong> {gissaSc.desc}
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                Vad visar vågen under förloppet, jämfört med när flugan
+                                sitter stilla på botten?
+                            </div>
+                            {gissa.phase === 'gissa' && (
+                                <div className="flex gap-2">
+                                    {['Ökar', 'Oförändrat', 'Minskar'].map(g => (
+                                        <button key={g} type="button" className="guess-btn" onClick={() => answer(g)}>{g}</button>
+                                    ))}
+                                </div>
+                            )}
+                            {gissa.phase === 'kor' && (
+                                <div className="text-sm font-semibold" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                    Du gissade "{gissa.guess}" — titta på grafen …
+                                </div>
+                            )}
+                            {gissa.phase === 'svar' && (
+                                <React.Fragment>
+                                    <div className="text-sm font-semibold" style={{ color: gissaOk ? '#2d6a3e' : 'var(--lab-accent, #c8324a)' }}>
+                                        {gissaOk ? 'Rätt! Utslaget ' + gissaSc.svar.toLowerCase() + (gissaSc.svar === 'Oförändrat' ? ' — det är oförändrat.' : '.')
+                                            : 'Inte riktigt — rätt svar är "' + gissaSc.svar + '".'}
+                                    </div>
+                                    <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)', lineHeight: 1.55 }}>
+                                        {gissaSc.explain}
+                                    </div>
+                                    <button type="button" className="guess-btn" onClick={nextChallenge}>Nästa förlopp</button>
+                                </React.Fragment>
+                            )}
+                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                                Rätt: {gissa.right} av {gissa.total}{gissa.streak >= 2 ? ' — svit: ' + gissa.streak : ''}
+                            </div>
+                        </React.Fragment>
+                    )}
+                </div>
+            );
+
+            const fmtuN = (v) => (Math.abs(v) < 0.05 ? '0' : fmtSmart(v, 1)) + ' µN';
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-8 pt-4 font-sans" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto">
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Flugan i bägaren
+                        </div>
+                    </div>
+
+                    <header className="max-w-6xl mx-auto mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight glow-text">
+                                Flugan i bägaren
+                            </h1>
+                            {/* Formelkort: N = M·g + Δp/Δt med ord-etiketter, allt på en mittlinje */}
+                            <div className="mt-3 flex items-center gap-3 flex-wrap" style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink, #0f1620)' }}>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs font-semibold" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Vågens kraft</span>
+                                    <span className="text-2xl font-bold"><em>N</em></span>
+                                    <span className="text-xs font-semibold" aria-hidden="true" style={{ visibility: 'hidden' }}>Vågens kraft</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs" aria-hidden="true" style={{ visibility: 'hidden' }}>=</span>
+                                    <span className="text-xl">=</span>
+                                    <span className="text-xs" aria-hidden="true" style={{ visibility: 'hidden' }}>=</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs font-semibold" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Systemets tyngd</span>
+                                    <span className="text-2xl font-bold"><em>M</em> · <em>g</em></span>
+                                    <span className="text-xs font-semibold" aria-hidden="true" style={{ visibility: 'hidden' }}>Systemets tyngd</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs" aria-hidden="true" style={{ visibility: 'hidden' }}>+</span>
+                                    <span className="text-xl">+</span>
+                                    <span className="text-xs" aria-hidden="true" style={{ visibility: 'hidden' }}>+</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs font-semibold" style={{ color: 'var(--lab-ink-muted, #8a8579)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Rörelsemängdsändring per tid</span>
+                                    <span className="text-xl font-bold leading-none flex flex-col items-center">
+                                        <span style={{ padding: '0 6px' }}>Δ<em>p</em></span>
+                                        <span style={{ borderTop: '2px solid currentColor', padding: '0 6px' }}>Δ<em>t</em></span>
+                                    </span>
+                                    <span className="text-xs font-semibold" aria-hidden="true" style={{ visibility: 'hidden' }}>Rörelsemängdsändring per tid</span>
+                                </div>
+                            </div>
+                            <p className="mt-2" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                En bägare står på en känslig våg, och en fluga sitter på botten. Vad händer med
+                                utslaget när flugan lyfter? Vågen i simuleringen räknar aldrig med facit — den känner
+                                bara kontaktkrafter och luftens tryck mot glaset. Kör förloppen, sakta ner till
+                                ultrarapid och se hur flugans tyngd tar vägen genom luften ner i bägaren.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col items-start md:items-end gap-2 flex-shrink-0">
+                            {/* Växla mellan avsnittets två simuleringar */}
+                            <div>
+                                <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
+                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                    <a href="fysik1-newtons-tredje-app.html"
+                                        className="tab-button px-4 py-2 rounded text-sm font-semibold border"
+                                        style={{ textDecoration: 'none' }}>
+                                        Brandsläckaren i rymden
+                                    </a>
+                                    <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
+                                        Flugan i bägaren
+                                    </span>
+                                </div>
+                            </div>
+                            {/* Läge inom denna simulering */}
+                            <div>
+                                <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Läge</div>
+                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                    <button onClick={() => setMode('utforska')}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'utforska' ? 'tab-active' : ''}`}>
+                                        Utforska
+                                    </button>
+                                    <button onClick={() => { setMode('gissa'); setGissa(g => ({ ...g, ch: null })); }}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'gissa' ? 'tab-active' : ''}`}>
+                                        Förutsäg
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
+                        {/* Scen */}
+                        <div className="flex-grow lg:w-2/3 order-1">
+                            <div className="glass-card rounded-2xl overflow-hidden">
+                                <div className="scene-wrap relative" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <canvas ref={canvasRef} width={VB_W} height={VB_H}
+                                        role="img"
+                                        aria-label="En glasbägare står på en laboratorievåg. En fluga flyger inne i bägaren, luftens strömning visas som partiklar och vågens utslag ritas i en graf."
+                                        onPointerDown={onPointerDown} onPointerMove={onPointerMove}
+                                        onPointerUp={onPointerUp} onPointerCancel={onPointerUp} />
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+
+                                    {/* Visningsval + styrknappar — uppe till höger */}
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Visa</div>
+                                        <label>
+                                            <input type="checkbox" checked={showAir} onChange={(e) => setShowAir(e.target.checked)} />
+                                            <span>Luftströmning</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={showPressure} onChange={(e) => setShowPressure(e.target.checked)} />
+                                            <span>Tryck mot botten</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={sound}
+                                                onChange={(e) => { setSound(e.target.checked); if (e.target.checked) simRef.current?.resumeAudio(); }} />
+                                            <span>Ljud (surr)</span>
+                                        </label>
+                                        <div className="st-title mt">Bägare</div>
+                                        <label>
+                                            <input type="checkbox" checked={lid} onChange={(e) => setLid(e.target.checked)} />
+                                            <span>Lock på bägaren</span>
+                                        </label>
+                                        <div className="st-title mt">Våg</div>
+                                        <label>
+                                            <input type="radio" name="vagtyp" checked={scaleType === 'lab'} onChange={() => setScaleType('lab')} />
+                                            <span>Laboratorievåg (dämpad)</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="vagtyp" checked={scaleType === 'ideal'} onChange={() => setScaleType('ideal')} />
+                                            <span>Ideal kraftgivare</span>
+                                        </label>
+                                        <div className="st-actions">
+                                            <button type="button" className="st-btn" onClick={() => setPaused(p => !p)}>
+                                                {paused ? 'Starta' : 'Pausa'}
+                                            </button>
+                                            <button type="button" className="st-btn" onClick={() => runScenario(scenarioId)}>Börja om</button>
+                                        </div>
+                                        <div className="st-actions" style={{ marginTop: 4 }}>
+                                            <button type="button" className="st-btn" onClick={() => simRef.current && simRef.current.tare()}>Nollställ vågen</button>
+                                        </div>
+                                    </div>
+
+                                    {/* Fullskärm: hopfällbar panel i underkanten */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={'fs-controls' + (fsPanelOpen ? '' : ' collapsed')}>
+                                                <div className="fs-panel-title">{mode === 'gissa' ? 'Utmaning' : 'Förlopp och reglage'}</div>
+                                                {mode === 'gissa' ? gissaCard : (
+                                                    <React.Fragment>
+                                                        {scenarioButtons('fs')}
+                                                        {sliders('fs')}
+                                                    </React.Fragment>
+                                                )}
+                                            </div>
+                                            <button type="button" className="fs-toggle-handle"
+                                                onClick={() => setFsPanelOpen(o => !o)}>
+                                                {(fsPanelOpen ? 'Dölj ' : 'Visa ') + (mode === 'gissa' ? 'utmaningen' : 'reglage')}
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Förklaring under scenen */}
+                            <div className="mt-6 p-4 text-sm glass-card" style={{ borderRadius: '6px', color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                <div className="font-semibold mb-2" style={{ color: 'var(--lab-ink, #0f1620)' }}>Så hänger det ihop</div>
+                                <ul className="list-disc pl-5 flex flex-col gap-1">
+                                    <li><strong>"Flugan rör ju inte botten — då försvinner väl dess tyngd?"</strong> Nej.
+                                        Kraftöverföring kräver inte kontakt med benen: flugans vingar accelererar luft nedåt
+                                        (Newtons tredje lag — luften trycker upp flugan, flugan trycker ner luften), och i en
+                                        sluten bägare måste hela det rörelsemängdsflödet till slut tas upp av botten och
+                                        väggarna. Flugans tyngd går via luften i stället för via benen.</li>
+                                    <li>Vågen visar systemets tyngd <em>plus</em> den totala rörelsemängdsändringen där inne:
+                                        {' '}<em>N</em> = <em>M</em> · <em>g</em> + Δ<em>p</em>{' '}/{' '}Δ<em>t</em>. Hovrar flugan
+                                        stationärt ändras ingen rörelsemängd — utslaget är exakt oförändrat. Accelererar
+                                        flugan uppåt ökar utslaget med <em>m</em> · <em>a</em>; faller den fritt minskar det
+                                        med <em>m</em> · <em>g</em>.</li>
+                                    <li><strong>Öppen eller sluten bägare är hela skillnaden.</strong> Sitter flugan djupt ner
+                                        fångas nedsvepet in även utan lock. Hovrar den vid mynningen sprider sig luftstrålen ut
+                                        i rummet — rörelsemängden hamnar på bordet i stället, och vågen tappar flugans tyngd.
+                                        Infångningsfaktorn <em>f</em> i avläsningarna visar exakt hur stor andel som stannar kvar.</li>
+                                    <li>Trycket som bär flugan är löjligt litet — några hundradels pascal utspritt över botten.
+                                        Det är inte trycket som "känns", utan rörelsemängdsräkningen som bär hela beviset.</li>
+                                    <li><strong>Energi och rörelsemängd är olika saker:</strong> flugan uträttar hela tiden
+                                        arbete mot luften och luften värms en aning — men det påverkar inte kraftbalansen.
+                                        Vågen mäter kraft, inte energi.</li>
+                                    <li>Jämför <strong>ideal kraftgivare</strong> med <strong>laboratorievågen</strong>: givaren ser
+                                        både vingslagens 200 Hz-rippel och de korta start- och landningsspikarna, medan den
+                                        dämpade vågen filtrerar bort alltihop. Det är därför man aldrig ser något hända i ett
+                                        verkligt klassrumsförsök.</li>
+                                </ul>
+                            </div>
+
+                            {/* Analogier */}
+                            <div className="mt-4 p-4 glass-card analogi" style={{ borderRadius: '6px' }}>
+                                <div className="font-semibold mb-2 text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>Samma fysik i andra kläder</div>
+                                <details>
+                                    <summary>Svävande magnet på en våg</summary>
+                                    <p>Låt en magnet sväva över en platta som står på vågen. Ingen kontakt — men vågen visar
+                                    ändå bådas tyngd. Kraften överförs genom magnetfältet precis som flugans tyngd överförs
+                                    genom luften.</p>
+                                </details>
+                                <details>
+                                    <summary>Fåglar i en sluten lastbil</summary>
+                                    <p>Den klassiska varianten: blir lastbilen lättare när alla fåglar i skåpet lyfter?
+                                    Nej — så länge fåglarna hovrar trycker deras vingslag ner luften, som trycker mot golvet.
+                                    Öppna flaket, så åker en del av nedsvepet ut och lastbilen blir faktiskt lite lättare.</p>
+                                </details>
+                                <details>
+                                    <summary>Helikopter i en silo</summary>
+                                    <p>Samma problem uppskalat: en helikopter som hovrar inne i en jättesilo på en våg ändrar
+                                    inte utslaget. Hovrar den precis ovanför den öppna siloöppningen går rotorvinden ut över
+                                    kanterna och utslaget sjunker. Öppet kontra slutet är hela skillnaden.</p>
+                                </details>
+                                <details>
+                                    <summary>Timglaset på vågen</summary>
+                                    <p>Nära släkting med motsatt intuition: ett rinnande timglas väger inte mindre — under den
+                                    stationära rinningen väger det till och med aningen <em>mer</em>, eftersom sandpelarens
+                                    masscentrum bromsas in mot högen där nere. Räkna gärna på det som fortsättningsfråga.</p>
+                                </details>
+                                <details>
+                                    <summary>Fisken i akvariet</summary>
+                                    <p>En fisk som simmar mitt i vattnet ändrar inte akvariets vikt. Där gör dessutom
+                                    Arkimedes princip jobbet: fisken väger lika mycket som vattnet den tränger undan, så
+                                    inte ens djupet spelar någon roll.</p>
+                                </details>
+                            </div>
+
+                            {/* Modellens begränsningar */}
+                            <div className="mt-4 p-4 text-sm glass-card" style={{ borderRadius: '6px', color: 'var(--lab-ink-soft, #3a4151)' }}>
+                                <div className="font-semibold mb-2" style={{ color: 'var(--lab-ink, #0f1620)' }}>Modellens begränsningar</div>
+                                <p style={{ lineHeight: 1.6 }}>
+                                    Det här är en fysikaliskt korrekt men förenklad modell — ingen strömningsberäkning (CFD).
+                                    Lyftkraften kommer ur aktuatorskiveteori (luft accelereras nedåt genom vingarnas svepta
+                                    yta), luftstrålens väg ner till botten beskrivs med en enda transporttid i stället för ett
+                                    verkligt hastighetsfält, infångningsfaktorn <em>f</em> är en fenomenologisk parameter, och
+                                    turbulens saknas helt. Det som däremot är exakt är själva rörelsemängdsbokföringen:
+                                    identiteten <em>N</em> − <em>M</em> · <em>g</em> = Δ<em>p</em>{' '}/{' '}Δ<em>t</em> uppfylls i
+                                    varje tidssteg, och det är den som bär slutsatserna. Att diskutera var en modell gäller —
+                                    och var den slutar gälla — är i sig fysik.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Sidopanel */}
+                        <div className="lg:w-1/3 flex-shrink-0 order-2 flex flex-col gap-4">
+                            {mode === 'gissa' ? gissaCard : scenarioButtons('panel')}
+                            {mode === 'utforska' && sliders('panel')}
+
+                            {/* Rörelsemängdsbokföring / avläsningar */}
+                            <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
+                                <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Bokföring</div>
+                                <table className="readout-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Vågen visar</td>
+                                            <td>{readout && readout.grams != null ? formatNum(readout.grams, 4) + ' g' : '—'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Flugans tyngd <em>m</em> · <em>g</em></td>
+                                            <td>{fmtuN(mg_uN)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kontaktkraft mot botten</td>
+                                            <td>{readout ? fmtuN(readout.FcuN) : '—'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Luftens kraft mot botten och väggar</td>
+                                            <td>{readout ? fmtuN(readout.airuN) : '—'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Läckage förbi mynningen</td>
+                                            <td>{readout ? fmtuN(readout.leakuN) : '—'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Infångningsfaktor <em>f</em></td>
+                                            <td>{readout ? formatNum(readout.f * 100, 0) + ' %' : '—'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Avvikelse <em>N</em> − <em>M</em> · <em>g</em></td>
+                                            <td style={{ fontWeight: 600, color: readout && Math.abs(readout.devuN) > 6 ? 'var(--lab-accent, #c8324a)' : '#2d6a3e' }}>
+                                                {readout ? fmtuN(readout.devuN) : '—'}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impulsöverskott sedan start</td>
+                                            <td>{readout ? fmtuN(readout.impulse) + '·s' : '—'}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted, #8a8579)', lineHeight: 1.5 }}>
+                                    Avvikelsen är alltid summan av flugans och luftens rörelsemängdsändring
+                                    plus läckaget — masscentrumsatsen, uppfylld i varje tidssteg. Impulsöverskottet
+                                    går mot noll över ett helt förlopp: ytorna över och under nollinjen tar ut varandra.
+                                    Dra gärna i flugan direkt i scenen för att flytta den i höjdled.
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

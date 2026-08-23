@@ -12,17 +12,39 @@ Format per post:
 
 ## Kö
 
-- **Jorden vrider rumtiden med sig — nu mätt till en femtedels procent**  **[BREVTEASER — teasad i brevet 2026-08-23, publiceras senast onsdag 2026-08-26]**
-  (STARK, men inte dagsfärsk). LARES-2 tillsammans med LAGEOS och GRACE ger
-  ramsläpningen (Lense–Thirring-effekten) med en osäkerhet kring 0,2 %, en
-  tiopotens bättre än tidigare bestämningar i solsystemet. Ungefär 200 000
-  laseravståndsmätningar under 1 050 dygn, juli 2022 till juni 2025.
-  Ciufolini m.fl., Nature 655, 332–335, publicerad online 2026-07-08,
-  DOI 10.1038/s41586-026-10715-0. Physics World lyfte den på nytt
-  2026-08-17. Perfekt gymnasievinkel: gravitation, satellitbanor,
-  ljusets gång tur och retur som linjal. Källa:
-  https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/
-  (tillagd 2026-08-18)
+- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
+  dipolväxelverkan**  **[BREVTEASER]** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
+  Chinese University of Hong Kong har gjort det första kondensatet av
+  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
+  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
+  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
+  självbunden kvantdroppe. Nature Physics (2026-07-09),
+  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
+  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
+  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
+  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
+  gammalt. Källa:
+  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
+  (tillagd 2026-08-03)
+
+- **Laserskuren aluminiumfolie ersätter dyra terahertzpolarisatorer** — en
+  billig folie med laserskurna springor gör samma jobb som en polarisator för
+  hundratusentals kronor. Fin ingång: polarisation, gitter, våglängdens
+  storlek jämfört med springorna. Källa (Phys.org 2026-08-21):
+  https://phys.org/news/2026-08-laser-aluminum-foil-terahertz-polarizers.html
+  (tillagd 2026-08-23)
+
+- **”Rainbow-on-a-chip” — hela spektrumet ur ett chip** — en frekvenskam på ett
+  chip, med tillämpningar i 6G och precisionstidmätning. Kolla att vinkeln
+  inte blir för teknisk innan den används. Källa (Phys.org 2026-08-21):
+  https://phys.org/news/2026-08-rainbow-chip-6g-networks-precision.html
+  (tillagd 2026-08-23)
+
+- **Intensivt ljus böjs av linser gjorda av gas** — ultrasnabba linser där
+  själva gasen bryter ljuset, för laserpulser som skulle förstöra vanligt
+  glas. Källa (Phys.org 2026-08-20):
+  https://phys.org/news/2026-08-intense-bent-ultrafast-lenses-gas.html
+  (tillagd 2026-08-23)
 
 - **Ett dolt elektroniskt tillstånd föds på 30 femtosekunder** — ljuspuls
   utlöser en fasövergång i ett material och forskarna hinner följa hur det nya
@@ -46,21 +68,6 @@ Format per post:
   för gymnasiet; hoppa hellre över än att skriva luddigt. Källa (Phys.org
   2026-08-21): https://phys.org/news/2026-08-dark-energy-quantum-gravity-deeply.html
   (tillagd 2026-08-22)
-
-- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
-  dipolväxelverkan** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
-  Chinese University of Hong Kong har gjort det första kondensatet av
-  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
-  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
-  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
-  självbunden kvantdroppe. Nature Physics (2026-07-09),
-  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
-  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
-  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
-  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
-  gammalt. Källa:
-  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
-  (tillagd 2026-08-03)
 
 ## Fynd som inte användes (2026-08-21) — kan tas upp senare
 

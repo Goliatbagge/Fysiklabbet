@@ -88,6 +88,56 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-23-rumtiden-vrids",
+    date: "2026-08-23",
+    title: "Jorden drar rumtiden runt med sig när den snurrar — nu är effekten uppmätt tio gånger noggrannare än förut",
+    deck: "Två metallklot i bana runt jorden, träffade av laserpulser från marken i tre år, har fångat en av de märkligaste förutsägelserna i Einsteins gravitationsteori: en roterande massa vrider själva rumtiden med sig. Osäkerheten är nere på promillenivå, och någon avvikelse från teorin syns inte.",
+    category: "Relativitetsteori",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-23-rumtiden-vrids.jpg",
+    imageAlt: "Ett smalt, knallgrönt laserstrålspår skär snett uppåt genom en stjärntät natthimmel där Vintergatans ljusband anas.",
+    imageCredit: "Foto: Meraj Chhaya / Wikimedia Commons (CC BY 2.0)",
+    tags: ["relativitetsteori", "gravitation", "rumtid", "ramsläpning", "satelliter", "einstein", "astronomi", "laser"],
+    sources: [
+      { name: "Physics World (17 augusti 2026)", url: "https://physicsworld.com/a/frame-dragging-measurement-around-the-earth-sets-new-precision-record/" },
+      { name: "Phys.org — Frame-dragging observations validate Einstein yet again", url: "https://phys.org/news/2026-07-validate-einstein.html" },
+      { name: "eoPortal — LARES-2 (Laser Relativity Satellite-2)", url: "https://www.eoportal.org/satellite-missions/lares-2" },
+      { name: "NASA/ILRS — LAGEOS-1", url: "https://ilrs.gsfc.nasa.gov/missions/satellite_missions/current_missions/lag1_general.html" }
+    ],
+    research: {
+      citation: "I. Ciufolini, A. Paolozzi, E. C. Pavlis, J. C. Ries med flera (bland dem R. Penrose), ”LARES-2 satellite measures frame-dragging effect around the Earth”, Nature 655, 332–335 (2026), publicerad online 8 juli 2026, DOI 10.1038/s41586-026-10715-0",
+      url: "https://doi.org/10.1038/s41586-026-10715-0"
+    },
+    body: [
+      { type: 'p', html: 'Snurra en sked i en burk honung, så följer honungen med runt. Enligt den allmänna relativitetsteorin gör en roterande himlakropp något liknande med rummet och tiden omkring sig: jorden släpar rumtiden en aning med sig varje gång den vrider sig kring sin axel. Fenomenet räknades ut redan 1918 av de två österrikiska fysikerna Josef Lense och Hans Thirring, och kallas ramsläpning.' },
+      { type: 'p', html: 'Att effekten finns har fysiker varit tämligen övertygade om i decennier. Att mäta <em>hur stor</em> den är har varit betydligt svårare. Nu har ett internationellt lag bestämt den kring jorden med en relativ osäkerhet på promillenivå &mdash; ungefär en tiopotens bättre än något tidigare mått någonstans i solsystemet. Resultatet publicerades i <em>Nature</em> i somras och lyftes på nytt i mitten av augusti.' },
+      { type: 'h2', text: 'Knappt två meter om året' },
+      { type: 'p', html: 'En satellit i bana runt jorden märker ramsläpningen som en långsam vridning av hela sitt banplan, i samma riktning som jorden roterar. För de två satelliter mätningen bygger på ligger vridningen på drygt 30&nbsp;millibågsekunder per år vardera &mdash; tillsammans 61,3. En millibågsekund är en tusendels bågsekund, och en bågsekund är 1/3600&nbsp;grad. Vinkeln motsvarar ungefär en enkrona &mdash; 19,5&nbsp;mm i diameter &mdash; betraktad från 66&nbsp;kilometers håll, och i den takten skulle banplanet behöva omkring 21&nbsp;miljoner år på sig för att hinna ett helt varv.' },
+      { type: 'p', html: 'Räknat i sträcka blir saken aningen mer gripbar, men bara aningen. Vid banradien drygt 12&nbsp;000&nbsp;km innebär 30&nbsp;millibågsekunder att banplanet glider knappt två meter i sidled under ett helt år. Det är den rörelsen som ska plockas fram &mdash; hos en satellit som samtidigt far fram i flera kilometer per sekund.' },
+      { type: 'h2', text: 'Golfbollar av metall' },
+      { type: 'p', html: 'Metoden kallas satellitlaseravståndsmätning. Ett teleskop på marken skickar en kort laserpuls mot satelliten, vars yta är täckt av hörnreflektorer: små prismor med den bekväma egenskapen att de kastar tillbaka ljuset exakt samma väg som det kom, oavsett från vilket håll det träffar. Cykelreflexen på bakskärmen bygger på precis samma knep. Ur tiden fram och åter faller avståndet ut, eftersom ljusets hastighet är känd.' },
+      { type: 'quote', html: 'Genom att mäta hur lång tid det tar för laserljuset att komma tillbaka kan vi bestämma satellitens läge mycket precist.', cite: 'Ignazio Ciufolini, som ledde arbetet, verksam vid Kinesiska vetenskapsakademins institut för fysik och matematik i Wuhan' },
+      { type: 'p', html: 'Laget samlade in ungefär 200&nbsp;000 sådana avståndsmätningar mellan juli 2022 och juni 2025 &mdash; drygt tusen dygn &mdash; med en noggrannhet kring en millimeter per mätning.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-23-rumtiden-vrids-2.jpg', alt: 'Ett metallklot mot svart bakgrund, tätt besatt med hundratals runda, facetterade glasprismor så att ytan liknar en golfboll.', caption: 'LAGEOS-1, uppskjuten 1976: ett massivt klot av mässing med aluminiumskal, 60&nbsp;cm i diameter och 411&nbsp;kg tungt, besatt med 426 hörnreflektorer. Satelliten bär ingen elektronik alls &mdash; den finns bara till för att kasta tillbaka laserljus.', credit: 'Foto: NASA / Wikimedia Commons (public domain)' },
+      { type: 'p', html: 'Den nyare satelliten i paret heter LARES-2 och sköts upp av italienska rymdorganisationen den 13&nbsp;juli 2022, på Vega-C-raketens jungfrufärd. Det är ett klot av nickellegeringen Inconel, 424&nbsp;mm i diameter och 295&nbsp;kg tungt, med 303 hörnreflektorer. Den orimliga tätheten är själva poängen: ju mer massa per ytenhet, desto mindre knuffas satelliten omkring av restatmosfär, solstrålningstryck och annat som stör en ren gravitationsmätning. Den är, kort sagt, byggd för att ligga så nära en fritt fallande punktmassa som ett verkligt föremål kan komma.' },
+      { type: 'h2', text: 'Tricket: två banor som tar ut varandra' },
+      { type: 'p', html: 'Här kommer problemet som gjort mätningen så svår. Jorden är inget klot utan tillplattad vid polerna, och den utbuktande ekvatorsvulsten får satellitbanor att vrida sig på precis samma sätt som ramsläpningen gör &mdash; fast flera miljoner gånger kraftigare. Den relativistiska signalen ligger alltså begravd under en newtonsk effekt som är enormt mycket större, och som dessutom inte är känd till sista decimalen.' },
+      { type: 'p', html: 'Lösningen är elegant. Den newtonska vridningen från jordens tillplattning är proportionell mot cosinus för banans lutning mot ekvatorn, medan ramsläpningen inte bryr sig om lutningen alls. Väljer man därför två satelliter på samma höjd med lutningar som tillsammans blir 180&nbsp;grader &mdash; LAGEOS ligger på 109,84° och LARES-2 på 70,16° &mdash; får de motsatt tecken på cosinus. Lägger man ihop de båda banplanens vridning tar den newtonska störningen ut sig själv, medan de två relativistiska bidragen adderas. Det är därför måttet redovisas som en summa, 61,3&nbsp;millibågsekunder per år, i stället för satellit för satellit.' },
+      { type: 'p', html: 'Kvar finns de störningar som inte låter sig avfärdas lika snyggt. Den besvärligaste visade sig vara tidvattnet: månens och solens dragning väcker en tidvattenkomponent som kallas K1, vars period ligger obehagligt nära satellitbanornas egen och därför härmar den sökta signalen. Att skilja de två åt beskriver Ciufolini som den svåraste delen av hela arbetet. Som bieffekt gav analysen bättre värden på just de tidvattenkomponenterna &mdash; ett relativitetsförsök som råkade förbättra geofysiken på vägen.' },
+      { type: 'h2', text: 'Vad resultatet stänger dörren för' },
+      { type: 'p', html: 'Det uppmätta värdet stämmer med Einsteins förutsägelse inom den snäva felmarginalen. Att bekräfta en hundra år gammal teori låter kanske odramatiskt, men det är skärpan som är nyheten. Tidigare bestämningar med LAGEOS-satelliterna landade på några procents osäkerhet, och rymdsonden Gravity Probe B &mdash; som mätte samma fenomen på ett helt annat sätt, genom hur axlarna på fyra ultraprecisa gyroskop vred sig &mdash; nådde omkring 19&nbsp;% när slutresultatet kom 2011.' },
+      { type: 'p', html: 'Skärpan har ett syfte bortom bokföringen. Flera föreslagna alternativ till Einsteins teori, framtagna bland annat för att förklara varför universums utvidgning accelererar, skiljer sig från den allmänna relativitetsteorin just i storleken på ramsläpningen. Så länge mätfelet låg på procentnivå fanns gott om plats för sådana modeller att gömma sig i. Med en promille krymper utrymmet rejält &mdash; författarna pekar särskilt ut de skalär-tensor-utvidgningar som går under namnet Chern&ndash;Simons-gravitation.' },
+      { type: 'p', html: 'Alla är inte helt övertygade om felmarginalen. Fysikern Lorenzo Iorio, som länge granskat den här sortens experiment, har invänt att de två banorna inte är riktigt så perfekt spegelvända som idealfallet kräver &mdash; höjder, lutningar och excentriciteter skiljer sig något &mdash; och att osäkerheten i jordens tillplattning därför kan läcka in i resultatet längs fler vägar än de som räknats. Diskussionen om exakt hur litet felet är lär pågå ett tag till. Att effekten finns och har rätt storleksordning är däremot inte omstritt.' },
+      { type: 'p', html: 'Runt jorden är ramsläpningen en kuriositet på ett par meter om året. Runt ett roterande svart hål är samma fenomen brutalt: där dras rumtiden med så hårt att ingenting kan stå stilla i förhållande till de avlägsna stjärnorna, hur kraftigt det än motar emot. Det är samma ekvationer och samma effekt &mdash; bara med en massa och en rotation som gör den omöjlig att missa. Att den nu går att mäta till promillen i vår egen bakgård gör att modellerna av det extrema fallet vilar på fastare mark.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Bland studiens fjorton författare finns Roger Penrose, som fick Nobelpriset i fysik 2020 för sitt arbete om svarta hål.',
+        'Hörnreflektorer används också på månen. Apollo-besättningarna och de sovjetiska Lunochod-farkosterna lämnade efter sig reflektorpaneler som fortfarande träffas av laser från jorden, och som visat att månen avlägsnar sig omkring 3,8&nbsp;cm om året.',
+        'LAGEOS-1 bär en plakett formgiven av Carl Sagan. Satelliten väntas falla ner först om många miljoner år, och plaketten visar kontinenternas läge då, nu och långt tillbaka i tiden &mdash; ett meddelande till den som råkar hitta den.',
+        'Ramsläpning kallas ibland gravitomagnetism, eftersom matematiken påminner om hur en elektrisk laddning i rörelse ger upphov till ett magnetfält. En roterande massa ger på motsvarande sätt ett gravitationellt bidrag som en vilande massa saknar.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-22-lilla-smallen",
     date: "2026-08-22",
     title: "Urmaterien från universums första ögonblick har återskapats i de minsta atomkärnor någon prövat — och den kom ut formad som en kägla",

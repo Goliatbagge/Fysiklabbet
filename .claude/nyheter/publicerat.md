@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-08-23 | `2026-08-23-rumtiden-vrids` | Jorden drar rumtiden runt med sig när den snurrar — nu är effekten uppmätt tio gånger noggrannare än förut | Physics World (2026-08-17) / Phys.org (juli 2026) / eoPortal (LARES-2) / NASA-ILRS (LAGEOS-1) / Nature 655, 332–335 (I. Ciufolini, A. Paolozzi, E. C. Pavlis, J. C. Ries m.fl., 14 författare inklusive R. Penrose, publicerad online 2026-07-08, DOI 10.1038/s41586-026-10715-0) / PubMed PMID 42420482 (hela abstractet läst i originalets egen formulering, eftersom Nature-sidan är betalspärrad) / Crossref (volym, sidor, författarlista) / arXiv:2503.07264 (Iorios invändning) |
 | 2026-08-22 | `2026-08-22-lilla-smallen` | Urmaterien från universums första ögonblick har återskapats i de minsta atomkärnor någon prövat — och den kom ut formad som en kägla | Københavns Universitet, Niels Bohr-institutet (pressmeddelande 2026-08-20) / Phys.org (2026-08-21, ALICE resp. CMS) / CERN Courier / Physical Review Letters 137, 082301 (ALICE-samarbetet, 2026-08-17, DOI 10.1103/gymp-vp87, preprint arXiv:2509.06428 CC BY 4.0, hela metoddelen läst) samt PRL 137 (CMS-samarbetet, DOI 10.1103/26wx-tg6f, arXiv:2510.02580) |
 | 2026-08-21 | `2026-08-21-infrarod-farg` | Ögat kan inte se värmestrålning — nu finns ett par glasögon som målar den i rött och cyan | Physics World (2026-08-20) / Tech Xplore (2026-08-03) / Popular Science / Science Advances 12 (31), eaed0245 (C. Fu, J. Zou, X. Yang, Q. Hao, X. Tang, G. Mu, publicerad online 2026-07-31, DOI 10.1126/sciadv.aed0245) / Crossref (volym, artikelnummer, författarlista, publiceringsdatum) |
 | 2026-08-20 | `2026-08-20-ljusslutaren` | Slutaren som står öppen en biljondels sekund — så plockas ljuset som inte gått vilse ut ur dimman | University of Rochester (pressmeddelande 2026-08-17) / Phys.org (2026-08-17) / Nature Communications 17, 5674 (Y. Xu, S. Choudhary, L. D. Nguyen, M. Klein, S. Vangala, J. K. Miller, E. G. Johnson, J. R. Hendrickson, M. Z. Alam, R. W. Boyd, publicerad online 2026-03-19, DOI 10.1038/s41467-026-71039-1) / arXiv:2503.21113 (CC BY 4.0, hela metoddelen och samtliga mätvärden lästa i HTML-versionen) / Light: Science & Applications 15, 327 (2026-07-21, DOI 10.1038/s41377-026-02375-6, uppföljaren med maskininlärning från UCLA) / Crossref (volym, artikelnummer, författarlista, publiceringsdatum) |
@@ -317,6 +318,47 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Journal 1006:77, DOI 10.3847/1538-4357/ae680d, publicerad 07-16 — stark
 > astropartikel-vinkel, ligger nu i ko.md), samt kvark-gluonplasma-simuleringen
 > ovan. Se ko.md.
+
+
+> **2026-08-23 — jorden vrider rumtiden med sig (LARES-2 och LAGEOS).**
+> Söndagens svep gav ingen dagsfärsk nyhet alls: nyaste posterna på Phys.org
+> och ScienceDaily var från 21 augusti, och toppen av listan var LHC:s
+> syre- och neonkollisioner — alltså exakt den nyhet som publicerades
+> 2026-08-22. Övriga färska uppslag (terahertzpolarisatorer av laserskuren
+> aluminiumfolie, ”rainbow-on-a-chip”, fraktoner i kvantspinnvätskor) var
+> antingen tunna eller ren teori.
+>
+> Därmed löstes teaser-skulden in. Nyhetsbrevet 2026-08-23 lovade
+> ramsläpningen ”senast onsdag 2026-08-26”, och regeln säger att teasern
+> ska publiceras tidigare om nyhetsdagen ändå är mager. Den var mager.
+>
+> Researchen: Nature-sidan är betalspärrad, men hela abstractet hämtades ur
+> PubMed (PMID 42420482), så formuleringen ”relative uncertainty at the
+> one-part-in-a-thousand level” är läst i originalets egen ordalydelse.
+> Detta spelade roll: flera referat skriver i stället 0,2 %, och artikeln
+> valde därför den försiktigare formuleringen ”promillenivå”. Crossref gav
+> volym 655, sidorna 332–335 och de 14 författarna — bland dem Roger
+> Penrose. Iorios invändning (arXiv:2503.07264) togs med för balans.
+>
+> Två omräkningar gjordes för att göra millibågsekunder gripbara: 61,3
+> mas/år motsvarar knappt två meter i sidled per år vid banradien, och
+> 21 miljoner år för ett helt varv. Utgivaren fällde första utkastet på
+> just en sådan omräkning — myntjämförelsen byggde omedvetet på den
+> indragna 25 mm-enkronan i stället för dagens 19,5 mm (84 km skulle vara
+> 66 km), och en likadan miss fanns i det nya begreppet ”bågsekund”
+> (tvåkronan på två km skulle vara knappt fem). Båda rättade före
+> publicering. **Lärdom: myntjämförelser måste räknas mot myntets faktiska
+> diameter, och den svenska enkronan bytte storlek 2016.**
+>
+> Bilder: BÅDA är riktiga foton, ingen AI. Huvudbilden visar en grön
+> laserstråle från en satellitlaserstation mot Vintergatan (HartRAO,
+> Sydafrika) — alltså precis den mätmetod artikeln handlar om. Bild två är
+> NASA:s klassiska foto av LAGEOS-1, den ena av de två satelliterna i
+> mätningen.
+>
+> Tre nya begrepp: ramsläpning, hörnreflektor, bågsekund.
+>
+> Bifynd som inte användes lades i ko.md.
 
 > **2026-08-07 — solvirvlarna (Kelvin–Helmholtz i fotosfären).** Uppslaget kom från
 > användaren, som klistrat in ett Omni-referat av BBC:s text plus DOI:n. Omni-texten

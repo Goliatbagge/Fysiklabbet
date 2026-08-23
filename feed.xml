@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 22 Aug 2026 07:51:06 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 01:33:36 GMT</lastBuildDate>
+    <item>
+      <title>Jorden drar rumtiden runt med sig när den snurrar — nu är effekten uppmätt tio gånger noggrannare än förut</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-23-rumtiden-vrids</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-23-rumtiden-vrids</guid>
+      <pubDate>Sun, 23 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Relativitetsteori</category>
+      <description>Två metallklot i bana runt jorden, träffade av laserpulser från marken i tre år, har fångat en av de märkligaste förutsägelserna i Einsteins gravitationsteori: en roterande massa vrider själva rumtiden med sig. Osäkerheten är nere på promillenivå, och någon avvikelse från teorin syns inte.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-23-rumtiden-vrids.jpg" length="374479" type="image/jpeg"/>
+    </item>
     <item>
       <title>Urmaterien från universums första ögonblick har återskapats i de minsta atomkärnor någon prövat — och den kom ut formad som en kägla</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-22-lilla-smallen</link>
@@ -177,15 +186,6 @@
       <category>Kärnfysik</category>
       <description>Ju trögare två atomkärnor möts, desto snabbare rasar chansen att de smälter samman. Så beter sig fria kärnor — men i folier av palladium och titan planar kurvan ut i stället för att dö. Utbytet blir över en triljon gånger, en etta med arton nollor, större än teorin för nakna kärnor förutsäger.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-04-fusion-i-metall.jpg" length="594900" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Fysiker skickar i väg nakna atomkärnor i 90 000 kilometer per sekund — och lyckas sedan bromsa dem till nästan stillastående</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-03-bromsade-atomkarnor</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-03-bromsade-atomkarnor</guid>
-      <pubDate>Mon, 03 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Atomfysik</category>
-      <description>Enda sättet att få bort alla arton elektroner från en argonatom är att skjuta i väg den i nästan en tredjedel av ljusets hastighet och köra den genom en folie. Men mätningarna man sedan vill göra kräver att kärnan står stilla. Nu har ett tyskt forskarlag klarat hela vägen tillbaka — och i fällan mött jonerna med ett moln av kalla elektroner.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-03-bromsade-atomkarnor.jpg" length="534905" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'ramslapning',
+    term: 'Ramsläpning',
+    former: ['ramsläpning', 'ramsläpningen', 'lense-thirring-effekten', 'lense-thirringeffekten', 'gravitomagnetism', 'gravitomagnetismen', 'gravitomagnetisk', 'gravitomagnetiska'],
+    kort: 'En roterande massa drar rumtiden runt omkring sig ett litet stycke med i rotationen, som en sked i honung. Effekten gör att banor och snurrande axlar i närheten långsamt vrids åt samma håll som massan roterar.',
+    relaterade: ['relativitetsteori'],
+    body: [
+      { type: 'p', html: 'I Einsteins allmänna relativitetsteori är gravitation inte en kraft utan geometri: massa kröker rummet och tiden omkring sig. Men det räcker inte att veta hur tung en kropp är. Det spelar också roll om den <em>snurrar</em>. En roterande massa river med sig rumtiden en aning i sin egen rotationsriktning, ungefär som en sked som dras runt i en burk honung får honungen närmast skeden att följa med. Det är detta som kallas ramsläpning.' },
+      { type: 'p', html: 'Namnet kommer av att det är själva referensramen — de riktningar man mäter mot — som släpas med. Ett gyroskop som hänger fritt i rymden ska enligt gammal fysik peka orubbligt mot samma avlägsna stjärna för alltid. Nära en roterande kropp gör det inte det: axeln vrids långsamt runt. Samma sak händer med en satellitbana, vars plan sakta vrids åt det håll planeten roterar. Kring jorden rör det sig om några hundradels bågsekunder per år, en så liten vinkel att det tog nästan hundra år från förutsägelsen 1918 till att den kunde mätas ordentligt.' },
+      { type: 'p', html: 'Effekten kallas ibland gravitomagnetism, eftersom matematiken påminner slående om elläran: en elektrisk laddning som står stilla ger bara ett elektriskt fält, men sätter man den i rörelse tillkommer ett magnetfält. På samma sätt ger en massa i vila bara den vanliga gravitationen, medan en massa i rotation ger ett extra bidrag som saknas i Newtons beskrivning. Kring ett roterande svart hål blir bidraget så starkt att det finns ett område närmast hålet där ingenting alls kan stå stilla i förhållande till fjärran stjärnor, hur kraftigt det än motar emot.' }
+    ]
+  },
+  {
+    id: 'hornreflektor',
+    term: 'Hörnreflektor',
+    former: ['hörnreflektor', 'hörnreflektorn', 'hörnreflektorer', 'hörnreflektorerna', 'retroreflektor', 'retroreflektorn', 'retroreflektorer', 'retroreflektorerna', 'kubhörn', 'kubhörnet'],
+    kort: 'Tre speglande ytor monterade som i ett kubhörn, vinkelrätt mot varandra. Ljus som träffar dem kastas tillbaka exakt samma väg som det kom, oavsett från vilket håll det kommer.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'En vanlig spegel kastar tillbaka ljuset så att infallsvinkeln blir lika stor som reflektionsvinkeln. Håller man den lite snett åker ljuset åt ett helt annat håll än det kom ifrån. En hörnreflektor löser det genom att sätta ihop tre speglande ytor vinkelrätt mot varandra, precis som de tre väggarna i ett kubhörn. En ljusstråle studsar då mot alla tre i tur och ordning, och det kan visas att strålen efter tredje studsen går tillbaka parallellt med den den kom in i — oavsett hur reflektorn är vriden.' },
+      { type: 'p', html: 'Just okänsligheten för vinkel är hela poängen. Cykelreflexen på bakskärmen och de reflekterande punkterna i vägmarkeringar är fulla av små hörnreflektorer i plast, och därför lyser de upp när billyktorna träffar dem, hur bilen än står. Samma sak gäller reflexvästen: den kastar tillbaka ljuset mot föraren i stället för att sprida det åt alla håll.' },
+      { type: 'p', html: 'Inom forskningen används de för att mäta avstånd med laser. Geodetiska satelliter är helt täckta av hörnreflektorer av glas, så att ett teleskop på marken kan skicka en kort laserpuls mot dem och få tillbaka ett eko. Ur tiden fram och åter beräknas avståndet, ofta med millimeternoggrannhet. Apollo-besättningarna och de sovjetiska Lunochod-farkosterna ställde upp likadana reflektorpaneler på månen, och de träffas fortfarande av laser från jorden — det är så man vet att månen avlägsnar sig omkring 3,8&nbsp;cm om året.' }
+    ]
+  },
+  {
+    id: 'bagsekund',
+    term: 'Bågsekund',
+    former: ['bågsekund', 'bågsekunden', 'bågsekunder', 'bågsekunderna', 'bågminut', 'bågminuten', 'bågminuter', 'millibågsekund', 'millibågsekunden', 'millibågsekunder', 'millibågsekunderna'],
+    kort: 'Ett vinkelmått för mycket små vinklar: en bågsekund är 1/3600 grad. Astronomer anger positioner och skenbara storlekar på himlen i bågminuter, bågsekunder och tusendels bågsekunder.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'Ett varv är 360 grader, och en grad räcker långt när man mäter hörn i en triangel. På himlen är den däremot grov: fullmånen är bara ungefär en halv grad bred. Därför delas graden vidare på samma sätt som en timme delas i minuter och sekunder. En grad rymmer 60 bågminuter, och varje bågminut rymmer 60 bågsekunder. En bågsekund är alltså 1/3600 grad. Orden båg- finns med för att skilja vinkelmåtten från tidsenheterna.' },
+      { type: 'p', html: 'Hur litet är det? En bågsekund är ungefär den vinkel ett tvåkronorsmynt upptar på knappt fem kilometers avstånd. Ett bra öga skiljer på sin höjd två punkter som ligger omkring 60 bågsekunder isär, och luftens oro gör att ett teleskop på marken sällan får skarpare bilder än en bågsekund utan särskilda knep. Rymdteleskop och radioteleskop som kopplas ihop över kontinenter kommer betydligt längre.' },
+      { type: 'p', html: 'När det blir riktigt smått används tusendelar: en millibågsekund är 1/1000 bågsekund, alltså en 3,6-miljondels grad. I den storleksordningen ligger stjärnornas parallax, alltså den lilla förskjutning i skenbart läge som uppstår när jorden hinner till andra sidan av sin bana — och det är också i millibågsekunder per år man mäter hur satellitbanor vrids av relativistiska effekter.' }
+    ]
+  },
+  {
     id: 'gravitationslinsning',
     term: 'Gravitationslinsning',
     former: ['gravitationslinsning', 'gravitationslinsningen', 'gravitationslins', 'gravitationslinsen', 'gravitationslinser', 'gravitationslinserna', 'gravitationslinseffekt', 'gravitationslinseffekten', 'svag gravitationslinsning', 'svaga gravitationslinsningen', 'stark gravitationslinsning', 'linsning', 'linsningen'],

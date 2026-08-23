@@ -108,6 +108,20 @@
         /* Formuläret är dolt efter anmälan — låt inte den reserverade
            höjden stå kvar som ett tomrum under kvittot. */
         '.nb-box.is-klar .nb-form { min-height: 0; }',
+        /* Reservtexten när EmailOctopus skript aldrig kom fram. Diskret —
+           den ska läsas som en upplysning, inte som ett larm. */
+        '.nb-box .nb-reserv {',
+        '    font-size: 14.5px; line-height: 1.55; color: var(--lab-ink-soft);',
+        '    max-width: 52ch; margin: 0 0 12px;',
+        '}',
+        '.nb-box .nb-reserv-knapp {',
+        '    height: 42px; padding: 0 22px; cursor: pointer;',
+        '    border: 1px solid var(--lab-line-strong); border-radius: 4px;',
+        '    background: var(--lab-bg); color: var(--lab-ink);',
+        '    font-family: var(--lab-font-mono); font-size: 12px;',
+        '    letter-spacing: 0.08em; text-transform: uppercase;',
+        '}',
+        '.nb-box .nb-reserv-knapp:hover { border-color: var(--lab-accent); color: var(--lab-accent); }',
         /* På smal skärm äter 34 px sidopadding upp textspalten. */
         '@media (max-width: 620px) {',
         '    .nb-box { margin: 32px 0 10px; padding: 24px 20px 20px; }',
@@ -215,10 +229,29 @@
     // ruta ta över.
     var aktiv = null;
 
-    function laddaFormular(hallare) {
+    /**
+     * Har formuläret faktiskt renderats i `el`? Ett fält att skriva i är det
+     * enda som räknas — det är det besökaren behöver. Skriptet kommer från en
+     * tredjepartsdomän (eomail5.com) och kan utebli: en annonsblockerare
+     * stoppar den sortens domän, och på mobilt nät räcker ett tapp i
+     * uppkopplingen. Då står rutan kvar med rubrik, ingress och ett tomt hål
+     * där e-postfältet skulle ha suttit (rapporterat från en telefon
+     * 2026-08-23). Anropare använder detta för att visa något annat i stället.
+     */
+    function harFalt(el) {
+        return !!(el && el.querySelector('input:not([type="hidden"])'));
+    }
+
+    // Så länge väntar vi på deras skript innan vi ger upp. Tilltaget:
+    // skriptet väger ~230 kB och ska hinna fram även på ett trögt mobilnät.
+    var VANTETID = 9000;
+
+    function laddaFormular(hallare, omIntet) {
         // Skriptet väger ~230 kB. Det hämtas därför först när rutan närmar sig
         // vyn, så att en besökare som aldrig skrollar dit slipper det helt.
         var laddad = false;
+        var io = null;
+        var vakt = null;
         var ladda = function () {
             if (laddad) return;
             laddad = true;
@@ -230,16 +263,31 @@
             s.src = 'https://eomail5.com/form/' + FORM_ID + '.js';
             s.setAttribute('data-form', FORM_ID);
             hallare.appendChild(s);   // skriptet ersätter sig själv med formuläret
+            // Vakten. Skriptets egna error-händelse räcker inte: en
+            // annonsblockerare kan lika gärna svara med ett tomt svar som med
+            // ett fel, och då laddas skriptet "utan problem" men ritar inget.
+            // Vi mäter därför utfallet — finns det ett fält att skriva i?
+            if (omIntet) {
+                vakt = window.setTimeout(function () {
+                    vakt = null;
+                    if (!harFalt(hallare)) omIntet();
+                }, VANTETID);
+            }
         };
 
-        if (!('IntersectionObserver' in window)) { ladda(); return function () {}; }
-        var io = new IntersectionObserver(function (poster) {
+        var stoppa = function () {
+            if (io) { io.disconnect(); io = null; }
+            if (vakt) { window.clearTimeout(vakt); vakt = null; }
+        };
+
+        if (!('IntersectionObserver' in window)) { ladda(); return stoppa; }
+        io = new IntersectionObserver(function (poster) {
             for (var i = 0; i < poster.length; i++) {
-                if (poster[i].isIntersecting) { ladda(); io.disconnect(); return; }
+                if (poster[i].isIntersecting) { ladda(); io.disconnect(); io = null; return; }
             }
         }, { rootMargin: '400px' });
         io.observe(hallare);
-        return function () { io.disconnect(); };
+        return stoppa;
     }
 
     /**
@@ -291,7 +339,29 @@
         box.appendChild(fin);
         el.appendChild(box);
 
-        var stoppaIO = laddaFormular(hallare);
+        // Kom formuläret aldrig fram säger vi det rakt ut och erbjuder ett
+        // omtag, i stället för att låta rutan stå med ett tomt hål i sig.
+        var stoppaIO = null;
+        var visaReserv = function () {
+            if (harFalt(hallare)) return;
+            hallare.textContent = '';
+            var text = document.createElement('p');
+            text.className = 'nb-reserv';
+            text.textContent = 'Anmälningsformuläret kunde inte laddas. Det stoppas '
+                + 'ibland av en annonsblockerare, och ett tapp i nätet räcker också.';
+            var knapp = document.createElement('button');
+            knapp.type = 'button';
+            knapp.className = 'nb-reserv-knapp';
+            knapp.textContent = 'Försök igen';
+            knapp.addEventListener('click', function () {
+                hallare.textContent = '';
+                if (stoppaIO) stoppaIO();
+                stoppaIO = laddaFormular(hallare, visaReserv);
+            });
+            hallare.appendChild(text);
+            hallare.appendChild(knapp);
+        };
+        stoppaIO = laddaFormular(hallare, visaReserv);
 
         // Deras kvittotext är hårdkodad på engelska; vi visar en egen.
         var onSuccess = function (e) {
@@ -315,7 +385,7 @@
         mo.observe(hallare, { childList: true, subtree: true, characterData: true });
 
         return function () {
-            stoppaIO();
+            if (stoppaIO) stoppaIO();
             mo.disconnect();
             document.removeEventListener('emailoctopus:form.success', onSuccess);
             if (aktiv === el) aktiv = null;
@@ -327,7 +397,9 @@
         for (var i = 0; i < noder.length; i++) mount(noder[i]);
     }
 
-    window.FYSIKNYHETSBREV = { mount: mount, mountAll: mountAll, FORM_ID: FORM_ID };
+    window.FYSIKNYHETSBREV = {
+        mount: mount, mountAll: mountAll, FORM_ID: FORM_ID, harFalt: harFalt,
+    };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () { mountAll(); });

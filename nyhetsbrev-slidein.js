@@ -43,8 +43,9 @@
  * ── NÄR RUTAN VISAS ────────────────────────────────────────────────────
  * Den ska aldrig upplevas som ett hinder. Därför gäller ALLA villkoren:
  *
- *   1. I lånläget finns sidans egen ruta att lyfta. Har den inte hunnit
- *      monteras väntar vi — vi bygger aldrig en andra.
+ *   1. I lånläget finns sidans egen ruta att lyfta, med sitt e-postfält på
+ *      plats. Har den inte hunnit monteras väntar vi — vi bygger aldrig
+ *      en andra.
  *   2. Besökaren har läst minst 45 % av sidan OCH varit kvar 30 sekunder.
  *   3. Sidan är alls värd att skrolla i (minst ~1,6 skärmhöjder).
  *   4. Rutan har inte visats förut: en stängd ruta vilar 60 dagar, och
@@ -53,6 +54,16 @@
  *      utm_source=nyhetsbrev) — då prenumererar hen redan, och vi
  *      minns det.
  *   6. Inget helskärmsläge eller presentationsläge är igång.
+ *   7. Rutan är KOMPLETT — den har ett ifyllbart e-postfält, och
+ *      vinjettbilden har hunnit fram. Både bilden och EmailOctopus skript
+ *      hämtas först i det ögonblick rutan öppnas, alltså långt efter
+ *      sidladdningen, och en annonsblockerare eller ett tapp i det mobila
+ *      nätet räcker för att fälla dem. Rutan byggs därför osynlig, väntar
+ *      på sitt innehåll, och glider upp först när det är på plats — blir
+ *      den aldrig komplett städas den bort utan ett ljud, och utan att
+ *      skriva i minnet, så att besökaren kan få den på nästa sida.
+ *      (Rapporterat från en telefon 2026-08-23: rutan visade rubrik och
+ *      ingress, men varken bild eller fält att skriva adressen i.)
  *
  * Rutan ligger centrerad över en dämpad skärm, alltså som en dialog: den
  * syns, till skillnad från en hörnruta som är lätt att missa. Priset är
@@ -72,6 +83,8 @@
     var SKROLL_ANDEL = 0.45;      // 45 % av sidan läst
     var TID_MS = 30000;           // och minst 30 sekunder på sidan
     var MIN_SIDHOJD = 1.6;        // sidan måste vara skrollbar på riktigt
+    var VANTETID = 9000;          // så länge väntar vi på ett ifyllbart fält
+    var BILD_FRIST = 6000;        // vinjettbilden får inte hålla upp rutan längre
 
     // Vinjettbilden. Sidorna som visar rutan ligger alla i roten.
     var BILD = 'media/nyhetsbrev-atom.webp';
@@ -154,6 +167,10 @@
         /* Rutan tar emot fokus när den öppnas (tabindex -1) och ska inte
            rita någon ram för det — den syns redan tydligt. */
         '.nbs-panel:focus { outline: none; }',
+        /* Medan rutan väntar på formuläret ligger den osynlig i dokumentet.
+           Utan pointer-events: none hade den ätit tryck mitt på skärmen —
+           en osynlig vägg framför sidan i upp till nio sekunder. */
+        '.nbs-panel.nbs-vantar { pointer-events: none; }',
 
         /* Lånläget: den lyfta .nb-box ÄR rutan. Den har redan vit botten,
            ram och accentlinje i överkant från nyhetsbrev.js — bara
@@ -226,6 +243,7 @@
 
     var panel = null;
     var skarm = null;
+    var vantar = false;      // rutan är byggd men väntar på sitt innehåll
     var lanad = null;        // den lyfta .nb-box, i lånläget
     var lanadPlats = null;   // platshållaren den lämnat efter sig
     var lanadText = null;    // rubrik och ingress att lämna tillbaka
@@ -329,8 +347,18 @@
         bild.alt = '';
         bild.width = 960;
         bild.height = 520;
-        // Går bilden inte att hämta ska rutan ändå se hel ut.
-        bild.addEventListener('error', function () { bild.remove(); });
+        // Går bilden inte att hämta ska rutan ändå se hel ut. Men ett tapp
+        // i nätet ska inte kosta vinjetten: ett omtag först, med en egen
+        // adress så att webbläsarens minne av det misslyckade svaret inte
+        // används om, och först därefter ger vi upp.
+        var forsok = 0;
+        bild.addEventListener('error', function () {
+            if (forsok++ === 0) {
+                window.setTimeout(function () { bild.src = BILD + '?omtag=1'; }, 900);
+                return;
+            }
+            bild.remove();
+        });
         return bild;
     }
 
@@ -408,50 +436,87 @@
         lanad = null; lanadPlats = null; lanadText = null;
     }
 
-    function visa() {
-        if (panel || !window.FYSIKNYHETSBREV) return;
-        injiceraCSS();
+    // Har rutan ett fält att skriva sin adress i? Formuläret kommer från
+    // eomail5.com och kan utebli — se harFalt() i nyhetsbrev.js.
+    function harFalt(el) {
+        if (window.FYSIKNYHETSBREV && window.FYSIKNYHETSBREV.harFalt) {
+            return window.FYSIKNYHETSBREV.harFalt(el);
+        }
+        return !!(el && el.querySelector('input:not([type="hidden"])'));
+    }
+
+    /* Väntar tills rutan är KOMPLETT innan den glider upp: ett ifyllbart
+       fält, och en vinjettbild som hunnit fram. Utan den väntan kan rutan
+       visa sig som rubrik + ingress + ett tomt hål, vilket är precis vad
+       som rapporterades från en telefon 2026-08-23 — bilden och
+       EmailOctopus-skriptet hämtas ju båda i samma ögonblick som rutan
+       öppnas, alltså långt efter att sidan laddats, och ett tapp i det
+       mobila nätet (eller en annonsblockerare) räcker för att fälla dem.
+       Bilden får en kortare frist än fältet: den är dekor, fältet är hela
+       poängen med rutan. */
+    function vantaPaInnehall(p, klar) {
+        var start = Date.now();
+        var t = window.setInterval(function () {
+            var gatt = Date.now() - start;
+            var bild = p.querySelector('.nbs-bild');
+            var bildKlar = !bild || bild.complete;   // borttagen bild = färdigt besked
+            if (harFalt(p) && (bildKlar || gatt > BILD_FRIST)) {
+                window.clearInterval(t); klar(true); return;
+            }
+            if (gatt > VANTETID) { window.clearInterval(t); klar(false); }
+        }, 200);
+    }
+
+    // Bygger den egna rutan (osynlig än så länge) och startar formuläret.
+    function byggPanel() {
+        var p = document.createElement('aside');
+        // nbs-vantar: rutan ligger i dokumentet med opacity 0 medan vi
+        // väntar, och får absolut inte fånga tryck som gäller sidan bakom.
+        p.className = 'nbs-panel nbs-vantar no-begrepp';
+        p.setAttribute('role', 'dialog');
+        p.setAttribute('aria-modal', 'true');
+        p.setAttribute('aria-label', 'Anmälan till nyhetsbrevet');
+        // Fokus flyttas till själva rutan, inte till kryssknappen: en
+        // programmatiskt fokuserad knapp ritar sin fokusring direkt, och
+        // det första ögat möter ska vara rubriken — inte en markerad knapp.
+        p.setAttribute('tabindex', '-1');
+
+        var kropp = document.createElement('div');
+        kropp.className = 'nbs-kropp';
+
+        p.appendChild(byggKnapp());
+        p.appendChild(byggBild());
+        p.appendChild(kropp);
+        document.body.appendChild(p);
+
+        // Formuläret byggs av nyhetsbrev.js — med samma fältstyling,
+        // samma svenska felmeddelanden och samma kvittotext som
+        // inline-rutan.
+        stadaFormular = window.FYSIKNYHETSBREV.mount(kropp, {
+            titel: TITEL, ingress: INGRESS,
+        });
+        var fin = kropp.querySelector('.nb-fine');
+        if (fin) fin.textContent = FINSTILT;
+        return p;
+    }
+
+    // Rutan blev aldrig komplett. Städa bort den utan ett ljud — och utan
+    // att skriva i minnet, så att besökaren kan få rutan på nästa sida.
+    function stadaBort(p) {
+        if (stadaFormular) { stadaFormular(); stadaFormular = null; }
+        if (p && p.parentNode) p.parentNode.removeChild(p);
+    }
+
+    // Öppnar en färdig ruta: skärmen bakom, tangentfångst, låst sida.
+    function oppna(p) {
+        panel = p;
+        panel.classList.remove('nbs-vantar');
         forraFokus = document.activeElement;
 
         skarm = document.createElement('div');
         skarm.className = 'nbs-skarm';
         skarm.addEventListener('click', function () { stang('stangd'); });
-
         document.body.appendChild(skarm);
-
-        var box = lanLage() ? document.querySelector('.nb-box') : null;
-        if (lanLage() && !box) { skarm.remove(); skarm = null; return; }
-
-        if (box) {
-            panel = lana(box);
-        } else {
-            panel = document.createElement('aside');
-            panel.className = 'nbs-panel no-begrepp';
-            panel.setAttribute('role', 'dialog');
-            panel.setAttribute('aria-modal', 'true');
-            panel.setAttribute('aria-label', 'Anmälan till nyhetsbrevet');
-            // Fokus flyttas till själva rutan, inte till kryssknappen: en
-            // programmatiskt fokuserad knapp ritar sin fokusring direkt, och
-            // det första ögat möter ska vara rubriken — inte en markerad knapp.
-            panel.setAttribute('tabindex', '-1');
-
-            var kropp = document.createElement('div');
-            kropp.className = 'nbs-kropp';
-
-            panel.appendChild(byggKnapp());
-            panel.appendChild(byggBild());
-            panel.appendChild(kropp);
-            document.body.appendChild(panel);
-
-            // Formuläret byggs av nyhetsbrev.js — med samma fältstyling,
-            // samma svenska felmeddelanden och samma kvittotext som
-            // inline-rutan.
-            stadaFormular = window.FYSIKNYHETSBREV.mount(kropp, {
-                titel: TITEL, ingress: INGRESS,
-            });
-            var fin = kropp.querySelector('.nb-fine');
-            if (fin) fin.textContent = FINSTILT;
-        }
 
         // Ett anmält formulär byter till kvittotexten. Låt den stå kvar
         // en stund, stäng sedan — och kom ihåg att aldrig visa rutan igen.
@@ -474,6 +539,31 @@
                 panel.focus();
 
             });
+        });
+    }
+
+    function visa(slappKrav) {
+        if (panel || vantar || !window.FYSIKNYHETSBREV) return;
+        injiceraCSS();
+
+        if (lanLage()) {
+            // Lånläget lyfter sidans egen ruta, och den har haft hela
+            // sidbesöket på sig att hämta sitt formulär. Saknas fältet ändå
+            // lyfter vi ingenting — en ruta utan fält att skriva i är värre
+            // än ingen ruta alls, och sidans egen ruta visar då sin
+            // reservtext på sin plats i flödet.
+            var box = document.querySelector('.nb-box');
+            if (!box || (!harFalt(box) && !slappKrav)) return;
+            oppna(lana(box));
+            return;
+        }
+
+        var p = byggPanel();
+        vantar = true;
+        vantaPaInnehall(p, function (komplett) {
+            vantar = false;
+            if (!komplett && !slappKrav) { stadaBort(p); return; }
+            oppna(p);
         });
     }
 
@@ -506,7 +596,10 @@
             var forsok = 0;
             var t = window.setInterval(function () {
                 if (!lanLage() || document.querySelector('.nb-box')) {
-                    window.clearInterval(t); visa(); return;
+                    // slappKrav: förhandsvisningen ska visa rutan även om
+                    // EmailOctopus inte svarar — den finns för att titta på
+                    // formen, inte för att prova anmälan.
+                    window.clearInterval(t); visa(true); return;
                 }
                 if (++forsok > 25) window.clearInterval(t);
             }, 300);
@@ -521,9 +614,11 @@
         var kolla = function () {
             if (panel) return;
             // I lånläget lyfter vi sidans egen ruta, och då måste den
-            // finnas. React-vyerna monterar sin i en effekt, så den kan
-            // dröja — vänta hellre än att bygga en andra som blir tom.
-            if (lanLage() && !document.querySelector('.nb-box')) return;
+            // finnas OCH ha fått sitt e-postfält. React-vyerna monterar sin
+            // i en effekt, och formuläret hämtas från eomail5.com — båda kan
+            // dröja. Vänta hellre än att lyfta en halvfärdig ruta; loopen
+            // fortsätter titta efter så länge sidbesöket varar.
+            if (lanLage() && !harFalt(document.querySelector('.nb-box'))) return;
             if (Date.now() - start_tid < TID_MS) return;
             if (nagotAnnatArIVagen()) return;
 

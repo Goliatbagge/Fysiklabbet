@@ -16,9 +16,29 @@
  *   <script src="nyhetsbrev-slidein.js" defer></script>
  *
  * Skriptet kopplar sig självt och beter sig rätt utan konfiguration.
- * Vill man stänga av den på en enskild sida:
+ * Två lägen finns, och de styrs av ett attribut på <body>:
  *
- *   <body data-nyhetsbrev-slidein="av">
+ *   (inget attribut)                      rutan bygger sitt eget formulär
+ *   <body data-nyhetsbrev-slidein="lana"> rutan LÅNAR sidans inline-ruta
+ *   <body data-nyhetsbrev-slidein="av">   rutan visas inte alls
+ *
+ * ── LÅNLÄGET ───────────────────────────────────────────────────────────
+ * Startsidan, nyhetssidan, simuleringslistan och om-sidan har redan en
+ * inline-ruta i sidfoten. EmailOctopus skript letar upp sitt formulär med
+ * document.querySelector och kontots plan rymmer bara ETT formulär, så vi
+ * kan inte bygga ett andra åt modalen där.
+ *
+ * Lösningen är att inte bygga något nytt: den befintliga .nb-box LYFTS på
+ * plats. Den får klassen .nbs-panel, alltså position: fixed och mitt på
+ * skärmen, och en vinjettbild plus en kryssknapp läggs in i den. När rutan
+ * stängs tas allt bort igen och boxen sjunker tillbaka i flödet.
+ *
+ * Det avgörande är att boxen ALDRIG flyttas i DOM:en. Formuläret rymmer en
+ * reCAPTCHA-iframe, och en iframe som tas ur trädet och sätts in igen
+ * laddas om — vilket hade kunnat slå sönder verifieringen mitt i en
+ * anmälan. Att bara ändra CSS och lägga till barn rör inte den saken.
+ * En platshållare med boxens höjd sätts in där den satt, så att sidan
+ * bakom inte hoppar när boxen lyfts.
  *
  * ── NÄR RUTAN VISAS ────────────────────────────────────────────────────
  * Den ska aldrig upplevas som ett hinder. Därför gäller ALLA villkoren:
@@ -121,7 +141,7 @@
            innehållet. Brickan är redan visibility: hidden, alltså aldrig tänkt
            att synas; att klippa den ändrar ingenting för besökaren. */
         '    max-height: min(92vh, 760px); overflow-y: auto; overflow-x: hidden;',
-        '    box-sizing: border-box; padding: 0;',
+        '    box-sizing: border-box;',
         '    background: var(--lab-bg-panel, #fff);',
         '    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));',
         '    border-top: 3px solid var(--lab-accent, #c8324a);',
@@ -136,6 +156,13 @@
         /* Rutan tar emot fokus när den öppnas (tabindex -1) och ska inte
            rita någon ram för det — den syns redan tydligt. */
         '.nbs-panel:focus { outline: none; }',
+
+        /* Lånläget: den lyfta .nb-box ÄR rutan. Den har redan vit botten,
+           ram och accentlinje i överkant från nyhetsbrev.js — bara
+           marginalen behöver bort, resten ärvs. */
+        '.nbs-panel.nb-box { margin: 0 !important; }',
+        /* Platshållaren håller kvar boxens höjd i flödet medan den är lyft. */
+        '.nbs-plats { flex: none; }',
 
         /* Bilden ligger i kant med rutan, som en vinjett över innehållet. */
         '.nbs-bild {',
@@ -201,6 +228,9 @@
 
     var panel = null;
     var skarm = null;
+    var lanad = null;        // den lyfta .nb-box, i lånläget
+    var lanadPlats = null;   // platshållaren den lämnat efter sig
+    var lanadText = null;    // rubrik och ingress att lämna tillbaka
     var stadaFormular = null;
     var forraFokus = null;
     var forraOverflow = '';
@@ -245,8 +275,12 @@
         el.classList.add('nbs-ut');
         if (sk) sk.classList.remove('nbs-in');
         window.setTimeout(function () {
-            if (stadaFormular) { stadaFormular(); stadaFormular = null; }
-            if (el.parentNode) el.parentNode.removeChild(el);
+            if (lanad) {
+                aterlamna(el);
+            } else {
+                if (stadaFormular) { stadaFormular(); stadaFormular = null; }
+                if (el.parentNode) el.parentNode.removeChild(el);
+            }
             if (sk && sk.parentNode) sk.parentNode.removeChild(sk);
         }, 520);
     }
@@ -274,25 +308,8 @@
         }
     }
 
-    function visa() {
-        if (panel || !window.FYSIKNYHETSBREV) return;
-        injiceraCSS();
-        forraFokus = document.activeElement;
-
-        skarm = document.createElement('div');
-        skarm.className = 'nbs-skarm';
-        skarm.addEventListener('click', function () { stang('stangd'); });
-
-        panel = document.createElement('aside');
-        panel.className = 'nbs-panel no-begrepp';
-        panel.setAttribute('role', 'dialog');
-        panel.setAttribute('aria-modal', 'true');
-        panel.setAttribute('aria-label', 'Anmälan till nyhetsbrevet');
-        // Fokus flyttas till själva rutan, inte till kryssknappen: en
-        // programmatiskt fokuserad knapp ritar sin fokusring direkt, och
-        // det första ögat möter ska vara rubriken — inte en markerad knapp.
-        panel.setAttribute('tabindex', '-1');
-
+    // Bygger kryssknappen och vinjettbilden — samma i båda lägena.
+    function byggKnapp() {
         var knapp = document.createElement('button');
         knapp.type = 'button';
         knapp.className = 'nbs-stang';
@@ -302,9 +319,12 @@
             + 'stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'
             + '<path d="M5 5l14 14M19 5L5 19"/></svg>';
         knapp.addEventListener('click', function () { stang('stangd'); });
+        return knapp;
+    }
 
-        // Dekorativ vinjett — rubriken bredvid säger redan vad rutan är,
-        // så bilden får tomt alt-attribut i stället för en dubblering.
+    // Dekorativ vinjett — rubriken bredvid säger redan vad rutan är, så
+    // bilden får tomt alt-attribut i stället för en dubblering.
+    function byggBild() {
         var bild = document.createElement('img');
         bild.className = 'nbs-bild';
         bild.src = BILD;
@@ -313,23 +333,127 @@
         bild.height = 520;
         // Går bilden inte att hämta ska rutan ändå se hel ut.
         bild.addEventListener('error', function () { bild.remove(); });
+        return bild;
+    }
 
-        var kropp = document.createElement('div');
-        kropp.className = 'nbs-kropp';
+    // LÅNLÄGET: lyft sidans egen ruta i stället för att bygga en ny.
+    // Boxen flyttas aldrig i DOM:en — se filhuvudet om reCAPTCHA-iframen.
+    function lana(box) {
+        lanad = box;
 
-        panel.appendChild(knapp);
-        panel.appendChild(bild);
-        panel.appendChild(kropp);
-        document.body.appendChild(skarm);
-        document.body.appendChild(panel);
+        // Platshållare med samma höjd, så att sidan bakom inte hoppar när
+        // boxen lämnar flödet.
+        lanadPlats = document.createElement('div');
+        lanadPlats.className = 'nbs-plats';
+        lanadPlats.style.height = box.offsetHeight + 'px';
+        box.parentNode.insertBefore(lanadPlats, box);
 
-        // Formuläret byggs av nyhetsbrev.js — med samma fältstyling,
-        // samma svenska felmeddelanden och samma kvittotext som inline-rutan.
-        stadaFormular = window.FYSIKNYHETSBREV.mount(kropp, {
-            titel: TITEL, ingress: INGRESS,
-        });
-        var fin = kropp.querySelector('.nb-fine');
+        // Modalens kortare texter — inline-rutans egna sparas och sätts
+        // tillbaka när rutan stängs.
+        var rubrik = box.querySelector('.nb-title');
+        var lead = box.querySelector('.nb-lead');
+        var fin = box.querySelector('.nb-fine');
+        lanadText = {
+            rubrik: rubrik && rubrik.textContent,
+            lead: lead && lead.textContent,
+            fin: fin && fin.textContent,
+        };
+        if (rubrik) rubrik.textContent = TITEL;
+        // Har besökaren redan anmält sig står kvittotexten här — rör den inte.
+        if (lead && !box.classList.contains('is-klar')) lead.textContent = INGRESS;
         if (fin) fin.textContent = FINSTILT;
+
+        var bild = byggBild();
+        // Bilden ska gå ut i rutans kanter, men boxen har egen padding.
+        // Den mäts i stället för att gissas — den är olika på mobil.
+        var cs = window.getComputedStyle(box);
+        var vl = parseFloat(cs.paddingLeft) || 0;
+        var hg = parseFloat(cs.paddingRight) || 0;
+        bild.style.marginTop = '-' + cs.paddingTop;
+        bild.style.marginLeft = '-' + cs.paddingLeft;
+        bild.style.marginRight = '-' + cs.paddingRight;
+        bild.style.marginBottom = '16px';
+        bild.style.width = 'calc(100% + ' + (vl + hg) + 'px)';
+        bild.style.maxWidth = 'none';
+
+        box.classList.add('nbs-panel');
+        box.setAttribute('role', 'dialog');
+        box.setAttribute('aria-modal', 'true');
+        box.setAttribute('tabindex', '-1');
+        box.insertBefore(bild, box.firstChild);
+        box.insertBefore(byggKnapp(), box.firstChild);
+        return box;
+    }
+
+    // Lämnar tillbaka den lånade boxen till sidan, i det skick den kom.
+    function aterlamna(box) {
+        var knapp = box.querySelector(':scope > .nbs-stang');
+        var bild = box.querySelector(':scope > .nbs-bild');
+        if (knapp) knapp.remove();
+        if (bild) bild.remove();
+        box.classList.remove('nbs-panel', 'nbs-in', 'nbs-ut');
+        box.removeAttribute('role');
+        box.removeAttribute('aria-modal');
+        box.removeAttribute('tabindex');
+        if (lanadText) {
+            var rubrik = box.querySelector('.nb-title');
+            var lead = box.querySelector('.nb-lead');
+            var fin = box.querySelector('.nb-fine');
+            if (rubrik && lanadText.rubrik !== null) rubrik.textContent = lanadText.rubrik;
+            // Kvittotexten efter en lyckad anmälan ska förstås stå kvar.
+            if (lead && lanadText.lead !== null && !box.classList.contains('is-klar')) {
+                lead.textContent = lanadText.lead;
+            }
+            if (fin && lanadText.fin !== null) fin.textContent = lanadText.fin;
+        }
+        if (lanadPlats && lanadPlats.parentNode) lanadPlats.remove();
+        lanad = null; lanadPlats = null; lanadText = null;
+    }
+
+    function visa() {
+        if (panel || !window.FYSIKNYHETSBREV) return;
+        injiceraCSS();
+        forraFokus = document.activeElement;
+
+        skarm = document.createElement('div');
+        skarm.className = 'nbs-skarm';
+        skarm.addEventListener('click', function () { stang('stangd'); });
+
+        document.body.appendChild(skarm);
+
+        var box = lanLage() ? document.querySelector('.nb-box') : null;
+        if (lanLage() && !box) { skarm.remove(); skarm = null; return; }
+
+        if (box) {
+            panel = lana(box);
+        } else {
+            panel = document.createElement('aside');
+            panel.className = 'nbs-panel no-begrepp';
+            panel.setAttribute('role', 'dialog');
+            panel.setAttribute('aria-modal', 'true');
+            panel.setAttribute('aria-label', 'Anmälan till nyhetsbrevet');
+            // Fokus flyttas till själva rutan, inte till kryssknappen: en
+            // programmatiskt fokuserad knapp ritar sin fokusring direkt, och
+            // det första ögat möter ska vara rubriken — inte en markerad knapp.
+            panel.setAttribute('tabindex', '-1');
+
+            var kropp = document.createElement('div');
+            kropp.className = 'nbs-kropp';
+
+            panel.appendChild(byggKnapp());
+            panel.appendChild(byggBild());
+            panel.appendChild(kropp);
+            document.body.appendChild(panel);
+
+            // Formuläret byggs av nyhetsbrev.js — med samma fältstyling,
+            // samma svenska felmeddelanden och samma kvittotext som
+            // inline-rutan.
+            stadaFormular = window.FYSIKNYHETSBREV.mount(kropp, {
+                titel: TITEL, ingress: INGRESS,
+            });
+            var fin = kropp.querySelector('.nb-fine');
+            if (fin) fin.textContent = FINSTILT;
+        }
 
         // Ett anmält formulär byter till kvittotexten. Låt den stå kvar
         // en stund, stäng sedan — och kom ihåg att aldrig visa rutan igen.
@@ -350,11 +474,16 @@
                 panel.classList.add('nbs-in');
                 skarm.classList.add('nbs-in');
                 panel.focus();
+
             });
         });
     }
 
     /* ── Villkoren ─────────────────────────────────────────────────── */
+
+    function lanLage() {
+        return document.body.getAttribute('data-nyhetsbrev-slidein') === 'lana';
+    }
 
     function komFranUtskick() {
         var s = window.location.search;
@@ -370,12 +499,19 @@
 
     function start() {
         if (document.body.getAttribute('data-nyhetsbrev-slidein') === 'av') return;
-        // Sidor med inline-rutan äger formuläret — se filhuvudet.
-        if (document.querySelector('[data-nyhetsbrev]')) return;
         // Förhandsvisning: ?nbs=test visar rutan direkt, utan villkor och
         // utan att skriva i minnet. Bara för att titta på den.
         if (/[?&]nbs=test\b/.test(window.location.search)) {
-            window.setTimeout(visa, 300);
+            // I lånläget måste sidans egen ruta hinna monteras först —
+            // React-vyerna gör det i en effekt, en bit efter
+            // DOMContentLoaded, så en fast fördröjning blir en lotteri.
+            var forsok = 0;
+            var t = window.setInterval(function () {
+                if (!lanLage() || document.querySelector('.nb-box')) {
+                    window.clearInterval(t); visa(); return;
+                }
+                if (++forsok > 25) window.clearInterval(t);
+            }, 300);
             return;
         }
         if (komFranUtskick()) { skriv('prenumererar'); return; }
@@ -386,11 +522,10 @@
 
         var kolla = function () {
             if (panel) return;
-            // Skyddsnät: sidor som monterar inline-rutan med JS (React-vyerna
-            // på startsidan, nyhetssidan och simuleringslistan) har ingen
-            // [data-nyhetsbrev] i källan att känna igen i förväg — men väl en
-            // .nb-box i DOM:en när den väl finns. Den rutan äger formuläret.
-            if (document.querySelector('.nb-box')) { avsluta(); return; }
+            // I lånläget lyfter vi sidans egen ruta, och då måste den
+            // finnas. React-vyerna monterar sin i en effekt, så den kan
+            // dröja — vänta hellre än att bygga en andra som blir tom.
+            if (lanLage() && !document.querySelector('.nb-box')) return;
             if (Date.now() - start_tid < TID_MS) return;
             if (nagotAnnatArIVagen()) return;
 

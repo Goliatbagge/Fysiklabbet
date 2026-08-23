@@ -477,6 +477,14 @@
     'a': { w: 62, strokes: [[[61, 57], [47, 48], [31, 55], [25, 73], [30, 90], [46, 98], [60, 89]], [[62, 50], [62, 84], [66, 97], [72, 94]]] },
     'r': { w: 46, strokes: [[[27, 50], [29, 100]], [[29, 64], [38, 53], [50, 47], [57, 52]]] },
     ':': { w: 34, strokes: [[[26, 58], [27, 60]], [[26, 88], [27, 90]]] },
+    /* semikolon — avgränsare i koordinatpar när kommat redan är
+     * decimaltecken: (0,64; 0,77) */
+    ';': { w: 34, strokes: [[[26, 58], [27, 60]], [[27, 88], [22, 106]]] },
+    /* vinkeltecken ∠ — "∠ABC är 35°" i triangelsatserna */
+    '∠': { w: 76, strokes: [[[68, 30], [16, 100]], [[16, 100], [70, 100]]] },
+    /* epsilon — beteckningen för inducerad spänning (ems) i Fysik 2 */
+    'ε': { w: 58, strokes: [[[52, 54], [36, 48], [24, 56], [26, 68], [40, 74]],
+                            [[40, 74], [26, 80], [24, 92], [36, 99], [52, 94]]] },
     ' ': { w: 46, strokes: [] },
     'd': { w: 68, strokes: [[[58, 58], [45, 49], [31, 56], [26, 73], [31, 89], [46, 97], [58, 87]], [[61, 12], [60, 80], [63, 95], [70, 93]]] },
     'y': { w: 62, strokes: [[[24, 52], [32, 72], [42, 96]], [[64, 52], [52, 88], [38, 118], [26, 130]]] },
@@ -530,6 +538,17 @@
     '.': { w: 28, strokes: [[[24, 92], [26, 94]]] },
     /* snedstreck för sammansatta enheter (N/kg, m/s) */
     '/': { w: 52, strokes: [[[46, 8], [16, 102]]] },
+    /* PRIM — derivatans märke. Ett kort snedstreck högt upp, med smal
+     * advance så att f'(x) hålls ihop. Genomgående i Matematik 3c.
+     * Både ASCII-apostrofen och primtecknet U+2032 ritas likadant. */
+    "'": { w: 24, strokes: [[[15, 12], [10, 42]]] },
+    '′': { w: 24, strokes: [[[15, 12], [10, 42]]] },
+    '\u2019': { w: 24, strokes: [[[15, 12], [10, 42]]] },
+    /* asterisk — behövs för kalkylbladsformler (=B3*C3+D3) i NP-scenerna.
+     * Tre streck genom samma mittpunkt, i skrivordning: lodrätt, sedan
+     * de två snedställda. Ligger högt på raden, som i tryckt text. */
+    '*': { w: 62, strokes: [[[31, 20], [31, 58]], [[15, 28], [47, 50]],
+                            [[47, 28], [15, 50]]] },
     '?': { w: 68, strokes: [[[26, 30], [33, 14], [50, 10], [63, 17], [66, 31], [58, 45], [47, 53], [45, 64]], [[45, 86], [46, 88]]] },
     '(': { w: 42, strokes: [[[36, 8], [26, 34], [23, 60], [26, 85], [36, 106]]] },
     ')': { w: 42, strokes: [[[22, 8], [32, 34], [35, 60], [32, 85], [22, 106]]] },
@@ -607,6 +626,9 @@
     '>': { w: 76, strokes: [[[24, 40], [64, 66], [24, 92]]] },
     /* implikationspil ⇒: två parallella streck + spets */
     '⇒': { w: 96, strokes: [[[20, 56], [64, 57]], [[20, 74], [64, 73]], [[60, 44], [80, 65], [60, 88]]] },
+    /* implikation åt vänster ⇐ — spegelbilden av ⇒. Behövs när ett
+     * samband bara gäller åt det hållet ("rektangel ⇐ kvadrat"). */
+    '⇐': { w: 96, strokes: [[[80, 56], [36, 57]], [[80, 74], [36, 73]], [[40, 44], [20, 65], [40, 88]]] },
     /* ekvivalenspil ⟺: två parallella streck + spets åt båda hållen.
      * Bred advance med luft åt båda hållen — raden ska inte bli kompakt
      * kring pilen (användarönskemål 2026-07-30) */
@@ -781,7 +803,8 @@
   var COMBINING = { '↺': 1, '↻': 1 };   /* ritas ovanpå föregående tecken */
   /* '±' står som PREFIX till ett tal (x=±8) och ingår därför INTE — den
    * ska klistra ihop med talet, inte få operatorluft åt båda håll. */
-  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⟺': 1,
+  var OPS = { '+': 1, '-': 1, '=': 1, '≈': 1, '<': 1, '>': 1, '⇒': 1, '⇐': 1,
+              '⟺': 1,
               '⟹': 1,
               '≤': 1, '≥': 1, '≠': 1 };
 
@@ -34878,6 +34901,42 @@
    * och högra kant, yBase = radens baslinje. `opt` = { ry, cy } när
    * partiet är högre än en vanlig rad (bråk, exponenter) eller sitter
    * på annan höjd (figuretiketter). */
+  /* BRÅKEXPONENT — a^(2/3) skrivs med ett litet bråk med VÅGRÄTT streck
+   * i upphöjt läge (division ritas aldrig med snedstreck, se REGEL).
+   * Returnerar nästa x. expFracW ger bredden utan att rita. */
+  function expFrac(T, F, numS, denS, x0, yb, sc) {
+    sc = sc == null ? 0.42 : sc;
+    var nw = T.adv(numS, sc), dw = T.adv(denS, sc);
+    var w = Math.max(nw, dw) + 0.10 * F;
+    var ybar = yb - 0.62 * F;
+    T.str(numS, x0 + (w - nw) / 2, ybar - 0.10 * F, null, sc);
+    T.pause(90);
+    T.acts.push({ kind: 'stroke',
+                  pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+    T.pause(90);
+    T.str(denS, x0 + (w - dw) / 2, ybar + 0.48 * F, null, sc);
+    return x0 + w + 1.5;
+  }
+  function expFracW(T, F, numS, denS, sc) {
+    sc = sc == null ? 0.42 : sc;
+    return Math.max(T.adv(numS, sc), T.adv(denS, sc)) + 0.10 * F + 1.5;
+  }
+
+  /* STOR PARENTES runt ett uttryck som är högre än en rad (t.ex. en
+   * skillnad mellan två bråk) — parentesglyfen är bara en rad hög.
+   * right=true ger den högra parentesen. Returnerar nästa x. */
+  function bigParen(T, F, x, yb, right) {
+    var yTop = yb - 1.42 * F, yBot = yb + 1.06 * F, ym = (yTop + yBot) / 2;
+    var d = (right ? -1 : 1) * 0.17 * F;
+    T.acts.push({ kind: 'stroke', pts: [
+      [x + d, yTop], [x + d * 0.45, yTop + (ym - yTop) * 0.36],
+      [x + d * 0.04, ym - (ym - yTop) * 0.22], [x, ym],
+      [x + d * 0.04, ym + (yBot - ym) * 0.22],
+      [x + d * 0.45, yBot - (yBot - ym) * 0.36], [x + d, yBot]] });
+    T.pause(120);
+    return x + 0.24 * F;
+  }
+
   function ringBox(x0, x1, yBase, F, opt) {
     opt = opt || {};
     var ry = opt.ry != null ? opt.ry : 0.72 * F;
@@ -36909,6 +36968,50 @@
     },
     typer: function () { return Object.keys(SCENES); },
     saknadeGlyfer: function () { return SAKNADE; },
-    PAPER_W: PAPER_W, FSIZE: FSIZE
+    PAPER_W: PAPER_W, FSIZE: FSIZE,
+
+    /* ---------------- SCENER I EGNA FILER ----------------------------
+     * Pennlösningarna till de nationella proven (data/np/<prov>-penna.js)
+     * bor INTE i den här filen — de är hundratals scener som hör ihop med
+     * sitt prov, inte med ett teoriavsnitt. En sådan fil registrerar sina
+     * layoutfunktioner med
+     *
+     *   HANDSKRIFT.registrera('ma1c-vt2022-u1', function (cfg, F) { … });
+     *
+     * och bygger dem med verktygslådan nedan (samma helpers som scenerna
+     * här inne använder: mathTools/physTools, mkTanke, mkArc, mkMultIn,
+     * mkAxes, valueBracket, substRings …). ALLA regler i filhuvudet
+     * gäller förstås även dem, och .claude/verify-handskrift.js laddar
+     * filerna och granskar scenerna på exakt samma sätt.
+     *
+     * Registret är öppet men INTE ett ställe att skriva över befintliga
+     * scener på: ett namn som redan finns avvisas, så att en NP-scen
+     * aldrig kan kapa en teoriscen av misstag. */
+    registrera: function (namn, fn) {
+      if (typeof namn !== 'string' || typeof fn !== 'function') return false;
+      if (SCENES[namn]) return false;
+      SCENES[namn] = fn;
+      return true;
+    },
+    verktyg: {
+      mathTools: mathTools, physTools: physTools,
+      mkTanke: mkTanke, mkArc: mkArc, mkMultIn: mkMultIn, mkAxes: mkAxes,
+      diagram: diagram, trigKvot: trigKvot, vinkelBage: vinkelBage,
+      ratVinkel: ratVinkel, vecPil: vecPil, figurPil: figurPil,
+      lutandePlan: lutandePlan, nuklid: nuklid,
+      kretsBatteri: kretsBatteri, kretsLampa: kretsLampa,
+      kretsResistor: kretsResistor,
+      valueBracket: valueBracket, rootSign: rootSign,
+      substRings: substRings, fadeRings: fadeRings, ringBox: ringBox,
+      expFrac: expFrac, expFracW: expFracW, bigParen: bigParen,
+      ringPts: ringPts, ringAlongPts: ringAlongPts, dotPts: dotPts,
+      underlinePts: underlinePts, bracePts: bracePts,
+      humanize: humanize, placeString: placeString,
+      placeGlyph: placeGlyph, stringAdvance: stringAdvance,
+      rotFrac: rotFrac, rotFracW: rotFracW,
+      tusen: tusen, heltal: heltal, rnd: rnd,
+      INK: INK, BLUE: BLUE, LABINK: LABINK, GRID: GRID,
+      PAPER_W: PAPER_W, FSIZE: FSIZE
+    }
   };
 })();

@@ -135,6 +135,43 @@ Fastlagt av användaren 2026-07-21 (referensimpl: `fy2-vt2016.js`):
   divisionsstreck (`\\dfrac`), inga Unicode-superscript i exponenter.
 - Deluppgifter i frågetexten skrivs som `**a)** …` på egna stycken.
 
+## Pennlösningar (animerad handskrift)
+
+**Varje uppgift i ett prov ska ha en pennlösning** — samma animerade
+handskrift som exemplen i teorin. Eleven ska kunna se HUR lösningen skrivs,
+inte bara läsa den färdig. Växeln "Med penna"/"Som text" i `np.html` dyker
+upp av sig själv så snart scenen finns; textlösningen (`steg`-listan ovan)
+finns kvar som alternativ vy och ska hållas i takt med pennlösningen.
+
+- **Var scenerna bor:** `data/np/<provId>-penna.js`, en fil per prov. Filen
+  registrerar sina layoutfunktioner med `HANDSKRIFT.registrera()` och
+  bygger dem med verktygslådan `HANDSKRIFT.verktyg` (`mathTools`,
+  `physTools`, `mkTanke`, `mkArc`, `mkMultIn`, `mkAxes`, `valueBracket`,
+  `substRings`, `trigKvot` …). Motorn själv ligger kvar i `handskrift.js`.
+- **Namn:** `<provId>-u<nr>` (`reg(nr, fn)` i filen). `np.html` slår upp
+  namnet automatiskt — ingen post behöver läggas i provets datafil.
+- **Ny fil:** lägg till en `<script>`-rad för den i `np.html` (efter
+  `handskrift.js`).
+- **ALLA regler i `handskrift.js` filhuvud gäller.** De som oftast bränner
+  i provuppgifter: inget bläck vid `x > 696` (stega-pilens band); inget med
+  `x > 420` ovanför `y = 150` (`y = 210` i ekvval-scener, som har den högre
+  inställningsrutan); en tanke per led, direkt före ledet; division alltid
+  med vågrätt streck; blå båge till varje term när en parentes utvecklas;
+  förkortning i två drag med `T.fracOp()`.
+- **Ekvationsscener** stödjer båda redovisningslägena (`cfg.vagg`) med
+  **samma antal klicksteg** och sätter `ekvval: 1`. Ryms väggen inte på
+  raden behåller det steget ledformen i båda lägena — och har scenen då
+  inget steg som skiljer lägena åt sätts inte `ekvval`.
+- **Samma siffror och samma avrundning** i pennlösningen och i
+  `steg`/`svar`. Eleven växlar mellan vyerna, och olika avrundning läses
+  som ett fel.
+- **Granskning:** `node .claude/verify-handskrift.js <scennamn>` (utan
+  argument granskas alla NP-scener och alla teoriscener) — och därefter
+  skärmdump, som vanligt: verifieraren ser inte etiketter som ligger på
+  linjer. Harness: `.shots/np-penna.html?typ=<scennamn>[,<scennamn>]`.
+- **Hur långt vi kommit:** `node .claude/np-penna-tacktning.js` listar per
+  prov vilka uppgifter som ännu saknar scen.
+
 ## Checklista före klart
 
 1. Alla figurnycklar finns i figurfilen (kör valideringsskriptet i

@@ -82,6 +82,12 @@ node .claude/verify-exittickets.js
 # granskningen — etiketter som ligger på linjer syns bara där.
 node .claude/verify-handskrift.js
 
+# Täckningsrapport för de nationella provens pennlösningar — hur många
+# uppgifter per prov som har en registrerad ::: handskrift-scen
+# (data/np/<provid>-penna.js, scennamn <provid>-u<nr>). Sekretessbelagda
+# uppgifter räknas inte. Se data/np/RIKTLINJER.md.
+node .claude/np-penna-tacktning.js
+
 # Verifiera sökindexet efter nya simuleringar eller ändringar i
 # data/simuleringar.js (KÖR FÖRE COMMIT!) — varje länkad simulering (även
 # href2 och djuplänkar) ska finnas som egen rad i sökrutan, med eget namn

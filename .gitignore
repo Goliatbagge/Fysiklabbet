@@ -64,3 +64,6 @@ webwork-open-problem-library/
 
 # Facebook-agentens lokala arbetslogg
 .claude/facebook/
+
+# Lokal testkopia av np.html med vendorade CDN-filer (skapas vid behov)
+np-test.html

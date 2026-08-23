@@ -1,11 +1,21 @@
 /* section-nav.js — injicerar avsnittsväxlaren (Teori / Simulering / Övningar)
  * högst upp på simuleringssidor, så att man alltid lätt kan växla mellan
- * avsnittets tre vyer.
+ * avsnittets vyer.
  *
  * Kräver att window.KATALOG (data/katalog.js) är laddad FÖRE detta skript.
  * Skriptet slår upp sidans filnamn mot katalogens section.href, härleder
  * hashen #fyN-K.A och länkar Teori → katalog, Simulering → (nuvarande sida),
  * Övningar → katalog med :ovningar-suffix.
+ *
+ * ⚠️ TVÅ SIMULERINGAR PÅ SAMMA AVSNITT (href2 i data/katalog.js):
+ * då får BÅDA en egen ruta i raden, med sina namn ur data/simuleringar.js
+ * (SIM_NAMES) — filen hämtas automatiskt om sidan inte redan laddat den.
+ * Det är den GARANTERADE vägen mellan avsnittets simuleringar: katalogen
+ * länkar bara till `href`, så utan detta blir `href2`-simuleringen
+ * oåtkomlig från katalogen (hände 2026-08-23: flugan gick inte att nå från
+ * astronauten). Enskilda sidor får gärna ha egna flikar i sitt sidhuvud
+ * också, men de är ett komplement — aldrig den enda vägen.
+ * `node .claude/verify-sim-vaxlare.js` kontrollerar detta.
  *
  * Hoppar över när sidan körs inbäddad i en wrapper-iframe (?embed eller
  * window.top !== window.self) — då sköter wrappern navigationen.
@@ -69,24 +79,75 @@
     ].join('');
     document.head.appendChild(style);
 
-    const bar = document.createElement('nav');
-    bar.className = 'secnav';
-    bar.setAttribute('aria-label', 'Avsnittsväxlare');
-    bar.innerHTML =
-        '<a href="' + base + '"><span class="secnav-tag">Läsning</span>' +
-        '<span class="secnav-title">Teori</span></a>' +
-        '<span class="secnav-cur"><span class="secnav-tag">Experiment</span>' +
-        '<span class="secnav-title">Simulering</span></span>' +
-        '<a href="' + base + ':ovningar"><span class="secnav-tag">Räkna</span>' +
-        '<span class="secnav-title">Övningar</span></a>';
+    const sec = found.sec;
 
-    const insert = function () {
+    // Avsnittets simuleringar i ordning: href (+ href2 när det finns).
+    const simHrefs = [sec.href].concat(sec.href2 ? [sec.href2] : []).filter(Boolean);
+
+    // Namnet på en simulering hämtas ur SIM_NAMES, som kan vara en sträng
+    // (en sim), en array av strängar eller en array av objekt där `href`
+    // utelämnas för avsnittets egen fil. Se huvudet i data/simuleringar.js.
+    function simName(target, index) {
+        const entry = window.SIM_NAMES && window.SIM_NAMES[sec.href];
+        if (!entry) return null;
+        if (typeof entry === 'string') return entry;
+        if (!Array.isArray(entry)) return null;
+        for (const e of entry) {
+            if (e && typeof e === 'object' &&
+                (e.href || sec.href).toLowerCase() === target.toLowerCase()) return e.name;
+        }
+        return typeof entry[index] === 'string' ? entry[index] : null;
+    }
+
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+    function build() {
+        const bar = document.createElement('nav');
+        bar.className = 'secnav';
+        bar.setAttribute('aria-label', 'Avsnittsväxlare');
+
+        let mid = '';
+        simHrefs.forEach((h, i) => {
+            const current = h.toLowerCase() === file;
+            // Med bara en simulering behålls den gamla etiketten "Simulering";
+            // med två visas simuleringarnas egna namn så att de går att skilja åt.
+            const title = simHrefs.length === 1
+                ? 'Simulering'
+                : (simName(h, i) || 'Simulering ' + (i + 1));
+            const inner = '<span class="secnav-tag">Experiment</span>' +
+                '<span class="secnav-title">' + esc(title) + '</span>';
+            mid += current
+                ? '<span class="secnav-cur">' + inner + '</span>'
+                : '<a href="' + esc(h) + '">' + inner + '</a>';
+        });
+
+        bar.innerHTML =
+            '<a href="' + base + '"><span class="secnav-tag">Läsning</span>' +
+            '<span class="secnav-title">Teori</span></a>' +
+            mid +
+            '<a href="' + base + ':ovningar"><span class="secnav-tag">Räkna</span>' +
+            '<span class="secnav-title">Övningar</span></a>';
+
         if (document.querySelector('.secnav')) return; // undvik dubbletter
         const header = document.querySelector('.lab-header');
         if (header && header.parentNode) {
             header.parentNode.insertBefore(bar, header.nextSibling);
         } else {
             document.body.insertBefore(bar, document.body.firstChild);
+        }
+    }
+
+    const insert = function () {
+        // Två simuleringar men SIM_NAMES saknas på sidan → hämta namnen.
+        // Utan detta skulle rutorna heta "Simulering 1"/"Simulering 2".
+        if (simHrefs.length > 1 && !window.SIM_NAMES) {
+            const s = document.createElement('script');
+            s.src = 'data/simuleringar.js';
+            s.onload = build;
+            s.onerror = build;
+            document.head.appendChild(s);
+        } else {
+            build();
         }
     };
 

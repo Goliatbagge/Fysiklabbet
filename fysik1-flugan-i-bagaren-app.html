@@ -2001,20 +2001,9 @@
                         </div>
 
                         <div className="flex flex-col items-start md:items-end gap-2 flex-shrink-0">
-                            {/* Växla mellan avsnittets två simuleringar */}
-                            <div>
-                                <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Simulering</div>
-                                <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
-                                    <a href="fysik1-newtons-tredje-app.html"
-                                        className="tab-button px-4 py-2 rounded text-sm font-semibold border"
-                                        style={{ textDecoration: 'none' }}>
-                                        Brandsläckaren i rymden
-                                    </a>
-                                    <span className="tab-button tab-active px-4 py-2 rounded text-sm font-semibold border">
-                                        Flugan i bägaren
-                                    </span>
-                                </div>
-                            </div>
+                            {/* Växlingen mellan avsnittets två simuleringar sköts av
+                                avsnittsraden överst på sidan (section-nav.js) — lägg
+                                inga egna flikar för det här. */}
                             {/* Läge inom denna simulering */}
                             <div>
                                 <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Läge</div>

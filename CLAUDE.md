@@ -96,6 +96,13 @@ node .claude/np-penna-tacktning.js
 # Kräver dev-servern på port 8000 + puppeteer-core i %TEMP%\pptr-test.
 node .claude/test-fluga-fysik.js
 
+# Verifiera att avsnittets ANDRA simulering går att nå (KÖR FÖRE COMMIT
+# när du lägger till en href2!) — katalogen länkar bara till `href`, så
+# avsnittsraden (section-nav.js) är enda vägen till href2-simuleringen.
+# Kontrollerar att båda filerna laddar data/katalog.js + section-nav.js och
+# har eget namn och egna nyckelord i data/simuleringar.js.
+node .claude/verify-sim-vaxlare.js
+
 # Verifiera sökindexet efter nya simuleringar eller ändringar i
 # data/simuleringar.js (KÖR FÖRE COMMIT!) — varje länkad simulering (även
 # href2 och djuplänkar) ska finnas som egen rad i sökrutan, med eget namn
@@ -2043,6 +2050,36 @@ Nyckelord (`keywords` i `data/katalog.js`, `kw` i `data/simuleringar.js`):
 ],
 ```
 
+## ⚠️ Två simuleringar på samma avsnitt (`href2`) — måste gå att nå
+
+**Katalogen länkar BARA till avsnittets `href`.** Lägger du en andra
+simulering som `href2` i `data/katalog.js` är den osynlig för alla som
+klickar "Simulering" i katalogen — om inte avsnittsraden överst på
+simuleringssidorna länkar dit. Felet har hänt (2026-08-23): flugan i
+bägaren lades som href2 på fy1-3.3, och besökaren som kom in via
+astronautsimuleringen såg aldrig att den fanns.
+
+**Växlingen sköts av `section-nav.js`** — samma rad som visar
+Teori / Simulering / Övningar. Har avsnittet två simuleringar ritar den
+en egen ruta för var och en, med namnen ur `data/simuleringar.js`
+(SIM_NAMES-filen hämtas automatiskt om sidan inte redan laddat den).
+Det sker **av sig självt** så snart `href2` finns i katalogen — du
+behöver inte skriva någon växlare för hand.
+
+Kraven, som `node .claude/verify-sim-vaxlare.js` kontrollerar:
+
+1. **Båda HTML-filerna måste ladda `data/katalog.js` OCH `section-nav.js`**
+   (sist i `<body>`, se checklistan för nya simuleringar). Utan dem ritas
+   ingen avsnittsrad och simuleringen blir oåtkomlig.
+2. **Varje simulering ska ha eget `name` och egna `kw`** i
+   `data/simuleringar.js` — annars får rutan en anonym etikett
+   ("Simulering 2") och sökrutan hittar den inte på sina egna begrepp.
+3. **Lägg INTE till egna flikar i sidhuvudet för att växla mellan
+   simuleringarna på nya sidor.** Avsnittsraden gör det redan, och två
+   växlare på samma sida är dubbelt UI. (Några äldre simuleringar har
+   kvar sådana flikar sedan tidigare — de är ett komplement, inte
+   mönstret att kopiera.)
+
 ## Adresser till teoriavsnitt, prov och repetitionspaket
 
 Tre sidor visar allt sitt innehåll i EN HTML-fil och väljer vad som ska
@@ -2336,7 +2373,9 @@ styckar orden i `<span>`-taggar och då hittas de inte längre (se
     `href2` om avsnittet redan har en sim) med `keywords`
 8. [ ] Namnge simuleringen i `data/simuleringar.js` — och vid **två sims på
     samma avsnitt**: en post per sim med eget `name`, `desc`, `href` och
-    `kw` (se "Sökruta och nyckelord")
+    `kw` (se "Sökruta och nyckelord"). Kör då även
+    `node .claude/verify-sim-vaxlare.js` så att BÅDA simuleringarna går
+    att nå från avsnittsraden (se "Två simuleringar på samma avsnitt")
 9. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (max 4–5 poster)
 10. [ ] Testa i webbläsare (normalt OCH fullskärm, bred OCH smal skärm)
 11. [ ] Verifiera decimalformatering (komma, inte punkt)

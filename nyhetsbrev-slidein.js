@@ -43,10 +43,8 @@
  * ── NÄR RUTAN VISAS ────────────────────────────────────────────────────
  * Den ska aldrig upplevas som ett hinder. Därför gäller ALLA villkoren:
  *
- *   1. Sidan har ingen inline-ruta ([data-nyhetsbrev]). EmailOctopus
- *      skript letar upp sitt formulär med document.querySelector, så två
- *      samtidiga rutor skulle plocka fel — och på de sidorna kan
- *      besökaren redan anmäla sig utan att bli avbruten.
+ *   1. I lånläget finns sidans egen ruta att lyfta. Har den inte hunnit
+ *      monteras väntar vi — vi bygger aldrig en andra.
  *   2. Besökaren har läst minst 45 % av sidan OCH varit kvar 30 sekunder.
  *   3. Sidan är alls värd att skrolla i (minst ~1,6 skärmhöjder).
  *   4. Rutan har inte visats förut: en stängd ruta vilar 60 dagar, och
@@ -62,8 +60,8 @@
  * så snäva. Escape och ett klick utanför stänger, fokus flyttas in i
  * rutan när den öppnas och tillbaka dit det låg när den stängs.
  *
- * Minnet ligger i localStorage under nyckeln FL_NB_SLIDEIN. Det är per
- * webbläsare och enhet — samma person i mobilen eller efter en
+ * Minnet ligger i localStorage under nyckeln fl-nyhetsbrev-slidein. Det
+ * är per webbläsare och enhet — samma person i mobilen eller efter en
  * cookierensning börjar om. Det går inte att komma runt utan inloggning.
  */
 (function () {

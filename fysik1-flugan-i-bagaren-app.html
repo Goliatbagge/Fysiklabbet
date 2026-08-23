@@ -99,9 +99,16 @@
             width: 100%; height: 100%; max-width: 100%; max-height: 100%;
         }
 
-        /* Ruta uppe till höger (visningsval + styrknappar) */
+        /* Ruta uppe till höger (visningsval + styrknappar).
+           ⚠️ I FULLSKÄRM ligger ALLA reglage här — förloppsvalet som
+           rullista, glidarna och systemgränsen. Simuleringen har därför
+           ingen .fs-controls-panel i underkanten: den täckte scenen och
+           gjorde att man inte hann se vad som hände när ett förlopp
+           startades, och glidarna hamnade utanför skärmkanten (påpekat
+           2026-08-23). Lägg inte tillbaka den panelen här. */
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
+            max-height: calc(100% - 28px); overflow-y: auto;
             background: rgba(246,242,234,0.94);
             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
@@ -131,14 +138,25 @@
             cursor: pointer; transition: border-color 0.15s ease;
         }
         .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); }
-
-        /* Fullskärm: reglagepanelen dockas av styles-laborans-sim.css —
-           här bara paneltitel och maxhöjd så att panelen kan rulla. */
-        .fs-controls { max-height: 70vh; overflow-y: auto; }
-        .fs-controls .fs-panel-title {
-            font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
-            color: rgba(229,231,235,0.75); font-weight: 600;
+        .scene-toggles .st-stack { margin-top: 6px; display: flex; flex-direction: column; gap: 5px; }
+        .scene-toggles .st-txt {
+            font-size: 12px; line-height: 1.45; color: var(--lab-ink-soft, #3a4151);
+            margin-top: 4px;
         }
+        .scene-toggles .st-select { width: 100%; margin-top: 2px; }
+        .scene-toggles .st-sl { margin-top: 6px; }
+        .scene-toggles .st-sl-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            font-size: 11.5px; color: var(--lab-ink-soft, #3a4151); margin-bottom: 1px;
+        }
+        .scene-toggles .st-sl-val {
+            font-family: var(--lab-font-mono, monospace); font-size: 11px;
+            font-weight: 600; color: var(--lab-accent, #c8324a);
+        }
+        .scene-toggles .st-sl input[type="range"] { width: 100%; }
+        /* Fullskärm: rutan rymmer alla reglage och får därför vara bredare */
+        body.lab-sim .scene-wrap:fullscreen .scene-toggles,
+        body.lab-sim .scene-wrap:-webkit-full-screen .scene-toggles { max-width: 258px; }
 
         /* ── Avläsningstabell ─────────────────────────────────────── */
         .readout-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1758,6 +1776,18 @@
             </div>
         );
 
+        // Kompakt glidare för rutan uppe till höger (fullskärm)
+        const BoxSlider = ({ label, value, min, max, step, onChange, fmt }) => (
+            <div className="st-sl">
+                <div className="st-sl-row">
+                    <span>{label}</span>
+                    <span className="st-sl-val">{fmt(value)}</span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                    onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
         const selectStyle = {
             width: '100%', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))',
             background: 'var(--lab-bg-panel, #ffffff)', color: 'var(--lab-ink, #0f1620)',
@@ -1783,7 +1813,6 @@
             const [readout, setReadout] = useState(null);
             const [gissa, setGissa] = useState({ ch: null, phase: 'gissa', guess: null, streak: 0, right: 0, total: 0 });
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const [fsPanelOpen, setFsPanelOpen] = useState(true);
 
             const sceneWrapRef = useRef(null);
             const canvasRef = useRef(null);
@@ -2128,9 +2157,57 @@
                                         )}
                                     </button>
 
-                                    {/* Visningsval + styrknappar — uppe till höger */}
+                                    {/* Visningsval + styrknappar — uppe till höger.
+                                        I FULLSKÄRM ligger även förloppsvalet och
+                                        glidarna här, så att scenen aldrig skyms av
+                                        någon panel (se kommentaren vid .scene-toggles
+                                        i sidans <style>). */}
                                     <div className="scene-toggles">
-                                        <div className="st-title">Visa</div>
+                                        {isFullscreen && (mode === 'gissa' ? (
+                                            <React.Fragment>
+                                                <div className="st-title">Förutsäg</div>
+                                                {gissaSc && (
+                                                    <React.Fragment>
+                                                        <div className="st-txt"><strong>{gissaSc.name}</strong></div>
+                                                        {gissa.phase === 'gissa' && (
+                                                            <div className="st-stack">
+                                                                {['Ökar', 'Oförändrat', 'Minskar'].map(g => (
+                                                                    <button key={g} type="button" className="st-btn"
+                                                                        onClick={() => answer(g)}>{g}</button>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                        {gissa.phase === 'kor' && (
+                                                            <div className="st-txt">Du gissade ”{gissa.guess}” — titta på grafen …</div>
+                                                        )}
+                                                        {gissa.phase === 'svar' && (
+                                                            <React.Fragment>
+                                                                <div className="st-txt" style={{ color: gissaOk ? '#2d6a3e' : 'var(--lab-accent, #c8324a)', fontWeight: 600 }}>
+                                                                    {gissaOk ? 'Rätt! ' + gissaSc.svar : 'Fel — rätt svar: ' + gissaSc.svar}
+                                                                </div>
+                                                                <div className="st-stack">
+                                                                    <button type="button" className="st-btn" onClick={nextChallenge}>Nästa förlopp</button>
+                                                                </div>
+                                                            </React.Fragment>
+                                                        )}
+                                                        <div className="st-txt" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
+                                                            Rätt: {gissa.right} av {gissa.total}
+                                                        </div>
+                                                    </React.Fragment>
+                                                )}
+                                            </React.Fragment>
+                                        ) : (
+                                            <React.Fragment>
+                                                <div className="st-title">Förlopp</div>
+                                                <select className="st-select" value={scenarioId}
+                                                    onChange={(e) => runScenario(e.target.value)}>
+                                                    {SCENARIOS.map(sc => (
+                                                        <option key={sc.id} value={sc.id}>{sc.name}</option>
+                                                    ))}
+                                                </select>
+                                            </React.Fragment>
+                                        ))}
+                                        <div className={'st-title' + (isFullscreen ? ' mt' : '')}>Visa</div>
                                         <label>
                                             <input type="checkbox" checked={showAir} onChange={(e) => setShowAir(e.target.checked)} />
                                             <span>Luftströmning</span>
@@ -2170,26 +2247,32 @@
                                         <div className="st-actions" style={{ marginTop: 4 }}>
                                             <button type="button" className="st-btn" onClick={() => simRef.current && simRef.current.tare()}>Nollställ vågen</button>
                                         </div>
+                                        {isFullscreen && (
+                                            <React.Fragment>
+                                                <div className="st-title mt">Reglage</div>
+                                                <BoxSlider label="Uppspelning" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1}
+                                                    onChange={setSpeedIdx}
+                                                    fmt={(v) => SPEEDS[v] === 1 ? 'realtid' : '1/' + formatNum(1 / SPEEDS[v], 0)} />
+                                                <BoxSlider label="Flugans massa" value={massMg} min={5} max={30} step={1}
+                                                    onChange={setMassMg} fmt={(v) => formatNum(v, 0) + ' mg'} />
+                                                <BoxSlider label="Lufttäthet" value={rho} min={0} max={1.3} step={0.01}
+                                                    onChange={setRho} fmt={(v) => formatNum(v, 2) + ' kg/m³'} />
+                                                <BoxSlider label="Hovringshöjd" value={hoverH * 100} min={1} max={beakerH * 100 - 1} step={0.5}
+                                                    onChange={(v) => setHoverH(v / 100)} fmt={(v) => formatNum(v, 1) + ' cm'} />
+                                                <BoxSlider label="Bägarens höjd" value={beakerH * 100} min={8} max={16} step={0.5}
+                                                    onChange={(v) => { setBeakerH(v / 100); if (hoverH > v / 100 - 0.01) setHoverH(v / 100 - 0.02); }}
+                                                    fmt={(v) => formatNum(v, 1) + ' cm'} />
+                                                <div className="st-title mt">Systemgräns</div>
+                                                <select className="st-select" value={boundary}
+                                                    onChange={(e) => setBoundary(e.target.value)}>
+                                                    <option value="ingen">Ingen</option>
+                                                    <option value="fluga">Bara flugan</option>
+                                                    <option value="luft">Bara luften i bägaren</option>
+                                                    <option value="hela">Hela systemet</option>
+                                                </select>
+                                            </React.Fragment>
+                                        )}
                                     </div>
-
-                                    {/* Fullskärm: hopfällbar panel i underkanten */}
-                                    {isFullscreen && (
-                                        <React.Fragment>
-                                            <div className={'fs-controls' + (fsPanelOpen ? '' : ' collapsed')}>
-                                                <div className="fs-panel-title">{mode === 'gissa' ? 'Utmaning' : 'Förlopp och reglage'}</div>
-                                                {mode === 'gissa' ? gissaCard : (
-                                                    <React.Fragment>
-                                                        {scenarioButtons('fs')}
-                                                        {sliders('fs')}
-                                                    </React.Fragment>
-                                                )}
-                                            </div>
-                                            <button type="button" className="fs-toggle-handle"
-                                                onClick={() => setFsPanelOpen(o => !o)}>
-                                                {(fsPanelOpen ? 'Dölj ' : 'Visa ') + (mode === 'gissa' ? 'utmaningen' : 'reglage')}
-                                            </button>
-                                        </React.Fragment>
-                                    )}
                                 </div>
                             </div>
 

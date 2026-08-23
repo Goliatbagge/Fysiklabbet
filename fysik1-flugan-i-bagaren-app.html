@@ -495,55 +495,59 @@
                 const nG = actx.createGain(); nG.gain.value = 0.018;
                 nSrc.connect(nBp); nBp.connect(nG); nG.connect(softG);
 
-                // ══ VARIANT "natur": pulsat brus (vingpuffar) ══════════
-                // En fluga låter inte som en ton utan som en snabb serie
-                // luftpuffar — en per vingslag. Därför amplitudmoduleras
-                // bandpassat brus av vingslagsfrekvensen i TVÅ steg: en
-                // sinus i två kaskadkopplade gain-steg ger sin²-formade
-                // pulser, alltså tydliga puffar i stället för ett jämnt
-                // sus. Under ligger en svag grundton så att tonhöjden
-                // fortfarande hörs. Detta är den naturtrogna varianten;
-                // "mjuk" finns kvar för den som vill ha något diskretare.
+                // ══ VARIANT "fluga": sågtand med kapad diskant ═════════
+                // Det som får ett surr att låta som en FLUGA är att tonen
+                // är övertonsrik — sågtanden har alla övertoner (1/n) och
+                // ger den karaktäristiska sträva klangen. Två försök gav
+                // fel resultat och båda är lärdomar värda att bevara:
+                //   • Ren sågtand med lågpass på 2400 Hz  → skar i öronen.
+                //   • Amplitudmodulerat brus (vingpuffar) → lät som
+                //     radiosprak, trots att det är fysikaliskt närmast.
+                // Rätt svar är sågtandens ÖVERTONER men bara de LÄGA: här
+                // passerar grundtonen och övertonerna upp till ~6:e (som
+                // bär surret), medan allt över ~2 kHz — där det skärande
+                // bor — kapas av två kaskadkopplade lågpass (24 dB/oktav)
+                // plus en hyllsänkning. Resonanstopparna hålls låga och
+                // breda; en smal topp låter genast nasal och tröttande.
                 const natG = actx.createGain();
                 natG.gain.value = 0;
                 natG.connect(trem);
 
-                const natMix = actx.createGain();
-                natMix.gain.value = 1;
-                const natLp = actx.createBiquadFilter();
-                natLp.type = 'lowpass'; natLp.frequency.value = 1700; natLp.Q.value = 0.5;
-                natMix.connect(natLp); natLp.connect(natG);
+                const nShelf = actx.createBiquadFilter();
+                nShelf.type = 'highshelf'; nShelf.frequency.value = 2200; nShelf.gain.value = -14;
+                nShelf.connect(natG);
+                const nLp2 = actx.createBiquadFilter();
+                nLp2.type = 'lowpass'; nLp2.frequency.value = 1700; nLp2.Q.value = 0.3;
+                nLp2.connect(nShelf);
+                const nLp1 = actx.createBiquadFilter();
+                nLp1.type = 'lowpass'; nLp1.frequency.value = 1350; nLp1.Q.value = 0.3;
+                nLp1.connect(nLp2);
+                const nPeak = actx.createBiquadFilter();
+                nPeak.type = 'peaking'; nPeak.frequency.value = 400; nPeak.Q.value = 0.8; nPeak.gain.value = 2;
+                nPeak.connect(nLp1);
 
-                // pulsad brusdel
-                const bSrc = mkNoise();
-                const bBp = actx.createBiquadFilter();
-                bBp.type = 'bandpass'; bBp.frequency.value = 700; bBp.Q.value = 1.1;
-                const am1 = actx.createGain(); am1.gain.value = 0.5;
-                const am2 = actx.createGain(); am2.gain.value = 0.5;
-                const amOsc = actx.createOscillator();
-                amOsc.type = 'sine'; amOsc.frequency.value = F_WING;
-                const amD1 = actx.createGain(); amD1.gain.value = 0.5;
-                const amD2 = actx.createGain(); amD2.gain.value = 0.5;
-                amOsc.connect(amD1); amD1.connect(am1.gain);
-                amOsc.connect(amD2); amD2.connect(am2.gain);
-                // De två AM-stegen släcker bruset mellan puffarna, så den
-                // genomsnittliga nivån blir bara ~0,375 av insignalen —
-                // kompensera här, annars blir varianten mycket svagare än
-                // den mjuka.
-                const bG = actx.createGain(); bG.gain.value = 3.4;
-                bSrc.connect(bBp); bBp.connect(am1); am1.connect(am2); am2.connect(bG);
-                bG.connect(natMix);
+                const sL = actx.createOscillator();
+                sL.type = 'sawtooth'; sL.frequency.value = F_WING;
+                const sR = actx.createOscillator();
+                sR.type = 'sawtooth'; sR.frequency.value = F_WING * 1.012;
+                const sG = actx.createGain(); sG.gain.value = 0.5;
+                sL.connect(sG); sR.connect(sG); sG.connect(nPeak);
 
-                // svag grundton som bär tonhöjden
-                const bodyOsc = actx.createOscillator();
-                bodyOsc.type = 'triangle'; bodyOsc.frequency.value = F_WING;
-                const bodyG = actx.createGain(); bodyG.gain.value = 0.22;
-                bodyOsc.connect(bodyG); bodyG.connect(natMix);
+                // en aning luft under tonen — knappt hörbar, men tar bort
+                // det syntetiska
+                const n2Src = mkNoise();
+                const n2Bp = actx.createBiquadFilter();
+                n2Bp.type = 'bandpass'; n2Bp.frequency.value = 800; n2Bp.Q.value = 0.8;
+                const n2G = actx.createGain(); n2G.gain.value = 0.02;
+                n2Src.connect(n2Bp); n2Bp.connect(n2G); n2G.connect(nPeak);
 
                 oL.start(); oR.start(); lfo1.start(); lfo2.start();
-                nSrc.start(); bSrc.start(); amOsc.start(); bodyOsc.start();
+                nSrc.start(); sL.start(); sR.start(); n2Src.start();
                 this._buzzJit = 0;
-                this.audio = { ctx: actx, master, pan, oL, oR, softG, natG, amOsc, bodyOsc };
+                // Filtren ligger med i objektet så att klangen går att mäta
+                // och finjustera utan att kedjan byggs om.
+                this.audio = { ctx: actx, master, pan, oL, oR, softG, natG, sL, sR,
+                               nPeak, nLp1, nLp2, nShelf };
             }
             resumeAudio() {
                 this.ensureAudio();
@@ -562,21 +566,18 @@
                 // Låg grundvolym: surret ska ligga i bakgrunden, inte ta över.
                 // Pulsvarianten har lägre medeleffekt (bruset är nedsläckt
                 // mellan puffarna) och kompenseras därför en aning.
-                // Den mjuka varianten är en TON och blir ohörbart mullrande
-                // under ~24 Hz, så den tystnar i ultrarapid. Pulsvarianten är
-                // brus och fungerar hela vägen ner: då hörs varje vingslag
-                // som en egen liten puff, i takt med vingarna på skärmen.
-                const audible = f > 24 || mode === 'natur';
-                const on = mode !== 'av' && flying && audible && !this.cfg.paused && !document.hidden;
+                // Båda varianterna är toner och blir ohörbart mullrande under
+                // ~24 Hz, så surret tystnar i ultrarapid.
+                const on = mode !== 'av' && flying && f > 24 && !this.cfg.paused && !document.hidden;
                 const lvl = clamp(this.cfg.rho / RHO0, 0, 1) * (0.6 + 0.4 * clamp(thrust, 0, 1.6));
-                a.master.gain.setTargetAtTime(on ? (mode === 'natur' ? 0.14 : 0.085) * lvl : 0, t, 0.09);
+                a.master.gain.setTargetAtTime(on ? (mode === 'natur' ? 0.10 : 0.085) * lvl : 0, t, 0.09);
                 a.softG.gain.setTargetAtTime(mode === 'mjuk' ? 1 : 0, t, 0.05);
                 a.natG.gain.setTargetAtTime(mode === 'natur' ? 1 : 0, t, 0.05);
                 const fs = Math.max(f, 8);
                 a.oL.frequency.setTargetAtTime(fs, t, 0.05);
                 a.oR.frequency.setTargetAtTime(fs * 1.012, t, 0.05);
-                a.amOsc.frequency.setTargetAtTime(fs, t, 0.05);
-                a.bodyOsc.frequency.setTargetAtTime(fs, t, 0.05);
+                a.sL.frequency.setTargetAtTime(fs, t, 0.05);
+                a.sR.frequency.setTargetAtTime(fs * 1.012, t, 0.05);
                 if (a.pan) a.pan.pan.setTargetAtTime(clamp(this.wander / 0.006, -1, 1) * 0.45, t, 0.1);
             }
 
@@ -2139,7 +2140,7 @@
                                             <span>Tryck mot botten</span>
                                         </label>
                                         <div className="st-title mt">Ljud</div>
-                                        {[['natur', 'Surr (naturtroget)'], ['mjuk', 'Surr (mjukt)'], ['av', 'Av']].map(([v, txt]) => (
+                                        {[['natur', 'Surr (fluga)'], ['mjuk', 'Surr (mjukt)'], ['av', 'Av']].map(([v, txt]) => (
                                             <label key={v}>
                                                 <input type="radio" name="ljud" checked={soundMode === v}
                                                     onChange={() => { setSoundMode(v); if (v !== 'av') simRef.current?.resumeAudio(); }} />

@@ -136,6 +136,7 @@
             background: var(--lab-bg-panel, #ffffff); color: var(--lab-ink, #0f1620);
             border-radius: 6px; padding: 5px 8px; font-size: 12.5px; font-weight: 600;
             cursor: pointer; transition: border-color 0.15s ease;
+            white-space: nowrap;
         }
         .scene-toggles .st-btn:hover { border-color: var(--lab-accent, #c8324a); }
         .scene-toggles .st-stack { margin-top: 6px; display: flex; flex-direction: column; gap: 5px; }
@@ -388,7 +389,7 @@
                 this.ctx = canvas.getContext('2d');
                 this.cfg = {
                     massMg: 12, rho: RHO0, hoverH: 0.06, beakerH: 0.12,
-                    lid: false, scaleType: 'lab', speedIdx: 0,
+                    lid: false, speedIdx: 0,
                     showAir: true, showPressure: true, boundary: 'ingen',
                     paused: false, tareG: 0, soundMode: 'natur',
                 };
@@ -853,8 +854,7 @@
                 this.lcdT += DT;
                 if (this.lcdT >= 0.2) {
                     this.lcdT = 0;
-                    const shown = this.cfg.scaleType === 'lab' ? this.scaleX : N;
-                    this.lcdG = Math.round(shown / G_ACC * 1000 * 10000) / 10000;
+                    this.lcdG = Math.round(this.scaleX / G_ACC * 1000 * 10000) / 10000;
                 }
 
                 // 12. Bokföring: N − M_tot·g = flugans + luftens
@@ -875,7 +875,7 @@
                 if (this._sampleAcc >= 0.00025) {
                     this._sampleAcc -= 0.00025;
                     const devS = this.scaleOn
-                        ? ((this.cfg.scaleType === 'lab' ? this.scaleX : N) - this.Nref) * 1e6
+                        ? (this.scaleX - this.Nref) * 1e6
                         : null;   // avstängd våg ritar ingen kurva
                     this.samples.push({ t: this.t, devI: dev * 1e6, devS });
                     if (this.samples.length > 20000) this.samples.splice(0, this.samples.length - 20000);
@@ -1167,7 +1167,7 @@
                 }
                 ctx.fillStyle = 'rgba(147,236,171,0.65)';
                 ctx.textAlign = 'right';
-                ctx.fillText(this.cfg.scaleType === 'lab' ? 'VÅG 0,1 mg' : 'IDEAL GIVARE', 604, 526);
+                ctx.fillText('VÅG 0,1 mg', 604, 526);
             }
 
             beakerGeom() {
@@ -1505,7 +1505,9 @@
                 // y-max (bara när den inte krockar med +mg-etiketten)
                 if (yOf(mg) - py0 > 14) ctx.fillText('+' + formatNum(maxDev, 0), px0 - 36, py0 + 3);
 
-                // kurvor: ideal givare (tunn, ink) + vald våg (accent)
+                // kurvor: den verkliga momentana kraften (tunn, ink) + vad
+                // den dämpade vågen faktiskt visar (accent) — kontrasten
+                // förklarar varför inget syns i ett verkligt klassrumsförsök
                 if (this.samples.length > 1) {
                     let i0 = this.samples.length - 1;
                     while (i0 > 0 && this.samples[i0 - 1].t >= t0) i0--;
@@ -1542,10 +1544,10 @@
                 ctx.lineWidth = 1.6;
                 ctx.beginPath(); ctx.moveTo(px0, gy + gh - 8); ctx.lineTo(px0 + 14, gy + gh - 8); ctx.stroke();
                 ctx.fillStyle = INK_MUTED;
-                ctx.fillText('ideal givare', px0 + 18, gy + gh - 5);
+                ctx.fillText('verklig kraft', px0 + 18, gy + gh - 5);
                 ctx.strokeStyle = COL_ACCENT;
                 ctx.beginPath(); ctx.moveTo(px0 + 82, gy + gh - 8); ctx.lineTo(px0 + 96, gy + gh - 8); ctx.stroke();
-                ctx.fillText(!this.scaleOn ? 'vågen avstängd' : (this.cfg.scaleType === 'lab' ? 'laboratorievåg' : 'vald: ideal'), px0 + 100, gy + gh - 5);
+                ctx.fillText(!this.scaleOn ? 'vågen avstängd' : 'vågen visar', px0 + 100, gy + gh - 5);
                 ctx.textAlign = 'right';
                 ctx.fillText('fönster ' + fmtSmart(W, 2) + ' s', px1, gy + gh - 5);
             }
@@ -1803,7 +1805,6 @@
             const [hoverH, setHoverH] = useState(0.06);
             const [beakerH, setBeakerH] = useState(0.12);
             const [lid, setLid] = useState(false);
-            const [scaleType, setScaleType] = useState('lab');
             const [speedIdx, setSpeedIdx] = useState(0);
             const [showAir, setShowAir] = useState(true);
             const [soundMode, setSoundMode] = useState('natur');   // 'av' | 'mjuk' | 'natur'
@@ -1846,10 +1847,10 @@
                 const sim = simRef.current;
                 if (!sim) return;
                 Object.assign(sim.cfg, {
-                    massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx,
+                    massMg, rho, hoverH, beakerH, lid, speedIdx,
                     showAir, showPressure, boundary, paused, soundMode,
                 });
-            }, [massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx, showAir, showPressure, boundary, paused, soundMode]);
+            }, [massMg, rho, hoverH, beakerH, lid, speedIdx, showAir, showPressure, boundary, paused, soundMode]);
 
             // Starta ett förlopp (med ev. förloppsspecifika förutsättningar)
             const runScenario = useCallback((id) => {
@@ -2229,15 +2230,6 @@
                                             <input type="checkbox" checked={lid} onChange={(e) => setLid(e.target.checked)} />
                                             <span>Lock på bägaren</span>
                                         </label>
-                                        <div className="st-title mt">Våg</div>
-                                        <label>
-                                            <input type="radio" name="vagtyp" checked={scaleType === 'lab'} onChange={() => setScaleType('lab')} />
-                                            <span>Laboratorievåg (dämpad)</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="vagtyp" checked={scaleType === 'ideal'} onChange={() => setScaleType('ideal')} />
-                                            <span>Ideal kraftgivare</span>
-                                        </label>
                                         <div className="st-actions">
                                             <button type="button" className="st-btn" onClick={() => setPaused(p => !p)}>
                                                 {paused ? 'Starta' : 'Pausa'}
@@ -2299,9 +2291,10 @@
                                     <li><strong>Energi och rörelsemängd är olika saker:</strong> flugan uträttar hela tiden
                                         arbete mot luften och luften värms en aning — men det påverkar inte kraftbalansen.
                                         Vågen mäter kraft, inte energi.</li>
-                                    <li>Jämför <strong>ideal kraftgivare</strong> med <strong>laboratorievågen</strong>: givaren ser
-                                        både vingslagens 200 Hz-rippel och de korta start- och landningsspikarna, medan den
-                                        dämpade vågen filtrerar bort alltihop. Det är därför man aldrig ser något hända i ett
+                                    <li>Jämför grafens två kurvor: den grå visar den <strong>verkliga kraften</strong> mot
+                                        vågen — med vingslagens 200 Hz-rippel och de korta start- och landningsspikarna —
+                                        medan den röda visar vad den dämpade <strong>laboratorievågen</strong> hinner uppfatta.
+                                        Vågen filtrerar bort alltihop, och det är därför man aldrig ser något hända i ett
                                         verkligt klassrumsförsök.</li>
                                 </ul>
                             </div>

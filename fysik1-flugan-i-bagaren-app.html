@@ -372,7 +372,7 @@
                     massMg: 12, rho: RHO0, hoverH: 0.06, beakerH: 0.12,
                     lid: false, scaleType: 'lab', speedIdx: 0,
                     showAir: true, showPressure: true, boundary: 'ingen',
-                    paused: false, tareG: 0, sound: true,
+                    paused: false, tareG: 0, soundMode: 'natur',
                 };
                 this.onReadout = null;
                 this.scaleOn = true;      // vågens ON/OFF-knapp
@@ -441,6 +441,7 @@
                     master.connect(actx.destination);
                 }
 
+                // ── Gemensam efterbehandling ──
                 // ojämn tremolo: basnivå 1 moduleras av två LFO:er.
                 // Grunt djup — en djup tremolo blir rastlös att lyssna på.
                 const trem = actx.createGain();
@@ -455,17 +456,32 @@
                 const lfo2g = actx.createGain(); lfo2g.gain.value = 0.13;
                 lfo2.connect(lfo2g); lfo2g.connect(trem.gain);
 
-                // svag formant + mjuk lågpass i två steg (12 dB/oktav vardera
-                // → brant nog att kapa den vassa diskanten helt)
+                // Gemensam brusbuffert (vitt brus, loopat)
+                const nLen = Math.floor(actx.sampleRate * 2);
+                const nBuf = actx.createBuffer(1, nLen, actx.sampleRate);
+                const nd = nBuf.getChannelData(0);
+                for (let i = 0; i < nLen; i++) nd[i] = Math.random() * 2 - 1;
+                const mkNoise = () => {
+                    const s = actx.createBufferSource();
+                    s.buffer = nBuf; s.loop = true;
+                    return s;
+                };
+
+                // ══ VARIANT "mjuk": stämd ton ══════════════════════════
+                // Två svävande triangelvågor genom en låg lågpass. Rundast
+                // och mest diskret — men just därför nästan flöjtlik.
+                const softG = actx.createGain();
+                softG.gain.value = 0;
+                softG.connect(trem);
+
                 const peak = actx.createBiquadFilter();
                 peak.type = 'peaking'; peak.frequency.value = 320; peak.Q.value = 0.9; peak.gain.value = 3;
                 const lp = actx.createBiquadFilter();
                 lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 0.4;
                 const lp2 = actx.createBiquadFilter();
                 lp2.type = 'lowpass'; lp2.frequency.value = 1500; lp2.Q.value = 0.4;
-                peak.connect(lp); lp.connect(lp2); lp2.connect(trem);
+                peak.connect(lp); lp.connect(lp2); lp2.connect(softG);
 
-                // de två "vingarna" — triangel, inte sågtand (se kommentaren ovan)
                 const oL = actx.createOscillator();
                 oL.type = 'triangle'; oL.frequency.value = F_WING;
                 const oR = actx.createOscillator();
@@ -473,22 +489,61 @@
                 const oG = actx.createGain(); oG.gain.value = 0.5;
                 oL.connect(oG); oR.connect(oG); oG.connect(peak);
 
-                // luftbrus (bandpassat vitt brus, loopat) — knappt hörbart,
-                // ger bara liv åt tonen
-                const nLen = Math.floor(actx.sampleRate * 2);
-                const nBuf = actx.createBuffer(1, nLen, actx.sampleRate);
-                const nd = nBuf.getChannelData(0);
-                for (let i = 0; i < nLen; i++) nd[i] = Math.random() * 2 - 1;
-                const nSrc = actx.createBufferSource();
-                nSrc.buffer = nBuf; nSrc.loop = true;
+                const nSrc = mkNoise();
                 const nBp = actx.createBiquadFilter();
                 nBp.type = 'bandpass'; nBp.frequency.value = 620; nBp.Q.value = 0.9;
                 const nG = actx.createGain(); nG.gain.value = 0.018;
-                nSrc.connect(nBp); nBp.connect(nG); nG.connect(trem);
+                nSrc.connect(nBp); nBp.connect(nG); nG.connect(softG);
 
-                oL.start(); oR.start(); lfo1.start(); lfo2.start(); nSrc.start();
+                // ══ VARIANT "natur": pulsat brus (vingpuffar) ══════════
+                // En fluga låter inte som en ton utan som en snabb serie
+                // luftpuffar — en per vingslag. Därför amplitudmoduleras
+                // bandpassat brus av vingslagsfrekvensen i TVÅ steg: en
+                // sinus i två kaskadkopplade gain-steg ger sin²-formade
+                // pulser, alltså tydliga puffar i stället för ett jämnt
+                // sus. Under ligger en svag grundton så att tonhöjden
+                // fortfarande hörs. Detta är den naturtrogna varianten;
+                // "mjuk" finns kvar för den som vill ha något diskretare.
+                const natG = actx.createGain();
+                natG.gain.value = 0;
+                natG.connect(trem);
+
+                const natMix = actx.createGain();
+                natMix.gain.value = 1;
+                const natLp = actx.createBiquadFilter();
+                natLp.type = 'lowpass'; natLp.frequency.value = 1700; natLp.Q.value = 0.5;
+                natMix.connect(natLp); natLp.connect(natG);
+
+                // pulsad brusdel
+                const bSrc = mkNoise();
+                const bBp = actx.createBiquadFilter();
+                bBp.type = 'bandpass'; bBp.frequency.value = 700; bBp.Q.value = 1.1;
+                const am1 = actx.createGain(); am1.gain.value = 0.5;
+                const am2 = actx.createGain(); am2.gain.value = 0.5;
+                const amOsc = actx.createOscillator();
+                amOsc.type = 'sine'; amOsc.frequency.value = F_WING;
+                const amD1 = actx.createGain(); amD1.gain.value = 0.5;
+                const amD2 = actx.createGain(); amD2.gain.value = 0.5;
+                amOsc.connect(amD1); amD1.connect(am1.gain);
+                amOsc.connect(amD2); amD2.connect(am2.gain);
+                // De två AM-stegen släcker bruset mellan puffarna, så den
+                // genomsnittliga nivån blir bara ~0,375 av insignalen —
+                // kompensera här, annars blir varianten mycket svagare än
+                // den mjuka.
+                const bG = actx.createGain(); bG.gain.value = 3.4;
+                bSrc.connect(bBp); bBp.connect(am1); am1.connect(am2); am2.connect(bG);
+                bG.connect(natMix);
+
+                // svag grundton som bär tonhöjden
+                const bodyOsc = actx.createOscillator();
+                bodyOsc.type = 'triangle'; bodyOsc.frequency.value = F_WING;
+                const bodyG = actx.createGain(); bodyG.gain.value = 0.22;
+                bodyOsc.connect(bodyG); bodyG.connect(natMix);
+
+                oL.start(); oR.start(); lfo1.start(); lfo2.start();
+                nSrc.start(); bSrc.start(); amOsc.start(); bodyOsc.start();
                 this._buzzJit = 0;
-                this.audio = { ctx: actx, master, pan, oL, oR };
+                this.audio = { ctx: actx, master, pan, oL, oR, softG, natG, amOsc, bodyOsc };
             }
             resumeAudio() {
                 this.ensureAudio();
@@ -503,13 +558,25 @@
                 // vingslagsfrekvensens slumpvandring (±5 %)
                 this._buzzJit = clamp((this._buzzJit || 0) * 0.985 + (Math.random() - 0.5) * 0.012, -0.05, 0.05);
                 const f = F_WING * speed * (0.88 + 0.18 * clamp(thrust, 0, 2)) * (1 + this._buzzJit);
+                const mode = this.cfg.soundMode;
                 // Låg grundvolym: surret ska ligga i bakgrunden, inte ta över.
-                const vol = (this.cfg.sound && flying && f > 24 && !this.cfg.paused && !document.hidden)
-                    ? 0.085 * clamp(this.cfg.rho / RHO0, 0, 1) * (0.6 + 0.4 * clamp(thrust, 0, 1.6))
-                    : 0;
-                a.master.gain.setTargetAtTime(vol, t, 0.09);
-                a.oL.frequency.setTargetAtTime(Math.max(f, 8), t, 0.05);
-                a.oR.frequency.setTargetAtTime(Math.max(f, 8) * 1.012, t, 0.05);
+                // Pulsvarianten har lägre medeleffekt (bruset är nedsläckt
+                // mellan puffarna) och kompenseras därför en aning.
+                // Den mjuka varianten är en TON och blir ohörbart mullrande
+                // under ~24 Hz, så den tystnar i ultrarapid. Pulsvarianten är
+                // brus och fungerar hela vägen ner: då hörs varje vingslag
+                // som en egen liten puff, i takt med vingarna på skärmen.
+                const audible = f > 24 || mode === 'natur';
+                const on = mode !== 'av' && flying && audible && !this.cfg.paused && !document.hidden;
+                const lvl = clamp(this.cfg.rho / RHO0, 0, 1) * (0.6 + 0.4 * clamp(thrust, 0, 1.6));
+                a.master.gain.setTargetAtTime(on ? (mode === 'natur' ? 0.14 : 0.085) * lvl : 0, t, 0.09);
+                a.softG.gain.setTargetAtTime(mode === 'mjuk' ? 1 : 0, t, 0.05);
+                a.natG.gain.setTargetAtTime(mode === 'natur' ? 1 : 0, t, 0.05);
+                const fs = Math.max(f, 8);
+                a.oL.frequency.setTargetAtTime(fs, t, 0.05);
+                a.oR.frequency.setTargetAtTime(fs * 1.012, t, 0.05);
+                a.amOsc.frequency.setTargetAtTime(fs, t, 0.05);
+                a.bodyOsc.frequency.setTargetAtTime(fs, t, 0.05);
                 if (a.pan) a.pan.pan.setTargetAtTime(clamp(this.wander / 0.006, -1, 1) * 0.45, t, 0.1);
             }
 
@@ -1708,7 +1775,7 @@
             const [scaleType, setScaleType] = useState('lab');
             const [speedIdx, setSpeedIdx] = useState(0);
             const [showAir, setShowAir] = useState(true);
-            const [sound, setSound] = useState(true);
+            const [soundMode, setSoundMode] = useState('natur');   // 'av' | 'mjuk' | 'natur'
             const [showPressure, setShowPressure] = useState(true);
             const [boundary, setBoundary] = useState('ingen');
             const [paused, setPaused] = useState(false);
@@ -1750,9 +1817,9 @@
                 if (!sim) return;
                 Object.assign(sim.cfg, {
                     massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx,
-                    showAir, showPressure, boundary, paused, sound,
+                    showAir, showPressure, boundary, paused, soundMode,
                 });
-            }, [massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx, showAir, showPressure, boundary, paused, sound]);
+            }, [massMg, rho, hoverH, beakerH, lid, scaleType, speedIdx, showAir, showPressure, boundary, paused, soundMode]);
 
             // Starta ett förlopp (med ev. förloppsspecifika förutsättningar)
             const runScenario = useCallback((id) => {
@@ -2071,11 +2138,14 @@
                                             <input type="checkbox" checked={showPressure} onChange={(e) => setShowPressure(e.target.checked)} />
                                             <span>Tryck mot botten</span>
                                         </label>
-                                        <label>
-                                            <input type="checkbox" checked={sound}
-                                                onChange={(e) => { setSound(e.target.checked); if (e.target.checked) simRef.current?.resumeAudio(); }} />
-                                            <span>Ljud (surr)</span>
-                                        </label>
+                                        <div className="st-title mt">Ljud</div>
+                                        {[['natur', 'Surr (naturtroget)'], ['mjuk', 'Surr (mjukt)'], ['av', 'Av']].map(([v, txt]) => (
+                                            <label key={v}>
+                                                <input type="radio" name="ljud" checked={soundMode === v}
+                                                    onChange={() => { setSoundMode(v); if (v !== 'av') simRef.current?.resumeAudio(); }} />
+                                                <span>{txt}</span>
+                                            </label>
+                                        ))}
                                         <div className="st-title mt">Bägare</div>
                                         <label>
                                             <input type="checkbox" checked={lid} onChange={(e) => setLid(e.target.checked)} />

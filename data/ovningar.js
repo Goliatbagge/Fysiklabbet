@@ -5389,7 +5389,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Två vagnar, *A* (massa 3,0 kg) och *B* (massa 2,0 kg), är förbundna med ett lätt, sträckbart snöre och vilar på ett friktionsfritt bord. En horisontell kraft *F* = 15 N dras på vagn *A* så att hela systemet accelererar bort från *B*. Snöret går mellan dem och drar därför *B* framåt med en spännkraft *T*.
+            question: `Två lådor, *A* (massa 3,0 kg) och *B* (massa 2,0 kg), är förbundna med ett lätt, osträckbart snöre och ligger på ett friktionsfritt bord. En horisontell kraft $F = 15\\ \\mathrm{N}$ drar i låda *A* så att hela systemet glider i väg med *B* på släp. Snöret går mellan dem och drar därför *B* framåt med en spännkraft *T*.
 
 a) Beräkna systemets gemensamma acceleration.
 
@@ -5397,13 +5397,13 @@ b) Beräkna **spännkraften** *T* i snöret.
 
 *Ange spännkraften (b) som ditt numeriska svar i N.*`,
             answer: { value: 6.0, unit: 'N', tol: 0.03 },
-            solution: `**a)** Båda vagnarna rör sig som ett system med total massa $m_A + m_B$. Den enda yttre horisontella kraften är *F* = 15 N (snörets spännkraft är intern):
+            solution: `**a)** Båda lådorna rör sig som ett system med total massa $m_A + m_B$. Den enda yttre horisontella kraften är $F = 15\\ \\mathrm{N}$ (snörets spännkraft är intern):
 
 $$
 a = \\frac{F}{m_A + m_B} = \\frac{15}{3{,}0 + 2{,}0} = \\frac{15}{5{,}0} = 3{,}0\\ \\mathrm{m/s^2}
 $$
 
-**b)** Spännkraften *T* är den enda horisontella kraften på vagn *B*. Newtons andra lag på vagn *B* ensam:
+**b)** Spännkraften *T* är den enda horisontella kraften på låda *B*. Newtons andra lag på låda *B* ensam:
 
 $$
 T = m_B \\cdot a = 2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{N}
@@ -5441,7 +5441,7 @@ $$
 
 **Svar:** a) Ca 1,2 m/s². b) Ca 2,7 kN.
 
-**Generell slutsats:** Samma teknik som i vagnproblemet: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration — det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
+**Generell slutsats:** Samma teknik som i förra uppgiften: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration — det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
         },
     ],
 
@@ -6869,7 +6869,7 @@ $$
         },
         {
             level: 2,
-            question: `En vagn med massan 28 kg dras 4,5 m uppför ett **friktionsfritt** lutande plan med vinkeln 20° över horisontalplanet. Vilket arbete uträttas mot tyngdkraften? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En låda med massan 28 kg dras 4,5 m uppför ett **friktionsfritt** lutande plan med vinkeln 20° över horisontalplanet. Vilket arbete uträttas mot tyngdkraften? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 423, unit: 'J', tol: 0.03 },
             solution: `På ett lutande plan utan friktion är det enda du arbetar mot komponenten av tyngdkraften nedför planet:
 
@@ -6885,7 +6885,7 @@ $$
 
 **Svar:** Ca 423 J.
 
-**Generell slutsats:** Samma resultat fås om man räknar via lägesenergin: höjdökningen är $h = s \\sin\\alpha = 4{,}5 \\cdot \\sin 20^{\\circ} \\approx 1{,}54$ m, och $W = mgh = 28 \\cdot 9{,}82 \\cdot 1{,}54 \\approx 423$ J. *Höjdökningen* är det som spelar roll — inte den sträcka vagnen rullar.`,
+**Generell slutsats:** Samma resultat fås om man räknar via lägesenergin: höjdökningen är $h = s \\sin\\alpha = 4{,}5 \\cdot \\sin 20^{\\circ} \\approx 1{,}54$ m, och $W = mgh = 28 \\cdot 9{,}82 \\cdot 1{,}54 \\approx 423$ J. *Höjdökningen* är det som spelar roll — inte den sträcka lådan glider.`,
         },
         {
             level: 3,
@@ -6972,7 +6972,7 @@ $$
         },
         {
             level: 2,
-            question: `En vagn med massan 32 kg dras 5,0 m uppför ett friktionsfritt lutande plan med vinkeln 30°. Vilket arbete uträttas för att lyfta vagnen? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En låda med massan 32 kg dras 5,0 m uppför ett friktionsfritt lutande plan med vinkeln 30°. Vilket arbete uträttas för att lyfta lådan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 786, unit: 'J', tol: 0.03 },
             solution: `Utan friktion motsvarar arbetet hela ökningen av lägesenergi. Höjdökningen:
 
@@ -7204,7 +7204,7 @@ $$
         },
         {
             level: 2,
-            question: `En vagn rullar nedför en friktionsfri bana från höjden 4,0 m. Vid en viss punkt är dess fart 6,0 m/s. Hur högt över marken befinner sig vagnen då? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En låda glider nedför en friktionsfri bana från höjden 4,0 m. Vid en viss punkt är dess fart 6,0 m/s. Hur högt över marken befinner sig lådan då? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 2.17, unit: 'm', tol: 0.03 },
             solution: `Energiprincipen mellan startpunkten (höjd 4,0 m, fart 0) och mätpunkten (höjd $h$, fart 6,0 m/s):
 
@@ -7218,7 +7218,7 @@ $$
 h = h_0 - \\frac{v^{2}}{2 g} = 4{,}0 - \\frac{6{,}0^{2}}{2 \\cdot 9{,}82} \\approx 4{,}0 - 1{,}833 \\approx 2{,}17\\ \\mathrm{m}
 $$
 
-**Svar:** Vagnen befinner sig ca 2,2 m över marken.`,
+**Svar:** Lådan befinner sig ca 2,2 m över marken.`,
         },
         {
             level: 2,

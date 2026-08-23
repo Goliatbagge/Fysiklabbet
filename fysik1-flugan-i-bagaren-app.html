@@ -404,14 +404,23 @@
             // Det som gör ett riktigt flugsurr igenkännligt är inte tonen i
             // sig utan ojämnheterna:
             //   1. Två vingar som aldrig är exakt samstämda → långsam
-            //      svävning (två sågtandsoscillatorer, ~1,4 % isär).
+            //      svävning (två oscillatorer, ~1,2 % isär).
             //   2. Vingslagsfrekvensen vandrar hela tiden (slumpvandring
             //      ±5 %) och stiger när flugan drar på.
             //   3. Ojämn tremolo — volymen vaggar på två osammanhängande
             //      LFO-frekvenser (flugan vrider sig mot/från lyssnaren).
-            //   4. Formant kring ~480 Hz (kroppens resonans) + lågpass.
+            //   4. Mjuk lågpass + svag formant kring 320 Hz.
             //   5. Svagt bandpassat luftbrus under tonen.
             //   6. Stereopanorering som följer flugans vandring i sidled.
+            //
+            // ⚠️ TONEN SKA VARA MJUK — ljudet hörs i minuter i sträck i ett
+            // klassrum, så det får aldrig skära. Därför TRIANGELVÅGOR (bara
+            // udda övertoner som dessutom avtar med 1/n², mot sågtandens
+            // 1/n): en sågtand här lät vasst och tröttande (påpekat
+            // 2026-08-23). Lågpassen ligger lågt (~900 Hz) så att surret
+            // hörs som ett dämpat "mmm" på andra sidan rummet, och
+            // grundvolymen är låg. Höj inte kantigheten igen.
+            //
             // Skapas lazy vid första användargesten (autoplay-policyn).
             // Tonhöjden följer uppspelningshastigheten — i ultrarapid
             // pitchas surret ner under hörtröskeln — och volymen skalar
@@ -432,35 +441,40 @@
                     master.connect(actx.destination);
                 }
 
-                // ojämn tremolo: basnivå 1 moduleras av två LFO:er
+                // ojämn tremolo: basnivå 1 moduleras av två LFO:er.
+                // Grunt djup — en djup tremolo blir rastlös att lyssna på.
                 const trem = actx.createGain();
                 trem.gain.value = 1;
                 trem.connect(master);
                 const lfo1 = actx.createOscillator();
-                lfo1.frequency.value = 7.3;
-                const lfo1g = actx.createGain(); lfo1g.gain.value = 0.14;
+                lfo1.frequency.value = 5.1;
+                const lfo1g = actx.createGain(); lfo1g.gain.value = 0.07;
                 lfo1.connect(lfo1g); lfo1g.connect(trem.gain);
                 const lfo2 = actx.createOscillator();
-                lfo2.frequency.value = 1.13;
-                const lfo2g = actx.createGain(); lfo2g.gain.value = 0.2;
+                lfo2.frequency.value = 0.83;
+                const lfo2g = actx.createGain(); lfo2g.gain.value = 0.13;
                 lfo2.connect(lfo2g); lfo2g.connect(trem.gain);
 
-                // formant + lågpass
+                // svag formant + mjuk lågpass i två steg (12 dB/oktav vardera
+                // → brant nog att kapa den vassa diskanten helt)
                 const peak = actx.createBiquadFilter();
-                peak.type = 'peaking'; peak.frequency.value = 480; peak.Q.value = 1.1; peak.gain.value = 7;
+                peak.type = 'peaking'; peak.frequency.value = 320; peak.Q.value = 0.9; peak.gain.value = 3;
                 const lp = actx.createBiquadFilter();
-                lp.type = 'lowpass'; lp.frequency.value = 2400; lp.Q.value = 0.6;
-                peak.connect(lp); lp.connect(trem);
+                lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 0.4;
+                const lp2 = actx.createBiquadFilter();
+                lp2.type = 'lowpass'; lp2.frequency.value = 1500; lp2.Q.value = 0.4;
+                peak.connect(lp); lp.connect(lp2); lp2.connect(trem);
 
-                // de två "vingarna"
+                // de två "vingarna" — triangel, inte sågtand (se kommentaren ovan)
                 const oL = actx.createOscillator();
-                oL.type = 'sawtooth'; oL.frequency.value = F_WING;
+                oL.type = 'triangle'; oL.frequency.value = F_WING;
                 const oR = actx.createOscillator();
-                oR.type = 'sawtooth'; oR.frequency.value = F_WING * 1.014;
+                oR.type = 'triangle'; oR.frequency.value = F_WING * 1.012;
                 const oG = actx.createGain(); oG.gain.value = 0.5;
                 oL.connect(oG); oR.connect(oG); oG.connect(peak);
 
-                // luftbrus (bandpassat vitt brus, loopat)
+                // luftbrus (bandpassat vitt brus, loopat) — knappt hörbart,
+                // ger bara liv åt tonen
                 const nLen = Math.floor(actx.sampleRate * 2);
                 const nBuf = actx.createBuffer(1, nLen, actx.sampleRate);
                 const nd = nBuf.getChannelData(0);
@@ -468,8 +482,8 @@
                 const nSrc = actx.createBufferSource();
                 nSrc.buffer = nBuf; nSrc.loop = true;
                 const nBp = actx.createBiquadFilter();
-                nBp.type = 'bandpass'; nBp.frequency.value = 1100; nBp.Q.value = 0.7;
-                const nG = actx.createGain(); nG.gain.value = 0.045;
+                nBp.type = 'bandpass'; nBp.frequency.value = 620; nBp.Q.value = 0.9;
+                const nG = actx.createGain(); nG.gain.value = 0.018;
                 nSrc.connect(nBp); nBp.connect(nG); nG.connect(trem);
 
                 oL.start(); oR.start(); lfo1.start(); lfo2.start(); nSrc.start();
@@ -489,12 +503,13 @@
                 // vingslagsfrekvensens slumpvandring (±5 %)
                 this._buzzJit = clamp((this._buzzJit || 0) * 0.985 + (Math.random() - 0.5) * 0.012, -0.05, 0.05);
                 const f = F_WING * speed * (0.88 + 0.18 * clamp(thrust, 0, 2)) * (1 + this._buzzJit);
+                // Låg grundvolym: surret ska ligga i bakgrunden, inte ta över.
                 const vol = (this.cfg.sound && flying && f > 24 && !this.cfg.paused && !document.hidden)
-                    ? 0.24 * clamp(this.cfg.rho / RHO0, 0, 1) * (0.5 + 0.5 * clamp(thrust, 0, 1.6))
+                    ? 0.085 * clamp(this.cfg.rho / RHO0, 0, 1) * (0.6 + 0.4 * clamp(thrust, 0, 1.6))
                     : 0;
-                a.master.gain.setTargetAtTime(vol, t, 0.07);
-                a.oL.frequency.setTargetAtTime(Math.max(f, 8), t, 0.04);
-                a.oR.frequency.setTargetAtTime(Math.max(f, 8) * 1.014, t, 0.04);
+                a.master.gain.setTargetAtTime(vol, t, 0.09);
+                a.oL.frequency.setTargetAtTime(Math.max(f, 8), t, 0.05);
+                a.oR.frequency.setTargetAtTime(Math.max(f, 8) * 1.012, t, 0.05);
                 if (a.pan) a.pan.pan.setTargetAtTime(clamp(this.wander / 0.006, -1, 1) * 0.45, t, 0.1);
             }
 

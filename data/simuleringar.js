@@ -89,6 +89,12 @@ window.SIM_NAMES = {
     { name: 'Skiftnyckeln och hävarmen', href: 'fysik2-skiftnyckel-app.html', desc: 'Flytta kraftens angreppspunkt längs skaftet, vrid kraften ett helt varv och se hävarmen — det vinkelräta avståndet till riktningslinjen — ändras i realtid. Lossnar den tröga muttern?',
       kw: ['krafter','kraftmoment','vridmoment','moment','hävarm','skiftnyckel','mutter','riktningslinje','angreppspunkt','vinkel','vinkelrät','vridningspunkt','vridning','medurs','moturs','verktyg','statik','mekanik'] },
   ],
+  'fysik2-brada-tva-stod-app.html': [
+    { name: 'Brädan på två bockar', desc: 'Dra i lasten och i stöden och se stödkrafterna F_P och F_Q live. Välj vridningspunkt fritt (vid ett stöd blir dess hävarm 0) och lös ut den andra kraften med momentlagen — och se brädan välta när tyngdpunkten passerar ett stöd.',
+      kw: ['krafter','moment','vridmoment','kraftmoment','momentlagen','jämvikt','vridningspunkt','stöd','stödkraft','bock','bräda','hävarm','tyngdpunkt','vältning','statik','mekanik'] },
+    { name: 'Gaffelbalansen', href: 'fysik2-gaffelbalans-app.html', desc: 'Det klassiska balanstricket i 3D: två gafflar i en kork balanserar på en nålspets mot den smala kanten av ett mynt på högkant. Knuffa till, ändra gaffelvinkeln och se varför det är så lätt — tyngdpunkten hamnar under stödpunkten.',
+      kw: ['krafter','moment','kraftmoment','tyngdpunkt','stödpunkt','stabilitet','stabil jämvikt','balans','balanstrick','gaffel','gafflar','kork','nål','mynt','pendel','hävarm','3d','statik','mekanik'] },
+  ],
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': 'Jämförelse av svängningar',

@@ -16,8 +16,9 @@
  *
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
- *           Tillgängliga typer: tomtebloss, centrifug, fjaderpendel,
- *           skiftnyckel, valtning, linjal, fodelsedag, talmangder
+ *           Tillgängliga typer: tomtebloss, centrifug, eulersdisk,
+ *           fjaderpendel, skiftnyckel, valtning, linjal, fodelsedag,
+ *           talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -54,6 +55,27 @@
  * spårlager — tangenterna syns i efterhand), fullskärm samt syntetiserat
  * ljud (motorton som följer varvtalet + vattenfräs som följer
  * utslungningen — inga ljudfiler).
+ *
+ * ── typ: eulersdisk ──────────────────────────────────────────────────────
+ * Demonstrationen ur fy1-4.4 (Energiprincipen): en blankpolerad metalldisk
+ * ("Eulers disk") som snurras på en spegelblank sockel. Disken rullar på
+ * sin kant och vaggar runt, runt — och när lutningsvinkeln α sjunker (och
+ * tyngdpunkten med den) stiger vaggningens varvtal enligt rulldiskens
+ * Ω = √(4g/(R·sin α)): lägesenergin omvandlas till rörelseenergi, precis
+ * som demonstrationen i genomgången beskriver. Lutningen avtar med
+ * Moffatts lag α ∝ (T−t)^(2/3), så förloppet slutar i den karakteristiska
+ * finalen där vaggningen rusar i frekvens och disken abrupt lägger sig
+ * platt med ett skallrande ljud. Markören på diskens ansikte visar diskens
+ * EGEN rotation, ψ̇ = Ω(1−cos α) — den nästan står stilla på slutet medan
+ * vaggningen rasar, precis som i verkligheten. Kryssrutan "Visa spår"
+ * ritar kontaktpunktens bana på sockeln (en långsamt borttonande ring som
+ * vidgas när disken planar ut), "Visa energi" ritar staplar för läges-,
+ * rörelse- och värmeenergi (summan konstant — energiprincipen), och
+ * "Ultrarapid" gör slutrusningen synlig. Syntetiserat ljud via Web Audio:
+ * en ringande ton vars frekvens och tremolo följer vaggningens varvtal,
+ * plus skallret när disken lägger sig — inga ljudfiler. Ritad i
+ * laboranstemat (papper med kollegierutnät) med disken i pseudo-3D:
+ * kromgradienter, spegelbild i sockeln och rörelseoskärpa vid hög fart.
  *
  * ── typ: fjaderpendel ────────────────────────────────────────────────────
  * Demonstrationen ur fy2-2.1 (Hookes lag): en vikt som hänger i en
@@ -1729,6 +1751,781 @@
 
         // Litet test-handtag (används av e2e-skriptet i .shots/)
         card._audioState = function () { return audio ? audio.ctx.state : 'none'; };
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: eulersdisk
+    // ══════════════════════════════════════════════════════════════════════
+    function buildEulersdisk(node, cfg) {
+        var W = 560, H = 430;          // logisk ritstorlek
+        var CX = W / 2;                // sockelns mitt i sidled
+        var BY = 300;                  // sockelns ovansida (kontaktplanet z = 0)
+        var KY = 0.30, KZ = 0.95;      // projektion: djup- och höjdfaktor
+        var RB = 190;                  // sockelns radie (3D-enheter = px i x-led)
+        var SH = 26;                   // sockelns synliga sidohöjd
+        var R3 = 110;                  // diskens radie i ritenheter
+        var TH = 9;                    // diskens tjocklek i ritenheter
+        var R_M = 0.037;               // diskens verkliga radie (m) — klassisk leksak
+        var G = 9.82;                  // tyngdfaktor (N/kg)
+        var AL0 = 70 * Math.PI / 180;  // startlutning (som när man snurrar för hand)
+        var AL_END = 0.9 * Math.PI / 180; // lutning där disken abrupt lägger sig
+        var T_ROLL = 40;               // sekunder från snurr till final
+        var OMEGA_CAP = 300;           // rad/s-tak (skyddar ljud/rendering)
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En blank metalldisk, en så kallad Eulers disk, som rullar runt på ' +
+            'sin kant på en spegelblank sockel. När lutningen minskar och ' +
+            'tyngdpunkten sjunker ökar vaggningens varvtal — lägesenergi ' +
+            'omvandlas till rörelseenergi — tills disken abrupt lägger sig.');
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+
+        var ICON_SND_ON =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var ICON_SND_OFF =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.className = 'minisim-sndbtn';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        sndBtn.title = 'Ljud av';
+        sndBtn.innerHTML = ICON_SND_ON;
+        scene.appendChild(sndBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var spinBtn = document.createElement('button');
+        spinBtn.type = 'button';
+        spinBtn.className = 'minisim-btn ms-primar';
+        spinBtn.textContent = 'Snurra disken';
+
+        var pausBtn = document.createElement('button');
+        pausBtn.type = 'button';
+        pausBtn.className = 'minisim-btn';
+        pausBtn.textContent = 'Pausa';
+
+        var slowLbl = document.createElement('label');
+        slowLbl.className = 'minisim-check';
+        var slowCb = document.createElement('input');
+        slowCb.type = 'checkbox';
+        slowLbl.appendChild(slowCb);
+        slowLbl.appendChild(document.createTextNode('Ultrarapid'));
+
+        var trailLbl = document.createElement('label');
+        trailLbl.className = 'minisim-check';
+        var trailCb = document.createElement('input');
+        trailCb.type = 'checkbox';
+        trailLbl.appendChild(trailCb);
+        trailLbl.appendChild(document.createTextNode('Visa spår'));
+
+        var energyLbl = document.createElement('label');
+        energyLbl.className = 'minisim-check';
+        var energyCb = document.createElement('input');
+        energyCb.type = 'checkbox';
+        energyCb.checked = true;
+        energyLbl.appendChild(energyCb);
+        energyLbl.appendChild(document.createTextNode('Visa energi'));
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(spinBtn);
+        controls.appendChild(pausBtn);
+        controls.appendChild(slowLbl);
+        controls.appendChild(trailLbl);
+        controls.appendChild(energyLbl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som centrifugen) ────────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // Spårlager: kontaktpunktens bana på sockeln (tonas långsamt bort så
+        // man ser den AKTUELLA, vidgande cirkeln — inte 1 600 varv gammalt
+        // bläck).
+        var TRAIL_SS = 2;
+        var trailCanvas = document.createElement('canvas');
+        trailCanvas.width = W * TRAIL_SS;
+        trailCanvas.height = H * TRAIL_SS;
+        var tctx = trailCanvas.getContext('2d');
+        tctx.setTransform(TRAIL_SS, 0, 0, TRAIL_SS, 0, 0);
+        tctx.lineCap = 'round';
+        var trailFadeAcc = 0;
+        function clearTrails() {
+            tctx.save();
+            tctx.setTransform(1, 0, 0, 1, 0, 0);
+            tctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+            tctx.restore();
+        }
+        function fadeTrails(dt) {
+            trailFadeAcc += 0.30 * dt;
+            if (trailFadeAcc < 0.05) return;
+            tctx.globalCompositeOperation = 'destination-out';
+            tctx.fillStyle = 'rgba(0,0,0,' + Math.min(1, trailFadeAcc).toFixed(3) + ')';
+            tctx.fillRect(0, 0, W, H);
+            tctx.globalCompositeOperation = 'source-over';
+            trailFadeAcc = 0;
+        }
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        // Faser: vila (platt, orörd) → uppsnurr (handen reser och snurrar
+        // disken) → rull (Moffatt-avklingande lutning) → stopp (den abrupta
+        // finalen) → slut (platt igen, all energi har blivit värme).
+        var phase = 'vila';
+        var tPhase = 0, tRoll = 0;
+        var al = 0;                 // lutningsvinkel α (rad)
+        var om = 0;                 // vaggningens vinkelfart Ω (rad/s)
+        var phi = -Math.PI / 2;     // kontaktpunktens azimut
+        var psi = 0.6;              // markörens vinkel på diskens ansikte
+        var alStop = 0, omStop = 0; // frysvärden vid stoppfasens start
+        var ep = 0, ek = 0, ev = 0; // energiandelar (av totala mekaniska)
+        var paused = false;
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        function timeScale() { return slowCb.checked ? 0.25 : 1; }
+        function omegaOf(a) {
+            // rulldiskens precessionsfart: Ω = √(4g/(R·sin α))
+            return Math.min(OMEGA_CAP, Math.sqrt(4 * G / (R_M * Math.sin(Math.max(a, 1e-4)))));
+        }
+
+        // ── Ljud (Web Audio, helt syntetiserat — inga ljudfiler) ──────────
+        // Ringande ton vars frekvens följer vaggningens varvtal, med tremolo
+        // i vaggningstakten (wa-wa-wa-wa som tätnar) och en svag rullbrus-
+        // botten. Skallret när disken lägger sig spelas som korta brusskurar.
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var audio = null;
+        var soundOn = true;
+
+        function makeNoiseBuffer(actx) {
+            var sr = actx.sampleRate;
+            var len = Math.floor(sr * 1.5);
+            var buf = actx.createBuffer(1, len, sr);
+            var d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * 0.3;
+            return buf;
+        }
+
+        function ensureAudio() {
+            if (audio || !AC) return;
+            var actx = new AC();
+            var master = actx.createGain();
+            master.gain.value = 0.55;
+            master.connect(actx.destination);
+            // ringtonen (grundton + oharmonisk metallpartial)
+            var humGain = actx.createGain();
+            humGain.gain.value = 0;
+            var trem = actx.createGain();
+            trem.gain.value = 0.55;
+            var o1 = actx.createOscillator();
+            o1.type = 'sine';
+            o1.frequency.value = 220;
+            var o2 = actx.createOscillator();
+            o2.type = 'sine';
+            o2.frequency.value = 220 * 2.76;
+            var o2g = actx.createGain();
+            o2g.gain.value = 0.30;
+            o1.connect(trem);
+            o2.connect(o2g);
+            o2g.connect(trem);
+            trem.connect(humGain);
+            humGain.connect(master);
+            o1.start();
+            o2.start();
+            // tremolo i vaggningstakten
+            var lfo = actx.createOscillator();
+            lfo.type = 'sine';
+            lfo.frequency.value = 2;
+            var lfoG = actx.createGain();
+            lfoG.gain.value = 0.42;
+            lfo.connect(lfoG);
+            lfoG.connect(trem.gain);
+            lfo.start();
+            // rullbrus
+            var noiseGain = actx.createGain();
+            noiseGain.gain.value = 0;
+            var bp = actx.createBiquadFilter();
+            bp.type = 'bandpass';
+            bp.frequency.value = 1600;
+            bp.Q.value = 1.6;
+            var src = actx.createBufferSource();
+            src.buffer = makeNoiseBuffer(actx);
+            src.loop = true;
+            src.connect(bp);
+            bp.connect(noiseGain);
+            noiseGain.connect(master);
+            src.start();
+            audio = { ctx: actx, master: master, humGain: humGain,
+                      o1: o1, o2: o2, lfo: lfo, noiseGain: noiseGain,
+                      noiseBuf: src.buffer };
+        }
+
+        function resumeAudio() {
+            ensureAudio();
+            if (audio && audio.ctx.state === 'suspended') audio.ctx.resume();
+        }
+
+        function updateAudio() {
+            if (!audio) return;
+            var t = audio.ctx.currentTime;
+            var ts = timeScale();
+            var spinning = phase === 'uppsnurr' || phase === 'rull' || phase === 'stopp';
+            var active = soundOn && visible && !document.hidden && !paused && spinning;
+            var revs = om / (2 * Math.PI);
+            var hg = (active && revs > 0.3) ? Math.min(0.5, 0.06 + revs * 0.009) : 0;
+            audio.humGain.gain.setTargetAtTime(hg, t, 0.05);
+            var f = (100 + revs * 22) * (0.35 + 0.65 * ts);
+            audio.o1.frequency.setTargetAtTime(f, t, 0.05);
+            audio.o2.frequency.setTargetAtTime(f * 2.76, t, 0.05);
+            audio.lfo.frequency.setTargetAtTime(Math.max(0.5, revs * ts), t, 0.05);
+            var ng = active ? Math.min(0.16, 0.015 + revs * 0.002) : 0;
+            audio.noiseGain.gain.setTargetAtTime(ng, t, 0.07);
+        }
+
+        function playClatter() {
+            // det skallrande "brrrp" när disken abrupt lägger sig platt
+            if (!audio || !soundOn) return;
+            var actx = audio.ctx;
+            var t0 = actx.currentTime;
+            var offs = [0, 0.07, 0.16, 0.28, 0.42];
+            var gains = [0.55, 0.44, 0.30, 0.17, 0.08];
+            for (var i = 0; i < offs.length; i++) {
+                var src = actx.createBufferSource();
+                src.buffer = audio.noiseBuf;
+                var bp = actx.createBiquadFilter();
+                bp.type = 'bandpass';
+                bp.frequency.value = 1500 - i * 160;
+                bp.Q.value = 2.5;
+                var g = actx.createGain();
+                g.gain.setValueAtTime(gains[i], t0 + offs[i]);
+                g.gain.exponentialRampToValueAtTime(0.001, t0 + offs[i] + 0.10);
+                src.connect(bp);
+                bp.connect(g);
+                g.connect(audio.master);
+                src.start(t0 + offs[i]);
+                src.stop(t0 + offs[i] + 0.13);
+            }
+            // dov duns i botten
+            var th = actx.createOscillator();
+            th.type = 'sine';
+            th.frequency.setValueAtTime(110, t0);
+            th.frequency.exponentialRampToValueAtTime(55, t0 + 0.22);
+            var tg = actx.createGain();
+            tg.gain.setValueAtTime(0.4, t0);
+            tg.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
+            th.connect(tg);
+            tg.connect(audio.master);
+            th.start(t0);
+            th.stop(t0 + 0.3);
+        }
+
+        // ── Geometri och projektion ───────────────────────────────────────
+        function project(x, y, z, refl) {
+            if (refl) z = -z;
+            return { x: CX + x, y: BY + y * KY - z * KZ };
+        }
+
+        // Diskens rand: X(t) = C + R(cos t·e1 + sin t·e2) där e1 pekar från
+        // kontaktpunkten upp mot centrum i diskplanet och e2 är den vågräta
+        // tangenten. Kontaktpunkten ligger på P = R·cos α·(cos φ, sin φ, 0).
+        function diskFrame(ph, a) {
+            var ca = Math.cos(a), sa = Math.sin(a);
+            var cf = Math.cos(ph), sf = Math.sin(ph);
+            return {
+                n:  { x: sa * cf, y: sa * sf, z: ca },
+                e1: { x: -ca * cf, y: -ca * sf, z: sa },
+                e2: { x: -sf, y: cf, z: 0 },
+                C:  { x: 0, y: 0, z: R3 * sa }
+            };
+        }
+
+        var N_RIM = 48;
+        function rimPoints(fr, offN, refl) {
+            var pts = [];
+            for (var i = 0; i < N_RIM; i++) {
+                var t = i * 2 * Math.PI / N_RIM;
+                var ct = Math.cos(t), st = Math.sin(t);
+                var x = fr.C.x + R3 * (ct * fr.e1.x + st * fr.e2.x) + offN * fr.n.x;
+                var y = fr.C.y + R3 * (ct * fr.e1.y + st * fr.e2.y) + offN * fr.n.y;
+                var z = fr.C.z + R3 * (ct * fr.e1.z + st * fr.e2.z) + offN * fr.n.z;
+                pts.push(project(x, y, z, refl));
+            }
+            return pts;
+        }
+
+        function tracePath(c, pts) {
+            c.beginPath();
+            c.moveTo(pts[0].x, pts[0].y);
+            for (var i = 1; i < pts.length; i++) c.lineTo(pts[i].x, pts[i].y);
+            c.closePath();
+        }
+
+        // Ritar disken (eller dess spegelbild) för given azimut/lutning.
+        function drawDisk(c, ph, a, ps, alpha, refl) {
+            var fr = diskFrame(ph, a);
+            var top = rimPoints(fr, 0, refl);
+            var bot = rimPoints(fr, -TH, refl);
+            c.globalAlpha = alpha;
+            // undersida + kanten — mörk stålton
+            tracePath(c, bot);
+            c.fillStyle = '#23272e';
+            c.fill();
+            // ovansidan — krom: gradient från ljus himmel-/pappersreflex till
+            // mörk metall, längs skärmens lodräta led över ansiktet
+            var yMin = Infinity, yMax = -Infinity, i;
+            for (i = 0; i < top.length; i++) {
+                if (top[i].y < yMin) yMin = top[i].y;
+                if (top[i].y > yMax) yMax = top[i].y;
+            }
+            if (yMax - yMin < 2) yMax = yMin + 2;
+            var g = c.createLinearGradient(0, yMin, 0, yMax);
+            if (refl) {
+                g.addColorStop(0, '#6e737b');
+                g.addColorStop(0.55, '#b9bab6');
+                g.addColorStop(1, '#e8e7e2');
+            } else {
+                g.addColorStop(0, '#f6f5f0');
+                g.addColorStop(0.42, '#cfcfcb');
+                g.addColorStop(0.58, '#8d939b');
+                g.addColorStop(1, '#5c626b');
+            }
+            tracePath(c, top);
+            c.fillStyle = g;
+            c.fill();
+            c.strokeStyle = 'rgba(30,34,40,0.55)';
+            c.lineWidth = 1.1;
+            c.stroke();
+            // markören på ansiktet — visar diskens EGEN (långsamma) rotation
+            var Cp = project(fr.C.x, fr.C.y, fr.C.z, refl);
+            var mx = fr.C.x + 0.92 * R3 * (Math.cos(ps) * fr.e1.x + Math.sin(ps) * fr.e2.x);
+            var my = fr.C.y + 0.92 * R3 * (Math.cos(ps) * fr.e1.y + Math.sin(ps) * fr.e2.y);
+            var mz = fr.C.z + 0.92 * R3 * (Math.cos(ps) * fr.e1.z + Math.sin(ps) * fr.e2.z);
+            var Mp = project(mx, my, mz, refl);
+            c.strokeStyle = 'rgba(15,22,32,0.30)';
+            c.lineWidth = 2;
+            c.lineCap = 'round';
+            c.beginPath();
+            c.moveTo(Cp.x, Cp.y);
+            c.lineTo(Mp.x, Mp.y);
+            c.stroke();
+            // borstad sektor bakom markören
+            c.beginPath();
+            c.moveTo(Cp.x, Cp.y);
+            for (i = 0; i <= 8; i++) {
+                var tt = ps + i * 0.06;
+                var sx = fr.C.x + 0.92 * R3 * (Math.cos(tt) * fr.e1.x + Math.sin(tt) * fr.e2.x);
+                var sy = fr.C.y + 0.92 * R3 * (Math.cos(tt) * fr.e1.y + Math.sin(tt) * fr.e2.y);
+                var sz = fr.C.z + 0.92 * R3 * (Math.cos(tt) * fr.e1.z + Math.sin(tt) * fr.e2.z);
+                var Sp = project(sx, sy, sz, refl);
+                c.lineTo(Sp.x, Sp.y);
+            }
+            c.closePath();
+            c.fillStyle = 'rgba(15,22,32,0.07)';
+            c.fill();
+            // glansstråk längs den övre randen
+            if (!refl) {
+                var hiIdx = 0;
+                for (i = 1; i < top.length; i++) if (top[i].y < top[hiIdx].y) hiIdx = i;
+                c.strokeStyle = 'rgba(255,255,255,0.75)';
+                c.lineWidth = 1.7;
+                c.beginPath();
+                for (i = -7; i <= 7; i++) {
+                    var p = top[(hiIdx + i + N_RIM) % N_RIM];
+                    if (i === -7) c.moveTo(p.x, p.y);
+                    else c.lineTo(p.x, p.y);
+                }
+                c.stroke();
+            }
+            c.globalAlpha = 1;
+        }
+
+        // ── Sockeln (spegelblank piedestal, som en riktig Eulers disk-bas) ─
+        function baseTopEllipse(c) {
+            c.beginPath();
+            c.ellipse(CX, BY, RB, RB * KY, 0, 0, 2 * Math.PI);
+        }
+
+        function drawBase() {
+            // sidan
+            var g = ctx.createLinearGradient(CX - RB, 0, CX + RB, 0);
+            g.addColorStop(0, '#3a3f47');
+            g.addColorStop(0.18, '#83898f');
+            g.addColorStop(0.34, '#2c3138');
+            g.addColorStop(0.52, '#9aa0a6');
+            g.addColorStop(0.72, '#31363d');
+            g.addColorStop(0.88, '#6e747b');
+            g.addColorStop(1, '#282c33');
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.moveTo(CX - RB, BY);
+            ctx.lineTo(CX - RB, BY + SH);
+            ctx.ellipse(CX, BY + SH, RB, RB * KY, 0, Math.PI, 0, true);
+            ctx.lineTo(CX + RB, BY);
+            ctx.ellipse(CX, BY, RB, RB * KY, 0, 0, Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+            // ovansidan — spegeln
+            var tg = ctx.createLinearGradient(CX - RB * 0.7, BY - RB * KY, CX + RB * 0.7, BY + RB * KY);
+            tg.addColorStop(0, '#fdfdfb');
+            tg.addColorStop(0.5, '#e2e3e0');
+            tg.addColorStop(1, '#c2c4c3');
+            baseTopEllipse(ctx);
+            ctx.fillStyle = tg;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(40,44,51,0.65)';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+        }
+
+        // ── Energistaplar (energiprincipen: summan är konstant) ───────────
+        function subLabel(x, y, sub, color) {
+            ctx.fillStyle = color;
+            ctx.font = 'italic 13px Poppins, system-ui, sans-serif';
+            ctx.fillText('E', x, y);
+            ctx.font = '10px Poppins, system-ui, sans-serif';
+            ctx.fillText(sub, x + 9, y + 3);
+        }
+
+        function drawEnergy() {
+            if (!energyCb.checked) return;
+            var bars = [
+                { f: ep, c: '#2563c9', l: 'p' },
+                { f: ek, c: '#c0392b', l: 'k' },
+                { f: ev, c: '#8a6d1c', l: 'v' }
+            ];
+            // hålls till vänster om sockeln (vars vänstra kant når x = 90)
+            var x0 = 20, bw = 14, gap = 26, maxh = 104, y0 = H - 34;
+            ctx.strokeStyle = 'rgba(15,22,32,0.5)';
+            ctx.lineWidth = 1.2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(x0 - 8, y0 + 0.5);
+            ctx.lineTo(x0 + gap * 2 + bw + 8, y0 + 0.5);
+            ctx.stroke();
+            for (var i = 0; i < bars.length; i++) {
+                var b = bars[i];
+                var h = Math.max(0, Math.min(1, b.f)) * maxh;
+                var x = x0 + i * gap;
+                if (h > 0.5) {
+                    ctx.fillStyle = b.c;
+                    ctx.fillRect(x, y0 - h, bw, h);
+                    ctx.strokeStyle = 'rgba(15,22,32,0.35)';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(x + 0.5, y0 - h + 0.5, bw - 1, h - 1);
+                }
+                subLabel(x + 1, y0 + 16, b.l, 'rgba(15,22,32,0.75)');
+            }
+        }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function drawBackground() {
+            ctx.globalCompositeOperation = 'source-over';
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        function render() {
+            drawBackground();
+            drawBase();
+            // allt som ligger PÅ spegeln klipps till dess ellips:
+            // spår, mjuk skugga och diskens spegelbild
+            ctx.save();
+            baseTopEllipse(ctx);
+            ctx.clip();
+            if (trailCb.checked) {
+                ctx.drawImage(trailCanvas, 0, 0, W, H);
+            }
+            var sc = project(0, 0, 0, false);
+            var shR = R3 * (0.35 + 0.65 * Math.cos(al));
+            var sg = ctx.createRadialGradient(sc.x, sc.y, 0, sc.x, sc.y, shR);
+            sg.addColorStop(0, 'rgba(20,24,30,0.22)');
+            sg.addColorStop(1, 'rgba(20,24,30,0)');
+            ctx.fillStyle = sg;
+            ctx.beginPath();
+            ctx.ellipse(sc.x, sc.y, shR, shR * KY * 1.4, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            if (al > 0.002) drawDisk(ctx, phi, al, psi, 0.22, true);
+            ctx.restore();
+            // rörelseoskärpa: spökbilder strax bakåt längs vaggningen
+            var wVis = om * timeScale();
+            if (wVis > 15) {
+                var back = Math.min(0.5, wVis * 0.004);
+                drawDisk(ctx, phi - back, al, psi, 0.12, false);
+                drawDisk(ctx, phi - back * 2, al, psi, 0.10, false);
+            }
+            drawDisk(ctx, phi, al, psi, 1, false);
+            drawEnergy();
+        }
+
+        // ── Spårritning (kontaktpunkten, deldelad längs bågen) ────────────
+        function drawTrailArc(phPrev, phNow, a) {
+            var rc = R3 * Math.cos(a);
+            var d = phNow - phPrev;
+            var n = Math.min(48, Math.max(1, Math.ceil(Math.abs(d) / 0.18)));
+            tctx.strokeStyle = 'rgba(170,124,32,0.5)';
+            tctx.lineWidth = 1.6;
+            tctx.beginPath();
+            for (var i = 0; i <= n; i++) {
+                var ph = phPrev + d * i / n;
+                var p = project(rc * Math.cos(ph), rc * Math.sin(ph), 0, false);
+                if (i === 0) tctx.moveTo(p.x, p.y);
+                else tctx.lineTo(p.x, p.y);
+            }
+            tctx.stroke();
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        function smoothstep(p) { return p * p * (3 - 2 * p); }
+
+        function step(dt) {
+            var phiPrev = phi;
+            if (phase === 'uppsnurr') {
+                tPhase += dt;
+                var p = Math.min(1, tPhase / 0.6);
+                var s = smoothstep(p);
+                al = AL0 * s;
+                om = omegaOf(Math.max(al, 0.05)) * s;
+                if (p >= 1) { phase = 'rull'; tRoll = 0; }
+            } else if (phase === 'rull') {
+                tRoll += dt;
+                // Moffatts lag: lutningen dör som (T − t)^(2/3) — långsamt
+                // först, rusande på slutet
+                var f = Math.max(0, 1 - tRoll / T_ROLL);
+                al = AL0 * Math.pow(f, 2 / 3);
+                om = omegaOf(al);
+                ev = 0.10 * (tRoll / T_ROLL);
+                if (al <= AL_END) {
+                    phase = 'stopp';
+                    tPhase = 0;
+                    alStop = al;
+                    omStop = om;
+                    playClatter();
+                }
+            } else if (phase === 'stopp') {
+                tPhase += dt;
+                al = alStop * Math.exp(-9 * tPhase);
+                om = omStop * Math.exp(-8 * tPhase);
+                ev = 0.10 + 0.90 * Math.min(1, tPhase / 0.55);
+                if (tPhase > 0.8) {
+                    phase = 'slut';
+                    al = 0;
+                    om = 0;
+                    ev = 1;
+                    syncUi();
+                }
+            }
+            phi += om * dt;
+            // diskens egen rotation: ψ̇ = Ω(1 − cos α) — nästan stilla i finalen
+            psi += om * (1 - Math.cos(al)) * dt;
+            if (phase === 'vila') {
+                ep = 0; ek = 0; ev = 0;   // orörd disk — ingen energi i spel
+            } else {
+                ep = 0.6 * Math.sin(al) / Math.sin(AL0);
+                ek = Math.max(0, 1 - ep - ev);
+            }
+            if (trailCb.checked && om > 0.01 && al > 0.002) {
+                drawTrailArc(phiPrev, phi, al);
+                fadeTrails(dt);
+            }
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            updateAudio();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return phase === 'uppsnurr' || phase === 'rull' || phase === 'stopp';
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            info.textContent = 'Lutning: ' + fmt(al * 180 / Math.PI, 0) + '°' +
+                ' · Varvtal: ' + fmt(om / (2 * Math.PI), 1) + ' varv/s';
+        }
+
+        // ── UI-logik ──────────────────────────────────────────────────────
+        function syncUi() {
+            spinBtn.textContent = (phase === 'vila' || phase === 'slut')
+                ? 'Snurra disken' : 'Snurra om';
+            pausBtn.textContent = paused ? 'Fortsätt' : 'Pausa';
+            pausBtn.disabled = phase === 'vila' || phase === 'slut';
+        }
+
+        spinBtn.addEventListener('click', function () {
+            phase = 'uppsnurr';
+            tPhase = 0;
+            tRoll = 0;
+            phi = -Math.PI / 2;
+            psi = 0.6;
+            ev = 0;
+            paused = false;
+            clearTrails();
+            resumeAudio();
+            syncUi();
+            kick();
+        });
+        pausBtn.addEventListener('click', function () {
+            paused = !paused;
+            syncUi();
+            updateAudio();
+            if (!paused) kick();
+            else render();
+        });
+        sndBtn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
+            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            if (soundOn) resumeAudio();
+            updateAudio();
+        });
+        slowCb.addEventListener('change', kick);
+        trailCb.addEventListener('change', function () {
+            if (!trailCb.checked) clearTrails();
+            render();
+            kick();
+        });
+        energyCb.addEventListener('change', function () {
+            render();
+            kick();
+        });
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                updateAudio();
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            updateAudio();
+            if (!document.hidden) kick();
+        });
+
+        // Litet test-handtag (används av e2e-skript i .shots/)
+        card._eulerState = function () {
+            return { phase: phase, al: al, om: om, ep: ep, ek: ek, ev: ev,
+                     audio: audio ? audio.ctx.state : 'none' };
+        };
 
         syncUi();
         render();
@@ -4633,6 +5430,7 @@
 
     // ── Register + publikt API ────────────────────────────────────────────
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+                  eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, linjal: buildLinjal,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder };

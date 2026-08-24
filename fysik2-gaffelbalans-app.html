@@ -539,44 +539,56 @@
                 corkLid.position.y = 6.52;
                 assembly.add(corkLid);
 
-                // ── Gaffel: byggs längs +x (huvudet vid x=0, skaftet utåt) ──
+                // ── Gaffel: byggs längs +x (klorna vid x≈0, skaftet utåt) ──
+                // Måtten är en vanlig matgaffel i cm: klor ≈ 4,5, hela gaffeln
+                // ≈ 18. Skaftet är i det närmaste RAKT — det kröker bara ett par
+                // grader uppåt mot änden, precis som en riktig bestickgaffel.
                 const buildFork = () => {
                     const fork = new THREE.Group();
-                    // fyra klor (delvis instuckna i korken)
+
+                    // Fyra klor som pekar in mot korken (−x). De innersta
+                    // 1,4 cm sitter instuckna i korken.
                     for (let i = 0; i < 4; i++) {
-                        const tine = new THREE.Mesh(new THREE.BoxGeometry(2.9, 0.13, 0.2), steelMat);
-                        tine.position.set(0.15, 0, -0.63 + i * 0.42);
+                        const z = -0.60 + i * 0.40;
+                        const tine = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.13, 0.21), steelMat);
+                        tine.position.set(0.7, 0, z);
                         fork.add(tine);
+                        // avsmalnande klospets
+                        const point = new THREE.Mesh(new THREE.ConeGeometry(0.105, 0.5, 8), steelMat);
+                        point.rotation.z = Math.PI / 2;
+                        point.position.set(-1.65, 0, z);
+                        fork.add(point);
                     }
-                    // huvudplattan (kloflätans bas, lätt vinklad)
-                    const head = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.15, 1.85), steelMat);
-                    head.position.set(2.25, -0.09, 0);
-                    head.rotation.z = -0.10;
+
+                    // Gaffelbladets bas, där klorna löper ihop.
+                    const head = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.16, 1.75), steelMat);
+                    head.position.set(3.5, 0.02, 0);
                     fork.add(head);
-                    // hals
-                    const neck = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.2, 0.62), steelMat);
-                    neck.position.set(4.0, -0.30, 0);
-                    neck.rotation.z = -0.10;
+
+                    // Halsen: smalast av allt, med en svag knäck.
+                    const neck = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.19, 0.66), steelMat);
+                    neck.position.set(5.2, 0.10, 0);
+                    neck.rotation.z = 0.06;
                     fork.add(neck);
-                    // skaft i tre segment som kröker mjukt uppåt mot änden
-                    let px = 5.0, py = -0.42, ang = -0.06;
-                    const segs = [[1.9, 0.82, 0.05], [1.9, 0.92, 0.08], [1.9, 1.0, 0.10],
-                                  [1.9, 1.06, 0.12], [1.8, 1.08, 0.13]];
-                    segs.forEach(([len, wz, dAng], i) => {
+
+                    // Skaftet: sex segment utåt från halsen. Total krökning bara
+                    // ~7° — alltså i det närmaste rakt — och greppet blir en
+                    // aning bredare mot änden.
+                    let px = 6.1, py = 0.16, ang = 0.05;
+                    const segs = [[1.9, 0.80, 0.010], [1.9, 0.88, 0.014], [1.9, 0.96, 0.018],
+                                  [1.9, 1.04, 0.020], [1.9, 1.08, 0.018], [1.8, 1.06, 0.014]];
+                    segs.forEach(([len, wz, dAng]) => {
                         ang += dAng;
-                        const seg = new THREE.Mesh(new THREE.BoxGeometry(len + 0.25, 0.26, wz), steelMat);
-                        const cx = px + (len / 2) * Math.cos(ang);
-                        const cy = py + (len / 2) * Math.sin(ang);
-                        seg.position.set(cx, cy, 0);
+                        const seg = new THREE.Mesh(new THREE.BoxGeometry(len + 0.2, 0.27, wz), steelMat);
+                        seg.position.set(px + (len / 2) * Math.cos(ang), py + (len / 2) * Math.sin(ang), 0);
                         seg.rotation.z = ang;
                         fork.add(seg);
                         px += len * Math.cos(ang);
                         py += len * Math.sin(ang);
                     });
                     // rundad skaftände
-                    const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.54, 0.54, 0.26, 18), steelMat);
+                    const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.53, 0.53, 0.27, 18), steelMat);
                     tip.rotation.x = Math.PI / 2;
-                    tip.rotation.z = ang;
                     tip.position.set(px, py, 0);
                     fork.add(tip);
                     return fork;

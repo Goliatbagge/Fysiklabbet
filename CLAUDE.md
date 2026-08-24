@@ -682,6 +682,22 @@ raderna får aldrig läsas upp). Marginal-CSS i `styles-laborans.css`
 (`.lab-minisim`), övrig CSS injiceras av widgeten själv. Efter att du lagt
 in ett block: kör `node data/teori/build.js` som vanligt.
 
+### ⚠️ En ny minisimulering ska ALLTID nämnas i "Senaste uppdateringar"
+
+**Varje ny minisimulering får en egen rad i `UPDATES` i `index.html`** —
+precis som en ny fristående simulering (uttryckligt önskemål 2026-08-24).
+Det är inte bara de stora simuleringarna som förtjänar att uppmärksammas:
+en minisim ligger inbäddad INNE i en genomgång och är därför osynlig för
+alla som inte råkar öppna just det avsnittet. Nämns den inte på startsidan
+finns den i praktiken inte för besökaren.
+
+- **`href` pekar på genomgången den bor i**, i `?id=`-form:
+  `katalog.html?id=fy1-4.4` (se "Adresser till teoriavsnitt" nedan) — det
+  finns ingen egen sida att länka till.
+- **Skriv raden i samma ton som de övriga**: vad man kan göra och vad man
+  ser hända, inte vad som är byggt. Inga emojier, komma som decimaltecken.
+- Raden läggs överst i listan (nyast först) med dagens datum.
+
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 
 **REGEL: När en text (teoriavsnitt, nyhetsartikel, simulering) refererar

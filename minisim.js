@@ -95,10 +95,11 @@
  * När pekaren släpps SLÄPPS KLOSSEN AUTOMATISKT och man ser åt vilket
  * håll den faller. En glidare (−70° till 70°) plus "Släpp klossen" finns
  * kvar som precisionsväg; en kloss som faller kan också fångas mitt i
- * fallet med pekaren. I klossens tyngdpunkt (grön prick) sitter en
- * metallvisare som alltid hänger lodrätt och illustrerar tyngdkraftens
- * riktning; stödytan är markerad lila på marken och vridningspunkten
- * (hörnet) med en prick. Hänger visaren innanför vridningspunkten faller
+ * fallet med pekaren. Från klossens tyngdpunkt (grön prick) pekar
+ * tyngdkraftens pil rakt nedåt — en kraftvektor med KONSTANT längd
+ * (skalenlig mot klossens massa), som gärna får gå igenom golvytan;
+ * stödytan är markerad lila på marken och vridningspunkten
+ * (hörnet) med en prick. Faller pilen innanför vridningspunkten faller
  * klossen tillbaka (med en liten studs), hänger den utanför — lutningen
  * har passerat den kritiska vinkeln tan θ = b/h där tyngdpunkten står
  * rakt ovanför hörnet — välter klossen med fysikalisk vinkelacceleration.
@@ -2709,11 +2710,11 @@
     // spelar ingen roll). Man TAR TAG i klossens överkant och drar åt
     // valfritt håll; när pekaren släpps släpps klossen automatiskt.
     // Vinkeln phi är SIGNERAD: positiv = tippning åt höger kring nedre
-    // högra hörnet, negativ = åt vänster kring nedre vänstra. I klossens
-    // tyngdpunkt (grön prick) sitter en metallvisare som alltid hänger
-    // lodrätt och visar tyngdkraftens riktning. Hänger visaren innanför
-    // vridningspunkten faller klossen tillbaka, hänger den utanför välter
-    // klossen. Två klossformer: hög/smal (välter tidigt) och låg/bred
+    // högra hörnet, negativ = åt vänster kring nedre vänstra. Från
+    // klossens tyngdpunkt (grön prick) pekar tyngdkraftens pil rakt nedåt
+    // med konstant längd. Faller pilen innanför vridningspunkten faller
+    // klossen tillbaka, faller den utanför välter klossen. Två
+    // klossformer: hög/smal (välter tidigt) och låg/bred
     // (kräver stor lutning). Ritad i laboranstemat.
     function buildValtning(node, cfg) {
         var W = 560, H = 430;              // logisk ritstorlek
@@ -2730,6 +2731,13 @@
             hog: { b: 64, h: 150 },        // hög/smal — välter vid ≈23°
             lag: { b: 120, h: 64 }         // låg/bred — välter först vid ≈62°
         };
+        // Tyngdkraftspilens längd: skalenlig mot klossens massa (∝ arean),
+        // så att den höga klossens pil är längre än den lågas. Konstant
+        // under hela lutningen — en kraftvektor byter inte belopp. Pilen
+        // får gärna gå igenom golvytan, men spetsen måste rymmas i
+        // canvasen: värsta läget är den höga klossen liggande (tyngd-
+        // punkten 32 px över marken) → 354 − 32 + 100 = 422 < H.
+        var FG_K = 100 / (64 * 150);       // px per areaenhet
 
         // ── DOM ───────────────────────────────────────────────────────────
         var card = document.createElement('div');
@@ -2748,10 +2756,10 @@
         canvas.setAttribute('aria-label',
             'En kloss står på ett vågrätt underlag. Ta tag i klossens ' +
             'överkant och dra för att tippa den åt valfritt håll — när du ' +
-            'släpper taget släpps klossen. I klossens tyngdpunkt sitter en ' +
-            'metallvisare som alltid hänger lodrätt och visar tyngdkraftens ' +
-            'riktning. Släpps klossen medan visaren hänger innanför ' +
-            'vridningspunkten faller den tillbaka — hänger visaren utanför ' +
+            'släpper taget släpps klossen. Från klossens tyngdpunkt pekar ' +
+            'tyngdkraftens pil rakt nedåt, lika lång hur mycket klossen än ' +
+            'lutas. Släpps klossen medan pilen faller innanför ' +
+            'vridningspunkten faller den tillbaka — faller pilen utanför ' +
             'välter klossen. En hög smal kloss välter vid liten lutning, en ' +
             'låg bred kräver mycket större lutning.');
         // Draget i klossens överkant är i huvudsak vågrätt: pan-y låter
@@ -3022,12 +3030,16 @@
             }
         }
 
-        // Metallvisaren: fritt upphängd i tyngdpunkten, hänger alltid
-        // lodrätt och visar tyngdkraftens riktning (pil nedåt).
+        // Tyngdkraften: pil rakt nedåt från tyngdpunkten. Pilen är en
+        // KRAFTVEKTOR, så längden är konstant (∝ klossens massa) och
+        // ändras aldrig när klossen lutas — den får gärna gå igenom
+        // golvytan. Att den alltid pekar lodrätt är hela poängen: hänger
+        // den innanför vridningspunkten faller klossen tillbaka, utanför
+        // välter den.
+        function fgLen() { return FG_K * shape.b * shape.h; }
         function drawPointer() {
             var cog = cogWorld();
-            // visaren hänger lodrätt från tyngdpunkten ner mot marken
-            var endY = GROUND_Y - 2;
+            var endY = cog.y + fgLen();
             var headLen = 9;
             ctx.strokeStyle = '#3a4049';
             ctx.lineWidth = 2.4;
@@ -3318,6 +3330,14 @@
         document.addEventListener('visibilitychange', function () {
             if (!document.hidden) kick();
         });
+
+        // Test-handtag: tyngdkraftspilens aktuella geometri (samma
+        // funktioner som drawPointer använder), för att kunna mäta att
+        // längden är konstant och att spetsen ryms i canvasen.
+        card._fg = function () {
+            var c = cogWorld();
+            return { x: c.x, y: c.y, len: fgLen(), endY: c.y + fgLen(), H: H };
+        };
 
         // Test-handtag för skärmdumpsskript: ställ lutning/läge exakt.
         // tiltDeg är signerad — negativ lutar/välter åt vänster.

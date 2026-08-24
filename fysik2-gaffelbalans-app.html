@@ -245,20 +245,22 @@
             let num = P.mNeedle * P.yNeedle + P.mCork * P.yCork;
             if (forksOn) num += 2 * P.mFork * yF;
             const yCm = num / M;
-            // Tröghetsmoment kring stödpunkten, två vippriktningar:
-            // Iz — vippning i gafflarnas plan (längs gafflarna)
-            // Ix — vippning tvärs gafflarna
+            // Tröghetsmoment kring stödpunkten för vippningen. Vi modellerar
+            // vippningen ISOTROPT med gaffelplanets tröghetsmoment — den
+            // långsamma, synliga moden där gafflarna svänger upp och ned.
+            // (Vippning tvärs gafflarna är en mycket snabbare mod; att blanda
+            // två olika tröghetsmoment med ett pågående snurr kräver de
+            // gyroskopiska termerna för att inte pumpa upp vipprörelsen.)
             const base = P.mNeedle * P.yNeedle * P.yNeedle + P.mCork * P.yCork * P.yCork;
-            const Iz = base + (forksOn ? 2 * P.mFork * (xF * xF + yF * yF) : 0);
-            const Ix = base + (forksOn ? 2 * P.mFork * (yF * yF) : 0);
+            const I = base + (forksOn ? 2 * P.mFork * (xF * xF + yF * yF) : 0);
             const stable = yCm < 0;
-            const omegaZ = stable ? Math.sqrt(M * P.g * (-yCm) / Iz) : 0;
-            const period = stable ? 2 * Math.PI / omegaZ : 0;
+            const omega0 = stable ? Math.sqrt(M * P.g * (-yCm) / I) : 0;
+            const period = stable ? 2 * Math.PI / omega0 : 0;
             // Kritisk gaffelvinkel: y_cm = 0
             const constNum = P.mNeedle * P.yNeedle + P.mCork * P.yCork + 2 * P.mFork * P.forkAttachY;
             const sinCrit = constNum / (2 * P.mFork * P.forkCmDist);
             const betaCrit = sinCrit <= 1 ? Math.asin(sinCrit) * 180 / Math.PI : NaN;
-            return { M, yCm, yForkCm: yF, xForkCm: xF, Iz, Ix, stable, period, betaCrit };
+            return { M, yCm, yForkCm: yF, xForkCm: xF, I, stable, period, betaCrit };
         };
 
         const SLIP_ANGLE = 0.35;   // rad — nålen glider av myntkanten
@@ -662,6 +664,10 @@
                 let last = performance.now();
                 let raf;
                 const tmpV = new THREE.Vector3();
+                const qTilt = new THREE.Quaternion();
+                const qYaw = new THREE.Quaternion();
+                const tiltEuler = new THREE.Euler();
+                const YAXIS = new THREE.Vector3(0, 1, 0);
 
                 const animate = () => {
                     raf = requestAnimationFrame(animate);
@@ -682,35 +688,54 @@
                     forkLWrap.visible = s.forksOn;
 
                     // Pendeldynamik kring stödpunkten, två vippriktningar.
-                    // phiZ: vippning i gafflarnas plan (x-led), tröghetsmoment Iz
-                    // phiX: vippning tvärs gafflarna (z-led), tröghetsmoment Ix
+                    // tbx/tbz: lutning kring världens x- respektive z-axel
                     if (!ph.frozen) {
-                        const kZ = d.M * PHYS.g * d.yCm / d.Iz;   // < 0 → återförande
-                        const kX = d.M * PHYS.g * d.yCm / d.Ix;
+                        // Snurr kring den LODRÄTA axeln genom stödpunkten och
+                        // tyngdpunkten. Den axeln är parallell med tyngdkraften,
+                        // så snurret ger inget vridmoment som kan välta bygget —
+                        // det bromsas bara av friktionen i nålspetsen (en trög
+                        // del ∝ farten + en konstant del som får det att stanna).
+                        if (ph.wPsi !== 0) {
+                            const brake = (0.18 * Math.abs(ph.wPsi) + 0.32) * dt;
+                            const mag = Math.abs(ph.wPsi) - brake;
+                            ph.wPsi = mag <= 0 ? 0 : Math.sign(ph.wPsi) * mag;
+                            ph.psi += ph.wPsi * dt;
+                        }
+                        // Vippningen mäts mot VÄRLDENS axlar och är isotrop, så
+                        // den är helt frikopplad från snurret ψ — precis som
+                        // fysiken säger: en rotation kring den lodräta axeln
+                        // genom stöd- och tyngdpunkten ger inget vridmoment som
+                        // kan ändra lutningen.
+                        const k = d.M * PHYS.g * d.yCm / d.I;   // < 0 → återförande
                         const damp = 0.22;
                         const steps = 4;
                         const h = dt / steps;
                         for (let i = 0; i < steps; i++) {
-                            ph.wZ += (kZ * Math.sin(ph.phiZ) - damp * ph.wZ) * h;
-                            ph.wX += (kX * Math.sin(ph.phiX) - damp * ph.wX) * h;
-                            ph.phiZ += ph.wZ * h;
-                            ph.phiX += ph.wX * h;
+                            ph.wbx += (k * Math.sin(ph.tbx) - damp * ph.wbx) * h;
+                            ph.wbz += (k * Math.sin(ph.tbz) - damp * ph.wbz) * h;
+                            ph.tbx += ph.wbx * h;
+                            ph.tbz += ph.wbz * h;
                         }
-                        const tilt = Math.sqrt(ph.phiZ * ph.phiZ + ph.phiX * ph.phiX);
+                        const tilt = Math.sqrt(ph.tbx * ph.tbx + ph.tbz * ph.tbz);
                         if (!ph.falling && tilt > SLIP_ANGLE) ph.falling = true;
                         if (ph.falling) {
                             // förbi glidgränsen: tyngdkraften får vinna oavsett
-                            ph.wZ += (Math.sign(ph.phiZ || 1) * 6 * Math.abs(Math.sin(ph.phiZ))) * dt;
+                            ph.wbx += 7 * Math.sin(ph.tbx) * dt;
+                            ph.wbz += 7 * Math.sin(ph.tbz) * dt;
                             if (tilt > FALL_STOP) { ph.frozen = true; ph.fellAt = now; }
                         }
                         ph.tilt = tilt;
                     }
-                    // Gafflarna ligger längs z: vippning i gaffelplanet (phiZ,
-                    // trögt Iz) sker kring x-axeln, tvärs gafflarna (phiX) kring z.
-                    assembly.rotation.set(ph.phiZ, 0, -ph.phiX);
+                    // Snurret ψ läggs FÖRST, kring byggets egen lodräta axel, så
+                    // att lutningen fortsatt mäts mot världens axlar.
+                    qTilt.setFromEuler(tiltEuler.set(ph.tbx, 0, ph.tbz, 'XYZ'));
+                    qYaw.setFromAxisAngle(YAXIS, ph.psi);
+                    assembly.quaternion.copy(qTilt).multiply(qYaw);
 
-                    // Tyngdpunkten i världskoordinater (lokalt: (0, y_cm, 0) i cm)
-                    tmpV.set(0, d.yCm * 100, 0).applyEuler(assembly.rotation).add(PIVOT);
+                    // Tyngdpunkten i världskoordinater (lokalt: (0, y_cm, 0) i cm).
+                    // Punkten ligger på snurraxeln, så ψ flyttar den inte — därför
+                    // går lodlinjen genom stödpunkten hela snurret igenom.
+                    tmpV.set(0, d.yCm * 100, 0).applyQuaternion(assembly.quaternion).add(PIVOT);
                     const cmVisible = s.show.cm;
                     cmDot.visible = cmVisible;
                     cmLabel.visible = cmVisible;
@@ -792,6 +817,7 @@
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(false);
             const [tiltDeg, setTiltDeg] = useState(0);
+            const [spinF, setSpinF] = useState(0);
             const [fallen, setFallen] = useState(false);
             const sceneWrapRef = useRef(null);
 
@@ -799,16 +825,19 @@
             useEffect(() => { stateRef.current = { beta, forksOn, show }; }, [beta, forksOn, show]);
 
             // Fysikens tillstånd (muteras i animationsloopen, inte React-state)
+            // tbx/tbz = lutning kring världens x- respektive z-axel, wbx/wbz
+            // deras vinkelhastigheter, psi/wPsi snurret kring lodlinjen.
             const physRef = useRef({
-                phiZ: 0.09, phiX: 0.015, wZ: 0, wX: 0,
+                tbx: 0.09, tbz: 0.015, wbx: 0, wbz: 0, psi: 0, wPsi: 0,
                 betaShown: 50 * Math.PI / 180, falling: false, frozen: false, tilt: 0.09
             });
 
-            // Läs av vinkel + fallstatus till UI:t några gånger per sekund
+            // Läs av vinkel, varvtal + fallstatus till UI:t några gånger per sekund
             useEffect(() => {
                 const id = setInterval(() => {
                     const ph = physRef.current;
                     setTiltDeg(ph.tilt * 180 / Math.PI);
+                    setSpinF(Math.abs(ph.wPsi) / (2 * Math.PI));
                     setFallen(ph.frozen);
                 }, 180);
                 return () => clearInterval(id);
@@ -839,26 +868,37 @@
                 const ph = physRef.current;
                 if (ph.frozen) return;
                 const dirSign = Math.random() < 0.5 ? -1 : 1;
-                ph.wZ += dirSign * (0.55 + Math.random() * 0.3);
-                ph.wX += (Math.random() - 0.5) * 0.5;
+                ph.wbx += dirSign * (0.55 + Math.random() * 0.3);
+                ph.wbz += (Math.random() - 0.5) * 0.5;
+            };
+
+            // Snurret ges kring den lodräta axeln — ingen extra lutning, så
+            // lodlinjen från tyngdpunkten fortsätter gå genom stödpunkten.
+            const snurra = () => {
+                const ph = physRef.current;
+                if (ph.frozen) return;
+                const dirSign = ph.wPsi !== 0 ? Math.sign(ph.wPsi) : (Math.random() < 0.5 ? -1 : 1);
+                ph.wPsi = dirSign * Math.min(22, Math.abs(ph.wPsi) + 9);
             };
 
             const reset = () => {
                 const ph = physRef.current;
-                ph.phiZ = forksOn ? 0.09 : 0.02;
-                ph.phiX = 0.015;
-                ph.wZ = 0; ph.wX = 0;
-                ph.falling = false; ph.frozen = false; ph.tilt = ph.phiZ;
+                ph.tbx = forksOn ? 0.09 : 0.02;
+                ph.tbz = 0.015;
+                ph.wbx = 0; ph.wbz = 0;
+                ph.psi = 0; ph.wPsi = 0;
+                ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
 
             // Startar om med liten störning när gafflarna sätts på/tas av
             const toggleForks = (on) => {
                 setForksOn(on);
                 const ph = physRef.current;
-                ph.phiZ = on ? 0.09 : 0.02;
-                ph.phiX = 0.01;
-                ph.wZ = 0; ph.wX = 0;
-                ph.falling = false; ph.frozen = false; ph.tilt = ph.phiZ;
+                ph.tbx = on ? 0.09 : 0.02;
+                ph.tbz = 0.01;
+                ph.wbx = 0; ph.wbz = 0;
+                ph.psi = 0; ph.wPsi = 0;
+                ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
 
             const d = useMemo(() => computeDerived(beta, forksOn), [beta, forksOn]);
@@ -886,7 +926,8 @@
                             balanserar på nålspetsen mot den ytterst smala kanten av ett mynt som står
                             på högkant. Det ser omöjligt ut, men är förvånansvärt lätt. Hemligheten: gafflarna hänger så lågt att hela
                             systemets <strong>tyngdpunkt hamnar under stödpunkten</strong>. Knuffa till det,
-                            ändra gaffelvinkeln — och ta bort gafflarna för att se skillnaden.
+                            sätt snurr på det, ändra gaffelvinkeln — och ta bort gafflarna för att
+                            se skillnaden.
                         </p>
 
                         {/* Formelkort: återförande kraftmoment */}
@@ -967,6 +1008,7 @@
                                         {isFullscreen && (
                                             <div className="st-actions">
                                                 <button className="btn-toggle" onClick={knuffa}>Knuffa till</button>
+                                                <button className="btn-toggle" onClick={snurra}>Snurra</button>
                                                 <button className="btn-toggle" onClick={reset}>Börja om</button>
                                             </div>
                                         )}
@@ -1020,6 +1062,7 @@
 
                                 <div className="flex gap-2 mb-4">
                                     <button className="btn-toggle flex-1" onClick={knuffa}>Knuffa till</button>
+                                    <button className="btn-toggle flex-1" onClick={snurra}>Snurra</button>
                                     <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
                                 </div>
 
@@ -1031,6 +1074,10 @@
                                         <Readout label="Utslagsvinkel" value={fmt(tiltDeg, 1)} unit="°" />
                                         <Readout label="Svängningstid <em>T</em>" value={d.stable && forksOn ? fmt(d.period, 2) : '—'} unit={d.stable && forksOn ? 's' : ''} />
                                         <Readout label="Kritisk vinkel <em>β</em>" value={fmt(d.betaCrit, 0)} unit="°" />
+                                        <div className="col-span-2">
+                                            <Readout label="Varvtal <em>f</em> (snurr kring lodräta axeln)"
+                                                     value={fmt(spinF, 1)} unit="varv/s" />
+                                        </div>
                                     </div>
                                     <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: d.stable ? 'rgba(46,158,79,0.10)' : 'rgba(200,50,74,0.10)', color: 'var(--lab-ink-soft)' }}>
                                         {d.stable
@@ -1068,6 +1115,25 @@
                                     <em>M</em> = <em>F</em><sub>G</sub> · <em>l</em> vrider systemet tillbaka
                                     mot jämviktsläget — det rättar till sig självt, precis som en gunga som
                                     alltid svänger tillbaka mot sitt lägsta läge.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför överlever balansen ett snurr?</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Tryck på <em>Snurra</em> och se bygget rotera runt — utan att tappa
+                                    balansen. Snurret sker kring den <strong>lodräta axeln</strong>, och den
+                                    axeln går genom både stödpunkten och tyngdpunkten. Tyngdkraften är
+                                    riktad längs precis samma linje, så dess hävarm till snurraxeln är{' '}
+                                    <em>l</em> = 0 och kraftmomentet blir noll: tyngdkraften kan varken
+                                    driva på snurret eller bromsa det, och framför allt inte välta bygget.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Att snurret ändå avtar beror på <strong>friktionen</strong> mellan
+                                    nålspetsen och myntkanten — den enda kraft som ger ett moment kring
+                                    axeln. Följ varvtalet <em>f</em> i avläsningen medan det saktar in. Ett
+                                    snurrande föremål blir dessutom stabilare, precis som en snurra: det
+                                    motsätter sig att rotationsaxeln vrids åt sidan.
                                 </p>
                             </div>
 

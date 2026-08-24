@@ -56,6 +56,49 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'elektronmikroskop',
+    term: 'Elektronmikroskop',
+    former: ['elektronmikroskop', 'elektronmikroskopet', 'elektronmikroskopen',
+             'elektronmikroskopi', 'elektronmikroskopin', 'elektronmikroskopet',
+             'transmissionselektronmikroskop', 'transmissionselektronmikroskopet',
+             'kryoelektronmikroskopi', 'kryoelektronmikroskopin', 'svepelektronmikroskop',
+             'svepelektronmikroskopet', 'stråldos', 'stråldosen'],
+    kort: 'Ett mikroskop som avbildar med elektroner i stället för ljus. Eftersom en snabb elektron uppträder som en våg med extremt kort våglängd kan den visa detaljer ända ner på atomnivå.',
+    relaterade: ['kvantmekanik', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Ett vanligt ljusmikroskop tar slut vid ungefär en halv mikrometer. Skälet är inte att linserna är dåliga, utan att ljuset är en våg: detaljer som är mycket mindre än våglängden böjer vågen helt enkelt av sig runt, och de suddas ut. Synligt ljus har en våglängd kring 500&nbsp;nm, vilket är tusen gånger grövre än en enskild molekyl.' },
+      { type: 'p', html: 'Elektroner löser problemet, eftersom även de är vågor. Våglängden hos en partikel blir kortare ju större rörelsemängden är, så en elektron som accelererats genom hundra tusen volt får en våglängd på några pikometer — mindre än en atom. I ett elektronmikroskop skjuts en sådan stråle genom eller mot provet, och i stället för glaslinser böjs strålen av magnetiska spolar. Bilden fångas till sist upp av en detektor, eftersom ögat inte kan se elektroner.' },
+      { type: 'p', html: 'Det stora hindret är att elektronerna inte bara tittar. Varje elektron som far genom provet kan slå loss elektroner ur molekylerna och bryta kemiska bindningar, så ett biologiskt prov tål bara en viss stråldos innan det förstörs. Därför fryser man ofta provet blixtsnabbt — kryoelektronmikroskopi — och nöjer sig med en brusig bild av mycket få elektroner, som sedan räknas ihop från tusentals likadana molekyler.' }
+    ]
+  },
+  {
+    id: 'standardkvantgransen',
+    term: 'Standardkvantgränsen',
+    former: ['standardkvantgränsen', 'standardkvantgräns', 'standardkvantgränser',
+             'skottbrus', 'skottbruset', 'heisenbergskalning', 'heisenbergskalningen'],
+    kort: 'Den brusgräns som gäller när varje partikel i en mätning räknas för sig: noggrannheten förbättras bara som roten ur antalet mätningar. Med sammanflätade sonder går gränsen att pressa förbi.',
+    relaterade: ['kvantsammanflatning', 'kvantmekanik', 'foton'],
+    body: [
+      { type: 'p', html: 'Räkna regndroppar i en hink under en minut. Faller det i snitt hundra droppar blir det sällan exakt hundra — utfallet varierar med ungefär tio åt endera hållet, alltså roten ur hundra. Samma slumpmässiga skvalp finns i varje mätning som bygger på att räkna partiklar en och en: fotoner i en kamera, elektroner i ett mikroskop. Fysiker kallar det skottbrus.' },
+      { type: 'p', html: 'Följden är en obeveklig växelkurs. Skickar man ett antal partiklar mot det man vill mäta växer signalen i takt med antalet, men bruset växer bara som roten ur antalet. Förhållandet dem emellan blir därför också roten ur antalet, vilket betyder att en dubbelt så noggrann mätning kostar fyra gånger så många partiklar. Den gränsen kallas standardkvantgränsen, och den är inget tecken på slarvig utrustning — den följer av att varje partikel behandlas som en oberoende mätning.' },
+      { type: 'p', html: 'Men förutsättningen går att bryta. Om sonderna i stället sammanflätas, så att de bär ett enda gemensamt kvanttillstånd i stället för varsitt eget, kan bidragen läggas ihop koherent. I det idealiserade fallet förbättras noggrannheten då i takt med antalet i stället för med roten ur det, vilket brukar kallas heisenbergskalning. Tekniken används redan i gravitationsvågsdetektorer, där ljuset pressas ihop så att bruset flyttas till en storhet man inte bryr sig om, och prövas i atomklockor och magnetometrar.' }
+    ]
+  },
+  {
+    id: 'jonfalla',
+    term: 'Jonfälla',
+    former: ['jonfälla', 'jonfällan', 'jonfällor', 'jonfällorna', 'jonfälleteknik',
+             'jonfälletekniken', 'jonfällebaserad', 'paulfälla', 'paulfällan',
+             'paulfällor', 'ytelektrodfälla', 'ytelektrodfällan'],
+    kort: 'En anordning som håller kvar enstaka laddade atomer mitt i ett vakuum med elektriska och magnetiska fält, utan att de rör någon vägg. Fångade joner används som qubitar i kvantdatorer och i världens noggrannaste klockor.',
+    relaterade: ['penningfalla', 'kvantdator', 'hogladdad-jon'],
+    body: [
+      { type: 'p', html: 'En ensam jon går inte att förvara i en burk. Den skulle driva mot väggen, plocka upp en elektron och sluta vara en jon. Lösningen är att låta elektriska fält göra jobbet i stället för väggar. Problemet är bara att ett statiskt elektriskt fält aldrig kan hålla en laddning instängd åt alla håll samtidigt — pressas den ihop i två riktningar slipper den undan i den tredje.' },
+      { type: 'p', html: 'Den vanligaste utvägen är att låta fältet växla. I en paulfälla byter det elektriska fältet riktning miljontals gånger i sekunden, så att jonen omväxlande pressas ihop och dras isär i olika riktningar. Sammantaget blir effekten en dragning inåt mot mitten, ungefär som en kula som hålls kvar mitt på en snurrande sadelformad yta. Den andra huvudtypen, penningfällan, använder i stället ett kraftigt magnetfält som tvingar jonen i cirkelbanor, plus elektroder i ändarna som stoppar den från att glida ut.' },
+      { type: 'p', html: 'Väl fångad kan jonen kylas med laser tills den nästan står stilla, och sedan styras och läsas av med ljuspulser. Det gör fångade joner till ett av de mest utvecklade sätten att bygga qubitar: en enda atom, identisk med alla andra av sitt slag, som kan hållas i ett känt kvanttillstånd i minuter. Samma teknik ligger bakom de optiska klockor som går fel med mindre än en sekund under hela universums ålder.' }
+    ]
+  },
+  {
     id: 'ramslapning',
     term: 'Ramsläpning',
     former: ['ramsläpning', 'ramsläpningen', 'lense-thirring-effekten', 'lense-thirringeffekten', 'gravitomagnetism', 'gravitomagnetismen', 'gravitomagnetisk', 'gravitomagnetiska'],
@@ -166,7 +209,7 @@ window.BEGREPP = [
   {
     id: 'penningfalla',
     term: 'Penningfälla',
-    former: ['penningfälla', 'penningfällan', 'penningfällor', 'penningfällorna', 'jonfälla', 'jonfällan', 'jonfällor', 'jonfällorna', 'jonfälletekniken', 'jonfälleteknik'],
+    former: ['penningfälla', 'penningfällan', 'penningfällor', 'penningfällorna'],
     kort: 'En fälla som håller kvar laddade partiklar mitt i ett vakuum med hjälp av ett starkt magnetfält och ett elektriskt fält. Enstaka joner eller elektroner kan förvaras i månader och mätas med extrem noggrannhet.',
     relaterade: ['hogladdad-jon', 'partikelaccelerator', 'supraledare', 'antimateria'],
     body: [

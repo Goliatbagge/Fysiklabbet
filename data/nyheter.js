@@ -88,6 +88,51 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-24-kvantmikroskopet",
+    date: "2026-08-24",
+    title: "Varje elektron som skärper bilden skadar också provet — nu vill fysiker låta en kvantdator läsa av mikroskopet",
+    deck: "Ett österrikiskt forskarlag föreslår att bygga in en jonfälla med enstaka kalciumjoner mitt i strålgången i ett elektronmikroskop. Tanken är att varje elektron ska lämna sin information hos en qubit i stället för i en vanlig detektor — och att bilden därmed ska kunna bli skarpare av färre elektroner.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-24-kvantmikroskopet.jpg",
+    imageAlt: "En forskare i vit rock sitter i ett blåbelyst rum framför ett transmissionselektronmikroskop och tittar på en kornig svartvit bild på skärmen bredvid.",
+    imageCredit: "Foto: Reneegas1 / Wikimedia Commons (CC BY-SA 4.0)",
+    tags: ["kvantfysik", "kvantdator", "elektronmikroskop", "jonfälla", "sammanflätning", "qubit", "mätteknik", "elektroner"],
+    sources: [
+      { name: "Phys.org — Quantum computer microscope is set to significantly improve electron microscopy (23 augusti 2026)", url: "https://phys.org/news/2026-08-quantum-microscope-significantly-electron-microscopy.html" },
+      { name: "TU Wien — The quantum computer microscope (pressmeddelande 18 augusti 2026)", url: "https://www.tuwien.at/en/tu-wien/news/news-articles/news/das-quantencomputer-mikroskop" },
+      { name: "arXiv:2601.11446 — Coupling free electrons to a trapped-ion quantum computer (fri fulltext, CC BY 4.0)", url: "https://arxiv.org/abs/2601.11446" }
+    ],
+    research: {
+      citation: "E. Pescoller, S. Beltrán-Romero, S. Egginger, N. Jungwirth, M. Zanetti, D. Hornof, M. S. Seifner, I. Březinová, P. Haslinger, T. Juffmann, J. Kofler, P. Schindler, D. Rätzel, ”Coupling free electrons to a trapped-ion quantum computer”, Physical Review Letters (2026), publicerad online 16 juli 2026, DOI 10.1103/w6t7-9txs. Fri förhandsversion: arXiv:2601.11446 (CC BY 4.0)",
+      url: "https://doi.org/10.1103/w6t7-9txs"
+    },
+    body: [
+      { type: 'p', html: 'Vill man se en enskild proteinmolekyl duger inte synligt ljus. Våglängden ligger kring 500&nbsp;nm, tusen gånger grövre än det man vill titta på, och vågen böjer sig helt enkelt runt föremålet. Därför byter man ut ljuset mot elektroner. En elektron som accelererats genom 100&nbsp;000&nbsp;volt uppträder som en våg med en våglängd på ungefär 3,7&nbsp;pm — nästan tusen gånger kortare än avståndet mellan atomerna i ett fast material.' },
+      { type: 'p', html: 'Priset är att elektronerna inte bara tittar. Varje elektron som passerar provet kan slå loss en annan elektron ur en molekyl, bryta en bindning eller flytta en atom. Ett biologiskt prov — en cell, ett virus, en frusen proteinlösning — tål bara en viss stråldos innan det man ville avbilda har slutat se ut som sig självt. Och eftersom bildens skärpa i grunden är en statistikfråga hamnar man i en rävsax: fler elektroner ger en tydligare bild av ett alltmer förstört prov.' },
+      { type: 'p', html: 'Ett forskarlag från TU Wien, Wiens universitet, Johannes Kepler-universitetet i Linz och Innsbrucks universitet föreslår nu en väg runt rävsaxen. I stället för att skicka fler elektroner vill de få ut mer information ur varje enskild elektron — genom att låta den tala med en kvantdator på vägen.' },
+      { type: 'h2', text: 'En jonfälla mitt i strålgången' },
+      { type: 'p', html: 'Förslaget går ut på att montera in en liten jonfälla i mikroskopets kolonn, i ett plan där bilden av provet återskapas. I fällan hålls enstaka kalciumjoner svävande omkring hundra mikrometer ovanför ett chip, fångade av elektriska växelfält och nedkylda med laser tills de nästan står stilla. Samma sorts joner används redan i dag som qubitar i kvantdatorer, där de manipuleras och läses av med laserpulser.' },
+      { type: 'p', html: 'Elektronen krockar aldrig med jonen. Den passerar bara förbi på nära håll, och den elektriska frånstötningen räcker för att knuffa till jonen en aning. Knuffen är löjligt liten — men om jonen först försatts i en superposition, alltså i två svängningstillstånd på en gång, blir följden att de två delarna får olika fas. Elektronen och jonen delar därefter ett gemensamt kvanttillstånd: de är sammanflätade. Informationen som elektronen bär med sig från provet finns nu också hos qubiten, och kan hämtas ut genom att jonen belyses och får lysa tillbaka.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-24-kvantmikroskopet-2.jpg', alt: 'Principskiss i tre paneler: ett elektronmikroskop med en inbyggd jonfälla, en elektron som passerar en fångad jon i en potentialgrop, och ett energinivådiagram för kalciumjonen.', caption: 'Forskarnas principskiss. Till vänster mikroskopet med jonfällan inmonterad, i mitten elektronen som passerar den fångade jonen och förskjuter dess svängningstillstånd i fas, till höger de energinivåer i kalciumjonen som bär själva qubiten.', credit: 'Figur: Pescoller med flera, arXiv:2601.11446 (CC BY 4.0)' },
+      { type: 'h2', text: 'Varför färre elektroner kan räcka' },
+      { type: 'p', html: 'I ett vanligt elektronmikroskop landar varje elektron i en detektor och räknas för sig. Elektronerna kommer oberoende av varandra, och bruset i en sådan räkning följer en välkänd regel: skickar man $N$ elektroner växer signalen som $N$ medan bruset växer som $\\sqrt{N}$. Skärpan förbättras alltså bara som roten ur antalet — vill man ha ett dubbelt så bra värde krävs fyra gånger så många elektroner. Gränsen kallas standardkvantgränsen och är inget tekniskt fel som går att konstruera bort; den följer av att varje elektron mäts var för sig.' },
+      { type: 'p', html: 'Kopplingen till jonen bryter just den förutsättningen. Eftersom växelverkan är koherent kan fasskiften från flera elektroner läggas ihop i ett och samma kvanttillstånd i stället för att summeras som oberoende mätvärden. I det idealiserade fallet förbättras då noggrannheten som $N$ i stället för som $\\sqrt{N}$ — det som inom mätfysiken kallas heisenbergskalning. Skillnaden är inte kosmetisk: den betyder att samma bildkvalitet skulle kunna nås med väsentligt lägre stråldos, alltså med ett prov som fortfarande är helt.' },
+      { type: 'quote', html: 'Kvantfysiken låter oss komma förbi de statistiska gränser som begränsar vanliga elektronmikroskop.', cite: 'Elias Pescoller, doktorand vid TU Wien och studiens förstaförfattare' },
+      { type: 'p', html: 'Den springande punkten är om en enda elektron alls ger ett avläsbart utslag, eller om effekten drunknar. Lagets beräkningar pekar åt rätt håll: för långsamma elektroner, med energier mellan 100&nbsp;eV och 1&nbsp;keV, hamnar sannolikheten att qubiten byter tillstånd i storleksordningen 0,1 till 1. Enstaka elektroner räcker alltså för att sätta ett tydligt avtryck i kvantdatorn.' },
+      { type: 'h2', text: 'Kvar står bygget' },
+      { type: 'p', html: 'Det här är än så länge räknat, inte byggt. Studien är kollegialt granskad och publicerad i <em>Physical Review Letters</em>, men den beskriver ett förslag med tillhörande teori — ingen apparat har ännu satt en fri elektron i förbindelse med en fångad jon. Och hindren på vägen är av det handfasta slaget.' },
+      { type: 'p', html: 'Jonfällan behöver ett vakuum kring 10<sup>−9</sup>&nbsp;mbar för att jonerna ska hållas kvar och kvanttillstånden överleva, vilket är hårdare än i ett vanligt mikroskop. Fällans elektroder drivs dessutom med växelspänningar på upp till 50&nbsp;volt, som skulle böja av elektronstrålen om den passerade vid fel tillfälle. Lösningen författarna föreslår är att skicka elektronerna i ultrakorta pulser, tajmade till de ögonblick — ungefär vart femtionde nanosekund — då växelfältet går genom noll. Till sist är det trångt: mellan mikroskopets poldelar finns bara några millimeter, så hela fällan måste rymmas på en chipyta kring 15&nbsp;×&nbsp;25&nbsp;millimeter — knappt ett frimärke.' },
+      { type: 'p', html: 'Nästa steg är just den byggnationen. Vid TU Wiens elektronmikroskopicentrum ska en jonfällebaserad kvantdator från Philipp Schindlers grupp i Innsbruck monteras in i ett elektronmikroskop. Lyckas det handlar vinsten inte bara om skarpare bilder av virus och proteiner, utan om en princip: att fria elektroner kan användas som kvantsonder, sammanflätade med annan materia. Författarna pekar själva ut att samma koppling i förlängningen skulle kunna prövas på andra styrda laddade partiklar — ända upp till protonerna i en accelerator.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Att elektroner beter sig som vågor förutsades av Louis de Broglie 1924 och bekräftades tre år senare, när elektroner spreds mot en nickelkristall och gav samma sorts mönster som röntgenstrålning. Hela elektronmikroskopin vilar på den upptäckten.',
+        'Nobelpriset i kemi 2017 gick till Jacques Dubochet, Joachim Frank och Richard Henderson för kryoelektronmikroskopi, där provet fryses så snabbt att vattnet blir glasartat i stället för att bilda iskristaller. Metoden finns till just för att biologiska prov tål så lite strålning.',
+        'Nobelpriset i fysik 2012 delades av David Wineland och Serge Haroche för metoder att mäta och styra enskilda kvantsystem utan att förstöra dem. Winelands verktyg var fångade joner, kylda med laser — samma teknik som nu föreslås flytta in i mikroskopet.',
+        'En elektron som accelererats genom 100&nbsp;000&nbsp;volt färdas i drygt halva ljushastigheten. Sträckan genom mikroskopets kolonn tillryggalägger den på några miljarddels sekunder.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-23-rumtiden-vrids",
     date: "2026-08-23",
     title: "Jorden drar rumtiden runt med sig när den snurrar — nu är effekten uppmätt tio gånger noggrannare än förut",

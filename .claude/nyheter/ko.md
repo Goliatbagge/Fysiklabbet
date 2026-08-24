@@ -27,6 +27,24 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+- **Stjärnor som gång på gång överlever mötet med ett supermassivt svart hål**
+  — upprepade partiella tidvattensönderslitningar, där samma stjärna skalas av
+  vid varje förbiflygning och ger en ny ljusblixt. Nytt arbete (Syracuse
+  University, augusti 2026) föreslår att stjärnor som redan snurrade extremt
+  fort förklarar både de avtagande blixtarna och hur stjärnorna hamnat i så
+  trånga banor. Mycket stark elevvinkel (tidvattenkrafter, gravitation), men
+  astrofysik gick tre gånger den senaste veckan — spara till ämnesväxlingen.
+  Källa (ScienceDaily 2026-08-22):
+  https://www.sciencedaily.com/releases/2026/08/260822015119.htm
+  (tillagd 2026-08-24)
+
+- **Supraledningsgapet i en ultratunn nickelat beter sig inte som väntat** —
+  färskt (Phys.org 2026-08-23) och rör supraledning, ett ämne som inte varit
+  uppe på länge. Kontrollera att vinkeln går att göra konkret innan den
+  används — gapmätningar är tekniska. Källa:
+  https://phys.org/news/2026-08-superconducting-gap-ultrathin-nickelate-defies.html
+  (tillagd 2026-08-24)
+
 - **Laserskuren aluminiumfolie ersätter dyra terahertzpolarisatorer** — en
   billig folie med laserskurna springor gör samma jobb som en polarisator för
   hundratusentals kronor. Fin ingång: polarisation, gitter, våglängdens

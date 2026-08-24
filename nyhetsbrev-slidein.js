@@ -48,8 +48,13 @@
  *      en andra.
  *   2. Besökaren har läst minst 45 % av sidan OCH varit kvar 30 sekunder.
  *   3. Sidan är alls värd att skrolla i (minst ~1,6 skärmhöjder).
- *   4. Rutan har inte visats förut: en stängd ruta vilar 60 dagar, och
- *      den som anmält sig får aldrig se den igen.
+ *   4. Rutan har inte visats förut. Minnet skrivs i samma ögonblick som
+ *      rutan VISAR sig — inte när den stängs — så att den som backar,
+ *      byter flik eller bara lämnar sidan räknas som en visning. En visad
+ *      ruta vilar 60 dagar, och den som anmält sig får aldrig se den igen.
+ *      Skriften går till både localStorage (de 60 dagarna) och
+ *      sessionStorage (fliken), så att ett blockerat localStorage inte
+ *      låter rutan komma tillbaka sida efter sida under samma besök.
  *   5. Besökaren kom inte hit från ett utskick (?eocampaign1=… eller
  *      utm_source=nyhetsbrev) — då prenumererar hen redan, och vi
  *      minns det.
@@ -71,14 +76,16 @@
  * så snäva. Escape och ett klick utanför stänger, fokus flyttas in i
  * rutan när den öppnas och tillbaka dit det låg när den stängs.
  *
- * Minnet ligger i localStorage under nyckeln fl-nyhetsbrev-slidein. Det
- * är per webbläsare och enhet — samma person i mobilen eller efter en
- * cookierensning börjar om. Det går inte att komma runt utan inloggning.
+ * Minnet ligger under nyckeln fl-nyhetsbrev-slidein, i localStorage (de 60
+ * dagarna) och i sessionStorage (den öppna fliken). Det är per webbläsare
+ * och enhet — samma person i mobilen eller efter en cookierensning börjar
+ * om. Det går inte att komma runt utan inloggning.
  */
 (function () {
     'use strict';
 
     var NYCKEL = 'fl-nyhetsbrev-slidein';
+    var forhandsvisning = false;  // ?nbs=test — visa rutan, rör inte minnet
     var VILA_DAGAR = 60;          // hur länge en stängd ruta håller tyst
     var SKROLL_ANDEL = 0.45;      // 45 % av sidan läst
     var TID_MS = 30000;           // och minst 30 sekunder på sidan
@@ -98,23 +105,33 @@
 
     /* ── Minnet ────────────────────────────────────────────────────── */
 
-    function las() {
+    function las(lager) {
         try {
-            var rad = window.localStorage.getItem(NYCKEL);
+            var rad = window[lager].getItem(NYCKEL);
             return rad ? JSON.parse(rad) : null;
         } catch (e) { return null; }        // privat läge, blockerad lagring
     }
 
+    /* Skriver i BÅDA lagren. localStorage bär de 60 dagarna; sessionStorage
+       är ett skyddsnät för den enda flik besökaren håller på i — går
+       localStorage inte att skriva i (privat läge, blockerad lagring,
+       full kvot) skulle rutan annars komma tillbaka på var och varannan
+       sida under hela besöket. Ingetdera får kasta: misslyckas allt är det
+       värsta som händer att rutan visas igen vid nästa besök. */
     function skriv(status) {
-        try {
-            window.localStorage.setItem(NYCKEL, JSON.stringify({
-                status: status, tid: Date.now(),
-            }));
-        } catch (e) { /* strunt samma — då visas rutan igen nästa besök */ }
+        // Förhandsvisningen (?nbs=test) finns för att titta på rutan, och
+        // ska aldrig kosta besökaren sina 60 dagar.
+        if (forhandsvisning) return;
+        var rad = JSON.stringify({ status: status, tid: Date.now() });
+        try { window.localStorage.setItem(NYCKEL, rad); } catch (e) { /* strunt samma */ }
+        try { window.sessionStorage.setItem(NYCKEL, rad); } catch (e) { /* strunt samma */ }
     }
 
     function farVisas() {
-        var m = las();
+        // Har rutan redan haft sin chans i den här fliken är den färdig,
+        // oavsett vad det långa minnet säger.
+        if (las('sessionStorage')) return false;
+        var m = las('localStorage');
         if (!m) return true;
         if (m.status === 'prenumererar') return false;
         var dagar = (Date.now() - (m.tid || 0)) / 86400000;
@@ -513,6 +530,18 @@
         panel.classList.remove('nbs-vantar');
         forraFokus = document.activeElement;
 
+        // Minnet skrivs HÄR, i samma andetag som rutan visar sig — inte
+        // först när den stängs. Annars räknas bara den besökare som
+        // uttryckligen kryssar bort rutan: den som i stället backar med
+        // telefonens bakåtgest, byter flik, stänger fliken eller vars
+        // webbläsare slås ihjäl lämnar inget spår, och får rutan igen på
+        // nästa sida. Bakåtknappen är dessutom fullt nåbar medan rutan är
+        // uppe, så det är inte ens ett kantfall — det är den vanliga vägen
+        // ut på en telefon. (Rapporterat 2026-08-24: rutan kom tillbaka
+        // flera gånger på kort tid.) stang() skriver sedan över med sin
+        // egen status; det gör ingen skada.
+        skriv('visad');
+
         skarm = document.createElement('div');
         skarm.className = 'nbs-skarm';
         skarm.addEventListener('click', function () { stang('stangd'); });
@@ -590,6 +619,7 @@
         // Förhandsvisning: ?nbs=test visar rutan direkt, utan villkor och
         // utan att skriva i minnet. Bara för att titta på den.
         if (/[?&]nbs=test\b/.test(window.location.search)) {
+            forhandsvisning = true;
             // I lånläget måste sidans egen ruta hinna monteras först —
             // React-vyerna gör det i en effekt, en bit efter
             // DOMContentLoaded, så en fast fördröjning blir en lotteri.

@@ -15135,9 +15135,15 @@
     /* ---- steg 3: b) — vridningspunkt P + hävarmsmått ---- */
     var b3 = figurBubble([
       [['b) Två okända krafter!']],
-      [['Väljer P som vridnings-']],
-      [['punkt — då får kraften']],
-      [['i P hävarmen 0.']]
+      [['Eftersom vi vill ha']],
+      [['kraften från den '], ['högra', 'u']],
+      [['bocken sätter vi vrid-']],
+      [['ningspunkten vid den']],
+      [['vänstra', 'u'], [' bocken.']],
+      [['Kraften vid den vänstra']],
+      [['bocken får då hävarmen']],
+      [['0 och ger inget']],
+      [['kraftmoment.']]
     ]);
     tanke(b3);
     var ringP = { kind: 'stroke', pts: ringPts(pX, 150, 17, 14), color: BLUE };
@@ -35190,7 +35196,9 @@
                            'font-size': fs, fill: LABINK }, g);
       ln.forEach(function (seg) {
         var sp = document.createElementNS(SVGNS, 'tspan');
-        if (seg[1]) sp.setAttribute('font-style', 'italic');
+        /* seg[1]: 'u' = understruket ord, annat sant värde = kursivt */
+        if (seg[1] === 'u') sp.setAttribute('text-decoration', 'underline');
+        else if (seg[1]) sp.setAttribute('font-style', 'italic');
         sp.textContent = seg[0];
         t.appendChild(sp);
       });

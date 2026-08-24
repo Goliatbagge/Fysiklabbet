@@ -597,7 +597,7 @@
                 a.oR.frequency.setTargetAtTime(fs * 1.012, t, 0.05);
                 a.sL.frequency.setTargetAtTime(fs, t, 0.05);
                 a.sR.frequency.setTargetAtTime(fs * 1.012, t, 0.05);
-                if (a.pan) a.pan.pan.setTargetAtTime(clamp(this.wander / 0.006, -1, 1) * 0.45, t, 0.1);
+                if (a.pan) a.pan.pan.setTargetAtTime(clamp((this.x + this.wander) / 0.05, -1, 1) * 0.6, t, 0.1);
             }
 
             get m() { return this.cfg.massMg * 1e-6; }         // kg
@@ -612,8 +612,10 @@
                 this.phase = 'sitter';
                 this.phaseT = 0;
                 this.z = 0; this.vz = 0;
+                this.x = 0; this.xT = 0;     // sidledsläge + sidledsmål (m från bägarens mitt)
                 this.pAir = 0;
                 this.Tcmd = 0; this.Tinst = 0; this.D = 0; this.Fc = this.m * G_ACC;
+                this.FcScale = this.Fc;
                 this.f = 1; this.tau = 0.1; this.vi = 0; this.viS = 0; this.zS = 0;
                 this.wander = 0;
                 this.impulse = 0;
@@ -634,15 +636,46 @@
 
             tare() { if (this.scaleOn) this.cfg.tareG = this.lcdG; }
 
+            // ── Golvnivån under flugan (m relativt bägarens inre botten):
+            //    bägarens botten, lockets ovansida, vågplattan eller bänken. ──
+            floorZof(x) {
+                const ax = Math.abs(x);
+                if (ax < D_BEAKER / 2) {
+                    if (this.cfg.lid && this.z > this.H - 0.004) return this.H + 0.002;  // ovanpå locket
+                    return 0;
+                }
+                if (ax < 0.062) return -0.004;   // vågplattan
+                return -0.0535;                  // bänken bredvid vågen
+            }
+            // Står/hovrar flugan över något som vilar PÅ vågen?
+            onScale(x) { return Math.abs(x) < 0.062; }
+
             // ── Infångningsfaktor: hur stor andel av nedsvepet som
-            //    stannar i bägaren. Med lock: allt. Öppen bägare: beror
-            //    på flugans djup under mynningen (strålen sprider sig
-            //    med ungefär bägardiameterns skala). ──
+            //    hamnar på vågen. Inne i bägaren under mynningen: beror på
+            //    djupet (strålen sprider sig med ungefär bägardiameterns
+            //    skala; med lock fångas allt). Ovanför mynningen eller
+            //    utanför väggarna: det som träffar bägarens utsida eller
+            //    vågplattan räknas, det som går ner i mynningen sprids ut
+            //    med återströmningen (etablerat: vid mynningen tappar
+            //    vågen flugan) och det som landar på bänken går förlorat. ──
             captureF() {
-                if (this.cfg.lid) return 1;
-                const d = this.H - this.z;           // djup under mynningen
-                if (d <= 0) return 0;                // ovanför mynningen
-                return smoother(d / (0.55 * D_BEAKER));
+                const ax = Math.abs(this.x);
+                const R = D_BEAKER / 2;
+                if (ax < R && this.z < this.H) {
+                    if (this.cfg.lid) return 1;
+                    const d = this.H - this.z;           // djup under mynningen
+                    if (d <= 0) return 0;
+                    return smoother(d / (0.55 * D_BEAKER));
+                }
+                // strålens fotavtryck (bredd växer med fallhöjden) mot
+                // vågens ring [bägarväggen … plattans kant] på båda sidor
+                const h = Math.max(this.z - this.floorZof(this.x), 0.005);
+                const w = 0.008 + 0.35 * h;
+                const lo = ax - w, hi = ax + w;
+                const ringLo = R + 0.002, ringHi = 0.062;
+                const seg = (a, b) => Math.max(0, Math.min(hi, b) - Math.max(lo, a));
+                const caught = seg(ringLo, ringHi) + seg(-ringHi, -ringLo);
+                return clamp(caught / (2 * w), 0, 1);
             }
 
             // ── Förloppens tillståndsmaskin → önskad lyftkraft ──
@@ -802,24 +835,48 @@
                 const kD = 0.5 * this.cfg.rho * CDA_BODY;
                 this.D = -kD * this.vz * Math.abs(this.vz);
 
-                // 6. Kontakt mot botten (fjäder + dämpare) och ev. locket
+                // 6. Kontakt (fjäder + dämpare) mot golvet under flugan —
+                //    bägarens botten, locket, vågplattan eller bänken — samt
+                //    lockets undersida när flugan är instängd. Bara kontakt
+                //    med något som står PÅ vågen känns av vågen (FcScale).
+                const R_IN = D_BEAKER / 2;
+                const insideNow = Math.abs(this.x) < R_IN;
+                const floorZ = this.floorZof(this.x);
+                const onScaleNow = this.onScale(this.x);
                 let Fc = 0;
-                if (this.z <= 0) Fc = Math.max(0, -K_CONTACT * this.z - C_CONTACT * this.vz);
+                if (this.z <= floorZ) Fc = Math.max(0, -K_CONTACT * (this.z - floorZ) - C_CONTACT * this.vz);
                 const zLid = this.H - 0.006;
-                if (this.cfg.lid && this.z >= zLid) {
+                if (this.cfg.lid && insideNow && this.z >= zLid && this.z < this.H) {
                     // locket trycker nedåt på flugan — och flugan uppåt på locket,
                     // dvs. kraften går in i bägaren med omvänt tecken
                     Fc = -Math.max(0, K_CONTACT * (this.z - zLid) + C_CONTACT * this.vz);
                 }
                 this.Fc = Fc;
+                this.FcScale = onScaleNow ? Fc : 0;
 
-                // 7. Flugans rörelseekvation
+                // 7. Flugans rörelseekvation (vertikalt) + sidledsflykt.
+                //    Sidleds är rörelsen kinematisk — vågen mäter bara
+                //    vertikala krafter (horisontell flykt: utslaget opåverkat).
+                const z0 = this.z;
                 const a = (this.Tinst + this.D + Fc - m * g) / m;
                 this.vz += a * DT;
                 this.z += this.vz * DT;
-                const zMax = this.cfg.lid ? this.H - 0.004 : this.H + 0.05;
-                if (this.z > zMax) { this.z = zMax; this.vz = Math.min(this.vz, 0); }
-                if (this.z < -0.002) this.z = -0.002;
+                if (this.cfg.lid && insideNow && z0 < this.H - 0.003 && this.z > this.H - 0.004) {
+                    this.z = this.H - 0.004; this.vz = Math.min(this.vz, 0);
+                } else if (this.z > this.H + 0.06) {
+                    this.z = this.H + 0.06; this.vz = Math.min(this.vz, 0);
+                }
+                if (this.z < floorZ - 0.002) this.z = floorZ - 0.002;
+                const airborne = flying || this.z > floorZ + 0.001;
+                if (airborne || this.dragTarget !== null) {
+                    this.x += clamp((this.xT - this.x) * 8, -0.35, 0.35) * DT;
+                }
+                // glaset är i vägen: under mynningsnivån går det inte att
+                // korsa väggen — flugan pressas mot den tills den lyfts över
+                if (this.z < this.H - 0.002) {
+                    if (Math.abs(this.x) < R_IN) this.x = clamp(this.x, -(R_IN - 0.004), R_IN - 0.004);
+                    else if (Math.abs(this.x) < R_IN + 0.006) this.x = Math.sign(this.x) * (R_IN + 0.006);
+                }
 
                 // 8. Luftens rörelsemängdsbudget. Vingslagens OSCILLATION
                 //    överförs nästan momentant till botten (tryckfältet rör
@@ -837,8 +894,9 @@
 
                 // 9. Vågens verkliga kraft — INTE M_tot·g, utan summan av
                 //    det som faktiskt trycker på den (identiteten
-                //    N − M·g = Δp/Δt uppfylls fortfarande exakt)
-                const N = (M_BEAKER + this.mAir) * G_ACC + Fc + outflux + this.f * ripple;
+                //    N − M·g = Δp/Δt uppfylls fortfarande exakt; kontakt
+                //    med bänken bredvid vågen räknas inte)
+                const N = (M_BEAKER + this.mAir) * G_ACC + this.FcScale + outflux + this.f * ripple;
                 this.N = N;
                 const dev = N - this.Nref;
                 this.impulse += dev * DT;
@@ -862,7 +920,9 @@
                 const em = 1 - Math.exp(-DT / 0.05);
                 const flyC = m * a;                       // = T + D + Fc − mg
                 const airC = -(inject - outflux);         // luftens dp/dt, uppåt räknat
-                const leakC = -(1 - this.f) * (this.Tinst + this.D);
+                // läckaget: nedsvep som missar vågen + kontaktkraft mot
+                // bänken (står flugan utanför vågen bär bordet den i stället)
+                const leakC = -(1 - this.f) * (this.Tinst + this.D) - (Fc - this.FcScale);
                 this.ema.fly += (flyC * 1e6 - this.ema.fly) * em;
                 this.ema.air += (airC * 1e6 - this.ema.air) * em;
                 this.ema.leak += (leakC * 1e6 - this.ema.leak) * em;
@@ -906,14 +966,17 @@
                 const vi = this.viS * s * pulse;   // vakens fart lever kvar en stund
                 let vx = 0, vz = 0;
                 if (vi > 0.01) {
-                    // nedsvepets stråle under flugan
+                    // nedsvepets stråle under flugan (centrerad där flugan är
+                    // — står den utanför bägaren dör fältet därinne av sig
+                    // självt eftersom gaussen inte når in)
                     const dz = zf - z;
+                    const xr = x - (this.x + this.wander);
                     if (dz > 0) {
                         const rj = 0.007 + 0.38 * dz;
-                        const u = Math.exp(-(x * x) / (2 * (rj * 0.55) * (rj * 0.55)));
+                        const u = Math.exp(-(xr * xr) / (2 * (rj * 0.55) * (rj * 0.55)));
                         vz -= vi * (0.009 / rj) * u * 2.4;
                         // strålen böjer av utåt nära botten
-                        if (z < 0.02) vx += Math.sign(x || (Math.random() - 0.5)) * vi * 0.8 * Math.exp(-z / 0.012) * u;
+                        if (z < 0.02) vx += Math.sign(xr || (Math.random() - 0.5)) * vi * 0.8 * Math.exp(-z / 0.012) * u;
                     }
                     // återströmning uppåt längs väggarna
                     const wf = smoother((Math.abs(x) - 0.5 * R) / (0.45 * R));
@@ -952,12 +1015,15 @@
                     if (p.x > R - 0.002) { p.x = R - 0.002; p.vx = -Math.abs(p.vx) * 0.3; }
                     if (p.x < -R + 0.002) { p.x = -R + 0.002; p.vx = Math.abs(p.vx) * 0.3; }
                 }
-                // nedsvep ovanför mynningen (flugan i/över mynningen): spawn direkt
-                if (!this.cfg.lid && this.cfg.rho > 0.25 && this.z > H - 0.012 && this.Tcmd > 0.3 * this.m * G_ACC) {
+                // nedsvep i det fria: flugan i/över mynningen ELLER utanför
+                // bägaren → puffar rakt under flugan som faller mot underlaget
+                const outsideNow = Math.abs(this.x) > R;
+                if (this.cfg.rho > 0.25 && (outsideNow || (!this.cfg.lid && this.z > H - 0.012)) &&
+                    this.Tcmd > 0.3 * this.m * G_ACC) {
                     if (Math.random() < clamp(dtVis * 30, 0, 1) && this.outParts.length < 90) {
                         const dir = Math.random() < 0.5 ? -1 : 1;
                         this.outParts.push({
-                            x: CX + (this.wander * PX) + dir * (6 + Math.random() * 10),
+                            x: CX + (this.x + this.wander) * PX + dir * (6 + Math.random() * 10),
                             y: BOT_Y - this.z * PX + 8,
                             vx: dir * (0.15 + Math.random() * 0.35) * PX * this.vi / 0.7,
                             vy: (0.3 + Math.random() * 0.4) * PX * this.vi / 0.7,
@@ -972,12 +1038,20 @@
                     q.y += q.vy * dtVis;
                     // luften viker av runt mynningskanten — aldrig genom glaset:
                     // ovanför bägaröppningen glider strömmen längs mynningen
-                    // tills den passerat kanten, sedan faller den utanför väggen
-                    if (q.y > rimYpx - 5 && Math.abs(q.x - CX) < spanPx) {
-                        q.y = rimYpx - 5;
-                        const dir = Math.sign(q.x - CX) || (Math.random() < 0.5 ? -1 : 1);
-                        q.vx = dir * Math.max(Math.abs(q.vx), 260);
-                        q.vy = Math.max(q.vy, 140);
+                    // tills den passerat kanten, sedan faller den utanför väggen.
+                    // En partikel djupare ner (från en fluga bredvid bägaren)
+                    // studsar i stället mot glasets utsida.
+                    if (Math.abs(q.x - CX) < spanPx && q.y > rimYpx - 5) {
+                        if (q.y < rimYpx + 10) {
+                            q.y = rimYpx - 5;
+                            const dir = Math.sign(q.x - CX) || (Math.random() < 0.5 ? -1 : 1);
+                            q.vx = dir * Math.max(Math.abs(q.vx), 260);
+                            q.vy = Math.max(q.vy, 140);
+                        } else {
+                            const dir = Math.sign(q.x - CX) || 1;
+                            q.x = CX + dir * spanPx;
+                            q.vx = dir * Math.abs(q.vx || 120);
+                        }
                     }
                     // träffar bänken eller vågen → sprids i sidled
                     const floorY = (q.x > CX - 160 && q.x < CX + 160) ? PLAT_Y : BENCH_Y;
@@ -1012,7 +1086,7 @@
                     this.onReadout({
                         grams: this.scaleOn ? this.lcdG : null,
                         devuN: this.ema.dev,
-                        FcuN: this.Fc * 1e6,
+                        FcuN: this.FcScale * 1e6,
                         airuN: (this.pAir / this.tau) * 1e6,
                         leakuN: -this.ema.leak,
                         mguN: this.m * G_ACC * 1e6,
@@ -1245,7 +1319,7 @@
                 if (F < 1e-8) return;
                 const sig = Math.max(0.010, 0.007 + 0.38 * this.z * 0.55);  // m
                 const p0 = F / (2 * Math.PI * sig * sig);    // maxtryck (Pa)
-                const xf = CX + this.wander * PX;
+                const xf = CX + (this.x + this.wander) * PX;
                 const maxA = clamp(F / (this.m * G_ACC), 0, 1.3);
                 for (let x = g.innerL; x < g.innerR; x += 4) {
                     const r = (x + 2 - xf) / PX;
@@ -1341,7 +1415,7 @@
             // ── Flugan ──
             drawFly(ctx, dtReal) {
                 const speed = SPEEDS[this.cfg.speedIdx];
-                const fx = CX + this.wander * PX;
+                const fx = CX + (this.x + this.wander) * PX;
                 const fy = BOT_Y - this.z * PX - 4;
                 const flying = this.Tcmd > 0.02 * this.m * G_ACC && this.cfg.rho > 0.3;
                 const trying = this.Tcmd > 0.02 * this.m * G_ACC;   // vingar rör sig även i vakuum
@@ -1610,7 +1684,7 @@
                 const b = this.cfg.boundary;
                 if (b === 'ingen') return;
                 const g = this.beakerGeom();
-                const fx = CX + this.wander * PX;
+                const fx = CX + (this.x + this.wander) * PX;
                 const fy = BOT_Y - this.z * PX - 4;
                 const mg = this.m * G_ACC;
                 ctx.setLineDash([6, 4]);
@@ -1719,7 +1793,7 @@
                 let cur = '';
                 if (this.scaleButtonAt(e)) cur = 'pointer';
                 else {
-                    const fx = CX + this.wander * PX;
+                    const fx = CX + (this.x + this.wander) * PX;
                     const fy = BOT_Y - this.z * PX - 4;
                     if (Math.hypot(p.x - fx, p.y - fy) < 34) cur = 'grab';
                 }
@@ -1738,10 +1812,11 @@
             tryGrab(e) {
                 const p = this.pointerToLogical(e);
                 if (!p) return false;
-                const fx = CX + this.wander * PX;
+                const fx = CX + (this.x + this.wander) * PX;
                 const fy = BOT_Y - this.z * PX - 4;
                 if (Math.hypot(p.x - fx, p.y - fy) < 34) {
                     this.dragTarget = this.z;
+                    this.xT = this.x;
                     return true;
                 }
                 return false;
@@ -1750,14 +1825,30 @@
             dragTo(e) {
                 const p = this.pointerToLogical(e);
                 if (!p || this.dragTarget === null) return;
-                const zMaxDrag = this.cfg.lid ? this.H - 0.012 : this.H + 0.03;
-                this.dragTarget = clamp((BOT_Y - p.y) / PX, 0.002, zMaxDrag);
+                const R = D_BEAKER / 2;
+                let xT = clamp((p.x - CX) / PX, -0.066, 0.075);
+                let zT = (BOT_Y - p.y) / PX;
+                if (this.cfg.lid && Math.abs(this.x) < R && this.z < this.H) {
+                    // locket på och flugan därinne: instängd i bägaren
+                    xT = clamp(xT, -(R - 0.006), R - 0.006);
+                    zT = clamp(zT, 0.002, this.H - 0.012);
+                } else {
+                    // locket blockerar mynningen utifrån — men det går att
+                    // landa ovanpå det
+                    if (this.cfg.lid && Math.abs(xT) < R && zT < this.H + 0.004) zT = this.H + 0.004;
+                    zT = clamp(zT, this.floorZof(xT) + 0.002, this.H + 0.055);
+                }
+                this.dragTarget = zT;
+                this.xT = xT;
+                // väggkollisionen i step() hindrar sidbyte under mynningsnivån
+                // — flugan pressas mot glaset tills den lyfts över kanten
             }
 
             release() {
-                // stanna kvar och hovra på släppt höjd (om flugan flyger)
-                if (this.dragTarget !== null && this.dragTarget > 0.008) {
-                    this.cfg.hoverH = clamp(this.dragTarget, 0.01, this.H + 0.02);
+                // stanna kvar och hovra där flugan släpptes (om den flyger);
+                // sidledsmålet xT ligger kvar så att den inte glider tillbaka
+                if (this.dragTarget !== null && this.dragTarget > this.floorZof(this.xT) + 0.006) {
+                    this.cfg.hoverH = clamp(this.dragTarget, 0.01, this.H + 0.05);
                 }
                 this.dragTarget = null;
             }
@@ -2369,7 +2460,7 @@
                                             <td>{fmtuN(mg_uN)}</td>
                                         </tr>
                                         <tr>
-                                            <td>Kontaktkraft mot botten</td>
+                                            <td>Kontaktkraft mot vågen</td>
                                             <td>{readout ? fmtuN(readout.FcuN) : '—'}</td>
                                         </tr>
                                         <tr>
@@ -2400,7 +2491,9 @@
                                     Avvikelsen är alltid summan av flugans och luftens rörelsemängdsändring
                                     plus läckaget — masscentrumsatsen, uppfylld i varje tidssteg. Impulsöverskottet
                                     går mot noll över ett helt förlopp: ytorna över och under nollinjen tar ut varandra.
-                                    Dra gärna i flugan direkt i scenen för att flytta den i höjdled.
+                                    Dra gärna i flugan direkt i scenen — i både höjd- och sidled: lyft den över
+                                    kanten, ut ur bägaren och bort till bänken. Hovrar den utanför vågen, eller
+                                    sätter sig på bordet, tappar vågen hela dess tyngd.
                                 </div>
                             </div>
                         </div>

@@ -72,9 +72,15 @@
         'border-color:var(--lab-ink,#0f1620);cursor:default;}',
         '.secnav .secnav-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;',
         'opacity:.65;font-family:var(--lab-font-mono,monospace);}',
-        '.secnav .secnav-title{font-weight:600;font-size:15px;}',
+        // overflow-wrap: ett långt simuleringsnamn utan mellanslag
+        // ("Gaffelbalansen") ska brytas i stället för att spilla ut ur rutan.
+        '.secnav .secnav-title{font-weight:600;font-size:15px;overflow-wrap:anywhere;}',
         '@media(max-width:560px){.secnav{padding:0 1rem;gap:6px;}',
-        '.secnav a,.secnav .secnav-cur{min-width:0;flex:1 1 0;padding:7px 10px;align-items:center;}',
+        '.secnav a,.secnav .secnav-cur{min-width:0;flex:1 1 0;padding:7px 10px;align-items:center;',
+        'text-align:center;}',
+        // Har avsnittet TVÅ simuleringar blir raden fyra rutor bred, och då
+        // finns det inte plats för namnen på en telefon. Lägg dem i 2 × 2.
+        '.secnav--multi a,.secnav--multi .secnav-cur{flex:1 1 calc(50% - 3px);}',
         '.secnav .secnav-title{font-size:13px;}}'
     ].join('');
     document.head.appendChild(style);
@@ -103,7 +109,7 @@
 
     function build() {
         const bar = document.createElement('nav');
-        bar.className = 'secnav';
+        bar.className = simHrefs.length > 1 ? 'secnav secnav--multi' : 'secnav';
         bar.setAttribute('aria-label', 'Avsnittsväxlare');
 
         let mid = '';

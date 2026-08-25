@@ -1177,6 +1177,18 @@
                     }
                 }
                 el.classList.add('pres-item');
+                // GENERELL REGEL: hänvisar stycket till figuren ("figuren
+                // nedan", "se bilden", "diagrammet visar") hör figuren till
+                // SAMMA steg som stycket — annars står texten "Betrakta
+                // cirkeln i figuren nedan" ensam på duken och man undrar
+                // vilken cirkel som menas.
+                const prevTop = steps[steps.length - 1];
+                if (el.classList.contains('lab-block-figur') &&
+                    prevTop && !prevTop.block && prevTop.el.tagName === 'P' &&
+                    /\b(figur|bild|diagram|graf|kurv|tabell)\w*/i.test(prevTop.el.textContent || '')) {
+                    (prevTop.twins || (prevTop.twins = [])).push(el);
+                    continue;
+                }
                 steps.push({ el, block: null });
             }
             return { steps, blocks };

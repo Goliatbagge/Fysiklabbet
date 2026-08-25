@@ -32,10 +32,10 @@ Regler för vilka beräkningar man ska utföra först kallas
 **prioriteringsregler**.
 
 ::: formel "Prioriteringsregler"
-1. **Parenteser** — ( )
-2. **Potenser** — $a^b$
-3. **Multiplikation och division** — $\cdot$ och /
-4. **Addition och subtraktion** — + och −
+1. **Parenteser**: ( )
+2. **Potenser**: $a^b$
+3. **Multiplikation och division**: $\cdot$ och /
+4. **Addition och subtraktion**: + och −
 :::
 
 Den korrekta uträkningen för exemplet ovan är alltså att först beräkna

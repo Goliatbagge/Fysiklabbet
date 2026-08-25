@@ -132,9 +132,9 @@ $$
 **Prioriteringsregler**
 
 1. **Parenteser**
-2. **Potenser** — $a^b$
-3. **Multiplikation och division** — $\cdot$ och /
-4. **Addition och subtraktion** — + och −
+2. **Potenser**: $a^b$
+3. **Multiplikation och division**: $\cdot$ och /
+4. **Addition och subtraktion**: + och −
 :::
 
 ## Viktiga samband och metoder

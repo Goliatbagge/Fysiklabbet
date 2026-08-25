@@ -17,8 +17,8 @@
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, eulersdisk,
- *           fjaderpendel, skiftnyckel, valtning, linjal, fodelsedag,
- *           talmangder
+ *           fjaderpendel, skiftnyckel, valtning, gaffelbalans, linjal,
+ *           fodelsedag, talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -128,6 +128,23 @@
  * Knappval mellan "Hög kloss" (välter redan vid ≈23°) och "Låg kloss"
  * (kräver ≈62°) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
+ *
+ * ── typ: gaffelbalans ────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-1.2 (Mer kraftmoment): det klassiska balanstricket
+ * — två gafflar trycks fast i en kork, en nål sticks igenom, och hela bygget
+ * balanserar på nålspetsen mot den ytterst smala kanten av ett mynt som står
+ * på högkant i en flaskkork. Gafflarnas tunga skaft hänger NEDÅT och drar
+ * systemets tyngdpunkt till en punkt strax UNDER stödpunkten — därför rättar
+ * tyngdkraftens moment till varje lutning i stället för att välta bygget,
+ * precis tvärtom mot klossen i typ: valtning. Ta tag i en gaffel och luta
+ * bygget (eller tryck "Knuffa till") — det vaggar tillbaka som en pendel
+ * kring stödpunkten. Glidaren ändrar gaffelvinkeln: lyfts gafflarna över den
+ * kritiska vinkeln (≈36°) hamnar tyngdpunkten ovanför stödpunkten och bygget
+ * faller av myntet. Skalan till höger visar tyngdpunktens läge i millimeter
+ * relativt stödpunkten, med nollstrecket på samma höjd som stödpunkten i
+ * scenen. Fysikmodellen (massor, längder, tröghetsmoment) är IDENTISK med
+ * den fristående simuleringen fysik2-gaffelbalans-app.html. Ritad i
+ * laboranstemat; "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  *
  * ── typ: fodelsedag ──────────────────────────────────────────────────────
  * Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst två
@@ -4157,6 +4174,855 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: gaffelbalans
+    // ══════════════════════════════════════════════════════════════════════
+    // Demonstrationen ur fy2-1.2 (Mer kraftmoment): det klassiska
+    // balanstricket — två gafflar trycks fast i en kork, en nål sticks
+    // igenom korken, och hela bygget balanserar på nålspetsen mot den
+    // smala kanten av ett mynt som står på högkant i en flaskkork.
+    // Gafflarnas tunga skaft hänger NEDÅT och drar systemets tyngdpunkt
+    // till en punkt strax UNDER stödpunkten — därför rättar tyngdkraftens
+    // moment till varje lutning i stället för att välta bygget, precis
+    // tvärtom mot klossen i vältningsdemonstrationen.
+    // Ta tag i en gaffel och luta bygget (eller tryck "Knuffa till") —
+    // det vaggar tillbaka som en pendel kring stödpunkten. Glidaren
+    // ändrar gaffelvinkeln: lyfter man gafflarna över den kritiska
+    // vinkeln (≈36°) hamnar tyngdpunkten ovanför stödpunkten och bygget
+    // faller. Skalan till höger visar tyngdpunktens läge i millimeter
+    // relativt stödpunkten — den lilla storheten som avgör allt.
+    // Fysikmodellen (massor, längder, tröghetsmoment) är IDENTISK med den
+    // fristående simuleringen fysik2-gaffelbalans-app.html. Ritad i
+    // laboranstemat; "Ultrarapid" och fullskärm som övriga minisims.
+    function buildGaffelbalans(node, cfg) {
+        var W = 560, H = 430;              // logisk ritstorlek
+        var PIVX = 230, PIVY = 150;        // stödpunkten: nålspetsen på myntkanten
+        var SCALE = 1100;                  // px per meter i scenen
+        var RAD = Math.PI / 180;
+        var INK = '#1f2530';
+        var COL_TP = '#2e9e4f';            // tyngdpunkten (grön, som teorifigurerna)
+        var COL_FG = '#2563c9';            // tyngdkraften (blå, som teorifigurerna)
+        var COL_RISK = '#c8324a';
+        var STEEL = '#d4d9de', STEEL_K = '#8f96a0';
+        var CORK_F = '#cbab7a', CORK_K = '#8a6a3a';
+        var DRAG_MAX = 0.30;               // rad — så mycket handen kan luta bygget
+        var SLIP = 0.40;                   // rad — nålspetsen glider av myntkanten
+        var GPX = 1500;                    // px/s² i fallanimationen
+        var DAMP = 0.35;                   // dämpning i vippningen (1/s)
+
+        // ── Fysikmodell (SI-enheter) ──────────────────────────────────────
+        // IDENTISK med fysik2-gaffelbalans-app.html. Stödpunkten är origo,
+        // positiv y uppåt. Gaffelvinkeln beta räknas nedåt från vågrätt.
+        var PHYS = {
+            g: 9.82,
+            mNeedle: 0.0005, yNeedle: 0.0175,   // synlig nål 3,5 cm, tp på mitten
+            mCork: 0.003,    yCork: 0.050,      // korkens mitt 5,0 cm över spetsen
+            mFork: 0.045,                        // per gaffel
+            forkAttachY: 0.045,                  // gaffelns fäste i korken
+            forkAttachX: 0.011,                  // korkens radie
+            forkCmDist: 0.080                    // gaffelns tp, avstånd från fästet
+        };
+        function derived(betaDeg) {
+            var P = PHYS;
+            var b = betaDeg * RAD;
+            var xF = P.forkAttachX + P.forkCmDist * Math.cos(b);
+            var yF = P.forkAttachY - P.forkCmDist * Math.sin(b);
+            var M = P.mNeedle + P.mCork + 2 * P.mFork;
+            var yCm = (P.mNeedle * P.yNeedle + P.mCork * P.yCork + 2 * P.mFork * yF) / M;
+            // Tröghetsmoment kring stödpunkten för vippningen (gaffelplanets
+            // mod — den långsamma, synliga rörelsen).
+            var I = P.mNeedle * P.yNeedle * P.yNeedle + P.mCork * P.yCork * P.yCork +
+                    2 * P.mFork * (xF * xF + yF * yF);
+            var stable = yCm < 0;
+            var omega0 = stable ? Math.sqrt(M * P.g * (-yCm) / I) : 0;
+            return { M: M, yCm: yCm, I: I, stable: stable,
+                     omega0: omega0, period: stable ? 2 * Math.PI / omega0 : 0 };
+        }
+        // Kritisk gaffelvinkel (y_cm = 0) — samma uttryck som i simuleringen
+        var BETA_CRIT = Math.asin(
+            (PHYS.mNeedle * PHYS.yNeedle + PHYS.mCork * PHYS.yCork +
+             2 * PHYS.mFork * PHYS.forkAttachY) /
+            (2 * PHYS.mFork * PHYS.forkCmDist)) / RAD;
+
+        // Bygget i px (lokalt system med origo i stödpunkten, y negativ uppåt)
+        var ATT_X = PHYS.forkAttachX * SCALE;      // 12,1
+        var ATT_Y = PHYS.forkAttachY * SCALE;      // 49,5
+        var FORK_L = 2 * PHYS.forkCmDist * SCALE;  // 176 — tp mitt på gaffeln
+        var CK_W = 12, CK_TOP = -74, CK_BOT = -38;
+        var FG_LEN = 78;                   // tyngdkraftspilen — konstant belopp
+
+        // Myntet och flaskan (världskoordinater, står stilla)
+        var COIN_X = PIVX, COIN_RY = 36, COIN_Y = PIVY + COIN_RY, COIN_RX = 17, COIN_T = 3.5;
+
+        // Skalan till höger: tyngdpunktens läge i mm relativt stödpunkten.
+        // Nollstrecket ligger på SAMMA höjd som stödpunkten i scenen.
+        var SC_L = 500, SC_R = 542, SC_PPMM = 4.4;
+        var SC_TOP = PIVY - 20 * SC_PPMM, SC_BOT = PIVY + 30 * SC_PPMM;
+        function scY(mm) {
+            return Math.max(SC_TOP, Math.min(SC_BOT, PIVY - mm * SC_PPMM));
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'Två gafflar sitter fast i en kork som en nål är stucken genom. ' +
+            'Nålspetsen vilar på den smala kanten av ett mynt som står på ' +
+            'högkant i en flaskkork. Gafflarnas skaft hänger nedåt, så ' +
+            'systemets tyngdpunkt hamnar strax under nålspetsen — den gröna ' +
+            'pricken med tyngdkraftens blå pil. Ta tag i en gaffel och luta ' +
+            'bygget, eller knuffa till det: det vaggar tillbaka i stället för ' +
+            'att välta. Lyfter du gafflarna över den kritiska vinkeln hamnar ' +
+            'tyngdpunkten ovanför stödpunkten och bygget faller. Skalan till ' +
+            'höger visar tyngdpunktens läge i millimeter över eller under ' +
+            'stödpunkten.');
+        canvas.style.touchAction = 'pan-y';
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var knuffBtn = document.createElement('button');
+        knuffBtn.type = 'button';
+        knuffBtn.className = 'minisim-btn ms-primar';
+        knuffBtn.textContent = 'Knuffa till';
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+
+        var slowLbl = document.createElement('label');
+        slowLbl.className = 'minisim-check';
+        var slowCb = document.createElement('input');
+        slowCb.type = 'checkbox';
+        slowLbl.appendChild(slowCb);
+        slowLbl.appendChild(document.createTextNode('Ultrarapid'));
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(knuffBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(slowLbl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Gaffelvinkel';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '10';
+        slider.max = '60';
+        slider.step = '1';
+        slider.value = '45';
+        slider.setAttribute('aria-label',
+            'Gaffelvinkel i grader nedåt från vågrätt — små vinklar lyfter ' +
+            'tyngdpunkten över stödpunkten så att bygget faller');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning ────────────────────────────────────────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var beta = 45;                     // gaffelvinkel (grader nedåt)
+        var theta = 0;                     // byggets lutning kring stödpunkten (rad)
+        var omega = 0;                     // vinkelfart (rad/s)
+        var mode = 'sving';                // 'hall' | 'sving' | 'fall' | 'fallen'
+        var fx = 0, fy = 0, vy = 0, vx = 0;   // fallets förskjutning
+        var knuffSida = 1;
+        var running = false, visible = true, lastTs = 0, rafId = 0;
+        var D = derived(beta);
+
+        function timeScale() { return slowCb.checked ? 0.25 : 1; }
+
+        // Deterministiska korkprickar (aldrig slumpade per bildruta)
+        var seed = 7;
+        function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+        var corkDots = [], bottleDots = [];
+        for (var i = 0; i < 26; i++) {
+            corkDots.push([-CK_W + 2 + rnd() * (2 * CK_W - 4),
+                           CK_TOP + 4 + rnd() * (CK_BOT - CK_TOP - 8),
+                           0.7 + rnd() * 1.3]);
+        }
+        for (var j = 0; j < 18; j++) {
+            bottleDots.push([-19 + rnd() * 38, 224 + rnd() * 30, 0.7 + rnd() * 1.2]);
+        }
+
+        // ── Bakgrund (laboranstema: papper med kollegieblocks-rutnät) ─────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        // ── Flaskan med korken och myntet på högkant ──────────────────────
+        function drawBottle() {
+            ctx.save();
+            ctx.translate(PIVX, 0);
+            // glaset: hals, skuldra och den övre delen av buken (fortsätter
+            // ut ur bilden nedåt)
+            ctx.beginPath();
+            ctx.moveTo(-25, 258);
+            ctx.lineTo(-25, 306);
+            ctx.bezierCurveTo(-40, 322, -66, 340, -68, 372);
+            ctx.lineTo(-68, H);
+            ctx.lineTo(68, H);
+            ctx.lineTo(68, 372);
+            ctx.bezierCurveTo(66, 340, 40, 322, 25, 306);
+            ctx.lineTo(25, 258);
+            ctx.closePath();
+            ctx.fillStyle = '#3a8f56';
+            ctx.fill();
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+            // ljusstrimma i glaset
+            ctx.strokeStyle = 'rgba(180,220,190,0.45)';
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(-15, 272);
+            ctx.lineTo(-15, 300);
+            ctx.bezierCurveTo(-28, 318, -52, 338, -55, 372);
+            ctx.lineTo(-55, H - 6);
+            ctx.stroke();
+            // mynningsring
+            ctx.fillStyle = '#357f4d';
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.rect(-29, 252, 58, 12);
+            ctx.fill();
+            ctx.stroke();
+            // korken i flaskhalsen, med skåran där myntet står
+            ctx.fillStyle = CORK_F;
+            ctx.strokeStyle = CORK_K;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.rect(-22, 218, 44, 40);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(138,106,58,0.40)';
+            for (var k = 0; k < bottleDots.length; k++) {
+                var d = bottleDots[k];
+                ctx.beginPath();
+                ctx.arc(d[0], d[1], d[2], 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            // skåran som myntet står i
+            ctx.fillStyle = '#6b5230';
+            ctx.fillRect(-2.6, 218, 5.2, 9);
+            ctx.restore();
+        }
+
+        function drawCoin() {
+            // baksidan (myntets tjocklek syns som en mörkare skära)
+            ctx.fillStyle = '#c8a24a';
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.ellipse(COIN_X + COIN_T, COIN_Y, COIN_RX, COIN_RY, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            // räfflad kant på den synliga skäran
+            ctx.strokeStyle = 'rgba(90,66,28,0.55)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var r = -0.8; r <= 0.8; r += 0.26) {
+                var ey = COIN_Y + r * COIN_RY;
+                var ex = COIN_RX * Math.sqrt(Math.max(0, 1 - r * r));
+                ctx.moveTo(COIN_X + COIN_T + ex - 3.8, ey);
+                ctx.lineTo(COIN_X + COIN_T + ex, ey);
+            }
+            ctx.stroke();
+            // framsidan
+            var g = ctx.createLinearGradient(COIN_X - COIN_T - COIN_RX, 0,
+                                             COIN_X - COIN_T + COIN_RX, 0);
+            g.addColorStop(0, '#dcb95f');
+            g.addColorStop(0.4, '#fdf3cf');
+            g.addColorStop(1, '#e2c06a');
+            ctx.fillStyle = g;
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.ellipse(COIN_X - COIN_T, COIN_Y, COIN_RX, COIN_RY, 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            // prägling: en svag inre ring
+            ctx.strokeStyle = 'rgba(138,106,58,0.35)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.ellipse(COIN_X - COIN_T, COIN_Y, COIN_RX * 0.62, COIN_RY * 0.74,
+                        0, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        // ── Bygget: nål, gafflar och kork ─────────────────────────────────
+        function drawFork(sign, b) {
+            var L = FORK_L;
+            ctx.save();
+            ctx.translate(sign * ATT_X, -ATT_Y);
+            ctx.scale(sign, 1);
+            ctx.rotate(b);
+            var pts = [[-14, 2.2], [0.10 * L, 3.0], [0.45 * L, 4.6],
+                       [0.60 * L, 3.0], [0.68 * L, 2.4], [0.74 * L, 7.2],
+                       [0.80 * L, 8.4]];
+            ctx.beginPath();
+            ctx.moveTo(pts[0][0], -pts[0][1]);
+            for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], -pts[i][1]);
+            for (var k = pts.length - 1; k >= 0; k--) ctx.lineTo(pts[k][0], pts[k][1]);
+            ctx.closePath();
+            ctx.fillStyle = STEEL;
+            ctx.fill();
+            ctx.strokeStyle = STEEL_K;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            // klorna
+            var centers = [-6.4, -2.1, 2.1, 6.4];
+            for (var t = 0; t < centers.length; t++) {
+                var c = centers[t];
+                ctx.beginPath();
+                ctx.moveTo(0.78 * L, c - 1.5);
+                ctx.lineTo(L - 11, c - 1.5);
+                ctx.lineTo(L, c);
+                ctx.lineTo(L - 11, c + 1.5);
+                ctx.lineTo(0.78 * L, c + 1.5);
+                ctx.closePath();
+                ctx.fillStyle = STEEL;
+                ctx.fill();
+                ctx.stroke();
+            }
+            // dager längs skaftet
+            ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(0.06 * L, -1.2);
+            ctx.lineTo(0.55 * L, -2.4);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawNeedle() {
+            ctx.strokeStyle = '#868d97';
+            ctx.lineWidth = 2.6;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(0, -9);
+            ctx.lineTo(0, -86);
+            ctx.stroke();
+            // spetsen (vilar i stödpunkten)
+            ctx.fillStyle = '#8f96a0';
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-1.6, -10);
+            ctx.lineTo(1.6, -10);
+            ctx.closePath();
+            ctx.fill();
+            // nålsögat
+            ctx.strokeStyle = '#8f96a0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.ellipse(0, -80, 1.5, 3.6, 0, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function drawCork() {
+            var r = 4;
+            ctx.beginPath();
+            ctx.moveTo(-CK_W + r, CK_TOP);
+            ctx.lineTo(CK_W - r, CK_TOP);
+            ctx.quadraticCurveTo(CK_W, CK_TOP, CK_W, CK_TOP + r);
+            ctx.lineTo(CK_W, CK_BOT - r);
+            ctx.quadraticCurveTo(CK_W, CK_BOT, CK_W - r, CK_BOT);
+            ctx.lineTo(-CK_W + r, CK_BOT);
+            ctx.quadraticCurveTo(-CK_W, CK_BOT, -CK_W, CK_BOT - r);
+            ctx.lineTo(-CK_W, CK_TOP + r);
+            ctx.quadraticCurveTo(-CK_W, CK_TOP, -CK_W + r, CK_TOP);
+            ctx.closePath();
+            ctx.fillStyle = CORK_F;
+            ctx.fill();
+            ctx.strokeStyle = CORK_K;
+            ctx.lineWidth = 1.6;
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(138,106,58,0.42)';
+            for (var i = 0; i < corkDots.length; i++) {
+                var d = corkDots[i];
+                ctx.beginPath();
+                ctx.arc(d[0], d[1], d[2], 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        // Tyngdpunktens läge i världen (bygget roterat theta kring
+        // stödpunkten och, under fallet, förskjutet)
+        function cogWorld() {
+            var ly = -D.yCm * SCALE;       // lokal y (negativ = ovanför stödpunkten)
+            var c = Math.cos(theta), s = Math.sin(theta);
+            return { x: PIVX + fx - ly * s, y: PIVY + fy + ly * c };
+        }
+
+        function drawAssembly() {
+            ctx.save();
+            ctx.translate(PIVX + fx, PIVY + fy);
+            ctx.rotate(theta);
+            drawNeedle();
+            drawFork(1, beta * RAD);
+            drawFork(-1, beta * RAD);
+            drawCork();
+            ctx.restore();
+        }
+
+        // Tyngdkraften: pil rakt nedåt från tyngdpunkten, med KONSTANT
+        // längd — byggets massa ändras aldrig, bara tyngdpunktens läge.
+        function drawGravity() {
+            var c = cogWorld();
+            var endY = c.y + FG_LEN, head = 10;
+            ctx.strokeStyle = COL_FG;
+            ctx.fillStyle = COL_FG;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(c.x, c.y);
+            ctx.lineTo(c.x, endY - head);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(c.x, endY);
+            ctx.lineTo(c.x - 5, endY - head);
+            ctx.lineTo(c.x + 5, endY - head);
+            ctx.closePath();
+            ctx.fill();
+            // etiketten i fri pappersyta till vänster om pilen
+            ctx.font = '11px ' + FONT;
+            ctx.textAlign = 'right';
+            ctx.fillText('G', c.x - 24, c.y + 44);
+            var gw = ctx.measureText('G').width;
+            ctx.font = 'italic 15px ' + FONT;
+            ctx.fillText('F', c.x - 24 - gw, c.y + 40);
+            // tyngdpunkten (grön prick)
+            ctx.fillStyle = COL_TP;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawPivot() {
+            // lodlinjen genom stödpunkten — tyngdpunkten hänger mot den
+            ctx.strokeStyle = 'rgba(31,37,48,0.45)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(PIVX, PIVY - 26);
+            ctx.lineTo(PIVX, PIVY + 96);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            if (mode !== 'fall' && mode !== 'fallen') {
+                ctx.fillStyle = INK;
+                ctx.beginPath();
+                ctx.arc(PIVX, PIVY, 3.2, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        // ── Skalan: tyngdpunktens läge relativt stödpunkten ───────────────
+        function drawScale() {
+            var mm = D.yCm * 1000;
+            ctx.font = '14px ' + FONT;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = INK;
+            ctx.fillText('Tyngdpunkten', 500, SC_TOP - 16);
+            // banden
+            ctx.fillStyle = 'rgba(200,50,74,0.13)';
+            ctx.fillRect(SC_L, SC_TOP, SC_R - SC_L, PIVY - SC_TOP);
+            ctx.fillStyle = 'rgba(46,158,79,0.14)';
+            ctx.fillRect(SC_L, PIVY, SC_R - SC_L, SC_BOT - PIVY);
+            ctx.font = '11.5px ' + FONT;
+            ctx.fillStyle = '#5a6170';
+            ctx.save();
+            ctx.translate(458, (SC_TOP + PIVY) / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('välter', 0, 0);
+            ctx.restore();
+            ctx.save();
+            ctx.translate(458, (PIVY + SC_BOT) / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('stabilt', 0, 0);
+            ctx.restore();
+            // axeln med gradering
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.4;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(SC_L, SC_TOP);
+            ctx.lineTo(SC_L, SC_BOT);
+            ctx.stroke();
+            ctx.font = '12px ' + FONT;
+            ctx.textAlign = 'right';
+            ctx.lineWidth = 1;
+            for (var v = 20; v >= -30; v -= 10) {
+                var y = PIVY - v * SC_PPMM;
+                ctx.beginPath();
+                ctx.moveTo(SC_L - 5, y);
+                ctx.lineTo(SC_L, y);
+                ctx.stroke();
+                ctx.fillStyle = '#5a6170';
+                ctx.fillText(v > 0 ? '+' + v : (v < 0 ? '−' + (-v) : '0'), SC_L - 8, y + 4);
+            }
+            // nollstrecket ligger på stödpunktens höjd i scenen
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(SC_L - 5, PIVY);
+            ctx.lineTo(SC_R, PIVY);
+            ctx.stroke();
+            ctx.font = '11.5px ' + FONT;
+            ctx.fillStyle = '#5a6170';
+            ctx.textAlign = 'right';
+            ctx.fillText('stödpunkt', SC_L - 8, PIVY + 17);
+            // markören
+            var my = scY(mm);
+            var col = D.stable ? COL_TP : COL_RISK;
+            ctx.strokeStyle = col;
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(SC_L, my);
+            ctx.lineTo(SC_R, my);
+            ctx.stroke();
+            ctx.fillStyle = col;
+            ctx.beginPath();
+            ctx.arc(SC_L + 9, my, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            // värdet under skalan
+            ctx.font = '15px ' + FONT;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = col;
+            ctx.fillText((mm < 0 ? '−' : '+') + fmt(Math.abs(mm), 1) + ' mm',
+                         (SC_L + SC_R) / 2, SC_BOT + 20);
+        }
+
+        function render() {
+            drawBackground();
+            drawBottle();
+            drawCoin();
+            drawPivot();
+            drawAssembly();
+            drawGravity();
+            drawScale();
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        // Vippningen är en pendel kring stödpunkten: tyngdpunkten ligger
+        // rakt under (eller över) stödpunkten på avståndet |y_cm|, så
+        //   I · θ'' = M · g · y_cm · sin θ.
+        // Ligger tyngdpunkten UNDER stödpunkten (y_cm < 0) är momentet
+        // återställande och bygget vaggar tillbaka; ligger den ÖVER växer
+        // lutningen i stället, och nålspetsen glider till slut av myntkanten.
+        function step(dt) {
+            if (mode === 'fall') {
+                theta += omega * dt;
+                vy += GPX * dt;
+                fy += vy * dt;
+                fx += vx * dt;
+                if (fy > 300) { mode = 'fallen'; syncUi(); }
+                return;
+            }
+            if (mode !== 'sving') return;
+            if (!D.stable && Math.abs(theta) < 0.004) theta = 0.004;
+            var acc = D.M * PHYS.g * D.yCm * Math.sin(theta) / D.I - DAMP * omega;
+            omega += acc * dt;
+            theta += omega * dt;
+            if (Math.abs(theta) > SLIP) {
+                mode = 'fall';
+                vy = 0;
+                vx = (theta > 0 ? 1 : -1) * 40;
+                omega = (theta > 0 ? 1 : -1) * Math.max(1.6, Math.abs(omega));
+                syncUi();
+            }
+        }
+
+        function shouldRun() {
+            if (!visible || document.hidden) return false;
+            if (mode === 'fall') return true;
+            if (mode !== 'sving') return false;
+            return !D.stable || Math.abs(theta) > 1e-4 || Math.abs(omega) > 1e-4;
+        }
+
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        function updateInfo() {
+            sliderVal.textContent = Math.round(beta) + '°';
+            if (mode === 'fallen') {
+                info.textContent = 'Bygget föll av myntet';
+            } else if (mode === 'fall') {
+                info.textContent = 'Nålen glider av myntkanten';
+            } else if (!D.stable) {
+                info.textContent = 'Tyngdpunkten hamnar över stödpunkten';
+            } else {
+                info.textContent = 'Stabilt — perioden ' + fmt(D.period, 1) + ' s';
+            }
+        }
+
+        function syncUi() {
+            knuffBtn.disabled = (mode === 'fall' || mode === 'fallen');
+        }
+
+        function reset() {
+            theta = 0; omega = 0; fx = 0; fy = 0; vy = 0; vx = 0;
+            mode = 'sving';
+            syncUi();
+            render();
+            updateInfo();
+            kick();
+        }
+
+        knuffBtn.addEventListener('click', function () {
+            if (mode === 'fall' || mode === 'fallen') return;
+            mode = 'sving';
+            omega += knuffSida * 0.8;
+            knuffSida = -knuffSida;
+            syncUi();
+            kick();
+        });
+        omBtn.addEventListener('click', reset);
+        slider.addEventListener('input', function () {
+            beta = parseFloat(slider.value);
+            D = derived(beta);
+            if (mode === 'fallen') { reset(); return; }
+            render();
+            updateInfo();
+            kick();
+        });
+        slowCb.addEventListener('change', kick);
+
+        // ── Ta tag i bygget och luta det ──────────────────────────────────
+        var dragging = false, dragPtr = -1, grabAng = 0;
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return { x: (e.clientX - r.left) * W / r.width,
+                     y: (e.clientY - r.top) * H / r.height };
+        }
+        // pekarens läge i byggets eget system (origo i stödpunkten)
+        function localPos(p) {
+            var dx = p.x - PIVX, dy = p.y - PIVY;
+            var c = Math.cos(theta), s = Math.sin(theta);
+            return { x: dx * c + dy * s, y: -dx * s + dy * c };
+        }
+        function overRig(p) {
+            if (mode === 'fall' || mode === 'fallen') return false;
+            var q = localPos(p);
+            if (Math.abs(q.x) <= CK_W + 8 && q.y >= CK_TOP - 8 && q.y <= 4) return true;
+            var b = beta * RAD;
+            for (var sign = -1; sign <= 1; sign += 2) {
+                var ux = sign * Math.cos(b), uy = Math.sin(b);
+                var rx = q.x - sign * ATT_X, ry = q.y + ATT_Y;
+                var t = rx * ux + ry * uy;
+                var d = Math.abs(rx * uy - ry * ux);
+                if (t >= 0 && t <= FORK_L + 6 && d <= 13) return true;
+            }
+            return false;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!overRig(p)) return;
+            e.preventDefault();
+            grabAng = Math.atan2(p.x - PIVX, -(p.y - PIVY)) - theta;
+            mode = 'hall';
+            omega = 0;
+            dragging = true;
+            dragPtr = e.pointerId;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            syncUi();
+            render();
+            updateInfo();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = overRig(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            var a = Math.atan2(p.x - PIVX, -(p.y - PIVY)) - grabAng;
+            while (a > Math.PI) a -= 2 * Math.PI;
+            while (a < -Math.PI) a += 2 * Math.PI;
+            theta = Math.max(-DRAG_MAX, Math.min(DRAG_MAX, a));
+            render();
+            updateInfo();
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            canvas.style.cursor = 'default';
+            mode = 'sving';                // släpper man taget tar fysiken över
+            omega = 0;
+            syncUi();
+            updateInfo();
+            kick();
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Test-handtag för skärmdumps- och mätskript
+        // starta = true släpper bygget (kör igång fysiken) i stället för att
+        // frysa läget för en skärmdump
+        card._set = function (betaDeg, thetaDeg, starta) {
+            beta = betaDeg;
+            slider.value = String(betaDeg);
+            D = derived(beta);
+            theta = (thetaDeg || 0) * RAD;
+            omega = 0; fx = 0; fy = 0; vy = 0; vx = 0;
+            mode = 'sving';
+            syncUi();
+            render();
+            updateInfo();
+            if (starta) kick();
+        };
+        card._state = function () {
+            var c = cogWorld();
+            return { beta: beta, thetaDeg: theta / RAD, mode: mode,
+                     yCmMm: D.yCm * 1000, stable: D.stable, period: D.period,
+                     betaCrit: BETA_CRIT, cog: c, fgEndY: c.y + FG_LEN, W: W, H: H };
+        };
+
+        syncUi();
+        render();
+        updateInfo();
+        kick();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: linjal
     // ══════════════════════════════════════════════════════════════════════
     function buildLinjal(node, cfg) {
@@ -5432,7 +6298,8 @@
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
-                  valtning: buildValtning, linjal: buildLinjal,
+                  valtning: buildValtning, gaffelbalans: buildGaffelbalans,
+                  linjal: buildLinjal,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
 
     function decodeSrc(b64) {

@@ -734,6 +734,19 @@ användaren påpekat (2026-08-25).
    överkant sidans topp och skrollningen uteblir helt (End-tangenten
    stannade kvar på titelbilden). Filtrera bort rektanglar utan bredd och
    höjd innan du mäter.
+5. **Refererar texten till en figur ska figuren SYNAS medan texten läses.**
+   Regeln gäller åt båda hållen. Ligger figuren EFTER stycket tänds de
+   samtidigt (punkt 1). Ligger figuren FÖRE stycket är den redan
+   framklickad — men då får skrollningen inte trycka upp den ur bild
+   när stycket tänds. Figuren blir därför *kontext* till stycket
+   (`st.context`) och räknas in när steget placeras: ryms figur + text
+   tillsammans centreras klumpen, annars går själva stycket före och
+   figuren får skrollas bort. Felet som utlöste regeln (påpekat
+   2026-08-25): stycket "De skuggade areorna motsvaras i bråkform av
+   15/4" i `ma1c-1.3` sköt upp tårtfiguren så att bara två av fyra
+   tårtor syntes — resonemanget gick inte att följa. Kontexten är ett
+   MÄT-begrepp, inte ett visningsbegrepp: klicka aldrig fram den på
+   nytt och märk den aldrig som aktuell.
 
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet

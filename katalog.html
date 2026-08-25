@@ -1189,6 +1189,17 @@
                     (prevTop.twins || (prevTop.twins = [])).push(el);
                     continue;
                 }
+                // GENERELL REGEL (åt andra hållet): ligger figuren FÖRE
+                // stycket resonerar stycket nästan alltid om den ("De
+                // skuggade areorna motsvaras av …"). Figuren är redan
+                // framklickad, men skrollningen får inte trycka upp den ur
+                // bild — den blir därför KONTEXT till stycket och räknas in
+                // när steget placeras på duken.
+                if (el.tagName === 'P' && prevTop && !prevTop.block &&
+                    prevTop.el.classList.contains('lab-block-figur')) {
+                    steps.push({ el, block: null, context: [prevTop.el] });
+                    continue;
+                }
                 steps.push({ el, block: null });
             }
             return { steps, blocks };
@@ -1405,14 +1416,27 @@
                     // Dolda element (textlösningen bakom växeln "Med penna"/
                     // "Som text") har en nollrektangel i 0,0 — tas den med
                     // mäter vi från sidans topp och skrollningen uteblir.
-                    const rects = [target, ...(target === st.el && st.twins ? st.twins : [])]
+                    const measure = els => els
                         .map(e => e.getBoundingClientRect())
                         .filter(r => r.width > 0 || r.height > 0);
+                    const rects = measure([target, ...(target === st.el && st.twins ? st.twins : [])]);
                     if (!rects.length) return;
-                    const rTop = Math.min(...rects.map(x => x.top));
-                    const rBot = Math.max(...rects.map(x => x.bottom));
-                    const rH = rBot - rTop;
+                    const oTop = Math.min(...rects.map(x => x.top));
+                    const oBot = Math.max(...rects.map(x => x.bottom));
                     const oh = overlay.clientHeight;
+                    // Kontexten (figuren som stycket resonerar om) ska synas
+                    // SAMTIDIGT som texten — annars läser man om något man
+                    // just tappat ur bild. Den tas med i mätningen så länge
+                    // hela klumpen ryms; gör den inte det går själva steget
+                    // före, och kontexten får skrollas bort.
+                    const ctx = st.context ? measure(st.context) : [];
+                    let rTop = oTop, rBot = oBot;
+                    if (ctx.length) {
+                        const cTop = Math.min(oTop, ...ctx.map(x => x.top));
+                        const cBot = Math.max(oBot, ...ctx.map(x => x.bottom));
+                        if (cBot - cTop <= oh * 0.94) { rTop = cTop; rBot = cBot; }
+                    }
+                    const rH = rBot - rTop;
                     // Ryms inte hela steget: lägg dess ÖVERKANT högt upp i
                     // rutan. Ett steg får aldrig skrollas så att dess början
                     // hamnar ovanför överkanten — man ska alltid kunna börja
@@ -1421,7 +1445,7 @@
                         ? overlay.scrollTop + rTop - oh * 0.10
                         : overlay.scrollTop + rTop - (oh - rH) / 2;
                     // Steget ska aldrig hamna med överkanten ovanför rutan.
-                    const maxTop = overlay.scrollTop + rTop - 24;
+                    const maxTop = overlay.scrollTop + oTop - 24;
                     overlay.scrollTo({ top: Math.max(0, Math.min(top, maxTop)), behavior: 'smooth' });
                 };
                 // Titelbilden krymper från 80vh till 16vh under 0,6 s när man

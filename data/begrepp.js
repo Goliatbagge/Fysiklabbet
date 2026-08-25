@@ -56,6 +56,54 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'vagfunktion',
+    term: 'Vågfunktion',
+    former: ['vågfunktion', 'vågfunktionen', 'vågfunktioner', 'vågfunktionerna'],
+    kort: 'Den matematiska våg som beskriver en partikel i kvantmekaniken. Kvadraten på dess belopp talar om hur sannolikt det är att hitta partikeln på ett visst ställe.',
+    relaterade: ['kvantmekanik', 'molekylorbital', 'tunneleffekt'],
+    body: [
+      { type: 'p', html: 'En fotboll har en plats. Frågar man var den är finns det ett svar, oavsett om någon tittar. En elektron fungerar inte så. Det närmaste en beskrivning man kommer är en våg som är utsmetad över ett område i rummet, och den vågen kallas vågfunktion. Den skrivs oftast med den grekiska bokstaven psi.' },
+      { type: 'p', html: 'Vågfunktionen i sig är inte något man kan se. Det man kan mäta är sannolikheten att hitta partikeln på ett visst ställe, och den fås genom att kvadrera vågfunktionens belopp. Där vågen är stor är chansen god, där den är noll dyker partikeln aldrig upp. Ett viktigt drag är att vågfunktionen kan vara både positiv och negativ. Möts två delar med olika tecken tar de ut varandra, precis som två vattenvågor som möts i motfas — och det är den mekanismen som avgör vilka kemiska bindningar som håller och vilka som inte gör det.' },
+      { type: 'p', html: 'Hur vågfunktionen ser ut och hur den ändrar sig med tiden bestäms av Schrödingerekvationen, uppställd 1926. Att lösa den exakt går bara för de allra enklaste systemen, som en enda elektron kring en väteatomkärna. För allt större får man räkna ungefärligt med dator. Vad vågfunktionen egentligen ÄR — en verklig sak eller bara ett räkneverktyg som beskriver vår kunskap — är fysiker fortfarande oense om, hundra år efter att ekvationen skrevs ned.' }
+    ]
+  },
+  {
+    id: 'molekylorbital',
+    term: 'Molekylorbital',
+    former: ['molekylorbital', 'molekylorbitalen', 'molekylorbitaler', 'molekylorbitalerna', 'orbital', 'orbitalen', 'orbitaler', 'orbitalerna', 'elektronmoln', 'elektronmolnet'],
+    kort: 'Det område kring en molekyl där en viss elektron håller till, beskrivet som en våg med både positiva och negativa delar.',
+    relaterade: ['vagfunktion', 'kvantmekanik', 'halvledare'],
+    body: [
+      { type: 'p', html: 'I en ensam atom håller elektronerna till i skal och underskal — de klotformade, hantelformade och klöverbladsformade områden som brukar ritas i kemiboken. Sådana områden kallas orbitaler. Ordet är en rest från tiden då man trodde att elektronen gick i bana kring kärnan; i dag betyder det inte en bana utan ett moln, ett område där elektronen kan påträffas.' },
+      { type: 'p', html: 'När atomer binder ihop sig till en molekyl smälter deras orbitaler samman till nya, gemensamma. En sådan sträcker sig över flera atomer på en gång, och elektronen tillhör då molekylen snarare än någon enskild atomkärna. Bilderna av dem är färgade i två toner, ofta rött och blått. Färgerna är inte laddning utan tecken: den underliggande vågen är positiv i de röda delarna och negativ i de blåa, och gränsen däremellan är ett område där elektronen aldrig hamnar.' },
+      { type: 'p', html: 'De två intressantaste orbitalerna i en molekyl är den högsta som faktiskt rymmer elektroner och den lägsta som står tom. Det är mellan dem det händer saker: absorberar molekylen ljus flyttas en elektron från den ena till den andra, och avståndet i energi mellan dem avgör vilken färg ämnet har, hur lätt det reagerar och hur väl det leder ström. Därför är orbitalernas form långt ifrån en teoretisk kuriositet — den styr både färgämnen, solceller och organisk elektronik.' }
+    ]
+  },
+  {
+    id: 'fasproblem',
+    term: 'Fasproblemet',
+    former: ['fasproblem', 'fasproblemet'],
+    kort: 'Svårigheten att en detektor bara kan mäta en vågs styrka, inte om den är positiv eller negativ — och att ungefär halva informationen därmed går förlorad i mätningen.',
+    relaterade: ['vagfunktion', 'diffraktion', 'koherens'],
+    body: [
+      { type: 'p', html: 'Vill man veta hur atomerna sitter i ett kristallkorn eller hur en elektron är fördelad i en molekyl skickar man in strålning och mäter vad som kommer ut åt olika håll. Det man får är ett mönster av ljusa och mörka fläckar. Matematiskt är det mönstret en så kallad fouriertransform av det man söker: samma information, sedd från ett annat håll, och den går i princip att räkna tillbaka.' },
+      { type: 'p', html: 'Problemet är att en detektor räknar partiklar eller mäter intensitet, och intensiteten är vågens styrka i kvadrat. Kvadreringen slänger bort tecknet. Var vågen positiv eller negativ när den träffade — låg den i takt med grannen eller i motfas? Den upplysningen, vågens fas, finns inte i mätvärdet. Ungefär hälften av det man behöver för att räkna tillbaka är alltså borta i samma ögonblick som mätningen görs. Det är fasproblemet.' },
+      { type: 'p', html: 'Utvägen är att lägga till kunskap man har av andra skäl: föremålet har en viss storlek, det kan inte vara negativt där det ska vara tomt, det har en känd symmetri. En dator kan då gissa en fas, räkna fram vad den skulle ge för mätning, jämföra med den verkliga och justera — om och om igen tills det stämmer. Sådana metoder gav nobelpriset i kemi 1985 och är i dag ryggraden i allt från proteinkristallografi till avbildning av enskilda elektronmoln.' }
+    ]
+  },
+  {
+    id: 'hogharmonisk-generering',
+    term: 'Högharmonisk generering',
+    former: ['högharmonisk generering', 'högharmonisk', 'högharmoniska', 'högharmoniskt', 'övertonsgenerering'],
+    kort: 'Ett sätt att göra extremt kortvågigt ljus genom att skjuta en stark laserpuls in i en gas, som svarar med att sända ut ljus med många gånger den ursprungliga frekvensen.',
+    relaterade: ['laser', 'foton', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'En gitarrsträng som knäpps hårt låter inte bara i sin grundton utan också i övertoner — ljud med dubbla, tredubbla och femdubbla frekvensen. Ljus kan bete sig likadant, men det krävs våld för att få det dit. Fokuserar man en tillräckligt kraftig laserpuls in i en tunn stråle av ädelgas blir det elektriska fältet i pulsen jämförbart med det fält som håller fast elektronerna i atomen.' },
+      { type: 'p', html: 'Då händer följande, gång på gång under varje svängning: fältet sliter loss en elektron ur atomen, drar i väg den ett stycke, vänder och slungar tillbaka den mot sin egen atomkärna. I krocken lämnas den upptagna energin ifrån sig som en enda foton — med tiotals eller hundratals gånger laserns ursprungliga frekvens. Ut kommer ultraviolett ljus och mjuk röntgen, långt kortvågigare än något material kan lasa fram direkt.' },
+      { type: 'p', html: 'Två saker gör tekniken värdefull. Dels får man kortvågigt ljus på ett laboratoriebord i stället för i en acceleratorring stor som ett kvarter. Dels blir pulserna ofattbart korta — ner till attosekunder, alltså miljarddels miljarddels sekunder, vilket är kort nog för att följa hur en elektron rör sig inne i en atom. Just den bedriften belönades med nobelpriset i fysik 2023.' }
+    ]
+  },
+  {
     id: 'elektronmikroskop',
     term: 'Elektronmikroskop',
     former: ['elektronmikroskop', 'elektronmikroskopet', 'elektronmikroskopen',
@@ -811,7 +859,7 @@ window.BEGREPP = [
 {
     id: 'laser',
     term: 'Laser',
-    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar', 'titan-safirlaser', 'titan-safirlasern', 'titan-safirlasrar', 'titan-safirlasrarna'],
+    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar', 'titan-safirlaser', 'titan-safirlasern', 'titan-safirlasrar', 'titan-safirlasrarna', 'fiberlaser', 'fiberlasern', 'fiberlasrar'],
     kort: 'En ljuskälla som skickar ut en smal, skarpt riktad stråle där alla ljusvågor har samma våglängd och svänger i takt. Namnet är en förkortning av engelskans light amplification by stimulated emission of radiation.',
     relaterade: ['foton', 'exciterat-tillstand', 'optisk-fiber'],
     body: [

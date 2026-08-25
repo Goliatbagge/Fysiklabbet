@@ -88,6 +88,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-25-vagfunktionen-fotograferad",
+    date: "2026-08-25",
+    title: "Elektronmolnet i kemiboken är uträknat, inte sett — nu har ett forskarlag fotograferat ett i tre dimensioner",
+    deck: "Fysiker i Göttingen har återskapat hela den tredimensionella vågfunktionen för en elektron i en organisk molekyl, med detaljer finare än avståndet mellan molekylens kolatomer. Tidigare krävdes en synkrotronanläggning för saken — nu räcker en laseruppsättning på ett bordsstativ.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-25-vagfunktionen-fotograferad.jpg",
+    imageAlt: "Illustration av en molekylorbital som lyser i röda och blåa lober ovanför en blankpolerad silverkristall, träffad av en smal violett ljusstråle i ett mörkt laboratorium.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantfysik", "vågfunktion", "molekylorbital", "fotoelektrisk effekt", "fotoelektronspektroskopi", "elektroner", "laser", "ultraviolett"],
+    sources: [
+      { name: "Phys.org — Molecular orbitals imaged in 3D, opening path to femtosecond videos (4 augusti 2026)", url: "https://phys.org/news/2026-08-molecular-orbitals-imaged-3d-path.html" },
+      { name: "EurekAlert! — Zooming in: Electron orbitals photographed in 3D (Georg-August-Universität Göttingen, pressmeddelande 4 augusti 2026)", url: "https://www.eurekalert.org/news-releases/1138815" },
+      { name: "ScienceDaily — Scientists just imaged the hidden quantum shape of a molecule (24 augusti 2026)", url: "https://www.sciencedaily.com/releases/2026/08/260822015213.htm" },
+      { name: "arXiv:2502.18269 — fri fulltext med hela metoddelen (CC BY 4.0)", url: "https://arxiv.org/abs/2502.18269" }
+    ],
+    research: {
+      citation: "W. Bennecke, T. L. Dinh, J. P. Bange, D. Schmitt, M. Merboldt, L. Weinhagen, B. van Wingerden, F. Frassetto, L. Poletto, M. Reutzel, D. Steil, D. R. Luke, S. Mathias, G. S. M. Jansen, ”Table-top three-dimensional photoemission orbital tomography with a femtosecond extreme ultraviolet light source”, Nature Communications 17, 5457 (2026), publicerad online 19 juni 2026, DOI 10.1038/s41467-026-74308-1 (öppet tillgänglig, CC BY 4.0)",
+      url: "https://doi.org/10.1038/s41467-026-74308-1"
+    },
+    body: [
+      { type: 'p', html: 'De färgglada elektronmolnen i kemiboken — de där hantelformade och klöverbladsformade figurerna som visar var en elektron håller till — är inga fotografier. De är uträknade. Bakom varje sådan bild ligger en lösning till Schrödingerekvationen, och det man ritar upp är en vågfunktion: den matematiska storhet som bestämmer hur sannolikt det är att hitta elektronen på ett visst ställe. Själva vågfunktionen går inte att avläsa med ett instrument.' },
+      { type: 'quote', html: 'Vågfunktionen är en grundläggande storhet i kvantmekaniken, men den kan inte observeras eller mätas direkt.', cite: 'Stefan Mathias, professor i fysik vid Göttingens universitet' },
+      { type: 'p', html: 'Ett forskarlag vid Göttingens universitet har nu ändå lyckats återskapa en hel vågfunktion i tre dimensioner — den yttersta, lösast bundna elektronbanan i en organisk pigmentmolekyl med det otympliga namnet PTCDA, utlagd som ett enda molekyllager på en silverkristall. Upplösningen blev ungefär 0,75&nbsp;ångström, alltså 75&nbsp;miljarddels millimeter. Det är finare än de omkring 1,4&nbsp;ångström som skiljer molekylens kolatomer åt.' },
+      { type: 'h2', text: 'Den fotoelektriska effekten som mätinstrument' },
+      { type: 'p', html: 'Metoden börjar i ett fenomen från 1905: lyser man på ett material med tillräckligt kortvågigt ljus slås elektroner ut ur det. Fotonens energi går till att lossa elektronen, och det som blir över följer med som rörelseenergi, $E_\\mathrm{k} = h \\cdot f - W$, där $W$ är det arbete som krävs för att slita loss elektronen.' },
+      { type: 'p', html: 'Det avgörande är att elektronen inte bara bär med sig en energi utan också en riktning. Mäter man både hur snabbt och åt vilket håll varje utsläppt elektron flyger, bygger man upp en karta över elektronernas rörelsemängd — och den kartan är vågfunktionens fouriertransform, alltså samma information sedd från ett annat håll. Sambandet upptäcktes 2009 och har sedan dess kallats fotoemissionsorbitaltomografi. Haken har varit att en enda ljusfrekvens bara ger ett tunt skal ur den tredimensionella kartan. För att fylla rummet måste man byta frekvens om och om igen, och då har det krävts en synkrotron — en acceleratorring stor som ett kvarter, med kö för mättid.' },
+      { type: 'p', html: 'Göttingenlaget byggde i stället sin ljuskälla på ett laboratoriebord. En kraftig infraröd fiberlaser fokuseras i en argonstråle, där gasens atomer svarar med att skicka tillbaka övertoner till den inskjutna frekvensen — högharmonisk generering. Ut kommer ultrakorta pulser av extremt ultraviolett ljus, ställbara mellan 13 och 71&nbsp;elektronvolt. Tio av frekvenserna användes i mätningarna, mellan 20,5 och 63,8&nbsp;elektronvolt, och elektronerna fångades upp av ett rörelsemängdsmikroskop som registrerar riktning och energi för varje enskild elektron på en gång.' },
+      { type: 'h2', text: 'Halva informationen går förlorad på vägen' },
+      { type: 'p', html: 'Här dyker kvantfysikens klassiska bekymmer upp. En detektor kan bara räkna elektroner, och antalet elektroner motsvarar vågfunktionens belopp i kvadrat. Tecknet — eller mer exakt fasen, det som avgör var vågen är positiv och var den är negativ — finns inte med i den räkningen. Ungefär hälften av informationen saknas alltså så snart mätvärdet är taget. Samma sak plågar röntgenkristallografin, där svårigheten kallas fasproblemet.' },
+      { type: 'p', html: 'Lösningen var matematisk. Tillsammans med matematiker i samma stad skrev fysikerna en algoritm som söker den vågfunktion som både stämmer med mätdata och uppfyller några självklara villkor: elektronen ska hålla sig inom molekylens utsträckning, och orbitalen ska ha molekylens egen symmetri. Algoritmen ställer upp villkoren som geometriska mängder och studsar lösningen mellan dem tills den hamnar där de överlappar. Då faller både fasen och de delar av rummet som aldrig mättes på plats.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-25-vagfunktionen-fotograferad-2.jpg', alt: 'Figur i fem paneler: mätdata på halvklotformade skal, den återskapade orbitalen i rörelsemängdsrummet och i vanligt rum som röda och blåa lober, samt två jämförelser mot beräkningar.', caption: 'Till vänster mätdata: varje ljusfrekvens ger ett tunt halvklotformat skal i rörelsemängdsrummet, och det mesta däremellan är tomt. I mitten och till höger den färdiga orbitalen — rött och blått är vågfunktionens två tecken. Längst ned jämförs resultatet med vad kvantmekanisk beräkning förutspår.', credit: 'Figur: Bennecke med flera, Nature Communications 17, 5457 (2026) (CC BY 4.0)' },
+      { type: 'h2', text: 'Sju mätningar räckte' },
+      { type: 'p', html: 'Vinsten är inte bara att utrustningen får plats i ett vanligt labb. Eftersom algoritmen klarar gles data behövs betydligt färre mätningar än förr: sju frekvenser gav en tillförlitlig bild, och i gynnsamma fall räckte fyra. Varje sådan mätning tog ungefär två timmar, så en hel tredimensionell orbital kunde plockas fram på en arbetsdag — i stället för genom en utdragen mätkampanj vid en synkrotron.' },
+      { type: 'p', html: 'Facit blev gott. Den återskapade orbitalen stämde väl med vad kvantmekanisk beräkning förutspår för den fria molekylen, både i molekylens eget plan och vinkelrätt ut från det, ända in på var elektrontätheten toppar på vägen ut från ytan — ungefär 0,8&nbsp;ångström upp. Poängen med den jämförelsen är att teorin aldrig matades in i återskapandet. Bilden kommer från mätningen, och beräkningen står kvar som en oberoende kontroll i stället för som en ingrediens.' },
+      { type: 'h2', text: 'Nästa steg är film' },
+      { type: 'p', html: 'Det som gör nyheten större än en enskild vacker bild är att ljuskällan ger pulser på några tiotals femtosekunder. En femtosekund är en miljondels miljarddels sekund, och det är ungefär på den tiden som en kemisk bindning hinner brytas eller en elektron flytta över till en grannmolekyl. Med en puls som sätter i gång förloppet och en andra puls som avbildar det en aning senare kan samma händelse spelas in bildruta för bildruta.' },
+      { type: 'p', html: 'Med andra ord: en stroboskopfilm av en vågfunktion i rörelse. Vad som händer med elektronmolnet i det ögonblick en molekyl absorberar ljus — i ett solcellsmaterial, i ett färgämne, i en kemisk reaktion — har hittills varit något man räknat sig fram till. Nu finns ett verktyg som kan titta efter.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Att lysa på ett material och mäta de utsläppta elektronerna är samma slags försök som gav Albert Einstein nobelpriset i fysik 1921. Han fick det inte för relativitetsteorin, utan för förklaringen av just den fotoelektriska effekten.',
+        'En ångström är 10<sup>−10</sup>&nbsp;meter och är uppkallad efter uppsalafysikern Anders Ångström, som på 1860-talet kartlade solens spektrum. Enheten är ungefär lagom stor för en atom.',
+        'Högharmonisk generering, tekniken bakom bordsstativets ultravioletta pulser, är grunden för attosekundfysiken — området som gav Pierre Agostini, Ferenc Krausz och Anne L’Huillier nobelpriset i fysik 2023.',
+        'PTCDA är släkt med de röda perylenpigment som används i bil- och tryckfärger. Just den molekylen har blivit fysikernas provkanin för organiska halvledare, eftersom den lägger sig självmant i prydliga lager på en metallyta.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-24-kvantmikroskopet",
     date: "2026-08-24",
     title: "Varje elektron som skärper bilden skadar också provet — nu vill fysiker låta en kvantdator läsa av mikroskopet",

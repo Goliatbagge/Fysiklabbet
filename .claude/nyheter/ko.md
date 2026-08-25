@@ -27,6 +27,15 @@ Format per post:
   https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
   (tillagd 2026-08-03)
 
+- **Små ”defekter” i en yta femdubblar värmeöverföringen vid kondensation** —
+  en beläggning med avsiktligt inbyggda ojämnheter gör att ånga som
+  kondenserar lämnar ifrån sig 5,5 gånger mer värme per ytenhet. Konkret
+  vardagsfysik: ångbildningsvärme, droppbildning, ytspänning och varför
+  kraftverkens kondensorer ser ut som de gör. Kontrollera mätvillkoren
+  (vilken referens de femdubblar mot) innan den används. Källa (ScienceDaily
+  2026-08-23): https://www.sciencedaily.com/releases/2026/08/260823014940.htm
+  (tillagd 2026-08-25)
+
 - **Stjärnor som gång på gång överlever mötet med ett supermassivt svart hål**
   — upprepade partiella tidvattensönderslitningar, där samma stjärna skalas av
   vid varje förbiflygning och ger en ny ljusblixt. Nytt arbete (Syracuse

@@ -1333,10 +1333,12 @@
                 if (root) { fitFormel(root); fitMathDisplays(root); }
                 const overlay = overlayRef.current;
                 if (!overlay) return;
-                const raf = requestAnimationFrame(() => {
+                let shAt = 0;
+                const place = () => {
                     if (step === 0) { overlay.scrollTo({ top: 0, behavior: 'smooth' }); return; }
                     const st = steps[step - 1];
                     if (!st) return;
+                    shAt = overlay.scrollHeight;
                     // Första delsteget i en exempel-ruta: skrolla till rutans
                     // ram (med titel), inte bara den första raden.
                     let target = st.el;
@@ -1344,14 +1346,40 @@
                         const before = steps[step - 2];
                         if (!before || before.block !== st.block) target = st.block;
                     }
-                    const r = target.getBoundingClientRect();
+                    // Mät HELA steget, inklusive tvillingar (figuren som
+                    // hör ihop med stycket, textlösningen till en
+                    // pennlösning). Mäts bara styckets egen höjd centreras
+                    // stycket, och den höga figuren under trycker upp
+                    // styckets första rader ovanför överkanten.
+                    const rects = [target.getBoundingClientRect()];
+                    if (target === st.el && st.twins)
+                        for (const tw of st.twins) rects.push(tw.getBoundingClientRect());
+                    const rTop = Math.min(...rects.map(x => x.top));
+                    const rBot = Math.max(...rects.map(x => x.bottom));
+                    const rH = rBot - rTop;
                     const oh = overlay.clientHeight;
-                    const top = (r.height > oh * 0.62)
-                        ? overlay.scrollTop + r.top - oh * 0.10
-                        : overlay.scrollTop + r.top - (oh - r.height) / 2;
-                    overlay.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-                });
-                return () => cancelAnimationFrame(raf);
+                    // Ryms inte hela steget: lägg dess ÖVERKANT högt upp i
+                    // rutan. Ett steg får aldrig skrollas så att dess början
+                    // hamnar ovanför överkanten — man ska alltid kunna börja
+                    // läsa på första raden.
+                    const top = (rH > oh * 0.62)
+                        ? overlay.scrollTop + rTop - oh * 0.10
+                        : overlay.scrollTop + rTop - (oh - rH) / 2;
+                    // Steget ska aldrig hamna med överkanten ovanför rutan.
+                    const maxTop = overlay.scrollTop + rTop - 24;
+                    overlay.scrollTo({ top: Math.max(0, Math.min(top, maxTop)), behavior: 'smooth' });
+                };
+                const raf = requestAnimationFrame(place);
+                // Titelbilden krymper från 80vh till 16vh under 0,6 s när man
+                // lämnar den. Mäter vi bara en gång räknas målet ut mot den
+                // ännu höga layouten, och när sidan sedan krymper klipper
+                // webbläsaren skrollningen till sitt max — steget hamnar då
+                // med sina första rader ovanför överkanten. Placera därför om
+                // steget när höjden faktiskt har ändrats.
+                const t = setTimeout(() => {
+                    if (overlay.scrollHeight !== shAt) place();
+                }, 700);
+                return () => { cancelAnimationFrame(raf); clearTimeout(t); };
             }, [step, ready]);
 
             // Nedre listen göms efter en stunds musinaktivitet (som i bildspel).

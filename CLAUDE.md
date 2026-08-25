@@ -698,6 +698,41 @@ finns den i praktiken inte för besökaren.
   ser hända, inte vad som är byggt. Inga emojier, komma som decimaltecken.
 - Raden läggs överst i listan (nyast först) med dagens datum.
 
+## Presentationsläget: hela steget ska synas när det klickas fram
+
+Presentationsläget (`buildPresSteps` + autoskrollen i `katalog.html`) visar
+genomgången som ett bildspel, ett stycke/block per klick. Tre regler styr
+vad ett steg är och var det hamnar på duken — alla tre kommer av fel som
+användaren påpekat (2026-08-25).
+
+1. **Text och figur som hör ihop tänds SAMTIDIGT.** Refererar stycket till
+   figuren ("figuren nedan", "se bilden", "diagrammet visar") blir figuren
+   en *tvilling* till styckets steg i stället för ett eget steg — annars
+   står texten "Betrakta cirkeln i figuren nedan" ensam på duken och man
+   undrar vilken cirkel som menas. Regeln är generell och utlöses av orden
+   figur/bild/diagram/graf/kurva/tabell i stycket precis före figuren.
+   Samma hopparning finns sedan tidigare inuti exempelrutorna (uppgiftens
+   figur hör till frågestammen, textlösningen till pennlösningen).
+2. **Ett steg får ALDRIG hamna med sina första rader ovanför överkanten.**
+   Autoskrollen mäter därför HELA steget, tvillingarna inräknade: ryms det
+   centreras det, annars läggs dess överkant 10 % ned i rutan. Mäts bara
+   det första elementets höjd centreras *det*, och en hög figur under
+   trycker upp textens början utanför bild.
+3. **Mät aldrig layouten bara en gång direkt efter klicket.** Titelbilden
+   krymper från `80vh` till `16vh` under 0,6 s när man lämnar den (CSS-
+   transition i `styles-laborans.css`). Räknas målet ut mot den ännu höga
+   layouten klipper webbläsaren skrollningen till sitt max när sidan sedan
+   krymper — och steget hamnar ovanför överkanten utan att något ser
+   trasigt ut i koden. Autoskrollen placerar därför om steget när
+   `scrollHeight` faktiskt har ändrats.
+
+**Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
+— felet syns bara i renderingen. Skriptet
+`%TEMP%\pptr-test\pres-alla.js` stegar igenom ett avsnitts alla steg och
+larmar om något steg får `top < 0`. Kom ihåg att presentationsläget bygger
+på `requestAnimationFrame`: i en bakgrundsflik körs autoskrollen aldrig, så
+en mätning i en dold flik säger ingenting.
+
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 
 **REGEL: När en text (teoriavsnitt, nyhetsartikel, simulering) refererar

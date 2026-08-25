@@ -701,8 +701,8 @@ finns den i praktiken inte för besökaren.
 ## Presentationsläget: hela steget ska synas när det klickas fram
 
 Presentationsläget (`buildPresSteps` + autoskrollen i `katalog.html`) visar
-genomgången som ett bildspel, ett stycke/block per klick. Tre regler styr
-vad ett steg är och var det hamnar på duken — alla tre kommer av fel som
+genomgången som ett bildspel, ett stycke/block per klick. Fyra regler styr
+vad ett steg är och var det hamnar på duken — alla fyra kommer av fel som
 användaren påpekat (2026-08-25).
 
 1. **Text och figur som hör ihop tänds SAMTIDIGT.** Refererar stycket till
@@ -718,20 +718,30 @@ användaren påpekat (2026-08-25).
    centreras det, annars läggs dess överkant 10 % ned i rutan. Mäts bara
    det första elementets höjd centreras *det*, och en hög figur under
    trycker upp textens början utanför bild.
-3. **Mät aldrig layouten bara en gång direkt efter klicket.** Titelbilden
-   krymper från `80vh` till `16vh` under 0,6 s när man lämnar den (CSS-
-   transition i `styles-laborans.css`). Räknas målet ut mot den ännu höga
-   layouten klipper webbläsaren skrollningen till sitt max när sidan sedan
-   krymper — och steget hamnar ovanför överkanten utan att något ser
-   trasigt ut i koden. Autoskrollen placerar därför om steget när
-   `scrollHeight` faktiskt har ändrats.
+3. **Mät aldrig layouten medan titelbilden krymper — och placera steget
+   bara EN gång.** Titelbilden går från `80vh` till `16vh` under 0,6 s när
+   man lämnar den (CSS-transition i `styles-laborans.css`). Räknas målet ut
+   mot den ännu höga layouten klipper webbläsaren skrollningen till sitt
+   max när sidan sedan krymper, och steget hamnar ovanför överkanten utan
+   att något ser trasigt ut i koden. Att rätta till det med en andra
+   placering en stund senare duger INTE — då ser man duken hoppa ned för
+   långt och sedan tillbaka upp. Autoskrollen väntar därför ut
+   `transitionend` för titelns `min-height` (med en reservtimer) och
+   placerar steget en enda gång, i rätt läge.
+4. **Räkna aldrig med dolda element i mätningen.** Ett element med
+   `display: none` — typiskt textlösningen bakom växeln "Med penna"/"Som
+   text" — har en nollrektangel i punkten 0,0. Tas den med blir stegets
+   överkant sidans topp och skrollningen uteblir helt (End-tangenten
+   stannade kvar på titelbilden). Filtrera bort rektanglar utan bredd och
+   höjd innan du mäter.
 
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet
 `%TEMP%\pptr-test\pres-alla.js` stegar igenom ett avsnitts alla steg och
-larmar om något steg får `top < 0`. Kom ihåg att presentationsläget bygger
-på `requestAnimationFrame`: i en bakgrundsflik körs autoskrollen aldrig, så
-en mätning i en dold flik säger ingenting.
+larmar om det AKTIVA delsteget får `top < 0` (exempelrutans ram får däremot
+gärna börja ovanför kanten när man stegar inne i den). Kom ihåg att
+presentationsläget bygger på `requestAnimationFrame`: i en bakgrundsflik
+körs autoskrollen aldrig, så en mätning i en dold flik säger ingenting.
 
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 

@@ -1202,6 +1202,7 @@
             const totalRef = useRef(0);
             const chromeTimer = useRef(null);
             const [step, setStep] = useState(0);     // 0 = titelbild
+            const prevStepRef = useRef(0);           // för titelbildens krympning
             const [total, setTotal] = useState(0);
             const [ready, setReady] = useState(false);
             const [chrome, setChrome] = useState(true);
@@ -1385,12 +1386,10 @@
                 if (root) { fitFormel(root); fitMathDisplays(root); }
                 const overlay = overlayRef.current;
                 if (!overlay) return;
-                let shAt = 0;
                 const place = () => {
                     if (step === 0) { overlay.scrollTo({ top: 0, behavior: 'smooth' }); return; }
                     const st = steps[step - 1];
                     if (!st) return;
-                    shAt = overlay.scrollHeight;
                     // Första delsteget i en exempel-ruta: skrolla till rutans
                     // ram (med titel), inte bara den första raden.
                     let target = st.el;
@@ -1403,9 +1402,13 @@
                     // pennlösning). Mäts bara styckets egen höjd centreras
                     // stycket, och den höga figuren under trycker upp
                     // styckets första rader ovanför överkanten.
-                    const rects = [target.getBoundingClientRect()];
-                    if (target === st.el && st.twins)
-                        for (const tw of st.twins) rects.push(tw.getBoundingClientRect());
+                    // Dolda element (textlösningen bakom växeln "Med penna"/
+                    // "Som text") har en nollrektangel i 0,0 — tas den med
+                    // mäter vi från sidans topp och skrollningen uteblir.
+                    const rects = [target, ...(target === st.el && st.twins ? st.twins : [])]
+                        .map(e => e.getBoundingClientRect())
+                        .filter(r => r.width > 0 || r.height > 0);
+                    if (!rects.length) return;
                     const rTop = Math.min(...rects.map(x => x.top));
                     const rBot = Math.max(...rects.map(x => x.bottom));
                     const rH = rBot - rTop;
@@ -1421,17 +1424,38 @@
                     const maxTop = overlay.scrollTop + rTop - 24;
                     overlay.scrollTo({ top: Math.max(0, Math.min(top, maxTop)), behavior: 'smooth' });
                 };
-                const raf = requestAnimationFrame(place);
                 // Titelbilden krymper från 80vh till 16vh under 0,6 s när man
-                // lämnar den. Mäter vi bara en gång räknas målet ut mot den
-                // ännu höga layouten, och när sidan sedan krymper klipper
-                // webbläsaren skrollningen till sitt max — steget hamnar då
-                // med sina första rader ovanför överkanten. Placera därför om
-                // steget när höjden faktiskt har ändrats.
-                const t = setTimeout(() => {
-                    if (overlay.scrollHeight !== shAt) place();
-                }, 700);
-                return () => { cancelAnimationFrame(raf); clearTimeout(t); };
+                // lämnar den. Mäts sidan medan den krympningen pågår räknas
+                // målet ut mot en för hög sida, och webbläsaren klipper
+                // skrollningen till sitt max — steget hamnar med sina första
+                // rader ovanför överkanten. Placera därför INTE steget två
+                // gånger (det ger ett synligt hopp ned och tillbaka upp) utan
+                // vänta ut krympningen och placera EN gång, i rätt läge.
+                const leavingTitle = prevStepRef.current === 0 && step > 0;
+                prevStepRef.current = step;
+                const title = overlay.querySelector('.lab-pres-title');
+                if (leavingTitle && title) {
+                    let done = false;
+                    const finish = () => {
+                        if (done) return;
+                        done = true;
+                        title.removeEventListener('transitionend', onEnd);
+                        clearTimeout(t);
+                        place();
+                    };
+                    const onEnd = (e) => {
+                        if (e.target === title && e.propertyName === 'min-height') finish();
+                    };
+                    title.addEventListener('transitionend', onEnd);
+                    const t = setTimeout(finish, 900);   // reserv om transitionen uteblir
+                    return () => {
+                        done = true;
+                        title.removeEventListener('transitionend', onEnd);
+                        clearTimeout(t);
+                    };
+                }
+                const raf = requestAnimationFrame(place);
+                return () => cancelAnimationFrame(raf);
             }, [step, ready]);
 
             // Nedre listen göms efter en stunds musinaktivitet (som i bildspel).

@@ -94,7 +94,7 @@ Skriver vi $2 = \dfrac{8}{4} = \dfrac{4 \cdot 2}{4 \cdot 1}$ och "stryker"
 4:orna (gångertecken mellan) får vi $\dfrac{2}{1} = 2$. Stämmer!
 
 Skriver vi i stället $2 = \dfrac{8}{4} = \dfrac{6 + 2}{2 + 2}$ och
-"stryker" 2:orna (plustecken mellan) får vi $\dfrac{6}{2} = 3$. Stämmer
+"stryker" 2:orna (plustecken mellan) får vi $\dfrac{6}{2} = 3 \neq 2$. Stämmer
 inte!
 :::
 

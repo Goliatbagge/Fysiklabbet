@@ -36,8 +36,7 @@ window.NP_INDEX = [
     {
         id: 'fy2-vt2016',
         kurs: 'Fysik nivå 2',
-        namn: 'Nationellt prov, våren 2016',
+        namn: 'Kursprov, våren 2016',
         meta: '19 uppgifter · Delprov A (teoriuppgifter) · Lösningar steg för steg',
-        dold: true,
     },
 ];

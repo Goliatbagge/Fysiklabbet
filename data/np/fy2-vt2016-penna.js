@@ -1,4 +1,4 @@
-/* fy2-vt2016-penna.js — pennlösningar till Nationellt prov Fy 2, VT 2016.
+/* fy2-vt2016-penna.js — pennlösningar till Kursprov Fy 2, VT 2016.
  *
  * En scen per uppgift, registrerad som "fy2-vt2016-u<nr>". Här gäller
  * FYSIKENS redovisningsregler ur handskrift.js filhuvud, till skillnad

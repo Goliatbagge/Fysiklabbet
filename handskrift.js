@@ -35563,6 +35563,13 @@
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
     var tg = e.target;
     if (tg && /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName)) return;
+    /* Presentationsläget (katalog.html) stegar den aktuella widgeten
+     * genom sin EGEN tangenthanterare — utan det här undantaget skulle
+     * båda hanterarna stega och varje piltryck bli ett dubbelsteg.
+     * Ligger fokus faktiskt i en widget (t.ex. på en navpil) backar
+     * presentationens hanterare i stället undan, så då gäller denna. */
+    if (document.body.classList.contains('lab-pres-active') &&
+        !(tg && tg.closest && tg.closest('.lab-handskrift'))) return;
     e.preventDefault();
     if (e.key === 'ArrowRight') ACTIVE.fwd(); else ACTIVE.back();
   });
@@ -36838,7 +36845,17 @@
     var api = { play: play, pause: stop, restart: restart,
                 setSpeed: function (v) { speed = v; },
                 jumpToEnd: jumpToEnd, spela: play, nasta: stepFwd,
-                forra: stepBack, steg: steg, boundaries: boundaries };
+                forra: stepBack, steg: steg, boundaries: boundaries,
+                /* lägesfrågor + pennans läge — används av presentations-
+                 * läget i katalog.html, som stegar widgeten klart innan
+                 * det går vidare till nästa stycke */
+                klar: function () { return tNow >= TOTAL; },
+                vidStart: function () { return tNow <= 0; },
+                skriver: function () { return playing; },
+                pennaY: function () {
+                  var r = svg.getBoundingClientRect();
+                  return r.top + (penPosAt(tNow).pos[1] / H) * r.height;
+                } };
     /* controllern nås även via containern — vy-växeln (buildVyval) slår
      * upp den där, så att den pekar rätt även efter en ombyggnad vid
      * växlad ekvationsredovisning */

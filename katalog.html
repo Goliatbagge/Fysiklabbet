@@ -1224,8 +1224,60 @@
                 return restoreMath(marked.parse(processed), tokens);
             }, [id]);
 
-            const next = () => setStep(s => Math.min(s + 1, totalRef.current));
-            const prev = () => setStep(s => Math.max(s - 1, 0));
+            // Pennlösningen stegas INUTI sitt presentationssteg: är det
+            // aktuella steget en ::: handskrift-widget (och arket visas —
+            // inte "Som text"-vyn) går varje nästa-tryck till widgetens
+            // egen stegning tills hela lösningen är färdigskriven; först
+            // DÅ går presentationen vidare till nästa stycke. Bakåt
+            // gäller samma sak spegelvänt (uttryckligt önskemål
+            // 2026-08-25 — tidigare hoppade fjärrkontrollen över hela
+            // pennlösningen).
+            const stepRef = useRef(0);
+            useEffect(() => { stepRef.current = step; }, [step]);
+            const hkRaf = useRef(0);
+            const curHkCtl = (s = stepRef.current) => {
+                const st = stepsRef.current[s - 1];
+                if (!st || !st.el.classList.contains('lab-handskrift')) return null;
+                const ctl = st.el.__hkCtl;
+                if (!ctl || !ctl.klar) return null;
+                // "Som text"-vyn: arket är gömt och textlösningen visas
+                // färdig — då finns inget att stega.
+                const wrapEl = st.el.querySelector('.hk-wrap');
+                if (wrapEl && wrapEl.style.display === 'none') return null;
+                return ctl;
+            };
+            // Håll pennan i sikte medan ett widget-steg skrivs — overlayen
+            // är skrollytan här (widgetens egen pennföljning gäller bara
+            // dess eget helskärmsläge). Rullar bara NEDÅT när pennan
+            // närmar sig underkanten, med dödzon så vyn ligger stilla.
+            const followHk = (ctl) => {
+                cancelAnimationFrame(hkRaf.current);
+                const tick = () => {
+                    const overlay = overlayRef.current;
+                    if (!overlay) return;
+                    const vh = overlay.clientHeight;
+                    const py = ctl.pennaY();
+                    const low = py > vh * 0.80;
+                    const before = overlay.scrollTop;
+                    if (low) overlay.scrollTop += Math.max(1, (py - vh * 0.45) * 0.10);
+                    if (ctl.skriver() || (low && overlay.scrollTop !== before))
+                        hkRaf.current = requestAnimationFrame(tick);
+                };
+                hkRaf.current = requestAnimationFrame(tick);
+            };
+            useEffect(() => () => cancelAnimationFrame(hkRaf.current), []);
+            const next = () => {
+                const ctl = curHkCtl();
+                if (ctl && !ctl.klar()) { ctl.nasta(); followHk(ctl); return; }
+                cancelAnimationFrame(hkRaf.current);
+                setStep(s => Math.min(s + 1, totalRef.current));
+            };
+            const prev = () => {
+                const ctl = curHkCtl();
+                if (ctl && !ctl.vidStart()) { ctl.forra(); return; }
+                cancelAnimationFrame(hkRaf.current);
+                setStep(s => Math.max(s - 1, 0));
+            };
 
             // Fullskärm + lås sidans egen scroll under presentationen.
             // Vi fullskärmar dokumentroten (inte overlayen) så att tooltips
@@ -1436,7 +1488,8 @@
                         <div className="lab-pres-bar-btns">
                             <button type="button" onClick={prev} disabled={step === 0}
                                 aria-label="Föregående steg">←</button>
-                            <button type="button" onClick={next} disabled={step >= total}
+                            <button type="button" onClick={next}
+                                disabled={step >= total && !curHkCtl(step)}
                                 aria-label="Nästa steg">→</button>
                         </div>
                         <div className="lab-pres-bar-right">

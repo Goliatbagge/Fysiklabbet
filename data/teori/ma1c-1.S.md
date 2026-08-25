@@ -33,7 +33,7 @@ skrivna i grundpotensform eller med prefix.
 - **minsta gemensamma nämnaren (MGN)**: den minsta nämnare som flera bråk
   kan skrivas med samtidigt.
 - **blandad form**: ett bråk skrivet som ett helt tal plus ett bråk, t.ex.
-  $3\frac{3}{4}$, till skillnad från bråkform ($\frac{15}{4}$).
+  $3\frac{3}{4}$, till skillnad från bråkform ($\dfrac{15}{4}$).
 - **närmevärde och avrundningssiffra**: ett avrundat värde kallas
   närmevärde; siffran som avgör avrundningen kallas avrundningssiffra.
 - **värdesiffror (gällande siffror)**: mått på hur noggrant ett närmevärde
@@ -154,7 +154,7 @@ $$
 - Blir talen stora vid multiplikation av bråk: faktorisera täljare och
   nämnare och förkorta *innan* multiplikationen utförs.
 - En bråkdel *av* något beräknas genom att **multiplicera** med
-  bråkdelen, t.ex. $\frac{5}{7}$ av 63 kr $= \frac{5}{7} \cdot 63$.
+  bråkdelen, t.ex. $\dfrac{5}{7}$ av 63 kr $= \dfrac{5}{7} \cdot 63$.
 - Skilj på $(-9)^2$ och $-9^2$: i det första fallet är hela $-9$ basen
   ($(-9)^2 = 81$), i det andra är bara 9 basen och minustecknet står
   utanför potensen ($-9^2 = -81$).
@@ -220,7 +220,7 @@ ansiktsdel så framhävs dess rad i ordningen bredvid.
   gemensam nämnare?
 - Kan du multiplicera och dividera bråk, och vet du varför division
   innebär att man inverterar bråket i nämnaren?
-- Kan du räkna ut en bråkdel av ett tal, t.ex. hur mycket $\frac{5}{7}$ av
+- Kan du räkna ut en bråkdel av ett tal, t.ex. hur mycket $\dfrac{5}{7}$ av
   63 kr är?
 - Kan du avrunda tal enligt avrundningsregeln, och vet du skillnaden
   mellan att avrunda efter värdesiffror (multiplikation/division) och

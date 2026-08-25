@@ -3641,7 +3641,7 @@ $$
 
 **Svar:** 1,67 m/s norrut.
 
-**Generell slutsats:** Hennes *medelfart* (skalär) är däremot $\\frac{2\\,400}{720} \\approx 3{,}33$ m/s eftersom hela sträckan är 2,4 km. Medelfart och medelhastighet är *inte* samma sak när rörelsen ändrar riktning.`,
+**Generell slutsats:** Hennes *medelfart* (skalär) är däremot $\\dfrac{2\\,400}{720} \\approx 3{,}33$ m/s eftersom hela sträckan är 2,4 km. Medelfart och medelhastighet är *inte* samma sak när rörelsen ändrar riktning.`,
         },
 
         {
@@ -4105,7 +4105,7 @@ $$
 
 **Svar:** Förflyttningen är 96 m.
 
-**Generell slutsats:** Det är samma resultat som man får ur formeln $s = v_0 t + \\frac{1}{2} a t^{2}$ — där $v_0 = 0$, $a = 24/8{,}0 = 3{,}0$ m/s² och $t = 8{,}0$ s.`,
+**Generell slutsats:** Det är samma resultat som man får ur formeln $s = v_0 t + \\dfrac{1}{2} a t^{2}$ — där $v_0 = 0$, $a = 24/8{,}0 = 3{,}0$ m/s² och $t = 8{,}0$ s.`,
         },
         {
             level: 2,
@@ -4381,7 +4381,7 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `En bil rullar med 12 m/s och accelererar konstant med 2,5 m/s² i 6,0 sekunder. Hur långt rullar bilen under denna tid? Använd $s = v_0 t + \\frac{1}{2} a t^{2}$.`,
+            question: `En bil rullar med 12 m/s och accelererar konstant med 2,5 m/s² i 6,0 sekunder. Hur långt rullar bilen under denna tid? Använd $s = v_0 t + \\dfrac{1}{2} a t^{2}$.`,
             answer: { value: 117, unit: 'm', tol: 0.02 },
             solution: `Vi sätter in värdena i formeln för sträcka vid konstant acceleration:
 
@@ -4494,7 +4494,7 @@ $$
 t = \\frac{v - v_0}{a} = \\frac{0 - 14}{-9{,}82} \\approx 1{,}426\\ \\mathrm{s}
 $$
 
-**Steg 2 — höjden** ur $s = v_0 t + \\frac{1}{2} a t^{2}$:
+**Steg 2 — höjden** ur $s = v_0 t + \\dfrac{1}{2} a t^{2}$:
 
 $$
 s = 14 \\cdot 1{,}426 + \\frac{(-9{,}82) \\cdot 1{,}426^{2}}{2}
@@ -4851,7 +4851,7 @@ b) På vilken **höjd över marken** sker mötet?
 
 *Ange höjden över marken (b) som ditt numeriska svar i meter.*`,
             answer: { value: 30.4, unit: 'm', tol: 0.03 },
-            solution: `Vi väljer **uppåt som positiv riktning** och lägger origo vid marken direkt nedanför klippan. Båda bollarnas lägesfunktioner ges av $s(t) = s_0 + v_0 t - \\frac{1}{2} g t^{2}$.
+            solution: `Vi väljer **uppåt som positiv riktning** och lägger origo vid marken direkt nedanför klippan. Båda bollarnas lägesfunktioner ges av $s(t) = s_0 + v_0 t - \\dfrac{1}{2} g t^{2}$.
 
 **Boll A** (släpps från $s_0 = 50$ m, $v_0 = 0$):
 $$
@@ -4869,7 +4869,7 @@ $$
 50 - \\frac{g t^{2}}{2} = 25\\, t - \\frac{g t^{2}}{2}
 $$
 
-Termen $\\frac{g t^{2}}{2}$ försvinner från båda led — den är **samma** för båda bollarna, eftersom de har samma tyngdacceleration! Vi får ett enkelt linjärt samband:
+Termen $\\dfrac{g t^{2}}{2}$ försvinner från båda led — den är **samma** för båda bollarna, eftersom de har samma tyngdacceleration! Vi får ett enkelt linjärt samband:
 
 $$
 50 = 25\\, t \\quad\\Leftrightarrow\\quad t = 2{,}0\\ \\mathrm{s}
@@ -7123,7 +7123,7 @@ $$
             level: 3,
             question: `En bil med massan 1 400 kg kör i 50 km/h och behöver bromssträckan 18 m för att stanna helt. Om samma bil **istället** kör i 100 km/h och bromsar med **exakt samma bromskraft**, hur lång blir då bromssträckan? Ange svaret i meter.`,
             answer: { value: 72, unit: 'm', tol: 0.05 },
-            solution: `Vid samma bromskraft *F* är arbetet som krävs för att stoppa bilen lika med rörelseenergin: $F \\cdot s = \\frac{m v_0^{2}}{2}$. Med konstant *F* och *m* gäller alltså:
+            solution: `Vid samma bromskraft *F* är arbetet som krävs för att stoppa bilen lika med rörelseenergin: $F \\cdot s = \\dfrac{m v_0^{2}}{2}$. Med konstant *F* och *m* gäller alltså:
 
 $$
 s \\propto v_0^{2}
@@ -18623,7 +18623,7 @@ $$ \\frac{3}{5} = \\frac{3 \\cdot 4}{5 \\cdot 4} = \\frac{12}{20} $$
 
 $$ \\frac{5}{8} = \\frac{5 \\cdot 11}{8 \\cdot 11} = \\frac{55}{88} \\qquad \\frac{7}{11} = \\frac{7 \\cdot 8}{11 \\cdot 8} = \\frac{56}{88} $$
 
-Eftersom $\\frac{56}{88} > \\frac{55}{88}$ är $\\dfrac{7}{11}$ störst.
+Eftersom $\\dfrac{56}{88} > \\dfrac{55}{88}$ är $\\dfrac{7}{11}$ störst.
 
 **Svar:** $\\dfrac{7}{11}$`,
         },
@@ -18641,7 +18641,7 @@ Eftersom $\\frac{56}{88} > \\frac{55}{88}$ är $\\dfrac{7}{11}$ störst.
 
 $$ \\frac{6}{8} = \\frac{3}{4} \\qquad \\frac{9}{12} = \\frac{3}{4} \\qquad \\frac{12}{16} = \\frac{3}{4} \\qquad \\frac{10}{14} = \\frac{5}{7} $$
 
-De tre första är alltså förlängningar av $\\frac{3}{4}$ (med 2, 3 respektive 4), men $\\frac{10}{14}$ förkortas till $\\frac{5}{7} \\neq \\frac{3}{4}$.
+De tre första är alltså förlängningar av $\\dfrac{3}{4}$ (med 2, 3 respektive 4), men $\\dfrac{10}{14}$ förkortas till $\\dfrac{5}{7} \\neq \\dfrac{3}{4}$.
 
 **Svar:** $\\dfrac{6}{8}$, $\\dfrac{9}{12}$ och $\\dfrac{12}{16}$`,
         },
@@ -18656,13 +18656,13 @@ De tre första är alltså förlängningar av $\\frac{3}{4}$ (med 2, 3 respektiv
                 `$\\dfrac{2}{6}$`,
             ],
             correct: 1,
-            solution: `**Insikten:** för att kunna jämföra alla bråk på en gång gör vi om $\\frac{1}{3}$ och $\\frac{1}{2}$ till samma nämnare. Nämnaren 12 fungerar bra (både 3 och 2 delar 12):
+            solution: `**Insikten:** för att kunna jämföra alla bråk på en gång gör vi om $\\dfrac{1}{3}$ och $\\dfrac{1}{2}$ till samma nämnare. Nämnaren 12 fungerar bra (både 3 och 2 delar 12):
 
 $$ \\frac{1}{3} = \\frac{4}{12} \\qquad\\qquad \\frac{1}{2} = \\frac{6}{12} $$
 
-Vi söker alltså ett bråk mellan $\\frac{4}{12}$ och $\\frac{6}{12}$ — och där ligger precis $\\dfrac{5}{12}$.
+Vi söker alltså ett bråk mellan $\\dfrac{4}{12}$ och $\\dfrac{6}{12}$ — och där ligger precis $\\dfrac{5}{12}$.
 
-Kontroll av de övriga: $\\frac{1}{4} = \\frac{3}{12}$ är för litet, $\\frac{3}{5} = \\frac{36}{60} > \\frac{30}{60} = \\frac{1}{2}$ är för stort, och $\\frac{2}{6} = \\frac{4}{12} = \\frac{1}{3}$ ligger inte *mellan* gränserna — det är lika med den undre.
+Kontroll av de övriga: $\\dfrac{1}{4} = \\dfrac{3}{12}$ är för litet, $\\dfrac{3}{5} = \\dfrac{36}{60} > \\dfrac{30}{60} = \\dfrac{1}{2}$ är för stort, och $\\dfrac{2}{6} = \\dfrac{4}{12} = \\dfrac{1}{3}$ ligger inte *mellan* gränserna — det är lika med den undre.
 
 **Svar:** $\\dfrac{5}{12}$
 
@@ -18700,7 +18700,7 @@ Nämnarna ska **inte** adderas — nämnaren anger bara hur stora delarna är.
                 `$\\dfrac{1}{3}$`,
             ],
             correct: 2,
-            solution: `Förläng $\\frac{1}{3}$ med 2 så att båda bråken får nämnaren 6 (metod 1):
+            solution: `Förläng $\\dfrac{1}{3}$ med 2 så att båda bråken får nämnaren 6 (metod 1):
 
 $$ \\frac{5}{6} - \\frac{1}{3} = \\frac{5}{6} - \\frac{1 \\cdot 2}{3 \\cdot 2} = \\frac{5}{6} - \\frac{2}{6} = \\frac{3}{6} = \\frac{1}{2} $$
 
@@ -18733,11 +18733,11 @@ $$ 2\\frac{3}{4} = \\frac{2 \\cdot 4 + 3}{4} = \\frac{11}{4} $$
                 `$\\dfrac{19}{24}$`,
             ],
             correct: 1,
-            solution: `Minsta gemensamma nämnaren till 4 och 6 är 12. Förläng $\\frac{3}{4}$ med 3 och $\\frac{5}{6}$ med 2:
+            solution: `Minsta gemensamma nämnaren till 4 och 6 är 12. Förläng $\\dfrac{3}{4}$ med 3 och $\\dfrac{5}{6}$ med 2:
 
 $$ \\frac{3}{4} + \\frac{5}{6} = \\frac{3 \\cdot 3}{4 \\cdot 3} + \\frac{5 \\cdot 2}{6 \\cdot 2} = \\frac{9}{12} + \\frac{10}{12} = \\frac{19}{12} $$
 
-Att addera täljare och nämnare var för sig ($\\frac{8}{10}$) är fel — bråken måste först få samma nämnare.
+Att addera täljare och nämnare var för sig ($\\dfrac{8}{10}$) är fel — bråken måste först få samma nämnare.
 
 **Svar:** $\\dfrac{19}{12}$`,
         },
@@ -18817,7 +18817,7 @@ $$ \\frac{2}{3} \\cdot \\frac{5}{7} = \\frac{2 \\cdot 5}{3 \\cdot 7} = \\frac{10
 
 $$ 4 \\cdot \\frac{3}{5} = \\frac{4 \\cdot 3}{5} = \\frac{12}{5} $$
 
-Multiplicerar man även nämnaren med 4 (svaret $\\frac{12}{20}$) har man i själva verket bara förlängt bråket — då har inget multiplicerats.
+Multiplicerar man även nämnaren med 4 (svaret $\\dfrac{12}{20}$) har man i själva verket bara förlängt bråket — då har inget multiplicerats.
 
 **Svar:** $\\dfrac{12}{5}$`,
         },
@@ -18870,7 +18870,7 @@ Faktorerna 5 och 8 finns i både täljare och nämnare och kan förkortas bort (
 
 $$ \\frac{1}{3 \\cdot 3} = \\frac{1}{9} $$
 
-$\\frac{40}{360}$ är samma värde men inte förkortat — och betydligt lättare att räkna fel på.
+$\\dfrac{40}{360}$ är samma värde men inte förkortat — och betydligt lättare att räkna fel på.
 
 **Svar:** $\\dfrac{1}{9}$`,
         },
@@ -18887,9 +18887,9 @@ $\\frac{40}{360}$ är samma värde men inte förkortat — och betydligt lättar
             correct: 0,
             solution: `**Insikten:** Noahs bråkdel räknas på *resten*, inte på hela tårtan — bråkdel av något betyder multiplikation med just det.
 
-Efter Emma är $1 - \\frac{1}{4} = \\frac{3}{4}$ av tårtan kvar.
+Efter Emma är $1 - \\dfrac{1}{4} = \\dfrac{3}{4}$ av tårtan kvar.
 
-Noah äter $\\frac{2}{3}$ **av** $\\frac{3}{4}$:
+Noah äter $\\dfrac{2}{3}$ **av** $\\dfrac{3}{4}$:
 
 $$ \\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{2 \\cdot 3}{3 \\cdot 4} = \\frac{6}{12} = \\frac{1}{2} $$
 
@@ -18899,7 +18899,7 @@ $$ \\frac{3}{4} - \\frac{1}{2} = \\frac{3}{4} - \\frac{2}{4} = \\frac{1}{4} $$
 
 **Svar:** $\\dfrac{1}{4}$ av tårtan är kvar.
 
-**Generell slutsats:** när en andel tas "av det som är kvar" multipliceras bråkdelarna — kvar blir $\\left(1 - \\frac{1}{4}\\right) \\cdot \\left(1 - \\frac{2}{3}\\right) = \\frac{3}{4} \\cdot \\frac{1}{3} = \\frac{1}{4}$. Samma tankesätt återkommer i procenträkningens förändringsfaktorer.`,
+**Generell slutsats:** när en andel tas "av det som är kvar" multipliceras bråkdelarna — kvar blir $\\left(1 - \\dfrac{1}{4}\\right) \\cdot \\left(1 - \\dfrac{2}{3}\\right) = \\dfrac{3}{4} \\cdot \\dfrac{1}{3} = \\dfrac{1}{4}$. Samma tankesätt återkommer i procenträkningens förändringsfaktorer.`,
         },
     ],
 
@@ -19161,7 +19161,7 @@ Observera att svaret är **positivt** — minustecknet i exponenten gör inte ta
                 `$-7^4$`,
             ],
             correct: 0,
-            solution: `Eftersom $7^{-4} = \\frac{1}{7^4}$ gäller det omvända också:
+            solution: `Eftersom $7^{-4} = \\dfrac{1}{7^4}$ gäller det omvända också:
 
 $$ \\frac{1}{7^4} = 7^{-4} $$
 
@@ -19182,7 +19182,7 @@ $$ \\frac{1}{7^4} = 7^{-4} $$
 
 $$ \\left(\\frac{2}{5}\\right)^{-2} = \\left(\\frac{5}{2}\\right)^{2} = \\frac{5^2}{2^2} = \\frac{25}{4} $$
 
-$\\frac{4}{25}$ är värdet av $\\left(\\frac{2}{5}\\right)^{2}$ — utan invertering.
+$\\dfrac{4}{25}$ är värdet av $\\left(\\frac{2}{5}\\right)^{2}$ — utan invertering.
 
 **Svar:** $\\dfrac{25}{4}$`,
         },
@@ -19233,7 +19233,7 @@ $$ 4^2 = 16 \\quad\\to\\quad 4^1 = 4 \\quad\\to\\quad 4^0 = 1 \\quad\\to\\quad 4
             level: 1,
             question: `Beräkna $81^{1/2}$ utan räknare.`,
             answer: { value: 9, unit: '' },
-            solution: `Exponenten $\\frac{1}{2}$ betyder kvadratroten:
+            solution: `Exponenten $\\dfrac{1}{2}$ betyder kvadratroten:
 
 $$ 81^{1/2} = \\sqrt{81} = 9 $$
 
@@ -19243,7 +19243,7 @@ $$ 81^{1/2} = \\sqrt{81} = 9 $$
             level: 1,
             question: `Beräkna $125^{1/3}$ utan räknare.`,
             answer: { value: 5, unit: '' },
-            solution: `Exponenten $\\frac{1}{3}$ betyder tredjeroten (kubikroten). Vi söker det tal som multiplicerat med sig själv tre gånger blir 125:
+            solution: `Exponenten $\\dfrac{1}{3}$ betyder tredjeroten (kubikroten). Vi söker det tal som multiplicerat med sig själv tre gånger blir 125:
 
 $$ 5 \\cdot 5 \\cdot 5 = 125 \\quad \\Rightarrow \\quad 125^{1/3} = \\sqrt[3]{125} = 5 $$
 
@@ -19259,7 +19259,7 @@ $$ 5 \\cdot 5 \\cdot 5 = 125 \\quad \\Rightarrow \\quad 125^{1/3} = \\sqrt[3]{12
                 `$13^{-4}$`,
             ],
             correct: 0,
-            solution: `Regeln $a^{1/n} = \\sqrt[n]{a}$ gäller åt båda hållen — fjärderoten ur 13 är alltså 13 upphöjt till $\\frac{1}{4}$:
+            solution: `Regeln $a^{1/n} = \\sqrt[n]{a}$ gäller åt båda hållen — fjärderoten ur 13 är alltså 13 upphöjt till $\\dfrac{1}{4}$:
 
 $$ \\sqrt[4]{13} = 13^{1/4} $$
 
@@ -20123,7 +20123,7 @@ $$ x = 8 $$
             correct: 0,
             solution: `**Insikten:** varje steg i en ekvationslösning måste vara samma operation på BÅDA led — "flytta över" är bara en förkortning av det, och den kan bli fel.
 
-**Steg 1** är korrekt: addera 7 till båda led ger $\\frac{2x}{5} = -4 + 7 = 3$.
+**Steg 1** är korrekt: addera 7 till båda led ger $\\dfrac{2x}{5} = -4 + 7 = 3$.
 
 **Steg 2** är felet. För att få bort nämnaren 5 ska båda led multipliceras med 5:
 
@@ -20135,7 +20135,7 @@ Simon "flyttade ner" 5:an till högerledets nämnare i stället — det motsvara
 
 $$ x = \\frac{15}{2} $$
 
-**Svar:** Steg 2 — båda led ska multipliceras med 5, vilket ger $2x = 15$ och $x = \\frac{15}{2}$.
+**Svar:** Steg 2 — båda led ska multipliceras med 5, vilket ger $2x = 15$ och $x = \\dfrac{15}{2}$.
 
 **Generell slutsats:** när något "flyttas över" likhetstecknet byter det operation (plus↔minus, gånger↔delat). Blanda inte ihop åt vilket håll — vid osäkerhet, skriv ut operationen på båda led.`,
         },
@@ -20245,7 +20245,7 @@ $$ ax - 6x = -7 - 5 $$
 
 $$ (a - 6)x = -12 $$
 
-Om $a \\neq 6$ kan vi dividera med $(a - 6)$ och få en lösning $x = \\frac{-12}{a-6}$.
+Om $a \\neq 6$ kan vi dividera med $(a - 6)$ och få en lösning $x = \\dfrac{-12}{a-6}$.
 
 Men om $a = 6$ blir vänsterledet $0 \\cdot x = 0$, och ekvationen säger
 
@@ -20375,7 +20375,7 @@ Men $x \\neq 4$! Det enda kandidatvärdet är förbjudet — ekvationen saknar l
 
 **Svar:** Ekvationen saknar lösning.
 
-**Generell slutsats:** villkoret "$x \\neq$ …" skrivs ned FÖRST och kontrolleras SIST. Ett svar som bryter mot villkoret är inget svar — precis som i genomgångens exempel med $\\frac{5x-35}{x-7} = 4$.`,
+**Generell slutsats:** villkoret "$x \\neq$ …" skrivs ned FÖRST och kontrolleras SIST. Ett svar som bryter mot villkoret är inget svar — precis som i genomgångens exempel med $\\dfrac{5x-35}{x-7} = 4$.`,
         },
     ],
 
@@ -21210,7 +21210,7 @@ $$ \\text{förändringsfaktor} = \\frac{32\\ 000}{25\\ 600} = 1{,}25 = 125\\ \\%
 
 Elsa tjänar alltså 25 % mer än Karim.
 
-(Observera att Karim tjänar $\\frac{25\\ 600}{32\\ 000} = 0{,}80$, dvs. 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
+(Observera att Karim tjänar $\\dfrac{25\\ 600}{32\\ 000} = 0{,}80$, dvs. 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
 
 **Svar:** 25 %`,
         },
@@ -21231,7 +21231,7 @@ Priset sänktes alltså med $100\\ \\% - 71{,}4\\ \\% = 28{,}6\\ \\%$.
 
 **Svar:** cirka 28,6 %
 
-**Generell slutsats:** faktorn "dit" och faktorn "hem" är varandras inverser ($1{,}40 \\cdot \\frac{1}{1{,}40} = 1$) — aldrig samma procentsats åt båda hållen (utom vid 0 %).`,
+**Generell slutsats:** faktorn "dit" och faktorn "hem" är varandras inverser ($1{,}40 \\cdot \\dfrac{1}{1{,}40} = 1$) — aldrig samma procentsats åt båda hållen (utom vid 0 %).`,
         },
     ],
 
@@ -21523,7 +21523,7 @@ Total räntekostnad = totalt betalt − lånebelopp:
 
 $$ 168\\ 300 - 150\\ 000 = 18\\ 300\\ \\mathrm{kr} $$
 
-Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, men sista månaden är skulden bara 2 500 kr och räntan $\\frac{0{,}048 \\cdot 2\\ 500}{12} = 10$ kr. Räntan sjunker linjärt, så i genomsnitt betalas ungefär $\\frac{600 + 10}{2} = 305$ kr/månad — och $60 \\cdot 305 = 18\\ 300$ kr. Stämmer!
+Första månaden är räntan $\\dfrac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, men sista månaden är skulden bara 2 500 kr och räntan $\\dfrac{0{,}048 \\cdot 2\\ 500}{12} = 10$ kr. Räntan sjunker linjärt, så i genomsnitt betalas ungefär $\\dfrac{600 + 10}{2} = 305$ kr/månad — och $60 \\cdot 305 = 18\\ 300$ kr. Stämmer!
 
 **Svar:** 18 300 kr — räntan räknas på den krympande skulden, inte på det ursprungliga lånebeloppet.
 
@@ -21548,7 +21548,7 @@ Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, me
                 `Priset är 132 kr`,
             ],
             correct: 0,
-            solution: `Basåret har alltid index 100. Indextalet 132 ligger $132 - 100 = 32$ enheter över basåret — priset är alltså 32 % högre än år 2015 (förändringsfaktorn är $\\frac{132}{100} = 1{,}32$).
+            solution: `Basåret har alltid index 100. Indextalet 132 ligger $132 - 100 = 32$ enheter över basåret — priset är alltså 32 % högre än år 2015 (förändringsfaktorn är $\\dfrac{132}{100} = 1{,}32$).
 
 Ett indextal säger ingenting om priset i kronor — bara om förhållandet till basåret.
 
@@ -21585,7 +21585,7 @@ Den vanligaste felläsningen är att ta hela indextalet som procentuell ökning 
             level: 2,
             question: `En chokladkaka kostar 65 kr i år, och prisets indextal är 125. Vad kostade chokladkakan under basåret?`,
             answer: { value: 52, unit: 'kr', tol: 0.005 },
-            solution: `Index 125 betyder att dagens pris är basårets pris multiplicerat med förändringsfaktorn $\\frac{125}{100} = 1{,}25$. Kalla basårets pris $x$:
+            solution: `Index 125 betyder att dagens pris är basårets pris multiplicerat med förändringsfaktorn $\\dfrac{125}{100} = 1{,}25$. Kalla basårets pris $x$:
 
 $$ 1{,}25 \\cdot x = 65 $$
 
@@ -21694,7 +21694,7 @@ $$ \\frac{81}{450} = 0{,}18 = 18\\ \\% $$
                 `Den verkliga ökningen är 30 %`,
             ],
             correct: 0,
-            solution: `Ovanför brytpunkten 480 blir staplarna $490 - 480 = 10$ respektive $520 - 480 = 40$ enheter höga — den andra ser $\\frac{40}{10} = 4$ gånger så hög ut. Den verkliga förändringsfaktorn är
+            solution: `Ovanför brytpunkten 480 blir staplarna $490 - 480 = 10$ respektive $520 - 480 = 40$ enheter höga — den andra ser $\\dfrac{40}{10} = 4$ gånger så hög ut. Den verkliga förändringsfaktorn är
 
 $$ \\frac{520}{490} = 1{,}061\\ldots $$
 
@@ -21719,7 +21719,7 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
 
 **Svar:** 46 %
 
-**Generell slutsats:** medelvärdet av två procentsatser ($\\frac{60 + 40}{2} = 50\\ \\%$) stämmer bara när grupperna är exakt lika stora. Här väger Bäckskolans 700 svar tyngre än Åskolans 300 — den viktade andelen hamnar närmare 40 % än 60 %.`,
+**Generell slutsats:** medelvärdet av två procentsatser ($\\dfrac{60 + 40}{2} = 50\\ \\%$) stämmer bara när grupperna är exakt lika stora. Här väger Bäckskolans 700 svar tyngre än Åskolans 300 — den viktade andelen hamnar närmare 40 % än 60 %.`,
         },
     ],
 
@@ -21880,7 +21880,7 @@ $$ k = \\frac{y}{x} = \\frac{84}{12} = 7 $$
                 `$x$: 2, 4, 6 — $y$: 10, 10, 10`,
             ],
             correct: 0,
-            solution: `I en proportionalitet är förhållandet $\\frac{y}{x}$ konstant:
+            solution: `I en proportionalitet är förhållandet $\\dfrac{y}{x}$ konstant:
 
 $$ \\frac{5}{2} = 2{,}5 \\qquad \\frac{10}{4} = 2{,}5 \\qquad \\frac{15}{6} = 2{,}5 $$
 
@@ -21917,7 +21917,7 @@ $$ y = 20 + 10 \\cdot 8 = 100\\ \\mathrm{kr} $$
 
 — inte 120 kr. Amandas dubbling skulle även dubbla startavgiften, men den betalas bara en gång.
 
-Kontrollera kvoterna: $\\frac{60}{4} = 15$ kr/km men $\\frac{100}{8} = 12{,}5$ kr/km — kvoten $\\frac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär *y*-axeln i 20, inte i origo.
+Kontrollera kvoterna: $\\dfrac{60}{4} = 15$ kr/km men $\\dfrac{100}{8} = 12{,}5$ kr/km — kvoten $\\dfrac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär *y*-axeln i 20, inte i origo.
 
 **Svar:** 100 kr
 
@@ -22080,7 +22080,7 @@ Linjen lutar nedåt — negativt $k$-värde.
             level: 2,
             question: `En rät linje har ekvationen $y = kx + m$. Linjen går genom (0, 7) och har lutningen $-\\dfrac{1}{2}$. Vilket *y*-värde har linjen vid $x = 8$?`,
             answer: { value: 3, unit: '' },
-            solution: `Skärningen med *y*-axeln ger $m = 7$, och $k = -\\frac{1}{2}$:
+            solution: `Skärningen med *y*-axeln ger $m = 7$, och $k = -\\dfrac{1}{2}$:
 
 $$ y = -\\frac{1}{2}x + 7 $$
 
@@ -22327,7 +22327,7 @@ $$ k = \\frac{12 - 3}{4 - 1} = \\frac{9}{3} = 3 $$
 
 $$ 2y = -ax + 8 \\qquad y = -\\frac{a}{2}x + 4 $$
 
-dvs. $k = -\\frac{a}{2}$.
+dvs. $k = -\\dfrac{a}{2}$.
 
 **Parallellitet** kräver samma $k$-värde:
 
@@ -22337,7 +22337,7 @@ Kontroll: $-6x + 2y - 8 = 0$ ger $y = 3x + 4$ — lutning 3, parallell. Stämmer
 
 **Svar:** $a = -6$
 
-**Generell slutsats:** allmän form döljer lutningen — lös alltid ut $y$ först. För $ax + by + c = 0$ är lutningen $-\\frac{a}{b}$.`,
+**Generell slutsats:** allmän form döljer lutningen — lös alltid ut $y$ först. För $ax + by + c = 0$ är lutningen $-\\dfrac{a}{b}$.`,
         },
     ],
 
@@ -22810,7 +22810,7 @@ $$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,
                 `En kurva som startar i origo och stiger allt flackare`,
             ],
             correct: 0,
-            solution: `$y = x^{-1} = \\frac{1}{x}$ ger en hyperbel: en gren i första kvadranten och en i tredje. Kurvan är odefinierad för $x = 0$ och närmar sig axlarna utan att nå dem.
+            solution: `$y = x^{-1} = \\dfrac{1}{x}$ ger en hyperbel: en gren i första kvadranten och en i tredje. Kurvan är odefinierad för $x = 0$ och närmar sig axlarna utan att nå dem.
 
 (Parabeln är $y = x^2$, och kurvan från origo är $y = \\sqrt{x}$.)
 
@@ -23003,7 +23003,7 @@ Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler t
             level: 3,
             question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 %. Hur många personer måste tillfrågas (med samma $p$) för att felmarginalen ska bli högst 2,4 %?`,
             answer: { value: 1600, unit: 'st' },
-            solution: `**Insikten:** felmarginalen skalar med $\\frac{1}{\\sqrt{n}}$ — för att fjärdedela $f$ krävs 16 gånger fler tillfrågade.
+            solution: `**Insikten:** felmarginalen skalar med $\\dfrac{1}{\\sqrt{n}}$ — för att fjärdedela $f$ krävs 16 gånger fler tillfrågade.
 
 Sök $n$ så att
 
@@ -23015,7 +23015,7 @@ $$ \\frac{2\\ 400}{n} = \\left(\\frac{2{,}4}{1{,}96}\\right)^2 = 1{,}4994\\ldots
 
 $$ n = \\frac{2\\ 400}{1{,}4994\\ldots} \\approx 1\\ 600 $$
 
-Rimlighetskoll med skalningen: $\\frac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gånger fler än 100 är just 1 600. Stämmer!
+Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gånger fler än 100 är just 1 600. Stämmer!
 
 **Svar:** Cirka 1 600 personer.
 
@@ -23201,7 +23201,7 @@ $$ P(\\text{inte gul}) = \\frac{12}{20} = 0{,}6 = 60\\ \\% $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Du singlar två mynt. Leia säger: "Det finns tre utfall — två kronor, två klavar eller en av varje — så sannolikheten för en av varje är $\\frac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
+            question: `Du singlar två mynt. Leia säger: "Det finns tre utfall — två kronor, två klavar eller en av varje — så sannolikheten för en av varje är $\\dfrac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
             choices: [
                 `$\\dfrac{1}{2}$ — utfallsrummet har fyra lika sannolika utfall, varav två ger en av varje`,
                 `$\\dfrac{1}{3}$ — Leia har rätt`,
@@ -23339,7 +23339,7 @@ $$ P(\\text{två kronor}) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4} $$
                 `Att välja två elever ur en klass till samma grupp`,
             ],
             correct: 0,
-            solution: `Tärningen har "inget minne" — sannolikheten $\\frac{1}{6}$ för en sexa är densamma i varje kast. Dragningar UTAN återläggning är däremot beroende: det som dras först ändrar förutsättningarna.
+            solution: `Tärningen har "inget minne" — sannolikheten $\\dfrac{1}{6}$ för en sexa är densamma i varje kast. Dragningar UTAN återläggning är däremot beroende: det som dras först ändrar förutsättningarna.
 
 **Svar:** Två tärningskast efter varandra.`,
         },
@@ -23378,7 +23378,7 @@ $$ P(\\text{två gröna}) = \\frac{5}{8} \\cdot \\frac{4}{7} = \\frac{20}{56} = 
 
 $$ \\left(\\frac{1}{6}\\right)^3 = \\frac{1}{216} $$
 
-$\\frac{1}{18}$ vore $3 \\cdot \\frac{1}{6} \\cdot \\frac{1}{6}$... sannolikheter för "i rad" multipliceras, aldrig adderas eller multipliceras med antalet.
+$\\dfrac{1}{18}$ vore $3 \\cdot \\dfrac{1}{6} \\cdot \\dfrac{1}{6}$... sannolikheter för "i rad" multipliceras, aldrig adderas eller multipliceras med antalet.
 
 **Svar:** $\\dfrac{1}{216}$`,
         },
@@ -23395,15 +23395,15 @@ $\\frac{1}{18}$ vore $3 \\cdot \\frac{1}{6} \\cdot \\frac{1}{6}$... sannolikhete
             correct: 0,
             solution: `**Insikten:** utan återläggning ändras BÅDE täljare och nämnare till andra dragningen.
 
-Första kortet: $P(\\text{ess}) = \\frac{4}{52}$.
+Första kortet: $P(\\text{ess}) = \\dfrac{4}{52}$.
 
-Andra kortet, givet att ett ess redan dragits: 3 ess kvar av 51 kort, $P = \\frac{3}{51}$.
+Andra kortet, givet att ett ess redan dragits: 3 ess kvar av 51 kort, $P = \\dfrac{3}{51}$.
 
 Produktregeln:
 
 $$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
 
-($\\frac{1}{169} = \\frac{4}{52} \\cdot \\frac{4}{52}$ vore svaret MED återläggning — skillnaden är just beroendet.)
+($\\dfrac{1}{169} = \\dfrac{4}{52} \\cdot \\dfrac{4}{52}$ vore svaret MED återläggning — skillnaden är just beroendet.)
 
 **Svar:** $\\dfrac{1}{221}$
 
@@ -23423,7 +23423,7 @@ $$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
                 `Dividera sannolikheterna med varandra`,
             ],
             correct: 0,
-            solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — t.ex. $\\frac{7}{10} \\cdot \\frac{7}{10} = \\frac{49}{100}$ för svart–svart med återläggning.
+            solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — t.ex. $\\dfrac{7}{10} \\cdot \\dfrac{7}{10} = \\dfrac{49}{100}$ för svart–svart med återläggning.
 
 **Svar:** Multiplicera sannolikheterna längs grenen.`,
         },
@@ -23453,7 +23453,7 @@ $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
                 `Adderar alla sannolikheter i hela trädet`,
             ],
             correct: 0,
-            solution: `Varje gren ger sin sannolikhet (multiplikation längs grenen); när flera grenar är gynnsamma **adderas** de — som svart–vit och vit–svart i genomgången: $\\frac{21}{90} + \\frac{21}{90} = \\frac{42}{90}$.
+            solution: `Varje gren ger sin sannolikhet (multiplikation längs grenen); när flera grenar är gynnsamma **adderas** de — som svart–vit och vit–svart i genomgången: $\\dfrac{21}{90} + \\dfrac{21}{90} = \\dfrac{42}{90}$.
 
 **Svar:** Multiplicera längs varje gren och addera grenarna.`,
         },
@@ -23472,7 +23472,7 @@ $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
 
 $$ \\frac{4}{10} \\cdot \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15} $$
 
-($\\frac{4}{25}$ vore svaret MED återläggning.)
+($\\dfrac{4}{25}$ vore svaret MED återläggning.)
 
 **Svar:** $\\dfrac{2}{15}$`,
         },
@@ -23511,7 +23511,7 @@ Addera:
 
 $$ \\frac{25}{90} + \\frac{25}{90} = \\frac{50}{90} = \\frac{5}{9} $$
 
-(Notera att $\\frac{5}{9} > \\frac{1}{2}$ — olika färg är faktiskt VANLIGARE än lika färg utan återläggning, eftersom den första dragna strumpan lämnar färre av sin egen färg kvar.)
+(Notera att $\\dfrac{5}{9} > \\dfrac{1}{2}$ — olika färg är faktiskt VANLIGARE än lika färg utan återläggning, eftersom den första dragna strumpan lämnar färre av sin egen färg kvar.)
 
 **Svar:** $\\dfrac{5}{9}$
 
@@ -23613,7 +23613,7 @@ Efter 3 kast är chansen fortfarande under 50 %, efter 4 kast över.
 
 **Svar:** 4 kast
 
-**Generell slutsats:** intuitionen säger ofta "3 kast räcker, för $3 \\cdot \\frac{1}{6} = \\frac{1}{2}$" — men sannolikheter får inte adderas så. Komplementmetoden ger det rätta svaret, precis som i födelsedagsparadoxen.`,
+**Generell slutsats:** intuitionen säger ofta "3 kast räcker, för $3 \\cdot \\dfrac{1}{6} = \\dfrac{1}{2}$" — men sannolikheter får inte adderas så. Komplementmetoden ger det rätta svaret, precis som i födelsedagsparadoxen.`,
         },
     ],
 
@@ -23791,7 +23791,7 @@ $$ A = \\frac{b \\cdot h}{2} = \\frac{15 \\cdot 9{,}0 \\cdot \\sin 38°}{2} = \\
 
 **Svar:** cirka 42 a.e.
 
-**Generell slutsats:** arean av VARJE triangel kan skrivas $A = \\frac{a \\cdot b \\cdot \\sin C}{2}$, där $C$ är vinkeln mellan sidorna $a$ och $b$ — sinus tillverkar höjden åt oss.`,
+**Generell slutsats:** arean av VARJE triangel kan skrivas $A = \\dfrac{a \\cdot b \\cdot \\sin C}{2}$, där $C$ är vinkeln mellan sidorna $a$ och $b$ — sinus tillverkar höjden åt oss.`,
         },
     ],
 
@@ -23821,7 +23821,7 @@ $$ v = \\tan^{-1}(1) = 45° $$
             correct: 0,
             solution: `$\\tan^{-1}$ ("tangens invers") och arctan ("arcus tangens") är samma funktion — bara olika skrivsätt. Båda förekommer på räknare och i litteratur.
 
-(Observera att $\\tan^{-1} v$ INTE betyder $\\frac{1}{\\tan v}$ i det här sammanhanget.)
+(Observera att $\\tan^{-1} v$ INTE betyder $\\dfrac{1}{\\tan v}$ i det här sammanhanget.)
 
 **Svar:** arctan`,
         },
@@ -24057,9 +24057,9 @@ $$ |\\vec{u}| = \\sqrt{100} = 10 $$
             correct: 0,
             solution: `**Insikten:** parallellitet handlar om LUTNING — kontrollera kvoten mellan stegen.
 
-$\\vec{a}$: lutning $\\frac{1}{4}$. $\\vec{b} = -\\vec{a}$: samma lutning (motsatt riktning räknas som parallell). $\\vec{c} = 2\\vec{a}$: lutning $\\frac{2}{8} = \\frac{1}{4}$ — parallell.
+$\\vec{a}$: lutning $\\dfrac{1}{4}$. $\\vec{b} = -\\vec{a}$: samma lutning (motsatt riktning räknas som parallell). $\\vec{c} = 2\\vec{a}$: lutning $\\dfrac{2}{8} = \\dfrac{1}{4}$ — parallell.
 
-$\\vec{d}$: lutning $\\frac{2}{4} = \\frac{1}{2} \\neq \\frac{1}{4}$ — INTE parallell med de övriga.
+$\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE parallell med de övriga.
 
 ($\\vec{b}$ är den MOTSATTA vektorn till $\\vec{a}$, inte samma — riktningen skiljer.)
 
@@ -25385,7 +25385,7 @@ $$ x_1 = -1 - 3 = -4 \\qquad x_2 = -1 + 3 = 2 $$
 
 $$ p = -6 \\qquad q = 8 $$
 
-(I formeln blir då $-\\frac{p}{2} = +3$.)
+(I formeln blir då $-\\dfrac{p}{2} = +3$.)
 
 **Svar:** $p = -6$ och $q = 8$`,
         },
@@ -25605,9 +25605,9 @@ Diskriminanten är **positiv** (9), så ekvationen har två lösningar ($x = -1$
                 `Ekvationen har lösningen $x = 0$`,
             ],
             correct: 0,
-            solution: `Med diskriminanten 0 blir *pq*-formeln $x = -\\frac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
+            solution: `Med diskriminanten 0 blir *pq*-formeln $x = -\\dfrac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
 
-Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-\\frac{p}{2}$.
+Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-\\dfrac{p}{2}$.
 
 **Svar:** Ekvationen har exakt en lösning (dubbelrot).`,
         },
@@ -26012,7 +26012,7 @@ Det andra nollstället ligger lika långt på andra sidan:
 
 $$ x = 3 + 4 = 7 $$
 
-Kontroll: medelvärdet av $-1$ och $7$ är $\\frac{-1 + 7}{2} = 3 = x_s$. Stämmer!
+Kontroll: medelvärdet av $-1$ och $7$ är $\\dfrac{-1 + 7}{2} = 3 = x_s$. Stämmer!
 
 **Svar:** $x = 7$`,
         },
@@ -26098,7 +26098,7 @@ $$ x_s = -4 $$
             level: 3,
             question: `Funktionen $f(x) = x^2 + px + 11$ har det minsta värdet 2. Bestäm det **positiva** värde på $p$ som är möjligt.`,
             answer: { value: 6, unit: '' },
-            solution: `Nyckelinsikten: minsta värdet ligger i extrempunkten, vars $x$-koordinat är $x_s = -\\frac{p}{2}$. Sätt in den i funktionen och kräv att värdet blir 2.
+            solution: `Nyckelinsikten: minsta värdet ligger i extrempunkten, vars $x$-koordinat är $x_s = -\\dfrac{p}{2}$. Sätt in den i funktionen och kräv att värdet blir 2.
 
 $$ f\\left(-\\frac{p}{2}\\right) = \\left(-\\frac{p}{2}\\right)^2 + p\\left(-\\frac{p}{2}\\right) + 11 = \\frac{p^2}{4} - \\frac{p^2}{2} + 11 = 11 - \\frac{p^2}{4} $$
 
@@ -26802,7 +26802,7 @@ Fällan i alternativet med $2k + 1$ två gånger: det visar bara fallet där tal
 
 $$ n + (n+1) + (n+2) + (n+3) + (n+4) = 5n + 10 = 5(n + 2) $$
 
-Uttrycket har faktorn 5, och $\\frac{5(n+2)}{5} = n + 2$ är ett heltal — summan är alltså alltid delbar med 5. v.s.v.
+Uttrycket har faktorn 5, och $\\dfrac{5(n+2)}{5} = n + 2$ är ett heltal — summan är alltså alltid delbar med 5. v.s.v.
 
 (Ett enskilt exempel räcker inte, och "$5n$ delbart + 10 delbart" är visserligen sant men först faktoriseringen $5(n+2)$ gör argumentet komplett i ett steg.)
 
@@ -27053,7 +27053,7 @@ $$ x = \\frac{10}{4} \\cdot 6 = 15 $$
             level: 2,
             question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
             choices: [
-                `Ja — alla vinklar är 90° och sidförhållandena är lika ($\\frac{4}{6} = \\frac{6}{9} = \\frac{2}{3}$)`,
+                `Ja — alla vinklar är 90° och sidförhållandena är lika ($\\dfrac{4}{6} = \\dfrac{6}{9} = \\dfrac{2}{3}$)`,
                 `Nej — sidorna är olika långa`,
                 `Nej — sidförhållandena är olika`,
                 `Det går inte att avgöra`,
@@ -27090,7 +27090,7 @@ $$ O = 12 \\cdot 2{,}5 = 30 $$
             correct: 0,
             solution: `Nyckelinsikten: regeln "ett villkor räcker" gäller **bara trianglar**. För fyrhörningar måste båda villkoren kontrolleras.
 
-Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) har båda fyra räta vinklar, men sidförhållandena $\\frac{1}{1}$ och $\\frac{1}{5}$ är olika — de är inte likformiga.
+Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) har båda fyra räta vinklar, men sidförhållandena $\\dfrac{1}{1}$ och $\\dfrac{1}{5}$ är olika — de är inte likformiga.
 
 **Svar:** Nej — sidförhållandena måste också kontrolleras.`,
         },
@@ -27120,7 +27120,7 @@ Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) 
             level: 1,
             question: `Två trianglar är likformiga. Den ena har sidorna 3, 4 och 5 cm. Den andra har sidorna 6, 8 och $x$ cm. Bestäm $x$.`,
             answer: { value: 10, unit: 'cm' },
-            solution: `Skalfaktorn är $\\frac{6}{3} = 2$ — alla sidor i den stora triangeln är dubbelt så långa:
+            solution: `Skalfaktorn är $\\dfrac{6}{3} = 2$ — alla sidor i den stora triangeln är dubbelt så långa:
 
 $$ x = 5 \\cdot 2 = 10 $$
 
@@ -27276,7 +27276,7 @@ $$ 10x = 6(x + 4) $$
 
 $$ 10x = 6x + 24 \\iff 4x = 24 \\iff x = 6 $$
 
-Kontroll: $\\frac{6}{10} = 0{,}6$ och $\\frac{6}{6+4} = 0{,}6$. Stämmer!
+Kontroll: $\\dfrac{6}{10} = 0{,}6$ och $\\dfrac{6}{6+4} = 0{,}6$. Stämmer!
 
 **Svar:** $AD = 6$ cm`,
         },
@@ -27556,7 +27556,7 @@ En sträcka är positiv, så $y = 6$ (hela kordan är 12).
             level: 1,
             question: `Lös potensekvationen $x^5 = 100$. Svara med två decimaler.`,
             answer: { value: 2.51, unit: '', tol: 0.02 },
-            solution: `Upphöj båda led till $\\frac{1}{5}$ (eller dra femte roten ur):
+            solution: `Upphöj båda led till $\\dfrac{1}{5}$ (eller dra femte roten ur):
 
 $$ x = 100^{1/5} = \\sqrt[5]{100} = 2{,}511\\ldots \\approx 2{,}51 $$
 
@@ -27946,7 +27946,7 @@ $$ y = 5\\,000 \\cdot 1{,}03^{10} = 5\\,000 \\cdot 1{,}3439\\ldots \\approx 6\\,
             level: 1,
             question: `Ekvationen $1{,}2 = 1{,}023^x$ ska lösas algebraiskt. Vilket är rätt tillvägagångssätt?`,
             choices: [
-                `Logaritmera båda led och multiplicera ner exponenten: $x = \\frac{\\lg 1{,}2}{\\lg 1{,}023}$`,
+                `Logaritmera båda led och multiplicera ner exponenten: $x = \\dfrac{\\lg 1{,}2}{\\lg 1{,}023}$`,
                 `Dividera båda led med 1,023`,
                 `Dra roten ur båda led`,
                 `Multiplicera båda led med x`,
@@ -28062,7 +28062,7 @@ $$ x = \\frac{\\lg 1{,}5}{\\lg 1{,}08} = 5{,}268\\ldots \\approx 5{,}3 $$
                 `$x = \\log_4 9$`,
                 `$x = \\log_9 4$`,
                 `$x = \\sqrt[4]{9}$`,
-                `$x = \\frac{9}{4}$`,
+                `$x = \\dfrac{9}{4}$`,
             ],
             correct: 0,
             solution: `Basen är 4 och resultatet 9 — lösningen är "4-logaritmen för 9":

@@ -122,7 +122,7 @@ närheten som vi har prefix för, t.ex. $10^6$. **OBS!** När vi ökar
 tiopotensen från $10^5$ till $10^6$ gör vi tiopotensen 10 gånger så stor.
 För att talet ska behålla sin storlek måste vi samtidigt göra talet framför
 tiopotensen 10 "gånger så litet", dvs. 2,7 ska då ändras till
-$\frac{2{,}7}{10} = 0{,}27$:
+$\dfrac{2{,}7}{10} = 0{,}27$:
 
 $$
 2{,}7 \cdot 10^5\ \mathrm{N} = 0{,}27 \cdot 10^6\ \mathrm{N} = 0{,}27\ \mathrm{MN}

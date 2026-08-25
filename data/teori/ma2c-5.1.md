@@ -18,7 +18,7 @@ algebraiska metoder — antingen med potenslagar eller med rotuttryck.
 ::: exempel "Exempel 1 — Lös potensekvationen"
 **Lös potensekvationen $x^7 = 860$.**
 
-**Metod 1: Med potenslagar.** Vi upphöjer båda led till $\frac{1}{7}$:
+**Metod 1: Med potenslagar.** Vi upphöjer båda led till $\dfrac{1}{7}$:
 
 $$
 x = 860^{1/7} \approx 2{,}63 \quad \text{(slås på räknaren)}

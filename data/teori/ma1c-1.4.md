@@ -67,7 +67,7 @@ $$
 
 Vi kan nu förkorta med 7 och 6, eftersom de faktorerna finns i både täljare
 och nämnare. **OBS!** När 7 och 6 förkortas i täljaren får vi 1 kvar,
-eftersom $\frac{7 \cdot 6}{7 \cdot 6} = 1$:
+eftersom $\dfrac{7 \cdot 6}{7 \cdot 6} = 1$:
 
 $$
 \frac{7 \cdot 6}{6 \cdot 6 \cdot 7 \cdot 3} = \frac{1}{6 \cdot 3} = \frac{1}{18}
@@ -92,9 +92,9 @@ $$
 
 ::: härledning "Bevis — Division med bråk"
 Vi bevisar regeln för division med bråk. Anta att vi dividerar två
-godtyckliga bråk $\frac{a}{b}$ och $\frac{c}{d}$. För att få 1 i nämnaren
+godtyckliga bråk $\dfrac{a}{b}$ och $\dfrac{c}{d}$. För att få 1 i nämnaren
 förlänger vi bråket med inversen till bråket i nämnaren, dvs. med
-$\frac{d}{c}$:
+$\dfrac{d}{c}$:
 
 $$
 \dfrac{\;\dfrac{a}{b}\;}{\;\dfrac{c}{d}\;}
@@ -137,7 +137,7 @@ $$
 
 **c)** Här har vi enbart ett bråk i nämnaren, men samma regel gäller
 fortfarande. En del tycker att det är lättare om man skriver om 5 som ett
-bråk, dvs. som $\frac{5}{1}$:
+bråk, dvs. som $\dfrac{5}{1}$:
 
 $$
 5 \Big/ \frac{3}{4} = \frac{5}{1} \Big/ \frac{3}{4} = \frac{5}{1} \cdot \frac{4}{3} = \frac{20}{3}
@@ -146,7 +146,7 @@ $$
 **Svar:** $\dfrac{20}{3}$
 
 **d)** På liknande sätt som i c-uppgiften skriver vi om 12 som
-$\frac{12}{1}$ och beräknar sedan som vanligt:
+$\dfrac{12}{1}$ och beräknar sedan som vanligt:
 
 $$
 \frac{2}{3} \Big/ 12 = \frac{2}{3} \Big/ \frac{12}{1} = \frac{2}{3} \cdot \frac{1}{12}

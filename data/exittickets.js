@@ -1084,7 +1084,7 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband uttrycker Newtons andra lag (accelerationslagen)?',
     choices: [
-      '$F_\\mathrm{R} = \\frac{m}{a}$',
+      '$F_\\mathrm{R} = \\dfrac{m}{a}$',
       '$F_\\mathrm{R} = m \\cdot a$',
       '$F_\\mathrm{R} = m + a$',
       '$a = F_\\mathrm{R} \\cdot m$',
@@ -1298,10 +1298,10 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband ger tyngdkraften på ett föremål?',
     choices: [
-      '$F_\\mathrm{G} = \\frac{m}{g}$',
+      '$F_\\mathrm{G} = \\dfrac{m}{g}$',
       '$F_\\mathrm{G} = m \\cdot g$',
       '$F_\\mathrm{G} = m + g$',
-      '$F_\\mathrm{G} = \\frac{g}{m}$',
+      '$F_\\mathrm{G} = \\dfrac{g}{m}$',
     ],
     correct: 1,
     why: [
@@ -1365,16 +1365,16 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband är Newtons gravitationslag?',
     choices: [
-      '$F_\\mathrm{G} = G \\cdot \\frac{m_1 + m_2}{r}$',
-      '$F_\\mathrm{G} = \\frac{G \\cdot r^{2}}{m_1 \\cdot m_2}$',
-      '$F_\\mathrm{G} = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}$',
+      '$F_\\mathrm{G} = G \\cdot \\dfrac{m_1 + m_2}{r}$',
+      '$F_\\mathrm{G} = \\dfrac{G \\cdot r^{2}}{m_1 \\cdot m_2}$',
+      '$F_\\mathrm{G} = G \\cdot \\dfrac{m_1 \\cdot m_2}{r^{2}}$',
       '$F_\\mathrm{G} = G \\cdot m_1 \\cdot m_2 \\cdot r^{2}$',
     ],
     correct: 2,
     why: [
       'Massorna ska multipliceras med varandra, inte adderas, och avståndet ska stå upphöjt till två i nämnaren, inte i första potens.',
       'Detta har täljare och nämnare omvänt — avståndet ska stå i nämnaren (kraften minskar med avståndet), inte i täljaren.',
-      'Newtons gravitationslag ger gravitationskraften som $F_\\mathrm{G} = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}$ — massorna multipliceras med varandra och delas med avståndet i kvadrat.',
+      'Newtons gravitationslag ger gravitationskraften som $F_\\mathrm{G} = G \\cdot \\dfrac{m_1 \\cdot m_2}{r^{2}}$ — massorna multipliceras med varandra och delas med avståndet i kvadrat.',
       'Avståndet *r* ska stå i nämnaren upphöjt till två, inte multipliceras i täljaren — annars skulle kraften öka med avståndet, vilket är fel.',
     ],
   },
@@ -1413,14 +1413,14 @@ window.EXITTICKETS = {
   {
     question: 'Genom att sätta $F_\\mathrm{G} = m \\cdot g$ lika med Newtons gravitationslag kan man härleda ett uttryck för tyngdfaktorn *g* vid jordytan. Vilket blir uttrycket (med $m_j$ som jordens massa och *r* som jordens radie)?',
     choices: [
-      '$g = G \\cdot \\frac{m_j}{r^{2}}$',
+      '$g = G \\cdot \\dfrac{m_j}{r^{2}}$',
       '$g = G \\cdot m_j \\cdot r^{2}$',
-      '$g = \\frac{G}{m_j \\cdot r^{2}}$',
-      '$g = G \\cdot \\frac{r^{2}}{m_j}$',
+      '$g = \\dfrac{G}{m_j \\cdot r^{2}}$',
+      '$g = G \\cdot \\dfrac{r^{2}}{m_j}$',
     ],
     correct: 0,
     why: [
-      'Genom att dividera båda led med föremålets massa *m* i $m \\cdot g = G \\cdot \\frac{m \\cdot m_j}{r^{2}}$ försvinner *m* och kvar blir $g = G \\cdot \\frac{m_j}{r^{2}}$.',
+      'Genom att dividera båda led med föremålets massa *m* i $m \\cdot g = G \\cdot \\dfrac{m \\cdot m_j}{r^{2}}$ försvinner *m* och kvar blir $g = G \\cdot \\dfrac{m_j}{r^{2}}$.',
       'Jordens radie *r* ska stå i nämnaren upphöjt till två, inte multipliceras i täljaren.',
       'Jordens massa $m_j$ ska stå i täljaren tillsammans med *G*, inte i nämnaren.',
       'Detta har täljare och nämnare omvänt — jordens massa $m_j$ ska stå i täljaren och $r^2$ i nämnaren.',
@@ -1463,7 +1463,7 @@ window.EXITTICKETS = {
     choices: [
       '$F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N}$',
       '$F_\\mathrm{f} = \\mu + F_\\mathrm{N}$',
-      '$F_\\mathrm{f} = \\frac{F_\\mathrm{N}}{\\mu}$',
+      '$F_\\mathrm{f} = \\dfrac{F_\\mathrm{N}}{\\mu}$',
       '$F_\\mathrm{f} = \\mu \\cdot m$',
     ],
     correct: 0,
@@ -1535,7 +1535,7 @@ window.EXITTICKETS = {
     question: 'Vilket uttryck ger tyngdkraftens komposant NEDFÖR ett lutande plan med lutningsvinkeln *α*?',
     choices: [
       '$F_1 = m \\cdot g \\cdot \\cos \\alpha$',
-      '$F_1 = \\frac{m \\cdot g}{\\sin \\alpha}$',
+      '$F_1 = \\dfrac{m \\cdot g}{\\sin \\alpha}$',
       '$F_1 = m \\cdot g$',
       '$F_1 = m \\cdot g \\cdot \\sin \\alpha$',
     ],
@@ -1813,7 +1813,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Detta är för litet — kontrollera att du delat den resulterande kraften med HELA systemets massa ($4{,}0\\ \\mathrm{kg}$), inte med en enskild vikt.',
-      'Resulterande kraft: $F_\\mathrm{R} = (3{,}0 - 1{,}0) \\cdot 10 = 20\\ \\mathrm{N}$. Total massa: $m_\\text{tot} = 3{,}0 + 1{,}0 = 4{,}0\\ \\mathrm{kg}$. Det ger $a = \\frac{20}{4{,}0} = 5{,}0\\ \\mathrm{m/s^2}$.',
+      'Resulterande kraft: $F_\\mathrm{R} = (3{,}0 - 1{,}0) \\cdot 10 = 20\\ \\mathrm{N}$. Total massa: $m_\\text{tot} = 3{,}0 + 1{,}0 = 4{,}0\\ \\mathrm{kg}$. Det ger $a = \\dfrac{20}{4{,}0} = 5{,}0\\ \\mathrm{m/s^2}$.',
       'Detta motsvarar tyngdfaktorn $g$, inte systemets acceleration.',
       'Detta är den resulterande kraften i newton, inte accelerationen — den ska delas med systemets totala massa.',
     ],
@@ -1877,7 +1877,7 @@ window.EXITTICKETS = {
     choices: [
       '$W = F \\cdot t$',
       '$W = m \\cdot a$',
-      '$W = \\frac{F}{s}$',
+      '$W = \\dfrac{F}{s}$',
       '$W = F_\\mathrm{s} \\cdot s$',
     ],
     correct: 3,
@@ -1937,7 +1937,7 @@ window.EXITTICKETS = {
   {
     question: 'Vilken formel ger lägesenergin $E_\\mathrm{p}$?',
     choices: [
-      '$E_\\mathrm{p} = \\frac{m \\cdot v^{2}}{2}$',
+      '$E_\\mathrm{p} = \\dfrac{m \\cdot v^{2}}{2}$',
       '$E_\\mathrm{p} = m \\cdot g \\cdot h$',
       '$E_\\mathrm{p} = F \\cdot s$',
       '$E_\\mathrm{p} = m \\cdot g$',
@@ -2016,9 +2016,9 @@ window.EXITTICKETS = {
     question: 'Vilken formel ger rörelseenergin?',
     choices: [
       '$E_\\mathrm{k} = m \\cdot v$',
-      '$E_\\mathrm{k} = \\frac{m \\cdot v}{2}$',
+      '$E_\\mathrm{k} = \\dfrac{m \\cdot v}{2}$',
       '$E_\\mathrm{k} = m \\cdot g \\cdot h$',
-      '$E_\\mathrm{k} = \\frac{m \\cdot v^{2}}{2}$',
+      '$E_\\mathrm{k} = \\dfrac{m \\cdot v^{2}}{2}$',
     ],
     correct: 3,
     why: [
@@ -2056,7 +2056,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Detta fås om man glömmer att dela med två efter att ha kvadrerat hastigheten.',
-      'Insättning i $E_\\mathrm{k} = \\frac{m \\cdot v^{2}}{2}$ ger $\\frac{4{,}0 \\cdot 5{,}0^{2}}{2} = \\frac{100}{2} = 50\\ \\mathrm{J}$.',
+      'Insättning i $E_\\mathrm{k} = \\dfrac{m \\cdot v^{2}}{2}$ ger $\\dfrac{4{,}0 \\cdot 5{,}0^{2}}{2} = \\dfrac{100}{2} = 50\\ \\mathrm{J}$.',
       'Detta motsvarar bara $m \\cdot v$ utan att hastigheten kvadrerats.',
       'Detta är för litet — kontrollera att hastigheten verkligen kvadrerats innan division med två.',
     ],
@@ -2118,7 +2118,7 @@ window.EXITTICKETS = {
       '$E_\\mathrm{m} = E_\\mathrm{p} - E_\\mathrm{k}$',
       '$E_\\mathrm{m} = E_\\mathrm{p} + E_\\mathrm{k}$',
       '$E_\\mathrm{m} = E_\\mathrm{p} \\cdot E_\\mathrm{k}$',
-      '$E_\\mathrm{m} = \\frac{E_\\mathrm{p}}{E_\\mathrm{k}}$',
+      '$E_\\mathrm{m} = \\dfrac{E_\\mathrm{p}}{E_\\mathrm{k}}$',
     ],
     correct: 1,
     why: [
@@ -2150,7 +2150,7 @@ window.EXITTICKETS = {
       'Antingen som skillnaden i mekanisk energi eller som $F_\\mathrm{f} \\cdot s$',
       'Bara genom att mäta temperaturökningen direkt',
       'Som $m \\cdot g \\cdot h$',
-      'Som $\\frac{m \\cdot v^{2}}{2}$ enbart',
+      'Som $\\dfrac{m \\cdot v^{2}}{2}$ enbart',
     ],
     correct: 0,
     why: [
@@ -2178,14 +2178,14 @@ window.EXITTICKETS = {
     question: 'Vilken formel definierar effekt?',
     choices: [
       '$P = \\Delta E \\cdot \\Delta t$',
-      '$P = \\frac{\\Delta E}{\\Delta t}$',
-      '$P = \\frac{\\Delta t}{\\Delta E}$',
+      '$P = \\dfrac{\\Delta E}{\\Delta t}$',
+      '$P = \\dfrac{\\Delta t}{\\Delta E}$',
       '$P = m \\cdot a$',
     ],
     correct: 1,
     why: [
       'Att multiplicera energi med tid ger inte rätt enhet eller rätt fysikaliskt samband för effekt.',
-      'Effekt definieras just som omvandlad energi per tidsenhet, $P = \\frac{\\Delta E}{\\Delta t}$.',
+      'Effekt definieras just som omvandlad energi per tidsenhet, $P = \\dfrac{\\Delta E}{\\Delta t}$.',
       'Detta är det omvända förhållandet — effekt är energi delat med tid, inte tvärtom.',
       '$m \\cdot a$ är Newtons andra lag och ger en kraft, inte en effekt.',
     ],
@@ -2643,7 +2643,7 @@ window.EXITTICKETS = {
     why: [
       'Tryckkraft och tryck har olika enheter (N respektive Pa) och olika innebörd — tryck tar dessutom hänsyn till hur stor area kraften fördelas över, vilket tryckkraften inte gör.',
       'Storleksförhållandet beror helt på arean: en liten area ger ett stort tryck även av en liten tryckkraft, och tvärtom. Det finns inget generellt "alltid större".',
-      'Just detta är den centrala skillnaden i avsnittet: $p = \\frac{F}{A}$ — tryckkraften fördelas på en area för att ge trycket.',
+      'Just detta är den centrala skillnaden i avsnittet: $p = \\dfrac{F}{A}$ — tryckkraften fördelas på en area för att ge trycket.',
       'Det är precis tvärtom: det är trycket som beror på arean ($p = F/A$), medan tryckkraften i sig är oberoende av hur den fördelas.',
     ],
   },
@@ -2706,7 +2706,7 @@ window.EXITTICKETS = {
 'fy1-5.3': [
   {
     question: 'Vilken formel gäller för vätsketrycket på djupet h i en vätska med densiteten ρ?',
-    choices: ['$p = \\frac{\\rho \\cdot g}{h}$', '$p = \\rho + g + h$', '$p = \\frac{F}{\\rho}$', '$p = \\rho \\cdot g \\cdot h$'],
+    choices: ['$p = \\dfrac{\\rho \\cdot g}{h}$', '$p = \\rho + g + h$', '$p = \\dfrac{F}{\\rho}$', '$p = \\rho \\cdot g \\cdot h$'],
     correct: 3,
     why: [
       'Här delas med djupet h istället för att multiplicera med det — men vätsketrycket ökar med djupet, det minskar inte.',
@@ -2864,7 +2864,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilken formel ger lyftkraften enligt Arkimedes princip?',
-    choices: ['$F_\\mathrm{L} = m \\cdot g$', '$F_\\mathrm{L} = \\frac{\\rho}{g \\cdot V}$', '$F_\\mathrm{L} = \\rho \\cdot V$', '$F_\\mathrm{L} = \\rho \\cdot g \\cdot V$'],
+    choices: ['$F_\\mathrm{L} = m \\cdot g$', '$F_\\mathrm{L} = \\dfrac{\\rho}{g \\cdot V}$', '$F_\\mathrm{L} = \\rho \\cdot V$', '$F_\\mathrm{L} = \\rho \\cdot g \\cdot V$'],
     correct: 3,
     why: [
       'Detta är den allmänna formeln för tyngdkraft. Den fångar inte det som är specifikt för Arkimedes princip: att lyftkraften beror på den undanträngda vätskans densitet och volym.',
@@ -2991,15 +2991,15 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband är ideala gaslagen för ett bestämt antal gasmolekyler?',
     choices: [
-      '$\\frac{p_1 \\cdot V_1}{T_1} = \\frac{p_2 \\cdot V_2}{T_2}$',
+      '$\\dfrac{p_1 \\cdot V_1}{T_1} = \\dfrac{p_2 \\cdot V_2}{T_2}$',
       '$p_1 \\cdot V_1 \\cdot T_1 = p_2 \\cdot V_2 \\cdot T_2$',
-      '$\\frac{p_1}{V_1 \\cdot T_1} = \\frac{p_2}{V_2 \\cdot T_2}$',
+      '$\\dfrac{p_1}{V_1 \\cdot T_1} = \\dfrac{p_2}{V_2 \\cdot T_2}$',
       '$p_1 + V_1 + T_1 = p_2 + V_2 + T_2$',
     ],
     correct: 0,
     why: [
-      'Ideala gaslagen säger att $\\frac{p \\cdot V}{T}$ är oförändrad mellan två tillstånd.',
-      'Att multiplicera in temperaturen rakt av ger fel samband — det är kvoten $\\frac{p \\cdot V}{T}$ som är konstant, inte produkten $p \\cdot V \\cdot T$.',
+      'Ideala gaslagen säger att $\\dfrac{p \\cdot V}{T}$ är oförändrad mellan två tillstånd.',
+      'Att multiplicera in temperaturen rakt av ger fel samband — det är kvoten $\\dfrac{p \\cdot V}{T}$ som är konstant, inte produkten $p \\cdot V \\cdot T$.',
       'Här står trycket ensamt i täljaren istället för att vara en del av produkten $p \\cdot V$ i täljaren tillsammans med volymen.',
       'Addition ger fel — p, V och T har olika enheter (tryck, volym, temperatur) och kan inte adderas rakt av.',
     ],
@@ -3050,7 +3050,7 @@ window.EXITTICKETS = {
       'Det här är kvoten $T_1/T_2$ istället för $T_2/T_1$ — trycket ska öka, inte minska, när temperaturen stiger.',
       'Vid konstant volym är trycket direkt proportionellt mot den absoluta temperaturen enligt ideala gaslagen — trycket kan alltså inte förbli oförändrat när temperaturen fördubblas.',
       'Det här vore rätt om temperaturen fyrdubblats, men den har bara fördubblats (från 200 K till 400 K).',
-      'Vid konstant volym ger $\\frac{p_1}{T_1} = \\frac{p_2}{T_2}$ att $p_2 = p_1 \\cdot \\frac{T_2}{T_1} = 100 \\cdot \\frac{400}{200} = 200$ kPa — en fördubblad absolut temperatur ger dubbelt så högt tryck.',
+      'Vid konstant volym ger $\\dfrac{p_1}{T_1} = \\dfrac{p_2}{T_2}$ att $p_2 = p_1 \\cdot \\dfrac{T_2}{T_1} = 100 \\cdot \\dfrac{400}{200} = 200$ kPa — en fördubblad absolut temperatur ger dubbelt så högt tryck.',
     ],
   },
   {
@@ -3090,10 +3090,10 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband gäller för en hydraulisk domkraft enligt Pascals princip?',
-    choices: ['$\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$', '$F_1 \\cdot A_1 = F_2 \\cdot A_2$', '$F_1 + A_1 = F_2 + A_2$', '$\\frac{A_1}{F_1} = \\frac{F_2}{A_2}$'],
+    choices: ['$\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2}$', '$F_1 \\cdot A_1 = F_2 \\cdot A_2$', '$F_1 + A_1 = F_2 + A_2$', '$\\dfrac{A_1}{F_1} = \\dfrac{F_2}{A_2}$'],
     correct: 0,
     why: [
-      'Eftersom trycket är detsamma i båda kolvarna ($p_1 = p_2$) gäller $\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$.',
+      'Eftersom trycket är detsamma i båda kolvarna ($p_1 = p_2$) gäller $\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2}$.',
       'Att multiplicera kraft och area rakt av motsvarar inte att trycken (kraft delat med area) är lika stora på båda sidor.',
       'Addition av kraft och area ger ingen fysikaliskt meningsfull storhet — det är kvoterna (trycken) som ska vara lika.',
       'Kvoterna är felvända på ena sidan jämfört med den andra — det ska vara kraft delat med area på båda sidor.',
@@ -3122,7 +3122,7 @@ window.EXITTICKETS = {
     why: [
       'Det här kommer av att areakvoten råkat vändas fel — det ska vara $A_2/A_1$, inte $A_1/A_2$, i uträkningen.',
       'Kraften blir inte oförändrad — hela poängen med olika stora kolvarea är att kraften förstärks.',
-      'Med $F_2 = F_1 \\cdot \\frac{A_2}{A_1} = 50 \\cdot \\frac{20}{2{,}0}$ blir kraften 500 N.',
+      'Med $F_2 = F_1 \\cdot \\dfrac{A_2}{A_1} = 50 \\cdot \\dfrac{20}{2{,}0}$ blir kraften 500 N.',
       'Det här är en tiopotens för högt — kontrollera att areakvoten $20/2{,}0 = 10$, inte 100, används i uträkningen.',
     ],
   },
@@ -3602,10 +3602,10 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband är Coulombs lag för kraften mellan två punktladdningar $Q_1$ och $Q_2$ på avståndet $r$?',
     choices: [
-      '$F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r}$',
-      '$F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2}$',
+      '$F = k \\cdot \\dfrac{Q_1 \\cdot Q_2}{r}$',
+      '$F = k \\cdot \\dfrac{Q_1 \\cdot Q_2}{r^2}$',
       '$F = k \\cdot Q_1 \\cdot Q_2 \\cdot r^2$',
-      '$F = k \\cdot \\frac{Q_1 + Q_2}{r^2}$',
+      '$F = k \\cdot \\dfrac{Q_1 + Q_2}{r^2}$',
     ],
     correct: 1,
     why: [
@@ -3686,8 +3686,8 @@ window.EXITTICKETS = {
     question: 'Vilket samband definierar elektrisk ström $I$ som funktion av laddningen $Q$ och tiden $t$?',
     choices: [
       '$I = Q \\cdot t$',
-      '$I = \\frac{t}{Q}$',
-      '$I = \\frac{Q}{t}$',
+      '$I = \\dfrac{t}{Q}$',
+      '$I = \\dfrac{Q}{t}$',
       '$I = Q^2 \\cdot t$',
     ],
     correct: 2,
@@ -3771,8 +3771,8 @@ window.EXITTICKETS = {
     choices: [
       '$U = Q \\cdot t$',
       '$U = Q \\cdot E$',
-      '$U = \\frac{Q}{E}$',
-      '$U = \\frac{E}{Q}$',
+      '$U = \\dfrac{Q}{E}$',
+      '$U = \\dfrac{E}{Q}$',
     ],
     correct: 3,
     why: [
@@ -3832,9 +3832,9 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband är Ohms lag?',
     choices: [
-      '$U = \\frac{R}{I}$',
+      '$U = \\dfrac{R}{I}$',
       '$U = R \\cdot I$',
-      '$U = \\frac{I}{R}$',
+      '$U = \\dfrac{I}{R}$',
       '$U = R + I$',
     ],
     correct: 1,
@@ -4000,7 +4000,7 @@ window.EXITTICKETS = {
   {
     question: 'Vilken formel gäller för ersättningsresistansen $R_\\text{tot}$ vid seriekoppling av resistorer?',
     choices: [
-      '$\\frac{1}{R_\\text{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2}$',
+      '$\\dfrac{1}{R_\\text{tot}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$',
       '$R_\\text{tot} = R_1 + R_2$',
       '$R_\\text{tot} = R_1 \\cdot R_2$',
       '$R_\\text{tot} = R_1 - R_2$',
@@ -4018,7 +4018,7 @@ window.EXITTICKETS = {
     choices: [
       '$R_\\text{tot} = R_1 + R_2$',
       '$R_\\text{tot} = R_1 - R_2$',
-      '$\\frac{1}{R_\\text{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2}$',
+      '$\\dfrac{1}{R_\\text{tot}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$',
       '$R_\\text{tot} = R_1 \\cdot R_2$',
     ],
     correct: 2,
@@ -5779,7 +5779,7 @@ window.EXITTICKETS = {
 'fy2-2.1': [
   {
     question: 'Vilket samband beskriver Hookes lag för en fjäder?',
-    choices: ['$F = m \\cdot a$', '$F = k \\cdot \\Delta l$', '$F = \\frac{k}{\\Delta l}$', '$F = k^{2} \\cdot \\Delta l$'],
+    choices: ['$F = m \\cdot a$', '$F = k \\cdot \\Delta l$', '$F = \\dfrac{k}{\\Delta l}$', '$F = k^{2} \\cdot \\Delta l$'],
     correct: 1,
     why: [
       'Detta är Newtons andra lag — sambandet mellan resulterande kraft, massa och acceleration. Det beskriver inte fjäderkraften.',
@@ -5836,9 +5836,9 @@ window.EXITTICKETS = {
     choices: ['0,80 N/m', '20 N/m', '4,2 N/m', '200 N/m'],
     correct: 1,
     why: [
-      'Detta fås om man multiplicerar kraft och förlängning istället för att dividera: $k = \\frac{F}{\\Delta l}$, inte $F \\cdot \\Delta l$.',
-      'Med Hookes lag $k = \\frac{F}{\\Delta l} = \\frac{4{,}0}{0{,}20} = 20$ N/m.',
-      'Detta stämmer inte med divisionen $\\frac{4{,}0}{0{,}20}$ — kontrollera uträkningen igen.',
+      'Detta fås om man multiplicerar kraft och förlängning istället för att dividera: $k = \\dfrac{F}{\\Delta l}$, inte $F \\cdot \\Delta l$.',
+      'Med Hookes lag $k = \\dfrac{F}{\\Delta l} = \\dfrac{4{,}0}{0{,}20} = 20$ N/m.',
+      'Detta stämmer inte med divisionen $\\dfrac{4{,}0}{0{,}20}$ — kontrollera uträkningen igen.',
       'Detta fås om man råkar dividera med 0,020 m istället för 0,20 m — kontrollera decimalplaceringen.',
     ],
   },
@@ -5874,11 +5874,11 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilken formel ger fjäderns totala mekaniska energi vid en svängning med amplituden *A*?',
-    choices: ['$E = k \\cdot A$', '$E = \\frac{k \\cdot A^{2}}{2}$', '$E = \\frac{k \\cdot A}{2}$', '$E = 2 \\cdot k \\cdot A^{2}$'],
+    choices: ['$E = k \\cdot A$', '$E = \\dfrac{k \\cdot A^{2}}{2}$', '$E = \\dfrac{k \\cdot A}{2}$', '$E = 2 \\cdot k \\cdot A^{2}$'],
     correct: 1,
     why: [
       'Amplituden ska vara kvadrerad i formeln, och resultatet ska halveras — annars stämmer inte enheten joule.',
-      'Fjäderns totala energi ges av $E = \\frac{k \\cdot A^{2}}{2}$ — samma form som ytan av triangeln i ett *F*-Δ*l*-diagram.',
+      'Fjäderns totala energi ges av $E = \\dfrac{k \\cdot A^{2}}{2}$ — samma form som ytan av triangeln i ett *F*-Δ*l*-diagram.',
       'Amplituden *A* ska vara kvadrerad ($A^2$), inte i första potens — annars stämmer inte uträkningen med areametoden i härledningen.',
       'Här är faktorn 2 placerad fel — den ska stå i nämnaren (division med 2), inte som en multiplikation.',
     ],
@@ -5907,7 +5907,7 @@ window.EXITTICKETS = {
       'Detta fås om man glömmer att kvadrera amplituden — men $A^2$ måste räknas ut innan multiplikationen med *k*.',
       'Detta fås om man glömmer att dela med 2 i formeln.',
       'Detta fås om man råkar kvadrera 0,020 istället för 0,20 — kontrollera decimalplaceringen på amplituden.',
-      'Med $E = \\frac{k \\cdot A^{2}}{2} = \\frac{10 \\cdot 0{,}20^{2}}{2} = 0{,}20$ J stämmer uträkningen.',
+      'Med $E = \\dfrac{k \\cdot A^{2}}{2} = \\dfrac{10 \\cdot 0{,}20^{2}}{2} = 0{,}20$ J stämmer uträkningen.',
     ],
   },
   {
@@ -5995,13 +5995,13 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket uttryck ger vinkelhastigheten ω för en vikt som svänger i en fjäder med fjäderkonstant *k* och massa *m*?',
-    choices: ['$\\omega = \\sqrt{\\frac{m}{k}}$', '$\\omega = \\frac{k}{m}$', '$\\omega = k \\cdot m$', '$\\omega = \\sqrt{\\frac{k}{m}}$'],
+    choices: ['$\\omega = \\sqrt{\\dfrac{m}{k}}$', '$\\omega = \\dfrac{k}{m}$', '$\\omega = k \\cdot m$', '$\\omega = \\sqrt{\\dfrac{k}{m}}$'],
     correct: 3,
     why: [
       'Bråket under rottecknet är omvänt här — det ska vara *k* delat med *m*, inte tvärtom.',
       'Rottecknet saknas — utan det stämmer inte enheten (rad/s).',
       'Detta uttryck saknar både rottecken och division — det stämmer varken dimensionsmässigt eller till formen.',
-      'Vinkelhastigheten för en fjäderpendel ges av $\\omega = \\sqrt{\\frac{k}{m}}$ — en styvare fjäder (större *k*) eller en lättare vikt (mindre *m*) ger snabbare svängning.',
+      'Vinkelhastigheten för en fjäderpendel ges av $\\omega = \\sqrt{\\dfrac{k}{m}}$ — en styvare fjäder (större *k*) eller en lättare vikt (mindre *m*) ger snabbare svängning.',
     ],
   },
   {
@@ -6028,21 +6028,21 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Periodtiden $T = 2\\pi \\sqrt{\\frac{m}{k}}$ beror enbart på massan *m* och fjäderkonstanten *k* — inte på hur långt fjädern dras ut.',
+      'Periodtiden $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ beror enbart på massan *m* och fjäderkonstanten *k* — inte på hur långt fjädern dras ut.',
       'Amplituden påverkar inte periodtiden alls — en svängning med stor eller liten amplitud tar lika lång tid.',
-      'Amplituden ingår faktiskt inte i formeln $T = 2\\pi \\sqrt{\\frac{m}{k}}$ — bara massan och fjäderkonstanten.',
+      'Amplituden ingår faktiskt inte i formeln $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ — bara massan och fjäderkonstanten.',
       'Massan *m* måste också vara med i formeln, inte bara fjäderkonstanten *k*.',
     ],
   },
   {
     question: 'Vilken formel ger periodtiden *T* för en vikt med massan *m* som hänger i en fjäder med fjäderkonstant *k*?',
-    choices: ['$T = 2\\pi \\sqrt{\\frac{k}{m}}$', '$T = \\frac{1}{2\\pi} \\sqrt{\\frac{m}{k}}$', '$T = 2\\pi \\cdot \\frac{m}{k}$', '$T = 2\\pi \\sqrt{\\frac{m}{k}}$'],
+    choices: ['$T = 2\\pi \\sqrt{\\dfrac{k}{m}}$', '$T = \\dfrac{1}{2\\pi} \\sqrt{\\dfrac{m}{k}}$', '$T = 2\\pi \\cdot \\dfrac{m}{k}$', '$T = 2\\pi \\sqrt{\\dfrac{m}{k}}$'],
     correct: 3,
     why: [
       'Bråket under rottecknet är omvänt — det ska vara massa delat med fjäderkonstant, inte tvärtom.',
       'Faktorn $2\\pi$ ska multipliceras, inte divideras.',
       'Rottecknet saknas i detta uttryck.',
-      'Periodtiden ges av $T = 2\\pi \\sqrt{\\frac{m}{k}}$ — en tyngre vikt ger längre period, en styvare fjäder (större *k*) ger kortare period.',
+      'Periodtiden ges av $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ — en tyngre vikt ger längre period, en styvare fjäder (större *k*) ger kortare period.',
     ],
   },
   {
@@ -6067,7 +6067,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Detta är kvoten $m/k = 0{,}25$ under rottecknet — men glöm inte att ta roten ur och sedan multiplicera med $2\\pi$.',
-      'Med $T = 2\\pi \\sqrt{\\frac{0{,}50}{2{,}0}} = 2\\pi \\sqrt{0{,}25} = 2\\pi \\cdot 0{,}50 \\approx 3{,}1$ s stämmer uträkningen.',
+      'Med $T = 2\\pi \\sqrt{\\dfrac{0{,}50}{2{,}0}} = 2\\pi \\sqrt{0{,}25} = 2\\pi \\cdot 0{,}50 \\approx 3{,}1$ s stämmer uträkningen.',
       'Detta är roten ur $m/k$ ($\\sqrt{0{,}25} = 0{,}50$), men faktorn $2\\pi$ saknas i uträkningen.',
       'Detta är dubbelt så stort som rätt svar — kontrollera om du råkat multiplicera med $4\\pi$ istället för $2\\pi$.',
     ],
@@ -6082,7 +6082,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Eftersom $T = 2\\pi \\sqrt{\\frac{m}{k}}$ beror periodtiden på massan — genom att hänga en annan vikt i samma fjäder ändras svängningstiden.',
+      'Eftersom $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ beror periodtiden på massan — genom att hänga en annan vikt i samma fjäder ändras svängningstiden.',
       'Amplituden påverkar inte periodtiden i en (idealisk) fjädersvängning.',
       'Hur långt man drar ut fjädern bestämmer bara amplituden, inte periodtiden.',
       'Tyngdaccelerationen *g* påverkar periodtiden för en pendel, men den förekommer inte alls i formeln för en fjädersvängning.',
@@ -6104,15 +6104,15 @@ window.EXITTICKETS = {
       'Massan påverkar inte periodtiden alls — en tung och en lätt pendelkula med samma längd svänger lika snabbt.',
       'Massan förekommer inte i formeln för periodtiden — den tar ut sig i härledningen, och pendellängden måste också vara med.',
       'Vid små utslag är periodtiden oberoende av utslagsvinkeln — det är en förutsättning för att formeln ska gälla.',
-      'Enligt $T = 2\\pi \\sqrt{\\frac{l}{g}}$ beror periodtiden bara på pendellängden *l* och tyngdaccelerationen *g* — inte på massan.',
+      'Enligt $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ beror periodtiden bara på pendellängden *l* och tyngdaccelerationen *g* — inte på massan.',
     ],
   },
   {
     question: 'Vilken formel ger periodtiden för en matematisk pendel vid små utslag?',
-    choices: ['$T = 2\\pi \\sqrt{\\frac{l}{g}}$', '$T = 2\\pi \\sqrt{\\frac{g}{l}}$', '$T = 2\\pi \\cdot \\frac{l}{g}$', '$T = \\frac{2\\pi}{\\sqrt{l \\cdot g}}$'],
+    choices: ['$T = 2\\pi \\sqrt{\\dfrac{l}{g}}$', '$T = 2\\pi \\sqrt{\\dfrac{g}{l}}$', '$T = 2\\pi \\cdot \\dfrac{l}{g}$', '$T = \\dfrac{2\\pi}{\\sqrt{l \\cdot g}}$'],
     correct: 0,
     why: [
-      'Periodtiden för en matematisk pendel vid små utslag ges av $T = 2\\pi \\sqrt{\\frac{l}{g}}$.',
+      'Periodtiden för en matematisk pendel vid små utslag ges av $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$.',
       'Bråket under rottecknet är omvänt — pendellängden ska stå i täljaren, tyngdaccelerationen i nämnaren.',
       'Rottecknet saknas i detta uttryck.',
       'I detta uttryck står *l* och *g* som en produkt under rottecknet, i nämnaren — det stämmer inte med den korrekta formeln.',
@@ -6135,7 +6135,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Varför gäller formeln $T = 2\\pi \\sqrt{\\frac{l}{g}}$ bara för små utslagsvinklar?',
+    question: 'Varför gäller formeln $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ bara för små utslagsvinklar?',
     choices: [
       'Eftersom snörets massa blir för stor vid stora vinklar',
       'Eftersom den återförande kraften bara är proportionell mot utslaget vid små vinklar, annars upphör rörelsen att vara harmonisk',
@@ -6157,7 +6157,7 @@ window.EXITTICKETS = {
     why: [
       'Detta är resultatet av $\\sqrt{l/g}$ ($\\sqrt{0{,}25} = 0{,}50$), men faktorn $2\\pi$ saknas.',
       'Detta stämmer inte med uträkningen — kontrollera att du tagit roten ur $l/g$ innan du multiplicerar med $2\\pi$.',
-      'Med $T = 2\\pi \\sqrt{\\frac{2{,}45}{9{,}82}} = 2\\pi \\sqrt{0{,}25} = 2\\pi \\cdot 0{,}50 \\approx 3{,}1$ s stämmer uträkningen.',
+      'Med $T = 2\\pi \\sqrt{\\dfrac{2{,}45}{9{,}82}} = 2\\pi \\sqrt{0{,}25} = 2\\pi \\cdot 0{,}50 \\approx 3{,}1$ s stämmer uträkningen.',
       'Detta är dubbelt så stort som rätt svar — kontrollera om du råkat multiplicera med $4\\pi$ istället för $2\\pi$.',
     ],
   },
@@ -6188,11 +6188,11 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband gäller mellan egenfrekvensen *f* och periodtiden *T*?',
-    choices: ['$f = T$', '$f = \\frac{1}{T}$', '$f = 2T$', '$f = T^{2}$'],
+    choices: ['$f = T$', '$f = \\dfrac{1}{T}$', '$f = 2T$', '$f = T^{2}$'],
     correct: 1,
     why: [
       'Frekvens och period är inte samma tal — de är varandras inverser.',
-      'Frekvensen är antalet svängningar per sekund, vilket är inversen av periodtiden: $f = \\frac{1}{T}$.',
+      'Frekvensen är antalet svängningar per sekund, vilket är inversen av periodtiden: $f = \\dfrac{1}{T}$.',
       'Detta samband stämmer inte dimensionsmässigt — frekvens och period är inverser av varandra, ingen faktor 2 är inblandad.',
       'Att kvadrera periodtiden ger inte frekvensen — sambandet är en enkel invers, $f = 1/T$.',
     ],
@@ -6262,12 +6262,12 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband ger vågens utbredningshastighet *v*?',
-    choices: ['$v = \\lambda \\cdot T$', '$v = \\frac{f}{\\lambda}$', '$v = f \\cdot \\lambda$', '$v = \\frac{T}{\\lambda}$'],
+    choices: ['$v = \\lambda \\cdot T$', '$v = \\dfrac{f}{\\lambda}$', '$v = f \\cdot \\lambda$', '$v = \\dfrac{T}{\\lambda}$'],
     correct: 2,
     why: [
       'Här är sambandet mellan våglängd och period felvänt — det ska vara en kvot, $\\lambda / T$, inte en produkt.',
       'Detta uttryck blandar ihop frekvens och våglängd på fel sätt — det korrekta sambandet är en produkt, $f \\cdot \\lambda$, inte en kvot.',
-      'Utbredningshastigheten ges av $v = \\frac{\\lambda}{T} = f \\cdot \\lambda$ — eftersom $T = 1/f$ blir de två formerna av samma samband.',
+      'Utbredningshastigheten ges av $v = \\dfrac{\\lambda}{T} = f \\cdot \\lambda$ — eftersom $T = 1/f$ blir de två formerna av samma samband.',
       'Bråket är omvänt — det ska vara våglängden delat med periodtiden, $\\lambda / T$, inte tvärtom.',
     ],
   },
@@ -6380,10 +6380,10 @@ window.EXITTICKETS = {
   },
   {
     question: 'Ett snöre svänger med tre bukar (andra övertonen). Vilket samband gäller mellan snörets längd $l$ och våglängden λ?',
-    choices: ['$l = \\frac{3\\lambda}{2}$', '$l = \\frac{\\lambda}{2}$', '$l = \\lambda$', '$l = 2\\lambda$'],
+    choices: ['$l = \\dfrac{3\\lambda}{2}$', '$l = \\dfrac{\\lambda}{2}$', '$l = \\lambda$', '$l = 2\\lambda$'],
     correct: 0,
     why: [
-      'Tre bukar innebär tre halva våglängder längs snöret: $l = 3 \\cdot \\frac{\\lambda}{2} = \\frac{3\\lambda}{2}$.',
+      'Tre bukar innebär tre halva våglängder längs snöret: $l = 3 \\cdot \\dfrac{\\lambda}{2} = \\dfrac{3\\lambda}{2}$.',
       'Det sambandet gäller för grundtonen med en enda buk, inte för tre bukar.',
       'Det sambandet gäller för första övertonen med två bukar, inte för tre bukar.',
       'Snörets längd motsvarar bara tre halva våglängder, inte två hela — det skulle kräva fyra bukar.',
@@ -6449,24 +6449,24 @@ window.EXITTICKETS = {
   },
   {
     question: 'I en öppen pipa (båda ändar öppna) med grundtonen, vilket samband gäller mellan pipans längd $l$ och våglängden λ?',
-    choices: ['$l = \\frac{\\lambda}{4}$', '$l = \\lambda$', '$l = \\frac{\\lambda}{2}$', '$l = 2\\lambda$'],
+    choices: ['$l = \\dfrac{\\lambda}{4}$', '$l = \\lambda$', '$l = \\dfrac{\\lambda}{2}$', '$l = 2\\lambda$'],
     correct: 2,
     why: [
       'Det sambandet gäller för grundtonen i en halvöppen pipa, inte i en öppen pipa.',
       'Det sambandet gäller för första övertonen (två bukar) i en öppen pipa, inte för grundtonen.',
-      'En öppen pipas grundton har en buk i varje ände och en nod i mitten, vilket motsvarar en halv våglängd över pipans längd: $l = \\frac{\\lambda}{2}$.',
+      'En öppen pipas grundton har en buk i varje ände och en nod i mitten, vilket motsvarar en halv våglängd över pipans längd: $l = \\dfrac{\\lambda}{2}$.',
       'Pipans längd i grundtonen är kortare än en hel våglängd — det skulle kräva fler bukar för en så lång pipa i förhållande till λ.',
     ],
   },
   {
-    question: 'En halvöppen pipa har längden $0{,}50\\ \\mathrm{m}$ och svänger i grundtonen ($n=1$). Formeln är $l = \\frac{(2n-1)\\cdot\\lambda}{4}$. Vad är våglängden?',
+    question: 'En halvöppen pipa har längden $0{,}50\\ \\mathrm{m}$ och svänger i grundtonen ($n=1$). Formeln är $l = \\dfrac{(2n-1)\\cdot\\lambda}{4}$. Vad är våglängden?',
     choices: ['$0{,}50\\ \\mathrm{m}$', '$0{,}25\\ \\mathrm{m}$', '$1{,}0\\ \\mathrm{m}$', '$2{,}0\\ \\mathrm{m}$'],
     correct: 3,
     why: [
       'Det är pipans längd, inte den sökta våglängden.',
       'Det fås om man förväxlar $l$ och λ direkt utan att lösa ut λ ur formeln.',
       'Det stämmer inte med insättningen — det motsvarar att man glömt faktorn 4 i nämnaren.',
-      'Med $n=1$ blir $l = \\frac{\\lambda}{4}$, så $\\lambda = 4 \\cdot l = 4 \\cdot 0{,}50 = 2{,}0\\ \\mathrm{m}$.',
+      'Med $n=1$ blir $l = \\dfrac{\\lambda}{4}$, så $\\lambda = 4 \\cdot l = 4 \\cdot 0{,}50 = 2{,}0\\ \\mathrm{m}$.',
     ],
   },
 ],
@@ -6485,7 +6485,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband gäller för ljudintensiteten från en punktformig ljudkälla med effekten $P$ på avståndet $r$?',
-    choices: ['$I = P \\cdot 4\\pi \\cdot r^{2}$', '$I = \\frac{P}{4\\pi \\cdot r^{2}}$', '$I = \\frac{4\\pi \\cdot r^{2}}{P}$', '$I = \\frac{P}{2\\pi \\cdot r}$'],
+    choices: ['$I = P \\cdot 4\\pi \\cdot r^{2}$', '$I = \\dfrac{P}{4\\pi \\cdot r^{2}}$', '$I = \\dfrac{4\\pi \\cdot r^{2}}{P}$', '$I = \\dfrac{P}{2\\pi \\cdot r}$'],
     correct: 1,
     why: [
       'Att multiplicera med arean skulle ge en orimligt stor intensitet på stort avstånd; intensiteten ska istället minska med avståndet.',
@@ -6496,7 +6496,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband definierar ljudnivån $L$ i decibel?',
-    choices: ['$L = 10 \\cdot \\lg\\!\\left(I \\cdot I_0\\right)$', '$L = \\frac{I}{I_0}$', '$L = 10 \\cdot \\lg\\!\\left(\\frac{I}{I_0}\\right)$', '$L = \\frac{\\lg I}{10}$'],
+    choices: ['$L = 10 \\cdot \\lg\\!\\left(I \\cdot I_0\\right)$', '$L = \\dfrac{I}{I_0}$', '$L = 10 \\cdot \\lg\\!\\left(\\dfrac{I}{I_0}\\right)$', '$L = \\dfrac{\\lg I}{10}$'],
     correct: 2,
     why: [
       'Ljudnivån bygger på kvoten mellan $I$ och $I_0$, inte på deras produkt.',
@@ -6528,12 +6528,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En punktformig ljudkälla sänder ut effekten $4\\pi\\ \\mathrm{W}$ jämnt åt alla håll. Vilken ljudintensitet uppmäts på avståndet $1{,}0\\ \\mathrm{m}$? (Formel: $I = \\frac{P}{4\\pi \\cdot r^{2}}$)',
+    question: 'En punktformig ljudkälla sänder ut effekten $4\\pi\\ \\mathrm{W}$ jämnt åt alla håll. Vilken ljudintensitet uppmäts på avståndet $1{,}0\\ \\mathrm{m}$? (Formel: $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$)',
     choices: ['$4\\pi\\ \\mathrm{W/m^{2}}$', '$1{,}0\\ \\mathrm{W/m^{2}}$', '$0{,}25\\ \\mathrm{W/m^{2}}$', '$16\\pi^{2}\\ \\mathrm{W/m^{2}}$'],
     correct: 1,
     why: [
       'Det är effekten $P$, inte den sökta intensiteten — arean i nämnaren gör att faktorerna $4\\pi$ tar ut varandra.',
-      'Med $P = 4\\pi\\ \\mathrm{W}$ och $r = 1{,}0\\ \\mathrm{m}$ blir $I = \\frac{4\\pi}{4\\pi \\cdot 1{,}0^{2}} = 1{,}0\\ \\mathrm{W/m^{2}}$.',
+      'Med $P = 4\\pi\\ \\mathrm{W}$ och $r = 1{,}0\\ \\mathrm{m}$ blir $I = \\dfrac{4\\pi}{4\\pi \\cdot 1{,}0^{2}} = 1{,}0\\ \\mathrm{W/m^{2}}$.',
       'Det skulle bara stämma om man glömt att $4\\pi$ i täljare och nämnare tar ut varandra och istället bara delat med 4.',
       'Det fås om man av misstag multiplicerar $P$ och arean istället för att dela dem.',
     ],
@@ -6656,7 +6656,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket samband beskriver brytningslagen för vattenvågor?',
-    choices: ['$\\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} = \\frac{\\lambda_1}{\\lambda_2}$', '$\\sin i \\cdot \\sin b = v_1 \\cdot v_2$', '$\\frac{\\sin i}{\\sin b} = \\frac{v_2}{v_1}$', '$i - b = \\frac{\\lambda_1}{\\lambda_2}$'],
+    choices: ['$\\dfrac{\\sin i}{\\sin b} = \\dfrac{v_1}{v_2} = \\dfrac{\\lambda_1}{\\lambda_2}$', '$\\sin i \\cdot \\sin b = v_1 \\cdot v_2$', '$\\dfrac{\\sin i}{\\sin b} = \\dfrac{v_2}{v_1}$', '$i - b = \\dfrac{\\lambda_1}{\\lambda_2}$'],
     correct: 0,
     why: [
       'Brytningslagen säger att kvoten mellan sinusvärdena för infalls- och brytningsvinkeln är lika med kvoten mellan hastigheterna, som i sin tur är lika med kvoten mellan våglängderna i respektive medium.',
@@ -6671,7 +6671,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Det värdet är större än 1 och kan inte vara ett sinusvärde — det tyder på att kvoten $v_1/v_2$ blivit omvänd.',
-      'Enligt brytningslagen är $\\sin b = \\sin i \\cdot \\frac{v_2}{v_1} = 0{,}80 \\cdot \\frac{3{,}0}{6{,}0} = 0{,}40$.',
+      'Enligt brytningslagen är $\\sin b = \\sin i \\cdot \\dfrac{v_2}{v_1} = 0{,}80 \\cdot \\dfrac{3{,}0}{6{,}0} = 0{,}40$.',
       'Det är samma värde som $\\sin i$ — det skulle innebära att vinkeln inte ändras alls vid brytningen, vilket bara stämmer om hastigheterna är lika.',
       'Det fås om man råkar dela med fel hastighetskvot (t.ex. en fjärdedel istället för en halv).',
     ],
@@ -6742,7 +6742,7 @@ window.EXITTICKETS = {
       'Det är själva vägskillnaden $\\Delta s$, inte den sökta våglängden.',
       'Det fås om man förväxlar $\\Delta s$ och λ och delar fel väg.',
       'Det skulle motsvara $\\Delta s = 2\\lambda$, vilket inte stämmer med villkoret för en nodlinje.',
-      'Med $n=0$ blir $\\Delta s = \\frac{1}{2}\\lambda$, så $\\lambda = 2 \\cdot \\Delta s = 2 \\cdot 1{,}5 = 3{,}0\\ \\mathrm{m}$.',
+      'Med $n=0$ blir $\\Delta s = \\dfrac{1}{2}\\lambda$, så $\\lambda = 2 \\cdot \\Delta s = 2 \\cdot 1{,}5 = 3{,}0\\ \\mathrm{m}$.',
     ],
   },
 ],
@@ -6898,7 +6898,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Enligt sambandet $B = k \\cdot \\frac{I}{d}$ — vad händer med den magnetiska flödestätheten om avståndet *d* till ledaren fördubblas, medan strömmen är oförändrad?',
+    question: 'Enligt sambandet $B = k \\cdot \\dfrac{I}{d}$ — vad händer med den magnetiska flödestätheten om avståndet *d* till ledaren fördubblas, medan strömmen är oförändrad?',
     choices: [
       '*B* fördubblas',
       '*B* halveras',
@@ -6908,7 +6908,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       '*B* är omvänt proportionell mot avståndet *d* — dubblas *d* halveras *B*, den fördubblas inte.',
-      'Eftersom *B* är omvänt proportionell mot *d* i formeln $B = k \\cdot \\frac{I}{d}$ ger en fördubbling av avståndet en halvering av flödestätheten.',
+      'Eftersom *B* är omvänt proportionell mot *d* i formeln $B = k \\cdot \\dfrac{I}{d}$ ger en fördubbling av avståndet en halvering av flödestätheten.',
       'Sambandet är linjärt omvänt (inte kvadratiskt) mot avståndet, så *B* blir hälften — inte en fjärdedel eller fyra gånger.',
       'Avståndet *d* står i nämnaren i formeln, så det påverkar definitivt storleken på *B*.',
     ],
@@ -6926,7 +6926,7 @@ window.EXITTICKETS = {
       'Detta motsvarar en beräkning där avståndet av misstag sattes till 1,0 m i stället för 0,10 m.',
       'Detta är hundra gånger för stort — en vanlig felkälla är att avrunda tiopotenserna fel vid uträkningen.',
       'Detta är hundra gånger för litet jämfört med det korrekta svaret.',
-      '$B = k \\cdot \\frac{I}{d} = 2 \\cdot 10^{-7} \\cdot \\frac{5{,}0}{0{,}10} = 1{,}0 \\cdot 10^{-5}\\ \\mathrm{T} = 10\\ \\mathrm{\\mu T}$.',
+      '$B = k \\cdot \\dfrac{I}{d} = 2 \\cdot 10^{-7} \\cdot \\dfrac{5{,}0}{0{,}10} = 1{,}0 \\cdot 10^{-5}\\ \\mathrm{T} = 10\\ \\mathrm{\\mu T}$.',
     ],
   },
 ],
@@ -6981,7 +6981,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I formeln $B = \\mu_0 \\cdot \\frac{n \\cdot I}{l}$ för en solenoid, vad representerar *n*?',
+    question: 'I formeln $B = \\mu_0 \\cdot \\dfrac{n \\cdot I}{l}$ för en solenoid, vad representerar *n*?',
     choices: [
       'Spolens längd',
       'Strömmen genom spolen',
@@ -7007,7 +7007,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Detta är tio gånger för litet jämfört med det korrekta svaret.',
-      '$B = \\mu_0 \\cdot \\frac{n \\cdot I}{l} = 4\\pi \\cdot 10^{-7} \\cdot \\frac{100 \\cdot 2{,}0}{0{,}50} \\approx 5{,}0 \\cdot 10^{-4}\\ \\mathrm{T} = 0{,}50\\ \\mathrm{mT}$.',
+      '$B = \\mu_0 \\cdot \\dfrac{n \\cdot I}{l} = 4\\pi \\cdot 10^{-7} \\cdot \\dfrac{100 \\cdot 2{,}0}{0{,}50} \\approx 5{,}0 \\cdot 10^{-4}\\ \\mathrm{T} = 0{,}50\\ \\mathrm{mT}$.',
       'Detta är tio gånger för stort jämfört med det korrekta svaret.',
       'Detta är hundra gånger för stort — kontrollera att längden är omvandlad till meter och att varvtalet inte räknats dubbelt.',
     ],
@@ -7068,7 +7068,7 @@ window.EXITTICKETS = {
     choices: [
       '$F = q \\cdot v \\cdot B$',
       '$F = B \\cdot I \\cdot l$',
-      '$F = k \\cdot \\frac{I}{d}$',
+      '$F = k \\cdot \\dfrac{I}{d}$',
       '$F = m \\cdot a$',
     ],
     correct: 0,
@@ -7118,7 +7118,7 @@ window.EXITTICKETS = {
     question: 'Vilken formel ger kraften på en rak strömförande ledare i ett magnetfält?',
     choices: [
       '$F = q \\cdot v \\cdot B$',
-      '$F = k \\cdot \\frac{I_1 \\cdot I_2 \\cdot l}{d}$',
+      '$F = k \\cdot \\dfrac{I_1 \\cdot I_2 \\cdot l}{d}$',
       '$F = m \\cdot a$',
       '$F = B \\cdot I \\cdot l$',
     ],
@@ -7133,14 +7133,14 @@ window.EXITTICKETS = {
   {
     question: 'Enligt härledningen i avsnittet, hur fås formeln $F = B \\cdot I \\cdot l$ ur $F = q \\cdot v \\cdot B$?',
     choices: [
-      'Genom att sätta in $Q = I \\cdot \\Delta t$ och $v = \\frac{l}{\\Delta t}$ i $F = q \\cdot v \\cdot B$, vilket ger $F = I \\cdot l \\cdot B$',
+      'Genom att sätta in $Q = I \\cdot \\Delta t$ och $v = \\dfrac{l}{\\Delta t}$ i $F = q \\cdot v \\cdot B$, vilket ger $F = I \\cdot l \\cdot B$',
       'Genom att anta att alla laddningar är stillastående i ledaren',
       'Genom att multiplicera bägge led med Newtons andra lag',
       'Genom att dividera bort tiden helt utan att ersätta den',
     ],
     correct: 0,
     why: [
-      'Genom att skriva den totala laddningen som $Q = I \\cdot \\Delta t$ och hastigheten som $v = \\frac{l}{\\Delta t}$, och sätta in dessa i $F = q \\cdot v \\cdot B$, förkortas $\\Delta t$ bort och kvar blir $F = I \\cdot l \\cdot B$.',
+      'Genom att skriva den totala laddningen som $Q = I \\cdot \\Delta t$ och hastigheten som $v = \\dfrac{l}{\\Delta t}$, och sätta in dessa i $F = q \\cdot v \\cdot B$, förkortas $\\Delta t$ bort och kvar blir $F = I \\cdot l \\cdot B$.',
       'Härledningen bygger tvärtom på att laddningarna rör sig genom ledaren med en hastighet *v* — annars skulle det inte finnas någon ström alls.',
       'Härledningen använder algebraisk insättning av uttryck för *Q* och *v*, inte Newtons andra lag.',
       'Tiden $\\Delta t$ förkortas bort naturligt genom insättningen, men den ersätts av uttrycken för laddning och hastighet på vägen — den försvinner inte utan anledning.',
@@ -7350,7 +7350,7 @@ window.EXITTICKETS = {
       '$e = l \\cdot v \\cdot B$',
       '$e = B \\cdot I \\cdot l$',
       '$e = q \\cdot v \\cdot B$',
-      '$e = k \\cdot \\frac{I}{d}$',
+      '$e = k \\cdot \\dfrac{I}{d}$',
     ],
     correct: 0,
     why: [
@@ -7455,9 +7455,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Ohms lag ger $I = \\frac{e}{R} = \\frac{0{,}30}{0{,}50} = 0{,}60\\ \\mathrm{A}$.',
+      'Ohms lag ger $I = \\dfrac{e}{R} = \\dfrac{0{,}30}{0{,}50} = 0{,}60\\ \\mathrm{A}$.',
       'Det fås om $e$ och $R$ multipliceras i stället för divideras: $0{,}30 \\cdot 0{,}50 = 0{,}15$.',
-      'Det fås om täljare och nämnare byts plats i divisionen: $\\frac{0{,}50}{0{,}30} \\approx 1{,}7$.',
+      'Det fås om täljare och nämnare byts plats i divisionen: $\\dfrac{0{,}50}{0{,}30} \\approx 1{,}7$.',
       'Det är tio gånger för stort — kontrollera decimalkommat i divisionen.',
     ],
   },
@@ -7540,12 +7540,12 @@ window.EXITTICKETS = {
     why: [
       'Med $\\Phi = B \\cdot A_\\perp$ blir $\\Phi = 0{,}20 \\cdot 0{,}50 = 0{,}10\\ \\mathrm{Wb}$.',
       'Det fås om $B$ och $A$ adderas i stället för multipliceras: $0{,}20 + 0{,}50 = 0{,}70$.',
-      'Det fås om arean divideras med flödestätheten i stället för att multipliceras: $\\frac{0{,}50}{0{,}20} = 2{,}5$.',
+      'Det fås om arean divideras med flödestätheten i stället för att multipliceras: $\\dfrac{0{,}50}{0{,}20} = 2{,}5$.',
       'Det uppstår om arean av misstag läses som 5,0 m² i stället för 0,50 m².',
     ],
   },
   {
-    question: 'Vad representerar minustecknet i induktionslagen $e = -\\frac{\\Delta \\Phi}{\\Delta t}$?',
+    question: 'Vad representerar minustecknet i induktionslagen $e = -\\dfrac{\\Delta \\Phi}{\\Delta t}$?',
     choices: [
       'Att spänningen alltid är negativ i praktiken och aldrig kan mätas som positiv',
       'Att det magnetiska flödet alltid minskar med tiden',
@@ -7570,8 +7570,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Med $e = N \\cdot \\frac{\\Delta \\Phi}{\\Delta t}$ blir beloppet $e = 100 \\cdot \\frac{0{,}020}{2{,}0} = 1{,}0\\ \\mathrm{V}$.',
-      'Det fås om antalet varv $N$ glöms bort och bara $\\frac{\\Delta \\Phi}{\\Delta t} = \\frac{0{,}020}{2{,}0}$ beräknas.',
+      'Med $e = N \\cdot \\dfrac{\\Delta \\Phi}{\\Delta t}$ blir beloppet $e = 100 \\cdot \\dfrac{0{,}020}{2{,}0} = 1{,}0\\ \\mathrm{V}$.',
+      'Det fås om antalet varv $N$ glöms bort och bara $\\dfrac{\\Delta \\Phi}{\\Delta t} = \\dfrac{0{,}020}{2{,}0}$ beräknas.',
       'Det fås om man glömmer att dividera med tiden och bara beräknar $N \\cdot \\Delta \\Phi = 100 \\cdot 0{,}020$.',
       'Det uppstår om flödesändringen av misstag läses som 0,20 Wb i stället för 0,020 Wb.',
     ],
@@ -7587,8 +7587,8 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Det fås om flödesändringen och tiden multipliceras i stället för divideras: $8{,}0 \\cdot 4{,}0 = 32$.',
-      'Det fås om kvoten tas omvänt: $\\frac{4{,}0}{8{,}0} = 0{,}50$.',
-      'Lutningen på grafen ger $e = \\frac{\\Delta \\Phi}{\\Delta t} = \\frac{8{,}0\\ \\mathrm{mWb}}{4{,}0\\ \\mathrm{s}} = 2{,}0\\ \\mathrm{mV}$.',
+      'Det fås om kvoten tas omvänt: $\\dfrac{4{,}0}{8{,}0} = 0{,}50$.',
+      'Lutningen på grafen ger $e = \\dfrac{\\Delta \\Phi}{\\Delta t} = \\dfrac{8{,}0\\ \\mathrm{mWb}}{4{,}0\\ \\mathrm{s}} = 2{,}0\\ \\mathrm{mV}$.',
       'Flödet ändras tvärtom snabbt just under dessa fyra sekunder — det är först därefter, när flödet ligger konstant, som den inducerade spänningen blir noll.',
     ],
   },
@@ -7637,7 +7637,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Det fås om man dividerar med $\\sqrt{2}$ i stället för att multiplicera: $\\frac{100}{\\sqrt{2}} \\approx 71$.',
+      'Det fås om man dividerar med $\\sqrt{2}$ i stället för att multiplicera: $\\dfrac{100}{\\sqrt{2}} \\approx 71$.',
       'Effektivvärdet $U$ och toppvärdet $\\hat{u}$ är olika storheter — de är inte lika stora.',
       'Det fås om man använder faktorn 2 i stället för $\\sqrt{2} \\approx 1{,}4$.',
       'Med $\\hat{u} = \\sqrt{2} \\cdot U$ blir $\\hat{u} = \\sqrt{2} \\cdot 100 \\approx 140\\ \\mathrm{V}$.',
@@ -7713,15 +7713,15 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband gäller mellan antal varv och spänning i en transformator?',
     choices: [
-      '$\\frac{N_1}{N_2} = \\frac{U_2}{U_1}$',
-      '$\\frac{N_1}{N_2} = \\frac{U_1}{U_2}$',
+      '$\\dfrac{N_1}{N_2} = \\dfrac{U_2}{U_1}$',
+      '$\\dfrac{N_1}{N_2} = \\dfrac{U_1}{U_2}$',
       '$N_1 \\cdot U_1 = N_2 \\cdot U_2$',
-      '$\\frac{N_1}{U_1} = \\frac{N_2}{U_2}$',
+      '$\\dfrac{N_1}{U_1} = \\dfrac{N_2}{U_2}$',
     ],
     correct: 1,
     why: [
-      'Kvoten på högerledet är omvänd — det ska vara $\\frac{U_1}{U_2}$, inte $\\frac{U_2}{U_1}$.',
-      'Förhållandet mellan antal varv motsvarar förhållandet mellan spänningarna: $\\frac{N_1}{N_2} = \\frac{U_1}{U_2}$.',
+      'Kvoten på högerledet är omvänd — det ska vara $\\dfrac{U_1}{U_2}$, inte $\\dfrac{U_2}{U_1}$.',
+      'Förhållandet mellan antal varv motsvarar förhållandet mellan spänningarna: $\\dfrac{N_1}{N_2} = \\dfrac{U_1}{U_2}$.',
       'Detta är en felaktig omskrivning — rätt korsprodukt är $N_1 \\cdot U_2 = N_2 \\cdot U_1$.',
       'Varv och spänning för samma spole ska inte paras ihop på detta sätt — det är kvoterna mellan spolarna som är lika.',
     ],
@@ -7736,10 +7736,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Det fås om kvoten $\\frac{U_1}{U_2}$ tas omvänt: $100 \\cdot \\frac{12}{120} = 10$.',
+      'Det fås om kvoten $\\dfrac{U_1}{U_2}$ tas omvänt: $100 \\cdot \\dfrac{12}{120} = 10$.',
       'Det stämmer bara om spänningen inte alls ändras mellan spolarna, vilket motsäger att transformatorn ska sänka spänningen.',
       'Det fås om man glömmer att dividera med $U_2$ och bara räknar $N_2 \\cdot U_1 = 100 \\cdot 120$.',
-      'Med $N_1 = N_2 \\cdot \\frac{U_1}{U_2}$ blir $N_1 = 100 \\cdot \\frac{120}{12} = 1\\,000\\ \\mathrm{varv}$.',
+      'Med $N_1 = N_2 \\cdot \\dfrac{U_1}{U_2}$ blir $N_1 = 100 \\cdot \\dfrac{120}{12} = 1\\,000\\ \\mathrm{varv}$.',
     ],
   },
   {
@@ -7755,7 +7755,7 @@ window.EXITTICKETS = {
       'En ideal transformator förbrukar i princip ingen energi — effekten in är densamma som effekten ut.',
       'Antalet varv i sig avgör spänningsförhållandet, inte spolens resistans, och det är inte anledningen till att strömmen ändras.',
       'Eftersom effekten är oförändrad ($P_1 = P_2$) och $P = U \\cdot I$, måste strömmen minska i samma proportion som spänningen ökar.',
-      'Strömförhållandet $\\frac{N_1}{N_2} = \\frac{I_2}{I_1}$ visar tvärtom att strömmen ändras precis som spänningen, fast omvänt.',
+      'Strömförhållandet $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$ visar tvärtom att strömmen ändras precis som spänningen, fast omvänt.',
     ],
   },
   {
@@ -7768,8 +7768,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Med $\\frac{N_1}{N_2} = \\frac{I_2}{I_1}$ blir $I_2 = \\frac{N_1}{N_2} \\cdot I_1 = 5 \\cdot 2{,}0 = 10\\ \\mathrm{A}$.',
-      'Det fås om kvoten tas omvänt: $I_2 = \\frac{I_1}{5} = \\frac{2{,}0}{5}$.',
+      'Med $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$ blir $I_2 = \\dfrac{N_1}{N_2} \\cdot I_1 = 5 \\cdot 2{,}0 = 10\\ \\mathrm{A}$.',
+      'Det fås om kvoten tas omvänt: $I_2 = \\dfrac{I_1}{5} = \\dfrac{2{,}0}{5}$.',
       'Det stämmer bara om strömmen är oförändrad, vilket motsäger att spänningen (och därmed strömmen) ändras med transformatorn.',
       'Det fås om man bara skriver av varvtalskvoten (5) utan att multiplicera med $I_1$.',
     ],
@@ -7804,7 +7804,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Det är masspektrometern (som bygger vidare på hastighetsväljaren) som bestämmer massan — och den behöver först känna till hastigheten.',
-      'Endast partiklar med hastigheten $v = \\frac{\\mathbb{E}}{B}$ passerar rätlinjigt genom hastighetsväljaren — övriga avböjs och fastnar.',
+      'Endast partiklar med hastigheten $v = \\dfrac{\\mathbb{E}}{B}$ passerar rätlinjigt genom hastighetsväljaren — övriga avböjs och fastnar.',
       'Hastighetsväljaren accelererar inte partiklarna, den filtrerar bara ut de som redan har rätt hastighet.',
       'Filtreringen sker på hastighet, inte direkt på laddningens storlek.',
     ],
@@ -7838,22 +7838,22 @@ window.EXITTICKETS = {
       'Det fås om $\\mathbb{E}$ och $B$ multipliceras i stället för divideras: $4{,}0 \\cdot 10^3 \\cdot 0{,}20 = 8{,}0 \\cdot 10^2$.',
       'Det uppstår om flödestätheten av misstag läses som 20 T i stället för 0,20 T.',
       'Det uppstår om fältstyrkan av misstag läses som $4{,}0 \\cdot 10^2$ V/m i stället för $4{,}0 \\cdot 10^3$ V/m.',
-      'Med $v = \\frac{\\mathbb{E}}{B}$ blir $v = \\frac{4{,}0 \\cdot 10^3}{0{,}20} = 2{,}0 \\cdot 10^{4}\\ \\mathrm{m/s}$.',
+      'Med $v = \\dfrac{\\mathbb{E}}{B}$ blir $v = \\dfrac{4{,}0 \\cdot 10^3}{0{,}20} = 2{,}0 \\cdot 10^{4}\\ \\mathrm{m/s}$.',
     ],
   },
   {
     question: 'Vilken formel används för att bestämma en partikels massa med en masspektrometer?',
     choices: [
-      '$m = \\frac{v \\cdot r}{q \\cdot B}$',
+      '$m = \\dfrac{v \\cdot r}{q \\cdot B}$',
       '$m = q \\cdot B \\cdot r \\cdot v$',
-      '$m = \\frac{q \\cdot B \\cdot r}{v}$',
-      '$m = \\frac{q \\cdot v}{B \\cdot r}$',
+      '$m = \\dfrac{q \\cdot B \\cdot r}{v}$',
+      '$m = \\dfrac{q \\cdot v}{B \\cdot r}$',
     ],
     correct: 2,
     why: [
       'Täljare och nämnare är omvända jämfört med det korrekta uttrycket.',
       'Här multipliceras alla storheter, men hastigheten $v$ ska stå i nämnaren, inte som en faktor i täljaren.',
-      'Masspektrometerns formel för massan är $m = \\frac{q \\cdot B \\cdot r}{v}$.',
+      'Masspektrometerns formel för massan är $m = \\dfrac{q \\cdot B \\cdot r}{v}$.',
       'Här har $B$ och $r$ bytt plats jämfört med det korrekta uttrycket.',
     ],
   },
@@ -7978,9 +7978,9 @@ window.EXITTICKETS = {
   {
     question: 'Vilket samband ger Hallspänningen $U$ i en magnetfältsmätare, uttryckt i elektronernas hastighet $v$, plattans bredd $d$ och flödestätheten $B$?',
     choices: [
-      '$U = \\frac{v \\cdot B}{d}$',
+      '$U = \\dfrac{v \\cdot B}{d}$',
       '$U = v \\cdot d \\cdot B$',
-      '$U = \\frac{d}{v \\cdot B}$',
+      '$U = \\dfrac{d}{v \\cdot B}$',
       '$U = v + d + B$',
     ],
     correct: 1,
@@ -8010,17 +8010,17 @@ window.EXITTICKETS = {
   {
     question: 'Magnetfältsmätaren har uppmätt Hallspänningen $U$ och känner till elektronernas hastighet $v$ och plattans bredd $d$. Hur beräknas den magnetiska flödestätheten $B$?',
     choices: [
-      '$B = \\frac{U}{v}$',
-      '$B = \\frac{U}{d}$',
+      '$B = \\dfrac{U}{v}$',
+      '$B = \\dfrac{U}{d}$',
       '$B = U \\cdot v \\cdot d$',
-      '$B = \\frac{U}{v \\cdot d}$',
+      '$B = \\dfrac{U}{v \\cdot d}$',
     ],
     correct: 3,
     why: [
       'Det motsvarar att plattans bredd $d$ glöms bort i nämnaren.',
       'Det motsvarar att elektronernas hastighet $v$ glöms bort i nämnaren.',
       'Det fås om täljare och nämnare byts plats, det vill säga om man multiplicerar i stället för att dividera.',
-      'Ur $U = v \\cdot d \\cdot B$ löses $B$ ut som $B = \\frac{U}{v \\cdot d}$.',
+      'Ur $U = v \\cdot d \\cdot B$ löses $B$ ut som $B = \\dfrac{U}{v \\cdot d}$.',
     ],
   },
 ],
@@ -8048,14 +8048,14 @@ window.EXITTICKETS = {
     question: 'Vilket samband gäller mellan ljusets frekvens *f*, våglängd *λ* och ljushastigheten *c*?',
     choices: [
       '$f = \\lambda \\cdot c$',
-      '$f = \\frac{c}{\\lambda}$',
+      '$f = \\dfrac{c}{\\lambda}$',
       '$\\lambda = f \\cdot c$',
       '$f = c - \\lambda$',
     ],
     correct: 1,
     why: [
       'Att multiplicera *c* och *λ* ger inte en frekvens — testa att sätta in enheterna (m/s gånger m blir inte 1/s).',
-      'Ljusets frekvens fås genom $f = \\frac{c}{\\lambda}$, precis som i genomgången.',
+      'Ljusets frekvens fås genom $f = \\dfrac{c}{\\lambda}$, precis som i genomgången.',
       'Detta beskriver inte sambandet mellan våglängd, frekvens och hastighet korrekt — testa att sätta in enheter så ser du att det inte stämmer.',
       'Frekvens och våglängd kan inte subtraheras meningsfullt från ljusets hastighet — sambandet är en kvot, inte en differens.',
     ],
@@ -8082,7 +8082,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Detta är bara ficklampans effekt *P* — kom ihåg att intensiteten fås genom att dela effekten med ytans area, inte bara läsa av *P*.',
-      'Ljusintensiteten fås genom $I = \\frac{P}{A} = \\frac{2{,}0}{4{,}0} = 0{,}5$ W/m².',
+      'Ljusintensiteten fås genom $I = \\dfrac{P}{A} = \\dfrac{2{,}0}{4{,}0} = 0{,}5$ W/m².',
       'Detta fås om man av misstag multiplicerar effekten med arean istället för att dela.',
       'Kontrollera uträkningen — division av 2,0 med 4,0 ger 0,5, inte 0,25.',
     ],
@@ -8099,7 +8099,7 @@ window.EXITTICKETS = {
     why: [
       'Intensiteten beror på avståndet i kvadrat, inte linjärt, så den minskar mer än bara en halvering.',
       'Intensiteten minskar när avståndet ökar — den ökar inte.',
-      'Eftersom $I = \\frac{P}{4\\pi \\cdot r^{2}}$ ger en fördubbling av *r* en area som är fyra gånger så stor, och alltså en intensitet som är en fjärdedel så stor.',
+      'Eftersom $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$ ger en fördubbling av *r* en area som är fyra gånger så stor, och alltså en intensitet som är en fjärdedel så stor.',
       'Intensiteten beror starkt av avståndet — den ändras kraftigt när *r* ändras.',
     ],
   },
@@ -8144,7 +8144,7 @@ window.EXITTICKETS = {
       '$n \\cdot \\lambda = d \\cdot \\sin\\alpha_n$',
       '$n \\cdot d = \\lambda \\cdot \\sin\\alpha_n$',
       '$\\lambda = n \\cdot d \\cdot \\sin\\alpha_n$',
-      '$n \\cdot \\lambda = \\frac{d}{\\sin\\alpha_n}$',
+      '$n \\cdot \\lambda = \\dfrac{d}{\\sin\\alpha_n}$',
     ],
     correct: 0,
     why: [
@@ -8177,7 +8177,7 @@ window.EXITTICKETS = {
     why: [
       'Detta är hälften av rätt svar — kontrollera att du multiplicerar *d* med $\\sin\\alpha$ och inte glömmer en faktor.',
       'Detta fås om man glömmer att multiplicera med $\\sin 30^\\circ = 0{,}5$ och bara använder *d* rakt av.',
-      'Ur gitterformeln $\\lambda = \\frac{d \\cdot \\sin\\alpha_n}{n} = \\frac{2{,}0 \\cdot 10^{-6} \\cdot 0{,}5}{1} = 1{,}0 \\cdot 10^{-6}$ m $= 1000$ nm.',
+      'Ur gitterformeln $\\lambda = \\dfrac{d \\cdot \\sin\\alpha_n}{n} = \\dfrac{2{,}0 \\cdot 10^{-6} \\cdot 0{,}5}{1} = 1{,}0 \\cdot 10^{-6}$ m $= 1000$ nm.',
       'Här har enhetsomvandlingen från meter till nanometer blivit fel (en faktor $10^{9}$ för liten).',
     ],
   },
@@ -8221,7 +8221,7 @@ window.EXITTICKETS = {
     choices: [
       '$\\lambda_\\mathrm{max} \\cdot T = 2{,}8978 \\cdot 10^{-3}$ m·K',
       '$\\lambda_\\mathrm{max} + T = 2{,}8978 \\cdot 10^{-3}$ m·K',
-      '$\\frac{\\lambda_\\mathrm{max}}{T} = 2{,}8978 \\cdot 10^{-3}$ m·K',
+      '$\\dfrac{\\lambda_\\mathrm{max}}{T} = 2{,}8978 \\cdot 10^{-3}$ m·K',
       '$\\lambda_\\mathrm{max} \\cdot T^{2} = 2{,}8978 \\cdot 10^{-3}$ m·K',
     ],
     correct: 0,
@@ -8270,16 +8270,16 @@ window.EXITTICKETS = {
   {
     question: 'Hur definieras brytningsindex *n* för ett ämne?',
     choices: [
-      '$n = \\frac{v}{c}$',
+      '$n = \\dfrac{v}{c}$',
       '$n = c \\cdot v$',
-      '$n = \\frac{c}{v}$',
+      '$n = \\dfrac{c}{v}$',
       '$n = c - v$',
     ],
     correct: 2,
     why: [
       'Detta är brytningsindex upp och ner — det ska vara ljushastigheten i vakuum delat med hastigheten i ämnet, inte tvärtom.',
       'Att multiplicera *c* och *v* ger inte det dimensionslösa tal som brytningsindex ska vara.',
-      'Brytningsindex definieras som $n = \\frac{c}{v}$, förhållandet mellan ljushastigheten i vakuum och i ämnet.',
+      'Brytningsindex definieras som $n = \\dfrac{c}{v}$, förhållandet mellan ljushastigheten i vakuum och i ämnet.',
       'En differens mellan två hastigheter ger inte det dimensionslösa talet som brytningsindex är.',
     ],
   },
@@ -8338,8 +8338,8 @@ window.EXITTICKETS = {
     why: [
       'Detta fås om man råkar multiplicera $n_2$ med $\\sin i$ istället för att dela med $n_2$.',
       '$\\sin b$ kan aldrig bli större än 1, så detta svar är inte fysikaliskt rimligt.',
-      'Detta är hälften av rätt svar — kontrollera uträkningen $\\frac{1{,}0 \\cdot 0{,}665}{1{,}33}$ igen.',
-      'Ur Snells lag: $\\sin b = \\frac{n_1 \\cdot \\sin i}{n_2} = \\frac{1{,}0 \\cdot 0{,}665}{1{,}33} = 0{,}5$.',
+      'Detta är hälften av rätt svar — kontrollera uträkningen $\\dfrac{1{,}0 \\cdot 0{,}665}{1{,}33}$ igen.',
+      'Ur Snells lag: $\\sin b = \\dfrac{n_1 \\cdot \\sin i}{n_2} = \\dfrac{1{,}0 \\cdot 0{,}665}{1{,}33} = 0{,}5$.',
     ],
   },
 ],
@@ -8365,13 +8365,13 @@ window.EXITTICKETS = {
     question: 'Vilken formel ger energin hos en foton?',
     choices: [
       '$E = h \\cdot f$',
-      '$E = \\frac{h}{f}$',
+      '$E = \\dfrac{h}{f}$',
       '$E = h + f$',
       '$E = f - h$',
     ],
     correct: 0,
     why: [
-      'Fotonens energi ges av $E = h \\cdot f$ (eller likvärdigt $E = \\frac{h \\cdot c}{\\lambda}$).',
+      'Fotonens energi ges av $E = h \\cdot f$ (eller likvärdigt $E = \\dfrac{h \\cdot c}{\\lambda}$).',
       'Sambandet är en produkt, inte en kvot, mellan Plancks konstant och frekvensen.',
       'Energi, konstant och frekvens hänger ihop via multiplikation, inte addition.',
       'En differens mellan konstanten *h* och frekvensen *f* ger inte en meningsfull energi.',
@@ -8458,14 +8458,14 @@ window.EXITTICKETS = {
   {
     question: 'Vilken formel beskriver de Broglie-våglängden hos en partikel?',
     choices: [
-      '$\\lambda = \\frac{h}{m \\cdot v}$',
+      '$\\lambda = \\dfrac{h}{m \\cdot v}$',
       '$\\lambda = h \\cdot m \\cdot v$',
-      '$\\lambda = \\frac{m \\cdot v}{h}$',
+      '$\\lambda = \\dfrac{m \\cdot v}{h}$',
       '$\\lambda = h + m \\cdot v$',
     ],
     correct: 0,
     why: [
-      'de Broglie-våglängden ges av $\\lambda = \\frac{h}{m \\cdot v}$, precis som i genomgången.',
+      'de Broglie-våglängden ges av $\\lambda = \\dfrac{h}{m \\cdot v}$, precis som i genomgången.',
       'Sambandet är en kvot, inte en produkt, mellan Plancks konstant och rörelsemängden $m \\cdot v$.',
       'Detta är formeln upp och ner — *h* ska stå i täljaren, inte $m \\cdot v$.',
       'Plancks konstant och rörelsemängden hänger ihop via division, inte addition.',
@@ -8497,7 +8497,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Ju större massa och hastighet, desto mindre blir $\\lambda = \\frac{h}{m \\cdot v}$ — för en tennisboll blir våglängden orimligt mycket mindre än bollens egen storlek.',
+      'Ju större massa och hastighet, desto mindre blir $\\lambda = \\dfrac{h}{m \\cdot v}$ — för en tennisboll blir våglängden orimligt mycket mindre än bollens egen storlek.',
       'Alla föremål i rörelse har rörelsemängd $p = m \\cdot v$, oavsett storlek.',
       'Plancks konstant *h* är en universell naturkonstant, samma för alla objekt.',
       'Ljus reflekteras visst mot stora objekt — det är därför vi kan se dem, men det har inget med de Broglie-våglängden att göra.',
@@ -8510,7 +8510,7 @@ window.EXITTICKETS = {
     why: [
       'Kontrollera tiopotensen — division av $10^{-34}$ med $10^{-24}$ ger $10^{-10}$, inte $10^{-4}$.',
       'Detta är bara nämnaren $m \\cdot v$ — glöm inte att dela *h* med denna produkt, inte bara skriva av den.',
-      '$\\lambda = \\frac{h}{m \\cdot v} = \\frac{6{,}626 \\cdot 10^{-34}}{6{,}626 \\cdot 10^{-27} \\cdot 1000} = \\frac{6{,}626 \\cdot 10^{-34}}{6{,}626 \\cdot 10^{-24}} = 1{,}0 \\cdot 10^{-10}$ m.',
+      '$\\lambda = \\dfrac{h}{m \\cdot v} = \\dfrac{6{,}626 \\cdot 10^{-34}}{6{,}626 \\cdot 10^{-27} \\cdot 1000} = \\dfrac{6{,}626 \\cdot 10^{-34}}{6{,}626 \\cdot 10^{-24}} = 1{,}0 \\cdot 10^{-10}$ m.',
       'Tiopotensens tecken har blivit fel — kontrollera uträkningen igen.',
     ],
   },
@@ -8606,7 +8606,7 @@ window.EXITTICKETS = {
       '$h \\cdot f = E_n - E_m$',
       '$h \\cdot f = E_n + E_m$',
       '$h \\cdot f = E_n \\cdot E_m$',
-      '$h \\cdot f = \\frac{E_n}{E_m}$',
+      '$h \\cdot f = \\dfrac{E_n}{E_m}$',
     ],
     correct: 0,
     why: [
@@ -8644,14 +8644,14 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Använd formeln $E_n \\approx -\\frac{13{,}6}{n^{2}}$ eV för att bestämma energin hos väteatomens andra energinivå ($n = 2$).',
+    question: 'Använd formeln $E_n \\approx -\\dfrac{13{,}6}{n^{2}}$ eV för att bestämma energin hos väteatomens andra energinivå ($n = 2$).',
     choices: ['−6,8 eV', '−1,7 eV', '−13,6 eV', '−3,4 eV'],
     correct: 3,
     why: [
       'Detta fås om man delar med 2 istället för att dela med $n^{2} = 4$.',
       'Detta är för litet i belopp — kontrollera att du delar 13,6 med $2^{2} = 4$, inte med ett större tal.',
       'Detta är energin vid grundtillståndet ($n = 1$), inte vid $n = 2$.',
-      '$E_2 = -\\frac{13{,}6}{2^{2}} = -\\frac{13{,}6}{4} = -3{,}4$ eV.',
+      '$E_2 = -\\dfrac{13{,}6}{2^{2}} = -\\dfrac{13{,}6}{4} = -3{,}4$ eV.',
     ],
   },
 ],
@@ -9284,7 +9284,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       '$\\mathbb{R}$ betecknar de reella talen — alla tal på tallinjen, även de irrationella.',
-      '$\\mathbb{Q}$ betecknar de rationella talen: alla tal som kan skrivas som ett bråk $\\frac{a}{b}$ där $a$ och $b$ är heltal och $b \\neq 0$.',
+      '$\\mathbb{Q}$ betecknar de rationella talen: alla tal som kan skrivas som ett bråk $\\dfrac{a}{b}$ där $a$ och $b$ är heltal och $b \\neq 0$.',
       '$\\mathbb{Z}$ betecknar heltalen — …, −2, −1, 0, 1, 2, …',
       '$\\mathbb{N}$ betecknar de naturliga talen — alla icke-negativa heltal 0, 1, 2, 3 …',
     ],
@@ -9301,7 +9301,7 @@ window.EXITTICKETS = {
     why: [
       'Talmängderna ligger inuti varandra — ett tal som ligger i $\\mathbb{Z}$ ligger automatiskt också i $\\mathbb{Q}$ och $\\mathbb{R}$.',
       'De naturliga talen $\\mathbb{N}$ innehåller bara icke-negativa heltal — det negativa talet $-7$ ingår inte där.',
-      '$-7$ är ett heltal, och varje heltal är också rationellt (t.ex. $-7 = \\frac{-7}{1}$) och reellt. Däremot är $-7$ inte naturligt, eftersom de naturliga talen bara innehåller icke-negativa heltal.',
+      '$-7$ är ett heltal, och varje heltal är också rationellt (t.ex. $-7 = \\dfrac{-7}{1}$) och reellt. Däremot är $-7$ inte naturligt, eftersom de naturliga talen bara innehåller icke-negativa heltal.',
       '$-7$ är visst ett heltal — heltalen $\\mathbb{Z}$ innehåller även de negativa heltalen.',
     ],
   },
@@ -9315,9 +9315,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Just det — irrationella tal som π och $\\sqrt{2}$ kan inte skrivas på formen $\\frac{a}{b}$ med heltal $a$ och $b$, och deras decimalutveckling är oändlig utan att upprepa sig.',
+      'Just det — irrationella tal som π och $\\sqrt{2}$ kan inte skrivas på formen $\\dfrac{a}{b}$ med heltal $a$ och $b$, och deras decimalutveckling är oändlig utan att upprepa sig.',
       'Tecknet har inget med saken att göra — det finns både negativa rationella tal (t.ex. −0,25) och negativa irrationella tal (t.ex. −π).',
-      'Det räcker inte — även $\\frac{1}{3} = 0{,}333\\ldots$ har oändligt många decimaler, men de upprepar sig, och talet är rationellt.',
+      'Det räcker inte — även $\\dfrac{1}{3} = 0{,}333\\ldots$ har oändligt många decimaler, men de upprepar sig, och talet är rationellt.',
       'Tvärtom — de irrationella talen ingår i de reella talen $\\mathbb{R}$, som innehåller alla tal på tallinjen.',
     ],
   },
@@ -9349,7 +9349,7 @@ window.EXITTICKETS = {
     why: [
       'Plus och minus ihop ersätts med ett minustecken: $5 + (-9) = 5 - 9 = -4$, som är negativt.',
       'Två minustecken ihop ersätts med ett plustecken: $7 - (-2) = 7 + 2 = 9$, som är positivt.',
-      'Lika tecken dividerat med varandra ger plus: $\\frac{-24}{-6} = 4$, som är positivt.',
+      'Lika tecken dividerat med varandra ger plus: $\\dfrac{-24}{-6} = 4$, som är positivt.',
       'Minus gånger minus ger plus: $(-3) \\cdot (-8) = 24$, som är positivt.',
     ],
   },
@@ -9385,7 +9385,7 @@ window.EXITTICKETS = {
       'Så länge man multiplicerar täljare och nämnare med samma tal (utom 0) är värdet alltid oförändrat, oavsett vilket talet är.',
       'Bråket delas inte upp i mindre värde — bara i fler, mindre delar.',
       'Täljaren blir visserligen större, men nämnaren växer lika många gånger — andelen är kvar.',
-      'Vid förlängning multipliceras täljare och nämnare med samma tal, så bråkets storlek ändras inte — t.ex. är $\\frac{1}{4} = \\frac{3}{12}$.',
+      'Vid förlängning multipliceras täljare och nämnare med samma tal, så bråkets storlek ändras inte — t.ex. är $\\dfrac{1}{4} = \\dfrac{3}{12}$.',
     ],
   },
   {
@@ -9399,8 +9399,8 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Här har bara täljaren dividerats med 4 — nämnaren måste också divideras med 4.',
-      'Att förkorta med 4 betyder att dividera både täljare och nämnare med 4: $\\frac{8/4}{12/4} = \\frac{2}{3}$.',
-      '$\\frac{4}{6}$ får man om man förkortar med 2 — här skulle det förkortas med 4.',
+      'Att förkorta med 4 betyder att dividera både täljare och nämnare med 4: $\\dfrac{8/4}{12/4} = \\dfrac{2}{3}$.',
+      '$\\dfrac{4}{6}$ får man om man förkortar med 2 — här skulle det förkortas med 4.',
       'Här har bara nämnaren dividerats med 4 — täljaren måste också divideras med 4.',
     ],
   },
@@ -9414,10 +9414,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Nej — t.ex. är $\\frac{6+2}{2+2} = \\frac{8}{4} = 2$, men "stryker" man 2:orna får man $\\frac{6}{2} = 3$, vilket är fel.',
-      'Det går utmärkt att stryka gemensamma faktorer, t.ex. $\\frac{4 \\cdot 2}{4 \\cdot 1} = \\frac{2}{1}$ — så länge det är multiplikation.',
+      'Nej — t.ex. är $\\dfrac{6+2}{2+2} = \\dfrac{8}{4} = 2$, men "stryker" man 2:orna får man $\\dfrac{6}{2} = 3$, vilket är fel.',
+      'Det går utmärkt att stryka gemensamma faktorer, t.ex. $\\dfrac{4 \\cdot 2}{4 \\cdot 1} = \\dfrac{2}{1}$ — så länge det är multiplikation.',
       'Strykning är egentligen en förkortning — division av täljare och nämnare med samma faktor — och det kräver att talet är en faktor, alltså att det står gångertecken mellan.',
-      'Precis tvärtom — med plustecken mellan ger strykning fel resultat, t.ex. $\\frac{6+2}{2+2} = 2$ men $\\frac{6}{2} = 3$.',
+      'Precis tvärtom — med plustecken mellan ger strykning fel resultat, t.ex. $\\dfrac{6+2}{2+2} = 2$ men $\\dfrac{6}{2} = 3$.',
     ],
   },
   {
@@ -9429,9 +9429,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Med samma nämnare syns det direkt: $\\frac{2}{3} = \\frac{10}{15}$ och $\\frac{3}{5} = \\frac{9}{15}$, och $\\frac{10}{15} > \\frac{9}{15}$.',
-      'Gör om till samma nämnare: $\\frac{10}{15}$ respektive $\\frac{9}{15}$ — de är inte lika.',
-      '$\\frac{3}{5} = \\frac{9}{15}$ är mindre än $\\frac{2}{3} = \\frac{10}{15}$ — jämför genom att göra om till samma nämnare.',
+      'Med samma nämnare syns det direkt: $\\dfrac{2}{3} = \\dfrac{10}{15}$ och $\\dfrac{3}{5} = \\dfrac{9}{15}$, och $\\dfrac{10}{15} > \\dfrac{9}{15}$.',
+      'Gör om till samma nämnare: $\\dfrac{10}{15}$ respektive $\\dfrac{9}{15}$ — de är inte lika.',
+      '$\\dfrac{3}{5} = \\dfrac{9}{15}$ är mindre än $\\dfrac{2}{3} = \\dfrac{10}{15}$ — jämför genom att göra om till samma nämnare.',
     ],
   },
 ],
@@ -9449,7 +9449,7 @@ window.EXITTICKETS = {
     why: [
       'Förkortning kan snygga till bråken men löser inte problemet — nämnarna måste bli lika innan additionen.',
       'Först när bråken har samma nämnare går det att addera täljarna rakt av — därför förlänger man tills nämnarna är lika.',
-      'Det är det klassiska felet — $\\frac{1}{2} + \\frac{1}{2}$ skulle då bli $\\frac{2}{4} = \\frac{1}{2}$, vilket uppenbart är fel.',
+      'Det är det klassiska felet — $\\dfrac{1}{2} + \\dfrac{1}{2}$ skulle då bli $\\dfrac{2}{4} = \\dfrac{1}{2}$, vilket uppenbart är fel.',
       'Tvärtom — vid beräkningar ska alltid bråkform användas, inte blandad form.',
     ],
   },
@@ -9465,8 +9465,8 @@ window.EXITTICKETS = {
     why: [
       'Nämnarna ska inte adderas — bråken har redan samma nämnare, så det är bara täljarna som adderas.',
       'Här har täljare och nämnare multiplicerats — men det är en addition, inte en multiplikation.',
-      'Det är differensen $\\frac{3}{7} - \\frac{2}{7}$ — här ska bråken adderas.',
-      'Samma nämnare: addera täljarna och behåll nämnaren, $\\frac{3 + 2}{7} = \\frac{5}{7}$.',
+      'Det är differensen $\\dfrac{3}{7} - \\dfrac{2}{7}$ — här ska bråken adderas.',
+      'Samma nämnare: addera täljarna och behåll nämnaren, $\\dfrac{3 + 2}{7} = \\dfrac{5}{7}$.',
     ],
   },
   {
@@ -9495,10 +9495,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Talet framför bråket gånger nämnaren plus täljaren: $\\frac{2 \\cdot 5 + 1}{5} = \\frac{11}{5}$.',
-      'Här har siffrorna 2 och 1 bara skrivits ihop — blandad form betyder $2 + \\frac{1}{5}$, inte 21 femtedelar.',
-      'Kontrollera: $\\frac{7}{5} = 1\\frac{2}{5}$, inte $2\\frac{1}{5}$.',
-      'Här har talet 2 och täljaren 1 adderats — men de hela ska först multipliceras med nämnaren: 2 hela är $\\frac{10}{5}$.',
+      'Talet framför bråket gånger nämnaren plus täljaren: $\\dfrac{2 \\cdot 5 + 1}{5} = \\dfrac{11}{5}$.',
+      'Här har siffrorna 2 och 1 bara skrivits ihop — blandad form betyder $2 + \\dfrac{1}{5}$, inte 21 femtedelar.',
+      'Kontrollera: $\\dfrac{7}{5} = 1\\frac{2}{5}$, inte $2\\frac{1}{5}$.',
+      'Här har talet 2 och täljaren 1 adderats — men de hela ska först multipliceras med nämnaren: 2 hela är $\\dfrac{10}{5}$.',
     ],
   },
   {
@@ -9511,7 +9511,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Jo — blandad form i en beräkning leder lätt till fel, t.ex. att $2\\frac{1}{5}$ råkar läsas som $2 \\cdot \\frac{1}{5}$.',
+      'Jo — blandad form i en beräkning leder lätt till fel, t.ex. att $2\\frac{1}{5}$ råkar läsas som $2 \\cdot \\dfrac{1}{5}$.',
       'Decimalform är ofta avrundad och kan ge avrundningsfel — bråkform är exakt.',
       'Vid beräkningar ska alltid bråkform användas — därför är det viktigt att kunna växla från blandad form till bråkform.',
       'Blandad form är bra för att *läsa av* en storlek (t.ex. $3\\frac{3}{4}$ tårtor), men i beräkningar ställer den till det.',
@@ -9531,7 +9531,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Korsvis multiplikation är ett minnesknep för att jämföra bråk eller lösa ekvationer, inte för att multiplicera dem.',
-      'Vid multiplikation multipliceras täljarna med varandra och nämnarna med varandra: $\\frac{2}{3} \\cdot \\frac{5}{7} = \\frac{10}{21}$.',
+      'Vid multiplikation multipliceras täljarna med varandra och nämnarna med varandra: $\\dfrac{2}{3} \\cdot \\dfrac{5}{7} = \\dfrac{10}{21}$.',
       'Invertering används vid division med bråk, inte vid multiplikation.',
       'Gemensam nämnare behövs vid addition och subtraktion — inte vid multiplikation.',
     ],
@@ -9549,7 +9549,7 @@ window.EXITTICKETS = {
       'Det kan råka fungera i specialfall, men den allmänna regeln är invertera-och-multiplicera.',
       'Förkortning ändrar inte divisionen till något enklare räknesätt — regeln är att invertera och multiplicera.',
       'Gemensam nämnare hör till addition och subtraktion — vid division inverterar man i stället.',
-      'Divisionen byts mot multiplikation samtidigt som bråket i nämnaren inverteras: $\\frac{a}{b} \\Big/ \\frac{c}{d} = \\frac{a}{b} \\cdot \\frac{d}{c}$.',
+      'Divisionen byts mot multiplikation samtidigt som bråket i nämnaren inverteras: $\\dfrac{a}{b} \\Big/ \\dfrac{c}{d} = \\dfrac{a}{b} \\cdot \\dfrac{d}{c}$.',
     ],
   },
   {
@@ -9563,9 +9563,9 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Här har divisionen vänts åt fel håll — det är bråket i nämnaren som ska inverteras, inte hela uttrycket.',
-      '$6 \\cdot \\frac{2}{3} = 4$ — men här ska det divideras, så bråket ska inverteras först.',
-      'Skriv $6 = \\frac{6}{1}$, invertera och multiplicera: $\\frac{6}{1} \\cdot \\frac{3}{2} = \\frac{18}{2} = 9$.',
-      '$\\frac{12}{3} = 4$ är resultatet av $6 \\cdot \\frac{2}{3}$ — division kräver invertering.',
+      '$6 \\cdot \\dfrac{2}{3} = 4$ — men här ska det divideras, så bråket ska inverteras först.',
+      'Skriv $6 = \\dfrac{6}{1}$, invertera och multiplicera: $\\dfrac{6}{1} \\cdot \\dfrac{3}{2} = \\dfrac{18}{2} = 9$.',
+      '$\\dfrac{12}{3} = 4$ är resultatet av $6 \\cdot \\dfrac{2}{3}$ — division kräver invertering.',
     ],
   },
   {
@@ -9579,9 +9579,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       '90 kr är dubbla beloppet — då har det multiplicerats med 2 utan att divideras med 9.',
-      'Bråkdel av något betyder multiplikation: $\\frac{2}{9} \\cdot 45 = \\frac{2 \\cdot 45}{9} = 2 \\cdot 5 = 10$.',
-      '18 kr är $\\frac{2}{5}$ av 45 kr — kontrollera nämnaren.',
-      '5 kr är $\\frac{1}{9}$ av 45 kr — här söks $\\frac{2}{9}$, alltså dubbelt så mycket.',
+      'Bråkdel av något betyder multiplikation: $\\dfrac{2}{9} \\cdot 45 = \\dfrac{2 \\cdot 45}{9} = 2 \\cdot 5 = 10$.',
+      '18 kr är $\\dfrac{2}{5}$ av 45 kr — kontrollera nämnaren.',
+      '5 kr är $\\dfrac{1}{9}$ av 45 kr — här söks $\\dfrac{2}{9}$, alltså dubbelt så mycket.',
     ],
   },
   {
@@ -9594,7 +9594,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'När täljare och nämnare skrivs som produkter syns gemensamma faktorer direkt och kan strykas — t.ex. $\\frac{7 \\cdot 6}{6 \\cdot 6 \\cdot 7 \\cdot 3} = \\frac{1}{18}$ utan att någonsin räkna ut $36 \\cdot 21$.',
+      'När täljare och nämnare skrivs som produkter syns gemensamma faktorer direkt och kan strykas — t.ex. $\\dfrac{7 \\cdot 6}{6 \\cdot 6 \\cdot 7 \\cdot 3} = \\dfrac{1}{18}$ utan att någonsin räkna ut $36 \\cdot 21$.',
       'Räknesättet ändras inte — det är fortfarande multiplikation, bara med synliga faktorer.',
       'Att multiplicera först och förkorta sedan ger också rätt svar — det är bara krångligare med stora tal.',
       'Man förkortar fortfarande — men mycket enklare, eftersom faktorerna syns direkt.',
@@ -9779,10 +9779,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Det vanligaste misstaget — men $\\frac{9^5}{9^5}$ är både $9^{5-5} = 9^0$ och uppenbart lika med 1, så $9^0 = 1$.',
+      'Det vanligaste misstaget — men $\\dfrac{9^5}{9^5}$ är både $9^{5-5} = 9^0$ och uppenbart lika med 1, så $9^0 = 1$.',
       'Exponenten 0 betyder inte att talet behålls — det är exponenten 1 som gör det: $9^1 = 9$.',
       'Det är bara $0^0$ som är odefinierat (det motsvarar division med 0) — för alla andra baser är värdet 1.',
-      'Alla tal utom 0 upphöjt till 0 är 1 — det följer av potenslagen för division: $\\frac{9^5}{9^5} = 9^0 = 1$.',
+      'Alla tal utom 0 upphöjt till 0 är 1 — det följer av potenslagen för division: $\\dfrac{9^5}{9^5} = 9^0 = 1$.',
     ],
   },
   {
@@ -9795,9 +9795,9 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      '$\\frac{1}{8} = 2^{-3}$ — kontrollera exponenten: här är den −4.',
+      '$\\dfrac{1}{8} = 2^{-3}$ — kontrollera exponenten: här är den −4.',
       'Det finns inget minustecken kvar i värdet: $2^{-4}$ är ett positivt bråk.',
-      'Negativ exponent betyder $a^{-n} = \\frac{1}{a^n}$, så $2^{-4} = \\frac{1}{2^4} = \\frac{1}{16}$.',
+      'Negativ exponent betyder $a^{-n} = \\dfrac{1}{a^n}$, så $2^{-4} = \\dfrac{1}{2^4} = \\dfrac{1}{16}$.',
       'Minustecknet i exponenten gör inte värdet negativt — det betyder "1 dividerat med potensen".',
     ],
   },
@@ -9813,8 +9813,8 @@ window.EXITTICKETS = {
     why: [
       'Trean är en exponent i uttrycket, inte en koefficient framför $x$.',
       '$x^3$ är nämnaren själv — bråket är dess invers, och det kräver negativ exponent.',
-      'Nämnaren "flyttas upp" med ombytt tecken på exponenten: $\\frac{1}{x^3} = x^{-3}$.',
-      'Exponenten $\\frac{1}{3}$ betyder något helt annat (ett rotuttryck), inte "1 delat med".',
+      'Nämnaren "flyttas upp" med ombytt tecken på exponenten: $\\dfrac{1}{x^3} = x^{-3}$.',
+      'Exponenten $\\dfrac{1}{3}$ betyder något helt annat (ett rotuttryck), inte "1 delat med".',
     ],
   },
   {
@@ -9862,10 +9862,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Exponenten $\\frac{1}{2}$ betyder kvadratroten: $36^{1/2} = \\sqrt{36} = 6$.',
-      '72 är dubbla 36 — exponenten $\\frac{1}{2}$ är varken halvering eller dubblering.',
-      '$\\frac{1}{36}$ vore $36^{-1}$ — negativ exponent, inte rationell.',
-      '18 är hälften av 36 — men exponenten $\\frac{1}{2}$ betyder kvadratrot, inte halvering.',
+      'Exponenten $\\dfrac{1}{2}$ betyder kvadratroten: $36^{1/2} = \\sqrt{36} = 6$.',
+      '72 är dubbla 36 — exponenten $\\dfrac{1}{2}$ är varken halvering eller dubblering.',
+      '$\\dfrac{1}{36}$ vore $36^{-1}$ — negativ exponent, inte rationell.',
+      '18 är hälften av 36 — men exponenten $\\dfrac{1}{2}$ betyder kvadratrot, inte halvering.',
     ],
   },
   {
@@ -9880,7 +9880,7 @@ window.EXITTICKETS = {
     why: [
       'Regeln $a^{1/n} = \\sqrt[n]{a}$ ger $\\sqrt[3]{64} = 64^{1/3}$ (= 4, eftersom $4^3 = 64$).',
       '$64^3$ är 64 multiplicerat med sig själv tre gånger — motsatsen till att dra tredjeroten.',
-      'Tredjeroten är ingen division — $\\sqrt[3]{64} = 4$ men $\\frac{64}{3} \\approx 21{,}3$.',
+      'Tredjeroten är ingen division — $\\sqrt[3]{64} = 4$ men $\\dfrac{64}{3} \\approx 21{,}3$.',
       'Här har bas och exponent bytt plats — rotens index hamnar i exponentens nämnare.',
     ],
   },
@@ -10045,9 +10045,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Nämnaren beräknas alltid först som en helhet — uttrycket förenklas utmärkt till 6.',
-      'Divisionen har en "osynlig" parentes kring nämnaren: $\\frac{18}{(7-4)} = \\frac{18}{3} = 6$.',
-      'Här har $\\frac{18}{7}$ beräknats först och sedan subtraherats med 4 — men hela nämnaren $7 - 4$ hör ihop.',
-      'Kontrollera: $\\frac{18}{3} = 6$, inte 14.',
+      'Divisionen har en "osynlig" parentes kring nämnaren: $\\dfrac{18}{(7-4)} = \\dfrac{18}{3} = 6$.',
+      'Här har $\\dfrac{18}{7}$ beräknats först och sedan subtraherats med 4 — men hela nämnaren $7 - 4$ hör ihop.',
+      'Kontrollera: $\\dfrac{18}{3} = 6$, inte 14.',
     ],
   },
   {
@@ -10097,7 +10097,7 @@ window.EXITTICKETS = {
     why: [
       'Det är exakt vad räknaren gör med alternativet utan parentes — och det ger 540, inte 60.',
       'Här har räknesätten kastats om helt: $360 \\cdot 2 / 3 = 240$.',
-      '\`360/2*3\` tolkas från vänster: $\\frac{360}{2} \\cdot 3 = 540$ — fel.',
+      '\`360/2*3\` tolkas från vänster: $\\dfrac{360}{2} \\cdot 3 = 540$ — fel.',
       'Bråkstrecket har en osynlig parentes kring nämnaren — på räknaren måste den skrivas ut: $360/(2 \\cdot 3) = 60$.',
     ],
   },
@@ -10434,7 +10434,7 @@ window.EXITTICKETS = {
     why: [
       '54 är $63 - 9$ — men 9:an är en faktor och ska divideras bort, inte subtraheras.',
       '72 är $63 + 9$ — fel operation.',
-      'Faktorn 9 tas bort genom division med 9 i båda led: $x = \\frac{63}{9} = 7$.',
+      'Faktorn 9 tas bort genom division med 9 i båda led: $x = \\dfrac{63}{9} = 7$.',
       '567 är $63 \\cdot 9$ — multiplikation är motsatsen till vad som behövs här.',
     ],
   },
@@ -10451,7 +10451,7 @@ window.EXITTICKETS = {
       'Derivering hör inte hemma i ekvationskontroll — det är insättning som gäller.',
       '$\\mathrm{VL} = 4 \\cdot 7 + 7 = 35 = \\mathrm{HL}$ — likheten stämmer, så lösningen är korrekt.',
       'Det kan fungera men är omständligt — insättning i den ursprungliga ekvationen räcker.',
-      'Lösningar behöver inte vara heltal — t.ex. har $\\frac{7x}{6} - 15 = -11$ lösningen $x = \\frac{24}{7}$.',
+      'Lösningar behöver inte vara heltal — t.ex. har $\\dfrac{7x}{6} - 15 = -11$ lösningen $x = \\dfrac{24}{7}$.',
     ],
   },
   {
@@ -10467,7 +10467,7 @@ window.EXITTICKETS = {
       'Att avrunda till heltal kastar bort ännu mer information.',
       'Bråkformen är exakt — en avrundad decimalform är bara ett närmevärde och gör svaret sämre.',
       'Blandad form är tillåten som avläsning men bråkform är standard — och kravet är framför allt att INTE avrunda.',
-      '3,4 är ett närmevärde — det exakta svaret $\\frac{24}{7}$ ska behållas.',
+      '3,4 är ett närmevärde — det exakta svaret $\\dfrac{24}{7}$ ska behållas.',
     ],
   },
 ],
@@ -10583,7 +10583,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       '13 är inte delbart med någon av nämnarna.',
-      '6 är inte delbart med 4 — bråket $\\frac{1}{4}$ skulle inte bli heltaligt.',
+      '6 är inte delbart med 4 — bråket $\\dfrac{1}{4}$ skulle inte bli heltaligt.',
       '12 är det minsta talet som är delbart med 3, 4 och 6 — multiplikationen ger $4x + 3 = 10$.',
       '72 fungerar (alla nämnare delar 72) men är inte den MINSTA gemensamma nämnaren — talen blir onödigt stora.',
     ],
@@ -10600,7 +10600,7 @@ window.EXITTICKETS = {
     why: [
       'Kandidatvärdet krockar med villkoret $x \\neq 7$ som sattes upp innan lösningen — alltså saknas lösning.',
       '$x = 7$ ger nämnaren $7 - 7 = 0$ — division med 0 är inte definierad, så värdet är förbjudet.',
-      'Teckenbyte hjälper inte — insättning av $-7$ ger $\\frac{-70}{-14} = 5 \\neq 4$.',
+      'Teckenbyte hjälper inte — insättning av $-7$ ger $\\dfrac{-70}{-14} = 5 \\neq 4$.',
       'En falsk likhet utan variabler hade behövts för "saknar lösning" på det sättet — här är problemet i stället det förbjudna värdet.',
     ],
   },
@@ -10767,7 +10767,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Upphöj båda led till exponentens invers $\\frac{1}{n}$: $(x^n)^{1/n} = x^1 = a^{1/n}$.',
+      'Upphöj båda led till exponentens invers $\\dfrac{1}{n}$: $(x^n)^{1/n} = x^1 = a^{1/n}$.',
       'Exponenten är ingen faktor — den kan inte divideras bort.',
       'Det upphöjer åt fel håll — då växer exponenten till $n^2$.',
       'Bas och exponent har bytt plats.',
@@ -10853,7 +10853,7 @@ window.EXITTICKETS = {
       'Vid division med det negativa talet −2 måste olikhetstecknet vändas.',
       'Både tecknet på 5:an och olikhetstecknet har hanterats fel — kontrollera med t.ex. $x = -6$: $-2 \\cdot (-6) = 12 > 10$ stämmer.',
       'Högerledet blir $-5$, inte 5, vid divisionen.',
-      'Dividera med −2 och vänd tecknet: $x < \\frac{10}{-2} = -5$.',
+      'Dividera med −2 och vänd tecknet: $x < \\dfrac{10}{-2} = -5$.',
     ],
   },
   {
@@ -10901,7 +10901,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'T.ex. beskriver $v = \\frac{s}{t}$ sambandet mellan storheterna hastighet, sträcka och tid.',
+      'T.ex. beskriver $v = \\dfrac{s}{t}$ sambandet mellan storheterna hastighet, sträcka och tid.',
       'Det beskriver snarare en konstant — formler innehåller variabler.',
       'Enheter är viktiga i formler, men formeln är själva sambandet.',
       'Formler är matematiska samband, inte bruksanvisningar.',
@@ -10920,7 +10920,7 @@ window.EXITTICKETS = {
       'Storheter med olika enheter kan inte subtraheras.',
       'Det är sträckan som är produkten: $s = v \\cdot t$.',
       'Uttrycket är uppochnedvänt — tiden växer med sträckan, inte tvärtom.',
-      'Multiplicera båda led med $t$ ($s = vt$) och dividera sedan med $v$: $t = \\frac{s}{v}$.',
+      'Multiplicera båda led med $t$ ($s = vt$) och dividera sedan med $v$: $t = \\dfrac{s}{v}$.',
     ],
   },
   {
@@ -11472,7 +11472,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Den kvoten räknar åt fel håll — den skulle ta lönen bakåt i tiden, från år B till år A.',
-      'Kvoten nya årets index genom gamla årets index är förändringsfaktorn mellan åren — här $\\frac{360}{300} = 1{,}2$.',
+      'Kvoten nya årets index genom gamla årets index är förändringsfaktorn mellan åren — här $\\dfrac{360}{300} = 1{,}2$.',
       'Indexenheter kan inte adderas till kronor — omräkningen är en multiplikation med en faktor.',
       'Att multiplicera med hela indextalet ger ett orimligt stort belopp — det är kvoten mellan indextalen som är faktorn.',
     ],
@@ -11658,8 +11658,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Ur $y = kx$ följer $k = \\frac{y}{x}$ — t.ex. ger (5, 100) konstanten $k = 20$.',
-      'Kvoten är vänd åt fel håll — det ger $\\frac{1}{k}$.',
+      'Ur $y = kx$ följer $k = \\dfrac{y}{x}$ — t.ex. ger (5, 100) konstanten $k = 20$.',
+      'Kvoten är vänd åt fel håll — det ger $\\dfrac{1}{k}$.',
       'En differens ger inte förhållandet mellan variablerna.',
       'Produkten är konstant i en OMVÄND proportionalitet, inte här.',
     ],
@@ -11795,7 +11795,7 @@ window.EXITTICKETS = {
       'En differens ger inte förhållandet mellan förändringarna.',
       'Kvoten är uppochnedvänd — det gäller höjd genom längd.',
       'Produkten säger inget om lutningen.',
-      'Trappstegets höjd genom dess längd: $k = \\frac{\\Delta y}{\\Delta x}$, och man tänker att man går åt höger.',
+      'Trappstegets höjd genom dess längd: $k = \\dfrac{\\Delta y}{\\Delta x}$, och man tänker att man går åt höger.',
     ],
   },
   {
@@ -11875,9 +11875,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '$k = \\frac{3 - (-1)}{2 - (-6)} = \\frac{4}{8} = \\frac{1}{2}$ — dubbla minustecken blir plus.',
+      '$k = \\dfrac{3 - (-1)}{2 - (-6)} = \\dfrac{4}{8} = \\dfrac{1}{2}$ — dubbla minustecken blir plus.',
       'Tecknen tar ut varandra i båda differenserna — kvoten blir positiv.',
-      '2 är kvoten uppochnedvänd ($\\frac{8}{4}$) — $\\Delta y$ ska stå i täljaren.',
+      '2 är kvoten uppochnedvänd ($\\dfrac{8}{4}$) — $\\Delta y$ ska stå i täljaren.',
       'Nämnaren är $2 - (-6) = 8$, inte $-4$ — parenteserna kring negativa koordinater är viktiga.',
     ],
   },
@@ -11958,10 +11958,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Lös ut y: $3y = -2x + 6$ ger $y = -\\frac{2}{3}x + 2$ — lutningen är $-\\frac{2}{3}$.',
+      'Lös ut y: $3y = -2x + 6$ ger $y = -\\dfrac{2}{3}x + 2$ — lutningen är $-\\dfrac{2}{3}$.',
       '2 är koefficienten framför x i allmän form — inte lutningen i k-form.',
       '−6 är konstanten c i allmän form.',
-      'Tecknet följer med när $2x$ flyttas över: $-\\frac{2}{3}$.',
+      'Tecknet följer med när $2x$ flyttas över: $-\\dfrac{2}{3}$.',
     ],
   },
 ],
@@ -12279,7 +12279,7 @@ window.EXITTICKETS = {
     why: [
       'Variabeln är själva kärnan i funktionsuttrycket.',
       '$f(x) = Cx^a$ — variabeln $x$ är basen som upphöjs till konstanten $a$.',
-      '$x^{-1} = \\frac{1}{x}$ hamnar i nämnaren, men det är ett specialfall — inte definitionen.',
+      '$x^{-1} = \\dfrac{1}{x}$ hamnar i nämnaren, men det är ett specialfall — inte definitionen.',
       'Variabel i exponenten ($Ca^x$) ger en exponentialfunktion.',
     ],
   },
@@ -12293,7 +12293,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Variabeln är basen och exponenten är konstanten −2 — en potensfunktion ($g(x) = \\frac{1}{x^2}$).',
+      'Variabeln är basen och exponenten är konstanten −2 — en potensfunktion ($g(x) = \\dfrac{1}{x^2}$).',
       'Exponentialfunktioner har variabeln i exponenten, som $2^x$.',
       'För varje tillåtet $x$ (alla utom 0) fås exakt ett värde — en funktion.',
       'Linjära funktioner har formen $kx + m$.',
@@ -12310,7 +12310,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Det beskriver $y = \\sqrt{x}$ — kvadraten är definierad för alla x.',
-      'Hyperbeln hör till $y = \\frac{1}{x}$.',
+      'Hyperbeln hör till $y = \\dfrac{1}{x}$.',
       'Räta linjer kommer från förstagradsfunktioner.',
       'Kvadraten är alltid positiv och lika stor för $x$ och $-x$ — en symmetrisk parabel.',
     ],
@@ -12579,7 +12579,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '$P(\\text{händelse}) = \\frac{\\text{gynnsamma}}{\\text{möjliga}}$ — och den kräver likformig sannolikhetsfördelning.',
+      '$P(\\text{händelse}) = \\dfrac{\\text{gynnsamma}}{\\text{möjliga}}$ — och den kräver likformig sannolikhetsfördelning.',
       'En summa av antal är ingen sannolikhet.',
       'Uppochnedvänt — då blir sannolikheten större än 1.',
       '50 % gäller bara specialfall som slantsingling.',
@@ -12627,8 +12627,8 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      '$\\frac{1}{36}$ är sannolikheten för exakt summan 12.',
-      '$\\frac{3}{36}$ är sannolikheten för summa STÖRRE än 10 (bara 11 och 12) — skilj på formuleringarna!',
+      '$\\dfrac{1}{36}$ är sannolikheten för exakt summan 12.',
+      '$\\dfrac{3}{36}$ är sannolikheten för summa STÖRRE än 10 (bara 11 och 12) — skilj på formuleringarna!',
       'Summorna 10, 11 och 12 täcker 3 + 2 + 1 = 6 rutor i utfallsrummet av 36.',
       'Talet 10 i frågan är ett summavärde, inte ett antal utfall.',
     ],
@@ -12714,7 +12714,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Tvärtom — produkten av tal mellan 0 och 1 blir MINDRE än faktorerna.',
-      'T.ex. är $P(\\text{två sexor}) = \\frac{1}{6} \\cdot \\frac{1}{6} = \\frac{1}{36}$.',
+      'T.ex. är $P(\\text{två sexor}) = \\dfrac{1}{6} \\cdot \\dfrac{1}{6} = \\dfrac{1}{36}$.',
       '50 % gäller bara enstaka specialfall.',
       'Addition hör till "antingen eller"-situationer, inte kombinationer.',
     ],
@@ -12731,7 +12731,7 @@ window.EXITTICKETS = {
     why: [
       'Det beskriver oförenliga händelser — något annat.',
       'Tvärtom — UTAN återläggning blir händelserna beroende.',
-      'Tärningskast är oberoende — sexans sannolikhet är $\\frac{1}{6}$ oavsett tidigare kast.',
+      'Tärningskast är oberoende — sexans sannolikhet är $\\dfrac{1}{6}$ oavsett tidigare kast.',
       'Oberoendet handlar om påverkan, inte om lika sannolikheter.',
     ],
   },
@@ -12747,7 +12747,7 @@ window.EXITTICKETS = {
     why: [
       '12 hjärter kvar av 51 kort — både täljare och nämnare har minskat.',
       'Ett kort är borta ur leken — 51 kvar, inte 52.',
-      '$\\frac{13}{52}$ gällde FÖRSTA dragningen — utan återläggning ändras oddsen.',
+      '$\\dfrac{13}{52}$ gällde FÖRSTA dragningen — utan återläggning ändras oddsen.',
       'Ett hjärter är borta — 12 kvar, inte 13.',
     ],
   },
@@ -12763,8 +12763,8 @@ window.EXITTICKETS = {
     why: [
       'Beräkningarna stämmer — beroendet är verkligt.',
       'Blandningen är inte poängen — antalet kulor är det.',
-      'Skillnaden är exakt: $\\frac{16}{100}$ mot $\\frac{12}{90}$.',
-      'Andra faktorn ändras från $\\frac{4}{10}$ till $\\frac{3}{9}$ när den första blå kulan inte läggs tillbaka.',
+      'Skillnaden är exakt: $\\dfrac{16}{100}$ mot $\\dfrac{12}{90}$.',
+      'Andra faktorn ändras från $\\dfrac{4}{10}$ till $\\dfrac{3}{9}$ när den första blå kulan inte läggs tillbaka.',
     ],
   },
 ],
@@ -12796,7 +12796,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Längs grenen gäller produktregeln: $\\frac{7}{10} \\cdot \\frac{7}{10} = \\frac{49}{100}$ med återläggning.',
+      'Längs grenen gäller produktregeln: $\\dfrac{7}{10} \\cdot \\dfrac{7}{10} = \\dfrac{49}{100}$ med återläggning.',
       'Medelvärden hör inte hemma här.',
       'Antalet grenar säger inget om sannolikheten när grenarna är olika sannolika.',
       'Addition används MELLAN gynnsamma grenar, inte längs en gren.',
@@ -12814,7 +12814,7 @@ window.EXITTICKETS = {
     why: [
       'Nämnaren ska också minska — en strumpa är borta ur lådan.',
       '6 svarta kvar av 9 totalt — både täljare och nämnare har minskat med 1.',
-      '$\\frac{7}{9}$ gäller grenen svart EFTER VIT — där är alla 7 svarta kvar.',
+      '$\\dfrac{7}{9}$ gäller grenen svart EFTER VIT — där är alla 7 svarta kvar.',
       'Det är sannolikheten i FÖRSTA dragningen.',
     ],
   },
@@ -12829,7 +12829,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Multiplikation sker LÄNGS grenar — mellan gynnsamma grenar adderas det.',
-      'Multiplicera längs varje gren, addera grenarna: $\\frac{21}{90} + \\frac{21}{90} = \\frac{42}{90}$.',
+      'Multiplicera längs varje gren, addera grenarna: $\\dfrac{21}{90} + \\dfrac{21}{90} = \\dfrac{42}{90}$.',
       'Alla gynnsamma grenar bidrar till sannolikheten.',
       'Samma träd används — det är avläsningen som ändras.',
     ],
@@ -12980,10 +12980,10 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      '$\\frac{3}{5}$ vore cosinus i samma triangel.',
-      'Motstående genom närliggande: $\\tan u = \\frac{4}{3}$.',
-      '$\\frac{4}{5}$ vore sinus (motstående/hypotenusa) i 3-4-5-triangeln.',
-      '$\\frac{3}{4}$ är tangens för den ANDRA spetsiga vinkeln i triangeln.',
+      '$\\dfrac{3}{5}$ vore cosinus i samma triangel.',
+      'Motstående genom närliggande: $\\tan u = \\dfrac{4}{3}$.',
+      '$\\dfrac{4}{5}$ vore sinus (motstående/hypotenusa) i 3-4-5-triangeln.',
+      '$\\dfrac{3}{4}$ är tangens för den ANDRA spetsiga vinkeln i triangeln.',
     ],
   },
   {
@@ -13018,7 +13018,7 @@ window.EXITTICKETS = {
       'Cosinus använder den NÄRLIGGANDE kateten och hypotenusan.',
       'Sinus är exakt den kopplingen.',
       'Tangens använder de två katetrarna — hypotenusan ingår inte.',
-      '$\\sin v = \\frac{\\text{motstående katet}}{\\text{hypotenusa}}$.',
+      '$\\sin v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$.',
     ],
   },
   {
@@ -13031,10 +13031,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      '$\\frac{4}{5}$ är sin $u$ — motstående genom hypotenusan.',
-      '$\\frac{4}{3}$ är tan $u$.',
+      '$\\dfrac{4}{5}$ är sin $u$ — motstående genom hypotenusan.',
+      '$\\dfrac{4}{3}$ är tan $u$.',
       'Hypotenusan står alltid i NÄMNAREN för sinus och cosinus.',
-      'Cosinus tar den NÄRLIGGANDE kateten (3) genom hypotenusan (5): $\\cos u = \\frac{3}{5} = 0{,}6$.',
+      'Cosinus tar den NÄRLIGGANDE kateten (3) genom hypotenusan (5): $\\cos u = \\dfrac{3}{5} = 0{,}6$.',
     ],
   },
   {
@@ -13048,7 +13048,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Cosinus kräver den närliggande kateten, som är okänd här.',
-      'Sinus innehåller just motstående katet och hypotenusa — som $\\sin 41° = \\frac{6{,}1}{a}$ i genomgången.',
+      'Sinus innehåller just motstående katet och hypotenusa — som $\\sin 41° = \\dfrac{6{,}1}{a}$ i genomgången.',
       'Tangens innehåller inte hypotenusan alls.',
       'Valet styrs av vilka sidor som är kända och sökta.',
     ],
@@ -13101,7 +13101,7 @@ window.EXITTICKETS = {
       'sinh är sinus hyperbolicus — hör till senare studier.',
       'sin⁻¹ och arcsin är två skrivsätt för samma inversa funktion — känn igen båda.',
       'Upphöjt −1 på FUNKTIONEN betyder invers, inte "1 delat med".',
-      'Cosekant är $\\frac{1}{\\sin}$ — en annan funktion.',
+      'Cosekant är $\\dfrac{1}{\\sin}$ — en annan funktion.',
     ],
   },
   {
@@ -13199,7 +13199,7 @@ window.EXITTICKETS = {
     why: [
       'Två kateter → tangens, och vinkeln fås med inversen: $\\tan^{-1}(0{,}75) \\approx 37°$.',
       'Vinklar skalas inte linjärt med kvoten.',
-      'sin⁻¹ kräver hypotenusan i nämnaren, och $\\frac{3}{4}$ är kvoten av katetrarna.',
+      'sin⁻¹ kräver hypotenusan i nämnaren, och $\\dfrac{3}{4}$ är kvoten av katetrarna.',
       'tan utan invers går åt fel håll — från vinkel till kvot.',
     ],
   },
@@ -14608,17 +14608,17 @@ window.EXITTICKETS = {
   {
     question: 'En funktion saknar nollställen. Hur hittas symmetrilinjen ändå?',
     choices: [
-      'Som "talet framför rottecknet" i *pq*-formeln, dvs. $x_s = -\\frac{p}{2}$',
+      'Som "talet framför rottecknet" i *pq*-formeln, dvs. $x_s = -\\dfrac{p}{2}$',
       'Det går inte — utan nollställen finns ingen symmetrilinje',
       'Genom att läsa av konstanttermen q',
       'Symmetrilinjen är då alltid $x_s = 0$',
     ],
     correct: 0,
     why: [
-      '*pq*-formelns första term $-\\frac{p}{2}$ pekar ut symmetrilinjen även när uttrycket under roten är negativt.',
+      '*pq*-formelns första term $-\\dfrac{p}{2}$ pekar ut symmetrilinjen även när uttrycket under roten är negativt.',
       'Alla parabler har en symmetrilinje — det är bara nollställena som kan saknas.',
       'q påverkar grafens höjdläge och antalet nollställen — inte symmetrilinjens läge.',
-      'Symmetrilinjen ligger vid $-\\frac{p}{2}$, som sällan är 0.',
+      'Symmetrilinjen ligger vid $-\\dfrac{p}{2}$, som sällan är 0.',
     ],
   },
   {
@@ -15340,9 +15340,9 @@ window.EXITTICKETS = {
     question: 'Hur lyder mittpunktsformeln?',
     choices: [
       '$(x_m, y_m) = (x_1 \\cdot x_2,\\ y_1 \\cdot y_2)$',
-      '$(x_m, y_m) = \\left(\\frac{x_1 + x_2}{2},\\ \\frac{y_1 + y_2}{2}\\right)$',
+      '$(x_m, y_m) = \\left(\\dfrac{x_1 + x_2}{2},\\ \\dfrac{y_1 + y_2}{2}\\right)$',
       '$(x_m, y_m) = (x_2 - x_1,\\ y_2 - y_1)$',
-      '$(x_m, y_m) = \\left(\\frac{x_1 + y_1}{2},\\ \\frac{x_2 + y_2}{2}\\right)$',
+      '$(x_m, y_m) = \\left(\\dfrac{x_1 + y_1}{2},\\ \\dfrac{x_2 + y_2}{2}\\right)$',
     ],
     correct: 1,
     why: [
@@ -15397,7 +15397,7 @@ window.EXITTICKETS = {
       'Teckenfel — kontrollera medelvärdena: −1 och +2.',
       '(−6, 8) är skillnaden mellan punkterna, inte mitten.',
       '(−2, 4) är halva den första punkten — båda punkterna ska medelvärdesbildas.',
-      'Medelvärden: $\\frac{-4 + 2}{2} = -1$ och $\\frac{6 + (-2)}{2} = 2$.',
+      'Medelvärden: $\\dfrac{-4 + 2}{2} = -1$ och $\\dfrac{6 + (-2)}{2} = 2$.',
     ],
   },
 ],
@@ -15591,7 +15591,7 @@ window.EXITTICKETS = {
       'Transversalen delar triangeln i två lika stora delar',
       'Transversalen är alltid parallell med basen',
       'Sidorna delas i förhållandet 1:2',
-      'En parallelltransversal delar triangelns sidor i samma förhållande: $\\frac{a}{b} = \\frac{c}{d}$',
+      'En parallelltransversal delar triangelns sidor i samma förhållande: $\\dfrac{a}{b} = \\dfrac{c}{d}$',
     ],
     correct: 3,
     why: [
@@ -15627,14 +15627,14 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Delarna på motstående sida förhåller sig som de närliggande sidorna: $\\frac{AD}{BD} = \\frac{AC}{BC}$.',
+      'Delarna på motstående sida förhåller sig som de närliggande sidorna: $\\dfrac{AD}{BD} = \\dfrac{AC}{BC}$.',
       'Mitt itu blir det bara om de närliggande sidorna är lika långa (likbent triangel).',
       'Vinkelräthet gäller höjden, inte bisektrisen.',
       'Delarna är kongruenta bara i specialfall — satsen handlar om förhållanden.',
     ],
   },
   {
-    question: 'En parallelltransversal delar sidorna så att $\\frac{a}{b} = \\frac{c}{d}$ med $a = 4$, $b = 8$ och $c = 5$. Vad är $d$?',
+    question: 'En parallelltransversal delar sidorna så att $\\dfrac{a}{b} = \\dfrac{c}{d}$ med $a = 4$, $b = 8$ och $c = 5$. Vad är $d$?',
     choices: [
       '2,5',
       '40',
@@ -15646,7 +15646,7 @@ window.EXITTICKETS = {
       '2,5 fås om förhållandet vänds åt fel håll — d ska vara STÖRRE än c precis som b är större än a.',
       '40 är korsprodukten $4d$ — dividera med 4 för att få d.',
       '9 = 8 + 1 — förhållandet är multiplikativt, inte additivt.',
-      '$\\frac{4}{8} = \\frac{5}{d}$ ger $4d = 40$, dvs. $d = 10$.',
+      '$\\dfrac{4}{8} = \\dfrac{5}{d}$ ger $4d = 40$, dvs. $d = 10$.',
     ],
   },
 ],
@@ -15839,7 +15839,7 @@ window.EXITTICKETS = {
     choices: [
       '$a - b = c - d$',
       '$a \\cdot b = c \\cdot d$',
-      '$\\frac{a}{b} = \\frac{c}{d}$',
+      '$\\dfrac{a}{b} = \\dfrac{c}{d}$',
       '$a + b = c + d$',
     ],
     correct: 1,
@@ -15923,7 +15923,7 @@ window.EXITTICKETS = {
       'Logaritmera båda led och dividera med 7',
       'Den kan bara lösas grafiskt',
       'Dividera båda led med 7',
-      'Upphöj båda led till $\\frac{1}{7}$ eller dra sjunde roten ur',
+      'Upphöj båda led till $\\dfrac{1}{7}$ eller dra sjunde roten ur',
     ],
     correct: 3,
     why: [
@@ -16136,7 +16136,7 @@ window.EXITTICKETS = {
     choices: [
       '$x = 10^{53}$',
       '$x = 5{,}3$',
-      '$x = \\frac{53}{10}$',
+      '$x = \\dfrac{53}{10}$',
       '$x = \\lg 53 \\approx 1{,}72$',
     ],
     correct: 3,
@@ -16169,10 +16169,10 @@ window.EXITTICKETS = {
   {
     question: 'Vad säger **andra** logaritmlagen?',
     choices: [
-      '$\\lg x - \\lg y = \\lg \\frac{x}{y}$',
+      '$\\lg x - \\lg y = \\lg \\dfrac{x}{y}$',
       '$\\lg x - \\lg y = \\lg(x - y)$',
-      '$\\lg x - \\lg y = \\frac{x}{y}$',
-      '$\\frac{\\lg x}{\\lg y} = \\lg \\frac{x}{y}$',
+      '$\\lg x - \\lg y = \\dfrac{x}{y}$',
+      '$\\dfrac{\\lg x}{\\lg y} = \\lg \\dfrac{x}{y}$',
     ],
     correct: 0,
     why: [
@@ -16201,8 +16201,8 @@ window.EXITTICKETS = {
   {
     question: 'Hur löses $5^x = 136$ med tredje logaritmlagen?',
     choices: [
-      'Dividera båda led med 5: $x = \\frac{136}{5}$',
-      'Logaritmera båda led, multiplicera ner exponenten: $x = \\frac{\\lg 136}{\\lg 5}$',
+      'Dividera båda led med 5: $x = \\dfrac{136}{5}$',
+      'Logaritmera båda led, multiplicera ner exponenten: $x = \\dfrac{\\lg 136}{\\lg 5}$',
       'Ta $\\lg$ av vänsterledet enbart',
       '$x = \\lg 136 - \\lg 5$',
     ],
@@ -16335,7 +16335,7 @@ window.EXITTICKETS = {
   {
     question: 'Ekvationen $3^x = 25$ har lösningen …',
     choices: [
-      '$x = \\frac{25}{3}$',
+      '$x = \\dfrac{25}{3}$',
       '$x = \\lg 25$',
       '$x = \\log_3 25$',
       '$x = \\sqrt[3]{25}$',
@@ -16384,7 +16384,7 @@ window.EXITTICKETS = {
     question: 'Bestäm $\\log_3 9$ utan räknare.',
     choices: [
       '3',
-      '$\\frac{9}{3} = 3$',
+      '$\\dfrac{9}{3} = 3$',
       '81',
       '2',
     ],
@@ -17243,7 +17243,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Många gränsvärden bestäms just för uttryck som ÄR odefinierade i en punkt (t.ex. $\\frac{0}{0}$), men gränsvärdet existerar ofta ändå.',
+      'Många gränsvärden bestäms just för uttryck som ÄR odefinierade i en punkt (t.ex. $\\dfrac{0}{0}$), men gränsvärdet existerar ofta ändå.',
       'Ett gränsvärde handlar om vad ett uttryck närmar sig, inte om något maximivärde.',
       'Ett gränsvärde beskriver ett enda uttrycks beteende, inte en jämförelse mellan två uttryck.',
       'Precis — gränsvärdet är det värde uttrycket närmar sig, till exempel $\\lim_{x \\to \\infty} \\dfrac{1}{x} = 0$, även om uttrycket aldrig når fram dit.',
@@ -17260,13 +17260,13 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Det är metod 1 — den enklaste och mest effektiva metoden, som fungerar så snart uttrycket är definierat vid $x = a$.',
-      'Faktorisering (metod 2) behövs bara när direkt insättning ger en odefinierad form som $\\frac{0}{0}$.',
+      'Faktorisering (metod 2) behövs bara när direkt insättning ger en odefinierad form som $\\dfrac{0}{0}$.',
       'Tabeller (metod 3) är sista utvägen, när varken metod 1 eller metod 2 fungerar.',
       'Är uttrycket definierat vid $x = a$ går gränsvärdet alltid att bestämma genom direkt insättning.',
     ],
   },
   {
-    question: 'Vid direkt insättning i $\\displaystyle\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$ fås formen $\\frac{0}{0}$. Vad bör man göra?',
+    question: 'Vid direkt insättning i $\\displaystyle\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$ fås formen $\\dfrac{0}{0}$. Vad bör man göra?',
     choices: [
       'Sätta gränsvärdet till oändligheten',
       'Sätta gränsvärdet till 0 direkt',
@@ -17275,8 +17275,8 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Formen $\\frac{0}{0}$ är inte samma sak som en oändlighet i täljare eller nämnare.',
-      'Formen $\\frac{0}{0}$ säger ingenting om gränsvärdets faktiska värde — det måste bestämmas genom förkortning (eller tabeller).',
+      'Formen $\\dfrac{0}{0}$ är inte samma sak som en oändlighet i täljare eller nämnare.',
+      'Formen $\\dfrac{0}{0}$ säger ingenting om gränsvärdets faktiska värde — det måste bestämmas genom förkortning (eller tabeller).',
       'Nämnaren får inte bytas ut godtyckligt — man förkortar bara bort gemensamma faktorer som faktiskt finns i uttrycket.',
       'Att faktorisera täljaren (här med konjugatregeln till $(x+1)(x-1)$) och förkorta bort $(x-1)$ gör uttrycket definierat vid $x=1$, så man kan sätta in värdet.',
     ],
@@ -18954,7 +18954,7 @@ window.EXITTICKETS = {
       'Hastigheten vid en viss tidpunkt fås genom att sätta in tidpunkten i $v(t)$, inte genom att integrera.',
       'Accelerationen fås genom att derivera hastigheten, inte genom att integrera den.',
       'Rätt — integralen av hastigheten mellan två tidpunkter ger den tillryggalagda sträckan under det tidsintervallet.',
-      'Medelhastigheten fås genom att dela integralen med tidsintervallets längd ($\\frac{1}{12-5}\\int_5^{12} v(t)\\, dt$) — inte av integralen ensam.',
+      'Medelhastigheten fås genom att dela integralen med tidsintervallets längd ($\\dfrac{1}{12-5}\\int_5^{12} v(t)\\, dt$) — inte av integralen ensam.',
     ],
   },
   {
@@ -20181,7 +20181,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Vinkeln $A$ kräver att sidan $c$ är känd först (för att alla tre sidorna ska vara kända) — det är alltså ett tvåstegsproblem.',
-      'Arean kräver kännedom om en höjd eller använder en annan formel (t.ex. $\\frac{1}{2}ab\\sin C$) — det är inte det cosinussatsen ger direkt.',
+      'Arean kräver kännedom om en höjd eller använder en annan formel (t.ex. $\\dfrac{1}{2}ab\\sin C$) — det är inte det cosinussatsen ger direkt.',
       'Precis som för $A$ krävs sidan $c$ innan $B$ kan bestämmas med cosinus- eller sinussatsen.',
       'Med två sidor och den mellanliggande vinkeln kända ger cosinussatsen $c^2 = a^2 + b^2 - 2ab\\cos C$ sidan $c$ i ett enda steg.',
     ],
@@ -22940,7 +22940,7 @@ window.EXITTICKETS = {
     why: [
       'Hastigheten är det grafen redan visar på $y$-axeln; arean under grafen är en annan storhet.',
       'Acceleration fås ur hastighetens förändring (derivata/lutning), inte ur arean under hastighetsgrafen.',
-      'Precis — integralens enhet är produkten av axlarnas enheter: $\\frac{\\mathrm{m}}{\\mathrm{s}} \\cdot \\mathrm{s} = \\mathrm{m}$, alltså en sträcka.',
+      'Precis — integralens enhet är produkten av axlarnas enheter: $\\dfrac{\\mathrm{m}}{\\mathrm{s}} \\cdot \\mathrm{s} = \\mathrm{m}$, alltså en sträcka.',
       'Tiden står på $x$-axeln; arean kombinerar båda axlarnas enheter och ger inte enbart tid.',
     ],
   },
@@ -23004,7 +23004,7 @@ window.EXITTICKETS = {
     why: [
       'Flödet är det grafen visar; arean under grafen ackumulerar flödet till en volym.',
       'Tiden står på $x$-axeln; arean kombinerar båda enheterna och ger inte enbart tid.',
-      'Precis — $\\frac{\\mathrm{liter}}{\\mathrm{min}} \\cdot \\mathrm{min} = \\mathrm{liter}$, så arean är en volym i liter.',
+      'Precis — $\\dfrac{\\mathrm{liter}}{\\mathrm{min}} \\cdot \\mathrm{min} = \\mathrm{liter}$, så arean är en volym i liter.',
       'Storheten stämmer men enheten inte — minuterna förkortas bort, så resultatet är liter, inte liter/minut.',
     ],
   },
@@ -24069,7 +24069,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Tecknet är fel; $-i$ svarar mot vinkeln $\\dfrac{3\\pi}{2}$ (eller $-\\dfrac{\\pi}{2}$).',
-      'Just det — $e^{i\\frac{\\pi}{2}} = \\cos \\frac{\\pi}{2} + i\\sin \\frac{\\pi}{2} = 0 + i\\cdot 1 = i$.',
+      'Just det — $e^{i\\frac{\\pi}{2}} = \\cos \\dfrac{\\pi}{2} + i\\sin \\dfrac{\\pi}{2} = 0 + i\\cdot 1 = i$.',
       'Det är $e^{i\\pi} = -1$, ett halvt varv, inte ett kvarts varv.',
       'Det är $e^{i\\cdot 0} = 1$, alltså vinkeln $0$, inte $\\dfrac{\\pi}{2}$.',
     ],

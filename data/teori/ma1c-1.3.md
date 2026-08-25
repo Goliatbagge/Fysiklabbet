@@ -81,8 +81,8 @@ $$
 
 **b)** Den minsta nämnaren här är 3. Men vi kan inte multiplicera 3 med ett
 heltal så att det blir 5 — metod 1 fungerar inte. Vi använder då metod 2 och
-förlänger båda bråken med varandras nämnare: vi förlänger $\frac{2}{5}$ med
-3 och $\frac{1}{3}$ med 5. Detta ger
+förlänger båda bråken med varandras nämnare: vi förlänger $\dfrac{2}{5}$ med
+3 och $\dfrac{1}{3}$ med 5. Detta ger
 
 $$
 \frac{2}{5} + \frac{1}{3} = \frac{2 \cdot 3}{5 \cdot 3} + \frac{1 \cdot 5}{3 \cdot 5}
@@ -154,9 +154,9 @@ Betrakta nedanstående "tårtor":
 Tre hela tårtor och tre fjärdedelar — sammanlagt 15 fjärdedelar.
 :::
 
-De skuggade areorna motsvaras i **bråkform** av $\frac{15}{4}$ (15 stycken
+De skuggade areorna motsvaras i **bråkform** av $\dfrac{15}{4}$ (15 stycken
 fjärdedelar). Vi kan även låta de motsvaras i **blandad form** av
-$3\frac{3}{4}$ (3 hela och 3 fjärdedelar). Så $\frac{15}{4}$ (bråkform)
+$3\frac{3}{4}$ (3 hela och 3 fjärdedelar). Så $\dfrac{15}{4}$ (bråkform)
 $= 3\frac{3}{4}$ (blandad form).
 
 ::: exempel "Exempel 4 — Skriv i bråkform"

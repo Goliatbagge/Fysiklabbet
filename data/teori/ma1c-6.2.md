@@ -142,7 +142,7 @@ h = 14 \cdot \sin 42\degree
 $$
 
 Vi har nu höjden! Insättning av $b = 12$ och $h = 14 \cdot \sin 42\degree$
-i formeln för triangelarean $A = \frac{b \cdot h}{2}$ ger
+i formeln för triangelarean $A = \dfrac{b \cdot h}{2}$ ger
 
 $$
 A = \frac{12 \cdot 14 \cdot \sin 42\degree}{2} = 56{,}206\ldots \approx 56\ \text{a.e. (areaenheter)}

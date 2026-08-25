@@ -45,7 +45,7 @@ $$
 $$
 
 På räknaren: `360/(2·3)` — utan parentesen tolkas det som
-$\frac{360}{2} \cdot 3 = 540$.
+$\dfrac{360}{2} \cdot 3 = 540$.
 
 ## Svara som bråk
 

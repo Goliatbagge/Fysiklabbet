@@ -85,7 +85,7 @@ finns så många kombinationer. Men med komplementhändelse blir det lätt!
 
 Komplementhändelsen till "att få minst en sexa" är "att inte få någon
 sexa". Sannolikheten att inte få sexa vid kast med en tärning är
-$\frac{5}{6}$, så för fem tärningar gäller
+$\dfrac{5}{6}$, så för fem tärningar gäller
 
 $$
 P(\text{ingen sexa}) = \left(\frac{5}{6}\right)^5 = \frac{3\,125}{7\,776} = 0{,}401\ldots
@@ -139,7 +139,7 @@ De flesta gissar högt, och resonemangen låter kloka:
   komma över hälften borde väl mer än hälften av årets dagar behöva vara
   "upptagna"?
 - **"Minst 100."** Tanken bakom: chansen att två bestämda personer delar
-  födelsedag är ju bara $\frac{1}{365} \approx 0{,}3\ \%$ — då borde det
+  födelsedag är ju bara $\dfrac{1}{365} \approx 0{,}3\ \%$ — då borde det
   väl krävas ett hav av människor innan något händer?
 
 Båda resonemangen gör samma tankefel: de räknar som om frågan gällde en
@@ -164,9 +164,9 @@ i stället.
 
 Låt personerna komma in i rummet en i taget:
 
-- Person 1 får fylla år vilken dag som helst: $\frac{365}{365}$.
-- Person 2 måste undvika en upptagen dag: $\frac{364}{365}$.
-- Person 3 måste undvika två upptagna dagar: $\frac{363}{365}$.
+- Person 1 får fylla år vilken dag som helst: $\dfrac{365}{365}$.
+- Person 2 måste undvika en upptagen dag: $\dfrac{364}{365}$.
+- Person 3 måste undvika två upptagna dagar: $\dfrac{363}{365}$.
 
 $$
 P(\text{ingen av tre delar födelsedag}) = \frac{365}{365} \cdot \frac{364}{365} \cdot \frac{363}{365} \approx 0{,}9918
@@ -179,7 +179,7 @@ $$
 Varje ny person lägger till en faktor, som dessutom är lite mindre än
 den förra — och en produkt av många faktorer strax under 1 sjunker
 snabbare än man anar. Med 23 personer är den sista faktorn
-$\frac{343}{365}$:
+$\dfrac{343}{365}$:
 
 $$
 P(\text{ingen delar födelsedag}) = \frac{365}{365} \cdot \frac{364}{365} \cdot \frac{363}{365} \cdot \ldots \cdot \frac{343}{365} \approx 0{,}493
@@ -212,7 +212,7 @@ person 4 lägger till 3 nya … och person 23 lägger till hela 22 nya par.
 <svg viewBox="16 5 297 121" width="470" height="192" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Tre grupper ritade som punkter med en linje mellan varje par: 3 personer ger 3 par, 5 personer ger 10 par och 8 personer ger 28 par — antalet linjer växer mycket snabbare än antalet punkter."><line x1="52.0" y1="12.0" x2="81.4" y2="63.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="52.0" y1="12.0" x2="22.6" y2="63.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="81.4" y1="63.0" x2="22.6" y2="63.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><circle cx="52.0" cy="12.0" r="4" fill="#1f2530"/><circle cx="81.4" cy="63.0" r="4" fill="#1f2530"/><circle cx="22.6" cy="63.0" r="4" fill="#1f2530"/><text x="52" y="104" font-size="12" text-anchor="middle" fill="#1f2530">3 personer</text><text x="52" y="120" font-size="12" text-anchor="middle" fill="#2563c9" font-weight="600">3 par</text><line x1="162.0" y1="12.0" x2="194.3" y2="35.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="162.0" y1="12.0" x2="182.0" y2="73.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="162.0" y1="12.0" x2="142.0" y2="73.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="162.0" y1="12.0" x2="129.7" y2="35.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="194.3" y1="35.5" x2="182.0" y2="73.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="194.3" y1="35.5" x2="142.0" y2="73.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="194.3" y1="35.5" x2="129.7" y2="35.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="182.0" y1="73.5" x2="142.0" y2="73.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="182.0" y1="73.5" x2="129.7" y2="35.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="142.0" y1="73.5" x2="129.7" y2="35.5" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><circle cx="162.0" cy="12.0" r="4" fill="#1f2530"/><circle cx="194.3" cy="35.5" r="4" fill="#1f2530"/><circle cx="182.0" cy="73.5" r="4" fill="#1f2530"/><circle cx="142.0" cy="73.5" r="4" fill="#1f2530"/><circle cx="129.7" cy="35.5" r="4" fill="#1f2530"/><text x="162" y="104" font-size="12" text-anchor="middle" fill="#1f2530">5 personer</text><text x="162" y="120" font-size="12" text-anchor="middle" fill="#2563c9" font-weight="600">10 par</text><line x1="272.0" y1="12.0" x2="296.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="306.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="296.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="272.0" y2="80.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="248.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="12.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="306.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="296.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="272.0" y2="80.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="248.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="22.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="306.0" y1="46.0" x2="296.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="306.0" y1="46.0" x2="272.0" y2="80.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="306.0" y1="46.0" x2="248.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="306.0" y1="46.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="306.0" y1="46.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="70.0" x2="272.0" y2="80.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="70.0" x2="248.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="70.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="296.0" y1="70.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="80.0" x2="248.0" y2="70.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="80.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="272.0" y1="80.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="248.0" y1="70.0" x2="238.0" y2="46.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="248.0" y1="70.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><line x1="238.0" y1="46.0" x2="248.0" y2="22.0" stroke="#2563c9" stroke-width="1.1" opacity="0.55"/><circle cx="272.0" cy="12.0" r="4" fill="#1f2530"/><circle cx="296.0" cy="22.0" r="4" fill="#1f2530"/><circle cx="306.0" cy="46.0" r="4" fill="#1f2530"/><circle cx="296.0" cy="70.0" r="4" fill="#1f2530"/><circle cx="272.0" cy="80.0" r="4" fill="#1f2530"/><circle cx="248.0" cy="70.0" r="4" fill="#1f2530"/><circle cx="238.0" cy="46.0" r="4" fill="#1f2530"/><circle cx="248.0" cy="22.0" r="4" fill="#1f2530"/><text x="272" y="104" font-size="12" text-anchor="middle" fill="#1f2530">8 personer</text><text x="272" y="120" font-size="12" text-anchor="middle" fill="#2563c9" font-weight="600">28 par</text></svg>
 :::
 
-I en grupp på $n$ personer finns det totalt $\frac{n \cdot (n-1)}{2}$
+I en grupp på $n$ personer finns det totalt $\dfrac{n \cdot (n-1)}{2}$
 möjliga par. Med 23 personer:
 
 $$
@@ -220,7 +220,7 @@ $$
 $$
 
 **253 chanser** att pricka en gemensam födelsedag — inte 23! Varje par
-är som en lott med vinstchansen $\frac{1}{365}$, och med 253 lotter är
+är som en lott med vinstchansen $\dfrac{1}{365}$, och med 253 lotter är
 det inte längre konstigt att någon av dem vinner.
 
 ::: figur

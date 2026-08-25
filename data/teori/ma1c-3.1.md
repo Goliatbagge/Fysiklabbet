@@ -113,7 +113,7 @@ $$
 $$
 
 Insättning av delen = 30 gram och andelen
-$= 5\ \text{ppm} = \frac{5}{1\,000\,000} = 0{,}000\,005$ ger
+$= 5\ \text{ppm} = \dfrac{5}{1\,000\,000} = 0{,}000\,005$ ger
 
 $$
 \text{hela} = \frac{30\ \text{gram}}{0{,}000\,005}

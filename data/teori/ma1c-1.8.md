@@ -56,7 +56,7 @@ typ: rotberakna
 :::
 
 ::: textlosning
-**a)** Exponenten $\frac{1}{2}$ betyder kvadratroten:
+**a)** Exponenten $\dfrac{1}{2}$ betyder kvadratroten:
 
 $$
 49^{1/2} = \sqrt{49} = 7
@@ -64,7 +64,7 @@ $$
 
 **Svar:** 7
 
-**b)** Exponenten $\frac{1}{3}$ betyder tredjeroten (kubikroten):
+**b)** Exponenten $\dfrac{1}{3}$ betyder tredjeroten (kubikroten):
 
 $$
 5 \cdot 8^{1/3} = 5 \cdot \sqrt[3]{8} = 5 \cdot 2 = 10

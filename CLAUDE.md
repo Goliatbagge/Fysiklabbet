@@ -771,6 +771,38 @@ användas där de hör hemma. Tumregel: om tecknet bär matematisk/typografisk
 betydelse i sammanhanget → behåll; om det bara är en färgglad dekoration →
 ta bort.
 
+### Förkortningar skrivs ut i klartext
+
+**Förkortningar ska generellt inte användas — skriv ut orden.** Gäller
+genomgångar (`data/teori/*.md`), övningar, exit tickets, katalogtexter,
+simuleringarnas löptext och nyhetsartiklar (uttryckligt önskemål
+2026-08-25). En förkortning sparar några tecken men bryter läsflytet, och
+för en elev som läser matematik eller fysik på ett andraspråk är den ett
+extra hinder.
+
+| Skriv inte | Skriv |
+|---|---|
+| t.ex. | till exempel |
+| bl.a. | bland annat |
+| m.m. | med mera |
+| d.v.s. / dvs. | det vill säga |
+| o.s.v. / osv. | och så vidare |
+| etc. | och så vidare |
+| ca | cirka |
+| fr.o.m. / t.o.m. | från och med / till och med |
+| s.k. | så kallad |
+| jfr | jämför |
+
+**Undantag (behåll förkortningen):**
+
+- **Enheter och SI-beteckningar** — m/s, kg, N, °C, kWh, mm. De är
+  standardiserade symboler, inte förkortningar.
+- **Etablerade namn och akronymer** som skrivs så överallt — SI, LED, DNA,
+  CERN, NASA, pH, KPI, GPS.
+- **Rena räkne-/tabellsammanhang där utrymmet är hårt** — en axeletikett
+  eller en trång tabellcell får korta av, men aldrig brödtext.
+- **Citat och källhänvisningar** återges ordagrant.
+
 ### Versaler
 ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor bokstav.
 - ✓ "Elektrostatisk induktion"  ✗ "Elektrostatisk Induktion"
@@ -1105,6 +1137,36 @@ skript: `require('.claude/teckenbredd.js').textWidth(str, fontSize)`.
 höjd- och sidled) för alla `::: figur` — men bara för text utan egen
 `transform`; roterade etiketter och simuleringarnas scener måste du
 fortfarande granska i skärmdump.
+
+### Bråk i löptext: `\dfrac`, aldrig `\frac`
+
+**Ett inline-bråk i brödtext skrivs alltid `$\dfrac{15}{4}$`** (påpekat
+2026-08-19 och igen 2026-08-25). KaTeX renderar `\frac` inline i *textstyle*,
+alltså med minisiffror i täljare och nämnare — bråket blir mindre än
+omgivande text och "flyter inte ihop" med den. `\dfrac` tvingar fram
+displaystyle, så bråket får samma teckenstorlek som brödtexten runt omkring.
+
+Gäller överallt inline-matte förekommer: `data/teori/*.md` (löptext,
+`:::`-rutor, figurernas bildtexter), `data/ovningar.js` (frågestammar och
+svarsalternativ), `data/exittickets.js` (frågor, `choices`, `why`) och
+`data/nyheter.js`. I JS-filerna dubblas backslashen: `\dfrac`.
+
+**Undantag — där `\frac` är rätt och `\dfrac` skulle bli fel:**
+
+- **Blandad form.** `$3\frac{3}{4}$` (3 hela och 3 fjärdedelar) ska ha det
+  lilla bråket bredvid heltalet — det är så blandad form skrivs, och ett
+  `\dfrac` här gör bråket lika stort som heltalet. Regeln i praktiken: står
+  det en **siffra direkt före** `\frac`, behåll `\frac`.
+- **Displayblock** (`$$…$$`) och `\displaystyle` — redan displaystyle,
+  `\dfrac` tillför ingenting.
+- **Exponenter och index**: `$e^{i\frac{\pi}{3}}$`, `$10^{\frac{1}{2}}$`.
+  Ett bråk i upphöjt läge ska vara mindre än bastexten.
+- **Nästlade bråk**: det inre bråket i
+  `$x = \dfrac{\lg\left(\frac{3}{4}\right)}{\lg\left(\frac{5}{2}\right)}$`
+  behåller `\frac`, annars sväller uttrycket ur raden.
+- **Parentes upphöjd till en exponent**: `$\left(\frac{p}{2}\right)^2 - q$`
+  (diskriminanten i *pq*-formeln) — hela parentesen läses som en enhet i
+  textstyle.
 
 ### JS-strängar: dubbla alla backslash
 

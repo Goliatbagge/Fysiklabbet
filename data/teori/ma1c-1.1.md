@@ -23,9 +23,9 @@ betecknas $\mathbb{Z}$ och kan skrivas
 $\mathbb{Z} = \{\ldots,\ -2,\ -1,\ 0,\ 1,\ 2,\ \ldots\}$.
 
 **Rationella tal:** innehåller samtliga tal som kan skrivas som ett bråk,
-t.ex. $\frac{1}{3}$, −0,25 och 5. Mängden rationella tal betecknas
+t.ex. $\dfrac{1}{3}$, −0,25 och 5. Mängden rationella tal betecknas
 $\mathbb{Q}$ och kan skrivas $\mathbb{Q} = \{$alla tal som kan skrivas på
-formen $\frac{a}{b}$ där $a$ och $b$ är heltal, $b \neq 0\}$.
+formen $\dfrac{a}{b}$ där $a$ och $b$ är heltal, $b \neq 0\}$.
 
 **Reella tal:** innehåller samtliga tal som finns på tallinjen. Här ingår
 även de **[[irrationella talen|Tal som inte kan skrivas som ett bråk av två heltal, t.ex. π och √2. Deras decimalutveckling är oändlig utan att upprepa sig.]]**, dvs. tal som *inte* kan skrivas som ett
@@ -54,8 +54,8 @@ typ: talmangd
 :::
 
 ::: textlosning
-Ett rationellt tal är ett tal som kan skrivas som ett bråk $\frac{a}{b}$ där
-$a$ och $b$ är heltal och $b \neq 0$. Väljer vi t.ex. $\frac{1}{3}$ får vi
+Ett rationellt tal är ett tal som kan skrivas som ett bråk $\dfrac{a}{b}$ där
+$a$ och $b$ är heltal och $b \neq 0$. Väljer vi t.ex. $\dfrac{1}{3}$ får vi
 ett tal som ligger mellan heltalen 0 och 1 — det är alltså rationellt men
 inte ett heltal.
 
@@ -64,19 +64,19 @@ duger, och det spelar ingen roll om talet skrivs som bråk eller som decimaltal.
 
 Tal som duger som svar:
 
-- $\frac{5}{2}$, som är samma tal som 2,5
-- $-\frac{3}{4}$, eftersom negativa tal också är rationella
-- 0,7, som kan skrivas $\frac{7}{10}$
-- $-1{,}25$, som kan skrivas $-\frac{5}{4}$
+- $\dfrac{5}{2}$, som är samma tal som 2,5
+- $-\dfrac{3}{4}$, eftersom negativa tal också är rationella
+- 0,7, som kan skrivas $\dfrac{7}{10}$
+- $-1{,}25$, som kan skrivas $-\dfrac{5}{4}$
 
 Tal som **inte** duger som svar:
 
 - 4 och $-6$, som är heltal
-- $\frac{8}{2}$, eftersom bråket går jämnt ut och alltså är heltalet 4
+- $\dfrac{8}{2}$, eftersom bråket går jämnt ut och alltså är heltalet 4
 - $\sqrt{2}$ och $\pi$, som inte går att skriva som ett bråk med heltal och
   därför inte ens är rationella
 
-**Svar:** T.ex. $\frac{1}{3}$ (även $\frac{5}{2}$, $-\frac{3}{4}$ och 0,7 är
+**Svar:** T.ex. $\dfrac{1}{3}$ (även $\dfrac{5}{2}$, $-\dfrac{3}{4}$ och 0,7 är
 rätta svar)
 :::
 :::

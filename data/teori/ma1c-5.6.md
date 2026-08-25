@@ -41,13 +41,13 @@ Om sannolikheten för en händelse
 
 - *inte* påverkas av händelsen innan har vi en **oberoende händelse**.
   T.ex. sannolikheten att slå en sexa vid ett kast med tärning är
-  $\frac{1}{6}$. Sannolikheten för att slå en sexa nästa gång med
-  tärningen är fortfarande $\frac{1}{6}$ ("slumpen har inget minne").
+  $\dfrac{1}{6}$. Sannolikheten för att slå en sexa nästa gång med
+  tärningen är fortfarande $\dfrac{1}{6}$ ("slumpen har inget minne").
   Kast med tärningar är alltså oberoende händelser.
 - påverkas av händelsen innan har vi en **beroende händelse**. T.ex.
-  sannolikheten att dra ett hjärter ur en kortlek är $\frac{13}{52}$. Om
+  sannolikheten att dra ett hjärter ur en kortlek är $\dfrac{13}{52}$. Om
   jag lägger undan kortet ("utan återläggning"), så är sannolikheten att
-  dra ytterligare ett hjärter ur kortleken $\frac{12}{51}$ (12 hjärter är
+  dra ytterligare ett hjärter ur kortleken $\dfrac{12}{51}$ (12 hjärter är
   kvar av 51 kort totalt). Sannolikheten att dra ett hjärter har ändrats!
   Att dra kort utan återläggning är alltså beroende händelser.
 
@@ -111,7 +111,7 @@ $$
 **b)** Utan återläggning påverkas sannolikheterna av föregående
 händelser. Efter att vi har dragit en blå kula (4 på 10) finns bara 3 blå
 kulor kvar av 9 kulor totalt. Så sannolikheten att dra en blå kula andra
-gången är alltså $\frac{3}{9}$:
+gången är alltså $\dfrac{3}{9}$:
 
 $$
 P(\text{två blå}) = P(\text{blå}) \cdot P(\text{blå})

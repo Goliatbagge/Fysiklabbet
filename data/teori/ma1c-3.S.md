@@ -21,10 +21,10 @@ cellreferenser.
 
 ## Begrepp att kunna
 
-- **procent (%)**: hundradel; $1\ \% = \frac{1}{100} = 0{,}01$.
-- **promille (‰)**: tusendel; $1\ \text{‰} = \frac{1}{1\,000} = 0{,}001$.
+- **procent (%)**: hundradel; $1\ \% = \dfrac{1}{100} = 0{,}01$.
+- **promille (‰)**: tusendel; $1\ \text{‰} = \dfrac{1}{1\,000} = 0{,}001$.
 - **ppm (parts per million)**: miljondel;
-  $1\ \text{ppm} = \frac{1}{1\,000\,000} = 0{,}000\,001$.
+  $1\ \text{ppm} = \dfrac{1}{1\,000\,000} = 0{,}000\,001$.
 - **andel**: delen genom det hela, angiven i bråk- eller decimalform.
 - **förändringsfaktor**: talet man multiplicerar det gamla värdet med för
   att direkt få det nya värdet vid en procentuell förändring.

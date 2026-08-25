@@ -60,7 +60,7 @@ $$
 \text{årsränta} = 0{,}048 \cdot 150\,000\ \mathrm{kr} = 7\,200\ \mathrm{kr}
 $$
 
-Eftersom hon betalar månadsvis, ska hon betala $\frac{1}{12}$ av detta
+Eftersom hon betalar månadsvis, ska hon betala $\dfrac{1}{12}$ av detta
 belopp i ränta varje månad (det går 12 månader på ett år), så
 
 $$

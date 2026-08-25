@@ -102,7 +102,7 @@ inte!
 
 ::: formel "Jämföra bråk"
 När vi jämför bråk görs det lättast genom att göra om bråken till **samma
-nämnare**. Vi inser t.ex. lätt att $\dfrac{5}{7}$ är större än $\dfrac{4}{7}$.
+nämnare**. Vi inser till exempel lätt att $\dfrac{5}{7}$ är större än $\dfrac{4}{7}$.
 :::
 
 ::: exempel "Exempel 3 — Vilket bråk är störst?"
@@ -113,7 +113,7 @@ typ: jamfora
 :::
 
 ::: textlosning
-Vi gör om bråken till samma nämnare! Det går t.ex. genom att förlänga varje
+Vi gör om bråken till samma nämnare! Det går till exempel genom att förlänga varje
 bråk med det tal som står i nämnaren *i det andra bråket*.
 
 Vi förlänger $\dfrac{4}{9}$ med 7, eftersom det står i nämnaren i det andra

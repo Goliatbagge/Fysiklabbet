@@ -22,7 +22,7 @@ Vi börjar med några enkla exempel för att förstå skrivsättet.
 - lg 1 betyder "det tal som 10 ska upphöjas till för att bli 1".
   Eftersom $10^0 = 1$ gäller $\lg 1 = 0$.
 - lg 0,01 betyder "det tal som 10 ska upphöjas till för att bli 0,01".
-  Eftersom $10^{-2} = \frac{1}{10^2} = 0{,}01$ gäller
+  Eftersom $10^{-2} = \dfrac{1}{10^2} = 0{,}01$ gäller
   $\lg 0{,}01 = -2$.
 
 Upptäck mönstret för tiologaritmer för jämna potenser av 10:
@@ -76,8 +76,8 @@ $$
 Det tal vi tar logaritmen för måste vara större än 0 eftersom vi aldrig
 kan upphöja 10 till något och få ett negativt värde. Ju mindre värde
 tians exponent har desto närmare 0 kommer vi, men det blir aldrig 0
-eller negativt: $10^{-3} = \frac{1}{1\,000} = 0{,}001$ och
-$10^{-6} = \frac{1}{1\,000\,000} = 0{,}000\,001$ och så vidare.
+eller negativt: $10^{-3} = \dfrac{1}{1\,000} = 0{,}001$ och
+$10^{-6} = \dfrac{1}{1\,000\,000} = 0{,}000\,001$ och så vidare.
 
 ::: exempel "Exempel 1 — Bestäm utan räknare"
 **Bestäm utan räknare<br>a) $\lg 10\,000$<br>b) $\lg 10^{-5}$<br>c) $\lg \sqrt{10}$**
@@ -96,7 +96,7 @@ $10^{-5}$? Jo, −5."
 $\sqrt{10}$?" Svaret till denna fråga kanske inte är lika självklart.
 Kom ihåg att dra kvadratroten ur är samma sak som att upphöja till en
 halv, så $\sqrt{10} = 10^{1/2}$. Vi ska alltså upphöja 10 till
-$\frac{1}{2}$ för att svaret ska bli $\sqrt{10}$.
+$\dfrac{1}{2}$ för att svaret ska bli $\sqrt{10}$.
 
 **Svar:** $\dfrac{1}{2}$
 :::

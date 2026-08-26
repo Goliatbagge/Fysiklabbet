@@ -101,3 +101,31 @@ $$
 
 **Svar:** $x_1 = 1$ och $x_2 = 3$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "*abc*-formeln"
+- $ax^2 + bx + c = 0$ har lösningarna
+- $x = -\dfrac{b}{2a}
+  \pm \dfrac{\sqrt{b^2 - 4ac}}{2a}$
+:::
+
+::: sampunkt "Fördelen"
+- Koefficienten framför $x^2$ behöver **inte** divideras bort först.
+- Praktiskt när $a$ inte går jämnt upp i de andra talen.
+:::
+
+::: sampunkt "Identifiera a, b och c"
+- $a$ står framför $x^2$, $b$ framför $x$, $c$ är konstanttermen.
+- Alla tre tas **med tecken**.
+- Ekvationen måste vara skriven **lika med 0**.
+:::
+
+::: sampunkt "Formlerna hänger ihop"
+- Dividerar man $ax^2 + bx + c = 0$ med $a$ får man
+  $x^2 + \dfrac{b}{a}x + \dfrac{c}{a} = 0$.
+- Det är precis *pq*-formen med
+  $p = \dfrac{b}{a}$ och $q = \dfrac{c}{a}$.
+- Båda formlerna ger alltså samma svar. Välj den som passar.
+:::
+:::

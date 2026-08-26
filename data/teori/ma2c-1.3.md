@@ -249,3 +249,37 @@ y = 2
 \end{cases}
 $$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Additionsmetoden"
+1. Se till att **samma variabelterm** finns i båda ekvationer, med
+   **olika tecken**.
+2. Addera ekvationerna **ledvis**, så att den variabeln elimineras.
+3. Lös den kvarvarande ekvationen.
+4. Sätt in värdet i en tidigare ekvation.
+:::
+
+::: sampunkt "När du kan addera direkt"
+- Står till exempel $+5y$ i den ena och $-5y$ i den andra tar de ut
+  varandra på en gång.
+:::
+
+::: sampunkt "Multiplicera en ekvation"
+- $+4y$ och $-8y$: multiplicera den övre med 2, så blir det $+8y$.
+- **Alla** termer i ekvationen måste multipliceras, inte bara den ena.
+:::
+
+::: sampunkt "Multiplicera båda ekvationerna"
+- Räcker det inte med en: multiplicera var och en med den **andras**
+  koefficient.
+- Sätt minustecken på den ena så att termerna tar ut varandra.
+:::
+
+::: sampunkt "Vilken metod ska du välja?"
+- **Substitution**: när en variabel redan står ensam eller är lätt att
+  lösa ut.
+- **Addition**: när båda ekvationerna står på formen
+  $ax + by = c$.
+:::
+:::

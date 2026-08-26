@@ -144,3 +144,40 @@ $$
 
 **Svar:** $\dfrac{x - 3}{5}$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Faktorisera: ordningen"
+1. **Bryt ut** en gemensam faktor, som vanligt.
+2. Använd sedan **kvadreringsregel eller konjugatregel baklänges** på det
+   som står kvar i parentesen.
+:::
+
+::: sampunkt "Konjugatregeln baklänges"
+- **Två** termer, båda kvadrater, med **minus** emellan.
+- Kom ihåg-ramsan: "Kvadrat minus kvadrat är konjugat!"
+- $a^2 - b^2 = (a + b)(a - b)$
+:::
+
+::: sampunkt "Kvadreringsreglerna baklänges"
+- **Tre** termer, där första och sista är kvadrater.
+- Plus framför mittentermen: $(a + b)^2$.
+- Minus framför mittentermen: $(a - b)^2$.
+- **Kontrollera alltid mittentermen**: den ska vara den dubbla produkten
+  $2ab$.
+:::
+
+::: sampunkt "Så hittar du innehållet"
+- "Vad upphöjt till 2 blir $25x^2$?" Svar: $5x$.
+- "Vad upphöjt till 2 blir 49?" Svar: 7.
+- Sätt in i mallen och kontrollera genom att multiplicera ut.
+:::
+
+::: sampunkt "Förenkla rationella uttryck"
+1. Faktorisera **täljare och nämnare** så långt det går.
+2. Förkorta bort de faktorer som finns i båda.
+- $\dfrac{x^2 - 9}{5x + 15}
+  = \dfrac{(x+3)(x-3)}{5(x+3)} = \dfrac{x - 3}{5}$.
+- Bara **faktorer** får strykas, aldrig termer.
+:::
+:::

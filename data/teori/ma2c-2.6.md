@@ -111,3 +111,36 @@ Vi får alltså en enda lösning när $a = 16$.
 
 **Svar:** $a = 16$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Diskriminanten"
+- Uttrycket **under rottecknet** i *pq*-formeln:
+  $\left(\dfrac{p}{2}\right)^{2} - q$.
+- I *abc*-formeln är det $b^2 - 4ac$.
+- Dess **tecken** avgör hur många lösningar ekvationen har.
+:::
+
+::: sampunkt "De tre fallen"
+- **Positiv** diskriminant: **två** lösningar.
+- **Noll**: **en** lösning, en så kallad **dubbelrot**.
+- **Negativ**: **noll** lösningar, eftersom man inte kan dra roten ur ett
+  negativt tal.
+:::
+
+::: sampunkt "Så gör du"
+- Börja lösningen med *pq*-formeln, men räkna bara ut **talet under
+  roten**.
+- Titta på tecknet. Du behöver inte räkna färdigt.
+:::
+
+::: sampunkt "Sökt värde för en dubbelrot"
+- Sätt **diskriminanten lika med 0** och lös ut den okända konstanten.
+- $x^2 - 8x + a = 0$ ger $4^2 - a = 0$, alltså $a = 16$.
+:::
+
+::: sampunkt "Kopplingen till grafen"
+- Diskriminanten säger hur många gånger parabeln **skär $x$-axeln**: två,
+  en eller ingen.
+:::
+:::

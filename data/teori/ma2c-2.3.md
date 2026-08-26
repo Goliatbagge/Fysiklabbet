@@ -142,3 +142,36 @@ vänstra ledet blir lika med 0.)
 
 **Svar:** $(x - 3)(x + 10) = 0$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "När metoden används"
+- Ekvationer med både $x^2$-termer **och** $x$-termer, men **ingen
+  konstantterm**.
+- Även ekvationer där en färdig **produkt** är lika med 0.
+:::
+
+::: sampunkt "Principen"
+- Är en produkt lika med 0 **måste minst en faktor vara 0**.
+- Det går inte att multiplicera två tal skilda från noll och få 0.
+:::
+
+::: sampunkt "Metoden"
+1. Se till att **högerledet blir 0**.
+2. **Faktorisera** vänsterledet.
+3. Sätt **varje faktor** lika med 0 och lös var för sig.
+:::
+
+::: sampunkt "Två lösningar"
+- En andragradsekvation har oftast **två** rötter, ofta $x_1 = 0$ och en
+  till.
+- Skriv ut båda och numrera dem $x_1$ och $x_2$.
+- Lösningen till en ekvation kallas också **rot**.
+:::
+
+::: sampunkt "Vanlig fälla"
+- **Dividera aldrig bort $x$.** Då tappar du lösningen $x = 0$.
+- $14x^2 = 21x$ ska flyttas ihop till
+  $7x(2x - 3) = 0$, inte förkortas med $x$.
+:::
+:::

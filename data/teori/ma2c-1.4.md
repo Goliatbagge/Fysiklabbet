@@ -136,3 +136,35 @@ $$
 
 **Svar:** Talen är 12 och 7.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Metoden"
+1. **Definiera** variablerna i klartext.
+2. Ställ upp **ett ekvationssystem** och lös det.
+3. **Tolka och svara** på frågan som ställdes.
+:::
+
+::: sampunkt "Två okända kräver två ekvationer"
+- Har problemet två okända storheter behövs **två oberoende** uppgifter i
+  texten.
+- Varje sådan uppgift blir en ekvation.
+:::
+
+::: sampunkt "Typexempel: kor och höns"
+- $k + h = 100$ för **huvudena**, ett per djur.
+- $4k + 2h = 352$ för **benen**, fyra respektive två per djur.
+- Varje ekvation beskriver alltså en egen sorts räkning.
+:::
+
+::: sampunkt "Typexempel: summa och differens"
+- $x + y = 19$ och $x - y = 5$.
+- Här passar **additionsmetoden** perfekt, eftersom $y$ tar ut sig direkt.
+:::
+
+::: sampunkt "Sista steget glöms lätt"
+- Svara i klartext med rätt enhet: "Bonden har 76 kor och 24 höns".
+- Kontrollera rimligheten: antal djur kan inte vara negativt eller ett
+  decimaltal.
+:::
+:::

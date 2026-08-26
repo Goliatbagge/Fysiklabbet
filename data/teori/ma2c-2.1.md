@@ -119,3 +119,39 @@ $$
 
 **Svar:** $4x^2 - 81$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Kvadreringsreglerna"
+- $(a + b)^2 = a^2 + 2ab + b^2$
+- $(a - b)^2 = a^2 - 2ab + b^2$
+- Enda skillnaden är **tecknet framför mittentermen**. Sista termen är
+  alltid positiv.
+:::
+
+::: sampunkt "Den vanligaste missen"
+- $(a + b)^2$ är **inte** $a^2 + b^2$.
+- Mittentermen $2ab$ måste finnas med. Kontrollera med
+  $(2 + 3)^2 = 25$, inte $4 + 9 = 13$.
+:::
+
+::: sampunkt "Konjugatregeln"
+- $(a + b)(a - b) = a^2 - b^2$
+- Två likadana parenteser där **bara tecknet** skiljer.
+- Mittentermerna tar ut varandra, så kvar blir en **differens av två
+  kvadrater**.
+:::
+
+::: sampunkt "Varför reglerna stämmer"
+- De är bara vanlig parentesmultiplikation, sammanfattad:
+  $(a + b)(a + b) = a^2 + ab + ab + b^2$.
+- Kan du reglerna utantill går det snabbare, men du kan alltid multiplicera
+  ut för hand som kontroll.
+:::
+
+::: sampunkt "Använda dem baklänges"
+- $a^2 - b^2$ kan **faktoriseras** till $(a + b)(a - b)$.
+- $a^2 + 2ab + b^2$ kan skrivas $(a + b)^2$.
+- Det används flitigt när uttryck ska förenklas och ekvationer lösas.
+:::
+:::

@@ -164,3 +164,31 @@ y = 1
 \end{cases}
 $$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Substitutionsmetoden"
+1. Lös ut en variabel ur den ena ekvationen.
+2. **Byt ut** variabeln mot uttrycket i den **andra** ekvationen.
+3. Lös den ekvationen, som nu bara har en variabel.
+4. Sätt in värdet i en tidigare ekvation för att få den andra variabeln.
+:::
+
+::: sampunkt "Välj rätt variabel att lösa ut"
+- Ta den som är **enklast**, alltså den som saknar koefficient och
+  minustecken.
+- Står en variabel redan ensam kan du substituera direkt.
+:::
+
+::: sampunkt "Numrera ekvationerna"
+- Sätt etiketterna (1), (2) och (3) på ekvationerna.
+- Skriv sedan vilken du använder i varje steg. Det gör lösningen läsbar
+  och lätt att kontrollera.
+:::
+
+::: sampunkt "Sista steget"
+- Sätt in det första svaret i **vilken som helst** av de tidigare
+  ekvationerna.
+- Kontrollera gärna i den **andra** ekvationen: båda leden ska bli lika.
+:::
+:::

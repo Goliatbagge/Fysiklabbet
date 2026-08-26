@@ -151,3 +151,34 @@ $$
 
 **Svar:** 144 cm
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Fyra steg"
+1. **Tolka problemet.** Definiera variablerna och rita figur vid behov.
+2. **Ställ upp** en eller flera ekvationer.
+3. **Lös** med lämplig metod.
+4. **Tolka svaret.** Vad stod variablerna för och är svaret rimligt?
+:::
+
+::: sampunkt "Två okända kräver två ekvationer"
+- "Differensen 21" ger $y - x = 21$.
+- "Produkten 1 080" ger $x \cdot y = 1\,080$.
+- Substitutionsmetoden ger då en **andragradsekvation** att lösa.
+:::
+
+::: sampunkt "Det avgörande sista steget"
+- En andragradsekvation ger **två** rötter, men problemet har ofta bara
+  **en** rimlig lösning.
+- Negativa längder, negativa antal eller negativa tal när uppgiften sagt
+  positiva ska **förkastas**.
+- Skriv ut varför du förkastar den, det hör till lösningen.
+:::
+
+::: sampunkt "Vanliga uppställningar"
+- Rektangelns area: $\text{bas} \cdot \text{höjd}$, där den ena uttrycks
+  med hjälp av den andra.
+- Tal med känd summa eller differens och känd produkt.
+- Ritar du en figur blir sambanden nästan alltid tydligare.
+:::
+:::

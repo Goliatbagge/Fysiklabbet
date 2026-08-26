@@ -153,3 +153,36 @@ $$
 
 **Svar:** $x_1 = -13$ och $x_2 = 3$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "När formeln används"
+- Ekvationer med $x^2$-term, $x$-term **och** konstantterm.
+- Alltså en **fullständig** andragradsekvation.
+:::
+
+::: sampunkt "*pq*-formeln"
+- $x^2 + px + q = 0$ har lösningarna
+- $x = -\dfrac{p}{2} \pm
+  \sqrt{\left(\dfrac{p}{2}\right)^{2} - q}$
+:::
+
+::: sampunkt "Två krav innan du använder den"
+- Ekvationen måste vara **lika med 0**.
+- Det får **inte** finnas någon koefficient framför $x^2$. Finns det,
+  dividera hela ekvationen med den först.
+:::
+
+::: sampunkt "Formeln med ord"
+- Halva koefficienten framför $x$-termen, med **ombytt tecken**.
+- Plus minus roten ur: föregående tal i kvadrat, minus konstanttermen med
+  **ombytt tecken**.
+:::
+
+::: sampunkt "Vanliga fällor"
+- $p$ och $q$ tas **med tecken**. Är $q = -7$ blir det
+  $-(-7) = +7$ under roten.
+- Glöm inte $\pm$. Det ger de **två** lösningarna.
+- Kontrollera genom att sätta in svaren i den ursprungliga ekvationen.
+:::
+:::

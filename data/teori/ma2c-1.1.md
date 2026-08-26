@@ -122,3 +122,37 @@ $m \neq 5$.
 
 **Svar:** $k = 2$ och $m \neq 5$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Ekvationssystem"
+- Flera ekvationer som ska ha **gemensamma** lösningar.
+- Markeras med en **krullparentes**.
+- En ensam ekvation med två variabler har oändligt många lösningspar. Det
+  är kravet på en **gemensam** lösning som ger ett bestämt svar.
+:::
+
+::: sampunkt "Grafisk lösning"
+1. Rita upp båda ekvationernas grafer.
+2. Ta fram **skärningspunktens** koordinater.
+3. $x$-koordinaten är lösningen för $x$, $y$-koordinaten för $y$.
+:::
+
+::: sampunkt "Antal lösningar"
+- **Olika $k$-värden**: linjerna korsar varandra, alltså **en** lösning.
+  $m$ spelar ingen roll.
+- **Samma $k$, olika $m$**: parallella linjer, **saknar** lösning.
+- **Samma $k$, samma $m$**: samma linje, **oändligt många** lösningar.
+:::
+
+::: sampunkt "Så avgör du"
+- Skriv om båda ekvationerna på formen $y = kx + m$.
+- Jämför sedan $k$ först och $m$ sedan.
+:::
+
+::: sampunkt "Svarsformen"
+- Skriv svaret med klammer:
+  $\begin{cases} x = 3 \\ y = 2 \end{cases}$
+- **Båda** variablerna hör till svaret.
+:::
+:::

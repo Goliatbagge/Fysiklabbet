@@ -186,3 +186,33 @@ med 0) eftersom den inte uppfyller det första villkoret $A = B$.
 
 Slutsats: Kvadreringar kan ge extra "falska" rötter.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Rotekvation"
+- En ekvation där variabeln står **under ett rottecken**.
+:::
+
+::: sampunkt "Standardmetoden"
+1. Lös ut **termen med rotuttrycket** så att den står ensam.
+2. **Kvadrera båda led**, så försvinner rottecknet.
+3. Lös med lämplig metod.
+4. **Kontrollera lösningen.**
+:::
+
+::: sampunkt "Falska rötter"
+- Kvadrering kan skapa lösningar som **inte** uppfyller den ursprungliga
+  ekvationen.
+- Orsaken: både $3$ och $-3$ ger 9 vid kvadrering.
+- **Kontrollen är därför obligatorisk**, inte en extra vänlighet. Sätt in
+  varje rot i den **ursprungliga** ekvationen.
+:::
+
+::: sampunkt "Variabelsubstitution"
+- Byt ut $\sqrt{x}$ mot en ny variabel, till exempel $t$.
+- Lös den nya ekvationen i $t$.
+- Gå sedan tillbaka: $x = t^2$.
+- Ett negativt $t$ måste förkastas, eftersom $\sqrt{x}$ aldrig är
+  negativ.
+:::
+:::

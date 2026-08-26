@@ -48,6 +48,14 @@ node .claude/verify-vinkelbagar.js
 # Se "Kurvor ska ritas ur sin funktion" nedan.
 node .claude/verify-kurvor.js
 
+# Verifiera BRÅKENS TECKENSTORLEK i inline-matte (KÖR FÖRE COMMIT vid
+# ändringar i teori, övningar, exit tickets eller nationella prov!) — ett
+# bråk i löptext ska vara lika stort som texten runt omkring. Flaggar
+# \tfrac överallt och bart \frac i löptext, men känner igen undantagen
+# (blandad form, \displaystyle, exponent, nästlat bråk, under rottecken,
+# parentes upphöjd till en exponent). Se "Bråk i löptext" nedan.
+node .claude/verify-brak.js
+
 # Verifiera BALANSEN i kopplingsscheman (KÖR FÖRE COMMIT vid ändringar i
 # kopplingsscheman!) — komponenterna ska ha lika stora mellanrum på sin
 # ledarsträcka, batteriet sitta centrerat och parallellgrenarna ligga på
@@ -1296,13 +1304,26 @@ höjd- och sidled) för alla `::: figur` — men bara för text utan egen
 `transform`; roterade etiketter och simuleringarnas scener måste du
 fortfarande granska i skärmdump.
 
-### Bråk i löptext: `\dfrac`, aldrig `\frac`
+### Bråk i löptext: `\dfrac` — aldrig `\frac`, och ALDRIG `\tfrac`
 
 **Ett inline-bråk i brödtext skrivs alltid `$\dfrac{15}{4}$`** (påpekat
-2026-08-19 och igen 2026-08-25). KaTeX renderar `\frac` inline i *textstyle*,
-alltså med minisiffror i täljare och nämnare — bråket blir mindre än
-omgivande text och "flyter inte ihop" med den. `\dfrac` tvingar fram
-displaystyle, så bråket får samma teckenstorlek som brödtexten runt omkring.
+2026-08-19, 2026-08-25 och 2026-08-26). KaTeX renderar `\frac` inline i
+*textstyle*, alltså med minisiffror i täljare och nämnare — bråket blir
+mindre än omgivande text och "flyter inte ihop" med den. `\dfrac` tvingar
+fram displaystyle, så bråket får samma teckenstorlek som brödtexten runt
+omkring.
+
+⛔ **`\tfrac` får ALDRIG användas — inte ens där undantagen nedan gäller.**
+Det är den vanligaste orsaken till fula minibråk (`$f = \tfrac{1}{T}$` i
+härledningen i `fy2-1.3`, påpekat 2026-08-26 — 169 sådana bråk fanns då i
+teorin, övningarna, exit tickets och de nationella proven). `\tfrac` tvingar
+fram textstyle *oavsett* omgivning, så det ger ett litet bråk även inuti ett
+`$$…$$`-block där allt annat är stort. Skriv `\dfrac` i löptext och `\frac`
+där ett litet bråk faktiskt är rätt (undantagen nedan) — `\tfrac` behövs
+aldrig.
+
+**Kör `node .claude/verify-brak.js` före commit.** Den granskar alla
+inline-spann i `data/` och känner igen undantagen automatiskt.
 
 Gäller överallt inline-matte förekommer: `data/teori/*.md` (löptext,
 `:::`-rutor, figurernas bildtexter), `data/ovningar.js` (frågestammar och
@@ -1322,6 +1343,9 @@ svarsalternativ), `data/exittickets.js` (frågor, `choices`, `why`) och
 - **Nästlade bråk**: det inre bråket i
   `$x = \dfrac{\lg\left(\frac{3}{4}\right)}{\lg\left(\frac{5}{2}\right)}$`
   behåller `\frac`, annars sväller uttrycket ur raden.
+- **Under rottecken**: `$T = 2\pi\sqrt{\frac{m}{k}}$`, `$\omega =
+  \sqrt{\frac{k}{m}}$`. Ett `\dfrac` drar ut rotmärket på höjden så att
+  raden spränger radavståndet — värre än storleksskillnaden.
 - **Parentes upphöjd till en exponent**: `$\left(\frac{p}{2}\right)^2 - q$`
   (diskriminanten i *pq*-formeln) — hela parentesen läses som en enhet i
   textstyle.
@@ -1415,6 +1439,17 @@ avslutande blanksteg).
 - ✓ `**Priset var 80 kr år 2010 och 140 kr år 2023.<br>a) Bestäm indextalet år 2023.<br>b) Med hur många procent har priset ökat?**`
 - ✗ `**…<br>a) Bestäm indextalet år 2023.&emsp;&emsp;b) Med hur många procent …**`
 - ✗ `**Vad är SI-enheten för a) hastighet, b) volym?**` (inbäddat i meningen)
+
+**Deluppgifter åtskiljs BARA av radbrytningen — aldrig av kommatecken**
+(uttryckligt önskemål 2026-08-26). Radbrytningen gör redan hela jobbet, och
+ett kommatecken som hänger kvar i radslutet läser som om meningen fortsatte.
+Det gäller även när deluppgifterna är korta ord eller enheter, och även när
+den gemensamma frågestammen slutar mitt i en mening ("Bestäm
+vinkelhastigheten i").
+
+- ✓ `**En karusell roterar ett varv på 10 sekunder. Bestäm vinkelhastigheten i<br>a) grader/s<br>b) rad/s.**`
+- ✗ `**… Bestäm vinkelhastigheten i<br>a) grader/s, b) rad/s.**`
+- ✗ `**… Bestäm resultanten om de verkar<br>a) åt samma håll,<br>b) åt motsatt håll.**`
 
 Gäller både teori-exemplens frågor (`::: exempel` i `data/teori/*.md`) och
 `question`-strängarna i `data/ovningar.js` — även när deluppgifterna är

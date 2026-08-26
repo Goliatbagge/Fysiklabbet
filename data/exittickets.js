@@ -766,7 +766,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Hastighetsökningen adderas till utgångshastigheten — det är inte en produkt av $v_0$, $a$ och $t$.',
-      '$a\\cdot t^2$ (utan faktorn $\\tfrac12$ och utan $v_0$) är en del av sträckformeln, inte hastighetsformeln.',
+      '$a\\cdot t^2$ (utan faktorn $\\dfrac12$ och utan $v_0$) är en del av sträckformeln, inte hastighetsformeln.',
       'Hastigheten vid konstant acceleration ges av $v = v_0 + a\\cdot t$ — utgångshastigheten plus hastighetsändringen $a\\cdot t$.',
       'Ett minustecken framför $a\\cdot t$ är fel — accelerationens eget tecken (positivt eller negativt) är redan inbyggt i $a$, så termen ska adderas.',
     ],
@@ -776,10 +776,10 @@ window.EXITTICKETS = {
     choices: ['$s = v_0 \\cdot t + \\dfrac{a \\cdot t^2}{2}$', '$s = v_0 \\cdot t - \\dfrac{a\\cdot t^2}{2}$', '$s = a \\cdot t^2$', '$s = \\dfrac{v_0+v}{2}\\cdot a$'],
     correct: 0,
     why: [
-      'Förflyttningen vid konstant acceleration är summan av en "rektangelterm" $v_0\\cdot t$ och en "triangelterm" $\\tfrac{a\\cdot t^2}{2}$.',
-      'Termen $\\tfrac{a\\cdot t^2}{2}$ ska adderas, inte subtraheras — accelerationens tecken är redan inbyggt i $a$.',
-      '$a\\cdot t^2$ (utan faktorn $\\tfrac12$ och utan $v_0\\cdot t$-termen) ger fel resultat — båda termerna och faktorn $\\tfrac12$ behövs.',
-      'Det uttrycket blandar ihop medelhastighet och acceleration på ett sätt som inte ger sträckan — rätt formel är $s = v_0 t + \\tfrac{a t^2}{2}$.',
+      'Förflyttningen vid konstant acceleration är summan av en "rektangelterm" $v_0\\cdot t$ och en "triangelterm" $\\dfrac{a\\cdot t^2}{2}$.',
+      'Termen $\\dfrac{a\\cdot t^2}{2}$ ska adderas, inte subtraheras — accelerationens tecken är redan inbyggt i $a$.',
+      '$a\\cdot t^2$ (utan faktorn $\\dfrac12$ och utan $v_0\\cdot t$-termen) ger fel resultat — båda termerna och faktorn $\\dfrac12$ behövs.',
+      'Det uttrycket blandar ihop medelhastighet och acceleration på ett sätt som inte ger sträckan — rätt formel är $s = v_0 t + \\dfrac{a t^2}{2}$.',
     ],
   },
   {
@@ -788,8 +788,8 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Den termen försvinner helt när $v_0 = 0$, eftersom den innehåller $v_0$ som faktor.',
-      'När $v_0 = 0$ faller den första termen i $s = v_0 t + \\tfrac{a t^2}{2}$ bort, och kvar blir $s = \\tfrac{a t^2}{2}$.',
-      '$a\\cdot t$ (utan kvadrat och utan faktorn $\\tfrac12$) är istället en del av hastighetsformeln $v=a\\cdot t$, inte sträckformeln.',
+      'När $v_0 = 0$ faller den första termen i $s = v_0 t + \\dfrac{a t^2}{2}$ bort, och kvar blir $s = \\dfrac{a t^2}{2}$.',
+      '$a\\cdot t$ (utan kvadrat och utan faktorn $\\dfrac12$) är istället en del av hastighetsformeln $v=a\\cdot t$, inte sträckformeln.',
       '$2at$ stämmer varken med hastighets- eller sträckformeln vid start från vila.',
     ],
   },
@@ -2358,7 +2358,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Rörelseenergi definieras som $E_\\mathrm{k} = \\tfrac{1}{2} m v^2$ och mäts i joule — en helt annan storhet, trots att båda beror på massa och hastighet.',
+      'Rörelseenergi definieras som $E_\\mathrm{k} = \\dfrac{1}{2} m v^2$ och mäts i joule — en helt annan storhet, trots att båda beror på massa och hastighet.',
       'Kraft mäts i newton och är inte samma sak som produkten av massa och hastighet.',
       'Rörelsemängd betecknas *p* och definieras som $p = m \\cdot v$, med SI-enheten kg · m/s.',
       'Impuls är en kraft som verkar under en viss tid, $I = F \\cdot \\Delta t$ — inte massa gånger hastighet.',
@@ -5283,16 +5283,16 @@ window.EXITTICKETS = {
   {
     question: 'Hur många radianer motsvarar 180°?',
     choices: [
-      '$\\tfrac{\\pi}{2}$',
+      '$\\dfrac{\\pi}{2}$',
       '$2\\pi$',
-      '$\\tfrac{\\pi}{4}$',
+      '$\\dfrac{\\pi}{4}$',
       '$\\pi$',
     ],
     correct: 3,
     why: [
-      '$\\tfrac{\\pi}{2}$ rad motsvarar 90°, inte 180°.',
+      '$\\dfrac{\\pi}{2}$ rad motsvarar 90°, inte 180°.',
       '$2\\pi$ rad motsvarar ett helt varv, dvs. 360°.',
-      '$\\tfrac{\\pi}{4}$ rad motsvarar 45°.',
+      '$\\dfrac{\\pi}{4}$ rad motsvarar 45°.',
       'Eftersom $360^{\\circ} = 2\\pi$ blir $180^{\\circ} = \\pi$.',
     ],
   },
@@ -5470,7 +5470,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Ingen mätning förekommer i räkneexemplet — hastigheten bestäms teoretiskt.',
-      'Lägesenergin $E_p = m \\cdot g \\cdot h$ som tyngdpunkten "faller" omvandlas till rörelseenergi $E_k = \\tfrac{1}{2} m v^2$, vilket ger farten i lägsta punkten.',
+      'Lägesenergin $E_p = m \\cdot g \\cdot h$ som tyngdpunkten "faller" omvandlas till rörelseenergi $E_k = \\dfrac{1}{2} m v^2$, vilket ger farten i lägsta punkten.',
       'Kraftmomentlagen används inte i detta exempel — den hör till avsnittet om kraftmoment.',
       'Farten är inte densamma i de två lägena — gungan är snabbast i lägsta punkten och (i deluppgift b) långsammast i högsta punkten.',
     ],
@@ -6714,7 +6714,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket villkor gäller för vägskillnaden $\\Delta s$ på en maximilinje (konstruktiv interferens)?',
-    choices: ['$\\Delta s = \\left(n + \\tfrac{1}{2}\\right) \\cdot \\lambda$', '$\\Delta s = n \\cdot \\lambda$', '$\\Delta s = 2n \\cdot \\lambda$', '$\\Delta s = \\sqrt{n} \\cdot \\lambda$'],
+    choices: ['$\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$', '$\\Delta s = n \\cdot \\lambda$', '$\\Delta s = 2n \\cdot \\lambda$', '$\\Delta s = \\sqrt{n} \\cdot \\lambda$'],
     correct: 1,
     why: [
       'Det villkoret gäller istället för nodlinjer (destruktiv interferens), där vågorna möts i motfas.',
@@ -6725,17 +6725,17 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilket villkor gäller för vägskillnaden $\\Delta s$ på en nodlinje (destruktiv interferens)?',
-    choices: ['$\\Delta s = n \\cdot \\lambda$', '$\\Delta s = 2n \\cdot \\lambda$', '$\\Delta s = \\left(n + \\tfrac{1}{2}\\right) \\cdot \\lambda$', '$\\Delta s = \\sqrt{n} \\cdot \\lambda$'],
+    choices: ['$\\Delta s = n \\cdot \\lambda$', '$\\Delta s = 2n \\cdot \\lambda$', '$\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$', '$\\Delta s = \\sqrt{n} \\cdot \\lambda$'],
     correct: 2,
     why: [
       'Det villkoret gäller istället för maximilinjer (konstruktiv interferens), där vågorna möts i fas.',
       'Att kräva jämna multipler av λ beskriver inte destruktiv interferens korrekt.',
-      'På en nodlinje möts vågorna i motfas, vilket sker när vägskillnaden är ett halvt heltal av våglängder: $\\Delta s = \\left(n + \\tfrac{1}{2}\\right) \\cdot \\lambda$.',
+      'På en nodlinje möts vågorna i motfas, vilket sker när vägskillnaden är ett halvt heltal av våglängder: $\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$.',
       'Villkoret för destruktiv interferens är linjärt i $n$ (plus en halv), inte en kvadratrot av $n$.',
     ],
   },
   {
-    question: 'En punkt ligger på en nodlinje. Avståndet till den ena högtalaren är $12{,}0\\ \\mathrm{m}$ och till den andra $10{,}5\\ \\mathrm{m}$. Detta är den nollte nodlinjen ($n=0$). Vad är våglängden λ? (Ledtråd: $\\Delta s = \\left(n+\\tfrac{1}{2}\\right)\\lambda$)',
+    question: 'En punkt ligger på en nodlinje. Avståndet till den ena högtalaren är $12{,}0\\ \\mathrm{m}$ och till den andra $10{,}5\\ \\mathrm{m}$. Detta är den nollte nodlinjen ($n=0$). Vad är våglängden λ? (Ledtråd: $\\Delta s = \\left(n+\\dfrac{1}{2}\\right)\\lambda$)',
     choices: ['$1{,}5\\ \\mathrm{m}$', '$0{,}75\\ \\mathrm{m}$', '$6{,}0\\ \\mathrm{m}$', '$3{,}0\\ \\mathrm{m}$'],
     correct: 3,
     why: [
@@ -20314,9 +20314,9 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Eftersom radien är 1 gäller $\\cos v = \\tfrac{x}{1} = x$, så cosinus är punktens $x$-koordinat.',
+      'Eftersom radien är 1 gäller $\\cos v = \\dfrac{x}{1} = x$, så cosinus är punktens $x$-koordinat.',
       'Cosinus är en koordinat för en punkt på cirkeln, inte något mått på hela cirkeln.',
-      'Kvoten $\\tfrac{y}{x}$ är $\\tan v$, inte $\\cos v$.',
+      'Kvoten $\\dfrac{y}{x}$ är $\\tan v$, inte $\\cos v$.',
       'Det är $\\sin v$ som är punktens $y$-koordinat, inte $\\cos v$.',
     ],
   },
@@ -20333,7 +20333,7 @@ window.EXITTICKETS = {
       '$x$-koordinaten är $\\cos v$ och $y$-koordinaten är $\\sin v$, så punkten är $(\\cos v,\\ \\sin v)$.',
       'Koordinaterna är omkastade — cosinus hör till $x$-axeln och sinus till $y$-axeln, inte tvärtom.',
       'Vinkeln $v$ själv är inte en koordinat — den bestämmer var på cirkeln punkten ligger.',
-      'Tangens är ingen koordinat på enhetscirkeln; den är kvoten $\\tfrac{\\sin v}{\\cos v}$.',
+      'Tangens är ingen koordinat på enhetscirkeln; den är kvoten $\\dfrac{\\sin v}{\\cos v}$.',
     ],
   },
   {
@@ -20346,10 +20346,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      '$\\tfrac{1}{2}$ är $\\sin 30^\\circ$, inte $\\sin 60^\\circ$.',
-      '$\\tfrac{\\sqrt{2}}{2}$ är $\\sin 45^\\circ$, inte $\\sin 60^\\circ$.',
+      '$\\dfrac{1}{2}$ är $\\sin 30^\\circ$, inte $\\sin 60^\\circ$.',
+      '$\\dfrac{\\sqrt{2}}{2}$ är $\\sin 45^\\circ$, inte $\\sin 60^\\circ$.',
       '$\\sqrt{3}$ är $\\tan 60^\\circ$; sinusvärdet kan aldrig vara större än 1.',
-      'För standardvinkeln $60^\\circ$ är $\\sin 60^\\circ = \\tfrac{\\sqrt{3}}{2} \\approx 0{,}87$.',
+      'För standardvinkeln $60^\\circ$ är $\\sin 60^\\circ = \\dfrac{\\sqrt{3}}{2} \\approx 0{,}87$.',
     ],
   },
   {
@@ -20904,7 +20904,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Multiplikation med $\\tfrac12$ ger $\\tfrac12\\sin x\\cos x$, vilket inte är $\\sin 2x$. Man ska multiplicera med 2.',
+      'Multiplikation med $\\dfrac12$ ger $\\dfrac12\\sin x\\cos x$, vilket inte är $\\sin 2x$. Man ska multiplicera med 2.',
       'Kvadrering ändrar ekvationen och inför falska lösningar — det behövs inte här.',
       '$\\sin x\\cos x$ hör ihop med $\\sin 2x$ (via faktorn 2), inte med $\\cos 2x$.',
       '$2\\sin x\\cos x = \\sin 2x$, så efter multiplikation med 2 blir ekvationen $\\sin 2x = \\dfrac{\\sqrt3}{2}$.',
@@ -21683,17 +21683,17 @@ window.EXITTICKETS = {
   {
     question: 'Hur skriver man om $\\sqrt{x^2 + 3x}$ som en potens inför derivering med kedjeregeln?',
     choices: [
-      '$\\tfrac{1}{2}(x^2 + 3x)$',
+      '$\\dfrac{1}{2}(x^2 + 3x)$',
       '$(x^2 + 3x)^{1/2}$',
       '$(x^2 + 3x)^{2}$',
       '$(x^2 + 3x)^{-1/2}$',
     ],
     correct: 1,
     why: [
-      'Roten är inte en faktor $\\tfrac{1}{2}$ framför uttrycket utan en exponent på uttrycket.',
-      'Just det — en kvadratrot är en potens med exponent $\\tfrac{1}{2}$.',
+      'Roten är inte en faktor $\\dfrac{1}{2}$ framför uttrycket utan en exponent på uttrycket.',
+      'Just det — en kvadratrot är en potens med exponent $\\dfrac{1}{2}$.',
       'Exponent $2$ betyder kvadrat, inte kvadratrot.',
-      '$-\\tfrac{1}{2}$ dyker upp först efter deriveringen; själva roten är $\\tfrac{1}{2}$.',
+      '$-\\dfrac{1}{2}$ dyker upp först efter deriveringen; själva roten är $\\dfrac{1}{2}$.',
     ],
   },
 ],
@@ -23495,7 +23495,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       '$a^2 < 9$ svarar mot $-3 < a < 3$; men villkoret är $a^2 < 36$, inte $a^2 < 9$.',
-      'Rätt — kravet är $\\left(\\tfrac{a}{2}\\right)^2 - 9 < 0$, alltså $a^2 < 36$, vilket ger $-6 < a < 6$.',
+      'Rätt — kravet är $\\left(\\frac{a}{2}\\right)^2 - 9 < 0$, alltså $a^2 < 36$, vilket ger $-6 < a < 6$.',
       'Vid $a = 6$ är diskriminanten exakt noll — då fås en reell dubbelrot, inte två icke-reella rötter.',
       'Där är $a^2 > 36$, så diskriminanten är positiv och rötterna blir reella — inte icke-reella.',
     ],

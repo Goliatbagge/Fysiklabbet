@@ -6832,7 +6832,7 @@ $$
             choices: [
                 `Arbetet är $W = m g s = 8{,}0 \\cdot 9{,}82 \\cdot 20 \\approx 1\\,570$ J.`,
                 `Arbetet är 0 J — rörelsen sker vinkelrätt mot kraften.`,
-                `Arbetet är $\\tfrac{1}{2} m g s$.`,
+                `Arbetet är $\\dfrac{1}{2} m g s$.`,
                 `Arbetet är negativt eftersom han bär lådan.`,
             ],
             correct: 1,
@@ -10297,7 +10297,7 @@ Den ena laddningen tredubblas ($Q_1 \\to 3Q_1$) och avståndet fördubblas ($r \
 
 $$ F_2 = k \\cdot \\frac{(3 Q_1) \\cdot Q_2}{(2r)^2} = k \\cdot \\frac{3 \\cdot Q_1 \\cdot Q_2}{4 r^2} = \\frac{3}{4} \\cdot k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} = \\frac{3}{4} F_1 $$
 
-**Svar:** Kraften blir $\\tfrac{3}{4} = 0{,}75$ gånger så stor (alltså mindre än förut).
+**Svar:** Kraften blir $\\dfrac{3}{4} = 0{,}75$ gånger så stor (alltså mindre än förut).
 
 **Generell slutsats:** Laddningen ökar kraften linjärt (faktor 3), men avståndet slår igenom i kvadrat (faktor $2^2 = 4$ i nämnaren). Avståndets kvadratiska beroende "vinner" här, så kraften minskar trots att laddningen ökade.`,
         },
@@ -11729,7 +11729,7 @@ $$ v = \\sqrt{2 a d} = \\sqrt{2 \\cdot 4{,}4 \\cdot 10^{15} \\cdot 0{,}020} = 1{
 
 **Svar:** Elektronen når hastigheten ungefär $1{,}3 \\cdot 10^7\\ \\mathrm{m/s}$.
 
-**Generell slutsats:** Det går att kontrollera via energi: $q_e U = \\tfrac{1}{2} m_e v^2$ ger samma svar direkt, eftersom hela "fält-vägen" bara är ett annat sätt att beskriva att den elektriska energin $q_e U$ blir rörelseenergi. Den långa vägen visar *varför* det fungerar.`,
+**Generell slutsats:** Det går att kontrollera via energi: $q_e U = \\dfrac{1}{2} m_e v^2$ ger samma svar direkt, eftersom hela "fält-vägen" bara är ett annat sätt att beskriva att den elektriska energin $q_e U$ blir rörelseenergi. Den långa vägen visar *varför* det fungerar.`,
         },
         {
             level: 3,
@@ -11744,7 +11744,7 @@ $$ a = \\frac{F}{m_e} = \\frac{\\mathbb{E} \\cdot q_e}{m_e} = \\frac{4\\,000 \\c
 **Vågrätt — tiden mellan plattorna** (konstant hastighet $v_0$):
 $$ t = \\frac{L}{v_0} = \\frac{0{,}060}{2{,}0 \\cdot 10^7} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{s} $$
 
-**Lodrät avböjning** under denna tid (start från vila i lodled, $y = \\tfrac{1}{2} a t^2$):
+**Lodrät avböjning** under denna tid (start från vila i lodled, $y = \\dfrac{1}{2} a t^2$):
 $$ y = \\frac{1}{2} a t^2 = \\frac{1}{2} \\cdot 7{,}03 \\cdot 10^{14} \\cdot (3{,}0 \\cdot 10^{-9})^2 = 3{,}2 \\cdot 10^{-3}\\ \\mathrm{m} = 3{,}2\\ \\mathrm{mm} $$
 
 **Svar:** Avböjningen är ungefär $3{,}2\\ \\mathrm{mm}$.
@@ -12163,7 +12163,7 @@ $$ U = \\frac{3{,}3 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}0 \\cdot 10^{-3}}{3
         },
         {
             level: 3,
-            question: `En oljedroppe svävar i jämvikt mellan två vågräta plattor som sitter $8{,}0\\ \\mathrm{mm}$ från varandra med spänningen $5{,}0\\ \\mathrm{kV}$. Droppen har 4 överskottselektroner. Oljans densitet är $\\rho = 900\\ \\mathrm{kg/m^3}$. Bestäm oljedroppens radie. Anta att droppen är klotformad ($V = \\tfrac{4}{3}\\pi r^3$). ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $g = 9{,}82\\ \\mathrm{N/kg}$)`,
+            question: `En oljedroppe svävar i jämvikt mellan två vågräta plattor som sitter $8{,}0\\ \\mathrm{mm}$ från varandra med spänningen $5{,}0\\ \\mathrm{kV}$. Droppen har 4 överskottselektroner. Oljans densitet är $\\rho = 900\\ \\mathrm{kg/m^3}$. Bestäm oljedroppens radie. Anta att droppen är klotformad ($V = \\dfrac{4}{3}\\pi r^3$). ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $g = 9{,}82\\ \\mathrm{N/kg}$)`,
             answer: { value: 2.2, unit: 'μm' },
             solution: `**Steg 1 — droppens laddning** (4 elementarladdningar):
 $$ Q = 4 \\cdot q_e = 4 \\cdot 1{,}602 \\cdot 10^{-19} = 6{,}41 \\cdot 10^{-19}\\ \\mathrm{C} $$
@@ -13008,7 +13008,7 @@ Fyra krafter verkar på stegen: tyngdkraften $F_G = mg$ nedåt i mitten, markens
 
 ${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m', forces: true })}
 
-**Momentjämvikt kring stegens fot** (då försvinner $N_\\text{mark}$ och *f*, som verkar i vridpunkten). Väggkraften har hävarmen $L\\sin 65^\\circ$ (höjden till toppen); tyngdkraften har hävarmen $\\tfrac{L}{2}\\cos 65^\\circ$ (vågrätt avstånd till mitten):
+**Momentjämvikt kring stegens fot** (då försvinner $N_\\text{mark}$ och *f*, som verkar i vridpunkten). Väggkraften har hävarmen $L\\sin 65^\\circ$ (höjden till toppen); tyngdkraften har hävarmen $\\dfrac{L}{2}\\cos 65^\\circ$ (vågrätt avstånd till mitten):
 
 $$ N_\\text{vägg} \\cdot L\\sin 65^\\circ = mg \\cdot \\tfrac{L}{2}\\cos 65^\\circ \\quad\\Rightarrow\\quad N_\\text{vägg} = \\frac{mg}{2\\tan 65^\\circ} $$
 
@@ -13102,7 +13102,7 @@ $$ F_\\mathrm{B} = \\frac{294{,}6 \\cdot 2{,}0}{3{,}0} = 196{,}4\\ \\mathrm{N} \
 
 ${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
             answer: { value: 37, unit: '°' },
-            solution: `Precis som i vältningsdemonstrationen välter lådan när **tyngdpunkten hamnar utanför vridningspunkten** — alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\tfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\tfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
+            solution: `Precis som i vältningsdemonstrationen välter lådan när **tyngdpunkten hamnar utanför vridningspunkten** — alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\dfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\dfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
 
 $$ \\tan v = \\frac{0{,}30}{0{,}40} = 0{,}75 $$
 
@@ -13146,7 +13146,7 @@ $$ T = \\frac{1}{f} = \\frac{1}{5{,}0} = 0{,}20\\ \\mathrm{s} $$
 
 **Svar:** Periodtiden är $0{,}20\\ \\mathrm{s}$.
 
-**Generell slutsats:** Frekvensen $5{,}0\\ \\mathrm{Hz}$ betyder 5 varv per sekund, så ett varv tar $\\tfrac{1}{5}$ sekund.`,
+**Generell slutsats:** Frekvensen $5{,}0\\ \\mathrm{Hz}$ betyder 5 varv per sekund, så ett varv tar $\\dfrac{1}{5}$ sekund.`,
         },
         {
             level: 1,
@@ -14187,7 +14187,7 @@ ${makeProjectile({ kind: 'horizontal', hLabel: 'h = 1,6 m', xLabel: 'x = 24 m', 
             answer: { value: 0.033, unit: 'kg' },
             solution: `Uppgiften kombinerar **fjäderenergi**, **energiomvandling** och **horisontellt kast**.
 
-**Steg 1 — pilens utgångsfart ur kasträkning.** Fallhöjden ger falltiden via $h = \\tfrac{1}{2}gt^2$:
+**Steg 1 — pilens utgångsfart ur kasträkning.** Fallhöjden ger falltiden via $h = \\dfrac{1}{2}gt^2$:
 
 $$ t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\cdot 1{,}6}{9{,}82}} = 0{,}5712\\ \\mathrm{s} $$
 
@@ -14199,7 +14199,7 @@ $$ v_0 = \\frac{x}{t} = \\frac{24}{0{,}5712} = 42{,}02\\ \\mathrm{m/s} $$
 
 $$ E = \\frac{k \\cdot A^2}{2} = \\frac{562{,}5 \\cdot 0{,}32^2}{2} = 28{,}8\\ \\mathrm{J} $$
 
-(Alternativ: triangelarean $E = \\tfrac{1}{2}FA = \\tfrac{1}{2}\\cdot 180\\cdot 0{,}32 = 28{,}8\\ \\mathrm{J}$.)
+(Alternativ: triangelarean $E = \\dfrac{1}{2}FA = \\dfrac{1}{2}\\cdot 180\\cdot 0{,}32 = 28{,}8\\ \\mathrm{J}$.)
 
 **Steg 3 — energiprincipen.** All spännenergi omvandlas till pilens rörelseenergi:
 
@@ -16007,7 +16007,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 
 ${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL = 12,0 m', dALLabel: 'AL' })}`,
             answer: { value: 510, unit: 'Hz' },
-            solution: `**Insikten är att 1:a nodlinjen ($n = 1$) motsvarar vägskillnaden $\\tfrac{3\\lambda}{2}$** — inte $\\lambda/2$ som för 0:e nodlinjen. Att räkna fel på nodlinje-ordningen är den vanligaste fällan i interferensuppgifter.
+            solution: `**Insikten är att 1:a nodlinjen ($n = 1$) motsvarar vägskillnaden $\\dfrac{3\\lambda}{2}$** — inte $\\lambda/2$ som för 0:e nodlinjen. Att räkna fel på nodlinje-ordningen är den vanligaste fällan i interferensuppgifter.
 
 **Steg 1 — vägskillnad ur geometrin.** Lyssnaren *L* står $12\\ \\mathrm{m}$ rakt fram från *B*, vinkelrätt mot $AB$:
 
@@ -17795,7 +17795,7 @@ $$ \\frac{P_\\mathrm{B}}{P_\\mathrm{A}} = \\frac{r_\\mathrm{B}^2}{r_\\mathrm{A}^
             level: 1,
             question: `Ett gitter med 500 linjer/mm belyses vinkelrätt med monokromatiskt ljus med våglängden $\\lambda = 600\\ \\mathrm{nm}$. Beräkna avböjningsvinkeln till första ordningens maximum $(n = 1)$.`,
             answer: { value: 17.5, unit: '°' },
-            solution: `Spaltavståndet är $d = \\tfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$. Gitterformeln, löst för vinkeln:
+            solution: `Spaltavståndet är $d = \\dfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$. Gitterformeln, löst för vinkeln:
 
 $$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad \\sin\\alpha_n = \\frac{n\\lambda}{d} = \\frac{1 \\cdot 600\\cdot 10^{-9}}{2{,}0\\cdot 10^{-6}} = 0{,}300 $$
 
@@ -17807,7 +17807,7 @@ $$ \\alpha_1 = \\sin^{-1}(0{,}300) = 17{,}5^\\circ $$
             level: 1,
             question: `Ett gitter med 300 linjer/mm belyses med en laser. Första ordningens maximum $(n = 1)$ ligger vid vinkeln $\\alpha_1 = 11{,}0^\\circ$. Beräkna laserljusets våglängd.`,
             answer: { value: 636, unit: 'nm' },
-            solution: `Spaltavstånd $d = \\tfrac{1}{300}\\ \\mathrm{mm} = 3{,}33\\cdot 10^{-6}\\ \\mathrm{m}$. Lös ut våglängden:
+            solution: `Spaltavstånd $d = \\dfrac{1}{300}\\ \\mathrm{mm} = 3{,}33\\cdot 10^{-6}\\ \\mathrm{m}$. Lös ut våglängden:
 
 $$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad \\lambda = \\frac{d\\sin\\alpha_n}{n} = \\frac{3{,}33\\cdot 10^{-6} \\cdot \\sin 11{,}0^\\circ}{1} = 6{,}36\\cdot 10^{-7}\\ \\mathrm{m} $$
 
@@ -17835,7 +17835,7 @@ ${makeGratingScreen({ ellLabel: 'ℓ = 2,0 m', xLabel: 'x = 21 cm' })}`,
 
 $$ \\tan\\alpha = \\frac{x}{\\ell} = \\frac{0{,}21}{2{,}0} = 0{,}105 \\quad\\Rightarrow\\quad \\alpha = 5{,}99^\\circ $$
 
-**Steg 2 — våglängden ur gitterformeln.** Spaltavstånd $d = \\tfrac{1}{200}\\ \\mathrm{mm} = 5{,}0\\cdot 10^{-6}\\ \\mathrm{m}$:
+**Steg 2 — våglängden ur gitterformeln.** Spaltavstånd $d = \\dfrac{1}{200}\\ \\mathrm{mm} = 5{,}0\\cdot 10^{-6}\\ \\mathrm{m}$:
 
 $$ \\lambda = \\frac{d\\sin\\alpha}{n} = \\frac{5{,}0\\cdot 10^{-6} \\cdot \\sin 5{,}99^\\circ}{1} = 5{,}22\\cdot 10^{-7}\\ \\mathrm{m} $$
 
@@ -17847,7 +17847,7 @@ $$ \\lambda = \\frac{d\\sin\\alpha}{n} = \\frac{5{,}0\\cdot 10^{-6} \\cdot \\sin
             level: 2,
             question: `Ett gitter med 500 linjer/mm belyses med en röd HeNe-laser, $\\lambda = 633\\ \\mathrm{nm}$. Vilken är den **högsta ordningen** $(n)$ som överhuvudtaget kan observeras?`,
             answer: { value: 3, unit: '' },
-            solution: `Spaltavstånd $d = \\tfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$.
+            solution: `Spaltavstånd $d = \\dfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$.
 
 **Insikten:** ett maximum kan bara existera om $\\sin\\alpha_n \\leq 1$. Sätt $\\sin\\alpha_n = 1$ (gränsfallet $\\alpha = 90^\\circ$) i gitterformeln:
 
@@ -18121,7 +18121,7 @@ $$ E = \\frac{hc}{\\lambda} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 
 
 $$ E_\\mathrm{k} = hf - W_\\mathrm{u} = 3{,}10 - 2{,}0 = 1{,}10\\ \\mathrm{eV} = 1{,}76\\cdot 10^{-19}\\ \\mathrm{J} $$
 
-**Steg 3 — elektronens hastighet** ur $E_\\mathrm{k} = \\tfrac{mv^2}{2}$:
+**Steg 3 — elektronens hastighet** ur $E_\\mathrm{k} = \\dfrac{mv^2}{2}$:
 
 $$ v = \\sqrt{\\frac{2E_\\mathrm{k}}{m}} = \\sqrt{\\frac{2\\cdot 1{,}76\\cdot 10^{-19}}{9{,}11\\cdot 10^{-31}}} = 6{,}22\\cdot 10^{5}\\ \\mathrm{m/s} $$
 
@@ -18214,7 +18214,7 @@ $$ \\lambda = \\frac{h}{mv} \\quad\\Leftrightarrow\\quad v = \\frac{h}{m\\lambda
             level: 2,
             question: `En elektron accelereras från vila genom spänningen $U = 100\\ \\mathrm{V}$. Beräkna elektronens de Broglie-våglängd. Räkna med $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$ och $Q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.`,
             answer: { value: 123, unit: 'pm' },
-            solution: `**Steg 1 — elektronens hastighet** ur energiomvandlingen elektrisk energi $\\to$ rörelseenergi $(QU = \\tfrac{mv^2}{2})$:
+            solution: `**Steg 1 — elektronens hastighet** ur energiomvandlingen elektrisk energi $\\to$ rörelseenergi $(QU = \\dfrac{mv^2}{2})$:
 
 $$ v = \\sqrt{\\frac{2QU}{m}} = \\sqrt{\\frac{2\\cdot 1{,}602\\cdot 10^{-19}\\cdot 100}{9{,}11\\cdot 10^{-31}}} = 5{,}93\\cdot 10^{6}\\ \\mathrm{m/s} $$
 
@@ -18230,7 +18230,7 @@ $$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{9{,}11\\cdot 10^{-3
             level: 2,
             question: `En proton accelereras från vila genom spänningen $U = 1{,}0\\ \\mathrm{kV}$. Beräkna protonens de Broglie-våglängd. Protonens massa är $m = 1{,}673\\cdot 10^{-27}\\ \\mathrm{kg}$ och dess laddning $Q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.`,
             answer: { value: 0.905, unit: 'pm', tol: 0.03 },
-            solution: `**Steg 1 — protonens hastighet** ur $QU = \\tfrac{mv^2}{2}$:
+            solution: `**Steg 1 — protonens hastighet** ur $QU = \\dfrac{mv^2}{2}$:
 
 $$ v = \\sqrt{\\frac{2QU}{m}} = \\sqrt{\\frac{2\\cdot 1{,}602\\cdot 10^{-19}\\cdot 1\\,000}{1{,}673\\cdot 10^{-27}}} = 4{,}38\\cdot 10^{5}\\ \\mathrm{m/s} $$
 
@@ -18246,7 +18246,7 @@ $$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{1{,}673\\cdot 10^{-
             level: 3,
             question: `En elektron och en proton accelereras båda från vila genom **samma** spänning $U$. Visa att de Broglie-våglängden kan skrivas $\\lambda = \\dfrac{h}{\\sqrt{2mQU}}$, och bestäm hur många gånger längre elektronens våglängd är än protonens. Räkna med $m_\\mathrm{p}/m_\\mathrm{e} = 1\\,836$.`,
             answer: { value: 42.9, unit: 'ggr', tol: 0.03 },
-            solution: `**Härledning.** Hastigheten ur energiomvandlingen $(QU = \\tfrac{mv^2}{2})$ är $v = \\sqrt{2QU/m}$. Sätt in i $\\lambda = h/(mv)$:
+            solution: `**Härledning.** Hastigheten ur energiomvandlingen $(QU = \\dfrac{mv^2}{2})$ är $v = \\sqrt{2QU/m}$. Sätt in i $\\lambda = h/(mv)$:
 
 $$ \\lambda = \\frac{h}{m\\sqrt{\\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{m^2\\cdot \\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{2mQU}} \\quad\\text{vsv.} $$
 
@@ -18340,7 +18340,7 @@ $$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm
             level: 3,
             question: `Vätgas belyses och ljuset skickas genom ett gitter med 600 linjer/mm. En av vätets spektrallinjer ger första ordningens maximum vid vinkeln $23{,}2^\\circ$. Beräkna linjens våglängd och avgör vilken **serie** (Lyman, Balmer eller Paschen) övergången tillhör.`,
             answer: { value: 657, unit: 'nm' },
-            solution: `**Steg 1 — våglängden ur gitterformeln.** Spaltavstånd $d = \\tfrac{1}{600}\\ \\mathrm{mm} = 1{,}667\\cdot 10^{-6}\\ \\mathrm{m}$:
+            solution: `**Steg 1 — våglängden ur gitterformeln.** Spaltavstånd $d = \\dfrac{1}{600}\\ \\mathrm{mm} = 1{,}667\\cdot 10^{-6}\\ \\mathrm{m}$:
 
 $$ \\lambda = \\frac{d\\sin\\alpha_1}{n} = \\frac{1{,}667\\cdot 10^{-6}\\cdot\\sin 23{,}2^\\circ}{1} = 6{,}57\\cdot 10^{-7}\\ \\mathrm{m} $$
 
@@ -33210,7 +33210,7 @@ $$
 A = \\frac{a \\cdot b}{2} = \\frac{(c \\sin v)(c \\cos v)}{2} = \\frac{c^2 \\sin v \\cos v}{2}
 $$
 
-De felaktiga alternativen har antingen glömt att kvadrera $c$ (bara EN faktor $c$ ger fel enhet — en area måste innehålla $c^2$), glömt faktorn $\\tfrac{1}{2}$, eller bara använt en av kateterna.
+De felaktiga alternativen har antingen glömt att kvadrera $c$ (bara EN faktor $c$ ger fel enhet — en area måste innehålla $c^2$), glömt faktorn $\\dfrac{1}{2}$, eller bara använt en av kateterna.
 
 **Svar:** $\\dfrac{c^2 \\sin v \\cos v}{2}$`,
         },
@@ -34197,7 +34197,7 @@ $$
 \\sin v = \\frac{a}{c} = \\frac{2}{\\sqrt{5}}
 $$
 
-De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\tfrac{1}{\\sqrt 5}$), använder fel hypotenusa, eller tar bara kvoten mellan kateterna (vilket är $\\tan v = 2$, inte sinus).
+De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\dfrac{1}{\\sqrt 5}$), använder fel hypotenusa, eller tar bara kvoten mellan kateterna (vilket är $\\tan v = 2$, inte sinus).
 
 **Svar:** $\\dfrac{2}{\\sqrt{5}}$`,
         },
@@ -34214,7 +34214,7 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\tfrac{
                 `Cirkelns radie, dvs. 1`,
             ],
             correct: 0,
-            solution: `Eftersom hypotenusan (radien) är 1 gäller $\\sin v = \\dfrac{y}{1} = y$. Sinus är alltså punktens $y$-koordinat. (Cosinus är $x$-koordinaten och $\\tan v = \\tfrac{y}{x}$.)
+            solution: `Eftersom hypotenusan (radien) är 1 gäller $\\sin v = \\dfrac{y}{1} = y$. Sinus är alltså punktens $y$-koordinat. (Cosinus är $x$-koordinaten och $\\tan v = \\dfrac{y}{x}$.)
 
 **Svar:** punktens $y$-koordinat`,
         },
@@ -34228,7 +34228,7 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\tfrac{
                 `$\\dfrac{\\sqrt{3}}{3}$`,
             ],
             correct: 0,
-            solution: `Standardvinkeln $30^\\circ$ har det exakta sinusvärdet $\\tfrac{1}{2}$. (Minnesknep: sinusraden är $\\tfrac{\\sqrt{0}}{2}, \\tfrac{\\sqrt{1}}{2}, \\tfrac{\\sqrt{2}}{2}, \\tfrac{\\sqrt{3}}{2}, \\tfrac{\\sqrt{4}}{2}$ för $0^\\circ, 30^\\circ, 45^\\circ, 60^\\circ, 90^\\circ$, och $\\tfrac{\\sqrt{1}}{2} = \\tfrac{1}{2}$.) De övriga är $\\sin 45^\\circ$, $\\sin 60^\\circ$ och $\\tan 30^\\circ$.
+            solution: `Standardvinkeln $30^\\circ$ har det exakta sinusvärdet $\\dfrac{1}{2}$. (Minnesknep: sinusraden är $\\dfrac{\\sqrt{0}}{2}, \\dfrac{\\sqrt{1}}{2}, \\dfrac{\\sqrt{2}}{2}, \\dfrac{\\sqrt{3}}{2}, \\dfrac{\\sqrt{4}}{2}$ för $0^\\circ, 30^\\circ, 45^\\circ, 60^\\circ, 90^\\circ$, och $\\dfrac{\\sqrt{1}}{2} = \\dfrac{1}{2}$.) De övriga är $\\sin 45^\\circ$, $\\sin 60^\\circ$ och $\\tan 30^\\circ$.
 
 **Svar:** $\\dfrac{1}{2}$`,
         },
@@ -34298,9 +34298,9 @@ $$
 x^2 + x^2 = 1 \\quad\\Leftrightarrow\\quad 2x^2 = 1 \\quad\\Leftrightarrow\\quad x = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}
 $$
 
-(positiv rot, eftersom punkten ligger i första kvadranten). Alltså är koordinaten $\\left(\\tfrac{\\sqrt{2}}{2},\\ \\tfrac{\\sqrt{2}}{2}\\right)$. Eftersom $\\cos v = \\sin v$ är $\\tan v = 1$, vilket ger $v = 45^\\circ$ — precis standardvinkeln med $\\sin 45^\\circ = \\cos 45^\\circ = \\tfrac{\\sqrt{2}}{2}$.
+(positiv rot, eftersom punkten ligger i första kvadranten). Alltså är koordinaten $\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$. Eftersom $\\cos v = \\sin v$ är $\\tan v = 1$, vilket ger $v = 45^\\circ$ — precis standardvinkeln med $\\sin 45^\\circ = \\cos 45^\\circ = \\dfrac{\\sqrt{2}}{2}$.
 
-Alternativet $\\left(\\tfrac{1}{2}, \\tfrac{1}{2}\\right)$ ligger inte på cirkeln ($\\left(\\tfrac{1}{2}\\right)^2 + \\left(\\tfrac{1}{2}\\right)^2 = \\tfrac{1}{2} \\neq 1$), och $60^\\circ$ respektive $30^\\circ$ har olika stora $x$- och $y$-koordinater.
+Alternativet $\\left(\\dfrac{1}{2}, \\dfrac{1}{2}\\right)$ ligger inte på cirkeln ($\\left(\\frac{1}{2}\\right)^2 + \\left(\\frac{1}{2}\\right)^2 = \\dfrac{1}{2} \\neq 1$), och $60^\\circ$ respektive $30^\\circ$ har olika stora $x$- och $y$-koordinater.
 
 **Svar:** $\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 45^\\circ$`,
         },
@@ -35022,7 +35022,7 @@ $$
 1 + \\sin 2v = \\frac{49}{25} \\quad\\Leftrightarrow\\quad \\sin 2v = \\frac{49}{25} - 1 = \\frac{24}{25}
 $$
 
-Alternativet $\\tfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
+Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
 
 **Svar:** $\\dfrac{24}{25}$`,
         },
@@ -35359,7 +35359,7 @@ $$
             question: `En funktion $y = A \\sin Bx$ med $A > 0$ och $B > 0$ har största värdet 4 och gör exakt två hela svängningar (perioder) på intervallet $0^\\circ \\le x \\le 360^\\circ$. Bestäm $A$ och $B$.`,
             choices: [
                 `$A = 4$ och $B = 2$`,
-                `$A = 4$ och $B = \\tfrac{1}{2}$`,
+                `$A = 4$ och $B = \\dfrac{1}{2}$`,
                 `$A = 2$ och $B = 4$`,
                 `$A = 4$ och $B = 180$`,
             ],
@@ -35378,7 +35378,7 @@ $$
 \\text{period} = \\frac{360^\\circ}{2} = 180^\\circ \\quad\\Rightarrow\\quad B = \\frac{360^\\circ}{\\text{period}} = \\frac{360^\\circ}{180^\\circ} = 2
 $$
 
-De felaktiga alternativen vänder på period-sambandet ($B = \\tfrac{1}{2}$ ger bara en halv svängning), förväxlar $A$ och $B$, eller sätter $B$ till periodens gradtal i stället för antalet svängningar.
+De felaktiga alternativen vänder på period-sambandet ($B = \\dfrac{1}{2}$ ger bara en halv svängning), förväxlar $A$ och $B$, eller sätter $B$ till periodens gradtal i stället för antalet svängningar.
 
 **Svar:** $A = 4$ och $B = 2$`,
         },
@@ -35703,7 +35703,7 @@ Det största värdet är lika med amplituden.
                 `$2\\sqrt{3}\\,\\sin x + 2 \\cos x$`,
             ],
             correct: 0,
-            solution: `**Insikten:** jämför $8\\sin\\!\\left(x + \\tfrac{\\pi}{3}\\right)$ med $c \\sin(x + v)$. Då är $c = 8$ och $v = \\tfrac{\\pi}{3}$, och de två sambanden $c = \\sqrt{a^2 + b^2}$ och $\\tan v = \\tfrac{b}{a}$ bildar ett ekvationssystem.
+            solution: `**Insikten:** jämför $8\\sin\\!\\left(x + \\dfrac{\\pi}{3}\\right)$ med $c \\sin(x + v)$. Då är $c = 8$ och $v = \\dfrac{\\pi}{3}$, och de två sambanden $c = \\sqrt{a^2 + b^2}$ och $\\tan v = \\dfrac{b}{a}$ bildar ett ekvationssystem.
 
 Ur amplituden:
 
@@ -35711,7 +35711,7 @@ $$
 \\sqrt{a^2 + b^2} = 8 \\quad\\Leftrightarrow\\quad a^2 + b^2 = 64 \\qquad (1)
 $$
 
-Ur vinkeln, med det exakta värdet $\\tan\\tfrac{\\pi}{3} = \\sqrt{3}$:
+Ur vinkeln, med det exakta värdet $\\tan\\dfrac{\\pi}{3} = \\sqrt{3}$:
 
 $$
 \\frac{b}{a} = \\sqrt{3} \\quad\\Leftrightarrow\\quad b = a\\sqrt{3} \\qquad (2)
@@ -37203,7 +37203,7 @@ $$
 \\frac{2x^2 - 4x + 3}{x} = \\frac{2x^2}{x} - \\frac{4x}{x} + \\frac{3}{x} = 2x - 4 + \\frac{3}{x}
 $$
 
-Resttermen $\\dfrac{3}{x} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asymptoten är $y = 2x - 4$. Alternativet $2x - 4 + \\tfrac{3}{x}$ är hela funktionen, inte asymptoten.
+Resttermen $\\dfrac{3}{x} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asymptoten är $y = 2x - 4$. Alternativet $2x - 4 + \\dfrac{3}{x}$ är hela funktionen, inte asymptoten.
 
 **Svar:** $y = 2x - 4$`,
         },
@@ -39082,7 +39082,7 @@ $$
 w = 3\\left(\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\right) = \\frac{3}{2} + \\frac{3\\sqrt{3}}{2}i
 $$
 
-Alternativet $\\tfrac{1}{2} + \\tfrac{\\sqrt{3}}{2}i$ är $w$ utan skalningen med $3$.
+Alternativet $\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}i$ är $w$ utan skalningen med $3$.
 
 **Svar:** $\\dfrac{3}{2} + \\dfrac{3\\sqrt{3}}{2}i$`,
         },

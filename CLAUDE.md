@@ -1424,17 +1424,21 @@ function fmtNum(n, d) {
 }
 ```
 
-### Deluppgifter (a, b, c …) i frågor — VARJE deluppgift på EGEN rad
+### Deluppgifter (a, b, c …) i frågor — a) börjar ALLTID på egen rad
 
-**Varje deluppgift börjar på en egen rad — b) får ALDRIG ligga på samma
-rad som a)** (uttryckligt önskemål 2026-08-14, ersätter den tidigare
-regeln där deluppgifterna flödade med `&emsp;&emsp;` emellan: en lång
-a-uppgift fick då b) att börja i slutet av samma rad och radbrytas mitt
-i meningen). Lägg en hård radbrytning **`<br>`** direkt före **varje**
-deluppgiftsbokstav — före "a)", före "b)", före "c)" osv. Markdown-
-pipelinen kör `marked` med `breaks: false` (se `katalog.html`), så ett
-vanligt radslut räcker *inte* — det måste vara `<br>` (eller två
-avslutande blanksteg).
+**Deluppgifterna får aldrig hänga kvar i frågestammens sista rad: lägg en
+hård radbrytning `<br>` direkt före "a)"** (uttryckligt önskemål
+2026-08-14 och 2026-08-26). Markdown-pipelinen kör `marked` med
+`breaks: false` (se `katalog.html`), så ett vanligt radslut räcker
+*inte* — det måste vara `<br>` (eller två avslutande blanksteg).
+
+**Om b), c) … får en egen rad eller följer på a):s rad avgörs av
+LÄNGDEN.** Är deluppgiften en mening att läsa får den en egen rad, med
+`<br>` före varje bokstav — annars knuffas b) in i radslutet och bryts
+mitt itu. Är den kort (ett uttryck, en enhet, ett par ord) skrivs de i
+stället bredvid varandra på a):s rad med `&emsp;&emsp;` emellan; att
+stapla korta deluppgifter lämnar hela ytan till höger tom i onödan.
+Se undantagen längst ned.
 
 - ✓ `**Priset var 80 kr år 2010 och 140 kr år 2023.<br>a) Bestäm indextalet år 2023.<br>b) Med hur många procent har priset ökat?**`
 - ✗ `**…<br>a) Bestäm indextalet år 2023.&emsp;&emsp;b) Med hur många procent …**`
@@ -1447,13 +1451,14 @@ Det gäller även när deluppgifterna är korta ord eller enheter, och även nä
 den gemensamma frågestammen slutar mitt i en mening ("Bestäm
 vinkelhastigheten i").
 
-- ✓ `**En karusell roterar ett varv på 10 sekunder. Bestäm vinkelhastigheten i<br>a) grader/s<br>b) rad/s.**`
-- ✗ `**… Bestäm vinkelhastigheten i<br>a) grader/s, b) rad/s.**`
-- ✗ `**… Bestäm resultanten om de verkar<br>a) åt samma håll,<br>b) åt motsatt håll.**`
+- ✓ `**En karusell roterar ett varv på 10 sekunder. Bestäm vinkelhastigheten i<br>a) grader/s&emsp;&emsp;b) rad/s.**`
+- ✗ `**… Bestäm vinkelhastigheten i<br>a) grader/s, b) rad/s.**` (kommatecken)
+- ✗ `**… Bestäm vinkelhastigheten i a) grader/s&emsp;&emsp;b) rad/s.**` (a) hänger kvar i stammens rad)
 
 Gäller både teori-exemplens frågor (`::: exempel` i `data/teori/*.md`) och
-`question`-strängarna i `data/ovningar.js` — även när deluppgifterna är
-korta ettordsalternativ (`<br>a) hastighet<br>b) volym`).
+`question`-strängarna i `data/ovningar.js` — korta ettordsalternativ ligger
+bredvid varandra (`<br>a) hastighet&emsp;&emsp;b) volym`), medan
+deluppgifter som är hela meningar får var sin rad.
 
 **Undantag som behåller inline-formen:**
 
@@ -1463,16 +1468,19 @@ korta ettordsalternativ (`<br>a) hastighet<br>b) volym`).
   (En svarsrad är kort och är inte en uppgift.)
 - När a)/b) är **inflätade som separata satser mitt i en mening**
   ("Vilken a) acceleration får vikterna, b) spännkraft …?").
-- **Rena räkneuttryck som ryms bredvid varandra** — deluppgifter som bara
-  är ett uttryck att beräkna (`a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$`)
-  skrivs på EN rad med `&emsp;&emsp;` emellan (uttryckligt önskemål
-  2026-08-26, referens: `ma1c-1.4` exempel 1 och 3, samma form som
-  `ma1c-1.3` redan använde). Staplade blir höga bråk trängda på varandra
-  medan hela ytan till höger står tom. Skälet till huvudregeln — att en
-  lång a-uppgift knuffar in b) i radslutet — finns inte här: uttrycken är
-  korta. Bind bokstaven till sitt uttryck med `&nbsp;` (`a)&nbsp;$…$`), så
-  att en smal skärm aldrig bryter raden mellan bokstaven och uttrycket.
-  Kräver deluppgiften en mening att läsa gäller huvudregeln (egen rad).
+- **Korta deluppgifter som ryms bredvid varandra** — ett uttryck att
+  beräkna (`a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$`), en enhet att svara i
+  (`a) grader/s`) eller ett par ord — skrivs på EN rad med `&emsp;&emsp;`
+  emellan (uttryckligt önskemål 2026-08-26, referens: `ma1c-1.4` exempel
+  1 och 3, `ma1c-1.3` och `fy2-1.3` exempel 1). Staplade lämnar de hela
+  ytan till höger tom, och höga bråk trängs på varandra. Skälet till
+  huvudregeln — att en lång a-uppgift knuffar in b) i radslutet — finns
+  inte här: deluppgifterna är korta. Bind bokstaven till sitt innehåll
+  med `&nbsp;` när det är ett matematiskt uttryck (`a)&nbsp;$…$`), så att
+  en smal skärm aldrig bryter raden mellan bokstaven och uttrycket.
+  `<br>` före "a)" gäller fortfarande — det är bara b), c) … som flyttar
+  upp på raden. Kräver deluppgiften en mening att läsa gäller
+  huvudregeln (egen rad).
 
 ## Designtänk för simuleringar (5/5-arbetssättet)
 

@@ -1205,6 +1205,22 @@
             return { steps, blocks };
         }
 
+        // Sammanfattningen (::: sammanfattning) visas som EN slide och ska
+        // rymmas i sin helhet på en skärm i liggande datorläge: krymp
+        // teckenstorleken stegvis (allt i rutan är em-baserat, även KaTeX)
+        // tills hela rutan ryms i overlayens höjd. I stående läge/mobil
+        // gäller inte kravet — då får sammanfattningen skrolla som vanligt.
+        function fitSammanfattning(el, overlay) {
+            el.style.fontSize = '';
+            if (window.innerWidth < 900 || window.innerHeight > window.innerWidth) return;
+            const maxH = overlay.clientHeight * 0.84;
+            let size = parseFloat(getComputedStyle(el).fontSize) || 17;
+            while (size > 11 && el.getBoundingClientRect().height > maxH) {
+                size -= 0.5;
+                el.style.fontSize = size + 'px';
+            }
+        }
+
         function PresentationMode({ id, num, title, chapter, chapterNumber, course, onClose }) {
             const overlayRef = useRef(null);
             const bodyRef = useRef(null);
@@ -1361,7 +1377,13 @@
                 setTotal(steps.length);
                 setStep(0);
                 setReady(true);
-                const fit = () => { fitFormel(root); fitMathDisplays(root); };
+                const fit = () => {
+                    fitFormel(root); fitMathDisplays(root);
+                    // Ändrad fönsterstorlek medan sammanfattnings-sliden
+                    // visas: räkna om krympningen mot den nya höjden.
+                    const sam = root.querySelector('.lab-block-sammanfattning.is-current');
+                    if (sam && overlayRef.current) fitSammanfattning(sam, overlayRef.current);
+                };
                 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
                 window.addEventListener('resize', fit);
                 return () => window.removeEventListener('resize', fit);
@@ -1408,6 +1430,11 @@
                         const before = steps[step - 2];
                         if (!before || before.block !== st.block) target = st.block;
                     }
+                    // Sammanfattnings-sliden ska rymmas på en skärm — krymp
+                    // den FÖRE mätningen, så placeringen räknar på den
+                    // färdiga höjden.
+                    if (st.el.classList.contains('lab-block-sammanfattning'))
+                        fitSammanfattning(st.el, overlay);
                     // Mät HELA steget, inklusive tvillingar (figuren som
                     // hör ihop med stycket, textlösningen till en
                     // pennlösning). Mäts bara styckets egen höjd centreras

@@ -2167,6 +2167,49 @@ button.lab-card-disabled { pointer-events: none; }
 }
 .lab-block-exempel .lab-block-title { color: var(--lab-ink); }
 
+/* Sammanfattning — genomgångens viktigaste innehåll i punktform, sist i
+   varje genomgång. En yttre ruta med små kort (nästlade ::: sampunkt) i
+   ett responsivt rutnät. I presentationsläget blir HELA rutan en enda
+   "slide" som breddas ut över duken och vid behov krymps i teckenstorlek
+   tills allt ryms på en skärm — se .lab-pres-reglerna längre ned samt
+   fitSammanfattning() i katalog.html. */
+.lab-block-sammanfattning {
+    background: var(--lab-bg-panel);
+    border-color: var(--lab-line-strong);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    align-items: stretch;
+}
+.lab-block-sammanfattning > .lab-block-title {
+    grid-column: 1 / -1;
+    color: var(--lab-ink);
+    margin-bottom: 0;
+}
+.lab-block-sammanfattning > p { grid-column: 1 / -1; margin: 0; }
+.lab-block-sammanfattning .lab-block-sampunkt {
+    margin: 0;
+    padding: 12px 14px 10px;
+    background: var(--lab-bg);
+    border-color: var(--lab-line);
+    font-size: 0.88em;
+    line-height: 1.55;
+}
+.lab-block-sammanfattning .lab-block-sampunkt > .lab-block-title {
+    font-size: 0.72em;
+    color: var(--lab-accent-2);
+    margin-bottom: 6px;
+}
+.lab-block-sampunkt p { margin: 0 0 8px; }
+.lab-block-sampunkt ul,
+.lab-block-sampunkt ol { margin: 0 0 6px; padding-left: 18px; }
+.lab-block-sampunkt li { margin-bottom: 4px; }
+.lab-block-sampunkt li:last-child { margin-bottom: 0; }
+.lab-block-sampunkt .katex-display { margin: 6px 0; }
+@media (max-width: 600px) {
+    .lab-block-sammanfattning { grid-template-columns: 1fr; }
+}
+
 /* Bild — streckad ram, platshållare */
 .lab-block-bild {
     background: rgba(15, 22, 32, 0.03);
@@ -3750,6 +3793,28 @@ button.lab-card-disabled { pointer-events: none; }
 }
 
 .lab-pres .lab-pres-body h2 { font-size: 36px; }
+
+/* Sammanfattningen i presentationsläget: EN slide som ska rymmas på en
+   skärm (liggande datorläge). Rutan bryter ut ur textspalten och tar
+   nästan hela dukens bredd; korten lägger sig i kolumner. Ryms den ändå
+   inte i höjdled krymper fitSammanfattning() i katalog.html
+   teckenstorleken stegvis via inline font-size på rutan — allt inuti
+   (även KaTeX) är em-baserat och följer med. Centreringen görs med
+   margin-left (INTE transform — entré-animationen labPresIn animerar
+   transform och skulle ge ett sidledshopp). */
+.lab-pres { overflow-x: hidden; }
+.lab-pres .lab-pres-body { overflow-x: visible; }
+.lab-pres .lab-block-sammanfattning {
+    width: min(94vw, 1560px);
+    margin-left: calc((100% - min(94vw, 1560px)) / 2);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    font-size: 17px;
+    line-height: 1.55;
+    gap: 14px;
+}
+@media (max-width: 600px) {
+    .lab-pres .lab-block-sammanfattning { grid-template-columns: 1fr; }
+}
 
 /* Dölj allt tills stegen är uppbyggda (undviker blink av hela texten) */
 .lab-pres:not(.is-ready) .lab-pres-body { visibility: hidden; }

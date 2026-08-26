@@ -114,3 +114,40 @@ $$
 **Svar:** Ungefär 27 700 kr i månaden.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Indextal"
+- Ett sätt att jämföra värden mellan **olika år**.
+- Ett år väljs till **basår** och får indextalet **100**.
+- $\text{index}
+  = \dfrac{\text{värdet}}{\text{värdet under basåret}} \cdot 100$
+:::
+
+::: sampunkt "Tolka indextalet"
+- Index **100**: samma värde som basåret.
+- Index **175**: 75 % **högre** än basåret.
+- Index **91**: 9 % **lägre** än basåret.
+- Dra bort 100 för att få den procentuella förändringen.
+:::
+
+::: sampunkt "Index och förändringsfaktor"
+- Dividera indextalet med 100, så får du **förändringsfaktorn** från
+  basåret.
+- Index 175 motsvarar faktorn 1,75.
+:::
+
+::: sampunkt "Konsumentprisindex"
+- **KPI** mäter priset på en varukorg med det hushållen faktiskt köper:
+  mat, hyra, kläder, el, resor.
+- Mäts varje månad av SCB, med **1980 som basår**.
+- Stiger KPI råder **inflation**: pengarna räcker till mindre.
+:::
+
+::: sampunkt "Räkna om mellan år"
+- $\text{nytt belopp} = \text{gammalt belopp} \cdot
+  \dfrac{\text{index nya året}}{\text{index gamla året}}$
+- Kvoten mellan årens indextal **är** förändringsfaktorn mellan dem.
+- Basåret behöver alltså inte vara inblandat i själva räkningen.
+:::
+:::

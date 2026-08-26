@@ -153,3 +153,44 @@ $1{,}0833\ldots - 1 = 0{,}0833\ldots \approx 8{,}3\ \%$.
 **Svar:** a) 5 gånger så hög&emsp;&emsp;b) Hyran höjdes med cirka 8,3 %.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Frekvenstabell"
+- **Frekvens**: hur många gånger ett svar förekommer.
+- **Relativ frekvens**:
+  $\dfrac{\text{frekvensen}}{\text{totala antalet}}$.
+- De relativa frekvenserna summerar alltid till 1, alltså 100 %. Det är en
+  bra kontroll.
+:::
+
+::: sampunkt "Välj rätt diagram"
+- **Stapeldiagram**: data i **kategorier** utan inbördes ordning.
+- **Linjediagram**: något som följs **över tid**. Lutningen visar hur
+  snabbt värdet ändras.
+- **Cirkeldiagram**: **delar av en helhet**. Hela cirkeln är 100 %.
+:::
+
+::: sampunkt "Från andel till antal"
+- $\text{antalet} = \text{andelen} \cdot \text{totala antalet}$
+- 45 % av 240 besökare blir 108 personer.
+:::
+
+::: sampunkt "Fyra vanliga knep"
+- **Avhuggen axel**: $y$-axeln börjar inte på noll, så små skillnader ser
+  enorma ut. Det vanligaste tricket av alla.
+- **Vald tidsperiod**: en start i en tillfällig svacka får en normal
+  återhämtning att se ut som en rusning.
+- **Olika skalor**: två kurvor mot varsin $y$-axel går inte att jämföra.
+- **Ytor i stället för höjder**: dubbel bredd och dubbel höjd ger **fyra
+  gånger** så stor yta, fast värdet bara fördubblats.
+:::
+
+::: sampunkt "Granska så här"
+- Var börjar axlarna?
+- Vad visar skalorna?
+- Vilken tidsperiod är vald?
+- Räkna alltid ut den **verkliga** procentuella förändringen och jämför
+  med hur bilden ser ut.
+:::
+:::

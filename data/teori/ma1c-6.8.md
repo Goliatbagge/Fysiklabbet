@@ -75,3 +75,29 @@ $$
 **Svar:** $\sqrt{146}$ l.e. ≈ 12,08 l.e.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Koordinatform"
+- En vektor skrivs $\vec{u} = (a, b)$, där $a$ är förflyttningen i
+  $x$-led och $b$ i $y$-led.
+- Koordinaterna motsvarar **kateterna** i den rätvinkliga triangeln.
+:::
+
+::: sampunkt "Längden"
+- $|\vec{u}| = \sqrt{a^2 + b^2}$
+- I formelbladet står det
+  $|\vec{u}| = \sqrt{a_x^2 + a_y^2}$. Samma sak.
+- Det är bara Pythagoras sats med koordinaterna som kateter.
+:::
+
+::: sampunkt "Tecknen spelar ingen roll"
+- Koordinaterna **kvadreras**, så negativa värden blir positiva.
+- En längd kan aldrig bli negativ.
+:::
+
+::: sampunkt "Svara exakt och avrundat"
+- Lämna gärna svaret som en rot: $\sqrt{146}$ l.e.
+- Ange sedan även ett avrundat värde, här ungefär 12,08 l.e.
+:::
+:::

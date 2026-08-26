@@ -107,3 +107,27 @@ $$
 **Svar:** 37°
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Pythagoras sats"
+- $a^2 + b^2 = c^2$, alltså
+  $\text{katet}^2 + \text{katet}^2 = \text{hypotenusa}^2$.
+- Används när **två sidor** är kända och den tredje söks.
+:::
+
+::: sampunkt "Sträcka mellan två punkter"
+1. Bilda en rätvinklig triangel med kateter längs axlarna.
+2. Kateternas längder är **skillnaderna** i $x$-led och $y$-led.
+3. Sträckan är hypotenusan:
+   $\sqrt{(\Delta x)^2 + (\Delta y)^2}$.
+- Tecknen spelar ingen roll, eftersom talen kvadreras.
+:::
+
+::: sampunkt "Vinkeln mot x-axeln"
+- Använd $\tan v = \dfrac{\Delta y}{\Delta x}$ och sedan
+  $\tan^{-1}$.
+- Rita alltid figuren först. Då syns det direkt vilken katet som är
+  motstående.
+:::
+:::

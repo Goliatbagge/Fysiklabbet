@@ -165,3 +165,40 @@ längdenheter.)
 **Svar:** 12 l.e.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Triangelns delar"
+- **Hypotenusa**: den längsta sidan, mitt emot den räta vinkeln.
+- **Kateter**: de två kortare sidorna.
+- **Motstående katet**: den katet som ligger mitt emot vinkeln.
+- **Närliggande katet**: den katet som bildar vinkeln.
+- Vilken katet som är vilken **beror på vilken vinkel** du utgår från.
+:::
+
+::: sampunkt "De tre funktionerna"
+- $\tan v
+  = \dfrac{\text{motstående}}{\text{närliggande}}$
+- $\sin v
+  = \dfrac{\text{motstående}}{\text{hypotenusan}}$
+- $\cos v
+  = \dfrac{\text{närliggande}}{\text{hypotenusan}}$
+:::
+
+::: sampunkt "Villkoret"
+- **Gäller endast rätvinkliga trianglar.** Utan rät vinkel fungerar
+  formlerna inte.
+:::
+
+::: sampunkt "Bestämma en okänd sida"
+1. Märk ut vinkeln och avgör vilka sidor som är kända och sökta.
+2. Välj den funktion som binder ihop just dem.
+3. Lös ut den sökta sidan.
+:::
+
+::: sampunkt "Skrivsätt"
+- $\angle ABC$ är vinkeln vid hörnet **B**, alltså det **mittersta**
+  hörnet.
+- Saknas enhet skrivs **l.e.** för längdenheter.
+:::
+:::

@@ -107,3 +107,36 @@ Den negativa lösningen kan bortses.
 **Svar:** $\sqrt{80}$ l.e.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vektor och skalär"
+- **Vektor**: har både **storlek och riktning**. Hastighet, kraft,
+  acceleration.
+- **Skalär**: har bara **storlek**. Vikt, tid, temperatur.
+:::
+
+::: sampunkt "Så ritas de"
+- Som **pilar**: längden är storleken, riktningen är pilens riktning.
+- Betecknas med pil ovanför variabeln, till exempel $\vec{x}$.
+:::
+
+::: sampunkt "Parallellförflyttning"
+- En vektor får flyttas fritt. Så länge **storlek och riktning** är
+  oförändrade är det **samma vektor**.
+- Var i koordinatsystemet den ritas spelar alltså ingen roll.
+:::
+
+::: sampunkt "Motsatta och parallella"
+- **Motsatta**: lika stora men **motsatt riktning**.
+- **Parallella**: samma lutning. De får gärna ha olika längd eller
+  motsatt riktning.
+- Alla motsatta vektorer är alltså också parallella.
+:::
+
+::: sampunkt "Vektorns längd"
+- Skrivs $|\vec{u}|$ och utläses "absolutbeloppet av $u$".
+- Beräknas med **Pythagoras sats**, precis som en sträcka i ett
+  koordinatsystem.
+:::
+:::

@@ -56,3 +56,23 @@ till slutpunkten:
 :::
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Subtraktion blir addition"
+- $\vec{u} - \vec{v} = \vec{u} + (-\vec{v})$
+- Alltså: **vänd på den vektor som ska dras bort** och addera som
+  vanligt.
+:::
+
+::: sampunkt "Så ritar du"
+1. Rita $-\vec{v}$, alltså $\vec{v}$ med **omvänd** riktning.
+2. Parallellförflytta den till spetsen av $\vec{u}$.
+3. Dra resultanten från $\vec{u}$:s start till den nya spetsen.
+:::
+
+::: sampunkt "Ordningen spelar roll här"
+- $\vec{u} - \vec{v}$ och $\vec{v} - \vec{u}$ är **motsatta** vektorer.
+- De är lika långa men pekar åt motsatt håll. Läs uppgiften noga.
+:::
+:::

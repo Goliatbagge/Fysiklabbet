@@ -120,3 +120,36 @@ $$
 **Svar:** 90°, 53° och 37°
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Inversa funktioner"
+- Används för att få **vinkeln** ur ett känt förhållande.
+- $\tan^{-1}$ heter också $\arctan$, $\sin^{-1}$ heter $\arcsin$ och
+  $\cos^{-1}$ heter $\arccos$.
+- Båda skrivsätten betyder samma sak.
+:::
+
+::: sampunkt "Sambanden"
+- $\tan v = \dfrac{a}{b}$ ger
+  $v = \tan^{-1}\!\left(\dfrac{a}{b}\right)$.
+- $\sin v = \dfrac{a}{c}$ ger
+  $v = \sin^{-1}\!\left(\dfrac{a}{c}\right)$.
+- $\cos v = \dfrac{b}{c}$ ger
+  $v = \cos^{-1}\!\left(\dfrac{b}{c}\right)$.
+:::
+
+::: sampunkt "Så gör du"
+1. Ställ upp rätt trigonometrisk funktion med de sidor du känner.
+2. Räkna ut kvoten.
+3. Använd den inversa funktionen på räknaren.
+:::
+
+::: sampunkt "Kontroller"
+- Vinkelsumman i en triangel är alltid $180^\circ$. Räkna ut den tredje
+  vinkeln genom subtraktion.
+- Räknaren måste stå i **grader**, inte radianer.
+- $\sin^{-1}$ av ett tal större än 1 ger ett felmeddelande, eftersom
+  ingen sådan vinkel finns.
+:::
+:::

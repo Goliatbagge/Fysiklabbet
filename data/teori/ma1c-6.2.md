@@ -151,3 +151,40 @@ $$
 **Svar:** 56 a.e.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Formlerna"
+- $\sin v
+  = \dfrac{\text{motstående}}{\text{hypotenusan}}$
+- $\cos v
+  = \dfrac{\text{närliggande}}{\text{hypotenusan}}$
+- $\tan v
+  = \dfrac{\text{motstående}}{\text{närliggande}}$
+:::
+
+::: sampunkt "Sinus och cosinus är alltid mindre än 1"
+- Hypotenusan är alltid längst, så du dividerar med det största talet.
+- Får du ett sinus- eller cosinusvärde över 1 har du räknat fel.
+- **Tangens** kan däremot bli hur stor som helst.
+:::
+
+::: sampunkt "De två spetsiga vinklarna hänger ihop"
+- Det som är motstående för den ena vinkeln är närliggande för den andra.
+- Därför är $\sin u = \cos v$ när $u$ och $v$ är triangelns två spetsiga
+  vinklar.
+:::
+
+::: sampunkt "Hitta hypotenusan"
+- Är en katet och en vinkel kända: lös ut hypotenusan ur sinus eller
+  cosinus.
+- Hypotenusan hamnar i **nämnaren**, så multiplicera upp den och dividera
+  sedan.
+:::
+
+::: sampunkt "Triangelns area"
+- $A = \dfrac{\text{basen} \cdot \text{höjden}}{2}$
+- Saknas höjden: räkna först ut den med trigonometri, sedan arean.
+- Areaenheter skrivs **a.e.** när enhet saknas.
+:::
+:::

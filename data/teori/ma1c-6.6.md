@@ -77,3 +77,32 @@ startpunkten till slutpunkten:
 :::
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vektor gånger tal"
+- Vektorns **längd** ändras lika mycket som faktorn.
+- $3\vec{w}$ är tre gånger så lång, med **samma** riktning.
+- **Negativ faktor byter riktning**: $-2\vec{w}$ är dubbelt så lång och
+  motriktad.
+:::
+
+::: sampunkt "Addition av vektorer"
+- **Parallellförflytta** den ena så att den börjar där den andra slutar.
+- **Resultanten** går från startpunkten till slutpunkten.
+- Kallas **polygonmetoden**.
+:::
+
+::: sampunkt "Ordningen spelar ingen roll"
+- $\vec{u} + \vec{v} = \vec{v} + \vec{u}$. Du får börja med vilken som
+  helst.
+- Med tre eller fler vektorer: sätt dem i en kedja, spets mot start.
+:::
+
+::: sampunkt "Vanlig fälla"
+- Resultanten går **från den första vektorns start till den sistas
+  spets**, inte tvärtom.
+- Vid vinkelräta vektorer kan resultantens längd räknas ut med Pythagoras
+  sats.
+:::
+:::

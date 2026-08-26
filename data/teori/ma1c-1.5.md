@@ -144,3 +144,37 @@ antalet decimaler, dvs. till en decimal.
 **Svar:** 0,4 m
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Positionssystemet"
+- Vårt talsystem bygger på basen 10 och kallas det **decimala**
+  talsystemet.
+- Siffrans **position** avgör vad den står för: tusental, hundratal,
+  tiotal, ental, tiondelar, hundradelar och så vidare.
+:::
+
+::: sampunkt "Avrundning"
+- Ett avrundat värde kallas **närmevärde**, siffran som avrundas
+  **avrundningssiffra**.
+- Följs den av **0 till 4**: behåll siffran, alltså avrunda nedåt.
+- Följs den av **5 till 9**: öka med 1, alltså avrunda uppåt.
+- **Avrunda aldrig i två steg.** Utgå alltid från originaltalet.
+:::
+
+::: sampunkt "Värdesiffror"
+- Ett mått på hur **noggrant** ett värde är. 4,00 har fler värdesiffror än
+  4, trots att talen är lika stora.
+- Första värdesiffran är den första siffran som **inte är 0**. Sista är
+  talets sista siffra.
+- Nollor i slutet av ett heltal kan vara avrundningsnollor, så 6 800 har
+  2, 3 eller 4 värdesiffror beroende på sammanhanget.
+:::
+
+::: sampunkt "Värdesiffror i ett svar"
+- **Multiplikation och division**: svaret får lika många
+  **värdesiffror** som det värde som har minst antal.
+- **Addition och subtraktion**: svaret får lika många **decimaler** som
+  det värde som har minst antal.
+:::
+:::

@@ -114,3 +114,33 @@ $$
 **Svar:** 5
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Varför ordningen spelar roll"
+- $5 + 2 \cdot 3$ ger 21 om man adderar först, men 11 om man
+  multiplicerar först.
+- Bara det ena är rätt, så det behövs regler.
+:::
+
+::: sampunkt "Prioriteringsreglerna"
+1. **Parenteser**
+2. **Potenser**
+3. **Multiplikation och division**
+4. **Addition och subtraktion**
+- Inom samma nivå räknar man från **vänster till höger**.
+:::
+
+::: sampunkt "Räknesättens delar"
+- **Addition**: term + term = **summa**.
+- **Subtraktion**: term − term = **differens**.
+- **Multiplikation**: faktor · faktor = **produkt**.
+- **Division**: täljare genom nämnare = **kvot**.
+:::
+
+::: sampunkt "Bråkstrecket är en osynlig parentes"
+- Ett bråkstreck grupperar hela täljaren och hela nämnaren.
+- $\dfrac{5 + 3}{2}$ betyder $\dfrac{8}{2} = 4$, inte
+  $5 + \dfrac{3}{2}$.
+:::
+:::

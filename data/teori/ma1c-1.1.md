@@ -230,3 +230,48 @@ heller minus *gånger* minus. Tänk termometern: −5 grader, och så sjunker
 temperaturen 3 grader. Då blir det −8 grader.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Talmängderna"
+- **Naturliga tal** $\mathbb{N}$: alla icke-negativa heltal, alltså
+  $0, 1, 2, 3, \ldots$
+- **Heltal** $\mathbb{Z}$: även de negativa,
+  $\ldots, -2, -1, 0, 1, 2, \ldots$
+- **Rationella tal** $\mathbb{Q}$: alla tal som kan skrivas som ett bråk
+  $\dfrac{a}{b}$ med heltal och $b \neq 0$.
+- **Reella tal** $\mathbb{R}$: alla tal på tallinjen.
+:::
+
+::: sampunkt "Irrationella tal"
+- Tal som **inte** går att skriva som ett bråk, till exempel $\pi$ och
+  $\sqrt{2}$.
+- Deras decimalutveckling är oändlig **utan att upprepa sig**.
+- De ingår i de reella talen men inte i de rationella.
+:::
+
+::: sampunkt "Mängderna ligger inuti varandra"
+- Varje naturligt tal är också heltal, rationellt och reellt.
+- Varje heltal är rationellt och reellt, men inte nödvändigtvis naturligt.
+:::
+
+::: sampunkt "Olikhetstecken"
+- $<$ betyder mindre än, $>$ betyder större än.
+- Tecknet **gapar** åt det större värdet.
+- Bland negativa tal är det med **störst** siffra minst: $-20 < -3$.
+:::
+
+::: sampunkt "Addition och subtraktion med tecken"
+- $a + (-b) = a - b$
+- $a - (-b) = a + b$
+- **Lika tecken ihop blir plus, olika tecken ihop blir minus.**
+:::
+
+::: sampunkt "Multiplikation och division med tecken"
+- $(-a) \cdot (-b) = a \cdot b$ och
+  $a \cdot (-b) = -(a \cdot b)$.
+- $\dfrac{-a}{-b} = \dfrac{a}{b}$ och
+  $\dfrac{a}{-b} = -\dfrac{a}{b}$.
+- **Lika tecken ger positivt, olika tecken ger negativt.**
+:::
+:::

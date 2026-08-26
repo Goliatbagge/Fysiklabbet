@@ -68,3 +68,39 @@ $$
 $$
 2{,}5\mathrm{E}{-4} = 2{,}5 \cdot 10^{-4} = 0{,}000\,25
 $$
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Rötter och potenser på räknaren"
+- Kvadratrot, kubikrot och $n$-te rot ska du hitta:
+  $\sqrt{7} \approx 2{,}65$ och
+  $\sqrt[3]{10} \approx 2{,}15$.
+- Potenser, även med bråkexponent och negativ exponent:
+  $45^{2/3} \approx 12{,}65$ och
+  $35^{-2} \approx 0{,}00082$.
+:::
+
+::: sampunkt "Parenteser i täljare och nämnare"
+- Består nämnaren av flera tal **måste** den skrivas inom parentes.
+- $\dfrac{360}{2 \cdot 3} = 60$ skrivs `360/(2·3)`.
+- Utan parentesen räknar räknaren
+  $\dfrac{360}{2} \cdot 3 = 540$.
+:::
+
+::: sampunkt "Tecken och parentes"
+- $(-3{,}7)^{2} = 13{,}69$. Skriv parentesen, annars upphöjs bara
+  talet och minustecknet hamnar utanför.
+:::
+
+::: sampunkt "Svar i bråkform"
+- De flesta räknare kan svara exakt i bråk i stället för decimaler:
+  $\dfrac{17}{51} = \dfrac{1}{3}$.
+:::
+
+::: sampunkt "E-notation"
+- **E betyder "gånger tio upphöjt till"**.
+- $3{,}7\mathrm{E}12 = 3{,}7 \cdot 10^{12}$.
+- $2{,}5\mathrm{E}{-4} = 2{,}5 \cdot 10^{-4}$.
+- Skriv **aldrig** E i ett svar. Skriv om till grundpotensform.
+:::
+:::

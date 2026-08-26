@@ -183,3 +183,32 @@ $$
 **Svar:** 500 st
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grundpotensform"
+- $a \cdot 10^{n}$ där $1 \leq a < 10$ och $n$ är ett heltal.
+- Ett bekvämt sätt att skriva mycket stora och mycket små tal.
+:::
+
+::: sampunkt "Bestämma exponenten"
+- **Tal större än 1**: exponenten är antalet heltalssiffror **efter** den
+  första siffran. $743\,000 = 7{,}43 \cdot 10^{5}$.
+- **Tal mindre än 1**: exponenten är **minus** antalet nollor före första
+  siffran skild från noll. $0{,}0009 = 9 \cdot 10^{-4}$.
+:::
+
+::: sampunkt "Prefix"
+- En bokstav som ersätter en tiopotens och sätts framför enheten.
+- Stora: T ($10^{12}$), G ($10^{9}$), M ($10^{6}$), k ($10^{3}$).
+- Små: d ($10^{-1}$), c ($10^{-2}$), m ($10^{-3}$),
+  µ ($10^{-6}$), n ($10^{-9}$), p ($10^{-12}$).
+- Alla nödvändiga prefix finns i **formelbladet**.
+:::
+
+::: sampunkt "Räkna med prefix"
+- Skriv om till grundpotensform först, räkna sedan.
+- $2{,}0\ \mathrm{TB}$ delat med $4{,}0\ \mathrm{GB}$ blir
+  $\dfrac{2{,}0 \cdot 10^{12}}{4{,}0 \cdot 10^{9}} = 500$.
+:::
+:::

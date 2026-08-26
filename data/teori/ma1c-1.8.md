@@ -100,3 +100,32 @@ $$
 **Svar:** $\sqrt{x}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Rationella exponenter"
+- En exponent som är ett bråk.
+- $a^{1/n} = \sqrt[n]{a}$
+- $25^{1/2} = \sqrt{25} = 5$ och
+  $27^{1/3} = \sqrt[3]{27} = 3$.
+:::
+
+::: sampunkt "Varför det stämmer"
+- $\left(25^{1/2}\right)^{2} = 25^{1} = 25$ enligt potenslagarna.
+- $\left(\sqrt{25}\right)^{2} = 25$ enligt rotdefinitionen.
+- Alltså måste $25^{1/2}$ och $\sqrt{25}$ vara samma tal.
+:::
+
+::: sampunkt "Allmän form"
+- $a^{m/n} = \sqrt[n]{a^m}
+  = \left(\sqrt[n]{a}\right)^{m}$.
+- **Nämnaren** är rotens ordning, **täljaren** är exponenten.
+- $27^{2/3} = \left(\sqrt[3]{27}\right)^{2} = 3^2 = 9$.
+:::
+
+::: sampunkt "Räkna med dem"
+- Alla potenslagar gäller precis som vanligt, även med bråkexponenter.
+- $\dfrac{x^{7/2}}{x^{3}} = x^{7/2 - 3}
+  = x^{1/2} = \sqrt{x}$.
+:::
+:::

@@ -185,3 +185,39 @@ $$
 **Svar:** 45 kr
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Multiplikation"
+- **Två bråk**: multiplicera täljare med täljare och nämnare med nämnare.
+- **Heltal gånger bråk**: multiplicera heltalet med **täljaren**. Nämnaren
+  står kvar.
+:::
+
+::: sampunkt "Förkorta först"
+- Blir talen stora: **faktorisera** täljare och nämnare och förkorta
+  **innan** du multiplicerar.
+- Det ger mindre tal att hantera och mindre risk för fel.
+:::
+
+::: sampunkt "Division"
+- Byt divisionstecknet mot **multiplikation** och **invertera** bråket i
+  nämnaren.
+- $\dfrac{\;\frac{a}{b}\;}{\;\frac{c}{d}\;}
+  = \dfrac{a}{b} \cdot \dfrac{d}{c}$
+- Beviset: förläng med $\dfrac{d}{c}$, så blir nämnaren 1.
+:::
+
+::: sampunkt "Heltal inblandade"
+- Ett heltal kan skrivas som ett bråk med nämnaren 1:
+  $5 = \dfrac{5}{1}$.
+- Sedan gäller vanliga regler, så
+  $5 \Big/ \dfrac{3}{4} = \dfrac{5}{1} \cdot \dfrac{4}{3}
+  = \dfrac{20}{3}$.
+:::
+
+::: sampunkt "Bråkdel av något"
+- "Av" betyder **multiplicera**.
+- En tredjedel av 60 är $\dfrac{1}{3} \cdot 60 = 20$.
+:::
+:::

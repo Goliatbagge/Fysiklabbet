@@ -219,3 +219,33 @@ $$
 **Svar:** $\dfrac{25}{16}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Exponenten noll"
+- $a^0 = 1$ för alla $a \neq 0$.
+- **Inte 0.** Det är en av de vanligaste missuppfattningarna.
+- Varför: $\dfrac{7^5}{7^5}$ är både $7^0$ och 1.
+:::
+
+::: sampunkt "Negativa exponenter"
+- $a^{-n} = \dfrac{1}{a^n}$ för $a \neq 0$.
+- Varför: $\dfrac{2^2}{2^5}$ är både $2^{-3}$ och
+  $\dfrac{1}{2^3}$.
+- Ett negativt exponenttecken betyder alltså **inte** att talet blir
+  negativt.
+:::
+
+::: sampunkt "Flytta mellan täljare och nämnare"
+- En faktor som byter våning i bråket **byter tecken på exponenten**.
+- $\dfrac{1}{3^5} = 3^{-5}$ och
+  $\dfrac{5}{x} = 5x^{-1}$.
+:::
+
+::: sampunkt "Bråk upphöjt till minus ett"
+- $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, alltså **invertera**
+  bråket.
+- $\left(\dfrac{4}{5}\right)^{-2}
+  = \left(\dfrac{5}{4}\right)^{2} = \dfrac{25}{16}$.
+:::
+:::

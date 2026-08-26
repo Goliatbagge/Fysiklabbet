@@ -132,3 +132,36 @@ därför måste $\dfrac{4}{9}$ vara störst.
 **Svar:** $\dfrac{4}{9}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Täljare och nämnare"
+- Talet **ovanför** bråkstrecket är **täljaren**, talet **under** är
+  **nämnaren**.
+- Minnesregel: **t**äljaren i **t**oppen, **n**ämnaren där **n**ere.
+:::
+
+::: sampunkt "Olika bråk kan vara lika stora"
+- $\dfrac{1}{4} = \dfrac{3}{12}$, eftersom de motsvarar lika stora
+  andelar.
+:::
+
+::: sampunkt "Förlängning och förkortning"
+- **Förlänga**: multiplicera täljare **och** nämnare med samma tal.
+- **Förkorta**: dividera täljare **och** nämnare med samma tal.
+- **Bråkets storlek ändras inte** av något av dem.
+:::
+
+::: sampunkt "Vanlig fälla"
+- Du får bara stryka lika tal när det står **gångertecken** mellan dem.
+- $\dfrac{4 \cdot 2}{4 \cdot 1}$ får förkortas till
+  $\dfrac{2}{1}$.
+- $\dfrac{6 + 2}{2 + 2}$ får **inte** förkortas genom att stryka
+  tvåorna. Det ger 3 i stället för rätt svar 2.
+:::
+
+::: sampunkt "Jämföra bråk"
+- Gör om till **samma nämnare**, sedan avgör täljaren.
+- $\dfrac{5}{7}$ är större än $\dfrac{4}{7}$ eftersom nämnarna är lika.
+:::
+:::

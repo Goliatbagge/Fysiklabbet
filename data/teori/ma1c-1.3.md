@@ -185,3 +185,35 @@ $$
 **Svar:** $\dfrac{22}{7}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grundregeln"
+- **Samma nämnare**: addera eller subtrahera **täljarna** och behåll
+  nämnaren. Förkorta om det går.
+- **Olika nämnare**: förläng först så att alla bråk får samma nämnare.
+- Nämnaren adderas **aldrig**.
+:::
+
+::: sampunkt "Hitta en gemensam nämnare"
+- **Metod 1**: förläng bråket med den minsta nämnaren så att den blir lika
+  med den största. Fungerar när den ena nämnaren är en multipel av den
+  andra.
+- **Metod 2**: förläng varje bråk med den **andras** nämnare. Fungerar
+  alltid, men ger inte alltid den minsta gemensamma nämnaren.
+:::
+
+::: sampunkt "Minsta gemensamma nämnaren"
+1. Skriv upp nämnarnas multiplar i varsin kolumn.
+2. Den **första** multipeln som finns i båda kolumnerna är MGN.
+:::
+
+::: sampunkt "Bråkform och blandad form"
+- **Bråkform**: $\dfrac{15}{4}$, alltså 15 fjärdedelar.
+- **Blandad form**: $3\frac{3}{4}$, alltså 3 hela och 3 fjärdedelar.
+- Vid **beräkningar används alltid bråkform**, så gör om blandad form
+  först.
+- Från blandad till bråkform: multiplicera heltalet med nämnaren och
+  addera täljaren.
+:::
+:::

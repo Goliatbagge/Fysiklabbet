@@ -213,3 +213,40 @@ $$
 **Svar:** $3^{14x-1}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Potens, bas och exponent"
+- $3^5$ betyder $3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$.
+- **Basen** är talet som upphöjs, **exponenten** talet man upphöjer till.
+- **Potensform**: $3^5$. **Faktorform**: produkten utskriven.
+- Exponenten 2 utläses "i kvadrat", exponenten 3 "i kubik".
+:::
+
+::: sampunkt "Potenslagarna"
+- $a^x \cdot a^y = a^{x+y}$
+- $\dfrac{a^x}{a^y} = a^{x-y}$
+- $(a^x)^y = a^{x \cdot y}$
+- $(ab)^x = a^x b^x$ och
+  $\left(\dfrac{a}{b}\right)^{x} = \dfrac{a^x}{b^x}$
+:::
+
+::: sampunkt "Villkoret för de två första"
+- Att addera eller subtrahera exponenter kräver **samma bas**.
+- $2^3 \cdot 5^3$ går alltså inte att slå ihop till en potens av 2 eller
+  5.
+:::
+
+::: sampunkt "Se upp med tecknet"
+- $(-9)^2 = 81$: minustecknet ingår i basen.
+- $-9^2 = -81$: bara nian upphöjs, minustecknet står utanför.
+- Parentesen avgör alltså helt.
+:::
+
+::: sampunkt "Vanliga uppgiftstyper"
+- Skriv om ett tal som potens med given bas: $64 = 4^3$.
+- Utveckla en parentes: $(7x)^2 = 49x^2$. **Både** siffran och variabeln
+  upphöjs.
+- Lös potensekvation med samma bas: jämför exponenterna direkt.
+:::
+:::

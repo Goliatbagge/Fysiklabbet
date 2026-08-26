@@ -1206,14 +1206,26 @@
         }
 
         // Sammanfattningen (::: sammanfattning) visas som EN slide och ska
-        // rymmas i sin helhet på en skärm i liggande datorläge: krymp
-        // teckenstorleken stegvis (allt i rutan är em-baserat, även KaTeX)
-        // tills hela rutan ryms i overlayens höjd. I stående läge/mobil
-        // gäller inte kravet — då får sammanfattningen skrolla som vanligt.
+        // rymmas i sin helhet på en skärm i liggande datorläge. Den är en
+        // HELSIDES-slide: den läggs med överkanten en bit ned i rutan (inte
+        // centrerad som vanliga steg) och krymps i teckenstorlek tills den
+        // ryms i ytan som blir kvar OVANFÖR kontrollisten. Allt i rutan är
+        // em-baserat, även KaTeX, så det följer med. I stående läge och på
+        // mobil gäller inte kravet: där får sammanfattningen skrolla.
+        const PRES_SAM_TOPP = 0.04;      // slidens överkant, andel av rutan
+
+        function samSlideMaxH(overlay) {
+            const bar = overlay.querySelector('.lab-pres-bar');
+            // Listen göms vid musinaktivitet men kommer tillbaka, så dess
+            // höjd reserveras alltid. Utan den hamnar sista raden bakom den.
+            const barH = bar ? bar.getBoundingClientRect().height : 56;
+            return overlay.clientHeight * (1 - PRES_SAM_TOPP) - barH - 10;
+        }
+
         function fitSammanfattning(el, overlay) {
             el.style.fontSize = '';
             if (window.innerWidth < 900 || window.innerHeight > window.innerWidth) return;
-            const maxH = overlay.clientHeight * 0.84;
+            const maxH = samSlideMaxH(overlay);
             let size = parseFloat(getComputedStyle(el).fontSize) || 17;
             while (size > 11 && el.getBoundingClientRect().height > maxH) {
                 size -= 0.5;
@@ -1451,6 +1463,17 @@
                     const oTop = Math.min(...rects.map(x => x.top));
                     const oBot = Math.max(...rects.map(x => x.bottom));
                     const oh = overlay.clientHeight;
+                    // Helsides-sliden placeras högt i rutan i stället för
+                    // centrerat, så att hela den breda rutan får plats
+                    // ovanför kontrollisten (den centrerande grenen nedan
+                    // sköt ned underkanten bakom listen).
+                    if (st.el.classList.contains('lab-block-sammanfattning')) {
+                        overlay.scrollTo({
+                            top: Math.max(0, overlay.scrollTop + oTop - oh * PRES_SAM_TOPP),
+                            behavior: 'smooth',
+                        });
+                        return;
+                    }
                     // Kontexten (figuren som stycket resonerar om) ska synas
                     // SAMTIDIGT som texten — annars läser man om något man
                     // just tappat ur bild. Den tas med i mätningen så länge

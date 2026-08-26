@@ -237,3 +237,38 @@ $$
 
 **Svar:** 15 cm
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Topptriangelsatsen"
+- En **parallelltransversal** bildar en topptriangel som är **likformig**
+  med hela triangeln.
+- $\dfrac{a}{a + b} = \dfrac{c}{c + d} = \dfrac{e}{f}$
+- Notera att nämnaren är **hela** sidan, inte bara den nedre delen.
+:::
+
+::: sampunkt "Transversalsatsen"
+- Parallelltransversalen delar sidorna i **samma förhållande**.
+- $\dfrac{a}{b} = \dfrac{c}{d}$
+- Här jämförs bara **delarna** av sidorna, inte hela.
+:::
+
+::: sampunkt "Vilken ska du välja?"
+- Används topptriangelns **bas** i uppgiften: bara topptriangelsatsen
+  fungerar.
+- Används den inte: båda fungerar, men **transversalsatsen** ger oftast
+  enklare räkning.
+:::
+
+::: sampunkt "Bisektrissatsen"
+- En **bisektris** delar motstående sida i samma förhållande som de
+  vidliggande sidorna.
+- $\dfrac{AD}{BD} = \dfrac{AC}{BC}$
+:::
+
+::: sampunkt "Bevisen bygger på likformighet"
+- Alla tre satser bevisas genom att hitta **två lika vinklar** i två
+  trianglar, vilket ger likformighet.
+- Sedan ställs sidförhållandena upp och skrivs om.
+:::
+:::

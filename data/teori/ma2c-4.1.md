@@ -106,3 +106,44 @@ $$
 
 **Svar:** 65°
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Beteckningar"
+- Vinklar mäts i **grader**, och ett helt varv är $360^\circ$.
+- Samma vinkel kan skrivas $v$, $\angle B$, $\angle ABC$ eller
+  $\angle CBA$.
+- Det **mittersta** hörnet i beteckningen är där vinkeln sitter.
+:::
+
+::: sampunkt "Transversal"
+- En linje som **skär** minst två andra linjer.
+- Skär den två **parallella** linjer uppstår ett bestämt mönster av
+  lika stora vinklar.
+:::
+
+::: sampunkt "De fyra vinkelparen"
+- **Likbelägna**: samma placering vid varsin skärning. **Lika stora**.
+- **Vertikalvinklar**: mitt emot varandra i en skärning. **Lika stora**.
+- **Alternatvinklar**: på motsatta sidor om transversalen. **Lika
+  stora**.
+- **Sidovinklar**: bildar tillsammans en rak vinkel, alltså
+  $180^\circ$.
+:::
+
+::: sampunkt "Viktigt villkor"
+- Likbelägna och alternatvinklar är lika stora **endast om linjerna är
+  parallella**.
+- Vertikalvinklar och sidovinklar gäller **alltid**.
+:::
+
+::: sampunkt "Bisektris"
+- En stråle som delar en vinkel **mitt itu**.
+:::
+
+::: sampunkt "Motivera alltid"
+- Skriv motiveringen i parentes efter varje steg: (alternatvinklar),
+  (sidovinklar), (vinkelsumma i triangel).
+- Går det inte direkt: lägg in en **hjälpvinkel** och ta två steg.
+:::
+:::

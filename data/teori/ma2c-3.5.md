@@ -95,3 +95,31 @@ Måtten på hagen är alltså 26 × 13 meter.
 
 **Svar:** 26 × 13 meter
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Arbetsgång"
+1. Rita upp den funktion som **beskriver situationen**.
+2. Avgör vilket verktyg frågan kräver.
+3. Läs av och **tolka** i sammanhangets enheter.
+:::
+
+::: sampunkt "Tre verktyg i GeoGebra"
+- **Nollställen**: när något är noll, till exempel höjden vid nedslag.
+- **Extrempunkt**: högsta eller lägsta värdet, till exempel maximal höjd.
+- **Skärning mellan två objekt**: när något når ett bestämt värde.
+:::
+
+::: sampunkt "Läs av rätt koordinat"
+- **Tiden** eller den oberoende storheten är $x$-koordinaten.
+- **Höjden** eller den beroende storheten är $y$-koordinaten.
+- "Hur lång tid" söker $x$, "hur högt" söker $y$.
+:::
+
+::: sampunkt "Tolka in i verkligheten"
+- Förkasta lösningar som saknar mening, till exempel negativ tid.
+- Frågar uppgiften "hur lång tid tar det att nå höjden $50\ \mathrm{m}$" kan det
+  finnas **två** svar: en gång på väg upp och en på väg ned.
+- Svara med **enhet** och rimlig avrundning.
+:::
+:::

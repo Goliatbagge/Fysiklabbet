@@ -109,3 +109,36 @@ $$
 
 **Svar:** 15 cm
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Likformiga månghörningar"
+- Månghörningar med **samma form**.
+- De får vara olika stora, vridna eller **spegelvända**.
+:::
+
+::: sampunkt "Två villkor, båda måste gälla"
+- Motsvarande **vinklar** är lika stora, **och**
+- förhållandet mellan motsvarande **sidor** är lika.
+- **Båda måste kontrolleras.** Trianglar är undantaget, se nästa avsnitt.
+:::
+
+::: sampunkt "Bestämma en sida: med ekvation"
+- Ställ upp förhållandet mellan motsvarande sidor:
+  $\dfrac{x}{5} = \dfrac{24}{8}$.
+- Lös med korsvis multiplikation.
+:::
+
+::: sampunkt "Bestämma en sida: med skalfaktor"
+- **Skalfaktorn** är kvoten mellan två kända motsvarande sidor:
+  $\dfrac{24}{8} = 3$.
+- Multiplicera den lilla figurens sida med skalfaktorn.
+- Kontrollera att du dividerar **stor genom liten** när du förstorar och
+  tvärtom när du förminskar.
+:::
+
+::: sampunkt "Vanlig fälla"
+- Se till att du parar ihop **rätt** sidor, alltså de som verkligen
+  motsvarar varandra. Figuren kan vara vriden eller spegelvänd.
+:::
+:::

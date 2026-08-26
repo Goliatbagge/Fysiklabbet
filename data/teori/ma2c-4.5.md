@@ -159,3 +159,35 @@ triangeln **inte** rätvinklig.
 
 **Svar:** Nej
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Pythagoras sats"
+- $a^2 + b^2 = c^2$
+- Summan av kvadraterna på **kateterna** är lika med kvadraten på
+  **hypotenusan**.
+- **Hypotenusan** är den längsta sidan, mitt emot den räta vinkeln.
+:::
+
+::: sampunkt "Gäller bara rätvinkliga trianglar"
+- Utan rät vinkel gäller satsen inte.
+- Omvändningen gäller också: stämmer
+  $a^2 + b^2 = c^2$ **är** triangeln rätvinklig.
+:::
+
+::: sampunkt "Lösa ut"
+- Hypotenusan: $c = \sqrt{a^2 + b^2}$.
+- En katet: $a = \sqrt{c^2 - b^2}$.
+- Sätt alltid in **hypotenusan som $c$**, oavsett vilken bokstav figuren
+  använder.
+:::
+
+::: sampunkt "Beviset i korthet"
+- Fyra likadana rätvinkliga trianglar arrangeras till en stor kvadrat
+  med sidan $a + b$.
+- Den inskrivna fyrhörningen med sidan $c$ visar sig vara en **kvadrat**,
+  eftersom $\alpha + \beta = 90^\circ$.
+- Arean av den stora kvadraten tecknas på **två sätt**, och satsen faller
+  ut.
+:::
+:::

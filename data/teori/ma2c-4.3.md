@@ -115,3 +115,35 @@ $$
 
 **Svar:** Implikationen gäller.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Implikation"
+- Att ett påstående **medför** ett annat.
+- Skrivs $A \implies B$ och utläses "medför att".
+- Gäller bara **åt ett håll**.
+:::
+
+::: sampunkt "Ekvivalens"
+- Implikationen gäller **åt båda hållen**.
+- Skrivs $A \iff B$ och utläses "är ekvivalent med".
+:::
+
+::: sampunkt "Så avgör du vilket"
+1. Undersök om $A \implies B$ är sant.
+2. Undersök **omvändningen**, alltså $B \implies A$.
+3. Sant åt båda hållen ger ekvivalens, annars bara implikation.
+:::
+
+::: sampunkt "Motexempel"
+- Är en implikation **falsk** bevisas det med ett **motexempel**.
+- **Ett enda räcker.**
+- "Det är en hund $\implies$ det är en tax" motbevisas av en pudel.
+:::
+
+::: sampunkt "Typexempel"
+- "Det är en tax $\implies$ det är en hund": bara implikation.
+- "Alla vinklar är $60^\circ$ $\iff$ triangeln är liksidig": ekvivalens,
+  eftersom båda hållen stämmer.
+:::
+:::

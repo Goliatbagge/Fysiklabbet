@@ -120,3 +120,34 @@ $$
 
 **Svar:** 9,00 meter
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Likformiga trianglar"
+- Trianglar med **samma form**. Ett specialfall av likformiga
+  månghörningar.
+- Skrivs med tecknet $\sim$:
+  $\triangle ABC \sim \triangle DEF$.
+:::
+
+::: sampunkt "Den stora skillnaden"
+- För trianglar räcker det att **ett** av villkoren är uppfyllt:
+- motsvarande vinklar lika stora **ELLER**
+- lika sidförhållanden.
+- För övriga månghörningar krävs **båda**.
+:::
+
+::: sampunkt "Två vinklar räcker"
+- Stämmer två vinklar överens måste den tredje också göra det, eftersom
+  vinkelsumman är $180^\circ$.
+- Räkna därför bara ut de vinklar du behöver.
+:::
+
+::: sampunkt "Tillämpning: höjdbestämning"
+- Samma solvinkel ger samma vinkel i båda trianglarna, och båda har en
+  rät vinkel. Alltså likformiga.
+- $\dfrac{x}{1{,}60} = \dfrac{6{,}75}{1{,}20}$
+- Sätt alltid **motsvarande** storheter i samma position: höjd över höjd,
+  skugga över skugga.
+:::
+:::

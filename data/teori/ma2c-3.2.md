@@ -118,3 +118,37 @@ symmetrilinjens ekvation $x_s = -3$.
 
 **Svar:** $x_s = -3$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Nollställen algebraiskt"
+- Sätt **funktionen lika med 0** och lös ekvationen.
+- Lösningarna **är** nollställena.
+- Finns en koefficient framför $x^2$: dividera bort den först.
+:::
+
+::: sampunkt "Symmetrilinje"
+- Ligger **mitt emellan nollställena**, alltså deras medelvärde:
+  $x_s = \dfrac{x_1 + x_2}{2}$.
+- Saknas nollställen: ta **talet framför rottecknet** i *pq*-formeln,
+  alltså $x_s = -\dfrac{p}{2}$.
+:::
+
+::: sampunkt "Extrempunkt"
+1. $x$-koordinaten är **symmetrilinjen**.
+2. Sätt in det värdet i **funktionsuttrycket**.
+3. Svaret blir $y$-koordinaten.
+- Svara med **båda** koordinaterna, till exempel $(2, -3)$.
+:::
+
+::: sampunkt "Karaktär och extremvärde"
+- Tecknet framför $x^2$ avgör karaktären: positiv ger minimipunkt,
+  negativ ger maximipunkt.
+- Det största eller minsta värdet är extrempunktens **$y$-koordinat**.
+:::
+
+::: sampunkt "Vanlig fälla"
+- Extrempunkten är en **punkt** med två koordinater, medan största eller
+  minsta **värdet** bara är $y$-koordinaten. Läs frågan noga.
+:::
+:::

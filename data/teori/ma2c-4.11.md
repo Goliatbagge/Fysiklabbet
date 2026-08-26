@@ -128,3 +128,38 @@ $$
 
 **Svar:** $v = 40°$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Begreppen"
+- **Rand**: cirkelns kant. **Medelpunkt**: dess mitt.
+- **Randvinkel**: har spetsen på randen.
+- **Medelpunktsvinkel**: har spetsen i medelpunkten.
+- Båda står på en **cirkelbåge**.
+:::
+
+::: sampunkt "Randvinkelsatsen"
+- Medelpunktsvinkeln är **dubbelt så stor** som randvinkeln på samma
+  båge.
+- $y = 2x$
+- Gäller **så länge vinklarna står på samma cirkelbåge**.
+:::
+
+::: sampunkt "Två följdsatser"
+- Randvinklar på **samma** cirkelbåge är **lika stora**.
+- En randvinkel på en **halvcirkelbåge** är alltid $90^\circ$.
+:::
+
+::: sampunkt "Två specialfall"
+- **Tangent mot radie**: vinkeln mellan en tangent och radien till
+  tangeringspunkten är alltid $90^\circ$.
+- **Två radier** bildar alltid en **likbent** triangel, så basvinklarna
+  är lika stora.
+:::
+
+::: sampunkt "Motivera varje steg"
+- Skriv motiveringen i parentes: (randvinkelsatsen), (randvinklar på
+  samma båge), (likbent triangel), (tangent mot radie).
+- Det är en del av lösningen, inte en extra kommentar.
+:::
+:::

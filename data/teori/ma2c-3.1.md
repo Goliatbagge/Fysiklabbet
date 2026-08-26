@@ -138,3 +138,44 @@ c: 3, -5, 5, 1
 x: -6, 6
 y: -6, 6
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Andragradsfunktion"
+- Variabeltermens största exponent är **2**.
+- $f(x) = x^2 - 6$ och $g(x) = 3x^2 - 5x + 7$.
+- Grafen kallas **parabel**.
+:::
+
+::: sampunkt "Extrempunkt"
+- **Maximipunkt**: parabelns topp, där funktionen har sitt **största**
+  värde.
+- **Minimipunkt**: parabelns dal, där den har sitt **minsta** värde.
+- Gemensamt namn: **extrempunkt**. Vilken sort det är kallas punktens
+  **karaktär**.
+:::
+
+::: sampunkt "Tecknet avgör formen"
+- **Positiv** $x^2$-term: **minimipunkt**, alltså "glad mun".
+- **Negativ** $x^2$-term: **maximipunkt**, alltså "sur mun".
+:::
+
+::: sampunkt "Symmetrilinje"
+- Den lodräta linje som delar parabeln i två lika halvor.
+- **Extrempunkten ligger alltid på symmetrilinjen.**
+- Anges med sin $x$-koordinat: $x_s = -1$.
+:::
+
+::: sampunkt "Nollställen"
+- De $x$-värden där grafen **skär $x$-axeln**, alltså där
+  $f(x) = 0$.
+- En andragradsfunktion har **två, ett eller inget** nollställe.
+:::
+
+::: sampunkt "Vad koefficienterna gör"
+- $a$ styr formen: tecknet ger riktningen, storleken hur smal parabeln
+  blir.
+- $c$ är grafens **skärning med $y$-axeln**.
+- $b$ förskjuter parabeln i sidled tillsammans med $a$.
+:::
+:::

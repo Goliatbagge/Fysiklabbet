@@ -57,3 +57,31 @@ $$
 
 **Svar:** 540°
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Månghörning"
+- En **sluten** figur av enbart sträckor och hörn.
+- Tre hörn: triangel. Fyra: fyrhörning. Fem: femhörning.
+:::
+
+::: sampunkt "Triangeltyper"
+- **Rätvinklig**: har en rät vinkel, och Pythagoras sats gäller.
+- **Likbent**: minst två lika långa sidor, och **basvinklarna är lika
+  stora**.
+- **Liksidig**: alla sidor lika långa och **alla vinklar $60^\circ$**.
+:::
+
+::: sampunkt "Vinkelsummor"
+- Triangel: $180^\circ$.
+- Fyrhörning: $360^\circ$.
+:::
+
+::: sampunkt "Vinkelsumman i en månghörning"
+- Dra sträckor från **ett** hörn till alla andra. Figuren delas då i
+  trianglar.
+- En månghörning med $n$ hörn delas i $n - 2$ trianglar.
+- Vinkelsumman blir $(n - 2) \cdot 180^\circ$.
+- Femhörning: $3 \cdot 180^\circ = 540^\circ$.
+:::
+:::

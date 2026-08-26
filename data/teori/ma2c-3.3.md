@@ -240,3 +240,38 @@ q: 3, -5, 5, 1
 x: -6, 6
 y: -9, 5
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Två sätt att hitta funktionen"
+- **Metod 1**: nollställen och en punkt. Bäst när nollställena syns
+  tydligt.
+- **Metod 2**: tre punkter. Krångligare, men fungerar **alltid**, även
+  utan nollställen.
+:::
+
+::: sampunkt "Metod 1: faktorform"
+- $f(x) = k(x - x_1)(x - x_2)$, där $x_1$ och $x_2$ är nollställena.
+- Sätt in nollställena, och bestäm sedan $k$ med **en punkt till** på
+  grafen. Den punkten får inte vara ett nollställe.
+- Har grafen en **dubbelrot**, alltså vänder på $x$-axeln, är
+  $x_1 = x_2$.
+- Utveckla till slut till formen $ax^2 + bx + c$ om uppgiften kräver
+  det.
+:::
+
+::: sampunkt "Metod 2: utvecklad form"
+- $f(x) = ax^2 + bx + c$.
+- Sätt in **tre** punkter, vilket ger tre ekvationer med tre obekanta.
+- Lös ekvationssystemet och sätt in $a$, $b$ och $c$.
+- Tips: punkten där $x = 0$ ger $c$ direkt.
+:::
+
+::: sampunkt "Modellering"
+- Lägg parabeln i ett koordinatsystem **där räkningen blir enkel**, till
+  exempel med start i origo.
+- En vattenstråle eller kastbana: nollställena är start och nedslag,
+  maximipunkten ligger **mitt emellan** dem.
+- Kontrollera att svaret är rimligt i sammanhanget.
+:::
+:::

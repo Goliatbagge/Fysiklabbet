@@ -128,3 +128,41 @@ $$
 
 v.s.v.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Fyra grundbegrepp"
+- **Axiom**: en grundsats vi kommit överens om, utan bevis.
+- **Definition**: en överenskommelse om vad ett begrepp betyder.
+- **Sats**: ett påstående som **är bevisat**.
+- **Bevis**: ett logiskt resonemang utan luckor, där **varje steg**
+  motiveras.
+:::
+
+::: sampunkt "Avslutningen"
+- **v.s.b.** = vilket skulle bevisas.
+- **v.s.v.** = vilket skulle visas.
+:::
+
+::: sampunkt "Skriva tal allmänt"
+- **Jämnt tal**: $2k$.
+- **Udda tal**: $2k + 1$.
+- **På varandra följande**: $n$, $n + 1$, $n + 2$.
+- $k$ och $n$ är heltal. Det är nyckeln till talteoretiska bevis.
+:::
+
+::: sampunkt "Delbarhet visas så här"
+- Skriv om uttrycket så att den sökta faktorn kan **brytas ut**.
+- $(2k)^2 = 4k^2$ är delbart med 4, eftersom
+  $\dfrac{4k^2}{4} = k^2$ är ett heltal.
+- $n + (n+1) + (n+2) = 3(n + 1)$ är delbart med 3.
+:::
+
+::: sampunkt "Geometriska bevis"
+- Skriv upp de samband du **ser** i figuren, med motivering.
+- Leta efter två uttryck som är lika med **samma sak**, och sätt dem
+  lika.
+- Yttervinkelsatsen bevisas så: både
+  $a + b + c$ och $b + x$ är $180^\circ$.
+:::
+:::

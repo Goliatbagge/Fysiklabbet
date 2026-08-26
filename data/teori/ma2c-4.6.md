@@ -101,3 +101,36 @@ $$
 
 **Svar:** (2, −3)
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Koordinatgeometri"
+- Geometriska figurer studeras med hjälp av ett **koordinatsystem**.
+:::
+
+::: sampunkt "Avståndsformeln"
+- $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$
+- Det är **Pythagoras sats**, där kateterna är skillnaderna i $x$-led
+  och $y$-led.
+- Ordningen spelar ingen roll, eftersom skillnaderna kvadreras.
+:::
+
+::: sampunkt "Räkna med negativa koordinater"
+- Sätt in med **parentes** runt varje värde:
+  $(7 - (-3))^2$.
+- Det är där de flesta fel uppstår.
+:::
+
+::: sampunkt "Mittpunktsformeln"
+- $(x_m, y_m) = \left(\dfrac{x_1 + x_2}{2},\
+  \dfrac{y_1 + y_2}{2}\right)$
+- Alltså **medelvärdet** av $x$-koordinaterna och medelvärdet av
+  $y$-koordinaterna.
+:::
+
+::: sampunkt "Svarsformen"
+- Avstånd: svara gärna både **exakt** som en rot och avrundat, med
+  enheten l.e.
+- Mittpunkt: svara som en **koordinat**, alltså $(2, -3)$.
+:::
+:::

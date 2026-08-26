@@ -150,3 +150,37 @@ $$
 
 **Svar:** $x = 65°$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Korda"
+- En **sträcka mellan två punkter på cirkelns rand**.
+- En diameter är den längsta möjliga kordan.
+:::
+
+::: sampunkt "Kordasatsen"
+- Skär två kordor varandra är **produkten av den ena kordans
+  delsträckor** lika med produkten av den andras.
+- $a \cdot b = c \cdot d$
+:::
+
+::: sampunkt "Beviset"
+- Dra två hjälpsträckor, så bildas två trianglar.
+- De har lika vinklar tack vare **randvinklar på samma båge** och
+  **vertikalvinklar**, alltså likformiga.
+- Sidförhållandena och korsvis multiplikation ger satsen.
+:::
+
+::: sampunkt "Inskriven fyrhörning"
+- En fyrhörning med **alla fyra hörn på randen**.
+- Summan av **motstående** vinklar är $180^\circ$.
+- $u + v = 180^\circ$ och $x + y = 180^\circ$.
+:::
+
+::: sampunkt "Varför det stämmer"
+- Randvinkelsatsen ger medelpunktsvinklarna $2u$ och $2v$.
+- Tillsammans utgör de ett helt varv:
+  $2u + 2v = 360^\circ$.
+- Division med 2 ger $u + v = 180^\circ$.
+:::
+:::

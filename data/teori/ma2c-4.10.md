@@ -90,3 +90,39 @@ $$
 
 **Svar:** $\angle D = 30°$, $\angle E = 48°$ och $\angle F = 102°$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Kongruens"
+- Figurerna är **likformiga och lika stora**.
+- Skrivs med tecknet $\cong$:
+  $\triangle ABC \cong \triangle DEF$.
+- Skalfaktorn är alltså 1.
+:::
+
+::: sampunkt "De tre kongruensvillkoren"
+- **SVS**: två sidor och **mellanliggande** vinkel.
+- **SSS**: alla tre sidorna.
+- **VSV**: två vinklar och **mellanliggande** sida.
+- Det räcker att **ett** av dem är uppfyllt.
+:::
+
+::: sampunkt "Ordet mellanliggande är avgörande"
+- Vinkeln måste ligga **mellan** de två sidorna, och sidan **mellan** de
+  två vinklarna.
+- Annars gäller villkoret inte.
+:::
+
+::: sampunkt "Markeringar i figuren"
+- Lika långa sidor: **lika många tvärstreck**.
+- Lika stora vinklar: **lika många vinkelbågar**.
+- Para ihop sidor och vinklar efter markeringarna, inte efter hur figuren
+  råkar vara vriden.
+:::
+
+::: sampunkt "Vad du får använda"
+- I kongruenta trianglar är **alla** motsvarande sidor och vinklar lika.
+- En vinkel ligger **mitt emot** sin motsvarande sida. Den kopplingen
+  används för att hitta rätt vinkel.
+:::
+:::

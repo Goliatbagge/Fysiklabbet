@@ -109,3 +109,37 @@ $x < -5$ och $x > -1$.
 
 **Svar:** $x < -5$ och $x > -1$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Ekvation, båda leden"
+1. Rita $y = \mathrm{VL}$ och $y = \mathrm{HL}$.
+2. Ta fram **skärningarna** och läs av deras $x$-koordinater.
+- Nu kan det bli **två** lösningar, till skillnad från linjära
+  ekvationer.
+:::
+
+::: sampunkt "Ekvation lika med noll"
+- Rita bara $y = \mathrm{VL}$ och använd verktyget **Nollställen**.
+- Snabbare när ekvationen redan står lika med 0.
+:::
+
+::: sampunkt "Olikheter"
+1. Rita $f(x) = \mathrm{VL}$ och $g(x) = \mathrm{HL}$.
+2. Skärningarnas $x$-koordinater ger intervallets **gränser**.
+3. Avgör var $f$ ligger **under** eller **över** $g$.
+:::
+
+::: sampunkt "Tolka intervallet rätt"
+- $f(x) < g(x)$ gäller där grafen ligger **under**. För en parabel blir
+  det oftast ett intervall **mellan** skärningarna.
+- $f(x) > g(x)$ gäller där den ligger **över**, alltså **utanför**
+  skärningarna. Svaret blir då **två** intervall.
+:::
+
+::: sampunkt "Redovisning"
+- Skriv **vad** du ritade och **hur** du läste av.
+- Ange lösningarna som $x_1$ och $x_2$, eller intervallen med
+  olikhetstecken.
+:::
+:::

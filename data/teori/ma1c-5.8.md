@@ -254,3 +254,34 @@ dagar är lika vanliga — i verkligheten är födelsedagar ojämnt fördelade
 du sitter i ett klassrum eller på en fest med minst 23 personer: fråga
 runt. Oddsen är på din sida.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Komplementhändelse"
+- Händelsens **motsats**. Tillsammans täcker de alla möjliga utfall.
+- $P(\text{händelse}) + P(\text{komplement}) = 1$
+:::
+
+::: sampunkt "Formeln"
+- $P(\text{händelse}) = 1 - P(\text{komplementhändelse})$
+:::
+
+::: sampunkt "Ange komplementet rätt"
+- Till "det regnar": att det **inte** regnar.
+- Till "dra ett hjärter": att dra spader, klöver eller ruter.
+- Till "**minst** en femma": att slå **högst** en fyra.
+:::
+
+::: sampunkt "Nyckelorden minst en"
+- Vid "minst en" eller "åtminstone en" är komplementet **ingen alls**,
+  vilket är mycket enklare att räkna på.
+- $P(\text{minst en}) = 1 - P(\text{ingen})$
+:::
+
+::: sampunkt "Typexempel"
+- Minst en sexa på fem tärningar:
+  $1 - \left(\dfrac{5}{6}\right)^{5} \approx 60\ \%$.
+- Minst en dotter av fyra barn:
+  $1 - \left(\dfrac{1}{2}\right)^{4} \approx 94\ \%$.
+:::
+:::

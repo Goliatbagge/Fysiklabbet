@@ -122,3 +122,34 @@ $$
 **Svar:** 13 %
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Produktregeln"
+- Sannolikheten för en **kombination** av händelser fås genom att
+  **multiplicera** de enskilda sannolikheterna.
+- Gäller när händelserna sker efter varandra, alltså "och".
+:::
+
+::: sampunkt "Oberoende händelser"
+- Sannolikheten påverkas **inte** av vad som hänt innan.
+- Tärningskast: alltid $\dfrac{1}{6}$ för en sexa.
+- **Slumpen har inget minne.**
+- Dragning **med** återläggning är oberoende.
+:::
+
+::: sampunkt "Beroende händelser"
+- Sannolikheten **ändras** av det som hänt innan.
+- Kort **utan** återläggning: först
+  $\dfrac{13}{52}$ för hjärter, sedan bara
+  $\dfrac{12}{51}$.
+- Både täljare och nämnare minskar.
+:::
+
+::: sampunkt "Så gör du"
+1. Avgör om händelserna är oberoende eller beroende.
+2. Skriv sannolikheten för varje steg, med **uppdaterade** tal om de är
+   beroende.
+3. Multiplicera ihop.
+:::
+:::

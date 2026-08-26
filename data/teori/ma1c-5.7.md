@@ -85,3 +85,33 @@ $$
 **Svar:** $\dfrac{7}{15}$ eller ca 47 %
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Träddiagram"
+- Ett diagram av **grenar**, en gren per möjligt utfall i varje steg.
+- Användbart när sannolikheterna för utfallen är **olika stora**.
+:::
+
+::: sampunkt "Räkna i trädet"
+- **Längs en gren**: multiplicera sannolikheterna. Det motsvarar "och".
+- **Mellan olika grenar**: addera sannolikheterna. Det motsvarar "eller".
+:::
+
+::: sampunkt "Med eller utan återläggning"
+- **Med** återläggning: samma sannolikheter i varje steg.
+- **Utan** återläggning: både antalet gynnsamma och antalet möjliga
+  minskar med ett.
+:::
+
+::: sampunkt "När ordningen är oviktig"
+- "En svart och en vit" kan ske på **två** sätt: svart först eller vit
+  först.
+- Räkna ut båda grenarna och **addera** dem.
+- Det är den vanligaste missen i avsnittet.
+:::
+
+::: sampunkt "Kontroll"
+- Sannolikheterna för **alla** grenar ska tillsammans bli 1.
+:::
+:::

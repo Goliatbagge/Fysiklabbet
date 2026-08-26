@@ -89,3 +89,35 @@ tur ger längre livslängd.
 **Svar:** Nej, ingen kausalitet råder.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Korrelation"
+- Ett **samband** mellan två variabler.
+- Undersöks med ett **spridningsdiagram**, där varje punkt är ett
+  mätpar.
+:::
+
+::: sampunkt "Stark eller svag"
+- **Stark**: punkterna ligger tydligt längs en linje.
+- **Svag**: punkterna ligger kring en linje men spritt.
+- **Ingen korrelation**: punkterna ligger utan mönster.
+:::
+
+::: sampunkt "Positiv eller negativ"
+- **Positiv**: linjen lutar uppåt. Ökar den ena ökar den andra.
+- **Negativ**: linjen lutar nedåt. Ökar den ena minskar den andra.
+:::
+
+::: sampunkt "Kausalitet"
+- Ett **orsakssamband**: den ena variabeln orsakar faktiskt den andra.
+- Mammors och döttrars längd har kausalitet, eftersom generna avgör.
+:::
+
+::: sampunkt "Korrelation är inte kausalitet"
+- Två variabler kan följas åt utan att den ena orsakar den andra.
+- Medellivslängd och internettillgång korrelerar, men internet gör ingen
+  äldre. Båda beror på landets **välstånd**.
+- Fråga alltid: finns en tredje, bakomliggande orsak?
+:::
+:::

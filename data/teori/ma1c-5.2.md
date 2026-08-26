@@ -101,3 +101,33 @@ mellan 50,4 % och 69,6 %).
 **Svar:** Nej, förändringen är inte statistiskt säkerställd.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Felmarginal"
+- Hur mycket resultatet kan förväntas **variera** om undersökningen
+  upprepades under liknande förhållanden.
+- Anges i **procentenheter** och gäller normalt med 95 % säkerhet.
+:::
+
+::: sampunkt "Formeln"
+- $f = 1{,}96 \sqrt{\dfrac{p(100 - p)}{n}}$
+- $p$ är andelen i **procent** som gett ett visst svar, $n$ är
+  stickprovets storlek.
+- **Större stickprov ger mindre felmarginal**, eftersom $n$ står i
+  nämnaren.
+:::
+
+::: sampunkt "Konfidensintervall"
+- Resultatet **plus och minus** felmarginalen.
+- 60 % med felmarginalen 9,6 ger intervallet 50,4 % till 69,6 %.
+:::
+
+::: sampunkt "Signifikans"
+- Sannolikheten att en verklig förändring har skett.
+- Är förändringen **större än felmarginalen** är den **statistiskt
+  säkerställd**, alltså signifikant.
+- Ligger den nya andelen **inom** det gamla konfidensintervallet går det
+  inte att säga att någon förändring skett.
+:::
+:::

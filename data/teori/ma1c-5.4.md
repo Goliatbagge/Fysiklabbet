@@ -154,3 +154,37 @@ $$
 **Svar:** $\dfrac{1}{12}$, alternativt ca 8 % eller ca 0,08
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grundbegrepp"
+- **Utfall**: resultatet av ett slumpförsök.
+- **Utfallsrum**: alla möjliga utfall.
+- **Gynnsamma utfall**: de utfall som stämmer in på händelsen.
+- Sannolikheten skrivs $P(\text{händelse})$, efter engelskans
+  *probability*.
+:::
+
+::: sampunkt "Den klassiska sannolikhetsdefinitionen"
+- $P(\text{händelse})
+  = \dfrac{\text{antalet gynnsamma utfall}}{\text{antalet möjliga utfall}}$
+- Gäller **bara** vid **likformig sannolikhetsfördelning**, alltså när
+  varje utfall är lika sannolikt.
+:::
+
+::: sampunkt "När den inte gäller"
+- Slantsingling fungerar: krona och klave är lika sannolika.
+- Straffläggning fungerar **inte**: mål och miss är olika sannolika.
+:::
+
+::: sampunkt "Skalan"
+- Anges i decimal-, procent- eller bråkform, alltid mellan 0 och 1.
+- $P = 0$ betyder **omöjligt**, $P = 1$ betyder **säkert**.
+:::
+
+::: sampunkt "Två föremål"
+- Vid två tärningar eller två mynt: **rita upp hela utfallsrummet**.
+- Två tärningar ger 36 kombinationer. Räkna sedan de gynnsamma.
+- Tänk på skillnaden mellan "minst 10" och "större än 10".
+:::
+:::

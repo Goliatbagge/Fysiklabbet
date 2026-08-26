@@ -150,3 +150,45 @@ $$
 **Svar:** Mellan 42 % och 54 %.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grundbegrepp"
+- **Data**: informationen som behandlas.
+- **Population**: hela den mängd undersökningen handlar om.
+- **Totalundersökning**: hela populationen undersöks. Exakt men
+  tidskrävande.
+- **Stickprovsundersökning**: bara en del undersöks. Mindre exakt men
+  lättare att genomföra.
+:::
+
+::: sampunkt "Tre urvalsmetoder"
+- **Obundet slumpmässigt**: varje individ får ett tal och en slumpgenerator
+  väljer. Helt slumpmässigt.
+- **Systematiskt**: efter ett system, till exempel var femte på en lista.
+  **Inte slumpmässigt**, om inte listan slumpats först.
+- **Stratifierat**: urvalet anpassas så att det **speglar populationen**,
+  till exempel samma könsfördelning.
+:::
+
+::: sampunkt "Felkällor"
+- **Urvalsfel**: urvalet representerar inte populationen. Att fråga om
+  gudstro utanför en kyrka.
+- **Mätfel**: värdena blir felaktiga. Trasiga mätinstrument, **ledande
+  frågor** eller svarsalternativ som inte täcker alla svar.
+:::
+
+::: sampunkt "Ledande frågor"
+- "Matematik är väl ett roligt ämne?" är mycket ledande.
+- "Är matematik ett roligt ämne?" är ledande.
+- "Vad tycker du om matematik?" är bra.
+:::
+
+::: sampunkt "Svarsbortfall"
+- De tillfrågade som **inte svarar**.
+- Är bortfallet stort, eller kan de misstänkas svara annorlunda, måste
+  hänsyn tas.
+- Redovisa då ett **intervall**: från att alla i bortfallet svarat det ena
+  till att alla svarat det andra.
+:::
+:::

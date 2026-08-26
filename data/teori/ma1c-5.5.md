@@ -98,3 +98,29 @@ $$
 **Svar:** Cirka 48,6 %
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "När klassisk definition inte räcker"
+- Den kräver att alla utfall är **lika sannolika**.
+- "Träffas av en meteorit eller inte" är två utfall, men absolut inte
+  50 % vardera.
+:::
+
+::: sampunkt "Experimentell sannolikhet"
+- Bestäms genom **upprepade försök** i stället för genom resonemang.
+- Anges som **relativ frekvens**:
+  $\dfrac{\text{antal gånger händelsen inträffat}}{\text{antal försök}}$.
+:::
+
+::: sampunkt "Fler försök ger bättre värde"
+- Efter få försök hoppar värdet kraftigt: 1 av 1 ger 100 %.
+- Efter många försök **stabiliserar** det sig kring det sanna värdet.
+- Använd därför **det största** antalet försök i tabellen.
+:::
+
+::: sampunkt "Från statistik"
+- Verklig statistik fungerar som ett stort försök.
+- 50 901 flickor av 104 734 födda ger sannolikheten ungefär 48,6 %.
+:::
+:::

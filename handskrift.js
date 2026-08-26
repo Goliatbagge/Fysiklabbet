@@ -577,23 +577,30 @@
                              [46, 72], [51, 90], [63, 97], [75, 86], [77, 68],
                              [68, 52]]] },
     /* alfa efter den italiska matte-formen (KaTeX/Computer Modern): en
-     * STOR, rund, sluten ÖGLA och ett HÖGERSTRECK som möter öglan i en
-     * spets upptill, buktar ut och löper TÄTT UTMED öglans högersida
-     * (bara ~15 enheters glapp) och avslutas med en KROK åt höger vid
-     * baslinjen. Fyra former förkastades 2026-08-02 innan denna: öppen
-     * skål + lodrät stapel, sluten skål + kort diagonal, skål +
-     * högerstreck som vek tillbaka in i botten (blev ett 'o'), och rund
-     * skål + långt ben snett ned åt höger. De tre första lästes som
-     * gemena 'a' eller 'o'. Felet i alla var att högerdelen SKÖT IVÄG
-     * från öglan i stället för att hugga intill den — det är närheten
-     * plus kroken som gör formen grekisk. Ändra aldrig glappet till ett
-     * utfallande ben igen. Granska nya glyfer sida vid sida med den
-     * bokstav de kan förväxlas med (labb: .shots/hk13-alfa-lab.html). */
+     * STOR, rund, sluten ÖGLA och ett HÖGERSTRECK som BÖRJAR I EN SPETS
+     * UPPE TILL HÖGER — ovanför öglans topp (y=38 mot öglans y=46) —
+     * sveper ned åt vänster, TANGERAR öglans högersida vid dess bredaste
+     * punkt (~61,70) och svänger sedan ut åt höger till en KROK vid
+     * baslinjen.
+     *
+     * ⚠️ SPETSEN UPPE TILL HÖGER ÄR DET SOM GÖR TECKNET GREKISKT — ta
+     * aldrig bort den. Utan överhäng läses glyfen som ett gemena 'a'
+     * (påpekat 2026-08-26: den dåvarande formen, där högerstrecket
+     * startade PÅ öglans topp vid y=50, "ser väldigt mycket ut som ett
+     * litet a"). Fyra ännu tidigare former förkastades 2026-08-02 av
+     * samma skäl: öppen skål + lodrät stapel, sluten skål + kort
+     * diagonal, skål + högerstreck som vek tillbaka in i botten (blev
+     * ett 'o'), och rund skål + långt ben snett ned åt höger.
+     *
+     * Benet får tangera öglan men inte SKÄRA den på mitten — ett djupt
+     * kors läser som ett X över en ring. Granska alltid nya former i
+     * VERKLIG storlek bredvid ett 'a' (labb: .shots/alfa-lab2.html); i
+     * stor förstoring ser även dåliga varianter rimliga ut. */
     'α': { w: 94, strokes: [[[57, 53], [45, 46], [29, 49], [18, 61], [16, 77],
                              [22, 93], [35, 101], [50, 97], [58, 86], [60, 68],
                              [55, 54]],
-                            [[56, 50], [66, 60], [74, 73], [74, 88], [70, 98],
-                             [79, 100], [86, 94]]] },
+                            [[77, 38], [71, 46], [66, 53], [62, 61], [61, 70],
+                             [65, 80], [71, 90], [73, 98], [80, 101], [87, 95]]] },
     /* pi: tvärstreck först, sedan vänsterbenet och högerbenet med fot */
     'π': { w: 92, strokes: [[[14, 54], [82, 51]],
                             [[34, 54], [28, 100]],

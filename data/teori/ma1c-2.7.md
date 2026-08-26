@@ -270,3 +270,37 @@ Men $x \neq 7$, så ekvationen saknar lösning.
 **Svar:** Saknar lösning.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Först: vilka värden är förbjudna"
+- Står variabeln i **nämnaren** får den aldrig anta ett värde som gör
+  nämnaren 0.
+- **Skriv ut det förbjudna värdet innan du löser.** Blir svaret just det
+  värdet saknar ekvationen lösning.
+:::
+
+::: sampunkt "En bråkterm i ena ledet"
+- Multiplicera båda led med nämnaren.
+- $\dfrac{130}{3x} = 5$ ger $130 = 5 \cdot 3x$.
+:::
+
+::: sampunkt "En bråkterm i varje led"
+- **Korsvis multiplikation**: täljaren i det ena ledet gånger nämnaren i
+  det andra.
+- $\dfrac{9}{2x} = \dfrac{3}{8}$ ger
+  $9 \cdot 8 = 3 \cdot 2x$.
+:::
+
+::: sampunkt "Tre eller fler bråktermer"
+- Multiplicera **båda led** med den minsta gemensamma nämnaren.
+- Alternativt: skriv om varje led som **ett enda** bråk och använd korsvis
+  multiplikation.
+:::
+
+::: sampunkt "Kontrollen på slutet"
+- Jämför svaret med de förbjudna värdena.
+- $\dfrac{5x - 35}{x - 7} = 4$ ger $x = 7$, men just 7 gör nämnaren 0.
+  Alltså **saknas lösning**.
+:::
+:::

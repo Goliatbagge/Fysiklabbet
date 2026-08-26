@@ -91,3 +91,35 @@ $x$ var Arielles belopp, och 860 kr av 4 000 kr är rimligt.
 **Svar:** 860 kr
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Metoden i tre steg"
+1. **Översätt.** Inför en beteckning för det som söks och ställ upp en
+   ekvation.
+2. **Lös ekvationen.**
+3. **Tolka och svara** med enhet. Kontrollera att svaret är rimligt.
+:::
+
+::: sampunkt "Välj beteckningen smart"
+- Låt $x$ vara det som allt annat kan uttryckas **utifrån**, inte
+  nödvändigtvis det som frågan söker.
+- Får en person dubbelt så mycket som en annan: låt $x$ vara den
+  **minsta** delen, så slipper du bråk.
+- Skriv **alltid ut vad $x$ betyder**, till exempel "låt $x$ vara Arielles
+  belopp i kronor".
+:::
+
+::: sampunkt "Uttryck de andra storheterna"
+- "dubbelt så mycket som $x$" blir $2x$.
+- "300 kr mindre än $2x$" blir $2x - 300$.
+- Summan av delarna sätts lika med helheten.
+:::
+
+::: sampunkt "Sista steget glöms lätt"
+- Löser du ut $x$ men frågan gällde någon annan, räkna ut den storheten
+  också.
+- Svara med **enhet** och kontrollera rimligheten: negativa belopp eller
+  åldrar är en signal om att något gått fel.
+:::
+:::

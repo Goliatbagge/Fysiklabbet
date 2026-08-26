@@ -126,3 +126,32 @@ Detta är falskt eftersom $-12 \neq 63$. Alltså saknar ekvationen lösningar.
 **Svar:** Saknar lösning.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Variabler i båda led"
+- **Samla variablerna på ena sidan** och konstanterna på den andra.
+- Ta bort variabeltermen från den sida där koefficienten är **minst**. Då
+  slipper du negativa tal.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Utveckla eventuella parenteser.
+2. Förenkla varje led för sig.
+3. Samla variabeltermerna i ena ledet.
+4. Samla konstanttermerna i det andra.
+5. Dividera med koefficienten.
+:::
+
+::: sampunkt "När lösningen saknas"
+- Leder ekvationen till en **motsägelse**, som $1 = 2$ eller
+  $-12 = 63$, **saknar den lösning**.
+- Det betyder att variablerna tar ut varandra och kvar blir ett påstående
+  som aldrig är sant.
+:::
+
+::: sampunkt "Oändligt många lösningar"
+- Leder ekvationen till något alltid sant, som $5 = 5$, gäller den för
+  **alla** värden på variabeln.
+:::
+:::

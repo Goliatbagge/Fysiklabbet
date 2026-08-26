@@ -107,3 +107,33 @@ $$
 **Svar:** $9y(9 - 5x^2 + 3xy)$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Faktorisera"
+- Att skriva ett uttryck som en **multiplikation**. Motsatsen till att
+  utveckla.
+- Underlättar när man ska lösa vissa ekvationer och förkorta bråk.
+:::
+
+::: sampunkt "Så gör du"
+1. Hitta den **största gemensamma faktorn** för **alla** termer.
+2. Bryt ut den framför en parentes.
+3. Fyll i parentesen genom att tänka baklänges: vad ska varje term
+   multipliceras med för att bli den ursprungliga?
+:::
+
+::: sampunkt "Bryt ut både tal och variabler"
+- $27x^2 - 18x = 9x(3x - 2)$: både 9 och $x$ är gemensamma.
+- Bryt ut den **lägsta** förekommande potensen:
+  $5x^3 + 20x^5 = 5x^3(1 + 4x^2)$.
+- Ibland finns bara ett tal gemensamt:
+  $21x^2 - 14 = 7(3x^2 - 2)$.
+:::
+
+::: sampunkt "Kontrollera"
+- Multiplicera in igen. Du ska få tillbaka det ursprungliga uttrycket.
+- Glöm inte ettan: bryter du ut hela termen blir det som står kvar 1, inte
+  ingenting.
+:::
+:::

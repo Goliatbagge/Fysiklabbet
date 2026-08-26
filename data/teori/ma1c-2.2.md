@@ -99,3 +99,30 @@ $$
 **Svar:** $6x + 6$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Förenkla uttryck"
+- Att skriva samma uttryck på ett enklare sätt.
+- Bara **likadana termer** får läggas ihop: $x$-termer för sig,
+  $y$-termer för sig, $x^2$-termer för sig och konstanttermer för sig.
+- $x$ och $x^2$ är **inte** likadana termer.
+:::
+
+::: sampunkt "Titta på tecknet"
+- Tecknet framför en term hör till den termen.
+- $8x + 3y - 2x + 9y = 6x + 12y$.
+:::
+
+::: sampunkt "Plustecken framför parentes"
+- Parentesen kan tas bort **utan att något ändras**.
+- $a + (b - c) = a + b - c$
+:::
+
+::: sampunkt "Minustecken framför parentes"
+- Parentesen kan tas bort om **alla tecken inuti byts**.
+- $a - (b + c) = a - b - c$
+- $a - (b - c) = a - b + c$
+- Det är den vanligaste felkällan i hela avsnittet.
+:::
+:::

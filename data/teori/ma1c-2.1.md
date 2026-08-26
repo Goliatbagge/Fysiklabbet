@@ -117,3 +117,35 @@ $$
 **Svar:** 35
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Uttryckets delar"
+- **Variabel**: bokstaven, till exempel $x$.
+- **Koefficient**: talet framför variabeln, det som multipliceras med den.
+- **Variabelterm**: hela termen som innehåller variabeln, som $150x$.
+- **Konstantterm**: termen som bara är ett tal, som 800.
+:::
+
+::: sampunkt "Teckna ett uttryck"
+- Leta efter det **fasta** (blir konstantterm) och det som beror på antalet
+  (blir variabelterm).
+- Studiohyra med 800 kr fast och 150 kr per timme blir
+  $800 + 150x$.
+:::
+
+::: sampunkt "Uttryckets värde"
+- Sätt in ett tal i stället för variabeln och räkna ut.
+- $x = 12$ i $800 + 150x$ ger 2 600. Det svaret kallas uttryckets
+  **värde**.
+- Räkna med **tecken**: $20 - 3x$ med $x = -5$ blir
+  $20 + 15 = 35$.
+:::
+
+::: sampunkt "Ord som blir räknesätt"
+- "gånger så gammal" betyder multiplikation.
+- "för 4 år sedan" betyder subtraktion, alltså $x - 4$.
+- Gäller det en hel förändrad storhet: sätt **parentes**, som
+  $3(x - 4)$.
+:::
+:::

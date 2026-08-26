@@ -206,3 +206,36 @@ negativt:
 **Svar:** En lösning
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Potensekvation"
+- En ekvation där **variabeln är basen** och står upphöjd till något,
+  som $x^n = a$.
+- Förväxla den inte med en exponentialekvation, där variabeln står i
+  exponenten.
+:::
+
+::: sampunkt "Två sätt att lösa"
+- **Med potenslagar**: upphöj båda led till $\dfrac{1}{n}$, vilket ger
+  $x = a^{1/n}$.
+- **Med rötter**: $x = \sqrt[n]{a}$.
+- Det är samma sak, eftersom $a^{1/n} = \sqrt[n]{a}$.
+:::
+
+::: sampunkt "Antal lösningar"
+- **Jämn** exponent: två, en eller noll lösningar. Sätt $\pm$ framför.
+- **Udda** exponent: alltid **exakt en** lösning, och inget $\pm$.
+- $x^{12} = 154$ ger två, $x^4 = 0$ ger en,
+  $x^{100} = -50$ ger ingen, $x^{99} = -5$ ger en.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Få potensen **ensam** i ena ledet.
+2. Upphöj båda led till exponentens invers.
+3. Sätt $\pm$ om exponenten är jämn.
+- Bråkexponent: $x^{2/5} = 10$ löses genom att upphöja till
+  $\dfrac{5}{2}$. Nämnaren 5 är udda, men täljaren 2 är jämn, så svaret
+  får $\pm$.
+:::
+:::

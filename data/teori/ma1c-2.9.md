@@ -151,3 +151,39 @@ $$
 **Svar:** 16 cm
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Ekvationens grad"
+- Den **högsta exponenten** på variabeln avgör graden.
+- $x^2 + 7 = 11$ är en **andragradsekvation**,
+  $x^3 - 8 = 1$ en **tredjegradsekvation**.
+- Innehåller de bara **en** variabelterm kallas de **enkla**.
+:::
+
+::: sampunkt "Enkla andragradsekvationer"
+- $x^2 = a$ har lösningarna $x = \pm\sqrt{a}$ om $a \geq 0$.
+- **Glöm inte minuslösningen.** Det är den vanligaste missen.
+- Är $a < 0$ saknas reella lösningar, eftersom en kvadrat aldrig kan bli
+  negativ.
+:::
+
+::: sampunkt "Enkla tredjegradsekvationer"
+- $x^3 = a$ har lösningen $x = \sqrt[3]{a}$, för **alla** $a$.
+- Bara **en** lösning, och den kan mycket väl vara negativ:
+  $x^3 = -27$ ger $x = -3$.
+:::
+
+::: sampunkt "Så löser du"
+1. Få variabeltermen **ensam** i ena ledet.
+2. Dividera bort koefficienten.
+3. Dra roten. Jämn exponent ger $\pm$, udda ger inte det.
+:::
+
+::: sampunkt "Geometrisk tillämpning"
+- Kvadratens sida ur arean: $s = \sqrt{A}$.
+- Kubens sida ur volymen: $s = \sqrt[3]{V}$.
+- Här väljs bara den **positiva** lösningen, eftersom en sida inte kan
+  vara negativ.
+:::
+:::

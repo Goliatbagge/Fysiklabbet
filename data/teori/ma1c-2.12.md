@@ -107,3 +107,30 @@ Sträckan blir 3 600 km, vilket motsvarar 360 mil.
 **Svar:** 360 mil (3 600 km)
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Storhet och formel"
+- En **storhet** är något som kan mätas: längd, tid, vikt, hastighet.
+- En **formel** är en ekvation som beskriver ett samband mellan storheter.
+:::
+
+::: sampunkt "Lösa ut en variabel"
+- Behandla formeln som en ekvation och isolera den variabel du söker.
+- $v = \dfrac{s}{t}$ ger $t = \dfrac{s}{v}$.
+- Lös ut **innan** du sätter in siffrorna. Det blir enklare och risken för
+  räknefel minskar.
+:::
+
+::: sampunkt "Enheterna måste stämma"
+- Räkna om till samma enhetssystem innan insättning: 35 mil är $350\ \mathrm{km}$.
+- Svara med **enhet**.
+:::
+
+::: sampunkt "Formler med fast och rörlig del"
+- $H = 21\,000 + 2{,}5m$: konstanttermen är den fasta kostnaden,
+  koefficienten den rörliga per enhet.
+- **Framåt**: sätt in $m$ och räkna ut $H$.
+- **Bakåt**: sätt in $H$ och lös ut $m$.
+:::
+:::

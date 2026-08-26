@@ -198,3 +198,37 @@ Dessa intervall beskrivs av $x < -3$ och $x > 3$.
 **Svar:** $x < -3$ och $x > 3$.
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Olikhetstecknen"
+- $<$ mindre än, $>$ större än.
+- $\leq$ mindre än eller lika med, $\geq$ större än eller lika med.
+- Tecknet **gapar åt det större** värdet, eller peka på det mindre som med
+  en pil.
+:::
+
+::: sampunkt "Ekvation eller olikhet"
+- $3x - 4 = 2$ är en **ekvation**, med ett bestämt svar.
+- $3x - 4 < 2$ är en **olikhet**, med ett helt **intervall** av
+  lösningar.
+:::
+
+::: sampunkt "Lösningen går som för ekvationer"
+- Samma operationer i båda led, precis som vanligt.
+:::
+
+::: sampunkt "Den avgörande regeln"
+- **Olikhetstecknet vänds vid multiplikation eller division med ett
+  negativt tal.**
+- Varför: $5 > 3$, men multiplicerat med $-1$ blir det
+  $-5 < -3$.
+- Att bara **flytta** termer vänder däremot ingenting.
+:::
+
+::: sampunkt "Andragradsolikheter"
+- Lös **gränsfallet** som en vanlig ekvation, alltså med likhetstecken.
+- Undersök sedan vilket intervall som uppfyller olikheten, till exempel
+  genom att testa ett värde i varje del.
+:::
+:::

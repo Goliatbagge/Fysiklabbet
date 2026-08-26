@@ -146,3 +146,32 @@ $$
 **Svar:** $x = \dfrac{24}{7}$ (avrunda inte!)
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vad en ekvation är"
+- Två uttryck som ska vara **lika**. Innehåller alltid en variabel och ett
+  likhetstecken.
+- Att lösa den betyder att få variabeln **ensam** på ena sidan.
+:::
+
+::: sampunkt "Grundprincipen"
+- **Allt du gör i ena ledet måste du göra i det andra.** Annars gäller
+  likheten inte längre.
+:::
+
+::: sampunkt "De fyra operationerna"
+- Term som **adderas**: subtrahera den från båda led.
+- Term som **subtraheras**: addera den till båda led.
+- Faktor som **multipliceras**: dividera båda led med den.
+- Nämnare som **divideras**: multiplicera båda led med den.
+:::
+
+::: sampunkt "Kontroll och regler"
+- Sätt in ditt svar i den **ursprungliga** ekvationen och kontrollera.
+- **Prövning, alltså att testa sig fram, är inte tillåtet** som
+  lösningsmetod.
+- Avrunda inte svaret. Lämna det gärna som ett bråk:
+  $x = \dfrac{24}{7}$.
+:::
+:::

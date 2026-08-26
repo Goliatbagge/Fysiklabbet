@@ -168,3 +168,32 @@ $$
 **Svar:** $x = 2$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Distributiva lagen"
+- $a(b + c) = ab + ac$
+- Faktorn framför parentesen multipliceras med **varje** term inuti.
+- Att skriva om ett uttryck utan parenteser kallas att **utveckla** det.
+:::
+
+::: sampunkt "Glöm ingen term"
+- $8(3x + 4) - 2(5x - 7)$: multiplicera in båda faktorerna, och tänk på
+  att $-2 \cdot (-7) = +14$.
+:::
+
+::: sampunkt "Två parenteser"
+- **Varje** term i den första parentesen multipliceras med **varje** term
+  i den andra.
+- $(x + 7)(x + 3) = x^2 + 3x + 7x + 21
+  = x^2 + 10x + 21$.
+- Med två termer i varje parentes blir det alltid **fyra** produkter.
+:::
+
+::: sampunkt "Minustecken framför två parenteser"
+- $10 - (x - 2)(x - 3)$: utveckla produkten **först**, byt sedan tecken
+  på hela resultatet.
+- Kontrollera alltid genom att sätta in ett enkelt värde, till exempel
+  $x = 1$, i både det ursprungliga och det utvecklade uttrycket.
+:::
+:::

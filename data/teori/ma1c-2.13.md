@@ -158,3 +158,38 @@ $$
 **Svar:** 3 001
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Talföljd"
+- En **serie av tal**. Talen kallas **element**.
+- Elementen betecknas $a_n$, där $n$ är **ordningsnumret**.
+- I talföljden $3, 7, 11, 15, \ldots$ är $a_1 = 3$ och $a_2 = 7$.
+:::
+
+::: sampunkt "Sluten formel"
+- En formel som räknar ut ett element **direkt**, utan att gå via de
+  föregående.
+:::
+
+::: sampunkt "Så hittar du den"
+1. Ta **differensen** mellan två element som följer på varandra. Den blir
+   koefficienten framför $n$.
+2. Räkna ut vad som måste läggas till för att $n = 1$ ska ge det första
+   elementet.
+- $3, 7, 11, \ldots$ har differensen 4, och $4 \cdot 1 = 4$ är ett för
+  mycket. Alltså $a_n = 4n - 1$.
+:::
+
+::: sampunkt "Kontroll"
+- Testa formeln på **minst två** element, gärna det första och det tredje.
+- Sedan går det att räkna ut vilket element som helst:
+  $a_{100} = 4 \cdot 100 - 1 = 399$.
+:::
+
+::: sampunkt "Mönster med figurer"
+- Räkna antalet i varje figur och skriv upp talföljden.
+- Differensen är hur många som **läggs till** för varje steg.
+- Konstanten är den del som finns med redan från början.
+:::
+:::

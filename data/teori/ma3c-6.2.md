@@ -134,3 +134,32 @@ $$
 
 **Svar:** $-0{,}86$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Enhetscirkeln"
+- **Enhetscirkeln** har radien 1 och medelpunkten i origo.
+- Den definierar sinus, cosinus och tangens för **alla** vinklar, inte bara spetsiga.
+- Radien till randen bildar en rätvinklig triangel med hypotenusan 1.
+:::
+
+::: sampunkt "Definitionerna"
+- $\sin v = y$, alltså punktens $y$-koordinat.
+- $\cos v = x$, alltså punktens $x$-koordinat.
+- $\tan v = \dfrac{\sin v}{\cos v} = \dfrac{y}{x}$, där $\cos v \neq 0$.
+- Punkten kan alltid skrivas $(\cos v,\ \sin v)$.
+:::
+
+::: sampunkt "Vinklar"
+- Vinkeln startar vid den **positiva $x$-axeln** och vrids **moturs**.
+- En **negativ** vinkel vrids i stället medurs.
+- En vinkel över $360^\circ$ har gått ett helt varv: $360^\circ + v$ ger samma punkt som $v$.
+:::
+
+::: sampunkt "Räkneknep"
+- Dra bort hela varv: $\sin 419{,}3^\circ = \sin 59{,}3^\circ$.
+- En negativ vinkel speglar punkten i $x$-axeln. Cosinus är oförändrat, sinus byter tecken.
+- Alltså gäller $\sin(-v) = -\sin v$ och $\cos(-v) = \cos v$.
+:::
+
+:::

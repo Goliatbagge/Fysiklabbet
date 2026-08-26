@@ -110,3 +110,30 @@ villkor: arean och två sidor bestämmer inte triangeln entydigt.
 <svg viewBox="-2 -4 320 94" width="486" height="143" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två trianglar med sidorna 4,0 och 12,0 centimeter. I den vänstra är den mellanliggande vinkeln 25 grader, i den högra 155 grader — båda ger samma area."><polygon points="6,62 46,62 114.76,11.29" fill="none" stroke="#1f2530" stroke-width="1.6"/><path d="M 26,62 A 20 20 0 0 0 24.13,53.55" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="54.82" y="51.18" font-size="12.5" text-anchor="middle" fill="#1f2530">25°</text><text x="26" y="80" font-size="12" text-anchor="middle" fill="#1f2530">4,0 cm</text><text x="51.93" y="18.51" font-size="12" text-anchor="end" fill="#1f2530">12,0 cm</text><polygon points="186,62 306,62 149.75,45.10" fill="none" stroke="#1f2530" stroke-width="1.6"/><path d="M 206,62 A 20 20 0 0 0 167.87,53.55" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="196.82" y="13.18" font-size="12.5" text-anchor="middle" fill="#1f2530">155°</text><text x="246" y="80" font-size="12" text-anchor="middle" fill="#1f2530">12,0 cm</text><text x="167.87" y="31.55" font-size="12" text-anchor="middle" fill="#1f2530">4,0 cm</text></svg>
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Areasatsen"
+- $T = \dfrac{ab\sin C}{2} = \dfrac{ac\sin B}{2} = \dfrac{bc\sin A}{2}$.
+- Satsen ger triangelns area **utan att höjden behöver vara känd**.
+- Använd den när två sidor och den mellanliggande vinkeln är kända.
+:::
+
+::: sampunkt "Mellanliggande vinkel"
+- Den mellanliggande vinkeln är den vinkel där de två sidorna möts.
+- Vinkeln $C$ är mellanliggande till $a$ och $b$, vinkeln $A$ till $b$ och $c$.
+- Sidan mitt emot den kända vinkeln behövs inte.
+:::
+
+::: sampunkt "Beviset"
+- Dra höjden $h$ från ett hörn. Då gäller $\sin A = \dfrac{h}{b}$, alltså $h = b\sin A$.
+- Insättning i $T = \dfrac{\text{basen} \cdot \text{höjden}}{2}$ ger $T = \dfrac{bc\sin A}{2}$.
+:::
+
+::: sampunkt "Söka vinkeln"
+- Lös ut $\sin C$ ur areasatsen och använd $\sin^{-1}$.
+- Ta även fram den andra lösningen, $C_2 = 180^\circ - C_1$.
+- Här ger **båda** vinklarna giltiga trianglar med samma area, till skillnad från i sinussatsen där vinkelsumman ofta utesluter den ena.
+:::
+
+:::

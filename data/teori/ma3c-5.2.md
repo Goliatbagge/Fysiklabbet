@@ -134,3 +134,31 @@ Eftersom hastigheten är angiven i meter/sekund blir sträckan i meter.
 
 **Svar:** $400$ meter
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Integrera"
+- Att ta fram en primitiv funktion kallas att **integrera**.
+- Integrering är motsatsen till derivering.
+:::
+
+::: sampunkt "Bestämma konstanten C"
+- Ett **villkor** är extra information om den primitiva funktionen, till exempel $F(1) = 7$.
+1. Ta fram samtliga primitiva funktioner, med $C$.
+2. Sätt in villkorets $x$-värde och sätt uttrycket lika med det givna värdet.
+3. Lös ut $C$ och sätt in det i funktionen.
+:::
+
+::: sampunkt "Sträcka, hastighet, acceleration"
+- Derivera: $s(t) \rightarrow v(t) \rightarrow a(t)$.
+- Integrera: $a(t) \rightarrow v(t) \rightarrow s(t)$.
+- Deriveras sträckan två gånger fås accelerationen direkt.
+:::
+
+::: sampunkt "Typuppgift"
+- $v(t) = 1{,}2t^2$ integreras till $s(t) = 0{,}4t^3 + C$.
+- Villkoret att sträckan är 0 vid start, $s(0) = 0$, ger $C = 0$.
+- $s(10) = 400$, alltså 400 meter. Enheten följer av hastighetens enhet.
+:::
+
+:::

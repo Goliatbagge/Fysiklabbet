@@ -95,3 +95,32 @@ mellan månad 0 och månad 12, dvs. under det första året.
 **Svar:** Under de 12 första månaderna (det första året) omsätter företaget
 3 000 000 kr.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vad integralen står för"
+- Integralen är **produkten** av den beroende variabeln och den oberoende variabeln.
+- Enheten blir därför enheten för $y$ gånger enheten för $x$.
+- Liter per minut gånger minut ger liter. Kronor per månad gånger månad ger kronor.
+:::
+
+::: sampunkt "Rörelse"
+- Derivera: $s(t) \rightarrow v(t) \rightarrow a(t)$.
+- Integrera: $a(t) \rightarrow v(t) \rightarrow s(t)$.
+- Sträckan mellan två tidpunkter fås ur $\int_{t_1}^{t_2} v(t)\, dt$.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Avgör vilken storhet som söks och åt vilket håll du ska gå.
+2. Sätt gränserna till de tidpunkter eller värden frågan gäller.
+3. Ta fram den primitiva funktionen och sätt in gränserna.
+4. Svara med rätt enhet och rimlig avrundning.
+:::
+
+::: sampunkt "Tolka i ord"
+- Gör en **enhetsanalys** för att veta vad integralens värde betyder.
+- $\int_0^{12} K(t)\, dt = 3\,000\,000$ med $K$ i kronor per månad betyder att företaget omsatte 3 000 000 kr under det första året.
+- Gränserna talar om vilket tidsintervall värdet gäller.
+:::
+
+:::

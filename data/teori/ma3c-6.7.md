@@ -181,3 +181,30 @@ $C \approx 28{,}1^\circ$
 Observera att sinussatsens första lösning ovan gav en felaktig vinkel (den
 spetsiga $B_1$). För att minska risken för slarvfel rekommenderas, om
 möjligt, cosinussatsen framför sinussatsen när man ska bestämma vinklar.
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Cosinussatsen"
+- $c^2 = a^2 + b^2 - 2ab\cos C$, och på motsvarande sätt för $b^2$ och $a^2$.
+- Den vinkel som står i formeln är alltid **mellanliggande** till de två sidorna i produkten.
+- Är vinkeln $90^\circ$ blir $\cos C = 0$ och satsen övergår i Pythagoras sats.
+:::
+
+::: sampunkt "När den fungerar"
+- Två sidor och den mellanliggande vinkeln är kända, och den tredje sidan söks.
+- Alla tre sidorna är kända och ingen vinkel.
+:::
+
+::: sampunkt "Söka en vinkel"
+- Lös ut $\cos C$ ur satsen och använd $\cos^{-1}$.
+- Är $\cos C$ **negativ** är vinkeln trubbig, alltså över $90^\circ$.
+- Metoden ger bara **en** lösning, till skillnad från sinussatsen.
+:::
+
+::: sampunkt "Välj cosinussatsen vid vinklar"
+- Sinussatsen ger två lösningar och den felaktiga är lätt att välja av misstag.
+- Använd därför helst cosinussatsen när en vinkel ska bestämmas.
+- Den sista vinkeln fås enklast ur vinkelsumman $180^\circ$.
+:::
+
+:::

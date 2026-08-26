@@ -166,3 +166,32 @@ $$
 
 **Svar:** $v_1 = 34{,}4^\circ$ och $v_2 = 325{,}6^\circ$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Trigonometrisk ekvation"
+- En ekvation med sinus, cosinus eller tangens kallas **trigonometrisk ekvation**.
+- I intervallet $0^\circ \leq v \leq 360^\circ$ finns oftast **två** lösningar.
+- Egentligen finns oändligt många, eftersom hela varv kan läggas till.
+:::
+
+::: sampunkt "Lösa med enhetscirkeln"
+- $\sin v = a$: dra en **vågrät** linje vid $y = a$ och läs av skärningarna.
+- $\cos v = a$: dra en **lodrät** linje vid $x = a$.
+- Är $|a| > 1$ hamnar linjen utanför cirkeln och ekvationen **saknar lösning**.
+:::
+
+::: sampunkt "Lösa med räknare"
+1. Lös ut den trigonometriska funktionen.
+2. Använd den inversa funktionen. Räknaren ger bara den minsta lösningen $v_1$.
+3. Räkna ut den andra lösningen själv.
+- Sinus: $v_2 = 180^\circ - v_1$. Cosinus: $v_2 = 360^\circ - v_1$.
+:::
+
+::: sampunkt "Typexempel"
+- $4\cos v + 3{,}28 = 6{,}58$ ger $\cos v = 0{,}825$.
+- $v_1 = \cos^{-1}(0{,}825) \approx 34{,}4^\circ$ och $v_2 = 360^\circ - 34{,}4^\circ \approx 325{,}6^\circ$.
+- Kontrollera alltid att lösningarna ligger inom det efterfrågade intervallet.
+:::
+
+:::

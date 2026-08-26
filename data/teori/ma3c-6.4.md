@@ -87,3 +87,31 @@ $$
 
 **Svar:** $v_1 \approx 63{,}4^\circ$ och $v_2 \approx 243{,}4^\circ$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Perioder"
+- $\sin$ och $\cos$ har perioden $360^\circ$.
+- $\tan$ har perioden $180^\circ$.
+- Perioden är hur långt man ska vrida innan funktionsvärdet upprepas.
+:::
+
+::: sampunkt "Varför tangens har halva perioden"
+- $\tan(v + 180^\circ) = \dfrac{-\sin v}{-\cos v} = \dfrac{\sin v}{\cos v} = \tan v$.
+- Annat sätt att se det: $\tan v = \dfrac{y}{x}$ är **lutningen** hos linjen genom origo och punkten.
+- Ett halvt varv ger den diametralt motsatta punkten på **samma linje**, alltså samma lutning.
+:::
+
+::: sampunkt "Lösa en tangensekvation"
+1. Lös ut $\tan v$.
+2. Använd $\tan^{-1}$ för att få den första lösningen $v_1$.
+3. Lägg till en period: $v_2 = v_1 + 180^\circ$.
+:::
+
+::: sampunkt "Typexempel"
+- $\tan v = 2$ ger $v_1 = \tan^{-1}(2) \approx 63{,}4^\circ$.
+- $v_2 \approx 63{,}4^\circ + 180^\circ = 243{,}4^\circ$.
+- Observera skillnaden mot sinus och cosinus, där den andra lösningen fås ur $180^\circ - v_1$ respektive $360^\circ - v_1$.
+:::
+
+:::

@@ -100,3 +100,30 @@ $$
 -\left(\frac{1}{3} - 4\right) = -\frac{1}{3} + 4 \qquad \text{men} \qquad -\frac{1}{3} - 4 \ \text{är fel.}
 $$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Fundamentalsatsen"
+- $\int_a^b f(x)\, dx = \Big[F(x)\Big]_a^b = F(b) - F(a)$.
+- Integralen beräknas alltså exakt med hjälp av en primitiv funktion, utan att summera rektanglar.
+- Sambandet kallas **integralkalkylens fundamentalsats**.
+:::
+
+::: sampunkt "Skrivsättet"
+- $\Big[F(x)\Big]_a^b$ betyder $F(b) - F(a)$.
+- Först sätts den **övre** gränsen in, sedan subtraheras den undre.
+- Konstanten $C$ behövs inte, eftersom den försvinner i subtraktionen.
+:::
+
+::: sampunkt "Tanken bakom"
+- Slutvärde är startvärde plus summan av alla förändringar: $F(b) = F(a) + \int_a^b F'(x)\, dx$.
+- Eftersom $F'(x) = f(x)$ följer satsen direkt när integralen löses ut.
+:::
+
+::: sampunkt "Glöm inte parentesen"
+- Har den primitiva funktionen **flera termer** måste parentes sättas runt hela uttrycket vid den undre gränsen.
+- Annars påverkar minustecknet bara den första termen och svaret blir fel.
+- $-\left(\dfrac{1}{3} - 4\right) = -\dfrac{1}{3} + 4$, inte $-\dfrac{1}{3} - 4$.
+:::
+
+:::

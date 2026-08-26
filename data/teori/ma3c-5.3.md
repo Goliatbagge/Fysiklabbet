@@ -181,3 +181,32 @@ negativt.
 
 **Svar:** Negativ
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Från rektanglar till integral"
+- Arean under en kurva kan **approximeras** med rektanglar av bredden $\Delta x$ och höjden $f(x)$.
+- Ju smalare rektanglar, desto bättre stämmer summan med den verkliga arean.
+- Låter man $\Delta x$ gå mot 0 skrivs bredden $dx$, och summatecknet $\Sigma$ byts mot integraltecknet $\int$.
+:::
+
+::: sampunkt "Bestämd integral"
+- $\int_a^b f(x)\, dx$ kallas en **bestämd integral**.
+- $\int$ är integraltecknet, $a$ den **undre** och $b$ den **övre integrationsgränsen**.
+- $f(x)$ är **integranden** och $dx$ **integrationsvariabeln**.
+- Grafiskt: arean mellan grafen och $x$-axeln mellan $x = a$ och $x = b$.
+:::
+
+::: sampunkt "Tecken"
+- Ligger området **under** $x$-axeln blir integralens värde **negativt**.
+- En area kan aldrig vara negativ. Arean är då integralens värde utan minustecknet.
+- Ligger delar på båda sidor tar bidragen ut varandra. Den största delen avgör tecknet.
+:::
+
+::: sampunkt "Beräkna ur en graf"
+- Är grafen en rät linje: dela upp området i rektanglar och trianglar och summera.
+- Areor anges med areaenheter, a.e. Ett integralvärde anges **utan** enhet.
+- Kontrollera att gränserna verkligen är områdets $x$-värden.
+:::
+
+:::

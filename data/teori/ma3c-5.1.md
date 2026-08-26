@@ -125,3 +125,32 @@ $$
 
 **Svar:** $F(x) = 2e^{3x} + C$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Primitiv funktion"
+- En **primitiv funktion** är en ursprunglig funktion till en given derivata, alltså en baklängesderivata.
+- För $F(x)$ gäller $F'(x) = f(x)$.
+- Skrivsätt: $f(x)$ har den primitiva funktionen $F(x)$, och $f'(x)$ har $f(x)$.
+:::
+
+::: sampunkt "En eller samtliga"
+- **En** primitiv funktion till $f(x) = 2x$ är $F(x) = x^2$.
+- **Samtliga** primitiva funktioner är $F(x) = x^2 + C$, där $C$ är en godtycklig konstant.
+- Skälet är att en konstantterm försvinner vid derivering. Läs alltid frågan noga innan du sätter dit $C$.
+:::
+
+::: sampunkt "Tre regler"
+- **Potensfunktion** $f(x) = x^n$: öka exponenten med 1 och dividera med den nya exponenten, $F(x) = \dfrac{x^{n+1}}{n+1}$.
+- **Konstant funktion** $f(x) = k$: multiplicera med $x$, alltså $F(x) = kx$.
+- **Exponentialfunktion** $f(x) = e^{kx}$: skriv av funktionen och dividera med koefficienten i exponenten, $F(x) = \dfrac{e^{kx}}{k}$.
+:::
+
+::: sampunkt "Flera termer"
+- Ta fram en primitiv funktion till **varje term för sig** och lägg ihop.
+- $14x^2 - 3$ ger $\dfrac{14x^3}{3} - 3x$.
+- $6e^{3x}$ ger $\dfrac{6e^{3x}}{3} = 2e^{3x}$.
+- Kontrollera svaret genom att derivera tillbaka.
+:::
+
+:::

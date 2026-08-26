@@ -165,3 +165,32 @@ $$
 
 **Svar:** $\dfrac{32}{3}\ \text{a.e.}$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Area mellan två kurvor"
+- $A = \int_a^b \big(f(x) - g(x)\big)\, dx$, där $f(x)$ är den **övre** och $g(x)$ den **undre** funktionen.
+- Beviset: dra bort arean under den undre kurvan från arean under den övre.
+- Formeln fungerar även när kurvorna ligger under $x$-axeln, eftersom bara skillnaden räknas.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Avgör vilken funktion som ligger överst i intervallet.
+2. Bestäm gränserna, ofta kurvornas skärningspunkter.
+3. Integrera skillnaden och sätt in gränserna.
+- Sätt parentes runt den undre funktionen: $x^2 - (x - 2) = x^2 - x + 2$.
+:::
+
+::: sampunkt "Skärningspunkter"
+- Sätt funktionerna lika med varandra och lös ekvationen.
+- $x = 6 - x^2$ ger $x^2 + x - 6 = 0$, alltså $x = -3$ och $x = 2$.
+- Välj den rot som stämmer med figuren.
+:::
+
+::: sampunkt "Sammansatt område"
+- Byter den övre eller undre funktionen vid en skärningspunkt måste området **delas upp**.
+- Beräkna varje delarea för sig och lägg ihop dem till slut.
+- I Geogebra används **IntegralMellan( övre, undre, från, till )**, i CAS-läget för exakt svar.
+:::
+
+:::

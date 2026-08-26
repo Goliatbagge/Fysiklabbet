@@ -97,3 +97,33 @@ $$
 
 **Svar:** $CD \approx 32$ m
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Triangelsatserna"
+- **Areasatsen:** $T = \dfrac{ab\sin C}{2}$
+- **Sinussatsen:** $\dfrac{\sin A}{a} = \dfrac{\sin B}{b} = \dfrac{\sin C}{c}$
+- **Cosinussatsen:** $c^2 = a^2 + b^2 - 2ab\cos C$
+- Sidan $a$ ligger alltid mitt emot vinkel $A$.
+:::
+
+::: sampunkt "Välja rätt sats"
+- **Areasatsen:** två sidor och mellanliggande vinkel, och arean söks.
+- **Sinussatsen:** en sida och två vinklar, eller två sidor och en icke-mellanliggande vinkel.
+- **Cosinussatsen:** två sidor och mellanliggande vinkel, eller alla tre sidorna.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Rita figuren och märk ut allt som är känt.
+2. Leta upp den triangel som innehåller den enda kända **sidan**.
+3. Fyll på med vinklar ur vinkelsumman.
+4. Välj sats efter vad som är känt och räkna.
+:::
+
+::: sampunkt "Flera trianglar i följd"
+- Många problem kräver att satserna används i **två trianglar efter varandra**.
+- Det som beräknas i den första triangeln blir känd information i nästa.
+- Bär vidare oavrundade värden mellan stegen och avrunda först i svaret.
+:::
+
+:::

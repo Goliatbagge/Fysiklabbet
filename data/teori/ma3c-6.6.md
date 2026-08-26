@@ -106,3 +106,30 @@ Vinkeln $A_2$ är orimlig eftersom den ger en vinkelsumma över $180^\circ$
 
 **Svar:** $A \approx 26{,}7^\circ$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Sinussatsen"
+- $\dfrac{\sin A}{a} = \dfrac{\sin B}{b} = \dfrac{\sin C}{c}$, eller upp och ned: $\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C}$.
+- Sidan $a$ är motstående sida till vinkel $A$, och så vidare.
+- Använd formen med sidorna i täljaren när du söker en **sida**.
+:::
+
+::: sampunkt "När den fungerar"
+- En sida och två vinklar är kända.
+- Två sidor och en **icke-mellanliggande** vinkel är kända.
+- Saknas den tredje vinkeln fås den ur vinkelsumman $180^\circ$.
+:::
+
+::: sampunkt "Beviset"
+- Utgå från areasatsen och multiplicera alla led med 2: $ab\sin C = ac\sin B = bc\sin A$.
+- Dividera alla led med $abc$ och förkorta.
+:::
+
+::: sampunkt "Två lösningar vid vinkelsökning"
+- $\sin^{-1}$ ger $A_1$. Den andra lösningen är $A_2 = 180^\circ - A_1$.
+- Pröva båda mot vinkelsumman: ger den ena en summa över $180^\circ$ är den orimlig och förkastas.
+- $\sin A = 0{,}449$ ger $A_1 \approx 26{,}7^\circ$ och $A_2 \approx 153{,}3^\circ$. Med en känd vinkel på $40^\circ$ duger bara $26{,}7^\circ$.
+:::
+
+:::

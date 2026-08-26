@@ -83,3 +83,31 @@ $$
 **Svar:** $F(x) = \dfrac{1}{3}x^3 - 4x$ alternativt
 $F(x) = \dfrac{x^3}{3} - 4x$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Två lägen i Geogebra"
+- **Standardläget** ger numeriska närmevärden med decimaler.
+- **CAS-läget** ger exakta svar med bråk och rotuttryck.
+- Välj läge efter vad uppgiften efterfrågar.
+:::
+
+::: sampunkt "Kommandot Integral"
+- *Integral( Funktion )* ger en primitiv funktion.
+- Samma kommando i CAS-läget ger samtliga primitiva funktioner, med konstanten $c_1$.
+- *Integral( Funktion, Från x-värde, Till x-värde )* ger integralens värde.
+:::
+
+::: sampunkt "Så gör du"
+1. Skriv "Integral" i inmatningsfältet och välj rätt variant i menyn.
+2. Mata in funktionsuttrycket **utan** $f(x) =$.
+3. Stega höger med piltangenten och skriv undre respektive övre gräns.
+4. Enter ger svaret.
+:::
+
+::: sampunkt "Typexempel"
+- $\int_1^5 (x^2 - 4)\, dx$ ger $\approx 25{,}3$ i standardläget och $\dfrac{76}{3}$ i CAS-läget.
+- Integral($x^2 - 4$) ger den primitiva funktionen $\dfrac{x^3}{3} - 4x$.
+:::
+
+:::

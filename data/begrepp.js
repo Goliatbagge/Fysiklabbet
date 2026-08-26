@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'vakuumfluktuation',
+    term: 'Vakuumfluktuation',
+    former: ['vakuumfluktuation', 'vakuumfluktuationen', 'vakuumfluktuationer', 'vakuumfluktuationerna', 'nollpunktssvängning', 'nollpunktssvängningar', 'nollpunktssvängningarna', 'nollpunktsfluktuation', 'nollpunktsfluktuationer', 'kvantvakuum', 'kvantvakuumet', 'virtuell partikel', 'virtuella partiklar', 'virtuella partiklarna', 'virtuell foton', 'virtuella fotoner'],
+    kort: 'Den darrning som finns kvar i ett elektromagnetiskt fält även när all energi tagits bort. Tomrummet är därför aldrig helt stilla, och darrningen ger mätbara effekter på atomer och material.',
+    relaterade: ['kvantelektrodynamik', 'casimireffekten', 'absoluta-nollpunkten', 'foton'],
+    body: [
+      { type: 'p', html: 'Ta bort all materia ur en låda, kyl den till absoluta nollpunkten och släck allt ljus. Enligt klassisk fysik borde det elektromagnetiska fältet inuti då vara exakt noll och stå exakt stilla. Kvantmekaniken tillåter inte det. Heisenbergs obestämdhetsrelation säger att ett fält inte samtidigt kan ha ett bestämt värde och en bestämd förändringstakt, och därför finns alltid en rest kvar: fältet darrar lite, hur mycket man än försöker lugna ner det. Darrningen kallas vakuumfluktuationer, eller nollpunktssvängningar eftersom den finns kvar i systemets lägsta energitillstånd.' },
+      { type: 'p', html: 'I kvantelektrodynamiken beskrivs samma sak med ett annat ordval: par av partiklar och antipartiklar bildas ur ingenting, lever en ofattbart kort stund och försvinner igen. De kallas virtuella, eftersom de aldrig kan fångas in och mätas var för sig — de dyker bara upp som mellansteg i räkningen. De två beskrivningarna är samma fysik sedd från två håll.' },
+      { type: 'p', html: 'Att detta inte bara är bokföring märks på tre klassiska mätningar. En atom som lyfts till ett högre energitillstånd faller ner igen även i kompakt mörker, och det är fluktuationerna som sätter i gång fallet. Två speglar några nanometer från varandra dras ihop, eftersom vissa svängningar inte får plats i springan mellan dem. Och väteatomens energinivåer ligger en aning fel jämfört med vad en teori utan fluktuationer förutsäger — en skillnad som mättes 1947 och blev startskottet för hela kvantelektrodynamiken.' }
+    ]
+  },
+  {
+    id: 'casimireffekten',
+    term: 'Casimireffekten',
+    former: ['casimireffekten', 'casimireffekt', 'casimirkraften', 'casimirkraft'],
+    kort: 'Två speglar som placeras mycket nära varandra dras ihop av en kraft, trots att ingenting finns emellan dem. Kraften kommer av att bara vissa av vakuumets svängningar får plats i springan.',
+    relaterade: ['vakuumfluktuation', 'kvantelektrodynamik', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Ställ två blanka metallplattor parallellt, någon tiondels mikrometer från varandra, i ett tomrum. Då börjar de dras mot varandra, utan att någon laddning, magnetism eller gravitation värd att tala om är inblandad. Effekten förutsades 1948 av nederländaren Hendrik Casimir och kunde mätas med god noggrannhet först 1997, eftersom kraften är minimal och avstånden måste hållas otroligt jämna.' },
+      { type: 'p', html: 'Förklaringen liknar den för en gitarrsträng. En sträng som är fastspänd i båda ändar kan bara svänga med vissa våglängder — de som råkar passa mellan fästpunkterna. På samma sätt kan bara vissa av tomrummets egna svängningar få plats mellan två speglar, medan alla svängningar finns utanför. Det blir alltså trängre inne i springan än utanför, och skillnaden trycker ihop plattorna. Ju närmare de kommer, desto färre svängningar ryms och desto hårdare trycker omgivningen.' },
+      { type: 'p', html: 'Kraften är svag men inte oviktig. På de avstånd som gäller inuti mycket små mekaniska konstruktioner kan den få rörliga delar att fastna mot varandra, vilket är ett verkligt bekymmer för mikroskopiska maskiner. Med rätt val av material och omgivning går kraften i vissa fall att vända från dragande till stötande, och just den möjligheten gör den intressant som ett handtag att styra saker med på nanometerskala.' }
+    ]
+  },
+  {
+    id: 'kavitet',
+    term: 'Kavitet',
+    former: ['kavitet', 'kaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn'],
+    kort: 'Ett litet inneslutet utrymme mellan speglar eller metallytor där bara vissa våglängder passar in. Kaviteten bestämmer därmed vilka elektromagnetiska svängningar som alls kan finnas i den.',
+    relaterade: ['vakuumfluktuation', 'laser', 'metamaterial', 'terahertzstralning'],
+    body: [
+      { type: 'p', html: 'En kavitet är i sin enklaste form två speglar som vänder mot varandra. En ljusvåg som studsar fram och tillbaka mellan dem förstärker sig själv bara om den passar jämnt in i mellanrummet; alla andra våglängder släcker ut sig själva efter några varv. Kaviteten fungerar därför som ett urval: den plockar ut ett fåtal tillåtna svängningar ur alla tänkbara. Samma princip finns i ett blåsinstrument, där rörets längd avgör vilken ton som byggs upp.' },
+      { type: 'p', html: 'Kaviteter behöver inte se ut som speglar. En metallring med ett litet gap i fungerar som en svängningskrets i miniatyr: strömmen går runt ringen och laddningen samlas i gapet, och ringens storlek bestämmer vilken frekvens som resonerar. Sådana ringar tillverkas mikrometersmå och används i området mellan mikrovågor och infrarött ljus, där vanliga speglar är opraktiska.' },
+      { type: 'p', html: 'Det subtila är att en kavitet gör skillnad även när ingenting lyser i den. Eftersom tomrummet självt darrar, och kaviteten bestämmer vilka svängningar som får finnas, ändras också darrningens styrka och fördelning. Ett material som läggs inne i en kavitet möter alltså en annan elektromagnetisk omgivning än utanför — utan att någon energi tillförts. Kaviteter används annars framför allt i lasrar, i optiska klockor och som minne för enskilda fotoner i kvantoptiken.' }
+    ]
+  },
+  {
     id: 'vagfunktion',
     term: 'Vågfunktion',
     former: ['vågfunktion', 'vågfunktionen', 'vågfunktioner', 'vågfunktionerna'],

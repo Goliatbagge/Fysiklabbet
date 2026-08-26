@@ -12,6 +12,36 @@ Format per post:
 
 ## Kö
 
+- **Vakuumfluktuationer förstärker supraledning — men ett no-go-teorem säger
+  att de inte borde kunna göra det** (UPPFÖLJNING, inte ny nyhet). Publicerad
+  2026-08-26 som `2026-08-26-vakuumet-som-hjalper-till`. Det som är kvar att
+  bevaka: vilken av de två vägarna förbi no-go-teoremet som gäller i NbSe2,
+  och om NTU Singapores förhandspublicering (arXiv:2606.19171) blir kollegialt
+  granskad — de två lagen ger olika förklaring till samma effekt. En bra
+  ”så gick det sedan”-artikel om några månader.
+  (tillagd 2026-08-26)
+
+- **Newtons gravitationslag klarar sitt hårdaste test hittills** — en kosmisk
+  studie av hur gravitationen beter sig på de allra största avstånden ger
+  ”nästan exakt” det Newton och Einstein förutsäger. Klassisk gymnasiefysik
+  (gravitationslagen) mot modern kosmologi, och ett bra tillfälle att förklara
+  vad det innebär att en 300 år gammal lag prövas på nytt. Kontrollera vilken
+  studie referatet bygger på innan den används. Källa (ScienceDaily
+  2026-08-24): https://www.sciencedaily.com/releases/2026/08/260823015019.htm
+  (tillagd 2026-08-26)
+
+- **Deuterium i vågledare på ett chip gör bredbandsljus av infraröda pulser**
+  — ett chip som breddar en laserpuls till ett helt spektrum. Ingång:
+  våglängd, brytningsindex och olinjär optik. Källa (Phys.org 2026-08-24):
+  https://phys.org/physics-news/ (leta upp direktlänken vid användning)
+  (tillagd 2026-08-26)
+
+- **Fusionsimplosioner tål mer ojämnheter än väntat** — Lawrence Livermore
+  visar hur långt en tändning kan drivas trots defekter i kapseln. Anknyter
+  till fusion, tryck och energiomvandling. Källa (Phys.org 2026-08-24, leta
+  upp direktlänken vid användning): https://phys.org/physics-news/
+  (tillagd 2026-08-26)
+
 - **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
   dipolväxelverkan**  **[BREVTEASER]** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
   Chinese University of Hong Kong har gjort det första kondensatet av

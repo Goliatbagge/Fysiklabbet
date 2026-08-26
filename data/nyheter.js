@@ -88,6 +88,57 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-26-vakuumet-som-hjalper-till",
+    date: "2026-08-26",
+    title: "Fysiker höjde en supraledares gräns utan att röra materialet — de byggde om tomrummet omkring den",
+    deck: "Niobdiselenid leder ström utan motstånd först när det kylts till några grader över absoluta nollpunkten. Genom att lägga provet inuti en liten metallring, som formar om vakuumets egna fluktuationer, har ett forskarlag flyttat gränsen uppåt med drygt fem procent — utan att tillföra någon energi alls.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-26-vakuumet-som-hjalper-till.jpg",
+    imageAlt: "En liten svart magnet svävar fritt i luften ovanför en nedkyld supraledande skiva, omgiven av vit dimma från den kalla gasen.",
+    imageCredit: "Foto: Mai-Linh Doan / Wikimedia Commons (CC BY-SA 3.0)",
+    tags: ["kvantfysik", "supraledning", "vakuumfluktuationer", "kvantelektrodynamik", "terahertz", "materialfysik", "kritisk temperatur"],
+    sources: [
+      { name: "Phys.org — Vacuum-fluctuation-enhanced superconductivity demonstrated for the first time (24 augusti 2026)", url: "https://phys.org/news/2026-08-vacuum-fluctuation-superconductivity.html" },
+      { name: "Chinese Academy of Sciences — Researchers achieve first experimental demonstration of vacuum-fluctuation-enhanced superconductivity (pressmeddelande 19 augusti 2026)", url: "https://english.cas.cn/newsroom/research-news/202608/t20260819_1188615.shtml" },
+      { name: "Nature — Evidence for vacuum-enhanced superconductivity in NbSe2 (19 augusti 2026)", url: "https://www.nature.com/articles/s41586-026-11037-x" },
+      { name: "arXiv:2608.14784 — No-go theorem and routes towards cavity-enhanced superconductivity (Qing-Dong Jiang, 14 augusti 2026)", url: "https://arxiv.org/abs/2608.14784" },
+      { name: "arXiv:2606.19171 — Cavity-enhanced superconductivity in the two-dimensional limit of NbSe2 (H. Zhang med flera, 17 juni 2026, förhandspublicering)", url: "https://arxiv.org/abs/2606.19171" }
+    ],
+    research: {
+      citation: "Zheyan Wang, Gabriel Cardoso, Liu Yang, Xun Gong, Chi Zhang, Yufei Zhu, Dongbo Zhang, Nan Pan, Hongbing Cai, Yong P. Chen, Qing-Dong Jiang, Guanghui Cheng, Frank Wilczek, Changgan Zeng, ”Evidence for vacuum-enhanced superconductivity in NbSe2”, Nature (2026), publicerad online 19 augusti 2026, DOI 10.1038/s41586-026-11037-x",
+      url: "https://doi.org/10.1038/s41586-026-11037-x"
+    },
+    body: [
+      { type: 'p', html: 'En supraledare leder ström helt utan motstånd — men bara under en viss temperatur. Ovanför den gränsen är materialet en alldeles vanlig, ofta ganska medelmåttig ledare. Hela jakten på användbara supraledare handlar därför om att skjuta gränsen uppåt, och receptet har i hundra år varit detsamma: ändra materialet. Ny kemi, andra grundämnen, tryck på hundratusentals atmosfärer, korta laserpulser som skakar om atomerna.' },
+      { type: 'p', html: 'Ett forskarlag har nu i stället låtit materialet vara i fred och byggt om det tomrum som omger det. Resultatet, publicerat i <em>Nature</em> den 19&nbsp;augusti, är att den kritiska temperaturen hos niobdiselenid, NbSe<sub>2</sub>, steg med upp till 5,4&nbsp;procent. Ingen yttre drivning tillfördes — ingen laser, ingen mikrovågspuls, ingen extra energi. Det enda som ändrades var vilka svängningar vakuumet runt omkring tilläts ha.' },
+      { type: 'h2', text: 'Vakuum är inte ingenting' },
+      { type: 'p', html: 'Heisenbergs obestämdhetsrelation säger att ett elektromagnetiskt fält inte samtidigt kan ha värdet exakt noll och ändra sig exakt noll. Också i sitt lägsta energitillstånd finns därför en rest av aktivitet kvar: fältet darrar. I kvantelektrodynamikens språk beskrivs darrningen som virtuella partiklar som oupphörligt bildas och försvinner igen. Ett tomrum är med andra ord inte stilla, utan ett sjudande hav av fluktuationer.' },
+      { type: 'p', html: 'Det är ingen lös spekulation, utan något som mätts på flera oberoende sätt. Att en exciterad atom förr eller senare faller ner till grundtillståndet, även i kompakt mörker där ingenting kan träffa den, beror på vakuumfluktuationerna. Att två speglar några nanometer från varandra dras ihop av en kraft utan avsändare — Casimireffekten — kommer av att vissa svängningar helt enkelt inte får plats i springan mellan dem. Och att väteatomens energinivåer ligger en aning fel jämfört med Diracs ekvation, den så kallade Lambskiftningen, var 1947 det mätvärde som tvingade fram hela kvantelektrodynamiken.' },
+      { type: 'h2', text: 'En ring som ställer om tomrummet' },
+      { type: 'p', html: 'Problemet är att fluktuationerna i fri rymd är alldeles för svaga för att märkas i något så stort och stökigt som en materialbit. Lösningen blev en delad ringresonator: en liten mikrometerstor metallring med ett gap i, med sin resonans kring en terahertz. Det är hundratals gånger högre frekvens än den en mobiltelefon sänder på.' },
+      { type: 'p', html: 'En resonator tillför ingen strålning. Den bestämmer bara vilka svängningar som alls kan finnas i sin närhet, och hur kraftiga de blir. Jämförelsen ligger nära ett rums akustik: rummet skapar inget ljud, men avgör vilka toner som förstärks och vilka som dör bort. Ringen gör samma sak med vakuumets nollpunktssvängningar. Eftersom inget ljus skickas in kallas den en mörk kavitet — det enda som ändras är bakgrunden.' },
+      { type: 'quote', html: 'Vakuumfluktuationer i fri rymd är i allmänhet för svaga för att ge observerbara effekter i makroskopiska system. För att komma runt den begränsningen införde vi en terahertzresonator. En sådan mörk kavitet kan forma om den elektromagnetiska omgivningen och kraftigt förstärka vakuumfluktuationerna.', cite: 'Zeng Changgan, professor vid University of Science and Technology of China' },
+      { type: 'h2', text: 'Vad mätningen visade' },
+      { type: 'p', html: 'NbSe<sub>2</sub> är ett skiktat material som går att flaga av till flingor några atomlager tunna, ungefär som grafit. I bulkform blir det supraledande under omkring 7&nbsp;K, alltså 7&nbsp;grader över absoluta nollpunkten, och gränsen sjunker ju tunnare flingan är. Laget jämförde systematiskt likadana prov innanför och utanför ringen. Inne i kaviteten steg den kritiska temperaturen — som mest 5,4&nbsp;procent, i ett prov på sex atomlager. Nära övergången ökade dessutom både den ström och det magnetfält materialet tålde innan supraledningen bröt samman, och där var skillnaden stor.' },
+      { type: 'p', html: 'Den sortens resultat måste tåla misstänksamhet, eftersom en tunn flinga klämd mot en metallstruktur kan ändra sig av fullständigt banala skäl. Forskarna varierade därför kavitetens form och resonansfrekvens, provets tjocklek, det isolerande materialet omkring och metallremsorna i sig. På så vis kunde de avfärda töjning, materialförsämring, ojämnheter i provet och avskärmning från metallen. Det avgörande fyndet var att förstärkningen har en resonanstopp: den är som störst när kavitetens frekvens ligger rätt, och avtar åt båda hållen. En mekanisk eller kemisk bieffekt hade inte brytt sig det minsta om vilken frekvens ringen råkar ha.' },
+      { type: 'p', html: 'Tolkningen bygger på Ginzburg–Landau-teorin, standardverktyget för att beskriva ett supraledande tillstånd i stort. Enligt den utbyter supraledaren virtuella fotoner med kaviteten, och utbytet sänker det supraledande tillståndets energi — vilket är just det som gör tillståndet stabilt upp till en högre temperatur. Toppen uppstår när kavitetsmodens energi råkar matcha de lågenergetiska svängningarna i supraledaren själv.' },
+      { type: 'quote', html: 'I det mesta av den praktiska fysiken är vakuum bara den passiva scen som fenomenen utspelar sig på. Det här arbetet visar att bakgrunden själv kan bli en aktör — konstruerad för att förstärka supraledning och forma om hur kvantmateria beter sig.', cite: 'Frank Wilczek, professor vid Massachusetts Institute of Technology' },
+      { type: 'h2', text: 'Ett teorem som säger nej' },
+      { type: 'p', html: 'Samtidigt är saken långt ifrån avgjord — och den mest intressanta invändningen kommer inifrån laget självt. En av artikelns egna medförfattare, Qing-Dong Jiang, lade i mitten av augusti ut en teoretisk uppsats som bevisar ett no-go-teorem. I den enklaste beskrivningen av en kavitet består vakuumets bidrag av två delar, en som motverkar supraledning och en som gynnar den, och den gynnsamma kan aldrig bli störst. Slutsatsen blir att vakuumfluktuationer i en passiv kavitet borde trycka ner den kritiska temperaturen i stället för att lyfta den.' },
+      { type: 'p', html: 'Teoremet är dock inte ett motargument utan snarare en ritning. Uppsatsen pekar ut exakt två vägar förbi förbudet, och båda kräver att kaviteten får tag i ytterligare någon kollektiv rörelse i materialet: antingen en svängning som förstärker den gynnsamma delen, eller att kaviteten försvagar en konkurrerande ordning som annars tar plats från supraledningen. Vilken av vägarna som är i spel i NbSe<sub>2</sub> är fortfarande obesvarat.' },
+      { type: 'p', html: 'Hur öppen frågan är syns i att ett helt annat forskarlag, vid Nanyang Technological University i Singapore, i somras rapporterade en liknande effekt i samma material: i ett dubbellager steg gränsen från 3,02&nbsp;K till 3,41&nbsp;K mot en kavitet som resonerar vid 0,92&nbsp;THz, och effekten växte ju tunnare provet blev. Deras beräkningar pekar i stället ut en omfördelning av kopplingen mellan elektronerna och gittrets svängningar som orsak. Det arbetet är än så länge en förhandspublicering och har inte kollegialt granskats.' },
+      { type: 'h2', text: 'En ratt, inte en revolution' },
+      { type: 'p', html: 'Storleken på effekten ska inte överdrivas. 5,4&nbsp;procent av några få kelvin är någon tiondels grad, och NbSe<sub>2</sub> behöver flytande helium precis som förut. Det intressanta är inte talet utan handtaget: ett sätt att ändra ett materials kvanttillstånd utan att röra vid det, lysa på det eller mata in energi i det. Fungerar knepet på ett material fungerar det i princip på fler — och då har tomrummet blivit ännu en parameter att skruva på, vid sidan av temperatur, tryck och kemisk sammansättning.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Casimirkraften förutsades 1948 av nederländaren Hendrik Casimir och kunde mätas med god noggrannhet först 1997. Samma forskargrupp som står bakom det nya försöket har tidigare visat att kraften kan växla från dragande till stötande med hjälp av ett magnetfält.',
+        'Att en magnet kan sväva ovanför en nedkyld supraledare beror på Meissnereffekten: supraledaren motar ut magnetfältet ur sitt inre, och det fält den då bygger upp bär magnetens tyngd.',
+        'Frank Wilczek fick nobelpriset i fysik 2004, tillsammans med David Gross och David Politzer, för upptäckten av den asymptotiska friheten i den starka växelverkan — alltså att kvarkar rör sig nästan fritt när de kommer riktigt nära varandra.',
+        'Terahertzstrålning ligger i gränslandet mellan mikrovågor och infrarött ljus. En terahertz betyder 10<sup>12</sup> svängningar per sekund, vilket motsvarar en våglängd på ungefär 0,3&nbsp;mm.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-25-vagfunktionen-fotograferad",
     date: "2026-08-25",
     title: "Elektronmolnet i kemiboken är uträknat, inte sett — nu har ett forskarlag fotograferat ett i tre dimensioner",

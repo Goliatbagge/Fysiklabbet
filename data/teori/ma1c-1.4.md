@@ -17,7 +17,7 @@ Vid multiplikation av
 :::
 
 ::: exempel "Exempel 1 — Multiplikation"
-**Beräkna<br>a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$<br>b) $3 \cdot \dfrac{4}{5}$**
+**Beräkna<br>a)&nbsp;$\dfrac{8}{3} \cdot \dfrac{7}{2}$&emsp;&emsp;b)&nbsp;$3 \cdot \dfrac{4}{5}$**
 
 ::: handskrift
 typ: brakmult
@@ -93,7 +93,7 @@ $$
 ::: härledning "Bevis — Division med bråk"
 Vi bevisar regeln för division med bråk. Anta att vi dividerar två
 godtyckliga bråk $\dfrac{a}{b}$ och $\dfrac{c}{d}$. För att få 1 i nämnaren
-förlänger vi bråket med inversen till bråket i nämnaren, dvs. med
+förlänger vi bråket med inversen till bråket i nämnaren, det vill säga med
 $\dfrac{d}{c}$:
 
 $$
@@ -106,12 +106,12 @@ $$
 
 Alltså gäller
 $\dfrac{\;\dfrac{a}{b}\;}{\;\dfrac{c}{d}\;} = \dfrac{a}{b} \cdot \dfrac{d}{c}$,
-vsv. (vilket skulle visas).
+vilket skulle visas.
 :::
 :::
 
 ::: exempel "Exempel 3 — Division"
-**Beräkna<br>a) $\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$<br>b) $\dfrac{4}{5} \Big/ \dfrac{2}{7}$<br>c) $5 \Big/ \dfrac{3}{4}$<br>d) $\dfrac{2}{3} \Big/ 12$**
+**Beräkna<br>a)&nbsp;$\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$&emsp;&emsp;b)&nbsp;$\dfrac{4}{5} \Big/ \dfrac{2}{7}$&emsp;&emsp;c)&nbsp;$5 \Big/ \dfrac{3}{4}$&emsp;&emsp;d)&nbsp;$\dfrac{2}{3} \Big/ 12$**
 
 ::: handskrift
 typ: brakdiv
@@ -137,7 +137,7 @@ $$
 
 **c)** Här har vi enbart ett bråk i nämnaren, men samma regel gäller
 fortfarande. En del tycker att det är lättare om man skriver om 5 som ett
-bråk, dvs. som $\dfrac{5}{1}$:
+bråk, det vill säga som $\dfrac{5}{1}$:
 
 $$
 5 \Big/ \frac{3}{4} = \frac{5}{1} \Big/ \frac{3}{4} = \frac{5}{1} \cdot \frac{4}{3} = \frac{20}{3}

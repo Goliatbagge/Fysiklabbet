@@ -241,7 +241,12 @@
  * huvudrader — ritas division som ett BRÅK med vågrätt divisionsstreck,
  * ALDRIG med snedstreck ("k·A²/2", "33 varv/60 s" eller "30/2" får inte
  * förekomma i pennskrift). Snedstrecket används ENBART inuti enheter
- * (N/m, m/s, varv/min). I en klammer skrivs bråket som segment-rad i
+ * (N/m, m/s, varv/min) — och som ENDA undantag i en ren avskrift av en
+ * uppgift som SJÄLV är skriven med snedstreck: står det $4/5 \Big/ 2/7$ i
+ * uppgiften får pennans FÖRSTA rad se likadan ut (T.slashDiv), så att
+ * eleven känner igen uppgiften. Redan i nästa led övergår uträkningen till
+ * vågrätt streck (användarbeslut 2026-08-26, referens: layoutBrakdiv b).
+ * I en klammer skrivs bråket som segment-rad i
  * valueBracket: ['E_1=', {frac:['k·A_1^2','2']}, '=35 J'] — bråkrader
  * får automatiskt extra radhöjd. Referensimpl: layoutDampning
  * (klammern), layoutLpskiva (frekvensraden + radie-anteckningen).
@@ -2564,6 +2569,17 @@
       str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, col);
       return x0 + w + 1.5;
     }
+    /* SNETT DIVISIONSSTRECK — ENDAST för att skriva av en uppgift som
+     * själv är skriven med snedstreck (se undantaget i REGEL DIVISION MED
+     * VÅGRÄTT STRECK). Ritar det långa lutande strecket mellan två bråk;
+     * bråken skrivs med fracH som vanligt, ett på var sida. */
+    function slashW() { return 0.90 * F; }
+    function slashDiv(x0, yb) {
+      pause(150);
+      line([x0 + 0.16 * F, yb + 0.92 * F], [x0 + 0.74 * F, yb - 1.42 * F]);
+      pause(150);
+      return x0 + slashW();
+    }
     /* bråk där täljare/nämnare byggs av segment [text, färg] — så att
      * "det man gör" (·4, /3 …) kan skrivas med blåpennan */
     function segW(segs) {
@@ -2742,6 +2758,7 @@
              underline: underline, bubbleTop: bubbleTop, str: str, adv: adv,
              mul: mul, fracW: fracW, fracH: fracH, fracSeg: fracSeg,
              fracOp: fracOp, vaggOp: vaggOp,
+             slashDiv: slashDiv, slashW: slashW,
              bigFrac: bigFrac, strike: strike, ring: ring,
              fade: fade, rot: rot, rotW: rotW,
              parenFrac: parenFrac, parenFracW: parenFracW };
@@ -3247,16 +3264,31 @@
     var ybar = y - 0.34 * F;
     var xNum = nx0 + (fw - wNum) / 2, xDen = nx0 + (fw - wDen) / 2;
     var yNum = ybar - 0.14 * F, yDen = ybar + 1.04 * F;
-    T.strike(xNum, xNum + wNum, yNum, 0.08, 0.86);        /* hela täljaren */
-    T.pause(260);
-    var d7 = xDen + T.adv('6·6·');                        /* 7:an i nämnaren */
+    var n7 = xNum, n6 = xNum + T.adv('7·');           /* täljarens faktorer */
+    var d7 = xDen + T.adv('6·6·');                     /* 7:an i nämnaren */
+    var d6 = xDen + T.adv('6·');                       /* andra 6:an */
+    /* en faktor i taget: stryk den i täljaren, stryk den i nämnaren och
+     * skriv därefter den lilla ettan över respektive under strykningen */
+    function liten(x, w, yb, over) {
+      T.str('1', x + w / 2 - T.adv('1', 0.62) / 2,
+            over ? yb - 0.92 * F : yb + 0.86 * F, BLUE, 0.62);
+    }
+    T.strike(n7, n7 + T.adv('7'), yNum);
+    T.pause(240);
     T.strike(d7, d7 + T.adv('7'), yDen);
-    T.pause(220);
-    var d6 = xDen + T.adv('6·');                          /* andra 6:an */
+    T.pause(240);
+    liten(n7, T.adv('7'), yNum, true);
+    T.pause(180);
+    liten(d7, T.adv('7'), yDen, false);
+    T.stepEnd();
+
+    T.strike(n6, n6 + T.adv('6'), yNum);
+    T.pause(240);
     T.strike(d6, d6 + T.adv('6'), yDen);
-    T.pause(260);
-    T.str('1', xNum + wNum / 2 - T.adv('1', 0.62) / 2, yNum - 0.9 * F,
-          BLUE, 0.62);
+    T.pause(240);
+    liten(n6, T.adv('6'), yNum, true);
+    T.pause(180);
+    liten(d6, T.adv('6'), yDen, false);
     T.stepEnd();
 
     y += 3.3 * F;
@@ -3281,9 +3313,10 @@
    * a) (3/4)/(2/5), b) (4/5)/(2/7), c) 5/(3/4) och d) (2/3)/12. Samma
    * regel varje gång: byt division mot multiplikation och INVERTERA
    * bråket i nämnaren — det inverterade bråket skrivs med blåpennan.
-   * Uppgiften skriver b)–d) med snett divisionstecken; på pappret ritas
-   * division alltid med vågrätt streck (se REGEL i filhuvudet), och
-   * bubblan i b) kopplar ihop de två skrivsätten. */
+   * Uppgiften skriver b)–d) med snett divisionstecken. I b) skriver pennan
+   * av uppgiften precis som den står, med snedstreck (undantaget i REGEL
+   * DIVISION MED VÅGRÄTT STRECK) — därefter, och i c) och d), ritas
+   * divisionen med vågrätt streck som vanligt. */
   function layoutBrakdiv(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     function tanke(yb, rader, dyn) {
@@ -3320,7 +3353,9 @@
     /* ---- b) (4/5)/(2/7) ---- */
     y += 5.4 * F;
     xx = T.str('b) ', padL, y);
-    xx = T.bigFrac(['4', '5'], ['2', '7'], xx, y);
+    xx = T.fracH('4', '5', xx, y);
+    xx = T.slashDiv(xx, y);
+    xx = T.fracH('2', '7', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3393,14 +3428,32 @@
     /* ---- d) (2/3)/12 ---- */
     y += 5.4 * F;
     xx = T.str('d) ', padL, y);
+    var dx0 = xx;
     xx = T.bigFrac(['2', '3'], '12', xx, y);
+    T.stepEnd();
+
+    /* 12 skrivs om till 12/1 PÅ PLATS: blåpennan drar ett rakt bråkstreck
+     * under tolvan i nämnaren och skriver ettan under det. Geometrin är
+     * bigFrac:s egen — nämnardelens mittlinje ligger 1,18·F under
+     * huvudstrecket och talets baslinje 0,45·F under den. */
+    tanke(y, [
+      [['Ett heltal är också ett bråk:']],
+      [['12 är tolv delat med ett.']]
+    ], 1.9);
+    var dw = Math.max(T.fracW('2', '3'), T.adv('12')) + 0.62 * F;
+    var d12 = dx0 + (dw - T.adv('12')) / 2;
+    var yb12 = (y - 0.34 * F) + 1.63 * F;
+    var bx0 = d12 - 0.15 * F, bx1 = d12 + T.adv('12') + 0.15 * F;
+    T.line([bx0, yb12 + 0.14 * F], [bx1, yb12 + 0.14 * F], BLUE);
+    T.pause(220);
+    T.str('1', (bx0 + bx1) / 2 - T.adv('1') / 2, yb12 + 1.18 * F, BLUE);
     T.stepEnd();
 
     tanke(y, [
       [['Nu står heltalet i nämnaren.']],
       [['Inverterat blir 12 till ett']],
       [['delat med 12.']]
-    ], 1.9);
+    ], 2.5);
     xx = T.str('=', xx, y);
     xx = T.fracH('2', '3', xx, y);
     xx = T.mul(xx, y);
@@ -3414,8 +3467,8 @@
     tanke(y, [
       [['2 och 36 är jämna, så jag']],
       [['förkortar med 2.']]
-    ], 1.9);
-    y += 3.8 * F;
+    ], 2.5);
+    y += 4.3 * F;                       /* extra luft: 12/1 når längre ned */
     xx = T.str('=', padL + 30, y);
     xx = T.fracOp('2', '36', '/2', xx, y);
     T.stepEnd();

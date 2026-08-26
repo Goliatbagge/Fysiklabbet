@@ -122,3 +122,32 @@ Så $(3, -18)$ är en minimipunkt.
 **Svar:** $(-3, 18)$ är en lokal maximipunkt och $(3, -18)$ är en lokal
 minimipunkt.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Andraderivatametoden"
+Om $f'(a) = 0$ och
+1. $f''(a) > 0$ har $f(x)$ en lokal **minimipunkt** där $x = a$,
+2. $f''(a) < 0$ har $f(x)$ en lokal **maximipunkt** där $x = a$,
+3. $f''(a) = 0$ krävs ett teckenstudium för att avgöra karaktären.
+:::
+
+::: sampunkt "Varför den fungerar"
+- En minimipunkt ligger i botten på en glad mun, alltså på en konvex del med $f'' > 0$.
+- En maximipunkt ligger på toppen av en sur mun, alltså på en konkav del med $f'' < 0$.
+- Metoden ersätter teckentabellen så länge $f''(a) \neq 0$, och går betydligt snabbare.
+:::
+
+::: sampunkt "Steg för steg"
+1. Derivera, sätt $f'(x) = 0$ och lös ekvationen.
+2. Sätt in $x$-värdena i den **ursprungliga** funktionen för $y$-koordinaterna.
+3. Derivera en gång till och sätt in $x$-värdena i $f''(x)$. Tecknet ger karaktären.
+:::
+
+::: sampunkt "Typexempel"
+- $f(x) = \dfrac{x^3}{3} - 9x$ ger $f'(x) = x^2 - 9$ och nollställena $x = \pm 3$.
+- Punkterna är $(-3, 18)$ och $(3, -18)$.
+- $f''(x) = 2x$ ger $f''(-3) = -6 < 0$, alltså maximipunkt, och $f''(3) = 6 > 0$, alltså minimipunkt.
+:::
+
+:::

@@ -100,3 +100,31 @@ $$
 
 **Svar:** $-13$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Polynomfunktion"
+- En funktion med **flera termer** kallas polynomfunktion.
+- Den deriveras **term för term** med de vanliga deriveringsreglerna.
+- $f(x) = x^2 + 4x - 7$ ger $f'(x) = 2x + 4$, vilket också definitionen bekräftar.
+:::
+
+::: sampunkt "Term för term"
+- $x^2$ ger $2x$, $4x$ ger $4$ och konstanten $-7$ ger $0$.
+- $3x^7 - 5x^2 + 8$ ger $21x^6 - 10x$.
+- Konstanta termer försvinner alltid.
+:::
+
+::: sampunkt "Bråk och parenteser"
+- Konstant nämnare behålls: $\dfrac{4x^3}{3}$ ger $\dfrac{12x^2}{3} = 4x^2$.
+- **Utveckla parentesen först**, derivera sedan. $(2x - 3)^2 = 4x^2 - 12x + 9$ ger $8x - 12$.
+- Derivera aldrig en parentes rakt av, term för term inuti den.
+:::
+
+::: sampunkt "Värdet i en punkt"
+1. Derivera funktionen.
+2. Sätt in $x$-värdet i derivatan.
+- $f(x) = 3x^2 - x$ ger $f'(x) = 6x - 1$ och $f'(-2) = -13$.
+:::
+
+:::

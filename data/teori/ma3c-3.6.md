@@ -243,3 +243,34 @@ $$
 
 **Svar:** $y = 10x - 16$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Tolka derivatan"
+- Positiv derivata betyder **ökning**, negativ derivata betyder **minskning**.
+- Enheten är enheten för funktionen per enheten för variabeln, till exempel invånare per år.
+- $N(t) = 42\,000 \cdot 0{,}98^t$ ger $N'(5) \approx -770$, alltså en minskning med cirka 770 invånare per år.
+:::
+
+::: sampunkt "Bestämma en okänd konstant"
+1. Sätt in det kända värdeparet i modellen.
+2. Lös ut exponentialtermen.
+3. Logaritmera med $\ln$ och utnyttja att $\ln e = 1$.
+- Ur $89 = e^{20k}$ följer $k = \dfrac{\ln 89}{20} \approx 0{,}2244$.
+- Spara minst fyra decimaler i en konstant som står i en exponent.
+:::
+
+::: sampunkt "Tangentens ekvation"
+- Tangenten är en rät linje, $y = kx + m$.
+- Riktningskoefficienten ges av derivatan i punkten: $k = f'(a)$.
+- $m$ fås genom att sätta in tangeringspunkten $(a,\ f(a))$ i $y = kx + m$.
+:::
+
+::: sampunkt "Arbetsgång för tangenten"
+1. Derivera och beräkna $k = f'(a)$.
+2. Beräkna punktens $y$-koordinat, $f(a)$.
+3. Sätt in punkten och lös ut $m$.
+- För $y = x^2 + 4x - 7$ i $x = 3$: $k = 10$, punkten $(3, 14)$ och $m = -16$, alltså $y = 10x - 16$.
+:::
+
+:::

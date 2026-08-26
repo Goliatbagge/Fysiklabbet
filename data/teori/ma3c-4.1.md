@@ -138,3 +138,31 @@ $f'(x)$ skär $x$-axeln. Det sker vid $x = -1$ och $x = 5$.
 
 **Svar:** $x = -1$ och $x = 5$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Derivatans tecken"
+- $f'(x) > 0$ betyder positiv lutning, alltså **växande** funktion.
+- $f'(x) < 0$ betyder negativ lutning, alltså **avtagande** funktion.
+- $f'(x) = 0$ betyder vågrät tangent.
+:::
+
+::: sampunkt "Strängt växande och avtagande"
+- Är funktionen växande i **hela** ett intervall är den **strängt växande** där.
+- Är den avtagande i hela intervallet är den **strängt avtagande**.
+- Svaret anges alltid som ett intervall, till exempel $-1 < x < 1$.
+:::
+
+::: sampunkt "Två sätt att avgöra"
+1. Titta på lutningen direkt i grafen till $f(x)$: uppförsbacke eller nedförsbacke sett från vänster till höger.
+2. Titta på **tecknet** i grafen till $f'(x)$: ovanför $x$-axeln betyder växande $f(x)$.
+- Håll isär graferna. En **nollpunkt** hos $f'(x)$ är en **extrempunkt** hos $f(x)$.
+:::
+
+::: sampunkt "Teckentabell"
+1. Bestäm nollställena till $f'(x)$.
+2. Läs av tecknet på $f'(x)$ i varje intervall mellan nollställena.
+3. Sammanställ i en teckentabell: plus ger växande, minus ger avtagande.
+:::
+
+:::

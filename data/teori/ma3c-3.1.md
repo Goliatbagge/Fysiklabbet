@@ -217,3 +217,31 @@ $$
 
 **Svar:** $f'(3) = 24$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Potensregeln"
+- $f(x) = x^n$ ger $f'(x) = nx^{n-1}$.
+- I ord: **multiplicera ner exponenten** framför och **minska exponenten med 1**.
+- $x^7$ deriveras till $7x^6$.
+:::
+
+::: sampunkt "Med koefficient"
+- $f(x) = kx^n$ ger $f'(x) = nkx^{n-1}$. Koefficienten följer med.
+- $3x^5$ deriveras till $15x^4$.
+- $f(x) = kx$ ger $f'(x) = k$. Vid grad 1 försvinner $x$.
+:::
+
+::: sampunkt "Konstanter och konstant nämnare"
+- $f(x) = a$ ger $f'(x) = 0$. En vågrät linje har lutningen 0.
+- $f(x) = \dfrac{g(x)}{a}$ ger $f'(x) = \dfrac{g'(x)}{a}$. Derivera täljaren, behåll nämnaren.
+- Skälet är att $\dfrac{x^2}{3}$ är samma sak som $\dfrac{1}{3}x^2$, alltså en koefficient.
+:::
+
+::: sampunkt "Derivatans värde i en punkt"
+1. Bestäm $f'(x)$ med deriveringsreglerna.
+2. Sätt in $x = a$ i derivatan.
+- För $f(x) = 4x^2$ blir $f'(x) = 8x$ och $f'(3) = 24$.
+:::
+
+:::

@@ -167,3 +167,32 @@ Grafen till $f'(x)$ har en extrempunkt (minimum) där $x = 1$.
 
 **Svar:** $x = 1$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Andraderivatan"
+- **Andraderivatan** är derivatan av derivatan, skrivs $f''(x)$ och utläses "$f$ bis av $x$".
+- Den beskriver hur **lutningen** ändras, alltså kurvans form.
+- Förstaderivatan säger om kurvan går upp eller ner, andraderivatan hur den böjer.
+:::
+
+::: sampunkt "Konvex och konkav"
+- $f''(x) > 0$: lutningen ökar, kurvan böjer uppåt och är **konvex**, som en glad mun.
+- $f''(x) < 0$: lutningen minskar, kurvan böjer nedåt och är **konkav**, som en sur mun.
+- $f''(x) = 0$: kurvans lutning ändras inte. Punkten är en **inflexionspunkt**.
+:::
+
+::: sampunkt "Bestämma inflexionspunkten"
+1. Derivera två gånger för att få $f''(x)$.
+2. Sätt $f''(x) = 0$ och lös ekvationen. Det ger $x$-koordinaten.
+3. Sätt in $x$ i den **ursprungliga** funktionen för $y$-koordinaten.
+- $f(x) = x^3 - 6x^2 + 7x$ ger $f''(x) = 6x - 12$ och inflexionspunkten $(2, -2)$.
+:::
+
+::: sampunkt "Läsa ur en graf"
+- Grafen till $f(x)$: inflexionspunkten ligger mitt emellan två extrempunkter.
+- Grafen till $f'(x)$: inflexionspunkten ligger i $f'(x)$:s **egen extrempunkt**, eftersom lutningen är 0 där.
+- Funktionen är konvex i de intervall där $f''(x) > 0$.
+:::
+
+:::

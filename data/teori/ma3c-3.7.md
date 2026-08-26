@@ -152,3 +152,32 @@ $$
 
 **Svar:** $V(t) = 100 \cdot e^{0{,}04879t}$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Kommandon i Geogebra"
+- Definiera funktionen på en egen rad: $f(x) = \ldots$
+- $f(3)$ ger funktionsvärdet, $f'(x)$ derivatan och $f'(3)$ derivatans värde.
+- NLös(Ekvation) ger numeriskt svar med decimaler, Lös(Ekvation) exakt svar med symboler.
+:::
+
+::: sampunkt "Typuppgifter"
+- "Hur snabbt ökar det efter 4 veckor?" är $N'(4)$.
+- "När är hastigheten 100 per vecka?" löses med NLös($N'(t) = 100$).
+- Svara alltid med rätt enhet och rimlig avrundning.
+:::
+
+::: sampunkt "Minsta lutning"
+- En grafs lutning är derivatan, så minsta lutningen är derivatans minsta värde.
+- Ta fram $f'(x)$, studera dess graf och använd verktyget *Extrempunkt*.
+- $f(x) = x^3 - 3x^2 - 4x$ ger $f'(x) = 3x^2 - 6x - 4$, med minsta värde vid $x = 1$.
+:::
+
+::: sampunkt "Modell med basen e"
+- $y = C \cdot a^x$ kan skrivas $y = Ce^{kx}$, där $e^k = a$.
+- Bestäm $k$ genom att logaritmera: $k = \ln a$.
+- 100 gram som ökar 5 % per dag ger $V(t) = 100 \cdot 1{,}05^t = 100 \cdot e^{0{,}04879t}$.
+- Basen $e$ gör funktionen enklare att derivera.
+:::
+
+:::

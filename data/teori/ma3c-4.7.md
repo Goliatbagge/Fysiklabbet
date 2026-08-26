@@ -93,3 +93,33 @@ svaret är rimligt.
 
 **Svar:** $r \approx 16{,}7$ cm
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grafisk lösning"
+- I stället för att derivera för hand ritas funktionens graf och extrempunkten läses av.
+- Metoden fungerar på samma problem som den algebraiska.
+- Nackdel: svaret blir avläst och avrundat, inte exakt.
+:::
+
+::: sampunkt "Steg för steg"
+1. Ställ upp en formel för det som ska optimeras.
+2. Använd uppgiftens villkor för att uttrycka den i **en enda** variabel.
+3. Skriv in funktionen i Geogebra och anpassa axlarna så att toppen syns.
+4. Använd verktyget **Extrempunkt** och klicka på grafen.
+5. Läs av: $x$-koordinaten ger variabelns värde, $y$-koordinaten det optimerade värdet.
+:::
+
+::: sampunkt "Typexempel: cylindern"
+- $V = \pi r^2 h$ och villkoret $h + 2r = 50$ ger $h = 50 - 2r$.
+- Insättning ger $V(r) = 50\pi r^2 - 2\pi r^3$, en funktion av bara $r$.
+- Extrempunkten ligger vid $r \approx 16{,}7$ cm.
+:::
+
+::: sampunkt "Rimlighetskontroll"
+- Kontrollera alltid att svaret ligger inom problemets tillåtna område.
+- Här måste $0 < r < 25$ gälla, annars blir höjden negativ.
+- Geogebra skriver decimaltal med **punkt**.
+:::
+
+:::

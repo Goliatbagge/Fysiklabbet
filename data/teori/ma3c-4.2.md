@@ -178,3 +178,32 @@ kurva och därmed en minimipunkt.
 
 **Svar:** $(1, -1)$ är en lokal minimipunkt.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Var derivatan är noll"
+- Där $f'(x) = 0$ är tangenten vågrät.
+- Punkten är då antingen en **lokal maximipunkt**, en **lokal minimipunkt** eller en **terrasspunkt**.
+- **Terrasspunkt:** kurvan planar ut men fortsätter sedan i samma riktning.
+:::
+
+::: sampunkt "Extrempunkt och extremvärde"
+- Maximi- och minimipunkter kallas gemensamt **lokala extrempunkter**.
+- Funktionsvärdet i en sådan punkt är det **lokala extremvärdet**.
+- Ordet lokal betyder att det bara gäller i ett litet intervall kring punkten.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Derivera, sätt $f'(x) = 0$ och lös ekvationen. Det ger $x$-koordinaterna.
+2. Sätt in $x$-värdena i den **ursprungliga** funktionen. Det ger $y$-koordinaterna.
+3. Bestäm punkternas karaktär med en teckentabell.
+:::
+
+::: sampunkt "Karaktär"
+- Teckenväxling $+ \to 0 \to -$ ger en **maximipunkt**.
+- Teckenväxling $- \to 0 \to +$ ger en **minimipunkt**.
+- Samma tecken på båda sidor ger en terrasspunkt.
+- Genväg för andragradsfunktioner: positiv $x^2$-term ger minimipunkt, negativ ger maximipunkt.
+:::
+
+:::

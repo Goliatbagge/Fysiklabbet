@@ -219,3 +219,31 @@ $$
 
 **Svar:** $f'(x) = -4x^{-3/2}$ eller $f'(x) = -\dfrac{4}{x\sqrt{x}}$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Regeln gäller alla exponenter"
+- $f(x) = x^a$ ger $f'(x) = ax^{a-1}$ för **alla reella** $a$, inte bara positiva heltal.
+- Definitionen bekräftar det: $\sqrt{x}$ ger $\dfrac{1}{2\sqrt{x}}$ och $\dfrac{1}{x}$ ger $-\dfrac{1}{x^2}$.
+:::
+
+::: sampunkt "Skriv om till potens först"
+1. Skriv om roten eller nämnaren som en potens och förenkla.
+2. Derivera sedan som vanligt.
+- $\sqrt{x} = x^{1/2}$, $\sqrt[3]{x} = x^{1/3}$ och $\dfrac{1}{x} = x^{-1}$.
+- Flyttas en potens från nämnaren till täljaren byter exponenten tecken.
+:::
+
+::: sampunkt "Variabel i både täljare och nämnare"
+- **Dela upp bråket** i flera termer och derivera termvis.
+- $\dfrac{4x - 7}{x} = 4 - 7x^{-1}$, som ger $f'(x) = 7x^{-2}$.
+- En konstant i nämnaren, som femman i $\dfrac{1}{5x}$, ska stanna kvar där.
+:::
+
+::: sampunkt "Förenkla med potenslagarna"
+- $x\sqrt{x} = x^1 \cdot x^{1/2} = x^{3/2}$, som ger $f'(x) = \dfrac{3\sqrt{x}}{2}$.
+- $\dfrac{8}{\sqrt{x}} = 8x^{-1/2}$, som ger $f'(x) = -4x^{-3/2}$.
+- Svara i den form uppgiften efterfrågar, med potens eller med rottecken.
+:::
+
+:::

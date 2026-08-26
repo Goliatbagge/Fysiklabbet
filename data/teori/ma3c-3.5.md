@@ -224,3 +224,32 @@ $$
 
 **Svar:** $f'(x) = 30 \cdot 8^{6x} \cdot \ln 8$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Koefficient i exponenten"
+- $f(x) = e^{kx}$ ger $f'(x) = k \cdot e^{kx}$.
+- $2e^{5x}$ ger $10e^{5x}$.
+- Står exponenten som ett bråk divideras koefficienten framför med samma nämnare: $12e^{x/3}$ ger $4e^{x/3}$.
+:::
+
+::: sampunkt "Naturliga logaritmen"
+- $\ln$ är $e$-logaritmen, alltså $\log_e$, och kallas den **naturliga logaritmen**.
+- $\ln 5$ är det tal $e$ ska upphöjas till för att bli 5, alltså $e^{\ln 5} = 5$.
+- $\ln e = 1$, precis som $\lg 10 = 1$. Räknaren har en ln-knapp.
+:::
+
+::: sampunkt "Annan bas än e"
+- $f(x) = a^x$ ger $f'(x) = a^x \cdot \ln a$.
+- Beviset bygger på omskrivningen $a = e^{\ln a}$, som ger $a^x = e^{(\ln a)x}$.
+- $5^x$ ger alltså $5^x \cdot \ln 5$.
+:::
+
+::: sampunkt "Lathund"
+1. Skriv av funktionen precis som den står.
+2. Multiplicera med koefficienten framför variabeln i exponenten.
+3. Är basen något annat än $e$, multiplicera även med $\ln$ för den basen.
+- $5 \cdot 8^{6x}$ ger $30 \cdot 8^{6x} \cdot \ln 8$.
+:::
+
+:::

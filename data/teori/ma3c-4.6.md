@@ -170,3 +170,33 @@ Den maximala arean är alltså $450\ \mathrm{m}^2$ när $x = 15$ meter.
 
 **Svar:** Den maximala arean är $450\ \mathrm{m}^2$.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Extremvärdesproblem"
+- Uppgifter om ett största eller minsta värde kallas **extremvärdesproblem** eller **optimeringsproblem**.
+- De löses som vanliga extrempunktsuppgifter, men svaret ska dessutom **tolkas i sammanhanget**.
+:::
+
+::: sampunkt "Steg för steg"
+1. Ställ upp en funktion för det som ska optimeras.
+2. Derivera funktionen.
+3. Sätt derivatan lika med 0 och lös ekvationen.
+4. Bestäm karaktären med andraderivatan eller ett teckenschema.
+5. Sätt in $x$-värdet i den ursprungliga funktionen för att få extremvärdet.
+6. Tolka resultatet med rätt enhet.
+:::
+
+::: sampunkt "Ställa upp funktionen"
+- Det svåraste steget är att teckna funktionen. Använd en känd formel, till exempel area eller volym.
+- Uttryck allt i **en enda** variabel med hjälp av uppgiftens villkor.
+- 60 meter stängsel mot en mur ger sidorna $x$, $x$ och $60 - 2x$, alltså $A(x) = x(60 - 2x)$.
+:::
+
+::: sampunkt "Typexempel: maximal intäkt"
+- $I(x) = 300x - 2x^2$ ger $I'(x) = 300 - 4x$ och $x = 75$.
+- $I(75) = 11\,250$ kr, och $I''(x) = -4 < 0$ visar att det är ett maximum.
+- Faktoriseringen $I(x) = x(300 - 2x)$ visar innebörden: priset gånger antalet sålda biljetter.
+:::
+
+:::

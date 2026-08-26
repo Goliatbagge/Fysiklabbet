@@ -203,3 +203,32 @@ $$
 
 **Svar:** $f'(2) \approx 42{,}2$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Exponentialfunktion"
+- I en **exponentialfunktion** står variabeln i exponenten, till exempel $f(x) = a^x$.
+- Derivatans definition ger $f'(x) = a^x \cdot k$, där $k$ beror på basen $a$.
+- $k \approx 0{,}69$ för $a = 2$ och $k \approx 1{,}10$ för $a = 3$.
+:::
+
+::: sampunkt "Talet e"
+- Mellan 2 och 3 finns en bas där $k = 1$. Den kallas $e$.
+- $e = 2{,}718\ldots \approx 2{,}72$ och är irrationellt, precis som $\pi$.
+- Talet fås ur $(h+1)^{1/h}$ när $h$ går mot 0.
+:::
+
+::: sampunkt "Deriveringsregeln"
+- $f(x) = e^x$ ger $f'(x) = e^x$. Funktionen är **sin egen derivata**.
+- $f(x) = ae^x$ ger $f'(x) = ae^x$. Koefficienten behålls.
+- Grafiskt: kurvans lutning i en punkt är lika med dess $y$-värde där.
+:::
+
+::: sampunkt "Vanliga fällor"
+- $e$ ensamt är ett **tal**, alltså en konstant. Som egen term deriveras det till 0.
+- $e - e^x$ ger därför $-e^x$.
+- $e^0 = 1$, vilket behövs vid insättning av $x = 0$.
+- Använd räknarens $e$-knapp och avrunda först i sista steget.
+:::
+
+:::

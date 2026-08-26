@@ -145,3 +145,31 @@ minimipunkten, och därefter växande igen fram till högra ändpunkten.*
 
 **Svar:** Se grafen ovan.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Slutet intervall"
+- I ett **slutet intervall** $a \leq x \leq b$ räknas även ändpunkterna med.
+- Största och minsta värdet finns alltid antingen i en **extrempunkt** eller i en **ändpunkt**, aldrig någon annanstans.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Sätt in intervallets ändpunkter i $f(x)$ och beräkna deras $y$-värden.
+2. Bestäm extrempunkterna inom intervallet på vanligt sätt med derivatan.
+3. Jämför alla $y$-värden. Det största respektive minsta är svaret.
+- Extrempunkter utanför intervallet räknas inte.
+:::
+
+::: sampunkt "Kurvkonstruktion"
+- Bestäm extrempunkterna och deras karaktär, samt ändpunkterna.
+- Förbind punkterna med en jämn kurva. Räkna inte ut fler punkter än nödvändigt.
+- Markera ändpunkterna med ohyllda cirklar och extrempunkterna med fyllda punkter.
+:::
+
+::: sampunkt "Typexempel"
+- $f(x) = x^3 - 3x$ på $-2 \leq x \leq 3$ har ändpunkterna $(-2, -2)$ och $(3, 18)$.
+- Extrempunkterna är maximum i $(-1, 2)$ och minimum i $(1, -2)$.
+- Största värdet är 18 i en ändpunkt, minsta värdet är $-2$ i både en ändpunkt och en extrempunkt.
+:::
+
+:::

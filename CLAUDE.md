@@ -861,6 +861,35 @@ extra hinder.
   eller en trång tabellcell får korta av, men aldrig brödtext.
 - **Citat och källhänvisningar** återges ordagrant.
 
+### Tankstreck ska inte användas
+
+**Skriv aldrig tankstreck (—) i text som eleven läser** (uttryckligt
+önskemål 2026-08-26). I en fysik- och mattekontext står strecket ofta
+alldeles intill en formel, och då **förväxlas det lätt med ett
+minustecken**: "$F_G$ — kraften nedåt" läses som ett subtraktionsuttryck.
+Risken är störst i täta sammanhang som sammanfattningarnas kort, där
+formler och löptext ligger tätt.
+
+Skriv om meningen i stället för att byta ut tecknet mot ett annat streck:
+
+| Skriv inte | Skriv |
+|---|---|
+| Kraftmoment: $M = F \cdot l$ — kraft gånger hävarm | Kraftmoment: kraft gånger hävarm, $M = F \cdot l$ |
+| Välj stödet — momentlagen ger … | Välj stödet. Momentlagen ger … |
+| glider sist — fingrarna möts | glider sist. Fingrarna möts |
+| Typuppgift — bräda på två stöd | Typuppgift: bräda på två stöd |
+
+Verktygen är punkt (dela meningen), kolon (följt av en förklaring),
+kommatecken och parentes. Gäller ALL text i nya och omskrivna
+`::: sammanfattning`-block, och nyskriven text i teori, övningar, exit
+tickets, katalog och simuleringar.
+
+**Bindestreck (-) i sammansättningar är förstås oberört** (*x*-axeln,
+*pq*-formeln), liksom minustecken (−) i matematik och intervallstreck i
+sifferspann. Det är det LÅNGA strecket som pausmarkör i löptext som är
+förbjudet. Äldre text på sajten har kvar sina tankstreck; de saneras inte
+retroaktivt utan att användaren ber om det.
+
 ### Versaler
 ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor bokstav.
 - ✓ "Elektrostatisk induktion"  ✗ "Elektrostatisk Induktion"

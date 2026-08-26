@@ -203,8 +203,7 @@ $$
 ::: sampunkt "Division"
 - Byt divisionstecknet mot **multiplikation** och **invertera** bråket i
   nämnaren.
-- $\dfrac{\;\frac{a}{b}\;}{\;\frac{c}{d}\;}
-  = \dfrac{a}{b} \cdot \dfrac{d}{c}$
+- $\dfrac{\frac{a}{b}}{\frac{c}{d}} = \dfrac{a}{b} \cdot \dfrac{d}{c}$
 - Beviset: förläng med $\dfrac{d}{c}$, så blir nämnaren 1.
 :::
 
@@ -212,8 +211,7 @@ $$
 - Ett heltal kan skrivas som ett bråk med nämnaren 1:
   $5 = \dfrac{5}{1}$.
 - Sedan gäller vanliga regler, så
-  $5 \Big/ \dfrac{3}{4} = \dfrac{5}{1} \cdot \dfrac{4}{3}
-  = \dfrac{20}{3}$.
+  $5 \Big/ \dfrac{3}{4} = \dfrac{5}{1} \cdot \dfrac{4}{3} = \dfrac{20}{3}$.
 :::
 
 ::: sampunkt "Bråkdel av något"

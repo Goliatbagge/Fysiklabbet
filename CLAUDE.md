@@ -1428,6 +1428,16 @@ korta ettordsalternativ (`<br>a) hastighet<br>b) volym`).
   (En svarsrad är kort och är inte en uppgift.)
 - När a)/b) är **inflätade som separata satser mitt i en mening**
   ("Vilken a) acceleration får vikterna, b) spännkraft …?").
+- **Rena räkneuttryck som ryms bredvid varandra** — deluppgifter som bara
+  är ett uttryck att beräkna (`a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$`)
+  skrivs på EN rad med `&emsp;&emsp;` emellan (uttryckligt önskemål
+  2026-08-26, referens: `ma1c-1.4` exempel 1 och 3, samma form som
+  `ma1c-1.3` redan använde). Staplade blir höga bråk trängda på varandra
+  medan hela ytan till höger står tom. Skälet till huvudregeln — att en
+  lång a-uppgift knuffar in b) i radslutet — finns inte här: uttrycken är
+  korta. Bind bokstaven till sitt uttryck med `&nbsp;` (`a)&nbsp;$…$`), så
+  att en smal skärm aldrig bryter raden mellan bokstaven och uttrycket.
+  Kräver deluppgiften en mening att läsa gäller huvudregeln (egen rad).
 
 ## Designtänk för simuleringar (5/5-arbetssättet)
 

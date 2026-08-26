@@ -97,3 +97,38 @@ vi t.ex. vill skriva in ekvationen $y = 13t + 5$ behöver vi byta ut
 variabeln $t$ mot $x$ och skriva in det vänstra ledet som $y = 13x + 5$:
 **$y = 13t + 5$ skrivs `y = 13x + 5`**.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grafisk lösning"
+1. Rita $y = \mathrm{VL}$ och $y = \mathrm{HL}$ som varsin graf.
+2. Ta fram **skärningspunkten**.
+3. Skärningspunktens **$x$-koordinat** är lösningen.
+:::
+
+::: sampunkt "Olikheter grafiskt"
+- Rita båda leden på samma sätt.
+- Avläs **vilket intervall** där den ena grafen ligger över eller under
+  den andra.
+- $-2x + 5 < x - 4$ har skärningen i $x = 3$, och svaret blir
+  $x > 3$.
+:::
+
+::: sampunkt "GeoGebra: decimaltal"
+- Skriv **punkt** i stället för decimalkomma.
+- $y = 7{,}5x + 3$ skrivs `y = 7.5x + 3`.
+:::
+
+::: sampunkt "GeoGebra: variabler"
+- Programmet förstår bara $x$ och $y$ i grafiska lösningar.
+- $y = 13t + 5$ måste skrivas `y = 13x + 5`.
+- Kom ihåg att **tolka tillbaka** svaret till den ursprungliga variabeln.
+:::
+
+::: sampunkt "Redovisning"
+- Skriv alltid ut **vad du gjorde**: vilka grafer du ritade och var de
+  skar varandra.
+- En avläst skärningspunkt är ett fullgott svar, men motiveringen måste
+  finnas.
+:::
+:::

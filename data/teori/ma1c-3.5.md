@@ -114,3 +114,36 @@ totala summan av alla inbetalningar 168 300 kr.
 **Svar:** 168 300 kr
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Begreppen"
+- **Lån**: pengar man får låna och ska betala tillbaka.
+- **Amortera**: att betala tillbaka **själva lånet**.
+- **Ränta**: priset för att låna, alltså kostnaden ovanpå.
+- **Räntesats**: räntan uttryckt som procent av skulden.
+:::
+
+::: sampunkt "Vad du betalar varje gång"
+- Varje inbetalning består av **amortering plus ränta**.
+- Räntan räknas alltid på den **kvarvarande skulden**.
+:::
+
+::: sampunkt "Rak amortering"
+- Samma **amorteringsbelopp** varje gång:
+  $\dfrac{\text{lånet}}{\text{antal betalningar}}$.
+- Skulden minskar, så **räntedelen blir mindre för varje gång**.
+- Därför blir den **första** inbetalningen störst och den sista minst.
+:::
+
+::: sampunkt "Räkna på månadsbetalningar"
+- Årsräntan delas med 12 för att få månadsräntan.
+- Ett kvartal är tre månader, alltså ett kvarts år.
+:::
+
+::: sampunkt "Total kostnad"
+- Summan av alla inbetalningar, alltså lånet plus all ränta.
+- Ett lån på $150\,000$ kr med 4,8 % ränta över 5 år kostar totalt
+  omkring $168\,300$ kr.
+:::
+:::

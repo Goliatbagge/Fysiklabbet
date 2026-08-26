@@ -97,3 +97,32 @@ $y = 4$ (toppen ligger på kurvan), vilket medför att $y \leq 4$.
 $0 \leq y \leq 4$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "De två mängderna"
+- **Definitionsmängd**: alla möjliga värden på den **oberoende**
+  variabeln, oftast $x$.
+- **Värdemängd**: alla möjliga värden på den **beroende** variabeln,
+  oftast $y$.
+:::
+
+::: sampunkt "Ur ett sammanhang"
+- Verkligheten sätter gränserna. En musiktjänst för högst ett år ger
+  $0 \leq x \leq 12$.
+- Räkna ut motsvarande $y$-värden i ändpunkterna för att få värdemängden,
+  här $0 \leq y \leq 600$.
+:::
+
+::: sampunkt "Ur en graf: titta på ringarna"
+- **Ifylld ring**: ändpunkten **ingår**. Skriv $\leq$ eller $\geq$.
+- **Tom ring**: ändpunkten ingår **inte**. Skriv $<$ eller $>$.
+:::
+
+::: sampunkt "Så läser du av"
+- Definitionsmängden läses av i **sidled**, alltså hur långt grafen
+  sträcker sig åt vänster och höger.
+- Värdemängden läses av i **höjdled**, alltså hur lågt och hur högt grafen
+  når.
+:::
+:::

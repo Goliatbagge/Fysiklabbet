@@ -155,3 +155,34 @@ Vi har en vertikal linje vid $x = 3$.
 **Svar:** $x = 3$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Parallella linjer"
+- Linjer med **samma lutning**, alltså samma $k$-värde.
+- De har olika $m$-värde, annars är det samma linje.
+- Sökt parallell genom en punkt: behåll $k$, räkna ut nytt $m$.
+:::
+
+::: sampunkt "Vertikala linjer"
+- En lodrät linje kan **inte** skrivas på formen $y = kx + m$, eftersom
+  lutningen inte är definierad.
+- Den skrivs $x = a$, där $a$ är läget i $x$-led.
+- Motsvarande vågrät linje skrivs $y = b$, vilket är
+  $y = kx + m$ med $k = 0$.
+:::
+
+::: sampunkt "Allmän form"
+- $ax + by + c = 0$
+- **Alla** räta linjer kan skrivas så, även de lodräta.
+- Alla termer samlas i ena ledet så att det andra blir 0.
+:::
+
+::: sampunkt "Växla mellan formerna"
+- **Till allmän form**: flytta över alla termer till ena ledet.
+- **Till k-form**: lös ut $y$, så avläses $k$ och $m$ direkt.
+- $2x + 3y - 6 = 0$ ger
+  $y = -\dfrac{2}{3}x + 2$, alltså
+  $k = -\dfrac{2}{3}$.
+:::
+:::

@@ -115,3 +115,33 @@ Vi tar tag i fyllnadshandtaget och drar ner till och med insättning 10:
 **Svar:** 56 794,24 kr
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Begreppen"
+- **Ränta**: hur mycket pengarna växer.
+- **Årsränta**: räntan per år. Står det bara "ränta" menas **årsränta**.
+- **Behållning**: beloppet som finns på kontot.
+:::
+
+::: sampunkt "Ett insatt belopp som växer"
+- Använd förändringsfaktorn upphöjd till antalet år:
+  $\text{behållning} = K \cdot f^{n}$.
+- $30\,000$ kr med 3,5 % ränta i 8 år blir
+  $30\,000 \cdot 1{,}035^{8}$.
+:::
+
+::: sampunkt "Årligt sparande"
+- Sätts ett belopp in **varje** år växer varje insättning olika länge.
+- Den första insättningen hinner växa flest år, den sista ingen tid alls.
+- Summera insättningarnas belopp var för sig, eller använd ett
+  kalkylblad.
+:::
+
+::: sampunkt "Kalkylblad"
+- Ett kalkylblad byggs av **celler**, namngivna med kolumnbokstav och
+  radnummer: A1, C5.
+- En formel i en cell inleds **alltid med likhetstecken**.
+- Skriv formeln en gång och dra nedåt, så räknas alla år ut automatiskt.
+:::
+:::

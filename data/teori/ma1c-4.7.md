@@ -205,3 +205,40 @@ Ekvationen har alltså tre lösningar.
 **Svar:** $x_1 = -1$, $x_2 = 1$ och $x_3 = 3$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Funktion"
+- Ett samband där varje tillåtet $x$-värde ger **exakt ett** $y$-värde.
+- **Lodrätt streck-testet**: en lodrät linje får skära grafen **högst en
+  gång**.
+:::
+
+::: sampunkt "Beroende och oberoende"
+- $x$ är den **oberoende** variabeln, den vi själva väljer.
+- $y$ är den **beroende** variabeln, den som följer av $x$.
+- Värdet $y$ får kallas **funktionsvärde**.
+:::
+
+::: sampunkt "Skrivsättet"
+- $y = f(x)$, som utläses "$f$ av $x$".
+- $f$ är funktionens namn, $x$ visar vilken variabel den beror på.
+- Andra bokstäver fungerar lika bra: $g(x)$, $h(x)$.
+- $f(x) = kx + m$ kallas **linjär funktion**, eftersom grafen blir en rät
+  linje.
+:::
+
+::: sampunkt "Räkna ut funktionsvärden"
+- **Ersätt $x$** med det som står inom parentesen.
+- $f(x) = 5x - 3$ ger $f(4) = 17$ och
+  $f(-2) = -13$.
+- Även uttryck fungerar: $f(3a) = 15a - 3$.
+:::
+
+::: sampunkt "Läsa av ur en graf"
+- $f(2)$: gå till $x = 2$ och läs av **höjden**.
+- $f(0)$: läs av där grafen skär $y$-axeln.
+- $f(x) = 0$: leta upp **alla** $x$ där grafen skär $x$-axeln. Det kan
+  vara flera.
+:::
+:::

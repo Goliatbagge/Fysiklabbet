@@ -133,3 +133,34 @@ Slutsats: $g(x) = 2^x$ är uppritad!
 **Svar:** $g(x) = 2^x$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Exponentialfunktion"
+- Den oberoende variabeln står **i exponenten**.
+- $y = C a^{x}$
+- $C$ är **ursprungsvärdet**, $a$ är **förändringsfaktorn** och $x$ är
+  tiden.
+:::
+
+::: sampunkt "Ställa upp formeln"
+- $C$ är startvärdet, $a$ räknas fram ur den procentuella förändringen.
+- $+2\ \%$ per år ger $a = 1{,}02$, alltså
+  $K(x) = 25\,000 \cdot 1{,}02^{x}$.
+:::
+
+::: sampunkt "Tolka en färdig funktion"
+- $V(t) = 180\,000 \cdot 0{,}85^{t}$: nyvärdet är
+  $180\,000$ kr och värdet **minskar med 15 %** per år.
+- Dra bort 1 från faktorn för att få den procentuella förändringen.
+:::
+
+::: sampunkt "Grafens utseende"
+- $a > 1$: **exponentiell ökning**, till exempel befolkningstillväxt.
+- $0 < a < 1$: **exponentiell minskning**, till exempel radioaktivt
+  sönderfall.
+- Grafen skär $y$-axeln i $C$, eftersom
+  $C \cdot a^{0} = C$.
+- Kurvan närmar sig $x$-axeln men **når den aldrig**.
+:::
+:::

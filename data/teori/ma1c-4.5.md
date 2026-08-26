@@ -138,3 +138,33 @@ Insättning av $k = 2$ och $m = -11$ i RLE ger $y = 2x - 11$.
 **Svar:** $y = 2x - 11$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Räta linjens ekvation"
+- $y = kx + m$, ibland förkortat RLE.
+- $k$ är lutningen, $m$ är $y$-skärningen.
+:::
+
+::: sampunkt "k ur två punkter"
+- $k = \dfrac{y_2 - y_1}{x_2 - x_1}$
+- Kommer av $\dfrac{\Delta y}{\Delta x}$ med
+  $\Delta y = y_2 - y_1$ och $\Delta x = x_2 - x_1$.
+- **Samma ordning i täljare och nämnare.** Byter du ordning i den ena
+  måste du byta i den andra.
+:::
+
+::: sampunkt "Ekvation ur punkt och lutning"
+1. Sätt in $k$ i $y = kx + m$.
+2. Sätt in punktens koordinater.
+3. Lös ut $m$.
+- Punkten $(4, -3)$ med $k = 2$ ger
+  $-3 = 2 \cdot 4 + m$, alltså $m = -11$.
+:::
+
+::: sampunkt "Ekvation ur två punkter"
+1. Räkna ut $k$ med formeln.
+2. Sätt in en av punkterna och lös ut $m$.
+3. Kontrollera med den **andra** punkten.
+:::
+:::

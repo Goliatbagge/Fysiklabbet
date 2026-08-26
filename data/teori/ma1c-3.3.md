@@ -81,3 +81,32 @@ $$
 **Svar:** 124 773 kr
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Total förändringsfaktor"
+- Vid flera förändringar efter varandra **multipliceras** faktorerna.
+- $\text{total} = f_1 \cdot f_2 \cdot \ldots$
+- Procenttalen får **aldrig** adderas.
+:::
+
+::: sampunkt "Upp och ner blir inte noll"
+- $+15\ \%$ följt av $-15\ \%$ ger
+  $1{,}15 \cdot 0{,}85 = 0{,}9775$.
+- Alltså en **minskning** med 2,25 %, inte oförändrat pris.
+- Orsaken: sänkningen räknas på det **höjda** priset.
+:::
+
+::: sampunkt "Samma förändring flera gånger"
+- Upprepas samma faktor $n$ gånger blir totalen $f^{n}$.
+- $\text{nya värdet}
+  = \text{gamla värdet} \cdot f^{n}$.
+- $80\,000$ kr med 2,5 % ränta i 18 år blir
+  $80\,000 \cdot 1{,}025^{18}$.
+:::
+
+::: sampunkt "Från total faktor till procent"
+- Dra bort 1 och gör om till procent.
+- Faktorn 1,5597 betyder en ökning med ungefär 56 %.
+:::
+:::

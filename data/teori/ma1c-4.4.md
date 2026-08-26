@@ -158,3 +158,37 @@ $$
 **Svar:** $k = -\dfrac{3}{5}$
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Räta linjens ekvation"
+- $y = kx + m$
+- Alla räta linjer utom de **lodräta** kan skrivas så.
+:::
+
+::: sampunkt "m-värdet"
+- Linjens **skärning med $y$-axeln**.
+- $y = 2x - 1$ skär i $-1$, $y = 2x$ i 0 och $y = 2x + 1$ i 1.
+- Läs av direkt i grafen där linjen korsar $y$-axeln.
+:::
+
+::: sampunkt "k-värdet"
+- Linjens **lutning**, kallas också **riktningskoefficient**.
+- Positivt $k$: linjen lutar uppåt. Negativt $k$: nedåt.
+- I en linjär modell är $k$ **förändringshastigheten**.
+:::
+
+::: sampunkt "Trappstegsmetoden"
+- $k = \dfrac{\text{trappstegets höjd}}{\text{trappstegets längd}}
+  = \dfrac{\Delta y}{\Delta x}$
+- Rita trappsteget mellan två punkter på linjen och gå alltid **åt
+  höger**.
+- Går du nedåt är $\Delta y$ negativt.
+:::
+
+::: sampunkt "Så bestämmer du ekvationen ur en graf"
+1. Läs av $m$ där linjen skär $y$-axeln.
+2. Räkna ut $k$ med ett trappsteg mellan två tydliga punkter.
+3. Sätt in båda i $y = kx + m$.
+:::
+:::

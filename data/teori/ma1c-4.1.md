@@ -90,3 +90,33 @@ Grafen till $y = 500 + 400x$ är en rät linje.
 :::
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Koordinatsystem"
+- Två talaxlar: en vågrät **$x$-axel** och en lodrät **$y$-axel**.
+- Skärningen kallas **origo**.
+- En **koordinat** skrivs $(x, y)$: läget i sidled först, läget i höjdled
+  sist.
+:::
+
+::: sampunkt "Kvadranterna"
+- De fyra områdena numreras **moturs** med start uppe till höger.
+- **Första kvadranten**: både $x$ och $y$ positiva.
+- Andra: $x$ negativ, $y$ positiv. Tredje: båda negativa. Fjärde: $x$
+  positiv, $y$ negativ.
+:::
+
+::: sampunkt "Linjär modell"
+- Beskriver något som ändras i **jämn takt**, alltid med samma mängd.
+- Grafen blir en **rät linje**.
+:::
+
+::: sampunkt "Tre sätt att beskriva samma sak"
+- **Formel**: $y = 500 + 400x$.
+- **Värdetabell**: några $x$-värden med tillhörande $y$-värden.
+- **Graf**: linjen i ett koordinatsystem.
+- Den **fasta** delen blir konstanttermen, det som tillkommer per enhet
+  blir koefficienten.
+:::
+:::

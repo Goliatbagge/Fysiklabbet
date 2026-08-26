@@ -137,3 +137,41 @@ varandra ska de multipliceras, står de över varandra ska de divideras.
 Triangeln sammanfattar: delen = andelen · hela,
 andelen = delen/hela och hela = delen/andelen.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Tre sätt att ange andelar"
+- **Procent**: hundradelar. $1\ \% = \dfrac{1}{100} = 0{,}01$.
+- **Promille**: tusendelar.
+  $1\ ‰ = \dfrac{1}{1\,000} = 0{,}001$.
+- **ppm**: miljondelar, "parts per million".
+  $\dfrac{1}{1\,000\,000}$.
+- Alla tre räknas på **exakt samma sätt**.
+:::
+
+::: sampunkt "Grundformeln"
+- $\text{andel} = \dfrac{\text{delen}}{\text{hela}}$
+- Andelen räknas alltid ut i **bråkform eller decimalform** och görs om
+  till procent på slutet.
+:::
+
+::: sampunkt "De tre frågetyperna"
+- **Andelen** söks: dividera delen med det hela.
+- **Delen** söks:
+  $\text{delen} = \text{andelen} \cdot \text{hela}$.
+- **Det hela** söks:
+  $\text{hela} = \dfrac{\text{delen}}{\text{andelen}}$.
+:::
+
+::: sampunkt "Enheterna måste vara samma"
+- Räkna om till samma enhet innan du dividerar.
+- $120\ \mathrm{g}$ av $15\ \mathrm{kg}$ blir $\dfrac{120}{15\,000}$, inte
+  $\dfrac{120}{15}$.
+:::
+
+::: sampunkt "Procenttriangeln"
+- Täck över den storhet du söker.
+- Står de kvarvarande **bredvid** varandra: multiplicera.
+- Står de **över** varandra: dividera.
+:::
+:::

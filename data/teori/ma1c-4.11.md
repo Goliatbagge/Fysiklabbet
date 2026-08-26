@@ -131,3 +131,38 @@ $$
 **Svar:** 4
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Potensfunktion"
+- Variabeln står **i basen**: $f(x) = Cx^{a}$.
+- Exempel: $f(x) = 5x^{3}$ och $g(x) = x^{-2}$.
+:::
+
+::: sampunkt "Skilj dem åt"
+- **Potensfunktion**: $Cx^{a}$, variabeln i **basen**.
+- **Exponentialfunktion**: $Ca^{x}$, variabeln i **exponenten**.
+- Titta på var $x$ står. Det är hela skillnaden.
+:::
+
+::: sampunkt "Graferna ser olika ut"
+- $y = x^{2}$: parabel, symmetrisk kring $y$-axeln.
+- $y = x^{3}$: stiger genom origo, med olika tecken på var sida.
+- $y = x^{-1} = \dfrac{1}{x}$: hyperbel, odefinierad i $x = 0$.
+- $y = x^{1/2} = \sqrt{x}$: bara för $x \geq 0$.
+- Formen beror på om exponenten är udda eller jämn, positiv eller negativ,
+  heltal eller bråk.
+:::
+
+::: sampunkt "Räkna med dem"
+- Funktionsvärde: sätt in värdet i basen. $f(x) = x^{4}$ ger
+  $f(2) = 16$.
+- Ekvation: $x^{4} = 2$ har lösningarna
+  $x = \pm\sqrt[4]{2}$, eftersom exponenten är **jämn**.
+:::
+
+::: sampunkt "Funktion i funktion"
+- $f(g(2))$ räknas **inifrån och ut**.
+- Räkna först ut $g(2)$, sätt sedan in det svaret i $f$.
+:::
+:::

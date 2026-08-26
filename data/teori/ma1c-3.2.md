@@ -134,3 +134,35 @@ Lägg märke till att svaren i a) och b) *inte* är samma tal — procentsatsen
 beror på vad vi jämför med!
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Förändringsfaktor"
+- Ett tal som anger hur mycket något förändrats.
+- $\text{förändringsfaktor}
+  = \dfrac{\text{nya värdet}}{\text{gamla värdet}}$
+- $\text{nya värdet}
+  = \text{förändringsfaktor} \cdot \text{gamla värdet}$
+:::
+
+::: sampunkt "Bestämma faktorn"
+- Utgå från **100 %**, som är det du har från början.
+- Lägg till eller dra ifrån förändringen och gör om till decimalform.
+- $+5\ \%$ ger 1,05. $+140\ \%$ ger 2,40. $-4\ \%$ ger 0,96.
+  $-25\ \%$ ger 0,75.
+:::
+
+::: sampunkt "Tolka faktorn"
+- Faktor **större än 1**: ökning.
+- Faktor **mindre än 1**: minskning.
+- Faktorn 1,32 betyder en ökning med 32 %, faktorn 0,75 en minskning med
+  25 %.
+:::
+
+::: sampunkt "Vid jämförelser"
+- **Det du jämför MED är det gamla värdet**, alltså nämnaren.
+- Därför blir svaren olika åt olika håll: 22 kr är 22 % dyrare än 18 kr,
+  medan 18 kr är 18 % billigare än 22 kr.
+- Läs frågan noga och avgör vilket värde som är jämförelsen.
+:::
+:::

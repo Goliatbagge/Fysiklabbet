@@ -85,3 +85,32 @@ lutningen: går vi **ett steg åt höger** längs linjen, så går vi samtidigt
 **$k$ steg uppåt eller nedåt**. Du kan också dra i rutnätet för att flytta
 dig i koordinatsystemet och zooma med mushjulet (eller knapparna uppe till
 höger).
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Rita en linje för hand"
+1. Välj några **enkla** $x$-värden, gärna $-2, 0, 2$.
+2. Räkna ut motsvarande $y$-värden och skriv dem i en värdetabell.
+3. Pricka in punkterna i koordinatsystemet.
+4. Dra en **rät linje** genom dem.
+:::
+
+::: sampunkt "Två punkter räcker"
+- En rät linje bestäms av två punkter. Ta gärna en tredje som
+  **kontroll**: hamnar den inte på linjen har du räknat fel.
+- $x = 0$ är alltid ett bra val, eftersom det ger $y$-skärningen direkt.
+:::
+
+::: sampunkt "Vad reglagen visar"
+- Ändras **$k$** vrider sig linjen kring sin punkt på $y$-axeln.
+- Ändras **$m$** flyttas hela linjen rakt upp eller ned.
+- $y$-skärningen ligger alltid i höjd med $m$.
+:::
+
+::: sampunkt "Trappsteget"
+- Går du **ett steg åt höger** längs linjen går du samtidigt **$k$ steg**
+  uppåt eller nedåt.
+- Det är precis vad digitala hjälpmedel som GeoGebra gör åt dig, fast
+  ögonblickligen.
+:::
+:::

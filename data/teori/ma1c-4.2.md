@@ -124,3 +124,29 @@ Endast graf A uppfyller kriterierna för en proportionalitet.
 **Svar:** A
 :::
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Proportionalitet"
+- Ett samband där **förhållandet** mellan variablerna är konstant.
+- Ett specialfall av linjärt samband, där startvärdet är **0**.
+- $y = kx$
+:::
+
+::: sampunkt "Proportionalitetskonstanten"
+- $k = \dfrac{y}{x}$
+- Vid lösviktsgodis är $k$ **kilopriset**.
+:::
+
+::: sampunkt "Grafen"
+- **Går alltid genom origo.** Det är det säkraste kännetecknet.
+- Är $m \neq 0$ är sambandet linjärt men **inte** proportionellt.
+- Större $k$ ger brantare linje. Negativt $k$ ger en linje som lutar
+  nedåt.
+:::
+
+::: sampunkt "Så avgör du"
+- Köper du 0 av något och betalar 0 kr: proportionellt.
+- Finns en fast startavgift: linjärt, men inte proportionellt.
+:::
+:::

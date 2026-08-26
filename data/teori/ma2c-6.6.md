@@ -99,3 +99,34 @@ $$
 
 **Svar:** 10 600 kr
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Korrelation"
+- **Korrelation:** ett samband mellan två variabler.
+- Undersöks med ett **spridningsdiagram**, där varje observation är en punkt.
+- Punkter tätt längs en linje ger **stark** korrelation, spridda punkter ger **svag**.
+- Stigande linje ger **positiv** korrelation, fallande ger **negativ**.
+:::
+
+::: sampunkt "Regressionslinje"
+- **Regressionslinjen** är den räta linje som värdena ligger samlade kring.
+- Att ta fram dess ekvation kallas **linjär regression**, och ekvationen har formen $y = kx + m$.
+- I Geogebra: kalkylblad, markera värdena, *Tvåvariabels regressionsanalys*, välj regressionsmodell *Linjär*.
+- Avrunda ekvationens värden till lämpligt antal värdesiffror.
+:::
+
+::: sampunkt "Korrelationskoefficienten"
+- $r$ mäter hur stark korrelationen är och ligger alltid mellan $-1$ och $1$.
+- $r = 1$ betyder att punkterna ligger perfekt på en stigande linje, $r = -1$ på en fallande.
+- $r = 0$ betyder ingen korrelation alls.
+- Läses av under "Visa statistik".
+:::
+
+::: sampunkt "Använda modellen"
+- Sätt in ett $x$-värde i regressionslinjens ekvation för att uppskatta motsvarande $y$.
+- Med $y = 270x + 2\,500$ ger $x = 30$ försäljningen 10 600 kr.
+- Korrelation betyder inte orsakssamband: äggkonsumtion och kriminalitet saknar samband helt.
+:::
+
+:::

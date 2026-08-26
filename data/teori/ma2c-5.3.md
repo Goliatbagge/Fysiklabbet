@@ -153,3 +153,31 @@ $$
 
 **Svar:** $x \approx 100{,}24$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Grundprincipen"
+- Varje positivt tal kan skrivas med basen 10: $a = 10^{\lg a}$.
+- Är två potenser med **samma bas** lika, så är exponenterna lika. Ur $2^x = 2^7$ följer $x = 7$.
+:::
+
+::: sampunkt "Lösa exponentialekvation"
+1. Skriv om båda led med basen 10 enligt $a = 10^{\lg a}$.
+2. Förenkla med potenslagarna, särskilt $\left(10^{\lg a}\right)^x = 10^{x \cdot \lg a}$.
+3. Sätt exponenterna lika och lös ekvationen.
+- Ur $10^x = 53$ följer direkt $x = \lg 53 \approx 1{,}72$.
+:::
+
+::: sampunkt "Typexempel"
+- $2^x = 37$ ger $x \cdot \lg 2 = \lg 37$, alltså $x = \dfrac{\lg 37}{\lg 2} \approx 5{,}21$.
+- Lös alltid ut potensen först: $5 \cdot 3^{2x} - 4 = 31$ ger $3^{2x} = 7$ och $x = \dfrac{\lg 7}{2 \cdot \lg 3} \approx 0{,}89$.
+:::
+
+::: sampunkt "Logaritmekvation"
+- **Logaritmekvation:** variabeln står inuti logaritmen, till exempel $\lg x = 3$.
+- Skriv om från logaritmform till potensform: $\lg x = a \iff x = 10^a$.
+- I ord: 10 upphöjt till högerledet är lika med det vi har logaritmen för.
+- $\lg 5x = 2{,}7$ ger $10^{2{,}7} = 5x$, alltså $x \approx 100{,}24$.
+:::
+
+:::

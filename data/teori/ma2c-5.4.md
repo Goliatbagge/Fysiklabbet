@@ -239,3 +239,38 @@ $$
 
 **Svar:** $x = 50$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Logaritmlagarna"
+- Första: $\lg x + \lg y = \lg xy$.
+- Andra: $\lg x - \lg y = \lg \dfrac{x}{y}$.
+- Tredje: $\lg x^p = p \cdot \lg x$.
+- Lagarna gäller för $x > 0$ och $y > 0$.
+:::
+
+::: sampunkt "Varför de gäller"
+- Skriv samma uttryck på två sätt, med $a = 10^{\lg a}$ och potenslagarna.
+- Exempel: $x \cdot y = 10^{\lg x} \cdot 10^{\lg y} = 10^{\lg x + \lg y}$ och samtidigt $x \cdot y = 10^{\lg xy}$.
+- Samma bas i båda uttrycken ger att exponenterna måste vara lika.
+:::
+
+::: sampunkt "Exponentialekvation, snabbare väg"
+1. Logaritmera båda led, alltså sätt lg framför båda uttrycken.
+2. Multiplicera ner exponenten med tredje lagen och lös som vanligt.
+- $5^x = 136$ ger $x \cdot \lg 5 = \lg 136$, alltså $x = \dfrac{\lg 136}{\lg 5} \approx 3{,}05$.
+- Står potenser i båda led: samla dem på samma sida, $\dfrac{5^x}{2^x} = \left(\dfrac{5}{2}\right)^x$.
+:::
+
+::: sampunkt "Flera logaritmtermer"
+- Skriv om båda led till **en enda** logaritm med lagarna.
+- Då kan lg strykas i båda led och ekvationen lösas som vanligt.
+- $2 \lg 5 + \lg 4 = \lg 2x$ ger $\lg 100 = \lg 2x$, alltså $x = 50$.
+:::
+
+::: sampunkt "Räkna utan räknare"
+- Slå ihop termerna så att en jämn tiopotens uppstår.
+- $\lg 25 + \lg 4 = \lg 100 = 2$ och $\lg 3\,000 - \lg 3 = \lg 1\,000 = 3$.
+:::
+
+:::

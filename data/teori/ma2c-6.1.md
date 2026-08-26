@@ -111,3 +111,32 @@ $$
 
 **Svar:** 50,5 år
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Lägesmått"
+- Ett **lägesmått** är ett sammanfattande värde för ett statistiskt material.
+- **Medelvärde:** summan dividerad med antalet. Vanligast, passar i de flesta fall.
+- **Median:** värdet i mitten när värdena står i storleksordning. Är två värden i mitten tas medelvärdet av dem.
+- **Typvärde:** det värde som förekommer flest gånger. Fungerar även när materialet inte är tal, till exempel färger.
+:::
+
+::: sampunkt "Välja rätt mått"
+- Medianen passar vid **sned fördelning**, alltså när enstaka värden sticker ut.
+- Åldrarna 16, 16, 16, 17, 17, 18, 61 ger medelvärdet 23 år men medianen 17 år.
+- Här är medianen mest representativ, eftersom 61-åringen drar upp medelvärdet.
+:::
+
+::: sampunkt "Frekvens och klasser"
+- **Frekvens:** antalet av ett visst värde.
+- **Klass:** ett intervall i stället för exakta värden, till exempel $300 \leq x < 400$.
+- **Klassmitt:** mitten av intervallet, här 350. Alla i klassen räknas ha klassmitten som värde.
+- **Histogram:** stapeldiagram över klasser, med sammanhängande staplar.
+:::
+
+::: sampunkt "Medelvärde ur klasser"
+- Multiplicera varje klassmitt med sin frekvens, summera och dividera med totala antalet.
+- Skriv alltid ut både täljare och nämnare, så syns det om något värde glömts.
+:::
+
+:::

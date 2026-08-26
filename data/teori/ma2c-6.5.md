@@ -125,3 +125,35 @@ andelen 0,99 som undre gräns ger 180 cm."
 
 **Svar:** 180 cm
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Normalfördelning"
+- **Normalfördelning:** värdena fördelas jämnt och symmetriskt kring medelvärdet.
+- Kurvan bestäms helt av medelvärdet $\mu$ och standardavvikelsen $\sigma$.
+- Liten spridning ger hög och smal kurva, stor spridning ger låg och bred kurva. Arean under kurvan är alltid densamma.
+:::
+
+::: sampunkt "Procentsatserna"
+- Mellan $\mu$ och $\mu \pm \sigma$: 34,1 % åt vardera hållet.
+- Mellan $\mu \pm \sigma$ och $\mu \pm 2\sigma$: 13,6 % åt vardera hållet.
+- Utanför $\mu \pm 2\sigma$: 2,3 % åt vardera hållet.
+- Inom en standardavvikelse ligger alltså 68,2 % av värdena.
+:::
+
+::: sampunkt "Arbetsgång för hand"
+1. Rita kurvan och skriv $\mu$ rakt under toppen.
+2. Fyll i $\mu \pm \sigma$ och $\mu \pm 2\sigma$ stegvis åt båda håll.
+3. Markera det efterfrågade området och addera procentsatserna.
+- Med $\mu = 181$ och $\sigma = 8$ ligger 68,2 % mellan 173 och 189, och 2,3 % över 197.
+:::
+
+::: sampunkt "Sannolikhetskalkylatorn"
+- Ojämna gränser kräver digitalt verktyg: knappen "Växla till sannolikhetskalkylator".
+- Fyll i $\mu$ och $\sigma$, välj intervalltyp och skriv in gränserna. Decimaltal med punkt.
+- Fyra intervalltyper: öppet åt vänster, slutet intervall, intervallkomplement och öppet åt höger.
+- Söks en **gräns** i stället för en andel skrivs andelen in, till exempel 0,99 för att hitta längden som 99 % ligger under.
+- Redovisa alltid vilka värden du matat in och vilket intervall du valt.
+:::
+
+:::

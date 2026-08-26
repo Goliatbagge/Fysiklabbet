@@ -131,3 +131,31 @@ Vi ser att skärningens $x$-koordinat är $x \approx 8{,}8$.
 
 **Svar:** Efter ca 9 år.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Två sorters ekvationer"
+- **Potensekvation:** variabeln står i **basen**, till exempel $x^3 = 50$.
+- **Exponentialekvation:** variabeln står i **exponenten**, till exempel $3^x = 50$.
+- Kolla alltid var $x$ står innan du väljer metod.
+:::
+
+::: sampunkt "Lösningsmetoder"
+- Potensekvation $x^n = b$ löses med rot: $x = \sqrt[n]{b}$.
+- Exponentialekvation löses på denna nivå **grafiskt**: rita $y = a^x$ och $y = b$ och läs av skärningspunktens $x$-värde.
+- Kontrollera alltid svaret genom insättning i ursprungsekvationen.
+:::
+
+::: sampunkt "Exponentiell modell"
+- $y = C \cdot a^x$, där $C$ är ursprungsvärdet och $a$ är förändringsfaktorn.
+- $a > 1$ ger ökning, $0 < a < 1$ ger minskning.
+- $x$ är antalet förändringar, oftast antal år.
+:::
+
+::: sampunkt "Förändringsfaktor"
+- Ökning med $p$ procent ger $a = 1 + \dfrac{p}{100}$. Ökning med 5 % ger $a = 1{,}05$.
+- Minskning med $p$ procent ger $a = 1 - \dfrac{p}{100}$. Minskning med 5 % ger $a = 0{,}95$.
+- Frågan "hur länge" leder till en exponentialekvation, där $x$ söks.
+:::
+
+:::

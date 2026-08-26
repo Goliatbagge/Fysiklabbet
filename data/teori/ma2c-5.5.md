@@ -84,3 +84,30 @@ att växa över 12 000 kr förrän efter 9 år.
 
 **Svar:** Efter 9 år.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Modellen"
+- Exponentiell förändring beskrivs av $y = C \cdot a^x$.
+- $y$ är nya värdet, $C$ startvärdet, $a$ förändringsfaktorn och $x$ antalet förändringar, oftast antal år.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Identifiera $y$, $C$ och $a$ ur uppgiften.
+2. Sätt in i modellen och dividera bort $C$.
+3. Logaritmera båda led och använd tredje logaritmlagen.
+4. Lös ut $x$ och tolka svaret i uppgiftens sammanhang.
+:::
+
+::: sampunkt "Typuppgift: sparkontot"
+- 10 000 kr med räntan 2,3 % per år: $12\,000 = 10\,000 \cdot 1{,}023^x$.
+- Division ger $1{,}2 = 1{,}023^x$, och logaritmering ger $x = \dfrac{\lg 1{,}2}{\lg 1{,}023} \approx 8{,}02$.
+:::
+
+::: sampunkt "Tolka svaret"
+- Ett decimaltal som svar måste ofta avrundas **uppåt** till hel period.
+- Räntan betalas i slutet av varje år, så 8,02 år betyder att beloppet passeras först efter 9 år.
+- Fråga alltid: vad betyder ett halvt år eller en halv period här?
+:::
+
+:::

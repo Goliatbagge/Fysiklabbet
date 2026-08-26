@@ -143,3 +143,29 @@ $$
 
 **Svar:** 0
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Definition av tiologaritm"
+- **Tiologaritmen** för ett tal är den exponent man ska ge basen 10 för att få talet.
+- $a = 10^x \iff x = \lg a$, och kravet är $a > 0$.
+- Negativa tal och noll saknar logaritm, eftersom en tiopotens alltid är positiv.
+:::
+
+::: sampunkt "Grundsambandet"
+- $a = 10^{\lg a}$ för alla $a > 0$. Varje positivt tal kan alltså skrivas som en tiopotens.
+- Sambandet är nyckeln till att lösa exponentialekvationer.
+:::
+
+::: sampunkt "Kända värden"
+- $\lg 1 = 0$, $\lg 10 = 1$, $\lg 100 = 2$, $\lg 1\,000 = 3$.
+- $\lg 0{,}1 = -1$, $\lg 0{,}01 = -2$.
+- Tal mellan två tiopotenser ger logaritm mellan motsvarande heltal: $\lg 42$ ligger mellan 1 och 2 eftersom 42 ligger mellan 10 och 100.
+:::
+
+::: sampunkt "Räknaren"
+- Knappen **log** ger tiologaritmen.
+- Använd överslaget ovan som rimlighetskontroll av räknarens svar.
+:::
+
+:::

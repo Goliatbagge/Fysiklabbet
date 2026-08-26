@@ -107,3 +107,31 @@ avrundar: $\sigma = 15{,}126\ldots \approx 15{,}1$.
 (Om det hade varit ett stickprov hade vi avläst standardavvikelsen vid
 $s$ och svarat 16,9.)
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vad standardavvikelse är"
+- **Standardavvikelsen** anger hur mycket mätvärdena i genomsnitt avviker från medelvärdet.
+- Stor standardavvikelse betyder stor spridning, liten standardavvikelse liten spridning.
+- Utan spridning alls är standardavvikelsen 0.
+:::
+
+::: sampunkt "Två beteckningar"
+- **Totalundersökning:** hela populationen undersöks. Standardavvikelsen betecknas $\sigma$.
+- **Stickprovsundersökning:** en del av populationen undersöks. Standardavvikelsen betecknas $s$.
+- Framgår det inte av uppgiften förutsätts totalundersökning, alltså $\sigma$.
+:::
+
+::: sampunkt "Avvikelser"
+- Avvikelsen för ett värde är mätvärdet minus medelvärdet, $x - \bar{x}$.
+- Datamängden 16, 17, 17, 17, 18 har medelvärdet 17 och avvikelser mellan 0 och 1, alltså liten standardavvikelse.
+- Datamängden 2, 4, 12, 24, 43 har samma medelvärde men avvikelser mellan 5 och 26, alltså mycket större standardavvikelse.
+:::
+
+::: sampunkt "Beräkning"
+- På denna nivå beräknas standardavvikelsen med digitalt verktyg.
+- I Geogebra: kalkylblad, markera värdena, *Envariabelanalys*, "Visa statistik", läs av vid $\sigma$ eller $s$.
+- Formeln bakom: kvadrera avvikelserna, ta medelvärdet och dra roten ur. Nämnaren är $n$ vid totalundersökning och $n - 1$ vid stickprov.
+:::
+
+:::

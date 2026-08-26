@@ -69,3 +69,30 @@ $$
 
 **Svar:** $3^{\log_3 24}$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Logaritm med valfri bas"
+- Ekvationen $a^x = b$ har lösningen $x = \log_a b$.
+- $\log_a b$ läses "$a$-logaritmen för $b$" och betyder: vad $a$ ska upphöjas till för att bli $b$.
+- $3^x = 25$ har alltså lösningen $x = \log_3 25$.
+:::
+
+::: sampunkt "Skrivsätt"
+- Tiologaritmen kan skrivas $\log_{10}$, men förkortas nästan alltid $\lg$.
+- Basen skrivs som index: $\log_2 16$, $\log_5 12$.
+:::
+
+::: sampunkt "Grundsamband och lagar"
+- $a^{\log_a b} = b$, precis som $10^{\lg a} = a$. Exempel: $7^{\log_7 3} = 3$.
+- Logaritmlagarna och de tidigare sambanden gäller för alla baser, inte bara 10.
+- Därför kan varje tal skrivas som en potens med vald bas: 24 med basen 3 blir $3^{\log_3 24}$.
+:::
+
+::: sampunkt "Räkna i huvudet"
+- Fråga: vilken exponent gör basen till talet?
+- $\log_2 16 = 4$ eftersom $2^4 = 16$.
+- $\log_3 9 = 2$ eftersom $3^2 = 9$.
+:::
+
+:::

@@ -99,3 +99,32 @@ denna bäst.
 
 **Svar:** Exponentiella modellen är bäst.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Fyra modeller"
+- **Linjär** $y = kx + m$: rät linje, lika stor ökning överallt.
+- **Exponentiell** $y = C \cdot a^x$: liten ökning i början och stor i slutet, eller stor minskning i början och liten i slutet.
+- **Potens** $y = C \cdot x^a$: kurva som vänder och går genom origo.
+- **Polynom** $y = ax^2 + bx + c$: kurva som vänder, men inte nödvändigtvis genom origo.
+:::
+
+::: sampunkt "Välja modell"
+- Titta först på hur punkterna ligger och jämför med kurvornas kännetecken.
+- Exponential- och potensfunktioner kan vara svåra att skilja åt, liksom potens och polynom. $y = x^2$ är både och.
+- Skriv bara av den modell som verkligen ligger nära punkterna.
+:::
+
+::: sampunkt "$r^2$-värdet avgör"
+- $r^2$ är korrelationskoefficientens kvadrat och ligger mellan 0 och 1.
+- Ju närmare 1, desto bättre är kurvan anpassad till punkterna.
+- Ta fram det under "Visa statistik" och jämför modellerna.
+:::
+
+::: sampunkt "Typuppgift: befolkningen"
+- Världens befolkning 1920 till 2020 ger linjärt $r^2 = 0{,}954$ men exponentiellt $r^2 = 0{,}9933$.
+- Den exponentiella modellen är alltså bäst, vilket också syns direkt i diagrammet.
+- Byt modell i rullistan "Regressionsmodell" och läs av ekvationen under diagrammet.
+:::
+
+:::

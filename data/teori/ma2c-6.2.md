@@ -136,3 +136,34 @@ svarar 72.
 
 **Svar:** 72 år
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Spridningsmått"
+- Ett spridningsmått beskriver hur spridda värdena är.
+- **Variationsbredd** = största värdet minus minsta värdet.
+- **Kvartilavstånd** = övre kvartil minus nedre kvartil, alltså lådans bredd.
+:::
+
+::: sampunkt "Kvartiler"
+- Kvartilerna delar materialet i fyra lika stora delar, en fjärdedel i varje.
+- **Nedre kvartil** $Q_1$ är medianen av värdena till vänster om medianen.
+- **Övre kvartil** $Q_3$ är medianen av värdena till höger om medianen.
+- Medianen kallas ibland andra kvartilen, $Q_2$.
+:::
+
+::: sampunkt "Lådagram"
+- Ritas ur fem värden: minsta värdet, $Q_1$, medianen, $Q_3$ och största värdet.
+- Varje del innehåller 25 % av värdena.
+- Stor del betyder stor spridning i det området, liten del betyder att värdena ligger samlade.
+- Andelar läses direkt ur bilden: över nedre kvartilen ligger tre delar, alltså 75 %.
+:::
+
+::: sampunkt "Percentiler"
+- **Percentiler** delar materialet i hundradelar och används vid många observationer.
+- $p_{80}$ betyder att 80 % av värdena är **lägre** och 20 % högre.
+- De 10 % äldsta ligger över $p_{90}$.
+- Beräknas digitalt, i Geogebra med kommandot `Percentil(l1, 90%)`.
+:::
+
+:::

@@ -100,3 +100,31 @@ av medelvärdet i tabellen: Medel ≈ 1,7966.
 
 **Svar:** Medelvärdet är ca 1,8 syskon.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Envariabelanalys"
+- Skriv värdena i en kolumn i Geogebras kalkylblad.
+- Markera värdena, klicka på menyn "blå staplar" och välj *Envariabelanalys*.
+- Knappen "Visa statistik" ger de statistiska måtten.
+:::
+
+::: sampunkt "Beteckningar i tabellen"
+- n = antal värden, Medel = medelvärde.
+- Min = minsta värdet, Max = största värdet.
+- Q1 = nedre kvartil, Median = median, Q3 = övre kvartil.
+:::
+
+::: sampunkt "Percentil"
+- Markera värdena och välj "Skapa lista", standardnamnet är l1.
+- Växla till standardläge och skriv `Percentil(l1, 90%)` i inmatningsfältet.
+- De 10 % högsta värdena ligger över $p_{90}$.
+:::
+
+::: sampunkt "Lådagram och frekvenstabell"
+- Lådagram: välj *Envariabelanalys* och byt från "Histogram" till "Boxplot (Lådagram)" i rullistan.
+- Frekvenstabell: skriv värdena i en kolumn och frekvenserna i kolumnen till höger, så slipper du skriva in varje observation.
+- Decimaltal skrivs med **punkt** i Geogebra.
+:::
+
+:::

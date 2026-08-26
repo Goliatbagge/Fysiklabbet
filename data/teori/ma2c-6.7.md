@@ -115,7 +115,7 @@ denna bäst.
 - Skriv bara av den modell som verkligen ligger nära punkterna.
 :::
 
-::: sampunkt "$r^2$-värdet avgör"
+::: sampunkt "Förklaringsgraden avgör"
 - $r^2$ är korrelationskoefficientens kvadrat och ligger mellan 0 och 1.
 - Ju närmare 1, desto bättre är kurvan anpassad till punkterna.
 - Ta fram det under "Visa statistik" och jämför modellerna.

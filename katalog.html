@@ -1208,11 +1208,21 @@
         // Sammanfattningen (::: sammanfattning) visas som EN slide och ska
         // rymmas i sin helhet på en skärm i liggande datorläge. Den är en
         // HELSIDES-slide: den läggs med överkanten en bit ned i rutan (inte
-        // centrerad som vanliga steg) och krymps i teckenstorlek tills den
-        // ryms i ytan som blir kvar OVANFÖR kontrollisten. Allt i rutan är
-        // em-baserat, även KaTeX, så det följer med. I stående läge och på
-        // mobil gäller inte kravet: där får sammanfattningen skrolla.
+        // centrerad som vanliga steg) och teckenstorleken ställs in så att
+        // rutan FYLLER ytan som blir kvar OVANFÖR kontrollisten — den krymps
+        // om den är för hög och VÄXER om det finns luft kvar. En sammanfattning
+        // som bara tar två tredjedelar av duken läses på onödigt liten stil.
+        // Allt i rutan är em-baserat, även KaTeX, så det följer med. I stående
+        // läge och på mobil gäller inte kravet: där får sammanfattningen skrolla.
         const PRES_SAM_TOPP = 0.04;      // slidens överkant, andel av rutan
+        const PRES_SAM_MIN = 11;         // px — under detta blir texten oläslig
+        const PRES_SAM_MAX = 30;         // px — över detta blir den en affisch
+
+        // Kolumner per antal kort. Med grid-auto-fit hamnar 4 kort som 3 + 1:
+        // det sista kortet blir ensamt på sin rad med två tomma platser bredvid,
+        // smalt och därmed högt. En jämnt fylld uppställning (2 × 2) ger bredare
+        // kort, färre radbrytningar och alltså plats för STÖRRE text.
+        const SAM_KOLUMNER = { 1: 1, 2: 2, 3: 3, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4 };
 
         function samSlideMaxH(overlay) {
             const bar = overlay.querySelector('.lab-pres-bar');
@@ -1224,12 +1234,47 @@
 
         function fitSammanfattning(el, overlay) {
             el.style.fontSize = '';
+            el.style.gridTemplateColumns = '';
+            el.style.gridTemplateRows = '';
+            el.style.gridAutoRows = '';
+            el.style.height = '';
             if (window.innerWidth < 900 || window.innerHeight > window.innerWidth) return;
+
+            const kort = el.querySelectorAll(':scope > .lab-block-sampunkt').length;
+            if (kort) {
+                el.style.gridTemplateColumns =
+                    'repeat(' + (SAM_KOLUMNER[kort] || 4) + ', minmax(0, 1fr))';
+            }
+
             const maxH = samSlideMaxH(overlay);
             let size = parseFloat(getComputedStyle(el).fontSize) || 17;
-            while (size > 11 && el.getBoundingClientRect().height > maxH) {
+            // Krymp tills rutan ryms …
+            while (size > PRES_SAM_MIN && el.getBoundingClientRect().height > maxH) {
                 size -= 0.5;
                 el.style.fontSize = size + 'px';
+            }
+            // … och väx sedan så länge nästa steg fortfarande ryms. Höjden växer
+            // monotont med teckenstorleken (kolumnantalet är låst ovan), så det
+            // första steg som spräcker ytan är också det sista vi behöver pröva.
+            while (size < PRES_SAM_MAX) {
+                el.style.fontSize = (size + 0.5) + 'px';
+                if (el.getBoundingClientRect().height > maxH) {
+                    el.style.fontSize = size + 'px';
+                    break;
+                }
+                size += 0.5;
+            }
+            // Ett kort avsnitt kan slå i takstorleken med yta kvar. Texten får
+            // då inte bli större, men luften ska ändå fördelas jämnt i stället
+            // för att samlas som ett tomt band i underkant: raderna sträcks ut
+            // så att rutan fyller ytan. Rad 1 (rubriken "Sammanfattning") hålls
+            // utanför med `auto` — annars blir även den en fjärdedel av duken.
+            // Detta kan bara LÄGGA TILL luft: teckenstorleken ryms redan i den
+            // mindre, innehållsstyrda höjden, så inget kan klippas.
+            if (size >= PRES_SAM_MAX && el.getBoundingClientRect().height < maxH) {
+                el.style.gridTemplateRows = 'auto';
+                el.style.gridAutoRows = '1fr';
+                el.style.height = maxH + 'px';
             }
         }
 

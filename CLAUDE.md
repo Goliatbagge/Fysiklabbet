@@ -133,6 +133,15 @@ node .claude/verify-fs-btn.js
 # nedan. Kräver dev-servern på port 8000 + puppeteer-core i %TEMP%\pptr-test.
 node .claude/verify-mobil-scen.js
 
+# Verifiera sammanfattnings-sliden (::: sammanfattning) i presentationsläget
+# (KÖR FÖRE COMMIT vid nya eller ändrade sammanfattningar!) — laddar avsnittet
+# på 1290×730, stegar till sista steget och mäter att sliden är sista steget,
+# ryms ovanför kontrollisten, inte spiller i sidled, inte krympts under 12 px
+# OCH fyller minst 80 % av den tillgängliga höjden. Utan argument granskas
+# alla avsnitt som har en sammanfattning. Se "Ytan ska utnyttjas" nedan.
+# Kräver dev-servern på port 8000 + playwright-core i %TEMP%\pptr-test.
+node .claude/verify-sammanfattning.js [avsnitts-id …]
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -755,6 +764,68 @@ larmar om det AKTIVA delsteget får `top < 0` (exempelrutans ram får däremot
 gärna börja ovanför kanten när man stegar inne i den). Kom ihåg att
 presentationsläget bygger på `requestAnimationFrame`: i en bakgrundsflik
 körs autoskrollen aldrig, så en mätning i en dold flik säger ingenting.
+
+## ⚠️ KRITISK: Varje genomgång avslutas med en `::: sammanfattning`
+
+**Sist i varje `data/teori/*.md` ska det stå en sammanfattning av allt viktigt
+i genomgången.** Den blir en egen, sista slide i presentationsläget. Två krav
+styr allt annat (uttryckliga önskemål 2026-08-26):
+
+1. **Hela sammanfattningen ska rymmas på EN skärm** i liggande datorläge, utan
+   att man behöver skrolla. (Kravet gäller inte i mobil- eller stående läge —
+   där får den skrolla.)
+2. **Inget viktigt får strykas för att spara plats.** Definitioner av
+   nyckelbegrepp (ofta de fetmarkerade i teoritexten), formler och allt som
+   eleven behöver för att förstå avsnittet och lösa uppgifter ska vara med.
+
+### Ytan ska utnyttjas — texten så stor som möjligt
+
+**En sammanfattning som slutar en bit ned på duken är ett FEL, inte ett
+lyckat resultat.** Läsbarheten sitter i teckenstorleken, och varje outnyttjad
+centimeter i underkant betyder att texten kunde ha varit större. Felet som
+utlöste regeln (påpekat 2026-08-26): `ma1c-1.2` lämnade nästan en tredjedel av
+duken tom i underkant och lästes därför på 15 px.
+
+Detta sköts av `fitSammanfattning()` i `katalog.html` och kräver normalt
+ingenting av dig — men förstå vad den gör innan du rör den:
+
+- Den **krymper** rutan om den är för hög OCH **växer** den så länge det finns
+  luft kvar, mellan `PRES_SAM_MIN` (11 px) och `PRES_SAM_MAX` (30 px). Bara
+  krympa räcker inte: då blir en kort sammanfattning liten i onödan.
+- Den **låser kolumnantalet** efter antalet kort (`SAM_KOLUMNER`). Med
+  `grid-auto-fit` hamnar 4 kort som 3 + 1 — det sista kortet blir ensamt på sin
+  rad med två tomma platser bredvid, smalt och därför högt. Jämnt fyllda rader
+  (4 kort → 2 × 2) ger bredare kort, färre radbrytningar och alltså plats för
+  större text: `ma3c-5.4` gick från 15 px till 24 px enbart på detta.
+- Slår ett kort avsnitt i **takstorleken** med yta kvar sträcks raderna ut så
+  att rutan ändå fyller duken. Texten får inte bli större, men luften fördelas
+  jämnt i korten i stället för att samlas som ett tomt band i underkant.
+- Allt i rutan är **em-baserat**, även KaTeX, så det följer med av sig självt.
+  Sätt aldrig en fast `px`-storlek på något inuti `::: sammanfattning`.
+
+### Så skriver du en sammanfattning som blir rätt direkt
+
+- **4–6 `::: sampunkt`-kort.** Färre än 4 ger en gles duk, fler än 6 tvingar
+  ned teckenstorleken. Sikta på 4.
+- **Håll korten jämnstora.** Det är det HÖGSTA kortet på varje rad som sätter
+  radhöjden, så ett kort med dubbelt så mycket text som de andra stjäl plats
+  från alla. 2–4 punkter per kort är lagom.
+- **Kortaste möjliga formulering utan att tappa tydlighet.** Punktlistor, inte
+  löptext. Inga inledande fraser ("Här gäller att …") — gå rakt på saken.
+- **Ingen matte i kortrubrikerna.** `.lab-block-title` har
+  `text-transform: uppercase`, så `$x$` renderas som `X` — alltså fel variabel.
+  Skriv rubriken i ren svenska ("Tecknet i sidled", inte "Tecknet i $x$-led").
+- Typografireglerna gäller som vanligt: inga tankstreck, `\dfrac` i löptext,
+  variabler kursiva, komma som decimaltecken.
+
+### Före commit
+
+Kör mätskriptet, som laddar avsnittet på 1290×730 (den snålaste vanliga
+liggande laptopskärmen), stegar till sista sliden och kontrollerar att den är
+sista steget, att den ryms i höjd- och sidled ovanför kontrollisten, att den
+inte krympts under 12 px — **och att den fyller minst 80 % av den tillgängliga
+höjden**. Underkänt fyllnadsvärde betyder oftast att korten är för få eller för
+ojämna, inte att koden är trasig.
 
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 

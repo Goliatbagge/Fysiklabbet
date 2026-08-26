@@ -76,3 +76,31 @@ som att "klockan 11.00 ökar temperaturen med 3 °C/h".
 
 **Svar:** Efter 5 timmar (klockan 11.00) ökar temperaturen med 3 °C/h.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vad derivatan betyder"
+- Grafiskt: grafens lutning i en punkt, alltså tangentens lutning där.
+- Vid tillämpningar: en **förändringshastighet vid en tidpunkt**.
+- $f(a)$ är värdet i punkten, $f'(a)$ är hur snabbt värdet ändras där. Blanda inte ihop dem.
+:::
+
+::: sampunkt "Enheten"
+- Enheten för derivatan är enheten för **funktionen** per enheten för **variabeln**.
+- Sträcka i km och tid i timmar ger km/h.
+- Temperatur i °C och tid i timmar ger °C/h.
+:::
+
+::: sampunkt "Tolka i ord"
+- $s(2) = 120$ betyder att bilen har färdats $120\ \mathrm{km}$ efter 2 timmar.
+- $s'(2) = 90$ betyder att bilen kör med hastigheten $90\ \mathrm{km/h}$ vid tidpunkten 2 timmar.
+- Räknas tiden från en klockslag ska svaret gärna översättas dit, till exempel klockan 11.00.
+:::
+
+::: sampunkt "Derivata i Geogebra"
+- Definiera funktionen genom att skriva $f(x) = \ldots$ i inmatningsfältet.
+- Skriv sedan $f'(a)$ på raden under för derivatan i punkten $x = a$.
+- Decimaltecknet är **punkt** i Geogebra: $0{,}3$ skrivs `0.3`.
+:::
+
+:::

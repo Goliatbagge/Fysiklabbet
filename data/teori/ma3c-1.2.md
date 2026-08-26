@@ -173,3 +173,31 @@ förkastar vi lösningen $x_2 = 1$.
 
 **Svar:** $x = 0$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Samma nämnare krävs"
+- Har termerna **samma nämnare** adderas eller subtraheras bara täljarna, nämnaren behålls.
+- Har de olika nämnare måste de först göras liknämniga.
+- Förläng varje term med den andra termens nämnare, precis som för bråk.
+:::
+
+::: sampunkt "Räknefällor"
+- Sätt **parentes** runt hela täljaren som subtraheras, så att alla tecken byts.
+- Förenkla svaret genom att faktorisera täljaren till slut.
+- Saknar ett andragradsuttryck reella nollställen kan det inte faktoriseras mer. Uttrycket under rottecknet är då negativt.
+:::
+
+::: sampunkt "Definitionsmängd först"
+- Kontrollera alltid vilka $x$-värden som gör en nämnare lika med noll.
+- För de värdena är ekvationen inte definierad, så de är inte tillåtna lösningar.
+- Dyker ett förbjudet värde upp som lösning måste det **förkastas**.
+:::
+
+::: sampunkt "Två metoder att lösa ekvationen"
+1. **Multiplicera med MGN:** multiplicera båda led med minsta gemensamma nämnaren, förkorta och lös som vanligt.
+2. **Gör liknämnigt:** förläng till samma nämnare, slå ihop på ett divisionsstreck och utnyttja att täljaren är kvot gånger nämnare.
+- Faktorisera nämnarna innan MGN bestäms. $x^2 - 1$ är en konjugat och blir $(x + 1)(x - 1)$.
+:::
+
+:::

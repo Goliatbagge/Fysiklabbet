@@ -91,3 +91,30 @@ Svaret är alltså detsamma som i a).
 
 **Svar:** Tangentens lutning då $x = 5$ är $10$.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Derivata"
+- **Derivatan** är tangentens lutning i en punkt, alltså kurvans lutning där.
+- Derivatan av $f(x)$ i punkten $x = a$ skrivs $f'(a)$ och utläses "$f$ prim av $a$".
+:::
+
+::: sampunkt "Från sekant till tangent"
+- Lägg den andra punkten på avståndet $h$ i sidled, alltså i $(a + h,\ f(a+h))$.
+- Sekantens lutning blir $\dfrac{f(a+h) - f(a)}{h}$.
+- Låter man $h$ gå mot 0 övergår sekanten i tangenten.
+:::
+
+::: sampunkt "Derivatans definition"
+- $f'(a) = \lim_{h \to 0} \dfrac{f(a+h) - f(a)}{h}$.
+- Skrivs allmänt $f'(x) = \lim_{h \to 0} \dfrac{f(x+h) - f(x)}{h}$.
+:::
+
+::: sampunkt "Steg för steg"
+1. Ställ upp definitionen med funktionen och den givna punkten.
+2. Förenkla täljaren och **faktorisera bort $h$**. Utan det blir det division med 0.
+3. Sätt $h = 0$ och beräkna gränsvärdet.
+- För $f(x) = x^2$: $\dfrac{10h + h^2}{h} = 10 + h$, alltså $f'(5) = 10$.
+:::
+
+:::

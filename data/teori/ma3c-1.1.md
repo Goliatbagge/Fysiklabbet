@@ -167,3 +167,33 @@ $$
 
 **Svar:** $x - 7$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Begrepp"
+- **Polynom:** uttryck där alla variabeltermer har positiva heltalsexponenter.
+- **Rationellt uttryck:** ett polynom i täljaren och ett i nämnaren, till exempel $\dfrac{5x^2 - 5x}{3x - 3}$.
+- Förkortning och förlängning ändrar **inte** uttryckets värde.
+:::
+
+::: sampunkt "Tre sätt att faktorisera"
+1. Bryt ut gemensam faktor.
+2. Kvadreringsreglerna eller konjugatregeln baklänges.
+3. Med hjälp av nollställen.
+- Ett polynom $p(x)$ av grad $n$ med nollställena $x_1, x_2, \ldots, x_n$ kan skrivas $p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)$, där $k$ är koefficienten framför termen med högst grad.
+:::
+
+::: sampunkt "Förlänga och förkorta"
+- **Förlänga:** multiplicera täljare och nämnare med samma tal eller uttryck.
+- **Förkorta:** dividera täljare och nämnare med en gemensam faktor.
+- Har uttrycket bara en term i täljare och nämnare: skriv ut alla faktorer och stryk de gemensamma.
+:::
+
+::: sampunkt "Arbetsgång vid förkortning"
+1. Faktorisera täljaren och nämnaren så långt det går.
+2. Stryk de faktorer som finns i både täljare och nämnare.
+- $\dfrac{5x^2 - 5x}{3x - 3} = \dfrac{5x(x - 1)}{3(x - 1)} = \dfrac{5x}{3}$.
+- Går inget att bryta ut: bestäm nollställena. $x^2 - 8x + 7$ har nollställena 1 och 7, alltså $(x - 1)(x - 7)$.
+:::
+
+:::

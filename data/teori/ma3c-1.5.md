@@ -148,3 +148,31 @@ eller genom att skriva "infinity".
 
 **Svar:** $3$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Vad hjälpmedlet gör"
+- Ett **symbolhanterande hjälpmedel** räknar inte bara med siffror utan också med bokstavsuttryck.
+- Geogebra är ett sådant verktyg och klarar förenkling, faktorisering, ekvationer och gränsvärden.
+:::
+
+::: sampunkt "Kommandon"
+- Utveckla( Uttryck ) och Förenkla( Funktion ) skriver om uttrycket.
+- Faktorisera( Polynom ) ger faktorerna.
+- Gränsvärde( Funktion, Värde ) ger gränsvärdet. Skriv "infinity" för $\infty$.
+:::
+
+::: sampunkt "Exakt eller närmevärde"
+- **Lös( Ekvation )** ger **exakt** svar med symboler, till exempel $x = \sqrt{3}$.
+- **NLös( Ekvation )** ger ett **numeriskt** svar med decimaler.
+- Knapparna $=$ och $\approx$ växlar mellan formerna utan att kommandot skrivs om.
+:::
+
+::: sampunkt "Funktioner"
+- Definiera funktionen på en egen rad, till exempel $f(x) = x^3 - 4x^2$.
+- Skriv sedan $f(7)$ för funktionsvärdet.
+- Skriv Lös($f = 7$) för att lösa ekvationen $f(x) = 7$.
+- Avrunda själv till lämpligt antal decimaler i svaret.
+:::
+
+:::

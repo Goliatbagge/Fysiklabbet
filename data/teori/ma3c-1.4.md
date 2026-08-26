@@ -175,3 +175,33 @@ $$
 
 **Svar:** $3$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Gränsvärde"
+- Ett **gränsvärde** är det värde ett uttryck närmar sig, utan att nödvändigtvis nå det.
+- Skrivs $\lim_{x \to a} f(x)$ och utläses "limes då $x$ går mot $a$".
+- $\lim_{x \to \infty} \dfrac{1}{x} = 0$, eftersom $\dfrac{1}{x}$ blir hur litet som helst.
+:::
+
+::: sampunkt "Variabeln går mot ett tal"
+1. Sätt in värdet direkt och beräkna.
+2. Fungerar det inte: faktorisera, förkorta och sätt sedan in värdet.
+3. Fungerar inte heller det: gör två tabeller och närma dig värdet underifrån och ovanifrån.
+- Metoderna prövas i denna ordning. Ta bort limes-beteckningen i samma steg som värdet sätts in.
+:::
+
+::: sampunkt "När gränsvärde saknas"
+- Ger tabellerna **olika** värden underifrån och ovanifrån saknas gränsvärde.
+- $\dfrac{x + 1}{x - 3}$ går mot $-\infty$ underifrån och mot $+\infty$ ovanifrån vid $x = 3$, alltså saknas gränsvärde.
+- Formen $\dfrac{0}{0}$ betyder inte att gränsvärdet saknas, bara att metod 1 inte duger.
+:::
+
+::: sampunkt "Variabeln går mot en oändlighet"
+- Oändlighet enbart i **täljaren** ger en oändlighet som gränsvärde.
+- Oändlighet enbart i **nämnaren** ger gränsvärdet 0.
+- Oändlighet i **båda**: stryk konstanttermerna, förkorta och beräkna.
+- $\lim_{x \to \infty} \dfrac{3x + 2}{x - 1} = \lim_{x \to \infty} \dfrac{3x}{x} = 3$.
+:::
+
+:::

@@ -161,3 +161,30 @@ Lösningen $x = \dfrac{7}{2}$ är varken 3 eller 0, så den är giltig.
 4. Uteslut alltid de värden på $x$ som gör någon nämnare i ekvationen lika
    med noll.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Multiplikation"
+- Täljare gånger täljare, nämnare gånger nämnare: $\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{a \cdot c}{b \cdot d}$.
+- **Faktorisera först**, sedan multiplicera. Då syns direkt vilka faktorer som kan förkortas bort.
+:::
+
+::: sampunkt "Division"
+- Byt divisionstecknet mot multiplikation och **invertera** uttrycket i nämnaren: $\dfrac{a}{b} \Big/ \dfrac{c}{d} = \dfrac{a}{b} \cdot \dfrac{d}{c}$.
+- Förenkla därefter som vid multiplikation.
+- $\dfrac{3x}{x+7} \Big/ \dfrac{5x}{x-2} = \dfrac{3(x-2)}{5(x+7)}$.
+:::
+
+::: sampunkt "Ekvationer"
+- Uteslut först alla $x$ som gör någon nämnare lika med noll.
+- Multiplicera båda led med MGN och förkorta.
+- Har ekvationen formen $\dfrac{a}{b} = \dfrac{c}{d}$ går det snabbare att **multiplicera korsvis**: $a \cdot d = c \cdot b$.
+- Kontrollera till sist att lösningen inte är ett förbjudet värde.
+:::
+
+::: sampunkt "Svarsform"
+- Svara gärna i både faktoriserad och utvecklad form.
+- Faktoriserad form visar tydligast att inget mer går att förkorta.
+:::
+
+:::

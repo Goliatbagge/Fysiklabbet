@@ -60,3 +60,31 @@ $$
 
 **Svar:** Efter 2 år växer granplantan med $0{,}35$ dm per år.
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Tangent"
+- En **tangent** är en rät linje som snuddar kurvan i en punkt.
+- Tangentens lutning är kurvans lutning i **just den punkten**.
+- Sekanten ger medellutning över ett intervall, tangenten lutningen i en enda punkt.
+:::
+
+::: sampunkt "Beräkna lutningen"
+- Samma formel som för sekanten: $k = \dfrac{\Delta y}{\Delta x} = \dfrac{y_2 - y_1}{x_2 - x_1}$.
+- Läs av **två punkter på tangenten**, inte på kurvan.
+- Välj punkter som ligger långt isär och på tydliga skalstreck, så blir avläsningen säkrare.
+:::
+
+::: sampunkt "Tolkning vid tillämpningar"
+- Tangentens lutning är **förändringshastigheten vid en tidpunkt**.
+- Enheten blir enheten på $y$-axeln per enheten på $x$-axeln.
+- Frågan "med vilken hastighet växer den efter 2 år" gäller alltså tangenten, inte sekanten.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Slå en tangent i den punkt på kurvan som frågan gäller.
+2. Läs av två punkter på tangentlinjen.
+3. Sätt in i formeln för $k$ och svara med enhet.
+:::
+
+:::

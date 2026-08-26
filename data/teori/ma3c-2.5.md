@@ -139,3 +139,34 @@ då $x = 0$. I dessa punkter är funktionen alltså inte deriverbar.
 
 **Svar:** $x = -4$ och $x = 0$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Kontinuerlig eller inte"
+- **Kontinuerlig funktion:** grafen hänger ihop och kan ritas utan att pennan lyfts.
+- **Diskontinuerlig funktion:** grafen har ett hopp eller ett språng i punkten.
+- Ett **hopp** ritas med en öppen ring och en fylld prick på olika höjd.
+- Ett **språng** finns till exempel vid en lodrät asymptot, där grafen går mot $+\infty$ och $-\infty$.
+:::
+
+::: sampunkt "Absolutbelopp"
+- **Absolutbeloppet** av ett tal är dess avstånd till 0 på tallinjen, och skrivs $|a|$.
+- $|2| = 2$ och $|-3| = 3$. Absolutbeloppet tar alltså bort minustecknet.
+- Grafen till $f(x) = |x|$ är ett V med spetsen i origo, alltså ett hörn.
+:::
+
+::: sampunkt "Deriverbarhet"
+En funktion är **inte** deriverbar i en punkt där grafen
+1. inte är definierad, alltså har ett språng,
+2. är diskontinuerlig, alltså har ett hopp,
+3. har en hörnpunkt.
+- I hörnet på $|x|$ är lutningen $-1$ från vänster och $1$ från höger. Olika gränsvärden ger ingen entydig derivata.
+:::
+
+::: sampunkt "Räkna med absolutbelopp"
+- Beräkna innehållet först och ta beloppet sist: $|(-2)^3 + 5| = |-3| = 3$.
+- Ekvationen $|x - 7| = 10$ ger två fall: $x - 7 = 10$ eller $x - 7 = -10$.
+- Kortare skrivsätt: $x - 7 = \pm 10$, alltså $x_1 = 17$ och $x_2 = -3$.
+:::
+
+:::

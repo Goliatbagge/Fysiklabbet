@@ -76,3 +76,32 @@ $$
 
 **Svar:** $k = 8$
 :::
+
+::: sammanfattning "Sammanfattning"
+
+::: sampunkt "Sekant"
+- En rät linje har samma lutning överallt, en kurva kan ha olika lutning i olika punkter.
+- En **sekant** är en rät linje mellan två punkter på kurvan.
+- Sekantens lutning är kurvans **medellutning** i intervallet mellan punkterna.
+:::
+
+::: sampunkt "Riktningskoefficienten"
+- $k = \dfrac{\Delta y}{\Delta x} = \dfrac{y_2 - y_1}{x_2 - x_1} = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1}$.
+- Samma sak kallas också **ändringskvot** eller *k*-värde.
+- Funktionsvärdet $f(x)$ är en $y$-koordinat.
+:::
+
+::: sampunkt "Tolkning vid tillämpningar"
+- Sekantens lutning är en **genomsnittlig förändringshastighet**.
+- Enheten blir enheten på $y$-axeln per enheten på $x$-axeln.
+- Höjd i dm mot tid i år ger alltså dm per år.
+:::
+
+::: sampunkt "Arbetsgång"
+1. Läs av eller beräkna punkterna vid intervallets ändpunkter.
+2. Sätt in i formeln för $k$.
+3. Tolka svaret med rätt enhet och i uppgiftens sammanhang.
+- För $f(x) = x^2$ mellan $x = 3$ och $x = 5$: $k = \dfrac{25 - 9}{5 - 3} = 8$.
+:::
+
+:::

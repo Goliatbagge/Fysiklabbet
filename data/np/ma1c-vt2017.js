@@ -190,16 +190,16 @@ window.NP_PROV['ma1c-vt2017'] = {
                     rubrik: 'Skriv om alla andelar i decimalform',
                     varfor: 'De olika enheterna ($\\%$, ‰, ppm) är bara olika sätt att ange en andel. ' +
                         'Skriver vi om allt i decimalform kan vi jämföra direkt. Kom ihåg: ' +
-                        '$1\\ \\% = \\frac{1}{100}$, $1\\ ‰ = \\frac{1}{1000}$, $1\\ \\text{ppm} = \\frac{1}{1\\,000\\,000}$.',
+                        '$1\\ \\% = \\dfrac{1}{100}$, $1\\ ‰ = \\dfrac{1}{1000}$, $1\\ \\text{ppm} = \\dfrac{1}{1\\,000\\,000}$.',
                     text: 'Frågan gäller\n\n$$0{,}12\\ \\% = \\dfrac{0{,}12}{100} = 0{,}0012$$',
                 },
                 {
                     rubrik: 'Räkna om varje alternativ',
-                    text: '- $12\\ ‰ = \\frac{12}{1000} = 0{,}012$ — för stort\n' +
-                        '- $1{,}2\\ ‰ = \\frac{1{,}2}{1000} = 0{,}0012$ — **stämmer**\n' +
-                        '- $120\\ ‰ = \\frac{120}{1000} = 0{,}12$ — för stort\n' +
-                        '- $120\\ \\text{ppm} = \\frac{120}{1\\,000\\,000} = 0{,}00012$ — för litet\n' +
-                        '- $1200\\ \\text{ppm} = \\frac{1200}{1\\,000\\,000} = 0{,}0012$ — **stämmer**',
+                    text: '- $12\\ ‰ = \\dfrac{12}{1000} = 0{,}012$ — för stort\n' +
+                        '- $1{,}2\\ ‰ = \\dfrac{1{,}2}{1000} = 0{,}0012$ — **stämmer**\n' +
+                        '- $120\\ ‰ = \\dfrac{120}{1000} = 0{,}12$ — för stort\n' +
+                        '- $120\\ \\text{ppm} = \\dfrac{120}{1\\,000\\,000} = 0{,}00012$ — för litet\n' +
+                        '- $1200\\ \\text{ppm} = \\dfrac{1200}{1\\,000\\,000} = 0{,}0012$ — **stämmer**',
                 },
             ],
             svar: '$1{,}2\\ ‰$ och $1200\\ \\text{ppm}$',
@@ -407,7 +407,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                     rubrik: 'Lös ut värdet',
                     text: '$$7x = 10 \\quad \\Longrightarrow \\quad x = \\dfrac{10}{7}$$\n\n' +
                         'Eftersom $y = x$ är $y = \\dfrac{10}{7}$ också.\n\n' +
-                        '**Kontroll:** $8 \\cdot \\frac{10}{7} - \\frac{10}{7} = 7 \\cdot \\frac{10}{7} = 10$ ✓',
+                        '**Kontroll:** $8 \\cdot \\dfrac{10}{7} - \\dfrac{10}{7} = 7 \\cdot \\dfrac{10}{7} = 10$ ✓',
                 },
             ],
             svar: '$x = y = \\dfrac{10}{7}$',
@@ -713,7 +713,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 {
                     del: 'b', rubrik: 'Räkna ut h',
                     text: 'Multiplicera båda leden med $-300$:\n\n$$h = 15 \\cdot 300 = 4\\,500\\ \\text{m}$$\n\n' +
-                        '**Kontroll:** $100 - \\frac{4500}{300} = 100 - 15 = 85$ ✓',
+                        '**Kontroll:** $100 - \\dfrac{4500}{300} = 100 - 15 = 85$ ✓',
                     delsvar: { del: 'b', text: 'Johan befinner sig på $4\\,500$ m över havet' },
                 },
             ],
@@ -981,7 +981,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 },
             ],
             svar: 'Kalle jämförde den procentuella ökningen: båda partierna ökade med ungefär $5\\ \\%$ ' +
-                'av sitt tidigare stöd ($\\frac{1{,}7}{31{,}7} \\approx \\frac{1{,}2}{22{,}4} \\approx 5{,}4\\ \\%$).',
+                'av sitt tidigare stöd ($\\dfrac{1{,}7}{31{,}7} \\approx \\dfrac{1{,}2}{22{,}4} \\approx 5{,}4\\ \\%$).',
             bedomning: [
                 ['Beräknar procentandelen för något parti i förra opinionsmätningen', '+E'],
                 ['Beräknar procentuell ökning för ett parti', '+C'],
@@ -1065,7 +1065,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             ],
             svar: 'Ja, påståendet stämmer alltid: både cirkelns och triangelns area är $\\pi r^2$, ' +
                 'eftersom triangelns bas är cirkelns omkrets $2\\pi r$ och höjden är $r$, så ' +
-                '$A_{\\text{triangel}} = \\frac{2\\pi r \\cdot r}{2} = \\pi r^2 = A_{\\text{cirkel}}$.',
+                '$A_{\\text{triangel}} = \\dfrac{2\\pi r \\cdot r}{2} = \\pi r^2 = A_{\\text{cirkel}}$.',
             bedomning: [
                 ['Påbörjad lösning som bygger på att triangelns bas är lika lång som cirkelns omkrets', '+C'],
                 ['Visar att areorna är lika för något fall eller påbörjar ett generellt bevis', '+C'],
@@ -1170,7 +1170,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 {
                     del: 'c', rubrik: 'Lös ut den årliga förändringsfaktorn',
                     varfor: 'För att få ut $a$ drar vi $14$:e roten ur båda leden, det vill säga upphöjer ' +
-                        'till $\\frac{1}{14}$ (digitala verktyg tillåtna).',
+                        'till $\\dfrac{1}{14}$ (digitala verktyg tillåtna).',
                     text: '$$a = 2^{1/14} \\approx 1{,}0508$$',
                 },
                 {

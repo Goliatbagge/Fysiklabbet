@@ -262,7 +262,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                 },
             ],
             svar: '$A$ blir större. Ett exempel: $B = 1$ ger $A = 0{,}5$, medan $B = 2$ ger $A \\approx 0{,}67$. ' +
-                'Generellt: $A = 1 - \\frac{1}{B+1}$, och när $B$ ökar minskar $\\frac{1}{B+1}$, så $A$ ökar.',
+                'Generellt: $A = 1 - \\dfrac{1}{B+1}$, och när $B$ ökar minskar $\\dfrac{1}{B+1}$, så $A$ ökar.',
             bedomning: [
                 ['Påbörjad lösning, sätter in ett värde på $B$ och dess dubbla värde', '+E'],
                 ['Korrekt slutsats utifrån exempel', '+C'],
@@ -726,7 +726,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                     varfor: 'Taket är symmetriskt med nocken i mitten. Höjden $1$ når nocken, och den ' +
                         'totala bredden är $3$. Takvinkeln $v$ mäts vid takfoten, där den ena halvan av ' +
                         'taket möter horisontalplanet. Den halvan spänner över *halva* bredden, alltså ' +
-                        '$\\frac{3}{2} = 1{,}5$, med höjden $1$.',
+                        '$\\dfrac{3}{2} = 1{,}5$, med höjden $1$.',
                     text: 'I den rätvinkliga triangeln för ena takhalvan är höjden $1$ motstående katet ' +
                         'till $v$, och halva bredden $1{,}5$ är närliggande katet. Då passar tangens.',
                     figur: 'u21-los',
@@ -813,7 +813,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                 {
                     rubrik: 'Lös ut den årliga förändringsfaktorn',
                     varfor: 'För att få $a$ drar vi $120$:e roten ur båda leden, det vill säga upphöjer ' +
-                        'till $\\frac{1}{120}$ (digitala verktyg tillåtna).',
+                        'till $\\dfrac{1}{120}$ (digitala verktyg tillåtna).',
                     text: '$$a = 2^{1/120} \\approx 1{,}0058$$',
                 },
                 {

@@ -149,7 +149,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                     rubrik: 'Sannolikheten att även andra vanten är gul',
                     varfor: 'Lena lägger **inte tillbaka** den första vanten — det är dragning utan återläggning. ' +
                         'Då ändras både antalet vantar och antalet gula i påsen inför andra dragningen. ' +
-                        'Detta är den avgörande skillnaden mot alternativen med $\\frac{2}{5}$ eller $\\frac{1}{5}$ i andra faktorn.',
+                        'Detta är den avgörande skillnaden mot alternativen med $\\dfrac{2}{5}$ eller $\\dfrac{1}{5}$ i andra faktorn.',
                     text: 'När den första gula vanten är tagen finns $4$ vantar kvar, varav $1$ gul:\n\n' +
                         '$$P(\\text{andra gul} \\mid \\text{första gul}) = \\dfrac{1}{4}$$',
                     figur: 'u3-vantar2',
@@ -162,7 +162,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 },
             ],
             svar: '$\\dfrac{2}{5} \\cdot \\dfrac{1}{4}$',
-            bedomning: [['Korrekt svar: $\\frac{2}{5} \\cdot \\frac{1}{4}$', '+E']],
+            bedomning: [['Korrekt svar: $\\dfrac{2}{5} \\cdot \\dfrac{1}{4}$', '+E']],
         },
 
         {
@@ -191,7 +191,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 },
             ],
             svar: '$\\dfrac{a^2}{4}$ (eller likvärdigt, t.ex. $0{,}25a^2$)',
-            bedomning: [['Korrekt svar: $0{,}25a^2$ eller $\\frac{a^2}{4}$', '+E']],
+            bedomning: [['Korrekt svar: $0{,}25a^2$ eller $\\dfrac{a^2}{4}$', '+E']],
         },
 
         {
@@ -415,7 +415,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                     rubrik: 'Teckna sannolikheten med okänt antal sidor',
                     varfor: 'Kasten är oberoende av varandra, så sannolikheten att få röd tre gånger i rad ' +
                         'är produkten av tre lika sannolikheter. Har tärningen $n$ sidor är sannolikheten ' +
-                        'för röd i ett kast $\\frac{1}{n}$.',
+                        'för röd i ett kast $\\dfrac{1}{n}$.',
                     text: '$$\\dfrac{1}{n} \\cdot \\dfrac{1}{n} \\cdot \\dfrac{1}{n} = \\left(\\dfrac{1}{n}\\right)^3 = \\dfrac{1}{n^3}$$',
                 },
                 {
@@ -519,7 +519,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 },
                 {
                     rubrik: 'Jämför med den önskade lösningen',
-                    varfor: 'Olikheten ska ha lösningen $x < 7$. Gränsen $\\frac{5+a}{2}$ måste därför ' +
+                    varfor: 'Olikheten ska ha lösningen $x < 7$. Gränsen $\\dfrac{5+a}{2}$ måste därför ' +
                         'vara exakt $7$.',
                     text: '$$\\dfrac{5 + a}{2} = 7 \\quad \\Longrightarrow \\quad 5 + a = 14 \\quad \\Longrightarrow \\quad a = 9$$\n\n' +
                         '**Kontroll:** $2x - 9 < 5 \\Rightarrow 2x < 14 \\Rightarrow x < 7$ — stämmer.',
@@ -594,15 +594,15 @@ window.NP_PROV['ma1c-vt2022'] = {
                 },
                 {
                     del: 'a', rubrik: 'Beräkna omkretsen för figur 1',
-                    varfor: 'Varje sida växer med samma faktor $\\frac{4}{3}$ — då växer hela omkretsen ' +
-                        'med faktorn $\\frac{4}{3}$.',
+                    varfor: 'Varje sida växer med samma faktor $\\dfrac{4}{3}$ — då växer hela omkretsen ' +
+                        'med faktorn $\\dfrac{4}{3}$.',
                     text: '$$O_1 = 9 \\cdot \\dfrac{4}{3} = 12$$',
                     delsvar: { del: 'a', text: '$O_1 = 12$' },
                 },
                 {
                     del: 'b', rubrik: 'Upprepa för figur 2',
                     varfor: 'Proceduren är exakt densamma i varje steg: varje liten sträcka delas i tre ' +
-                        'och blir fyra. Omkretsen multipliceras därför med $\\frac{4}{3}$ ännu en gång.',
+                        'och blir fyra. Omkretsen multipliceras därför med $\\dfrac{4}{3}$ ännu en gång.',
                     text: '$$O_2 = 12 \\cdot \\dfrac{4}{3} = 16$$',
                     delsvar: { del: 'b', text: '$O_2 = 16$' },
                 },
@@ -619,13 +619,13 @@ window.NP_PROV['ma1c-vt2022'] = {
                         'Starten (figur 0, den ursprungliga triangeln) har omkretsen $9$, och det tar $n$ steg ' +
                         'att nå figur $n$.',
                     text: '$$O = 9 \\cdot \\left(\\dfrac{4}{3}\\right)^n$$\n\n' +
-                        '**Kontroll:** $n = 1$ ger $9 \\cdot \\frac{4}{3} = 12$ ✓ och $n = 2$ ger ' +
-                        '$9 \\cdot \\frac{16}{9} = 16$ ✓',
+                        '**Kontroll:** $n = 1$ ger $9 \\cdot \\dfrac{4}{3} = 12$ ✓ och $n = 2$ ger ' +
+                        '$9 \\cdot \\dfrac{16}{9} = 16$ ✓',
                     delsvar: { del: 'd', text: '$O = 9 \\cdot \\left(\\dfrac{4}{3}\\right)^n$' },
                 },
                 {
                     del: 'e', rubrik: 'Skriv om formeln med potenslagarna',
-                    varfor: 'Omkretsen $\\frac{2^{16}}{3^6}$ är skriven med tvåor och treor. ' +
+                    varfor: 'Omkretsen $\\dfrac{2^{16}}{3^6}$ är skriven med tvåor och treor. ' +
                         'Om vi skriver om vår formel på samma form kan vi jämföra exponenterna direkt — ' +
                         'det är hela poängen med basbytet.',
                     text: 'Eftersom $9 = 3^2$ och $4^n = (2^2)^n = 2^{2n}$:\n\n' +
@@ -1050,7 +1050,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 {
                     rubrik: 'Lös ut den årliga förändringsfaktorn',
                     varfor: 'Ekvationen $a^6 = 0{,}6826$ löses genom att dra sjätte roten ur — ' +
-                        'dvs. upphöja till $\\frac{1}{6}$.',
+                        'dvs. upphöja till $\\dfrac{1}{6}$.',
                     text: '$$a = \\left(\\dfrac{157\\,000}{230\\,000}\\right)^{1/6} \\approx 0{,}938$$',
                 },
                 {
@@ -1086,7 +1086,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             steg: [
                 {
                     del: 'a', rubrik: 'Multiplicera sannolikheterna för två vinster',
-                    varfor: 'Vinstchansen i en omgång är $\\frac{1}{20}$ (ett vinstfält av tjugo). ' +
+                    varfor: 'Vinstchansen i en omgång är $\\dfrac{1}{20}$ (ett vinstfält av tjugo). ' +
                         'Spelomgångarna är oberoende — hjulet minns inte förra snurret — ' +
                         'så sannolikheterna multipliceras.',
                     text: '$$P(\\text{två vinster i rad}) = \\dfrac{1}{20} \\cdot \\dfrac{1}{20} = ' +

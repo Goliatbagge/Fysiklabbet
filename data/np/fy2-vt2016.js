@@ -59,7 +59,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 {
                     rubrik: 'Lös ut temperaturen',
                     varfor: 'Temperaturen står i fjärde potens, så vi delar med $\\sigma$ och drar ' +
-                        'fjärde roten (samma sak som att upphöja till $\\tfrac{1}{4}$). Mätvärdena är ' +
+                        'fjärde roten (samma sak som att upphöja till $\\dfrac{1}{4}$). Mätvärdena är ' +
                         'redan i SI-enheter, så temperaturen kommer ut i kelvin.',
                     text: 'Mätvärden:\n\n' +
                         '$$\\left[ \\begin{array}{l} ' +

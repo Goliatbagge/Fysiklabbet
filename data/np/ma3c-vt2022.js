@@ -696,7 +696,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             bedomning: [
                 ['Godtagbar ansats, korrekt tecknad ändringskvot', '+C'],
                 ['med godtagbar fortsättning, korrekt förenkling av ändringskvoten till en form där gränsvärdesbestämning kan göras', '+A'],
-                ['med i övrigt godtagbar lösning med korrekt svar ($f\'(x) = -\\frac{5}{a^2x^2}$)', '+A'],
+                ['med i övrigt godtagbar lösning med korrekt svar ($f\'(x) = -\\dfrac{5}{a^2x^2}$)', '+A'],
                 ['Lösningen kommuniceras på A-nivå', '+A'],
             ],
         },

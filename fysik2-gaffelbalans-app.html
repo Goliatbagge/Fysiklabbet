@@ -717,6 +717,10 @@
                 const tmpV = new THREE.Vector3();
                 const qTilt = new THREE.Quaternion();
                 const qYaw = new THREE.Quaternion();
+                const qSettleStart = new THREE.Quaternion();
+                const qSettleEnd = new THREE.Quaternion();
+                const settleM = new THREE.Matrix4();
+                const vA = new THREE.Vector3(), vB = new THREE.Vector3(), vC = new THREE.Vector3();
                 const tiltEuler = new THREE.Euler();
                 const YAXIS = new THREE.Vector3(0, 1, 0);
 
@@ -740,7 +744,7 @@
 
                     // Pendeldynamik kring stödpunkten, två vippriktningar.
                     // tbx/tbz: lutning kring världens x- respektive z-axel
-                    if (!ph.frozen && ph.dropping) {
+                    if (!ph.frozen && ph.dropping && !ph.landed) {
                         // Fritt fall: nålspetsen har tappat myntkanten. Inget
                         // vridmoment verkar längre kring tyngdpunkten, så
                         // rotationsfarten är konstant medan tyngdaccelerationen
@@ -755,6 +759,25 @@
                         ph.tbz += ph.wbz * dt;
                         ph.psi += ph.wPsi * dt;
                         ph.tilt = Math.sqrt(ph.tbx * ph.tbx + ph.tbz * ph.tbz);
+                    } else if (!ph.frozen && ph.landed) {
+                        // Vältfasen: första kontakten har tagit — oftast änden
+                        // av ETT gaffelskaft, medan korken fortfarande är högt
+                        // uppe. Ett stelt föremål stannar inte så: tyngdkraften
+                        // vrider det vidare kring kontaktpunkten tills det
+                        // ligger ned. Orienteringen förs mot viloposen (nålens
+                        // axel OCH gaffelplanet vågräta — beräknad vid islaget
+                        // nedan) medan kontaktklampningen håller den lägsta
+                        // punkten kvar på bordsytan under hela vridningen.
+                        ph.settleT += dt / ph.settleDur;
+                        ph.px += ph.vx * dt;
+                        ph.pz += ph.vz * dt;
+                        ph.vx *= Math.max(0, 1 - 4 * dt);
+                        ph.vz *= Math.max(0, 1 - 4 * dt);
+                        if (ph.settleT >= 1) {
+                            ph.settleT = 1;
+                            ph.frozen = true;
+                            ph.fellAt = now;
+                        }
                     } else if (!ph.frozen) {
                         // Snurr kring den LODRÄTA axeln genom stödpunkten och
                         // tyngdpunkten. Den axeln är parallell med tyngdkraften,
@@ -806,15 +829,23 @@
                     qTilt.setFromEuler(tiltEuler.set(ph.tbx, 0, ph.tbz, 'XYZ'));
                     qYaw.setFromAxisAngle(YAXIS, ph.psi);
                     assembly.quaternion.copy(qTilt).multiply(qYaw);
+                    if (ph.landed) {
+                        const kS = ph.settleT >= 1 ? 1
+                            : ph.settleT * ph.settleT * (3 - 2 * ph.settleT);
+                        assembly.quaternion.copy(qSettleStart).slerp(qSettleEnd, kS);
+                    }
                     assembly.position.set(PIVOT.x + ph.px, PIVOT.y + ph.py, PIVOT.z + ph.pz);
 
-                    // Landning: bygget faller tills dess LÄGSTA punkt når
-                    // bordsytan (y = 0). Kandidaterna är gaffelskaftens ändar,
-                    // nålens båda ändar och korkens kanter — de transformeras
-                    // med byggets aktuella rotation och läge.
-                    if (ph.dropping && !ph.frozen) {
+                    // Markkontakt: byggets LÄGSTA punkt mäts mot bordsytan
+                    // (y = 0). Kandidaterna är gaffelskaftens ändar, nålens
+                    // båda ändar och korkens kanter — de transformeras med
+                    // byggets aktuella rotation och läge. Första träffen
+                    // startar VÄLTFASEN (se dynamiken ovan); under den hålls
+                    // kontaktpunkten kvar exakt på bordsytan medan bygget
+                    // vrider sig ned till liggande.
+                    if (ph.dropping) {
                         const armL = 2 * PHYS.forkCmDist * 100;
-                        const fex = PHYS.forkAttachX * 100 + armL * Math.cos(ph.betaShown);
+                        const fez = PHYS.forkAttachX * 100 + armL * Math.cos(ph.betaShown);
                         const fey = PHYS.forkAttachY * 100 - armL * Math.sin(ph.betaShown);
                         const kandidater = [
                             [0, 0, 0], [0, 6.7, 0],
@@ -822,7 +853,7 @@
                             [1.1, 6.5, 0], [-1.1, 6.5, 0],
                             [0, 3.5, 1.1], [0, 3.5, -1.1]
                         ];
-                        if (s.forksOn) kandidater.push([fex, fey, 0], [-fex, fey, 0]);
+                        if (s.forksOn) kandidater.push([0, fey, fez], [0, fey, -fez]);
                         let lagsta = Infinity;
                         for (const q of kandidater) {
                             tmpV.set(q[0], q[1], q[2])
@@ -830,11 +861,35 @@
                                 .add(assembly.position);
                             if (tmpV.y < lagsta) lagsta = tmpV.y;
                         }
-                        if (lagsta <= 0) {
+                        if (!ph.landed && lagsta <= 0) {
+                            // Islaget: dämpa rörelsen och räkna ut VILOPOSEN —
+                            // bygget liggande med nålens axel vågrät i fall-
+                            // riktningen och gaffelplanet vågrätt (normalen åt
+                            // det håll gaffelplanet redan lutar, så vridningen
+                            // tar närmaste vägen). Vältfasens längd sätts av
+                            // hur stor vridningen är.
+                            ph.landed = true;
+                            qSettleStart.copy(assembly.quaternion);
+                            const lx = -Math.sin(ph.tbz), lz = Math.sin(ph.tbx);
+                            const ln2 = Math.hypot(lx, lz) || 1;
+                            vB.set(lx / ln2, 0, lz / ln2);
+                            vA.set(1, 0, 0).applyQuaternion(assembly.quaternion);
+                            vA.set(0, vA.y >= 0 ? 1 : -1, 0);
+                            vC.crossVectors(vA, vB);
+                            qSettleEnd.setFromRotationMatrix(settleM.makeBasis(vA, vB, vC));
+                            ph.settleT = 0;
+                            ph.settleDur = Math.min(0.7,
+                                Math.max(0.18, qSettleStart.angleTo(qSettleEnd) / 3.2));
+                            ph.vx *= 0.25;
+                            ph.vz *= 0.25;
+                            ph.vy = 0;
+                            ph.wPsi = 0;
+                        }
+                        if (ph.landed && isFinite(lagsta)) {
+                            // håll den lägsta punkten på bordet (både när
+                            // vridningen sänker OCH lyfter den)
                             ph.py -= lagsta;
                             assembly.position.y = PIVOT.y + ph.py;
-                            ph.frozen = true;
-                            ph.fellAt = now;
                         }
                     }
 
@@ -999,8 +1054,12 @@
             const physRef = useRef({
                 tbx: 0.09, tbz: 0.015, wbx: 0, wbz: 0, psi: 0, wPsi: 0,
                 px: 0, py: 0, pz: 0, vx: 0, vy: 0, vz: 0, dropping: false,
+                landed: false, settleT: 0, settleDur: 0.4,
                 betaShown: 50 * Math.PI / 180, falling: false, frozen: false, tilt: 0.09
             });
+
+            // Test-handtag för mätskript (skärmdumpsgranskning av fallet)
+            useEffect(() => { window.__gaffelPh = physRef.current; }, []);
 
             // Läs av vinkel, varvtal + fallstatus till UI:t några gånger per sekund
             useEffect(() => {
@@ -1083,6 +1142,7 @@
                 ph.psi = 0; ph.wPsi = 0;
                 ph.px = 0; ph.py = 0; ph.pz = 0;
                 ph.vx = 0; ph.vy = 0; ph.vz = 0; ph.dropping = false;
+                ph.landed = false; ph.settleT = 0;
                 ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
 
@@ -1096,6 +1156,7 @@
                 ph.psi = 0; ph.wPsi = 0;
                 ph.px = 0; ph.py = 0; ph.pz = 0;
                 ph.vx = 0; ph.vy = 0; ph.vz = 0; ph.dropping = false;
+                ph.landed = false; ph.settleT = 0;
                 ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
 

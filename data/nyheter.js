@@ -88,6 +88,58 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-27-ljudet-som-lyfter",
+    date: "2026-08-27",
+    title: "Kulan svävar fyra decimeter ovanför högtalaren — och ingenting annat än ljud håller den uppe",
+    deck: "Akustisk levitation har hittills krävt att föremålet kläms fast mellan två ultraljudskällor, och räckvidden har stannat vid några centimeter. Ett forskarlag har nu hållit en polystyrenkula svävande nästan fyra decimeter från en enda källa, genom att forma ljudet till en stråle som vägrar breda ut sig.",
+    category: "Akustik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-27-ljudet-som-lyfter.jpg",
+    imageAlt: "En liten ljusblå plastkula svävar fritt i luften ovanför en skålformad uppställning med hundratals ultraljudsgivare på ett laboratoriebord fullt av kablar och mätinstrument.",
+    imageCredit: "Foto: Tatsuki Fushimi / Wikimedia Commons (CC BY-SA 4.0). Bilden visar en tidigare uppställning för akustisk levitation, inte den nya strålen.",
+    tags: ["akustik", "ultraljud", "akustisk levitation", "stående våg", "vågor", "besselstråle", "ljudtryck"],
+    sources: [
+      { name: "Phys.org — Narrow ultrasonic beam enables stable 3D levitation six times farther than before (25 augusti 2026)", url: "https://phys.org/news/2026-08-narrow-ultrasonic-enables-stable-3d.html" },
+      { name: "Mirage News — Ultrasonic beam boosts acoustic levitation 6x (pressmeddelandet från University of Tsukuba och University of Bristol i återpublicering, 25 augusti 2026)", url: "https://www.miragenews.com/ultrasonic-beam-boosts-acoustic-levitation-6x-1733497/" },
+      { name: "Physical Review Letters 137, 094001 — Midair Single-Sided Acoustic Levitation in High-Pressure Regions of Zero-Order Bessel Beams (24 augusti 2026)", url: "https://journals.aps.org/prl/abstract/10.1103/pfkh-4x7j" },
+      { name: "arXiv:2412.15539 — förhandsversionen med hela metoddelen och samtliga mätvärden", url: "https://arxiv.org/abs/2412.15539" }
+    ],
+    research: {
+      citation: "Yusuke Koroyasu, Christopher Stone, Yoichi Ochiai, Takayuki Hoshi, Bruce W. Drinkwater, Tatsuki Fushimi, ”Midair Single-Sided Acoustic Levitation in High-Pressure Regions of Zero-Order Bessel Beams”, Physical Review Letters 137, 094001 (2026), publicerad 24 augusti 2026, DOI 10.1103/pfkh-4x7j",
+      url: "https://doi.org/10.1103/pfkh-4x7j"
+    },
+    body: [
+      { type: 'p', html: 'Ljud är tryckvariationer i luft. Trycket stiger och sjunker en aning när en våg passerar, och det räcker för att sätta trumhinnan i rörelse. Görs ljudet tillräckligt starkt räcker det också för att bära ett litet föremål mot tyngdkraften. Fenomenet kallas akustisk levitation och har varit känt sedan 1930-talet, men det har alltid haft samma begränsning: föremålet måste sitta inneslutet mellan två ljudkällor, eller mellan en källa och en reflektor, och det får aldrig komma särskilt långt bort.' },
+      { type: 'p', html: 'Ett forskarlag vid University of Tsukuba i Japan och University of Bristol i Storbritannien har nu tagit bort halva uppställningen. I <em>Physical Review Letters</em> den 24&nbsp;augusti redovisar de en fälla som håller en polystyrenkula stilla på upp till 397&nbsp;mm avstånd från en enda ljudkälla, med ingenting alls på andra sidan. Med den ensidiga metod som hittills använts, en så kallad tvillingfälla, stannade motsvarande räckvidd vid 66,7&nbsp;mm — knappt en sjättedel så långt.' },
+      { type: 'h2', text: 'Föremålet sitter där ljudet är som svagast' },
+      { type: 'p', html: 'Den vanliga sortens akustiska levitator bygger på en stående våg. Två motriktade vågor med samma frekvens lägger sig ovanpå varandra och bildar ett mönster som står stilla i rummet: på vissa ställen slår trycket kraftigt fram och tillbaka, på andra ställen tar de två vågorna alltid ut varandra så att trycket knappt ändras alls. De stillsamma ställena kallas tryckknutar.' },
+      { type: 'p', html: 'Avståndet mellan knutarna följer direkt av våglängden, som i sin tur ges av $\\lambda = \\dfrac{v}{f}$. Med ljudhastigheten $v \\approx 343\\ \\mathrm{m/s}$ och de $40\\ \\mathrm{kHz}$ som givarna arbetar med blir våglängden ungefär 8,6&nbsp;mm, och knutarna ligger på halva den sträckan, alltså drygt fyra millimeter isär. Ett litet och lätt föremål som råkar hamna bredvid en knut knuffas tillbaka in i den av det omgivande övertrycket. Där ligger det sedan kvar och svävar, som en pärla i en osynlig skål.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-27-ljudet-som-lyfter-2.jpg', alt: 'Sju fotografier av små föremål som svävar fritt i luften: en vit droppe, en myra, färgade plastbitar, en elektronikkomponent, klickar av ketchup och senap, en lodrät rad med fem vattendroppar och ett sockerkorn.', caption: 'Föremål som hålls svävande av en stående våg i en konventionell levitator. Raden med fem vattendroppar (f) visar tryckknutarna rakt ovanför varandra, en droppe i varje.', credit: 'Foto: Asier Marzo, Adrian Barnes och Bruce W. Drinkwater / Wikimedia Commons (CC BY 4.0)' },
+      { type: 'h2', text: 'Med bara en källa rinner kraften ut' },
+      { type: 'p', html: 'Så länge ljudet kommer från två håll är saken enkel. Tas den ena sidan bort försvinner både den stående vågen och den symmetri som höll föremålet på plats. Det som är kvar blir dessutom svagare för varje centimeter, eftersom en vanlig ljudstråle breder ut sig och tunnas ut när den går framåt.' },
+      { type: 'quote', html: 'I en vanlig akustisk levitator är det ljudvågorna från motsatta håll som stabiliserar föremålet inne i apparaten. Kraften som håller föremålet på plats blir svagare ju längre bort från källan det kommer.', cite: 'Bruce Drinkwater, professor vid University of Bristol' },
+      { type: 'h2', text: 'En stråle som inte breder ut sig' },
+      { type: 'p', html: 'Lösningen blev en besselstråle av nollte ordningen. Den byggs upp av ljud som kommer in snett från alla håll, längs en kon, och möts längs en gemensam mittlinje. Resultatet är ett smalt område med högt tryck rakt längs axeln, omgivet av allt svagare ringar. Till skillnad från en vanlig stråle behåller mönstret sin bredd i stället för att spridas ut. Sådana strålar beskrevs teoretiskt i optiken 1987 och har en egenhet till: hamnar ett hinder i vägen sluter sig strålen igen ett stycke längre fram, eftersom mittlinjen hela tiden fylls på från sidorna.' },
+      { type: 'p', html: 'I försöket formades strålen av en fyrkantig platta med 16&nbsp;·&nbsp;16 ultraljudsgivare, alltså 256 stycken, där varje givare kunde ges sin egen fördröjning. Genom att välja fördröjningarna rätt lät sig konens vinkel ställas in, och i huvudförsöken var den 20&nbsp;grader.' },
+      { type: 'h2', text: 'Fällan ligger i övertrycket, inte i knuten' },
+      { type: 'p', html: 'Det märkliga med resultatet är var kulan hamnar. I en stående våg samlas partiklarna i tryckknutarna, alltså där trycket varierar minst. Här sitter kulan tvärtom mitt i strålens allra kraftigaste område.' },
+      { type: 'p', html: 'Förklaringen ligger i att ljudet trycker på ett svävande föremål på två olika sätt samtidigt. Den ena kraften beror på hur trycket ändrar sig från plats till plats, och på hur lätt föremålet låter sig pressas ihop jämfört med luften. Den andra beror på hur luftens rörelse ändrar sig från plats till plats, och på skillnaden i densitet. De två drar åt olika håll, och i en stående våg vinner den första. Men i en besselstråle med tillräckligt flack konvinkel, och med ett föremål som är extremt lätt, tar den andra över och gör mittlinjen till en stabil plats. Polystyrenkulan i försöket hade densiteten 40,4&nbsp;kg/m³, alltså bara ett trettiotal gånger tätare än luften omkring.' },
+      { type: 'h2', text: 'Vad mätningarna visade' },
+      { type: 'p', html: 'Kulan var 1,5&nbsp;mm i diameter och kunde hållas stilla var som helst mellan 141 och 397&nbsp;mm från plattan, ett arbetsområde på drygt 25&nbsp;cm, eller uttryckt i våglängder från 16,5 till 46,6. I sidled gick den att flytta nästan tio centimeter. Rörelsen sköttes utan att någonting mekaniskt rörde sig: genom att luta strålen upp till tio grader åt vardera hållet flyttades kulan i sidled med ungefär 5,7&nbsp;cm/s, och genom att ändra konens vinkel mellan 15 och 25&nbsp;grader åkte den upp och ner med 4,3&nbsp;cm/s.' },
+      { type: 'p', html: 'Laget höll dessutom flera föremål svävande samtidigt, prövade sådant som inte alls är runt — ett teblad, en skiva av kiselaerogel och en flaga potatisstärkelse — och lät kulan sväva kvar med ett hinder inskjutet mellan plattan och kulan. Det sista är strålens självläkning i praktiken.' },
+      { type: 'quote', html: 'Eftersom vår teknik möjliggör beröringsfri hantering på långt avstånd i öppna miljöer räknar vi med att metoden kan komma till användning för automatiserade experiment, tredimensionella bildskärmar och hantering av ömtåliga material och farliga ämnen.', cite: 'Tatsuki Fushimi, professor vid University of Tsukuba' },
+      { type: 'h2', text: 'Vad det duger till' },
+      { type: 'p', html: 'Poängen med att slippa den andra ljudkällan är att fällan då kan riktas in i ett utrymme i stället för att omsluta det. Ett prov behöver aldrig vidröra en behållarvägg, vilket är hela idén bakom behållarlös hantering: en droppe som svävar fritt kan varken förorenas av kärlet eller börja kristallisera från dess yta.' },
+      { type: 'p', html: 'Begränsningarna ska dock inte skrivas bort. Försöken gjordes med millimeterstora och mycket lätta föremål, och det är just den låga densiteten som gör mittlinjen stabil. Om samma grepp går att sträcka till tätare material, som en vattendroppe, är ännu inte visat. Men steget från sju centimeter till fyra decimeter är stort nog för att flytta akustisk levitation från en apparat man stoppar in något i, till ett verktyg man riktar.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'De 40&nbsp;kHz som givarna arbetar med ligger långt över hörselns övre gräns, som för unga öron går vid ungefär 20&nbsp;kHz. En akustisk levitator är alltså ljudlös, trots att det är ljudet som bär.',
+        'Besselstrålar är uppkallade efter den tyske astronomen och matematikern Friedrich Bessel. Att de kan förverkligas som strålar som inte breder ut sig visades i optiken 1987, av J. Durnin med kollegor.',
+        'Ljudhastigheten i luft beror på temperaturen och är omkring 343&nbsp;m/s vid 20&nbsp;°C. Kyls luften ner sjunker den, och våglängden — och därmed avståndet mellan tryckknutarna — krymper med den.',
+        'Akustisk levitation används i dag bland annat för att studera hur läkemedelsämnen kristalliserar utan att en behållarvägg stör förloppet.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-26-vakuumet-som-hjalper-till",
     date: "2026-08-26",
     title: "Fysiker höjde en supraledares gräns utan att röra materialet — de byggde om tomrummet omkring den",

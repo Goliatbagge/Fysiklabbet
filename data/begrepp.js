@@ -1775,5 +1775,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Är materien i stället en sammanhängande vätska uppstår ett tryck, och trycket faller snabbast där vägen ut är kortast. Fler partiklar slungas därför ut åt mandelns smala håll än åt det breda. Skillnaden mäts som ett tal, och eftersom mönstret har två motsatta riktningar kallas det elliptiskt flöde och betecknas <em>v</em><sub>2</sub>. Motsvarande tal för ett tresidigt mönster kallas triangulärt flöde, <em>v</em><sub>3</sub>, och kommer av att kärnpartiklarna aldrig ligger helt jämnt fördelade utan ger krocken små slumpmässiga ojämnheter.' },
       { type: 'p', html: 'Måttet har blivit ett av de viktigaste verktygen i studiet av heta kärnkollisioner, av två skäl. Ett starkt flöde är i sig ett tecken på att en vätska bildats. Och eftersom mönstret formas av krockens geometri går det att vända på resonemanget och läsa av något om själva kärnorna: en avlång kärna ger en plattare mandel än en rund, och alltså ett kraftigare flöde.' }
     ]
+  },
+  {
+    id: 'akustisk-levitation',
+    term: 'Akustisk levitation',
+    former: ['akustisk levitation', 'akustiska levitationen', 'levitation', 'levitationen', 'akustisk levitator', 'akustiska levitatorn', 'levitator', 'levitatorn', 'levitatorer'],
+    kort: 'Att hålla ett litet föremål svävande fritt i luften med hjälp av mycket starkt ljud, oftast ultraljud. Kraften kommer av att ljudtrycket är olika stort på föremålets olika sidor.',
+    relaterade: ['besselstrale'],
+    body: [
+      { type: 'p', html: 'Ljud är tryckvariationer. När en ljudvåg passerar pressas luften omväxlande ihop och tunnas ut, och ett föremål som ligger i vägen får därför lite olika tryck på olika sidor. I vardagens ljudstyrkor är skillnaden alldeles för liten för att märkas. Skruvas ljudet upp tillräckligt mycket blir den däremot stor nog att bära ett litet och lätt föremål rakt upp mot tyngdkraften.' },
+      { type: 'p', html: 'Det svåra är inte att lyfta något, utan att få det att stanna. Lösningen är nästan alltid en stående våg: två ljudvågor som möts från motsatta håll bildar ett mönster som står stilla i luften, med ställen där trycket svänger häftigt och ställen där det knappt ändras alls. De stillsamma ställena kallas tryckknutar, och ett litet föremål som glider åt sidan knuffas tillbaka in i knuten av trycket runt omkring. Knutarna ligger på ett halvt våglängdsavstånd från varandra, vilket med vanligt 40&nbsp;kHz-ultraljud blir drygt fyra millimeter. Därför ser man ibland flera droppar sväva i en lodrät rad, en i varje knut.' },
+      { type: 'p', html: 'Nyttan ligger i att provet aldrig rör vid någonting. En droppe i ett provrör kan förorenas av glaset och börjar gärna kristallisera från kärlets yta, medan en droppe som svävar fritt bara har luft omkring sig. Metoden används därför för att studera hur ämnen kristalliserar, torkar och blandas, och den fungerar bara på små och lätta föremål: millimeterstora droppar, korn och flagor. En kaffekopp går inte att lyfta med ljud.' }
+    ]
+  },
+  {
+    id: 'besselstrale',
+    term: 'Besselstråle',
+    former: ['besselstråle', 'besselstrålen', 'besselstrålar', 'besselstrålarna'],
+    kort: 'En stråle av ljus eller ljud som behåller sin bredd i stället för att spridas ut, och som dessutom sluter sig igen bakom ett hinder. Den byggs upp av vågor som kommer in snett från alla håll och möts längs en gemensam mittlinje.',
+    relaterade: ['akustisk-levitation'],
+    body: [
+      { type: 'p', html: 'En vanlig stråle breder ut sig. Ficklampans ljuskägla blir bredare och svagare ju längre bort man lyser, och detsamma gäller ljud från en högtalare. Orsaken är diffraktion: en våg som pressas ihop i sidled får oundvikligen betala för det med att sprida sig framåt.' },
+      { type: 'p', html: 'En besselstråle kringgår problemet genom att aldrig vara ihoppressad från början. Den byggs i stället av vågor som färdas snett inåt från alla håll, längs ytan av en kon, och som möts längs konens mittlinje. Där förstärker de varandra och bildar en smal, intensiv kärna, omgiven av allt svagare ringar. Eftersom mittlinjen hela tiden matas med nytt tillskott från sidorna behåller kärnan sin bredd sträcka efter sträcka, i stället för att tunnas ut. Mönstret av ringar beskrivs matematiskt av en så kallad besselfunktion, uppkallad efter den tyske astronomen och matematikern Friedrich Bessel, och det är därifrån namnet kommer.' },
+      { type: 'p', html: 'Samma egenskap ger strålen ett andra kännetecken: den läker. Ställer man ett litet hinder mitt i kärnan skuggas visserligen mittlinjen strax bakom hindret, men lite längre fram har vågorna från sidorna hunnit fylla på igen och strålen ser ut som förut. Perfekta besselstrålar skulle kräva oändligt mycket effekt och finns bara på papperet, men goda efterlikningar går att göra över begränsade sträckor, och de används i dag i allt från laserbearbetning och mikroskopi till att flytta små föremål med ultraljud.' }
+    ]
+  },
+  {
+    id: 'aerogel',
+    term: 'Aerogel',
+    former: ['aerogel', 'aerogelen', 'aerogeler', 'kiselaerogel', 'kiselaerogelen'],
+    kort: 'Ett fast material som till största delen består av luft, framställt genom att vätskan i en gel byts mot gas utan att strukturen faller ihop. Det är bland de lättaste fasta ämnen som finns.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'En gel är ett finmaskigt nätverk av fast material med vätska i alla hålrum, ungefär som gelé. Låter man vätskan avdunsta på vanligt sätt drar ytspänningen ihop nätverket och kvar blir en hopsjunken klump. Knepet bakom aerogel är att få bort vätskan utan att den någonsin bildar en yta som kan dra: materialet torkas under högt tryck, i ett tillstånd där gränsen mellan vätska och gas inte längre finns. Då står nätverket kvar precis som det var, med luft i stället för vätska i hålrummen.' },
+      { type: 'p', html: 'Resultatet blir ett fast ämne som till 90–99&nbsp;procent består av luft. Den vanligaste sorten görs av kiseldioxid, samma ämne som glas, och väger några tiotals kilogram per kubikmeter — bara ett trettiotal gånger mer än luften själv. En bit ser ut som ett fruset rökmoln och känns nästan viktlös i handen, men bär ändå långt mer än sin egen tyngd.' },
+      { type: 'p', html: 'Eftersom hålrummen är mindre än sträckan en luftmolekyl hinner färdas mellan två krockar leds värme mycket dåligt genom materialet, och aerogel är därför ett av de bästa isolermaterial som finns. Det har använts i rymdsonder för att fånga upp stoftkorn utan att de brinner upp, som isolering i marsfordon, och i byggnader där tunna väggar ändå ska hålla värmen kvar.' }
+    ]
   }
 ];

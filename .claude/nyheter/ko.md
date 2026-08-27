@@ -12,6 +12,30 @@ Format per post:
 
 ## Kö
 
+- **Dubbelspaltförsöket krympt till två atomer** — ett lag vid University of
+  Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
+  som Youngs två spalter för en fokuserad elektronstråle, och läser ur
+  interferensmönstret hur grannatomerna svänger tillsammans. Ungefär sju
+  tiopotenser mindre än Youngs ursprungliga försök med ljus. Nature
+  (2026-08-26), DOI 10.1038/s41586-026-10914-9, Koudai Tabata med flera.
+  Kollegialt granskad. Stark kandidat: dubbelspalten är en av de mest kända
+  uppställningarna i hela fysiken, och kopplingen till fononer och
+  värmeledning i halvledare ger en modern fortsättning. Valdes bort
+  2026-08-27 enbart för att dagen redan hade en färsk våg-/mekaniknyhet och
+  de närmast föregående artiklarna varit kvantfysiktunga. Källa:
+  https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
+  (tillagd 2026-08-27)
+
+- **Ett enda infrarött fotonrekyl mätt på en enda molekyl** — Innsbruck har
+  tagit upp absorptionsspektrumet för en ensam CaOH+-jon genom att låta en
+  hjälpatom i samma jonfälla, sammanflätad i ett kattillstånd, förstärka den
+  annars omätbart lilla rekylen. Icke-förstörande, så molekylen kan mätas om
+  och om igen. Ingång: fotonens rörelsemängd och rörelsemängdens bevarande.
+  Nature (2026-08-26), DOI 10.1038/s41586-026-10915-8, Zhenlin Wu med flera,
+  grupp ledd av Philipp Schindler. Källa:
+  https://phys.org/news/2026-08-molecule-photon-entanglement-imperceptible-recoil.html
+  (tillagd 2026-08-27)
+
 - **Vakuumfluktuationer förstärker supraledning — men ett no-go-teorem säger
   att de inte borde kunna göra det** (UPPFÖLJNING, inte ny nyhet). Publicerad
   2026-08-26 som `2026-08-26-vakuumet-som-hjalper-till`. Det som är kvar att

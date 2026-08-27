@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 26 Aug 2026 01:28:01 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2026 01:27:23 GMT</lastBuildDate>
+    <item>
+      <title>Kulan svävar fyra decimeter ovanför högtalaren — och ingenting annat än ljud håller den uppe</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-27-ljudet-som-lyfter</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-27-ljudet-som-lyfter</guid>
+      <pubDate>Thu, 27 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Akustik</category>
+      <description>Akustisk levitation har hittills krävt att föremålet kläms fast mellan två ultraljudskällor, och räckvidden har stannat vid några centimeter. Ett forskarlag har nu hållit en polystyrenkula svävande nästan fyra decimeter från en enda källa, genom att forma ljudet till en stråle som vägrar breda ut sig.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-27-ljudet-som-lyfter.jpg" length="171421" type="image/jpeg"/>
+    </item>
     <item>
       <title>Fysiker höjde en supraledares gräns utan att röra materialet — de byggde om tomrummet omkring den</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-26-vakuumet-som-hjalper-till</link>
@@ -177,15 +186,6 @@
       <category>Magnetism</category>
       <description>De känsligaste magnetfältsmätarna kräver flytande helium eller ett magnetiskt avskärmat rum. Ett lag från Peking och Mainz har i stället låtit en pytteliten permanentmagnet hänga fritt i luften och läst av hur den vrider sig — med en laserstråle, vid rumstemperatur, mitt i jordens eget magnetfält.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-08-svavande-magnet.jpg" length="16128" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Solens yta visar sig vara täckt av små virvlar — och de kan förklara varför atmosfären ovanför är miljoner grader het</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-07-virvlar-pa-solens-yta</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-07-virvlar-pa-solens-yta</guid>
-      <pubDate>Fri, 07 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Astrofysik</category>
-      <description>Världens största solteleskop har avbildat solytan med 19 kilometers upplösning. Överallt där magnetfältet möter den kokande gasen kröker sig kanterna till fjäderlika fransar med små virvlar i. Instabiliteten räknades ut på papper redan på 1800-talet, men har aldrig setts på en stjärna förrän nu.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-07-virvlar-pa-solens-yta.jpg" length="246622" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

@@ -34,13 +34,36 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
-    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+        // mini-läge: sidan körs som minisimulering i en iframe i teorin —
+        // bara scenen visas, verktygen bor i minisim-kortet utanför.
+        window.__MINI = __q.has('mini');
+        if (window.__MINI) document.documentElement.classList.add('mini-mode');
+    </script>
     <style>
         /* Embed-läge: dölj sajt-nav när simen körs i en wrapper-iframe */
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
         html.embed-mode #fb-feedback-widget { display: none !important; }
         html.embed-mode .pt-6 { padding-top: 0.5rem; }
         html.embed-mode .min-h-screen { min-height: 0 !important; }
+        /* Mini-läge (?embed=1&mini=1): teorins minisim-kort bäddar in sidan i
+           en iframe och visar BARA scenen — rubrik, formelkort, sidopanel och
+           de pedagogiska sektionerna göms, och scenens overlay-verktyg
+           (.scene-toggles, .scene-hint) göms utanför fullskärm (minisim-kortet
+           har egna knappar och glidare). I FULLSKÄRM — som startas med scenens
+           egen .fs-btn inne i iframen — visas allt precis som i originalet:
+           kryssrutorna, styrknapparna, glidarpanelen och tipset. */
+        html.mini-mode .min-h-screen { padding: 0 !important; }
+        html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
+        html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
+        html.mini-mode main > .order-2 { display: none !important; }
+        html.mini-mode main .order-1 > :not(.scene-wrap) { display: none !important; }
+        html.mini-mode .scene-stage { height: 100vh; }
+        html.mini-mode .scene-wrap { border-radius: 6px; border: none; }
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-toggles,
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-hint { display: none; }
         .dark-container { background: transparent; }
         .glass-card {
             background: var(--lab-bg, #f3eee4);
@@ -264,7 +287,7 @@
         };
 
         const SLIP_ANGLE = 0.35;   // rad — nålen glider av myntkanten
-        const FALL_STOP = 1.05;    // rad — fallanimationen fryses här
+        const DROP_ANGLE = 0.55;   // rad — nålspetsen tappar myntkanten: fritt fall
 
         // ── Graf: tyngdpunktens höjd mot gaffelvinkeln ───────────
         const YcmGraph = ({ beta, forksOn }) => {
@@ -377,7 +400,7 @@
                 const PIVOT = new THREE.Vector3(0, coinCy + COIN_R, 0);
 
                 const camera = new THREE.PerspectiveCamera(42, width / height, 0.5, 400);
-                camera.position.set(28, 24, 21);
+                camera.position.set(33, 28, 25);
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setPixelRatio(window.devicePixelRatio);
@@ -387,7 +410,7 @@
                 const controls = new THREE.OrbitControls(camera, renderer.domElement);
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.08;
-                controls.target.set(0, 14, 0);
+                controls.target.set(0, 13.5, 0);
                 controls.minDistance = 6;
                 controls.maxDistance = 70;
                 controls.maxPolarAngle = Math.PI * 0.55;
@@ -717,7 +740,22 @@
 
                     // Pendeldynamik kring stödpunkten, två vippriktningar.
                     // tbx/tbz: lutning kring världens x- respektive z-axel
-                    if (!ph.frozen) {
+                    if (!ph.frozen && ph.dropping) {
+                        // Fritt fall: nålspetsen har tappat myntkanten. Inget
+                        // vridmoment verkar längre kring tyngdpunkten, så
+                        // rotationsfarten är konstant medan tyngdaccelerationen
+                        // (9,82 m/s² = 982 cm/s² i scenens cm-skala) drar bygget
+                        // ned till bordsytan. Landningen mäts längre ned, mot
+                        // byggets faktiskt lägsta punkt.
+                        ph.vy -= 982 * dt;
+                        ph.px += ph.vx * dt;
+                        ph.py += ph.vy * dt;
+                        ph.pz += ph.vz * dt;
+                        ph.tbx += ph.wbx * dt;
+                        ph.tbz += ph.wbz * dt;
+                        ph.psi += ph.wPsi * dt;
+                        ph.tilt = Math.sqrt(ph.tbx * ph.tbx + ph.tbz * ph.tbz);
+                    } else if (!ph.frozen) {
                         // Snurr kring den LODRÄTA axeln genom stödpunkten och
                         // tyngdpunkten. Den axeln är parallell med tyngdkraften,
                         // så snurret ger inget vridmoment som kan välta bygget —
@@ -750,7 +788,16 @@
                             // förbi glidgränsen: tyngdkraften får vinna oavsett
                             ph.wbx += 7 * Math.sin(ph.tbx) * dt;
                             ph.wbz += 7 * Math.sin(ph.tbz) * dt;
-                            if (tilt > FALL_STOP) { ph.frozen = true; ph.fellAt = now; }
+                            if (tilt > DROP_ANGLE) {
+                                // nålspetsen glider av myntkanten — fritt fall,
+                                // med en liten sidledsfart åt hållet bygget lutar
+                                ph.dropping = true;
+                                const lx = -Math.sin(ph.tbz), lz = Math.sin(ph.tbx);
+                                const ln = Math.hypot(lx, lz) || 1;
+                                ph.vx = 26 * lx / ln;
+                                ph.vz = 26 * lz / ln;
+                                ph.vy = 0;
+                            }
                         }
                         ph.tilt = tilt;
                     }
@@ -759,11 +806,42 @@
                     qTilt.setFromEuler(tiltEuler.set(ph.tbx, 0, ph.tbz, 'XYZ'));
                     qYaw.setFromAxisAngle(YAXIS, ph.psi);
                     assembly.quaternion.copy(qTilt).multiply(qYaw);
+                    assembly.position.set(PIVOT.x + ph.px, PIVOT.y + ph.py, PIVOT.z + ph.pz);
+
+                    // Landning: bygget faller tills dess LÄGSTA punkt når
+                    // bordsytan (y = 0). Kandidaterna är gaffelskaftens ändar,
+                    // nålens båda ändar och korkens kanter — de transformeras
+                    // med byggets aktuella rotation och läge.
+                    if (ph.dropping && !ph.frozen) {
+                        const armL = 2 * PHYS.forkCmDist * 100;
+                        const fex = PHYS.forkAttachX * 100 + armL * Math.cos(ph.betaShown);
+                        const fey = PHYS.forkAttachY * 100 - armL * Math.sin(ph.betaShown);
+                        const kandidater = [
+                            [0, 0, 0], [0, 6.7, 0],
+                            [1.1, 3.5, 0], [-1.1, 3.5, 0],
+                            [1.1, 6.5, 0], [-1.1, 6.5, 0],
+                            [0, 3.5, 1.1], [0, 3.5, -1.1]
+                        ];
+                        if (s.forksOn) kandidater.push([fex, fey, 0], [-fex, fey, 0]);
+                        let lagsta = Infinity;
+                        for (const q of kandidater) {
+                            tmpV.set(q[0], q[1], q[2])
+                                .applyQuaternion(assembly.quaternion)
+                                .add(assembly.position);
+                            if (tmpV.y < lagsta) lagsta = tmpV.y;
+                        }
+                        if (lagsta <= 0) {
+                            ph.py -= lagsta;
+                            assembly.position.y = PIVOT.y + ph.py;
+                            ph.frozen = true;
+                            ph.fellAt = now;
+                        }
+                    }
 
                     // Tyngdpunkten i världskoordinater (lokalt: (0, y_cm, 0) i cm).
                     // Punkten ligger på snurraxeln, så ψ flyttar den inte — därför
                     // går lodlinjen genom stödpunkten hela snurret igenom.
-                    tmpV.set(0, d.yCm * 100, 0).applyQuaternion(assembly.quaternion).add(PIVOT);
+                    tmpV.set(0, d.yCm * 100, 0).applyQuaternion(assembly.quaternion).add(assembly.position);
                     const cmVisible = s.show.cm;
                     cmDot.visible = cmVisible;
                     cmLabel.visible = cmVisible;
@@ -780,7 +858,8 @@
                     if (plumbVisible) {
                         plumbLine.geometry.setFromPoints([
                             new THREE.Vector3(tmpV.x, tmpV.y + 2.2, tmpV.z),
-                            new THREE.Vector3(tmpV.x, PIVOT.y - 3.6, tmpV.z)
+                            new THREE.Vector3(tmpV.x,
+                                Math.min(PIVOT.y - 3.6, Math.max(0.2, tmpV.y - 3)), tmpV.z)
                         ]);
                         plumbLine.computeLineDistances();
                     }
@@ -798,7 +877,7 @@
                     }
 
                     // Hävarmen: vågrätt avstånd stödpunkt → tyngdkraftens riktningslinje
-                    const leverVisible = s.show.lever && Math.abs(tmpV.x - PIVOT.x) + Math.abs(tmpV.z - PIVOT.z) > 0.12;
+                    const leverVisible = s.show.lever && !ph.dropping && Math.abs(tmpV.x - PIVOT.x) + Math.abs(tmpV.z - PIVOT.z) > 0.12;
                     leverLine.visible = leverVisible;
                     leverLabel.visible = leverVisible;
                     if (leverVisible) {
@@ -919,6 +998,7 @@
             // deras vinkelhastigheter, psi/wPsi snurret kring lodlinjen.
             const physRef = useRef({
                 tbx: 0.09, tbz: 0.015, wbx: 0, wbz: 0, psi: 0, wPsi: 0,
+                px: 0, py: 0, pz: 0, vx: 0, vy: 0, vz: 0, dropping: false,
                 betaShown: 50 * Math.PI / 180, falling: false, frozen: false, tilt: 0.09
             });
 
@@ -929,6 +1009,16 @@
                     setTiltDeg(ph.tilt * 180 / Math.PI);
                     setSpinF(Math.abs(ph.wPsi) / (2 * Math.PI));
                     setFallen(ph.frozen);
+                    // Mini-läget: rapportera läget till minisim-kortet utanför
+                    if (window.__MINI && window.parent !== window) {
+                        const st = stateRef.current;
+                        const dd = computeDerived(st.beta, st.forksOn);
+                        window.parent.postMessage({ fysikGaffelStatus: {
+                            fallen: ph.frozen, stable: dd.stable, period: dd.period,
+                            betaCrit: dd.betaCrit, forksOn: st.forksOn,
+                            spinF: Math.abs(ph.wPsi) / (2 * Math.PI)
+                        } }, '*');
+                    }
                 }, 180);
                 return () => clearInterval(id);
             }, []);
@@ -991,6 +1081,8 @@
                 ph.tbz = 0.015;
                 ph.wbx = 0; ph.wbz = 0;
                 ph.psi = 0; ph.wPsi = 0;
+                ph.px = 0; ph.py = 0; ph.pz = 0;
+                ph.vx = 0; ph.vy = 0; ph.vz = 0; ph.dropping = false;
                 ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
 
@@ -1002,8 +1094,29 @@
                 ph.tbz = 0.01;
                 ph.wbx = 0; ph.wbz = 0;
                 ph.psi = 0; ph.wPsi = 0;
+                ph.px = 0; ph.py = 0; ph.pz = 0;
+                ph.vx = 0; ph.vy = 0; ph.vz = 0; ph.dropping = false;
                 ph.falling = false; ph.frozen = false; ph.tilt = ph.tbx;
             };
+
+            // Mini-läget: minisim-kortet i teorin styr sidan via postMessage
+            const miniRef = useRef({});
+            miniRef.current = { knuffa, snurra, reset, setBeta };
+            useEffect(() => {
+                if (!window.__MINI) return;
+                const onMsg = (e) => {
+                    const msg = e.data;
+                    if (!msg || !msg.fysikGaffel) return;
+                    const m = miniRef.current;
+                    if (msg.fysikGaffel === 'knuffa') m.knuffa();
+                    else if (msg.fysikGaffel === 'snurra') m.snurra();
+                    else if (msg.fysikGaffel === 'reset') m.reset();
+                    else if (msg.fysikGaffel === 'beta')
+                        m.setBeta(Math.max(10, Math.min(70, +msg.value || 0)));
+                };
+                window.addEventListener('message', onMsg);
+                return () => window.removeEventListener('message', onMsg);
+            }, []);
 
             const d = useMemo(() => computeDerived(beta, forksOn), [beta, forksOn]);
             const dMm = d.yCm * 1000;
@@ -1063,7 +1176,7 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
-                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <div className="scene-stage">
                                         <BalansScene stateRef={stateRef} physRef={physRef} actionsRef={actionsRef} />
                                         <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"

@@ -17,8 +17,8 @@
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, eulersdisk,
- *           fjaderpendel, skiftnyckel, valtning, gaffelbalans, linjal,
- *           fodelsedag, talmangder
+ *           fjaderpendel, skiftnyckel, valtning, gaffelbalans,
+ *           gaffelbalans3d, linjal, fodelsedag, talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -145,6 +145,16 @@
  * scenen. Fysikmodellen (massor, längder, tröghetsmoment) är IDENTISK med
  * den fristående simuleringen fysik2-gaffelbalans-app.html. Ritad i
  * laboranstemat; "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
+ *
+ * ── typ: gaffelbalans3d ──────────────────────────────────────────────────
+ * 3D-varianten av gaffelbalansen: den fristående simuleringen
+ * fysik2-gaffelbalans-app.html inbäddad som minisimulering via en iframe
+ * (?embed=1&mini=1 — mini-läget visar bara scenen). Kortet har de
+ * väsentliga verktygen (Knuffa till, Snurra, Börja om, glidaren
+ * Gaffelvinkel) som styr sidan med postMessage; sidan rapporterar
+ * tillbaka fallen/stabil/period/varvtal till kortets info-rad.
+ * Fullskärm startas med scenens egen .fs-btn inne i iframen och ger
+ * exakt originalsimuleringens fullskärmsläge, med alla verktyg.
  *
  * ── typ: fodelsedag ──────────────────────────────────────────────────────
  * Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst två
@@ -289,6 +299,8 @@
         '.ms-tm-panel b{color:inherit;}',
         /* (.lab-minisim-marginalen ligger i styles-laborans.css, som
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
+        '.minisim-iframe{display:block;width:100%;aspect-ratio:560/430;border:0;',
+        '  border-radius:4px;background:#eef0ee;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -5023,6 +5035,132 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: gaffelbalans3d
+    // ══════════════════════════════════════════════════════════════════════
+    // 3D-varianten av gaffelbalansen: den fristående simuleringen
+    // fysik2-gaffelbalans-app.html inbäddad som minisimulering via en
+    // iframe (?embed=1&mini=1). I mini-läget visar sidan BARA scenen;
+    // de väsentliga verktygen — Knuffa till, Snurra, Börja om och
+    // glidaren Gaffelvinkel — bor här i minisim-kortet och styr sidan
+    // med postMessage. Sidan rapporterar tillbaka sitt läge
+    // (fallen/stabil/period/varvtal) till kortets info-rad.
+    // FULLSKÄRM startas med scenens egen .fs-btn INNE i iframen (en
+    // fullskärmsknapp i kortet kan inte skicka vidare klickgesten till
+    // iframen) och ger då EXAKT originalsimuleringens fullskärmsläge:
+    // kryssrutorna uppe till höger, styrknapparna, glidarpanelen i
+    // underkant och scen-tipset. Kräver allow="fullscreen" på iframen.
+    // (Canvas-varianten typ: gaffelbalans finns kvar ovan.)
+    function buildGaffelbalans3d(node, cfg) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var iframe = document.createElement('iframe');
+        iframe.className = 'minisim-iframe';
+        iframe.src = 'fysik2-gaffelbalans-app.html?embed=1&mini=1';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.allow = 'fullscreen';
+        iframe.loading = 'lazy';
+        iframe.title =
+            '3D-simulering: två gafflar i en kork balanserar på en nålspets ' +
+            'mot kanten av ett mynt på högkant. Dra i scenen för att vrida ' +
+            'kameran, klicka på korken för en knuff och på ett gaffelskaft ' +
+            'för ett snurr. Fullskärmsknappen uppe till vänster i scenen ' +
+            'öppnar simuleringen i fullskärm med alla verktyg.';
+        scene.appendChild(iframe);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        function sanda(cmd, value) {
+            try {
+                iframe.contentWindow.postMessage(
+                    { fysikGaffel: cmd, value: value }, location.origin);
+            } catch (e) { /* iframen inte laddad ännu */ }
+        }
+
+        var knuffBtn = document.createElement('button');
+        knuffBtn.type = 'button';
+        knuffBtn.className = 'minisim-btn ms-primar';
+        knuffBtn.textContent = 'Knuffa till';
+        knuffBtn.addEventListener('click', function () { sanda('knuffa'); });
+
+        var snurrBtn = document.createElement('button');
+        snurrBtn.type = 'button';
+        snurrBtn.className = 'minisim-btn';
+        snurrBtn.textContent = 'Snurra';
+        snurrBtn.addEventListener('click', function () { sanda('snurra'); });
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        omBtn.addEventListener('click', function () { sanda('reset'); });
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(knuffBtn);
+        controls.appendChild(snurrBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Gaffelvinkel';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '10';
+        slider.max = '70';
+        slider.step = '1';
+        slider.value = '50';
+        slider.setAttribute('aria-label',
+            'Gaffelvinkel i grader nedåt från vågrätt — små vinklar lyfter ' +
+            'tyngdpunkten över stödpunkten så att bygget faller');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderVal.textContent = '50°';
+        slider.addEventListener('input', function () {
+            sliderVal.textContent = slider.value + '°';
+            sanda('beta', parseFloat(slider.value));
+        });
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        // Lägesrapporten från sidan i iframen → kortets info-rad
+        window.addEventListener('message', function (e) {
+            if (e.source !== iframe.contentWindow) return;
+            var st = e.data && e.data.fysikGaffelStatus;
+            if (!st) return;
+            if (st.fallen) {
+                info.textContent = 'Det välte — tryck Börja om';
+            } else if (!st.stable) {
+                info.textContent = st.forksOn
+                    ? 'Tyngdpunkten hamnar över stödpunkten'
+                    : 'Utan gafflar: instabilt';
+            } else if (st.spinF >= 0.3) {
+                info.textContent = 'Snurrar ' + fmt(st.spinF, 1) + ' varv/s';
+            } else {
+                info.textContent = 'Stabilt — perioden ' + fmt(st.period, 1) + ' s';
+            }
+        });
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: linjal
     // ══════════════════════════════════════════════════════════════════════
     function buildLinjal(node, cfg) {
@@ -6299,6 +6437,7 @@
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,
+                  gaffelbalans3d: buildGaffelbalans3d,
                   linjal: buildLinjal,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
 

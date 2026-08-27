@@ -825,9 +825,27 @@
                     raycaster.setFromCamera(pointerNDC, camera);
                     const hits = raycaster.intersectObject(assembly, true);
                     for (const h of hits) {
-                        if (h.object.userData.action) return h.object.userData.action;
+                        if (h.object.userData.action) return { action: h.object.userData.action, point: h.point };
                     }
                     return null;
+                };
+
+                // Snurrets riktning: klicket ska kännas som en putt RAKT IN I
+                // SKÄRMEN. Ett skaft till höger om snurraxeln puttas då bort
+                // från betraktaren och bygget vrider sig moturs sett ovanifrån;
+                // ett skaft till vänster ger medurs. Vi jämför därför träff-
+                // punktens läge i bild med axelns, så att riktningen blir rätt
+                // oavsett hur kameran står och hur bygget hunnit vrida sig.
+                // (+ψ = moturs uppifrån, eftersom en rotation kring +y för +z
+                // mot +x.)
+                const pivotNDC = new THREE.Vector3();
+                const hitNDC = new THREE.Vector3();
+                const spinSign = (point) => {
+                    hitNDC.copy(point).project(camera);
+                    pivotNDC.copy(PIVOT).project(camera);
+                    const dx = hitNDC.x - pivotNDC.x;
+                    if (Math.abs(dx) < 1e-4) return 0;   // rakt över axeln
+                    return dx > 0 ? 1 : -1;
                 };
                 let downAt = null;
                 const onPointerDown = (ev) => { downAt = { x: ev.clientX, y: ev.clientY }; };
@@ -836,10 +854,11 @@
                     const moved = Math.hypot(ev.clientX - downAt.x, ev.clientY - downAt.y);
                     downAt = null;
                     if (moved > 7) return;   // kameradragning, inte klick
-                    const action = pickAction(ev);
+                    const hit = pickAction(ev);
+                    if (!hit) return;
                     const acts = actionsRef.current;
-                    if (action === 'knuff' && acts.knuffa) acts.knuffa();
-                    if (action === 'snurr' && acts.snurra) acts.snurra();
+                    if (hit.action === 'knuff' && acts.knuffa) acts.knuffa();
+                    if (hit.action === 'snurr' && acts.snurra) acts.snurra(spinSign(hit.point));
                 };
                 // Pekarmarkör över de klickbara delarna
                 let lastHover = 0;
@@ -945,11 +964,20 @@
 
             // Snurret ges kring den lodräta axeln — ingen extra lutning, så
             // lodlinjen från tyngdpunkten fortsätter gå genom stödpunkten.
-            const snurra = () => {
+            const snurra = (dir) => {
                 const ph = physRef.current;
                 if (ph.frozen) return;
+                const KICK = 9, MAX = 22;
+                if (typeof dir === 'number' && dir !== 0) {
+                    // Klick i scenen: riktningen kommer av VAR man puttar, så
+                    // putten alltid går in i skärmen. Puttar man mot ett
+                    // pågående snurr bromsas det i stället, som i verkligheten.
+                    ph.wPsi = Math.max(-MAX, Math.min(MAX, ph.wPsi + dir * KICK));
+                    return;
+                }
+                // Knappen Snurra: fyller på i den riktning bygget redan snurrar.
                 const dirSign = ph.wPsi !== 0 ? Math.sign(ph.wPsi) : (Math.random() < 0.5 ? -1 : 1);
-                ph.wPsi = dirSign * Math.min(22, Math.abs(ph.wPsi) + 9);
+                ph.wPsi = dirSign * Math.min(MAX, Math.abs(ph.wPsi) + KICK);
             };
 
             // Bär in knapparnas handlingar till 3D-scenens klickhantering:

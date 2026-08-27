@@ -233,8 +233,8 @@ $$
 
 ::: sampunkt "Villkoret för de två första"
 - Att addera eller subtrahera exponenter kräver **samma bas**.
-- $2^3 \cdot 5^3$ går alltså inte att slå ihop till en potens av 2 eller
-  5.
+- $2^3 \cdot 5^3$ går alltså inte att slå ihop till en potens av
+  2 eller 5.
 :::
 
 ::: sampunkt "Se upp med tecknet"

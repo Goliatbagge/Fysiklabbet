@@ -356,7 +356,7 @@
 
         // ── 3D-scenen ────────────────────────────────────────────
         // Scen-enhet: 1 = 1 cm. Bordet ligger i y = 0.
-        const BalansScene = ({ stateRef, physRef }) => {
+        const BalansScene = ({ stateRef, physRef, actionsRef }) => {
             const mountRef = useRef(null);
 
             useEffect(() => {
@@ -533,10 +533,12 @@
                     new THREE.CylinderGeometry(1.1, 1.1, 3.0, 28),
                     new THREE.MeshStandardMaterial({ map: corkTex, roughness: 0.9 }));
                 cork.position.y = 5.0;
+                cork.userData.action = 'knuff';       // klick på korken = knuff
                 assembly.add(cork);
                 const corkLid = new THREE.Mesh(new THREE.CylinderGeometry(1.08, 1.08, 0.06, 28),
                     new THREE.MeshStandardMaterial({ color: 0xc09858, roughness: 0.95 }));
                 corkLid.position.y = 6.52;
+                corkLid.userData.action = 'knuff';
                 assembly.add(corkLid);
 
                 // ── Gaffel: byggs längs +x (klorna vid x≈0, skaftet utåt) ──
@@ -594,6 +596,7 @@
                         const seg = new THREE.Mesh(new THREE.BoxGeometry(len + 0.2, 0.27, wz), steelMat);
                         seg.position.set(px + (len / 2) * Math.cos(ang), py + (len / 2) * Math.sin(ang), 0);
                         seg.rotation.z = ang;
+                        seg.userData.action = 'snurr';   // klick på skaftet = snurr
                         fork.add(seg);
                         px += len * Math.cos(ang);
                         py += len * Math.sin(ang);
@@ -602,6 +605,7 @@
                     const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.53, 0.53, 0.27, 18), steelMat);
                     tip.rotation.x = Math.PI / 2;
                     tip.position.set(px, py, 0);
+                    tip.userData.action = 'snurr';
                     fork.add(tip);
                     return fork;
                 };
@@ -809,6 +813,46 @@
                 };
                 animate();
 
+                // ── Klick i scenen: korken = knuff, gaffelskaften = snurr ──
+                // Ett klick skiljs från en kameradragning på att pekaren inte
+                // flyttat sig mer än några pixlar mellan ned- och uppsläpp.
+                const raycaster = new THREE.Raycaster();
+                const pointerNDC = new THREE.Vector2();
+                const pickAction = (ev) => {
+                    const rect = renderer.domElement.getBoundingClientRect();
+                    pointerNDC.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+                    pointerNDC.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+                    raycaster.setFromCamera(pointerNDC, camera);
+                    const hits = raycaster.intersectObject(assembly, true);
+                    for (const h of hits) {
+                        if (h.object.userData.action) return h.object.userData.action;
+                    }
+                    return null;
+                };
+                let downAt = null;
+                const onPointerDown = (ev) => { downAt = { x: ev.clientX, y: ev.clientY }; };
+                const onPointerUp = (ev) => {
+                    if (!downAt) return;
+                    const moved = Math.hypot(ev.clientX - downAt.x, ev.clientY - downAt.y);
+                    downAt = null;
+                    if (moved > 7) return;   // kameradragning, inte klick
+                    const action = pickAction(ev);
+                    const acts = actionsRef.current;
+                    if (action === 'knuff' && acts.knuffa) acts.knuffa();
+                    if (action === 'snurr' && acts.snurra) acts.snurra();
+                };
+                // Pekarmarkör över de klickbara delarna
+                let lastHover = 0;
+                const onPointerMove = (ev) => {
+                    const now2 = performance.now();
+                    if (now2 - lastHover < 90 || downAt) return;
+                    lastHover = now2;
+                    renderer.domElement.style.cursor = pickAction(ev) ? 'pointer' : '';
+                };
+                renderer.domElement.addEventListener('pointerdown', onPointerDown);
+                renderer.domElement.addEventListener('pointerup', onPointerUp);
+                renderer.domElement.addEventListener('pointermove', onPointerMove);
+
                 const onResize = () => {
                     const w = mount.clientWidth, hh = mount.clientHeight;
                     if (!w || !hh) return;
@@ -822,6 +866,9 @@
                 return () => {
                     cancelAnimationFrame(raf);
                     window.removeEventListener('resize', onResize);
+                    renderer.domElement.removeEventListener('pointerdown', onPointerDown);
+                    renderer.domElement.removeEventListener('pointerup', onPointerUp);
+                    renderer.domElement.removeEventListener('pointermove', onPointerMove);
                     ro.disconnect();
                     renderer.dispose();
                     mount.removeChild(renderer.domElement);
@@ -905,6 +952,11 @@
                 ph.wPsi = dirSign * Math.min(22, Math.abs(ph.wPsi) + 9);
             };
 
+            // Bär in knapparnas handlingar till 3D-scenens klickhantering:
+            // klick på korken gör en knuff, klick på ett gaffelskaft ett snurr.
+            const actionsRef = useRef({});
+            actionsRef.current = { knuffa, snurra };
+
             const reset = () => {
                 const ph = physRef.current;
                 ph.tbx = forksOn ? 0.09 : 0.02;
@@ -985,7 +1037,7 @@
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <div className="scene-stage">
-                                        <BalansScene stateRef={stateRef} physRef={physRef} />
+                                        <BalansScene stateRef={stateRef} physRef={physRef} actionsRef={actionsRef} />
                                         <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                                 title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                             {isFullscreen ? (
@@ -998,7 +1050,7 @@
                                                 </svg>
                                             )}
                                         </button>
-                                        <div className="scene-hint">Dra för att rotera · scrolla för att zooma</div>
+                                        <div className="scene-hint">Klicka på korken (knuff) eller ett gaffelskaft (snurr) · dra för att rotera</div>
                                     </div>
 
                                     <div className="scene-toggles">

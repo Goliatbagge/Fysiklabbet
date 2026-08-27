@@ -3874,7 +3874,7 @@
    * 64 skrivet som en potens med basen 4. Man PROVAR sig fram: antalet
    * fyror som multipliceras blir exponenten. */
   function layoutPotensskriv(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, rx0, rx1, r;
     function tanke(yb, rader, dyn) {
       T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
     }
@@ -3888,8 +3888,12 @@
     T.tanke(b1);
     y = 150;
     T.str('Provar', padL, y, null, 0.62);
+    /* räkneraderna dras in under rubriken: blåringen kring 4·4 sticker ut
+     * ~0,18 F till vänster om texten, och vid padL hamnade den kanten i
+     * vänsterpilens band (se pilzonen i filhuvudet) */
+    var xr = padL + 18;
     y += 1.5 * F;
-    xx = T.str('4·4=16', padL, y);
+    xx = T.str('4·4=16', xr, y);
     T.str('  för litet', xx + 0.20 * F, y, null, 0.62);
     T.stepEnd();
 
@@ -3898,7 +3902,18 @@
       [['Jag provar med tre fyror.']]
     ]);
     y += 1.9 * F;
-    xx = T.str('4·4·4=16·4', padL, y);
+    rx0 = xr;
+    xx = T.str('4·4', xr, y);
+    rx1 = xx;
+    xx = T.str('·4=', xx, y);
+    T.stepEnd();
+
+    /* de två första fyrorna är produkten vi redan räknat ut — ringa in
+     * dem innan 16 skrivs, så att det syns var 16:an kommer ifrån */
+    r = T.ring(rx0, rx1, y);
+    T.stepEnd();
+    T.fade(r);
+    xx = T.str('16·4', xx, y);
     T.stepEnd();
 
     xx = T.str('=64', xx, y);
@@ -4052,17 +4067,19 @@
       T.vaggOp('-5', xw, y);
       T.stepEnd();
       y += 2.0 * F;
-      T.str('m=2', padL + 30, y);
-      T.stepEnd();
     } else {
+      /* båda led: operationen skrivs ut i BÅDA leden med blåpennan innan
+       * ekvationen löses vidare — m+5-5 = 7-5 */
       y += 2.0 * F;
-      xx = T.str('m=7', padL + 30, y);
+      xx = T.str('m+5', padL + 30, y);
       xx = T.str('-5', xx, y, BLUE);
+      xx = T.str('=7', xx, y);
+      T.str('-5', xx, y, BLUE);
       T.stepEnd();
-
-      T.str('=2', xx, y);
-      T.stepEnd();
+      y += 2.0 * F;
     }
+    T.str('m=2', padL + 30, y);
+    T.stepEnd();
 
     y += 1.9 * F;
     xe = T.str('Svar: m=2', padL, y);
@@ -10559,8 +10576,8 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Minus framför en negativ']],
-      [['siffra blir plus.']]
+      [['Minus framför ett negativt']],
+      [['tal blir plus.']]
     ], 1.05);
     xx = T.str('=', xx, y);
     xx = T.fracH('3+1', '2+6', xx, y);
@@ -10970,8 +10987,8 @@
 
     /* ---- c) f(3a) ---- */
     tanke(y, [
-      [['Det behöver inte vara en']],
-      [['siffra. Även 3a sätts in på']],
+      [['Det behöver inte vara ett']],
+      [['tal. Även 3a sätts in på']],
       [['x-ets plats, precis likadant.']]
     ], 0.5);
     y += 4.5 * F;
@@ -22519,7 +22536,7 @@
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
       [['1,4 kW på varje kvadratmeter —']],
       [['det är solarkonstanten, och']],
-      [['just den siffran står i']],
+      [['just det värdet står i']],
       [['tabellen. Stämmer!']]
     ]));
     T.underline(T.str('Svar: 1,4 kW/m^2', padL, y), y);

@@ -10,7 +10,7 @@ section: '1.5'
 # Symbolhanterande hjälpmedel
 
 En räknare som inte bara kan hantera numeriska beräkningar (beräkningar med
-siffror), utan också kan hantera algebraiska uttryck (bokstavsuttryck),
+tal), utan också kan hantera algebraiska uttryck (bokstavsuttryck),
 kallas **symbolhanterande hjälpmedel**. Geogebra är ett exempel på ett
 sådant hjälpmedel.
 
@@ -152,7 +152,7 @@ eller genom att skriva "infinity".
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Vad hjälpmedlet gör"
-- Ett **symbolhanterande hjälpmedel** räknar inte bara med siffror utan också med bokstavsuttryck.
+- Ett **symbolhanterande hjälpmedel** räknar inte bara med tal utan också med bokstavsuttryck.
 - Geogebra är ett sådant verktyg och klarar förenkling, faktorisering, ekvationer och gränsvärden.
 :::
 

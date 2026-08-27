@@ -232,7 +232,7 @@
                'upp exakt den sträcka i figuren som talet motsvarar.',
             3: 'Sätt <em>v</em> = <em>u</em> med knappen — de två färgade sträckorna blir lika ' +
                'långa, och formeln blir dubbla vinkeln. Cosinusformeln kan du kontrollera med ' +
-               'siffrorna direkt.'
+               'talen direkt.'
         };
         var stepBtns = [];
         STEPS.forEach(function (s) {
@@ -519,8 +519,8 @@
                 } else {
                     var sumSc = sinU + sinV;
                     var intro = state.guess === 'nej'
-                        ? 'Rätt tänkt! Se varför på siffrorna:'
-                        : 'Nästan alla tror det till en början — men se på siffrorna:';
+                        ? 'Rätt tänkt! Se varför på talen:'
+                        : 'Nästan alla tror det till en början — men se på talen:';
                     var html = intro + '<br>' +
                         'sin ' + fmt(uD, 0) + '° + sin ' + fmt(vD, 0) + '° = ' + fmt(sinU, 3) + ' + ' + fmt(sinV, 3) + ' = ' + fmt(sumSc, 3) + '<br>' +
                         'sin(' + fmt(uD, 0) + '° + ' + fmt(vD, 0) + '°) = sin ' + fmt(sumD, 0) + '° = ' + fmt(sinSum, 3) + '<br>' +

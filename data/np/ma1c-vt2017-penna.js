@@ -1925,7 +1925,7 @@
       [['Sara använder i stället två']],
       [['samband som gäller i varje']],
       [['triangel, med bokstäver i']],
-      [['stället för siffror.']]
+      [['stället för tal.']]
     ]);
     y += 2.8 * F;
     T.str('Sara: a+b+x=180°', padL, y);

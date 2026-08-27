@@ -883,7 +883,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 },
                 {
                     rubrik: 'Granska Saras lösning',
-                    varfor: 'Sara räknar aldrig med några siffror — hon arbetar med bokstäverna $a$, $b$, ' +
+                    varfor: 'Sara räknar aldrig med några tal — hon arbetar med bokstäverna $a$, $b$, ' +
                         '$x$ och $c$ hela vägen. Då gäller slutsatsen för *vilka* vinklar som helst.',
                     text: 'Sara använder två allmänt giltiga samband:\n\n' +
                         '$$a + b + x = 180\\degree \\quad (\\text{vinkelsumman i triangeln})$$\n' +

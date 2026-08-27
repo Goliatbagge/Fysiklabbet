@@ -50,7 +50,7 @@ problem.
 - **gränsvärde saknas**: när uttrycket går mot olika värden underifrån och
   ovanifrån finns inget gemensamt gränsvärde.
 - **symbolhanterande hjälpmedel**: en räknare eller programvara (t.ex.
-  Geogebra) som förutom siffror även kan hantera algebraiska
+  Geogebra) som förutom tal även kan hantera algebraiska
   bokstavsuttryck.
 
 ## Formler

@@ -173,7 +173,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             figur: null,
             steg: [
                 {
-                    rubrik: 'Förenkla siffrorna för sig',
+                    rubrik: 'Förenkla talen för sig',
                     varfor: 'Ett bråk med flera faktorer kan förenklas del för del: ' +
                         'först talen, sedan potenserna. Det gör beräkningen överskådlig.',
                     text: '$$\\dfrac{3}{12} = \\dfrac{1}{4}$$',

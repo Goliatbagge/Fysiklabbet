@@ -529,7 +529,7 @@ const NYHETER_ALL = [
       { type: 'p', html: 'Mellan den 26 mars och den 5 april 2025 riktades tre instrument mot stjärnan samtidigt. NASA:s IXPE, som är byggt för att mäta åt vilket håll röntgenstrålning svänger, samlade 499,5&nbsp;ks — knappt 140&nbsp;timmars effektiv mättid. NICER ombord på rymdstationen höll reda på stjärnans rotation, och Murriyang, den 64&nbsp;m breda radioskålen i Parkes i Australien, lyssnade i bandet 2,5–4,0&nbsp;GHz. Det var första gången någon mätt polarisationen hos en magnetar i radio och röntgen samtidigt.' },
       { type: 'p', html: 'Strålningen visade sig vara påfallande välordnad. Över hela bandet 2–8&nbsp;keV var 46&nbsp;±&nbsp;4&nbsp;% av röntgenljuset polariserat åt ett och samma håll, och i det mjukaste bandet steg andelen till omkring 60&nbsp;%. Under vissa delar av rotationen nådde den 74&nbsp;±&nbsp;11&nbsp;%. Det är ungefär två och en halv gånger mer än vad andra magnetarer brukar visa.' },
 
-      { type: 'h2', text: 'Varför siffran är svår att förklara bort' },
+      { type: 'h2', text: 'Varför mätvärdet är svårt att förklara bort' },
       { type: 'p', html: 'Höga värden är i sig inget bevis. Det avgörande var vad radioteleskopet bidrog med. Ur hur radiovågornas svängningsriktning vrider sig under ett varv går stjärnans geometri att räkna fram, och den visade sig ovanlig: magnetaxeln lutar bara ett par grader mot rotationsaxeln, och vi tittar nästan rakt ner i den ena magnetpolen.' },
       { type: 'p', html: 'Just den geometrin gör mätningen besvärlig att förklara. Tittar man rakt ner i en magnetpol ser man en yta där fältet pekar åt alla håll runt mitten. Ljus från olika delar av ytan skulle då svänga åt olika håll och till stor del ta ut varandra, så att den sammanlagda polarisationen blev låg — i praktiken nära noll under delar av varvet. I stället var den hög hela varvet igenom.' },
       { type: 'p', html: 'Dubbelbrytning i vakuum löser knuten. Är tomrummet runt stjärnan optiskt aktivt följer varje ljusstråles svängningsriktning det lokala magnetfältet ut genom magnetosfären, i stället för att ligga kvar som den var vid ytan. Först långt ute, där fältet tunnats ut och blivit i det närmaste enhetligt över hela synfältet, släpper kopplingen. Ljus som lämnade ytan åt vilket håll som helst når därför fram med sina svängningar inbördes uppradade. Sorteringen sker alltså på vägen, inte vid utsändningen.' },
@@ -731,7 +731,7 @@ const NYHETER_ALL = [
       { type: 'p', html: 'Frågan som har hängt i luften i decennier är enkel att ställa och svår att besvara: <em>var</em> i vår galax får partiklarna den energin? Objekt som klarar av det kallas PeVatroner, och de är sällsynta. Nu har ett lag lett från Hiroshima University pekat ut en av dem — och, viktigare, visat vilken sorts partikel den accelererar.' },
 
       { type: 'h2', text: 'Ett knä i spektrumet' },
-      { type: 'p', html: 'Räknar man kosmiska partiklar och sorterar dem efter energi får man en kurva som faller stadigt — tills den nära 10<sup>15</sup>&nbsp;eV plötsligt viker av brantare. Böjen kallas knäet, och den brukar tolkas som att galaxens egna acceleratorer tar slut där: kraftigare partiklar än så antas komma utifrån. PeV är alltså inte en godtycklig siffra utan Vintergatans egen övre gräns.' },
+      { type: 'p', html: 'Räknar man kosmiska partiklar och sorterar dem efter energi får man en kurva som faller stadigt — tills den nära 10<sup>15</sup>&nbsp;eV plötsligt viker av brantare. Böjen kallas knäet, och den brukar tolkas som att galaxens egna acceleratorer tar slut där: kraftigare partiklar än så antas komma utifrån. PeV är alltså inte ett godtyckligt tal utan Vintergatans egen övre gräns.' },
       { type: 'p', html: 'Den kinesiska anläggningen LHAASO, ett detektorfält som täcker en kvadratkilometer på 4&nbsp;400&nbsp;meters höjd i Sichuan, har rapporterat 43 källor som sänder ut gammastrålning i det så kallade sub-PeV-området. Var och en av dem är en kandidat till att vara en PeVatron. En av dem heter LHAASO J1912+1014u och ligger i stjärnbilden Örnen, inte långt från Altair. Den är utsträckt: mer än en grad tvärs över, alltså dubbelt så bred som fullmånen på himlen.' },
 
       { type: 'h2', text: 'Två misstänkta som lämnar samma spår' },
@@ -978,7 +978,7 @@ const NYHETER_ALL = [
 
       { type: 'h2', text: 'Varför formen avgör kärnans öde' },
       { type: 'p', html: 'Hos de allra tyngsta kärnorna hänger formen ihop med hur väl de står emot spontan fission — att helt enkelt falla isär i två delar av sig själva. Där ligger också nyckeln till en av kärnfysikens öppna frågor: hur långt kan det periodiska systemet sträcka sig? Att förutsäga var eventuella långlivade supertunga grundämnen finns kräver modeller av kärnans inre, och modeller måste stämmas av mot verkligheten.' },
-      { type: 'p', html: 'Två sådana modeller prövades mot de nya siffrorna. Den ena, byggd på Hartree–Fock–Bogoljubov-metoden, hamnade inom fem procent av båda de uppmätta värdena. Den andra överskattade det magnetiska momentet med ungefär 25&nbsp;procent och kvadrupolmomentet med omkring 6&nbsp;procent. Skillnaden är precis den sorts besked teoretiker behöver för att veta vilken beskrivning som bär.' },
+      { type: 'p', html: 'Två sådana modeller prövades mot de nya mätvärdena. Den ena, byggd på Hartree–Fock–Bogoljubov-metoden, hamnade inom fem procent av båda de uppmätta värdena. Den andra överskattade det magnetiska momentet med ungefär 25&nbsp;procent och kvadrupolmomentet med omkring 6&nbsp;procent. Skillnaden är precis den sorts besked teoretiker behöver för att veta vilken beskrivning som bär.' },
       { type: 'p', html: 'Fermium-255 blir därmed en referenspunkt att mäta mot i fortsättningen. Nästa steg väntar redan: en uppgraderad apparatur vid GSI i Darmstadt och en ny anläggningsdel vid acceleratorn GANIL i Frankrike ska göra samma sorts mätning möjlig på kärnor som är ännu tyngre — och ännu mer kortlivade.' },
 
       { type: 'fact', title: 'Visste du?', items: [
@@ -1164,7 +1164,7 @@ const NYHETER_ALL = [
         { label: "Fysik nivå 2 — 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html#fy2-4.1" }
       ],
       fragor: [
-        "Samma förmörkelse beskrivs på olika håll som 81 procent och som 86 procent. Båda siffrorna är riktigt uträknade. Vad säger det om hur man bör läsa en procentsiffra i en nyhetstext, och vilken av de två är mest relevant för hur ljust det blir ute?",
+        "Samma förmörkelse beskrivs på olika håll som 81 procent och som 86 procent. Båda talen är riktigt uträknade. Vad säger det om hur man bör läsa en procentuppgift i en nyhetstext, och vilken av de två är mest relevant för hur ljust det blir ute?",
         "Månen är ungefär 400 gånger mindre än solen och råkar samtidigt stå ungefär 400 gånger närmare. Vore det ett problem för vetenskapen om den slumpen inte fanns — alltså skulle vi veta mindre om solen då, eller bara se mindre?",
         "Ögat klarar inte av att avgöra när solen är farlig att titta på, eftersom både obehaget och pupillreflexen styrs av hur ljust det känns. Vilka andra situationer känner ni till där en kroppslig varningssignal saknas just när risken är som störst — och hur hanterar man det?"
       ]
@@ -1187,7 +1187,7 @@ const NYHETER_ALL = [
       { type: "p", html: "Att det inte blir förmörkelse vid varje nymåne beror på att månens bana lutar drygt fem grader mot jordens bana runt solen. För det mesta passerar månen alltså strax ovanför eller nedanför solskivan sett från oss. Bara när nymånen infaller nära en av de två punkter där banorna korsas hamnar de tre kropparna på tillräckligt rak linje." },
 
       { type: "h2", text: "81 procent eller 86 — båda stämmer" },
-      { type: "p", html: "Olika källor uppger olika siffror för samma förmörkelse, och de har alla rätt. Det ena måttet är hur stor <em>andel av solens yta</em> som är dold; det andra är hur långt in över solskivan månens kant har trängt, mätt <em>längs diametern</em>. I Malmö är det första 83,3&nbsp;procent och det andra 86,2&nbsp;procent. Skillnaden är ren geometri: den kvarvarande ljusa skäran är tunn men lång, och en tunn skära rymmer mer yta än vad ögonmåttet längs diametern antyder. När något beskrivs i procent är det alltså värt att fråga: procent av vad?" },
+      { type: "p", html: "Olika källor uppger olika värden för samma förmörkelse, och de har alla rätt. Det ena måttet är hur stor <em>andel av solens yta</em> som är dold; det andra är hur långt in över solskivan månens kant har trängt, mätt <em>längs diametern</em>. I Malmö är det första 83,3&nbsp;procent och det andra 86,2&nbsp;procent. Skillnaden är ren geometri: den kvarvarande ljusa skäran är tunn men lång, och en tunn skära rymmer mer yta än vad ögonmåttet längs diametern antyder. När något beskrivs i procent är det alltså värt att fråga: procent av vad?" },
 
       { type: "h2", text: "Fyra femtedelar borta — och ändå ljust" },
       { type: "p", html: "Den som inte vet om förmörkelsen kommer med stor sannolikhet att missa den. Direkt solljus ger omkring 100&nbsp;000&nbsp;lux; med 81&nbsp;procent av solen borta återstår ungefär 19&nbsp;000&nbsp;lux, vilket fortfarande är en ljus mulen dag. Ögat mäter inte ljus linjärt utan ungefär logaritmiskt — samma egenskap som låter oss se både i månsken och i middagssol — så ett bortfall på fyra femtedelar upplevs som en aning grådaskigt, inte som skymning. Först över ungefär 99&nbsp;procent börjar det kännas som att kvällen kommit på fel tid." },
@@ -1202,7 +1202,7 @@ const NYHETER_ALL = [
 
       { type: "h2", text: "Samma natt faller perseiderna" },
       { type: "p", html: "Att meteorsvärmen perseiderna kulminerar natten mellan den 12 och 13 augusti, precis när himlen är helt månlös, är ingen slump. En solförmörkelse kan bara inträffa vid nymåne — månen måste stå mellan jorden och solen — och vid nymåne finns det inget månljus kvar att blekna ut de svagaste meteorerna med. Årets bästa förmörkelse och årets bästa meteornatt hänger alltså ihop." },
-      { type: "p", html: "Perseiderna är stoft som kometen 109P/Swift–Tuttle lämnat efter sig längs sin bana. Kornen är oftast inte större än ett sandkorn, men de möter jordens atmosfär i omkring 59&nbsp;km/s och glöder upp på 80–100&nbsp;kilometers höjd. Under en riktigt mörk himmel kan det bli 60–100 meteorer i timmen efter midnatt. Den siffran förutsätter dock idealiska förhållanden — de högsta talen som brukar citeras gäller en helt mörk himmel med svärmens utstrålningspunkt rakt ovanför, vilket nästan aldrig är fallet. Räkna hellre med några tiotal i timmen, och med att de blir fler ju närmare gryningen man orkar hålla ut." },
+      { type: "p", html: "Perseiderna är stoft som kometen 109P/Swift–Tuttle lämnat efter sig längs sin bana. Kornen är oftast inte större än ett sandkorn, men de möter jordens atmosfär i omkring 59&nbsp;km/s och glöder upp på 80–100&nbsp;kilometers höjd. Under en riktigt mörk himmel kan det bli 60–100 meteorer i timmen efter midnatt. Det talet förutsätter dock idealiska förhållanden — de högsta värdena som brukar citeras gäller en helt mörk himmel med svärmens utstrålningspunkt rakt ovanför, vilket nästan aldrig är fallet. Räkna hellre med några tiotal i timmen, och med att de blir fler ju närmare gryningen man orkar hålla ut." },
 
       { type: "fact", title: "Solförmörkelsen 12 augusti 2026", items: [
         "Partiell i hela Sverige: 80–83&nbsp;procent av solens yta skyms, mest i Skåne.",
@@ -1480,7 +1480,7 @@ const NYHETER_ALL = [
       { type: "quote", html: "”Vår uppgift var att utveckla de optiska gränssnitten mellan lasermodulerna och vakuumsystemet — de som krävs för att kyla och styra atomerna.”", cite: "André Wenzlawski, Johannes Gutenberg-universitetet Mainz" },
       { type: "quote", html: "”Den stabiliteten är avgörande för att behålla den exakta kontrollen över atomerna även under de extrema mekaniska påfrestningarna vid en raketuppskjutning och vid växlande temperaturer.”", cite: "André Wenzlawski, Johannes Gutenberg-universitetet Mainz" },
       { type: "p", html: "Kylningen sker i steg. Laserljuset bromsar först atomerna ner till 43&nbsp;miljondels kelvin för 26&nbsp;miljoner kaliumatomer och 10&nbsp;miljondels kelvin för 940&nbsp;miljoner rubidiumatomer. Sedan tar magnetfällan över, och under 1,7&nbsp;sekunder kokas de hetaste rubidiumatomerna bort med mikrovågor — samma princip som när kaffet i muggen svalnar av att ångan lämnar den. Kaliumatomerna kyls inte alls direkt; de kolliderar bara med rubidiumet och följer med nedåt i temperatur. Metoden kallas sympatisk kylning." },
-      { type: "p", html: "Resultatet är upp till 250&nbsp;000 atomer i ett rent rubidiumkondensat, eller ungefär 20&nbsp;000 atomer i vardera kondensatet när blandningen ställs in symmetriskt. Hela cykeln, från tom kammare till färdig blandning, tar 2,3&nbsp;sekunder. Det är den siffran som är nyheten: antalet atomer per beredningscykel — flödet — är omkring tio gånger högre än i andra kompakta och flyttbara uppställningar." },
+      { type: "p", html: "Resultatet är upp till 250&nbsp;000 atomer i ett rent rubidiumkondensat, eller ungefär 20&nbsp;000 atomer i vardera kondensatet när blandningen ställs in symmetriskt. Hela cykeln, från tom kammare till färdig blandning, tar 2,3&nbsp;sekunder. Det är det värdet som är nyheten: antalet atomer per beredningscykel — flödet — är omkring tio gånger högre än i andra kompakta och flyttbara uppställningar." },
 
       { type: "h2", text: "Därför två sorters atomer" },
       { type: "p", html: "Att alls bry sig om att göra två kondensat samtidigt har ett bestämt skäl. Ett föremåls tyngd är proportionell mot dess massa, $F_\\mathrm{G} = m \\cdot g$, medan accelerationen är kraften delad med massan, $a = \\dfrac{F}{m}$. Sätts det första in i det andra försvinner massan, och kvar blir bara $a = g$: allt faller lika fort, oavsett vad det väger och vad det är gjort av." },
@@ -1665,7 +1665,7 @@ const NYHETER_ALL = [
         "Deuterium finns naturligt i allt vatten: ungefär en av 6&nbsp;400 väteatomer i havet är deuterium. Tungt vatten, där båda väteatomerna är deuterium, är omkring 11&nbsp;% tyngre än vanligt vatten — en isbit av tungt vatten sjunker i ett glas vanligt vatten.",
         "Att palladium suger i sig väte upptäcktes av kemisten Thomas Graham 1866. Metallen kan ta upp hundratals gånger sin egen volym vätgas, och används än i dag som filter för att rena väte: vätet slinker igenom gittret, alla andra gaser stannar utanför.",
         "Solens kärna håller omkring 15&nbsp;miljoner grader, vilket motsvarar en typisk partikelenergi på drygt 1&nbsp;keV — lägre än energierna i det här experimentet, och långt under coulombbarriären. Utan tunneleffekten hade solen aldrig börjat lysa.",
-        "Neutronen från deuterium–deuterium-fusion får alltid 2,45&nbsp;MeV i rörelseenergi. Just den siffran fungerar som ett fingeravtryck: mäter man neutroner med precis den energin vet man vilken reaktion som ägt rum."
+        "Neutronen från deuterium–deuterium-fusion får alltid 2,45&nbsp;MeV i rörelseenergi. Just det värdet fungerar som ett fingeravtryck: mäter man neutroner med precis den energin vet man vilken reaktion som ägt rum."
       ]}
     ]
   },
@@ -1748,7 +1748,7 @@ const NYHETER_ALL = [
     id: "2026-08-02-viskositetens-ovre-grans",
     date: "2026-08-02",
     title: "Berg rinner — men bara nästan. Nu har en geofysiker räknat ut var gränsen mellan flytande och stelt går",
-    deck: "Vatten rinner lätt, honung trögt, glaciärer knappt märkbart. Men någonstans slutar ”trögflytande” att betyda något alls, och materialet är helt enkelt stelt. Efter att ha stått svarslös inför sina egna studenter har Masaki Yoshida vid Ritsumeikan University i Japan satt en siffra på var den gränsen går.",
+    deck: "Vatten rinner lätt, honung trögt, glaciärer knappt märkbart. Men någonstans slutar ”trögflytande” att betyda något alls, och materialet är helt enkelt stelt. Efter att ha stått svarslös inför sina egna studenter har Masaki Yoshida vid Ritsumeikan University i Japan satt ett värde på var den gränsen går.",
     category: "Geofysik",
     readingTime: "5 min",
     image: "nyheter/bilder/2026-08-02-viskositetens-ovre-grans.jpg",
@@ -1791,7 +1791,7 @@ const NYHETER_ALL = [
 
       { type: "h2", text: "Formeln gav ett svar med sjuttio nollor" },
       { type: "p", html: "I laboratorier går det att klämma och vrida på bergartsprover och mäta hur de deformeras. Ur sådana försök får geologer fram samband som beskriver hur trögt ett visst mineral flyter vid ett visst tryck och en viss temperatur. Sambanden är extremt känsliga för just temperaturen: kyler man ner materialet skjuter viskositeten i höjden." },
-      { type: "p", html: "Problemet uppstår när man använder sambanden vid jordytan, där berget är svalt. Då spottar formlerna ur sig svindlande siffror — Physics World anger storleksordningen 10<sup>70</sup>&nbsp;Pa·s för de tektoniska plattorna. Ett material med den viskositeten skulle aldrig hinna röra sig ur fläcken, inte under universums hela livstid. Ändå ser vi plattorna böja sig och dyka ner i manteln vid subduktionszonerna, år efter år." },
+      { type: "p", html: "Problemet uppstår när man använder sambanden vid jordytan, där berget är svalt. Då spottar formlerna ur sig svindlande värden — Physics World anger storleksordningen 10<sup>70</sup>&nbsp;Pa·s för de tektoniska plattorna. Ett material med den viskositeten skulle aldrig hinna röra sig ur fläcken, inte under universums hela livstid. Ändå ser vi plattorna böja sig och dyka ner i manteln vid subduktionszonerna, år efter år." },
       { type: "quote", html: "”Jag insåg att jag inte kunde förklara för mina studenter varför plattor med så hög viskositet böjs och sjunker ner i manteln.”", cite: "Masaki Yoshida, Ritsumeikan University, i Physics World" },
 
       { type: "h2", text: "Tre tidsskalor, ett svar" },
@@ -1800,7 +1800,7 @@ const NYHETER_ALL = [
       { type: "p", html: "Sedan laboratorieförsöken, som deformerar bergarter under timmar till år. Yoshida gick igenom deformationssambanden för de mineral som bygger upp jordens inre — olivin, klinopyroxen, diopsid, anortit och kvarts — vid realistiska tryck och temperaturer. Och till sist datorsimuleringar av mantelkonvektion och plattrörelser över miljontals år. De spåren pekade mot samma tak: 10<sup>30±2</sup>&nbsp;Pa·s." },
 
       { type: "h2", text: "Varför gränsen ligger just där" },
-      { type: "p", html: "Bakom siffran ligger en ganska enkel tanke. Ett material som både kan fjädra tillbaka som ett gummiband och sakta flyta som sirap har en karakteristisk tid, Maxwelltiden, som säger hur länge man måste vänta innan flytandet tar över från fjädrandet. Den får man genom att dividera viskositeten med materialets styvhet." },
+      { type: "p", html: "Bakom värdet ligger en ganska enkel tanke. Ett material som både kan fjädra tillbaka som ett gummiband och sakta flyta som sirap har en karakteristisk tid, Maxwelltiden, som säger hur länge man måste vänta innan flytandet tar över från fjädrandet. Den får man genom att dividera viskositeten med materialets styvhet." },
       { type: "p", html: "För bergarter är styvheten omkring 10<sup>11</sup>&nbsp;Pa. Sätter man in en viskositet på 10<sup>30</sup>&nbsp;Pa·s hamnar Maxwelltiden på storleksordningen 10<sup>19</sup>&nbsp;sekunder — hundratals miljarder år, alltså mer än femtio gånger jordens ålder på 4,5&nbsp;miljarder år. Ett sådant material hinner aldrig flyta märkbart, hur länge planeten än får stå. Den samlade deformationen blir försumbar, och då är ”trögflytande vätska” helt enkelt fel beskrivning: kroppen är stel." },
       { type: "quote", html: "”Det föreslagna övre viskositetsintervallet är ett tidsskaleberoende kriterium, ovanför vilket ett material beter sig som en i praktiken stel kropp i stället för som ett deformerbart, trögflytande kontinuum.”", cite: "Masaki Yoshida, ur pressmaterialet till studien" },
 
@@ -1842,7 +1842,7 @@ const NYHETER_ALL = [
         { label: "Fysik nivå 2 · mätnoggrannhet och systematiska fel" }
       ],
       fragor: [
-        "Galaxen har ingen skarp kant — ljuset bara tunnas ut. Ändå anger forskarna en diameter. Vad är det egentligen de har mätt, och vad måste man komma överens om innan en sådan siffra betyder något?",
+        "Galaxen har ingen skarp kant — ljuset bara tunnas ut. Ändå anger forskarna en diameter. Vad är det egentligen de har mätt, och vad måste man komma överens om innan ett sådant värde betyder något?",
         "Ju längre man exponerar, desto svagare ljus syns — och desto längre ut verkar galaxen sträcka sig. Betyder det att galaxen växer när vi tittar bättre, eller att vår mätning gör det? Vad säger det om skillnaden mellan ett föremål och en mätning av det?",
         "Forskarna räknade bort ljuset från över 250 förgrundsstjärnor innan de litade på resultatet. Vad skulle hända med den uppmätta kanten om de räknade bort för mycket? För lite? Vilken sorts fel är det — slumpmässigt eller systematiskt?"
       ]
@@ -1876,7 +1876,7 @@ const NYHETER_ALL = [
         "En parsec är ungefär 3,26&nbsp;ljusår och en kiloparsec 1&nbsp;000 parsec, alltså drygt 3&nbsp;260&nbsp;ljusår. IC 1101:s 520&nbsp;kiloparsec motsvarar därmed cirka 1,7&nbsp;miljoner ljusår.",
         "Ljuset behöver 1,7&nbsp;miljoner år på sig för att ta sig tvärs över IC 1101. Samma resa rakt genom Vintergatan klaras av på omkring 100&nbsp;000 år.",
         "Vissa radiogalaxer sprutar ut jetstrålar och lober som sträcker sig över mer än tio miljoner ljusår och är alltså vidare än IC 1101 — men de består av utströmmande plasma, inte av stjärnor. Bland galaxernas stjärnkroppar är IC 1101 rekordhållaren.",
-        "Ytljusstyrka mäts i magnituder per kvadratbågsekund. Skalan är omvänd: ju högre siffra, desto svagare ljus — och fem steg uppåt motsvarar hundra gånger svagare sken."
+        "Ytljusstyrka mäts i magnituder per kvadratbågsekund. Skalan är omvänd: ju högre tal, desto svagare ljus — och fem steg uppåt motsvarar hundra gånger svagare sken."
       ]}
     ]
   },
@@ -4103,14 +4103,14 @@ const NYHETER_ALL = [
     ],
     research: null,
     body: [
-      { type: "p", html: "Standardmodellen är fysikens bästa karta över materiens minsta byggstenar och de krafter som binder dem samman. Den siffra man oftast får höra är <strong>17</strong>: tolv materiepartiklar (elektron, myon, tau, tre sorters neutriner och sex kvarkar), fyra kraftbärare (foton, W, Z och gluon) — och så Higgspartikeln på toppen." },
+      { type: "p", html: "Standardmodellen är fysikens bästa karta över materiens minsta byggstenar och de krafter som binder dem samman. Det tal man oftast får höra är <strong>17</strong>: tolv materiepartiklar (elektron, myon, tau, tre sorters neutriner och sex kvarkar), fyra kraftbärare (foton, W, Z och gluon) — och så Higgspartikeln på toppen." },
       { type: "h2", text: "Materia och krafter" },
       { type: "p", html: "De tolv materiepartiklarna kallas <em>fermioner</em>. Vardagsmaterien är egentligen ganska enkel: protoner och neutroner är byggda av upp- och nedkvarkar, och runt atomkärnan kretsar elektroner. Resten — myoner, tau och de tyngre kvarkarna — är instabila kusiner som mest dyker upp i partikelacceleratorer och i kosmisk strålning. Kraftbärarna kallas <em>bosoner</em>: fotonen förmedlar elektromagnetismen, gluonen den starka kärnkraften, och W och Z den svaga kraften. Higgspartikeln är speciell — det är växelverkan med Higgsfältet som ger de övriga partiklarna deras massa." },
       { type: "h2", text: "Men sen blir det krångligt" },
       { type: "p", html: "Räkneövningen ser enkel ut, men den skenar snabbt iväg. För varje partikel finns en antipartikel — vips är vi uppe i 30. Gluonen visar sig dessutom vara inte en utan åtta, var och en med sin egen kombination av ”färgladdning” (den starka kraftens motsvarighet till elektrisk laddning) — 37. Varje kvark finns i sin tur i tre färger — 61. Räknar man även in att partiklar kan vara vänster- eller högerhänta, och kraftbärarnas olika polarisationer, landar man på 118." },
       { type: "p", html: "Och vill man vara riktigt petig och räkna kvantfältens ”frihetsgrader” — för i grunden är partiklar bara små krusningar i underliggande fält som fyller hela rymden — spottar matematiken ur sig det underbart absurda svaret <strong>995,5</strong>. Ja, en halv. Eller som essäns författare Natalie Wolchover sammanfattar det hela: kvantfältteori är ”obegripligt svårt”." },
       { type: "h2", text: "Vem bryr sig om exakt antal?" },
-      { type: "p", html: "Poängen är inte att fastna vid en siffra, utan att se hur djupt naturens skenbara enkelhet vilar på något betydligt mer mångbottnat. Frågan ”hur många?” tvingar fram följdfrågan ”vad menar vi egentligen med <em>en partikel</em>?” — och just där, i glappet mellan vår vardagsbild av små kulor och kvantfältteorins verklighet, börjar den riktigt intressanta fysiken." },
+      { type: "p", html: "Poängen är inte att fastna vid ett tal, utan att se hur djupt naturens skenbara enkelhet vilar på något betydligt mer mångbottnat. Frågan ”hur många?” tvingar fram följdfrågan ”vad menar vi egentligen med <em>en partikel</em>?” — och just där, i glappet mellan vår vardagsbild av små kulor och kvantfältteorins verklighet, börjar den riktigt intressanta fysiken." },
       { type: "fact", title: "Standardmodellen i korthet", items: [
         "12 materiepartiklar (fermioner) + 4 kraftbärare (bosoner) + Higgs = 17.",
         "Higgspartikeln, som ger de andra partiklarna deras massa, bekräftades vid CERN 2012.",
@@ -4125,7 +4125,7 @@ const NYHETER_ALL = [
     id: "2026-06-14-mork-energi",
     date: "2026-06-14",
     title: "Mörk energi överlever attacken — universum fortsätter accelerera",
-    deck: "Förra året hävdade en uppmärksammad studie att den mörka energin kanske var en synvilla. Nu har två Nobelpristagare granskat siffrorna — och hittat två rejäla räknefel.",
+    deck: "Förra året hävdade en uppmärksammad studie att den mörka energin kanske var en synvilla. Nu har två Nobelpristagare granskat beräkningarna — och hittat två rejäla räknefel.",
     category: "Kosmologi",
     readingTime: "6 min",
     image: "nyheter/bilder/2026-06-14-mork-energi.jpg",

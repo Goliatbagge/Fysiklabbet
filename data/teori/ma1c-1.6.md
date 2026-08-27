@@ -46,17 +46,17 @@ En
 För att räkna med potenser ska vi använda **potenslagarna**.
 
 ::: formel "Potenslagarna"
-| Potenslagar (generellt) | Potenslagar (exempel) |
-| --- | --- |
-| $a^x \cdot a^y = a^{x+y}$ | $7^2 \cdot 7^3 = 7^{2+3} = 7^5$ |
-| $\dfrac{a^x}{a^y} = a^{x-y}$ | $\dfrac{7^5}{7^3} = 7^{5-3} = 7^2$ |
-| $(a^x)^y = a^{x \cdot y}$ | $(7^2)^3 = 7^{2 \cdot 3} = 7^6$ |
-| $\left(\dfrac{a}{b}\right)^{\!x} = \dfrac{a^x}{b^x}$ | $\left(\dfrac{5}{3}\right)^{\!2} = \dfrac{5^2}{3^2}$ |
-| $(ab)^x = a^x \cdot b^x$ | $(3 \cdot 4)^2 = 3^2 \cdot 4^2$ |
+| Potenslagar (generellt) | Potenslagar (exempel) | Motivering |
+| --- | --- | --- |
+| $a^x \cdot a^y = a^{x+y}$ | $7^2 \cdot 7^3 = 7^{2+3} = 7^5$ | $7 \cdot 7 \;\cdot\; 7 \cdot 7 \cdot 7 = 7^5$ |
+| $\dfrac{a^x}{a^y} = a^{x-y}$ | $\dfrac{7^5}{7^3} = 7^{5-3} = 7^2$ | $\dfrac{7 \cdot 7 \cdot 7 \cdot 7 \cdot 7}{7 \cdot 7 \cdot 7} = 7 \cdot 7 = 7^2$ |
+| $(a^x)^y = a^{x \cdot y}$ | $(7^2)^3 = 7^{2 \cdot 3} = 7^6$ | $7^2 \cdot 7^2 \cdot 7^2 = 7^{2+2+2} = 7^6$ |
+| $\left(\dfrac{a}{b}\right)^{\!x} = \dfrac{a^x}{b^x}$ | $\left(\dfrac{5}{3}\right)^{\!2} = \dfrac{5^2}{3^2}$ | $\dfrac{5}{3} \cdot \dfrac{5}{3} = \dfrac{5 \cdot 5}{3 \cdot 3} = \dfrac{5^2}{3^2}$ |
+| $(ab)^x = a^x \cdot b^x$ | $(3 \cdot 4)^2 = 3^2 \cdot 4^2$ | $3 \cdot 4 \;\cdot\; 3 \cdot 4 = 3 \cdot 3 \cdot 4 \cdot 4 = 3^2 \cdot 4^2$ |
 :::
 
 ::: exempel "Exempel 1 — Tecken och potenser"
-**Beräkna<br>a) $(-9)^2$<br>b) $-9^2$**
+**Beräkna<br>a)&nbsp;$(-9)^2$&emsp;&emsp;b)&nbsp;$-9^2$**
 
 ::: handskrift
 typ: potenstecken
@@ -219,7 +219,7 @@ $$
 ::: sampunkt "Potens, bas och exponent"
 - $3^5$ betyder $3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$.
 - **Basen** är talet som upphöjs, **exponenten** talet man upphöjer till.
-- **Potensform**: $3^5$. **Faktorform**: produkten utskriven.
+- **Potensform**: $3^5$. **Faktorform**: $3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$.
 - Exponenten 2 utläses "i kvadrat", exponenten 3 "i kubik".
 :::
 
@@ -245,7 +245,7 @@ $$
 
 ::: sampunkt "Vanliga uppgiftstyper"
 - Skriv om ett tal som potens med given bas: $64 = 4^3$.
-- Utveckla en parentes: $(7x)^2 = 49x^2$. **Både** siffran och variabeln
+- Utveckla en parentes: $(7x)^2 = 49x^2$. **Både** talet och variabeln
   upphöjs.
 - Lös potensekvation med samma bas: jämför exponenterna direkt.
 :::

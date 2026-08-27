@@ -19801,7 +19801,7 @@ $$ a - (2b - a) = a - 2b + a = 2a - 2b $$
 
 **Svar:** $2a - 2b$
 
-**Generell slutsats:** lös upp en parentes i taget, inifrån och ut. Kontrollera gärna med siffror: $a = 5$, $b = 3$ ger $5 - (3 - (5 - 3)) = 5 - 1 = 4$ och $2 \\cdot 5 - 2 \\cdot 3 = 4$ — stämmer.`,
+**Generell slutsats:** lös upp en parentes i taget, inifrån och ut. Kontrollera gärna med tal: $a = 5$, $b = 3$ ger $5 - (3 - (5 - 3)) = 5 - 1 = 4$ och $2 \\cdot 5 - 2 \\cdot 3 = 4$ — stämmer.`,
         },
     ],
 
@@ -29313,7 +29313,7 @@ $$
                 `Det kan bara rita grafer, inte räkna`,
             ],
             correct: 0,
-            solution: `En vanlig räknare hanterar numeriska beräkningar (beräkningar med siffror). Ett symbolhanterande hjälpmedel, t.ex. Geogebra, kan därutöver räkna med algebraiska uttryck — faktorisera, förenkla och lösa ekvationer där bokstäver ingår i själva uttrycket.
+            solution: `En vanlig räknare hanterar numeriska beräkningar (beräkningar med tal). Ett symbolhanterande hjälpmedel, t.ex. Geogebra, kan därutöver räkna med algebraiska uttryck — faktorisera, förenkla och lösa ekvationer där bokstäver ingår i själva uttrycket.
 
 **Svar:** Det kan hantera algebraiska uttryck, inte bara tal.`,
         },

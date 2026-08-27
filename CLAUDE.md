@@ -908,6 +908,41 @@ användas där de hör hemma. Tumregel: om tecknet bär matematisk/typografisk
 betydelse i sammanhanget → behåll; om det bara är en färgglad dekoration →
 ta bort.
 
+### ⛔ "Siffra" är ALDRIG en synonym för "tal"
+
+**En siffra är ett tecken (0–9); ett tal är det värde man bygger av
+siffror** — precis som en bokstav inte är ett ord, utan det ord byggs av
+(uttryckligt önskemål 2026-08-27). Att skriva "både siffran och variabeln
+upphöjs" eller "räknar inte bara med siffror" lär eleven en
+sammanblandning som senare gör positionssystemet, värdesiffrorna och
+grundpotensformen svårare att förstå. Regeln gäller ALL text: teori,
+övningar, exit tickets, nationella prov, pennlösningarnas tankebubblor,
+simuleringar, visualiseringar, nyhetsartiklar och ordlistan.
+
+| Skriv inte | Skriv |
+|---|---|
+| Både **siffran** och variabeln upphöjs | Både **talet** och variabeln upphöjs |
+| räknar inte bara med **siffror** | räknar inte bara med **tal** |
+| förenkla **siffrorna** för sig | förenkla **talen** för sig |
+| data som inte är **siffror** | data som inte är **tal** |
+| minus framför en negativ **siffra** | minus framför ett negativt **tal** |
+| den **siffran** står i tabellen | det **värdet** står i tabellen |
+| en **siffra** som säger de flesta ingenting | ett **tal** som säger de flesta ingenting |
+| ju högre **siffra**, desto svagare ljus | ju högre **tal**, desto svagare ljus |
+
+**Behåll "siffra" där det verkligen är tecknet 0–9:** värdesiffror och
+gällande siffror, avrundningssiffra, entals-/tiondels-/heltalssiffra,
+"talet 42 har två siffror", "den första siffran som inte är 0",
+positionssystemets siffror, binära siffror, handskrivna siffror och
+siffrorna i ett objektnamn. Ett tal kan också *skrivas med siffror* till
+skillnad från med ord — "tolka svaret i ord, inte bara i siffror" är
+alltså rätt.
+
+**Hittar du felet någonstans: rätta det.** Välj ersättningsord efter vad
+som avses — *tal* när det är ett tal, *värde* eller *mätvärde* när det är
+ett mätresultat, *belopp* när det är absolutbeloppet. Se upp med *"ett
+udda tal"*, som betyder något helt annat än "ett udda värde".
+
 ### Förkortningar skrivs ut i klartext
 
 **Förkortningar ska generellt inte användas — skriv ut orden.** Gäller
@@ -1472,8 +1507,11 @@ deluppgifter som är hela meningar får var sin rad.
   beräkna (`a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$`), en enhet att svara i
   (`a) grader/s`) eller ett par ord — skrivs på EN rad med `&emsp;&emsp;`
   emellan (uttryckligt önskemål 2026-08-26, referens: `ma1c-1.4` exempel
-  1 och 3, `ma1c-1.3` och `fy2-1.3` exempel 1). Staplade lämnar de hela
-  ytan till höger tom, och höga bråk trängs på varandra. Skälet till
+  1 och 3, `ma1c-1.3`, `ma1c-1.6` exempel 1 och `fy2-1.3` exempel 1).
+  **Detta är ett krav, inte ett val:** finns det gott om plats kvar på
+  raden ska deluppgifterna stå bredvid varandra, och en stapling som du
+  stöter på ska rättas till (påpekat igen 2026-08-27). Staplade lämnar de
+  hela ytan till höger tom, och höga bråk trängs på varandra. Skälet till
   huvudregeln — att en lång a-uppgift knuffar in b) i radslutet — finns
   inte här: deluppgifterna är korta. Bind bokstaven till sitt innehåll
   med `&nbsp;` när det är ett matematiskt uttryck (`a)&nbsp;$…$`), så att

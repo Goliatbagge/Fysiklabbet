@@ -118,7 +118,7 @@ Sträckan blir 3 600 km, vilket motsvarar 360 mil.
 ::: sampunkt "Lösa ut en variabel"
 - Behandla formeln som en ekvation och isolera den variabel du söker.
 - $v = \dfrac{s}{t}$ ger $t = \dfrac{s}{v}$.
-- Lös ut **innan** du sätter in siffrorna. Det blir enklare och risken för
+- Lös ut **innan** du sätter in värdena. Det blir enklare och risken för
   räknefel minskar.
 :::
 

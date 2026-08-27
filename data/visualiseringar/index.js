@@ -571,7 +571,7 @@ window.VISUALISERINGAR_INDEX = {
     },
     'ma1c-1.9': {
         titel: 'Zoomresan',
-        beskrivning: 'Zooma från en atom till Vintergatan och se att tiopotensen bara är en position på skalan — a·10ⁿ är siffrorna gånger zoomnivån.',
+        beskrivning: 'Zooma från en atom till Vintergatan och se att tiopotensen bara är en position på skalan — a·10ⁿ är talet gånger zoomnivån.',
         fil: 'data/visualiseringar/ma1c-1.9.js'
     },
     'ma1c-4.9': {

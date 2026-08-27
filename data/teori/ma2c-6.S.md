@@ -30,7 +30,7 @@ normalfördelningskurvor, samt ta fram och tolka en regressionsmodell.
   (medelvärdet av de två mittersta om antalet är jämnt); ofta bättre än
   medelvärdet vid sned fördelning.
 - **typvärde**: det värde som förekommer flest gånger; det enda lägesmåttet
-  som går att använda även på data som inte är siffror.
+  som går att använda även på data som inte är tal.
 - **frekvens**: hur många gånger ett visst värde, eller en viss klass,
   förekommer i en datamängd.
 - **klass och klassmitt**: vid intervallindelad data (t.ex. i ett
@@ -130,7 +130,7 @@ modellen punkterna.
   extremvärden (uteliggare) drar med sig medelvärdet är medianen ofta mer
   representativ.
 - Typvärdet är det enda lägesmåttet som fungerar även för data som inte är
-  siffror, t.ex. bilmärken eller färger.
+  tal, till exempel bilmärken eller färger.
 - I klassindelat material (t.ex. i ett histogram) räknas varje värde som om
   det låg i sin klassmitt när medelvärdet ska beräknas.
 - I ett lådagram innehåller varje del — vänster morrhår, vänstra lådan,

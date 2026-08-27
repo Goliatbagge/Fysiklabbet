@@ -258,7 +258,7 @@ temperaturen 3 grader. Då blir det −8 grader.
 ::: sampunkt "Olikhetstecken"
 - $<$ betyder mindre än, $>$ betyder större än.
 - Tecknet **gapar** åt det större värdet.
-- Bland negativa tal är det med **störst** siffra minst: $-20 < -3$.
+- Bland negativa tal är det med **störst belopp** minst: $-20 < -3$.
 :::
 
 ::: sampunkt "Addition och subtraktion med tecken"

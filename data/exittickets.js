@@ -3405,7 +3405,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Det är för lågt — en vilande kropp avger betydligt mer effekt än så.',
-      'Det är för högt för en kropp i vila — den siffran ligger närmare vad en kraftig värmefläkt avger.',
+      'Det är för högt för en kropp i vila — det värdet ligger närmare vad en kraftig värmefläkt avger.',
       '37 är kroppstemperaturen i celsius, inte en effekt i watt — lätt att blanda ihop dem här.',
       'En människokropp i vila strålar värme ungefär som ett element med effekten 100 W.',
     ],
@@ -11288,7 +11288,7 @@ window.EXITTICKETS = {
     why: [
       'Kolumnbokstaven följs av radnumret: C5.',
       'Det skrivsättet används inte i vanliga kalkylblad.',
-      'Ordningen är alltid bokstav först, siffra sedan.',
+      'Ordningen är alltid bokstav först, radnummer sedan.',
       'Inget kolon används i cellnamn — kolon anger i stället ett OMRÅDE, t.ex. B3:B10.',
     ],
   },
@@ -17326,7 +17326,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — utöver numeriska beräkningar (beräkningar med siffror) kan ett symbolhanterande hjälpmedel räkna med algebraiska uttryck, t.ex. faktorisera och lösa ekvationer symboliskt. Geogebra är ett exempel.',
+      'Precis — utöver numeriska beräkningar (beräkningar med tal) kan ett symbolhanterande hjälpmedel räkna med algebraiska uttryck, t.ex. faktorisera och lösa ekvationer symboliskt. Geogebra är ett exempel.',
       'Tvärtom — det är just förmågan att hantera algebraiska uttryck utöver tal som skiljer ett symbolhanterande hjälpmedel från en vanlig räknare.',
       'En vanlig miniräknare klarar bara numeriska beräkningar — den kan inte hantera uttryck med bokstäver i sig.',
       'Grafritning är bara en av flera funktioner i Geogebra — symbolhanteringen (förenkla, faktorisera, lösa, gränsvärden) är det utmärkande.',
@@ -21757,7 +21757,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Precis — $1$ liter är per definition $1\\ \\mathrm{dm^3}$, så $6$ liter/minut är $6\\ \\mathrm{dm^3/minut}$.',
-      '$1$ liter är $1000\\ \\mathrm{cm^3}$, inte $1\\ \\mathrm{cm^3}$; siffran $6$ skulle inte stämma.',
+      '$1$ liter är $1000\\ \\mathrm{cm^3}$, inte $1\\ \\mathrm{cm^3}$; talet $6$ skulle inte stämma.',
       'Litermåttet ska inte divideras; $1$ liter är $1\\ \\mathrm{dm^3}$, alltså $6\\ \\mathrm{dm^3/minut}$.',
       'Ingen omräkning med faktorn $10$ behövs — $1$ liter är exakt $1\\ \\mathrm{dm^3}$.',
     ],

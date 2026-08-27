@@ -616,7 +616,7 @@
                         ' = ' + fmtFixTex(lgA + lgB, 2) + ' = \\lg ' + fmtTex(ab, 2));
                     note.innerHTML = 'Skalan är logaritmisk: samma FÖRHÅLLANDE (kvot) mellan två tal ' +
                         'ger alltid samma sträcka. Från 1 till 2 är kvoten 2 — lång sträcka. Från 9 ' +
-                        'till 10 är kvoten bara 1,11 — kort sträcka. Därför trängs siffrorna ihop mot slutet.';
+                        'till 10 är kvoten bara 1,11 — kort sträcka. Därför trängs talen ihop mot slutet.';
                 } else {
                     formelCombined.textContent = '';
                     note.textContent = '';

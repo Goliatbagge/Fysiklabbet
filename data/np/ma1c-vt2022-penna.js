@@ -498,7 +498,7 @@
 
     tanke(y, [
       [['Jag delar upp bråket i två']],
-      [['delar: siffrorna för sig och']],
+      [['delar: talen för sig och']],
       [['potenserna för sig.']]
     ], 1.05);
     y += 3.3 * F;
@@ -2120,7 +2120,7 @@
     tanke(y, [
       [['Samma räkning som i a), men med']],
       [['cellernas namn i stället för']],
-      [['siffror: lånet gånger räntan,']],
+      [['tal: lånet gånger räntan,']],
       [['plus amorteringen.']]
     ]);
     y += 2.9 * F;

@@ -33,7 +33,9 @@ const fil = (href) => String(href).split(/[?#]/)[0];
 
 for (const section of KF) {
   if (!section.href) continue;
-  const hrefs = [section.href].concat(section.href2 ? [section.href2] : []);
+  const hrefs = [section.href]
+    .concat(section.href2 ? [section.href2] : [])
+    .concat(section.href3 ? [section.href3] : []);
   const namngivet = SIM_NAMES[section.href];
   const flera = hrefs.length > 1 || Array.isArray(namngivet);
   const etikett = `${section.course} ${section.num} "${section.title}"`;

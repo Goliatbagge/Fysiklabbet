@@ -7,12 +7,12 @@
  * hashen #fyN-K.A och länkar Teori → katalog, Simulering → (nuvarande sida),
  * Övningar → katalog med :ovningar-suffix.
  *
- * ⚠️ TVÅ SIMULERINGAR PÅ SAMMA AVSNITT (href2 i data/katalog.js):
- * då får BÅDA en egen ruta i raden, med sina namn ur data/simuleringar.js
+ * ⚠️ FLERA SIMULERINGAR PÅ SAMMA AVSNITT (href2/href3 i data/katalog.js):
+ * då får ALLA en egen ruta i raden, med sina namn ur data/simuleringar.js
  * (SIM_NAMES) — filen hämtas automatiskt om sidan inte redan laddat den.
  * Det är den GARANTERADE vägen mellan avsnittets simuleringar: katalogen
- * länkar bara till `href`, så utan detta blir `href2`-simuleringen
- * oåtkomlig från katalogen (hände 2026-08-23: flugan gick inte att nå från
+ * länkar bara till `href`, så utan detta blir `href2`/`href3`-simuleringarna
+ * oåtkomliga från katalogen (hände 2026-08-23: flugan gick inte att nå från
  * astronauten). Enskilda sidor får gärna ha egna flikar i sitt sidhuvud
  * också, men de är ett komplement — aldrig den enda vägen.
  * `node .claude/verify-sim-vaxlare.js` kontrollerar detta.
@@ -42,7 +42,8 @@
                 const sections = chapters[chapKey].sections || [];
                 for (const sec of sections) {
                     if ((sec.href && sec.href.toLowerCase() === file) ||
-                        (sec.href2 && sec.href2.toLowerCase() === file)) {
+                        (sec.href2 && sec.href2.toLowerCase() === file) ||
+                        (sec.href3 && sec.href3.toLowerCase() === file)) {
                         found = { courseKey, sec };
                         break;
                     }
@@ -87,8 +88,11 @@
 
     const sec = found.sec;
 
-    // Avsnittets simuleringar i ordning: href (+ href2 när det finns).
-    const simHrefs = [sec.href].concat(sec.href2 ? [sec.href2] : []).filter(Boolean);
+    // Avsnittets simuleringar i ordning: href (+ href2/href3 när de finns).
+    const simHrefs = [sec.href]
+        .concat(sec.href2 ? [sec.href2] : [])
+        .concat(sec.href3 ? [sec.href3] : [])
+        .filter(Boolean);
 
     // Namnet på en simulering hämtas ur SIM_NAMES, som kan vara en sträng
     // (en sim), en array av strängar eller en array av objekt där `href`

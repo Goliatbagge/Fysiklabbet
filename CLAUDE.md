@@ -2386,6 +2386,11 @@ simuleringssidorna länkar dit. Felet har hänt (2026-08-23): flugan i
 bägaren lades som href2 på fy1-3.3, och besökaren som kom in via
 astronautsimuleringen såg aldrig att den fanns.
 
+**En TREDJE simulering läggs som `href3`** (infört 2026-08-28 för
+dubbelkonen på fy2-1.2) — avsnittsraden, sökindexet och verifierarna
+hanterar den likadant som `href2`, och samma krav gäller (egen post med
+`name`/`kw` i `data/simuleringar.js`, båda skripten laddade).
+
 **Växlingen sköts av `section-nav.js`** — samma rad som visar
 Teori / Simulering / Övningar. Har avsnittet två simuleringar ritar den
 en egen ruta för var och en, med namnen ur `data/simuleringar.js`

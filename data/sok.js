@@ -54,11 +54,13 @@
           num: section.num,
           kw: it.kw || null,
         });
-    // Skyddsnät: en andra simulering (href2) som saknar post i SIM_NAMES ska
-    // ändå komma med i listan/sökningen.
-    if (section.href2 && !out.some(s => s.href === section.href2)) {
-      out.push({ name: section.title, desc: section.description, href: section.href2,
-                 num: section.num, kw: null });
+    // Skyddsnät: en andra eller tredje simulering (href2/href3) som saknar
+    // post i SIM_NAMES ska ändå komma med i listan/sökningen.
+    for (const extra of [section.href2, section.href3]) {
+      if (extra && !out.some(s => s.href === extra)) {
+        out.push({ name: section.title, desc: section.description, href: extra,
+                   num: section.num, kw: null });
+      }
     }
     return out;
   }

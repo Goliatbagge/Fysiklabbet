@@ -94,6 +94,8 @@ window.SIM_NAMES = {
       kw: ['krafter','moment','vridmoment','kraftmoment','momentlagen','jämvikt','vridningspunkt','stöd','stödkraft','bock','bräda','hävarm','tyngdpunkt','vältning','statik','mekanik'] },
     { name: 'Gaffelbalansen', href: 'fysik2-gaffelbalans-app.html', desc: 'Det klassiska balanstricket i 3D: två gafflar i en kork balanserar på en nålspets mot den smala kanten av ett mynt på högkant. Knuffa till, ändra gaffelvinkeln och se varför det är så lätt — tyngdpunkten hamnar under stödpunkten.',
       kw: ['krafter','moment','kraftmoment','tyngdpunkt','stödpunkt','stabilitet','stabil jämvikt','balans','balanstrick','gaffel','gafflar','kork','nål','mynt','pendel','hävarm','3d','statik','mekanik'] },
+    { name: 'Dubbelkonen som rullar uppför', href: 'fysik2-dubbelkon-app.html', desc: 'Den klassiska demonstrationen i 3D: en dubbelkon släpps vid den låga änden av en V-formad bana och rullar mot den höga — men tyngdpunkten sjunker hela vägen, eftersom kontaktpunkterna vandrar ut mot konens spetsar när skenorna går isär. Jämför med cylindern som rullar nedåt, ändra lutningen och hitta gränsen där illusionen bryts.',
+      kw: ['krafter','tyngdpunkt','dubbelkon','kon','rullar uppför','uppförsbacke','lutande bana','illusion','rullning','cylinder','lägesenergi','kontaktpunkt','demonstration','3d','mekanik'] },
   ],
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',

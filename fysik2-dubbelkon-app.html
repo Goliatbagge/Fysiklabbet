@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubbelkonen som rullar uppför — Fysiklabbet</title>
+    <meta name="description" content="Interaktiv 3D-simulering av den klassiska demonstrationen där en dubbelkon ser ut att rulla uppför en lutande bana. Skenorna går isär, kontaktpunkterna vandrar mot konens spetsar och tyngdpunkten sjunker fastän banan stiger. Jämför med cylindern som rullar nedåt, ändra lutningen och hitta gränsen där illusionen bryts.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-dubbelkon-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Dubbelkonen som rullar uppför — Fysik nivå 2">
+    <meta property="og:description" content="En dubbelkon släpps vid den låga änden av en V-formad bana och rullar mot den höga. 3D-simulering som avslöjar illusionen: tyngdpunkten sjunker hela vägen, eftersom kontaktpunkterna vandrar ut mot konens spetsar när skenorna går isär.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-dubbelkon-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dubbelkonen som rullar uppför — Fysik nivå 2">
+    <meta name="twitter:description" content="En dubbelkon släpps vid den låga änden av en V-formad bana och rullar mot den höga. 3D-simulering som avslöjar illusionen: tyngdpunkten sjunker hela vägen, eftersom kontaktpunkterna vandrar ut mot konens spetsar när skenorna går isär.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+        // mini-läge: sidan körs som minisimulering i en iframe i teorin —
+        // bara scenen visas, verktygen bor i minisim-kortet utanför.
+        window.__MINI = __q.has('mini');
+        if (window.__MINI) document.documentElement.classList.add('mini-mode');
+    </script>
+    <style>
+        /* Embed-läge: dölj sajt-nav när simen körs i en wrapper-iframe */
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        /* Mini-läge (?embed=1&mini=1): teorins minisim-kort bäddar in sidan i
+           en iframe och visar BARA scenen — rubrik, formelkort, sidopanel och
+           de pedagogiska sektionerna göms, och scenens overlay-verktyg
+           (.scene-toggles, .scene-hint) göms utanför fullskärm (minisim-kortet
+           har egna knappar och glidare). I FULLSKÄRM — som startas med scenens
+           egen .fs-btn inne i iframen — visas allt precis som i originalet. */
+        html.mini-mode .min-h-screen { padding: 0 !important; }
+        html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
+        html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
+        html.mini-mode main > .order-2 { display: none !important; }
+        html.mini-mode main .order-1 > :not(.scene-wrap) { display: none !important; }
+        html.mini-mode main .order-1 { width: 100% !important; }
+        html.mini-mode .scene-stage { height: 100vh; }
+        html.mini-mode .scene-wrap { border-radius: 6px; border: none; }
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-toggles,
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-hint { display: none; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* Formel-etiketter (beteckningar ovanför/under symboler) */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 17px; }
+
+        /* Scen-wrapper + fullskärm. Canvasen bor i .scene-stage (fast höjd),
+           så att verktygsrutorna kan flöda UNDER scenen på mobil (sektion 8.2
+           i styles-laborans-sim.css) i stället för att hamna bakom canvasen. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 50, 74, 0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #eef0ee;
+        }
+        .scene-stage { position: relative; height: 520px; }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+            position: absolute; inset: 0; height: auto;
+        }
+        @media (max-width: 600px) {
+            .scene-stage { height: 400px; }
+        }
+        .scene-wrap canvas { display: block; }
+
+        /* Snabbknapp: återställ vyn rakt från sidan. Ligger UNDER
+           fullskärmsknappen (fs-btn äger övre vänstra hörnet ensam). */
+        .vy-btn {
+            position: absolute; top: 66px; left: 14px; z-index: 7;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            color: var(--lab-ink, #0f1620);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            transition: border-color 0.15s ease;
+        }
+        .vy-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        @media (max-width: 600px) {
+            .vy-btn { top: 54px; width: 32px; height: 32px; }
+        }
+
+        .scene-hint {
+            position: absolute; bottom: 8px; left: 10px; z-index: 5;
+            font-size: 11px; color: var(--lab-ink-muted, #5a6170);
+            background: rgba(243,238,228,0.7); padding: 3px 8px; border-radius: 6px;
+            pointer-events: none;
+        }
+
+        /* "Visa"-rutor + styrknappar på scenytan (uppe till höger) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(243,238,228,0.92);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 8px 12px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        /* Samma verktygsval som ett KORT i sidopanelen (normalläget) —
+           overlay-rutan .scene-toggles används bara i fullskärm, så att
+           den aldrig ligger i vägen för scenen. */
+        .st-panel { display: flex; flex-wrap: wrap; gap: 6px 28px; }
+        .st-panel > div { display: flex; flex-direction: column; gap: 3px; }
+        .st-panel .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .st-panel label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .st-panel input[type="checkbox"], .st-panel input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .st-panel .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        /* Reglage-rad inom fullskärms-dropdown */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        const fmt = (num, decimals = 2) => {
+            if (!isFinite(num)) return '∞';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        // Färger (mättade — ingen vit halo mot ljus scen)
+        const COL = {
+            cm:    '#2e9e4f',   // tyngdpunkt — grön (sajtens konvention)
+            spar:  '#f5d000',   // tyngdpunktens spår — ren gul, syns mot både
+                                // den gråa bänken och den ljusa bakgrunden
+            ref:   '#0f1620',   // vågrät startnivå — bläck
+            rail:  '#8a6a3a',   // skenornas överkant i grafen — träbrun
+            kontakt: '#c8324a'  // kontaktpunkter — accent-röd
+        };
+
+        // ── Geometri (scen-enhet: 1 = 1 cm) ─────────────────────
+        // Banan är en V-formad ram på ett vågrätt bord: spetsen (där skenorna
+        // möts) ligger lågt vid x = 0, och skenornas överkant stiger linjärt
+        // mot den breda änden vid x = L. Positionen x mäts längs mittlinjen.
+        const GEO = {
+            L: 56,      // banans längd längs mittlinjen
+            H0: 1.0,    // överkantens höjd vid spetsen
+            RK: 5.0,    // dubbelkonens största radie (på mitten)
+            LK: 10.0,   // halva konens längd (mitt till spets), tan α = RK/LK
+            RC: 2.2,    // cylinderns radie
+            LC: 26.0,   // cylinderns längd — lång nog att nå banans breda
+                        // ände utan att falla ner mellan skenorna
+            railT: 1.1, // skenbrädans tjocklek
+            xStart: 16, // startläget (samma för båda föremålen)
+            g: 982      // tyngdfaktorn i cm/s²
+        };
+        const TAN_A = GEO.RK / GEO.LK;                       // tan α = 0,5
+        const ALFA = Math.atan(TAN_A) * 180 / Math.PI;       // ≈ 26,6°
+
+        // Härledda storheter för given lutning θ och halv öppningsvinkel φ.
+        // Kontaktpunkterna sitter på skenornas inre överkant, på det axiella
+        // avståndet s = x · tan φ från konens mitt; kontaktradien är därför
+        // r = R − s · tan α, och tyngdpunktens (axelns) höjd
+        //   y = H0 + x · tan θ + r  ⟹  dy/dx = tan θ − tan φ · tan α.
+        // Dubbelkonen rullar mot den breda änden precis när dy/dx < 0.
+        const computeDerived = (thetaDeg, phiDeg) => {
+            const tanT = Math.tan(thetaDeg * Math.PI / 180);
+            const tanF = Math.tan(phiDeg * Math.PI / 180);
+            const slopeKon = tanT - tanF * TAN_A;
+            const thetaCrit = Math.atan(tanF * TAN_A) * 180 / Math.PI;
+            // Rörelseområden längs mittlinjen
+            const sMax = Math.min((GEO.RK - 0.45) / TAN_A, GEO.LK - 0.7);
+            const konXMax = Math.min(GEO.L - 2.5, sMax / tanF);
+            const cylXMax = Math.min(GEO.L - 2.5, (GEO.LC / 2 - 1.0) / tanF);
+            const xMin = 4;
+            const railTopY = (x) => GEO.H0 + x * tanT;
+            const konR = (x) => GEO.RK - x * tanF * TAN_A;
+            const konY = (x) => railTopY(x) + konR(x);
+            const cylY = (x) => railTopY(x) + GEO.RC;
+            return { tanT, tanF, slopeKon, thetaCrit, konXMax, cylXMax, xMin,
+                     railTopY, konR, konY, cylY };
+        };
+
+        // ── Graf: skenans överkant stiger, tyngdpunkten sjunker ──
+        const HeightGraph = ({ theta, phi, obj, curX }) => {
+            const W = 320, H = 190, padL = 40, padB = 32, padT = 14, padR = 12;
+            const d = computeDerived(theta, phi);
+            const xMaxObj = obj === 'kon' ? d.konXMax : d.cylXMax;
+            const yTop = 12;
+            const gx = (x) => padL + (x / GEO.L) * (W - padL - padR);
+            const gy = (y) => padT + ((yTop - y) / yTop) * (H - padT - padB);
+            const railPath = `M${gx(0).toFixed(1)} ${gy(d.railTopY(0)).toFixed(1)} L${gx(GEO.L).toFixed(1)} ${gy(d.railTopY(GEO.L)).toFixed(1)}`;
+            const pts = [];
+            for (let i = 0; i <= 48; i++) {
+                const x = d.xMin + (xMaxObj - d.xMin) * (i / 48);
+                const y = obj === 'kon' ? d.konY(x) : d.cylY(x);
+                pts.push([gx(x), gy(y)]);
+            }
+            const cmPath = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+            const xC = Math.max(d.xMin, Math.min(xMaxObj, curX));
+            const yC = obj === 'kon' ? d.konY(xC) : d.cylY(xC);
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }} role="img"
+                     aria-label="Graf: skenornas överkant stiger längs banan medan tyngdpunktens höjd för det valda föremålet ritas som egen kurva. För dubbelkonen sjunker kurvan mot den breda änden.">
+                    {/* axlar (pil endast åt positiva hållet) */}
+                    <line x1={padL} y1={padT - 4} x2={padL} y2={H - padB} stroke="#38bdf8" strokeWidth="1" />
+                    <polygon points={`${padL},${padT - 10} ${padL - 3.4},${padT - 3} ${padL + 3.4},${padT - 3}`} fill="#38bdf8" />
+                    <line x1={padL} y1={H - padB} x2={W - padR + 2} y2={H - padB} stroke="#38bdf8" strokeWidth="1" />
+                    <polygon points={`${W - padR + 8},${H - padB} ${W - padR + 1},${H - padB - 3.4} ${W - padR + 1},${H - padB + 3.4}`} fill="#38bdf8" />
+                    {[0, 20, 40].map(x => (
+                        <g key={x}>
+                            <line x1={gx(x)} y1={H - padB} x2={gx(x)} y2={H - padB + 4} stroke="#38bdf8" strokeWidth="1" />
+                            <text x={gx(x)} y={H - padB + 15} textAnchor="middle" fontSize="9.5" fill="var(--lab-ink-muted)">{x}</text>
+                        </g>
+                    ))}
+                    {[4, 8].map(y => (
+                        <g key={y}>
+                            <line x1={padL - 4} y1={gy(y)} x2={padL} y2={gy(y)} stroke="#38bdf8" strokeWidth="1" />
+                            <text x={padL - 7} y={gy(y) + 3.5} textAnchor="end" fontSize="9.5" fill="var(--lab-ink-muted)">{y}</text>
+                        </g>
+                    ))}
+                    <text x={padL - 7} y={padT + 2} textAnchor="end" fontSize="10" fill="var(--lab-ink-muted)">cm</text>
+                    <text x={W - padR} y={H - padB - 6} textAnchor="end" fontSize="10" fill="var(--lab-ink-muted)">läge (cm)</text>
+                    {/* skenans överkant */}
+                    <path d={railPath} fill="none" stroke={COL.rail} strokeWidth="2" strokeDasharray="5 3" />
+                    <text x={gx(30)} y={Math.min(gy(d.railTopY(30)) + 13, H - padB - 5)} textAnchor="middle" fontSize="9.5" fill={COL.rail} fontWeight="600">skenans överkant</text>
+                    {/* tyngdpunktens höjd */}
+                    <path d={cmPath} fill="none" stroke={COL.cm} strokeWidth="2.2" />
+                    <text x={gx(d.xMin) + 4} y={gy(obj === 'kon' ? d.konY(d.xMin) : d.cylY(d.xMin)) - 7} fontSize="9.5" fill={COL.cm} fontWeight="600">tyngdpunkten</text>
+                    {/* aktuell punkt */}
+                    <circle cx={gx(xC)} cy={gy(yC)} r="4.5" fill="var(--lab-ink)" />
+                </svg>
+            );
+        };
+
+        // ── Reglage ──────────────────────────────────────────────
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 0 }) => (
+            <div className="p-3 rounded-xl glass-card mb-3">
+                <div className="flex justify-between items-baseline mb-2">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>
+                        {fmt(value, decimals)}<span style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, 0)}{unit}</span>
+                    <span>{fmt(max, 0)}{unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, unit, onChange, decimals = 0 }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 168 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 52, textAlign: 'right' }}>
+                    {fmt(value, decimals)}{unit}
+                </span>
+            </div>
+        );
+
+        // ── 3D-scenen ────────────────────────────────────────────
+        const BanaScene = ({ stateRef, physRef, actionsRef }) => {
+            const mountRef = useRef(null);
+
+            useEffect(() => {
+                const mount = mountRef.current;
+                const width = mount.clientWidth;
+                const height = mount.clientHeight;
+
+                // Dämpad, naturlig palett: ljus bakgrund men en mörkare
+                // stengrå bänk, så att den bleka träkonen tecknar sig
+                // tydligt utan skrikiga färger.
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xe4e8e2);
+
+                // Startvyn är RAKT FRÅN SIDAN, i ögonhöjd med banan: den
+                // vågräta startnivålinjen ligger då exakt horisontellt på
+                // skärmen, så att man ser tyngdpunkten sjunka medan konen
+                // rullar "uppför". Kameran står mitt för banans mitt — då
+                // projiceras linjen symmetriskt och blir vågrät även om
+                // kameran står något över den. Vy-knappen (.vy-btn)
+                // återställer hit efter fri rotation.
+                const HOME_POS = new THREE.Vector3(GEO.L / 2, 9, 80);
+                const HOME_TARGET = new THREE.Vector3(GEO.L / 2, 5.5, 0);
+                const camera = new THREE.PerspectiveCamera(40, width / height, 0.5, 600);
+                camera.position.copy(HOME_POS);
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(width, height);
+                mount.appendChild(renderer.domElement);
+
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.08;
+                controls.target.copy(HOME_TARGET);
+                controls.minDistance = 14;
+                controls.maxDistance = 160;
+                controls.maxPolarAngle = Math.PI * 0.55;
+                actionsRef.current.resetView = () => {
+                    // Utan damping tömmer update() den kvarvarande
+                    // rotationsrörelsen — annars knuffar den bort kameran
+                    // från hemvyn direkt efter återställningen.
+                    controls.enableDamping = false;
+                    controls.update();
+                    camera.position.copy(HOME_POS);
+                    controls.target.copy(HOME_TARGET);
+                    controls.update();
+                    controls.enableDamping = true;
+                };
+                window.__dubbelCam = camera;   // test-handtag för mätskript
+
+                // Lägre grundljus + starkare riktat ljus ger skuggning som
+                // tecknar konens form i stället för att bleka ut den.
+                scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+                const dir = new THREE.DirectionalLight(0xfff6e8, 0.78);
+                dir.position.set(35, 55, 40);
+                scene.add(dir);
+                const fill = new THREE.DirectionalLight(0xffffff, 0.28);
+                fill.position.set(-25, 20, -30);
+                scene.add(fill);
+
+                // ── Bordsskivan (ljus labbänk med diskreta fläckar) ──
+                const benchCv = document.createElement('canvas');
+                benchCv.width = 512; benchCv.height = 512;
+                const bctx = benchCv.getContext('2d');
+                bctx.fillStyle = '#878e88'; bctx.fillRect(0, 0, 512, 512);
+                for (let i = 0; i < 320; i++) {
+                    bctx.fillStyle = i % 3 === 0
+                        ? 'rgba(210,214,208,' + (0.04 + Math.random() * 0.06) + ')'
+                        : 'rgba(52,58,52,' + (0.04 + Math.random() * 0.08) + ')';
+                    const rr = 1 + Math.random() * 4;
+                    bctx.beginPath();
+                    bctx.arc(Math.random() * 512, Math.random() * 512, rr, 0, Math.PI * 2);
+                    bctx.fill();
+                }
+                const benchTex = new THREE.CanvasTexture(benchCv);
+                benchTex.wrapS = benchTex.wrapT = THREE.RepeatWrapping;
+                benchTex.repeat.set(2, 2);
+                const bench = new THREE.Mesh(
+                    new THREE.BoxGeometry(130, 2, 90),
+                    new THREE.MeshStandardMaterial({ map: benchTex, roughness: 0.9 })
+                );
+                bench.position.set(GEO.L / 2, -1, 0);
+                scene.add(bench);
+
+                // ── Skenmaterial: gulmålat trä med slitna stråk ──
+                const railCv = document.createElement('canvas');
+                railCv.width = 256; railCv.height = 256;
+                const rctx = railCv.getContext('2d');
+                rctx.fillStyle = '#c99b2f'; rctx.fillRect(0, 0, 256, 256);
+                for (let i = 0; i < 34; i++) {
+                    rctx.strokeStyle = 'rgba(138,106,58,' + (0.10 + Math.random() * 0.18) + ')';
+                    rctx.lineWidth = 0.7 + Math.random() * 2;
+                    const y = Math.random() * 256;
+                    rctx.beginPath();
+                    rctx.moveTo(0, y);
+                    for (let x = 0; x <= 256; x += 32) {
+                        rctx.lineTo(x, y + Math.sin(x * 0.03 + i) * 3 + (Math.random() - 0.5) * 3);
+                    }
+                    rctx.stroke();
+                }
+                const railTex = new THREE.CanvasTexture(railCv);
+                railTex.wrapS = railTex.wrapT = THREE.RepeatWrapping;
+                // DoubleSide: −z-skenan är en spegling (scale.z = −1), vilket
+                // vänder ytorna ut och in — utan DoubleSide blir den osynlig.
+                const railMat = new THREE.MeshStandardMaterial({ map: railTex, roughness: 0.8, side: THREE.DoubleSide });
+                const capMat = new THREE.MeshStandardMaterial({ color: 0x7d838d, roughness: 0.35, metalness: 0.7 });
+
+                // ── Banan (byggs om när lutning eller öppningsvinkel ändras) ──
+                let trackGroup = null;
+                const buildTrack = (thetaDeg, phiDeg) => {
+                    if (trackGroup) {
+                        scene.remove(trackGroup);
+                        trackGroup.traverse(o => { if (o.geometry) o.geometry.dispose(); });
+                    }
+                    trackGroup = new THREE.Group();
+                    const d = computeDerived(thetaDeg, phiDeg);
+                    const phi = phiDeg * Math.PI / 180;
+                    const Lr = GEO.L / Math.cos(phi);          // skenans längd längs sig själv
+                    const hEnd = GEO.H0 + GEO.L * d.tanT;      // överkantens höjd vid breda änden
+                    // Kilformad bräda: underkanten ligger på bordet, överkanten
+                    // stiger från H0 vid spetsen till hEnd vid den breda änden.
+                    const shape = new THREE.Shape();
+                    shape.moveTo(0, 0);
+                    shape.lineTo(Lr, 0);
+                    shape.lineTo(Lr, hEnd);
+                    shape.lineTo(0, GEO.H0);
+                    shape.closePath();
+                    const geo = new THREE.ExtrudeGeometry(shape, { depth: GEO.railT, bevelEnabled: false });
+                    // +z-skenan: lokala x-axeln vrids till (cos φ, 0, sin φ);
+                    // extruderingens djup pekar då utåt, bort från mittlinjen,
+                    // så den inre ytan går genom spetsen (kontaktlinjen).
+                    const railP = new THREE.Mesh(geo, railMat);
+                    railP.rotation.y = -phi;
+                    trackGroup.add(railP);
+                    // −z-skenan: exakt spegelbild av +z-skenan i planet z = 0
+                    const railN = new THREE.Mesh(geo.clone(), railMat);
+                    railN.rotation.y = -phi;
+                    const mirror = new THREE.Group();
+                    mirror.scale.z = -1;
+                    mirror.add(railN);
+                    trackGroup.add(mirror);
+                    // Tvärbräda som stänger ramen vid den breda änden
+                    const zEnd = GEO.L * d.tanF + GEO.railT;
+                    const endBoard = new THREE.Mesh(
+                        new THREE.BoxGeometry(GEO.railT, hEnd, 2 * zEnd + 1.2), railMat);
+                    endBoard.position.set(GEO.L + GEO.railT / 2 + 0.35, hEnd / 2, 0);
+                    trackGroup.add(endBoard);
+                    // Metallbeslag i hörnen (som på den riktiga banan)
+                    [-1, 1].forEach(sgn => {
+                        const cap = new THREE.Mesh(new THREE.BoxGeometry(3.2, hEnd + 0.3, 1.5), capMat);
+                        cap.position.set(GEO.L - 0.9, (hEnd + 0.3) / 2, sgn * (zEnd - 0.2));
+                        trackGroup.add(cap);
+                    });
+                    scene.add(trackGroup);
+                };
+
+                // ── Dubbelkonen (blek björk med mörka meridianstreck) ──
+                const woodCv = document.createElement('canvas');
+                woodCv.width = 256; woodCv.height = 128;
+                const wctx = woodCv.getContext('2d');
+                wctx.fillStyle = '#dbcca6'; wctx.fillRect(0, 0, 256, 128);
+                for (let i = 0; i < 26; i++) {
+                    wctx.strokeStyle = 'rgba(128,102,64,' + (0.14 + Math.random() * 0.18) + ')';
+                    wctx.lineWidth = 0.6 + Math.random() * 1.6;
+                    const y = Math.random() * 128;
+                    wctx.beginPath(); wctx.moveTo(0, y); wctx.lineTo(256, y + (Math.random() - 0.5) * 8); wctx.stroke();
+                }
+                // två meridianstreck så att rotationen syns
+                wctx.fillStyle = 'rgba(122,74,46,0.85)';
+                wctx.fillRect(30, 0, 7, 128);
+                wctx.fillStyle = 'rgba(122,74,46,0.45)';
+                wctx.fillRect(158, 0, 7, 128);
+                const woodTex = new THREE.CanvasTexture(woodCv);
+                const woodMat = new THREE.MeshStandardMaterial({ map: woodTex, roughness: 0.75 });
+
+                const konGroup = new THREE.Group();
+                const halfKon = new THREE.ConeGeometry(GEO.RK, GEO.LK, 48, 1, false);
+                const konA = new THREE.Mesh(halfKon, woodMat);
+                konA.rotation.x = -Math.PI / 2;            // spetsen mot −z
+                konA.position.z = -GEO.LK / 2;             // basytan i konens mitt
+                konGroup.add(konA);
+                const konB = new THREE.Mesh(halfKon.clone(), woodMat);
+                konB.rotation.x = Math.PI / 2;             // spetsen mot +z
+                konB.position.z = GEO.LK / 2;
+                konGroup.add(konB);
+                konGroup.traverse(o => { o.userData.drag = true; });
+                scene.add(konGroup);
+
+                // ── Cylindern ──
+                const cylGroup = new THREE.Group();
+                const cylMesh = new THREE.Mesh(
+                    new THREE.CylinderGeometry(GEO.RC, GEO.RC, GEO.LC, 40),
+                    woodMat);
+                cylMesh.rotation.x = Math.PI / 2;          // axeln längs z
+                cylGroup.add(cylMesh);
+                cylGroup.traverse(o => { o.userData.drag = true; });
+                scene.add(cylGroup);
+
+                // ── Mjuk kontaktskugga under föremålet ──
+                // Ingen riktig skuggkarta behövs: en radiell gradient på en
+                // platt yta strax över bänken förankrar föremålet visuellt
+                // och skiljer det från den ljusa bakgrunden.
+                const shCv = document.createElement('canvas');
+                shCv.width = 128; shCv.height = 128;
+                const shx = shCv.getContext('2d');
+                const shGrad = shx.createRadialGradient(64, 64, 6, 64, 64, 62);
+                shGrad.addColorStop(0, 'rgba(18,22,18,0.32)');
+                shGrad.addColorStop(1, 'rgba(18,22,18,0)');
+                shx.fillStyle = shGrad; shx.fillRect(0, 0, 128, 128);
+                const shadow = new THREE.Mesh(
+                    new THREE.PlaneGeometry(17, 9.5),
+                    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shCv),
+                        transparent: true, depthWrite: false }));
+                shadow.rotation.x = -Math.PI / 2;
+                shadow.renderOrder = 1;
+                scene.add(shadow);
+
+                // ── Tyngdpunkt, spår, startnivå och kontaktpunkter ──
+                const cmDot = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.55, 20, 14),
+                    new THREE.MeshBasicMaterial({ color: COL.cm, depthTest: false }));
+                cmDot.renderOrder = 9;
+                scene.add(cmDot);
+
+                const makeLabel = (segments, hex, scale = 1) => {
+                    const cv = document.createElement('canvas');
+                    cv.width = 560; cv.height = 110;
+                    const ctx = cv.getContext('2d');
+                    const BASE = 40;
+                    let total = 0;
+                    segments.forEach(seg => {
+                        ctx.font = (seg.i ? 'italic ' : '') + '600 ' + BASE + 'px Poppins, sans-serif';
+                        total += ctx.measureText(seg.t).width;
+                    });
+                    let x = (cv.width - total) / 2;
+                    const cy = cv.height / 2;
+                    ctx.fillStyle = hex;
+                    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+                    segments.forEach(seg => {
+                        ctx.font = (seg.i ? 'italic ' : '') + '600 ' + BASE + 'px Poppins, sans-serif';
+                        ctx.fillText(seg.t, x, cy);
+                        x += ctx.measureText(seg.t).width;
+                    });
+                    const tex = new THREE.CanvasTexture(cv);
+                    tex.anisotropy = 4;
+                    const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+                    spr.scale.set(cv.width * 0.0068 * scale, cv.height * 0.0068 * scale, 1);
+                    spr.renderOrder = 10;
+                    return spr;
+                };
+                // Etiketterna ska vara LÄSBARA på skärmen (~20 px eller mer)
+                // — glyfhöjden i scen-enheter är fontPx · 0,0068 · skala, så
+                // skala 9 ger ≈ 2,5 enheter ≈ 25 px med startkameran.
+                const cmLabel = makeLabel([{ t: 'Tyngdpunkt' }], COL.cm, 9);
+                scene.add(cmLabel);
+                const refLabel = makeLabel([{ t: 'Vågrät startnivå' }], COL.ref, 8.5);
+                scene.add(refLabel);
+
+                // Spårlinjen: tyngdpunktens bana ritas efterhand som ett
+                // HELDRAGET gult streck med mörk kant. En LineBasicMaterial
+                // blir alltid 1 px bred och försvinner mot bakgrunden, så
+                // strecket byggs i stället av runda punkter satta så tätt
+                // (interpolerade) att de smälter ihop — i två lager: ett
+                // mörkt något större under och det gula ovanpå, vilket ger
+                // en kantlinje som håller även över de gula skenorna.
+                const TRACE_MAX = 1400;
+                const tracePos = new Float32Array(TRACE_MAX * 3);
+                const traceGeo = new THREE.BufferGeometry();
+                traceGeo.setAttribute('position', new THREE.BufferAttribute(tracePos, 3));
+                traceGeo.setDrawRange(0, 0);
+                const dotCv = document.createElement('canvas');
+                dotCv.width = 32; dotCv.height = 32;
+                const dctx = dotCv.getContext('2d');
+                dctx.fillStyle = '#ffffff';
+                dctx.beginPath(); dctx.arc(16, 16, 14, 0, Math.PI * 2); dctx.fill();
+                const dotTex = new THREE.CanvasTexture(dotCv);
+                const traceCase = new THREE.Points(traceGeo,
+                    new THREE.PointsMaterial({ color: '#1f2530', size: 1.7,
+                        sizeAttenuation: true, map: dotTex,
+                        alphaTest: 0.5, transparent: true, depthTest: false }));
+                traceCase.renderOrder = 8;
+                scene.add(traceCase);
+                const traceLine = new THREE.Points(traceGeo,
+                    new THREE.PointsMaterial({ color: COL.spar, size: 1.25,
+                        sizeAttenuation: true, map: dotTex,
+                        alphaTest: 0.5, transparent: true, depthTest: false }));
+                traceLine.renderOrder = 9;
+                scene.add(traceLine);
+                let traceN = 0, traceLastX = null, traceLastY = 0;
+                const tracePut = (x, y) => {
+                    if (traceN >= TRACE_MAX) return;
+                    tracePos[traceN * 3] = x; tracePos[traceN * 3 + 1] = y; tracePos[traceN * 3 + 2] = 0;
+                    traceN++;
+                };
+                const traceReset = () => {
+                    traceN = 0; traceLastX = null;
+                    traceGeo.setDrawRange(0, 0);
+                };
+                const tracePush = (x, y) => {
+                    if (traceLastX === null) {
+                        tracePut(x, y);
+                    } else {
+                        // fyll mellanrummet så att punkterna överlappar och
+                        // strecket blir heldraget även i hög fart
+                        const d = Math.hypot(x - traceLastX, y - traceLastY);
+                        const steps = Math.max(1, Math.ceil(d / 0.3));
+                        for (let i = 1; i <= steps; i++) {
+                            tracePut(traceLastX + (x - traceLastX) * (i / steps),
+                                     traceLastY + (y - traceLastY) * (i / steps));
+                        }
+                    }
+                    traceLastX = x; traceLastY = y;
+                    traceGeo.setDrawRange(0, traceN);
+                    traceGeo.attributes.position.needsUpdate = true;
+                };
+
+                // Vågrät referenslinje i startnivån (streckad bläcklinje)
+                let refLine = null;
+                const buildRefLine = (y) => {
+                    if (refLine) { scene.remove(refLine); refLine.geometry.dispose(); }
+                    const g = new THREE.BufferGeometry().setFromPoints([
+                        new THREE.Vector3(2, y, 0), new THREE.Vector3(GEO.L + 4, y, 0)]);
+                    refLine = new THREE.Line(g, new THREE.LineDashedMaterial({
+                        color: COL.ref, dashSize: 1.4, gapSize: 1.0, depthTest: false }));
+                    refLine.computeLineDistances();
+                    refLine.renderOrder = 7;
+                    scene.add(refLine);
+                    // etiketten i fri luft ovanför linjens högra del, inte på skenan
+                    refLabel.position.set(GEO.L - 8, y + 3.6, 0);
+                };
+
+                // Kontaktpunkter (röda prickar på skenornas inre överkant)
+                const contactDots = [1, -1].map(() => {
+                    const m = new THREE.Mesh(
+                        new THREE.SphereGeometry(0.45, 16, 12),
+                        new THREE.MeshBasicMaterial({ color: COL.kontakt, depthTest: false }));
+                    m.renderOrder = 9;
+                    scene.add(m);
+                    return m;
+                });
+
+                // ── Animationsloop med fysikintegration ──
+                // Rullning utan glidning kring kontaktlinjen ger energin
+                //   E = ½ m v² · k(x) + m g y(x),   k = 1 + I/(m r²)
+                // med I = (3/10) m R² för dubbelkonen och ½ m R² för
+                // cylindern. Derivering ger accelerationen
+                //   a = (−g · dy/dx − ½ k'(x) v²) / k(x).
+                // När kontaktradien r → 0 vid den breda änden växer k mot
+                // oändligheten och konen glider mjukt in i vila, precis som i
+                // den verkliga demonstrationen.
+                let built = { theta: null, phi: null };
+                let last = performance.now();
+                let raf;
+                let traceT = 0;
+                const animate = () => {
+                    raf = requestAnimationFrame(animate);
+                    const now = performance.now();
+                    let dt = Math.min(0.04, (now - last) / 1000);
+                    last = now;
+                    const s = stateRef.current;
+                    const ph = physRef.current;
+                    if (s.slow) dt *= 0.25;
+
+                    if (built.theta !== s.theta || built.phi !== s.phi) {
+                        buildTrack(s.theta, s.phi);
+                        built = { theta: s.theta, phi: s.phi };
+                        ph.derived = computeDerived(s.theta, s.phi);
+                        buildRefLine((s.obj === 'kon' ? ph.derived.konY : ph.derived.cylY)(ph.x));
+                        traceReset();
+                    }
+                    const d = ph.derived;
+                    if (ph.refDirty) {
+                        buildRefLine((s.obj === 'kon' ? d.konY : d.cylY)(ph.x));
+                        traceReset();
+                        ph.refDirty = false;
+                    }
+
+                    const isKon = s.obj === 'kon';
+                    const xMax = isKon ? d.konXMax : d.cylXMax;
+                    const xMin = d.xMin;
+
+                    if (ph.released && !ph.dragging && !ph.stopped) {
+                        // två delsteg för stabilitet
+                        for (let i = 0; i < 2; i++) {
+                            const h = dt / 2;
+                            let a;
+                            if (isKon) {
+                                const r = Math.max(0.3, d.konR(ph.x));
+                                const k = 1 + 0.3 * (GEO.RK / r) * (GEO.RK / r);
+                                const kp = 0.6 * GEO.RK * GEO.RK * d.tanF * TAN_A / (r * r * r);
+                                a = (-GEO.g * d.slopeKon - 0.5 * kp * ph.v * ph.v) / k;
+                            } else {
+                                a = -GEO.g * d.tanT / 1.5;
+                            }
+                            a -= 0.15 * ph.v;   // svag rullfriktion
+                            ph.v += a * h;
+                            ph.x += ph.v * h;
+                        }
+                        // ändlägen: liten studs, sedan vila
+                        if (ph.x <= xMin) {
+                            ph.x = xMin;
+                            if (Math.abs(ph.v) < 2.5) { ph.v = 0; ph.stopped = true; ph.stopReason = 'spets'; }
+                            else ph.v = -ph.v * 0.25;
+                        } else if (ph.x >= xMax) {
+                            ph.x = xMax;
+                            if (Math.abs(ph.v) < 2.5) { ph.v = 0; ph.stopped = true; ph.stopReason = 'bred'; }
+                            else ph.v = -ph.v * 0.2;
+                        }
+                        // dubbelkonen somnar in när kontakten når spetsarna
+                        if (isKon && d.konR(ph.x) < 0.75 && Math.abs(ph.v) < 1.2) {
+                            ph.v = 0; ph.stopped = true; ph.stopReason = 'bred';
+                        }
+                        // rotationen följer rullvillkoret ω = v / r
+                        const r = isKon ? Math.max(0.3, d.konR(ph.x)) : GEO.RC;
+                        ph.spin -= (ph.v / r) * dt;
+                        // spårlinjen
+                        traceT += dt;
+                        if (traceT > 0.045) {
+                            traceT = 0;
+                            tracePush(ph.x, (isKon ? d.konY : d.cylY)(ph.x));
+                        }
+                    }
+
+                    // ── uppdatera meshar ──
+                    const y = (isKon ? d.konY : d.cylY)(ph.x);
+                    konGroup.visible = isKon;
+                    cylGroup.visible = !isKon;
+                    const g = isKon ? konGroup : cylGroup;
+                    g.position.set(ph.x, y, 0);
+                    g.rotation.z = ph.spin;
+                    shadow.position.set(ph.x, 0.07, 0);
+                    // konen: rund skugga; rundstaven: smal och långsträckt
+                    shadow.scale.set(isKon ? 1 : 0.45, isKon ? 1 : 2.6, 1);
+
+                    cmDot.visible = s.show.cm;
+                    cmLabel.visible = s.show.cm;
+                    if (s.show.cm) {
+                        cmDot.position.set(ph.x, y, 0);
+                        cmLabel.position.set(ph.x, y + GEO.RK + 3.4, 0);
+                    }
+                    traceLine.visible = s.show.spar;
+                    traceCase.visible = s.show.spar;
+                    if (refLine) refLine.visible = s.show.ref;
+                    refLabel.visible = s.show.ref;
+
+                    // Kontaktpunkterna vandrar utåt för båda föremålen — men
+                    // bara konens radie krymper där kontakten hamnar.
+                    const sHalf = ph.x * d.tanF;
+                    contactDots.forEach((m, i) => {
+                        m.visible = s.show.kontakt;
+                        if (m.visible) m.position.set(ph.x, d.railTopY(ph.x), (i === 0 ? 1 : -1) * sHalf);
+                    });
+
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+                animate();
+
+                // ── Dra föremålet längs banan ──
+                const raycaster = new THREE.Raycaster();
+                const pointerNDC = new THREE.Vector2();
+                const dragPlane = new THREE.Plane();
+                const hitV = new THREE.Vector3();
+                let dragOffset = 0;
+                const setNDC = (ev) => {
+                    const rect = renderer.domElement.getBoundingClientRect();
+                    pointerNDC.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+                    pointerNDC.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+                };
+                const onPointerDown = (ev) => {
+                    setNDC(ev);
+                    raycaster.setFromCamera(pointerNDC, camera);
+                    const s = stateRef.current;
+                    const ph = physRef.current;
+                    const g = s.obj === 'kon' ? konGroup : cylGroup;
+                    const hits = raycaster.intersectObject(g, true);
+                    if (!hits.length) return;
+                    ph.dragging = true;
+                    ph.v = 0;
+                    controls.enabled = false;
+                    dragPlane.set(new THREE.Vector3(0, 1, 0), -hits[0].point.y);
+                    dragOffset = hits[0].point.x - ph.x;
+                    renderer.domElement.setPointerCapture(ev.pointerId);
+                };
+                const onPointerMove = (ev) => {
+                    const ph = physRef.current;
+                    if (!ph.dragging) {
+                        // pekarmarkör över föremålet
+                        setNDC(ev);
+                        raycaster.setFromCamera(pointerNDC, camera);
+                        const g = stateRef.current.obj === 'kon' ? konGroup : cylGroup;
+                        renderer.domElement.style.cursor =
+                            raycaster.intersectObject(g, true).length ? 'grab' : '';
+                        return;
+                    }
+                    setNDC(ev);
+                    raycaster.setFromCamera(pointerNDC, camera);
+                    if (!raycaster.ray.intersectPlane(dragPlane, hitV)) return;
+                    const s = stateRef.current;
+                    const d = ph.derived;
+                    const xMax = s.obj === 'kon' ? d.konXMax : d.cylXMax;
+                    ph.x = Math.max(d.xMin, Math.min(xMax, hitV.x - dragOffset));
+                    ph.refDirty = true;
+                };
+                const onPointerUp = (ev) => {
+                    const ph = physRef.current;
+                    if (!ph.dragging) return;
+                    ph.dragging = false;
+                    ph.released = true;
+                    ph.stopped = false;
+                    ph.stopReason = null;
+                    controls.enabled = true;
+                    try { renderer.domElement.releasePointerCapture(ev.pointerId); } catch (e) {}
+                };
+                renderer.domElement.addEventListener('pointerdown', onPointerDown);
+                renderer.domElement.addEventListener('pointermove', onPointerMove);
+                renderer.domElement.addEventListener('pointerup', onPointerUp);
+
+                const onResize = () => {
+                    const w = mount.clientWidth, hh = mount.clientHeight;
+                    if (!w || !hh) return;
+                    camera.aspect = w / hh; camera.updateProjectionMatrix();
+                    renderer.setSize(w, hh);
+                };
+                window.addEventListener('resize', onResize);
+                const ro = new ResizeObserver(onResize);
+                ro.observe(mount);
+
+                actionsRef.current.clearTrace = traceReset;
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    window.removeEventListener('resize', onResize);
+                    renderer.domElement.removeEventListener('pointerdown', onPointerDown);
+                    renderer.domElement.removeEventListener('pointermove', onPointerMove);
+                    renderer.domElement.removeEventListener('pointerup', onPointerUp);
+                    ro.disconnect();
+                    renderer.dispose();
+                    mount.removeChild(renderer.domElement);
+                };
+            }, []);
+
+            // absolute inset-0: fyller ramen — och undantar scen-wrappern från
+            // sektion 8:s height:auto på mobil (annars kollapsar ramen till 0)
+            return <div ref={mountRef} className="absolute inset-0"></div>;
+        };
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [theta, setThetaState] = useState(3);
+            const [phi, setPhiState] = useState(10);
+            const [obj, setObjState] = useState('kon');
+            // Startläget: inga kryssrutor förkryssade — hjälplinjerna väljs
+            // aktivt av användaren (uttryckligt önskemål 2026-08-28).
+            const [show, setShow] = useState({ cm: false, spar: false, ref: false, kontakt: false });
+            const [slow, setSlow] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(false);
+            const [ui, setUi] = useState({ x: GEO.xStart, v: 0, released: false, stopped: false, stopReason: null });
+            const sceneWrapRef = useRef(null);
+
+            const stateRef = useRef({ theta, phi, obj, show, slow });
+            useEffect(() => { stateRef.current = { theta, phi, obj, show, slow }; }, [theta, phi, obj, show, slow]);
+
+            // Fysikens tillstånd (muteras i animationsloopen, inte React-state)
+            const physRef = useRef({
+                x: GEO.xStart, v: 0, spin: 0,
+                released: false, stopped: false, stopReason: null,
+                dragging: false, refDirty: false,
+                derived: computeDerived(3, 10)
+            });
+            const actionsRef = useRef({});
+
+            // Test-handtag för mätskript
+            useEffect(() => { window.__dubbelPh = physRef.current; }, []);
+
+            // Läs av läget till UI:t några gånger per sekund
+            useEffect(() => {
+                const id = setInterval(() => {
+                    const ph = physRef.current;
+                    setUi({ x: ph.x, v: ph.v, released: ph.released,
+                            stopped: ph.stopped, stopReason: ph.stopReason });
+                    // Mini-läget: rapportera läget till minisim-kortet utanför
+                    if (window.__MINI && window.parent !== window) {
+                        const st = stateRef.current;
+                        const dd = computeDerived(st.theta, st.phi);
+                        window.parent.postMessage({ fysikDubbelkonStatus: {
+                            objekt: st.obj, released: ph.released, stopped: ph.stopped,
+                            stopReason: ph.stopReason,
+                            up: dd.slopeKon < 0, theta: st.theta, thetaCrit: dd.thetaCrit
+                        } }, '*');
+                    }
+                }, 180);
+                return () => clearInterval(id);
+            }, []);
+
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const placeAtStart = (objType, thetaV, phiV) => {
+                const ph = physRef.current;
+                const d = computeDerived(thetaV, phiV);
+                ph.derived = d;
+                const xMax = objType === 'kon' ? d.konXMax : d.cylXMax;
+                ph.x = Math.max(d.xMin, Math.min(xMax, GEO.xStart));
+                ph.v = 0; ph.spin = 0;
+                ph.released = false; ph.stopped = false; ph.stopReason = null;
+                ph.refDirty = true;
+            };
+
+            const slapp = () => {
+                const ph = physRef.current;
+                if (ph.released && !ph.stopped) return;
+                ph.released = true; ph.stopped = false; ph.stopReason = null;
+            };
+            const reset = () => placeAtStart(obj, theta, phi);
+            const setObj = (o) => { setObjState(o); placeAtStart(o, theta, phi); };
+            const setTheta = (t) => { setThetaState(t); placeAtStart(obj, t, phi); };
+            const setPhi = (p) => { setPhiState(p); placeAtStart(obj, theta, p); };
+
+            // Mini-läget: minisim-kortet i teorin styr sidan via postMessage
+            const miniRef = useRef({});
+            miniRef.current = { slapp, reset, setObj, setTheta };
+            useEffect(() => {
+                if (!window.__MINI) return;
+                const onMsg = (e) => {
+                    const msg = e.data;
+                    if (!msg || !msg.fysikDubbelkon) return;
+                    const m = miniRef.current;
+                    if (msg.fysikDubbelkon === 'slapp') m.slapp();
+                    else if (msg.fysikDubbelkon === 'reset') m.reset();
+                    else if (msg.fysikDubbelkon === 'objekt')
+                        m.setObj(msg.value === 'cyl' ? 'cyl' : 'kon');
+                    else if (msg.fysikDubbelkon === 'lutning')
+                        m.setTheta(Math.max(0, Math.min(8, +msg.value || 0)));
+                };
+                window.addEventListener('message', onMsg);
+                return () => window.removeEventListener('message', onMsg);
+            }, []);
+
+            const d = useMemo(() => computeDerived(theta, phi), [theta, phi]);
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const rullarUpp = d.slopeKon < 0;
+            const yNu = obj === 'kon' ? d.konY(ui.x) : d.cylY(ui.x);
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Dubbelkonen som rullar uppför
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Dubbelkonen som rullar uppför</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 760 }}>
+                            En dubbelkon släpps vid den låga änden av en V-formad bana och rullar,
+                            till synes av sig själv, upp mot den höga änden. En vanlig cylinder på
+                            samma bana rullar nedåt som förväntat. Hemligheten är att banans skenor
+                            går isär: kontaktpunkterna vandrar ut mot konens smala spetsar, så
+                            att <strong>tyngdpunkten sjunker hela vägen</strong> fastän skenornas
+                            överkant stiger. Dra föremålet dit du vill, släpp det och följ
+                            tyngdpunktens spår.
+                        </p>
+
+                        {/* Formelkort: villkoret för att rulla mot den breda änden */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4">
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Konens halva toppvinkel</div>
+                                    <div className="fnum">tan <em>α</em></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>⋅</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Halva öppningsvinkeln</div>
+                                    <div className="fnum">tan <em>φ</em></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>&gt;</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Banans lutning</div>
+                                    <div className="fnum">tan <em>θ</em></div>
+                                </div>
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 430 }}>
+                                När olikheten är uppfylld sjunker tyngdpunkten mot den breda änden
+                                och dubbelkonen rullar <strong>&quot;uppför&quot;</strong> banan. Med de
+                                aktuella värdena: tan {fmt(ALFA, 0)}° ⋅ tan {fmt(phi, 1)}° {rullarUpp ? '>' : '≤'} tan {fmt(theta, 1)}°,
+                                så konen rullar {rullarUpp ? 'mot den breda, höga änden' : 'nedåt mot spetsen'}.
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <div className="scene-stage">
+                                        <BanaScene stateRef={stateRef} physRef={physRef} actionsRef={actionsRef} />
+                                        <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                                title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                            {isFullscreen ? (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                                </svg>
+                                            ) : (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <button className="vy-btn"
+                                                onClick={() => actionsRef.current.resetView && actionsRef.current.resetView()}
+                                                aria-label="Återställ vyn rakt från sidan"
+                                                title="Rakt från sidan">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/>
+                                            </svg>
+                                        </button>
+                                        <div className="scene-hint">Dra föremålet längs banan · dra i scenen för att vrida kameran</div>
+                                    </div>
+
+                                    {isFullscreen && (
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Föremål</div>
+                                        <label>
+                                            <input type="radio" name="objekt" checked={obj === 'kon'} onChange={() => setObj('kon')} />
+                                            <span>Dubbelkon</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="objekt" checked={obj === 'cyl'} onChange={() => setObj('cyl')} />
+                                            <span>Cylinder</span>
+                                        </label>
+                                        <div className="st-title" style={{ marginTop: 7 }}>Visa</div>
+                                        <label>
+                                            <input type="checkbox" checked={show.cm} onChange={() => tShow('cm')} />
+                                            <span className="st-swatch" style={{ background: COL.cm }}></span>
+                                            <span>Tyngdpunkt</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.spar} onChange={() => tShow('spar')} />
+                                            <span className="st-swatch" style={{ background: COL.spar }}></span>
+                                            <span>Tyngdpunktens spår</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.ref} onChange={() => tShow('ref')} />
+                                            <span className="st-swatch" style={{ background: COL.ref }}></span>
+                                            <span>Vågrät startnivå</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.kontakt} onChange={() => tShow('kontakt')} />
+                                            <span className="st-swatch" style={{ background: COL.kontakt }}></span>
+                                            <span>Kontaktpunkter</span>
+                                        </label>
+                                        <div className="st-title" style={{ marginTop: 7 }}>Fart</div>
+                                        <label>
+                                            <input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} />
+                                            <span className="st-swatch" style={{ background: 'transparent' }}></span>
+                                            <span>Ultrarapid</span>
+                                        </label>
+                                        <div className="st-actions">
+                                            <button className="btn-toggle" onClick={slapp} disabled={ui.released && !ui.stopped}>Släpp</button>
+                                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                                        </div>
+                                    </div>
+                                    )}
+
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Banans lutning (<em>θ</em>)" value={theta}
+                                                          min={0} max={8} step={0.5} unit="°" onChange={setTheta} decimals={1} />
+                                                <FsSlider label="Halva öppningsvinkeln (<em>φ</em>)" value={phi}
+                                                          min={6} max={16} step={0.5} unit="°" onChange={setPhi} decimals={1} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                </div>
+
+                                {ui.stopped && ui.stopReason === 'bred' && obj === 'kon' && (
+                                    <div className="mt-3 p-3 rounded-lg text-sm" style={{ background: 'var(--lab-bg)', borderLeft: '3px solid var(--lab-accent)', color: 'var(--lab-ink-soft)' }}>
+                                        <strong>Konen har stannat vid den breda, höga änden.</strong>{' '}
+                                        Kontaktpunkterna har nått nästan ända ut till spetsarna, där
+                                        kontaktradien är liten: nu måste konen snurra många varv för
+                                        varje centimeter framåt, och rörelseenergin räcker inte längre.
+                                        Tyngdpunkten har sjunkit hela vägen hit. Tryck på <em>Börja om</em>.
+                                    </div>
+                                )}
+                                {ui.stopped && ui.stopReason === 'spets' && (
+                                    <div className="mt-3 p-3 rounded-lg text-sm" style={{ background: 'var(--lab-bg)', borderLeft: '3px solid var(--lab-accent)', color: 'var(--lab-ink-soft)' }}>
+                                        <strong>{obj === 'kon' ? 'Konen' : 'Cylindern'} rullade ned till banans spets.</strong>{' '}
+                                        {obj === 'kon'
+                                            ? <span>Med lutningen {fmt(theta, 1)}° är banan brantare än gränsen {fmt(d.thetaCrit, 1)}°: skenornas stigning vinner över kontaktradiens krympning, tyngdpunkten skulle stiga mot den breda änden, och konen rullar därför nedåt precis som cylindern.</span>
+                                            : <span>Cylinderns kontaktradie är lika stor överallt, så dess tyngdpunkt följer skenornas lutning. Den rullar alltid mot den låga spetsen, hur banan än ser ut.</span>}
+                                        {' '}Tryck på <em>Börja om</em>.
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="flex gap-2 mb-3">
+                                    <button className="btn-toggle flex-1" onClick={slapp} disabled={ui.released && !ui.stopped}>Släpp</button>
+                                    <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                </div>
+
+                                {/* I normalläget bor verktygsvalen här i sidopanelen,
+                                    så att de aldrig skymmer scenen. I fullskärm tar
+                                    overlay-rutan .scene-toggles över (sidopanelen
+                                    syns inte där) — aldrig båda samtidigt. */}
+                                {!isFullscreen && (
+                                <div className="glass-card rounded-xl p-3 mb-3 st-panel">
+                                    <div>
+                                        <div className="st-title">Föremål</div>
+                                        <label>
+                                            <input type="radio" name="objekt-panel" checked={obj === 'kon'} onChange={() => setObj('kon')} />
+                                            <span>Dubbelkon</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="objekt-panel" checked={obj === 'cyl'} onChange={() => setObj('cyl')} />
+                                            <span>Cylinder</span>
+                                        </label>
+                                        <div className="st-title" style={{ marginTop: 7 }}>Fart</div>
+                                        <label>
+                                            <input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} />
+                                            <span>Ultrarapid</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <div className="st-title">Visa</div>
+                                        <label>
+                                            <input type="checkbox" checked={show.cm} onChange={() => tShow('cm')} />
+                                            <span className="st-swatch" style={{ background: COL.cm }}></span>
+                                            <span>Tyngdpunkt</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.spar} onChange={() => tShow('spar')} />
+                                            <span className="st-swatch" style={{ background: COL.spar }}></span>
+                                            <span>Tyngdpunktens spår</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.ref} onChange={() => tShow('ref')} />
+                                            <span className="st-swatch" style={{ background: COL.ref }}></span>
+                                            <span>Vågrät startnivå</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" checked={show.kontakt} onChange={() => tShow('kontakt')} />
+                                            <span className="st-swatch" style={{ background: COL.kontakt }}></span>
+                                            <span>Kontaktpunkter</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                )}
+
+                                <Slider label="Banans lutning (<em>θ</em>)"
+                                        sub={`Hur brant skenornas överkant stiger mot den breda änden. Gränsen för dubbelkonen går vid <em>θ</em> ≈ ${fmt(d.thetaCrit, 1)}° med den aktuella öppningsvinkeln.`}
+                                        value={theta} min={0} max={8} step={0.5} unit="°" onChange={setTheta} decimals={1} />
+                                <Slider label="Halva öppningsvinkeln (<em>φ</em>)"
+                                        sub="Hur snabbt skenorna går isär. Större vinkel flyttar kontaktpunkterna snabbare ut mot spetsarna, så att tyngdpunkten sjunker brantare."
+                                        value={phi} min={6} max={16} step={0.5} unit="°" onChange={setPhi} decimals={1} />
+
+                                <div className="glass-card rounded-xl p-3 mb-4">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Avläsningar</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Tyngdpunktens höjd" value={fmt(yNu, 1)} unit="cm över bordet" accent />
+                                        <Readout label="Läge längs banan" value={fmt(ui.x, 0)} unit="cm" />
+                                        <Readout label="Fart" value={fmt(Math.abs(ui.v), 0)} unit="cm/s" />
+                                        <Readout label="Kritisk lutning <em>θ</em>" value={fmt(d.thetaCrit, 1)} unit="°" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: rullarUpp ? 'rgba(46,158,79,0.10)' : 'rgba(200,50,74,0.10)', color: 'var(--lab-ink-soft)' }}>
+                                        {rullarUpp
+                                            ? <span><strong>Illusionen håller</strong>: tyngdpunkten sjunker mot den breda änden, så dubbelkonen rullar &quot;uppför&quot; banan.</span>
+                                            : <span><strong>Illusionen bruten</strong>: banan är brantare än gränsen, tyngdpunkten skulle stiga mot den breda änden, och dubbelkonen rullar nedåt.</span>}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-4">
+                                    <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>Höjden längs banan</h3>
+                                    <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Skenornas överkant (streckad) stiger, men dubbelkonens
+                                        tyngdpunkt (grön) sjunker: kontaktradien krymper snabbare än
+                                        skenorna hinner stiga. Byt till cylindern och se dess
+                                        tyngdpunktskurva stiga parallellt med skenorna.
+                                    </p>
+                                    <HeightGraph theta={theta} phi={phi} obj={obj} curX={ui.x} />
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför rullar den uppför?</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Det gör den inte, egentligen. Ett föremål som rullar fritt söker sig
+                                    alltid dit dess <strong>tyngdpunkt</strong> kommer lägst, och det som
+                                    avgör tyngdpunktens höjd är inte skenornas överkant utan var på
+                                    föremålet skenorna bär upp det.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vid banans spets sitter skenorna tätt ihop och bär dubbelkonen nära
+                                    dess tjocka mitt: tyngdpunkten ligger då en hel konradie ovanför
+                                    skenorna. Mot den breda änden går skenorna isär, kontaktpunkterna
+                                    glider ut mot de smala spetsarna, och konen sjunker ner mellan
+                                    skenorna. Kryssa i <em>Kontaktpunkter</em> och följ de röda prickarna:
+                                    de vandrar utåt medan den gröna tyngdpunkten sjunker under den
+                                    vågräta startnivån.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Cylindern avslöjar skillnaden</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En cylinder är lika tjock överallt. Var skenorna än rör den är
+                                    kontaktradien densamma, så dess tyngdpunkt ligger alltid på samma
+                                    höjd över skenorna och följer deras lutning exakt: stiger skenorna
+                                    med 3° stiger cylinderns tyngdpunkt med 3°.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Därför rullar cylindern alltid mot den låga spetsen, precis som
+                                    intuitionen säger. Släpp båda föremålen från samma startläge och se
+                                    dem rulla åt varsitt håll: samma bana, samma tyngdkraft, men två
+                                    olika former, och det är formen som bestämmer vart tyngdpunkten
+                                    kan sjunka.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4 md:col-span-2">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Villkoret, med siffror</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    På avståndet <em>x</em> från spetsen har skenorna gått isär så att de
+                                    rör konen på det axiella avståndet <em>x</em> · tan <em>φ</em> från
+                                    mitten. Där är konens radie mindre: den har krympt med{' '}
+                                    <em>x</em> · tan <em>φ</em> · tan <em>α</em>. Samtidigt har skenornas
+                                    överkant stigit med <em>x</em> · tan <em>θ</em>. Tyngdpunkten sjunker
+                                    alltså precis när radien krymper snabbare än skenorna stiger:
+                                    tan <em>α</em> · tan <em>φ</em> &gt; tan <em>θ</em>.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Konen i simuleringen har halva toppvinkeln <em>α</em> ≈ {fmt(ALFA, 0)}°.
+                                    Med <em>φ</em> = {fmt(phi, 1)}° blir gränsen{' '}
+                                    <em>θ</em><sub>krit</sub> ≈ {fmt(d.thetaCrit, 1)}°: gör banan brantare än
+                                    så, och illusionen bryts. Prova med glidaren <em>Banans lutning</em>,
+                                    och lägg märke till att konen saktar in och stannar av sig själv vid
+                                    den breda änden. När kontaktpunkterna når de smala spetsarna måste
+                                    konen snurra fortare och fortare för varje centimeter, och till slut
+                                    går all rörelseenergi åt till snurrandet.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>&quot;Dubbelkonen rullar uppför backen.&quot;</strong> Skenornas överkant stiger, men det är inte den ett rullande föremål bryr sig om. Konens tyngdpunkt sjunker hela vägen, så rörelsen är helt vanlig: nedåt i lägesenergi, precis som en kula som rullar nedför en backe.</li>
+                                <li><strong>&quot;Det måste finnas en dold motor eller magnet.&quot;</strong> Demonstrationen drivs enbart av tyngdkraften. Att den känns omöjlig beror på att ögat läser skenornas kant som &quot;backen&quot; och inte ser att föremålet samtidigt sjunker ner mellan skenorna.</li>
+                                <li><strong>&quot;Energin ökar eftersom konen tar fart uppåt.&quot;</strong> Energiprincipen gäller som vanligt: den rörelseenergi konen vinner kommer från lägesenergin som frigörs när tyngdpunkten sjunker. Höjden som räknas är tyngdpunktens, inte skenornas.</li>
+                            </ul>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Prova själv hemma</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Tejpa ihop två likadana trattar mot varandra, mynning mot mynning, så
+                                får du en dubbelkon. Bygg banan av två linjaler eller lister som möts i
+                                en spets: lägg spetsen på bordet och de breda ändarna på ett par böcker,
+                                så att kanterna stiger några grader. Lägg dubbelkonen vid spetsen och
+                                släpp. Fungerar det inte direkt är banan antingen för brant eller
+                                öppningsvinkeln för liten, precis som villkoret ovan säger. Titta
+                                sedan från sidan, i ögonhöjd med banan: då syns det tydligt att konens
+                                mitt faktiskt sjunker medan den rullar &quot;uppför&quot;.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

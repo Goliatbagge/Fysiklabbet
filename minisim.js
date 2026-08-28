@@ -18,7 +18,7 @@
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, eulersdisk,
  *           fjaderpendel, skiftnyckel, valtning, gaffelbalans,
- *           gaffelbalans3d, linjal, fodelsedag, talmangder
+ *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -155,6 +155,18 @@
  * tillbaka fallen/stabil/period/varvtal till kortets info-rad.
  * Fullskärm startas med scenens egen .fs-btn inne i iframen och ger
  * exakt originalsimuleringens fullskärmsläge, med alla verktyg.
+ *
+ * ── typ: dubbelkon ───────────────────────────────────────────────────────
+ * Demonstrationen ur fy2-1.2 (Mer kraftmoment): dubbelkonen som ser ut att
+ * rulla uppför en lutande, V-formad bana. Den fristående simuleringen
+ * fysik2-dubbelkon-app.html inbäddad som minisimulering via en iframe
+ * (?embed=1&mini=1 — mini-läget visar bara scenen), samma mönster som
+ * gaffelbalans3d. Kortet har de väsentliga verktygen (Släpp, Börja om,
+ * växeln Dubbelkon/Cylinder och glidaren Banans lutning) som styr sidan
+ * med postMessage; sidan rapporterar tillbaka läget (rullar mot breda
+ * änden / rullar nedåt / stannade) till kortets info-rad. Fullskärm
+ * startas med scenens egen .fs-btn inne i iframen och ger exakt
+ * originalsimuleringens fullskärmsläge, med alla verktyg.
  *
  * ── typ: fodelsedag ──────────────────────────────────────────────────────
  * Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst två
@@ -5161,6 +5173,132 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: dubbelkon
+    // ══════════════════════════════════════════════════════════════════════
+    // Dubbelkonen som ser ut att rulla uppför: den fristående simuleringen
+    // fysik2-dubbelkon-app.html inbäddad som minisimulering via en iframe
+    // (?embed=1&mini=1) — samma mönster som gaffelbalans3d. Kortets verktyg
+    // (Släpp, Börja om, växeln Dubbelkon/Cylinder, glidaren Banans lutning)
+    // styr sidan med postMessage, och sidan rapporterar tillbaka sitt läge
+    // till info-raden. FULLSKÄRM startas med scenens egen .fs-btn INNE i
+    // iframen och ger då exakt originalsimuleringens fullskärmsläge.
+    function buildDubbelkon(node, cfg) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var iframe = document.createElement('iframe');
+        iframe.className = 'minisim-iframe';
+        iframe.src = 'fysik2-dubbelkon-app.html?embed=1&mini=1';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.allow = 'fullscreen';
+        iframe.loading = 'lazy';
+        iframe.title =
+            '3D-simulering: en dubbelkon på en lutande, V-formad bana rullar ' +
+            'mot den höga änden eftersom tyngdpunkten ändå sjunker. Dra i ' +
+            'scenen för att vrida kameran och dra föremålet längs banan. ' +
+            'Fullskärmsknappen uppe till vänster i scenen öppnar ' +
+            'simuleringen i fullskärm med alla verktyg.';
+        scene.appendChild(iframe);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        function sanda(cmd, value) {
+            try {
+                iframe.contentWindow.postMessage(
+                    { fysikDubbelkon: cmd, value: value }, location.origin);
+            } catch (e) { /* iframen inte laddad ännu */ }
+        }
+
+        var slappBtn = document.createElement('button');
+        slappBtn.type = 'button';
+        slappBtn.className = 'minisim-btn ms-primar';
+        slappBtn.textContent = 'Släpp';
+        slappBtn.addEventListener('click', function () { sanda('slapp'); });
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        omBtn.addEventListener('click', function () { sanda('reset'); });
+
+        var objekt = 'kon';
+        var bytBtn = document.createElement('button');
+        bytBtn.type = 'button';
+        bytBtn.className = 'minisim-btn';
+        bytBtn.textContent = 'Byt till cylinder';
+        bytBtn.addEventListener('click', function () {
+            objekt = objekt === 'kon' ? 'cyl' : 'kon';
+            bytBtn.textContent = objekt === 'kon'
+                ? 'Byt till cylinder' : 'Byt till dubbelkon';
+            sanda('objekt', objekt);
+        });
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(slappBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(bytBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Banans lutning';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '0';
+        slider.max = '8';
+        slider.step = '0.5';
+        slider.value = '3';
+        slider.setAttribute('aria-label',
+            'Banans lutning i grader — brantare än den kritiska vinkeln ' +
+            'rullar även dubbelkonen nedåt');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderVal.textContent = '3°';
+        slider.addEventListener('input', function () {
+            sliderVal.textContent = String(slider.value).replace('.', ',') + '°';
+            sanda('lutning', parseFloat(slider.value));
+        });
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        // Lägesrapporten från sidan i iframen → kortets info-rad
+        window.addEventListener('message', function (e) {
+            if (e.source !== iframe.contentWindow) return;
+            var st = e.data && e.data.fysikDubbelkonStatus;
+            if (!st) return;
+            if (st.stopped && st.stopReason === 'bred') {
+                info.textContent = 'Stannade vid den breda, höga änden';
+            } else if (st.stopped) {
+                info.textContent = 'Rullade ned till spetsen';
+            } else if (st.objekt === 'cyl') {
+                info.textContent = 'Cylindern rullar alltid nedåt';
+            } else if (st.up) {
+                info.textContent = 'Tyngdpunkten sjunker mot den breda änden';
+            } else {
+                info.textContent = 'För brant bana: konen rullar nedåt';
+            }
+        });
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: linjal
     // ══════════════════════════════════════════════════════════════════════
     function buildLinjal(node, cfg) {
@@ -6438,6 +6576,7 @@
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,
                   gaffelbalans3d: buildGaffelbalans3d,
+                  dubbelkon: buildDubbelkon,
                   linjal: buildLinjal,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
 

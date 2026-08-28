@@ -11,7 +11,7 @@
  * fy1-3.3, men gick inte att nå från astronautsimuleringen — en besökare
  * som klickade "Simulering" i katalogen såg aldrig att den fanns.
  *
- * Skriptet kontrollerar för varje avsnitt med href2:
+ * Skriptet kontrollerar för varje avsnitt med href2 (och/eller href3):
  *   1. att båda HTML-filerna finns,
  *   2. att BÅDA laddar data/katalog.js + section-nav.js (annars ingen rad),
  *   3. att data/simuleringar.js har ett eget namn för var och en av dem,
@@ -45,9 +45,10 @@ for (const subjKey of Object.keys(KATALOG)) {
         const chapters = (courses[courseKey] && courses[courseKey].chapters) || {};
         for (const chapKey of Object.keys(chapters)) {
             for (const sec of (chapters[chapKey].sections || [])) {
-                if (sec.href && sec.href2) {
+                if (sec.href && (sec.href2 || sec.href3)) {
                     pairs.push({ course: courseKey, num: sec.num, title: sec.title,
-                                 href: sec.href, href2: sec.href2 });
+                                 href: sec.href,
+                                 extra: [sec.href2, sec.href3].filter(Boolean) });
                 }
             }
         }
@@ -73,7 +74,7 @@ const problems = [];
 
 for (const p of pairs) {
     const label = `${p.course} ${p.num} ${p.title}`;
-    for (const file of [p.href, p.href2]) {
+    for (const file of [p.href].concat(p.extra)) {
         const full = path.join(ROOT, file);
         if (!fs.existsSync(full)) {
             problems.push(`${label}: filen ${file} saknas`);
@@ -103,8 +104,8 @@ for (const p of pairs) {
 }
 
 console.log('Verifierar växlingen mellan avsnittens simuleringar...\n');
-console.log(`  ${pairs.length} avsnitt har två simuleringar.`);
-for (const p of pairs) console.log(`    ${p.num} ${p.title}: ${p.href} + ${p.href2}`);
+console.log(`  ${pairs.length} avsnitt har flera simuleringar.`);
+for (const p of pairs) console.log(`    ${p.num} ${p.title}: ${[p.href].concat(p.extra).join(' + ')}`);
 console.log('');
 console.log('='.repeat(60));
 

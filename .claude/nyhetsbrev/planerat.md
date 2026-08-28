@@ -24,3 +24,15 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   avsnitt**, i både matematiken och fysiken, teasades i samma brev (öppen
   formulering, inget datumlöfte) — håll teasern öppen tills fler fördjupningar
   faktiskt lanserats, då blir den nästa gång "Nytt på sajten" i stället.
+
+- **Teckenstorleken i presentationsläget går att ställa in.** Läraren som kör
+  en genomgång på projektor har fått en glidare i den nedre kontrollisten
+  (litet A till vänster, stort A till höger) som skalar texten upp till mer än
+  dubbla storleken. Bakgrunden är verklig: elever längst bak i salen hade svårt
+  att läsa, och rätt storlek beror på klassrummet, inte på avsnittet. Valet
+  sparas i webbläsaren, så datorn i den sal man brukar undervisa i minns
+  inställningen till nästa lektion.
+  **Ordval i brevet:** skriv "glidare" eller "reglage", och beskriv nyttan
+  (texten blir läsbar ända till bakre bänkraden) snarare än funktionen.
+  Lanserat 2026-08-28, hör hemma under "Nytt på Fysiklabbet".
+  Länk till ett avsnitt att prova i: `https://fysiklabbet.se/katalog.html?id=fy2-1.2`

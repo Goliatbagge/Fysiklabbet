@@ -296,11 +296,25 @@
             });
         }
 
+
+        // Ankarnamn för en blockruta: "Exempel 2 — Den fatala gungan" →
+        // "exempel-2-den-fatala-gungan". Används av direktlänkningen till en
+        // enskild ruta (katalog.html?id=<avsnitt>&block=<ankare>).
+        function blockSlug(s) {
+            return String(s == null ? '' : s)
+                .toLowerCase()
+                .replace(/[\u00e5\u00e4]/g, 'a').replace(/\u00f6/g, 'o')
+                .replace(/[\u00e9\u00e8]/g, 'e').replace(/\u00fc/g, 'u')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
         // --- Markdown-preprocessor: ::: typ "Titel" ... ::: → HTML-blockruta
         function preprocessBlocks(md) {
             const lines = md.split('\n');
             const out = [];
             const stack = [];
+            const rakn = {};   // ordningsnummer per blocktyp (ankare, se nedan)
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
                 // ::: graf — interaktiv grafritare. Samla config-raderna och
@@ -388,7 +402,24 @@
                         continue;
                     }
                     stack.push({ type: ty, close: '</div>' });
-                    out.push('<div class="lab-block lab-block-' + ty + '">');
+                    // Ankare per ruta, så att en länk kan peka RAKT på den:
+                    //   data-blocknr  typ + ordningsnummer  (exempel-2)
+                    //   data-block    slug av titeln        (den-fatala-gungan)
+                    // Se scrollaTillBlock — hashen är upptagen av
+                    // avsnittsroutingen, därför läses ankaret ur ?block=.
+                    rakn[ty] = (rakn[ty] || 0) + 1;
+                    let ankare = ' data-blocknr="' + blockSlug(ty) + '-' + rakn[ty] + '"';
+                    if (title) {
+                        const slug = blockSlug(title);
+                        ankare += ' data-block="' + slug + '"';
+                        // "Exempel 2 — Den fatala gungan" ger också den korta
+                        // formen "den-fatala-gungan", som överlever att
+                        // exemplen numreras om.
+                        const kort = slug.replace(
+                            new RegExp('^' + blockSlug(ty) + '-\\d+-'), '');
+                        if (kort && kort !== slug) ankare += ' data-blockkort="' + kort + '"';
+                    }
+                    out.push('<div class="lab-block lab-block-' + ty + '"' + ankare + '>');
                     if (title) {
                         // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
                         const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -996,6 +1027,71 @@
             return fordjupningCache[id];
         }
 
+        // ── Direktlänk till en enskild ruta i genomgången (?block=) ────
+        //
+        // katalog.html?id=fy2-1.4&block=den-fatala-gungan tar besökaren rakt
+        // ned till just den rutan i stället för till avsnittets början. Det
+        // används bland annat av nyhetsartiklarna, som ofta pekar på ETT
+        // räkneexempel i en genomgång.
+        //
+        // Varför en query-parameter och inte en hash: allt efter # är redan
+        // upptaget av avsnittsroutingen (#fy2-1.4:ovningar), och hashen
+        // vinner över ?id= i parseInitialState. Ankaret läses därför bara
+        // när hashen är tom — samma ordning som resten av routingen.
+        //
+        // Ankarnamnen sätts av preprocessBlocks: data-block (slug av rutans
+        // titel, tål att rutor läggs till före) och data-blocknr (typ +
+        // ordningsnummer, tål att titeln skrivs om). Båda går att länka till.
+        let blockAnkare = (function () {
+            try {
+                if (window.location.hash) return null;
+                const v = (new URLSearchParams(window.location.search).get('block') || '')
+                    .toLowerCase();
+                return /^[a-z0-9-]+$/.test(v) ? v : null;
+            } catch (e) { return null; }
+        })();
+
+        // Rullar fram rutan när genomgången har renderats. Layouten sätter
+        // sig i flera steg (KaTeX, teckensnitt, pennlösningar, minisims), så
+        // positionen räknas om några gånger — men aldrig efter att besökaren
+        // själv har börjat röra sidan.
+        function scrollaTillBlock(root, del) {
+            if (!blockAnkare || !root || del === 'fordjupning') return;
+            const sok = blockAnkare;
+            // Förbrukat så snart genomgången ritats en gång — annars skulle
+            // ett ankare som inte finns ligga kvar och rycka sidan långt
+            // senare, när besökaren själv klickar tillbaka till Teori.
+            blockAnkare = null;
+            const el = root.querySelector('[data-block="' + sok + '"]')
+                    || root.querySelector('[data-blockkort="' + sok + '"]')
+                    || root.querySelector('[data-blocknr="' + sok + '"]');
+            if (!el) return;
+
+            let avbrutet = false;
+            const avbryt = () => { avbrutet = true; stang(); };
+            const handelser = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+            const stang = () => handelser.forEach(h =>
+                window.removeEventListener(h, avbryt, { passive: true }));
+            handelser.forEach(h =>
+                window.addEventListener(h, avbryt, { passive: true }));
+
+            const placera = () => {
+                if (avbrutet) return;
+                const y = window.scrollY + el.getBoundingClientRect().top - 16;
+                window.scrollTo(0, Math.max(0, y));
+            };
+            requestAnimationFrame(placera);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(placera);
+            const t1 = setTimeout(placera, 300);
+            const t2 = setTimeout(() => { placera(); stang(); }, 900);
+
+            // Kort markering så att det syns VAR man landade.
+            el.classList.add('block-mal');
+            setTimeout(() => el.classList.remove('block-mal'), 2600);
+
+            return () => { clearTimeout(t1); clearTimeout(t2); stang(); };
+        }
+
         // del: 'teori' (genomgången utan fördjupningsblocken) eller
         // 'fordjupning' (bara blocken — kortets egen vy).
         function TeoriBody({ id, bionic, dyslexia, del }) {
@@ -1036,6 +1132,8 @@
                 // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
                 // Synlighet styrs sedan av .bionic-on-klassen via CSS.
                 applyBionic(ref.current);
+                // ?block= — rulla fram den ruta länken pekar på.
+                const slutaScrolla = scrollaTillBlock(ref.current, del);
                 // Skala ner long display-math; kör efter KaTeX-rendering.
                 // Måste vänta på fonts.ready — KaTeX laddar Computer Modern
                 // async och bredder är inte korrekta innan dess. fitFormel
@@ -1058,6 +1156,7 @@
                     cancelAnimationFrame(raf1);
                     clearTimeout(tid);
                     window.removeEventListener('resize', fit);
+                    if (slutaScrolla) slutaScrolla();
                 };
             }, [html]);
             if (!html) {

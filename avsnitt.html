@@ -236,12 +236,26 @@
             });
         }
 
+
+        // Ankarnamn för en blockruta: "Exempel 2 — Den fatala gungan" →
+        // "exempel-2-den-fatala-gungan". Används av direktlänkningen till en
+        // enskild ruta (katalog.html?id=<avsnitt>&block=<ankare>).
+        function blockSlug(s) {
+            return String(s == null ? '' : s)
+                .toLowerCase()
+                .replace(/[\u00e5\u00e4]/g, 'a').replace(/\u00f6/g, 'o')
+                .replace(/[\u00e9\u00e8]/g, 'e').replace(/\u00fc/g, 'u')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
         // --- Markdown-preprocessor: ::: typ "Titel" ... ::: → HTML-blockruta
         // Hanterar nästlade ::: bild ... ::: inuti t.ex. ::: kuriosa ... :::.
         function preprocessBlocks(md) {
             const lines = md.split('\n');
             const out = [];
             const stack = [];
+            const rakn = {};   // ordningsnummer per blocktyp (ankare, se nedan)
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
@@ -331,7 +345,24 @@
                         continue;
                     }
                     stack.push({ type: ty, close: '</div>' });
-                    out.push('<div class="lab-block lab-block-' + ty + '">');
+                    // Ankare per ruta, så att en länk kan peka RAKT på den:
+                    //   data-blocknr  typ + ordningsnummer  (exempel-2)
+                    //   data-block    slug av titeln        (den-fatala-gungan)
+                    // Se scrollaTillBlock — hashen är upptagen av
+                    // avsnittsroutingen, därför läses ankaret ur ?block=.
+                    rakn[ty] = (rakn[ty] || 0) + 1;
+                    let ankare = ' data-blocknr="' + blockSlug(ty) + '-' + rakn[ty] + '"';
+                    if (title) {
+                        const slug = blockSlug(title);
+                        ankare += ' data-block="' + slug + '"';
+                        // "Exempel 2 — Den fatala gungan" ger också den korta
+                        // formen "den-fatala-gungan", som överlever att
+                        // exemplen numreras om.
+                        const kort = slug.replace(
+                            new RegExp('^' + blockSlug(ty) + '-\\d+-'), '');
+                        if (kort && kort !== slug) ankare += ' data-blockkort="' + kort + '"';
+                    }
+                    out.push('<div class="lab-block lab-block-' + ty + '"' + ankare + '>');
                     if (title) {
                         // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
                         const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');

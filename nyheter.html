@@ -310,7 +310,10 @@
         .article-body p {
             font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px;
         }
-        .article-body p a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
+        /* Länkar i brödtexten stylas av .begrepp-lank (ordlistan) och
+           .artikel-lank (länk till ett avsnitt) i styles-laborans.css. En
+           regel på .article-body p a har ingen verkan: body.laborans a:not(…)
+           väger tyngre och nollställer den. */
         /* Formler (KaTeX). Samma sättning som teoriavsnitten; storleken
            trimmas mot brödtexten så att en inline-formel inte sticker upp
            som en främmande kropp i stycket. .katex { white-space: nowrap }

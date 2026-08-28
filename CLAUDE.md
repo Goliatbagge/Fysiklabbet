@@ -2423,6 +2423,40 @@ visas utifrån adressen:
 Google, så alla 333 genomgångar var i praktiken omöjliga att hitta via
 sökning. `?id=` ger varje avsnitt en egen riktig adress.
 
+### Direktlänk till en enskild ruta i genomgången (`&block=`)
+
+**En länk kan peka RAKT på en ruta i en genomgång — ett räkneexempel, en
+formelruta, en sammanfattning — så att besökaren slipper leta sig ned på
+sidan.** Formen är `katalog.html?id=<avsnitt>&block=<ankare>`, till exempel
+`katalog.html?id=fy2-1.4&block=den-fatala-gungan`. Används framför allt när
+en nyhetsartikel refererar till ett bestämt exempel i katalogen.
+
+Ankarnamnen sätts automatiskt av `preprocessBlocks` i `katalog.html` — du
+behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
+`&block=` matchar vilken som helst av dem:
+
+| Attribut | Exempel för `::: exempel "Exempel 2 — Den fatala gungan"` |
+|---|---|
+| `data-block` | `exempel-2-den-fatala-gungan` (hela titeln som slug) |
+| `data-blockkort` | `den-fatala-gungan` (utan `<typ>-<nummer>-`) |
+| `data-blocknr` | `exempel-2` (typ + ordningsnummer, även för rutor utan titel) |
+
+- **Länka helst med den korta formen** (`den-fatala-gungan`) — den överlever
+  att exemplen numreras om, medan `exempel-2` överlever att titeln skrivs om.
+- **Ankaret läses bara när hashen är tom**, precis som `?id=` (se nedan), och
+  bara vid första inläsningen av teorivyn. Hittas ingen ruta händer
+  ingenting: besökaren landar överst i avsnittet som vanligt. Ändras en titel
+  blir en gammal länk alltså inte trasig, bara trubbig.
+- **Rullningen räknas om några gånger** medan KaTeX, teckensnitt,
+  pennlösningar och minisimuleringar sätter layouten, men avbryts så snart
+  besökaren själv rör sidan. Rutan man landar i markeras kort med en
+  bortonande accentram (`.block-mal`).
+- **Länken skrivs med klassen `artikel-lank`** i nyhetsartiklarnas
+  `body`-strängar (`<a class="artikel-lank" href="…">`). Utan klassen blir
+  länken osynlig svart text: `body.laborans a:not(…)` nollställer färg och
+  understrykning för alla andra länkar. Den prickade `.begrepp-lank` är
+  ordlistans stil och ska inte användas för avsnittslänkar.
+
 **Regler:**
 
 - **`?id=` läses BARA när hashen är tom.** Hashen vinner alltid, så

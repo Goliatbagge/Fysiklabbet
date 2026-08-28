@@ -3823,13 +3823,18 @@ button.lab-card-disabled { pointer-events: none; }
     background: var(--lab-bg-panel);
 }
 
-/* Brödtexten — uppskalad för projektor */
+/* Brödtexten — uppskalad för projektor. --pres-skala sätts av
+   textstorleks-glidaren i kontrollisten (katalog.html) så att läraren kan
+   anpassa storleken efter klassrummet; allt inuti (KaTeX inräknat) är
+   em-baserat och följer med. Sammanfattnings-sliden berörs inte — dess
+   storlek sätts inline av fitSammanfattning(). */
 .lab-pres .lab-pres-body {
-    font-size: 20px;
+    font-size: calc(20px * var(--pres-skala, 1));
     line-height: 1.7;
 }
 
-.lab-pres .lab-pres-body h2 { font-size: 36px; }
+.lab-pres .lab-pres-body h2 { font-size: calc(36px * var(--pres-skala, 1)); }
+.lab-pres .lab-pres-body h3 { font-size: calc(22px * var(--pres-skala, 1)); }
 
 /* Sammanfattningen i presentationsläget: EN slide som ska rymmas på en
    skärm (liggande datorläge). Rutan bryter ut ur textspalten och tar
@@ -3952,6 +3957,24 @@ button.lab-card-disabled { pointer-events: none; }
     cursor: default;
 }
 
+/* Textstorleks-glidaren i kontrollisten: litet A — glidare — stort A */
+.lab-pres-textsize {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lab-ink-soft);
+    font-family: var(--lab-font-display);
+}
+
+.lab-pres-textsize .ts-min { font-size: 12px; line-height: 1; }
+.lab-pres-textsize .ts-max { font-size: 19px; line-height: 1; }
+
+.lab-pres-textsize input[type="range"] {
+    width: 110px;
+    accent-color: var(--lab-ink);
+    cursor: pointer;
+}
+
 .lab-pres-exit {
     border: 1px solid var(--lab-line-strong);
     background: transparent;
@@ -3981,6 +4004,8 @@ button.lab-card-disabled { pointer-events: none; }
     .lab-pres-stage { padding: 6vh 22px 40vh; }
     .lab-pres-counter { min-width: 0; }
     .lab-pres-launch { margin-left: 0; }
+    /* Trång list på mobil: kortare glidare i stället för att trängas bort */
+    .lab-pres-textsize input[type="range"] { width: 64px; }
 }
 
 /* Under presentation: göm feedback-lampan (ligger annars över kontrollisten) */

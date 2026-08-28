@@ -1389,6 +1389,24 @@
             const [total, setTotal] = useState(0);
             const [ready, setReady] = useState(false);
             const [chrome, setChrome] = useState(true);
+            // Textstorlek: glidare i kontrollisten som skalar brödtexten
+            // (CSS-variabeln --pres-skala). Valet sparas i localStorage så
+            // att det sitter kvar mellan lektioner på samma dator — behovet
+            // beror på klassrummet (projektorns storlek, avståndet till
+            // duken), inte på avsnittet. Sammanfattnings-sliden berörs inte:
+            // den storleksanpassas redan av fitSammanfattning() så att den
+            // fyller hela duken.
+            const [textScale, setTextScale] = useState(() => {
+                try {
+                    const v = parseFloat(localStorage.getItem('fl-pres-textskala'));
+                    if (v >= 0.8 && v <= 2.2) return v;
+                } catch (e) { /* privat läge m.m. — kör vidare med 1 */ }
+                return 1;
+            });
+            useEffect(() => {
+                try { localStorage.setItem('fl-pres-textskala', String(textScale)); }
+                catch (e) { /* privat läge m.m. — inställningen gäller ändå nu */ }
+            }, [textScale]);
             // Avsnittets visualisering (om någon) kan öppnas som ett eget
             // lager ovanpå presentationen — stort och utan störningsmoment.
             const vis = VIS_INDEX[id];
@@ -1674,7 +1692,9 @@
                 }
                 const raf = requestAnimationFrame(place);
                 return () => cancelAnimationFrame(raf);
-            }, [step, ready]);
+            // textScale: en ändrad textstorlek flyttar radbrytningar och
+            // höjder — mät om och placera det aktuella steget på nytt.
+            }, [step, ready, textScale]);
 
             // Nedre listen göms efter en stunds musinaktivitet (som i bildspel).
             const pokeChrome = () => {
@@ -1700,6 +1720,7 @@
             return (
                 <div className={'lab-pres' + (chrome ? ' chrome-on' : '')
                         + (step === 0 ? ' at-title' : '') + (ready ? ' is-ready' : '')}
+                    style={{ '--pres-skala': textScale }}
                     ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
                     role="dialog" aria-label={'Presentationsläge: ' + plainTitle(title)}>
                     <div className="lab-pres-progress" aria-hidden="true">
@@ -1735,6 +1756,13 @@
                                 aria-label="Nästa steg">→</button>
                         </div>
                         <div className="lab-pres-bar-right">
+                            <div className="lab-pres-textsize" title="Textstorlek">
+                                <span className="ts-min" aria-hidden="true">A</span>
+                                <input type="range" min="0.8" max="2.2" step="0.05"
+                                    value={textScale} aria-label="Textstorlek"
+                                    onChange={(e) => setTextScale(parseFloat(e.target.value))} />
+                                <span className="ts-max" aria-hidden="true">A</span>
+                            </div>
                             {vis && (
                                 <button type="button" className="lab-pres-exit lab-pres-visbtn"
                                     onClick={() => setShowVis(true)}

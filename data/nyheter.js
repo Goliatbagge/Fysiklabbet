@@ -88,6 +88,59 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-28-gungan-som-gar-runt",
+    date: "2026-08-28",
+    title: "Gungan går ett helt varv runt sitt eget fäste — och lyftet kommer inte från benen",
+    deck: "I den estniska sporten kiiking pumpar utövaren en sju meter lång stålgunga tills den passerar rakt över sitt fäste. Ett forskarlag har nu räknat fram den bästa möjliga tekniken, och den handlar mindre om styrka än om att göra rätt sak i exakt rätt ögonblick.",
+    category: "Mekanik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-28-gungan-som-gar-runt.jpg",
+    imageAlt: "En kiikingutövare högt uppe på två gula stålarmar, nästan vågrätt ute i luften, ovanför en ställning av lodräta stolpar och vajrar.",
+    imageCredit: "Foto: Eesti Kiikingi Liit / Wikimedia Commons (CC BY-SA 3.0)",
+    tags: ["mekanik", "pendel", "energi", "kiiking", "parametrisk resonans", "optimal styrning", "cirkulär rörelse", "luftmotstånd"],
+    sources: [
+      { name: "Phys.org — The physics of kiiking, Estonia's extreme sport of swinging (27 augusti 2026)", url: "https://phys.org/news/2026-08-physics-kiiking-estonia-extreme-sport.html" },
+      { name: "Journal of Nonlinear Science 36, artikel 84 — Optimal Strategies for Kiiking: Active Pumping to Invert a Swing (publicerad 15 juli 2026)", url: "https://doi.org/10.1007/s00332-026-10267-7" },
+      { name: "arXiv:2308.06818 — förhandsversionen med hela modellen, parametrarna och jämförelsen med videodata", url: "https://arxiv.org/abs/2308.06818" },
+      { name: "Guinness World Records — Longest successful 360° kiiking swing (male)", url: "https://www.guinnessworldrecords.com/world-records/longest-kiiking-swing-shaft-successfully-acheived-men" }
+    ],
+    research: {
+      citation: "Petur Bryde, Ian C. Davenport, L. Mahadevan, ”Optimal Strategies for Kiiking: Active Pumping to Invert a Swing”, Journal of Nonlinear Science 36, artikel 84 (2026), publicerad 15 juli 2026, DOI 10.1007/s00332-026-10267-7",
+      url: "https://doi.org/10.1007/s00332-026-10267-7"
+    },
+    body: [
+      { type: 'p', html: 'Alla som har suttit i en gunga vet hur man gör. Man lutar sig bakåt och framåt, eller reser sig och sätter sig, och för varje gång går det lite högre. Ingen behöver få det förklarat. Ändå är det som händer allt annat än självklart: ingen knuffar, ingen tar spjärn mot marken, och ändå växer utslaget varv för varv.' },
+      { type: 'p', html: 'I Estland har den vardagliga rörelsen drivits till sin yttersta gräns. Sporten heter kiiking, efter det estniska ordet <em>kiik</em> som betyder just gunga, och växte fram under 1990-talet. Utövaren står på en plattform med fötterna fastspända, håller i två styva stålarmar i stället för kedjor, och pumpar genom att omväxlande resa sig och gå ner i knäböj. Målet är att komma hela vägen runt: gungan ska passera rakt över sitt eget fäste och fullborda ett varv. Ju längre armar, desto svårare. Världsrekordet för herrar står sedan 2022 på 7,43&nbsp;m.' },
+      { type: 'p', html: 'I <em>Journal of Nonlinear Science</em> har Petur Bryde, Ian C. Davenport och L. Mahadevan vid Harvard University tagit sig an sporten med mekanik och styrteori. De ställer upp den enklast tänkbara modellen av en kiikinggunga, räknar fram den teoretiskt bästa strategin, och jämför den med filmer av fem tävlande.' },
+      { type: 'h2', text: 'En pendel som ändrar sin egen längd' },
+      { type: 'p', html: 'Modellen är en pendel, men inte den vanliga sorten med fast längd. När utövaren reser sig flyttas kroppens tyngdpunkt in mot fästet, och när hon går ner i knäböj flyttas den ut igen. Pendelns effektiva längd $l$ ändras alltså hela tiden, och det är det enda som driver systemet. Ingen kraft kommer utifrån.' },
+      { type: 'p', html: 'Takten är dubbel mot svängningens. Ett fullständigt stå-huka-varv hinns med två gånger under varje svängningsperiod, en gång för varje passage genom det lägsta läget. En svängning som hålls i gång genom att en av systemets egna egenskaper ändras periodiskt, i stället för genom en yttre knuff, kallas parametriskt driven. Gungan är läroboksexemplet.' },
+      { type: 'h2', text: 'Därför lönar det sig att resa sig längst ner' },
+      { type: 'p', html: 'Varför rörelsen tillför energi syns tydligast om man ser efter hur hårt armarna drar i olika delar av svängningen. I det lägsta läget ska de inte bara bära utövarens tyngd, utan också tvinga henne runt en krökt bana. Kraften längs armen blir där $F = m \\cdot g + \\dfrac{m \\cdot v^2}{l}$, alltså tyngden plus det som cirkelrörelsen kräver. Att resa sig just där betyder att dra sig själv en bit inåt mot fästet mot precis den kraften, och arbetet blir därefter.' },
+      { type: 'p', html: 'I vändlägena är det tvärtom. Farten är noll, så hela cirkelrörelsedelen faller bort. Kvar finns bara tyngdkraftens komposant längs armen, $m \\cdot g \\cdot \\cos\\theta$ räknat från lodlinjen, och den är liten vid stora utslag. Har gungan dessutom passerat vågrätt läge pekar komposanten in mot fästet i stället för ut från det, och då är det inte längre en kostnad att sträcka ut sig utan ett litet tillskott. Skillnaden mellan cykelns två halvor stannar kvar i systemet som ny energi.' },
+      { type: 'p', html: 'Det är också förklaringen till något som annars ser omöjligt ut. Det mesta av det som lyfter utövaren de sista meterna kommer inte direkt från benen i det ögonblicket, utan är energi som lagts in nära botten under tidigare varv och som finns kvar i gungans rörelse.' },
+      { type: 'quote', html: 'Idrottaren påtvingar inte omvärlden någon rörelse. I stället lär sig idrottaren att samarbeta med omvärldens dynamik.', cite: 'L. Mahadevan, professor vid Harvard University' },
+      { type: 'h2', text: 'Den bästa strategin är girig' },
+      { type: 'p', html: 'Med modellen på plats blev frågan vilken tidsplan som tar gungan runt på kortast tid. Svaret gav laget med optimal styrning, den gren av matematiken som handlar om att välja en styrsignal så bra som möjligt över ett helt förlopp. Resultatet var en överraskning i sin enkelhet: den tidsoptimala lösningen sammanfaller i praktiken med en girig algoritm, alltså en som bara maximerar energivinsten i slutet av varje enskild cykel utan att tänka på nästa.' },
+      { type: 'p', html: 'I klartext: res dig så snabbt du överhuvudtaget kan när gungan passerar sitt lägsta läge, och huka dig i vändlägena där rörelsen nästan har stannat. Det är också precis vad de tävlande på filmerna gör. Laget lät dessutom en algoritm för förstärkningsinlärning pröva sig fram från noll, med belöning bara för att komma runt. Den hittade samma strategi.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-28-gungan-som-gar-runt-2.jpg', alt: 'Fem höga kiikinggungor i olika färger på en gräsäng med granskog och stackmoln bakom. En utövare hänger upp och ner högst upp på en av dem.', caption: 'Kiikinggungor av olika längd på en tävling i Estland. Armarna är av stål och kan förlängas mellan försöken — det är armens längd som avgör svårighetsgraden.', credit: 'Foto: Eesti Kiikingi Liit / Wikimedia Commons (CC BY-SA 3.0)' },
+      { type: 'h2', text: 'Kroppen sätter gränserna' },
+      { type: 'p', html: 'Skillnaden mellan en matematisk pendel och en människa är att människan har gränser, och det är där modellen blir intressant. Ur filmerna mätte laget att en utövare reser sig med som mest ungefär 1,4&nbsp;m/s, och som effektgräns använde de den toppeffekt på omkring 5&nbsp;000&nbsp;W som uppmätts för ben som sträcks explosivt i ett hopp. Själva längdändringen är också begränsad: i modellen rör sig tyngdpunkten mellan fyra och åtta procent av armens längd åt vardera hållet, alltså mellan knappt tre decimeter och drygt en halv meter på en sju meter lång arm.' },
+      { type: 'p', html: 'En detalj i konstruktionen är avgörande. En vanlig gunga hänger i kedjor, och en kedja kan bara dra. Den som vill runt på en kedjegunga måste därför passera högsta punkten med minst farten $v = \\sqrt{g \\cdot r}$, annars slaknar kedjan och man faller. Kiikinggungans armar är styva och kan trycka lika väl som dra. Därmed finns inget fartkrav alls i toppen: det räcker att energin nätt och jämnt bär hela vägen upp till det upp-och-nedvända läget, så tippar gungan över av sig själv. Hela sporten är en ren energifråga.' },
+      { type: 'h2', text: 'Luften sätter taket' },
+      { type: 'p', html: 'Utan luftmotstånd hade det inte funnits någon övre gräns alls. Varje cykel skulle lägga till lite energi, och med tillräckligt många försök skulle vilken armlängd som helst gå att ta runt. Luftmotståndet ändrar bilden, eftersom det tar tillbaka mer och mer ju fortare gungan går. Först när motståndet räknades in stämde modellen kvantitativt med videodata — både med de försök som lyckades och med de två som misslyckades och stannade en bit under toppen.' },
+      { type: 'p', html: 'Slutsatsen är att det för varje utövare finns en längsta arm som överhuvudtaget är möjlig, och att den gränsen inte går att köpa sig förbi med mer muskler. Över den längden vinner luftmotståndet varje cykel, hur stor effekt benen än utvecklar. Rekordjakten i sporten har alltså en fysikalisk bortre vägg, inte bara en träningsmässig.' },
+      { type: 'quote', html: 'Det som utifrån ser ut som en enkel rytmisk rörelse är en elegant lösning på ett komplicerat styrproblem som omfattar tajmning, kraftutveckling, tyngdkraft, tröghet och luftmotstånd.', cite: 'Petur Bryde, förstaförfattare' },
+      { type: 'p', html: 'Därmed hamnar lekplatsens gunga och ett tävlingsredskap i samma modell. Barnet som reser sig i botten och lutar sig tillbaka i vändläget har hittat samma lösning som den giriga algoritmen, utan att kunna en enda av ekvationerna.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kiiking uppfanns i Estland av Ado Kosk. Den första gungan med justerbara armar byggdes 1996, och armarna kan förlängas mellan försöken — tävlingen går ut på att klara den längsta arm man förmår.',
+        'Pendelns kända svängningstid $T = 2\\pi\\sqrt{\\frac{l}{g}}$ gäller bara för små utslag. Ju större utslaget blir, desto längre tid tar varje sväng, och nära det upp-och-nedvända läget växer tiden över alla gränser.',
+        'Samma knep fungerar på vilken gunga som helst: stå upp när du passerar det lägsta läget och huka dig i vändlägena. Sitter du ner gör du samma sak genom att luta överkroppen fram och tillbaka.',
+        'Att tillföra energi genom att ändra ett system i takt med dess egen svängning är inte unikt för gungor. Samma princip används i partikelacceleratorer, där ett elektriskt fält växlar riktning i takt med att partiklarna kommer varv efter varv.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-27-ljudet-som-lyfter",
     date: "2026-08-27",
     title: "Kulan svävar fyra decimeter ovanför högtalaren — och ingenting annat än ljud håller den uppe",

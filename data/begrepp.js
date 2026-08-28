@@ -1811,5 +1811,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Resultatet blir ett fast ämne som till 90–99&nbsp;procent består av luft. Den vanligaste sorten görs av kiseldioxid, samma ämne som glas, och väger några tiotals kilogram per kubikmeter — bara ett trettiotal gånger mer än luften själv. En bit ser ut som ett fruset rökmoln och känns nästan viktlös i handen, men bär ändå långt mer än sin egen tyngd.' },
       { type: 'p', html: 'Eftersom hålrummen är mindre än sträckan en luftmolekyl hinner färdas mellan två krockar leds värme mycket dåligt genom materialet, och aerogel är därför ett av de bästa isolermaterial som finns. Det har använts i rymdsonder för att fånga upp stoftkorn utan att de brinner upp, som isolering i marsfordon, och i byggnader där tunna väggar ändå ska hålla värmen kvar.' }
     ]
+  },
+  {
+    id: 'parametrisk-resonans',
+    term: 'Parametrisk resonans',
+    former: ['parametrisk resonans', 'parametriska resonansen', 'parametriskt driven', 'parametriskt drivna', 'parametrisk pendel', 'parametriska pendeln', 'parametrisk förstärkning'],
+    kort: 'Att en svängning växer sig starkare därför att någon av systemets egna egenskaper ändras i takt med svängningen, i stället för att en yttre kraft knuffar på. Att pumpa en gunga är det vanligaste exemplet.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'Det finns två sätt att få en svängning att växa. Det ena är att knuffa: någon utifrån trycker på i rätt ögonblick, gång på gång. Det andra är att ändra själva systemet — dess längd, dess styvhet, dess tröghet — i takt med att det svänger. Det andra sättet kallas parametrisk resonans, eftersom det är en parameter i systemet som ändras och inte en yttre kraft som läggs till.' },
+      { type: 'p', html: 'Gungan är skolexemplet. Den som står upp i gungan och reser sig när den passerar sitt lägsta läge drar sin egen tyngdpunkt närmare upphängningen, alltså kortar pendeln, just när kraften i kedjan är som störst. I vändläget, där farten är noll och kraften liten, sätter hon sig ner igen och förlänger pendeln. Arbetet som läggs in när kraften är stor är större än det som lämnas tillbaka när den är liten, och skillnaden blir ny energi i svängningen. Ingen har knuffat.' },
+      { type: 'p', html: 'Ett kännetecken är takten. Vid en vanlig knuff ska knuffarna komma en gång per svängning, alltså med samma frekvens som svängningen. Vid parametrisk resonans ska parametern i stället ändras <em>två</em> gånger per svängning — en gång vid varje passage genom mittläget. Ett annat kännetecken är att det inte hjälper att börja: en gunga som står helt stilla går inte att pumpa i gång, eftersom det inte finns någon svängning att förstärka. Samma princip används bland annat i vissa förstärkare inom elektroniken och optiken, där ett svagt insignalsvar förstärks genom att ett medium ändras i takt med signalen.' }
+    ]
+  },
+  {
+    id: 'optimal-styrning',
+    term: 'Optimal styrning',
+    former: ['optimal styrning', 'optimala styrningen', 'styrteori', 'styrteorin', 'reglerteori', 'reglerteorin', 'optimal reglering', 'tidsoptimal', 'tidsoptimala'],
+    kort: 'Grenen av matematiken som söker det allra bästa sättet att styra ett system över tid, till exempel den snabbaste vägen till ett mål när det finns gränser för vad styrningen får göra.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'Många problem handlar inte om ett enda val, utan om en följd av val som sträcker sig över tid. Hur ska en raket gasa för att nå omloppsbanan med minst bränsle? När ska ett tåg bromsa för att stanna mjukt men i tid? Hur ska en person i en gunga röra sig för att komma högst? I samtliga fall finns ett system som utvecklas enligt kända lagar, en styrsignal som får ändras löpande, och ett mått på vad som är bra. Att hitta den bästa styrsignalen kallas optimal styrning.' },
+      { type: 'p', html: 'Det svåra är att gränserna nästan alltid är verkliga. Motorn har en maxeffekt, benen en högsta hastighet, bromsen en gräns. Utan sådana gränser blir svaret ofta orimligt: gasa oändligt hårt i ett oändligt kort ögonblick. Med dem blir lösningen i stället typiskt en växling mellan ytterlägen — full gas ett tag, sedan ingenting, sedan full broms. Sådana lösningar kallas bang-bang-styrning, och de är förvånansvärt vanliga.' },
+      { type: 'p', html: 'En besläktad metod är förstärkningsinlärning, där ingen räknar ut svaret i förväg. I stället får en dator pröva sig fram om och om igen och belönas när det går bra, ungefär som ett barn lär sig gunga. De två angreppssätten leder ofta till samma strategi, och när de gör det är det ett gott tecken på att strategin verkligen är den bästa och inte bara den man råkade hitta.' }
+    ]
   }
 ];

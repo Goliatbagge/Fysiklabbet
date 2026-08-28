@@ -12,6 +12,25 @@ Format per post:
 
 ## Kö
 
+- **Solljus i stället för laser gav sammanflätade fotonpar** — ett lag vid
+  University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
+  Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
+  med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan
+  parametrisk nedkonvertering att ge sammanflätade fotonpar utan laser. Bells
+  olikhet bröts med S = 2,54 och tillståndet hade 94 procents trohet mot
+  målet. Ingång: fotonens energi, våglängd och energiprincipen. Optica 13 (8),
+  1508 (25 augusti 2026). Källa (Physics World 2026-08-26):
+  https://physicsworld.com/a/researchers-harness-sunlight-to-generate-quantum-entanglement/
+  (tillagd 2026-08-28)
+
+- **Magnuseffekten observerad för ljus** — den effekt som får en skruvad
+  fotboll att böja av har för första gången setts i optiken, och kan skärpa
+  styrningen av kvantdatorer. Ingång: en välkänd mekanikeffekt som dyker upp
+  i ett helt annat sammanhang, alltså en tacksam brygga mellan bollsport och
+  optik. Kontrollera originalstudien innan den används. Källa (Phys.org
+  2026-08-27): https://phys.org/physics-news/ (leta upp direktlänken)
+  (tillagd 2026-08-28)
+
 - **Dubbelspaltförsöket krympt till två atomer** — ett lag vid University of
   Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
   som Youngs två spalter för en fokuserad elektronstråle, och läser ur

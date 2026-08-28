@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Thu, 27 Aug 2026 13:26:22 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 28 Aug 2026 01:27:54 GMT</lastBuildDate>
+    <item>
+      <title>Gungan går ett helt varv runt sitt eget fäste — och lyftet kommer inte från benen</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-28-gungan-som-gar-runt</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-28-gungan-som-gar-runt</guid>
+      <pubDate>Fri, 28 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Mekanik</category>
+      <description>I den estniska sporten kiiking pumpar utövaren en sju meter lång stålgunga tills den passerar rakt över sitt fäste. Ett forskarlag har nu räknat fram den bästa möjliga tekniken, och den handlar mindre om styrka än om att göra rätt sak i exakt rätt ögonblick.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-28-gungan-som-gar-runt.jpg" length="160946" type="image/jpeg"/>
+    </item>
     <item>
       <title>Kulan svävar fyra decimeter ovanför högtalaren — och ingenting annat än ljud håller den uppe</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-27-ljudet-som-lyfter</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>I en laserdriven plasmaaccelerator får elektroner surfa på en våg av laddning och kan nå enorm fart på några millimeter. Haken är att vågen alltid är en aning långsammare än surfarna. Ett lag i Rochester har nu format en laserpuls vars ljusstarkaste punkt förflyttar sig framåt med precis ljushastighet — och fick därmed ut elektroner med mer än dubbelt så hög energi som gränsen tillåter.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-09-flygande-fokus.jpg" length="34572" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-08-svavande-magnet</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-08-svavande-magnet</guid>
-      <pubDate>Sat, 08 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Magnetism</category>
-      <description>De känsligaste magnetfältsmätarna kräver flytande helium eller ett magnetiskt avskärmat rum. Ett lag från Peking och Mainz har i stället låtit en pytteliten permanentmagnet hänga fritt i luften och läst av hur den vrider sig — med en laserstråle, vid rumstemperatur, mitt i jordens eget magnetfält.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-08-svavande-magnet.jpg" length="16128" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

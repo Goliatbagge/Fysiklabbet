@@ -157,7 +157,7 @@ $$
 ::: exempel "Exempel 1 — Derivera med deriveringsreglerna"
 **Derivera<br>a) $f(x) = x^7$<br>b) $y = 3x^5$&emsp;&emsp;
 c) $f(x) = 27$<br>d) $g(x) = 12x$<br>e)
-$f(x) = \dfrac{x^4}{5}$**
+$f(x) = \dfrac{x^4}{5}$<br>f)&nbsp;$f(x) = \dfrac{9\pi^{e}\left(4 + \ln 90\right)^{\sqrt{2}}}{5\ln 2 - \sqrt{e} + 8\pi}$**
 
 **a)** Vi multiplicerar ned exponenten 7 och minskar den sedan med 1.
 
@@ -199,6 +199,19 @@ f'(x) = \frac{4x^3}{5}
 $$
 
 **Svar:** $f'(x) = \dfrac{4x^3}{5}$
+
+**f)** Uttrycket ser avskräckande ut, men leta efter variabeln: det finns
+inget $x$ någonstans i det. Varje del är ett tal. $\pi$, $e$, $\sqrt{2}$,
+$\ln 2$ och $\ln 90$ är alla bestämda tal, hur krångliga de än ser ut att
+räkna ut, och ett tal upphöjt till ett tal är också ett tal. Hela
+uttrycket är alltså ett enda tal, och $f$ är en konstant funktion. Grafen
+är en vågrät linje med lutningen 0, oavsett vilket $x$ vi väljer.
+
+$$
+f'(x) = 0
+$$
+
+**Svar:** $f'(x) = 0$
 :::
 
 ::: exempel "Exempel 2 — Derivatans värde i en punkt"
@@ -234,6 +247,7 @@ $$
 
 ::: sampunkt "Konstanter och konstant nämnare"
 - $f(x) = a$ ger $f'(x) = 0$. En vågrät linje har lutningen 0.
+- Saknar uttrycket $x$ är det en konstant, hur krångligt det än ser ut.
 - $f(x) = \dfrac{g(x)}{a}$ ger $f'(x) = \dfrac{g'(x)}{a}$. Derivera täljaren, behåll nämnaren.
 - Skälet är att $\dfrac{x^2}{3}$ är samma sak som $\dfrac{1}{3}x^2$, alltså en koefficient.
 :::

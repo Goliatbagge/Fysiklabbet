@@ -336,7 +336,7 @@ sidled i sig själv i stället för att klippas (samma lösning som
 **En härledning/ett bevis av en formel skrivs som ett `::: härledning`-block
 NÄSTLAT INUTI formelns `::: formel`-block** — renderarna gör det då till en
 hopfällbar dropdown (`<details>`) längst ned i formelrutan (mönstret infört
-sajtbrett 2026-08-03, referens: `fy2-1.5.md`). Skapa ALDRIG en ny fristående
+sajtbrett 2026-08-03, referens: `fy2-1.6.md`). Skapa ALDRIG en ny fristående
 härledningsruta direkt före/efter en formelruta.
 
 - Ordningen i md-filen: formelinnehåll (+ ev. `där`-lista och `::: figur`),
@@ -672,7 +672,7 @@ typ: tomtebloss
 ```
 
 - `typ:` — **obligatoriskt.** Vilken minisimulering som byggs. Tillgängliga
-  typer: `tomtebloss` (demonstrationen i fy2-1.4 Cirkulär rörelse: tänd ett
+  typer: `tomtebloss` (demonstrationen i fy2-1.5 Cirkulär rörelse: tänd ett
   tomtebloss fäst i en skruvdragare, i mörker, och se gnistorna lämna
   cirkelbanan tangentiellt; varvtalsglidare, pausknapp som fryser bilden,
   "Ultrarapid"-kryssruta för slow motion, "Visa spår"-kryssruta som ritar
@@ -680,7 +680,7 @@ typ: tomtebloss
   syns i efterhand), fullskärmsläge samt syntetiserat
   ljud via Web Audio — motorton som följer varvtalet + sprakande gnistor,
   inga ljudfiler — med ljudknapp uppe till höger) och `centrifug`
-  (demonstrationen i fy2-1.4: en blöt tvättsvamp i en roterande
+  (demonstrationen i fy2-1.5: en blöt tvättsvamp i en roterande
   centrifugkorg sedd rakt uppifrån; vattendropparna lämnar banan
   tangentiellt enligt Newtons första lag. Samma kontrolluppsättning som
   tomteblosset: varvtalsglidare, paus som fryser bilden, "Ultrarapid",
@@ -689,7 +689,7 @@ typ: tomtebloss
   tillkomna typer dokumenteras i filhuvudet på `minisim.js` (bl.a.
   `fjaderpendel` i fy2-2.1, `linjal` i fy2-1.2 — linjalen på två
   pekfingrar som växelvis glider tills de möts under tyngdpunkten — och
-  `valtning` i fy2-1.2: en kloss med tyngdpunktsvisare som lutas kring
+  `valtning` i fy2-1.3: en kloss med tyngdpunktsvisare som lutas kring
   sitt nedre hörn på vågrätt underlag och välter när visaren släpps
   utanför vridningspunkten).
 - `titel:` — liten rubrik ovanför scenen (valfritt; blocket ligger oftast
@@ -844,9 +844,10 @@ ingenting av dig — men förstå vad den gör innan du rör den:
   från alla. 2–4 punkter per kort är lagom.
 - **Kortaste möjliga formulering utan att tappa tydlighet.** Punktlistor, inte
   löptext. Inga inledande fraser ("Här gäller att …") — gå rakt på saken.
-- **Ingen matte i kortrubrikerna.** `.lab-block-title` har
-  `text-transform: uppercase`, så `$x$` renderas som `X` — alltså fel variabel.
-  Skriv rubriken i ren svenska ("Tecknet i sidled", inte "Tecknet i $x$-led").
+- **Sparsamt med matte i kortrubrikerna.** Rubriken versaliseras, men KaTeX
+  undantas (`.katex { text-transform: none }`), så `$x$` blir `x` som det ska.
+  En beteckning i rubriken måste alltså sättas som matte: skriv aldrig ut den
+  som vanlig text. Oftast är ren svenska ändå bättre ("Tecknet i sidled").
 - Typografireglerna gäller som vanligt: inga tankstreck, `\dfrac` i löptext,
   variabler kursiva, komma som decimaltecken.
 
@@ -1055,6 +1056,35 @@ retroaktivt utan att användaren ber om det.
 ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor bokstav.
 - ✓ "Elektrostatisk induktion"  ✗ "Elektrostatisk Induktion"
 - ✓ "Visa laddningar"  ✗ "Visa Laddningar"
+
+### Funktionsnamn och variabler i rubriker
+
+**Ett funktionsnamn ska ALLTID stå med liten bokstav, också i rubriker:
+`f(x)`, aldrig `F(X)`.** Versalen är upptagen: `F(x)` betecknar den primitiva
+funktionen till `f(x)`, så en versaliserad rubrik påstår något helt annat än
+den ska. Samma sak med `g`/`G`, `h`/`H` och `v`/`V` (volym): i matematik och
+fysik är gemen och versal två olika storheter, inte två sätt att skriva samma.
+
+Rubrikerna på sajten (`.lab-block-title`, härledningarnas `<summary>`,
+sammanfattningskortens titlar, etiketter i visualiseringarna) sätts med
+`text-transform: uppercase`. Två regler följer av det:
+
+1. **Sätt beteckningen som matte, aldrig som vanlig text.**
+   `::: formel "Derivatan av $f(x) = e^x$"`, inte
+   `::: formel "Derivatan av f(x) = e^x"`. KaTeX undantas från
+   versaliseringen av regeln `.katex { text-transform: none }` i
+   `styles-laborans.css`, så matten behåller sitt skiftläge. **Rör inte den
+   regeln**: utan den blir varje formel i en rubrik fel, och det ser inte
+   trasigt ut, bara felaktigt (påpekat 2026-08-29: rubriken "Derivatan av
+   $f(x) = a$" visades som "DERIVATAN AV F(X) = A").
+2. **Skriver du ändå ut beteckningen i ren text** (i en HTML-rubrik, en
+   canvas-etikett, en knapp eller något annat versalsatt element): låt då inte
+   versaliseringen ändra betydelsen. Antingen sätts texten som matte,
+   eller så formuleras rubriken om utan beteckning ("Derivatan av en konstant
+   funktion").
+
+`node .claude/verify-sprak.js` har regeln `funktionsnamn-i-rubrik`, som
+blockerar en `:::`-titel med ett funktionsnamn utanför matte.
 
 ### Variabler och enheter
 - **Fysikaliska variabler**: alltid *kursiv* — *F*, *Q*, *r*, *v*, *a*
@@ -1397,7 +1427,7 @@ omkring.
 
 ⛔ **`\tfrac` får ALDRIG användas — inte ens där undantagen nedan gäller.**
 Det är den vanligaste orsaken till fula minibråk (`$f = \tfrac{1}{T}$` i
-härledningen i `fy2-1.3`, påpekat 2026-08-26 — 169 sådana bråk fanns då i
+härledningen i `fy2-1.4` (dåvarande fy2-1.3), påpekat 2026-08-26 — 169 sådana bråk fanns då i
 teorin, övningarna, exit tickets och de nationella proven). `\tfrac` tvingar
 fram textstyle *oavsett* omgivning, så det ger ett litet bråk även inuti ett
 `$$…$$`-block där allt annat är stort. Skriv `\dfrac` i löptext och `\frac`
@@ -1595,7 +1625,7 @@ deluppgifter som är hela meningar får var sin rad.
   beräkna (`a) $\dfrac{8}{3} \cdot \dfrac{7}{2}$`), en enhet att svara i
   (`a) grader/s`) eller ett par ord — skrivs på EN rad med `&emsp;&emsp;`
   emellan (uttryckligt önskemål 2026-08-26, referens: `ma1c-1.4` exempel
-  1 och 3, `ma1c-1.3`, `ma1c-1.6` exempel 1 och `fy2-1.3` exempel 1).
+  1 och 3, `ma1c-1.3`, `ma1c-1.6` exempel 1 och `fy2-1.4` exempel 1).
   **Detta är ett krav, inte ett val:** finns det gott om plats kvar på
   raden ska deluppgifterna stå bredvid varandra, och en stapling som du
   stöter på ska rättas till (påpekat igen 2026-08-27). Staplade lämnar de
@@ -2475,7 +2505,7 @@ bägaren lades som href2 på fy1-3.3, och besökaren som kom in via
 astronautsimuleringen såg aldrig att den fanns.
 
 **En TREDJE simulering läggs som `href3`** (infört 2026-08-28 för
-dubbelkonen på fy2-1.2) — avsnittsraden, sökindexet och verifierarna
+dubbelkonen, som numera bor på fy2-1.3) — avsnittsraden, sökindexet och verifierarna
 hanterar den likadant som `href2`, och samma krav gäller (egen post med
 `name`/`kw` i `data/simuleringar.js`, båda skripten laddade).
 
@@ -2521,7 +2551,7 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
 **⚠️ REGEL: syftar en länk på en bestämd DEL av en genomgång ska den ha ett
 ankare, aldrig bara `?id=`.** Formen är
 `katalog.html?id=<avsnitt>&block=<ankare>`, till exempel
-`katalog.html?id=fy2-1.4&block=den-fatala-gungan`. Besökaren ska landa på det
+`katalog.html?id=fy2-1.5&block=den-fatala-gungan`. Besökaren ska landa på det
 du skriver om, inte överst i ett långt avsnitt med uppgiften att skrolla och
 leta själv (uttryckligt önskemål 2026-08-29: nyhetsbrevets länk till
 Tacoma-filmen i `fy2-2.6` gick till avsnittets början, och filmen ligger

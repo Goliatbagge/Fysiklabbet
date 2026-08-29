@@ -5202,6 +5202,9 @@ window.EXITTICKETS = {
       'Krafterna uppåt ska tillsammans bli 200 N, inte 320 N. Det vänstra stödet ger skillnaden $200 - 120 = 80\\ \\mathrm{N}$.',
     ],
   },
+],
+
+'fy2-1.3': [
   {
     question: 'Man lutar en kloss långsamt mer och mer. När välter den?',
     choices: [
@@ -5218,9 +5221,73 @@ window.EXITTICKETS = {
       'Tyngdpunkten flyttar sig i sidled så fort man lutar klossen — den välter först när lodlinjen genom tyngdpunkten hamnar utanför stödytan.',
     ],
   },
+  {
+    question: 'En kula ligger i botten av en skål. Rubbar man den en aning rullar den tillbaka. Vilken typ av jämvikt är det, och varför?',
+    choices: [
+      'Indifferent jämvikt: kulan kan ligga var som helst i skålen',
+      'Labil jämvikt: rubbningen förstärks av tyngdkraften',
+      'Stabil jämvikt: tyngdpunkten höjs vid rubbningen, och tyngdkraften vrider kulan tillbaka',
+      'Stabil jämvikt: normalkraften från skålen är större än tyngdkraften',
+    ],
+    correct: 2,
+    why: [
+      'Nej: i skålen ligger jämvikten bara i botten. Först på ett plant underlag blir kulan kvar där den hamnar, och det är indifferent jämvikt.',
+      'Det beskriver kulan på en kulle: där sänks tyngdpunkten åt vilket håll kulan än rullar och rubbningen förstärks. I skålen är det tvärtom.',
+      'För att lämna botten måste kulan upp längs skålens vägg. Tyngdpunkten höjs, och tyngdkraften driver den tillbaka mot det lägsta läget. Det är stabil jämvikt.',
+      'Typen av jämvikt är rätt, men skälet är fel: krafterna är lika stora när kulan ligger stilla. Det avgörande är att tyngdpunkten höjs vid en rubbning.',
+    ],
+  },
+  {
+    question: 'Vad är ett föremåls stödyta?',
+    choices: [
+      'Den yta av föremålet som är i kontakt med underlaget',
+      'Området som föremålets kontaktpunkter mot underlaget ringar in',
+      'Underlagets hela yta',
+      'Ytan rakt under tyngdpunkten',
+    ],
+    correct: 1,
+    why: [
+      'Nästan, men en stol står stadigt trots att bara fyra små benändar rör golvet. Stödytan är hela fyrhörningen mellan benen, inte bara kontaktytorna.',
+      'Stödytan är området som kontaktpunkterna ringar in: för en stol hela fyrhörningen mellan de fyra benen. Föremålet står kvar så länge tyngdpunktens lodlinje träffar innanför den.',
+      'Underlaget kan vara hur stort som helst utan att föremålet står stadigare. Det är föremålets egna kontaktpunkter som avgör.',
+      'Var tyngdpunktens lodlinje träffar avgör om föremålet välter, men stödytan är något föremålet har oavsett var tyngdpunkten ligger.',
+    ],
+  },
+  {
+    question: 'Fyra klossar med olika form lutas tills de välter. Vilken sorts kloss tål störst lutningsvinkel?',
+    choices: [
+      'Den höga och smala',
+      'Alla välter vid samma vinkel om de väger lika mycket',
+      'Den som väger mest',
+      'Den låga och breda',
+    ],
+    correct: 3,
+    why: [
+      'Tvärtom: en hög och smal kloss har tyngdpunkten högt, och lodlinjen når snabbt utanför den smala stödytan, så den välter redan vid en liten vinkel.',
+      'Vinkeln bestäms av formen, $\\tan \\alpha = \\dfrac{b}{h}$, inte av massan. En bred och låg kloss tål mest.',
+      'Massan påverkar inte vältningsvinkeln: tyngdkraften växer, men det gör även det mothållande momentet. Formen avgör: $\\tan \\alpha = \\dfrac{b}{h}$.',
+      'Rätt: vältningsvinkeln uppfyller $\\tan \\alpha = \\dfrac{b}{h}$, så stor bredd och liten höjd ger den största vinkeln.',
+    ],
+  },
+  {
+    question: 'Ett bygge av två gafflar i en kork balanserar stabilt på en nålspets. Vad är hemligheten?',
+    choices: [
+      'Friktionen mellan nålen och underlaget håller fast bygget',
+      'Byggets gemensamma tyngdpunkt ligger under stödpunkten',
+      'Gafflarna gör bygget så lätt att tyngdkraften kan försummas',
+      'Nålspetsen ger bygget en bred stödyta',
+    ],
+    correct: 1,
+    why: [
+      'Friktion kan inte förklara balansen: bygget kan vagga och till och med snurra utan att falla. Det är tyngdpunktens läge som gör jämvikten stabil.',
+      'Gafflarnas tunga skaft hänger nedåt och utåt och drar ned den gemensamma tyngdpunkten under stödpunkten. Varje lutning höjer då tyngdpunkten, och tyngdkraften vrider bygget tillbaka.',
+      'Bygget väger en hel del, och det är just tyngdkraften som vrider det tillbaka mot jämviktsläget när tyngdpunkten ligger under stödpunkten.',
+      'Stödytan är i praktiken en enda punkt. Ändå är jämvikten stabil, eftersom tyngdpunkten ligger under stödpunkten.',
+    ],
+  },
 ],
 
-'fy2-1.3': [
+'fy2-1.4': [
   {
     question: 'Vad kallas tiden det tar för en periodisk rörelse att upprepa sig en gång, till exempel tiden för ett helt varv?',
     choices: [
@@ -5314,7 +5381,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.4': [
+'fy2-1.5': [
   {
     question: 'Varför krävs en resulterande kraft för att ett föremål ska röra sig i en cirkelbana med konstant fart?',
     choices: [
@@ -5493,7 +5560,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.5': [
+'fy2-1.6': [
   {
     question: 'Vad kännetecknar en konisk pendel?',
     choices: [
@@ -5592,7 +5659,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.6': [
+'fy2-1.7': [
   {
     question: 'Om luftmotstånd försummas, hur beter sig hastigheten och accelerationen i *x*-led under en kaströrelse?',
     choices: [
@@ -5691,7 +5758,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.7': [
+'fy2-1.8': [
   {
     question: 'Vad är syftet med räkneexemplet "Den flygande kossan"?',
     choices: [

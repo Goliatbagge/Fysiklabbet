@@ -682,10 +682,10 @@
                             {' · '}
                             KAPITEL {meta.chapterNumber} · {chapterLabel}
                             {' · '}
-                            AVSNITT {meta.num}
+                            AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : ''}
                         </div>
                         <h1 className="lab-article-title">
-                            <span className="lab-article-title-num">{meta.num}</span>
+                            <span className="lab-article-title-num">{meta.fordjupning ? '*' : ''}{meta.num}</span>
                             {emTitle(meta.title)}
                         </h1>
                         {meta.description && (
@@ -720,11 +720,11 @@
                         {' · '}
                         KAPITEL {meta.chapterNumber} · {chapterLabel}
                         {' · '}
-                        AVSNITT {meta.num}
+                        AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : ''}
                     </div>
 
                     <h1 className="lab-article-title">
-                        <span className="lab-article-title-num">{meta.num}</span>
+                        <span className="lab-article-title-num">{meta.fordjupning ? '*' : ''}{meta.num}</span>
                         {emTitle(fm.title || meta.title)}
                     </h1>
 

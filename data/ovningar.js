@@ -13098,19 +13098,26 @@ $$ F_\\mathrm{B} = \\frac{294{,}6 \\cdot 2{,}0}{3{,}0} = 196{,}4\\ \\mathrm{N} \
         },
         {
             level: 2,
-            question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den tippas sakta åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
+            question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $15\\ \\mathrm{kg}$ vilar på två bockar, en vid varje ände. En person med massan $60\\ \\mathrm{kg}$ står $1{,}0\\ \\mathrm{m}$ från den vänstra änden. Hur stor kraft trycker den vänstra bocken uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
-${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
-            answer: { value: 37, unit: '°' },
-            solution: `Precis som i vältningsdemonstrationen välter lådan när **tyngdpunkten hamnar utanför vridningspunkten** — alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\dfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\dfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
+${makeBeamSupports({ supports: [{ posFrac: 0, label: 'V' }, { posFrac: 1, label: 'H' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.25, label: '60 kg' }, dims: [{ fromFrac: 0, toFrac: 0.25, label: '1,0 m', row: 0 }, { fromFrac: 0, toFrac: 0.5, label: '2,0 m', row: 1 }, { fromFrac: 0, toFrac: 1, label: '4,0 m', row: 2 }] })}`,
+            answer: { value: 516, unit: 'N', tol: 5 },
+            solution: `Två okända stödkrafter. Vi väljer **vridningspunkten i det högra stödet H** så att $F_\\mathrm{H}$ får hävarmen 0 och försvinner. Kvar står momentjämvikten kring H: den vänstra stödkraftens moment åt ena hållet mot personens och brädans tyngdkrafters moment åt det andra. Hävarmarna mäts från H: personen står $4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}$ från H och brädans tyngdpunkt $2{,}0\\ \\mathrm{m}$ från H.
 
-$$ \\tan v = \\frac{0{,}30}{0{,}40} = 0{,}75 $$
+$$ F_\\mathrm{V} \\cdot 4{,}0 = F_\\mathrm{person} \\cdot 3{,}0 + F_\\mathrm{G} \\cdot 2{,}0 $$
 
-$$ v = \\arctan(0{,}75) = 37^\\circ $$
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{person} = 60 \\cdot 9{,}82 = 589{,}2\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = 15 \\cdot 9{,}82 = 147{,}3\\ \\mathrm{N}
+\\end{array} \\right]
+$$
 
-**Svar:** Lådan välter om den lutas mer än cirka $37^\\circ$.
+$$ F_\\mathrm{V} = \\frac{589{,}2 \\cdot 3{,}0 + 147{,}3 \\cdot 2{,}0}{4{,}0} = \\frac{2\\,062{,}2}{4{,}0} = 515{,}55\\ \\mathrm{N} \\approx 520\\ \\mathrm{N} $$
 
-**Generell slutsats:** En bred och låg låda tål större lutning innan den välter. Så länge tyngdpunktens lodlinje träffar stödytan står föremålet stabilt — hamnar den utanför faller det.`,
+**Svar:** Ungefär $520\\ \\mathrm{N}$ (0,52 kN).
+
+**Generell slutsats:** Med flera tyngdkrafter på samma bräda får varje kraft sitt eget moment med sin egen hävarm: momentlagen blir en summa i varje led. Kontrollera gärna med kraftjämvikt: $F_\\mathrm{H} = (589{,}2 + 147{,}3) - 515{,}55 \\approx 220\\ \\mathrm{N}$, och mycket riktigt bär den vänstra bocken mest eftersom personen står närmast den.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -13135,6 +13142,116 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
     ],
 
     'fy2-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett föremål står på ett vågrätt underlag. Vad krävs för att det ska stå kvar utan att välta?`,
+            choices: [
+                `Tyngdpunkten måste ligga exakt över stödytans mittpunkt.`,
+                `Tyngdpunktens lodräta riktningslinje måste träffa innanför stödytan.`,
+                `Tyngdpunkten måste ligga under stödytan.`,
+                `Normalkraften måste vara större än tyngdkraften.`,
+            ],
+            correct: 1,
+            solution: `**Stödytan** är området som föremålets kontaktpunkter mot underlaget ringar in. Så länge tyngdpunktens lodräta riktningslinje träffar **innanför** stödytan står föremålet kvar. Lodlinjen behöver inte alls träffa mitten. Hamnar lodlinjen utanför får tyngdkraften ett kraftmoment kring stödytans kant som vrider föremålet omkull.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Normalkraften och tyngdkraften är lika stora så länge föremålet står stilla. Det är tyngdpunktens läge i sidled, inte krafternas storlek, som avgör om det välter.`,
+        },
+        {
+            level: 1,
+            question: `En kula ligger i botten av en skål, en annan balanserar på toppen av en kulle och en tredje ligger på ett plant golv. Vilken typ av jämvikt har kulorna, i tur och ordning?`,
+            choices: [
+                `Labil, stabil, indifferent`,
+                `Stabil, indifferent, labil`,
+                `Stabil, labil, indifferent`,
+                `Indifferent, labil, stabil`,
+            ],
+            correct: 2,
+            solution: `Testet är att **rubba kulan en aning**. I skålen höjs tyngdpunkten vid en rubbning, och kulan rullar tillbaka mot botten: **stabil** jämvikt. På kullen sänks tyngdpunkten åt vilket håll kulan än rullar, så rubbningen förstärks: **labil** jämvikt. På golvet ligger tyngdpunkten på samma höjd överallt, och kulan blir kvar där den hamnar: **indifferent** jämvikt.
+
+**Svar:** Alternativ C — stabil, labil, indifferent.
+
+**Generell slutsats:** Det som skiljer fallen är vad som händer med tyngdpunktens höjd vid en liten rubbning: höjs den är jämvikten stabil, sänks den är jämvikten labil, och är den oförändrad är jämvikten indifferent.`,
+        },
+        {
+            level: 1,
+            question: `Två gafflar sitter fast i en kork som balanserar på en nålspets. Varför är jämvikten stabil?`,
+            choices: [
+                `Gafflarnas tyngd pressar korken mot nålen så att friktionen håller emot.`,
+                `Byggets gemensamma tyngdpunkt ligger under stödpunkten, så varje lutning höjer tyngdpunkten och tyngdkraften vrider bygget tillbaka.`,
+                `Nålspetsen fungerar som en stor stödyta.`,
+                `Gafflarnas tyngdkrafter tar ut varandra så att bygget saknar tyngd.`,
+            ],
+            correct: 1,
+            solution: `Gafflarnas tunga skaft hänger nedåt och utåt, och drar därför ned byggets gemensamma tyngdpunkt till en punkt strax **under** stödpunkten på nålspetsen. Lutar bygget åt något håll höjs tyngdpunkten, och tyngdkraften $F_\\mathrm{G}$ får en hävarm som vrider bygget **tillbaka**. Jämvikten är stabil, trots att stödytan i praktiken är en enda punkt.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Tyngdpunkt under stödpunkten ger alltid stabil jämvikt. Det är samma princip som gör att en hängande lampa eller en gunga aldrig kan välta, bara pendla tillbaka. Lindansarens tunga, nedböjda balansstång utnyttjar samma sak.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den tippas sakta åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
+
+${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
+            answer: { value: 37, unit: '°' },
+            solution: `Lådan välter när **tyngdpunkten hamnar utanför vridningspunkten**, alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\dfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\dfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Vältningsvinkeln $\\alpha$ uppfyller
+
+$$ \\tan \\alpha = \\frac{0{,}30}{0{,}40} = \\frac{0{,}60}{0{,}80} = 0{,}75 $$
+
+$$ \\alpha = \\arctan(0{,}75) = 37^\\circ $$
+
+**Svar:** Lådan välter om den lutas mer än cirka $37^\\circ$.
+
+**Generell slutsats:** Det är formeln för vältningsvinkeln, $\\tan \\alpha = \\dfrac{b}{h}$: en bred och låg låda tål stor lutning innan den välter. Så länge tyngdpunktens lodlinje träffar stödytan står föremålet stabilt. Hamnar den utanför faller det.`,
+        },
+        {
+            level: 2,
+            question: `En transportlåda ska tåla att lutas $25^\\circ$ utan att välta. Lådan är $0{,}40\\ \\mathrm{m}$ bred och jämnt packad, så att tyngdpunkten ligger i mitten. Hur hög får lådan högst vara?
+
+${makeTippingBox({ boxW: 56, boxH: 116, gravityLine: true, wLabel: '0,40 m', hLabel: 'h' })}`,
+            answer: { value: 0.86, unit: 'm', tol: 0.02 },
+            solution: `Vältningsvinkeln för en jämntjock låda uppfyller $\\tan \\alpha = \\dfrac{b}{h}$. Ju högre lådan är, desto mindre blir vältningsvinkeln. Gränsfallet är att vältningsvinkeln är exakt $25^\\circ$. Vi löser ut höjden:
+
+$$ \\tan 25^\\circ = \\frac{b}{h} \\quad\\Leftrightarrow\\quad h = \\frac{b}{\\tan 25^\\circ} $$
+
+$$ h = \\frac{0{,}40}{\\tan 25^\\circ} = \\frac{0{,}40}{0{,}4663} = 0{,}8578\\ \\mathrm{m} \\approx 0{,}86\\ \\mathrm{m} $$
+
+**Svar:** Lådan får vara högst cirka $0{,}86\\ \\mathrm{m}$ hög.
+
+**Generell slutsats:** Formeln kan läsas åt båda hållen: en given form ger en vältningsvinkel, och ett krav på vältningsvinkel ger en största tillåten höjd (eller minsta bredd). Lastbilsflak, bokhyllor och husvagnar dimensioneras med precis den här sortens räkning.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En jämntjock bräda är $1{,}2\\ \\mathrm{m}$ lång och har massan $2{,}4\\ \\mathrm{kg}$. Den skjuts sakta ut över en bordskant, och på brädans inre ände står en vikt med massan $1{,}2\\ \\mathrm{kg}$. **Hur långt utanför bordskanten kan brädans yttre ände som mest sticka ut utan att brädan tippar?**
+
+<svg viewBox="0 0 420 170" width="420" height="170" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En bräda ligger på ett bord och sticker ut en bit utanför bordskanten åt höger. På brädans vänstra ände står en vikt märkt 1,2 kg. Brädan är märkt 2,4 kg och är 1,2 m lång. Utsticket utanför bordskanten är märkt d."><rect x="20" y="110" width="210" height="10" fill="#d8c39a" stroke="#8a6a3a" stroke-width="1.4"/><rect x="36" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="198" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="50" y="100" width="300" height="10" rx="2" fill="#c69a5e" stroke="#8a6a3a" stroke-width="1.4"/><rect x="54" y="74" width="36" height="26" rx="3" fill="#9aa2ad" stroke="#1f2530" stroke-width="1.4"/><text x="72" y="66" text-anchor="middle" font-size="13" fill="#1f2530">1,2 kg</text><text x="215" y="93" text-anchor="middle" font-size="13" fill="#1f2530">2,4 kg</text><line x1="50" y1="40" x2="50" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="40" x2="350" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="50" y1="36" x2="350" y2="36" stroke="#1f2530" stroke-width="1.3"/><polygon points="50,36 58,32.8 58,39.2" fill="#1f2530"/><polygon points="350,36 342,32.8 342,39.2" fill="#1f2530"/><text x="200" y="30" text-anchor="middle" font-size="13" fill="#1f2530">1,2 m</text><line x1="230" y1="122" x2="230" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="112" x2="350" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="230" y1="140" x2="350" y2="140" stroke="#1f2530" stroke-width="1.3"/><polygon points="230,140 238,136.8 238,143.2" fill="#1f2530"/><polygon points="350,140 342,136.8 342,143.2" fill="#1f2530"/><text x="290" y="158" text-anchor="middle" font-size="14" fill="#1f2530" font-style="italic">d</text></svg>`,
+            answer: { value: 0.8, unit: 'm', tol: 0.02 },
+            solution: `I **tippögonblicket** vrider sig brädan kring bordskanten: hela normalkraften samlas där, så vi väljer **bordskanten som vridningspunkt**. Kalla utsticket $d$. Brädans tyngdpunkt sitter mitt på brädan, $0{,}60\\ \\mathrm{m}$ från den yttre änden, alltså $d - 0{,}60$ **utanför** kanten. Vikten står på den inre änden, $1{,}2 - d$ **innanför** kanten.
+
+Momentlagen kring kanten (tyngdfaktorn $g$ finns i båda led och stryks):
+
+$$ m_\\text{bräda} \\cdot (d - 0{,}60) = m_\\text{vikt} \\cdot (1{,}2 - d) $$
+
+$$ 2{,}4 \\cdot (d - 0{,}60) = 1{,}2 \\cdot (1{,}2 - d) $$
+
+$$ 2{,}4d - 1{,}44 = 1{,}44 - 1{,}2d $$
+
+$$ 3{,}6d = 2{,}88 \\quad\\Leftrightarrow\\quad d = 0{,}80\\ \\mathrm{m} $$
+
+**Svar:** Brädan kan sticka ut som mest $0{,}80\\ \\mathrm{m}$ utanför bordskanten.
+
+**Generell slutsats:** Utan vikten hade gränsen gått vid $0{,}60\\ \\mathrm{m}$, precis när tyngdpunkten når kanten. Vikten på den inre änden ger ett mothållande moment och flyttar ut gränsen. Kontrollera rimligheten: den gemensamma tyngdpunkten för bräda och vikt ska i gränsfallet ligga rakt över kanten, och närmare brädans tyngdpunkt än viktens eftersom brädan väger dubbelt så mycket.`,
+        },
+    ],
+
+    'fy2-1.4': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13246,7 +13363,7 @@ $$ t = \\frac{1\\ \\text{varv}}{\\omega_\\text{rel}} = \\frac{720}{11} = 65{,}5\
         },
     ],
 
-    'fy2-1.4': [
+    'fy2-1.5': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13495,7 +13612,7 @@ $$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
         },
     ],
 
-    'fy2-1.5': [
+    'fy2-1.6': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13622,7 +13739,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot 0
         },
     ],
 
-    'fy2-1.6': [
+    'fy2-1.7': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13741,7 +13858,7 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
         },
     ],
 
-    'fy2-1.7': [
+    'fy2-1.8': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,

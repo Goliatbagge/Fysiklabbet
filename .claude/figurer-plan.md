@@ -143,7 +143,9 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    ger falsk "för stor högermarginal").
 16. ~~mekanik fy2-1.x (moment/cirkelrörelse/pendlar)~~ — **KLART (2026-07-01).**
    fy2-1.1..1.4 klara sedan tidigare; fy2-1.5–1.8 klara nu (konisk pendel,
-   kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1 KOMPLETT.**
+   kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1
+   KOMPLETT.** (Avsnitten omnumrerade 2026-08-29: fördjupningen fy2-1.3
+   Stabilitet och vältning sköts in, gamla 1.3–1.7 heter nu 1.4–1.8.)
 17. ~~fy2-3.x magnetism~~ — **KLART (2026-07-02). KAPITEL 3 ELEKTROMAGNETISM
    KOMPLETT** (3.1–3.14; enda SKIP = 3D-växelströmsgeneratorn i 3.10).
    30 figurer över 14 filer: 3.1 (poler/delad magnet/dipolfält), 3.2 (Ørsted-
@@ -566,10 +568,10 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-8.1 (1 relativitet: sol/jordbana/ljusstrålar) · fy1-9.1 (2 atom: helium + excitation) KLAR (2026-07-01)** — KAPITEL RELATIVITET + KÄRNFYSIK KOMPLETT. **HELA FYSIK 1 KLAR (drawable).**
 
 ### Fysik 2
-- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [x] **fy2-1.4 (2: centripetal v/a_C, vertikal cirkel F_G/F_S övre+nedre) KLAR (2026-07-01)**
-- [x] **fy2-1.5 (1 konisk pendel: snöre + ellipsbana + α + F_G/F_S) · fy2-1.6
+- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.4, förr 1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [x] **fy2-1.5, förr 1.4 (2: centripetal v/a_C, vertikal cirkel F_G/F_S övre+nedre) KLAR (2026-07-01)**
+- [x] **fy2-1.6, förr 1.5 (1 konisk pendel: snöre + ellipsbana + α + F_G/F_S) · fy2-1.7, förr 1.6
   (2: kastparabel med 5 stationer [v_0x röd, v_y röd, v blå, θ/α/β] + v-triangel)
-  · fy2-1.7 (3: svängbåge med gungande person + 1,0 m-mått, kraftdiagram lägsta
+  · fy2-1.8, förr 1.7 (3: svängbåge med gungande person + 1,0 m-mått, kraftdiagram lägsta
   läget [F_S=F_C+F_G skalenligt], kraftdiagram översta läget [F_C=F_G]) · fy2-1.8
   (1 konisk pendel med kraftuppdelning F_Sy/F_Sx + likformiga trianglar h/r)
   KLAR (2026-07-01).** Generatorer i scratchpad: `gen_fy2_15.js`, `gen_fy2_16.js`,

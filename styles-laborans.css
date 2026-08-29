@@ -1533,6 +1533,16 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn):not(.artike
     color: var(--lab-ink-muted);
 }
 
+/* Fotnot under avsnittslistan: * framför numret = fördjupningsavsnitt */
+.lab-sections-fotnot {
+    margin-top: 10px;
+    padding-left: 4px;
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.02em;
+}
+
 .lab-section-item.active .lab-section-item-arrow { color: var(--lab-accent); }
 
 .lab-sections-aside-foot { border-top: 1px solid var(--lab-line); }
@@ -2098,6 +2108,14 @@ button.lab-card-disabled { pointer-events: none; }
     .lab-block.block-mal,
     .lab-video.block-mal { animation: none; }
 }
+
+/* KaTeX behåller ALLTID sitt eget skiftläge, även inuti versalsatta
+   rubriker (.lab-block-title, härledningarnas summary, etiketter i
+   visualiseringarna). En matematisk beteckning betyder olika saker i
+   gemen och versal: f(x) versaliserat blir F(X), alltså den primitiva
+   funktionen. Se "Funktionsnamn och variabler ..." i CLAUDE.md.
+   RÖR INTE regeln — utan den blir varje formel i en rubrik fel. */
+.katex { text-transform: none; }
 
 .lab-block-title {
     font-family: var(--lab-font-mono);

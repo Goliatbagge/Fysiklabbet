@@ -92,7 +92,9 @@ window.SIM_NAMES = {
   'fysik2-brada-tva-stod-app.html': [
     { name: 'Brädan på två bockar', desc: 'Dra i lasten och i stöden och se stödkrafterna F_P och F_Q live. Välj vridningspunkt fritt (vid ett stöd blir dess hävarm 0) och lös ut den andra kraften med momentlagen — och se brädan välta när tyngdpunkten passerar ett stöd.',
       kw: ['krafter','moment','vridmoment','kraftmoment','momentlagen','jämvikt','vridningspunkt','stöd','stödkraft','bock','bräda','hävarm','tyngdpunkt','vältning','statik','mekanik'] },
-    { name: 'Gaffelbalansen', href: 'fysik2-gaffelbalans-app.html', desc: 'Det klassiska balanstricket i 3D: två gafflar i en kork balanserar på en nålspets mot den smala kanten av ett mynt på högkant. Knuffa till, ändra gaffelvinkeln och se varför det är så lätt — tyngdpunkten hamnar under stödpunkten.',
+  ],
+  'fysik2-gaffelbalans-app.html': [
+    { name: 'Gaffelbalansen', desc: 'Det klassiska balanstricket i 3D: två gafflar i en kork balanserar på en nålspets mot den smala kanten av ett mynt på högkant. Knuffa till, ändra gaffelvinkeln och se varför det är så lätt — tyngdpunkten hamnar under stödpunkten.',
       kw: ['krafter','moment','kraftmoment','tyngdpunkt','stödpunkt','stabilitet','stabil jämvikt','balans','balanstrick','gaffel','gafflar','kork','nål','mynt','pendel','hävarm','3d','statik','mekanik'] },
     { name: 'Dubbelkonen som rullar uppför', href: 'fysik2-dubbelkon-app.html', desc: 'Den klassiska demonstrationen i 3D: en dubbelkon släpps vid den låga änden av en V-formad bana och rullar mot den höga — men tyngdpunkten sjunker hela vägen, eftersom kontaktpunkterna vandrar ut mot konens spetsar när skenorna går isär. Jämför med cylindern som rullar nedåt, ändra lutningen och hitta gränsen där illusionen bryts.',
       kw: ['krafter','tyngdpunkt','dubbelkon','kon','rullar uppför','uppförsbacke','lutande bana','illusion','rullning','cylinder','lägesenergi','kontaktpunkt','demonstration','3d','mekanik'] },

@@ -112,7 +112,7 @@ intervallen mellan dess nollställen.
 3. Sammanställ resultatet i en **teckentabell**.
 :::
 
-::: exempel "Exempel 3 — Bestämma f(x):s växande ur grafen till f′(x)"
+::: exempel "Exempel 3 — Bestämma var $f(x)$ växer ur grafen till $f'(x)$"
 **Figuren nedan visar grafen till $y = f'(x)$.<br>
 a) I vilket intervall är $f(x)$ växande?&emsp;&emsp;
 b) För vilka $x$-värden har grafen till $f(x)$ lutningen 0?**

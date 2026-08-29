@@ -57,6 +57,43 @@ const REGLER = [
                   '(Publicerade artikel-id:n rättas dock aldrig.)',
     },
     {
+        namn: 'över-ända',
+        niva: 'fel',
+        monster: /\böver ända\b/gi,
+        rattelse: 'Adverbet skrivs i ett ord: överända (falla överända, vrida överända).',
+    },
+    {
+        namn: 'tankstreck',
+        niva: 'varning',
+        // Tankstreck som pausmarkör i löptext (förbjudet i nyskriven text
+        // sedan 2026-08-26). Blocktitlar ("Härledning — …"), title:-fält
+        // och intervall fångas inte: mönstret kräver mellanslag runt
+        // strecket och hoppar över rader som ser ut som :::-titlar.
+        monster: /(?<!:::.{0,80}) — /g,
+        undantag: [/^\s*:::/, /title:/i, /"title"/, /aria-label/],
+        rattelse: 'Tankstreck som pausmarkör i löptext. Skriv om med punkt, ' +
+                  'kolon, komma eller parentes. Se "Tankstreck ska inte användas" ' +
+                  'i CLAUDE.md. (Äldre text saneras inte retroaktivt — varningen ' +
+                  'gäller nyskrivet.)',
+    },
+    {
+        namn: 'funktionsnamn-i-rubrik',
+        niva: 'fel',
+        // Blocktitlar (:::-rutor och sammanfattningskort) sätts med
+        // text-transform: uppercase, så ett funktionsnamn som står som
+        // VANLIG TEXT i titeln blir F(X) — den primitiva funktionen, alltså
+        // något helt annat än f(x). KaTeX undantas numera från versaliseringen
+        // (regeln .katex { text-transform: none } i styles-laborans.css), så
+        // lösningen är att sätta beteckningen som matte: "$f(x)$".
+        // Mönstret hoppar över kompletta $…$-spann och slår alltså bara på
+        // funktionsnamn som ligger utanför matte. (Påpekat 2026-08-29.)
+        monster: /^:::.*?"(?:[^"$]|\$[^$]*\$)*?\b[A-Za-z]\s*[′'″]?\s*\(\s*[a-zA-Z]\s*\)/g,
+        rattelse: 'Funktionsnamn som vanlig text i en blocktitel versaliseras ' +
+                  'till F(X) och läses som den primitiva funktionen. Sätt ' +
+                  'beteckningen som matte i stället: "Derivatan av $f(x) = a^x$". ' +
+                  'Se "Funktionsnamn och variabler i rubriker" i CLAUDE.md.',
+    },
+    {
         namn: 'förkortningar',
         niva: 'varning',
         monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.)/gi,

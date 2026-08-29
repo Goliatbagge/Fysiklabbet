@@ -54,7 +54,10 @@ async function routeCdn(page) {
       .sort();
   }
   const W = 1290, H = 730;                 // liggande laptop, den snålaste vanliga
-  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  // Webbläsare: PW_CHROMIUM om den är satt, annars den förinstallerade i
+  // molnmiljön, annars playwright-cores egen (samma logik som verify-formelklipp).
+  const exe = process.env.PW_CHROMIUM || '/opt/pw-browsers/chromium';
+  const browser = await chromium.launch(fs.existsSync(exe) ? { executablePath: exe } : {});
   const page = await browser.newPage({ viewport: { width: W, height: H } });
   await routeCdn(page);
   let fel = 0;

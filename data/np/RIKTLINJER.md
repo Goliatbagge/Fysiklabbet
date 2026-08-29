@@ -16,7 +16,7 @@ Gäller alla prov under `data/np/`. Pilot och referensimplementation:
 
 ## Genomgångar högst upp i lösningen (`genomgangar`)
 
-Varje uppgift har `genomgangar: ['fy2-1.4', 'fy2-2.5']` — en lista med
+Varje uppgift har `genomgangar: ['fy2-1.5', 'fy2-2.5']` — en lista med
 teori-id (`<kurskod>-<num>`, samma id som `katalog.html#…`). `np.html` visar
 dem som rutan **"Teori du behöver"** överst i lösningen, så att den som kör
 fast kan läsa på innan stegen klickas fram (önskemål 2026-08-07).

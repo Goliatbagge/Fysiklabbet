@@ -2629,13 +2629,16 @@
                                                     e.preventDefault();
                                                     pickSection(s.num);
                                                 }}>
-                                                <span className="lab-section-item-num">{s.num}</span>
+                                                <span className="lab-section-item-num">{s.fordjupning ? '*' : ''}{s.num}</span>
                                                 <span className="lab-section-item-title">{emTitle(s.title)}</span>
                                                 <span className="lab-section-item-arrow">
                                                     {section === s.num ? '●' : '→'}
                                                 </span>
                                             </a>
                                         ))}
+                                        {sections.some(s => s.fordjupning) && (
+                                            <div className="lab-sections-fotnot">* Fördjupning, utanför kursens kärna</div>
+                                        )}
                                         <div className="lab-sections-aside-foot" />
                                     </aside>
 
@@ -2644,14 +2647,14 @@
                                             <React.Fragment>
                                                 <div className="lab-section-content-head">
                                                     <span className="lab-mono-label">
-                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()} · Avsnitt {activeSection.num}
+                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()} · Avsnitt {activeSection.num}{activeSection.fordjupning ? ' · Fördjupning' : ''}
                                                     </span>
                                                     <span className="lab-mono-label">
                                                         {sectionIdx + 1} / {sections.length}
                                                     </span>
                                                 </div>
                                                 <h2 className="lab-section-title">
-                                                    <span className="lab-section-title-num">{activeSection.num}</span>
+                                                    <span className="lab-section-title-num">{activeSection.fordjupning ? '*' : ''}{activeSection.num}</span>
                                                     {emTitle(activeSection.title)}
                                                 </h2>
 

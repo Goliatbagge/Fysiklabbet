@@ -24,7 +24,7 @@
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
  *
  * ── typ: tomtebloss ──────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.4 (Cirkulär rörelse): ett tomtebloss fäst i en
+ * Demonstrationen ur fy2-1.5 (Cirkulär rörelse): ett tomtebloss fäst i en
  * skruvdragare, i mörker. Tänd tomteblosset — gnistorna sprutar åt alla
  * håll. Starta skruvdragaren — tomteblosset roterar snabbt och gnistorna
  * lämnar banan TANGENTIELLT i rörelsens riktning (inte radiellt utåt),
@@ -42,7 +42,7 @@
  * Tomteblosset är UNDANTAGET: det kräver mörker för ljuseffekten.
  *
  * ── typ: centrifug ───────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.4 (Cirkulär rörelse): en blöt tvättsvamp i en
+ * Demonstrationen ur fy2-1.5 (Cirkulär rörelse): en blöt tvättsvamp i en
  * centrifug (roterande korg utan lock, sedd rakt uppifrån, ritad på
  * papperstemat med rutnät). Blöt svampen
  * och starta centrifugen — vattendropparna pressas ut genom korgväggen och
@@ -107,8 +107,26 @@
  * fingrarna möts. Ritad i laboranstemat; pausknapp, "Ultrarapid" och
  * fullskärm som övriga minisims; inget ljud.
  *
+ * ── typ: linjaltrio ─────────────────────────────────────────────────────
+ * Teoriavsnittet fy2-1.3 (Stabilitet och vältning): tre likadana linjaler
+ * uppspikade på tre olika sätt, som interaktiv spegel av figuren med
+ * kulan i skålen/på kullen/på golvet (panelerna ligger i tredjedelar så
+ * att de hamnar rakt under figurens paneler). Vänster: spik genom
+ * ÖVERKANTEN — dämpad pendel som gungar tillbaka till utgångsläget
+ * (stabil). Mitten: spik genom NEDERKANTEN — står upprätt, men minsta
+ * vinkel får den att välta tills dess ände slår i marklinjen (labil) —
+ * spiken sitter en bit ovanför marken, så linjalen blir stående snett
+ * lutad på sin ände (stoppvinkeln PHI_STOP löses ur geometrin, med
+ * linjalens halva bredd inräknad så att hörnet inte går genom marken).
+ * En liten studs, och knappen "Ställ upp linjalerna igen" reser den. Höger: spik genom TYNGDPUNKTEN — snurrar som en propeller
+ * av en knuff (släppfarten följer med från draget) och blir kvar i det
+ * läge där den stannar (indifferent). Dra i linjalerna med pekare/touch
+ * (grepp nära spiken ignoreras — vinkeln är odefinierad där). Ritad i
+ * laboranstemat; fullskärm som övriga minisims; inget ljud, ingen
+ * rAF-loop i viloläge (somnat() släcker den när allt står stilla).
+ *
  * ── typ: valtning ────────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.2 (Vältning): en kloss på ett vågrätt underlag
+ * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): en kloss på ett vågrätt underlag
  * tippas kring ett av sina nedre hörn — som när man tippar klossen för
  * hand. Underlaget lutas aldrig, så glidfriktion spelar ingen roll.
  * Klossen lutas genom att man TAR TAG i dess överkant (pekare/touch) och
@@ -130,7 +148,7 @@
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  *
  * ── typ: gaffelbalans ────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.2 (Mer kraftmoment): det klassiska balanstricket
+ * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): det klassiska balanstricket
  * — två gafflar trycks fast i en kork, en nål sticks igenom, och hela bygget
  * balanserar på nålspetsen mot den ytterst smala kanten av ett mynt som står
  * på högkant i en flaskkork. Gafflarnas tunga skaft hänger NEDÅT och drar
@@ -157,7 +175,7 @@
  * exakt originalsimuleringens fullskärmsläge, med alla verktyg.
  *
  * ── typ: dubbelkon ───────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.2 (Mer kraftmoment): dubbelkonen som ser ut att
+ * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): dubbelkonen som ser ut att
  * rulla uppför en lutande, V-formad bana. Den fristående simuleringen
  * fysik2-dubbelkon-app.html inbäddad som minisimulering via en iframe
  * (?embed=1&mini=1 — mini-läget visar bara scenen), samma mönster som
@@ -3542,7 +3560,7 @@
     // ══════════════════════════════════════════════════════════════════════
     //  typ: valtning
     // ══════════════════════════════════════════════════════════════════════
-    // Demonstrationen ur fy2-1.2 (Vältning): en kloss står på ett vågrätt
+    // Demonstrationen ur fy2-1.3 (Stabilitet och vältning): en kloss står på ett vågrätt
     // underlag och tippas kring ett av sina nedre hörn — som när man
     // tippar klossen för hand (underlaget lutas aldrig, så glidfriktion
     // spelar ingen roll). Man TAR TAG i klossens överkant och drar åt
@@ -4200,7 +4218,7 @@
     // ══════════════════════════════════════════════════════════════════════
     //  typ: gaffelbalans
     // ══════════════════════════════════════════════════════════════════════
-    // Demonstrationen ur fy2-1.2 (Mer kraftmoment): det klassiska
+    // Demonstrationen ur fy2-1.3 (Stabilitet och vältning): det klassiska
     // balanstricket — två gafflar trycks fast i en kork, en nål sticks
     // igenom korken, och hela bygget balanserar på nålspetsen mot den
     // smala kanten av ett mynt som står på högkant i en flaskkork.
@@ -5900,6 +5918,474 @@
         updateInfo();
     }
 
+    // ── typ: linjaltrio ─────────────────────────────────────────────────
+    // (dokumenterad i filhuvudet)
+    function buildLinjaltrio(node, cfg) {
+        var W = 660, H = 300;              // logisk ritstorlek (tre paneler)
+        var PW = W / 3;                    // panelbredd — tredjedelar, så att
+                                           // panelerna hamnar rakt under
+                                           // kulfigurens tre paneler i teorin
+        var GROUND_Y = 252;                // gemensam marklinje
+        var RL = 150, RW = 16;             // linjalens längd och bredd
+        var GPX = 1500;                    // "g" i px/s² (som valtning)
+        var RAD = Math.PI / 180;
+        var INK = '#1f2530';
+
+        // Pendelkonstant för en stav spikad nära ena änden:
+        // alfa = -(g·d/(L²/12 + d²))·sin(theta), d = spik → tyngdpunkt.
+        var D_END = RL / 2 - 10;           // spiken sitter 10 px från änden
+        var K_END = GPX * D_END / (RL * RL / 12 + D_END * D_END);   // ≈ 16 s⁻²
+
+        // De tre linjalerna. vil = riktningen i viloläget (enhetsvektor som
+        // vinkel), fran/till = linjalens utsträckning längs riktningen
+        // räknat från spiken (positivt = åt vilo-riktningens håll).
+        var PANELS = [
+            { namn: 'stabil', pivot: { x: PW * 0.5, y: 48 },
+              fran: -10, till: RL - 10, typ: 'Stabil', etikett: 'Spikad i överkant' },
+            { namn: 'labil', pivot: { x: PW * 1.5, y: 176 },
+              fran: -10, till: RL - 10, typ: 'Labil', etikett: 'Spikad i nederkant' },
+            { namn: 'indifferent', pivot: { x: PW * 2.5, y: 150 },
+              fran: -RL / 2, till: RL / 2, typ: 'Indifferent', etikett: 'Spikad i tyngdpunkten' }
+        ];
+        // Den labila linjalen sitter spikad en bit ovanför marken och
+        // stannar när dess ÄNDE slår i marklinjen. Stoppvinkeln löses ur
+        // -till·cos(phi) + (RW/2)·|sin(phi)| = pivothöjden över marken,
+        // så att även linjalens nedre hörn vilar precis på linjen.
+        var PHI_STOP = (function () {
+            var h = GROUND_Y - PANELS[1].pivot.y, till = RL - 10;
+            var phi = Math.PI / 2;
+            while (phi < Math.PI &&
+                   -till * Math.cos(phi) + (RW / 2) * Math.abs(Math.sin(phi)) < h) {
+                phi += 0.001;
+            }
+            return phi;                    // ≈ 2,18 rad (≈ 125°)
+        })();
+
+        // Vinkeln th mäts från VILOLÄGET: stabil hänger rakt ned (0 = ned),
+        // labil står rakt upp (0 = upp), indifferent börjar stående (0 = upp
+        // men utan betydelse — spiken går genom tyngdpunkten).
+        // ang() räknar om till skärmvinkel: åt vilket håll "till"-änden pekar.
+        function restDir(i) { return i === 0 ? Math.PI / 2 : -Math.PI / 2; }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'Tre likadana linjaler är uppspikade på tre olika sätt. Den ' +
+            'vänstra hänger i en spik genom överkanten: dras den åt sidan ' +
+            'gungar den tillbaka och stannar i sitt utgångsläge. Den ' +
+            'mittersta är uppspikad genom nederkanten en bit ovanför marken: ' +
+            'vid minsta lilla vinkel välter den tills änden slår i marken. ' +
+            'Den högra har spiken rakt ' +
+            'genom tyngdpunkten: den snurrar som en propeller när man drar ' +
+            'i den och blir kvar i det läge där den stannar.');
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn ms-primar';
+        omBtn.textContent = 'Ställ upp linjalerna igen';
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+        info.textContent = 'Dra i en linjal och släpp, eller ge den högra en knuff.';
+        controls.appendChild(omBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisims) ────────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        // th[i] = vinkel från viloläget (rad), om[i] = vinkelhastighet.
+        var th = [0, 0, 0];
+        var om = [0, 0, 0];
+        var lying = false;                 // den labila ligger på marken
+        var dragging = -1;                 // panelindex som dras, annars −1
+        var dragPtr = -1;
+        var grabOfs = 0;
+        var lastDrag = null;               // { t, th } för att skatta fart
+        var dragVel = 0;
+        var running = false;
+        var visible = true;
+        var lastTs = 0;
+        var rafId = 0;
+
+        // ── Fysik ─────────────────────────────────────────────────────────
+        function step(dt) {
+            // Stabil: dämpad pendel som gungar tillbaka till utgångsläget.
+            if (dragging !== 0) {
+                var a0 = -K_END * Math.sin(th[0]) - 1.4 * om[0];
+                om[0] += a0 * dt;
+                th[0] += om[0] * dt;
+                if (Math.abs(th[0]) < 0.02 && Math.abs(om[0]) < 0.06) {
+                    th[0] = 0;
+                    om[0] = 0;
+                }
+            }
+            // Labil: samma pendel fast UPPOCHNED — varje avvikelse växer.
+            if (dragging !== 1 && !(lying && Math.abs(om[1]) < 0.001)) {
+                var a1 = K_END * Math.sin(th[1]) - 0.15 * om[1];
+                om[1] += a1 * dt;
+                th[1] += om[1] * dt;
+                var lim = PHI_STOP;        // änden slår i marken
+                if (th[1] >= lim || th[1] <= -lim) {
+                    th[1] = th[1] > 0 ? lim : -lim;
+                    if (Math.abs(om[1]) > 0.5) {
+                        om[1] = -0.22 * om[1];     // liten studs
+                    } else {
+                        om[1] = 0;
+                        lying = true;
+                    }
+                }
+            }
+            // Indifferent: fri rotation kring tyngdpunkten, mild friktion i
+            // spikhålet — propellern snurrar av sig och BLIR KVAR där den
+            // stannar (inget läge är bättre än något annat).
+            if (dragging !== 2) {
+                om[2] -= 0.6 * om[2] * dt;
+                th[2] += om[2] * dt;
+                if (Math.abs(om[2]) < 0.05) om[2] = 0;
+            }
+        }
+
+        function somnat() {
+            return th[0] === 0 && om[0] === 0 &&
+                   om[1] === 0 && (lying || th[1] === 0) &&
+                   om[2] === 0 && dragging < 0;
+        }
+
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+            // marklinje med snedstreck (bara mittpanelen behöver marken,
+            // men en genomgående linje håller ihop scenen)
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(14, GROUND_Y);
+            ctx.lineTo(W - 14, GROUND_Y);
+            ctx.stroke();
+            ctx.strokeStyle = 'rgba(31,37,48,0.45)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            for (var gx = 24; gx < W - 14; gx += 20) {
+                ctx.moveTo(gx, GROUND_Y + 1);
+                ctx.lineTo(gx - 8, GROUND_Y + 9);
+            }
+            ctx.stroke();
+        }
+
+        function drawRuler(i) {
+            var P = PANELS[i];
+            ctx.save();
+            ctx.translate(P.pivot.x, P.pivot.y);
+            ctx.rotate(th[i]);
+            // lokalt system: viloriktningen är inbakad i rektangeln (nedåt
+            // för den hängande, uppåt för de andra), så rotationen är alltid
+            // bara vinkeln från viloläget
+            var ned = restDir(i) === Math.PI / 2;
+            var y0 = ned ? P.fran : -P.till;
+            var y1 = ned ? P.till : -P.fran;
+            ctx.beginPath();
+            var r = 3;
+            ctx.moveTo(-RW / 2 + r, y0);
+            ctx.arcTo(RW / 2, y0, RW / 2, y1, r);
+            ctx.arcTo(RW / 2, y1, -RW / 2, y1, r);
+            ctx.arcTo(-RW / 2, y1, -RW / 2, y0, r);
+            ctx.arcTo(-RW / 2, y0, RW / 2, y0, r);
+            ctx.closePath();
+            ctx.fillStyle = '#f0e2b8';
+            ctx.fill();
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+            // cm-gradering längs ena kanten (30 cm på 150 px)
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            for (var cm = 0; cm <= 30; cm++) {
+                var yy = y0 + cm * (RL / 30);
+                if (yy < y0 || yy > y1) continue;
+                var len = (cm % 5 === 0) ? 7 : 4;
+                ctx.moveTo(-RW / 2, yy);
+                ctx.lineTo(-RW / 2 + len, yy);
+            }
+            ctx.stroke();
+            ctx.restore();
+            // spiken (stålgrå med mörk kant), ovanpå linjalen
+            ctx.beginPath();
+            ctx.arc(P.pivot.x, P.pivot.y, 4.4, 0, 2 * Math.PI);
+            ctx.fillStyle = '#9aa2ad';
+            ctx.fill();
+            ctx.strokeStyle = '#3d434d';
+            ctx.lineWidth = 1.3;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(P.pivot.x - 1.2, P.pivot.y - 1.2, 1.2, 0, 2 * Math.PI);
+            ctx.fillStyle = '#e8ebef';
+            ctx.fill();
+        }
+
+        function render() {
+            drawBackground();
+            for (var i = 0; i < 3; i++) drawRuler(i);
+            // etiketter under marklinjen, en per panel. Canvasen skalas ned
+            // rejält på mobil, så teckenstorleken räknas upp mot en ungefär
+            // konstant skärmstorlek — men aldrig så att texten spränger
+            // sin panel.
+            ctx.fillStyle = INK;
+            ctx.textAlign = 'center';
+            var kf = Math.max(1, Math.min(1.8, W / (canvas.clientWidth || W)));
+            // jämviktstypen ovanför respektive linjal
+            ctx.font = '600 ' + (14 * kf) + 'px ' + FONT;
+            for (i = 0; i < 3; i++) {
+                ctx.fillText(PANELS[i].typ, PW * (i + 0.5), 24);
+            }
+            for (i = 0; i < 3; i++) {
+                var fs = 13 * kf;
+                ctx.font = fs + 'px ' + FONT;
+                var b = ctx.measureText(PANELS[i].etikett).width;
+                if (b > PW - 18) {
+                    fs = fs * (PW - 18) / b;
+                    ctx.font = fs + 'px ' + FONT;
+                }
+                ctx.fillText(PANELS[i].etikett, PW * (i + 0.5), H - 14);
+            }
+        }
+
+        // ── Pekare: dra i en linjal, släpp — eller knuffa propellern ──────
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return { x: (e.clientX - r.left) / r.width * W,
+                     y: (e.clientY - r.top) / r.height * H };
+        }
+        // avstånd från punkt till linjalens mittlinje (i skärmläge);
+        // linjalens "till"-ände pekar åt skärmvinkeln restDir + th
+        function distToRuler(p, i) {
+            var P = PANELS[i];
+            var a = restDir(i) + th[i];
+            var ux = Math.cos(a), uy = Math.sin(a);
+            var rx = p.x - P.pivot.x, ry = p.y - P.pivot.y;
+            var s = rx * ux + ry * uy;                   // längs linjalen
+            s = Math.max(P.fran, Math.min(P.till, s));
+            var qx = P.pivot.x + ux * s, qy = P.pivot.y + uy * s;
+            return { d: Math.hypot(p.x - qx, p.y - qy), s: s };
+        }
+        function pointerTheta(p, i) {
+            var P = PANELS[i];
+            var a = Math.atan2(p.y - P.pivot.y, p.x - P.pivot.x);
+            var d = a - restDir(i);
+            while (d > Math.PI) d -= 2 * Math.PI;
+            while (d < -Math.PI) d += 2 * Math.PI;
+            return d;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            var i = Math.max(0, Math.min(2, Math.floor(p.x / PW)));
+            var hit = distToRuler(p, i);
+            if (hit.d > 30 || Math.abs(hit.s) < 14) return;   // inte på linjalen (eller för nära spiken)
+            e.preventDefault();
+            dragging = i;
+            dragPtr = e.pointerId;
+            grabOfs = pointerTheta(p, i) - th[i];
+            om[i] = 0;
+            dragVel = 0;
+            lastDrag = { t: performance.now(), th: th[i] };
+            if (i === 1) lying = false;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            kick();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (dragging < 0) {
+                var over = false;
+                for (var i = 0; i < 3; i++) {
+                    var h = distToRuler(p, i);
+                    if (h.d <= 30 && Math.abs(h.s) >= 14) { over = true; break; }
+                }
+                canvas.style.cursor = over ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            var j = dragging;
+            var ny = pointerTheta(p, j) - grabOfs;
+            while (ny - th[j] > Math.PI) ny -= 2 * Math.PI;
+            while (ny - th[j] < -Math.PI) ny += 2 * Math.PI;
+            if (j === 0) ny = Math.max(-2.4, Math.min(2.4, ny));
+            if (j === 1) ny = Math.max(-PHI_STOP, Math.min(PHI_STOP, ny));
+            var now = performance.now();
+            if (lastDrag && now > lastDrag.t) {
+                dragVel = 0.6 * dragVel +
+                          0.4 * (ny - th[j]) / ((now - lastDrag.t) / 1000);
+            }
+            lastDrag = { t: now, th: ny };
+            th[j] = ny;
+            if (!running) render();
+        });
+        function endDrag(e) {
+            if (dragging < 0 || e.pointerId !== dragPtr) return;
+            var j = dragging;
+            dragging = -1;
+            dragPtr = -1;
+            canvas.style.cursor = 'default';
+            // släppfart: propellern (och pendeln) får med sig knuffen
+            om[j] = Math.max(-14, Math.min(14, dragVel));
+            if (j === 1) lying = Math.abs(th[1]) >= PHI_STOP - 0.001 && om[1] === 0;
+            kick();
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        omBtn.addEventListener('click', function () {
+            th = [0, 0, 0];
+            om = [0, 0, 0];
+            lying = false;
+            dragging = -1;
+            render();
+            kick();
+        });
+
+        // ── Loop ──────────────────────────────────────────────────────────
+        function shouldRun() {
+            if (!visible || document.hidden) return false;
+            return !somnat();
+        }
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045);
+            step(dt);
+            render();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Test-handtag för skärmdumps-/verifieringsskript.
+        card._trio = {
+            get: function () { return { th: th.slice(), om: om.slice(), lying: lying, philim: PHI_STOP, dragging: dragging, running: running, visible: visible, rafId: rafId }; },
+            set: function (i, vinkelDeg, fart) {
+                th[i] = vinkelDeg * RAD;
+                om[i] = fart || 0;
+                if (i === 1) lying = Math.abs(th[1]) >= PHI_STOP - 0.001 && !fart;
+                render();
+                kick();
+            }
+        };
+
+        render();
+    }
+
     // ── typ: fodelsedag ───────────────────────────────────────────────────
     // Fördjupningen i ma1c-5.8 (Komplementhändelse): sannolikheten att minst
     // två personer i en grupp delar födelsedag, som funktion av gruppens
@@ -6577,7 +7063,7 @@
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,
                   gaffelbalans3d: buildGaffelbalans3d,
                   dubbelkon: buildDubbelkon,
-                  linjal: buildLinjal,
+                  linjal: buildLinjal, linjaltrio: buildLinjaltrio,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
 
     function decodeSrc(b64) {

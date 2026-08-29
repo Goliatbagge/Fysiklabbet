@@ -18,7 +18,7 @@ av exponentialfunktioner mycket enkel.
 
 ## Härledning av derivatan för aˣ
 
-::: härledning "Derivatan för f(x) = aˣ med derivatans definition"
+::: härledning "Derivatan för $f(x) = a^x$ med derivatans definition"
 $$
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
 = \lim_{h \to 0} \frac{a^{x+h} - a^x}{h}
@@ -122,7 +122,7 @@ funktionens värde ($y$-koordinaten) i varje punkt är detsamma som kurvans
 lutning där. Lutningen är 1 där $y = 1$, lutningen är 2 där $y = 2$, och så
 vidare.
 
-::: formel "Derivatan av f(x) = eˣ"
+::: formel "Derivatan av $f(x) = e^x$"
 Derivatan av $f(x) = e^x$ är
 
 $$

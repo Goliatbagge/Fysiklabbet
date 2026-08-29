@@ -12,6 +12,38 @@ Format per post:
 
 ## Kö
 
+- **Röntgenkameran som fångar spinnvågor i rörelse** — en avbildningsteknik som
+  följer magnoner (spinnvågor) medan de färdas genom ett material, vilket är
+  svårt eftersom de rör sig snabbt och dör ut fort. Ingång: vågor, magnetism och
+  varför en våg kan bära information utan att något material följer med. Leta upp
+  originalstudien innan den används. Källa (Physics World, augusti 2026):
+  https://physicsworld.com/a/x-ray-camera-catches-spin-waves-in-the-act/
+  (tillagd 2026-08-29)
+
+- **Strålskyddsväst kan minska cancerrisken för astronauter** — en väst som
+  skärmar av den kosmiska strålningen kring de mest strålkänsliga organen har
+  testats. Ingång: joniserande strålning, absorberad dos, halveringstjocklek och
+  varför rymden är farligare än marken. Konkret och lätt att ta till sig, och en
+  nyttig motvikt till de mer abstrakta nyheterna. Källa (Physics World, augusti
+  2026): https://physicsworld.com/a/radiation-shielding-vest-could-reduce-cancer-risk-for-astronauts/
+  (tillagd 2026-08-29)
+
+- **Kritisk skalning uppmätt i en tvådimensionell fotongas** — ljuspartiklar
+  som stängts in i två dimensioner beter sig som en gas och visar samma sorts
+  beteende nära en fasövergång som vanlig materia gör. Ingång: fotonen som
+  partikel, aggregationstillstånd och fasövergångar. Kontrollera originalstudien.
+  Källa (Phys.org 2026-08-27, leta upp direktlänken):
+  https://phys.org/physics-news/
+  (tillagd 2026-08-29)
+
+- **Magnetfält dödar först supraledningen och väcker den sedan till liv igen**
+  — i nickelater slår ett starkt magnetfält ut supraledningen, men vid ännu
+  starkare fält kommer den tillbaka. Ingång: supraledning, kritiskt magnetfält.
+  OBS: sajten publicerade en supraledningsnyhet 2026-08-26, så låt det gå en tid
+  innan den här används. Källa (Physics World, augusti 2026):
+  https://physicsworld.com/a/magnetic-field-first-kills-superconductor-then-brings-it-back-to-life/
+  (tillagd 2026-08-29)
+
 - **Solljus i stället för laser gav sammanflätade fotonpar** — ett lag vid
   University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
   Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus

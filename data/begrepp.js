@@ -1607,6 +1607,32 @@ window.BEGREPP = [
   },
 
   {
+    id: 'fonon',
+    term: 'Fonon',
+    former: ['fonon', 'fononen', 'fononer', 'fononerna', 'fononsignal', 'fononsignalen'],
+    kort: 'Den minsta portion av skakning som får plats i ett fast material. Ljud och värme i en kristall räknas som ett myller av sådana portioner, ungefär som ljus räknas i fotoner.',
+    relaterade: ['kvasipartikel', 'foton', 'halvledare', 'absoluta-nollpunkten'],
+    body: [
+      { type: 'p', html: 'Slå på ena änden av en järnstång så hörs ljudet i den andra. Det som färdas är ingen materia utan en skakning: atomerna sitter kvar på sina platser i kristallen och guppar bara fram och tillbaka kring dem, medan själva rörelsemönstret vandrar vidare. En sådan skakning kan inte ha vilken styrka som helst. Precis som ljusenergi kommer i portioner som kallas fotoner, kommer skakningsenergin i ett fast material i bestämda portioner. En sådan portion kallas fonon.' },
+      { type: 'p', html: 'Att räkna skakningar som partiklar är först och främst ett knep som gör räknandet möjligt. Ett gram metall innehåller så ofattbart många atomer att ingen kan följa dem en och en, men om deras gemensamma vibrationer beskrivs som ett gäng fononer som far omkring i kristallen, studsar mot varandra och mot orenheter, går det att räkna ut hur materialet leder värme och ljud. Ju fler fononer, desto varmare är materialet: temperatur är i den här bilden helt enkelt ett mått på hur mycket kristallen skakar.' },
+      { type: 'p', html: 'Just därför blir fononer ett mätverktyg när man kyler ner något nästan hela vägen till den absoluta nollpunkten. I en iskall kristall är skakningen nästan borta, och då räcker det att en enda atomkärna får en knuff för att ett litet knippe fononer ska ge sig av genom gittret. Känsliga detektorer mäter den svaga värmepuls skakningen ger upphov till, och kan på så sätt registrera enskilda partiklar som annars inte skulle lämna något spår alls.' }
+    ]
+  },
+
+  {
+    id: 'wimp',
+    term: 'WIMP',
+    former: ['wimp', 'wimpen', 'wimpar', 'wimparna', 'wimp-jakt', 'wimp-jakten', 'wimp-jakterna'],
+    kort: 'En av de mest studerade kandidaterna till vad mörk materia består av: en tung partikel som knappt bryr sig om vanlig materia, men som ändå kan stöta till en atomkärna en sällsynt gång.',
+    relaterade: ['mork-materia', 'rotationskurva', 'standardmodellen', 'fonon'],
+    body: [
+      { type: 'p', html: 'Namnet är en engelsk förkortning för <em>weakly interacting massive particle</em>, alltså ungefär ”tung partikel som växelverkar svagt”. Det är inte namnet på en upptäckt partikel utan på en hel familj av tänkbara partiklar, med två gemensamma drag: de har rejält med massa, gärna i storleksordningen tio till tusen protonmassor, och de känner varken av den elektriska kraften eller den starka kraften. Därför far de rakt igenom vanlig materia utan att bromsas eller lysa.' },
+      { type: 'p', html: 'Idén blev populär eftersom den löser två problem på en gång. Räknar man ut hur många sådana partiklar som borde ha blivit över från det tidiga universum landar man, för massor i just det området, nära den mängd mörk materia som astronomerna faktiskt mäter upp. Samtidigt förutsade flera teorier bortom den kända partikelfysiken partiklar med precis de egenskaperna. Sammanträffandet var lockande nog att bygga ett halvt sekel av experiment kring.' },
+      { type: 'p', html: 'Sökandet går ut på att vänta. Om partiklarna finns strömmar de hela tiden genom jorden, och någon enstaka gång bör en av dem träffa en atomkärna i en detektor så att kärnan studsar i väg. Ingen har sett en sådan träff än, och de känsligaste experimenten har efterhand uteslutit stora delar av det område där partiklarna borde ha funnits. Därför riktas sökandet numera allt oftare mot betydligt lättare partiklar, som ger så små knuffar att äldre detektorer aldrig hade kunnat märka dem.' }
+    ]
+  },
+
+  {
     id: 'kvasipartikel',
     term: 'Kvasipartikel',
     former: ['kvasipartikel', 'kvasipartikeln', 'kvasipartiklar', 'kvasipartiklarna'],

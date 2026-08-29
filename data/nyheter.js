@@ -88,6 +88,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-29-jakten-under-jorden",
+    date: "2026-08-29",
+    title: "Kallare än rymden och två kilometer ner i en nickelgruva — nu lyssnar 24 kristaller efter mörk materia",
+    deck: "Experimentet SuperCDMS SNOLAB har börjat samla sina första mätdata. Det letar efter partiklar så lätta att knuffen de kan ge en atomkärna motsvarar ett tiotal elektronvolt, och för att höra den måste allt annat tystas.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-29-jakten-under-jorden.jpg",
+    imageAlt: "En av SuperCDMS detektorenheter: en sexkantig dosa i blank koppar, med guldfärgade kretsband längs sidan, stående på en vit duk i ett renrum.",
+    imageCredit: "Foto: SNOLAB (godkänd pressbild)",
+    tags: ["mörk materia", "partikelfysik", "astropartikelfysik", "supercdms", "snolab", "fonon", "kryogenik", "supraledare", "elastisk stöt", "bakgrundsstrålning"],
+    sources: [
+      { name: "SLAC National Accelerator Laboratory — SuperCDMS SNOLAB begins preliminary phase of dark matter hunt (26 augusti 2026)", url: "https://www6.slac.stanford.edu/news/2026-08-26-supercdms-snolab-begins-preliminary-phase-dark-matter-hunt" },
+      { name: "Phys.org — Deep underground, SuperCDMS begins hunting light dark matter with 24 cryogenic crystals (27 augusti 2026)", url: "https://phys.org/news/2026-08-deep-underground-supercdms-dark-cryogenic.html" },
+      { name: "University of Florida — UF physicists part of effort toward first-ever detection of dark matter (augusti 2026)", url: "https://news.ufl.edu/2026/08/dark-matter-experiment/" },
+      { name: "SNOLAB — om anläggningen och dämpningen av den kosmiska strålningen", url: "https://www.snolab.ca/facility/about-the-facilities/" },
+      { name: "SuperCDMS — samarbetets egen presentation av experimentet", url: "https://supercdms.slac.stanford.edu/" }
+    ],
+    research: {
+      citation: "R. Agnese med flera (SuperCDMS-samarbetet, 97 författare), ”Projected sensitivity of the SuperCDMS SNOLAB experiment”, Physical Review D 95, 082002 (2017), publicerad 7 april 2017, DOI 10.1103/PhysRevD.95.082002",
+      url: "https://doi.org/10.1103/PhysRevD.95.082002"
+    },
+    body: [
+      { type: 'p', html: 'Ungefär 85 % av all materia i universum är av ett slag som ingen någonsin har sett. Den lyser inte, den kastar ingen skugga, och den går rakt igenom både bergmassiv och människokroppar utan att lämna spår. Att den finns där vet astronomerna ändå, eftersom galaxernas ytterkanter roterar alldeles för fort för att hållas kvar av bara den massa som syns i teleskopen.' },
+      { type: 'p', html: 'Sedan i augusti pågår ett av världens känsligaste försök att fånga den. Två kilometer under markytan, i nickelgruvan Creighton utanför Sudbury i Ontario, har experimentet SuperCDMS SNOLAB börjat samla sina allra första mätdata. Bakom det står 28 institutioner med SLAC National Accelerator Laboratory som ledande laboratorium.' },
+      { type: 'h2', text: 'Tjugofyra kristaller som ska känna en enda knuff' },
+      { type: 'p', html: 'Hjärtat i anläggningen är 24 ultrarena kristaller av kisel och germanium, var och en ungefär så stor som en ishockeypuck. Träffar en partikel av mörk materia en atomkärna inne i en kristall studsar kärnan i väg, och rekylen sprider sig genom kristallgittret som en svag skakning: ett knippe fononer, ljudets minsta beståndsdelar i ett fast material. Samtidigt slits några laddningar loss. Båda signalerna läses av med supraledande sensorer, som bara fungerar när det är extremt kallt, och därför sitter kristallerna i ett kylskåp som hålls kallare än rymden mellan stjärnorna.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-29-jakten-under-jorden-2.jpg', alt: 'En lång, skinande ren korridor djupt nere i en gruva, med vitt golv, eltavlor längs ena väggen och rör i taket.', caption: 'Labbet ligger inne i en arbetande nickelgruva, men är inrett som ett renrum: varje dammkorn bär spår av naturligt radioaktiva ämnen.', credit: 'Foto: SNOLAB (godkänd pressbild)' },
+      { type: 'h2', text: 'Allt annat måste tystas' },
+      { type: 'p', html: 'Svårigheten är inte att bygga en känslig detektor. Svårigheten är att en så känslig detektor hör allting annat också. Berget ovanför labbet dämpar den kosmiska strålningen med en faktor 50 miljoner, ner till ungefär en kosmisk partikel per fyra kvadratmeter och dygn, men det räcker inte. Runt kristallerna ligger därför skal av koppar, polyeten, ultrarent bly och en spärr mot radon, plus en skärm av mumetall som håller undan jordens magnetfält.' },
+      { type: 'p', html: 'Blyet är historiens egen gåva till fysiken. Nytillverkat bly innehåller alltid en rest av den radioaktiva isotopen bly-210, som har en halveringstid på drygt 22 år. I blytackor som legat som fartygsballast på Medelhavets botten sedan antiken har den resten hunnit sönderfalla nästan helt, och just sådant bly ligger nu som tunna plattor i taket på SuperCDMS skyddshölje.' },
+      { type: 'h2', text: 'Ju lättare partikel, desto mindre knuff' },
+      { type: 'p', html: 'SuperCDMS är byggt för <em>lätt</em> mörk materia: partiklar med massor under omkring tio protonmassor, alltså klart under det område där de klassiska WIMP-jakterna har letat. Att de är svårare att upptäcka följer av samma stötlära som gäller för biljardbollar. Vid en elastisk stöt mot en kärna i vila kan en partikel med massan $m$ som mest lämna ifrån sig andelen $\\dfrac{4mM}{(m+M)^2}$ av sin rörelseenergi, där $M$ är kärnans massa. Är $m$ mycket mindre än $M$ blir andelen försvinnande liten, precis som när en ärta kastas mot ett bowlingklot.' },
+      { type: 'p', html: 'Räknar man med den fart på ungefär 230 km/s som brukar antas för mörk materia i vår del av Vintergatan, kan en partikel med en protons massa i bästa fall lämna ifrån sig omkring 15 elektronvolt till en germaniumkärna. Det är i den storleksordningen kristallerna måste kunna höra, och det är också skälet till att kisel finns vid sidan av germanium: kiselkärnan är lättare, så samma partikel kan ge den ungefär två och en halv gånger så mycket energi.' },
+      { type: 'h2', text: 'Ett år av tålmodigt lyssnande återstår' },
+      { type: 'p', html: 'Den inledande fasen pågår till i höst. Sedan värms anläggningen upp för att kylsystemet och brusnivån ska trimmas, ett arbete som väntas pågå in i slutet av året, innan detektorerna sätts i gång för ett helt år av mätningar vid full känslighet från 2027.' },
+      { type: 'quote', html: 'Även i den här tidiga fasen har våra känsligaste detektorer möjlighet att ge banbrytande upptäckter. Samtidigt förbereder och testar vi hela systemet, och lär oss hur detektorerna och kylningen fungerar tillsammans.', cite: 'Tina Cartaro, driftansvarig för SuperCDMS vid SLAC' },
+      { type: 'p', html: 'Samarbetets talesperson Priscilla Cushman, professor vid University of Minnesota, säger att detektorerna kommer att undersöka områden där de allra lättaste partiklarna av mörk materia kan tänkas finnas, med en känslighet som inte nåtts tidigare.' },
+      { type: 'p', html: 'Skulle ingenting alls dyka upp är även det ett resultat. Varje år utan träff stryker ytterligare en bit av den karta där den mörka materien fortfarande kan gömma sig, och tvingar teoretikerna att leta på nya ställen.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Ingången till labbet ligger på 6 800 fots nivå i gruvan. Därifrån återstår 1,8 km att gå innan man är framme.',
+        'Berget dämpar den kosmiska strålningen med en faktor 50 miljoner, ner till ungefär en kosmisk partikel per fyra kvadratmeter och dygn.',
+        'Hela anläggningen drivs som renrum, med 5 000 m<sup>2</sup> renrumsyta under jord.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-28-gungan-som-gar-runt",
     date: "2026-08-28",
     title: "Gungan går ett helt varv runt sitt eget fäste — och lyftet kommer inte från benen",

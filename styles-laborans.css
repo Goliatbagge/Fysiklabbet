@@ -25,6 +25,19 @@
     --lab-accent-soft: rgba(200, 50, 74, 0.10);
     --lab-accent-2:    #1c3d6b;  /* djupblå sekundär */
 
+    /* Klippluft UNDER block-formler (.katex-display). KaTeX ritar bråkens
+       nämnare en bit NEDANFÖR .katex egen ruta, samtidigt som
+       .katex-display klipper i höjdled (overflow: hidden, och
+       overflow-y: hidden på de rutor som scrollar i sidled). Utan luft
+       kapas nämnaren: "a" i g(x)/a fick underdelen avhuggen i
+       sammanfattningsrutan i ma3c-3.1 (rapporterat 2026-08-29). Paddingen
+       vidgar klippytan; marginalreglerna för .katex-display drar tillbaka
+       lika mycket med calc(), så att luften under formeln blir densamma
+       som förr — ändrar du den ena måste du ändra den andra. Uppåt behövs
+       ingen luft: KaTeX reserverar alltid gott om plats ovanför bläcket.
+       Kontrolleras av .claude/verify-formelklipp.js. */
+    --katex-luft-botten: 0.5em;
+
     /* Teckensnitt */
     --lab-font-sans:    "DM Sans", "Söhne", -apple-system, system-ui, sans-serif;
     --lab-font-mono:    "JetBrains Mono", ui-monospace, "Menlo", monospace;
@@ -2242,7 +2255,9 @@ button.lab-card-disabled { pointer-events: none; }
 .lab-block-sampunkt ol { margin: 0 0 6px; padding-left: 18px; }
 .lab-block-sampunkt li { margin-bottom: 4px; }
 .lab-block-sampunkt li:last-child { margin-bottom: 0; }
-.lab-block-sampunkt .katex-display { margin: 6px 0; }
+.lab-block-sampunkt .katex-display {
+    margin: 6px 0 max(0px, calc(8px - var(--katex-luft-botten)));
+}
 @media (max-width: 600px) {
     .lab-block-sammanfattning { grid-template-columns: 1fr; }
 }
@@ -2851,7 +2866,11 @@ button.lab-card-disabled { pointer-events: none; }
 
 /* KaTeX-styling — matcha kroppstexten */
 .lab-article-body .katex-display {
-    margin: 14px 0 !important;
+    /* Samma luft till brödtexten som förr (14 px marginal + 2 px padding).
+       Klippluften under formeln räknas bort ur undermarginalen så att
+       avståndet inte växer; max() håller marginalen positiv även vid stor
+       teckenstorlek. */
+    margin: 14px 0 max(2px, calc(16px - var(--katex-luft-botten))) !important;
     /* Vänsterställ block-formler istället för KaTeX:s default centrerade.
        Underlättar läsning: ögat behöver inte söka runt på en ny horisontell
        position för varje formel. Liten indrag (~1.5em) skiljer formeln
@@ -2902,7 +2921,9 @@ button.lab-card-disabled { pointer-events: none; }
 .katex-display {
     max-width: 100%;
     overflow: hidden;
-    padding: 2px 0;
+    /* Luft för KaTeX överhäng nedåt — se --katex-luft-botten överst i
+       filen. Rutan klipper i höjdled, så utan paddingen kapas nämnaren. */
+    padding: 2px 0 var(--katex-luft-botten);
 }
 
 .lab-block,

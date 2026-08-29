@@ -205,7 +205,20 @@
             // en center-origin lämnar högerkanten utanför rutan efter skalning.
             inner.style.transformOrigin = 'left top';
             inner.style.transform = 'scale(' + scale + ')';
-            disp.style.height = Math.ceil(inner.offsetHeight * scale) + 'px';
+            // Höjden räknas på INNEHÅLLETS höjd — inte på .katex offsetHeight.
+            // KaTeX ritar bråkens nämnare en bit under sin egen ruta (~0,3 em),
+            // och .katex-display klipper i höjdled. Med offsetHeight blev rutan
+            // för låg och nämnaren kapades: "a" i g(x)/a klipptes rakt av i
+            // sammanfattningsrutan i ma3c-3.1 (rapporterat 2026-08-29).
+            // scrollHeight räknar med överhänget, +1 px täcker avrundningen,
+            // och rutans egen padding (--katex-luft-botten) läggs på när
+            // box-sizing är border-box. Kontrolleras av
+            // .claude/verify-formelklipp.js.
+            const cs = getComputedStyle(disp);
+            const padY = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+            const ram = cs.boxSizing === 'border-box' ? padY : 0;
+            const ink = Math.max(inner.offsetHeight, inner.scrollHeight) + 1;
+            disp.style.height = Math.ceil(ink * scale + ram) + 'px';
         }
 
         function fitMathDisplays(root) {

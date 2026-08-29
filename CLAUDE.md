@@ -56,6 +56,18 @@ node .claude/verify-kurvor.js
 # parentes upphöjd till en exponent). Se "Bråk i löptext" nedan.
 node .claude/verify-brak.js
 
+# Verifiera att inga BLOCK-FORMLER klipps av sin egen ruta (KÖR FÖRE COMMIT
+# vid ändringar i teorins formler, i .katex-display-CSS:en eller i
+# nedskalningen av breda formler!) — laddar avsnitten på 390×844, fäller ut
+# härledningarnas dropdowns och mäter att bläcket i varje $$-formel ryms
+# innanför rutans klippkant. KaTeX ritar bråkens nämnare en bit nedanför
+# sin egen ruta samtidigt som rutan klipper i höjdled, så nämnaren kan
+# kapas rakt av. Utan argument granskas alla teoriavsnitt; np:<provid> och
+# nyhet:<artikelid> granskar de sidorna. BRED=1 kör 1290×800 också. Se
+# "Block-formler får aldrig klippas av sin egen ruta" nedan. Kräver
+# dev-servern på port 8000 + playwright-core i %TEMP%\pptr-test.
+node .claude/verify-formelklipp.js [avsnitts-id …]
+
 # Verifiera BALANSEN i kopplingsscheman (KÖR FÖRE COMMIT vid ändringar i
 # kopplingsscheman!) — komponenterna ska ha lika stora mellanrum på sin
 # ledarsträcka, batteriet sitta centrerat och parallellgrenarna ligga på
@@ -436,7 +448,9 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 6. **Angränsande teoriavsnitt** — grep i `data/teori/` efter hänvisningar
    till avsnittet ("förra avsnittet", gamla titeln, begrepp som flyttats).
 7. **Verifierare före commit**: `node .claude/verify-figur-bounds.js` och
-   `node .claude/verify-no-white-outline.js` om figurer ändrats.
+   `node .claude/verify-no-white-outline.js` om figurer ändrats,
+   `node .claude/verify-brak.js` och `node .claude/verify-formelklipp.js`
+   om formler ändrats.
 
 ## ⚠️ KRITISK: Matematik nivå 1b delar innehåll med nivå 1c
 
@@ -1384,6 +1398,47 @@ svarsalternativ), `data/exittickets.js` (frågor, `choices`, `why`) och
 - **Parentes upphöjd till en exponent**: `$\left(\frac{p}{2}\right)^2 - q$`
   (diskriminanten i *pq*-formeln) — hela parentesen läses som en enhet i
   textstyle.
+
+### ⚠️ Block-formler får aldrig klippas av sin egen ruta
+
+**KaTeX ritar bråkens nämnare en bit NEDANFÖR sin egen ruta**, samtidigt som
+`.katex-display` **klipper i höjdled** (`overflow: hidden`, och
+`overflow-y: hidden` på de rutor som scrollar i sidled). Utan luft kapas
+alltså bläcket rakt av, och det syns bara i renderingen: källan ser felfri
+ut. Felet som utlöste regeln (rapporterat 2026-08-29): i
+sammanfattningsrutan i `ma3c-3.1` var nedre halvan av nämnaren **`a`** i
+$f'(x) = \dfrac{g'(x)}{a}$ bortklippt på en telefon. Uppåt behövs ingen
+luft — KaTeX reserverar alltid gott om plats ovanför bläcket.
+
+Luften sätts på två ställen — rör dem bara med den här regeln i huvudet:
+
+1. **`--katex-luft-botten`** i `styles-laborans.css` (`:root`) är den
+   padding som vidgar rutans klippyta nedåt. Marginalreglerna för
+   `.katex-display` (i `styles-laborans.css`, `np.html` och
+   `nyheter.html`) räknar bort lika mycket med `calc()`, så att luften
+   under formeln blir densamma som förr. **Ändrar du den ena måste du
+   ändra den andra**, annars flyttar sig hela sidans vertikala rytm.
+   (Marginaler kollapsar mot grannens marginal, padding gör det inte —
+   därför räcker det inte att bara lägga på padding.)
+2. **`scaleDownDisplay()`** i `katalog.html` och `avsnitt.html` skalar ned
+   en formel som är för bred och sätter då rutans höjd själv. Höjden ska
+   räknas på INNEHÅLLETS höjd (`scrollHeight`), aldrig på `.katex`
+   `offsetHeight` — den saknar överhänget, och det var precis så `a`:et
+   kapades. Rutans egen padding läggs på när `box-sizing` är
+   `border-box`.
+
+**Kör `node .claude/verify-formelklipp.js` före commit** när du rört
+teorins formler, `.katex-display`-CSS:en eller nedskalningen. Den laddar
+avsnitten på 390×844 (smalast, där formlerna skalas ned och klippet slår
+hårdast), fäller ut härledningarnas dropdowns och mäter bläckets
+utsträckning mot rutans klippkant. Bara kanter som verkligen klipper
+granskas: en `overflow-x: auto`-ruta får ha innehåll utanför i sidled,
+det går att dra fram.
+
+**Granska dessutom i skärmdump på 390 px** när du lagt in en ny sorts
+formel (nästlade bråk, höga rottecken, `\begin{array}` med bråk på sista
+raden). Mätningen är geometrisk och kan i teorin missa ett tecken vars
+glyf sticker längre ned än sin ruta.
 
 ### JS-strängar: dubbla alla backslash
 

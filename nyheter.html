@@ -320,7 +320,12 @@
            i styles-laborans.css håller ihop formeln över radbrytningar. */
         .article-body .katex { font-size: 1.03em; }
         .article-body .katex-display {
-            margin: 18px 0 !important; text-align: left !important;
+            /* Samma luft som förr (18 px marginal + 2 px padding).
+               Klippluften under formeln (--katex-luft-botten i
+               styles-laborans.css) räknas bort ur undermarginalen — utan
+               paddingen kapar overflow-y bråkens nämnare. */
+            margin: 18px 0 max(2px, calc(20px - var(--katex-luft-botten))) !important;
+            text-align: left !important;
             overflow-x: auto; overflow-y: hidden;
         }
         .article-body .katex-display > .katex { text-align: left; padding-left: 1.5em; }

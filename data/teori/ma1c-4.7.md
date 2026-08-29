@@ -9,7 +9,7 @@ section: '4.7'
 
 # Funktion och funktionsvärde
 
-Ett samband mellan två variabler, t.ex. $x$ och $y$, där varje tillåtet
+Ett samband mellan två variabler, till exempel $x$ och $y$, där varje tillåtet
 *x*-värde ger *exakt ett* *y*-värde kallas **funktion**. Om vi ritar upp
 grafen till en funktion innebär det att om vi lägger en penna lodrätt över
 grafen kan den bara skära grafen en gång.
@@ -56,7 +56,7 @@ Vi stoppar in den oberoende variabeln $x = 3$ i funktionsmaskinen
 $f(x) = x + 2$ och får ut den beroende variabeln $y = 5$.
 :::
 
-Precis som att vi kan beteckna variabler med olika bokstäver, t.ex. $x$,
+Precis som att vi kan beteckna variabler med olika bokstäver, till exempel $x$,
 $y$, $z$, …, så kan funktioner betecknas med olika bokstäver, vanligtvis
 $f$, $g$, $h$, …
 

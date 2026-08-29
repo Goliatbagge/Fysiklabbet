@@ -158,7 +158,7 @@ v_1 = \cos^{-1}(0{,}825) = 34{,}411\ldots^\circ \approx 34{,}4^\circ
 $$
 
 Den andra lösningen får vi genom sambandet $\cos(360^\circ - v) = \cos v$,
-dvs. genom att dra bort vinkeln från $360^\circ$.
+det vill säga genom att dra bort vinkeln från $360^\circ$.
 
 $$
 v_2 = 360^\circ - 34{,}411\ldots^\circ = 325{,}588\ldots^\circ \approx 325{,}6^\circ

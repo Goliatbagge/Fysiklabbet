@@ -29,7 +29,7 @@ typen av uppgifter med digitala hjälpmedel som Geogebra.
 - **konstant funktion**: funktion utan $x$-term; har alltid derivatan 0
   eftersom grafen är en horisontell linje.
 - **exponentialfunktion**: funktion där variabeln sitter i exponenten,
-  t.ex. $f(x) = a^x$.
+  till exempel $f(x) = a^x$.
 - **talet e (Eulers tal)**: det irrationella talet $e \approx 2{,}72$ för
   vilket $f(x) = e^x$ är sin egen derivata.
 - **naturliga logaritmen (ln)**: logaritmen med basen *e*; $\ln x$ är det
@@ -119,7 +119,7 @@ där
 - Ett polynom deriveras term för term; koefficienter behålls, och
   konstanttermer faller bort eftersom derivatan av en konstant alltid är 0.
 - Variabler under ett rottecken eller i en nämnare måste först skrivas om
-  som en potens (t.ex. $\sqrt{x} = x^{1/2}$, $\dfrac{1}{x} = x^{-1}$) innan
+  som en potens (till exempel $\sqrt{x} = x^{1/2}$, $\dfrac{1}{x} = x^{-1}$) innan
   potensregeln kan användas.
 - Har uttrycket variabeln i både täljare och nämnare: dela upp bråket i
   flera termer och derivera var och en för sig, i stället för att derivera
@@ -134,16 +134,16 @@ där
 - Derivatans tecken avgör om en storhet ökar eller minskar: positiv
   derivata betyder ökning, negativ derivata betyder minskning.
 - Enheten för en derivata är "enheten för funktionen" per "enheten för
-  variabeln", t.ex. invånare/år eller °C/minut.
+  variabeln", till exempel invånare/år eller °C/minut.
 - Är en konstant i en modell obekant kan den bestämmas genom att sätta in
   ett känt funktions- eller derivatavärde och lösa ut konstanten — ofta med
   hjälp av $\ln$, eftersom $\ln e = 1$.
 - Tangentens *k*-värde ges av derivatan i tangeringspunkten; *m*-värdet
   bestäms sedan genom att sätta in tangeringspunktens koordinater i räta
   linjens ekvation.
-- Med digitala hjälpmedel (t.ex. Geogebra) kan derivator, funktionsvärden
+- Med digitala hjälpmedel (till exempel Geogebra) kan derivator, funktionsvärden
   och ekvationer (NLös/Lös) bestämmas direkt utan att räkna för hand —
-  användbart t.ex. för att hitta extrempunkter till derivatan.
+  användbart till exempel för att hitta extrempunkter till derivatan.
 
 ## Figurer värda att minnas
 
@@ -170,7 +170,7 @@ av derivatans värde i tangeringspunkten:
   bas *a* till basen *e*?
 - Kan du bestämma en obekant konstant i en modell genom att sätta in ett
   känt funktions- eller derivatavärde?
-- Kan du tolka derivatans tecken och enhet i en tillämpning, t.ex. en
+- Kan du tolka derivatans tecken och enhet i en tillämpning, till exempel en
   tillväxthastighet?
 - Kan du bestämma ekvationen för tangenten till en kurva i en given punkt?
 - Kan du använda digitala hjälpmedel som Geogebra för att derivera,

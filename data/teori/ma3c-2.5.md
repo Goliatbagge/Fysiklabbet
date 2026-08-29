@@ -27,7 +27,7 @@ En diskontinuitet kan se ut på olika sätt. Vid ett **hopp** ändras
 funktionsvärdet plötsligt till ett annat värde i punkten — grafen ritas då
 ofta med en öppen ring (punkten ingår inte) och en fylld prick (punkten
 ingår) på olika höjd. Vid ett **språng** går grafen i stället mot
-oändligheten på ömse sidor om punkten, t.ex. vid en lodrät asymptot, där
+oändligheten på ömse sidor om punkten, till exempel vid en lodrät asymptot, där
 grafen delas i två grenar som går mot $+\infty$ respektive $-\infty$.
 
 ## Absolutbelopp
@@ -68,8 +68,8 @@ Grafen får ett "hörn".
 
 ::: tips "Deriverbarhet"
 En funktion är **inte** deriverbar i en viss punkt om funktionen
-1. inte är definierad i punkten (t.ex. då grafen har ett "språng"),
-2. är diskontinuerlig i punkten (t.ex. då grafen har ett "hopp"), eller
+1. inte är definierad i punkten (till exempel då grafen har ett "språng"),
+2. är diskontinuerlig i punkten (till exempel då grafen har ett "hopp"), eller
 3. har en hörnpunkt i punkten (då grafen har ett "hörn").
 :::
 

@@ -25,7 +25,7 @@ andelen visas.
 där $\mu$ = medelvärde och $\sigma$ = standardavvikelse.
 
 Om man ska bestämma andelar som inte ligger vid jämna
-standardavvikelser får man ta hjälp av digitala verktyg, t.ex.
+standardavvikelser får man ta hjälp av digitala verktyg, till exempel
 Geogebra.
 
 För att beräkna procentsatser vid normalfördelningar i Geogebra klickar

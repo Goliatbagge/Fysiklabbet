@@ -95,6 +95,20 @@ if (relativa.length) {
              'e-postklienter visar bara absoluta https-adresser.');
 }
 
+// ── 8. Minst en bild från sajten ──────────────────────────────────────
+// Ett brev illustrerat enbart med pressbilder visar aldrig upp det läsaren
+// prenumererar för. Heuristik: en <img> som ligger i en länk till något
+// ANNAT än en nyhetsartikel är en sajtbild (simulering, genomgång,
+// pennlösning). Regeln står under "Bilder" i .claude/agents/nyhetsbrev.md.
+const bildLankar = [...html.matchAll(/<a[^>]+href="([^"]+)"[^>]*>\s*<img[ >]/g)].map(m => m[1]);
+const sajtbilder = bildLankar.filter(h => !/nyheter\.html\?id=/.test(h));
+if (!sajtbilder.length) {
+    fel.push('Ingen bild i brevet visar något på sajten — minst en bild ska föreställa ' +
+             'en simulering, genomgång eller funktion som brevet skriver om (regeln ' +
+             'står under "Bilder" i .claude/agents/nyhetsbrev.md). Kan sessionen inte ' +
+             'rendera simuleringarna: säg det till användaren och be om skärmdumpen.');
+}
+
 // ── 8. Riktlängd ──────────────────────────────────────────────────────
 const ord = text.split(/\s+/).filter(Boolean).length;
 if (ord > 600) varn.push(`~${ord} ord brödtext (riktlängd 250–450).`);
@@ -107,4 +121,4 @@ if (fel.length) {
     console.log(`\n${fel.length} fel. Brevet ska INTE läggas upp förrän de är rättade.`);
     process.exit(1);
 }
-console.log(`Inga fel. (${unika.length} artiklar länkade, ~${ord} ord.)`);
+console.log(`Inga fel. (${unika.length} artiklar länkade, ${sajtbilder.length} sajtbild(er), ~${ord} ord.)`);

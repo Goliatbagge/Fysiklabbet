@@ -30,7 +30,7 @@ $f(x)$ ligger över $g(x)$ i hela intervallet $[a, b]$.
 Peka eller tryck på en kurva eller det skuggade området så visas vad delen är.
 :::
 
-Arean under $f(x)$, dvs. mellan kurvan och *x*-axeln, ges av integralen
+Arean under $f(x)$, det vill säga mellan kurvan och *x*-axeln, ges av integralen
 $\int_a^b f(x)\, dx$ (den blå arean i figuren, om vi också räknar med arean
 under $g(x)$). Arean under $g(x)$ ges på motsvarande sätt av
 $\int_a^b g(x)\, dx$ (den rosa arean).

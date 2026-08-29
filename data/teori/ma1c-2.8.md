@@ -13,7 +13,7 @@ När vi översätter ett problem till matematiskt språk för att lösa det ägn
 vi oss åt **problemlösning**.
 
 ::: formel "Metod för problemlösning"
-1. **Översätt.** Definiera och inför en beteckning, t.ex. $x$, på det som
+1. **Översätt.** Definiera och inför en beteckning, till exempel $x$, på det som
    söks och ställ upp en ekvation.
 2. **Lös ekvationen.**
 3. **Tolka och svara** med enhet. Är svaret rimligt?

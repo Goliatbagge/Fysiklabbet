@@ -17,7 +17,7 @@ section: '3.S'
 Det här kapitlet handlade om att räkna med procentuella förändringar: hur
 andelar anges som procent, promille och ppm, hur en förändringsfaktor gör
 att ett nytt värde kan räknas ut i ett enda steg, och hur upprepade
-förändringar (t.ex. flera års ränta) kombineras till en total
+förändringar (till exempel flera års ränta) kombineras till en total
 förändringsfaktor. Med indextal jämförde vi priser och löner med ett
 basår — konsumentprisindex (KPI) mäter prisnivån och gör att belopp kan
 räknas om mellan olika års penningvärden. Kapitlet visade också hur ett
@@ -50,14 +50,14 @@ kalkylbladsformler med relativa och låsta cellreferenser.
   kostar) per år; det som avses om enbart "ränta" nämns.
 - **behållning**: beloppet som finns på ett sparkonto vid en given
   tidpunkt.
-- **kalkylblad, cell**: verktyg (t.ex. Google Kalkylark, Excel) uppbyggt
-  av celler namngivna med kolumnbokstav + radnummer (t.ex. B3); en formel
+- **kalkylblad, cell**: verktyg (till exempel Google Kalkylark, Excel) uppbyggt
+  av celler namngivna med kolumnbokstav + radnummer (till exempel B3); en formel
   i en cell inleds alltid med likhetstecknet =.
 - **fyllnadshandtag**: verktyget i kalkylbladets nedre högra cellhörn som
   kopierar en formel neråt i en kolumn.
 - **relativ och låst cellreferens**: en relativ referens (`B2`) ändras när
   formeln kopieras till en ny rad; en låst referens (`$B$12`) hålls fast.
-- **lån**: pengar som lånas, från t.ex. en bank, och som ska betalas
+- **lån**: pengar som lånas, från till exempel en bank, och som ska betalas
   tillbaka.
 - **amortera / amortering**: återbetalning av själva lånebeloppet
   (skulden).
@@ -105,14 +105,14 @@ $$
 = \text{förändringsfaktor}_1 \cdot \text{förändringsfaktor}_2 \cdot \ldots
 $$
 
-Är alla förändringsfaktorer lika stora (t.ex. samma ränta varje år) blir
+Är alla förändringsfaktorer lika stora (till exempel samma ränta varje år) blir
 den totala förändringsfaktorn en potens:
 
 $$
 \text{nytt värde} = \text{gammalt värde} \cdot \text{förändringsfaktor}^{\,n}
 $$
 
-där *n* = antal upprepningar (t.ex. antal år).
+där *n* = antal upprepningar (till exempel antal år).
 
 **Indextal**
 
@@ -150,7 +150,7 @@ $$
 ## Viktiga samband och metoder
 
 - Vid en andelsberäkning måste delen och det hela ha **samma enhet** innan
-  de sätts in i formeln — gör t.ex. om kilogram till gram innan du
+  de sätts in i formeln — gör till exempel om kilogram till gram innan du
   dividerar.
 - Procenttriangeln är ett minnesstöd: står storheterna bredvid varandra
   ska de multipliceras, står de över varandra ska de divideras.
@@ -164,20 +164,20 @@ $$
 - En ökning med $x\ \%$ följd av en minskning med $x\ \%$ ger **inte**
   tillbaka samma värde, eftersom minskningen räknas på ett redan
   förändrat (större) belopp.
-- Vid upprepade lika stora förändringar (t.ex. samma ränta år efter år)
+- Vid upprepade lika stora förändringar (till exempel samma ränta år efter år)
   multipliceras samma förändringsfaktor med sig själv flera gånger, vilket
   ger en potens: förändringsfaktor upphöjt till antalet perioder.
 - Ett indextal delat med 100 är förändringsfaktorn från basåret: index
   175 betyder faktorn 1,75, alltså 75 % över basårets värde.
 - Kvoten mellan två års indextal är förändringsfaktorn **mellan de två
   åren** — så räknas ett belopp om från ett års penningvärde till ett
-  annat, t.ex. med KPI.
+  annat, till exempel med KPI.
 - I ett kalkylblad låses en cellreferens som ska vara oförändrad i alla
   rader med dollartecken (`$B$12`), medan en referens som ska ändras per
   rad (`B2`) lämnas relativ.
 - Vid årligt sparande med insättning varje period kombineras tillväxt
   (multiplikation med förändringsfaktorn) och ny insättning (addition) i
-  samma cellformel, t.ex. `=B2*1,028+5000`.
+  samma cellformel, till exempel `=B2*1,028+5000`.
 - Vid ett lån betalar man vid varje inbetalning både **amortering**
   (avbetalning av skulden) och **ränta** (kostnaden för lånet); räntan
   beräknas på den skuld som återstår och minskar därför efter hand vid
@@ -186,7 +186,7 @@ $$
   räntesatsen (eller den beräknade årsräntan) delas med 12 innan den
   används i månadsberäkningen.
 - En kolumn med alla inbetalningar summeras enkelt i kalkylbladet med
-  SUM-funktionen, t.ex. `=SUM(D2:D61)`, för att få lånets totala kostnad.
+  SUM-funktionen, till exempel `=SUM(D2:D61)`, för att få lånets totala kostnad.
 
 ## Figurer värda att minnas
 
@@ -205,7 +205,7 @@ andelen = delen/hela och hela = delen/andelen.
 - Kan du förklara skillnaden mellan procent, promille och ppm, och räkna
   om mellan bråkform, decimalform och de olika enheterna?
 - Kan du bestämma andelen, delen eller det hela när två av de tre är
-  kända, t.ex. med hjälp av procenttriangeln?
+  kända, till exempel med hjälp av procenttriangeln?
 - Kan du bestämma en förändringsfaktor utifrån en procentuell ökning
   eller minskning, och vet du att en minskning ger en faktor mindre än 1?
 - Kan du använda förändringsfaktorn för att räkna ut ett nytt värde
@@ -215,9 +215,9 @@ andelen = delen/hela och hela = delen/andelen.
 - Kan du förklara varför en ökning med $x\ \%$ följd av en minskning med
   samma $x\ \%$ inte ger tillbaka ursprungsvärdet?
 - Kan du räkna ut en total förändringsfaktor vid flera upprepade
-  förändringar, t.ex. flera års sparande med samma ränta?
+  förändringar, till exempel flera års sparande med samma ränta?
 - Kan du bestämma ett indextal ur ett värde och basårets värde, och
-  tolka vad t.ex. index 132 betyder?
+  tolka vad till exempel index 132 betyder?
 - Vet du vad konsumentprisindex mäter, och kan du med två års KPI räkna
   om ett belopp till ett annat års penningvärde?
 - Kan du bygga ett kalkylblad som beräknar behållningen på ett sparkonto
@@ -230,5 +230,5 @@ andelen = delen/hela och hela = delen/andelen.
 - Kan du räkna om en årsränta till en månadsränta och sätta upp ett
   kalkylblad som visar skuld, ränta och inbetalning månad för månad vid
   rak amortering?
-- Kan du summera en kolumn i ett kalkylblad, t.ex. med SUM-funktionen,
+- Kan du summera en kolumn i ett kalkylblad, till exempel med SUM-funktionen,
   för att få lånets totala kostnad?

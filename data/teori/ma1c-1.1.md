@@ -11,25 +11,25 @@ section: '1.1'
 
 ## Talmängder
 
-Alla tal kan delas in i så kallade **[[talmängder|En samling av tal med en gemensam egenskap, t.ex. alla heltal eller alla tal på tallinjen.]]**.
+Alla tal kan delas in i så kallade **[[talmängder|En samling av tal med en gemensam egenskap, till exempel alla heltal eller alla tal på tallinjen.]]**.
 
 ::: formel "Talmängder"
-**Naturliga tal:** innehåller alla icke-negativa heltal, t.ex. 0, 1, 2, 3 …
-osv. Mängden naturliga tal betecknas $\mathbb{N}$ och kan skrivas
+**Naturliga tal:** innehåller alla icke-negativa heltal, till exempel 0, 1, 2, 3 …
+och så vidare Mängden naturliga tal betecknas $\mathbb{N}$ och kan skrivas
 $\mathbb{N} = \{0,\ 1,\ 2,\ 3,\ \ldots\}$.
 
-**Heltal:** innehåller samtliga heltal, t.ex. −3, 0, 5 och 25. Mängden heltal
+**Heltal:** innehåller samtliga heltal, till exempel −3, 0, 5 och 25. Mängden heltal
 betecknas $\mathbb{Z}$ och kan skrivas
 $\mathbb{Z} = \{\ldots,\ -2,\ -1,\ 0,\ 1,\ 2,\ \ldots\}$.
 
 **Rationella tal:** innehåller samtliga tal som kan skrivas som ett bråk,
-t.ex. $\dfrac{1}{3}$, −0,25 och 5. Mängden rationella tal betecknas
+till exempel $\dfrac{1}{3}$, −0,25 och 5. Mängden rationella tal betecknas
 $\mathbb{Q}$ och kan skrivas $\mathbb{Q} = \{$alla tal som kan skrivas på
 formen $\dfrac{a}{b}$ där $a$ och $b$ är heltal, $b \neq 0\}$.
 
 **Reella tal:** innehåller samtliga tal som finns på tallinjen. Här ingår
-även de **[[irrationella talen|Tal som inte kan skrivas som ett bråk av två heltal, t.ex. π och √2. Deras decimalutveckling är oändlig utan att upprepa sig.]]**, dvs. tal som *inte* kan skrivas som ett
-bråk, t.ex. π (pi) och $\sqrt{2}$. Irrationella tal kan även ses som tal med
+även de **[[irrationella talen|Tal som inte kan skrivas som ett bråk av två heltal, till exempel π och √2. Deras decimalutveckling är oändlig utan att upprepa sig.]]**, det vill säga tal som *inte* kan skrivas som ett
+bråk, till exempel π (pi) och $\sqrt{2}$. Irrationella tal kan även ses som tal med
 oändlig decimalutveckling, som inte upprepar sig. Mängden reella tal
 betecknas $\mathbb{R}$ och kan skrivas $\mathbb{R} = \{$alla tal på
 tallinjen$\}$.
@@ -55,7 +55,7 @@ typ: talmangd
 
 ::: textlosning
 Ett rationellt tal är ett tal som kan skrivas som ett bråk $\dfrac{a}{b}$ där
-$a$ och $b$ är heltal och $b \neq 0$. Väljer vi t.ex. $\dfrac{1}{3}$ får vi
+$a$ och $b$ är heltal och $b \neq 0$. Väljer vi till exempel $\dfrac{1}{3}$ får vi
 ett tal som ligger mellan heltalen 0 och 1 — det är alltså rationellt men
 inte ett heltal.
 
@@ -76,7 +76,7 @@ Tal som **inte** duger som svar:
 - $\sqrt{2}$ och $\pi$, som inte går att skriva som ett bråk med heltal och
   därför inte ens är rationella
 
-**Svar:** T.ex. $\dfrac{1}{3}$ (även $\dfrac{5}{2}$, $-\dfrac{3}{4}$ och 0,7 är
+**Svar:** Till exempel $\dfrac{1}{3}$ (även $\dfrac{5}{2}$, $-\dfrac{3}{4}$ och 0,7 är
 rätta svar)
 :::
 :::

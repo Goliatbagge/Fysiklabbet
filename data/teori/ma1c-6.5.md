@@ -22,7 +22,7 @@ En storhet som anges med
 
 Vi representerar vektorer med pilar där pilens längd motsvarar vektorns
 storlek och pilen motsvarar vektorns riktning. För att beteckna en vektor
-används ofta en variabel ihop med en pil ovanför, t.ex. $\vec{x}$.
+används ofta en variabel ihop med en pil ovanför, till exempel $\vec{x}$.
 
 Vektorer kan parallellförflyttas: så länge inte storleken eller
 riktningen ändras, så är det *samma vektor*. Vektorer som är lika stora,

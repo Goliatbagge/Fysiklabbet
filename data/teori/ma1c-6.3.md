@@ -30,7 +30,7 @@ funktionernas **inversa funktioner**.
 | sin | sin⁻¹ ("sinus invers") eller arcsin ("arcus sinus") |
 | cos | cos⁻¹ ("cosinus invers") eller arccos ("arcus cosinus") |
 
-Alltså är t.ex. tan⁻¹ och arctan samma sak — bara olika skrivsätt. Det är
+Alltså är till exempel tan⁻¹ och arctan samma sak — bara olika skrivsätt. Det är
 bra att känna igen båda skrivsätten!
 
 ::: formel "Inversa funktioner"

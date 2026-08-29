@@ -23,7 +23,7 @@ färdigt, och använda allt detta i problemlösning.
   $(a - b)^2$ utan att multiplicera ut parentes för parentes.
 - **konjugatregeln**: genväg för att utveckla ett "kvadrat minus
   kvadrat"-uttryck: $(a + b)(a - b) = a^2 - b^2$.
-- **faktorisera**: skriva om ett uttryck som en multiplikation, t.ex.
+- **faktorisera**: skriva om ett uttryck som en multiplikation, till exempel
   genom att bryta ut en gemensam faktor eller använda en
   kvadrerings- eller konjugatregel baklänges.
 - **rationellt uttryck**: ett bråkuttryck som innehåller $x$; förkortas
@@ -43,7 +43,7 @@ färdigt, och använda allt detta i problemlösning.
   rottecken.
 - **falsk rot**: en lösning som uppstår vid kvadrering men som inte
   uppfyller den ursprungliga ekvationen.
-- **variabelsubstitution**: att byta ut ett uttryck (t.ex. $\sqrt{x}$)
+- **variabelsubstitution**: att byta ut ett uttryck (till exempel $\sqrt{x}$)
   mot en ny variabel för att förenkla en ekvation innan man löser den.
 
 ## Formler
@@ -137,12 +137,12 @@ $$
   nollproduktmetoden baklänges: $(x - x_1)(x - x_2) = 0$.
 - Vid problemlösning: tolka problemet och inför variabler (rita figur vid
   behov), ställ upp en eller flera ekvationer, lös dem, och tolka sedan
-  svaret — förkasta lösningar som inte är rimliga (t.ex. negativa
+  svaret — förkasta lösningar som inte är rimliga (till exempel negativa
   längder eller negativa antal).
 - Vid rotekvationer: isolera rotuttrycket i ett led, kvadrera båda led,
   lös ekvationen med lämplig metod och **kontrollera alltid** lösningen i
   den ursprungliga ekvationen — kvadrering kan skapa falska rötter.
-- Variabelsubstitution (t.ex. $\sqrt{x} = t$) förenklar en rotekvation
+- Variabelsubstitution (till exempel $\sqrt{x} = t$) förenklar en rotekvation
   till en vanlig andragradsekvation i $t$ — glöm inte att räkna tillbaka
   till $x$ och kontrollera lösningarna på slutet.
 - Förkorta ett rationellt uttryck genom att faktorisera täljare och

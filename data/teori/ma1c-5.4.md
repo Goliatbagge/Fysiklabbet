@@ -114,7 +114,7 @@ $$
 ## Sannolikheter med två föremål
 
 Uppgifter där vi använder oss av två föremål (kast med *två* tärningar,
-singla *två* mynt osv.) är oftast enklast att lösa genom att rita upp
+singla *två* mynt och så vidare) är oftast enklast att lösa genom att rita upp
 *utfallsrummet* (alla möjliga kombinationer).
 
 ::: exempel "Exempel 2 — Två tärningar"

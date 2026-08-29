@@ -70,10 +70,13 @@ matnyttigt att man tar med sig något in i klassrummet.
      åtta där hälften är fyllnad.
 
 3. **Välj och vinkla innehållet.**
-   - **Veckans fysiknyheter:** lyft 2–4 av veckans artiklar. Ge var och en
+   - **Veckans fysiknyheter:** lyft de TRE mest häpnadsväckande av veckans
+     artiklar (urvalskriterierna står under "Brevets delar" punkt 3 — det är
+     märkvärdighet som avgör, aldrig publiceringsdatum). Ge var och en
      1–3 meningar egen text — en vinkel, en aha-detalj eller en anledning att
      klicka — inte en kopierad ingress. Länka till artikeln
-     (`https://fysiklabbet.se/nyheter.html?id=<id>`).
+     (`https://fysiklabbet.se/nyheter.html?id=<id>`). Resten av veckan blir
+     "Läs även"-rader.
    - **Nytt på sajten:** 1–4 punkter från steg 2, med direktlänk till
      simuleringen/avsnittet. Beskriv vad man kan *göra* ("dra i varvtalet och
      se gnistorna lämna cirkelbanan"), inte vad som committats.
@@ -95,6 +98,9 @@ matnyttigt att man tar med sig något in i klassrummet.
    inte bär, dubbelkolla varje länk mot att filen/artikeln faktiskt finns
    (`?id=` mot `data/nyheter.js`, simuleringsfiler mot repo-roten), och
    kontrollera ton (värme utan trams), typografi och facktermer.
+   **Varje länk som syftar på en bestämd DEL av en genomgång ska ha ett
+   ankare** (`&amp;block=…`), aldrig bara `?id=` — se "Direktlänk till en
+   enskild ruta i genomgången" i `CLAUDE.md`.
 
 7. **Spara utkastet** som `.claude/nyhetsbrev/utkast/ÅÅÅÅ-MM-DD.html`
    (datumet = tänkt utskicksdag). Öppna det i en skärmdump (headless Chrome
@@ -131,6 +137,29 @@ matnyttigt att man tar med sig något in i klassrummet.
 3. **Veckans fysiknyheter** — **exakt TRE artiklar lyfts** med egen text +
    länk (en hjälte + två miniatyrer). Fler än så gör brevet tungt; tre är
    lagom att orka läsa. (Uttryckligt önskemål 2026-08-22.)
+   - **⚠️ Välj de tre HÄPNADSVÄCKANDE, inte de tre senaste.** Gå igenom
+     hela veckans skörd och rangordna den efter hur märkvärdig varje
+     nyhet är: det coolaste, mest udda, mest banbrytande går först.
+     Datumordning är INTE ett urvalskriterium (uttryckligt önskemål
+     2026-08-29: de tre färskaste hade valts vecka efter vecka, och då
+     kan veckans bästa fynd hamna som en rad under "Läs även" bara för
+     att det publicerades på måndagen).
+     Fråga om varje kandidat: skulle en 16-åring som inte läser fysik
+     stanna upp vid det här? Väger något av detta över:
+     - **Udda och oväntat** — en gunga som slår runt av sig själv, en
+       kula som svävar på ljud, ett material som beter sig tvärtemot
+       intuitionen.
+     - **Banbrytande** — första mätningen av något, ett rekord, en
+       gammal gåta som får sitt svar.
+     - **Storslaget** — kosmiska skalor, extrema temperaturer, tal som
+       är svåra att fatta.
+     - **Nära eleven** — fysik i något hen känner igen från vardagen.
+     Rutinuppdateringar, inkrementella mätförbättringar och artiklar
+     som mest är "ännu en bekräftelse" hör hemma under "Läs även", hur
+     färska de än är.
+   - **Hjälteplatsen tillhör den mest häpnadsväckande av de tre** — inte
+     automatiskt den senast publicerade artikeln. Veckans bästa fynd kan
+     mycket väl vara publicerat på måndagen.
    - **Resten av veckans nyheter listas ändå, under rubriken "Läs även"**
      — en kort rad per artikel, bara en klickbar rubrik utan brödtext och
      utan bild, direkt efter miniatyrraden. Ingen artikel från brevperioden
@@ -231,6 +260,21 @@ labbanteckningsblock", inte "ett företagsutskick".
 
 Riktvärde: **2–4 bilder** per brev. Varje bild ska förtjäna sin plats;
 hellre två starka än fem utfyllnadsbilder.
+
+**⚠️ MINIMIKRAV: minst EN bild i brevet ska visa något på sajten** — en
+simulering, en minisimulering, en genomgång, en pennlösning, en ny funktion,
+vad som helst av det som nämns under "Nytt på Fysiklabbet". Ett brev som
+bara illustreras med pressbilder från nyhetsvärlden visar aldrig upp det
+läsaren faktiskt prenumererar för (uttryckligt önskemål 2026-08-29:
+"Nytt på Fysiklabbet" hade bara textlänkar två veckor i rad).
+
+- **Bilden ska höra till något brevet skriver om**, inte vara en allmän
+  sajtbild. Nämns två nya simuleringar: visa dem båda om de håller.
+- **En blockerad CDN är inget giltigt skäl att hoppa över bilden.** Kan din
+  session inte rendera React/Three.js-simuleringarna (molnsessioner har
+  träffat på det: unpkg/cdnjs/tailwind spärrade av nätverkspolicyn) — säg
+  det uttryckligen till användaren i överlämningen och be om skärmdumparna,
+  i stället för att tyst leverera ett brev utan sajtbilder.
 
 1. **Hjältebild**: veckans bästa nyhetsbild (`nyheter/bilder/…` — den ligger
    redan på sajten, länka absolut) direkt under anslaget eller överst i

@@ -48,6 +48,16 @@ node .claude/verify-vinkelbagar.js
 # Se "Kurvor ska ritas ur sin funktion" nedan.
 node .claude/verify-kurvor.js
 
+# Språkgranska den text besökaren läser (KÖR FÖRE COMMIT när du skrivit
+# eller skrivit om löptext!) — anglicismer ("räknar med facit"), felböjda
+# verb ("svepar" i stället för sveper), personifierade döda ting ("förråder")
+# och ord projektet valt bort ("rymdtid"). Utan filargument sveper den hela
+# sajten med bara de blockerande reglerna; peka ut filerna du rört, så körs
+# även stilvarningarna (förkortningar). Reglerna växer i REGLER-listan i
+# skriptet. Det som kräver ett öra i stället för ett mönster granskas av
+# agenten `korrekturlasare`. Se "Språkgranskning" nedan.
+node .claude/verify-sprak.js [fil …]
+
 # Verifiera BRÅKENS TECKENSTORLEK i inline-matte (KÖR FÖRE COMMIT vid
 # ändringar i teori, övningar, exit tickets eller nationella prov!) — ett
 # bråk i löptext ska vara lika stort som texten runt omkring. Flaggar
@@ -897,6 +907,29 @@ fysiklabbet/
     ├── commands/               # Slash-commands
     └── agents/                 # Specialiserade agenter
 ```
+
+## Språkgranskning: kör verifieraren, ta korrekturläsaren vid tveksamhet
+
+**Språkfel ser aldrig trasiga ut.** En anglicism eller ett felböjt verb
+passerar varenda annan kontroll i projektet och ligger kvar tills en
+människa läser meningen högt för sig själv. Så tog sig "vågen räknar aldrig
+med facit" och "luftpartiklarna svepar ner mot botten" hela vägen ut i en
+simulering, på startsidan och i ett nyhetsbrev (påpekat 2026-08-29).
+
+- **`node .claude/verify-sprak.js <filerna du rört>` före commit** när du
+  skrivit ny löptext eller skrivit om gammal. Den tar det mekaniska.
+- **Agenten `korrekturlasare`** tar det som kräver ett öra: meningsbyggnad,
+  personifiering, klichéer, tunga inversioner. Använd den när en text är
+  innehållsligt klar men inte språkgranskad, och särskilt **när användaren
+  påpekat en formulering** — samma uttryck brukar finnas på fler ställen,
+  eftersom texten återanvänds mellan simuleringens ingress, `UPDATES` i
+  `index.html`, katalogtexten och nyhetsbrevet.
+- **Hittar du ett fel av en typ som kan återkomma: lägg till en regel** i
+  `REGLER` i `verify-sprak.js`. Det är så listan är tänkt att växa, och
+  enda sättet att inte göra om samma miss.
+- **Äldre text saneras inte retroaktivt** utan att användaren ber om det.
+  Därför kör en full svepning bara de blockerande reglerna: sajten har en
+  arvsskuld på ~850 förkortningar som inte ska blockera någon commit.
 
 ## Typografi (master)
 
@@ -2485,11 +2518,23 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
 
 ### Direktlänk till en enskild ruta i genomgången (`&block=`)
 
-**En länk kan peka RAKT på en ruta i en genomgång — ett räkneexempel, en
-formelruta, en sammanfattning — så att besökaren slipper leta sig ned på
-sidan.** Formen är `katalog.html?id=<avsnitt>&block=<ankare>`, till exempel
-`katalog.html?id=fy2-1.4&block=den-fatala-gungan`. Används framför allt när
-en nyhetsartikel refererar till ett bestämt exempel i katalogen.
+**⚠️ REGEL: syftar en länk på en bestämd DEL av en genomgång ska den ha ett
+ankare, aldrig bara `?id=`.** Formen är
+`katalog.html?id=<avsnitt>&block=<ankare>`, till exempel
+`katalog.html?id=fy2-1.4&block=den-fatala-gungan`. Besökaren ska landa på det
+du skriver om, inte överst i ett långt avsnitt med uppgiften att skrolla och
+leta själv (uttryckligt önskemål 2026-08-29: nyhetsbrevets länk till
+Tacoma-filmen i `fy2-2.6` gick till avsnittets början, och filmen ligger
+långt ned).
+
+Regeln gäller överallt en länk skrivs: nyhetsartiklarnas `body`-strängar,
+nyhetsbrevet, "Senaste uppdateringar" i `index.html`, teoritexternas egna
+korshänvisningar och sociala medier. Ställ frågan varje gång: *pekar jag på
+avsnittet, eller på något inuti det?* Är det det senare, hämta ankaret ur
+tabellen nedan. I HTML-attribut skrivs `&` som `&amp;`.
+
+Används framför allt när en nyhetsartikel eller ett nyhetsbrev refererar till
+ett bestämt exempel i katalogen.
 
 Ankarnamnen sätts automatiskt av `preprocessBlocks` i `katalog.html` — du
 behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
@@ -2501,6 +2546,15 @@ behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
 | `data-blockkort` | `den-fatala-gungan` (utan `<typ>-<nummer>-`) |
 | `data-blocknr` | `exempel-2` (typ + ordningsnummer, även för rutor utan titel) |
 
+- **`::: video` har ett EGET, handsatt ankare.** Filmblocken får ingen titel
+  att slugga, så de skrivs med raden `ankare: <namn>` i config-blocket
+  (t.ex. `ankare: tacoma-narrows` i `fy2-2.6`, `ankare: apollo15-hammare-fjader`
+  i `fy1-2.4`). Det ger `data-block="<namn>"` på `<figure class="lab-video">`,
+  och `data-blocknr="video-N"` sätts alltid automatiskt som reserv. **Lägger du
+  in ett nytt `::: video`-block: sätt en `ankare:`-rad direkt** — annars finns
+  inget vettigt sätt att länka till filmen, och nästa text som nämner den
+  hamnar överst på sidan igen. Kör `node data/teori/build.js` efteråt som
+  vanligt.
 - **Länka helst med den korta formen** (`den-fatala-gungan`) — den överlever
   att exemplen numreras om, medan `exempel-2` överlever att titeln skrivs om.
 - **Ankaret läses bara när hashen är tom**, precis som `?id=` (se nedan), och

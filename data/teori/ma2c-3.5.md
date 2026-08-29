@@ -64,7 +64,7 @@ ska bli så stor som möjligt?**
 Vi tecknar ett uttryck för hagens area. Vi kallar de två lika långa
 sidorna för $x$. Eftersom vi har 52 meter stängsel totalt, måste den
 tredje sidan ha längden $52 - 2x$. Arean hos rektangeln fås av basen
-gånger höjden, dvs.
+gånger höjden, det vill säga
 
 $$
 A(x) = x(52 - 2x)
@@ -76,7 +76,7 @@ Vi ritar upp funktionen $A(x) = x(52 - 2x)$ i Geogebra.
 <svg viewBox="-12 -6 202 222" width="295" height="324" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till hagens area som funktion av sidan x: en parabel med maximipunkt i 13 komma 338."><line x1="45" y1="10" x2="45" y2="196" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="75" y1="10" x2="75" y2="196" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="105" y1="10" x2="105" y2="196" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="135" y1="10" x2="135" y2="196" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="165" y1="10" x2="165" y2="196" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="7" y1="140" x2="180" y2="140" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="7" y1="90" x2="180" y2="90" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="7" y1="40" x2="180" y2="40" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="7" y1="190" x2="184" y2="190" stroke="#1f2530" stroke-width="1.6"/><polygon points="192,190 182,185.5 182,194.5" fill="#1f2530"/><line x1="15" y1="202" x2="15" y2="8" stroke="#1f2530" stroke-width="1.6"/><polygon points="15,0 10.5,10 19.5,10" fill="#1f2530"/><text x="190" y="208" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="24" y="10" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">A</tspan></text><text x="45" y="204" font-size="11" text-anchor="middle" fill="#1f2530">5</text><text x="75" y="204" font-size="11" text-anchor="middle" fill="#1f2530">10</text><text x="105" y="204" font-size="11" text-anchor="middle" fill="#1f2530">15</text><text x="135" y="204" font-size="11" text-anchor="middle" fill="#1f2530">20</text><text x="165" y="204" font-size="11" text-anchor="middle" fill="#1f2530">25</text><text x="9" y="144" font-size="11" text-anchor="end" fill="#1f2530">100</text><text x="9" y="94" font-size="11" text-anchor="end" fill="#1f2530">200</text><text x="9" y="44" font-size="11" text-anchor="end" fill="#1f2530">300</text><path d="M 15,190 Q 93,-148 171,190" fill="none" stroke="#2563c9" stroke-width="2"/><circle cx="93" cy="21" r="3.5" fill="#c8324a"/><text x="101" y="16" font-size="12" text-anchor="start" fill="#c8324a">(13, 338)</text></svg>
 :::
 
-Vi ska bestämma måtten som ger den maximala arean, dvs. vi vill ta
+Vi ska bestämma måtten som ger den maximala arean, det vill säga vi vill ta
 reda på för vilket värde på $x$ som $A(x)$ är som störst, vilket
 motsvarar grafens maximipunkt. Vi använder verktyget *Extrempunkt* för
 att ta fram maximipunktens koordinat: (13, 338).

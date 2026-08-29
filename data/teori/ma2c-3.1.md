@@ -54,7 +54,7 @@ antingen vara en maximi- eller en minimipunkt. Huruvida en extrempunkt
 Vi ser också att grafen är symmetrisk kring en lodrät linje som kallas
 **symmetrilinje**. Extrempunkten ligger på symmetrilinjen (detta kommer
 vi att utnyttja framöver). Symmetrilinjens ekvation anges med dess
-$x$-koordinat. Om en symmetrilinje t.ex. ligger vid 3 på $x$-axeln är
+$x$-koordinat. Om en symmetrilinje till exempel ligger vid 3 på $x$-axeln är
 symmetrilinjens ekvation $x = 3$. Ibland skrivs den också $x_s = 3$.
 
 De $x$-värden där funktionens värde är 0 och där grafen till funktionen
@@ -71,7 +71,7 @@ lösningar till $f(x) = 0$ visas.
 :::
 
 ::: tips "Parabelns utseende"
-Om andragradstermen (t.ex. $x^2$ eller $t^2$) i en andragradsfunktion
+Om andragradstermen (till exempel $x^2$ eller $t^2$) i en andragradsfunktion
 är
 
 - **positiv** har grafen en **minimipunkt** (Minnesregel: positiv
@@ -100,14 +100,14 @@ värdet kan vi använda verktyget "Extrempunkt" i Geogebra.)
 
 **Svar:** Största värdet är 4.
 
-**b)** Nollställena är där grafen skär $x$-axeln, dvs. vid $x = -3$ och
+**b)** Nollställena är där grafen skär $x$-axeln, det vill säga vid $x = -3$ och
 vid $x = 1$. (Om det är svårt att avläsa nollställena kan vi använda
 verktyget "Nollställen" i Geogebra.)
 
 **Svar:** $x = -3$ och $x = 1$
 
 **c)** Extrempunktens koordinater är, i detta fall, koordinaterna för
-maximipunkten, dvs. (−1, 4).
+maximipunkten, det vill säga (−1, 4).
 
 **Svar:** (−1, 4)
 

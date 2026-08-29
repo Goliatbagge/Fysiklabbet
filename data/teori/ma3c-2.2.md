@@ -51,7 +51,7 @@ Peka eller tryck på tangenten så visas de avlästa punkternas koordinater.
 Vi ska ta reda på en förändringshastighet vid en tidpunkt. Vi slår en
 tangent i punkten på kurvan där $x = 2$ och beräknar dess lutning.
 
-Vi läser av två punkter på tangenten, t.ex. $(0;\ 0{,}7)$ och
+Vi läser av två punkter på tangenten, till exempel $(0;\ 0{,}7)$ och
 $(2;\ 1{,}4)$, och sätter in dem i formeln för $k$.
 
 $$

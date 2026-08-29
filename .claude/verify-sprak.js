@@ -1,0 +1,153 @@
+#!/usr/bin/env node
+/*
+ * verify-sprak.js — letar efter språkliga fadäser i den text besökaren
+ * faktiskt läser: anglicismer, felböjda verb, personifierade döda ting och
+ * ord projektet bestämt sig för att inte använda. Kör:
+ *
+ *   node .claude/verify-sprak.js                 (hela sajten)
+ *   node .claude/verify-sprak.js <fil> [<fil>…]  (bara vissa filer)
+ *
+ * Skriptet finns för att sådant här ALDRIG ser trasigt ut. "Vågen räknar
+ * aldrig med facit" och "luftpartiklarna svepar ner" gick igenom varenda
+ * annan kontroll och hamnade i både en simulering, på startsidan och i ett
+ * nyhetsbrev innan användaren läste dem (påpekat 2026-08-29).
+ *
+ * Reglerna är avsiktligt FÅ och HÖGPRECISA — ett skript som skriker om
+ * varannan mening slutar man läsa. Vill du fånga sådant som kräver omdöme
+ * (klichéer, tunga satser, ordval som är rätt men trist): använd
+ * korrekturläsar-agenten i .claude/agents/korrekturlasare.md.
+ *
+ * Lägga till en regel: ett objekt i REGLER nedan. `undantag` är mönster som
+ * gör en träff laglig; `niva` är 'fel' (blockerar) eller 'varning'.
+ */
+const fs = require('fs');
+const path = require('path');
+
+const ROT = path.join(__dirname, '..');
+
+const REGLER = [
+    {
+        namn: 'facit-anglicism',
+        niva: 'fel',
+        monster: /\bmed facit\b/gi,
+        undantag: [/\bmed facit i hand\b/i],
+        rattelse: 'Anglicism. "Räknar med facit" är inte svenska. Skriv ' +
+                  '"får aldrig veta svaret på förhand", "har inget svar att luta sig mot". ' +
+                  '(Idiomet "med facit i hand" är korrekt och undantaget.)',
+    },
+    {
+        namn: 'svepar',
+        niva: 'fel',
+        monster: /\bsvepar\b/gi,
+        rattelse: 'Fel böjning. Verbet heter sveper (svepa, sveper, svepte, svept).',
+    },
+    {
+        namn: 'förråda',
+        niva: 'fel',
+        monster: /\bförråd(er|de|a|s|tt)\b/gi,
+        rattelse: 'Ger ett dött ting ett uppsåt. Skriv avslöjar, visar, röjer, ' +
+                  'pekar ut eller vittnar om. Se "Ordval i nyhetsartiklar" i CLAUDE.md. ' +
+                  '(Substantivet förråd berörs inte.)',
+    },
+    {
+        namn: 'rymdtid',
+        niva: 'fel',
+        monster: /\brymdtid(en|ens|er)?\b/gi,
+        rattelse: 'Svenska ordet för spacetime är rumtid, inte rymdtid. ' +
+                  '(Publicerade artikel-id:n rättas dock aldrig.)',
+    },
+    {
+        namn: 'förkortningar',
+        niva: 'varning',
+        monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.)/gi,
+        rattelse: 'Skriv ut förkortningen i klartext (till exempel, bland annat, ' +
+                  'med mera, det vill säga, och så vidare, från och med, så kallad). ' +
+                  'Se "Förkortningar skrivs ut i klartext" i CLAUDE.md.',
+    },
+];
+
+// ── Vilka filer läses ─────────────────────────────────────────────────
+// Bara källor med text som besökaren ser. Verifierare, byggskript och
+// agentinstruktioner hålls utanför — där är förkortningar helt i sin ordning.
+// (Kodkommentarer INUTI sidorna kommer med och kan ge en och annan falsk
+// varning; det är billigare än att tolka JS.)
+function standardfiler() {
+    const ut = [];
+    const lagg = (dir, filter) => {
+        if (!fs.existsSync(dir)) return;
+        for (const f of fs.readdirSync(dir)) {
+            const p = path.join(dir, f);
+            if (fs.statSync(p).isFile() && filter(f)) ut.push(p);
+        }
+    };
+    lagg(path.join(ROT, 'data', 'teori'), f => f.endsWith('.md'));
+    lagg(path.join(ROT, 'data'), f => ['nyheter.js', 'begrepp.js', 'ovningar.js',
+        'exittickets.js', 'katalog.js', 'simuleringar.js'].includes(f));
+    lagg(path.join(ROT, '.claude', 'nyhetsbrev', 'utkast'), f => f.endsWith('.html'));
+    lagg(ROT, f => f.endsWith('.html'));
+    return ut;
+}
+
+const valda = process.argv.length > 2;
+const filer = valda
+    ? process.argv.slice(2).map(f => path.resolve(f))
+    : standardfiler();
+
+// Vid en svepning över HELA sajten körs bara de blockerande reglerna.
+// Stilvarningarna (förkortningar m.fl.) har en stor arvsskuld i äldre text
+// som inte saneras retroaktivt, och 800 rader varning gör att man slutar
+// läsa utskriften. Peka ut filerna du rört, så granskas allt.
+const aktiva = valda ? REGLER : REGLER.filter(r => r.niva === 'fel');
+
+// ── Granska ───────────────────────────────────────────────────────────
+const fel = [];
+const varn = [];
+
+for (const fil of filer) {
+    let text;
+    try { text = fs.readFileSync(fil, 'utf8'); } catch (e) { continue; }
+    const rader = text.split(/\r?\n/);
+
+    for (const regel of aktiva) {
+        rader.forEach((rad, i) => {
+            regel.monster.lastIndex = 0;
+            let m;
+            while ((m = regel.monster.exec(rad)) !== null) {
+                const runt = rad.slice(Math.max(0, m.index - 60), m.index + m[0].length + 60);
+                if ((regel.undantag || []).some(u => u.test(runt))) continue;
+                const post = {
+                    fil: path.relative(ROT, fil).replace(/\\/g, '/'),
+                    rad: i + 1,
+                    regel: regel.namn,
+                    traff: m[0].trim(),
+                    utdrag: runt.trim().replace(/\s+/g, ' '),
+                    rattelse: regel.rattelse,
+                };
+                (regel.niva === 'fel' ? fel : varn).push(post);
+            }
+        });
+    }
+}
+
+// ── Utfall ────────────────────────────────────────────────────────────
+function skriv(lista, etikett) {
+    const perRegel = {};
+    lista.forEach(p => (perRegel[p.regel] = perRegel[p.regel] || []).push(p));
+    for (const [regel, poster] of Object.entries(perRegel)) {
+        console.log(`\n  ${etikett}  ${regel} (${poster.length} st)`);
+        console.log(`           ${poster[0].rattelse}`);
+        poster.slice(0, 12).forEach(p =>
+            console.log(`           ${p.fil}:${p.rad}  …${p.utdrag}…`));
+        if (poster.length > 12) console.log(`           … och ${poster.length - 12} till.`);
+    }
+}
+
+console.log(`Granskar ${filer.length} filer med ${aktiva.length} regler` +
+    (valda ? '.' : ' (stilvarningar körs bara på utpekade filer).'));
+if (varn.length) skriv(varn, 'VARNING');
+if (fel.length) {
+    skriv(fel, 'FEL    ');
+    console.log(`\n${fel.length} fel. Rätta dem före commit.`);
+    process.exit(1);
+}
+console.log(varn.length ? '\nInga fel (varningarna ovan är att gå igenom).' : '\nInga fel.');

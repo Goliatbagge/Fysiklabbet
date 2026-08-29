@@ -55,7 +55,7 @@ En vinkel $v$
 - startar vid den positiva $x$-axeln och vrids **moturs** det antal grader
   som anges.
 - som är större än $360°$ har gått ett helt varv och fortsätter sedan om
-  igen, t.ex. ger $360° + v$ samma punkt på cirkeln som $v$.
+  igen, till exempel ger $360° + v$ samma punkt på cirkeln som $v$.
 - som är **negativ** motsvarar i stället en vridning **medurs** det antal
   grader som anges.
 :::

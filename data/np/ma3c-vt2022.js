@@ -23,7 +23,7 @@ window.NP_PROV['ma3c-vt2022'] = {
         'Varje steg förklarar både vad som görs och varför, och figurerna byggs upp i takt ' +
         'med lösningen.',
     kravgranser: 'Provet (delprov B–D) ger totalt 58 poäng varav 21 E-, 21 C- och 16 A-poäng. ' +
-        'Poängen skrivs (E/C/A) — t.ex. betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        'Poängen skrivs (E/C/A) — till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
         '1 A-poäng. Gräns för provbetyget: E minst 15 poäng · D minst 24 poäng varav 7 på ' +
         'minst C-nivå · C minst 31 poäng varav 13 på minst C-nivå · B minst 39 poäng varav ' +
         '5 på A-nivå · A minst 45 poäng varav 8 på A-nivå.',
@@ -566,7 +566,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                     rubrik: 'Avgör karaktären med en teckentabell',
                     varfor: 'Derivatans tecken runt nollställena avslöjar karaktären: går grafen ' +
                         'från växande till avtagande är det en maximipunkt, tvärtom en minimipunkt. ' +
-                        'Testa ett $x$-värde i varje intervall, t.ex. $f\'(-1) = 9$, $f\'(1) = -3$ ' +
+                        'Testa ett $x$-värde i varje intervall, till exempel $f\'(-1) = 9$, $f\'(1) = -3$ ' +
                         'och $f\'(3) = 9$.',
                     text: '| | $x < 0$ | $x = 0$ | $0 < x < 2$ | $x = 2$ | $x > 2$ |\n' +
                         '| :--- | :---: | :---: | :---: | :---: | :---: |\n' +
@@ -618,7 +618,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: '$p = 4$',
             bedomning: [
-                ['Godtagbar ansats, t.ex. ställer upp ekvationen $\\displaystyle\\int_0^3 g(x)\\,\\mathrm{d}x = 24$', '+C'],
+                ['Godtagbar ansats, till exempel ställer upp ekvationen $\\displaystyle\\int_0^3 g(x)\\,\\mathrm{d}x = 24$', '+C'],
                 ['med i övrigt godtagbar lösning med korrekt svar ($p = 4$)', '+C'],
             ],
         },
@@ -649,7 +649,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: 'Nej, Jaana har fel: $f\'(x) = 3x^2 + 3 > 0$ för alla $x$, så $f$ saknar extrempunkter.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. bestämmer $f\'(x)$ och tecknar ekvationen $3x^2 + 3 = 0$', '+C'],
+                ['Godtagbar ansats, till exempel bestämmer $f\'(x)$ och tecknar ekvationen $3x^2 + 3 = 0$', '+C'],
                 ['med godtagbart resonemang där det framgår att funktionen $f$ saknar extrempunkter och att Jaana därmed har fel', '+C'],
             ],
         },
@@ -765,7 +765,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                     varfor: 'Poängen med uppgiften är att använda verktyget: mata in funktionen och ' +
                         'be om derivatans värde i $x = 2$ (numerisk derivata), eller rita grafen och ' +
                         'läs av tangentens lutning där.',
-                    text: 'Med t.ex. kommandot $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\Big[(2x-1)^5\\Big]_{x=2}$ ' +
+                    text: 'Med till exempel kommandot $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\Big[(2x-1)^5\\Big]_{x=2}$ ' +
                         'ger verktyget:\n\n$$f\'(2) = 810$$\n\n' +
                         '(Kontroll med kedjeregeln, som hör till nästa nivå: ' +
                         '$f\'(x) = 10(2x-1)^4$ ger $f\'(2) = 10 \\cdot 3^4 = 810$.)',
@@ -857,16 +857,16 @@ window.NP_PROV['ma3c-vt2022'] = {
                     del: 'c',
                     rubrik: 'Testa modellen för en gymnasieålder',
                     varfor: 'En modell prövas genom att sätta in ett relevant värde och bedöma ' +
-                        'rimligheten. Gymnasiepojkar är cirka 16–19 år — testa t.ex. $x = 16$.',
+                        'rimligheten. Gymnasiepojkar är cirka 16–19 år — testa till exempel $x = 16$.',
                     text: '$$f(16) = 78 \\cdot \\mathrm{e}^{0{,}07 \\cdot 16} \\approx 240\\ \\text{cm}$$\n\n' +
                         'En medellängd på $2{,}4$ meter för 16-åringar är orimlig (och för 19-åringar ' +
                         'ger modellen nästan $2{,}9$ meter) — **modellen är inte giltig för pojkar på ' +
                         'gymnasiet**.',
-                    delsvar: { del: 'c', text: 'Nej — modellen ger t.ex. $f(16) \\approx 240$ cm, vilket är orimligt. Modellen gäller inte gymnasiepojkar.' },
+                    delsvar: { del: 'c', text: 'Nej — modellen ger till exempel $f(16) \\approx 240$ cm, vilket är orimligt. Modellen gäller inte gymnasiepojkar.' },
                 },
             ],
             svar: 'a) Cirka $6{,}7$ år &nbsp;&nbsp; b) Cirka $8{,}3$ cm/år &nbsp;&nbsp; ' +
-                'c) Nej, modellen är inte giltig för gymnasiepojkar (den ger t.ex. $240$ cm för en 16-åring).',
+                'c) Nej, modellen är inte giltig för gymnasiepojkar (den ger till exempel $240$ cm för en 16-åring).',
             bedomning: [
                 ['a) Godtagbar ansats, ställer upp ekvationen $78 \\cdot \\mathrm{e}^{0{,}07x} = 125$ eller motsvarande med digitalt verktyg', '+E'],
                 ['a) med i övrigt godtagbar lösning med godtagbart svar ($6{,}7$ år)', '+E'],
@@ -929,7 +929,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                     rubrik: 'Ställ upp ekvationen och lös den digitalt',
                     varfor: 'Ekvationen $-\\dfrac{12}{x^2} + 8 = \\dfrac{1}{2\\sqrt{x}}$ går inte ' +
                         'att lösa algebraiskt med nivåns metoder — här är det digitala verktyget ' +
-                        'tänkt att användas (t.ex. grafisk skärning eller en ekvationslösare).',
+                        'tänkt att användas (till exempel grafisk skärning eller en ekvationslösare).',
                     text: '$$-\\dfrac{12}{x^2} + 8 = 0{,}5 x^{-0{,}5}$$\n\n' +
                         'Verktyget ger $x \\approx 1{,}26$.',
                 },
@@ -982,7 +982,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: '$BD \\approx 11\\ \\mathrm{cm}$',
             bedomning: [
-                ['Godtagbar ansats, t.ex. bestämmer vinkeln $ABC$ och beräknar sidan $AB$', '+C'],
+                ['Godtagbar ansats, till exempel bestämmer vinkeln $ABC$ och beräknar sidan $AB$', '+C'],
                 ['med i övrigt godtagbar lösning med godtagbart svar ($11\\ \\mathrm{cm}$)', '+C'],
                 ['Lösningen kommuniceras på C-nivå', '+C'],
             ],
@@ -1021,7 +1021,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: '$x \\approx 0{,}75$',
             bedomning: [
-                ['Godtagbar ansats, t.ex. ställer upp ekvationen $2^x \\cdot \\ln 2 = \\dfrac{7}{6}$', '+C'],
+                ['Godtagbar ansats, till exempel ställer upp ekvationen $2^x \\cdot \\ln 2 = \\dfrac{7}{6}$', '+C'],
                 ['med i övrigt godtagbar lösning med godtagbart svar ($0{,}75$)', '+C'],
             ],
         },
@@ -1050,7 +1050,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                 {
                     rubrik: 'Derivera f',
                     varfor: 'Den utvecklade formen $ax^3 - 6a^2x^2 + 11a^3x - 6a^4$ deriveras ' +
-                        'termvis med potensregeln — kom ihåg att $a$ är en konstant, så t.ex. ' +
+                        'termvis med potensregeln — kom ihåg att $a$ är en konstant, så till exempel ' +
                         '$6a^2x^2$ får derivatan $12a^2x$.',
                     text: '$$f\'(x) = 3ax^2 - 12a^2 x + 11a^3$$',
                 },
@@ -1116,7 +1116,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: 'Wilma kan köra cirka $11$ mil innan bensinen tar slut.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. ställer upp ekvationen $\\displaystyle\\int_0^a (0{,}3 + 0{,}5\\mathrm{e}^{-0{,}76x})\\,\\mathrm{d}x = 4$', '+A'],
+                ['Godtagbar ansats, till exempel ställer upp ekvationen $\\displaystyle\\int_0^a (0{,}3 + 0{,}5\\mathrm{e}^{-0{,}76x})\\,\\mathrm{d}x = 4$', '+A'],
                 ['med i övrigt godtagbar lösning med godtagbart svar ($11$ mil)', '+A'],
             ],
         },
@@ -1164,7 +1164,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             ],
             svar: 'Guldtråden blir som kortast cirka $23\\ \\mathrm{mm}$.',
             bedomning: [
-                ['Godtagbar ansats, bestämmer ett korrekt funktionsuttryck för guldtrådens längd i en variabel, t.ex. $L(x) = \\sqrt{(x-16)^2 + \\left( \\frac{550}{x} \\right)^2}$', '+A'],
+                ['Godtagbar ansats, bestämmer ett korrekt funktionsuttryck för guldtrådens längd i en variabel, till exempel $L(x) = \\sqrt{(x-16)^2 + \\left( \\frac{550}{x} \\right)^2}$', '+A'],
                 ['med i övrigt godtagbar lösning, inklusive verifiering av minimum, med godtagbart svar ($23$ mm)', '+A'],
                 ['Lösningen kommuniceras på A-nivå', '+A'],
             ],

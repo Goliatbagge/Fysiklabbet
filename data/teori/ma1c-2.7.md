@@ -9,7 +9,7 @@ section: '2.7'
 
 # Ekvationer med nämnare
 
-**OBS! När vi har ekvationer med variabler, t.ex. $x$, i nämnaren får den
+**OBS! När vi har ekvationer med variabler, till exempel $x$, i nämnaren får den
 inte anta ett värde som gör att nämnaren blir lika med 0**, eftersom
 division med 0 inte är definierat. Innan vi löser sådana ekvationer skriver
 vi vilka värden på variabeln som *inte* är tillåtna.
@@ -69,7 +69,7 @@ typ: korsvis
 ::: textlosning
 Vi har $2x$ i nämnaren så $2x \neq 0$, vilket ger $x \neq 0$.
 
-Vi multiplicerar "korsvis", dvs. vi multiplicerar täljaren i ena bråket
+Vi multiplicerar "korsvis", det vill säga vi multiplicerar täljaren i ena bråket
 med nämnaren i det andra bråket och vice versa. Ordningen spelar ingen
 roll!
 

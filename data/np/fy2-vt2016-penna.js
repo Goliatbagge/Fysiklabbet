@@ -931,7 +931,7 @@
     T.str('tongeneratorn, i fas. Välj en', padL + 40, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('frekvens, t.ex. f=500 Hz.', padL + 40, y);
+    T.str('frekvens, till exempel f=500 Hz.', padL + 40, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [

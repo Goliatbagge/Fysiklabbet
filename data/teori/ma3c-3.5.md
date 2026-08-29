@@ -53,7 +53,7 @@ $$
 
 $f(x) = e^{3x}$ har alltså derivatan $f'(x) = 3e^{3x}$.
 
-På motsvarande sätt kan vi visa att t.ex. $f(x) = e^{4x}$ har derivatan
+På motsvarande sätt kan vi visa att till exempel $f(x) = e^{4x}$ har derivatan
 $f'(x) = 4e^{4x}$ och att $f(x) = e^{5x}$ har derivatan $f'(x) = 5e^{5x}$.
 
 **Slutsats:** Om $f(x) = e^{kx}$ så gäller att $f'(x) = ke^{kx}$.
@@ -96,7 +96,7 @@ $$
 
 Nu har vi deriveringsregler för alla exponentialfunktioner med basen $e$.
 Men vad gäller för derivatan till en exponentialfunktion med en annan bas än
-$e$, t.ex. $f(x) = 2^x$ eller $f(x) = 3^{5x}$?
+$e$, till exempel $f(x) = 2^x$ eller $f(x) = 3^{5x}$?
 
 För att ta reda på det behöver vi först repetera tiologaritmer och införa en
 ny logaritm.
@@ -112,7 +112,7 @@ Eftersom $10^2 = 100$ är alltså $\lg 100 = 2$.
 Eftersom $\lg 100 = 2$ gäller
 
 $$
-10^2 = 10^{\lg 100} = 100, \qquad \text{dvs.} \qquad 10^{\lg 100} = 100
+10^2 = 10^{\lg 100} = 100, \qquad \text{det vill säga} \qquad 10^{\lg 100} = 100
 $$
 
 På motsvarande sätt gäller $10^{\lg 1000} = 1000$ och $10^{\lg 7} = 7$ och så
@@ -133,7 +133,7 @@ $$
 \ln 5 \approx 1{,}61
 $$
 
-dvs. $e^{1{,}61} \approx 5$. Exakt kan vi skriva $e^{\ln 5} = 5$.
+det vill säga $e^{1{,}61} \approx 5$. Exakt kan vi skriva $e^{\ln 5} = 5$.
 
 På motsvarande sätt som för tiologaritmen gäller $e^{\ln 12} = 12$ och så
 vidare.
@@ -175,7 +175,7 @@ $$
 
 $f(x) = 5^x$ har alltså derivatan $f'(x) = 5^x \cdot \ln 5$.
 
-På motsvarande sätt kan vi visa att t.ex. $f(x) = 7^x$ har derivatan
+På motsvarande sätt kan vi visa att till exempel $f(x) = 7^x$ har derivatan
 $f'(x) = 7^x \cdot \ln 7$ och att $f(x) = 1{,}14^x$ har derivatan
 $f'(x) = 1{,}14^x \cdot \ln 1{,}14$.
 

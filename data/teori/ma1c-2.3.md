@@ -22,7 +22,7 @@ $$
 
 ::: härledning "Kontroll — Distributiva lagen"
 Vi kontrollerar om den distributiva lagen gäller med de räkneregler vi vet
-sedan tidigare. Vi beräknar t.ex. $3 \cdot (9 - 4)$ på två olika sätt.
+sedan tidigare. Vi beräknar till exempel $3 \cdot (9 - 4)$ på två olika sätt.
 
 **Med prioriteringsreglerna:**
 

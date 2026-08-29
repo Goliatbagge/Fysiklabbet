@@ -118,10 +118,10 @@ $$
 **c)** I grundpotensform: $270\,000\ \mathrm{N} = 2{,}7 \cdot 10^5\ \mathrm{N}$.
 
 Vi har inget prefix för $10^5$. Vi skriver om talet med en tiopotens i
-närheten som vi har prefix för, t.ex. $10^6$. **OBS!** När vi ökar
+närheten som vi har prefix för, till exempel $10^6$. **OBS!** När vi ökar
 tiopotensen från $10^5$ till $10^6$ gör vi tiopotensen 10 gånger så stor.
 För att talet ska behålla sin storlek måste vi samtidigt göra talet framför
-tiopotensen 10 "gånger så litet", dvs. 2,7 ska då ändras till
+tiopotensen 10 "gånger så litet", det vill säga 2,7 ska då ändras till
 $\dfrac{2{,}7}{10} = 0{,}27$:
 
 $$
@@ -172,7 +172,7 @@ Vi ska ta reda på hur många filer med storleken 4,0 GB som får plats på en
 hårddisk med storleken 2,0 TB. Vi ska alltså dividera hårddiskens storlek
 med storleken hos en fil för att få antalet. För att få det korrekta
 antalet behöver vi göra om det till samma enhet i täljare och nämnare,
-t.ex. genom att skriva om prefixen som tiopotenser:
+till exempel genom att skriva om prefixen som tiopotenser:
 
 $$
 \text{antal filer} = \frac{2{,}0\ \mathrm{TB}}{4{,}0\ \mathrm{GB}}

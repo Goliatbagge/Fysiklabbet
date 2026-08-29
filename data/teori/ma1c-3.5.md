@@ -23,7 +23,7 @@ till en högre ränta och tjänar pengar på mellanskillnaden.)
 
 Kom ihåg: Om det i uppgifter bara står "ränta" är det underförstått att
 de menar årsränta. Ibland förekommer kvartalsränta där ett kvartal är ett
-"kvarts år", dvs. 3 månader.
+"kvarts år", det vill säga 3 månader.
 
 ::: formel "Betala ett lån"
 När vi betalar av ett lån betalar vi **amortering** (återbetalning) *och*

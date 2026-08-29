@@ -40,11 +40,11 @@ händelserna genom **produktregeln**.
 Om sannolikheten för en händelse
 
 - *inte* påverkas av händelsen innan har vi en **oberoende händelse**.
-  T.ex. sannolikheten att slå en sexa vid ett kast med tärning är
+  Till exempel sannolikheten att slå en sexa vid ett kast med tärning är
   $\dfrac{1}{6}$. Sannolikheten för att slå en sexa nästa gång med
   tärningen är fortfarande $\dfrac{1}{6}$ ("slumpen har inget minne").
   Kast med tärningar är alltså oberoende händelser.
-- påverkas av händelsen innan har vi en **beroende händelse**. T.ex.
+- påverkas av händelsen innan har vi en **beroende händelse**. Till exempel
   sannolikheten att dra ett hjärter ur en kortlek är $\dfrac{13}{52}$. Om
   jag lägger undan kortet ("utan återläggning"), så är sannolikheten att
   dra ytterligare ett hjärter ur kortleken $\dfrac{12}{51}$ (12 hjärter är

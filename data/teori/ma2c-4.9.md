@@ -33,7 +33,7 @@ $\triangle ABC$ och $\triangle ADE$ har alltså två lika vinklar
 $\implies \triangle ABC \sim \triangle ADE$ (trianglarna är
 likformiga).
 
-Förhållandet mellan motsvarande sidor är då lika, dvs.
+Förhållandet mellan motsvarande sidor är då lika, det vill säga
 
 $$
 \frac{AD}{AB} = \frac{AE}{AC} = \frac{DE}{BC}

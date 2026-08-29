@@ -60,7 +60,7 @@ window.REPETITION['fy1-6'] = {
                 { text: 'Värme och temperatur är samma sak.',
                   sant: false, varfor: 'Värme är energi under transport, medan temperatur är ett mått på atomernas genomsnittliga rörelseenergi.' },
                 { text: 'Om ett föremål känns kallare än ett annat måste det ha lägre temperatur.',
-                  sant: false, varfor: 'Det kan bero på att materialet leder värme bättre, t.ex. känns aluminium kallare än plast trots samma temperatur.' },
+                  sant: false, varfor: 'Det kan bero på att materialet leder värme bättre, till exempel känns aluminium kallare än plast trots samma temperatur.' },
                 { text: 'Temperaturen ändras inte under en fasövergång som smältning.',
                   sant: true, varfor: 'Energin går åt att bryta eller bilda bindningar, inte till att ändra temperaturen.' },
                 { text: 'Den specifika värmekapaciteten är samma för is och flytande vatten.',

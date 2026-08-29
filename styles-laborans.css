@@ -2084,7 +2084,8 @@ button.lab-card-disabled { pointer-events: none; }
 /* Direktlänk till en enskild ruta (katalog.html?id=…&block=…): kort
    markering av rutan man landade i, så att det syns var på sidan man
    hamnade. Tonar bort av sig själv — ingen bestående färgändring. */
-.lab-block.block-mal {
+.lab-block.block-mal,
+.lab-video.block-mal {
     animation: block-mal-puls 2.6s ease-out 1;
 }
 
@@ -2094,7 +2095,8 @@ button.lab-card-disabled { pointer-events: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .lab-block.block-mal { animation: none; }
+    .lab-block.block-mal,
+    .lab-video.block-mal { animation: none; }
 }
 
 .lab-block-title {

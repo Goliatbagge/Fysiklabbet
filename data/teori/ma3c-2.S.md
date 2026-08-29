@@ -35,9 +35,9 @@ avgöra i vilka punkter en funktion inte är deriverbar.
 - **kontinuerlig funktion**: en funktion vars graf hänger ihop och kan
   ritas "utan att lyfta pennan".
 - **diskontinuerlig funktion**: en funktion vars graf har ett hopp (öppen
-  ring och fylld prick på olika höjd) eller ett språng (t.ex. vid en
+  ring och fylld prick på olika höjd) eller ett språng (till exempel vid en
   lodrät asymptot).
-- **hörnpunkt**: en punkt där grafen bildar ett skarpt "hörn", t.ex. i
+- **hörnpunkt**: en punkt där grafen bildar ett skarpt "hörn", till exempel i
   $x = 0$ för $f(x) = |x|$.
 - **absolutbelopp ($|a|$)**: ett tals avstånd till 0 på tallinjen; "tar
   bort" minustecknet från negativa tal.
@@ -89,20 +89,20 @@ där
   och beräkna gränsvärdet.
 - Enheten för derivatan fås genom "enheten för funktionen" per "enheten
   för variabeln" — samma princip som för sekantens och tangentens lutning.
-- Med symbolhanterande hjälpmedel (t.ex. Geogebra): definiera funktionen
+- Med symbolhanterande hjälpmedel (till exempel Geogebra): definiera funktionen
   som $f(x) = \ldots$ och beräkna derivatan i en punkt genom att skriva
   $f'(a)$. OBS: Geogebra använder punkt som decimaltecken, inte komma.
 - En funktion är **inte** deriverbar i en punkt om den (1) inte är
   definierad där, (2) är diskontinuerlig där (hopp), eller (3) har en
   hörnpunkt där.
-- I en hörnpunkt (t.ex. $x = 0$ för $f(x) = |x|$) ger gränsvärdet av
+- I en hörnpunkt (till exempel $x = 0$ för $f(x) = |x|$) ger gränsvärdet av
   derivatan olika svar beroende på om man närmar sig punkten från vänster
   eller höger — derivatan saknar då ett entydigt värde.
 - En ekvation med absolutbelopp, $|x - a| = b$, löses genom att sätta
   $x - a = \pm b$ och lösa båda fallen separat.
 - Skilj på kontinuitetens två typer av avbrott: ett **hopp** (funktionen
   definierad men värdet "hoppar", öppen ring/fylld prick) och ett
-  **språng** (grafen går mot $\pm\infty$, t.ex. vid en lodrät asymptot).
+  **språng** (grafen går mot $\pm\infty$, till exempel vid en lodrät asymptot).
 
 ## Figurer värda att minnas
 
@@ -135,7 +135,7 @@ vänster om $x = 0$ och $1$ till höger — eftersom gränsvärdena skiljer sig
 - Vet du vad notationen $f'(a)$ betyder och hur den utläses?
 - Kan du tolka en derivata i ett tillämpat sammanhang och avgöra dess
   enhet?
-- Kan du beräkna en derivata med symbolhanterande hjälpmedel (t.ex.
+- Kan du beräkna en derivata med symbolhanterande hjälpmedel (till exempel
   Geogebra), och vet du att Geogebra använder punkt som decimaltecken?
 - Kan du förklara skillnaden mellan en kontinuerlig och en diskontinuerlig
   funktion, och mellan ett hopp och ett språng?

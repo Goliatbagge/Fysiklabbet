@@ -37,7 +37,7 @@ $$
 
 för alla reella tal $a$ (om $x > 0$).
 
-::: härledning "Derivatan för $f(x) = x^{1/2}$, dvs. för $f(x) = \sqrt{x}$, med derivatans definition"
+::: härledning "Derivatan för $f(x) = x^{1/2}$, det vill säga för $f(x) = \sqrt{x}$, med derivatans definition"
 Om den vanliga regeln (multiplicera ner exponenten och minska den med 1)
 gäller även för denna typ av funktion ska
 
@@ -66,9 +66,9 @@ De enkla deriveringsreglerna gäller alltså även för annat än
 heltalsexponenter!
 :::
 
-::: härledning "Derivatan för $f(x) = x^{-1}$, dvs. för $f(x) = \dfrac{1}{x}$, med derivatans definition"
+::: härledning "Derivatan för $f(x) = x^{-1}$, det vill säga för $f(x) = \dfrac{1}{x}$, med derivatans definition"
 Om den vanliga regeln gäller även för denna funktion ska
-$f'(x) = -x^{-2}$, dvs. $f'(x) = -\dfrac{1}{x^2}$.
+$f'(x) = -x^{-2}$, det vill säga $f'(x) = -\dfrac{1}{x^2}$.
 
 Vi undersöker om det verkligen är så med derivatans definition.
 
@@ -96,7 +96,7 @@ $x^a$ innan vi deriverar — variabler under ett rottecken eller i en nämnare
 räknas alltså om till en potens med bråk- eller negativ exponent först.
 
 ::: tips "Derivera variabler under rottecknet eller i nämnaren"
-Om vi ska derivera en funktion som innehåller variabler (t.ex. $x$) under
+Om vi ska derivera en funktion som innehåller variabler (till exempel $x$) under
 rottecknet eller i en nämnare gör vi det enklast genom att
 
 1. skriva om termen som en potens och förenkla,
@@ -104,7 +104,7 @@ rottecknet eller i en nämnare gör vi det enklast genom att
 :::
 
 ::: formel "Derivera uttryck med variabeln i både täljare och nämnare"
-När vi har variabeln, t.ex. $x$, i både täljare och nämnare deriverar vi
+När vi har variabeln, till exempel $x$, i både täljare och nämnare deriverar vi
 funktionen enklast genom att dela upp bråket i flera termer och sedan
 derivera termvis.
 :::

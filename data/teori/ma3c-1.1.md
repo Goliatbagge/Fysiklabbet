@@ -47,7 +47,7 @@ $$
 där $k$ är koefficienten framför $x$-termen med högst grad (exponent).
 :::
 
-I uppgifter där vi ska faktorisera uttryck, t.ex. när vi ska förenkla
+I uppgifter där vi ska faktorisera uttryck, till exempel när vi ska förenkla
 rationella uttryck, har vi nu tre metoder.
 
 ::: tips "Faktorisera"
@@ -131,7 +131,7 @@ $$
 
 **b)** Detta uttryck har flera termer i täljare och nämnare. Vi utnyttjar
 samma princip som för bråken: vi skriver om täljare och nämnare som
-multiplikationer, dvs. vi **faktoriserar** dem. Vi bryter ut största
+multiplikationer, det vill säga vi **faktoriserar** dem. Vi bryter ut största
 gemensamma faktorn i täljaren respektive nämnaren och förkortar sedan.
 
 $$

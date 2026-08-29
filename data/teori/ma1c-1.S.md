@@ -24,7 +24,7 @@ skrivna i grundpotensform eller med prefix.
   ($\mathbb{N}$), heltal ($\mathbb{Z}$), rationella tal ($\mathbb{Q}$) och
   reella tal ($\mathbb{R}$); varje mängd ligger inuti nästa.
 - **irrationella tal**: tal som inte kan skrivas som ett bråk av två
-  heltal, t.ex. π och $\sqrt{2}$; har en oändlig decimalutveckling som
+  heltal, till exempel π och $\sqrt{2}$; har en oändlig decimalutveckling som
   inte upprepar sig.
 - **täljare och nämnare**: talet ovanför respektive under bråkstrecket i
   ett bråk.
@@ -32,7 +32,7 @@ skrivna i grundpotensform eller med prefix.
   täljare och nämnare med samma tal, utan att bråkets värde ändras.
 - **minsta gemensamma nämnaren (MGN)**: den minsta nämnare som flera bråk
   kan skrivas med samtidigt.
-- **blandad form**: ett bråk skrivet som ett helt tal plus ett bråk, t.ex.
+- **blandad form**: ett bråk skrivet som ett helt tal plus ett bråk, till exempel
   $3\frac{3}{4}$, till skillnad från bråkform ($\dfrac{15}{4}$).
 - **närmevärde och avrundningssiffra**: ett avrundat värde kallas
   närmevärde; siffran som avgör avrundningen kallas avrundningssiffra.
@@ -43,12 +43,12 @@ skrivna i grundpotensform eller med prefix.
 - **potensform och faktorform**: ett tal skrivet med bas och exponent
   ($3^5$) respektive skrivet som en produkt av faktorer
   ($3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$).
-- **rationell exponent**: en exponent som är ett bråk, t.ex.
+- **rationell exponent**: en exponent som är ett bråk, till exempel
   $a^{1/n} = \sqrt[n]{a}$.
 - **tiopotens och grundpotensform**: en tiopotens är en potens av 10; ett
   tal på formen $a \cdot 10^n$ där $1 \leq a < 10$ är skrivet i
   grundpotensform.
-- **prefix**: en bokstav som ersätter en tiopotens framför en enhet, t.ex.
+- **prefix**: en bokstav som ersätter en tiopotens framför en enhet, till exempel
   k (kilo, $10^3$), M (mega, $10^6$) och m (milli, $10^{-3}$).
 - **prioriteringsregler**: ordningen räknesätten ska utföras i:
   parenteser, potenser, multiplikation/division, addition/subtraktion.
@@ -139,7 +139,7 @@ $$
 
 ## Viktiga samband och metoder
 
-- Vid subtraktion av ett positivt tal från ett negativt (t.ex.
+- Vid subtraktion av ett positivt tal från ett negativt (till exempel
   $(-5) - 3$) blandar man lätt ihop det med "minus gånger minus" — tänk
   termometern: −5 grader som sjunker 3 grader till blir −8 grader, inte 8.
 - Att jämföra två bråk görs enklast genom att göra om dem till samma
@@ -154,7 +154,7 @@ $$
 - Blir talen stora vid multiplikation av bråk: faktorisera täljare och
   nämnare och förkorta *innan* multiplikationen utförs.
 - En bråkdel *av* något beräknas genom att **multiplicera** med
-  bråkdelen, t.ex. $\dfrac{5}{7}$ av 63 kr $= \dfrac{5}{7} \cdot 63$.
+  bråkdelen, till exempel $\dfrac{5}{7}$ av 63 kr $= \dfrac{5}{7} \cdot 63$.
 - Skilj på $(-9)^2$ och $-9^2$: i det första fallet är hela $-9$ basen
   ($(-9)^2 = 81$), i det andra är bara 9 basen och minustecknet står
   utanför potensen ($-9^2 = -81$).
@@ -162,7 +162,7 @@ $$
   antal värdesiffror** hur många värdesiffror svaret ska avrundas till.
   Vid **addition och subtraktion** avgör i stället talet med **minst antal
   decimaler** hur många decimaler svaret ska ha.
-- För att lösa en potensekvation med samma bas (t.ex. $8^m \cdot 8^5 = 8^7$):
+- För att lösa en potensekvation med samma bas (till exempel $8^m \cdot 8^5 = 8^7$):
   skriv om båda led som en enda potens med samma bas, sätt sedan
   exponenterna lika med varandra och lös ut den obekanta.
 - Vid förenkling av bråkuttryck med potenser: skriv om täljare och nämnare
@@ -220,7 +220,7 @@ ansiktsdel så framhävs dess rad i ordningen bredvid.
   gemensam nämnare?
 - Kan du multiplicera och dividera bråk, och vet du varför division
   innebär att man inverterar bråket i nämnaren?
-- Kan du räkna ut en bråkdel av ett tal, t.ex. hur mycket $\dfrac{5}{7}$ av
+- Kan du räkna ut en bråkdel av ett tal, till exempel hur mycket $\dfrac{5}{7}$ av
   63 kr är?
 - Kan du avrunda tal enligt avrundningsregeln, och vet du skillnaden
   mellan att avrunda efter värdesiffror (multiplikation/division) och
@@ -229,7 +229,7 @@ ansiktsdel så framhävs dess rad i ordningen bredvid.
   potensekvationer med samma bas?
 - Vet du vad $a^0$ och $a^{-n}$ betyder, och kan du skriva om bråk med
   negativa exponenter?
-- Kan du tolka en rationell exponent som en rot, t.ex.
+- Kan du tolka en rationell exponent som en rot, till exempel
   $a^{1/n} = \sqrt[n]{a}$?
 - Kan du skriva tal i grundpotensform och växla mellan tiopotenser och
   prefix (t, G, M, k, d, c, m, µ, n, p)?

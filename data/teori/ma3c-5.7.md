@@ -26,8 +26,8 @@ $$
 :::
 
 Integraler kan dock användas för mer än så. Generellt kan man säga att
-**integralen står för produkten av den beroende variabeln** (t.ex. $y$ eller
-$f(x)$) **och den oberoende variabeln** (t.ex. $x$). Om vi t.ex. har ett
+**integralen står för produkten av den beroende variabeln** (till exempel $y$ eller
+$f(x)$) **och den oberoende variabeln** (till exempel $x$). Om vi till exempel har ett
 badkar som läcker vatten med en hastighet i liter per minut, som funktion av
 tiden i minuter, kan vi bestämma hur många liter vatten som har läckt ut
 efter en viss tid eftersom
@@ -90,7 +90,7 @@ $$
 $$
 
 Värdet av integralen, 3 000 000, står alltså för omsättningen i kronor
-mellan månad 0 och månad 12, dvs. under det första året.
+mellan månad 0 och månad 12, det vill säga under det första året.
 
 **Svar:** Under de 12 första månaderna (det första året) omsätter företaget
 3 000 000 kr.

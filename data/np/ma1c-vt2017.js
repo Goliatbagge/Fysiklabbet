@@ -173,7 +173,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             svar: '**a)** $12$ **b)** $x = -2$',
             bedomning: [
                 ['a) Korrekt svar: $12$', '+E'],
-                ['b) Påbörjad lösning, t.ex. multiplicerar in $4$ och $3$ i parenteserna', '+E'],
+                ['b) Påbörjad lösning, till exempel multiplicerar in $4$ och $3$ i parenteserna', '+E'],
                 ['b) Lösning med korrekt svar: $x = -2$', '+C'],
             ],
         },
@@ -450,7 +450,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             ],
             svar: '$\\sin v = \\sqrt{\\dfrac{3}{7}}$',
             bedomning: [
-                ['Påbörjad lösning, t.ex. visar hur kateternas längder och vinkeln $v$ förhåller sig, ' +
+                ['Påbörjad lösning, till exempel visar hur kateternas längder och vinkeln $v$ förhåller sig, ' +
                     'eller bestämmer hypotenusans längd', '+C'],
                 ['Lösning med korrekt svar: $\\sqrt{\\frac{3}{7}}$', '+A'],
                 ['Redovisning som är lätt att följa med tydlig koppling till triangeln', '+A'],
@@ -491,7 +491,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             ],
             svar: '$\\vec{v} = (2,\\ 2)$ — en pil 2 rutor åt höger och 2 rutor uppåt (se figuren).',
             bedomning: [
-                ['Påbörjad lösning, t.ex. ritar en vektorpolygon även om vektorn $\\vec{v}$ har fel riktning', '+A'],
+                ['Påbörjad lösning, till exempel ritar en vektorpolygon även om vektorn $\\vec{v}$ har fel riktning', '+A'],
                 ['Lösning med godtagbart svar där storlek och riktning tydligt framgår', '+A'],
             ],
         },
@@ -583,7 +583,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 {
                     del: 'IV', rubrik: 'Ta reda på hur +10 kan uppstå på två omgångar',
                     varfor: 'Den högsta poäng man kan få på en enda omgång är $+5$ (då den minsta ' +
-                        'tärningen visar $5$, dvs. utfallen $(5,6)$ och $(6,5)$). Eftersom $+5$ är taket ' +
+                        'tärningen visar $5$, det vill säga utfallen $(5,6)$ och $(6,5)$). Eftersom $+5$ är taket ' +
                         'per omgång måste $+10$ på två omgångar komma som $+5$ i varje omgång.',
                     text: 'Sannolikheten för $+5$ i en omgång: utfallen $(5,6)$ och $(6,5)$, alltså\n\n' +
                         '$$P(+5) = \\dfrac{2}{36} = \\dfrac{1}{18}$$',
@@ -720,7 +720,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             svar: '**a)** $\\approx 80{,}4\\degree$C **b)** $4\\,500$ m',
             bedomning: [
                 ['a) Godtagbart svar: $80{,}4\\degree$C eller $80\\degree$C', '+E'],
-                ['b) Påbörjad lösning, t.ex. löser ut $h$ eller ersätter $t$ med $85$ i formeln', '+E'],
+                ['b) Påbörjad lösning, till exempel löser ut $h$ eller ersätter $t$ med $85$ i formeln', '+E'],
                 ['b) Lösning med korrekt svar: $4\\,500$ m', '+C'],
             ],
         },
@@ -787,7 +787,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 ['a) Godtagbart svar i intervallet $2019$–$2022$', '+E'],
                 ['b) Tecknar en relevant kvot', '+E'],
                 ['b) Lösning med godtagbart svar ($15$–$20\\ \\%$)', '+C'],
-                ['c) Påbörjad lösning, t.ex. beräknar elevökning per år eller per 4 år', '+C'],
+                ['c) Påbörjad lösning, till exempel beräknar elevökning per år eller per 4 år', '+C'],
                 ['c) Lösning med godtagbart svar ($2027$–$2030$)', '+C'],
             ],
         },
@@ -839,7 +839,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             svar: '**a)** Golv A $6\\,900$ kr, golv B $7\\,900$ kr **b)** $K = 345x$ **c)** $80$ m²',
             bedomning: [
                 ['a) Beräkning med korrekt svar ($6\\,900$ kr och $7\\,900$ kr)', '+E'],
-                ['b) Godtagbart uttryck, t.ex. $345x$', '+E'],
+                ['b) Godtagbart uttryck, till exempel $345x$', '+E'],
                 ['b) Godtagbar algebraisk formel med definierade variabler', '+C'],
                 ['c) Prövning med korrekt svar eller påbörjad effektiv lösningsmetod', '+C'],
                 ['c) Effektiv lösningsmetod med korrekt svar: $80$ m²', '+A'],
@@ -943,7 +943,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                 ['Påbörjad lösning, bestämmer en förändringsfaktor eller ansätter ett värde för Oskars ' +
                     'vinst och beräknar Ahmeds eller Stinas vinst', '+E'],
                 ['Godtagbar lösning med korrekt svar', '+C'],
-                ['och förhållandet visas generellt (t.ex. att $x$ förkortas bort)', '+A'],
+                ['och förhållandet visas generellt (till exempel att $x$ förkortas bort)', '+A'],
             ],
         },
 
@@ -1123,7 +1123,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             bedomning: [
                 ['a) Använder upprepad procentuell förändring', '+C'],
                 ['a) Lösning med godtagbart svar ($65{,}5$–$66$ cm)', '+C'],
-                ['b) Påbörjad lösning, t.ex. ställer upp en ekvation/olikhet eller påbörjar prövning', '+C'],
+                ['b) Påbörjad lösning, till exempel ställer upp en ekvation/olikhet eller påbörjar prövning', '+C'],
                 ['b) Lösning som visar att höjden ska beräknas på 11 eller 12 avstånd mellan pinnarna', '+A'],
                 ['b) Lösning med godtagbart svar utifrån 11 avstånd mellan pinnarna ($2{,}75$ m)', '+A'],
             ],

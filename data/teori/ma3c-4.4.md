@@ -154,13 +154,13 @@ $f(x)$ växlar mellan att vara konvex och konkav (i "mungipan"). På grund
 av symmetrin ligger den alltid mitt emellan två extrempunkter.
 
 Vi har extrempunkter där $x = -1$ och $x = 1$. Alltså ligger
-inflexionspunkten mitt emellan dessa, dvs. då $x = 0$.
+inflexionspunkten mitt emellan dessa, det vill säga då $x = 0$.
 
 **Svar:** $x = 0$
 
 **b)** I inflexionspunkten är $f''(x) = 0$. Vi kan se $f''(x)$ som
 derivatan (lutningen) till $f'(x)$. Inflexionspunkten för funktionen
-$f(x)$ ges alltså av när grafen till $f'(x)$ har lutningen 0, dvs. i sin
+$f(x)$ ges alltså av när grafen till $f'(x)$ har lutningen 0, det vill säga i sin
 egen extrempunkt.
 
 Grafen till $f'(x)$ har en extrempunkt (minimum) där $x = 1$.

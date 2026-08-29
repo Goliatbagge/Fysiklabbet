@@ -37,7 +37,7 @@ där $k$ är ett heltal.
 :::
 
 ::: formel "På varandra följande tal vid bevis"
-Tal "som följer på varandra" är t.ex. 1, 2 och 3 eller 85, 86 och 87.
+Tal "som följer på varandra" är till exempel 1, 2 och 3 eller 85, 86 och 87.
 Tal som följer på varandra kan skrivas
 
 $$
@@ -47,7 +47,7 @@ $$
 
 ::: exempel "Exempel 1 — Yttervinkelsatsen"
 **Betrakta nedanstående figur. Yttervinkelsatsen lyder: "Yttervinkeln
-$x$ är lika med summan av de två motstående vinklarna $a$ och $c$, dvs.
+$x$ är lika med summan av de två motstående vinklarna $a$ och $c$, det vill säga
 $x = a + c$." Bevisa att yttervinkelsatsen gäller.**
 
 ::: figur

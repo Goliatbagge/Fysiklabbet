@@ -18,12 +18,12 @@ dividerat med antalet. Lämpligt att använda i de flesta fall.
 
 **Median:** Värdet i mitten när de står i storleksordning. Om två
 värden är i mitten är medianen medelvärdet av dessa. Lämpligt vid sned
-fördelning, dvs. när enstaka värden sticker ut.
+fördelning, det vill säga när enstaka värden sticker ut.
 
 **Typvärde:** Det värde som förekommer flest gånger. Kan användas även
-när datamängden inte är tal, t.ex. färger eller bilmärken.
+när datamängden inte är tal, till exempel färger eller bilmärken.
 
-Antalet av ett visst värde kallas **frekvens**. Om t.ex. antalet
+Antalet av ett visst värde kallas **frekvens**. Om till exempel antalet
 17-åringar i ett klassrum är 12 är 17-åringarnas frekvens 12.
 
 ::: exempel "Exempel 1 — Tre lägesmått"
@@ -38,7 +38,7 @@ $$
 
 **Svar:** 23 år
 
-**b)** Vi sorterar åldrarna i storleksordning, t.ex. minst först, och
+**b)** Vi sorterar åldrarna i storleksordning, till exempel minst först, och
 läser av talet i mitten:
 
 $$
@@ -73,7 +73,7 @@ i så kallade **klasser**. Sådana klasser kan redovisas antingen i
 tabellform eller i diagramform som ett **histogram** med
 sammanhängande staplar. I dessa fall räknar man med att alla värden i
 en klass har värdet i mitten av intervallet, vilket kallas
-**klassmitt**. Klassen $300 \leq x < 400$ har t.ex. klassmitten 350.
+**klassmitt**. Klassen $300 \leq x < 400$ har till exempel klassmitten 350.
 
 ::: exempel "Exempel 3 — Medelvärde ur klassindelat material"
 **Åldern hos personerna i ett rum åskådliggörs i en tabell med

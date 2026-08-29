@@ -30,7 +30,7 @@ $$
 ::: härledning "Härledning — Integralkalkylens fundamentalsats"
 Tankesätt: om vi har en funktion $F(x)$ vars förändring vi vill undersöka
 från $x = a$ till $x = b$ kan detta skrivas som "slutvärde" = "startvärde"
-+ "summan av alla förändringar i $y$-led", dvs.
++ "summan av alla förändringar i $y$-led", det vill säga
 
 $$
 F(b) = F(a) + \int_a^b F'(x)\, dx

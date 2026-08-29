@@ -65,7 +65,7 @@ Så $f(x) = x^2$ har derivatan $f'(x) = 2x$.
 Vi undersöker vad derivatan blir för funktioner med en koefficient framför
 potensen. Det visar sig att samma mönster gäller fortfarande! Vi
 multiplicerar ned exponenten till koefficienten framför, samtidigt som vi
-minskar exponenten med 1, dvs.
+minskar exponenten med 1, det vill säga
 
 $$
 f(x) = 3x^2 \quad\Rightarrow\quad f'(x) = 2 \cdot 3x^{2-1} = 6x
@@ -113,7 +113,7 @@ $$
 
 ## Derivatan av konstanta funktioner
 
-Till sist undersöker vi vad derivatan blir av konstanta funktioner, dvs.
+Till sist undersöker vi vad derivatan blir av konstanta funktioner, det vill säga
 funktioner utan någon $x$-term alls.
 
 ::: formel "Derivatan av $f(x) = a$"

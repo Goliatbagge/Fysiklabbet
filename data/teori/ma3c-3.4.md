@@ -9,7 +9,7 @@ section: '3.4'
 
 # Derivatan av eˣ
 
-En funktion där variabeln, t.ex. $x$, sitter i exponenten kallas en
+En funktion där variabeln, till exempel $x$, sitter i exponenten kallas en
 **exponentialfunktion** — till exempel $f(x) = 2^x$ eller mer allmänt
 $f(x) = a^x$. I det här avsnittet undersöker vi derivatan av den allmänna
 exponentialfunktionen $f(x) = a^x$ med hjälp av derivatans definition, och
@@ -156,7 +156,7 @@ $$
 f'(x) = 3e^x
 $$
 
-**c)** Kom ihåg att $e$ är ett tal, dvs. en konstant. Deriverar vi den som
+**c)** Kom ihåg att $e$ är ett tal, det vill säga en konstant. Deriverar vi den som
 en egen term blir den 0. I övrigt deriverar vi term för term precis som
 tidigare:
 

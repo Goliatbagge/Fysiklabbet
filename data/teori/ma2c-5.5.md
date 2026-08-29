@@ -12,7 +12,7 @@ section: '5.5'
 Kom ihåg 1:
 
 ::: tips "Modell vid exponentiell förändring"
-Vid tillämpningar där något förändras exponentiellt eller t.ex. med en
+Vid tillämpningar där något förändras exponentiellt eller till exempel med en
 viss procent varje år ställer vi upp en modell på formen
 
 $$

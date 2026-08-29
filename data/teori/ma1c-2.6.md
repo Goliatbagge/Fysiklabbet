@@ -12,7 +12,7 @@ section: '2.6'
 Om vi har variabler på båda sidor om likhetstecknet, så samla dem på ena
 sidan och lös sedan ekvationen som vanligt. Enklast brukar det bli genom
 att ta bort variabeltermen från den sida där som har *minst* koefficient.
-Om en ekvation leder till en motsägelse, t.ex. $1 = 2$, så betyder det att
+Om en ekvation leder till en motsägelse, till exempel $1 = 2$, så betyder det att
 ekvationen **saknar lösning**.
 
 ::: exempel "Exempel 1 — Variabler i båda led"

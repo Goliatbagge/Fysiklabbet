@@ -59,12 +59,12 @@ I det här fallet är det dock svårt.
 
 **Svar:** Att det inte regnar.
 
-**b)** Komplementhändelsen är "att inte dra ett hjärter", dvs. att dra
+**b)** Komplementhändelsen är "att inte dra ett hjärter", det vill säga att dra
 ett spader, klöver eller ruter.
 
 **Svar:** Att dra ett spader, klöver eller ruter.
 
-**c)** Komplementhändelsen är "att inte slå minst en femma", dvs. att slå
+**c)** Komplementhändelsen är "att inte slå minst en femma", det vill säga att slå
 1, 2, 3 eller 4. Detta kan vi uttrycka som "att slå högst en fyra".
 
 **Svar:** Att slå högst en fyra.

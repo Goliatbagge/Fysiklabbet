@@ -15,9 +15,9 @@ kurvans utseende.
 ::: härledning "Kom ihåg — Andraderivatan och konkavitet"
 Om
 
-- $f''(a) > 0$ är kurvan **konvex**, dvs. den "böjer av uppåt" (är en
+- $f''(a) > 0$ är kurvan **konvex**, det vill säga den "böjer av uppåt" (är en
   "glad mun") där $x = a$,
-- $f''(a) < 0$ är kurvan **konkav**, dvs. den "böjer av nedåt" (är en
+- $f''(a) < 0$ är kurvan **konkav**, det vill säga den "böjer av nedåt" (är en
   "sur mun") där $x = a$,
 - $f''(a) = 0$ har vi en **inflexionspunkt** (övergången mellan konvex och
   konkav) där $x = a$.

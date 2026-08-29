@@ -22,8 +22,8 @@ hjälp av grafritande hjälpmedel som Geogebra.
 ## Begrepp att kunna
 
 - **andragradsfunktion**: en funktion där variabelns högsta exponent
-  är 2, t.ex. $f(x) = ax^2 + bx + c$.
-- **andragradsterm**: termen med $x^2$ i funktionsuttrycket, t.ex.
+  är 2, till exempel $f(x) = ax^2 + bx + c$.
+- **andragradsterm**: termen med $x^2$ i funktionsuttrycket, till exempel
   $x^2$ eller $3x^2$; tecknet på termen avgör parabelns form.
 - **parabel**: den bågformade grafen till en andragradsfunktion.
 - **maximipunkt**: parabelns "topp", där funktionen har sitt största
@@ -107,7 +107,7 @@ också är funktionens största eller minsta värde.
 
 ## Viktiga samband och metoder
 
-- Tecknet på andragradstermen avgör kurvans form: positiv (t.ex.
+- Tecknet på andragradstermen avgör kurvans form: positiv (till exempel
   $x^2$) ger en minimipunkt ("glad mun"), negativ ger en maximipunkt
   ("sur mun").
 - En andragradsfunktion kan ha två nollställen (grafen skär
@@ -135,12 +135,12 @@ också är funktionens största eller minsta värde.
 - Olikheterna $f(x) < g(x)$ respektive $f(x) > g(x)$ löses genom att
   först ta fram skärningspunkterna mellan graferna och sedan avgöra
   var den ena grafen ligger under respektive över den andra.
-- Vid problemlösning (banor, areor m.m.) tecknas först en funktion som
+- Vid problemlösning (banor, areor med mera) tecknas först en funktion som
   modellerar situationen, och Geogebra-verktygen *Extrempunkt*,
   *Nollställen* och *Skärning mellan två objekt* används för att
   besvara frågan direkt ur grafen.
 - Vid modellering är det ofta smart att lägga koordinatsystemet så att
-  ett känt värde (t.ex. ett nollställe) hamnar i origo — det
+  ett känt värde (till exempel ett nollställe) hamnar i origo — det
   förenklar de fortsatta uträkningarna.
 
 ## Figurer värda att minnas
@@ -177,6 +177,6 @@ lösningar till $f(x) = 0$ visas.
   leden och läsa av skärningspunkterna?
 - Kan du avgöra vilket olikhetstecken som gäller genom att se om en
   graf ligger över eller under en annan?
-- Kan du modellera en verklig situation (t.ex. en projektilbana eller
+- Kan du modellera en verklig situation (till exempel en projektilbana eller
   en area som ska maximeras) med en andragradsfunktion och lösa
   problemet med hjälp av Geogebras verktyg?

@@ -47,7 +47,7 @@ a) Beräkna felmarginalen.<br>
 b) Beräkna konfidensintervallet.<br>
 c) Undersökningen upprepades efter tre år. Av 100 tillfrågade svarade då
 52 att de har matematik som favoritämne. Är förändringen statistiskt
-säkerställd, dvs. är det säkert att det har skett en minskning av andelen
+säkerställd, det vill säga är det säkert att det har skett en minskning av andelen
 som har matematik som favoritämne?**
 
 ::: handskrift
@@ -77,7 +77,7 @@ $$
 **Svar:** 9,6 %
 
 **b)** Konfidensintervallet fås genom att ta resultatet ± felmarginalen,
-dvs. $60\ \% \pm 9{,}6\ \%$:
+det vill säga $60\ \% \pm 9{,}6\ \%$:
 
 $$
 \left[\begin{array}{l}

@@ -26,7 +26,7 @@ $x = 7$.
 3. Sätt exponenterna lika och lös ekvationen.
 :::
 
-En ekvation där variabeln finns i logaritmen, t.ex. $\lg x = 3$, kallas
+En ekvation där variabeln finns i logaritmen, till exempel $\lg x = 3$, kallas
 **logaritmekvation**. Dessa löser vi enklast genom att skriva om
 ekvationen från logaritmform till potensform och sedan lösa ekvationen
 enligt tidigare metoder.

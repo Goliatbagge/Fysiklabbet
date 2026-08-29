@@ -29,7 +29,7 @@ sätta in tre valfria punkter på grafen i detta funktionsuttryck kan vi
 bilda ett ekvationssystem med tre obekanta och tre ekvationer. Då kan
 vi bestämma konstanterna $a$, $b$ och $c$ och därefter bestämma
 funktionen. Denna metod är ofta krängligare räknemässigt, men fungerar
-alltid, även om t.ex. nollställena är okända.
+alltid, även om till exempel nollställena är okända.
 :::
 
 ::: exempel "Exempel 1 — Nollställen och en punkt"
@@ -48,7 +48,7 @@ $$
 f(x) = k(x - (-1))(x - 3) = k(x + 1)(x - 3) \qquad (1)
 $$
 
-Vi sätter in punkten (1, −8), dvs. $x = 1$ och $f(x) = -8$, i (1) för
+Vi sätter in punkten (1, −8), det vill säga $x = 1$ och $f(x) = -8$, i (1) för
 att bestämma $k$:
 
 $$
@@ -164,7 +164,7 @@ strålens bana. (Np Ma2c vt 2013)**
 Vi gör en skiss och lägger in parabeln i ett koordinatsystem. Det kan
 göras på olika sätt, men vi väljer att lägga in den med start i origo.
 Vi inser att vi då får nollställen vid $x = 0$ och $x = 2{,}3$.
-Maximipunkten måste ligga mitt emellan dessa, dvs. vid
+Maximipunkten måste ligga mitt emellan dessa, det vill säga vid
 $x = \dfrac{0 + 2{,}3}{2} = 1{,}15$ och med $y = 3{,}1$. Vi markerar
 dessa tre punkter med koordinater.
 
@@ -183,7 +183,7 @@ $$
 f(x) = kx(x - 2{,}3) \qquad (1)
 $$
 
-Vi sätter in punkten (1,15; 3,1), dvs. $x = 1{,}15$ och
+Vi sätter in punkten (1,15; 3,1), det vill säga $x = 1{,}15$ och
 $f(x) = 3{,}1$, i (1) för att bestämma $k$:
 
 $$

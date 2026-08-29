@@ -41,12 +41,12 @@ grafiskt och algebraiskt.
   löses ut ur en ekvation och byts ut (substitueras) i den andra.
 - **additionsmetoden**: algebraisk lösningsmetod där ekvationerna
   adderas ledvis så att en variabel elimineras.
-- **eliminera en variabel**: få en variabels term att försvinna, t.ex.
+- **eliminera en variabel**: få en variabels term att försvinna, till exempel
   genom att addera två ekvationer där termen har olika tecken framför
   sig.
 - **ledvis addition**: att addera två ekvationer term för term,
   vänsterled för sig och högerled för sig.
-- **koefficient**: talet framför en variabel i en term, t.ex. 5 i
+- **koefficient**: talet framför en variabel i en term, till exempel 5 i
   termen $5x$.
 - **etikettering av ekvationer**: att numrera ekvationerna (1), (2),
   (3) … för att kunna hänvisa till dem i lösningen.
@@ -108,7 +108,7 @@ $m_2$ är linjernas skärningar med *y*-axeln (*m*-värden).
   utan att rita något kan du avgöra om systemet har en, ingen eller
   oändligt många lösningar.
 - Substitutionsmetoden passar bäst när en variabel redan står ensam i
-  ena ledet, eller är enkel att lösa ut (t.ex. utan koefficient eller
+  ena ledet, eller är enkel att lösa ut (till exempel utan koefficient eller
   minustecken framför).
 - Additionsmetoden passar bäst när samma variabelterm redan finns i
   båda ekvationerna med olika tecken, eller enkelt kan göras det genom
@@ -163,7 +163,7 @@ Peka eller tryck på ett fall så visas vilka $k$- och $m$-värden som ger det.
 - Kan du sätta in din lösning i en av de ursprungliga ekvationerna för
   att bestämma den andra variabeln?
 - Kan du ställa upp ett eget ekvationssystem utifrån en textuppgift med
-  två okända, t.ex. kor och höns eller summan och differensen av två
+  två okända, till exempel kor och höns eller summan och differensen av två
   tal?
 - Avslutar du problemlösningsuppgifter med att tolka svaret i ord, inte
   bara med siffror?

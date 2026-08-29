@@ -16,7 +16,7 @@ något annat. Implikation skrivs med symbolen ⟹ och utläses "implicerar"
 eller "medför att".
 
 Ett logiskt förhållande där implikationen även gäller åt andra hållet,
-dvs. om påstående 2 är sant och det medför att påstående 1 också
+det vill säga om påstående 2 är sant och det medför att påstående 1 också
 **måste** vara sant, kallas **ekvivalens**. Ekvivalens skrivs med
 symbolen ⟺ och utläses "är ekvivalent med".
 

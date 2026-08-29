@@ -587,9 +587,10 @@
                 this.ema = { fly: 0, air: 0, leak: 0, dev: 0 };
                 // vågfiltret startar i jämvikt
                 this.scaleX = this.Nref; this.scaleV = 0;
-                // Enkelt läge: vågen är nollställd med bägare och luft, så
-                // att displayen visar BARA flugans bidrag (i milligram)
-                if (this.cfg.enkel) this.cfg.tareG = (M_BEAKER + this.mAir) * 1000;
+                // Vågen är nollställd med bägare och luft (i båda lägena),
+                // så att displayen visar BARA flugans bidrag — i milligram i
+                // enkelt läge, i gram med fyra decimaler i avancerat
+                this.cfg.tareG = (M_BEAKER + this.mAir) * 1000;
                 this.lcdG = this.scaleX / G_ACC * 1000;
                 this.lcdT = 0;
                 this.samples = [];       // { t, devI, devS } i µN
@@ -623,29 +624,22 @@
             // ── Infångningsfaktor: hur stor andel av nedsvepet som
             //    hamnar på vågen. Inne i bägaren under mynningen: beror på
             //    djupet (strålen sprider sig med ungefär bägardiameterns
-            //    skala; med lock fångas allt). Ovanför mynningen eller
-            //    utanför väggarna: det som träffar bägarens utsida eller
-            //    vågplattan räknas, det som går ner i mynningen sprids ut
-            //    med återströmningen (etablerat: vid mynningen tappar
-            //    vågen flugan) och det som landar på bänken går förlorat. ──
+            //    skala; med lock fångas allt — även när flugan hovrar
+            //    OVANFÖR locket, för då träffar nedsvepet lockets ovansida
+            //    som ju står på vågen). Utanför bägaren i sidled: NOLL.
+            //    Luften som träffar glasets utsida trycker i sidled
+            //    (vinkelrätt mot väggen), inte nedåt, så den ger inget
+            //    utslag — en medveten förenkling som också hoppar över den
+            //    smala vågplatteremsan utanför glaset (påpekat 2026-08-29:
+            //    ett kvarvarande utslag där förvirrar mer än det lär). ──
             captureF() {
                 const ax = Math.abs(this.x);
                 const R = D_BEAKER / 2;
-                if (ax < R && this.z < this.H) {
-                    if (this.cfg.lid) return 1;
-                    const d = this.H - this.z;           // djup under mynningen
-                    if (d <= 0) return 0;
-                    return smoother(d / (0.55 * D_BEAKER));
-                }
-                // strålens fotavtryck (bredd växer med fallhöjden) mot
-                // vågens ring [bägarväggen … plattans kant] på båda sidor
-                const h = Math.max(this.z - this.floorZof(this.x), 0.005);
-                const w = 0.008 + 0.35 * h;
-                const lo = ax - w, hi = ax + w;
-                const ringLo = R + 0.002, ringHi = 0.062;
-                const seg = (a, b) => Math.max(0, Math.min(hi, b) - Math.max(lo, a));
-                const caught = seg(ringLo, ringHi) + seg(-ringHi, -ringLo);
-                return clamp(caught / (2 * w), 0, 1);
+                if (ax >= R) return 0;               // utanför bägaren i sidled
+                if (this.cfg.lid) return 1;          // slutet kärl (eller ovanpå locket)
+                const d = this.H - this.z;           // djup under mynningen
+                if (d <= 0) return 0;                // i/ovanför den öppna mynningen
+                return smoother(d / (0.55 * D_BEAKER));
             }
 
             // ── Förloppens tillståndsmaskin → önskad lyftkraft ──
@@ -1026,9 +1020,17 @@
                             q.vx = dir * Math.abs(q.vx || 120);
                         }
                     }
-                    // träffar bänken eller vågen → sprids i sidled
+                    // träffar bänken eller vågen → sprids i sidled, men
+                    // väggstrålen BROMSAS in och tonar bort i stället för
+                    // att skjuta iväg som ett rakt streck
                     const floorY = (q.x > CX - 160 && q.x < CX + 160) ? PLAT_Y : BENCH_Y;
-                    if (q.y > floorY - 4) { q.y = floorY - 4; q.vy = 0; }
+                    if (q.y > floorY - 4) {
+                        q.y = floorY - 4;
+                        q.vy = 0;
+                        q.vx *= Math.exp(-dtVis * 3.5);
+                        q.vx += (Math.random() - 0.5) * 40 * dtVis;
+                        q.life -= dtVis * 1.6;
+                    }
                     q.life -= dtVis;
                 }
                 this.outParts = this.outParts.filter(q => q.life > 0 && q.x > 0 && q.x < VB_W);
@@ -1057,7 +1059,7 @@
                 if (now - this._readoutLast > 120 && this.onReadout) {
                     this._readoutLast = now;
                     this.onReadout({
-                        grams: this.scaleOn ? this.lcdG : null,
+                        grams: this.scaleOn ? this.lcdG - this.cfg.tareG : null,
                         devuN: this.ema.dev,
                         FcuN: this.FcScale * 1e6,
                         airuN: (this.pAir / this.tau) * 1e6,
@@ -1227,10 +1229,7 @@
                 ctx.textAlign = 'left';
                 ctx.fillStyle = stable ? '#93ecab' : 'rgba(147,236,171,0.35)';
                 ctx.fillText(stable ? '● stabil' : '○', 444, 526);
-                if (this.cfg.tareG !== 0 && !this.cfg.enkel) {
-                    ctx.fillStyle = '#93ecab';
-                    ctx.fillText('NOLL', 444, 560);
-                }
+
                 ctx.fillStyle = 'rgba(147,236,171,0.65)';
                 ctx.textAlign = 'right';
                 ctx.fillText('VÅG 0,1 mg', 604, 526);
@@ -1913,6 +1912,13 @@
                     // locket blockerar mynningen utifrån — men det går att
                     // landa ovanpå det
                     if (this.cfg.lid && Math.abs(xT) < R && zT < this.H + 0.004) zT = this.H + 0.004;
+                    // pekar man på ANDRA sidan av glaset ruttas flugan över
+                    // kanten: håll den på mynningshöjd tills den korsat —
+                    // annars fastnar den mot väggen när den hinner sjunka
+                    // under kanten innan den hunnit över (dra snett nedåt)
+                    const flyInside = Math.abs(this.x) < R;
+                    const targetInside = Math.abs(xT) < R;
+                    if (flyInside !== targetInside && zT < this.H + 0.006) zT = this.H + 0.008;
                     zT = clamp(zT, this.floorZof(xT) + 0.002, this.H + 0.055);
                 }
                 this.dragTarget = zT;
@@ -2032,7 +2038,7 @@
                 const sim = simRef.current;
                 if (!sim) return;
                 sim.cfg.enkel = enkel;
-                sim.cfg.tareG = enkel ? (M_BEAKER + sim.mAir) * 1000 : 0;
+                sim.cfg.tareG = (M_BEAKER + sim.mAir) * 1000;
                 if (enkel && mode === 'gissa') setMode('utforska');
             }, [enkel]);
 
@@ -2407,6 +2413,10 @@
                                                     </button>
                                                     <button type="button" className="st-btn" onClick={() => runScenario('sitter')}>Börja om</button>
                                                 </div>
+                                                <label style={{ marginTop: 6 }}>
+                                                    <input type="checkbox" checked={lid} onChange={(e) => setLid(e.target.checked)} />
+                                                    <span>Lock på bägaren</span>
+                                                </label>
                                             </React.Fragment>
                                         ) : (
                                             <React.Fragment>
@@ -2606,6 +2616,11 @@
                                         <button type="button" className="guess-btn" onClick={() => { simRef.current?.landNow(); simRef.current?.resumeAudio(); }}>Landa</button>
                                         <button type="button" className="guess-btn" onClick={() => runScenario('sitter')}>Börja om</button>
                                     </div>
+                                    <label className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                                        <input type="checkbox" checked={lid} onChange={(e) => setLid(e.target.checked)}
+                                            style={{ width: 15, height: 15, accentColor: 'var(--lab-accent, #c8324a)' }} />
+                                        <span>Lock på bägaren</span>
+                                    </label>
                                     <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)', lineHeight: 1.55 }}>
                                         Du kan också ta tag i flugan och dra den vart du vill:
                                         högre upp, ut över kanten och bort till bänken. Så länge den

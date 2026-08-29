@@ -406,7 +406,7 @@
                     massMg: 12, rho: RHO0, hoverH: 0.06, beakerH: 0.12,
                     lid: false, speedIdx: 0,
                     showAir: true, showPressure: true, boundary: 'ingen',
-                    paused: false, tareG: 0, sound: true,
+                    paused: false, tareG: 0, sound: true, enkel: true,
                 };
                 this.onReadout = null;
                 this.scaleOn = true;      // vågens ON/OFF-knapp
@@ -415,7 +415,7 @@
                 this.dragTarget = null;      // manuell hovringshöjd vid dragning
                 this.trail = [];             // skärmpositioner för rörelseoskärpa
                 this.initParticles();
-                this.reset('hovrar');
+                this.reset('sitter');
                 this._raf = null;
                 this._last = performance.now();
                 this._readoutLast = 0;
@@ -587,6 +587,9 @@
                 this.ema = { fly: 0, air: 0, leak: 0, dev: 0 };
                 // vågfiltret startar i jämvikt
                 this.scaleX = this.Nref; this.scaleV = 0;
+                // Enkelt läge: vågen är nollställd med bägare och luft, så
+                // att displayen visar BARA flugans bidrag (i milligram)
+                if (this.cfg.enkel) this.cfg.tareG = (M_BEAKER + this.mAir) * 1000;
                 this.lcdG = this.scaleX / G_ACC * 1000;
                 this.lcdT = 0;
                 this.samples = [];       // { t, devI, devS } i µN
@@ -594,6 +597,12 @@
             }
 
             startScenario(id) { this.reset(id); }
+
+            // Flyg hem-ish: gå in i den generiska landningsfasen där flugan är
+            landNow() {
+                if (this.scenario.id === 'sitter') return;   // sitter redan
+                this.phase = 'landa'; this.phaseT = 0;
+            }
 
             tare() { if (this.scaleOn) this.cfg.tareG = this.lcdG; }
 
@@ -757,8 +766,11 @@
                     case 'topphovring':
                         return hoverTo(topZ());
                     case 'landa': {
-                        if (this.z <= 0.003 && this.vz > -0.02) { next('klar'); this.done = true; }
-                        return hoverTo(0.001, 60, 20);
+                        // landa där flugan är — golvet kan vara bägarbotten,
+                        // vågplattan eller bänken
+                        const fl = this.floorZof(this.x);
+                        if (this.z <= fl + 0.003 && this.vz > -0.02) { next('klar'); this.done = true; }
+                        return hoverTo(fl + 0.001, 60, 20);
                     }
                     case 'klar':
                         return 0;
@@ -809,7 +821,7 @@
                 const zLid = this.H - 0.006;
                 if (this.cfg.lid && insideNow && this.z >= zLid && this.z < this.H) {
                     // locket trycker nedåt på flugan — och flugan uppåt på locket,
-                    // dvs. kraften går in i bägaren med omvänt tecken
+                    // det vill säga kraften går in i bägaren med omvänt tecken
                     Fc = -Math.max(0, K_CONTACT * (this.z - zLid) + C_CONTACT * this.vz);
                 }
                 this.Fc = Fc;
@@ -1038,7 +1050,7 @@
                     if (steps > 1500) { steps = 1500; this._acc = 0; }
                     else this._acc -= steps * DT;
                     for (let i = 0; i < steps; i++) this.step();
-                    if (this.cfg.showAir) this.stepParticles(adv);
+                    if (this.cfg.enkel || this.cfg.showAir) this.stepParticles(adv);
                 }
                 this.updateAudio();
                 this.draw(dtReal);
@@ -1081,21 +1093,29 @@
                 ctx.fillRect(0, 0, c.width, c.height);
                 ctx.setTransform(S, 0, 0, S, ox, oy);
 
+                // Enkelt läge skalar av instrumenteringen: ingen graf,
+                // ingen tryckremsa, ingen systemgräns — i stället en stor
+                // klartext-avläsning (drawSimplePanel). Fysiken är identisk.
+                const enkel = this.cfg.enkel;
                 this.drawPaperGrid(ctx);
                 this.drawBench(ctx);
                 this.drawScaleBody(ctx);
                 this.drawBeakerBack(ctx);
-                if (this.cfg.showPressure) this.drawPressure(ctx);
-                if (this.cfg.showAir) this.drawParticles(ctx);
+                if (!enkel && this.cfg.showPressure) this.drawPressure(ctx);
+                if (enkel || this.cfg.showAir) this.drawParticles(ctx);
                 this.drawFly(ctx, dtReal);
                 this.drawBeakerFront(ctx);
                 if (this.cfg.lid) this.drawLid(ctx);
-                if (this.cfg.showAir) this.drawOutParticles(ctx);
+                if (enkel || this.cfg.showAir) this.drawOutParticles(ctx);
                 this.drawLeakArrows(ctx);
                 this.drawLCD(ctx);
-                this.drawGraph(ctx);
-                this.drawStatus(ctx);
-                this.drawBoundary(ctx);
+                if (enkel) {
+                    this.drawSimplePanel(ctx);
+                } else {
+                    this.drawGraph(ctx);
+                    this.drawStatus(ctx);
+                    this.drawBoundary(ctx);
+                }
             }
 
             drawPaperGrid(ctx) {
@@ -1181,22 +1201,33 @@
                 this.roundRect(ctx, 438, 514, 172, 52, 4);
                 ctx.fill(); ctx.stroke();
                 if (!this.scaleOn) return;   // avstängd våg: släckt display
-                const gShown = this.lcdG - this.cfg.tareG;
-                let txt = gShown.toFixed(4).replace('.', ',').replace('-', '−');
-                if (parseFloat(gShown.toFixed(4)) === 0) txt = '0,0000';
+                // Enkelt läge: nollställd våg som visar flugans bidrag i
+                // MILLIGRAM med en decimal — lätt att läsa, inget sifferbrus
+                let txt, unit;
+                if (this.cfg.enkel) {
+                    const mgv = (this.lcdG - this.cfg.tareG) * 1000;
+                    txt = mgv.toFixed(1).replace('.', ',').replace('-', '−');
+                    if (parseFloat(mgv.toFixed(1)) === 0) txt = '0,0';
+                    unit = 'mg';
+                } else {
+                    const gShown = this.lcdG - this.cfg.tareG;
+                    txt = gShown.toFixed(4).replace('.', ',').replace('-', '−');
+                    if (parseFloat(gShown.toFixed(4)) === 0) txt = '0,0000';
+                    unit = 'g';
+                }
                 ctx.fillStyle = '#93ecab';
                 ctx.font = '500 23px "JetBrains Mono", monospace';
                 ctx.textAlign = 'right';
                 ctx.fillText(txt, 578, 548);
                 ctx.font = '500 12px "JetBrains Mono", monospace';
-                ctx.fillText('g', 598, 548);
+                ctx.fillText(unit, 600, 548);
                 // stabilitetsindikator + tara-markör
                 const stable = Math.abs(this.scaleV) < 2e-4;
                 ctx.font = '500 9px "JetBrains Mono", monospace';
                 ctx.textAlign = 'left';
                 ctx.fillStyle = stable ? '#93ecab' : 'rgba(147,236,171,0.35)';
                 ctx.fillText(stable ? '● stabil' : '○', 444, 526);
-                if (this.cfg.tareG !== 0) {
+                if (this.cfg.tareG !== 0 && !this.cfg.enkel) {
                     ctx.fillStyle = '#93ecab';
                     ctx.fillText('NOLL', 444, 560);
                 }
@@ -1366,11 +1397,13 @@
                     ctx.closePath();
                     ctx.fill();
                 }
-                ctx.fillStyle = INK_MUTED;
-                ctx.font = '400 10.5px Poppins, sans-serif';
-                ctx.textAlign = 'right';
-                ctx.fillText('läckage ' + formatNum((1 - this.f) * 100, 0) + ' %', CX - D_BEAKER / 2 * PX - WALL - 8, g.rimY - 18);
-                ctx.textAlign = 'left';
+                if (!this.cfg.enkel) {
+                    ctx.fillStyle = INK_MUTED;
+                    ctx.font = '400 10.5px Poppins, sans-serif';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('läckage ' + formatNum((1 - this.f) * 100, 0) + ' %', CX - D_BEAKER / 2 * PX - WALL - 8, g.rimY - 18);
+                    ctx.textAlign = 'left';
+                }
             }
 
             // ── Flugan ──
@@ -1585,6 +1618,89 @@
                 ctx.fillText(!this.scaleOn ? 'vågen avstängd' : 'vågen visar', px0 + 100, gy + gh - 5);
                 ctx.textAlign = 'right';
                 ctx.fillText('fönster ' + fmtSmart(W, 2) + ' s', px1, gy + gh - 5);
+            }
+
+            // ── Enkelt läge: stor avläsning + klartext i grafens ställe ──
+            wrapText(ctx, text, x, y, maxW, lh) {
+                const words = text.split(' ');
+                let line = '', yy = y;
+                for (const w of words) {
+                    const t = line ? line + ' ' + w : w;
+                    if (ctx.measureText(t).width > maxW && line) {
+                        ctx.fillText(line, x, yy); line = w; yy += lh;
+                    } else line = t;
+                }
+                if (line) { ctx.fillText(line, x, yy); yy += lh; }
+                return yy;
+            }
+
+            simpleStatus() {
+                const mg = this.m * G_ACC;
+                const flying = this.Tcmd > 0.3 * mg && this.cfg.rho > 0.3;
+                const inside = Math.abs(this.x) < D_BEAKER / 2 && this.z < this.H;
+                const grounded = !flying && this.z <= this.floorZof(this.x) + 0.002;
+                if (this.dragTarget !== null) return { head: 'Du styr flugan.',
+                    body: 'Släpp den där du vill att den ska hovra: inne i bägaren, ovanför kanten eller utanför.', ok: true };
+                if (grounded) {
+                    if (!this.onScale(this.x)) return { head: 'Flugan sitter på bänken.',
+                        body: 'Utanför vågen: utslaget har sjunkit med hela flugans tyngd.', ok: false };
+                    if (inside) return { head: 'Flugan sitter på botten.',
+                        body: 'Vågen visar flugans tyngd.', ok: true };
+                    return { head: 'Flugan sitter på vågen.',
+                        body: 'Samma utslag som nere i bägaren: den står fortfarande på vågen.', ok: true };
+                }
+                if (flying) {
+                    if (this.f > 0.85) return { head: 'Flyger. Ingen skillnad i utslag!',
+                        body: 'Vingarna trycker ner luften, och luften för tyngden vidare ner i bägaren.', ok: true };
+                    if (this.f > 0.15) return { head: 'På väg ut ur bägaren.',
+                        body: 'En del av luftströmmen missar nu bägaren, och utslaget sjunker.', ok: false };
+                    return { head: 'Utanför bägaren.',
+                        body: 'Nedsvepet hamnar på bänken i stället. Vågen känner inte flugan längre.', ok: false };
+                }
+                return { head: 'Flugan faller.',
+                    body: 'Utan lyftkraft når ingen tyngd vågen förrän den landar.', ok: false };
+            }
+
+            drawSimplePanel(ctx) {
+                const px = 20, py = 96, pw = 310;
+                ctx.textAlign = 'left';
+                const st = this.simpleStatus();
+                ctx.font = '400 12.5px Poppins, sans-serif';
+                const bodyLines = Math.max(1, Math.ceil(ctx.measureText(st.body).width / (pw - 28)));
+                const ph = 118 + 20 + bodyLines * 17 + 26;
+                ctx.fillStyle = 'rgba(246,242,234,0.9)';
+                ctx.strokeStyle = 'rgba(15,22,32,0.28)';
+                ctx.lineWidth = 1.2;
+                this.roundRect(ctx, px, py, pw, ph, 6);
+                ctx.fill(); ctx.stroke();
+                ctx.fillStyle = INK_SOFT;
+                ctx.font = '600 11px Poppins, sans-serif';
+                ctx.fillText('VÅGEN VISAR', px + 14, py + 24);
+                let big = '— —';
+                if (this.scaleOn) {
+                    const mgv = (this.lcdG - this.cfg.tareG) * 1000;
+                    big = mgv.toFixed(1).replace('.', ',').replace('-', '−');
+                    if (parseFloat(mgv.toFixed(1)) === 0) big = '0,0';
+                }
+                ctx.font = '500 38px "JetBrains Mono", monospace';
+                ctx.fillStyle = INK;
+                ctx.fillText(big, px + 14, py + 64);
+                const bw = ctx.measureText(big).width;
+                ctx.font = '500 17px "JetBrains Mono", monospace';
+                ctx.fillStyle = INK_SOFT;
+                if (this.scaleOn) ctx.fillText('mg', px + 22 + bw, py + 64);
+                ctx.font = '400 11px Poppins, sans-serif';
+                ctx.fillStyle = INK_MUTED;
+                ctx.fillText('nollställd våg: bara flugans bidrag syns', px + 14, py + 82);
+                ctx.font = '600 14.5px Poppins, sans-serif';
+                ctx.fillStyle = st.ok ? '#2d6a3e' : COL_ACCENT;
+                let yy = this.wrapText(ctx, st.head, px + 14, py + 108, pw - 28, 19);
+                ctx.font = '400 12.5px Poppins, sans-serif';
+                ctx.fillStyle = INK_SOFT;
+                yy = this.wrapText(ctx, st.body, px + 14, yy + 4, pw - 28, 17);
+                ctx.font = '400 11px Poppins, sans-serif';
+                ctx.fillStyle = INK_MUTED;
+                ctx.fillText('Dra i flugan eller använd knapparna.', px + 14, py + ph - 12);
             }
 
             drawStatus(ctx) {
@@ -1810,6 +1926,10 @@
                 // sidledsmålet xT ligger kvar så att den inte glider tillbaka
                 if (this.dragTarget !== null && this.dragTarget > this.floorZof(this.xT) + 0.006) {
                     this.cfg.hoverH = clamp(this.dragTarget, 0.01, this.H + 0.05);
+                    // släpps flugan i luften ska den hovra — även om förloppet
+                    // var 'sitter' eller redan klart (annars faller den bara)
+                    this.scenario = SCENARIOS.find(sc => sc.id === 'hovrar');
+                    this.phase = 'hovrar'; this.phaseT = 0;
                 }
                 this.dragTarget = null;
             }
@@ -1850,8 +1970,9 @@
 
         // ── Huvudapp ──────────────────────────────────────────────
         const App = () => {
+            const [enkel, setEnkel] = useState(true);               // enkelt eller avancerat läge
             const [mode, setMode] = useState('utforska');           // 'utforska' | 'gissa'
-            const [scenarioId, setScenarioId] = useState('hovrar');
+            const [scenarioId, setScenarioId] = useState('sitter');
             const [massMg, setMassMg] = useState(12);
             const [rho, setRho] = useState(RHO0);
             const [hoverH, setHoverH] = useState(0.06);
@@ -1903,6 +2024,17 @@
                     showAir, showPressure, boundary, paused, sound,
                 });
             }, [massMg, rho, hoverH, beakerH, lid, speedIdx, showAir, showPressure, boundary, paused, sound]);
+
+            // Enkelt/avancerat läge: nollställ vågen med bägare + luft i
+            // enkelt läge (displayen visar bara flugans bidrag), visa hela
+            // gramvärdet i avancerat. Förutsäg finns bara i avancerat.
+            useEffect(() => {
+                const sim = simRef.current;
+                if (!sim) return;
+                sim.cfg.enkel = enkel;
+                sim.cfg.tareG = enkel ? (M_BEAKER + sim.mAir) * 1000 : 0;
+                if (enkel && mode === 'gissa') setMode('utforska');
+            }, [enkel]);
 
             // Starta ett förlopp (med ev. förloppsspecifika förutsättningar)
             const runScenario = useCallback((id) => {
@@ -2169,20 +2301,36 @@
                             {/* Växlingen mellan avsnittets två simuleringar sköts av
                                 avsnittsraden överst på sidan (section-nav.js) — lägg
                                 inga egna flikar för det här. */}
-                            {/* Läge inom denna simulering */}
+                            {/* Enkelt läge visar bara huvudpoängen; avancerat
+                                visar graf, förlopp, reglage och bokföring */}
                             <div>
                                 <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Läge</div>
                                 <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
-                                    <button onClick={() => setMode('utforska')}
-                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'utforska' ? 'tab-active' : ''}`}>
-                                        Utforska
+                                    <button onClick={() => setEnkel(true)}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${enkel ? 'tab-active' : ''}`}>
+                                        Enkelt
                                     </button>
-                                    <button onClick={() => { setMode('gissa'); setGissa(g => ({ ...g, ch: null })); }}
-                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'gissa' ? 'tab-active' : ''}`}>
-                                        Förutsäg
+                                    <button onClick={() => setEnkel(false)}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${!enkel ? 'tab-active' : ''}`}>
+                                        Avancerat
                                     </button>
                                 </div>
                             </div>
+                            {!enkel && (
+                                <div>
+                                    <div className="text-right mb-1" style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--lab-ink-muted, #8a8579)', fontWeight: 600, fontFamily: 'var(--lab-font-mono, monospace)' }}>Arbetssätt</div>
+                                    <div className="p-1 flex gap-1" style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                        <button onClick={() => setMode('utforska')}
+                                            className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'utforska' ? 'tab-active' : ''}`}>
+                                            Utforska
+                                        </button>
+                                        <button onClick={() => { setMode('gissa'); setGissa(g => ({ ...g, ch: null })); }}
+                                            className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'gissa' ? 'tab-active' : ''}`}>
+                                            Förutsäg
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </header>
 
@@ -2232,7 +2380,36 @@
                                         glidarna här, så att scenen aldrig skyms av
                                         någon panel (se kommentaren vid .scene-toggles
                                         i sidans <style>). */}
+                                    {(!enkel || isFullscreen) && (
                                     <div className="scene-toggles">
+                                        {isFullscreen && (
+                                            <React.Fragment>
+                                                <div className="st-title">Läge</div>
+                                                <label>
+                                                    <input type="radio" name="fs-enkel" checked={enkel} onChange={() => setEnkel(true)} />
+                                                    <span>Enkelt</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="fs-enkel" checked={!enkel} onChange={() => setEnkel(false)} />
+                                                    <span>Avancerat</span>
+                                                </label>
+                                            </React.Fragment>
+                                        )}
+                                        {enkel ? (
+                                            <React.Fragment>
+                                                <div className="st-actions" style={{ marginTop: 8 }}>
+                                                    <button type="button" className="st-btn" onClick={() => runScenario('hovrar')}>Flyg</button>
+                                                    <button type="button" className="st-btn" onClick={() => { simRef.current?.landNow(); simRef.current?.resumeAudio(); }}>Landa</button>
+                                                </div>
+                                                <div className="st-actions" style={{ marginTop: 4 }}>
+                                                    <button type="button" className="st-btn" onClick={() => setPaused(p => !p)}>
+                                                        {paused ? 'Starta' : 'Pausa'}
+                                                    </button>
+                                                    <button type="button" className="st-btn" onClick={() => runScenario('sitter')}>Börja om</button>
+                                                </div>
+                                            </React.Fragment>
+                                        ) : (
+                                            <React.Fragment>
                                         {isFullscreen && (mode === 'gissa' ? (
                                             <React.Fragment>
                                                 <div className="st-title">Förutsäg</div>
@@ -2325,7 +2502,10 @@
                                                 </select>
                                             </React.Fragment>
                                         )}
+                                            </React.Fragment>
+                                        )}
                                     </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -2413,10 +2593,35 @@
 
                         {/* Sidopanel */}
                         <div className="lg:w-1/3 flex-shrink-0 order-2 flex flex-col gap-4">
-                            {mode === 'gissa' ? gissaCard : scenarioButtons('panel')}
-                            {mode === 'utforska' && sliders('panel')}
+                            {enkel ? (
+                                <div className="p-4 glass-card flex flex-col gap-3" style={{ borderRadius: '6px' }}>
+                                    <div className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Prova själv</div>
+                                    <div className="text-sm" style={{ color: 'var(--lab-ink, #0f1620)', lineHeight: 1.55 }}>
+                                        Vågen är nollställd med bägare och luft, så displayen
+                                        visar bara flugans bidrag, i milligram. Låt flugan lyfta och håll
+                                        ögonen på siffran.
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button type="button" className="guess-btn" onClick={() => runScenario('hovrar')}>Flyg</button>
+                                        <button type="button" className="guess-btn" onClick={() => { simRef.current?.landNow(); simRef.current?.resumeAudio(); }}>Landa</button>
+                                        <button type="button" className="guess-btn" onClick={() => runScenario('sitter')}>Börja om</button>
+                                    </div>
+                                    <div className="text-sm" style={{ color: 'var(--lab-ink-soft, #3a4151)', lineHeight: 1.55 }}>
+                                        Du kan också ta tag i flugan och dra den vart du vill:
+                                        högre upp, ut över kanten och bort till bänken. Så länge den
+                                        flyger kvar i bägaren står vågen still på flugans tyngd.
+                                        Först när den lämnar bägaren sjunker utslaget.
+                                    </div>
+                                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)', lineHeight: 1.5 }}>
+                                        Byt till Avancerat läge för graf, förlopp, reglage,
+                                        Förutsäg-utmaningar och hela rörelsemängdsbokföringen.
+                                    </div>
+                                </div>
+                            ) : (mode === 'gissa' ? gissaCard : scenarioButtons('panel'))}
+                            {!enkel && mode === 'utforska' && sliders('panel')}
 
-                            {/* Rörelsemängdsbokföring / avläsningar */}
+                            {/* Rörelsemängdsbokföring / avläsningar (avancerat läge) */}
+                            {!enkel && (
                             <div className="p-4 glass-card" style={{ borderRadius: '6px' }}>
                                 <div className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--lab-ink-soft, #3a4151)', letterSpacing: '0.06em', fontFamily: 'var(--lab-font-mono, monospace)' }}>Bokföring</div>
                                 <table className="readout-table">
@@ -2466,6 +2671,7 @@
                                     sätter sig på bordet, tappar vågen hela dess tyngd.
                                 </div>
                             </div>
+                            )}
                         </div>
                     </main>
                 </div>

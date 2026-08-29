@@ -11,6 +11,70 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-08-30 — "Kallare än rymden, två kilometer ner"
+- Status: UTKAST skrivet 2026-08-29 (lördag, inom 08.00-deadline). Tänkt
+  utskick söndag 2026-08-30 kl 06.00 svensk tid. Brevperiod (nyheter)
+  2026-08-24 till 2026-08-29; sajtuppdateringar sedan förra brevets datum
+  2026-08-23. Skrivet i en molnsession utan tillgång till CDN:erna
+  (unpkg/cdnjs/tailwind blockerade av organisationens nätverkspolicy, samma
+  begränsning som 2026-08-23) — därför inga nya skärmdumpar av React-
+  simuleringarna (flugan i bägaren, gaffelbalansen, dubbelkonen) denna
+  vecka. Bildsättningen vilar helt på tre riktiga nyhetsfoton (hjälte +
+  två miniatyrer); "Nytt på Fysiklabbet" är textlänkar utan bild.
+  **588 ord, längre än riktlängden 250–450 — ovanligt innehållsrik vecka**
+  (6 nyhetsartiklar i brevperioden i stället för sedvanliga 3–4, plus fyra
+  sajtuppdateringar), samma typ av avvikelse som brevet 2026-08-09.
+  **⚠️ FYND under arbetet, SEDAN LÖST:** sessionen körde på arbetsgrenen
+  `claude/amazing-faraday-canq6g`, som vid start låg 74 commits FÖRE `main`
+  (main:s HEAD var `bec51f0`, daterad 2026-08-24) — main saknade alltså
+  nyhetsartiklarna 2026-08-25 till 2026-08-29 (fem av brevets sex
+  artiklar, inklusive hjälten), `fysik2-dubbelkon-app.html`, delar av
+  `fysik2-gaffelbalans-app.html`/`fysik1-flugan-i-bagaren-app.html`,
+  Eulers disk-minisimen, fysikprovet Fysik 2 VT 2016, pennlösnings-
+  kompletteringen (132/132) och teckenstorleks-glidaren, alltihop länkat
+  i brevet. Under sessionens gång (efter ett `git fetch origin main`)
+  visade det sig att arbetsgrenen redan hade mergats och forcepushats till
+  `origin/main` av någon annan (main:s HEAD blev `007c3ec`, identiskt med
+  sessionens egen HEAD) — så när nyhetsbrevsfilerna committades nedan
+  fanns hela veckans innehåll redan på main. Kontrollera ändå själv, som
+  sista säkerhetskoll före schemaläggning, att de tre nya bilderna i
+  `nyheter/brev/` och utkastfilen faktiskt syns på fysiklabbet.se.
+- Nyheter: 2026-08-29-jakten-under-jorden (hjälte — dagens artikel,
+  publicerad 03:15 samma morgon, obligatorisk enligt uppdraget),
+  2026-08-28-gungan-som-gar-runt + 2026-08-27-ljudet-som-lyfter
+  (miniatyrer). Läs även: 2026-08-26-vakuumet-som-hjalper-till,
+  2026-08-25-vagfunktionen-fotograferad, 2026-08-24-kvantmikroskopet
+  (samtliga listade, ingen artikel utelämnad).
+- Nytt på sajten: Flugan i bägaren (ny simulering, Newtons tredje lag,
+  fy1-3.3, Förutsäg-läge), balanstricken i Mer kraftmoment (gaffelbalansen
+  + dubbelkonen, båda 3D), fysikprovet Fysik 2 VT 2016 och milstolpen
+  132/132 pennlösningar på de nationella proven, samt teckenstorleks-
+  glidaren i presentationsläget (planerat.md, lanserad 2026-08-28,
+  avklarad genom detta brev).
+- Bilder: nyheter/brev/2026-08-30-detektor-hero.jpg (beskuren från
+  nyheter/bilder/2026-08-29-jakten-under-jorden.jpg, 60 kB),
+  -kiiking-thumb.jpg och -levitation-thumb.jpg (kvadratiska miniatyrer ur
+  veckans nyhetsbilder, 33+37 kB). Inga simuleringsskärmdumpar, se status
+  ovan.
+- Veckans tips: inbäddade filmer i teorin (senast "tipsad" 2026-08-09, men
+  det brevet skickades aldrig, så tipset var osagt). Länkad till
+  fy2-2.6 (Resonans, Tacoma Narrows-bron) i stället för standardlänken
+  fy1-2.4, som en tematisk brygga till veckans gung-/resonansartikel.
+- Teaser: nyhetskö-uppslaget om Bose–Einstein-kondensatet av polära
+  molekyler (natrium–rubidium, Dajun Wangs grupp), avslutat med "Vi läser
+  på." Uppslaget flyttat till toppen av ko.md och märkt med teaser-skuld,
+  publiceras senast onsdag 2026-09-02. Ingen egen sajt-/simulerings-teaser
+  denna vecka (brevet var redan långt).
+- ÅTERSTÅR: användarens granskning, testskick och schemaläggning i
+  EmailOctopus (kom ihåg tidszonen, default London, 06.00 där blir 07.00
+  svensk tid). Se fyndet ovan om huvudgrenen för en sista länkkontroll.
+- OBS: `SendUserFile`-verktyget fanns inte i den här molnsessionen (varken
+  direkt eller sökbart bland deferred tools) — förhandsvisningen visades i
+  stället inline i sessionen (Read-verktyget på den beskurna JPEG:en,
+  680 px bred). Filen ligger kvar lokalt i sessionens scratchpad, inte i
+  repot. Om ett SendUserFile-liknande verktyg finns tillgängligt för
+  användaren i den vanliga klienten bör förhandsvisningen skickas därifrån.
+
 ## 2026-08-23 — "Neonkärnan är formad som en kägla"
 - Status: UTKAST skrivet 2026-08-22 (lördag, klart gott om marginal före 08.00-deadline).
   Tänkt utskick söndag 2026-08-23 kl 06.00 svensk tid. Brevperiod (nyheter)

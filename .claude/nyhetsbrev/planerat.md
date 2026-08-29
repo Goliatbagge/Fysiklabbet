@@ -32,7 +32,6 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   att läsa, och rätt storlek beror på klassrummet, inte på avsnittet. Valet
   sparas i webbläsaren, så datorn i den sal man brukar undervisa i minns
   inställningen till nästa lektion.
-  **Ordval i brevet:** skriv "glidare" eller "reglage", och beskriv nyttan
-  (texten blir läsbar ända till bakre bänkraden) snarare än funktionen.
-  Lanserat 2026-08-28, hör hemma under "Nytt på Fysiklabbet".
-  Länk till ett avsnitt att prova i: `https://fysiklabbet.se/katalog.html?id=fy2-1.2`
+  Lanserat 2026-08-28. **[AVKLARAT 2026-08-30]** Nämnd under "Nytt på
+  Fysiklabbet" i brevet 2026-08-30 ("Text i valfri storlek på projektorn"),
+  länkad till `https://fysiklabbet.se/katalog.html?id=fy2-1.2`.

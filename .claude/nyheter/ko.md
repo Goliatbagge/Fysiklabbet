@@ -12,6 +12,22 @@ Format per post:
 
 ## Kö
 
+- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
+  dipolväxelverkan**  **[BREVTEASER, teasad i brevet 2026-08-30]** (STARK
+  RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
+  Chinese University of Hong Kong har gjort det första kondensatet av
+  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
+  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
+  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
+  självbunden kvantdroppe. Nature Physics (2026-07-09),
+  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
+  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
+  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
+  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
+  gammalt. Källa:
+  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
+  (tillagd 2026-08-03) **TEASER-SKULD: publicera senast onsdag 2026-09-02.**
+
 - **Röntgenkameran som fångar spinnvågor i rörelse** — en avbildningsteknik som
   följer magnoner (spinnvågor) medan de färdas genom ett material, vilket är
   svårt eftersom de rör sig snabbt och dör ut fort. Ingång: vågor, magnetism och
@@ -116,21 +132,6 @@ Format per post:
   till fusion, tryck och energiomvandling. Källa (Phys.org 2026-08-24, leta
   upp direktlänken vid användning): https://phys.org/physics-news/
   (tillagd 2026-08-26)
-
-- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
-  dipolväxelverkan**  **[BREVTEASER]** (STARK RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
-  Chinese University of Hong Kong har gjort det första kondensatet av
-  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
-  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
-  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
-  självbunden kvantdroppe. Nature Physics (2026-07-09),
-  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
-  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
-  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
-  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
-  gammalt. Källa:
-  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
-  (tillagd 2026-08-03)
 
 - **Små ”defekter” i en yta femdubblar värmeöverföringen vid kondensation** —
   en beläggning med avsiktligt inbyggda ojämnheter gör att ånga som

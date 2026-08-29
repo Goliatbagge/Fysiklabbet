@@ -12,6 +12,17 @@ Format:
 ```
 
 ## 2026-08-30 — "Kallare än rymden, två kilometer ner"
+- Status: **UPPLAGD i EmailOctopus 2026-08-29** som kampanjen "Nyhetsbrev nr 3 -
+  2026-08-30" (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad och
+  preheader ur utkastet, HTML inklistrad med {{PreviewText}}-diven, alla tre
+  bilder verifierade som laddade i förhandsvisningen). Listan har 17
+  prenumeranter. Förhandsvisningen lämnades öppen vid "Send as test".
+  ÅTERSTÅR för användaren: testskick och schemaläggning till söndag 06.00
+  svensk tid (tidszonen default:ar till London!). Delivery står just nu på
+  "Send immediately" och måste bytas till "Send at a specific time".
+- Rättelse före uppladdning: `Bose&ndash;Einstein` i teaserstycket byttes mot
+  bindestreck. verify-nyhetsbrev.js räknar varje en/em-streck som tankstreck,
+  även när det binder ihop två namn.
 - Status: UTKAST skrivet 2026-08-29 (lördag, inom 08.00-deadline). Tänkt
   utskick söndag 2026-08-30 kl 06.00 svensk tid. Brevperiod (nyheter)
   2026-08-24 till 2026-08-29; sajtuppdateringar sedan förra brevets datum

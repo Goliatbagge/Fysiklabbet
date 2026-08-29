@@ -361,7 +361,8 @@
                         const m = lines[j].match(/^([a-zåäö]+):\s*(.+)$/i);
                         if (m) cfg[m[1].toLowerCase()] = m[2].trim();
                     }
-                    out.push(buildVideoEmbed(cfg));
+                    rakn.video = (rakn.video || 0) + 1;
+                    out.push(buildVideoEmbed(cfg, rakn.video));
                     i = j; // hoppa förbi det avslutande :::
                     continue;
                 }
@@ -455,8 +456,14 @@
         //   format: "4:3" för äldre filmmaterial (standard 16:9)
         // Saknas fil:, arkiv: och youtube: renderas bara en länkrad — så att
         // material som inte går att bädda in ändå blir ett klick bort.
-        function buildVideoEmbed(cfg) {
+        function buildVideoEmbed(cfg, nr) {
             const ratio = cfg.format === '4:3' ? '4 / 3' : '16 / 9';
+            // Ankare, så att en länk kan peka RAKT på filmen
+            // (katalog.html?id=…&block=…). `ankare:` i config-blocket är den
+            // stabila formen och överlever att filmens titel skrivs om;
+            // video-N finns alltid som reserv. Se scrollaTillBlock.
+            let ank = ' data-blocknr="video-' + (nr || 1) + '"';
+            if (cfg.ankare) ank += ' data-block="' + blockSlug(cfg.ankare) + '"';
             const cap = [];
             if (cfg.titel) cap.push('<span class="lab-video-titel">' + escapeHtml(cfg.titel) + '</span>');
             const meta = [];
@@ -469,7 +476,7 @@
             const caption = '<figcaption>' + cap.join('') + '</figcaption>';
             if (cfg.fil) {
                 const poster = (cfg.affisch ? ' poster="' + escapeHtml(cfg.affisch) + '"' : '');
-                return '<figure class="lab-video"><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+                return '<figure class="lab-video"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
                     '<video controls preload="metadata" playsinline' + poster + '>' +
                     '<source src="' + escapeHtml(cfg.fil) + '" type="video/mp4">' +
                     '</video></div>' + caption + '</figure>';
@@ -480,9 +487,9 @@
                     ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(cfg.youtube)
                     : null);
             if (!src) {
-                return '<div class="lab-video lab-video-lank">' + cap.join('') + '</div>';
+                return '<div class="lab-video lab-video-lank"' + ank + '>' + cap.join('') + '</div>';
             }
-            return '<figure class="lab-video"><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+            return '<figure class="lab-video"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
                 '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
                 ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
                 '</div>' + caption + '</figure>';

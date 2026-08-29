@@ -59,12 +59,17 @@ emailoctopus.com i Chrome.
    - Verifiera i förhandsvisnings-iframen (JS): alla `d.images` har
      `complete && naturalWidth > 0`, och sidfotstexterna finns i
      `d.body.innerText`. → **Save & next**.
-5. **Send-steget**: välj gärna radioknappen "Send at a specific time" —
-   **men fyll INTE i leveransfälten och tryck ALDRIG på
-   Schedule/Send/Preview & test.** Skicka-steget är användarens:
-   testskick till egen adress, datum/tid (söndag **06.00 svensk tid**,
-   standard sedan 2026-08-15 — kontrollera att tidszonen står på Stockholm,
-   inte London) och Schedule-knappen.
+5. **Send-steget**: gå igenom sammanställningen (mottagare, avsändare,
+   ämnesrad) men **fyll INTE i leveransfälten och tryck ALDRIG på
+   Schedule/Send.** Schemaläggningen är användarens: "Send at a specific
+   time", datum/tid (söndag **06.00 svensk tid**, standard sedan 2026-08-15
+   — kontrollera att tidszonen står på Stockholm, inte London) och
+   Schedule-knappen.
+6. **Lämna fönstret på testmejlet** (stående rutin sedan 2026-08-29): gå
+   tillbaka till Content-steget, klicka **Preview & test** och låt
+   förhandsvisningen stå öppen. Då ligger knappen **"Send as test"** uppe
+   till höger, ett klick från användaren. Tryck inte på den själv —
+   testmejlet är ett utskick, och det är användarens knapp.
 
 ## Efterarbete
 

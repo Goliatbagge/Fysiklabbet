@@ -914,7 +914,7 @@
                     cmLabel.visible = cmVisible;
                     if (cmVisible) {
                         cmDot.position.copy(tmpV);
-                        cmLabel.position.copy(tmpV).add(new THREE.Vector3(1.4, -0.9, 0));
+                        cmLabel.position.copy(tmpV).add(new THREE.Vector3(1.3, -3.3, 0));
                     }
 
                     // Lodlinje från tyngdpunkten rakt ned + stödpunkt
@@ -940,7 +940,7 @@
                         gravArrow.position.copy(tmpV);
                         gravArrow.setDirection(new THREE.Vector3(0, -1, 0));
                         gravArrow.setLength(len, Math.min(0.75, len * 0.28), Math.min(0.45, len * 0.17));
-                        gravLabel.position.set(tmpV.x + 1.2, tmpV.y - len - 0.4, tmpV.z);
+                        gravLabel.position.set(tmpV.x + 1.2, tmpV.y - len - 1.5, tmpV.z);
                     }
 
                     // Hävarmen: vågrätt avstånd stödpunkt → tyngdkraftens riktningslinje

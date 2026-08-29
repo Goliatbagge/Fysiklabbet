@@ -20,6 +20,9 @@ Format:
   ÅTERSTÅR för användaren: testskick och schemaläggning till söndag 06.00
   svensk tid (tidszonen default:ar till London!). Delivery står just nu på
   "Send immediately" och måste bytas till "Send at a specific time".
+- Ordvits inlagd på användarens begäran 2026-08-29, efter flug-stycket:
+  "har du hört om den senaste flugan? En flugsimulator." Skriven med punkt,
+  inte utropstecken, enligt tonregeln om torr underdrift.
 - Rättelse före uppladdning: `Bose&ndash;Einstein` i teaserstycket byttes mot
   bindestreck. verify-nyhetsbrev.js räknar varje en/em-streck som tankstreck,
   även när det binder ihop två namn.

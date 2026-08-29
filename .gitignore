@@ -42,25 +42,35 @@ tmpclaude-*
 .shots/
 figur-preview.html
 
+# ⚠️ De lokala mapparna nedan är ROTMAPPAR och skrivs med inledande /.
+# Utan snedstrecket matchar mönstret mappen på ALLA nivåer, och eftersom
+# Windows filsystem är skiftlägesokänsligt träffade `NP/` då även
+# `data/np/` — de nationella provens datafiler. De 17 filerna där låg
+# kvar i git bara för att de lades till innan regeln fanns, men en NY
+# fil hade ignorerats tyst, och provet hade saknat sina pennlösningar på
+# sajten utan att något sett trasigt ut. Ta inte bort snedstrecken.
+# (Generella mönster som node_modules/ och .shots/ ska däremot fortsätta
+# matcha på alla nivåer och har därför inget inledande /.)
+
 # PDF-källor (transkriberade till data/teori/)
-Genomgångar/
+/Genomgångar/
 
 # Upphovsrättsskyddade läromedelsuppgifter — endast lokala för kalibrering
-Uppgifter/
-Kursprovsuppgifter/
+/Uppgifter/
+/Kursprovsuppgifter/
 
 # Obsidian-vault - synkas aldrig till GitHub
-docs-vault/
+/docs-vault/
 
 # Käll-PDF:er för nationella prov — endast lokala
-NP/
+/NP/
 
 # Skarmbilder inklistrade fran HP_KONTOR via snabbtangent - alltid lokala
-skarmbilder/
+/skarmbilder/
 
 # WeBWorK Open Problem Library — egen git-klon, uppgiftskälla för fysikuppgifter
 # (~2 GB, ska aldrig med i Fysiklabbets repo)
-webwork-open-problem-library/
+/webwork-open-problem-library/
 
 # Facebook-agentens lokala arbetslogg
 .claude/facebook/

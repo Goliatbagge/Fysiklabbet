@@ -23,7 +23,7 @@ $N(t) = 42\,000 \cdot 0{,}98^t$, där $t$ är tiden i år från 1 januari 2020.
 Beräkna tillväxthastigheten den 1 januari 2025.**
 
 Tillväxthastigheten av folkmängden vid en tidpunkt motsvaras av derivatan av
-folkmängden. Tiden från 1 januari 2020 till 1 januari 2025 är 5 år, dvs.
+folkmängden. Tiden från 1 januari 2020 till 1 januari 2025 är 5 år, det vill säga
 $t = 5$. Det är alltså $N'(5)$ som söks. Vi deriverar först och sätter sedan
 in 5 i derivatan.
 
@@ -183,7 +183,7 @@ En tangent är en rät linje och kan beskrivas med räta linjens ekvation
 $y = kx + m$. Vi ska bestämma $k$ och $m$.
 
 $k$-värdet står för tangentens lutning, som är samma sak som derivatan i
-punkten då $x = 3$, dvs. $k = y'(3)$.
+punkten då $x = 3$, det vill säga $k = y'(3)$.
 
 Vi bestämmer $y'(3)$ genom att först derivera och sedan sätta in $x = 3$.
 

@@ -61,7 +61,7 @@ $y = x^{-1} = \dfrac{1}{x}$
 $y = x^{1/2} = \sqrt{x}$
 :::
 
-Undersök själv: prova olika värden på exponenten $a$ (t.ex. 2, 3 eller
+Undersök själv: prova olika värden på exponenten $a$ (till exempel 2, 3 eller
 −1) och konstanten $C$ och se hur grafens form ändras. Startläget visar
 $y = x^2$.
 

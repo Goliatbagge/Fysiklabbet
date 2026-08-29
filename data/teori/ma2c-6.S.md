@@ -33,7 +33,7 @@ normalfördelningskurvor, samt ta fram och tolka en regressionsmodell.
   som går att använda även på data som inte är tal.
 - **frekvens**: hur många gånger ett visst värde, eller en viss klass,
   förekommer i en datamängd.
-- **klass och klassmitt**: vid intervallindelad data (t.ex. i ett
+- **klass och klassmitt**: vid intervallindelad data (till exempel i ett
   histogram) räknas varje värde som om det låg i sin klassmitt, intervallets
   mittpunkt.
 - **variationsbredd**: skillnaden mellan det största och det minsta värdet
@@ -47,7 +47,7 @@ normalfördelningskurvor, samt ta fram och tolka en regressionsmodell.
   lådans bredd i lådagrammet, ett mått på spridningen i mitten av
   materialet.
 - **percentil**: ett värde som en given andel av datamängden ligger under;
-  t.ex. anger $p_{90}$ gränsen för de $10\ \%$ högsta värdena.
+  till exempel anger $p_{90}$ gränsen för de $10\ \%$ högsta värdena.
 - **standardavvikelse ($\sigma$, $s$)**: hur mycket värdena i genomsnitt
   avviker från medelvärdet; $\sigma$ används vid totalundersökning och $s$
   vid stickprovsundersökning.
@@ -131,7 +131,7 @@ modellen punkterna.
   representativ.
 - Typvärdet är det enda lägesmåttet som fungerar även för data som inte är
   tal, till exempel bilmärken eller färger.
-- I klassindelat material (t.ex. i ett histogram) räknas varje värde som om
+- I klassindelat material (till exempel i ett histogram) räknas varje värde som om
   det låg i sin klassmitt när medelvärdet ska beräknas.
 - I ett lådagram innehåller varje del — vänster morrhår, vänstra lådan,
   högra lådan och höger morrhår — alltid $25\ \%$ av värdena; en bred del
@@ -161,7 +161,7 @@ modellen punkterna.
   (linjär, exponentiell, potens, polynom) passar samma punkter — modellen
   med $r^2$ närmast 1 är bäst anpassad.
 - Kom ihåg att Geogebra kräver decimalpunkt i stället för decimalkomma när
-  tal matas in, t.ex. 165,5 → 165.5.
+  tal matas in, till exempel 165,5 → 165.5.
 
 ## Figurer värda att minnas
 
@@ -204,7 +204,7 @@ Peka eller tryck på en kurva så visas modellens ekvation.
   $Q_3$, samt kvartilavståndet för en datamängd?
 - Kan du rita och tolka ett lådagram, och förklara att varje del innehåller
   $25\ \%$ av värdena?
-- Vet du vad en percentil är, och kan du bestämma en given percentil (t.ex.
+- Vet du vad en percentil är, och kan du bestämma en given percentil (till exempel
   $p_{90}$) med Geogebra?
 - Kan du förklara vad standardavvikelsen mäter, och skillnaden mellan
   $\sigma$ (totalundersökning) och $s$ (stickprovsundersökning)?

@@ -40,7 +40,7 @@ negativt antal månader och priset gäller endast i 12 månader.)
 
 **b)** I a-uppgiften fick vi att definitionsmängden var
 $0 \leq x \leq 12$. Det *minsta* värdet på $y$ (kostnaden) får vi då
-$x = 0$, dvs. då vi inte köper musiktjänsten alls:
+$x = 0$, det vill säga då vi inte köper musiktjänsten alls:
 
 $$
 y(0) = 50 \cdot 0 = 0\ \mathrm{kr}
@@ -71,7 +71,7 @@ typ: mangderurgraf
 
 ::: textlosning
 Vi börjar med att bestämma definitionsmängden som står för tillåtna
-*x*-värden. Vi tittar var grafen börjar på *x*-axeln (håll t.ex. en penna
+*x*-värden. Vi tittar var grafen börjar på *x*-axeln (håll till exempel en penna
 lodrätt och vandra från vänster till höger och stanna när du stöter på
 grafen). Grafen startar vid $x = -1$. Ringen är inte ifylld, vilket
 medför att $x > -1$.

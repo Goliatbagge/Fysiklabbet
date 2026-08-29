@@ -62,7 +62,7 @@ delen är desto mindre är spridningen** (ju mer samlade ligger värdena).
 Om man har ett större antal observationer kan man, istället för
 kvartiler (fjärdedelar), dela in det statistiska materialet i
 **percentiler** (hundradelar). Percentiler anger hur många procent som
-är **lägre** än ett visst värde. $p_{80}$ är t.ex. den 80:e percentilen
+är **lägre** än ett visst värde. $p_{80}$ är till exempel den 80:e percentilen
 och då är 80 % av värdena mindre än detta värde och 20 % av värdena
 större. Percentiler beräknas i Geogebra (se exemplet nedan).
 

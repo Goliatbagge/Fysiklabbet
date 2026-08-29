@@ -729,7 +729,7 @@
                     <div className="lab-search-input-wrap">
                         <span className="lab-search-icon" aria-hidden="true">⌕</span>
                         <input type="text" value={query} className="lab-search-input"
-                            placeholder="sök — t.ex. coulomb, pendel, magnetfält, ljus…"
+                            placeholder="sök — till exempel coulomb, pendel, magnetfält, ljus…"
                             autoComplete="off" aria-label="Sök på Fysiklabbet"
                             onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
                             onFocus={() => { if (query.trim()) setOpen(true); }}
@@ -1849,7 +1849,7 @@
             { label: '·10³', insert: '·10³' },
             { label: '·10⁶', insert: '·10⁶' },
             { label: '·10⁹', insert: '·10⁹' },
-            { label: '·10ⁿ', insert: '·10^', title: 'Skriv exponenten själv efter — t.ex. ·10^-12' },
+            { label: '·10ⁿ', insert: '·10^', title: 'Skriv exponenten själv efter — till exempel ·10^-12' },
             { label: '²', insert: '²' },
             { label: '³', insert: '³' },
             { label: '⁻', insert: '⁻' },

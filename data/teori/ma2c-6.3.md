@@ -67,7 +67,7 @@ kalkylbladet, klicka på menyn "blå staplar" och välj
 *Envariabelanalys*. I rullistan där det står "Histogram" väljer du
 "Boxplot (Lådagram)".
 
-Om du vill modifiera lådagrammets utseende eller t.ex. lättare läsa av
+Om du vill modifiera lådagrammets utseende eller till exempel lättare läsa av
 det mot axlarna kan du med fördel kopiera det till ritområdet. Växla
 därefter till standardläget och justera vid behov axlarna med verktyget
 *Flytta ritområdet*. Där kan du även justera utseendet (färg,
@@ -91,7 +91,7 @@ frekvenstabell.**
 
 För att slippa skriva in 177 separata värden i ett kalkylblad (eller i
 formeln för medelvärde), så kan vi i Geogebras kalkylblad skriva in
-frekvenserna i en extra kolumn till höger, dvs. så som de står i
+frekvenserna i en extra kolumn till höger, det vill säga så som de står i
 tabellen ovan.
 
 Markera alla värden i båda kolumner, klicka på "blå staplar" och välj

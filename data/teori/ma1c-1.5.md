@@ -10,7 +10,7 @@ section: '1.5'
 # Tal i decimalform
 
 Vårt positionssystem bygger på basen 10 och kallas det **decimala
-talsystemet**. ("Decem" betyder 10 på latin, jämför t.ex. med "decennium"
+talsystemet**. ("Decem" betyder 10 på latin, jämför till exempel med "decennium"
 som betyder årtionde.) Beroende på positionen i talet står siffran för
 olika saker.
 
@@ -23,7 +23,7 @@ Siffrans position i talet avgör vad den står för. Peka eller tryck på en sif
 :::
 
 2:an står alltså för hur många tusental vi har, 7:an för hur många hundratal
-vi har osv.
+vi har och så vidare
 
 ## Avrundning
 
@@ -114,7 +114,7 @@ $$
 
 Vi har räknat multiplikation, så vi tittar på antalet värdesiffror. 19,5
 har *tre* värdesiffror och 24 har *två* värdesiffror. Vi avrundar till det
-*minsta antalet* värdesiffror, dvs. till två värdesiffror:
+*minsta antalet* värdesiffror, det vill säga till två värdesiffror:
 
 $$
 \text{area} = 468\ \mathrm{cm^2} \approx 470\ \mathrm{cm^2}
@@ -139,7 +139,7 @@ $$
 
 Vi har räknat subtraktion, så vi tittar på antalet decimaler. 1,73 har
 *två* decimaler och 1,3 har *en* decimal. Vi avrundar till det minsta
-antalet decimaler, dvs. till en decimal.
+antalet decimaler, det vill säga till en decimal.
 
 **Svar:** 0,4 m
 :::

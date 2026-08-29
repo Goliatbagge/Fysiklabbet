@@ -36,7 +36,7 @@ andra baser än 10.
 - **logaritmform och potensform**: två likvärdiga sätt att skriva
   samma samband, $\lg x = a \iff 10^a = x$.
 - **logaritmekvation**: ekvation där variabeln står i logaritmen
-  (t.ex. $\lg x = 3$); löses genom omskrivning till potensform.
+  (till exempel $\lg x = 3$); löses genom omskrivning till potensform.
 - **logaritmlagarna**: tre räkneregler för summa, differens och
   potens av logaritmer.
 - **generell logaritm ($\log_a b$)**: lösningen till ekvationen
@@ -108,7 +108,7 @@ $$
   positiv och en negativ ($\pm$ framför roten/lösningen); en udda
   exponent ger bara en lösning.
 - **Metod 1 för exponentialekvationer:** skriv om båda led till basen
-  10 (t.ex. $2 = 10^{\lg 2}$), förenkla med potenslagarna och sätt
+  10 (till exempel $2 = 10^{\lg 2}$), förenkla med potenslagarna och sätt
   exponenterna lika.
 - **Metod 2 (snabbare):** logaritmera båda led direkt (sätt $\lg$
   framför hela uttrycket) och använd tredje logaritmlagen för att
@@ -125,7 +125,7 @@ $$
   förändringsfaktorn $a$ ut ur en given procentsats: en ökning med
   $p\ \%$ ger $a = 1 + \dfrac{p}{100}$, en minskning ger
   $a = 1 - \dfrac{p}{100}$.
-- Ett svar med en logaritm kvar i sig (t.ex. $x = \lg 53$) är ett
+- Ett svar med en logaritm kvar i sig (till exempel $x = \lg 53$) är ett
   **exakt** svar — avrunda bara till decimaler när uppgiften ber om
   det.
 - Alla logaritmlagarna och sambanden med basen 10 gäller likadant för
@@ -153,6 +153,6 @@ $$
 - Kan du lösa en ekvation med flera logaritmtermer genom att samla dem
   till en enda logaritm innan du stryker $\lg$?
 - Kan du ställa upp och lösa en tillämpning med modellen
-  $y = C \cdot a^x$, t.ex. ränta eller värdeökning?
-- Kan du lösa ekvationer med andra baser än 10, t.ex. $3^x = 25$, med
+  $y = C \cdot a^x$, till exempel ränta eller värdeökning?
+- Kan du lösa ekvationer med andra baser än 10, till exempel $3^x = 25$, med
   hjälp av generella logaritmer $\log_a b$?

@@ -114,7 +114,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                         'att påståendena medför varandra åt båda hållen. Fråga: följer det ena av det andra, ' +
                         'och gäller det åt båda hållen?',
                     text: 'Bor man i Sverige så bor man i Europa — det stämmer alltid. Men bor man i Europa ' +
-                        'behöver man inte bo i Sverige (man kan bo i t.ex. Spanien). Det gäller alltså bara ' +
+                        'behöver man inte bo i Sverige (man kan bo i till exempel Spanien). Det gäller alltså bara ' +
                         'åt ett håll:\n\n$$\\text{bor i Sverige} \\Rightarrow \\text{bor i Europa}$$',
                 },
                 {
@@ -186,7 +186,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                 {
                     rubrik: 'Ge varje siffra sitt platsvärde',
                     varfor: 'I bas 7 har positionerna, från höger, platsvärdena $7^0 = 1$, $7^1 = 7$, ' +
-                        '$7^2 = 49$, osv. Talet $113_7$ har siffrorna $1$, $1$, $3$ — multiplicera varje ' +
+                        '$7^2 = 49$, och så vidare Talet $113_7$ har siffrorna $1$, $1$, $3$ — multiplicera varje ' +
                         'siffra med sitt platsvärde.',
                     text: '$$113_7 = 1 \\cdot 7^2 + 1 \\cdot 7^1 + 3 \\cdot 7^0$$',
                 },
@@ -197,7 +197,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: '$59$',
             bedomning: [
-                ['Påbörjad lösning, t.ex. visar att ettorna står för $49$ ($7^2$) och $7$', '+C'],
+                ['Påbörjad lösning, till exempel visar att ettorna står för $49$ ($7^2$) och $7$', '+C'],
                 ['Lösning med korrekt svar: $59$', '+C'],
             ],
         },
@@ -299,7 +299,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: '$x = 33$',
             bedomning: [
-                ['Påbörjad lösning, t.ex. förlänger bråken till gemensam nämnare eller multiplicerar båda ' +
+                ['Påbörjad lösning, till exempel förlänger bråken till gemensam nämnare eller multiplicerar båda ' +
                     'leden med $12$', '+C'],
                 ['Lösning med korrekt svar: $x = 33$', '+C'],
             ],
@@ -571,10 +571,10 @@ window.NP_PROV['ma1c-ht2016'] = {
             svar: '**I.** $0{,}1$ **II.** träff $0{,}1$ / miss $0{,}9$ per kast **III.** $1$, $2$ eller $3$ kulor ' +
                 '**IV.** $0{,}09$ **V.** $0{,}271$ **VI.** $0{,}9^4 = 0{,}6561 \\approx 0{,}66$',
             bedomning: [
-                ['Anger någon sannolikhet, t.ex. sannolikheten för träff', '+E'],
+                ['Anger någon sannolikhet, till exempel sannolikheten för träff', '+E'],
                 ['Fyller i sannolikheterna i träddiagrammet', '+E'],
                 ['Anger samtliga möjligheter för hur många kulor man kan "gå plus" med', '+E'],
-                ['Beräknar någon sannolikhet i flera steg, t.ex. $P(\\text{miss, träff})$ eller $P(\\text{miss, miss})$', '+C'],
+                ['Beräknar någon sannolikhet i flera steg, till exempel $P(\\text{miss, träff})$ eller $P(\\text{miss, miss})$', '+C'],
                 ['Beräknar sannolikheten att "gå plus" med precis två kulor, $P(\\text{miss, träff})$', '+C'],
                 ['Beräknar sannolikheten att "gå plus" med minst en kula', '+C'],
                 ['Visar möjliga utfall eller komplementhändelse för "gå plus" med minst en kula', '+C'],
@@ -609,7 +609,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: 'Klockan $01.00$',
             bedomning: [
-                ['Påbörjad lösning, t.ex. beräknar hur många dygn det går på $1\\,000$ h', '+E'],
+                ['Påbörjad lösning, till exempel beräknar hur många dygn det går på $1\\,000$ h', '+E'],
                 ['Lösning med korrekt svar: $01.00$', '+E'],
             ],
         },
@@ -682,7 +682,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                         'längs axeln (skalan ska vara *ekvidistant*). Titta på vilka år som finns med.',
                     text: 'Åren på $x$-axeln är $2002,\\ 2004,\\ 2005,\\ 2006,\\ 2007,\\ 2010$ — men de är ' +
                         'utritade med *lika stort* avstånd mellan varje, trots att tidsavstånden är olika ' +
-                        '(t.ex. $3$ år mellan $2007$ och $2010$, men bara $1$ år mellan $2006$ och $2007$).',
+                        '(till exempel $3$ år mellan $2007$ och $2010$, men bara $1$ år mellan $2006$ och $2007$).',
                     delsvar: { del: 'b', text: 'Avstånden mellan årtalen på $x$-axeln är inte lika stora — skalan är inte ekvidistant.' },
                 },
                 {
@@ -693,7 +693,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                     text: 'Kurvan skulle inte bli lika brant, eftersom $x$-axeln förlängs där år saknas ' +
                         '(mellan $2007$ och $2010$ saknas $2008$ och $2009$). Ökningen skulle då se ' +
                         'långsammare ut än den gör i det missvisande diagrammet.',
-                    delsvar: { del: 'c', text: 'Kurvan skulle bli mindre brant där år saknas (t.ex. mellan $2007$ och $2010$), eftersom $x$-axeln förlängs.' },
+                    delsvar: { del: 'c', text: 'Kurvan skulle bli mindre brant där år saknas (till exempel mellan $2007$ och $2010$), eftersom $x$-axeln förlängs.' },
                 },
             ],
             svar: '**a)** ca $156$ miljarder spam **b)** avstånden mellan årtalen på $x$-axeln är inte lika ' +
@@ -701,7 +701,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             bedomning: [
                 ['a) Godtagbar avläsning (intervallet $180$–$195$ miljarder)', '+E'],
                 ['a) Redovisning med godtagbart svar ($148$–$160$ miljarder)', '+E'],
-                ['b) Knapphändig beskrivning som antyder problemet, t.ex. "År 2003 är inte med"', '+E'],
+                ['b) Knapphändig beskrivning som antyder problemet, till exempel "År 2003 är inte med"', '+E'],
                 ['b) Beskrivning som anger att skalan inte är ekvidistant', '+C'],
                 ['c) Beskrivning som antyder ett korrekt diagrams utseende', '+E'],
                 ['c) Beskrivning som tydligt anger hur ett korrekt diagram påverkas', '+C'],
@@ -789,7 +789,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: '$45$ öre per kWh',
             bedomning: [
-                ['Påbörjad lösning, t.ex. visar att förändringsfaktorn är $0{,}6$ eller att minskningen ' +
+                ['Påbörjad lösning, till exempel visar att förändringsfaktorn är $0{,}6$ eller att minskningen ' +
                     'ska baseras på priset år $2013$', '+C'],
                 ['Lösning med godtagbart svar: $45$ öre', '+C'],
             ],
@@ -917,9 +917,9 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: 'Ungefär $8\\,916$ kr',
             bedomning: [
-                ['Påbörjad lösning som visar upprepad procentuell ökning, t.ex. skulden efter minst två månader', '+C'],
+                ['Påbörjad lösning som visar upprepad procentuell ökning, till exempel skulden efter minst två månader', '+C'],
                 ['Lösning med godtagbart svar', '+C'],
-                ['med en effektiv lösningsmetod, t.ex. $1\\,000 \\cdot 1{,}2^{12}$', '+A'],
+                ['med en effektiv lösningsmetod, till exempel $1\\,000 \\cdot 1{,}2^{12}$', '+A'],
             ],
         },
 
@@ -965,7 +965,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                 '$mM = mP = r$, hypotenusan $MP = R$) att $R^2 = 2r^2$. Då är $A_{\\text{stor}} = \\pi R^2 = ' +
                 '2\\pi r^2 = 2 A_{\\text{liten}}$.',
             bedomning: [
-                ['Påbörjad lösning, t.ex. visar sambandet mellan radierna med ett exempel eller algebraiskt', '+C'],
+                ['Påbörjad lösning, till exempel visar sambandet mellan radierna med ett exempel eller algebraiskt', '+C'],
                 ['Påbörjar en generell formulering av stora cirkelns area utifrån lilla radien, eller visar ' +
                     'för något värde att stora arean är dubbelt så stor', '+C'],
                 ['Tecknar ett generellt uttryck för stora cirkelns area utifrån lilla radien ($R^2 = 2r^2$)', '+A'],
@@ -977,7 +977,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             nr: 27, del: 'D', poang: [0, 1, 2], omrade: 'Vektorer — associativa lagen',
             genomgangar: ['ma1c-6.6'],
             endastSvar: false,
-            fraga: 'Vid addition av tal gäller den associativa lagen, dvs. $(a + b) + c = a + (b + c)$. ' +
+            fraga: 'Vid addition av tal gäller den associativa lagen, det vill säga $(a + b) + c = a + (b + c)$. ' +
                 'Till exempel är $(3 + 2) + 5 = 5 + 5 = 10$ och $3 + (2 + 5) = 3 + 7 = 10$. ' +
                 'Den associativa lagen gäller även för addition av vektorer. Visa med ett exempel att ' +
                 'detta gäller även för vektorerna $\\vec{u}$, $\\vec{v}$ och $\\vec{w}$.',
@@ -1010,10 +1010,10 @@ window.NP_PROV['ma1c-ht2016'] = {
                         'Exemplet visar att den associativa lagen gäller för vektoraddition.',
                 },
             ],
-            svar: 'Med t.ex. $\\vec{u} = (1,2)$, $\\vec{v} = (3,1)$, $\\vec{w} = (2,4)$: ' +
+            svar: 'Med till exempel $\\vec{u} = (1,2)$, $\\vec{v} = (3,1)$, $\\vec{w} = (2,4)$: ' +
                 '$(\\vec{u} + \\vec{v}) + \\vec{w} = (6,7)$ och $\\vec{u} + (\\vec{v} + \\vec{w}) = (6,7)$ — lika.',
             bedomning: [
-                ['Påbörjad lösning, t.ex. anger tre vektorer och adderar två av dessa', '+C'],
+                ['Påbörjad lösning, till exempel anger tre vektorer och adderar två av dessa', '+C'],
                 ['Korrekt visad likhet', '+A'],
                 ['Tydlig redovisning', '+A'],
             ],
@@ -1052,7 +1052,7 @@ window.NP_PROV['ma1c-ht2016'] = {
             ],
             svar: 'Ungefär år $1976$ (i intervallet $1975$–$1977$)',
             bedomning: [
-                ['Påbörjad lösning, t.ex. beräknar basårets kaffepris', '+A'],
+                ['Påbörjad lösning, till exempel beräknar basårets kaffepris', '+A'],
                 ['Lösning med godtagbart svar ($1975$–$1977$)', '+A'],
             ],
         },

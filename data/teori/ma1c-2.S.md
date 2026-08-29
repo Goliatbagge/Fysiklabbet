@@ -20,10 +20,10 @@ hur många lösningar en ekvation eller olikhet har.
 
 ## Begrepp att kunna
 
-- **variabel**: bokstav (t.ex. $x$) som representerar ett okänt eller
+- **variabel**: bokstav (till exempel $x$) som representerar ett okänt eller
   varierande tal.
 - **koefficient**: talet som multiplicerar en variabel i en term
-  (t.ex. 150 i $150x$).
+  (till exempel 150 i $150x$).
 - **variabelterm / konstantterm**: term som innehåller en variabel
   respektive en term som bara består av ett tal.
 - **uttryckets värde**: talet man får när man sätter in ett värde på
@@ -48,7 +48,7 @@ hur många lösningar en ekvation eller olikhet har.
   tal i serien kallas ett element.
 - **sluten formel**: formel som ger ett godtyckligt element $a_n$ i en
   talföljd direkt, utan att räkna ut alla föregående element.
-- **storhet och formel**: något mätbart, t.ex. längd eller hastighet
+- **storhet och formel**: något mätbart, till exempel längd eller hastighet
   (storhet), respektive en ekvation som beskriver ett samband mellan
   storheter (formel).
 
@@ -110,7 +110,7 @@ eller division med ett negativt tal.
   den minsta potensen av varje variabel som finns i alla termer.
 - Har ekvationen variabler i båda led: samla variabeltermerna på den sida
   som har minst koefficient, så blir fortsatt räkning enklare.
-- Leder ekvationslösningen till en falsk likhet (t.ex. $-12 = 63$) saknar
+- Leder ekvationslösningen till en falsk likhet (till exempel $-12 = 63$) saknar
   ekvationen lösning.
 - I ekvationer med variabeln i nämnaren måste man först ange vilka värden
   som gör nämnaren noll (och alltså inte är tillåtna); har ekvationen en
@@ -130,7 +130,7 @@ eller division med ett negativt tal.
   skillnaden mellan elementen, testa mot $a_1$, och justera med en
   konstant tills formeln stämmer för flera element.
 - Vid formelanvändning måste enheterna vara konsekventa genom hela
-  beräkningen (t.ex. omvandla mil till km, och km/h till samma tidsenhet
+  beräkningen (till exempel omvandla mil till km, och km/h till samma tidsenhet
   som övriga värden) innan man sätter in dem i formeln.
 
 ## Figurer värda att minnas

@@ -60,7 +60,7 @@ för 12 år sedan.
 **Svar:** $x - 12$
 
 **b)** Linn är $x$ år nu. För 4 år sedan var hon $(x - 4)$ år. Albin är
-alltså 3 gånger så gammal som det, dvs. Albin är $3(x - 4)$ år.
+alltså 3 gånger så gammal som det, det vill säga Albin är $3(x - 4)$ år.
 
 Faktorer framför parenteser multiplicerar vi in med varje term:
 

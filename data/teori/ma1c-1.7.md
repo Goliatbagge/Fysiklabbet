@@ -11,8 +11,8 @@ section: '1.7'
 
 ## Exponenten noll
 
-$7^3$ betyder att 7 ska multipliceras med sig själv 3 gånger, dvs.
-$7^3 = 7 \cdot 7 \cdot 7$. Men hur ska vi tolka exponenten noll, t.ex.
+$7^3$ betyder att 7 ska multipliceras med sig själv 3 gånger, det vill säga
+$7^3 = 7 \cdot 7 \cdot 7$. Men hur ska vi tolka exponenten noll, till exempel
 $7^0$?
 
 ::: formel "Exponenten noll"
@@ -23,7 +23,7 @@ $$
 **Varning!** $7^0 \neq 0$ — värdet är 1, inte 0.
 
 ::: härledning "Undersökning — Tolkning av exponenten noll"
-För att undersöka det så studerar vi t.ex. kvoten $\dfrac{7^5}{7^5}$ och
+För att undersöka det så studerar vi till exempel kvoten $\dfrac{7^5}{7^5}$ och
 beräknar den på två sätt.
 
 **Med potenslagarna:**
@@ -73,7 +73,7 @@ $$
 
 ## Negativa exponenter
 
-Hur ska vi tolka negativa exponenter, t.ex. $2^{-3}$? Vi undersöker!
+Hur ska vi tolka negativa exponenter, till exempel $2^{-3}$? Vi undersöker!
 
 ::: formel "Negativa exponenter"
 $$
@@ -82,7 +82,7 @@ $$
 
 ::: härledning "Undersökning — Tolkning av negativa exponenter"
 På motsvarande sätt som för exponenten noll, så undersöker vi tolkningen av
-negativa tal genom att beräkna t.ex. kvoten $\dfrac{2^2}{2^5}$ på två olika
+negativa tal genom att beräkna till exempel kvoten $\dfrac{2^2}{2^5}$ på två olika
 sätt.
 
 **Med potenslagarna:**
@@ -99,7 +99,7 @@ $$
 $$
 
 Båda sätt är korrekta. Vi ser alltså att $2^{-3} = \dfrac{1}{2^3}$. Vi kan
-upprepa samma resonemang och visa att t.ex. $3^{-7} = \dfrac{1}{3^7}$ och
+upprepa samma resonemang och visa att till exempel $3^{-7} = \dfrac{1}{3^7}$ och
 $5^{-4} = \dfrac{1}{5^4}$. Slutsats: tal upphöjt till negativa tal kan
 skrivas som "1 dividerat med samma tal, men utan minustecknet framför
 exponenten".
@@ -188,7 +188,7 @@ $$
 = \frac{b}{a}
 $$
 
-dvs. $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
+det vill säga $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
 :::
 :::
 

@@ -50,7 +50,7 @@ $x$-koordinat.
 En exponentialfunktion i generell form skrivs $y = C \cdot a^x$.
 
 ::: tips "Tillämpningar"
-Vid tillämpningar där vi har en **exponentiell förändring**, t.ex. där
+Vid tillämpningar där vi har en **exponentiell förändring**, till exempel där
 något ändras med en viss procentsats per år, kan vi ställa upp en
 ekvation på formen
 

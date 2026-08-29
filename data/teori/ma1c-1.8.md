@@ -10,7 +10,7 @@ section: '1.8'
 # Rationella exponenter
 
 En exponent som innehåller ett bråk kallas **rationell exponent**. Hur ska
-vi tolka rationella exponenter, t.ex. $25^{1/2}$?
+vi tolka rationella exponenter, till exempel $25^{1/2}$?
 
 ::: formel "Rationella exponenter"
 $$
@@ -18,7 +18,7 @@ a^{1/n} = \sqrt[n]{a}
 $$
 
 ::: härledning "Undersökning — Tolkning av rationella exponenter"
-Vi bildar t.ex. talet 25 på två sätt.
+Vi bildar till exempel talet 25 på två sätt.
 
 **Med potenslagarna:**
 
@@ -44,7 +44,7 @@ $$
 \left(\sqrt[3]{27}\right)^3 = 3^3 = 3 \cdot 3 \cdot 3 = 27
 $$
 
-dvs. $27^{1/3} = \sqrt[3]{27}$.
+det vill säga $27^{1/3} = \sqrt[3]{27}$.
 :::
 :::
 

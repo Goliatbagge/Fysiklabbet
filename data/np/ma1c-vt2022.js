@@ -33,7 +33,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         'Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg i taget. ' +
         'Varje steg förklarar både vad som görs och varför.',
     kravgranser: 'Provet (delprov B–D) ger totalt högst 70 poäng. Poängen skrivs (E/C/A) — ' +
-        't.ex. betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
+        'till exempel betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
         'Gräns för provbetyget: E minst 14 poäng · D minst 27 poäng varav 12 på lägst C-nivå · ' +
         'C minst 35 poäng varav 18 på lägst C-nivå · B minst 46 poäng varav 6 på A-nivå · ' +
         'A minst 55 poäng varav 11 på A-nivå.',
@@ -190,7 +190,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                         'Svaret kan också skrivas $0{,}25a^2$.',
                 },
             ],
-            svar: '$\\dfrac{a^2}{4}$ (eller likvärdigt, t.ex. $0{,}25a^2$)',
+            svar: '$\\dfrac{a^2}{4}$ (eller likvärdigt, till exempel $0{,}25a^2$)',
             bedomning: [['Korrekt svar: $0{,}25a^2$ eller $\\dfrac{a^2}{4}$', '+E']],
         },
 
@@ -320,14 +320,14 @@ window.NP_PROV['ma1c-vt2022'] = {
                         'med lika stora procent, eller via en potens av variabeln.',
                     text: '- **Linjär modell** $y = kx + m$ — ändras med **konstant mängd** per enhet.\n' +
                         '- **Exponentiell modell** $y = C \\cdot a^x$ — ändras med **konstant procent** per enhet.\n' +
-                        '- **Potensmodell** $y = C \\cdot x^n$ — variabeln ingår som en **potens**, t.ex. $x^2$.',
+                        '- **Potensmodell** $y = C \\cdot x^n$ — variabeln ingår som en **potens**, till exempel $x^2$.',
                 },
                 {
                     rubrik: 'Klassificera situation 1 och 2',
                     text: '**1. Lastbilen:** varje kilo sand ökar totalvikten med lika mycket — ' +
                         'konstant ökning per kilo, alltså **linjär modell**.\n\n' +
                         '**2. Bromssträckan:** den beror på hastigheten *i kvadrat*, ' +
-                        'dvs. $y = C \\cdot v^2$ — alltså en **potensmodell**.',
+                        'det vill säga $y = C \\cdot v^2$ — alltså en **potensmodell**.',
                 },
                 {
                     rubrik: 'Klassificera situation 3 och 4',
@@ -547,7 +547,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 {
                     rubrik: 'Avgör var ett sådant område finns',
                     varfor: 'Ett golv måste ligga under sitt tak: villkoret kan bara uppfyllas där ' +
-                        '$f(x) \\leq g(x)$, dvs. där parabeln ligger ovanför linjen.',
+                        '$f(x) \\leq g(x)$, det vill säga där parabeln ligger ovanför linjen.',
                     text: 'I figuren skär graferna varandra i punkten $(4,\\ 3)$. ' +
                         'Till vänster om skärningspunkten ligger parabeln under linjen — där finns inget område. ' +
                         'Till höger om skärningspunkten ligger parabeln över linjen — där finns området.',
@@ -636,7 +636,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                     varfor: 'Två potensuttryck med baserna $2$ och $3$ är lika precis när exponenterna ' +
                         'för respektive bas är lika.',
                     text: '$$\\dfrac{2^{2n}}{3^{n-2}} = \\dfrac{2^{16}}{3^6}$$\n\n' +
-                        'Jämför tvåornas exponenter: $2n = 16$, dvs. $n = 8$.\n\n' +
+                        'Jämför tvåornas exponenter: $2n = 16$, det vill säga $n = 8$.\n\n' +
                         'Kontrollera treornas exponenter: $n - 2 = 8 - 2 = 6$ ✓\n\n' +
                         'Båda villkoren ger samma $n$ — figuren har nummer $8$.',
                     delsvar: { del: 'e', text: 'Figur nummer $8$' },
@@ -647,7 +647,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             bedomning: [
                 ['Anger någon figurs omkrets', '+E'],
                 ['Påbörjar bestämning av omkrets för figur 2', '+E'],
-                ['Motiverar någon figurs omkrets, t.ex. i bild eller med beräkning', '+E'],
+                ['Motiverar någon figurs omkrets, till exempel i bild eller med beräkning', '+E'],
                 ['Bestämmer omkretsen för någon figur $n > 1$ med beräkning eller motivering', '+C'],
                 ['Anger förändringsfaktorn', '+C'],
                 ['Anger ett uttryck för omkretsen i figur $n$', '+A'],
@@ -987,7 +987,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             svar: '$A = 62{,}5\\degree$, $B = 17{,}5\\degree$ och $C = 100\\degree$',
             bedomning: [
                 ['Uttrycker vinkel $B$ och vinkel $C$ som en andel av vinkel $A$', '+C'],
-                ['Ställer upp ett samband baserat på relationen mellan vinklarna, t.ex. genom en ekvation', '+C'],
+                ['Ställer upp ett samband baserat på relationen mellan vinklarna, till exempel genom en ekvation', '+C'],
                 ['Lösning med korrekt svar', '+C'],
             ],
         },
@@ -1050,7 +1050,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 {
                     rubrik: 'Lös ut den årliga förändringsfaktorn',
                     varfor: 'Ekvationen $a^6 = 0{,}6826$ löses genom att dra sjätte roten ur — ' +
-                        'dvs. upphöja till $\\dfrac{1}{6}$.',
+                        'det vill säga upphöja till $\\dfrac{1}{6}$.',
                     text: '$$a = \\left(\\dfrac{157\\,000}{230\\,000}\\right)^{1/6} \\approx 0{,}938$$',
                 },
                 {
@@ -1220,7 +1220,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             ],
             svar: '$x = 19{,}55$',
             bedomning: [
-                ['Påbörjad lösning, t.ex. tecknar ett samband mellan $p$ och $x$', '+A'],
+                ['Påbörjad lösning, till exempel tecknar ett samband mellan $p$ och $x$', '+A'],
                 ['Bestämmer $p$ (eller tecknar en ekvation med endast en variabel för att bestämma $x$)', '+A'],
                 ['Lösning med korrekt svar där $p$ används i procentform', '+A'],
             ],

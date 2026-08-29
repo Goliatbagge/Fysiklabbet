@@ -38,7 +38,7 @@ graden löser vi genom att undersöka gränsfallet (se exemplet nedan).
 ::: härledning "Undersökning — Olikhetstecknets vändning"
 Vi vet att $5 > 3$.
 
-Om vi multiplicerar eller dividerar med ett negativt tal, t.ex. (−1), får
+Om vi multiplicerar eller dividerar med ett negativt tal, till exempel (−1), får
 vi
 
 $$
@@ -50,7 +50,7 @@ $$
 $$
 
 Men detta är ju falskt eftersom −5 är *mindre* än −3. Alltså måste
-olikhetstecknet vändas, dvs. $-5 < -3$, vid multiplikation och division
+olikhetstecknet vändas, det vill säga $-5 < -3$, vid multiplikation och division
 med negativa tal.
 :::
 :::
@@ -150,7 +150,7 @@ $$
 
 När vi svarar med en olikhet vill vi som regel ha variabeln till vänster
 om olikhetstecknet. När vi nu vänder på "10" och "$a$" måste också
-olikhetstecknet vändas, dvs. $a < 10$.
+olikhetstecknet vändas, det vill säga $a < 10$.
 
 **Svar:** $a < 10$
 :::

@@ -14,7 +14,7 @@ section: '5.1'
 Information som behandlas i en undersökning kallas **data**.
 
 Den mängd som undersökningen handlar om kallas **population**. Populationen
-kan utgöras av t.ex. människor eller föremål.
+kan utgöras av till exempel människor eller föremål.
 
 Om man samlar in data från en hel population kallas det
 **totalundersökning**. Totalundersökningar är exakta, men tidskrävande om
@@ -33,11 +33,11 @@ populationen som ska delta i undersökningen. Hur man väljer dessa kallas
   ett tal. Sedan väljs ett tal med en slumpgenerator. "Dra namnlappar ur en
   hatt." Urvalet blir helt slumpmässigt.
 - **Systematiskt urval.** Man använder ett system för hur man gör sitt
-  urval, t.ex. att välja var femte person från en klasslista. Till skillnad
+  urval, till exempel att välja var femte person från en klasslista. Till skillnad
   från vad man kan tro är detta sätt *inte* slumpmässigt (om man inte har
   slumpat ordningen i klasslistan innan).
 - **Stratifierat urval.** Man anpassar valet av individer i stickprovet för
-  att spegla populationen. T.ex. om 75 % av en population är kvinnor, ska
+  att spegla populationen. Till exempel om 75 % av en population är kvinnor, ska
   även 75 % av stickprovet vara kvinnor, om man tror att kön har inverkan
   på resultatet.
 :::
@@ -87,7 +87,7 @@ typ: enkatfraga
 ::: textlosning
 **Svar:** Ja, svarsalternativen täcker inte in alla möjliga svar. Det är
 inte säkert att en svarande föredrar något av språken. Det är inte heller
-säkert att en svarande vet hur t.ex. katalanska låter. Alternativen
+säkert att en svarande vet hur till exempel katalanska låter. Alternativen
 "Inget" och "Vet ej" saknas alltså. (Dessutom nämner frågan *spanska*, men
 alternativet som ges är *katalanska*.)
 :::

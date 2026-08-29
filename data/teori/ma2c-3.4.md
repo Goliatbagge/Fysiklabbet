@@ -10,7 +10,7 @@ section: '3.4'
 # Andragradsekvationer och olikheter med grafritande hjälpmedel
 
 Vi ska nu titta på hur man löser andragradsekvationer och olikheter
-grafiskt med hjälp av grafritande hjälpmedel, t.ex. Geogebra. Vi har på
+grafiskt med hjälp av grafritande hjälpmedel, till exempel Geogebra. Vi har på
 en tidigare nivå löst linjära ekvationer med grafritande hjälpmedel och
 metoden är precis densamma för andragradsekvationer. Skillnaden är att
 vi nu kan få två lösningar.
@@ -38,7 +38,7 @@ Vi har en ekvation VL = 0.
 Vi kan även lösa olikheter med grafritande hjälpmedel.
 
 ::: tips "Lösa olikheter med grafritande hjälpmedel"
-Vi har en olikhet, t.ex. VL < HL eller VL > HL.
+Vi har en olikhet, till exempel VL < HL eller VL > HL.
 
 1. Rita upp $f(x) = \mathrm{VL}$ och $g(x) = \mathrm{HL}$.
 2. Ta fram skärningarna och läs av deras $x$-koordinater. Dessa ger
@@ -61,7 +61,7 @@ som varsin funktion — grafen nedan visar uppritningen.
 **a)** VAD: Vi ritar upp funktionerna $y = x^2 - 4x + 5$ och $y = 2$ i
 Geogebra (se figuren ovan) och tar fram skärningarnas koordinater.
 
-HUR: Skärningarnas $x$-koordinater ger lösningarna, dvs. $x_1 = 3$ och
+HUR: Skärningarnas $x$-koordinater ger lösningarna, det vill säga $x_1 = 3$ och
 $x_2 = 1$.
 
 **Svar:** $x_1 = 3$ och $x_2 = 1$
@@ -72,7 +72,7 @@ nollställena.
 VAD: Vi ritar upp funktionen $y = x^2 - 2x - 15$ i Geogebra och tar
 fram nollställena med verktyget "Nollställen".
 
-HUR: Nollställenas $x$-koordinater ger lösningarna, dvs. $x_1 = 5$ och
+HUR: Nollställenas $x$-koordinater ger lösningarna, det vill säga $x_1 = 5$ och
 $x_2 = -3$.
 
 **Svar:** $x_1 = 5$ och $x_2 = -3$
@@ -89,10 +89,10 @@ grafen.
 
 **a) $x^2 + 6x + 6 < 1$<br>b) $x^2 + 6x + 6 > 1$**
 
-**a)** HUR: Skärningarnas $x$-koordinater ger intervallets gränser, dvs.
+**a)** HUR: Skärningarnas $x$-koordinater ger intervallets gränser, det vill säga
 $x = -5$ och $x = -1$. Eftersom $x^2 + 6x + 6 < 1$ gäller att
-$f(x) < g(x)$, dvs. $f(x)$ ska vara **mindre** än $g(x)$. Detta gäller
-när grafen till $f(x)$ är **under** grafen till $g(x)$, dvs. mellan
+$f(x) < g(x)$, det vill säga $f(x)$ ska vara **mindre** än $g(x)$. Detta gäller
+när grafen till $f(x)$ är **under** grafen till $g(x)$, det vill säga mellan
 $x = -5$ och $x = -1$. Detta ger intervallet $-5 < x < -1$.
 
 **Svar:** $-5 < x < -1$
@@ -101,9 +101,9 @@ $x = -5$ och $x = -1$. Detta ger intervallet $-5 < x < -1$.
 bli desamma som i a-uppgiften, så vi tittar på samma graf igen.
 
 HUR: Skärningarnas $x$-koordinater ger återigen intervallets gränser,
-dvs. $x = -5$ och $x = -1$. Eftersom $x^2 + 6x + 6 > 1$ gäller att
-$f(x) > g(x)$, dvs. $f(x)$ ska vara **större** än $g(x)$. Detta gäller
-när grafen till $f(x)$ är **över** grafen till $g(x)$, dvs. till
+det vill säga $x = -5$ och $x = -1$. Eftersom $x^2 + 6x + 6 > 1$ gäller att
+$f(x) > g(x)$, det vill säga $f(x)$ ska vara **större** än $g(x)$. Detta gäller
+när grafen till $f(x)$ är **över** grafen till $g(x)$, det vill säga till
 vänster om $x = -5$ och till höger om $x = -1$. Detta ger intervallen
 $x < -5$ och $x > -1$.
 

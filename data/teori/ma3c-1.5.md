@@ -14,7 +14,7 @@ tal), utan också kan hantera algebraiska uttryck (bokstavsuttryck),
 kallas **symbolhanterande hjälpmedel**. Geogebra är ett exempel på ett
 sådant hjälpmedel.
 
-Symbolhanterande hjälpmedel kan t.ex. användas för att förenkla uttryck,
+Symbolhanterande hjälpmedel kan till exempel användas för att förenkla uttryck,
 faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.
 
 ::: tips "Kommandon i Geogebra"
@@ -24,7 +24,7 @@ faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.
 | Faktorisera uttryck | Faktorisera( Polynom ) |
 | Lösa ekvationer numeriskt (skriver ut decimaler) | NLös( Ekvation ) |
 | Lösa ekvationer exakt (skriver ut symboler) | Lös( Ekvation ) |
-| Bestämma funktionsvärde | Definiera $f(x) = \ldots$ och skriv sedan t.ex. $f(3)$ |
+| Bestämma funktionsvärde | Definiera $f(x) = \ldots$ och skriv sedan till exempel $f(3)$ |
 | Beräkna gränsvärde | Gränsvärde( Funktion, Värde ) |
 :::
 

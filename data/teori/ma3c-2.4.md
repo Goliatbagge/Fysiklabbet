@@ -14,7 +14,7 @@ section: '2.4'
 Sedan tidigare har vi konstaterat att derivatan grafiskt står för en grafs
 lutning i en viss punkt (eller tangentens lutning i en viss punkt).
 
-Vid tillämpningar inom t.ex. naturvetenskap eller ekonomi står derivatan för
+Vid tillämpningar inom till exempel naturvetenskap eller ekonomi står derivatan för
 någon form av **förändringshastighet vid en tidpunkt**. Enheten för
 derivatan fås genom att ta "enheten för funktionen" per "enheten för
 variabeln".
@@ -40,7 +40,7 @@ timmar).
 
 ## Beräkna derivata med Geogebra
 
-Vi kan beräkna en derivata med symbolhanterande hjälpmedel, t.ex. Geogebra.
+Vi kan beräkna en derivata med symbolhanterande hjälpmedel, till exempel Geogebra.
 Vi definierar då en funktion genom att skriva $f(x) = \ldots$ i
 inmatningsfältet och sedan beräkna derivatan genom att skriva $f'(a)$ för
 den punkt $x = a$ vi är intresserade av.

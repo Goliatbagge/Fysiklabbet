@@ -97,7 +97,7 @@ olika variabler: $x$ och $y$. Då får vi titta på varje variabel för sig.
 
 81, 45 och 27 har **9** som gemensam faktor. Den första termen innehåller
 inget $x$, alltså kan vi inte bryta ut något $x$. Alla termer innehåller
-$y$. Då kan vi bryta ut den minsta potensen av $y$, dvs. $y$. Tillsammans
+$y$. Då kan vi bryta ut den minsta potensen av $y$, det vill säga $y$. Tillsammans
 bryter vi alltså ut $9y$:
 
 $$

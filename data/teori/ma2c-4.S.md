@@ -43,7 +43,7 @@ kortfattat och genomföra enkla bevis.
   den längsta sidan (mitt emot den räta vinkeln); de två övriga sidorna
   kallas kateter.
 - **koordinatgeometri**: att studera geometriska figurer med hjälp av
-  ett koordinatsystem, t.ex. med avståndsformeln och mittpunktsformeln.
+  ett koordinatsystem, till exempel med avståndsformeln och mittpunktsformeln.
 - **likformiga figurer (~)**: figurer med samma form men eventuellt
   olika storlek, vridning eller spegling.
 - **skalfaktor**: talet som anger hur mycket större/mindre en
@@ -199,7 +199,7 @@ cirkel.
 - I cirklar gäller också: vinkeln mellan en tangent och radien till
   tangeringspunkten är 90°, och två radier bildar alltid en likbent
   triangel.
-- Motivera varje beräkningssteg kortfattat i parentes, t.ex.
+- Motivera varje beräkningssteg kortfattat i parentes, till exempel
   "(alternatvinklar)" eller "(vinkelsumma i triangel)" — det är en
   central del av att lösa geometriuppgifter korrekt.
 

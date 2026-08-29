@@ -20,7 +20,7 @@ Algebraiskt bestäms en andragradsfunktions
   Lösningarna ger nollställena.
 - **symmetrilinje** genom medelvärdet av nollställena. Om nollställen
   saknas kan symmetrilinjen fås av "talet framför rottecknet" i
-  *pq*-formeln, dvs. $x_s = -\dfrac{p}{2}$.
+  *pq*-formeln, det vill säga $x_s = -\dfrac{p}{2}$.
 - **extrempunkt** genom att sätta in symmetrilinjens $x$-koordinat i
   funktionsuttrycket. Symmetrilinjen ger extrempunktens $x$-koordinat
   och funktionsuttryckets värde ger extrempunktens $y$-koordinat.
@@ -66,7 +66,7 @@ $$
 **Svar:** $x_s = 2$
 
 **c)** Extrempunkten ligger på symmetrilinjen och har alltså samma
-$x$-koordinat, dvs. $x = 2$. Insättning av $x = 2$ i funktionen
+$x$-koordinat, det vill säga $x = 2$. Insättning av $x = 2$ i funktionen
 $f(x) = 3x^2 - 12x + 9$ ger
 
 $$

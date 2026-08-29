@@ -94,7 +94,7 @@ $$
 **Svar:** $x^2 - 64$
 
 Kommentar: Precis som med kvadreringsreglerna så träna på att få fram
-det slutgiltiga svaret i ett enda steg, dvs. försök att direkt få fram
+det slutgiltiga svaret i ett enda steg, det vill säga försök att direkt få fram
 att $(x + 8)(x - 8) = x^2 - 64$ utan några mellanled.
 
 **b)** Tänk på att även 3 och 5 ska upphöjas till 2:

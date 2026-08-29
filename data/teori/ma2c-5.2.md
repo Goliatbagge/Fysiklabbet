@@ -44,7 +44,7 @@ göra bra uppskattningar.
 Säg att vi ska avgöra hur stort lg 42 är. Det betyder alltså vad vi ska
 upphöja 10 till för att värdet ska bli 42. Vi vet att $10^1 = 10$ är
 för litet. Vi vet också att $10^2 = 100$ är för stort. Alltså måste
-exponenten vara någonstans mellan 1 och 2, dvs. lg 42 ligger mellan 1
+exponenten vara någonstans mellan 1 och 2, det vill säga lg 42 ligger mellan 1
 och 2.
 
 Vi kan få ett exaktare värde genom att slå logaritmen på våra räknare
@@ -55,7 +55,7 @@ Som vi förutsåg hamnade värdet mellan 1 och 2, närmare bestämt ungefär
 1,62. Detta betyder att $42 \approx 10^{1{,}62}$.
 
 Om vi vill ha en exakt likhet, så behåller vi logaritmen i exponenten,
-dvs.
+det vill säga
 
 $$
 42 = 10^{\lg 42}

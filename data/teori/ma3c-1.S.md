@@ -24,7 +24,7 @@ problem.
 - **polynom**: ett uttryck där alla variabeltermer har positiva
   heltalsexponenter.
 - **rationellt uttryck**: ett uttryck med ett polynom i täljaren och ett
-  polynom i nämnaren, t.ex. $\dfrac{5x^2 - 5x}{3x - 3}$.
+  polynom i nämnaren, till exempel $\dfrac{5x^2 - 5x}{3x - 3}$.
 - **förlänga**: multiplicera både täljare och nämnare med samma tal eller
   uttryck; ändrar inte uttryckets värde.
 - **förkorta**: dividera både täljare och nämnare med en gemensam faktor;
@@ -49,7 +49,7 @@ problem.
   gräns ($x \to \infty$) eller avtar utan gräns ($x \to -\infty$).
 - **gränsvärde saknas**: när uttrycket går mot olika värden underifrån och
   ovanifrån finns inget gemensamt gränsvärde.
-- **symbolhanterande hjälpmedel**: en räknare eller programvara (t.ex.
+- **symbolhanterande hjälpmedel**: en räknare eller programvara (till exempel
   Geogebra) som förutom tal även kan hantera algebraiska
   bokstavsuttryck.
 
@@ -162,7 +162,7 @@ utläses "gränsvärdet av $f(x)$ då $x$ går mot $a$ är $L$".
 - Kan du bestämma ett gränsvärde genom att sätta in värdet direkt, och vet
   du när den metoden inte fungerar?
 - Kan du bestämma ett gränsvärde genom att faktorisera och förkorta
-  uttrycket, t.ex. med konjugatregeln?
+  uttrycket, till exempel med konjugatregeln?
 - Vet du hur man med hjälp av tabeller avgör om ett gränsvärde saknas?
 - Kan du bestämma gränsvärden då $x$ går mot en oändlighet, och vet du
   skillnaden mellan oändlighet i täljaren, i nämnaren och i båda?

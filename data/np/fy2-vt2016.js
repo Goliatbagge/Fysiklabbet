@@ -80,7 +80,7 @@ window.NP_PROV['fy2-vt2016'] = {
             ],
             svar: 'Exoplanetens yttemperatur är cirka $250\\ \\mathrm{K}$.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. ställer upp korrekt ekvation för beräkning av $T$', '+E'],
+                ['Godtagbar ansats, till exempel ställer upp korrekt ekvation för beräkning av $T$', '+E'],
                 ['med i övrigt godtagbar lösning och svar ($250\\ \\mathrm{K}$)', '+E'],
             ],
         },
@@ -130,7 +130,7 @@ window.NP_PROV['fy2-vt2016'] = {
             svar: 'Spännkraften i repet är störst i det nedersta läget av svängningen — där borde repet ' +
                 'brista, inte i läge B där farten är noll och spännkraften är som minst.',
             bedomning: [
-                ['Godtagbar förklaring, t.ex. att spännkraften är störst i nedersta läget', '+E'],
+                ['Godtagbar förklaring, till exempel att spännkraften är störst i nedersta läget', '+E'],
             ],
         },
 
@@ -294,7 +294,7 @@ window.NP_PROV['fy2-vt2016'] = {
             svar: 'Det varierande magnetfältet inducerar strömmar i kastrullens botten. Kastrullen har ' +
                 'elektriskt motstånd (resistans), så strömmarna utvecklar värme i metallen.',
             bedomning: [
-                ['I huvudsak korrekta och utförliga resonemang kring induktion, t.ex. att varierande magnetfält ger upphov till strömmar', '+E'],
+                ['I huvudsak korrekta och utförliga resonemang kring induktion, till exempel att varierande magnetfält ger upphov till strömmar', '+E'],
                 ['med ett resonemang om att det finns ett elektriskt motstånd i kastrullen som leder till att den värms', '+C'],
             ],
         },
@@ -489,7 +489,7 @@ window.NP_PROV['fy2-vt2016'] = {
             svar: 'a) $E_\\mathrm{U} \\approx 4{,}1\\ \\mathrm{eV}$. ' +
                 'b) $E_\\mathrm{k} \\approx 3{,}3 \\cdot 10^{-19}\\ \\mathrm{J}$.',
             bedomning: [
-                ['a) Godtagbar ansats, t.ex. ställer upp ett uttryck för utträdesarbetet, $E_\\mathrm{U} = h f_0$', '+E'],
+                ['a) Godtagbar ansats, till exempel ställer upp ett uttryck för utträdesarbetet, $E_\\mathrm{U} = h f_0$', '+E'],
                 ['med i övrigt godtagbar lösning och svar ($4{,}1\\ \\mathrm{eV}$)', '+E'],
                 ['b) Godtagbar lösning och svar ($3{,}3 \\cdot 10^{-19}\\ \\mathrm{J}$)', '+C'],
             ],
@@ -611,7 +611,7 @@ window.NP_PROV['fy2-vt2016'] = {
             ],
             svar: 'Elektronen måste accelereras med spänningen $U \\approx 55\\ \\mathrm{V}$.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. beräknar elektronernas hastighet', '+C'],
+                ['Godtagbar ansats, till exempel beräknar elektronernas hastighet', '+C'],
                 ['med i övrigt godtagbar lösning och svar ($55\\ \\mathrm{V}$)', '+C'],
             ],
         },
@@ -676,7 +676,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 'snabbare än världsrekordfart på $100\\ \\mathrm{m}$. Det finns ingen risk att slå i kanten ' +
                 'vid ett horisontellt uthopp.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. beräknar falltiden, $1{,}009\\ \\mathrm{s}$', '+C'],
+                ['Godtagbar ansats, till exempel beräknar falltiden, $1{,}009\\ \\mathrm{s}$', '+C'],
                 ['med godtagbar hantering av rörelsen i $x$-led och korrekt slutsats (det är ingen risk att slå i kanten)', '+C'],
             ],
         },
@@ -737,7 +737,7 @@ window.NP_PROV['fy2-vt2016'] = {
             svar: 'Vågens utbredningshastighet i strängen är cirka $130\\ \\mathrm{m/s}$ ' +
                 '($0{,}13\\ \\mathrm{km/s}$).',
             bedomning: [
-                ['Godtagbar ansats, t.ex. beräknar våglängden i pipan, $3{,}20\\ \\mathrm{m}$, och i strängen, $1{,}21\\ \\mathrm{m}$', '+C'],
+                ['Godtagbar ansats, till exempel beräknar våglängden i pipan, $3{,}20\\ \\mathrm{m}$, och i strängen, $1{,}21\\ \\mathrm{m}$', '+C'],
                 ['med i övrigt godtagbar lösning och svar ($130\\ \\mathrm{m/s}$)', '+C'],
                 ['med lösningen väl motiverad utifrån att frekvenserna är lika i båda instrumenten, naturvetenskapligt språk och kommunikation anpassad till syfte och sammanhang', '+C'],
             ],
@@ -780,7 +780,7 @@ window.NP_PROV['fy2-vt2016'] = {
                         'Två kombinationer fungerar:\n\n' +
                         '$$N_1 = 500,\\ N_2 = 10: \\quad U_2 = 230 \\cdot \\dfrac{10}{500}\\ \\mathrm{V} = 4{,}6\\ \\mathrm{V}$$\n\n' +
                         '$$N_1 = 1000,\\ N_2 = 50: \\quad U_2 = 230 \\cdot \\dfrac{50}{1000}\\ \\mathrm{V} = 11{,}5\\ \\mathrm{V}$$\n\n' +
-                        'Övriga kvoter hamnar utanför intervallet (t.ex. $10/1000$ ger $2{,}3\\ \\mathrm{V}$ — ' +
+                        'Övriga kvoter hamnar utanför intervallet (till exempel $10/1000$ ger $2{,}3\\ \\mathrm{V}$ — ' +
                         'för lågt; $50/500$ ger $23\\ \\mathrm{V}$ — för högt).',
                     delsvar: { del: 'a', text: 'Två sätt: primärspole $500$ varv med sekundärspole $10$ varv ' +
                         '($U_2 = 4{,}6\\ \\mathrm{V}$), eller primärspole $1000$ varv med sekundärspole $50$ varv ' +
@@ -897,7 +897,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 ['a) Godtagbar ansats, påbörjar en lösning med gitterekvationen $n\\lambda = d \\sin v$ där $n$ eller $d$ är korrekt bestämd', '+E'],
                 ['med i övrigt godtagbar lösning och svar ($420\\ \\mathrm{nm}$, $610\\ \\mathrm{nm}$ och $650\\ \\mathrm{nm}$)', '+E'],
                 ['b) Godtagbar bestämning av energierna för övergångarna till grundtillståndet', '+C'],
-                ['med godtagbar fortsättning, t.ex. beräknar den kortaste våglängden, $1170\\ \\mathrm{nm}$, och motiverar varför de andra våglängderna inte behöver beräknas', '+A'],
+                ['med godtagbar fortsättning, till exempel beräknar den kortaste våglängden, $1170\\ \\mathrm{nm}$, och motiverar varför de andra våglängderna inte behöver beräknas', '+A'],
                 ['med i övrigt godtagbar lösning och svar (våglängderna ligger utanför det synliga området)', '+A'],
             ],
         },
@@ -1035,7 +1035,7 @@ window.NP_PROV['fy2-vt2016'] = {
             ],
             svar: 'Svärtningen motsvarar isotopen $^{38}\\mathrm{Ar}$.',
             bedomning: [
-                ['Godtagbar ansats, t.ex. beräknar hastigheten, $5{,}1 \\cdot 10^5\\ \\mathrm{m/s}$', '+A'],
+                ['Godtagbar ansats, till exempel beräknar hastigheten, $5{,}1 \\cdot 10^5\\ \\mathrm{m/s}$', '+A'],
                 ['med godtagbar fortsättning där massan beräknas, $6{,}28 \\cdot 10^{-26}\\ \\mathrm{kg}$', '+A'],
                 ['med i övrigt godtagbar lösning och svar ($^{38}\\mathrm{Ar}$)', '+A'],
             ],
@@ -1122,9 +1122,9 @@ window.NP_PROV['fy2-vt2016'] = {
             ],
             svar: 'a) $k \\approx 5{,}7\\ \\mathrm{N/m}$. b) $A \\approx 0{,}12\\ \\mathrm{m}$.',
             bedomning: [
-                ['a) Godtagbar ansats, t.ex. avläser periodtiden och inser att sambandet $T = 2\\pi\\sqrt{m/k}$ ska användas', '+C'],
+                ['a) Godtagbar ansats, till exempel avläser periodtiden och inser att sambandet $T = 2\\pi\\sqrt{m/k}$ ska användas', '+C'],
                 ['med i övrigt godtagbar lösning och svar ($5{,}7\\ \\mathrm{N/m}$)', '+A'],
-                ['b) Godtagbar ansats, t.ex. bestämmer den resulterande kraften i något vändläge', '+A'],
+                ['b) Godtagbar ansats, till exempel bestämmer den resulterande kraften i något vändläge', '+A'],
                 ['med i övrigt godtagbar lösning och svar ($0{,}12\\ \\mathrm{m}$)', '+A'],
             ],
         },
@@ -1213,7 +1213,7 @@ window.NP_PROV['fy2-vt2016'] = {
             bedomning: [
                 ['Godtagbar beräkning av passagetiden, $8{,}1 \\cdot 10^{-10}\\ \\mathrm{s}$', '+C'],
                 ['med godtagbar beräkning av hastigheten i $y$-led, $21{,}4\\ \\mathrm{Mm/s}$', '+A'],
-                ['med godtagbar fortsättning, t.ex. beräknar resulterande kraft i $y$-led, $2{,}4 \\cdot 10^{-14}\\ \\mathrm{N}$', '+A'],
+                ['med godtagbar fortsättning, till exempel beräknar resulterande kraft i $y$-led, $2{,}4 \\cdot 10^{-14}\\ \\mathrm{N}$', '+A'],
                 ['med i övrigt godtagbar lösning och svar ($6{,}0\\ \\mathrm{kV}$)', '+A'],
             ],
         },

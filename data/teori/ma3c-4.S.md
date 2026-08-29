@@ -48,7 +48,7 @@ optimeringsproblem.
 - **andraderivatametoden**: metod att bestämma en extrempunkts karaktär
   med hjälp av tecknet på $f''(a)$, som alternativ till en teckentabell.
 - **extremvärdesproblem (optimeringsproblem)**: problem som handlar om
-  att bestämma ett störst eller minst möjligt värde, t.ex. maximal area
+  att bestämma ett störst eller minst möjligt värde, till exempel maximal area
   eller minimal kostnad.
 - **kurvkonstruktion**: att skissa en funktions graf utifrån dess
   ändpunkter, extrempunkter och inflexionspunkter, utan att räkna ut
@@ -143,10 +143,10 @@ där
   den storhet som ska optimeras i EN enda variabel innan derivering, och
   svaret tolkas till sist i problemets sammanhang (med rätt enhet).
 - Kontrollera alltid att svaret i ett extremvärdesproblem ligger inom en
-  rimlig definitionsmängd, t.ex. att en radie eller höjd inte blir
+  rimlig definitionsmängd, till exempel att en radie eller höjd inte blir
   negativ.
 - Extremvärdesproblem kan även lösas grafiskt med digitalt hjälpmedel,
-  t.ex. Geogebra: rita upp funktionen och använd verktyget Extrempunkt i
+  till exempel Geogebra: rita upp funktionen och använd verktyget Extrempunkt i
   stället för att derivera för hand. $x$-koordinaten ger den sökta
   variabeln och $y$-koordinaten det optimerade värdet — men bara som ett
   avrundat värde, inte ett exakt uttryck.
@@ -227,4 +227,4 @@ med inflexionspunkten mitt emellan:
   bivillkor för att få en enda variabel, derivera, bestämma karaktären
   och tolka svaret i sammanhanget?
 - Kan du lösa ett extremvärdesproblem grafiskt med digitalt hjälpmedel,
-  t.ex. med Geogebras verktyg Extrempunkt?
+  till exempel med Geogebras verktyg Extrempunkt?

@@ -12,12 +12,12 @@ section: '4.7'
 När vi löser extremvärdesproblem med derivata gör vi en **algebraisk
 lösning**: vi ställer upp en formel, deriverar, sätter derivatan lika med
 noll och löser ut den obekanta variabeln. Vi kan även lösa
-extremvärdesproblem med **digitala hjälpmedel**, t.ex. Geogebra. Då ritar
+extremvärdesproblem med **digitala hjälpmedel**, till exempel Geogebra. Då ritar
 vi i stället upp grafen för den funktion som ska optimeras och läser av
 eventuella extrempunkter direkt i grafen — utan att derivera för hand.
 
 ::: tips "Så löser du ett extremvärdesproblem grafiskt i Geogebra"
-1. Ställ upp en formel för den storhet som ska optimeras (t.ex. en volym eller en area).
+1. Ställ upp en formel för den storhet som ska optimeras (till exempel en volym eller en area).
 2. Utnyttja ett bivillkor för att uttrycka storheten som en funktion av **en enda** variabel.
 3. Skriv in funktionen i Geogebras inmatningsfält och anpassa koordinataxlarna så att den intressanta delen av grafen syns.
 4. Använd verktyget **Extrempunkt** och klicka på grafen.

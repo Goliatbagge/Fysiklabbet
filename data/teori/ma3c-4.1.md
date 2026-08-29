@@ -16,9 +16,9 @@ funktionen växer eller avtar.
 ::: tips "Växande och avtagande"
 Om värdet på $f'(x)$ är
 
-- **positivt**, dvs. $f'(x) > 0$, är lutningen hos $f(x)$ positiv
+- **positivt**, det vill säga $f'(x) > 0$, är lutningen hos $f(x)$ positiv
   ("uppförsbacke") och funktionen **växande**.
-- **negativt**, dvs. $f'(x) < 0$, är lutningen hos $f(x)$ negativ
+- **negativt**, det vill säga $f'(x) < 0$, är lutningen hos $f(x)$ negativ
   ("nedförsbacke") och funktionen **avtagande**.
 :::
 
@@ -46,10 +46,10 @@ a) $f(x)$<br>b) $g(x)$**
 
 **a)** $f(x)$ är växande där grafen har positiv lutning ("uppförsbacke"
 sett från vänster till höger). Det har den för alla $x$-värden fram till
-$x = 1$, dvs. funktionen är växande för $x < 1$.
+$x = 1$, det vill säga funktionen är växande för $x < 1$.
 
 $f(x)$ är avtagande där grafen har negativ lutning ("nedförsbacke"). Det
-har den för alla $x$-värden efter $x = 1$, dvs. funktionen är avtagande
+har den för alla $x$-värden efter $x = 1$, det vill säga funktionen är avtagande
 för $x > 1$.
 
 **Svar:** Växande för $x < 1$ och avtagande för $x > 1$.
@@ -59,10 +59,10 @@ för $x > 1$.
 :::
 
 **b)** Samma resonemang som i a-uppgiften. $g(x)$ är växande mellan
-$x = -1$ och $x = 1$, dvs. för $-1 < x < 1$.
+$x = -1$ och $x = 1$, det vill säga för $-1 < x < 1$.
 
 $g(x)$ är avtagande för alla $x$-värden före $-1$ och för alla
-$x$-värden efter $1$, dvs. för $x < -1$ och $x > 1$.
+$x$-värden efter $1$, det vill säga för $x < -1$ och $x > 1$.
 
 **Svar:** Växande för $-1 < x < 1$ och avtagande för $x < -1$ samt
 $x > 1$.
@@ -85,13 +85,13 @@ negativ där, eftersom $g(x)$ avtar för $x > 1$. $g'(2)$ är alltså negativ.
 **Svar:** Negativ.
 
 **b)** Att $g'(x) > 0$ betyder att derivatan (lutningen) ska vara positiv,
-dvs. att funktionen växer. Grafen har positiv lutning mellan $x = -1$ och
-$x = 1$, dvs. då $-1 < x < 1$.
+det vill säga att funktionen växer. Grafen har positiv lutning mellan $x = -1$ och
+$x = 1$, det vill säga då $-1 < x < 1$.
 
 **Svar:** $-1 < x < 1$
 
 **c)** Att $g'(x) = 0$ betyder att derivatan (lutningen) ska vara noll,
-dvs. att tangenten i punkten är horisontell. Det är den vid $x = -1$ och
+det vill säga att tangenten i punkten är horisontell. Det är den vid $x = -1$ och
 $x = 1$ (i den lokala minimi- respektive maximipunkten).
 
 **Svar:** $x = -1$ och $x = 1$
@@ -104,7 +104,7 @@ $f(x)$ växer och avtar genom att studera **tecknet** på $f'(x)$ i
 intervallen mellan dess nollställen.
 
 ::: tips "Steg för steg"
-1. Bestäm nollställena till $f'(x)$, dvs. var derivatans graf skär
+1. Bestäm nollställena till $f'(x)$, det vill säga var derivatans graf skär
    $x$-axeln.
 2. Avläs tecknet på $f'(x)$ i varje intervall mellan nollställena —
    positivt tecken ger växande $f(x)$, negativt tecken ger avtagande
@@ -122,7 +122,7 @@ b) För vilka $x$-värden har grafen till $f(x)$ lutningen 0?**
 :::
 
 **a)** $f(x)$ är växande när $f'(x)$ (lutningen) är större än 0. Grafen
-till $f'(x)$ ligger ovanför $x$-axeln mellan $x = -1$ och $x = 5$, dvs.
+till $f'(x)$ ligger ovanför $x$-axeln mellan $x = -1$ och $x = 5$, det vill säga
 för $-1 < x < 5$.
 
 | Intervall | Tecken på $f'(x)$ | $f(x)$ |
@@ -133,7 +133,7 @@ för $-1 < x < 5$.
 
 **Svar:** $-1 < x < 5$
 
-**b)** $f(x)$ har lutningen 0 där $f'(x) = 0$, dvs. där grafen till
+**b)** $f(x)$ har lutningen 0 där $f'(x) = 0$, det vill säga där grafen till
 $f'(x)$ skär $x$-axeln. Det sker vid $x = -1$ och $x = 5$.
 
 **Svar:** $x = -1$ och $x = 5$

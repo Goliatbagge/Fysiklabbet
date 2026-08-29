@@ -9,7 +9,7 @@ section: '2.10'
 
 # Potensekvationer
 
-En ekvation där variabeln, t.ex. $x$, är en potens ("upphöjt till något")
+En ekvation där variabeln, till exempel $x$, är en potens ("upphöjt till något")
 kallas för **potensekvation**. Dessa kan lösas med två algebraiska metoder:
 med potenslagar eller med rotuttryck.
 

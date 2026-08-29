@@ -840,7 +840,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Enheter kan behöva räknas om, men det är inte anledningen till att man behöver ett helt ekvationssystem.',
-      'När en enda ekvation innehåller två obekanta storheter (t.ex. både $a$ och $t$) kan den inte lösas ensam — då behövs en andra ekvation för att bilda ett ekvationssystem.',
+      'När en enda ekvation innehåller två obekanta storheter (till exempel både $a$ och $t$) kan den inte lösas ensam — då behövs en andra ekvation för att bilda ett ekvationssystem.',
       'Accelerationen är oftast precis det man vill bestämma i dessa problem — den är inte noll.',
       'GeoGebra är ett verktyg för att lösa ekvationssystemet, men anledningen till att man behöver systemet är att man har två obekanta storheter, inte ett krav från programmet.',
     ],
@@ -866,7 +866,7 @@ window.EXITTICKETS = {
     choices: [
       'Att bara skriva ner svaret utan uträkning',
       'Att alltid runda av till heltal',
-      'Att redovisa vad man gör i lösningen (t.ex. vilka ekvationer och vilken metod som används)',
+      'Att redovisa vad man gör i lösningen (till exempel vilka ekvationer och vilken metod som används)',
       'Att undvika att nämna GeoGebra i lösningen',
     ],
     correct: 2,
@@ -874,7 +874,7 @@ window.EXITTICKETS = {
       'Även om man använder CAS ska man redovisa vad man gör i lösningen, inte bara presentera svaret.',
       'Svaret ska anges med ett rimligt antal värdesiffror, men det är inte huvudpoängen — det viktiga är att redovisa metoden.',
       'Genomgången betonar att man alltid ska redovisa vad man gör, till exempel skriva "Jag löser ekvationen … med CAS och får …".',
-      'Det finns ingen anledning att undvika att nämna vilket verktyg (t.ex. GeoGebra) man använt — tvärtom ska metoden redovisas tydligt.',
+      'Det finns ingen anledning att undvika att nämna vilket verktyg (till exempel GeoGebra) man använt — tvärtom ska metoden redovisas tydligt.',
     ],
   },
   {
@@ -929,7 +929,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Sträckan är alltid positiv (total väglängd), men det är inte det *s* står för i Torricellis ekvation — där betyder *s* förflyttning.',
-      'I Torricellis ekvation står *s* för förflyttningen, en vektorstorhet som kan vara positiv, negativ eller noll (t.ex. noll om föremålet återvänder till startpunkten).',
+      'I Torricellis ekvation står *s* för förflyttningen, en vektorstorhet som kan vara positiv, negativ eller noll (till exempel noll om föremålet återvänder till startpunkten).',
       'Tiden $t$ förekommer inte alls i Torricellis ekvation — det är hela poängen med formeln.',
       'Accelerationen betecknas *a* i ekvationen, inte *s*.',
     ],
@@ -977,7 +977,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Detta beskriver massa, inte kraft — massa är ett mått på mängden materia i ett föremål.',
-      'Detta beskriver gravitationskraft, som bara är en av flera typer av krafter (t.ex. finns även elektrisk och magnetisk kraft) — frågan gäller kraft i allmänhet.',
+      'Detta beskriver gravitationskraft, som bara är en av flera typer av krafter (till exempel finns även elektrisk och magnetisk kraft) — frågan gäller kraft i allmänhet.',
       'Kraft är just en påverkan som kan ändra ett föremåls rörelse eller form, betecknas *F* och har SI-enheten newton (N).',
       'Kraft är ingen skalär storhet utan en vektorstorhet — den har både storlek och riktning, till skillnad från farten som bara har storlek.',
     ],
@@ -1190,7 +1190,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Att vara lika stora och motriktade räcker inte — kraft och motkraft enligt Newtons tredje lag måste dessutom verka på två OLIKA föremål och vara av samma typ (t.ex. båda gravitationskrafter).',
+      'Att vara lika stora och motriktade räcker inte — kraft och motkraft enligt Newtons tredje lag måste dessutom verka på två OLIKA föremål och vara av samma typ (till exempel båda gravitationskrafter).',
       'Tyngdkraft och normalkraft verkar båda på vikten (samma föremål) och håller den i jämvikt — de kallas jämviktskrafter, inte kraft och motkraft.',
       'Accelerationen hos vikten spelar ingen roll för om krafterna räknas som kraft och motkraft eller ej — avgörande är om de verkar på samma eller olika föremål.',
       'I det här fallet (vikt i vila) är normalkraften och tyngdkraften lika stora, inte olika stora — men det är ändå inte skälet till att de inte räknas som kraft och motkraft.',
@@ -1391,7 +1391,7 @@ window.EXITTICKETS = {
       'Tyngdfaktorn *g* är en annan storhet (kraft per kilogram vid jordytan) — den är inte samma sak som gravitationskonstanten *G*, även om de är relaterade.',
       '*G* kallas gravitationskonstanten och har det ungefärliga värdet $6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.',
       'Ljushastigheten är en helt annan naturkonstant och saknar koppling till gravitationslagens formel.',
-      'Jordens massa är en variabel man sätter in i formeln för en specifik beräkning (t.ex. $m_j$) — den är inte konstanten *G* själv.',
+      'Jordens massa är en variabel man sätter in i formeln för en specifik beräkning (till exempel $m_j$) — den är inte konstanten *G* själv.',
     ],
   },
   {
@@ -1479,7 +1479,7 @@ window.EXITTICKETS = {
     choices: ['N', 'N/kg', 'kg/m³', 'Saknar enhet'],
     correct: 3,
     why: [
-      'Newton (N) är enheten för kraft, t.ex. friktionskraften $F_\\mathrm{f}$ — men *μ* är bara ett förhållandetal.',
+      'Newton (N) är enheten för kraft, till exempel friktionskraften $F_\\mathrm{f}$ — men *μ* är bara ett förhållandetal.',
       'N/kg är enheten för tyngdfaktorn *g*, inte för friktionstalet.',
       'kg/m³ är enheten för densitet, ett helt annat begrepp.',
       'Friktionstalet är förhållandet mellan två krafter (båda i N), så enheterna tar ut varandra och *μ* saknar enhet.',
@@ -1718,7 +1718,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Hastigheten minskar hela tiden (t.ex. från 6 m/s till 0 till −6 m/s), så accelerationen är konstant och negativ under hela kastet.',
+      'Hastigheten minskar hela tiden (till exempel från 6 m/s till 0 till −6 m/s), så accelerationen är konstant och negativ under hela kastet.',
       'Accelerationen är densamma (tyngdaccelerationen) genom hela kastet — den byter inte tecken i vändläget.',
       'Accelerationen är inte noll — då skulle hastigheten inte alls ändras, men den minskar hela tiden.',
       'Om accelerationen vore positiv skulle hastigheten öka, men den minskar (blir mer negativ) genom hela kastet.',
@@ -1750,7 +1750,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Att farten ökar räcker inte för slutsatsen — hastigheten (med tecken) går här från t.ex. 0 till −1 m/s till −2 m/s, alltså minskar den.',
+      'Att farten ökar räcker inte för slutsatsen — hastigheten (med tecken) går här från till exempel 0 till −1 m/s till −2 m/s, alltså minskar den.',
       'Hastigheten går från 0 till −1 m/s till −2 m/s, alltså minskar den, vilket ger en negativ acceleration — trots att farten ökar.',
       'Accelerationen är inte noll eftersom hastigheten hela tiden ändras.',
       'Det går att avgöra: med positiv riktning uppåt minskar hastigheten (blir mer negativ) när farten ökar nedåt, så accelerationen är negativ.',
@@ -1766,7 +1766,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Att hissen rör sig nedåt räcker inte — det är hastighetens förändring som avgör tecknet, och här ökar hastigheten (t.ex. från −2 m/s till −1 m/s till 0).',
+      'Att hissen rör sig nedåt räcker inte — det är hastighetens förändring som avgör tecknet, och här ökar hastigheten (till exempel från −2 m/s till −1 m/s till 0).',
       'Accelerationen är inte noll eftersom hastigheten hela tiden ändras när hissen bromsar in.',
       'Hastigheten går från −2 m/s till −1 m/s till 0, alltså ökar den, vilket ger en positiv acceleration — trots att farten minskar.',
       'Det går att avgöra: hastigheten (med tecken) ökar mot noll, så accelerationen är positiv.',
@@ -3553,7 +3553,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två föremål med samma tecken på laddningen (t.ex. båda negativa) förs nära varandra. Vad händer?',
+    question: 'Två föremål med samma tecken på laddningen (till exempel båda negativa) förs nära varandra. Vad händer?',
     choices: ['De attraherar varandra', 'De repellerar varandra', 'Ingen kraft uppstår', 'De blir neutrala'],
     correct: 1,
     why: [
@@ -3799,7 +3799,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       '$12\\ \\mathrm{V}$ är en typisk spänning för till exempel bilbatterier, inte för det svenska elnätet.',
-      '$110\\ \\mathrm{V}$ används i vissa andra länder (t.ex. USA), men inte i Sverige.',
+      '$110\\ \\mathrm{V}$ används i vissa andra länder (till exempel USA), men inte i Sverige.',
       'Ett vanligt svenskt eluttag har spänningen $230\\ \\mathrm{V}$.',
       '$400\\ \\mathrm{V}$ förekommer i vissa industriella trefaskopplingar, men är inte spänningen i ett vanligt vägguttag.',
     ],
@@ -4742,7 +4742,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Olika antal protoner skulle innebära olika grundämnen, inte isotoper av samma ämne.',
-      'Samma masstal med olika $Z$ beskriver s.k. isobarer, inte isotoper.',
+      'Samma masstal med olika $Z$ beskriver så kallade isobarer, inte isotoper.',
       'Isotoper har samma $Z$ (samma grundämne) men olika antal neutroner, vilket ger olika masstal $A$.',
       'Isotoper av ett grundämne är normalt oladdade atomer — det är antalet neutroner, inte laddningen, som skiljer dem åt.',
     ],
@@ -4788,7 +4788,7 @@ window.EXITTICKETS = {
     choices: ['kWh', 'cal (kalori)', 'u (atommassenhet)', 'eV (elektronvolt)'],
     correct: 3,
     why: [
-      'kWh används för stora energimängder (t.ex. hushållsel), inte för enskilda partiklars energier.',
+      'kWh används för stora energimängder (till exempel hushållsel), inte för enskilda partiklars energier.',
       'Kalori används för värmeenergi i vardagliga sammanhang, inte för partikelfysik.',
       'u är en massenhet, inte en energienhet.',
       'eV, elektronvolt, är en praktisk energienhet för mycket små energier: $1\\ \\mathrm{eV} \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$.',
@@ -5222,7 +5222,7 @@ window.EXITTICKETS = {
 
 'fy2-1.3': [
   {
-    question: 'Vad kallas tiden det tar för en periodisk rörelse att upprepa sig en gång, t.ex. tiden för ett helt varv?',
+    question: 'Vad kallas tiden det tar för en periodisk rörelse att upprepa sig en gång, till exempel tiden för ett helt varv?',
     choices: [
       'Frekvens',
       'Vinkelhastighet',
@@ -5291,7 +5291,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       '$\\dfrac{\\pi}{2}$ rad motsvarar 90°, inte 180°.',
-      '$2\\pi$ rad motsvarar ett helt varv, dvs. 360°.',
+      '$2\\pi$ rad motsvarar ett helt varv, det vill säga 360°.',
       '$\\dfrac{\\pi}{4}$ rad motsvarar 45°.',
       'Eftersom $360^{\\circ} = 2\\pi$ blir $180^{\\circ} = \\pi$.',
     ],
@@ -5327,7 +5327,7 @@ window.EXITTICKETS = {
     why: [
       'Farten (hastighetens storlek) är per definition konstant i detta resonemang — det är riktningen som ändras.',
       'Enligt Newtons första lag fortsätter ett föremål annars rakt fram med konstant hastighet. Eftersom banan är krökt måste hastighetens riktning ändras, vilket kräver en resulterande kraft.',
-      'En bana i sig kan inte producera en kraft — kraften kommer från t.ex. ett snöre, friktion eller gravitation.',
+      'En bana i sig kan inte producera en kraft — kraften kommer från till exempel ett snöre, friktion eller gravitation.',
       'Luftmotstånd är ingen generell förklaring — centripetalkraften kan lika gärna komma från spännkraft, normalkraft eller gravitation, helt utan luft inblandad.',
     ],
   },
@@ -5336,13 +5336,13 @@ window.EXITTICKETS = {
     choices: [
       'En helt egen, extra kraft som alltid finns i cirkelrörelse utöver de andra krafterna',
       'En kraft som bara finns i satelliters omloppsbanor',
-      'Den resulterande kraften, riktad mot cirkelns centrum, som t.ex. kan bestå av spännkraft, friktion, normalkraft eller tyngdkraft',
+      'Den resulterande kraften, riktad mot cirkelns centrum, som till exempel kan bestå av spännkraft, friktion, normalkraft eller tyngdkraft',
       'Kraften som håller emot rörelsen och bromsar farten',
     ],
     correct: 2,
     why: [
       'Centripetalkraften är inte en egen fristående kraft — den är resultanten av de krafter som redan verkar på föremålet.',
-      'Centripetalkraft gäller all cirkulär rörelse, inte bara satelliter — t.ex. en vikt i ett snöre eller en bil i en kurva.',
+      'Centripetalkraft gäller all cirkulär rörelse, inte bara satelliter — till exempel en vikt i ett snöre eller en bil i en kurva.',
       'Detta stämmer med genomgången: centripetalkraften är resultanten av krafter som spännkraft, friktion, normalkraft eller tyngdkraft, riktad mot centrum.',
       'Centripetalkraften bromsar inte farten (den är vinkelrät mot rörelseriktningen) — den ändrar bara riktningen.',
     ],
@@ -6310,7 +6310,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En puls i ett tätare medium (t.ex. en tung fjäder) möter ett tunnare medium (en lätt fjäder). Vad gäller för den transmitterade respektive reflekterade pulsen?',
+    question: 'En puls i ett tätare medium (till exempel en tung fjäder) möter ett tunnare medium (en lätt fjäder). Vad gäller för den transmitterade respektive reflekterade pulsen?',
     choices: ['Transmitteras förkortad, reflekteras omvänd.', 'Transmitteras oförändrad, ingen reflexion sker.', 'Transmitteras förlängd, reflekteras rättvänd.', 'Transmitteras förlängd, reflekteras omvänd.'],
     correct: 2,
     why: [
@@ -6352,7 +6352,7 @@ window.EXITTICKETS = {
     why: [
       'Bukar är istället punkterna med maximal amplitud, mitt emellan noderna.',
       'Noder är punkter som inte rör sig alls — amplituden är där noll.',
-      'Vågfronter är ett begrepp för t.ex. vattenvågor, inte för stillastående punkter på en sträng.',
+      'Vågfronter är ett begrepp för till exempel vattenvågor, inte för stillastående punkter på en sträng.',
       'Källpunkter beskriver inte fenomenet — de fasta punkterna i en stående våg kallas noder.',
     ],
   },
@@ -6568,7 +6568,7 @@ window.EXITTICKETS = {
     choices: ['Infraljud', 'Ultraljud', 'Basljud', 'Undertoner'],
     correct: 0,
     why: [
-      'Ljud under 20 Hz, under människans hörbarhetsgräns, kallas infraljud och genereras t.ex. av jordbävningar och ventilationsfläktar.',
+      'Ljud under 20 Hz, under människans hörbarhetsgräns, kallas infraljud och genereras till exempel av jordbävningar och ventilationsfläktar.',
       'Ultraljud ligger istället över 20 000 Hz, i motsatt ände av skalan.',
       'Basljud är inget etablerat fysikbegrepp för frekvenser under 20 Hz.',
       'Undertoner är inte det vedertagna begreppet för frekvenser under hörbarhetsgränsen — det korrekta begreppet är infraljud.',
@@ -6597,7 +6597,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad orsakar en s.k. ljudbang (sonic boom)?',
+    question: 'Vad orsakar en så kallad ljudbang (sonic boom)?',
     choices: ['Att en ljudvåg reflekteras upprepade gånger mot marken.', 'Att frekvensen sjunker till under den mänskliga hörbarhetsgränsen.', 'Att två ljudvågor med exakt samma frekvens möts i fas.', 'Att ett föremål passerar ljudets hastighet och kör ikapp sina egna ljudvågor.'],
     correct: 3,
     why: [
@@ -6612,7 +6612,7 @@ window.EXITTICKETS = {
 'fy2-2.13': [
   {
     question: 'Vilken typ av vågkälla ger upphov till cirkulära vattenvågor?',
-    choices: ['En punktformig vågkälla, t.ex. en punkt som doppas ner i vattnet.', 'En rak, linjär vågkälla som rör sig fram och tillbaka.', 'Endast vågor orsakade av vind kan bli cirkulära.', 'En vågkälla med oändlig utbredning i en riktning.'],
+    choices: ['En punktformig vågkälla, till exempel en punkt som doppas ner i vattnet.', 'En rak, linjär vågkälla som rör sig fram och tillbaka.', 'Endast vågor orsakade av vind kan bli cirkulära.', 'En vågkälla med oändlig utbredning i en riktning.'],
     correct: 0,
     why: [
       'En punktformig källa skickar ut pulser radiellt åt alla håll, vilket ger cirkulära vågfronter.',
@@ -6673,7 +6673,7 @@ window.EXITTICKETS = {
       'Det värdet är större än 1 och kan inte vara ett sinusvärde — det tyder på att kvoten $v_1/v_2$ blivit omvänd.',
       'Enligt brytningslagen är $\\sin b = \\sin i \\cdot \\dfrac{v_2}{v_1} = 0{,}80 \\cdot \\dfrac{3{,}0}{6{,}0} = 0{,}40$.',
       'Det är samma värde som $\\sin i$ — det skulle innebära att vinkeln inte ändras alls vid brytningen, vilket bara stämmer om hastigheterna är lika.',
-      'Det fås om man råkar dela med fel hastighetskvot (t.ex. en fjärdedel istället för en halv).',
+      'Det fås om man råkar dela med fel hastighetskvot (till exempel en fjärdedel istället för en halv).',
     ],
   },
 ],
@@ -6685,7 +6685,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Interferens beskriver hur vågor påverkar varandra när de möts, inte hur en enskild våg böjs av vid en öppning.',
-      'Refraktion är brytning som sker vid övergång mellan olika medier (t.ex. olika djup), inte avböjning vid en öppning.',
+      'Refraktion är brytning som sker vid övergång mellan olika medier (till exempel olika djup), inte avböjning vid en öppning.',
       'Diffraktion är just det fenomen där en våg böjs av vid kanterna av ett hinder eller en öppning, som om öppningen blev en ny vågkälla.',
       'Reflexion innebär att en våg studsar tillbaka mot ett hinder, inte att den böjs av runt en öppning.',
     ],
@@ -6882,7 +6882,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur markeras i en figur att en vektor (t.ex. ström eller fält) pekar rakt in i papperet?',
+    question: 'Hur markeras i en figur att en vektor (till exempel ström eller fält) pekar rakt in i papperet?',
     choices: [
       'En prick i en cirkel',
       'En dubbelpil',
@@ -7096,7 +7096,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilket ungefärligt värde har elementarladdningen (t.ex. hos en proton eller elektron)?',
+    question: 'Vilket ungefärligt värde har elementarladdningen (till exempel hos en proton eller elektron)?',
     choices: [
       '$1{,}602 \\cdot 10^{-23}\\ \\mathrm{C}$',
       '$1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$',
@@ -7257,7 +7257,7 @@ window.EXITTICKETS = {
     why: [
       'Avvikelsen i vinkel mellan den magnetiska nordriktningen och den geografiska nordriktningen kallas deklination.',
       'Inklination är i stället vinkeln som det jordmagnetiska fältet bildar med markytan.',
-      'Precession är ett annat fysikaliskt fenomen (t.ex. hos snurrande toppar eller jordaxelns långsamma vridning), inte det som beskrivs här.',
+      'Precession är ett annat fysikaliskt fenomen (till exempel hos snurrande toppar eller jordaxelns långsamma vridning), inte det som beskrivs här.',
       'Refraktion är ljusets avböjning vid övergång mellan medier, ett helt annat begrepp från optiken.',
     ],
   },
@@ -7294,7 +7294,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Varför är skyddet mot laddade partiklar från t.ex. solen sämre nära de magnetiska polerna, vilket ger upphov till norrsken där?',
+    question: 'Varför är skyddet mot laddade partiklar från till exempel solen sämre nära de magnetiska polerna, vilket ger upphov till norrsken där?',
     choices: [
       'Där är atmosfären tunnare',
       'Solen står närmast jorden vid polerna',
@@ -8316,7 +8316,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En ljusstråle går från ett optiskt tunnare medium (t.ex. luft) till ett optiskt tätare medium (t.ex. glas). Hur bryts strålen?',
+    question: 'En ljusstråle går från ett optiskt tunnare medium (till exempel luft) till ett optiskt tätare medium (till exempel glas). Hur bryts strålen?',
     choices: [
       'Ljuset bryts från normalen.',
       'Ljuset bryts mot normalen.',
@@ -9176,7 +9176,7 @@ window.EXITTICKETS = {
       'Att molnet gradvis blir varmare av sig självt',
       'Att molnets eget inre gastryck ökar för mycket',
       'Att molnet börjar rotera mycket snabbare än förut',
-      'Att någon störning (t.ex. en supernova-stötvåg) gör en del av molnet tillräckligt tätt för att gravitationen ska ta över',
+      'Att någon störning (till exempel en supernova-stötvåg) gör en del av molnet tillräckligt tätt för att gravitationen ska ta över',
     ],
     correct: 3,
     why: [
@@ -9301,7 +9301,7 @@ window.EXITTICKETS = {
     why: [
       'Talmängderna ligger inuti varandra — ett tal som ligger i $\\mathbb{Z}$ ligger automatiskt också i $\\mathbb{Q}$ och $\\mathbb{R}$.',
       'De naturliga talen $\\mathbb{N}$ innehåller bara icke-negativa heltal — det negativa talet $-7$ ingår inte där.',
-      '$-7$ är ett heltal, och varje heltal är också rationellt (t.ex. $-7 = \\dfrac{-7}{1}$) och reellt. Däremot är $-7$ inte naturligt, eftersom de naturliga talen bara innehåller icke-negativa heltal.',
+      '$-7$ är ett heltal, och varje heltal är också rationellt (till exempel $-7 = \\dfrac{-7}{1}$) och reellt. Däremot är $-7$ inte naturligt, eftersom de naturliga talen bara innehåller icke-negativa heltal.',
       '$-7$ är visst ett heltal — heltalen $\\mathbb{Z}$ innehåller även de negativa heltalen.',
     ],
   },
@@ -9316,7 +9316,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Just det — irrationella tal som π och $\\sqrt{2}$ kan inte skrivas på formen $\\dfrac{a}{b}$ med heltal $a$ och $b$, och deras decimalutveckling är oändlig utan att upprepa sig.',
-      'Tecknet har inget med saken att göra — det finns både negativa rationella tal (t.ex. −0,25) och negativa irrationella tal (t.ex. −π).',
+      'Tecknet har inget med saken att göra — det finns både negativa rationella tal (till exempel −0,25) och negativa irrationella tal (till exempel −π).',
       'Det räcker inte — även $\\dfrac{1}{3} = 0{,}333\\ldots$ har oändligt många decimaler, men de upprepar sig, och talet är rationellt.',
       'Tvärtom — de irrationella talen ingår i de reella talen $\\mathbb{R}$, som innehåller alla tal på tallinjen.',
     ],
@@ -9385,7 +9385,7 @@ window.EXITTICKETS = {
       'Så länge man multiplicerar täljare och nämnare med samma tal (utom 0) är värdet alltid oförändrat, oavsett vilket talet är.',
       'Bråket delas inte upp i mindre värde — bara i fler, mindre delar.',
       'Täljaren blir visserligen större, men nämnaren växer lika många gånger — andelen är kvar.',
-      'Vid förlängning multipliceras täljare och nämnare med samma tal, så bråkets storlek ändras inte — t.ex. är $\\dfrac{1}{4} = \\dfrac{3}{12}$.',
+      'Vid förlängning multipliceras täljare och nämnare med samma tal, så bråkets storlek ändras inte — till exempel är $\\dfrac{1}{4} = \\dfrac{3}{12}$.',
     ],
   },
   {
@@ -9414,10 +9414,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Nej — t.ex. är $\\dfrac{6+2}{2+2} = \\dfrac{8}{4} = 2$, men "stryker" man 2:orna får man $\\dfrac{6}{2} = 3$, vilket är fel.',
-      'Det går utmärkt att stryka gemensamma faktorer, t.ex. $\\dfrac{4 \\cdot 2}{4 \\cdot 1} = \\dfrac{2}{1}$ — så länge det är multiplikation.',
+      'Nej — till exempel är $\\dfrac{6+2}{2+2} = \\dfrac{8}{4} = 2$, men "stryker" man 2:orna får man $\\dfrac{6}{2} = 3$, vilket är fel.',
+      'Det går utmärkt att stryka gemensamma faktorer, till exempel $\\dfrac{4 \\cdot 2}{4 \\cdot 1} = \\dfrac{2}{1}$ — så länge det är multiplikation.',
       'Strykning är egentligen en förkortning — division av täljare och nämnare med samma faktor — och det kräver att talet är en faktor, alltså att det står gångertecken mellan.',
-      'Precis tvärtom — med plustecken mellan ger strykning fel resultat, t.ex. $\\dfrac{6+2}{2+2} = 2$ men $\\dfrac{6}{2} = 3$.',
+      'Precis tvärtom — med plustecken mellan ger strykning fel resultat, till exempel $\\dfrac{6+2}{2+2} = 2$ men $\\dfrac{6}{2} = 3$.',
     ],
   },
   {
@@ -9511,10 +9511,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Jo — blandad form i en beräkning leder lätt till fel, t.ex. att $2\\frac{1}{5}$ råkar läsas som $2 \\cdot \\dfrac{1}{5}$.',
+      'Jo — blandad form i en beräkning leder lätt till fel, till exempel att $2\\frac{1}{5}$ råkar läsas som $2 \\cdot \\dfrac{1}{5}$.',
       'Decimalform är ofta avrundad och kan ge avrundningsfel — bråkform är exakt.',
       'Vid beräkningar ska alltid bråkform användas — därför är det viktigt att kunna växla från blandad form till bråkform.',
-      'Blandad form är bra för att *läsa av* en storlek (t.ex. $3\\frac{3}{4}$ tårtor), men i beräkningar ställer den till det.',
+      'Blandad form är bra för att *läsa av* en storlek (till exempel $3\\frac{3}{4}$ tårtor), men i beräkningar ställer den till det.',
     ],
   },
 ],
@@ -9594,7 +9594,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'När täljare och nämnare skrivs som produkter syns gemensamma faktorer direkt och kan strykas — t.ex. $\\dfrac{7 \\cdot 6}{6 \\cdot 6 \\cdot 7 \\cdot 3} = \\dfrac{1}{18}$ utan att någonsin räkna ut $36 \\cdot 21$.',
+      'När täljare och nämnare skrivs som produkter syns gemensamma faktorer direkt och kan strykas — till exempel $\\dfrac{7 \\cdot 6}{6 \\cdot 6 \\cdot 7 \\cdot 3} = \\dfrac{1}{18}$ utan att någonsin räkna ut $36 \\cdot 21$.',
       'Räknesättet ändras inte — det är fortfarande multiplikation, bara med synliga faktorer.',
       'Att multiplicera först och förkorta sedan ger också rätt svar — det är bara krångligare med stora tal.',
       'Man förkortar fortfarande — men mycket enklare, eftersom faktorerna syns direkt.',
@@ -9661,7 +9661,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Vid multiplikation och division ger värdet med minsta antalet värdesiffror antalet värdesiffror i svaret — t.ex. 19,5 · 24 = 468 ≈ 470 (två värdesiffror, som i 24).',
+      'Vid multiplikation och division ger värdet med minsta antalet värdesiffror antalet värdesiffror i svaret — till exempel 19,5 · 24 = 468 ≈ 470 (två värdesiffror, som i 24).',
       'Då skulle svaret se noggrannare ut än den sämsta mätningen — noggrannheten kan aldrig bli bättre än den osäkraste faktorn.',
       'Minsta antalet decimaler styr vid addition och subtraktion — inte vid multiplikation.',
       'Tre värdesiffror är en vanlig tumregel i fysiken när inget annat anges, men regeln här följer den minst noggranna faktorn.',
@@ -9698,7 +9698,7 @@ window.EXITTICKETS = {
     why: [
       'I faktorformen $3 \\cdot 3 \\cdot 3 \\cdot 3 \\cdot 3$ är varje trea en faktor, men i potensskrivsättet kallas 3:an bas.',
       'Exponenten är talet 5 — det som anger hur många gånger basen ska multipliceras med sig själv.',
-      'Koefficient kallas talet framför en variabel, t.ex. 42 i $42x^3$.',
+      'Koefficient kallas talet framför en variabel, till exempel 42 i $42x^3$.',
       'Basen är det tal som upphöjs — här 3. Exponenten 5 anger antalet faktorer.',
     ],
   },
@@ -9837,7 +9837,7 @@ window.EXITTICKETS = {
 
 'ma1c-1.8': [
   {
-    question: 'Vad kallas en exponent som innehåller ett bråk, t.ex. $25^{1/2}$?',
+    question: 'Vad kallas en exponent som innehåller ett bråk, till exempel $25^{1/2}$?',
     choices: [
       'Rationell exponent',
       'Negativ exponent',
@@ -9913,10 +9913,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Talet framför tiopotensen ska vara minst 1 men mindre än 10 — t.ex. $6{,}3 \\cdot 10^4$, inte $63 \\cdot 10^3$.',
-      'Med $a$ mindre än 1 (t.ex. $0{,}63 \\cdot 10^5$) är talet inte i grundpotensform.',
+      'Talet framför tiopotensen ska vara minst 1 men mindre än 10 — till exempel $6{,}3 \\cdot 10^4$, inte $63 \\cdot 10^3$.',
+      'Med $a$ mindre än 1 (till exempel $0{,}63 \\cdot 10^5$) är talet inte i grundpotensform.',
       'Utan villkoret vore skrivsättet inte entydigt — samma tal kunde skrivas på många sätt.',
-      'Tal mellan 10 och 100 framför tiopotensen (t.ex. $63 \\cdot 10^3$) är inte grundpotensform.',
+      'Tal mellan 10 och 100 framför tiopotensen (till exempel $63 \\cdot 10^3$) är inte grundpotensform.',
     ],
   },
   {
@@ -9997,7 +9997,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Det är prioriteringsreglernas ordning — kom ihåg mattedjävulen uppifrån och ner: parenteser (hornen), potenser (ögonen), multiplikation/division, addition, subtraktion.',
-      'Vänster till höger gäller bara mellan operationer med SAMMA prioritet — annars gäller reglerna, t.ex. $5 + 2 \\cdot 3 = 11$, inte 21.',
+      'Vänster till höger gäller bara mellan operationer med SAMMA prioritet — annars gäller reglerna, till exempel $5 + 2 \\cdot 3 = 11$, inte 21.',
       'Det är precis omvänd ordning — addition och subtraktion kommer sist, inte först.',
       'Parenteser går alltid först — de finns just för att tvinga fram en viss ordning.',
     ],
@@ -10031,7 +10031,7 @@ window.EXITTICKETS = {
       'Produkten är svaret i en multiplikation.',
       'Differensen är svaret i en subtraktion.',
       'Nämnaren är talet man dividerar MED, inte svaret.',
-      'Svaret i en division kallas kvot — t.ex. är kvoten $12/4 = 3$.',
+      'Svaret i en division kallas kvot — till exempel är kvoten $12/4 = 3$.',
     ],
   },
   {
@@ -10192,7 +10192,7 @@ window.EXITTICKETS = {
   {
     question: 'Vilka termer får läggas ihop när man förenklar ett uttryck?',
     choices: [
-      'Endast likadana termer — $x$-termer för sig, $y$-termer för sig osv.',
+      'Endast likadana termer — $x$-termer för sig, $y$-termer för sig och så vidare',
       'Endast termer med plustecken framför',
       'Alla termer i uttrycket',
       'Endast konstanttermer',
@@ -10202,7 +10202,7 @@ window.EXITTICKETS = {
       'Likadana termer läggs ihop var för sig: $x$-termer, $y$-termer, $x^2$-termer och konstanttermer separat.',
       'Tecknet följer med termen i beräkningen, men både plus- och minustermer av samma slag läggs ihop.',
       'Olika slags termer kan inte slås ihop — $6x + 12y$ går inte att förenkla vidare.',
-      'Även variabeltermer av samma slag läggs ihop, t.ex. $8x - 2x = 6x$.',
+      'Även variabeltermer av samma slag läggs ihop, till exempel $8x - 2x = 6x$.',
     ],
   },
   {
@@ -10333,7 +10333,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Faktorisering skriver om uttrycket som en produkt av faktorer, t.ex. $27x^2 - 18x = 9x(3x - 2)$.',
+      'Faktorisering skriver om uttrycket som en produkt av faktorer, till exempel $27x^2 - 18x = 9x(3x - 2)$.',
       'Det är tvärtom utveckling — faktorisering SKAPAR parenteser.',
       'Det är förenkling — faktorisering handlar om att bryta ut gemensamma faktorer.',
       'Värdet beräknas när variabeln får ett tal — faktorisering ändrar bara uttryckets form.',
@@ -10381,7 +10381,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      '$x = 0$ kollar bara konstanttermen — likheten måste gälla för ALLA $x$, och t.ex. missar testet fel i $x$-koefficienten.',
+      '$x = 0$ kollar bara konstanttermen — likheten måste gälla för ALLA $x$, och till exempel missar testet fel i $x$-koefficienten.',
       'Det går utmärkt — kontrollen är en vanlig utveckling av parentesen.',
       'Faktorisering är "distributiva lagen baklänges" — multiplicera in igen och se att det ursprungliga uttrycket kommer tillbaka.',
       'Derivering hör till senare nivåer — och multiplikation är både enklare och tillräcklig.',
@@ -10451,7 +10451,7 @@ window.EXITTICKETS = {
       'Derivering hör inte hemma i ekvationskontroll — det är insättning som gäller.',
       '$\\mathrm{VL} = 4 \\cdot 7 + 7 = 35 = \\mathrm{HL}$ — likheten stämmer, så lösningen är korrekt.',
       'Det kan fungera men är omständligt — insättning i den ursprungliga ekvationen räcker.',
-      'Lösningar behöver inte vara heltal — t.ex. har $\\dfrac{7x}{6} - 15 = -11$ lösningen $x = \\dfrac{24}{7}$.',
+      'Lösningar behöver inte vara heltal — till exempel har $\\dfrac{7x}{6} - 15 = -11$ lösningen $x = \\dfrac{24}{7}$.',
     ],
   },
   {
@@ -10474,7 +10474,7 @@ window.EXITTICKETS = {
 
 'ma1c-2.6': [
   {
-    question: 'Vad är första steget när en ekvation har variabler i **båda** led, t.ex. $2x + 8 = 9x - 20$?',
+    question: 'Vad är första steget när en ekvation har variabler i **båda** led, till exempel $2x + 8 = 9x - 20$?',
     choices: [
       'Dividera båda led med $x$',
       'Samla variabeltermerna på ena sidan av likhetstecknet',
@@ -10502,7 +10502,7 @@ window.EXITTICKETS = {
       'Resultatet blir förstås detsamma oavsett — men genomgångens rekommendation är just minst koefficient, så det första alternativet är mer precist.',
       'Samma sak gäller där — det är koefficientens storlek som avgör, inte sidan.',
       'Vänsterledet kan lika gärna ha den största koefficienten — då är det bättre att ta bort högerledets term.',
-      'Då blir den kvarvarande koefficienten positiv och räkningen enklast — t.ex. tas $2x$ bort ur $2x + 8 = 9x - 20$.',
+      'Då blir den kvarvarande koefficienten positiv och räkningen enklast — till exempel tas $2x$ bort ur $2x + 8 = 9x - 20$.',
     ],
   },
   {
@@ -10557,7 +10557,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilken metod passar när det står EN bråkterm i varje led, t.ex. $\\dfrac{9}{2x} = \\dfrac{3}{8}$?',
+    question: 'Vilken metod passar när det står EN bråkterm i varje led, till exempel $\\dfrac{9}{2x} = \\dfrac{3}{8}$?',
     choices: [
       'Korsvis multiplikation',
       'Prövning',
@@ -10661,7 +10661,7 @@ window.EXITTICKETS = {
       'För att slippa kontrollera ekvationen',
       'För att kunna avrunda svaret korrekt',
       'Det är bara en artighetsfras',
-      'En rimlighetskoll avslöjar översättnings- och räknefel — t.ex. en ålder på 500 år',
+      'En rimlighetskoll avslöjar översättnings- och räknefel — till exempel en ålder på 500 år',
     ],
     correct: 3,
     why: [
@@ -10703,7 +10703,7 @@ window.EXITTICKETS = {
       'Den negativa lösningen glöms lätt — men $(-7)^2 = 49$ också.',
       'Kvadraten av både 7 och −7 är 49, så $x = \\pm 7$.',
       'En andragradsekvation har högst två lösningar.',
-      'Lösningar saknas bara när högerledet är negativt, t.ex. $x^2 = -9$.',
+      'Lösningar saknas bara när högerledet är negativt, till exempel $x^2 = -9$.',
     ],
   },
   {
@@ -10742,7 +10742,7 @@ window.EXITTICKETS = {
 
 'ma1c-2.10': [
   {
-    question: 'Vad kallas en ekvation där variabeln är en potens, t.ex. $x^{14} = 80\\ 000$?',
+    question: 'Vad kallas en ekvation där variabeln är en potens, till exempel $x^{14} = 80\\ 000$?',
     choices: [
       'Andragradsekvation',
       'Rotekvation',
@@ -10754,7 +10754,7 @@ window.EXITTICKETS = {
       'Andragradsekvationen är specialfallet $n = 2$ — här är exponenten 14.',
       'Rotuttryck används för att LÖSA potensekvationer, men det är inte ekvationens namn.',
       'Variabeln är basen i en potens ("upphöjt till något") — en potensekvation.',
-      'I en exponentialekvation sitter variabeln i EXPONENTEN (t.ex. $2^x = 8$) — här är den basen.',
+      'I en exponentialekvation sitter variabeln i EXPONENTEN (till exempel $2^x = 8$) — här är den basen.',
     ],
   },
   {
@@ -10835,7 +10835,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Olikheter innehåller oftast variabler, precis som ekvationer.',
-      'Tvärtom — lösningen är oftast ett helt intervall av tal, t.ex. $x < 9$.',
+      'Tvärtom — lösningen är oftast ett helt intervall av tal, till exempel $x < 9$.',
       '$3x - 4 = 2$ är en ekvation; $3x - 4 < 2$ är en olikhet — skillnaden är tecknet mellan leden.',
       'Olikheter löses nästan precis som ekvationer.',
     ],
@@ -10851,7 +10851,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Vid division med det negativa talet −2 måste olikhetstecknet vändas.',
-      'Både tecknet på 5:an och olikhetstecknet har hanterats fel — kontrollera med t.ex. $x = -6$: $-2 \\cdot (-6) = 12 > 10$ stämmer.',
+      'Både tecknet på 5:an och olikhetstecknet har hanterats fel — kontrollera med till exempel $x = -6$: $-2 \\cdot (-6) = 12 > 10$ stämmer.',
       'Högerledet blir $-5$, inte 5, vid divisionen.',
       'Dividera med −2 och vänd tecknet: $x < \\dfrac{10}{-2} = -5$.',
     ],
@@ -10859,7 +10859,7 @@ window.EXITTICKETS = {
   {
     question: 'Varför vänds olikhetstecknet vid multiplikation med ett negativt tal?',
     choices: [
-      'Talens ordning på tallinjen speglas — t.ex. är $5 > 3$ men $-5 < -3$',
+      'Talens ordning på tallinjen speglas — till exempel är $5 > 3$ men $-5 < -3$',
       'Tecknet vänds egentligen bara vid division, inte multiplikation',
       'För att negativa tal inte kan jämföras',
       'Det är en ren konvention utan matematisk grund',
@@ -10901,7 +10901,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'T.ex. beskriver $v = \\dfrac{s}{t}$ sambandet mellan storheterna hastighet, sträcka och tid.',
+      'Till exempel beskriver $v = \\dfrac{s}{t}$ sambandet mellan storheterna hastighet, sträcka och tid.',
       'Det beskriver snarare en konstant — formler innehåller variabler.',
       'Enheter är viktiga i formler, men formeln är själva sambandet.',
       'Formler är matematiska samband, inte bruksanvisningar.',
@@ -10951,7 +10951,7 @@ window.EXITTICKETS = {
     why: [
       '360 är svaret i MIL — i kilometer är det 3 600.',
       '9 000 är kronorna som återstår efter den fasta kostnaden — de ska divideras med 2,5 kr/km.',
-      'Insättning av $H = 30\\ 000$ ger $9\\ 000 = 2{,}5m$, dvs. $m = 3\\ 600$ km (360 mil).',
+      'Insättning av $H = 30\\ 000$ ger $9\\ 000 = 2{,}5m$, det vill säga $m = 3\\ 600$ km (360 mil).',
       '12 000 vore $30\\ 000/2{,}5$ — den fasta kostnaden 21 000 kr måste dras bort först.',
     ],
   },
@@ -11101,7 +11101,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Täcker man t.ex. "delen" står "andelen · hela" kvar bredvid varandra — multiplikation. Täcker man "andelen" står delen ÖVER hela — division.',
+      'Täcker man till exempel "delen" står "andelen · hela" kvar bredvid varandra — multiplikation. Täcker man "andelen" står delen ÖVER hela — division.',
       'Triangeln kodar multiplikation och division, inte addition.',
       'Triangeln ger formeln — beräkningen gör man själv.',
       'Den fungerar utmärkt även för promille och ppm.',
@@ -11289,7 +11289,7 @@ window.EXITTICKETS = {
       'Kolumnbokstaven följs av radnumret: C5.',
       'Det skrivsättet används inte i vanliga kalkylblad.',
       'Ordningen är alltid bokstav först, radnummer sedan.',
-      'Inget kolon används i cellnamn — kolon anger i stället ett OMRÅDE, t.ex. B3:B10.',
+      'Inget kolon används i cellnamn — kolon anger i stället ett OMRÅDE, till exempel B3:B10.',
     ],
   },
   {
@@ -11354,7 +11354,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Det vore en engångsbetalning, inte en amorteringsplan.',
-      'Skulden delas i lika delar — t.ex. 150 000 kr på 60 månader ger 2 500 kr amortering varje månad. Totalbeloppet sjunker ändå, eftersom räntedelen krymper.',
+      'Skulden delas i lika delar — till exempel 150 000 kr på 60 månader ger 2 500 kr amortering varje månad. Totalbeloppet sjunker ändå, eftersom räntedelen krymper.',
       'Ränta betalas alltid på den aktuella skulden.',
       'Det beskriver annuitetslån — vid rak amortering är det amorteringen som är konstant, inte totalen.',
     ],
@@ -11592,9 +11592,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Fördubbling i varje steg är exponentiell tillväxt, inte linjär.',
-      'Jämn ändringstakt (t.ex. 400 kr per timme) ger en rät linje — därav namnet linjär.',
+      'Jämn ändringstakt (till exempel 400 kr per timme) ger en rät linje — därav namnet linjär.',
       'Linjen kan skära *y*-axeln var som helst — verkstadsmodellen $y = 500 + 400x$ startar på 500.',
-      'Konstanttermen (t.ex. en fast avgift) är tillåten och vanlig.',
+      'Konstanttermen (till exempel en fast avgift) är tillåten och vanlig.',
     ],
   },
   {
@@ -11658,7 +11658,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Ur $y = kx$ följer $k = \\dfrac{y}{x}$ — t.ex. ger (5, 100) konstanten $k = 20$.',
+      'Ur $y = kx$ följer $k = \\dfrac{y}{x}$ — till exempel ger (5, 100) konstanten $k = 20$.',
       'Kvoten är vänd åt fel håll — det ger $\\dfrac{1}{k}$.',
       'En differens ger inte förhållandet mellan variablerna.',
       'Produkten är konstant i en OMVÄND proportionalitet, inte här.',
@@ -11743,7 +11743,7 @@ window.EXITTICKETS = {
     why: [
       'Ligger en punkt utanför linjen är det ett räknefel i den raden av värdetabellen — grafen fungerar som kontroll.',
       'ALLA punkter från tabellen ligger på linjen — det är själva linjäriteten.',
-      'Symmetri kring *y*-axeln gäller t.ex. $y = x^2$, inte räta linjer i allmänhet.',
+      'Symmetri kring *y*-axeln gäller till exempel $y = x^2$, inte räta linjer i allmänhet.',
       'Bågar hör till andra funktionstyper — linjära ekvationer ger räta linjer.',
     ],
   },
@@ -11980,7 +11980,7 @@ window.EXITTICKETS = {
       'Det är funktionsdefinitionen — grafiskt: en lodrät penna skär grafen högst en gång.',
       'Negativa tal är inga problem för funktioner.',
       'Det är kravet åt fel håll — flera *x*-värden får gärna ge samma *y*-värde.',
-      'Även kurvor (t.ex. andragradsfunktioner) är funktioner — linjäritet krävs inte.',
+      'Även kurvor (till exempel andragradsfunktioner) är funktioner — linjäritet krävs inte.',
     ],
   },
   {
@@ -12051,7 +12051,7 @@ window.EXITTICKETS = {
 
 'ma1c-4.8': [
   {
-    question: 'Vad kallas det att lösa en ekvation med hjälp av grafer i t.ex. GeoGebra?',
+    question: 'Vad kallas det att lösa en ekvation med hjälp av grafer i till exempel GeoGebra?',
     choices: [
       'Algebraisk lösning',
       'Prövning',
@@ -12195,9 +12195,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Variabel i nämnaren hör till andra funktionstyper.',
-      'T.ex. $y = 25\\ 000 \\cdot 1{,}02^x$ — variabeln $x$ är exponenten.',
+      'Till exempel $y = 25\\ 000 \\cdot 1{,}02^x$ — variabeln $x$ är exponenten.',
       'Rotuttryck motsvarar rationella exponenter på en variabel BAS.',
-      'Variabel i basen (t.ex. $y = x^2$) ger en potensfunktion.',
+      'Variabel i basen (till exempel $y = x^2$) ger en potensfunktion.',
     ],
   },
   {
@@ -12210,7 +12210,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '$a$ är förändringsfaktorn — t.ex. 1,02 för +2 % per år eller 0,85 för −15 %.',
+      '$a$ är förändringsfaktorn — till exempel 1,02 för +2 % per år eller 0,85 för −15 %.',
       'Det ursprungliga värdet är $C$.',
       'Tiden är exponenten $x$.',
       'Formeln handlar om förändring över tid, inte geometri.',
@@ -12254,7 +12254,7 @@ window.EXITTICKETS = {
       'Det går inte — kurvorna är identiska',
       'Mät kurvans lutning med linjal',
       'Kolla var kurvan skär *x*-axeln',
-      'Beräkna några punkter (t.ex. x = 1) och testa vilka som ligger på kurvan',
+      'Beräkna några punkter (till exempel x = 1) och testa vilka som ligger på kurvan',
     ],
     correct: 3,
     why: [
@@ -12564,7 +12564,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Utfallsrummet är alla möjliga utfall — för en tärning {1, 2, 3, 4, 5, 6}.',
-      'Händelsen är det man frågar efter, t.ex. "minst 5".',
+      'Händelsen är det man frågar efter, till exempel "minst 5".',
       'Population hör till statistiska undersökningar.',
       'Gynnsamma utfall är bara de som stämmer in på händelsen.',
     ],
@@ -12665,7 +12665,7 @@ window.EXITTICKETS = {
       'Konfidensintervall hör till felmarginalen.',
       'Korrelation handlar om samband mellan variabler.',
       'Utfallsrummet är mängden möjliga utfall.',
-      'Relativ frekvens = antal gånger händelsen inträffade delat med antalet försök — t.ex. 139 mål på 200 straffar ≈ 70 %.',
+      'Relativ frekvens = antal gånger händelsen inträffade delat med antalet försök — till exempel 139 mål på 200 straffar ≈ 70 %.',
     ],
   },
   {
@@ -12714,7 +12714,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Tvärtom — produkten av tal mellan 0 och 1 blir MINDRE än faktorerna.',
-      'T.ex. är $P(\\text{två sexor}) = \\dfrac{1}{6} \\cdot \\dfrac{1}{6} = \\dfrac{1}{36}$.',
+      'Till exempel är $P(\\text{två sexor}) = \\dfrac{1}{6} \\cdot \\dfrac{1}{6} = \\dfrac{1}{36}$.',
       '50 % gäller bara enstaka specialfall.',
       'Addition hör till "antingen eller"-situationer, inte kombinationer.',
     ],
@@ -12964,7 +12964,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Sträckor skrivs utan vinkelsymbol, t.ex. AC.',
+      'Sträckor skrivs utan vinkelsymbol, till exempel AC.',
       'Mittenbokstaven anger hörnet där vinkeln sitter — ∠ABC är vinkeln vid B.',
       'Triangeln betecknas utan vinkelsymbol.',
       'Vinkeln vid A skrivs ∠BAC eller ∠CAB.',
@@ -13084,7 +13084,7 @@ window.EXITTICKETS = {
     why: [
       'Sidor beräknas med de vanliga funktionerna tan, sin och cos.',
       'Bråkinvertering är något annat — trots det liknande namnet.',
-      'tan⁻¹, sin⁻¹ och cos⁻¹ går "baklänges": från förhållandet till vinkeln, t.ex. $v = \\cos^{-1}(0{,}753) \\approx 41°$.',
+      'tan⁻¹, sin⁻¹ och cos⁻¹ går "baklänges": från förhållandet till vinkeln, till exempel $v = \\cos^{-1}(0{,}753) \\approx 41°$.',
       'De är räkneverktyg, inte ritverktyg.',
     ],
   },
@@ -13299,7 +13299,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'T.ex. är $-2\\vec{w}$ dubbelt så lång som $\\vec{w}$ och pekar åt motsatt håll.',
+      'Till exempel är $-2\\vec{w}$ dubbelt så lång som $\\vec{w}$ och pekar åt motsatt håll.',
       'Bara multiplikation med 0 nollar vektorn.',
       'Minustecknet gör mer än så — det vänder riktningen.',
       'Skalärmultiplikation vrider aldrig — den skalar och kan vända.',
@@ -13620,7 +13620,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Då har $2x$-termen tappats bort — hela den undre ekvationen ska behållas.',
-      'Enligt den övre ekvationen är y lika med 3x — byt ut y mot 3x i den undre: $2x + 3x = 10$, dvs. $5x = 10$.',
+      'Enligt den övre ekvationen är y lika med 3x — byt ut y mot 3x i den undre: $2x + 3x = 10$, det vill säga $5x = 10$.',
       'Det är *x*-termen som fått fel ersättning — det är $y$ som ska bytas ut mot $3x$, inte $x$.',
       'Substitutionen ska göras i den undre ekvationens *y*-term — inte genom att sätta ekvationernas led lika hur som helst.',
     ],
@@ -13673,7 +13673,7 @@ window.EXITTICKETS = {
       'Det är utgångsläget för substitutionsmetoden — additionsmetoden bygger på teckenmotsatta termer.',
       'Termer som $+5y$ och $-5y$ ger summan 0 vid ledvis addition — variabeln försvinner och kvar blir en ekvation med en variabel.',
       'Högerleden adderas också, men de behöver inte vara lika för att metoden ska fungera.',
-      'Med samma tecken blir summan dubbla termen (t.ex. $5y + 5y = 10y$) — inget elimineras.',
+      'Med samma tecken blir summan dubbla termen (till exempel $5y + 5y = 10y$) — inget elimineras.',
     ],
   },
   {
@@ -13753,7 +13753,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Innan ekvationerna kan tecknas måste det vara tydligt vad varje bokstav står för — t.ex. "k = antalet kor".',
+      'Innan ekvationerna kan tecknas måste det vara tydligt vad varje bokstav står för — till exempel "k = antalet kor".',
       'Ekvationerna kommer i steg 2 — utan definierade variabler vet man inte vad de betyder.',
       'Metoden är algebraisk och exakt — gissning behövs inte.',
       'En graf kan hjälpa men ingår inte i grundproceduren: definiera, ställ upp och lös, tolka.',
@@ -13854,7 +13854,7 @@ window.EXITTICKETS = {
     why: [
       'En parentes i kvadrat utvecklas med en kvadreringsregel, inte konjugatregeln.',
       'Med helt olika termer finns ingen genväg — då får man multiplicera in term för term.',
-      'Två minusparenteser, t.ex. $(a - b)(a - b)$, är en kvadrat — andra kvadreringsregeln gäller då.',
+      'Två minusparenteser, till exempel $(a - b)(a - b)$, är en kvadrat — andra kvadreringsregeln gäller då.',
       'Konjugat är just ett par som $(a + b)(a - b)$ — samma termer, olika tecken emellan. Produkten blir $a^2 - b^2$.',
     ],
   },
@@ -14005,7 +14005,7 @@ window.EXITTICKETS = {
       'Endast ekvationer där konstantterm saknas har roten 0.',
       'Två tal kan aldrig multipliceras till 0 om inget av dem är 0 — därför måste någon faktor vara 0.',
       'Att multiplicera en ekvation med 0 förstör den (allt blir 0 = 0).',
-      'En summa kan bli 0 på många sätt (t.ex. $5 + (-5)$) — principen gäller produkter.',
+      'En summa kan bli 0 på många sätt (till exempel $5 + (-5)$) — principen gäller produkter.',
     ],
   },
   {
@@ -14101,7 +14101,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Under rottecknet ska konstanttermen subtraheras (dvs. ombytt tecken på q).',
+      'Under rottecknet ska konstanttermen subtraheras (det vill säga ombytt tecken på q).',
       'Halva koefficienten med ombytt tecken utanför roten; under roten samma tal i kvadrat minus konstanttermen.',
       'Tecknet utanför roten ska vara ombytt — minus p/2, inte plus.',
       'Det är HALVA koefficienten som används, både utanför och under roten.',
@@ -14284,7 +14284,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Ett tal multiplicerat med sig självt är aldrig negativt — därför finns inget (reellt) värde för roten, och formeln ger inga rötter.',
-      'Lösningar får visst vara negativa (t.ex. x = −7) — det är talet UNDER ROTEN som inte får vara negativt.',
+      'Lösningar får visst vara negativa (till exempel x = −7) — det är talet UNDER ROTEN som inte får vara negativt.',
       'Formeln hanterar negativa p och q utmärkt — problemet är enbart negativt värde under rottecknet.',
       'Negativ diskriminant ger noll lösningar, inte oändligt många.',
     ],
@@ -14420,7 +14420,7 @@ window.EXITTICKETS = {
       'Det är variabelns placering under rottecknet i EKVATIONEN som räknas, inte svarets form.',
       'Lösningens värde har inget med namnet att göra.',
       'Rotekvationer kan mycket väl ha lösningar — "rot" syftar på rottecknet, inte på antalet rötter.',
-      'Namnet syftar på att variabeln (t.ex. x) står under ett rottecken, som i $\\sqrt{x + 2} = 17$.',
+      'Namnet syftar på att variabeln (till exempel x) står under ett rottecken, som i $\\sqrt{x + 2} = 17$.',
     ],
   },
   {
@@ -14501,7 +14501,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Andragradsfunktionens graf bildar en "båge" som kallas parabel.',
-      'Hyperbel är grafen till t.ex. $y = 1/x$ — två separata grenar.',
+      'Hyperbel är grafen till till exempel $y = 1/x$ — två separata grenar.',
       'Räta linjer hör till förstagradsfunktioner ($y = kx + m$).',
       'Sinuskurvan hör till trigonometriska funktioner och böljar fram och tillbaka.',
     ],
@@ -14548,7 +14548,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Symmetrilinjen delar parabeln i två spegellika halvor; extrempunkten ligger alltid på den, och ekvationen skrivs t.ex. $x_s = 3$.',
+      'Symmetrilinjen delar parabeln i två spegellika halvor; extrempunkten ligger alltid på den, och ekvationen skrivs till exempel $x_s = 3$.',
       'Symmetrilinjen är lodrät — en vågrät linje kan inte dela parabeln i två spegellika halvor.',
       'Alla parabler har en symmetrilinje, oavsett om nollställen finns.',
       'Bara parabler med extrempunkt på *y*-axeln har $x_s = 0$ — i allmänhet ligger den någon annanstans.',
@@ -14585,7 +14585,7 @@ window.EXITTICKETS = {
     why: [
       'Extrempunkten ligger mellan nollställena men ger dem inte direkt.',
       'Konstanttermen är funktionens värde vid $x = 0$.',
-      'Nollställen är de *x*-värden där funktionens värde är 0 — ekvationen $f(x) = 0$ (t.ex. med *pq*-formeln) ger dem.',
+      'Nollställen är de *x*-värden där funktionens värde är 0 — ekvationen $f(x) = 0$ (till exempel med *pq*-formeln) ger dem.',
       '$x = 0$ ger skärningen med *y*-axeln, inte nollställena.',
     ],
   },
@@ -14608,7 +14608,7 @@ window.EXITTICKETS = {
   {
     question: 'En funktion saknar nollställen. Hur hittas symmetrilinjen ändå?',
     choices: [
-      'Som "talet framför rottecknet" i *pq*-formeln, dvs. $x_s = -\\dfrac{p}{2}$',
+      'Som "talet framför rottecknet" i *pq*-formeln, det vill säga $x_s = -\\dfrac{p}{2}$',
       'Det går inte — utan nollställen finns ingen symmetrilinje',
       'Genom att läsa av konstanttermen q',
       'Symmetrilinjen är då alltid $x_s = 0$',
@@ -14765,7 +14765,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'HL är 0, dvs. *x*-axeln — skärningarna med den är just grafens nollställen (verktyget "Nollställen" i Geogebra).',
+      'HL är 0, det vill säga *x*-axeln — skärningarna med den är just grafens nollställen (verktyget "Nollställen" i Geogebra).',
       'Det går utmärkt — nollställena är lösningarna.',
       '$y = 0$ ÄR *x*-axeln — en rät linje utan extrempunkt.',
       'Extrempunkten visar största/minsta värde — inte var funktionen är 0.',
@@ -15109,7 +15109,7 @@ window.EXITTICKETS = {
       'Genom att räkna upp många taxar',
       'Genom att visa att alla taxar är hundar',
       'Det går inte att visa',
-      'Med ett enda motexempel, t.ex. en pudel',
+      'Med ett enda motexempel, till exempel en pudel',
     ],
     correct: 3,
     why: [
@@ -15164,7 +15164,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Axiom finns i all matematik, t.ex. "varje heltal n följs av n + 1".',
+      'Axiom finns i all matematik, till exempel "varje heltal n följs av n + 1".',
       'Axiom är överenskomna grundsatser som bevisen vilar på; satser är påståenden som bevisats utifrån axiom, definitioner och tidigare satser.',
       'Skillnaden är just bevisen — axiom kräver inga, satser kräver.',
       'Precis tvärtom.',
@@ -15199,7 +15199,7 @@ window.EXITTICKETS = {
       'Ett udda tal är ett jämnt tal plus 1: $2k + 1$.',
       '$k + 1$ kan vara både jämnt och udda beroende på k.',
       '$2k$ är alltid jämnt (delbart med 2).',
-      '$3k$ växlar också paritet — t.ex. 3, 6, 9.',
+      '$3k$ växlar också paritet — till exempel 3, 6, 9.',
     ],
   },
   {
@@ -15424,7 +15424,7 @@ window.EXITTICKETS = {
     choices: [
       'Det räcker visst — vinklar räcker alltid',
       'Fyrhörningar saknar motsvarande vinklar',
-      'Figurer med lika vinklar kan ha olika proportioner — t.ex. en kvadrat och en avlång rektangel',
+      'Figurer med lika vinklar kan ha olika proportioner — till exempel en kvadrat och en avlång rektangel',
       'Vinklarna går inte att mäta i fyrhörningar',
     ],
     correct: 2,
@@ -15447,7 +15447,7 @@ window.EXITTICKETS = {
     why: [
       'Skillnaden varierar från sida till sida — det är KVOTEN som är konstant.',
       'Hörnantalet måste vara lika för likformighet, men det är inte skalfaktorn.',
-      'Skalfaktorn fås genom att dividera motsvarande sidor, t.ex. 24/8 = 3 — alla sidor i den större figuren är 3 gånger längre.',
+      'Skalfaktorn fås genom att dividera motsvarande sidor, till exempel 24/8 = 3 — alla sidor i den större figuren är 3 gånger längre.',
       'Ett enda sidpar räcker — kvoten är samma för alla par.',
     ],
   },
@@ -15477,7 +15477,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Motsvarande sidor har samma förhållande: stor/liten = stor/liten, dvs. x/5 = 24/8, vilket ger x = 15.',
+      'Motsvarande sidor har samma förhållande: stor/liten = stor/liten, det vill säga x/5 = 24/8, vilket ger x = 15.',
       'Produkter av sidor hör till kordasatsen — likformighet bygger på kvoter.',
       'Paren har blandats — x hör ihop med 5 och 24 hör ihop med 8.',
       'Skillnader bevaras inte vid skalning — kvoterna gör det.',
@@ -15646,7 +15646,7 @@ window.EXITTICKETS = {
       '2,5 fås om förhållandet vänds åt fel håll — d ska vara STÖRRE än c precis som b är större än a.',
       '40 är korsprodukten $4d$ — dividera med 4 för att få d.',
       '9 = 8 + 1 — förhållandet är multiplikativt, inte additivt.',
-      '$\\dfrac{4}{8} = \\dfrac{5}{d}$ ger $4d = 40$, dvs. $d = 10$.',
+      '$\\dfrac{4}{8} = \\dfrac{5}{d}$ ger $4d = 40$, det vill säga $d = 10$.',
     ],
   },
 ],
@@ -15793,7 +15793,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Rätvinklig blir den bara i specialfall (t.ex. randvinkel på halvcirkelbåge).',
+      'Rätvinklig blir den bara i specialfall (till exempel randvinkel på halvcirkelbåge).',
       'Alla radier i en cirkel är lika långa — triangeln får två lika ben och därmed lika basvinklar.',
       'Jo — radiernas lika längd ger alltid en likbent triangel.',
       'Liksidig kräver att även kordan råkar vara lika lång som radien.',
@@ -15877,7 +15877,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Motstående vinklar summerar till 180° — beviset använder randvinkelsatsen: medelpunktsvinklarna 2u + 2v utgör ett helt varv.',
-      'Lika stora blir de bara i specialfall (t.ex. rektangel).',
+      'Lika stora blir de bara i specialfall (till exempel rektangel).',
       '360° är summan av ALLA fyra vinklar.',
       'Räta vinklar kräver att fyrhörningen är en rektangel.',
     ],
@@ -16060,7 +16060,7 @@ window.EXITTICKETS = {
     why: [
       'Ingen multiplikation med 10 sker.',
       'lg a är exponenten — potensen blir talet självt.',
-      '$10^0 = 1$ kräver att exponenten är 0, dvs. a = 1 — inte allmänt.',
+      '$10^0 = 1$ kräver att exponenten är 0, det vill säga a = 1 — inte allmänt.',
       'lg a är precis den exponent som gör att 10-potensen blir a — alltså $10^{\\lg a} = a$. Sambandet används för att skriva tal med basen 10.',
     ],
   },
@@ -16103,7 +16103,7 @@ window.EXITTICKETS = {
     question: 'Vad är en **logaritmekvation**?',
     choices: [
       'En ekvation med två variabler',
-      'En ekvation där variabeln finns i logaritmen, t.ex. $\\lg x = 3$',
+      'En ekvation där variabeln finns i logaritmen, till exempel $\\lg x = 3$',
       'En ekvation som saknar lösning',
       'En ekvation där variabeln är i exponenten',
     ],
@@ -16111,7 +16111,7 @@ window.EXITTICKETS = {
     why: [
       'Antalet variabler har inget med namnet att göra.',
       'Variabeln står inuti logaritmen — ekvationen löses genom omskrivning till potensform: $x = 10^3$.',
-      'Logaritmekvationer har ofta en lösning — t.ex. x = 1 000.',
+      'Logaritmekvationer har ofta en lösning — till exempel x = 1 000.',
       'Det är en exponentialekvation.',
     ],
   },
@@ -16163,7 +16163,7 @@ window.EXITTICKETS = {
       'Exponentform hör till tredje lagen.',
       'Det är summan av logaritmerna, inte produkten av dem, som ger lg xy.',
       'Klassisk fälla: logaritmen av en summa kan INTE delas upp.',
-      'Summan av logaritmer är logaritmen av PRODUKTEN — t.ex. lg 25 + lg 4 = lg 100 = 2.',
+      'Summan av logaritmer är logaritmen av PRODUKTEN — till exempel lg 25 + lg 4 = lg 100 = 2.',
     ],
   },
   {
@@ -16176,7 +16176,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Differensen av logaritmer är logaritmen av KVOTEN — t.ex. lg 3 000 − lg 3 = lg 1 000 = 3.',
+      'Differensen av logaritmer är logaritmen av KVOTEN — till exempel lg 3 000 − lg 3 = lg 1 000 = 3.',
       'Logaritmen av en differens kan inte delas upp.',
       'Resultatet är en logaritm, inte kvoten själv.',
       'Kvoten av två logaritmer är något annat än logaritmen av kvoten.',
@@ -16209,7 +16209,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Division tar bort en faktor 5 — inte exponenten.',
-      '$\\lg 5^x = \\lg 136$ ger $x \\cdot \\lg 5 = \\lg 136$, dvs. $x = \\lg 136 / \\lg 5 \\approx 3{,}05$.',
+      '$\\lg 5^x = \\lg 136$ ger $x \\cdot \\lg 5 = \\lg 136$, det vill säga $x = \\lg 136 / \\lg 5 \\approx 3{,}05$.',
       'En ekvation kräver samma operation på BÅDA led.',
       'Differensen $\\lg 136 - \\lg 5 = \\lg(136/5)$ — det är kvoten av logaritmerna som behövs, inte differensen.',
     ],
@@ -16307,7 +16307,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Minskning betyder förändringsfaktor under 1 (t.ex. 0,85 vid −15 % per år).',
+      'Minskning betyder förändringsfaktor under 1 (till exempel 0,85 vid −15 % per år).',
       'Förändringsfaktorer är alltid positiva — annars växlar värdet tecken.',
       'a = 0,5 gäller bara om halveringen sker på exakt en tidsenhet.',
       'a > 1 beskriver tillväxt — då nås aldrig hälften.',
@@ -16459,7 +16459,7 @@ window.EXITTICKETS = {
     why: [
       'Antalet klasser är just antalet klasser — frekvensen räknar värden.',
       'Klassbredd beskriver avståndet mellan klassgränser.',
-      'Frekvensen anger hur många gånger ett värde förekommer — t.ex. att 17-åringarnas frekvens är 12 om det finns 12 stycken.',
+      'Frekvensen anger hur många gånger ett värde förekommer — till exempel att 17-åringarnas frekvens är 12 om det finns 12 stycken.',
       'Största värdet har inget särskilt namn kopplat till frekvens.',
     ],
   },
@@ -16474,7 +16474,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Klassen med högst frekvens ger typvärdesklassen.',
-      'Klassen 300 ≤ x < 400 har klassmitten 350 — vid t.ex. medelvärdesberäkning räknas alla i klassen som 350.',
+      'Klassen 300 ≤ x < 400 har klassmitten 350 — vid till exempel medelvärdesberäkning räknas alla i klassen som 350.',
       'Medianen är ett lägesmått för hela materialet, inte ett intervalls mitt.',
       'Klassmitten hör till varje enskild klass, inte till axeln.',
     ],
@@ -16725,7 +16725,7 @@ window.EXITTICKETS = {
       'Ingen spridning alls betyder att inget värde avviker från medelvärdet — alla är identiska.',
       'Även 5, 5, 5, 5 (fyra värden) har standardavvikelsen 0.',
       'Medelvärdet finns — det är lika med det gemensamma värdet.',
-      'Värdena kan vara vilket tal som helst, bara de är lika (t.ex. 7, 7, 7).',
+      'Värdena kan vara vilket tal som helst, bara de är lika (till exempel 7, 7, 7).',
     ],
   },
 ],
@@ -16744,7 +16744,7 @@ window.EXITTICKETS = {
       'Lika vanliga värden vore en likformig fördelning — normalfördelningen toppar vid medelvärdet.',
       'Normalfördelningen är den klockformade kurvan där bestämda procentsatser (34,1/13,6/2,3 %) ligger inom givna intervall av standardavvikelser.',
       'Exponentiell tillväxt är något annat — normalfördelning beskriver hur värden SPRIDS.',
-      'Normalfördelade värden kan vara negativa (t.ex. temperaturer).',
+      'Normalfördelade värden kan vara negativa (till exempel temperaturer).',
     ],
   },
   {
@@ -16825,7 +16825,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Lådagram beskriver en enda variabels spridning.',
-      'Regressionslinjen är linjen punkterna samlas kring — regressionen ger dess ekvation, t.ex. y = 270x + 2 500.',
+      'Regressionslinjen är linjen punkterna samlas kring — regressionen ger dess ekvation, till exempel y = 270x + 2 500.',
       'Regression handlar om SAMBANDET mellan två variabler.',
       'Ordningen på punkterna saknar betydelse.',
     ],
@@ -16872,7 +16872,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Statistikknappen i regressionsanalysen listar bl.a. r (korrelationskoefficienten) — för glassexemplet r ≈ 0,97.',
+      'Statistikknappen i regressionsanalysen listar bland annat r (korrelationskoefficienten) — för glassexemplet r ≈ 0,97.',
       'Kalkylbladet innehåller rådata, inte analysresultaten.',
       'Under diagrammet visas ekvationen — r kräver statistikvyn.',
       'Jodå, via "Visa statistik".',
@@ -16942,7 +16942,7 @@ window.EXITTICKETS = {
       'Antalet punkter är n.',
       '$r^2$ är ett sammanfattande mått, inte ett medelvärde av fel.',
       'Kvadreringen tar bort tecknet — riktningen syns i $r$, inte i $r^2$.',
-      '$r^2$ ligger mellan 0 och 1; ju närmare 1, desto bättre kurvanpassning — t.ex. 0,9933 (exponentiell) mot 0,954 (linjär) för världens befolkning.',
+      '$r^2$ ligger mellan 0 och 1; ju närmare 1, desto bättre kurvanpassning — till exempel 0,9933 (exponentiell) mot 0,954 (linjär) för världens befolkning.',
     ],
   },
   {
@@ -16993,7 +16993,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — ett bråk där både täljare och nämnare är polynom, t.ex. $\\dfrac{5x^2 - 5x}{3x - 3}$.',
+      'Precis — ett bråk där både täljare och nämnare är polynom, till exempel $\\dfrac{5x^2 - 5x}{3x - 3}$.',
       'Tvärtom, variabler är typiska för rationella uttryck.',
       'Rationella uttryck innehåller nästan alltid variabler — det är polynomen i täljare och nämnare som är det centrala.',
       'Ett rationellt uttryck är just ett uttryck, inte en ekvation — det finns inget likhetstecken.',
@@ -17128,7 +17128,7 @@ window.EXITTICKETS = {
       'Det är metoder för att faktorisera polynom, inte för att lösa ekvationer med rationella uttryck.',
       'Det är operationer på rationella uttryck i sig, inte metoder för att lösa ekvationer.',
       'Just dessa två metoder löser ekvationer med rationella uttryck — antingen multiplicerar man bort nämnarna, eller gör man alla termer liknämniga.',
-      'De kan behövas som delsteg (t.ex. vid en andragradsekvation som dyker upp under lösningen), men är inte själva huvudmetoderna för rationella ekvationer.',
+      'De kan behövas som delsteg (till exempel vid en andragradsekvation som dyker upp under lösningen), men är inte själva huvudmetoderna för rationella ekvationer.',
     ],
   },
   {
@@ -17194,7 +17194,7 @@ window.EXITTICKETS = {
     why: [
       'Målet är tvärtom att förenkla uttrycket, inte göra det krångligare.',
       'Det handlar om vilka räkneoperationer som är matematiskt giltiga, inte om någon godtycklig regel.',
-      'Att förkorta term för term är ett vanligt fel — t.ex. kan $\\dfrac{x+2}{x+5}$ inte förkortas till $\\dfrac{2}{5}$.',
+      'Att förkorta term för term är ett vanligt fel — till exempel kan $\\dfrac{x+2}{x+5}$ inte förkortas till $\\dfrac{2}{5}$.',
       'Precis — en gemensam faktor måste synas i både täljare och nämnare för att få strykas, och faktorisering gör dessa faktorer synliga.',
     ],
   },
@@ -17243,7 +17243,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Många gränsvärden bestäms just för uttryck som ÄR odefinierade i en punkt (t.ex. $\\dfrac{0}{0}$), men gränsvärdet existerar ofta ändå.',
+      'Många gränsvärden bestäms just för uttryck som ÄR odefinierade i en punkt (till exempel $\\dfrac{0}{0}$), men gränsvärdet existerar ofta ändå.',
       'Ett gränsvärde handlar om vad ett uttryck närmar sig, inte om något maximivärde.',
       'Ett gränsvärde beskriver ett enda uttrycks beteende, inte en jämförelse mellan två uttryck.',
       'Precis — gränsvärdet är det värde uttrycket närmar sig, till exempel $\\lim_{x \\to \\infty} \\dfrac{1}{x} = 0$, även om uttrycket aldrig når fram dit.',
@@ -17326,7 +17326,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — utöver numeriska beräkningar (beräkningar med tal) kan ett symbolhanterande hjälpmedel räkna med algebraiska uttryck, t.ex. faktorisera och lösa ekvationer symboliskt. Geogebra är ett exempel.',
+      'Precis — utöver numeriska beräkningar (beräkningar med tal) kan ett symbolhanterande hjälpmedel räkna med algebraiska uttryck, till exempel faktorisera och lösa ekvationer symboliskt. Geogebra är ett exempel.',
       'Tvärtom — det är just förmågan att hantera algebraiska uttryck utöver tal som skiljer ett symbolhanterande hjälpmedel från en vanlig räknare.',
       'En vanlig miniräknare klarar bara numeriska beräkningar — den kan inte hantera uttryck med bokstäver i sig.',
       'Grafritning är bara en av flera funktioner i Geogebra — symbolhanteringen (förenkla, faktorisera, lösa, gränsvärden) är det utmärkande.',
@@ -17343,7 +17343,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Gränsvärde( Funktion, Värde ) beräknar vad ett uttryck närmar sig, inte hur det faktoriseras.',
-      'Faktorisera( Polynom ) skriver om ett polynom som en produkt av faktorer, t.ex. $(x-1)(x+3)(x+5)$.',
+      'Faktorisera( Polynom ) skriver om ett polynom som en produkt av faktorer, till exempel $(x-1)(x+3)(x+5)$.',
       'Förenkla förenklar ett uttryck, men skriver inte nödvändigtvis om det som en produkt av faktorer.',
       'Lös( Ekvation ) löser ekvationer — det förutsätter ett likhetstecken, inte bara ett uttryck att faktorisera.',
     ],
@@ -17358,7 +17358,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'NLös (numeriskt lös) svarar med decimaltal, t.ex. $x \\approx 1{,}73$, medan Lös svarar exakt, t.ex. $x = \\sqrt{3}$.',
+      'NLös (numeriskt lös) svarar med decimaltal, till exempel $x \\approx 1{,}73$, medan Lös svarar exakt, till exempel $x = \\sqrt{3}$.',
       'Skillnaden är just formen på svaret: decimaler mot exakta symboler.',
       'Både NLös och Lös fungerar på ekvationer av godtycklig grad, inte bara förstagradsekvationer.',
       'Det är tvärtom — NLös står för "numeriskt lös" och ger decimalform.',
@@ -17432,7 +17432,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad står sekantens lutning för vid tillämpningar, t.ex. när en storhet förändras över tiden?',
+    question: 'Vad står sekantens lutning för vid tillämpningar, till exempel när en storhet förändras över tiden?',
     choices: [
       'En genomsnittlig förändringshastighet',
       'Ett maximivärde',
@@ -17542,12 +17542,12 @@ window.EXITTICKETS = {
     why: [
       'Enbart minuter är enheten för tiden, inte för lutningen mellan volym och tid.',
       'Enbart liter är enheten för volymen själv, inte för hur snabbt den förändras.',
-      'Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", dvs. liter per minut.',
+      'Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", det vill säga liter per minut.',
       'Det är tvärtom — täljaren i enheten följer $y$-axeln och nämnaren $x$-axeln, inte omvänt.',
     ],
   },
   {
-    question: 'Vad står tangentens lutning för när en graf visar en storhet som funktion av tiden, t.ex. sträcka som funktion av tid?',
+    question: 'Vad står tangentens lutning för när en graf visar en storhet som funktion av tiden, till exempel sträcka som funktion av tid?',
     choices: [
       'Medelhastigheten över hela tidsintervallet',
       'Det totala värdet av storheten vid den tidpunkten',
@@ -17624,7 +17624,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Punkten $x=a$ är fortfarande kvar; det är den ANDRA punkten, $a+h$, som glider in mot den första när $h \\to 0$.',
-      'Precis — när den andra punkten $(a+h, f(a+h))$ närmar sig $(a, f(a))$ (dvs. $h \\to 0$) glider sekanten mot tangenten i punkten.',
+      'Precis — när den andra punkten $(a+h, f(a+h))$ närmar sig $(a, f(a))$ (det vill säga $h \\to 0$) glider sekanten mot tangenten i punkten.',
       'Det är bara sekanten som övergår i tangenten, inte hela kurvan som rätas ut.',
       'Funktionen är oförändrad — det är bara vilken linje (sekant eller tangent) vi betraktar som ändras.',
     ],
@@ -17649,7 +17649,7 @@ window.EXITTICKETS = {
 
 'ma3c-2.4': [
   {
-    question: 'Vad står derivatan för vid tillämpningar inom t.ex. naturvetenskap eller ekonomi?',
+    question: 'Vad står derivatan för vid tillämpningar inom till exempel naturvetenskap eller ekonomi?',
     choices: [
       'Grafens skärningspunkt med *x*-axeln',
       'Funktionens värde vid en viss tidpunkt',
@@ -17674,7 +17674,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Rätt — enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln", dvs. kg per s.',
+      'Rätt — enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln", det vill säga kg per s.',
       'Det är enheten för variabeln $x$, inte för derivatan.',
       'Det är enheten för $g(x)$ själv, inte för förändringshastigheten $g\'(x)$.',
       'Kvoten tas i motsatt ordning mot det korrekta: det är funktionens enhet per variabelns enhet, inte tvärtom.',
@@ -17767,15 +17767,15 @@ window.EXITTICKETS = {
     question: 'Vilket av följande är INTE ett skäl till att en funktion saknar derivata i en punkt?',
     choices: [
       'Funktionen är deriverbar och kontinuerlig i punkten',
-      'Funktionen är inte definierad där (t.ex. ett språng)',
-      'Funktionen är diskontinuerlig där (t.ex. ett hopp)',
+      'Funktionen är inte definierad där (till exempel ett språng)',
+      'Funktionen är diskontinuerlig där (till exempel ett hopp)',
       'Funktionen har en hörnpunkt där',
     ],
     correct: 0,
     why: [
       'Om funktionen redan är deriverbar i punkten finns derivatan förstås där — detta är motsatsen till ett skäl att sakna derivata.',
       'En funktion som inte är definierad i en punkt kan inte heller ha en derivata där.',
-      'En diskontinuerlig funktion (t.ex. med ett hopp) kan inte ha en väldefinierad derivata i den punkten.',
+      'En diskontinuerlig funktion (till exempel med ett hopp) kan inte ha en väldefinierad derivata i den punkten.',
       'I en hörnpunkt är lutningen olika från vänster och höger, så derivatan saknar ett entydigt värde.',
     ],
   },
@@ -17807,7 +17807,7 @@ window.EXITTICKETS = {
     why: [
       'Deriverbarhet kräver kontinuitet, och en funktion med ett hopp är inte kontinuerlig i punkten.',
       'Ett hopp innebär att grafen inte hänger ihop, så funktionen är inte ens kontinuerlig i $x = 2$ — inte bara icke-deriverbar.',
-      'Den öppna ringen visar att gränsvärdet från ena hållet är 5 medan det faktiska funktionsvärdet (fylld prick) är 3 — grafen hänger inte ihop, dvs. ett hopp. Då är funktionen varken kontinuerlig eller deriverbar i punkten.',
+      'Den öppna ringen visar att gränsvärdet från ena hållet är 5 medan det faktiska funktionsvärdet (fylld prick) är 3 — grafen hänger inte ihop, det vill säga ett hopp. Då är funktionen varken kontinuerlig eller deriverbar i punkten.',
       'Den fyllda pricken vid $(2, 3)$ visar tvärtom att funktionen faktiskt är definierad i $x = 2$, med värdet 3.',
     ],
   },
@@ -17940,7 +17940,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Exponenten på $x$ i den deriverade termen ska minska med 1 jämfört med ursprungstermen — här blir det $x^2$, inte $x$.',
-      'Koefficienten $6$ ska multipliceras med exponenten $3$ innan exponenten minskas, dvs. $3 \\cdot 6 = 18$, inte bara $6$.',
+      'Koefficienten $6$ ska multipliceras med exponenten $3$ innan exponenten minskas, det vill säga $3 \\cdot 6 = 18$, inte bara $6$.',
       'Konstanttermen $9$ har derivatan $0$ och ska inte finnas kvar i svaret.',
       'Varje term deriveras för sig: $6x^3$ ger $18x^2$, $-2x$ ger $-2$, och konstanten $9$ försvinner.',
     ],
@@ -17990,7 +17990,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Med derivatans definition visar man att regeln fungerar lika bra för bråkexponenter (t.ex. $a = 1/2$) och negativa exponenter (t.ex. $a = -1$) — regeln är alltså generell.',
+      'Med derivatans definition visar man att regeln fungerar lika bra för bråkexponenter (till exempel $a = 1/2$) och negativa exponenter (till exempel $a = -1$) — regeln är alltså generell.',
       'Regeln gäller betydligt bredare — även bråk- och negativa exponenter ger samma enkla mönster.',
       'Regeln gäller inte bara negativa heltal, utan alla reella exponenter.',
       'Bråkexponenter är bara ett av flera fall regeln täcker — den gäller även heltal och negativa exponenter.',
@@ -18025,7 +18025,7 @@ window.EXITTICKETS = {
       'Att skriva om roten som en potens ger $x^{1/2}$, inte ett uttryck med $x$ multiplicerat med en konstant.',
       'Exponenten 2 svarar mot $x^2$, inte mot roten ur $x$.',
       'Exponenten ska vara positiv $1/2$ — det negativa tecknet hör till $\\dfrac{1}{\\sqrt{x}}$, inte till $\\sqrt{x}$.',
-      'Kvadratroten ur $x$ motsvarar exponenten $1/2$, dvs. $\\sqrt{x} = x^{1/2}$.',
+      'Kvadratroten ur $x$ motsvarar exponenten $1/2$, det vill säga $\\sqrt{x} = x^{1/2}$.',
     ],
   },
   {
@@ -18189,13 +18189,13 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Tiologaritmen har basen 10 och skrivs $\\lg$ — $\\ln$ har i stället basen $e$.',
-      '$\\ln$ är den naturliga logaritmen, dvs. $e$-logaritmen — $\\ln 5$ svarar på "vad ska $e$ upphöjas till för att bli 5?".',
+      '$\\ln$ är den naturliga logaritmen, det vill säga $e$-logaritmen — $\\ln 5$ svarar på "vad ska $e$ upphöjas till för att bli 5?".',
       '$\\ln 5$ är en logaritm, inte en division mellan $e$ och 5.',
       'Det är $e^5$, inte $\\ln 5$ — ordningen mellan bas och exponent är omvänd.',
     ],
   },
   {
-    question: 'Vad händer med koefficienten framför en exponentialfunktion, t.ex. i $f(x) = 4e^{3x}$, när man deriverar?',
+    question: 'Vad händer med koefficienten framför en exponentialfunktion, till exempel i $f(x) = 4e^{3x}$, när man deriverar?',
     choices: [
       'Den försvinner',
       'Den kvadreras',
@@ -18204,7 +18204,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Koefficienten framför en exponentialfunktion försvinner aldrig vid derivering, till skillnad från t.ex. en konstantterm i en summa.',
+      'Koefficienten framför en exponentialfunktion försvinner aldrig vid derivering, till skillnad från till exempel en konstantterm i en summa.',
       'Ingenting i deriveringsregeln kvadrerar koefficienten framför funktionen.',
       'Koefficienten framför funktionen byter inte plats med exponenten vid derivering.',
       'En konstant faktor framför funktionen följer med rakt av — bara faktorer i exponenten påverkar hur derivatan bildas.',
@@ -18223,7 +18223,7 @@ window.EXITTICKETS = {
       'Om basen ska ha en $\\ln$-faktor eller ej avgörs av basen, inte av om det finns en koefficient framför funktionen.',
       'Är basen $e$ gäller $\\ln e = 1$, så den faktorn syns inte — därför multiplicerar man bara med $\\ln$ när basen är en annan än $e$.',
       'Med basen $e$ skulle det innebära att multiplicera med $\\ln e = 1$, vilket inte ändrar något — regeln gäller alltså bara andra baser.',
-      'Utan $\\ln$-faktorn skulle t.ex. $f(x) = 2^x$ få samma derivata som $f(x) = e^x$, vilket är fel — baserna ger olika brantheter.',
+      'Utan $\\ln$-faktorn skulle till exempel $f(x) = 2^x$ få samma derivata som $f(x) = e^x$, vilket är fel — baserna ger olika brantheter.',
     ],
   },
 ],
@@ -18313,7 +18313,7 @@ window.EXITTICKETS = {
 
 'ma3c-3.7': [
   {
-    question: 'Vilket Geogebra-kommando ger derivatans värde vid en given punkt, t.ex. vid $x = 3$, för en redan definierad funktion $f$?',
+    question: 'Vilket Geogebra-kommando ger derivatans värde vid en given punkt, till exempel vid $x = 3$, för en redan definierad funktion $f$?',
     choices: [
       'Lös(f(x) = 3)',
       'NLös(f(x) = 3)',
@@ -18371,7 +18371,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Basbytet kräver logaritmering — $k$ är inte samma tal som $a$.',
-      'Precis — logaritmera båda led i $e^k = a$: $\\ln e^k = \\ln a$, dvs. $k \\cdot \\ln e = \\ln a$, och eftersom $\\ln e = 1$ blir $k = \\ln a$.',
+      'Precis — logaritmera båda led i $e^k = a$: $\\ln e^k = \\ln a$, det vill säga $k \\cdot \\ln e = \\ln a$, och eftersom $\\ln e = 1$ blir $k = \\ln a$.',
       'Det är den naturliga logaritmen (ln, med basen $e$) som används här, inte 10-logaritmen.',
       '$k$ beror bara på förändringsfaktorn $a$ — startvärdet $C$ påverkar inte $k$.',
     ],
@@ -18387,7 +18387,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       `En maximipunkt hos $f'(x)$ ger i stället den brantaste positiva lutningen.`,
-      `Ja — lutningen är som mest negativ just där derivatan $f'(x)$ själv har sitt minsta värde, dvs. i derivatans minimipunkt.`,
+      `Ja — lutningen är som mest negativ just där derivatan $f'(x)$ själv har sitt minsta värde, det vill säga i derivatans minimipunkt.`,
       `Det är inget villkor som beskriver extrem lutning — $f'(x)$ och $f(x)$ är olika funktioner.`,
       `Ett nollställe till $f'(x)$ betyder att lutningen är noll (en extrempunkt hos $f$), inte att lutningen är som mest negativ.`,
     ],
@@ -18681,7 +18681,7 @@ window.EXITTICKETS = {
     choices: [
       'Den måste vara samma funktion som $f$',
       'Den kan vara vilken funktion som helst',
-      'Den måste vara en primitiv funktion till $f$, dvs. en funktion vars derivata är lika med $f$',
+      'Den måste vara en primitiv funktion till $f$, det vill säga en funktion vars derivata är lika med $f$',
       'Den måste vara derivatan av $f$',
     ],
     correct: 2,
@@ -18762,14 +18762,14 @@ window.EXITTICKETS = {
   {
     question: 'Med kommandot Integral( Funktion, Från *x*-värde, Till *x*-värde ) i standardläget — vilken typ av svar får man?',
     choices: [
-      'Ett exakt svar, t.ex. i bråkform',
+      'Ett exakt svar, till exempel i bråkform',
       'Ett närmevärde (ett ungefärligt decimaltal)',
       'Ett samband mellan två variabler',
       'En primitiv funktion utan gränser',
     ],
     correct: 1,
     why: [
-      'Ett exakt svar, t.ex. som bråk, får man i stället i CAS-läget.',
+      'Ett exakt svar, till exempel som bråk, får man i stället i CAS-läget.',
       'I standardläget beräknar Geogebra integralen numeriskt och ger ett ungefärligt decimaltal.',
       'Svaret är ett enda tal — integralens värde mellan gränserna — inte ett samband.',
       'Kommandot har två integrationsgränser inmatade, så svaret blir ett tal, inte en funktion.',
@@ -18778,14 +18778,14 @@ window.EXITTICKETS = {
   {
     question: 'Med samma kommando, Integral( Funktion, Från *x*-värde, Till *x*-värde ), fast i CAS-läget — vilken typ av svar får man?',
     choices: [
-      'Ett exakt svar, t.ex. i bråkform',
+      'Ett exakt svar, till exempel i bråkform',
       'Ett närmevärde (ett ungefärligt decimaltal)',
       'En primitiv funktion utan gränser',
       'Alltid ett heltal',
     ],
     correct: 0,
     why: [
-      'CAS-läget räknar symboliskt och ger integralens exakta värde, t.ex. som ett bråk.',
+      'CAS-läget räknar symboliskt och ger integralens exakta värde, till exempel som ett bråk.',
       'Ett ungefärligt decimaltal är vad standardläget ger, inte CAS-läget.',
       'Gränserna är inmatade i kommandot, så svaret är integralens värde, inte en primitiv funktion.',
       'Svaret kan mycket väl bli ett bråk eller ett rotuttryck — det behöver inte bli ett heltal.',
@@ -18859,7 +18859,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett område avgränsas av tre kurvor så att den övre funktionen byter identitet mitt i intervallet (t.ex. en rät linje först, sedan en parabel). Hur beräknas den sammanlagda arean?',
+    question: 'Ett område avgränsas av tre kurvor så att den övre funktionen byter identitet mitt i intervallet (till exempel en rät linje först, sedan en parabel). Hur beräknas den sammanlagda arean?',
     choices: [
       'Dela upp intervallet vid bytespunkten, beräkna varje delarea för sig och addera dem',
       'Beräkna bara arean i den ena delen — den andra bidrar inte',
@@ -18886,7 +18886,7 @@ window.EXITTICKETS = {
     why: [
       'Det är tvärtom: CAS-läget ger exakta svar, standardvyn ger närmevärden.',
       'IntegralMellan tar emot två funktionsuttryck — en övre och en undre — i båda vyerna, inte bara ett.',
-      'Just det — CAS-läget räknar symboliskt och ger exakta svar (t.ex. som bråk), medan standardvyn ger ett numeriskt närmevärde.',
+      'Just det — CAS-läget räknar symboliskt och ger exakta svar (till exempel som bråk), medan standardvyn ger ett numeriskt närmevärde.',
       'Kommandot är detsamma, men CAS-läget respektive standardvyn tolkar och presenterar resultatet på olika sätt (exakt kontra numeriskt).',
     ],
   },
@@ -18922,7 +18922,7 @@ window.EXITTICKETS = {
       'Enheterna för sekunder förkortas bort mot varandra i stället för att multipliceras ihop till kvadrat.',
       'Det är enheten för variabeln $x$, inte för hela integralen.',
       'Det är enheten för $f(x)$ själv, inte för integralen — s-enheterna ska förkortas bort.',
-      'Rätt — integralens enhet fås genom att ta "enheten för $f$" $\\cdot$ "enheten för $x$", dvs. $\\dfrac{\\text{kg}}{\\text{s}} \\cdot \\text{s} = \\text{kg}$.',
+      'Rätt — integralens enhet fås genom att ta "enheten för $f$" $\\cdot$ "enheten för $x$", det vill säga $\\dfrac{\\text{kg}}{\\text{s}} \\cdot \\text{s} = \\text{kg}$.',
     ],
   },
   {
@@ -18986,7 +18986,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Precis — positiv derivata betyder positiv lutning, dvs. att funktionen växer.',
+      'Precis — positiv derivata betyder positiv lutning, det vill säga att funktionen växer.',
       'I en maximipunkt är derivatan noll, inte positiv.',
       'Avtagande hör ihop med negativ derivata, $f\'(x) < 0$, inte positiv.',
       'En konstant funktion har derivatan noll överallt, inte ett positivt värde.',
@@ -19034,7 +19034,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Växande skulle kräva att $f\'(x) > 0$, dvs. att grafen till $f\'(x)$ ligger ovanför $x$-axeln.',
+      'Växande skulle kräva att $f\'(x) > 0$, det vill säga att grafen till $f\'(x)$ ligger ovanför $x$-axeln.',
       'Att grafen till $f\'(x)$ ligger under $x$-axeln betyder att $f\'(x) < 0$ där, vilket ger avtagande $f(x)$.',
       'Det är $f\'(x)$:s graf som ligger under axeln — det säger inget om var $f(x)$ själv är noll.',
       'Tecknet på $f\'(x)$ säger hur $f(x)$ förändras, inte vilket värde $f(x)$ själv har.',
@@ -19104,7 +19104,7 @@ window.EXITTICKETS = {
       'En teckenväxling vid $f\'(a) = 0$ innebär tvärtom att $x = a$ är en extrempunkt.',
       'Vid en terrasspunkt behåller derivatan samma tecken på båda sidor om nollstället, den växlar inte.',
       'En minimipunkt kräver den motsatta teckenväxlingen: från $-$ till $+$.',
-      'Funktionen växer före $x = a$ och avtar efter — kurvan går från stigande till fallande, vilket är precis vad som kännetecknar en topp, dvs. en lokal maximipunkt.',
+      'Funktionen växer före $x = a$ och avtar efter — kurvan går från stigande till fallande, vilket är precis vad som kännetecknar en topp, det vill säga en lokal maximipunkt.',
     ],
   },
   {
@@ -19117,7 +19117,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'En negativ $x^2$-term ger en "sur" kurva som öppnar sig nedåt, och en sådan kurva har alltid en topp, dvs. en maximipunkt.',
+      'En negativ $x^2$-term ger en "sur" kurva som öppnar sig nedåt, och en sådan kurva har alltid en topp, det vill säga en maximipunkt.',
       'Minimipunkt hade krävt en positiv $x^2$-term ("glad" kurva som öppnar sig uppåt).',
       'Tecknet framför $x^2$-termen avgör entydigt karaktären — det behövs ingen teckentabell för andragradsfunktioner.',
       'En andragradsfunktions enda extrempunkt är alltid en riktig maximi- eller minimipunkt, aldrig en terrasspunkt.',
@@ -19134,7 +19134,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'En värdetabell kan ge en fingervisning, men ger inte extrempunkternas exakta koordinater.',
-      'Det ger i stället funktionens nollställen, dvs. var kurvan skär $x$-axeln — ett annat problem än att hitta extrempunkter.',
+      'Det ger i stället funktionens nollställen, det vill säga var kurvan skär $x$-axeln — ett annat problem än att hitta extrempunkter.',
       'Extrempunkternas $x$-koordinater fås genom att derivera funktionen, sätta derivatan lika med 0 och lösa den ekvationen.',
       'Andraderivatan används inte i den metod som gås igenom i det här avsnittet — karaktären bestäms i stället med en teckentabell.',
     ],
@@ -19155,7 +19155,7 @@ window.EXITTICKETS = {
       'Det är för vagt — värdet finns bland en bestämd, liten mängd kandidatpunkter, inte var som helst.',
       'En extrempunkt inom intervallet kan också ge det största eller minsta värdet, inte bara ändpunkterna.',
       'Precis — det största och minsta värdet i ett slutet intervall finns alltid antingen i en extrempunkt eller i en av ändpunkterna, aldrig någon annanstans.',
-      'En ändpunkt kan också ge det största eller minsta värdet — t.ex. om funktionen fortsätter växa ända fram till intervallets kant.',
+      'En ändpunkt kan också ge det största eller minsta värdet — till exempel om funktionen fortsätter växa ända fram till intervallets kant.',
     ],
   },
   {
@@ -19195,14 +19195,14 @@ window.EXITTICKETS = {
     choices: [
       'Att derivatan är odefinierad i den punkten',
       'Att funktionen är konstant i hela det angränsande intervallet',
-      'En punkt där derivatan är $0$, dvs. en horisontell tangent (en extrempunkt)',
+      'En punkt där derivatan är $0$, det vill säga en horisontell tangent (en extrempunkt)',
       'Att grafen har en asymptot i den punkten',
     ],
     correct: 2,
     why: [
       'Tvärtom är derivatan precis definierad och lika med $0$ i den punkten — det är själva poängen.',
       'Pilen markerar en enskild punkt i tabellen, inte ett helt delintervall där funktionen skulle vara konstant.',
-      'Precis — den vågräta pilen markerar en enda punkt, där lutningen (derivatan) är $0$, dvs. en extrempunkt.',
+      'Precis — den vågräta pilen markerar en enda punkt, där lutningen (derivatan) är $0$, det vill säga en extrempunkt.',
       'Teckentabellen för extrempunkter har ingenting med asymptoter att göra.',
     ],
   },
@@ -19279,7 +19279,7 @@ window.EXITTICKETS = {
       'Kurvan är konvex i hela intervallet kring punkten',
       'Andraderivatan är noll där, samtidigt som kurvan växlar mellan konvex och konkav',
       'Förstaderivatan är noll där, och funktionen har ett extremvärde',
-      'Funktionen själv är noll där, dvs. ett nollställe',
+      'Funktionen själv är noll där, det vill säga ett nollställe',
     ],
     correct: 1,
     why: [
@@ -19299,7 +19299,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Det intervallet är där $f\'\'(x) < 0$, dvs. där funktionen i stället är konkav.',
+      'Det intervallet är där $f\'\'(x) < 0$, det vill säga där funktionen i stället är konkav.',
       'Precis — konvex innebär $f\'\'(x) > 0$, och $4x - 8 > 0$ ger $x > 2$.',
       'Olikheten $4x - 8 > 0$ ger $x > 2$ efter division med 4 — talet 8 ska inte stå kvar som gräns.',
       'Tecknet är fel vänt: $4x - 8 > 0$ ger ett positivt gränsvärde, $x > 2$, inte ett negativt.',
@@ -19445,14 +19445,14 @@ window.EXITTICKETS = {
       'Ett $x$-värde kan aldrig vara en del av ett korrekt svar på matematiska problem',
       'Andraderivatan kan bara beräknas om $x$-värdet skrivs ut i decimalform',
       '$x$-värdet är alltid fel om det inte anges tillsammans med en enhet',
-      'Resultatet måste tolkas i problemets sammanhang, t.ex. vilket pris eller vilken area som blir följden',
+      'Resultatet måste tolkas i problemets sammanhang, till exempel vilket pris eller vilken area som blir följden',
     ],
     correct: 3,
     why: [
       'Tvärtom, ett $x$-värde kan mycket väl vara en del av ett korrekt svar — men det räcker sällan som ett fullständigt svar i ett tillämpat problem.',
       'Andraderivatan beror inte på hur $x$-värdet skrivs — den beräknas ur funktionsuttrycket, inte ur ett tals decimalform.',
       'Enhet är viktigt när det finns en, men huvudskälet till att tolka resultatet är sammanhanget, inte enheten i sig.',
-      'Extremvärdesproblem beskriver verkliga situationer — svaret ska kopplas till vad $x$-värdet betyder i sammanhanget, t.ex. det pris eller den area som ger extremvärdet.',
+      'Extremvärdesproblem beskriver verkliga situationer — svaret ska kopplas till vad $x$-värdet betyder i sammanhanget, till exempel det pris eller den area som ger extremvärdet.',
     ],
   },
   {
@@ -19475,7 +19475,7 @@ window.EXITTICKETS = {
 
 'ma3c-4.7': [
   {
-    question: 'Varför måste vi uttrycka storheten som ska optimeras (t.ex. en volym) som en funktion av en enda variabel innan vi ritar grafen i Geogebra?',
+    question: 'Varför måste vi uttrycka storheten som ska optimeras (till exempel en volym) som en funktion av en enda variabel innan vi ritar grafen i Geogebra?',
     choices: [
       'En funktion med flera variabler blir alltid negativ',
       'Ett vanligt koordinatsystem visar bara hur ett $y$-värde beror av ETT $x$-värde, så funktionen måste bero av en enda variabel för att kunna ritas',
@@ -19516,7 +19516,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Att sätta funktionen (inte derivatan) lika med noll ger nollställen, dvs. var grafen skär $x$-axeln — inte extrempunkter.',
+      'Att sätta funktionen (inte derivatan) lika med noll ger nollställen, det vill säga var grafen skär $x$-axeln — inte extrempunkter.',
       'Det är precis det här Geogebra gör i bakgrunden när verktyget markerar en extrempunkt: hittar var derivatan (lutningen) är noll.',
       'Förkortning handlar om att förenkla rationella uttryck, inte om att optimera en funktion.',
       'Integraler ger arean under en kurva, inte extrempunkter.',
@@ -19550,7 +19550,7 @@ window.EXITTICKETS = {
     why: [
       'Geogebras verktyg Extrempunkt hittar extremvärdet automatiskt utan att vi behöver derivera för hand, men resultatet är ett numeriskt (avrundat) värde, till skillnad från ett exakt algebraiskt uttryck.',
       'Precis som i den algebraiska metoden måste storheten uttryckas som funktion av en enda variabel för att kunna ritas som en vanlig graf.',
-      'Metoden fungerar för alla funktioner som går att rita i Geogebra, t.ex. tredjegradsfunktioner som i cylinderexemplet.',
+      'Metoden fungerar för alla funktioner som går att rita i Geogebra, till exempel tredjegradsfunktioner som i cylinderexemplet.',
       'Tvärtom — den grafiska avläsningen ger ett avrundat närmevärde, medan den algebraiska metoden (när den går att genomföra) ger ett exakt svar.',
     ],
   },
@@ -19733,7 +19733,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'En exponentialekvation har den obekanta i exponenten, t.ex. $a^x = b$ — inte samma sak.',
+      'En exponentialekvation har den obekanta i exponenten, till exempel $a^x = b$ — inte samma sak.',
       'Precis — ekvationer med de trigonometriska funktionerna kallas trigonometriska ekvationer.',
       'En linjär ekvation innehåller bara $x$ i första graden, ingen trigonometrisk funktion.',
       'En andragradsekvation innehåller en term med $x^2$, inte trigonometriska funktioner.',
@@ -20113,16 +20113,16 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Cosinussatsen kan lösas ut med avseende på cosinustermen, t.ex. $\\cos C = \\dfrac{a^2 + b^2 - c^2}{2ab}$, så en vinkel kan bestämmas även när bara sidorna är kända.',
+      'Cosinussatsen kan lösas ut med avseende på cosinustermen, till exempel $\\cos C = \\dfrac{a^2 + b^2 - c^2}{2ab}$, så en vinkel kan bestämmas även när bara sidorna är kända.',
       'Cosinussatsen fungerar utan någon känd vinkel, så en vinkel går faktiskt att bestämma.',
       'Sinussatsen kräver att minst en vinkel redan är känd för att kunna sätta upp ett samband — det har vi inte här.',
       'Areasatsen kräver en känd vinkel för att ge arean, och ger i vilket fall inte en vinkel som svar.',
     ],
   },
   {
-    question: 'I ett tillämpningsproblem med två höjdvinklar mot samma lodräta linje (t.ex. en flaggstång på en kulle, sedd från en punkt på marken) — hur löser man det?',
+    question: 'I ett tillämpningsproblem med två höjdvinklar mot samma lodräta linje (till exempel en flaggstång på en kulle, sedd från en punkt på marken) — hur löser man det?',
     choices: [
-      'Man bestämmer först en gemensam sträcka (t.ex. siktlinjen till den övre punkten) med en triangelsats i den ena triangeln, och använder den sträckan som känd i nästa triangel',
+      'Man bestämmer först en gemensam sträcka (till exempel siktlinjen till den övre punkten) med en triangelsats i den ena triangeln, och använder den sträckan som känd i nästa triangel',
       'Man använder cosinussatsen en enda gång och är klar',
       'Man löser de två trianglarna helt oberoende av varandra utan att någon storhet återanvänds',
       'Man mäter höjden direkt ur figuren utan beräkning',
@@ -20181,7 +20181,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Vinkeln $A$ kräver att sidan $c$ är känd först (för att alla tre sidorna ska vara kända) — det är alltså ett tvåstegsproblem.',
-      'Arean kräver kännedom om en höjd eller använder en annan formel (t.ex. $\\dfrac{1}{2}ab\\sin C$) — det är inte det cosinussatsen ger direkt.',
+      'Arean kräver kännedom om en höjd eller använder en annan formel (till exempel $\\dfrac{1}{2}ab\\sin C$) — det är inte det cosinussatsen ger direkt.',
       'Precis som för $A$ krävs sidan $c$ innan $B$ kan bestämmas med cosinus- eller sinussatsen.',
       'Med två sidor och den mellanliggande vinkeln kända ger cosinussatsen $c^2 = a^2 + b^2 - 2ab\\cos C$ sidan $c$ i ett enda steg.',
     ],
@@ -21003,7 +21003,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Kurvan svänger fram och tillbaka mellan fasta gränser — den växer inte obegränsat.',
-      'Sinus blir också negativ (t.ex. $\\sin 210^\\circ = -0{,}5$), så nedre gränsen är $-1$, inte $0$.',
+      'Sinus blir också negativ (till exempel $\\sin 210^\\circ = -0{,}5$), så nedre gränsen är $-1$, inte $0$.',
       'Just det — sinusvärdet kommer från enhetscirkeln och håller sig alltid mellan $-1$ och $1$.',
       'Värdemängden gäller $y$-värdena ($-1$ till $1$), inte vinklar i grader.',
     ],
@@ -21248,7 +21248,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Det ger bara vartannat av de $x$ där $\\cos x = 0$. Även $270^\\circ$, $450^\\circ$ osv. saknas, så steget ska vara $180^\\circ$, inte $360^\\circ$.',
+      'Det ger bara vartannat av de $x$ där $\\cos x = 0$. Även $270^\\circ$, $450^\\circ$ och så vidare saknas, så steget ska vara $180^\\circ$, inte $360^\\circ$.',
       'Dessa vinklar motsvarar inte alla nollställen till $\\cos x$; asymptoterna ligger med jämna $180^\\circ$-avstånd från $90^\\circ$.',
       'Vid dessa $x$ är $\\cos x = \\pm 1 \\neq 0$, så tangens är definierad (och lika med $0$).',
       'Rätt — där är $\\cos x = 0$, så bråket $\\dfrac{\\sin x}{\\cos x}$ är odefinierat. Det kan även skrivas $x = \\pm 90^\\circ + n \\cdot 360^\\circ$.',
@@ -21604,7 +21604,7 @@ window.EXITTICKETS = {
       '$m$ är alltid noll för en tangent',
       '$m$ är alltid lika med $k$',
       'Derivera funktionen en gång till',
-      'Sätt in en punkt $(x,\\ y)$ som tangenten går genom, t.ex. tangeringspunkten',
+      'Sätt in en punkt $(x,\\ y)$ som tangenten går genom, till exempel tangeringspunkten',
     ],
     correct: 3,
     why: [
@@ -22546,7 +22546,7 @@ window.EXITTICKETS = {
     why: [
       'Var funktionen är störst är en följd man läser av tabellen, inte ett extra $x$-värde man skriver in i förväg.',
       'En rationell funktion av den här typen skär inte alltid $y$-axeln — den är ofta odefinierad där; det är just de odefinierade punkterna som ska med.',
-      'Precis — där funktionen inte är definierad (t.ex. vid en lodrät asymptot) kan tecknet byta, så de punkterna måste med.',
+      'Precis — där funktionen inte är definierad (till exempel vid en lodrät asymptot) kan tecknet byta, så de punkterna måste med.',
       'Man tar med de odefinierade punkterna och nollställena till derivatan, inte alla heltal.',
     ],
   },

@@ -31,7 +31,7 @@ Peka eller tryck på en kurva så visas modellens ekvation.
 :::
 
 Ibland är det svårt att avgöra vilken modell som passar bäst. Det kan
-t.ex. vara svårt att se om punkterna anpassas bäst av en exponential-
+till exempel vara svårt att se om punkterna anpassas bäst av en exponential-
 eller en potensfunktion. Potens- och polynomfunktioner kan vara ännu
 svårare att skilja åt eftersom de dessutom ibland kan sammanfalla
 ($y = x^2$ är både en potensfunktion och en polynomfunktion).

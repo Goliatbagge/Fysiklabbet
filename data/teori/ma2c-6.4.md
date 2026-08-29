@@ -9,7 +9,7 @@ section: '6.4'
 
 # Standardavvikelse
 
-Variationsbredd och lådagram är två exempel på spridningsmått, dvs. två
+Variationsbredd och lådagram är två exempel på spridningsmått, det vill säga två
 sätt att beskriva spridning. Ett tredje spridningsmått är
 standardavvikelse.
 

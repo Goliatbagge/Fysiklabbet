@@ -15,7 +15,7 @@ samband som kan beskrivas av formeln $y = kx$ och där grafen alltid är *en
 rät linje som går genom origo*. Förhållandet $k$ mellan $y$ och $x$ kallas
 **proportionalitetskonstant**.
 
-Proportionaliteter uppstår t.ex. i linjära modeller där startvärdet är 0.
+Proportionaliteter uppstår till exempel i linjära modeller där startvärdet är 0.
 Exempel: När du köper lösviktsgodis betalar du ett visst kilopris. Priset
 beror på vikten. Köper du 0 kg godis betalar du 0 kr (startvärdet är 0).
 Vi säger att "priset är proportionellt mot vikten".

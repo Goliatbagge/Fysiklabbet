@@ -94,7 +94,7 @@ $$
 $$
 
 **Med skalfaktor.** Vi dividerar två kända sidor för att bestämma
-skalfaktorn, dvs. hur stora figurerna är relativt varandra.
+skalfaktorn, det vill säga hur stora figurerna är relativt varandra.
 
 $$
 \text{Skalfaktor} = \frac{24}{8} = 3

@@ -2911,7 +2911,7 @@ Att kalla evolutionsteorin "bara en teori" är därför ett missförstånd av va
         },
         {
             level: 2,
-            question: `Varför använder fysiker ofta **modeller** (t.ex. en punktmassa, en perfekt kula eller en ideal gas) istället för att räkna på verkligheten exakt?`,
+            question: `Varför använder fysiker ofta **modeller** (till exempel en punktmassa, en perfekt kula eller en ideal gas) istället för att räkna på verkligheten exakt?`,
             choices: [
                 `För att fysiker tycker att modeller är roligare än verkligheten.`,
                 `För att modellerna är förenklingar av verkligheten som ändå är *tillräckligt bra* för att kunna förutsäga och förklara det vi observerar.`,
@@ -3285,7 +3285,7 @@ $$
 \\rho_\\text{krona} \\approx 16{,}9\\ \\mathrm{g/cm^3} < 19{,}3\\ \\mathrm{g/cm^3} = \\rho_\\text{guld}
 $$
 
-Eftersom densitet är en *materialegenskap* som inte beror på föremålets storlek eller form kan kronan **inte** vara av rent guld. Den är förmodligen legerad med en lättare metall (t.ex. silver eller koppar).
+Eftersom densitet är en *materialegenskap* som inte beror på föremålets storlek eller form kan kronan **inte** vara av rent guld. Den är förmodligen legerad med en lättare metall (till exempel silver eller koppar).
 
 **Svar:** Kronans densitet är 16,9 g/cm³, vilket är klart lägre än 19,3 g/cm³. Kronan är inte av rent guld.
 
@@ -3532,7 +3532,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [10, 50]] }],
 })}`,
             answer: { value: 5.0, unit: 'm/s', tol: 0.05 },
-            solution: `Lutningen i ett *s-t*-diagram motsvarar hastigheten. Vi väljer två lämpliga punkter på linjen — gärna där linjen skär rutnätskorsningar — t.ex. (0; 0) och (10 s; 50 m).
+            solution: `Lutningen i ett *s-t*-diagram motsvarar hastigheten. Vi väljer två lämpliga punkter på linjen — gärna där linjen skär rutnätskorsningar — till exempel (0; 0) och (10 s; 50 m).
 
 $$
 v = \\frac{\\Delta s}{\\Delta t} = \\frac{s_2 - s_1}{t_2 - t_1}
@@ -3986,7 +3986,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [10, 25]] }],
 })}`,
             answer: { value: 2.5, unit: 'm/s²', tol: 0.05 },
-            solution: `Lutningen i ett *v-t*-diagram motsvarar accelerationen. Vi väljer två punkter på linjen där det är lätt att läsa av exakta värden — t.ex. (0; 0) och (10 s; 25 m/s).
+            solution: `Lutningen i ett *v-t*-diagram motsvarar accelerationen. Vi väljer två punkter på linjen där det är lätt att läsa av exakta värden — till exempel (0; 0) och (10 s; 25 m/s).
 
 $$
 a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{t_2 - t_1}
@@ -4616,12 +4616,12 @@ Det är 180 km/h.
             question: `När behöver man typiskt ställa upp ett **ekvationssystem** med två ekvationer i rörelseuppgifter med konstant acceleration?`,
             choices: [
                 `När problemet handlar om fritt fall.`,
-                `När man har **två obekanta storheter** (t.ex. acceleration *a* och tid *t*) som båda måste bestämmas från given information.`,
+                `När man har **två obekanta storheter** (till exempel acceleration *a* och tid *t*) som båda måste bestämmas från given information.`,
                 `När hastigheten är negativ.`,
                 `När man räknar med SI-enheter.`,
             ],
             correct: 1,
-            solution: `En ekvation kan lösa **en** obekant variabel. Om problemet ger oss tillräckligt med information för att räkna ut två obekanta (t.ex. både *a* och *t*) — men där vi inte direkt kan isolera någondera — måste vi ställa upp **två** ekvationer som båda innehåller de obekanta. Då bildar ekvationerna ett ekvationssystem som kan lösas algebraiskt eller med GeoGebra.
+            solution: `En ekvation kan lösa **en** obekant variabel. Om problemet ger oss tillräckligt med information för att räkna ut två obekanta (till exempel både *a* och *t*) — men där vi inte direkt kan isolera någondera — måste vi ställa upp **två** ekvationer som båda innehåller de obekanta. Då bildar ekvationerna ett ekvationssystem som kan lösas algebraiskt eller med GeoGebra.
 
 **Svar:** När man har två obekanta som båda måste bestämmas.
 
@@ -6891,7 +6891,7 @@ $$
             level: 3,
             question: `En timmerkälke dras 30 m längs en horisontell skidled. Repet lutar 28° över marken och en konstant dragkraft på 250 N används. Friktionstalet mellan kälken och snön är 0,15 och kälken (med last) väger 90 kg.
 
-Beräkna **det netto-arbete** som verkar på kälken (dvs. det arbete som ger upphov till ökad rörelseenergi). Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+Beräkna **det netto-arbete** som verkar på kälken (det vill säga det arbete som ger upphov till ökad rörelseenergi). Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 3160, unit: 'J', tol: 0.05 },
             solution: `Netto-arbetet är arbetet av den resulterande kraften $F_R = F_x - F_f$ längs rörelsen.
 
@@ -9772,7 +9772,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
                 `Tredje huvudsatsen.`,
             ],
             correct: 1,
-            solution: `**Första huvudsatsen** är energiprincipen: energi kan varken skapas eller förstöras, bara omvandlas mellan olika energiformer (rörelseenergi, lägesenergi, värme, kemisk energi osv.).
+            solution: `**Första huvudsatsen** är energiprincipen: energi kan varken skapas eller förstöras, bara omvandlas mellan olika energiformer (rörelseenergi, lägesenergi, värme, kemisk energi och så vidare).
 
 **Svar:** Alternativ B — första huvudsatsen.
 
@@ -9838,7 +9838,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
                 `Tredje huvudsatsen.`,
             ],
             correct: 2,
-            solution: `Värme flödar av sig själv bara från varmt till kallt — aldrig tvärtom. Att överföra värme från en kallare till en varmare plats kräver alltid att man tillför arbete (t.ex. el till en kompressor i en värmepump). Det är **andra huvudsatsen** som gör en sådan här "passiv värmepump utan kraftkälla" omöjlig.
+            solution: `Värme flödar av sig själv bara från varmt till kallt — aldrig tvärtom. Att överföra värme från en kallare till en varmare plats kräver alltid att man tillför arbete (till exempel el till en kompressor i en värmepump). Det är **andra huvudsatsen** som gör en sådan här "passiv värmepump utan kraftkälla" omöjlig.
 
 **Svar:** Alternativ C — andra huvudsatsen.
 
@@ -10077,7 +10077,7 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
                 `En halvledare leder alltid ström bättre än en metall.`,
             ],
             correct: 0,
-            solution: `I en **ledare** (t.ex. metall) finns ledningselektroner som rör sig lätt genom materialet — därför leder ledare ström bra. I en **isolator** (glas, plast, trä) är elektronerna hårt bundna och rör sig inte lätt.
+            solution: `I en **ledare** (till exempel metall) finns ledningselektroner som rör sig lätt genom materialet — därför leder ledare ström bra. I en **isolator** (glas, plast, trä) är elektronerna hårt bundna och rör sig inte lätt.
 
 **Svar:** Alternativ A.
 
@@ -16044,7 +16044,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
             question: `Vad menas med en **permanentmagnet**?`,
             choices: [
                 'En magnet som tillverkas av aluminium eller koppar.',
-                'En metall (t.ex. järn, stål eller nickel) som behåller sina magnetiska egenskaper över lång tid.',
+                'En metall (till exempel järn, stål eller nickel) som behåller sina magnetiska egenskaper över lång tid.',
                 'En magnet som bara fungerar när ström går genom den.',
                 'En magnet som vänds upp och ner regelbundet.',
             ],
@@ -17445,7 +17445,7 @@ $$ \\Delta r = \\frac{3{,}3\\cdot 10^{-27} \\cdot 1{,}0\\cdot 10^5}{4{,}005\\cdo
             answer: { value: 5.12e-8, unit: 'kg/C' },
             solution: `**Insikten är att vi har två oberoende fysikaliska principer:**
 1. **Energiprincipen** vid accelerationen: $qU = mv^2/2$
-2. **Cirkelrörelse** i magnetfältet: $qvB = mv^2/r$, dvs. $v = qBr/m$
+2. **Cirkelrörelse** i magnetfältet: $qvB = mv^2/r$, det vill säga $v = qBr/m$
 
 Kombinera dem för att eliminera $v$.
 
@@ -17523,7 +17523,7 @@ Den mekaniska energin omvandlas till elektrisk energi i form av strömmarna, som
             choices: [
                 'Det måste vara av icke-magnetisk plast.',
                 'Det måste vara av aluminium specifikt.',
-                'Det måste vara av ferromagnetiskt material (t.ex. järn eller stål) så att virvelströmmar kan induceras.',
+                'Det måste vara av ferromagnetiskt material (till exempel järn eller stål) så att virvelströmmar kan induceras.',
                 'Det måste vara genomskinligt så ljus kommer fram.',
             ],
             correct: 2,
@@ -18525,9 +18525,9 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
             correct: 2,
             solution: `Talmängderna ligger inuti varandra: $\\mathbb{N}$ ligger i $\\mathbb{Z}$, som ligger i $\\mathbb{Q}$, som ligger i $\\mathbb{R}$ — men **inte** omvänt.
 
-- Alla naturliga tal är rationella: sant, t.ex. $5 = \\dfrac{5}{1}$.
+- Alla naturliga tal är rationella: sant, till exempel $5 = \\dfrac{5}{1}$.
 - π är reellt: sant — π är ett irrationellt tal, och de irrationella talen ingår i de reella.
-- **Alla rationella tal är heltal: falskt** — t.ex. $\\dfrac{1}{3}$ är rationellt men inget heltal.
+- **Alla rationella tal är heltal: falskt** — till exempel $\\dfrac{1}{3}$ är rationellt men inget heltal.
 - $-0{,}25$ är rationellt: sant, eftersom $-0{,}25 = -\\dfrac{1}{4}$.
 
 **Svar:** "Alla rationella tal är heltal" är falskt.`,
@@ -18543,7 +18543,7 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
                 `endast a`,
             ],
             correct: 0,
-            solution: `**Insikten:** testa med konkreta tal och motivera sedan generellt. Ta t.ex. $a = -5$ och $b = -2$ (då gäller $a < b$ eftersom −5 ligger till vänster om −2 på tallinjen).
+            solution: `**Insikten:** testa med konkreta tal och motivera sedan generellt. Ta till exempel $a = -5$ och $b = -2$ (då gäller $a < b$ eftersom −5 ligger till vänster om −2 på tallinjen).
 
 **a)** $a \\cdot b$: minus gånger minus ger plus, t.ex. $(-5) \\cdot (-2) = 10$. Produkten av två negativa tal är **alltid positiv**.
 
@@ -19404,7 +19404,7 @@ $$ 3{,}9 \\cdot 10^{-6}\\ \\mathrm{s} = 3{,}9\\ \\mathrm{µs} $$
             correct: 2,
             solution: `Grundpotensform: $45\\ 000\\ 000\\ \\mathrm{W} = 4{,}5 \\cdot 10^7\\ \\mathrm{W}$.
 
-Vi har inget prefix för $10^7$, så vi skriver om med en tiopotens som har prefix, t.ex. $10^6$ (mega). När tiopotensen blir 10 gånger mindre måste talet framför bli 10 gånger större:
+Vi har inget prefix för $10^7$, så vi skriver om med en tiopotens som har prefix, till exempel $10^6$ (mega). När tiopotensen blir 10 gånger mindre måste talet framför bli 10 gånger större:
 
 $$ 4{,}5 \\cdot 10^7\\ \\mathrm{W} = 45 \\cdot 10^6\\ \\mathrm{W} = 45\\ \\mathrm{MW} $$
 
@@ -20391,7 +20391,7 @@ Men $x \\neq 4$! Det enda kandidatvärdet är förbjudet — ekvationen saknar l
                 `Svara med enhet`,
             ],
             correct: 0,
-            solution: `Metoden har tre steg: **1. Översätt** (inför en beteckning, t.ex. $x$, på det som söks och ställ upp ekvationen), **2. Lös ekvationen**, **3. Tolka och svara** med enhet.
+            solution: `Metoden har tre steg: **1. Översätt** (inför en beteckning, till exempel $x$, på det som söks och ställ upp ekvationen), **2. Lös ekvationen**, **3. Tolka och svara** med enhet.
 
 **Svar:** Definiera en beteckning på det som söks och ställ upp en ekvation.`,
         },
@@ -20423,7 +20423,7 @@ $$ x = 26 $$
 
 $$ x + (x + 5) = 31 $$
 
-(Lösningen blir $2x + 5 = 31$, dvs. $x = 13$ — Moa är 13 år och brodern 18 år.)
+(Lösningen blir $2x + 5 = 31$, det vill säga $x = 13$ — Moa är 13 år och brodern 18 år.)
 
 **Svar:** $x + (x + 5) = 31$`,
         },
@@ -20735,7 +20735,7 @@ $$ x < 4 $$
                 `Skilt från`,
             ],
             correct: 0,
-            solution: `≥ betyder "större än eller lika med" — t.ex. betyder $x \\geq -9$ att $x$ får vara −9 eller vilket större tal som helst.
+            solution: `≥ betyder "större än eller lika med" — till exempel betyder $x \\geq -9$ att $x$ får vara −9 eller vilket större tal som helst.
 
 **Svar:** Större än eller lika med`,
         },
@@ -20794,7 +20794,7 @@ $$ x \\geq -5 $$
 
 $$ -5 < x < 5 $$
 
-Enbart $x < 5$ räcker inte — t.ex. är $x = -7 < 5$ men $(-7)^2 = 49 > 25$.
+Enbart $x < 5$ räcker inte — till exempel är $x = -7 < 5$ men $(-7)^2 = 49 > 25$.
 
 **Svar:** $-5 < x < 5$`,
         },
@@ -20961,7 +20961,7 @@ $$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
                 `Ordningsnummer`,
             ],
             correct: 0,
-            solution: `En **sluten formel**, t.ex. $a_n = 4n - 1$, ger elementet direkt ur ordningsnumret $n$ — utan att man behöver räkna sig fram genom alla tidigare element.
+            solution: `En **sluten formel**, till exempel $a_n = 4n - 1$, ger elementet direkt ur ordningsnumret $n$ — utan att man behöver räkna sig fram genom alla tidigare element.
 
 **Svar:** Sluten formel`,
         },
@@ -21210,7 +21210,7 @@ $$ \\text{förändringsfaktor} = \\frac{32\\ 000}{25\\ 600} = 1{,}25 = 125\\ \\%
 
 Elsa tjänar alltså 25 % mer än Karim.
 
-(Observera att Karim tjänar $\\dfrac{25\\ 600}{32\\ 000} = 0{,}80$, dvs. 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
+(Observera att Karim tjänar $\\dfrac{25\\ 600}{32\\ 000} = 0{,}80$, det vill säga 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
 
 **Svar:** 25 %`,
         },
@@ -21371,9 +21371,9 @@ $$ 12\\ 000 \\cdot 1{,}035 = 12\\ 420\\ \\mathrm{kr} $$
                 `Ordet "formel"`,
             ],
             correct: 0,
-            solution: `Formler i kalkylblad inleds alltid med =, t.ex. \`=B2*B12\`. Utan likhetstecknet tolkas innehållet som vanlig text.
+            solution: `Formler i kalkylblad inleds alltid med =, till exempel \`=B2*B12\`. Utan likhetstecknet tolkas innehållet som vanlig text.
 
-Dollartecknet används för något annat: att "låsa" en cellreferens (t.ex. \`$B$12\`) när formeln kopieras.
+Dollartecknet används för något annat: att "låsa" en cellreferens (till exempel \`$B$12\`) när formeln kopieras.
 
 **Svar:** Ett likhetstecken, =`,
         },
@@ -21388,7 +21388,7 @@ Dollartecknet används för något annat: att "låsa" en cellreferens (t.ex. \`$
                 `\`=B3*B12\` — formeln ska peka på sin egen cell`,
             ],
             correct: 0,
-            solution: `När formeln kopieras nedåt flyttas referenserna med: \`=B2*B12\` blir \`=B3*B13\`, \`=B4*B14\` osv. — men förändringsfaktorn ligger BARA i B12. Den referensen måste därför låsas med dollartecken:
+            solution: `När formeln kopieras nedåt flyttas referenserna med: \`=B2*B12\` blir \`=B3*B13\`, \`=B4*B14\` och så vidare — men förändringsfaktorn ligger BARA i B12. Den referensen måste därför låsas med dollartecken:
 
 \`=B2*$B$12\`
 
@@ -22009,7 +22009,7 @@ Rätt beräkning för $x = -2$:
 
 $$ y = -2 \\cdot (-2) + 3 = 4 + 3 = 7 $$
 
-Selmas punkt (−2, −1) fås av $-4 + 3 = -1$, dvs. hon räknade $-2 \\cdot (-2) = -4$. Minus gånger minus ger plus!
+Selmas punkt (−2, −1) fås av $-4 + 3 = -1$, det vill säga hon räknade $-2 \\cdot (-2) = -4$. Minus gånger minus ger plus!
 
 Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och passerar (−2, 7) — precis den korrigerade punkten.
 
@@ -22327,7 +22327,7 @@ $$ k = \\frac{12 - 3}{4 - 1} = \\frac{9}{3} = 3 $$
 
 $$ 2y = -ax + 8 \\qquad y = -\\frac{a}{2}x + 4 $$
 
-dvs. $k = -\\dfrac{a}{2}$.
+det vill säga $k = -\\dfrac{a}{2}$.
 
 **Parallellitet** kräver samma $k$-värde:
 
@@ -22415,7 +22415,7 @@ $$ f(5) - f(3) = 21 - 13 = 8 $$
             level: 3,
             question: `Sambandet $x = y^2$ ritas upp som en liggande parabel. Ali säger: "Det är en funktion, för varje *y*-värde ger exakt ett *x*-värde." Vad är rätt om vi som vanligt betraktar $y$ som funktion av $x$?`,
             choices: [
-                `Ingen funktion — t.ex. ger $x = 4$ två *y*-värden (2 och −2), så penntestet misslyckas`,
+                `Ingen funktion — till exempel ger $x = 4$ två *y*-värden (2 och −2), så penntestet misslyckas`,
                 `En funktion — Alis motivering håller`,
                 `En funktion — parabler är alltid funktioner`,
                 `Ingen funktion — parabeln går inte genom origo`,
@@ -22423,7 +22423,7 @@ $$ f(5) - f(3) = 21 - 13 = 8 $$
             correct: 0,
             solution: `**Insikten:** funktionsbegreppet har en riktning — det är X-värdena som ska ge entydiga *y*-värden, inte tvärtom.
 
-Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet *x*-värde ger EXAKT ETT *y*-värde. Men $x = 4$ ger $y^2 = 4$, dvs. både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
+Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet *x*-värde ger EXAKT ETT *y*-värde. Men $x = 4$ ger $y^2 = 4$, det vill säga både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
 
 Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en funktion av $y$. Men det är en annan fråga än den vanliga.
 
@@ -22657,7 +22657,7 @@ $$ \\text{Värdemängd: } 0 \\leq y \\leq 4 $$
                 `Funktionen saknar konstant`,
             ],
             correct: 0,
-            solution: `I en exponentialfunktion, t.ex. $y = 25\\ 000 \\cdot 1{,}02^x$, sitter variabeln $x$ i **exponenten**. (Jämför potensfunktioner där variabeln är basen.)
+            solution: `I en exponentialfunktion, till exempel $y = 25\\ 000 \\cdot 1{,}02^x$, sitter variabeln $x$ i **exponenten**. (Jämför potensfunktioner där variabeln är basen.)
 
 **Svar:** Den oberoende variabeln står i exponenten.`,
         },
@@ -22994,7 +22994,7 @@ Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler t
                 `Nej — opinionsmätningar kan aldrig säkerställas`,
             ],
             correct: 0,
-            solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, dvs. 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
+            solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, det vill säga 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
 
 **Svar:** Nej — förändringen är inte statistiskt säkerställd.`,
         },
@@ -23180,7 +23180,7 @@ $$ P(\\text{ess}) = \\frac{4}{52} = \\frac{1}{13} $$
                 `$\\dfrac{1}{7}$`,
             ],
             correct: 0,
-            solution: `Rita upp utfallsrummet — summan 7 fås av (1,6), (2,5), (3,4), (4,3), (5,2) och (6,1), dvs. 6 gynnsamma utfall av 36 möjliga:
+            solution: `Rita upp utfallsrummet — summan 7 fås av (1,6), (2,5), (3,4), (4,3), (5,2) och (6,1), det vill säga 6 gynnsamma utfall av 36 möjliga:
 
 $$ P(\\text{summan 7}) = \\frac{6}{36} = \\frac{1}{6} $$
 
@@ -23219,7 +23219,7 @@ Fyra lika sannolika utfall. "En av varje" täcks av två av dem:
 
 $$ P(\\text{en av varje}) = \\frac{2}{4} = \\frac{1}{2} $$
 
-Leias fel: hon slog ihop (krona, klave) och (klave, krona) till ETT utfall, fast kombinationen är dubbelt så vanlig som t.ex. två kronor.
+Leias fel: hon slog ihop (krona, klave) och (klave, krona) till ETT utfall, fast kombinationen är dubbelt så vanlig som till exempel två kronor.
 
 **Svar:** $\\dfrac{1}{2}$
 
@@ -23423,7 +23423,7 @@ $$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
                 `Dividera sannolikheterna med varandra`,
             ],
             correct: 0,
-            solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — t.ex. $\\dfrac{7}{10} \\cdot \\dfrac{7}{10} = \\dfrac{49}{100}$ för svart–svart med återläggning.
+            solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — till exempel $\\dfrac{7}{10} \\cdot \\dfrac{7}{10} = \\dfrac{49}{100}$ för svart–svart med återläggning.
 
 **Svar:** Multiplicera sannolikheterna längs grenen.`,
         },
@@ -23531,7 +23531,7 @@ $$ \\frac{25}{90} + \\frac{25}{90} = \\frac{50}{90} = \\frac{5}{9} $$
                 `Att slå en sexa igen`,
             ],
             correct: 0,
-            solution: `Komplementhändelsen är "att INTE slå en sexa", dvs. att slå 1, 2, 3, 4 eller 5 — vilket kan uttryckas "att slå högst en femma".
+            solution: `Komplementhändelsen är "att INTE slå en sexa", det vill säga att slå 1, 2, 3, 4 eller 5 — vilket kan uttryckas "att slå högst en femma".
 
 **Svar:** Att slå högst en femma.`,
         },
@@ -23891,7 +23891,7 @@ Kontroll: den andra spetsiga vinkeln är $\\tan^{-1}(12/5{,}0) \\approx 67°$, o
                 `$a^2 + c^2 = b^2$`,
             ],
             correct: 0,
-            solution: `Katet² + katet² = hypotenusa², dvs. $a^2 + b^2 = c^2$. Satsen gäller endast rätvinkliga trianglar.
+            solution: `Katet² + katet² = hypotenusa², det vill säga $a^2 + b^2 = c^2$. Satsen gäller endast rätvinkliga trianglar.
 
 **Svar:** $a^2 + b^2 = c^2$`,
         },
@@ -23983,7 +23983,7 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
                 `Ingen skillnad — orden betyder samma sak`,
             ],
             correct: 0,
-            solution: `Vektorer (t.ex. hastighet, kraft, acceleration) anges med storlek OCH riktning; skalärer (t.ex. vikt, tid, temperatur) med enbart storlek.
+            solution: `Vektorer (till exempel hastighet, kraft, acceleration) anges med storlek OCH riktning; skalärer (till exempel vikt, tid, temperatur) med enbart storlek.
 
 **Svar:** En vektor har både storlek och riktning.`,
         },
@@ -24255,7 +24255,7 @@ $$ |\\vec{w}|^2 = 4^2 + 3^2 = 25 \\qquad |\\vec{w}| = 5\\ \\text{rutor} $$
             correct: 0,
             solution: `**Insikten:** subtraktion av två identiska vektorer tar ut allt — precis som $a - a = 0$ för tal.
 
-$\\vec{u}$ och $\\vec{v}$ har samma längd OCH samma riktning, dvs. $\\vec{u} = \\vec{v}$. Kedjan blir: gå 6 steg åt ett håll ($\\vec{u}$), sedan 6 steg rakt tillbaka ($-\\vec{v}$). Start- och slutpunkt sammanfaller:
+$\\vec{u}$ och $\\vec{v}$ har samma längd OCH samma riktning, det vill säga $\\vec{u} = \\vec{v}$. Kedjan blir: gå 6 steg åt ett håll ($\\vec{u}$), sedan 6 steg rakt tillbaka ($-\\vec{v}$). Start- och slutpunkt sammanfaller:
 
 $$ \\vec{w} = \\vec{u} - \\vec{u} = \\vec{0} \\qquad |\\vec{w}| = 0 $$
 
@@ -24422,7 +24422,7 @@ $$`,
 
 $x = 3$, $y = 6$: första ekvationen ger $y = 2 \\cdot 3 = 6$ (stämmer), andra ger $y = 3 + 3 = 6$ (stämmer).
 
-Övriga par passar bara i den ena ekvationen — t.ex. $x = 2$, $y = 4$ stämmer i $y = 2x$ men inte i $y = x + 3$ (som ger 5).
+Övriga par passar bara i den ena ekvationen — till exempel $x = 2$, $y = 4$ stämmer i $y = 2x$ men inte i $y = x + 3$ (som ger 5).
 
 **Svar:** $x = 3$, $y = 6$`,
         },
@@ -24667,7 +24667,7 @@ $$ 10 = c $$
 
 Alla $x$-termer försvinner! Om $c = 10$ blir ekvationen $10 = 10$ — sant för **alla** $x$, så varje punkt på linjen $y = 5 - 2x$ är en lösning (oändligt många).
 
-Om $c \\neq 10$ blir ekvationen en motsägelse (t.ex. $10 = 7$) — då saknas lösningar helt (parallella linjer).
+Om $c \\neq 10$ blir ekvationen en motsägelse (till exempel $10 = 7$) — då saknas lösningar helt (parallella linjer).
 
 **Svar:** $c = 10$`,
         },
@@ -24832,7 +24832,7 @@ Termerna $+2b$ och $-2b$ elimineras med additionsmetoden:
 
 $$ 3a = 15 \\iff a = 5 $$
 
-(Insättning ger $2b = 7 - 5 = 2$, dvs. $b = 1$.)
+(Insättning ger $2b = 7 - 5 = 2$, det vill säga $b = 1$.)
 
 Kontroll i den undre ursprungsekvationen: $2 \\cdot 5 \\cdot 1 - 1 \\cdot 2 = 10 - 2 = 8$. Stämmer!
 
@@ -25300,7 +25300,7 @@ Bryt ut största möjliga faktor, $5x$:
 
 $$ 5x(x - 6) = 0 $$
 
-Nollproduktmetoden ger $5x = 0$ (dvs. $x = 0$) eller $x - 6 = 0$ (dvs. $x = 6$).
+Nollproduktmetoden ger $5x = 0$ (det vill säga $x = 0$) eller $x - 6 = 0$ (det vill säga $x = 6$).
 
 (Vanligt fel: att dividera båda led med $x$ — då tappas lösningen $x = 0$ bort.)
 
@@ -25782,7 +25782,7 @@ En sträcka kan inte vara negativ, så $s = 15$ cm.
             answer: { value: 15, unit: 'cm' },
             solution: `Nyckelinsikten: omkrets och area ger ett ekvationssystem där den ena ekvationen är linjär och den andra innehåller en produkt — tillsammans ger de en andragradsekvation.
 
-Kalla sidorna $x$ och $y$ cm. Omkretsen ger $2x + 2y = 46$, dvs.
+Kalla sidorna $x$ och $y$ cm. Omkretsen ger $2x + 2y = 46$, det vill säga
 
 $$ x + y = 23 $$
 
@@ -26212,7 +26212,7 @@ $$ 2a = 4 \\iff a = 2 $$
             level: 3,
             question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
             answer: { value: -0.5, unit: '' },
-            solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen — mitt emellan nollställena $x = 0$ och $x = 6$, dvs. vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
+            solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen — mitt emellan nollställena $x = 0$ och $x = 6$, det vill säga vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
 
 Insättning i $h(x) = kx(x - 6)$:
 
@@ -26316,13 +26316,13 @@ Den positiva gränsen är $x = 3$.
 
 $$ x = -1 \\pm \\sqrt{1 + 8} = -1 \\pm 3 $$
 
-dvs. nollställena $x = -4$ och $x = 2$.
+det vill säga nollställena $x = -4$ och $x = 2$.
 
 Parabeln $y = x^2 + 2x - 8$ har positiv $x^2$-term ("glad mun") och ligger därför **över** $x$-axeln utanför nollställena — till vänster om $-4$ och till höger om $2$:
 
 $$ x < -4 \\quad \\text{och} \\quad x > 2 $$
 
-(Att svara $-4 < x < 2$ är det klassiska felet — det är där parabeln ligger UNDER axeln, dvs. lösningen till $< 0$.)
+(Att svara $-4 < x < 2$ är det klassiska felet — det är där parabeln ligger UNDER axeln, det vill säga lösningen till $< 0$.)
 
 **Svar:** $x < -4$ och $x > 2$`,
         },
@@ -26342,7 +26342,7 @@ $$ x < -4 \\quad \\text{och} \\quad x > 2 $$
 
 $$ 30t - 5t^2 = 0 \\iff 5t(6 - t) = 0 $$
 
-dvs. $t = 0$ (start) och $t = 6$ (landning). Grafiskt: nollstället längst till höger på $t$-axeln.
+det vill säga $t = 0$ (start) och $t = 6$ (landning). Grafiskt: nollstället längst till höger på $t$-axeln.
 
 **Svar:** Efter 6 sekunder.`,
         },
@@ -26350,7 +26350,7 @@ dvs. $t = 0$ (start) och $t = 6$ (landning). Grafiskt: nollstället längst till
             level: 1,
             question: `Samma raket har höjden $h(t) = 30t - 5t^2$. Vilken är raketens högsta höjd? Svara i meter.`,
             answer: { value: 45, unit: 'm' },
-            solution: `Högsta höjden är maximipunktens $y$-koordinat. Maximipunkten ligger på symmetrilinjen, mitt emellan nollställena $t = 0$ och $t = 6$, dvs. vid $t = 3$:
+            solution: `Högsta höjden är maximipunktens $y$-koordinat. Maximipunkten ligger på symmetrilinjen, mitt emellan nollställena $t = 0$ och $t = 6$, det vill säga vid $t = 3$:
 
 $$ h(3) = 30 \\cdot 3 - 5 \\cdot 3^2 = 90 - 45 = 45 $$
 
@@ -26389,7 +26389,7 @@ $$ t^2 - 6t + 5 = 0 $$
 
 $$ t = 3 \\pm \\sqrt{9 - 5} = 3 \\pm 2 $$
 
-dvs. $t = 1$ (på väg upp) och $t = 5$ (på väg ner). Första gången är efter 1 sekund.
+det vill säga $t = 1$ (på väg upp) och $t = 5$ (på väg ner). Första gången är efter 1 sekund.
 
 **Svar:** Efter 1 sekund.`,
         },
@@ -26750,7 +26750,7 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
                 `Ett motexempel`,
             ],
             correct: 0,
-            solution: `Ett axiom är en grundsats man kommit överens om att utgå ifrån, utan bevis — t.ex. "varje heltal $n$ följs av heltalet $(n + 1)$". Bevisade påståenden kallas satser; begreppsöverenskommelser kallas definitioner.
+            solution: `Ett axiom är en grundsats man kommit överens om att utgå ifrån, utan bevis — till exempel "varje heltal $n$ följs av heltalet $(n + 1)$". Bevisade påståenden kallas satser; begreppsöverenskommelser kallas definitioner.
 
 **Svar:** En grundsats som gäller utan bevis.`,
         },
@@ -26767,7 +26767,7 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             correct: 0,
             solution: `Tal som följer på varandra ökar med 1 i taget: $n$, $n + 1$, $n + 2$.
 
-($n$, $2n$, $3n$ är multiplar av n, och $n$, $n+2$, $n+4$ är vartannat tal — t.ex. tre jämna eller tre udda i rad.)
+($n$, $2n$, $3n$ är multiplar av n, och $n$, $n+2$, $n+4$ är vartannat tal — till exempel tre jämna eller tre udda i rad.)
 
 **Svar:** $n$, $n + 1$, $n + 2$`,
         },
@@ -27621,7 +27621,7 @@ Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
                 `Det är bara en skrivkonvention utan betydelse`,
             ],
             correct: 0,
-            solution: `Vid jämn exponent försvinner tecknet: t.ex. $2^4 = 16$ och $(-2)^4 = 16$. Ekvationen $x^4 = 16$ har därför två lösningar, $x = \\pm 2$. Vid udda exponent bevaras tecknet och det finns bara en lösning.
+            solution: `Vid jämn exponent försvinner tecknet: till exempel $2^4 = 16$ och $(-2)^4 = 16$. Ekvationen $x^4 = 16$ har därför två lösningar, $x = \\pm 2$. Vid udda exponent bevaras tecknet och det finns bara en lösning.
 
 **Svar:** Både positivt och negativt tal ger positivt resultat vid jämn upphöjning.`,
         },
@@ -27928,7 +27928,7 @@ $$ 40 = 4x \\iff x = 10 $$
                 `Tiden`,
             ],
             correct: 0,
-            solution: `$a$ är förändringsfaktorn (t.ex. 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
+            solution: `$a$ är förändringsfaktorn (till exempel 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
 
 **Svar:** Förändringsfaktorn`,
         },
@@ -28134,7 +28134,7 @@ $$ 3,\\ 5,\\ \\mathbf{7},\\ 9,\\ 12 $$
                 `Skillnaden mellan största och minsta värdet`,
             ],
             correct: 0,
-            solution: `Typvärdet är det vanligast förekommande värdet — det med högst frekvens. Det kan användas även när datamängden inte är tal, t.ex. färger eller bilmärken.
+            solution: `Typvärdet är det vanligast förekommande värdet — det med högst frekvens. Det kan användas även när datamängden inte är tal, till exempel färger eller bilmärken.
 
 (Mitten = medianen; summan/antalet = medelvärdet; största − minsta = variationsbredden.)
 
@@ -28310,7 +28310,7 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
                 `Hur många värden som är exakt 90`,
             ],
             correct: 0,
-            solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — t.ex. åldern man måste överstiga för att tillhöra de 10 % äldsta.
+            solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — till exempel åldern man måste överstiga för att tillhöra de 10 % äldsta.
 
 **Svar:** Värdet som 90 % av värdena är mindre än.`,
         },
@@ -28844,7 +28844,7 @@ $$
 x = \\frac{1}{2} \\pm \\sqrt{\\left(\\frac{1}{2}\\right)^2 + 6} = \\frac{1}{2} \\pm \\sqrt{\\frac{25}{4}} = \\frac{1}{2} \\pm \\frac{5}{2}
 $$
 
-så nollställena är $x = 3$ och $x = -2$, dvs. $x^2 - x - 6 = (x - 3)(x + 2)$.
+så nollställena är $x = 3$ och $x = -2$, det vill säga $x^2 - x - 6 = (x - 3)(x + 2)$.
 
 Nämnaren är en konjugat: $x^2 - 4 = (x + 2)(x - 2)$.
 
@@ -28852,7 +28852,7 @@ $$
 \\frac{x^2 - x - 6}{x^2 - 4} = \\frac{(x - 3)(x + 2)}{(x + 2)(x - 2)} = \\frac{x - 3}{x - 2}
 $$
 
-Den gemensamma faktorn $(x + 2)$ förkortas bort. Observera att man **inte** får förkorta term för term (t.ex. $\\dfrac{-6}{-4}$) — bara hela faktorer.
+Den gemensamma faktorn $(x + 2)$ förkortas bort. Observera att man **inte** får förkorta term för term (till exempel $\\dfrac{-6}{-4}$) — bara hela faktorer.
 
 **Svar:** $\\dfrac{x - 3}{x - 2}$`,
         },
@@ -29131,7 +29131,7 @@ $$
 x = -1 \\pm \\sqrt{1^2 + 3} = -1 \\pm 2
 $$
 
-så nollställena är $x=1$ och $x=-3$, dvs. $x^2+2x-3=(x-1)(x+3)$.
+så nollställena är $x=1$ och $x=-3$, det vill säga $x^2+2x-3=(x-1)(x+3)$.
 
 Nämnaren är en konjugat: $x^2-9=(x-3)(x+3)$.
 
@@ -29299,7 +29299,7 @@ $$
                 `NLös kan bara lösa andragradsekvationer`,
             ],
             correct: 0,
-            solution: `*NLös* (numeriskt lös) svarar med decimaltal, t.ex. $x \\approx 1{,}73$. *Lös* svarar exakt, med symboler som $x = \\sqrt{3}$ när lösningen inte är ett "snyggt" heltal.
+            solution: `*NLös* (numeriskt lös) svarar med decimaltal, till exempel $x \\approx 1{,}73$. *Lös* svarar exakt, med symboler som $x = \\sqrt{3}$ när lösningen inte är ett "snyggt" heltal.
 
 **Svar:** NLös ger decimalform, Lös ger exakt form.`,
         },
@@ -29313,7 +29313,7 @@ $$
                 `Det kan bara rita grafer, inte räkna`,
             ],
             correct: 0,
-            solution: `En vanlig räknare hanterar numeriska beräkningar (beräkningar med tal). Ett symbolhanterande hjälpmedel, t.ex. Geogebra, kan därutöver räkna med algebraiska uttryck — faktorisera, förenkla och lösa ekvationer där bokstäver ingår i själva uttrycket.
+            solution: `En vanlig räknare hanterar numeriska beräkningar (beräkningar med tal). Ett symbolhanterande hjälpmedel, till exempel Geogebra, kan därutöver räkna med algebraiska uttryck — faktorisera, förenkla och lösa ekvationer där bokstäver ingår i själva uttrycket.
 
 **Svar:** Det kan hantera algebraiska uttryck, inte bara tal.`,
         },
@@ -29446,7 +29446,7 @@ $$
 k = \\frac{s(t_2) - s(t_1)}{t_2 - t_1} = \\frac{35 - 8}{5 - 2} = \\frac{27}{3} = 9
 $$
 
-Enheten på $k$-värdet blir "enheten på $s$-axeln" per "enheten på $t$-axeln", dvs. meter per sekund.
+Enheten på $k$-värdet blir "enheten på $s$-axeln" per "enheten på $t$-axeln", det vill säga meter per sekund.
 
 **Svar:** Medelhastigheten är $9\\ \\mathrm{m/s}$.`,
         },
@@ -29588,7 +29588,7 @@ $$
 k = \\frac{s_2 - s_1}{t_2 - t_1} = \\frac{54 - 30}{5{,}0 - 2{,}0} = \\frac{24}{3{,}0} = 8{,}0
 $$
 
-Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", dvs. m/s.
+Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", det vill säga m/s.
 
 **Svar:** $8{,}0$ m/s`,
         },
@@ -29822,7 +29822,7 @@ $$
             correct: 0,
             solution: `Enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln". Här är enheten för $N$ individer och enheten för $t$ timmar, så $N'$ har enheten individer per timme.
 
-$N'(3) = 240$ är värdet av derivatan just vid tidpunkten $t = 3$ h, dvs. den momentana förändringshastigheten där — inte ett värde som gäller under hela förloppet.
+$N'(3) = 240$ är värdet av derivatan just vid tidpunkten $t = 3$ h, det vill säga den momentana förändringshastigheten där — inte ett värde som gäller under hela förloppet.
 
 **Svar:** Efter 3 timmar ökar antalet bakterier med cirka 240 individer per timme`,
         },
@@ -29842,7 +29842,7 @@ $$
 f'(3) = 4 \\cdot 3 = 12
 $$
 
-Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enheten för variabeln" (min), dvs. °C/min.
+Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enheten för variabeln" (min), det vill säga °C/min.
 
 **Svar:** $f'(3) = 12$ °C/min`,
         },
@@ -29877,7 +29877,7 @@ $$
 I'(x) = 10x - 3 \\quad \\Rightarrow \\quad I'(10) = 10 \\cdot 10 - 3 = 97
 $$
 
-Enheten för derivatan är "enheten för funktionen" (kr) per "enheten för variabeln" (styck), dvs. kr/styck. $I'(10) = 97$ betyder alltså att intäkten just vid 10 sålda produkter ökar med cirka 97 kr per ytterligare produkt — inte att den totala intäkten är 97 kr (det är $I(10) = 470$ kr).
+Enheten för derivatan är "enheten för funktionen" (kr) per "enheten för variabeln" (styck), det vill säga kr/styck. $I'(10) = 97$ betyder alltså att intäkten just vid 10 sålda produkter ökar med cirka 97 kr per ytterligare produkt — inte att den totala intäkten är 97 kr (det är $I(10) = 470$ kr).
 
 **Svar:** $I'(10) = 97$ kr/styck — intäkten ökar med cirka 97 kr per ytterligare produkt`,
         },
@@ -29897,7 +29897,7 @@ $$
 h'(t) = -2t + 8 \\quad \\Rightarrow \\quad h'(5) = -2 \\cdot 5 + 8 = -2
 $$
 
-Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjden vid $t = 5$ min, dvs. draken sjunker. (Det sista alternativet blandar ihop $h(5) = 15$ m, som är höjden, med $h'(5)$, som är förändringshastigheten.)
+Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjden vid $t = 5$ min, det vill säga draken sjunker. (Det sista alternativet blandar ihop $h(5) = 15$ m, som är höjden, med $h'(5)$, som är förändringshastigheten.)
 
 **Svar:** $h'(5) = -2$ m/min — draken sjunker`,
         },
@@ -30188,7 +30188,7 @@ $$
 
 Exponenterna måste stämma överens: $n - 1 = 3$, vilket ger $n = 4$.
 
-Sedan jämför vi koefficienterna: $an = 20$. Med $n = 4$ ger detta $4a = 20$, dvs. $a = 5$.
+Sedan jämför vi koefficienterna: $an = 20$. Med $n = 4$ ger detta $4a = 20$, det vill säga $a = 5$.
 
 Kontroll: $f(x) = 5x^4$ ger $f'(x) = 4 \\cdot 5x^3 = 20x^3$, vilket stämmer.
 
@@ -30616,7 +30616,7 @@ $$
 f'(0) = ae^0 = a = 6
 $$
 
-Nu använder vi det andra villkoret: att kurvan skär $y$-axeln i $(0,\\ 10)$, dvs. $f(0) = 10$.
+Nu använder vi det andra villkoret: att kurvan skär $y$-axeln i $(0,\\ 10)$, det vill säga $f(0) = 10$.
 
 $$
 f(0) = ae^0 + b = a + b = 10
@@ -30658,7 +30658,7 @@ $$
                 `$f'(x) = \\ln 6$`,
             ],
             correct: 0,
-            solution: `Basen är 6, dvs. en annan bas än $e$. Enligt deriveringsregeln $f'(x) = a^x \\ln a$ skriver vi av funktionen och multiplicerar med $\\ln$ för basen.
+            solution: `Basen är 6, det vill säga en annan bas än $e$. Enligt deriveringsregeln $f'(x) = a^x \\ln a$ skriver vi av funktionen och multiplicerar med $\\ln$ för basen.
 
 $$
 f'(x) = 6^x \\cdot \\ln 6
@@ -30960,7 +30960,7 @@ tangeringspunkten ligger på kurvan hade $c$ förblivit obestämd.
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Vilket Geogebra-kommando använder du om du vill lösa en ekvation **exakt**, dvs. få svaret i symboler i stället för decimaltal?`,
+            question: `Vilket Geogebra-kommando använder du om du vill lösa en ekvation **exakt**, det vill säga få svaret i symboler i stället för decimaltal?`,
             choices: [
                 `Lös(Ekvation)`,
                 `NLös(Ekvation)`,
@@ -31047,7 +31047,7 @@ $$
 
 (I Geogebra: skriv in $B(t) = 300e^{0{,}12t}$ och sedan $B'(t)$.)
 
-Vi sätter $B'(t) = 50$ och löser ut $t$, t.ex. med kommandot NLös:
+Vi sätter $B'(t) = 50$ och löser ut $t$, till exempel med kommandot NLös:
 
 $$
 36e^{0{,}12t} = 50 \\quad \\Rightarrow \\quad e^{0{,}12t} = \\frac{50}{36} \\approx 1{,}3889
@@ -31064,7 +31064,7 @@ $$
             level: 3,
             question: `Antalet besökare på en webbplats ökar enligt modellen $V(t) = 500e^{0{,}065t}$, där $t$ är tiden i månader efter lanseringen. Efter hur många månader har antalet besökare ökat med 50 % jämfört med lanseringen? Svara avrundat till en decimal, i månader.`,
             answer: { value: 6.2, unit: 'månader' },
-            solution: `Nyckelinsikten: "ökat med 50 %" betyder att $V(t)$ ska vara $1{,}5$ gånger startvärdet $V(0) = 500$, dvs.
+            solution: `Nyckelinsikten: "ökat med 50 %" betyder att $V(t)$ ska vara $1{,}5$ gånger startvärdet $V(0) = 500$, det vill säga
 
 $$
 V(t) = 1{,}5 \\cdot V(0)
@@ -31446,7 +31446,7 @@ $$
                 `Går inte att avgöra utan mer information`,
             ],
             correct: 0,
-            solution: `En bestämd integral får ett negativt värde om arean under grafen ligger under $x$-axeln. Arean i sig kan aldrig vara negativ, men eftersom hela området ligger under $x$-axeln blir integralens värde arean med motsatt tecken, dvs. negativt.
+            solution: `En bestämd integral får ett negativt värde om arean under grafen ligger under $x$-axeln. Arean i sig kan aldrig vara negativ, men eftersom hela området ligger under $x$-axeln blir integralens värde arean med motsatt tecken, det vill säga negativt.
 
 **Svar:** Negativt`,
         },
@@ -31620,7 +31620,7 @@ vilket ger $k = 5$ eller $k = -4$. Eftersom villkoret är $k > 1$ förkastar vi 
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Ett digitalt hjälpmedel (t.ex. Geogebra) ger en primitiv funktion till $f(x) = 4x^3 - 2x$. Vilket svar ger verktyget?`,
+            question: `Ett digitalt hjälpmedel (till exempel Geogebra) ger en primitiv funktion till $f(x) = 4x^3 - 2x$. Vilket svar ger verktyget?`,
             choices: [
                 `$F(x) = x^4 - x^2$`,
                 `$F(x) = x^4 + x^2$`,
@@ -31839,7 +31839,7 @@ $$
 x = \\frac{1}{2} \\pm \\sqrt{\\left(\\frac{1}{2}\\right)^2+6} = \\frac{1}{2}\\pm\\sqrt{\\frac{25}{4}} = \\frac{1}{2}\\pm\\frac{5}{2}
 $$
 
-vilket ger $x_1=-2$ och $x_2=3$. Vid t.ex. $x=0$ är $y=x+4$ lika med 4 och $y=x^2-2$ lika med −2, så linjen är den övre funktionen i intervallet.
+vilket ger $x_1=-2$ och $x_2=3$. Vid till exempel $x=0$ är $y=x+4$ lika med 4 och $y=x^2-2$ lika med −2, så linjen är den övre funktionen i intervallet.
 
 $$
 A = \\int_{-2}^{3} \\big((x+4)-(x^2-2)\\big)\\, dx = \\int_{-2}^{3} (-x^2+x+6)\\, dx = \\left[-\\frac{x^3}{3}+\\frac{x^2}{2}+6x\\right]_{-2}^{3}
@@ -31882,7 +31882,7 @@ $$
 kx = x^2 \\quad\\Leftrightarrow\\quad x(k-x)=0 \\quad\\Leftrightarrow\\quad x=0 \\ \\text{eller} \\ x=k
 $$
 
-Eftersom $k>0$ ligger linjen $y=kx$ över parabeln $y=x^2$ i intervallet $0 \\leq x \\leq k$ (vid t.ex. $x=k/2$ är $kx=k^2/2$ och $x^2=k^2/4$, så linjen är störst). Arean blir då, uttryckt i $k$,
+Eftersom $k>0$ ligger linjen $y=kx$ över parabeln $y=x^2$ i intervallet $0 \\leq x \\leq k$ (vid till exempel $x=k/2$ är $kx=k^2/2$ och $x^2=k^2/4$, så linjen är störst). Arean blir då, uttryckt i $k$,
 
 $$
 A = \\int_0^k (kx-x^2)\\, dx = \\left[\\frac{kx^2}{2}-\\frac{x^3}{3}\\right]_0^k = \\frac{k^3}{2}-\\frac{k^3}{3} = \\frac{k^3}{6}
@@ -31992,7 +31992,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett företags marginalkostnad ges av $K'(x) = 6x + 10$ (kr per tillverkad enhet), där $x$ är antalet tillverkade enheter. Den fasta kostnaden, dvs. kostnaden vid $x = 0$ innan någon enhet tillverkats, är 500 kr. Bestäm den totala kostnaden för att tillverka 20 enheter.`,
+            question: `Ett företags marginalkostnad ges av $K'(x) = 6x + 10$ (kr per tillverkad enhet), där $x$ är antalet tillverkade enheter. Den fasta kostnaden, det vill säga kostnaden vid $x = 0$ innan någon enhet tillverkats, är 500 kr. Bestäm den totala kostnaden för att tillverka 20 enheter.`,
             answer: { value: 1900, unit: 'kr' },
             solution: `Marginalkostnaden $K'(x)$ är derivatan av den totala kostnadsfunktionen $K(x)$. Vi måste alltså gå baklänges — integrera — för att hitta $K(x)$, men en obestämd integral ger bara en familj av funktioner som skiljer sig åt med en konstant $C$.
 
@@ -32091,7 +32091,7 @@ ${makeDiagram({
                 `$x > 1$`,
             ],
             correct: 0,
-            solution: `$f(x)$ är avtagande där $f'(x) < 0$, dvs. där grafen till $f'(x)$ ligger under $x$-axeln. Grafen skär $x$-axeln vid $x = -2$ och $x = 1$, och ligger under axeln både till vänster om $x = -2$ och till höger om $x = 1$.
+            solution: `$f(x)$ är avtagande där $f'(x) < 0$, det vill säga där grafen till $f'(x)$ ligger under $x$-axeln. Grafen skär $x$-axeln vid $x = -2$ och $x = 1$, och ligger under axeln både till vänster om $x = -2$ och till höger om $x = 1$.
 
 | Intervall | Tecken på $f'(x)$ | $f(x)$ |
 | --- | --- | --- |
@@ -32144,7 +32144,7 @@ $$
             correct: 0,
             solution: `Eftersom $f'(x)$ bara är noll vid $x = -1$ och $x = 4$, och byter tecken vid varje nollställe, måste tecknet på $f'(x)$ växla mellan de tre intervallen $x < -1$, $-1 < x < 4$ och $x > 4$ — annars skulle $f'(x)$ ha behövt ännu ett nollställe för att byta tecken tillbaka.
 
-Vi vet att $f(x)$ är strängt avtagande för $x < -1$, dvs. att $f'(x) < 0$ där. Eftersom tecknet växlar vid varje nollställe blir
+Vi vet att $f(x)$ är strängt avtagande för $x < -1$, det vill säga att $f'(x) < 0$ där. Eftersom tecknet växlar vid varje nollställe blir
 
 $$
 \\underbrace{f'(x) < 0}_{x\\, <\\, -1} \\quad\\Rightarrow\\quad \\underbrace{f'(x) > 0}_{-1\\, <\\, x\\, <\\, 4} \\quad\\Rightarrow\\quad \\underbrace{f'(x) < 0}_{x\\, >\\, 4}
@@ -32417,7 +32417,7 @@ Vi jämför värdena $0$, $-5$ och $4$. Det största värdet, $4$, finns i extre
                 `Går inte att avgöra`,
             ],
             correct: 0,
-            solution: `Vi testar tecknet på $f'(x)$ strax före och strax efter $x = -1$, t.ex. vid $x = -2$ och $x = 0$.
+            solution: `Vi testar tecknet på $f'(x)$ strax före och strax efter $x = -1$, till exempel vid $x = -2$ och $x = 0$.
 
 $$
 f'(-2) = 3 \\cdot (-2)^2 - 6 \\cdot (-2) - 9 = 12 + 12 - 9 = 15 \\quad \\Rightarrow \\quad +
@@ -32427,7 +32427,7 @@ $$
 f'(0) = 3 \\cdot 0^2 - 6 \\cdot 0 - 9 = -9 \\quad \\Rightarrow \\quad -
 $$
 
-Derivatan går från $+$ till $-$ vid $x = -1$, dvs. funktionen växer fram till punkten och avtar efter den. Det är kännetecknet för en maximipunkt.
+Derivatan går från $+$ till $-$ vid $x = -1$, det vill säga funktionen växer fram till punkten och avtar efter den. Det är kännetecknet för en maximipunkt.
 
 **Svar:** Maximipunkt`,
         },
@@ -32549,7 +32549,7 @@ $$
                 `$x > -1$`,
             ],
             correct: 0,
-            solution: `Funktionen är konkav när andraderivatan är negativ, dvs. när $f''(x) < 0$.
+            solution: `Funktionen är konkav när andraderivatan är negativ, det vill säga när $f''(x) < 0$.
 
 $$
 6x - 6 < 0
@@ -32747,7 +32747,7 @@ $$
 
 Andraderivatan är positiv, så $(3, -22)$ är en **minimipunkt**.
 
-(Vid $x = -1$ hade vi i stället fått $f''(-1) = -12 < 0$, dvs. en maximipunkt i $(-1, 10)$ — men det är inte punkten frågan gäller.)
+(Vid $x = -1$ hade vi i stället fått $f''(-1) = -12 < 0$, det vill säga en maximipunkt i $(-1, 10)$ — men det är inte punkten frågan gäller.)
 
 **Svar:** $(3, -22)$, minimipunkt`,
         },
@@ -32950,7 +32950,7 @@ $$
             answer: { value: 200, unit: 'm²' },
             solution: `Vi kallar de två sidorna vinkelräta mot ån för $x$ meter och sidan parallell med ån för $y$ meter.
 
-Stängslet läggs på de två sidorna $x$ samt på den del av den parallella sidan som **inte** är grind, dvs. $(y - 8)$ meter. Totalt stängsel är 32 meter, vilket ger ekvationen
+Stängslet läggs på de två sidorna $x$ samt på den del av den parallella sidan som **inte** är grind, det vill säga $(y - 8)$ meter. Totalt stängsel är 32 meter, vilket ger ekvationen
 
 $$
 2x + (y - 8) = 32 \\quad \\Rightarrow \\quad y = 40 - 2x
@@ -33065,7 +33065,7 @@ $$
 P(x) = x(24 - x)
 $$
 
-Extrempunkten anger både vilket $x$ som ger max ($x = 12$, dvs. talen är 12 och 12) och själva det maximala produktvärdet — det är $y$-koordinaten som efterfrågas.
+Extrempunkten anger både vilket $x$ som ger max ($x = 12$, det vill säga talen är 12 och 12) och själva det maximala produktvärdet — det är $y$-koordinaten som efterfrågas.
 
 $$
 (12, 144) \\quad \\Rightarrow \\quad P(12) = 144
@@ -33159,7 +33159,7 @@ $$
         },
         {
             level: 2,
-            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, dvs. hypotenusan (avrunda till en decimal).`,
+            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, det vill säga hypotenusan (avrunda till en decimal).`,
             choices: [
                 `31°; 4,1 m`,
                 `31°; 3,5 m`,
@@ -34211,7 +34211,7 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\dfrac{
                 `Punktens $y$-koordinat`,
                 `Punktens $x$-koordinat`,
                 `Kvoten $\\dfrac{x}{y}$`,
-                `Cirkelns radie, dvs. 1`,
+                `Cirkelns radie, det vill säga 1`,
             ],
             correct: 0,
             solution: `Eftersom hypotenusan (radien) är 1 gäller $\\sin v = \\dfrac{y}{1} = y$. Sinus är alltså punktens $y$-koordinat. (Cosinus är $x$-koordinaten och $\\tan v = \\dfrac{y}{x}$.)

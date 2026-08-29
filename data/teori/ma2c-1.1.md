@@ -20,7 +20,7 @@ y = 2x - 4
 $$
 
 Den består av **två olika** variabler, $x$ och $y$. Den har flera
-(oändligt många) par av lösningar, t.ex.
+(oändligt många) par av lösningar, till exempel
 
 | $x$ | 0 | 1 | 2 | 3 |
 | --- | --- | --- | --- | --- |
@@ -117,7 +117,7 @@ gäller $k = 2$ och $m = 5$.
 
 Den övre ekvationen måste alltså ha samma $k$-värde, så $k = 2$.
 
-$m$-värdena ska vara olika, så $m$ kan vara vad som helst utom 5, dvs.
+$m$-värdena ska vara olika, så $m$ kan vara vad som helst utom 5, det vill säga
 $m \neq 5$.
 
 **Svar:** $k = 2$ och $m \neq 5$

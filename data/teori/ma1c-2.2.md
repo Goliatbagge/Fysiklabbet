@@ -13,7 +13,7 @@ När vi skriver ett uttryck på ett enklare sätt kallas det att **förenkla
 uttryck**.
 
 ::: formel "Förenkla uttryck"
-Vi kan bara lägga ihop **likadana termer** med varandra, dvs. $x$-termer
+Vi kan bara lägga ihop **likadana termer** med varandra, det vill säga $x$-termer
 för sig, $y$-termer för sig, $x^2$-termer för sig, konstanttermer för sig,
 och så vidare. Var noga med att titta på tecknet framför varje term!
 :::
@@ -90,7 +90,7 @@ typ: omkrets
 ::: textlosning
 Eftersom motstående sidor i en rektangel är lika långa måste vänstersidan
 vara $x$ och ovansidan vara $2x + 3$. Omkretsen fås genom att lägga ihop
-alla sidor, dvs. som
+alla sidor, det vill säga som
 
 $$
 (2x + 3) + (2x + 3) + x + x = 2x + 3 + 2x + 3 + x + x = 6x + 6

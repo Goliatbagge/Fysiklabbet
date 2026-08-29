@@ -15,7 +15,7 @@ växer varje år. Står det bara "ränta" i en uppgift är det underförstått
 *årsräntan*. Beloppet som finns på kontot kallas **behållning**.
 
 Om vi snabbt vill ta reda på behållningen på ett konto varje år kan vi
-använda ett **kalkylblad**, t.ex. Google Kalkylark eller Microsoft Excel.
+använda ett **kalkylblad**, till exempel Google Kalkylark eller Microsoft Excel.
 
 Ett kalkylblad byggs upp av rutor som kallas **celler**. Varje cell har
 ett namn som består av en bokstav och ett tal. Varje cell som ligger i
@@ -41,7 +41,7 @@ typ: kalkylranta
 **a)** Vi öppnar ett kalkylark och gör en kolumn för "År" och en kolumn
 för "Behållning (kr)". Vi fyller i kolumnen från år 0 till och med år 8.
 Vi fyller också i insättningen 30 000 kr (i cell B2) samt
-förändringsfaktorn som motsvarar en ökning med 3,5 %, dvs.
+förändringsfaktorn som motsvarar en ökning med 3,5 %, det vill säga
 $1 + 0{,}035 = 1{,}035$ (i cell B12).
 
 För att få behållningen efter ett år ska vi multiplicera 30 000 (värdet i

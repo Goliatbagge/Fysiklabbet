@@ -62,7 +62,7 @@ window.REPETITION['fy2-1'] = {
                 { text: 'Ju längre bort från vridningspunkten en kraft verkar (med samma kraft), desto större blir kraftmomentet.',
                   sant: true, varfor: 'Kraftmomentet $M = F \\cdot l$ ökar med hävarmen $l$ vid oförändrad kraft.' },
                 { text: 'Centripetalkraften är en egen, separat kraft utöver de vanliga krafterna som tyngdkraft och friktion.',
-                  sant: false, varfor: 'Centripetalkraften är resultanten av de faktiska krafterna, t.ex. spännkraft, friktion eller tyngdkraft.' },
+                  sant: false, varfor: 'Centripetalkraften är resultanten av de faktiska krafterna, till exempel spännkraft, friktion eller tyngdkraft.' },
                 { text: 'En radian är det vinkelmått där cirkelbågen är lika lång som radien.',
                   sant: true, varfor: 'Det är just definitionen av 1 radian.' },
                 { text: 'I en kaströrelse (utan luftmotstånd) är hastigheten i x-led konstant.',

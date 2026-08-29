@@ -76,7 +76,7 @@ ligger i (3, −1).
 Vi ska nu avgöra när $-2x + 5$ är MINDRE ÄN $x - 4$.
 
 $-2x + 5$ är MINDRE ÄN $x - 4$ när linjen $y = -2x + 5$ ligger *under*
-linjen $y = x - 4$. Det gör den *till höger* om skärningspunkten, dvs.
+linjen $y = x - 4$. Det gör den *till höger* om skärningspunkten, det vill säga
 när $x > 3$.
 
 **Svar:** $x > 3$
@@ -93,7 +93,7 @@ skriva `y = 7.5x + 3`. Observera skillnaden: **7,5 skrivs 7.5**.
 **Variabler**
 
 I grafiska lösningar "förstår" GeoGebra bara variablerna $x$ och $y$. Om
-vi t.ex. vill skriva in ekvationen $y = 13t + 5$ behöver vi byta ut
+vi till exempel vill skriva in ekvationen $y = 13t + 5$ behöver vi byta ut
 variabeln $t$ mot $x$ och skriva in det vänstra ledet som $y = 13x + 5$:
 **$y = 13t + 5$ skrivs `y = 13x + 5`**.
 :::

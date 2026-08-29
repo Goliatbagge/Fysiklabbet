@@ -139,7 +139,7 @@ $$
 x = 4
 $$
 
-Insättning av $x = 4$ i t.ex. ekvation (1) ger
+Insättning av $x = 4$ i till exempel ekvation (1) ger
 
 $$
 5 \cdot 4 + 4y = 30
@@ -188,7 +188,7 @@ $$
 
 Här räcker det inte att multiplicera en av ekvationerna för att
 eliminera $x$ eller $y$. Vi kan då multiplicera **båda** ekvationer. Om
-vi t.ex. vill eliminera $x$-termerna kan vi multiplicera ekvationerna
+vi till exempel vill eliminera $x$-termerna kan vi multiplicera ekvationerna
 med varandras koefficienter framför $x$ och se till att de får olika
 tecken.
 

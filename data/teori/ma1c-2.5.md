@@ -10,9 +10,9 @@ section: '2.5'
 # Ekvationslösningens grunder
 
 När vi har ett uttryck som ska vara lika med ett annat uttryck har vi en
-**ekvation**. En ekvation innehåller alltså alltid någon variabel, t.ex.
+**ekvation**. En ekvation innehåller alltså alltid någon variabel, till exempel
 $x$, och ett likhetstecken, =. Vid ekvationslösning ska vi bestämma värdet
-på variabeln. Det gör vi genom att **lösa ut** variabeln, t.ex. $x$, så att
+på variabeln. Det gör vi genom att **lösa ut** variabeln, till exempel $x$, så att
 den står ensam på ena sidan av likhetstecknet.
 
 För att lösa ut $x$ används några grunder som beror på vilket räknesätt vi

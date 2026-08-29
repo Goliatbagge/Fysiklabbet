@@ -38,7 +38,7 @@ givet problem och lösa tillämpningar med flera trianglar efter varandra.
   trigonometrisk funktion ska anta samma värde igen; $360^\circ$ för sinus
   och cosinus, $180^\circ$ för tangens.
 - **trigonometrisk ekvation**: en ekvation som innehåller en
-  trigonometrisk funktion, t.ex. $\sin v = a$; löses med enhetscirkeln
+  trigonometrisk funktion, till exempel $\sin v = a$; löses med enhetscirkeln
   eller räknarens inversa funktioner.
 - **mellanliggande vinkel**: vinkeln som ligger mellan två kända sidor i
   en triangel; krävs för areasatsen och för ett av cosinussatsens

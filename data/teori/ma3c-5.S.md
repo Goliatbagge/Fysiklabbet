@@ -21,20 +21,20 @@ andra tillämpningar av integraler beräknas och tolkas.
 ## Begrepp att kunna
 
 - **primitiv funktion ($F(x)$)**: en funktion vars derivata är den
-  ursprungliga funktionen, dvs. $F'(x) = f(x)$; kallas även
+  ursprungliga funktionen, det vill säga $F'(x) = f(x)$; kallas även
   baklängesderivata eller antiderivata.
 - **integrera**: att ta fram en primitiv funktion till en given funktion;
   motsatsen till att derivera.
 - **integrationskonstant ($C$)**: konstanten som läggs till när samtliga
   primitiva funktioner till en funktion anges, eftersom en konstant term
   försvinner vid derivering.
-- **villkor**: en given uppgift om en primitiv funktion, t.ex.
+- **villkor**: en given uppgift om en primitiv funktion, till exempel
   $F(1) = 7$, som används för att bestämma integrationskonstanten $C$.
 - **integraltecken ($\int$)**: summatecknet för oändligt många oändligt
   smala termer; ett utdraget "s".
 - **bestämd integral**: en integral med en undre gräns *a* och en övre
   gräns *b*, $\int_a^b f(x)\, dx$, som ger ett bestämt tal.
-- **integrand**: funktionen $f(x)$ som integreras, dvs. den funktion
+- **integrand**: funktionen $f(x)$ som integreras, det vill säga den funktion
   arean beräknas under.
 - **integrationsgränser**: *x*-värdena *a* (undre gräns) och *b* (övre
   gräns) som avgränsar det område en bestämd integral beräknar.
@@ -117,7 +117,7 @@ intervallet $[a, b]$.
   $C$ läggas till på slutet.
 - Har funktionen flera termer: ta fram en primitiv funktion till varje
   term för sig och lägg ihop dem.
-- Ett **villkor** (t.ex. $F(1) = 7$) används genom att sätta in villkorets
+- Ett **villkor** (till exempel $F(1) = 7$) används genom att sätta in villkorets
   *x*-värde i den primitiva funktionen (med $C$ kvar), sätta uttrycket
   lika med det angivna funktionsvärdet och lösa ut $C$.
 - En bestämd integral kan bli **negativ** om området ligger under
@@ -141,8 +141,8 @@ intervallet $[a, b]$.
 - Skärningspunkter mellan kurvor (integrationsgränser vid area mellan
   kurvor) bestäms genom att sätta funktionsuttrycken lika med varandra
   och lösa den ekvation som uppstår.
-- En integral kan tolkas som produkten av den beroende variabeln (t.ex.
-  $y$ eller $f(x)$) och den oberoende variabeln (t.ex. $x$); enheten fås
+- En integral kan tolkas som produkten av den beroende variabeln (till exempel
+  $y$ eller $f(x)$) och den oberoende variabeln (till exempel $x$); enheten fås
   genom att ta enheten för $y$ gånger enheten för $x$.
 - Vid tillämpningar: integrerar man en acceleration $a(t)$ får man en
   hastighet $v(t)$, och integrerar man en hastighet $v(t)$ får man en
@@ -175,7 +175,7 @@ Peka eller tryck på en kurva eller det skuggade området så visas vad delen ä
 - Kan du ta fram primitiva funktioner till potensfunktioner, konstanta
   funktioner och exponentialfunktioner med basen $e$?
 - Kan du bestämma integrationskonstanten $C$ utifrån ett givet villkor,
-  t.ex. $F(1) = 7$?
+  till exempel $F(1) = 7$?
 - Kan du förklara sambandet mellan sträcka, hastighet och acceleration
   vid derivering respektive integrering?
 - Vet du att en bestämd integral grafiskt motsvarar arean mellan en
@@ -192,5 +192,5 @@ Peka eller tryck på en kurva eller det skuggade området så visas vad delen ä
   exakt?
 - Kan du beräkna arean mellan två kurvor, och vet du hur du bestämmer
   skärningspunkter när området behöver delas upp i flera delar?
-- Kan du tolka vad en integral betyder i ett tillämpat sammanhang, t.ex.
+- Kan du tolka vad en integral betyder i ett tillämpat sammanhang, till exempel
   utifrån enheterna på *y*-axeln och *x*-axeln?

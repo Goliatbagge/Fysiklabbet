@@ -74,7 +74,7 @@ $$
 $$
 
 Vi har nu tecknat arean på den stora kvadraten på två olika sätt och
-dessa uttryck måste såklart vara lika stora, dvs. (1) = (2). Detta ger
+dessa uttryck måste såklart vara lika stora, det vill säga (1) = (2). Detta ger
 
 $$
 a^2 + 2ab + b^2 = 2ab + c^2
@@ -98,7 +98,7 @@ hypotenusan.
 :::
 
 Om triangeln är rätvinklig, så gäller $a^2 + b^2 = c^2$. Men
-omvändningen gäller också, dvs. om $a^2 + b^2 = c^2$, så är triangeln
+omvändningen gäller också, det vill säga om $a^2 + b^2 = c^2$, så är triangeln
 rätvinklig. Detta är alltså en ekvivalens, så
 
 $$

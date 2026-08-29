@@ -12,7 +12,7 @@ section: '4.2'
 Vi vet sedan tidigare att tecknet på derivatan $f'(x)$ avgör om en funktion
 är växande eller avtagande i ett intervall: $f'(x) > 0$ ger en växande
 funktion och $f'(x) < 0$ ger en avtagande funktion. Men vad händer i den
-punkt där derivatan är exakt 0, dvs. där $f'(x) = 0$? Där är kurvans
+punkt där derivatan är exakt 0, det vill säga där $f'(x) = 0$? Där är kurvans
 tangent vågrät, och punkten är antingen en **lokal maximipunkt**, en
 **lokal minimipunkt** eller en **terrasspunkt**.
 
@@ -116,8 +116,8 @@ $$
 Punkterna $(1, 7)$ och $(3, 3)$ har alltså derivatan 0.
 
 Steg 3: Vi bestämmer punkternas karaktär med en teckentabell. Vi sätter in
-ett valfritt värde mindre än 1 (t.ex. $x = 0$), ett värde mellan 1 och 3
-(t.ex. $x = 2$) och ett värde större än 3 (t.ex. $x = 10$) i derivatan.
+ett valfritt värde mindre än 1 (till exempel $x = 0$), ett värde mellan 1 och 3
+(till exempel $x = 2$) och ett värde större än 3 (till exempel $x = 10$) i derivatan.
 
 $$
 f'(0) = 3 \cdot 0^2 - 12 \cdot 0 + 9 = 9 > 0

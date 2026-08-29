@@ -37,16 +37,16 @@ skalär — både grafiskt och i koordinatform.
   vektorers längd.
 - **l.e. och a.e. (längdenheter och areaenheter)**: beteckningar som
   används när en sträcka respektive area saknar angiven enhet.
-- **storhet**: en egenskap som kan mätas, t.ex. sträcka, hastighet eller
+- **storhet**: en egenskap som kan mätas, till exempel sträcka, hastighet eller
   temperatur.
-- **vektor**: en storhet som anges med både storlek och riktning, t.ex.
+- **vektor**: en storhet som anges med både storlek och riktning, till exempel
   hastighet, kraft och acceleration; betecknas $\vec{u}$.
-- **skalär**: en storhet som endast anges med storlek, t.ex. vikt, tid
+- **skalär**: en storhet som endast anges med storlek, till exempel vikt, tid
   och temperatur.
 - **vektorns längd (belopp) ($|\vec{u}|$)**: vektorns storlek, beräknas
   med Pythagoras sats eller ur koordinatformen.
 - **motsatta vektorer**: vektorer med samma storlek men motsatt
-  riktning, t.ex. $\vec{v}_2 = -\vec{v}_1$.
+  riktning, till exempel $\vec{v}_2 = -\vec{v}_1$.
 - **parallella vektorer**: vektorer som har samma lutning, oavsett om de
   är olika stora eller motriktade.
 - **resultant**: den vektor som fås när två (eller flera) vektorer

@@ -21,7 +21,7 @@ karaktär (maximipunkt, minimipunkt eller terrasspunkt).
 :::
 
 Ibland ska vi bestämma en funktions största eller minsta värde i ett
-**slutet intervall**, dvs. ett intervall där även ändpunkterna
+**slutet intervall**, det vill säga ett intervall där även ändpunkterna
 $a \leq x \leq b$ räknas med. Det största eller minsta värdet i intervallet
 finns då alltid antingen i en extrempunkt **eller** i en av intervallets
 ändpunkter — aldrig någon annanstans.

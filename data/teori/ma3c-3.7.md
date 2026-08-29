@@ -11,13 +11,13 @@ section: '3.7'
 
 När vi löser en tillämpningsuppgift med deriveringsregler gör vi en
 algebraisk lösning för hand. Vi kan även lösa tillämpningsuppgifter med
-derivata med hjälp av digitala hjälpmedel, t.ex. Geogebra.
+derivata med hjälp av digitala hjälpmedel, till exempel Geogebra.
 
 | Uppgift | Kommando i Geogebra |
 | --- | --- |
-| Bestämma funktionsvärde | $f(x) = \ldots$ och sedan t.ex. $f(3)$ |
+| Bestämma funktionsvärde | $f(x) = \ldots$ och sedan till exempel $f(3)$ |
 | Derivera | $f(x) = \ldots$ och sedan $f'(x)$ |
-| Bestämma derivatans värde | $f(x) = \ldots$ och sedan t.ex. $f'(3)$ |
+| Bestämma derivatans värde | $f(x) = \ldots$ och sedan till exempel $f'(3)$ |
 | Lösa ekvationer numeriskt (skriver ut decimaler) | NLös(Ekvation) |
 | Lösa ekvationer exakt (skriver ut symboler) | Lös(Ekvation) |
 
@@ -87,7 +87,7 @@ parabel som öppnar uppåt, med ett minsta värde i sin minimipunkt. Vi
 studerar grafen till $f'(x)$ i Geogebra och använder verktyget
 *Extrempunkt* för att ta fram minimipunkten. Den ligger vid $x = 1$.
 
-Vi ser att $f'(x)$ har sitt lägsta värde då $x = 1$, dvs. det är där
+Vi ser att $f'(x)$ har sitt lägsta värde då $x = 1$, det vill säga det är där
 funktionen $f(x)$ har sin minsta lutning.
 
 **Svar:** $x = 1$
@@ -109,7 +109,7 @@ $$
 V(t) = 100 \cdot 1{,}05^t
 $$
 
-Vi ska skriva om det exponentiella sambandet med basen $e$, dvs. på
+Vi ska skriva om det exponentiella sambandet med basen $e$, det vill säga på
 formen $y = Ce^{kx}$. Detta ger
 
 $$

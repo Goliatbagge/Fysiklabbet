@@ -37,7 +37,7 @@ k + h = 100 & (1) \\
 \end{cases}
 $$
 
-Vi löser ut t.ex. $h$ från ekvation (1) och använder oss av
+Vi löser ut till exempel $h$ från ekvation (1) och använder oss av
 substitutionsmetoden:
 
 $$
@@ -115,7 +115,7 @@ $$
 x = 12
 $$
 
-Insättning av $x = 12$ i t.ex. (1) ger
+Insättning av $x = 12$ i till exempel (1) ger
 
 $$
 12 + y = 19

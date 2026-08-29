@@ -10,9 +10,9 @@ section: '2.9'
 # Enkla andra- och tredjegradsekvationer
 
 I en ekvation avgör variabeltermen med högst exponent ekvationens **grad**.
-En ekvation som innehåller en variabel där högsta exponenten är 2, t.ex.
+En ekvation som innehåller en variabel där högsta exponenten är 2, till exempel
 $x^2 + 7 = 11$, kallas **andragradsekvation**. En ekvation som innehåller
-en variabel med högsta graden 3, t.ex. $x^3 - 8 = 1$, kallas
+en variabel med högsta graden 3, till exempel $x^3 - 8 = 1$, kallas
 **tredjegradsekvation**. Andra- och tredjegradsekvationer som innehåller en
 enda variabelterm kallas **enkla andra- och tredjegradsekvationer**.
 

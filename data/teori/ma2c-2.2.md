@@ -61,7 +61,7 @@ $$
 $$
 
 Nu tittar vi på uttrycket i parentesen igen. Kan vi faktorisera det
-ytterligare? Nej, det kan inte faktoriseras ytterligare, t.ex. med en
+ytterligare? Nej, det kan inte faktoriseras ytterligare, till exempel med en
 kvadreringsregel, eftersom den första termen (2) inte är en kvadrat
 (kan inte skrivas som ett heltal upphöjt till 2).
 

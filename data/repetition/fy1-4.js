@@ -72,7 +72,7 @@ window.REPETITION['fy1-4'] = {
                 { text: 'Rörelsemängden hos ett föremål har både storlek och riktning.',
                   sant: true, varfor: 'Med $p = m \\cdot v$ och hastigheten som vektor blir även rörelsemängden en vektor.' },
                 { text: 'Vid en fullkomligt oelastisk stöt bevaras rörelsemängden, men inte hela den mekaniska energin.',
-                  sant: true, varfor: 'Rörelsemängden bevaras alltid i ett slutet system, men en del rörelseenergi omvandlas t.ex. till värme eller deformation.' },
+                  sant: true, varfor: 'Rörelsemängden bevaras alltid i ett slutet system, men en del rörelseenergi omvandlas till exempel till värme eller deformation.' },
             ],
         },
     ],

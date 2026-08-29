@@ -42,7 +42,7 @@ typ: andelpromille
 
 ::: textlosning
 Det frågas efter *andelen*. För att vi ska få korrekt andel krävs att vi
-har samma enhet på delen och det hela. Vi gör om t.ex. 15 kg till gram och
+har samma enhet på delen och det hela. Vi gör om till exempel 15 kg till gram och
 får $15\ \mathrm{kg} = 15\,000\ \mathrm{g}$. Så delen = 120 g och
 hela = 15 000 g. Vi sätter in i formeln för andelen och får
 

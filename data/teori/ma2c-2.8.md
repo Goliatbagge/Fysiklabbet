@@ -9,7 +9,7 @@ section: '2.8'
 
 # Rotekvationer
 
-En ekvation där variabeln, t.ex. $x$, är under ett rottecken kallas
+En ekvation där variabeln, till exempel $x$, är under ett rottecken kallas
 **rotekvation**.
 
 ::: tips "Lösa rotekvationer — generellt"
@@ -20,8 +20,8 @@ En ekvation där variabeln, t.ex. $x$, är under ett rottecken kallas
 :::
 
 ::: tips "Lösa rotekvationer — med variabelsubstitution"
-1. Substituera (byt ut) rotuttrycket, t.ex. $\sqrt{x}$, mot en annan
-   variabel, t.ex. $t$.
+1. Substituera (byt ut) rotuttrycket, till exempel $\sqrt{x}$, mot en annan
+   variabel, till exempel $t$.
 2. Teckna en ny ekvation med $t$ och lös ekvationen.
 3. Bestäm den ursprungliga variabeln $x$ med hjälp av värdet på $t$.
 4. Kontrollera din lösning! Falska rötter kan uppstå.

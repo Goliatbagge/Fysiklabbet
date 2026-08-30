@@ -22,10 +22,20 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
    - **⚠️ TEASER-SKULD GÅR FÖRE ALLT ANNAT.** Har det senaste nyhetsbrevet
      (översta posten i `.claude/nyhetsbrev/logg.md`) teasat ett uppslag ur
      `ko.md` under "Nästa vecka", är det ett löfte till prenumeranterna som
-     MÅSTE infrias innan nästa brev går ut (söndag). Publicera det teasade
-     uppslaget **senast onsdag** samma vecka — tidigare om nyhetsdagen ändå
-     är mager. En färsk dagsnyhet får gå före någon enstaka dag, men aldrig
-     så att teasern riskerar att bli oinfriad. Visar granskningen att
+     MÅSTE infrias innan nästa brev går ut (söndag). **Publiceringsfönstret
+     är TIDIGAST måndagen och SENAST lördagen i veckan efter brevet**
+     (uttryckligt önskemål 2026-08-30):
+     - **Publicera ALDRIG det teasade uppslaget före måndagen.** Brevet går
+       ut söndag 06.00 och säger "ur nyhetskön väntar" — ligger artikeln
+       redan på sajten när prenumeranten läser det ser löftet ut som ett
+       misstag. Precis det hände 2026-08-30: brevet teasade
+       molekylkondensatet, och artikeln (2026-08-30-droppen-utan-karl)
+       publicerades natten till söndagen, timmar FÖRE utskicket. Ett
+       [BREVTEASER]-märkt uppslag är alltså FRYST för publicering från att
+       det teasats till och med söndagen, hur mager nyhetsdagen än är.
+     - **Publicera senast lördagen**, så att uppslaget är inlöst innan
+       nästa brev går ut. En färsk dagsnyhet får gå före någon enstaka
+       dag, men aldrig så att teasern riskerar att bli oinfriad. Visar granskningen att
      uppslaget spruckit (indraget, faktafel, går inte att belägga):
      publicera det INTE — skriv i stället en rad om detta i
      `.claude/nyhetsbrev/planerat.md`, så att nästa brev kan lösa in löftet
@@ -49,12 +59,16 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
      inte nödvändigtvis det mest nyhetsvärdiga. Det ska gå att sammanfatta i
      en mening som får någon att vilja läsa vidare.
    - Det måste vara **belagt och publicerbart** — teasern blir ett löfte som
-     du själv måste lösa in senast onsdag (se teaser-skuldregeln ovan). Märk
-     aldrig ett uppslag du är osäker på.
+     du själv måste lösa in i fönstret måndag–lördag veckan efter brevet
+     (se teaser-skuldregeln ovan). Märk aldrig ett uppslag du är osäker på.
+   - **Ett märkt uppslag är FRYST tills brevet gått ut**: vill du publicera
+     det som dagens nyhet innan söndagen har du valt fel — flytta först
+     märkningen till ett annat uppslag, annars teasar brevet en artikel som
+     redan ligger på sajten.
    - **Publicerar du det märkta uppslaget**: flytta märkningen till ett nytt
      uppslag i samma körning. Kön får aldrig lämnas utan brevteaser.
    - Skriv datum i märkningen när brevet väl teasat den, så att skulden syns:
-     `**[BREVTEASER — teasad i brevet ÅÅÅÅ-MM-DD, publiceras senast onsdag ÅÅÅÅ-MM-DD]**`
+     `**[BREVTEASER — teasad i brevet ÅÅÅÅ-MM-DD, publiceras TIDIGAST måndag ÅÅÅÅ-MM-DD, senast lördag ÅÅÅÅ-MM-DD]**`
 
 3. **Hantera "nyhetstorka" och dubblar med kön.**
    - Hittar du **två** starka nyheter samma dag: publicera den bästa idag och

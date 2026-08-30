@@ -208,6 +208,13 @@ node data/build-nyheter-og.js
 # utanför sitemapen men MÅSTE ligga kvar i roten.
 node .claude/verify-sitemap.js
 
+# Verifiera att BESÖKSMÄTNINGEN finns på varje sida (KÖR FÖRE COMMIT när du
+# lagt till en ny HTML-sida i roten!) — Cloudflares mättagg måste ligga före
+# </body> i varje sida besökaren kan landa på, med rätt token. Saknas den
+# ser ingenting trasigt ut: sidan fungerar, den bara försvinner ur
+# statistiken. Se "Besöksstatistik" nedan.
+node .claude/verify-analytics.js
+
 # Uppläsning (talsyntes).
 # ⛔ PAUSAT (2026-08-03, tills vidare på uttrycklig begäran): generera INGET
 # nytt ljud och committa inga ljudkedje-artefakter (audio/,
@@ -911,6 +918,40 @@ skyddat material (uttryckligt önskemål 2026-08-06).
   `archive.org/details/<id>`), aldrig på en startsida — och undvik
   NSSDC-länkar (nssdc.gsfc.nasa.gov låg nere 2026-08-06 och visade en
   underhållssida i stället för filmen).
+
+## Besöksstatistik
+
+Sajten mäts med **Cloudflare Web Analytics** (uppsatt 2026-08-30). Den är
+gratis, cookiefri och samlar inga personuppgifter, så den kräver ingen
+kakruta och inget samtycke.
+
+- **Rapporten:** [dash.cloudflare.com](https://dash.cloudflare.com) →
+  Analytics → Web analytics → `fysiklabbet.se`. Sidvisningar, besök,
+  populäraste sidor, hänvisande källor, land och enhetstyp.
+- **Mätningen sker med en JS-tagg** som ligger före `</body>` i varje sida i
+  projektroten. Den läggs in för hand i nya sidor och granskas av
+  `node .claude/verify-analytics.js`.
+- **Delningssidorna** under `nyheter/dela/` och `katalog/dela/` har medvetet
+  INGEN tagg — de är rena vidarebefordringar, och besökaren räknas på den
+  riktiga sidan en halvsekund senare. Skulle de mätas blev varje delad länk
+  två sidvisningar.
+
+**⚠️ Välj aldrig Cloudflares "automatic setup" för den här sajten.** Den
+injicerar taggen via Cloudflares proxy, och våra DNS-poster är DNS-only
+(`fysiklabbet.se` pekar rakt på GitHub Pages IP-adresser). Ingen trafik
+passerar alltså Cloudflare, och automatisk injicering skulle ge noll
+sidvisningar utan att något ser trasigt ut. Manuell JS-tagg är rätt väg så
+länge sajten ligger på GitHub Pages.
+
+**Mätning från localhost räknas inte.** Taggens anrop till
+`cloudflareinsights.com` stoppas av CORS när värdnamnet inte är
+`fysiklabbet.se`, så provkörningar mot dev-servern smutsar aldrig ned
+statistiken. Ett CORS-fel i konsolen på `localhost:8000` är alltså väntat
+och inget att laga.
+
+Övriga siffror finns på andra håll: **Google Search Console** (sökfrågor och
+indexering), **EmailOctopus** (nyhetsbrevets öppningar och klick) och **Meta
+Business Suite** (Facebook och Instagram).
 
 ## Projektstruktur
 
@@ -2920,6 +2961,9 @@ styckar orden i `<span>`-taggar och då hittas de inte längre (se
     `"<Simuleringens namn> — <Kurs>"`, `<title>` som
     `"<Namn> — Fysiklabbet"` (em-streck). Kör
     `node .claude/verify-sitemap.js` — den larmar om taggarna saknas.
+17. [ ] **Cloudflares mättagg före `</body>`** — kopiera de tre raderna från
+    `fysik1-densitet-app.html`. Utan dem finns sidan inte i besöksstatistiken,
+    och det syns inte på sidan. Kör `node .claude/verify-analytics.js`.
 
 ## Övningar
 

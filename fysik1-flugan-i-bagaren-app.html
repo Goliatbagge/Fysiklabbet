@@ -955,6 +955,85 @@
                 return [vx, vz];
             }
 
+            // Markytan under en viss x-position (px): vågplattan,
+            // vågkroppens ovansida eller bänken.
+            groundYof(qx) {
+                const dx = Math.abs(qx - CX);
+                if (dx <= 122) return PLAT_Y;
+                if (qx >= 320 && qx <= 620) return 502;
+                return BENCH_Y;
+            }
+
+            // ── Strömningsfältet i det FRIA (utanför bägaren), px/s ──
+            // Samma tanke som airField för insidan, men med markeffekt:
+            //   1. nedsvepets stråle rakt under flugan,
+            //   2. väggstråle längs marken, utåt från träffpunkten,
+            //   3. VIRVLAR som rullar upp vid strålfronten (verklighetens
+            //      virvelring under en hovrande insekt, i genomskärning),
+            //   4. uppvik längs glasets utsida när strålen trycker mot den.
+            // Partiklarna FÖLJER fältet (med tröghet) i stället för att
+            // flyga ballistiskt — det är det som ger virvelkänslan
+            // (linjära banor påpekade 2026-08-30).
+            outsideField(qx, qy) {
+                const fx = CX + (this.x + this.wander) * PX;
+                const fy = BOT_Y - this.z * PX - 4;
+                const thrust = clamp(this.Tcmd / Math.max(this.m * G_ACC, 1e-12), 0, 2);
+                const pulse = this.Tcmd > 1e-9 ? clamp(this.Tinst / this.Tcmd, 0.2, 2) : 1;
+                const V0 = clamp(this.viS / 0.7, 0, 1.5) * 300 * pulse * clamp(thrust, 0, 1);
+                if (V0 < 5) return [0, 0];
+                let vx = 0, vy = 0;
+                const spanPx = (D_BEAKER / 2) * PX + WALL;
+                const rimY = BOT_Y - this.H * PX;
+
+                // flugan i/över mynningen: spillet rinner utåt över kanten
+                // och nedåt längs utsidan — insidans fält sköter resten
+                if (Math.abs(this.x) < D_BEAKER / 2) {
+                    const dir2 = Math.sign(qx - CX || 1);
+                    vx += dir2 * V0 * 0.45;
+                    vy += V0 * 0.5;
+                    return [vx, vy];
+                }
+
+                const yGj = this.groundYof(fx);   // marken under strålen
+                // 1. nedsvepets stråle
+                const dyj = qy - fy;
+                if (dyj > -6) {
+                    const rj = 9 + 0.42 * Math.max(dyj, 0);
+                    const dxj = qx - fx;
+                    const sg = 0.6 * rj;
+                    const u = Math.exp(-(dxj * dxj) / (2 * sg * sg));
+                    vy += V0 * (11 / rj) * 2.6 * u;
+                }
+                // 2. väggstråle längs marken (avtar med avståndet)
+                const yGq = this.groundYof(qx);
+                const prox = clamp(1 - (yGq - qy) / 26, 0, 1);
+                if (prox > 0 && qy > fy) {
+                    const dist = qx - fx;
+                    vx += Math.sign(dist || 1) * V0 * 0.9 * (34 / (Math.abs(dist) + 34)) * prox;
+                }
+                // 3. virvlarna vid strålfronten (motroterande par)
+                for (const side of [-1, 1]) {
+                    const cxv = fx + side * 46;
+                    const cyv = this.groundYof(cxv) - 15;
+                    const rx = qx - cxv, ry = qy - cyv;
+                    const r = Math.hypot(rx, ry);
+                    if (r < 0.5) continue;
+                    const rc = 13;
+                    const spd = V0 * 0.75 * (r < rc ? r / rc : rc / r) *
+                        Math.exp(-Math.max(0, r - 60) / 50);
+                    if (side > 0) { vx += (ry / r) * spd; vy += (-rx / r) * spd; }
+                    else { vx += (-ry / r) * spd; vy += (rx / r) * spd; }
+                }
+                // 4. uppvik längs glasets utsida: stråle som trycker mot
+                // glaset viker av uppåt längs väggen
+                const dxg = Math.abs(qx - CX) - spanPx;
+                if (qy > rimY && dxg > -2 && dxg < 16) {
+                    const toGlass = Math.sign(CX - qx) === Math.sign(vx) && Math.abs(vx) > 20;
+                    if (toGlass) { vy -= Math.abs(vx) * 0.8; vx *= 0.2; }
+                }
+                return [vx, vy];
+            }
+
             stepParticles(dtVis) {
                 const R = D_BEAKER / 2, H = this.H;
                 const leak = (1 - this.f) * this.Tcmd;
@@ -993,49 +1072,43 @@
                         this.outParts.push({
                             x: CX + (this.x + this.wander) * PX + dir * (6 + Math.random() * 10),
                             y: BOT_Y - this.z * PX + 8,
-                            vx: dir * (0.05 + Math.random() * 0.16) * PX * this.vi / 0.7,
-                            vy: (0.45 + Math.random() * 0.4) * PX * this.vi / 0.7,
-                            life: 1.1,
+                            vx: dir * (30 + Math.random() * 60),
+                            vy: 140 + Math.random() * 160,
+                            life: 1.6 + Math.random() * 0.6,
                         });
                     }
                 }
                 const rimYpx = BOT_Y - H * PX;
                 const spanPx = R * PX + WALL + 3;
                 for (const q of this.outParts) {
+                    // följ strömningsfältet med tröghet + termisk darrning —
+                    // det är fältet (stråle, väggstråle, virvlar) som formar
+                    // banorna, inte partikelns startfart
+                    const [wx, wy] = this.outsideField(q.x, q.y);
+                    const relax = Math.min(1, dtVis * 9);
+                    q.vx += (wx - q.vx) * relax + (Math.random() - 0.5) * 200 * dtVis;
+                    q.vy += (wy - q.vy) * relax + (Math.random() - 0.5) * 200 * dtVis;
                     q.x += q.vx * dtVis;
                     q.y += q.vy * dtVis;
-                    // luften viker av runt mynningskanten — aldrig genom glaset:
-                    // ovanför bägaröppningen glider strömmen längs mynningen
-                    // tills den passerat kanten, sedan faller den utanför väggen.
-                    // En partikel djupare ner (från en fluga bredvid bägaren)
-                    // viker i stället av NEDÅT längs glasets utsida — den ska
-                    // inte studsa ut vågrätt (såg orealistiskt ut, påpekat
-                    // 2026-08-30).
+                    // glaset: ovanför öppningen glider strömmen längs
+                    // mynningen tills den passerat kanten; djupare ner viker
+                    // den av nedåt längs utsidan — aldrig genom glaset
                     if (Math.abs(q.x - CX) < spanPx && q.y > rimYpx - 5) {
                         if (q.y < rimYpx + 10) {
                             q.y = rimYpx - 5;
                             const dir = Math.sign(q.x - CX) || (Math.random() < 0.5 ? -1 : 1);
-                            q.vx = dir * Math.max(Math.abs(q.vx), 260);
-                            q.vy = Math.max(q.vy, 140);
+                            q.vx = dir * Math.max(Math.abs(q.vx), 200);
+                            q.vy = Math.max(q.vy, 120);
                         } else {
                             const dir = Math.sign(q.x - CX) || 1;
                             q.x = CX + dir * spanPx;
-                            q.vx = 0;
-                            q.vy = Math.max(q.vy, 120);
+                            if (Math.sign(q.vx) !== dir) q.vx = 0;
                         }
                     }
-                    // träffar bänken eller vågen → sprids i sidled, men
-                    // väggstrålen BROMSAS in och tonar bort i stället för
-                    // att skjuta iväg som ett rakt streck
-                    const floorY = (q.x > CX - 160 && q.x < CX + 160) ? PLAT_Y : BENCH_Y;
-                    if (q.y > floorY - 4) {
-                        q.y = floorY - 4;
-                        q.vy = 0;
-                        q.vx *= Math.exp(-dtVis * 3.5);
-                        q.vx += (Math.random() - 0.5) * 40 * dtVis;
-                        q.life -= dtVis * 1.6;
-                    }
-                    q.life -= dtVis;
+                    // marken: luften tränger inte ner i underlaget
+                    const yG = this.groundYof(q.x);
+                    if (q.y > yG - 3) { q.y = yG - 3; q.vy = Math.min(q.vy, 0); }
+                    q.life -= dtVis * 0.7;
                 }
                 this.outParts = this.outParts.filter(q => q.life > 0 && q.x > 0 && q.x < VB_W);
             }
@@ -1367,7 +1440,9 @@
                     let dx = q.vx * 0.03, dy = q.vy * 0.03;
                     const len = Math.hypot(dx, dy);
                     if (len > 12) { dx *= 12 / len; dy *= 12 / len; }
-                    ctx.strokeStyle = 'rgba(42,90,124,' + al.toFixed(2) + ')';
+                    // färg efter vertikal fart, som inne i bägaren: nedåt
+                    // blå, uppåt ockra — virvelns uppsida syns direkt
+                    ctx.strokeStyle = (q.vy > -8 ? 'rgba(42,90,124,' : 'rgba(176,100,42,') + al.toFixed(2) + ')';
                     ctx.lineWidth = 1.4;
                     ctx.beginPath();
                     ctx.moveTo(q.x - dx, q.y - dy);
@@ -2704,5 +2779,8 @@
     <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besoksmatning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
 </body>
 </html>

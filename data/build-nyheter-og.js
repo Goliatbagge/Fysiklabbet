@@ -338,6 +338,7 @@ const KURSKOD = {
   'Fysik nivå 2': 'fy2',
   'Matematik nivå 1b': 'ma1b',
   'Matematik nivå 1c': 'ma1c',
+  'Matematik nivå 2b': 'ma2b',
   'Matematik nivå 2c': 'ma2c',
   'Matematik fortsättning nivå 1c': 'ma3c',
   'Matematik fortsättning nivå 2': 'ma4',

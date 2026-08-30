@@ -496,6 +496,26 @@ tagits bort eller lagts till). Sidorna (`katalog.html`) speglar teori,
   manuellt läggas in i spec-listan (kapitel 1–2 använder `'alla'` och
   följer med av sig självt).
 
+**Matematik nivå 2b är på samma sätt HÄRLEDD ur nivå 2c** (`MA2B_SPEC` +
+`window.MA2B_ALIAS` i `data/katalog.js`, infört 2026-08-30). Alla regler
+ovan gäller likadant, med 2b:s egna fakta:
+
+- **Skillnaderna mot 2c**: "Rotekvationer" (ma2c-2.8) och "Logaritmer med
+  andra baser" (ma2c-5.6) ingår inte — båda ligger sist i sina kapitel, så
+  ingen omnumrering sker och aliaskartan är identitetsmappad
+  (`ma2b-X.Y → ma2c-X.Y`). Inga egna 2b-avsnitt finns.
+- **Egna 2b-filer finns bara för** sammanfattningarna `ma2b-2.S` och
+  `ma2b-5.S` (utan de strukna momenten) — de synkas manuellt mot
+  `ma2c-2.S`/`5.S` när gemensamt innehåll ändras (kommentar i filerna
+  påminner). 2c-avsnitt som ska hållas UTANFÖR 2b: nämn aldrig
+  rotekvationer eller andra baser i de delade kapitel 2-/5-avsnitten utan
+  att tänka på att 2b-elever också läser dem.
+- **2b i spec-listan**: kapitel 2 och 5 räknar upp sina avsnitt manuellt
+  (nya 2c-avsnitt där måste läggas in för hand); kapitel 1, 3, 4 och 6
+  använder `'alla'`. En spec-post med `fran:` kan i 2b även skriva över
+  `description`/`keywords` (används för 2.S, vars 2c-beskrivning nämner
+  rotekvationer).
+
 ## ⚠️ KRITISK: Navigation i ALLA HTML-filer
 
 **Varje HTML-simulering MÅSTE innehålla:**

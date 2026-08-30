@@ -29,6 +29,7 @@ for (const subj of Object.values(WK.KATALOG)) {
         const code = courseName === 'Fysik nivå 2' ? 'fy2'
                    : courseName === 'Matematik nivå 1b' ? 'ma1b'
                    : courseName === 'Matematik nivå 1c' ? 'ma1c'
+                   : courseName === 'Matematik nivå 2b' ? 'ma2b'
                    : courseName === 'Matematik nivå 2c' ? 'ma2c'
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
                    : courseName === 'Matematik fortsättning nivå 2' ? 'ma4' : 'fy1';
@@ -44,10 +45,10 @@ for (const subj of Object.values(WK.KATALOG)) {
     }
 }
 
-// Täckning. Matematik nivå 1b delar innehåll med 1c: aliasade avsnitt
-// (WK.MA1B_ALIAS, ma1b-id → ma1c-id) täcks av 1c-posten och ska INTE ha
-// någon egen post i exittickets.js.
-const ALIAS = WK.MA1B_ALIAS || {};
+// Täckning. Matematik nivå 1b delar innehåll med 1c och nivå 2b med 2c:
+// aliasade avsnitt (WK.MA1B_ALIAS/WK.MA2B_ALIAS, b-id → c-id) täcks av
+// c-posten och ska INTE ha någon egen post i exittickets.js.
+const ALIAS = { ...(WK.MA1B_ALIAS || {}), ...(WK.MA2B_ALIAS || {}) };
 for (const id of sections) {
     const cid = ALIAS[id] || id;
     if (!ET[cid] || !Array.isArray(ET[cid]) || ET[cid].length === 0) {
@@ -56,7 +57,7 @@ for (const id of sections) {
 }
 for (const id of Object.keys(ET)) {
     if (!sections.includes(id)) warnings.push(`OKÄND: ${id} finns inte i katalogen`);
-    if (ALIAS[id]) errors.push(`DUBBLETT: ${id} är aliasat till ${ALIAS[id]} — posten ska ligga där, inte under ma1b-id`);
+    if (ALIAS[id]) errors.push(`DUBBLETT: ${id} är aliasat till ${ALIAS[id]} — posten ska ligga där, inte under b-kursens id`);
 }
 
 // Regexar

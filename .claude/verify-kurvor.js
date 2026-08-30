@@ -23,7 +23,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dir = path.join(__dirname, '..', 'data', 'teori');
-const files = fs.readdirSync(dir).filter(f => /^(fy\d|ma\dc|ma4|ma1b)-.*\.md$/.test(f)).sort();
+const files = fs.readdirSync(dir).filter(f => /^(fy\d|ma\dc|ma4|ma1b|ma2b)-.*\.md$/.test(f)).sort();
 
 const MJUK_MIN = 2, MJUK_MAX = 40;   // grader: sväng som tolkas som kurva
 const MIN_MJUKA = 3;                 // så många mjuka hörn = kurva, inte polygon

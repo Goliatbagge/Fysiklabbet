@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fysiklabbet — Teori, simuleringar och övningar i fysik och matematik</title>
-    <meta name="description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c & 2c på gymnasiet.">
+    <meta name="description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c, 2b & 2c på gymnasiet.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <link rel="alternate" type="application/rss+xml" title="Fysiklabbet — fysiknyheter" href="https://fysiklabbet.se/feed.xml">
@@ -15,14 +15,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Fysiklabbet — Teori, simuleringar och övningar i fysik och matematik">
-    <meta property="og:description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c & 2c på gymnasiet.">
+    <meta property="og:description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c, 2b & 2c på gymnasiet.">
     <meta property="og:url" content="https://fysiklabbet.se/">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Fysiklabbet — Teori, simuleringar och övningar i fysik och matematik">
-    <meta name="twitter:description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c & 2c på gymnasiet.">
+    <meta name="twitter:description" content="Interaktiva simuleringar, teori och övningar för Fysik nivå 1 & 2 samt Matematik nivå 1b, 1c, 2b & 2c på gymnasiet.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,6 +178,7 @@
         };
 
         const UPDATES = [
+            { date: '2026-08-30', href: 'katalog.html?id=ma2b', title: 'Ny nivå: Matematik nivå 2b', text: 'Matematiken får sin femte nivå — Matematik nivå 2b, fortsättningen på nivå 1b för dig som läser samhällsvetenskap eller ekonomi. Nivån delar nästan alla genomgångar med nivå 2c: linjära ekvationssystem, algebra och andragradsekvationer, andragradsfunktioner, geometri med satser och bevis, logaritmer samt statistik med normalfördelning och regression. Skillnaden mot 2c är att rotekvationer och logaritmer med andra baser utgår, och kapitel 2 och 5 har fått egna sammanfattningar som speglar det. Varje avsnitt har som vanligt teorigenomgång, övningar i tre nivåer, exit ticket och pennlösningar.' },
             { date: '2026-08-29', href: 'katalog.html?id=fy2-1.3&block=figur-6', title: 'Tre linjaler på tre spikar — minisimulering om jämviktstyperna', text: 'Figuren med kulan i skålen, på kullen och på golvet har fått en interaktiv granne i fördjupningen Stabilitet: tre likadana linjaler uppspikade på tre olika sätt, en rakt under varje fall i figuren. Dra i den som hänger i en spik genom överkanten och se den gunga tillbaka till utgångsläget, ge den som står på en spik genom nederkanten minsta lilla vinkel och se den välta ned mot marken, och sätt snurr på den som har spiken rakt genom tyngdpunkten: den roterar som en propeller och blir kvar där den stannar.' },
             { date: '2026-08-29', href: 'katalog.html?id=fy2-1.3', title: 'Stabilitet — ny fördjupningsgenomgång i Fysik nivå 2', text: 'Genomgången Mer kraftmoment har delats: allt om vältning och balans har flyttat till ett eget fördjupningsavsnitt, 1.3 Stabilitet, markerat med en asterisk i avsnittslistan. Där får stödytan och tyngdpunktens lodlinje förklara när något står kvar och när det välter, formeln för vältningsvinkeln, tan α = b/h, härleds, och begreppen stabil, labil och indifferent jämvikt reds ut med nya figurer. Demonstrationerna följer med: luta klossen tills den välter, balansera gafflarna på nålspetsen och låt dubbelkonen rulla uppför banan. Nya övningar och en ny exit ticket hör förstås till.' },
             { date: '2026-08-28', href: 'fysik2-dubbelkon-app.html', title: 'Dubbelkonen som rullar uppför — ny 3D-simulering om tyngdpunkten', text: 'Den klassiska demonstrationen där en dubbelkon släpps vid den låga änden av en V-formad bana och rullar av sig själv upp mot den höga. Illusionen avslöjas i 3D: skenorna går isär, kontaktpunkterna vandrar ut mot konens smala spetsar och tyngdpunkten sjunker hela vägen fastän banans kant stiger. Dra föremålet dit du vill, släpp det och följ tyngdpunktens gula spår under den vågräta startnivån. Byt till en vanlig cylinder som rullar nedåt som förväntat, gör banan brantare tills illusionen bryts vid den kritiska lutningen, och läs av villkoret med de tre vinklarna live. Demonstrationen går också att köra direkt i genomgången Stabilitet, som en minisimulering.' },
@@ -282,6 +283,7 @@
                                         <div className="lab-nav-dd-undermeny">
                                             <a href="katalog.html#ma1b">Nivå 1b</a>
                                             <a href="katalog.html#ma1c">Nivå 1c</a>
+                                            <a href="katalog.html#ma2b">Nivå 2b</a>
                                             <a href="katalog.html#ma2c">Nivå 2c</a>
                                         </div>
                                     </div>
@@ -319,7 +321,7 @@
                             <p className="lab-welcome-lead">
                                 Teori, interaktiva simuleringar och övningar för gymnasieämnena{' '}
                                 <strong>Fysik</strong> <span style={{ whiteSpace: 'nowrap' }}>(nivå 1 och 2)</span>,{' '}
-                                <strong>Matematik</strong> <span style={{ whiteSpace: 'nowrap' }}>(nivå 1b, 1c och 2c)</span> och nu även{' '}
+                                <strong>Matematik</strong> <span style={{ whiteSpace: 'nowrap' }}>(nivå 1b, 1c, 2b och 2c)</span> och nu även{' '}
                                 <strong style={{ whiteSpace: 'nowrap' }}>Matematik – fortsättning</strong>{' '}
                                 <span style={{ whiteSpace: 'nowrap' }}>(nivå 1c och 2)</span> — plus{' '}
                                 <a href="nyheter.html" style={{ color: 'var(--lab-accent)', textDecoration: 'none', fontWeight: 600 }}>dagliga fysiknyheter</a>. Läs, utforska och förstå.
@@ -338,6 +340,7 @@
                                         fler nivåer fylls på i respektive rad efter hand. */}
                                     <div className="lab-course-levels">
                                         <a className="lab-btn" href="katalog.html#ma1b">Nivå 1b →</a>
+                                        <a className="lab-btn" href="katalog.html#ma2b">Nivå 2b →</a>
                                     </div>
                                     <div className="lab-course-levels">
                                         <a className="lab-btn" href="katalog.html#ma1c">Nivå 1c →</a>

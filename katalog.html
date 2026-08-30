@@ -60,7 +60,9 @@
         // träffar 1c-innehållet. Egna 1b-avsnitt (t.ex. ma1b-3.4) saknas i
         // kartan och slås upp direkt som vanligt.
         const MA1B_ALIAS = window.MA1B_ALIAS || {};
-        for (const [bId, cId] of Object.entries(MA1B_ALIAS)) {
+        // Matematik nivå 2b delar innehåll med 2c på samma sätt (MA2B_SPEC).
+        const MA2B_ALIAS = window.MA2B_ALIAS || {};
+        for (const [bId, cId] of Object.entries({ ...MA1B_ALIAS, ...MA2B_ALIAS })) {
             if (TEORI[bId] === undefined && TEORI[cId] !== undefined) TEORI[bId] = TEORI[cId];
             if (OVNINGAR[bId] === undefined && OVNINGAR[cId] !== undefined) OVNINGAR[bId] = OVNINGAR[cId];
             if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
@@ -551,6 +553,7 @@
             if (courseName === 'Fysik nivå 2') return 'fy2';
             if (courseName === 'Matematik nivå 1b') return 'ma1b';
             if (courseName === 'Matematik nivå 1c') return 'ma1c';
+            if (courseName === 'Matematik nivå 2b') return 'ma2b';
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
             if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
             if (courseName === 'Matematik fortsättning nivå 2') return 'ma4';
@@ -653,6 +656,7 @@
                                         <div className="lab-nav-dd-undermeny">
                                             <a href="katalog.html?id=ma1b">Nivå 1b</a>
                                             <a href="katalog.html?id=ma1c">Nivå 1c</a>
+                                            <a href="katalog.html?id=ma2b">Nivå 2b</a>
                                             <a href="katalog.html?id=ma2c">Nivå 2c</a>
                                         </div>
                                     </div>
@@ -2259,10 +2263,11 @@
                 setError(null);
                 loadVisModule(meta.fil).then(() => {
                     if (cancelled || !hostRef.current) return;
-                    // Aliasade 1b-avsnitt: modulen registrerar sig under sitt
-                    // eget (1c-)id — fall tillbaka på det.
+                    // Aliasade 1b/2b-avsnitt: modulen registrerar sig under
+                    // sitt eget (1c/2c-)id — fall tillbaka på det.
                     const mod = (window.VISUALISERINGAR || {})[id]
-                        || (window.VISUALISERINGAR || {})[MA1B_ALIAS[id]];
+                        || (window.VISUALISERINGAR || {})[MA1B_ALIAS[id]]
+                        || (window.VISUALISERINGAR || {})[MA2B_ALIAS[id]];
                     if (mod && mod.mount) {
                         instance = mod.mount(hostRef.current);
                     } else {
@@ -2902,6 +2907,7 @@
             fy2: ['Fysik', 'Fysik nivå 2'],
             ma1b: ['Matematik', 'Matematik nivå 1b'],
             ma1c: ['Matematik', 'Matematik nivå 1c'],
+            ma2b: ['Matematik', 'Matematik nivå 2b'],
             ma2c: ['Matematik', 'Matematik nivå 2c'],
             ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
             ma4: ['Matematik', 'Matematik fortsättning nivå 2'],
@@ -2922,7 +2928,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

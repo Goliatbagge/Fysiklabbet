@@ -516,6 +516,12 @@ window.KATALOG = {
           },
         },
       },
+      // Matematik nivå 2b HÄRLEDS programmatiskt ur nivå 2c — se byggaren
+      // längst ned i filen (sök på MA2B_SPEC). Platshållaren här styr bara
+      // ORDNINGEN bland kurserna (… 2c, 2b, fortsättning …). Redigera ALDRIG
+      // 2b-avsnitt för hand: delade avsnitt ändras i 2c och följer med
+      // automatiskt.
+      'Matematik nivå 2b': {},
       // Matematik fortsättning nivå 1c (Ma3c) byggs ut avsnitt för avsnitt
       // från den samlade genomgångs-PDF:en i Genomgångar/Matematik
       // fortsättning nivå 1c/ — se .claude/matematik-3c-plan.md för plan,
@@ -833,6 +839,98 @@ window.MA1B_ALIAS = {};
         'Du lär dig: taluppfattning, algebra, procent och funktioner',
         'Du tränar på: ekvationslösning, procenträkning och problemlösning',
         'Du möter: index, statistik och sannolikhetslära',
+      ],
+    },
+    chapters,
+  };
+})();
+
+// ═══════════════════════════════════════════════════════════════════════
+// Matematik nivå 2b — HÄRLEDD ur Matematik nivå 2c.
+//
+// Samma mekanism som 1b/1c ovan: katalogposterna kopieras härifrån vid
+// sidladdning, och innehållet (teori-md, övningar, exit tickets,
+// visualiseringar) slås upp via aliaskartan window.MA2B_ALIAS
+// (ma2b-id → ma2c-id). En ändring i ett delat 2c-avsnitt slår alltså
+// automatiskt igenom i 2b — redigera ALDRIG delade 2b-avsnitt separat.
+//
+// MA2B_SPEC följer MA1B_SPEC-formatet, med ett tillägg: en spec-post med
+// fran: får sätta description/keywords som SKRIVER ÖVER 2c-postens (används
+// när 2c-texten nämner stoff som utgår i 2b).
+//
+// Skillnader mot 2c (2026-08-30): "Rotekvationer" (2c 2.8) och "Logaritmer
+// med andra baser" (2c 5.6) utgår — båda ligger sist i sina kapitel, så
+// ingen omnumrering behövs. Inga egna 2b-avsnitt tillkommer. Kapitel 2 och
+// 5 får egna sammanfattningar (ma2b-2.S, ma2b-5.S) utan de strukna
+// momenten.
+// ═══════════════════════════════════════════════════════════════════════
+window.MA2B_ALIAS = {};
+(function () {
+  const ma2c = window.KATALOG['Matematik'].courses['Matematik nivå 2c'];
+  const kopia = (o) => JSON.parse(JSON.stringify(o));
+
+  const MA2B_SPEC = [
+    { kapitel: 'Linjära ekvationssystem', sektioner: 'alla' },
+    { kapitel: 'Algebra och andragradsekvationer',
+      intro: 'Kvadrerings- och konjugatreglerna snabbar upp algebran — framlänges för att utveckla, baklänges för att faktorisera. Sedan knäcker vi andragradsekvationerna: nollproduktmetoden, *pq*-formeln och *abc*-formeln, diskriminantens besked om antalet lösningar och problemlösning där svaren ska tolkas.',
+      sektioner: ['2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7',
+                  { fran: '2.S', egenTeori: true,
+                    description: 'Kvadrerings- och konjugatreglerna, *pq*-formeln och diskriminanten — kapitlets begrepp, formler och metoder komprimerat inför provet.' }] },
+    { kapitel: 'Andragradsfunktioner', sektioner: 'alla' },
+    { kapitel: 'Geometri', sektioner: 'alla' },
+    { kapitel: 'Logaritmer',
+      intro: 'Nyckeln till x i exponenten — potensekvationer löses med rötter, men exponentialekvationer kräver tiologaritmer. Vi definierar lg, härleder logaritmlagarna och använder dem på tillämpningar med ränta och tillväxt.',
+      sektioner: ['5.1', '5.2', '5.3', '5.4', '5.5',
+                  { fran: '5.S', egenTeori: true }] },
+    { kapitel: 'Statistik', sektioner: 'alla' },
+  ];
+
+  const chapters = {};
+  MA2B_SPEC.forEach((kap, ki) => {
+    const src = ma2c.chapters[kap.kapitel];
+    if (!src) throw new Error('MA2B_SPEC: kapitlet "' + kap.kapitel + '" finns inte i 2c');
+    const nr = ki + 1;
+    const items = kap.sektioner === 'alla'
+      ? src.sections.map((s) => String(s.num))
+      : kap.sektioner;
+    let lopnr = 0;
+    const sections = items.map((item) => {
+      const spec = (typeof item === 'string') ? { fran: item } : item;
+      let sec;
+      if (spec.fran) {
+        const srcSec = src.sections.find((s) => String(s.num) === spec.fran);
+        if (!srcSec) throw new Error('MA2B_SPEC: hittar inte 2c-avsnittet ' + spec.fran);
+        sec = kopia(srcSec);
+        if (spec.description) sec.description = spec.description;
+        if (spec.keywords) sec.keywords = kopia(spec.keywords);
+      } else {
+        sec = kopia(spec);
+      }
+      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // bokstav; övriga numreras löpande efter positionen i listan.
+      const suffix = spec.fran && /\.(S|E)$/.test(spec.fran)
+        ? spec.fran.split('.')[1] : null;
+      sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
+      if (spec.fran && !spec.egenTeori) {
+        window.MA2B_ALIAS['ma2b-' + sec.num] = 'ma2c-' + spec.fran;
+      }
+      return sec;
+    });
+    chapters[kap.kapitel] = { number: nr, intro: kap.intro || src.intro, sections };
+  });
+
+  window.KATALOG['Matematik'].courses['Matematik nivå 2b'] = {
+    label: 'Matematik nivå 2b',
+    intro: {
+      tagline: 'Matematikens andra nivå för dig som läser samhällsvetenskap eller ekonomi.',
+      paragraphs: [
+        'Matematik nivå 2b bygger vidare på nivå 1b och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och *pq*-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Nivån avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
+        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+      ],
+      bullets: [
+        'Du lär dig: ekvationssystem, andragradsekvationer och logaritmer',
+        'Du tränar på: algebraiska metoder, geometriska bevis och problemlösning',
+        'Du möter: andragradsfunktioner, normalfördelning och regression',
       ],
     },
     chapters,

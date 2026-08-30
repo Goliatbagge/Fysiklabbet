@@ -13,11 +13,18 @@ Format per post:
 ## Kö
 
 - **⚠️ REDAN SKRIVEN OCH SCHEMALAGD: `2026-09-01-hundra-ganger-vidare-blick`** (Roman-teleskopets
-  uppskjutning och den mörka materien). Artikeln ligger FÄRDIG och datumgrindad i
-  `data/nyheter.js` med datum 2026-09-01, på användarens begäran 2026-08-30. Skriv INGEN
-  egen nyhet om Roman-teleskopet, och räkna med att den 1 september redan har en artikel —
-  publicera dagens nyhet som vanligt ändå, två artiklar samma dag är inget problem.
-  Behöver datumet flyttas räcker det att ändra `date` i artikelposten. (tillagd 2026-08-30)
+  uppskjutning och den mörka materien, område: **astronomi/kosmologi**). Artikeln ligger
+  FÄRDIG och datumgrindad i `data/nyheter.js` med datum 2026-09-01, på användarens begäran
+  2026-08-30. Tre saker följer av det:
+  1. Skriv INGEN egen nyhet om Roman-teleskopet.
+  2. **Välj inte astronomi eller kosmologi till 31 augusti eller 2 september** — de är
+     Romans grannar, och samma område två dagar i rad är förbjudet (se relevanskriterium 4
+     i `.claude/agents/nyhetsagent.md`). Måndagen 31 augusti passar brevteasern nedan
+     (solljus och sammanflätade fotonpar, alltså kvantoptik) utmärkt.
+  3. Den 1 september får två artiklar, eftersom det nattliga jobbet publicerar sin egen
+     som vanligt. Det är inget problem — men den artikeln får inte heller vara astronomi.
+  Behöver datumet flyttas räcker det att ändra `date` i artikelposten; flytta då den här
+  notisens datumangivelser med. (tillagd 2026-08-30)
 
 - **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05]** — ett lag vid
   University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die

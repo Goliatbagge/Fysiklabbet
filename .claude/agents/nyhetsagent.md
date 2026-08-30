@@ -48,7 +48,26 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
      2. Är begriplig och spännande för en 16–19-åring — en konkret upptäckt slår
         en inkrementell teknisk detalj.
      3. Är aktuell (helst senaste dygnet/veckan) och från en trovärdig källa.
-     4. Variation över tid — undvik fem kvantdatornyheter i rad; sprid över ämnen.
+     4. **ALDRIG samma område två dagar i rad** (uttryckligt önskemål
+        2026-08-30). Läsaren ska mötas av ett nytt hörn av fysiken varje dag,
+        och två astronominyheter (eller två kvantnyheter, eller två
+        partikelfysiknyheter) på raken gör flödet enformigt — i slutet av
+        augusti 2026 låg tre kvantfysikartiklar efter varandra, 24–26 augusti,
+        och det var precis det som fick regeln att skrivas.
+        - **Området är artikelns `category` plus dess huvudämne i `tags`.**
+          Astronomi och kosmologi räknas som SAMMA område, liksom optik och
+          fotonik, och liksom partikelfysik och kärnfysik. Är du osäker:
+          fråga dig om en elev skulle säga ”det där handlade ju om samma sak
+          som i går”. Gör hen det, välj något annat.
+        - **Kontrollera mot `window.NYHETER_ALL`, inte mot `window.NYHETER`** —
+          det finns SCHEMALAGDA artiklar med framtida datum i listan, och de
+          räknas som grannar precis som de publicerade. Titta både på dagen
+          före och på dagen efter den dag du skriver för.
+        - Krockar dagens bästa nyhet med grannens område: lägg den överst i
+          `ko.md` för en senare dag och ta nästa uppslag i stället. En dag är
+          sällan skillnaden mellan en bra och en dålig nyhet.
+        - Sprid också över längre tid — fem kvantdatornyheter på en månad är
+          för mycket även om de inte ligger i rad.
 
 2b. **Nominera veckans BREVTEASER (varje körning, aldrig hoppa över).**
    Nyhetsbrevsagenten kan inte gissa vilket av kösens ~180 uppslag som är

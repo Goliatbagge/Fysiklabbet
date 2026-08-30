@@ -255,13 +255,19 @@
         const PXPM = 26;              // px per meter (golvets skrollhastighet)
 
         // Fysik
-        const M_CART = 1.0;           // kärrans massa (kg)
+        // Massreglaget anger HELA ekipagets massa (kärra + låda). Tidigare hade
+        // kärran en egen massa på 1,0 kg som lades på reglagets värde — då dök
+        // ett oförklarat extra kilo upp i formelkortet (reglaget sa 3,0 kg,
+        // formeln 4,0 kg; lärarpåpekat 2026-08-28). Nu är massan i F_R = m · a
+        // exakt reglagets värde, samma tal överallt.
+        const M_CART = 0;             // ingår i massreglaget — se ovan
         const VMAX = 25;              // begränsa farten för rimlig animation
-        // Luftmotstånd: F_luft = DRAG_K · v (proportionell mot farten, motriktad
-        // rörelsen). DRAG_K vald så att vid v = VMAX (25 m/s) ger den 20 N — lika
-        // med den maximala drivkraften → resulterande kraft 0 och konstant fart
-        // (terminalfart).
-        const DRAG_K = 20 / VMAX;   // = 0,8 N per (m/s)
+        // Luftmotstånd: F_luft = DRAG_K · v² (kvadratiskt i farten, motriktad
+        // rörelsen — vid dessa farter dominerar v²-termen, lärarpåpekat
+        // 2026-08-28). DRAG_K vald så att vid v = VMAX (25 m/s) ger den 20 N —
+        // lika med den maximala drivkraften → resulterande kraft 0 och
+        // konstant fart.
+        const DRAG_K = 20 / (VMAX * VMAX);   // = 0,032 N per (m/s)²
 
         const COL = {
             f: '#0284c7',  // blå — drivkraft F₁ (vänstra motorn)
@@ -686,7 +692,7 @@
 
         // ── Huvudapp ─────────────────────────────────────────────
         const App = () => {
-            const [massObj, setMassObj] = useState(3);     // objektets massa (kg)
+            const [massObj, setMassObj] = useState(3);     // ekipagets massa, kärra + låda (kg)
             const [force1, setForce1] = useState(0);       // drivkraft F₁ (vänster motor), signerad −20 … +20 N
             const [force2, setForce2] = useState(0);       // drivkraft F₂ (höger motor), signerad −20 … +20 N
             const [airMode, setAirMode] = useState(false); // false = idealt, true = med luftmotstånd
@@ -706,7 +712,7 @@
 
             const mTot = M_CART + massObj;
             const Fapplied = force1 + force2;                   // summan av de pålagda drivkrafterna
-            const Fair = airMode ? -DRAG_K * v : 0;             // luftmotstånd, motriktat farten
+            const Fair = airMode ? -DRAG_K * v * Math.abs(v) : 0;   // luftmotstånd k·v², motriktat farten
             const Fres = Fapplied + Fair;                       // resulterande kraft (signerad)
             const forceDir = Math.sign(Fres);                   // -1 vänster, 0, +1 höger
             const appliedF = Math.abs(Fres);                    // resulterande kraftens storlek
@@ -719,7 +725,7 @@
                     if (lastRef.current == null) lastRef.current = ts;
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
                     lastRef.current = ts;
-                    const drag = airMode ? -DRAG_K * vRef.current : 0;
+                    const drag = airMode ? -DRAG_K * vRef.current * Math.abs(vRef.current) : 0;
                     const a = (force1 + force2 + drag) / (M_CART + massObj);
                     let nv = vRef.current + a * dt;
                     if (nv > 999) nv = 999;
@@ -809,7 +815,7 @@
                     {isFullscreen && (
                         <React.Fragment>
                             <div className="st-title mt">Reglage</div>
-                            <StSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
+                            <StSlider label="Massa (kärra + låda)" value={massObj} min={1} max={10} step={0.5}
                                       onChange={setMassObj} display={`${fmt(massObj, 1)} kg`} />
                             <StSlider label="Drivkraft <em>F</em>&#8321;" value={force1} min={-20} max={20} step={1}
                                       onChange={setForce1}
@@ -854,8 +860,8 @@
                             till en <strong>resulterande kraft</strong> <em>F</em><sub>R</sub> som bestämmer accelerationen och farten.
                             {airMode
                                 ? <span> I läget <strong>med luftmotstånd</strong> tillkommer en bromsande kraft <em>F</em><sub>luft</sub> som
-                                    växer med farten — till slut tar den ut den pålagda kraften och kärran håller <strong>konstant fart</strong>.</span>
-                                : <span> Slå på <strong>luftmotstånd</strong> för att se hur farten i stället planar ut mot en terminalfart.</span>}
+                                    växer med kvadraten på farten. Till slut tar den ut den pålagda kraften och kärran håller <strong>konstant fart</strong>.</span>
+                                : <span> Slå på <strong>luftmotstånd</strong> för att se hur farten i stället planar ut mot en toppfart.</span>}
                         </p>
 
                         <FormulaCard Fres={Fres} m={mTot} a={aMag} />
@@ -869,7 +875,7 @@
                                                show={show} svgRef={svgRef} />
 
                                     <div className="scene-hint">
-                                        {airMode ? 'Luftmotståndet ökar med farten. Rullmotstånd försummas.' : 'Luftmotstånd försummas.'}
+                                        {airMode ? 'Luftmotståndet växer med kvadraten på farten.' : 'Luftmotstånd försummas.'}
                                     </div>
 
                                     {/* Visningsval + glidare uppe till höger (glidarna bara i fullskärm) */}
@@ -894,7 +900,7 @@
                             <div className="lg:w-2/5 order-2">
                                 {/* Reglage */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <Slider label="Objektets massa <em>m</em>" value={massObj} min={1} max={10} step={0.5} onChange={setMassObj}>
+                                    <Slider label="Massa <em>m</em> (kärra + låda)" value={massObj} min={1} max={10} step={0.5} onChange={setMassObj}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
                                             {fmt(massObj, 1)} kg
@@ -958,10 +964,10 @@
                                     </h3>
                                     {airMode ? (
                                         <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                            Luftmotståndet <em>F</em><sub>luft</sub> = <em>k</em> · <em>v</em> växer med farten och är
-                                            riktat mot rörelsen. Allteftersom farten ökar minskar den resulterande kraften, tills
-                                            luftmotståndet precis tar ut den pålagda kraften (<em>F</em><sub>R</sub> = 0). Då är
-                                            accelerationen noll och kärran håller en <em>konstant</em> <strong>terminalfart</strong>.
+                                            Luftmotståndet <em>F</em><sub>luft</sub> = <em>k</em> · <em>v</em>² växer med kvadraten på
+                                            farten och är riktat mot rörelsen. Allteftersom farten ökar minskar den resulterande
+                                            kraften, tills luftmotståndet precis tar ut den pålagda kraften (<em>F</em><sub>R</sub> = 0).
+                                            Då är accelerationen noll och kärran håller en <em>konstant</em> <strong>toppfart</strong>.
                                         </p>
                                     ) : (
                                         <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
@@ -973,16 +979,17 @@
                                     )}
                                     <p className="text-sm mt-2 pt-2" style={{ color: 'var(--lab-ink-soft)', borderTop: '1px solid var(--lab-line)' }}>
                                         {airMode
-                                            ? <span>Proportionalitetskonstanten är <em>k</em> = 0,8 N per m/s. Vid 25 m/s ger
-                                                luftmotståndet 20 N — lika med den största drivkraften. Rullmotstånd och
-                                                lagerfriktion försummas.</span>
-                                            : <span>Luftmotstånd, rullmotstånd och lagerfriktion försummas, så drivkraften
-                                                är den enda horisontella kraften på systemet (kärra + objekt). Drivkraften är
-                                                själva greppet — den statiska friktionskraften mellan de drivna hjulen och
+                                            ? <span>Proportionalitetskonstanten är <em>k</em> = 0,032 N per (m/s)². Vid 25 m/s ger
+                                                luftmotståndet 0,032 · 25² N = 20 N, lika stort som den största drivkraften
+                                                från en motor. Kärran rullar i övrigt förlustfritt.</span>
+                                            : <span>Luftmotstånd försummas och kärran rullar förlustfritt, så drivkraften
+                                                är den enda horisontella kraften på ekipaget. Massan <em>m</em> är hela
+                                                ekipagets, kärra och låda tillsammans. Drivkraften är
+                                                själva greppet: den statiska friktionskraften mellan de drivna hjulen och
                                                 marken. En kraft motriktad rörelsen betyder att motorn bromsar; hjulen
                                                 fortsätter då rulla åt samma håll medan farten sjunker. Pekar{' '}
                                                 <em>F</em><sub>1</sub> och <em>F</em><sub>2</sub> åt var sitt håll drar
-                                                motorerna dragkamp — som att gasa och bromsa samtidigt. Är summan noll
+                                                motorerna dragkamp, som att gasa och bromsa samtidigt. Är summan noll
                                                 står kärran stilla, och hjulen med den: de sitter i samma vagn och
                                                 rullar utan att slira, så de har alltid en gemensam rotation och kan
                                                 aldrig snurra åt var sitt håll. Modellen antar dessutom fullt grepp:

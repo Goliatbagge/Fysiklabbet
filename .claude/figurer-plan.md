@@ -145,7 +145,7 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    fy2-1.1..1.4 klara sedan tidigare; fy2-1.5–1.8 klara nu (konisk pendel,
    kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1
    KOMPLETT.** (Avsnitten omnumrerade 2026-08-29: fördjupningen fy2-1.3
-   Stabilitet och vältning sköts in, gamla 1.3–1.7 heter nu 1.4–1.8.)
+   Stabilitet sköts in, gamla 1.3–1.7 heter nu 1.4–1.8.)
 17. ~~fy2-3.x magnetism~~ — **KLART (2026-07-02). KAPITEL 3 ELEKTROMAGNETISM
    KOMPLETT** (3.1–3.14; enda SKIP = 3D-växelströmsgeneratorn i 3.10).
    30 figurer över 14 filer: 3.1 (poler/delad magnet/dipolfält), 3.2 (Ørsted-

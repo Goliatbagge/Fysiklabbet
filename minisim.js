@@ -108,7 +108,7 @@
  * fullskärm som övriga minisims; inget ljud.
  *
  * ── typ: linjaltrio ─────────────────────────────────────────────────────
- * Teoriavsnittet fy2-1.3 (Stabilitet och vältning): tre likadana linjaler
+ * Teoriavsnittet fy2-1.3 (Stabilitet): tre likadana linjaler
  * uppspikade på tre olika sätt, som interaktiv spegel av figuren med
  * kulan i skålen/på kullen/på golvet (panelerna ligger i tredjedelar så
  * att de hamnar rakt under figurens paneler). Vänster: spik genom
@@ -126,7 +126,7 @@
  * rAF-loop i viloläge (somnat() släcker den när allt står stilla).
  *
  * ── typ: valtning ────────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): en kloss på ett vågrätt underlag
+ * Demonstrationen ur fy2-1.3 (Stabilitet): en kloss på ett vågrätt underlag
  * tippas kring ett av sina nedre hörn — som när man tippar klossen för
  * hand. Underlaget lutas aldrig, så glidfriktion spelar ingen roll.
  * Klossen lutas genom att man TAR TAG i dess överkant (pekare/touch) och
@@ -148,7 +148,7 @@
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
  *
  * ── typ: gaffelbalans ────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): det klassiska balanstricket
+ * Demonstrationen ur fy2-1.3 (Stabilitet): det klassiska balanstricket
  * — två gafflar trycks fast i en kork, en nål sticks igenom, och hela bygget
  * balanserar på nålspetsen mot den ytterst smala kanten av ett mynt som står
  * på högkant i en flaskkork. Gafflarnas tunga skaft hänger NEDÅT och drar
@@ -175,7 +175,7 @@
  * exakt originalsimuleringens fullskärmsläge, med alla verktyg.
  *
  * ── typ: dubbelkon ───────────────────────────────────────────────────────
- * Demonstrationen ur fy2-1.3 (Stabilitet och vältning): dubbelkonen som ser ut att
+ * Demonstrationen ur fy2-1.3 (Stabilitet): dubbelkonen som ser ut att
  * rulla uppför en lutande, V-formad bana. Den fristående simuleringen
  * fysik2-dubbelkon-app.html inbäddad som minisimulering via en iframe
  * (?embed=1&mini=1 — mini-läget visar bara scenen), samma mönster som
@@ -3560,7 +3560,7 @@
     // ══════════════════════════════════════════════════════════════════════
     //  typ: valtning
     // ══════════════════════════════════════════════════════════════════════
-    // Demonstrationen ur fy2-1.3 (Stabilitet och vältning): en kloss står på ett vågrätt
+    // Demonstrationen ur fy2-1.3 (Stabilitet): en kloss står på ett vågrätt
     // underlag och tippas kring ett av sina nedre hörn — som när man
     // tippar klossen för hand (underlaget lutas aldrig, så glidfriktion
     // spelar ingen roll). Man TAR TAG i klossens överkant och drar åt
@@ -4218,7 +4218,7 @@
     // ══════════════════════════════════════════════════════════════════════
     //  typ: gaffelbalans
     // ══════════════════════════════════════════════════════════════════════
-    // Demonstrationen ur fy2-1.3 (Stabilitet och vältning): det klassiska
+    // Demonstrationen ur fy2-1.3 (Stabilitet): det klassiska
     // balanstricket — två gafflar trycks fast i en kork, en nål sticks
     // igenom korken, och hela bygget balanserar på nålspetsen mot den
     // smala kanten av ett mynt som står på högkant i en flaskkork.

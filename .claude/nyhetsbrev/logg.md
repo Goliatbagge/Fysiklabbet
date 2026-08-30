@@ -20,6 +20,18 @@ Format:
   ÅTERSTÅR för användaren: testskick och schemaläggning till söndag 06.00
   svensk tid (tidszonen default:ar till London!). Delivery står just nu på
   "Send immediately" och måste bytas till "Send at a specific time".
+- **Ändringar på utskicksdagen 2026-08-30 (användarens begäran):**
+  (1) Balanstrick-stycket pekar nu på fördjupningen Stabilitet
+  (katalog.html?id=fy2-1.3) — simuleringarna flyttade dit från Mer
+  kraftmoment efter att utkastet skrevs. (2) NY TEASER: molekylkondensatet
+  publicerades natten till söndagen (2026-08-30-droppen-utan-karl) och låg
+  redan på sajten, så teasern byttes till solljus-uppslaget (sammanflätade
+  fotonpar utan laser, [BREVTEASER]-märkt i ko.md med publiceringsfönster
+  måndag 2026-08-31 till lördag 2026-09-05). Ny regel i båda agentfilerna:
+  ett teasat uppslag publiceras TIDIGAST måndagen och SENAST lördagen efter
+  brevet, och verify-nyhetsbrev.js fäller numera ett brev vars teaser redan
+  är publicerad. OBS: kondensatartikeln nämns inte i detta brev alls — den
+  hör till nästa veckas brevperiod och lyfts där.
 - Ordvits inlagd på användarens begäran 2026-08-29, efter flug-stycket:
   "har du hört om den senaste flugan? En flugsimulator." Skriven med punkt,
   inte utropstecken, enligt tonregeln om torr underdrift.

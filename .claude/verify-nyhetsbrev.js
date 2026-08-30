@@ -71,6 +71,27 @@ if (fs.existsSync(KO)) {
     } else if (traffar > 1) {
         varn.push(`${traffar} uppslag i ko.md är märkta [BREVTEASER] — det ska vara exakt ett.`);
     }
+    // Det teasade uppslaget får INTE redan vara publicerat. Brevet säger
+    // "ur nyhetskön väntar" — ligger artikeln redan på sajten när brevet
+    // går ut ser löftet ut som ett misstag (hänt 2026-08-30: brevet
+    // teasade molekylkondensatet, artikeln publicerades natten före
+    // utskicket). Uppslagets källänkar jämförs mot data/nyheter.js.
+    if (traffar >= 1) {
+        const i = ko.indexOf('[BREVTEASER');
+        const slut = ko.indexOf('- **', i + 10);
+        const posten = ko.slice(i, slut > -1 ? slut : i + 2000);
+        const lankar = [...posten.matchAll(/https?:\/\/[^\s)\]]+/g)].map(m => m[0]);
+        const NYH = path.join(ROT, 'data', 'nyheter.js');
+        if (lankar.length && fs.existsSync(NYH)) {
+            const nyh = fs.readFileSync(NYH, 'utf8');
+            const traff = lankar.find(u => nyh.includes(u));
+            if (traff) {
+                fel.push('Det [BREVTEASER]-märkta uppslagets källa (' + traff + ') finns redan ' +
+                         'i data/nyheter.js — uppslaget är alltså publicerat och kan inte teasas ' +
+                         'som kommande. Märk ett annat uppslag och skriv om brevets "Nästa vecka".');
+            }
+        }
+    }
 } else {
     varn.push('Hittar inte .claude/nyheter/ko.md — hoppar över brevteaser-kontrollen.');
 }

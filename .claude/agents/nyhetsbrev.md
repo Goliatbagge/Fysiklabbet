@@ -210,10 +210,18 @@ matnyttigt att man tar med sig något in i klassrummet.
    - Saknas `**[BREVTEASER]**`-märkningen i `ko.md` är det ett FEL i kedjan:
      välj då själv det spänstigaste uppslaget ur kön, märk det, och notera i
      loggposten att märkningen saknades.
+   - **Kontrollera att uppslaget INTE redan är publicerat** innan du teasar
+     det: grep uppslagets källänk och nyckelord i `data/nyheter.js` och
+     `.claude/nyheter/publicerat.md`. Felet har hänt (2026-08-30): brevet
+     teasade molekylkondensatet som "väntar ur nyhetskön", men artikeln
+     publicerades natten före utskicket och låg redan på sajten när brevet
+     gick ut. `verify-nyhetsbrev.js` kontrollerar numera detta maskinellt.
    - **Teasas ett uppslag ur nyhetskön blir det ett LÖFTE**: nyhetsagenten
      har en spegelvänd teaser-skuldregel (steg 2 i
      `.claude/agents/nyhetsagent.md`) som tvingar den att publicera det
-     teasade uppslaget senast onsdag samma vecka. Flytta därför uppslaget
+     teasade uppslaget **tidigast måndagen och senast lördagen veckan efter
+     brevet** — aldrig före söndagens utskick, aldrig senare än att nästa
+     brev kan bocka av det. Flytta därför uppslaget
      till **toppen av `ko.md`** när du teasar det, om det inte redan ligger
      där, och skriv i loggposten exakt vilket uppslag som teasades.
    - **Avsluta nyhets-teasern med den stående signaturen "Vi läser på."**

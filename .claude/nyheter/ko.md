@@ -12,7 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER]** — ett lag vid
+- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05]** — ett lag vid
   University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
   Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
   med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan

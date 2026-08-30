@@ -370,7 +370,7 @@ window.BEGREPP = [
   {
     id: 'bose-einstein-kondensat',
     term: 'Bose–Einstein-kondensat',
-    former: ['bose–einstein-kondensat', 'bose-einstein-kondensat', 'bose–einstein-kondensatet', 'bose-einstein-kondensatet', 'bose–einstein-kondensaten', 'bose-einstein-kondensaten', 'kondensat', 'kondensatet', 'kondensaten', 'rubidiumkondensat', 'rubidiumkondensatet', 'rubidiumkondensaten', 'kaliumkondensat', 'kaliumkondensatet', 'atomkondensat'],
+    former: ['bose–einstein-kondensat', 'bose-einstein-kondensat', 'bose–einstein-kondensatet', 'bose-einstein-kondensatet', 'bose–einstein-kondensaten', 'bose-einstein-kondensaten', 'kondensat', 'kondensatet', 'kondensaten', 'rubidiumkondensat', 'rubidiumkondensatet', 'rubidiumkondensaten', 'kaliumkondensat', 'kaliumkondensatet', 'atomkondensat', 'molekylkondensat', 'molekylkondensatet', 'molekylkondensaten'],
     kort: 'Den kallaste form av materia som går att tillverka: en gas där alla atomer har fallit ner i samma kvanttillstånd och tillsammans beter sig som en enda gemensam våg.',
     relaterade: ['absoluta-nollpunkten', 'boson', 'superfluid', 'kvantmekanik'],
     body: [
@@ -1411,7 +1411,7 @@ window.BEGREPP = [
   {
     id: 'polarisation',
     term: 'Polarisation',
-    former: ['polarisation', 'polarisationen', 'polariserad', 'polariserat', 'polariserade', 'linjärt polariserad', 'linjär polarisation', 'cirkulär polarisation', 'polarisationsriktning', 'polarisationsriktningen', 'polarisationsgrad', 'polarisationsgraden'],
+    former: ['polarisation', 'polarisationen', 'polariserad', 'polariserat', 'polariserade', 'linjärt polariserad', 'linjär polarisation', 'cirkulär polarisation', 'polarisationsriktning', 'polarisationsriktningen', 'polarisationsgrad', 'polarisationsgraden', 'cirkulärpolariserat', 'cirkulärpolariserad', 'linjärpolariserat', 'linjärpolariserad'],
     kort: 'Vilken riktning en ljusvågs elektriska fält svänger i. Vanligt ljus svänger huller om buller åt alla håll, men speglingar, spridning och magnetfält kan sortera fram en riktning.',
     relaterade: ['foton', 'vaglangd', 'kiralitet'],
     body: [
@@ -1860,6 +1860,47 @@ window.BEGREPP = [
       { type: 'p', html: 'Många problem handlar inte om ett enda val, utan om en följd av val som sträcker sig över tid. Hur ska en raket gasa för att nå omloppsbanan med minst bränsle? När ska ett tåg bromsa för att stanna mjukt men i tid? Hur ska en person i en gunga röra sig för att komma högst? I samtliga fall finns ett system som utvecklas enligt kända lagar, en styrsignal som får ändras löpande, och ett mått på vad som är bra. Att hitta den bästa styrsignalen kallas optimal styrning.' },
       { type: 'p', html: 'Det svåra är att gränserna nästan alltid är verkliga. Motorn har en maxeffekt, benen en högsta hastighet, bromsen en gräns. Utan sådana gränser blir svaret ofta orimligt: gasa oändligt hårt i ett oändligt kort ögonblick. Med dem blir lösningen i stället typiskt en växling mellan ytterlägen — full gas ett tag, sedan ingenting, sedan full broms. Sådana lösningar kallas bang-bang-styrning, och de är förvånansvärt vanliga.' },
       { type: 'p', html: 'En besläktad metod är förstärkningsinlärning, där ingen räknar ut svaret i förväg. I stället får en dator pröva sig fram om och om igen och belönas när det går bra, ungefär som ett barn lär sig gunga. De två angreppssätten leder ofta till samma strategi, och när de gör det är det ett gott tecken på att strategin verkligen är den bästa och inte bara den man råkade hitta.' }
+    ]
+  },
+  {
+    id: 'elektrisk-dipol',
+    term: 'Elektrisk dipol',
+    former: ['elektrisk dipol', 'elektriska dipoler', 'dipol', 'dipolen', 'dipoler', 'dipolerna', 'dipolmoment', 'dipolmomentet', 'dipolmomenten', 'dipolväxelverkan', 'elektriska dipolen'],
+    kort: 'Ett föremål vars positiva och negativa laddning sitter en liten bit ifrån varandra, så att ena änden blir plusare och den andra minusare — utan att helheten är laddad.',
+    relaterade: ['bose-einstein-kondensat', 'kvantdroppe'],
+    body: [
+      { type: 'p', html: 'En vattenmolekyl är utåt sett oladdad: den har lika många protoner som elektroner. Ändå beter den sig inte som något neutralt. Syreatomen drar elektronerna hårdare till sig än väteatomerna gör, så syreänden blir en aning negativ och väteänden en aning positiv. Molekylen har blivit en <em>elektrisk dipol</em> — en liten laddningsstav med plus i ena änden och minus i den andra.' },
+      { type: 'p', html: 'Hur sned laddningsfördelningen är mäts med dipolmomentet. Det räknas ut som laddningens storlek gånger avståndet mellan tyngdpunkterna för plus- och minusladdningen, och anges ofta i enheten debye. Vatten ligger på ungefär 1,85&nbsp;debye. Molekyler byggda av två olika alkalimetaller, som natrium och rubidium, kan komma upp i det dubbla eller mer, eftersom elektronerna där dras påfallande snett.' },
+      { type: 'p', html: 'Två dipoler känner av varandra på ett sätt som beror på hur de är vända. Ligger de i linje, plus mot minus, dras de ihop. Ligger de sida vid sida med samma ände åt samma håll, stöter de bort varandra. Kraften avtar dessutom långsammare med avståndet än kraften mellan två hela laddningar gör i ett neutralt material, vilket gör dipolgaser till ett populärt verktyg när fysiker vill studera partiklar som påverkar varandra på långt håll.' },
+      { type: 'fact', title: 'Dipoler i vardagen', items: [
+        'Mikrovågsugnen värmer mat genom att vrida vattnets dipoler fram och tillbaka miljardtals gånger i sekunden.',
+        'Att vatten löser salt beror på att vattendipolerna lägger sig runt varje jon och drar isär kristallen.',
+        'En laddad ballong lyfter små pappersbitar därför att den först gör pappret till en dipol och sedan drar i den.'
+      ] }
+    ]
+  },
+  {
+    id: 'kvantdroppe',
+    term: 'Kvantdroppe',
+    former: ['kvantdroppe', 'kvantdroppen', 'kvantdroppar', 'kvantdropparna'],
+    kort: 'Ett moln av extremt kalla partiklar som håller ihop av sig självt, utan kärl och utan väggar, ungefär som en vattendroppe — fast miljontals gånger tunnare.',
+    relaterade: ['bose-einstein-kondensat', 'elektrisk-dipol', 'superfluid'],
+    body: [
+      { type: 'p', html: 'En vattendroppe behåller sin form utan behållare. Molekylerna dras mot varandra och ytan drar ihop sig så långt den kan. En gas gör tvärtom: släpper man den fri breder den ut sig tills den fyller rummet. Under mycket speciella förhållanden kan ett ultrakallt gasmoln ändå bete sig som droppen — det håller ihop av sig självt när fällan som höll det stängs av. Ett sådant moln kallas kvantdroppe.' },
+      { type: 'p', html: 'Att den inte faller ihop till en punkt är det märkliga. Dragningen mellan partiklarna vill pressa samman molnet, men kvantmekaniken sätter emot. Ju trängre partiklarna packas, desto mer osäker blir deras rörelsemängd, och det motsvarar en energi som stiger när volymen minskar. Det uppstår alltså ett inre mottryck som inte har något med värme att göra — det finns kvar också vid temperaturer nära den absoluta nollpunkten. Vid en viss storlek balanserar de två effekterna varandra, och droppen får en bestämd storlek.' },
+      { type: 'p', html: 'Droppar av det här slaget har gjorts både av starkt magnetiska atomer och av molekyler med ett stort elektriskt dipolmoment. De är ofantligt mycket tunnare än vatten — tätheten kan vara mindre än en miljondel av luftens — men de har ändå en yta, en ytspänning och en form. Fysiker studerar dem för att de ligger i gränslandet mellan gas och vätska, där de vanliga formlerna för utspädda gaser inte längre gäller.' }
+    ]
+  },
+  {
+    id: 'forangningskylning',
+    term: 'Förångningskylning',
+    former: ['förångningskylning', 'förångningskylningen', 'förångningskyla', 'förångning', 'förångningen'],
+    kort: 'Metoden att kyla något genom att låta de snabbaste partiklarna slippa ut. De som blir kvar har lägre medelenergi, alltså lägre temperatur.',
+    relaterade: ['absoluta-nollpunkten', 'bose-einstein-kondensat'],
+    body: [
+      { type: 'p', html: 'Blås på en kopp hett kaffe och den svalnar. Skälet är inte främst att luften är sval, utan att de vattenmolekyler som råkar ha allra mest fart lämnar ytan och försvinner. Kvar i koppen blir de långsammare molekylerna, och eftersom temperatur är ett mått på medelrörelsen har kaffet blivit kallare. Samma sak händer när svetten avdunstar från huden.' },
+      { type: 'p', html: 'Fysiker som arbetar med ultrakalla gaser använder exakt samma knep, fast med full kontroll. Atomerna eller molekylerna hålls i en fälla av laserljus eller magnetfält. Sedan sänks fällans kant, långsamt och i lagom takt, så att bara de energirikaste hinner klättra över och rymma. De som är kvar krockar med varandra och fördelar om energin, tills fördelningen åter är jämn men vid en lägre temperatur. Så upprepas det, steg för steg.' },
+      { type: 'p', html: 'Priset är att provet krymper. Det är fullt normalt att bara någon procent av partiklarna finns kvar när slutmålet nåtts, men de som är kvar kan vara miljarddels grader från den absoluta nollpunkten — kallare än något som uppmätts naturligt någonstans. Metoden fungerar bara om partiklarna hinner krocka med varandra många gånger utan att gå förlorade på andra sätt, och det är just den balansen som gör steget särskilt svårt för molekyler, som lätt fastnar i varandra när de möts.' }
     ]
   }
 ];

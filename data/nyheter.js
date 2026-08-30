@@ -88,6 +88,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-08-30-droppen-utan-karl",
+    date: "2026-08-30",
+    title: "500 molekyler kyldes till tjugo miljarddels grad över nollpunkten — sedan höll de ihop som en droppe helt utan kärl",
+    deck: "Ett forskarlag i Hongkong har fått natrium–rubidium-molekyler att bilda ett Bose–Einstein-kondensat, och kan dessutom vrida på hur hårt molekylerna drar i varandra. Vrider man tillräckligt långt slutar gasen att breda ut sig och drar i stället ihop sig till en självbunden droppe.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-08-30-droppen-utan-karl.jpg",
+    imageAlt: "En glascell i ultrahögvakuum sedd rakt framifrån, omgiven av runda metallflänsar och optiska fönster. Mitt inne i cellen lyser ett litet rödaktigt moln av laserkylda atomer.",
+    imageCredit: "Foto: Balping / Wikimedia Commons (CC BY-SA 4.0). Bilden visar ett annat laboratoriums fälla för ultrakalla rubidiumatomer, inte försöket i artikeln.",
+    tags: ["kvantfysik", "bose-einstein-kondensat", "ultrakalla molekyler", "laserkylning", "absoluta nollpunkten", "dipol", "kvantdroppe", "aggregationstillstånd", "mikrovågor", "atomfysik"],
+    sources: [
+      { name: "Phys.org — Physicists create Bose–Einstein condensate from ultracold polar molecules (30 juli 2026)", url: "https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html" },
+      { name: "Dajun Wangs forskargrupp, The Chinese University of Hong Kong", url: "https://www.phy.cuhk.edu.hk/~djwang/" },
+      { name: "Nature — Observation of Bose–Einstein condensation of dipolar molecules (det första molekylkondensatet, NaCs, 2024)", url: "https://www.nature.com/articles/s41586-024-07492-z" }
+    ],
+    research: {
+      citation: "Zhaopeng Shi, Zerong Huang, Fulin Deng, Wei-Jian Jin, Su Yi, Tao Shi, Dajun Wang, ”Bose–Einstein condensate of ultracold sodium–rubidium molecules with tunable dipolar interactions”, Nature Physics, publicerad online 9 juli 2026, DOI 10.1038/s41567-026-03362-9. Förhandsversion: arXiv:2508.20518 (CC BY 4.0).",
+      url: "https://doi.org/10.1038/s41567-026-03362-9"
+    },
+    body: [
+      { type: 'p', html: 'Kyl en gas tillräckligt mycket och något underligt händer. Vid några miljarddels grad över absoluta nollpunkten slutar partiklarna att vara enskilda partiklar. De faller alla ner i exakt samma kvanttillstånd och beter sig i stället som en enda våg, ett så kallat Bose–Einstein-kondensat. Med atomer lyckades det första gången 1995. Med hela molekyler har det varit betydligt svårare, och det är först de senaste åren som det gått alls.' },
+      { type: 'p', html: 'Nu har ett lag lett av Dajun Wang vid The Chinese University of Hong Kong, tillsammans med teoretiker under Tao Shi vid Kinesiska vetenskapsakademins institut för teoretisk fysik, gjort ett kondensat av natrium–rubidium-molekyler. Resultatet publicerades i <em>Nature Physics</em> i juli.' },
+      { type: 'h2', text: 'Molekyler är klibbiga' },
+      { type: 'p', html: 'Skälet till att atomer var lättare är prosaiskt: två kalla atomer studsar oftast bara mot varandra, medan två kalla molekyler gärna fastnar i varandra. Krockar de på nära håll försvinner de ur fällan, och den förlusten går snabbare än nedkylningen hinner arbeta. Fysikerna kallar det tvåkroppsförluster.' },
+      { type: 'p', html: 'Det spelar roll eftersom sista biten av nedkylningen sker genom förångning, precis som när kaffe svalnar. Man sänker kanten på den optiska fälla som håller molekylerna, låter de snabbaste rymma över kanten och låter resten fördela om energin mellan sig. Kvar blir färre molekyler, men kallare. Metoden fungerar bara om de nyttiga krockarna är många fler än de skadliga.' },
+      { type: 'h2', text: 'Två mikrovågsfält som håller molekylerna ifrån varandra' },
+      { type: 'p', html: 'Knepet laget använde kallas dubbel mikrovågsskärmning. Två mikrovågsfält, ett cirkulärpolariserat och ett linjärpolariserat, ställs in strax vid sidan av molekylens lägsta rotationsövergång. Fälten får molekylerna att stöta bort varandra på långt håll, så att de sällan kommer nära nog för att fastna. Förlusterna sjönk flera gånger om jämfört med skärmning med ett enda fält, medan de nyttiga krockarna blev kvar.' },
+      { type: 'p', html: 'Sedan kunde förångningen göra sitt arbete. Ur ett moln vid $734\\ \\mathrm{nK}$ återstod till slut omkring 500 molekyler vid $20{,}3\\ \\mathrm{nK}$, alltså tjugo miljarddels grad över absoluta nollpunkten. Bara en bråkdel överlevde, men det som återstod hade blivit så mycket kallare att fasrymdstätheten, det mått som avgör om kvantfysiken tar över, steg från 0,008 till 1,7. Vid ungefär $20\\ \\mathrm{nK}$ passerades gränsen, och som mest låg 70&nbsp;% av molekylerna i kondensatet.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-30-droppen-utan-karl-2.jpg', alt: 'Ett optiskt bord fullt av speglar, linser och hållare i svart och silver, monterat i två våningar i ett ljust laboratorium.', caption: 'Bakom varje moln av ultrakalla partiklar ligger ett bord som det här: dussintals lasrar, speglar och linser som måste hålla sina inställningar på bråkdelen av en våglängd.', credit: 'Foto: Tomasz Kawalec / Wikimedia Commons (CC BY-SA 4.0). Bilden visar en uppställning för kylning av rubidiumatomer vid ett annat laboratorium.' },
+      { type: 'h2', text: 'Ratten som ändrar hur molekylerna känner varandra' },
+      { type: 'p', html: 'Det verkligt nya sitter i vad som händer sedan. En natrium–rubidium-molekyl är elektriskt sned: natriumänden är svagt positiv och rubidiumänden svagt negativ. Den är alltså en liten elektrisk dipol, med ett dipolmoment på 3,2&nbsp;debye. Sådana dipoler drar i varandra på långt håll, och kraften beror på hur de är vända mot varandra.' },
+      { type: 'p', html: 'Genom att bara ändra frekvensen på det ena mikrovågsfältet kunde laget skruva på styrkan i den växelverkan. Det är ovanligt: i en vanlig gas är krafterna mellan partiklarna det de är. Här finns en ratt.' },
+      { type: 'h2', text: 'En droppe som håller ihop utan kärl' },
+      { type: 'p', html: 'Vrids ratten förbi ett visst läge slutar molnet att bete sig som en gas. Släpper man normalt en kall gas fri breder den ut sig åt alla håll. Men förbi gränsen gjorde molnet motsatsen: när fällan stängdes av krympte det i sidled i stället för att växa. Molekylerna höll ihop av sig själva, utan väggar, utan yta, utan behållare. Det är en kvantdroppe.' },
+      { type: 'p', html: 'Droppen var trettio gånger tätare än gasen den kom ur och levde i ungefär en fjärdedels sekund, mot drygt två sekunder för kondensatet i gasfas. Att den alls håller ihop beror på en fin balans: dipolerna drar ihop den, medan kvantmekanikens egna fluktuationer trycker emot och hindrar den från att kollapsa till en punkt.' },
+      { type: 'quote', html: 'Även om det här inte är det första molekylkondensatet visar vårt arbete att förångningskylning med mikrovågsdämpade förluster kan vara en mer allmän väg till Bose–Einstein-kondensation av polära molekyler.', cite: 'Tao Shi och Dajun Wang, artikelns seniorförfattare, till Phys.org' },
+      { type: 'p', html: 'Det första molekylkondensatet gjordes 2024 med natrium–cesium vid Columbia University. Att metoden nu fungerat på ett andra ämne är själva poängen: receptet tycks gå att flytta vidare till fler molekylslag.' },
+      { type: 'p', html: 'Nästa steg är större och mer långlivade prover. Med bara 500 molekyler blir varje mätning tunn, och forskarna vill kunna undersöka hur droppen svänger och vad som händer i dess inre. En sak misstänker de redan: att den kan vara så tät att den mer liknar flytande helium än en tunn gas.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Ett Bose–Einstein-kondensat brukar kallas materiens femte aggregationstillstånd, vid sidan av fast, flytande, gas och plasma.',
+        'Droppen innehöll omkring 6&nbsp;·&nbsp;10<sup>13</sup> molekyler per kubikcentimeter, några miljondelar av tätheten i luften omkring dig.',
+        'Absoluta nollpunkten, 0&nbsp;K eller −273,15&nbsp;°C, går inte att nå. Men 20 miljarddels grad ifrån är kallare än något som uppmätts naturligt någonstans i universum.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-29-jakten-under-jorden",
     date: "2026-08-29",
     title: "Kallare än rymden och två kilometer ner i en nickelgruva — nu lyssnar 24 kristaller efter mörk materia",

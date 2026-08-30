@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 29 Aug 2026 13:12:18 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 01:25:07 GMT</lastBuildDate>
+    <item>
+      <title>500 molekyler kyldes till tjugo miljarddels grad över nollpunkten — sedan höll de ihop som en droppe helt utan kärl</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-30-droppen-utan-karl</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-30-droppen-utan-karl</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <category>Kvantfysik</category>
+      <description>Ett forskarlag i Hongkong har fått natrium–rubidium-molekyler att bilda ett Bose–Einstein-kondensat, och kan dessutom vrida på hur hårt molekylerna drar i varandra. Vrider man tillräckligt långt slutar gasen att breda ut sig och drar i stället ihop sig till en självbunden droppe.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-30-droppen-utan-karl.jpg" length="218192" type="image/jpeg"/>
+    </item>
     <item>
       <title>Kallare än rymden och två kilometer ner i en nickelgruva — nu lyssnar 24 kristaller efter mörk materia</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-08-29-jakten-under-jorden</link>
@@ -177,15 +186,6 @@
       <category>Optik</category>
       <description>Ytan ser slät ut men är kuperad i steg som mäts i ljusets våglängder. Ett lag vid UCLA visade tio olika handskrivna siffror för sin spegel, och varje gång kom samma bild tillbaka. Mönstret räknades fram med maskininlärning — men själva förvandlingen sker i ljusets egen gång genom det.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-11-spegeln-som-ljuger.jpg" length="304969" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>På onsdag tar månen fyra femtedelar av solen — och nästan ingen kommer att se det på ljuset</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-10-solformorkelse-sverige</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-10-solformorkelse-sverige</guid>
-      <pubDate>Mon, 10 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Astronomi</category>
-      <description>Den 12 augusti skyms drygt 80 procent av solskivan sett från Sverige, strax före solnedgången. Det är den största solförmörkelsen här sedan 2015. Ögat kommer knappt att märka att något händer — och just därför är det farligare än det låter att kika upp.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-10-solformorkelse-sverige.jpg" length="116692" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

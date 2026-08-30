@@ -12,21 +12,32 @@ Format per post:
 
 ## Kö
 
-- **Bose–Einstein-kondensat av ultrakalla polära molekyler — med en ratt för
-  dipolväxelverkan**  **[BREVTEASER, teasad i brevet 2026-08-30]** (STARK
-  RESERV). Zhaopeng Shi, Zerong Huang m.fl. i Dajun Wangs grupp vid
-  Chinese University of Hong Kong har gjort det första kondensatet av
-  natrium–rubidium-molekyler i grundtillståndet (~500 molekyler) genom
-  förångningskylning med dubbel mikrovågsskärmning, och kan vrida på den
-  långräckviddiga dipolväxelverkan så att systemet går mellan gasfas och en
-  självbunden kvantdroppe. Nature Physics (2026-07-09),
-  DOI 10.1038/s41567-026-03362-9, preprint arXiv:2508.20518. Kollegialt
-  granskad. Utmärkta vinklar för gymnasiet: aggregationstillstånd, absoluta
-  nollpunkten, elektriska dipoler, och en droppe som håller ihop utan kärl.
-  Valdes bort 2026-08-03 enbart för att Phys.org-referatet var fyra dagar
-  gammalt. Källa:
-  https://phys.org/news/2026-07-physicists-boseeinstein-condensate-ultracold-polar.html
-  (tillagd 2026-08-03) **TEASER-SKULD: publicera senast onsdag 2026-09-02.**
+- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER]** — ett lag vid
+  University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
+  Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
+  med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan
+  parametrisk nedkonvertering att ge sammanflätade fotonpar utan laser. Bells
+  olikhet bröts med S = 2,54 och tillståndet hade 94 procents trohet mot
+  målet. Ingång: fotonens energi, våglängd och energiprincipen. Optica 13 (8),
+  1508 (25 augusti 2026). Källa (Physics World 2026-08-26):
+  https://physicsworld.com/a/researchers-harness-sunlight-to-generate-quantum-entanglement/
+  (tillagd 2026-08-28)
+
+- **Diamantklockan som väger ihop två signaler och slipper temperaturdriften**
+  — en atomklocka byggd kring kristallfel i diamant kombinerar två signaler så
+  att temperaturberoendet tar ut sig självt. Ingång: vad en klocka egentligen
+  mäter, resonans och varför noggrannhet handlar om att bli av med störningar.
+  Leta upp originalstudien innan den används. Källa (Phys.org 2026-08-29):
+  https://phys.org/news/2026-08-diamond-clock-combines-temperature-driven.html
+  (tillagd 2026-08-30)
+
+- **Ljus avslöjar rörelsen inne i elektronkristaller — och kan smälta dem**
+  — vid låg täthet och låg temperatur ordnar elektroner sig i ett gitter, en
+  wignerkristall, och nu går det att se hur de rör sig i den. Ingång: elektronen
+  som partikel, kristallordning och smältning som fasövergång. Kontrollera
+  originalstudien. Källa (Phys.org 2026-08-29):
+  https://phys.org/news/2026-08-reveals-internal-motion-electron-crystals.html
+  (tillagd 2026-08-30)
 
 - **Röntgenkameran som fångar spinnvågor i rörelse** — en avbildningsteknik som
   följer magnoner (spinnvågor) medan de färdas genom ett material, vilket är
@@ -59,17 +70,6 @@ Format per post:
   innan den här används. Källa (Physics World, augusti 2026):
   https://physicsworld.com/a/magnetic-field-first-kills-superconductor-then-brings-it-back-to-life/
   (tillagd 2026-08-29)
-
-- **Solljus i stället för laser gav sammanflätade fotonpar** — ett lag vid
-  University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
-  Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
-  med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan
-  parametrisk nedkonvertering att ge sammanflätade fotonpar utan laser. Bells
-  olikhet bröts med S = 2,54 och tillståndet hade 94 procents trohet mot
-  målet. Ingång: fotonens energi, våglängd och energiprincipen. Optica 13 (8),
-  1508 (25 augusti 2026). Källa (Physics World 2026-08-26):
-  https://physicsworld.com/a/researchers-harness-sunlight-to-generate-quantum-entanglement/
-  (tillagd 2026-08-28)
 
 - **Magnuseffekten observerad för ljus** — den effekt som får en skruvad
   fotboll att böja av har för första gången setts i optiken, och kan skärpa

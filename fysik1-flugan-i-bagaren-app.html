@@ -248,6 +248,7 @@
                             <div class="lab-nav-dd-undermeny">
                                 <a href="katalog.html#ma1b">Nivå 1b</a>
                                 <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
                                 <a href="katalog.html#ma2c">Nivå 2c</a>
                             </div>
                         </div>
@@ -992,8 +993,8 @@
                         this.outParts.push({
                             x: CX + (this.x + this.wander) * PX + dir * (6 + Math.random() * 10),
                             y: BOT_Y - this.z * PX + 8,
-                            vx: dir * (0.15 + Math.random() * 0.35) * PX * this.vi / 0.7,
-                            vy: (0.3 + Math.random() * 0.4) * PX * this.vi / 0.7,
+                            vx: dir * (0.05 + Math.random() * 0.16) * PX * this.vi / 0.7,
+                            vy: (0.45 + Math.random() * 0.4) * PX * this.vi / 0.7,
                             life: 1.1,
                         });
                     }
@@ -1007,7 +1008,9 @@
                     // ovanför bägaröppningen glider strömmen längs mynningen
                     // tills den passerat kanten, sedan faller den utanför väggen.
                     // En partikel djupare ner (från en fluga bredvid bägaren)
-                    // studsar i stället mot glasets utsida.
+                    // viker i stället av NEDÅT längs glasets utsida — den ska
+                    // inte studsa ut vågrätt (såg orealistiskt ut, påpekat
+                    // 2026-08-30).
                     if (Math.abs(q.x - CX) < spanPx && q.y > rimYpx - 5) {
                         if (q.y < rimYpx + 10) {
                             q.y = rimYpx - 5;
@@ -1017,7 +1020,8 @@
                         } else {
                             const dir = Math.sign(q.x - CX) || 1;
                             q.x = CX + dir * spanPx;
-                            q.vx = dir * Math.abs(q.vx || 120);
+                            q.vx = 0;
+                            q.vy = Math.max(q.vy, 120);
                         }
                     }
                     // träffar bänken eller vågen → sprids i sidled, men

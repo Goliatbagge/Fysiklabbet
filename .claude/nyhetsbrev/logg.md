@@ -32,6 +32,9 @@ Format:
   brevet, och verify-nyhetsbrev.js fäller numera ett brev vars teaser redan
   är publicerad. OBS: kondensatartikeln nämns inte i detta brev alls — den
   hör till nästa veckas brevperiod och lyfts där.
+- Ordvitsen omarbetad 2026-08-30: stycket struket, i stället bär rubriken
+  vitsen: "Senaste flugan? En flugsimulator". Gaffelbalans-bilden flyttad
+  till EFTER sitt stycke (bild under text, användarens begäran).
 - Ordvits inlagd på användarens begäran 2026-08-29, efter flug-stycket:
   "har du hört om den senaste flugan? En flugsimulator." Skriven med punkt,
   inte utropstecken, enligt tonregeln om torr underdrift.

@@ -88,6 +88,74 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-01-hundra-ganger-vidare-blick",
+    date: "2026-09-01",
+    title: "Samma spegel som Hubble men hundra gånger vidare blick — Roman ska mäta hur klumpig den mörka materien är",
+    deck: "NASA:s nya rymdteleskop lämnade Kennedy Space Center i söndags och är på väg mot en punkt 1,5 miljoner kilometer från jorden. Frågan det ska svara på är inte om den mörka materien finns, utan vad den består av — och det avgörs av hur tidigt materien hann klumpa ihop sig.",
+    category: "Astronomi",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-01-hundra-ganger-vidare-blick.jpg",
+    imageAlt: "En Falcon Heavy-raket syns som en smal mörk silhuett rakt framför solskivan under uppstigningen. Avgasstrålen böjer sig i ett brett, gnistrande band nedåt genom gyllene moln.",
+    imageCredit: "Foto: NASA/John Kraus",
+    tags: ["astronomi", "kosmologi", "mörk materia", "mörk energi", "teleskop", "gravitationslinsning", "lagrangepunkt", "gravitation", "cirkulär rörelse", "infrarött", "rymdfart", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "NASA — presskit för Nancy Grace Roman Space Telescope (augusti 2026)", url: "https://assets.science.nasa.gov/content/dam/science/missions/rst/education/aug%20Roman%20Press%20Kit-508compliant.pdf" },
+      { name: "NASA — Roman-bloggen: uppskjutningen den 30 augusti 2026", url: "https://science.nasa.gov/blogs/roman/2026/08/30/nasas-roman-space-telescope-launches/" },
+      { name: "NASA — uppdragssidan för Roman", url: "https://science.nasa.gov/mission/roman-space-telescope/" },
+      { name: "Caltech/IPAC — Wide Field Instrument, tekniska data", url: "https://roman.ipac.caltech.edu/page/wfi" },
+      { name: "Space.com — direktrapportering från uppskjutningen", url: "https://www.space.com/news/live/nancy-grace-roman-telescope-live-updates-nasa-readies-roman-for-launch-august-30-2026" }
+    ],
+    research: {
+      citation: "Roman Observations Time Allocation Committee, ”Final Report and Recommendations”, NASA (24 april 2025) — rapporten som fastställde omfattningen på Romans tre kärnundersökningar",
+      url: "https://roman.gsfc.nasa.gov/science/ccs/ROTAC-Report-20250424-v3.pdf"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 3.5 Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Fysik nivå 2 · 1.5 Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Fysik nivå 2 · 5.1 Universums struktur", href: "katalog.html?id=fy2-5.1" }
+      ],
+      fragor: [
+        "En punkt som L2 finns bara därför att två himlakroppars dragning råkar summera till precis den centripetalacceleration ett varv om året kräver. Vad händer med ett föremål som placeras en bit vid sidan av punkten, och varför måste ett teleskop där ändå tända motorerna med jämna mellanrum?",
+        "Roman mäter inte den mörka materien direkt, utan hur ljuset från miljardtals galaxer böjs på vägen hit. Vad är det egentligen som mäts i ett sådant försök, och vilka antaganden om galaxernas naturliga former måste hålla för att slutsatsen ska gälla?",
+        "Är partiklarna i den mörka materien lätta och snabba hinner de rusa ur de minsta gravitationsgroparna innan något samlats där. Hur kan tidpunkten för när de första strukturerna bildades då fungera som en mätning av en partikels massa?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Klockan 13.26 svensk tid i söndags lyfte en Falcon Heavy från startplatta 39A vid Kennedy Space Center i Florida. Raketens första steg består av tre sammankopplade kärnor med sammanlagt 27 motorer, och de två yttre stängde av sina motorer efter två och en halv minut och vände tillbaka mot marken för att landa nära startplatsen. Trettioen minuter efter lyftet släppte översta steget sin last: Nancy Grace Roman-teleskopet, uppkallat efter NASA:s första chefsastronom.' },
+      { type: 'p', html: 'Därmed började en tre månader lång driftsättning. Först ut är solpanelerna och solskyddet, därefter antennen och locket framför optiken, och ett par veckor in i resan väcks huvudinstrumentet. Nya bilder väntas i början av 2027.' },
+      { type: 'quote', html: 'När det väl lyfter kommer det att göra sådant som i dag är omöjligt.', cite: 'Shawn Domagal-Goldman, chef för NASA:s astrofysikavdelning, vid en presskonferens i juli' },
+
+      { type: 'h2', text: 'Platsen där jorden hjälper till att hålla takten' },
+      { type: 'p', html: 'Målet är L2, den andra lagrangepunkten i systemet sol–jord: en plats ungefär 1,5&nbsp;miljoner kilometer från oss, rakt bort från solen sett. Det är nästan fyra gånger så långt som till månen, och samma trakt som James Webb-teleskopet håller till i.' },
+      { type: 'p', html: 'Att en sådan plats alls finns följer av två samband. Ett föremål i cirkelbana kring solen behöver en centripetalacceleration som gravitationen ska stå för, och ju längre ut man kommer, desto svagare blir dragningen och desto längre tid tar ett varv. Ett ensamt föremål 1,5&nbsp;miljoner kilometer utanför jordbanan skulle behöva knappt 371 dygn på sitt varv, alltså drygt fem dygn mer än jorden. Det skulle sacka efter och lämnas kvar.' },
+      { type: 'p', html: 'Men där ute drar jorden också, åt exakt samma håll som solen. Lägger man ihop de två dragningarna räcker de precis till ett varv på ett år:' },
+      { type: 'p', html: '$$\\dfrac{G \\cdot M_{\\mathrm{sol}}}{(R + d)^2} + \\dfrac{G \\cdot M_{\\mathrm{jord}}}{d^2} = \\dfrac{4\\pi^2 (R + d)}{T^2}$$' },
+      { type: 'p', html: 'Här är $R$ avståndet sol–jord, $d$ avståndet jord–teleskop och $T$ ett år. Löser man ut $d$ hamnar man på ungefär $1{,}5 \\cdot 10^{9}\\ \\mathrm{m}$. Där, och bara där, följer teleskopet jorden runt solen utan att halka efter, och det behöver nästan inget bränsle för att stanna kvar.' },
+      { type: 'p', html: 'Läget har ett andra skäl. Roman ser i infrarött ljus, och infraröda teleskop störs av allt varmt i närheten, eftersom värme lyser i just det området. Från L2 ligger solen, jorden och månen åt samma håll, så ett enda solskydd räcker för att hålla dem alla utanför synfältet.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-01-hundra-ganger-vidare-blick-2.jpg', alt: 'Rymdteleskopet står upprätt i en renrumshall med hopfällda, kopparfärgade solpaneler överst och silverglänsande värmeisolering nedanför. På var sida står de två svarta halvorna av raketens noskåpa uppställda i blå ställningar.', caption: 'Roman i renrummet vid Kennedy Space Center den 21 augusti, strax innan raketens noskåpa slöts om teleskopet. Solpanelerna sitter hopfällda överst.', credit: 'Foto: NASA/Sydney Rohde' },
+
+      { type: 'h2', text: 'Samma spegel, en helt annan blick' },
+      { type: 'p', html: 'Huvudspegeln är 2,4&nbsp;meter bred, exakt lika stor som Hubbles och därför lika skarpsynt. Den väger däremot bara 186&nbsp;kilogram, mindre än en fjärdedel av föregångarens.' },
+      { type: 'p', html: 'Skillnaden sitter i synfältet. Varje exponering täcker 0,281&nbsp;kvadratgrader, alltså drygt en fullmånes yta på himlen, och det är minst hundra gånger mer än Hubble fångar i ett svep. Bakom optiken sitter 18 detektorer, var och en stor som ett saltkex och med 16,8&nbsp;miljoner bildpunkter: sammanlagt 300&nbsp;megapixel som känner ljus mellan 0,48 och 2,3&nbsp;mikrometer, alltså från gränsen till det synliga och en bit in i det infraröda.' },
+      { type: 'p', html: 'Det ger data i mängder. Varje dygn skickas 1,4&nbsp;terabyte ner till markstationer i New Mexico, Australien och Japan, och under de fem år som är uppdragets grundplan väntas det bli 20&nbsp;petabyte. Allt släpps fritt så snart det behandlats, utan någon period då den som beställt mätningen har ensamrätt.' },
+
+      { type: 'h2', text: 'Frågan är inte om, utan hur klumpig' },
+      { type: 'p', html: 'Allt som lyser, alltså stjärnor, gas och galaxer, utgör bara ungefär en femtedel av materien i universum. Resten drar men syns inte, och den enda tråd som leder dit är just dragningen.' },
+      { type: 'p', html: 'Massa kröker rummet, och ljus som passerar nära en tung ansamling böjs av. Bakgrundsgalaxernas former dras därför ut med någon enstaka procent. På en enskild galax går det inte att se, eftersom galaxer har vitt skilda former från början, men mäter man en miljard av dem framträder ett mönster av grannar som lutar systematiskt åt samma håll. Ur mönstret går massan att räkna baklänges, också den del som aldrig lyser.' },
+      { type: 'p', html: 'Det verkligt intressanta är när klumparna bildades. Består den mörka materien av tunga, tröga partiklar faller de lätt ner i minsta lilla gravitationsgrop: små strukturer bildas tidigt och växer sedan samman till stora. Är partiklarna i stället lätta och snabba rusar de ur groparna igen innan något hunnit samlas där, ungefär som en het gas vägrar att dra ihop sig, och de minsta klumparna blir aldrig av. Då dröjer galaxbildningen.' },
+      { type: 'p', html: 'Roman ska därför göra den mest detaljerade tredimensionella kartan hittills över var materien finns och när den samlades. Den största av de tre kärnundersökningarna täcker 5&nbsp;100&nbsp;kvadratgrader, ungefär 12&nbsp;% av himlen, och mäter läge och form hos mer än en miljard galaxer tillbaka till en tid då universum var omkring två miljarder år gammalt. Tidpunkten för strukturernas framväxt blir på så sätt ett mått på vad partikeln väger och hur fort den rör sig, utan att någon någonsin ser en enda av dem.' },
+      { type: 'p', html: 'Samma bilder bär dessutom på svaret till en andra fråga. Genom att fånga exploderande stjärnor av typen Ia, som alla lyser ungefär lika starkt och därför fungerar som avståndsmätare, och genom att mäta de ringar i galaxfördelningen som tryckvågor i det tidiga universums plasma lämnade efter sig, ska Roman följa hur utvidgningen ändrat takt. Den mörka materien drar ihop, den mörka energin trycker isär, och båda avtecknar sig i samma karta.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Med allt utfällt är Roman 12,7&nbsp;meter långt och väger omkring 8&nbsp;000&nbsp;kilogram, ungefär som en turistbuss.',
+        'De 1,4&nbsp;terabyten per dygn är den största datamängden från något NASA-uppdrag inom astrofysiken hittills.',
+        'Ingen kan i dag serva ett teleskop vid L2, men Roman är ändå byggt för att kunna tankas. Det är bränslet som sätter gränsen för hur länge det kan arbeta.',
+        'Vid sidan av den mörka materien väntas uppdraget hitta omkring 100&nbsp;000 nya planeter kring andra stjärnor.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-30-droppen-utan-karl",
     date: "2026-08-30",
     title: "500 molekyler kyldes till tjugo miljarddels grad över nollpunkten — sedan höll de ihop som en droppe helt utan kärl",

@@ -12,6 +12,13 @@ Format per post:
 
 ## Kö
 
+- **⚠️ REDAN SKRIVEN OCH SCHEMALAGD: `2026-09-01-hundra-ganger-vidare-blick`** (Roman-teleskopets
+  uppskjutning och den mörka materien). Artikeln ligger FÄRDIG och datumgrindad i
+  `data/nyheter.js` med datum 2026-09-01, på användarens begäran 2026-08-30. Skriv INGEN
+  egen nyhet om Roman-teleskopet, och räkna med att den 1 september redan har en artikel —
+  publicera dagens nyhet som vanligt ändå, två artiklar samma dag är inget problem.
+  Behöver datumet flyttas räcker det att ändra `date` i artikelposten. (tillagd 2026-08-30)
+
 - **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05]** — ett lag vid
   University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
   Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus

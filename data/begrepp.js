@@ -1902,5 +1902,16 @@ window.BEGREPP = [
       { type: 'p', html: 'Fysiker som arbetar med ultrakalla gaser använder exakt samma knep, fast med full kontroll. Atomerna eller molekylerna hålls i en fälla av laserljus eller magnetfält. Sedan sänks fällans kant, långsamt och i lagom takt, så att bara de energirikaste hinner klättra över och rymma. De som är kvar krockar med varandra och fördelar om energin, tills fördelningen åter är jämn men vid en lägre temperatur. Så upprepas det, steg för steg.' },
       { type: 'p', html: 'Priset är att provet krymper. Det är fullt normalt att bara någon procent av partiklarna finns kvar när slutmålet nåtts, men de som är kvar kan vara miljarddels grader från den absoluta nollpunkten — kallare än något som uppmätts naturligt någonstans. Metoden fungerar bara om partiklarna hinner krocka med varandra många gånger utan att gå förlorade på andra sätt, och det är just den balansen som gör steget särskilt svårt för molekyler, som lätt fastnar i varandra när de möts.' }
     ]
+  },
+  {
+    id: 'lagrangepunkt',
+    term: 'Lagrangepunkt',
+    former: ['lagrangepunkt', 'lagrangepunkten', 'lagrangepunkter', 'lagrangepunkterna', 'librationspunkt', 'librationspunkten'],
+    kort: 'En av fem platser i ett system med två stora himlakroppar där ett litet föremål kan följa med i banan utan att sacka efter eller rusa i förväg. Rymdteleskop parkeras ofta i den som ligger rakt bort från solen sett från jorden.',
+    body: [
+      { type: 'p', html: 'Ju längre från solen ett föremål går, desto svagare drar solen i det och desto längre tid tar ett varv. Jorden behöver ett år, Mars nästan två. Ett rymdskepp som placeras en bit utanför jordbanan borde därför halka efter jorden mer och mer. Men några särskilda platser är undantag: där ligger jorden så till att dess egen dragning läggs till (eller dras ifrån) solens med precis så mycket att varvet ändå tar ett år. Föremålet följer då med jorden runt solen som om det satt fast i den.' },
+      { type: 'p', html: 'Sådana platser finns det fem av i varje system med två stora kroppar, och de brukar numreras L1 till L5. L1 ligger mellan solen och jorden, L2 rakt bakom jorden sett från solen, L3 på andra sidan solen, och L4 och L5 i själva jordbanan, en sjättedels varv före respektive efter jorden. De tre första är ostadiga som en kula på en sadel: minsta knuff åt sidan växer, så en farkost där måste tända motorerna med jämna mellanrum för att inte driva bort. L4 och L5 är i stället stabila, och i Jupiters L4 och L5 har det med tiden samlats tusentals asteroider, de så kallade trojanerna.' },
+      { type: 'p', html: 'Punkterna är uppkallade efter Joseph-Louis Lagrange, som på 1770-talet räknade fram dem ur gravitationslagen. I dag är L2 i systemet sol–jord den populäraste adressen för rymdteleskop, drygt 1,5 miljoner kilometer från oss. Där ligger solen, jorden och månen åt samma håll, så ett enda solskydd räcker för att hålla allt varmt och lysande utanför synfältet. Teleskopen står inte exakt i punkten utan sveper runt den i en vid bana, bland annat för att slippa hamna i jordens skugga.' }
+    ]
   }
 ];

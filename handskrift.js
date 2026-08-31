@@ -2576,6 +2576,26 @@
       str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, col);
       return x0 + w + 1.5;
     }
+    /* BRÅK SOM EXPONENT (ma1c-1.8): en rationell exponent skrivs med rakt
+     * bråkstreck i upphöjd storlek, aldrig med snedstreck. ”x^7/2 - 3”
+     * läses annars lätt som att hela potensen divideras med 2. Bråket
+     * ritas i samma 0,62-skala som placeString ger övriga index.
+     * Returnerar x efter bråket, precis som fracH. */
+    function fracSupW(numS, denS) {
+      return Math.max(adv(numS, 0.62), adv(denS, 0.62)) + 0.3 * F * 0.62;
+    }
+    function fracSup(numS, denS, x0, yb, col) {
+      var sc = 0.62, f = F * sc, ybar = yb - 0.78 * F;
+      var nw = adv(numS, sc), dw = adv(denS, sc);
+      var w = Math.max(nw, dw) + 0.3 * f;
+      str(numS, x0 + (w - nw) / 2, ybar - 0.14 * f, col, sc);
+      pause(110);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: col || null });
+      pause(110);
+      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * f, col, sc);
+      return x0 + w;
+    }
     /* SNETT DIVISIONSSTRECK — ENDAST för att skriva av en uppgift som
      * själv är skriven med snedstreck (se undantaget i REGEL DIVISION MED
      * VÅGRÄTT STRECK). Ritar det långa lutande strecket mellan två bråk;
@@ -2764,6 +2784,7 @@
              bubble: bubble, stepEnd: stepEnd, tanke: tanke,
              underline: underline, bubbleTop: bubbleTop, str: str, adv: adv,
              mul: mul, fracW: fracW, fracH: fracH, fracSeg: fracSeg,
+             fracSup: fracSup, fracSupW: fracSupW,
              fracOp: fracOp, vaggOp: vaggOp,
              slashDiv: slashDiv, slashW: slashW,
              bigFrac: bigFrac, strike: strike, ring: ring,
@@ -4553,9 +4574,35 @@
       T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
     }
 
-    y = 122;
-    T.str('Potenslagen för division', padL, y - 2.35 * F, null, 0.62);
-    xx = T.fracH('x^7^/^2', 'x^3', padL, y);
+    /* x upphöjt till ett bråk — exponenten skrivs med RAKT bråkstreck
+     * (fracSup), aldrig med snedstreck: "x^7/2 - 3" läser annars som om
+     * hela potensen dividerades med 2. tailS är den övriga exponenten
+     * (t.ex. " - 3"), skriven i samma upphöjda storlek. */
+    function xPowW(numS, denS, tailS) {
+      return T.adv('x') + 0.06 * F + T.fracSupW(numS, denS)
+        + (tailS ? 0.12 * F + T.adv(tailS, 0.62) : 0);
+    }
+    function xPow(numS, denS, tailS, x0, yb) {
+      var xe2 = T.str('x', x0, yb);
+      xe2 = T.fracSup(numS, denS, xe2 + 0.06 * F, yb);
+      if (tailS) xe2 = T.str(tailS, xe2 + 0.12 * F, yb - 0.5 * F, null, 0.62);
+      return xe2;
+    }
+    /* stort bråk vars täljare själv har en bråkexponent */
+    function bigFracX(x0, yb) {
+      var nw = xPowW('7', '2', null), dw = T.adv('x^3');
+      var w = Math.max(nw, dw) + 0.3 * F, ybar = yb - 0.34 * F;
+      xPow('7', '2', null, x0 + (w - nw) / 2, ybar - 0.14 * F);
+      T.pause(130);
+      T.line([x0, ybar], [x0 + w, ybar]);
+      T.pause(130);
+      T.str('x^3', x0 + (w - dw) / 2, ybar + 1.24 * F);
+      return x0 + w + 1.5;
+    }
+
+    y = 128;
+    T.str('Potenslagen för division', padL, y - 3.15 * F, null, 0.62);
+    xx = bigFracX(padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -4564,7 +4611,7 @@
       [['subtraheras.']]
     ], 1.05);
     xx = T.str('=', xx, y);
-    T.str('x^7^/^2^-^3', xx, y);
+    xPow('7', '2', ' - 3', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -4572,23 +4619,26 @@
       [['behöver samma nämnare.']],
       [['3 är samma sak som 6/2.']]
     ], 1.05);
-    y += 2.6 * F;
-    xx = T.str('=x^7^/^2^-^6^/^2', padL + 30, y);
+    y += 3.2 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = xPow('7', '2', ' - ', xx, y);
+    xx = T.fracSup('6', '2', xx, y);
     T.stepEnd();
 
-    T.str('=x^1^/^2', xx, y);
+    xx = T.str('=', xx + 0.20 * F, y);
+    xx = xPow('1', '2', null, xx, y);
     T.stepEnd();
 
     tanke(y, [
       [['Exponenten 1/2 är ju']],
       [['kvadratroten.']]
     ]);
-    y += 2.2 * F;
+    y += 2.6 * F;
     xx = T.str('=', padL + 30, y);
     T.rot('x', xx, y);
     T.stepEnd();
 
-    y += 2.1 * F;
+    y += 2.3 * F;
     xe = T.str('Svar: ', padL, y);
     xe = T.rot('x', xe, y);
     T.underline(xe, y);
@@ -15997,7 +16047,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* ---------------- scen: konisk pendel "slänggungan" (fy2-1.5 Ex 1) --
+  /* ---------------- scen: konisk pendel "slänggungan" (fy2-1.7 Ex 1) --
    * Stolar i 5,0 m långa kedjor bildar 30° mot lodlinjen — hur lång tid
    * tar ett varv? En formel-insättningsuppgift: figuren ska bära att
    * vinkeln mäts MOT LODLINJEN och att banradien inte behövs. Perioden T
@@ -16235,7 +16285,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* ---------------- scen: vertikal cirkel "vikt i snöre" (fy2-1.4 Ex 1)
+  /* ---------------- scen: vertikal cirkel "vikt i snöre" (fy2-1.5 Ex 1)
    * En 200-gramsvikt i ett 80 cm långt snöre snurras i en vertikal
    * cirkel. a) F_C och F_S i övre läget (6,0 m/s), b) samma i nedre
    * läget (14 m/s), c) minsta farten i övre läget utan att snöret
@@ -16729,7 +16779,7 @@
   }
 
   /* ---------------- scen: kastparabel "Elin sparkar en boll" -----------
-   * (fy2-1.6 Exempel 1) Boll med 15 m/s i 50° mot marken. a) tid till
+   * (fy2-1.8 Exempel 1) Boll med 15 m/s i 50° mot marken. a) tid till
    * högsta punkten (v_y = 0), b) stighöjd, c) kastvidd, d) fart i ned-
    * slaget via Pythagoras. Figuren ritas skalenligt ur fysiken (apex-
    * höjden i px följer y_max/x_max ≈ 0,30, vilket ger startlutningen
@@ -17132,7 +17182,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* ---------------- scen: kast från höjd (fy2-1.6 Exempel 2) -----------
+  /* ---------------- scen: kast från höjd (fy2-1.8 Exempel 2) -----------
    * En boll kastas med 25 m/s i 40° från 1,6 m höjd — hur långt blir
    * kastet? Kärnan: y-ekvationen blir en ANDRAGRADSEKVATION som löses
    * med digitalt hjälpmedel; den negativa roten stryks (blåpennan) och
@@ -34741,7 +34791,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* fy2-1.4 Exempel 2 — den fatala gungan: energiprincipen ger farten,
+  /* fy2-1.6 Exempel 1 — den fatala gungan: energiprincipen ger farten,
    * kraftekvationen i lägsta punkten ger spännkraften. */
   function layoutGungan(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
@@ -34946,7 +34996,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* ---------------- scen: Hubbles banhöjd (fy2-1.5 Ex 3) -------------
+  /* ---------------- scen: Hubbles banhöjd (fy2-1.6 Ex 2) -------------
    * F_C = F_G med Newtons gravitationslag ger banradien r = G·m_j/v²
    * direkt ur farten — teleskopets massa divideras bort. Höjden över
    * jordytan fås genom att jordradien dras bort från banradien

@@ -49,7 +49,7 @@ det vill säga $27^{1/3} = \sqrt[3]{27}$.
 :::
 
 ::: exempel "Exempel 1 — Beräkna utan räknare"
-**Beräkna utan räknare<br>a) $49^{1/2}$<br>b) $5 \cdot 8^{1/3}$<br>c) $27^{2/3}$**
+**Beräkna utan räknare<br>a)&nbsp;$49^{1/2}$&emsp;&emsp;b)&nbsp;$5 \cdot 8^{1/3}$&emsp;&emsp;c)&nbsp;$27^{2/3}$**
 
 ::: handskrift
 typ: rotberakna
@@ -83,7 +83,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Förenkla med potenslagarna"
-**Förenkla $\dfrac{x^{7/2}}{x^3}$.**
+**Förenkla $\dfrac{x^{\frac{7}{2}}}{x^3}$.**
 
 ::: handskrift
 typ: rotforenkla
@@ -94,7 +94,8 @@ Vi använder potenslagen för division och räknar med exponenterna som med
 vanliga bråk:
 
 $$
-\frac{x^{7/2}}{x^3} = x^{7/2 - 3} = x^{7/2 - 6/2} = x^{1/2} = \sqrt{x}
+\frac{x^{\frac{7}{2}}}{x^3} = x^{\frac{7}{2} - 3}
+= x^{\frac{7}{2} - \frac{6}{2}} = x^{\frac{1}{2}} = \sqrt{x}
 $$
 
 **Svar:** $\sqrt{x}$
@@ -125,7 +126,7 @@ $$
 
 ::: sampunkt "Räkna med dem"
 - Alla potenslagar gäller precis som vanligt, även med bråkexponenter.
-- $\dfrac{x^{7/2}}{x^{3}} = x^{7/2 - 3}
-  = x^{1/2} = \sqrt{x}$.
+- $\dfrac{x^{\frac{7}{2}}}{x^{3}} = x^{\frac{7}{2} - 3}
+  = x^{\frac{1}{2}} = \sqrt{x}$.
 :::
 :::

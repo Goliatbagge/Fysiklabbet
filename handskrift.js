@@ -34936,6 +34936,205 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: Hubbles banhöjd (fy2-1.5 Ex 3) -------------
+   * F_C = F_G med Newtons gravitationslag ger banradien r = G·m_j/v²
+   * direkt ur farten — teleskopets massa divideras bort. Höjden över
+   * jordytan fås genom att jordradien dras bort från banradien
+   * (subtraktionen i km, omvandlingen visas i klammern). */
+  function layoutHubble(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var jx = 250, jy = 235, Rj = 70, Ro = 120;
+
+    /* ---- steg 1: jorden och cirkelbanan ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar jorden och Hubbles']],
+      [['cirkelbana. Banradien räknas']],
+      [['från jordens MEDELPUNKT.']]
+    ], 430));
+    T.circle(jx, jy, Rj);
+    T.dot(jx, jy);
+    T.pause(150);
+    (function () {                    /* streckad cirkelbana, glugg i topp */
+      var n = 26;
+      for (var k = 0; k < n; k++) {
+        var a0 = (k / n) * Math.PI * 2, a1 = a0 + (0.55 / n) * Math.PI * 2;
+        var mid = (a0 + a1) / 2;
+        /* hoppa över strecken bakom teleskopet (toppen = 1,5π) */
+        var d = Math.abs(mid - 1.5 * Math.PI);
+        if (Math.min(d, Math.PI * 2 - d) < 0.34) continue;
+        T.line([jx + Ro * Math.cos(a0), jy + Ro * Math.sin(a0)],
+               [jx + Ro * Math.cos(a1), jy + Ro * Math.sin(a1)]);
+      }
+    })();
+    T.pause(150);
+    /* teleskopet överst i banan: kropp + solpaneler */
+    T.rect(jx - 12, jy - Ro - 9, jx + 12, jy - Ro + 9);
+    T.rect(jx - 36, jy - Ro - 5, jx - 16, jy - Ro + 5);
+    T.rect(jx + 16, jy - Ro - 5, jx + 36, jy - Ro + 5);
+    T.pause(150);
+    T.line([jx, jy], [jx - Rj * 0.707, jy + Rj * 0.707]);  /* jordradien */
+    T.stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in farten och det jag']],
+      [['vet om jorden ur tabellen.']],
+      [['Höjden ', 0], ['h', 1], [' över ytan är det jag', 0]],
+      [['söker.']]
+    ], 430));
+    T.arrow([jx - 40, jy - Ro], [jx - 108, jy - Ro], BLUE);
+    T.lbl('v=7 560 m/s', jx - 44 - T.lblW('v=7 560 m/s'), jy - Ro - 18,
+          BLUE);
+    T.pause(150);
+    T.lbl('r_j=6 378 km', 30, jy + Ro, BLUE);
+    T.pause(150);
+    T.lbl('m_j=5,972·10^2^4 kg', 30, jy + Ro + 30, BLUE);
+    T.pause(150);
+    T.dblArrow([jx + Rj + 5, jy], [jx + Ro - 5, jy], BLUE);
+    T.lbl('h', jx + (Rj + Ro) / 2 - 4, jy - 12, BLUE);
+    T.stepEnd();
+
+    /* ---- kraftekvationen ---- */
+    var y = 560;
+    T.tanke(T.bubble(120, T.bubbleTop(430 + 100), bw, [
+      [['Den enda kraften på Hubble är']],
+      [['gravitationskraften. Det är den']],
+      [['som håller teleskopet i banan.']]
+    ]));
+    T.str('Gravitationen ger centripetalkraften', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.str('F_C=F_G', padL, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Sätter in uttrycken för båda']],
+      [['krafterna. Hubbles massa ', 0], ['m', 1]],
+      [['står i båda led och kan']],
+      [['divideras bort.']]
+    ]));
+    var xa = T.fracH('m·v^2', 'r', padL, y);
+    var xb = T.str('=G·', xa + 0.1 * F, y);
+    T.fracH('m·m_j', 'r^2', xb, y);
+    T.pause(250);
+    (function () {                    /* stryk m i båda täljarna */
+      var mAdv = T.adv('m');
+      var nwL = T.adv('m·v^2');
+      var wL = Math.max(nwL, T.adv('r')) + 0.3 * F;
+      var xnL = padL + (wL - nwL) / 2, ynL = y - 0.48 * F;
+      T.line([xnL - 4, ynL + 0.28 * F], [xnL + mAdv + 4, ynL - 0.72 * F],
+             BLUE);
+      var nwR = T.adv('m·m_j');
+      var wR = Math.max(nwR, T.adv('r^2')) + 0.3 * F;
+      var xnR = xb + (wR - nwR) / 2, ynR = y - 0.70 * F;
+      T.line([xnR - 4, ynR + 0.28 * F], [xnR + mAdv + 4, ynR - 0.72 * F],
+             BLUE);
+    })();
+    T.stepEnd();
+
+    y += adv + 2.6 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Massan är borta: banan beror']],
+      [['inte på hur tungt teleskopet är.']],
+      [['Multiplicerar båda led med ', 0], ['r', 1]],
+      [['och löser ut banradien.']]
+    ]));
+    var xc = T.fracH('v^2', 'r', padL, y);
+    xc = T.str('=G·', xc + 0.1 * F, y);
+    xc = T.fracH('m_j', 'r^2', xc, y);
+    xc = T.str('⟺v^2=G·', xc + 0.15 * F, y);
+    xc = T.fracH('m_j', 'r', xc, y);
+    xc = T.str('⟺r=G·', xc + 0.15 * F, y);
+    T.fracH('m_j', 'v^2', xc, y);
+    T.stepEnd();
+
+    /* ---- klammer + insättning för banradien ---- */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Farten är given. Jordens massa']],
+      [['tar jag ur tabellen.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'G=6,67·10^−^1^1 Nm^2/kg^2',
+      'm_j=5,972·10^2^4 kg (jordens massa)',
+      'v=7 560 m/s'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('5,972·10^2^4', '7 560^2',
+            T.str('r=6,67·10^−^1^1·', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.str('=6,9695...·10^6 m', padL + 24, y);
+    T.stepEnd();
+
+    /* ---- höjden över jordytan ---- */
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Det är avståndet till jordens']],
+      [['medelpunkt. Jag drar bort']],
+      [['jordradien för att få höjden']],
+      [['över ytan.']]
+    ]));
+    T.str('Höjd över jordytan', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('h=r−r_j', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jordradien ur tabellen. Bägge']],
+      [['avstånden skrivs i kilometer.']]
+    ]));
+    var klam2 = valueBracket(acts, [
+      'r=6,9695...·10^6 m=6 969,5... km',
+      'r_j=6 378 km (jordens radie)'
+    ], padL, y, T.s, F, { rs: 0.75 });
+    T.stepEnd();
+    y = klam2.yEnd;
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('h=6 969,5...−6 378=591,5... km', padL, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
+      [['Först nu avrundar jag. Talen i']],
+      [['subtraktionen är nästan lika']],
+      [['stora, så bara två siffror i']],
+      [['svaret är säkra: 590 km.']]
+    ]));
+    var avrS = '≈590 km';
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
+    else { y += adv + 1.2 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Rimligt: satelliter nära jorden']],
+      [['kretsar några hundra kilometer']],
+      [['upp. Det är en tunn hinna jämfört']],
+      [['med jordradien på 6 378 km.']]
+    ]));
+    T.underline(T.str('Svar: 590 km', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ifylld prick: tät spiral inåt — ser ut som en ritad punkt */
   function dotPts(cx, cy) {
     var pts = [];
@@ -35990,7 +36189,8 @@
                    bindningsenergi: layoutBindningsenergi,
                    sonderfallsformler: layoutSonderfallsformler,
                    betaenergi: layoutBetaenergi,
-                   gungan: layoutGungan };
+                   gungan: layoutGungan,
+                   hubble: layoutHubble };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

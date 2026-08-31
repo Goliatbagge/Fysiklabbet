@@ -1533,7 +1533,7 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn):not(.artike
     color: var(--lab-ink-muted);
 }
 
-/* Fotnot under avsnittslistan: * framför numret = fördjupningsavsnitt */
+/* Fotnot under avsnittslistan: * efter numret = fördjupningsavsnitt */
 .lab-sections-fotnot {
     margin-top: 10px;
     padding-left: 4px;

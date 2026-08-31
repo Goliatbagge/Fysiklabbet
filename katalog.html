@@ -2634,7 +2634,7 @@
                                                     e.preventDefault();
                                                     pickSection(s.num);
                                                 }}>
-                                                <span className="lab-section-item-num">{s.fordjupning ? '*' : ''}{s.num}</span>
+                                                <span className="lab-section-item-num">{s.num}{s.fordjupning ? '*' : ''}</span>
                                                 <span className="lab-section-item-title">{emTitle(s.title)}</span>
                                                 <span className="lab-section-item-arrow">
                                                     {section === s.num ? '●' : '→'}
@@ -2642,7 +2642,7 @@
                                             </a>
                                         ))}
                                         {sections.some(s => s.fordjupning) && (
-                                            <div className="lab-sections-fotnot">* Fördjupning, utanför kursens kärna</div>
+                                            <div className="lab-sections-fotnot">* Fördjupning</div>
                                         )}
                                         <div className="lab-sections-aside-foot" />
                                     </aside>
@@ -2659,7 +2659,7 @@
                                                     </span>
                                                 </div>
                                                 <h2 className="lab-section-title">
-                                                    <span className="lab-section-title-num">{activeSection.fordjupning ? '*' : ''}{activeSection.num}</span>
+                                                    <span className="lab-section-title-num">{activeSection.num}{activeSection.fordjupning ? '*' : ''}</span>
                                                     {emTitle(activeSection.title)}
                                                 </h2>
 

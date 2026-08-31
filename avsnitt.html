@@ -686,7 +686,7 @@
                             AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : ''}
                         </div>
                         <h1 className="lab-article-title">
-                            <span className="lab-article-title-num">{meta.fordjupning ? '*' : ''}{meta.num}</span>
+                            <span className="lab-article-title-num">{meta.num}{meta.fordjupning ? '*' : ''}</span>
                             {emTitle(meta.title)}
                         </h1>
                         {meta.description && (
@@ -725,7 +725,7 @@
                     </div>
 
                     <h1 className="lab-article-title">
-                        <span className="lab-article-title-num">{meta.fordjupning ? '*' : ''}{meta.num}</span>
+                        <span className="lab-article-title-num">{meta.num}{meta.fordjupning ? '*' : ''}</span>
                         {emTitle(fm.title || meta.title)}
                     </h1>
 

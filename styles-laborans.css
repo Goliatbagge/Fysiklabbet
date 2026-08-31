@@ -3264,6 +3264,19 @@ button.lab-card-disabled { pointer-events: none; }
     background: rgba(200, 50, 74, 0.08);
 }
 
+/* Understrykning i löptext (<u>) lyfter fram en avgörande förutsättning,
+   till exempel "konstant fart" i cirkulär rörelse. Ingår ett begrepp i
+   frasen släcks dess streckade understrykning, så att uttrycket får EN
+   sammanhängande linje under sig i stället för två parallella streck. */
+body.laborans u {
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+}
+
+body.laborans u .lab-term {
+    text-decoration: none;
+}
+
 .lab-term-tooltip {
     position: fixed;
     background: var(--lab-ink);

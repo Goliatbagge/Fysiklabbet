@@ -248,6 +248,15 @@ inline-SVG med pilar, beteckningar, valfri storleksetikett, kompass och
 kropp. Vinklar i grader, 0 = höger, 90 = upp. Strecka okända krafter med
 `dashed: true` och magnitud `'?'`. Se kommentaren ovanför funktionen.
 
+**Resultanten streckas.** En sammansatt kraft (`F_R`, `F_C`) ritas med
+streckat skaft och helt pilhuvud, i samma färg som de övriga pilarna.
+Annars läses ett diagram med `F_S`, `F_G` och `F_C` som om det verkade tre
+krafter på kroppen i stället för två. `makeForceDiagram` och
+`makeCircularPath` gör det automatiskt när etiketten är `F_R` eller `F_C`
+(`dashed` respektive `fcDash` skriver över). En kraft som faktiskt verkar
+(`F_f`) och en acceleration (`a_C`) ritas hela. Samma konvention gäller i
+teorins figurer, se "Kraftfigurer" i CLAUDE.md.
+
 **Storlek = pixellängd, inte newton.** Välj proportionellt så dubbelt
 så stor kraft → dubbelt så lång pil. Tumregel: 3 px/N för krafter
 30–80 N (pilar 90–240 px).
@@ -436,7 +445,7 @@ Se kommentaren ovanför varje funktion för fullständigt API.
 
 **Avslöja aldrig svaret i figuren.** Är en vinkel/kraft/sträcka det sökta
 ska den ritas med ett **symboliskt** värde (`'α'`, `'?'`, `'d = ?'`) eller
-med en *annan* (icke-svars-)vinkel — aldrig med facit-värdet utsatt.
+med en *annan* (icke-svars-)vinkel. Det sökta värdet skrivs aldrig ut.
 Exempel: doseringsvinkeln (svar $30^\circ$) ritas som `α` vid en godtycklig
 lutning; stegens kraftbild ritas **utan** krafter i frågan och **med** i
 lösningen (eleven ska själv identifiera krafterna).

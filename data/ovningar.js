@@ -825,7 +825,11 @@ function makeBField(opts) {
 //       angle,                        // grader: 0 = höger, 90 = upp, 180 = vänster
 //       length,                       // pilens längd i px (du skalar manuellt)
 //       color,                        // default lab-accent röd
-//       dashed,                       // boolean — för obekanta krafter
+//       dashed,                       // boolean — streckat skaft. Sätts
+//                                     // AUTOMATISKT för en resultant
+//                                     // (F_R, F_C); ange den själv för en
+//                                     // obekant, sökt kraft. Se
+//                                     // "Kraftfigurer" i CLAUDE.md.
 //       showAngle,                    // boolean — rita streckad horisontalreferens + båge med vinkel
 //       angleLabel,                   // sträng — etikett vid bågen (default: `${angle}°`)
 //     }]
@@ -983,7 +987,11 @@ function makeForceDiagram(opts) {
     for (const vd of vectorData) {
         const v = vd.v;
         const color = v.color || '#c8324a';
-        const dash = v.dashed ? ` stroke-dasharray="6 4"` : '';
+        // Resultanten ritas med streckat skaft, så att den inte läses som
+        // ännu en kraft som verkar på kroppen (se CLAUDE.md, Kraftfigurer).
+        const resultant = /^F_(R|C)\b/.test(v.label || '');
+        const dash = (v.dashed === undefined ? resultant : v.dashed)
+            ? ` stroke-dasharray="6 4"` : '';
         const x2 = vd.x2 + tx, y2 = vd.y2 + ty;
         const lx = vd.lx + tx, ly = vd.ly + ty;
 
@@ -2237,7 +2245,11 @@ function makeTorqueArm(opts) {
 //     r,                     // banradie i px (default 110)
 //     angleDeg,              // föremålets vinkelläge (0=höger, 90=topp)
 //     radiusLabel, vLabel,   // 'r = 50 m', 'v = 20 m/s'
-//     showFc, fcLabel,       // centripetalpil mot centrum (t.ex. 'a_C', 'F_C')
+//     showFc, fcLabel,       // pil in mot centrum (t.ex. 'a_C', 'F_C', 'F_f')
+//     fcDash,                // streckat skaft. Sätts AUTOMATISKT när
+//                            // etiketten är en resultant (F_C, F_R) och
+//                            // lämnas hel för en verklig kraft (F_f) eller
+//                            // en acceleration (a_C).
 //     point,                 // true → rita punkt i stället för bil
 //     objLabel,              // valfri etikett vid föremålet
 //   }
@@ -2249,15 +2261,26 @@ function makeCircularPath(opts) {
     const tang = a + Math.PI / 2;
     const vlen = opts.vLen || 56;
     const vx = ox + vlen * Math.cos(tang), vy = oy - vlen * Math.sin(tang);
-    let fcx = null, fcy = null;
-    if (opts.showFc) { fcx = ox + (0 - ox) * 0.36; fcy = oy + (0 - oy) * 0.36; }
+    let fcx = null, fcy = null, fclx = 0, fcly = 0;
+    if (opts.showFc) {
+        fcx = ox + (0 - ox) * 0.36; fcy = oy + (0 - oy) * 0.36;
+        // Etiketten vinkelrätt ut från pilen, på motsatt sida mot
+        // hastighetspilen. Låg tidigare 10 px till höger om mittpunkten och
+        // hamnade då ovanpå föremålet (se CLAUDE.md: en kraftetikett får
+        // aldrig ligga på objektet pilen verkar på).
+        fclx = (ox + fcx) / 2 - 15 * Math.cos(tang);
+        fcly = (oy + fcy) / 2 + 15 * Math.sin(tang) + 4;
+    }
     // grov etikettbredd (utan taggar) för att räkna viewBox så inget klipps
     const estW = s => String(s).replace(/<[^>]+>/g, '').length * 7.2 + 8;
     const pts = [[-r, 0], [r, 0], [0, -r], [0, r], [ox, oy], [vx, vy]];
     if (fcx != null) pts.push([fcx, fcy]);
     if (opts.vLabel) { const w = estW(opts.vLabel); pts.push([vx + 6 + w, vy - 8], [vx + 6, vy - 8]); }
     if (opts.radiusLabel) { const w = estW(opts.radiusLabel); pts.push([ox / 2 - w / 2, oy / 2 - 9], [ox / 2 + w / 2, oy / 2 - 9]); }
-    if (opts.showFc && opts.fcLabel !== false) { const w = estW(opts.fcLabel || 'F_C'); pts.push([(ox + fcx) / 2 + 10 + w, (oy + fcy) / 2 + 2]); }
+    if (opts.showFc && opts.fcLabel !== false) {
+        const w = estW(opts.fcLabel || 'F_C');
+        pts.push([fclx - w / 2, fcly - 11], [fclx + w / 2, fcly + 4]);
+    }
     if (opts.objLabel) { const w = estW(opts.objLabel); pts.push([ox - w / 2, oy - 24], [ox + w / 2, oy - 24]); }
     let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
     for (const p of pts) { minX = Math.min(minX, p[0]); maxX = Math.max(maxX, p[0]); minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1]); }
@@ -2273,8 +2296,14 @@ function makeCircularPath(opts) {
     if (opts.radiusLabel) body += sceneText((cx + OX) / 2, (cy + OY) / 2 - 9, sceneQty(opts.radiusLabel), { color: SCENE_MUTED, size: 13 });
     if (opts.showFc) {
         const FX = OX + (cx - OX) * 0.36, FY = OY + (cy - OY) * 0.36;
-        body += sceneArrow(OX, OY, FX, FY, { color: SCENE_ACCENT });
-        if (opts.fcLabel !== false) body += sceneText((OX + FX) / 2 + 10, (OY + FY) / 2 + 2, sceneVar(opts.fcLabel || 'F_C'), { color: SCENE_ACCENT, anchor: 'start', size: 14 });
+        // Centripetalkraften är ingen egen kraft utan en resultant, och
+        // streckas därför. F_f (friktionen som håller bilen i kurvan) och
+        // a_C (en acceleration) ritas hela. Se CLAUDE.md, Kraftfigurer.
+        const fcL = opts.fcLabel || 'F_C';
+        const fcRes = opts.fcDash === undefined ? /^F_(C|R)\b/.test(fcL) : opts.fcDash;
+        body += sceneArrow(OX, OY, FX, FY,
+            { color: SCENE_ACCENT, dash: fcRes ? '6 4' : '' });
+        if (opts.fcLabel !== false) body += sceneText(fclx + offX, fcly + offY, sceneVar(fcL), { color: SCENE_ACCENT, size: 14 });
     }
     if (opts.point) body += `<circle cx="${OX.toFixed(1)}" cy="${OY.toFixed(1)}" r="6" fill="${SCENE_INK}"/>`;
     else body += `<g transform="translate(${OX.toFixed(1)},${OY.toFixed(1)}) rotate(${(-tang * 180 / Math.PI).toFixed(1)})"><rect x="-17" y="-9" width="34" height="18" rx="3" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.5"/><line x1="6" y1="-9" x2="6" y2="9" stroke="${SCENE_INK}" stroke-width="1"/></g>`;

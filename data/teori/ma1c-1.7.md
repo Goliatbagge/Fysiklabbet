@@ -43,9 +43,9 @@ definierat.
 :::
 :::
 
-**Varning!** $7^0$ är inte 0. Värdet är 1. Att exponenten är noll betyder
-alltså inte att potensen blir noll, och det är en av de vanligaste
-missuppfattningarna.
+**Varning!** Värdet av ett tal upphöjt till 0 är inte 0. Värdet är 1. Att
+exponenten är noll betyder alltså inte att potensen blir noll, och det är en
+av de vanligaste missuppfattningarna.
 
 ::: exempel "Exempel 1 — Exponenten noll"
 **Beräkna<br>a)&nbsp;$25^0$&emsp;&emsp;b)&nbsp;$4^0 + (-7)^0$**

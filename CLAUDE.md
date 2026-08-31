@@ -1279,6 +1279,27 @@ React-textbarn utan `dangerouslySetInnerHTML`) går varken `<sup>` eller
 math-block. Skriv då `10^-17` (caret) eller behåll Unicode som nödlösning —
 men välj alltid `<sup>`/math-block så fort kontexten faktiskt renderar dem.
 
+### Vinklar betecknas α, inte θ
+
+**En vinkel skrivs med *α* (alfa) — och därefter *β*, *γ*, *v* — aldrig med
+*θ* (theta)** (uttryckligt önskemål 2026-08-31). Det är den beteckning
+svenska läroböcker i fysik och matematik använder, och den eleven möter på
+formelbladet; *θ* hör hemma i engelskspråkig litteratur och känns främmande
+i en svensk genomgång. Gäller överallt: teori, övningar, exit tickets,
+nationella prov, pennlösningarnas skisser, figurer (KaTeX såväl som SVG),
+simuleringar och nyhetsartiklar.
+
+- Skriv `\alpha` i KaTeX (`\\alpha` i JS-strängar) och α i SVG-etiketter,
+  kursivt som alla andra variabler (`<tspan font-style="italic">α</tspan>`).
+- **Vinkeländringar** följer med: `$\Delta \alpha$`, aldrig `$\Delta \theta$`.
+- **Undantag:** en beteckning som hör till en etablerad formel där något
+  annat är standard behålls — sfäriska koordinater, fasvinkeln *φ* i
+  svängningar, *λ* för våglängd. Det är *θ* som generell vinkelbeteckning
+  som är bortvald.
+- Äldre text saneras inte retroaktivt utan att användaren ber om det (det
+  finns *θ* kvar i bland annat `fy2-1.7`, `fy2-5.3`, `data/ovningar.js` och
+  `handskrift.js`), men **allt nyskrivet och omskrivet använder α**.
+
 ### Standardbeteckningar för krafter
 
 - **Tyngdkraften betecknas ALLTID `F_G` med STORT `G`** — aldrig `F_g`

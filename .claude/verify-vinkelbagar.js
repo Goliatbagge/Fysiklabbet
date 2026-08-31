@@ -142,9 +142,18 @@ for (const file of files) {
         for (let i = 0; i + 3 < pts.length; i += 2)
           peri += Math.hypot(pts[i + 2] - pts[i], pts[i + 3] - pts[i + 1]);
         if (peri > 60) return false;
-        for (let i = 0; i + 1 < pts.length; i += 2)
+        // Kandidatpunkter: pilspetsens hörn OCH kantmittpunkter — skaftet
+        // ska sluta vid pilhuvudets BAS (basens mittpunkt), inte spetsen.
+        const cand = [];
+        const n = pts.length / 2;
+        for (let i = 0; i < n; i++) {
+          const px = pts[2 * i], py = pts[2 * i + 1];
+          const qx = pts[2 * ((i + 1) % n)], qy = pts[2 * ((i + 1) % n) + 1];
+          cand.push([px, py], [(px + qx) / 2, (py + qy) / 2]);
+        }
+        for (const [cx, cy] of cand)
           for (const [ex, ey] of [[x1, y1], [x2, y2]])
-            if (Math.hypot(pts[i] - ex, pts[i + 1] - ey) < 3) return true;
+            if (Math.hypot(cx - ex, cy - ey) < 3) return true;
         return false;
       });
       if (hasArrowhead) continue;

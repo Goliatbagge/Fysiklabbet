@@ -153,6 +153,28 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // Formatera tal med komma som decimaltecken (svensk standard)
+        const formatNumber = (num, decimals = 1) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Kompakt reglage-rad för inställningsrutan uppe till höger i
+        // fullskärm: etikett + värde på en rad, glidaren under. Bottenpanelen
+        // (.fs-controls) migrerades hit eftersom den låg ovanpå grafens
+        // negativa v-område (placeringsregeln, omskriven 2026-08-31).
+        const StSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span>{label}</span>
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
+                        {formatNumber(value, decimals)} {unit}
+                    </span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
         const VelocityTimeSimulation = () => {
             const [motionType, setMotionType] = useState('constant-acceleration'); // 'constant-velocity', 'constant-acceleration', 'variable-acceleration'
             const [v0, setV0] = useState(0); // Initial velocity (m/s)
@@ -164,7 +186,7 @@
             const [maxTime, setMaxTime] = useState(10);
             const [tangentTime, setTangentTime] = useState(5); // Time for tangent point
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const [controlsOpen, setControlsOpen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
             const sceneWrapRef = useRef(null);
 
             useEffect(() => {
@@ -191,11 +213,6 @@
                 } else {
                     (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
                 }
-            };
-
-            // Helper function to format numbers with comma as decimal separator (Swedish standard)
-            const formatNumber = (num, decimals = 1) => {
-                return num.toFixed(decimals).replace('.', ',');
             };
 
             // Calculate velocity at time t
@@ -642,8 +659,30 @@
                                         )}
                                     </button>
 
-                                    {/* Rörelsetyp + visningsval uppe till höger */}
+                                    {/* Inställningsrutan uppe till höger — hopfällbar, och i fullskärm
+                                        bor reglagen här (placeringsregeln, omskriven 2026-08-31:
+                                        bottenpanelen .fs-controls låg ovanpå grafens negativa
+                                        v-område när man drog i glidarna). */}
+                                    {!togglesOpen ? (
+                                        <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                                                aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                                <line x1="4" y1="8" x2="20" y2="8" />
+                                                <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                                <line x1="4" y1="16" x2="20" y2="16" />
+                                                <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                            </svg>
+                                        </button>
+                                    ) : (
                                     <div className="scene-toggles">
+                                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                                <path d="M6 6l12 12M18 6L6 18" />
+                                            </svg>
+                                        </button>
                                         <div className="st-title">Rörelse</div>
                                         <label>
                                             <input type="radio" name="motionType-scene" checked={motionType === 'constant-velocity'}
@@ -671,70 +710,42 @@
                                                    onChange={(e) => setShowArea(e.target.checked)} />
                                             <span>Area (sträcka)</span>
                                         </label>
-                                    </div>
-
-                                    {/* Fullskärm: glidare i hopfällbar panel i underkanten */}
-                                    {isFullscreen && (
-                                        <>
-                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                                    <span className="fs-label" style={{ minWidth: 150 }}>Starthastighet <em>v</em>₀</span>
-                                                    <input type="range" style={{ flex: 1 }} min="-10" max="20" step="1"
-                                                           value={v0} onChange={(e) => setV0(parseFloat(e.target.value))} />
-                                                    <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{formatNumber(v0, 0)} m/s</span>
+                                        {/* Reglagen visas här BARA i fullskärm — i normalläget finns
+                                            de i sidopanelen (aldrig dubblerade). */}
+                                        {isFullscreen && (
+                                            <React.Fragment>
+                                                <div className="st-title mt">Reglage</div>
+                                                <div className="st-sliders">
+                                                    <StSlider label={<span>Starthastighet <em>v</em>₀</span>} value={v0}
+                                                              min={-10} max={20} step={1} unit="m/s" decimals={0}
+                                                              onChange={(val) => setV0(val)} />
+                                                    {motionType !== 'constant-velocity' && (
+                                                        <StSlider label={<span>Acceleration <em>a</em></span>} value={acceleration}
+                                                                  min={-5} max={5} step={0.1} unit="m/s²" decimals={1}
+                                                                  onChange={(val) => setAcceleration(val)} />
+                                                    )}
+                                                    {showSlope && (
+                                                        <StSlider label={<span>Tangeringspunkt <em>t</em></span>} value={tangentTime}
+                                                                  min={0} max={20} step={0.5} unit="s" decimals={1}
+                                                                  onChange={(val) => setTangentTime(val)} />
+                                                    )}
+                                                    {showArea && (
+                                                        <React.Fragment>
+                                                            <StSlider label="Area, starttid" value={areaStart}
+                                                                      min={0} max={19} step={0.5} unit="s" decimals={1}
+                                                                      onChange={(val) => {
+                                                                          setAreaStart(val);
+                                                                          if (val >= areaEnd) setAreaEnd(val + 1);
+                                                                      }} />
+                                                            <StSlider label="Area, sluttid" value={areaEnd}
+                                                                      min={areaStart + 0.5} max={20} step={0.5} unit="s" decimals={1}
+                                                                      onChange={(val) => setAreaEnd(val)} />
+                                                        </React.Fragment>
+                                                    )}
                                                 </div>
-                                                {motionType !== 'constant-velocity' && (
-                                                    <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                                        <span className="fs-label" style={{ minWidth: 150 }}>Acceleration <em>a</em></span>
-                                                        <input type="range" style={{ flex: 1 }} min="-5" max="5" step="0.1"
-                                                               value={acceleration} onChange={(e) => setAcceleration(parseFloat(e.target.value))} />
-                                                        <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{formatNumber(acceleration, 1)} m/s²</span>
-                                                    </div>
-                                                )}
-                                                {showSlope && (
-                                                    <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                                        <span className="fs-label" style={{ minWidth: 150 }}>Tangeringspunkt <em>t</em></span>
-                                                        <input type="range" style={{ flex: 1 }} min="0" max="20" step="0.5"
-                                                               value={tangentTime} onChange={(e) => setTangentTime(parseFloat(e.target.value))} />
-                                                        <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{formatNumber(tangentTime, 1)} s</span>
-                                                    </div>
-                                                )}
-                                                {showArea && (
-                                                    <>
-                                                        <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                                            <span className="fs-label" style={{ minWidth: 150 }}>Area, starttid</span>
-                                                            <input type="range" style={{ flex: 1 }} min="0" max="19" step="0.5"
-                                                                   value={areaStart}
-                                                                   onChange={(e) => {
-                                                                       const val = parseFloat(e.target.value);
-                                                                       setAreaStart(val);
-                                                                       if (val >= areaEnd) setAreaEnd(val + 1);
-                                                                   }} />
-                                                            <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{formatNumber(areaStart, 1)} s</span>
-                                                        </div>
-                                                        <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                                            <span className="fs-label" style={{ minWidth: 150 }}>Area, sluttid</span>
-                                                            <input type="range" style={{ flex: 1 }} min={areaStart + 0.5} max="20" step="0.5"
-                                                                   value={areaEnd} onChange={(e) => setAreaEnd(parseFloat(e.target.value))} />
-                                                            <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{formatNumber(areaEnd, 1)} s</span>
-                                                        </div>
-                                                    </>
-                                                )}
-                                            </div>
-                                            <button
-                                                className="fs-toggle-handle"
-                                                onClick={() => setControlsOpen(o => !o)}
-                                                title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                                                aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                                                aria-expanded={controlsOpen}>
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                     stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                                                    <path d="M6 9l6 6 6-6"/>
-                                                </svg>
-                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                                            </button>
-                                        </>
+                                            </React.Fragment>
+                                        )}
+                                    </div>
                                     )}
                                     </div>
 

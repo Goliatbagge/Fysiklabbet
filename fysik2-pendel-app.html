@@ -187,25 +187,52 @@
             opacity: 0.85;
         }
 
-        /* Fullskärmsläge: scenen är #canvas-container. Reglageraden i den
-           flytande panelen (.fs-controls, global stil i styles-laborans-sim.css) */
+        /* Fullskärmsläge: scenen är #canvas-container. Styrknapparna och (i
+           fullskärm) glidarna bor i den hopfällbara inställningsrutan uppe
+           till höger — bottenpanelen .fs-controls låg ovanpå scenen och
+           skymde kulan vid lång tråd (placeringsregeln 2026-08-31).
+           Hopfällbarheten (.st-hide/.st-show-btn) och reglageraderna
+           (.st-slider) är centrala klasser i styles-laborans-sim.css; basen
+           för rutan definieras här eftersom sidan inte använder .scene-wrap. */
         #canvas-container {
             user-select: none;
             -webkit-user-select: none;
         }
-        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
-        .fs-controls .fs-row input[type="range"] { flex: 1; }
-        .fs-controls .fs-label { min-width: 128px; }
-        .fs-controls .fs-value { min-width: 82px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 10;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-val { font-weight: 600; color: var(--lab-ink, #0f1620); white-space: nowrap; }
+        .scene-toggles .st-actions { display: flex; gap: 8px; }
+        .scene-toggles .st-actions .canvas-btn { flex: 1; }
+        /* Glidarna visas BARA i fullskärm — i normalläget bor de i höger-
+           spalten (aldrig dubblerade). Ren CSS-gate, ingen JS behövs. */
+        #st-reglage { display: none; }
+        #canvas-container:fullscreen #st-reglage,
+        #canvas-container:-webkit-full-screen #st-reglage { display: block; }
+        #canvas-container:fullscreen .scene-toggles,
+        #canvas-container:-webkit-full-screen .scene-toggles {
+            max-height: calc(100vh - 28px); overflow-y: auto;
+        }
 
-        /* Mobil: styrknapparna får inte täcka breadcrumb/titel — flytta ned
-           dem under titelblocket, i scenens tomma övre yta. */
+        /* Mobil: rutan får inte täcka breadcrumb/titel — flytta ned den
+           under titelblocket, i scenens tomma övre yta (sidan använder inte
+           .scene-wrap, så sektion 8-docken gäller inte här). */
         @media (max-width: 600px) {
-            #simulation-controls {
+            .scene-toggles {
                 top: 9rem;
                 right: auto;
                 left: 1rem;
-                align-items: flex-start;
             }
             .canvas-btn {
                 padding: 0.35rem 0.7rem;
@@ -291,19 +318,61 @@
                 </div>
                 <h1 class="text-2xl md:text-4xl font-bold tracking-tight" style="background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(200, 50, 74, 0.4));">Plan pendel (matematisk)</h1>
             </div>
-            <div id="simulation-controls" class="absolute top-4 right-4 flex flex-col gap-3 z-10">
-                <div class="flex gap-3">
+            <!-- Inställningsrutan uppe till höger: styrknapparna alltid, och i
+                 fullskärm även glidarna (#st-reglage, CSS-gatad ovan). -->
+            <div id="scene-toggles" class="scene-toggles">
+                <button id="st-hide" class="st-hide" aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+                <div class="st-title">Rörelse</div>
+                <div class="st-actions">
                     <button id="canvas-pause-button" class="canvas-btn canvas-btn-orange" disabled>
-                        ⏸ Pausa
+                        Pausa
                     </button>
                     <button id="canvas-abort-button" class="canvas-btn canvas-btn-red" disabled>
-                        ⏹ Återställ
+                        Återställ
                     </button>
                 </div>
-                <button id="canvas-timing-button" class="canvas-btn canvas-btn-cyan" disabled>
-                    ⏱ Ta tiden för 10 pendlingar
+                <button id="canvas-timing-button" class="canvas-btn canvas-btn-cyan" disabled style="margin-top: 6px;">
+                    Ta tiden för 10 pendlingar
                 </button>
+                <div id="st-reglage">
+                    <div class="st-title" style="margin-top: 9px;">Reglage</div>
+                    <div class="st-sliders" id="st-sliders">
+                        <div class="st-slider">
+                            <div class="st-slider-top">
+                                <span>Trådlängd <em>l</em></span>
+                                <span class="st-val" id="fs-length-value">1,50 m</span>
+                            </div>
+                            <input id="fs-length-slider" type="range" min="0.5" max="5" step="0.1" value="1.5">
+                        </div>
+                        <div class="st-slider">
+                            <div class="st-slider-top">
+                                <span>Tyngdfaktor <em>g</em></span>
+                                <span class="st-val" id="fs-gravity-value">9,81 m/s²</span>
+                            </div>
+                            <input id="fs-gravity-slider" type="range" min="1" max="25" step="0.1" value="9.81">
+                        </div>
+                        <div class="st-slider">
+                            <div class="st-slider-top">
+                                <span>Massa <em>m</em></span>
+                                <span class="st-val" id="fs-mass-value">150 g</span>
+                            </div>
+                            <input id="fs-mass-slider" type="range" min="10" max="300" step="5" value="150">
+                        </div>
+                        <div class="st-slider">
+                            <div class="st-slider-top">
+                                <span>Startvinkel <em>α</em></span>
+                                <span class="st-val" id="fs-angle-value">0°</span>
+                            </div>
+                            <input id="fs-angle-slider" type="range" min="0" max="25" step="1" value="0">
+                        </div>
+                    </div>
+                </div>
             </div>
+            <button id="st-show-btn" class="st-show-btn" style="display: none; z-index: 10;" aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="8" x2="20" y2="8"/><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none"/></svg>
+            </button>
             <button id="fs-btn" class="fs-btn" aria-label="Fullskärm" title="Fullskärm">
                 <svg id="fs-icon-expand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
@@ -311,34 +380,6 @@
                 <svg id="fs-icon-compress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
                     <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
                 </svg>
-            </button>
-            <div id="fs-controls" class="fs-controls collapsed">
-                <div class="fs-row">
-                    <span class="fs-label">Trådlängd <em>l</em></span>
-                    <input id="fs-length-slider" type="range" min="0.5" max="5" step="0.1" value="1.5">
-                    <span class="fs-value" id="fs-length-value">1,50 m</span>
-                </div>
-                <div class="fs-row">
-                    <span class="fs-label">Tyngdfaktor <em>g</em></span>
-                    <input id="fs-gravity-slider" type="range" min="1" max="25" step="0.1" value="9.81">
-                    <span class="fs-value" id="fs-gravity-value">9,81 m/s²</span>
-                </div>
-                <div class="fs-row">
-                    <span class="fs-label">Massa <em>m</em></span>
-                    <input id="fs-mass-slider" type="range" min="10" max="300" step="5" value="150">
-                    <span class="fs-value" id="fs-mass-value">150 g</span>
-                </div>
-                <div class="fs-row">
-                    <span class="fs-label">Startvinkel <em>α</em></span>
-                    <input id="fs-angle-slider" type="range" min="0" max="25" step="1" value="0">
-                    <span class="fs-value" id="fs-angle-value">0°</span>
-                </div>
-            </div>
-            <button id="fs-toggle-handle" class="fs-toggle-handle" aria-expanded="false" title="Visa reglage">
-                <svg id="fs-toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg);">
-                    <path d="M6 9l6 6 6-6"/>
-                </svg>
-                <span id="fs-toggle-text">Reglage</span>
             </button>
         </div>
         <div class="w-full lg:w-1/2 p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto"
@@ -928,28 +969,28 @@
 
                     // Update pause button text
                     if (simulationState === 'running') {
-                        canvasPauseButton.textContent = '⏸ Pausa';
+                        canvasPauseButton.textContent = 'Pausa';
                     } else if (simulationState === 'paused') {
-                        canvasPauseButton.textContent = '▶ Fortsätt';
+                        canvasPauseButton.textContent = 'Fortsätt';
                     }
 
                     // Timing button - enabled when running and not already timing
                     if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
                         canvasTimingButton.disabled = false;
                         canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                        canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                        canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
                     } else if (waitingForTurningPoint) {
                         canvasTimingButton.disabled = true;
                         canvasTimingButton.className = 'canvas-btn canvas-btn-yellow';
-                        canvasTimingButton.textContent = '⏱ Väntar på vändläge...';
+                        canvasTimingButton.textContent = 'Väntar på vändläge...';
                     } else if (timingActive) {
                         canvasTimingButton.disabled = true;
                         canvasTimingButton.className = 'canvas-btn canvas-btn-green';
-                        canvasTimingButton.textContent = '⏱ Tidtagning pågår...';
+                        canvasTimingButton.textContent = 'Tidtagning pågår...';
                     } else {
                         canvasTimingButton.disabled = true;
                         canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                        canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                        canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
                     }
                 } else {
                     // Inactive state - disabled
@@ -959,8 +1000,8 @@
                     canvasPauseButton.className = 'canvas-btn canvas-btn-orange';
                     canvasAbortButton.className = 'canvas-btn canvas-btn-red';
                     canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                    canvasPauseButton.textContent = '⏸ Pausa';
-                    canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                    canvasPauseButton.textContent = 'Pausa';
+                    canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
                 }
             }
 
@@ -1092,10 +1133,10 @@
         const fsBtn = document.getElementById('fs-btn');
         const fsIconExpand = document.getElementById('fs-icon-expand');
         const fsIconCompress = document.getElementById('fs-icon-compress');
-        const fsControlsEl = document.getElementById('fs-controls');
-        const fsToggleHandle = document.getElementById('fs-toggle-handle');
-        const fsToggleText = document.getElementById('fs-toggle-text');
-        const fsToggleChevron = document.getElementById('fs-toggle-chevron');
+        const sceneTogglesEl = document.getElementById('scene-toggles');
+        const stSlidersEl = document.getElementById('st-sliders');
+        const stHideBtn = document.getElementById('st-hide');
+        const stShowBtn = document.getElementById('st-show-btn');
 
         function isFullscreenNow() {
             return !!(document.fullscreenElement || document.webkitFullscreenElement);
@@ -1126,13 +1167,15 @@
         document.addEventListener('fullscreenchange', onFullscreenChange);
         document.addEventListener('webkitfullscreenchange', onFullscreenChange);
 
-        fsToggleHandle.addEventListener('click', () => {
-            fsControlsEl.classList.toggle('collapsed');
-            const nowOpen = !fsControlsEl.classList.contains('collapsed');
-            fsToggleText.textContent = nowOpen ? 'Dölj reglage' : 'Reglage';
-            fsToggleHandle.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
-            fsToggleHandle.title = nowOpen ? 'Dölj reglage' : 'Visa reglage';
-            fsToggleChevron.style.transform = nowOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        // Hopfällning av inställningsrutan: krysset göms rutan, runda
+        // knappen tar tillbaka den (placeringsregeln 2026-08-31).
+        stHideBtn.addEventListener('click', () => {
+            sceneTogglesEl.style.display = 'none';
+            stShowBtn.style.display = 'flex';
+        });
+        stShowBtn.addEventListener('click', () => {
+            sceneTogglesEl.style.display = '';
+            stShowBtn.style.display = 'none';
         });
 
         // Synka fullskärmspanelens glidare med parametrar + tillstånd
@@ -1167,7 +1210,7 @@
             }
         }
 
-        fsControlsEl.addEventListener('input', (e) => {
+        stSlidersEl.addEventListener('input', (e) => {
             if (e.target.id === 'fs-length-slider') {
                 params.length = parseFloat(e.target.value);
                 scene.remove(labStand);

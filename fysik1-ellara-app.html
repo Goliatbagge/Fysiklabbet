@@ -827,6 +827,21 @@
           );
         };
 
+        // Kompakt reglage-rad för inställningsrutan uppe till höger i
+        // fullskärm: etikett + värde på en rad, glidaren under.
+        const StSlider = ({ label, value, min, max, step, unit, onChange, formatValue }) => (
+          <div className="st-slider">
+            <div className="st-slider-top">
+              <span dangerouslySetInnerHTML={{ __html: label }} />
+              <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
+                {formatValue ? formatValue(value) : value} {unit}
+              </span>
+            </div>
+            <input type="range" min={min} max={max} step={step} value={value}
+                   onChange={(e) => onChange(parseFloat(e.target.value))} />
+          </div>
+        );
+
         const App = () => {
           const [circuitType, setCircuitType] = useState(CircuitType.DC);
           const [displayMode, setDisplayMode] = useState('current');
@@ -839,7 +854,7 @@
           const [showValues, setShowValues] = useState(true);
           const [componentType, setComponentType] = useState('bulb'); // 'bulb' or 'resistor'
           const [isFullscreen, setIsFullscreen] = useState(false);
-          const [fsControlsOpen, setFsControlsOpen] = useState(false);
+          const [togglesOpen, setTogglesOpen] = useState(true);
           const sceneWrapRef = useRef(null);
 
           useEffect(() => {
@@ -901,9 +916,33 @@
                   </svg>
                 )}
               </button>
+              {/* Inställningsrutan uppe till höger — hopfällbar, och i
+                  fullskärm bor även glidarna här (placeringsregeln
+                  2026-08-31: bottenpanelen låg ovanpå kretsens nedre
+                  ledare och skymde strömanimationen bakom lampan/
+                  resistorn). Rutans innehåll dubblerar sidopanelen, så
+                  den visas bara i fullskärm, precis som förr. */}
               {isFullscreen && (
-                <>
+                !togglesOpen ? (
+                  <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                          aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                      <line x1="4" y1="8" x2="20" y2="8" />
+                      <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                      <line x1="4" y1="16" x2="20" y2="16" />
+                      <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                    </svg>
+                  </button>
+                ) : (
                   <div className="scene-toggles">
+                    <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                            aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                           strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                        <path d="M6 6l12 12M18 6L6 18" />
+                      </svg>
+                    </button>
                     <div className="st-title">Kretstyp</div>
                     <label>
                       <input type="radio" name="fs-kretstyp" checked={circuitType === CircuitType.DC}
@@ -942,6 +981,25 @@
                              onChange={(e) => setShowValues(e.target.checked)} />
                       Visa värden
                     </label>
+                    {isFullscreen && (
+                      <React.Fragment>
+                        <div className="st-title mt">Reglage</div>
+                        <div className="st-sliders">
+                          <StSlider label="Spänning (<em>U</em>)" value={voltage}
+                                    min={1} max={24} step={1} unit="V"
+                                    onChange={(v) => setVoltage(v)} />
+                          <StSlider label="Resistans (<em>R</em>)" value={resistance}
+                                    min={1} max={50} step={1} unit="Ω"
+                                    onChange={(v) => setResistance(v)} />
+                          {circuitType === CircuitType.AC && (
+                            <StSlider label="Frekvens (<em>f</em>)" value={frequency}
+                                      min={0.2} max={5} step={0.1} unit="Hz"
+                                      formatValue={(v) => v.toFixed(1).replace('.', ',')}
+                                      onChange={(v) => setFrequency(v)} />
+                          )}
+                        </div>
+                      </React.Fragment>
+                    )}
                     <div className="st-actions">
                       <button className="st-btn" onClick={() => setIsPaused(prev => !prev)}>
                         {isPaused ? 'Starta' : 'Pausa'}
@@ -958,45 +1016,7 @@
                       )}
                     </div>
                   </div>
-                  <div className={`fs-controls ${fsControlsOpen ? '' : 'collapsed'}`}>
-                    <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span className="fs-label" style={{ minWidth: 110 }}>Spänning <em>U</em></span>
-                      <input type="range" min="1" max="24" step="1" value={voltage}
-                             style={{ flex: 1, ...handleSliderStyle(voltage, 1, 24) }}
-                             onChange={(e) => setVoltage(parseFloat(e.target.value))} />
-                      <span className="fs-value" style={{ minWidth: 52, textAlign: 'right' }}>{voltage} V</span>
-                    </div>
-                    <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span className="fs-label" style={{ minWidth: 110 }}>Resistans <em>R</em></span>
-                      <input type="range" min="1" max="50" step="1" value={resistance}
-                             style={{ flex: 1, ...handleSliderStyle(resistance, 1, 50) }}
-                             onChange={(e) => setResistance(parseFloat(e.target.value))} />
-                      <span className="fs-value" style={{ minWidth: 52, textAlign: 'right' }}>{resistance} Ω</span>
-                    </div>
-                    {circuitType === CircuitType.AC && (
-                      <div className="fs-row" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <span className="fs-label" style={{ minWidth: 110 }}>Frekvens <em>f</em></span>
-                        <input type="range" min="0.2" max="5" step="0.1" value={frequency}
-                               style={{ flex: 1, ...handleSliderStyle(frequency, 0.2, 5) }}
-                               onChange={(e) => setFrequency(parseFloat(e.target.value))} />
-                        <span className="fs-value" style={{ minWidth: 52, textAlign: 'right' }}>{frequency.toFixed(1).replace('.', ',')} Hz</span>
-                      </div>
-                    )}
-                  </div>
-                  <button
-                    className="fs-toggle-handle"
-                    onClick={() => setFsControlsOpen(o => !o)}
-                    title={fsControlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                    aria-label={fsControlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                    aria-expanded={fsControlsOpen}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                         style={{ transform: fsControlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                      <path d="M6 9l6 6 6-6"/>
-                    </svg>
-                    <span>{fsControlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                  </button>
-                </>
+                )
               )}
             </>
           );

@@ -231,6 +231,14 @@ const WaveSimulator = () => {
   const timeRef = useRef(0);
   const wavefrontsRef = useRef([]);
   const lastEmitTimeRef = useRef(0);
+  // Vågfältet räknas i halv upplösning på en offscreen-canvas och skalas upp
+  // 2x utan utjämning — samma 2x2-block som förr, men utan getImageData-
+  // återläsning och med en fjärdedel av pixelskrivningarna. Bildrutan måste
+  // hålla sig under ~10 ms: dyrare rAF-uppgifter skjuter fram Chromes
+  // "network quiet"-fönster så att sidan aldrig når network-idle, och då
+  // fastnar verify-mobil-scen.js (och allt annat Puppeteer-drivet) på
+  // navigation timeout trots att sidan ser färdigladdad ut.
+  const fieldRef = useRef(null);
 
   // Refs for Camera Interaction
   const cameraAngleRef = useRef({ h: Math.PI / 4, v: Math.PI / 4 }); // Azimuth (h), Elevation (v)
@@ -450,8 +458,16 @@ const WaveSimulator = () => {
 
     } else {
       // Interference / Standard Wave Field / Planar / Refraction / Diffraction
-      // Using ImageData for performance in 2D heatmap mode
-      const imgData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      // Fältet ritas i halv upplösning (se fieldRef-kommentaren ovan).
+      const FIELD_W = CANVAS_WIDTH / 2;
+      const FIELD_H = CANVAS_HEIGHT / 2;
+      if (!fieldRef.current) {
+          const fc = document.createElement('canvas');
+          fc.width = FIELD_W; fc.height = FIELD_H;
+          const fctx = fc.getContext('2d');
+          fieldRef.current = { canvas: fc, ctx: fctx, img: fctx.createImageData(FIELD_W, FIELD_H) };
+      }
+      const { canvas: fieldCanvas, ctx: fieldCtx, img: imgData } = fieldRef.current;
       const data = imgData.data;
 
       const k = (2 * Math.PI) / wavelength;
@@ -510,9 +526,13 @@ const WaveSimulator = () => {
           }
       }
 
-      // Step 2 pixels for performance
-      for (let y = 0; y < CANVAS_HEIGHT; y += 2) {
-        for (let x = 0; x < CANVAS_WIDTH; x += 2) {
+      const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 2 : 1;
+
+      // Samplar varannan scenpixel, precis som förr (x = 2·fx, y = 2·fy)
+      for (let fy = 0; fy < FIELD_H; fy++) {
+        const y = fy * 2;
+        for (let fx = 0; fx < FIELD_W; fx++) {
+           const x = fx * 2;
            let z = 0;
 
            if (mode === 'planar') {
@@ -559,7 +579,6 @@ const WaveSimulator = () => {
            }
 
            // Normalize z to 0-1 range for coloring
-           const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 2 : 1;
            let val = (z + maxAmp) / (maxAmp * 2);
 
            if (val < 0) val = 0;
@@ -570,19 +589,13 @@ const WaveSimulator = () => {
            const g = Math.round(238 - val * 180);
            const b = Math.round(228 - val * 133);
 
-           // Fill 2x2 block
-           const idx = (y * CANVAS_WIDTH + x) * 4;
+           const idx = (fy * FIELD_W + fx) * 4;
            data[idx] = r; data[idx+1] = g; data[idx+2] = b; data[idx+3] = 255;
-           data[idx+4] = r; data[idx+5] = g; data[idx+6] = b; data[idx+7] = 255;
-
-           const idxBelow = ((y + 1) * CANVAS_WIDTH + x) * 4;
-           if (idxBelow < data.length) {
-              data[idxBelow] = r; data[idxBelow+1] = g; data[idxBelow+2] = b; data[idxBelow+3] = 255;
-              data[idxBelow+4] = r; data[idxBelow+5] = g; data[idxBelow+6] = b; data[idxBelow+7] = 255;
-           }
         }
       }
-      ctx.putImageData(imgData, 0, 0);
+      fieldCtx.putImageData(imgData, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(fieldCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
       // Overlays
       if (mode === 'refraction') {

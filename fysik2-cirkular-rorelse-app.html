@@ -206,50 +206,10 @@
             padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
         }
 
-        /* Inställningsrutan är hopfällbar: krysset uppe i rutans hörn fäller
-           ihop den, och en rund knapp (spegelbild av .fs-btn, fast uppe till
-           höger) tar tillbaka den. I fullskärm bor även GLIDARNA i rutan —
-           den nedre fs-controls-panelen låg ovanpå scenen och skymde bilen
-           när man drog i reglagen (påpekat 2026-08-31). */
-        .scene-toggles .st-hide {
-            position: absolute; top: 6px; right: 7px; width: 24px; height: 24px;
-            display: flex; align-items: center; justify-content: center;
-            background: none; border: none; cursor: pointer; padding: 0;
-            color: var(--lab-ink-muted, #5a6170); border-radius: 6px;
-        }
-        .scene-toggles .st-hide:hover { color: var(--lab-ink, #0f1620); background: rgba(15,22,32,0.07); }
-        .st-show-btn {
-            position: absolute; top: 14px; right: 14px; z-index: 6;
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(246,242,234,0.94); color: var(--lab-ink, #0f1620);
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            box-shadow: 0 2px 8px rgba(15,22,32,0.12); cursor: pointer; padding: 0;
-        }
-        .st-show-btn:hover { background: #ffffff; }
-        /* Fullskärm: rutan rymmer även glidarna — lite bredare, och egen
-           skroll om skärmen är låg */
-        .scene-wrap.is-fs .scene-toggles {
-            max-width: 280px; max-height: calc(100vh - 28px); overflow-y: auto;
-        }
-        .scene-toggles .st-sliders { display: flex; flex-direction: column; gap: 8px; }
-        .scene-toggles .st-slider { display: flex; flex-direction: column; gap: 3px; }
-        .scene-toggles .st-slider-top {
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 8px; font-size: 12.5px; color: var(--lab-ink-soft, #3a4151);
-        }
-        .scene-toggles .st-slider input[type="range"] {
-            width: 100%; margin: 0; accent-color: var(--lab-accent, #c8324a); cursor: pointer;
-        }
-        @media (max-width: 600px) {
-            /* Mobil: docken (sektion 8 + sim-dock.js) har redan sitt eget
-               Dölj verktyg-handtag, och rutan ligger dockad i flödet — då
-               skulle rutans kryss (absolut positionerat) hamna löst uppe
-               till höger över scenen. Göm krysset; den runda knappen finns
-               kvar ifall rutan fälldes ihop i desktopläget. */
-            .scene-toggles .st-hide { display: none; }
-            .st-show-btn { width: 32px; height: 32px; top: 10px; right: 10px; }
-        }
+        /* Inställningsrutan är hopfällbar (.st-hide/.st-show-btn) och rymmer
+           glidarna i fullskärm (.st-sliders) — klasserna är CENTRALA och bor
+           i styles-laborans-sim.css. Se placeringsregeln i CLAUDE.md
+           (omskriven 2026-08-31, med den här simuleringen som original). */
 
         .btn-toggle {
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);

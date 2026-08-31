@@ -343,7 +343,7 @@ sidled i sig själv i stället för att klippas (samma lösning som
 **En härledning/ett bevis av en formel skrivs som ett `::: härledning`-block
 NÄSTLAT INUTI formelns `::: formel`-block** — renderarna gör det då till en
 hopfällbar dropdown (`<details>`) längst ned i formelrutan (mönstret infört
-sajtbrett 2026-08-03, referens: `fy2-1.6.md`). Skapa ALDRIG en ny fristående
+sajtbrett 2026-08-03, referens: `fy2-1.7.md`). Skapa ALDRIG en ny fristående
 härledningsruta direkt före/efter en formelruta.
 
 - Ordningen i md-filen: formelinnehåll (+ ev. `där`-lista och `::: figur`),
@@ -1297,8 +1297,8 @@ simuleringar och nyhetsartiklar.
   svängningar, *λ* för våglängd. Det är *θ* som generell vinkelbeteckning
   som är bortvald.
 - Äldre text saneras inte retroaktivt utan att användaren ber om det (det
-  finns *θ* kvar i bland annat `fy2-1.7`, `fy2-5.3`, `data/ovningar.js` och
-  `handskrift.js`), men **allt nyskrivet och omskrivet använder α**.
+  finns *θ* kvar i `handskrift.js`), men **allt nyskrivet och omskrivet
+  använder α**.
 
 ### Standardbeteckningar för krafter
 
@@ -1754,8 +1754,9 @@ framöver). Tillämpa det på VARJE ny simulering och varje större revidering:
    Parametrar väljs helst fysiskt begripligt (material + volym) i stället
    för råa glidare, med härledda värden visade (m = ρ · V = …).
 6. **Husets standarder gäller fullt ut**: layout, fullskärmsmönstret
-   (`.fs-controls`/`.fs-toggle-handle`/`.scene-toggles` från
-   styles-laborans-sim.css — definiera inga egna dubbletter), mobil-dock,
+   (`.scene-toggles` med `.st-sliders`/`.st-actions`, hopfällbar via
+   `.st-hide`/`.st-show-btn` — se placeringsregeln nedan; definiera inga
+   egna dubbletter av centralklasserna i styles-laborans-sim.css), mobil-dock,
    skalenliga kraftpilar, typografi och alla verifierare. Testa interaktivt
    med skärmdumpar (dra föremål, byt läge, fullskärm, mobil 390 px) och
    kontrollera fysiken numeriskt i jämvikt (t.ex. F_L = F_G) före commit.
@@ -1797,36 +1798,48 @@ Referensimpl: `fysik2-brytning-app.html`, `fysik2-fotoelektrisk-effekt.html`.
 Varje sim ska ha fullskärmsläge. **All interaktion måste vara möjlig även i
 fullskärm** — fullskärm får aldrig bli ett "titta-men-rör-inte"-läge.
 
-⚠️ **PLACERINGSREGEL (gäller ALLA simuleringar):** I fullskärm på **bred
-skärm** placeras reglagen efter typ, så att de inte skymmer scenen. (På
-skärmar ≤600 px gäller i stället "Mobil (≤600px)" nedan: overlay-lägena
-kopplas bort och verktygen dockas under scenen. Du behöver inte göra något
-särskilt för det — men skriv inga egna `align-items: center`-regler på
+⚠️ **PLACERINGSREGEL (gäller ALLA simuleringar; omskriven 2026-08-31):**
+I fullskärm på **bred skärm** samlas ALLA verktyg i inställningsrutan uppe
+till höger, så att ingenting ligger ovanpå scenen. (På skärmar ≤600 px
+gäller i stället "Mobil (≤600px)" nedan: overlay-lägena kopplas bort och
+verktygen dockas under scenen. Du behöver inte göra något särskilt för
+det — men skriv inga egna `align-items: center`-regler på
 `.scene-wrap:fullscreen`, se fällan där.)
 
-- **Glidare/reglage (och sifferfält) → en hopfällbar panel (dropdown) i
-  scenens UNDERKANT** (`.fs-controls` + `.fs-toggle-handle`). Användaren kan
-  fälla ihop den med "Dölj reglage".
-- **Kryssrutor och radioknappar (visningsval, lägesval) → en ruta UPPE TILL
-  HÖGER** på scenytan (`.scene-toggles`). Denna ruta visas i både normalt
-  läge och fullskärm.
-- **Start/Paus/Börja om (styrknappar) → BARA i rutan uppe till höger**
-  (`.scene-toggles` `.st-actions`), tillsammans med visningsvalen.
+- **Alla verktyg → rutan UPPE TILL HÖGER** (`.scene-toggles`): kryssrutor
+  och radioknappar (visningsval, lägesval) som vanligt, och i fullskärm
+  dessutom glidarna/sifferfälten under en egen rubrik "Reglage"
+  (`.st-sliders` med kompakta `.st-slider`-rader: etikett + sifferfält på
+  en rad, glidaren under) samt styrknapparna (Start/Paus/Börja om) sist i
+  `.st-actions`. Rutan visas i både normalt läge och fullskärm — men i
+  normalläget UTAN glidare och styrknappar (de bor då i sidopanelen,
+  aldrig dubblerade).
+- **Rutan ska vara HOPFÄLLBAR**: ett kryss (`.st-hide`) i rutans övre hörn
+  fäller ihop den, och en rund knapp (`.st-show-btn`, samma stil som
+  `.fs-btn` men uppe till höger) tar tillbaka den. I fullskärm får rutan
+  `max-width: 280px`, `max-height: calc(100vh - 28px)` och
+  `overflow-y: auto`, så att den skrollar i stället för att växa ur
+  skärmen. På mobilen göms krysset — dockens eget "Dölj verktyg"-handtag
+  sköter hopfällningen där, och det ska bara finnas EN fäll-knapp.
 - Fullskärmsknappen (`.fs-btn`) sitter uppe till vänster.
+- ⛔ **Bottenpanelen (`.fs-controls` + `.fs-toggle-handle`) används INTE i
+  nya simuleringar.** Den låg absolut positionerad ovanpå scenens nederdel
+  och skymde skeendet precis när man drog i reglagen (påpekat 2026-08-31 i
+  Cirkulär rörelse). Många äldre simuleringar har den kvar; migrera en
+  sådan sim till rutan uppe till höger när du ändå arbetar i den, och
+  särskilt om panelen täcker något som rör sig.
 
-⛔ **VARJE reglage får finnas på EXAKT ETT ställe i fullskärm — aldrig
-dubblerat.** Återkommande misstag: Start/Börja om läggs *både* i den nedre
-panelen (`.fs-controls`) *och* uppe till höger (`.st-actions`), så samma
-knappar syns två gånger. Styrknapparna hör hemma uppe till höger; den nedre
-panelen innehåller **bara glidare/sifferfält**. Har ett scenario inga
-glidare (t.ex. fallskärmshopparen) ska den nedre panelen och dess
-"Dölj reglage"-handtag **inte renderas alls** — annars blir den en tom låda
-eller en dubblettlåda för knappar. Kontrollera alltid i fullskärm att inget
-reglage förekommer på två platser.
+⛔ **VARJE reglage får finnas på EXAKT ETT ställe per läge — aldrig
+dubblerat.** Glidarna finns i sidopanelen i normalläget och i
+inställningsrutan i fullskärm — aldrig på båda ställena samtidigt, och
+aldrig kvar i en `.fs-controls`-panel parallellt med rutan. Har ett
+scenario inga glidare renderas ingen "Reglage"-rubrik alls. Kontrollera
+alltid i fullskärm att inget reglage förekommer på två platser.
 
-Så: kontinuerliga värden (glidare) nere, diskreta val + styrknappar uppe
-till höger, fullskärm uppe till vänster — inga överlapp, inga dubbletter.
-Referensimpl: `fysik2-konisk-pendel-app.html`, `fysik1-vektoraddition-app.html`.
+Så: allt uppe till höger i en hopfällbar ruta, fullskärm uppe till
+vänster — inga överlapp, inga dubbletter. Referensimpl:
+`fysik2-cirkular-rorelse-app.html` (mönstrets original, med CSS för
+`.st-hide`/`.st-show-btn`/`.st-sliders`), `fysik1-arkimedes.html`.
 
 Krav på mönstret:
 
@@ -1871,15 +1884,18 @@ Krav på mönstret:
      )}
    </button>
    ```
-3. Flytande kontrollpanel (`.fs-controls`) absolut positionerad,
-   innehållande de viktigaste reglagen.
-4. Visa/dölj-knapp (`.fs-toggle-handle`) — användaren kan minimera panelen.
+3. Inställningsrutan (`.scene-toggles`) uppe till höger, som i fullskärm
+   även rymmer glidarna (`.st-sliders`) och styrknapparna (`.st-actions`)
+   — se placeringsregeln ovan.
+4. Hopfällbarhet: krysset `.st-hide` i rutans hörn fäller ihop den, runda
+   `.st-show-btn` tar tillbaka den (göms båda aldrig samtidigt; på mobil
+   göms krysset och dockens handtag tar över).
 5. Tunga/sällan använda kontroller stannar i sidopanelen utanför scenen.
 6. `user-select: none` på scen-wrappern (förhindrar att etiketter markeras
    blått när användaren drar i scenen).
 
-Komplett CSS- och React-mall: kopiera från `fysik2-fotoelektrisk-effekt.html`
-eller `fysik2-brytning-app.html`.
+Komplett CSS- och React-mall: kopiera från
+`fysik2-cirkular-rorelse-app.html` eller `fysik1-arkimedes.html`.
 
 ### Mobil (≤600px): scenen överst, verktygen UNDER — aldrig ovanpå
 
@@ -2644,7 +2660,7 @@ sökning. `?id=` ger varje avsnitt en egen riktig adress.
 **⚠️ REGEL: syftar en länk på en bestämd DEL av en genomgång ska den ha ett
 ankare, aldrig bara `?id=`.** Formen är
 `katalog.html?id=<avsnitt>&block=<ankare>`, till exempel
-`katalog.html?id=fy2-1.5&block=den-fatala-gungan`. Besökaren ska landa på det
+`katalog.html?id=fy2-1.6&block=den-fatala-gungan`. Besökaren ska landa på det
 du skriver om, inte överst i ett långt avsnitt med uppgiften att skrolla och
 leta själv (uttryckligt önskemål 2026-08-29: nyhetsbrevets länk till
 Tacoma-filmen i `fy2-2.6` gick till avsnittets början, och filmen ligger
@@ -2663,11 +2679,11 @@ Ankarnamnen sätts automatiskt av `preprocessBlocks` i `katalog.html` — du
 behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
 `&block=` matchar vilken som helst av dem:
 
-| Attribut | Exempel för `::: exempel "Exempel 2 — Den fatala gungan"` |
+| Attribut | Exempel för `::: exempel "Exempel 1 — Den fatala gungan"` |
 |---|---|
-| `data-block` | `exempel-2-den-fatala-gungan` (hela titeln som slug) |
+| `data-block` | `exempel-1-den-fatala-gungan` (hela titeln som slug) |
 | `data-blockkort` | `den-fatala-gungan` (utan `<typ>-<nummer>-`) |
-| `data-blocknr` | `exempel-2` (typ + ordningsnummer, även för rutor utan titel) |
+| `data-blocknr` | `exempel-1` (typ + ordningsnummer, även för rutor utan titel) |
 
 - **`::: video` har ett EGET, handsatt ankare.** Filmblocken får ingen titel
   att slugga, så de skrivs med raden `ankare: <namn>` i config-blocket

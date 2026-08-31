@@ -2263,6 +2263,17 @@ de ska inte behöva påpekas av användaren:
      streckade guider).
    Gör figuren stor nog (höj `LMAX`/standardvärdet) så pilarna inte trasslar
    ihop sig till en klump vid små krafter.
+3b. **RESULTANTEN ritas med STRECKAT skaft, i samma färg som de övriga
+   pilarna** (`stroke-dasharray="6 4"`, pilhuvudet helt). Så skiljs en
+   sammansatt kraft (`F_R`, `F_C`) från de krafter som faktiskt verkar på
+   kroppen. Utan markeringen läses ett diagram med `F_S`, `F_G` och `F_C`
+   som om det verkade tre krafter på kroppen i stället för två (påpekat
+   2026-08-31). `dashed: true` i `makeForceDiagram` gör detta i
+   övningsfigurerna; i handskriven SVG lägger du dasharrayen på skaftets
+   `<line>`. Färgbyte är fel väg: färgerna bär redan annan betydelse i
+   scenerna, och en streckad pil läses som "den här är uträknad, inte
+   påförd".
+
 4. **Etiketter får ALDRIG ligga på en färgad/mönstrad bakgrund** (tegelvägg,
    ballong, planets fyllning) — de blir svårlästa. Flytta etiketten ut till
    den lugna pappersytan precis utanför objektet (`text-anchor="end"`/

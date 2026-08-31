@@ -112,7 +112,7 @@ const NYHETER_ALL = [
     larare: {
       moment: [
         { label: "Fysik nivå 1 · 3.5 Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
-        { label: "Fysik nivå 2 · 1.5 Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Fysik nivå 2 · 1.6 Energi och gravitation i cirkelbanor", href: "katalog.html?id=fy2-1.6" },
         { label: "Fysik nivå 2 · 5.1 Universums struktur", href: "katalog.html?id=fy2-5.1" }
       ],
       fragor: [
@@ -337,7 +337,7 @@ const NYHETER_ALL = [
       { type: 'h2', text: 'Kroppen sätter gränserna' },
       { type: 'p', html: 'Skillnaden mellan en matematisk pendel och en människa är att människan har gränser, och det är där modellen blir intressant. Ur filmerna mätte laget att en utövare reser sig med som mest ungefär 1,4&nbsp;m/s, och som effektgräns använde de den toppeffekt på omkring 5&nbsp;000&nbsp;W som uppmätts för ben som sträcks explosivt i ett hopp. Själva längdändringen är också begränsad: i modellen rör sig tyngdpunkten mellan fyra och åtta procent av armens längd åt vardera hållet, alltså mellan knappt tre decimeter och drygt en halv meter på en sju meter lång arm.' },
       { type: 'p', html: 'En detalj i konstruktionen är avgörande. En vanlig gunga hänger i kedjor, och en kedja kan bara dra. Den som vill runt på en kedjegunga måste därför passera högsta punkten med minst farten $v = \\sqrt{g \\cdot r}$, annars slaknar kedjan och man faller. Kiikinggungans armar är styva och kan trycka lika väl som dra. Därmed finns inget fartkrav alls i toppen: det räcker att energin nätt och jämnt bär hela vägen upp till det upp-och-nedvända läget, så tippar gungan över av sig själv. Hela sporten är en ren energifråga.' },
-      { type: 'p', html: 'Villkoret för kedjegungan går att räkna på, och räkningen är en klassiker i fysikkursen. I genomgången om <a class="artikel-lank" href="katalog.html?id=fy2-1.5&amp;block=den-fatala-gungan">cirkulär rörelse i Fysik nivå 2</a> finns exemplet Den fatala gungan, där en gunga med banradien 2,5&nbsp;m ska ta sig runt ett helt varv och minsta farten i det översta läget ska bestämmas.' },
+      { type: 'p', html: 'Villkoret för kedjegungan går att räkna på, och räkningen är en klassiker i fysikkursen. I genomgången om <a class="artikel-lank" href="katalog.html?id=fy2-1.6&amp;block=den-fatala-gungan">energi och gravitation i cirkelbanor i Fysik nivå 2</a> finns exemplet Den fatala gungan, där en gunga med banradien 2,5&nbsp;m ska ta sig runt ett helt varv och minsta farten i det översta läget ska bestämmas.' },
       { type: 'h2', text: 'Luften sätter taket' },
       { type: 'p', html: 'Utan luftmotstånd hade det inte funnits någon övre gräns alls. Varje cykel skulle lägga till lite energi, och med tillräckligt många försök skulle vilken armlängd som helst gå att ta runt. Luftmotståndet ändrar bilden, eftersom det tar tillbaka mer och mer ju fortare gungan går. Först när motståndet räknades in stämde modellen kvantitativt med videodata — både med de försök som lyckades och med de två som misslyckades och stannade en bit under toppen.' },
       { type: 'p', html: 'Slutsatsen är att det för varje utövare finns en längsta arm som överhuvudtaget är möjlig, och att den gränsen inte går att köpa sig förbi med mer muskler. Över den längden vinner luftmotståndet varje cykel, hur stor effekt benen än utvecklar. Rekordjakten i sporten har alltså en fysikalisk bortre vägg, inte bara en träningsmässig.' },
@@ -1809,7 +1809,7 @@ const NYHETER_ALL = [
     larare: {
       moment: [
         { label: "Fysik nivå 1 · 3.5 Gravitationslagen", href: "katalog.html#fy1-3.5" },
-        { label: "Fysik nivå 2 · 1.5 Cirkulär rörelse", href: "katalog.html#fy2-1.5" },
+        { label: "Fysik nivå 2 · 1.6 Energi och gravitation i cirkelbanor", href: "katalog.html#fy2-1.6" },
         { label: "Fysik nivå 2 · 5.1 Universums struktur", href: "katalog.html#fy2-5.1" }
       ],
       fragor: [

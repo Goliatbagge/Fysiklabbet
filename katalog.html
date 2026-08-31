@@ -312,8 +312,8 @@
         }
 
 
-        // Ankarnamn för en blockruta: "Exempel 2 — Den fatala gungan" →
-        // "exempel-2-den-fatala-gungan". Används av direktlänkningen till en
+        // Ankarnamn för en blockruta: "Exempel 1 — Den fatala gungan" →
+        // "exempel-1-den-fatala-gungan". Används av direktlänkningen till en
         // enskild ruta (katalog.html?id=<avsnitt>&block=<ankare>).
         function blockSlug(s) {
             return String(s == null ? '' : s)
@@ -428,7 +428,7 @@
                     if (title) {
                         const slug = blockSlug(title);
                         ankare += ' data-block="' + slug + '"';
-                        // "Exempel 2 — Den fatala gungan" ger också den korta
+                        // "Exempel 1 — Den fatala gungan" ger också den korta
                         // formen "den-fatala-gungan", som överlever att
                         // exemplen numreras om.
                         const kort = slug.replace(
@@ -1053,7 +1053,7 @@
 
         // ── Direktlänk till en enskild ruta i genomgången (?block=) ────
         //
-        // katalog.html?id=fy2-1.4&block=den-fatala-gungan tar besökaren rakt
+        // katalog.html?id=fy2-1.6&block=den-fatala-gungan tar besökaren rakt
         // ned till just den rutan i stället för till avsnittets början. Det
         // används bland annat av nyhetsartiklarna, som ofta pekar på ETT
         // räkneexempel i en genomgång.

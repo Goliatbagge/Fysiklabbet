@@ -88,7 +88,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 2 =================
         {
             nr: 2, del: 'A', poang: [1, 0, 0], omrade: 'Cirkulär rörelse — krafter i pendelrörelse',
-            genomgangar: ['fy2-1.5', 'fy2-2.5'],
+            genomgangar: ['fy2-1.5', 'fy2-1.6', 'fy2-2.5'],
             endastSvar: true,
             fraga: 'I en film svänger en tecknad seriefigur i ett rep från A till B. I filmen brister ' +
                 'repet i läge B (se figur). Förklara varför det i verkligheten är osannolikt att repet ' +
@@ -619,7 +619,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 12 =================
         {
             nr: 12, del: 'A', poang: [0, 2, 0], omrade: 'Kaströrelse',
-            genomgangar: ['fy2-1.7'],
+            genomgangar: ['fy2-1.8'],
             fraga: 'En grupp simhoppare tränar för en uppvisning i en simbassäng med ett hopptorn. För en ' +
                 'del hopp vill de ta sats, men det är förstås livsfarligt om simhopparna skulle hoppa över ' +
                 'bassängen och slå i kanten på andra sidan.\n\n' +
@@ -1132,7 +1132,7 @@ window.NP_PROV['fy2-vt2016'] = {
         // ================= UPPGIFT 19 =================
         {
             nr: 19, del: 'A', poang: [0, 1, 3], omrade: 'Elektriskt fält — avlänkning av elektroner',
-            genomgangar: ['fy1-7.11', 'fy2-1.7'],
+            genomgangar: ['fy1-7.11', 'fy2-1.8'],
             fraga: 'Katodstrålerör används i en TV av äldre modell, så kallad tjock-TV. Principen för ett ' +
                 'katodstrålerör är att elektroner accelereras till hög hastighet för att därefter passera ' +
                 'ett homogent elektriskt fält där de avlänkas och träffar en plats på skärmen.\n\n' +

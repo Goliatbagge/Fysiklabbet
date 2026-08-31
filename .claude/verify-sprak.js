@@ -63,6 +63,26 @@ const REGLER = [
         rattelse: 'Adverbet skrivs i ett ord: överända (falla överända, vrida överända).',
     },
     {
+        namn: 'varken-inte-vare-sig',
+        niva: 'fel',
+        // "vare sig … eller" kräver en negation före sig ("kan inte vare sig …").
+        // Utan negation är "varken … eller" rätt form. Felet har uppstått i
+        // energiprincipens formelruta två gånger (fy1-4.4, fy2-1.6, upptäckt
+        // 2026-08-31), så mönstret fångar hjälpverb + "vare sig" utan "inte".
+        monster: /\b(kan|får|ska|skall|bör|kunde|borde|vill)\s+vare\s+sig\b/gi,
+        undantag: [/\b(inte|aldrig|inget|ingen)\s+(kan|får|ska|skall|bör|kunde|borde|vill)\s+vare\s+sig\b/i],
+        rattelse: 'Grammatikfel: "vare sig … eller" kräver en negation före sig. ' +
+                  'Utan negation: skriv "varken … eller" ("kan varken skapas eller förstöras").',
+    },
+    {
+        namn: 'ganger-mindre',
+        niva: 'varning',
+        // Något kan inte bli mer än en gång mindre; språkvården avråder.
+        monster: /\bgånger\s+mindre\b/gi,
+        rattelse: 'Skriv delformen i stället: "en X-del av" (en 3 600-del av ' +
+                  'accelerationen), inte "X gånger mindre".',
+    },
+    {
         namn: 'tankstreck',
         niva: 'varning',
         // Tankstreck som pausmarkör i löptext (förbjudet i nyskriven text

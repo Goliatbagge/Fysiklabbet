@@ -250,8 +250,8 @@
         }
 
 
-        // Ankarnamn för en blockruta: "Exempel 2 — Den fatala gungan" →
-        // "exempel-2-den-fatala-gungan". Används av direktlänkningen till en
+        // Ankarnamn för en blockruta: "Exempel 1 — Den fatala gungan" →
+        // "exempel-1-den-fatala-gungan". Används av direktlänkningen till en
         // enskild ruta (katalog.html?id=<avsnitt>&block=<ankare>).
         function blockSlug(s) {
             return String(s == null ? '' : s)
@@ -369,7 +369,7 @@
                     if (title) {
                         const slug = blockSlug(title);
                         ankare += ' data-block="' + slug + '"';
-                        // "Exempel 2 — Den fatala gungan" ger också den korta
+                        // "Exempel 1 — Den fatala gungan" ger också den korta
                         // formen "den-fatala-gungan", som överlever att
                         // exemplen numreras om.
                         const kort = slug.replace(

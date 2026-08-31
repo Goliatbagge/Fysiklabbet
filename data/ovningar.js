@@ -13456,25 +13456,6 @@ $$ F_C = \\frac{4\\pi^2 \\cdot 0{,}20 \\cdot 0{,}80}{0{,}50^2} = 25\\ \\mathrm{N
 
 **Generell slutsats:** $F_C = \\dfrac{mv^2}{r} = \\dfrac{4\\pi^2 m r}{T^2}$ — välj formen efter om du har farten *v* eller perioden *T*.`,
         },
-
-        {
-            level: 1,
-            question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
-            answer: { value: 5.4, unit: 'm/s' },
-            solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
-
-$$ mgh = \\frac{mv^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
-
-Massan stryks. Insättning:
-
-$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}5} = 5{,}4\\ \\mathrm{m/s} $$
-
-**Svar:** Farten i lägsta punkten är ungefär $5{,}4\\ \\mathrm{m/s}$.
-
-**Generell slutsats:** Farten beror bara på fallhöjden, inte på massan eller banans form (om friktion försummas). Detta är samma $v = \\sqrt{2gh}$ som för fritt fall.`,
-        },
         {
             level: 1,
             question: `I lägsta punkten av en gungbana (radie $3{,}0\\ \\mathrm{m}$) rör sig en gungare som väger $60\\ \\mathrm{kg}$ med farten $5{,}0\\ \\mathrm{m/s}$. Hur stor är centripetalkraften?
@@ -13548,6 +13529,97 @@ $$ v = \\sqrt{\\mu \\cdot g \\cdot r} = \\sqrt{0{,}50 \\cdot 9{,}82 \\cdot 90} =
 **Generell slutsats:** Maxfarten beror *inte* på bilens massa (den stryks bort) — bara på friktionstalet och radien. Halt väglag (lågt μ) eller tvär kurva (litet *r*) sänker maxfarten.`,
         },
 
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För att bilar ska klara en kurva även på halt underlag **doseras** vägen — vägbanan lutas in mot kurvans centrum. Vilken doseringsvinkel ska en kurva med radien $110\\ \\mathrm{m}$ ha för att en bil i farten $90\\ \\mathrm{km/h}$ ska klara den helt utan friktion? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: false, showCenter: true })}`,
+            answer: { value: 30, unit: '°' },
+            solution: `Utan friktion finns bara två krafter på bilen: tyngdkraften $mg$ rakt ned och normalkraften $N$ vinkelrätt mot den lutande vägbanan. Insikten är att normalkraften måste **delas upp** i komposanter — och att dess vågräta komposant ensam ska utgöra centripetalkraften.
+
+${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: true })}
+
+**Vågrätt** (in mot centrum): $\\;N \\sin\\alpha = \\dfrac{mv^2}{r}$
+
+**Lodrätt** (jämvikt, bilen åker inte uppåt/nedåt): $\\;N \\cos\\alpha = mg$
+
+Dividerar vi den första ekvationen med den andra försvinner både $N$ och $m$:
+
+$$ \\frac{N\\sin\\alpha}{N\\cos\\alpha} = \\frac{mv^2/r}{mg} \\quad\\Leftrightarrow\\quad \\tan\\alpha = \\frac{v^2}{r \\cdot g} $$
+
+Mätvärden ($v = 90\\ \\mathrm{km/h} = 25\\ \\mathrm{m/s}$):
+
+$$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}579 \\quad\\Rightarrow\\quad \\alpha = 30^\\circ $$
+
+**Svar:** Kurvan ska doseras med ungefär $30^\\circ$.
+
+**Generell slutsats:** Den avgörande insikten är att dela upp normalkraften i komposanter och inse att den lodräta komposanten bär tyngden medan den vågräta krökar banan. Genom att dividera ekvationerna stryks både normalkraften och massan — doseringsvinkeln beror bara på fart och radie.`,
+        },
+    ],
+
+    'fy2-1.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
+            answer: { value: 5.4, unit: 'm/s' },
+            solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
+
+$$ mgh = \\frac{mv^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
+
+Massan stryks. Insättning:
+
+$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}5} = 5{,}4\\ \\mathrm{m/s} $$
+
+**Svar:** Farten i lägsta punkten är ungefär $5{,}4\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Farten beror bara på fallhöjden, inte på massan eller banans form (om friktion försummas). Detta är samma $v = \\sqrt{2gh}$ som för fritt fall.`,
+        },
+        {
+            level: 1,
+            question: `En satellit med massan $800\\ \\mathrm{kg}$ kretsar på avståndet $7{,}0 \\cdot 10^{6}\\ \\mathrm{m}$ från jordens medelpunkt. Hur stor är gravitationskraften på satelliten? (Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$.)`,
+            answer: { value: 6.5, unit: 'kN' },
+            solution: `Newtons gravitationslag ger kraften mellan satelliten och jorden:
+
+$$ F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 800\\ \\mathrm{kg} \\\\
+m_2 = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
+r = 7{,}0 \\cdot 10^{6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{800 \\cdot 5{,}972 \\cdot 10^{24}}{(7{,}0 \\cdot 10^{6})^2} = 6\\,503\\ \\mathrm{N} \\approx 6{,}5\\ \\mathrm{kN} $$
+
+**Svar:** Gravitationskraften är ungefär $6{,}5\\ \\mathrm{kN}$.
+
+**Generell slutsats:** Gravitationen är långt ifrån noll i en omloppsbana: kraften här är över 80 % av satellitens tyngd vid jordytan. Satelliten är tyngdlös för att den **faller fritt** runt jorden, inte för att gravitationen saknas.`,
+        },
+        {
+            level: 1,
+            question: `Vilken fart måste en satellit ha för att gå i en cirkulär bana på avståndet $7{,}0 \\cdot 10^{6}\\ \\mathrm{m}$ från jordens medelpunkt? (Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$.)`,
+            answer: { value: 7.5, unit: 'km/s' },
+            solution: `Gravitationskraften utgör centripetalkraften:
+
+$$ F_C = F_G \\quad\\Leftrightarrow\\quad \\frac{m \\cdot v^2}{r} = G \\cdot \\frac{m \\cdot m_j}{r^2} $$
+
+Satellitens massa *m* stryks, och vi löser ut farten:
+
+$$ v = \\sqrt{\\frac{G \\cdot m_j}{r}} = \\sqrt{\\frac{6{,}67 \\cdot 10^{-11} \\cdot 5{,}972 \\cdot 10^{24}}{7{,}0 \\cdot 10^{6}}} = 7\\,543\\ \\mathrm{m/s} \\approx 7{,}5\\ \\mathrm{km/s} $$
+
+**Svar:** Satelliten måste ha farten ungefär $7{,}5\\ \\mathrm{km/s}$.
+
+**Generell slutsats:** Farten beror inte på satellitens egen massa: den stryks ur ekvationen. Ju lägre bana (mindre *r*), desto **högre** fart krävs.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -13587,34 +13659,41 @@ $$ v_\\text{botten} = \\sqrt{5gr} = \\sqrt{5 \\cdot 9{,}82 \\cdot 8{,}0} = 20\\ 
 
 **Generell slutsats:** Det fina sambandet $v_\\text{botten} = \\sqrt{5gr}$ följer av att toppfarten ($\\sqrt{gr}$) plus energin för att lyfta vagnen $2r$ tillsammans bestämmer bottenfarten.`,
         },
+        {
+            level: 2,
+            question: `En geostationär satellit går ett varv på ett dygn och står därför stilla över samma punkt på ekvatorn. Där ligger till exempel TV-satelliterna. Hur högt över jordytan ligger banan? (Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$ och jordens radie $6\\,378\\ \\mathrm{km}$.)`,
+            answer: { value: 35900, unit: 'km' },
+            solution: `Gravitationskraften utgör centripetalkraften. Eftersom perioden är given använder vi formen med *T*:
+
+$$ \\frac{4\\pi^2 \\cdot m \\cdot r}{T^2} = G \\cdot \\frac{m \\cdot m_j}{r^2} $$
+
+Satellitens massa *m* stryks. Vi multiplicerar båda led med $r^2$ och löser ut $r^3$:
+
+$$ r^3 = \\frac{G \\cdot m_j \\cdot T^2}{4\\pi^2} $$
+
+Mätvärden ($T = 24\\ \\mathrm{h} = 86\\,400\\ \\mathrm{s}$):
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_j = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
+T = 86\\,400\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ r^3 = \\frac{6{,}67 \\cdot 10^{-11} \\cdot 5{,}972 \\cdot 10^{24} \\cdot 86\\,400^2}{4\\pi^2} = 7{,}53 \\cdot 10^{22}\\ \\mathrm{m^3} $$
+
+$$ r = \\sqrt[3]{7{,}53 \\cdot 10^{22}} = 4{,}224 \\cdot 10^{7}\\ \\mathrm{m} = 42\\,240\\ \\mathrm{km} $$
+
+Detta är avståndet från jordens medelpunkt. Höjden över jordytan fås genom att dra bort jordens radie:
+
+$$ h = r - r_j = 42\\,240 - 6\\,378 = 35\\,862\\ \\mathrm{km} \\approx 35\\,900\\ \\mathrm{km} $$
+
+**Svar:** Den geostationära banan ligger ungefär $35\\,900\\ \\mathrm{km}$ över jordytan.
+
+**Generell slutsats:** Perioden bestämmer banradien entydigt: det finns bara **en** höjd där ett varv tar precis ett dygn, och alla geostationära satelliter trängs därför i samma ring över ekvatorn. Räknar man med stjärndygnet 23 h 56 min (jordens verkliga rotationstid) blir svaret $35\\,786\\ \\mathrm{km}$.`,
+        },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
-        {
-            level: 3,
-            question: `För att bilar ska klara en kurva även på halt underlag **doseras** vägen — vägbanan lutas in mot kurvans centrum. Vilken doseringsvinkel ska en kurva med radien $110\\ \\mathrm{m}$ ha för att en bil i farten $90\\ \\mathrm{km/h}$ ska klara den helt utan friktion? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: false, showCenter: true })}`,
-            answer: { value: 30, unit: '°' },
-            solution: `Utan friktion finns bara två krafter på bilen: tyngdkraften $mg$ rakt ned och normalkraften $N$ vinkelrätt mot den lutande vägbanan. Insikten är att normalkraften måste **delas upp** i komposanter — och att dess vågräta komposant ensam ska utgöra centripetalkraften.
-
-${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: true })}
-
-**Vågrätt** (in mot centrum): $\\;N \\sin\\alpha = \\dfrac{mv^2}{r}$
-
-**Lodrätt** (jämvikt, bilen åker inte uppåt/nedåt): $\\;N \\cos\\alpha = mg$
-
-Dividerar vi den första ekvationen med den andra försvinner både $N$ och $m$:
-
-$$ \\frac{N\\sin\\alpha}{N\\cos\\alpha} = \\frac{mv^2/r}{mg} \\quad\\Leftrightarrow\\quad \\tan\\alpha = \\frac{v^2}{r \\cdot g} $$
-
-Mätvärden ($v = 90\\ \\mathrm{km/h} = 25\\ \\mathrm{m/s}$):
-
-$$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}579 \\quad\\Rightarrow\\quad \\alpha = 30^\\circ $$
-
-**Svar:** Kurvan ska doseras med ungefär $30^\\circ$.
-
-**Generell slutsats:** Den avgörande insikten är att dela upp normalkraften i komposanter och inse att den lodräta komposanten bär tyngden medan den vågräta krökar banan. Genom att dividera ekvationerna stryks både normalkraften och massan — doseringsvinkeln beror bara på fart och radie.`,
-        },
         {
             level: 3,
             question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -13641,7 +13720,7 @@ $$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
         },
     ],
 
-    'fy2-1.6': [
+    'fy2-1.7': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13768,7 +13847,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot 0
         },
     ],
 
-    'fy2-1.7': [
+    'fy2-1.8': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -13887,7 +13966,7 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
         },
     ],
 
-    'fy2-1.8': [
+    'fy2-1.9': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,

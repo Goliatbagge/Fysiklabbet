@@ -5478,6 +5478,9 @@ window.EXITTICKETS = {
       'Detta fås om man glömmer att kvadrera farten $v$.',
     ],
   },
+],
+
+'fy2-1.6': [
   {
     question: 'Vilka två fysikaliska principer kombineras i räkneexemplet med den fatala gungan?',
     choices: [
@@ -5558,9 +5561,41 @@ window.EXITTICKETS = {
       'Tyngdkraften är alltid närvarande (den beror bara på massa och $g$) — det är spännkraften som blir noll, inte tyngdkraften.',
     ],
   },
+  {
+    question: 'Vilken kraft utgör centripetalkraften för en satellit som kretsar i en cirkulär bana runt jorden?',
+    choices: [
+      'Friktionskraften mot den tunna restluften',
+      'Gravitationskraften från jorden',
+      'Dragkraften från satellitens raketmotorer',
+      'Den magnetiska kraften från jordens magnetfält',
+    ],
+    correct: 1,
+    why: [
+      'Luftmotståndet på banhöjd är försvinnande litet, och det är dessutom riktat mot rörelsen, inte in mot jordens medelpunkt.',
+      'Den enda kraft som verkar på satelliten är gravitationskraften från jorden, riktad in mot jordens medelpunkt. Det är den som utgör centripetalkraften och håller satelliten i banan.',
+      'En satellit i en stabil cirkulär bana behöver inga motorer alls: den faller fritt runt jorden.',
+      'Den magnetiska kraften på en vanlig satellit är helt försumbar jämfört med gravitationskraften.',
+    ],
+  },
+  {
+    question: 'Två satelliter, en lätt och en tung, går i samma cirkulära bana runt jorden. Vad gäller om deras farter?',
+    choices: [
+      'Den tunga måste ha högre fart, eftersom den dras hårdare mot jorden',
+      'Den lätta måste ha högre fart, eftersom den är lättare att accelerera',
+      'Det beror på satelliternas form och storlek',
+      'De har samma fart, eftersom satellitens egen massa stryks ur ekvationen $F_C = F_G$',
+    ],
+    correct: 3,
+    why: [
+      'Gravitationskraften på den tunga satelliten är visserligen större, men det är också den centripetalkraft som krävs, i exakt samma proportion.',
+      'Trögheten och gravitationskraften växer lika mycket med massan, så effekterna tar ut varandra.',
+      'Form och storlek påverkar bara luftmotståndet, som är försumbart på banhöjd, inte villkoret för cirkulär bana.',
+      'När $\\dfrac{m v^2}{r} = G \\cdot \\dfrac{m \\cdot m_j}{r^2}$ ställs upp stryks satellitens massa $m$ ur båda led. Farten i en given bana beror bara på banradien och jordens massa.',
+    ],
+  },
 ],
 
-'fy2-1.6': [
+'fy2-1.7': [
   {
     question: 'Vad kännetecknar en konisk pendel?',
     choices: [
@@ -5659,7 +5694,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.7': [
+'fy2-1.8': [
   {
     question: 'Om luftmotstånd försummas, hur beter sig hastigheten och accelerationen i *x*-led under en kaströrelse?',
     choices: [
@@ -5758,7 +5793,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy2-1.8': [
+'fy2-1.9': [
   {
     question: 'Vad är syftet med räkneexemplet "Den flygande kossan"?',
     choices: [

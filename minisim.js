@@ -16,8 +16,8 @@
  *
  * Fält i konfigurationen (en per rad, "nyckel: värde"):
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
- *           Tillgängliga typer: tomtebloss, centrifug, eulersdisk,
- *           fjaderpendel, skiftnyckel, valtning, gaffelbalans,
+ *           Tillgängliga typer: tomtebloss, centrifug, cirkularrorelse,
+ *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
@@ -55,6 +55,21 @@
  * spårlager — tangenterna syns i efterhand), fullskärm samt syntetiserat
  * ljud (motorton som följer varvtalet + vattenfräs som följer
  * utslungningen — inga ljudfiler).
+ *
+ * ── typ: cirkularrorelse ─────────────────────────────────────────────────
+ * Bilen i cirkelbana ur fy2-1.5 (Cirkulär rörelse): den fristående
+ * simuleringen fysik2-cirkular-rorelse-app.html inbäddad via en iframe
+ * (?embed=1&mini=1 — mini-läget visar bara scenen), samma mönster som
+ * gaffelbalans3d/dubbelkon. Växlaren uppe till höger på scenen byter
+ * situation mellan Cirkelbana (bilen sedd rakt uppifrån — friktionskraften
+ * utgör centripetalkraften) och Loop (bilen från sidan — normalkraften och
+ * tyngdkraften utgör tillsammans centripetalkraften). Kortets verktyg
+ * (Pausa/Fortsätt, Börja om och fartglidaren, som byter roll med
+ * situationen) styr sidan med postMessage; sidan rapporterar tillbaka sitt
+ * läge, och info-raden visar aktuell centripetalkraft (cirkelbanan)
+ * respektive gränsfarten längst ned (loopen). FULLSKÄRM startas med
+ * scenens egen .fs-btn inne i iframen och ger exakt originalsimuleringens
+ * fullskärmsläge med alla verktyg.
  *
  * ── typ: eulersdisk ──────────────────────────────────────────────────────
  * Demonstrationen ur fy1-4.4 (Energiprincipen): en blankpolerad metalldisk
@@ -331,6 +346,20 @@
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
         '.minisim-iframe{display:block;width:100%;aspect-ratio:560/430;border:0;',
         '  border-radius:4px;background:#eef0ee;}',
+        /* Situationsväxlare (typ: cirkularrorelse) — uppe till höger på
+           scenen, samma stil som simuleringssidornas sim-switch (mörk
+           aktiv flik på ljus botten). Krockar inte med iframens .fs-btn,
+           som sitter uppe till vänster. */
+        '.ms-sitvaxel{position:absolute;top:8px;right:8px;z-index:5;display:flex;',
+        '  border-radius:6px;overflow:hidden;border:1px solid #c9bfa9;',
+        '  box-shadow:0 1px 4px rgba(15,22,32,0.22);}',
+        '.ms-sitvaxel button{appearance:none;border:none;margin:0;padding:8px 13px;',
+        '  font-family:' + FONT + ';font-size:12.5px;font-weight:600;line-height:1;',
+        '  cursor:pointer;background:rgba(255,255,255,0.92);color:#1f2530;font-style:normal;}',
+        '.ms-sitvaxel button:hover{background:#fff;}',
+        '.ms-sitvaxel button + button{border-left:1px solid #c9bfa9;}',
+        '.ms-sitvaxel button.ms-aktiv{background:#0f1620;color:#f3eee4;cursor:default;}',
+        '.ms-sitvaxel button:focus-visible{outline:2px solid #7aa2e0;outline-offset:2px;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -5317,6 +5346,203 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: cirkularrorelse
+    // ══════════════════════════════════════════════════════════════════════
+    // Bilen i cirkelbana: den fristående simuleringen
+    // fysik2-cirkular-rorelse-app.html inbäddad som minisimulering via en
+    // iframe (?embed=1&mini=1) — samma mönster som gaffelbalans3d/dubbelkon.
+    // Växlaren uppe till höger på scenen byter situation mellan Cirkelbana
+    // (bilen sedd rakt uppifrån) och Loop (bilen från sidan). Kortets
+    // verktyg (Pausa/Fortsätt, Börja om, fartglidaren) styr sidan med
+    // postMessage, och sidan rapporterar tillbaka sitt läge: i cirkelbanan
+    // visar info-raden aktuell centripetalkraft, i loopen gränsfarten
+    // längst ned. FULLSKÄRM startas med scenens egen .fs-btn INNE i
+    // iframen och ger då exakt originalsimuleringens fullskärmsläge.
+    function buildCirkularrorelse(node, cfg) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var iframe = document.createElement('iframe');
+        iframe.className = 'minisim-iframe';
+        iframe.src = 'fysik2-cirkular-rorelse-app.html?embed=1&mini=1';
+        // scenens viewBox är 820×540 — låt iframen ha samma proportion så
+        // att SVG:n fyller ytan utan brevlådekanter
+        iframe.style.aspectRatio = '820 / 540';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.allow = 'fullscreen';
+        iframe.loading = 'lazy';
+        iframe.title =
+            'Simulering: en bil kör med konstant fart i en cirkelbana, sedd ' +
+            'rakt uppifrån — kraftpilen pekar hela tiden in mot centrum. ' +
+            'Växlaren uppe till höger byter till en loop sedd från sidan. ' +
+            'Fullskärmsknappen uppe till vänster i scenen öppnar ' +
+            'simuleringen i fullskärm med alla verktyg.';
+        scene.appendChild(iframe);
+
+        function sanda(cmd, value) {
+            try {
+                iframe.contentWindow.postMessage(
+                    { fysikCirkular: cmd, value: value }, location.origin);
+            } catch (e) { /* iframen inte laddad ännu */ }
+        }
+
+        // Tusentalsavgränsat heltal med hårt mellanslag (för krafter i N)
+        function fmtT(n) {
+            var s = String(Math.round(n));
+            return s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        // ── Situationsväxlaren uppe till höger på scenen ──────────────────
+        var lage = 'cirkel';            // 'cirkel' | 'loop'
+        var sistaV = 8, sistaV0 = 21;   // senast valda fart per situation
+        var running = true;
+
+        var vaxel = document.createElement('div');
+        vaxel.className = 'ms-sitvaxel';
+        var cirkelBtn = document.createElement('button');
+        cirkelBtn.type = 'button';
+        cirkelBtn.textContent = 'Cirkelbana';
+        var loopBtn = document.createElement('button');
+        loopBtn.type = 'button';
+        loopBtn.textContent = 'Loop';
+        vaxel.appendChild(cirkelBtn);
+        vaxel.appendChild(loopBtn);
+        scene.appendChild(vaxel);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+
+        var korBtn = document.createElement('button');
+        korBtn.type = 'button';
+        korBtn.className = 'minisim-btn ms-primar';
+        korBtn.textContent = 'Pausa';
+        korBtn.addEventListener('click', function () {
+            running = !running;
+            korBtn.textContent = running ? 'Pausa' : 'Fortsätt';
+            sanda(running ? 'kor' : 'paus');
+        });
+
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        omBtn.addEventListener('click', function () {
+            running = true;
+            korBtn.textContent = 'Pausa';
+            sanda('reset');
+        });
+
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+
+        controls.appendChild(korBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // ── Fartglidaren (byter roll med situationen) ─────────────────────
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.step = '0.1';
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        function visaFart(v) { sliderVal.textContent = fmt(v, 1) + ' m/s'; }
+
+        // Ställer om växlare, glidare och etikett efter situationen —
+        // används både vid klick här och när läget byts inne i iframen
+        // (fullskärmens radioknappar).
+        function visaLage() {
+            cirkelBtn.classList.toggle('ms-aktiv', lage === 'cirkel');
+            loopBtn.classList.toggle('ms-aktiv', lage === 'loop');
+            if (lage === 'cirkel') {
+                sliderLbl.textContent = 'Banhastighet';
+                slider.min = '2'; slider.max = '15';
+                slider.value = String(sistaV);
+                slider.setAttribute('aria-label',
+                    'Banhastighet i meter per sekund — större fart kräver ' +
+                    'större centripetalkraft');
+                visaFart(sistaV);
+            } else {
+                sliderLbl.textContent = 'Fart längst ned';
+                slider.min = '8'; slider.max = '24';
+                slider.value = String(sistaV0);
+                slider.setAttribute('aria-label',
+                    'Bilens fart längst ned i loopen i meter per sekund — ' +
+                    'under gränsfarten släpper bilen från banan');
+                visaFart(sistaV0);
+            }
+        }
+
+        function byt(nytt) {
+            if (lage === nytt) return;
+            lage = nytt;
+            running = true;
+            korBtn.textContent = 'Pausa';
+            visaLage();
+            sanda('situation', nytt);
+        }
+        cirkelBtn.addEventListener('click', function () { byt('cirkel'); });
+        loopBtn.addEventListener('click', function () { byt('loop'); });
+
+        slider.addEventListener('input', function () {
+            var v = parseFloat(slider.value);
+            visaFart(v);
+            if (lage === 'cirkel') { sistaV = v; sanda('fart', v); }
+            else { sistaV0 = v; sanda('fart0', v); }
+        });
+
+        visaLage();
+
+        // Lägesrapporten från sidan i iframen → växlare, glidare, info-rad
+        window.addEventListener('message', function (e) {
+            if (e.source !== iframe.contentWindow) return;
+            var st = e.data && e.data.fysikCirkularStatus;
+            if (!st) return;
+            if ((st.mode === 'cirkel' || st.mode === 'loop') && st.mode !== lage) {
+                lage = st.mode;
+                visaLage();
+            }
+            if (typeof st.running === 'boolean' && st.running !== running) {
+                running = st.running;
+                korBtn.textContent = running ? 'Pausa' : 'Fortsätt';
+            }
+            // synka glidaren om farten ändrats inne i iframen (fullskärm) —
+            // men aldrig medan användaren själv drar i den
+            if (document.activeElement !== slider) {
+                if (lage === 'cirkel' && isFinite(st.v) && Math.abs(st.v - sistaV) > 0.049) {
+                    sistaV = st.v; slider.value = String(st.v); visaFart(st.v);
+                } else if (lage === 'loop' && isFinite(st.v0) && Math.abs(st.v0 - sistaV0) > 0.049) {
+                    sistaV0 = st.v0; slider.value = String(st.v0); visaFart(st.v0);
+                }
+            }
+            if (lage === 'cirkel' && isFinite(st.FC)) {
+                info.innerHTML = '<em>F</em><sub>C</sub> = ' + fmtT(st.FC) + ' N';
+            } else if (lage === 'loop' && isFinite(st.vcrit)) {
+                info.textContent = 'Gränsfart längst ned: ' + fmt(st.vcrit, 1) + ' m/s';
+            }
+        });
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: linjal
     // ══════════════════════════════════════════════════════════════════════
     function buildLinjal(node, cfg) {
@@ -7058,6 +7284,7 @@
 
     // ── Register + publikt API ────────────────────────────────────────────
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+                  cirkularrorelse: buildCirkularrorelse,
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,

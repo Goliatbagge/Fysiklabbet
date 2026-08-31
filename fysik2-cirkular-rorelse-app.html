@@ -32,7 +32,14 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
-    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+        // mini-läge: sidan körs som minisimulering i en iframe i teorin —
+        // bara scenen visas, verktygen bor i minisim-kortet utanför.
+        window.__MINI = __q.has('mini');
+        if (window.__MINI) document.documentElement.classList.add('mini-mode');
+    </script>
     <style>
         /* ── Växlare mellan avsnittets två simuleringar ──
            Samma komponent som Stavmagneten/Magnetpoler och
@@ -83,6 +90,22 @@
         html.embed-mode #fb-feedback-widget { display: none !important; }
         html.embed-mode .pt-6 { padding-top: 0.5rem; }
         html.embed-mode .min-h-screen { min-height: 0 !important; }
+        /* Mini-läge (?embed=1&mini=1): teorins minisim-kort bäddar in sidan i
+           en iframe och visar BARA scenen — rubrik, formelkort, sidopanel och
+           de pedagogiska sektionerna göms, och scenens overlay-verktyg
+           (.scene-toggles, .scene-hint) göms utanför fullskärm (minisim-kortet
+           har egna knappar, glidare och situationsväxlare). I FULLSKÄRM — som
+           startas med scenens egen .fs-btn inne i iframen — visas allt precis
+           som i originalet: kryssrutorna, styrknapparna, glidarpanelen i
+           underkant och tipset. Samma mönster som fysik2-gaffelbalans-app. */
+        html.mini-mode .min-h-screen { padding: 0 !important; }
+        html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
+        html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
+        html.mini-mode main > .order-2 { display: none !important; }
+        html.mini-mode main .order-1 > :not(.scene-wrap) { display: none !important; }
+        html.mini-mode .scene-wrap { height: 100vh; border-radius: 6px; border: none; }
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-toggles,
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-hint { display: none; }
         .dark-container { background: transparent; }
         .glass-card {
             background: var(--lab-bg, #f3eee4);
@@ -357,6 +380,20 @@
             );
         };
 
+        // Mjuk pilkompression (cirkelscenen): linjär skala upp till knäet
+        // (60 % av cap), därefter avtagande tillväxt mot cap enligt
+        // t/(1 + t). Pilen FORTSÄTTER alltså alltid att växa när kraften
+        // eller accelerationen ökar — den hårda klippningen gjorde att
+        // pilen slutade växa redan vid ca 8 m/s (påpekat 2026-08-31) —
+        // men når aldrig fram till cirkelns centrum.
+        const softLen = (raw, cap) => {
+            const knee = cap * 0.6;
+            if (raw <= knee) return raw;
+            const rest = cap - knee;
+            const t = (raw - knee) / rest;
+            return knee + rest * (t / (1 + t));
+        };
+
         // Etikett vid pilspets: placeras ett stycke BORTOM spetsen i pilens
         // riktning, med anchor så texten flödar ut i fri yta.
         const tipLabel = (tip, dir, extra = 15) => {
@@ -440,7 +477,7 @@
             </g>
         );
 
-        const CircleScene = ({ phase, v, m, r, show, forceView }) => {
+        const CircleScene = ({ phase, v, m, r, show, forceView, kompakt }) => {
             const rPx = rToPx(r);
             const cosP = Math.cos(phase), sinP = Math.sin(phase);
             const P = { x: CX + rPx * cosP, y: CY - rPx * sinP };      // bilens mitt (motsols)
@@ -450,11 +487,12 @@
             const aC = v * v / r;
             const FC = m * aC;
 
-            // pillängder — kraftpilen får aldrig nå förbi centrum
-            const capF = Math.min(200, rPx - 28);
-            const LF = FC <= 0.5 ? 0 : Math.max(14, Math.min(FC * 0.02, capF));
-            const capA = Math.min(170, rPx - 40);
-            const LA = aC <= 0.02 ? 0 : Math.max(13, Math.min(aC * 8, capA));
+            // pillängder — pilen växer alltid med beloppet (softLen), men
+            // planar mjukt ut så att spetsen aldrig når cirkelns centrum
+            const capF = rPx - 12;
+            const LF = FC <= 0.5 ? 0 : Math.max(14, softLen(FC * 0.016, capF));
+            const capA = rPx - 30;
+            const LA = aC <= 0.02 ? 0 : Math.max(13, softLen(aC * 8, capA));
             const LV = Math.max(14, Math.min(v * 7, 150));
 
             const rotDeg = -(90 + phase / DEG);
@@ -526,8 +564,12 @@
                     )}
 
                     {/* tillståndstext — centrerad över scenens vänstra del så den
-                        inte hamnar bakom visa-panelen uppe till höger */}
-                    <text x="290" y={40} textAnchor="middle" fontSize="19" fontWeight="700" fill="rgba(15,22,32,0.7)">
+                        inte hamnar bakom visa-panelen uppe till höger. I mini-
+                        läget (kompakt) är skalan mindre och överkanten upptagen
+                        av fullskärmsknappen och situationsväxlaren — texten
+                        läggs då centrerad i den fria nederkanten i stället. */}
+                    <text x={kompakt ? 410 : 290} y={kompakt ? 524 : 40} textAnchor="middle"
+                          fontSize={kompakt ? 17 : 19} fontWeight="700" fill="rgba(15,22,32,0.7)">
                         Konstant fart — men hastigheten byter riktning
                     </text>
 
@@ -621,7 +663,7 @@
         const kFL = 0.003;                        // px per N (kraftpilar, loop)
         const lenFL = (F) => (F <= 1 ? 0 : Math.min(F * kFL, 250));
 
-        const LoopScene = ({ ls, v0, show, forceView }) => {
+        const LoopScene = ({ ls, v0, show, forceView, kompakt }) => {
             // ls: { st, th, dir, x, y, vx, vy, detach, trace }  (px där inget annat anges)
             const th = ls.th;
             const onTrack = ls.st === 'track';
@@ -758,8 +800,12 @@
                         </g>
                     )}
 
-                    {/* tillståndstext — vänsterställd yta, fri från visa-panelen */}
-                    <text x="290" y={38} textAnchor="middle" fontSize="19" fontWeight="700" fill={stateCol}>
+                    {/* tillståndstext — vänsterställd yta, fri från visa-panelen.
+                        I mini-läget (kompakt) täcks överkanten av fullskärms-
+                        knappen och situationsväxlaren — texten läggs då
+                        centrerad i den fria nederkanten under marklinjen. */}
+                    <text x={kompakt ? 410 : 290} y={kompakt ? 524 : 38} textAnchor="middle"
+                          fontSize={kompakt ? 17 : 19} fontWeight="700" fill={stateCol}>
                         {stateText}
                     </text>
 
@@ -1048,6 +1094,38 @@
             const vTop2 = v0 * v0 - 4 * G * RL;
             const nTop = vTop2 >= 0 ? ML * (vTop2 / RL - G) : NaN;   // F_N i toppen (kan vara < 0 = klarar inte)
 
+            // Mini-läget (?embed=1&mini=1): minisim-kortet i teorin styr sidan
+            // via postMessage och får läget tillbaka till sin info-rad.
+            // Refs i stället för deps: lyssnaren/intervallet sätts upp en gång,
+            // men ska alltid se senaste render-varvets funktioner och värden.
+            const miniRef = useRef({});
+            miniRef.current = { setModeReset, reset, setRunning, setV, setV0 };
+            const miniStatusRef = useRef({});
+            miniStatusRef.current = { mode, running, FC, v, v0, vcrit: VCRIT };
+            useEffect(() => {
+                if (!window.__MINI) return;
+                const onMsg = (e) => {
+                    const msg = e.data;
+                    if (!msg || !msg.fysikCirkular) return;
+                    const mi = miniRef.current;
+                    if (msg.fysikCirkular === 'situation') mi.setModeReset(msg.value === 'loop' ? 'loop' : 'cirkel');
+                    else if (msg.fysikCirkular === 'paus') mi.setRunning(false);
+                    else if (msg.fysikCirkular === 'kor') mi.setRunning(true);
+                    else if (msg.fysikCirkular === 'reset') mi.reset();
+                    else if (msg.fysikCirkular === 'fart')
+                        mi.setV(Math.max(VMIN, Math.min(VMAX, +msg.value || VMIN)));
+                    else if (msg.fysikCirkular === 'fart0')
+                        mi.setV0(Math.max(V0MIN, Math.min(V0MAX, +msg.value || V0MIN)));
+                };
+                window.addEventListener('message', onMsg);
+                const id = window.parent !== window
+                    ? setInterval(() => {
+                          window.parent.postMessage({ fysikCirkularStatus: miniStatusRef.current }, '*');
+                      }, 200)
+                    : null;
+                return () => { window.removeEventListener('message', onMsg); if (id) clearInterval(id); };
+            }, []);
+
             const primaryLabel = running ? 'Pausa' : 'Fortsätt';
 
             const sceneToggles = () => (
@@ -1133,10 +1211,12 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
-                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
                                     {mode === 'cirkel'
-                                        ? <CircleScene phase={phase} v={v} m={m} r={r} show={show} forceView={forceView} />
-                                        : <LoopScene ls={ls} v0={v0} show={show} forceView={forceView} />}
+                                        ? <CircleScene phase={phase} v={v} m={m} r={r} show={show} forceView={forceView}
+                                                       kompakt={window.__MINI && !isFullscreen} />
+                                        : <LoopScene ls={ls} v0={v0} show={show} forceView={forceView}
+                                                     kompakt={window.__MINI && !isFullscreen} />}
 
                                     <div className="scene-hint">
                                         {mode === 'cirkel'

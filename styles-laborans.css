@@ -2869,8 +2869,25 @@ button.lab-card-disabled { pointer-events: none; }
 
 /* Variabelsymbolen (allt före "=") i KaTeX-typsnittet så att listans t.ex.
    M, λ, Δt matchar formelns. Texten efter "=" behåller brödtypsnittet.
-   Färdig KaTeX i symbolen behåller sina egna fontar (mer specifikt). */
+   Färdig KaTeX i symbolen behåller sina egna fontar (mer specifikt).
+
+   KURSIVERINGEN KOMMER FRÅN KÄLLAN, inte härifrån. Regeln hade förut
+   font-style: italic + KaTeX_Math på hela symbolen, vilket lutade ALLT före
+   "=" — även det som inte är en variabel: sifferindex (*m*₁ fick kursiv
+   etta), operatorn Δ i Δ*t*, mätetal och enheter (1 J) och prosarader som
+   råkar innehålla ett likhetstecken. Variabler kursiveras i stället
+   explicit i md-filen (*m*, *α*, *λ*), som typografireglerna kräver.
+
+   Därför två skikt: symbolen sätts UPPRÄTT i KaTeX_Main (samma raka former
+   som formelns siffror, Δ och parenteser), och <em> — variabeln — får
+   KaTeX_Math, matematikkursiven. KaTeX_Math finns BARA i kursiv skärning,
+   så den får aldrig sättas på hela symbolen: då ritas även index och Δ med
+   den kursiva filen hur än font-style står. Se "Index och annat som inte är
+   en variabel" i CLAUDE.md. */
 .vardef-stack .vardef-sym {
+    font-family: 'KaTeX_Main', 'Cambria Math', serif;
+}
+.vardef-stack .vardef-sym em {
     font-family: 'KaTeX_Math', 'KaTeX_Main', 'Cambria Math', serif;
     font-style: italic;
 }

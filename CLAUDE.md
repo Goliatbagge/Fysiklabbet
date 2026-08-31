@@ -1255,6 +1255,43 @@ blockerar en `:::`-titel med ett funktionsnamn utanför matte.
 - I `data/ovningar.js` finns ingen sådan transform — där måste du själv
   skriva `F_\\mathrm{G}` (med dubbelt backslash, se nedan).
 
+### ⛔ Index och annat som inte är en variabel kursiveras ALDRIG
+
+**Kursiveringen tillhör variabeln själv, ingenting annat som råkar stå
+bredvid den.** Ettan i *m*₁ är en etikett som skiljer massa 1 från massa 2,
+inte en storhet, och ska därför stå rakt — precis som KaTeX sätter den i
+formeln ovanför (uttryckligt önskemål 2026-08-31). Lutar index och variabel
+lika mycket ser raden dessutom annorlunda ut än formeln den förklarar, och
+det är just den kopplingen där-listan finns till för.
+
+Rakt (aldrig kursivt):
+
+- **Sifferindex**: ₁, ₂, ₀ i *m*₁, *v*₀, *F*₂ — och siffrorna i `m_1`.
+- **Etikett-index**: G i $F_G$, N i $F_N$, p i $E_p$ (sköts automatiskt av
+  `uprightSubscripts()`, se ovan).
+- **Operatorer och prefix framför variabeln**: Δ i Δ*t*, Σ, ∫, d i d*x*.
+- **Mätetal, enheter och ord**: 1 J, 5,0 m/s, "Min", "Median".
+- **Parenteser, kommatecken och likhetstecken.**
+
+Kursivt: bara storhetsbeteckningen — latinsk (*m*, *v*, *T*) eller grekisk
+gemen (*α*, *λ*, *ω*, *ρ*). Versal grekisk som är en storhet kursiveras
+också (*Φ* för magnetiskt flöde), men Δ och Σ som operatorer gör det inte.
+
+**Skriv alltså `- *m*₁ = massa hos föremål 1 (kg)`** i där-listan, med
+asteriskerna om *bara* bokstaven. Samma sak i löptext, figurernas
+`<tspan font-style="italic">`, formelkortens `.flbl`-spann och
+canvas-etiketter: kursivera tecken för tecken, aldrig hela strängen.
+
+⚠️ **Sätt aldrig `font-style: italic` (eller `font-family: KaTeX_Math`) på
+en behållare som rymmer mer än variabeln.** Det var precis det felet i
+`.vardef-stack .vardef-sym`, som kursiverade *allt* före likhetstecknet i
+formelrutornas där-listor: sifferindexen, Δ i Δ*t*, "1 J" och till och med
+prosarader som råkade innehålla ett likhetstecken (upptäckt 2026-08-31).
+Regeln är numera tvåskiktad — `.vardef-sym` sätter upprätt KaTeX_Main och
+`.vardef-sym em` matematikkursiven KaTeX_Math. **KaTeX_Math finns bara i
+kursiv skärning**, så den familjen på en behållare lutar innehållet hur än
+`font-style` står; den hör hemma enbart på det som ska vara kursivt.
+
 ### Exponenter och tiopotenser
 
 **Använd ALDRIG Unicode-superscript-tecken (⁻, ¹, ², ⁷, ⁰ …) för exponenter

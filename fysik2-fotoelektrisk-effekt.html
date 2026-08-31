@@ -146,7 +146,7 @@
             <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:var(--lab-ink-muted);max-width:780px;line-height:1.65;">
                 Skjut ljus mot en metallyta och undersök Einsteins fotoelektriska effekt. Dra i våglängdsreglaget
                 för att ändra fotonens energi — bara när energin överstiger metallens utträdesarbete
-                <span class="italic-var">W</span> frigörs elektroner, och ytterligare energi blir till rörelseenergi.
+                <span class="italic-var">W</span><sub>u</sub> frigörs elektroner, och ytterligare energi blir till rörelseenergi.
                 Observera hur de frigjorda elektronernas rörelseenergi ökar med högre frekvens
                 (kortare våglängd), medan antalet elektroner per sekund ökar med intensiteten —
                 utan att deras rörelseenergi påverkas.
@@ -1162,7 +1162,7 @@ function App() {
                 <div className="value-card">
                     <div className="value-label">Utträdesarbete</div>
                     <div className="value-number">
-                        <em className="italic-var">W</em> = {fmt(metal.W, 2)}
+                        <em className="italic-var">W</em><sub style={{fontSize:'0.75em'}}>u</sub> = {fmt(metal.W, 2)}
                         <span className="unit">eV</span>
                     </div>
                 </div>
@@ -1177,7 +1177,7 @@ function App() {
                     borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(15, 22, 32, 0.35)',
                     boxShadow: emitted ? '0 0 18px rgba(34,197,94,0.12)' : 'none'
                 }}>
-                    <div className="value-label">Max rörelseenergi</div>
+                    <div className="value-label">Rörelseenergi</div>
                     <div className="value-number">
                         <em className="italic-var">E</em><sub style={{fontSize:'0.75em'}}>k</sub> = {fmt(Ek, 2)}
                         <span className="unit">eV</span>
@@ -1206,12 +1206,12 @@ function App() {
                     Ljus består av små energipaket, <strong>fotoner</strong>. Varje foton bär energin
                     <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">E</em>₍foton₎ = <em className="italic-var">h·f</em> = <em className="italic-var">h·c/λ</em></span>.
                     För att slå loss en elektron ur metallen krävs minst energin
-                    <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">W</em> </span>
+                    <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">W</em><sub>u</sub> </span>
                     (metallens <em>utträdesarbete</em>). Resten blir elektronens rörelseenergi:
                 </p>
 
                 <div className="formula-box" style={{ textAlign:'center', fontSize:'1.25rem', letterSpacing:'0.02em', marginBottom:18 }}>
-                    <em className="italic-var">E</em><sub>k,max</sub> = <em className="italic-var">h·f</em> − <em className="italic-var">W</em>
+                    <em className="italic-var">E</em><sub>k</sub> = <em className="italic-var">h·f</em> − <em className="italic-var">W</em><sub>u</sub>
                 </div>
 
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:14 }}>
@@ -1222,7 +1222,7 @@ function App() {
                     }}>
                         <div style={{ color:'#fca5a5', fontWeight:600, fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.9rem', marginBottom:6 }}>
-                            Om <em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em>
+                            Om <em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em><sub>u</sub>
                         </div>
                         <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>
@@ -1237,7 +1237,7 @@ function App() {
                     }}>
                         <div style={{ color:'#86efac', fontWeight:600, fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.9rem', marginBottom:6 }}>
-                            Om <em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em>
+                            Om <em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em><sub>u</sub>
                         </div>
                         <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>
@@ -1253,7 +1253,7 @@ function App() {
                               borderRadius:10 }}>
                     <div style={{ color:'#fde68a', fontFamily:'Poppins,sans-serif',
                                   fontWeight:600, fontSize:'0.92rem', marginBottom:6 }}>
-                        💡 Klassisk fysik funkar inte här
+                        Klassisk fysik räcker inte här
                     </div>
                     <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                   fontSize:'0.88rem', lineHeight:1.6 }}>

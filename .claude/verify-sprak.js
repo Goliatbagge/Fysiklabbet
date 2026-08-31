@@ -114,6 +114,22 @@ const REGLER = [
                   'Se "Funktionsnamn och variabler i rubriker" i CLAUDE.md.',
     },
     {
+        namn: 'rullar-utan-friktion',
+        niva: 'fel',
+        // Rullande hjul KRÄVER statisk friktion — "vagnen rullar utan
+        // friktion" är den missuppfattning en fysiker reagerar på (påpekat
+        // av en besökare 2026-08-31: lutande planets vagn och berg- och
+        // dalbanan). Rätt idealisering heter "utan energiförluster".
+        // Undantag: citerade missuppfattningar (”…”), texter som förklarar
+        // att rullning kräver friktion, och trissor (friktionsfri axel är
+        // en korrekt standardidealisering).
+        monster: /\b(?:rullar|rullande|hjulen|vagn(?:en)?)\b[^.!?]{0,60}\butan friktion\b|\butan friktion\b[^.!?]{0,60}\b(?:rullar|rullande|hjulen|vagn(?:en)?)\b/gi,
+        undantag: [/”/, /trissa/i, /inte ens rulla/i, /kräver/i],
+        rattelse: 'Rullande hjul kräver statisk friktion — skriv "utan ' +
+                  'energiförluster" i stället för "utan friktion" om vagnar, ' +
+                  'hjul och berg- och dalbanor. (Besökarpåpekande 2026-08-31.)',
+    },
+    {
         namn: 'förkortningar',
         niva: 'varning',
         monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.)/gi,

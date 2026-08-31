@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lutande plan — Fysiklabbet</title>
-    <meta name="description" content="Låda (med friktion) och vagn (utan friktion) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
+    <meta name="description" content="Låda (med friktion) och vagn (utan energiförluster) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-lutande-plan-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Lutande plan — Fysik nivå 1">
-    <meta property="og:description" content="Låda (med friktion) och vagn (utan friktion) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
+    <meta property="og:description" content="Låda (med friktion) och vagn (utan energiförluster) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-lutande-plan-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lutande plan — Fysik nivå 1">
-    <meta name="twitter:description" content="Låda (med friktion) och vagn (utan friktion) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
+    <meta name="twitter:description" content="Låda (med friktion) och vagn (utan energiförluster) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -449,7 +449,7 @@
             const angLbl = { x: A.x + flip * (Rang + 13), y: A.y - 8 };
 
             const stateText = mode === 'vagn'
-                ? (alpha < 0.5 ? 'Vågrätt — vagnen står still' : 'Vagnen rullar fritt nedför — ingen friktion')
+                ? (alpha < 0.5 ? 'Vågrätt — vagnen står still' : 'Vagnen rullar fritt nedför — inga energiförluster')
                 : (sliding ? 'Lådan glider — glidfriktion'
                            : (atLimit ? 'På gränsen — maximal statisk friktion' : 'I vila — statisk friktion håller emot'));
             const stateCol = sliding ? COL.acc : (atLimit ? COL.frik : 'rgba(15,22,32,0.7)');
@@ -924,7 +924,7 @@
                     <label><input type="checkbox" checked={show.accel} onChange={() => tShow('accel')} /><span>Acceleration</span></label>
                     <div className="st-title mt">Objekt</div>
                     <label><input type="radio" name="mode" checked={mode === 'lada'} onChange={() => setModeReset('lada')} /><span>Låda (med friktion)</span></label>
-                    <label><input type="radio" name="mode" checked={mode === 'vagn'} onChange={() => setModeReset('vagn')} /><span>Vagn (utan friktion)</span></label>
+                    <label><input type="radio" name="mode" checked={mode === 'vagn'} onChange={() => setModeReset('vagn')} /><span>Vagn (inga energiförluster)</span></label>
                     <div className="st-title mt">Vy</div>
                     <label><input type="checkbox" checked={flipped} onChange={() => setFlipped((f) => !f)} /><span>Spegelvänd</span></label>
                     {isFullscreen && (
@@ -959,7 +959,7 @@
                             planet som drar föremålet nedför (<em>F</em><sub>1</sub> = <em>F</em><sub>G</sub> · sin <em>α</em>),
                             och en <strong>vinkelrät</strong> mot planet (<em>F</em><sub>2</sub> = <em>F</em><sub>G</sub> · cos <em>α</em>)
                             som balanseras av normalkraften <em>F</em><sub>N</sub>. En <strong>vagn</strong> rullar
-                            fritt (ingen friktion) medan en <strong>låda</strong> hålls kvar av friktionen — ända tills
+                            fritt (inga energiförluster) medan en <strong>låda</strong> hålls kvar av friktionen — ända tills
                             lutningen blir så brant att drivkraften nedför överstiger den maximala friktionen. Öka vinkeln
                             <em> α</em> och se när lådan släpper.
                         </p>
@@ -1005,7 +1005,7 @@
                                     <div className="flbl mb-2">Objekt på planet</div>
                                     <div className="mode-seg">
                                         <button className={mode === 'vagn' ? 'active' : ''} onClick={() => setModeReset('vagn')}>
-                                            Vagn<span className="sub">utan friktion</span>
+                                            Vagn<span className="sub">inga energiförluster</span>
                                         </button>
                                         <button className={mode === 'lada' ? 'active' : ''} onClick={() => setModeReset('lada')}>
                                             Låda<span className="sub">med friktion</span>
@@ -1073,7 +1073,7 @@
                                         Drivkraften nedför (<span style={{ color: COL.tyngd, fontWeight: 600 }}><em>F</em><sub>G</sub>·sin <em>α</em></span>) växer med vinkeln,
                                         {mode === 'lada'
                                             ? <span> medan maxfriktionen (<span style={{ color: COL.frik, fontWeight: 600 }}><em>μ</em>·<em>F</em><sub>G</sub>·cos <em>α</em></span>) avtar. Där de korsas (tan <em>α</em> = <em>μ</em>) börjar lådan glida.</span>
-                                            : <span> och utan friktion glider vagnen vid minsta lutning.</span>}
+                                            : <span> och vagnen, som rullar utan energiförluster, kommer i rörelse vid minsta lutning.</span>}
                                     </p>
                                 </div>
                             </div>
@@ -1091,11 +1091,11 @@
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
-                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vagn utan friktion</h3>
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vagn utan energiförluster</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Utan friktion finns inget som håller emot — vagnen accelererar nedför så fort planet lutar.
-                                    Accelerationen blir <em>a</em> = <em>g</em>·sin <em>α</em>, oberoende av massan: en tung och en
-                                    lätt vagn rullar lika fort.
+                                    Vagnens lätta hjul rullar utan energiförluster, så inget bromsar vagnen: den accelererar nedför
+                                    så fort planet lutar. Accelerationen blir <em>a</em> = <em>g</em>·sin <em>α</em>, oberoende av
+                                    massan: en tung och en lätt vagn rullar lika fort.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
@@ -1119,10 +1119,16 @@
                                 <li><strong>”Tyngre föremål glider lättare.”</strong> Nej — gränsen för glidning beror bara på
                                     vinkeln och friktionstalet (tan <em>α</em> = <em>μ</em>), inte på massan. Både drivkraften och
                                     maxfriktionen är proportionella mot <em>m</em>, så massan ”stryks bort”.</li>
-                                <li><strong>”En tung vagn rullar fortare nedför.”</strong> Nej — utan friktion är accelerationen
+                                <li><strong>”En tung vagn rullar fortare nedför.”</strong> Nej — när inget bromsar är accelerationen
                                     <em> g</em>·sin <em>α</em> för alla massor. Massan påverkar kraften, men inte accelerationen.</li>
+                                <li><strong>”Vagnen rullar utan friktion.”</strong> Rullning <em>kräver</em> faktiskt friktion:
+                                    det är den statiska friktionen mellan hjul och underlag som får hjulen att snurra. Den uträttar
+                                    dock inget arbete, så det rätta idealfallet är en vagn <em>utan energiförluster</em>.</li>
                                 <li><strong>”Friktionen är alltid <em>μ</em>·<em>F</em><sub>N</sub>.”</strong> Nej — det är maxvärdet.
                                     Står lådan still är friktionen precis lika stor som drivkraften nedför, och kan vara mindre.</li>
+                                <li><strong>”Lådan glider med samma friktionstal som höll den kvar.”</strong> I verkligheten har de
+                                    flesta materialpar två friktionstal, ett statiskt för vila och ett dynamiskt för glidning, och
+                                    det statiska är oftast störst. Här räknar vi, som i kursen, med ett gemensamt <em>μ</em>.</li>
                             </ul>
                         </details>
                     </div>

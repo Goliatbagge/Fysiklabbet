@@ -35111,12 +35111,6 @@
     var xIns = T.str('h=6 969,5...−6 378=591,5... km', padL, y);
     T.stepEnd();
 
-    T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
-      [['Först nu avrundar jag. Talen i']],
-      [['subtraktionen är nästan lika']],
-      [['stora, så bara två siffror i']],
-      [['svaret är säkra: 590 km.']]
-    ]));
     var avrS = '≈590 km';
     if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
     else { y += adv + 1.2 * F; T.str(avrS, padL, y); }

@@ -16477,10 +16477,23 @@
     underline(xeA, y);
     stepEnd();
 
-    /* ---- b) riktningarna i nedre läget ---- */
+    /* ---- b) riktningarna i nedre läget ----
+     * UNDANTAG från REGELN "rubrik + formel i SAMMA steg" (uttryckligt
+     * önskemål 2026-08-31): rubriken "b)" skrivs för sig, och krafterna
+     * ritas i figuren FÖRST i nästa klicksteg. Vid a) står vyn kvar vid
+     * figuren och pilarna kan ritas direkt, men här har skriften gått
+     * långt ned på arket — utan rubriken som förvarning dyker pilarna upp
+     * långt uppe i bild utan att eleven vet att b) har börjat. */
     y += adv + 1.2 * F;
-    var bB = bubble(120, bubbleTop(y - adv), bw, [
-      [['b) I nedersta läget pekar']],
+    placeString('b) Centripetalkraft i nedre läget', padL, y,
+                s * 0.62, F * 0.62, acts);
+    stepEnd();
+
+    /* Bubblan står vid skrivraden, INTE uppe vid figuren: i "Med tankar"
+     * visas den innan pennan flyttar sig, och vyn står kvar här. En
+     * bubbla uppe vid figuren hade visats utanför bild. */
+    var bB = bubble(120, bubbleTop(y), bw, [
+      [['I nedersta läget pekar']],
       [['spännkraften uppåt mot mitten,']],
       [['men tyngdkraften nedåt.']]
     ]);
@@ -16493,9 +16506,6 @@
     placeString('F_G', 231, 318, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
-    placeString('b) Centripetalkraft i nedre läget', padL, y,
-                s * 0.62, F * 0.62, acts);
-    pause(300);
     y += 2.0 * F;
     xx = placeString('F_C=', padL, y, s, F, acts);
     fracH('m·v^2', 'r', xx, y);
@@ -37028,7 +37038,14 @@
         scrollTarget = clampT(py - (ph + 0.40 * fri));
       }
       if (scrollTarget != null && Math.abs(scrollTarget - wrap.scrollTop) > 1) {
-        wrap.scrollTop += (scrollTarget - wrap.scrollTop) * 0.08;
+        var d = scrollTarget - wrap.scrollTop;
+        /* Kort sträcka: glid mjukt, rad för rad. LÅNG sträcka (pennan
+         * byter del av arket — hoppar till exempel upp i figuren för att
+         * rita krafterna i b-uppgiften): flytta blicken DIREKT. Med bara
+         * glidningen hann strecken ritas färdigt medan vyn fortfarande
+         * var på väg, så eleven missade just det som skulle visas
+         * (påpekat 2026-08-31). */
+        wrap.scrollTop += Math.abs(d) > 0.8 * fri ? d : d * 0.08;
       }
     }
 

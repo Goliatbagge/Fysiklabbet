@@ -20,8 +20,6 @@ $$
 a^0 = 1, \quad \text{där } a \neq 0
 $$
 
-**Varning!** $7^0 \neq 0$ — värdet är 1, inte 0.
-
 ::: härledning "Undersökning — Tolkning av exponenten noll"
 För att undersöka det så studerar vi till exempel kvoten $\dfrac{7^5}{7^5}$ och
 beräknar den på två sätt.
@@ -45,8 +43,12 @@ definierat.
 :::
 :::
 
+**Varning!** $7^0$ är inte 0. Värdet är 1. Att exponenten är noll betyder
+alltså inte att potensen blir noll, och det är en av de vanligaste
+missuppfattningarna.
+
 ::: exempel "Exempel 1 — Exponenten noll"
-**Beräkna<br>a) $25^0$<br>b) $4^0 + (-7)^0$**
+**Beräkna<br>a)&nbsp;$25^0$&emsp;&emsp;b)&nbsp;$4^0 + (-7)^0$**
 
 ::: handskrift
 typ: exponentnoll
@@ -107,7 +109,7 @@ exponenten".
 :::
 
 ::: exempel "Exempel 2 — Negativa exponenter"
-**Beräkna utan räknare<br>a) $4^{-2}$<br>b) $5^{-1}$**
+**Beräkna utan räknare<br>a)&nbsp;$4^{-2}$&emsp;&emsp;b)&nbsp;$5^{-1}$**
 
 ::: handskrift
 typ: negexponent
@@ -193,7 +195,7 @@ det vill säga $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
 :::
 
 ::: exempel "Exempel 5 — Bråk med negativa exponenter"
-**Beräkna<br>a) $\left(\dfrac{3}{4}\right)^{-1}$<br>b) $\left(\dfrac{4}{5}\right)^{-2}$**
+**Beräkna<br>a)&nbsp;$\left(\dfrac{3}{4}\right)^{-1}$&emsp;&emsp;b)&nbsp;$\left(\dfrac{4}{5}\right)^{-2}$**
 
 ::: handskrift
 typ: brakinvers
@@ -208,7 +210,7 @@ $$
 
 **Svar:** $\dfrac{4}{3}$
 
-**b)** Invertera bråket och byt tecken på exponenten — sedan är det en
+**b)** Invertera bråket och byt tecken på exponenten. Sedan är det en
 vanlig potens:
 
 $$

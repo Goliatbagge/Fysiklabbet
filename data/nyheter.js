@@ -156,6 +156,56 @@ const NYHETER_ALL = [
     ]
   },
   {
+    id: "2026-08-31-spinnvagor-i-rorelse",
+    date: "2026-08-31",
+    title: "Vågen går rakt genom magneten utan att flytta en enda atom — nu har den fångats ner till 67 nanometers våglängd",
+    deck: "En spinnvåg är en krusning i atomernas magnetiska riktningar, och den skulle kunna bära information genom ett material utan att någon ström flyter. Ett europeiskt forskarlag har byggt en röntgenmetod som avbildar sådana vågor direkt, och såg då en process som ingen hade sett förut.",
+    category: "Magnetism",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-08-31-spinnvagor-i-rorelse.jpg",
+    imageAlt: "En svart, spegelblank kristall med många plana fasetter, fotograferad mot vit bakgrund. Kristallen är ungefär formad som en tillplattad kula och har några små röda fläckar kvar på ytan.",
+    imageCredit: "Foto: Krizu / Wikimedia Commons (CC BY-SA 3.0). Bilden visar en enkristall av yttriumjärngranat, samma material som filmen i försöket var gjord av.",
+    tags: ["magnetism", "magnon", "spinnvåg", "vågor", "spinn", "yttriumjärngranat", "röntgenstrålning", "synkrotron", "diffraktion", "materialfysik", "parametrisk resonans"],
+    sources: [
+      { name: "Physics World — X-ray camera catches spin waves in the act (augusti 2026)", url: "https://physicsworld.com/a/x-ray-camera-catches-spin-waves-in-the-act/" },
+      { name: "Max-Born-Institut — Magnon momentum microscopy: a new window into nanoscale spin-wave physics", url: "https://mbi-berlin.de/research/highlights/details/magnon-momentum-microscopy-a-new-window-into-nanoscale-spin-wave-physics" },
+      { name: "Helmholtz-Zentrum Berlin — pressmeddelande 8 juni 2026", url: "https://www.helmholtz-berlin.de/pubbin/news_seite?nid=34186&sprache=en&seitenid=" },
+      { name: "EPFL — A new window into the hidden world of spin waves", url: "https://actu.epfl.ch/news/a-new-window-into-the-hidden-world-of-spin-waves/" }
+    ],
+    research: {
+      citation: "Steffen Wittrock, Christopher Klose, Salvatore Perna, Korbinian Baumgaertl, Andrea Mucchietto, Michael Schneider, Josefin Fuchs, Victor Deinhart, Tamer Karaman, Dirk Grundler, Stefan Eisebitt, Bastian Pfau, Daniel Schick, ”Soft-X-ray momentum microscopy of nonlinear magnon interactions”, Nature Physics 22, 1160–1165, publicerad online 5 juni 2026, DOI 10.1038/s41567-026-03318-z (CC BY 4.0). Förhandsversion: arXiv:2504.20958v3 (CC BY 4.0).",
+      url: "https://doi.org/10.1038/s41567-026-03318-z"
+    },
+    body: [
+      { type: 'p', html: 'Inuti en magnet är varje atom en liten magnet i sig, med en egen riktning. I ett välordnat material pekar de alla åt samma håll. Rubbar man en enda av dem så att den börjar vackla drar den med sig sina grannar, och vacklandet vandrar vidare genom materialet som en krusning på vatten. Ingen atom flyttar sig någonstans. Det som färdas är riktningen.' },
+      { type: 'p', html: 'Krusningen kallas spinnvåg, och precis som ljuset kommer i portioner som heter fotoner kommer den i portioner som heter magnoner. På senare år har de blivit en av de mer lovande idéerna för att bygga kretsar som klarar sig utan ström: en signal som bärs av magnoner flyttar ingen laddning, och då uppstår inte heller den värme som tvingar fram fläktar och kylflänsar i varje dator.' },
+      { type: 'h2', text: 'Problemet har varit att se dem' },
+      { type: 'p', html: 'Haken är att de mest intressanta spinnvågorna är korta och snabba. Ju kortare våglängd, desto mer styrs vågen av de utbyteskrafter som håller grannatomernas riktningar samman, och desto närmare magnetismens egen kärna kommer man. Men strax under hundra nanometer tar mätmetoderna slut. Optiska metoder begränsas av ljusets egen våglängd, som är många gånger längre än den våg man vill mäta. Röntgenmikroskop som ritar upp vågen punkt för punkt begränsas i stället av sina linser och av hur korta ljusblixtar de kan leverera.' },
+      { type: 'p', html: 'Ett lag lett från Max Born-institutet i Berlin, tillsammans med Helmholtz-Zentrum Berlin, universitetet Federico&nbsp;II i Neapel och EPFL i Lausanne, har nu tagit en annan väg. I stället för att rita upp vågen där den befinner sig mäter de på en gång vilka våglängder och riktningar som finns i provet. Resultatet publicerades i <em>Nature Physics</em>.' },
+      { type: 'h2', text: 'Läs av avtrycket i stället för vågen' },
+      { type: 'p', html: 'Metoden vilar på en gammal idé. En spinnvåg gör materialets magnetisering periodiskt olika på olika ställen, ungefär som räfflorna i ett optiskt gitter. Skickar man röntgenstrålning rakt genom provet böjs den därför av i bestämda vinklar, och avböjningsvinkeln säger direkt hur lång vågen är och åt vilket håll den går. Man mäter alltså aldrig vågen själv, bara det avtryck den lämnar i strålen.' },
+      { type: 'p', html: 'För att avböjningen ska bli mätbar ställs fotonernas energi in på 708&nbsp;eV, exakt där järnatomerna i provet absorberar som kraftigast och kontrasten mot magnetismen blir störst. En liten skärm mitt i strålgången fångar upp den ostörda strålen, så att bara det svaga avböjda ljuset når detektorn. Kvar på bilden blir ett par ljusa fläckar: spinnvågen, avläst i ett enda svep.' },
+      { type: 'p', html: 'Provet var en film av yttriumjärngranat, hundra nanometer tunn, det material som nästan all magnonforskning utgår från. Vågorna sattes i gång elektriskt med en mikrovågsledare och ett gitter av 200&nbsp;nanometer breda permalloystrimlor. Mätningarna gjordes vid två synkrotroner: BESSY&nbsp;II i Berlin och PETRA&nbsp;III i Hamburg.' },
+      { type: 'h2', text: 'Känsligheten blev den första överraskningen' },
+      { type: 'p', html: 'Laget kunde direkt driva och läsa av vågor med våglängden 79&nbsp;nanometer, vid drivfrekvensen 12,1&nbsp;GHz. Det betyder att varje atoms magnetiska riktning svängde drygt tolv miljarder varv i sekunden, samtidigt som mönstret upprepade sig var åttionde nanometer. Vågor som uppstod av sig själva inne i materialet kom ännu längre ner, till omkring 67&nbsp;nanometer.' },
+      { type: 'p', html: 'Lika viktigt var hur lite som behövdes. En tydlig signal syntes på en halv minuts mätning redan vid mikrovågseffekten −34&nbsp;dBm, alltså mindre än en miljondels watt. Ett röntgenmikroskop av det äldre slaget hade behövt mer än tusen gånger så mycket effekt för att alls skilja vågen från bruset på ett systerprov.' },
+      { type: 'image', src: 'nyheter/bilder/2026-08-31-spinnvagor-i-rorelse-2.jpg', alt: 'Tre mätbilder bredvid varandra. I den vänstra syns bara två små prickar, i den mittersta har prickarna blivit en sluten oval ring, och i den högra ligger flera ovala ringar innanför och utanför varandra.', caption: 'Samma drivfrekvens, 8,84&nbsp;GHz, med effekten uppskruvad från vänster till höger. Först finns bara den insända vågen, som två prickar. Sedan sluter sig prickarna till en ellips: magnoner åt alla håll. Längst till höger har det tillkommit flera ringar, vid övertoner och undertoner av drivfrekvensen. Läget i bilden anger vågens riktning och våglängd, inte var i provet den finns.', credit: 'Figur: Wittrock med flera, arXiv:2504.20958v3 / Nature Physics 22, 1160–1165 (2026), CC BY 4.0. Beskuren.' },
+      { type: 'h2', text: 'Ringen som inte skulle vara där' },
+      { type: 'p', html: 'Vid låg effekt uppträdde precis det väntade: två fläckar, en på var sida, från den våg som skickats in. Vreds effekten upp bytte bilden karaktär. Fläckarna slöt sig till en ellips.' },
+      { type: 'p', html: 'Ringen betyder att det plötsligt fanns magnoner åt alla håll, inte bara åt det håll som drevs. Förklaringen laget räknade fram är en fyrmagnonprocess: två magnoner ur den drivna vågen krockar och ersätts av två nya, som går åt andra håll men tillsammans bär samma energi och samma rörelsemängd som de gamla. Ellipsen är helt enkelt alla de riktningar som råkar ha rätt frekvens. Att den blir en ellips och inte en cirkel beror på att en spinnvåg rör sig olika fort längs magnetfältet och tvärs över det.' },
+      { type: 'p', html: 'Och det stannade inte vid en ring. Drevs provet i stället vid 2,38&nbsp;GHz lade sig flera ellipser innanför och utanför varandra, vid två, tre och fyra gånger drivfrekvensen. Skruvades effekten upp ännu mer vid 8,84&nbsp;GHz dök ringar upp vid åttondelar av frekvensen, både under och över den. Övertoner är välkända från varje svängning som drivs hårt nog, från en gitarrsträng till en högtalare som distar. Att se dem lägga sig som ringar av magnonriktningar var däremot nytt.' },
+      { type: 'quote', html: 'Sådana icke-linjära växelverkningar är välkända för likformiga spinnvågsmoder. Men vi upptäckte en mer allmän sorts fyrmagnonspridning, där även vandrande magnoner är inblandade.', cite: 'Salvatore Perna, universitetet Federico II i Neapel, som tog fram den teoretiska modellen (översatt från engelska)' },
+      { type: 'p', html: 'Att kunna se de här processerna är mer än en kuriositet. Icke-linjära växelverkningar är just det som gör att en signal kan påverka en annan, och därmed det som skulle krävas för att bygga något som räknar med magnoner i stället för med elektriska strömmar. Hittills har de fått slutas fram ur indirekta mätningar. Nu ligger de på en bild.' },
+      { type: 'p', html: 'Metoden har heller ingen inbyggd övre gräns för frekvensen, till skillnad från de flesta alternativ. Det öppnar för att följa magnoner ända upp i terahertzområdet, tusen gånger snabbare än de gigahertz som mätts här. Det är också där de vore som mest användbara.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Yttriumjärngranat, med formeln Y<sub>3</sub>Fe<sub>5</sub>O<sub>12</sub>, dämpar magnetiska svängningar sämre än något annat känt material. Därför hinner en spinnvåg vandra långt innan den dör ut, och därför är materialet magnonforskningens motsvarighet till labbråttan.',
+        'Röntgenfotonerna i försöket hade energin 708&nbsp;eV, drygt trehundra gånger mer än en foton av grönt ljus.',
+        'En magnon bär ingen elektrisk laddning alls. Det den flyttar är rörelsemängdsmoment, alltså själva spinnet, och det är därför en magnonkrets slipper resistansvärme.',
+        'Ett magnetfält på 30&nbsp;mT, ungefär sexhundra gånger jordmagnetfältet vid marken, höll atomernas riktningar på plats medan vågorna skickades genom filmen.'
+      ] }
+    ]
+  },
+  {
     id: "2026-08-30-droppen-utan-karl",
     date: "2026-08-30",
     title: "500 molekyler kyldes till tjugo miljarddels grad över nollpunkten — sedan höll de ihop som en droppe helt utan kärl",

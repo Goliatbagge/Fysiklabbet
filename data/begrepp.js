@@ -1913,5 +1913,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Sådana platser finns det fem av i varje system med två stora kroppar, och de brukar numreras L1 till L5. L1 ligger mellan solen och jorden, L2 rakt bakom jorden sett från solen, L3 på andra sidan solen, och L4 och L5 i själva jordbanan, en sjättedels varv före respektive efter jorden. De tre första är ostadiga som en kula på en sadel: minsta knuff åt sidan växer, så en farkost där måste tända motorerna med jämna mellanrum för att inte driva bort. L4 och L5 är i stället stabila, och i Jupiters L4 och L5 har det med tiden samlats tusentals asteroider, de så kallade trojanerna.' },
       { type: 'p', html: 'Punkterna är uppkallade efter Joseph-Louis Lagrange, som på 1770-talet räknade fram dem ur gravitationslagen. I dag är L2 i systemet sol–jord den populäraste adressen för rymdteleskop, drygt 1,5 miljoner kilometer från oss. Där ligger solen, jorden och månen åt samma håll, så ett enda solskydd räcker för att hålla allt varmt och lysande utanför synfältet. Teleskopen står inte exakt i punkten utan sveper runt den i en vid bana, bland annat för att slippa hamna i jordens skugga.' }
     ]
+  },
+  {
+    id: 'magnon',
+    term: 'Magnon',
+    former: ['magnon', 'magnonen', 'magnoner', 'magnonerna', 'spinnvåg', 'spinnvågen', 'spinnvågor', 'spinnvågorna', 'spinnvågsmod', 'spinnvågsmoder', 'magnonik', 'magnoniken', 'magnonkrets', 'magnonkretsen', 'magnonkretsar', 'magnonforskning', 'magnonforskningen', 'magnondynamik', 'magnondynamiken', 'fyrmagnonspridning', 'fyrmagnonspridningen', 'magnonriktning', 'magnonriktningar'],
+    kort: 'Den minsta portionen av en spinnvåg, alltså av en krusning som vandrar genom ett magnetiskt material. Ingen materia flyttar sig i vågen, bara atomernas magnetiska riktningar.',
+    relaterade: ['spinn', 'gitter', 'altermagnetism', 'skyrmion'],
+    body: [
+      { type: 'p', html: 'Tänk dig en publik på en läktare där alla står vända åt samma håll. Om en person vrider sig lite åt sidan, och grannen följer efter, och grannens granne efter det, så vandrar en vridning längs raden. Ingen har bytt plats. Det som rör sig är riktningen. Så ser en spinnvåg ut i en magnet: varje atom bär en liten inbyggd magnet, ett spinn, och i ett magnetiskt material pekar de åt samma håll. Rubbas en av dem drar den med sig sina grannar, och rubbningen färdas vidare som en våg.' },
+      { type: 'p', html: 'Kvantmekaniken tillåter inte att en sådan våg får hur lite energi som helst. Den kommer i bestämda portioner, precis som ljus kommer i fotoner, och portionen kallas magnon. En magnon har en våglängd och en riktning, och den flyttar rörelsemängdsmoment genom materialet — men ingen elektrisk laddning. Det låter som en detalj men är själva poängen: en ström av laddningar värmer alltid upp ledaren den passerar, medan en magnon inte gör det.' },
+      { type: 'p', html: 'Just därför finns ett helt forskningsfält, magnonik, som försöker bygga kretsar där signalerna bärs av spinnvågor i stället för av elektrisk ström. Vågorna kan dessutom vara mycket korta, ner mot några tiotals nanometer, samtidigt som de svänger miljardtals gånger i sekunden. Det svåra är att mäta dem: ju kortare vågen är, desto sämre fungerar vanliga optiska metoder, eftersom ljusets egen våglängd då är många gånger längre än det man vill se.' }
+    ]
+  },
+  {
+    id: 'yttriumjarngranat',
+    term: 'Yttriumjärngranat',
+    former: ['yttriumjärngranat', 'yttriumjärngranaten', 'järngranat', 'järngranaten'],
+    kort: 'Ett genomskinligt magnetiskt mineral som dämpar magnetiska svängningar sämre än något annat känt material. Därför används det i nästan alla försök med spinnvågor.',
+    relaterade: ['magnon', 'spinn', 'gitter'],
+    body: [
+      { type: 'p', html: 'Yttriumjärngranat är ett konstgjort material med den kemiska formeln Y<sub>3</sub>Fe<sub>5</sub>O<sub>12</sub>, ofta förkortat YIG efter det engelska namnet. Det odlas som en kristall i en smälta och kan sedan skäras i skivor eller växas som en film bara några hundra atomlager tjock. Trots att det innehåller järn leder det ingen ström alls, och en tunn skiva är rentav genomskinlig för infrarött ljus.' },
+      { type: 'p', html: 'Det som gör materialet berömt är att magnetiska svängningar dör ut så långsamt i det. Sätter man en krusning i rörelse genom atomernas magnetiska riktningar hinner den vandra centimetervis innan den ebbar ut, medan den i en vanlig metall skulle vara borta efter någon mikrometer. Skälet är att materialet är en isolator: det finns inga fria elektroner som kan rusa omkring och sprida svängningens energi till värme.' },
+      { type: 'p', html: 'Den låga dämpningen har gjort materialet till en standardkomponent. Det sitter i mikrovågsfilter och oscillatorer i radar och radiosändare, där en liten kula av det används som ett avstämbart resonanselement, och det är i stort sett alltid yttriumjärngranat som används när någon vill undersöka hur spinnvågor uppför sig. Rollen är ungefär densamma som kiselns i halvledarforskningen: inte nödvändigtvis det mest spännande materialet, men det renaste och mest förutsägbara att arbeta i.' }
+    ]
   }
 ];

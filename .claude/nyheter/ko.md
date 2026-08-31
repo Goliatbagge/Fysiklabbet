@@ -26,7 +26,7 @@ Format per post:
   Behöver datumet flyttas räcker det att ändra `date` i artikelposten; flytta då den här
   notisens datumangivelser med. (tillagd 2026-08-30)
 
-- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05]** — ett lag vid
+- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05. STATUS 2026-08-31: fönstret är öppet, men måndagen gick till spinnvågsnyheten eftersom söndagens artikel var kvantfysik och två kvantnyheter i rad är förbjudet. Publiceras tisdag 1 september eller någon av dagarna därefter, senast lördag.]** — ett lag vid
   University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
   Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
   med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan
@@ -52,14 +52,6 @@ Format per post:
   originalstudien. Källa (Phys.org 2026-08-29):
   https://phys.org/news/2026-08-reveals-internal-motion-electron-crystals.html
   (tillagd 2026-08-30)
-
-- **Röntgenkameran som fångar spinnvågor i rörelse** — en avbildningsteknik som
-  följer magnoner (spinnvågor) medan de färdas genom ett material, vilket är
-  svårt eftersom de rör sig snabbt och dör ut fort. Ingång: vågor, magnetism och
-  varför en våg kan bära information utan att något material följer med. Leta upp
-  originalstudien innan den används. Källa (Physics World, augusti 2026):
-  https://physicsworld.com/a/x-ray-camera-catches-spin-waves-in-the-act/
-  (tillagd 2026-08-29)
 
 - **Strålskyddsväst kan minska cancerrisken för astronauter** — en väst som
   skärmar av den kosmiska strålningen kring de mest strålkänsliga organen har

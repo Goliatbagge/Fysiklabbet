@@ -40,6 +40,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-transformator-app.html',
     'fysik2-hastighetsvaljare-app.html',
     'fysik2-virvelstrommar-app.html',
+    'fysik2-magnetror-app.html',
     'fysik2-ledare-magnetfalt-app.html',
     'fysik2-induktion-app.html',
     'fysik2-lenz-lag-app.html',

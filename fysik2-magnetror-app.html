@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magneten i kopparröret — Fysiklabbet</title>
+    <meta name="description" content="Släpp två likadana magneter samtidigt, en genom ett kopparrör och en genom ett plaströr. Magneten i plaströret faller fritt, medan magneten i kopparröret bromsas av virvlande inducerade strömmar och sjunker med konstant fart, tills den lämnar rörmynningen och faller fritt sista biten. Se strömmarna virvla och magnetfältet de skapar inuti röret, visa krafterna, ställ in varje rör för sig och jämför farten i v–t-diagrammet.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-magnetror-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Magneten i kopparröret — Fysik nivå 2">
+    <meta property="og:description" content="Släpp två likadana magneter samtidigt, en genom ett kopparrör och en genom ett plaströr. Magneten i plaströret faller fritt, medan magneten i kopparröret bromsas av virvlande inducerade strömmar och sjunker med konstant fart, tills den lämnar rörmynningen och faller fritt sista biten. Se strömmarna virvla och magnetfältet de skapar inuti röret, visa krafterna, ställ in varje rör för sig och jämför farten i v–t-diagrammet.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-magnetror-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Magneten i kopparröret — Fysik nivå 2">
+    <meta name="twitter:description" content="Släpp två likadana magneter samtidigt, en genom ett kopparrör och en genom ett plaströr. Magneten i plaströret faller fritt, medan magneten i kopparröret bromsas av virvlande inducerade strömmar och sjunker med konstant fart, tills den lämnar rörmynningen och faller fritt sista biten. Se strömmarna virvla och magnetfältet de skapar inuti röret, visa krafterna, ställ in varje rör för sig och jämför farten i v–t-diagrammet.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; left: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: grid; grid-template-columns: auto auto; gap: 1px 16px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 14px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        /* I fullskärm ligger reglagepanelen längs underkanten — lyft avläsningen ovanför den. */
+        .scene-wrap:fullscreen .scene-info, .scene-wrap:-webkit-full-screen .scene-info { bottom: 122px; }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles select {
+            font: inherit; font-size: 13px; color: var(--lab-ink, #0f1620);
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 7px; padding: 3px 6px; cursor: pointer; width: 100%;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-radrow { display: flex; gap: 14px; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Glidarintervall ──
+        const BMIN = 0.1, BMAX = 1.2;          // flödestäthet B vid polytan (T)
+        const MMIN = 5, MMAX = 30;             // magnetens massa (g)
+
+        // ── Fysik ──
+        const G = 9.82;
+        const CEDDY = 1.92;                    // bromskonstant för koppar, kg/(s·T²)
+        const SIGREL = { plast: 0, aluminium: 0.61, koppar: 1 };
+        const RORNAMN = { plast: 'Plaströr', aluminium: 'Aluminiumrör', koppar: 'Kopparrör' };
+        const MATNAMN = { plast: 'plast', aluminium: 'aluminium', koppar: 'koppar' };
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 860, VBH = 540;
+        const TUBE = { topY: 88, botY: 348, outerHW: 28, innerHW: 20 };   // rören hänger i luften
+        const CXL = 348, CXR = 462;            // rörens mittlinjer
+        const ROD_X = 405;                     // stativstången mellan rören
+        const MAG = { hw: 17, hh: 28 };        // magnetens halvbredd/halvhöjd (px)
+        const CM0 = 54;                        // magnetens mittpunkt vid start — nederkanten strax OVANFÖR mynningen
+        const BENCH_Y = 474;
+        const CMEND = BENCH_Y - MAG.hh;        // magnetens mittpunkt när den landat på bänken
+        const TUBELEN_M = 0.30;                // rörets längd i meter
+        const PXM = (TUBE.botY - TUBE.topY) / TUBELEN_M;   // px per meter (= 840)
+        const TRAVEL_M = (CMEND - CM0) / PXM;  // hela fallhöjden, rör + fri luft (≈ 0,40 m)
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        const COL = {
+            ink:    '#1f2530',
+            falt:   '#c0392b',   // magnetfältet B (rött, som teorifigurerna)
+            virvel: '#7b3fa0',   // virvelströmmarna I (lila, som teorifiguren)
+            indfalt:'#0d9488',   // strömmarnas eget fält (blågrön — ska gå att skilja
+                                 // från ringarnas lila även med nedsatt färgseende)
+            v:      '#3f8f4a',   // hastigheten (grön)
+            kraft:  '#2563c9',   // bromsande kraften (blå)
+            koppar: '#b06a2a',   // kurvfärger i diagrammet, per material
+            plast:  '#5d646e',
+            aluminium: '#7c8a97',
+            axel:   '#38bdf8',
+        };
+
+        // Pil: skaftet slutar vid pilhuvudets bas, butt-ändar (husregler).
+        const arrow = (x1, y1, x2, y2, color, key, w = 3, head = 10) => {
+            const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+            if (L < 5) return null;
+            const ux = dx / L, uy = dy / L;
+            const hb = Math.max(8, Math.min(head, L * 0.9));
+            const bx = x2 - ux * hb, by = y2 - uy * hb;
+            const px = -uy, py = ux, hw = hb * 0.55;
+            return (
+                <g key={key}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={w} strokeLinecap="butt" />
+                    <polygon points={`${x2},${y2} ${bx + px * hw},${by + py * hw} ${bx - px * hw},${by - py * hw}`} fill={color} />
+                </g>
+            );
+        };
+
+        // Riktningsmarkör MITT PÅ en fältlinje (aldrig i änden — husregel).
+        const midHead = (x, y, ux, uy, color, key, s = 7) => {
+            const px = -uy, py = ux;
+            return (
+                <polygon key={key} fill={color}
+                         points={`${x + ux * s},${y + uy * s} ${x - ux * s * 0.7 + px * s * 0.62},${y - uy * s * 0.7 + py * s * 0.62} ${x - ux * s * 0.7 - px * s * 0.62},${y - uy * s * 0.7 - py * s * 0.62}`} />
+            );
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 190 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 76, textAlign: 'right' }}>{valueText}</span>
+            </div>
+        );
+
+        const PrincipleCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-2" style={{ color: 'var(--lab-ink)' }}>
+                <div style={{ maxWidth: 420 }}>
+                    <span className="flbl" style={{ display: 'block', marginBottom: 2 }}>Lenz lag</span>
+                    <span style={{ fontSize: 16 }}>
+                        De inducerade strömmarna får alltid en sådan riktning att de <strong>motverkar
+                        orsaken</strong> till sin uppkomst.
+                    </span>
+                </div>
+                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13, maxWidth: 360 }}>
+                    Bromskraften växer med farten. När den hunnit bli lika stor som tyngdkraften
+                    accelererar magneten inte längre, utan sjunker med konstant fart: den har nått
+                    sin <strong>gränshastighet</strong>.
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const q0 = (name, def, lo, hi) => {
+                const x = parseFloat(q.get(name));
+                return isFinite(x) ? Math.min(hi, Math.max(lo, x)) : def;
+            };
+            const qB = q0('b', 0.8, BMIN, BMAX), qM = q0('m', 10, MMIN, MMAX);
+            const [cfgL, setCfgL] = useState({ mat: 'koppar', B: qB, m: qM });
+            const [cfgR, setCfgR] = useState({
+                mat: ['plast', 'aluminium', 'koppar'].includes(q.get('ror')) ? q.get('ror') : 'plast',
+                B: qB, m: qM,
+            });
+            const [antal, setAntal] = useState(q.get('antal') === '1' ? 1 : 2);
+            const [show, setShow] = useState({ falt: false, strommar: true, indfalt: true, krafter: true, fart: true, diagram: true });
+            const [slowmo, setSlowmo] = useState(false);
+            const [released, setReleased] = useState(false);
+            const [running, setRunning] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const nyttRor = () => ({ s: 0, v: 0, t: 0, done: false, fas: 0, data: [{ t: 0, v: 0 }] });
+            const tubesRef = useRef({ L: nyttRor(), R: nyttRor() });
+            const pRef = useRef({});
+            pRef.current = { running, released, cfgL, cfgR, antal, slowmo };
+
+            const tShow = (key) => setShow(s => ({ ...s, [key]: !s[key] }));
+
+            const kFor = (cfg) => CEDDY * SIGREL[cfg.mat] * cfg.B * cfg.B;
+
+            // Hur stor del av magneten som är inne i röret (0..1) — utanför
+            // rörmynningen finns ingen rörvägg och därmed ingen broms.
+            const overlapFor = (s) => {
+                const cm = CM0 + s * PXM;
+                const inne = Math.min(cm + MAG.hh, TUBE.botY) - Math.max(cm - MAG.hh, TUBE.topY);
+                return Math.max(0, Math.min(1, inne / (2 * MAG.hh)));
+            };
+
+            // Exakt lösning av m·dv/dt = m·g − k·v per delsteg — stabil för alla k.
+            const stepTube = (st, h, cfg) => {
+                if (st.done) return;
+                const m = cfg.m / 1000;
+                const k = kFor(cfg) * overlapFor(st.s);
+                if (k > 1e-9) {
+                    const tau = m / k, vT = m * G / k;
+                    const e = Math.exp(-h / tau);
+                    st.s += vT * h + (st.v - vT) * tau * (1 - e);
+                    st.v = vT + (st.v - vT) * e;
+                } else {
+                    st.s += st.v * h + 0.5 * G * h * h;
+                    st.v += G * h;
+                }
+                // strömmens vandringsfas — ju fortare magneten rör sig, desto fortare virvlar det
+                st.fas += 260 * st.v * cfg.B * overlapFor(st.s) * h;
+                st.t += h;
+                if (st.s >= TRAVEL_M) { st.s = TRAVEL_M; st.done = true; st.v = 0; }
+            };
+
+            // ── Animationsloop ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dtRaw = Math.min((now - last) / 1000, 0.04);
+                    last = now;
+                    const p = pRef.current;
+                    if (!p.running || !p.released) return;
+                    const dt = dtRaw * (p.slowmo ? 0.125 : 1);
+                    const tb = tubesRef.current;
+                    const n = 4, h = dt / n;
+                    for (let i = 0; i < n; i++) {
+                        stepTube(tb.L, h, p.cfgL);
+                        if (p.antal === 2) stepTube(tb.R, h, p.cfgR);
+                    }
+                    // registrera diagrampunkter (glesa ut långa förlopp)
+                    const keys = p.antal === 2 ? ['L', 'R'] : ['L'];
+                    for (const key of keys) {
+                        const st = tb[key];
+                        if (st.s < TRAVEL_M || st.data[st.data.length - 1].v !== 0) {
+                            const lastP = st.data[st.data.length - 1];
+                            if (st.t - lastP.t > 0.016 || st.done) st.data.push({ t: st.t, v: st.done ? 0 : st.v });
+                            if (st.data.length > 900) st.data = st.data.filter((_, i2) => i2 % 2 === 0 || i2 === st.data.length - 1);
+                        }
+                    }
+                    if (tb.L.done && (p.antal === 1 || tb.R.done)) setRunning(false);
+                    setTick(t => t + 1);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const onFs = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', onFs);
+                document.addEventListener('webkitfullscreenchange', onFs);
+                return () => {
+                    document.removeEventListener('fullscreenchange', onFs);
+                    document.removeEventListener('webkitfullscreenchange', onFs);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                } else {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                }
+            };
+
+            const release = () => {
+                tubesRef.current = { L: nyttRor(), R: nyttRor() };
+                setReleased(true);
+                setRunning(true);
+            };
+            const reset = () => {
+                tubesRef.current = { L: nyttRor(), R: nyttRor() };
+                setReleased(false);
+                setRunning(false);
+                setTick(t => t + 1);
+            };
+            const byt_antal = (n) => { setAntal(n); reset(); };
+
+            const tb = tubesRef.current;
+            const kL = kFor(cfgL), kR = kFor(cfgR);
+            const vT_for = (cfg) => { const k = kFor(cfg); return k > 1e-9 ? (cfg.m / 1000) * G / k : Infinity; };
+
+            // Skala för hastighetspilarna: gemensam för båda rören i varje ögonblick,
+            // men zoomar så att även en långsam magnets pil syns (som diagrammets axlar).
+            const aktivaV = [];
+            if (!tb.L.done) aktivaV.push(tb.L.v);
+            if (antal === 2 && !tb.R.done) aktivaV.push(tb.R.v);
+            const pxPerV = 90 / Math.max(0.6, ...aktivaV, 0);
+
+            // Kraftskalan: samma px per newton för båda rören (skalenliga pilar).
+            const maxM = Math.max(cfgL.m, antal === 2 ? cfgR.m : 0) / 1000;
+            const pxPerN = 55 / (maxM * G);
+
+            // ── Rit-hjälpare ──────────────────────────────────────────────
+
+            // Ett rör i genomskärning: vänster/höger vägg + öppningar upptill och nedtill.
+            const drawTube = (cx, material, key) => {
+                const oh = TUBE.outerHW, ih = TUBE.innerHW;
+                const isPlast = material === 'plast';
+                const wallW = oh - ih;
+                const grad = material === 'koppar' ? 'url(#kopparV)' : (material === 'aluminium' ? 'url(#aluV)' : 'rgba(150,180,205,0.30)');
+                const edge = material === 'koppar' ? '#8a5527' : (material === 'aluminium' ? '#5f6a76' : 'rgba(80,110,135,0.65)');
+                return (
+                    <g key={key}>
+                        {/* innerväggen (rörets bakre insida) */}
+                        <rect x={cx - ih} y={TUBE.topY} width={2 * ih} height={TUBE.botY - TUBE.topY}
+                              fill={isPlast ? 'rgba(190,210,225,0.16)' : '#e9e2d2'} />
+                        {/* väggarna i genomskärning */}
+                        <rect x={cx - oh} y={TUBE.topY} width={wallW} height={TUBE.botY - TUBE.topY}
+                              fill={grad} stroke={edge} strokeWidth="1" />
+                        <rect x={cx + ih} y={TUBE.topY} width={wallW} height={TUBE.botY - TUBE.topY}
+                              fill={grad} stroke={edge} strokeWidth="1" />
+                        {/* öppningen upptill */}
+                        <ellipse cx={cx} cy={TUBE.topY} rx={oh} ry={8} fill="none" stroke={edge} strokeWidth="1.4" />
+                        <ellipse cx={cx} cy={TUBE.topY} rx={ih} ry={5.5} fill={isPlast ? 'rgba(190,210,225,0.35)' : '#d9d0bc'}
+                                 stroke={edge} strokeWidth="1" />
+                        {/* mynningen nedtill — röret hänger fritt i luften */}
+                        <path d={`M ${cx - oh} ${TUBE.botY} A ${oh} 8 0 0 0 ${cx + oh} ${TUBE.botY}`}
+                              fill="none" stroke={edge} strokeWidth="1.4" />
+                    </g>
+                );
+            };
+
+            // Stativet som rören hänger i: stång mellan rören, fot på bänken.
+            const drawStativ = () => (
+                <g key="stativ">
+                    <rect x={ROD_X - 4} y="60" width="8" height={BENCH_Y - 60} rx="3" fill="#4a5058" />
+                    <rect x={ROD_X - 32} y={BENCH_Y - 8} width="64" height="10" rx="4" fill="#3a4046" />
+                    <rect x={CXL + TUBE.outerHW} y="104" width={ROD_X - CXL - TUBE.outerHW} height="7" rx="2" fill="#4a5058" />
+                    {antal === 2 && (
+                        <rect x={ROD_X} y="104" width={CXR - TUBE.outerHW - ROD_X} height="7" rx="2" fill="#4a5058" />
+                    )}
+                </g>
+            );
+
+            // Klämbackarna (ritas framför rören).
+            const drawClamp = (cx, key) => (
+                <g key={key}>
+                    <rect x={cx - TUBE.outerHW - 5} y="99" width="5" height="17" rx="2" fill="#2b2f33" />
+                    <rect x={cx + TUBE.outerHW} y="99" width="5" height="17" rx="2" fill="#2b2f33" />
+                </g>
+            );
+
+            // Magneten: nordpol röd nedåt, sydpol vit upptill (husregel för polfärger).
+            const drawMagnet = (cx, cm, key) => (
+                <g key={key}>
+                    <rect x={cx - MAG.hw} y={cm - MAG.hh} width={2 * MAG.hw} height={MAG.hh} rx="2"
+                          fill="#f6f4ee" stroke="#0f1620" strokeWidth="1.1" />
+                    <rect x={cx - MAG.hw} y={cm} width={2 * MAG.hw} height={MAG.hh} rx="2"
+                          fill="#c0392b" stroke="#7d2318" strokeWidth="1.1" />
+                    <text x={cx} y={cm - 9} textAnchor="middle" fontSize="16" fontWeight="700"
+                          fill="#ffffff" stroke="#0f1620" strokeWidth="1.1" style={{ paintOrder: 'stroke' }}>S</text>
+                    <text x={cx} y={cm + 22} textAnchor="middle" fontSize="16" fontWeight="700" fill="#ffffff">N</text>
+                </g>
+            );
+
+            // Magnetens eget fält: slutna slingor + axellinjer, riktningsmarkörer mitt på linjen.
+            const drawField = (cx, cm, key) => {
+                const els = [];
+                // axellinjer (fältet pekar nedåt på axeln: ut ur N nedtill, in i S upptill)
+                const aTop1 = cm - MAG.hh - 50, aTop2 = cm - MAG.hh - 2;
+                const aBot1 = cm + MAG.hh + 2, aBot2 = cm + MAG.hh + 50;
+                els.push(<line key="ax1" x1={cx} y1={aTop1} x2={cx} y2={aTop2} stroke={COL.falt} strokeWidth="1.6" />);
+                els.push(midHead(cx, (aTop1 + aTop2) / 2, 0, 1, COL.falt, 'ax1h'));
+                els.push(<line key="ax2" x1={cx} y1={aBot1} x2={cx} y2={aBot2} stroke={COL.falt} strokeWidth="1.6" />);
+                els.push(midHead(cx, (aBot1 + aBot2) / 2, 0, 1, COL.falt, 'ax2h'));
+                // slingor (ellipser genom magneten) med sidopartierna I RÖRVÄGGEN
+                // (väggen ligger 20–28 px från centrum) — det är fältet genom väggen
+                // som drivs förbi och inducerar strömmarna. Vid ytterpunkterna pekar
+                // fältet uppåt (ekvatorialfältet är motriktat dipolmomentet). Den
+                // mörka kantlinjen under ger separation mot den kopparfärgade väggen.
+                [[24, 52], [27, 68]].forEach(([rx, ry], i) => {
+                    els.push(<ellipse key={`elc${i}`} cx={cx} cy={cm} rx={rx} ry={ry}
+                                      fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="3.4" />);
+                    els.push(<ellipse key={`el${i}`} cx={cx} cy={cm} rx={rx} ry={ry}
+                                      fill="none" stroke={COL.falt} strokeWidth="1.4" />);
+                    els.push(midHead(cx - rx, cm, 0, -1, COL.falt, `elh${i}a`, 6));
+                    els.push(midHead(cx + rx, cm, 0, -1, COL.falt, `elh${i}b`, 6));
+                });
+                els.push(
+                    <text key="blbl" x={cx - TUBE.outerHW - 8} y={cm - MAG.hh - 40} textAnchor="end" fontSize="14" fill={COL.falt}>
+                        <tspan fontStyle="italic">B</tspan>
+                    </text>
+                );
+                return <g key={key}>{els}</g>;
+            };
+
+            // Virvelströmmarna i rörväggen — motsatt riktning ovanför och under magneten.
+            // Strömmen ANIMERAS med vandrande streck längs ringen (fasen drivs av
+            // magnetens fart): framsidan åt ena hållet, baksidan åt andra — det är
+            // så en cirkulerande ström ser ut från sidan.
+            const drawCurrents = (cx, cm, st, cfg, key) => {
+                const ov = overlapFor(st.s);
+                const op = Math.min(1, st.v * 12 * (cfg.B / 0.8)) * ov;
+                if (op < 0.04) return null;
+                const els = [];
+                const rings = [
+                    { dy: -58, dir: -1, f: 0.55 }, { dy: -40, dir: -1, f: 1 },
+                    { dy: 40, dir: 1, f: 1 }, { dy: 58, dir: 1, f: 0.55 },
+                ];
+                const rx = TUBE.outerHW - 2, ry = 6.5;
+                let lblY = null;
+                rings.forEach((r, i) => {
+                    const y = cm + r.dy;
+                    if (y < TUBE.topY + 12 || y > TUBE.botY - 9) return;
+                    const o = op * r.f;
+                    const dash = '6.5 6.5';
+                    // dir = 1: strömmen åt höger på framsidan (ringen under magneten)
+                    const offF = r.dir > 0 ? -st.fas : st.fas;
+                    const offB = -offF;
+                    // baksidan (övre bågen) tunn, framsidan (nedre bågen) kraftig
+                    els.push(<path key={`b${i}`} d={`M ${cx - rx} ${y} A ${rx} ${ry} 0 0 1 ${cx + rx} ${y}`}
+                                   fill="none" stroke={COL.virvel} strokeWidth="1.3" opacity={o * 0.4}
+                                   strokeDasharray={dash} strokeDashoffset={offB} />);
+                    els.push(<path key={`f${i}`} d={`M ${cx - rx} ${y} A ${rx} ${ry} 0 0 0 ${cx + rx} ${y}`}
+                                   fill="none" stroke={COL.virvel} strokeWidth="2.6" opacity={o}
+                                   strokeDasharray={dash} strokeDashoffset={offF} strokeLinecap="round" />);
+                    // riktningsmarkör mitt på framsidan: under magneten åt höger, ovanför åt vänster
+                    els.push(<g key={`h${i}`} opacity={o}>{midHead(cx, y + ry, r.dir, 0, COL.virvel, `hh${i}`, 6)}</g>);
+                    if (r.dy > 0) lblY = y;
+                });
+                if (lblY !== null) {
+                    els.push(
+                        <text key="ilbl" x={cx - TUBE.outerHW - 8} y={lblY + 4} textAnchor="end"
+                              fontSize="14" fill={COL.virvel} opacity={op}>
+                            <tspan fontStyle="italic">I</tspan>
+                        </text>
+                    );
+                }
+                return <g key={key}>{els}</g>;
+            };
+
+            // Strömmarnas EGET magnetfält inuti röret (Lenz lag synliggjord):
+            // ringarna under magneten skapar ett uppåtriktat fält (möter magnetens
+            // nordpol med en nordpol — stöter bort), ringarna ovanför ett nedåtriktat
+            // (håller kvar). Riktningsmarkörer mitt på linjerna, aldrig i änden.
+            const drawInducedField = (cx, cm, st, cfg, key) => {
+                const ov = overlapFor(st.s);
+                const op = Math.min(1, st.v * 12 * (cfg.B / 0.8)) * ov;
+                if (op < 0.04) return null;
+                const els = [];
+                const zones = [
+                    { y0: cm - 72, y1: cm - MAG.hh - 4, riktning: 1 },   // ovanför: nedåt
+                    { y0: cm + MAG.hh + 4, y1: cm + 72, riktning: -1 },  // under: uppåt
+                ];
+                zones.forEach((z, zi) => {
+                    const y0 = Math.max(z.y0, TUBE.topY + 8);
+                    const y1 = Math.min(z.y1, TUBE.botY - 8);
+                    if (y1 - y0 < 18) return;
+                    [-9, 9].forEach((dx, li) => {
+                        els.push(<line key={`l${zi}${li}`} x1={cx + dx} y1={y0} x2={cx + dx} y2={y1}
+                                       stroke={COL.indfalt} strokeWidth="1.7" opacity={op * 0.9} />);
+                        els.push(<g key={`h${zi}${li}`} opacity={op * 0.9}>
+                            {midHead(cx + dx, (y0 + y1) / 2, 0, z.riktning, COL.indfalt, `m${zi}${li}`, 6)}
+                        </g>);
+                    });
+                });
+                return <g key={key}>{els}</g>;
+            };
+
+            // Krafterna: F_G nedåt från tyngdpunkten (med prick), bromskraften F uppåt.
+            // Motriktade krafter på samma verkningslinje — skaften ritas precis intill
+            // varandra (husregeln om Στ = 0).
+            const drawForces = (cx, cm, st, cfg, key) => {
+                const els = [];
+                const m = cfg.m / 1000;
+                const FG = m * G, FB = kFor(cfg) * overlapFor(st.s) * st.v;
+                const lG = FG * pxPerN, lB = FB * pxPerN;
+                els.push(<circle key="cmdot" cx={cx} cy={cm} r="2.6" fill={COL.ink} />);
+                els.push(arrow(cx - 2.2, cm, cx - 2.2, cm + lG, COL.ink, 'fg', 3.2));
+                els.push(
+                    <text key="fglbl" x={cx + TUBE.outerHW + 6} y={cm + lG + 4} textAnchor="start" fontSize="14" fill={COL.ink}>
+                        <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">G</tspan>
+                    </text>
+                );
+                if (lB > 5) {
+                    els.push(arrow(cx + 2.2, cm, cx + 2.2, cm - lB, COL.kraft, 'fb', 3.2));
+                    els.push(
+                        <text key="fblbl" x={cx + TUBE.outerHW + 6} y={cm - lB + 2} textAnchor="start" fontSize="14" fill={COL.kraft}>
+                            <tspan fontStyle="italic">F</tspan>
+                        </text>
+                    );
+                }
+                return <g key={key}>{els}</g>;
+            };
+
+            // Hastighetspilen: startar vid magnetens NEDERKANT (objektets rand i pilens riktning).
+            const drawV = (cx, cm, v, key) => {
+                const len = v * pxPerV;
+                if (len < 4) return null;
+                const y0 = cm + MAG.hh;
+                return (
+                    <g key={key}>
+                        {arrow(cx - 16, y0, cx - 16, y0 + len, COL.v, 'vp', 2.6)}
+                        <text x={cx - TUBE.outerHW - 8} y={y0 + len + 2} textAnchor="end" fontSize="14" fill={COL.v}>
+                            <tspan fontStyle="italic">v</tspan>
+                        </text>
+                    </g>
+                );
+            };
+
+            // ── v–t-diagrammet ──
+            const drawGraph = () => {
+                const card = { x: 18, y: 58, w: 280, h: 354 };
+                const ox = 60, oy = 372, plotW = 214, plotH = 260;
+                let tMax = 2, vMax = 0.5;
+                const keys = antal === 2 ? ['L', 'R'] : ['L'];
+                for (const key of keys) {
+                    for (const p of tb[key].data) {
+                        while (p.t > tMax * 0.96) tMax *= 2;
+                        while (p.v > vMax * 0.92) vMax *= 2;
+                    }
+                }
+                const X = (t) => ox + (t / tMax) * plotW;
+                const Y = (v) => oy - (v / vMax) * plotH;
+                const els = [];
+                els.push(<rect key="bg" x={card.x} y={card.y} width={card.w} height={card.h} rx="8"
+                               fill="#fbf8f1" stroke="rgba(15,22,32,0.22)" strokeWidth="1" />);
+                els.push(<text key="ti" x={card.x + 14} y={card.y + 22} fontSize="11" fontWeight="600"
+                               letterSpacing="0.05em" fill="#5a6170">FART OCH TID</text>);
+                // förklaringsrader
+                const colL = COL[cfgL.mat], colR = COL[cfgR.mat];
+                els.push(<line key="lg1" x1={card.x + 118} y1={card.y + 12} x2={card.x + 142} y2={card.y + 12}
+                               stroke={colL} strokeWidth="2.6" />);
+                els.push(<text key="lg1t" x={card.x + 147} y={card.y + 16} fontSize="11" fill="#1f2530">
+                    {antal === 2 ? `Vänster (${MATNAMN[cfgL.mat]})` : RORNAMN[cfgL.mat]}</text>);
+                if (antal === 2) {
+                    els.push(<line key="lg2" x1={card.x + 118} y1={card.y + 27} x2={card.x + 142} y2={card.y + 27}
+                                   stroke={colR} strokeWidth="2.6" strokeDasharray="5 3" />);
+                    els.push(<text key="lg2t" x={card.x + 147} y={card.y + 31} fontSize="11" fill="#1f2530">
+                        {`Höger (${MATNAMN[cfgR.mat]})`}</text>);
+                }
+                // stödlinjer + skalstreck
+                for (let i = 1; i <= 4; i++) {
+                    const gx = ox + (plotW * i) / 4;
+                    els.push(<line key={`gv${i}`} x1={gx} y1={oy - plotH} x2={gx} y2={oy}
+                                   stroke="rgba(15,22,32,0.08)" strokeWidth="1" />);
+                    if (i < 4) els.push(<text key={`gvt${i}`} x={gx} y={oy + 15} textAnchor="middle" fontSize="11"
+                                   fill="rgba(15,22,32,0.72)">{fmt(tMax * i / 4, tMax < 4 ? 1 : 0)}</text>);
+                    const gy = oy - (plotH * i) / 4;
+                    els.push(<line key={`gh${i}`} x1={ox} y1={gy} x2={ox + plotW} y2={gy}
+                                   stroke="rgba(15,22,32,0.08)" strokeWidth="1" />);
+                    els.push(<text key={`ght${i}`} x={ox - 6} y={gy + 4} textAnchor="end" fontSize="11"
+                                   fill="rgba(15,22,32,0.72)">{fmt(vMax * i / 4, vMax < 2 ? 2 : 1)}</text>);
+                }
+                els.push(<text key="g0" x={ox - 6} y={oy + 15} textAnchor="end" fontSize="11" fill="rgba(15,22,32,0.72)">0</text>);
+                // axlar med pilspets endast åt det positiva hållet
+                els.push(<line key="axy" x1={ox} y1={oy + 3} x2={ox} y2={oy - plotH - 12} stroke={COL.axel} strokeWidth="2" />);
+                els.push(<polygon key="axyh" points={`${ox - 4},${oy - plotH - 6} ${ox},${oy - plotH - 14} ${ox + 4},${oy - plotH - 6}`} fill={COL.axel} />);
+                els.push(<line key="axx" x1={ox - 3} y1={oy} x2={ox + plotW + 12} y2={oy} stroke={COL.axel} strokeWidth="2" />);
+                els.push(<polygon key="axxh" points={`${ox + plotW + 6},${oy - 4} ${ox + plotW + 14},${oy} ${ox + plotW + 6},${oy + 4}`} fill={COL.axel} />);
+                els.push(<text key="axyl" x={ox + 8} y={oy - plotH - 6} textAnchor="start" fontSize="13" fill="rgba(15,22,32,0.82)"><tspan fontStyle="italic">v</tspan></text>);
+                els.push(<text key="axyu" x={ox - 8} y={oy - plotH - 6} textAnchor="end" fontSize="12" fill="rgba(15,22,32,0.82)">m/s</text>);
+                els.push(<text key="axxl" x={ox + plotW + 8} y={oy - 8} textAnchor="middle" fontSize="13" fill="rgba(15,22,32,0.82)"><tspan fontStyle="italic">t</tspan></text>);
+                els.push(<text key="axxu" x={ox + plotW + 8} y={oy + 16} textAnchor="middle" fontSize="12" fill="rgba(15,22,32,0.82)">s</text>);
+                // gränshastigheten som streckad nivå, per ledande rör
+                let vtLabelSatt = false;
+                const vtLine = (cfg, col, key) => {
+                    const vT = vT_for(cfg);
+                    if (!isFinite(vT) || vT > vMax) return;
+                    const yT = Y(vT);
+                    els.push(<line key={`vt${key}`} x1={ox} y1={yT} x2={ox + plotW} y2={yT}
+                                   stroke={col} strokeWidth="1.2" strokeDasharray="5 4" opacity="0.55" />);
+                    if (!vtLabelSatt) {
+                        els.push(<text key={`vtl${key}`} x={ox + plotW - 2} y={yT - 5} textAnchor="end" fontSize="10.5"
+                                       fill={col} opacity="0.9">gränshastighet</text>);
+                        vtLabelSatt = true;
+                    }
+                };
+                vtLine(cfgL, colL, 'L');
+                if (antal === 2) vtLine(cfgR, colR, 'R');
+                // kurvorna
+                const toPts = (data) => data.map(p => `${X(Math.min(p.t, tMax)).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
+                if (antal === 2 && tb.R.data.length > 1) {
+                    els.push(<polyline key="cR" points={toPts(tb.R.data)} fill="none" stroke={colR}
+                                       strokeWidth="2.4" strokeDasharray="6 4" strokeLinejoin="round" />);
+                }
+                if (tb.L.data.length > 1) {
+                    els.push(<polyline key="cL" points={toPts(tb.L.data)} fill="none" stroke={colL}
+                                       strokeWidth="2.6" strokeLinejoin="round" />);
+                }
+                return <g key="graph">{els}</g>;
+            };
+
+            // ── Scenen ──
+            const scene = () => {
+                const cmL = CM0 + tb.L.s * PXM;
+                const cmR = CM0 + tb.R.s * PXM;
+                const els = [];
+
+                // labbänken
+                els.push(<rect key="bench" x="0" y={BENCH_Y} width={VBW} height={VBH - BENCH_Y} fill="url(#benchG)" />);
+                els.push(<rect key="benchEdge" x="0" y={BENCH_Y} width={VBW} height="5" fill="rgba(15,22,32,0.18)" />);
+                [90, 260, 430, 600, 760].forEach((gx, i) => {
+                    els.push(<path key={`grain${i}`} d={`M ${gx} ${BENCH_Y + 18} q 60 6 130 2`} fill="none"
+                                   stroke="rgba(90,60,30,0.16)" strokeWidth="1.4" strokeLinecap="round" />);
+                });
+
+                // dekor på bänkens högra del: en rulle koppartråd och en reservmagnet
+                els.push(
+                    <g key="dekor" opacity="0.9">
+                        <ellipse cx="640" cy={BENCH_Y + 30} rx="34" ry="12" fill="none" stroke="#b06a2a" strokeWidth="5" />
+                        <ellipse cx="640" cy={BENCH_Y + 27} rx="34" ry="12" fill="none" stroke="#c07a3c" strokeWidth="3" />
+                        <rect x="740" y={BENCH_Y + 22} width="30" height="11" rx="2" fill="#f6f4ee" stroke="#0f1620" strokeWidth="1" />
+                        <rect x="770" y={BENCH_Y + 22} width="30" height="11" rx="2" fill="#c0392b" stroke="#7d2318" strokeWidth="1" />
+                    </g>
+                );
+
+                // stativet (bakom rören)
+                els.push(drawStativ());
+
+                // rörens namn ovanför öppningarna, i fri yta
+                els.push(<text key="lblL" x={CXL} y="16" textAnchor="middle" fontSize="14" fontWeight="600" fill="#1f2530">{RORNAMN[cfgL.mat]}</text>);
+                if (antal === 2) els.push(<text key="lblR" x={CXR} y="16" textAnchor="middle" fontSize="14" fontWeight="600" fill="#1f2530">{RORNAMN[cfgR.mat]}</text>);
+
+                // diagrammet
+                if (show.diagram) els.push(drawGraph());
+
+                // rör och klämmor först, sedan magnetens fält OVANPÅ väggen (slingorna
+                // löper genom väggen och får inte döljas av den), sist magneter,
+                // strömmar och pilar
+                els.push(drawTube(CXL, cfgL.mat, 'tubeL'));
+                if (antal === 2) els.push(drawTube(CXR, cfgR.mat, 'tubeR'));
+                els.push(drawClamp(CXL, 'clL'));
+                if (antal === 2) els.push(drawClamp(CXR, 'clR'));
+                if (show.falt) {
+                    els.push(drawField(CXL, cmL, 'fldL'));
+                    if (antal === 2) els.push(drawField(CXR, cmR, 'fldR'));
+                }
+                els.push(drawMagnet(CXL, cmL, 'magL'));
+                if (antal === 2) els.push(drawMagnet(CXR, cmR, 'magR'));
+                if (show.strommar) {
+                    if (SIGREL[cfgL.mat] > 0) els.push(drawCurrents(CXL, cmL, tb.L, cfgL, 'curL'));
+                    if (antal === 2 && SIGREL[cfgR.mat] > 0) els.push(drawCurrents(CXR, cmR, tb.R, cfgR, 'curR'));
+                }
+                if (show.indfalt) {
+                    if (SIGREL[cfgL.mat] > 0) els.push(drawInducedField(CXL, cmL, tb.L, cfgL, 'indL'));
+                    if (antal === 2 && SIGREL[cfgR.mat] > 0) els.push(drawInducedField(CXR, cmR, tb.R, cfgR, 'indR'));
+                }
+                if (show.krafter && released) {
+                    if (!tb.L.done) els.push(drawForces(CXL, cmL, tb.L, cfgL, 'frcL'));
+                    if (antal === 2 && !tb.R.done) els.push(drawForces(CXR, cmR, tb.R, cfgR, 'frcR'));
+                }
+                if (show.fart) {
+                    els.push(drawV(CXL, cmL, tb.L.v, 'vL'));
+                    if (antal === 2) els.push(drawV(CXR, cmR, tb.R.v, 'vR'));
+                }
+
+                return (
+                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                            <linearGradient id="benchG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#c9a26b" />
+                                <stop offset="1" stopColor="#a87e4a" />
+                            </linearGradient>
+                            <linearGradient id="kopparV" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stopColor="#8a5527" />
+                                <stop offset="0.45" stopColor="#d99a63" />
+                                <stop offset="1" stopColor="#a5642f" />
+                            </linearGradient>
+                            <linearGradient id="aluV" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stopColor="#6f7b87" />
+                                <stop offset="0.45" stopColor="#c3cbd3" />
+                                <stop offset="1" stopColor="#7f8b98" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                        {els}
+                    </svg>
+                );
+            };
+
+            // ── Kryssrutor, lägesval och styrknappar (uppe till höger) ──
+            const matSelect = (cfg, setCfg, namn) => (
+                <select value={cfg.mat} onChange={(e) => setCfg(c => ({ ...c, mat: e.target.value }))}
+                        aria-label={`Material för ${namn}`}>
+                    <option value="koppar">Kopparrör</option>
+                    <option value="aluminium">Aluminiumrör</option>
+                    <option value="plast">Plaströr</option>
+                </select>
+            );
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Antal rör</div>
+                    <div className="st-radrow">
+                        <label><input type="radio" name="antal" checked={antal === 1} onChange={() => byt_antal(1)} />
+                            <span>Ett</span></label>
+                        <label><input type="radio" name="antal" checked={antal === 2} onChange={() => byt_antal(2)} />
+                            <span>Två</span></label>
+                    </div>
+                    <div className="st-title st-group">{antal === 2 ? 'Vänster rör' : 'Rör'}</div>
+                    {matSelect(cfgL, setCfgL, 'vänstra röret')}
+                    {antal === 2 && (
+                        <React.Fragment>
+                            <div className="st-title st-group">Höger rör</div>
+                            {matSelect(cfgR, setCfgR, 'högra röret')}
+                        </React.Fragment>
+                    )}
+                    <div className="st-title st-group">Visa</div>
+                    <label><input type="checkbox" checked={show.falt} onChange={() => tShow('falt')} />
+                        <span className="st-swatch" style={{ background: COL.falt }}></span>
+                        <span>Magnetens fält</span></label>
+                    <label><input type="checkbox" checked={show.strommar} onChange={() => tShow('strommar')} />
+                        <span className="st-swatch" style={{ background: COL.virvel }}></span>
+                        <span>Virvelströmmarna <em>I</em></span></label>
+                    <label><input type="checkbox" checked={show.indfalt} onChange={() => tShow('indfalt')} />
+                        <span className="st-swatch" style={{ background: COL.indfalt }}></span>
+                        <span>Strömmarnas fält</span></label>
+                    <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                        <span className="st-swatch" style={{ background: COL.kraft }}></span>
+                        <span>Krafterna</span></label>
+                    <label><input type="checkbox" checked={show.fart} onChange={() => tShow('fart')} />
+                        <span className="st-swatch" style={{ background: COL.v }}></span>
+                        <span>Hastigheten <em>v</em></span></label>
+                    <label><input type="checkbox" checked={show.diagram} onChange={() => tShow('diagram')} />
+                        <span className="st-swatch" style={{ background: COL.axel }}></span>
+                        <span>Diagrammet</span></label>
+                    <div className="st-title st-group">Uppspelning</div>
+                    <label><input type="checkbox" checked={slowmo} onChange={() => setSlowmo(s => !s)} />
+                        <span>Ultrarapid</span></label>
+                    <div className="st-actions">
+                        <button className="btn-toggle" onClick={release}>{antal === 2 ? 'Släpp magneterna' : 'Släpp magneten'}</button>
+                        <button className={`btn-toggle ${running ? '' : 'active'}`} disabled={!released}
+                                onClick={() => setRunning(r => !r)} style={!released ? { opacity: 0.5, cursor: 'default' } : null}>
+                            {running ? 'Pausa' : 'Fortsätt'}
+                        </button>
+                        <button className="btn-toggle" onClick={reset}>Börja om</button>
+                    </div>
+                </div>
+            );
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            // Glidarkort för ett rör (sidopanelen).
+            const TubeCard = ({ titel, cfg, setCfg }) => {
+                const vT = vT_for(cfg);
+                return (
+                    <div className="glass-card rounded-xl p-3 mb-3">
+                        <div className="flbl mb-2">{titel}: {RORNAMN[cfg.mat]}</div>
+                        <Slider label="Flödestäthet (<em>B</em>)"
+                                sub="Magnetens styrka vid polytan. Bromskraften växer med kvadraten på <em>B</em>: dubbelt så stort <em>B</em> ger fyra gånger så stark broms."
+                                value={cfg.B} min={BMIN} max={BMAX} step={0.05}
+                                onChange={(v) => setCfg(c => ({ ...c, B: v }))}
+                                valueText={`${fmt(cfg.B, 2)} T`} />
+                        <Slider label="Magnetens massa (<em>m</em>)"
+                                sub="En tyngre magnet dras nedåt av en större tyngdkraft och får därmed en högre gränshastighet."
+                                value={cfg.m} min={MMIN} max={MMAX} step={1}
+                                onChange={(v) => setCfg(c => ({ ...c, m: v }))}
+                                valueText={`${fmt(cfg.m, 0)} g`} />
+                        <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
+                            {isFinite(vT)
+                                ? <span>Gränshastighet i röret: <strong style={{ color: 'var(--lab-ink)' }}>{fmt(vT, vT < 0.2 ? 3 : 2)} m/s</strong></span>
+                                : <span>Plast leder ingen ström: magneten faller fritt.</span>}
+                        </div>
+                    </div>
+                );
+            };
+
+            const namnL = antal === 2 ? 'Vänster' : 'Röret';
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Magneten i kopparröret
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Magneten i kopparröret</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Det klassiska försöket: två likadana magneter släpps samtidigt, en genom ett
+                            kopparrör och en genom ett plaströr. Magneten i plaströret faller fritt, men i
+                            kopparröret sjunker magneten sakta, som genom sirap. När magneten rör sig ändras
+                            det magnetiska flödet i rörväggen, och där induceras <strong>virvelströmmar</strong> som
+                            enligt Lenz lag motverkar rörelsen. Rören hänger fritt i ett stativ och visas i
+                            genomskärning: följ magneten och de virvlande strömmarna på vägen ned, se det
+                            magnetfält som strömmarna skapar inuti röret, och se hur magneten faller fritt
+                            igen så snart den lämnat rörmynningen.
+                            Simulera ett eller två rör, ställ in varje rör för sig och jämför farten i
+                            diagrammet.
+                        </p>
+
+                        <PrincipleCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">{namnL}: fart</span>
+                                        <span className="si-val">{fmt(tb.L.v, 2)} m/s</span>
+                                        <span className="si-lbl">{namnL}: falltid</span>
+                                        <span className="si-val">{released ? `${fmt(tb.L.t, 2)} s` : '–'}</span>
+                                        {antal === 2 && (
+                                            <React.Fragment>
+                                                <span className="si-lbl">Höger: fart</span>
+                                                <span className="si-val">{fmt(tb.R.v, 2)} m/s</span>
+                                                <span className="si-lbl">Höger: falltid</span>
+                                                <span className="si-val">{released ? `${fmt(tb.R.t, 2)} s` : '–'}</span>
+                                            </React.Fragment>
+                                        )}
+                                    </div>
+
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label={`${antal === 2 ? 'Vänster' : 'Röret'}: flödestäthet (<em>B</em>)`} value={cfgL.B}
+                                                          min={BMIN} max={BMAX} step={0.05}
+                                                          onChange={(v) => setCfgL(c => ({ ...c, B: v }))}
+                                                          valueText={`${fmt(cfgL.B, 2)} T`} />
+                                                <FsSlider label={`${antal === 2 ? 'Vänster' : 'Röret'}: massa (<em>m</em>)`} value={cfgL.m}
+                                                          min={MMIN} max={MMAX} step={1}
+                                                          onChange={(v) => setCfgL(c => ({ ...c, m: v }))}
+                                                          valueText={`${fmt(cfgL.m, 0)} g`} />
+                                                {antal === 2 && (
+                                                    <React.Fragment>
+                                                        <FsSlider label="Höger: flödestäthet (<em>B</em>)" value={cfgR.B}
+                                                                  min={BMIN} max={BMAX} step={0.05}
+                                                                  onChange={(v) => setCfgR(c => ({ ...c, B: v }))}
+                                                                  valueText={`${fmt(cfgR.B, 2)} T`} />
+                                                        <FsSlider label="Höger: massa (<em>m</em>)" value={cfgR.m}
+                                                                  min={MMIN} max={MMAX} step={1}
+                                                                  onChange={(v) => setCfgR(c => ({ ...c, m: v }))}
+                                                                  valueText={`${fmt(cfgR.m, 0)} g`} />
+                                                    </React.Fragment>
+                                                )}
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <TubeCard titel={antal === 2 ? 'Vänster rör' : 'Röret'} cfg={cfgL} setCfg={setCfgL} />
+                                {antal === 2 && <TubeCard titel="Höger rör" cfg={cfgR} setCfg={setCfgR} />}
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label={`${namnL}: fart`} value={fmt(tb.L.v, 2)} unit="m/s" color="var(--lab-accent)" />
+                                        <Readout label={`${namnL}: falltid`} value={released ? fmt(tb.L.t, 2) : '–'} unit="s" />
+                                        {antal === 2 && (
+                                            <React.Fragment>
+                                                <Readout label="Höger: fart" value={fmt(tb.R.v, 2)} unit="m/s" />
+                                                <Readout label="Höger: falltid" value={released ? fmt(tb.R.t, 2) : '–'} unit="s" />
+                                            </React.Fragment>
+                                        )}
+                                        <Readout label="Rörets längd" value={fmt(TUBELEN_M, 2)} unit="m" />
+                                        <Readout label="Hela fallhöjden" value={fmt(TRAVEL_M, 2)} unit="m" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Prova: slå på Ultrarapid och titta när magneten lämnar rörmynningen.
+                                        Utan rörvägg finns ingen broms, så magneten faller fritt sista biten
+                                        ner mot bänken, och i diagrammet får kurvan en knyck uppåt.
+                                    </div>
+                                </div>
+
+                                {/* Förklaring */}
+                                <div className="glass-card rounded-xl p-4">
+                                    <div className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Så uppstår bromsningen</div>
+                                    <ol className="space-y-2 text-sm list-decimal pl-5" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <li>Magneten faller och det magnetiska flödet genom rörväggen ändras:
+                                            under magneten ökar det, ovanför minskar det.</li>
+                                        <li>Flödesändringen inducerar strömmar som cirklar runt röret, åt ena
+                                            hållet under magneten och åt andra hållet ovanför.</li>
+                                        <li>Enligt <strong>Lenz lag</strong> motverkar strömmarna sin orsak.
+                                            Ringarna under magneten skapar ett <strong>uppåtriktat</strong> magnetfält
+                                            inuti röret, som möter magnetens nordpol med en nordpol och stöter
+                                            bort den. Ringarna ovanför skapar ett <strong>nedåtriktat</strong> fält
+                                            som håller den kvar.</li>
+                                        <li>Tillsammans ger de en bromskraft riktad uppåt. Den växer med farten,
+                                            och när den blivit lika stor som tyngdkraften faller magneten med
+                                            konstant fart: den har nått sin <strong>gränshastighet</strong>.</li>
+                                        <li>Utanför rörmynningen finns ingen rörvägg som strömmar kan induceras
+                                            i. Bromskraften försvinner, och magneten faller fritt igen.</li>
+                                    </ol>
+                                </div>
+
+                                <details className="glass-card rounded-xl p-4 mt-4">
+                                    <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                        <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                                    </summary>
+                                    <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <li><strong>"Kopparröret attraherar magneten."</strong> Nej. Koppar är
+                                            omagnetiskt: en stillastående magnet påverkas inte alls av röret.
+                                            Bromskraften finns bara när magneten <em>rör sig</em>, och den är
+                                            alltid motriktad rörelsen.</li>
+                                        <li><strong>"Magneten stannar i röret."</strong> Nej, den slutar bara
+                                            att accelerera. Bromskraften kan aldrig växa sig större än
+                                            tyngdkraften, så magneten fortsätter nedåt med konstant fart.</li>
+                                        <li><strong>"Energin försvinner."</strong> Nej. Den lägesenergi som inte
+                                            blir rörelseenergi omvandlas via virvelströmmarna till värme i
+                                            rörväggen. Röret blir en aning varmare för varje släpp.</li>
+                                    </ul>
+                                </details>
+
+                                <details className="glass-card rounded-xl p-4 mt-4">
+                                    <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                        <span>Var tar energin vägen?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                                    </summary>
+                                    <div className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <p>Virvelströmmarna möter elektriskt motstånd i rörväggen, och där
+                                            omvandlas magnetens rörelseenergi till värme. Samma princip
+                                            utnyttjas i <strong>magnetbromsar</strong>, till exempel i
+                                            nöjesparkernas fritt fall-attraktioner: bromsningen sker utan att
+                                            något vidrör något, och den blir automatiskt starkare ju fortare
+                                            det går.</p>
+                                        <p>Byt till ett aluminiumrör och jämför: aluminium leder ström sämre än
+                                            koppar, så virvelströmmarna blir svagare och magneten faller
+                                            fortare. I plaströret, som inte leder ström alls, induceras inga
+                                            strömmar och magneten faller helt fritt.</p>
+                                    </div>
+                                </details>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

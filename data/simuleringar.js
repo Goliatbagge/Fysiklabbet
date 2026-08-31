@@ -116,6 +116,12 @@ window.SIM_NAMES = {
   'fysik2-jordmagnetiska-faltet.html': 'Jordmagnetiska fältet',
   'fysik2-magnetiskt-flode.html': 'Magnetiskt flöde',
   'fysik2-vaxelstromsgenerator.html': 'Växelströmsgenerator',
+  'fysik2-virvelstrommar-app.html': [
+    { name: 'Virvelströmmar i en pendel', desc: 'En aluminiumpendel svänger genom ett magnetfält och bromsas in av inducerade virvelströmmar. Justera flödestätheten, slå av elektromagneten mitt i svängningen och byt till en platta med spår.',
+      kw: ['elektromagnetism','virvelström','virvelströmmar','induktion','lenz','lenz lag','broms','magnetbroms','induktionshäll','induktionsspis','pendel','aluminium','platta','spår','värme','flöde'] },
+    { name: 'Magneten i kopparröret', href: 'fysik2-magnetror-app.html', desc: 'Släpp två likadana magneter samtidigt, en genom ett kopparrör och en genom ett plaströr, och se skillnaden: virvelströmmarna i kopparväggen bromsar magneten så att den sjunker med konstant fart, tills den lämnar rörmynningen och faller fritt sista biten. Se strömmarna virvla runt röret och magnetfältet de skapar inuti det, visa krafterna, ställ in varje rör för sig och jämför farten i v–t-diagrammet.',
+      kw: ['elektromagnetism','virvelström','virvelströmmar','induktion','lenz','lenz lag','kopparrör','rör','magnet','fallande magnet','magnetbroms','broms','plaströr','aluminiumrör','gränshastighet','koppar','fritt fall','flöde','flödesändring'] },
+  ],
   'fysik2-em-stralning.html': 'Elektromagnetisk strålning',
   'fysik2-dubbelspalt.html': 'Dubbelspaltexperimentet',
   'fysik2-wiens-lag.html': 'Wiens förskjutningslag',

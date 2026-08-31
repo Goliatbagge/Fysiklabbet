@@ -23786,7 +23786,7 @@
   /* ---------------- scen: vinkeldiameter (fy2-5.3 Ex 1) ---------------
    * a) månen, b) solen — samma formel två gånger, och poängen är att de
    * två svaren blir nästan lika (därför kan månen täcka solen). Figuren
-   * är generisk: jorden, himlakroppen, vinkeln θ, diametern 2R och
+   * är generisk: jorden, himlakroppen, vinkeln α, diametern 2R och
    * avståndet d. Värdena kommer in i var sin mätvärdesklammer. */
   function layoutVinkeldiameter(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
@@ -23820,7 +23820,7 @@
     T.tanke(T.figurBubble(292, [
       [['Skriver in beteckningarna:']],
       [['diametern ', 0], ['2R', 1], [' och avståndet ', 0], ['d', 1]],
-      [['Vinkeln ', 0], ['θ', 1], [' är den jag söker', 0]]
+      [['Vinkeln ', 0], ['α', 1], [' är den jag söker', 0]]
     ], 395));
     (function () {                              /* vinkelbågen vid jorden */
       var pts = [], n = 14, r = 150;
@@ -23830,7 +23830,7 @@
       }
       acts.push({ kind: 'stroke', pts: pts });
     })();
-    T.lbl('θ', 252, oy + 8, BLUE);
+    T.lbl('α', 252, oy + 8, BLUE);
     T.pause(150);
     T.dash([bx, by - br], [mx + 8, by - br]);
     T.dash([bx, by + br], [mx + 8, by + br]);
@@ -23853,7 +23853,7 @@
     T.str('a) Månen', padL, y, null, 0.62);
     T.pause(300);
     y += 2.35 * F;
-    T.fracH('2·R', 'd', T.str('θ≈', padL, y), y);
+    T.fracH('2·R', 'd', T.str('α≈', padL, y), y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
@@ -23874,7 +23874,7 @@
       [['klammern i formeln.']]
     ]));
     T.str('=9,0625·10^−^3 rad',
-          T.fracH('2·1,74·10^6', '3,84·10^8', T.str('θ≈', padL, y), y)
+          T.fracH('2·1,74·10^6', '3,84·10^8', T.str('α≈', padL, y), y)
             + 0.12 * F, y);
     T.stepEnd();
 
@@ -23884,7 +23884,7 @@
       [['stor kroppen ser ut. Ett halvt']],
       [['varv är ', 0], ['π', 1], [' radianer, alltså 180°', 0]]
     ]));
-    var xa = T.mul(T.str('θ≈9,0625·10^−^3', padL, y), y);
+    var xa = T.mul(T.str('α≈9,0625·10^−^3', padL, y), y);
     T.str('=0,5192...°', T.fracH('180°', 'π', xa, y) + 0.12 * F, y);
     T.stepEnd();
 
@@ -23911,7 +23911,7 @@
     T.str('b) Solen', padL, y, null, 0.62);
     T.pause(300);
     y += 2.35 * F;
-    T.fracH('2·R', 'd', T.str('θ≈', padL, y), y);
+    T.fracH('2·R', 'd', T.str('α≈', padL, y), y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
@@ -23924,7 +23924,7 @@
 
     y += adv + 1.9 * F;
     T.str('=9,28·10^−^3 rad',
-          T.fracH('2·6,96·10^8', '1,50·10^1^1', T.str('θ≈', padL, y), y)
+          T.fracH('2·6,96·10^8', '1,50·10^1^1', T.str('α≈', padL, y), y)
             + 0.12 * F, y);
     T.stepEnd();
 
@@ -23933,7 +23933,7 @@
       [['Och samma omräkning till']],
       [['grader som i a).']]
     ]));
-    var xb = T.mul(T.str('θ≈9,28·10^−^3', padL, y), y);
+    var xb = T.mul(T.str('α≈9,28·10^−^3', padL, y), y);
     T.str('=0,5317...°', T.fracH('180°', 'π', xb, y) + 0.12 * F, y);
     T.stepEnd();
 

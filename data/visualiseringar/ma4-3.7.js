@@ -222,7 +222,7 @@
                '<em>x</em>-axeln på intervallet <em>a</em> ≤ <em>x</em> ≤ <em>b</em> ' +
                'ska rotera ett helt varv runt <em>x</em>-axeln. Det skuggade ' +
                'området är det som sveper ut kroppen.',
-            2: 'Dra i den röda markören (eller vinkel-glidaren <em>θ</em>) och se ' +
+            2: 'Dra i den röda markören (eller vinkel-glidaren <em>α</em>) och se ' +
                'området svänga runt <em>x</em>-axeln. Den ljusa konturen visar var ' +
                'den färdiga kroppen hamnar. Tryck på knappen för att se ett helt varv.',
             3: 'Kroppen delas in i <em>n</em> tunna cylinderskivor. Varje skiva har ' +
@@ -331,7 +331,7 @@
                 }
             };
         }
-        var rowAngle = makeRow('θ', 0, 360, 1,
+        var rowAngle = makeRow('α', 0, 360, 1,
             function () { return state.angle; },
             function (v) { state.angle = Math.round(v); });
         var rowN = makeRow('n', 2, 60, 1,
@@ -580,7 +580,7 @@
             svg.appendChild(hit);
 
             // Vinkeletikett i fri yta ovanför protraktorn
-            svg.appendChild(svgVarText({ x: X(B) + rx + 12, y: T + 14, 'font-size': 13, 'text-anchor': 'start', fill: COL.accent }, ['*θ', ' = ' + fmt(state.angle, 0) + '°']));
+            svg.appendChild(svgVarText({ x: X(B) + rx + 12, y: T + 14, 'font-size': 13, 'text-anchor': 'start', fill: COL.accent }, ['*α', ' = ' + fmt(state.angle, 0) + '°']));
 
             drawTicksMain(svg);
         }

@@ -209,8 +209,8 @@
         const COL = {
             tension:   '#b8860b', // spännkraft T – mörk guld
             gravity:   '#c8324a', // tyngdkraft mg – accent-röd
-            vert:      '#0e7490', // T·cosθ – teal
-            horiz:     '#c2410c', // T·sinθ – bränd orange
+            vert:      '#0e7490', // T·cosα – teal
+            horiz:     '#c2410c', // T·sinα – bränd orange
             centripetal:'#7c3aed' // nettokraft/centripetal – lila
         };
 
@@ -257,7 +257,7 @@
             </label>
         );
 
-        // ── θ–ω-graf (pedagogiskt guldkorn) ──────────────────────
+        // ── α–ω-graf (pedagogiskt guldkorn) ──────────────────────
         const ThetaOmegaGraph = ({ L, g, omega }) => {
             const W = 300, H = 150, padL = 34, padB = 24, padT = 10, padR = 10;
             const omegaMin = Math.sqrt(g / L);

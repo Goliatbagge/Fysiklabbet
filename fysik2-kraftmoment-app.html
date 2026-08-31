@@ -381,8 +381,8 @@
         // Maxlutning = den vinkel där brädans nedre ände precis vilar mot marken.
         const THETA_GROUND = Math.asin((GROUND_Y - PY - BEAM_T / 2) / HALF_PX);
         // ── Rotationsdynamik (gungbrädan svänger som i verkligheten) ──
-        // I·θ'' = M_last − C·sinθ − b·θ'   (M_last = viktenas netto kraftmoment).
-        // Egenstabiliteten C·sinθ (vridpunkten sitter strax ovanför brädans
+        // I·α'' = M_last − C·sinα − b·α'   (M_last = viktenas netto kraftmoment).
+        // Egenstabiliteten C·sinα (vridpunkten sitter strax ovanför brädans
         // tyngdpunkt) är i den ideala modellen FÖRSUMBAR mot varje verklig
         // obalans: den appliceras därför BARA när viktmomenten tar ut varandra
         // (samma avrundade värde som visas i jämviktsrutan) och ställer då
@@ -413,10 +413,10 @@
                 const hw = massHW(mass.m), hh = massHH(mass.m);
                 const off = BEAM_T / 2 + hh / 2 + 2;   // vinkelrätt avstånd till brädan
                 // Tyngdpunkten läggs LODRÄTT ovanför viktens punkt på brädan.
-                // En lodrät förskjutning d = off/cos θ ger exakt samma vinkelräta
+                // En lodrät förskjutning d = off/cos α ger exakt samma vinkelräta
                 // avstånd (off) till brädan — lådan vilar alltså fortfarande plant
                 // mot brädan — samtidigt som tyngdkraftens verkningslinje genom
-                // tyngdpunkten sammanfaller med hävarmen l = x · cos θ och med
+                // tyngdpunkten sammanfaller med hävarmen l = x · cos α och med
                 // hävarmens måttlinje. (Med en förskjutning längs brädans normal
                 // hamnade tyngdpunkten i stället vid sidan om verkningslinjen.)
                 const cx = bp.x, cy = bp.y - off / cosT;

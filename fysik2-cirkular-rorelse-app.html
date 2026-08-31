@@ -627,12 +627,12 @@
             const onTrack = ls.st === 'track';
             const failed = ls.st === 'failed';
 
-            // position + riktningar på banan (θ från loopens botten, medsols i scenen)
+            // position + riktningar på banan (α från loopens botten, medsols i scenen)
             const pos = onTrack
                 ? { x: LCX + LRPX * Math.sin(th), y: LCY + LRPX * Math.cos(th) }
                 : { x: ls.x, y: ls.y };
             const inward = { x: -Math.sin(th), y: -Math.cos(th) };     // mot centrum
-            const tdir = { x: Math.cos(th), y: -Math.sin(th) };        // rörelseriktning (θ växer)
+            const tdir = { x: Math.cos(th), y: -Math.sin(th) };        // rörelseriktning (α växer)
 
             // fart ur energiprincipen
             const v2 = Math.max(0, v0 * v0 - 2 * G * RL * (1 - Math.cos(th)));

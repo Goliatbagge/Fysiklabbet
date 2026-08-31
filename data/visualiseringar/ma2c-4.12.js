@@ -22,11 +22,11 @@
  *                         ADE och BCE (hjälpsträckor AD, BC streckade).
  *
  * ── Interaktionsval (dokumenterat enligt bygginstruktionen) ──────────────
- * Tillståndet är INTE de fyra ändpunktsvinklarna utan (E, θ1, θ2): E är en
- * fri 2D-punkt inuti cirkeln, och θ1/θ2 är de båda kordornas riktningar.
- * Varje korda är då linjen genom E med riktning θ — dess två ändpunkter
+ * Tillståndet är INTE de fyra ändpunktsvinklarna utan (E, α1, α2): E är en
+ * fri 2D-punkt inuti cirkeln, och α1/α2 är de båda kordornas riktningar.
+ * Varje korda är då linjen genom E med riktning α — dess två ändpunkter
  * fås som de två skärningarna med cirkeln (linje–cirkel, andragradsformel).
- *   • Drar man E: kordornas RIKTNINGAR (θ1, θ2) hålls fasta, båda kordornas
+ *   • Drar man E: kordornas RIKTNINGAR (α1, α2) hålls fasta, båda kordornas
  *     ändpunkter räknas om så de fortsätter gå genom nya E.
  *   • Drar man en ändpunkt (A/B/C/D): E hålls fast, den kordans riktning
  *     räknas om så linjen genom E fortsätter träffa cirkeln exakt vid den

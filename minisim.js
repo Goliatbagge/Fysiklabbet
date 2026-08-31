@@ -141,7 +141,7 @@
  * stödytan är markerad lila på marken och vridningspunkten
  * (hörnet) med en prick. Faller pilen innanför vridningspunkten faller
  * klossen tillbaka (med en liten studs), hänger den utanför — lutningen
- * har passerat den kritiska vinkeln tan θ = b/h där tyngdpunkten står
+ * har passerat den kritiska vinkeln tan α = b/h där tyngdpunkten står
  * rakt ovanför hörnet — välter klossen med fysikalisk vinkelacceleration.
  * Knappval mellan "Hög kloss" (välter redan vid ≈23°) och "Låg kloss"
  * (kräver ≈62°) gör stabilitetspoängen jämförbar. Ritad i laboranstemat;
@@ -4824,7 +4824,7 @@
         // ── Simulationssteg ───────────────────────────────────────────────
         // Vippningen är en pendel kring stödpunkten: tyngdpunkten ligger
         // rakt under (eller över) stödpunkten på avståndet |y_cm|, så
-        //   I · θ'' = M · g · y_cm · sin θ.
+        //   I · α'' = M · g · y_cm · sin α.
         // Ligger tyngdpunkten UNDER stödpunkten (y_cm < 0) är momentet
         // återställande och bygget vaggar tillbaka; ligger den ÖVER växer
         // lutningen i stället, och nålspetsen glider till slut av myntkanten.

@@ -453,7 +453,7 @@ bakom text (`sceneText`) är ett *skyddsnät* för oundvikliga korsningar med
 *tunna* hjälplinjer, inte en ursäkt för att lägga text på en tjock arm, balk
 eller kontur. Var särskilt försiktig med **diagonala** armar/stegar/trådar:
 en enkel lodrät offset hamnar då mitt på linjen — offsetta i stället längs
-linjens normal (`(-sin θ, -cos θ)`-riktningen).
+linjens normal (`(-sin α, -cos α)`-riktningen).
 
 > **Specialfall: scener med parallella fältlinjer.** När du placerar en
 > etikett (ström-, laddnings-, massa-text) intill ett objekt i en scen med
@@ -626,7 +626,7 @@ utanför sina punkter, inte bara att grafiken själv ryms.
 **Kända vinkelvärden i figurer skrivs *bara med värdet* — inte "i = 30°".**
 För vinklar gäller en specifik konvention: när vinkelmåttet ritas vid sin
 båge inne i figuren ska bara *värdet* stå där (t.ex. `'30°'`, inte
-`'i = 30°'`). Variabelnamnet (*i*, *b*, α, θ) framgår redan av sammanhanget
+`'i = 30°'`). Variabelnamnet (*i*, *b*, α, α) framgår redan av sammanhanget
 — bågen markerar vilken vinkel det är, och frågetexten introducerar
 variabelnamnet. Att skriva ut "i = 30°" tar 5–6 gånger så mycket
 typografisk plats som "30°" och tvingar etiketten ut från bågen, ofta

@@ -304,11 +304,11 @@
         const TAN_A = GEO.RK / GEO.LK;                       // tan α = 0,5
         const ALFA = Math.atan(TAN_A) * 180 / Math.PI;       // ≈ 26,6°
 
-        // Härledda storheter för given lutning θ och halv öppningsvinkel φ.
+        // Härledda storheter för given lutning β och halv öppningsvinkel φ.
         // Kontaktpunkterna sitter på skenornas inre överkant, på det axiella
         // avståndet s = x · tan φ från konens mitt; kontaktradien är därför
         // r = R − s · tan α, och tyngdpunktens (axelns) höjd
-        //   y = H0 + x · tan θ + r  ⟹  dy/dx = tan θ − tan φ · tan α.
+        //   y = H0 + x · tan β + r  ⟹  dy/dx = tan β − tan φ · tan α.
         // Dubbelkonen rullar mot den breda änden precis när dy/dx < 0.
         const computeDerived = (thetaDeg, phiDeg) => {
             const tanT = Math.tan(thetaDeg * Math.PI / 180);
@@ -1119,7 +1119,7 @@
                                 <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>&gt;</span>
                                 <div style={{ textAlign: 'center' }}>
                                     <div className="flbl mb-1">Banans lutning</div>
-                                    <div className="fnum">tan <em>θ</em></div>
+                                    <div className="fnum">tan <em>β</em></div>
                                 </div>
                             </div>
                             <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 430 }}>
@@ -1207,7 +1207,7 @@
                                     {isFullscreen && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <FsSlider label="Banans lutning (<em>θ</em>)" value={theta}
+                                                <FsSlider label="Banans lutning (<em>β</em>)" value={theta}
                                                           min={0} max={8} step={0.5} unit="°" onChange={setTheta} decimals={1} />
                                                 <FsSlider label="Halva öppningsvinkeln (<em>φ</em>)" value={phi}
                                                           min={6} max={16} step={0.5} unit="°" onChange={setPhi} decimals={1} />
@@ -1302,8 +1302,8 @@
                                 </div>
                                 )}
 
-                                <Slider label="Banans lutning (<em>θ</em>)"
-                                        sub={`Hur brant skenornas överkant stiger mot den breda änden. Gränsen för dubbelkonen går vid <em>θ</em> ≈ ${fmt(d.thetaCrit, 1)}° med den aktuella öppningsvinkeln.`}
+                                <Slider label="Banans lutning (<em>β</em>)"
+                                        sub={`Hur brant skenornas överkant stiger mot den breda änden. Gränsen för dubbelkonen går vid <em>β</em> ≈ ${fmt(d.thetaCrit, 1)}° med den aktuella öppningsvinkeln.`}
                                         value={theta} min={0} max={8} step={0.5} unit="°" onChange={setTheta} decimals={1} />
                                 <Slider label="Halva öppningsvinkeln (<em>φ</em>)"
                                         sub="Hur snabbt skenorna går isär. Större vinkel flyttar kontaktpunkterna snabbare ut mot spetsarna, så att tyngdpunkten sjunker brantare."
@@ -1315,7 +1315,7 @@
                                         <Readout label="Tyngdpunktens höjd" value={fmt(yNu, 1)} unit="cm över bordet" accent />
                                         <Readout label="Läge längs banan" value={fmt(ui.x, 0)} unit="cm" />
                                         <Readout label="Fart" value={fmt(Math.abs(ui.v), 0)} unit="cm/s" />
-                                        <Readout label="Kritisk lutning <em>θ</em>" value={fmt(d.thetaCrit, 1)} unit="°" />
+                                        <Readout label="Kritisk lutning <em>β</em>" value={fmt(d.thetaCrit, 1)} unit="°" />
                                     </div>
                                     <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: rullarUpp ? 'rgba(46,158,79,0.10)' : 'rgba(200,50,74,0.10)', color: 'var(--lab-ink-soft)' }}>
                                         {rullarUpp
@@ -1382,14 +1382,14 @@
                                     rör konen på det axiella avståndet <em>x</em> · tan <em>φ</em> från
                                     mitten. Där är konens radie mindre: den har krympt med{' '}
                                     <em>x</em> · tan <em>φ</em> · tan <em>α</em>. Samtidigt har skenornas
-                                    överkant stigit med <em>x</em> · tan <em>θ</em>. Tyngdpunkten sjunker
+                                    överkant stigit med <em>x</em> · tan <em>β</em>. Tyngdpunkten sjunker
                                     alltså precis när radien krymper snabbare än skenorna stiger:
-                                    tan <em>α</em> · tan <em>φ</em> &gt; tan <em>θ</em>.
+                                    tan <em>α</em> · tan <em>φ</em> &gt; tan <em>β</em>.
                                 </p>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Konen i simuleringen har halva toppvinkeln <em>α</em> ≈ {fmt(ALFA, 0)}°.
                                     Med <em>φ</em> = {fmt(phi, 1)}° blir gränsen{' '}
-                                    <em>θ</em><sub>krit</sub> ≈ {fmt(d.thetaCrit, 1)}°: gör banan brantare än
+                                    <em>β</em><sub>krit</sub> ≈ {fmt(d.thetaCrit, 1)}°: gör banan brantare än
                                     så, och illusionen bryts. Prova med glidaren <em>Banans lutning</em>,
                                     och lägg märke till att konen saktar in och stannar av sig själv vid
                                     den breda änden. När kontaktpunkterna når de smala spetsarna måste

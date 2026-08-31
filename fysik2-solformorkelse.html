@@ -320,7 +320,7 @@
             <div class="formula-box">
                 <div style="display:flex;flex-direction:column;align-items:center;">
                     <span class="flbl">Vinkeldiameter</span>
-                    <span class="fnum"><em>θ</em></span>
+                    <span class="fnum"><em>α</em></span>
                     <span class="flbl" aria-hidden="true" style="visibility:hidden;">Vinkeldiameter</span>
                 </div>
                 <span class="fnum">=</span>
@@ -331,8 +331,8 @@
                     <span class="flbl">Avstånd till kroppen</span>
                 </div>
                 <span style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--lab-ink-soft);line-height:1.5;">
-                    Solen:&nbsp;<em>θ</em> ≈ 0,53°<br>
-                    Månen:&nbsp;<em>θ</em> ≈ 0,50°–0,56°
+                    Solen:&nbsp;<em>α</em> ≈ 0,53°<br>
+                    Månen:&nbsp;<em>α</em> ≈ 0,50°–0,56°
                 </span>
             </div>
         </div>
@@ -1224,11 +1224,11 @@ function App() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 12 }}>
                 <div className="value-card">
                     <div className="value-label">Solens vinkeldiameter</div>
-                    <div className="value-number"><em className="italic-var">θ</em><sub style={{ fontSize: '0.7em' }}>S</sub> = {fmt(2 * THETA_S, 1)}′</div>
+                    <div className="value-number"><em className="italic-var">α</em><sub style={{ fontSize: '0.7em' }}>S</sub> = {fmt(2 * THETA_S, 1)}′</div>
                 </div>
                 <div className="value-card">
                     <div className="value-label">Månens vinkeldiameter</div>
-                    <div className="value-number"><em className="italic-var">θ</em><sub style={{ fontSize: '0.7em' }}>M</sub> = {fmt(2 * thetaM(dm), 1)}′</div>
+                    <div className="value-number"><em className="italic-var">α</em><sub style={{ fontSize: '0.7em' }}>M</sub> = {fmt(2 * thetaM(dm), 1)}′</div>
                 </div>
                 <div className="value-card">
                     <div className="value-label">Storleksförhållande</div>

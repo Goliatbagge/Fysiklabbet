@@ -3489,11 +3489,11 @@ b) Hur lång tid tar det att korsa floden?
 - *v*_ström = 0,90 m/s är ena kateten (riktad västerut),
 - *v*_norr (komponenten rakt över floden) är andra kateten.
 
-Vinkeln θ mellan simmarens kurs och rakt norrut uppfyller
+Vinkeln α mellan simmarens kurs och rakt norrut uppfyller
 
 $$
-\\sin\\theta = \\frac{v_\\text{ström}}{v_s} = \\frac{0{,}90}{1{,}5} = 0{,}60
-\\quad\\Rightarrow\\quad \\theta \\approx 37^{\\circ}\\ \\text{motströms}
+\\sin\\alpha = \\frac{v_\\text{ström}}{v_s} = \\frac{0{,}90}{1{,}5} = 0{,}60
+\\quad\\Rightarrow\\quad \\alpha \\approx 37^{\\circ}\\ \\text{motströms}
 $$
 
 **b)** Den effektiva farten *rakt över* floden är komponenten norrut:
@@ -34149,18 +34149,18 @@ $$
             level: 2,
             question: `En triangel har sidorna 7 cm, 9 cm och 13 cm. Bestäm triangelns STÖRSTA vinkel.`,
             answer: { value: 108, unit: '°' },
-            solution: `Den största vinkeln ligger mitt emot den längsta sidan, alltså sidan 13 cm. Vi kallar den motstående vinkeln $\\theta$ och använder cosinussatsen.
+            solution: `Den största vinkeln ligger mitt emot den längsta sidan, alltså sidan 13 cm. Vi kallar den motstående vinkeln $\\alpha$ och använder cosinussatsen.
 
 $$
-13^2 = 7^2 + 9^2 - 2 \\cdot 7 \\cdot 9\\cos\\theta \\iff \\cos\\theta = \\frac{7^2 + 9^2 - 13^2}{2 \\cdot 7 \\cdot 9}
-$$
-
-$$
-\\cos\\theta = \\frac{130 - 169}{126} \\approx -0{,}310\\ldots
+13^2 = 7^2 + 9^2 - 2 \\cdot 7 \\cdot 9\\cos\\alpha \\iff \\cos\\alpha = \\frac{7^2 + 9^2 - 13^2}{2 \\cdot 7 \\cdot 9}
 $$
 
 $$
-\\theta = \\cos^{-1}(-0{,}310\\ldots) \\approx 108{,}0\\ldots^\\circ \\approx 108^\\circ
+\\cos\\alpha = \\frac{130 - 169}{126} \\approx -0{,}310\\ldots
+$$
+
+$$
+\\alpha = \\cos^{-1}(-0{,}310\\ldots) \\approx 108{,}0\\ldots^\\circ \\approx 108^\\circ
 $$
 
 **Svar:** Den största vinkeln är $\\approx 108^\\circ$.`,

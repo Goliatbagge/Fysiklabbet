@@ -24387,7 +24387,7 @@
   }
 
   /* ---------------- scen: Falköping–Skövde (fy1-2.1 Ex 2) -------------
-   * Tidsvinsten mellan 100 och 90 km/h. Två tider räknas ut och jämförs;
+   * Tidsvinsten mellan 90 och 80 km/h. Två tider räknas ut och jämförs;
    * båda farterna görs om till m/s på var sin rad i klammern. */
   function layoutFalkoping(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
@@ -24418,9 +24418,9 @@
     T.dblArrow([130, vy + 66], [410, vy + 66], BLUE);
     T.lbl('s=30 km', 210, vy + 94, BLUE);
     T.pause(150);
-    T.lbl('v_m_1=100 km/h', 236, vy - 62, BLUE);
+    T.lbl('v_m_1=90 km/h', 236, vy - 62, BLUE);
     T.pause(150);
-    T.lbl('v_m_2=90 km/h', 236, vy - 34, BLUE);
+    T.lbl('v_m_2=80 km/h', 236, vy - 34, BLUE);
     T.stepEnd();
 
     var y = 386;
@@ -24444,8 +24444,8 @@
     ]));
     var klam = valueBracket(acts, [
       's=30 km=30 000 m',
-      ['v_m_1=100 km/h=', { frac: ['100', '3,6'] }, ' m/s=27,777... m/s'],
-      ['v_m_2=90 km/h=', { frac: ['90', '3,6'] }, ' m/s=25 m/s']
+      ['v_m_1=90 km/h=', { frac: ['90', '3,6'] }, ' m/s=25 m/s'],
+      ['v_m_2=80 km/h=', { frac: ['80', '3,6'] }, ' m/s=22,222... m/s']
     ], padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
@@ -24455,8 +24455,8 @@
       [['Först tiden med den högre']],
       [['farten.']]
     ]));
-    T.str('=1 080 s',
-          T.fracH('30 000', '27,777...', T.str('t_1=', padL, y), y)
+    T.str('=1 200 s',
+          T.fracH('30 000', '25', T.str('t_1=', padL, y), y)
             + 0.15 * F, y);
     T.stepEnd();
 
@@ -24465,8 +24465,8 @@
       [['Och sedan tiden med den lägre']],
       [['farten.']]
     ]));
-    T.str('=1 200 s',
-          T.fracH('30 000', '25', T.str('t_2=', padL, y), y) + 0.15 * F, y);
+    T.str('=1 350 s',
+          T.fracH('30 000', '22,222...', T.str('t_2=', padL, y), y) + 0.15 * F, y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
@@ -24474,21 +24474,21 @@
       [['Tidsvinsten är skillnaden']],
       [['mellan de två tiderna.']]
     ]));
-    T.str('Δt=t_2-t_1=1 200-1 080=120 s', padL, y);
+    T.str('Δt=t_2-t_1=1 350-1 200=150 s', padL, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    T.str('=2,0 minuter', padL + 24, y);
+    T.str('=2,5 minuter', padL + 24, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Två minuter på tre mil — och']],
-      [['ändå tio kilometer i timmen']],
-      [['fortare. Tidsvinsten är']],
+      [['Två och en halv minut på tre']],
+      [['mil, och ändå tio kilometer i']],
+      [['timmen fortare. Tidsvinsten är']],
       [['förvånansvärt liten!']]
     ]));
-    T.underline(T.str('Svar: 2,0 minuter', padL, y), y);
+    T.underline(T.str('Svar: 2,5 minuter', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };

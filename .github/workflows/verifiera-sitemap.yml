@@ -28,13 +28,31 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  # Dagligen 06:00 UTC (08:00 svensk sommartid). Fångar det pushar inte kan
-  # fånga: en framtidsdaterad artikel som passerar sin datumgrind blir synlig
-  # på sajten vid midnatt, men hamnar inte i sitemapen förrän byggskriptet
-  # körs igen. Kör inte nyhetsagenten den dagen förblir artikeln osynlig för
-  # Google — helt tyst.
+  # Varje timme, tjugotre minuter över. TIDPUNKTEN ÄR VALD MED OMSORG — läs
+  # det här innan du glesar ut schemat igen.
+  #
+  # Vad som går sönder utan att någon rör något: en datumgrindad artikel blir
+  # synlig på sajten i samma stund som klockan passerar dess datum (midnatt
+  # svensk tid, eller den time: artikeln anger). Då är feed.xml och sitemap.xml
+  # inaktuella på fläcken, utan att någon har pushat. De lagas först när det
+  # här jobbet kör.
+  #
+  # Varför en gång om dygnet inte räckte: fram till körningen ger VARJE push
+  # till main ett rött kryss och ett mejl till ägaren, fast författaren inte
+  # gjort något fel. Och GitHub kör inte cron på utsatt tid — schemat är en
+  # tidigast-tid. I slutet av augusti 2026 sköts körningarna upp 5–12 timmar
+  # (27 aug: 06:00 → 17:26, 28 aug: 06:00 → 18:20, 31 aug: 06:00 → 13:03).
+  # Fyra pushar den 31 augusti och två den 1 september blev röda i det glappet.
+  #
+  # Två saker följer av det:
+  #   * :00 undviks. Där ligger hela världens cron-jobb, och förseningen är
+  #     som värst just då. En udda minut ger kortare kö.
+  #   * Varje timme, inte varje dygn. Blir en körning uppskjuten tar nästa vid
+  #     en timme senare i stället för ett dygn senare. Det kostar ingenting:
+  #     repot är publikt, och jobbet gatear på verifieraren — är allt i takt
+  #     avslutas det på någon sekund utan att committa.
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '23 * * * *'
   # Går även att starta för hand från fliken Actions ("bygg om nu"-knappen).
   workflow_dispatch:
 
@@ -78,29 +96,47 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Gatea på VERIFIERAREN, aldrig på `git diff`. feed.xml innehåller
-          # <lastBuildDate>, en tidsstämpel som ändras varje gång byggskriptet
-          # körs; verifieraren ignorerar den men git gör det inte. Byggde vi om
-          # ovillkorligt skulle det bli en skräpcommit varje dygn — och en
-          # Pages-omdeploy på köpet.
-          if node .claude/verify-sitemap.js; then
-            echo "Allt i takt — ingenting att göra."
-            exit 0
-          fi
-
-          echo "== Drift upptäckt, bygger om =="
-          node data/build-nyheter-og.js
-
-          # Andra rundan får inte fela. Gör den det är driften något annat än
-          # ett oskrivet bygge, och då ska körningen bli röd och mejla.
-          node .claude/verify-sitemap.js
-
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add feed.xml sitemap.xml nyheter/dela katalog/dela data/begrepp-sok.js
-          git diff --cached --quiet && { echo "Inget att committa"; exit 0; }
-          git commit -m "Bygg om RSS och sitemap (automatisk körning)"
-          # Pushas någonting till main mitt i körningen avvisas den här pushen
-          # och jobbet blir rött. Det är avsikten: nästa dygns körning gör om
-          # jobbet, och under tiden har den pushen ändå kört push-kontrollen.
-          git push origin HEAD:main
+
+          # Tre försök, för att en push till main mitt i körningen inte ska bli
+          # ett mejl om ett problem som inte finns. Bygget är deterministiskt:
+          # blir vår push avvisad hämtar vi den nya spetsen och gör om alltihop
+          # på den grunden.
+          for forsok in 1 2 3; do
+            # Gatea på VERIFIERAREN, aldrig på `git diff`. feed.xml innehåller
+            # <lastBuildDate>, en tidsstämpel som ändras varje gång byggskriptet
+            # körs; verifieraren ignorerar den men git gör det inte. Byggde vi om
+            # ovillkorligt skulle det bli en skräpcommit varje timme — och en
+            # Pages-omdeploy på köpet.
+            if node .claude/verify-sitemap.js; then
+              echo "Allt i takt — ingenting att göra."
+              exit 0
+            fi
+
+            echo "== Drift upptäckt (försök $forsok), bygger om =="
+            node data/build-nyheter-og.js
+
+            # Andra rundan får inte fela. Gör den det är driften något annat än
+            # ett oskrivet bygge, och då ska körningen bli röd och mejla.
+            node .claude/verify-sitemap.js
+
+            git add feed.xml sitemap.xml nyheter/dela katalog/dela data/begrepp-sok.js
+            git diff --cached --quiet && { echo "Inget att committa"; exit 0; }
+            git commit -m "Bygg om RSS och sitemap (automatisk körning)"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "== Push avvisad: main har flyttat sig. Gör om på ny grund =="
+            # Vår commit byggdes på en grund som inte längre är spetsen, så den
+            # slängs. FETCH_HEAD i stället för origin/main: checkout-actionen
+            # hämtar grunt och konfigurerar en smal refspec, så fjärrgrenen
+            # finns inte alltid som lokal referens.
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+          done
+
+          echo "Kunde inte pusha efter tre försök — main ändras snabbare än bygget hinner."
+          exit 1

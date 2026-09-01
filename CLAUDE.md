@@ -200,10 +200,16 @@ node data/build-nyheter-og.js
 # Körs dessutom automatiskt av GitHub Actions — se
 # .github/workflows/verifiera-sitemap.yml, som gör olika saker beroende på
 # vem som är närvarande: vid PUSH till main bara kontroll (rött kryss om du
-# glömt byggskriptet), medan den DAGLIGA körningen (06:00 UTC) och manuell
-# start från fliken Actions bygger om, committar och pushar själva. Den
-# dagliga körningen finns för datumgrindade artiklar som blir synliga vid
-# midnatt utan att någon pushar — där finns ingen människa att säga till.
+# glömt byggskriptet), medan den SCHEMALAGDA körningen (varje timme, :23) och
+# manuell start från fliken Actions bygger om, committar och pushar själva.
+# Den schemalagda körningen finns för datumgrindade artiklar som blir synliga
+# vid midnatt utan att någon pushar — där finns ingen människa att säga till.
+# Att den går varje timme och inte en gång om dygnet är ingen slump: fram
+# till att den kört är feed.xml inaktuell av sig själv, och då blir VARJE
+# push röd och mejlar ägaren fast författaren inte gjort något fel. GitHub
+# sköt dessutom upp dygnskörningen 5–12 timmar i slutet av augusti 2026.
+# Glesa inte ut schemat, och lägg det inte på :00 — skälen står utförligt i
+# arbetsflödesfilen.
 # Ägarverifieringsfiler (google<token>.html) hålls medvetet
 # utanför sitemapen men MÅSTE ligga kvar i roten.
 node .claude/verify-sitemap.js

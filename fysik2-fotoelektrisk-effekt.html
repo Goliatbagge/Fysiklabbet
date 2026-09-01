@@ -68,6 +68,15 @@
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
         }
+        .scene-toggles .st-title.mt { margin-top: 9px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a);
+            flex-shrink: 0; margin: 0;
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -865,38 +874,6 @@ function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode }) 
     return <div ref={containerRef} className="scene-canvas"></div>;
 }
 
-function LightModeToggle({ mode, onChange }) {
-    return (
-        <div className="mode-toggle" role="tablist" aria-label="Visningsläge för ljus">
-            <button
-                role="tab"
-                aria-selected={mode === 'wave'}
-                className={`mode-toggle-btn ${mode === 'wave' ? 'active' : ''}`}
-                onClick={() => onChange('wave')}
-                title="Visa ljuset som en kontinuerlig våg">
-                <svg width="16" height="14" viewBox="0 0 24 20" fill="none" stroke="currentColor"
-                     strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 10 C 5 2, 8 18, 11 10 S 17 2, 20 10 S 23 16, 24 12"/>
-                </svg>
-                <span>Våg</span>
-            </button>
-            <button
-                role="tab"
-                aria-selected={mode === 'photons'}
-                className={`mode-toggle-btn ${mode === 'photons' ? 'active' : ''}`}
-                onClick={() => onChange('photons')}
-                title="Visa ljuset som partiklar (fotoner)">
-                <svg width="16" height="14" viewBox="0 0 24 20" fill="currentColor">
-                    <circle cx="4" cy="10" r="2"/>
-                    <circle cx="12" cy="10" r="2.6"/>
-                    <circle cx="20" cy="10" r="2"/>
-                </svg>
-                <span>Fotoner</span>
-            </button>
-        </div>
-    );
-}
-
 function MetalSelector({ metalId, onChange }) {
     return (
         <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
@@ -994,7 +971,18 @@ function App() {
                             <path d="M6 6l12 12M18 6L6 18" />
                         </svg>
                     </button>
-                    <div className="st-title">Reglage</div>
+                    <div className="st-title">Visa ljus som</div>
+                    <label>
+                        <input type="radio" name="ljuslage" checked={lightMode === 'wave'}
+                               onChange={() => setLightMode('wave')} />
+                        <span>Våg</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="ljuslage" checked={lightMode === 'photons'}
+                               onChange={() => setLightMode('photons')} />
+                        <span>Fotoner</span>
+                    </label>
+                    <div className="st-title mt">Reglage</div>
                     <div className="st-sliders">
                         <div className="st-slider">
                             <div className="st-slider-top">
@@ -1070,23 +1058,22 @@ function App() {
             <div className="glass-card" style={{ padding:20 }}>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:20 }}>
 
-                    {/* Visningsläge för ljus */}
-                    <div style={{ display:'flex', flexWrap:'wrap', alignItems:'center',
-                                  justifyContent:'space-between', gap:12 }}>
-                        <div>
-                            <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                          color:'var(--lab-ink-muted)', letterSpacing:'0.05em', textTransform:'uppercase',
-                                          marginBottom:4 }}>
-                                Visa ljus som
-                            </div>
-                            <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                          color:'#64748b', lineHeight:1.45 }}>
-                                {lightMode === 'wave'
-                                    ? 'Klassisk vågbild — ljusets intensitet syns som amplitud.'
-                                    : 'Partikelbild — ljuset är en ström av fotoner. Intensiteten styr antalet.'}
-                            </div>
+                    {/* Visningsläge för ljus. Själva valet görs med
+                        radioknapparna i inställningsrutan på scenen. Här står
+                        bara vad läget innebär. */}
+                    <div>
+                        <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                      color:'var(--lab-ink-muted)', letterSpacing:'0.05em', textTransform:'uppercase',
+                                      marginBottom:4 }}>
+                            Visa ljus som
                         </div>
-                        <LightModeToggle mode={lightMode} onChange={setLightMode} />
+                        <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                      color:'#64748b', lineHeight:1.45 }}>
+                            {lightMode === 'wave'
+                                ? 'Våg: klassisk vågbild, där ljusets intensitet syns som amplitud.'
+                                : 'Fotoner: partikelbild, där ljuset är en ström av fotoner och intensiteten styr antalet.'}
+                            {' '}Välj läge i inställningsrutan vid scenen.
+                        </div>
                     </div>
 
                     {/* Metallval */}

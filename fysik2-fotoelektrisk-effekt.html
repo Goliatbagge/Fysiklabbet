@@ -52,6 +52,18 @@
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
             width: 236px; max-width: 252px;
         }
+        /* Bandrutan nere till vänster (våglängdens färg och namn).
+           Klassen .scene-info gör att sektion 8 i styles-laborans-sim.css
+           dockar rutan under scenen på mobil. Positionen får därför INTE
+           skrivas inline: då vinner den över dockningen. */
+        .scene-wrap .band-info {
+            position: absolute; bottom: 16px; left: 16px; z-index: 3;
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.86);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px; padding: 8px 14px;
+        }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
@@ -305,7 +317,7 @@ class PhotoelectricScene {
         this.controls.update();
 
         // Ljussättning
-        this.ambient = new THREE.AmbientLight(0xbac6d6, 0.75);
+        this.ambient = new THREE.AmbientLight(0xfff6e6, 1.15);
         this.scene.add(this.ambient);
 
         this.keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
@@ -318,19 +330,15 @@ class PhotoelectricScene {
 
         // Golvplan (osynligt men ger reflektion via shadow)
         const floorGeo = new THREE.PlaneGeometry(30, 30);
-        const floorMat = new THREE.MeshBasicMaterial({
-            color: 0x0a0f1e, transparent: true, opacity: 0.35
-        });
+        const floorMat = new THREE.MeshBasicMaterial({ color: 0xe9e0cd });
         const floor = new THREE.Mesh(floorGeo, floorMat);
         floor.rotation.x = -Math.PI / 2;
         floor.position.y = -0.6;
         this.scene.add(floor);
 
         // Subtle grid på golvet
-        const grid = new THREE.GridHelper(18, 18, 0x1e3a5f, 0x0f1e30);
+        const grid = new THREE.GridHelper(18, 18, 0xa3c0da, 0xc0d2e0);
         grid.position.y = -0.59;
-        grid.material.opacity = 0.35;
-        grid.material.transparent = true;
         this.scene.add(grid);
 
         // Metallplatta (huvudobjekt)
@@ -342,8 +350,8 @@ class PhotoelectricScene {
         const plateGeo = new THREE.BoxGeometry(this.plateWidth, this.plateThickness, this.plateDepth);
         this.plateMat = new THREE.MeshStandardMaterial({
             color: 0xd4d4d8,
-            metalness: 0.9,
-            roughness: 0.32,
+            metalness: 0.45,
+            roughness: 0.38,
             envMapIntensity: 0.8,
         });
         this.plate = new THREE.Mesh(plateGeo, this.plateMat);
@@ -352,7 +360,7 @@ class PhotoelectricScene {
 
         // Fasad/kant på plattan – ljus ring för definition
         const edgeGeo = new THREE.EdgesGeometry(plateGeo);
-        const edgeMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.35 });
+        const edgeMat = new THREE.LineBasicMaterial({ color: 0x0f1620, transparent: true, opacity: 0.28 });
         const edges = new THREE.LineSegments(edgeGeo, edgeMat);
         edges.position.copy(this.plate.position);
         this.scene.add(edges);
@@ -373,7 +381,13 @@ class PhotoelectricScene {
         }));
         this.photonGeo = new THREE.SphereGeometry(0.09, 14, 10);
         this.photonMat = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
+            color: 0xffc400,
+            toneMapped: false,
+        });
+        this.photonRimGeo = new THREE.SphereGeometry(0.115, 14, 10);
+        this.photonRimMat = new THREE.MeshBasicMaterial({
+            color: 0x9a6a00,
+            side: THREE.BackSide,
             toneMapped: false,
         });
         this.photonHaloTexture = (() => {
@@ -382,9 +396,9 @@ class PhotoelectricScene {
             canvas.width = size; canvas.height = size;
             const ctx = canvas.getContext('2d');
             const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-            g.addColorStop(0.00, 'rgba(255, 255, 255, 1.0)');
-            g.addColorStop(0.25, 'rgba(255, 255, 255, 0.55)');
-            g.addColorStop(1.00, 'rgba(255, 255, 255, 0.0)');
+            g.addColorStop(0.00, 'rgba(255, 196, 0, 0.85)');
+            g.addColorStop(0.30, 'rgba(240, 170, 0, 0.42)');
+            g.addColorStop(1.00, 'rgba(215, 145, 0, 0.0)');
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, size, size);
             const tex = new THREE.CanvasTexture(canvas);
@@ -396,7 +410,6 @@ class PhotoelectricScene {
             color: 0xffffff,
             transparent: true,
             depthWrite: false,
-            blending: THREE.AdditiveBlending,
             toneMapped: false,
         });
 
@@ -419,9 +432,8 @@ class PhotoelectricScene {
             canvas.width = size; canvas.height = size;
             const ctx = canvas.getContext('2d');
             const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-            g.addColorStop(0.00, 'rgba(147, 197, 253, 1.0)');
-            g.addColorStop(0.18, 'rgba(200, 50, 74, 0.85)');
-            g.addColorStop(0.45, 'rgba(37, 99, 235, 0.35)');
+            g.addColorStop(0.00, 'rgba(37, 99, 235, 0.75)');
+            g.addColorStop(0.35, 'rgba(37, 99, 235, 0.32)');
             g.addColorStop(1.00, 'rgba(30, 64, 175, 0.0)');
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, size, size);
@@ -434,7 +446,6 @@ class PhotoelectricScene {
             color: 0xffffff,
             transparent: true,
             depthWrite: false,
-            blending: THREE.AdditiveBlending,
             toneMapped: false,
         });
 
@@ -454,7 +465,7 @@ class PhotoelectricScene {
             ctx.fill();
 
             // Ring runt cirkeln
-            ctx.strokeStyle = 'rgba(200, 50, 74, 0.9)';
+            ctx.strokeStyle = 'rgba(29, 78, 216, 0.9)';
             ctx.lineWidth = 4;
             ctx.beginPath();
             ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -523,8 +534,7 @@ class PhotoelectricScene {
         const mat = new THREE.MeshBasicMaterial({
             color: 0xffffff,
             transparent: true,
-            opacity: 0.75,
-            blending: THREE.AdditiveBlending,
+            opacity: 0.9,
             depthWrite: false,
             toneMapped: false,
         });
@@ -569,18 +579,6 @@ class PhotoelectricScene {
         }
     }
 
-    // STEG C — uppdatera fog-färg så 3D-objekten blandar sig med
-    // den nya CSS-bakgrunden istället för att se "klippta" ut.
-    setCanvasTheme(themeKey) {
-        const fogColors = {
-            morkRymd:    0x080c1a,
-            ljusPapper:  0xebe5d7,  // matchar --lab-bg-panel
-            pergament:   0x1a1813,
-        };
-        const c = fogColors[themeKey] ?? fogColors.morkRymd;
-        if (this.scene.fog) this.scene.fog.color.setHex(c);
-    }
-
     // Hur många elektroner/sek vid full intensitet och Ek>0
     emissionRate() {
         return 22 * (this.intensity / 100);
@@ -609,8 +607,8 @@ class PhotoelectricScene {
 
         const group = new THREE.Group();
 
-        const mesh = new THREE.Mesh(this.photonGeo, this.photonMat);
-        group.add(mesh);
+        group.add(new THREE.Mesh(this.photonRimGeo, this.photonRimMat));
+        group.add(new THREE.Mesh(this.photonGeo, this.photonMat));
 
         const halo = new THREE.Sprite(this.photonHaloMat);
         halo.scale.set(0.55, 0.55, 1);
@@ -723,10 +721,8 @@ class PhotoelectricScene {
             });
         }
 
-        // Fotoner: matcha färg mot våglängd och spawn/uppdatera i partikelvyn
-        this.photonMat.color.copy(col);
-        this.photonHaloMat.color.copy(col);
-
+        // Fotonerna har fast gul färg (se materialet ovan). Här spawnas de
+        // och flyttas bara.
         if (this.visualMode === 'photons') {
             this.photonSpawnAccumulator += dt * this.photonRate();
             while (this.photonSpawnAccumulator >= 1) {
@@ -810,6 +806,8 @@ class PhotoelectricScene {
         this.photons.length = 0;
         this.photonGeo.dispose();
         this.photonMat.dispose();
+        this.photonRimGeo.dispose();
+        this.photonRimMat.dispose();
         this.photonHaloMat.dispose();
         this.photonHaloTexture.dispose();
         this.plateMat.dispose();
@@ -829,7 +827,7 @@ class PhotoelectricScene {
 // ══════════════════════════════════════════════════════════════════════════
 // React-komponenter
 // ══════════════════════════════════════════════════════════════════════════
-function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode, canvasTheme }) {
+function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode }) {
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
 
@@ -863,11 +861,6 @@ function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode, ca
         sceneRef.current.setMetalColor(metalHex);
         sceneRef.current.setVisualMode(lightMode);
     }, [wavelength, intensity, Ek, emitted, metalHex, lightMode]);
-
-    useEffect(() => {
-        if (!sceneRef.current) return;
-        sceneRef.current.setCanvasTheme(canvasTheme);
-    }, [canvasTheme]);
 
     return <div ref={containerRef} className="scene-canvas"></div>;
 }
@@ -921,13 +914,6 @@ function MetalSelector({ metalId, onChange }) {
     );
 }
 
-// STEG C — experimentell canvas-tema-väljare (V1/V2/V3 jämförelse)
-const CANVAS_THEMES = {
-    morkRymd:   { label: 'Mörk rymd' },
-    ljusPapper: { label: 'Ljus papper' },
-    pergament:  { label: 'Pergament' },
-};
-
 function App() {
     const [wavelength, setWavelength] = useState(420);
     const [intensity, setIntensity]   = useState(10);
@@ -935,7 +921,6 @@ function App() {
     const [lightMode, setLightMode]   = useState('wave'); // 'wave' | 'photons'
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [togglesOpen, setTogglesOpen] = useState(true);
-    const [canvasTheme, setCanvasTheme] = useState('morkRymd');
     const sceneWrapRef = useRef(null);
 
     useEffect(() => {
@@ -977,26 +962,8 @@ function App() {
 
     return (
         <div style={{ display:'flex', flexDirection:'column', gap:22 }}>
-            {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
-                Tas bort när du valt vilken variant som blir default. */}
-            <div className="flex flex-wrap items-center gap-3 px-3 py-2 rounded border"
-                 style={{borderColor:'var(--lab-line-strong)', background:'var(--lab-bg)'}}>
-                <span className="text-xs font-semibold uppercase tracking-wide"
-                      style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>
-                    Canvas-tema (test)
-                </span>
-                <div className="mode-toggle">
-                    {Object.entries(CANVAS_THEMES).map(([key, t]) => (
-                        <button key={key} className={'mode-toggle-btn ' + (canvasTheme === key ? 'active' : '')}
-                                onClick={() => setCanvasTheme(key)}>
-                            {t.label}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
             {/* 3D-vy */}
-            <div className="scene-wrap" ref={sceneWrapRef} data-theme={canvasTheme}>
+            <div className="scene-wrap" ref={sceneWrapRef} data-theme="ljusPapper">
                 <SceneView
                     wavelength={wavelength}
                     intensity={intensity}
@@ -1004,7 +971,6 @@ function App() {
                     emitted={emitted}
                     metalHex={metal.hex}
                     lightMode={lightMode}
-                    canvasTheme={canvasTheme}
                 />
                 {/* Inställningsrutan uppe till höger — hopfällbar; här bor
                     glidarna i BÅDA lägena (placeringsregeln 2026-08-31). */}
@@ -1086,15 +1052,12 @@ function App() {
                     </div>
                 </div>
                 {/* Bandinfo nere till vänster */}
-                <div style={{ position:'absolute', bottom:16, left:16, zIndex:3,
-                              display:'flex', alignItems:'center', gap:10,
-                              background:'rgba(10,15,30,0.72)', backdropFilter:'blur(8px)',
-                              border:'1px solid rgba(200, 50, 74, 0.25)', borderRadius:12, padding:'8px 14px' }}>
+                <div className="scene-info band-info">
                     <span style={{
                         width:18, height:18, borderRadius:'50%',
                         background: wlColor,
-                        boxShadow: `0 0 14px ${wlColor}`,
-                        border: '1.5px solid rgba(255,255,255,0.35)'
+                        boxShadow: `0 0 10px ${wlColor}`,
+                        border: '1.5px solid rgba(15,22,32,0.35)'
                     }}></span>
                     <span className="band-pill" style={{ color: band.color }}>{band.label}</span>
                     <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.85rem', color:'var(--lab-ink-soft)' }}>

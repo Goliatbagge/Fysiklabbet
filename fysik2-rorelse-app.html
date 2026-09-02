@@ -284,7 +284,7 @@
         // teorifiguren i fy2-1.8, så att simuleringen och genomgången
         // läses som samma bild.
         const COL = {
-            comp: '#c0392b', v: '#2563c9', axis: '#38bdf8',
+            comp: '#c0392b', v: '#2563c9', axis: '#0f1620',
             ink: '#0f1620', soft: '#3a4151', muted: '#5a6170',
             grid: 'rgba(96,130,175,0.20)', traj: 'rgba(15,22,32,0.55)',
             ball: '#d6dd4a', ballEdge: '#7e8420', seam: '#f6f8dc',
@@ -643,12 +643,17 @@
                 else if (status === 'finished') { reset(); setTimeout(() => setStatus('running'), 0); }
                 else setStatus('running');
             };
+            // Stegning fungerar i alla lägen: ett pågående kast pausas och
+            // stegas sedan vidare, från utgångsläget startar kastet pausat,
+            // och ur slutläget kan man backa tillbaka in i banan.
             const stepForward = () => {
-                if (status !== 'paused') return;
+                if (status === 'finished') return;
+                if (status !== 'paused') setStatus('paused');
                 applyStep(stepState(stateRef.current, paramsRef.current, TIME_STEP));
             };
             const stepBackward = () => {
-                if (status !== 'paused' || histRef.current.length <= 1) return;
+                if (histRef.current.length <= 1) return;
+                if (status !== 'paused') { setStatus('paused'); setResult(null); }
                 histRef.current.pop();
                 const st = histRef.current[histRef.current.length - 1];
                 stateRef.current = st;
@@ -666,6 +671,7 @@
                 xmax: result ? result.xmax : null, ymax: result ? result.ymax : null,
                 tF: result ? result.tF : null, angle: params.angle, v0: params.v0, air: params.air,
                 canBack: histRef.current.length > 1,
+                canFwd: status !== 'finished',
             };
             useEffect(() => {
                 if (!window.__MINI) return;
@@ -910,7 +916,8 @@
             // ── Inställningsrutan uppe till höger ─────────────────────
             const primaryLabel = status === 'running' ? 'Pausa' : status === 'paused' ? 'Fortsätt'
                                : status === 'finished' ? 'Kasta igen' : 'Kasta';
-            const canStep = status === 'paused';
+            const canFwd = status !== 'finished';
+            const canBack = histRef.current.length > 1;
             const sceneToggles = () => {
                 if (!togglesOpen) return (
                     <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
@@ -976,8 +983,8 @@
                                 <div className="st-actions">
                                     <button className="btn-toggle primary" onClick={primary}>{primaryLabel}</button>
                                     <div className="flex gap-2">
-                                        <button className="btn-toggle flex-1" onClick={stepBackward} disabled={!canStep || histRef.current.length <= 1}>Stega bakåt</button>
-                                        <button className="btn-toggle flex-1" onClick={stepForward} disabled={!canStep}>Stega framåt</button>
+                                        <button className="btn-toggle flex-1" onClick={stepBackward} disabled={!canBack}>Stega bakåt</button>
+                                        <button className="btn-toggle flex-1" onClick={stepForward} disabled={!canFwd}>Stega framåt</button>
                                     </div>
                                     <button className="btn-toggle" onClick={reset}>Börja om</button>
                                 </div>
@@ -1051,14 +1058,14 @@
                                         <button className="btn-toggle primary flex-1 inline-flex items-center justify-center gap-2" onClick={primary}>
                                             {status === 'running' ? <IconPause /> : <IconPlay />}<span>{primaryLabel}</span>
                                         </button>
-                                        <button className="btn-toggle btn-icon" onClick={stepBackward} disabled={!canStep || histRef.current.length <= 1}
+                                        <button className="btn-toggle btn-icon" onClick={stepBackward} disabled={!canBack}
                                                 aria-label="Stega bakåt" title="Stega bakåt en bildruta"><IconStepBack /></button>
-                                        <button className="btn-toggle btn-icon" onClick={stepForward} disabled={!canStep}
+                                        <button className="btn-toggle btn-icon" onClick={stepForward} disabled={!canFwd}
                                                 aria-label="Stega framåt" title="Stega framåt en bildruta"><IconStepFwd /></button>
                                         <button className="btn-toggle" onClick={reset}>Börja om</button>
                                     </div>
                                     <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                        Pausa kastet för att stega det en bildruta ({fmt(TIME_STEP * 1000, 0)} ms) i taget.
+                                        Pilknapparna stegar kastet en bildruta ({fmt(TIME_STEP * 1000, 0)} ms) i taget; ett pågående kast pausas då.
                                         Visningsval, luftmotstånd och ultrarapid väljs i rutan uppe till höger på scenen.
                                     </p>
                                 </div>

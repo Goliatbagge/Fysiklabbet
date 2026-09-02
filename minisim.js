@@ -7543,7 +7543,7 @@
             b.type = 'button';
             b.className = 'minisim-btn';
             b.disabled = true;
-            b.title = txt + ' en bildruta (pausa kastet först)';
+            b.title = txt + ' en bildruta (ett pågående kast pausas)';
             b.setAttribute('aria-label', txt + ' en bildruta');
             b.innerHTML = ikon;
             b.addEventListener('click', function () { sanda(cmd); });
@@ -7610,8 +7610,8 @@
             kastBtn.textContent = st.status === 'running' ? 'Pausa'
                                 : st.status === 'paused' ? 'Fortsätt'
                                 : st.status === 'finished' ? 'Kasta igen' : 'Kasta';
-            framBtn.disabled = st.status !== 'paused';
-            bakBtn.disabled = st.status !== 'paused' || !st.canBack;
+            framBtn.disabled = !st.canFwd;
+            bakBtn.disabled = !st.canBack;
             if (st.status === 'finished' && st.xmax != null) {
                 info.textContent = 'kastvidd ' + fmt(st.xmax, 2) + ' m · stighöjd ' + fmt(st.ymax, 2) + ' m';
             } else if (st.status === 'running' || st.status === 'paused') {

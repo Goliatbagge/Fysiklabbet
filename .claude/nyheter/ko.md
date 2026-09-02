@@ -12,30 +12,19 @@ Format per post:
 
 ## Kö
 
-- **⚠️ REDAN SKRIVEN OCH SCHEMALAGD: `2026-09-01-hundra-ganger-vidare-blick`** (Roman-teleskopets
-  uppskjutning och den mörka materien, område: **astronomi/kosmologi**). Artikeln ligger
-  FÄRDIG och datumgrindad i `data/nyheter.js` med datum 2026-09-01, på användarens begäran
-  2026-08-30. Tre saker följer av det:
-  1. Skriv INGEN egen nyhet om Roman-teleskopet.
-  2. **Välj inte astronomi eller kosmologi till 31 augusti eller 2 september** — de är
-     Romans grannar, och samma område två dagar i rad är förbjudet (se relevanskriterium 4
-     i `.claude/agents/nyhetsagent.md`). Måndagen 31 augusti passar brevteasern nedan
-     (solljus och sammanflätade fotonpar, alltså kvantoptik) utmärkt.
-  3. Den 1 september får två artiklar, eftersom det nattliga jobbet publicerar sin egen
-     som vanligt. Det är inget problem — men den artikeln får inte heller vara astronomi.
-  Behöver datumet flyttas räcker det att ändra `date` i artikelposten; flytta då den här
-  notisens datumangivelser med. (tillagd 2026-08-30)
-
-- **Solljus i stället för laser gav sammanflätade fotonpar**  **[BREVTEASER — teasad i brevet 2026-08-30, publiceras TIDIGAST måndag 2026-08-31, senast lördag 2026-09-05. STATUS 2026-08-31: fönstret är öppet, men måndagen gick till spinnvågsnyheten eftersom söndagens artikel var kvantfysik och två kvantnyheter i rad är förbjudet. Publiceras tisdag 1 september eller någon av dagarna därefter, senast lördag.]** — ett lag vid
-  University of Ottawa (Robert Boyds grupp) och Max-Planck-Institut für die
-  Physik des Lichts i Erlangen (Hanieh Fattahis grupp) koncentrerade solljus
-  med en fresnellins och en glaskon ner till 2 mm bredd och fick spontan
-  parametrisk nedkonvertering att ge sammanflätade fotonpar utan laser. Bells
-  olikhet bröts med S = 2,54 och tillståndet hade 94 procents trohet mot
-  målet. Ingång: fotonens energi, våglängd och energiprincipen. Optica 13 (8),
-  1508 (25 augusti 2026). Källa (Physics World 2026-08-26):
-  https://physicsworld.com/a/researchers-harness-sunlight-to-generate-quantum-entanglement/
-  (tillagd 2026-08-28)
+- **Dubbelspaltförsöket krympt till två atomer** **[BREVTEASER]** — ett lag vid University of
+  Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
+  som Youngs två spalter för en fokuserad elektronstråle, och läser ur
+  interferensmönstret hur grannatomerna svänger tillsammans. Ungefär sju
+  tiopotenser mindre än Youngs ursprungliga försök med ljus. Nature
+  (2026-08-26), DOI 10.1038/s41586-026-10914-9, Koudai Tabata med flera.
+  Kollegialt granskad. Stark kandidat: dubbelspalten är en av de mest kända
+  uppställningarna i hela fysiken, och kopplingen till fononer och
+  värmeledning i halvledare ger en modern fortsättning. Valdes bort
+  2026-08-27 enbart för att dagen redan hade en färsk våg-/mekaniknyhet och
+  de närmast föregående artiklarna varit kvantfysiktunga. Källa:
+  https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
+  (tillagd 2026-08-27)
 
 - **Diamantklockan som väger ihop två signaler och slipper temperaturdriften**
   — en atomklocka byggd kring kristallfel i diamant kombinerar två signaler så
@@ -84,20 +73,6 @@ Format per post:
   optik. Kontrollera originalstudien innan den används. Källa (Phys.org
   2026-08-27): https://phys.org/physics-news/ (leta upp direktlänken)
   (tillagd 2026-08-28)
-
-- **Dubbelspaltförsöket krympt till två atomer** — ett lag vid University of
-  Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
-  som Youngs två spalter för en fokuserad elektronstråle, och läser ur
-  interferensmönstret hur grannatomerna svänger tillsammans. Ungefär sju
-  tiopotenser mindre än Youngs ursprungliga försök med ljus. Nature
-  (2026-08-26), DOI 10.1038/s41586-026-10914-9, Koudai Tabata med flera.
-  Kollegialt granskad. Stark kandidat: dubbelspalten är en av de mest kända
-  uppställningarna i hela fysiken, och kopplingen till fononer och
-  värmeledning i halvledare ger en modern fortsättning. Valdes bort
-  2026-08-27 enbart för att dagen redan hade en färsk våg-/mekaniknyhet och
-  de närmast föregående artiklarna varit kvantfysiktunga. Källa:
-  https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
-  (tillagd 2026-08-27)
 
 - **Ett enda infrarött fotonrekyl mätt på en enda molekyl** — Innsbruck har
   tagit upp absorptionsspektrumet för en ensam CaOH+-jon genom att låta en

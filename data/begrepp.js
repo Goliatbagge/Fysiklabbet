@@ -466,7 +466,7 @@ window.BEGREPP = [
   {
     id: 'koherens',
     term: 'Koherens',
-    former: ['koherens', 'koherensen', 'koherent', 'koherenta', 'koherent ljus', 'inkoherent', 'inkoherenta', 'inkoherent ljus', 'partiellt koherent', 'koherenslängd', 'koherenslängden'],
+    former: ['koherens', 'koherensen', 'koherent', 'koherenta', 'koherent ljus', 'inkoherent', 'inkoherenta', 'inkoherens', 'inkoherensen', 'inkoherent ljus', 'partiellt koherent', 'koherenslängd', 'koherenslängden'],
     kort: 'Hur väl vågorna i en ljusstråle håller takten med varandra. Koherent ljus har en fast fasrelation mellan olika delar av strålen och kan därför ge tydliga interferensmönster.',
     relaterade: ['interferens', 'laser', 'diffraktion'],
     body: [
@@ -536,7 +536,7 @@ window.BEGREPP = [
   {
     id: 'kvantsammanflatning',
     term: 'Kvantsammanflätning',
-    former: ['kvantsammanflätning', 'kvantsammanflätningen', 'sammanflätning', 'sammanflätningen', 'sammanflätade', 'sammanflätat', 'sammanflätas', 'kvantsammanflätade', 'kvantsammanflätat'],
+    former: ['kvantsammanflätning', 'kvantsammanflätningen', 'sammanflätning', 'sammanflätningen', 'sammanflätade', 'sammanflätat', 'sammanflätas', 'polarisationssammanflätning', 'kvantsammanflätade', 'kvantsammanflätat'],
     kort: 'Ett kvantfenomen där två partiklar delar ett gemensamt tillstånd, så att en mätning på den ena omedelbart avgör resultatet för den andra — oavsett avståndet mellan dem.',
     relaterade: ['spinn'],
     body: [
@@ -1936,6 +1936,36 @@ window.BEGREPP = [
       { type: 'p', html: 'Yttriumjärngranat är ett konstgjort material med den kemiska formeln Y<sub>3</sub>Fe<sub>5</sub>O<sub>12</sub>, ofta förkortat YIG efter det engelska namnet. Det odlas som en kristall i en smälta och kan sedan skäras i skivor eller växas som en film bara några hundra atomlager tjock. Trots att det innehåller järn leder det ingen ström alls, och en tunn skiva är rentav genomskinlig för infrarött ljus.' },
       { type: 'p', html: 'Det som gör materialet berömt är att magnetiska svängningar dör ut så långsamt i det. Sätter man en krusning i rörelse genom atomernas magnetiska riktningar hinner den vandra centimetervis innan den ebbar ut, medan den i en vanlig metall skulle vara borta efter någon mikrometer. Skälet är att materialet är en isolator: det finns inga fria elektroner som kan rusa omkring och sprida svängningens energi till värme.' },
       { type: 'p', html: 'Den låga dämpningen har gjort materialet till en standardkomponent. Det sitter i mikrovågsfilter och oscillatorer i radar och radiosändare, där en liten kula av det används som ett avstämbart resonanselement, och det är i stort sett alltid yttriumjärngranat som används när någon vill undersöka hur spinnvågor uppför sig. Rollen är ungefär densamma som kiselns i halvledarforskningen: inte nödvändigtvis det mest spännande materialet, men det renaste och mest förutsägbara att arbeta i.' }
+    ]
+  },
+  {
+    id: 'parametrisk-nedkonvertering',
+    term: 'Spontan parametrisk nedkonvertering',
+    former: ['spontan parametrisk nedkonvertering', 'parametrisk nedkonvertering', 'parametriska nedkonverteringen', 'nedkonvertering', 'nedkonverteringen'],
+    kort: 'Processen där en foton som passerar en kristall försvinner och ersätts av två nya fotoner med sammanlagt samma energi. Det är det vanligaste sättet att tillverka fotoner som hör ihop parvis.',
+    relaterade: ['kvantsammanflatning', 'foton', 'polarisation'],
+    body: [
+      { type: 'p', html: 'Skickar man ljus genom en vanlig glasbit kommer samma ljus ut på andra sidan. I vissa kristaller kan något annat hända, om än sällan: en enda foton försvinner och två nya dyker upp i dess ställe. De två nya delar på den gamlas energi, så var och en av dem har lägre energi och alltså längre våglängd. Skickar man in blått ljus kommer det ut infrarött. Att energin räknas ner på det viset är vad ordet nedkonvertering syftar på.' },
+      { type: 'p', html: 'Ordet spontan betyder att ingen startar processen. Kristallen gör det av sig själv, med hjälp av de små svängningar som finns kvar i ett elektromagnetiskt fält även när där inte finns något ljus alls. Ordet parametrisk betyder att kristallen bara är en mellanhand: den lånar aldrig någon energi och blir varken varmare eller kallare av det hela. Allt som gick in kommer ut igen, bara omfördelat på två fotoner i stället för en.' },
+      { type: 'p', html: 'Det som gör processen så användbar är att de två fotonerna skapas i samma ögonblick och ur samma foton. Därför är de bundna till varandra: energierna måste gå jämnt ut, riktningarna måste gå jämnt ut, och hos de vanligaste uppställningarna gäller detsamma för svängningsriktningen. Paret hamnar då i ett gemensamt tillstånd där ingen av de två har någon egen bestämd svängningsriktning förrän någon mäter. Nästan alla försök med kvantkryptering, kvantteleportering och tester av kvantmekanikens grunder får sina fotonpar just på det här sättet.' },
+      { type: 'fact', title: 'Att veta om processen', items: [
+        'Den är sällsynt: i en vanlig kristall är det bara någon foton på miljontals som klyvs, resten går rakt igenom.',
+        'Kristallen måste vara olinjär, alltså svara oproportionerligt kraftigt på ljus. Vanligt glas duger inte.',
+        'Kristallens atomer måste dessutom sitta osymmetriskt, annars tar effekten ut sig själv.',
+        'Motsatsen finns också: två fotoner som slås ihop till en med dubbelt så hög energi. Det är så gröna laserpekare gör sitt gröna ljus ur osynligt infrarött.'
+      ] }
+    ]
+  },
+  {
+    id: 'bells-olikhet',
+    term: 'Bells olikhet',
+    former: ['bells olikhet', 'bells olikheter', 'bellolikhet', 'bellolikheten', 'belltest', 'belltestet'],
+    kort: 'En gräns för hur starkt två mätresultat kan hänga ihop om partiklarna bär med sig färdiga, dolda svar. Kvantsammanflätade partiklar bryter mot gränsen, och det är så man bevisar att sammanflätningen är äkta.',
+    relaterade: ['kvantsammanflatning'],
+    body: [
+      { type: 'p', html: 'Att två saker alltid ger samma svar är i sig inget mystiskt. Lägger man en röd och en blå kula i var sin låda och skickar i väg dem åt var sitt håll vet den som öppnar den ena lådan genast vad den andra innehåller. Ingen information har färdats någonstans; svaret låg där hela tiden. Einstein menade att sammanflätade partiklar var precis sådana lådor, och att kvantmekaniken bara inte kände till vad som låg i dem.' },
+      { type: 'p', html: 'Den nordirländske fysikern John Bell visade 1964 att frågan går att avgöra med ett experiment. Tricket är att inte mäta samma sak varje gång, utan att slumpmässigt växla mellan olika mätriktningar och sedan räkna ut hur väl resultaten stämmer överens. Alla förklaringar där partiklarna bär med sig färdiga svar hamnar då under ett bestämt tak, oavsett hur listigt svaren är valda. Kvantmekaniken förutsäger att taket kan överskridas.' },
+      { type: 'p', html: 'I den vanligaste versionen sammanfattas mätningarna i ett enda tal. Med dolda svar kan talet aldrig bli större än 2, medan kvantmekaniken tillåter upp till ungefär 2,83. Experiment sedan 1970-talet har gång på gång landat över 2, och de senaste versionerna har täppt till varje kryphål som funnits kvar. Naturen är alltså inte en samling lådor med förutbestämt innehåll. Arbetet belönades med Nobelpriset i fysik 2022.' }
     ]
   }
 ];

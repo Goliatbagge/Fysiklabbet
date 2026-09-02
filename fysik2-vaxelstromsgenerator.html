@@ -314,6 +314,11 @@
         return num.toFixed(decimals).replace('.', ',');
     };
 
+    // Arean lagras i m² men visas i cm² (1 m² = 10 000 cm²), med hårt
+    // mellanslag som tusentalsavgränsare (0,10 m² → "1 000").
+    const formatAreaCm2 = (areaM2) => Math.round(areaM2 * 10000)
+        .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
     // ─── Three.js scene manager ───────────────────────────────────────────────
     class ACGeneratorScene {
         constructor(container) {
@@ -1215,7 +1220,7 @@
                                                     <div className="st-slider-top">
                                                         <span>Slingans area <em>A</em></span>
                                                         <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
-                                                            {formatNum(area * 100, 0)} cm&sup2;
+                                                            {formatAreaCm2(area)} cm&sup2;
                                                         </span>
                                                     </div>
                                                     <input type="range" min="0.01" max="0.10" step="0.005" value={area}
@@ -1331,7 +1336,7 @@
                                         Slingans area <em>A</em>
                                     </label>
                                     <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c084fc', fontFamily: 'monospace' }}>
-                                        {formatNum(area * 100, 0)} cm²
+                                        {formatAreaCm2(area)} cm²
                                     </span>
                                 </div>
                                 <input type="range" min="0.01" max="0.10" step="0.005" value={area}
@@ -1339,7 +1344,7 @@
                                     style={{ accentColor: '#c084fc' }}
                                     aria-label="Slingans area" />
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '2px' }}>
-                                    <span>100 cm²</span><span>1 000 cm²</span>
+                                    <span>100 cm²</span><span>1&nbsp;000 cm²</span>
                                 </div>
                             </div>
 

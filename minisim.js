@@ -18,7 +18,8 @@
  *   typ:    vilken minisimulering som ska byggas (OBLIGATORISKT).
  *           Tillgängliga typer: tomtebloss, centrifug, cirkularrorelse,
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
- *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder
+ *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
+ *           magnetpoler, magnetdelning
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -40,6 +41,19 @@
  * pappersbakgrund med ett blått kollegieblocks-rutnät, som om simuleringen
  * låg ritad på ett anteckningsblock (kortklass ms-ljus + drawPaper()).
  * Tomteblosset är UNDANTAGET: det kräver mörker för ljuseffekten.
+ *
+ * ── typ: magnetpoler / magnetdelning ────────────────────────────────────
+ * Stavmagneterna ur fy2-3.1 (Magnetism och magnetfält). magnetpoler: två
+ * magneter på rutat papper som dras i sidled — lika poler mot varandra
+ * skjuter undan den andra magneten, olika poler drar ihop dem så att de
+ * klickar fast i varandra; knappar (eller dubbelklick) vänder en magnet.
+ * magnetdelning: en hel magnet som slits itu (dra i ena halvan) eller
+ * delas med knappen — brottytorna får nya poler, bitarna dras ihop igen,
+ * och varje bit kan delas igen (upp till fyra). Gemensam motor: varje
+ * magnet är ett par punktpoler, kraften summeras över polparen (∝ 1/r²),
+ * den dragna magneten följer pekaren och de fria styrs av kraft +
+ * vilofriktion + glidfriktion + oelastisk kontakt. Blå pilar visar
+ * nettokraften på varje magnet. Ljus pappersscen, inget ljud.
  *
  * ── typ: centrifug ───────────────────────────────────────────────────────
  * Demonstrationen ur fy2-1.5 (Cirkulär rörelse): en blöt tvättsvamp i en
@@ -281,6 +295,9 @@
         '.minisim-check input{accent-color:#c95f26;width:15px;height:15px;cursor:pointer;}',
         '.minisim-info{margin-left:auto;color:#8a93a5;font-size:13px;font-variant-numeric:tabular-nums;',
         '  font-family:' + FONT + ';font-style:normal;white-space:nowrap;}',
+        /* Längre info-text (hela meningar, som i magnetsimuleringarna):
+           egen rad under knapparna och får radbrytas. */
+        '.minisim-info.ms-brod{white-space:normal;flex-basis:100%;margin-left:0;line-height:1.35;}',
         '.minisim-slider-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;font-style:normal;}',
         '.minisim-slider-lbl{color:#aab1bf;font-size:13.5px;font-family:' + FONT + ';white-space:nowrap;}',
         '.minisim-slider-val{color:#dde2ec;font-size:13.5px;font-family:' + FONT + ';',
@@ -7635,6 +7652,769 @@
         });
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: magnetpoler / magnetdelning
+    // ══════════════════════════════════════════════════════════════════════
+    // Stavmagneterna ur fy2-3.1 (Magnetism och magnetfält) som man kan ta
+    // i. Båda typerna bygger på samma motor: varje magnet är ett par
+    // punktpoler (+1 i nordändan, −1 i sydändan) och kraften mellan två
+    // magneter är summan av de fyra polparens Coulomb-liknande krafter
+    // (∝ 1/r², mjukad nära kontakt). Det ger automatiskt rätt tecken i
+    // alla lägen: lika poler mot varandra repellerar, olika attraherar —
+    // och två bitar av en delad magnet dras ihop igen, eftersom de nya
+    // polerna vid brottytan är olika.
+    // Magneten man drar i följer pekaren (kinematisk); de övriga är fria
+    // och styrs av magnetkraften, vilofriktion (de rör sig inte förrän
+    // kraften är stor nog), glidfriktion och en oelastisk kontakt — därför
+    // "klickar" de ihop och stannar. Blå kraftpilar ovanför magneterna
+    // visar nettokraften på var och en (längd ∝ √F, så små krafter syns).
+    //   magnetpoler:   två magneter med lika poler mot varandra från start.
+    //                  "Vänd vänstra"/"Vänd högra" roterar en magnet ett
+    //                  halvt varv (även dubbelklick/dubbeltryck på den).
+    //   magnetdelning: en hel magnet. Ta tag i ena halvan och dra isär —
+    //                  den spricker på mitten och brottytorna får nya
+    //                  poler: en sydända där nordändan var kvar, en
+    //                  nordända på den andra biten. "Dela på mitten" delar
+    //                  alla bitar igen (upp till fyra), och de dras ihop
+    //                  till en kedja av små magneter — poler uppträder
+    //                  alltid parvis.
+    function buildMagneter(node, cfg, variant) {
+        var W = 560, H = 210;              // logisk ritstorlek
+        var AXIS_Y = 122;                  // magneternas mittlinje (under fullskärmsknappen även på mobil)
+        var MH = 40;                       // magnetens höjd
+        var MARG = 24;                     // väggarna (magneterna stannar här)
+        var INK = '#1f2530';
+        var COL_N = '#c0392b', COL_S = '#cfd4da', COL_KANT = '#5d646e';
+        var COL_S_TXT = '#3a3f47', COL_KRAFT = '#2563c9';
+        var delning = variant === 'delning';
+        var HEL_LEN = 240, MIN_LEN = 60;   // hela magneten / minsta bit (max 4 bitar)
+        var PAR_LEN = 120;                 // magneterna i polparet
+        // Kraftmodell (px, px/s²; massa 1). K vald så att kontaktkraften
+        // mellan två 120-magneter blir ≈ 7 000 px/s² och kraften vid ett
+        // 65 px stort gap ungefär motsvarar vilofriktionen: magneterna
+        // börjar röra sig först när de kommer nära varandra.
+        var K = 1000000, R0 = 12;
+        var F_STAT = 120, F_GLID = 100, DAMP = 0.8;
+        var TEAR = 18;                     // så långt töjs den hela magneten innan den spricker
+        var V_MAX = 700;
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label', delning
+            ? 'En stavmagnet med röd nordända och grå sydända ligger på ett ' +
+              'rutat papper. Ta tag i ena halvan och dra isär, eller tryck ' +
+              'Dela på mitten: magneten spricker och brottytorna får nya ' +
+              'poler, så att varje bit blir en egen magnet med nordända och ' +
+              'sydända. Bitarna dras ihop igen eftersom olika poler möts vid ' +
+              'brottet. Varje bit kan delas igen, upp till fyra bitar.'
+            : 'Två stavmagneter med röd nordända och grå sydända ligger på ' +
+              'ett rutat papper och kan dras i sidled. Är lika poler vända ' +
+              'mot varandra skjuts den andra magneten undan när man för dem ' +
+              'ihop; är olika poler vända mot varandra dras de ihop och ' +
+              'fastnar i varandra. Blå pilar visar kraften på varje magnet. ' +
+              'Knapparna vänder en magnet ett halvt varv.');
+        canvas.style.touchAction = 'pan-y';
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        function mkBtn(text, cls) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn' + (cls ? ' ' + cls : '');
+            b.textContent = text;
+            controls.appendChild(b);
+            return b;
+        }
+        var delaBtn = null, vandVBtn = null, vandHBtn = null;
+        if (delning) {
+            delaBtn = mkBtn('Dela på mitten', 'ms-primar');
+        } else {
+            vandVBtn = mkBtn('Vänd vänstra');
+            vandHBtn = mkBtn('Vänd högra');
+        }
+        var omBtn = mkBtn('Börja om');
+        var info = document.createElement('span');
+        info.className = 'minisim-info ms-brod';
+        controls.appendChild(info);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── Canvas-uppsättning (samma mönster som övriga minisimmar) ──────
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        // En magnet: x = vänsterkant, len, polL = +1 om nordändan är till
+        // vänster (−1 om sydändan), bl/br = brottyta i vänster/höger ände,
+        // v = fart (px/s), hel = den ursprungliga hela magneten (kan
+        // slitas itu med pekaren), stretch = töjning under sådant drag,
+        // flip = pågående vändning {t, dur}.
+        var mags = [];
+        var drag = null;                   // {m, off, ptr, side, x0, pv, lx, lt}
+        var klick = null;                  // {x, t} liten kontaktmarkering
+        var lastTap = { m: null, t: 0 };
+        var running = false, visible = true, lastTs = 0, rafId = 0;
+
+        function mkMag(x, len, polL, bl, br, hel) {
+            return { x: x, len: len, polL: polL, bl: !!bl, br: !!br,
+                     v: 0, hel: !!hel, stretch: 0, flip: null };
+        }
+        function reset() {
+            drag = null;
+            klick = null;
+            if (delning) {
+                mags = [mkMag((W - HEL_LEN) / 2, HEL_LEN, 1, false, false, true)];
+            } else {
+                mags = [mkMag(120, PAR_LEN, -1, false, false, false),
+                        mkMag(W - 120 - PAR_LEN, PAR_LEN, 1, false, false, false)];
+            }
+            syncUi();
+            render();
+            updateInfo();
+        }
+        function sorted() {
+            return mags.slice().sort(function (a, b) { return a.x - b.x; });
+        }
+        function polR(m) { return -m.polL; }
+        function cx(m) { return m.x + m.len / 2; }
+
+        // ── Krafter: summan över alla polpar (1D längs mittlinjen) ────────
+        function forceOn(m) {
+            var F = 0;
+            var pb = [[m.x, m.polL], [m.x + m.len, polR(m)]];
+            for (var i = 0; i < mags.length; i++) {
+                var o = mags[i];
+                if (o === m) continue;
+                var pa = [[o.x, o.polL], [o.x + o.len, polR(o)]];
+                // Magneterna ligger på rad och kan inte gå in i varandra,
+                // så riktningen "bort från o" ges av mittpunkterna — inte
+                // av polparets eget avstånd, som vid kontakt är noll (eller
+                // efter ett flyttalsöverlapp pekar åt fel håll och vänder
+                // attraktion till repulsion för ett par i kontakt).
+                var sgn = cx(m) > cx(o) ? 1 : -1;
+                for (var j = 0; j < 2; j++) {
+                    for (var k = 0; k < 2; k++) {
+                        var d = sgn * (pb[k][0] - pa[j][0]);
+                        var r = Math.max(0, d) + R0;
+                        F += K * pa[j][1] * pb[k][1] / (r * r) * sgn;
+                    }
+                }
+            }
+            return F;
+        }
+
+        // ── Kontakter och väggar (magneterna kan inte gå in i varandra) ──
+        function atLeftWall(m) { return m.x <= MARG + 0.01; }
+        function atRightWall(m) { return m.x + m.len >= W - MARG - 0.01; }
+        function walls(m) {
+            if (m.x < MARG) { m.x = MARG; if (m.v < 0) m.v = 0; }
+            if (m.x + m.len > W - MARG) { m.x = W - MARG - m.len; if (m.v > 0) m.v = 0; }
+        }
+        function ev(m) {                   // "effektiv" fart: den dragna följer pekaren
+            return (drag && m === drag.m) ? drag.pv : m.v;
+        }
+        function push(a, b, ov) {          // a till vänster om b, överlapp ov > 0
+            var aFix = drag && a === drag.m, bFix = drag && b === drag.m;
+            if (aFix && !bFix) {
+                if (atRightWall(b)) { a.x -= ov; } else { b.x += ov; }
+            } else if (bFix && !aFix) {
+                if (atLeftWall(a)) { b.x += ov; } else { a.x -= ov; }
+            } else if (!aFix && !bFix) {
+                if (atRightWall(b)) { a.x -= ov; }
+                else if (atLeftWall(a)) { b.x += ov; }
+                else { a.x -= ov / 2; b.x += ov / 2; }
+            }
+        }
+        function resolve(dt) {
+            var ms = sorted();
+            var i, it, ov;
+            // 1. Lägen: ingen får ligga inne i en granne eller utanför väggarna.
+            for (it = 0; it < 4; it++) {
+                for (i = 0; i < ms.length - 1; i++) {
+                    ov = ms[i].x + ms[i].len - ms[i + 1].x;
+                    if (ov > 0) push(ms[i], ms[i + 1], ov);
+                }
+                for (i = 0; i < ms.length; i++) walls(ms[i]);
+                for (i = ms.length - 1; i > 0; i--) {
+                    ov = ms[i - 1].x + ms[i - 1].len - ms[i].x;
+                    if (ov > 0) push(ms[i - 1], ms[i], ov);
+                }
+                for (i = 0; i < ms.length; i++) walls(ms[i]);
+            }
+            // 2. Farter: magneter i kontakt som rör sig MOT varandra (eller
+            // hålls ihop) bildar ett kluster och får gemensam fart — medel-
+            // farten (lika massor), så att rörelsemängden bevaras och de
+            // inre magnetkrafterna, som är parvis motriktade, tar ut
+            // varandra exakt. Utan detta driver en kedja av bitar iväg.
+            // Ett par som rör sig ISÄR (repulsion) lämnas i fred.
+            var k = 0;
+            while (k < ms.length) {
+                var grupp = [ms[k]];
+                while (k + 1 < ms.length) {
+                    var a = ms[k], b = ms[k + 1];
+                    var gap = b.x - (a.x + a.len);
+                    if (gap > 0.01 || ev(a) < ev(b)) break;
+                    grupp.push(b);
+                    k++;
+                }
+                k++;
+                if (grupp.length < 2) continue;
+                var dragged = null, sum = 0, j;
+                for (j = 0; j < grupp.length; j++) {
+                    if (drag && grupp[j] === drag.m) dragged = grupp[j];
+                    sum += grupp[j].v;
+                }
+                var v = dragged ? drag.pv : sum / grupp.length;
+                // glidfriktionen bromsar klustret som helhet — de enskilda
+                // farterna har motsatta tecken (de inre krafterna), så den
+                // friktion som redan dragits av var för sig tar ut sig i
+                // medelvärdet i stället för att bromsa
+                if (!dragged && dt) {
+                    var glid = F_GLID * dt;
+                    if (Math.abs(v) <= glid) v = 0;
+                    else v -= (v > 0 ? 1 : -1) * glid;
+                }
+                // mot en vägg stannar hela klustret
+                if ((v < 0 && atLeftWall(grupp[0])) ||
+                    (v > 0 && atRightWall(grupp[grupp.length - 1]))) v = 0;
+                for (j = 0; j < grupp.length; j++) {
+                    if (grupp[j] !== dragged) grupp[j].v = v;
+                }
+            }
+        }
+
+        // ── Simulationssteg ───────────────────────────────────────────────
+        function step(dt) {
+            var i, m;
+            // alla krafter räknas FÖRE någon flyttas — annars ser den andra
+            // magneten i ett par redan den förstas nya läge, och paret får
+            // en liten nettofart som aldrig dör ut
+            var Fs = [];
+            for (i = 0; i < mags.length; i++) Fs.push(forceOn(mags[i]));
+            for (i = 0; i < mags.length; i++) {
+                m = mags[i];
+                if (m.flip) {
+                    m.flip.t += dt;
+                    if (m.flip.t >= m.flip.dur) m.flip = null;
+                }
+                if (drag && m === drag.m) continue;
+                var F = Fs[i];
+                if (Math.abs(m.v) < 2 && Math.abs(F) < F_STAT) {
+                    m.v = 0;               // vilofriktionen håller kvar den
+                    continue;
+                }
+                m.v += F * dt;
+                var glid = F_GLID * dt;
+                if (Math.abs(m.v) <= glid) m.v = 0;
+                else m.v -= (m.v > 0 ? 1 : -1) * glid;
+                m.v *= Math.exp(-DAMP * dt);
+                m.v = Math.max(-V_MAX, Math.min(V_MAX, m.v));
+                m.x += m.v * dt;
+            }
+            // "klick": en fri magnet som når kontakt med fart
+            var ms = sorted();
+            for (i = 0; i < ms.length - 1; i++) {
+                var a = ms[i], b = ms[i + 1];
+                var gap = b.x - (a.x + a.len);
+                if (gap <= 0 && Math.abs(a.v - b.v) > 60 && !klick) {
+                    klick = { x: b.x - gap / 2, t: 0 };
+                }
+            }
+            resolve(dt);
+            if (klick) {
+                klick.t += dt;
+                if (klick.t > 0.3) klick = null;
+            }
+        }
+
+        function anyMoving() {
+            for (var i = 0; i < mags.length; i++) {
+                if (mags[i].v !== 0 || mags[i].flip) return true;
+            }
+            return false;
+        }
+        function shouldRun() {
+            if (!visible || document.hidden) return false;
+            return !!drag || anyMoving() || !!klick;
+        }
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045);
+            step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+
+        // ── Åtgärder ──────────────────────────────────────────────────────
+        function flip(m) {
+            if (m.flip) return;
+            m.polL = -m.polL;
+            var b = m.bl; m.bl = m.br; m.br = b;
+            m.flip = { t: 0, dur: 0.38 };
+            kick();
+        }
+        // Dela en magnet på mitten: brottytorna får nya poler av sig
+        // själva (nordändan blir kvar på ena biten, sydändan på den
+        // andra, och varje bit får den motsatta polen vid brottet).
+        function split(m, sep, grabbed) {
+            var half = m.len / 2;
+            var left = mkMag(m.x, half, m.polL, m.bl, true, false);
+            var right = mkMag(m.x + half + sep, half, m.polL, true, m.br, false);
+            left.v = m.v - (grabbed ? 0 : 90);
+            right.v = m.v + (grabbed ? 0 : 90);
+            var idx = mags.indexOf(m);
+            mags.splice(idx, 1, left, right);
+            return { left: left, right: right };
+        }
+        function splitAll() {
+            var list = mags.slice();
+            var n = 0;
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].len >= 2 * MIN_LEN && !list[i].flip) { split(list[i], 8, false); n++; }
+            }
+            if (n) { klick = null; kick(); }
+            syncUi();
+            updateInfo();
+        }
+        function canSplit() {
+            for (var i = 0; i < mags.length; i++) if (mags[i].len >= 2 * MIN_LEN) return true;
+            return false;
+        }
+        function syncUi() {
+            if (delaBtn) {
+                delaBtn.disabled = !canSplit();
+                delaBtn.textContent = mags.length === 1 && mags[0].hel ? 'Dela på mitten' : 'Dela igen';
+            }
+        }
+
+        // ── Rendering (laboranstema: papper med kollegieblocks-rutnät) ────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, H);
+            }
+            for (var y = 26; y < H; y += 26) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(W, y + 0.5);
+            }
+            ctx.stroke();
+        }
+
+        // Konturen som polygon (medurs från övre vänstra hörnet). En
+        // brottyta ritas taggig; samma tandning i båda bitarna vid ett
+        // brott, så att de passar ihop som pusselbitar.
+        var TAND = [[0, 0], [4.8, 7.2], [-2.4, 14.4], [4.8, 21.6], [-2.4, 28.8], [0, 36]];
+        function outline(x, len, bl, br) {
+            var top = AXIS_Y - MH / 2, xr = x + len;
+            var pts = [], i;
+            if (br) {
+                for (i = 0; i < TAND.length; i++) pts.push([xr + TAND[i][0], top + TAND[i][1] * MH / 36]);
+            } else {
+                pts.push([xr, top], [xr, top + MH]);
+            }
+            if (bl) {
+                for (i = TAND.length - 1; i >= 0; i--) pts.push([x + TAND[i][0], top + TAND[i][1] * MH / 36]);
+            } else {
+                pts.push([x, top + MH], [x, top]);
+            }
+            return pts;
+        }
+        function tracePath(pts) {
+            ctx.beginPath();
+            ctx.moveTo(pts[0][0], pts[0][1]);
+            for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+            ctx.closePath();
+        }
+        // Ritar en stav (eller halva den hela magneten under töjning):
+        // x, len, färgen i vänster respektive höger halva, bokstäver.
+        function drawBar(x, len, polL, bl, br, letters) {
+            var top = AXIS_Y - MH / 2;
+            var pts = outline(x, len, bl, br);
+            ctx.save();
+            tracePath(pts);
+            ctx.clip();
+            ctx.fillStyle = polL > 0 ? COL_N : COL_S;
+            ctx.fillRect(x - 8, top, len / 2 + 8, MH);
+            ctx.fillStyle = polL > 0 ? COL_S : COL_N;
+            ctx.fillRect(x + len / 2, top, len / 2 + 8, MH);
+            ctx.restore();
+            tracePath(pts);
+            ctx.strokeStyle = COL_KANT;
+            ctx.lineWidth = 1.4;
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            if (letters) {
+                ctx.font = '600 ' + (len >= 100 ? 19 : 16) + 'px Poppins, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                var lx = x + len / 4, rx = x + 3 * len / 4;
+                ctx.fillStyle = polL > 0 ? '#ffffff' : COL_S_TXT;
+                ctx.fillText(polL > 0 ? 'N' : 'S', lx, AXIS_Y + 1);
+                ctx.fillStyle = polL > 0 ? COL_S_TXT : '#ffffff';
+                ctx.fillText(polL > 0 ? 'S' : 'N', rx, AXIS_Y + 1);
+            }
+        }
+        function easeOut(u) { return 1 - Math.pow(1 - u, 3); }
+        function drawMagnet(m) {
+            var half = m.len / 2;
+            if (m.hel && m.stretch > 0 && drag && drag.m === m) {
+                // den hela magneten töjs: halvorna glider isär vid mitten
+                // (ännu inga nya poler — de finns först när den spruckit)
+                var s = m.stretch, side = drag.side;
+                var xl = m.x + (side < 0 ? -s : 0), xr = m.x + half + (side > 0 ? s : 0);
+                drawBar(xl, half, m.polL, false, true, false);
+                drawBar(xr, half, -m.polL, true, false, false);
+                ctx.font = '600 19px Poppins, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = m.polL > 0 ? '#ffffff' : COL_S_TXT;
+                ctx.fillText(m.polL > 0 ? 'N' : 'S', xl + half / 2, AXIS_Y + 1);
+                ctx.fillStyle = m.polL > 0 ? COL_S_TXT : '#ffffff';
+                ctx.fillText(m.polL > 0 ? 'S' : 'N', xr + half / 2, AXIS_Y + 1);
+                return;
+            }
+            if (m.flip) {
+                var ang = Math.PI * (1 - easeOut(Math.min(1, m.flip.t / m.flip.dur)));
+                ctx.save();
+                ctx.translate(cx(m), AXIS_Y);
+                ctx.rotate(ang);
+                ctx.translate(-cx(m), -AXIS_Y);
+                drawBar(m.x, m.len, m.polL, m.bl, m.br, true);
+                ctx.restore();
+                return;
+            }
+            drawBar(m.x, m.len, m.polL, m.bl, m.br, true);
+        }
+
+        // Kraftpil ovanför magneten: svansen över magnetens mitt, längd
+        // ∝ √|F| (så att även svaga krafter syns), begränsad så att den
+        // aldrig når in över grannens pil.
+        function arrowLen(F) { return 90 * Math.sqrt(Math.min(1, Math.abs(F) / 7000)); }
+        function drawArrows() {
+            var ms = sorted();
+            var y = AXIS_Y - MH / 2 - 18;
+            for (var i = 0; i < ms.length; i++) {
+                var m = ms[i];
+                if (m.flip || (m.hel && m.stretch > 0)) continue;
+                var F = forceOn(m);
+                var L = arrowLen(F);
+                if (L < 7) continue;
+                var dir = F > 0 ? 1 : -1;
+                var nb = dir > 0 ? ms[i + 1] : ms[i - 1];
+                if (nb) L = Math.min(L, Math.abs(cx(nb) - cx(m)) / 2 - 4);
+                if (L < 7) continue;
+                var x0 = cx(m), x1 = x0 + dir * L;
+                var hd = Math.min(9, L * 0.6);
+                ctx.strokeStyle = COL_KRAFT;
+                ctx.fillStyle = COL_KRAFT;
+                ctx.lineWidth = 2.4;
+                ctx.lineCap = 'butt';
+                ctx.beginPath();
+                ctx.moveTo(x0, y);
+                ctx.lineTo(x1 - dir * hd, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x1, y);
+                ctx.lineTo(x1 - dir * hd, y - 4.5);
+                ctx.lineTo(x1 - dir * hd, y + 4.5);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+        function drawKlick() {
+            if (!klick) return;
+            var u = klick.t / 0.3;
+            var r0 = 8 + 14 * u, r1 = r0 + 7 * (1 - u);
+            ctx.strokeStyle = 'rgba(31,37,48,' + (0.8 * (1 - u)).toFixed(2) + ')';
+            ctx.lineWidth = 1.6;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            for (var k = 0; k < 6; k++) {
+                var a = -Math.PI / 2 + (k - 2.5) * 0.42;
+                var y0 = AXIS_Y - MH / 2;
+                ctx.moveTo(klick.x + r0 * Math.cos(a), y0 + r0 * Math.sin(a));
+                ctx.lineTo(klick.x + r1 * Math.cos(a), y0 + r1 * Math.sin(a));
+            }
+            ctx.stroke();
+        }
+        function hintText() {
+            if (delning) {
+                if (mags.length === 1 && mags[0].hel) return 'Ta tag i ena halvan och dra isär magneten.';
+                return 'Dra i bitarna. Dubbelklicka på en bit för att vända den.';
+            }
+            return 'Dra i magneterna. Dubbelklicka på en magnet för att vända den.';
+        }
+        function drawHint() {
+            // nederst till vänster (uppe till vänster sitter fullskärms-
+            // knappen); på en smal telefon blir texten oläsligt liten och
+            // hoppas över — info-raden under kortet säger samma sak
+            if ((canvas.clientWidth || W) < 440) return;
+            ctx.font = '13px Poppins, system-ui, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = 'rgba(31,37,48,0.72)';
+            ctx.fillText(hintText(), 14, H - 12);
+        }
+        function render() {
+            drawBackground();
+            drawHint();
+            drawArrows();
+            var ms = sorted();
+            for (var i = 0; i < ms.length; i++) drawMagnet(ms[i]);
+            drawKlick();
+        }
+
+        function facing() {
+            // polerna som är vända mot varandra i det närmaste paret
+            var ms = sorted();
+            if (ms.length < 2) return null;
+            var best = null;
+            for (var i = 0; i < ms.length - 1; i++) {
+                var gap = ms[i + 1].x - (ms[i].x + ms[i].len);
+                if (!best || gap < best.gap) best = { a: ms[i], b: ms[i + 1], gap: gap };
+            }
+            best.lika = polR(best.a) === best.b.polL;
+            return best;
+        }
+        function updateInfo() {
+            var f = facing();
+            if (delning) {
+                if (!f) {
+                    info.textContent = 'En hel magnet. Ta tag i ena halvan och dra isär den, eller tryck Dela på mitten.';
+                } else if (mags.length === 2) {
+                    info.textContent = 'Två bitar, och båda har fått en nordända och en sydända.';
+                } else {
+                    info.textContent = mags.length + ' bitar, var och en med nordända och sydända. Poler uppträder alltid parvis.';
+                }
+                return;
+            }
+            if (!f) { info.textContent = ''; return; }
+            if (f.lika) {
+                info.textContent = f.gap > 70
+                    ? 'Lika poler mot varandra. Dra dem närmare varandra.'
+                    : 'Lika poler mot varandra: magneterna repellerar.';
+            } else {
+                info.textContent = f.gap <= 0.5
+                    ? 'Magneterna sitter ihop: olika poler attraherar.'
+                    : (f.gap > 70 ? 'Olika poler mot varandra. Dra dem närmare varandra.'
+                                  : 'Olika poler mot varandra: magneterna attraherar.');
+            }
+        }
+
+        // ── Pekare: ta tag i en magnet och dra i sidled ───────────────────
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - r.left) * W / r.width,
+                y: (e.clientY - r.top) * H / r.height
+            };
+        }
+        function hit(p) {
+            if (Math.abs(p.y - AXIS_Y) > MH / 2 + 10) return null;
+            for (var i = 0; i < mags.length; i++) {
+                var m = mags[i];
+                if (p.x >= m.x - 6 && p.x <= m.x + m.len + 6) return m;
+            }
+            return null;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            if (e.button && e.button !== 0) return;
+            var p = logicalPos(e);
+            var m = hit(p);
+            if (!m) return;
+            e.preventDefault();
+            var now = performance.now();
+            // dubbelklick/dubbeltryck vänder magneten (e.detail täcker
+            // musens dubbelklick, tidsfönstret täcker två snabba tryck)
+            if (!m.hel && (e.detail >= 2 || (lastTap.m === m && now - lastTap.t < 350))) {
+                lastTap = { m: null, t: 0 };
+                flip(m);
+                return;
+            }
+            lastTap = { m: m, t: now };
+            if (m.flip) return;
+            drag = { m: m, off: p.x - m.x, ptr: e.pointerId, x0: m.x,
+                     side: p.x < cx(m) ? -1 : 1, pv: 0, lx: p.x, lt: now };
+            m.v = 0;
+            m.stretch = 0;
+            canvas.style.cursor = 'grabbing';
+            try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+            kick();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!drag) {
+                canvas.style.cursor = hit(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== drag.ptr) return;
+            var m = drag.m;
+            var now = performance.now();
+            var dt = Math.max(0.004, (now - drag.lt) / 1000);
+            drag.pv = 0.6 * drag.pv + 0.4 * (p.x - drag.lx) / dt;
+            drag.lx = p.x;
+            drag.lt = now;
+            var nx = p.x - drag.off;
+            if (m.hel) {
+                // dra utåt från mitten → magneten töjs och spricker;
+                // dra åt andra hållet → hela magneten glider med
+                var pull = drag.side * (nx - m.x);
+                if (pull <= 0) {
+                    m.x = nx;
+                    m.stretch = 0;
+                } else if (pull < TEAR) {
+                    m.stretch = pull;
+                } else {
+                    var parts = split(m, 0, true);
+                    var grabbed = drag.side > 0 ? parts.right : parts.left;
+                    var other = drag.side > 0 ? parts.left : parts.right;
+                    grabbed.x += drag.side * TEAR;   // där halvan redan ritades
+                    drag.off = p.x - grabbed.x;
+                    drag.m = grabbed;
+                    other.v = -drag.side * 40;       // den andra halvan rycker till
+                    klick = null;
+                    syncUi();
+                }
+            } else {
+                m.x = nx;
+            }
+            resolve();
+            kick();
+        });
+        function endDrag(e) {
+            if (!drag || e.pointerId !== drag.ptr) return;
+            var m = drag.m;
+            m.stretch = 0;
+            m.v = m.hel ? 0 : Math.max(-V_MAX, Math.min(V_MAX, drag.pv));
+            drag = null;
+            canvas.style.cursor = 'default';
+            kick();
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Knappar ───────────────────────────────────────────────────────
+        if (delaBtn) delaBtn.addEventListener('click', splitAll);
+        if (vandVBtn) vandVBtn.addEventListener('click', function () { flip(sorted()[0]); });
+        if (vandHBtn) vandHBtn.addEventListener('click', function () { flip(sorted()[1]); });
+        omBtn.addEventListener('click', reset);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+            kick();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () {
+            resizeCanvas();
+            if (!running) render();
+        });
+
+        // Pausa när widgeten inte syns (lång teorisida) eller fliken göms.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) kick();
+        });
+
+        // Test-handtag för skärmdumps- och fysikskript.
+        card._mags = function () { return mags; };
+        card._force = forceOn;
+        card._step = function (dt) { step(dt); render(); updateInfo(); };
+        card._split = splitAll;
+        card._flip = function (i) { flip(sorted()[i]); };
+        card._dbg = function () { return { running: running, visible: visible, rafId: rafId, drag: !!drag, hidden: document.hidden }; };
+
+        reset();
+    }
+    function buildMagnetpoler(node, cfg) { buildMagneter(node, cfg, 'poler'); }
+    function buildMagnetdelning(node, cfg) { buildMagneter(node, cfg, 'delning'); }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
@@ -7645,7 +8425,8 @@
                   gaffelbalans3d: buildGaffelbalans3d,
                   dubbelkon: buildDubbelkon,
                   linjal: buildLinjal, linjaltrio: buildLinjaltrio,
-                  fodelsedag: buildFodelsedag, talmangder: buildTalmangder };
+                  fodelsedag: buildFodelsedag, talmangder: buildTalmangder,
+                  magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

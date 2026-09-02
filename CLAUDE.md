@@ -409,6 +409,11 @@ Så här bygger du scenen:
    efter sin båge). **Läs filhuvudet innan
    du skriver en ny scen** — kopiera rytmen från en närliggande scen
    (`layoutParallax`, `layoutVinkeldiameter`, `layoutSchwarzschild`).
+   **Kraftekvation i en cirkelrörelse?** Rita kraftsituationen intill
+   ekvationen, med centripetalkraften FÖRST och STRECKAD (`T.dashArrow`)
+   och bubblan som resonerar från dess riktning, se REGEL "KRAFTFIGUR
+   VID VARJE KRAFTEKVATION I CIRKELRÖRELSE" i filhuvudet (referens:
+   `layoutGungan`, `layoutVertikalcirkel`, `layoutHubble`).
 3. **Saknas ett tecken i `GLYPHS`** ritas det inte alls men tar plats
    ("FÖRSTÄRKS" blev "FÖRST RKS"). Lägg då till glyfen som enstreckad
    handstil bland de andra (θ lades till 2026-08-09) — och granska den

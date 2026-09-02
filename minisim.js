@@ -71,6 +71,29 @@
  * scenens egen .fs-btn inne i iframen och ger exakt originalsimuleringens
  * fullskärmsläge med alla verktyg.
  *
+ * ── typ: kastvektorer ────────────────────────────────────────────────────
+ * Hjälpfiguren i fy2-1.8 (Kaströrelse) som interaktiv figur: kastparabeln
+ * med hastighetsvektorerna i fem punkter — v_0x (röd, konstant), v_y (röd,
+ * ändras) och den resulterande hastigheten v (blå) med vinklarna α, β, γ.
+ * Tre kryssrutor under figuren ("Visa hastighet i x-led", "Visa hastighet i
+ * y-led", "Visa total hastighet") tänder och släcker varsitt lager, så att
+ * eleven kan titta på EN led i taget i stället för alla vektorer på en gång.
+ * Ren SVG i laboranstemat, inget ljud, ingen fullskärm. Geometrin är samma
+ * som den tidigare statiska ::: figur-SVG:n (samma koordinater och färger
+ * som simuleringen fysik2-rorelse-app.html använder).
+ *
+ * ── typ: snettkast ───────────────────────────────────────────────────────
+ * Bollen som kastas ur fy2-1.8 (Kaströrelse): den fristående simuleringen
+ * fysik2-rorelse-app.html inbäddad via en iframe (?embed=1&mini=1 —
+ * mini-läget visar bara scenen), samma mönster som cirkularrorelse. Kortets
+ * verktyg (Kasta/Pausa/Fortsätt, Börja om samt glidarna Utkastvinkel och
+ * Utgångshastighet) styr sidan med postMessage ({ fysikKast: … }); sidan
+ * rapporterar tillbaka sitt läge ({ fysikKastStatus: … }) och info-raden
+ * visar tid och fart under kastet, kastvidd och stighöjd efter nedslaget.
+ * Utgångsläget är genomgångens Exempel 1 (15 m/s, 50°). FULLSKÄRM startas
+ * med scenens egen .fs-btn inne i iframen och ger exakt originalets
+ * fullskärmsläge med alla verktyg.
+ *
  * ── typ: eulersdisk ──────────────────────────────────────────────────────
  * Demonstrationen ur fy1-4.4 (Energiprincipen): en blankpolerad metalldisk
  * ("Eulers disk") som snurras på en spegelblank sockel. Disken rullar på
@@ -257,11 +280,11 @@
         '.minisim-check input{accent-color:#c95f26;width:15px;height:15px;cursor:pointer;}',
         '.minisim-info{margin-left:auto;color:#8a93a5;font-size:13px;font-variant-numeric:tabular-nums;',
         '  font-family:' + FONT + ';font-style:normal;white-space:nowrap;}',
-        '.minisim-slider-row{display:flex;align-items:center;gap:10px;margin-top:10px;font-style:normal;}',
+        '.minisim-slider-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;font-style:normal;}',
         '.minisim-slider-lbl{color:#aab1bf;font-size:13.5px;font-family:' + FONT + ';white-space:nowrap;}',
         '.minisim-slider-val{color:#dde2ec;font-size:13.5px;font-family:' + FONT + ';',
         '  font-variant-numeric:tabular-nums;white-space:nowrap;min-width:74px;text-align:right;}',
-        '.minisim-slider{flex:1;appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;',
+        '.minisim-slider{flex:1 1 120px;min-width:50px;appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;',
         '  background:#2a2f3a;outline:none;cursor:pointer;}',
         '.minisim-slider::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;',
         '  border-radius:50%;background:#c95f26;border:2px solid #07090f;cursor:pointer;}',
@@ -360,6 +383,15 @@
         '.ms-sitvaxel button + button{border-left:1px solid #c9bfa9;}',
         '.ms-sitvaxel button.ms-aktiv{background:#0f1620;color:#f3eee4;cursor:default;}',
         '.ms-sitvaxel button:focus-visible{outline:2px solid #7aa2e0;outline-offset:2px;}',
+        /* typ: kastvektorer — hjälpfiguren i fy2-1.8 med tre lager som
+           kryssrutorna tänder och släcker. Kortet är bredare (ms-bred) så
+           att figuren får sin fulla bredd (593 px) och etiketterna sin
+           storlek. */
+        '.minisim-card.ms-bred{max-width:664px;}',
+        '.ms-kv-scene{background:linear-gradient(180deg,#f7f2e8,#ece3d2);padding:8px 4px 4px;}',
+        '.ms-kv-svg{display:block;width:100%;max-width:593px;height:auto;margin:0 auto;font-style:normal;}',
+        '.ms-kv-lager{transition:opacity .2s ease;}',
+        '.ms-kv-lager.ms-dold{opacity:0;visibility:hidden;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -7283,8 +7315,284 @@
     }
 
     // ── Register + publikt API ────────────────────────────────────────────
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: kastvektorer
+    // ══════════════════════════════════════════════════════════════════════
+    // Hjälpfiguren i fy2-1.8 som interaktiv figur: samma SVG som den gamla
+    // ::: figur-figuren, men vektorerna ligger i tre lager (x-led, y-led,
+    // total hastighet) som kryssrutorna under figuren tänder och släcker.
+    // Vinkelbågarna α, β, γ hör till den totala hastigheten (det är dess
+    // vinkel de visar) och "v_y = 0" i högsta punkten till y-lagret.
+    function buildKastvektorer(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', BLA = '#2563c9', AXEL = '#38bdf8';
+        var FONT_ATTR = 'font-size="15"';
+
+        // Hjälpare för etiketterna: kursiv v + upprätt index
+        function vLbl(x, y, anchor, sub, color) {
+            return '<text x="' + x + '" y="' + y + '" text-anchor="' + anchor + '" ' + FONT_ATTR +
+                ' fill="' + color + '"><tspan font-style="italic">v</tspan>' +
+                (sub ? '<tspan font-size="11" dy="3">' + sub + '</tspan>' : '') + '</text>';
+        }
+        // Pil (skaftet slutar vid pilhuvudets bas, butt-ändar)
+        function pil(x1, y1, x2, y2, color, w, head) {
+            var dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
+            var bx = x2 - ux * head, by = y2 - uy * head, hw = head * 0.47;
+            var r = function (v) { return Math.round(v * 10) / 10; };
+            return '<line x1="' + r(x1) + '" y1="' + r(y1) + '" x2="' + r(bx) + '" y2="' + r(by) +
+                '" stroke="' + color + '" stroke-width="' + w + '" stroke-linecap="butt"/>' +
+                '<polygon points="' + r(bx - uy * hw) + ',' + r(by + ux * hw) + ' ' + r(x2) + ',' + r(y2) +
+                ' ' + r(bx + uy * hw) + ',' + r(by - ux * hw) + '" fill="' + color + '"/>';
+        }
+        // Vinkelbåge med medelpunkt i hörnet (x,y) från riktningen a1 till a2
+        // (radianer i SVG:s y-nedåt-system), tätt samplad
+        function bage(x, y, r, a1, a2) {
+            var pts = [];
+            for (var i = 0; i <= 14; i++) {
+                var a = a1 + (a2 - a1) * i / 14;
+                pts.push((x + r * Math.cos(a)).toFixed(1) + ',' + (y + r * Math.sin(a)).toFixed(1));
+            }
+            return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.2"/>';
+        }
+        function vinkelLbl(x, y, txt) {
+            return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-size="14" fill="' + INK + '">' + txt + '</text>';
+        }
+
+        // Geometrin: origo (64,182), topp (236,70), nedslag (408,182)
+        var OX = 64, OY = 182, PX = 236, HW = 172, HH = 112;
+        function yAv(x) { var u = (x - PX) / HW; return OY - HH * (1 - u * u); }
+        var kurva = [];
+        for (var i = 0; i <= 60; i++) {
+            var xx = OX + (2 * HW) * i / 60;
+            kurva.push(xx.toFixed(1) + ',' + yAv(xx).toFixed(1));
+        }
+        // Fem punkter med vy-längd (px, uppåt positiv); vx är alltid VX
+        var VX = 46;
+        var punkter = [
+            { x: 64,  vy: 60,  xs: '0x', ys: '0y', vs: '0', vinkel: 'α' },
+            { x: 150, vy: 30,  xs: '0x', ys: 'y',  vs: '',  vinkel: 'β' },
+            { x: 236, vy: 0,   xs: '0x', ys: 'y',  vs: '',  vinkel: '' },
+            { x: 322, vy: -30, xs: '0x', ys: 'y',  vs: '',  vinkel: 'γ' },
+            { x: 408, vy: -60, xs: '0x', ys: '0y', vs: '0', vinkel: 'α' },
+        ];
+        var LX = [[114, 198], [200, 114], [286, 63], [372, 101], [458, 178]];
+        var LY = [[58, 126], [144, 66], null, [316, 132], [402, 246]];
+        var LV = [[104, 112, 'end'], [194, 60, 'end'], null, [373, 142, 'start'], [459, 256, 'start']];
+        var LVINKEL = [[98, 176], [183, 94], null, [355, 114], [442, 200]];
+
+        var bas = '', lagerX = '', lagerY = '', lagerV = '';
+        // axlar med pilspets bara åt det positiva hållet
+        bas += '<line x1="64" y1="182" x2="474" y2="182" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+               '<polygon points="474,178 484,182 474,186" fill="' + AXEL + '"/>' +
+               '<line x1="64" y1="182" x2="64" y2="40" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+               '<polygon points="60,40 64,30 68,40" fill="' + AXEL + '"/>' +
+               '<text x="481" y="200" text-anchor="end" ' + FONT_ATTR + ' fill="' + INK + '"><tspan font-style="italic">x</tspan></text>' +
+               '<text x="73" y="38" text-anchor="start" ' + FONT_ATTR + ' fill="' + INK + '"><tspan font-style="italic">y</tspan></text>';
+        // tyngdaccelerationen g
+        bas += pil(86, 52, 86, 84, INK, 2, 8) +
+               '<text x="92" y="72" text-anchor="start" ' + FONT_ATTR + ' fill="' + INK + '"><tspan font-style="italic">g</tspan></text>';
+        bas += '<polyline points="' + kurva.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="2"/>';
+
+        punkter.forEach(function (p, idx) {
+            var x = p.x, y = yAv(x);
+            bas += '<circle cx="' + x + '" cy="' + y.toFixed(1) + '" r="3" fill="' + INK + '"/>';
+            // x-led
+            lagerX += pil(x, y, x + VX, y, ROD, 2.6, 9);
+            lagerX += vLbl(LX[idx][0], LX[idx][1], 'start', p.xs, ROD);
+            // y-led
+            if (p.vy !== 0) {
+                lagerY += pil(x, y, x, y - p.vy, ROD, 2.6, 9);
+                lagerY += vLbl(LY[idx][0], LY[idx][1], 'end', p.ys, ROD);
+            } else {
+                lagerY += '<text x="232" y="60" text-anchor="middle" font-size="14" fill="' + INK + '">' +
+                          '<tspan font-style="italic">v</tspan><tspan font-size="11" dy="3">y</tspan>' +
+                          '<tspan dy="-3"> = 0</tspan></text>';
+            }
+            // total hastighet + vinkelbåge mot vågräta axeln
+            if (p.vy !== 0) {
+                lagerV += pil(x, y, x + VX, y - p.vy, BLA, 3, 10);
+                lagerV += vLbl(LV[idx][0], LV[idx][1], LV[idx][2], p.vs, BLA);
+                var ang = Math.atan2(-p.vy, VX);          // v-riktningen i SVG-vinkel
+                var r = (idx === 0 || idx === 4) ? 26 : 24;
+                lagerV += p.vy > 0 ? bage(x, y, r, ang, 0) : bage(x, y, r, 0, ang);
+                lagerV += vinkelLbl(LVINKEL[idx][0], LVINKEL[idx][1], p.vinkel);
+            }
+        });
+
+        var svg = '<svg class="ms-kv-svg" viewBox="30 28 468 236" width="593" height="299" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="Kastparabel i ett xy-diagram. En boll följer en parabel från origo till nedslag. ' +
+            'Vid fem punkter visas den konstanta vågräta hastigheten (röd), den varierande lodräta ' +
+            'hastigheten (röd) och den resulterande hastigheten (blå). I högsta punkten är hastigheten ' +
+            'i y-led noll. Kryssrutorna under figuren tänder och släcker de tre vektortyperna.">' +
+            bas +
+            '<g class="ms-kv-lager" data-lager="x">' + lagerX + '</g>' +
+            '<g class="ms-kv-lager" data-lager="y">' + lagerY + '</g>' +
+            '<g class="ms-kv-lager" data-lager="v">' + lagerV + '</g>' +
+            '</svg>';
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = svg;
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        function kryss(txt, lager) {
+            var lbl = document.createElement('label');
+            lbl.className = 'minisim-check';
+            var inp = document.createElement('input');
+            inp.type = 'checkbox';
+            inp.checked = true;
+            var g = scene.querySelector('.ms-kv-lager[data-lager="' + lager + '"]');
+            inp.addEventListener('change', function () {
+                g.classList.toggle('ms-dold', !inp.checked);
+            });
+            lbl.appendChild(inp);
+            lbl.appendChild(document.createTextNode(txt));
+            controls.appendChild(lbl);
+        }
+        kryss('Visa hastighet i x-led', 'x');
+        kryss('Visa hastighet i y-led', 'y');
+        kryss('Visa total hastighet', 'v');
+        card.appendChild(controls);
+        node.appendChild(card);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: snettkast
+    // ══════════════════════════════════════════════════════════════════════
+    // Bollen som kastas ur fy2-1.8: den fristående simuleringen
+    // fysik2-rorelse-app.html inbäddad via en iframe (?embed=1&mini=1 —
+    // mini-läget visar bara scenen). Kortets verktyg styr sidan med
+    // postMessage; sidan rapporterar tillbaka sitt läge till info-raden.
+    // Samma mönster som cirkularrorelse.
+    function buildSnettkast(node, cfg) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var iframe = document.createElement('iframe');
+        iframe.className = 'minisim-iframe';
+        iframe.src = 'fysik2-rorelse-app.html?embed=1&mini=1';
+        iframe.style.aspectRatio = '3 / 2';   // scenens proportion i simuleringen
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.allow = 'fullscreen';
+        iframe.loading = 'lazy';
+        iframe.title =
+            'Simulering: en tennisboll kastas i ett snett kast på rutat papper. ' +
+            'Röda pilar visar hastigheten i x-led och y-led, en blå pil den totala ' +
+            'hastigheten. Fullskärmsknappen uppe till vänster i scenen öppnar ' +
+            'simuleringen i fullskärm med alla verktyg.';
+        scene.appendChild(iframe);
+        card.appendChild(scene);
+
+        function sanda(cmd, value) {
+            try {
+                iframe.contentWindow.postMessage({ fysikKast: cmd, value: value }, location.origin);
+            } catch (e) { /* iframen inte laddad ännu */ }
+        }
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var kastBtn = document.createElement('button');
+        kastBtn.type = 'button';
+        kastBtn.className = 'minisim-btn ms-primar';
+        kastBtn.textContent = 'Kasta';
+        kastBtn.addEventListener('click', function () { sanda('primar'); });
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        omBtn.addEventListener('click', function () { sanda('reset'); });
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+        controls.appendChild(kastBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        // Glidarrad: etikett, glidare, värde
+        function glidare(lblTxt, min, max, step, start, visa, aria, cmd) {
+            var row = document.createElement('div');
+            row.className = 'minisim-slider-row';
+            var lbl = document.createElement('span');
+            lbl.className = 'minisim-slider-lbl';
+            lbl.textContent = lblTxt;
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(step);
+            sl.value = String(start);
+            sl.setAttribute('aria-label', aria);
+            var val = document.createElement('span');
+            val.className = 'minisim-slider-val';
+            val.textContent = visa(start);
+            sl.addEventListener('input', function () {
+                var v = parseFloat(sl.value);
+                val.textContent = visa(v);
+                sanda(cmd, v);
+            });
+            // glidare + värde hålls ihop, så att en smal skärm bryter raden
+            // EFTER etiketten och inte mellan glidaren och värdet
+            var par = document.createElement("span");
+            par.style.cssText = "display:flex;flex:1 1 170px;align-items:center;gap:10px;min-width:0;";
+            par.appendChild(sl); par.appendChild(val);
+            row.appendChild(lbl); row.appendChild(par);
+            card.appendChild(row);
+            return { sl: sl, val: val, visa: visa };
+        }
+        var vinkel = glidare('Utkastvinkel', 0, 90, 1, 50,
+            function (v) { return fmt(v, 0) + '°'; },
+            'Utkastvinkel i grader mot marken', 'vinkel');
+        var fart = glidare('Utgångshastighet', 1, 30, 0.5, 15,
+            function (v) { return fmt(v, 1) + ' m/s'; },
+            'Utgångshastighet i meter per sekund', 'fart');
+        node.appendChild(card);
+
+        // Lägesrapporten från sidan i iframen → knapp, glidare, info-rad
+        window.addEventListener('message', function (e) {
+            if (e.source !== iframe.contentWindow) return;
+            var st = e.data && e.data.fysikKastStatus;
+            if (!st) return;
+            kastBtn.textContent = st.status === 'running' ? 'Pausa'
+                                : st.status === 'paused' ? 'Fortsätt'
+                                : st.status === 'finished' ? 'Kasta igen' : 'Kasta';
+            if (st.status === 'finished' && st.xmax != null) {
+                info.textContent = 'kastvidd ' + fmt(st.xmax, 2) + ' m · stighöjd ' + fmt(st.ymax, 2) + ' m';
+            } else if (st.status === 'running' || st.status === 'paused') {
+                info.textContent = 't = ' + fmt(st.t, 2) + ' s · v = ' + fmt(st.v, 1) + ' m/s';
+            } else {
+                info.textContent = '';
+            }
+            // synka glidarna om värdena ändrats inne i iframen (fullskärm) —
+            // men aldrig medan användaren själv drar i dem
+            [[vinkel, st.angle], [fart, st.v0]].forEach(function (par) {
+                var g = par[0], v = par[1];
+                if (typeof v !== 'number' || document.activeElement === g.sl) return;
+                if (parseFloat(g.sl.value) !== v) { g.sl.value = String(v); g.val.textContent = g.visa(v); }
+            });
+        });
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
+                  kastvektorer: buildKastvektorer,
+                  snettkast: buildSnettkast,
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,

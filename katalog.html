@@ -393,7 +393,13 @@
                     }
                     const src = cfgLines.join('\n');
                     const b64 = btoa(unescape(encodeURIComponent(src)));
-                    out.push('<div class="lab-minisim" data-minisim-src="' + b64 + '"></div>');
+                    // Ankare även för minisimuleringar (?block=minisim-2 eller
+                    // ?block=<typ>, t.ex. snettkast) — se data-blocknr nedan.
+                    rakn.minisim = (rakn.minisim || 0) + 1;
+                    const msTyp = (src.match(/^\s*typ\s*:\s*(\S+)/mi) || [])[1];
+                    out.push('<div class="lab-minisim" data-minisim-src="' + b64 + '"' +
+                             ' data-blocknr="minisim-' + rakn.minisim + '"' +
+                             (msTyp ? ' data-block="' + blockSlug(msTyp) + '"' : '') + '></div>');
                     i = j; // hoppa förbi det avslutande :::
                     continue;
                 }

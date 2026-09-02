@@ -1277,9 +1277,29 @@
                     if (subs.length > 1) {
                         el.classList.add('pres-block');
                         blocks.push(el);
+                        // HELA UPPGIFTEN LEVERERAS I ETT KLICK. Allt i rutan
+                        // före lösningen (pennlösningen/textlösningen) är
+                        // uppgiftsdelen: frågestammen, uppgiftens figur och
+                        // deluppgifterna a), b), c) … Även när deluppgifterna
+                        // står som egna stycken i md-filen ska de tändas
+                        // samtidigt med stammen — eleven ska se hela frågan,
+                        // inte klicka fram en deluppgift i taget (påpekat
+                        // 2026-09-02, Exempel 1 i fy2-1.8). Finns ingen
+                        // lösning i rutan gäller det vanliga ett-stycke-per-
+                        // klick.
+                        const arLosning = (c) => c.classList.contains('lab-handskrift') ||
+                                                 c.classList.contains('lab-block-textlosning') ||
+                                                 c.classList.contains('lab-block-losning');
+                        const losningIx = subs.findIndex(arLosning);
                         for (const c of subs) {
                             c.classList.add('pres-sub');
                             const prev = steps[steps.length - 1];
+                            const ix = subs.indexOf(c);
+                            if (losningIx > 0 && ix > 0 && ix < losningIx &&
+                                prev && prev.block === el) {
+                                (prev.twins || (prev.twins = [])).push(c);
+                                continue;
+                            }
                             // Uppgiftens figur (::: figur direkt i exempel-
                             // rutan) hör till SAMMA steg som frågestammen —
                             // eleven ska se figuren samtidigt som uppgiften,

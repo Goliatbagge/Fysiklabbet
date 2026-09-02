@@ -826,6 +826,17 @@ användaren påpekat (2026-08-25).
    tårtor syntes — resonemanget gick inte att följa. Kontexten är ett
    MÄT-begrepp, inte ett visningsbegrepp: klicka aldrig fram den på
    nytt och märk den aldrig som aktuell.
+6. **Hela uppgiften i ett exempel levereras i ETT klick.** Allt i en
+   `::: exempel`-ruta som ligger FÖRE lösningen (`::: handskrift` /
+   `::: textlosning`) är uppgiftsdelen: frågestammen, uppgiftens figur
+   och deluppgifterna a), b), c) … De tänds samtidigt, även när
+   deluppgifterna står som egna stycken i md-filen. Eleven ska läsa hela
+   frågan på en gång, inte klicka fram en deluppgift i taget (påpekat
+   2026-09-02: Exempel 1 i `fy2-1.8` krävde fyra klick innan frågan var
+   komplett). Regeln sitter i `buildPresSteps` (`losningIx`) och gäller
+   automatiskt för alla exempel med lösning. Skriv ändå nya frågestammar
+   som ETT stycke med `<br>` före deluppgifterna (se "Deluppgifter" under
+   Typografi), så att teorivyn och presentationsläget läser likadant.
 
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet

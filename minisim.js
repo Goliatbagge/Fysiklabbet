@@ -7380,7 +7380,7 @@
         var LV = [[104, 112, 'end'], [194, 60, 'end'], null, [373, 142, 'start'], [459, 256, 'start']];
         var LVINKEL = [[98, 176], [183, 94], null, [355, 114], [442, 200]];
 
-        var bas = '', lagerX = '', lagerY = '', lagerV = '';
+        var bas = '', lagerX = '', lagerY = '', lagerV = '', lagerVhjalp = '';
         // axlar med pilspets bara åt det positiva hållet
         bas += '<line x1="64" y1="182" x2="474" y2="182" stroke="' + AXEL + '" stroke-width="1.6"/>' +
                '<polygon points="474,178 484,182 474,186" fill="' + AXEL + '"/>' +
@@ -7409,7 +7409,20 @@
                           '<tspan dy="-3"> = 0</tspan></text>';
             }
             // total hastighet + vinkelbåge mot vågräta axeln
-            if (p.vy !== 0) {
+            if (p.vy === 0) {
+                // I högsta punkten är v vågrät och lika med v_0x: den blå
+                // pilen ritas ändå, ovanpå den röda, så att lagret "total
+                // hastighet" visar v i alla fem punkter.
+                lagerV += pil(x, y, x + VX, y, BLA, 3, 10);
+                lagerV += vLbl(268, 62, "middle", "", BLA);
+            } else {
+                // Streckad horisontell hjälplinje där x-axeln inte själv är
+                // horisontalen: visar vad vinkeln mäts mot.
+                if (idx === 1 || idx === 3) {
+                    lagerVhjalp += "<line x1=\"" + x + "\" y1=\"" + y.toFixed(1) + "\" x2=\"" + (x + 44) +
+                              "\" y2=\"" + y.toFixed(1) + "\" stroke=\"" + INK +
+                              "\" stroke-width=\"1\" stroke-dasharray=\"3 3\" opacity=\"0.7\"/>";
+                }
                 lagerV += pil(x, y, x + VX, y - p.vy, BLA, 3, 10);
                 lagerV += vLbl(LV[idx][0], LV[idx][1], LV[idx][2], p.vs, BLA);
                 var ang = Math.atan2(-p.vy, VX);          // v-riktningen i SVG-vinkel
@@ -7426,6 +7439,9 @@
             'hastigheten (röd) och den resulterande hastigheten (blå). I högsta punkten är hastigheten ' +
             'i y-led noll. Kryssrutorna under figuren tänder och släcker de tre vektortyperna.">' +
             bas +
+            // hjälplinjerna ligger UNDER pilarna (annars ser de röda pilarna
+            // streckade ut) men tänds och släcks med lagret v
+            '<g class="ms-kv-lager" data-lager="v-hjalp">' + lagerVhjalp + '</g>' +
             '<g class="ms-kv-lager" data-lager="x">' + lagerX + '</g>' +
             '<g class="ms-kv-lager" data-lager="y">' + lagerY + '</g>' +
             '<g class="ms-kv-lager" data-lager="v">' + lagerV + '</g>' +
@@ -7452,9 +7468,10 @@
             var inp = document.createElement('input');
             inp.type = 'checkbox';
             inp.checked = true;
-            var g = scene.querySelector('.ms-kv-lager[data-lager="' + lager + '"]');
+            var gs = scene.querySelectorAll('.ms-kv-lager[data-lager="' + lager + '"], ' +
+                                            '.ms-kv-lager[data-lager="' + lager + '-hjalp"]');
             inp.addEventListener('change', function () {
-                g.classList.toggle('ms-dold', !inp.checked);
+                gs.forEach(function (g) { g.classList.toggle('ms-dold', !inp.checked); });
             });
             lbl.appendChild(inp);
             lbl.appendChild(document.createTextNode(txt));

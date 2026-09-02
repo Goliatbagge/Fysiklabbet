@@ -7536,9 +7536,30 @@
         omBtn.className = 'minisim-btn';
         omBtn.textContent = 'Börja om';
         omBtn.addEventListener('click', function () { sanda('reset'); });
+        // Stegverktyget: i pausat läge stegas kastet en bildruta i taget,
+        // framåt och bakåt, för att hitta exakt det läge man är ute efter.
+        function stegKnapp(txt, ikon, cmd) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn';
+            b.disabled = true;
+            b.title = txt + ' en bildruta (pausa kastet först)';
+            b.setAttribute('aria-label', txt + ' en bildruta');
+            b.innerHTML = ikon;
+            b.addEventListener('click', function () { sanda(cmd); });
+            return b;
+        }
+        var IK_BAK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+                     '<rect x="4" y="5" width="2.8" height="14"/><path d="M19 5v14L8.5 12z"/></svg>';
+        var IK_FRAM = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+                      '<rect x="17.2" y="5" width="2.8" height="14"/><path d="M5 5v14l10.5-7z"/></svg>';
+        var bakBtn = stegKnapp('Stega bakåt', IK_BAK, 'stegbak');
+        var framBtn = stegKnapp('Stega framåt', IK_FRAM, 'stegfram');
         var info = document.createElement('span');
         info.className = 'minisim-info';
         controls.appendChild(kastBtn);
+        controls.appendChild(bakBtn);
+        controls.appendChild(framBtn);
         controls.appendChild(omBtn);
         controls.appendChild(info);
         card.appendChild(controls);
@@ -7589,6 +7610,8 @@
             kastBtn.textContent = st.status === 'running' ? 'Pausa'
                                 : st.status === 'paused' ? 'Fortsätt'
                                 : st.status === 'finished' ? 'Kasta igen' : 'Kasta';
+            framBtn.disabled = st.status !== 'paused';
+            bakBtn.disabled = st.status !== 'paused' || !st.canBack;
             if (st.status === 'finished' && st.xmax != null) {
                 info.textContent = 'kastvidd ' + fmt(st.xmax, 2) + ' m · stighöjd ' + fmt(st.ymax, 2) + ' m';
             } else if (st.status === 'running' || st.status === 'paused') {

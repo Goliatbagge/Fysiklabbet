@@ -277,7 +277,7 @@
         const TIME_STEP = 1 / 60;          // fysiksteg (s)
         const DRAG_K = 0.01;               // luftmotstånd: a = −k·v·|v|
         const ULTRA = 0.15;                // tidsfaktor i ultrarapid
-        const PAD_L = 58, PAD_R = 26, PAD_T = 22, GROUND_H = 58;   // markremsan rymmer x-värdena och scen-tipset
+        const PAD_L = 58, PAD_R = 26, PAD_T = 22, GROUND_H = 68;   // markremsan rymmer x-värdena och scen-tipset
         const BALL_R = 8;
 
         // Färger: komposanterna röda och resultanten blå — samma som i
@@ -659,12 +659,13 @@
 
             // ── Mini-läget: minisim-kortet i teorin styr sidan ─────────
             const apiRef = useRef({});
-            apiRef.current = { primary, reset, setP };
+            apiRef.current = { primary, reset, setP, stepForward, stepBackward };
             const miniStatusRef = useRef({});
             miniStatusRef.current = {
                 status, t: snap.t, v: Math.hypot(snap.vx, snap.vy), x: snap.x, y: snap.y,
                 xmax: result ? result.xmax : null, ymax: result ? result.ymax : null,
                 tF: result ? result.tF : null, angle: params.angle, v0: params.v0, air: params.air,
+                canBack: histRef.current.length > 1,
             };
             useEffect(() => {
                 if (!window.__MINI) return;
@@ -674,6 +675,8 @@
                     const a = apiRef.current;
                     if (m.fysikKast === 'primar') a.primary();
                     else if (m.fysikKast === 'reset') a.reset();
+                    else if (m.fysikKast === 'stegfram') a.stepForward();
+                    else if (m.fysikKast === 'stegbak') a.stepBackward();
                     else if (m.fysikKast === 'vinkel') a.setP('angle', clamp(+m.value || 0, 0, 90));
                     else if (m.fysikKast === 'fart') a.setP('v0', clamp(+m.value || 1, 1, 30));
                 };
@@ -729,6 +732,10 @@
                 const toX = (x) => PAD_L + x * s;
                 const toY = (y) => H - GROUND_H - y * s;
                 const groundY = toY(0);
+                // Markytan ligger en bollradie under x-axeln: bollens
+                // centrum följer y = 0, men bollen ska vila PÅ marken, inte
+                // sitta halvvägs ned i den.
+                const gTop = groundY + BALL_R + 1;
 
                 // Papper med kollegieblocks-rutnät, i takt med axlarnas skala
                 const bg = ctx.createLinearGradient(0, 0, 0, H);
@@ -754,19 +761,19 @@
 
                 // Marken — papperston med himlakroppens färg som tunn lasyr
                 const body = BODIES.find((b) => Math.abs(b.g - params.g) < 0.005);
-                ctx.fillStyle = '#e3d9c3'; ctx.fillRect(0, groundY, W, H - groundY);
-                if (body) { ctx.globalAlpha = 0.32; ctx.fillStyle = body.ground; ctx.fillRect(0, groundY, W, H - groundY); ctx.globalAlpha = 1; }
+                ctx.fillStyle = '#e3d9c3'; ctx.fillRect(0, gTop, W, H - gTop);
+                if (body) { ctx.globalAlpha = 0.32; ctx.fillStyle = body.ground; ctx.fillRect(0, gTop, W, H - gTop); ctx.globalAlpha = 1; }
                 ctx.strokeStyle = 'rgba(15,22,32,0.55)'; ctx.lineWidth = 1.4;
-                ctx.beginPath(); ctx.moveTo(0, groundY + 0.5); ctx.lineTo(W, groundY + 0.5); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, gTop + 0.5); ctx.lineTo(W, gTop + 0.5); ctx.stroke();
 
                 // Utkastramp när kastet startar från en höjd
                 if (params.h > 0) {
                     const top = toY(params.h);
                     ctx.fillStyle = '#cdbf9f';
                     ctx.strokeStyle = 'rgba(15,22,32,0.5)'; ctx.lineWidth = 1.2;
-                    ctx.beginPath(); ctx.rect(PAD_L - 16, top, 16, groundY - top); ctx.fill(); ctx.stroke();
+                    ctx.beginPath(); ctx.rect(PAD_L - 16, top, 16, gTop - top); ctx.fill(); ctx.stroke();
                     ctx.fillStyle = 'rgba(15,22,32,0.14)';
-                    for (let yy = top + 8; yy < groundY - 4; yy += 12) ctx.fillRect(PAD_L - 13, yy, 10, 2);
+                    for (let yy = top + 8; yy < gTop - 4; yy += 12) ctx.fillRect(PAD_L - 13, yy, 10, 2);
                 }
 
                 // Axlar (pilspets bara åt det positiva hållet)
@@ -782,7 +789,7 @@
                     for (let m = step; toX(m) < W - 30; m += step) {
                         const x = toX(m);
                         ctx.strokeStyle = COL.axis; ctx.beginPath(); ctx.moveTo(x, groundY); ctx.lineTo(x, groundY + 4); ctx.stroke();
-                        ctx.fillText(tickText(m, step), x, groundY + 7);
+                        ctx.fillText(tickText(m, step), x, gTop + 5);
                     }
                     ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
                     // y-värdena börjar nedanför fullskärmsknappen (14–54 px)
@@ -795,8 +802,8 @@
                     ctx.fillStyle = COL.soft; ctx.textBaseline = 'top';
                     ctx.font = "11px 'Poppins', sans-serif";
                     const wm = ctx.measureText('(m)').width;
-                    ctx.textAlign = 'right'; ctx.fillText('(m)', W - 4, groundY + 20);
-                    ctx.font = "italic 13px 'Poppins', sans-serif"; ctx.fillText('x', W - 4 - wm - 4, groundY + 18);
+                    ctx.textAlign = 'right'; ctx.fillText('(m)', W - 4, gTop + 18);
+                    ctx.font = "italic 13px 'Poppins', sans-serif"; ctx.fillText('x', W - 4 - wm - 4, gTop + 16);
                     ctx.textAlign = 'left';
                     ctx.fillText('y', PAD_L + 9, 3);
                     const wy = ctx.measureText('y').width;

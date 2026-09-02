@@ -263,8 +263,8 @@
 
         const COL = {
             falt:  '#c0392b',    // fältlinjer (röda, som i systersimuleringarna)
-            npol:  '#c0392b',    // nordpol röd
-            spol:  '#cfd4da',    // sydpol vit/ljusgrå (aldrig blå) — som teorifigurerna
+            npol:  '#c0392b',    // nordända röd
+            spol:  '#cfd4da',    // sydända vit/ljusgrå (aldrig blå) — som teorifigurerna
             spolText: '#3a3f47',
             ink:   '#30363f',
             inkSoft: 'rgba(48,54,63,0.72)',
@@ -296,7 +296,7 @@
         };
 
         // Fältlinje från en startpunkt: RK4 längs fältriktningen tills linjen
-        // når en sydpol, lämnar det utökade ritområdet eller tar för många steg.
+        // når en sydända, lämnar det utökade ritområdet eller tar för många steg.
         const traceLine = (x0, y0, poles, W, H, sgn = 1) => {
             const pts = [[x0, y0]];
             let x = x0, y = y0;
@@ -407,7 +407,7 @@
         };
 
         // Fältlinje i (x, ρ)-planet för dipolen (+1 i x = +a, −1 i x = −a):
-        // spåras från ekvatorsplanet (0, rho0) längs fältet ner i sydpolen,
+        // spåras från ekvatorsplanet (0, rho0) längs fältet ner i sydändan,
         // speglas sedan till nordhalvan. Returnerar punkter N-ända → S-ända.
         const traceDipole3D = (a, rho0, rStop) => {
             const dir = (x, rho) => {
@@ -1283,8 +1283,8 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Poler uppträder alltid parvis</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Nordpolen är markerad röd och sydpolen vit. Delas en stavmagnet på mitten fås
-                                    inte en ensam nordpol och en ensam sydpol — utan två nya, kortare magneter med
+                                    Nordändan är markerad röd och sydändan vit. Delas en stavmagnet på mitten fås
+                                    inte en ensam nordända och en ensam sydända — utan två nya, kortare magneter med
                                     var sitt polpar. Det går aldrig att skapa en magnet med endast en pol.
                                 </p>
                             </div>

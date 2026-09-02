@@ -510,7 +510,7 @@
                 </g>
             );
 
-            // Magneten: nordpol röd nedåt, sydpol vit upptill (husregel för polfärger).
+            // Magneten: nordända röd nedåt, sydända vit upptill (husregel för polfärger).
             const drawMagnet = (cx, cm, key) => (
                 <g key={key}>
                     <rect x={cx - MAG.hw} y={cm - MAG.hh} width={2 * MAG.hw} height={MAG.hh} rx="2"
@@ -601,7 +601,7 @@
 
             // Strömmarnas EGET magnetfält inuti röret (Lenz lag synliggjord):
             // ringarna under magneten skapar ett uppåtriktat fält (möter magnetens
-            // nordpol med en nordpol — stöter bort), ringarna ovanför ett nedåtriktat
+            // nordända med en nordända — stöter bort), ringarna ovanför ett nedåtriktat
             // (håller kvar). Riktningsmarkörer mitt på linjerna, aldrig i änden.
             const drawInducedField = (cx, cm, st, cfg, key) => {
                 const ov = overlapFor(st.s);
@@ -1073,7 +1073,7 @@
                                             hållet under magneten och åt andra hållet ovanför.</li>
                                         <li>Enligt <strong>Lenz lag</strong> motverkar strömmarna sin orsak.
                                             Ringarna under magneten skapar ett <strong>uppåtriktat</strong> magnetfält
-                                            inuti röret, som möter magnetens nordpol med en nordpol och stöter
+                                            inuti röret, som möter magnetens nordända med en nordända och stöter
                                             bort den. Ringarna ovanför skapar ett <strong>nedåtriktat</strong> fält
                                             som håller den kvar.</li>
                                         <li>Tillsammans ger de en bromskraft riktad uppåt. Den växer med farten,

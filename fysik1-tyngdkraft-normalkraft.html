@@ -269,15 +269,19 @@
         // ════════════════════════════════════════════════════════
         const REF_KG = 1000, LMAX_FLOOR = 58, LMAX_INCL = 76;
         const REF_HAND = 600, LMAX_HAND = 72;
-        // Ballongen: lyftkraften är tyngden av den undanträngda luften, så
-        // volymen — och ballongens ritade storlek — växer med lyftkraften.
+        // Ballongen är en vanlig festballong (latex, ~30 cm). Lyftkraften är
+        // tyngden av den undanträngda luften (1,2 kg/m³ · 9,82 N/kg =
+        // 11,8 N per m³), så volymen — och ballongens ritade storlek — växer
+        // med lyftkraften: 0,15 N motsvarar ~13 liter, 0,25 N ~21 liter.
         // Ballongens tyngd = höljets tyngd + heliumets tyngd, där heliumet
         // väger ungefär 14 % av den luft det tränger undan (0,17 mot
-        // 1,2 kg/m³). Vid 2,0 N lyftkraft är volymen ~170 liter.
-        const REF_LYFT = 2.0, LMAX_LYFT = 84;
-        const BALLONG_HOLJE = 0.20;       // höljets tyngd, N (~20 g gummi)
+        // 1,2 kg/m³).
+        const REF_LYFT = 0.25, LMAX_LYFT = 84;
+        const BALLONG_HOLJE = 0.035;      // höljets tyngd, N (~3,5 g latex)
         const HELIUM_KVOT = 0.14;         // heliumets tyngd per newton lyftkraft
+        const LUFT_RHO_G = 1.2 * 9.82;    // luftens tyngd per m³, N/m³
         const balloonFG = (FL) => BALLONG_HOLJE + HELIUM_KVOT * FL;
+        const balloonLiter = (FL) => FL / LUFT_RHO_G * 1000;
 
         // 1 ── Låda på golv ──────────────────────────────────────
         const FloorScene = ({ F, rt }) => {
@@ -504,7 +508,7 @@
             const [fFloor, setFFloor] = useState(500);
             const [fIncline, setFIncline] = useState(700);
             const [fHand, setFHand] = useState(250);
-            const [fBalloon, setFBalloon] = useState(1.2);
+            const [fBalloon, setFBalloon] = useState(0.15);
             const [showRightAngle, setShowRightAngle] = useState(false);
 
             const stageRef = useRef(null);
@@ -600,10 +604,13 @@
 
                                 <Panel title="Heliumballong mot tak"
                                        scene={<CeilingScene F={fBalloon} rt={showRightAngle} />}
-                                       driveLabel="Lyftkraft" driveSub="L" driveCol={COL.push} driveVal={fBalloon} dec={2}
-                                       extra={<span style={{ color: COL.tyngd }}>Tyngdkraft <em>F</em><sub>G</sub> = <span className="ro-val">{fmt(balloonFG(fBalloon), 2)} N</span> <span style={{ color: 'var(--lab-ink-muted)', fontWeight: 400 }}>(hölje + helium)</span></span>}
+                                       driveLabel="Lyftkraft" driveSub="L" driveCol={COL.push} driveVal={fBalloon} dec={3}
+                                       extra={<React.Fragment>
+                                           <span style={{ color: COL.tyngd }}>Tyngdkraft <em>F</em><sub>G</sub> = <span className="ro-val">{fmt(balloonFG(fBalloon), 3)} N</span> <span style={{ color: 'var(--lab-ink-muted)', fontWeight: 400 }}>(hölje + helium)</span></span>
+                                           <span style={{ color: 'var(--lab-ink-muted)' }}>Volym ≈ <span className="ro-val">{fmt(balloonLiter(fBalloon))} liter</span></span>
+                                       </React.Fragment>}
                                        normVal={fBalloon - balloonFG(fBalloon)} normNote={<span>(= <em>F</em><sub>L</sub> − <em>F</em><sub>G</sub>)</span>}
-                                       sliderLabel="Lyftkraft" value={fBalloon} min={0.5} max={2} step={0.05} onChange={setFBalloon} />
+                                       sliderLabel="Lyftkraft" value={fBalloon} min={0.05} max={0.25} step={0.01} onChange={setFBalloon} />
                             </div>
                         </div>
 
@@ -613,6 +620,8 @@
                             På det lutande planet håller dessutom friktionen (orange) emot komposanten längs planet. Utan
                             den skulle lådan glida nedför. Ballongen växer när lyftkraften ökar: lyftkraften är lika stor
                             som tyngden av den luft ballongen tränger undan, så en större lyftkraft kräver en större ballong.
+                            En vanlig festballong rymmer omkring 13 liter och får då lyftkraften 0,15 N, medan hölje och
+                            helium tillsammans väger ungefär 6 gram.
                         </p>
 
                         {/* förklaring */}

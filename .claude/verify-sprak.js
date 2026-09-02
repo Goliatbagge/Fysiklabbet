@@ -130,9 +130,34 @@ const REGLER = [
                   'hjul och berg- och dalbanor. (Besökarpåpekande 2026-08-31.)',
     },
     {
+        namn: 'nordpol-pa-magnet',
+        niva: 'fel',
+        // Magnetens ändar heter nordända och sydända; nordpol och sydpol är
+        // jordens geografiska poler. Blandas orden kolliderar de just där det
+        // är som farligast: jordens magnetiska pol i norr är en sydända.
+        // (Besökarpåpekande 2026-09-02.) Mönstret fångar en pol som hängs på
+        // en magnet/kompass/spole samt formen "magnetisk nordpol/sydpol".
+        // Geografin ("geografiska nordpolen", "norra magnetiska polen") och
+        // sökordslistorna i data/simuleringar.js berörs inte.
+        monster: /\b(?:magnet(?:en|ens|s)?|stavmagnet(?:en|ens|s)?|kompass(?:en|ens)?|kompassnål(?:en|ens|s)?|spole(?:n|ns)?|slinga(?:n|ns)?|elektromagnet(?:en|ens)?)\s+(?:nord|syd)pol|\bmagnetisk(?:a|t)?\s+(?:nord|syd)pol|\b(?:nord|syd)pol(?:en)?\s+(?:röd|vit)\b|\bensam(?:ma)?\s+(?:nord|syd)pol|\b[NS]-pol(?:en|er|erna)?\b/gi,
+        undantag: [/kw:/, /keywords:/],
+        rattelse: 'Magnetens ändar heter nordända och sydända. Orden nordpol och ' +
+                  'sydpol är geografi (jordens poler). Se "Magnetens ändar heter ' +
+                  'nordända och sydända" i CLAUDE.md.',
+    },
+    {
+        namn: 'nordande-sidoform',
+        niva: 'fel',
+        // Sajtens form är nordända/sydända (nordändan, nordändar). Sidoformen
+        // nordände och stavningarna norrända/söderända bryter konventionen.
+        monster: /(?:nord|syd)änd(?:e|en)|(?:norr|söder)änd(?:a|an|e|en|ar)?/gi,
+        rattelse: 'Skriv nordända/sydända (nordändan, nordändar), inte nordände ' +
+                  'eller norrända. Se "Magnetens ändar heter nordända och sydända" i CLAUDE.md.',
+    },
+    {
         namn: 'förkortningar',
         niva: 'varning',
-        monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.)/gi,
+        monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.|sk\.?(?=\s))/gi,
         rattelse: 'Skriv ut förkortningen i klartext (till exempel, bland annat, ' +
                   'med mera, det vill säga, och så vidare, från och med, så kallad). ' +
                   'Se "Förkortningar skrivs ut i klartext" i CLAUDE.md.',

@@ -321,7 +321,7 @@
             const [R, setR] = useState(isFinite(parseFloat(q.get('r'))) ? parseFloat(q.get('r')) : 0.75);
             const [autoV, setAutoV] = useState(isFinite(parseFloat(q.get('v'))) ? parseFloat(q.get('v')) : 25);
             const [autoRun, setAutoRun] = useState(q.get('auto') === '1');
-            const [nMot, setNMot] = useState(q.get('pol') !== 's');   // N-polen mot slingan
+            const [nMot, setNMot] = useState(q.get('pol') !== 's');   // nordändan mot slingan
             const [show, setShow] = useState({ falten: true, strom: true, kraft: false });
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
@@ -673,9 +673,9 @@
                     </button>
                     <div className="st-title">Magneten</div>
                     <label><input type="radio" name="pol" checked={nMot} onChange={() => setNMot(true)} />
-                        <span>N-polen mot slingan</span></label>
+                        <span>Nordändan mot slingan</span></label>
                     <label><input type="radio" name="pol" checked={!nMot} onChange={() => setNMot(false)} />
-                        <span>S-polen mot slingan</span></label>
+                        <span>Sydändan mot slingan</span></label>
                     <div className="st-title st-group">Visa</div>
                     <label><input type="checkbox" checked={show.falten} onChange={() => tShow('falten')} />
                         <span className="st-swatch" style={{ background: COL.ind }}></span>
@@ -827,8 +827,8 @@
                                         <Readout label="Strömmen i framkanten" value={active ? (upFront ? 'uppåt' : 'nedåt') : '—'} unit="" />
                                     </div>
                                     <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
-                                        Testa teorins Exempel 2: närma magneten med N-polen mot slingan och läs av
-                                        strömriktningen. Dra sedan bort den — strömmen byter håll. Vänd till S-polen
+                                        Testa teorins Exempel 2: närma magneten med nordändan mot slingan och läs av
+                                        strömriktningen. Dra sedan bort den — strömmen byter håll. Vänd till sydändan
                                         och gör om: allt speglas!
                                     </div>
                                 </div>

@@ -6869,16 +6869,16 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Man delar en stavmagnet med en nordpol och en sydpol mitt itu. Vad händer?',
+    question: 'Man delar en stavmagnet med en nordända och en sydända mitt itu. Vad händer?',
     choices: [
-      'Man får två nya, kortare magneter, var och en med en egen nord- och sydpol',
-      'Den ena biten blir en isolerad nordpol och den andra en isolerad sydpol',
+      'Man får två nya, kortare magneter, var och en med en egen nordända och sydända',
+      'Den ena biten blir en isolerad nordända och den andra en isolerad sydända',
       'Magnetismen försvinner helt eftersom magneten förstörs',
-      'Endast den bit som redan hade nordpolen behåller magnetiska egenskaper',
+      'Endast den bit som redan hade nordändan behåller magnetiska egenskaper',
     ],
     correct: 0,
     why: [
-      'Magnetpoler uppträder alltid parvis. Delas en magnet på mitten bildas två kortare magneter, var och en med en egen nord- och sydpol — precis som i demonstrationen med den avbrutna stavmagneten.',
+      'Magnetpoler uppträder alltid parvis. Delas en magnet på mitten bildas två kortare magneter, var och en med en egen nordända och sydända — precis som i demonstrationen med den avbrutna stavmagneten.',
       'Det går aldrig att skapa en magnet med bara en pol (en magnetisk monopol) — vid delningen bildas i stället en ny pol av motsatt sort vid brottytan på båda bitarna.',
       'Magnetismen försvinner inte vid delning — båda bitarna förblir magnetiska, bara kortare.',
       'Båda bitarna får magnetiska egenskaper efter delningen, inte bara den som redan hade en pol av ett visst slag.',
@@ -6895,7 +6895,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Detta är tvärtom mot det faktiska sambandet — lika poler repellerar varandra, medan olika poler attraherar varandra.',
-      'Poler attraherar inte varandra oavsett typ — två nordpoler (eller två sydpoler) repellerar varandra.',
+      'Poler attraherar inte varandra oavsett typ — två nordändar (eller två sydändar) repellerar varandra.',
       'Magnetiska krafter verkar på avstånd, precis som gravitation och elektriska krafter — polerna behöver inte vara i kontakt för att påverka varandra.',
       'Precis som för elektrisk laddning gäller att lika magnetiska poler (N–N eller S–S) repellerar varandra, medan olika poler (N–S) attraherar varandra.',
     ],
@@ -7332,23 +7332,23 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Varför sägs jordens norra magnetiska pol egentligen vara en magnetisk sydpol?',
+    question: 'Varför sägs jordens norra magnetiska pol egentligen vara en sydända?',
     choices: [
       'Eftersom den ligger vid den geografiska sydpolen',
       'Eftersom den upptäcktes av en forskare på södra halvklotet',
       'Det är bara en förvirrande beteckning utan fysikalisk grund',
-      'Eftersom en kompassnåls nordända (som attraheras av magnetiska sydpoler) pekar mot den',
+      'Eftersom en kompassnåls nordända (som attraheras av sydändar) pekar mot den',
     ],
     correct: 3,
     why: [
       'Den norra magnetiska polen ligger nära den geografiska nordpolen (i norra Kanada), inte vid sydpolen.',
       'Vem som upptäckte polen har ingen betydelse för vilken typ av magnetisk pol den är.',
       'Beteckningen har en tydlig fysikalisk grund — den följer av hur olika poler attraherar varandra.',
-      'Eftersom olika poler attraherar varandra, och en kompassnåls nordända pekar mot den norra magnetiska polen, måste den polen egentligen vara en magnetisk sydpol.',
+      'Eftersom olika poler attraherar varandra, och en kompassnåls nordända pekar mot den norra magnetiska polen, måste den polen egentligen vara en sydända.',
     ],
   },
   {
-    question: 'Vad kallas vinkeln mellan den magnetiska nordpolen och den geografiska nordpolen, sett från en given plats?',
+    question: 'Vad kallas vinkeln mellan den norra magnetiska polen och den geografiska nordpolen, sett från en given plats?',
     choices: [
       'Deklination',
       'Inklination',

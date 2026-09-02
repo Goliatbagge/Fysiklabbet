@@ -16280,15 +16280,15 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
         },
         {
             level: 1,
-            question: `Två stavmagneter förs mot varandra med sina **nordpoler vända mot varandra**. Vad händer?`,
+            question: `Två stavmagneter förs mot varandra med sina **nordändar vända mot varandra**. Vad händer?`,
             choices: [
                 'De attraherar varandra (dras ihop).',
                 'De repellerar varandra (puttas isär).',
-                'Inget händer — nordpoler påverkar inte varandra.',
-                'Den ena magnetens nordpol byter polaritet till sydpol.',
+                'Inget händer — nordändar påverkar inte varandra.',
+                'Den ena magnetens nordända förvandlas till en sydända.',
             ],
             correct: 1,
-            solution: `**Lika poler repellerar varandra** och **olika poler attraherar varandra**. Eftersom båda magneterna har sina nordpoler mot varandra, repellerar de.
+            solution: `**Lika poler repellerar varandra** och **olika poler attraherar varandra**. Eftersom båda magneterna har sina nordändar mot varandra, repellerar de.
 
 **Generell slutsats:** Detta är analogt med elektriska laddningar — lika laddningar repellerar, olika attraherar.`,
         },
@@ -16296,13 +16296,13 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             level: 1,
             question: `En stavmagnet **delas på mitten**. Vad händer?`,
             choices: [
-                'Den ena delen blir bara en nordpol, den andra bara en sydpol.',
+                'Den ena delen blir en ensam nordända, den andra en ensam sydända.',
                 'Magnetiseringen försvinner helt — båda halvorna blir omagnetiska.',
-                'Båda halvorna blir nya, mindre stavmagneter med varsin nord- och sydpol.',
+                'Båda halvorna blir nya, mindre stavmagneter med varsin nordända och sydända.',
                 'Den ena halvan får dubbel styrka, den andra ingen.',
             ],
             correct: 2,
-            solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter — vardera med en nordpol och en sydpol. Man kan **aldrig** skapa en magnet med endast en pol (sk *magnetisk monopol*) — det är en grundläggande egenskap hos magnetism.`,
+            solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter — vardera med en nordända och en sydända. Man kan **aldrig** skapa en magnet med endast en pol (en så kallad *magnetisk monopol*) — det är en grundläggande egenskap hos magnetism.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -16310,13 +16310,13 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             level: 2,
             question: `Hur ritas magnetiska fältlinjer kring en stavmagnet?`,
             choices: [
-                'Som raka linjer från sydpolen till nordpolen, utanför magneten.',
-                'Som böjda kurvor som går *från nordpolen till sydpolen* utanför magneten och tillbaka inuti.',
+                'Som raka linjer från sydändan till nordändan, utanför magneten.',
+                'Som böjda kurvor som går *från nordändan till sydändan* utanför magneten och tillbaka inuti.',
                 'Som koncentriska cirklar runt magneten.',
                 'Som raka linjer rakt utåt från magnetens mitt.',
             ],
             correct: 1,
-            solution: `Magnetiska fältlinjer **börjar vid nordpolen och slutar vid sydpolen** (utanför magneten) och bildar slutna kurvor genom att fortsätta inuti magneten från syd till nord. Riktningen definieras som den riktning en kompassens nordände pekar i.
+            solution: `Magnetiska fältlinjer **börjar vid nordändan och slutar vid sydändan** (utanför magneten) och bildar slutna kurvor genom att fortsätta inuti magneten från syd till nord. Riktningen definieras som den riktning en kompassnåls nordända pekar i.
 
 Att fältlinjerna alltid är slutna kurvor (inte avbrytas vid någon pol) är en konsekvens av att magnetiska monopoler inte existerar.`,
         },
@@ -16338,20 +16338,20 @@ Att fältlinjerna alltid är slutna kurvor (inte avbrytas vid någon pol) är en
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En kompassens nordände pekar mot jordens geografiska nordpol. Vilken **magnetisk** pol är då vid jordens geografiska nordpol?`,
+            question: `En kompassnåls nordända pekar mot jordens geografiska nordpol. Vilken sorts **magnetisk** pol har jorden alltså i norr?`,
             choices: [
-                'En magnetisk nordpol — därför pekar kompassen dit.',
-                'En magnetisk sydpol — kompassens nordände attraheras av en sydpol.',
-                'Båda — jordens nordpol har båda polerna samtidigt.',
+                'En nordända, och därför pekar kompassen dit.',
+                'En sydända, eftersom kompassens nordända attraheras av en sydända.',
+                'Båda på en gång: jordens nordpol har båda sorternas poler samtidigt.',
                 'Ingen — jorden har inget magnetfält vid polerna.',
             ],
             correct: 1,
-            solution: `**Den geografiska nordpolen är magnetiskt sett en sydpol!** Insikten kommer från konventionen "olika poler attraherar":
+            solution: `**Jordens magnetiska pol i norr är en sydända!** Insikten kommer från regeln att olika poler attraherar:
 
-- En kompassens *nordände* dras mot jordens *geografiska* nordpol.
-- För att en nordände ska dras dit måste den geografiska nordpolen vara en *magnetisk sydpol* (olika poler attraherar).
+- Kompassnålens *nordända* dras mot jordens *geografiska* nordpol.
+- För att en nordända ska dras dit måste polen där vara en *sydända* (olika poler attraherar).
 
-Kompassens nordände är alltså egentligen den ände som dras *mot* en magnetisk sydpol. Konventionsbeteckningen är historiskt — namnet "nordände" syftar på "den ände som pekar norrut", inte på att den själv är en magnetisk nordpol.
+Namnet nordända betyder "den ända som pekar norrut", inte att ändan själv skulle vara något slags nordpol. Orden nordpol och sydpol sparar vi till jordens geografiska poler.
 
 **Generell slutsats:** Detta är ett klassiskt "fälla"-problem som testar om eleven verkligen förstår polkonventionen och kan tänka kontraintuitivt.`,
         },
@@ -16850,7 +16850,7 @@ $$ B = \\frac{F}{I\\cdot l} = \\frac{0{,}50}{2{,}5 \\cdot 0{,}25} = 0{,}80\\ \\m
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En rak ledare med längden $15\\ \\mathrm{cm}$ ligger horisontellt mellan polerna på en U-formad magnet. Magnetfältet i gapet är $0{,}60\\ \\mathrm{T}$ riktat från nordpolen (vänster) till sydpolen (höger). Strömmen i ledaren är $2{,}5\\ \\mathrm{A}$ riktad **ut ur planet** (mot läsaren). Bestäm den magnetiska kraftens storlek och riktning.
+            question: `En rak ledare med längden $15\\ \\mathrm{cm}$ ligger horisontellt mellan polerna på en U-formad magnet. Magnetfältet i gapet är $0{,}60\\ \\mathrm{T}$ riktat från nordändan (vänster) till sydändan (höger). Strömmen i ledaren är $2{,}5\\ \\mathrm{A}$ riktad **ut ur planet** (mot läsaren). Bestäm den magnetiska kraftens storlek och riktning.
 
 ${makeBField({ width: 300, height: 200, bDir: 'right', bLabel: 'B = 0,60 T', wireOut: { label: 'I = 2,5 A' } })}`,
             answer: { value: 0.225, unit: 'N' },
@@ -16945,12 +16945,12 @@ De magnetiska polerna **rör sig över tid** — ungefär $0{,}5^\\circ$ väster
             question: `Vad menas med **deklination**?`,
             choices: [
                 'Vinkeln mellan magnetfältets riktning och horisontalplanet.',
-                'Vinkeln mellan jordens geografiska nordpol och den magnetiska nordpolen (mätt från en plats på jorden).',
+                'Vinkeln mellan jordens geografiska nordpol och den norra magnetiska polen (mätt från en plats på jorden).',
                 'Variation av magnetfältets styrka beroende på årstid.',
                 'Den årliga ändringen av jordens rotationsaxel.',
             ],
             correct: 1,
-            solution: `**Deklination** är den horisontella vinkeln mellan riktningen mot den **geografiska** nordpolen och riktningen mot den **magnetiska** nordpolen — sett från en plats på jorden. Navigatörer behöver justera sina kompasser efter denna avvikelse för att hitta rätt riktning.
+            solution: `**Deklination** är den horisontella vinkeln mellan riktningen mot den **geografiska** nordpolen och riktningen mot den **norra magnetiska** polen — sett från en plats på jorden. Navigatörer behöver justera sina kompasser efter denna avvikelse för att hitta rätt riktning.
 
 **Inte att förväxla med inklination** (se nästa fråga), som är vinkeln mellan magnetfältet och horisontalplanet.`,
         },
@@ -16966,10 +16966,10 @@ De magnetiska polerna **rör sig över tid** — ungefär $0{,}5^\\circ$ väster
             correct: 0,
             solution: `**Inklination** är vinkeln mellan jordens magnetfält och horisontalplanet vid en viss plats.
 
-- Vid **magnetiska nordpolen**: $i = 90^\\circ$ (fältet pekar rakt ned).
+- Vid **norra magnetiska polen**: $i = 90^\\circ$ (fältet pekar rakt ned).
 - **I Sverige**: $i \\approx 71^\\circ$ (fältet pekar snett ned mot norr).
 - **Vid ekvatorn**: $i = 0^\\circ$ (fältet är horisontellt).
-- Vid **magnetiska sydpolen**: $i = -90^\\circ$ (fältet pekar rakt upp).
+- Vid **södra magnetiska polen**: $i = -90^\\circ$ (fältet pekar rakt upp).
 
 **Generell slutsats:** En kompass på det norra halvklotet vill alltså egentligen peka *snett ned* — det är därför kompassnålar ofta balanseras med en motvikt så att de ändå håller sig horisontella.`,
         },
@@ -17231,17 +17231,17 @@ $$ F = B\\cdot I\\cdot l = 0{,}80 \\cdot 0{,}40 \\cdot 0{,}15 = 0{,}048\\ \\math
         },
         {
             level: 2,
-            question: `En magnet med nordpolen framåt förs **mot** en cirkulär ledarslinga. Vilken är den inducerade strömmens riktning i slingan, sett från magnetens sida?`,
+            question: `En magnet med nordändan framåt förs **mot** en cirkulär ledarslinga. Vilken är den inducerade strömmens riktning i slingan, sett från magnetens sida?`,
             choices: [
-                'Medurs, så att slingan får en nordpol mot magneten (för att repellera).',
-                'Moturs, så att slingan får en nordpol mot magneten (för att repellera).',
-                'Medurs, så att slingan får en sydpol mot magneten (för att attrahera).',
+                'Medurs, så att slingan får en nordända mot magneten (för att repellera).',
+                'Moturs, så att slingan får en nordända mot magneten (för att repellera).',
+                'Medurs, så att slingan får en sydända mot magneten (för att attrahera).',
                 'Det induceras ingen ström — magneter ger inte strömmar i ledare.',
             ],
             correct: 1,
-            solution: `Enligt **Lenz lag** ska den inducerade strömmen *motverka* orsaken till sin uppkomst. Eftersom magneten närmar sig med sin nordpol måste slingan reagera så att den **repellerar** magneten — alltså bilda en nordpol mot magneten.
+            solution: `Enligt **Lenz lag** ska den inducerade strömmen *motverka* orsaken till sin uppkomst. Eftersom magneten närmar sig med sin nordända måste slingan reagera så att den **repellerar** magneten — alltså bilda en nordända mot magneten.
 
-Med tumregeln för spole (fingrar = strömriktning, tumme = magnetfältets riktning): för att ge slingan en nordpol *mot magneten* (utåt mot betraktaren från slingans sida) ska tummen peka utåt, vilket innebär att strömmen går **moturs** sett från magnetens sida.
+Med tumregeln för spole (fingrar = strömriktning, tumme = magnetfältets riktning): för att ge slingan en nordända *mot magneten* (utåt mot betraktaren från slingans sida) ska tummen peka utåt, vilket innebär att strömmen går **moturs** sett från magnetens sida.
 
 **Generell slutsats:** Detta repellerar magneten och gör att man måste anstränga sig att hålla den i rörelse — energiprincipen i praktiken. Om Lenz lag inte gällde skulle slingan attrahera magneten, vilket skulle accelerera den och ge mer ström, som accelererar mer... = gratis energi, vilket inte existerar.`,
         },

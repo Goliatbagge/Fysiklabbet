@@ -108,9 +108,9 @@ window.SIM_NAMES = {
   'fysik2-vagsimulator.html': 'Vågsimulator',
   'fysik2-stavmagnet-app.html': [
     { name: 'Stavmagnetens magnetfält', desc: 'Magnetfältet kring en stavmagnet i 2D och 3D — dra magneten över en platta med kompassnålar, strö järnfilspån och rotera fältbilden fritt i rummet.',
-      kw: ['magnetism','elektromagnetism','magnetfält','stavmagnet','permanentmagnet','fältlinjer','kompass','kompassnål','järnfilspån','nordpol','sydpol','poler','provkompass','3d'] },
+      kw: ['magnetism','elektromagnetism','magnetfält','stavmagnet','permanentmagnet','fältlinjer','kompass','kompassnål','järnfilspån','nordpol','sydpol','nordända','sydända','poler','provkompass','3d'] },
     { name: 'Attraktion och repulsion', href: 'fysik2-magnetpoler-app.html', desc: 'Två stavmagneter på en labbänk — vänd polerna, släpp magneterna och se när magnetkraften övervinner friktionen. Lika poler repellerar, olika attraherar.',
-      kw: ['magnetism','elektromagnetism','magnetkraft','attraktion','repulsion','attrahera','repellera','poler','nordpol','sydpol','stavmagnet','kraft på avstånd','newtons tredje lag'] },
+      kw: ['magnetism','elektromagnetism','magnetkraft','attraktion','repulsion','attrahera','repellera','poler','nordpol','sydpol','nordända','sydända','stavmagnet','kraft på avstånd','newtons tredje lag'] },
   ],
   'fysik2-magnetfalt-app.html': 'Magnetfält runt en rak ledare',
   'fysik2-jordmagnetiska-faltet.html': 'Jordmagnetiska fältet',

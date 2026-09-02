@@ -2254,16 +2254,39 @@ deklination), måttpilar och högerhandsregelns fingrar. Fråga: visar pilen
 en storhets belopp eller en linjes förlopp? Belopp → spets i änden.
 Förlopp → spets mitt på.
 
-### Magnetpoler: nordpolen röd, sydpolen VIT — aldrig blå
+### Magnetens ändar heter nordända och sydända, aldrig nordpol och sydpol
 
-I svensk fysiklitteratur markeras **nordpolen röd och sydpolen vit**. Blått
-är i våra figurer strömmens färg (*I*), så en blå sydpol läses som ström i
+**Ändarna på en magnet, en kompassnål eller en spole kallas nordända (N)
+och sydända (S). Orden nordpol och sydpol är GEOGRAFI och reserveras för
+jordens poler** (besökarpåpekande 2026-09-02: teorin och stavmagnet-
+simuleringen blandade båda orden i samma text). Skälet är att orden annars
+kolliderar på värsta tänkbara ställe: jordens magnetiska pol i norr är en
+sydända. Med två ordpar går det aldrig att blanda ihop.
+
+- **Magneter, kompassnålar, spolar, slingor**: nordända/sydända. Det
+  generella ordet är *pol*: "magnetens båda poler", "lika poler
+  repellerar", "magnetpoler uppträder parvis".
+- **Jorden**: *geografiska nordpolen/sydpolen* för geografin, *norra/södra
+  magnetiska polen* för jordens magnetiska poler (lägesbeskrivning), och
+  om deras natur: "den norra magnetiska polen är en sydända". Skriv aldrig
+  "magnetisk nordpol"/"magnetisk sydpol", det är just den formen som
+  betyder olika saker i olika böcker.
+- Gäller teori, övningar, exit tickets, simuleringar, katalogtexter och
+  nyheter. `verify-sprak.js` har regeln `nordpol-pa-magnet` som blockerar
+  "magnetens nordpol", "kompassens sydpol", "magnetisk sydpol" och
+  liknande. Sökordslistorna i `data/simuleringar.js` får däremot behålla
+  nordpol/sydpol som synonymer, så att den som söker på dem hittar rätt.
+
+### Magnetpoler: nordändan röd, sydändan VIT — aldrig blå
+
+I svensk fysiklitteratur markeras **nordändan röd och sydändan vit**. Blått
+är i våra figurer strömmens färg (*I*), så en blå sydända läses som ström i
 stället för som pol. Gäller polkroppar och polbeteckningar överallt: sims
 (SVG, canvas, THREE.js), teori-figurer och övningsfigurer.
 
-**Sydpolens `S` ritas vitt med en tunn svart kontur** (`#0f1620`), så att
+**Sydändans `S` ritas vitt med en tunn svart kontur** (`#0f1620`), så att
 den håller både mot den ljusa pappersbotten (`#f3eee4`) och mot en vit
-polkropp. Nordpolens `N` är vitt på den röda polkroppen och behöver ingen
+polkropp. Nordändans `N` är vitt på den röda polkroppen och behöver ingen
 kontur.
 
 Konturen ritas som `strokeText` **före** `fillText` (canvas) respektive

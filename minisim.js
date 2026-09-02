@@ -74,7 +74,8 @@
  * ── typ: kastvektorer ────────────────────────────────────────────────────
  * Hjälpfiguren i fy2-1.8 (Kaströrelse) som interaktiv figur: kastparabeln
  * med hastighetsvektorerna i fem punkter — v_0x (röd, konstant), v_y (röd,
- * ändras) och den resulterande hastigheten v (blå) med vinklarna α, β, γ.
+ * ändras) och den resulterande hastigheten v (blå) med vinklarna α_0
+ * (utgångs- och landningsvinkel), α_1 och α_2.
  * Tre kryssrutor under figuren ("Visa hastighet i x-led", "Visa hastighet i
  * y-led", "Visa total hastighet") tänder och släcker varsitt lager, så att
  * eleven kan titta på EN led i taget i stället för alla vektorer på en gång.
@@ -7322,7 +7323,7 @@
     // Hjälpfiguren i fy2-1.8 som interaktiv figur: samma SVG som den gamla
     // ::: figur-figuren, men vektorerna ligger i tre lager (x-led, y-led,
     // total hastighet) som kryssrutorna under figuren tänder och släcker.
-    // Vinkelbågarna α, β, γ hör till den totala hastigheten (det är dess
+    // Vinkelbågarna α_0, α_1, α_2 hör till den totala hastigheten (det är dess
     // vinkel de visar) och "v_y = 0" i högsta punkten till y-lagret.
     function buildKastvektorer(node, cfg) {
         var INK = '#1f2530', ROD = '#c0392b', BLA = '#2563c9', AXEL = '#38bdf8';
@@ -7354,8 +7355,13 @@
             }
             return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.2"/>';
         }
-        function vinkelLbl(x, y, txt) {
-            return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-size="14" fill="' + INK + '">' + txt + '</text>';
+        // Vinkelns beteckning: kursiv α + upprätt sifferindex, som alla
+        // andra variabler i figuren. α_0 är utgångs- och landningsvinkeln
+        // (samma vinkel, av symmetrin), α_1 och α_2 punkterna däremellan.
+        function vinkelLbl(x, y, sub) {
+            return '<text x="' + x + '" y="' + y + '" text-anchor="middle" font-size="14" fill="' + INK + '">' +
+                '<tspan font-style="italic">α</tspan>' +
+                '<tspan font-size="10" dy="3">' + sub + '</tspan></text>';
         }
 
         // Geometrin: origo (64,182), topp (236,70), nedslag (408,182)
@@ -7369,11 +7375,11 @@
         // Fem punkter med vy-längd (px, uppåt positiv); vx är alltid VX
         var VX = 46;
         var punkter = [
-            { x: 64,  vy: 60,  xs: '0x', ys: '0y', vs: '0', vinkel: 'α' },
-            { x: 150, vy: 30,  xs: '0x', ys: 'y',  vs: '',  vinkel: 'β' },
+            { x: 64,  vy: 60,  xs: '0x', ys: '0y', vs: '0', vinkel: '0' },
+            { x: 150, vy: 30,  xs: '0x', ys: 'y',  vs: '',  vinkel: '1' },
             { x: 236, vy: 0,   xs: '0x', ys: 'y',  vs: '',  vinkel: '' },
-            { x: 322, vy: -30, xs: '0x', ys: 'y',  vs: '',  vinkel: 'γ' },
-            { x: 408, vy: -60, xs: '0x', ys: '0y', vs: '0', vinkel: 'α' },
+            { x: 322, vy: -30, xs: '0x', ys: 'y',  vs: '',  vinkel: '2' },
+            { x: 408, vy: -60, xs: '0x', ys: '0y', vs: '0', vinkel: '0' },
         ];
         var LX = [[114, 198], [200, 114], [286, 63], [372, 101], [458, 178]];
         var LY = [[58, 126], [144, 66], null, [316, 132], [402, 246]];

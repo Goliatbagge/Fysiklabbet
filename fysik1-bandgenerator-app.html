@@ -49,9 +49,13 @@
             height: 100% !important;
         }
 
+        /* styles.css centrerar .intro-section — simuleringarna har rubrik
+           och ingress vänsterställda */
+        .intro-section { text-align: left; }
+
         .vdg-card {
-            background: var(--lab-bg-panel, #ffffff);
-            border: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 12px;
         }
 
@@ -103,37 +107,15 @@
         /* ── Knappar (Laborans papper) ── */
         .vdg-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.55rem 1.3rem; border-radius: 8px;
-            font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+            padding: 8px 14px; border-radius: 8px;
+            font-weight: 600; font-size: 0.9rem;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             cursor: pointer; transition: all 0.15s ease;
         }
-        .vdg-btn-primary {
-            background: var(--lab-ink, #0f1620);
-            color: var(--lab-bg, #f3eee4);
-            border: 1px solid var(--lab-ink, #0f1620);
-        }
-        .vdg-btn-primary:hover { opacity: 0.88; }
-        .vdg-btn-secondary {
-            background: var(--lab-bg-panel, #ffffff);
-            color: var(--lab-ink, #0f1620);
-            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-        }
-        .vdg-btn-secondary:hover { border-color: var(--lab-ink, #0f1620); }
-
-        input[type="range"] {
-            -webkit-appearance: none; appearance: none;
-            background: var(--lab-line, rgba(15,22,32,0.14));
-            border-radius: 4px; height: 6px; width: 100%;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none;
-            width: 20px; height: 20px; border-radius: 50%;
-            background: var(--lab-ink, #0f1620); cursor: pointer;
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 20px; height: 20px; border-radius: 50%;
-            background: var(--lab-ink, #0f1620); cursor: pointer; border: none;
-        }
+        .vdg-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        /* Glidarna stylas centralt i styles-laborans-sim.css (papperston,
+           röd accent) — inga egna tumregler här. */
 
         /* ── Formelkort ── */
         .vdg-formula {
@@ -164,8 +146,7 @@
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 240px;
-            font-family: 'Poppins', sans-serif;
+            max-width: 252px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -186,12 +167,7 @@
             width: 100%; justify-content: center;
             padding: 0.45rem 0.9rem; font-size: 0.82rem;
         }
-
-        /* Rader i den hopfällbara fullskärmspanelen */
-        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
-        .fs-controls .fs-row input[type="range"] { flex: 1; min-width: 60px; }
-        .fs-controls .fs-label { min-width: 120px; flex-shrink: 0; }
-        .fs-controls .fs-value { min-width: 60px; text-align: right; flex-shrink: 0; }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
 
         /* Ljudknapp: samma cirkelstil som fs-btn, placerad direkt under den */
         body.lab-sim .vdg-sound-btn { top: 62px; }
@@ -289,8 +265,8 @@
         <section class="intro-section" style="margin-bottom:1.25rem;">
             <div class="intro-head">
                 <div>
-                    <h1 class="section-title" style="font-size:1.8rem; font-weight:700; color:var(--lab-ink); margin-bottom:0.5rem;">Bandgeneratorn</h1>
-                    <p style="color:var(--lab-ink-muted); max-width:720px; line-height:1.7;">
+                    <h1 class="section-title text-3xl md:text-4xl" style="color:var(--lab-ink); margin-bottom:0.5rem;">Bandgeneratorn</h1>
+                    <p style="color:var(--lab-ink-soft); max-width:820px; line-height:1.7;">
                         Starta motorn och se hur gummibandet bär elektroner upp till metallklotet, som
                         laddas mer och mer negativt. Dra den jordade kulan mot klotet och se gnistan
                         när urladdningen sker, lägg aluminiumformar på klotet, titta in i klotet i
@@ -2020,7 +1996,7 @@
         const [showPerson, setShowPerson] = useState(false);
         const [foilsOn, setFoilsOn] = useState(false);
         const [isFullscreen, setIsFullscreen] = useState(false);
-        const [controlsOpen, setControlsOpen] = useState(false);
+        const [togglesOpen, setTogglesOpen] = useState(true);
         const [muted, setMuted] = useState(false);
         const [readout, setReadout] = useState({ q: 0, status: 'Motorn är av' });
 
@@ -2115,8 +2091,26 @@
         const nSci = sciParts(nElectrons);
         const qSci = sciParts(qUC * 1e-6);
 
-        const toggles = (
+        const toggles = !togglesOpen ? (
+            <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                    aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <line x1="4" y1="8" x2="20" y2="8" />
+                    <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                    <line x1="4" y1="16" x2="20" y2="16" />
+                    <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                </svg>
+            </button>
+        ) : (
             <div className="scene-toggles">
+                <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                        aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                        <path d="M6 6l12 12M18 6L6 18" />
+                    </svg>
+                </button>
                 <div className="st-title">Visa</div>
                 <label>
                     <input type="checkbox" checked={showElectrons}
@@ -2144,16 +2138,30 @@
                     <span>Figur håller i klotet</span>
                 </label>
                 {isFullscreen && (
-                    <div className="st-actions">
-                        <button className="vdg-btn vdg-btn-primary" onClick={handleToggleRun}
-                                aria-label={running ? 'Pausa motorn' : 'Starta motorn'}>
-                            {running ? 'Pausa' : 'Starta'}
-                        </button>
-                        <button className="vdg-btn vdg-btn-secondary" onClick={handleReset}
-                                aria-label="Återställ simuleringen">
-                            Återställ
-                        </button>
-                    </div>
+                    <React.Fragment>
+                        <div className="st-title mt">Reglage</div>
+                        <div className="st-sliders">
+                            <div className="st-slider">
+                                <div className="st-slider-top">
+                                    <span>Bandets fart</span>
+                                    <span style={{ fontWeight: 600, color: 'var(--lab-ink)' }}>{formatNum(speed, 1)}&times;</span>
+                                </div>
+                                <input type="range" min="0.5" max="2.0" step="0.1" value={speed}
+                                    onChange={e => setSpeed(parseFloat(e.target.value))}
+                                    aria-label="Bandets fart" />
+                            </div>
+                        </div>
+                        <div className="st-actions">
+                            <button className="vdg-btn" onClick={handleToggleRun}
+                                    aria-label={running ? 'Pausa motorn' : 'Starta motorn'}>
+                                {running ? 'Pausa' : 'Starta'}
+                            </button>
+                            <button className="vdg-btn" onClick={handleReset}
+                                    aria-label="Återställ simuleringen">
+                                Återställ
+                            </button>
+                        </div>
+                    </React.Fragment>
                 )}
             </div>
         );
@@ -2236,33 +2244,6 @@
 
                                 {toggles}
 
-                                {/* Hopfällbar glidarpanel i underkanten (endast fullskärm) */}
-                                {isFullscreen && (
-                                    <React.Fragment>
-                                        <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                            <div className="fs-row">
-                                                <span className="fs-label">Bandets fart</span>
-                                                <input type="range" min="0.5" max="2.0" step="0.1" value={speed}
-                                                    onChange={e => setSpeed(parseFloat(e.target.value))}
-                                                    aria-label="Bandets fart" />
-                                                <span className="fs-value">{formatNum(speed, 1)}&times;</span>
-                                            </div>
-                                        </div>
-                                        <button
-                                            className="fs-toggle-handle"
-                                            onClick={() => setControlsOpen(o => !o)}
-                                            title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                                            aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                                            aria-expanded={controlsOpen}>
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                 stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                                                 style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                                                <path d="M6 9l6 6 6-6"/>
-                                            </svg>
-                                            <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                                        </button>
-                                    </React.Fragment>
-                                )}
                             </div>
                         </div>
                     </div>
@@ -2270,12 +2251,12 @@
                     {/* Höger: reglage + avläsningar */}
                     <aside style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <div className="vdg-card" style={{ padding: '1rem', display: 'flex', gap: '0.75rem' }}>
-                            <button className="vdg-btn vdg-btn-primary" style={{ flex: 1 }}
+                            <button className="vdg-btn" style={{ flex: 1 }}
                                     onClick={handleToggleRun}
                                     aria-label={running ? 'Pausa motorn' : 'Starta motorn'}>
                                 {running ? 'Pausa' : 'Starta'}
                             </button>
-                            <button className="vdg-btn vdg-btn-secondary" style={{ flex: 1 }}
+                            <button className="vdg-btn" style={{ flex: 1 }}
                                     onClick={handleReset} aria-label="Återställ simuleringen">
                                 Återställ
                             </button>

@@ -22,6 +22,7 @@
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
@@ -30,24 +31,21 @@
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-        }
+        /* Laborans papper — samma mönster som fysik2-cirkular-rorelse-app.html */
+        .dark-container { background: transparent; }
         .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
-        .glass-card-light {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(15, 22, 32, 0.28);
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+
+        /* ── Rubrikhuvud med växlare till avsnittets andra simulering ── */
+        .intro-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 18px; flex-wrap: wrap;
         }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
-        /* ── Växlare mellan avsnittets två simuleringar ── */
-        .sim-switch-wrap { display: flex; flex-direction: column; align-items: flex-end; }
+        .sim-switch-wrap { flex-shrink: 0; }
         .sim-switch-label {
             display: block; text-align: right; margin-bottom: 4px;
             font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -76,63 +74,109 @@
             border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
             background: var(--lab-bg-panel, #ffffff);
         }
-        .btn-glow {
-            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
-            transition: all 0.3s ease;
+        @media (max-width: 640px) {
+            .sim-switch-wrap { width: 100%; margin-bottom: 10px; }
+            .sim-switch-label { text-align: left; }
+            .sim-switch { display: flex; width: 100%; }
+            .sim-switch a, .sim-switch .sim-switch-active {
+                flex: 1; text-align: center; padding: 8px 6px; font-size: 13px;
+            }
         }
-        .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
+
+        /* ── Scenen ── */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none; -webkit-user-select: none;
+            background: #f3eee4;
         }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        /* Inställningsrutan uppe till höger. Hopfällbarheten (.st-hide/
+           .st-show-btn) och glidarraderna är centrala klasser i
+           styles-laborans-sim.css — se placeringsregeln i CLAUDE.md. */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        /* ── Knappar och situationsväljare (samma som i övriga simuleringar) ── */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 9px 10px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* ── Meddelandet när staven nuddar burken: ett papperskort över scenen ── */
         .contact-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 900;
-            animation: contact-pop 0.4s ease-out;
+            position: absolute; inset: 0; z-index: 20;
+            background: rgba(15, 22, 32, 0.42);
+            display: flex; align-items: center; justify-content: center;
+            animation: contact-pop 0.3s ease-out;
         }
         .contact-banner {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 2px solid rgba(200, 50, 74, 0.5);
-            box-shadow: 0 0 40px rgba(200, 50, 74, 0.25), 0 0 80px rgba(200, 50, 74, 0.1);
-            max-width: 460px;
-            width: 90%;
+            background: var(--lab-bg-panel, #ffffff);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(15, 22, 32, 0.22);
+            padding: 22px 26px;
+            max-width: 440px; width: 90%;
+            text-align: center; color: var(--lab-ink, #0f1620);
         }
         @keyframes contact-pop {
-            0% { opacity: 0; transform: scale(0.8); }
-            50% { transform: scale(1.03); }
+            0% { opacity: 0; transform: scale(0.94); }
             100% { opacity: 1; transform: scale(1); }
-        }
-        .tab-button {
-            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-            background: var(--lab-bg);
-            color: var(--lab-ink);
-            border-color: var(--lab-line-strong) !important;
-        }
-        .tab-button:hover:not(.active) {
-            background: var(--lab-bg-panel);
-            border-color: var(--lab-ink) !important;
-        }
-        .tab-button.active {
-            background: var(--lab-ink);
-            border-color: var(--lab-ink) !important;
-            color: var(--lab-bg);
-            box-shadow: none;
-        }
-        /* Mobil: kompakt knapppanel längst ned så den inte täcker burken/golvet */
-        @media (max-width: 600px) {
-            .ledare-controls {
-                bottom: 6px !important;
-                padding: 6px 8px !important;
-                gap: 8px !important;
-            }
-            .ledare-controls button {
-                padding: 8px 12px !important;
-                font-size: 0.85rem;
-            }
         }
     </style>
 </head>
@@ -247,46 +291,7 @@
             return [isFullscreen, toggleFullscreen];
         }
 
-        const FsButton = ({ isFullscreen, onClick }) => (
-            <button className="fs-btn" onClick={onClick} aria-label="Fullskärm"
-                    title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
-                {isFullscreen ? (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                    </svg>
-                ) : (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                    </svg>
-                )}
-            </button>
-        );
-
         // ==================== LEDARE SIMULATION (BURK) ====================
-
-        const LedareControls = ({ showCharges, onToggleCharges, onReset }) => {
-            return (
-                <div className="ledare-controls absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 glass-card p-4 rounded-2xl z-10 w-11/12 max-w-md justify-center">
-                    <button
-                        onClick={onToggleCharges}
-                        className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
-                            showCharges
-                                ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 btn-glow'
-                                : 'bg-slate-700/50 text-slate-300 border border-slate-600 hover:bg-slate-600/50'
-                        }`}
-                    >
-                        {showCharges ? 'Dölj laddningar' : 'Visa laddningar'}
-                    </button>
-
-                    <button
-                        onClick={onReset}
-                        className="px-6 py-3 rounded-lg font-semibold bg-slate-700/50 text-slate-300 border border-slate-600 hover:bg-slate-600/50 transition-all duration-200"
-                    >
-                        Återställ
-                    </button>
-                </div>
-            );
-        };
 
         const LedareCanvas = ({ showCharges, resetSignal, onContact }) => {
             const canvasRef = useRef(null);
@@ -549,8 +554,7 @@
 
                     // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
 
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
+                    ctx.shadowBlur = 0;
                     ctx.beginPath();
                     ctx.moveTo(0, floorY);
                     ctx.lineTo(width, floorY);
@@ -566,8 +570,8 @@
                     rodGradient.addColorStop(0.7, '#334155');
                     rodGradient.addColorStop(1, '#f3eee4');
 
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'rgba(15, 22, 32, 0.28)';
                     ctx.fillStyle = rodGradient;
                     if (ctx.roundRect) {
                         ctx.beginPath();
@@ -581,10 +585,9 @@
                     }
                     ctx.shadowBlur = 0;
 
-                    ctx.shadowBlur = 18;
-                    ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                    ctx.shadowBlur = 0;
                     ctx.fillStyle = '#1e40af';
-                    ctx.font = 'bold 24px sans-serif';
+                    ctx.font = 'bold 24px Poppins, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     for(let i=1; i<4; i++) {
@@ -603,8 +606,8 @@
                     gradient.addColorStop(0.6, '#475569');
                     gradient.addColorStop(1, '#334155');
 
-                    ctx.shadowBlur = 20;
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.2)';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(15, 22, 32, 0.25)';
                     ctx.beginPath();
                     ctx.arc(0, 0, CAN_RADIUS, 0, Math.PI * 2);
                     ctx.fillStyle = gradient;
@@ -627,10 +630,9 @@
 
                     if (showChargesRef.current) {
                         state.electrons.forEach(p => {
-                            ctx.shadowBlur = 10;
-                            ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
-                            ctx.fillStyle = '#ef4444';
-                            ctx.font = 'bold 16px Arial';
+                            ctx.shadowBlur = 0;
+                            ctx.fillStyle = '#c8324a';
+                            ctx.font = 'bold 16px Poppins, sans-serif';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
                             ctx.fillText('+', p.basePosition.x, p.basePosition.y);
@@ -644,18 +646,17 @@
                         ctx.translate(state.canX, canY);
                         state.electrons.forEach(p => {
                             const outerGlow = ctx.createRadialGradient(p.currentPosition.x, p.currentPosition.y, 0, p.currentPosition.x, p.currentPosition.y, 18);
-                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.7)');
-                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.25)');
+                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.30)');
+                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.10)');
                             outerGlow.addColorStop(1, 'rgba(59, 130, 246, 0)');
                             ctx.beginPath();
                             ctx.arc(p.currentPosition.x, p.currentPosition.y, 18, 0, Math.PI * 2);
                             ctx.fillStyle = outerGlow;
                             ctx.fill();
 
-                            ctx.shadowBlur = 16;
-                            ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                            ctx.shadowBlur = 0;
                             ctx.fillStyle = '#1e40af';
-                            ctx.font = 'bold 20px Arial';
+                            ctx.font = 'bold 20px Poppins, sans-serif';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
                             ctx.fillText('−', p.currentPosition.x, p.currentPosition.y);
@@ -696,15 +697,10 @@
 
             return (
                 <div ref={containerRef} className="absolute inset-0 cursor-move">
-                    <div className="absolute top-4 left-0 w-full text-center pointer-events-none select-none z-0">
-                        <h2 className="text-slate-500 text-sm font-medium">
-                            Flytta staven med musen eller fingret
-                        </h2>
-                    </div>
                     <canvas
                         ref={canvasRef}
                         className="block touch-none"
-                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(200, 50, 74, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                        style={{ width: '100%', height: '100%' }}
                     />
                 </div>
             );
@@ -713,103 +709,27 @@
         const ContactOverlay = ({ onReset }) => {
             return (
                 <div className="contact-overlay" onClick={onReset}>
-                    <div className="contact-banner rounded-2xl px-8 py-8 text-center" onClick={(e) => e.stopPropagation()}>
-                        <div className="text-5xl mb-4">⚡</div>
-                        <p className="text-cyan-300 font-bold text-xl mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                            Staven nuddade burken!
-                        </p>
-                        <p className="text-slate-300 text-base mb-6" style={{ lineHeight: '1.7' }}>
+                    <div className="contact-banner" onClick={(e) => e.stopPropagation()}>
+                        <div className="flbl mb-2">Staven nuddade burken</div>
+                        <p className="text-sm mb-4" style={{ color: 'var(--lab-ink-soft)', lineHeight: 1.65 }}>
                             Nu överförs elektroner från den negativt laddade staven till burken.
-                            Burken blir negativt laddad och är inte längre neutral.
-                            Eftersom både staven och burken nu är negativa kommer de att repellera varandra!
+                            Burken blir negativt laddad och är inte längre neutral. Eftersom både
+                            staven och burken nu är negativa repellerar de varandra.
                         </p>
-                        <button
-                            className="px-6 py-2.5 rounded-xl font-semibold text-white text-sm"
-                            style={{
-                                background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
-                                border: 'none',
-                                cursor: 'pointer',
-                                boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)'
-                            }}
-                            onClick={onReset}
-                        >
-                            Börja om
-                        </button>
+                        <button className="btn-toggle active" onClick={onReset}>Börja om</button>
                     </div>
                 </div>
             );
         };
 
-        const LedareSimulation = () => {
-            const [showCharges, setShowCharges] = useState(true);
-            const [resetSignal, setResetSignal] = useState(0);
-            const [showContact, setShowContact] = useState(false);
-            const sceneWrapRef = useRef(null);
-            const [isFullscreen, toggleFullscreen] = useFullscreen(sceneWrapRef);
-
-            const handleContact = useCallback(() => {
-                setShowContact(true);
-            }, []);
-
-            const handleReset = useCallback(() => {
-                setShowContact(false);
-                setResetSignal(prev => prev + 1);
-            }, []);
-
-            return (
-                <>
-                    <div className="glass-card rounded-2xl p-4 mb-6">
-                        <div className="scene-wrap relative w-full" ref={sceneWrapRef} data-theme="ljusPapper"
-                             style={{ minHeight: '500px', maxHeight: isFullscreen ? 'none' : '600px', userSelect: 'none' }}>
-                            {/* Overlayn ligger inuti scen-wrappern så den syns även i fullskärm */}
-                            {showContact && <ContactOverlay onReset={handleReset} />}
-                            <LedareCanvas
-                                showCharges={showCharges}
-                                resetSignal={resetSignal}
-                                onContact={showContact ? null : handleContact}
-                            />
-                            <LedareControls
-                                showCharges={showCharges}
-                                onToggleCharges={() => setShowCharges(prev => !prev)}
-                                onReset={() => setResetSignal(prev => prev + 1)}
-                            />
-                            <FsButton isFullscreen={isFullscreen} onClick={toggleFullscreen} />
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="glass-card-light p-4 rounded-xl">
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                    <span className="text-cyan-400 text-xl font-bold">−</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-slate-200 font-semibold mb-1">Ebonitstav</h3>
-                                    <p className="text-slate-400 text-sm">Negativt laddad efter att ha gnidits mot päls. De negativa laddningarna repellerar elektronerna i burken.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="glass-card-light p-4 rounded-xl">
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                    <span className="text-cyan-400 text-xl font-bold">⚡</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-slate-200 font-semibold mb-1">Influens i ledare</h3>
-                                    <p className="text-slate-400 text-sm">Elektronerna i burken flyttar sig fritt bort från staven, vilket skapar en positiv sida närmast staven som attraheras.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            );
-        };
-
         // ==================== ISOLATOR SIMULATION (BALLONG) ====================
 
-        const IsolatorCanvas = ({ resetSignal }) => {
+        const IsolatorCanvas = ({ resetSignal, onHint }) => {
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
+            const onHintRef = useRef(onHint);
+            const lastHintRef = useRef('');
+            useEffect(() => { onHintRef.current = onHint; }, [onHint]);
 
             const BALLOON_RADIUS = 50;
             const HEAD_WIDTH = 80;
@@ -1085,8 +1005,7 @@
                     ctx.fillStyle = ceilingGradient;
                     ctx.fillRect(0, 0, width, CEILING_HEIGHT + 30);
 
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
+                    ctx.shadowBlur = 0;
                     ctx.beginPath();
                     ctx.moveTo(0, CEILING_HEIGHT + 30);
                     ctx.lineTo(width, CEILING_HEIGHT + 30);
@@ -1115,17 +1034,15 @@
                         ctx.stroke();
 
                         // Positive side (right, toward balloon when aligned)
-                        ctx.shadowBlur = 8;
-                        ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
-                        ctx.fillStyle = '#ef4444';
-                        ctx.font = 'bold 14px Arial';
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#c8324a';
+                        ctx.font = 'bold 14px Poppins, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
                         ctx.fillText('+', dipoleWidth / 4, 0);
 
                         // Negative side (left) — glödande blå elektron
-                        ctx.shadowBlur = 14;
-                        ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                        ctx.shadowBlur = 0;
                         ctx.fillStyle = '#1e40af';
                         ctx.fillText('−', -dipoleWidth / 4, 0);
                         ctx.shadowBlur = 0;
@@ -1251,10 +1168,9 @@
 
                     // Show positive charges in hair if electrons transferred - i en båge
                     if (state.chargeLevel > 0) {
-                        ctx.shadowBlur = 15;
-                        ctx.shadowColor = 'rgba(239, 68, 68, 1)';
-                        ctx.fillStyle = '#ef4444';
-                        ctx.font = 'bold 18px Arial';
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#c8324a';
+                        ctx.font = 'bold 18px Poppins, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
                         const numCharges = Math.floor(state.chargeLevel * 6);
@@ -1334,10 +1250,9 @@
                             ctx.fill();
 
                             // Minus sign
-                            ctx.shadowBlur = 16;
-                            ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                            ctx.shadowBlur = 0;
                             ctx.fillStyle = '#1e40af';
-                            ctx.font = 'bold 16px Arial';
+                            ctx.font = 'bold 16px Poppins, sans-serif';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
                             ctx.fillText('−', x, y);
@@ -1347,25 +1262,20 @@
 
                     ctx.restore();
 
-                    // Instructions - placerad till höger om huvudet
-                    let instruction = 'Dra ballongen mot håret\nför att ladda den';
+                    // Ledtexten visas i scenens hint-ruta (.scene-hint), som i
+                    // övriga simuleringar — inte ritad på canvasen.
+                    let instruction = 'Dra ballongen mot håret för att ladda den.';
                     if (state.isStuck) {
-                        instruction = 'Ballongen sitter fast!\nDipolerna har vridit sig.';
+                        instruction = 'Ballongen sitter fast. Dipolerna i taket har vridit sig.';
                     } else if (state.isCharged) {
-                        instruction = 'Dra den laddade\nballongen mot taket';
+                        instruction = 'Dra den laddade ballongen upp mot taket.';
                     } else if (state.isRubbing || state.chargeLevel > 0) {
                         instruction = 'Gnugga mer!';
                     }
-
-                    ctx.fillStyle = '#0f1620';
-                    ctx.font = '14px sans-serif';
-                    ctx.textAlign = 'left';
-                    const instructionX = state.headX + HEAD_WIDTH / 2 + 40;
-                    const instructionY = state.headY;
-                    const lines = instruction.split('\n');
-                    lines.forEach((line, i) => {
-                        ctx.fillText(line, instructionX, instructionY + i * 18);
-                    });
+                    if (instruction !== lastHintRef.current) {
+                        lastHintRef.current = instruction;
+                        if (onHintRef.current) onHintRef.current(instruction);
+                    }
 
                     animationFrameId = requestAnimationFrame(render);
                 };
@@ -1395,118 +1305,194 @@
                     <canvas
                         ref={canvasRef}
                         className="block touch-none"
-                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(200, 50, 74, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                        style={{ width: '100%', height: '100%' }}
                     />
                 </div>
             );
         };
 
-        const IsolatorSimulation = () => {
+        // ==================== MAIN APP ====================
+
+        const FS_ICON = (isFullscreen) => isFullscreen ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+            </svg>
+        ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+            </svg>
+        );
+
+        const TEXTER = {
+            ledare: {
+                gor: 'Dra ebonitstaven mot burken och se hur burken börjar rulla efter staven. Nuddar staven burken hoppar elektroner över till burken, och då stöts burken i stället bort.',
+                kort: [
+                    { titel: 'Ebonitstav', text: 'Negativt laddad efter att ha gnidits mot päls. De negativa laddningarna repellerar elektronerna i burken.' },
+                    { titel: 'Influens i ledare', text: 'Elektronerna i burken flyttar sig fritt bort från staven. Sidan närmast staven blir positiv och attraheras av staven.' },
+                ],
+            },
+            isolator: {
+                gor: 'Gnugga ballongen mot håret så att den laddas, och dra den sedan upp mot taket. Dipolerna i taket vrider sig och ballongen fastnar.',
+                kort: [
+                    { titel: 'Laddad ballong', text: 'När ballongen gnuggas mot hår överförs elektroner till ballongen, som blir negativt laddad.' },
+                    { titel: 'Influens i isolator', text: 'I en isolator kan elektroner inte röra sig fritt. I stället vrids dipolerna så att deras positiva ändar pekar mot ballongen.' },
+                ],
+            },
+        };
+
+        function App() {
+            const [mode, setMode] = useState('ledare');
+            const [showCharges, setShowCharges] = useState(true);
             const [resetSignal, setResetSignal] = useState(0);
+            const [showContact, setShowContact] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isolatorHint, setIsolatorHint] = useState('Dra ballongen mot håret för att ladda den.');
             const sceneWrapRef = useRef(null);
             const [isFullscreen, toggleFullscreen] = useFullscreen(sceneWrapRef);
 
-            return (
-                <>
-                    <div className="glass-card rounded-2xl p-4 mb-6">
-                        <div className="scene-wrap relative w-full" ref={sceneWrapRef} data-theme="ljusPapper"
-                             style={{ minHeight: '500px', maxHeight: isFullscreen ? 'none' : '600px', userSelect: 'none' }}>
-                            <IsolatorCanvas resetSignal={resetSignal} />
-                            <FsButton isFullscreen={isFullscreen} onClick={toggleFullscreen} />
-                            <div className="absolute top-32 right-4 z-10">
-                                <button
-                                    onClick={() => setResetSignal(prev => prev + 1)}
-                                    className="px-4 py-2 rounded-lg font-semibold bg-slate-700/80 text-slate-300 border border-slate-600 hover:bg-slate-600/50 transition-all duration-200 text-sm"
-                                >
-                                    Återställ
-                                </button>
+            const reset = useCallback(() => {
+                setShowContact(false);
+                setResetSignal(prev => prev + 1);
+            }, []);
+            const handleContact = useCallback(() => setShowContact(true), []);
+            const switchMode = (m) => {
+                if (m === mode) return;
+                setMode(m);
+                setShowContact(false);
+                setResetSignal(prev => prev + 1);
+            };
+
+            const hint = mode === 'ledare'
+                ? (showContact ? 'Klicka på Börja om för att göra om försöket.' : 'Flytta staven med musen eller fingret.')
+                : isolatorHint;
+            const t = TEXTER[mode];
+
+            // Inställningsrutan uppe till höger. I normalläget bara visningsvalet
+            // (situationsväljaren och Börja om bor i sidopanelen); i fullskärm
+            // samlas allt här. Hopfällbar med krysset/den runda knappen.
+            const harToggles = isFullscreen || mode === 'ledare';
+            const sceneToggles = () => {
+                if (!harToggles) return null;
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title">Situation</div>
+                                <label><input type="radio" name="sit" checked={mode === 'ledare'} onChange={() => switchMode('ledare')} /><span>Ledare (burk)</span></label>
+                                <label><input type="radio" name="sit" checked={mode === 'isolator'} onChange={() => switchMode('isolator')} /><span>Isolator (ballong)</span></label>
+                            </React.Fragment>
+                        )}
+                        {mode === 'ledare' && (
+                            <React.Fragment>
+                                <div className={'st-title' + (isFullscreen ? ' mt' : '')}>Visa</div>
+                                <label><input type="checkbox" checked={showCharges} onChange={() => setShowCharges(v => !v)} /><span>Laddningar</span></label>
+                            </React.Fragment>
+                        )}
+                        {isFullscreen && (
+                            <div className="st-actions">
+                                <button className="btn-toggle" onClick={reset}>Börja om</button>
                             </div>
-                        </div>
+                        )}
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="glass-card-light p-4 rounded-xl">
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-blue-500/20 rounded-lg">
-                                    <span className="text-blue-400 text-xl font-bold">−</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-slate-200 font-semibold mb-1">Laddad ballong</h3>
-                                    <p className="text-slate-400 text-sm">När ballongen gnuggas mot hår överförs elektroner till ballongen, som blir negativt laddad.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="glass-card-light p-4 rounded-xl">
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                    <span className="text-cyan-400 text-xl font-bold">↔</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-slate-200 font-semibold mb-1">Influens i isolator</h3>
-                                    <p className="text-slate-400 text-sm">I en isolator kan elektroner inte röra sig fritt. Istället vrids dipolerna så att deras positiva ändar pekar mot ballongen.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            );
-        };
-
-        // ==================== MAIN APP ====================
-
-        function App() {
-            const [activeTab, setActiveTab] = useState('ledare');
+                );
+            };
 
             return (
-                <div className="dark-container min-h-screen">
-                    <div className="max-w-6xl mx-auto py-8 px-4">
-                        {/* Växlare mellan avsnittets två simuleringar */}
-                        <div className="sim-switch-wrap" style={{ marginBottom: '0.75rem' }}>
-                            <span className="sim-switch-label">Simulering</span>
-                            <div className="sim-switch">
-                                <span className="sim-switch-active">Elektrisk influens</span>
-                                <a href="fysik1-bandgenerator-app.html">Bandgeneratorn</a>
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12">
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Elektrisk influens
+                        </div>
+                        <div className="intro-head">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Elektrisk influens</h1>
+                            {/* Växlare till avsnittets andra simulering */}
+                            <div className="sim-switch-wrap">
+                                <span className="sim-switch-label">Simulering</span>
+                                <div className="sim-switch">
+                                    <span className="sim-switch-active">Elektrisk influens</span>
+                                    <a href="fysik1-bandgenerator-app.html">Bandgeneratorn</a>
+                                </div>
                             </div>
                         </div>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Ett laddat föremål kan dra till sig ett neutralt föremål utan att röra det.
+                            Laddningarna i det neutrala föremålet omfördelas, och det kallas <strong>influens</strong>.
+                            I en <strong>ledare</strong>, som aluminiumburken, rör sig elektronerna fritt: de stöts
+                            bort från den negativa ebonitstaven, burkens närmaste sida blir positiv och burken
+                            rullar mot staven. I en <strong>isolator</strong>, som taket ballongen fastnar på, sitter
+                            elektronerna fast, men molekylernas <strong>dipoler</strong> vrider sig så att de
+                            positiva ändarna vänds mot ballongen.
+                        </p>
 
-                        {/* Header */}
-                        <header className="text-center mb-8">
-                            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">
-                                Elektrisk influens
-                            </h1>
-                            <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed mb-6">
-                                {activeTab === 'ledare'
-                                    ? 'Observera hur den neutrala aluminiumburken attraheras av den negativt laddade ebonitstaven. Elektronerna repelleras, vilket skapar en dipol som får burken att rulla.'
-                                    : 'Se hur en negativt laddad ballong får dipolerna i taket att vrida sig och attrahera ballongen. I en isolator kan elektroner inte röra sig fritt – istället vrids molekylernas dipoler.'}
-                            </p>
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {mode === 'ledare'
+                                        ? <LedareCanvas showCharges={showCharges} resetSignal={resetSignal}
+                                                        onContact={showContact ? null : handleContact} />
+                                        : <IsolatorCanvas resetSignal={resetSignal} onHint={setIsolatorHint} />}
+                                    {mode === 'ledare' && showContact && <ContactOverlay onReset={reset} />}
 
-                            {/* Tab buttons */}
-                            <div className="flex justify-center gap-4 mb-6">
-                                <button
-                                    onClick={() => setActiveTab('ledare')}
-                                    className={`tab-button px-6 py-3 rounded-lg font-semibold border transition-all duration-200 ${
-                                        activeTab === 'ledare'
-                                            ? 'active'
-                                            : 'bg-slate-800/50 text-slate-400 border-slate-700 hover:bg-slate-700/50'
-                                    }`}
-                                >
-                                    Elektrisk influens i ledare
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab('isolator')}
-                                    className={`tab-button px-6 py-3 rounded-lg font-semibold border transition-all duration-200 ${
-                                        activeTab === 'isolator'
-                                            ? 'active'
-                                            : 'bg-slate-800/50 text-slate-400 border-slate-700 hover:bg-slate-700/50'
-                                    }`}
-                                >
-                                    Elektrisk influens i isolator
-                                </button>
+                                    <div className="scene-hint">{hint}</div>
+                                    {sceneToggles()}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {FS_ICON(isFullscreen)}
+                                    </button>
+                                </div>
                             </div>
-                        </header>
 
-                        {/* Simulation content */}
-                        {activeTab === 'ledare' ? <LedareSimulation /> : <IsolatorSimulation />}
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Situation</div>
+                                    <div className="mode-seg">
+                                        <button className={mode === 'ledare' ? 'active' : ''} onClick={() => switchMode('ledare')}>
+                                            Ledare<span className="sub">aluminiumburk och ebonitstav</span>
+                                        </button>
+                                        <button className={mode === 'isolator' ? 'active' : ''} onClick={() => switchMode('isolator')}>
+                                            Isolator<span className="sub">ballong mot taket</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-1">Så gör du</div>
+                                    <p className="text-sm mb-3" style={{ color: 'var(--lab-ink-soft)' }}>{t.gor}</p>
+                                    <div className="flex gap-2">
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {t.kort.map(k => (
+                                    <div className="glass-card rounded-xl p-3 mb-3" key={k.titel}>
+                                        <div className="flbl mb-1">{k.titel}</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>{k.text}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </main>
                     </div>
                 </div>
             );

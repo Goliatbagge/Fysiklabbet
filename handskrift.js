@@ -19328,6 +19328,27 @@
       arrowHead(p2[0], p2[1], p1[0], p1[1], 9, color);
       arrowHead(p1[0], p1[1], p2[0], p2[1], 9, color);
     }
+    /* RESULTANTPIL: streckat skaft, helt pilhuvud (se REGEL om
+     * resultanten). Används för en kraft som INTE är påförd kroppen utan
+     * är summan av de andra — centripetalkraften i en cirkelrörelse är
+     * det stående exemplet. Utan markeringen läses ett diagram med F_S,
+     * F_G och F_C som om det verkade tre krafter på kroppen. Samma
+     * konvention som teori- och övningsfigurernas stroke-dasharray.
+     * Strecken är tätare än dash() eftersom kraftpilarna är korta. */
+    function dashArrow(p1, p2, color, len) {
+      var hl = len || 10;
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      /* skaftet slutar vid pilhuvudets bas, aldrig i spetsen */
+      var sl = Math.max(0, L - hl * 0.75);
+      var n = Math.max(2, Math.round(sl / 9));
+      for (var i = 0; i < n; i++) {
+        var t0 = (i / n) * sl / L, t1 = t0 + (0.62 / n) * sl / L;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1], color);
+      }
+      arrowHead(p2[0], p2[1], p1[0], p1[1], hl, color);
+    }
     function rect(x0, y0, x1, y1, color) {
       line([x0, y0], [x1, y0], color);
       line([x1, y0], [x1, y1], color);
@@ -19413,6 +19434,7 @@
 
     T.line = line; T.dash = dash; T.dashPts = dashPts;
     T.arrowHead = arrowHead; T.arrow = arrow; T.dblArrow = dblArrow;
+    T.dashArrow = dashArrow;
     T.rect = rect; T.circle = circle; T.dot = dot; T.hatch = hatch;
     T.symIn = symIn; T.symUt = symUt; T.kryssfalt = kryssfalt;
     T.figurBubble = figurBubble; T.lbl = lbl; T.lblW = lblW;
@@ -34796,6 +34818,33 @@
   function layoutGungan(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var adv = 1.7 * F, bw = 292;
+    /* KRAFTFIGURER I HÖGERMARGINALEN (kfx): en liten figur intill varje
+     * kraftekvation, så att eleven ser VARFÖR ekvationen ser ut som den
+     * gör. Pilarna är SKALENLIGA med 0,055 px/N, alltså F_S = 78 px
+     * (1414 N), F_G = 43 px (786 N) och F_C = 35 px (629 N) — F_S-pilen
+     * blir därmed exakt lika lång som de båda andra tillsammans, vilket
+     * är just vad F_S = F_C + F_G säger.
+     * CENTRIPETALKRAFTEN RITAS STRECKAD (T.dashArrow, se REGEL om
+     * resultanten): den är ingen egen kraft utan resultanten av de
+     * verkliga, och det är dess RIKTNING som avgör vilken av de verkliga
+     * krafterna som måste vara störst. Den är sidoförskjuten för
+     * läsbarhet, precis som i teorifigurens kraftdiagram. */
+    var kfx = 590;
+    /* en bit av cirkelbanan genom sitsen: sign −1 i lägsta punkten
+     * (banan kröker upp mot fästet), +1 i toppen */
+    function banbit(cy0, sign) {
+      var pts = [], i, dx;
+      for (i = 0; i <= 16; i++) {
+        dx = -44 + i * (88 / 16);
+        pts.push([kfx + dx, cy0 + sign * 12 * (dx / 44) * (dx / 44)]);
+      }
+      T.dashPts(pts);
+      /* gungsitsen som dubbelstreck — ett ensamt streck försvinner i den
+       * streckade banan. Bred nog att bära alla tre pilfötterna, så att
+       * ingen kraft ser ut att angripa vid sidan av kroppen. */
+      T.line([kfx - 24, cy0 - 1.5], [kfx + 24, cy0 - 1.5]);
+      T.line([kfx - 24, cy0 + 1.5], [kfx + 24, cy0 + 1.5]);
+    }
     /* 60 px per meter: r = 2,5 m → 150 px, h = 1,0 m → 60 px */
     var px = 60, cx = 250, cyT = 70, R = 2.5 * px;
     var yLow = cyT + R;                       /* lägsta punkten, y = 220 */
@@ -34892,11 +34941,42 @@
 
     /* ---- kraftekvationen i lägsta punkten ---- */
     y += adv + 2.4 * F;
+    var kyA = y + 58;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['I lägsta punkten pekar']],
-      [['centripetalkraften UPPÅT, in mot']],
-      [['fästet. Spännkraften drar uppåt']],
-      [['och tyngdkraften nedåt.']]
+      [['Vilka krafter verkar på gungan']],
+      [['längst ned? Repet drar uppåt och']],
+      [['tyngdkraften nedåt. Ritar dem.']]
+    ]));
+    banbit(kyA, -1);
+    T.pause(140);
+    T.arrow([kfx, kyA], [kfx, kyA - 78], BLUE);           /* F_S, 1414 N */
+    T.lbl('F_S', kfx - T.lblW('F_S') / 2, kyA - 86, BLUE);
+    T.pause(160);
+    /* F_G en bit åt höger: ritas de från samma punkt läses de två
+     * motriktade pilarna som EN dubbelpil (samma grepp som
+     * teorifigurens kraftdiagram) */
+    T.dot(kfx + 20, kyA, BLUE);
+    T.arrow([kfx + 20, kyA], [kfx + 20, kyA + 43], BLUE); /* F_G, 786 N */
+    T.lbl('F_G', kfx + 20 - T.lblW('F_G') / 2, kyA + 65, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Banan kröker uppåt mot fästet,']],
+      [['så resultanten pekar uppåt. Den']],
+      [['streckar jag: centripetalkraften']],
+      [['är ingen egen kraft.']]
+    ]));
+    T.dashArrow([kfx - 20, kyA], [kfx - 20, kyA - 35], BLUE);  /* F_C, 629 N */
+    /* etiketten ovanför banbågen, annars hamnar den på de streckade
+     * banstrecken */
+    T.lbl('F_C', kfx - 34 - T.lblW('F_C'), kyA - 24, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Den streckade pilen pekar uppåt,']],
+      [['alltså måste spännkraften vara']],
+      [['störst. Centripetalkraften är']],
+      [['skillnaden mellan krafterna.']]
     ]));
     T.str('F_C=F_S-F_G', padL, y);
     T.stepEnd();
@@ -34953,8 +35033,29 @@
       [['centripetalkraft.']]
     ]));
     T.str('b) Minsta farten i toppen', padL, y, null, 0.62);
-    T.pause(300);
+    T.stepEnd();
+
     y += 2.1 * F;
+    var kyB = y - 6;
+    T.tanke(T.bubble(140, T.bubbleTop(y - 2.1 * F), bw, [
+      [['I toppen ligger fästet rakt']],
+      [['under sitsen, så resultanten']],
+      [['pekar NEDÅT i stället.']]
+    ]));
+    banbit(kyB, 1);
+    T.pause(140);
+    T.lbl('F_S=0', kfx - T.lblW('F_S=0') / 2, kyB - 22, BLUE);
+    T.pause(140);
+    T.dot(kfx + 20, kyB, BLUE);
+    T.arrow([kfx + 20, kyB], [kfx + 20, kyB + 43], BLUE); /* F_G, 786 N */
+    T.lbl('F_G', kfx + 20 - T.lblW('F_G') / 2, kyB + 65, BLUE);
+    T.pause(160);
+    /* exakt lika lång som F_G: i gränsfallet är tyngdkraften ensam
+     * centripetalkraft */
+    T.dashArrow([kfx - 20, kyB], [kfx - 20, kyB + 43], BLUE);
+    T.lbl('F_C', kfx - 34 - T.lblW('F_C'), kyB + 30, BLUE);
+    T.stepEnd();
+
     T.str('F_S=0⟹F_C=F_G', padL, y);
     T.stepEnd();
 

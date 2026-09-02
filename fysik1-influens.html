@@ -291,6 +291,38 @@
             return [isFullscreen, toggleFullscreen];
         }
 
+        // ==================== RITHJÄLPARE (laboranstemat) ====================
+        // Samma pappersbotten med kollegieblocks-rutnät som minisimuleringarna,
+        // och laddningstecken ritade som streck i teorifigurernas färger
+        // (plus #c0392b, minus #2563c9) — inte som glyfer med glöd.
+        const PAPER_INK = '#0f1620';
+        const PLUS_RED = '#c0392b';
+        const MINUS_BLUE = '#2563c9';
+        function drawPaper(ctx, width, height) {
+            const g = ctx.createLinearGradient(0, 0, 0, height);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, width, height);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (let x = 26; x < width; x += 26) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, height); }
+            for (let y = 26; y < height; y += 26) { ctx.moveTo(0, y + 0.5); ctx.lineTo(width, y + 0.5); }
+            ctx.stroke();
+        }
+        function drawSign(ctx, x, y, positive, size, lw) {
+            ctx.save();
+            ctx.strokeStyle = positive ? PLUS_RED : MINUS_BLUE;
+            ctx.lineWidth = lw || 2.2;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(x - size / 2, y); ctx.lineTo(x + size / 2, y);
+            if (positive) { ctx.moveTo(x, y - size / 2); ctx.lineTo(x, y + size / 2); }
+            ctx.stroke();
+            ctx.restore();
+        }
+
         // ==================== LEDARE SIMULATION (BURK) ====================
 
         const LedareCanvas = ({ showCharges, resetSignal, onContact }) => {
@@ -549,119 +581,92 @@
                     const dx = state.canV * deltaTime;
                     state.canRotation += dx / CAN_RADIUS;
 
-                    ctx.fillStyle = '#f3eee4';
-                    ctx.fillRect(0, 0, width, height);
+                    drawPaper(ctx, width, height);
 
-                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
-
-                    ctx.shadowBlur = 0;
+                    // Bänkskivan: en svagt tonad platta under bläcklinjen
+                    ctx.fillStyle = 'rgba(15, 22, 32, 0.05)';
+                    ctx.fillRect(0, floorY, width, height - floorY);
                     ctx.beginPath();
                     ctx.moveTo(0, floorY);
                     ctx.lineTo(width, floorY);
-                    ctx.strokeStyle = '#334155';
+                    ctx.strokeStyle = PAPER_INK;
                     ctx.lineWidth = 2;
                     ctx.stroke();
-                    ctx.shadowBlur = 0;
 
-                    const rodGradient = ctx.createLinearGradient(state.rodX - ROD_WIDTH/2, 0, state.rodX + ROD_WIDTH/2, 0);
-                    rodGradient.addColorStop(0, '#f3eee4');
-                    rodGradient.addColorStop(0.3, '#334155');
-                    rodGradient.addColorStop(0.5, '#475569');
-                    rodGradient.addColorStop(0.7, '#334155');
-                    rodGradient.addColorStop(1, '#f3eee4');
-
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = 'rgba(15, 22, 32, 0.28)';
-                    ctx.fillStyle = rodGradient;
-                    if (ctx.roundRect) {
+                    // Ebonitstaven — ritad som i teorifigurerna (gul plaststav med
+                    // blå minustecken), med en mjuk bläckskugga mot papperet
+                    const rx0 = state.rodX - ROD_WIDTH / 2;
+                    const ry0 = rodY - ROD_HEIGHT / 2;
+                    const rodPath = () => {
                         ctx.beginPath();
-                        ctx.roundRect(state.rodX - ROD_WIDTH/2, rodY - ROD_HEIGHT/2, ROD_WIDTH, ROD_HEIGHT, 8);
-                        ctx.fill();
-                        ctx.strokeStyle = '#64748b';
-                        ctx.lineWidth = 2;
-                        ctx.stroke();
-                    } else {
-                        ctx.fillRect(state.rodX - ROD_WIDTH/2, rodY - ROD_HEIGHT/2, ROD_WIDTH, ROD_HEIGHT);
+                        if (ctx.roundRect) ctx.roundRect(rx0, ry0, ROD_WIDTH, ROD_HEIGHT, 10);
+                        else ctx.rect(rx0, ry0, ROD_WIDTH, ROD_HEIGHT);
+                    };
+                    ctx.save();
+                    ctx.shadowBlur = 8;
+                    ctx.shadowOffsetY = 2;
+                    ctx.shadowColor = 'rgba(15, 22, 32, 0.22)';
+                    const rodGradient = ctx.createLinearGradient(0, ry0, 0, ry0 + ROD_HEIGHT);
+                    rodGradient.addColorStop(0, '#efe3a2');
+                    rodGradient.addColorStop(0.45, '#e3d384');
+                    rodGradient.addColorStop(1, '#cdbb62');
+                    ctx.fillStyle = rodGradient;
+                    rodPath();
+                    ctx.fill();
+                    ctx.restore();
+                    ctx.strokeStyle = '#b6a64e';
+                    ctx.lineWidth = 2;
+                    rodPath();
+                    ctx.stroke();
+                    for (let i = 1; i < 4; i++) {
+                        drawSign(ctx, rx0 + i * ROD_WIDTH / 4, rodY, false, 12, 2.6);
                     }
-                    ctx.shadowBlur = 0;
 
-                    ctx.shadowBlur = 0;
-                    ctx.fillStyle = '#1e40af';
-                    ctx.font = 'bold 24px Poppins, sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    for(let i=1; i<4; i++) {
-                        const rx = state.rodX - ROD_WIDTH/2 + (i * ROD_WIDTH/4);
-                        ctx.fillText('−', rx, rodY);
-                    }
-                    ctx.shadowBlur = 0;
-
+                    // Aluminiumburken sedd från gaveln: ljus metall med bläckkant
                     ctx.save();
                     ctx.translate(state.canX, canY);
-                    ctx.rotate(state.canRotation);
-
-                    const gradient = ctx.createRadialGradient(-20, -20, 10, 0, 0, CAN_RADIUS);
-                    gradient.addColorStop(0, '#94a3b8');
-                    gradient.addColorStop(0.3, '#64748b');
-                    gradient.addColorStop(0.6, '#475569');
-                    gradient.addColorStop(1, '#334155');
-
+                    ctx.save();
                     ctx.shadowBlur = 10;
+                    ctx.shadowOffsetY = 3;
                     ctx.shadowColor = 'rgba(15, 22, 32, 0.25)';
+                    const gradient = ctx.createRadialGradient(-22, -22, 8, 0, 0, CAN_RADIUS);
+                    gradient.addColorStop(0, '#fdfcf8');
+                    gradient.addColorStop(0.55, '#ddd9cf');
+                    gradient.addColorStop(1, '#b9b4a8');
+                    ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(0, 0, CAN_RADIUS, 0, Math.PI * 2);
-                    ctx.fillStyle = gradient;
                     ctx.fill();
-                    ctx.strokeStyle = '#0f1620';
-                    ctx.lineWidth = 3;
-                    ctx.stroke();
-                    ctx.shadowBlur = 0;
-
+                    ctx.restore();
+                    ctx.strokeStyle = PAPER_INK;
+                    ctx.lineWidth = 2;
                     ctx.beginPath();
-                    ctx.arc(0, 0, CAN_RADIUS - 5, 0, Math.PI * 2);
-                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.42)';
+                    ctx.arc(0, 0, CAN_RADIUS, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Gavelns fals och en markering som rullar med burken
+                    ctx.rotate(state.canRotation);
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.35)';
                     ctx.lineWidth = 1;
-                    ctx.stroke();
-
-                    ctx.fillStyle = '#64748b';
                     ctx.beginPath();
-                    ctx.ellipse(CAN_RADIUS * 0.4, 0, 10, 15, 0, 0, Math.PI*2);
+                    ctx.arc(0, 0, CAN_RADIUS - 6, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.fillStyle = 'rgba(15, 22, 32, 0.16)';
+                    ctx.beginPath();
+                    ctx.ellipse(CAN_RADIUS * 0.45, 0, 9, 14, 0, 0, Math.PI * 2);
                     ctx.fill();
 
+                    // De fasta positiva laddningarna följer burkens rotation
                     if (showChargesRef.current) {
-                        state.electrons.forEach(p => {
-                            ctx.shadowBlur = 0;
-                            ctx.fillStyle = '#c8324a';
-                            ctx.font = 'bold 16px Poppins, sans-serif';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('+', p.basePosition.x, p.basePosition.y);
-                        });
-                        ctx.shadowBlur = 0;
+                        state.electrons.forEach(p => drawSign(ctx, p.basePosition.x, p.basePosition.y, true, 9, 2.2));
                     }
                     ctx.restore();
 
+                    // De rörliga elektronerna ritas i burkens oroterade ram
                     if (showChargesRef.current) {
                         ctx.save();
                         ctx.translate(state.canX, canY);
-                        state.electrons.forEach(p => {
-                            const outerGlow = ctx.createRadialGradient(p.currentPosition.x, p.currentPosition.y, 0, p.currentPosition.x, p.currentPosition.y, 18);
-                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.30)');
-                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.10)');
-                            outerGlow.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                            ctx.beginPath();
-                            ctx.arc(p.currentPosition.x, p.currentPosition.y, 18, 0, Math.PI * 2);
-                            ctx.fillStyle = outerGlow;
-                            ctx.fill();
-
-                            ctx.shadowBlur = 0;
-                            ctx.fillStyle = '#1e40af';
-                            ctx.font = 'bold 20px Poppins, sans-serif';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('−', p.currentPosition.x, p.currentPosition.y);
-                        });
-                        ctx.shadowBlur = 0;
+                        state.electrons.forEach(p => drawSign(ctx, p.currentPosition.x, p.currentPosition.y, false, 11, 2.6));
                         ctx.restore();
                     }
 
@@ -992,61 +997,35 @@
                         }
                     }
 
-                    // Papper-bakgrund
-                    ctx.fillStyle = '#f3eee4';
-                    ctx.fillRect(0, 0, width, height);
+                    drawPaper(ctx, width, height);
 
-                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
-
-                    // Draw ceiling
-                    const ceilingGradient = ctx.createLinearGradient(0, 0, 0, CEILING_HEIGHT + 30);
-                    ceilingGradient.addColorStop(0, '#f3eee4');
-                    ceilingGradient.addColorStop(1, '#f3eee4');
-                    ctx.fillStyle = ceilingGradient;
+                    // Taket: en ljus isolatorplatta (som i teorifigurerna) med bläckkant undertill
+                    ctx.fillStyle = 'rgba(15, 22, 32, 0.05)';
                     ctx.fillRect(0, 0, width, CEILING_HEIGHT + 30);
-
-                    ctx.shadowBlur = 0;
                     ctx.beginPath();
                     ctx.moveTo(0, CEILING_HEIGHT + 30);
                     ctx.lineTo(width, CEILING_HEIGHT + 30);
-                    ctx.strokeStyle = '#334155';
+                    ctx.strokeStyle = PAPER_INK;
                     ctx.lineWidth = 2;
                     ctx.stroke();
-                    ctx.shadowBlur = 0;
 
-                    // Draw dipoles in ceiling
+                    // Dipolerna i taket: ljusa ovaler med bläckkontur, plus- och
+                    // minuspol som streck — samma ritsätt som teorins figur
                     state.dipoles.forEach(dipole => {
                         ctx.save();
                         ctx.translate(dipole.x, dipole.y);
                         ctx.rotate(dipole.angle);
-
-                        // Dipole oval shape
                         const dipoleWidth = 40;
                         const dipoleHeight = 16;
-
-                        // Draw oval
                         ctx.beginPath();
                         ctx.ellipse(0, 0, dipoleWidth / 2, dipoleHeight / 2, 0, 0, Math.PI * 2);
-                        ctx.fillStyle = '#334155';
-                        ctx.strokeStyle = '#475569';
-                        ctx.lineWidth = 2;
+                        ctx.fillStyle = '#fdfaf3';
                         ctx.fill();
+                        ctx.strokeStyle = 'rgba(15, 22, 32, 0.75)';
+                        ctx.lineWidth = 1.4;
                         ctx.stroke();
-
-                        // Positive side (right, toward balloon when aligned)
-                        ctx.shadowBlur = 0;
-                        ctx.fillStyle = '#c8324a';
-                        ctx.font = 'bold 14px Poppins, sans-serif';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText('+', dipoleWidth / 4, 0);
-
-                        // Negative side (left) — glödande blå elektron
-                        ctx.shadowBlur = 0;
-                        ctx.fillStyle = '#1e40af';
-                        ctx.fillText('−', -dipoleWidth / 4, 0);
-                        ctx.shadowBlur = 0;
-
+                        drawSign(ctx, dipoleWidth / 4, 0, true, 8, 2);
+                        drawSign(ctx, -dipoleWidth / 4, 0, false, 8, 2);
                         ctx.restore();
                     });
 
@@ -1181,7 +1160,7 @@
                             const radius = HEAD_HEIGHT / 2 + 15;
                             const x = Math.sin(arcAngle) * radius;
                             const y = -Math.cos(arcAngle) * radius;
-                            ctx.fillText('+', x, y);
+                            drawSign(ctx, x, y, true, 11, 2.6);
                         }
                         ctx.shadowBlur = 0;
                     }
@@ -1195,7 +1174,7 @@
                     // Balloon glow if charged
                     if (state.isCharged) {
                         ctx.shadowBlur = 30;
-                        ctx.shadowColor = 'rgba(59, 130, 246, 0.45)';   // blå glöd: negativ laddning
+                        ctx.shadowColor = 'rgba(37, 99, 201, 0.30)';   // svag blå ton: negativ laddning
                     }
 
                     // Balloon gradient
@@ -1239,23 +1218,7 @@
                             const x = Math.cos(angle) * electronRadius;
                             const y = Math.sin(angle) * electronRadius;
 
-                            // Outer glow — glödande blå
-                            const outerGlow = ctx.createRadialGradient(x, y, 0, x, y, 14);
-                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.85)');
-                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.35)');
-                            outerGlow.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                            ctx.beginPath();
-                            ctx.arc(x, y, 14, 0, Math.PI * 2);
-                            ctx.fillStyle = outerGlow;
-                            ctx.fill();
-
-                            // Minus sign
-                            ctx.shadowBlur = 0;
-                            ctx.fillStyle = '#1e40af';
-                            ctx.font = 'bold 16px Poppins, sans-serif';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText('−', x, y);
+                            drawSign(ctx, x, y, false, 11, 2.6);
                         }
                         ctx.shadowBlur = 0;
                     }

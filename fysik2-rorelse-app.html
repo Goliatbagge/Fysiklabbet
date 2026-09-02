@@ -275,7 +275,8 @@
 
         // ── Konstanter ────────────────────────────────────────────────
         const TIME_STEP = 1 / 60;          // fysiksteg (s)
-        const DRAG_DEFAULT = 0.01;         // luftmotstånd a = −k·v·|v|: k ≈ 0,01 1/m för en tennisboll
+        const DRAG_DEFAULT = 0.17;         // luftmotstånd a = −k·v·|v|: startar högt (ballongnivå) så att
+                                           // asymmetrin syns direkt; k ≈ 0,01 1/m motsvarar en tennisboll
         const DRAG_MAX = 0.2;              // k för något lätt och stort, som en ballong
         const ULTRA = 0.15;                // tidsfaktor i ultrarapid
         const PAD_L = 58, PAD_R = 26, PAD_T = 22, GROUND_H = 68;   // markremsan rymmer x-värdena och scen-tipset
@@ -969,9 +970,9 @@
                         <div className="st-title mt">Fysik</div>
                         <label><input type="checkbox" checked={params.air} onChange={(e) => setP('air', e.target.checked)} /><span>Luftmotstånd</span></label>
                         {/* Luftmotståndets storlek hör ihop med sin kryssruta och bor
-                            därför här i båda lägena (aldrig i sidopanelen). k ≈ 0,01 1/m
-                            är en tennisboll; vid 0,2 beter sig bollen som en ballong och
-                            faller nästan rakt ned efter toppen. */}
+                            därför här i båda lägena (aldrig i sidopanelen). Startvärdet
+                            0,17 ligger nära ballongnivå, så att den osymmetriska banan
+                            syns redan vid första kastet; k ≈ 0,01 1/m är en tennisboll. */}
                         {params.air && (
                             <div className="st-sliders" style={{ marginTop: 2 }}>
                                 <StSlider label="Luftmotståndets storlek (<em>k</em>)" value={params.drag} min={0.002} max={DRAG_MAX} step={0.002}
@@ -1148,8 +1149,9 @@
                                     Startar och slutar kastet i samma höjd är parabeln symmetrisk kring sin högsta
                                     punkt: tiden upp är lika lång som tiden ned, och bollen slår i marken med samma
                                     fart som den kastades med, fast riktad snett nedåt. Kryssa i symmetrilinjen efter
-                                    nedslaget. Med luftmotstånd bryts symmetrin: bollen faller brantare än den steg. Dra upp
-                                    luftmotståndets storlek mot ballongnivå, så syns det tydligt.
+                                    nedslaget. Med luftmotstånd bryts symmetrin: bollen faller brantare än den steg.
+                                    Luftmotståndet startar på ballongnivå; dra ned det mot en tennisbolls (0,01)
+                                    och se skillnaden krympa.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">

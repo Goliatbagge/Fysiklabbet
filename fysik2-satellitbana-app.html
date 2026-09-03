@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellit i omloppsbana — Fysiklabbet</title>
+    <meta name="description" content="Skjut upp en satellit runt jorden: ställ in höjd och fart och se om banan blir en cirkel, en ellips, en krasch mot jordytan eller en flykt bort från jorden. Gravitationskraften, hastigheten, den förutsagda banan och energierna visas live, med rymdteleskopet Hubble som utgångsläge.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-satellitbana-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Satellit i omloppsbana — Fysik nivå 2">
+    <meta property="og:description" content="Skjut upp en satellit runt jorden: ställ in höjd och fart och se om banan blir en cirkel, en ellips, en krasch mot jordytan eller en flykt bort från jorden. Gravitationskraften, hastigheten, den förutsagda banan och energierna visas live, med rymdteleskopet Hubble som utgångsläge.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-satellitbana-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Satellit i omloppsbana — Fysik nivå 2">
+    <meta name="twitter:description" content="Skjut upp en satellit runt jorden: ställ in höjd och fart och se om banan blir en cirkel, en ellips, en krasch mot jordytan eller en flykt bort från jorden. Gravitationskraften, hastigheten, den förutsagda banan och energierna visas live, med rymdteleskopet Hubble som utgångsläge.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+    </script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Mobil: formeln får aldrig radbrytas. Behåll EN rad och skrolla
+           kortet i sidled i stället. */
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
+        .num-in { width: 62px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-presets button { padding: 4px 9px; font-size: 12px; }
+
+        /* Inställningsrutan är hopfällbar (.st-hide/.st-show-btn) och rymmer
+           glidarna i fullskärm (.st-sliders). Klasserna är centrala och bor i
+           styles-laborans-sim.css (se placeringsregeln i CLAUDE.md). */
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .preset-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Fysikaliska konstanter, samma värden och beteckningar som i
+        //    genomgången Energi och gravitation i cirkelbanor (fy2-1.6) ──
+        const G  = 6.67e-11;          // gravitationskonstanten (Nm²/kg²)
+        const MJ = 5.972e24;          // jordens massa m_j (kg)
+        const RJ = 6.378e6;           // jordens radie r_j (m)
+        const MU = G * MJ;            // G·m_j (m³/s²)
+
+        // Glidarintervall
+        const HMIN = 200, HMAX = 400000;      // höjd över jordytan (km), logaritmisk glidare
+        const VMAX = 12000;                    // fart (m/s)
+        const MMIN = 100, MMAX = 50000;        // satellitens massa (kg)
+        const TLMIN = 1, TLMAX = 3.6;          // log10 av tidsförkortningen (10× till 4 000×)
+        const R_ESCAPE = 60 * RJ;              // bortom detta räknas satelliten som försvunnen
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+        // Tusentalsavgränsare med hårt mellanslag (NBSP).
+        const fmtNum = (n, d = 0) => {
+            if (!isFinite(n)) return '–';
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [intp, frac] = s.split('.');
+            const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return frac !== undefined ? withSpaces + ',' + frac : withSpaces;
+        };
+        // Energier i joule med tiopotens: 3,2 · 10¹⁰ J
+        const fmtSci = (x) => {
+            if (!isFinite(x)) return '–';
+            if (x === 0) return '0';
+            const ex = Math.floor(Math.log10(Math.abs(x)));
+            const mant = x / Math.pow(10, ex);
+            const sup = String(ex).replace('-', '−').split('').map(ch => ({
+                '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','−':'⁻' }[ch] || ch)).join('');
+            return fmt(mant, 2) + ' · 10' + sup;
+        };
+        // Tid i sekunder som en läsbar sträng
+        const fmtTid = (s) => {
+            if (!isFinite(s)) return '–';
+            if (s < 90) return fmt(s, 0) + ' s';
+            if (s < 5400) return fmt(s / 60, 1) + ' min';
+            if (s < 172800) return fmt(s / 3600, 1) + ' h';
+            return fmt(s / 86400, 1) + ' dygn';
+        };
+        const fmtKm = (m) => fmtNum(m / 1000, 0) + ' km';
+
+        const COL = {
+            fart:  '#2563c9',   // blå: hastighet v
+            tyngd: '#c8324a',   // crimson: gravitationskraft F_G
+            bana:  '#0f1620',   // bläck: den förutsagda banan
+            ref:   '#7c828c',   // grå: cirkelbanan för jämförelse
+            spar:  '#e0701a',   // orange: satellitens spår
+            ink:   '#0f1620',
+            krasch:'#c8324a', ellipsIn: '#e0701a', cirkel: '#0d9488', ellipsUt: '#2563c9', flykt: '#7c3aed',
+        };
+
+        // ── Banmekanik ─────────────────────────────────────────────
+        const vCirc = (r) => Math.sqrt(MU / r);
+        const vEsc  = (r) => Math.sqrt(2 * MU / r);
+        // Minsta fart vid tangentiell uppskjutning på avståndet r0 för att
+        // perigeum ska ligga precis vid jordytan (lägre fart: krasch).
+        const vKrasch = (r0) => Math.sqrt(2 * MU * RJ / (r0 * (r0 + RJ)));
+
+        // Banelementen ur läge och hastighet (konstanta längs banan).
+        const elements = (x, y, vx, vy) => {
+            const r = Math.hypot(x, y), v2 = vx * vx + vy * vy;
+            const E = v2 / 2 - MU / r;                         // specifik energi
+            const hz = x * vy - y * vx;                         // specifikt rörelsemängdsmoment
+            const rv = x * vx + y * vy;
+            const ex = ((v2 - MU / r) * x - rv * vx) / MU;      // excentricitetsvektorn
+            const ey = ((v2 - MU / r) * y - rv * vy) / MU;      // pekar mot perigeum
+            const e = Math.hypot(ex, ey);
+            const p = hz * hz / MU;
+            const rp = p / (1 + e);
+            const ra = e < 1 ? p / (1 - e) : Infinity;
+            const a = e < 1 ? p / (1 - e * e) : Infinity;
+            const T = e < 1 ? 2 * Math.PI * Math.sqrt(a * a * a / MU) : Infinity;
+            return { r, v: Math.sqrt(v2), E, hz, ex, ey, e, p, rp, ra, a, T, rv };
+        };
+
+        // Den förutsagda banan (kägelsnittet) som punkter i meter.
+        const conicPoints = (el, rmax) => {
+            const pts = [];
+            if (el.p <= 0) return pts;
+            const ux = el.e > 1e-9 ? el.ex / el.e : 1, uy = el.e > 1e-9 ? el.ey / el.e : 0;
+            let thMax;
+            if (el.e < 1) thMax = Math.PI;
+            else {
+                const c = (el.p / rmax - 1) / el.e;
+                thMax = Math.acos(Math.max(-1, Math.min(1, c)));
+                thMax = Math.min(thMax, Math.acos(-1 / el.e) - 0.01);
+            }
+            const n = 240;
+            for (let k = -n; k <= n; k++) {
+                const th = thMax * k / n;
+                const r = el.p / (1 + el.e * Math.cos(th));
+                if (r <= 0 || r > rmax * 1.001) continue;
+                const c = Math.cos(th), s = Math.sin(th);
+                pts.push([r * (c * ux - s * uy), r * (c * uy + s * ux)]);
+            }
+            return pts;
+        };
+
+        // Rörelseekvationen: a = −G·m_j/r³ · r
+        const accel = (x, y) => {
+            const r = Math.hypot(x, y), k = -MU / (r * r * r);
+            return [k * x, k * y];
+        };
+        const rk4 = (s, dt) => {
+            const [ax1, ay1] = accel(s.x, s.y);
+            const x2 = s.x + s.vx * dt / 2, y2 = s.y + s.vy * dt / 2;
+            const vx2 = s.vx + ax1 * dt / 2, vy2 = s.vy + ay1 * dt / 2;
+            const [ax2, ay2] = accel(x2, y2);
+            const x3 = s.x + vx2 * dt / 2, y3 = s.y + vy2 * dt / 2;
+            const vx3 = s.vx + ax2 * dt / 2, vy3 = s.vy + ay2 * dt / 2;
+            const [ax3, ay3] = accel(x3, y3);
+            const x4 = s.x + vx3 * dt, y4 = s.y + vy3 * dt;
+            const vx4 = s.vx + ax3 * dt, vy4 = s.vy + ay3 * dt;
+            const [ax4, ay4] = accel(x4, y4);
+            s.x += dt / 6 * (s.vx + 2 * vx2 + 2 * vx3 + vx4);
+            s.y += dt / 6 * (s.vy + 2 * vy2 + 2 * vy3 + vy4);
+            s.vx += dt / 6 * (ax1 + 2 * ax2 + 2 * ax3 + ax4);
+            s.vy += dt / 6 * (ay1 + 2 * ay2 + 2 * ay3 + ay4);
+        };
+
+        // Bantyp ur banelementen vid uppskjutningen
+        const klassa = (el, r0) => {
+            if (el.e < 1 && el.rp < RJ) return 'krasch';
+            if (el.e >= 1) return (el.rp < RJ && el.rv < 0) ? 'krasch' : 'flykt';
+            if (Math.abs(el.v - vCirc(r0)) / vCirc(r0) < 0.002 && el.e < 0.004) return 'cirkel';
+            return el.ra > r0 * 1.001 ? 'ellipsUt' : 'ellipsIn';
+        };
+
+        // ── Jordklotet: kontinenterna sedda från Atlanten, i enhets-
+        //    koordinater (radie 1). Samma silhuetter som teorifigurerna. ──
+const KONTINENTER = [
+            '-0.230,-0.973 -0.220,-0.975 -0.302,-0.952 -0.313,-0.944 -0.292,-0.939 -0.270,-0.928 -0.286,-0.906 -0.302,-0.885 -0.345,-0.849 -0.415,-0.818 -0.498,-0.792 -0.536,-0.742 -0.522,-0.703 -0.464,-0.746 -0.372,-0.777 -0.341,-0.745 -0.345,-0.665 -0.345,-0.607 -0.408,-0.586 -0.473,-0.582 -0.552,-0.551 -0.604,-0.530 -0.654,-0.476 -0.719,-0.425 -0.764,-0.349 -0.757,-0.383 -0.772,-0.407 -0.797,-0.419 -0.832,-0.418 -0.868,-0.380 -0.896,-0.317 -0.894,-0.234 -0.853,-0.272 -0.867,-0.202 -0.870,-0.074 -0.840,-0.027 -0.811,-0.018 -0.849,-0.139 -0.878,-0.189 -0.919,-0.211 -0.932,-0.310 -0.912,-0.392 -0.866,-0.493 -0.835,-0.548 -0.786,-0.618 -0.727,-0.686 -0.654,-0.756 -0.559,-0.829 -0.484,-0.875 -0.421,-0.907 -0.411,-0.911 -0.384,-0.923 -0.287,-0.957',
+            '-0.811,-0.018 -0.752,-0.055 -0.657,-0.035 -0.609,0.026 -0.498,0.094 -0.470,0.183 -0.391,0.243 -0.275,0.284 -0.223,0.336 -0.269,0.415 -0.291,0.521 -0.372,0.572 -0.401,0.623 -0.432,0.682 -0.464,0.734 -0.493,0.751 -0.482,0.799 -0.443,0.859 -0.450,0.870 -0.506,0.831 -0.567,0.772 -0.613,0.705 -0.653,0.607 -0.698,0.466 -0.785,0.355 -0.842,0.228 -0.856,0.158 -0.848,0.093 -0.826,0.030',
+            '-0.279,-0.760 -0.219,-0.754 -0.155,-0.783 -0.113,-0.813 -0.018,-0.848 0.009,-0.891 -0.006,-0.927 -0.033,-0.947 -0.085,-0.946 -0.154,-0.928 -0.215,-0.884 -0.220,-0.844 -0.232,-0.802',
+            '0.084,-0.053 0.081,-0.157 0.140,-0.261 0.191,-0.347 0.236,-0.415 0.338,-0.439 0.423,-0.448 0.451,-0.402 0.510,-0.377 0.574,-0.371 0.620,-0.398 0.694,-0.399 0.732,-0.356 0.805,-0.234 0.853,-0.159 0.886,-0.118 0.923,-0.117 0.935,-0.144 0.944,-0.055 0.920,0.047 0.890,0.146 0.866,0.236 0.853,0.348 0.797,0.439 0.745,0.533 0.707,0.581 0.643,0.645 0.576,0.671 0.533,0.679 0.539,0.618 0.536,0.551 0.532,0.467 0.565,0.338 0.557,0.257 0.515,0.127 0.452,0.099 0.373,0.107 0.292,0.113 0.242,0.133 0.155,0.068 0.085,-0.001',
+            '0.165,-0.519 0.175,-0.458 0.223,-0.414 0.273,-0.432 0.291,-0.466 0.315,-0.515 0.344,-0.533 0.371,-0.551 0.416,-0.526 0.485,-0.473 0.461,-0.501 0.493,-0.506 0.405,-0.571 0.408,-0.586 0.488,-0.537 0.512,-0.510 0.555,-0.469 0.567,-0.489 0.570,-0.522 0.586,-0.543 0.551,-0.583 0.548,-0.615 0.591,-0.645 0.635,-0.609 0.679,-0.592 0.709,-0.589 0.759,-0.537 0.814,-0.427 0.871,-0.361 0.933,-0.265 0.916,-0.336 0.898,-0.387 0.841,-0.424 0.806,-0.464 0.750,-0.511 0.699,-0.508 0.677,-0.501 0.695,-0.453 0.710,-0.404 0.694,-0.399 0.633,-0.419 0.686,-0.485 0.654,-0.494 0.629,-0.469 0.570,-0.522 0.570,-0.539 0.543,-0.532 0.505,-0.525 0.412,-0.557 0.359,-0.550 0.354,-0.534 0.309,-0.529 0.253,-0.554 0.233,-0.582 0.196,-0.594 0.224,-0.610 0.256,-0.641 0.273,-0.670 0.294,-0.685 0.280,-0.723 0.304,-0.714 0.311,-0.688 0.346,-0.693 0.392,-0.714 0.392,-0.742 0.383,-0.780 0.370,-0.803 0.315,-0.828 0.293,-0.834 0.282,-0.832 0.299,-0.813 0.292,-0.799 0.286,-0.761 0.273,-0.748 0.227,-0.754 0.214,-0.777 0.233,-0.824 0.221,-0.854 0.234,-0.878 0.270,-0.875 0.352,-0.851 0.372,-0.859 0.360,-0.885 0.339,-0.909 0.293,-0.938 0.500,-0.851 0.568,-0.784 0.636,-0.684 0.602,-0.649 0.591,-0.645',
+            '0.188,-0.622 0.246,-0.640 0.245,-0.667 0.220,-0.678 0.192,-0.702 0.164,-0.725 0.146,-0.724 0.154,-0.699 0.168,-0.688 0.192,-0.676 0.180,-0.648 0.177,-0.621',
+            '0.128,-0.646 0.170,-0.648 0.162,-0.674 0.139,-0.685 0.122,-0.672',
+            '-0.015,-0.799 0.030,-0.789 0.058,-0.800 0.043,-0.809 0.000,-0.809',
+            '0.828,0.490 0.858,0.463 0.915,0.331 0.925,0.270 0.906,0.309 0.858,0.414',
+            '-0.826,-0.279 -0.780,-0.281 -0.750,-0.217 -0.779,-0.225 -0.803,-0.270',
+            '-0.745,-0.198 -0.698,-0.204 -0.684,-0.165 -0.728,-0.175',
+        ];
+
+        const Jorden = ({ cx, cy, R }) => (
+            <g transform={`translate(${cx} ${cy}) scale(${R})`}>
+                {/* atmosfären: ett tunt, ljusblått skikt utanför ytan */}
+                <circle cx="0" cy="0" r="1.045" fill="url(#atmosG)" />
+                <circle cx="0" cy="0" r="1" fill="url(#havG)" />
+                <g clipPath="url(#jordKlipp)" fill="#8fbf6a" stroke="#4f7f3a" strokeWidth="0.8"
+                   strokeLinejoin="round" vectorEffect="non-scaling-stroke">
+                    {KONTINENTER.map((p, i) => <polygon key={i} points={p} vectorEffect="non-scaling-stroke" />)}
+                </g>
+                <circle cx="0" cy="0" r="1" fill="url(#skuggG)" />
+                <circle cx="0" cy="0" r="1" fill="none" stroke="#153a5f" strokeWidth="1.2" vectorEffect="non-scaling-stroke" />
+            </g>
+        );
+
+        // ── Satelliten: rymdteleskopet Hubble sett från sidan. Lokala
+        //    koordinater: +x = framåt (rörelseriktningen), origo i mitten. ──
+        const Satellit = () => (
+            <g>
+                {/* solpanelernas master */}
+                <line x1="-2" y1="-9" x2="-2" y2="-30" stroke="#6b7280" strokeWidth="1.6" />
+                <line x1="-2" y1="9" x2="-2" y2="30" stroke="#6b7280" strokeWidth="1.6" />
+                {/* solpaneler */}
+                <rect x="-16" y="-31" width="28" height="9" rx="1" fill="url(#panelG)" stroke="#1e3a5f" strokeWidth="1.1" />
+                <rect x="-16" y="22" width="28" height="9" rx="1" fill="url(#panelG)" stroke="#1e3a5f" strokeWidth="1.1" />
+                {[-11, -6, -1, 4, 9].map(x => (
+                    <g key={x}>
+                        <line x1={x} y1="-31" x2={x} y2="-22" stroke="#1e3a5f" strokeWidth="0.6" opacity="0.7" />
+                        <line x1={x} y1="22" x2={x} y2="31" stroke="#1e3a5f" strokeWidth="0.6" opacity="0.7" />
+                    </g>
+                ))}
+                {/* bakre, vidare sektion med instrumenten */}
+                <rect x="-27" y="-8" width="14" height="16" rx="2" fill="url(#kroppG)" stroke="#3a3f47" strokeWidth="1.1" />
+                {/* teleskoptuben */}
+                <rect x="-14" y="-6.5" width="36" height="13" rx="1.5" fill="url(#kroppG)" stroke="#3a3f47" strokeWidth="1.1" />
+                <line x1="-4" y1="-6.5" x2="-4" y2="6.5" stroke="#3a3f47" strokeWidth="0.8" opacity="0.6" />
+                <line x1="8" y1="-6.5" x2="8" y2="6.5" stroke="#3a3f47" strokeWidth="0.8" opacity="0.6" />
+                {/* öppningen med den uppfällda luckan */}
+                <rect x="21" y="-5.5" width="2.5" height="11" fill="#1f2530" />
+                <path d="M 22,-6.5 L 30,-14 L 30.5,-12.6 L 23.4,-5.6 Z" fill="#c9ced6" stroke="#3a3f47" strokeWidth="0.9" strokeLinejoin="round" />
+                {/* antenn */}
+                <line x1="-20" y1="8" x2="-20" y2="15" stroke="#6b7280" strokeWidth="1.2" />
+                <ellipse cx="-20" cy="15.5" rx="4" ry="1.6" fill="#e6e9ee" stroke="#3a3f47" strokeWidth="0.8" />
+            </g>
+        );
+
+        // Kraschen: en liten glödande brottyta där satelliten träffar jorden
+        const Krasch = ({ x, y, ang }) => (
+            <g transform={`translate(${x} ${y}) rotate(${ang})`}>
+                {[-60, -35, -12, 12, 35, 60].map(a => (
+                    <line key={a} x1="0" y1="0" x2={Math.cos((a - 90) * Math.PI / 180) * 22} y2={Math.sin((a - 90) * Math.PI / 180) * 22}
+                          stroke="#e0701a" strokeWidth="2.4" strokeLinecap="round" />
+                ))}
+                <circle cx="0" cy="0" r="7" fill="#f2a33a" stroke="#c8324a" strokeWidth="2" />
+            </g>
+        );
+
+        // ── SVG-pil: mot ljus papperscen behövs ingen vit kontur ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 5.5, head = 16, dashed = false }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42;
+            const hd = Math.max(10, Math.min(head, len * 0.9));
+            const bx = x2 - hd * 0.82 * Math.cos(ang);
+            const by = y2 - hd * 0.82 * Math.sin(ang);
+            const pL = [x2 - hd * Math.cos(ang - hw), y2 - hd * Math.sin(ang - hw)];
+            const pR = [x2 - hd * Math.cos(ang + hw), y2 - hd * Math.sin(ang + hw)];
+            return (
+                <g>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dashed ? '6 4' : undefined} />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
+                             stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Etikett vid pilspets: ett stycke bortom spetsen i pilens riktning
+        const tipLabel = (tip, dir, extra = 14) => {
+            const x = tip.x + dir.x * extra, y = tip.y + dir.y * extra;
+            const anchor = dir.x > 0.35 ? 'start' : (dir.x < -0.35 ? 'end' : 'middle');
+            const dy = dir.y > 0.35 ? 15 : (dir.y < -0.35 ? -5 : 5);
+            return { x, y: y + dy, anchor };
+        };
+
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 118, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(/\s/g, '').replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+
+        // ── Scenen ─────────────────────────────────────────────────
+        const VBW = 820, VBH = 540;
+        // Vyns mittpunkt förskjuten åt vänster och nedåt: fartskalan ligger
+        // överst och inställningsrutan uppe till höger.
+        const X0 = 340, Y0 = 312;
+        const AVAIL_W = 600, AVAIL_H = 386;
+
+        // Fartskalan: den pedagogiska kärnan. Visar var den aktuella farten
+        // ligger i förhållande till kraschfarten, cirkelfarten och
+        // flykthastigheten på uppskjutningsavståndet.
+        const Fartskala = ({ r0, vNu, typ, el }) => {
+            const x0 = 64, x1 = 500, y = 66;
+            const vk = vKrasch(r0), vc = vCirc(r0), ve = vEsc(r0);
+            const vmax = Math.max(ve * 1.22, vNu * 1.05);
+            const X = (v) => x0 + (x1 - x0) * Math.min(v, vmax) / vmax;
+            const seg = (a, b, col) => (
+                <rect x={X(a)} y={y - 6} width={Math.max(0, X(b) - X(a))} height="12" fill={col} opacity="0.32" />
+            );
+            // Etiketterna under skalan ankras bort från sitt streck: kraschfarten
+            // och cirkelfarten ligger bara ett par procent isär i låga banor.
+            const tick = (v, lbl, col, anchor, dx) => (
+                <g>
+                    <line x1={X(v)} y1={y - 10} x2={X(v)} y2={y + 10} stroke={col} strokeWidth="2" />
+                    <text x={X(v) + dx} y={y + 23} textAnchor={anchor} fontSize="12" fontWeight="600" fill={col}>{lbl}</text>
+                </g>
+            );
+            const rubrik = {
+                krasch:   ['Kraschbana', 'perigeum ' + (el.rp < RJ ? fmtKm(RJ - el.rp) : '') + ' under jordytan'],
+                ellipsIn: ['Ellipsbana, för långsam för cirkel', 'faller inåt men missar jorden, perigeum ' + fmtKm(el.rp - RJ)],
+                cirkel:   ['Cirkelbana', 'gravitationskraften är exakt den centripetalkraft som krävs'],
+                ellipsUt: ['Ellipsbana, för snabb för cirkel', 'stiger utåt och kommer tillbaka, apogeum ' + fmtKm(el.ra - RJ)],
+                flykt:    ['Flyktbana', 'farten når flykthastigheten, satelliten återvänder aldrig'],
+            }[typ];
+            const rubCol = { krasch: COL.krasch, ellipsIn: COL.ellipsIn, cirkel: COL.cirkel, ellipsUt: COL.ellipsUt, flykt: COL.flykt }[typ];
+            const xN = X(vNu);
+            return (
+                <g style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <text x={(x0 + x1) / 2} y="18" textAnchor="middle" fontSize="16.5" fontWeight="700" fill={rubCol}>{rubrik[0]}</text>
+                    <text x={(x0 + x1) / 2} y="33" textAnchor="middle" fontSize="12.5" fill="rgba(15,22,32,0.75)">{rubrik[1]}</text>
+                    {seg(0, vk, COL.krasch)}
+                    {seg(vk, vc, COL.ellipsIn)}
+                    {seg(vc, ve, COL.ellipsUt)}
+                    {seg(ve, vmax, COL.flykt)}
+                    <line x1={x0} y1={y} x2={x1} y2={y} stroke="rgba(15,22,32,0.55)" strokeWidth="1" />
+                    {tick(vk, 'krasch', COL.krasch, 'end', -4)}
+                    {tick(vc, 'cirkelfart', COL.cirkel, 'start', 4)}
+                    {tick(ve, 'flykthastighet', COL.flykt, 'start', 4)}
+                    <text x={x0 - 6} y={y + 4} textAnchor="end" fontSize="11" fill="rgba(15,22,32,0.6)">0</text>
+                    {/* nålen: farten just nu */}
+                    <polygon points={`${xN},${y - 9} ${xN - 6},${y - 19} ${xN + 6},${y - 19}`} fill={COL.fart} stroke="rgba(15,22,32,0.3)" strokeWidth="1" />
+                    <text x={xN} y={y - 22} textAnchor="middle" fontSize="12" fontWeight="700" fill={COL.fart}>
+                        <tspan fontStyle="italic">v</tspan> = {fmtNum(vNu)} m/s
+                    </text>
+                </g>
+            );
+        };
+
+        const Scene = ({ sim, view, show, m, r0, typ }) => {
+            const s = view.s;
+            const toPx = (x, y) => [X0 + (x - view.cx) * s, Y0 - (y - view.cy) * s];
+            const [ex, ey] = toPx(0, 0);
+            const Rpx = RJ * s;
+            const [px, py] = toPx(sim.x, sim.y);
+            const el = sim.el;
+
+            // riktningar på skärmen (y nedåt)
+            const vmag = Math.hypot(sim.vx, sim.vy) || 1;
+            const dir = { x: sim.vx / vmag, y: -sim.vy / vmag };
+            const rr = Math.hypot(sim.x, sim.y) || 1;
+            const inward = { x: -sim.x / rr, y: sim.y / rr };
+            const rotDeg = Math.atan2(dir.y, dir.x) * 180 / Math.PI;
+
+            // hastighetspilen: från satellitens framkant, längd ∝ v
+            const LV = Math.min(14 + vmag / 7561 * 56, 120);
+            const vStart = { x: px + dir.x * 30, y: py + dir.y * 30 };
+            const vTip = { x: vStart.x + dir.x * LV, y: vStart.y + dir.y * LV };
+            const vl = tipLabel(vTip, dir);
+
+            // gravitationskraften: från satellitens mitt, mot jordens medelpunkt,
+            // längd ∝ F (relativt kraften vid uppskjutningen); spetsen når
+            // aldrig ned i jorden
+            const F = MU * m / (rr * rr);
+            const F0 = MU * m / (r0 * r0);
+            const capF = Math.max(20, (rr - RJ) * s - 14);
+            const LF = Math.min(64 * F / F0, capF);
+            const fTip = { x: px + inward.x * LF, y: py + inward.y * LF };
+            // Etiketten på satellitens UTSIDA, i förlängningen av kraftens
+            // verkningslinje bort från jorden: mellan banan och jordytan finns
+            // ingen fri yta i en låg bana (Hubble: 17 px), och längs banan
+            // ligger spåret och den förutsagda banan.
+            const outward = { x: -inward.x, y: -inward.y };
+            const fl = tipLabel({ x: px + outward.x * 34, y: py + outward.y * 34 }, outward, 8);
+            // I övre högra kvadranten flödar texten åt vänster, bort från
+            // inställningsrutan uppe till höger.
+            if (outward.x > 0 && outward.y < 0) fl.anchor = 'end';
+
+            const rMid = toPx(sim.x * 0.5, sim.y * 0.5);
+            const rl = tipLabel({ x: rMid[0], y: rMid[1] }, dir, 12);
+
+            const path = (pts) => pts.map(p => { const q = toPx(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+            const crashPx = sim.krasch ? toPx(sim.krasch.x, sim.krasch.y) : null;
+
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <clipPath id="jordKlipp"><circle cx="0" cy="0" r="1" /></clipPath>
+                        <radialGradient id="havG" cx="0.38" cy="0.32" r="0.8">
+                            <stop offset="0" stopColor="#5aa7dd" />
+                            <stop offset="0.55" stopColor="#2f74b5" />
+                            <stop offset="1" stopColor="#173f6b" />
+                        </radialGradient>
+                        <radialGradient id="skuggG" cx="0.38" cy="0.32" r="0.75">
+                            <stop offset="0.6" stopColor="#000" stopOpacity="0" />
+                            <stop offset="1" stopColor="#000" stopOpacity="0.35" />
+                        </radialGradient>
+                        <radialGradient id="atmosG" cx="0.5" cy="0.5" r="0.5">
+                            <stop offset="0.93" stopColor="#8fc6ef" stopOpacity="0.55" />
+                            <stop offset="1" stopColor="#8fc6ef" stopOpacity="0" />
+                        </radialGradient>
+                        <linearGradient id="kroppG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f0f2f5" />
+                            <stop offset="55%" stopColor="#b9c0c9" />
+                            <stop offset="100%" stopColor="#7d8591" />
+                        </linearGradient>
+                        <linearGradient id="panelG" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#3b6fb6" />
+                            <stop offset="100%" stopColor="#24457a" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+
+                    {/* cirkelbanan för jämförelse */}
+                    {show.ref && (
+                        <circle cx={ex} cy={ey} r={r0 * s} fill="none" stroke={COL.ref} strokeWidth="1.6" strokeDasharray="2 5" />
+                    )}
+
+                    {/* den förutsagda banan */}
+                    {show.bana && sim.conic.length > 1 && (
+                        <polyline points={path(sim.conic)} fill="none" stroke={COL.bana} strokeWidth="1.5"
+                                  strokeDasharray="7 5" opacity="0.7" />
+                    )}
+
+                    {/* spåret: vägen satelliten redan har färdats */}
+                    {show.spar && sim.trail.length > 1 && (
+                        <polyline points={path(sim.trail) + ' ' + px.toFixed(1) + ',' + py.toFixed(1)} fill="none"
+                                  stroke={COL.spar} strokeWidth="2.2" opacity="0.8" strokeLinejoin="round" />
+                    )}
+
+                    <Jorden cx={ex} cy={ey} R={Rpx} />
+                    <circle cx={ex} cy={ey} r="2.6" fill={COL.ink} />
+
+                    {/* avståndet r från jordens medelpunkt */}
+                    {show.radie && sim.st !== 'krasch' && (
+                        <g>
+                            <line x1={ex} y1={ey} x2={px} y2={py} stroke={COL.ink} strokeWidth="1.5" strokeDasharray="6 5" opacity="0.7" />
+                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="16" fontWeight="700" fill={COL.ink}>
+                                <tspan fontStyle="italic">r</tspan> = {fmtKm(rr)}
+                            </text>
+                        </g>
+                    )}
+
+                    {/* satelliten (förstorad, riktad längs hastigheten) */}
+                    {sim.st !== 'krasch' && (
+                        <g transform={`translate(${px} ${py}) rotate(${rotDeg})`}>
+                            <Satellit />
+                        </g>
+                    )}
+                    {crashPx && <Krasch x={crashPx[0]} y={crashPx[1]} ang={Math.atan2(-sim.krasch.x, sim.krasch.y) * 180 / Math.PI} />}
+
+                    {/* gravitationskraften: i cirkelbanan är den hela centripetalkraften */}
+                    {show.kraft && sim.st !== 'krasch' && LF > 6 && (
+                        <g>
+                            <Arrow x1={px} y1={py} x2={fTip.x} y2={fTip.y} color={COL.tyngd} />
+                            <circle cx={px} cy={py} r="2.8" fill={COL.tyngd} />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
+                                <tspan dy="-4"> = {fmtNum(F)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hastigheten */}
+                    {show.fart && sim.st !== 'krasch' && (
+                        <g>
+                            <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6} head={17} />
+                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="16" fontWeight="700" fill={COL.fart}>
+                                <tspan fontStyle="italic">v</tspan> = {fmtNum(vmag)} m/s
+                            </text>
+                        </g>
+                    )}
+
+                    <Fartskala r0={r0} vNu={vmag} typ={sim.st === 'flykt' ? 'flykt' : typ} el={el} />
+
+                    {sim.st === 'krasch' && (
+                        <text x={X0} y={VBH - 22} textAnchor="middle" fontSize="16" fontWeight="700" fill={COL.krasch}>
+                            Satelliten störtade mot jordytan efter {fmtTid(sim.t)}. Tryck Börja om.
+                        </text>
+                    )}
+                    {sim.st === 'flykt' && (
+                        <text x={X0} y={VBH - 22} textAnchor="middle" fontSize="16" fontWeight="700" fill={COL.flykt}>
+                            Satelliten är nu mer än 60 jordradier bort och kommer aldrig tillbaka.
+                        </text>
+                    )}
+                </svg>
+            );
+        };
+
+        // ── Formelkort med ord-etiketter ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{topLabel}</span>
+                <span className="fnum">{top}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
+                <span className="flbl">{bottomLabel}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Gravitationskraft"><em>F</em><sub>G</sub></Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Grav.konst. · massa · jordens massa" top={<span><em>G</em>&thinsp;·&thinsp;<em>m</em>&thinsp;·&thinsp;<em>m</em><sub>j</sub></span>}
+                      bottomLabel="Avstånd²" bottom={<span><em>r</em>²</span>} />
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Centripetalkraft"><em>F</em><sub>C</sub></Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Massa · fart²" top={<span><em>m</em>&thinsp;·&thinsp;<em>v</em>²</span>}
+                      bottomLabel="Banradie" bottom={<em>r</em>} />
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Cirkelbana"><em>F</em><sub>G</sub> = <em>F</em><sub>C</sub></Vbl>
+                <span className="fnum">⟹</span>
+                <Vbl label="Fart²"><em>v</em>²</Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Grav.konst. · jordens massa" top={<span><em>G</em>&thinsp;·&thinsp;<em>m</em><sub>j</sub></span>}
+                      bottomLabel="Banradie" bottom={<em>r</em>} />
+            </div>
+        );
+
+        // Färdiga försök: höjd (km), fart (m/s), massa (kg)
+        const PRESETS = [
+            { id: 'hubble', namn: 'Hubble', h: 590, v: 7560, m: 11110, text: 'Rymdteleskopet Hubble, exemplet i genomgången: 7 560 m/s på 590 km höjd.' },
+            { id: 'iss', namn: 'Rymdstationen ISS', h: 420, v: null, m: 420000, text: 'Den internationella rymdstationen på 420 km höjd, ett varv på drygt 90 minuter.' },
+            { id: 'gps', namn: 'GPS-satellit', h: 20200, v: null, m: 1630, text: 'En GPS-satellit på 20 200 km höjd går två varv om dygnet.' },
+            { id: 'geo', namn: 'Geostationär', h: 35786, v: null, m: 3500, text: 'På 35 786 km höjd tar ett varv exakt ett dygn: satelliten står stilla över samma punkt på ekvatorn.' },
+            { id: 'mane', namn: 'Månens avstånd', h: 378000, v: 1020, m: 50000, text: 'En satellit på månens avstånd, 384 400 km från jordens medelpunkt, behöver bara 1 020 m/s och tar 27 dygn på ett varv.' },
+        ];
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [h, setH] = useState(590);          // starthöjd över jordytan (km)
+            const [v0, setV0] = useState(7560);       // fart vid uppskjutningen (m/s)
+            const [m, setM] = useState(11110);        // satellitens massa (kg)
+            const [tl, setTl] = useState(Math.log10(300));   // log10 av tidsförkortningen
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState({ kraft: true, fart: true, bana: true, spar: true, ref: true, radie: false });
+            const [preset, setPreset] = useState('hubble');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            const lastRef = useRef(null);
+            const simRef = useRef(null);
+            const viewRef = useRef({ cx: 0, cy: 0, s: 1 });
+            const [, setTick] = useState(0);
+
+            const r0 = RJ + h * 1000;
+            const tidsfaktor = Math.pow(10, tl);
+
+            // Vyn: hela den förutsagda banan, jorden och satelliten ska rymmas
+            const viewTarget = (sim) => {
+                let minx = -RJ, maxx = RJ, miny = -RJ, maxy = RJ;
+                const take = (x, y) => { if (x < minx) minx = x; if (x > maxx) maxx = x; if (y < miny) miny = y; if (y > maxy) maxy = y; };
+                sim.conic.forEach(p => take(p[0], p[1]));
+                take(sim.x, sim.y);
+                const bw = (maxx - minx) * 1.14, bh = (maxy - miny) * 1.14;
+                return { cx: (minx + maxx) / 2, cy: (miny + maxy) / 2, s: Math.min(AVAIL_W / bw, AVAIL_H / bh) };
+            };
+
+            const launch = () => {
+                const rr = RJ + h * 1000;
+                const sim = { x: 0, y: rr, vx: v0, vy: 0, t: 0, st: 'flyger', trail: [], krasch: null };
+                sim.el = elements(sim.x, sim.y, sim.vx, sim.vy);
+                sim.conic = conicPoints(sim.el, Math.max(4 * rr, 2.5 * RJ));
+                simRef.current = sim;
+                viewRef.current = viewTarget(sim);
+                lastRef.current = null;
+                setTick(t => t + 1);
+            };
+            if (!simRef.current) launch();
+            useEffect(() => { launch(); setRunning(true); }, [h, v0]);
+
+            // animationsloop
+            useEffect(() => {
+                if (!running) { lastRef.current = null; return; }
+                let raf;
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dtReal = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const sim = simRef.current;
+                    if (sim.st === 'flyger') {
+                        let dt = dtReal * tidsfaktor;
+                        // delsteg så att satelliten aldrig vrider sig mer än
+                        // ungefär en halv grad kring jorden per steg
+                        const rr = Math.hypot(sim.x, sim.y), vv = Math.hypot(sim.vx, sim.vy);
+                        const n = Math.max(1, Math.min(600, Math.ceil(dt * vv / (rr * 0.008))));
+                        const hDt = dt / n;
+                        for (let k = 0; k < n; k++) {
+                            rk4(sim, hDt);
+                            sim.t += hDt;
+                            const rNu = Math.hypot(sim.x, sim.y);
+                            if (rNu <= RJ) {
+                                // kraschen: flytta ut punkten på jordytan
+                                const f = RJ / rNu;
+                                sim.x *= f; sim.y *= f;
+                                sim.krasch = { x: sim.x, y: sim.y };
+                                sim.st = 'krasch';
+                                break;
+                            }
+                            if (rNu > R_ESCAPE && sim.el.E >= 0) { sim.st = 'flykt'; break; }
+                        }
+                        // spåret: en punkt när satelliten flyttat sig tillräckligt
+                        const last = sim.trail[sim.trail.length - 1];
+                        const rNu = Math.hypot(sim.x, sim.y);
+                        if (!last || Math.hypot(sim.x - last[0], sim.y - last[1]) > rNu * 0.012) {
+                            sim.trail.push([sim.x, sim.y]);
+                            if (sim.trail.length > 2500) sim.trail.shift();
+                        }
+                    }
+                    // vyn glider mjukt mot sitt mål
+                    const vt = viewTarget(sim), vw = viewRef.current;
+                    const k = 1 - Math.pow(0.02, dtReal);
+                    vw.cx += (vt.cx - vw.cx) * k; vw.cy += (vt.cy - vw.cy) * k;
+                    vw.s = Math.exp(Math.log(vw.s) + (Math.log(vt.s) - Math.log(vw.s)) * k);
+                    setTick(t => t + 1);
+                    raf = requestAnimationFrame(step);
+                };
+                raf = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(raf);
+            }, [running, tidsfaktor]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            const reset = () => { launch(); setRunning(true); };
+            const setHoch = (hh) => { setPreset(null); setH(Math.max(HMIN, Math.min(HMAX, hh))); };
+            const setVoch = (vv) => { setPreset(null); setV0(Math.max(0, Math.min(VMAX, vv))); };
+            const valjPreset = (p) => {
+                setPreset(p.id);
+                setH(p.h); setM(p.m);
+                setV0(p.v != null ? p.v : Math.round(vCirc(RJ + p.h * 1000)));
+            };
+
+            const sim = simRef.current;
+            const el = sim.el;
+            const typ = klassa(el, r0);
+            const rr = Math.hypot(sim.x, sim.y), vv = Math.hypot(sim.vx, sim.vy);
+            const F = MU * m / (rr * rr);
+            const Ek = m * vv * vv / 2, Ep = -MU * m / rr;
+            const primaryLabel = running ? 'Pausa' : 'Fortsätt';
+            const presetInfo = PRESETS.find(p => p.id === preset);
+            const typCol = { krasch: COL.krasch, ellipsIn: COL.ellipsIn, cirkel: COL.cirkel, ellipsUt: COL.ellipsUt, flykt: COL.flykt }[typ];
+
+            const sliders = (St) => (
+                <React.Fragment>
+                    <St label="Höjd över jordytan (<em>h</em>)" value={Math.log10(h)} min={Math.log10(HMIN)} max={Math.log10(HMAX)} step={0.004}
+                        onChange={(x) => setHoch(Math.round(Math.pow(10, x)))}
+                        valueNode={<NumInput value={h} min={HMIN} max={HMAX} fmtFn={(x) => fmtNum(x, 0)} unit="km" onCommit={setHoch} />} />
+                    <St label="Fart vid uppskjutningen (<em>v</em>)" value={v0} min={0} max={VMAX} step={10}
+                        onChange={setVoch}
+                        valueNode={<NumInput value={v0} min={0} max={VMAX} fmtFn={(x) => fmtNum(x, 0)} unit="m/s" onCommit={setVoch} />} />
+                    <St label="Satellitens massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={10}
+                        onChange={setM}
+                        valueNode={<NumInput value={m} min={1} max={null} fmtFn={(x) => fmtNum(x, 0)} unit="kg" onCommit={setM} />} />
+                    <St label="Tidsförkortning" value={tl} min={TLMIN} max={TLMAX} step={0.02}
+                        onChange={setTl}
+                        valueNode={<span className="num-unit">1 s = {fmtTid(tidsfaktor)}</span>} />
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                <div className="scene-toggles">
+                    <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                            aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                            <path d="M6 6l12 12M18 6L6 18" />
+                        </svg>
+                    </button>
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
+                        <span className="st-swatch" style={{ background: COL.tyngd }}></span>
+                        <span>Gravitationskraft <em>F</em><sub>G</sub></span></label>
+                    <label><input type="checkbox" checked={show.fart} onChange={() => tShow('fart')} />
+                        <span className="st-swatch" style={{ background: COL.fart }}></span>
+                        <span>Hastighet <em>v</em></span></label>
+                    <label><input type="checkbox" checked={show.bana} onChange={() => tShow('bana')} />
+                        <span className="st-swatch" style={{ background: COL.bana, opacity: 0.7 }}></span>
+                        <span>Förutsagd bana</span></label>
+                    <label><input type="checkbox" checked={show.spar} onChange={() => tShow('spar')} />
+                        <span className="st-swatch" style={{ background: COL.spar }}></span>
+                        <span>Spår</span></label>
+                    <label><input type="checkbox" checked={show.ref} onChange={() => tShow('ref')} />
+                        <span className="st-swatch" style={{ background: COL.ref }}></span>
+                        <span>Cirkelbana för jämförelse</span></label>
+                    <label><input type="checkbox" checked={show.radie} onChange={() => tShow('radie')} />
+                        <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.6)' }}></span>
+                        <span>Avstånd <em>r</em></span></label>
+                    {/* Glidare, färdiga försök och styrknappar BARA i fullskärm.
+                        I normalläget bor de i sidopanelen, aldrig dubblerade. */}
+                    {isFullscreen && (
+                        <React.Fragment>
+                            <div className="st-title mt">Reglage</div>
+                            <div className="st-sliders">{sliders(StSlider)}</div>
+                            <div className="st-title mt">Färdiga försök</div>
+                            <div className="st-presets">
+                                {PRESETS.map(p => (
+                                    <button key={p.id} className={'btn-toggle' + (preset === p.id ? ' active' : '')} onClick={() => valjPreset(p)}>{p.namn}</button>
+                                ))}
+                            </div>
+                            <div className="st-actions">
+                                <button className="btn-toggle" onClick={() => setRunning((rr) => !rr)}>{primaryLabel}</button>
+                                <button className="btn-toggle" onClick={reset}>Börja om</button>
+                            </div>
+                        </React.Fragment>
+                    )}
+                </div>
+                );
+            };
+
+            const Avl = ({ val, lbl, col }) => (
+                <div>
+                    <div style={{ color: col || 'var(--lab-ink)', fontWeight: 700, fontSize: 15 }}>{val}</div>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: lbl }} />
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Satellit i omloppsbana
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Satellit i omloppsbana</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En satellit hålls kvar i sin bana av en enda kraft: <strong>gravitationskraften</strong> från jorden.
+                            I en cirkelbana är den exakt den <strong>centripetalkraft</strong> som krävs, och det ger en bestämd
+                            fart för varje höjd. Skjut upp satelliten med en annan fart och se vad som händer: för långsamt
+                            faller den inåt i en ellips, eller störtar mot jordytan, och för snabbt stiger den utåt i en ellips
+                            eller lämnar jorden för gott. Utgångsläget är genomgångens exempel med rymdteleskopet Hubble.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scene sim={sim} view={viewRef.current} show={show} m={m} r0={r0} typ={typ} />
+                                    <div className="scene-hint">
+                                        Jorden och banan är i skala, satelliten är förstorad. Luftmotstånd försummas.
+                                    </div>
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Färdiga försök</div>
+                                    <div className="preset-grid">
+                                        {PRESETS.map(p => (
+                                            <button key={p.id} className={'btn-toggle btn-small' + (preset === p.id ? ' active' : '')} onClick={() => valjPreset(p)}>{p.namn}</button>
+                                        ))}
+                                    </div>
+                                    {presetInfo && (
+                                        <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>{presetInfo.text}</p>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Reglage</div>
+                                    {sliders(({ label, value, min, max, step, onChange, valueNode }) => (
+                                        <Slider label={label} value={value} min={min} max={max} step={step} onChange={onChange}>{valueNode}</Slider>
+                                    ))}
+                                    <div className="flex gap-2 mt-1 flex-wrap">
+                                        <button className="btn-toggle btn-small" onClick={() => setVoch(Math.round(vCirc(r0)))}>Sätt cirkelfart ({fmtNum(vCirc(r0))} m/s)</button>
+                                        <button className="btn-toggle btn-small" onClick={() => setVoch(Math.round(vEsc(r0)))}>Sätt flykthastighet ({fmtNum(vEsc(r0))} m/s)</button>
+                                    </div>
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Ändrar du höjden eller farten startar satelliten om från startpunkten, rakt ovanför jorden,
+                                        med hastigheten riktad åt höger. Massan påverkar kraften och energierna men inte banan.
+                                    </p>
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-toggle flex-1" onClick={() => setRunning((rr) => !rr)}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning just nu</div>
+                                    <div className="grid grid-cols-2 gap-2 text-center">
+                                        <Avl val={fmtNum(vv) + ' m/s'} lbl="fart <em>v</em>" col={COL.fart} />
+                                        <Avl val={fmtKm(rr - RJ)} lbl="höjd över jordytan <em>h</em>" />
+                                        <Avl val={fmtNum(F) + ' N'} lbl="gravitationskraft <em>F</em><sub>G</sub>" col={COL.tyngd} />
+                                        <Avl val={fmt(F / m, 2) + ' m/s²'} lbl="acceleration <em>F</em><sub>G</sub>/<em>m</em>" />
+                                        <Avl val={fmtNum(vCirc(rr)) + ' m/s'} lbl="cirkelfart på denna höjd" col={COL.cirkel} />
+                                        <Avl val={fmtNum(vEsc(rr)) + ' m/s'} lbl="flykthastighet på denna höjd" col={COL.flykt} />
+                                        <Avl val={el.e < 1 ? fmtTid(el.T) : '–'} lbl="omloppstid <em>T</em>" />
+                                        <Avl val={fmtTid(sim.t)} lbl="tid sedan uppskjutningen" />
+                                        <Avl val={el.rp >= RJ ? fmtKm(el.rp - RJ) : 'under ytan'} lbl="lägsta höjd (perigeum)" />
+                                        <Avl val={el.e < 1 ? fmtKm(el.ra - RJ) : '∞'} lbl="högsta höjd (apogeum)" />
+                                        <Avl val={fmtSci(Ek) + ' J'} lbl="rörelseenergi <em>E</em><sub>k</sub>" />
+                                        <Avl val={fmtSci(Ep) + ' J'} lbl="lägesenergi <em>E</em><sub>p</sub>" />
+                                        <Avl val={fmtSci(Ek + Ep) + ' J'} lbl="total energi <em>E</em><sub>k</sub> + <em>E</em><sub>p</sub>" col={Ek + Ep < 0 ? COL.cirkel : COL.flykt} />
+                                        <Avl val={fmt(el.e, 3)} lbl="banans excentricitet <em>e</em>" />
+                                    </div>
+                                </div>
+
+                                {/* Bantyp */}
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-1">Vad avgör banan?</div>
+                                    <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Enbart farten på den givna höjden. Cirkelfarten är{' '}
+                                        <span style={{ color: COL.cirkel, fontWeight: 600 }}>{fmtNum(vCirc(r0))} m/s</span> här,
+                                        flykthastigheten <span style={{ color: COL.flykt, fontWeight: 600 }}>{fmtNum(vEsc(r0))} m/s</span>,
+                                        och under <span style={{ color: COL.krasch, fontWeight: 600 }}>{fmtNum(vKrasch(r0))} m/s</span> når
+                                        banan ned under jordytan. Just nu:{' '}
+                                        <span style={{ color: typCol, fontWeight: 600 }}>
+                                            {{ krasch: 'kraschbana', ellipsIn: 'ellipsbana med perigeum under startpunkten', cirkel: 'cirkelbana',
+                                               ellipsUt: 'ellipsbana med apogeum över startpunkten', flykt: 'flyktbana' }[typ]}
+                                        </span>.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Gravitationen är centripetalkraften</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Det finns ingen extra kraft som håller satelliten i banan. Gravitationskraften pekar hela tiden
+                                    mot jordens medelpunkt, och i en cirkelbana är den precis så stor som centripetalkraften
+                                    <em> m</em>·<em>v</em>²/<em>r</em> kräver. Sätter man <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub> försvinner
+                                    satellitens massa ur ekvationen: banan beror bara på höjden och farten, aldrig på hur tung satelliten är.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>För långsamt och för snabbt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Med lägre fart än cirkelfarten räcker inte hastigheten i sidled för att missa jorden lika bra:
+                                    satelliten faller inåt, ökar farten och kommer tillbaka upp i en ellips, om den inte hinner
+                                    träffa jordytan först. Med högre fart stiger den utåt, bromsas av gravitationen och vänder i
+                                    apogeum. Når farten flykthastigheten, √2 gånger cirkelfarten, är den totala energin noll eller
+                                    positiv och satelliten kommer aldrig tillbaka.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Lägesenergin långt från jorden</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Nära jordytan duger <em>E</em><sub>p</sub> = <em>m</em>·<em>g</em>·<em>h</em>, men uppe i en bana
+                                    ändras <em>g</em> med höjden. Avläsningen använder därför nollnivån oändligt långt bort och
+                                    <em> E</em><sub>p</sub> = −<em>G</em>·<em>m</em>·<em>m</em><sub>j</sub>/<em>r</em>. Summan
+                                    <em> E</em><sub>k</sub> + <em>E</em><sub>p</sub> är konstant längs hela banan, och dess tecken
+                                    avgör om satelliten är bunden till jorden (negativ) eller fri (noll eller positiv).
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Satelliten är tyngdlös eftersom gravitationen inte når dit upp.”</strong> På Hubbles höjd är
+                                    gravitationskraften fortfarande 84 procent av kraften vid jordytan. Satelliten och allt i den
+                                    faller fritt hela tiden, det är därför astronauterna svävar.</li>
+                                <li><strong>”En tyngre satellit behöver högre fart.”</strong> Nej. Massan står i både gravitationskraften
+                                    och centripetalkraften och kan divideras bort. Prova att ändra massan: kraften ändras, men banan är densamma.</li>
+                                <li><strong>”Om satelliten bromsas faller den rakt ned.”</strong> Den behåller nästan hela sin fart i sidled
+                                    och följer i stället en ellips inåt. Först om perigeum hamnar under jordytan störtar den, och då i en
+                                    lång, flack bana, inte lodrätt.</li>
+                                <li><strong>”Flykthastigheten är farten som krävs för att komma ut i rymden.”</strong> Den är farten som krävs
+                                    för att aldrig komma tillbaka, oavsett hur långt man färdas. En raket som ska nå en bana behöver
+                                    betydligt mindre än så.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -57,11 +57,21 @@
         }
         function restoreMath(html, tokens) {
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            // Skydda attributvärden (data-tip="…<em>s-t</em>-graf…") från
+            // nowrap-omslagen nedan: en <span class="…"> inuti ett attribut
+            // spränger taggen, och resten av tooltipen läcker ut som text i
+            // stycket (hänt i fy1-2.5, påpekat 2026-09-03).
+            const attrs = [];
+            html = html.replace(/\b(data-tip|title|aria-label)="[^"]*"/g, (m) => {
+                attrs.push(m);
+                return '@@RMATTR' + (attrs.length - 1) + '@@';
+            });
             // Håll ihop variabel + bindestreck + efterled ("$x$-termen",
             // "<em>pq</em>-formeln") — annars kan raden brytas efter
             // bindestrecket eller mellan variabeln och bindestrecket.
             html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
                 '<span class="var-compound">$1-$2</span>');
+            html = html.replace(/@@RMATTR(\d+)@@/g, (_, i) => attrs[+i]);
             return html;
         }
 

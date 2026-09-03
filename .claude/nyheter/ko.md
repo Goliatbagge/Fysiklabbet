@@ -26,6 +26,31 @@ Format per post:
   https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
   (tillagd 2026-08-27)
 
+- **Feynmans vägintegral prövad experimentellt för första gången** — själva
+  fundamentet för hur kvantmekaniken räknas, idén att en partikel ”tar alla vägar
+  samtidigt”, har hittills varit ett räknerecept ingen testat direkt. Ingång:
+  interferens, superposition och vad det betyder att en teori prövas. Leta upp
+  originalstudien. Källa (Phys.org 2026-08-31):
+  https://phys.org/news/2026-08-physicists-feynman-path.html
+  (tillagd 2026-09-03)
+
+- **Halleffekten tar en ny riktning** — den klassiska effekten där ett magnetfält
+  böjer av strömmen i en ledare har fåtts att uppträda på ett sätt som inte
+  passar in i standardbilden. Ingång: laddning i magnetfält, kraften på en
+  strömförande ledare, högerhandsregeln. Rakt in i ellärans kärna och därför
+  ovanligt lätt att koppla till. Kontrollera originalstudien. Källa (Phys.org
+  2026-08-31): https://phys.org/news/2026-08-physicists-hall-effect.html
+  (tillagd 2026-09-03)
+
+- **Solneutriner som studsar mot elektroner — uppmätt vid låg energi för första
+  gången** — en ny mätning av hur de allra lägst energetiska neutrinerna från
+  solen sprids mot elektroner. Ingång: neutrinon, elastisk stöt och hur något
+  som nästan aldrig växelverkar ändå går att detektera. OBS: sajten hade en
+  neutrinonyhet 2026-08-15 och en mörk materia-nyhet 2026-08-29, så låt det gå
+  en tid. Källa (Phys.org 2026-09-01):
+  https://phys.org/news/2026-09-energy-solar-neutrinos-electrons.html
+  (tillagd 2026-09-03)
+
 - **Diamantklockan som väger ihop två signaler och slipper temperaturdriften**
   — en atomklocka byggd kring kristallfel i diamant kombinerar två signaler så
   att temperaturberoendet tar ut sig självt. Ingång: vad en klocka egentligen

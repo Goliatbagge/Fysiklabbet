@@ -1991,5 +1991,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Vågen har en våglängd och en frekvens som beror på varandra, och sambandet skiljer sig från det ljud eller ljus följer. Långa spinnvågor, med våglängder på mikrometer, styrs mest av att atomernas små magneter känner av varandra på avstånd, som två kompassnålar bredvid varandra. Korta spinnvågor, kortare än omkring hundra nanometer, styrs i stället av den nära kraften mellan grannar, och där stiger frekvensen snabbt när vågen görs kortare. Typiska frekvenser ligger på miljarder svängningar i sekunden, i mikrovågsområdet, vilket är just därför spinnvågor brukar sättas i gång med en liten mikrovågsantenn ovanpå materialet. Vågen lever inte för evigt: friktionen i materialet dämpar den, och i de flesta metaller dör den ut efter några mikrometer. I yttriumjärngranat, det material som nästan all forskning om spinnvågor utgår från, kan den färdas millimeter.' },
       { type: 'p', html: 'Spinnvågen är den klassiska bilden, med mjukt vickande riktningar. Kvantmekaniskt kommer vågens energi i bestämda portioner, och den minsta portionen kallas magnon, på samma sätt som ljusvågen har fotonen och gittrets ljudvåg har fononen. De två orden beskriver alltså samma sak på två nivåer: spinnvågen är vågen, magnonen är kvantat. Att skicka signaler med spinnvågor i stället för med elektrisk ström är lockande därför att ingen laddning behöver flyttas och ingen värme uppstår på vägen, och forskningen om sådana kretsar går under namnet magnonik.' }
     ]
+  },
+  {
+    id: 'eotvosparametern',
+    term: 'Eötvösparametern',
+    former: ['eötvösparametern', 'eötvösparameter', 'eötvösparametrar', 'eötvöskoefficienten', 'eötvöskoefficient'],
+    kort: 'Ett mått på hur olika fort två ämnen faller. Faller de exakt lika fort är parametern noll, och hittills har varje mätning gett just noll.',
+    relaterade: ['ekvivalensprincipen', 'relativitetsteori', 'atominterferometri'],
+    body: [
+      { type: 'p', html: 'Att allting faller lika fort är lätt att säga men svårt att pröva, eftersom svaret alltid blir ”ja, ungefär”. Det som behövs är ett tal som säger hur nära ett sådant ungefär ligger. Eötvösparametern är det talet: släpp två föremål av olika material bredvid varandra, mät hur mycket deras accelerationer skiljer sig åt, och dela skillnaden med den acceleration de i genomsnitt får. Ett värde på en miljondel betyder att det ena faller en miljondel snabbare än det andra.' },
+      { type: 'p', html: 'Namnet kommer från den ungerske fysikern Loránd Eötvös, som kring sekelskiftet 1900 hängde upp två vikter av olika material i var sin ände av en stång och lät stången hänga i en tunn tråd. Föll materialen olika fort skulle stången vrida sig en aning, och tråden vrida sig med den. Någon vridning gick inte att se, och Eötvös kunde därmed sätta en gräns på ungefär en miljarddel. Hans upplägg lever kvar: de känsligaste mätningarna på marken görs än i dag med torsionsvågar av samma grundidé, fast med laserutläsning och temperaturstyrda vakuumkammare.' },
+      { type: 'p', html: 'Anledningen till att mätningen görs om och om igen är att ett värde skilt från noll skulle vara ett av de största fynden i modern fysik. Den allmänna relativitetsteorin bygger på att talet är exakt noll, medan flera förslag till en mer heltäckande teori tillåter att det är en aning skilt från noll — ofta för att de innehåller ett hittills okänt kraftfält som drar olika hårt i olika ämnen. Rekordet innehas av satelliten MICROSCOPE, som jämförde en platinavikt med en titanvikt i omloppsbana och kom ner till ungefär en tusendels biljondel. Även där blev svaret noll.' }
+    ]
+  },
+  {
+    id: 'mikrogravitation',
+    term: 'Mikrogravitation',
+    former: ['mikrogravitation', 'mikrogravitationen', 'tyngdlöshet', 'tyngdlösheten', 'viktlöshet', 'viktlösheten'],
+    kort: 'Tillståndet ombord på en rymdfarkost i omloppsbana, där allt faller åt samma håll samtidigt och därför inte trycker mot någonting. Tyngdkraften finns kvar och är nästan lika stark som vid marken.',
+    relaterade: ['ekvivalensprincipen'],
+    body: [
+      { type: 'p', html: 'Bilder från en rymdstation brukar beskrivas med orden ”här uppe finns ingen tyngdkraft”, och det är fel. På 400&nbsp;kilometers höjd är avståndet till jordens medelpunkt bara omkring 6&nbsp;procent större än vid marken, och eftersom tyngdkraften avtar med avståndet i kvadrat är den kvar med ungefär 89&nbsp;procent av sin styrka. En människa som väger 70&nbsp;kg skulle på en badrumsvåg där uppe visa nästan 62&nbsp;kg, om vågen bara hade något att stå på.' },
+      { type: 'p', html: 'Just det är hela poängen. Vad en våg mäter är inte tyngdkraften utan hur hårt underlaget trycker tillbaka. En station i omloppsbana faller hela tiden mot jorden, men rör sig samtidigt så fort i sidled att jordytan kröker sig undan lika fort som stationen faller. Banan blir ett fall som aldrig tar slut. Golvet, väggarna, besättningen och kaffedropparna faller alla åt samma håll med samma acceleration, och därför trycker ingenting mot något annat. Exakt samma tillstånd råder i en hiss vars vajer gått av, och i de få sekunder ett högt falltorn ger.' },
+      { type: 'p', html: 'Ordet mikrogravitation används i stället för tyngdlöshet därför att fallet aldrig är helt rent. Delar av farkosten långt från masscentrum går i en aning fel bana, den tunna kvarvarande luften bromsar, och fläktar, pumpar och en besättning som knuffar ifrån väggarna skakar om alltsammans. Det som blir kvar brukar ligga kring en miljondel av tyngdaccelerationen vid marken, vilket är just vad förleden mikro syftar på. För försök som mäter acceleration är den kvarvarande skakningen ofta det som sätter gränsen, och därför byggs det särskilda upphängda skåp och farkoster som skyddar instrumentet från allt utom själva fallet.' }
+    ]
   }
 ];

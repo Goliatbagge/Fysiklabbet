@@ -88,6 +88,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-03-fallet-som-aldrig-tar-slut",
+    date: "2026-09-03",
+    title: "Två sorters rubidium har fallit sida vid sida i 280 dygn — och ingen av dem kom först",
+    deck: "Ombord på den kinesiska rymdstationen har ett 37 kilo tungt laboratorium släppt två isotoper om och om igen. Någon skillnad i deras fall går inte att se, precis som Einstein förutsade.",
+    category: "Relativitetsteori",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-03-fallet-som-aldrig-tar-slut.jpg",
+    imageAlt: "En astronaut i vit rymddräkt arbetar utanför den kinesiska rymdstationen, med de orangeröda solpanelerna och jorden i bakgrunden.",
+    imageCredit: "Foto: China Manned Space Engineering Office (CC BY 4.0)",
+    tags: ["relativitetsteori", "gravitation", "fritt fall", "ekvivalensprincipen", "tröghet", "massa", "atominterferometri", "rymdstation", "mekanik", "precisionsmätning"],
+    sources: [
+      { name: "Phys.org: Physicists test the weak equivalence principle in an orbiting space station", url: "https://phys.org/news/2026-09-physicists-weak-equivalence-principle-orbiting.html" },
+      { name: "npj Microgravity: instrumentet ombord på rymdstationen", url: "https://www.nature.com/articles/s41526-023-00306-y" },
+      { name: "Classical and Quantum Gravity: slutresultatet från MICROSCOPE", url: "https://iopscience.iop.org/article/10.1088/1361-6382/ac84be" }
+    ],
+    research: {
+      citation: "Dan-Fang Zhang med flera, ”In-orbit test of the weak equivalence principle with atom interferometry”, Science Advances 12 (35), 2026. DOI 10.1126/sciadv.aeh4502",
+      url: "https://doi.org/10.1126/sciadv.aeh4502"
+    },
+    body: [
+      { type: 'p', html: 'Släpp en hammare och en fjäder samtidigt, och fjädern dröjer sig kvar i luften. Ta bort luften, och de landar i samma ögonblick. Det är en av fysikens äldsta och mest svårsmälta iakttagelser, och den demonstrerades på månen 1971 av astronauten David Scott inför en tv-kamera.' },
+      { type: 'p', html: 'Att det stämmer ungefär är alltså avgjort sedan länge. Frågan som fysiker fortfarande ställer är hur exakt det stämmer. Hittar någon en dag två ämnen som faller olika fort, om än med en obetydlighet, faller en av grundstenarna under den allmänna relativitetsteorin — och då finns det något i naturen som ingen känner till.' },
+
+      { type: 'h2', text: 'Två massor som råkar vara lika stora' },
+      { type: 'p', html: 'Massan uppträder i två helt skilda roller. I Newtons andra lag, $F = m \\cdot a$, står den för trögheten: hur svårt det är att ändra ett föremåls rörelse. I tyngdkraften, $F_\\mathrm{G} = m \\cdot g$, står den i stället för hur hårt jorden drar. Det är två olika egenskaper, och ingenting säger på förhand att de ska mätas med samma tal.' },
+      { type: 'p', html: 'Sätter man ihop de två sambanden för ett fallande föremål blir accelerationen $a = \\dfrac{m_\\mathrm{g}}{m_\\mathrm{t}} \\cdot g$, där $m_\\mathrm{g}$ är den tunga massan och $m_\\mathrm{t}$ den tröga. Är kvoten densamma för allt som finns faller allting lika fort, och massan försvinner helt ur ekvationen. Det påståendet kallas den svaga ekvivalensprincipen, och Einstein gjorde det till utgångspunkt i stället för till en tillfällighet.' },
+      { type: 'p', html: 'Hur väl två ämnen håller sig till principen mäts med Eötvösparametern, accelerationsskillnaden delad med medelaccelerationen: $\\eta = \\dfrac{2(a_1 - a_2)}{a_1 + a_2}$. Faller de exakt lika fort blir $\\eta$ noll, och varje experiment sedan slutet av 1800-talet har fått just noll, med allt fler decimaler.' },
+
+      { type: 'h2', text: 'Ett laboratorium som aldrig slutar falla' },
+      { type: 'p', html: 'Problemet med fallförsök på jorden är att fallet tar slut. Även i ett tiotal meter högt falltorn hinner ett föremål bara vara i luften ett par sekunder, och noggrannheten växer snabbt med falltiden. Därför har fysiker länge velat flytta mätningen till en omloppsbana.' },
+      { type: 'p', html: 'En vanlig missuppfattning är att tyngdkraften vore borta där uppe. Det är den inte. På den kinesiska rymdstationens höjd, drygt 400&nbsp;km, är tyngdaccelerationen fortfarande ungefär 8,7&nbsp;m/s<sup>2</sup>, nästan nio tiondelar av värdet vid marken. Skillnaden är att stationen, bänken, astronauterna och atomerna faller åt samma håll samtidigt och därför inte trycker mot varandra. Tyngdlösheten är ett fritt fall som aldrig når marken, eftersom stationen rör sig så fort i sidled att den ständigt missar jorden.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-03-fallet-som-aldrig-tar-slut-2.jpg', alt: 'Den kinesiska rymdstationen fotograferad bakifrån mot svart rymd, med de två laboratoriemodulerna utsträckta åt var sitt håll från kärnmodulen.', caption: 'Rymdstationen sedd bakifrån. I en av laboratoriemodulerna står det skåp där fallförsöket sitter monterat.', credit: 'Foto: China Manned Space Engineering Office (CC BY 4.0)' },
+      { type: 'p', html: 'Instrumentet är förvånansvärt litet: en låda på 46 × 33 × 26&nbsp;cm som väger omkring 37&nbsp;kg. Den sköts upp med rymdfarkosten Tianzhou-5 i november 2022 och monterades en månad senare in i stationens särskilda skåp för mikrogravitation. Skåpet är byggt för att dämpa skakningarna från fläktar, pumpar och besättning ner mot en tiomiljondel av tyngdaccelerationen vid marken, och det är det som gör mätningen möjlig: fallet ska störas av så lite som möjligt utom av tyngdkraften själv.' },
+
+      { type: 'h2', text: 'Atomerna delas i två och läggs ihop igen' },
+      { type: 'p', html: 'Det som släpps är inte hammare och fjäder utan två moln av rubidiumatomer: rubidium-85 och rubidium-87, alltså samma grundämne med olika många neutroner i kärnan. Molnen laserkyls till 6,6 respektive 4,5 miljondels grader över den absoluta nollpunkten, vilket får atomerna att röra sig så långsamt att de beter sig som vågor.' },
+      { type: 'p', html: 'Sedan får varje moln, ungefär 300 miljoner atomer, en serie korta laserpulser. Den första delar molnet så att det tar två vägar samtidigt, en andra vänder tillbaka delarna, och en tredje lägger ihop dem igen. Har vägarna varit exakt likvärdiga hamnar atomerna i ett bestämt tillstånd; har den ena accelererat det allra minsta annorlunda syns det som en förskjutning i mönstret. Delningen varar 50 millisekunder, och samma laserstråle betjänar båda isotoperna, så att skakningar och laserbrus stör mätningarna lika mycket och räknas bort när skillnaden tas fram.' },
+      { type: 'p', html: 'Under 280 dygn samlades över 9&nbsp;700 par av sådana mönster in. Facit blev $\\eta = (-2{,}7 \\pm 4{,}7) \\cdot 10^{-7}$ — med andra ord noll, inom mätosäkerheten. De två isotoperna föll lika fort så långt instrumentet kan se, och det är tusen gånger noggrannare än vad tidigare atomförsök i tyngdlöshet har mäktat med.' },
+
+      { type: 'h2', text: 'Ändå långt kvar till rekordet' },
+      { type: 'p', html: 'Här är det värt att vara noggrann med vad som faktiskt har slagits. Det här är inte världens känsligaste test av ekvivalensprincipen, inte i närheten. Torsionsvågar på marken når ner till <span style="white-space:nowrap">10<sup>−13</sup></span>, en atominterferometer i ett tio meter högt falltorn vid Stanford nådde <span style="white-space:nowrap">10<sup>−12</sup></span>, och den franska satelliten MICROSCOPE vägde 2022 en platinavikt mot en titanvikt och kom ner till <span style="white-space:nowrap">10<sup>−15</sup></span>. Det nya resultatet är miljontals gånger grövre än det bästa som finns.' },
+      { type: 'p', html: 'Forskarlaget skriver det själva rakt ut: mätningen är i första hand ett principbevis. Poängen är att en atominterferometer, som annars kräver ett tungt optiskt bord och ständig omjustering, har gått att driva i knappt ett år i omloppsbana med lasrar, vakuumkammare och magnetfällor intakta.' },
+      { type: 'p', html: 'Målet ligger långt fram: en noggrannhet kring <span style="white-space:nowrap">10<sup>−17</sup></span>, hundra gånger bättre än MICROSCOPE. Dit krävs tre saker som laget pekar ut. En farkost som skärmas från luftmotstånd och strålningstryck så att den verkligen bara faller. Ännu kallare atommoln. Och framför allt en delning som varar sekunder i stället för hundradelar — vilket är just det tyngdlöshet är bra för, och just det som ingen ännu har visat sig klara där uppe.' },
+      { type: 'p', html: 'Hittar någon på den nivån ett $\\eta$ som inte är noll vore det den första sprickan i den allmänna relativitetsteorin på hundra år, och en tråd att dra i för alla som letar efter en femte naturkraft. Fortsätter det bli noll är också det ett besked: då har en av fysikens djärvaste förenklingar hållit i ytterligare tio decimaler.' },
+
+      { type: 'fact', title: 'Talen bakom försöket', items: [
+        'Fallande ämnen: rubidium-85 och rubidium-87, kylda till 6,6 respektive 4,5 miljondels grader över absoluta nollpunkten.',
+        'Antal atomer per försök: omkring 340 respektive 290 miljoner.',
+        'Tid som varje atommoln går två vägar samtidigt: 50&nbsp;ms.',
+        'Mätperiod: 280 dygn, mer än 9&nbsp;700 par av interferensmönster.',
+        'Uppmätt kvarvarande acceleration längs mätriktningen under försöket: (2,7 ± 0,6)&nbsp;·&nbsp;10<sup>−4</sup>&nbsp;m/s<sup>2</sup>.',
+        'Resultat: Eötvösparametern (−2,7 ± 4,7)&nbsp;·&nbsp;10<sup>−7</sup>, alltså förenlig med noll.'
+      ] },
+
+      { type: 'p', html: 'Studien publicerades i <em>Science Advances</em> den 28 augusti 2026 av 25 forskare vid Chinese Academy of Sciences institut för precisionsmätning i Wuhan, med Ming-Sheng Zhan som ansvarig.' }
+    ]
+  },
+  {
     id: "2026-09-02-solljuset-som-flatar-samman",
     date: "2026-09-02",
     title: "Alla var överens om att det krävdes en laser — nu har vanligt solljus fått fotoner att flätas samman",

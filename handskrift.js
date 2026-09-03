@@ -35259,9 +35259,9 @@
       [['Höjden ', 0], ['h', 1], [' över ytan är det jag', 0]],
       [['söker.']]
     ], 430));
-    T.arrow([jx - 40, jy - Ro], [jx - 108, jy - Ro], BLUE);
-    T.lbl('v=7 560 m/s', jx - 44 - T.lblW('v=7 560 m/s'), jy - Ro - 18,
-          BLUE);
+    /* hastighetspilen åt HÖGER, samma håll som i uppgiftens figur */
+    T.arrow([jx + 40, jy - Ro], [jx + 108, jy - Ro], BLUE);
+    T.lbl('v=7 560 m/s', jx + 14, jy - Ro - 18, BLUE);
     T.pause(150);
     T.lbl('r_j=6 378 km', 30, jy + Ro, BLUE);
     T.pause(150);

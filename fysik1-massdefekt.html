@@ -33,118 +33,97 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        .glass-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: #0a0a1a;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(200, 50, 74, 0.35);
-            transition: all 0.25s ease;
-        }
-        .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(200, 50, 74, 0.6);
-            transform: translateY(-1px);
-        }
-        .btn-primary:active { transform: translateY(0px); }
-        .btn-secondary {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(15, 22, 32, 0.42);
-            color: #94a3b8;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-        .btn-secondary:hover {
-            border-color: rgba(200, 50, 74, 0.4);
-            color: #38bdf8;
-        }
+        /* Laborans-temat: färger på kort, knappar, flikar, brödsmulor och
+           förklaringsrutor styrs centralt av styles-laborans-sim.css
+           (.glass-card, .btn-primary, .btn-secondary, .tab-btn, .mode-toggle,
+           .breadcrumb, .explanation-box). Här ligger bara sidans egna
+           layoutdetaljer, utan färger från det gamla mörka temat. */
         .tab-btn {
             padding: 0.5rem 1.1rem;
             border-radius: 0.6rem;
             font-family: 'Poppins', sans-serif;
             font-size: 0.82rem;
             font-weight: 600;
-            border: 1px solid rgba(15, 22, 32, 0.28);
-            background: rgba(15, 23, 42, 0.6);
-            color: #94a3b8;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: border-color 0.15s ease, color 0.15s ease;
             white-space: nowrap;
         }
-        .tab-btn:hover { color: #e2e8f0; border-color: rgba(200, 50, 74, 0.3); }
-        .tab-btn.active {
-            background: rgba(200, 50, 74, 0.15);
-            border-color: rgba(200, 50, 74, 0.55);
-            color: #38bdf8;
-            box-shadow: 0 0 16px rgba(200, 50, 74, 0.2);
-        }
         canvas { display: block; border-radius: 0.75rem; }
-        .breadcrumb { color: #64748b; font-size: 0.8rem; }
-        .breadcrumb a { color: #38bdf8; text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb { font-size: 0.8rem; }
         .explanation-box {
-            background: rgba(15, 23, 42, 0.75);
-            border-left: 3px solid rgba(200, 50, 74, 0.5);
             border-radius: 0 0.5rem 0.5rem 0;
             padding: 0.85rem 1.1rem;
-            font-size: 0.88rem;
-            color: #cbd5e1;
+            font-size: 0.9rem;
             line-height: 1.7;
         }
-        .mode-toggle {
-            display: flex;
-            border: 1px solid rgba(200, 50, 74, 0.25);
-            border-radius: 0.75rem;
-            overflow: hidden;
+        /* Formelkortet i sidhuvudet: ord-etikett ovanför varje beteckning */
+        .flbl {
+            display: block; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #69655c); font-weight: 600; margin-bottom: 2px; text-align: center;
+            white-space: nowrap;
         }
-        .mode-btn {
-            padding: 0.5rem 1.3rem;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #64748b;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .fsym { font-size: 1.6rem; font-weight: 700; line-height: 1.1; text-align: center; }
+        /* Index och exponenter: Tailwinds grundregler flyttar redan sup/sub med
+           position: relative, så vertical-align lämnas på baslinjen (annars
+           adderas de två förskjutningarna och tvåan i c² svävar iväg) */
+        .fsym sub, .fsym sup, .mass-row sub, .formula-box sup, .formula-box sub, .rakne sup, .rakne sub {
+            font-size: 0.68em; line-height: 0; position: relative; vertical-align: baseline;
         }
-        .mode-btn.active { background: rgba(200, 50, 74, 0.18); color: #38bdf8; }
-        .mode-btn:hover:not(.active) { color: #94a3b8; }
+        .fsym sup, .formula-box sup, .rakne sup { top: -0.55em; }
+        .fsym sub, .mass-row sub, .formula-box sub, .rakne sub { bottom: -0.2em; }
+        /* Massbalansen: avläsningsrader i sidopanelen */
         .mass-row {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 0.28rem 0;
-            font-size: 0.82rem;
+            gap: 0.75rem;
+            padding: 0.3rem 0;
+            font-size: 0.86rem;
+            color: var(--lab-ink, #0f1620);
+            font-variant-numeric: tabular-nums;
         }
+        .mass-row .mr-lbl { color: var(--lab-ink-soft, #3f4a5c); }
+        .mass-row .mr-val { font-weight: 600; white-space: nowrap; text-align: right; }
         .mass-row.divider {
-            border-top: 1px solid rgba(100, 116, 139, 0.25);
+            border-top: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             margin-top: 0.3rem;
             padding-top: 0.5rem;
         }
         .mass-row.highlight {
-            background: rgba(200, 50, 74, 0.09);
-            border-radius: 0.3rem;
-            padding: 0.4rem 0.5rem;
-            margin: 0.2rem -0.5rem;
+            background: var(--lab-accent-soft, rgba(200,50,74,0.10));
+            border-left: 3px solid var(--lab-accent, #c8324a);
+            border-radius: 0 4px 4px 0;
+            padding: 0.45rem 0.6rem;
+            margin: 0.35rem -0.6rem 0.2rem -0.6rem;
         }
+        .mass-row.highlight .mr-lbl { color: var(--lab-ink, #0f1620); font-weight: 600; }
+        /* Energiraderna i bränd ockra, samma ton som palettens amber-text */
+        .mass-row.energy .mr-lbl,
+        .mass-row.energy .mr-val { color: #a85a1a; }
         .formula-box {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(200, 50, 74, 0.2);
-            border-radius: 0.75rem;
-            padding: 0.75rem 1.2rem;
+            background: var(--lab-bg-panel, #ffffff);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 4px;
+            padding: 0.7rem 1rem;
             font-size: 1rem;
-            color: #e2e8f0;
+            color: var(--lab-ink, #0f1620);
             text-align: center;
-            letter-spacing: 0.03em;
+            line-height: 1.7;
         }
-        /* On-scene-ruta uppe till höger (endast fullskärm): lägesval */
+        .formula-box .fb-res { font-weight: 600; font-size: 1.1em; color: #a85a1a; }
+        .panel-kicker {
+            font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #69655c); font-weight: 600; margin-bottom: 4px; text-align: center;
+        }
+        /* Räkneexemplet: rader i sans med tabellsiffror, aldrig monospace */
+        .rakne { font-size: 0.9rem; line-height: 1.75; font-variant-numeric: tabular-nums; }
+        .rakne .r-lbl {
+            color: var(--lab-ink-muted, #69655c); font-size: 0.76rem; text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.1rem;
+        }
+        .rakne .r-sum { border-top: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); margin-top: 0.2rem; padding-top: 0.2rem; }
+        .rakne .r-res { color: #a85a1a; font-weight: 600; }
+        /* On-scene-ruta uppe till höger (endast fullskärm): lägesval, hopfällbar */
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
             background: rgba(246,242,234,0.94);
@@ -158,6 +137,7 @@
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+            padding-right: 22px;
         }
         .scene-toggles label {
             display: flex; align-items: center; gap: 7px; cursor: pointer;
@@ -244,7 +224,15 @@
     // ─── Färger ───────────────────────────────────────────────────────────────
     const C_PROTON  = '#ef4444';
     const C_NEUTRON = '#6b7280';   // grå, inte blå: en oladdad partikel ska inte bära minusfärgen
-    const C_ENERGY  = '#fbbf24';
+    // Energi: fotonen ritas i bränd bärnsten (ren gul försvinner mot
+    // pappersbotten) och energitexten i palettens ockra, samma ton som
+    // amber-texten i styles-laborans-sim.css.
+    const C_ENERGY      = '#d97706';
+    const C_ENERGY_TEXT = '#a85a1a';
+    // Bläck och toner från styles-laborans.css (canvasen kan inte läsa CSS-variabler)
+    const INK       = '#0f1620';
+    const INK_SOFT  = '#3f4a5c';
+    const INK_MUTED = '#69655c';
 
     // ─── Hjälpfunktioner ─────────────────────────────────────────────────────
     function hexToRgb(hex) {
@@ -261,7 +249,13 @@
     }
     function eio(t) { return t < 0.5 ? 2*t*t : -1 + (4-2*t)*t; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-    function fmt(n, d = 6) { return n.toFixed(d).replace('.', ','); }
+    // Decimalkomma, och decimalerna grupperade tre och tre med hårt
+    // mellanslag (1,007 276 u) som i räkneexemplet nedanför scenen.
+    function fmt(n, d = 6) {
+        const [intp, frac] = n.toFixed(d).split('.');
+        if (!frac) return intp;
+        return intp + ',' + frac.replace(/(\d{3})(?=\d)/g, '$1 ');
+    }
 
     // ─── Fysikdata ────────────────────────────────────────────────────────────
     // Massor i atomära massenheter (u), kärnmassor (utan elektroner)
@@ -369,17 +363,18 @@
         ctx.restore();
         // Energitext bredvid
         if (label) {
-            txt(ctx, label, x + dotR + 8, y, `bold ${Math.max(10, r * 1.1) | 0}px Poppins, sans-serif`, C_ENERGY, alpha, 'left');
+            txt(ctx, label, x + dotR + 8, y, `bold ${Math.max(10, r * 1.1) | 0}px Poppins, sans-serif`, C_ENERGY_TEXT, alpha, 'left');
         }
     }
 
     function drawFlash(ctx, cx, cy, radius, alpha) {
         ctx.save();
         ctx.globalAlpha = alpha;
+        // Blixten i bärnsten: en vit blixt syns inte mot pappersbotten
         const fg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        fg.addColorStop(0, 'rgba(255,255,255,1)');
-        fg.addColorStop(0.4, 'rgba(180,220,255,0.6)');
-        fg.addColorStop(1, 'rgba(200, 50, 74, 0)');
+        fg.addColorStop(0, 'rgba(255, 236, 170, 1)');
+        fg.addColorStop(0.4, 'rgba(217, 119, 6, 0.55)');
+        fg.addColorStop(1, 'rgba(217, 119, 6, 0)');
         ctx.fillStyle = fg;
         ctx.beginPath();
         ctx.arc(cx, cy, radius, 0, Math.PI*2);
@@ -506,10 +501,13 @@
                     ctx.save();
                     ctx.globalAlpha = alpha;
                     // Bakgrund
-                    // Minimimått så etikett och värde inte kolliderar på smal skärm
+                    // Minimimått så etikett och värde inte kolliderar på smal skärm.
+                    // På en smal canvas skjuts rutan åt höger, annars ligger den
+                    // ovanpå teckenförklaringen uppe till vänster.
                     const bw = Math.max(W * 0.38, 168);
                     const bh = Math.max(H * 0.14, 48);
-                    const bx = cx - bw/2;
+                    const bcx = W < 560 ? W - bw/2 - 10 : cx;
+                    const bx = bcx - bw/2;
                     const by = massBoxY - bh/2;
                     ctx.fillStyle = 'rgba(243, 238, 228, 0.95)';
                     ctx.strokeStyle = highlight ? 'rgba(200, 50, 74, 0.6)' : 'rgba(15, 22, 32, 0.25)';
@@ -520,15 +518,14 @@
                     ctx.stroke();
                     // Label
                     ctx.font = fsBigLabel;
-                    ctx.fillStyle = '#5a6170';
+                    ctx.fillStyle = INK_MUTED;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('Total massa', cx, massBoxY - bh*0.22);
-                    // Värde
+                    ctx.fillText('Total massa', bcx, massBoxY - bh*0.22);
+                    // Värde (ingen glöd: en ljus skugga blir en halo på papper)
                     ctx.font = fsBig;
-                    ctx.fillStyle = highlight ? '#c8324a' : '#0f1620';
-                    if (highlight) { ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 12; }
-                    ctx.fillText(fmt(currentMass) + ' u', cx, massBoxY + bh*0.18);
+                    ctx.fillStyle = highlight ? '#c8324a' : INK;
+                    ctx.fillText(fmt(currentMass) + ' u', bcx, massBoxY + bh*0.18);
                     ctx.restore();
                 }
 
@@ -538,16 +535,16 @@
                     drawCluster(ctx, lx0, cy, nr, lay1);
                     drawCluster(ctx, rx0, cy, nr, lay2);
                     txt(ctx, cfg.p1.name,           lx0, cy + nr*3.4, fsB, '#0f1620');
-                    txt(ctx, fmt(cfg.p1.mass) + ' u', lx0, cy + nr*5.1, fs, '#64748b');
+                    txt(ctx, fmt(cfg.p1.mass) + ' u', lx0, cy + nr*5.1, fs, INK_SOFT);
                     txt(ctx, cfg.p2.name,           rx0, cy + nr*3.4, fsB, '#0f1620');
-                    txt(ctx, fmt(cfg.p2.mass) + ' u', rx0, cy + nr*5.1, fs, '#64748b');
+                    txt(ctx, fmt(cfg.p2.mass) + ' u', rx0, cy + nr*5.1, fs, INK_SOFT);
                     // "+" tecken
-                    txt(ctx, '+', cx, cy, `bold ${Math.max(20, W*0.044)|0}px Poppins`, '#475569');
+                    txt(ctx, '+', cx, cy, `bold ${Math.max(20, W*0.044)|0}px Poppins`, INK_SOFT);
                     // Total massa (stor ruta)
                     drawMassBox(sumMass, 1, false);
                     // Tiptext
                     txt(ctx, 'Tryck "Starta fusion" för att se reaktionen',
-                        cx, H * 0.87, fs, '#334155');
+                        cx, H * 0.87, fs, INK_MUTED);
                 } else {
                     const APPROACH_END = 0.35;
                     const FLASH_END    = 0.48;
@@ -563,9 +560,9 @@
                         drawCluster(ctx, lx, cy, nr, lay1);
                         drawCluster(ctx, rx, cy, nr, lay2);
                         txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#0f1620', fa);
-                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', fa);
+                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  INK_SOFT, fa);
                         txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#0f1620', fa);
-                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', fa);
+                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  INK_SOFT, fa);
                         // Visa total massa hela tiden
                         drawMassBox(sumMass, 1, false);
 
@@ -604,16 +601,16 @@
                         // Visa produktmassa under kärnan när rasslet är klart
                         if (rattleT >= 1) {
                             txt(ctx, fmt(cfg.prod.mass) + ' u',
-                                cx, cy + nr*5.1, fs, '#38bdf8', rte);
+                                cx, cy + nr*5.1, fs, INK, rte);
                         }
 
                         // Massdefektinfo – visa efter rasslet
                         if (rattleT >= 0.8) {
                             const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
                             txt(ctx, 'Δm = ' + fmt(cfg.deltaM) + ' u  (massa som blev energi)',
-                                cx, H*0.79, fs, '#38bdf8', ea);
+                                cx, H*0.79, fs, INK, ea);
                             txt(ctx, 'E = Δm · c² = ' + fmt(cfg.Eb, 3) + ' MeV',
-                                cx, H*0.86, fsH, '#22c55e', ea);
+                                cx, H*0.86, fsH, C_ENERGY_TEXT, ea);
                         }
                     }
                 }
@@ -625,14 +622,14 @@
                     txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
                         cx, cy + nr*3.4, fsB, '#0f1620');
                     txt(ctx, fmt(cfg.prod.mass) + ' u',
-                        cx, cy + nr*5.1, fs, '#64748b');
+                        cx, cy + nr*5.1, fs, INK_SOFT);
                     // Massruta visar bundna kärnans massa
                     drawMassBox(cfg.prod.mass, 1, false);
                     // Energiindikator (hur mycket som krävs)
                     txt(ctx, 'Krävs: ' + fmt(cfg.Eb, 2) + ' MeV för att bryta bindningen',
-                        cx, H*0.87, fs, '#fbbf24', 0.6);
+                        cx, H*0.87, fs, C_ENERGY_TEXT, 0.9);
                     txt(ctx, 'Tryck "Bryt bindningen" för att se separationen',
-                        cx, H*0.93, fs, '#334155');
+                        cx, H*0.93, fs, INK_MUTED);
                 } else {
                     const ENERGY_END   = 0.32;
                     const FLASH_END    = 0.45;
@@ -651,7 +648,7 @@
                         // Massruta visar bundna massan
                         drawMassBox(cfg.prod.mass, 1, false);
                         txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 2) + ' MeV',
-                            cx, H*0.84, fsB, C_ENERGY, et);
+                            cx, H*0.84, fsB, C_ENERGY_TEXT, et);
 
                     } else if (prog < FLASH_END) {
                         // Fas 2: Blixt
@@ -670,9 +667,9 @@
                         drawCluster(ctx, lx, cy, nr, lay1);
                         drawCluster(ctx, rx, cy, nr, lay2);
                         txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#0f1620', ste);
-                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', ste);
+                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  INK_SOFT, ste);
                         txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#0f1620', ste);
-                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', ste);
+                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  INK_SOFT, ste);
 
                         // Massa-rasslet uppåt: från produktmassa till summa
                         const rattleT = clamp((prog - RATTLE_S_START) / (RATTLE_S_END - RATTLE_S_START), 0, 1);
@@ -685,9 +682,9 @@
                         if (rattleT >= 0.8) {
                             const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
                             txt(ctx, 'Ökade med Δm = ' + fmt(cfg.deltaM) + ' u  (energi blev massa)',
-                                cx, H*0.79, fs, C_ENERGY, ea);
+                                cx, H*0.79, fs, INK, ea);
                             txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 3) + ' MeV → massa',
-                                cx, H*0.86, fsH, C_ENERGY, ea);
+                                cx, H*0.86, fsH, C_ENERGY_TEXT, ea);
                         }
                     }
                 }
@@ -765,55 +762,49 @@
         const sum = cfg.p1.mass + cfg.p2.mass;
 
         return (
-            <div className="glass-card rounded-2xl p-5 space-y-0.5">
-                <h3 className="text-sky-400 font-bold mb-3 text-base">Massbalans</h3>
+            <div className="glass-card rounded-2xl p-5">
+                <h3 className="font-bold mb-3 text-base">Massbalans</h3>
 
-                <div className="mass-row font-mono">
-                    <span className="text-slate-300">{cfg.p1.name} ({cfg.p1.sym})</span>
-                    <span className="text-slate-100">{fmt(cfg.p1.mass)} u</span>
+                <div className="mass-row">
+                    <span className="mr-lbl">{cfg.p1.name} ({cfg.p1.sym})</span>
+                    <span className="mr-val">{fmt(cfg.p1.mass)} u</span>
                 </div>
-                <div className="mass-row font-mono">
-                    <span className="text-slate-300">+ {cfg.p2.name} ({cfg.p2.sym})</span>
-                    <span className="text-slate-100">{fmt(cfg.p2.mass)} u</span>
+                <div className="mass-row">
+                    <span className="mr-lbl">+ {cfg.p2.name} ({cfg.p2.sym})</span>
+                    <span className="mr-val">{fmt(cfg.p2.mass)} u</span>
                 </div>
-                <div className="mass-row divider font-mono">
-                    <span className="text-slate-400">= Summa (fria)</span>
-                    <span className="text-slate-100">{fmt(sum)} u</span>
+                <div className="mass-row divider">
+                    <span className="mr-lbl">= Summa (fria)</span>
+                    <span className="mr-val">{fmt(sum)} u</span>
                 </div>
-                <div className="mass-row font-mono">
-                    <span className="text-slate-400">− {cfg.prod.sym} (bunden)</span>
-                    <span className="text-slate-100">{fmt(cfg.prod.mass)} u</span>
-                </div>
-
-                <div className="mass-row divider highlight font-mono mt-1">
-                    <span className="text-sky-300 font-semibold">Massdefekt (Δm)</span>
-                    <span className="text-sky-300 font-semibold">{fmt(cfg.deltaM)} u</span>
+                <div className="mass-row">
+                    <span className="mr-lbl">− {cfg.prod.sym} (bunden)</span>
+                    <span className="mr-val">{fmt(cfg.prod.mass)} u</span>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-slate-700/50 space-y-2">
-                    <div className="mass-row font-mono">
-                        <span className="text-green-400">Bindningsenergi (E_b)</span>
-                        <span className="text-green-400 font-bold">{fmt(cfg.Eb, 3)} MeV</span>
-                    </div>
-                    <div className="mass-row font-mono">
-                        <span className="text-slate-400">Per nukleon (E_b/A)</span>
-                        <span className="text-slate-200">{fmt(cfg.EbPerA, 3)} MeV/nukleon</span>
-                    </div>
+                <div className="mass-row highlight">
+                    <span className="mr-lbl">Massdefekt Δ<em>m</em></span>
+                    <span className="mr-val">{fmt(cfg.deltaM)} u</span>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-slate-700/50 text-center">
-                    <p className="text-slate-500 text-xs font-mono leading-relaxed">
-                        E = Δm · c²<br/>
-                        = {fmt(cfg.deltaM)} u × 931,5 MeV/u
-                    </p>
-                    <p className="text-green-400 font-bold mt-1 text-base">
-                        = {fmt(cfg.Eb, 3)} MeV
-                    </p>
+                <div className="mass-row divider energy">
+                    <span className="mr-lbl">Bindningsenergi <em>E</em><sub>b</sub></span>
+                    <span className="mr-val">{fmt(cfg.Eb, 3)} MeV</span>
+                </div>
+                <div className="mass-row">
+                    <span className="mr-lbl">Per nukleon <em>E</em><sub>b</sub>/<em>A</em></span>
+                    <span className="mr-val">{fmt(cfg.EbPerA, 3)} MeV/nukleon</span>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-slate-700/50">
-                    <p className="text-xs text-slate-500 mb-1 text-center">Reaktion ({mode === 'bind' ? 'fusion' : 'separation'})</p>
-                    <div className="formula-box text-sm">
+                <div className="formula-box mt-4">
+                    <em>E</em><sub>b</sub> = Δ<em>m</em> · <em>c</em><sup>2</sup><br/>
+                    = {fmt(cfg.deltaM)} u · 931,5 MeV/u<br/>
+                    <span className="fb-res">= {fmt(cfg.Eb, 3)} MeV</span>
+                </div>
+
+                <div className="mt-4">
+                    <div className="panel-kicker">Reaktion ({mode === 'bind' ? 'fusion' : 'separation'})</div>
+                    <div className="formula-box">
                         {mode === 'bind'
                             ? <>{cfg.p1.sym} + {cfg.p2.sym} → {cfg.prod.sym} + γ</>
                             : <>{cfg.prod.sym} + γ → {cfg.p1.sym} + {cfg.p2.sym}</>
@@ -830,6 +821,7 @@
         const [exKey,  setExKey]  = useState('deuteron');
         const [phase,  setPhase]  = useState('idle');
         const [isFullscreen, setIsFullscreen] = useState(false);
+        const [togglesOpen, setTogglesOpen] = useState(true);
         const sceneWrapRef = useRef(null);
 
         function switchMode(m) { setMode(m); setPhase('idle'); }
@@ -872,17 +864,25 @@
                         Massdefekt och bindningsenergi
                     </p>
 
-                    {/* Titel */}
+                    {/* Titel + formelkort */}
                     <div className="mb-6">
-                        <h1 className="text-3xl md:text-4xl font-bold text-white glow-text mb-2">
+                        <h1 className="text-3xl md:text-4xl font-bold glow-text mb-2">
                             Massdefekt och bindningsenergi
                         </h1>
-                        <p className="text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed">
+                        <p className="text-sm md:text-base max-w-2xl leading-relaxed" style={{ color: 'var(--lab-ink-soft, #3f4a5c)' }}>
                             När nukleoner (protoner och neutroner) bildar en kärna minskar den totala
-                            massan eftersom energi strålar ut i form av en foton (γ). Denna förlorade
-                            energi motsvarar kärnans bindningsenergi – det vill säga den mängd energi
-                            man måste tillföra för att bryta upp kärnan igen.
+                            massan, eftersom energi strålar ut i form av en foton (γ). Den förlorade
+                            energin motsvarar kärnans bindningsenergi, det vill säga den energi man
+                            måste tillföra för att bryta upp kärnan igen.
                         </p>
+                        {/* Formelkort: E_b = Δm · c² med ord-etikett ovanför varje beteckning */}
+                        <div className="mt-4 flex items-end gap-3 flex-wrap" style={{ color: 'var(--lab-ink, #0f1620)' }}>
+                            <div><span className="flbl">Bindningsenergi</span><div className="fsym"><em>E</em><sub>b</sub></div></div>
+                            <div className="text-xl pb-1" style={{ color: 'var(--lab-ink-muted, #69655c)' }}>=</div>
+                            <div><span className="flbl">Massdefekt</span><div className="fsym">Δ<em>m</em></div></div>
+                            <div className="text-xl pb-1" style={{ color: 'var(--lab-ink-muted, #69655c)' }}>·</div>
+                            <div><span className="flbl">Ljusets hastighet</span><div className="fsym"><em>c</em><sup>2</sup></div></div>
+                        </div>
                     </div>
 
                     {/* Läge + exempelval */}
@@ -891,12 +891,12 @@
                             <button
                                 className={`mode-btn${mode === 'bind'  ? ' active' : ''}`}
                                 onClick={() => switchMode('bind')}>
-                                ⚡ Fusion
+                                Fusion
                             </button>
                             <button
                                 className={`mode-btn${mode === 'break' ? ' active' : ''}`}
                                 onClick={() => switchMode('break')}>
-                                💥 Separation
+                                Separation
                             </button>
                         </div>
                         <div className="flex gap-2">
@@ -936,8 +936,30 @@
                                         </svg>
                                     )}
                                 </button>
-                                {isFullscreen && (
+                                {/* Inställningsrutan uppe till höger visas bara i fullskärm:
+                                    i normalläget bor lägesvalet i knappraden ovanför scenen
+                                    (aldrig dubblerat). Hopfällbar med krysset/runda knappen. */}
+                                {isFullscreen && !togglesOpen && (
+                                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                            <line x1="4" y1="8" x2="20" y2="8" />
+                                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                            <line x1="4" y1="16" x2="20" y2="16" />
+                                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                        </svg>
+                                    </button>
+                                )}
+                                {isFullscreen && togglesOpen && (
                                     <div className="scene-toggles">
+                                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                                <path d="M6 6l12 12M18 6L6 18" />
+                                            </svg>
+                                        </button>
                                         <div className="st-title">Läge</div>
                                         <label>
                                             <input type="radio" name="fsMode" checked={mode === 'bind'}
@@ -969,67 +991,59 @@
                     {/* Förklaringssektion */}
                     <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <h2 className="text-sky-400 font-bold text-lg mb-3">Vad är massdefekt?</h2>
+                            <h2 className="font-bold text-lg mb-3">Vad är massdefekt?</h2>
                             <div className="explanation-box">
-                                En fri proton väger <strong className="text-white">1,007 276 u</strong> och
-                                en fri neutron väger <strong className="text-white">1,008 665 u</strong>.
-                                Deras summa är 2,015 941 u. Men en deuteronkärna (²H) väger bara{' '}
-                                <strong className="text-white">2,013 553 u</strong> – alltså{' '}
+                                En fri proton väger <strong>1,007&nbsp;276 u</strong> och
+                                en fri neutron väger <strong>1,008&nbsp;665 u</strong>.
+                                Deras summa är 2,015&nbsp;941 u. Men en deuteronkärna (²H) väger bara{' '}
+                                <strong>2,013&nbsp;553 u</strong>, alltså{' '}
                                 <em>mindre</em> än de fria partiklarna.
                                 <br/><br/>
-                                Massdifferensen kallas <strong className="text-sky-300">massdefekt</strong> (Δm).
-                                Enligt Einsteins formel <em>E = Δm · c²</em> har denna massa omvandlats till
-                                den <strong className="text-green-400">bindningsenergi</strong> som håller kärnan samman.
+                                Massdifferensen kallas <strong>massdefekt</strong> (Δ<em>m</em>).
+                                Enligt Einsteins formel <em>E</em> = Δ<em>m</em> · <em>c</em><sup>2</sup> har
+                                denna massa omvandlats till den <strong>bindningsenergi</strong> som håller
+                                kärnan samman.
                             </div>
                         </div>
 
                         <div>
-                            <h2 className="text-sky-400 font-bold text-lg mb-3">Fusion och separation</h2>
+                            <h2 className="font-bold text-lg mb-3">Fusion och separation</h2>
                             <div className="explanation-box">
-                                Vid <strong className="text-sky-300">fusion</strong> slås kärnor ihop och
-                                bindningsenergin <em>frigörs</em> – ofta som gammastrålning (γ). Det är
+                                Vid <strong>fusion</strong> slås kärnor ihop och
+                                bindningsenergin <em>frigörs</em>, ofta som gammastrålning (γ). Det är
                                 denna process som driver solen och stjärnorna.
                                 <br/><br/>
-                                Vid <strong className="text-yellow-300">separation</strong> bryts kärnan isär.
+                                Vid <strong>separation</strong> bryts kärnan isär.
                                 Då måste <em>exakt lika mycket</em> energi <em>tillföras</em> som frigörs
-                                vid fusionen. Bindningsenergin är det "lim" som håller kärnan samman –
+                                vid fusionen. Bindningsenergin är det ”lim” som håller kärnan samman:
                                 ju mer per nukleon, desto stabilare kärna.
                             </div>
                         </div>
 
                         <div className="md:col-span-2">
-                            <h2 className="text-sky-400 font-bold text-lg mb-3">Räkneexempel: p + n → ²H</h2>
+                            <h2 className="font-bold text-lg mb-3">Räkneexempel: p + n → ²H</h2>
                             <div className="explanation-box">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-sm">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 rakne">
                                     <div>
-                                        <p className="text-slate-400 mb-1">Massor av fria partiklar:</p>
-                                        <p>m(p) = 1,007 276 u</p>
-                                        <p>m(n) = 1,008 665 u</p>
-                                        <p className="border-t border-slate-600 mt-1 pt-1">
-                                            Summa = <strong className="text-white">2,015 941 u</strong>
-                                        </p>
-                                        <p className="mt-3 text-slate-400">Massa bunden kärna (²H):</p>
-                                        <p><strong className="text-white">2,013 553 u</strong></p>
-                                        <p className="mt-3 text-sky-300">
-                                            Δm = 2,015 941 − 2,013 553 = <strong>0,002 388 u</strong>
-                                        </p>
+                                        <div className="r-lbl">Massor av fria partiklar</div>
+                                        <div><em>m</em>(p) = 1,007&nbsp;276 u</div>
+                                        <div><em>m</em>(n) = 1,008&nbsp;665 u</div>
+                                        <div className="r-sum">Summa = <strong>2,015&nbsp;941 u</strong></div>
+                                        <div className="r-lbl mt-3">Massa hos den bundna kärnan (²H)</div>
+                                        <div><strong>2,013&nbsp;553 u</strong></div>
+                                        <div className="r-lbl mt-3">Massdefekt</div>
+                                        <div>Δ<em>m</em> = 2,015&nbsp;941 u − 2,013&nbsp;553 u = <strong>0,002&nbsp;388 u</strong></div>
                                     </div>
                                     <div>
-                                        <p className="text-slate-400 mb-1">Bindningsenergi:</p>
-                                        <p>1 u · c² = 931,5 MeV</p>
-                                        <p className="mt-1">
-                                            E_b = 0,002 388 u × 931,5 MeV/u
-                                        </p>
-                                        <p className="text-green-400 mt-1">
-                                            <strong>E_b = 2,224 MeV</strong>
-                                        </p>
-                                        <p className="mt-3 text-slate-400">Per nukleon (A = 2):</p>
-                                        <p className="text-green-400">
-                                            <strong>E_b/A = 1,112 MeV/nukleon</strong>
-                                        </p>
-                                        <p className="mt-3 text-slate-400 text-xs">
-                                            (Helium-4 har 7,07 MeV/nukleon – mycket stabilare!)
-                                        </p>
+                                        <div className="r-lbl">Bindningsenergi</div>
+                                        <div>1 u · <em>c</em><sup>2</sup> = 931,5 MeV</div>
+                                        <div><em>E</em><sub>b</sub> = 0,002&nbsp;388 u · 931,5 MeV/u</div>
+                                        <div className="r-res"><em>E</em><sub>b</sub> = 2,224 MeV</div>
+                                        <div className="r-lbl mt-3">Per nukleon (<em>A</em> = 2)</div>
+                                        <div className="r-res"><em>E</em><sub>b</sub>/<em>A</em> = 1,112 MeV/nukleon</div>
+                                        <div className="mt-3" style={{ color: 'var(--lab-ink-soft, #3f4a5c)', fontSize: '0.85rem' }}>
+                                            Helium-4 har 7,07 MeV per nukleon och är därför en mycket stabilare kärna.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1037,10 +1051,6 @@
                     </div>
 
                 </div>
-
-                <footer className="mt-14 text-center text-slate-600 text-sm">
-                    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
-                </footer>
             </div>
         );
     }

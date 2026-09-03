@@ -33,103 +33,75 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        .glass-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
-        }
-        .glass-card-light {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(15, 22, 32, 0.28);
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: #0a0a1a;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(200, 50, 74, 0.35);
-            transition: all 0.25s ease;
-        }
-        .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(200, 50, 74, 0.6);
-            transform: translateY(-1px);
-        }
-        .btn-primary:active {
-            transform: translateY(0px);
-        }
-        .btn-secondary {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(15, 22, 32, 0.42);
-            color: #94a3b8;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-        .btn-secondary:hover {
-            border-color: rgba(200, 50, 74, 0.4);
-            color: #38bdf8;
-            box-shadow: 0 0 15px rgba(200, 50, 74, 0.15);
-        }
+        /* Laborans-temat: färger på kort, knappar, flikar, brödsmulor och
+           förklaringsrutor styrs centralt av styles-laborans-sim.css
+           (.glass-card, .glass-card-light, .btn-primary, .btn-secondary,
+           .tab-btn, .equation-box, .breadcrumb, .explanation-box). Här ligger
+           bara sidans egna layoutdetaljer, utan färger från det gamla mörka
+           temat. */
         .tab-btn {
             padding: 0.5rem 1.2rem;
             border-radius: 0.6rem;
             font-family: 'Poppins', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(15, 22, 32, 0.28);
-            background: rgba(15, 23, 42, 0.6);
-            color: #94a3b8;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: border-color 0.15s ease, color 0.15s ease;
             white-space: nowrap;
-        }
-        .tab-btn:hover {
-            color: #e2e8f0;
-            border-color: rgba(200, 50, 74, 0.3);
-        }
-        .tab-btn.active {
-            background: rgba(200, 50, 74, 0.15);
-            border-color: rgba(200, 50, 74, 0.55);
-            color: #38bdf8;
-            box-shadow: 0 0 18px rgba(200, 50, 74, 0.2);
         }
         canvas {
             display: block;
             border-radius: 0.75rem;
         }
         .equation-box {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(200, 50, 74, 0.2);
             border-radius: 0.75rem;
             padding: 1rem 1.5rem;
             font-family: 'Poppins', sans-serif;
-            font-size: 1.15rem;
-            color: #e2e8f0;
+            font-size: 1.25rem;
             text-align: center;
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 0.15em 0.5em;
         }
-        .equation-box sup { font-size: 0.65em; vertical-align: super; }
-        .equation-box sub { font-size: 0.65em; vertical-align: sub; }
+        .equation-box sup, .equation-box sub {
+            font-size: 0.62em; line-height: 0; position: relative; vertical-align: baseline;
+        }
+        .equation-box sup { top: -0.55em; }
+        .equation-box sub { bottom: -0.2em; }
+        /* Nuklidbeteckning: masstal över atomnummer, till vänster om symbolen */
+        .nuc { display: inline-flex; align-items: center; font-weight: 600; }
+        .nuc .nuc-az {
+            display: inline-flex; flex-direction: column; align-items: flex-end;
+            font-size: 0.58em; line-height: 1.05; margin-right: 2px; font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
         .legend-dot {
             display: inline-block;
             width: 14px;
             height: 14px;
             border-radius: 50%;
         }
-        .breadcrumb { color: #64748b; font-size: 0.8rem; }
-        .breadcrumb a { color: #38bdf8; text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb { font-size: 0.8rem; }
         .explanation-box {
-            background: rgba(15, 23, 42, 0.75);
-            border-left: 3px solid rgba(200, 50, 74, 0.5);
             border-radius: 0 0.5rem 0.5rem 0;
             padding: 0.85rem 1.1rem;
             font-size: 0.9rem;
-            color: #cbd5e1;
             line-height: 1.65;
         }
-        /* On-scene-ruta uppe till höger (endast fullskärm): val av sönderfallstyp */
+        .section-kicker {
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #69655c); font-weight: 600; margin-bottom: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Moder- och dotterkärna under scenen */
+        .nucleus-card { min-width: 160px; text-align: center; padding: 0.7rem 1rem; }
+        .nucleus-card .nc-lbl {
+            font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #69655c); font-weight: 600; margin-bottom: 2px;
+        }
+        .nucleus-card .nc-name { font-weight: 600; color: var(--lab-ink, #0f1620); }
+        .nucleus-card .nc-pn { font-size: 12px; margin-top: 2px; color: var(--lab-ink-soft, #3f4a5c); font-weight: 600; }
+        .info-card p { color: var(--lab-ink-soft, #3f4a5c); }
+        /* On-scene-ruta uppe till höger (endast fullskärm): val av sönderfallstyp, hopfällbar */
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
             background: rgba(246,242,234,0.94);
@@ -143,6 +115,7 @@
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+            padding-right: 22px;
         }
         .scene-toggles label {
             display: flex; align-items: center; gap: 7px; cursor: pointer;
@@ -324,9 +297,16 @@
         const COL_NEUTRON  = '#6b7280';
         const COL_ELECTRON = '#22c55e';
         const COL_POSITRON = '#ec4899';
-        const COL_NEUTRINO = '#94a3b8';
-        const COL_GAMMA    = '#fbbf24';
-        const COL_ALPHA    = '#f59e0b';
+        const COL_NEUTRINO = '#5a6170';   // mörk grå: den ljusgrå från det mörka temat försvann mot papperet
+        // Gammafotonen och alfaklustrets ring i bränd bärnsten: ren gul och
+        // orange försvinner mot pappersbotten. Text i samma familj sätts i
+        // palettens ockra, samma ton som amber-texten i styles-laborans-sim.css.
+        const COL_GAMMA    = '#d97706';
+        const COL_ALPHA    = '#d97706';
+        const COL_AMBER_TEXT = '#a85a1a';
+        // Bläck och toner från styles-laborans.css (canvasen kan inte läsa CSS-variabler)
+        const INK       = '#0f1620';
+        const INK_SOFT  = '#3f4a5c';
 
         // Draw a single nucleon with a simple 3-D gradient
         function drawNucleon(ctx, x, y, r, color, glowColor = null, glowStrength = 0) {
@@ -434,6 +414,7 @@
             let x = cx - totalW / 2;
             ctx.save();
             ctx.fillStyle = color;
+            ctx.shadowBlur = 0;   // aldrig glöd runt text på papper (blir en halo)
             ctx.textBaseline = 'middle';
 
             parts.forEach(p => {
@@ -467,25 +448,25 @@
             const showProducts = currentPhase === 'animating' || currentPhase === 'done' || currentPhase === 'formula';
             const prodProg = currentPhase === 'formula' || currentPhase === 'done' ? 1 : progress;
             const items = [
-                { color: '#ef4444', label: 'Proton', show: true },
+                { color: COL_PROTON, label: 'Proton', show: true },
                 { color: COL_NEUTRON, label: 'Neutron', show: true },
             ];
             // Alpha: cluster starts forming at prodProg ~0.15
-            if (decayType === 'alpha')     items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)', show: showProducts && prodProg > 0.15 });
+            if (decayType === 'alpha')     items.push({ color: COL_ALPHA, label: 'Alfapartikel (⁴He)', show: showProducts && prodProg > 0.15 });
             // Beta⁻: electron ejects at prodProg 0.3, neutrino at 0.38
             if (decayType === 'betaMinus') {
                 const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
-                items.push({ color: '#22c55e', label: 'Elektron (e⁻)', show: showProducts && ejectProg > 0 });
-                items.push({ color: '#5a6170', label: 'Antineutrino (ν̄ₑ)', show: showProducts && ejectProg > 0.1 });
+                items.push({ color: COL_ELECTRON, label: 'Elektron (e⁻)', show: showProducts && ejectProg > 0 });
+                items.push({ color: COL_NEUTRINO, label: 'Antineutrino (ν̄ₑ)', show: showProducts && ejectProg > 0.1 });
             }
             // Beta⁺: same timing as beta⁻
             if (decayType === 'betaPlus') {
                 const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
-                items.push({ color: '#c084fc', label: 'Positron (e⁺)', show: showProducts && ejectProg > 0 });
-                items.push({ color: '#5a6170', label: 'Neutrino (νₑ)', show: showProducts && ejectProg > 0.1 });
+                items.push({ color: COL_POSITRON, label: 'Positron (e⁺)', show: showProducts && ejectProg > 0 });
+                items.push({ color: COL_NEUTRINO, label: 'Neutrino (νₑ)', show: showProducts && ejectProg > 0.1 });
             }
             // Gamma: photon appears at prodProg ~0.1
-            if (decayType === 'gamma')     items.push({ color: '#fbbf24', label: 'Gammafoton (γ)', show: showProducts && prodProg > 0.1 });
+            if (decayType === 'gamma')     items.push({ color: COL_GAMMA, label: 'Gammafoton (γ)', show: showProducts && prodProg > 0.1 });
 
             const visibleItems = items.filter(it => it.show);
 
@@ -536,6 +517,7 @@
 
             ctx.save();
             ctx.fillStyle = color;
+            ctx.shadowBlur = 0;   // aldrig glöd runt text på papper (blir en halo)
             ctx.textBaseline = 'middle';
 
             // Measure symbol
@@ -668,7 +650,9 @@
                             setCanvasSize({ w, h });
                         } else {
                             const w = Math.min(rect.width || 750, 750);
-                            const h = Math.round(w * 480 / 750);
+                            // Smal canvas (mobil): högre format, så att teckenförklaring,
+                            // etikett och kärna får plats under varandra
+                            const h = Math.round(w * (w < 560 ? 1.05 : 480 / 750));
                             setCanvasSize({ w, h });
                         }
                     }
@@ -708,14 +692,48 @@
                 let maxGridR = 0;
                 nucleons.forEach(n => { if (n.distFromCenter > maxGridR) maxGridR = n.distFromCenter; });
 
+                // ── Layout för enkelvyerna (idle/animering) ──────────────────
+                // På en smal canvas (mobil) tas rubriken bort (den aktiva fliken
+                // säger redan vilket sönderfall det är), teckenförklaringen får
+                // hela överkanten och kärnan ytan under den. På bred canvas är
+                // allt som förr: rubrik överst, kärnan mitt i. Etiketten ovanför
+                // kärnan (och tillståndsraden ovanför den) ligger aldrig på
+                // rubriken eller teckenförklaringen.
+                const narrow = w < 560;
+                const headingSize = Math.max(16, Math.min(24, w / 30));
+                const titleSize = Math.max(16, Math.min(22, w / 32));
+                const legendLines = { alpha: 3, betaMinus: 4, betaPlus: 4, gamma: 3 }[decayType];
+                const legendBottom = 16 + (legendLines - 1) * 18 + 9;
+                const stateGap = decayType === 'gamma' ? 26 : 0;   // rad för "Exciterat tillstånd"/"Grundtillstånd"
+                const labelMin = (narrow ? legendBottom + 6 + titleSize / 2 : 24 + headingSize + 14) + stateGap;
+                const areaTop = narrow ? labelMin + titleSize / 2 + 10 : 0;
+                const areaBottom = narrow ? h - 40 : h;
+                function singleGeom() {
+                    const padding = nr * 3;
+                    const availR = Math.min(Math.min(w, h) * 0.42, (areaBottom - areaTop) / 2) - padding;
+                    const scale = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
+                    const drawR = Math.max(nr, scale * 0.48);
+                    const cx = w / 2;
+                    const cy = narrow ? (areaTop + areaBottom) / 2 : h / 2;
+                    const visR = maxGridR * scale + drawR;
+                    const labelY = Math.max(cy - visR - 18, labelMin);
+                    return { scale, drawR, cx, cy, visR, labelY, stateY: labelY - 26 };
+                }
+                function drawTitle() {
+                    if (narrow) return;
+                    const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
+                    ctx.save();
+                    ctx.font = `bold ${headingSize}px Poppins, sans-serif`;
+                    ctx.fillStyle = INK;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
+                    ctx.restore();
+                }
+
                 if (currentPhase === 'idle') {
                     // ── IDLE: single centred view ────────────────────────────
-                    const padding = nr * 3;
-                    const availR  = Math.min(w, h) * 0.42 - padding;
-                    const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
-                    const drawR   = Math.max(nr, scale * 0.48);
-                    const cx = w / 2;
-                    const cy = h / 2;
+                    const { scale, drawR, cx, cy, labelY, stateY } = singleGeom();
 
                     const jiggleAmp = decayType === 'gamma' ? drawR * 0.38 : drawR * 0.10;
                     const glowStr   = decayType === 'gamma' ? 12 + Math.sin(time * 8) * 6 : 0;
@@ -729,78 +747,44 @@
                         drawNucleon(ctx, px, py, drawR, color, decayType === 'gamma' ? color : null, glowStr * 0.7);
                     });
 
-                    // Decay type title at top
-                    const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
-                    const headingSize = Math.max(16, Math.min(24, w / 30));
-                    ctx.save();
-                    ctx.font = `bold ${headingSize}px Poppins, sans-serif`;
-                    ctx.fillStyle = '#0f1620';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
-                    ctx.shadowBlur = 8;
-                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
-                    ctx.restore();
+                    // Decay type title at top (not on narrow canvases)
+                    drawTitle();
 
-                    // Parent isotope label closer to nucleus
-                    const nucleusTop = cy - (maxGridR * scale + drawR);
-                    const titleSize = Math.max(16, Math.min(22, w / 32));
+                    // Parent isotope label above the nucleus
                     const nLabels = NUCLEUS_LABELS[decayType];
-                    ctx.save();
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
-                    ctx.shadowBlur = 8;
-                    // Liten canvas (mobil): kläm etiketten under rubriken så de inte överlappar
-                    drawNucleusLabel(ctx, w / 2, Math.max(nucleusTop - 18, 24 + headingSize + 14), nLabels.parent, titleSize, '#e2e8f0');
-                    ctx.restore();
+                    drawNucleusLabel(ctx, w / 2, labelY, nLabels.parent, titleSize, INK);
 
                     // "Exciterat tillstånd" label for gamma
                     if (decayType === 'gamma') {
                         ctx.save();
                         ctx.globalAlpha = 0.75 + Math.sin(time * 2) * 0.15;
                         ctx.font = `bold ${Math.max(11, titleSize * 0.6)}px Poppins, sans-serif`;
-                        ctx.fillStyle = '#fbbf24';
+                        ctx.fillStyle = COL_AMBER_TEXT;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.shadowColor = '#fbbf24';
-                        ctx.shadowBlur = 12;
-                        ctx.fillText('Exciterat tillstånd', w / 2, Math.max(nucleusTop - 36, 24 + headingSize + 34));
+                        ctx.fillText('Exciterat tillstånd', w / 2, stateY);
                         ctx.restore();
                     }
 
                     // Formula at bottom
                     const fmSize = Math.max(13, Math.min(19, w / 40));
                     const fTokens = FORMULA_TOKENS[decayType];
-                    drawFormula(ctx, w / 2, h - 18, fTokens, fmSize, '#94a3b8');
+                    drawFormula(ctx, w / 2, h - 18, fTokens, fmSize, INK_SOFT);
 
                     // Legend top-left
                     drawLegend(ctx, decayType, 64, 16, currentPhase, progress);
 
                 } else if (currentPhase === 'animating' || currentPhase === 'done') {
                     // ── SINGLE VIEW: decay animation / final products ────────
-                    const padding = nr * 3;
-                    const availR  = Math.min(w, h) * 0.42 - padding;
-                    const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
-                    const drawR   = Math.max(nr, scale * 0.48);
-                    const cx = w / 2;
-                    const cy = h / 2;
+                    const { scale, drawR, cx, cy, labelY, stateY } = singleGeom();
 
                     // prodProg is just the raw animation progress (0 to 1), no hold
                     const prodProg = progress;
 
-                    // Decay type title at top
-                    const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
-                    const headingSize = Math.max(16, Math.min(24, w / 30));
-                    ctx.save();
-                    ctx.font = `bold ${headingSize}px Poppins, sans-serif`;
-                    ctx.fillStyle = '#0f1620';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
-                    ctx.shadowBlur = 8;
-                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
-                    ctx.restore();
+                    // Decay type title at top (not on narrow canvases)
+                    drawTitle();
 
-                    const lblSize = Math.max(16, Math.min(22, w / 32));
+                    const lblSize = titleSize;
                     const nLabels = NUCLEUS_LABELS[decayType];
 
                     // ── ALPHA single view ─────────────────────────────────────
@@ -859,8 +843,6 @@
                             ctx.globalAlpha = (convergeProg - 0.5) * 2 * 0.45;
                             ctx.strokeStyle = COL_ALPHA;
                             ctx.lineWidth = 1.5;
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 10;
                             ctx.beginPath();
                             ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
                             ctx.stroke();
@@ -872,8 +854,6 @@
                             const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
                             ctx.save();
                             ctx.globalAlpha = clamp((prodProg - 0.4) / 0.25, 0, 1);
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 12;
                             drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(α)');
                             ctx.restore();
                         }
@@ -882,9 +862,7 @@
                         const nucleusTopY = cy - (maxGridR * scale + drawR);
                         ctx.save();
                         ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
-                        ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
-                        ctx.shadowBlur = 8;
-                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        drawNucleusLabel(ctx, cx, labelY, nLabels.daughter, lblSize, INK);
                         ctx.restore();
                     }
 
@@ -902,7 +880,7 @@
                             const py = cy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                drawNucleon(ctx, px, py, drawR, COL_PROTON, '#fff', 8);
+                                drawNucleon(ctx, px, py, drawR, COL_PROTON, COL_ALPHA, 10);
                                 if (prodProg < 0.7) {
                                     ctx.save();
                                     ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
@@ -910,8 +888,6 @@
                                     ctx.fillStyle = '#0f1620';
                                     ctx.textAlign = 'center';
                                     ctx.textBaseline = 'middle';
-                                    ctx.shadowColor = '#fff';
-                                    ctx.shadowBlur = 10;
                                     ctx.fillText('n \u2192 p', px, py - drawR * 2.2);
                                     ctx.restore();
                                 }
@@ -926,9 +902,10 @@
                         const eRadius = drawR * 0.55;
                         const nuRadius = drawR * 0.35;
                         const particleSpacing = drawR * 6;
-                        const eFinalX = cx + nucleusVisR + drawR * 5;
+                        // Håll partiklarna innanför canvasens högerkant (smal canvas)
+                        const nuFinalX = Math.min(cx + nucleusVisR + drawR * 5 + particleSpacing, w - 20);
+                        const eFinalX = nuFinalX - particleSpacing;
                         const eFinalY = cy;
-                        const nuFinalX = eFinalX + particleSpacing;
                         const nuFinalY = cy;
                         const eStartX = cx + convNucleon.gx * scale;
                         const eStartY = cy + convNucleon.gy * scale;
@@ -955,9 +932,7 @@
                                 const eInfo = { mass: '0', Z: '-1', symbol: 'e\u207B', name: '' };
                                 ctx.save();
                                 ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.shadowColor = COL_ALPHA;
-                                ctx.shadowBlur = 10;
-                                drawNucleusLabel(ctx, ex, ey - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
+                                drawNucleusLabel(ctx, ex, narrow ? ey + eRadius + 22 : ey - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
                                 ctx.restore();
                             }
                         }
@@ -982,7 +957,7 @@
                                 ctx.fillStyle = COL_NEUTRINO;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'alphabetic';
-                                ctx.fillText('\u03BD\u0304\u2091', nx, ny - nuRadius - 10);
+                                ctx.fillText('\u03BD\u0304\u2091', nx, narrow ? ny + nuRadius + 18 : ny - nuRadius - 10);
                                 ctx.restore();
                             }
                         }
@@ -991,9 +966,7 @@
                         const nucleusTopY = cy - (maxGridR * scale + drawR);
                         ctx.save();
                         ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
-                        ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
-                        ctx.shadowBlur = 8;
-                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        drawNucleusLabel(ctx, cx, labelY, nLabels.daughter, lblSize, INK);
                         ctx.restore();
                     }
 
@@ -1011,7 +984,7 @@
                             const py = cy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, '#fff', 8);
+                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, COL_ALPHA, 10);
                                 if (prodProg < 0.7) {
                                     ctx.save();
                                     ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
@@ -1019,8 +992,6 @@
                                     ctx.fillStyle = '#0f1620';
                                     ctx.textAlign = 'center';
                                     ctx.textBaseline = 'middle';
-                                    ctx.shadowColor = '#fff';
-                                    ctx.shadowBlur = 10;
                                     ctx.fillText('p \u2192 n', px, py - drawR * 2.2);
                                     ctx.restore();
                                 }
@@ -1035,9 +1006,10 @@
                         const eRadiusBp = drawR * 0.55;
                         const nuRadiusBp = drawR * 0.35;
                         const particleSpacingBp = drawR * 6;
-                        const eFinalXBp = cx + nucleusVisRBp + drawR * 5;
+                        // Håll partiklarna innanför canvasens högerkant (smal canvas)
+                        const nuFinalXBp = Math.min(cx + nucleusVisRBp + drawR * 5 + particleSpacingBp, w - 20);
+                        const eFinalXBp = nuFinalXBp - particleSpacingBp;
                         const eFinalYBp = cy;
-                        const nuFinalXBp = eFinalXBp + particleSpacingBp;
                         const nuFinalYBp = cy;
                         const eStartXBp = cx + convNucleon.gx * scale;
                         const eStartYBp = cy + convNucleon.gy * scale;
@@ -1064,9 +1036,7 @@
                                 const eInfoBp = { mass: '0', Z: '1', symbol: 'e\u207A', name: '' };
                                 ctx.save();
                                 ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.shadowColor = COL_ALPHA;
-                                ctx.shadowBlur = 10;
-                                drawNucleusLabel(ctx, ex, ey - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
+                                drawNucleusLabel(ctx, ex, narrow ? ey + eRadiusBp + 22 : ey - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
                                 ctx.restore();
                             }
                         }
@@ -1091,7 +1061,7 @@
                                 ctx.fillStyle = COL_NEUTRINO;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'alphabetic';
-                                ctx.fillText('\u03BD\u2091', nx, ny - nuRadiusBp - 10);
+                                ctx.fillText('\u03BD\u2091', nx, narrow ? ny + nuRadiusBp + 18 : ny - nuRadiusBp - 10);
                                 ctx.restore();
                             }
                         }
@@ -1100,9 +1070,7 @@
                         const nucleusTopY = cy - (maxGridR * scale + drawR);
                         ctx.save();
                         ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
-                        ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
-                        ctx.shadowBlur = 8;
-                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        drawNucleusLabel(ctx, cx, labelY, nLabels.daughter, lblSize, INK);
                         ctx.restore();
                     }
 
@@ -1132,9 +1100,7 @@
                             ctx.fillStyle = '#0f1620';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.shadowColor = '#38bdf8';
-                            ctx.shadowBlur = 10;
-                            ctx.fillText('Grundtillst\u00e5nd', cx, gtTopY - 36);
+                            ctx.fillText('Grundtillst\u00e5nd', cx, stateY);
                             ctx.restore();
                         }
 
@@ -1143,7 +1109,7 @@
                         const gammaFade = clamp((prodProg - 0.85) / 0.15, 0, 1);
                         const nucleusVisRG = maxGridR * scale + drawR;
                         const gammaStartX = cx + nucleusVisRG + drawR;
-                        const gammaEndX   = cx + nucleusVisRG + drawR * 12;
+                        const gammaEndX   = Math.min(cx + nucleusVisRG + drawR * 12, w - 24);
                         const gammaFinalX = gammaStartX + (gammaEndX - gammaStartX) * easeInOut(gammaProg);
                         const gammaY = cy;
 
@@ -1188,8 +1154,6 @@
                                 ctx.fillStyle = COL_GAMMA;
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'alphabetic';
-                                ctx.shadowColor = COL_GAMMA;
-                                ctx.shadowBlur = 12;
                                 ctx.fillText('\u03B3', gammaFinalX, gammaY - gDotR - 10);
                                 ctx.restore();
                             }
@@ -1199,9 +1163,7 @@
                         const nucleusTopY = cy - (maxGridR * scale + drawR);
                         ctx.save();
                         ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
-                        ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
-                        ctx.shadowBlur = 8;
-                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        drawNucleusLabel(ctx, cx, labelY, nLabels.daughter, lblSize, INK);
                         ctx.restore();
                     }
 
@@ -1217,12 +1179,21 @@
                     const availR  = Math.min(panelW - 10, h - 80) * 0.40 - padding;
                     const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
                     const drawR   = Math.max(nr, scale * 0.48);
+                    // Smal canvas: tätare produktpartiklar i delad vy (halva bredden per panel),
+                    // och etiketterna visar bara nukliden (namnen står i korten under scenen)
+                    const eOffS = narrow ? drawR * 3.5 : drawR * 5;
+                    const nuOffS = narrow ? drawR * 4 : drawR * 6;
+                    const lblParent = narrow ? { ...NUCLEUS_LABELS[decayType].parent, name: '' } : NUCLEUS_LABELS[decayType].parent;
+                    const lblDaughter = narrow ? { ...NUCLEUS_LABELS[decayType].daughter, name: '' } : NUCLEUS_LABELS[decayType].daughter;
+                    let daughterCX = null;
 
                     // Panel centres
+                    // Smal canvas: kärnorna sänks så att teckenförklaringen får överkanten
                     const lcx = w / 4;
-                    const lcy = h / 2 + 8;
-                    const rcx = 3 * w / 4;
-                    const rcy = h / 2 + 8;
+                    const lcy = narrow ? h / 2 + legendBottom / 2 : h / 2 + 8;
+                    // (beta: gruppen kärna + partiklar skjuts redan åt vänster nedan)
+                    const rcx = (narrow && (decayType === 'alpha' || decayType === 'gamma')) ? 3 * w / 4 - 18 : 3 * w / 4;
+                    const rcy = lcy;
 
                     // Static final state: prodProg = 1
                     const prodProg = 1;
@@ -1246,8 +1217,9 @@
                     ctx.textBaseline = 'top';
                     ctx.textAlign = 'center';
                     ctx.fillStyle = '#0f1620';
-                    ctx.fillText('F\u00f6re', w / 4, 10);
-                    ctx.fillText('Efter', 3 * w / 4, 10);
+                    const hdrY = narrow ? legendBottom + 2 : 10;
+                    ctx.fillText('F\u00f6re', w / 4, hdrY);
+                    ctx.fillText('Efter', 3 * w / 4, hdrY);
                     ctx.restore();
 
                     // ── LEFT PANEL: frozen original nucleus with subtle jiggle ─
@@ -1268,9 +1240,7 @@
                     const lblSize = Math.max(14, Math.min(20, w / 42));
                     const nLabels = NUCLEUS_LABELS[decayType];
                     ctx.save();
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
-                    ctx.shadowBlur = 6;
-                    drawNucleusLabel(ctx, lcx, parentTopY - 18, nLabels.parent, lblSize, '#e2e8f0');
+                    drawNucleusLabel(ctx, lcx, parentTopY - 18, lblParent, lblSize, INK);
                     ctx.restore();
 
                     // Gamma: "Exciterat tillstånd" below parent label
@@ -1278,12 +1248,10 @@
                         ctx.save();
                         ctx.globalAlpha = 0.85;
                         ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
-                        ctx.fillStyle = '#fbbf24';
+                        ctx.fillStyle = COL_AMBER_TEXT;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.shadowColor = '#fbbf24';
-                        ctx.shadowBlur = 12;
-                        ctx.fillText('Exciterat tillst\u00e5nd', lcx, parentTopY - 40);
+                        ctx.fillText('Exciterat tillst\u00e5nd', lcx, parentTopY - 44);
                         ctx.restore();
                     }
 
@@ -1306,7 +1274,7 @@
 
                         const nucleusVisR = maxGridR * scale + drawR;
                         const targetDist  = nucleusVisR + drawR * 8;
-                        const clusterCX   = rcx + targetDist;
+                        const clusterCX   = Math.min(rcx + targetDist, w - 40);
                         const clusterCY   = rcy;
 
                         // Draw daughter nucleus
@@ -1335,8 +1303,6 @@
                         ctx.globalAlpha = 0.45;
                         ctx.strokeStyle = COL_ALPHA;
                         ctx.lineWidth = 1.5;
-                        ctx.shadowColor = COL_ALPHA;
-                        ctx.shadowBlur = 10;
                         ctx.beginPath();
                         ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
                         ctx.stroke();
@@ -1345,8 +1311,6 @@
                         // Alpha label
                         const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
                         ctx.save();
-                        ctx.shadowColor = COL_ALPHA;
-                        ctx.shadowBlur = 12;
                         drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(\u03B1)');
                         ctx.restore();
                     }
@@ -1359,9 +1323,10 @@
 
                         // Shift group left so electron is roughly centered in right panel
                         const nucleusVisR_bm = maxGridR * scale + drawR;
-                        const groupExtent = nucleusVisR_bm + drawR * 5 + drawR * 6;
+                        const groupExtent = nucleusVisR_bm + eOffS + nuOffS;
                         const groupShift = (groupExtent - nucleusVisR_bm) / 2;
                         const bmRcx = rcx - groupShift;
+                        daughterCX = bmRcx;
 
                         nucleons.forEach((n, idx) => {
                             const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
@@ -1370,7 +1335,7 @@
                             const py = rcy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                drawNucleon(ctx, px, py, drawR, COL_PROTON, '#fff', 8);
+                                drawNucleon(ctx, px, py, drawR, COL_PROTON, COL_ALPHA, 10);
                             } else {
                                 const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
                                 drawNucleon(ctx, px, py, drawR, color);
@@ -1380,8 +1345,8 @@
                         const nucleusVisR = nucleusVisR_bm;
                         const eRadius = drawR * 0.55;
                         const nuRadius = drawR * 0.35;
-                        const particleSpacing = drawR * 6;
-                        const eFinalX = bmRcx + nucleusVisR + drawR * 5;
+                        const particleSpacing = nuOffS;
+                        const eFinalX = bmRcx + nucleusVisR + eOffS;
                         const eFinalY = rcy;
                         const nuFinalX = eFinalX + particleSpacing;
                         const nuFinalY = rcy;
@@ -1403,9 +1368,7 @@
 
                         const eInfo = { mass: '0', Z: '-1', symbol: 'e\u207B', name: '' };
                         ctx.save();
-                        ctx.shadowColor = COL_ALPHA;
-                        ctx.shadowBlur = 10;
-                        drawNucleusLabel(ctx, eFinalX, eFinalY - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
+                        drawNucleusLabel(ctx, eFinalX, narrow ? eFinalY + eRadius + 22 : eFinalY - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
                         ctx.restore();
 
                         // Antineutrino at final position
@@ -1423,7 +1386,7 @@
                         ctx.fillStyle = COL_NEUTRINO;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'alphabetic';
-                        ctx.fillText('\u03BD\u0304\u2091', nuFinalX, nuFinalY - nuRadius - 10);
+                        ctx.fillText('\u03BD\u0304\u2091', nuFinalX, narrow ? nuFinalY + nuRadius + 18 : nuFinalY - nuRadius - 10);
                         ctx.restore();
                     }
 
@@ -1435,8 +1398,9 @@
 
                         // Shift group left so positron is roughly centered in right panel
                         const nucleusVisRBp = maxGridR * scale + drawR;
-                        const groupShiftBp = (drawR * 5 + drawR * 6) / 2;
+                        const groupShiftBp = (eOffS + nuOffS) / 2;
                         const bpRcx = rcx - groupShiftBp;
+                        daughterCX = bpRcx;
 
                         nucleons.forEach((n, idx) => {
                             const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
@@ -1445,7 +1409,7 @@
                             const py = rcy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, '#fff', 8);
+                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, COL_ALPHA, 10);
                             } else {
                                 const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
                                 drawNucleon(ctx, px, py, drawR, color);
@@ -1454,8 +1418,8 @@
 
                         const eRadiusBp = drawR * 0.55;
                         const nuRadiusBp = drawR * 0.35;
-                        const particleSpacingBp = drawR * 6;
-                        const eFinalXBp = bpRcx + nucleusVisRBp + drawR * 5;
+                        const particleSpacingBp = nuOffS;
+                        const eFinalXBp = bpRcx + nucleusVisRBp + eOffS;
                         const eFinalYBp = rcy;
                         const nuFinalXBp = eFinalXBp + particleSpacingBp;
                         const nuFinalYBp = rcy;
@@ -1477,9 +1441,7 @@
 
                         const eInfoBp = { mass: '0', Z: '1', symbol: 'e\u207A', name: '' };
                         ctx.save();
-                        ctx.shadowColor = COL_ALPHA;
-                        ctx.shadowBlur = 10;
-                        drawNucleusLabel(ctx, eFinalXBp, eFinalYBp - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
+                        drawNucleusLabel(ctx, eFinalXBp, narrow ? eFinalYBp + eRadiusBp + 22 : eFinalYBp - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
                         ctx.restore();
 
                         // Neutrino at final position
@@ -1497,7 +1459,7 @@
                         ctx.fillStyle = COL_NEUTRINO;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'alphabetic';
-                        ctx.fillText('\u03BD\u2091', nuFinalXBp, nuFinalYBp - nuRadiusBp - 10);
+                        ctx.fillText('\u03BD\u2091', nuFinalXBp, narrow ? nuFinalYBp + nuRadiusBp + 18 : nuFinalYBp - nuRadiusBp - 10);
                         ctx.restore();
                     }
 
@@ -1520,14 +1482,12 @@
                         ctx.fillStyle = '#0f1620';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.shadowColor = '#38bdf8';
-                        ctx.shadowBlur = 10;
-                        ctx.fillText('Grundtillst\u00e5nd', rcx, gtTopY - 40);
+                        ctx.fillText('Grundtillst\u00e5nd', rcx, gtTopY - 44);
                         ctx.restore();
 
                         // Gamma dot at final position (no wave)
                         const nucleusVisRG = maxGridR * scale + drawR;
-                        const gammaEndX = rcx + nucleusVisRG + drawR * 12;
+                        const gammaEndX = Math.min(rcx + nucleusVisRG + drawR * 12, w - 16);
                         const gammaY = rcy;
                         const gDotR = drawR * 0.5;
 
@@ -1545,33 +1505,29 @@
                         ctx.fillStyle = COL_GAMMA;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'alphabetic';
-                        ctx.shadowColor = COL_GAMMA;
-                        ctx.shadowBlur = 12;
                         ctx.fillText('\u03B3', gammaEndX, gammaY - gDotR - 10);
                         ctx.restore();
                     }
 
                     // Daughter label above right-panel nucleus
                     const nucleusTopY = rcy - (maxGridR * scale + drawR);
-                    const daughterLabelX = (decayType === 'betaMinus' || decayType === 'betaPlus') ? rcx - drawR * 5.5 : rcx;
+                    const daughterLabelX = daughterCX !== null ? daughterCX : rcx;
                     ctx.save();
-                    ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
-                    ctx.shadowBlur = 8;
-                    drawNucleusLabel(ctx, daughterLabelX, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                    drawNucleusLabel(ctx, daughterLabelX, nucleusTopY - 18, lblDaughter, lblSize, INK);
                     ctx.restore();
 
                     // Formula aligned with panels: reactant left, arrow center, products right
-                    const fmSize = Math.max(16, Math.min(24, w / 32));
+                    const fmSize = narrow ? 13 : Math.max(16, Math.min(24, w / 32));
                     const fTokens = FORMULA_TOKENS[decayType];
                     const reactant = [fTokens[0]];
                     const products = fTokens.slice(2);
                     const formulaY = h - 38;
                     const formulaBoxH = fmSize * 2.2;
 
-                    // Background box
+                    // Background box (vitt kort med bläckkant, som .equation-box under scenen)
                     ctx.save();
-                    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-                    ctx.strokeStyle = 'rgba(200, 50, 74, 0.2)';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.28)';
                     ctx.lineWidth = 1;
                     const boxY = formulaY - formulaBoxH / 2;
                     const boxR = 8;
@@ -1582,7 +1538,7 @@
                     ctx.restore();
 
                     // Reactant centred in left panel
-                    drawFormula(ctx, lcx, formulaY, reactant, fmSize, '#e2e8f0');
+                    drawFormula(ctx, lcx, formulaY, reactant, fmSize, INK);
 
                     // Arrow at centre
                     ctx.save();
@@ -1594,7 +1550,7 @@
                     ctx.restore();
 
                     // Products centred in right panel
-                    drawFormula(ctx, rcx, formulaY, products, fmSize, '#e2e8f0');
+                    drawFormula(ctx, rcx, formulaY, products, fmSize, INK);
 
                     // Legend top-left
                     drawLegend(ctx, decayType, 64, 16, currentPhase, progress);
@@ -1705,7 +1661,7 @@
                         {phase === 'idle' && (
                             <button
                                 onClick={startAnimation}
-                                className="btn-primary px-8 py-3 rounded-xl text-base"
+                                className="btn-primary px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-base"
                                 style={{ fontFamily: 'Poppins, sans-serif' }}
                             >
                                 {{ alpha: 'α-sönderfall', betaMinus: 'β⁻-sönderfall', betaPlus: 'β⁺-sönderfall', gamma: 'γ-sönderfall' }[decayType]}
@@ -1713,24 +1669,24 @@
                         )}
                         {phase === 'animating' && (
                             <span
-                                className="px-8 py-3 rounded-xl text-base text-slate-400"
-                                style={{ fontFamily: 'Poppins, sans-serif', background: 'rgba(30,41,59,0.5)', border: '1px solid rgba(15, 22, 32, 0.28)' }}
+                                className="px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-base"
+                                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted, #69655c)', border: '1px solid var(--lab-line-strong, rgba(15, 22, 32, 0.28))' }}
                             >
-                                Animerar...
+                                Animerar …
                             </span>
                         )}
                         {phase === 'done' && (
                             <React.Fragment>
                                 <button
                                     onClick={reset}
-                                    className="btn-secondary px-8 py-3 rounded-xl text-base"
+                                    className="btn-secondary px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-base"
                                     style={{ fontFamily: 'Poppins, sans-serif' }}
                                 >
                                     Återställ
                                 </button>
                                 <button
                                     onClick={showFormula}
-                                    className="btn-primary px-8 py-3 rounded-xl text-base"
+                                    className="btn-primary px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-base"
                                     style={{ fontFamily: 'Poppins, sans-serif' }}
                                 >
                                     Visa sönderfallsformel
@@ -1740,7 +1696,7 @@
                         {phase === 'formula' && (
                             <button
                                 onClick={reset}
-                                className="btn-secondary px-8 py-3 rounded-xl text-base"
+                                className="btn-secondary px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-base"
                                 style={{ fontFamily: 'Poppins, sans-serif' }}
                             >
                                 Återställ
@@ -1752,47 +1708,58 @@
         }
 
         // ─── Equation display for each decay ─────────────────────────────────
+        // Nuklidbeteckning med masstalet ovanför atomnumret, till vänster om
+        // symbolen (som i genomgången), i stället för sup + sub på rad.
+        function Nuc({ a, z, sym }) {
+            return (
+                <span className="nuc">
+                    <span className="nuc-az"><span>{a}</span><span>{z}</span></span>
+                    <span>{sym}</span>
+                </span>
+            );
+        }
         function DecayEquation({ decayType }) {
             const equations = {
                 alpha: (
-                    <span>
-                        <sup>226</sup><sub>88</sub>Ra
-                        {' '}&rarr;{' '}
-                        <sup>222</sup><sub>86</sub>Rn
-                        {' '}+{' '}
-                        <sup>4</sup><sub>2</sub>He&nbsp;(α)
-                    </span>
+                    <React.Fragment>
+                        <Nuc a="226" z="88" sym="Ra" />
+                        <span>&rarr;</span>
+                        <Nuc a="222" z="86" sym="Rn" />
+                        <span>+</span>
+                        <Nuc a="4" z="2" sym="He" />
+                        <span>(α)</span>
+                    </React.Fragment>
                 ),
                 betaMinus: (
-                    <span>
-                        <sup>14</sup><sub>6</sub>C
-                        {' '}&rarr;{' '}
-                        <sup>14</sup><sub>7</sub>N
-                        {' '}+{' '}
-                        e<sup>&minus;</sup>
-                        {' '}+{' '}
-                        &nu;&#x0305;<sub>e</sub>
-                    </span>
+                    <React.Fragment>
+                        <Nuc a="14" z="6" sym="C" />
+                        <span>&rarr;</span>
+                        <Nuc a="14" z="7" sym="N" />
+                        <span>+</span>
+                        <Nuc a="0" z="−1" sym="e" />
+                        <span>+</span>
+                        <span>&nu;&#x0305;<sub>e</sub></span>
+                    </React.Fragment>
                 ),
                 betaPlus: (
-                    <span>
-                        <sup>18</sup><sub>9</sub>F
-                        {' '}&rarr;{' '}
-                        <sup>18</sup><sub>8</sub>O
-                        {' '}+{' '}
-                        e<sup>+</sup>
-                        {' '}+{' '}
-                        &nu;<sub>e</sub>
-                    </span>
+                    <React.Fragment>
+                        <Nuc a="18" z="9" sym="F" />
+                        <span>&rarr;</span>
+                        <Nuc a="18" z="8" sym="O" />
+                        <span>+</span>
+                        <Nuc a="0" z="+1" sym="e" />
+                        <span>+</span>
+                        <span>&nu;<sub>e</sub></span>
+                    </React.Fragment>
                 ),
                 gamma: (
-                    <span>
-                        <sup>99</sup><sub>43</sub>Tc*
-                        {' '}&rarr;{' '}
-                        <sup>99</sup><sub>43</sub>Tc
-                        {' '}+{' '}
-                        &gamma;
-                    </span>
+                    <React.Fragment>
+                        <Nuc a="99" z="43" sym="Tc*" />
+                        <span>&rarr;</span>
+                        <Nuc a="99" z="43" sym="Tc" />
+                        <span>+</span>
+                        <span>&gamma;</span>
+                    </React.Fragment>
                 ),
             };
             return (
@@ -1820,10 +1787,10 @@
                 { color: COL_NEUTRON, label: 'Neutron' },
             ];
             if (decayType === 'alpha') {
-                items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)' });
+                items.push({ color: COL_ALPHA, label: 'Alfapartikel (⁴He)' });
             }
             if (decayType === 'betaMinus') {
-                items.push({ color: '#22c55e', label: 'Elektron (e⁻)' });
+                items.push({ color: COL_ELECTRON, label: 'Elektron (e⁻)' });
                 items.push({ color: '#5a6170', label: 'Antineutrino (ν̄ₑ)' });
             }
             if (decayType === 'betaPlus') {
@@ -1831,7 +1798,7 @@
                 items.push({ color: '#5a6170', label: 'Neutrino (νₑ)' });
             }
             if (decayType === 'gamma') {
-                items.push({ color: '#fbbf24', label: 'Gammafoton (γ)' });
+                items.push({ color: COL_AMBER_TEXT, label: 'Gammafoton (γ)' });
             }
             return (
                 <div className="flex flex-wrap gap-4 justify-center">
@@ -1841,7 +1808,7 @@
                                 className="legend-dot"
                                 style={{ background: item.color, boxShadow: `0 0 6px ${item.color}88` }}
                             />
-                            <span className="text-slate-300 text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                            <span className="text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                 {item.label}
                             </span>
                         </div>
@@ -1871,26 +1838,27 @@
                 },
             };
             const d = info[decayType];
+            // Protontalet i en mörkare röd än nukleonerna (liten text på papper),
+            // neutrontalet i mjukt bläck
+            const pnRow = (n) => (
+                <div className="nc-pn">
+                    <span style={{ color: '#c0392b' }}>{n.protons} p</span>
+                    {' '}&middot;{' '}
+                    <span>{n.neutrons} n</span>
+                </div>
+            );
             return (
-                <div className="flex flex-wrap gap-4 justify-center text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                    <div className="glass-card-light rounded-lg px-4 py-3 text-center min-w-[160px]">
-                        <div className="text-slate-400 text-xs mb-1">Moderkärna</div>
-                        <div className="text-white font-semibold">{d.before.name}</div>
-                        <div className="text-slate-300 text-xs mt-1">
-                            <span style={{ color: '#ef4444' }}>{d.before.protons}p</span>
-                            {' '}&middot;{' '}
-                            <span style={{ color: COL_NEUTRON }}>{d.before.neutrons}n</span>
-                        </div>
+                <div className="flex flex-wrap gap-4 justify-center items-center text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="glass-card-light rounded-lg nucleus-card">
+                        <div className="nc-lbl">Moderkärna</div>
+                        <div className="nc-name">{d.before.name}</div>
+                        {pnRow(d.before)}
                     </div>
-                    <div className="flex items-center text-slate-400 text-xl">&rarr;</div>
-                    <div className="glass-card-light rounded-lg px-4 py-3 text-center min-w-[160px]">
-                        <div className="text-slate-400 text-xs mb-1">Dotterkärna</div>
-                        <div className="text-white font-semibold">{d.after.name}</div>
-                        <div className="text-slate-300 text-xs mt-1">
-                            <span style={{ color: '#ef4444' }}>{d.after.protons}p</span>
-                            {' '}&middot;{' '}
-                            <span style={{ color: COL_NEUTRON }}>{d.after.neutrons}n</span>
-                        </div>
+                    <div className="text-xl" style={{ color: 'var(--lab-ink-muted, #69655c)' }}>&rarr;</div>
+                    <div className="glass-card-light rounded-lg nucleus-card">
+                        <div className="nc-lbl">Dotterkärna</div>
+                        <div className="nc-name">{d.after.name}</div>
+                        {pnRow(d.after)}
                     </div>
                 </div>
             );
@@ -1908,6 +1876,7 @@
         function App() {
             const [activeTab, setActiveTab] = useState('alpha');
             const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
             const sceneWrapRef = useRef(null);
 
             function handleTabChange(key) {
@@ -1950,22 +1919,23 @@
                             <span className="mx-2">/</span>
                             <a href="fysik1.html">Fysik nivå 1</a>
                             <span className="mx-2">/</span>
-                            <span className="text-slate-300">Radioaktivt sönderfall</span>
+                            <span>Radioaktivt sönderfall</span>
                         </div>
 
                         {/* Heading */}
-                        <div className="mb-8 text-center">
-                            <h1 className="text-3xl font-bold glow-text mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                        <div className="mb-6">
+                            <h1 className="text-3xl md:text-4xl font-bold glow-text mb-2">
                                 Radioaktivt sönderfall
                             </h1>
-                            <p className="text-slate-400 text-sm max-w-xl mx-auto" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                Utforska de fyra typerna av radioaktivt sönderfall. Varje atom är uppbyggd av
-                                individuella protoner (röda) och neutroner (grå) i kärnan.
+                            <p className="text-sm md:text-base max-w-2xl leading-relaxed" style={{ color: 'var(--lab-ink-soft, #3f4a5c)' }}>
+                                Utforska de fyra typerna av radioaktivt sönderfall. Varje atomkärna är uppbyggd
+                                av protoner (röda) och neutroner (grå). Välj sönderfall, starta det och se vilka
+                                partiklar som lämnar kärnan.
                             </p>
                         </div>
 
                         {/* Tabs */}
-                        <div className="flex flex-wrap gap-2 justify-center mb-6">
+                        <div className="flex flex-wrap gap-2 mb-6">
                             {TABS.map(tab => (
                                 <button
                                     key={tab.key}
@@ -1996,8 +1966,30 @@
                                         </svg>
                                     )}
                                 </button>
-                                {isFullscreen && (
+                                {/* Inställningsrutan uppe till höger visas bara i fullskärm:
+                                    i normalläget bor valet av sönderfall i flikraden ovanför
+                                    scenen (aldrig dubblerat). Hopfällbar med krysset/runda knappen. */}
+                                {isFullscreen && !togglesOpen && (
+                                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                            <line x1="4" y1="8" x2="20" y2="8" />
+                                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                            <line x1="4" y1="16" x2="20" y2="16" />
+                                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                        </svg>
+                                    </button>
+                                )}
+                                {isFullscreen && togglesOpen && (
                                     <div className="scene-toggles">
+                                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                                <path d="M6 6l12 12M18 6L6 18" />
+                                            </svg>
+                                        </button>
                                         <div className="st-title">Sönderfallstyp</div>
                                         {TABS.map(tab => (
                                             <label key={tab.key}>
@@ -2021,50 +2013,40 @@
 
                         {/* Equation */}
                         <div className="mb-4">
-                            <div className="text-xs text-slate-500 uppercase tracking-widest mb-2 text-center"
-                                 style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                Kärnreaktionsformel
-                            </div>
+                            <div className="section-kicker text-center">Kärnreaktionsformel</div>
                             <DecayEquation decayType={activeTab} />
                         </div>
 
                         {/* Explanation */}
                         <div className="mb-8">
-                            <div className="text-xs text-slate-500 uppercase tracking-widest mb-2"
-                                 style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                Förklaring
-                            </div>
+                            <div className="section-kicker">Förklaring</div>
                             <DecayExplanation decayType={activeTab} />
                         </div>
 
                         {/* Info cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                            <div className="glass-card-light rounded-xl p-4">
-                                <h3 className="text-sm font-semibold text-sky-400 mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                            <div className="glass-card-light rounded-xl p-4 info-card">
+                                <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                     Om visualiseringen
                                 </h3>
-                                <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                     Kärnorna ritas med hexagonal packning för att efterlikna hur nukleoner sitter
-                                    tätt packade i verkligheten. Storlekarna är inte i skala – en riktig atomkärna
-                                    är ungefär 100&nbsp;000 gånger mindre än atomen.
+                                    tätt packade i verkligheten. Storlekarna är inte i skala: en riktig atomkärna
+                                    är bara ungefär en hundratusendel av atomens storlek.
                                 </p>
                             </div>
-                            <div className="glass-card-light rounded-xl p-4">
-                                <h3 className="text-sm font-semibold text-sky-400 mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                    Bevaringslagen
+                            <div className="glass-card-light rounded-xl p-4 info-card">
+                                <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Bevarandelagarna
                                 </h3>
-                                <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                                    Vid alla typer av sönderfall bevaras det totala masstalet (antal nukleoner) och
-                                    den totala laddningen. Energi och rörelsemängd bevaras också – det är kärn­fysikens
+                                <p className="text-sm leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Vid alla typer av sönderfall bevaras det totala masstalet (antalet nukleoner) och
+                                    den totala laddningen. Energi och rörelsemängd bevaras också. Det är kärnfysikens
                                     grundlagar.
                                 </p>
                             </div>
                         </div>
                     </div>
-
-                    <footer class="footer">
-                        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
-                    </footer>
                 </div>
             );
         }

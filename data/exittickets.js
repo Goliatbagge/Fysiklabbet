@@ -6911,9 +6911,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Riktningen är tvärtom — fältlinjerna går ut ur nordändan, inte sydändan.',
-      'Magnetiska fältlinjer definieras med riktningen från nordända till sydända, precis som i figuren med stavmagneten.',
+      'Utanför magneten går fältlinjerna från nordända till sydända, precis som i figuren med stavmagneten. Inuti magneten sluter de sig från syd till nord, så varje fältlinje är en sluten kurva.',
       'Fältlinjerna böjer sig i stora bågar mellan polerna, de går inte rakt igenom magneten som räta linjer.',
-      'En enskild magnet har ett eget fältlinjemönster som går från dess nordända till dess sydända — det krävs inte två magneter för att fältlinjer ska finnas.',
+      'En enskild magnet har ett eget fältlinjemönster som utanför magneten går från dess nordända till dess sydända — det krävs inte två magneter för att fältlinjer ska finnas.',
     ],
   },
   {

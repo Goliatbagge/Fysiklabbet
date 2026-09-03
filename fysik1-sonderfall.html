@@ -318,7 +318,10 @@
 
         // ─── Colours ──────────────────────────────────────────────────────────
         const COL_PROTON   = '#ef4444';
-        const COL_NEUTRON  = '#60a5fa';
+        // Neutronen är grå, inte blå: blått är laddningsfärgen för minus på
+        // sajten, och en oladdad partikel ska inte se laddad ut (lärarpåpekat
+        // 2026-08-31). Samma grå i massdefekt- och genomtränglighetssimen.
+        const COL_NEUTRON  = '#6b7280';
         const COL_ELECTRON = '#22c55e';
         const COL_POSITRON = '#ec4899';
         const COL_NEUTRINO = '#94a3b8';
@@ -465,7 +468,7 @@
             const prodProg = currentPhase === 'formula' || currentPhase === 'done' ? 1 : progress;
             const items = [
                 { color: '#ef4444', label: 'Proton', show: true },
-                { color: '#60a5fa', label: 'Neutron', show: true },
+                { color: COL_NEUTRON, label: 'Neutron', show: true },
             ];
             // Alpha: cluster starts forming at prodProg ~0.15
             if (decayType === 'alpha')     items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)', show: showProducts && prodProg > 0.15 });
@@ -1803,8 +1806,8 @@
         function DecayExplanation({ decayType }) {
             const texts = {
                 alpha: 'En alfapartikel (2 protoner och 2 neutroner) lämnar kärnan. Masstalet minskar med 4 och atomnumret minskar med 2. Radium-226 omvandlas till Radon-222.',
-                betaMinus: 'En neutron i kärnan omvandlas till en proton. En elektron (e⁻) och en antineutrino (ν̄ₑ) sänds ut. Atomnumret ökar med 1, masstalet är oförändrat. Kol-14 omvandlas till Kväve-14.',
-                betaPlus: 'En proton i kärnan omvandlas till en neutron. En positron (e⁺) och en neutrino (νₑ) sänds ut. Atomnumret minskar med 1, masstalet är oförändrat. Fluor-18 omvandlas till Syre-18.',
+                betaMinus: 'En neutron i kärnan omvandlas till en proton. En elektron (e⁻), betapartikeln, och en antineutrino (ν̄ₑ) sänds ut. Atomnumret ökar med 1, masstalet är oförändrat. Kol-14 omvandlas till Kväve-14.',
+                betaPlus: 'En proton i kärnan omvandlas till en neutron. En positron (e⁺), betapartikeln, och en neutrino (νₑ) sänds ut. Atomnumret minskar med 1, masstalet är oförändrat. Fluor-18 omvandlas till Syre-18. Samma omvandling kan också ske genom elektroninfångning: kärnan fångar in en av atomens egna elektroner i stället för att sända ut en positron.',
                 gamma: 'Kärnan befinner sig i ett exciterat tillstånd (hög energi). Den avger energi som en gammafoton (elektromagnetisk strålning) och övergår till grundtillståndet. Varken masstal eller atomnummer förändras. Teknetium-99 i exciterat tillstånd övergår till grundtillståndet.',
             };
             return <p className="explanation-box">{texts[decayType]}</p>;
@@ -1814,7 +1817,7 @@
         function Legend({ decayType }) {
             const items = [
                 { color: '#ef4444', label: 'Proton' },
-                { color: '#60a5fa', label: 'Neutron' },
+                { color: COL_NEUTRON, label: 'Neutron' },
             ];
             if (decayType === 'alpha') {
                 items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)' });
@@ -1876,7 +1879,7 @@
                         <div className="text-slate-300 text-xs mt-1">
                             <span style={{ color: '#ef4444' }}>{d.before.protons}p</span>
                             {' '}&middot;{' '}
-                            <span style={{ color: '#60a5fa' }}>{d.before.neutrons}n</span>
+                            <span style={{ color: COL_NEUTRON }}>{d.before.neutrons}n</span>
                         </div>
                     </div>
                     <div className="flex items-center text-slate-400 text-xl">&rarr;</div>
@@ -1886,7 +1889,7 @@
                         <div className="text-slate-300 text-xs mt-1">
                             <span style={{ color: '#ef4444' }}>{d.after.protons}p</span>
                             {' '}&middot;{' '}
-                            <span style={{ color: '#60a5fa' }}>{d.after.neutrons}n</span>
+                            <span style={{ color: COL_NEUTRON }}>{d.after.neutrons}n</span>
                         </div>
                     </div>
                 </div>
@@ -1957,7 +1960,7 @@
                             </h1>
                             <p className="text-slate-400 text-sm max-w-xl mx-auto" style={{ fontFamily: 'Poppins, sans-serif' }}>
                                 Utforska de fyra typerna av radioaktivt sönderfall. Varje atom är uppbyggd av
-                                individuella protoner (röda) och neutroner (blå) i kärnan.
+                                individuella protoner (röda) och neutroner (grå) i kärnan.
                             </p>
                         </div>
 

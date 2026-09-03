@@ -568,13 +568,13 @@
                 ctx.globalAlpha = p.alpha;
 
                 if (p.type === 'alpha') {
-                    // Alfa: 4 bollar (2 röda protoner + 2 blå neutroner) i kluster
+                    // Alfa: 4 bollar (2 röda protoner + 2 grå neutroner) i kluster
                     const br = 3.2; // boll-radie
                     const off = 3.0; // offset från centrum
                     const positions = [
                         { dx: -off, dy: -off, color: '#ef4444' }, // proton
-                        { dx:  off, dy: -off, color: '#3b82f6' }, // neutron
-                        { dx: -off, dy:  off, color: '#3b82f6' }, // neutron
+                        { dx:  off, dy: -off, color: '#6b7280' }, // neutron (grå, inte minusfärgen blå)
+                        { dx: -off, dy:  off, color: '#6b7280' }, // neutron
                         { dx:  off, dy:  off, color: '#ef4444' }, // proton
                     ];
                     // Glöd runt hela klustret

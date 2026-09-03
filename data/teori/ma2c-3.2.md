@@ -27,7 +27,7 @@ Algebraiskt bestäms en andragradsfunktions
 :::
 
 ::: exempel "Exempel 1 — Bestäm allt algebraiskt"
-**Vi har funktionen $f(x) = 3x^2 - 12x + 9$. Ange funktionens<br>a) nollställen<br>b) symmetrilinje<br>c) extrempunkt<br>d) extrempunkts karaktär<br>e) största eller minsta värde**
+**Vi har funktionen $f(x) = 3x^2 - 12x + 9$. Ange funktionens<br>a) nollställen&emsp;&emsp;b) symmetrilinje&emsp;&emsp;c) extrempunkt&emsp;&emsp;d) extrempunkts karaktär&emsp;&emsp;e) största eller minsta värde**
 
 **a)** Vi bestämmer nollställena genom att sätta funktionsuttrycket
 lika med 0 och lösa ekvationen:

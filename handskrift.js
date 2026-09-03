@@ -135,6 +135,14 @@
  * ERSÄTTER det äldre önskemålet (2026-08-02) att utnyttja hela arkets
  * bredd. verify-handskrift.js ger fel på bläck i banden.
  *
+ * REGEL (TANKEPAUS EFTER RUBRIK, användarönskemål 2026-09-03): när en rad
+ * består av en rubrik följd av det uttryck eleven ska komma på själv
+ * ("För 12 år sedan: x − 12", "Albin: 3(x − 4)") skrivs rubriken FÖRST
+ * och pennan stannar — eget klicksteg (T.stepEnd) och T.pause(900) i
+ * uppspelningen — innan uttrycket skrivs. Tankebubblan som motiverar
+ * uttrycket visas EFTER pausen, aldrig före: då avslöjar den svaret.
+ * Referens: layoutTecknaalder (ma1c-2.1 ex 1).
+ *
  * REGEL (INSÄTTNING): varje gång något SÄTTS IN i något annat — ett
  * värde i en funktion/formel, ett uttryck i en ekvation, mätvärden i ett
  * samband — ska handen göra en hjälpande gest FÖRE den nya raden skrivs:
@@ -144,6 +152,12 @@
  * Ringarna står kvar medan insättningsraden skrivs och fejdas ut när den
  * är klar. Syftet är att eleven ska SE var siffrorna kommer ifrån och vart
  * de tar vägen — det är den vanligaste punkten där man tappar tråden.
+ * RINGA VARIABELN, INTE HELA UTTRYCKET (användarbeslut 2026-09-03): när
+ * ETT värde ersätter EN variabel (x = 4 i 20 − 3x) ringas bara den
+ * bokstaven in i uttrycket — ringen ska visa exakt vilken plats värdet
+ * tar i nästa rad. Skriv därför variabeln som egen sträng så att dess
+ * x-gränser finns. Hela uttrycket ringas bara när flera värden sätts in
+ * på en gång. Referens: layoutUttryckvarde (ma1c-2.1 ex 3).
  * Använd helpers: `substRings(acts, [[x0, x1, yBas, F, opt], …])` och
  * `fadeRings(acts, ringar)`; spara x-gränserna när raderna skrivs
  * (`placeString` returnerar slut-x). Gäller ALLA layouter — bygger du en
@@ -5285,17 +5299,29 @@
      * reserverat för inställningsrutan, som på mobil täcker allt med
      * x > paperW−310 och y < 150 (se REGEL i filhuvudet). Raden är
      * bred nog att nå in i den zonen. */
+    /* Rubriken skrivs först och pennan STANNAR (eget klicksteg och en
+     * paus i uppspelningen), så att eleven hinner tänka ut uttrycket
+     * själv innan det skrivs (användarönskemål 2026-09-03, se REGEL
+     * TANKEPAUS EFTER RUBRIK i filhuvudet). Tanken som motiverar
+     * uttrycket kommer EFTER pausen: före skulle den avslöja svaret. */
+    var TANKPAUS = 900;
     y = 122;
-    T.str('a) Linns ålder nu: x', padL, y);
+    xx = T.str('a) Linns ålder nu: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    T.str('x', xx, y);
     T.stepEnd();
 
+    y += 2.1 * F;
+    xx = T.str('För 12 år sedan: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
     tanke(y, [
       [['För 12 år sedan var Linn']],
       [['12 år yngre än nu. Då']],
       [['subtraherar jag 12.']]
     ]);
-    y += 2.1 * F;
-    T.str('För 12 år sedan: x-12', padL, y);
+    T.str('x-12', xx, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -5304,6 +5330,10 @@
     T.stepEnd();
 
     /* ---- b) ---- */
+    y += 3.4 * F;
+    var xb0 = T.str('b) Linn för 4 år sedan: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
     tanke(y, [
       [['Albin jämförs inte med']],
       [['Linns ålder NU, utan med']],
@@ -5311,11 +5341,14 @@
       [['sedan. Den skriver jag']],
       [['först.']]
     ]);
-    y += 3.4 * F;
-    var xb0 = T.str('b) Linn för 4 år sedan: ', padL, y);
     var xb1 = T.str('x-4', xb0, y);
     T.stepEnd();
 
+    var yb = y;
+    y += 2.3 * F;
+    xx = T.str('Albin: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
     tanke(y, [
       [['Albin är 3 gånger så']],
       [['gammal som det. Parentes']],
@@ -5323,9 +5356,8 @@
       [['att HELA åldern']],
       [['multipliceras med 3.']]
     ]);
-    var rb = T.ring(xb0, xb1, y);
-    y += 2.3 * F;
-    T.str('Albin: 3(x-4)', padL, y);
+    var rb = T.ring(xb0, xb1, yb);
+    T.str('3(x-4)', xx, y);
     T.fade(rb);
     T.stepEnd();
 
@@ -5377,14 +5409,18 @@
     /* liten blå förklaring under en inringad term */
     function forklara(x0, x1, yb, text) {
       var w = T.adv(text, 0.55);
-      T.str(text, (x0 + x1) / 2 - w / 2, yb + 1.05 * F, BLUE, 0.55);
+      /* centrerad under termen, men aldrig ut i vänsterpilens zon */
+      var x = Math.max(padL, (x0 + x1) / 2 - w / 2);
+      T.str(text, x, yb + 1.05 * F, BLUE, 0.55);
     }
 
     /* ---- a) 3a+4b ----
      * Termerna skrivs med EXTRA luft kring operatorn (LUFT px): de blå
      * förklaringarna under dem är bredare än termerna själva, och utan
-     * luften växer "3 äpplen" och "4 päron" ihop till en enda rad. */
-    var LUFT = 30;
+     * luften växer "pris för 3 äpplen" och "pris för 4 päron" ihop till en
+     * enda rad. Förklaringen säger "pris för …", inte bara "3 äpplen":
+     * 3a är priset för tre äpplen, inte äpplena (påpekat 2026-09-03). */
+    var LUFT = 76;
     y = 78;
     var x3a = T.str('a) ', padL, y);
     var xa1 = T.str('3a', x3a, y);
@@ -5398,7 +5434,7 @@
       [['priset för tre äpplen.']]
     ], 1.4);
     var r1 = T.ring(x3a, xa1, y);
-    forklara(x3a, xa1, y, '3 äpplen');
+    forklara(x3a, xa1, y, 'pris för 3 äpplen');
     T.stepEnd();
 
     tanke(y, [
@@ -5407,7 +5443,7 @@
       [['för fyra päron.']]
     ], 1.4);
     var r2 = T.ring(x4b, xa2, y);
-    forklara(x4b, xa2, y, '4 päron');
+    forklara(x4b, xa2, y, 'pris för 4 päron');
     T.stepEnd();
 
     tanke(y, [
@@ -5445,10 +5481,10 @@
       [['sju päron.']]
     ], 1.4);
     var r3 = T.ring(x10a, xb1, y);
-    forklara(x10a, xb1, y, '10 äpplen');
+    forklara(x10a, xb1, y, 'pris för 10 äpplen');
     T.pause(300);
     var r4 = T.ring(x7b, xb2, y);
-    forklara(x7b, xb2, y, '7 päron');
+    forklara(x7b, xb2, y, 'pris för 7 päron');
     T.stepEnd();
 
     tanke(y, [
@@ -5471,8 +5507,9 @@
 
   /* ---------------- scen: beräkna uttryckets värde (ma1c-2.1 ex 3) ----
    * 20-3x för x=4 och x=-5. Insättningsgesten (se REGEL i filhuvudet):
-   * värdet ringas in där det står och sedan uttrycket det sätts in i,
-   * innan insättningsraden skrivs. I b) är parentesen kring det negativa
+   * värdet ringas in där det står och sedan BARA variabeln x i
+   * uttrycket, inte hela uttrycket — ringen visar exakt vilken plats
+   * värdet tar i nästa rad (användarbeslut 2026-09-03). I b) är parentesen kring det negativa
    * talet hela poängen. */
   function layoutUttryckvarde(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -5481,7 +5518,8 @@
     /* uttrycket står överst och används av båda deluppgifterna */
     var yU = 70;
     var xu0 = T.str('Uttrycket: ', padL, yU);
-    var xu1 = T.str('20-3x', xu0, yU);
+    var xux = T.str('20-3', xu0, yU);
+    var xu1 = T.str('x', xux, yU);
     T.stepEnd();
 
     /* ---- a) x=4 ---- */
@@ -5494,7 +5532,7 @@
       [['Jag byter ut x mot 4 där']],
       [['x står i uttrycket.']]
     ]);
-    var rings = substRings(acts, [[xa0, xa1, y, F], [xu0, xu1, yU, F]]);
+    var rings = substRings(acts, [[xa0, xa1, y, F], [xux, xu1, yU, F]]);
     y += 2.3 * F;
     xx = T.str('20-3·4', padL + 30, y);
     fadeRings(acts, rings);
@@ -5526,7 +5564,7 @@
     var xb1 = T.str('−5', xb0, y);
     T.stepEnd();
 
-    var rings2 = substRings(acts, [[xb0, xb1, y, F], [xu0, xu1, yU, F]]);
+    var rings2 = substRings(acts, [[xb0, xb1, y, F], [xux, xu1, yU, F]]);
     y += 2.3 * F;
     xx = T.str('20-3·(−5)', padL + 30, y);
     fadeRings(acts, rings2);

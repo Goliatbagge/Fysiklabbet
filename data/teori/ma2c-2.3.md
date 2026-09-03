@@ -28,7 +28,7 @@ Lösningen till en ekvation kallas också för **rot**.
 :::
 
 ::: exempel "Exempel 1 — Lös ekvationerna"
-**Lös ekvationerna<br>a) $x^2 - 12x = 0$<br>b) $x^2 + 5x = 0$<br>c) $(x - 7)(x + 3) = 0$<br>d) $14x^2 = 21x$**
+**Lös ekvationerna<br>a)&nbsp;$x^2 - 12x = 0$&emsp;&emsp;b)&nbsp;$x^2 + 5x = 0$&emsp;&emsp;c)&nbsp;$(x - 7)(x + 3) = 0$&emsp;&emsp;d)&nbsp;$14x^2 = 21x$**
 
 **a)** Vi har en ekvation med både $x^2$-termer och $x$-termer. Den är
 lika med 0. Då börjar vi med att faktorisera vänstra ledet. Vi bryter

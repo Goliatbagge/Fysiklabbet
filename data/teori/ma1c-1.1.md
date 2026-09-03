@@ -105,7 +105,7 @@ En kom ihåg-regel är att olikhetstecknet "gapar" åt det större värdet.
 
 ::: exempel "Exempel 2 — Sätt ut rätt olikhetstecken"
 **Sätt ut korrekt olikhetstecken, < eller >, mellan talen.<br>
-a) 23&emsp;19&emsp;<br>b) −20&emsp;−3**
+a) 23&emsp;19&emsp;&emsp;&emsp;&emsp;b) −20&emsp;−3**
 
 ::: handskrift
 typ: olikhet
@@ -140,7 +140,7 @@ Minnesregel: "minus minus ger plus" och "plus minus ger minus".
 :::
 
 ::: exempel "Exempel 3 — Addition och subtraktion"
-**Beräkna<br>a) $4 - (-9)$<br>b) $25 + (-10)$**
+**Beräkna<br>a)&nbsp;$4 - (-9)$&emsp;&emsp;b)&nbsp;$25 + (-10)$**
 
 ::: handskrift
 typ: negadd
@@ -186,7 +186,7 @@ Minnesregel: "minus gånger minus ger plus" och "plus gånger minus ger minus".
 :::
 
 ::: exempel "Exempel 4 — Multiplikation och division"
-**Beräkna<br>a) $4 \cdot (-3)$<br>b) $(-5) \cdot (-9)$<br>c) $\dfrac{35}{(-7)}$<br>d) $\dfrac{(-42)}{(-7)}$**
+**Beräkna<br>a)&nbsp;$4 \cdot (-3)$&emsp;&emsp;b)&nbsp;$(-5) \cdot (-9)$&emsp;&emsp;c)&nbsp;$\dfrac{35}{(-7)}$&emsp;&emsp;d)&nbsp;$\dfrac{(-42)}{(-7)}$**
 
 ::: handskrift
 typ: negmult

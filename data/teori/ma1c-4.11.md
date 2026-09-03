@@ -76,7 +76,7 @@ y: -2, 6
 :::
 
 ::: exempel "Exempel 1 — Funktionsvärde och ekvation"
-**Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.<br>b) Lös ekvationen $f(x) = 2$**
+**Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.&emsp;&emsp;b) Lös ekvationen $f(x) = 2$**
 
 ::: handskrift
 typ: potensfunktion

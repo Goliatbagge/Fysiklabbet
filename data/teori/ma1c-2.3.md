@@ -42,7 +42,7 @@ Regeln verkar stämma.
 :::
 
 ::: exempel "Exempel 1 — Multiplicera in i parentesen"
-**Förenkla<br>a) $2(2x - 1)$<br>b) $8(3x + 4) - 2(5x - 7)$**
+**Förenkla<br>a)&nbsp;$2(2x - 1)$&emsp;&emsp;b)&nbsp;$8(3x + 4) - 2(5x - 7)$**
 
 ::: handskrift
 typ: multiplicerain
@@ -90,7 +90,7 @@ Peka eller tryck på en båge så framhävs produkten den ger.
 :::
 
 ::: exempel "Exempel 2 — Utveckla och förenkla"
-**Utveckla och förenkla<br>a) $(x + 7)(x + 3)$<br>b) $(3x - 5)(8x + 9)$<br>c) $10 - (x - 2)(x - 3)$**
+**Utveckla och förenkla<br>a)&nbsp;$(x + 7)(x + 3)$&emsp;&emsp;b)&nbsp;$(3x - 5)(8x + 9)$&emsp;&emsp;c)&nbsp;$10 - (x - 2)(x - 3)$**
 
 ::: handskrift
 typ: utveckla

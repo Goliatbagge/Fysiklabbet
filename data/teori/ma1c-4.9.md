@@ -25,7 +25,7 @@ att titta på hur grafens ändpunkter är markerade. En
 ::: exempel "Exempel 1 — Musiktjänsten"
 **En musiktjänst kostar 50 kr/månad. Erbjudandet gäller max 1 år.
 Kostnaden $y$ kr för $x$ månader kan då skrivas $y = 50x$. Bestäm
-funktionens<br>a) definitionsmängd<br>b) värdemängd.**
+funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
 
 ::: handskrift
 typ: musiktjanst

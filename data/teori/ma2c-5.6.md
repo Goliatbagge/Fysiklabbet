@@ -44,7 +44,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Bestäm utan räknare"
-**Bestäm utan räknare<br>a) $\log_2 16$<br>b) $\log_3 9$**
+**Bestäm utan räknare<br>a)&nbsp;$\log_2 16$&emsp;&emsp;b)&nbsp;$\log_3 9$**
 
 **a)** $\log_2 16$ kan tolkas "vad 2 ska upphöjas till för att bli
 16". Då $2^4 = 16$ gäller $\log_2 16 = 4$.

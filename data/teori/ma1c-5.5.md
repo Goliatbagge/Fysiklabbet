@@ -59,7 +59,7 @@ tabellen nedan.**
 | 100 | 70 | 30 | $70/100 = 0{,}7 = 70\ \%$ |
 | 200 | 139 | 61 | $139/200 \approx 0{,}70 = 70\ \%$ |
 
-**Vad är sannolikheten i procent att nästa straff<br>a) blir mål?<br>b) inte blir mål?**
+**Vad är sannolikheten i procent att nästa straff<br>a) blir mål?&emsp;&emsp;b) inte blir mål?**
 
 ::: handskrift
 typ: relativfrekvens

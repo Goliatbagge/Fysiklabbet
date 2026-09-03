@@ -73,7 +73,7 @@ Kontrollera gärna mot exemplen ovan.
 :::
 
 ::: exempel "Exempel 1 — Sinus och cosinus för vinklar på enhetscirkeln"
-**Använd enhetscirkeln för att bestämma<br>a) $\sin 90^\circ$<br>b) $\cos 180^\circ$.**
+**Använd enhetscirkeln för att bestämma<br>a)&nbsp;$\sin 90^\circ$&emsp;&emsp;b)&nbsp;$\cos 180^\circ$.**
 
 **a)** Vi utgår från den positiva $x$-axeln och roterar $90^\circ$ moturs.
 Då hamnar vi högst upp på enhetscirkeln, i punkten $(0, 1)$. Sinus
@@ -97,7 +97,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Närmevärden med enhetscirkeln"
-**Använd enhetscirkeln för att bestämma ett närmevärde till<br>a) $\sin 45^\circ$<br>b) $\cos 220^\circ$.**
+**Använd enhetscirkeln för att bestämma ett närmevärde till<br>a)&nbsp;$\sin 45^\circ$&emsp;&emsp;b)&nbsp;$\cos 220^\circ$.**
 
 **a)** Vi sätter en punkt på enhetscirkelns rand vid $45^\circ$. $\sin
 45^\circ$ motsvarar $y$-koordinaten här, och avläst mot $y$-axeln ger det
@@ -114,7 +114,7 @@ ungefär $-0,8$.
 
 ::: exempel "Exempel 3 — Lös trigonometriska ekvationer med enhetscirkeln"
 **Använd enhetscirkeln för att lösa ekvationerna nedan i intervallet
-$0^\circ \leq v \leq 360^\circ$.<br>a) $\sin v = 0{,}4$<br>b) $\cos v = 1{,}5$**
+$0^\circ \leq v \leq 360^\circ$.<br>a)&nbsp;$\sin v = 0{,}4$&emsp;&emsp;b)&nbsp;$\cos v = 1{,}5$**
 
 **a)** Eftersom sinus motsvarar $y$-koordinaten drar vi en vågrät linje vid
 $y = 0{,}4$. Linjen skär enhetscirkeln vid ungefär $20^\circ$ och

@@ -20,7 +20,7 @@ baklänges".
 :::
 
 ::: exempel "Exempel 1 — Faktorisera så långt som möjligt"
-**Faktorisera så långt som möjligt<br>a) $27x^2 - 18x$<br>b) $5x^3 + 20x^5$<br>c) $21x^2 - 14$<br>d) $4x^3 - 6x^2 + 10x$<br>e) $81y - 45x^2y + 27xy^2$**
+**Faktorisera så långt som möjligt<br>a)&nbsp;$27x^2 - 18x$&emsp;&emsp;b)&nbsp;$5x^3 + 20x^5$&emsp;&emsp;c)&nbsp;$21x^2 - 14$&emsp;&emsp;d)&nbsp;$4x^3 - 6x^2 + 10x$&emsp;&emsp;e)&nbsp;$81y - 45x^2y + 27xy^2$**
 
 ::: handskrift
 typ: faktoriseraut

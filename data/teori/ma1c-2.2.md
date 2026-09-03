@@ -19,7 +19,7 @@ och så vidare. Var noga med att titta på tecknet framför varje term!
 :::
 
 ::: exempel "Exempel 1 — Lägg ihop likadana termer"
-**Förenkla<br>a) $8x + 3y - 2x + 9y$<br>b) $5x^2 + 3x - x^2$**
+**Förenkla<br>a)&nbsp;$8x + 3y - 2x + 9y$&emsp;&emsp;b)&nbsp;$5x^2 + 3x - x^2$**
 
 ::: handskrift
 typ: likatermer

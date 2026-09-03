@@ -71,7 +71,7 @@ $$
 :::
 
 ::: exempel "Exempel 1 — Lös ekvationerna"
-**Lös<br>a) $4x + 7 = 35$<br>b) $\dfrac{7x}{6} - 15 = -11$**
+**Lös<br>a)&nbsp;$4x + 7 = 35$&emsp;&emsp;b)&nbsp;$\dfrac{7x}{6} - 15 = -11$**
 
 ::: handskrift
 typ: ekvgrund

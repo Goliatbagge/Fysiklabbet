@@ -155,6 +155,25 @@ const REGLER = [
                   'eller norrända. Se "Magnetens ändar heter nordända och sydända" i CLAUDE.md.',
     },
     {
+        namn: 'korta-deluppgifter-staplade',
+        niva: 'fel',
+        // Korta deluppgifter (ett uttryck, en enhet, ett par ord) ska stå
+        // BREDVID varandra med &emsp;&emsp; emellan, inte staplade med <br>
+        // — staplade lämnar hela ytan till höger tom. Hela sajten sveptes
+        // 2026-09-03 (drygt hundra frågestammar), så en ny träff är ett
+        // nytt fel. Mönstret slår på ett a)-led som är ett ensamt
+        // math-block eller högst ~32 tecken utan frågetecken, direkt
+        // följt av ett lika kort b)-led. Deluppgifter som är hela meningar
+        // (imperativ eller fråga) får fortsatt egen rad — de undantas på
+        // sitt första ord. Svarsalternativ i ovningar.js (`a) …<br>b) …`)
+        // är inte frågestammar och undantas. Se "Deluppgifter" i CLAUDE.md.
+        monster: /(?:<br>|\*\*)a\)(?:&nbsp;|\s)*(?:\$[^$]{1,60}\$[^<$*`]{0,8}|(?:[^<$?!*`]|\$[^$]{1,60}\$){1,32}?)<br>b\)(?:&nbsp;|\s)*(?:\$[^$]{1,60}\$[^<$*`]{0,8}|(?:[^<$?!*`]|\$[^$]{1,60}\$){1,32}?)(?=<br>|\*\*|`|\s*$)/g,
+        undantag: [/a\)\s*(?:Bestäm|Beräkna|Lös|Rita|Ange|Skriv|Visa|Tolka|Förklara|Avgör|Teckna|Använd|Uppskatta|Skapa|Derivera|Motivera|Bevisa|Undersök|Hur|Vilken|Vilket|Vad|Om|I|Efter|Är|Anta|Vi)\b/, /\\(?:dfrac|displaystyle|int)\b/],
+        rattelse: 'Korta deluppgifter skrivs bredvid varandra: "<br>a) …&emsp;&emsp;b) …" ' +
+                  '(a)&nbsp;$…$ när ledet är matte). Bara deluppgifter som är hela ' +
+                  'meningar får egen rad. Se "Deluppgifter" i CLAUDE.md.',
+    },
+    {
         namn: 'förkortningar',
         niva: 'varning',
         monster: /(?:^|[\s(])(?:t\.ex\.|bl\.a\.|m\.m\.|d\.v\.s\.|dvs\.|o\.s\.v\.|osv\.|etc\.|fr\.o\.m\.|t\.o\.m\.|s\.k\.|sk\.?(?=\s))/gi,

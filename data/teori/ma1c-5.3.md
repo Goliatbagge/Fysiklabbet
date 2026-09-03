@@ -66,7 +66,7 @@ råder kausalitet.
 **Ett spridningsdiagram över medellivslängd (år, *y*-axeln) och tillgång
 till internet (%, *x*-axeln) för några olika länder visar punkter spridda
 kring en stigande linje. Avgör om det råder<br>a) korrelation, och i så
-fall vilken typ<br>b) kausalitet.**
+fall vilken typ&emsp;&emsp;b) kausalitet.**
 
 ::: handskrift
 typ: korrelation

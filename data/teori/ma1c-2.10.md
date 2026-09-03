@@ -74,7 +74,7 @@ En potensekvation $x^n = a$ med
 :::
 
 ::: exempel "Exempel 1 — Lös potensekvationerna"
-**Lös ekvationerna och avrunda svaret till två decimaler.<br>a) $x^{14} = 80\,000$<br>b) $3x^5 - 21 = 0$<br>c) $x^{3,4} = 98$<br>d) $x^{1/2} = 4$<br>e) $x^{2/5} = 10$**
+**Lös ekvationerna och avrunda svaret till två decimaler.<br>a)&nbsp;$x^{14} = 80\,000$&emsp;&emsp;b)&nbsp;$3x^5 - 21 = 0$&emsp;&emsp;c)&nbsp;$x^{3,4} = 98$&emsp;&emsp;d)&nbsp;$x^{1/2} = 4$&emsp;&emsp;e)&nbsp;$x^{2/5} = 10$**
 
 ::: handskrift
 typ: potensekvlos
@@ -173,7 +173,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Bestäm antalet lösningar"
-**Bestäm antal lösningar till ekvationen<br>a) $x^{12} = 154$<br>b) $x^4 = 0$<br>c) $x^{100} = -50$<br>d) $x^{99} = -5$**
+**Bestäm antal lösningar till ekvationen<br>a)&nbsp;$x^{12} = 154$&emsp;&emsp;b)&nbsp;$x^4 = 0$&emsp;&emsp;c)&nbsp;$x^{100} = -50$&emsp;&emsp;d)&nbsp;$x^{99} = -5$**
 
 ::: handskrift
 typ: antallosningar

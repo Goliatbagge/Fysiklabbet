@@ -28,7 +28,7 @@ det gör det lättare att se vilka faktorer som senare kan förkortas bort.
 :::
 
 ::: exempel "Exempel 1 — Multiplikation av rationella uttryck"
-**Förenkla<br>a) $\dfrac{3}{8-x}\cdot\dfrac{x^2+5}{6}$<br>b) $\dfrac{3x+6}{x-2}\cdot\dfrac{x^2-4}{3}$**
+**Förenkla<br>a)&nbsp;$\dfrac{3}{8-x}\cdot\dfrac{x^2+5}{6}$&emsp;&emsp;b)&nbsp;$\dfrac{3x+6}{x-2}\cdot\dfrac{x^2-4}{3}$**
 
 **a)** Vi multiplicerar täljare med täljare och nämnare med nämnare:
 

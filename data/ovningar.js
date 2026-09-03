@@ -18760,7 +18760,7 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a) $a \\cdot b$<br>b) $a + b$<br>c) $a - b$<br>d) $b - a$`,
+            question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a)&nbsp;$a \\cdot b$&emsp;&emsp;b)&nbsp;$a + b$&emsp;&emsp;c)&nbsp;$a - b$&emsp;&emsp;d)&nbsp;$b - a$`,
             choices: [
                 `a och d`,
                 `a och c`,
@@ -34472,7 +34472,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.<br>b) Bestäm $\\sin(-v)$.`,
+            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.&emsp;&emsp;b) Bestäm $\\sin(-v)$.`,
             choices: [
                 `0,77 och −0,77`,
                 `−0,77 och 0,77`,
@@ -34934,7 +34934,7 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a) $\\sin(-50^\\circ)$<br>b) $\\sin 130^\\circ$`,
+            question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a)&nbsp;$\\sin(-50^\\circ)$&emsp;&emsp;b)&nbsp;$\\sin 130^\\circ$`,
             choices: [
                 `a) $-0{,}77$<br>b) $0{,}77$`,
                 `a) $0{,}77$<br>b) $0{,}77$`,

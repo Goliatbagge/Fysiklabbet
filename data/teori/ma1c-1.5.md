@@ -38,7 +38,7 @@ kallas **avrundningssiffra**.
 :::
 
 ::: exempel "Exempel 1 — Avrundning"
-**Avrunda 61,4738 till<br>a) tiondelar<br>b) ental<br>c) tiotal**
+**Avrunda 61,4738 till<br>a) tiondelar&emsp;&emsp;b) ental&emsp;&emsp;c) tiotal**
 
 ::: handskrift
 typ: avrundning

@@ -47,8 +47,7 @@ Så $f(x) = x^2 + 4x - 7$ har derivatan $f'(x) = 2x + 4$.
 :::
 
 ::: exempel "Exempel 1 — Derivera term för term"
-**Derivera<br>a) $f(x) = 3x^7 - 5x^2 + 8$<br>b)
-$f(x) = \dfrac{4x^3}{3} - \dfrac{x}{5}$<br>c) $f(x) = (2x - 3)^2$**
+**Derivera<br>a)&nbsp;$f(x) = 3x^7 - 5x^2 + 8$&emsp;&emsp;b)&nbsp;$f(x) = \dfrac{4x^3}{3} - \dfrac{x}{5}$&emsp;&emsp;c)&nbsp;$f(x) = (2x - 3)^2$**
 
 **a)** Vi deriverar term för term och får
 

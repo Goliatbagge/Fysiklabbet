@@ -91,7 +91,7 @@ $$
 
 ::: exempel "Exempel 3 — Kulor med och utan återläggning"
 **I en skål ligger 6 röda och 4 blå kulor. Vad är sannolikheten att dra
-två blå kulor<br>a) med återläggning?<br>b) utan återläggning?**
+två blå kulor<br>a) med återläggning?&emsp;&emsp;b) utan återläggning?**
 
 ::: handskrift
 typ: aterlaggning

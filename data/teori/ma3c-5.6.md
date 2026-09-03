@@ -74,7 +74,7 @@ för att beräkna arean mellan två kurvor, både exakt och som närmevärde.
 ::: exempel "Exempel 1 — Area mellan kurvor med integraler och Geogebra"
 **Bestäm arean av det skuggade området mellan kurvorna $y = x^2$ och
 $y = x - 2$ då $0 \leq x \leq 2$, dels<br>
-a) med integraler<br>b) med digitalt hjälpmedel.**
+a) med integraler&emsp;&emsp;b) med digitalt hjälpmedel.**
 
 **a)** $y = x^2$ är den övre funktionen och $y = x - 2$ är den undre
 funktionen i intervallet. Arean ges då av

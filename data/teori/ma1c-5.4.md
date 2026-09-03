@@ -119,7 +119,7 @@ singla *två* mynt och så vidare) är oftast enklast att lösa genom att rita u
 
 ::: exempel "Exempel 2 — Två tärningar"
 **Du kastar två tärningar. Vad är sannolikheten att få<br>a) minst
-summan 10?<br>b) en summa större än 10?**
+summan 10?&emsp;&emsp;b) en summa större än 10?**
 
 ::: handskrift
 typ: tvatarningar

@@ -143,7 +143,7 @@ anges med någon enhet).
 **Grafen till $f(x) = 1 - x$ är ritad i ett koordinatsystem. Tillsammans
 med $x$-axeln och linjen $x = 6$ bildar grafen ett skuggat område mellan
 $x = 1$ och $x = 6$. Bestäm<br>
-a) den skuggade arean<br>b) $\displaystyle\int_1^6 (1 - x)\, dx$.**
+a) den skuggade arean&emsp;&emsp;b)&nbsp;$\displaystyle\int_1^6 (1 - x)\, dx$.**
 
 **a)** Området är en triangel. Grafen skär $x$-axeln vid $x = 1$ (då
 $f(1) = 1 - 1 = 0$), så triangelns bas sträcker sig från $x = 1$ till

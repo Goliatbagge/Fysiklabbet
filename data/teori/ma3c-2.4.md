@@ -21,7 +21,7 @@ variabeln".
 
 ::: exempel "Exempel 1 — Tolka derivatan"
 **En bil färdas $s(t)$ km på $t$ timmar. Tolka<br>
-a) $s(2) = 120$<br>b) $s'(2) = 90$**
+a)&nbsp;$s(2) = 120$&emsp;&emsp;b)&nbsp;$s'(2) = 90$**
 
 **a)** $s$ står för sträckan i kilometer (120 km). $t$ står för tiden i
 timmar (2 timmar).

@@ -47,7 +47,7 @@ Kostnaden blir alltså 2 600 kr, där 2 600 kallas uttryckets **värde**.
 
 ::: exempel "Exempel 1 — Teckna uttryck för ålder"
 **Linn är $x$ år. Albin är 3 gånger så gammal som Linn var för 4 år sedan.
-Ställ upp ett uttryck för<br>a) Linns ålder för 12 år sedan<br>b) Albins ålder.**
+Ställ upp ett uttryck för<br>a) Linns ålder för 12 år sedan&emsp;&emsp;b) Albins ålder.**
 
 ::: handskrift
 typ: tecknaalder
@@ -73,7 +73,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Tolka uttryck"
-**Äpplen kostar $a$ kr/st och päron $b$ kr/st. Tolka<br>a) $3a + 4b$<br>b) $10a - 7b$**
+**Äpplen kostar $a$ kr/st och päron $b$ kr/st. Tolka<br>a)&nbsp;$3a + 4b$&emsp;&emsp;b)&nbsp;$10a - 7b$**
 
 ::: handskrift
 typ: tolkauttryck
@@ -92,7 +92,7 @@ den totala kostnaden.
 :::
 
 ::: exempel "Exempel 3 — Beräkna uttryckets värde"
-**Beräkna värdet för $20 - 3x$ om<br>a) $x = 4$<br>b) $x = -5$**
+**Beräkna värdet för $20 - 3x$ om<br>a)&nbsp;$x = 4$&emsp;&emsp;b)&nbsp;$x = -5$**
 
 ::: handskrift
 typ: uttryckvarde

@@ -1779,6 +1779,16 @@ deluppgifter som är hela meningar får var sin rad.
   upp på raden. Kräver deluppgiften en mening att läsa gäller
   huvudregeln (egen rad).
 
+**Mekanisk kontroll:** `node .claude/verify-sprak.js` har regeln
+`korta-deluppgifter-staplade`, som ger fel på ett kort a)-led (ett ensamt
+math-block eller högst ~32 tecken utan frågetecken) som följs av `<br>b)`
+med ett lika kort b)-led. Deluppgifter som börjar med ett imperativ eller
+ett frågeord ("Bestäm", "Hur", "Vilken") undantas, de är meningar. Hela
+sajten sveptes 2026-09-03 (drygt hundra frågestammar flyttades upp på
+raden), så en ny träff är ett nytt fel. Är a) och b) korta men c) en hel
+mening: skriv a) och b) bredvid varandra och ge c) egen rad (referens:
+`fy1-5.4`, `ma2c-6.7`).
+
 ## Designtänk för simuleringar (5/5-arbetssättet)
 
 Detta arbetssätt användes när "Flyta eller sjunka" gjordes om 2026-08-06 och

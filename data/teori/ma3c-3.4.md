@@ -140,7 +140,7 @@ där konstanten $e \approx 2{,}72$.
 :::
 
 ::: exempel "Exempel 1 — Derivera exponentialfunktioner"
-**Derivera<br>a) $f(x) = e^x$<br>b) $f(x) = 3e^x$<br>c) $f(x) = e - e^x$**
+**Derivera<br>a)&nbsp;$f(x) = e^x$&emsp;&emsp;b)&nbsp;$f(x) = 3e^x$&emsp;&emsp;c)&nbsp;$f(x) = e - e^x$**
 
 **a)** Funktionen är sin egen derivata, så
 
@@ -168,7 +168,7 @@ $$
 :::
 
 ::: exempel "Exempel 2 — Bestäm derivatans värde"
-**Funktionen är $f(x) = \dfrac{5x^3}{3} + 3e^x$. Bestäm<br>a) $f'(0)$<br>b) $f'(2)$**
+**Funktionen är $f(x) = \dfrac{5x^3}{3} + 3e^x$. Bestäm<br>a)&nbsp;$f'(0)$&emsp;&emsp;b)&nbsp;$f'(2)$**
 
 Avrunda och svara med en decimal.
 

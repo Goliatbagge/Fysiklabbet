@@ -28,7 +28,7 @@ Antalet av ett visst värde kallas **frekvens**. Om till exempel antalet
 
 ::: exempel "Exempel 1 — Tre lägesmått"
 **Åldern på personerna i ett klassrum är 16, 17, 61, 16, 16, 18 och 17
-år. Bestäm<br>a) medelvärdet<br>b) medianen<br>c) typvärdet**
+år. Bestäm<br>a) medelvärdet&emsp;&emsp;b) medianen&emsp;&emsp;c) typvärdet**
 
 **a)**
 

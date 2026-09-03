@@ -43,7 +43,7 @@ Om möjligt,
 :::
 
 ::: exempel "Exempel 1 — Faktorisera"
-**Faktorisera<br>a) $18x^2 + 45x^3 - 81x^4$<br>b) $x^2 - 6x + 9$<br>c) $50x^2 - 98$**
+**Faktorisera<br>a)&nbsp;$18x^2 + 45x^3 - 81x^4$&emsp;&emsp;b)&nbsp;$x^2 - 6x + 9$&emsp;&emsp;c)&nbsp;$50x^2 - 98$**
 
 **a)** Först undersöker vi om det går att bryta ut "som vanligt". Vi
 tittar först på alla koefficienter, alltså talen framför

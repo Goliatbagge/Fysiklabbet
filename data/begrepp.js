@@ -1189,6 +1189,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'iribarrental',
+    term: 'Iribarrentalet',
+    former: ['iribarrental', 'iribarrentalet', 'iribarrentalen', 'iribarrenparameter', 'iribarrenparametern'],
+    kort: 'Ett enda tal som förutsäger hur en våg kommer att bryta mot en strand, byggt av bottnens lutning och vågens branthet.',
+    relaterade: ['dyning', 'turbulens'],
+    body: [
+      { type: 'p', html: 'Står man en stund vid vattnet märker man att alla vågor inte bryter likadant. På en lång, flack sandstrand smulas kammen sönder i vitt skum som rinner ner längs framsidan, och det tar många meter innan vågen är slut. Vid en brant strand eller ett rev händer i stället allting på en gång: vågen reser sig, kastar ut hela kammen framför sig och slår ner med en smäll. Ute på riktigt branta stränder kan vågen till och med hinna rusa upp på land utan att bryta alls.' },
+      { type: 'p', html: 'Vilken av sorterna det blir hänger på två saker: hur brant bottnen lutar, och hur brant vågen själv är, alltså hur hög den är i förhållande till hur lång den är. Den spanske ingenjören Ramón Iribarren satte 1949 ihop de två till ett enda tal, bottnens lutning delad med roten ur vågens branthet. Namnet fick talet först på 1970-talet, av nederländaren Jurjen Battjes. Ett litet tal betyder flack botten och lång, hög våg, och då rinner kammen sönder. Ett större tal betyder brant botten eller flack dyning, och då välver sig vågen och bildar en tunnel. Ett riktigt stort tal ger en våg som knappt bryter.'},
+      { type: 'p', html: 'Talet är trubbigt, för i verkligheten finns hela skalan däremellan, men det är svårslaget för att vara så enkelt. Kustingenjörer använder det för att räkna ut hur högt vattnet spolar upp på en strand, hur mycket av vågens energi som kastas tillbaka ut till havs och hur en vågbrytare bör byggas för att inte ätas upp av vintern. Samma tal ligger bakom varför en och samma dyning kan ge ofarliga vågor på en strand och livsfarliga vågor några hundra meter längre bort.' }
+    ]
+  },
+  {
+    id: 'dyning',
+    term: 'Dyning',
+    former: ['dyning', 'dyningen', 'dyningar', 'dyningarna'],
+    kort: 'Långa, jämna vågor som rullar fram långt efter att vinden som skapade dem har mojnat, ofta tusentals kilometer från stormen.',
+    relaterade: ['iribarrental'],
+    body: [
+      { type: 'p', html: 'När det blåser hårt över öppet hav blir sjön först rörig: korta, branta vågor med skum, kors och tvärs, av alla möjliga längder samtidigt. Det kallas vindsjö. Men vågor på vatten har en egenhet som gör att röran sorterar sig själv. Långa vågor går fortare än korta, ungefär som att ljus av olika färger går olika fort genom glas. Ju längre bort från stormen vågorna kommer, desto mer drar de långa i väg från de korta.' },
+      { type: 'p', html: 'Efter något dygn och några hundra mil har den ursprungliga röran sållats till något helt annat: långa, låga, nästan likadana vågkammar med jämna mellanrum, som rullar fram i samma riktning utan att luta brant. Det är dyning. En dyning från en storm söder om Antarktis kan nå Kalifornien efter en vecka och flera tusen mil, och kommer då in mot kusten som en jämn puls med kanske en halv minut mellan varje kam.' },
+      { type: 'p', html: 'Att dyningen förlorar så lite på vägen beror på att vattnet knappt gnider mot något. På djupt vatten rör sig vattenpartiklarna i nästan slutna cirklar och kommer tillbaka dit de var, så det går bara åt en försumbar mängd energi per våglängd. Först när vattnet blir grunt känner dyningen av botten, bromsas, växer på höjden och bryter. Just därför är det en långväga dyning och inte lokal vindsjö som surfare väntar på: den är jämn, förutsägbar och slår in med hela stormens energi kvar.' }
+    ]
+  },
+  {
     id: 'turbulens',
     term: 'Turbulens',
     former: ['turbulens', 'turbulensen', 'turbulent', 'turbulenta', 'turbulent flöde', 'laminär', 'laminärt', 'laminära', 'laminärt flöde'],

@@ -26,6 +26,32 @@ Format per post:
   https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
   (tillagd 2026-08-27)
 
+- **Einsteins gravitation iakttagen i kvantvärlden** — ett internationellt lag, med Roger
+  Penrose bland författarna, säger sig för första gången ha sett gravitationens verkan på
+  kvantobjekt. Ingång: tyngdkraft, superposition och var de två teorierna krockar. OBS:
+  sajten hade en relativitetsnyhet 2026-09-03, så låt det gå några dagar. Leta upp
+  originalstudien och kontrollera vad som faktiskt uppmätts — rubriken lovar mycket.
+  Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-scientists-einstein-gravity-quantum-world.html
+  (tillagd 2026-09-04)
+
+- **Vatten som aldrig blir is — glasövergången fångad i nanotunna skikt** — genom att
+  stänga in vatten mellan lipidmembran hindras det från att kristallisera, och då syns
+  övergången från vätska till glas i ett mycket bredare temperaturområde än väntat,
+  ungefär −35 °C till −20 °C. Ingång: fasövergångar, smältpunkt, underkylning och vad
+  ett glas egentligen är. Nature Communications, DOI 10.1038/s41467-026-72955-y, ANSTO
+  och Monash University. Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html
+  (tillagd 2026-09-04)
+
+- **BESIII sätter världens skarpaste gräns för lambdahyperonens elektriska dipolmoment**
+  — ännu ett försök att hitta den asymmetri som skulle kunna förklara varför universum
+  består av materia och inte av lika delar materia och antimateria. Ingång: laddning,
+  dipol, symmetrier och varför ett nollresultat också är ett resultat. Kontrollera
+  originalpublikationen. Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-besiii-world-stringent-limit-lambda.html
+  (tillagd 2026-09-04)
+
 - **Feynmans vägintegral prövad experimentellt för första gången** — själva
   fundamentet för hur kvantmekaniken räknas, idén att en partikel ”tar alla vägar
   samtidigt”, har hittills varit ett räknerecept ingen testat direkt. Ingång:

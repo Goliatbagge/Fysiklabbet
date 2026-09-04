@@ -88,6 +88,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-04-bottnen-formar-vagen",
+    date: "2026-09-04",
+    title: "Vågen vet inte hur den ska bryta förrän den känner botten — nu går tunnelns storlek att räkna ut i förväg",
+    deck: "Två oceanografer i Kalifornien har låtit en dator bryta trettio vågor över olika sjöbottnar. Ur resultatet föll ett enda tal ut som avgör hur stor tunneln blir, hur tjock vattenstrålen från krönet är och hur vågen lutar när den slår igen.",
+    category: "Vågor",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-04-bottnen-formar-vagen.jpg",
+    imageAlt: "En surfare åker inuti en stor blå våg som välver sig över honom och bildar en tunnel av vatten.",
+    imageCredit: "Foto: The Last Minute / Flickr, Teahupo‘o på Tahiti (CC BY 2.0)",
+    tags: ["vågor", "mekanik", "vattenvågor", "vågbrytning", "strömningslära", "turbulens", "energi", "oceanografi", "numerisk simulering", "surfing"],
+    sources: [
+      { name: "UC San Diego Today: Surf’s up — how the seafloor shapes breaking waves", url: "https://today.ucsd.edu/story/surfs-up-how-the-seafloor-shapes-breaking-waves" },
+      { name: "Phys.org: Surf’s up — how the seafloor shapes breaking waves", url: "https://phys.org/news/2026-09-surf-seafloor.html" },
+      { name: "Scripps Institution of Oceanography, UC San Diego", url: "https://scripps.ucsd.edu/" }
+    ],
+    research: {
+      citation: "Kanoa Pick och Falk Feddersen, ”Scaling the shape of shoaling and overturning solitary waves”, Journal of Fluid Mechanics 1040, A8, 2026. DOI 10.1017/jfm.2026.11869 (öppet tillgänglig, CC BY 4.0)",
+      url: "https://doi.org/10.1017/jfm.2026.11869"
+    },
+    body: [
+      { type: 'p', html: 'En våg kan färdas tusentals kilometer över öppet hav utan att något särskilt händer med den. Den sista minuten av dess liv är desto dramatiskare: på några sekunder reser den sig, blir brantare, välver sig framåt och slår igen i ett moln av bubblor. Det som avgör hur det sista skedet ser ut ligger inte i vågen. Det ligger under den.' },
+      { type: 'p', html: 'Vid Scripps Institution of Oceanography i Kalifornien har doktoranden Kanoa Pick och oceanografen Falk Feddersen satt siffror på just det sambandet. Deras arbete publicerades i <em>Journal of Fluid Mechanics</em> och visar att bottnens lutning tillsammans med vågens ursprungliga höjd räcker för att förutsäga hela formen på den brytande vågen.' },
+
+      { type: 'h2', text: 'Därför bryter vågen först vid stranden' },
+      { type: 'p', html: 'På grunt vatten bestäms en vågs fart av djupet, och av nästan ingenting annat: $c = \\sqrt{g \\cdot h}$, där $h$ är vattendjupet och $g$ tyngdfaktorn. På fyra meters djup blir farten ungefär $6{,}3\\ \\mathrm{m/s}$, på en meters djup bara $3{,}1\\ \\mathrm{m/s}$.' },
+      { type: 'p', html: 'Framkanten av vågen befinner sig alltid på något grundare vatten än bakkanten, och bromsas därför lite mer. Vågen packas ihop på längden samtidigt som samma energi ska rymmas i allt mindre vatten, så den växer på höjden. Framsidan lutar sig mer och mer, tills den för ett ögonblick står lodrätt. Där går brytpunkten, och hur långt ut den hamnar brukar anges med kvoten mellan vågens höjd och vattendjupet just där.' },
+
+      { type: 'h2', text: 'Två ord räcker inte' },
+      { type: 'p', html: 'Brytande vågor brukar delas in i två sorter. En <em>spilling</em>-våg smular sönder krönet i vitt skum utan att välva sig; en <em>plunging</em>-våg kastar ut krönet framför sig som en läpp och bildar den tunnel surfare kallar barrel. Vilken sort det blir brukar avgöras med Iribarrentalet, som ställer bottnens lutning mot vågens branthet.' },
+      { type: 'p', html: 'Verkligheten är förstås inte tudelad utan en glidande skala, och det var den skalan de två forskarna ville mäta. I stället för att titta och kalla vågen det ena eller det andra mätte de geometrin i det ögonblick då vattenstrålen från krönet träffar ytan igen: tunnelns area, strålens area, tunnelns bredd delad med dess längd, och vinkeln mellan tunnelns längdaxel och vattenytan.' },
+
+      { type: 'h2', text: 'Trettio vågor i en dator' },
+      { type: 'p', html: 'Vågorna bröts i en modell, inte i en vågränna. Forskarna använde en tvådimensionell fullt olinjär potentialströmningsmodell, som följer vattenytan exakt så länge strömningen är virvelfri — vilket den är ända fram till det ögonblick då strålen slår ner. Trettio fall räknades igenom, med bottenlutningar från 1 på 100 till 1 på 10 och vågor vars höjd var mellan 0,2 och 0,6 gånger vattendjupet.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-04-bottnen-formar-vagen-2.jpg',
+        alt: 'Fyra beräknade vågprofiler i genomskärning, där vattnet är blått och bottnen brun, och där tunnelns storlek och lutning skiljer sig tydligt mellan de fyra fallen.',
+        caption: 'Fyra av de beräknade vågorna i det ögonblick då strålen från krönet träffar vattenytan. Den flackare bottnen (a och b) ger en liten, upprätt tunnel, den brantare (c och d) en stor och mer liggande.',
+        credit: 'Figur: Kanoa Pick och Falk Feddersen, Journal of Fluid Mechanics 1040, A8 (CC BY 4.0)' },
+      { type: 'p', html: 'Mönstret var entydigt. En flack botten ger en liten tunnel som lutar brant uppåt, med en tunn vattenstråle. En brant botten ger en stor tunnel som ligger mer vågrätt, med en tjock stråle.' },
+
+      { type: 'h2', text: 'Ett tal som samlar ihop alltihop' },
+      { type: 'p', html: 'Det verkligt användbara i studien är att alla dessa mått följde ett och samma tal, bildat av bottnens lutning $s$ och vågens ursprungliga höjd i förhållande till djupet: $\\psi_0 = \\dfrac{s}{(H_0/h_0)^{1/4}}$.' },
+      { type: 'p', html: 'Mot det talet lade sig mätningarna på var sin kurva. Tunnelns area, mätt i enheter av vågens höjd i kvadrat, växte från 0,04 till 0,43 nästan rakt proportionellt mot $\\psi_0$, med en anpassning som fångade 99&nbsp;% av spridningen. Strålens area växte från 0,012 till 0,266. Tunneln gick från avlång till rundare, och lutningen minskade från 52,7° till 22,4° — alltså från en tunnel som pekar snett uppåt till en som ligger nästan platt. Ett liknande samband gällde takten i hur snabbt vågen brantnade på vägen in.' },
+      { type: 'quote', html: 'Surfare är oerhört uppmärksamma. De lär sig känna igen hur förändringar i dyningen och i botten påverkar en våg, även om de inte uttrycker sambanden med ekvationer. Vetenskapen ger oss ett sätt att pröva den intuitionen och sätta siffror på fysiken bakom den.', cite: 'Kanoa Pick, Scripps Institution of Oceanography' },
+
+      { type: 'h2', text: 'Sanden på botten märker skillnaden' },
+      { type: 'p', html: 'Nyttan sträcker sig längre än till att välja surfstrand. Vattenstrålen som kastas ut från krönet bär med sig lägesenergi, och när den slår ner omsätts den nästan omedelbart i turbulens och bubblor. Det är den turbulensen som virvlar upp sand från botten och flyttar den längs kusten. Forskarna visar att strålens lägesenergi växer rakt proportionellt mot strålens area gånger vågens höjd i kvadrat, med korrelationen 0,99. Därmed knyts vågens form ihop med hur mycket sand som sätts i rörelse.' },
+      { type: 'p', html: 'Modellens bottenprofil var för övrigt hämtad från korallrev av den typ där en brant sluttning slutar tvärt i en grund revplatå. Ett sådant rev ligger utanför Teahupo‘o på Tahiti, en av världens mest fruktade vågor och arena för de olympiska surftävlingarna 2024. Där stiger bottnen så tvärt att en jämn dyning på några sekunder förvandlas till en tjock, nästan vågrätt tunnel.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Samma samband förklarar varför vågor vrider sig och kommer in nästan parallellt med stranden: den del av vågkammen som ligger på grundare vatten går långsammare, och vågen svänger runt den.',
+        'En tsunami lyder under samma formel. På 4&nbsp;000&nbsp;m djup blir farten omkring 200&nbsp;m/s, alltså över 700&nbsp;km/h — men eftersom vågen bara är någon meter hög på öppet hav märks den knappt av ett fartyg.',
+        'En våg på öppet hav flyttar inte vattnet framåt. Vattenpartiklarna rör sig i nästan slutna banor och hamnar ungefär där de började. Först när vågen bryter går vattnet verkligen mot land.'
+      ]}
+    ]
+  },
+  {
     id: "2026-09-03-fallet-som-aldrig-tar-slut",
     date: "2026-09-03",
     title: "Två sorters rubidium har fallit sida vid sida i 280 dygn — och ingen av dem kom först",

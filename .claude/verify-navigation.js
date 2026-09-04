@@ -63,6 +63,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-brada-tva-stod-app.html',
     'fysik2-gaffelbalans-app.html',
     'fysik2-dubbelkon-app.html',
+    'fysik2-dubbelspalt-3d-app.html',
     'fysik1-lutande-plan-app.html',
     'fysik1-flytkraft-app.html',
     'fysik1-hastighet-tid-app.html',

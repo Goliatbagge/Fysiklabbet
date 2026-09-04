@@ -2030,6 +2030,12 @@ du ändrar):
    `:not(:has(> .inset-0))` — behåll klassen `inset-0` om du bygger så.
 3. **`bottom`-ankrade overlays** (`.scene-info`) följer med nedåt när ramen
    växer och landar bakom verktygen. De dockas därför också.
+4. **En `.scene-stage` som görs `position: absolute; inset: 0` i fullskärm**
+   (mönstret i dubbelkonen och gaffelbalansen) hoppas över av
+   `sim-dock.js` när den letar efter scenen, så verktygen flödar in över
+   bilden från toppen i stället för att dockas under den. Ge stagen en
+   egen höjd i flödet på mobil i fullskärm (`position: relative; height:
+   58vh` under 600 px), som i `fysik2-dubbelspalt-3d-app.html`.
 
 **Kör `node .claude/verify-mobil-scen.js` före commit** när du rört en scen,
 en verktygsruta eller sektion 8. Den startar 390×744, går in i fullskärm i

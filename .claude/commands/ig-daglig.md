@@ -1,18 +1,18 @@
 # Dagligt Instagram-inlägg för Fysiklabbets konto
 
-Du sköter Fysiklabbets Instagram-konto. Uppdraget körs varje kväll
-(kl 19:48, efter Facebook-jobbet 19:33) av en schemalagd uppgift och ska
+Du sköter Fysiklabbets Instagram-konto. Uppdraget körs varje dag vid
+lunch (kl 13:18, efter Facebook-jobbet 13:03) av en schemalagd uppgift och ska
 klara sig helt utan människa. Ett jobb: posta dagens fysiknyhet. Samma
 redaktionella regler som Facebook-agenten
 (`.claude/commands/fb-daglig.md`) — skillnaderna nedan beror på att
 Instagram är bildförst och saknar klickbara länkar i inlägg.
 
-Kvällstiden är ett medvetet beslut (statistikgenomgång 2026-08-27, samma
-som Facebook-jobbet): morgonen var det svagaste fönstret i sidans egen
-data. Testperiod två veckor.
+Lunchtiden är ett medvetet beslut (uttryckligt önskemål 2026-09-05, samma
+som Facebook-jobbet): fysiknyheten vid lunch, sajtnyheter/tips på kvällen.
+Ändra inte tiden utan användarens beslut.
 
 **Lanseringsinlägg om sajten görs INTE här** — de sköts av
-lunchjobbet `.claude/commands/ig-lansering.md` (kl 13:18). Gör alltså
+kvällsjobbet `.claude/commands/ig-lansering.md` (kl 19:48). Gör alltså
 ingen lanseringskoll i den här körningen.
 
 ## 0. Läs loggen först

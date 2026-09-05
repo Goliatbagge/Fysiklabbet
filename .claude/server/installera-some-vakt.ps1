@@ -2,8 +2,10 @@
 # some-vakt.ps1 kl 14:00 och 21:00 varje dag, endast när användaren är
 # inloggad (vakten kan behöva köra om Facebook-/Instagram-jobben, och de
 # kräver Chrome med Claude-utökningen i den interaktiva sessionen).
-# 14:00 kontrollerar lanseringsjobben (13:03/13:18), 21:00 kontrollerar
-# även nyhetsjobben (19:33/19:48 sedan schemaflytten 2026-08-27).
+# 14:00 kontrollerar nyhetsjobben (13:03/13:18), 21:00 kontrollerar
+# även lanseringsjobben (19:33/19:48). (Tiderna bytte plats 2026-09-05:
+# nyheten vid lunch, lanseringen på kvällen — vaktens egna triggrar är
+# oförändrade, bara some-vakt.ps1:s tidsgränser följde med.)
 # Kör en gång per maskin. -Avinstallera tar bort uppgiften.
 
 param([switch]$Avinstallera)

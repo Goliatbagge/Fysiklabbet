@@ -1,9 +1,11 @@
-# Registrerar de schemalagda uppgifterna för eftermiddagens
-# lanseringsinlägg (uttryckligt önskemål 2026-08-18: lanseringar ska
-# inte posta direkt efter morgonens nyhetsinlägg utan senare på dagen):
+# Registrerar de schemalagda uppgifterna för kvällens lanseringsinlägg
+# (uttryckligt önskemål 2026-09-05: fysiknyheten vid lunch, sajtnyheter
+# och tips senare på dagen — lanseringarna bytte därför plats med
+# nyhetsjobben, som nu ligger 13:03/13:18; 2026-08-18 till 2026-09-05
+# låg lanseringarna på lunchen):
 #
-#   "Fysiklabbet Facebook-lansering"   13:03  (fb-lansering.ps1)
-#   "Fysiklabbet Instagram-lansering"  13:18  (ig-lansering.ps1)
+#   "Fysiklabbet Facebook-lansering"   19:33  (fb-lansering.ps1)
+#   "Fysiklabbet Instagram-lansering"  19:48  (ig-lansering.ps1)
 #
 # Endast när användaren är inloggad (interaktivt — Chrome med
 # Claude-utökningen krävs). Kör en gång per maskin.
@@ -12,8 +14,8 @@
 param([switch]$Avinstallera)
 
 $uppgifter = @(
-    @{ namn = 'Fysiklabbet Facebook-lansering';  skript = 'fb-lansering.ps1'; tid = '13:03' }
-    @{ namn = 'Fysiklabbet Instagram-lansering'; skript = 'ig-lansering.ps1'; tid = '13:18' }
+    @{ namn = 'Fysiklabbet Facebook-lansering';  skript = 'fb-lansering.ps1'; tid = '19:33' }
+    @{ namn = 'Fysiklabbet Instagram-lansering'; skript = 'ig-lansering.ps1'; tid = '19:48' }
 )
 
 if ($Avinstallera) {

@@ -11,8 +11,9 @@ förändringar utifrån data — aldrig utifrån känsla.
 ## Rollfördelning (viktigt)
 
 - **Du postar ingenting.** Inläggen publiceras av de schemalagda jobben:
-  `.claude/commands/ig-daglig.md` (dagens fysiknyhet, kväll 19:48) och
-  `.claude/commands/ig-lansering.md` (lanseringar, lunch 13:18).
+  `.claude/commands/ig-daglig.md` (dagens fysiknyhet, lunch 13:18) och
+  `.claude/commands/ig-lansering.md` (lanseringar, kväll 19:48). Tiderna
+  bytte plats 2026-09-05 på användarens önskemål.
 - **Du äger riktlinjerna i de filerna.** Ändringar ska bygga på
   statistik eller uttryckliga användarönskemål, med daterad motivering.
 - **Svar på kommentarer är svarsagentens jobb** (`svarsagent.md`).
@@ -79,7 +80,9 @@ Senast uppdaterat 2026-09-05 (delrapport för 1–4 sep på begäran, i
   inlägg visar att taggarna på egen hand inte räcker för att bli upptäckt.
 - **Kvällstestet** (nyheten 19:48 i stället för 07:48, start 27 aug) är
   utvärderat på Facebook-datan och visade ingen effekt: nedgången där var
-  kanalbred, inte slot-beroende. Ingen anledning att flytta tillbaka.
+  kanalbred, inte slot-beroende. Den 5 sep bytte tiderna ändå plats på
+  användarens önskemål: nyheten vid lunch (13:18), lanseringen på kvällen
+  (19:48).
 - **Formatgränsen 1,91:1** gäller alla bilder. Sedan formatfelet 27 aug
   kontrolleras proportionen med PIL före uppladdning, och inga fler
   formatfel har inträffat. Kom också ihåg att bilden i ett publicerat

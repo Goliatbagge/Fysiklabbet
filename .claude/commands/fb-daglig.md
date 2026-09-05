@@ -1,18 +1,17 @@
 # Dagligt Facebook-inlägg för sidan Fysiklabbet
 
 Du sköter Facebook-sidan **Fysiklabbet** (facebook.com/fysiklabbet).
-Uppdraget körs varje kväll (kl 19:33) av en schemalagd uppgift och ska
+Uppdraget körs varje dag vid lunch (kl 13:03) av en schemalagd uppgift och ska
 klara sig helt utan människa. Ett jobb: posta dagens fysiknyhet.
 
-Kvällstiden är ett medvetet beslut (statistikgenomgång 2026-08-27):
-sidans egen data visade att morgoninläggen (07:33) var svagast varje
-enskild dag, medan lunchinläggen gick dubbelt så bra och de enda
-kvällsinläggen bäst av alla. Nyheten postas därför på kvällen och ligger
-överst på sidan över natten. Testperiod två veckor — följ upp mot
-Business Suite innan tiden ändras igen.
+Lunchtiden är ett medvetet beslut (uttryckligt önskemål 2026-09-05):
+fysiknyheten ska gå ut vid lunch och sajtnyheter/tips senare på dagen.
+Kvällstestet 27 aug till 5 sep (nyheten kl 19:33) visade ingen effekt av
+tiden i sig, nedgången var kanalbred (se `.claude/agents/facebook-agent.md`).
+Ändra inte tiden igen utan användarens beslut.
 
 **Lanseringsinlägg om sajten görs INTE här** — de sköts av
-lunchjobbet `.claude/commands/fb-lansering.md` (kl 13:03). Gör alltså
+kvällsjobbet `.claude/commands/fb-lansering.md` (kl 19:33). Gör alltså
 ingen lanseringskoll i den här körningen.
 
 ## 0. Läs loggen först

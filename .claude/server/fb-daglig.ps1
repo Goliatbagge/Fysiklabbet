@@ -1,10 +1,10 @@
 # Kör det dagliga Facebook-jobbet: startar en headless Claude Code-session
 # som följer .claude/commands/fb-daglig.md (dagens fysiknyhet på sidan
-# facebook.com/fysiklabbet; lanseringsinlägg sköts av eftermiddagsjobbet
-# fb-lansering.ps1 kl 13:03).
+# facebook.com/fysiklabbet; lanseringsinlägg sköts av kvällsjobbet
+# fb-lansering.ps1 kl 19:33).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Facebook-inlagg"
-# (19:33 varje dag, endast när användaren är inloggad — Chrome med
+# (13:03 varje dag vid lunch, endast när användaren är inloggad — Chrome med
 # Claude-utökningen måste finnas i den interaktiva sessionen).
 # Registrering: se installera-fb-task.ps1 i samma mapp.
 #

@@ -1,15 +1,15 @@
-# Instagram-inlägg om lanseringar på sajten (lunchjobbet)
+# Instagram-inlägg om lanseringar på sajten (kvällsjobbet)
 
 Du sköter Fysiklabbets Instagram-konto. Uppdraget körs varje dag kl
-13:18 av en schemalagd uppgift (efter Facebook-lanseringsjobbet 13:03)
+19:48 av en schemalagd uppgift (efter Facebook-lanseringsjobbet 19:33)
 och ska klara sig helt utan människa. Ett jobb: göra Instagram-versionen
 av det lanseringsinlägg Facebook-jobbet postat i dag, om det postat
 något. Samma redaktionella regler som Facebook-lanseringsjobbet
 (`.claude/commands/fb-lansering.md`) — skillnaderna nedan beror på att
 Instagram är bildförst och saknar klickbara länkar i inlägg.
 
-Nyhetsjobbet (`ig-daglig.md`) ligger sedan 2026-08-27 på kvällen
-(19:48), så lanseringen postas före nyheten. Flytta inte
+Nyhetsjobbet (`ig-daglig.md`) ligger sedan 2026-09-05 på lunchen
+(13:18), så lanseringen postas efter nyheten. Flytta inte
 lanseringskollen in i nyhetsjobbet — ett jobb per slot (uttryckligt
 önskemål 2026-08-18).
 
@@ -33,7 +33,7 @@ Facebook-lanseringsjobbet (som körs först). Läs dess rader för i dag:
 - Saknas Facebook-raden helt (jobbet har inte kört/misslyckats) → gör
   ingen egen lanseringskoll och avsluta UTAN att skriva någon
   `ig-lansering:`-rad (medvetet undantag från logga-alltid-regeln):
-  SoMe-vakten (`some-vakt.ps1`, 14:00) ser då att båda raderna saknas
+  SoMe-vakten (`some-vakt.ps1`, 21:00) ser då att båda raderna saknas
   och kör om jobben i rätt ordning — Facebook först, sedan detta jobb,
   som då hittar en färsk Facebook-rad att spegla.
 

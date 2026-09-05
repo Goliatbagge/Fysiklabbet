@@ -3,15 +3,15 @@
 # lanseringar på sajten, på sidan facebook.com/fysiklabbet).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Facebook-lansering"
-# (13:03 varje dag, endast när användaren är inloggad — Chrome med
+# (19:33 varje dag, endast när användaren är inloggad — Chrome med
 # Claude-utökningen måste finnas i den interaktiva sessionen).
 # Registrering: se installera-lansering-tasks.ps1 i samma mapp.
 #
-# Sedan 2026-08-27 ligger nyhetsjobbet fb-daglig.ps1 på kvällen (19:33),
-# så lanseringen postas FÖRE dagens fysiknyhet — nyheten hamnar överst
-# på sidan över natten. (Tidigare låg nyheten på morgonen och lanseringen
-# flyttades hit för att inte putta ner den; statistiken visade sedan att
-# morgonen var sidans svagaste fönster.)
+# Sedan 2026-09-05 ligger nyhetsjobbet fb-daglig.ps1 på lunchen (13:03)
+# och lanseringen här på kvällen — användarens uttryckliga önskemål:
+# fysiknyheten vid lunch, sajtnyheter och tips senare på dagen. (27 aug
+# till 5 sep var ordningen den omvända; dessförinnan låg nyheten på
+# morgonen och lanseringen på lunchen.)
 
 $ErrorActionPreference = 'Continue'
 $repo   = 'C:\claude\Fysiklabbet'

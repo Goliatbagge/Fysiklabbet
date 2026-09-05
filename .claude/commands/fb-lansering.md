@@ -1,16 +1,16 @@
-# Facebook-inlägg om lanseringar på sajten (lunchjobbet)
+# Facebook-inlägg om lanseringar på sajten (kvällsjobbet)
 
 Du sköter Facebook-sidan **Fysiklabbet** (facebook.com/fysiklabbet).
-Uppdraget körs varje dag kl 13:03 av en schemalagd uppgift och ska klara
+Uppdraget körs varje dag kl 19:33 av en schemalagd uppgift och ska klara
 sig helt utan människa. Ett jobb: posta om större lanseringar på sajten
 (ny simulering, nytt teoriavsnitt, ny funktion) när sådana skett.
 
-Lunchtiden är ett medvetet beslut: den är sidans bevisat starkaste
-testade slot för lanseringsinlägg (statistikgenomgång 2026-08-27).
-Nyhetsjobbet (`fb-daglig.md`) ligger sedan samma dag på kvällen (19:33),
-så lanseringen och nyheten konkurrerar inte om samma flöde, och nyheten
-hamnar överst över natten. Flytta inte lanseringskollen in i
-nyhetsjobbet — ett jobb per slot (uttryckligt önskemål 2026-08-18).
+Kvällstiden är ett medvetet beslut (uttryckligt önskemål 2026-09-05):
+fysiknyheten (`fb-daglig.md`) går ut vid lunch (13:03) och sajtnyheter
+och tips senare på dagen, så lanseringen och nyheten konkurrerar inte om
+samma flöde. (27 aug till 5 sep var ordningen den omvända.) Flytta inte
+lanseringskollen in i nyhetsjobbet — ett jobb per slot (uttryckligt
+önskemål 2026-08-18).
 
 ## 0. Läs loggen först
 
@@ -72,7 +72,7 @@ Logga `länkkommentar: OK` eller `länkkommentar: SAKNAS (<orsak>)`.
 
 Lägg till dagens `lansering:`-rad i `.claude/facebook/logg.md` och
 uppdatera `senaste lanseringskoll:`-raden. Committa INTE loggen — den är
-lokal arbetsdata. (Instagram-jobbet kl 13:18 läser din rad och gör
+lokal arbetsdata. (Instagram-jobbet kl 19:48 läser din rad och gör
 Instagram-versionen av samma lansering.)
 
 ## Samarbete med nyhetsbrevsagenten

@@ -1,15 +1,15 @@
-﻿# Vakt för de dagliga sociala medie-jobben — lanseringsjobben på lunchen
-# (Facebook 13:03, Instagram 13:18) och nyhetsinläggen på kvällen
-# (Facebook 19:33, Instagram 19:48; nyheten flyttades från morgonen till
-# kvällen 2026-08-27 efter statistikgenomgång — lunchen slog morgonen
-# varje dag och kvällen var bäst av alla; nyheten postas sist så att den
-# ligger överst över natten):
+﻿# Vakt för de dagliga sociala medie-jobben — nyhetsinläggen på lunchen
+# (Facebook 13:03, Instagram 13:18) och lanseringsjobben på kvällen
+# (Facebook 19:33, Instagram 19:48; tiderna bytte plats 2026-09-05 på
+# användarens uttryckliga önskemål — fysiknyheten vid lunch, sajtnyheter
+# och tips senare på dagen. 27 aug–5 sep låg nyheten på kvällen och
+# lanseringen på lunchen, dessförinnan nyheten på morgonen):
 # kontrollerar att dagens rader faktiskt loggats i .claude/facebook/logg.md,
 # kör annars om jobben (riskfritt — jobben läser samma logg och hoppar själva
 # över det som redan postats) och LARMAR om det fortfarande saknas efteråt.
-# Lanseringsjobben kontrolleras först från 13:30 (14:00-triggern) och
-# nyhetsjobben först från 20:15 (21:00-triggern) — före dess har de inte
-# haft sin chans. Ett lanseringsjobb är "klart" även när det
+# Nyhetsjobben kontrolleras först från 13:30 (14:00-triggern) och
+# lanseringsjobben först från 20:15 (21:00-triggern) — före dess har de
+# inte haft sin chans. Ett lanseringsjobb är "klart" även när det
 # loggat att ingen lansering fanns; det som bevakas är att KÖRNINGEN skett.
 # Bakgrund: 2026-08-17 uteblev både Facebook- och Instagram-inlägget utan att
 # någon märkte det förrän på eftermiddagen — BOSGAME står på dygnet runt, så
@@ -182,18 +182,18 @@ if ((Get-Date).TimeOfDay -lt [timespan]'13:30') {
     exit 0
 }
 
-# Jobben som bevakas. Lanseringsjobben (13:03/13:18) från 13:30, och
-# nyhetsjobben (19:33/19:48) först från 20:15 — före dess har de inte
+# Jobben som bevakas. Nyhetsjobben (13:03/13:18) från 13:30, och
+# lanseringsjobben (19:33/19:48) först från 20:15 — före dess har de inte
 # haft sin chans, och 14:00-triggern får inte köra kvällsjobben i förtid
-# (då hamnade nyheten på eftermiddagen igen, precis det schemaflytten
-# 2026-08-27 skulle bort från).
+# (då hamnar lanseringen på eftermiddagen, i stället för på kvällen som
+# användaren bestämt 2026-09-05).
 $jobb = @(
-    @{ namn = 'Facebook-lansering';  falt = 'fbL'; skript = 'fb-lansering.ps1'; logg = 'fb-lansering.log'; kommando = '/fb-lansering' }
-    @{ namn = 'Instagram-lansering'; falt = 'igL'; skript = 'ig-lansering.ps1'; logg = 'ig-lansering.log'; kommando = '/ig-lansering' }
+    @{ namn = 'Facebook-nyhet';  falt = 'fb'; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log'; kommando = '/fb-daglig' }
+    @{ namn = 'Instagram-nyhet'; falt = 'ig'; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log'; kommando = '/ig-daglig' }
 )
 if ((Get-Date).TimeOfDay -ge [timespan]'20:15') {
-    $jobb += @{ namn = 'Facebook-nyhet';  falt = 'fb'; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log'; kommando = '/fb-daglig' }
-    $jobb += @{ namn = 'Instagram-nyhet'; falt = 'ig'; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log'; kommando = '/ig-daglig' }
+    $jobb += @{ namn = 'Facebook-lansering';  falt = 'fbL'; skript = 'fb-lansering.ps1'; logg = 'fb-lansering.log'; kommando = '/fb-lansering' }
+    $jobb += @{ namn = 'Instagram-lansering'; falt = 'igL'; skript = 'ig-lansering.ps1'; logg = 'ig-lansering.log'; kommando = '/ig-lansering' }
 }
 
 $status = JobbStatus

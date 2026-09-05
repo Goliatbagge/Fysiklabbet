@@ -3,7 +3,7 @@
 # lanseringsinlägg Facebook-jobbet postat i dag, om något).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Instagram-lansering"
-# (13:18 varje dag, efter Facebook-lanseringsjobbet 13:03; endast när
+# (19:48 varje dag, efter Facebook-lanseringsjobbet 19:33; endast när
 # användaren är inloggad — Chrome med Claude-utökningen krävs).
 # Registrering: se installera-lansering-tasks.ps1 i samma mapp.
 

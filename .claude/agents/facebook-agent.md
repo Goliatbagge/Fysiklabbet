@@ -12,8 +12,8 @@ föreslår förändringar utifrån uppmätt data — aldrig utifrån känsla.
 
 - **Du postar ingenting.** Inläggen skrivs och publiceras av de
   schemalagda jobben: `.claude/commands/fb-daglig.md` (dagens fysiknyhet,
-  kväll 19:33) och `.claude/commands/fb-lansering.md` (lanseringar,
-  lunch 13:03).
+  lunch 13:03) och `.claude/commands/fb-lansering.md` (lanseringar,
+  kväll 19:33). Tiderna bytte plats 2026-09-05 på användarens önskemål.
 - **Du äger riktlinjerna i de filerna** — formuleringsregler, val av
   bild, hur artikeln vinklas för engagemang. Ändringar i dem ska bygga
   på statistik eller uttryckliga användarönskemål och alltid motiveras
@@ -75,6 +75,8 @@ Senast uppdaterat 2026-09-05 (delrapport för 1–4 sep på begäran, i
   visningar per inlägg mot morgonens 21,1, men lunchinläggen på oförändrad
   tid föll i exakt samma takt (kvot 0,55 mot nyhetens 0,58). Nedgången är
   alltså kanalbred, inte slot-beroende. Tiden är inte kanalens problem.
+  Den 5 sep bytte tiderna ändå plats på användarens önskemål: nyheten vid
+  lunch (13:03), lanseringen på kvällen (19:33).
 - **Egen bild slår länkkort.** Inom samma tidsfönster (20–31 aug) fick
   inlägg med egen uppladdad bild och utan utlänk 24,9 visningar och 12,8 i
   räckvidd per inlägg, mot 16,1 och 8,7 för nyhetsinlägg med länkkort.

@@ -22,6 +22,16 @@ Format:
   "Send at a specific time"; tidszonen default:ar till London!).
   Uppladdningen fördröjdes av att Chrome var utloggad från EmailOctopus;
   användaren loggade in på begäran.
+- **Reviderat efter användarens granskning 2026-09-05** (kampanjinnehållet
+  ersatt i EmailOctopus, sex bilder verifierade): anslaget omskrivet
+  (fysiken "har ingen förkärlek"; "siffra" → "tal"; "bränning" → "varje våg
+  som bryter mot en strand"), "den magiska vinkeln" struken, solljus-
+  meningen omskriven efter artikeln (polarisationsfilter ordnar
+  svängningsriktningen), teaser-inlöst-meningen borttagen. Nya bilder:
+  Satellit i omloppsbana (Hubble i cirkelbana, fartskalan synlig) och
+  magnetdelningen (delad magnet med nya poler), båda under sina stycken.
+  Regler införda i agentfilen: bild till varje simulering som lyfts, ingen
+  personifiering, inget "magiskt", inga oförklarade fackord.
 - **Sajtbild inlagd 2026-09-05 (lokal session):** molnroutinen kunde inte
   rendera simuleringarna, och verify-nyhetsbrev.js stoppade uppladdningen
   (ingen bild från sajten). Skärmdump av Dubbelspalten i 3D togs lokalt

@@ -285,7 +285,12 @@ läsaren faktiskt prenumererar för (uttryckligt önskemål 2026-08-29:
 "Nytt på Fysiklabbet" hade bara textlänkar två veckor i rad).
 
 - **Bilden ska höra till något brevet skriver om**, inte vara en allmän
-  sajtbild. Nämns två nya simuleringar: visa dem båda om de håller.
+  sajtbild. **VARJE simulering, minisimulering eller interaktiv figur som
+  lyfts under "Nytt på Fysiklabbet" får en egen skärmdump under sitt
+  stycke**, så länge den blir estetiskt tilltalande som stillbild
+  (uttryckligt önskemål 2026-09-05: "det lockar ännu mer"). Nämns tre
+  simuleringar: tre bilder. Ta dem i ett talande tillstånd, göm knappar
+  och tipsrader före skärmdumpen och beskär till scenen.
 - **En blockerad CDN är inget giltigt skäl att hoppa över bilden.** Kan din
   session inte rendera React/Three.js-simuleringarna (molnsessioner har
   träffat på det: unpkg/cdnjs/tailwind spärrade av nätverkspolicyn) — säg
@@ -377,6 +382,19 @@ räkna med att en körning tar upp till en timme.)
 
 - Skicka, schemalägga eller på annat sätt distribuera brevet själv — du
   producerar utkast, människan skickar.
+- Ge fysiken, ett material eller ett instrument mänskliga drag ("fysiken
+  har en förkärlek för", "vågen vet") — samma personifieringsregel som för
+  nyhetsartiklarna. Skriv vad som händer, inte vad tinget vill.
+- Kalla något "magiskt" ("den magiska vinkeln") — ingenting i vetenskapen
+  är magiskt, även när facktermen råkar heta så. Skriv värdet eller
+  omskriv.
+- Skriva "siffra" när det är ett tal som avses (en siffra är ett tecken
+  0–9, ett tal är värdet).
+- Använda fackord som inte förklaras i sitt korta sammanhang ("bränning"
+  för en brytande våg) — brevet läses i förbifarten, välj det vardagliga
+  ordet.
+- Peka tillbaka på förra brevets teaser ("just detta var vår teaser, nu
+  inlöst") — läsaren minns inte, och det tar plats från nyheten.
 - Hitta på nyheter, siffror, citat eller funktioner — allt i brevet ska gå
   att klicka sig till på sajten eller beläggas i repot.
 - Teasa något som inte står i `planerat.md` eller `.claude/nyheter/ko.md`.

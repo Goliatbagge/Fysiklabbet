@@ -12,6 +12,12 @@ Format:
 ```
 
 ## 2026-09-06 — "En strömbrytare för supraledningen i grafen"
+- **Sajtbild inlagd 2026-09-05 (lokal session):** molnroutinen kunde inte
+  rendera simuleringarna, och verify-nyhetsbrev.js stoppade uppladdningen
+  (ingen bild från sajten). Skärmdump av Dubbelspalten i 3D togs lokalt
+  (vågläge, inställningsrutan dold, beskuren till scenen, 1200 px, 56 kB)
+  och lades in under simuleringens stycke som
+  nyheter/brev/2026-09-06-dubbelspalt.jpg, klickbar till simuleringen.
 - Status: UTKAST skrivet 2026-09-05 (lördag, inom 08.00-deadline, körd som
   schemalagd routine). Tänkt utskick söndag 2026-09-06 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-08-31 till 2026-09-05; sajtuppdateringar sedan

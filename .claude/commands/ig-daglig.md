@@ -1,17 +1,19 @@
 # Dagligt Instagram-inlägg för Fysiklabbets konto
 
-Du sköter Fysiklabbets Instagram-konto. Uppdraget körs varje morgon av en
-schemalagd uppgift (efter Facebook-jobbet) och ska klara sig helt utan
-människa. Ett jobb: posta dagens fysiknyhet. Samma redaktionella regler
-som Facebook-agenten (`.claude/commands/fb-daglig.md`) — skillnaderna
-nedan beror på att Instagram är bildförst och saknar klickbara länkar i
-inlägg.
+Du sköter Fysiklabbets Instagram-konto. Uppdraget körs varje kväll
+(kl 19:48, efter Facebook-jobbet 19:33) av en schemalagd uppgift och ska
+klara sig helt utan människa. Ett jobb: posta dagens fysiknyhet. Samma
+redaktionella regler som Facebook-agenten
+(`.claude/commands/fb-daglig.md`) — skillnaderna nedan beror på att
+Instagram är bildförst och saknar klickbara länkar i inlägg.
+
+Kvällstiden är ett medvetet beslut (statistikgenomgång 2026-08-27, samma
+som Facebook-jobbet): morgonen var det svagaste fönstret i sidans egen
+data. Testperiod två veckor.
 
 **Lanseringsinlägg om sajten görs INTE här** — de sköts av
-eftermiddagsjobbet `.claude/commands/ig-lansering.md` (kl 13:18), så att
-nyheten får ligga överst i flödet hela förmiddagen i stället för att
-puttas ner direkt (uttryckligt önskemål 2026-08-18). Gör alltså ingen
-lanseringskoll i den här körningen.
+lunchjobbet `.claude/commands/ig-lansering.md` (kl 13:18). Gör alltså
+ingen lanseringskoll i den här körningen.
 
 ## 0. Läs loggen först
 
@@ -68,8 +70,13 @@ dagar gammal.
 ## 3. Publicera
 
 1. Ladda Chrome-verktygen (ToolSearch, se fb-daglig.md).
-2. Gå till `https://www.instagram.com/`. Kontrollera i skärmdump att du
-   agerar som FYSIKLABBETS konto — inte ett personligt. Fel konto: byt
+2. Två webbläsare kan vara anslutna: välj ALLTID den med deviceId
+   `158b4037-ff82-4800-8498-0f69b8ba16df` med `select_browser`
+   (identifiera på id, aldrig på namnet "Browser 1/2" — numreringen
+   kastas om mellan körningar, se loggen 3 sep). Gå till
+   `https://www.instagram.com/`. Kontrollera (javascript_tool mot
+   sidopanelens profillänkar ska ge `/fysiklabbet/`, plus skärmdump) att
+   du agerar som FYSIKLABBETS konto — inte ett personligt. Fel konto: byt
    via profilmenyn ("Byt konto"); går det inte → AVBRYT och logga.
 3. Klicka "Skapa" (+) i vänstermenyn → "Inlägg". Ladda upp bilden med
    `file_upload` mot dialogens file-input (klicka ALDRIG "Välj från

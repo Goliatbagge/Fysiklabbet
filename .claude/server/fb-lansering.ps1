@@ -7,9 +7,11 @@
 # Claude-utökningen måste finnas i den interaktiva sessionen).
 # Registrering: se installera-lansering-tasks.ps1 i samma mapp.
 #
-# Jobbet ligger medvetet på eftermiddagen: morgonjobbet fb-daglig.ps1
-# (07:33) postar dagens fysiknyhet, och ett lanseringsinlägg direkt
-# efter puttade tidigare ner nyheten från sidans topp.
+# Sedan 2026-08-27 ligger nyhetsjobbet fb-daglig.ps1 på kvällen (19:33),
+# så lanseringen postas FÖRE dagens fysiknyhet — nyheten hamnar överst
+# på sidan över natten. (Tidigare låg nyheten på morgonen och lanseringen
+# flyttades hit för att inte putta ner den; statistiken visade sedan att
+# morgonen var sidans svagaste fönster.)
 
 $ErrorActionPreference = 'Continue'
 $repo   = 'C:\claude\Fysiklabbet'
@@ -51,5 +53,10 @@ $verktyg = @(
 Set-Location $repo
 $ut = & $claude --chrome -p '/fb-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- fb-lansering klar (exit $LASTEXITCODE) ---"
-exit $LASTEXITCODE
+$exitKod = $LASTEXITCODE
+# Larma DIREKT vid inloggningsfel (se some-notis.ps1) - vaktens omkoerning
+# senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidInloggningsfel 'Facebook-lansering' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+Logga "--- fb-lansering klar (exit $exitKod) ---"
+exit $exitKod

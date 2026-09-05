@@ -77,3 +77,6 @@ figur-preview.html
 
 # Lokal testkopia av np.html med vendorade CDN-filer (skapas vid behov)
 np-test.html
+
+# SoMe-rapporterna är intern arbetsdata (se .claude/commands/some-rapport.md)
+.claude/some/rapporter/

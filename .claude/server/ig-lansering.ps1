@@ -40,10 +40,22 @@ $verktyg = @(
     'Glob'
     'Edit(.claude/facebook/logg.md)'
     'Bash(git log:*)'
+    # Reels (sedan 2026-09-05): spela in simuleringen, granska en bildruta
+    # och kontrollera bildproportionen. Se steg 2b i ig-lansering.md.
+    'Bash(node .claude/some/spela-in-reel.js:*)'
+    'Bash(ffmpeg:*)'
+    'Bash(ffprobe:*)'
+    'Bash(grep:*)'
+    'Bash(python:*)'
 ) -join ','
 
 Set-Location $repo
 $ut = & $claude --chrome -p '/ig-lansering' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- ig-lansering klar (exit $LASTEXITCODE) ---"
-exit $LASTEXITCODE
+$exitKod = $LASTEXITCODE
+# Larma DIREKT vid inloggningsfel (se some-notis.ps1) - vaktens omkoerning
+# senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidInloggningsfel 'Instagram-lansering' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+Logga "--- ig-lansering klar (exit $exitKod) ---"
+exit $exitKod

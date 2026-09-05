@@ -4,7 +4,7 @@
 # fb-lansering.ps1 kl 13:03).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Facebook-inlagg"
-# (07:33 varje dag, endast när användaren är inloggad — Chrome med
+# (19:33 varje dag, endast när användaren är inloggad — Chrome med
 # Claude-utökningen måste finnas i den interaktiva sessionen).
 # Registrering: se installera-fb-task.ps1 i samma mapp.
 #
@@ -54,5 +54,10 @@ Set-Location $repo
 # Chrome-MCP-verktygen, oavsett --allowedTools (missarna 2026-08-17/19).
 $ut = & $claude --chrome -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- fb-daglig klar (exit $LASTEXITCODE) ---"
-exit $LASTEXITCODE
+$exitKod = $LASTEXITCODE
+# Larma DIREKT vid inloggningsfel (se some-notis.ps1) - vaktens omkoerning
+# senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidInloggningsfel 'Facebook-nyhet' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+Logga "--- fb-daglig klar (exit $exitKod) ---"
+exit $exitKod

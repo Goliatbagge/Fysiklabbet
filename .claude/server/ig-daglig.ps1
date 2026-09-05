@@ -4,7 +4,7 @@
 # eftermiddagsjobbet ig-lansering.ps1 kl 13:18).
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet Instagram-inlagg"
-# (07:48 varje dag, efter Facebook-jobbet; endast när användaren är
+# (19:48 varje dag, efter Facebook-jobbet 19:33; endast när användaren är
 # inloggad — Chrome med Claude-utökningen krävs).
 # Registrering: se installera-ig-task.ps1 i samma mapp.
 
@@ -46,5 +46,10 @@ $verktyg = @(
 Set-Location $repo
 $ut = & $claude --chrome -p '/ig-daglig' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-Logga "--- ig-daglig klar (exit $LASTEXITCODE) ---"
-exit $LASTEXITCODE
+$exitKod = $LASTEXITCODE
+# Larma DIREKT vid inloggningsfel (se some-notis.ps1) - vaktens omkoerning
+# senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidInloggningsfel 'Instagram-nyhet' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+Logga "--- ig-daglig klar (exit $exitKod) ---"
+exit $exitKod

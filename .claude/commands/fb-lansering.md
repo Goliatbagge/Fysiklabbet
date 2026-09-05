@@ -1,16 +1,16 @@
-# Facebook-inlägg om lanseringar på sajten (eftermiddagsjobbet)
+# Facebook-inlägg om lanseringar på sajten (lunchjobbet)
 
 Du sköter Facebook-sidan **Fysiklabbet** (facebook.com/fysiklabbet).
 Uppdraget körs varje dag kl 13:03 av en schemalagd uppgift och ska klara
 sig helt utan människa. Ett jobb: posta om större lanseringar på sajten
 (ny simulering, nytt teoriavsnitt, ny funktion) när sådana skett.
 
-Jobbet ligger MEDVETET på eftermiddagen (uttryckligt önskemål
-2026-08-18): morgonjobbet (`fb-daglig.md`, 07:33) postar dagens
-fysiknyhet, och när lanseringsinlägget tidigare gjordes i samma körning
-puttade det ner nyheten från sidans topp efter några minuter. Nu får
-nyheten hela förmiddagen och lanseringen lunchtid — flytta inte tillbaka
-lanseringskollen till morgonjobbet.
+Lunchtiden är ett medvetet beslut: den är sidans bevisat starkaste
+testade slot för lanseringsinlägg (statistikgenomgång 2026-08-27).
+Nyhetsjobbet (`fb-daglig.md`) ligger sedan samma dag på kvällen (19:33),
+så lanseringen och nyheten konkurrerar inte om samma flöde, och nyheten
+hamnar överst över natten. Flytta inte lanseringskollen in i
+nyhetsjobbet — ett jobb per slot (uttryckligt önskemål 2026-08-18).
 
 ## 0. Läs loggen först
 
@@ -38,22 +38,35 @@ avsluta.
   största, resten väntar till kommande dagar och ska då fortfarande
   fångas av loggens sha-pekare, så flytta bara fram pekaren förbi det du
   faktiskt postat om.
-- Samma redaktionella regler som morgonjobbet (`fb-daglig.md` steg 2):
+- Samma redaktionella regler som nyhetsjobbet (`fb-daglig.md` steg 2):
   2–4 korta meningar på svenska, egen formulering, ingen clickbait,
   **inga emojis, inga hashtags**, decimalkomma, gemener i rubriker,
   INTE "på gymnasienivå".
 - Beskriv vad man kan GÖRA i det nya ("dra i reglaget och se …").
-- Sista raden är länken till rätt sida på sajten, på egen rad
+- **Ingen länk i inläggstexten** (sedan 2026-09-05, samma beslut som i
+  nyhetsjobbet: Facebook stryper räckvidden för inlägg med utlänk, även
+  en ren text-URL). Länken till rätt sida på sajten
   (t.ex. `https://fysiklabbet.se/fysik2-skiftnyckel-app.html` eller
-  `https://fysiklabbet.se/katalog.html?id=fy2-1.1`).
+  `https://fysiklabbet.se/katalog.html?id=fy2-1.1&block=<ankare>`) läggs
+  som inläggets FÖRSTA KOMMENTAR. Avsluta texten med en hänvisning
+  ("Testa själv på Fysiklabbet, länken finns i första kommentaren").
+  Pekar inlägget på en del av en genomgång: ankarlänk med `&block=`, inte
+  bara `?id=` (se CLAUDE.md, "Direktlänk till en enskild ruta").
 
 ## 3. Publicera
 
 Exakt samma procedur som `fb-daglig.md` steg 3: Chrome-verktygen via
-ToolSearch, kontrollera att du agerar som sidan Fysiklabbet ("Hantera
-sida") — annars AVBRYT utan att posta och logga orsaken — skriv, vänta
-in länkförhandsvisningen, Nästa → Publicera (Offentligt, publicera nu),
-och verifiera med skärmdump att inlägget ligger överst ("Alldeles nyss").
+ToolSearch (välj webbläsaren på deviceId `158b4037…`; visar Facebook ett
+inloggningsformulär där, byt till den andra anslutna webbläsaren och
+fyll aldrig i formuläret), kontrollera att du agerar som sidan
+Fysiklabbet ("Hantera sida") — annars AVBRYT utan att posta och logga
+orsaken — ladda upp bilden FÖRST med `file_upload`
+(så att inget länkkort skapas), skriv texten, Nästa → Publicera
+(Offentligt, publicera nu, Boosta AV), verifiera i fräsch flik att
+inlägget ligger överst ("Alldeles nyss") med exakt EN förekomst av
+texten, och lägg sedan länken som första kommentar under just det
+inlägget (steg 3.9 i `fb-daglig.md`, den enda tillåtna kommentaren).
+Logga `länkkommentar: OK` eller `länkkommentar: SAKNAS (<orsak>)`.
 
 ## 4. Uppdatera loggen
 
@@ -74,10 +87,13 @@ agenten läser din logg åt andra hållet för att se vad som redan lyfts.
 
 ## Säkerhetsregler (absoluta)
 
-- Publicera ENDAST inlägg på sidan Fysiklabbet. Gilla, kommentera, dela
-  eller följ ingenting. Skicka inga meddelanden. Svara inte på
-  kommentarer. Ändra inga sid- eller kontoinställningar. Bjud inte in
-  någon. Starta inga annonser/boostar (klicka aldrig "Boosta inlägg").
+- Publicera ENDAST inlägg på sidan Fysiklabbet. Gilla, dela eller följ
+  ingenting. Skicka inga meddelanden. Svara inte på kommentarer. Ändra
+  inga sid- eller kontoinställningar. Bjud inte in någon. Starta inga
+  annonser/boostar (klicka aldrig "Boosta inlägg").
+- **Den enda tillåtna kommentaren är länkkommentaren**: exakt en rad
+  med sajtadressen, under det inlägg du själv nyss publicerat i samma
+  körning. Kommentera aldrig något annat inlägg.
 - Max ETT inlägg per körning.
 - Om något ser oväntat ut (dialog du inte känner igen, varning från
   Facebook, fel språk/layout) → avbryt utan att posta och skriv i loggen

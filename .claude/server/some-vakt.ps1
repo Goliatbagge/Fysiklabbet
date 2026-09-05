@@ -1,21 +1,30 @@
-﻿# Vakt för de dagliga sociala medie-jobben — nyhetsinläggen på morgonen
-# (Facebook 07:33, Instagram 07:48) och lanseringsjobben på eftermiddagen
-# (Facebook 13:03, Instagram 13:18; lanseringar postas medvetet senare än
-# nyheten så att den inte puttas ner, önskemål 2026-08-18):
+﻿# Vakt för de dagliga sociala medie-jobben — lanseringsjobben på lunchen
+# (Facebook 13:03, Instagram 13:18) och nyhetsinläggen på kvällen
+# (Facebook 19:33, Instagram 19:48; nyheten flyttades från morgonen till
+# kvällen 2026-08-27 efter statistikgenomgång — lunchen slog morgonen
+# varje dag och kvällen var bäst av alla; nyheten postas sist så att den
+# ligger överst över natten):
 # kontrollerar att dagens rader faktiskt loggats i .claude/facebook/logg.md,
 # kör annars om jobben (riskfritt — jobben läser samma logg och hoppar själva
 # över det som redan postats) och LARMAR om det fortfarande saknas efteråt.
-# Lanseringsjobben kontrolleras först från 13:30 (14:00-triggern) — före dess
-# har de inte haft sin chans. Ett lanseringsjobb är "klart" även när det
+# Lanseringsjobben kontrolleras först från 13:30 (14:00-triggern) och
+# nyhetsjobben först från 20:15 (21:00-triggern) — före dess har de inte
+# haft sin chans. Ett lanseringsjobb är "klart" även när det
 # loggat att ingen lansering fanns; det som bevakas är att KÖRNINGEN skett.
 # Bakgrund: 2026-08-17 uteblev både Facebook- och Instagram-inlägget utan att
 # någon märkte det förrän på eftermiddagen — BOSGAME står på dygnet runt, så
 # en miss beror på något ihållande (utloggad session efter Windows-uppdatering,
 # Chrome-utökningen inte ansluten, flyttad claude.exe) och behöver synas.
 #
-# Körs av den schemalagda uppgiften "Fysiklabbet SoMe-vakt" (09:30 och 14:00
+# Körs av den schemalagda uppgiften "Fysiklabbet SoMe-vakt" (14:00 och 21:00
 # varje dag, endast när användaren är inloggad — samma krav som jobben själva:
 # Chrome med Claude-utökningen). Registrering: installera-some-vakt.ps1.
+#
+# Sedan 2026-09-05 larmar dessutom JOBBEN SJÄLVA (some-notis.ps1, dot-sourcad
+# i fb-daglig/ig-daglig/fb-lansering/ig-lansering.ps1) direkt när claude.exe
+# svarar "Failed to authenticate" — vaktens omkörning faller annars på samma
+# utgångna OAuth-session utan att någon hunnit logga in (1 sep 2026 uteblev
+# båda kvällsinläggen så). Vakten är alltså andra linjen, inte första.
 #
 # Larmkanaler när något saknas även efter omkörning:
 #   1. Windows-notis (toast) i den inloggade sessionen.
@@ -166,24 +175,25 @@ function SistaRaderna($fil, $antal = 15) {
 
 Logga '--- some-vakt startar ---'
 
-# Före 08:00 har jobben inte haft sin chans än — gör inget (händer bara vid
-# manuell körning; de schemalagda triggrarna ligger 09:30 och 14:00).
-if ((Get-Date).TimeOfDay -lt [timespan]'08:00') {
-    Logga 'Klockan är före 08:00 - jobben har inte kört än. Avvaktar.'
+# Före 13:30 har inget av dagens jobb haft sin chans än — gör inget
+# (händer bara vid manuell körning; triggrarna ligger 14:00 och 21:00).
+if ((Get-Date).TimeOfDay -lt [timespan]'13:30') {
+    Logga 'Klockan är före 13:30 - jobben har inte kört än. Avvaktar.'
     exit 0
 }
 
-# Jobben som bevakas. Lanseringsjobben (13:03/13:18) tas med först från
-# 13:30 — före dess har de inte haft sin chans, och 09:30-triggern ska
-# inte köra dem i förtid (då postades lanseringen på förmiddagen igen,
-# precis det schemaflytten skulle bort från).
+# Jobben som bevakas. Lanseringsjobben (13:03/13:18) från 13:30, och
+# nyhetsjobben (19:33/19:48) först från 20:15 — före dess har de inte
+# haft sin chans, och 14:00-triggern får inte köra kvällsjobben i förtid
+# (då hamnade nyheten på eftermiddagen igen, precis det schemaflytten
+# 2026-08-27 skulle bort från).
 $jobb = @(
-    @{ namn = 'Facebook-nyhet';  falt = 'fb'; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log'; kommando = '/fb-daglig' }
-    @{ namn = 'Instagram-nyhet'; falt = 'ig'; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log'; kommando = '/ig-daglig' }
+    @{ namn = 'Facebook-lansering';  falt = 'fbL'; skript = 'fb-lansering.ps1'; logg = 'fb-lansering.log'; kommando = '/fb-lansering' }
+    @{ namn = 'Instagram-lansering'; falt = 'igL'; skript = 'ig-lansering.ps1'; logg = 'ig-lansering.log'; kommando = '/ig-lansering' }
 )
-if ((Get-Date).TimeOfDay -ge [timespan]'13:30') {
-    $jobb += @{ namn = 'Facebook-lansering';  falt = 'fbL'; skript = 'fb-lansering.ps1'; logg = 'fb-lansering.log'; kommando = '/fb-lansering' }
-    $jobb += @{ namn = 'Instagram-lansering'; falt = 'igL'; skript = 'ig-lansering.ps1'; logg = 'ig-lansering.log'; kommando = '/ig-lansering' }
+if ((Get-Date).TimeOfDay -ge [timespan]'20:15') {
+    $jobb += @{ namn = 'Facebook-nyhet';  falt = 'fb'; skript = 'fb-daglig.ps1'; logg = 'fb-daglig.log'; kommando = '/fb-daglig' }
+    $jobb += @{ namn = 'Instagram-nyhet'; falt = 'ig'; skript = 'ig-daglig.ps1'; logg = 'ig-daglig.log'; kommando = '/ig-daglig' }
 }
 
 $status = JobbStatus

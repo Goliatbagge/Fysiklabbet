@@ -523,28 +523,23 @@
                 </g>
             );
 
-            // Magnetens eget fält: slutna slingor + axellinjer, riktningsmarkörer mitt på linjen.
+            // Magnetens eget fält, ritat bara där det gör pedagogisk nytta: som raka
+            // axiella fältlinjer inuti röret. På axeln pekar fältet nedåt både ovanför
+            // magneten (in i sydändan) och under den (ut ur nordändan). Jämför med
+            // strömmarnas fält strax utanför: under magneten är de motriktade.
+            // Riktningsmarkörer mitt på linjerna, aldrig i änden (husregel).
             const drawField = (cx, cm, key) => {
                 const els = [];
-                // axellinjer (fältet pekar nedåt på axeln: ut ur N nedtill, in i S upptill)
-                const aTop1 = cm - MAG.hh - 50, aTop2 = cm - MAG.hh - 2;
-                const aBot1 = cm + MAG.hh + 2, aBot2 = cm + MAG.hh + 50;
-                els.push(<line key="ax1" x1={cx} y1={aTop1} x2={cx} y2={aTop2} stroke={COL.falt} strokeWidth="1.6" />);
-                els.push(midHead(cx, (aTop1 + aTop2) / 2, 0, 1, COL.falt, 'ax1h'));
-                els.push(<line key="ax2" x1={cx} y1={aBot1} x2={cx} y2={aBot2} stroke={COL.falt} strokeWidth="1.6" />);
-                els.push(midHead(cx, (aBot1 + aBot2) / 2, 0, 1, COL.falt, 'ax2h'));
-                // slingor (ellipser genom magneten) med sidopartierna I RÖRVÄGGEN
-                // (väggen ligger 20–28 px från centrum) — det är fältet genom väggen
-                // som drivs förbi och inducerar strömmarna. Vid ytterpunkterna pekar
-                // fältet uppåt (ekvatorialfältet är motriktat dipolmomentet). Den
-                // mörka kantlinjen under ger separation mot den kopparfärgade väggen.
-                [[24, 52], [27, 68]].forEach(([rx, ry], i) => {
-                    els.push(<ellipse key={`elc${i}`} cx={cx} cy={cm} rx={rx} ry={ry}
-                                      fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="3.4" />);
-                    els.push(<ellipse key={`el${i}`} cx={cx} cy={cm} rx={rx} ry={ry}
-                                      fill="none" stroke={COL.falt} strokeWidth="1.4" />);
-                    els.push(midHead(cx - rx, cm, 0, -1, COL.falt, `elh${i}a`, 6));
-                    els.push(midHead(cx + rx, cm, 0, -1, COL.falt, `elh${i}b`, 6));
+                const zones = [
+                    { y0: cm - MAG.hh - 52, y1: cm - MAG.hh - 2 },
+                    { y0: cm + MAG.hh + 2, y1: cm + MAG.hh + 52 },
+                ];
+                zones.forEach((z, zi) => {
+                    [-6.5, 6.5].forEach((dx, li) => {
+                        els.push(<line key={`f${zi}${li}`} x1={cx + dx} y1={z.y0} x2={cx + dx} y2={z.y1}
+                                       stroke={COL.falt} strokeWidth="1.7" />);
+                        els.push(midHead(cx + dx, (z.y0 + z.y1) / 2, 0, 1, COL.falt, `fh${zi}${li}`, 6));
+                    });
                 });
                 els.push(
                     <text key="blbl" x={cx - TUBE.outerHW - 8} y={cm - MAG.hh - 40} textAnchor="end" fontSize="14" fill={COL.falt}>
@@ -616,7 +611,7 @@
                     const y0 = Math.max(z.y0, TUBE.topY + 8);
                     const y1 = Math.min(z.y1, TUBE.botY - 8);
                     if (y1 - y0 < 18) return;
-                    [-9, 9].forEach((dx, li) => {
+                    [-13, 13].forEach((dx, li) => {
                         els.push(<line key={`l${zi}${li}`} x1={cx + dx} y1={y0} x2={cx + dx} y2={y1}
                                        stroke={COL.indfalt} strokeWidth="1.7" opacity={op * 0.9} />);
                         els.push(<g key={`h${zi}${li}`} opacity={op * 0.9}>
@@ -660,7 +655,7 @@
                 const y0 = cm + MAG.hh;
                 return (
                     <g key={key}>
-                        {arrow(cx - 16, y0, cx - 16, y0 + len, COL.v, 'vp', 2.6)}
+                        {arrow(cx - 17, y0, cx - 17, y0 + len, COL.v, 'vp', 2.6)}
                         <text x={cx - TUBE.outerHW - 8} y={y0 + len + 2} textAnchor="end" fontSize="14" fill={COL.v}>
                             <tspan fontStyle="italic">v</tspan>
                         </text>

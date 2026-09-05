@@ -116,10 +116,18 @@ matnyttigt att man tar med sig något in i klassrummet.
    genomförda punkter i `planerat.md`, och **sätt dagens datum på det valda
    tipset i `tips.md`** (annars fungerar inte rotationen).
 
-9. **Lämna över till användaren.** Du skickar ALDRIG brevet själv. Utskicket
-   görs manuellt i EmailOctopus (anmälningsrutan på `nyheter.html` är kopplad
-   dit): användaren klistrar in HTML-utkastet, sätter ämnesrad + preheader och
-   schemalägger. Påminn om rekommenderad utskickstid (se nedan), och om att
+9. **Lämna över till användaren.** Du skickar ALDRIG brevet själv.
+   Överföringen till EmailOctopus sköts av kommandot `/brev-till-octopus`
+   (`.claude/commands/brev-till-octopus.md`), som lägger upp kampanjen och
+   lämnar Chrome-fliken på "Send as test". **Kör du lokalt, med
+   Chrome-verktygen: kör det kommandot direkt när utkastet är klart.**
+   **Kör du som molnroutine kan du inte**, du saknar Chrome, och då måste
+   uppladdningen göras i en lokal session efteråt (upptäckt 2026-09-05:
+   utkastet låg på main utan att någon flik öppnats, och användaren
+   undrade varför). Skriv därför i överlämningen UTTRYCKLIGEN att
+   kampanjen inte är upplagd och att `/brev-till-octopus` ska köras
+   lokalt. Anmälningsrutan på `nyheter.html` är kopplad till EmailOctopus;
+   testskick och schemaläggning trycker användaren på själv. Påminn om rekommenderad utskickstid (se nedan), och om att
    **nya bilder i `nyheter/brev/` måste vara pushade till `main` (= ligga på
    sajten) innan brevet skickas** — annars visar mejlet trasiga bildrutor.
    Committa utkast + logg om användaren ber om det, enligt projektets

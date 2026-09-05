@@ -12,6 +12,16 @@ Format:
 ```
 
 ## 2026-09-06 — "En strömbrytare för supraledningen i grafen"
+- Status: **UPPLAGD i EmailOctopus 2026-09-05** som kampanjen "Nyhetsbrev nr 4 -
+  2026-09-06" (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad och
+  preheader ur utkastet, HTML inklistrad med {{PreviewText}}-diven, alla fyra
+  bilder verifierade som laddade i förhandsvisningen, 21 prenumeranter).
+  Fliken lämnad på Content-stegets "Preview & test" med knappen "Send as
+  test". ÅTERSTÅR för användaren: testskick och schemaläggning till söndag
+  06.00 svensk tid (Delivery står på "Send immediately" och måste bytas till
+  "Send at a specific time"; tidszonen default:ar till London!).
+  Uppladdningen fördröjdes av att Chrome var utloggad från EmailOctopus;
+  användaren loggade in på begäran.
 - **Sajtbild inlagd 2026-09-05 (lokal session):** molnroutinen kunde inte
   rendera simuleringarna, och verify-nyhetsbrev.js stoppade uppladdningen
   (ingen bild från sajten). Skärmdump av Dubbelspalten i 3D togs lokalt

@@ -275,8 +275,10 @@ const SITEMAP_EXCLUDE = new Set([
   'prototyp-tts.html',           // prototyp
   'handskrift-demo.html',        // intern demo för handskriftsmotorn
   'matte-triangel-rektangel.html', // olänkad arbetsfil
+  'nivakriterier-reviderad.html', // olänkad lokal arbetsfil (ej i repot)
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
   'fysik1-enhetskollen.html',    // redirect-stub → fysik-enhetskoll.html
+  'fysik2-dubbelspalt.html',     // redirect-stub → fysik2-dubbelspalt-3d-app.html
   // Omdirigeringssidor hör inte hemma i en sitemap — Google rapporterar dem
   // som "Sida med omdirigering". De ligger kvar som filer eftersom hela
   // navigationen länkar dit; målet katalog.html?id=fy1/fy2 står i sitemapen.

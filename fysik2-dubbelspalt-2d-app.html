@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubbelspalten i 2D — Fysiklabbet</title>
+    <meta name="description" content="Dubbelspaltexperimentet sett ovanifrån, i 2D: vågfältet mellan spalterna och skärmen ritas som i genomgångens figurer, skärmen fångar mönstret som ljusband eller som partiklar en i taget, och en detektor vid spalterna visar hur banden försvinner när vägen observeras. Ändra våglängd, spaltavstånd och skärmavstånd, mät vägskillnaden med ett klick och se gitterformeln n · λ = d · sin α i figuren.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-dubbelspalt-2d-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Dubbelspalten i 2D — Fysik nivå 2">
+    <meta property="og:description" content="Dubbelspaltexperimentet sett ovanifrån, i 2D: vågfältet mellan spalterna och skärmen ritas som i genomgångens figurer, skärmen fångar mönstret som ljusband eller som partiklar en i taget, och en detektor vid spalterna visar hur banden försvinner när vägen observeras. Ändra våglängd, spaltavstånd och skärmavstånd, mät vägskillnaden med ett klick och se gitterformeln n · λ = d · sin α i figuren.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-dubbelspalt-2d-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dubbelspalten i 2D — Fysik nivå 2">
+    <meta name="twitter:description" content="Dubbelspaltexperimentet sett ovanifrån, i 2D: vågfältet mellan spalterna och skärmen ritas som i genomgångens figurer, skärmen fångar mönstret som ljusband eller som partiklar en i taget, och en detektor vid spalterna visar hur banden försvinner när vägen observeras. Ändra våglängd, spaltavstånd och skärmavstånd, mät vägskillnaden med ett klick och se gitterformeln n · λ = d · sin α i figuren.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+    </script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum em { font-family: 'KaTeX_Math', 'Times New Roman', serif; font-style: italic; }
+        .fnum sub { font-style: normal; font-size: 12px; }
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        /* Scenen: en mörk laborationsscen (laser eller elektronkanon i mörker).
+           Canvasen bor i .scene-stage med fast höjd; i fullskärm fyller den
+           ramen. Bakgrunden är en CSS-gradient bakom en genomskinlig
+           WebGL-canvas, så att djupet i rummet inte kostar en enda triangel. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.35);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #071022;
+        }
+        .scene-stage {
+            position: relative; height: 540px;
+            background: radial-gradient(ellipse at 48% 30%, #16305f 0%, #0b1a3a 48%, #050b1c 100%);
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+            position: absolute; inset: 0; height: auto;
+        }
+        @media (max-width: 600px) {
+            .scene-stage { height: 400px; }
+            /* Mobil fullskärm: scenen ligger kvar i flödet med en egen höjd,
+               så att sim-dock.js hittar den och lägger verktygen UNDER
+               scenen (en absolut stage hoppas över och verktygen skulle
+               då flöda in över bilden från toppen). */
+            .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+                position: relative; inset: auto; height: 58vh;
+            }
+        }
+        .scene-wrap canvas { display: block; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.72); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+        /* Avläsning uppe till vänster under knapparna: träffräknaren i
+           partikelläget. Ljus text på den mörka scenen, ingen ruta. */
+        .scene-info.si-diskret {
+            position: absolute; top: 116px; left: 16px; z-index: 5;
+            color: #dfe7f5; font-size: 13px; font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            pointer-events: none; background: none; border: none; box-shadow: none;
+        }
+        .scene-info.si-diskret span { display: block; font-weight: 400; font-size: 11.5px; color: #aab7cf; }
+        @media (max-width: 600px) { .scene-info.si-diskret { top: 96px; left: 12px; } }
+
+        /* Inställningsrutan uppe till höger: kryssrutor och radioknappar i
+           båda lägena, glidare och styrknappar bara i fullskärm. Hopfällbar
+           via .st-hide/.st-show-btn (centrala klasser i styles-laborans-sim.css). */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 30px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { font-size: 13px; padding: 7px 10px; }
+        .scene-toggles .st-views { display: flex; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-views button { flex: 1; padding: 4px 6px; font-size: 11.5px; }
+
+        /* Samma verktygsval som ett KORT i sidopanelen (normalläget) */
+        .st-panel { display: flex; flex-wrap: wrap; gap: 6px 26px; }
+        .st-panel > div { display: flex; flex-direction: column; gap: 3px; min-width: 150px; }
+        .st-panel .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .st-panel .st-title.mt { margin-top: 7px; }
+        .st-panel label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .st-panel input[type="checkbox"], .st-panel input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .st-panel .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-family: Poppins, sans-serif;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .view-grid { display: flex; gap: 6px; }
+        .view-grid button { flex: 1; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; }
+        .num-in { width: 60px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; color: var(--lab-accent, #c8324a); }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Konstanter, samma beteckningar som i genomgångarna Ljus,
+        //    diffraktion och interferens (fy2-4.2) och Våg-partikeldualitet
+        //    (fy2-4.6): n · λ = d · sin α_n och λ = h / (m · v). ──
+        const H_PLANCK = 6.626e-34;    // Plancks konstant (Js)
+        const M_E = 9.109e-31;         // elektronens massa (kg)
+        const C_LIGHT = 2.998e8;       // ljusets hastighet (m/s)
+
+        // Scenen är i MIKROMETERSKALA (1 scen-enhet = 1 µm): spaltavstånd på
+        // några µm och en skärm några tiotal µm bort ger avböjningsvinklar på
+        // tiotals grader, så att vågorna och maxima syns i samma bild. Alla
+        // mått är riktiga; det är bara uppställningen som är liten.
+        const GEO = {
+            H: 6.5,          // plattans och skärmens höjd (µm)
+            W: 24,           // scenens bredd i sidled (µm)
+            SRC_X: -7,       // källans mynning (µm)
+            XMIN: -9.5,      // vågytans början
+            PLATE_T: 0.3,    // plattans tjocklek
+        };
+        const N_SUB = 7;     // Huygens-delkällor per spalt
+
+        const LAM_MIN = 380, LAM_MAX = 750;      // nm
+        const D_MIN = 0.8, D_MAX = 6;            // µm
+        const B_MIN = 0.2, B_MAX = 1.6;          // µm
+        const L_MIN = 8, L_MAX = 30;             // µm
+        const RATE_MIN = 1, RATE_MAX = 300;      // partiklar per sekund
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+        const fmtNum = (n, d = 0) => {
+            if (!isFinite(n)) return '–';
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [intp, frac] = s.split('.');
+            const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return frac !== undefined ? withSpaces + ',' + frac : withSpaces;
+        };
+        const DEG = Math.PI / 180;
+
+        // Våglängd → RGB (0–1), en vanlig approximation av det synliga spektrumet.
+        function wlToRGB(w) {
+            let r, g, b;
+            if (w < 440) { r = -(w - 440) / 60; g = 0; b = 1; }
+            else if (w < 490) { r = 0; g = (w - 440) / 50; b = 1; }
+            else if (w < 510) { r = 0; g = 1; b = -(w - 510) / 20; }
+            else if (w < 580) { r = (w - 510) / 70; g = 1; b = 0; }
+            else if (w < 645) { r = 1; g = -(w - 645) / 65; b = 0; }
+            else { r = 1; g = 0; b = 0; }
+            let f = 1;
+            if (w < 420) f = 0.35 + 0.65 * (w - 380) / 40;
+            else if (w > 700) f = 0.4 + 0.6 * (750 - w) / 50;
+            return [r * f, g * f, b * f];
+        }
+        const ELEKTRON_RGB = [0.55, 0.80, 1.0];
+        const rgbHex = (c) => '#' + c.map(v => Math.round(Math.max(0, Math.min(1, v)) * 255).toString(16).padStart(2, '0')).join('');
+        const mixRGB = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+        // Ljusets färg i scenen: våglängdens färg, något ljusare så att den
+        // bär mot den mörka bakgrunden. Elektroner ritas blåvita.
+        const sceneColor = (source, lam) => source === 'elektron' ? ELEKTRON_RGB : mixRGB(wlToRGB(lam), [1, 1, 1], 0.18);
+
+        // ── Fysik: källorna bakom plattan och intensiteten på skärmen ──
+        // Varje öppen spalt delas i N_SUB Huygens-delkällor jämnt över
+        // spaltbredden b, centrerade i z = ±d/2. Samma källor driver vågytan
+        // (i shadern) och skärmens intensitet, så att vågtopparna på golvet
+        // träffar skärmen exakt där banden är ljusa.
+        function buildSources(d, b, slitA, slitB) {
+            const out = [];
+            const add = (zc) => {
+                for (let j = 0; j < N_SUB; j++) {
+                    out.push({ z: zc + b * ((j + 0.5) / N_SUB - 0.5), a: 1 / N_SUB });
+                }
+            };
+            if (slitA) add(-d / 2);
+            if (slitB) add(d / 2);
+            return out;
+        }
+        // Intensiteten I(z) längs skärmen (tidsmedelvärde av |Σ e^{ikr}/√r|²),
+        // normerad så att centralmaximum med båda spalterna öppna är 1.
+        const N_COLS = 1024;
+        function computeIntensity(p) {
+            const { lamUm, d, b, L, slitA, slitB } = p;
+            const k = 2 * Math.PI / lamUm;
+            const srcs = buildSources(d, b, slitA, slitB);
+            const ref = buildSources(d, b, true, true);
+            let re = 0, im = 0;
+            for (const s of ref) {
+                const r = Math.hypot(L, s.z); const a = s.a / Math.sqrt(r);
+                re += a * Math.cos(k * r); im += a * Math.sin(k * r);
+            }
+            const Iref = re * re + im * im;
+            const I = new Float32Array(N_COLS);
+            for (let c = 0; c < N_COLS; c++) {
+                const z = (c + 0.5) / N_COLS * GEO.W - GEO.W / 2;
+                re = 0; im = 0;
+                for (const s of srcs) {
+                    const r = Math.hypot(L, z - s.z); const a = s.a / Math.sqrt(r);
+                    re += a * Math.cos(k * r); im += a * Math.sin(k * r);
+                }
+                I[c] = (re * re + im * im) / Iref;
+            }
+            return I;
+        }
+        // Kumulativ fördelning för att lotta träffpunkter i partikelläget
+        function buildCDF(I) {
+            const cdf = new Float32Array(I.length);
+            let acc = 0;
+            for (let i = 0; i < I.length; i++) { acc += I[i]; cdf[i] = acc; }
+            if (acc > 0) for (let i = 0; i < I.length; i++) cdf[i] /= acc;
+            return { cdf, total: acc };
+        }
+        function sampleZ(cdfObj) {
+            const { cdf } = cdfObj;
+            const u = Math.random();
+            let lo = 0, hi = cdf.length - 1;
+            while (lo < hi) { const mid = (lo + hi) >> 1; if (cdf[mid] < u) lo = mid + 1; else hi = mid; }
+            const c = lo + Math.random();
+            return c / cdf.length * GEO.W - GEO.W / 2;
+        }
+        // Tankeexperimentet "vanliga små kulor": kulorna kommer i en riktad
+        // stråle, går genom EN spalt och fortsätter rakt fram utan någon
+        // vågnatur. På skärmen blir det två smala streck, vart och ett lika
+        // brett som spalten (plus en mycket liten spridning i strålen).
+        const KUL_SPRID = 0.4 * DEG;
+        function kulSigma(L) { return Math.max(0.03, L * Math.tan(KUL_SPRID)); }
+        // Felfunktionen (Abramowitz–Stegun 7.1.26), räcker för fördelningen
+        function erf(x) {
+            const sgn = x < 0 ? -1 : 1; x = Math.abs(x);
+            const t = 1 / (1 + 0.3275911 * x);
+            const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+            return sgn * y;
+        }
+        function computeKulor(d, b, L, slitA, slitB) {
+            const I = new Float32Array(N_COLS);
+            const sig = kulSigma(L), k = 1 / (Math.SQRT2 * sig);
+            const zs = [];
+            if (slitA) zs.push(-d / 2);
+            if (slitB) zs.push(d / 2);
+            for (let c = 0; c < N_COLS; c++) {
+                const z = (c + 0.5) / N_COLS * GEO.W - GEO.W / 2;
+                let v = 0;
+                // likformigt över spaltbredden, utsmetat med den lilla spridningen
+                for (const z0 of zs) v += 0.5 * (erf((z - z0 + b / 2) * k) - erf((z - z0 - b / 2) * k));
+                I[c] = v;
+            }
+            return I;
+        }
+        function randn() {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+        }
+        // Maximanas lägen enligt gitterformeln n · λ = d · sin α_n
+        function maximaList(lamUm, d, L) {
+            const out = [];
+            for (let n = 0; n <= 12; n++) {
+                const s = n * lamUm / d;
+                if (s >= 1) break;
+                const alpha = Math.asin(s);
+                const z = L * Math.tan(alpha);
+                if (z > GEO.W / 2) break;
+                out.push({ n, alpha, z });
+                if (n > 0) out.push({ n, alpha: -alpha, z: -z });
+            }
+            return out;
+        }
+
+        // ── Reglage-komponenter ──
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null) n = Math.max(min, n);
+                if (max != null) n = Math.min(max, n);
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => setTxt(e.target.value)}
+                           onBlur={() => { setEditing(false); commit(txt); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') { e.target.blur(); } }} />
+                    <span className="num-unit">{unit}</span>
+                </span>
+            );
+        };
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 0, cmin, cmax }) => (
+            <div className="p-3 rounded-xl glass-card mb-3">
+                <div className="flex justify-between items-baseline mb-2 gap-2">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={cmin != null ? cmin : min} max={cmax != null ? cmax : max}
+                              fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, decimals)} {unit}</span>
+                    <span>{fmt(max, decimals)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+        // Kompakt rad i inställningsrutan (fullskärm): etikett + sifferfält, glidaren under
+        const StSlider = ({ label, value, min, max, step, onChange, decimals, unit }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // ── 2D-scenen: planvy ovanifrån i en 2D-canvas ──
+        // Samma fysik och samma lägen som i 3D-versionen, men ritad som
+        // genomgångens figurer: källan till vänster, plattan i mitten,
+        // skärmen till höger och vågfältet som ett färgat höjdfält emellan.
+        // Vågfältet förberäknas som två fasbilder C och S (cos- och sin-delen
+        // av varje källa), så att varje bildruta bara behöver
+        // h = C·cos ωt + S·sin ωt per cell: några miljoner cosinus per
+        // parameterändring, men bara multiplikationer per bildruta.
+        const SpaltScene2D = ({ stateRef, physRef, actionsRef, onMeasure }) => {
+            const mountRef = useRef(null);
+
+            useEffect(() => {
+                const mount = mountRef.current;
+                const canvas = document.createElement('canvas');
+                canvas.style.cssText = 'display:block;width:100%;height:100%;touch-action:none;';
+                mount.appendChild(canvas);
+                const ctx = canvas.getContext('2d');
+
+                const SW = 0.9;          // skärmens tjocklek (µm) — träffarna sprids över den
+                const CURVE_W = 3.2;     // plats till höger om skärmen för intensitetskurvan
+                const LABEL_W = 1.7;     // och för maximanas n-etiketter utanför kurvan
+                const CELL = 2.4;        // vågcellens storlek i CSS-px
+                let cw = 0, ch = 0, dpr = 1;
+                let s = 20, ox = 0, oz = 0;   // skala (px/µm) och origo
+                const X = (x) => ox + x * s;
+                const Z = (z) => oz + z * s;
+
+                const resize = () => {
+                    cw = mount.clientWidth; ch = mount.clientHeight;
+                    if (!cw || !ch) return;
+                    dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr);
+                    gridKey = '';
+                };
+                const layout = (L) => {
+                    const xspan = (L + SW + 0.3 + CURVE_W + LABEL_W) - GEO.XMIN;
+                    const padX = 10, padTop = 34, padBot = 34;
+                    s = Math.min((cw - 2 * padX) / xspan, (ch - padTop - padBot) / GEO.W);
+                    ox = padX + (cw - 2 * padX - xspan * s) / 2 - GEO.XMIN * s;
+                    oz = padTop + (ch - padTop - padBot) / 2;
+                };
+
+                // ── Vågfältets fasbilder ──
+                let gridKey = '', gx = 0, gz = 0, Cf = null, Sf = null, Ff = null, off = null, offCtx = null, img = null;
+                const buildGrid = (lamUm, d, b, L, slitA, slitB) => {
+                    const key = [lamUm, d, b, L, slitA, slitB, s.toFixed(3)].join('|');
+                    if (key === gridKey) return;
+                    gridKey = key;
+                    gx = Math.max(2, Math.ceil((L - GEO.XMIN) * s / CELL));
+                    gz = Math.max(2, Math.ceil(GEO.W * s / CELL));
+                    Cf = new Float32Array(gx * gz); Sf = new Float32Array(gx * gz); Ff = new Float32Array(gx * gz);
+                    const k = 2 * Math.PI / lamUm;
+                    const srcs = buildSources(d, b, slitA, slitB);
+                    const gain = 1.35;
+                    for (let j = 0; j < gz; j++) {
+                        const z = -GEO.W / 2 + (j + 0.5) / gz * GEO.W;
+                        const zEdge = GEO.W / 2 - Math.abs(z);
+                        const fz = Math.min(1, zEdge / 3.0);
+                        for (let i = 0; i < gx; i++) {
+                            const x = GEO.XMIN + (i + 0.5) / gx * (L - GEO.XMIN);
+                            const n = j * gx + i;
+                            let c = 0, sn = 0;
+                            if (x < 0) {
+                                const t = Math.max(0, Math.min(1, (x - GEO.XMIN) / 2.5));
+                                const env = t * t * (3 - 2 * t);
+                                c = env * Math.cos(k * x); sn = env * Math.sin(k * x);
+                            } else {
+                                const t = Math.max(0, Math.min(1, x / 0.5));
+                                const env = gain * t * t * (3 - 2 * t);
+                                for (const q of srcs) {
+                                    const dz = z - q.z;
+                                    const r = Math.sqrt(x * x + dz * dz);
+                                    const a = env * q.a / Math.sqrt(r + 0.35);
+                                    c += a * Math.cos(k * r); sn += a * Math.sin(k * r);
+                                }
+                            }
+                            Cf[n] = c; Sf[n] = sn;
+                            const fx = Math.max(0, Math.min(1, (x - GEO.XMIN) / 3.5));
+                            Ff[n] = fz * fx;
+                        }
+                    }
+                    off = document.createElement('canvas'); off.width = gx; off.height = gz;
+                    offCtx = off.getContext('2d');
+                    img = offCtx.createImageData(gx, gz);
+                };
+                const FLOOR = [12, 26, 56];
+                const renderWave = (t, col, opacity) => {
+                    const ct = Math.cos(t), st = Math.sin(t);
+                    const px = img.data;
+                    const deep = mixRGB([0.05, 0.11, 0.26], col, 0.18);
+                    let prev = 0;
+                    for (let j = 0; j < gz; j++) {
+                        for (let i = 0; i < gx; i++) {
+                            const n = j * gx + i;
+                            const h = Cf[n] * ct + Sf[n] * st;
+                            const slope = i ? (h - prev) : 0;
+                            prev = h;
+                            const crest = Math.max(0, Math.min(1, h * 0.28 + 0.5));
+                            const m = 0.22 + 0.55 * crest;
+                            const lit = Math.max(0, Math.min(1, 0.5 - 2.4 * slope));
+                            const light = 0.35 + 0.85 * lit;
+                            const spec = Math.pow(lit, 9) * 0.55;
+                            const f = Ff[n] * opacity;
+                            for (let ch3 = 0; ch3 < 3; ch3++) {
+                                const base = (deep[ch3] + (col[ch3] - deep[ch3]) * m) * light + spec;
+                                const v = Math.min(1, base) * 255;
+                                px[n * 4 + ch3] = Math.round(FLOOR[ch3] + (v - FLOOR[ch3]) * f);
+                            }
+                            px[n * 4 + 3] = 255;
+                        }
+                    }
+                    offCtx.putImageData(img, 0, 0);
+                };
+
+                // ── Skärmens träffar (upplösningsoberoende remsa) ──
+                const dotCv = document.createElement('canvas');
+                dotCv.width = 48; dotCv.height = 1024;
+                const dctx = dotCv.getContext('2d');
+                let hits = 0;
+                const clearDots = () => {
+                    dctx.clearRect(0, 0, dotCv.width, dotCv.height);
+                    hits = 0; physRef.current.hits = 0;
+                    physRef.current.hitsA = 0; physRef.current.hitsB = 0;
+                };
+                let colRGB = [1, 0.3, 0.3];
+                const addDot = (z, u) => {
+                    const cx = u * dotCv.width;
+                    const cy = (z + GEO.W / 2) / GEO.W * dotCv.height;
+                    const c = colRGB.map(v => Math.round(v * 255));
+                    const g = dctx.createRadialGradient(cx, cy, 0, cx, cy, 4.5);
+                    g.addColorStop(0, 'rgba(255,255,255,0.95)');
+                    g.addColorStop(0.4, `rgba(${c[0]},${c[1]},${c[2]},0.8)`);
+                    g.addColorStop(1, `rgba(${c[0]},${c[1]},${c[2]},0)`);
+                    dctx.globalCompositeOperation = 'lighter';
+                    dctx.fillStyle = g;
+                    dctx.beginPath(); dctx.arc(cx, cy, 4.5, 0, Math.PI * 2); dctx.fill();
+                    hits++; physRef.current.hits = hits;
+                };
+
+                // ── Partiklar ──
+                const particles = [];
+                window.__spaltParticles = particles;
+                const flashes = [];
+                const det = { A: 9, B: 9 };
+
+                // ── Intensiteter ──
+                let I = null, Iobs = null, Ikul = null, cdfObj = null, cdfA = null, cdfB = null, intKey = '', lastPm = null;
+
+                // ── Klick på skärmen: vägskillnaden ──
+                let downX = 0, downY = 0;
+                const onDown = (ev) => { downX = ev.clientX; downY = ev.clientY; };
+                const onUp = (ev) => {
+                    if (Math.hypot(ev.clientX - downX, ev.clientY - downY) > 6) return;
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (ev.clientX - rect.left - ox) / s, z = (ev.clientY - rect.top - oz) / s;
+                    const L = stateRef.current.L;
+                    if (x > L - 0.6 && x < L + SW + 0.6 && Math.abs(z) < GEO.W / 2) {
+                        physRef.current.measureZ = z;
+                        onMeasure(z);
+                    }
+                };
+                canvas.addEventListener('pointerdown', onDown);
+                canvas.addEventListener('pointerup', onUp);
+                actionsRef.current.updateMeasure = () => {};
+                actionsRef.current.clearScreen = () => { clearDots(); particles.length = 0; flashes.length = 0; };
+
+                // ── Ritfunktioner ──
+                const FONT = (px, italic) => (italic ? 'italic ' : '') + '600 ' + px + 'px Poppins, sans-serif';
+                const label = (txt, x, y, opts = {}) => {
+                    ctx.save();
+                    ctx.font = FONT(opts.size || 14, opts.italic);
+                    ctx.textAlign = opts.align || 'center'; ctx.textBaseline = opts.base || 'middle';
+                    ctx.shadowColor = 'rgba(0,0,0,0.75)'; ctx.shadowBlur = 5;
+                    ctx.fillStyle = opts.color || '#e9eef8';
+                    ctx.fillText(txt, x, y);
+                    ctx.restore();
+                };
+                // etikett med kursiv variabel följd av rak text, till exempel n = 1
+                const labelVar = (v, rest, x, y, opts = {}) => {
+                    ctx.save();
+                    const size = opts.size || 14;
+                    ctx.font = FONT(size, true);
+                    const w1 = ctx.measureText(v).width;
+                    ctx.font = FONT(size, false);
+                    const w2 = ctx.measureText(rest).width;
+                    let x0 = x - (w1 + w2) / 2;
+                    if (opts.align === 'left') x0 = x;
+                    if (opts.align === 'right') x0 = x - (w1 + w2);
+                    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(0,0,0,0.75)'; ctx.shadowBlur = 5;
+                    ctx.fillStyle = opts.color || '#e9eef8';
+                    ctx.font = FONT(size, true); ctx.fillText(v, x0, y);
+                    ctx.font = FONT(size, false); ctx.fillText(rest, x0 + w1, y);
+                    ctx.restore();
+                };
+                const glowDot = (x, y, r, col, a) => {
+                    const c = col.map(v => Math.round(v * 255));
+                    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+                    g.addColorStop(0, `rgba(255,255,255,${0.95 * a})`);
+                    g.addColorStop(0.35, `rgba(${c[0]},${c[1]},${c[2]},${0.85 * a})`);
+                    g.addColorStop(1, `rgba(${c[0]},${c[1]},${c[2]},0)`);
+                    ctx.fillStyle = g;
+                    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+                };
+
+                // ── Animationsloop ──
+                let raf = 0, last = performance.now(), simT = 0, emitAcc = 0, visible = true;
+                const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0.02 });
+                io.observe(mount);
+                const tick = (now) => {
+                    raf = requestAnimationFrame(tick);
+                    const dt = Math.min(0.05, (now - last) / 1000);
+                    last = now;
+                    if (!visible || !cw || !ch) return;
+                    const st = stateRef.current;
+                    const ph = physRef.current;
+                    const lamUm = st.lam / 1000;
+                    const slowF = st.slow ? 0.2 : 1;
+                    const running = st.running;
+                    const col = sceneColor(st.source, st.lam);
+                    colRGB = col;
+                    const colCss = rgbHex(col);
+                    layout(st.L);
+
+                    // intensiteter (samma beräkning som i 3D-versionen)
+                    const ik = [st.lam, st.d, st.b, st.L, st.slitA, st.slitB].join('|');
+                    if (ik !== intKey) {
+                        intKey = ik;
+                        I = computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: st.slitA, slitB: st.slitB });
+                        cdfObj = buildCDF(I);
+                        const IA = st.slitA ? computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: true, slitB: false }) : new Float32Array(N_COLS);
+                        const IB = st.slitB ? computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: false, slitB: true }) : new Float32Array(N_COLS);
+                        Iobs = new Float32Array(N_COLS);
+                        for (let c = 0; c < N_COLS; c++) Iobs[c] = IA[c] + IB[c];
+                        cdfA = buildCDF(IA); cdfB = buildCDF(IB);
+                        Ikul = computeKulor(st.d, st.b, st.L, st.slitA, st.slitB);
+                        [I, Iobs].forEach(arr => {
+                            let mx = 0;
+                            for (let c = 0; c < N_COLS; c++) if (arr[c] > mx) mx = arr[c];
+                            if (mx > 1) for (let c = 0; c < N_COLS; c++) arr[c] /= mx;
+                        });
+                        clearDots(); particles.length = 0; flashes.length = 0;
+                    }
+                    const pm = st.mode === 'partikel' ? st.partMode : 'kvant';
+                    if (pm !== lastPm) { lastPm = pm; clearDots(); particles.length = 0; flashes.length = 0; }
+                    const Ishow = pm === 'detektor' ? Iobs : pm === 'kulor' ? Ikul : I;
+                    ph.I = Ishow;
+                    if (running) simT += dt * slowF;
+                    det.A += running ? dt : 0; det.B += running ? dt : 0;
+
+                    // ── partiklar (samma regler som i 3D) ──
+                    const vP = 15 * slowF;
+                    if (st.mode === 'partikel' && running) {
+                        emitAcc += st.rate * slowF * dt;
+                        while (emitAcc >= 1 && particles.length < 900) {
+                            emitAcc -= 1;
+                            particles.push({ x: GEO.SRC_X + 0.2, z: (Math.random() - 0.5) * 0.9, u: Math.random(),
+                                             mode: 'flyg', t: 0, alpha: 1, pm, anyOpen: st.slitA || st.slitB, slit: null, passed: false });
+                        }
+                    } else emitAcc = 0;
+                    if (running) {
+                        for (let i = particles.length - 1; i >= 0; i--) {
+                            const p = particles[i];
+                            if (p.mode === 'flyg') {
+                                p.x += vP * dt;
+                                if (p.pm !== 'kvant') {
+                                    if (p.slit == null && p.x >= -0.6) {
+                                        const open = [];
+                                        if (st.slitA) open.push(-st.d / 2);
+                                        if (st.slitB) open.push(st.d / 2);
+                                        if (!open.length) { particles.splice(i, 1); continue; }
+                                        const zs = open[Math.floor(Math.random() * open.length)];
+                                        p.slit = zs;
+                                        p.z = zs + (Math.random() - 0.5) * st.b * 0.9;
+                                        let hz = p.pm === 'detektor' ? sampleZ(zs < 0 ? cdfA : cdfB) : p.z + randn() * kulSigma(st.L);
+                                        hz = Math.max(-GEO.W / 2 + 0.3, Math.min(GEO.W / 2 - 0.3, hz));
+                                        p.hitZ = hz;
+                                        p.kz = (hz - p.z) / (st.L - 0.1);
+                                    }
+                                    if (p.slit != null && !p.passed && p.x >= -0.45) {
+                                        p.passed = true;
+                                        if (p.pm === 'detektor') {
+                                            if (p.slit < 0) { det.A = 0; ph.hitsA = (ph.hitsA || 0) + 1; }
+                                            else { det.B = 0; ph.hitsB = (ph.hitsB || 0) + 1; }
+                                        }
+                                    }
+                                    if (p.passed) p.z += p.kz * vP * dt;
+                                    if (p.x >= st.L - 0.1) {
+                                        addDot(p.hitZ, p.u); flashes.push({ z: p.hitZ, u: p.u, t: 0 });
+                                        particles.splice(i, 1);
+                                    }
+                                } else {
+                                    if (p.x > -1.4) p.alpha = Math.max(0, (-0.1 - p.x) / 1.3);
+                                    if (p.x >= -0.1) {
+                                        if (!p.anyOpen) { particles.splice(i, 1); continue; }
+                                        p.mode = 'gomd'; p.t = 0;
+                                        p.hitZ = sampleZ(cdfObj);
+                                        p.tHit = st.L / vP;
+                                    }
+                                }
+                            } else if (p.mode === 'gomd') {
+                                p.t += dt;
+                                if (p.t >= p.tHit) {
+                                    addDot(p.hitZ, p.u); flashes.push({ z: p.hitZ, u: p.u, t: 0 });
+                                    particles.splice(i, 1);
+                                }
+                            } else particles.splice(i, 1);
+                        }
+                        for (let i = flashes.length - 1; i >= 0; i--) {
+                            flashes[i].t += dt * slowF;
+                            if (flashes[i].t > 0.55) flashes.splice(i, 1);
+                        }
+                    }
+
+                    // ── rita ──
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    ctx.clearRect(0, 0, cw, ch);
+                    const L = st.L, d = st.d, b = st.b;
+                    const top = Z(-GEO.W / 2), bot = Z(GEO.W / 2);
+
+                    // golvet och vågfältet
+                    ctx.fillStyle = 'rgb(12,26,56)';
+                    ctx.fillRect(X(GEO.XMIN) - 6, top - 6, (L + SW + 0.3 - GEO.XMIN) * s + 12, GEO.W * s + 12);
+                    if (st.show.vagyta && pm === 'kvant') {
+                        buildGrid(lamUm, d, b, L, st.slitA, st.slitB);
+                        renderWave(2 * Math.PI / lamUm * 1.7 * simT, col, st.mode === 'vag' ? 1 : 0.55);
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.drawImage(off, X(GEO.XMIN), top, (L - GEO.XMIN) * s, GEO.W * s);
+                    }
+
+                    // ljusstrålen (vågläget)
+                    if (st.mode === 'vag') {
+                        ctx.save();
+                        ctx.globalAlpha = 0.16;
+                        ctx.fillStyle = colCss;
+                        ctx.fillRect(X(GEO.SRC_X), Z(-0.8), -GEO.SRC_X * s, 1.6 * s);
+                        ctx.restore();
+                    }
+
+                    // källan
+                    const srcW = 3.4 * s, srcH = 1.7 * s;
+                    ctx.save();
+                    const sg = ctx.createLinearGradient(0, Z(-0.85), 0, Z(0.85));
+                    sg.addColorStop(0, '#4a5f8a'); sg.addColorStop(0.5, '#2a3a5c'); sg.addColorStop(1, '#16213a');
+                    ctx.fillStyle = sg;
+                    ctx.beginPath(); ctx.roundRect(X(GEO.SRC_X) - srcW, Z(0) - srcH / 2, srcW, srcH, 4); ctx.fill();
+                    ctx.fillStyle = '#8fa5cf';
+                    ctx.fillRect(X(GEO.SRC_X) - 0.35 * s, Z(0) - srcH / 2 - 2, 0.35 * s, srcH + 4);
+                    ctx.restore();
+                    glowDot(X(GEO.SRC_X), Z(0), 0.9 * s, col, 0.9);
+                    label(st.source === 'elektron' ? 'Elektronkanon' : 'Laser', X(GEO.SRC_X) - srcW / 2, Z(0) - srcH / 2 - 12);
+
+                    // plattan med spalterna
+                    const pw = Math.max(6, GEO.PLATE_T * s);
+                    const zA = -d / 2, zB = d / 2, hb = b / 2;
+                    ctx.fillStyle = '#18253f';
+                    ctx.strokeStyle = 'rgba(111,155,224,0.55)'; ctx.lineWidth = 1;
+                    const plateSeg = (z0, z1) => {
+                        ctx.fillRect(X(0) - pw / 2, Z(z0), pw, (z1 - z0) * s);
+                        ctx.strokeRect(X(0) - pw / 2 + 0.5, Z(z0) + 0.5, pw - 1, (z1 - z0) * s - 1);
+                    };
+                    plateSeg(-GEO.W / 2, zA - hb); plateSeg(zA + hb, zB - hb); plateSeg(zB + hb, GEO.W / 2);
+                    ctx.fillStyle = '#8c6a3a';
+                    if (!st.slitA) ctx.fillRect(X(0) - pw / 2 - 4, Z(zA - hb) - 2, 4, b * s + 4);
+                    if (!st.slitB) ctx.fillRect(X(0) - pw / 2 - 4, Z(zB - hb) - 2, 4, b * s + 4);
+                    label('Dubbelspalt', X(0), top - 12);
+                    label('A', X(0) - pw / 2 - 9, Z(zA), { color: '#8fc1ff', align: 'right', size: 13 });
+                    label('B', X(0) - pw / 2 - 9, Z(zB), { color: '#ff9a8f', align: 'right', size: 13 });
+
+                    // detektorerna
+                    if (pm === 'detektor') {
+                        const dw = 0.6 * s;
+                        [{ z: zA - hb - 0.55, t: det.A, dir: 1 }, { z: zB + hb + 0.55, t: det.B, dir: -1 }].forEach(dd => {
+                            const cx = X(-0.62), cz = Z(dd.z);
+                            ctx.fillStyle = '#3b4a6b';
+                            ctx.fillRect(cx - dw / 2, cz - dw / 2, dw, dw);
+                            ctx.fillStyle = '#9fd3ff';
+                            ctx.fillRect(cx - 0.14 * s, cz + (dd.dir > 0 ? dw / 2 : -dw / 2 - 0.3 * s), 0.28 * s, 0.3 * s);
+                            const k = Math.exp(-dd.t / 0.18);
+                            if (k > 0.02) glowDot(cx, cz, 0.8 * s, [1, 0.82, 0.4], k);
+                            ctx.fillStyle = k > 0.3 ? '#ffd166' : '#4a3510';
+                            ctx.beginPath(); ctx.arc(cx, cz, 0.15 * s, 0, Math.PI * 2); ctx.fill();
+                        });
+                        label('Detektorer', X(-0.62), Z(zB + hb + 0.55) + 0.6 * s + 12, { size: 13 });
+                    }
+
+                    // maximilinjer och vinkelbågen
+                    if (st.show.max) {
+                        const list = maximaList(lamUm, d, L);
+                        ctx.save();
+                        ctx.strokeStyle = 'rgba(244,247,255,0.8)'; ctx.lineWidth = 1.2;
+                        list.forEach(m => {
+                            ctx.setLineDash(m.n === 0 ? [] : [6, 4]);
+                            ctx.beginPath(); ctx.moveTo(X(0), Z(0)); ctx.lineTo(X(L), Z(m.z)); ctx.stroke();
+                            const lx = X(L + SW + 0.3 + (st.show.kurva ? CURVE_W + 0.3 : 0.2));
+                            labelVar('n', ' = ' + m.n, lx, Z(m.z), { align: 'left', size: 12 });
+                        });
+                        const m1 = list.find(m => m.n === 1 && m.alpha > 0);
+                        if (m1) {
+                            const R = Math.min(4.2, L * 0.28) * s;
+                            ctx.setLineDash([]); ctx.strokeStyle = '#ffd166'; ctx.lineWidth = 1.4;
+                            ctx.beginPath(); ctx.arc(X(0), Z(0), R, 0, m1.alpha); ctx.stroke();
+                            const am = m1.alpha / 2;
+                            label('α', X(0) + (R + 14) * Math.cos(am), Z(0) + (R + 14) * Math.sin(am), { color: '#ffd166', italic: true, size: 15 });
+                            label('1', X(0) + (R + 14) * Math.cos(am) + 7, Z(0) + (R + 14) * Math.sin(am) + 5, { color: '#ffd166', size: 10 });
+                        }
+                        ctx.restore();
+                    }
+
+                    // skärmen
+                    const sx = X(L), sw = SW * s;
+                    ctx.fillStyle = '#080f22';
+                    ctx.fillRect(sx, top, sw, GEO.W * s);
+                    if (st.mode === 'vag' && I) {
+                        const rows = Math.ceil(GEO.W * s);
+                        for (let r = 0; r < rows; r++) {
+                            const c = Math.min(N_COLS - 1, Math.floor(r / rows * N_COLS));
+                            const v = Math.pow(Math.min(1, I[c]), 0.62);
+                            ctx.fillStyle = `rgb(${Math.round(8 + (col[0] * 255 - 8) * v)},${Math.round(15 + (col[1] * 255 - 15) * v)},${Math.round(34 + (col[2] * 255 - 34) * v)})`;
+                            ctx.fillRect(sx, top + r, sw, 1.2);
+                        }
+                    }
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    ctx.drawImage(dotCv, sx, top, sw, GEO.W * s);
+                    ctx.restore();
+                    ctx.strokeStyle = 'rgba(111,155,224,0.7)'; ctx.lineWidth = 1;
+                    ctx.strokeRect(sx + 0.5, top + 0.5, sw - 1, GEO.W * s - 1);
+                    ctx.fillStyle = '#1a2946';
+                    ctx.fillRect(sx + sw, top - 3, 0.25 * s, GEO.W * s + 6);
+                    label('Skärm', sx + sw / 2, bot + 14);
+
+                    // intensitetskurvan till höger om skärmen
+                    if (st.show.kurva && Ishow) {
+                        const x0 = sx + sw + 0.3 * s;
+                        ctx.save();
+                        ctx.strokeStyle = 'rgba(159,179,217,0.5)'; ctx.lineWidth = 1;
+                        ctx.beginPath(); ctx.moveTo(x0, top); ctx.lineTo(x0, bot); ctx.stroke();
+                        ctx.beginPath();
+                        for (let i = 0; i <= 300; i++) {
+                            const c = Math.min(N_COLS - 1, Math.floor(i / 300 * N_COLS));
+                            const z = -GEO.W / 2 + i / 300 * GEO.W;
+                            const x = x0 + Math.min(1, Ishow[c]) * CURVE_W * s;
+                            if (i) ctx.lineTo(x, Z(z)); else ctx.moveTo(x, Z(z));
+                        }
+                        ctx.strokeStyle = colCss; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+                        ctx.stroke();
+                        ctx.lineTo(x0, bot); ctx.lineTo(x0, top); ctx.closePath();
+                        ctx.globalAlpha = 0.18; ctx.fillStyle = colCss; ctx.fill();
+                        ctx.restore();
+                    }
+
+                    // vägskillnadsmätaren
+                    const mz = ph.measureZ;
+                    if (mz != null) {
+                        ctx.save();
+                        ctx.lineWidth = 1.5;
+                        ctx.strokeStyle = '#6fb0ff';
+                        ctx.beginPath(); ctx.moveTo(X(0), Z(zA)); ctx.lineTo(sx, Z(mz)); ctx.stroke();
+                        ctx.strokeStyle = '#ff8a7a';
+                        ctx.beginPath(); ctx.moveTo(X(0), Z(zB)); ctx.lineTo(sx, Z(mz)); ctx.stroke();
+                        ctx.fillStyle = '#ffd166';
+                        ctx.beginPath(); ctx.arc(sx, Z(mz), 5, 0, Math.PI * 2); ctx.fill();
+                        const rA = Math.hypot(L, mz + d / 2), rB = Math.hypot(L, mz - d / 2);
+                        const ds = Math.abs(rB - rA) / lamUm;
+                        ctx.restore();
+                        labelVar('Δs', ' = ' + fmt(ds, 2) + ' λ', sx - 10, Z(mz) - 16, { align: 'right', color: '#ffd166', size: 13 });
+                    }
+
+                    // partiklar i flykt och träffblixtar
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    for (const p of particles) {
+                        if (p.mode !== 'flyg') continue;
+                        glowDot(X(p.x), Z(p.z), Math.max(3, 0.24 * s), col, p.alpha);
+                    }
+                    for (const f of flashes) {
+                        const u = f.t / 0.55;
+                        glowDot(sx + f.u * sw, Z(f.z), Math.max(4, (0.3 + 0.5 * u) * s), col, (1 - u) * (1 - u));
+                    }
+                    ctx.restore();
+                };
+                raf = requestAnimationFrame(tick);
+
+                resize();
+                const ro = new ResizeObserver(resize);
+                ro.observe(mount);
+                window.addEventListener('resize', resize);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    io.disconnect(); ro.disconnect();
+                    window.removeEventListener('resize', resize);
+                    canvas.removeEventListener('pointerdown', onDown);
+                    canvas.removeEventListener('pointerup', onUp);
+                    mount.removeChild(canvas);
+                };
+            }, []);
+
+            return <div ref={mountRef} className="absolute inset-0"></div>;
+        };
+
+        // ── Intensitetsdiagram i sidopanelen ──
+        const IntensityGraph = ({ I, lamUm, d, L, colHex, measureZ }) => {
+            const Wpx = 320, Hpx = 130, padL = 30, padR = 46, padT = 12, padB = 26;
+            const gw = Wpx - padL - padR, gh = Hpx - padT - padB;
+            const path = useMemo(() => {
+                if (!I) return '';
+                const pts = [];
+                for (let i = 0; i <= 200; i++) {
+                    const c = Math.min(N_COLS - 1, Math.floor(i / 200 * N_COLS));
+                    const x = padL + i / 200 * gw;
+                    const y = padT + gh - Math.min(1, I[c]) * gh;
+                    pts.push((i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1));
+                }
+                return pts.join(' ');
+            }, [I]);
+            const maxima = maximaList(lamUm, d, L);
+            const zx = (z) => padL + (z + GEO.W / 2) / GEO.W * gw;
+            return (
+                <svg viewBox={`0 0 ${Wpx} ${Hpx}`} width="100%" style={{ display: 'block' }} role="img"
+                     aria-label="Intensiteten längs skärmen med maxima markerade">
+                    <line x1={padL} y1={padT + gh} x2={padL + gw + 6} y2={padT + gh} stroke="#1f2530" strokeWidth="1.2" />
+                    <polygon points={`${padL + gw + 6},${padT + gh - 3.5} ${padL + gw + 13},${padT + gh} ${padL + gw + 6},${padT + gh + 3.5}`} fill="#1f2530" />
+                    <line x1={padL} y1={padT + gh} x2={padL} y2={padT - 4} stroke="#1f2530" strokeWidth="1.2" />
+                    <polygon points={`${padL - 3.5},${padT - 4} ${padL},${padT - 11} ${padL + 3.5},${padT - 4}`} fill="#1f2530" />
+                    {[-10, -5, 0, 5, 10].map(z => (
+                        <g key={z}>
+                            <line x1={zx(z)} y1={padT + gh} x2={zx(z)} y2={padT + gh + 4} stroke="#1f2530" strokeWidth="1" />
+                            <text x={zx(z)} y={padT + gh + 15} textAnchor="middle" fontSize="9.5" fill="#1f2530" fontFamily="Poppins, sans-serif">{z}</text>
+                        </g>
+                    ))}
+                    <text x={padL + gw + 16} y={padT + gh + 3.5} textAnchor="start" fontSize="9.5" fill="#1f2530" fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">x</tspan> (µm)</text>
+                    <text x={padL - 6} y={padT + 2} textAnchor="end" fontSize="9.5" fill="#1f2530" fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">I</tspan></text>
+                    {maxima.map((m, i) => (
+                        <line key={i} x1={zx(m.z)} y1={padT} x2={zx(m.z)} y2={padT + gh} stroke="#9aa0a6" strokeWidth="0.8" strokeDasharray="3 3" />
+                    ))}
+                    <path d={path} fill="none" stroke={colHex} strokeWidth="2" strokeLinejoin="round" />
+                    {maxima.length <= 7 && maxima.filter(m => m.n <= 3 && zx(m.z) > padL + 16 && zx(m.z) < padL + gw - 4).map((m, i) => (
+                        <text key={'t' + i} x={zx(m.z)} y={padT - 2} textAnchor="middle" fontSize="8.5" fill="#5a6170" fontFamily="Poppins, sans-serif">
+                            <tspan fontStyle="italic">n</tspan>={m.n}
+                        </text>
+                    ))}
+                    {measureZ != null && (
+                        <circle cx={zx(measureZ)} cy={padT + gh + 0.5} r="3" fill="#d9a400" stroke="#1f2530" strokeWidth="0.8" />
+                    )}
+                </svg>
+            );
+        };
+
+        // ── Huvudapp ──
+        const App = () => {
+            const [lam, setLam] = useState(650);
+            const [d, setD] = useState(2.4);
+            const [b, setB] = useState(0.6);
+            const [L, setL] = useState(18);
+            const [rate, setRate] = useState(60);
+            const [source, setSource] = useState('ljus');
+            const [mode, setMode] = useState('vag');
+            const [show, setShow] = useState({ vagyta: true, max: false, kurva: false });
+            // Partiklarna: 'kvant' = det verkliga försöket utan mätning,
+            // 'detektor' = observatör som registrerar vilken spalt,
+            // 'kulor' = tankeexperimentet med vanliga små kulor.
+            const [partMode, setPartMode] = useState('kvant');
+            const [slitA, setSlitA] = useState(true);
+            const [slitB, setSlitB] = useState(true);
+            const [running, setRunning] = useState(true);
+            const [slow, setSlow] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [measureZ, setMeasureZ] = useState(null);
+            const [ui, setUi] = useState({ hits: 0, hitsA: 0, hitsB: 0, I: null });
+            const sceneWrapRef = useRef(null);
+
+            const stateRef = useRef({});
+            stateRef.current = { lam, d, b, L, rate, source, mode, show, partMode, slitA, slitB, running, slow };
+            const physRef = useRef({ hits: 0, hitsA: 0, hitsB: 0, measureZ: null, I: null, lastMode: null });
+            const actionsRef = useRef({});
+            useEffect(() => { window.__spaltPh = physRef.current; window.__spaltActions = actionsRef.current; }, []);
+
+            useEffect(() => {
+                const id = setInterval(() => {
+                    const ph = physRef.current;
+                    setUi(u => (u.hits === ph.hits && u.I === ph.I && u.hitsA === ph.hitsA && u.hitsB === ph.hitsB) ? u
+                               : { hits: ph.hits, hitsA: ph.hitsA || 0, hitsB: ph.hitsB || 0, I: ph.I });
+                }, 150);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => { if (actionsRef.current.updateMeasure) actionsRef.current.updateMeasure(); }, [lam, d, L]);
+
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const clearScreen = () => actionsRef.current.clearScreen && actionsRef.current.clearScreen();
+            const clearMeasure = () => { physRef.current.measureZ = null; setMeasureZ(null); if (actionsRef.current.updateMeasure) actionsRef.current.updateMeasure(); };
+            const setModeAndClear = (m) => { setMode(m); clearScreen(); };
+            // Färdiga försök. "Två skilda fält" är det parameterval där varje
+            // spalts eget diffraktionsmönster (bredd ungefär ℓ·λ/b) blir smalare
+            // än spaltavståndet d, så att detektorläget visar två åtskilda
+            // fält i stället för ett brett: b·d > λ·ℓ. Med standardvärdena är
+            // det omvänt (1,4 mot 12 µm²), så det krävs breda spalter, stort
+            // spaltavstånd, kort våglängd OCH kort skärmavstånd samtidigt.
+            const forsok = (which) => {
+                if (which === 'standard') {
+                    setLam(650); setD(2.4); setB(0.6); setL(18);
+                    setSource('ljus'); setMode('vag'); setPartMode('kvant');
+                    setSlitA(true); setSlitB(true);
+                } else if (which === 'tvafalt') {
+                    setLam(400); setD(6); setB(1.6); setL(8);
+                    setSource('ljus'); setMode('partikel'); setPartMode('detektor'); setRate(200);
+                    setSlitA(true); setSlitB(true);
+                } else if (which === 'elektron') {
+                    setLam(650); setD(2.4); setB(0.6); setL(18);
+                    setSource('elektron'); setMode('partikel'); setPartMode('kvant'); setRate(60);
+                    setSlitA(true); setSlitB(true);
+                }
+                clearScreen(); setRunning(true);
+            };
+
+            // ── Härledda storheter ──
+            const lamUm = lam / 1000;
+            const sin1 = lamUm / d;
+            const alpha1 = sin1 < 1 ? Math.asin(sin1) : NaN;
+            const x1 = isFinite(alpha1) ? L * Math.tan(alpha1) : NaN;
+            const maxima = maximaList(lamUm, d, L);
+            const nMax = maxima.length;
+            const vEl = H_PLANCK / (M_E * lam * 1e-9);
+            const fLight = C_LIGHT / (lam * 1e-9);
+            const colHex = rgbHex(mixRGB(sceneColor(source, lam), [0, 0, 0], source === 'elektron' ? 0.25 : 0.12));
+            const meas = useMemo(() => {
+                if (measureZ == null) return null;
+                const rA = Math.hypot(L, measureZ + d / 2), rB = Math.hypot(L, measureZ - d / 2);
+                const ds = Math.abs(rB - rA);
+                const k = ds / lamUm;
+                const m = Math.round(k);
+                let verdict, typ;
+                if (Math.abs(k - m) < 0.12) { verdict = `Vägskillnaden är ${m} hel${m === 1 ? '' : 'a'} våglängd${m === 1 ? '' : 'er'}: vågorna från A och B kommer i fas, konstruktiv interferens. Maximum av ordningen n = ${m}.`; typ = 'max'; }
+                else if (Math.abs(k - Math.floor(k) - 0.5) < 0.12) { verdict = `Vägskillnaden är ${Math.floor(k)} + ½ våglängder: vågtopp från den ena spalten möter vågdal från den andra, destruktiv interferens. Här är det mörkt (en nodlinje).`; typ = 'min'; }
+                else { verdict = 'Varken helt i fas eller helt i motfas: vågorna förstärker varandra delvis. Flytta markören mot ett ljust band eller ett mörkt.'; typ = 'mellan'; }
+                return { rA, rB, ds, k, verdict, typ };
+            }, [measureZ, L, d, lamUm]);
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            // Verktygsvalen (samma i sidopanelens kort och i fullskärmens ruta)
+            const toggleBlocks = (nameSuffix) => (
+                <React.Fragment>
+                    <div>
+                        <div className="st-title">Källa</div>
+                        <label><input type="radio" name={'kalla' + nameSuffix} checked={source === 'ljus'} onChange={() => { setSource('ljus'); clearScreen(); }} /><span>Laser (ljus)</span></label>
+                        <label><input type="radio" name={'kalla' + nameSuffix} checked={source === 'elektron'} onChange={() => { setSource('elektron'); clearScreen(); }} /><span>Elektronkanon</span></label>
+                        <div className="st-title mt">Skickar</div>
+                        <label><input type="radio" name={'mode' + nameSuffix} checked={mode === 'vag'} onChange={() => setModeAndClear('vag')} /><span>Vågor</span></label>
+                        <label><input type="radio" name={'mode' + nameSuffix} checked={mode === 'partikel'} onChange={() => setModeAndClear('partikel')} /><span>En partikel i taget</span></label>
+                        {mode === 'partikel' && (
+                            <React.Fragment>
+                                <div className="st-title mt">Vid spalterna</div>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'kvant'} onChange={() => setPartMode('kvant')} /><span>Ingen mätning (verkligt försök)</span></label>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'detektor'} onChange={() => setPartMode('detektor')} /><span>Detektor: vilken spalt?</span></label>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'kulor'} onChange={() => setPartMode('kulor')} /><span>Tankeexperiment: vanliga små kulor</span></label>
+                            </React.Fragment>
+                        )}
+                    </div>
+                    <div>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.vagyta} onChange={() => tShow('vagyta')} /><span className="st-swatch" style={{ background: colHex }}></span><span>Vågfält</span></label>
+                        <label><input type="checkbox" checked={show.max} onChange={() => tShow('max')} /><span className="st-swatch" style={{ background: '#3d4451' }}></span><span>Maximilinjer och <em>α</em><sub>1</sub></span></label>
+                        <label><input type="checkbox" checked={show.kurva} onChange={() => tShow('kurva')} /><span className="st-swatch" style={{ background: colHex }}></span><span>Intensitetskurva</span></label>
+                        <div className="st-title mt">Spalter</div>
+                        <label><input type="checkbox" checked={slitA} onChange={() => setSlitA(v => !v)} /><span className="st-swatch" style={{ background: '#4f8ef7' }}></span><span>Spalt A öppen</span></label>
+                        <label><input type="checkbox" checked={slitB} onChange={() => setSlitB(v => !v)} /><span className="st-swatch" style={{ background: '#e0524f' }}></span><span>Spalt B öppen</span></label>
+                        <div className="st-title mt">Fart</div>
+                        <label><input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} /><span>Ultrarapid</span></label>
+                    </div>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        {isFullscreen ? toggleBlocks('-fs') : (
+                            <React.Fragment>
+                                <div className="st-title">Visa</div>
+                                <label><input type="checkbox" checked={show.vagyta} onChange={() => tShow('vagyta')} /><span className="st-swatch" style={{ background: colHex }}></span><span>Vågfält</span></label>
+                                <label><input type="checkbox" checked={show.max} onChange={() => tShow('max')} /><span className="st-swatch" style={{ background: '#3d4451' }}></span><span>Maximilinjer och <em>α</em><sub>1</sub></span></label>
+                                <label><input type="checkbox" checked={show.kurva} onChange={() => tShow('kurva')} /><span className="st-swatch" style={{ background: colHex }}></span><span>Intensitetskurva</span></label>
+                            </React.Fragment>
+                        )}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    <StSlider label="Våglängd <em>λ</em>" value={lam} min={LAM_MIN} max={LAM_MAX} step={1} decimals={0} unit="nm" onChange={setLam} />
+                                    <StSlider label="Spaltavstånd <em>d</em>" value={d} min={D_MIN} max={D_MAX} step={0.05} decimals={2} unit="µm" onChange={setD} />
+                                    <StSlider label="Spaltbredd <em>b</em>" value={b} min={B_MIN} max={B_MAX} step={0.05} decimals={2} unit="µm" onChange={setB} />
+                                    <StSlider label="Skärmavstånd <em>ℓ</em>" value={L} min={L_MIN} max={L_MAX} step={0.5} decimals={1} unit="µm" onChange={setL} />
+                                    {mode === 'partikel' && (
+                                        <StSlider label="Partiklar per sekund" value={rate} min={RATE_MIN} max={RATE_MAX} step={1} decimals={0} unit="/s" onChange={setRate} />
+                                    )}
+                                </div>
+                                <div className="st-title mt">Färdiga försök</div>
+                                <div className="st-views">
+                                    <button className="btn-toggle" onClick={() => forsok('standard')}>Utgångsläge</button>
+                                    <button className="btn-toggle" onClick={() => forsok('elektron')}>Elektroner</button>
+                                    <button className="btn-toggle" onClick={() => forsok('tvafalt')}>Två fält</button>
+                                </div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Paus' : 'Start'}</button>
+                                    <button className="btn-toggle" onClick={clearScreen}>Rensa skärmen</button>
+                                    {measureZ != null && <button className="btn-toggle" onClick={clearMeasure}>Ta bort markören</button>}
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Dubbelspalten i 2D
+                        </div>
+                        <div className="intro-head">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Dubbelspalten i 2D</h1>
+                        </div>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Samma experiment som i 3D-versionen, men sett rakt ovanifrån, som figurerna
+                            i genomgången. En laser lyser mot en platta med två smala spalter, och på
+                            skärmen till höger uppstår <strong>interferensmönstret</strong>: ljusa band
+                            där vågorna från de två spalterna kommer i fas och mörka där de släcker ut
+                            varandra. Vågfältet mellan plattan och skärmen visar hur de två vågsystemen
+                            breder ut sig och möts, och banden på skärmen ligger exakt där vågtopparna
+                            träffar den. Byt till <strong>en
+                            partikel i taget</strong> och se samma mönster växa fram, prick för prick.
+                            Sätt sedan en <strong>detektor</strong> vid spalterna som registrerar vilken
+                            spalt varje partikel går genom, och se banden försvinna: mäts vägen beter sig
+                            partikeln som en partikel, mäts den inte som en våg. Klicka på skärmen för
+                            att mäta vägskillnaden, och kryssa i maximilinjerna för att se gitterformeln
+                            ritad i rummet.
+                        </p>
+
+                        {/* Formelkort: gitterformeln med ord-etiketter, samma uppställning som i genomgången */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 formula-card">
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Ordning</div>
+                                    <div className="fnum"><em>n</em></div>
+                                </div>
+                                <span className="fnum">⋅</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Våglängd</div>
+                                    <div className="fnum"><em>λ</em></div>
+                                </div>
+                                <span className="fnum">=</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Spaltavstånd</div>
+                                    <div className="fnum"><em>d</em></div>
+                                </div>
+                                <span className="fnum">⋅</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Avböjningsvinkel</div>
+                                    <div className="fnum">sin <em>α<sub>n</sub></em></div>
+                                </div>
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 470 }}>
+                                Första ordningens maximum (<em>n</em> = 1) med de aktuella värdena:
+                                sin <em>α</em><sub>1</sub> = <em>λ</em>/<em>d</em> = {fmtNum(lam, 0)} nm / {fmtNum(d * 1000, 0)} nm
+                                = {fmt(sin1, 3)}{isFinite(alpha1)
+                                    ? <span>, alltså <em>α</em><sub>1</sub> = {fmt(alpha1 / DEG, 1)}°. På skärmen {fmt(L, 1)} µm bort hamnar det {fmt(x1, 2)} µm från centralmaximum.</span>
+                                    : <span>. Det är mer än 1, så inget första maximum finns: våglängden är längre än spaltavståndet och bara centralmaximum blir kvar.</span>}
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} ref={sceneWrapRef}>
+                                    <div className="scene-stage">
+                                        <SpaltScene2D stateRef={stateRef} physRef={physRef} actionsRef={actionsRef} onMeasure={setMeasureZ} />
+                                        <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                                title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                            {isFullscreen ? (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                                </svg>
+                                            ) : (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                </svg>
+                                            )}
+                                        </button>
+                                        {mode === 'partikel' && (
+                                            <div className="scene-info si-diskret">
+                                                {fmtNum(ui.hits, 0)} träffar
+                                                <span>{source === 'elektron' ? 'elektroner' : 'fotoner'} på skärmen</span>
+                                                {partMode === 'detektor' && (
+                                                    <span>genom A: {fmtNum(ui.hitsA, 0)} · genom B: {fmtNum(ui.hitsB, 0)}</span>
+                                                )}
+                                            </div>
+                                        )}
+                                        <div className="scene-hint">Planvy ovanifrån · klicka på skärmen för att mäta vägskillnaden</div>
+
+                                        {/* Snabbverktyg i mobilens ark-läge (styrs av sektion 8 i CSS:en) */}
+                                        <div className="fs-quick">
+                                            <button className="fq-play" onClick={() => setRunning(r => !r)}
+                                                    aria-label={running ? 'Paus' : 'Start'} title={running ? 'Paus' : 'Start'}>
+                                                {running ? (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                        <rect x="6" y="5" width="4" height="14" rx="1"/>
+                                                        <rect x="14" y="5" width="4" height="14" rx="1"/>
+                                                    </svg>
+                                                ) : (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                        <path d="M8 5.5v13l11-6.5z"/>
+                                                    </svg>
+                                                )}
+                                            </button>
+                                            <div className="fq-rows">
+                                                <div className="fq-row">
+                                                    <span className="fq-lbl">Våglängd</span>
+                                                    <input type="range" min={LAM_MIN} max={LAM_MAX} step={1} value={lam}
+                                                           onChange={e => setLam(parseFloat(e.target.value))} aria-label="Våglängd" />
+                                                </div>
+                                                <div className="fq-row">
+                                                    <span className="fq-lbl">Spaltavstånd</span>
+                                                    <input type="range" min={D_MIN} max={D_MAX} step={0.05} value={d}
+                                                           onChange={e => setD(parseFloat(e.target.value))} aria-label="Spaltavstånd" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {sceneToggles()}
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="flex gap-2 mb-3">
+                                    <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{running ? 'Paus' : 'Start'}</button>
+                                    <button className="btn-toggle flex-1" onClick={clearScreen}>Rensa skärmen</button>
+                                </div>
+
+                                {!isFullscreen && (
+                                    <div className="glass-card rounded-xl p-3 mb-3 st-panel">
+                                        {toggleBlocks('-panel')}
+                                    </div>
+                                )}
+
+                                <Slider label="Våglängd (<em>λ</em>)"
+                                        sub={source === 'elektron'
+                                            ? `Elektronernas de Broglie-våglängd. Med <em>λ</em> = <em>h</em>/(<em>m</em> · <em>v</em>) svarar den mot farten ${fmtNum(vEl, 0)} m/s.`
+                                            : `Ljusets våglängd. Färgen i scenen följer med: ${fmtNum(fLight / 1e12, 0)} THz just nu.`}
+                                        value={lam} min={LAM_MIN} max={LAM_MAX} step={1} unit="nm" onChange={setLam} decimals={0} />
+                                <Slider label="Spaltavstånd (<em>d</em>)"
+                                        sub="Avståndet mellan spalternas mitt. Större avstånd ger tätare band på skärmen."
+                                        value={d} min={D_MIN} max={D_MAX} step={0.05} unit="µm" onChange={setD} decimals={2} />
+                                <Slider label="Spaltbredd (<em>b</em>)"
+                                        sub="Varje spalts bredd. Smalare spalter sprider ljuset mer, så att fler band blir synliga; bredare spalter samlar ljuset i mitten."
+                                        value={b} min={B_MIN} max={B_MAX} step={0.05} unit="µm" onChange={setB} decimals={2} />
+                                <Slider label="Skärmavstånd (<em>ℓ</em>)"
+                                        sub="Avståndet från plattan till skärmen. Vinklarna ändras inte, men banden hamnar längre isär på en avlägsen skärm."
+                                        value={L} min={L_MIN} max={L_MAX} step={0.5} unit="µm" onChange={setL} decimals={1} />
+                                {mode === 'partikel' && (
+                                    <Slider label="Partiklar per sekund"
+                                            sub="Hur tätt källan skickar partiklar. Med få per sekund ser du varje träff för sig; med många växer mönstret fram på några sekunder."
+                                            value={rate} min={RATE_MIN} max={RATE_MAX} step={1} unit="/s" onChange={setRate} decimals={0} />
+                                )}
+
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>Färdiga försök</h3>
+                                    <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Ställer in alla reglage med ett klick. <em>Två skilda fält</em> visar det
+                                        gränsfall där detektorn ger två åtskilda fält: breda spalter långt isär,
+                                        kort våglängd och skärmen nära.
+                                    </p>
+                                    <div className="view-grid">
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('standard')}>Utgångsläge</button>
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('elektron')}>Elektroner en i taget</button>
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('tvafalt')}>Två skilda fält</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Avläsningar</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Första maximum <em>α</em><sub>1</sub>" value={isFinite(alpha1) ? fmt(alpha1 / DEG, 1) : 'finns ej'} unit={isFinite(alpha1) ? '°' : ''} accent />
+                                        <Readout label="Avstånd centralmax till 1:a max" value={isFinite(x1) ? fmt(x1, 2) : '–'} unit="µm" />
+                                        <Readout label="Maxima på skärmen" value={fmtNum(nMax, 0)} unit="st" />
+                                        {source === 'elektron'
+                                            ? <Readout label="Elektronernas fart <em>v</em> = <em>h</em>/(<em>m</em> · <em>λ</em>)" value={fmtNum(vEl, 0)} unit="m/s" />
+                                            : <Readout label="Ljusets frekvens <em>f</em> = <em>c</em>/<em>λ</em>" value={fmtNum(fLight / 1e12, 0)} unit="THz" />}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Vägskillnad</h3>
+                                        {measureZ != null && <button className="btn-toggle btn-small" onClick={clearMeasure}>Ta bort markören</button>}
+                                    </div>
+                                    {measureZ == null ? (
+                                        <p className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Klicka på en punkt på skärmen i scenen. Då ritas vägarna från spalt A och
+                                            spalt B till punkten, och vägskillnaden Δ<em>s</em> jämförs med våglängden:
+                                            hela våglängder ger maximum, halva ger minimum.
+                                        </p>
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className="grid grid-cols-2 gap-2 mb-2">
+                                                <Readout label="Från spalt A, <em>r</em><sub>A</sub>" value={fmt(meas.rA, 3)} unit="µm" />
+                                                <Readout label="Från spalt B, <em>r</em><sub>B</sub>" value={fmt(meas.rB, 3)} unit="µm" />
+                                                <Readout label="Vägskillnad Δ<em>s</em>" value={fmtNum(meas.ds * 1000, 0)} unit="nm" accent />
+                                                <Readout label="Δ<em>s</em> i våglängder" value={fmt(meas.k, 2)} unit="λ" accent />
+                                            </div>
+                                            <div className="p-2 rounded-lg text-xs" style={{ background: meas.typ === 'max' ? 'rgba(46,158,79,0.10)' : meas.typ === 'min' ? 'rgba(200,50,74,0.10)' : 'rgba(15,22,32,0.06)', color: 'var(--lab-ink-soft)' }}>
+                                                {meas.verdict}
+                                            </div>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3">
+                                    <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>Intensiteten längs skärmen</h3>
+                                    <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Ljusstyrkan tvärs över skärmen, med maxima markerade. Läget <em>x</em> räknas
+                                        från centralmaximum. Den breda kupan som dämpar de yttre banden kommer av
+                                        diffraktionen i varje enskild spalt.
+                                    </p>
+                                    <IntensityGraph I={ui.I} lamUm={lamUm} d={d} L={L} colHex={colHex} measureZ={measureZ} />
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vad visar vågfältet?</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vågfältet är samma bild som vattenvågorna i genomgången: en plan våg
+                                    kommer från vänster, och varje spalt blir en ny vågkälla som sänder ut
+                                    halvcirkelformade vågfronter. Ljusa ränder är vågtoppar, mörka är vågdalar. Bakom plattan
+                                    överlappar de två vågsystemen. Där vågtopp möter vågtopp blir
+                                    utslaget dubbelt så stort, där vågtopp möter vågdal blir det noll.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Följ de lugna stråken där fältet är nästan stilla:
+                                    det är nodlinjerna, och de träffar skärmen precis i de mörka banden.
+                                    Mellan dem ligger maximilinjerna, där vågen slår som högst hela vägen
+                                    fram till skärmens ljusa band.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>En partikel i taget</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Skruva ner till några partiklar per sekund. Varje foton eller elektron
+                                    träffar skärmen i <strong>en enda punkt</strong>, som en partikel. Men
+                                    punkterna hamnar inte var som helst: efter några hundra träffar har de
+                                    ritat exakt samma band som vågorna gav. Var en enskild partikel landar
+                                    går inte att förutsäga, bara sannolikheten, och sannolikheten är
+                                    vågens intensitet.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Välj <em>Tankeexperiment: vanliga små kulor</em> för att se hur det
+                                    <strong> hade sett ut om</strong> ljus och elektroner inte hade någon
+                                    vågnatur alls, utan vore små kulor som skjuts en och en: varje kula
+                                    går genom den ena spalten eller den andra och fortsätter rakt fram,
+                                    så det blir två smala streck, ett bakom varje spalt och lika brett som
+                                    spalten, och inga mörka band.
+                                    Det är alltså inte ett verkligt utfall utan en jämförelse, och det
+                                    är just skillnaden mot det verkliga mönstret som visar att
+                                    partiklarna beter sig som vågor.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Detektor vid spalterna</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Välj <em>Detektor: vilken spalt?</em> Två givare sätts intill spalterna,
+                                    och varje gång en partikel passerar blinkar lampan vid den spalt den
+                                    gick genom. Nu har varje partikel en bestämd väg, och den flyger
+                                    synligt från sin spalt till skärmen. Räkna in träffarna: ungefär
+                                    hälften genom A, hälften genom B, och på skärmen finns
+                                    <strong> inga mörka band längre</strong>. Mönstret är i stället summan av
+                                    de två spalternas egna diffraktionsmönster, ett brett ljust fält.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Detta är det verkliga experimentets mest berömda resultat. Observeras
+                                    vägen beter sig elektronen som en partikel som gått genom en spalt;
+                                    observeras den inte går den som en våg genom båda och interfererar
+                                    med sig själv. Det är inte detektorns knuff som suddar ut banden,
+                                    utan att informationen om vägen finns: en mätning som kunde avslöja
+                                    spalten räcker, hur skonsam den än är. Att det inte blir två skarpa
+                                    streck beror på att partikeln fortfarande har sin våglängd och
+                                    diffrakterar genom den spalt den passerar: spalterna är smala i
+                                    förhållande till avståndet mellan dem, så varje spalts eget ljus
+                                    sprids ut över hela skärmen. Så är det också i verkliga försök, både
+                                    med laser och med elektroner. Två åtskilda fält kräver att varje
+                                    spalts diffraktionsbredd, ungefär <em>ℓ</em> · <em>λ</em>/<em>b</em>, är mindre
+                                    än spaltavståndet <em>d</em>. Det färdiga försöket <em>Två skilda fält</em>
+                                    ställer in just det: breda spalter långt isär, kort våglängd och
+                                    skärmen nära.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Gitterformeln i scenen</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Kryssa i <em>Maximilinjer</em>. Från mitten mellan spalterna går en
+                                    linje till varje ljust band, och vinkeln mellan centrallinjen och
+                                    linjen till första maximet är avböjningsvinkeln <em>α</em><sub>1</sub>.
+                                    Gitterformeln säger att sin <em>α</em><sub><em>n</em></sub> = <em>n</em> · <em>λ</em>/<em>d</em>:
+                                    längre våglängd eller mindre spaltavstånd ger större vinklar och glesare band.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Prova: dra våglängden från blått till rött och se banden glida isär
+                                    medan färgen ändras. Dra sedan ihop spalterna, så sprids banden ännu
+                                    mer. Blir <em>λ</em> större än <em>d</em> försvinner sidomaxima helt,
+                                    precis som formeln förutsäger, eftersom sin <em>α</em> aldrig kan bli större än 1.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4 md:col-span-2">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Täck för en spalt</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Stäng spalt B. Kvar blir en enkelspalt, och interferensbanden
+                                    försvinner: skärmen visar i stället ett brett, mjukt centralt maximum
+                                    med svaga sidomaxima, diffraktionsmönstret från en enda spalt. Öppna
+                                    spalten igen och banden är tillbaka, inne i samma breda kupa.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Det är därför de yttre banden i dubbelspaltmönstret alltid är svagare:
+                                    varje spalts diffraktion bestämmer hur mycket ljus som når ut åt
+                                    sidorna, och dubbelspaltens interferens delar upp det ljuset i band.
+                                    Med smalare spalter (mindre <em>b</em>) blir kupan bredare och fler band syns.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Om storleken i scenen</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Scenen är i mikrometerskala: spalterna sitter några mikrometer isär och
+                                skärmen står några tiotal mikrometer bort, alltså tusen gånger närmare än i
+                                en vanlig laboration. Alla mått är riktiga, och gitterformeln gäller precis
+                                som vanligt. Den lilla uppställningen är vald för att vinklarna ska bli
+                                stora nog att se: med en labbdubbelspalt på 0,1 mm och en skärm 2 m bort
+                                är första maximets vinkel bara 0,4°, och vågorna på golvet skulle vara
+                                omöjliga att urskilja. Elektronernas våglängd i scenen svarar mot ganska
+                                långsamma elektroner, kring tusen meter per sekund. I det klassiska
+                                elektronexperimentet är elektronerna mycket snabbare, våglängden tusentals
+                                gånger kortare och spalterna därför mycket smalare, men bilden är densamma.
+                            </p>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>&quot;Banden uppstår för att partiklarna krockar med varandra.&quot;</strong> Mönstret växer fram också när partiklarna skickas en i taget, med lång tid emellan. Varje partikel interfererar med sig själv, inte med andra.</li>
+                                <li><strong>&quot;Ljuset går genom den ena spalten eller den andra.&quot;</strong> Om det vore så skulle mönstret bli summan av två enkelspaltmönster, utan mörka band. Täck för en spalt i taget och lägg ihop bilderna: det blir aldrig dubbelspaltens mönster.</li>
+                                <li><strong>&quot;Längre skärmavstånd ger större vinklar.&quot;</strong> Vinklarna bestäms enbart av <em>λ</em> och <em>d</em>. Ett längre avstånd gör bara att samma vinklar ger större avstånd på skärmen, <em>x</em> = <em>ℓ</em> · tan <em>α</em>.</li>
+                                <li><strong>&quot;Med detektor blir partikeln en kula som går rakt fram, så skärmen visar två streck.&quot;</strong> Nej. Detektorn tar bort interferensen mellan de två vägarna, men partikeln har kvar sin våglängd och diffrakterar genom den spalt den faktiskt passerar, precis som i enkelspaltförsöket. Därför blir fältet brett. Två smala streck är kul-tankeexperimentets bild, där vågnaturen är helt borttagen. Först med breda spalter långt isär, kort våglängd och en nära skärm blir varje spalts eget mönster smalt nog för att synas som två skilda fält.</li>
+                                <li><strong>&quot;Detektorn stör partikeln mekaniskt, därför försvinner banden.&quot;</strong> Det avgörande är inte hur hårt detektorn påverkar partikeln utan att den ger information om vägen. Så snart det i princip går att veta vilken spalt partikeln tog finns inga två vägar att lägga ihop, och interferensen uteblir. Tas informationen bort kommer banden tillbaka.</li>
+                                <li><strong>&quot;Mörkt betyder att ljuset försvann.&quot;</strong> Energin försvinner inte. Den som saknas i de mörka banden finns i de ljusa: interferensen flyttar ljuset, den förstör det inte.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -101,7 +101,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-stralning-genomtranglighet.html',
     'fysik2-vaxelstromsgenerator.html',
     'fysik2-em-stralning.html',
-    'fysik2-dubbelspalt.html',
+    'fysik2-dubbelspalt-2d-app.html',
     'fysik2-manens-faser.html',
     'fysik2-solformorkelse.html',
     'fysik2-wiens-lag.html',

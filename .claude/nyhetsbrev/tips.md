@@ -23,7 +23,7 @@ för någon månad sedan är en perfekt tipskandidat nu).
 | "För läraren"-rutorna | nyheter.html | Diskussionsfrågor och momentkoppling på nyhetsartiklarna — färdig lektionsstart | Terminsstart, måndagar | 2026-08-02 |
 | RSS-flödet | feed.xml | Prenumerera på nyheterna i valfri RSS-läsare | När nyhetsflödet nämns | – |
 | Delningslänkar | katalog.html | Varje avsnitt, prov och simulering har egen adress med delningskort — länka en elev rakt in i rätt genomgång | Alltid; lärare som planerar | 2026-08-02 |
-| Fullskärmsläge i simuleringarna | simuleringar.html | Alla simuleringar körs i fullskärm — gjort för projektor och mobil | Alltid; bra på projektor | – |
+| Fullskärmsläge i simuleringarna | simuleringar.html | Alla simuleringar körs i fullskärm — gjort för projektor och mobil | Alltid; bra på projektor | 2026-09-06 |
 | Poddspelare på vissa nyheter | nyheter.html | Utvalda artiklar har en ljudöversikt att lyssna på (kolla att aktuella artiklar faktiskt har en innan du tipsar!) | Pendling, lov | – |
 | Magnetfältet i 3D | fysik2-stavmagnet-app.html | Stavmagnetens fält går att rotera fritt i 3D — fältet finns i hela rummet, inte bara på papperet | När magnetism är i säsong; bra på projektor | 2026-08-16 (nämnd i brevet) |
 | Gissa-läget i Flyta eller sjunka | fysik1-flytkraft-app.html | Förutsäg om ett okänt föremål flyter, svävar eller sjunker — räkna ut densiteten först, se svaret direkt | Densitet/tryck-momentet; självtest | 2026-08-16 (nämnd i brevet) |

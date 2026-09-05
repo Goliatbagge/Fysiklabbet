@@ -11,6 +11,75 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-09-06 — "En strömbrytare för supraledningen i grafen"
+- Status: UTKAST skrivet 2026-09-05 (lördag, inom 08.00-deadline, körd som
+  schemalagd routine). Tänkt utskick söndag 2026-09-06 kl 06.00 svensk tid.
+  Brevperiod (nyheter) 2026-08-31 till 2026-09-05; sajtuppdateringar sedan
+  förra brevets datum 2026-08-30 (git log --since="2026-08-30" main, 50
+  commits).
+- Skrivet i en molnsession UTAN tillgång till CDN:erna (unpkg/cdnjs/tailwind
+  blockerade av organisationens nätverkspolicy, samma begränsning som
+  2026-08-23 och 2026-08-30) — trots att veckan hade en ovanligt
+  bildvänlig kandidat för "Nytt på Fysiklabbet" (Dubbelspalten i 3D,
+  Three.js-scen med vågyta och interferensmönster). Ingen simulerings-
+  skärmdump kunde alltså tas. `verify-nyhetsbrev.js` ger därför ett FEL
+  ("ingen bild visar något på sajten") som INTE är rättat i detta utkast.
+  ⚠️ ANVÄNDAREN BÖR ANTINGEN ta en egen skärmdump av
+  `fysik2-dubbelspalt-3d-app.html` eller `fysik2-satellitbana-app.html` och
+  lägga in den under "Nytt på Fysiklabbet" innan utskick, eller acceptera
+  ett textlänks-brev denna vecka också (tredje veckan i rad).
+  Bildsättningen vilar i övrigt på tre riktiga foton/illustrationer.
+- Nyheter: 2026-09-05-supraledningen-som-gick-att-stanga-av (hjälte,
+  dagens artikel publicerad 03:15 samma morgon, obligatorisk enligt
+  uppdraget, och dessutom bedömd mest banbrytande: löser en åtta år
+  gammal fråga om grafenets supraledningsmekanism, medförfattare Andre
+  Geim), 2026-09-04-bottnen-formar-vagen +
+  2026-09-02-solljuset-som-flatar-samman (miniatyrer). Läs även:
+  2026-09-01-hundra-ganger-vidare-blick (Roman-teleskopets uppskjutning),
+  2026-09-03-fallet-som-aldrig-tar-slut (ekvivalensprincipen testad i
+  omloppsbana), 2026-08-31-spinnvagor-i-rorelse (röntgenmikroskopi av
+  magnoner). Samtliga sex artiklar i brevperioden listade, ingen utelämnad.
+  Solljus-artikeln var förra brevets [BREVTEASER] (teasad 2026-08-30,
+  publicerad 2026-09-02, alltså inlöst inom fönstret måndag till lördag)
+  — nämnt kort i brevets egen text som en varm callback.
+- Nytt på sajten: Dubbelspalten i 3D (ny simulering, fy2-4.2, Ljus/
+  diffraktion/interferens), Satellit i omloppsbana (ny simulering, fy2-1.6,
+  tematisk brygga till Roman-teleskopets gravitationsuppslag i Läs även),
+  två nya minisimuleringar i Magnetism och magnetfält (fy2-3.1: dra i
+  magneterna + dela en magnet på mitten). Bortvalt (redigeringar/omdesign,
+  inte nytt innehåll en besökare efterfrågar): omgjorda scener i
+  laboranstemat för flera äldre sims (Elektrisk influens, radioaktivt
+  sönderfall med flera), UI-flytt av reglage till inställningsrutan i 19
+  simuleringar, presentationslägets enklicks-exempel, div. figur- och
+  bugfixar. Snett kast-ombyggnaden (fy2-1.8, nu inbäddad i Kaströrelse)
+  övervägdes men uteslöts för att hålla brevet kort denna redan
+  innehållsrika vecka.
+- Bilder: nyheter/brev/2026-09-06-moire-hero.jpg (beskuren/nedskalad ur
+  nyheter/bilder/2026-09-05-supraledningen-som-gick-att-stanga-av.jpg,
+  176 kB), -tahiti-thumb.jpg (kvadratisk beskärning av vågbilden, 47 kB)
+  och -solljus-thumb.jpg (kvadratisk beskärning av forskarfotot, 66 kB).
+  Beskurna med Pillow (installerat i sessionen, `pip install pillow`).
+  Inga simuleringsskärmdumpar, se ⚠️ ovan.
+- Veckans tips: fullskärmsläget i simuleringarna (aldrig tipsat förut,
+  krok: projektorn igång igen efter skolstarten). Daterat 2026-09-06 i
+  tips.md.
+- Teaser: nyhetskö-uppslaget om dubbelspaltförsöket krympt till två
+  kiselatomer (University of Tokyo, Koudai Tabata med flera, Nature
+  2026-08-26), avslutat med "Vi läser på." Uppslaget låg redan överst i
+  ko.md, märkt [BREVTEASER] sedan 2026-08-27 — ingen flytt behövdes.
+  Kontrollerat att det inte redan publicerats (sökt på "Tabata" och
+  "kiselatomer" i data/nyheter.js och publicerat.md, inga träffar).
+- Förhandsvisning: hela brevet renderat till JPEG (600 px bredd, tom yta
+  bortbeskuren) via headless Chromium mot dev-servern, med bildernas
+  URL:er tillfälligt omdirigerade till lokala repo-sökvägar i en kopia
+  under .shots/ (utkastfilen behåller de absoluta fysiklabbet.se-
+  adresserna). Skickad till användaren med SendUserFile.
+- ÅTERSTÅR för användaren: (1) lösa skärmdumpsfrågan ovan, (2) granska
+  utkastet, (3) lägga upp i EmailOctopus och schemalägga till söndag
+  06.00 svensk tid (tidszonen default:ar till London, 06.00 där blir
+  07.00 svensk tid), (4) kontrollera att bilderna i nyheter/brev/ syns
+  live på fysiklabbet.se innan utskick.
+
 ## 2026-08-30 — "Kallare än rymden, två kilometer ner"
 - Status: **UPPLAGD i EmailOctopus 2026-08-29** som kampanjen "Nyhetsbrev nr 3 -
   2026-08-30" (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad och

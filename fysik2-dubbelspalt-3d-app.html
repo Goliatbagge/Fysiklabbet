@@ -1157,6 +1157,16 @@
                         for (let c = 0; c < N_COLS; c++) Iobs[c] = IA[c] + IB[c];
                         cdfA = buildCDF(IA); cdfB = buildCDF(IB);
                         Ikul = computeKulor(st.d, st.b, st.L, st.slitA, st.slitB);
+                        // Normeringen utgår från dubbelspaltens centralmax med båda
+                        // spalterna öppna. I gränsfall med stort d och kort ℓ ligger
+                        // det maximet långt från spalternas egna toppar, och
+                        // enkelspaltmönstren kan då överstiga 1: skala ned så att
+                        // inget klipps på skärmen eller i kurvan.
+                        [I, Iobs].forEach(arr => {
+                            let mx = 0;
+                            for (let c = 0; c < N_COLS; c++) if (arr[c] > mx) mx = arr[c];
+                            if (mx > 1) for (let c = 0; c < N_COLS; c++) arr[c] /= mx;
+                        });
                         bandsDirty = true;
                         // ett nytt experiment: gamla träffar hör inte hit
                         clearDots(); particles.length = 0; flashes.length = 0;
@@ -1368,7 +1378,7 @@
                         <line key={i} x1={zx(m.z)} y1={padT} x2={zx(m.z)} y2={padT + gh} stroke="#9aa0a6" strokeWidth="0.8" strokeDasharray="3 3" />
                     ))}
                     <path d={path} fill="none" stroke={colHex} strokeWidth="2" strokeLinejoin="round" />
-                    {maxima.filter(m => m.n <= 3 && zx(m.z) > padL + 16 && zx(m.z) < padL + gw - 4).map((m, i) => (
+                    {maxima.length <= 7 && maxima.filter(m => m.n <= 3 && zx(m.z) > padL + 16 && zx(m.z) < padL + gw - 4).map((m, i) => (
                         <text key={'t' + i} x={zx(m.z)} y={padT - 2} textAnchor="middle" fontSize="8.5" fill="#5a6170" fontFamily="Poppins, sans-serif">
                             <tspan fontStyle="italic">n</tspan>={m.n}
                         </text>
@@ -1445,6 +1455,28 @@
             const clearMeasure = () => { physRef.current.measureZ = null; setMeasureZ(null); if (actionsRef.current.updateMeasure) actionsRef.current.updateMeasure(); };
             const setView = (v) => actionsRef.current.setView && actionsRef.current.setView(v);
             const setModeAndClear = (m) => { setMode(m); clearScreen(); };
+            // Färdiga försök. "Två skilda fält" är det parameterval där varje
+            // spalts eget diffraktionsmönster (bredd ungefär ℓ·λ/b) blir smalare
+            // än spaltavståndet d, så att detektorläget visar två åtskilda
+            // fält i stället för ett brett: b·d > λ·ℓ. Med standardvärdena är
+            // det omvänt (1,4 mot 12 µm²), så det krävs breda spalter, stort
+            // spaltavstånd, kort våglängd OCH kort skärmavstånd samtidigt.
+            const forsok = (which) => {
+                if (which === 'standard') {
+                    setLam(650); setD(2.4); setB(0.6); setL(18);
+                    setSource('ljus'); setMode('vag'); setPartMode('kvant');
+                    setSlitA(true); setSlitB(true);
+                } else if (which === 'tvafalt') {
+                    setLam(400); setD(6); setB(1.6); setL(8);
+                    setSource('ljus'); setMode('partikel'); setPartMode('detektor'); setRate(200);
+                    setSlitA(true); setSlitB(true);
+                } else if (which === 'elektron') {
+                    setLam(650); setD(2.4); setB(0.6); setL(18);
+                    setSource('elektron'); setMode('partikel'); setPartMode('kvant'); setRate(60);
+                    setSlitA(true); setSlitB(true);
+                }
+                clearScreen(); setRunning(true);
+            };
 
             // ── Härledda storheter ──
             const lamUm = lam / 1000;
@@ -1552,6 +1584,12 @@
                                     {mode === 'partikel' && (
                                         <StSlider label="Partiklar per sekund" value={rate} min={RATE_MIN} max={RATE_MAX} step={1} decimals={0} unit="/s" onChange={setRate} />
                                     )}
+                                </div>
+                                <div className="st-title mt">Färdiga försök</div>
+                                <div className="st-views">
+                                    <button className="btn-toggle" onClick={() => forsok('standard')}>Utgångsläge</button>
+                                    <button className="btn-toggle" onClick={() => forsok('elektron')}>Elektroner</button>
+                                    <button className="btn-toggle" onClick={() => forsok('tvafalt')}>Två fält</button>
                                 </div>
                                 <div className="st-title mt">Kameravy</div>
                                 <div className="st-views">
@@ -1736,6 +1774,20 @@
                                 </div>
 
                                 <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>Färdiga försök</h3>
+                                    <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Ställer in alla reglage med ett klick. <em>Två skilda fält</em> visar det
+                                        gränsfall där detektorn ger två åtskilda fält: breda spalter långt isär,
+                                        kort våglängd och skärmen nära.
+                                    </p>
+                                    <div className="view-grid">
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('standard')}>Utgångsläge</button>
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('elektron')}>Elektroner en i taget</button>
+                                        <button className="btn-toggle btn-small" onClick={() => forsok('tvafalt')}>Två skilda fält</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
                                     <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Avläsningar</h3>
                                     <div className="grid grid-cols-2 gap-2">
                                         <Readout label="Första maximum <em>α</em><sub>1</sub>" value={isFinite(alpha1) ? fmt(alpha1 / DEG, 1) : 'finns ej'} unit={isFinite(alpha1) ? '°' : ''} accent />
@@ -1844,9 +1896,15 @@
                                     med sig själv. Det är inte detektorns knuff som suddar ut banden,
                                     utan att informationen om vägen finns: en mätning som kunde avslöja
                                     spalten räcker, hur skonsam den än är. Att det inte blir två skarpa
-                                    linjer beror på att spalterna är smala, bara någon våglängd breda,
-                                    så varje spalt sprider ljuset över hela skärmen. Bredda spalterna med
-                                    glidaren så drar de två fälten ihop sig mot varsin spalt.
+                                    streck beror på att partikeln fortfarande har sin våglängd och
+                                    diffrakterar genom den spalt den passerar: spalterna är smala i
+                                    förhållande till avståndet mellan dem, så varje spalts eget ljus
+                                    sprids ut över hela skärmen. Så är det också i verkliga försök, både
+                                    med laser och med elektroner. Två åtskilda fält kräver att varje
+                                    spalts diffraktionsbredd, ungefär <em>ℓ</em> · <em>λ</em>/<em>b</em>, är mindre
+                                    än spaltavståndet <em>d</em>. Det färdiga försöket <em>Två skilda fält</em>
+                                    ställer in just det: breda spalter långt isär, kort våglängd och
+                                    skärmen nära.
                                 </p>
                             </div>
 
@@ -1910,6 +1968,7 @@
                                 <li><strong>&quot;Banden uppstår för att partiklarna krockar med varandra.&quot;</strong> Mönstret växer fram också när partiklarna skickas en i taget, med lång tid emellan. Varje partikel interfererar med sig själv, inte med andra.</li>
                                 <li><strong>&quot;Ljuset går genom den ena spalten eller den andra.&quot;</strong> Om det vore så skulle mönstret bli summan av två enkelspaltmönster, utan mörka band. Täck för en spalt i taget och lägg ihop bilderna: det blir aldrig dubbelspaltens mönster.</li>
                                 <li><strong>&quot;Längre skärmavstånd ger större vinklar.&quot;</strong> Vinklarna bestäms enbart av <em>λ</em> och <em>d</em>. Ett längre avstånd gör bara att samma vinklar ger större avstånd på skärmen, <em>x</em> = <em>ℓ</em> · tan <em>α</em>.</li>
+                                <li><strong>&quot;Med detektor blir partikeln en kula som går rakt fram, så skärmen visar två streck.&quot;</strong> Nej. Detektorn tar bort interferensen mellan de två vägarna, men partikeln har kvar sin våglängd och diffrakterar genom den spalt den faktiskt passerar, precis som i enkelspaltförsöket. Därför blir fältet brett. Två smala streck är kul-tankeexperimentets bild, där vågnaturen är helt borttagen. Först med breda spalter långt isär, kort våglängd och en nära skärm blir varje spalts eget mönster smalt nog för att synas som två skilda fält.</li>
                                 <li><strong>&quot;Detektorn stör partikeln mekaniskt, därför försvinner banden.&quot;</strong> Det avgörande är inte hur hårt detektorn påverkar partikeln utan att den ger information om vägen. Så snart det i princip går att veta vilken spalt partikeln tog finns inga två vägar att lägga ihop, och interferensen uteblir. Tas informationen bort kommer banden tillbaka.</li>
                                 <li><strong>&quot;Mörkt betyder att ljuset försvann.&quot;</strong> Energin försvinner inte. Den som saknas i de mörka banden finns i de ljusa: interferensen flyttar ljuset, den förstör det inte.</li>
                             </ul>

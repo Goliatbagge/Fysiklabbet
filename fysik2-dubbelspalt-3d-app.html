@@ -417,6 +417,31 @@
             const c = lo + Math.random();
             return c / cdf.length * GEO.W - GEO.W / 2;
         }
+        // Tankeexperimentet "vanliga små kulor": var kula går genom EN spalt och
+        // fortsätter rakt fram med en liten spridning, utan någon vågnatur.
+        // Fördelningen blir två kullar, en bakom varje öppen spalt.
+        const KUL_SPRID = 2.5 * DEG;
+        function kulSigma(b, L) { return Math.hypot(b / 2, L * Math.tan(KUL_SPRID)); }
+        function computeKulor(d, b, L, slitA, slitB) {
+            const I = new Float32Array(N_COLS);
+            const sig = kulSigma(b, L);
+            const zs = [];
+            if (slitA) zs.push(-d / 2);
+            if (slitB) zs.push(d / 2);
+            for (let c = 0; c < N_COLS; c++) {
+                const z = (c + 0.5) / N_COLS * GEO.W - GEO.W / 2;
+                let v = 0;
+                for (const z0 of zs) v += Math.exp(-(z - z0) * (z - z0) / (2 * sig * sig));
+                I[c] = v * 0.5;
+            }
+            return I;
+        }
+        function randn() {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+        }
         // Maximanas lägen enligt gitterformeln n · λ = d · sin α_n
         function maximaList(lamUm, d, L) {
             const out = [];
@@ -760,6 +785,50 @@
                 beam.position.set(GEO.SRC_X / 2 - 0.1, GEO.H / 2, 0);
                 scene.add(beam);
 
+                // ── Detektorer vid spalterna (observatören) ──
+                // Två små givare monterade bakom plattan, en intill varje spalt,
+                // med en lins vänd mot spalten och en lampa som blinkar när en
+                // partikel registreras. Syns bara när eleven valt detektorn.
+                const detGroup = new THREE.Group();
+                scene.add(detGroup);
+                const detBodyMat = new THREE.MeshStandardMaterial({ color: 0x3b4a6b, metalness: 0.5, roughness: 0.45 });
+                const detLensMat = new THREE.MeshStandardMaterial({ color: 0x9fd3ff, metalness: 0.2, roughness: 0.2, emissive: 0x1a3a5c });
+                const makeDet = () => {
+                    const g = new THREE.Group();
+                    const body = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.6, 0.6), detBodyMat);
+                    g.add(body);
+                    const lens = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.34, 20), detLensMat);
+                    lens.rotation.x = Math.PI / 2;
+                    g.add(lens);
+                    const lampMat = new THREE.MeshBasicMaterial({ color: 0x4a3510 });
+                    const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 12), lampMat);
+                    lamp.position.set(0, 0.42, 0);
+                    g.add(lamp);
+                    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xffd166, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0 }));
+                    halo.scale.set(1.6, 1.6, 1);
+                    halo.position.copy(lamp.position);
+                    g.add(halo);
+                    detGroup.add(g);
+                    return { g, lens, lampMat, halo, t: 9 };
+                };
+                const detA = makeDet(), detB = makeDet();
+                const detDim = new THREE.Color(0x4a3510), detLit = new THREE.Color(0xffd166);
+                const placeDets = (d, b) => {
+                    const zA = -d / 2 - b / 2 - 0.55, zB = d / 2 + b / 2 + 0.55;
+                    detA.g.position.set(-0.62, GEO.H / 2, zA);
+                    detB.g.position.set(-0.62, GEO.H / 2, zB);
+                    detA.lens.position.set(0, 0, 0.42);
+                    detB.lens.position.set(0, 0, -0.42);
+                };
+                const updateDetLamps = (dt) => {
+                    [detA, detB].forEach(det => {
+                        det.t += dt;
+                        const k = Math.exp(-det.t / 0.18);
+                        det.lampMat.color.copy(detDim).lerp(detLit, k);
+                        det.halo.material.opacity = 0.9 * k;
+                    });
+                };
+
                 // ── Etiketter (sprites, läsbara ≥ 20 px) ──
                 const makeLabel = (segments, hex, scale = 1, size = 40) => {
                     const cv = document.createElement('canvas');
@@ -800,6 +869,8 @@
                 scene.add(lblPlate);
                 const lblScreen = makeLabel([{ t: 'Skärm' }], LBL, 2.7);
                 scene.add(lblScreen);
+                const lblDet = makeLabel([{ t: 'Detektorer' }], LBL, 2.4);
+                detGroup.add(lblDet);
                 const lblA = makeLabel([{ t: 'A' }], '#8fc1ff', 2.4);
                 const lblB = makeLabel([{ t: 'B' }], '#ff9a8f', 2.4);
                 scene.add(lblA); scene.add(lblB);
@@ -947,11 +1018,13 @@
                 dots.frustumCulled = false;
                 dots.renderOrder = 6;
                 scene.add(dots);
-                const particles = [];   // { x, y, z, vx, vz, mode:'flyg'|'gomd'|'kula', t, alpha, hitZ, hitY }
+                const particles = [];   // { x, y, z, mode:'flyg'|'gomd', pm, slit, passed, hitZ, hitY, kz, ky }
+                window.__spaltParticles = particles;   // test-handtag
                 const flashes = [];     // { x, y, z, t }
 
                 // ── Skärmens bild ──
                 let I = null, cdfObj = null, intKey = '';
+                let Iobs = null, Ikul = null, cdfA = null, cdfB = null, lastPm = null;
                 let bandsDirty = true, dotsDirty = true, hits = 0;
                 const bandsCv = document.createElement('canvas');
                 bandsCv.width = N_COLS; bandsCv.height = 384;
@@ -980,6 +1053,7 @@
                 const clearDots = () => {
                     dctx.clearRect(0, 0, N_COLS, 384);
                     hits = 0; physRef.current.hits = 0;
+                    physRef.current.hitsA = 0; physRef.current.hitsB = 0;
                     dotsDirty = true;
                 };
                 const addDot = (z, y) => {
@@ -1075,14 +1149,32 @@
                         intKey = ik;
                         I = computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: st.slitA, slitB: st.slitB });
                         cdfObj = buildCDF(I);
-                        ph.I = I;
+                        // Med detektor vid spalterna försvinner interferenstermen:
+                        // mönstret blir summan av de två enkelspaltmönstren.
+                        const IA = st.slitA ? computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: true, slitB: false }) : new Float32Array(N_COLS);
+                        const IB = st.slitB ? computeIntensity({ lamUm, d: st.d, b: st.b, L: st.L, slitA: false, slitB: true }) : new Float32Array(N_COLS);
+                        Iobs = new Float32Array(N_COLS);
+                        for (let c = 0; c < N_COLS; c++) Iobs[c] = IA[c] + IB[c];
+                        cdfA = buildCDF(IA); cdfB = buildCDF(IB);
+                        Ikul = computeKulor(st.d, st.b, st.L, st.slitA, st.slitB);
                         bandsDirty = true;
                         // ett nytt experiment: gamla träffar hör inte hit
                         clearDots(); particles.length = 0; flashes.length = 0;
                         updateMeasure();
                     }
+                    const pm = st.mode === 'partikel' ? st.partMode : 'kvant';
+                    if (pm !== lastPm) {
+                        lastPm = pm;
+                        clearDots(); particles.length = 0; flashes.length = 0;
+                    }
+                    const Ishow = pm === 'detektor' ? Iobs : pm === 'kulor' ? Ikul : I;
+                    ph.I = Ishow;
                     buildMaxima(lamUm, st.d, st.L, st.show.max);
-                    updateCurve(I, st.L, st.show.kurva);
+                    updateCurve(Ishow, st.L, st.show.kurva);
+                    detGroup.visible = pm === 'detektor';
+                    placeDets(st.d, st.b);
+                    lblDet.position.set(-0.62, GEO.H / 2 - 1.1, st.d / 2 + st.b / 2 + 1.9);
+                    updateDetLamps(running ? dt : 0);
 
                     // vågytan
                     const srcs = buildSources(st.d, st.b, st.slitA, st.slitB);
@@ -1097,8 +1189,10 @@
                     if (running) simT += dt * slowF;
                     waveMat.uniforms.uTime.value = simT;
                     waveMat.uniforms.uCamPos.value.copy(camera.position);
-                    const wantWave = st.show.vagyta;
-                    wave.visible = wantWave;
+                    // Vågytan gäller det omätta försöket: med detektor eller i
+                    // kultankeexperimentet har varje partikel en bestämd väg, och
+                    // då finns ingen våg att rita.
+                    wave.visible = st.show.vagyta && pm === 'kvant';
                     waveMat.uniforms.uOpacity.value = st.mode === 'vag' ? 1 : 0.55;
 
                     // partiklar
@@ -1111,7 +1205,7 @@
                             particles.push({
                                 x: GEO.SRC_X + 0.2, y: GEO.H / 2 + (Math.random() - 0.5) * 0.5,
                                 z: (Math.random() - 0.5) * 0.9, mode: 'flyg', t: 0, alpha: 1,
-                                kula: st.show.kulor, anyOpen
+                                pm, anyOpen, slit: null, passed: false
                             });
                         }
                     } else {
@@ -1122,23 +1216,38 @@
                             const p = particles[i];
                             if (p.mode === 'flyg') {
                                 p.x += vP * dt;
-                                if (p.kula) {
-                                    // små kulor: rakt igenom en öppen spalt och vidare i rät linje
-                                    if (p.x >= -0.6 && p.slit == null) {
+                                if (p.pm !== 'kvant') {
+                                    // Bestämd väg: genom EN spalt och sedan rakt mot
+                                    // träffpunkten. Med detektorn lottas träffpunkten ur
+                                    // spaltens eget enkelspaltmönster; för kulorna ur en
+                                    // smal spridning rakt bakom spalten.
+                                    if (p.slit == null && p.x >= -0.6) {
                                         const open = [];
                                         if (st.slitA) open.push(-st.d / 2);
                                         if (st.slitB) open.push(st.d / 2);
                                         if (!open.length) { p.mode = 'absorb'; continue; }
-                                        const zs = open[Math.floor(Math.random() * open.length)] + (Math.random() - 0.5) * st.b * 0.8;
+                                        const zs = open[Math.floor(Math.random() * open.length)];
                                         p.slit = zs;
-                                        // sväng in mot spalten i sista biten före plattan
-                                        p.z = zs;
-                                        const spread = (Math.random() - 0.5) * 2 * 2.5 * DEG;
-                                        p.vz = vP * Math.tan(spread);
+                                        p.z = zs + (Math.random() - 0.5) * st.b * 0.8;
+                                        let hz = p.pm === 'detektor' ? sampleZ(zs < 0 ? cdfA : cdfB)
+                                                                     : zs + randn() * kulSigma(st.b, st.L);
+                                        hz = Math.max(-GEO.W / 2 + 0.3, Math.min(GEO.W / 2 - 0.3, hz));
+                                        p.hitZ = hz;
+                                        p.hitY = GEO.H * (0.12 + 0.76 * Math.random());
+                                        const run = st.L - 0.1;
+                                        p.kz = (hz - p.z) / run; p.ky = (p.hitY - p.y) / run;
                                     }
-                                    if (p.slit != null) p.z += p.vz * dt;
+                                    if (p.slit != null && !p.passed && p.x >= -0.45) {
+                                        p.passed = true;
+                                        if (p.pm === 'detektor') {
+                                            const det = p.slit < 0 ? detA : detB;
+                                            det.t = 0;
+                                            if (p.slit < 0) ph.hitsA = (ph.hitsA || 0) + 1; else ph.hitsB = (ph.hitsB || 0) + 1;
+                                        }
+                                    }
+                                    if (p.passed) { p.z += p.kz * vP * dt; p.y += p.ky * vP * dt; }
                                     if (p.x >= st.L - 0.1) {
-                                        addDot(p.z, p.y); flashes.push({ x: st.L - 0.1, y: p.y, z: p.z, t: 0 });
+                                        addDot(p.hitZ, p.hitY); flashes.push({ x: st.L - 0.1, y: p.hitY, z: p.hitZ, t: 0 });
                                         particles.splice(i, 1);
                                     }
                                 } else {
@@ -1280,7 +1389,11 @@
             const [rate, setRate] = useState(60);
             const [source, setSource] = useState('ljus');
             const [mode, setMode] = useState('vag');
-            const [show, setShow] = useState({ vagyta: true, max: false, kurva: false, kulor: false });
+            const [show, setShow] = useState({ vagyta: true, max: false, kurva: false });
+            // Partiklarna: 'kvant' = det verkliga försöket utan mätning,
+            // 'detektor' = observatör som registrerar vilken spalt,
+            // 'kulor' = tankeexperimentet med vanliga små kulor.
+            const [partMode, setPartMode] = useState('kvant');
             const [slitA, setSlitA] = useState(true);
             const [slitB, setSlitB] = useState(true);
             const [running, setRunning] = useState(true);
@@ -1288,19 +1401,20 @@
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
             const [measureZ, setMeasureZ] = useState(null);
-            const [ui, setUi] = useState({ hits: 0, I: null });
+            const [ui, setUi] = useState({ hits: 0, hitsA: 0, hitsB: 0, I: null });
             const sceneWrapRef = useRef(null);
 
             const stateRef = useRef({});
-            stateRef.current = { lam, d, b, L, rate, source, mode, show, slitA, slitB, running, slow };
-            const physRef = useRef({ hits: 0, measureZ: null, I: null, lastMode: null });
+            stateRef.current = { lam, d, b, L, rate, source, mode, show, partMode, slitA, slitB, running, slow };
+            const physRef = useRef({ hits: 0, hitsA: 0, hitsB: 0, measureZ: null, I: null, lastMode: null });
             const actionsRef = useRef({});
             useEffect(() => { window.__spaltPh = physRef.current; window.__spaltActions = actionsRef.current; }, []);
 
             useEffect(() => {
                 const id = setInterval(() => {
                     const ph = physRef.current;
-                    setUi(u => (u.hits === ph.hits && u.I === ph.I) ? u : { hits: ph.hits, I: ph.I });
+                    setUi(u => (u.hits === ph.hits && u.I === ph.I && u.hitsA === ph.hitsA && u.hitsB === ph.hitsB) ? u
+                               : { hits: ph.hits, hitsA: ph.hitsA || 0, hitsB: ph.hitsB || 0, I: ph.I });
                 }, 150);
                 return () => clearInterval(id);
             }, []);
@@ -1375,7 +1489,12 @@
                         <label><input type="radio" name={'mode' + nameSuffix} checked={mode === 'vag'} onChange={() => setModeAndClear('vag')} /><span>Vågor</span></label>
                         <label><input type="radio" name={'mode' + nameSuffix} checked={mode === 'partikel'} onChange={() => setModeAndClear('partikel')} /><span>En partikel i taget</span></label>
                         {mode === 'partikel' && (
-                            <label style={{ paddingLeft: 22 }}><input type="checkbox" checked={show.kulor} onChange={() => { tShow('kulor'); clearScreen(); }} /><span>Som om de vore små kulor</span></label>
+                            <React.Fragment>
+                                <div className="st-title mt">Vid spalterna</div>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'kvant'} onChange={() => setPartMode('kvant')} /><span>Ingen mätning (verkligt försök)</span></label>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'detektor'} onChange={() => setPartMode('detektor')} /><span>Detektor: vilken spalt?</span></label>
+                                <label><input type="radio" name={'pm' + nameSuffix} checked={partMode === 'kulor'} onChange={() => setPartMode('kulor')} /><span>Tankeexperiment: vanliga små kulor</span></label>
+                            </React.Fragment>
                         )}
                     </div>
                     <div>
@@ -1467,8 +1586,11 @@
                             golvet visar hur de två vågsystemen breder ut sig och möts, och banden på
                             skärmen ligger exakt där vågtopparna träffar den. Byt till <strong>en
                             partikel i taget</strong> och se samma mönster växa fram, prick för prick.
-                            Klicka på skärmen för att mäta vägskillnaden, och kryssa i maximilinjerna
-                            för att se gitterformeln ritad i rummet.
+                            Sätt sedan en <strong>detektor</strong> vid spalterna som registrerar vilken
+                            spalt varje partikel går genom, och se banden försvinna: mäts vägen beter sig
+                            partikeln som en partikel, mäts den inte som en våg. Klicka på skärmen för
+                            att mäta vägskillnaden, och kryssa i maximilinjerna för att se gitterformeln
+                            ritad i rummet.
                         </p>
 
                         {/* Formelkort: gitterformeln med ord-etiketter, samma uppställning som i genomgången */}
@@ -1531,6 +1653,9 @@
                                             <div className="scene-info si-diskret">
                                                 {fmtNum(ui.hits, 0)} träffar
                                                 <span>{source === 'elektron' ? 'elektroner' : 'fotoner'} på skärmen</span>
+                                                {partMode === 'detektor' && (
+                                                    <span>genom A: {fmtNum(ui.hitsA, 0)} · genom B: {fmtNum(ui.hitsB, 0)}</span>
+                                                )}
                                             </div>
                                         )}
                                         <div className="scene-hint">Dra för att vrida kameran · rulla för att zooma · klicka på skärmen för att mäta vägskillnaden</div>
@@ -1690,10 +1815,38 @@
                                     vågens intensitet.
                                 </p>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Kryssa i <em>Som om de vore små kulor</em> för att se vad man hade
-                                    väntat sig av rena partiklar: två staplar, en bakom varje spalt, och
-                                    inga mörka band alls. Det mönstret uppstår aldrig i det verkliga
-                                    experimentet, inte ens när partiklarna skickas en i taget.
+                                    Välj <em>Tankeexperiment: vanliga små kulor</em> för att se hur det
+                                    <strong> hade sett ut om</strong> ljus och elektroner inte hade någon
+                                    vågnatur alls, utan vore små kulor som skjuts en och en: varje kula
+                                    går genom den ena spalten eller den andra och fortsätter rakt fram,
+                                    så det blir två kullar, en bakom varje spalt, och inga mörka band.
+                                    Det är alltså inte ett verkligt utfall utan en jämförelse, och det
+                                    är just skillnaden mot det verkliga mönstret som visar att
+                                    partiklarna beter sig som vågor.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Detektor vid spalterna</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Välj <em>Detektor: vilken spalt?</em> Två givare sätts intill spalterna,
+                                    och varje gång en partikel passerar blinkar lampan vid den spalt den
+                                    gick genom. Nu har varje partikel en bestämd väg, och den flyger
+                                    synligt från sin spalt till skärmen. Räkna in träffarna: ungefär
+                                    hälften genom A, hälften genom B, och på skärmen finns
+                                    <strong> inga mörka band längre</strong>. Mönstret är i stället summan av
+                                    de två spalternas egna diffraktionsmönster, ett brett ljust fält.
+                                </p>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Detta är det verkliga experimentets mest berömda resultat. Observeras
+                                    vägen beter sig elektronen som en partikel som gått genom en spalt;
+                                    observeras den inte går den som en våg genom båda och interfererar
+                                    med sig själv. Det är inte detektorns knuff som suddar ut banden,
+                                    utan att informationen om vägen finns: en mätning som kunde avslöja
+                                    spalten räcker, hur skonsam den än är. Att det inte blir två skarpa
+                                    linjer beror på att spalterna är smala, bara någon våglängd breda,
+                                    så varje spalt sprider ljuset över hela skärmen. Bredda spalterna med
+                                    glidaren så drar de två fälten ihop sig mot varsin spalt.
                                 </p>
                             </div>
 
@@ -1714,7 +1867,7 @@
                                 </p>
                             </div>
 
-                            <div className="glass-card rounded-xl p-4">
+                            <div className="glass-card rounded-xl p-4 md:col-span-2">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Täck för en spalt</h3>
                                 <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Stäng spalt B. Kvar blir en enkelspalt, och interferensbanden
@@ -1757,6 +1910,7 @@
                                 <li><strong>&quot;Banden uppstår för att partiklarna krockar med varandra.&quot;</strong> Mönstret växer fram också när partiklarna skickas en i taget, med lång tid emellan. Varje partikel interfererar med sig själv, inte med andra.</li>
                                 <li><strong>&quot;Ljuset går genom den ena spalten eller den andra.&quot;</strong> Om det vore så skulle mönstret bli summan av två enkelspaltmönster, utan mörka band. Täck för en spalt i taget och lägg ihop bilderna: det blir aldrig dubbelspaltens mönster.</li>
                                 <li><strong>&quot;Längre skärmavstånd ger större vinklar.&quot;</strong> Vinklarna bestäms enbart av <em>λ</em> och <em>d</em>. Ett längre avstånd gör bara att samma vinklar ger större avstånd på skärmen, <em>x</em> = <em>ℓ</em> · tan <em>α</em>.</li>
+                                <li><strong>&quot;Detektorn stör partikeln mekaniskt, därför försvinner banden.&quot;</strong> Det avgörande är inte hur hårt detektorn påverkar partikeln utan att den ger information om vägen. Så snart det i princip går att veta vilken spalt partikeln tog finns inga två vägar att lägga ihop, och interferensen uteblir. Tas informationen bort kommer banden tillbaka.</li>
                                 <li><strong>&quot;Mörkt betyder att ljuset försvann.&quot;</strong> Energin försvinner inte. Den som saknas i de mörka banden finns i de ljusa: interferensen flyttar ljuset, den förstör det inte.</li>
                             </ul>
                         </details>

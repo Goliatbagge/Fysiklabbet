@@ -21,7 +21,7 @@ const FILES = [
     'fysik1-rorelsediagram.html', 'fysik1-serie-parallell.html', 'fysik1-sonderfall.html',
     'fysik1-stracka-tid-app.html', 'fysik1-stralning-genomtranglighet.html', 'fysik1-tryck-pa-app.html',
     'fysik1-tryck.html', 'fysik1-tyngdfaktor-jorden.html', 'fysik1-varme-app.html',
-    'fysik2-brytning-app.html', 'fysik2-dubbelspalt-2d-app.html', 'fysik2-em-stralning.html',
+    'fysik2-brytning-app.html', 'fysik2-dubbelspalt.html', 'fysik2-em-stralning.html',
     'fysik2-energinivaer.html', 'fysik2-fotoelektrisk-effekt.html', 'fysik2-jordmagnetiska-faltet.html',
     'fysik2-konisk-pendel.html', 'fysik2-magnetfalt-app.html', 'fysik2-magnetiskt-flode.html',
     'fysik2-manens-faser.html', 'fysik2-pendel-app.html', 'fysik2-rorelse-app.html',

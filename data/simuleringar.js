@@ -124,12 +124,7 @@ window.SIM_NAMES = {
       kw: ['elektromagnetism','virvelström','virvelströmmar','induktion','lenz','lenz lag','kopparrör','rör','magnet','fallande magnet','magnetbroms','broms','plaströr','aluminiumrör','gränshastighet','koppar','fritt fall','flöde','flödesändring'] },
   ],
   'fysik2-em-stralning.html': 'Elektromagnetisk strålning',
-  'fysik2-dubbelspalt-3d-app.html': [
-    { name: 'Dubbelspalten i 3D', desc: 'Dubbelspaltexperimentet i 3D: en vågyta visar hur de två vågsystemen bakom spalterna förstärker och släcker ut varandra, och skärmen fångar mönstret, som ljusband eller som partiklar en i taget. Ändra våglängd, spaltavstånd och skärmavstånd, mät vägskillnaden med ett klick, se gitterformeln ritad i rummet, och sätt en detektor vid spalterna som får banden att försvinna.',
-      kw: ['vågor','optik','ljus','diffraktion','interferens','dubbelspalt','enkelspalt','gitterformeln','laser','våglängd','spaltavstånd','spaltbredd','maxima','minima','nodlinje','vägskillnad','huygens','fotoner','elektroner','de broglie','kvantfysik','observation','observatör','detektor','vilken spalt','tankeexperiment','3d'] },
-    { name: 'Dubbelspalten i 2D', href: 'fysik2-dubbelspalt-2d-app.html', desc: 'Samma experiment sett rakt ovanifrån, som figurerna i genomgången: vågfältet mellan spalterna och skärmen, banden på skärmen, partiklar en i taget, detektorn vid spalterna och gitterformelns maximilinjer, allt i en planvy som går lätt även på svaga datorer.',
-      kw: ['vågor','optik','ljus','diffraktion','interferens','dubbelspalt','enkelspalt','gitterformeln','laser','våglängd','spaltavstånd','spaltbredd','maxima','minima','nodlinje','vägskillnad','huygens','fotoner','elektroner','de broglie','kvantfysik','observation','observatör','detektor','vilken spalt','tankeexperiment','planvy','ovanifrån','2d'] },
-  ],
+  'fysik2-dubbelspalt.html': 'Dubbelspaltexperimentet',
   'fysik2-wiens-lag.html': 'Wiens förskjutningslag',
   'fysik2-brytning-app.html': 'Brytningslagen',
   'fysik2-fotoelektrisk-effekt.html': 'Fotoelektrisk effekt',

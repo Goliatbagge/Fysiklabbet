@@ -72,7 +72,7 @@ Avsnittsnumrering följer Laborans-mönstret: `kapitelnr.avsnittsnr`.
 - **4.2** Wiens förskjutningslag — `fysik2-wiens-lag.html` 🌡️
 - **4.3** Solens färg — `fysik2-solens-farg.html` 🌅
 - **4.4** Brytningslagen — `fysik2-brytning-app.html` 💎
-- **4.5** Dubbelspaltexperimentet — `fysik2-dubbelspalt-3d-app.html` 🔬
+- **4.5** Dubbelspaltexperimentet — `fysik2-dubbelspalt.html` 🔬
 - **4.6** Fotoelektrisk effekt — `fysik2-fotoelektrisk-effekt.html` 💡
 - **4.7** Spektrallinjer — `fysik2-spektrallinjer.html` 🌈
 - **4.8** Energinivåer — `fysik2-energinivaer.html` ⚛️

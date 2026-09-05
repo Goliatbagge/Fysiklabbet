@@ -417,22 +417,31 @@
             const c = lo + Math.random();
             return c / cdf.length * GEO.W - GEO.W / 2;
         }
-        // Tankeexperimentet "vanliga små kulor": var kula går genom EN spalt och
-        // fortsätter rakt fram med en liten spridning, utan någon vågnatur.
-        // Fördelningen blir två kullar, en bakom varje öppen spalt.
-        const KUL_SPRID = 2.5 * DEG;
-        function kulSigma(b, L) { return Math.hypot(b / 2, L * Math.tan(KUL_SPRID)); }
+        // Tankeexperimentet "vanliga små kulor": kulorna kommer i en riktad
+        // stråle, går genom EN spalt och fortsätter rakt fram utan någon
+        // vågnatur. På skärmen blir det två smala streck, vart och ett lika
+        // brett som spalten (plus en mycket liten spridning i strålen).
+        const KUL_SPRID = 0.4 * DEG;
+        function kulSigma(L) { return Math.max(0.03, L * Math.tan(KUL_SPRID)); }
+        // Felfunktionen (Abramowitz–Stegun 7.1.26), räcker för fördelningen
+        function erf(x) {
+            const sgn = x < 0 ? -1 : 1; x = Math.abs(x);
+            const t = 1 / (1 + 0.3275911 * x);
+            const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+            return sgn * y;
+        }
         function computeKulor(d, b, L, slitA, slitB) {
             const I = new Float32Array(N_COLS);
-            const sig = kulSigma(b, L);
+            const sig = kulSigma(L), k = 1 / (Math.SQRT2 * sig);
             const zs = [];
             if (slitA) zs.push(-d / 2);
             if (slitB) zs.push(d / 2);
             for (let c = 0; c < N_COLS; c++) {
                 const z = (c + 0.5) / N_COLS * GEO.W - GEO.W / 2;
                 let v = 0;
-                for (const z0 of zs) v += Math.exp(-(z - z0) * (z - z0) / (2 * sig * sig));
-                I[c] = v * 0.5;
+                // likformigt över spaltbredden, utsmetat med den lilla spridningen
+                for (const z0 of zs) v += 0.5 * (erf((z - z0 + b / 2) * k) - erf((z - z0 - b / 2) * k));
+                I[c] = v;
             }
             return I;
         }
@@ -1238,9 +1247,9 @@
                                         if (!open.length) { p.mode = 'absorb'; continue; }
                                         const zs = open[Math.floor(Math.random() * open.length)];
                                         p.slit = zs;
-                                        p.z = zs + (Math.random() - 0.5) * st.b * 0.8;
+                                        p.z = zs + (Math.random() - 0.5) * st.b * 0.9;
                                         let hz = p.pm === 'detektor' ? sampleZ(zs < 0 ? cdfA : cdfB)
-                                                                     : zs + randn() * kulSigma(st.b, st.L);
+                                                                     : p.z + randn() * kulSigma(st.L);
                                         hz = Math.max(-GEO.W / 2 + 0.3, Math.min(GEO.W / 2 - 0.3, hz));
                                         p.hitZ = hz;
                                         p.hitY = GEO.H * (0.12 + 0.76 * Math.random());
@@ -1871,7 +1880,8 @@
                                     <strong> hade sett ut om</strong> ljus och elektroner inte hade någon
                                     vågnatur alls, utan vore små kulor som skjuts en och en: varje kula
                                     går genom den ena spalten eller den andra och fortsätter rakt fram,
-                                    så det blir två kullar, en bakom varje spalt, och inga mörka band.
+                                    så det blir två smala streck, ett bakom varje spalt och lika brett som
+                                    spalten, och inga mörka band.
                                     Det är alltså inte ett verkligt utfall utan en jämförelse, och det
                                     är just skillnaden mot det verkliga mönstret som visar att
                                     partiklarna beter sig som vågor.

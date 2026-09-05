@@ -26,6 +26,29 @@ Format per post:
   https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
   (tillagd 2026-08-27)
 
+- **Lysdioden som slipper fånga sitt eget ljus** — en vanlig lysdiod släpper bara ut
+  omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom
+  totalreflektion. Ett lag vid Lunds universitet odlar i stället förgrenade
+  nanotrådar, där grenarna är tunnare än ljusets våglängd och ljuset därför inte kan
+  fångas. Kärnan har indirekt bandgap och lyser inte alls, utan matar bara in
+  laddningsbärare i grenarna. Ingång: totalreflektion, gränsvinkel, brytningsindex,
+  bandgap och våglängd — ovanligt lätt att koppla till optiken. Nano Research (2026),
+  DOI 10.26599/nr.2026.94908799, Magnus Borgström och Yue Zhao. OBS: tekniken är
+  ännu experimentell och slår inte kommersiella lysdioder — skriv inte om den som
+  färdig. Källa (Phys.org 2026-09-05):
+  https://phys.org/news/2026-09-significant-efficiency-gains.html
+  (tillagd 2026-09-05)
+
+- **Kvantalgoritmen som prövar hur flyttfåglar hittar** — den ledande förklaringen till
+  fåglarnas magnetiska sinne är att ljus skapar ett par radikaler i ögat vars spinn
+  påverkas av jordens magnetfält. Nu används kvantstyrningsmetoder för att räkna på
+  hur känslig en sådan kompass egentligen kan vara. Ingång: spinn, magnetfält och att
+  ett fält på bara några tiotals mikrotesla ändå kan styra en kemisk reaktion. Leta
+  upp originalstudien och kontrollera vad som är beräknat och vad som är uppmätt —
+  hypotesen är inte bevisad. Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-quantum-algorithm-birds-migrate.html
+  (tillagd 2026-09-05)
+
 - **Einsteins gravitation iakttagen i kvantvärlden** — ett internationellt lag, med Roger
   Penrose bland författarna, säger sig för första gången ha sett gravitationens verkan på
   kvantobjekt. Ingång: tyngdkraft, superposition och var de två teorierna krockar. OBS:

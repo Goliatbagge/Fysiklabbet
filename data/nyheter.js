@@ -88,6 +88,80 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-05-supraledningen-som-gick-att-stanga-av",
+    date: "2026-09-05",
+    title: "Två grafenlager vridna 1,1 grader leder ström helt utan motstånd — nu har fysiker hittat strömbrytaren",
+    deck: "Ett internationellt lag lade ett avskärmande grafenskikt en tredjedels nanometer ovanför den supraledande delen. När den fylldes med laddning slocknade supraledningen helt, och det talar emot den förklaring som gäller för vanliga supraledare.",
+    category: "Materialfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-05-supraledningen-som-gick-att-stanga-av.jpg",
+    imageAlt: "Modell av två gitter av kolatomer som ligger på varandra, det ena blått och det andra grått, lätt vridna mot varandra så att det uppstår ett större ringmönster av ljusa och mörka fläckar.",
+    imageCredit: "Illustration: NIST via Wikimedia Commons (allmän egendom). Två grafengitter lagda på varandra med en liten vridning ger ett moirémönster.",
+    tags: ["materialfysik", "supraledning", "grafen", "ellära", "elektroner", "coulombs lag", "moiré", "låg temperatur", "kvantfysik", "kondenserade materiens fysik"],
+    sources: [
+      { name: "Phys.org: Magic-angle graphene provides evidence for unconventional superconductivity", url: "https://phys.org/news/2026-09-magic-angle-graphene-evidence-unconventional.html" },
+      { name: "National Graphene Institute, University of Manchester", url: "https://www.graphene.manchester.ac.uk/" },
+      { name: "Physical Review X (öppet tillgänglig, CC BY 4.0)", url: "https://doi.org/10.1103/z9qg-287y" }
+    ],
+    research: {
+      citation: "Julien Barrier, Liangtao Peng, Shuigang Xu, Christophe De Beule, V. I. Fal’ko, K. Watanabe, T. Taniguchi, A. K. Geim, Shaffique Adam och Alexey I. Berdyugin, ”Coulomb Screening of Superconductivity in Magic-Angle Graphene”, Physical Review X 16, 031040, publicerad 17 augusti 2026. DOI 10.1103/z9qg-287y (öppet tillgänglig, CC BY 4.0)",
+      url: "https://doi.org/10.1103/z9qg-287y"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 7.1 Laddning och influens", href: "katalog.html?id=fy1-7.1" },
+        { label: "Fysik nivå 1 · 7.2 Krafter mellan laddningar och Coulombs lag", href: "katalog.html?id=fy1-7.2" },
+        { label: "Fysik nivå 1 · 7.5 Resistans och Ohms lag", href: "katalog.html?id=fy1-7.5" }
+      ],
+      fragor: [
+        "Avskärmningen i försöket bygger på samma sak som influens: fria laddningar i ett ledande material ordnar om sig så att fältet inne i materialet motverkas. Varför avtar den effekten så snabbt med avståndet att tre nanometer räcker för att den nästan ska försvinna?",
+        "Två förklaringar förutsäger motsatta saker om vad avskärmningen ska göra med den kritiska temperaturen. Vad är det som gör ett sådant försök starkare som bevis än ett som bara bekräftar den ena förklaringen?",
+        "Resultatet utesluter en förklaring men pekar inte entydigt ut någon av de kvarvarande. Varför är det ändå ett värdefullt resultat, och vad skulle krävas för att komma vidare?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Grafen är ett enda lager kolatomer, ordnade i ett mönster som ser ut som ett hönsnät. Lägger man två sådana lager på varandra och vrider det ena en aning i förhållande till det andra händer ingenting särskilt — vid nästan alla vinklar. Men vid ungefär 1,1° blir materialet plötsligt supraledande: strömmen flyter helt utan elektriskt motstånd. Vinkeln är så egendomligt utpekad att fysiker kallar den den magiska vinkeln, och sedan upptäckten 2018 har den varit ett av materialfysikens hetaste forskningsfält.' },
+      { type: 'p', html: 'Åtta år senare är en central fråga fortfarande obesvarad: <em>vad</em> är det som får elektronerna att para ihop sig? Nu har ett lag forskare i Manchester och Singapore, tillsammans med kollegor i USA, Belgien och Japan, gjort ett försök som pekar tydligt åt ett håll. De lyckades stänga av supraledningen helt.' },
+
+      { type: 'h2', text: 'Ett kitt som ingen har sett' },
+      { type: 'p', html: 'Elektroner stöter bort varandra. De bär alla samma negativa laddning, och kraften mellan två laddningar följer Coulombs lag, $F = k \\cdot \\dfrac{q_1 \\cdot q_2}{r^2}$ — ju närmare de kommer varandra, desto hårdare knuffar de ifrån sig. Ändå bygger all supraledning på att elektronerna slår sig ihop två och två i så kallade Cooperpar, som sedan glider genom materialet utan att bromsas.' },
+      { type: 'p', html: 'I vanliga supraledare, som kvicksilver eller bly, vet man vad kittet är. En elektron som far genom kristallen drar atomkärnorna en aning mot sig, och den lilla förtätningen av positiv laddning hinner locka till sig en andra elektron innan den klingat av. Elektronerna paras alltså ihop av materialets egna skakningar, av fononerna. Det är den så kallade BCS-teorin från 1957, och den fungerar utmärkt — så länge det handlar om metaller som kyls nästan hela vägen ner till absoluta nollpunkten.' },
+      { type: 'p', html: 'Grafenet med den magiska vinkeln passar däremot dåligt in i den bilden. Det blir supraledande vid förvånansvärt få laddningar per ytenhet, och kartan över vilka tillstånd materialet antar liknar på ett kusligt sätt kartan för kupratsupraledarna, den familj av keramiska material vars supraledning ingen heller har lyckats förklara med fononer. Misstanken har därför varit att elektronerna i grafen paras ihop av varandra: att det är själva den elektriska växelverkan mellan dem, och inte gittrets skakningar, som gör jobbet.' },
+
+      { type: 'h2', text: 'Idén: kortslut Coulombkraften' },
+      { type: 'p', html: 'De två förklaringarna går att skilja åt, och tanken bakom försöket är ovanligt enkel. Håller man en metallbit intill en laddning ordnar sig metallens fria elektroner så att de motverkar laddningens fält. Kraften mellan två laddningar i närheten av metallen blir därmed svagare. Effekten kallas avskärmning, och den är släkt med det som gör att en mobiltelefon i en plåtburk tappar täckningen.' },
+      { type: 'p', html: 'Lägger man ett sådant avskärmande skikt tätt intill supraledaren borde alltså den elektriska växelverkan mellan elektronerna försvagas. Är det den som håller ihop paren ska supraledningen försvagas eller upphöra. Är det i stället fononerna som gör jobbet blir utfallet det motsatta: avskärmningen dämpar då bara elektronernas inbördes bortstötning, den som motverkar parbildningen, och den kritiska temperaturen borde snarast stiga något.' },
+      { type: 'p', html: 'Försöket hade gjorts förr, utan att ge besked. Med grafitelektroder skilda från grafenet av 6–10 nanometer tjocka skikt bornitrid slocknade visserligen ett besläktat tillstånd i materialet, men supraledningen levde vidare. I ett senare försök, med tre nanometers avstånd, steg den kritiska temperaturen med två till tre procent — vilket tolkades som stöd för den konventionella förklaringen.' },
+
+      { type: 'h2', text: 'Fyra lager grafen i samma stapel' },
+      { type: 'p', html: 'Problemet, insåg laget bakom den nya studien, var avståndet. Avskärmningen avtar exponentiellt, och för just supraledningen i grafen sker avklingningen över en sträcka på bara ett par nanometer. Ett mellanlägg av bornitrid placerar alltså i praktiken redan skärmen för långt bort.' },
+      { type: 'p', html: 'Lösningen blev att stryka mellanlägget helt. I stället staplades fyra grafenlager direkt på varandra i en enda hög. De två understa vreds 1,15° mot varandra och bildade den magiska, supraledande delen. Det tredje lagret vreds hela 10° i förhållande till det andra, och det fjärde bara 0,46° i förhållande till det tredje, så att de två översta lagren i sin tur bildade ett eget par.' },
+      { type: 'p', html: 'Den stora vinkeln på 10° i mitten är hela knepet. Två grafenlager som ligger kraftigt vridna mot varandra får sina elektroner så olika beskrivna att de i praktiken slutar samverka elektriskt, trots att de fysiskt ligger dikt an. Forskarna kunde därmed placera sitt avskärmande skikt ungefär en tredjedels nanometer från supraledaren, alltså en tiondel av de tidigare avstånden, och ändå hålla de två systemen åtskilda. Hela högen bäddades in mellan 30&nbsp;nm tjocka bornitridkristaller och lades på en kiseloxidplatta.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-05-supraledningen-som-gick-att-stanga-av-2.jpg',
+        alt: 'Färgkarta över provbitens elektriska resistans, med fyllnadsgraden i det magiska grafenlagret på vågräta axeln och laddningstätheten i det avskärmande lagret på lodräta axeln. Uppe till vänster en skiss av de fyra grafenlagren vridna mot varandra.',
+        caption: 'Provbitens resistans vid 35 tusendels kelvin. Vågrätt: hur mycket laddning som lagts in i det magiska grafenlagret. Lodrätt: hur mycket laddning som lagts in i det avskärmande lagret ovanför. De mörka stråken är områden med försvinnande resistans, och de tunnar ut och tar slut när det övre lagret fylls på.',
+        credit: 'Figur: Barrier med flera, Physical Review X 16, 031040 (CC BY 4.0)' },
+
+      { type: 'h2', text: 'Supraledningen slocknade' },
+      { type: 'p', html: 'Mätningarna gjordes dels vid 2&nbsp;K, dels vid apparatens lägsta temperatur, omkring 35 tusendels kelvin. Vid den kylan syntes de områden där resistansen var noll tydligt i mätkartan. Sedan började forskarna fylla på det översta lagret med laddning, och de supraledande områdena krympte. Vid en laddningstäthet över 2&nbsp;·&nbsp;10<sup>12</sup>&nbsp;cm<sup>−2</sup> i det avskärmande lagret var supraledningen borta, även vid den lägsta temperaturen. Den kritiska temperaturen hade då sjunkit med mer än en tiopotens.' },
+      { type: 'quote', html: 'När vi slog på avskärmningen blev vi överraskade av att supraledningen försvann helt.', cite: 'Alexey Berdyugin, National University of Singapore' },
+      { type: 'p', html: 'Forskarna prövade de närliggande invändningarna och avfärdade dem en efter en. Att det översta lagret helt enkelt skulle leda strömmen förbi supraledaren stämmer inte med att provbitens resistans aldrig sjönk vid hög laddning. Att det vinkelräta elektriska fältet råkade ändras samtidigt räcker inte heller som förklaring, visar en genomräkning i studiens tilläggsmaterial.' },
+
+      { type: 'h2', text: 'Vad det säger om kittet' },
+      { type: 'p', html: 'Slutsatsen är att fononerna inte kan vara hela historien. Enligt BCS-teorin skulle avskärmningen ha höjt den kritiska temperaturen, inte utplånat den. Kvar står förklaringar där elektronerna paras ihop av sin egen växelverkan. Forskarnas beräkningar stämmer rimligt väl med en av dem, där kittet utgörs av plasmoner — kollektiva svallvågor i elektrongasen — men de påpekar själva att flera andra elektroniska mekanismer är lika känsliga för avskärmning och därför inte går att utesluta.' },
+      { type: 'p', html: 'Studien, som publicerades i <em>Physical Review X</em>, står inte ensam. Ett annat forskarlag kom oberoende fram till samma slutsats om avskärmningens roll och publicerade sitt resultat i <em>Nature Physics</em> tidigare i år. Att två grupper med olika prov ser samma sak gör bilden betydligt stabilare.' },
+      { type: 'quote', html: 'Om vi inte förstår vad som får supraledning att fungera är det osannolikt att vi någonsin når supraledning i rumstemperatur.', cite: 'Andre Geim, University of Manchester' },
+      { type: 'p', html: 'Metoden i sig kan visa sig lika användbar som svaret. Genom att kombinera små och stora vridningsvinklar i samma stapel går det att bygga material där den elektriska växelverkan i ett skikt styrs med en ratt i skiktet bredvid. Nästa steg, skriver forskarna, vore att använda ett vanligt enkelt grafenlager som skärm, eftersom dess egenskaper är betydligt bättre kartlagda.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Grafen upptäcktes med tejp. Andre Geim och Konstantin Novoselov tryckte tejp mot en grafitbit och drog av, om och om igen, tills ett enda atomlager satt kvar. De fick Nobelpriset i fysik 2010 för det.',
+        'Ett moirémönster uppstår när två regelbundna mönster läggs på varandra lätt snedvridna. Samma sak syns när två myggnät ligger omlott, eller när en rutig skjorta filmas och bilden börjar krusa sig.',
+        'Vridningsvinkeln måste vara häpnadsväckande exakt. Skiljer den sig någon tiondels grad från 1,1° uteblir supraledningen, vilket är en viktig anledning till att prov från olika laboratorier länge var svåra att jämföra.',
+        '35 tusendels kelvin är kallare än rymden. Bakgrundsstrålningen i universum håller 2,7&nbsp;K, alltså nästan åttio gånger högre temperatur.'
+      ]}
+    ]
+  },
+  {
     id: "2026-09-04-bottnen-formar-vagen",
     date: "2026-09-04",
     title: "Vågen vet inte hur den ska bryta förrän den känner botten — nu går tunnelns storlek att räkna ut i förväg",

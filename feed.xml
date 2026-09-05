@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Fri, 04 Sep 2026 22:05:32 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 01:31:45 GMT</lastBuildDate>
+    <item>
+      <title>Två grafenlager vridna 1,1 grader leder ström helt utan motstånd — nu har fysiker hittat strömbrytaren</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-05-supraledningen-som-gick-att-stanga-av</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-05-supraledningen-som-gick-att-stanga-av</guid>
+      <pubDate>Sat, 05 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Materialfysik</category>
+      <description>Ett internationellt lag lade ett avskärmande grafenskikt en tredjedels nanometer ovanför den supraledande delen. När den fylldes med laddning slocknade supraledningen helt, och det talar emot den förklaring som gäller för vanliga supraledare.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-05-supraledningen-som-gick-att-stanga-av.jpg" length="1096559" type="image/jpeg"/>
+    </item>
     <item>
       <title>Vågen vet inte hur den ska bryta förrän den känner botten — nu går tunnelns storlek att räkna ut i förväg</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-04-bottnen-formar-vagen</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>Läroboken säger att en protons baryontal är jämnt fördelat på dess tre kvarkar, en tredjedel på var och en. Nu har STAR-detektorn vid Brookhaven mätt hur baryontalet flyttar sig i partikelkrockar, och det rör sig nästan dubbelt så villigt som kvarkarna kan förklara. Kandidaten som blir kvar är en gammal och underlig idé: en knut av gluoner.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-17-gluonknuten-i-protonen.jpg" length="766363" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Något i stjärnbilden Örnen slungar i väg protoner hundra gånger hårdare än LHC — nu vet fysikerna att det verkligen är protoner</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-16-protonaccelerator-i-ornen</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-16-protonaccelerator-i-ornen</guid>
-      <pubDate>Sun, 16 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Astropartikelfysik</category>
-      <description>Vintergatan har ett fåtal naturliga acceleratorer som driver upp partiklar till en biljard elektronvolt. Problemet har varit att gammastrålningen de sänder ut ser likadan ut oavsett om det är protoner eller elektroner som accelereras. Ett japanskt lag har nu jämfört femton års gammadata med en kartläggning av gasmolnen i samma riktning — och mönstren följs åt.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-16-protonaccelerator-i-ornen.jpg" length="302086" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

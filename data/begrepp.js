@@ -687,7 +687,7 @@ window.BEGREPP = [
   {
     id: 'supraledare',
     term: 'Supraledare',
-    former: ['supraledare', 'supraledaren', 'supraledarna', 'supraledning', 'supraledningen', 'supraledande'],
+    former: ['supraledare', 'supraledaren', 'supraledarna', 'supraledning', 'supraledningen', 'supraledande', 'kupratsupraledare', 'kupratsupraledarna'],
     kort: 'Ett material som under en viss kritisk temperatur leder ström helt utan elektriskt motstånd — och dessutom trycker ut magnetfält ur sitt inre, så att magneter kan sväva över det.',
     relaterade: ['absoluta-nollpunkten', 'superfluid'],
     body: [
@@ -2038,6 +2038,54 @@ window.BEGREPP = [
       { type: 'p', html: 'Bilder från en rymdstation brukar beskrivas med orden ”här uppe finns ingen tyngdkraft”, och det är fel. På 400&nbsp;kilometers höjd är avståndet till jordens medelpunkt bara omkring 6&nbsp;procent större än vid marken, och eftersom tyngdkraften avtar med avståndet i kvadrat är den kvar med ungefär 89&nbsp;procent av sin styrka. En människa som väger 70&nbsp;kg skulle på en badrumsvåg där uppe visa nästan 62&nbsp;kg, om vågen bara hade något att stå på.' },
       { type: 'p', html: 'Just det är hela poängen. Vad en våg mäter är inte tyngdkraften utan hur hårt underlaget trycker tillbaka. En station i omloppsbana faller hela tiden mot jorden, men rör sig samtidigt så fort i sidled att jordytan kröker sig undan lika fort som stationen faller. Banan blir ett fall som aldrig tar slut. Golvet, väggarna, besättningen och kaffedropparna faller alla åt samma håll med samma acceleration, och därför trycker ingenting mot något annat. Exakt samma tillstånd råder i en hiss vars vajer gått av, och i de få sekunder ett högt falltorn ger.' },
       { type: 'p', html: 'Ordet mikrogravitation används i stället för tyngdlöshet därför att fallet aldrig är helt rent. Delar av farkosten långt från masscentrum går i en aning fel bana, den tunna kvarvarande luften bromsar, och fläktar, pumpar och en besättning som knuffar ifrån väggarna skakar om alltsammans. Det som blir kvar brukar ligga kring en miljondel av tyngdaccelerationen vid marken, vilket är just vad förleden mikro syftar på. För försök som mäter acceleration är den kvarvarande skakningen ofta det som sätter gränsen, och därför byggs det särskilda upphängda skåp och farkoster som skyddar instrumentet från allt utom själva fallet.' }
+    ]
+  },
+  {
+    id: 'magisk-vinkel',
+    term: 'Magisk vinkel',
+    former: ['magisk vinkel', 'magiska vinkeln', 'magiska vinkel', 'magisk-vinkel-grafen', 'magiska vinklar'],
+    kort: 'Den vridning på ungefär 1,1 grader mellan två grafenlager som gör att materialet plötsligt börjar leda ström utan motstånd. Vid nästan alla andra vinklar händer ingenting särskilt.',
+    relaterade: ['grafen', 'supraledare', 'moiremonster', 'cooperpar'],
+    body: [
+      { type: 'p', html: 'Lägg två stycken grafen, alltså två skikt av kolatomer som var för sig är en enda atom tjocka, på varandra så att atomerna hamnar rakt över varandra. Ingenting anmärkningsvärt händer. Vrid sedan det ena skiktet en aning. Vid ungefär 1,1&nbsp;grader förändras materialet fullständigt: det börjar leda ström helt utan motstånd om det kyls tillräckligt, och det uppträder samtidigt i flera andra ovanliga tillstånd som beror på hur många elektroner man matat in i det.' },
+      { type: 'p', html: 'Förklaringen ligger i att vridningen skapar ett storskaligt mönster, ett moirémönster, med en periodicitet som är hundratals gånger större än avståndet mellan enskilda atomer. Elektronerna känner av det mönstret som ett nytt, mycket grovmaskigt gitter. Vid just den magiska vinkeln blir de energiband elektronerna får röra sig i nästan alldeles platta, vilket är fysikens sätt att säga att elektronerna knappt kan flytta på sig. En elektron som inte rör sig fort låter sig lätt styras av knuffarna från sina grannar, och därmed är det inte längre varje elektron för sig utan hela sällskapet tillsammans som avgör vad materialet gör.' },
+      { type: 'p', html: 'Att vinkeln kunde ha den effekten förutsades teoretiskt 2011 och visades i laboratorium 2018. Sedan dess har materialet blivit ett standardverktyg för att studera hur elektroner beter sig kollektivt, eftersom mängden elektroner går att skruva på med en pålagd spänning i stället för att man måste tillverka ett nytt material. Svårigheten är precisionen: en tiondels grads avvikelse räcker för att effekten ska utebli, och att stapla skikten tillräckligt exakt är fortfarande hantverk snarare än industri.' }
+    ]
+  },
+  {
+    id: 'moiremonster',
+    term: 'Moirémönster',
+    former: ['moirémönster', 'moirémönstret', 'moirémönstren', 'moiré', 'moirén'],
+    kort: 'Det nya, mycket större mönster som uppstår när två regelbundna mönster läggs på varandra en aning snedvridna eller med olika täthet.',
+    relaterade: ['grafen', 'magisk-vinkel', 'interferens'],
+    body: [
+      { type: 'p', html: 'Håll två myggnät framför varandra och vrid det ena långsamt. Genom nätet syns då ett mönster av ljusa och mörka fläckar som är mycket större än nätets egna maskor, och som glider i väg åt sidan så fort du vrider en aning till. Samma sak händer när en rutig skjorta filmas och bilden börjar krusa sig, och när två staket ses genom varandra från en bil. Effekten kallas moiré, efter ett franskt ord för ett vattrat tyg.' },
+      { type: 'p', html: 'Det som händer är att de två mönstren omväxlande hamnar i takt och ur takt med varandra. Där maskorna sammanfaller släpper de igenom mycket ljus, där de ligger omlott täcker de för. Avståndet mellan de ljusa fläckarna avgörs av hur liten vinkelskillnaden är: ju mindre vridning, desto längre dröjer det innan mönstren hamnar ur takt, och desto större blir moirémönstret. Vid en mycket liten vridning kan mönstret bli hundratals gånger grövre än de mönster det byggs av.' },
+      { type: 'p', html: 'Just den förstoringen har gjort moiré till ett verktyg i fysiken. Läggs två skikt av atomer på varandra med en liten vridning uppstår ett moirémönster i atomskala, och elektronerna i materialet känner av det som ett nytt gitter med mycket större maskor än det gitter atomerna själva bildar. Materialets elektriska egenskaper kan då förändras fullständigt, trots att inga nya ämnen tillförts. Utanför fysiken används samma effekt för att avslöja förfalskade sedlar och för att mäta hur en yta böjer sig.' }
+    ]
+  },
+  {
+    id: 'cooperpar',
+    term: 'Cooperpar',
+    former: ['cooperpar', 'cooperparet', 'cooperparen', 'cooper-par'],
+    kort: 'Två elektroner som i en supraledare hänger ihop parvis och rör sig samordnat genom materialet. Så länge paren håller ihop möter strömmen inget motstånd.',
+    relaterade: ['supraledare', 'fonon', 'magisk-vinkel', 'kvasipartikel'],
+    body: [
+      { type: 'p', html: 'Två elektroner borde aldrig hålla ihop. De bär samma negativa laddning, och två lika laddningar stöter bort varandra hårdare ju närmare de kommer. Ändå är det precis vad som sker i en supraledare: under en viss temperatur ordnar sig elektronerna två och två i par som beter sig som en enda enhet. Paren är uppkallade efter Leon Cooper, som 1956 visade att en hur svag dragning som helst räcker för att bilda dem, så länge materialet är tillräckligt kallt.' },
+      { type: 'p', html: 'I vanliga supraledare kommer dragningen från atomgittret. En elektron som far förbi drar de positiva atomkärnorna en aning mot sig, och där den passerat blir det för ett kort ögonblick en förtätning av positiv laddning som kan locka till sig nästa elektron. Elektronerna berör aldrig varandra, de kan till och med vara långt ifrån varandra, men gittret förmedlar en dragning mellan dem. Det är kärnan i den förklaring som kallas BCS-teorin och som gav Nobelpriset i fysik 1972.' },
+      { type: 'p', html: 'Poängen med paren är att de uppträder helt annorlunda än ensamma elektroner. Alla par i materialet kan gå in i ett och samma gemensamma tillstånd, som en enda stor kvantvåg genom hela provbiten, och en sådan våg går inte att bromsa lite grann. Antingen får den så mycket energi att paren slits isär, eller så flyter den vidare orörd. Det är därför motståndet inte bara blir litet utan exakt noll. Vad det är som håller ihop paren i vissa nyare material, som kupraterna och grafen med magisk vinkel, är fortfarande omtvistat.' }
+    ]
+  },
+  {
+    id: 'plasmon',
+    term: 'Plasmon',
+    former: ['plasmon', 'plasmonen', 'plasmoner', 'plasmonerna'],
+    kort: 'En gemensam svallvåg i ett materials elektroner, räknad i portioner på samma sätt som ljus räknas i fotoner.',
+    relaterade: ['kvasipartikel', 'fonon', 'foton', 'supraledare'],
+    body: [
+      { type: 'p', html: 'Elektronerna i en metall kan liknas vid en vätska som fyller ut mellanrummen mellan atomerna. Knuffas den vätskan undan på ett ställe blir det ett underskott av negativ laddning där och ett överskott bredvid, och de positiva atomkärnorna drar tillbaka elektronerna. Precis som vatten i ett badkar svänger elektronvätskan då fram och tillbaka. En sådan gemensam svängning kallas plasmasvängning, och dess minsta energiportion kallas plasmon.' },
+      { type: 'p', html: 'Att ge svängningen ett eget namn och behandla den som en partikel är samma sorts knep som när ljud i ett fast material räknas som fononer. Ingen enskild elektron är en plasmon, lika lite som en enskild vattendroppe är en våg. Men eftersom svängningen har en bestämd energi och rör sig genom materialet med en bestämd fart går den att räkna med som om den vore en partikel, och det gör problem med miljarder elektroner hanterbara.' },
+      { type: 'p', html: 'Plasmoner förklarar en hel del av vad man ser omkring sig. Att guld är gult och koppar rödaktigt beror på vid vilka frekvenser elektronerna svänger med, och glasmålningar med guldpartiklar får sin djupröda färg av svängningar i partiklarnas yta. I forskningen används plasmoner för att pressa ihop ljus till ytor mycket mindre än ljusets våglängd, och de har också föreslagits som det som håller ihop elektronpar i vissa supraledare vars mekanism ännu inte är fastslagen.' }
     ]
   }
 ];

@@ -1462,7 +1462,13 @@
             const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
             const clearScreen = () => actionsRef.current.clearScreen && actionsRef.current.clearScreen();
             const clearMeasure = () => { physRef.current.measureZ = null; setMeasureZ(null); if (actionsRef.current.updateMeasure) actionsRef.current.updateMeasure(); };
-            const setView = (v) => actionsRef.current.setView && actionsRef.current.setView(v);
+            // Kameravyn: knappen under fullskärmsknappen cyklar mellan de tre
+            // vyerna, och sidopanelens knappar hoppar direkt till en vald.
+            const VIEWS = ['sida', 'ovan', 'skarm'];
+            const VIEW_NAMES = { sida: 'Snett framifrån', ovan: 'Ovanifrån', skarm: 'Mot skärmen' };
+            const [view, setViewState] = useState('sida');
+            const setView = (v) => { setViewState(v); if (actionsRef.current.setView) actionsRef.current.setView(v); };
+            const nextView = () => setView(VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]);
             const setModeAndClear = (m) => { setMode(m); clearScreen(); };
             // Färdiga försök. "Två skilda fält" är det parameterval där varje
             // spalts eget diffraktionsmönster (bredd ungefär ℓ·λ/b) blir smalare
@@ -1690,8 +1696,9 @@
                                                 </svg>
                                             )}
                                         </button>
-                                        <button className="vy-btn" onClick={() => setView('sida')}
-                                                aria-label="Återställ vyn" title="Återställ vyn">
+                                        <button className="vy-btn" onClick={nextView}
+                                                aria-label="Byt kameravy"
+                                                title={'Byt kameravy: nu ' + VIEW_NAMES[view].toLowerCase() + ', nästa ' + VIEW_NAMES[VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]].toLowerCase()}>
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/>
                                             </svg>

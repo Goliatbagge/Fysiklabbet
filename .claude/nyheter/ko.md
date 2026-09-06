@@ -12,7 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Dubbelspaltförsöket krympt till två atomer** **[BREVTEASER]** — ett lag vid University of
+- **Dubbelspaltförsöket krympt till två atomer** **[BREVTEASER — teasad i brevet 2026-09-06, publiceras TIDIGAST måndag 2026-09-07, senast lördag 2026-09-12]** — ett lag vid University of
   Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
   som Youngs två spalter för en fokuserad elektronstråle, och läser ur
   interferensmönstret hur grannatomerna svänger tillsammans. Ungefär sju
@@ -25,6 +25,32 @@ Format per post:
   de närmast föregående artiklarna varit kvantfysiktunga. Källa:
   https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
   (tillagd 2026-08-27)
+
+- **Svävande magnet söker ultratung mörk materia** — ett korn av permanentmagnet som svävar
+  över en supraledare nära absoluta nollpunkten används som stötdetektor: rör den sig en
+  hundradels atomdiameter har något knuffat till den. Laget vid Rice University täckte ett
+  massområde nio tiopotenser brett och hittade ingenting, men satte gränser. Ingång:
+  rörelsemängd, impuls och magnetisk levitation. OBS: resultaten presenterades vid en
+  konferens — kontrollera om det finns en kollegialt granskad publikation eller bara en
+  förhandspublicering innan den används, och låt det gå tid efter mörk materia-nyheten
+  2026-08-29. Källa (Phys.org 2026-09-05):
+  https://phys.org/news/2026-09-levitated-magnet-frontier-ultraheavy-dark.html
+  (tillagd 2026-09-06)
+
+- **Instängt ljus magnetiserar i nanoskala** — ljus som fångas i en struktur mindre än sin
+  egen våglängd ger upphov till magnetisering. Ingång: ljusets elektromagnetiska natur,
+  och att ett ljusfält kan göra samma sak som en strömslinga. Leta upp originalstudien.
+  Källa (Phys.org 2026-09-02):
+  https://phys.org/news/2026-09-generates-nanoscale-magnetization.html
+  (tillagd 2026-09-06)
+
+- **AI föreslår försöksuppställningar som slår människans** — ett program söker igenom
+  rymden av möjliga optiska uppställningar och hittar lösningar ingen tänkt på. Ingång:
+  vad ett fysikaliskt experiment egentligen är, och skillnaden mellan att räkna ut och att
+  söka fram. Kontrollera vilka uppställningar som faktiskt byggts och vilka som bara
+  simulerats. Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-ai-physics-outperform-human-setups.html
+  (tillagd 2026-09-06)
 
 - **Lysdioden som slipper fånga sitt eget ljus** — en vanlig lysdiod släpper bara ut
   omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom

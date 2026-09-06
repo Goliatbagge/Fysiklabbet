@@ -88,6 +88,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-06-tiohorningen-vid-saturnus-sydpol",
+    date: "2026-09-06",
+    title: "Gasen rusar fram i 400 km/h — men tiohörningen vid Saturnus sydpol står nästan stilla",
+    deck: "Hubbleteleskopet har fångat en tiosidig figur runt Saturnus sydpol, ritad av molnen i en stråljet. Gasen i jeten rör sig omkring 46 gånger snabbare än själva mönstret, och det är just den skillnaden som gör figuren till en våg och inte till en storm.",
+    category: "Astronomi",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-06-tiohorningen-vid-saturnus-sydpol.jpg",
+    imageAlt: "Saturnus fotograferad rakt framifrån mot svart bakgrund. Planetklotet är randigt i gult, gräddvitt och blekrosa, och ringsystemet skär tvärs över bilden som ett smalt, nästan kantställt band.",
+    imageCredit: "Foto: NASA, ESA, STScI, A. Sánchez-Lavega (Universidad del País Vasco), A. Simon (NASA-GSFC), M. Wong (UC Berkeley); bildbehandling A. Pagan (STScI)",
+    tags: ["astronomi", "vågor", "saturnus", "planetatmosfärer", "stråljet", "våglängd", "stående våg", "rotation", "hubble", "strömningslära", "meteorologi"],
+    sources: [
+      { name: "NASA — Hubble tracks new decagon encircling Saturn’s south pole (2 september 2026)", url: "https://science.nasa.gov/missions/hubble/nasas-hubble-tracks-new-decagon-encircling-saturns-south-pole/" },
+      { name: "Physics World — Astronomers discover unusual 10-sided atmospheric wave on Saturn", url: "https://physicsworld.com/a/astronomers-discover-unusual-10-sided-atmospheric-wave-on-saturn/" },
+      { name: "Phys.org — Hubble tracks new decagon encircling Saturn", url: "https://phys.org/news/2026-09-hubble-tracks-decagon-encircling-saturn.html" },
+      { name: "UC Berkeley Space Sciences Laboratory — Decagon wave emerges near Saturn’s south pole", url: "https://www.ssl.berkeley.edu/decagon-wave-emerges-near-saturns-south-pole/" }
+    ],
+    research: {
+      citation: "A. Sánchez-Lavega, A. A. Simon, M. H. Wong med flera, ”A decagon wave around Saturn’s south pole”, Science Advances 12 (36), eaee4251 (2026)",
+      url: "https://doi.org/10.1126/sciadv.aee4251"
+    },
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 2.7 Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" },
+        { label: "Fysik nivå 2 · 2.9 Stående vågor i strängar", href: "katalog.html?id=fy2-2.9" },
+        { label: "Fysik nivå 2 · 1.5 Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" }
+      ],
+      fragor: [
+        "Gasen i stråljeten rör sig 46 gånger snabbare än den tiosidiga figuren. Varför är just den skillnaden det starkaste argumentet för att figuren är en våg och inte en sammanhängande virvel som roterar med gasen?",
+        "På en sluten cirkel kan bara ett helt antal våglängder rymmas. Vilka andra fysikaliska system känner ni igen det villkoret från, och vad är det som spelar rollen av cirkelns omkrets där?",
+        "Sydpolen gick inte att se från jorden mellan 2012 och 2023, och ingen rymdsond har besökt Saturnus sedan 2017. Vad kan man då säga om när figuren bildades, och vad kan man inte säga?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Bilden togs den 29 augusti 2025. När molnen kring Saturnus sydpol projicerades ner på en karta sedd rakt uppifrån framträdde något som ingen hade sett förut: en tiohörning. Tio nästan raka sidor och tio hörn, ritade av molnbanden själva, och i en skala som är svår att ta in. Varvet runt planeten på den breddgrad figuren följer är drygt 200&nbsp;000&nbsp;km, alltså närmare sexton jorddiametrar.' },
+      { type: 'p', html: 'Att en gasplanet ritar räta linjer låter fel. Sådant hör hemma i kristaller. Ändå har Saturnus haft en välkänd sexhörning kring sin <em>norra</em> pol i minst 45 år, ända sedan Voyagersonderna passerade 1980 och 1981, och forskare har letat efter en motsvarighet i söder i decennier utan att hitta någon.' },
+      { type: 'quote', html: 'Vi har aldrig sett något liknande på Saturnus södra halvklot. Sexhörningen i norr har funnits där varje gång vi tittat, i mer än 40 år. Den här figuren är annorlunda.', cite: 'Amy Simon, NASA Goddard Space Flight Center, huvudansvarig för observationsprogrammet OPAL' },
+      { type: 'p', html: 'Till skillnad från sexhörningen ser tiohörningen dessutom ut att bli starkare med tiden. Enligt Simon ger det ett sällsynt tillfälle att följa hur ett jättemönster i en atmosfär växer fram, i stället för att bara hitta ett som redan är färdigt.' },
+
+      { type: 'h2', text: 'Mönstret står stilla medan gasen rusar igenom' },
+      { type: 'p', html: 'Runt sydpolen ligger en stråljet: ett smalt band där gasen blåser åt öster betydligt snabbare än omgivningen. Vid 60,5° sydlig bredd mäter forskarlaget jetens fart till $116\\ \\mathrm{m/s}$, alltså drygt 400&nbsp;km/h.' },
+      { type: 'p', html: 'Tiohörningen driver också åt öster, men bara med $2{,}5\\ \\mathrm{m/s}$, ungefär 9&nbsp;km/h. Gasen rör sig alltså omkring 46 gånger snabbare än den figur den ritar.' },
+      { type: 'p', html: 'Det är studiens viktigaste iakttagelse, och den är samtidigt en definition. Med jetens fart hinner ett gaspaket runt hela varvet på ungefär tjugo dygn och passerar då rakt genom vartenda hörn, utan att hörnen följer med. Mönstret sitter alltså inte i gasen utan i rörelsen: det är en våg. Precis som en våg på ett rep flyttar en form framåt medan repets fibrer bara svänger på stället, flyttar tiohörningen en form medan gasen strömmar igenom den.' },
+      { type: 'p', html: 'Skillnaden är inte akademisk. En virvel, som jordens orkaner eller Jupiters stora röda fläck, består av samma gas hela tiden och roterar med den. En våg gör tvärtom: den bär ett mönster och energi, men inte materia.' },
+
+      { type: 'h2', text: 'Tio våglängder som går jämnt upp' },
+      { type: 'p', html: 'Varför tio sidor i söder och sex i norr? Svaret ligger i att en breddgrad är en sluten cirkel. En våg som ska bita sig fast där måste passa ihop med sig själv efter ett helt varv, och då kan bara ett helt antal våglängder rymmas. Antalet kallas vågtal, och här är det tio.' },
+      { type: 'p', html: 'Villkoret är detsamma som avgör vilka toner en gitarrsträng kan ge. Strängen är fastspänd i båda ändar, så bara de svängningar vars våglängd går jämnt upp mot stränglängden överlever. Alla andra slår ut sig själva. På Saturnus är det varvet runt polen som spelar strängens roll.' },
+      { type: 'p', html: 'Tio vågtoppar och tio vågdalar ryms alltså på varvet. Jeten slingrar sig omväxlande något närmare polen och något längre bort från den, och det är slingringens vändpunkter ögat läser som hörn. Sidorna däremellan ser raka ut helt enkelt för att en tiondels varv är en kort båge.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-06-tiohorningen-vid-saturnus-sydpol-2.jpg', alt: 'Saturnus sydpol sedd rakt uppifrån som en cirkulär karta. Ytterst ligger ljusgula molnband, innanför dem ett brunorange band och i mitten ett mörkt, blågrönt område. Polens läge är utmärkt med ett kryss i en streckad ring.', caption: 'Samma Hubblebild projicerad så att sydpolen ligger i mitten. Krysset markerar polen, och kanten på det mörka polarområdet är inte rund utan bruten i raka avsnitt.', credit: 'Bild: NASA, ESA, STScI, A. Sánchez-Lavega (Universidad del País Vasco), A. Simon (NASA-GSFC), M. Wong (UC Berkeley); bildbehandling A. Pagan (STScI)' },
+      { type: 'p', html: 'Vågen håller sig dessutom på plats. Den ligger mellan 58 och 63° sydlig bredd, och i studien beskrivs den som en slingrande våg som är fångad i höjdled och hålls samman i nord–sydlig led av jetens krökning. Krökningen fungerar med andra ord som kanalväggar: vågen kan löpa runt varvet men inte vandra i väg mot ekvatorn.' },
+
+      { type: 'h2', text: 'Hörnen vandrar fram och tillbaka' },
+      { type: 'p', html: 'I detalj står figuren inte stilla. Hörnens längdgrader svänger fram och tillbaka med en period på 32 dygn och med utslag på mellan 4,6 och 8,4 grader. Tiohörningen pulserar alltså långsamt, ungefär som en gummiring som knuffats till.' },
+      { type: 'p', html: 'Var vågen kommer ifrån är fortfarande öppet. Forskarlaget har prövat sina mätningar mot en förenklad modell av ett tunt vätskeskikt på ett roterande klot, och två förklaringar överlever prövningen. Antingen sattes vågen i gång av en störning som upprepade sig med jämna mellanrum längs jetens snabbaste linje. Eller så drivs den av en mörk antecyklon, en virvel som roterar åt motsatt håll mot ett lågtryck, som ligger strax norr om jeten vid omkring 55° sydlig bredd och mäter några tusen kilometer tvärs över.' },
+
+      { type: 'h2', text: 'Varför den inte upptäcktes tidigare' },
+      { type: 'p', html: 'Saturnus lutar sin rotationsaxel ungefär som jorden gör, men ett varv kring solen tar 29,5 år, så varje årstid varar i drygt sju år. Mellan 2012 och 2023 pekade sydpolen bort från oss och gick helt enkelt inte att se härifrån. Cassinisonden, som kretsade kring planeten mellan 2004 och 2017, hittade aldrig någon långlivad figur där, bara kortvariga störningar som varade i dagar.' },
+      { type: 'p', html: 'När polen väl vred sig fram i synfältet igen var det två amatörastronomer som först lade märke till att kanten på det mörka polarområdet inte var rund utan vågig: Trevor Barry vid Broken Hill Observatory i Australien och Jean-Paul Oger i Frankrike. Båda står som medförfattare till studien.' },
+      { type: 'p', html: 'I Hubbles arkivbilder från 2023 och 2024 går hörnen sedan att hitta i efterhand, fast svagare mot omgivningen. Figuren har alltså vuxit fram medan den observerats, och det är ovanligt. Sexhörningen i norr var färdig när den upptäcktes och har sett i stort sett likadan ut sedan dess.' },
+      { type: 'p', html: 'Nu ska tiohörningen följas vidare, med Hubble och med James Webb-teleskopet. Frågan är om den sätter sig till rätta och blir lika långlivad som sin motsvarighet i norr, eller om den bleknar bort igen innan någon hunnit förklara varför den bildades just nu.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Saturnus är drygt nio gånger så bred som jorden men roterar ett varv på bara 10&nbsp;timmar och 33&nbsp;minuter. Den snabba rotationen är en förutsättning för att atmosfären ska dela upp sig i skarpa band med stråljetar emellan.',
+        'Sexhörningen kring nordpolen låg gömd i bilderna från Voyagersonderna 1980 och 1981 och upptäcktes först flera år senare, när materialet gicks igenom på nytt.',
+        'Två av studiens fjorton författare är amatörastronomer som fotograferar planeter med sina egna teleskop.',
+        'Ingen rymdsond har besökt Saturnus sedan Cassini avslutade sitt uppdrag 2017, så allt vi vet om tiohörningen kommer från teleskop på och kring jorden.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-05-supraledningen-som-gick-att-stanga-av",
     date: "2026-09-05",
     title: "Två grafenlager vridna 1,1 grader leder ström helt utan motstånd — nu har fysiker hittat strömbrytaren",

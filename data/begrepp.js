@@ -2087,5 +2087,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Att ge svängningen ett eget namn och behandla den som en partikel är samma sorts knep som när ljud i ett fast material räknas som fononer. Ingen enskild elektron är en plasmon, lika lite som en enskild vattendroppe är en våg. Men eftersom svängningen har en bestämd energi och rör sig genom materialet med en bestämd fart går den att räkna med som om den vore en partikel, och det gör problem med miljarder elektroner hanterbara.' },
       { type: 'p', html: 'Plasmoner förklarar en hel del av vad man ser omkring sig. Att guld är gult och koppar rödaktigt beror på vid vilka frekvenser elektronerna svänger med, och glasmålningar med guldpartiklar får sin djupröda färg av svängningar i partiklarnas yta. I forskningen används plasmoner för att pressa ihop ljus till ytor mycket mindre än ljusets våglängd, och de har också föreslagits som det som håller ihop elektronpar i vissa supraledare vars mekanism ännu inte är fastslagen.' }
     ]
+  },
+  {
+    id: 'straljet',
+    term: 'Stråljet',
+    former: ['stråljet', 'stråljeten', 'stråljetar', 'stråljetarna', 'jetström', 'jetströmmen', 'jetströmmar', 'jetströmmarna'],
+    kort: 'Ett smalt band i en atmosfär där vinden blåser mycket snabbare än i luften omkring. På jorden styr stråljetarna vädret, och på gasplaneterna ritar de de band man ser i teleskop.',
+    relaterade: ['antecyklon'],
+    body: [
+      { type: 'p', html: 'En stråljet är en flod av luft. Den är några hundra kilometer bred, några kilometer tjock och kan sträcka sig ett helt varv runt planeten, och inne i den blåser det långt hårdare än strax bredvid. Över jorden ligger de vanligaste stråljetarna på tio kilometers höjd och når ofta över 200&nbsp;km/h. Det är därför en flygresa västerut kan ta en timme längre än samma resa österut.' },
+      { type: 'p', html: 'Att de bildas beror på två saker som samverkar: en temperaturskillnad och en rotation. Vid ekvatorn värms atmosfären mer än vid polerna, och den skillnaden sätter luften i rörelse. Men planeten snurrar, och en luftmassa som förflyttar sig i nord–sydlig led behåller sin fart i öst–västlig led. Ju närmare polen den kommer, desto mindre är varvets omkrets, och desto mer springer den om marken under sig. Rörelsen böjs alltså av och samlas i smala band längs breddgraderna i stället för att gå rakt från ekvator till pol.' },
+      { type: 'p', html: 'På jättegasplaneterna blir effekten mycket tydligare, eftersom de snurrar snabbt och saknar kontinenter som bromsar. Saturnus roterar ett varv på tio och en halv timme, och dess atmosfär är därför delad i ett stort antal band med stråljetar emellan, några av dem med vindar över 1&nbsp;500&nbsp;km/h. En stråljet är dessutom inte alltid rak: den kan slingra sig i regelbundna bukter, och på Saturnus har sådana slingringar ritat både en sexhörning och en tiohörning kring polerna.' }
+    ]
+  },
+  {
+    id: 'antecyklon',
+    term: 'Antecyklon',
+    former: ['antecyklon', 'antecyklonen', 'antecykloner', 'antecyklonerna', 'anticyklon', 'anticyklonen', 'anticykloner', 'anticyklonerna', 'antecyklonisk', 'antecykloniska'],
+    kort: 'En virvel i en atmosfär som roterar åt motsatt håll mot ett lågtryck. Kring en antecyklon sjunker luften nedåt, och på jorden betyder det oftast högtryck och klart väder.',
+    relaterade: ['straljet'],
+    body: [
+      { type: 'p', html: 'Väder handlar till stor del om två sorters virvlar. I den ena, cyklonen, är trycket lägst i mitten, luften strömmar inåt och tvingas uppåt, och när den stiger kyls den så att moln och nederbörd bildas. I den andra, antecyklonen, är trycket högst i mitten, luften sjunker långsamt nedåt och värms i stället när den pressas ihop, så att molnen löses upp. Förledet <em>ante</em> betyder just motsatt.' },
+      { type: 'p', html: 'Att de två sorterna roterar åt olika håll beror på planetens rotation. En luftmassa som rör sig norrut eller söderut böjs av, eftersom marken under den rör sig med olika fart på olika breddgrader. Utfallet blir att luften kring ett lågtryck på norra halvklotet cirklar motsols medan den kring ett högtryck cirklar medsols. På södra halvklotet är det tvärtom. Det är därför en väderkarta ser spegelvänd ut beroende på vilket halvklot den visar.' },
+      { type: 'p', html: 'Antecykloner finns också på andra planeter, och där kan de bli enormt långlivade. Jupiters stora röda fläck är en antecyklon som är ungefär lika bred som jorden och har observerats i århundraden. På Saturnus har mörka antecykloner setts nära polerna, och en av dem misstänks vara det som driver den tiosidiga vågen kring sydpolen.' }
+    ]
+  },
+  {
+    id: 'vagtal',
+    term: 'Vågtal',
+    former: ['vågtal', 'vågtalet', 'vågtalen'],
+    kort: 'Ett mått på hur många vågor som ryms på en given sträcka. Går vågen runt en cirkel måste vågtalet vara ett helt tal, annars möter vågen inte sig själv rätt efter ett varv.',
+    relaterade: ['straljet'],
+    body: [
+      { type: 'p', html: 'Våglängden säger hur långt det är mellan två vågtoppar. Vågtalet vänder på frågan och säger i stället hur många våglängder som ryms på en viss sträcka. Går vågen runt något slutet, som en cirkel eller en breddgrad på en planet, är vågtalet helt enkelt antalet vågtoppar man passerar på ett varv. Ett vågtal på tio betyder tio toppar och tio dalar.' },
+      { type: 'p', html: 'Det speciella med en sluten bana är att vågen måste passa ihop med sig själv. Efter ett helt varv är man tillbaka där man började, och där kan vågen inte gärna vara både på toppen och i dalen samtidigt. Alltså kan bara ett helt antal våglängder rymmas, och vågtalet måste vara ett heltal. Alla andra vågor slår ut sig själva. Samma villkor gäller en gitarrsträng, som är fastspänd i båda ändar och därför bara kan svänga i ett bestämt urval av toner.' },
+      { type: 'p', html: 'Villkoret dyker upp överallt där en våg är instängd. Det avgör vilka toner en orgelpipa ger, vilka färger som förstärks i en tunn oljehinna på vatten, och vilka energier en elektron kan ha i en atom, eftersom även elektronen beter sig som en våg. På en planet med kraftiga vindar avgör det hur många bukter en slingrande vind kan lägga sig i runt en pol, och därmed om mönstret ser ut som en sexhörning eller en tiohörning.' }
+    ]
   }
 ];

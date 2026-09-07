@@ -49,12 +49,12 @@ $$
 När ett
 
 - **plustecken** står framför en parentes kan parentesen tas bort *utan att
-  ändra något inuti parentesen*:
-  $a + (b + c) = a + b + c$ och $a + (b - c) = a + b - c$
+  ändra något inuti parentesen*:<br>
+  $a + (b + c) = a + b + c$&emsp;&emsp;$a + (b - c) = a + b - c$
 - **minustecken** står framför en parentes kan parentesen tas bort om man
   samtidigt ändrar tecknen på termerna inuti parentesen (plustecken blir
-  minustecken och minustecken blir plustecken):
-  $a - (b + c) = a - b - c$ och $a - (b - c) = a - b + c$
+  minustecken och minustecken blir plustecken):<br>
+  $a - (b + c) = a - b - c$&emsp;&emsp;$a - (b - c) = a - b + c$
 :::
 
 ::: exempel "Exempel 2 — Minustecken framför parentes"

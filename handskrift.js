@@ -26542,15 +26542,31 @@
     T.underline(T.str('Svar: 60 m', padL, y), y);
     T.stepEnd();
 
-    /* ---- b) hastigheten vid nedslaget ---- */
+    /* ---- b) hastigheten vid nedslaget ----
+     * Frågan gäller hastigheten, så HASTIGHETSFORMELN ställs upp först.
+     * Där saknas tiden, som därför räknas ut ur sträckformeln (en
+     * andragradsekvation, CAS) innan lösningen fortsätter i den
+     * ursprungliga formeln (användarönskemål 2026-09-07). */
     y += adv + 2.0 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Nu kastas stenen UPPÅT med']],
-      [['12 m/s, men landar ändå på']],
-      [['botten. Samma formel, fast nu']],
-      [['är det tiden som är okänd.']]
+      [['Frågan gäller hastigheten vid']],
+      [['nedslaget, så jag börjar med']],
+      [['hastighetsformeln.']]
     ]));
-    T.str('b) Sträcka vid konstant acceleration', padL, y, null, 0.62);
+    T.str('b) Hastighet vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('v=v_0+a·t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Starthastigheten 12 m/s och']],
+      [['accelerationen vet jag, men']],
+      [['tiden i luften saknas. Den får']],
+      [['jag ur sträckformeln.']]
+    ]));
+    T.str('Tiden ur sträckformeln', padL, y, null, 0.62);
     T.pause(300);
     y += 2.5 * F;
     T.fracH('a·t^2', '2', T.str('s=v_0·t+', padL, y), y);
@@ -26608,12 +26624,11 @@
 
     y += adv + 2.0 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Nu vet jag hur länge stenen är i']],
-      [['luften. Hastigheten vid']],
-      [['nedslaget får jag ur']],
-      [['hastighetsformeln.']]
+      [['Nu har jag tiden. Tillbaka till']],
+      [['hastighetsformeln, som jag']],
+      [['började med.']]
     ]));
-    T.str('Hastighet vid konstant acceleration', padL, y, null, 0.62);
+    T.str('Tillbaka i hastighetsformeln', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
     T.str('v=v_0+a·t', padL, y);
@@ -26622,7 +26637,8 @@
     y += adv + 1.5 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
       [['Tiden tar jag oavrundad från']],
-      [['raden ovan.']]
+      [['raden ovan, de andra värdena']],
+      [['är samma som förut.']]
     ]));
     klam = valueBracket(acts, ['v_0=12 m/s', 'a=−9,82 m/s^2', 't=4,929... s'],
                         padL, y, T.s, F);

@@ -451,6 +451,15 @@ Så här bygger du scenen:
    ekvval-scener har en HÖGRE inställningsruta: inget bläck med x > 420
    får ligga ovanför y = 210 (i stället för 150).
 
+   **Varje operation på båda led skrivs ALLTID ut i det valda läget**
+   via `y = ekvOp(y, op, xw, ekvation)` (`mkEkvOp(T, vagg)`): i "Båda
+   led" en egen rad med operationen i blått efter vardera ledet, i
+   "Väggen" streck + operation. Ett enradigt `if (vagg) T.vaggOp(…)`
+   utan båda led-rad är förbjudet (verifieraren ger fel), och en
+   ekvationsoperation ringas aldrig in — ringar är för hopslagning och
+   insättning. Se REGEL "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" i
+   filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
+   stället för att −12x² skrevs ut).
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
 **En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara

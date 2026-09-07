@@ -347,6 +347,42 @@
  * ALLA kurser: uttryck, ekvationer (även när termerna står i samma led
  * och samlas innan något flyttas) och fysikscener.
  * Referensimpl: layoutLikatermer, layoutMultiplicerain b), layoutUtveckla.
+ * ⛔ RINGARNA ÄR BARA FÖR HOPSLAGNING (och insättning, se REGEL
+ * INSÄTTNING). En ekvationsoperation på båda led (subtrahera 12x² från
+ * båda led) ringas ALDRIG in — den redovisas enligt regeln nedan.
+ * Felet har hänt (påpekat 2026-09-07): 12x² ringades in i båda led i
+ * layoutParentesekv i stället för att "−12x²" skrevs ut.
+ *
+ * ⚠️ REGEL (EKVATIONSOPERATIONEN SKRIVS ALLTID UT — I BÅDA LÄGENA,
+ * användarkrav 2026-09-07): varje gång samma operation görs på båda led
+ * i en ekvation eller olikhet ska den SYNAS på arket, i det läge eleven
+ * valt (se EKVATIONSREDOVISNING ovan):
+ *   Båda led: en egen rad där operationen skrivs med BLÅPENNAN efter
+ *             vardera ledet ("12x²−5x−2 −12x² = 12x²−6x −12x²"), och
+ *             därefter resultatraden. Division skrivs som bråk i båda
+ *             led (4x/4 = 28/4).
+ *   Väggen:   lodrätt blått streck till höger om ekvationsraden med
+ *             operationen efter ("| −12x²"), därefter resultatraden.
+ * Det får ALDRIG finnas ett väggsteg utan motsvarande båda led-rad —
+ * skrivsättet `if (vagg) T.vaggOp(…)` på en rad, följt av resultatraden
+ * direkt, är FÖRBJUDET: i läget Båda led försvinner då operationen helt
+ * och eleven ser bara att termen är borta. 26 sådana genvägar i 12
+ * scener rättades 2026-09-07 (parentesekv, variabelbada, trebrak,
+ * ejtillaten, delabelopp, enklagrad, potensekvlos, losolikhet,
+ * variabelnamnare, okandsida, triangelarea). Använd ALLTID helpern
+ * mkEkvOp(T, vagg) — den ger båda lägena och samma stegantal; skriv
+ * inga egna if (vagg)-grenar för term- och divisionsoperationer.
+ * `.claude/verify-handskrift.js` ger fel på enradiga väggsteg och på en
+ * T.ring() strax före en ekvationsoperation.
+ * UNDANTAG (MGN-multiplikation): när båda led multipliceras med minsta
+ * gemensamma nämnaren och nästa rad skriver faktorn in i VARJE täljare
+ * (12x/3 + 12·1/4 = 12·5/6) ÄR den raden båda led-formen — faktorerna
+ * skrivs då med BLUE i läget Båda led (fracSeg), och väggen ("| ·12")
+ * läggs på ekvationsraden i samma klicksteg i läget Väggen. Referens:
+ * layoutTrebrak, layoutVariabelnamnare.
+ * Referensimpl för helpern: layoutParentesekv, layoutVariabelbada,
+ * layoutLosolikhet (olikhetstecken), layoutOkandsida (funktionsform med
+ * bråk i raden).
  *
  * REGEL (FÖRKORTNING OCH FÖRLÄNGNING SKRIVS I TVÅ DRAG, användar-
  * önskemål 2026-08-05): när ett bråk förkortas eller förlängs får pennan
@@ -5369,6 +5405,76 @@
     };
   }
 
+  /* EKVATIONSOPERATION I BÅDA REDOVISNINGSLÄGENA — se REGEL
+   * (EKVATIONSOPERATIONEN SKRIVS ALLTID UT) i filhuvudet. Ett anrop per
+   * operation på båda led; helpern gör rätt sak för det valda läget och
+   * ger SAMMA antal klicksteg i båda:
+   *   Väggen:   lodrätt blått streck vid xw + operationen, eget klicksteg,
+   *             nästa rad (resultatet) läggs dyVagg (2,1·F) ned.
+   *   Båda led: en egen rad där ekvationen skrivs om med operationen i
+   *             BLÅTT efter vardera ledet ("4x+7 −7 = 35 −7"), eget
+   *             klicksteg, resultatet läggs dyRes (2,1·F) under den.
+   *             Division ('/4') skrivs som bråkrad: VL/4 = HL/4.
+   *   var ekvOp = mkEkvOp(T, vagg);
+   *   y = ekvOp(y, '-7', xw, '4x+7=35');      // y = resultatradens baslinje
+   *   T.str('4x=28', padL + 30, y);
+   * ekv är ekvationsraden som text (relationstecknet =, <, >, ≤, ≥ eller
+   * ≠ hittas automatiskt) — eller en FUNKTION function (yb) {…} som själv
+   * skriver båda led-raden när den innehåller bråk eller annat som inte
+   * går att skriva som en sträng (opS skrivs då med BLUE av funktionen).
+   * opt: x0 (radens start, standard padL+30), dy (avstånd ned till båda
+   * led-raden, 2,3·F; bråkrader behöver 3,0–3,2), dyRes, dyVagg, vopt
+   * (vidare till vaggOp, t.ex. { h0: 1.25, h1: 1.15 } vid bråkrader),
+   * bryt (true när raden inte ryms före pilzonen: högerledet fortsätter
+   * på nästa rad med relationstecknet först — verify-handskrift.js säger
+   * till när det behövs).
+   * Returnerar y för resultatraden. Anropande scen skriver resultatraden
+   * själv och avslutar den med T.stepEnd() som vanligt. */
+  function mkEkvOp(T, vagg) {
+    var F = T.s * 100;
+    var REL = /^(.*?)(=|≤|≥|<|>|≠)(.*)$/;
+    return function (y, opS, xw, ekv, opt) {
+      opt = opt || {};
+      if (vagg) {
+        T.vaggOp(opS, xw, y, opt.vopt);
+        T.stepEnd();
+        return y + (opt.dyVagg == null ? 2.1 : opt.dyVagg) * F;
+      }
+      var x0 = opt.x0 == null ? T.padL + 30 : opt.x0, xx, m;
+      if (typeof ekv === 'function') {
+        y += (opt.dy == null ? 2.3 : opt.dy) * F;
+        ekv(y);
+        T.stepEnd();
+        return y + (opt.dyRes == null ? 2.1 : opt.dyRes) * F;
+      }
+      m = ekv.match(REL);
+      if (!m) throw new Error('mkEkvOp: inget relationstecken i "' + ekv + '"');
+      if (opS.charAt(0) === '/') {
+        /* division: båda led som bråk med divisorn i nämnaren */
+        var d = opS.slice(1);
+        y += (opt.dy == null ? 3.0 : opt.dy) * F;
+        xx = T.fracH(m[1], d, x0, y);
+        xx = T.str(m[2], xx, y);
+        T.fracH(m[3], d, xx, y);
+        T.stepEnd();
+        return y + (opt.dyRes == null ? 2.9 : opt.dyRes) * F;
+      }
+      y += (opt.dy == null ? 2.3 : opt.dy) * F;
+      xx = T.str(m[1], x0, y);
+      xx = T.str(opS, xx, y, BLUE);
+      if (opt.bryt) {
+        /* raden ryms inte på arket: högerledet fortsätter på nästa rad
+         * med relationstecknet först (kollegieblock-stil) */
+        y += 2.1 * F;
+        xx = x0 + 30;
+      }
+      xx = T.str(m[2] + m[3], xx, y);
+      T.str(opS, xx, y, BLUE);
+      T.stepEnd();
+      return y + (opt.dyRes == null ? 2.1 : opt.dyRes) * F;
+    };
+  }
+
   /* ---------------- scen: teckna uttryck för ålder (ma1c-2.1 ex 1) ----
    * Linn är x år, Albin är 3 gånger så gammal som Linn var för 4 år
    * sedan. Poängen är att ÖVERSÄTTA orden ett steg i taget: "för … år
@@ -6265,7 +6371,7 @@
      * Ledläget skriver inga operationsrader (bara tankarna), så väggen
      * ritas i SAMMA klicksteg som resultatraden — stegantalet är då
      * automatiskt lika i båda lägena. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xw = Math.max(padL + T.adv('12x^2-5x-2=12x^2-6x'),
                       padL + 30 + T.adv('-5x-2=-6x'),
                       padL + 30 + T.adv('x-2=0')) + 0.9 * F;
@@ -6337,10 +6443,7 @@
       { skriv: '-2=' }
     ];
     var xrest = samla(xv1, y, gv);
-    var xv2 = gv[0].x1;
-    var xh1 = xrest;
-    var xh2 = T.str('12x^2', xh1, y);
-    T.str('-6x', xh2, y);
+    T.str('12x^2-6x', xrest, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6350,14 +6453,12 @@
       [['försvinner']],
       [['andragradstermen helt.']]
     ]);
-    var r1 = T.ring(xv1, xv2, y);
-    T.pause(280);
-    var r2 = T.ring(xh1, xh2, y);
-    if (vagg) T.vaggOp('-12x^2', xw, y);
-    y += 2.4 * F;
+    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
+     * SKRIVS ALLTID UT) — ingen inringning: ringar är för hopslagning.
+     * Båda led-raden ryms inte på en rad ens från padL (31 tecken —
+     * arket tar ~27), så högerledet fortsätter på nästa rad. */
+    y = ekvOp(y, '-12x^2', xw, '12x^2-5x-2=12x^2-6x', { x0: padL, bryt: true });
     T.str('-5x-2=-6x', padL + 30, y);
-    T.fade(r1);
-    T.fade(r2);
     T.stepEnd();
 
     tanke(y, [
@@ -6365,8 +6466,7 @@
       [['och adderar 6x till båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('+6x', xw, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+6x', xw, '-5x-2=-6x');
     T.str('x-2=0', padL + 30, y);
     T.stepEnd();
 
@@ -6374,8 +6474,7 @@
       [['Sist adderar jag 2 till']],
       [['båda led.']]
     ]);
-    if (vagg) T.vaggOp('+2', xw, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+2', xw, 'x-2=0');
     T.str('x=2', padL + 30, y);
     T.stepEnd();
 
@@ -6771,7 +6870,7 @@
      * term-stegen skriver väggen i samma klicksteg som resultatraden,
      * divisionsstegen ersätter bråkraden med ett väggsteg (som i
      * ekvgrund) — stegantalet är lika i båda lägena. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xwA = Math.max(padL + 30 + T.adv('2x+8=9x-20'),
                        padL + 30 + T.adv('8=7x-20'),
                        padL + 30 + T.adv('28=7x')) + 0.9 * F;
@@ -6814,8 +6913,7 @@
       [['MINST koefficient, alltså']],
       [['2x, från båda led.']]
     ]);
-    if (vagg) T.vaggOp('-2x', xwA, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '-2x', xwA, '2x+8=9x-20');
     T.str('8=7x-20', padL + 30, y);
     T.stepEnd();
 
@@ -6824,8 +6922,7 @@
       [['högerledet, så jag']],
       [['adderar 20 till båda led.']]
     ]);
-    if (vagg) T.vaggOp('+20', xwA, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+20', xwA, '8=7x-20');
     T.str('28=7x', padL + 30, y);
     T.stepEnd();
 
@@ -6909,8 +7006,7 @@
       [['vänsterledet: adderar 12x']],
       [['till båda led.']]
     ]);
-    if (vagg) T.vaggOp('+12x', xwB, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+12x', xwB, '74-12x=25x');
     T.str('74=37x', padL + 30, y);
     T.stepEnd();
 
@@ -6959,27 +7055,20 @@
     T.str(')', xx, y);
     T.stepEnd();
 
-    /* bågarna från 3:an respektive 7:an (se REGEL: MULTIPLICERA IN I
-     * PARENTES) — här med mkArc direkt, eftersom ringspannen xc1–xc2/
-     * xc3–xc4 (21x i båda led) måste fångas åt subtraktionssteget */
-    var arcC = mkArc(T);
+    /* bågarna från 3:an respektive 7:an, produkttermen direkt efter
+     * varje båge (se REGEL: MULTIPLICERA IN I PARENTES) — först
+     * vänsterledet, sedan högerledet */
     var yArcC = y - 0.95 * F;
     y += 2.3 * F;
-    var yc = y;
-    var xc1 = padL + 30;
-    arcC((s1 + s1b) / 2, (s2 + s2b) / 2, yArcC, 24, BLUE);
-    var xc2 = T.str('21x', xc1, y);
-    T.pause(200);
-    arcC((s1 + s1b) / 2 + 4, (s3 + s3b) / 2, yArcC, 40, BLUE);
-    var xrest = T.str('-12', xc2, y);
-    T.pause(200);
-    xrest = T.str('=', xrest, y);
-    arcC((s4 + s4b) / 2, (s5 + s5b) / 2, yArcC, 24, BLUE);
-    xrest = T.str('63', xrest, y);
-    T.pause(200);
-    arcC((s4 + s4b) / 2 + 4, (s6 + s6b) / 2, yArcC, 40, BLUE);
-    var xc3 = T.str('+', xrest, y);
-    var xc4 = T.str('21x', xc3, y);
+    xx = multIn(padL + 30, y, yArcC, [
+      { fran: [s1, s1b], till: [s2, s2b], skriv: '21x', hojd: 24 },
+      { fran: [s1, s1b], till: [s3, s3b], skriv: '-12', hojd: 40, dx: 4 }
+    ]);
+    xx = T.str('=', xx, y);
+    multIn(xx, y, yArcC, [
+      { fran: [s4, s4b], till: [s5, s5b], skriv: '63', hojd: 24 },
+      { fran: [s4, s4b], till: [s6, s6b], skriv: '+21x', hojd: 40, dx: 4 }
+    ]);
     T.stepEnd();
 
     tanke(y, [
@@ -6988,14 +7077,10 @@
       [['led. Då försvinner']],
       [['variabeln helt.']]
     ]);
-    var r1 = T.ring(xc1, xc2, yc);
-    T.pause(280);
-    var r2 = T.ring(xc3, xc4, yc);
-    if (vagg) T.vaggOp('-21x', xwC, yc);
-    y += 2.4 * F;
+    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
+     * SKRIVS ALLTID UT) — ingen inringning: ringar är för hopslagning */
+    y = ekvOp(y, '-21x', xwC, '21x-12=63+21x');
     T.str('-12=63', padL + 30, y);
-    T.fade(r1);
-    T.fade(r2);
     T.stepEnd();
 
     tanke(y, [
@@ -7198,9 +7283,12 @@
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
      * MGN-multiplikationen behåller sin utskrivna rad i BÅDA lägena
-     * (raden visar hur varje täljare multipliceras) — väggen läggs till
-     * på ekvationsraden i samma klicksteg. */
-    var vagg = !!cfg.vagg;
+     * (raden visar hur varje täljare multipliceras; faktorerna skrivs
+     * blått i läget Båda led) — väggen läggs till på ekvationsraden i
+     * samma klicksteg (undantaget i REGEL: EKVATIONSOPERATIONEN SKRIVS
+     * ALLTID UT). Term- och divisionsoperationerna går via mkEkvOp. */
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var mgnCol = vagg ? null : BLUE;
     var xw1 = Math.max(
       padL + T.fracW('x', '3') + T.adv('+') + T.fracW('1', '4') +
         T.adv('=') + T.fracW('5', '6') + 6,
@@ -7238,13 +7326,13 @@
       [['om jag multiplicerar varje']],
       [['TÄLJARE med 12.']]
     ]);
-    if (vagg) T.vaggOp('·12', xw1, yEkv1, { h0: 1.25, h1: 1.15 });
+    if (vagg) T.vaggOp('·12', xw1, yEkv1, { h0: 1.25, h1: 1.15 });   /* MGN-undantaget */
     y += 3.2 * F;
-    xx = T.fracH('12x', '3', padL + 30, y);
+    xx = T.fracSeg([['12', mgnCol], ['x']], [['3']], padL + 30, y);
     xx = T.str('+', xx, y);
-    xx = T.fracH('12·1', '4', xx, y);
+    xx = T.fracSeg([['12·', mgnCol], ['1']], [['4']], xx, y);
     xx = T.str('=', xx, y);
-    T.fracH('12·5', '6', xx, y);
+    T.fracSeg([['12·', mgnCol], ['5']], [['6']], xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -7261,8 +7349,7 @@
       [['Subtraherar 3 från båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('-3', xw1, y);
-    y += 2.4 * F;
+    y = ekvOp(y, '-3', xw1, '4x+3=10');
     T.str('4x=7', padL + 30, y);
     T.stepEnd();
 
@@ -7270,8 +7357,7 @@
       [['Dividerar med 4 i båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('/4', xw1, y);
-    y += 3.0 * F;
+    y = ekvOp(y, '/4', xw1, '4x=7', { dyRes: 3.0, dyVagg: 3.0 });
     xx = T.str('x=', padL + 30, y);
     T.fracH('7', '4', xx, y);
     T.stepEnd();
@@ -7350,8 +7436,7 @@
       [['Subtraherar 18 från båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('-18', xw2, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '-18', xw2, '24x+18=60');
     T.str('24x=42', padL + 30, y);
     T.stepEnd();
 
@@ -7360,8 +7445,7 @@
       [['led och förkortar sedan']],
       [['bråket med 6.']]
     ]);
-    if (vagg) T.vaggOp('/24', xw2, y);
-    y += 3.0 * F;
+    y = ekvOp(y, '/24', xw2, '24x=42', { dyRes: 3.0, dyVagg: 3.0 });
     xx = T.str('x=', padL + 30, y);
     xx = T.fracOp('42', '24', '/6', xx, y);
     xx = T.str('=', xx, y);
@@ -7384,9 +7468,12 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
-     * MGN-multiplikationens utskrivna rad behålls i båda lägena; väggen
-     * läggs på ekvationsraden i samma klicksteg. */
+     * MGN-multiplikationens utskrivna rad behålls i båda lägena, med
+     * faktorerna blå i läget Båda led; väggen läggs på ekvationsraden i
+     * samma klicksteg (undantaget i REGEL: EKVATIONSOPERATIONEN SKRIVS
+     * ALLTID UT). */
     var vagg = !!cfg.vagg;
+    var mgnCol = vagg ? null : BLUE;
     var xw = padL + T.fracW('5', '3x') + T.adv('-') + T.fracW('1', '2x') +
              T.adv('=') + T.fracW('1', '6') + 6 + 0.9 * F;
 
@@ -7424,13 +7511,13 @@
       [['Jag multiplicerar varje']],
       [['täljare med 6x.']]
     ]);
-    if (vagg) T.vaggOp('·6x', xw, yEkv, { h0: 1.25, h1: 1.15 });
+    if (vagg) T.vaggOp('·6x', xw, yEkv, { h0: 1.25, h1: 1.15 });   /* MGN-undantaget */
     y += 3.2 * F;
-    xx = T.fracH('6x·5', '3x', padL + 30, y);
+    xx = T.fracSeg([['6x·', mgnCol], ['5']], [['3x']], padL + 30, y);
     xx = T.str('-', xx, y);
-    xx = T.fracH('6x·1', '2x', xx, y);
+    xx = T.fracSeg([['6x·', mgnCol], ['1']], [['2x']], xx, y);
     xx = T.str('=', xx, y);
-    T.fracH('6x·1', '6', xx, y);
+    T.fracSeg([['6x·', mgnCol], ['1']], [['6']], xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -7471,7 +7558,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xw = Math.max(padL + 30 + T.adv('5x-35=4x-28'),
                       padL + 30 + T.adv('x-35=-28')) + 0.9 * F;
 
@@ -7523,16 +7610,14 @@
       [['Subtraherar 4x från båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('-4x', xw, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '-4x', xw, '5x-35=4x-28');
     T.str('x-35=-28', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
       [['Adderar 35 till båda led.']]
     ]);
-    if (vagg) T.vaggOp('+35', xw, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+35', xw, 'x-35=-28');
     var ySvar = y;
     var xs0 = padL + 30;
     var xs1 = T.str('x=7', xs0, y);
@@ -7568,7 +7653,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xw = Math.max(padL + T.adv('5x-300=4 000'),
                       padL + 30 + T.adv('5x=4 300')) + 0.9 * F;
 
@@ -7642,8 +7727,7 @@
       [['Adderar 300 till båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('+300', xw, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+300', xw, '5x-300=4 000');
     T.str('5x=4 300', padL + 30, y);
     T.stepEnd();
 
@@ -7693,7 +7777,7 @@
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
      * Bara f) har term-/faktoroperationer i båda led; rotdragningarna
      * skrivs likadant i båda lägena. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xwF = Math.max(padL + T.adv('f) 3x^2-2,31=17,97'),
                        padL + 30 + T.adv('3x^2=20,28')) + 0.9 * F;
 
@@ -7831,8 +7915,7 @@
       [['Adderar 2,31 till båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('+2,31', xwF, y);
-    y += 2.4 * F;
+    y = ekvOp(y, '+2,31', xwF, '3x^2-2,31=17,97');
     T.str('3x^2=20,28', padL + 30, y);
     T.stepEnd();
 
@@ -7840,8 +7923,7 @@
       [['Dividerar med 3 i båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('/3', xwF, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '/3', xwF, '3x^2=20,28');
     T.str('x^2=6,76', padL + 30, y);
     T.stepEnd();
 
@@ -7984,7 +8066,7 @@
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
      * Bara b) har term-/faktoroperationer i båda led; upphöjningarna
      * skrivs likadant i båda lägena. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xwB = Math.max(padL + T.adv('b) 3x^5-21=0'),
                        padL + 30 + T.adv('3x^5=21')) + 0.9 * F;
 
@@ -8047,8 +8129,7 @@
     tanke(y, [
       [['Adderar 21 till båda led.']]
     ]);
-    if (vagg) T.vaggOp('+21', xwB, y);
-    y += 2.4 * F;
+    y = ekvOp(y, '+21', xwB, '3x^5-21=0');
     T.str('3x^5=21', padL + 30, y);
     T.stepEnd();
 
@@ -8056,8 +8137,7 @@
       [['Dividerar med 3 i båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('/3', xwB, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '/3', xwB, '3x^5=21');
     T.str('x^5=7', padL + 30, y);
     T.stepEnd();
 
@@ -8267,7 +8347,7 @@
      * Olikheter redovisas som ekvationer — även vid väggen. Vändningen
      * av olikhetstecknet syns i resultatraden; vid division med ett
      * negativt tal skrivs operationen /(-7) vid väggen. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xwA = Math.max(padL + T.adv('a) 3x-5<22'),
                        padL + 30 + T.adv('3x<27')) + 0.9 * F;
     var xwB = Math.max(padL + 30 + T.adv('42-7x≤105'),
@@ -8359,8 +8439,7 @@
       [['Subtraherar 42 från båda']],
       [['led.']]
     ]);
-    if (vagg) T.vaggOp('-42', xwB, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '-42', xwB, '42-7x≤105');
     T.str('-7x≤63', padL + 30, y);
     T.stepEnd();
 
@@ -8436,16 +8515,14 @@
       [['koefficient: subtraherar']],
       [['6a från båda led.']]
     ]);
-    if (vagg) T.vaggOp('-6a', xwC, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '-6a', xwC, '6a>15a-90');
     T.str('0>9a-90', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
       [['Adderar 90 till båda led.']]
     ]);
-    if (vagg) T.vaggOp('+90', xwC, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '+90', xwC, '0>9a-90');
     T.str('90>9a', padL + 30, y);
     T.stepEnd();
 
@@ -8454,8 +8531,7 @@
       [['led. 9 är positivt, så']],
       [['tecknet står kvar.']]
     ]);
-    if (vagg) T.vaggOp('/9', xwC, y);
-    y += 2.3 * F;
+    y = ekvOp(y, '/9', xwC, '90>9a');
     T.str('10>a', padL + 30, y);
     T.stepEnd();
 
@@ -13585,7 +13661,7 @@
      * Bara a) får en vägg (·1,3). I b) står x i nämnaren och tas ut i
      * TVÅ tänkta operationer på en gång ("täljaren är lika med
      * produkten...") — det steget skrivs likadant i båda lägena. */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     /* ---- a) x i täljaren ---- */
     var A = [padL + 60, 300], C = [padL + 250, 300], B = [padL + 250, 190];
@@ -13620,8 +13696,16 @@
       [['multiplicerar båda led med']],
       [['1,3 för att få ut det.']]
     ], 1.05);
-    if (vagg) T.vaggOp('·1,3', r.x + 0.6 * F, y, { h0: 1.25, h1: 1.15 });
-    y += 4.2 * F;
+    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
+     * SKRIVS ALLTID UT); raden har ett bråk, så båda led-raden skrivs av
+     * en funktion */
+    y = ekvOp(y, '·1,3', r.x + 0.6 * F, function (yb) {
+      var x = T.str('tan 30°', padL, yb);
+      x = T.str('·1,3', x, yb, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('x', '1,3', x, yb);
+      T.str('·1,3', x, yb, BLUE);
+    }, { dy: 4.2, dyRes: 3.2, dyVagg: 4.2, vopt: { h0: 1.25, h1: 1.15 } });
     xx = T.str('x=1,3·tan 30°', padL, y);
     T.stepEnd();
 
@@ -13850,7 +13934,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
-    var vagg = !!cfg.vagg;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     /* trubbig triangel: bas 12 längs botten, sidan 14 upp åt höger */
     var A = [padL + 70, 300], Bp = [padL + 310, 300];
@@ -13901,8 +13985,16 @@
       [['h står i täljaren, så jag']],
       [['multiplicerar båda led med 14.']]
     ], 1.05);
-    if (vagg) T.vaggOp('·14', r.x + 0.6 * F, y, { h0: 1.25, h1: 1.15 });
-    y += 4.4 * F;
+    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
+     * SKRIVS ALLTID UT); raden har ett bråk, så båda led-raden skrivs av
+     * en funktion */
+    y = ekvOp(y, '·14', r.x + 0.6 * F, function (yb) {
+      var x = T.str('sin 42°', padL, yb);
+      x = T.str('·14', x, yb, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('h', '14', x, yb);
+      T.str('·14', x, yb, BLUE);
+    }, { dy: 4.4, dyRes: 3.2, dyVagg: 4.4, vopt: { h0: 1.25, h1: 1.15 } });
     T.str('h=14·sin 42°', padL, y);
     T.stepEnd();
 

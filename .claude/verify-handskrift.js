@@ -377,6 +377,52 @@ for (const typ of valda) {
   }
 }
 
+/* EKVATIONSOPERATIONEN SKRIVS ALLTID UT (se REGEL i handskrift.js
+ * filhuvud, 2026-09-07). Två genvägar som bara syns i uppspelningen:
+ *   a) ett väggsteg på en rad — `if (vagg) T.vaggOp(…)` följt av
+ *      resultatraden — ger i läget Båda led ingen operationsrad alls;
+ *      eleven ser bara att termen försvann. Skriv y = ekvOp(…) i stället.
+ *      MGN-undantaget (väggen på ekvationsraden när nästa rad skriver
+ *      faktorn in i varje täljare) markeras med kommentaren
+ *      "MGN-undantaget" på samma rad och släpps igenom.
+ *   b) en T.ring() strax före en ekvationsoperation — ringar är för
+ *      hopslagning och insättning, aldrig för "subtrahera 12x² från
+ *      båda led" (12x² ringades in i båda led i parentesekv). */
+{
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const rader = src.split('\n');
+  const genvag = [], ringOp = [];
+  rader.forEach((rad, i) => {
+    if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;               /* kommentar */
+    if (/if \(vagg\)\s*T\.vaggOp\(/.test(rad) && !/MGN-undantaget/.test(rad)) {
+      genvag.push((i + 1) + ': ' + rad.trim().slice(0, 60));
+    }
+    if (/\b(ekvOp|T\.vaggOp)\(/.test(rad)) {
+      for (let k = Math.max(0, i - 6); k < i; k++) {
+        if (/T\.ring\(/.test(rader[k])) {
+          ringOp.push((k + 1) + ': ' + rader[k].trim().slice(0, 60));
+          break;
+        }
+      }
+    }
+  });
+  if (genvag.length) {
+    felTot += genvag.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  väggsteg utan båda led-rad (skriv ' +
+                'y = ekvOp(y, op, xw, ekvation), se REGEL ' +
+                'EKVATIONSOPERATIONEN SKRIVS ALLTID UT):');
+    genvag.forEach(r => console.log('      - rad ' + r));
+  }
+  if (ringOp.length) {
+    felTot += ringOp.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  inringning strax före en ' +
+                'ekvationsoperation (ringar är för hopslagning, inte för ' +
+                'operationer på båda led):');
+    ringOp.forEach(r => console.log('      - rad ' + r));
+  }
+}
+
 /* TECKEN UTAN GLYF — en bokstav som saknas i GLYPHS ritas inte alls men
  * tar plats, så ordet får ett tomrum mitt i ("FÖRST RKS"). Det syns bara
  * i skärmdump, därför räknas missarna medan scenerna byggs. */

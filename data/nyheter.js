@@ -44,6 +44,21 @@
  *               samt bild-/videoblockens `alt` och `credit`. Endast fälten
  *               `html`, faktarutans `items` och bildtexternas `caption` är
  *               HTML — där hör `&nbsp;`, `<em>` och `<sup>` hemma.
+ *   simulering – (valfritt) { href, name, text } — "Prova själv"-ruta som
+ *               renderas DIREKT EFTER artikeltexten (före ordförklaringar
+ *               och källor) när nyheten tydligt knyter an till en av
+ *               Fysiklabbets simuleringar. Det är den sanktionerade vägen
+ *               att länka en simulering: artikeltexten själv förblir
+ *               fristående och nämner aldrig sajtens eget material.
+ *               `href` = simuleringens fil i repo-roten
+ *               (till exempel "fysik2-dubbelspalt.html"), `name` = simuleringens
+ *               namn exakt som i data/simuleringar.js, `text` = en eller två
+ *               meningar (REN TEXT, literalt hårt mellanslag) om vad läsaren
+ *               kan göra i simuleringen och vad hen då ser. Skriv i samma
+ *               ton som "Senaste uppdateringar" på startsidan: vad man gör
+ *               och ser, inte vad som är byggt. Fyll bara i fältet när
+ *               kopplingen är tydlig — en simulering som bara tangerar
+ *               ämnet hör hemma i `larare.moment`, inte här.
  *   audio     – (valfritt) sökväg till en poddfil. Utelämnas oftast: lägg bara
  *               ljudfilen som nyheter/podd/<id>.<ext> så hittar spelaren den.
  *               Se nyheter/podd/README.md för det manuella NotebookLM-flödet.
@@ -104,6 +119,11 @@ const NYHETER_ALL = [
       { name: "Nature (via Europe PMC): Atomic-scale double-slit interferometry with a focused electron probe", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13538068/" }
     ],
     research: { citation: "Koudai Tabata, Takehito Seki, Toma Susi, Ryo Ishikawa och Naoya Shibata, ”Atomic-scale double-slit interferometry with a focused electron probe”, Nature 657, 107–113 (2026)", url: "https://doi.org/10.1038/s41586-026-10914-9" },
+    simulering: {
+      href: "fysik2-dubbelspalt.html",
+      name: "Dubbelspaltexperimentet",
+      text: "Skjut elektroner en i taget mot två spalter och se ränderna växa fram partikel för partikel. Ändra våglängd och spaltavstånd och se hur randavståndet följer med, och sätt en detektor vid spalterna för att se mönstret försvinna så snart vägen observeras."
+    },
     body: [
       { type: 'p', html: 'Thomas Young lät i början av 1800-talet ljus falla mot två smala springor och såg ett mönster av ljusa och mörka ränder breda ut sig bakom dem. Ränderna gick inte att förklara med partiklar som flyger raka vägen. De uppstår när två vågor möts och antingen förstärker eller släcker varandra, och försöket blev därför skolexemplet på att ljus är en våg. I den klassiska uppställningen ligger spalterna omkring en millimeter isär och skärmen någon meter bort.' },
       { type: 'p', html: 'Nu har ett forskarlag vid University of Tokyo gjort om försöket inne i en kristall, med två atomer som spalter och en elektronstråle i stället för ljus. Avståndet mellan spalterna är 136&nbsp;pikometer, alltså 0,136&nbsp;nanometer. Det är ungefär sju tiopotenser mindre än hos Young: en tiomiljondel av hans uppställning.' },

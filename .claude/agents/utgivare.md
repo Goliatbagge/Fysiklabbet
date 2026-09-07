@@ -21,7 +21,9 @@ duktig men gör fel — särskilt med siffror, räkneord, citat och överdrifter
 Om inget annat anges: den ÖVERSTA (nyaste) artikeln i `window.NYHETER` i
 `data/nyheter.js`. Anges ett id — granska den artikeln. Läs hela posten:
 `title`, `deck`, `body` (alla block, inklusive `fact`- och `quote`-block),
-`sources`, `research`, `imageCredit` och ev. `larare`.
+`sources`, `research`, `imageCredit` och ev. `simulering` och `larare`.
+Pekar `simulering` på en sim: kontrollera att filen finns och att nyheten
+verkligen handlar om det fenomen simuleringen visar.
 
 ## Obligatoriska kontroller (samtliga, varje gång)
 

@@ -438,6 +438,44 @@
             .article-larare { padding: 18px 16px; }
         }
 
+        /* "Prova själv" — länk till simuleringen nyheten knyter an till.
+           Ligger direkt EFTER artikeltexten men UTANFÖR den (egen, tydligt
+           avgränsad ruta): brödtexten ska stå på egna ben och nämner aldrig
+           sajtens eget material, medan läsaren som just läst om
+           dubbelspalten ska kunna klicka sig vidare till simuleringen utan
+           att leta. Fältet `simulering` i data/nyheter.js styr rutan. */
+        .article-sim {
+            margin: 34px 0 0; padding: 22px 24px;
+            border: 1px solid var(--lab-line-strong); border-left: 4px solid var(--lab-accent);
+            border-radius: 5px; background: var(--lab-bg-raised);
+        }
+        .article-sim-label {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-accent); margin-bottom: 8px;
+        }
+        .article-sim-name {
+            font-family: var(--lab-font-display); font-size: 21px; line-height: 1.25;
+            color: var(--lab-ink); margin: 0 0 8px;
+        }
+        .article-sim-text {
+            font-size: 15px; line-height: 1.6; color: var(--lab-ink-soft); margin: 0 0 16px;
+        }
+        body.laborans .article-sim-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-accent); text-decoration: none;
+            border: 1px solid var(--lab-accent); border-radius: 999px; padding: 8px 15px;
+            transition: background 0.15s, color 0.15s;
+        }
+        body.laborans .article-sim-link:hover {
+            background: var(--lab-accent); color: var(--lab-bg-panel);
+        }
+        .article-sim-link svg { flex: none; }
+        @media (max-width: 600px) {
+            .article-sim { padding: 18px 16px; }
+            .article-sim-name { font-size: 19px; }
+        }
+
         /* Dela-artikel-rad */
         .article-share {
             margin: 30px 0 6px; padding-top: 22px;
@@ -1360,6 +1398,8 @@
                         {a.body.map((b, i) => <Block b={b} key={i} />)}
                     </div>
 
+                    {a.simulering && <SimRuta s={a.simulering} />}
+
                     {ordIds.length > 0 && (
                         <div className="article-ord">
                             <div className="article-sources-label">Ordförklaringar</div>
@@ -1409,6 +1449,30 @@
 
                     <ShareBar a={a} />
                 </article>
+            );
+        }
+
+        // "Prova själv": länk till simuleringen nyheten knyter an till.
+        //
+        // Renderas direkt efter artikeltexten, i en egen ruta. Artikeln
+        // själv nämner aldrig Fysiklabbets material (standalone-regeln),
+        // men när nyheten så tydligt handlar om något som går att prova i
+        // en simulering ska läsaren hitta dit utan att leta.
+        function SimRuta({ s }) {
+            if (!s || !s.href) return null;
+            return (
+                <aside className="article-sim no-begrepp" id="prova-sjalv">
+                    <div className="article-sim-label">Prova själv</div>
+                    {s.name && <p className="article-sim-name">{s.name}</p>}
+                    {s.text && <p className="article-sim-text">{s.text}</p>}
+                    <a className="article-sim-link" href={s.href}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+                        </svg>
+                        Öppna simuleringen
+                    </a>
+                </aside>
             );
         }
 

@@ -278,6 +278,16 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
   Fysik 2", rubriker som "Koppling till gymnasiefysiken" e.d. Förklara i stället
   fysiken direkt i texten. (Att välja nyheter som *anknyter* till gymnasiefysikens
   områden är fortsatt rätt — men själva artikeltexten ska inte nämna kurserna.)
+- **Knyter nyheten tydligt an till en simulering: fyll i fältet `simulering`**
+  (`{ href, name, text }`, se huvudet i `data/nyheter.js`). Det renderas som
+  en egen "Prova själv"-ruta direkt efter artikeltexten, med länk till
+  simuleringen — den sanktionerade vägen att länka sajtens eget material
+  (uttryckligt önskemål 2026-09-07: dubbelspaltnyheten ska leda vidare till
+  dubbelspaltsimuleringen). Brödtexten förblir alltså fristående. Kravet är
+  en TYDLIG koppling: nyheten handlar om samma fenomen som simuleringen
+  visar. Tangerar simuleringen bara ämnet hör länken hemma i
+  `larare.moment`. `name` skrivs exakt som i `data/simuleringar.js`, och
+  `text` säger vad läsaren kan göra och se, i ren text.
 
 ## Bildregler
 
@@ -441,7 +451,8 @@ Se `nyheter/podd/README.md`.
 Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 `id`, `date`, `title`, `deck`, `category`, `readingTime`, `image`, `imageAlt`,
 `imageCredit`, `tags[]`, `sources[{name,url}]`, `research{citation,url}|null`,
-`body[]` (block: `p` / `h2` / `quote` / `fact` / `image`).
+`body[]` (block: `p` / `h2` / `quote` / `fact` / `image`), samt valfritt
+`simulering{href,name,text}` (se Skrivregler) och `larare{moment,fragor}`.
 
 `image`-blocket är för extra pressbilder insprängda i brödtexten:
 `{ type: 'image', src: 'nyheter/bilder/<id>-2.jpg', alt: '…', caption: '…', credit: '…' }`.
@@ -459,6 +470,8 @@ Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 - Bryta mot projektets typografi-/emoji-regler i CLAUDE.md.
 - Hänvisa i artikeltexten till gymnasiekurserna (Fysik nivå 1/2) eller till
   Fysiklabbets egna genomgångar/simuleringar (se Skrivregler: standalone).
+  Länken till en simulering går via fältet `simulering`, aldrig via
+  brödtexten.
 - Lägga en manuell länk till ordlistan i artikeltexten (länkningen är
   automatisk) — eller publicera en artikel full av oförklarade facktermer
   utan att fylla på `data/begrepp.js`.

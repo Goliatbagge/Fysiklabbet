@@ -137,7 +137,15 @@ if (katalogHtml) {
     }
     const iBygget = new Map();
     for (const id of B.loadAvsnitt()) iBygget.set(id.split('-')[0], true);
-    const saknas = [...iSidan.entries()].filter(([, kod]) => !iBygget.has(kod));
+    // Dolda kurser (course.dold i data/katalog.js, t.ex. Matematik
+    // specialisering under uppbyggnad) ska INTE ge några avsnitt i bygget —
+    // de hålls medvetet utanför sitemapen och nås bara via ?id=.
+    const KAT = (() => { const w = {}; new Function('window', las('data/katalog.js'))(w); return w.KATALOG || {}; })();
+    const dolda = new Set();
+    for (const subj of Object.values(KAT)) {
+      for (const [namn, kurs] of Object.entries(subj.courses || {})) if (kurs.dold) dolda.add(namn);
+    }
+    const saknas = [...iSidan.entries()].filter(([namn, kod]) => !iBygget.has(kod) && !dolda.has(namn));
     if (saknas.length) {
       varning.push('Kurser i katalog.htmls HASH_COURSES som inte gav några avsnitt i ' +
         `bygget: ${saknas.map(([namn, kod]) => `${kod} (${namn})`).join(', ')}. ` +
@@ -190,7 +198,7 @@ if (sitemapPaDisk) {
 // tillbaka till standardsidan, så Google indexerar hundratals identiska
 // sidor. Regexpen nedan är kopierad ur katalog.htmls parseInitialState() och
 // måste hållas i takt med den.
-const KATALOG_RE = /^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/;
+const KATALOG_RE = /^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/;
 const avsnitt = B.loadAvsnitt();
 if (!avsnitt.length) {
   fel.push('Inga teoriavsnitt hittades i data/katalog.js — har kursnamnen ändrats? ' +

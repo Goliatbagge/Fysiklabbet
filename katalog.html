@@ -581,6 +581,9 @@
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
             if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
             if (courseName === 'Matematik fortsättning nivå 2') return 'ma4';
+            // Dold kurs under uppbyggnad — nås bara via ?id=maspec-… (se
+            // kommentaren vid kursen i data/katalog.js).
+            if (courseName === 'Matematik specialisering') return 'maspec';
             return null;
         }
 
@@ -3030,6 +3033,7 @@
             ma2c: ['Matematik', 'Matematik nivå 2c'],
             ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
             ma4: ['Matematik', 'Matematik fortsättning nivå 2'],
+            maspec: ['Matematik', 'Matematik specialisering'],   // dold kurs
         };
         function parseInitialState() {
             const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
@@ -3047,7 +3051,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

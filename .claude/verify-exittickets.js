@@ -32,7 +32,8 @@ for (const subj of Object.values(WK.KATALOG)) {
                    : courseName === 'Matematik nivå 2b' ? 'ma2b'
                    : courseName === 'Matematik nivå 2c' ? 'ma2c'
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
-                   : courseName === 'Matematik fortsättning nivå 2' ? 'ma4' : 'fy1';
+                   : courseName === 'Matematik fortsättning nivå 2' ? 'ma4'
+                   : courseName === 'Matematik specialisering' ? 'maspec' : 'fy1';
         for (const ch of Object.values(course.chapters || {})) {
             // Sammanfattningsavsnitt (num 'K.S') har repetitionsspel och
             // enhetskollavsnitt (num 'K.E') har enhetskollsquiz i stället

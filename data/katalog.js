@@ -725,6 +725,43 @@ window.KATALOG = {
           },
         },
       },
+      // ═══════════════════════════════════════════════════════════════
+      // Matematik specialisering — DOLD kurs under uppbyggnad (2026-09-07).
+      // `dold: true` håller kursen utanför KATALOG_FLAT, och därmed utanför
+      // sökrutan, sitemapen, RSS/delningssidorna och verify-sok. Kursen nås
+      // ENBART via direktadress: katalog.html?id=maspec-4.1 (routingen i
+      // katalog.html känner kurskoden 'maspec'). Ämne-menyn länkar inte hit.
+      // När kursen ska visas: ta bort `dold`, lägg till 'Matematik
+      // specialisering': 'maspec' i KURSKOD (data/build-nyheter-og.js) och
+      // länka den i Ämne-menyerna (katalog.html, index.html, avsnitt.html,
+      // simuleringar.html) — samt uppdatera välkomstmejlet (se CLAUDE.md).
+      // Kapitelnumren följer boken (kapitel 4 = Vektorer), så numreringen
+      // stämmer även när tidigare kapitel läggs till senare.
+      'Matematik specialisering': {
+        label: 'Matematik specialisering',
+        dold: true,
+        intro: {
+          tagline: 'Fördjupning för dig som vill läsa mer matematik än fortsättningsnivåerna ger.',
+          paragraphs: [
+            'Matematik specialisering bygger vidare på fortsättningskurserna och tar upp områden som ligger nära universitetets första matematikkurser. Vektorerna är ett av dem. Här får vektorn en egen algebra med addition, subtraktion och multiplikation med tal, först grafiskt och sedan med koordinater. Den används för att beskriva krafter, hastigheter och geometri i planet och rummet.',
+            'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel och pennlösningar, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+          ],
+          bullets: [
+            'Du lär dig: vektorer som riktade sträckor och räkning med dem',
+            'Du tränar på: polygon- och parallellogrammetoden, multiplar och differenser',
+            'Du möter: resultanter, ekvivalensklasser och parallella vektorer',
+          ],
+        },
+        chapters: {
+          'Vektorer': {
+            number: 4,
+            intro: 'Vektorer är storheter med både storlek och riktning. Kapitlet börjar med de grundläggande räkneoperationerna, ritade för hand i rutnät: vektorer som riktade sträckor, addition med polygon- och parallellogrammetoden, multiplikation med tal och subtraktion som addition av den motsatta vektorn.',
+            sections: [
+              { num: '4.1', title: 'Grundläggande vektoroperationer', description: 'Skalära och vektoriella storheter, vektorer som riktade sträckor och ekvivalensklasser, addition med polygon- och parallellogrammetoden, multiplikation med tal och subtraktion.', href: null, icon: null, keywords: ['vektor','vektorer','skalär','vektoriell storhet','riktad sträcka','ekvivalensklass','polygonmetoden','parallellogrammetoden','vektoraddition','vektorsubtraktion','resultant','parallella vektorer','multiplikation med tal','kommutativa lagen'] },
+            ],
+          },
+        },
+      },
     },
   },
 };
@@ -947,6 +984,10 @@ window.KATALOG_FLAT = (function () {
     for (const courseName in subject.courses) {
       const course = subject.courses[courseName];
       if (!course.chapters) continue;
+      // Dolda kurser (course.dold, t.ex. Matematik specialisering under
+      // uppbyggnad) hålls utanför den platta listan — och därmed utanför
+      // sökrutan, sitemapen och delningssidorna. De nås bara via ?id=.
+      if (course.dold) continue;
       for (const chapterName in course.chapters) {
         const chapter = course.chapters[chapterName];
         for (const section of (chapter.sections || [])) {

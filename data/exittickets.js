@@ -24177,4 +24177,104 @@ window.EXITTICKETS = {
     ],
   },
 ],
+// ── Matematik specialisering — kapitel 4 Vektorer ────────────────────
+
+'maspec-4.1': [
+  {
+    question: 'Vad skiljer en vektoriell storhet från en skalär?',
+    choices: [
+      'En skalär storhet har en enhet, en vektoriell saknar enhet',
+      'En vektoriell storhet är alltid större än en skalär',
+      'En vektoriell storhet har både storlek och riktning, en skalär har bara storlek',
+      'En skalär storhet kan bara vara positiv',
+    ],
+    correct: 2,
+    why: [
+      'Båda sorterna har enhet. Massa mäts i kilogram och kraft i newton.',
+      'Storleken säger ingenting om vilken sort storheten är. Det är riktningen som skiljer dem åt.',
+      'En kraft på 10 N är inte fullständigt beskriven förrän man vet åt vilket håll den drar. En massa på 3 kg behöver ingen riktning.',
+      'En temperatur på −5 °C är en skalär. Tecknet har inget med riktning att göra.',
+    ],
+  },
+  {
+    question: 'Vektorerna $\\vec{u}$ och $\\vec{v}$ ligger längs samma linje men är riktade åt motsatt håll. Vektorn $\\vec{u}$ har längden 3 och $\\vec{v}$ har längden 8. Vilken längd har $\\vec{u} + \\vec{v}$?',
+    choices: [
+      '5',
+      '11',
+      '$\\sqrt{73}$',
+      '24',
+    ],
+    correct: 0,
+    why: [
+      'Spets mot start: $\\vec{v}$ går 8 steg fram och $\\vec{u}$ går 3 steg tillbaka, så summan får längden $8 - 3 = 5$, riktad som $\\vec{v}$.',
+      '$3 + 8 = 11$ gäller bara om vektorerna drar åt samma håll. Här är de motriktade och tar delvis ut varandra.',
+      'Pythagoras sats används när vektorerna är vinkelräta. Här ligger de längs samma linje.',
+      'Längder multipliceras inte vid addition av vektorer.',
+    ],
+  },
+  {
+    question: 'När räknas två riktade sträckor som samma vektor?',
+    choices: [
+      'När de har samma startpunkt',
+      'När de är lika långa',
+      'När de ligger på samma linje',
+      'När de är lika långa och har samma riktning',
+    ],
+    correct: 3,
+    why: [
+      'Startpunkten ingår inte i vektorn. En vektor får parallellförflyttas fritt.',
+      'Längden räcker inte. Två lika långa pilar som pekar åt olika håll är olika vektorer.',
+      'Pilar på samma linje kan ha olika längd eller peka åt motsatt håll.',
+      'Längd och riktning är allt som ingår i en vektor. Var den ritas spelar ingen roll, och alla sådana pilar tillhör samma ekvivalensklass.',
+    ],
+  },
+  {
+    question: 'Vektorerna $\\vec{u}$ och $\\vec{v}$ ritas från samma punkt och kompletteras till en parallellogram. Vilken vektor är $\\vec{u} + \\vec{v}$ enligt parallellogrammetoden?',
+    choices: [
+      'Sidan mitt emot $\\vec{u}$',
+      'Diagonalen från den gemensamma startpunkten',
+      'Diagonalen från spetsen på $\\vec{v}$ till spetsen på $\\vec{u}$',
+      'Sidan mitt emot $\\vec{v}$',
+    ],
+    correct: 1,
+    why: [
+      'Sidan mitt emot $\\vec{u}$ är en parallellförflyttad kopia av $\\vec{u}$, alltså samma vektor som $\\vec{u}$.',
+      'Följer man $\\vec{u}$ och sedan sidan som är parallell med $\\vec{v}$ hamnar man i parallellogrammens bortre hörn. Diagonalen dit från startpunkten är summan.',
+      'Den diagonalen är differensen $\\vec{u} - \\vec{v}$, inte summan.',
+      'Sidan mitt emot $\\vec{v}$ är samma vektor som $\\vec{v}$.',
+    ],
+  },
+  {
+    question: 'Vad gäller för vektorn $-2\\vec{u}$ jämfört med $\\vec{u}$?',
+    choices: [
+      'Hälften så lång, samma riktning',
+      'Dubbelt så lång, samma riktning',
+      'Dubbelt så lång, motsatt riktning',
+      'Lika lång, motsatt riktning',
+    ],
+    correct: 2,
+    why: [
+      'Faktorn 2 gör vektorn längre, inte kortare. Hälften så lång hade krävt faktorn $\\dfrac{1}{2}$.',
+      'Faktorn är negativ, så riktningen vänds.',
+      'Talet $|{-2}| = 2$ ger dubbla längden och minustecknet vänder riktningen. $\\vec{u}$ och $-2\\vec{u}$ är parallella.',
+      'Lika lång och motriktad är $-\\vec{u}$, alltså faktorn $-1$.',
+    ],
+  },
+  {
+    question: 'Vektorerna $\\vec{u}$ och $\\vec{v}$ ritas från samma punkt. Hur konstrueras $\\vec{u} - \\vec{v}$?',
+    choices: [
+      'Som vektorn från spetsen på $\\vec{v}$ till spetsen på $\\vec{u}$',
+      'Som vektorn från spetsen på $\\vec{u}$ till spetsen på $\\vec{v}$',
+      'Som diagonalen från den gemensamma startpunkten',
+      'Som $\\vec{u}$ parallellförflyttad till spetsen på $\\vec{v}$',
+    ],
+    correct: 0,
+    why: [
+      'Följer man $\\vec{v}$ och sedan $\\vec{u} - \\vec{v}$ hamnar man i spetsen på $\\vec{u}$. Det stämmer precis för pilen från $\\vec{v}$:s spets till $\\vec{u}$:s spets.',
+      'Den pilen är $\\vec{v} - \\vec{u}$, den motsatta vektorn till $\\vec{u} - \\vec{v}$. Ordningen i subtraktionen avgör riktningen.',
+      'Diagonalen från startpunkten är summan $\\vec{u} + \\vec{v}$.',
+      'Att flytta $\\vec{u}$ till spetsen på $\\vec{v}$ är ett steg i polygonmetoden för summan $\\vec{v} + \\vec{u}$.',
+    ],
+  },
+],
 };

@@ -14412,7 +14412,7 @@
 
     tanke(y, [
       [['Riktningen är den längre']],
-      [['vektorns: v vinner, så summan']],
+      [['vektorns: v är längst, så summan']],
       [['pekar åt höger.']]
     ]);
     y += 3.6 * F;
@@ -14480,8 +14480,8 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Rimligt? 10 N är längre än']],
-      [['båda krafterna men kortare än']],
+      [['Rimligt? 10 N är större än']],
+      [['båda krafterna men mindre än']],
       [['6,0+8,0=14 N: de drar ju']],
       [['åt olika håll.']]
     ]);

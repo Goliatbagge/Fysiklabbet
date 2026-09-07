@@ -39645,4 +39645,126 @@ $$
 **Svar:** $z = \\ln 2 + \\dfrac{\\pi}{2}i$`,
         },
     ],
+    // ── Matematik specialisering — kapitel 4 Vektorer ──────────────────
+    'maspec-4.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken av följande storheter är vektoriell?`,
+            choices: [
+                `Massa`,
+                `Förflyttning`,
+                `Temperatur`,
+                `Energi`,
+            ],
+            correct: 1,
+            solution: `En vektoriell storhet har både storlek och riktning. En förflyttning på 500 m är inte fullständigt beskriven förrän man vet åt vilket håll den går. Massa, temperatur och energi saknar riktning och är skalära.
+
+**Svar:** Förflyttning`,
+        },
+        {
+            level: 1,
+            question: `Vektorerna $\\vec{u}$ och $\\vec{v}$ ligger längs samma linje och är riktade åt motsatt håll. Vektorn $\\vec{u}$ har längden 2 och vektorn $\\vec{v}$ har längden 9. Bestäm längden av $\\vec{u} + \\vec{v}$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Vektorerna adderas spets mot start. Den längre vektorn $\\vec{v}$ går 9 steg åt sitt håll och $\\vec{u}$ går 2 steg tillbaka, så summan blir
+
+$$
+|\\vec{u} + \\vec{v}| = 9 - 2 = 7
+$$
+
+riktad åt samma håll som $\\vec{v}$.
+
+**Svar:** 7`,
+        },
+        {
+            level: 1,
+            question: `Vektorn $\\vec{w}$ går 4 rutor åt höger och 2 rutor uppåt. Hur ser vektorn $-3\\vec{w}$ ut?`,
+            choices: [
+                `12 rutor åt höger och 6 rutor uppåt`,
+                `4 rutor åt vänster och 2 rutor nedåt`,
+                `12 rutor åt vänster och 6 rutor nedåt`,
+                `12 rutor åt höger och 6 rutor nedåt`,
+            ],
+            correct: 2,
+            solution: `Talet 3 gör vektorn tre gånger så lång: $3 \\cdot 4 = 12$ rutor och $3 \\cdot 2 = 6$ rutor. Minustecknet vänder riktningen, så $-3\\vec{w}$ går åt vänster och nedåt.
+
+**Svar:** 12 rutor åt vänster och 6 rutor nedåt`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två krafter verkar på en kropp och är vinkelräta mot varandra. Den ena har storleken $5{,}0\\ \\mathrm{N}$ och den andra $12\\ \\mathrm{N}$. Bestäm resultantens storlek.`,
+            answer: { value: 13, unit: 'N' },
+            solution: `Ritas krafterna spets mot start bildar de tillsammans med resultanten en rätvinklig triangel där resultanten är hypotenusan. Pythagoras sats ger
+
+$$
+|\\vec{F}|^2 = 5{,}0^2 + 12^2 = 25 + 144 = 169
+$$
+
+$$
+|\\vec{F}| = \\sqrt{169} = 13
+$$
+
+Kontroll: 13 N är större än båda krafterna men mindre än $5{,}0 + 12 = 17\\ \\mathrm{N}$, precis som det ska vara när krafterna drar åt olika håll.
+
+**Svar:** 13 N`,
+        },
+        {
+            level: 2,
+            question: `Vektorn $\\vec{u}$ går 4 rutor åt höger och 1 ruta uppåt. Vektorn $\\vec{v}$ går 2 rutor åt vänster och 3 rutor uppåt. Hur ser $\\vec{u} - \\vec{v}$ ut?`,
+            choices: [
+                `2 rutor åt höger och 4 rutor uppåt`,
+                `6 rutor åt höger och 2 rutor nedåt`,
+                `6 rutor åt vänster och 2 rutor uppåt`,
+                `2 rutor åt vänster och 4 rutor nedåt`,
+            ],
+            correct: 1,
+            solution: `Subtraktionen skrivs om som en addition med den motsatta vektorn: $\\vec{u} - \\vec{v} = \\vec{u} + (-\\vec{v})$. Den motsatta vektorn $-\\vec{v}$ går 2 rutor åt höger och 3 rutor nedåt.
+
+Läggs $-\\vec{v}$ i spetsen på $\\vec{u}$ går vi sammanlagt $4 + 2 = 6$ rutor åt höger och $1 - 3 = -2$ rutor uppåt, det vill säga 2 rutor nedåt.
+
+(Alternativet "2 rutor åt höger och 4 uppåt" är summan $\\vec{u} + \\vec{v}$, och "6 åt vänster och 2 uppåt" är $\\vec{v} - \\vec{u}$, den motsatta vektorn till svaret.)
+
+**Svar:** 6 rutor åt höger och 2 rutor nedåt`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vektorerna $\\vec{u}$ och $\\vec{v}$ har längderna $|\\vec{u}| = 5$ och $|\\vec{v}| = 7$. När de ritas från samma punkt är vinkeln mellan dem $60^\\circ$. Bestäm längderna av $\\vec{u} + \\vec{v}$ och $\\vec{u} - \\vec{v}$.`,
+            choices: [
+                `$|\\vec{u} + \\vec{v}| = 12$ och $|\\vec{u} - \\vec{v}| = 2$`,
+                `$|\\vec{u} + \\vec{v}| = \\sqrt{39} \\approx 6{,}2$ och $|\\vec{u} - \\vec{v}| = \\sqrt{109} \\approx 10{,}4$`,
+                `$|\\vec{u} + \\vec{v}| = \\sqrt{109} \\approx 10{,}4$ och $|\\vec{u} - \\vec{v}| = \\sqrt{39} \\approx 6{,}2$`,
+                `$|\\vec{u} + \\vec{v}| = |\\vec{u} - \\vec{v}| = \\sqrt{74} \\approx 8{,}6$`,
+            ],
+            correct: 2,
+            solution: `**Insikten:** summan och differensen är parallellogrammens två diagonaler, och deras längder fås ur varsin triangel med cosinussatsen. Fällan är vilken vinkel som hör till vilken diagonal.
+
+**Summan.** Ritas $\\vec{v}$ spets mot start efter $\\vec{u}$ bildar $\\vec{u}$, $\\vec{v}$ och $\\vec{u} + \\vec{v}$ en triangel. Vinkeln mellan sidorna $\\vec{u}$ och $\\vec{v}$ i den triangeln är **inte** $60^\\circ$ utan grannvinkeln $180^\\circ - 60^\\circ = 120^\\circ$, eftersom $\\vec{v}$ nu startar i spetsen på $\\vec{u}$. Cosinussatsen ger
+
+$$
+|\\vec{u} + \\vec{v}|^2 = 5^2 + 7^2 - 2 \\cdot 5 \\cdot 7 \\cdot \\cos 120^\\circ = 25 + 49 + 35 = 109
+$$
+
+$$
+|\\vec{u} + \\vec{v}| = \\sqrt{109} \\approx 10{,}4
+$$
+
+**Differensen.** Ritas $\\vec{u}$ och $\\vec{v}$ från samma punkt är $\\vec{u} - \\vec{v}$ sidan mellan spetsarna, mitt emot vinkeln $60^\\circ$:
+
+$$
+|\\vec{u} - \\vec{v}|^2 = 5^2 + 7^2 - 2 \\cdot 5 \\cdot 7 \\cdot \\cos 60^\\circ = 74 - 35 = 39
+$$
+
+$$
+|\\vec{u} - \\vec{v}| = \\sqrt{39} \\approx 6{,}2
+$$
+
+Rimlighet: summan ska vara kortare än $5 + 7 = 12$ (vektorerna drar inte åt exakt samma håll) och differensen längre än $7 - 5 = 2$. Båda värdena ligger som de ska.
+
+**Svar:** $|\\vec{u} + \\vec{v}| = \\sqrt{109} \\approx 10{,}4$ och $|\\vec{u} - \\vec{v}| = \\sqrt{39} \\approx 6{,}2$
+
+**Generell slutsats:** i parallellogrammen som $\\vec{u}$ och $\\vec{v}$ spänner upp gäller $|\\vec{u} + \\vec{v}|^2 + |\\vec{u} - \\vec{v}|^2 = 2|\\vec{u}|^2 + 2|\\vec{v}|^2$, här $109 + 39 = 148 = 2 \\cdot 25 + 2 \\cdot 49$. Det är ett bra sätt att kontrollera räkningen.`,
+        },
+    ],
 };

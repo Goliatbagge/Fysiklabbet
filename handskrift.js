@@ -14317,6 +14317,424 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ================= Matematik specialisering 4.1 — vektorer ============
+   * Gemensamma verktyg för vektorscenerna: streckad linje (parallello-
+   * grammens hjälpsidor), streckad vektorpil (resultanten, se REGEL om
+   * kraftfigurer) och etikett med pil över varje vektorbokstav (u, v, F). */
+  function vekVerktyg(T, F) {
+    function dash(p1, p2, col) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        T.line([p1[0] + dx * t0, p1[1] + dy * t0],
+               [p1[0] + dx * t1, p1[1] + dy * t1], col);
+      }
+    }
+    function dashPil(p1, p2, col) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L;
+      dash(p1, [p2[0] - ux * 7, p2[1] - uy * 7], col);
+      var nx = -uy, ny = ux, h = 13, b = 5.5;
+      T.line([p2[0] - ux * h + nx * b, p2[1] - uy * h + ny * b], p2, col);
+      T.line([p2[0] - ux * h - nx * b, p2[1] - uy * h - ny * b], p2, col);
+    }
+    /* "u", "-v", "3u", "u+v", "|F|^2=…": pil över varje u, v och F.
+     * sc = skriftskala (0,62 = figuretikett, 1 = huvudrad). */
+    function lbl(t, x, yb, col, sc) {
+      sc = sc == null ? 0.62 : sc;
+      var xe = T.str(t, x, yb, col, sc);
+      for (var i = 0; i < t.length; i++) {
+        var ch = t[i];
+        if (ch !== 'u' && ch !== 'v' && ch !== 'F') continue;
+        if (i > 0 && (t[i - 1] === '_' || t[i - 1] === '^')) continue;
+        var x0 = x + T.adv(t.slice(0, i), sc), x1 = x0 + T.adv(ch, sc);
+        vecPil(T, F, x0 + 1, x1 - 1, yb, col,
+               ch === 'F' ? (sc < 1 ? 0.78 : 1.12) : (sc < 1 ? 0.68 : 1.05));
+      }
+      return xe;
+    }
+    return { dash: dash, dashPil: dashPil, lbl: lbl };
+  }
+
+  /* ---------------- scen: två vektorer längs samma linje (maspec-4.1 ex 1)
+   * u (längd 3, åt vänster) och v (längd 8, åt höger) är motriktade. Spets
+   * mot start: u läggs där v slutar, och summan blir 8 − 3 = 5 lång, riktad
+   * som den längre vektorn. */
+  function layoutVektorsammalinje(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+    var E = 30;                                   /* px per längdenhet */
+
+    /* uppgiftens vektorer */
+    var A = [padL + 130, 120];
+    figurPil(T, A, [A[0] - 3 * E, A[1]]);
+    V.lbl('u', A[0] - 1.5 * E - 6, A[1] - 14);
+    T.pause(180);
+    var B = [padL + 60, 172];
+    figurPil(T, B, [B[0] + 8 * E, B[1]]);
+    V.lbl('v', B[0] + 4 * E - 6, B[1] + 34);
+    T.stepEnd();
+
+    tanke(206, [
+      [['Vektorer adderas spets mot']],
+      [['start. Jag ritar v först och']],
+      [['låter u börja där v slutar.']]
+    ], 0);
+    y = 250;
+    T.str('Spets mot start', padL, y, null, 0.62);
+    var P = [padL + 60, 300], Q = [P[0] + 8 * E, P[1]];
+    figurPil(T, P, Q);
+    V.lbl('v', P[0] + 4 * E - 6, P[1] - 12);
+    T.stepEnd();
+
+    var Q2 = [Q[0], Q[1] + 36], R = [Q2[0] - 3 * E, Q2[1]];
+    V.dash(Q, Q2);
+    figurPil(T, Q2, R, BLUE);
+    V.lbl('u', Q2[0] - 1.5 * E - 6, Q2[1] + 32, BLUE);
+    T.stepEnd();
+
+    tanke(368, [
+      [['Summan går från den första']],
+      [['startpunkten till den sista']],
+      [['spetsen: 8 fram och 3 tillbaka.']]
+    ], 0);
+    var S = [P[0], 402], S2 = [R[0], 402];
+    figurPil(T, S, S2);
+    V.lbl('u+v', (S[0] + S2[0]) / 2 - 18, S[1] + 32);
+    T.stepEnd();
+
+    y = 500;
+    T.str('Längden', padL, y - 1.7 * F, null, 0.62);
+    V.lbl('|u+v|=8-3=5', padL, y, null, 1);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Riktningen är den längre']],
+      [['vektorns: v vinner, så summan']],
+      [['pekar åt höger.']]
+    ]);
+    y += 3.6 * F;
+    xe = V.lbl('Svar: längd 5, riktad som v', padL, y, null, 1);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: två vinkelräta krafter (maspec-4.1 ex 2) ------
+   * F1 = 6,0 N uppåt och F2 = 8,0 N åt höger. Krafterna ritas med
+   * blåpennan (vektorer med värden), resultanten STRECKAD: den ersätter
+   * de två krafterna. Pythagoras sats ger |F| = 10 N. Skala 25 px/N. */
+  function layoutVinkelratakrafter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+    var k = 25;                                   /* px per newton */
+    var O = [padL + 80, 320];
+    var P1 = [O[0], O[1] - 6 * k], P2 = [O[0] + 8 * k, O[1]];
+
+    figurPil(T, O, P1, BLUE);
+    V.lbl('F_1=6,0 N', O[0] - 50, P1[1] - 22, BLUE);
+    T.pause(200);
+    figurPil(T, O, P2, BLUE);
+    V.lbl('F_2=8,0 N', O[0] + 60, O[1] + 34, BLUE);
+    T.stepEnd();
+
+    tanke(354, [
+      [['Resultanten ersätter de två']],
+      [['krafterna. Jag ritar den']],
+      [['streckad: den verkar inte']],
+      [['utöver F1 och F2.']]
+    ], 0);
+    var R = [P2[0], P1[1]];
+    V.dashPil(O, R, BLUE);
+    /* etiketten snett ovanför diagonalen, aldrig på den */
+    V.lbl('F', (O[0] + R[0]) / 2 - 22, (O[1] + R[1]) / 2 - 20, BLUE);
+    T.stepEnd();
+
+    tanke(354, [
+      [['Krafterna är vinkelräta, så']],
+      [['F1, F2 och F bildar en rät-']],
+      [['vinklig triangel. F är hypo-']],
+      [['tenusan. Pythagoras sats.']]
+    ], 0);
+    y = 470;
+    T.str('Pythagoras sats', padL, y - 1.7 * F, null, 0.62);
+    V.lbl('|F|^2=6,0^2+8,0^2', padL, y, null, 1);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('=36+64=100', padL + 60, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur båda led. En längd']],
+      [['kan inte vara negativ, så den']],
+      [['negativa roten faller bort.']]
+    ]);
+    y += 3.2 * F;
+    xx = V.lbl('|F|=', padL, y, null, 1);
+    xx = T.rot('100', xx, y);
+    T.str('=10 N', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt? 10 N är längre än']],
+      [['båda krafterna men kortare än']],
+      [['6,0+8,0=14 N: de drar ju']],
+      [['åt olika håll.']]
+    ]);
+    y += 3.2 * F;
+    xe = T.str('Svar: 10 N', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: polygon- och parallellogrammetoden (ex 3) ----
+   * u = 3 åt höger, 2 upp; v = 2 åt höger, 3 ned (28 px per ruta).
+   * a) spets mot start, b) samma startpunkt + streckade hjälpsidor,
+   * summan är diagonalen. Båda figurerna på samma rad. */
+  function layoutPolygonparallellogram(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+    var E = 28, u = [3 * E, -2 * E], v = [2 * E, 3 * E];
+    function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
+
+    /* uppgiftens vektorer */
+    var G1 = [padL + 60, 150], G2 = [padL + 220, 100];
+    figurPil(T, G1, add(G1, u));
+    V.lbl('u', G1[0] + 50, G1[1] - 4);
+    T.pause(180);
+    figurPil(T, G2, add(G2, v));
+    V.lbl('v', G2[0] + 50, G2[1] + 50);
+    T.stepEnd();
+
+    /* a) polygonmetoden */
+    y = 230;
+    T.str('a) Polygonmetoden', padL, y, null, 0.62);
+    var P = [padL + 60, 300], Q = add(P, u), R = add(Q, v);
+    figurPil(T, P, Q);
+    V.lbl('u', P[0] + 50, P[1] - 4);
+    T.stepEnd();
+
+    tanke(372, [
+      [['Jag parallellförflyttar v så']],
+      [['att den startar i u:s spets.']],
+      [['Bara startpunkten ändras.']]
+    ], 0);
+    figurPil(T, Q, R, BLUE);
+    V.lbl('v', Q[0] + 40, Q[1] + 50, BLUE);
+    T.stepEnd();
+
+    tanke(372, [
+      [['Summan går från den första']],
+      [['startpunkten till den sista']],
+      [['spetsen.']]
+    ], 0);
+    figurPil(T, P, R);
+    V.lbl('u+v', P[0] + 46, P[1] + 56);
+    T.stepEnd();
+
+    /* b) parallellogrammetoden, till höger om a) */
+    T.str('b) Parallellogrammetoden', padL + 350, y, null, 0.62);
+    var P2 = [padL + 370, 300], U2 = add(P2, u), V2 = add(P2, v), R2 = add(U2, v);
+    figurPil(T, P2, U2);
+    V.lbl('u', P2[0] + 20, P2[1] - 42);
+    T.pause(180);
+    figurPil(T, P2, V2);
+    V.lbl('v', P2[0] + 2, P2[1] + 57);
+    T.stepEnd();
+
+    tanke(372, [
+      [['Jag gör klart parallello-']],
+      [['grammen: hjälplinjer parallella']],
+      [['med v från u:s spets och med']],
+      [['u från v:s spets.']]
+    ], 0);
+    V.dash(U2, R2, BLUE);
+    T.pause(150);
+    V.dash(V2, R2, BLUE);
+    T.stepEnd();
+
+    tanke(372, [
+      [['Summan är diagonalen från den']],
+      [['gemensamma startpunkten.']]
+    ], 0);
+    figurPil(T, P2, R2);
+    V.lbl('u+v', R2[0] + 10, R2[1] + 8);
+    T.stepEnd();
+
+    tanke(372, [
+      [['Samma vektor båda gångerna:']],
+      [['5 rutor åt höger och 1 nedåt.']]
+    ], 0);
+    y = 460;
+    xe = V.lbl('Båda metoderna ger samma u+v:', padL, y, null, 0.72);
+    T.stepEnd();
+    y += 1.9 * F;
+    T.str('5 rutor åt höger och 1 ruta nedåt', padL, y, null, 0.72);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vektor gånger tal (maspec-4.1 ex 4) ----------
+   * u = 2 åt höger, 1 upp; v = 1 åt vänster, 2 upp. 3u är tre gånger så
+   * lång åt samma håll, −v lika lång men vänd, −2v dubbelt så lång och
+   * vänd. Tre kolumner på samma rad. */
+  function layoutVektorgangertal(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+    var E = 28, u = [2 * E, -1 * E], v = [-1 * E, 2 * E];
+    function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
+    function mul(d, k) { return [d[0] * k, d[1] * k]; }
+
+    var G1 = [padL + 60, 140], G2 = [padL + 210, 90];
+    figurPil(T, G1, add(G1, u));
+    V.lbl('u', G1[0] + 22, G1[1] + 26);
+    T.pause(180);
+    figurPil(T, G2, add(G2, v));
+    V.lbl('v', G2[0] - 4, G2[1] + 40);
+    T.stepEnd();
+
+    tanke(176, [
+      [['3u är tre gånger så lång som']],
+      [['u, åt samma håll: 3·2=6 rutor']],
+      [['åt höger och 3·1=3 uppåt.']]
+    ], 0);
+    y = 236;
+    T.str('a)', padL, y, null, 0.62);
+    var A = [padL + 30, 340];
+    figurPil(T, A, add(A, mul(u, 3)), BLUE);
+    V.lbl('3u', A[0] + 60, A[1] - 44, BLUE);
+    T.stepEnd();
+
+    tanke(352, [
+      [['−v är lika lång som v men']],
+      [['vänd: 1 ruta åt höger och']],
+      [['2 nedåt.']]
+    ], 0);
+    T.str('b)', padL + 270, y, null, 0.62);
+    var B = [padL + 290, 284];
+    figurPil(T, B, add(B, mul(v, -1)), BLUE);
+    V.lbl('-v', B[0] + 32, B[1] + 42, BLUE);
+    T.stepEnd();
+
+    tanke(352, [
+      [['−2v är dubbelt så lång som v']],
+      [['och vänd: 2 rutor åt höger och']],
+      [['4 nedåt. Jag sätter av −v två']],
+      [['gånger.']]
+    ], 0);
+    T.str('c)', padL + 420, y, null, 0.62);
+    /* c) ligger längst till höger: hela pilen måste hålla sig under
+     * inställningsrutans mobilzon (x > 420, y < 150) */
+    var C = [padL + 440, 330];
+    figurPil(T, C, add(C, mul(v, -2)), BLUE);
+    V.lbl('-2v', C[0] + 42, C[1] - 48, BLUE);
+    T.stepEnd();
+
+    y = 470;
+    xe = T.str('Talet ändrar längden, minus', padL, y, null, 0.72);
+    T.stepEnd();
+    y += 1.9 * F;
+    T.str('vänder riktningen', padL, y, null, 0.72);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: subtrahera grafiskt (maspec-4.1 ex 5) --------
+   * Samma u och v som i exempel 3. a) u + (−v) spets mot start, b) från
+   * samma punkt: u − v går från v:s spets till u:s spets. */
+  function layoutVektorsubtraktion(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+    var E = 28, u = [3 * E, -2 * E], v = [2 * E, 3 * E];
+    function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
+    function neg(d) { return [-d[0], -d[1]]; }
+
+    var G1 = [padL + 60, 150], G2 = [padL + 220, 100];
+    figurPil(T, G1, add(G1, u));
+    V.lbl('u', G1[0] + 50, G1[1] - 4);
+    T.pause(180);
+    figurPil(T, G2, add(G2, v));
+    V.lbl('v', G2[0] + 50, G2[1] + 50);
+    T.stepEnd();
+
+    tanke(190, [
+      [['Att dra bort v är samma sak']],
+      [['som att lägga till den']],
+      [['motsatta vektorn −v.']]
+    ], 0);
+    y = 250;
+    V.lbl('u-v=u+(-v)', padL, y, null, 1);
+    T.stepEnd();
+
+    /* a) polygonmetoden */
+    y = 310;
+    T.str('a) Polygonmetoden', padL, y, null, 0.62);
+    var P = [padL + 60, 470], Q = add(P, u), R = add(Q, neg(v));
+    figurPil(T, P, Q);
+    V.lbl('u', P[0] + 50, P[1] - 4);
+    T.stepEnd();
+
+    tanke(482, [
+      [['−v är lika lång som v men']],
+      [['vänd: 2 rutor åt vänster och']],
+      [['3 uppåt. Jag lägger den i u:s']],
+      [['spets, som vid addition.']]
+    ], 0);
+    figurPil(T, Q, R, BLUE);
+    V.lbl('-v', Q[0] - 4, Q[1] - 40, BLUE);
+    T.stepEnd();
+
+    tanke(482, [
+      [['Differensen går från den']],
+      [['första startpunkten till den']],
+      [['sista spetsen.']]
+    ], 0);
+    figurPil(T, P, R);
+    V.lbl('u-v', padL + 8, P[1] - 70);
+    T.stepEnd();
+
+    /* b) från samma punkt, till höger om a) */
+    T.str('b) Parallellogrammetoden', padL + 350, y, null, 0.62);
+    var P2 = [padL + 370, 420], U2 = add(P2, u), V2 = add(P2, v);
+    figurPil(T, P2, U2);
+    V.lbl('u', P2[0] + 20, P2[1] - 42);
+    T.pause(180);
+    figurPil(T, P2, V2);
+    V.lbl('v', P2[0] + 2, P2[1] + 57);
+    T.stepEnd();
+
+    tanke(536, [
+      [['Startar u och v i samma punkt']],
+      [['går u−v från v:s spets till u:s']],
+      [['spets. Kolla: v plus (u−v)']],
+      [['hamnar i u:s spets.']]
+    ], 0);
+    figurPil(T, V2, U2, BLUE);
+    V.lbl('u-v', V2[0] + 42, V2[1] - 30, BLUE);
+    T.stepEnd();
+
+    tanke(536, [
+      [['Samma vektor båda gångerna:']],
+      [['1 ruta åt höger och 5 uppåt.']]
+    ], 0);
+    y = 640;
+    xe = V.lbl('Båda metoderna ger samma u-v:', padL, y, null, 0.72);
+    T.stepEnd();
+    y += 1.9 * F;
+    T.str('1 ruta åt höger och 5 rutor uppåt', padL, y, null, 0.72);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: kraftmoment "gungbrädan" ----------------
    * Exempel 3 ur Fysik nivå 2, 1.1 Kraftmoment (momentjämvikt): pappa
    * 80 kg och barn 30 kg på en gungbräda. Handmetoden: rita först det
@@ -26007,6 +26425,244 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: hur djupt är stupet? (fy1-2.7, Impuls Ex 3.14)
+   * a) En sten släpps och faller i 3,5 s: sträckformeln med v_0 = 0 och
+   * a = −g (uppåt positiv riktning) ger djupet. b) En sten kastas rakt upp
+   * med 12 m/s från samma kant och ska landa på samma botten: sträck-
+   * formeln blir en ANDRAGRADSEKVATION i t, som löses med digitalt
+   * hjälpmedel (CAS) enligt tipsrutan i avsnittet; den negativa roten
+   * förkastas, och tiden sätts sedan in i hastighetsformeln. Samma
+   * positiva riktning (uppåt) i båda deluppgifterna, så att tecknen
+   * betyder samma sak hela vägen. Visas på den olänkade sidan
+   * utkast/stupet.html. */
+  function layoutStupet(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var topY = 90, botY = 288, kantX = 228, sx = 280;
+
+    function gubbe(x) {
+      T.circle(x, topY - 40, 7);
+      T.line([x, topY - 33], [x, topY - 14]);
+      T.line([x, topY - 14], [x - 7, topY]);
+      T.line([x, topY - 14], [x + 7, topY]);
+      T.line([x - 9, topY - 22], [x + 9, topY - 30]);
+    }
+
+    /* ---- figuren: stupet, kompisarna och stenens väg ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar stupet, kompisarna som']],
+      [['släpper stenen och stenens väg']],
+      [['rakt ner till botten.']]
+    ], 332));
+    T.line([100, topY], [kantX, topY]);
+    T.hatch([kantX, topY], [100, topY], 6);
+    T.line([kantX, topY], [kantX, botY]);
+    T.hatch([kantX, botY], [kantX, topY], 9);
+    T.line([kantX, botY], [470, botY]);
+    T.hatch([470, botY], [kantX, botY], 11);
+    T.pause(150);
+    gubbe(140);
+    gubbe(184);
+    T.pause(150);
+    T.circle(sx, topY + 18, 8);
+    T.dash([sx, topY + 30], [sx, botY - 20]);
+    T.circle(sx, botY - 8, 8);
+    T.stepEnd();
+
+    /* ---- anteckningar i blått ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Stenen SLÄPPS, så']],
+      [['starthastigheten är noll. Jag']],
+      [['väljer uppåt som positiv']],
+      [['riktning och söker sträckan ', 0], ['s', 1], ['.', 0]]
+    ], 332));
+    T.lbl('v_0=0', sx + 18, topY + 24, BLUE);
+    T.pause(150);
+    T.lbl('t=3,5 s', sx + 18, topY + 116, BLUE);
+    T.pause(150);
+    T.dblArrow([396, topY + 2], [396, botY - 2], BLUE);
+    T.lbl('s', 406, topY + 104, BLUE);
+    T.pause(150);
+    T.arrow([438, botY - 20], [438, botY - 100], BLUE);
+    T.lbl('+', 428, botY - 106, BLUE);
+    T.stepEnd();
+
+    /* ---- a) djupet ---- */
+    var y = 442;
+    T.tanke(T.bubble(120, T.bubbleTop(332 + 90), bw, [
+      [['Accelerationen är konstant']],
+      [['under hela fallet, så jag']],
+      [['använder sträckformeln.']]
+    ]));
+    T.str('a) Sträcka vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('a·t^2', '2', T.str('s=v_0·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Uppåt är positivt, så']],
+      [['tyngdaccelerationen NEDÅT får']],
+      [['minustecken.']]
+    ]));
+    var klam = valueBracket(acts, ['v_0=0', 'a=−g=−9,82 m/s^2', 't=3,5 s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('(−9,82)·3,5^2', '2', T.str('s=0·3,5+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.8 * F;
+    T.str('=−60,1475 m', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Minustecknet betyder att stenen']],
+      [['hamnade NEDANFÖR kanten. Först']],
+      [['nu avrundar jag: tiden 3,5 s har']],
+      [['två värdesiffror.']]
+    ]));
+    T.str('≈−60 m', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['60 meter är som ett hus på']],
+      [['tjugo våningar. Ett stup i']],
+      [['fjällen, rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 60 m', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) hastigheten vid nedslaget ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu kastas stenen UPPÅT med']],
+      [['12 m/s, men landar ändå på']],
+      [['botten. Samma formel, fast nu']],
+      [['är det tiden som är okänd.']]
+    ]));
+    T.str('b) Sträcka vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('a·t^2', '2', T.str('s=v_0·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Sträckan tar jag oavrundad ur']],
+      [['a), med minustecken: botten']],
+      [['ligger under kanten. Kastet']],
+      [['uppåt ger positiv starthastighet.']]
+    ]));
+    klam = valueBracket(acts, ['s=−60,1475 m', 'v_0=12 m/s', 'a=−9,82 m/s^2'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.fracH('(−9,82)·t^2', '2', T.str('−60,1475=12·t+', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.8 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Jag räknar ut −9,82 delat med 2']],
+      [['så att ekvationen blir enklare']],
+      [['att skriva in.']]
+    ]));
+    T.str('−60,1475=12·t−4,91·t^2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['En andragradsekvation med ', 0], ['t', 1]],
+      [['som obekant! Den löser jag med']],
+      [['ett digitalt hjälpmedel, i']],
+      [['CAS-läget.']]
+    ]));
+    var xNeg0 = padL;
+    var xNeg1 = T.str('t=−2,485... s', padL, y);
+    var xE = T.str(' eller ', xNeg1, y);
+    T.str('t=4,929... s', xE, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y), bw, [
+      [['Den negativa tiden ligger FÖRE']],
+      [['kastet. Den lösningen']],
+      [['förkastas.']]
+    ]));
+    T.strike(xNeg0, xNeg1 - 0.16 * F, y);
+    T.stepEnd();
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Nu vet jag hur länge stenen är i']],
+      [['luften. Hastigheten vid']],
+      [['nedslaget får jag ur']],
+      [['hastighetsformeln.']]
+    ]));
+    T.str('Hastighet vid konstant acceleration', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('v=v_0+a·t', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Tiden tar jag oavrundad från']],
+      [['raden ovan.']]
+    ]));
+    klam = valueBracket(acts, ['v_0=12 m/s', 'a=−9,82 m/s^2', 't=4,929... s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('v=12+(−9,82)·4,929...', padL, y);
+    T.stepEnd();
+
+    y += adv;
+    T.str('=−36,404... m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Först nu avrundar jag. Både']],
+      [['12 m/s och 3,5 s har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    T.str('≈−36 m/s', padL + 24, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Stenen i a) landade med 9,82·3,5,']],
+      [['ungefär 34 m/s. Den här får']],
+      [['dessutom fart av kastet, så lite']],
+      [['mer är rimligt. Minus: nedåt.']]
+    ]));
+    T.underline(T.str('Svar: −36 m/s (36 m/s nedåt)', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: bil som accelererar 400 m (fy1-2.8 Ex 1) ----
    * Två okända (a och t) kräver två ekvationer. Teorin löser systemet i
    * GeoGebra — med penna går det lika bra att substituera: ur ekvation
@@ -36343,6 +36999,12 @@
                    adderavektorer: layoutAdderavektorer,
                    subtraheravektorer: layoutSubtraheravektorer,
                    koordinatlangd: layoutKoordinatlangd,
+                   /* Matematik specialisering kapitel 4 — Vektorer */
+                   vektorsammalinje: layoutVektorsammalinje,
+                   vinkelratakrafter: layoutVinkelratakrafter,
+                   polygonparallellogram: layoutPolygonparallellogram,
+                   vektorgangertal: layoutVektorgangertal,
+                   vektorsubtraktion: layoutVektorsubtraktion,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,
@@ -36413,6 +37075,7 @@
                    arearvt: layoutArearvt,
                    omkorning: layoutOmkorning,
                    reaktionstid: layoutReaktionstid,
+                   stupet: layoutStupet,
                    accel400: layoutAccel400,
                    /* Fysik 1 kapitel 3 — krafter och Newtons lagar */
                    resultantkraft: layoutResultantkraft,

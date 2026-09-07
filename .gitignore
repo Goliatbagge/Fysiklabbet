@@ -80,3 +80,6 @@ np-test.html
 
 # SoMe-rapporterna är intern arbetsdata (se .claude/commands/some-rapport.md)
 .claude/some/rapporter/
+
+# Tillfälligt inlagt läromedelsmaterial (skannade exempel) — bara lokalt
+/tillfälligt/

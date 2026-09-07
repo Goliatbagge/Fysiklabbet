@@ -14342,9 +14342,20 @@
     }
     /* "u", "-v", "3u", "u+v", "|F|^2=…": pil över varje u, v och F.
      * sc = skriftskala (0,62 = figuretikett, 1 = huvudrad). */
-    function lbl(t, x, yb, col, sc) {
+    function lbl(t, x, yb, col, sc, over) {
       sc = sc == null ? 0.62 : sc;
       var xe = T.str(t, x, yb, col, sc);
+      /* over = ['AB', 'OC'] ger pil över hela delsträngen (punktvektorer);
+       * utan over får varje u, v och F sin egen pil */
+      if (over) {
+        over.forEach(function (sub) {
+          var i = t.indexOf(sub);
+          if (i < 0) return;
+          var x0 = x + T.adv(t.slice(0, i), sc), x1 = x0 + T.adv(sub, sc);
+          vecPil(T, F, x0 + 1, x1 - 1, yb, col, sc < 1 ? 0.78 : 1.12);
+        });
+        return xe;
+      }
       for (var i = 0; i < t.length; i++) {
         var ch = t[i];
         if (ch !== 'u' && ch !== 'v' && ch !== 'F') continue;
@@ -14730,6 +14741,333 @@
     T.stepEnd();
     y += 1.9 * F;
     T.str('1 ruta åt höger och 5 rutor uppåt', padL, y, null, 0.72);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: räkna med koordinater (maspec-4.2 ex 1) ------
+   * u = (2, −3), v = (−4, 1). Addition och subtraktion koordinat för
+   * koordinat, tal gånger vektor multiplicerar båda koordinaterna. */
+  function layoutKoordinatrakning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+
+    /* raden når förbi x=420, så den läggs under mobilzonen (y<150) */
+    y = 175;
+    xx = V.lbl('u=(2,-3)', padL, y, null, 1);
+    V.lbl('v=(-4,1)', xx + 1.2 * F, y, null, 1);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Addition koordinat för']],
+      [['koordinat: x-koordinaterna']],
+      [['för sig och y-koordinaterna']],
+      [['för sig.']]
+    ]);
+    y += 3.4 * F;
+    T.str('a)', padL, y, null, 0.62);
+    V.lbl('u+v=(2+(-4),-3+1)', padL + 36, y, null, 1);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('=(-2,-2)', padL + 36, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraktion på samma sätt.']],
+      [['Minus minus fyra blir plus']],
+      [['fyra.']]
+    ]);
+    y += 3.0 * F;
+    T.str('b)', padL, y, null, 0.62);
+    V.lbl('u-v=(2-(-4),-3-1)', padL + 36, y, null, 1);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('=(6,-4)', padL + 36, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet 4 multipliceras in i']],
+      [['BÅDA koordinaterna.']]
+    ]);
+    y += 3.0 * F;
+    T.str('c)', padL, y, null, 0.62);
+    V.lbl('4u=(4·2,4·(-3))=(8,-12)', padL + 36, y, null, 1);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först multiplarna 3u och 2v,']],
+      [['sedan subtraktionen.']]
+    ]);
+    y += 3.0 * F;
+    T.str('d)', padL, y, null, 0.62);
+    V.lbl('3u-2v=(6,-9)-(-8,2)', padL + 36, y, null, 1);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('=(6-(-8),-9-2)=(14,-11)', padL + 36, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['u+v räknade jag ut i a).']],
+      [['Tvåan multipliceras in i']],
+      [['båda koordinaterna.']]
+    ]);
+    y += 3.0 * F;
+    T.str('e)', padL, y, null, 0.62);
+    V.lbl('2(u+v)=2·(-2,-2)=(-4,-4)', padL + 36, y, null, 1);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: parallell för rätt t (maspec-4.2 ex 2) -------
+   * (5, 1) + t(1, 2) ska bli parallell med (1, 1): skriv om till ett tal
+   * k gånger (1, 1), lika koordinater ger två ekvationer, lös. Stödjer
+   * båda ekvationsredovisningslägena (cfg.vagg). */
+  function layoutParallellt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg;
+    var xw = padL + T.adv('5+t=1+2t') + 0.9 * F;
+
+    /* första raden HELT under y=210 (även glyfernas överkant): rutan är
+     * högre i ekvval-scener, och raden når långt förbi x=420 */
+    y = 245;
+    tanke(120, [
+      [['Först skriver jag vektorn i']],
+      [['koordinatform: t multipliceras']],
+      [['in i båda koordinaterna.']]
+    ], 0);
+    T.str('(5,1)+t(1,2)=(5+t,1+2t)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parallell med (1,1) betyder']],
+      [['ett tal k gånger (1,1).']]
+    ]);
+    y += 2.6 * F;
+    T.str('(5+t,1+2t)=k(1,1)=(k,k)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lika vektorer har lika']],
+      [['koordinater: x för sig och y']],
+      [['för sig. Det ger två']],
+      [['ekvationer.']]
+    ]);
+    y += 2.6 * F;
+    T.str('x:', padL, y, null, 0.62);
+    T.str('5+t=k', padL + 40, y);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('y:', padL, y, null, 0.62);
+    T.str('1+2t=k', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda vänsterleden är lika']],
+      [['med k, så de är lika med']],
+      [['varandra.']]
+    ]);
+    y += 2.6 * F;
+    T.str('5+t=1+2t', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag samlar t i högerledet:']],
+      [['subtrahera t från båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-t', xw, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.3 * F;
+      xx = T.str('5+t', padL + 30, y);
+      xx = T.str('-t', xx, y, BLUE);
+      xx = T.str('=1+2t', xx, y);
+      T.str('-t', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.1 * F;
+    }
+    T.str('5=1+t', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ettan bort: subtrahera 1']],
+      [['från båda led.']]
+    ]);
+    if (vagg) {
+      T.vaggOp('-1', xw, y);
+      T.stepEnd();
+      y += 2.1 * F;
+    } else {
+      y += 2.3 * F;
+      xx = T.str('5', padL + 30, y);
+      xx = T.str('-1', xx, y, BLUE);
+      xx = T.str('=1+t', xx, y);
+      T.str('-1', xx, y, BLUE);
+      T.stepEnd();
+      y += 2.1 * F;
+    }
+    T.str('4=t', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: med t=4 blir k=9,']],
+      [['och (9,9) är verkligen 9']],
+      [['gånger (1,1).']]
+    ]);
+    y += 2.8 * F;
+    T.str('Kontroll', padL, y - 1.5 * F, null, 0.62);
+    T.str('(5,1)+4(1,2)=(9,9)=9(1,1)', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: t=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: vektorer mellan punkter (maspec-4.2 ex 3) ----
+   * A = (−1, 2), B = (4, −1). AB = slutpunkt minus startpunkt, BA är
+   * motsatt, och C fås ur OC = OA + AC. Litet koordinatsystem först. */
+  function layoutPunktvektor(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+
+    var A = mkAxes(T, F, { ox: padL + 100, oy: 240, u: 28,
+                           xmin: -2, xmax: 5, ymin: -2, ymax: 3 });
+    A.axes();
+    /* talet 4 på x-axeln skulle hamna rakt på B — bara 2 skrivs ut */
+    A.ticks(heltal(-2, 5), heltal(-2, 3), [2], [2, -2], { y: { 2: 26 } });
+    T.pause(150);
+    A.dot(-1, 2); A.tag(-1, 2, 'A', -26, -4);
+    A.dot(4, -1); A.tag(4, -1, 'B', 10, 20);
+    T.stepEnd();
+
+    tanke(A.Y(-2) + 1.3 * F, [
+      [['AB går från A till B: slut-']],
+      [['punktens koordinater minus']],
+      [['startpunktens.']]
+    ], 0);
+    figurPil(T, [A.X(-1), A.Y(2)], [A.X(4), A.Y(-1)], BLUE);
+    y = 400;
+    T.str('a)', padL, y, null, 0.62);
+    V.lbl('AB=(4-(-1),-1-2)=(5,-3)', padL + 36, y, null, 1, ['AB']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['BA går åt andra hållet: B är']],
+      [['startpunkt och A slutpunkt.']],
+      [['Det blir den motsatta']],
+      [['vektorn.']]
+    ]);
+    y += 3.0 * F;
+    T.str('b)', padL, y, null, 0.62);
+    V.lbl('BA=(-1-4,2-(-1))=(-5,3)', padL + 36, y, null, 1, ['BA']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Till C kommer jag genom att']],
+      [['gå till A och sedan längs AC.']],
+      [['Ortsvektorn till C är alltså']],
+      [['OA+AC.']]
+    ]);
+    y += 3.0 * F;
+    T.str('c)', padL, y, null, 0.62);
+    V.lbl('OC=OA+AC=(-1,2)+(2,6)', padL + 36, y, null, 1, ['OC', 'OA', 'AC']);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('=(-1+2,2+6)=(1,8)', padL + 36 + T.adv('OC'), y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Punkten har samma koordinater']],
+      [['som sin ortsvektor.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: C=(1,8)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: längd ur koordinater (maspec-4.2 ex 4) -------
+   * u = (3, −4), v = (−2, 1). |u| med Pythagoras, och |u − 2v| genom att
+   * först räkna ut koordinaterna. */
+  function layoutKoordinatbelopp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), V = vekVerktyg(T, F);
+
+    /* raden når förbi x=420, så den läggs under mobilzonen (y<150) */
+    y = 182;
+    xx = V.lbl('u=(3,-4)', padL, y, null, 1);
+    V.lbl('v=(-2,1)', xx + 1.2 * F, y, null, 1);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Koordinaterna 3 och −4 är']],
+      [['kateterna i en rätvinklig']],
+      [['triangel. Pythagoras sats']],
+      [['ger längden.']]
+    ]);
+    y += 3.6 * F;
+    T.str('a)', padL, y, null, 0.62);
+    xx = V.lbl('|u|=', padL + 36, y, null, 1);
+    T.rot('3^2+(-4)^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet försvinner när']],
+      [['−4 kvadreras.']]
+    ], 1.05);
+    y += 3.6 * F;
+    xx = T.str('=', padL + 66, y);
+    xx = T.rot('9+16', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.rot('25', xx, y);
+    T.str('=5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först koordinaterna för u−2v,']],
+      [['sedan längden. Tvåan']],
+      [['multipliceras in i v.']]
+    ], 1.05);
+    y += 3.6 * F;
+    T.str('b)', padL, y, null, 0.62);
+    V.lbl('u-2v=(3,-4)-(-4,2)=(7,-6)', padL + 36, y, null, 1);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = V.lbl('|u-2v|=', padL + 36, y, null, 1);
+    T.rot('7^2+(-6)^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['85 är ingen jämn kvadrat, så']],
+      [['roten är det exakta svaret.']],
+      [['Decimaltalet är avrundat.']]
+    ], 1.05);
+    y += 3.6 * F;
+    xx = T.str('=', padL + 66, y);
+    xx = T.rot('49+36', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.rot('85', xx, y);
+    T.str('≈9,2', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: a) 5', padL, y);
+    xe = T.str('   b) ', xe, y);
+    xe = T.rot('85', xe, y);
+    xe = T.str('≈9,2', xe, y);
+    T.underline(xe, y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
@@ -37021,6 +37359,10 @@
                    polygonparallellogram: layoutPolygonparallellogram,
                    vektorgangertal: layoutVektorgangertal,
                    vektorsubtraktion: layoutVektorsubtraktion,
+                   koordinatrakning: layoutKoordinatrakning,
+                   parallellt: layoutParallellt,
+                   punktvektor: layoutPunktvektor,
+                   koordinatbelopp: layoutKoordinatbelopp,
                    gungbrada: layoutGunga, skiftnyckel: layoutSkiftnyckel,
                    spett: layoutSpett, brada: layoutBrada,
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,

@@ -39767,4 +39767,149 @@ Rimlighet: summan ska vara kortare än $5 + 7 = 12$ (vektorerna drar inte åt ex
 **Generell slutsats:** i parallellogrammen som $\\vec{u}$ och $\\vec{v}$ spänner upp gäller $|\\vec{u} + \\vec{v}|^2 + |\\vec{u} - \\vec{v}|^2 = 2|\\vec{u}|^2 + 2|\\vec{v}|^2$, här $109 + 39 = 148 = 2 \\cdot 25 + 2 \\cdot 49$. Det är ett bra sätt att kontrollera räkningen.`,
         },
     ],
+    'maspec-4.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I en ON-bas gäller $\\vec{w} = 3\\vec{e}_x - 2\\vec{e}_y$. Vilka koordinater har $\\vec{w}$?`,
+            choices: [
+                `$(3,\\ 2)$`,
+                `$(-2,\\ 3)$`,
+                `$(3,\\ -2)$`,
+                `$(1,\\ 1)$`,
+            ],
+            correct: 2,
+            solution: `Koordinaterna är talen framför basvektorerna, i ordningen $\\vec{e}_x$ först och $\\vec{e}_y$ sedan: $3\\vec{e}_x - 2\\vec{e}_y = (3,\\ -2)$.
+
+**Svar:** $(3,\\ -2)$`,
+        },
+        {
+            level: 1,
+            question: `Vektorerna $\\vec{u} = (1,\\ 4)$ och $\\vec{v} = (2,\\ -2)$ är givna. Bestäm koordinaterna för $\\vec{u} + 2\\vec{v}$.`,
+            choices: [
+                `$(3,\\ 2)$`,
+                `$(5,\\ 0)$`,
+                `$(4,\\ 8)$`,
+                `$(5,\\ 4)$`,
+            ],
+            correct: 1,
+            solution: `Först multipliceras tvåan in i båda koordinaterna för $\\vec{v}$, sedan adderas koordinat för koordinat:
+
+$$
+\\vec{u} + 2\\vec{v} = (1,\\ 4) + (4,\\ -4) = (1 + 4,\\ 4 + (-4)) = (5,\\ 0)
+$$
+
+**Svar:** $(5,\\ 0)$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna längden av vektorn $\\vec{u} = (6,\\ -8)$ i en ON-bas.`,
+            answer: { value: 10, unit: '' },
+            solution: `Pythagoras sats med koordinaterna som kateter:
+
+$$
+|\\vec{u}| = \\sqrt{6^2 + (-8)^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10
+$$
+
+Tecknet på $-8$ spelar ingen roll eftersom talet kvadreras.
+
+**Svar:** 10`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Punkterna $A = (2,\\ -3)$ och $B = (-1,\\ 5)$ är givna. Bestäm koordinaterna för $\\overrightarrow{AB}$ och beräkna $|\\overrightarrow{AB}|$.`,
+            choices: [
+                `$\\overrightarrow{AB} = (3,\\ -8)$ och $|\\overrightarrow{AB}| = \\sqrt{73}$`,
+                `$\\overrightarrow{AB} = (1,\\ 2)$ och $|\\overrightarrow{AB}| = \\sqrt{5}$`,
+                `$\\overrightarrow{AB} = (-3,\\ 8)$ och $|\\overrightarrow{AB}| = \\sqrt{73}$`,
+                `$\\overrightarrow{AB} = (-3,\\ 8)$ och $|\\overrightarrow{AB}| = 5$`,
+            ],
+            correct: 2,
+            solution: `Vektorn mellan två punkter är slutpunktens koordinater minus startpunktens:
+
+$$
+\\overrightarrow{AB} = (-1 - 2,\\ 5 - (-3)) = (-3,\\ 8)
+$$
+
+Längden fås med Pythagoras sats:
+
+$$
+|\\overrightarrow{AB}| = \\sqrt{(-3)^2 + 8^2} = \\sqrt{9 + 64} = \\sqrt{73} \\approx 8{,}5
+$$
+
+($(3,\\ -8)$ är $\\overrightarrow{BA}$, den motsatta vektorn. $(1,\\ 2)$ är summan av punkternas koordinater, som inte betyder något här.)
+
+**Svar:** $\\overrightarrow{AB} = (-3,\\ 8)$ och $|\\overrightarrow{AB}| = \\sqrt{73}$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm talet $t$ så att vektorn $(4,\\ 1) + t(1,\\ 1)$ blir parallell med $(2,\\ 1)$.`,
+            answer: { value: 2, unit: '' },
+            solution: `Vektorn skrivs i koordinatform: $(4,\\ 1) + t(1,\\ 1) = (4 + t,\\ 1 + t)$. Parallell med $(2,\\ 1)$ betyder att den är ett tal $k$ gånger $(2,\\ 1)$:
+
+$$
+(4 + t,\\ 1 + t) = (2k,\\ k)
+$$
+
+Lika koordinater ger $4 + t = 2k$ och $1 + t = k$. Sätts $k = 1 + t$ in i den första ekvationen fås
+
+$$
+4 + t = 2(1 + t) = 2 + 2t
+$$
+
+$$
+t = 2
+$$
+
+Kontroll: $(4,\\ 1) + 2(1,\\ 1) = (6,\\ 3) = 3 \\cdot (2,\\ 1)$.
+
+**Svar:** $t = 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vektorerna $\\vec{u} = (2,\\ -1)$, $\\vec{v} = (1,\\ 3)$ och $\\vec{w} = (8,\\ 3)$ är givna. Bestäm talen $s$ och $t$ så att $s\\vec{u} + t\\vec{v} = \\vec{w}$.`,
+            choices: [
+                `$s = 2$ och $t = 3$`,
+                `$s = 4$ och $t = 0$`,
+                `$s = 3$ och $t = 2$`,
+                `$s = 1$ och $t = 6$`,
+            ],
+            correct: 2,
+            solution: `**Insikten:** en vektorekvation i planet är två vanliga ekvationer, en per koordinat. Vänsterledet skrivs i koordinatform:
+
+$$
+s\\vec{u} + t\\vec{v} = (2s,\\ -s) + (t,\\ 3t) = (2s + t,\\ -s + 3t)
+$$
+
+Lika vektorer har lika koordinater, vilket ger ekvationssystemet
+
+$$
+\\left\\{ \\begin{array}{l} 2s + t = 8 \\\\ -s + 3t = 3 \\end{array} \\right.
+$$
+
+Ur den första ekvationen är $t = 8 - 2s$. Insatt i den andra:
+
+$$
+-s + 3(8 - 2s) = 3
+$$
+
+$$
+-s + 24 - 6s = 3
+$$
+
+$$
+-7s = -21 \\quad \\Leftrightarrow \\quad s = 3
+$$
+
+och därmed $t = 8 - 2 \\cdot 3 = 2$.
+
+Kontroll: $3(2,\\ -1) + 2(1,\\ 3) = (6,\\ -3) + (2,\\ 6) = (8,\\ 3)$.
+
+**Svar:** $s = 3$ och $t = 2$
+
+**Generell slutsats:** eftersom $\\vec{u}$ och $\\vec{v}$ inte är parallella kan varje vektor i planet skrivas på precis ett sätt som $s\\vec{u} + t\\vec{v}$. Paret $\\vec{u}$, $\\vec{v}$ är alltså en bas, fast ingen ON-bas, och $(3,\\ 2)$ är koordinaterna för $\\vec{w}$ i den basen.`,
+        },
+    ],
 };

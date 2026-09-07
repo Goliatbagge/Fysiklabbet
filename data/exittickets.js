@@ -24277,4 +24277,102 @@ window.EXITTICKETS = {
     ],
   },
 ],
+'maspec-4.2': [
+  {
+    question: 'Vektorn $\\vec{u} = 4\\vec{e}_x - 3\\vec{e}_y$ är given i en ON-bas. Vad är vektorns koordinater?',
+    choices: [
+      '$(-3,\\ 4)$',
+      '$(4,\\ -3)$',
+      '$(4,\\ 3)$',
+      '$(1,\\ 1)$',
+    ],
+    correct: 1,
+    why: [
+      'Ordningen är $x$-koordinaten först: talet framför $\\vec{e}_x$ står först.',
+      'Talen framför basvektorerna är koordinaterna: 4 längs $\\vec{e}_x$ och $-3$ längs $\\vec{e}_y$.',
+      'Tecknet följer med: komposanten längs $\\vec{e}_y$ är $-3\\vec{e}_y$.',
+      'Basvektorerna själva har koordinaterna $(1,\\ 0)$ och $(0,\\ 1)$, men $\\vec{u}$ består av 4 gånger den ena och $-3$ gånger den andra.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar en ON-bas?',
+    choices: [
+      'Basvektorerna är parallella och lika långa',
+      'Basvektorerna pekar åt samma håll',
+      'Basvektorerna är lika långa men behöver inte vara vinkelräta',
+      'Basvektorerna är vinkelräta mot varandra och har längden 1',
+    ],
+    correct: 3,
+    why: [
+      'Parallella vektorer kan inte vara en bas alls: man når bara vektorer längs en enda linje.',
+      'Två vektorer som pekar åt samma håll är parallella och duger inte ens som bas.',
+      'Lika längd räcker inte. Bokstaven O står för ortogonal, alltså vinkelrät.',
+      'Ortonormerad betyder just detta: ortogonala (vinkelräta) och normerade (längd 1).',
+    ],
+  },
+  {
+    question: 'Vektorerna $\\vec{u} = (3,\\ -2)$ och $\\vec{v} = (-1,\\ 5)$ är givna. Vad är $\\vec{u} + \\vec{v}$?',
+    choices: [
+      '$(2,\\ 3)$',
+      '$(4,\\ -7)$',
+      '$(-3,\\ -10)$',
+      '$(2,\\ -7)$',
+    ],
+    correct: 0,
+    why: [
+      'Koordinat för koordinat: $3 + (-1) = 2$ och $-2 + 5 = 3$.',
+      'Det är $\\vec{u} - \\vec{v}$, alltså differensen.',
+      'Koordinaterna multipliceras inte med varandra vid addition.',
+      '$x$-koordinaten stämmer, men $y$-koordinaten ska vara $-2 + 5 = 3$.',
+    ],
+  },
+  {
+    question: 'Vilket vektorpar är parallellt?',
+    choices: [
+      '$(2,\\ 3)$ och $(3,\\ 2)$',
+      '$(2,\\ 3)$ och $(4,\\ 5)$',
+      '$(2,\\ 3)$ och $(-4,\\ -6)$',
+      '$(2,\\ 3)$ och $(2,\\ -3)$',
+    ],
+    correct: 2,
+    why: [
+      'Koordinaterna har bytt plats, men ingen faktor $k$ ger $2k = 3$ och $3k = 2$ samtidigt.',
+      '$4 = 2 \\cdot 2$ men $5 \\neq 2 \\cdot 3$. Båda koordinaterna måste multipliceras med samma tal.',
+      '$(-4,\\ -6) = -2 \\cdot (2,\\ 3)$. Vektorerna är parallella och motriktade.',
+      'Ett teckenbyte på bara ena koordinaten speglar vektorn i en axel, och spegelbilden är inte parallell med originalet.',
+    ],
+  },
+  {
+    question: 'Punkterna $P_1 = (1,\\ 4)$ och $P_2 = (5,\\ 2)$ är givna. Vad är $\\overrightarrow{P_1P_2}$?',
+    choices: [
+      '$(6,\\ 6)$',
+      '$(-4,\\ 2)$',
+      '$(5,\\ 8)$',
+      '$(4,\\ -2)$',
+    ],
+    correct: 3,
+    why: [
+      'Punkternas koordinater ska inte adderas. Vektorn är skillnaden mellan dem.',
+      'Det är $\\overrightarrow{P_2P_1}$, vektorn åt andra hållet.',
+      'Koordinaterna multipliceras inte ihop.',
+      'Slutpunkt minus startpunkt: $(5 - 1,\\ 2 - 4) = (4,\\ -2)$.',
+    ],
+  },
+  {
+    question: 'Hur beräknas längden av $\\vec{u} = (x,\\ y)$ i en ON-bas?',
+    choices: [
+      '$|\\vec{u}| = x + y$',
+      '$|\\vec{u}| = \\sqrt{x^2 + y^2}$',
+      '$|\\vec{u}| = x^2 + y^2$',
+      '$|\\vec{u}| = |x| \\cdot |y|$',
+    ],
+    correct: 1,
+    why: [
+      'Summan av kateterna är inte hypotenusan. För $(3,\\ 4)$ hade det gett 7 i stället för 5.',
+      'Koordinaterna är kateterna i en rätvinklig triangel med vektorn som hypotenusa, och Pythagoras sats ger längden.',
+      'Det är längdens kvadrat. Roten ur saknas.',
+      'Produkten av koordinaterna har ingenting med längden att göra.',
+    ],
+  },
+],
 };

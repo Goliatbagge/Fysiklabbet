@@ -758,6 +758,7 @@ window.KATALOG = {
             intro: 'Vektorer är storheter med både storlek och riktning. Kapitlet börjar med de grundläggande räkneoperationerna, ritade för hand i rutnät: vektorer som riktade sträckor, addition med polygon- och parallellogrammetoden, multiplikation med tal och subtraktion som addition av den motsatta vektorn.',
             sections: [
               { num: '4.1', title: 'Grundläggande vektoroperationer', description: 'Skalära och vektoriella storheter, vektorer som riktade sträckor och ekvivalensklasser, addition med polygon- och parallellogrammetoden, multiplikation med tal och subtraktion.', href: null, icon: null, keywords: ['vektor','vektorer','skalär','vektoriell storhet','riktad sträcka','ekvivalensklass','polygonmetoden','parallellogrammetoden','vektoraddition','vektorsubtraktion','resultant','parallella vektorer','multiplikation med tal','kommutativa lagen'] },
+              { num: '4.2', title: 'Basvektorer och vektorkoordinater', description: 'Basvektorer, ON-bas och koordinater, räkning koordinat för koordinat, parallella vektorer som u = kv, ortsvektorer, vektorn mellan två punkter och längden med Pythagoras sats.', href: null, icon: null, keywords: ['vektor','vektorer','basvektorer','bas','on-bas','ortonormerad','koordinater','komponenter','komposanter','koordinatform','parallella vektorer','ortsvektor','vektor mellan två punkter','längd','belopp','norm','pythagoras sats'] },
             ],
           },
         },

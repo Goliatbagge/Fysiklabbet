@@ -36308,19 +36308,19 @@ $$
             level: 1,
             question: `Vilket uttryck ger derivatan av en sammansatt funktion $y = f(g(x))$ enligt kedjeregeln?`,
             choices: [
-                `$y' = f\\,'(g(x))\\cdot g'(x)$`,
-                `$y' = f\\,'(x)\\cdot g'(x)$`,
-                `$y' = f\\,'(g(x)) + g'(x)$`,
-                `$y' = f\\,'(g'(x))$`,
+                `$y' = f'(g(x))\\cdot g'(x)$`,
+                `$y' = f'(x)\\cdot g'(x)$`,
+                `$y' = f'(g(x)) + g'(x)$`,
+                `$y' = f'(g'(x))$`,
             ],
             correct: 0,
             solution: `Kedjeregeln säger att man deriverar den yttre funktionen med den inre kvar och multiplicerar med den inre derivatan:
 
 $$
-y' = f\\,'(g(x))\\cdot g'(x)
+y' = f'(g(x))\\cdot g'(x)
 $$
 
-**Svar:** $y' = f\\,'(g(x))\\cdot g'(x)$`,
+**Svar:** $y' = f'(g(x))\\cdot g'(x)$`,
         },
         {
             level: 1,

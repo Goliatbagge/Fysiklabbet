@@ -17,7 +17,10 @@
   }
   .page { max-width: 820px; margin: 0 auto; padding: 36px 20px 60px; }
   h1 { font-size: 26px; margin: 0 0 18px; }
-  .uppgift {
+  /* Rutan har klassen lab-block-exempel och arket klassen lab-handskrift:
+     då klonar handskrift.js frågestammen till den hopfällbara
+     uppgiftspanelen i helskärm, precis som i katalogens exempelrutor. */
+  .uppgift > p {
     background: rgba(255,255,255,.55);
     border: 1px solid rgba(15,22,32,.14);
     border-radius: 10px;
@@ -26,7 +29,6 @@
     font-size: 17px;
     line-height: 1.55;
   }
-  .uppgift p { margin: 0; }
   .uppgift em { font-style: italic; }
 </style>
 </head>
@@ -34,16 +36,16 @@
 <div class="page">
   <h1>Hur djupt är stupet?</h1>
 
-  <div class="uppgift">
+  <div class="uppgift lab-block-exempel">
     <p><strong>Aevan och Olle är uppe i fjällen och klättrar. De sitter och
     fikar vid ett stup och undrar hur djupt det kan vara. De släpper ner en
     stor sten och mäter falltiden till 3,5&nbsp;s.<br>
     a) Hur djupt är stupet?<br>
     b) De kastar sedan en sten rakt upp med hastigheten 12&nbsp;m/s. Vilken
     hastighet har stenen när den landar på stupets botten?</strong></p>
-  </div>
 
-  <div id="stupet"></div>
+    <div id="stupet" class="lab-handskrift"></div>
+  </div>
 </div>
 <script src="../handskrift.js"></script>
 <script>

@@ -108,6 +108,14 @@
             // både mellan dem och efter bindestrecket.
             html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
                 '<span class="var-compound">$1-$2</span>');
+            // Håll ihop en hel likhet i löptext: variabel + operator + värde
+            // ("<em>a</em> = −<em>g</em>", "<em>y</em> = −1,6 m", "<em>t</em> = 0").
+            // Variabeln, likhetstecknet och värdet är separata inline-noder, så
+            // webbläsaren fick annars bryta raden mitt i likheten ("a =" på
+            // en rad och "−g" på nästa, påpekat 2026-09-07 i fy2-1.8).
+            html = html.replace(
+                /(<em>[^<]{1,3}<\/em>[₀-₉ₓᵧ]*)([  ](?:=|≈|&lt;|&gt;|≤|≥|≠|∝)[  ])(−?(?:<em>[^<]{1,3}<\/em>[₀-₉ₓᵧ]*|\d[\d,.]*(?: [^\s<]{1,8}){0,3}))/g,
+                '<span class="var-compound">$1$2$3</span>');
             html = html.replace(/@@RMATTR(\d+)@@/g, (_, i) => attrs[+i]);
             return html;
         }
@@ -939,8 +947,50 @@
                 }
             }
         }
+        function isVardefList(box, ul) {
+            const kids = Array.from(box.children);
+            const ix = kids.indexOf(ul);
+            for (let i = ix - 1; i >= 0; i--) {                            // närmast föregående stycke
+                const el = kids[i];
+                if (el.classList && el.classList.contains('lab-block-title')) continue;
+                if (el.tagName === 'P') {
+                    if (/^där/i.test(el.textContent.trim())) return true;
+                    if (/där$/i.test(el.textContent.trim())) return true;
+                }
+                break;
+            }
+            const lis = Array.from(ul.children).filter(li => li.tagName === 'LI');
+            return lis.length > 0 && lis.every(li =>
+                Array.from(li.childNodes).some(n => n.nodeType === 3 && n.nodeValue.indexOf('=') >= 0));
+        }
+        // En ANMÄRKNING till en formel — ett stycke direkt efter en
+        // display-formel som bara består av en parentes, t.ex. "(då rörelsen
+        // startar och slutar i samma horisontalplan)" — läggs till HÖGER om
+        // formeln i en flex-rad (.formel-rad), så att det syns vilken formel
+        // den hör till. På smal skärm radbryts raden och anmärkningen hamnar
+        // under formeln. Att baka in texten i KaTeX-formeln duger inte: då
+        // skalas hela formeln ned till oläslig storlek på en telefon
+        // (fy2-1.8, 2026-09-07).
+        function wrapFormelAnm(root) {
+            root.querySelectorAll('.lab-block-formel .katex-display').forEach(disp => {
+                if (disp.closest('.formel-rad')) return;
+                // marked lindar $$-formeln i ett <p>: utgå från det stycket
+                const wrapP = disp.closest('p') || disp;
+                const p = wrapP.nextElementSibling;
+                if (!p || p.tagName !== 'P') return;
+                const t = p.textContent.trim();
+                if (!/^\(.{4,160}\)$/.test(t) || p.querySelector('.katex-display')) return;
+                const rad = document.createElement('div');
+                rad.className = 'formel-rad';
+                wrapP.parentNode.insertBefore(rad, wrapP);
+                rad.appendChild(wrapP);
+                p.classList.add('formel-anm');
+                rad.appendChild(p);
+            });
+        }
         function buildFormelLayouts(root) {
             if (!root) return;
+            wrapFormelAnm(root);
             root.querySelectorAll('.lab-block-formel').forEach(box => {
                 if (box.querySelector('.formel-layout')) return;          // redan byggd
                 if (!box.querySelector('.katex-display, .katex')) return;
@@ -952,9 +1002,30 @@
                 const uls = Array.from(box.querySelectorAll('ul'))
                     .filter(u => !u.closest('details'));
                 if (uls.length > 1) return;
-                // Förklaringen till höger: i första hand en punktlista <ul>,
-                // annars ett stycke som börjar med "där" (prosaförklaring).
+                // Kapitelsammanfattningarnas "Kapitlets formler" radar upp
+                // flera formler under var sin fetstilsrubrik, ofta med flera
+                // "där"-förklaringar. Där ska ingenting flyttas: layouten
+                // lade förut en avskiljare mitt i rutan och strök "där" ur
+                // en av förklaringarna.
+                const subheads = Array.from(box.children).filter(el =>
+                    el.tagName === 'P' && el.children.length === 1 &&
+                    el.firstElementChild.tagName === 'STRONG' &&
+                    el.textContent.trim() === el.firstElementChild.textContent.trim());
+                if (subheads.length > 1) return;
+                const darP = Array.from(box.children).filter(el =>
+                    el.tagName === 'P' && /^där/i.test(el.textContent.trim()) &&
+                    el.textContent.trim().toLowerCase() !== 'där');
+                if (darP.length > 1) return;
+                // En punktlista är bara en "där"-lista om den ser ut som en:
+                // antingen står ett stycke "där" före den, eller så har varje
+                // rad ett likhetstecken UTANFÖR matten ("$v$ = hastighet") —
+                // det är där styleVardefSymbols delar raden. En vanlig
+                // punktlista i en formelruta ("När ett … plustecken står
+                // framför en parentes …", ma1c-2.2) har inget sådant: allt
+                // hamnade då i symbol-spannet, raden sattes nowrap och listan
+                // försvann utanför rutan. Sådana listor lämnas i sitt flöde.
                 let right = uls[0] || null;
+                if (right && !isVardefList(box, right)) right = null;
                 let isProse = false;
                 if (!right) {
                     right = Array.from(box.children).find(

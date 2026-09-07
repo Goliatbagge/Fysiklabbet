@@ -2947,6 +2947,25 @@ button.lab-card-disabled { pointer-events: none; }
 .var-compound {
     white-space: nowrap;
 }
+
+/* Anmärkning intill en formel (wrapFormelAnm i katalog.html/avsnitt.html):
+   formeln och parentes-stycket efter den läggs på samma rad; på smal skärm
+   radbryts raden och anmärkningen hamnar under formeln. */
+.formel-rad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1.2em;
+    row-gap: 0;
+}
+.formel-rad > p:first-child { flex: 0 1 auto; min-width: 0; margin: 0; }
+.formel-rad > p.formel-anm {
+    flex: 1 1 11em;
+    margin: 0 0 0.6em;
+    font-size: 0.92em;
+    line-height: 1.35;
+    opacity: 0.85;
+}
 .katex-display .katex {
     white-space: normal;
 }

@@ -17098,8 +17098,8 @@
     y += adv + 1.1 * F;
     var bB = bubble(120, bubbleTop(y - adv), bw, [
       [['b) Stighöjden har en egen']],
-      [['formel. Mätvärdena står redan']],
-      [['i klammern i a).']]
+      [['formel. Jag skriver upp den']],
+      [['först.']]
     ]);
     tanke(bB);
     placeString('b) Stighöjd', padL, y, s * 0.62, F * 0.62, acts);
@@ -17108,6 +17108,17 @@
     xx = placeString('y_m_a_x=', padL, y, s, F, acts);
     fracH('v_0^2·sin^2 α', '2g', xx, y);
     stepEnd();
+
+    /* mätvärdesklammer direkt under formeln, som i a) */
+    y += adv + 1.1 * F;
+    var bKB = bubble(140, bubbleTop(y - adv), bw, [
+      [['Mätvärdena i en klammer under']],
+      [['formeln, innan de sätts in.']]
+    ]);
+    tanke(bKB);
+    var klamB = valueBracket(acts, ['v_0=15 m/s', 'α=50°', 'g≈9,82 m/s^2'], padL, y, s, F);
+    stepEnd();
+    y = klamB.yEnd;
 
     y += adv + 1.2 * F;
     var bI2 = bubble(140, bubbleTop(y - adv), bw, [
@@ -17169,10 +17180,20 @@
     fracH('v_0^2·sin(2α)', 'g', xx, y);
     stepEnd();
 
+    y += adv + 1.1 * F;
+    var bKC = bubble(140, bubbleTop(y - adv), bw, [
+      [['Samma mätvärden som förut,']],
+      [['i en klammer under formeln.']]
+    ]);
+    tanke(bKC);
+    var klamC = valueBracket(acts, ['v_0=15 m/s', 'α=50°', 'g≈9,82 m/s^2'], padL, y, s, F);
+    stepEnd();
+    y = klamC.yEnd;
+
     y += adv + 1.2 * F;
     var bI3 = bubble(140, bubbleTop(y - adv), bw, [
       [['Dubbla vinkeln inuti sinus!']],
-      [['Värdena ur klammern i a).']]
+      [['In med värdena ur klammern.']]
     ]);
     tanke(bI3);
     xx = placeString('x_m_a_x=', padL, y, s, F, acts);
@@ -17231,10 +17252,22 @@
     placeString('t=2·1,170...=2,340... s', padL, y, s, F, acts);
     stepEnd();
 
-    y += adv;
+    y += adv + 1.1 * F;
+    var bKD = bubble(140, bubbleTop(y - adv), bw, [
+      [['Klammern får nu hela flygtiden']],
+      [['som mätvärde, oavrundad.']]
+    ]);
+    tanke(bKD);
+    var klamD = valueBracket(acts,
+      ['v_0=15 m/s', 'α=50°', 'g≈9,82 m/s^2', 't=2,340... s'], padL, y, s, F);
+    stepEnd();
+    y = klamD.yEnd;
+
+    y += adv + 1.2 * F;
     var bD3 = bubble(140, bubbleTop(y - adv), bw, [
       [['Farten i x-led är konstant']],
-      [['under hela kastet.']]
+      [['under hela kastet. In med']],
+      [['värdena ur klammern.']]
     ]);
     tanke(bD3);
     placeString('v_x=15·cos 50°=9,641... m/s', padL, y, s, F, acts);

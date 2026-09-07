@@ -71,6 +71,14 @@
             // bindestrecket eller mellan variabeln och bindestrecket.
             html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
                 '<span class="var-compound">$1-$2</span>');
+            // Håll ihop en hel likhet i löptext: variabel + operator + värde
+            // ("<em>a</em> = −<em>g</em>", "<em>y</em> = −1,6 m", "<em>t</em> = 0").
+            // Variabeln, likhetstecknet och värdet är separata inline-noder, så
+            // webbläsaren fick annars bryta raden mitt i likheten ("a =" på
+            // en rad och "−g" på nästa, påpekat 2026-09-07 i fy2-1.8).
+            html = html.replace(
+                /(<em>[^<]{1,3}<\/em>[₀-₉ₓᵧ]*)([  ](?:=|≈|&lt;|&gt;|≤|≥|≠|∝)[  ])(−?(?:<em>[^<]{1,3}<\/em>[₀-₉ₓᵧ]*|\d[\d,.]*(?: [^\s<]{1,8}){0,3}))/g,
+                '<span class="var-compound">$1$2$3</span>');
             html = html.replace(/@@RMATTR(\d+)@@/g, (_, i) => attrs[+i]);
             return html;
         }
@@ -642,6 +650,23 @@
                         { left: '$', right: '$', display: false },
                     ],
                     throwOnError: false,
+                });
+                // Anmärkning intill en formel — ett parentes-stycke direkt
+                // efter en display-formel läggs till höger om den (samma
+                // regel som wrapFormelAnm i katalog.html; CSS .formel-rad).
+                containerRef.current.querySelectorAll('.lab-block-formel .katex-display').forEach(disp => {
+                    if (disp.closest('.formel-rad')) return;
+                    // marked lindar $$-formeln i ett <p>: utgå från det stycket
+                const wrapP = disp.closest('p') || disp;
+                const p = wrapP.nextElementSibling;
+                    if (!p || p.tagName !== 'P') return;
+                    if (!/^\(.{4,160}\)$/.test(p.textContent.trim()) || p.querySelector('.katex-display')) return;
+                    const rad = document.createElement('div');
+                    rad.className = 'formel-rad';
+                    wrapP.parentNode.insertBefore(rad, wrapP);
+                    rad.appendChild(wrapP);
+                    p.classList.add('formel-anm');
+                    rad.appendChild(p);
                 });
                 // Interaktiva grafer (::: graf) — bygg widgetarna.
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(containerRef.current);

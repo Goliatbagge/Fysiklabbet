@@ -629,11 +629,19 @@
             // ── Uppspelning (verklig tid, fast fysiksteg) ─────────────
             useEffect(() => {
                 if (status !== 'running') return;
-                let last = performance.now(), acc = 0, alive = true;
+                // Klockan startas på FÖRSTA bildrutan, aldrig med
+                // performance.now(): i en iframe inne i katalogens
+                // presentationsläge (fullskärm) räknar rAF-tidsstämpeln från
+                // en annan tidsorigo än performance.now(), så now − last blev
+                // negativt, ackumulatorn nådde aldrig ett tidssteg och kastet
+                // stod stilla efter Kasta/Fortsätt medan stegpilarna fungerade
+                // (påpekat 2026-09-07). Därför också: aldrig negativt steg.
+                let last = null, acc = 0, alive = true;
                 const loop = (now) => {
                     if (!alive) return;
                     const p = paramsRef.current;
-                    acc += Math.min((now - last) / 1000, 0.05) * (p.ultra ? ULTRA : 1);
+                    if (last === null) last = now;
+                    acc += Math.min(Math.max(now - last, 0) / 1000, 0.05) * (p.ultra ? ULTRA : 1);
                     last = now;
                     let done = false;
                     while (acc >= TIME_STEP && !done) {

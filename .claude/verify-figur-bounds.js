@@ -143,6 +143,15 @@ for (const f of files) {
         const [vx, vy, vw, vh] = vb;
         const bb = bboxOfSvgBody(svg[2]);
         if (!isFinite(bb.minX)) continue;
+        // Texten har en BREDD: en etikett med text-anchor="start" nära
+        // högerkanten fyller ut marginalen med sina glyfer, så räkna in
+        // etiketternas uppmätta vänster-/högerkanter (samma teckentabell som
+        // klipp-kontrollen). Annars flaggas en välbeskuren figur för "tom"
+        // marginal som i själva verket är text (fy2-1.8, 2026-09-07).
+        for (const t of collectTexts(svg[2])) {
+            if (t.left < bb.minX) bb.minX = t.left;
+            if (t.right > bb.maxX) bb.maxX = t.right;
+        }
         const margins = {
             top:    bb.minY - vy,
             bottom: (vy + vh) - bb.maxY,

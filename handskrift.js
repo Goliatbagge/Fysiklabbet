@@ -14391,8 +14391,8 @@
 
     var Q2 = [Q[0], Q[1] + 36], R = [Q2[0] - 3 * E, Q2[1]];
     V.dash(Q, Q2);
-    figurPil(T, Q2, R, BLUE);
-    V.lbl('u', Q2[0] - 1.5 * E - 6, Q2[1] + 32, BLUE);
+    figurPil(T, Q2, R);
+    V.lbl('u', Q2[0] - 1.5 * E - 6, Q2[1] + 32);
     T.stepEnd();
 
     tanke(368, [
@@ -14401,8 +14401,8 @@
       [['spetsen: 8 fram och 3 tillbaka.']]
     ], 0);
     var S = [P[0], 402], S2 = [R[0], 402];
-    figurPil(T, S, S2);
-    V.lbl('u+v', (S[0] + S2[0]) / 2 - 18, S[1] + 32);
+    figurPil(T, S, S2, BLUE);
+    V.lbl('u+v', (S[0] + S2[0]) / 2 - 18, S[1] + 32, BLUE);
     T.stepEnd();
 
     y = 500;
@@ -14525,8 +14525,8 @@
       [['att den startar i u:s spets.']],
       [['Bara startpunkten ändras.']]
     ], 0);
-    figurPil(T, Q, R, BLUE);
-    V.lbl('v', Q[0] + 40, Q[1] + 50, BLUE);
+    figurPil(T, Q, R);
+    V.lbl('v', Q[0] + 40, Q[1] + 50);
     T.stepEnd();
 
     tanke(372, [
@@ -14534,8 +14534,8 @@
       [['startpunkten till den sista']],
       [['spetsen.']]
     ], 0);
-    figurPil(T, P, R);
-    V.lbl('u+v', P[0] + 46, P[1] + 56);
+    figurPil(T, P, R, BLUE);
+    V.lbl('u+v', P[0] + 46, P[1] + 56, BLUE);
     T.stepEnd();
 
     /* b) parallellogrammetoden, till höger om a) */
@@ -14554,17 +14554,17 @@
       [['med v från u:s spets och med']],
       [['u från v:s spets.']]
     ], 0);
-    V.dash(U2, R2, BLUE);
+    V.dash(U2, R2);
     T.pause(150);
-    V.dash(V2, R2, BLUE);
+    V.dash(V2, R2);
     T.stepEnd();
 
     tanke(372, [
       [['Summan är diagonalen från den']],
       [['gemensamma startpunkten.']]
     ], 0);
-    figurPil(T, P2, R2);
-    V.lbl('u+v', R2[0] + 10, R2[1] + 8);
+    figurPil(T, P2, R2, BLUE);
+    V.lbl('u+v', R2[0] + 10, R2[1] + 8, BLUE);
     T.stepEnd();
 
     tanke(372, [
@@ -14688,8 +14688,8 @@
       [['3 uppåt. Jag lägger den i u:s']],
       [['spets, som vid addition.']]
     ], 0);
-    figurPil(T, Q, R, BLUE);
-    V.lbl('-v', Q[0] - 4, Q[1] - 40, BLUE);
+    figurPil(T, Q, R);
+    V.lbl('-v', Q[0] - 4, Q[1] - 40);
     T.stepEnd();
 
     tanke(482, [
@@ -14697,8 +14697,8 @@
       [['första startpunkten till den']],
       [['sista spetsen.']]
     ], 0);
-    figurPil(T, P, R);
-    V.lbl('u-v', padL + 8, P[1] - 70);
+    figurPil(T, P, R, BLUE);
+    V.lbl('u-v', padL + 8, P[1] - 70, BLUE);
     T.stepEnd();
 
     /* b) från samma punkt, till höger om a) */

@@ -57,7 +57,8 @@ $$
 
 **Svar:** $4x - 2$
 
-**b)** Vi multiplicerar in 8:an, men har först kvar parentesen efter 2:an:
+**b)** Vi multiplicerar in båda faktorerna i samma steg. Minustecknet
+framför 2:an gäller hela produkten, så vi behåller en parentes runt den:
 
 $$
 8(3x + 4) - 2(5x - 7) = 8 \cdot 3x + 8 \cdot 4 - (2 \cdot 5x - 2 \cdot 7)
@@ -106,7 +107,7 @@ $$
 
 **Svar:** $x^2 + 10x + 21$
 
-**b)** Samma metod — håll ordning på tecknen:
+**b)** Samma metod. Håll ordning på tecknen:
 
 $$
 (3x - 5)(8x + 9) = 24x^2 + 27x - 40x - 45 = 24x^2 - 13x - 45

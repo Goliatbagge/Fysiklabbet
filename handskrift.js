@@ -311,6 +311,42 @@
  * skriv, hojd}). Sign-flip vid MINUS framför parentes (utan faktor) är
  * INTE en multiplicering och behåller sin blå teckenbytes-skrivning.
  * Referensimpl: layoutMultiplicerain, layoutVariabelbada b).
+ * FLERA PARENTESER PÅ SAMMA RAD UTVECKLAS I SAMMA LED (användarönskemål
+ * 2026-09-07): i 8(3x+4)−2(5x−7) skrivs =24x+32−(10x−14) som ETT led,
+ * med bågarna från 8:an och sedan från 2:an i samma klicksteg — inte
+ * ett led per parentes med den andra parentesen avskriven oförändrad.
+ * Avskriften tillför ingenting, och eleven ska se att båda faktorerna
+ * multipliceras in på samma sätt.
+ *
+ * ⚠️ REGEL (BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN, användarkrav
+ * 2026-09-07): när två parenteser multipliceras, (a+b)(c+d), ritas
+ * bågarna från den FÖRSTA termen (a → c, a → d) ovanför raden och
+ * bågarna från den ANDRA termen (b → c, b → d) UNDER raden — precis som
+ * i teorins figur "Multiplicera parenteser". Fyra bågar ovanför varandra
+ * blir en gröt där ingen ser vilken båge som hör till vilken produkt.
+ * Ordningen är oförändrad (a·c, a·d, b·c, b·d, produkttermen direkt efter
+ * varje båge); bara sidan skiljer. Skriv `under: true` på b-delarna i
+ * mkMultIn (hojd ~20 och ~36; dx 3 på den andra) och lägg målraden
+ * 3,1·F under källraden i stället för 2,3·F, så att bågarna inte går in
+ * i den. Har första parentesen tre termer ritas den tredje termens
+ * bågar också underifrån, med större hojd. Gäller ALLA kurser.
+ * Referensimpl: layoutUtveckla, layoutParentesekv.
+ *
+ * ⚠️ REGEL (SAMLA LIKADANA TERMER — RINGA IN FÖRST, användarkrav
+ * 2026-09-07): när likadana termer i en rad slås ihop till EN term i
+ * nästa rad ringar blåpennan FÖRST in termerna som slås ihop, där de
+ * står i raden ovanför (24x och −10x), en i taget med en kort paus —
+ * och skriver DIREKT därefter den hopslagna termen (14x). Ringarna tonar
+ * ut, och sedan görs samma sak för nästa grupp (32 och 14 → +46). Utan
+ * ringarna dyker "14x" upp ur ingenting, och just där tappar eleven
+ * tråden. Termer som bara följer med oförändrade skrivs utan ringar.
+ * Källraden skrivs i segment så att varje terms x-intervall fångas —
+ * en positiv term ringas UTAN sitt plustecken, en negativ MED sitt
+ * minustecken (tecknet hör till termen). Allt i ETT klicksteg; pauserna
+ * bär ordningen. Helper: mkSamla(T) (grupper = {ringar, skriv}). Gäller
+ * ALLA kurser: uttryck, ekvationer (även när termerna står i samma led
+ * och samlas innan något flyttas) och fysikscener.
+ * Referensimpl: layoutLikatermer, layoutMultiplicerain b), layoutUtveckla.
  *
  * REGEL (FÖRKORTNING OCH FÖRLÄNGNING SKRIVS I TVÅ DRAG, användar-
  * önskemål 2026-08-05): när ett bråk förkortas eller förlängs får pennan
@@ -5241,22 +5277,26 @@
 
   /* Bågpil mellan två punkter på en rad (distributiva lagen): en båge som
    * buktar uppåt från faktorn till den term den multipliceras med, med
-   * pilspets i bågens slutriktning. */
+   * pilspets i bågens slutriktning. Med `under` buktar bågen i stället
+   * NEDÅT under raden (yRef är då bågfötternas y under tecknen) — så
+   * ritas bågarna från den ANDRA termen i en dubbelparentes, se REGEL
+   * (BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN) i filhuvudet. */
   function mkArc(T) {
     var acts = T.acts;
-    return function (x1, x2, yTop, hojd, col) {
-      var mx = (x1 + x2) / 2, my = yTop - hojd;
+    return function (x1, x2, yRef, hojd, col, under) {
+      var sgn = under ? 1 : -1;
+      var mx = (x1 + x2) / 2, my = yRef + sgn * hojd, yEnd = yRef + sgn * 3;
       acts.push({ kind: 'stroke',
-                  pts: [[x1, yTop], [mx, my], [x2, yTop - 3]],
+                  pts: [[x1, yRef], [mx, my], [x2, yEnd]],
                   color: col || null });
       /* pilspets längs tangenten i slutpunkten */
-      var dx = x2 - mx, dy = (yTop - 3) - my, L = Math.hypot(dx, dy) || 1;
+      var dx = x2 - mx, dy = yEnd - my, L = Math.hypot(dx, dy) || 1;
       dx /= L; dy /= L;
       var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), len = 11;
-      T.line([x2 - (dx * ca - dy * sa) * len, (yTop - 3) - (dx * sa + dy * ca) * len],
-             [x2, yTop - 3], col || null);
-      T.line([x2 - (dx * ca + dy * sa) * len, (yTop - 3) - (-dx * sa + dy * ca) * len],
-             [x2, yTop - 3], col || null);
+      T.line([x2 - (dx * ca - dy * sa) * len, yEnd - (dx * sa + dy * ca) * len],
+             [x2, yEnd], col || null);
+      T.line([x2 - (dx * ca + dy * sa) * len, yEnd - (-dx * sa + dy * ca) * len],
+             [x2, yEnd], col || null);
       T.pause(240);
     };
   }
@@ -5270,16 +5310,60 @@
    *     { fran: [f0, f1], till: [t0, t1], skriv: '-12x', hojd: 26 }, …]);
    * fran/till är x-intervall i källraden (mittpunkterna används; dx/dx2
    * knuffar bågens ändar i sidled när flera bågar delar ändpunkt), yArc
-   * är bågfötternas y (vanligen källradens baslinje − 0,95·F). */
+   * är bågfötternas y (vanligen källradens baslinje − 0,95·F).
+   * `under: true` på en del ritar bågen UNDERIFRÅN — fötterna läggs då
+   * 0,34·F under källradens baslinje (räknat ur yArc) — se REGEL
+   * (BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN). Målraden måste då
+   * ligga ~3,1·F under källraden, inte 2,3·F, så att bågarna får plats.
+   * Efter anropet har varje del fått d.x0/d.x1: produkttermens x-intervall
+   * i målraden, så att en senare hopslagning kan ringa in den (mkSamla). */
+  var UNDER_ARC_DY = 1.29;   /* 0,95·F (över) + 0,34·F (under) */
   function mkMultIn(T) {
-    var arc = mkArc(T);
+    var arc = mkArc(T), F = T.s * 100;
     return function (xx, yMal, yArc, delar) {
       delar.forEach(function (d) {
         arc((d.fran[0] + d.fran[1]) / 2 + (d.dx || 0),
             (d.till[0] + d.till[1]) / 2 + (d.dx2 || 0),
-            yArc, d.hojd == null ? 30 : d.hojd, BLUE);
+            d.under ? yArc + UNDER_ARC_DY * F : yArc,
+            d.hojd == null ? 30 : d.hojd, BLUE, !!d.under);
+        d.x0 = xx;
         xx = T.str(d.skriv, xx, yMal);
+        d.x1 = xx;
         T.pause(200);
+      });
+      return xx;
+    };
+  }
+
+  /* SAMLA LIKADANA TERMER — se REGEL i filhuvudet: innan en hopslagen
+   * term skrivs ringar blåpennan in de termer i raden ovanför som slås
+   * ihop, en i taget med en kort paus emellan. Termen skrivs medan
+   * ringarna står kvar, och de tonar ut innan nästa grupp ringas. Allt i
+   * ETT klicksteg; pauserna bär ordningen.
+   *   var samla = mkSamla(T);
+   *   xx = samla(xx, yMal, [
+   *     { ringar: [[x24a, x24b, yRad], [x10a, x10b, yRad]], skriv: '14x' },
+   *     { ringar: [[x32a, x32b, yRad], [x14a, x14b, yRad]], skriv: '+46' },
+   *     { skriv: '-2' } ]);                    // oförändrad term: inga ringar
+   * ringar = [x0, x1, yBaslinje(, opt)] som T.ring. Efter anropet har varje
+   * grupp fått g.x0/g.x1: den skrivna termens x-intervall i målraden. */
+  function mkSamla(T) {
+    return function (xx, yMal, grupper) {
+      grupper.forEach(function (g) {
+        var rs = [];
+        (g.ringar || []).forEach(function (r, i) {
+          if (i) T.pause(280);
+          rs.push(T.ring(r[0], r[1], r[2], r[3]));
+        });
+        if (rs.length) T.pause(220);
+        g.x0 = xx;
+        xx = T.str(g.skriv, xx, yMal, g.col || null);
+        g.x1 = xx;
+        if (rs.length) {
+          T.pause(260);
+          rs.forEach(function (st) { T.fade(st); });
+        }
+        T.pause(160);
       });
       return xx;
     };
@@ -5699,9 +5783,11 @@
     ]);
     var rM = T.ring(xp0 + 0.16 * F, xm - 0.16 * F, y);
     y += 2.4 * F;
-    xx = T.str('=20x', padL + 30, y);
+    var yS = y;
+    xx = T.str('=', padL + 30, y);
+    var k1 = xx; xx = T.str('20x', xx, y);        var k1b = xx;
     xx = T.str('-5', xx, y, BLUE);
-    xx = T.str('-3x', xx, y, BLUE);
+    var k2 = xx; xx = T.str('-3x', xx, y, BLUE);  var k2b = xx;
     T.str('+7y', xx, y, BLUE);
     T.fade(rM);
     T.stepEnd();
@@ -5710,8 +5796,14 @@
       [['Nu samlar jag']],
       [['x-termerna: 20x-3x=17x.']]
     ]);
+    /* 20x och -3x ringas in innan 17x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST) */
+    var samla = mkSamla(T);
     y += 2.3 * F;
-    T.str('=17x-5+7y', padL + 30, y);
+    samla(padL + 30, y, [
+      { ringar: [[k1, k1b, yS], [k2, k2b, yS]], skriv: '=17x' },
+      { skriv: '-5+7y' }
+    ]);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -5778,7 +5870,19 @@
       [['något ändras inuti.']]
     ]);
     y += 2.3 * F;
-    T.str('=2x+3+2x+3+x+x', padL + 30, y);
+    var yS = y;
+    xx = T.str('=', padL + 30, y);
+    var o1 = xx; xx = T.str('2x', xx, y);  var o1b = xx;
+    xx = T.str('+', xx, y);
+    var k1 = xx; xx = T.str('3', xx, y);   var k1b = xx;
+    xx = T.str('+', xx, y);
+    var o2 = xx; xx = T.str('2x', xx, y);  var o2b = xx;
+    xx = T.str('+', xx, y);
+    var k2 = xx; xx = T.str('3', xx, y);   var k2b = xx;
+    xx = T.str('+', xx, y);
+    var o3 = xx; xx = T.str('x', xx, y);   var o3b = xx;
+    xx = T.str('+', xx, y);
+    var o4 = xx; xx = T.str('x', xx, y);   var o4b = xx;
     T.stepEnd();
 
     tanke(y, [
@@ -5786,8 +5890,15 @@
       [['2x+2x+x+x=6x.']],
       [['Konstanterna: 3+3=6.']]
     ]);
+    /* x-termerna ringas in innan 6x skrivs, sedan konstanterna innan 6
+     * (se REGEL: SAMLA LIKADANA TERMER — RINGA IN FÖRST) */
+    var samla = mkSamla(T);
     y += 2.3 * F;
-    T.str('=6x+6', padL + 30, y);
+    samla(padL + 30, y, [
+      { ringar: [[o1, o1b, yS], [o2, o2b, yS], [o3, o3b, yS], [o4, o4b, yS]],
+        skriv: '=6x' },
+      { ringar: [[k1, k1b, yS], [k2, k2b, yS]], skriv: '+6' }
+    ]);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -5846,12 +5957,6 @@
     T.stepEnd();
 
     /* ---- b) 8(3x+4)-2(5x-7) ---- */
-    tanke(y, [
-      [['Här finns två']],
-      [['parenteser. Jag tar en i']],
-      [['taget och börjar med']],
-      [['8:an.']]
-    ]);
     y += 3.4 * F;
     var yb1 = y;
     xx = T.str('b) ', padL, y);
@@ -5869,24 +5974,25 @@
     T.str(')', xx, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Två parenteser. 8:an']],
+      [['multipliceras in i den']],
+      [['första. Minus framför']],
+      [['2:an gäller HELA']],
+      [['produkten, så jag']],
+      [['behåller en parentes']],
+      [['runt den ett steg till.']]
+    ]);
+    /* båda parenteserna utvecklas i SAMMA led (användarönskemål
+     * 2026-09-07, se REGEL: MULTIPLICERA IN I PARENTES): bågarna från
+     * 8:an, sedan "-(", bågarna från 2:an och ")" — i ett klicksteg */
     y += 2.3 * F;
     xx = T.str('=', padL + 30, y);
     xx = multIn(xx, y, yb1 - 0.95 * F, [
       { fran: [g1, g1b], till: [h1, h1b], skriv: '24x', hojd: 24 },
       { fran: [g1, g1b], till: [h2, h2b], skriv: '+32', hojd: 40, dx: 4 }
     ]);
-    T.str('-2(5x-7)', xx, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Framför 2:an står ett']],
-      [['minustecken. Det gäller']],
-      [['HELA produkten, så jag']],
-      [['behåller en parentes runt']],
-      [['den ett steg till.']]
-    ]);
-    y += 2.3 * F;
-    xx = T.str('=24x+32-(', padL + 30, y);
+    xx = T.str('-(', xx, y);
     xx = multIn(xx, y, yb1 - 0.95 * F, [
       { fran: [g2, g2b], till: [h3, h3b], skriv: '10x', hojd: 24 },
       { fran: [g2, g2b], till: [h4, h4b], skriv: '-14', hojd: 40, dx: 4 }
@@ -5899,10 +6005,17 @@
       [['byter tecken på båda']],
       [['termerna inuti.']]
     ]);
+    /* raden skrivs i segment så att termernas x-intervall fångas åt
+     * hopslagningen nedanför */
     y += 2.3 * F;
-    xx = T.str('=24x+32', padL + 30, y);
-    xx = T.str('-10x', xx, y, BLUE);
-    T.str('+14', xx, y, BLUE);
+    var yS = y;
+    xx = T.str('=', padL + 30, y);
+    var k1 = xx; xx = T.str('24x', xx, y);        var k1b = xx;
+    xx = T.str('+', xx, y);
+    var k2 = xx; xx = T.str('32', xx, y);         var k2b = xx;
+    var k3 = xx; xx = T.str('-10x', xx, y, BLUE); var k3b = xx;
+    xx = T.str('+', xx, y, BLUE);
+    var k4 = xx; xx = T.str('14', xx, y, BLUE);   var k4b = xx;
     T.stepEnd();
 
     tanke(y, [
@@ -5911,8 +6024,15 @@
       [['24x-10x=14x och']],
       [['32+14=46.']]
     ]);
+    /* 24x och -10x ringas in innan 14x skrivs, sedan 32 och 14 innan 46
+     * (se REGEL: SAMLA LIKADANA TERMER — RINGA IN FÖRST) */
+    var samla = mkSamla(T);
     y += 2.3 * F;
-    T.str('=14x+46', padL + 30, y);
+    xx = T.str('=', padL + 30, y);
+    samla(xx, y, [
+      { ringar: [[k1, k1b, yS], [k3, k3b, yS]], skriv: '14x' },
+      { ringar: [[k2, k2b, yS], [k4, k4b, yS]], skriv: '+46' }
+    ]);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -5954,22 +6074,32 @@
       [['blir fyra produkter.']]
     ]);
     /* en båge per produkt, produkttermen direkt efter varje båge (se
-     * REGEL: MULTIPLICERA IN I PARENTES) */
-    var multIn = mkMultIn(T);
+     * REGEL: MULTIPLICERA IN I PARENTES). Bågarna från x ritas ovanför
+     * raden, bågarna från 7 UNDERIFRÅN (se REGEL: BÅGARNA FRÅN ANDRA
+     * TERMEN RITAS UNDERIFRÅN) — därför ligger målraden 3,1·F ned. */
+    var multIn = mkMultIn(T), samla = mkSamla(T);
     var yArc = y - 0.95 * F;
-    y += 2.6 * F;
+    y += 3.1 * F;
     xx = T.str('=', padL + 30, y);
     multIn(xx, y, yArc, [
       { fran: [a1, a1b], till: [b1, b1b], skriv: 'x·x', hojd: 26 },
       { fran: [a1, a1b], till: [b2, b2b], skriv: '+x·3', hojd: 48, dx: 3 },
-      { fran: [a2, a2b], till: [b1, b1b], skriv: '+7·x', hojd: 20, dx2: 4 },
-      { fran: [a2, a2b], till: [b2, b2b], skriv: '+7·3', hojd: 38, dx: 3,
-        dx2: 4 }
+      { fran: [a2, a2b], till: [b1, b1b], skriv: '+7·x', hojd: 20,
+        under: true },
+      { fran: [a2, a2b], till: [b2, b2b], skriv: '+7·3', hojd: 36, dx: 3,
+        under: true }
     ]);
     T.stepEnd();
 
+    /* raden skrivs i segment så att 3x och 7x kan ringas in nedanför */
     y += 2.1 * F;
-    T.str('=x^2+3x+7x+21', padL + 30, y);
+    var yS = y;
+    xx = T.str('=x^2', padL + 30, y);
+    xx = T.str('+', xx, y);
+    var s1 = xx; xx = T.str('3x', xx, y);  var s1b = xx;
+    xx = T.str('+', xx, y);
+    var s2 = xx; xx = T.str('7x', xx, y);  var s2b = xx;
+    T.str('+21', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -5977,8 +6107,14 @@
       [['termer och slås ihop:']],
       [['3x+7x=10x.']]
     ]);
+    /* 3x och 7x ringas in innan 10x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST) */
     y += 2.3 * F;
-    T.str('=x^2+10x+21', padL + 30, y);
+    samla(padL + 30, y, [
+      { skriv: '=x^2' },
+      { ringar: [[s1, s1b, yS], [s2, s2b, yS]], skriv: '+10x' },
+      { skriv: '+21' }
+    ]);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -5995,6 +6131,7 @@
       [['med in i produkterna.']]
     ]);
     y += 3.4 * F;
+    var ySb = y;
     xx = T.str('b) (', padL, y);
     var c1 = xx; xx = T.str('3x', xx, y);  var c1b = xx;
     var c2 = xx; xx = T.str('-5', xx, y);  var c2b = xx;
@@ -6005,20 +6142,26 @@
     T.str(')', xx, y);
     T.stepEnd();
 
-    y += 2.3 * F;
+    /* bågarna från 3x ovanför, från -5 underifrån → 3,1·F ned */
+    y += 3.1 * F;
     xx = T.str('=', padL + 30, y);
-    multIn(xx, y, y - 2.3 * F - 0.95 * F, [
+    multIn(xx, y, ySb - 0.95 * F, [
       { fran: [c1, c1b], till: [d1, d1b], skriv: '3x·8x', hojd: 26 },
       { fran: [c1, c1b], till: [d2, d2b], skriv: '+3x·9', hojd: 48, dx: 3 },
       { fran: [c2, c2b], till: [d1, d1b], skriv: '-5·8x', hojd: 20,
-        dx2: 4 },
-      { fran: [c2, c2b], till: [d2, d2b], skriv: '-5·9', hojd: 38, dx: 3,
-        dx2: 4 }
+        under: true },
+      { fran: [c2, c2b], till: [d2, d2b], skriv: '-5·9', hojd: 36, dx: 3,
+        under: true }
     ]);
     T.stepEnd();
 
     y += 2.1 * F;
-    T.str('=24x^2+27x-40x-45', padL + 30, y);
+    yS = y;
+    xx = T.str('=24x^2', padL + 30, y);
+    xx = T.str('+', xx, y);
+    s1 = xx; xx = T.str('27x', xx, y);   s1b = xx;
+    s2 = xx; xx = T.str('-40x', xx, y);  s2b = xx;
+    T.str('-45', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6026,7 +6169,11 @@
       [['27x-40x=-13x.']]
     ]);
     y += 2.3 * F;
-    T.str('=24x^2-13x-45', padL + 30, y);
+    samla(padL + 30, y, [
+      { skriv: '=24x^2' },
+      { ringar: [[s1, s1b, yS], [s2, s2b, yS]], skriv: '-13x' },
+      { skriv: '-45' }
+    ]);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -6043,6 +6190,7 @@
       [['utvecklade uttrycket.']]
     ]);
     y += 3.4 * F;
+    var ySc = y;
     xx = T.str('c) 10-(', padL, y);
     var e1 = xx; xx = T.str('x', xx, y);   var e1b = xx;
     var e2 = xx; xx = T.str('-2', xx, y);  var e2b = xx;
@@ -6052,15 +6200,20 @@
     T.str(')', xx, y);
     T.stepEnd();
 
-    y += 2.3 * F;
+    /* bågarna från x ovanför, från -2 underifrån → 3,1·F ned. Delarna
+     * sparas: deras x0/x1 ringas in i hopslagningen nedanför. */
+    y += 3.1 * F;
+    var yP = y;
     xx = T.str('=10-(', padL + 30, y);
-    xx = multIn(xx, y, y - 2.3 * F - 0.95 * F, [
+    var dc = [
       { fran: [e1, e1b], till: [e3, e3b], skriv: 'x^2', hojd: 26 },
       { fran: [e1, e1b], till: [e4, e4b], skriv: '-3x', hojd: 48, dx: 3 },
-      { fran: [e2, e2b], till: [e3, e3b], skriv: '-2x', hojd: 20, dx2: 4 },
-      { fran: [e2, e2b], till: [e4, e4b], skriv: '+6', hojd: 38, dx: 3,
-        dx2: 4 }
-    ]);
+      { fran: [e2, e2b], till: [e3, e3b], skriv: '-2x', hojd: 20,
+        under: true },
+      { fran: [e2, e2b], till: [e4, e4b], skriv: '+6', hojd: 36, dx: 3,
+        under: true }
+    ];
+    xx = multIn(xx, y, ySc - 0.95 * F, dc);
     T.str(')', xx, y);
     T.stepEnd();
 
@@ -6069,7 +6222,12 @@
       [['-3x-2x=-5x.']]
     ]);
     y += 2.3 * F;
-    T.str('=10-(x^2-5x+6)', padL + 30, y);
+    samla(padL + 30, y, [
+      { skriv: '=10-(x^2' },
+      { ringar: [[dc[1].x0, dc[1].x1, yP], [dc[2].x0, dc[2].x1, yP]],
+        skriv: '-5x' },
+      { skriv: '+6)' }
+    ]);
     T.stepEnd();
 
     tanke(y, [
@@ -6141,17 +6299,21 @@
     /* en båge per produkt, produkttermen direkt efter varje båge (se
      * REGEL: MULTIPLICERA IN I PARENTES) — först vänsterledet, sedan
      * högerledet */
-    var multIn = mkMultIn(T);
+    var multIn = mkMultIn(T), samla = mkSamla(T);
     var yArcP = y - 0.95 * F;
-    y += 2.3 * F;
-    pxx = multIn(padL, y, yArcP, [
+    /* bågarna från 1:an ovanför raden, från 4x UNDERIFRÅN (se REGEL:
+     * BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN) → målraden 3,1·F ned */
+    y += 3.1 * F;
+    var yProd = y;
+    var dv = [
       { fran: [p1, p1b], till: [p3, p3b], skriv: '3x', hojd: 26 },
       { fran: [p1, p1b], till: [p4, p4b], skriv: '-2', hojd: 48, dx: 3 },
       { fran: [p2, p2b], till: [p3, p3b], skriv: '+12x^2', hojd: 20,
-        dx2: 4 },
-      { fran: [p2, p2b], till: [p4, p4b], skriv: '-8x', hojd: 38, dx: 3,
-        dx2: 4 }
-    ]);
+        under: true },
+      { fran: [p2, p2b], till: [p4, p4b], skriv: '-8x', hojd: 36, dx: 3,
+        under: true }
+    ];
+    pxx = multIn(padL, y, yArcP, dv);
     pxx = T.str('=', pxx, y);
     multIn(pxx, y, yArcP, [
       { fran: [p5, p5b], till: [p6, p6b], skriv: '12x^2', hojd: 24 },
@@ -6164,10 +6326,18 @@
       [['vänsterledet:']],
       [['3x-8x=-5x.']]
     ]);
+    /* 3x och -8x ringas in i produktraden innan -5x skrivs (se REGEL:
+     * SAMLA LIKADANA TERMER — RINGA IN FÖRST) */
     y += 2.3 * F;
     var xv1 = padL;
-    var xv2 = T.str('12x^2', xv1, y);
-    var xrest = T.str('-5x-2=', xv2, y);
+    var gv = [
+      { skriv: '12x^2' },
+      { ringar: [[dv[0].x0, dv[0].x1, yProd], [dv[3].x0, dv[3].x1, yProd]],
+        skriv: '-5x' },
+      { skriv: '-2=' }
+    ];
+    var xrest = samla(xv1, y, gv);
+    var xv2 = gv[0].x1;
     var xh1 = xrest;
     var xh2 = T.str('12x^2', xh1, y);
     T.str('-6x', xh2, y);
@@ -6615,7 +6785,12 @@
      * y < 210 (se OBS i mobilzon-regeln i filhuvudet). Raden är bred
      * nog att nå in i zonen i sidled. */
     y = 242;
-    T.str('a) 5x+8-3x=9x-20', padL, y);
+    var ySa = y;
+    xx = T.str('a) ', padL, y);
+    var a1 = xx; xx = T.str('5x', xx, y);   var a1b = xx;
+    xx = T.str('+8', xx, y);
+    var a2 = xx; xx = T.str('-3x', xx, y);  var a2b = xx;
+    T.str('=9x-20', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6623,8 +6798,14 @@
       [['vänsterledet:']],
       [['5x-3x=2x.']]
     ]);
+    /* 5x och -3x ringas in innan 2x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST) */
+    var samla = mkSamla(T);
     y += 2.3 * F;
-    T.str('2x+8=9x-20', padL + 30, y);
+    samla(padL + 30, y, [
+      { ringar: [[a1, a1b, ySa], [a2, a2b, ySa]], skriv: '2x' },
+      { skriv: '+8=9x-20' }
+    ]);
     T.stepEnd();
 
     tanke(y, [
@@ -6697,11 +6878,13 @@
      * (se REGEL: MULTIPLICERA IN I PARENTES) */
     var yArcB = y - 0.95 * F;
     y += 2.3 * F;
-    xx = T.str('54', padL + 30, y);
-    xx = multIn(xx, y, yArcB, [
+    var yB = y, x54 = padL + 30;
+    xx = T.str('54', x54, y); var x54b = xx;
+    var db = [
       { fran: [q1, q1b], till: [q2, q2b], skriv: '-12x', hojd: 24 },
       { fran: [q1, q1b], till: [q3, q3b], skriv: '+20', hojd: 40, dx: 4 }
-    ]);
+    ];
+    xx = multIn(xx, y, yArcB, db);
     T.str('=25x', xx, y);
     T.stepEnd();
 
@@ -6710,8 +6893,14 @@
       [['vänsterledet slås ihop:']],
       [['54+20=74.']]
     ]);
+    /* 54 och 20 ringas in innan 74 skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST); plustecknet före 20 lämnas utanför ringen */
     y += 2.3 * F;
-    T.str('74-12x=25x', padL + 30, y);
+    samla(padL + 30, y, [
+      { ringar: [[x54, x54b, yB], [db[1].x0 + T.adv('+'), db[1].x1, yB]],
+        skriv: '74' },
+      { skriv: '-12x=25x' }
+    ]);
     T.stepEnd();
 
     tanke(y, [
@@ -7421,7 +7610,13 @@
       [['ekvationen.']]
     ]);
     y += 2.3 * F;
-    T.str('x+2x+(2x-300)=4 000', padL, y);
+    var yE = y;
+    var w1 = padL; xx = T.str('x', padL, y);  var w1b = xx;
+    xx = T.str('+', xx, y);
+    var w2 = xx; xx = T.str('2x', xx, y);     var w2b = xx;
+    xx = T.str('+(', xx, y);
+    var w3 = xx; xx = T.str('2x', xx, y);     var w3b = xx;
+    T.str('-300)=4 000', xx, y);
     T.stepEnd();
 
     /* ---- 2. Lös ekvationen ---- */
@@ -7432,9 +7627,15 @@
       [['slås x-termerna ihop:']],
       [['x+2x+2x=5x.']]
     ]);
+    /* x, 2x och 2x ringas in innan 5x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST) */
+    var samla = mkSamla(T);
     y += 3.6 * F;
     T.str('2. Lös ekvationen', padL, y - 1.6 * F, null, 0.62);
-    T.str('5x-300=4 000', padL, y);
+    samla(padL, y, [
+      { ringar: [[w1, w1b, yE], [w2, w2b, yE], [w3, w3b, yE]], skriv: '5x' },
+      { skriv: '-300=4 000' }
+    ]);
     T.stepEnd();
 
     tanke(y, [

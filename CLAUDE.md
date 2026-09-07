@@ -406,7 +406,10 @@ Så här bygger du scenen:
    avrundning i mellanled, rimlighetsbedömning i en bubbla före svarsraden,
    division med vågrätt streck, en tanke per led, blå båge från faktorn
    till varje term när en parentes utvecklas — produkttermen skrivs direkt
-   efter sin båge). **Läs filhuvudet innan
+   efter sin båge; vid två parenteser ritas bågarna från den andra termen
+   UNDERIFRÅN, `under: true` i `mkMultIn`, med målraden 3,1·F ned; och
+   innan likadana termer slås ihop ringas de in i raden ovanför,
+   `mkSamla`). **Läs filhuvudet innan
    du skriver en ny scen** — kopiera rytmen från en närliggande scen
    (`layoutParallax`, `layoutVinkeldiameter`, `layoutSchwarzschild`).
    **Kraftekvation i en cirkelrörelse?** Rita kraftsituationen intill

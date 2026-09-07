@@ -56,6 +56,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'dubbelspaltforsoket',
+    term: 'Dubbelspaltförsöket',
+    former: ['dubbelspaltförsöket', 'dubbelspaltförsök', 'dubbelspaltförsöken', 'dubbelspalt', 'dubbelspalten', 'dubbelspalter', 'dubbelspaltinterferens'],
+    kort: 'Försöket där en stråle får passera två smala springor och bildar ett mönster av ljusa och mörka ränder bakom dem. Ränderna visar att strålen är en våg, och de uppträder även när partiklarna skickas fram en och en.',
+    relaterade: ['interferens', 'vaglangd', 'vagfunktion', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Skicka ljus mot en skärm med två smala springor bredvid varandra, och fånga upp det som kommer igenom på en vägg bakom. Med partiklar skulle man vänta sig två ljusa fläckar, en rakt bakom varje springa. I stället bildas en hel rad av ljusa och mörka ränder, som breder ut sig långt utanför springorna. Thomas Young visade detta i början av 1800-talet, och det blev avgörande för att ljus uppfattas som en våg.' },
+      { type: 'p', html: 'Ränderna kommer av att vågen tar båda vägarna samtidigt. Från varje springa breder en våg ut sig, och de två vågorna möts på vägen fram till väggen. Där de kommer i takt förstärker de varandra och det blir ljust; där den enas berg möter den andras dal släcker de varandra och det blir mörkt. Hur långt det är mellan ränderna beror på våglängden och på avståndet mellan springorna: ju tätare springor, desto bredare isär hamnar ränderna.' },
+      { type: 'p', html: 'Det märkliga upptäcktes långt senare. Samma mönster växer fram om man byter ljuset mot elektroner och skickar iväg dem en i taget, med lång tid emellan. Varje elektron lämnar en enda prick på skärmen, men efter tillräckligt många prickar syns ränderna ändå. Varje partikel beter sig alltså som en våg som passerar båda springorna. Försöket att ta reda på vilken springa den valde släcker dessutom mönstret, och just den motsägelsen har gjort uppställningen till kvantfysikens mest omtalade.' }
+    ]
+  },
+  {
+    id: 'pikometer',
+    term: 'Pikometer',
+    former: ['pikometer', 'pikometern', 'pikometrar', 'pikometrarna', 'ångström', 'ångströmmen'],
+    kort: 'En biljondels meter, den längdenhet som passar avstånden inne i en atom och mellan atomerna i en kristall. Tusen pikometer går på en nanometer.',
+    relaterade: ['nanoskala', 'gitter', 'elektronmikroskop'],
+    body: [
+      { type: 'p', html: 'En pikometer är 10<sup>−12</sup>&nbsp;m, alltså en tusendels nanometer och en biljondels meter. Enheten används där nanometern blir för grov: avståndet mellan två atomer i ett fast material ligger på ett par hundra pikometer, en väteatom är omkring 100&nbsp;pikometer i diameter och en kemisk bindning mellan två kolatomer 154&nbsp;pikometer lång.' },
+      { type: 'p', html: 'För att få en känsla för storleken kan man skala upp. Vore en pikometer lika lång som en millimeter, då vore en meter lika lång som avståndet från jorden till solen och tillbaka igen, flera gånger om. En annan väg är att räkna åt andra hållet: det får plats ungefär lika många pikometer på en meter som det finns sekunder på trettiotusen år.' },
+      { type: 'p', html: 'I den här skalan slutar vanliga bilder att fungera, eftersom synligt ljus har en våglängd på omkring 500&nbsp;000&nbsp;pikometer och alltså är hundratals gånger grövre än det man vill se. Elektroner som accelererats genom några hundra tusen volt har däremot en våglängd på ett par pikometer, och därför är det med elektronstrålar som enskilda atomer går att skilja åt. En äldre enhet som fortfarande används i samma sammanhang är ångström, som är 100&nbsp;pikometer.' }
+    ]
+  },
+  {
     id: 'vakuumfluktuation',
     term: 'Vakuumfluktuation',
     former: ['vakuumfluktuation', 'vakuumfluktuationen', 'vakuumfluktuationer', 'vakuumfluktuationerna', 'nollpunktssvängning', 'nollpunktssvängningar', 'nollpunktssvängningarna', 'nollpunktsfluktuation', 'nollpunktsfluktuationer', 'kvantvakuum', 'kvantvakuumet', 'virtuell partikel', 'virtuella partiklar', 'virtuella partiklarna', 'virtuell foton', 'virtuella fotoner'],

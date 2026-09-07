@@ -12,19 +12,18 @@ Format per post:
 
 ## Kö
 
-- **Dubbelspaltförsöket krympt till två atomer** **[BREVTEASER — teasad i brevet 2026-09-06, publiceras TIDIGAST måndag 2026-09-07, senast lördag 2026-09-12]** — ett lag vid University of
-  Tokyo har låtit två närliggande kiselatomer, 136 pikometer isär, spela rollen
-  som Youngs två spalter för en fokuserad elektronstråle, och läser ur
-  interferensmönstret hur grannatomerna svänger tillsammans. Ungefär sju
-  tiopotenser mindre än Youngs ursprungliga försök med ljus. Nature
-  (2026-08-26), DOI 10.1038/s41586-026-10914-9, Koudai Tabata med flera.
-  Kollegialt granskad. Stark kandidat: dubbelspalten är en av de mest kända
-  uppställningarna i hela fysiken, och kopplingen till fononer och
-  värmeledning i halvledare ger en modern fortsättning. Valdes bort
-  2026-08-27 enbart för att dagen redan hade en färsk våg-/mekaniknyhet och
-  de närmast föregående artiklarna varit kvantfysiktunga. Källa:
-  https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html
-  (tillagd 2026-08-27)
+- **Lysdioden som slipper fånga sitt eget ljus** **[BREVTEASER]** — en vanlig lysdiod släpper bara ut
+  omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom
+  totalreflektion. Ett lag vid Lunds universitet odlar i stället förgrenade
+  nanotrådar, där grenarna är tunnare än ljusets våglängd och ljuset därför inte kan
+  fångas. Kärnan har indirekt bandgap och lyser inte alls, utan matar bara in
+  laddningsbärare i grenarna. Ingång: totalreflektion, gränsvinkel, brytningsindex,
+  bandgap och våglängd — ovanligt lätt att koppla till optiken. Nano Research (2026),
+  DOI 10.26599/nr.2026.94908799, Magnus Borgström och Yue Zhao. OBS: tekniken är
+  ännu experimentell och slår inte kommersiella lysdioder — skriv inte om den som
+  färdig. Källa (Phys.org 2026-09-05):
+  https://phys.org/news/2026-09-significant-efficiency-gains.html
+  (tillagd 2026-09-05)
 
 - **Svävande magnet söker ultratung mörk materia** — ett korn av permanentmagnet som svävar
   över en supraledare nära absoluta nollpunkten används som stötdetektor: rör den sig en
@@ -51,19 +50,6 @@ Format per post:
   simulerats. Källa (Phys.org 2026-09-03):
   https://phys.org/news/2026-09-ai-physics-outperform-human-setups.html
   (tillagd 2026-09-06)
-
-- **Lysdioden som slipper fånga sitt eget ljus** — en vanlig lysdiod släpper bara ut
-  omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom
-  totalreflektion. Ett lag vid Lunds universitet odlar i stället förgrenade
-  nanotrådar, där grenarna är tunnare än ljusets våglängd och ljuset därför inte kan
-  fångas. Kärnan har indirekt bandgap och lyser inte alls, utan matar bara in
-  laddningsbärare i grenarna. Ingång: totalreflektion, gränsvinkel, brytningsindex,
-  bandgap och våglängd — ovanligt lätt att koppla till optiken. Nano Research (2026),
-  DOI 10.26599/nr.2026.94908799, Magnus Borgström och Yue Zhao. OBS: tekniken är
-  ännu experimentell och slår inte kommersiella lysdioder — skriv inte om den som
-  färdig. Källa (Phys.org 2026-09-05):
-  https://phys.org/news/2026-09-significant-efficiency-gains.html
-  (tillagd 2026-09-05)
 
 - **Kvantalgoritmen som prövar hur flyttfåglar hittar** — den ledande förklaringen till
   fåglarnas magnetiska sinne är att ljus skapar ett par radikaler i ögat vars spinn

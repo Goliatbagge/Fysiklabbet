@@ -88,6 +88,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-07-dubbelspalten-krympt-till-tva-atomer",
+    date: "2026-09-07",
+    title: "Två atomer som spalter: Youngs klassiska försök krympt tio miljoner gånger",
+    deck: "Ett forskarlag vid University of Tokyo har låtit två grannatomer i en kiselkristall, 136 pikometer isär, spela rollen som spalterna i Youngs dubbelspaltförsök. Ränderna som elektronstrålen ritar visar hur nära i takt de två atomerna skakar, och det är just den skakningen som bär värme genom en halvledare.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-07-dubbelspalten-krympt-till-tva-atomer.jpg",
+    imageAlt: "En forskare sitter framför två bildskärmar i ett blåbelyst laboratorium. På skärmarna syns rader av runda fläckar i rött, grönt och blått, och bakom skärmarna står en cylinderformad pelare av stål.",
+    imageCredit: "Foto: Oak Ridge National Laboratory (CC BY 2.0). Bilden visar ett annat elektronmikroskop än det som användes i studien.",
+    tags: ["kvantfysik", "vågor", "interferens", "dubbelspalt", "elektron", "elektronmikroskopi", "fononer", "halvledare", "kisel", "värmeledning", "materialfysik"],
+    sources: [
+      { name: "Phys.org: Observing the vibrations of neighboring atoms with an atomic-scale double slit", url: "https://phys.org/news/2026-08-vibrations-neighboring-atoms-atomic-scale.html" },
+      { name: "University of Tokyo, School of Engineering: pressmeddelande 2026-08-20", url: "https://www.t.u-tokyo.ac.jp/en/press/pr2026-08-20-001" },
+      { name: "Nature (via Europe PMC): Atomic-scale double-slit interferometry with a focused electron probe", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13538068/" }
+    ],
+    research: { citation: "Koudai Tabata, Takehito Seki, Toma Susi, Ryo Ishikawa och Naoya Shibata, ”Atomic-scale double-slit interferometry with a focused electron probe”, Nature 657, 107–113 (2026)", url: "https://doi.org/10.1038/s41586-026-10914-9" },
+    body: [
+      { type: 'p', html: 'Thomas Young lät i början av 1800-talet ljus falla mot två smala springor och såg ett mönster av ljusa och mörka ränder breda ut sig bakom dem. Ränderna gick inte att förklara med partiklar som flyger raka vägen. De uppstår när två vågor möts och antingen förstärker eller släcker varandra, och försöket blev därför skolexemplet på att ljus är en våg. I den klassiska uppställningen ligger spalterna omkring en millimeter isär och skärmen någon meter bort.' },
+      { type: 'p', html: 'Nu har ett forskarlag vid University of Tokyo gjort om försöket inne i en kristall, med två atomer som spalter och en elektronstråle i stället för ljus. Avståndet mellan spalterna är 136&nbsp;pikometer, alltså 0,136&nbsp;nanometer. Det är ungefär sju tiopotenser mindre än hos Young: en tiomiljondel av hans uppställning.' },
+
+      { type: 'h2', text: 'Kristallen bygger spalterna åt forskarna' },
+      { type: 'p', html: 'Provet är en kiselkristall, vänd så att strålen tittar rakt längs en av kristallens riktningar. Då hamnar atomerna bakom varandra i raka kolonner, och sedda från strålens håll ligger de parvis, som hantlar. Två sådana grannkolonner är de två spalterna.' },
+      { type: 'p', html: 'Elektronerna accelereras genom 300&nbsp;kilovolt och fokuseras till en punkt som är drygt 100&nbsp;pikometer bred. Punkten placeras exakt mitt emellan de två kolonnerna. Där tar kristallen över: atomkärnorna är positivt laddade och drar till sig de negativa elektronerna, så strålen sugs in mot kolonnerna och leds nedåt längs dem, ungefär som ljus i en optisk fiber. På kristallens undersida, omkring 10&nbsp;nanometer ned, kommer elektronvågen därför ut ur två punkter i stället för en. Tio centimeter längre bort, på detektorn, möts de två vågorna och ränderna träder fram.' },
+      { type: 'p', html: 'Att det verkligen är de två kolonnerna som gör jobbet syns på kontrollförsöket: flyttas strålen så att den träffar en enda kolonn försvinner ränderna. Deras täthet stämmer dessutom med avståndet 136&nbsp;pikometer, precis som randavståndet i Youngs försök hänger ihop med springornas läge.' },
+
+      { type: 'h2', text: 'Ränderna mäter hur atomerna skakar' },
+      { type: 'p', html: 'Här skiljer sig atomspalterna från Youngs springor på en avgörande punkt: de sitter inte stilla. Varje atom i en kristall vibrerar kring sitt läge, och ju varmare materialet är, desto kraftigare. Två spalter som skakade oberoende av varandra skulle ändra sitt inbördes avstånd hela tiden, och när mätningen summerar miljontals elektroner skulle de yttre ränderna suddas ut helt.' },
+      { type: 'p', html: 'Men ränderna fanns kvar. Slutsatsen är att grannatomerna inte skakar var för sig utan till stor del i takt, så att avståndet mellan dem bevaras. Hur nära i takt går att räkna fram ur hur skarpa ränderna är. Vid rumstemperatur blev samstämmigheten 0,36 längs bindningen mellan atomerna och 0,18 tvärs över den, på en skala där 1 betyder helt synkront och 0 betyder oberoende.' },
+      { type: 'p', html: 'Skillnaden mellan de två riktningarna säger något om bindningen: den gör mer motstånd mot att töjas och tryckas ihop än mot att vridas i sidled. Och när provet värmdes ändrades värdena bara måttligt: vid 500&nbsp;kelvin till 0,40 och 0,26, vid 900&nbsp;kelvin till 0,42 och 0,29. Samstämmigheten är alltså inte i första hand ett mått på temperaturen utan på kraften mellan atomerna.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-07-dubbelspalten-krympt-till-tva-atomer-2.jpg', alt: 'En forskare med blå engångshandskar sträcker sig fram mot en hög stålcylinder täckt av röda och vita kablar. Väggen bakom är klädd med tjocka, rutmönstrade ljuddämpande skivor.', caption: 'Ett elektronmikroskop som ska skilja på detaljer mindre än en atom står i ett rum klätt med ljuddämpning, eftersom ljud, drag och magnetfält räcker för att sudda ut mätningen.', credit: 'Foto: Oak Ridge National Laboratory (CC BY 2.0). Bilden visar ett annat laboratorium än studiens.' },
+
+      { type: 'h2', text: 'Skakningarna som bär värmen' },
+      { type: 'p', html: 'Vibrationerna i en kristall beskrivs som fononer, energiportioner i atomernas gemensamma skakning, och det är fononerna som transporterar värme genom ett material som kisel. Alla fononer märks dock inte i ränderna. De med lång våglängd flyttar båda kolonnerna åt samma håll samtidigt, och avståndet mellan spalterna påverkas knappt. De med kort våglängd knuffar däremot grannarna åt olika håll, och det är de som suddar mönstret.' },
+      { type: 'p', html: 'Metoden är därmed selektiv på ett användbart sätt. Den känner just de lågenergetiska skakningar som står för en stor del av värmetransporten, och den gör det bindning för bindning i stället för som ett medelvärde över hela provet. I takt med att kretsarna i ett chipp blir mindre är det allt oftare värmen, inte elektroniken, som sätter gränsen för vad som är möjligt. Att kunna mäta var i ett material värmen har lätt att ta sig fram är då ingen liten sak.' },
+      { type: 'p', html: 'Kvar står också en principiell poäng. Dubbelspaltförsöket har i tvåhundra år varit demonstrationen av att en partikel också är en våg. Nu fungerar det dessutom som mätinstrument: ränderna bär information både om vågen och om de två föremål som skapade dem.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Elektroner som accelererats genom 300&nbsp;kilovolt har en våglängd på ungefär 2&nbsp;pikometer, alltså en sjuttiondel av avståndet mellan de två atomkolonnerna. Youngs spalter låg ett par tusen gånger längre isär än ljusets våglängd.',
+        'Mätningen görs genom att strålen sveper över provet punkt för punkt medan en snabb detektor med 192&nbsp;·&nbsp;192 bildpunkter fångar hela mönstret vid varje läge.',
+        'Kiselskivan i försöket var bara omkring 10&nbsp;nanometer tjock, medan detektorn satt 10&nbsp;centimeter bort. Avståndet till detektorn var alltså tio miljoner gånger större än provets tjocklek.',
+        'Ett elektronmikroskop har inga glaslinser. Strålen fokuseras av magnetfält från spolar, och hela vägen genom instrumentet råder vakuum.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-06-tiohorningen-vid-saturnus-sydpol",
     date: "2026-09-06",
     title: "Gasen rusar fram i 400 km/h — men tiohörningen vid Saturnus sydpol står nästan stilla",

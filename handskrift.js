@@ -17249,6 +17249,9 @@
       [['länge som upp till toppen.']]
     ]);
     tanke(bD2);
+    placeString('Tid till nedslag', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.55 * F;
     placeString('t=2·1,170...=2,340... s', padL, y, s, F, acts);
     stepEnd();
 
@@ -17257,13 +17260,14 @@
     y += adv + 1.1 * F;
     var bKD = bubble(140, bubbleTop(y - adv), bw, [
       [['Hastigheterna i x-led och y-led']],
-      [['vid nedslaget räknar jag ut']],
-      [['direkt i klammern.']]
+      [['vid nedslaget: formeln först,']],
+      [['sedan värdena, direkt i klammern.']]
     ]);
     tanke(bKD);
     var klamD = valueBracket(acts,
-      ['v_x=15·cos 50°=9,641... m/s',
-       'v_y=15·sin 50°-9,82·2,340...=−11,488... m/s'], padL, y, s, F);
+      ['v_x=v_0·cos α=15·cos 50°=9,641... m/s',
+       'v_y=v_0·sin α-g·t=15·sin 50°-9,82·2,340...',
+       '=−11,488... m/s'], padL, y, s, F);
     stepEnd();
     y = klamD.yEnd;
 

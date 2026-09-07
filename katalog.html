@@ -1011,11 +1011,23 @@
                     el.tagName === 'P' && el.children.length === 1 &&
                     el.firstElementChild.tagName === 'STRONG' &&
                     el.textContent.trim() === el.firstElementChild.textContent.trim());
-                if (subheads.length > 1) return;
                 const darP = Array.from(box.children).filter(el =>
                     el.tagName === 'P' && /^där/i.test(el.textContent.trim()) &&
                     el.textContent.trim().toLowerCase() !== 'där');
                 if (darP.length > 1) return;
+                // Flera rubriker är ett samlingsblock bara om formelgrupperna
+                // har VAR SIN förklaring, alltså om någon rubrik står EFTER
+                // där-listan. En ruta som delar upp EN formeluppsättning under
+                // rubriker ("I x-led:", "I y-led:", "Fart …") och avslutar
+                // med en enda där-lista (fy2-1.8) ska ha sin vanliga layout —
+                // listan hör till alla formlerna i rutan.
+                if (subheads.length > 1) {
+                    const kids = Array.from(box.children);
+                    const forklaring = uls[0] || darP[0];
+                    const iF = forklaring ? kids.indexOf(forklaring) : -1;
+                    const iH = kids.indexOf(subheads[subheads.length - 1]);
+                    if (iF < 0 || iH > iF) return;
+                }
                 // En punktlista är bara en "där"-lista om den ser ut som en:
                 // antingen står ett stycke "där" före den, eller så har varje
                 // rad ett likhetstecken UTANFÖR matten ("$v$ = hastighet") —

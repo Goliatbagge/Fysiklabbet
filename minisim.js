@@ -5172,7 +5172,11 @@
         scene.className = 'minisim-scene';
         var iframe = document.createElement('iframe');
         iframe.className = 'minisim-iframe';
-        iframe.src = 'fysik2-gaffelbalans-app.html?embed=1&mini=1';
+        // Cache-buster (samma __CB som katalogen använder): utan den kunde
+        // webbläsaren servera en gammal version av den inbäddade sidan i
+        // upp till tio minuter efter en push, fast teorin runt omkring var
+        // ny (Snett kast, 2026-09-07).
+        iframe.src = 'fysik2-gaffelbalans-app.html?embed=1&mini=1&v=' + (window.__CB || Date.now());
         iframe.setAttribute('allowfullscreen', '');
         iframe.allow = 'fullscreen';
         iframe.loading = 'lazy';
@@ -5292,7 +5296,7 @@
         scene.className = 'minisim-scene';
         var iframe = document.createElement('iframe');
         iframe.className = 'minisim-iframe';
-        iframe.src = 'fysik2-dubbelkon-app.html?embed=1&mini=1';
+        iframe.src = 'fysik2-dubbelkon-app.html?embed=1&mini=1&v=' + (window.__CB || Date.now());
         iframe.setAttribute('allowfullscreen', '');
         iframe.allow = 'fullscreen';
         iframe.loading = 'lazy';
@@ -5421,7 +5425,7 @@
         scene.className = 'minisim-scene';
         var iframe = document.createElement('iframe');
         iframe.className = 'minisim-iframe';
-        iframe.src = 'fysik2-cirkular-rorelse-app.html?embed=1&mini=1';
+        iframe.src = 'fysik2-cirkular-rorelse-app.html?embed=1&mini=1&v=' + (window.__CB || Date.now());
         // scenens viewBox är 820×540 — låt iframen ha samma proportion så
         // att SVG:n fyller ytan utan brevlådekanter
         iframe.style.aspectRatio = '820 / 540';
@@ -7528,7 +7532,7 @@
         scene.className = 'minisim-scene';
         var iframe = document.createElement('iframe');
         iframe.className = 'minisim-iframe';
-        iframe.src = 'fysik2-rorelse-app.html?embed=1&mini=1';
+        iframe.src = 'fysik2-rorelse-app.html?embed=1&mini=1&v=' + (window.__CB || Date.now());
         iframe.style.aspectRatio = '3 / 2';   // scenens proportion i simuleringen
         iframe.setAttribute('allowfullscreen', '');
         iframe.allow = 'fullscreen';

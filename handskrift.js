@@ -17252,38 +17252,20 @@
     placeString('t=2·1,170...=2,340... s', padL, y, s, F, acts);
     stepEnd();
 
+    /* hastigheterna vid nedslaget räknas ut DIREKT i klammern: v_x ur
+     * x-formeln (konstant), v_y ur y-formeln med hela flygtiden insatt */
     y += adv + 1.1 * F;
     var bKD = bubble(140, bubbleTop(y - adv), bw, [
-      [['Klammern får nu hela flygtiden']],
-      [['som mätvärde, oavrundad.']]
+      [['Hastigheterna i x-led och y-led']],
+      [['vid nedslaget räknar jag ut']],
+      [['direkt i klammern.']]
     ]);
     tanke(bKD);
     var klamD = valueBracket(acts,
-      ['v_0=15 m/s', 'α=50°', 'g≈9,82 m/s^2', 't=2,340... s'], padL, y, s, F);
+      ['v_x=15·cos 50°=9,641... m/s',
+       'v_y=15·sin 50°-9,82·2,340...=−11,488... m/s'], padL, y, s, F);
     stepEnd();
     y = klamD.yEnd;
-
-    y += adv + 1.2 * F;
-    var bD3 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Farten i x-led är konstant']],
-      [['under hela kastet. In med']],
-      [['värdena ur klammern.']]
-    ]);
-    tanke(bD3);
-    placeString('v_x=15·cos 50°=9,641... m/s', padL, y, s, F, acts);
-    stepEnd();
-
-    y += adv;
-    var bD4 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Hastigheten i y-led vid ned-']],
-      [['slaget fås ur formeln i a),']],
-      [['med hela flygtiden insatt.']]
-    ]);
-    tanke(bD4);
-    placeString('v_y=15·sin 50°-9,82·2,340...', padL, y, s, F, acts);
-    y += adv;
-    placeString('=−11,488... m/s', padL, y, s, F, acts);
-    stepEnd();
 
     y += adv + 0.8 * F;
     var bD5 = bubble(140, bubbleTop(y - adv), bw, [

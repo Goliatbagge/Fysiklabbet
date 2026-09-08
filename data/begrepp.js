@@ -120,7 +120,7 @@ window.BEGREPP = [
     term: 'Vågfunktion',
     former: ['vågfunktion', 'vågfunktionen', 'vågfunktioner', 'vågfunktionerna'],
     kort: 'Den matematiska våg som beskriver en partikel i kvantmekaniken. Kvadraten på dess belopp talar om hur sannolikt det är att hitta partikeln på ett visst ställe.',
-    relaterade: ['kvantmekanik', 'molekylorbital', 'tunneleffekt'],
+    relaterade: ['kvantmekanik', 'molekylorbital', 'tunneleffekt', 'orbital', 'superposition'],
     body: [
       { type: 'p', html: 'En fotboll har en plats. Frågar man var den är finns det ett svar, oavsett om någon tittar. En elektron fungerar inte så. Det närmaste en beskrivning man kommer är en våg som är utsmetad över ett område i rummet, och den vågen kallas vågfunktion. Den skrivs oftast med den grekiska bokstaven psi.' },
       { type: 'p', html: 'Vågfunktionen i sig är inte något man kan se. Det man kan mäta är sannolikheten att hitta partikeln på ett visst ställe, och den fås genom att kvadrera vågfunktionens belopp. Där vågen är stor är chansen god, där den är noll dyker partikeln aldrig upp. Ett viktigt drag är att vågfunktionen kan vara både positiv och negativ. Möts två delar med olika tecken tar de ut varandra, precis som två vattenvågor som möts i motfas — och det är den mekanismen som avgör vilka kemiska bindningar som håller och vilka som inte gör det.' },
@@ -130,9 +130,9 @@ window.BEGREPP = [
   {
     id: 'molekylorbital',
     term: 'Molekylorbital',
-    former: ['molekylorbital', 'molekylorbitalen', 'molekylorbitaler', 'molekylorbitalerna', 'orbital', 'orbitalen', 'orbitaler', 'orbitalerna', 'elektronmoln', 'elektronmolnet'],
+    former: ['molekylorbital', 'molekylorbitalen', 'molekylorbitaler', 'molekylorbitalerna'],
     kort: 'Det område kring en molekyl där en viss elektron håller till, beskrivet som en våg med både positiva och negativa delar.',
-    relaterade: ['vagfunktion', 'kvantmekanik', 'halvledare'],
+    relaterade: ['vagfunktion', 'kvantmekanik', 'halvledare', 'orbital'],
     body: [
       { type: 'p', html: 'I en ensam atom håller elektronerna till i skal och underskal — de klotformade, hantelformade och klöverbladsformade områden som brukar ritas i kemiboken. Sådana områden kallas orbitaler. Ordet är en rest från tiden då man trodde att elektronen gick i bana kring kärnan; i dag betyder det inte en bana utan ett moln, ett område där elektronen kan påträffas.' },
       { type: 'p', html: 'När atomer binder ihop sig till en molekyl smälter deras orbitaler samman till nya, gemensamma. En sådan sträcker sig över flera atomer på en gång, och elektronen tillhör då molekylen snarare än någon enskild atomkärna. Bilderna av dem är färgade i två toner, ofta rött och blått. Färgerna är inte laddning utan tecken: den underliggande vågen är positiv i de röda delarna och negativ i de blåa, och gränsen däremellan är ett område där elektronen aldrig hamnar.' },
@@ -379,7 +379,7 @@ window.BEGREPP = [
     term: 'Absoluta nollpunkten',
     former: ['absoluta nollpunkten', 'absolut nollpunkt'],
     kort: 'Den lägsta temperatur som över huvud taget kan finnas: −273,15 °C, eller 0 kelvin. Där har partiklarnas värmerörelse i princip helt stannat av.',
-    relaterade: ['supraledare', 'superfluid'],
+    relaterade: ['supraledare', 'superfluid', 'laserkylning'],
     body: [
       { type: 'p', html: 'Temperatur är egentligen ett mått på hur mycket ett ämnes atomer och molekyler rör sig: i het ånga far vattenmolekylerna omkring i hög fart, i kallt is-vatten kryper de långsamt. Kyler man något blir rörelsen mindre och mindre — och då måste det finnas en botten, en temperatur där rörelsen inte kan bli mindre. Den bottnen kallas den absoluta nollpunkten och ligger vid −273,15&nbsp;°C. Kelvinskalan är byggd så att den börjar precis där: 0&nbsp;K är absoluta nollpunkten, och en grad på kelvinskalan är lika stor som en grad Celsius.' },
       { type: 'p', html: 'Nollpunkten går att komma hur nära som helst — men aldrig att nå exakt. Dels säger termodynamiken att varje kylsteg bara tar bort en del av den värme som finns kvar, dels säger kvantmekaniken att partiklar aldrig kan ligga helt stilla: även vid 0&nbsp;K finns en liten kvarvarande darrning som kallas nollpunktsrörelse. Med laserkylning och magnetfällor har forskare ändå kylt små gasmoln till under en miljarddels kelvin — kallare än någon naturlig plats i universum.' },
@@ -425,9 +425,9 @@ window.BEGREPP = [
   {
     id: 'atominterferometri',
     term: 'Atominterferometri',
-    former: ['atominterferometri', 'atominterferometrin', 'atominterferometer', 'atominterferometern', 'atominterferometrar', 'atominterferometrarna', 'materievåg', 'materievågen', 'materievågor', 'materievågorna'],
+    former: ['atominterferometri', 'atominterferometrin', 'atominterferometer', 'atominterferometern', 'atominterferometrar', 'atominterferometrarna'],
     kort: 'En mätmetod där ett moln av atomer behandlas som en våg: den delas i två delar som går olika vägar och läggs ihop igen, och mönstret som uppstår avslöjar minsta skillnad mellan vägarna.',
-    relaterade: ['interferens', 'bose-einstein-kondensat', 'kvantmekanik'],
+    relaterade: ['interferens', 'bose-einstein-kondensat', 'kvantmekanik', 'materievag'],
     body: [
       { type: 'p', html: 'Kvantfysikens kanske mest överraskande besked är att materia beter sig som vågor. En atom som rör sig har en våglängd, precis som ljus, och kan därför göra allt som vågor gör: böja av runt hinder, mötas och förstärka varandra, eller mötas och släcka ut varandra. Våglängden är visserligen försvinnande liten för vardagliga föremål, men för en atom som kylts nästan till stillastående blir den fullt mätbar.' },
       { type: 'p', html: 'En atominterferometer utnyttjar detta. I stället för halvgenomskinliga speglar används korta laserpulser, som delar atommolnet så att det tar två vägar samtidigt — en aning högre upp och en aning längre ner, eller åt två håll. En stund senare förs delarna ihop igen. Har de två vägarna varit exakt likvärdiga hamnar atomerna i ett bestämt tillstånd; har den ena vägen varit det allra minsta annorlunda syns det direkt som en förskjutning i mönstret.' },
@@ -509,9 +509,9 @@ window.BEGREPP = [
   {
     id: 'gitter',
     term: 'Gitter',
-    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'diffraktionsgitter', 'diffraktionsgittret', 'bikakegitter', 'bikakegittret'],
+    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'bikakegitter', 'bikakegittret'],
     kort: 'Det regelbundna, upprepade mönster som atomerna bildar i en kristall. Ordet används också om optiska gitter — täta mönster av spalter eller spår som delar upp ljus i sina färger.',
-    relaterade: ['fotonisk-kristall', 'interferens', 'tidskristall'],
+    relaterade: ['fotonisk-kristall', 'interferens', 'tidskristall', 'diffraktionsgitter'],
     body: [
       { type: 'p', html: 'I ett fast ämne som är kristallint — metaller, salt, is, diamant — sitter atomerna inte huller om buller utan i ett strikt geometriskt mönster som upprepar sig i alla riktningar: ett kristallgitter. Gittret avgör många av materialets egenskaper. Att diamant och grafit är så olika trots att båda är rent kol beror helt på hur kolatomernas gitter ser ut. Värme i ett fast ämne är i själva verket vibrationer som fortplantar sig genom gittret, och när elektroner krockar med gittrets vibrationer uppstår elektriskt motstånd.' },
       { type: 'p', html: 'Inom optiken betyder gitter något besläktat men annorlunda: en skiva med tusentals tätt liggande, jämnt fördelade spalter eller spår. När ljus passerar böjs det olika mycket beroende på våglängd, och genom interferens delas ljuset upp i ett skarpt spektrum — mycket skarpare än genom ett prisma. Det är samma effekt som gör att en cd-skivas undersida skimrar i regnbågens färger: de tätt packade dataspåren fungerar som ett gitter.' }
@@ -647,9 +647,9 @@ window.BEGREPP = [
   {
     id: 'spinn',
     term: 'Spinn',
-    former: ['spinn', 'spinnet', 'elektronspinn', 'elektronspinnet', 'kärnspinn', 'kärnspinnet', 'spinntronik', 'spinntroniken'],
+    former: ['spinn', 'spinnet', 'elektronspinn', 'elektronspinnet', 'kärnspinn', 'kärnspinnet'],
     kort: 'En inbyggd kvantegenskap hos partiklar som gör att de beter sig som små magneter och bär ett eget rörelsemängdsmoment — trots att ingenting faktiskt snurrar.',
-    relaterade: ['altermagnetism', 'kvantsammanflatning', 'skyrmion'],
+    relaterade: ['altermagnetism', 'kvantsammanflatning', 'skyrmion', 'spinntronik'],
     body: [
       { type: 'p', html: 'Namnet lurar lätt tanken: spinn låter som att partikeln snurrar runt sin egen axel, som en liten jord. Men elektronen har, så vitt fysiken vet, ingen utsträckning alls — det finns inget som kan snurra. Spinn är i stället en medfödd kvantegenskap, lika grundläggande som partikelns laddning och massa: partikeln bär ett inbyggt rörelsemängdsmoment och uppför sig som en pytteliten magnet. För elektronen kan spinnet dessutom bara mätas till två värden, ofta kallade ”upp” och ”ner” — aldrig något mittemellan.' },
       { type: 'p', html: 'Trots sin abstrakta natur formar spinnet världen påtagligt. Att järn kan bli magnetiskt beror på att många elektronspinn ställer in sig åt samma håll. Och att elektroner med samma spinn vägrar dela kvanttillstånd (Pauliprincipen) tvingar atomernas elektroner att stapla sig i skal — vilket ger grundämnena deras kemi och periodiska systemet dess struktur.' },
@@ -673,7 +673,7 @@ window.BEGREPP = [
     term: 'Magnetometer',
     former: ['magnetometer', 'magnetometern', 'magnetometrar', 'magnetometrarna', 'magnetometri', 'magnetfältsmätare', 'magnetfältsmätaren'],
     kort: 'Ett instrument som mäter magnetfält. De känsligaste varianterna registrerar fält som är hundratals miljoner gånger svagare än jordens.',
-    relaterade: ['squid', 'diamagnetism', 'supraledare'],
+    relaterade: ['squid', 'diamagnetism', 'supraledare', 'halleffekten'],
     body: [
       { type: 'p', html: 'En magnetometer mäter hur starkt ett magnetfält är, och ofta också åt vilket håll det pekar. Den enklaste modellen har funnits i tusen år och heter kompass: en liten magnet som får vrida sig fritt ställer in sig efter fältet. Mobiltelefonen har en modern släkting inbyggd, ett par kvadratmillimeter kisel som känner av jordens fält så att kartappen vet vilket håll du tittar åt.' },
       { type: 'p', html: 'De vetenskapliga magnetometrarna är av ett helt annat slag. Magnetfält mäts i enheten tesla, och jordens fält är omkring 50&nbsp;mikrotesla — ungefär en tjugotusendels tesla. En kylskåpsmagnet ger några millitesla vid ytan. De känsligaste instrumenten arbetar i stället i femtotesla, som är en miljondels miljarddels tesla, alltså i storleksordningen en miljard gånger svagare än jordens fält. Vid den nivån hörs signaler som annars är omöjliga att uppfatta: strömmarna i en hjärna eller ett hjärta, järnhaltiga mineral djupt nere i berggrunden, eller små föroreningar i ett materialprov.' },
@@ -831,7 +831,7 @@ window.BEGREPP = [
     term: 'Svart hål',
     former: ['svart hål', 'svarta hål', 'svarta hålet', 'svarta hålen', 'supermassivt svart hål', 'supermassiva svarta hål', 'supermassiva svarta hålet'],
     kort: 'Ett område där så mycket massa packats ihop på så liten plats att inget kan ta sig därifrån — inte ens ljus. Gränsen kallas händelsehorisonten.',
-    relaterade: ['kvasar', 'supernova', 'vit-dvarg', 'handelsehorisont'],
+    relaterade: ['kvasar', 'supernova', 'vit-dvarg', 'handelsehorisont', 'rumtid'],
     body: [
       { type: 'p', html: 'Namnet lurar: ett svart hål är inte ett hål i rymden utan raka motsatsen — ovanligt mycket materia klämd in på ovanligt liten plats. Ju mer massa som trängs ihop, desto starkare blir gravitationen och desto högre fart krävs för att slita sig loss. Pressas materien hårt nog räcker inte ens ljusets hastighet. Den gränsen kallas händelsehorisonten, och innanför den kommer ingenting ut. Solen skulle behöva klämmas ihop till en kula med 3&nbsp;km radie för att bli ett svart hål, jorden till en kula på ett par centimeter.' },
       { type: 'p', html: 'Det finns två sorter. Stjärnmassehål på några till några tiotals solmassor bildas när kärnan i en mycket tung stjärna kollapsar. Supermassiva svarta hål väger miljoner till miljarder solmassor och sitter i mitten av så gott som varje stor galax — Vintergatans heter Sagittarius&nbsp;A* och är omkring 4&nbsp;miljoner solmassor tungt.' },
@@ -844,7 +844,7 @@ window.BEGREPP = [
     term: 'Supernova',
     former: ['supernova', 'supernovan', 'supernovor', 'supernovorna', 'supernovaexplosion', 'supernovaexplosionen', 'supernovaexplosioner', 'supernovarest', 'supernovaresten', 'supernovarester', 'kärnkollapssupernova', 'kärnkollapssupernovor'],
     kort: 'En stjärnexplosion som under några veckor kan lysa lika starkt som en hel galax. Bakom namnet döljer sig två helt olika sätt för en stjärna att sprängas.',
-    relaterade: ['vit-dvarg', 'svart-hal', 'nova'],
+    relaterade: ['vit-dvarg', 'svart-hal', 'nova', 'gammablixt', 'chandrasekhargransen'],
     body: [
       { type: 'p', html: 'En supernova är det våldsammaste en enskild stjärna kan göra: på några dagar tänds en ljuspunkt som kan mäta sig med hela sin galax, för att sedan blekna bort. Kinesiska astronomer noterade en sådan ”gäststjärna” år 1054, och resterna syns i dag som Krabbnebulosan. Två helt olika processer kan ge samma spektakulära resultat.' },
       { type: 'p', html: 'Den ena drabbar mycket tunga stjärnor, från omkring åtta solmassor och uppåt. En sådan stjärna fusionerar sig fram genom allt tyngre grundämnen, men vid järn tar det stopp — järnfusion ger ingen energi tillbaka. Utan strålningstrycket inifrån kollapsar kärnan på sekunder, de yttre lagren studsar, och en skur av neutriner kastar av stjärnans hölje. Kvar i mitten blir en neutronstjärna eller ett svart hål.' },
@@ -855,9 +855,9 @@ window.BEGREPP = [
   {
     id: 'vit-dvarg',
     term: 'Vit dvärg',
-    former: ['vit dvärg', 'vita dvärgen', 'vita dvärgar', 'vita dvärgarna', 'vit dvärgstjärna', 'vita dvärgstjärnan', 'vita dvärgstjärnor', 'chandrasekhargränsen'],
+    former: ['vit dvärg', 'vita dvärgen', 'vita dvärgar', 'vita dvärgarna', 'vit dvärgstjärna', 'vita dvärgstjärnan', 'vita dvärgstjärnor'],
     kort: 'Den utbrunna kärna som blir kvar när en stjärna av solens storlek dör: ungefär lika stor som jorden men lika tung som en stjärna.',
-    relaterade: ['nova', 'supernova', 'solmassa'],
+    relaterade: ['nova', 'supernova', 'solmassa', 'chandrasekhargransen'],
     body: [
       { type: 'p', html: 'De flesta stjärnor slutar inte med en explosion utan med en tyst avveckling. När solen om ungefär fem miljarder år gjort slut på sitt bränsle sväller den först upp till en röd jätte och puffar sedan av sina yttre gaslager. Kvar blir den nakna, glödheta kärnan — en vit dvärg, ungefär lika stor som jorden men med en stor del av solens massa kvar. Tätheten blir absurd: en tesked av materialet skulle väga flera ton. Omkring 97&nbsp;% av alla stjärnor i Vintergatan går den vägen.' },
       { type: 'p', html: 'Vad hindrar en så tät kropp från att krympa vidare? Inte fusion, den har upphört. I stället ett rent kvantfysikaliskt motstånd som kallas elektrondegenerationstryck: två elektroner kan inte pressas in i exakt samma tillstånd, så när de trängs ihop tvingas de upp i höga farter och trycker tillbaka utåt. Det ger en märklig konsekvens — ju tyngre en vit dvärg är, desto <em>mindre</em> blir den. Vid ungefär 1,4&nbsp;solmassor räcker motståndet inte längre. Den gränsen kallas Chandrasekhargränsen, efter Subrahmanyan Chandrasekhar som räknade fram den på 1930-talet och fick Nobelpriset i fysik 1983.' },
@@ -879,9 +879,9 @@ window.BEGREPP = [
   {
     id: 'exoplanet',
     term: 'Exoplanet',
-    former: ['exoplanet', 'exoplaneten', 'exoplaneter', 'exoplaneterna', 'exoplanetatmosfär', 'exoplanetatmosfärer', 'het jupiter', 'heta jupitrar', 'superjord', 'superjorden', 'superjordar', 'superjordarna'],
+    former: ['exoplanet', 'exoplaneten', 'exoplaneter', 'exoplaneterna', 'exoplanetatmosfär', 'exoplanetatmosfärer'],
     kort: 'En planet som kretsar kring en annan stjärna än solen. Flera tusen är i dag kända, och de flesta liknar ingenting i vårt eget solsystem.',
-    relaterade: ['spektroskopi', 'ljusar'],
+    relaterade: ['spektroskopi', 'ljusar', 'het-jupiter', 'superjord'],
     body: [
       { type: 'p', html: 'Att andra stjärnor borde ha planeter gissade man i århundraden, men ända in på 1990-talet var det bara en gissning. En planet lyser inte själv, och den svaga reflex den ger drunknar i stjärnans bländande ljus — som att försöka se en knappnål bredvid en strålkastare flera mil bort. Genombrottet kom 1995, när Michel Mayor och Didier Queloz hittade 51&nbsp;Pegasi&nbsp;b kring en solliknande stjärna. Upptäckten gav dem Nobelpriset i fysik 2019, och sedan dess har listan vuxit till flera tusen bekräftade exoplaneter.' },
       { type: 'p', html: 'Två metoder står för de flesta fynden, och båda studerar stjärnan i stället för planeten. Transitmetoden mäter stjärnans ljusstyrka och väntar på att en planet ska passera framför den: ljuset dippar en aning, regelbundet, varje varv. En jupiterstor planet skymmer ungefär en procent av en solliknande stjärna, en jordstor bara någon hundradels procent. Radialhastighetsmetoden utnyttjar i stället att stjärnan och planeten kretsar kring en gemensam tyngdpunkt, så att stjärnan vaggar. Vaggningen syns som en periodisk förskjutning av färgerna i stjärnans ljus — Jupiter får solen att vagga med omkring 12&nbsp;m/s, ungefär cykelfart.' },
@@ -905,7 +905,7 @@ window.BEGREPP = [
     term: 'Asteroid',
     former: ['asteroid', 'asteroiden', 'asteroider', 'asteroiderna', 'asteroidbälte', 'asteroidbältet', 'jordnära asteroid', 'jordnära asteroider'],
     kort: 'En sten- eller metallkropp i bana kring solen, för liten för att kallas planet. De flesta finns i asteroidbältet mellan Mars och Jupiter.',
-    relaterade: ['komet'],
+    relaterade: ['komet', 'meteoroid', 'meteorit'],
     body: [
       { type: 'p', html: 'Asteroider är byggmaterial som blev över. När solsystemet bildades för 4,6&nbsp;miljarder år sedan klumpade stoft och grus ihop sig till allt större kroppar, och på de flesta ställen växte de vidare till planeter. Mellan Mars och Jupiter gick det inte: Jupiters gravitation piskade upp farterna där, så att krockarna krossade i stället för att bygga. Kvar blev ett bälte av spillror i alla storlekar — från Ceres på omkring 940&nbsp;km i diameter, stor nog att räknas som dvärgplanet, ner till stenar på några meter.' },
       { type: 'p', html: 'Trots antalet är bältet inget minfält. Lägger man ihop allt material där blir det bara några procent av månens massa, utspritt över ett enormt område, och avstånden mellan grannarna mäts i miljoner kilometer — rymdsonder passerar rakt igenom utan risk. Eftersom asteroiderna aldrig smälte samman till en planet är de i praktiken fryst ursprungsmaterial, och prover som sonder hämtat hem ger en direkt inblick i hur solsystemet såg ut innan planeterna fanns.' },
@@ -915,9 +915,9 @@ window.BEGREPP = [
 {
     id: 'laser',
     term: 'Laser',
-    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'laserkylning', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar', 'titan-safirlaser', 'titan-safirlasern', 'titan-safirlasrar', 'titan-safirlasrarna', 'fiberlaser', 'fiberlasern', 'fiberlasrar'],
+    former: ['laser', 'lasern', 'lasrar', 'lasrarna', 'laserstråle', 'laserstrålen', 'laserstrålar', 'laserpuls', 'laserpulsen', 'laserpulser', 'laserljus', 'laserljuset', 'diodlaser', 'diodlasern', 'diodlasrar', 'diodlasrarna', 'precisionslaser', 'precisionslasrar', 'terahertzlaser', 'terahertzlasrar', 'titan-safirlaser', 'titan-safirlasern', 'titan-safirlasrar', 'titan-safirlasrarna', 'fiberlaser', 'fiberlasern', 'fiberlasrar'],
     kort: 'En ljuskälla som skickar ut en smal, skarpt riktad stråle där alla ljusvågor har samma våglängd och svänger i takt. Namnet är en förkortning av engelskans light amplification by stimulated emission of radiation.',
-    relaterade: ['foton', 'exciterat-tillstand', 'optisk-fiber'],
+    relaterade: ['foton', 'exciterat-tillstand', 'optisk-fiber', 'laserkylning'],
     body: [
       { type: 'p', html: 'Tänd en ficklampa och en laserpekare bredvid varandra så syns skillnaden direkt: ficklampans sken sprider ut sig åt alla håll och innehåller alla möjliga färger, medan laserns stråle håller ihop som en tunn nål av en enda färg. Skillnaden sitter i hur ljuset skapas. I en glödlampa skickar varje atom ut sin ljuspartikel för sig, oberoende av grannarna. En laser utnyttjar i stället <em>stimulerad emission</em>, en effekt som Einstein förutsade redan 1917: passerar en foton en atom som redan är exciterad kan den knuffa ner atomen i förtid, och den nya fotonen blir en exakt kopia av den första — samma våglängd, samma riktning, i takt med originalet.' },
       { type: 'p', html: 'För att kopiorna ska hinna bli många sitter det aktiva materialet — en kristall, en gas eller en halvledarbit — mellan två speglar som bildar en resonator. Ljuset studsar fram och tillbaka och förstärks för varje varv. Samtidigt pumpas materialet med energi, från en ström, en blixtlampa eller en annan laser, tills fler atomer befinner sig i det exciterade tillståndet än i grundtillståndet. Det kallas inversion och är nödvändigt: annars skulle ljuset absorberas mer än det förstärks. Den ena spegeln släpper igenom någon procent av ljuset, och det som kommer ut där är laserstrålen.' },
@@ -929,7 +929,7 @@ window.BEGREPP = [
     term: 'Foton',
     former: ['foton', 'fotonen', 'fotoner', 'fotonerna', 'ljuspartikel', 'ljuspartikeln', 'ljuspartiklar', 'röntgenfoton', 'röntgenfotonen', 'röntgenfotoner', 'röntgenfotonerna'],
     kort: 'Ljusets minsta odelbara energipaket — en partikel utan massa som alltid rör sig med ljusets hastighet. Energin bestäms av ljusets frekvens, alltså av färgen.',
-    relaterade: ['vaglangd', 'laser', 'exciterat-tillstand'],
+    relaterade: ['vaglangd', 'laser', 'exciterat-tillstand', 'comptonspridning', 'materievag'],
     body: [
       { type: 'p', html: 'Frågan om ljus är en vågrörelse eller en ström av partiklar var länge en av fysikens hetaste stridsfrågor. Svaret blev: både och. När Max Planck och Albert Einstein i början av 1900-talet skulle förklara hur glödande föremål strålar, och hur ljus kan slå loss elektroner ur en metallyta, tvingades de anta att ljusenergin kommer i odelbara portioner. En sådan portion kallas en foton. Energin ges av <em>E</em> = <em>h</em> · <em>f</em>, där <em>f</em> är ljusets frekvens och <em>h</em> är Plancks konstant, ungefär 6,63 · 10<sup>−34</sup>&nbsp;J·s. Blått ljus svänger snabbare än rött, så varje blå foton bär mer energi än en röd.' },
       { type: 'p', html: 'Det viktigaste i formeln är vad som <em>inte</em> står i den: intensiteten. Att skruva upp ljusstyrkan ger fler fotoner per sekund, men varje enskild foton behåller sin energi. Därför kan hur starkt rött ljus som helst vara oförmöget att slå loss en enda elektron ur en metallyta, medan svagt ultraviolett ljus gör det omedelbart. Det är den fotoelektriska effekten, och förklaringen av den gav Einstein nobelpriset för året 1921.' },
@@ -953,7 +953,7 @@ window.BEGREPP = [
     term: 'Spektroskopi',
     former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'spektrum', 'spektrumet', 'spektret', 'spektra', 'spektrometer', 'spektrometern', 'laserspektroskopi', 'fotoelektronspektroskopi'],
     kort: 'Konsten att dela upp ljus efter våglängd och läsa av mönstret av ljusa och mörka linjer. Eftersom varje grundämne har sitt eget linjemönster går det att bestämma vad något består av utan att röra vid det.',
-    relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand'],
+    relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand', 'diffraktionsgitter'],
     body: [
       { type: 'p', html: 'Låter man solljus passera ett prisma eller ett optiskt gitter delas det upp i regnbågens färger efter våglängd. Tittar man riktigt noga på det uppdelade solljuset visar det sig att regnbågen är genomkorsad av smala mörka streck. Joseph von Fraunhofer kartlade hundratals av dem kring 1814 utan att veta vad de var. Förklaringen kom senare: atomerna i solens svalare ytterlager plockar bort exakt de våglängder som svarar mot hopp mellan deras egna energinivåer. Varje grundämne har sin egen uppsättning nivåer — och därmed sitt eget streckkodsliknande fingeravtryck.' },
       { type: 'p', html: 'Att läsa av det mönstret kallas spektroskopi. En het, tunn gas ger ljusa linjer på precis samma våglängder som ett svalare skikt ger mörka. Natrium lyser till exempel i ett gult par vid 589&nbsp;nm — samma gula ton som i gatlyktor och i en flamma man strör salt i. Metoden är så pålitlig att grundämnet helium upptäcktes i solens spektrum 1868, nästan trettio år innan någon hittade det på jorden. Namnet kommer av grekiskans <em>helios</em>, sol.' },
@@ -975,9 +975,9 @@ window.BEGREPP = [
   {
     id: 'gammastralning',
     term: 'Gammastrålning',
-    former: ['gammastrålning', 'gammastrålningen', 'gammastråle', 'gammastrålen', 'gammastrålar', 'gammafoton', 'gammafotonen', 'gammafotoner', 'gammakvanta', 'gammablixt', 'gammablixten', 'gammablixtar', 'gammablixtarna'],
+    former: ['gammastrålning', 'gammastrålningen', 'gammastråle', 'gammastrålen', 'gammastrålar', 'gammafoton', 'gammafotonen', 'gammafotoner', 'gammakvanta'],
     kort: 'Elektromagnetisk strålning med allra kortast våglängd och högst energi per foton. Den kommer från atomkärnor och från universums våldsammaste händelser, och är kraftigt joniserande.',
-    relaterade: ['foton', 'vaglangd', 'exciterat-tillstand'],
+    relaterade: ['foton', 'vaglangd', 'exciterat-tillstand', 'gammablixt'],
     body: [
       { type: 'p', html: 'Gammastrålning ligger allra längst ut i det elektromagnetiska spektrumet: kortast våglängd, högst frekvens och därmed högst energi per foton. Våglängderna är typiskt kortare än 10<sup>−11</sup>&nbsp;m, alltså mindre än en atom, och en enskild gammafoton kan bära omkring en miljon gånger mer energi än en foton synligt ljus. Gränsen mot röntgenstrålning handlar mer om ursprung än om exakt våglängd: röntgen uppstår när elektroner bromsas eller byter energinivå, medan gammastrålning kommer från själva atomkärnan.' },
       { type: 'p', html: 'Den vanligaste källan är radioaktiva sönderfall. Efter ett alfa- eller betasönderfall lämnas den nybildade kärnan ofta i ett exciterat tillstånd, med energi över. När kärnan deexciteras skickas överskottet ut som en gammafoton. Till skillnad från alfa- och betasönderfall ändras då varken antalet protoner eller neutroner — bara kärnans energi. Gammafotoner bildas också när materia och antimateria möts och förintar varandra.' },
@@ -988,9 +988,9 @@ window.BEGREPP = [
 {
     id: 'kvantmekanik',
     term: 'Kvantmekanik',
-    former: ['kvantmekanik', 'kvantmekaniken', 'kvantmekanisk', 'kvantmekaniskt', 'kvantmekaniska', 'kvantfysik', 'kvantfysiken', 'kvanta', 'kvantum', 'kvanttillstånd', 'kvanttillståndet', 'superposition', 'superpositionen', 'obestämdhetsrelationen', 'obestämdhetsrelation'],
+    former: ['kvantmekanik', 'kvantmekaniken', 'kvantmekanisk', 'kvantmekaniskt', 'kvantmekaniska', 'kvantfysik', 'kvantfysiken', 'kvanta', 'kvantum', 'kvanttillstånd', 'kvanttillståndet'],
     kort: 'Teorin för materiens allra minsta beståndsdelar. Där kommer energi i bestämda portioner, partiklar beter sig som vågor, och naturen svarar med sannolikheter i stället för säkra besked.',
-    relaterade: ['kvantsammanflatning', 'foton', 'exciterat-tillstand'],
+    relaterade: ['kvantsammanflatning', 'foton', 'exciterat-tillstand', 'superposition', 'obestamdhetsrelationen'],
     body: [
       { type: 'p', html: 'I början av 1900-talet gick den klassiska fysiken i stå. Den kunde inte förklara varför en glödande kropp lyser som den gör, varför atomerna inte kollapsar, eller varför varje grundämne bara sänder ut vissa bestämda färger. Lösningen visade sig vara lika enkel som omvälvande: på den allra minsta skalan kommer energi inte i en jämn ström utan i bestämda portioner, kvanta. En elektron i en atom kan inte ha vilken energi som helst, lika lite som du kan stå mellan två pinnar på en stege.' },
       { type: 'p', html: 'Kvantmekaniken lade till två saker som strider mot vardagsförnuftet. Det ena är att allt smått har både våg- och partikelegenskaper: skickar man elektroner mot två smala spalter bildas ett randmönster på skärmen bakom, precis som av en vattenvåg — men varje elektron träffar skärmen i en enda punkt, som en kula. Det andra är att teorin bara ger sannolikheter. Man kan räkna ut exakt hur stor chansen är att elektronen hamnar på ett visst ställe, men inte vilket ställe det blir i just det försöket. Obestämdhetsrelationen sätter dessutom en principiell gräns: ju bättre man känner en partikels läge, desto sämre känner man dess rörelsemängd — och det beror inte på slarviga instrument utan på hur naturen är byggd.' },
@@ -1175,9 +1175,9 @@ window.BEGREPP = [
   {
     id: 'relativitetsteori',
     term: 'Relativitetsteori',
-    former: ['relativitetsteori', 'relativitetsteorin', 'speciella relativitetsteorin', 'allmänna relativitetsteorin', 'relativistisk', 'relativistiskt', 'relativistiska', 'tidsdilatation', 'tidsdilatationen', 'längdkontraktion', 'längdkontraktionen', 'rumtid', 'rumtiden'],
+    former: ['relativitetsteori', 'relativitetsteorin', 'speciella relativitetsteorin', 'allmänna relativitetsteorin', 'relativistisk', 'relativistiskt', 'relativistiska'],
     kort: 'Einsteins två teorier om rum, tid och gravitation: den speciella (1905) om vad som händer nära ljusets hastighet, och den allmänna (1915) som beskriver gravitation som en krökning av rumtiden.',
-    relaterade: ['svart-hal', 'kosmologiska-konstanten', 'kvantmekanik'],
+    relaterade: ['svart-hal', 'kosmologiska-konstanten', 'kvantmekanik', 'tidsdilatation', 'langdkontraktion', 'rumtid'],
     body: [
       { type: 'p', html: 'Den speciella relativitetsteorin, som Einstein lade fram 1905, vilar på ett enda envist mätresultat: ljus i vakuum rör sig med samma fart, ungefär 300&nbsp;000&nbsp;km/s, oavsett hur den som mäter rör sig. Kastar du en boll framåt från ett tåg läggs bollens och tågets fart ihop — men riktar du en ficklampa framåt blir ljusets fart exakt densamma. För att det ska gå ihop måste något annat ge vika, och det som ger vika är tiden och längden. En klocka i hög fart går långsammare sett utifrån (tidsdilatation) och ett föremål blir kortare i sin färdriktning (längdkontraktion). Det är inga synvillor: myoner som bildas högt uppe i atmosfären hinner ner till marken trots att de borde ha sönderfallit långt innan. Ur samma teori följer att massa är en form av energi, <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup>.' },
       { type: 'p', html: 'Tio år senare kom fortsättningen. I den allmänna relativitetsteorin från 1915 är gravitation inte en kraft som drar i saker på avstånd, utan ren geometri: massa och energi kröker rumtiden — rummets tre riktningar och tiden sammanvävda till en helhet — och föremål följer den rakaste möjliga vägen genom krökningen. Bilden av en tung kula som gröper ur en studsmatta fångar en del av saken, men bara en del, för det är inte bara rummet som kröks: klockor går långsammare djupt nere i ett gravitationsfält.' },
@@ -1395,9 +1395,9 @@ window.BEGREPP = [
   {
     id: 'meteor',
     term: 'Meteor',
-    former: ['meteor', 'meteoren', 'meteorer', 'meteorerna', 'stjärnfall', 'stjärnfallet', 'meteorsvärm', 'meteorsvärmen', 'meteorsvärmar', 'meteorsvärmarna', 'meteorskur', 'meteorskuren', 'meteoroid', 'meteoroider', 'meteorit', 'meteoriten', 'meteoriter'],
+    former: ['meteor', 'meteoren', 'meteorer', 'meteorerna', 'stjärnfall', 'stjärnfallet', 'meteorsvärm', 'meteorsvärmen', 'meteorsvärmar', 'meteorsvärmarna', 'meteorskur', 'meteorskuren'],
     kort: 'Ljusstrimman efter ett stoftkorn som brinner upp högt i atmosfären. Själva kornet heter meteoroid, och det som eventuellt når marken heter meteorit.',
-    relaterade: ['komet', 'asteroid', 'plasma'],
+    relaterade: ['komet', 'asteroid', 'plasma', 'meteorit', 'meteoroid'],
     body: [
       { type: 'p', html: 'Ett stjärnfall är inte en stjärna och inte heller en sten som glöder av friktion i vanlig mening. Det som kommer in är oftast ett korn i storleksordningen ett sandkorn, och det färdas i tiotals kilometer per sekund. På ungefär tio mils höjd är luften fortfarande extremt tunn, men i den farten hinner kornet ändå slå in i luftmolekylerna så våldsamt att både kornet och luften framför det slits sönder till glödande, joniserad gas. Ljusstrimman vi ser är den gasen som lyser — därför syns strimman långt bredare än det lilla kornet.' },
       { type: 'p', html: 'Tre ord som lätt blandas ihop håller isär saken: kornet ute i rymden är en <em>meteoroid</em>, ljusfenomenet i atmosfären är en <em>meteor</em>, och den klump som mot förmodan överlever hela vägen ner till marken är en <em>meteorit</em>. De allra flesta meteoroider förångas fullständigt på några sekunder, och det enda som når marken är mikroskopiskt stoft som dalar ner under veckor.' },
@@ -1457,7 +1457,7 @@ window.BEGREPP = [
     term: 'Polarisation',
     former: ['polarisation', 'polarisationen', 'polariserad', 'polariserat', 'polariserade', 'linjärt polariserad', 'linjär polarisation', 'cirkulär polarisation', 'polarisationsriktning', 'polarisationsriktningen', 'polarisationsgrad', 'polarisationsgraden', 'cirkulärpolariserat', 'cirkulärpolariserad', 'linjärpolariserat', 'linjärpolariserad'],
     kort: 'Vilken riktning en ljusvågs elektriska fält svänger i. Vanligt ljus svänger huller om buller åt alla håll, men speglingar, spridning och magnetfält kan sortera fram en riktning.',
-    relaterade: ['foton', 'vaglangd', 'kiralitet'],
+    relaterade: ['foton', 'vaglangd', 'kiralitet', 'dubbelbrytning'],
     body: [
       { type: 'p', html: 'Ljus är en våg där ett elektriskt fält svänger fram och tillbaka tvärs mot färdriktningen. Tänk på ett rep som någon vickar på: du kan vicka det upp och ner, i sidled eller i vilken vinkel som helst däremellan. Den vinkeln är ljusets polarisationsriktning. En glödlampa eller solen sänder ut oräkneliga vågor med slumpmässiga riktningar samtidigt, och sammanlagt blir ljuset opolariserat — ingen riktning är vanligare än någon annan.' },
       { type: 'p', html: 'Vissa förlopp sorterar. Ett polarisationsfilter släpper bara igenom svängningar i en riktning, ungefär som ett galler av spjälor. Ljus som studsar snett mot en vattenyta eller en våt asfalt blir till stor del polariserat i sidled, vilket är hela idén bakom polariserade solglasögon: de har spjälorna ställda upp och ner och släcker därför reflexerna. Även ljus som sprids i himlen blir delvis polariserat, något humlor och honungsbin använder för att navigera.' },
@@ -1627,9 +1627,9 @@ window.BEGREPP = [
   {
     id: 'invers-comptonspridning',
     term: 'Invers comptonspridning',
-    former: ['invers comptonspridning', 'invers comptonspridningen', 'comptonspridning', 'comptonspridningen', 'compton-spridning'],
+    former: ['invers comptonspridning', 'invers comptonspridningen'],
     kort: 'När en mycket snabb elektron krockar med en ljuspartikel och sparkar upp den till mycket högre energi. Vanligt ljus kan på det viset förvandlas till röntgen- eller gammastrålning.',
-    relaterade: ['foton', 'gammastralning', 'pevatron', 'kosmisk-stralning'],
+    relaterade: ['foton', 'gammastralning', 'pevatron', 'kosmisk-stralning', 'comptonspridning'],
     body: [
       { type: 'p', html: 'Vanlig Comptonspridning upptäcktes 1923: skjuter man röntgenstrålning mot en stillastående elektron studsar strålningen i väg med lite lägre energi, eftersom en del av den gått åt till att sätta elektronen i rörelse. Det var ett av de tydligaste bevisen för att ljus uppträder som partiklar och inte bara som vågor.' },
       { type: 'p', html: 'Vänder man på rollerna vänder också energiflödet. Är det i stället elektronen som far fram i nästan ljusets hastighet, och fotonen som ligger stilla och är energifattig, så är det elektronen som förlorar och fotonen som vinner. En foton av vanligt synligt ljus, eller till och med av den svaga kosmiska bakgrundsstrålningen, kan då kastas upp till röntgen- eller gammaenergier i en enda krock. Därav namnet: invers, alltså omvänd.' },
@@ -1692,9 +1692,9 @@ window.BEGREPP = [
   {
     id: 'kvant-halleffekten',
     term: 'Kvant-Halleffekten',
-    former: ['kvant-halleffekten', 'kvant-halleffekt', 'kvanthalleffekten', 'kvanthalleffekt', 'halleffekten', 'halleffekt', 'kvant-halltillstånd', 'kvant-halltillståndet', 'fyllnadsfaktor', 'fyllnadsfaktorn'],
+    former: ['kvant-halleffekten', 'kvant-halleffekt', 'kvanthalleffekten', 'kvanthalleffekt', 'kvant-halltillstånd', 'kvant-halltillståndet', 'fyllnadsfaktor', 'fyllnadsfaktorn'],
     kort: 'Vad som händer när elektroner tvingas in i ett tunt skikt, kyls nästan till absoluta nollpunkten och utsätts för ett starkt magnetfält: de ordnar sig i ett stelt kvanttillstånd där resistansen antar exakta, bestämda värden.',
-    relaterade: ['kvasipartikel', 'elementarladdning', 'grafen', 'tunneleffekt'],
+    relaterade: ['kvasipartikel', 'elementarladdning', 'grafen', 'tunneleffekt', 'halleffekten'],
     body: [
       { type: 'p', html: 'Skickar man en ström genom en metallplatta och lägger ett magnetfält vinkelrätt mot plattan trycks laddningarna åt sidan, så att det uppstår en spänning tvärs över strömriktningen. Det är den vanliga Halleffekten, känd sedan 1879, och den spänningen växer jämnt när magnetfältet ökar. Så ser det ut i vardagen.' },
       { type: 'p', html: 'Klaus von Klitzing upptäckte 1980 att det slutar se ut så under extrema förhållanden. Är elektronerna instängda i ett skikt så tunt att de bara kan röra sig i två riktningar, är temperaturen nära absoluta nollpunkten och magnetfältet mycket starkt, växer spänningen inte längre jämnt. Den hoppar mellan platåer och står helt still däremellan. På varje platå har resistansen ett värde som bara beror på två naturkonstanter och ett heltal — inte på materialet, inte på provbitens form och inte på hur noggrant någon tillverkat den. Exaktheten är så stor att effekten används som världens normal för elektrisk resistans.' },
@@ -1753,9 +1753,9 @@ window.BEGREPP = [
   {
     id: 'epsilon-nara-noll',
     term: 'Epsilon-nära-noll',
-    former: ['epsilon-nära-noll', 'epsilon nära noll', 'epsilon-nära-noll-material', 'epsilon-nära-noll-materialet', 'permittivitet', 'permittiviteten'],
+    former: ['epsilon-nära-noll', 'epsilon nära noll', 'epsilon-nära-noll-material', 'epsilon-nära-noll-materialet'],
     kort: 'Ett tillstånd där ett material nästan inte alls svarar elektriskt på en ljusvåg av en viss våglängd. Materialet blir då ovanligt känsligt för starkt ljus, så att en ljusstråle kan styras med en annan.',
-    relaterade: ['ballistiska-fotoner', 'fyrvagsblandning', 'metamaterial'],
+    relaterade: ['ballistiska-fotoner', 'fyrvagsblandning', 'metamaterial', 'permittivitet'],
     body: [
       { type: 'p', html: 'Hur ett material påverkar ljus beskrivs av dess permittivitet, som brukar betecknas med den grekiska bokstaven epsilon. Storheten talar om hur starkt materialets elektroner förskjuts av ljusvågens elektriska fält. I glas och vatten är den ordentligt större än noll, och ljuset saktar ner och bryts på det välkända sättet.' },
       { type: 'p', html: 'I vissa material passerar permittiviteten genom noll vid en bestämd våglängd. Det gäller framför allt genomskinliga metalloxider som leder ström, till exempel indiumtennoxid, där gränsen ligger i det nära infraröda området. Där svarar materialet knappt alls elektriskt på ljuset, och de vanliga tumreglerna slutar gälla: vågen får en mycket lång våglängd inuti materialet och fasen ändras nästan inte alls när ljuset tar sig igenom.' },
@@ -1789,9 +1789,9 @@ window.BEGREPP = [
   {
     id: 'vakuumdubbelbrytning',
     term: 'Vakuumdubbelbrytning',
-    former: ['vakuumdubbelbrytning', 'vakuumdubbelbrytningen', 'dubbelbrytning', 'dubbelbrytningen', 'dubbelbrytande', 'kritiska fältstyrkan', 'kritisk fältstyrka', 'vakuumresonans', 'vakuumresonansen'],
+    former: ['vakuumdubbelbrytning', 'vakuumdubbelbrytningen', 'kritiska fältstyrkan', 'kritisk fältstyrka', 'vakuumresonans', 'vakuumresonansen'],
     kort: 'Kvantfysikens förutsägelse att ett mycket starkt magnetfält gör tomrummet till ett optiskt material, som bryter ljus olika mycket beroende på hur ljusvågen svänger. Effekten förutsades 1936 och har aldrig kunnat framställas i ett laboratorium.',
-    relaterade: ['kvantelektrodynamik', 'polarisation', 'magnetar'],
+    relaterade: ['kvantelektrodynamik', 'polarisation', 'magnetar', 'dubbelbrytning'],
     body: [
       { type: 'p', html: 'Vissa kristaller, som kalcit, har olika brytningsförmåga åt olika håll. Lägger man en kalcitbit över en textrad ser man två rader i stället för en, eftersom ljus som svänger i den ena riktningen bryts annorlunda än ljus som svänger i den andra. Egenskapen kallas dubbelbrytning, och den kräver normalt ett material med en inre ordning — atomer som sitter uppradade åt ett bestämt håll.' },
       { type: 'p', html: 'Enligt kvantelektrodynamiken kan även ett tomrum få en sådan ordning. Vakuum är nämligen inte stilla: par av elektroner och positroner uppstår hela tiden, existerar en ofattbart kort stund och försvinner igen. Vanligtvis märks de inte alls. Men i ett tillräckligt starkt magnetfält hinner paren rikta in sig efter fältet innan de slocknar, och då har tomrummet en riktning. Ljus som svänger längs fältet möter något annat än ljus som svänger tvärs över det, och de två går fram olika fort. Werner Heisenberg och Hans Euler räknade ut detta 1936.' },
@@ -2455,6 +2455,246 @@ window.BEGREPP = [
       { type: 'p', html: 'Ställ en hink i regnet och räkna dropparna under en minut. Faller det i genomsnitt hundra droppar blir det sällan exakt hundra, utan utfallet varierar med ungefär tio åt endera hållet, alltså roten ur hundra. Dropparna kommer oberoende av varandra och vid slumpmässiga tidpunkter, och den sortens räkning har alltid den spridningen. Samma sak gäller varje mätning som bygger på att räkna partiklar: fotoner i en kamera, elektroner i en ledning, sönderfall i en geigermätare. Fysiker kallar skvalpet skottbrus.' },
       { type: 'p', html: 'Namnet myntades av Walter Schottky 1918, som hörde bruset i ett radiorör som ett svagt fräsande, likt hagel som hälls ut på en plåt. Det avgörande är hur bruset växer. Räknar man hundra partiklar är osäkerheten tio procent, räknar man tiotusen är den en procent. Det relativa bruset sjunker alltså bara som roten ur antalet, vilket betyder att en dubbelt så noggrann mätning kostar fyra gånger så många partiklar och därmed fyra gånger så lång tid. Kornigheten i ett foto taget i svag belysning är i huvudsak just detta, inte ett fel i kameran.' },
       { type: 'p', html: 'Men bruset är inte bara en plåga, utan också ett mätinstrument. Eftersom spridningen hänger ihop med hur stora paketen är kan man vända på resonemanget och läsa av paketstorleken ur bruset. Mäter man skvalpet i en ström går det på så sätt att bestämma laddningen hos de partiklar som bär den. Just det knepet användes i mitten av 1990-talet för att visa att laddningsbärarna i ett tvådimensionellt elektronsystem i starkt magnetfält bar en tredjedels elementarladdning, precis som teorin för den fraktionella kvant-Halleffekten förutsade.' }
+    ]
+  },
+  {
+    id: 'superposition',
+    term: 'Superposition',
+    former: ['superposition', 'superpositionen', 'superpositioner', 'superpositionstillstånd', 'superponera', 'superponerad', 'superponerade', 'superponerat'],
+    kort: 'Att ett kvantsystem befinner sig i flera möjligheter samtidigt, inte i en av dem som vi råkar sakna besked om. Vid en mätning faller tillståndet ihop till ett enda svar.',
+    relaterade: ['kvantmekanik', 'dubbelspaltforsoket', 'qubit', 'dekoherens'],
+    body: [
+      { type: 'p', html: 'Möts två vågor på en vattenyta lägger de sig helt enkelt ovanpå varandra, topp mot topp eller topp mot dal. Kvantmekanikens vågfunktion följer samma additionsregel, och det får en märklig följd. Kan en partikel ta två vägar är dess tillstånd summan av båda vägarna, inte den ena eller den andra. Det kallas superposition, och det är utgångspunkten för nästan allt som känns underligt i kvantfysiken.' },
+      { type: 'p', html: 'Frestelsen är att tro att partikeln egentligen valde en väg och att vi bara saknar upplysningen. Så är det inte, och dubbelspaltförsöket visar varför. Skickar man elektroner en och en mot två spalter bygger de med tiden upp ett randmönster på skärmen, och ränder kan bara uppstå om något går genom båda spalterna och möter sig självt. Sätter man dit en detektor som avslöjar vägen försvinner ränderna omedelbart, och kvar blir två vanliga högar. Blandningen är alltså verklig så länge ingen kan veta vilket alternativ som gäller.' },
+      { type: 'p', html: 'Vid en mätning får man ändå bara ett svar. Sannolikheten för vart och ett ges av kvadraten på dess andel i blandningen, och resten av möjligheterna är därefter borta. Att vi aldrig ser vardagsföremål i superposition beror på dekoherens: ju större systemet är, desto snabbare läcker upplysningen om dess tillstånd ut i omgivningen. Just därför byggs kvantdatorer av små, välisolerade och nedkylda system, där superpositionen hinner användas till något innan den suddas ut.' }
+    ]
+  },
+  {
+    id: 'obestamdhetsrelationen',
+    term: 'Obestämdhetsrelationen',
+    former: ['obestämdhetsrelationen', 'obestämdhetsrelation', 'obestämdhetsrelationer', 'heisenbergs obestämdhetsrelation', 'obestämdhetsprincipen', 'osäkerhetsrelationen', 'osäkerhetsrelation', 'osäkerhetsprincipen'],
+    kort: 'Heisenbergs regel att läge och rörelsemängd inte kan vara skarpt bestämda samtidigt. Ju bättre det ena är känt, desto suddigare är det andra, och det beror inte på mätinstrumentens kvalitet.',
+    relaterade: ['kvantmekanik', 'vagfunktion', 'vakuumfluktuation', 'superposition'],
+    body: [
+      { type: 'p', html: 'Werner Heisenberg formulerade 1927 en gräns som ingen mätning kan ta sig förbi: produkten av obestämdheten i ett läge och obestämdheten i rörelsemängden kan aldrig bli mindre än ett visst litet tal, satt av Plancks konstant. Det är lätt att missförstå regeln som ett problem med instrumenten, som om vi störde partikeln när vi tittade på den. Så är det inte. En partikel som har ett skarpt läge har helt enkelt ingen bestämd rörelsemängd, och tvärtom.' },
+      { type: 'p', html: 'Förklaringen ligger i att partikeln beskrivs av en våg. Ska vågen vara samlad till en liten punkt i rummet måste den byggas ihop av många olika våglängder, och våglängden är just det som svarar mot rörelsemängden. En enda ren våglängd ger tvärtom en våg som breder ut sig över hela rummet. Samma matematik gäller för ljud: en mycket kort knäpp har ingen tydlig tonhöjd, medan en ren ton måste pågå en stund för att alls kunna kallas ren. Obestämdheten är alltså inte kvantfysikens egenhet utan vågornas, och kvantfysikens bidrag är att materia är vågor.' },
+      { type: 'p', html: 'Följderna är genomgripande. Att atomer inte kollapsar beror på relationen: pressas elektronen närmare kärnan blir dess läge mer bestämt, vilket tvingar upp rörelsemängden och därmed energin, så det finns en minsta möjliga storlek. Samma sak gör att partiklar aldrig blir helt stilla ens vid absoluta nollpunkten. En variant kopplar ihop energi och tid: ett tillstånd som bara lever en kort stund kan inte ha en skarpt bestämd energi, vilket syns direkt som breda linjer i ett spektrum, och det är också vad som tillåter tomrummet att fluktuera.' }
+    ]
+  },
+  {
+    id: 'materievag',
+    term: 'Materievåg',
+    former: ['materievåg', 'materievågen', 'materievågor', 'materievågorna', 'de broglie-våglängd', 'de broglie-våglängden', 'de broglies våglängd', 'våg-partikeldualitet', 'våg-partikeldualiteten'],
+    kort: 'Att också materia beter sig som en våg. Våglängden blir kortare ju större rörelsemängden är, och det är därför vågnaturen aldrig märks hos vardagliga föremål.',
+    relaterade: ['kvantmekanik', 'atominterferometri', 'elektronmikroskop', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'År 1924 föreslog Louis de Broglie något som då lät befängt. Ljus hade redan visat sig vara både våg och partikel, så varför skulle inte det omvända gälla? Om en foton kan bete sig som en partikel borde en elektron kunna bete sig som en våg. Han skrev till och med ner våglängden: Plancks konstant delat med partikelns rörelsemängd. Ju tyngre och snabbare föremålet är, desto kortare blir vågen. Förslaget var hans doktorsavhandling, och fem år senare gav det honom Nobelpriset.' },
+      { type: 'p', html: 'Bekräftelsen kom 1927, delvis av en olyckshändelse. Clinton Davisson och Lester Germer sköt elektroner mot en nickelbit och såg dem studsa tillbaka i ett mönster av tydliga maxima och minima, precis som röntgenstrålning som böjs av i en kristall. Elektronerna hade alltså böjts av som vågor kring atomerna i kristallen. Sedan dess har samma sak visats för neutroner, för hela atomer och till och med för molekyler med hundratals atomer, som fortfarande ger ett randmönster om de skickas mot ett gitter.' },
+      { type: 'p', html: 'Skalan förklarar varför ingen märker något i vardagen. En elektron som accelererats genom hundra tusen volt får en våglängd på några pikometer, kortare än en atom, och det är precis den korta vågen som gör elektronmikroskopet så skarpt. En tennisboll i normal fart får i stället en våglängd i storleksordningen en miljarddels miljarddels miljarddels miljarddels meter. Ingen mätning kommer någonsin i närheten, och därför uppför sig bollen som ett vanligt föremål. Materievågor används i dag som precisionsverktyg i atominterferometrar, som mäter tyngdkraft och rotation med enastående noggrannhet.' }
+    ]
+  },
+  {
+    id: 'spinntronik',
+    term: 'Spinntronik',
+    former: ['spinntronik', 'spinntroniken', 'spinntronisk', 'spinntroniska', 'spinnelektronik', 'spinnström', 'spinnströmmen', 'spinnströmmar', 'jättemagnetoresistans', 'jättemagnetoresistansen'],
+    kort: 'Elektronik som utnyttjar elektronens spinn i stället för bara dess laddning. Tekniken gav de täta hårddiskarna och används i dag för minnen som behåller innehållet utan ström.',
+    relaterade: ['spinn', 'magnon', 'altermagnetism', 'halvledare'],
+    body: [
+      { type: 'p', html: 'Vanlig elektronik räknar bara laddningar: fler elektroner genom en ledning betyder högre ström. Men varje elektron bär också ett spinn, en inbyggd magnetisk riktning som kan peka åt två håll. I ett magnetiskt material möter de två spinnriktningarna olika stort motstånd, ungefär som om trafiken i den ena filen gick lättare än i den andra. Utnyttjar man den skillnaden får man en helt ny uppsättning komponenter, och det är vad spinntronik handlar om.' },
+      { type: 'p', html: 'Genombrottet kom 1988, när Albert Fert och Peter Grünberg oberoende av varandra upptäckte att en smörgås av mycket tunna magnetiska skikt ändrar sitt motstånd dramatiskt när ett svagt magnetfält vrider skikten i förhållande till varandra. Effekten fick namnet jättemagnetoresistans och belönades med Nobelpriset 2007. Praktiskt blev den läshuvudet i hårddisken: eftersom en pytteliten magnetisk fläck nu räckte för att ge en tydlig signal kunde bitarna packas långt tätare, och lagringsutrymmet växte explosionsartat under 1990-talet.' },
+      { type: 'p', html: 'I dag pekar utvecklingen åt två håll. Det ena är magnetiska minnen, där varje cell är en liten magnet som behåller sitt läge utan ström, vilket ger arbetsminnen som inte glöms vid strömavbrott. Det andra är att skicka ren spinninformation utan att flytta någon laddning alls. En sådan spinnström värmer inte upp materialet på samma sätt som en elektrisk ström, vilket lockar när värmeutvecklingen är det som begränsar kretsarna. Besläktade grenar arbetar med magnoner som informationsbärare och med antiferromagnetiska material, som växlar riktning tusen gånger snabbare än vanliga magneter.' }
+    ]
+  },
+  {
+    id: 'tidsdilatation',
+    term: 'Tidsdilatation',
+    former: ['tidsdilatation', 'tidsdilatationen', 'tidsdilatationer', 'tidsförlängning', 'gravitationell tidsdilatation'],
+    kort: 'Att tiden går långsammare i ett system som far förbi med hög fart, och långsammare där gravitationen är stark. Effekten är uppmätt med klockor och måste räknas med i satellitnavigering.',
+    relaterade: ['relativitetsteori', 'langdkontraktion', 'rumtid', 'myon'],
+    body: [
+      { type: 'p', html: 'I den speciella relativitetsteorin är ljusets hastighet densamma för alla som mäter den, oavsett hur de själva rör sig. Priset för det är att tiden inte kan vara det. En klocka som far förbi tickar långsammare sett från den som står stilla, och effekten växer dramatiskt nära ljusets hastighet: vid ungefär åtta tiondelar av ljushastigheten går klockan halva takten. Vid vardagliga farter är skillnaden så liten att den saknar all praktisk betydelse, vilket är skälet till att ingen märker något.' },
+      { type: 'p', html: 'Att det ändå är sant syns tydligast på myoner. De bildas högt uppe i atmosfären när kosmisk strålning träffar luften, och de lever i genomsnitt bara ett par miljondels sekunder. Även med nästan ljusets hastighet borde de hinna några hundra meter innan de sönderfaller, men de når marken i stora mängder. Förklaringen är att deras inre klocka går långsammare sett från oss. Effekten har också mätts direkt, bland annat 1971 när atomklockor flögs runt jorden i linjefart och kom hem med en avvikelse som stämde med teorin.' },
+      { type: 'p', html: 'Den allmänna relativitetsteorin lägger till en andra orsak: tiden går långsammare djupt nere i en gravitationsbrunn än högt uppe. De två effekterna drar åt olika håll för en satellit, som både rör sig fort och befinner sig högt upp. För GPS-satelliterna vinner höjdeffekten, och deras klockor går sammanlagt några tiotals miljondels sekunder fel per dygn jämfört med klockor på marken. Det låter försumbart, men eftersom systemet mäter avstånd med ljusets hastighet skulle positionerna glida flera kilometer om dygnet om korrektionen inte fanns inbyggd.' }
+    ]
+  },
+  {
+    id: 'langdkontraktion',
+    term: 'Längdkontraktion',
+    former: ['längdkontraktion', 'längdkontraktionen', 'lorentzkontraktion', 'lorentzkontraktionen', 'längdförkortning', 'längdförkortningen'],
+    kort: 'Att ett föremål mäts som kortare i rörelseriktningen när det far förbi med hög fart. Effekten är den nödvändiga motsvarigheten till att tiden går långsammare.',
+    relaterade: ['relativitetsteori', 'tidsdilatation', 'rumtid', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'Mäter man ett föremål som rör sig snabbt förbi blir det kortare i färdriktningen än när det står stilla, med exakt samma faktor som klockan saktas ner. Måtten tvärs rörelsen är däremot oförändrade, så en förbiflygande kub blir en platt låda och inte en mindre kub. Ingenting kläms ihop i vanlig mening, och för den som följer med föremålet är allt sig likt. Det är själva mätningen av längd som beror på vem som utför den.' },
+      { type: 'p', html: 'Nyttan med begreppet är att det håller ihop berättelsen. En myon som bildas högt i atmosfären hinner ner till marken trots sin korta livstid, och sett från oss beror det på att myonens klocka går långsammare. Sett från myonen går klockan alldeles normalt, men då är atmosfären i stället hoptryckt till en bråkdel av sin tjocklek, så sträckan hinner passera. De två beskrivningarna låter olika men ger samma svar på den enda fråga som går att kontrollera: nådde myonen marken eller inte.' },
+      { type: 'p', html: 'Effekten är vardag i partikelfysiken. En proton i den stora acceleratorn vid CERN går så nära ljusets hastighet att hela den två och en halv mil långa ringen, sett ur protonens perspektiv, krymper till några meter. När tunga atomkärnor kollideras vid sådana farter möts de inte som klot utan som platta skivor, och den formen påverkar hur den heta materien som bildas breder ut sig efteråt. Idén formulerades ursprungligen av George FitzGerald och Hendrik Lorentz före relativitetsteorin, som ett sätt att rädda de gamla föreställningarna, men fick sin riktiga innebörd först hos Einstein.' }
+    ]
+  },
+  {
+    id: 'rumtid',
+    term: 'Rumtid',
+    former: ['rumtid', 'rumtiden', 'rumtidsgeometri', 'rumtidsgeometrin', 'rumtidskrökning', 'rumtidskrökningen', 'rumtidsdiagram', 'fyrdimensionell rumtid'],
+    kort: 'Rummets tre riktningar och tiden sammanfogade till en enda fyrdimensionell väv. I den allmänna relativitetsteorin är gravitation ingenting annat än att väven är krökt.',
+    relaterade: ['relativitetsteori', 'tidsdilatation', 'svart-hal', 'handelsehorisont'],
+    body: [
+      { type: 'p', html: 'När relativitetsteorin visade att två observatörer kan vara oense både om hur långt något är och om hur lång tid något tog, verkade rum och tid ha blivit hopplöst godtyckliga. Hermann Minkowski såg 1908 att de i stället är oense på ett mycket bestämt sätt: en viss kombination av avstånd och tidsskillnad ger alltid samma värde för alla. Slutsatsen blev att rum och tid inte är två oberoende saker utan två riktningar i samma fyrdimensionella geometri. En punkt i den, en händelse, anges med tre lägeskoordinater och en tidpunkt.' },
+      { type: 'p', html: 'Sju år senare byggde Einstein sin gravitationsteori på den geometrin. Massa och energi kröker rumtiden, och föremål som ingen kraft verkar på följer den rakaste väg som finns i den krökta väven. Jorden känner alltså ingen dragning i vanlig mening utan går rakt fram i en geometri som solen har böjt. Bilden är svår att föreställa sig, men den ger mätbara svar: ljus från stjärnor böjs när det passerar solen, vilket bekräftades vid en solförmörkelse 1919, Merkurius bana vrider sig långsamt på det sätt teorin kräver, och klockor går olika fort på olika höjd.' },
+      { type: 'p', html: 'Att rumtiden är något som kan formas betyder också att den kan skaka. Två svarta hål som spiralerar mot varandra skickar ut krusningar i väven, gravitationsvågor, som pressar och sträcker allt de passerar med ofattbart små belopp. Den första direkta mätningen gjordes 2015. I ett svart håls närhet är krökningen så extrem att alla vägar leder inåt, och det är den egenskapen som händelsehorisonten beskriver.' }
+    ]
+  },
+  {
+    id: 'meteorit',
+    term: 'Meteorit',
+    former: ['meteorit', 'meteoriten', 'meteoriter', 'meteoriterna', 'järnmeteorit', 'järnmeteoriten', 'järnmeteoriter', 'stenmeteorit', 'stenmeteoriter', 'kondrit', 'kondriten', 'kondriter', 'kondriterna'],
+    kort: 'Den bit som överlever färden genom atmosfären och når marken. De flesta meteoriter kommer från asteroidbältet och är äldre än jorden själv.',
+    relaterade: ['meteor', 'meteoroid', 'asteroid', 'isotop'],
+    body: [
+      { type: 'p', html: 'Orden hänger ihop i en kedja. Kroppen som far omkring i rymden är en meteoroid, ljusstrimman den ritar när den träffar atmosfären är en meteor, och det som eventuellt landar är en meteorit. De allra flesta meteoroider förångas fullständigt, så bara de större kropparna lämnar något efter sig. En färsk meteorit känns igen på sin mörka, tunna smältskorpa, som bildas när ytan smälter under inbromsningen och stelnar igen. Inuti är stenen däremot opåverkad och kall, eftersom färden är alldeles för kort för att värmen ska hinna tränga in.' },
+      { type: 'p', html: 'Meteoriter delas i tre huvudgrupper. Stenmeteoriterna är vanligast och liknar vid en hastig blick vanliga jordiska bergarter. Järnmeteoriterna består av en legering av järn och nickel och kommer från kärnan i kroppar som en gång var stora nog att smälta och skikta sig, och som senare krossats i kollisioner. Däremellan finns blandformerna. Den intressantaste undergruppen är kondriterna, som innehåller små stelnade droppar av smält material från solsystemets barndom och aldrig har smälts om. De är det äldsta fasta material en människa kan hålla i handen, ungefär 4,57&nbsp;miljarder år gammalt.' },
+      { type: 'p', html: 'Just åldern gör dem ovärderliga. Genom att mäta hur långt olika radioaktiva ämnen i dem har sönderfallit får man solsystemets ålder, och sammansättningen berättar vad den ursprungliga gas- och stoftskivan innehöll. En liten andel meteoriter kommer inte från asteroidbältet alls utan från månen och Mars, uppslungade av nedslag och långt senare infångade av jorden. Det största nedfallet i modern tid inträffade 2013 över Tjeljabinsk i Ryssland, där en kropp på ett tjugotal meter exploderade högt i luften och krossade fönster i hela staden. Bäst av allt letar man i Antarktis, där mörka stenar syns långt på den vita isen.' }
+    ]
+  },
+  {
+    id: 'meteoroid',
+    term: 'Meteoroid',
+    former: ['meteoroid', 'meteoroiden', 'meteoroider', 'meteoroiderna', 'mikrometeoroid', 'mikrometeoroider'],
+    kort: 'Den lilla kroppen i rymden som ger upphov till en meteor när den träffar atmosfären. Storleken går från ett sandkorn upp till någon meter, större kroppar räknas som asteroider.',
+    relaterade: ['meteor', 'meteorit', 'komet', 'asteroid'],
+    body: [
+      { type: 'p', html: 'En meteoroid är helt enkelt en liten kropp på egen bana runt solen. Gränserna är satta av praktiska skäl snarare än av fysiken: under ungefär en meter talar man om meteoroider, över den storleken om asteroider, och de allra minsta kallas mikrometeoroider eller bara rymdstoft. De flesta är osynliga tills de träffar atmosfären, eftersom en mörk stenbit på några centimeter inte reflekterar tillräckligt med solljus för att kunna upptäckas på håll.' },
+      { type: 'p', html: 'De kommer från två håll. Kometer tappar stoft varje gång de passerar nära solen, och kvar längs deras banor ligger långsträckta stråk av korn. Passerar jorden ett sådant stråk får vi en meteorsvärm med många strimmor från samma punkt på himlen. Den andra källan är kollisioner mellan asteroider, som slår loss splitter i alla storlekar. Sammantaget sveper jorden upp åtskilliga tiotals ton material varje dygn, men nästan allt är stoft som aldrig märks.' },
+      { type: 'p', html: 'Mötet med atmosfären sker i väldiga farter, mellan drygt elva och drygt sjuttio kilometer per sekund beroende på om kroppen kommer i kapp jorden eller möter den. Ljuset uppstår inte av friktion i vardaglig mening, utan av att luften framför kroppen komprimeras och hettas upp våldsamt samtidigt som material kokar bort från ytan och joniserar luften runt omkring. De flesta meteoroider förbrukas helt på mellan åttio och etthundratjugo kilometers höjd. För rymdfarkoster är de minsta kornen ett verkligt bekymmer, eftersom även ett stoftkorn i den farten slår ett litet krater i en yta.' }
+    ]
+  },
+  {
+    id: 'gammablixt',
+    term: 'Gammablixt',
+    former: ['gammablixt', 'gammablixten', 'gammablixtar', 'gammablixtarna', 'gammastrålningsutbrott', 'långa gammablixtar', 'korta gammablixtar'],
+    kort: 'De ljusstarkaste explosionerna i universum: några sekunder av gammastrålning från en händelse miljarder ljusår bort. Under den korta stunden lyser en blixt starkare än alla stjärnor i sin galax tillsammans.',
+    relaterade: ['gammastralning', 'supernova', 'neutronstjarna', 'svart-hal'],
+    body: [
+      { type: 'p', html: 'Upptäckten var en biprodukt av kalla kriget. I slutet av 1960-talet sköt USA upp satelliter som skulle spana efter hemliga kärnvapenprov genom att leta efter plötsliga skurar av gammastrålning. Satelliterna hittade skurar, men de kom inte från jorden utan från rymden, och först 1973 blev fynden offentliga. Det dröjde sedan ett kvartssekel innan man kunde mäta hur långt bort blixtarna sker. Svaret var miljarder ljusår, vilket innebar att energin som frigörs är den största som någonsin uppmätts från en enskild händelse.' },
+      { type: 'p', html: 'Det finns två sorter, och de har helt olika ursprung. De långa, som varar mer än ett par sekunder, uppstår när kärnan i en mycket tung stjärna kollapsar till ett svart hål och en stråle av materia borrar sig ut genom stjärnan längs rotationsaxeln. De korta kommer i stället från när två neutronstjärnor smälter samman. Det bekräftades i augusti 2017, då gravitationsvågor från en sådan sammansmältning nådde jorden och nästan samtidigt följdes av en kort gammablixt från samma punkt på himlen.' },
+      { type: 'p', html: 'Strålningen skickas inte ut åt alla håll utan i smala strålar längs axeln, vilket är avgörande för räkningen. Den energi vi mäter, om vi antar att blixten lyste lika starkt åt alla håll, är därför en stark överskattning, men även den verkliga energin är ofattbar. Baksidan är att vi bara ser de blixtar vars stråle råkar peka mot oss. Efter själva utbrottet lyser platsen i timmar och dagar i röntgen, synligt ljus och radiovågor, och det är det efterglödet som gör det möjligt att peka ut vilken galax händelsen skedde i.' }
+    ]
+  },
+  {
+    id: 'laserkylning',
+    term: 'Laserkylning',
+    former: ['laserkylning', 'laserkylningen', 'laserkyla', 'laserkyld', 'laserkylt', 'laserkylda', 'dopplerkylning', 'dopplerkylningen', 'magnetooptisk fälla', 'magnetooptiska fällan', 'optisk melass', 'optiska melassen'],
+    kort: 'Att bromsa atomer med ljus tills de nästan står stilla, vilket motsvarar temperaturer bara miljondels grader över absoluta nollpunkten. Metoden är förutsättningen för dagens atomklockor och kvantgaser.',
+    relaterade: ['laser', 'absoluta-nollpunkten', 'bose-einstein-kondensat', 'jonfalla'],
+    body: [
+      { type: 'p', html: 'Temperatur är i grunden rörelse, så att kyla en gas betyder att få atomerna att röra sig långsammare. Vid rumstemperatur far en atom fram i flera hundra meter i sekunden, ungefär som ett gevärsprojektil. Att bromsa något sådant med ljus låter orimligt, men varje foton bär en liten rörelsemängd, och en atom som absorberar en foton rakt framifrån får en knuff bakåt. Knuffen är minimal, men en atom kan absorbera och sända ut miljontals fotoner i sekunden, och då blir inbromsningen kraftig.' },
+      { type: 'p', html: 'Konsten är att få knuffarna att alltid bromsa, aldrig accelerera. Knepet är att ställa in laserns frekvens en aning under den frekvens atomen helst absorberar. En atom som rör sig mot lasern ser ljuset dopplerskiftat uppåt, hamnar därmed i takt med atomens övergång och absorberar gärna. En atom som rör sig bort ser ljuset skiftat åt andra hållet och struntar i det. Belyser man molnet från sex håll blir följden att varje atom bromsas oavsett vilket håll den råkar fara åt, som om den simmade i sirap. Ljuset som sedan sänds ut igen går åt slumpmässiga håll och tar därför ut sig självt i längden.' },
+      { type: 'p', html: 'Med den här tekniken når man miljondels grader över absoluta nollpunkten, och kombinerar man den med förångningskylning kommer man ner i miljarddels grader, där ett Bose–Einstein-kondensat kan bildas. Nobelpriset i fysik 1997 gick till utvecklingen av metoden och 2001 till kondensatet den möjliggjorde. I dag vilar en stor del av precisionsfysiken på laserkylda atomer: de bästa atomklockorna, atominterferometrar som mäter tyngdkraft, kvantsimulatorer och flera av de ledande kvantdatorbyggena.' }
+    ]
+  },
+  {
+    id: 'orbital',
+    term: 'Orbital',
+    former: ['orbital', 'orbitalen', 'orbitaler', 'orbitalerna', 'atomorbital', 'atomorbitalen', 'atomorbitaler', 'elektronmoln', 'elektronmolnet', 's-orbital', 'p-orbital', 'd-orbital', 'elektronskal'],
+    kort: 'Det område kring en atomkärna där en viss elektron kan påträffas, och den vågfunktion som beskriver den. Elektronen har ingen bana utan finns som ett moln av sannolikhet.',
+    relaterade: ['molekylorbital', 'vagfunktion', 'kvantmekanik', 'fermion'],
+    body: [
+      { type: 'p', html: 'Skolans bild av atomen, med elektroner som cirklar kring kärnan som planeter kring en sol, är bekväm men fel. Elektronen är en våg, och en våg har ingen bestämd punkt att befinna sig i. Det närmaste man kommer är att ange var den sannolikt finns, och det är vad en orbital gör. Ritas den som en form är formen oftast den yta som rymmer omkring nittio procent av sannolikheten. Innanför ytan finns elektronen någonstans, men frågan var exakt saknar svar tills man mäter.' },
+      { type: 'p', html: 'Orbitalerna har olika form beroende på hur mycket rörelsemängdsmoment elektronen har. En s-orbital är klotformad, en p-orbital ser ut som två lober på var sin sida om kärnan och finns i tre riktningar, och d-orbitalerna är mer sammansatta. Eftersom elektroner är fermioner får varje orbital rymma högst två elektroner, och då med motsatt spinn. Den regeln, tillsammans med i vilken ordning orbitalerna fylls, är hela förklaringen till det periodiska systemets uppbyggnad i rader och block.' },
+      { type: 'p', html: 'Formerna är inte bara bokföring utan avgör hur atomer sitter ihop. När två atomer närmar sig överlappar deras orbitaler och bildar molekylorbitaler som sträcker sig över båda kärnorna, och det är den överlappningen som är den kemiska bindningen. Riktningarna hos p- och d-orbitalerna bestämmer därmed molekylernas form, från vattenmolekylens vinkel till kolets fyra bindningar i en tetraeder. Länge var orbitalen ett räkneverktyg som ingen kunde se, men med moderna metoder går det numera att avbilda hur sannolikhetsmolnet faktiskt är format.' }
+    ]
+  },
+  {
+    id: 'permittivitet',
+    term: 'Permittivitet',
+    former: ['permittivitet', 'permittiviteten', 'dielektricitetskonstant', 'dielektricitetskonstanten', 'relativ permittivitet', 'relativa permittiviteten', 'dielektrisk', 'dielektriskt', 'dielektriska', 'dielektrikum'],
+    kort: 'Ett mått på hur mycket ett material dämpar ett elektriskt fält genom att självt bli en aning polariserat. Samma egenskap bestämmer hur snabbt ljus går genom materialet.',
+    relaterade: ['epsilon-nara-noll', 'elektrisk-dipol', 'polarisation', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'Sätt ett material i ett elektriskt fält, så förskjuts laddningarna inuti det en aning: de positiva åt ena hållet, de negativa åt andra. Materialet blir polariserat och bygger därmed upp ett eget fält som pekar åt motsatt håll, så att det sammanlagda fältet blir svagare än det pålagda. Permittiviteten, som betecknas med den grekiska bokstaven epsilon, säger hur stor den dämpningen är. Tomrummet har ett grundvärde, och för ett material anges oftast den relativa permittiviteten, alltså hur många gånger större den är än tomrummets.' },
+      { type: 'p', html: 'Skillnaderna mellan material är stora. Luft ligger praktiskt taget på tomrummets värde, glas några gånger högre och vatten omkring åttio gånger högre vid låga frekvenser, eftersom vattenmolekylerna är små dipoler som kan vrida sig efter fältet. Den vanligaste tillämpningen är kondensatorn: skjuter man in ett material med hög permittivitet mellan plattorna rymmer den mer laddning vid samma spänning, och det är därför kondensatorer nästan alltid är fyllda med något annat än luft. Samma vridning av vattenmolekyler är för övrigt det som värmer maten i en mikrovågsugn.' },
+      { type: 'p', html: 'För ljus är permittiviteten den avgörande storheten. Brytningsindex är roten ur den relativa permittiviteten vid just den frekvensen, så det är epsilon som avgör hur långsamt ljuset går i materialet och hur mycket en stråle bryts vid ytan. Värdet beror starkt på frekvensen, vilket är skälet till att vatten dämpar ett statiskt fält kraftigt men bryter synligt ljus ganska måttligt. Vid höga frekvenser kan permittiviteten till och med bli mycket liten eller negativ, och just i närheten av noll uppstår de säregna optiska effekter som utnyttjas i särskilt konstruerade material.' }
+    ]
+  },
+  {
+    id: 'dubbelbrytning',
+    term: 'Dubbelbrytning',
+    former: ['dubbelbrytning', 'dubbelbrytningen', 'dubbelbrytande', 'birefringens', 'birefringensen', 'våglängdsplatta', 'våglängdsplattan', 'kvartsvågsplatta', 'halvvågsplatta'],
+    kort: 'Att ett material bryter ljus olika mycket beroende på hur ljusvågen svänger, så att en bild sedd genom kristallen blir dubbel. Egenskapen används i allt från bildskärmar till hållfasthetsprov.',
+    relaterade: ['polarisation', 'vakuumdubbelbrytning', 'vaglangd', 'kiralitet'],
+    body: [
+      { type: 'p', html: 'Lägger man en genomskinlig kalkspatkristall över en text ser man texten i dubbel uppsättning. Fenomenet beskrevs redan 1669 av dansken Rasmus Bartholin och var en gåta i över hundra år. Förklaringen är att kristallen inte är likadan åt alla håll. Ljus är en tvärgående våg som svänger vinkelrätt mot färdriktningen, och i en sådan kristall möter en våg som svänger åt ett håll ett annat brytningsindex än en våg som svänger vinkelrätt mot den. Strålen delas därför i två, som bryts olika mycket och tar skilda vägar.' },
+      { type: 'p', html: 'Eftersom de två delarna går olika fort genom materialet glider de ur takt med varandra. Med rätt tjocklek på kristallen kan man ställa in fasskillnaden exakt, och det är precis vad en våglängdsplatta gör: en kvartsvågsplatta gör linjärt polariserat ljus cirkulärt, en halvvågsplatta vrider svängningsriktningen. Sådana plattor är standardkomponenter i varje optiskt laboratorium och sitter också i vanliga solglasögon av bättre slag och i kameraobjektivens filter.' },
+      { type: 'p', html: 'Nyttan sträcker sig långt utanför optiken. En LCD-skärm arbetar genom att flytande kristaller vrider ljusets svängningsriktning olika mycket i varje bildpunkt mellan två polarisationsfilter. Inom hållfasthetslära gjuts modeller i plast och betraktas mellan korsade filter, varvid färgade mönster visar exakt var spänningarna är störst, eftersom materialet blir dubbelbrytande när det belastas. Geologer identifierar mineral i polarisationsmikroskop på samma grund, och även en bit tejp som sträckts blir dubbelbrytande och lyser i färger mellan två filter.' }
+    ]
+  },
+  {
+    id: 'chandrasekhargransen',
+    term: 'Chandrasekhargränsen',
+    former: ['chandrasekhargränsen', 'chandrasekhargräns', 'chandrasekharmassan', 'chandrasekhars gräns'],
+    kort: 'Den största massa en vit dvärg kan ha, ungefär 1,4 solmassor. Över den gränsen orkar elektronernas motstånd inte längre bära stjärnan, och den kollapsar.',
+    relaterade: ['vit-dvarg', 'fermion', 'supernova', 'neutronstjarna'],
+    body: [
+      { type: 'p', html: 'En vit dvärg hålls inte uppe av värme, för den har ingen fusion kvar som producerar någon. Det som hindrar gravitationen från att pressa ihop den är i stället att elektroner är fermioner och därför vägrar dela kvanttillstånd med varandra. Trycket från den vägran kallas urartningstryck och beror inte på temperaturen alls. En egendomlig följd är att en tyngre vit dvärg är mindre än en lätt: mer massa pressar ihop stjärnan hårdare, och den krymper tills motståndet räcker.' },
+      { type: 'p', html: 'År 1930 räknade den nittonårige Subrahmanyan Chandrasekhar på saken under båtresan från Indien till England och lade till en detalj som andra hade förbisett. Vid tillräckligt hög täthet rör sig elektronerna nära ljusets hastighet, och då växer trycket långsammare med tätheten än vad gravitationen kräver. Slutsatsen blev att det finns en övre massgräns, ungefär 1,4&nbsp;solmassor, ovanför vilken ingen jämvikt är möjlig. Arthur Eddington, tidens mest inflytelserika astrofysiker, förlöjligade resultatet offentligt. Chandrasekhar fick rätt och belönades med Nobelpriset 1983.' },
+      { type: 'p', html: 'Gränsen har blivit ett av astronomins viktigaste verktyg. Drar en vit dvärg till sig materia från en följeslagare närmar den sig gränsen och exploderar i en supernova av typ Ia. Eftersom detonationen alltid sker vid ungefär samma massa blir också ljusstyrkan ungefär densamma varje gång, och en känd ljusstyrka gör det möjligt att räkna ut avståndet ur hur svag explosionen ser ut. Det var just den metoden som på 1990-talet visade att universums expansion accelererar. Blir stjärnan i stället tyngre utan att detonera fortsätter kollapsen till en neutronstjärna.' }
+    ]
+  },
+  {
+    id: 'het-jupiter',
+    term: 'Het jupiter',
+    former: ['het jupiter', 'heta jupitrar', 'heta jupitern', 'het jupiter-planet', 'heta jupiter-planeter'],
+    kort: 'En jätteplanet av Jupiters slag som kretsar tätt intill sin stjärna, ofta på bara några dygn. Den första exoplaneten kring en solliknande stjärna visade sig vara en sådan, mot alla förväntningar.',
+    relaterade: ['exoplanet', 'superjord', 'spektroskopi', 'ljusar'],
+    body: [
+      { type: 'p', html: 'När Michel Mayor och Didier Queloz 1995 hittade den första planeten kring en annan solliknande stjärna var upptäckten svår att tro på. Planeten kring 51 Pegasi vägde ungefär halva Jupiter men gick ett varv på drygt fyra dygn, alltså långt närmare sin stjärna än Merkurius är solen. Enligt dåtidens teori kunde jätteplaneter bara bildas långt ute, där det är kallt nog för att is ska kunna klumpa ihop sig till en tillräckligt tung kärna. Något så stort så nära stjärnan skulle helt enkelt inte finnas. Upptäckten gav Nobelpriset 2019.' },
+      { type: 'p', html: 'Lösningen på gåtan blev att planeterna flyttar på sig. En jätteplanet som bildas långt ute kan under sin ungdom växelverka med den skiva av gas och stoft den simmar i och spiralera inåt, tills den hejdas nära stjärnan. Väl där blir förhållandena extrema. Yttemperaturen ligger på uppemot ett par tusen grader, planeten är oftast bunden så att samma sida ständigt vetter mot stjärnan, och atmosfären sväller upp av värmen så att planeten blir betydligt större än Jupiter trots mindre massa.' },
+      { type: 'p', html: 'Att de heta jupitrarna dominerade de tidiga katalogerna säger mer om metoderna än om verkligheten. En stor planet nära sin stjärna ger både den kraftigaste vaggningen hos stjärnan och den djupaste förmörkelsen när den passerar framför den, alltså den starkaste signalen för båda de vanliga sökmetoderna. I själva verket är de ovanliga, kanske kring någon procent av alla stjärnor. Däremot är de fortfarande de tacksammaste att undersöka: den uppsvällda, heta atmosfären ger tydliga spektrum, och i dem har man kunnat läsa av vattenånga, kolmonoxid, järn i gasform och vindar på flera kilometer i sekunden.' }
+    ]
+  },
+  {
+    id: 'superjord',
+    term: 'Superjord',
+    former: ['superjord', 'superjorden', 'superjordar', 'superjordarna'],
+    kort: 'En stenplanet som är tyngre än jorden men lättare än Neptunus. Sådana planeter är de vanligaste vi känner till, trots att det inte finns en enda i vårt eget solsystem.',
+    relaterade: ['exoplanet', 'het-jupiter', 'spektroskopi', 'ljusar'],
+    body: [
+      { type: 'p', html: 'Namnet syftar bara på massan, inte på att planeten skulle vara en bättre jord. En superjord väger mellan ungefär en och tio jordmassor och är alltså inklämd mellan jorden och Neptunus, som väger sjutton jordmassor. Mätningar av både massa och storlek visar att planeter upp till omkring en och en halv jordradie oftast är steniga, medan de något större i regel bär på ett tjockt hölje av väte och helium och därför brukar kallas minineptunusar i stället.' },
+      { type: 'p', html: 'Det märkliga är hur vanliga de är. Rymdteleskopet Keplers systematiska genomsökning visade att just det här storleksintervallet är det allra vanligaste kring stjärnor i vår galax. Samtidigt finns ingenting alls i det intervallet hemma hos oss, där steget går rakt från jorden till Neptunus utan mellanled. Varför vårt solsystem saknar den vanligaste sortens planet är en av de öppna frågorna om hur planetsystem bildas. Det finns dessutom en tydlig svacka i statistiken kring ungefär 1,8&nbsp;jordradier, som troligen beror på att stjärnans strålning blåser bort tunna atmosfärer från de planeter som ligger nära.' },
+      { type: 'p', html: 'Vissa superjordar kretsar på ett avstånd där flytande vatten skulle kunna finnas, vilket gör dem intressanta att leta liv kring. Hur en sådan värld faktiskt ser ut vet ingen. Den högre tyngdkraften talar för en tätare atmosfär, och åsikterna går isär om huruvida en tyngre stenplanet får kraftigare kontinentaldrift än jorden eller snarare ett stelnat skal utan rörelse alls. De exemplar som går att undersöka noggrant kretsar oftast kring små röda dvärgstjärnor, som är lätta att mäta på men som skickar ut häftiga utbrott av strålning mot sina planeter.' }
+    ]
+  },
+  {
+    id: 'diffraktionsgitter',
+    term: 'Diffraktionsgitter',
+    former: ['diffraktionsgitter', 'diffraktionsgittret', 'diffraktionsgittren', 'gitterspektrometer', 'gitterspektrometern', 'reflexionsgitter', 'transmissionsgitter', 'gitterekvationen'],
+    kort: 'En yta med tusentals mycket täta parallella spår som delar upp ljus i dess våglängder. Det är gittret som gör en spektrometer till ett precisionsinstrument.',
+    relaterade: ['diffraktion', 'interferens', 'spektroskopi', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'Ett diffraktionsgitter är i grunden mycket många spalter bredvid varandra, med ett avstånd i samma storleksordning som ljusets våglängd. Ljus som passerar varje spalt breder ut sig, och vågorna från alla spalterna möts sedan och lägger sig ovanpå varandra. I de riktningar där vägskillnaden mellan grannspalter råkar vara ett helt antal våglängder förstärker vågorna varandra, i alla andra riktningar släcker de ut varandra. Eftersom villkoret innehåller våglängden hamnar olika färger i olika riktningar, och det vita ljuset delas upp.' },
+      { type: 'p', html: 'Sambandet skrivs som spaltavståndet gånger sinus för utfallsvinkeln α lika med ett helt tal gånger våglängden. Poängen med att ha många spår i stället för bara två är skärpan: ju fler vågor som ska samverka, desto smalare blir riktningen där de gör det, och desto bättre går det att skilja två närliggande våglängder åt. Ett bra gitter har tusentals spår per millimeter, och därför kan en gitterspektrometer separera våglängder som skiljer sig med en försvinnande liten bråkdel. Gittret kan antingen släppa igenom ljuset eller vara en blank yta med spår som speglar det.' },
+      { type: 'p', html: 'Instrumentet finns överallt där man vill veta vad något består av. Det var med gitterspektrografer man kartlade de mörka linjerna i solens spektrum och därmed kunde säga vilka grundämnen solen innehåller, och samma princip sitter i dagens teleskop, i laboratoriernas mätinstrument och i handhållna materialanalysatorer. Regnbågsskimret på en cd-skiva kommer av att spåren fungerar som ett reflexionsgitter. Att blanda ihop det med ett kristallgitter är lätt gjort, men där är det atomernas regelbundna mönster som gör samma sak med röntgenstrålning.' }
+    ]
+  },
+  {
+    id: 'halleffekten',
+    term: 'Halleffekten',
+    former: ['halleffekten', 'halleffekt', 'hallspänning', 'hallspänningen', 'hallsensor', 'hallsensorn', 'hallsensorer', 'hallmotstånd', 'hallmotståndet', 'hallmätning', 'hallmätningar'],
+    kort: 'Att en strömförande platta får en spänning tvärs över sig när den placeras i ett magnetfält. Effekten avslöjar både fältets styrka och vilket tecken laddningsbärarna har.',
+    relaterade: ['kvant-halleffekten', 'magnetometer', 'halvledare', 'elementarladdning'],
+    body: [
+      { type: 'p', html: 'Låt en ström flyta genom en tunn platta och lägg ett magnetfält vinkelrätt mot plattan. Varje laddning som rör sig i ett magnetfält känner en kraft åt sidan, så laddningsbärarna trycks mot ena kanten. Där hopar de sig tills det elektriska fältet från överskottet är precis så starkt att det balanserar den magnetiska sidokraften. Kvar står en mätbar spänning tvärs över plattan, vinkelrätt mot både strömmen och fältet. Edwin Hall visade detta 1879, arton år innan elektronen ens var upptäckt.' },
+      { type: 'p', html: 'Spänningen bär två upplysningar. Storleken är proportionell mot strömmen och magnetfältet och omvänt mot plattans tjocklek, vilket gör en tunn platta till en enkel magnetfältsmätare. Tecknet avslöjar däremot något djupare, nämligen om laddningsbärarna är positiva eller negativa. I vissa material visade mätningen att strömmen bärs av positiva bärare, vilket var ett tidigt och svårsmält resultat. Förklaringen kom med halvledarfysiken: i ett p-dopat material är det tomma platser i elektronernas bindningar som förflyttar sig, och de beter sig i alla avseenden som positiva laddningar.' },
+      { type: 'p', html: 'I dag sitter halleffekten i nästan varje maskin. En hallsensor är billig, tål smuts och kräver ingen mekanisk kontakt, så den används för att känna av varvtal på hjul och motoraxlar, för att märka när ett lock stängs, för att styra borstlösa motorer och för att mäta ström i en kabel utan att bryta den. Kyler man i stället ner en tunn halvledare nästan till absoluta nollpunkten och lägger på ett mycket starkt fält förvandlas effekten till kvant-Halleffekten, där spänningen bara antar exakta bestämda värden, så exakta att de används som internationell motståndsnormal.' }
+    ]
+  },
+  {
+    id: 'comptonspridning',
+    term: 'Comptonspridning',
+    former: ['comptonspridning', 'comptonspridningen', 'compton-spridning', 'comptoneffekten', 'comptoneffekt', 'comptonvåglängd', 'comptonvåglängden'],
+    kort: 'När en energirik foton studsar mot en elektron och lämnar över en del av sin energi. Fotonen fortsätter med längre våglängd, vilket bara går att förklara om ljuset uppträder som partiklar.',
+    relaterade: ['invers-comptonspridning', 'foton', 'gammastralning', 'elektronvolt'],
+    body: [
+      { type: 'p', html: 'År 1923 lät Arthur Compton röntgenstrålning falla mot en bit grafit och mätte noggrant vad som studsade tillbaka. Resultatet var förbryllande. En del av den spridda strålningen hade längre våglängd än den infallande, och skillnaden berodde bara på vilken vinkel man mätte i, inte på materialet och inte heller på den ursprungliga våglängden. En våg som studsar mot något ska behålla sin frekvens, så vågbeskrivningen gav helt fel svar.' },
+      { type: 'p', html: 'Compton löste det genom att räkna som om det vore en biljardstöt mellan två partiklar: en foton träffar en elektron, bägge far i väg åt var sitt håll, och både energi och rörelsemängd bevaras. Fotonen lämnar då över en del av sin energi, och eftersom energin hänger ihop med våglängden blir den utgående vågen längre. Förskjutningen beror bara på vinkeln, och som mest, vid en rak studs bakåt, blir den ungefär fem biljondels millimeter. Räkningen stämde exakt, och den blev det avgörande beviset för att ljus bär rörelsemängd i portioner. Compton fick Nobelpriset 1927.' },
+      { type: 'p', html: 'Processen är långtifrån bara ett historiskt experiment. Vid de fotonenergier som används inom sjukvården är comptonspridning det vanligaste sättet för gammastrålning att lämna ifrån sig energi i vävnad, vilket avgör hur röntgenrum måste skärmas av och varför strålning sprids i sidled i stället för att bara stanna i den tänkta strålgången. Den ger också ett suddigt bakgrundsbrus i gammakameror som måste räknas bort. Vänder man på förloppet, så att en mycket snabb elektron träffar en långsam foton, sparkas fotonen i stället upp till gammaenergier, och det kallas invers comptonspridning.' }
     ]
   },
 ];

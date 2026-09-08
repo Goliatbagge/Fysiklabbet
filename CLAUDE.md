@@ -457,7 +457,9 @@ Så här bygger du scenen:
    "Väggen" streck + operation. Ett enradigt `if (vagg) T.vaggOp(…)`
    utan båda led-rad är förbjudet (verifieraren ger fel), och en
    ekvationsoperation ringas aldrig in — ringar är för hopslagning och
-   insättning. Se REGEL "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" i
+   insättning. En ekvation skrivs alltid på EN rad: ryms den inte
+   krymper helpern raden i stället för att bryta den. Se REGEL
+   "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" och "EN EKVATION SKRIVS PÅ EN RAD" i
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras

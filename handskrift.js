@@ -384,6 +384,19 @@
  * layoutLosolikhet (olikhetstecken), layoutOkandsida (funktionsform med
  * bråk i raden).
  *
+ * ⚠️ REGEL (EN EKVATION SKRIVS PÅ EN RAD, användarkrav 2026-09-08): en
+ * ekvation får inte delas upp på flera rader annat än i extremfall.
+ * Vänsterled, relationstecken och högerled hör ihop; bryts raden mitt i
+ * läses de två halvorna som två olika rader i lösningen, och likheten
+ * går förlorad. Ryms raden inte fram till pilzonen (PAPER_W−34) skrivs
+ * den i stället en aning MINDRE — precis som man kniper ihop handstilen
+ * i slutet av en rad — och börjar längst till vänster (x0: padL) i
+ * stället för i indraget. mkEkvOp gör detta av sig självt: hoptryckningen
+ * räknas ut ur radens bredd och stannar vid EKV_MIN_SC (0,82). Först om
+ * inte ens det räcker är det ett extremfall, och då får raden brytas
+ * med relationstecknet först på fortsättningsraden.
+ * Referensimpl: layoutParentesekv (−12x² i båda led, arkets bredaste rad).
+ *
  * REGEL (FÖRKORTNING OCH FÖRLÄNGNING SKRIVS I TVÅ DRAG, användar-
  * önskemål 2026-08-05): när ett bråk förkortas eller förlängs får pennan
  * ALDRIG skriva det färdiga uttrycket ("5/5" över "20/5") i ett svep.
@@ -5424,12 +5437,13 @@
    * går att skriva som en sträng (opS skrivs då med BLUE av funktionen).
    * opt: x0 (radens start, standard padL+30), dy (avstånd ned till båda
    * led-raden, 2,3·F; bråkrader behöver 3,0–3,2), dyRes, dyVagg, vopt
-   * (vidare till vaggOp, t.ex. { h0: 1.25, h1: 1.15 } vid bråkrader),
-   * bryt (true när raden inte ryms före pilzonen: högerledet fortsätter
-   * på nästa rad med relationstecknet först — verify-handskrift.js säger
-   * till när det behövs).
+   * (vidare till vaggOp, t.ex. { h0: 1.25, h1: 1.15 } vid bråkrader).
+   * En båda led-rad som inte ryms fram till pilzonen skrivs automatiskt
+   * något mindre (ned till EKV_MIN_SC) i stället för att brytas — se
+   * REGEL (EN EKVATION SKRIVS PÅ EN RAD).
    * Returnerar y för resultatraden. Anropande scen skriver resultatraden
    * själv och avslutar den med T.stepEnd() som vanligt. */
+  var EKV_MIN_SC = 0.82;   /* minsta hoptryckning av en båda led-rad */
   function mkEkvOp(T, vagg) {
     var F = T.s * 100;
     var REL = /^(.*?)(=|≤|≥|<|>|≠)(.*)$/;
@@ -5459,17 +5473,18 @@
         T.stepEnd();
         return y + (opt.dyRes == null ? 2.9 : opt.dyRes) * F;
       }
+      /* EN EKVATION SKRIVS PÅ EN RAD (se REGEL i filhuvudet): ryms
+       * båda led-raden inte fram till pilzonen skrivs den lite mindre,
+       * precis som man kniper ihop handstilen i slutet av en rad —
+       * aldrig uppdelad på två rader. */
+      var bredd = T.adv(m[1]) + 2 * T.adv(opS) + T.adv(m[2] + m[3]);
+      var plats = (PAPER_W - 34 - 6) - x0;
+      var sc = bredd > plats ? Math.max(EKV_MIN_SC, plats / bredd) : 1;
       y += (opt.dy == null ? 2.3 : opt.dy) * F;
-      xx = T.str(m[1], x0, y);
-      xx = T.str(opS, xx, y, BLUE);
-      if (opt.bryt) {
-        /* raden ryms inte på arket: högerledet fortsätter på nästa rad
-         * med relationstecknet först (kollegieblock-stil) */
-        y += 2.1 * F;
-        xx = x0 + 30;
-      }
-      xx = T.str(m[2] + m[3], xx, y);
-      T.str(opS, xx, y, BLUE);
+      xx = T.str(m[1], x0, y, null, sc);
+      xx = T.str(opS, xx, y, BLUE, sc);
+      xx = T.str(m[2] + m[3], xx, y, null, sc);
+      T.str(opS, xx, y, BLUE, sc);
       T.stepEnd();
       return y + (opt.dyRes == null ? 2.1 : opt.dyRes) * F;
     };
@@ -6455,9 +6470,10 @@
     ]);
     /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
      * SKRIVS ALLTID UT) — ingen inringning: ringar är för hopslagning.
-     * Båda led-raden ryms inte på en rad ens från padL (31 tecken —
-     * arket tar ~27), så högerledet fortsätter på nästa rad. */
-    y = ekvOp(y, '-12x^2', xw, '12x^2-5x-2=12x^2-6x', { x0: padL, bryt: true });
+     * Båda led-raden är arkets bredaste rad: den börjar vid padL och
+     * skrivs automatiskt en aning mindre för att rymmas på EN rad (se
+     * REGEL: EN EKVATION SKRIVS PÅ EN RAD). */
+    y = ekvOp(y, '-12x^2', xw, '12x^2-5x-2=12x^2-6x', { x0: padL });
     T.str('-5x-2=-6x', padL + 30, y);
     T.stepEnd();
 

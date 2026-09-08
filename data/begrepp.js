@@ -166,13 +166,9 @@ window.BEGREPP = [
   {
     id: 'elektronmikroskop',
     term: 'Elektronmikroskop',
-    former: ['elektronmikroskop', 'elektronmikroskopet', 'elektronmikroskopen',
-             'elektronmikroskopi', 'elektronmikroskopin', 'elektronmikroskopet',
-             'transmissionselektronmikroskop', 'transmissionselektronmikroskopet',
-             'kryoelektronmikroskopi', 'kryoelektronmikroskopin', 'svepelektronmikroskop',
-             'svepelektronmikroskopet', 'stråldos', 'stråldosen'],
+    former: ['elektronmikroskop', 'elektronmikroskopet', 'elektronmikroskopen', 'elektronmikroskopi', 'elektronmikroskopin', 'elektronmikroskopet', 'transmissionselektronmikroskop', 'transmissionselektronmikroskopet', 'kryoelektronmikroskopi', 'kryoelektronmikroskopin', 'svepelektronmikroskop', 'svepelektronmikroskopet'],
     kort: 'Ett mikroskop som avbildar med elektroner i stället för ljus. Eftersom en snabb elektron uppträder som en våg med extremt kort våglängd kan den visa detaljer ända ner på atomnivå.',
-    relaterade: ['kvantmekanik', 'nanoskala'],
+    relaterade: ['kvantmekanik', 'nanoskala', 'straldos'],
     body: [
       { type: 'p', html: 'Ett vanligt ljusmikroskop tar slut vid ungefär en halv mikrometer. Skälet är inte att linserna är dåliga, utan att ljuset är en våg: detaljer som är mycket mindre än våglängden böjer vågen helt enkelt av sig runt, och de suddas ut. Synligt ljus har en våglängd kring 500&nbsp;nm, vilket är tusen gånger grövre än en enskild molekyl.' },
       { type: 'p', html: 'Elektroner löser problemet, eftersom även de är vågor. Våglängden hos en partikel blir kortare ju större rörelsemängden är, så en elektron som accelererats genom hundra tusen volt får en våglängd på några pikometer — mindre än en atom. I ett elektronmikroskop skjuts en sådan stråle genom eller mot provet, och i stället för glaslinser böjs strålen av magnetiska spolar. Bilden fångas till sist upp av en detektor, eftersom ögat inte kan se elektroner.' },
@@ -182,10 +178,9 @@ window.BEGREPP = [
   {
     id: 'standardkvantgransen',
     term: 'Standardkvantgränsen',
-    former: ['standardkvantgränsen', 'standardkvantgräns', 'standardkvantgränser',
-             'skottbrus', 'skottbruset', 'heisenbergskalning', 'heisenbergskalningen'],
+    former: ['standardkvantgränsen', 'standardkvantgräns', 'standardkvantgränser', 'heisenbergskalning', 'heisenbergskalningen'],
     kort: 'Den brusgräns som gäller när varje partikel i en mätning räknas för sig: noggrannheten förbättras bara som roten ur antalet mätningar. Med sammanflätade sonder går gränsen att pressa förbi.',
-    relaterade: ['kvantsammanflatning', 'kvantmekanik', 'foton'],
+    relaterade: ['kvantsammanflatning', 'kvantmekanik', 'foton', 'skottbrus'],
     body: [
       { type: 'p', html: 'Räkna regndroppar i en hink under en minut. Faller det i snitt hundra droppar blir det sällan exakt hundra — utfallet varierar med ungefär tio åt endera hållet, alltså roten ur hundra. Samma slumpmässiga skvalp finns i varje mätning som bygger på att räkna partiklar en och en: fotoner i en kamera, elektroner i ett mikroskop. Fysiker kallar det skottbrus.' },
       { type: 'p', html: 'Följden är en obeveklig växelkurs. Skickar man ett antal partiklar mot det man vill mäta växer signalen i takt med antalet, men bruset växer bara som roten ur antalet. Förhållandet dem emellan blir därför också roten ur antalet, vilket betyder att en dubbelt så noggrann mätning kostar fyra gånger så många partiklar. Den gränsen kallas standardkvantgränsen, och den är inget tecken på slarvig utrustning — den följer av att varje partikel behandlas som en oberoende mätning.' },
@@ -271,7 +266,7 @@ window.BEGREPP = [
     term: 'Kärnfusion',
     former: ['kärnfusion', 'kärnfusionen', 'fusion', 'fusionen', 'fusioner', 'fusionerna', 'fusionera', 'fusionerar', 'fusionerade', 'fusionsreaktion', 'fusionsreaktionen', 'fusionsreaktioner', 'fusionsreaktor', 'fusionsreaktorn', 'fusionsreaktorer', 'fusionskraft', 'fusionskraften', 'fusionshastighet', 'fusionshastigheten', 'vätefusion', 'vätefusionen', 'kall fusion', 'kalla fusionen'],
     kort: 'Två lätta atomkärnor slås samman till en tyngre, och en del av massan frigörs som energi. Det är kärnfusion som får solen och alla andra stjärnor att lysa.',
-    relaterade: ['coulombbarriar', 'tunneleffekt', 'plasma', 'isotop'],
+    relaterade: ['coulombbarriar', 'tunneleffekt', 'plasma', 'isotop', 'deuterium', 'tritium'],
     body: [
       { type: 'p', html: 'Slår man ihop två lätta atomkärnor till en enda blir resultatet nästan alltid lite lättare än delarna var för sig. Den massa som ”försvinner” har inte försvunnit — den har blivit energi, enligt <em>E</em>&nbsp;=&nbsp;<em>m</em>&nbsp;·&nbsp;<em>c</em><sup>2</sup>. Eftersom ljushastigheten i kvadrat är ett gigantiskt tal räcker en försvinnande liten massförändring för att frigöra oerhört mycket energi. Ett gram väte som fusioneras till helium ger ungefär lika mycket energi som tio ton kol som brinner upp.' },
       { type: 'p', html: 'Haken är att kärnorna måste komma varandra oerhört nära innan sammanslagningen kan ske, och de är alla positivt laddade. Positiva laddningar stöter bort varandra, och avstötningen växer brant på korta avstånd. Därför krävs våldsamma förhållanden: i solens kärna är temperaturen omkring 15&nbsp;miljoner grader och trycket ofattbart högt, och materien är där ett plasma, alltså kärnor och elektroner som rör sig fritt från varandra. Även då är fusion en sällsynt händelse för den enskilda kärnan — solen är effektiv först för att den är enormt stor och har enormt gott om tid.' },
@@ -408,7 +403,7 @@ window.BEGREPP = [
     term: 'Boson',
     former: ['boson', 'bosonen', 'bosoner', 'bosonerna'],
     kort: 'En partikel av den familj som gärna samsas i samma kvanttillstånd — motsatsen till fermionerna, som aldrig kan dela tillstånd med varandra.',
-    relaterade: ['spinn', 'higgsbosonen', 'bose-einstein-kondensat', 'foton'],
+    relaterade: ['spinn', 'higgsbosonen', 'bose-einstein-kondensat', 'foton', 'fermion'],
     body: [
       { type: 'p', html: 'Alla partiklar i naturen tillhör en av två familjer, och gränsen mellan dem dras av en egenskap som kallas spinn — ett slags inbyggd rotation som bara kan ha bestämda värden. Partiklar med halvtaligt spinn kallas fermioner: elektroner, protoner och neutroner hör dit. Partiklar med heltaligt spinn kallas bosoner, och dit hör bland annat ljuspartikeln fotonen.' },
       { type: 'p', html: 'Skillnaden i beteende är dramatisk. Två fermioner kan aldrig befinna sig i exakt samma tillstånd samtidigt — det är därför elektronerna i en atom tvingas fördela sig på olika skal i stället för att alla lägga sig innerst, och i förlängningen därför materia tar plats. Bosoner har ingen sådan spärr. Tvärtom blir det mer sannolikt att en boson hamnar i ett visst tillstånd ju fler som redan finns där. Laserns skarpa stråle bygger på just den flockningen: alla fotoner marscherar i takt.' },
@@ -620,6 +615,7 @@ window.BEGREPP = [
     term: 'Neutrino',
     former: ['neutrino', 'neutrinon', 'neutriner', 'neutrinerna', 'antineutrino', 'antineutrinon', 'antineutriner', 'antineutrinerna', 'reaktorantineutrin', 'reaktorantineutriner', 'solneutrin', 'solneutriner', 'elektronneutrino', 'myonneutrino', 'tauneutrino', 'tauneutrinon'],
     kort: 'Universums skyggaste partikel: elektriskt neutral, nästan masslös och passerar rakt genom hela jordklotet utan att märka det. Varje sekund far tiotals miljarder neutriner genom din tumnagel.',
+    relaterade: ['lepton', 'betasonderfall', 'svag-vaxelverkan', 'standardmodellen'],
     body: [
       { type: 'p', html: 'Neutriner föds i kärnreaktioner: i solens inre, i kärnkraftverk, i radioaktiva sönderfall och i exploderande stjärnor. De saknar elektrisk laddning och känner varken av elektriska krafter eller den starka kärnkraften — bara den svaga växelverkan och (ytterst lite) gravitationen. Därför flyger de rakt igenom nästan allt: av de tiotals miljarder solneutriner som varje sekund passerar genom en tumnagel fastnar i praktiken ingen. Ett ljusårs­tjockt blylager skulle bara stoppa ungefär hälften.' },
       { type: 'p', html: 'Att alls fånga en neutrino kräver därför enorma detektorer och gott om tålamod: tiotusentals ton ultrarent vatten, is eller specialvätska djupt nere i gruvor eller under Antarktis is, kantade av ljussensorer som väntar på den svaga blixt som uppstår de sällsynta gånger en neutrino ändå träffar en atomkärna.' },
@@ -833,9 +829,9 @@ window.BEGREPP = [
 {
     id: 'svart-hal',
     term: 'Svart hål',
-    former: ['svart hål', 'svarta hål', 'svarta hålet', 'svarta hålen', 'supermassivt svart hål', 'supermassiva svarta hål', 'supermassiva svarta hålet', 'händelsehorisont', 'händelsehorisonten'],
+    former: ['svart hål', 'svarta hål', 'svarta hålet', 'svarta hålen', 'supermassivt svart hål', 'supermassiva svarta hål', 'supermassiva svarta hålet'],
     kort: 'Ett område där så mycket massa packats ihop på så liten plats att inget kan ta sig därifrån — inte ens ljus. Gränsen kallas händelsehorisonten.',
-    relaterade: ['kvasar', 'supernova', 'vit-dvarg'],
+    relaterade: ['kvasar', 'supernova', 'vit-dvarg', 'handelsehorisont'],
     body: [
       { type: 'p', html: 'Namnet lurar: ett svart hål är inte ett hål i rymden utan raka motsatsen — ovanligt mycket materia klämd in på ovanligt liten plats. Ju mer massa som trängs ihop, desto starkare blir gravitationen och desto högre fart krävs för att slita sig loss. Pressas materien hårt nog räcker inte ens ljusets hastighet. Den gränsen kallas händelsehorisonten, och innanför den kommer ingenting ut. Solen skulle behöva klämmas ihop till en kula med 3&nbsp;km radie för att bli ett svart hål, jorden till en kula på ett par centimeter.' },
       { type: 'p', html: 'Det finns två sorter. Stjärnmassehål på några till några tiotals solmassor bildas när kärnan i en mycket tung stjärna kollapsar. Supermassiva svarta hål väger miljoner till miljarder solmassor och sitter i mitten av så gott som varje stor galax — Vintergatans heter Sagittarius&nbsp;A* och är omkring 4&nbsp;miljoner solmassor tungt.' },
@@ -1004,9 +1000,9 @@ window.BEGREPP = [
   {
     id: 'kvantdator',
     term: 'Kvantdator',
-    former: ['kvantdator', 'kvantdatorn', 'kvantdatorer', 'kvantdatorerna', 'qubit', 'qubitar', 'qubitarna', 'kvantbit', 'kvantbiten', 'kvantbitar', 'kvantberäkning', 'kvantberäkningar', 'kvantalgoritm', 'kvantalgoritmer', 'dekoherens', 'dekoherensen'],
+    former: ['kvantdator', 'kvantdatorn', 'kvantdatorer', 'kvantdatorerna', 'kvantberäkning', 'kvantberäkningar', 'kvantalgoritm', 'kvantalgoritmer'],
     kort: 'En dator som räknar med kvantmekanikens regler. Dess minnesceller, qubits, kan befinna sig i en blandning av 0 och 1 samtidigt — vilket öppnar nya sätt att angripa vissa problem.',
-    relaterade: ['kvantsammanflatning', 'kvantmekanik', 'supraledare'],
+    relaterade: ['kvantsammanflatning', 'kvantmekanik', 'supraledare', 'qubit', 'dekoherens'],
     body: [
       { type: 'p', html: 'En vanlig dator bygger på bitar som är antingen 0 eller 1, som strömbrytare i två lägen. En kvantdator använder i stället qubits, kvantbitar, som lyder kvantmekanikens regler: en qubit kan befinna sig i en superposition, en blandning av 0 och 1 samtidigt, och flera qubits kan sammanflätas så att de bildar ett enda gemensamt tillstånd. Med <em>n</em> qubits rymmer maskinen därför 2<sup><em>n</em></sup> möjligheter på en gång — redan 300 qubits ger fler kombinationer än det finns atomer i det synliga universum.' },
       { type: 'p', html: 'Men en kvantdator är inte bara en snabbare dator. Läser man av qubitarna kollapsar superpositionen och man får ut ett helt vanligt svar av nollor och ettor. Konsten ligger i att skriva algoritmer där de felaktiga svaren släcker ut varandra genom interferens medan det rätta förstärks, och sådana algoritmer känner man bara till för vissa problemtyper: faktorisering av stora tal (som mycket av dagens kryptering vilar på), simulering av molekyler och kemiska reaktioner, samt vissa sök- och optimeringsproblem. På ordbehandling, videoströmning och det mesta annat är en kvantdator hopplöst underlägsen en vanlig.' },
@@ -1016,9 +1012,9 @@ window.BEGREPP = [
   {
     id: 'standardmodellen',
     term: 'Standardmodellen',
-    former: ['standardmodellen', 'standardmodell', 'kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'lepton', 'leptonen', 'leptoner', 'leptonerna', 'gluon', 'gluonen', 'gluoner', 'gluonerna', 'fermion', 'fermioner', 'fermionerna', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna', 'nedkvark', 'nedkvarkar', 'uppkvark', 'uppkvarkar', 'pentakvark', 'pentakvarkar', 'särkvark', 'särkvarken', 'särkvarkar', 'särkvarkarna', 'charmkvark', 'charmkvarken', 'toppkvark', 'toppkvarken', 'taulepton', 'tauleptonen', 'tauleptoner', 'tauleptonerna'],
+    former: ['standardmodellen', 'standardmodell', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna'],
     kort: 'Partikelfysikens grundkarta: en lista över materiens minsta byggstenar och de partiklar som förmedlar krafterna mellan dem. Den beskriver tre av naturens fyra krafter — gravitationen står utanför.',
-    relaterade: ['higgsbosonen', 'boson', 'neutrino', 'partikelaccelerator'],
+    relaterade: ['higgsbosonen', 'boson', 'neutrino', 'partikelaccelerator', 'kvark', 'lepton'],
     body: [
       { type: 'p', html: 'Allt du kan ta på består av atomer, atomerna av elektroner och atomkärnor, och kärnorna av protoner och neutroner. Där tog uppdelningen slut länge — men protoner och neutroner visade sig i sin tur bestå av kvarkar. Standardmodellen är listan där allt detta samlas: tolv materiepartiklar, nämligen sex kvarkar (upp, ner, sär, charm, botten och topp) och sex leptoner (elektronen, myonen, tauonen och deras tre neutriner). De är ordnade i tre generationer, där varje generation är en tyngre kopia av den föregående. Vanlig materia klarar sig med den lättaste: uppkvark, nedkvark och elektron. De tyngre släktingarna sönderfaller nästan omedelbart.' },
       { type: 'p', html: 'Till detta kommer krafternas budbärare. Elektromagnetismen förmedlas av fotonen, den starka kraften som håller ihop atomkärnan av gluoner, och den svaga kraften — den som driver vissa radioaktiva sönderfall — av W- och Z-partiklarna. Sist i uppställningen står higgsbosonen, som hör ihop med det fält som ger de övriga partiklarna massa. Varje materiepartikel har dessutom en antipartikel med motsatt laddning.' },
@@ -1054,7 +1050,7 @@ window.BEGREPP = [
     term: 'Stark växelverkan',
     former: ['stark växelverkan', 'starka växelverkan', 'stark kärnkraft', 'starka kärnkraften', 'starka kraften', 'färgladdning', 'färgladdningen', 'färgladdningar', 'kvantkromodynamik', 'kvantkromodynamiken', 'gluonfält', 'gluonfältet'],
     kort: 'Den kraft som håller ihop kvarkarna inne i protoner och neutroner, och som i förlängningen håller ihop atomkärnan. Den är starkast av naturens fyra krafter men når bara några få kärndiametrar.',
-    relaterade: ['baryon', 'baryonknut', 'standardmodellen', 'karnfusion'],
+    relaterade: ['baryon', 'baryonknut', 'standardmodellen', 'karnfusion', 'gluon', 'kvark'],
     body: [
       { type: 'p', html: 'En atomkärna borde inte finnas. Protonerna i den är positivt laddade och stöter bort varandra kraftfullt på så korta avstånd. Att kärnan ändå håller ihop beror på en kraft som är ungefär hundra gånger starkare än den elektriska, men som bara verkar över ungefär en kärndiameter. Den kallas den starka växelverkan. Egentligen verkar den mellan kvarkarna inne i protoner och neutroner; det som håller ihop kärnpartiklarna med varandra är ett slags läckage av den kraften utanför partiklarnas kant.' },
       { type: 'p', html: 'Kraftens bärare heter gluoner, och den egenskap de reagerar på kallas färgladdning. Namnet har ingenting med färg att göra — det är bara en etikett för tre sorters laddning, ungefär som plus och minus i elektriciteten men med tre varianter i stället för två. Teorin för alltihop heter kvantkromodynamik. Det märkliga är att gluonerna själva bär färgladdning, till skillnad från fotonen som är elektriskt neutral. Därför drar kraftfältet ihop sig till smala strängar i stället för att breda ut sig.' },
@@ -1088,9 +1084,9 @@ window.BEGREPP = [
   {
     id: 'antimateria',
     term: 'Antimateria',
-    former: ['antimateria', 'antimaterian', 'antipartikel', 'antipartikeln', 'antipartiklar', 'antipartiklarna', 'positron', 'positronen', 'positroner', 'positronerna', 'antiproton', 'antiprotoner', 'antiväte', 'antivätet', 'antiatom', 'antiatomer', 'annihilation', 'annihilationen'],
+    former: ['antimateria', 'antimaterian', 'antipartikel', 'antipartikeln', 'antipartiklar', 'antipartiklarna', 'antiproton', 'antiprotoner', 'antiväte', 'antivätet', 'antiatom', 'antiatomer'],
     kort: 'Materiens spegelbild: till varje partikel finns en antipartikel med samma massa men motsatt laddning. Möts de förintas båda och blir ren energi.',
-    relaterade: ['standardmodellen', 'partikelaccelerator'],
+    relaterade: ['standardmodellen', 'partikelaccelerator', 'positron', 'annihilation'],
     body: [
       { type: 'p', html: 'När Paul Dirac 1928 skrev ner en ekvation som förenade kvantmekaniken med relativitetsteorin fick han på köpet med en uppsättning lösningar som verkade beskriva elektroner med positiv laddning. I stället för att stryka dem tog han dem på allvar — och 1932 hittade Carl Anderson just en sådan partikel i den kosmiska strålningen. Den kallas positron och är elektronens antipartikel: exakt samma massa, exakt lika stor laddning, men med motsatt tecken. Samma sak gäller alla andra partiklar. Det finns antiprotoner, antineutroner och till och med hela antiväteatomer, som tillverkas några i taget vid CERN.' },
       { type: 'p', html: 'Det dramatiska händer när materia möter antimateria. Partikelparet förintas, och hela massan omvandlas till energi enligt <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup>, oftast som två gammafotoner som far åt var sitt håll. Det är den effektivaste energiomvandling naturen känner till — men helt oanvändbar som energikälla, eftersom det kostar långt mer energi att tillverka antimaterian än man någonsin får ut av den. All antimateria som mänskligheten hittills framställt väger tillsammans mindre än ett miljondels gram.' },
@@ -1131,9 +1127,9 @@ window.BEGREPP = [
   {
     id: 'radioaktivt-sonderfall',
     term: 'Radioaktivt sönderfall',
-    former: ['radioaktivt sönderfall', 'radioaktivitet', 'radioaktiviteten', 'radioaktiv', 'radioaktivt', 'radioaktiva', 'sönderfall', 'sönderfallet', 'sönderfaller', 'sönderfalla', 'halveringstid', 'halveringstiden', 'halveringstider', 'halveringstiderna', 'alfastrålning', 'alfasönderfall', 'betastrålning', 'betasönderfall', 'alfasönderfallet', 'betasönderfallet'],
+    former: ['radioaktivt sönderfall', 'radioaktivitet', 'radioaktiviteten', 'radioaktiv', 'radioaktivt', 'radioaktiva', 'sönderfall', 'sönderfallet', 'sönderfaller', 'sönderfalla'],
     kort: 'Instabila atomkärnor omvandlas spontant och gör sig av med energi genom att sända ut strålning. När det sker för en enskild kärna går inte att förutsäga — men för en stor mängd kärnor följer det en exakt lag.',
-    relaterade: ['isotop', 'gammastralning', 'neutrino'],
+    relaterade: ['isotop', 'gammastralning', 'neutrino', 'halveringstid', 'alfastralning', 'betasonderfall'],
     body: [
       { type: 'p', html: 'En atomkärna hålls ihop av den starka kärnkraften, som drar, medan protonernas positiva laddningar stöter bort varandra. Blir blandningen av protoner och neutroner ogynnsam blir kärnan instabil och ombildar sig förr eller senare spontant till något som ligger stabilare till. Det sker på tre huvudsätt. Vid alfasönderfall spottar kärnan ut ett fast paket av två protoner och två neutroner, alltså en heliumkärna. Vid betasönderfall omvandlas en neutron till en proton eller tvärtom, och en elektron eller positron kastas ut tillsammans med en neutrino. Vid gammasönderfall behåller kärnan sina partiklar men gör sig av med överskottsenergi som en energirik foton.' },
       { type: 'p', html: 'Det märkliga är slumpen. Kärnor åldras inte, och ingen enskild kärna går att förutsäga: en atom som legat orörd i en miljard år har exakt samma chans att sönderfalla under nästa sekund som en nybildad. Ändå blir en stor samling kärnor fullständigt förutsägbar. Efter en halveringstid återstår ungefär hälften, efter två halveringstider en fjärdedel, efter tre en åttondel. Halveringstiderna spänner över ofattbara skalor: vissa konstgjorda kärnor lever bråkdelar av en miljondels sekund, medan uran-238 har halveringstiden 4,5&nbsp;miljarder år — ungefär jordens ålder, vilket är just därför det fortfarande finns uran i berggrunden.' },
@@ -1143,9 +1139,9 @@ window.BEGREPP = [
   {
     id: 'isotop',
     term: 'Isotop',
-    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'deuterium', 'deuteron', 'deuteronen', 'deuteroner', 'deuteronerna', 'tritium', 'tungt vatten', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna'],
+    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna'],
     kort: 'Atomer av samma grundämne men med olika många neutroner i kärnan. De uppför sig nästan likadant kemiskt, men skiljer sig i massa och i hur stabila de är.',
-    relaterade: ['radioaktivt-sonderfall', 'spektroskopi'],
+    relaterade: ['radioaktivt-sonderfall', 'spektroskopi', 'deuterium', 'tritium'],
     body: [
       { type: 'p', html: 'Vilket grundämne en atom tillhör bestäms helt av antalet protoner i kärnan: sex protoner betyder kol, åtta betyder syre, 92 betyder uran. Antalet neutroner är däremot inte låst. Kolatomer finns med sex, sju eller åtta neutroner och kallas då kol-12, kol-13 och kol-14 efter det sammanlagda antalet kärnpartiklar. Sådana varianter av samma grundämne kallas isotoper. Eftersom kemin styrs av elektronerna, och elektronantalet följer protonerna, beter sig isotoperna nästan identiskt kemiskt — de ingår i samma föreningar och deltar i samma reaktioner.' },
       { type: 'p', html: 'Två saker skiljer dem åt. Den ena är massan, vilket märks tydligast bland de lättaste ämnena: vanligt väte har en ensam proton i kärnan, deuterium har en proton och en neutron och är alltså ungefär dubbelt så tungt, och tritium med två neutroner nästan tre gånger så tungt. Tungt vatten, där väteatomerna är deuterium, är faktiskt mätbart tyngre än vanligt vatten. Den andra skillnaden är stabiliteten. Av de omkring 3&nbsp;000 kända isotoperna är bara ungefär 250 stabila; resten är radioaktiva och sönderfaller förr eller senare. Kol-12 ligger kvar för alltid, medan kol-14 har halveringstiden 5&nbsp;730&nbsp;år.' },
@@ -1155,9 +1151,9 @@ window.BEGREPP = [
 {
     id: 'halvledare',
     term: 'Halvledare',
-    former: ['halvledare', 'halvledaren', 'halvledarna', 'halvledarmaterial', 'halvledarmaterialet', 'halvledarkomponent', 'halvledarkomponenter', 'halvledarindustrin', 'bandgap', 'bandgapet', 'dopning', 'dopningen', 'dopad', 'dopat', 'dopade', 'pn-övergång', 'pn-övergången'],
+    former: ['halvledare', 'halvledaren', 'halvledarna', 'halvledarmaterial', 'halvledarmaterialet', 'halvledarkomponent', 'halvledarkomponenter', 'halvledarindustrin'],
     kort: 'Ett material som leder ström sämre än en metall men bättre än en isolator — och där ledningsförmågan dessutom går att styra. Det är styrbarheten som gör all modern elektronik möjlig.',
-    relaterade: ['gitter', 'nanoskala', 'supraledare'],
+    relaterade: ['gitter', 'nanoskala', 'supraledare', 'bandgap', 'dopning', 'pn-overgang'],
     body: [
       { type: 'p', html: 'Sorterar man material efter hur bra de leder ström hamnar metallerna i ena änden och isolatorerna i den andra: koppar släpper igenom ström nästan hur lätt som helst, glas och gummi inte alls. Mittemellan ligger halvledarna, med kisel som den stora arbetshästen. Det intressanta är inte att de leder ”lagom”, utan att ledningsförmågan går att <em>styra</em>: samma bit kisel kan gå från att knappt leda alls till att leda bra, beroende på temperatur, ljus eller en pålagd spänning.' },
       { type: 'p', html: 'Förklaringen ligger i bandgapet. Elektronerna i ett fast ämne kan bara ha vissa energier, och mellan de energier där de sitter fastlåsta i sina bindningar och de där de kan vandra fritt finns ett tomrum: bandgapet. I en isolator är gapet så brett att nästan ingen elektron orkar över, i en metall finns inget gap alls, och i en halvledare räcker en knuff av värme eller ljus. Dessutom går det att smutsa ner kislet med avsikt, så kallad dopning: en främmande atom på en miljon kiselatomer räcker. Har den en elektron för mycket blir det n-typ, med rörliga elektroner i överskott; en för lite ger p-typ, där tomma platser beter sig som positiva laddningar.' },
@@ -1581,7 +1577,7 @@ window.BEGREPP = [
     term: 'Myon',
     former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår'],
     kort: 'En tyngre släkting till elektronen, ungefär 207 gånger så tung. Den lever bara ett par miljondels sekunder, men regnar ständigt ner över oss från kosmisk strålning — omkring en per sekund genom en utsträckt handflata.',
-    relaterade: ['neutrino', 'standardmodellen', 'invers-betasonderfall'],
+    relaterade: ['neutrino', 'standardmodellen', 'invers-betasonderfall', 'lepton'],
     body: [
       { type: 'p', html: 'Myonen är en av standardmodellens tolv materiepartiklar. Den har exakt samma laddning som elektronen och beter sig i stort sett likadant, men väger omkring 207 gånger mer. När den upptäcktes 1936 var den så oväntad att fysikern Isidor Rabi lär ha frågat: ”Vem beställde den?” Ingen hade sett något behov av en tyngre kopia av elektronen, och frågan varför naturen ändå har tre generationer av materiepartiklar är fortfarande obesvarad.' },
       { type: 'p', html: 'Myoner bildas högt uppe i atmosfären när partiklar från rymden krockar med luftmolekyler. De är instabila och sönderfaller efter i genomsnitt ett par miljondels sekunder — så kort tid att de även i nästan ljusets hastighet borde hinna någon halvkilometer innan de var borta. Ändå når de marken i stora mängder. Förklaringen är relativitetsteorin: sett från vårt perspektiv går myonens inre klocka långsammare, och sett från myonens eget perspektiv är sträckan ner till marken hoptryckt. Kosmiska myoner är därför ett av de tydligaste vardagsbevisen för att tid och längd inte är absoluta.' },
@@ -1721,9 +1717,9 @@ window.BEGREPP = [
   {
     id: 'neutronstjarna',
     term: 'Neutronstjärna',
-    former: ['neutronstjärna', 'neutronstjärnan', 'neutronstjärnor', 'neutronstjärnorna', 'pulsar', 'pulsaren', 'pulsarer', 'pulsarerna'],
+    former: ['neutronstjärna', 'neutronstjärnan', 'neutronstjärnor', 'neutronstjärnorna'],
     kort: 'Den hoppressade kärna som blir kvar när en tung stjärna exploderat. Den väger mer än solen men är bara ett par mil bred, vilket gör den till det tätaste föremål som finns utan att vara ett svart hål.',
-    relaterade: ['supernova', 'magnetar', 'svart-hal'],
+    relaterade: ['supernova', 'magnetar', 'svart-hal', 'pulsar'],
     body: [
       { type: 'p', html: 'En stjärna håller ihop genom en dragkamp: gravitationen drar allt inåt, medan trycket från fusionen i mitten trycker utåt. När bränslet tar slut i en stjärna som väger mer än ungefär åtta gånger solen upphör mottrycket på några sekunder, och kärnan faller ihop. De yttre lagren studsar ut i en supernova. Det som ligger kvar i mitten är en neutronstjärna.' },
       { type: 'p', html: 'Sammanpressningen är svår att ta in. Ungefär en och en halv solmassa hamnar i en kula som är omkring två mil tvärs över — ungefär en storstads bredd. Materialet är så tätt att atomerna inte längre finns kvar som atomer: elektronerna har tryckts in i protonerna, och kvar är i huvudsak neutroner tätt packade som i en enda jättelik atomkärna. En tesked av materialet skulle väga ett par miljarder ton. Ytans gravitation är hundratals miljarder gånger starkare än jordens.' },
@@ -2151,9 +2147,9 @@ window.BEGREPP = [
   {
     id: 'hyperon',
     term: 'Hyperon',
-    former: ['hyperon', 'hyperonen', 'hyperoner', 'hyperonerna', 'lambdapartikel', 'lambdapartikeln', 'lambdapartiklar', 'lambdapartiklarna', 'antilambda', 'antilambdan', 'hyperonstråle', 'hyperonstrålen'],
+    former: ['hyperon', 'hyperonen', 'hyperoner', 'hyperonerna', 'hyperonstråle', 'hyperonstrålen'],
     kort: 'En tung släkting till protonen och neutronen som innehåller minst en särkvark. Hyperoner bildas i kollisioner mellan partiklar och faller sönder inom en bråkdel av en miljondels sekund.',
-    relaterade: ['baryon', 'standardmodellen', 'svag-vaxelverkan', 'partikelaccelerator'],
+    relaterade: ['lambdapartikel', 'baryon', 'standardmodellen', 'svag-vaxelverkan'],
     body: [
       { type: 'p', html: 'Protonen och neutronen består vardera av tre kvarkar av de två lättaste sorterna, upp och ned. Byter man ut en av dem mot den tyngre särkvarken får man en ny partikel, som är byggd på samma sätt men väger mer. Sådana partiklar kallas hyperoner. Den lättaste heter lambda och innehåller en uppkvark, en nedkvark och en särkvark. Den väger ungefär 1,2 gånger så mycket som en proton.' },
       { type: 'p', html: 'Ingen hyperon är stabil. Särkvarken förvandlas förr eller senare till en lättare kvark, och partikeln faller sönder till en proton eller neutron plus något mer. Lambdapartikeln lever i genomsnitt drygt två tiondels miljarddels sekund, vilket låter kort men i partikelsammanhang är gott om tid. En hyperon som skickas i väg nära ljusets hastighet hinner därför flera centimeter genom en detektor innan den försvinner, och det räcker för att man ska kunna se var den bildades och var den föll sönder.' },
@@ -2161,11 +2157,36 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'lambdapartikel',
+    term: 'Lambdapartikel',
+    former: ['lambdapartikel', 'lambdapartikeln', 'lambdapartiklar', 'lambdapartiklarna', 'lambdahyperon', 'lambdahyperonen', 'lambdahyperoner', 'lambdahyperonerna', 'lambdabaryon', 'lambdabaryonen', 'antilambda', 'antilambdan', 'antilambdor', 'lambdasönderfall', 'lambdasönderfallet', 'lambdasönderfallen'],
+    kort: 'Den lättaste hyperonen: en oladdad släkting till neutronen där en av kvarkarna är utbytt mot den tyngre särkvarken. Den lever bara någon tiondels miljarddels sekund och röjer sig genom det V-formade spårparet som sönderfallet lämnar efter sig.',
+    relaterade: ['hyperon', 'baryon', 'svag-vaxelverkan', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'Byt ut en av neutronens tre kvarkar mot den tyngre särkvarken, så har du en lambdapartikel. Den innehåller en uppkvark, en nedkvark och en särkvark, saknar elektrisk laddning och väger ungefär 1,2 gånger så mycket som en proton. I övrigt är den förvånansvärt lik sina lättare släktingar: samma bygge av tre kvarkar, samma spinn och samma starka kraft som håller ihop den. Skillnaden sitter i särkvarken, som gör partikeln tyngre och samtidigt kortlivad. Lambdapartikeln är den lättaste i den familj som kallas hyperoner, alltså partiklar av protonens och neutronens slag men med minst en särkvark inblandad.' },
+      { type: 'p', html: 'Den upptäcktes 1947 i kosmisk strålning, i en dimkammare i Manchester. På bilderna dök det plötsligt upp två spår som pekade ut från ingenting och bildade ett tydligt V. Förklaringen var att en oladdad partikel hade farit genom kammaren utan att lämna något spår alls, och sedan fallit sönder till två laddade partiklar som gjorde det. Sådana fynd kallades först bara V-partiklar. Den neutrala varianten fick senare namn efter den grekiska bokstaven Λ, som har just den formen. Samma V-mönster används än i dag för att sålla fram lambdapartiklar ur miljardtals kollisioner i en detektor.' },
+      { type: 'p', html: 'En lambdapartikel lever i genomsnitt 2,6&nbsp;·&nbsp;10<sup>−10</sup>&nbsp;sekunder. Det låter försvinnande kort, men i partikelsammanhang är det ovanligt länge, och skälet är att bara den svaga växelverkan förmår göra sig av med särkvarken. Eftersom partikeln oftast rör sig nära ljusets hastighet hinner den i genomsnitt knappt en decimeter genom en detektor innan den försvinner. Det räcker gott för att man ska kunna se både var den bildades och var den föll sönder. Nästan alltid blir slutprodukterna en proton och en negativ pion, eller en neutron och en neutral pion. I ungefär åtta fall av tiotusen blir det i stället en proton, en elektron och en antineutrino.' },
+      { type: 'p', html: 'Sönderfallet har en egenhet som gör partikeln ovanligt användbar. Den svaga växelverkan skiljer på höger och vänster, och därför skickas protonen ut lite oftare åt det håll som lambdapartikelns spinn pekar. Mäter man riktningen på sönderfallsprodukterna får man alltså på köpet veta hur partikeln var vänd, utan att behöva mäta spinnet direkt. Antipartikeln, antilambdan, beter sig likadant fast spegelvänt. Att jämföra de två är ett av sätten att leta efter skillnader mellan materia och antimateria.' }
+    ]
+  },
+  {
+    id: 'gitter-qcd',
+    term: 'Gitter-QCD',
+    former: ['gitter-qcd', 'gitterqcd', 'gitter-qcd-beräkning', 'gitter-qcd-beräkningar', 'gitterberäkning', 'gitterberäkningar', 'gitterberäkningarna', 'rumtidsgitter', 'rumtidsgittret'],
+    kort: 'Ett sätt att räkna på den starka kraften genom att byta ut rummet och tiden mot ett rutnät av punkter och låta en superdator arbeta sig fram punkt för punkt. Det är i dag den enda metoden som ger svar direkt ur teorin, utan gissningar på vägen.',
+    relaterade: ['stark-vaxelverkan', 'standardmodellen', 'baryon', 'ckm-matrisen'],
+    body: [
+      { type: 'p', html: 'Teorin för den starka kraften heter kvantkromodynamik, förkortat QCD, och den har ett besvärligt drag: kraften är så stark att den vanliga räknemetoden inte fungerar. I resten av partikelfysiken kan man behandla växelverkan som en liten störning och lägga ihop bidrag som blir mindre och mindre. Med den starka kraften blir bidragen i stället större och större, och summan går inte att avsluta. Att räkna ut något så vardagligt som protonens massa ur teorin var därför omöjligt i decennier.' },
+      { type: 'p', html: 'Lösningen är att ge upp tanken på ett kontinuerligt rum. I gitter-QCD delas en liten låda av rumtid in i ett rutnät av punkter, typiskt någon tiondels femtometer isär, alltså en bråkdel av en protons storlek. Kvarkarna placeras i gitterpunkterna och gluonfälten på sträckorna mellan dem. Då blir teorin ett ändligt räkneproblem i stället för ett oändligt, och en dator kan angripa det. Priset är att problemet är enormt: en beräkning innebär att man slumpar fram miljontals möjliga fälttillstånd och tar medelvärdet av dem, och sådana körningar hör till de tyngsta som görs på världens största datorer.' },
+      { type: 'p', html: 'Rutnätet är förstås inte verkligt, så beräkningen görs om med allt tätare punkter och allt större låda, varefter man extrapolerar till det gränsvärde där rutnätet försvinner. Enda ingångsvärdena är kvarkarnas massor och kraftens styrka. Allt annat kommer ut ur räkningen, och massorna på protonen, neutronen och deras släktingar stämmer numera med de uppmätta inom någon procent. Metoden behövs också som mellanhand när andra saker ska mätas: vill man veta hur benägen en kvark är att förvandlas till en annan måste man först veta hur den starka kraften påverkar sönderfallet, och det svaret får man ur gittret.' }
+    ]
+  },
+  {
     id: 'svag-vaxelverkan',
     term: 'Svag växelverkan',
     former: ['svag växelverkan', 'svaga växelverkan', 'svag kärnkraft', 'svaga kärnkraften', 'semileptoniskt sönderfall', 'semileptoniska sönderfall'],
     kort: 'Den enda naturkraft som kan ändra en kvark från en sort till en annan. Den ligger bakom betasönderfall och därmed bakom en stor del av radioaktiviteten omkring oss.',
-    relaterade: ['standardmodellen', 'neutrino', 'ckm-matrisen', 'baryon'],
+    relaterade: ['standardmodellen', 'neutrino', 'ckm-matrisen', 'baryon', 'betasonderfall'],
     body: [
       { type: 'p', html: 'Av naturens fyra grundläggande krafter är den svaga den mest udda. Tyngdkraften drar ihop, den elektriska kraften drar och stöter bort, den starka kraften håller ihop atomkärnan. Den svaga växelverkan gör något helt annat: den byter identitet på partiklar. En nedkvark kan bli en uppkvark, en särkvark kan bli en uppkvark, och en elektron kan bli en neutrino. Ingen annan känd kraft klarar det.' },
       { type: 'p', html: 'Det tydligaste exemplet är betasönderfall. En neutron i en atomkärna innehåller två nedkvarkar och en uppkvark. Förvandlas en av nedkvarkarna till en uppkvark blir neutronen en proton, och samtidigt skickas en elektron och en antineutrino i väg. Kärnan har då bytt grundämne utan att antalet byggstenar har ändrats. Det är den processen som gör att kol-14 långsamt blir kväve, och som ligger bakom en stor del av den radioaktivitet som mäts i naturen.' },
@@ -2177,11 +2198,263 @@ window.BEGREPP = [
     term: 'CKM-matrisen',
     former: ['ckm-matrisen', 'ckm-matris', 'cabibbovinkeln', 'cabibbovinkel', 'kvarkblandning', 'kvarkblandningen', 'unitaritet', 'unitariteten'],
     kort: 'En tabell med nio tal som säger hur lätt varje kvarksort förvandlas till varje annan. Talen måste uppfylla ett strängt räknevillkor, och att pröva det villkoret är ett av de skarpaste testen av partikelfysikens standardmodell.',
-    relaterade: ['standardmodellen', 'svag-vaxelverkan', 'hyperon', 'antimateria'],
+    relaterade: ['standardmodellen', 'svag-vaxelverkan', 'hyperon', 'antimateria', 'kvark'],
     body: [
       { type: 'p', html: 'Kvarkar finns i sex sorter, och den svaga växelverkan kan förvandla dem till varandra. Men alla förvandlingar är inte lika vanliga. En nedkvark blir nästan alltid en uppkvark, betydligt mer sällan en charmkvark, och nästan aldrig en toppkvark. Sannolikheterna samlas i en tabell med tre rader och tre kolonner, en ruta för varje kombination. Den kallas CKM-matrisen efter Nicola Cabibbo, Makoto Kobayashi och Toshihide Maskawa.' },
       { type: 'p', html: 'Det som gör tabellen intressant är att den inte får se ut hur som helst. En kvark som förvandlas måste bli något, och om listan över tänkbara utfall är fullständig ska sannolikheterna i varje rad summera till hundra procent. Villkoret kallas unitaritet. Går summan inte ihop finns det en väg som saknas i listan, alltså en partikel eller en kraft som ingen känner till. Därför mäts varje ruta i tabellen om och om igen, med olika metoder och i olika laboratorier, och summorna kontrolleras.' },
       { type: 'p', html: 'Tabellen bär också på en av fysikens större gåtor. Ett av talen i den kan inte vara ett vanligt reellt tal utan måste innehålla en fasfaktor, och det är just den som gör att materia och antimateria beter sig en aning olika. Utan den skillnaden hade det tidiga universum lika gärna kunnat sluta med lika delar av båda, som sedan hade utplånat varandra. Effekten som matrisen ger räcker dock inte alls till för att förklara hur mycket materia som faktiskt finns, så någonting mer måste ha bidragit.' }
     ]
-  }
+  },
+  {
+    id: 'kvark',
+    term: 'Kvark',
+    former: ['kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'uppkvark', 'uppkvarken', 'uppkvarkar', 'uppkvarkarna', 'nedkvark', 'nedkvarken', 'nedkvarkar', 'nedkvarkarna', 'särkvark', 'särkvarken', 'särkvarkar', 'särkvarkarna', 'charmkvark', 'charmkvarken', 'charmkvarkar', 'toppkvark', 'toppkvarken', 'toppkvarkar', 'bottenkvark', 'bottenkvarken', 'antikvark', 'antikvarken', 'antikvarkar', 'antikvarkarna', 'kvarksort', 'kvarksorten', 'kvarksorter', 'kvarksorterna', 'pentakvark', 'pentakvarken', 'pentakvarkar', 'pentakvarkarna'],
+    kort: 'Byggstenen som protoner, neutroner och deras släktingar består av. Kvarkar finns i sex sorter och går aldrig att plocka ut en och en, utan sitter alltid ihop i grupper.',
+    relaterade: ['standardmodellen', 'gluon', 'stark-vaxelverkan', 'baryon'],
+    body: [
+      { type: 'p', html: 'När protonen och neutronen visade sig vara delbara var det kvarkar som kom ut. Det finns sex sorter, och de brukar räknas upp i par efter stigande massa: upp och ned, sär och charm, botten och topp. All vanlig materia klarar sig med de två lättaste. En proton är två uppkvarkar och en nedkvark, en neutron är en uppkvark och två nedkvarkar. De fyra tyngre sorterna bildas bara där det finns gott om energi, i kollisioner eller i kosmisk strålning, och de faller sönder nästan omedelbart. Toppkvarken är den extrema ytterligheten: den väger ungefär lika mycket som en hel guldatom, trots att den är en enda partikel utan känd inre struktur.' },
+      { type: 'p', html: 'Kvarkarna bär också en egendomlig laddning. I stället för hela elementarladdningar har de tredjedelar: uppkvarken har laddningen två tredjedels positiv, nedkvarken en tredjedels negativ. Räknar man ihop protonens tre kvarkar blir summan exakt en hel positiv laddning, och neutronens blir exakt noll. Det är den bokföringen som gör att atomer kan vara elektriskt neutrala. Ingen har någonsin uppmätt en fri laddning på en tredjedel, och skälet är enkelt: en ensam kvark går inte att få tag i.' },
+      { type: 'p', html: 'Den starka kraften mellan kvarkar avtar nämligen inte med avståndet, som tyngdkraften och den elektriska kraften gör. Den håller sig ungefär konstant, så ju längre isär man drar två kvarkar desto mer energi krävs det. Till slut räcker energin till att skapa ett nytt kvarkpar ur tomma intet, och i stället för en lös kvark får man två nya partiklar. Det påminner om att bryta en stavmagnet på mitten: man får två magneter, aldrig en ensam pol. Därför uppträder kvarkar bara i grupper. Tre kvarkar bildar en baryon som protonen, en kvark och en antikvark bildar en meson som pionen, och i sällsynta fall har man sett fyra kvarkar och en antikvark hänga ihop i det som kallas en pentakvark.' }
+    ]
+  },
+  {
+    id: 'lepton',
+    term: 'Lepton',
+    former: ['lepton', 'leptonen', 'leptoner', 'leptonerna', 'taulepton', 'tauleptonen', 'tauleptoner', 'tauleptonerna', 'tauon', 'tauonen', 'tauoner', 'antilepton', 'antileptoner', 'leptontal', 'leptontalet'],
+    kort: 'De materiepartiklar som står utanför den starka kraften och därför kan färdas ensamma. Elektronen är den vardagliga leptonen, och till familjen hör också myonen, tauonen och de tre neutrinerna.',
+    relaterade: ['standardmodellen', 'kvark', 'neutrino', 'myon'],
+    body: [
+      { type: 'p', html: 'Materiens minsta byggstenar delas i två läger efter en enda fråga: känner partikeln av den starka kraften eller inte? Kvarkarna gör det och blir därför inspärrade i protoner och neutroner. Leptonerna gör det inte, och kan röra sig fritt en och en. Elektronen är den lepton vi lever med varje dag, den som bär strömmen i en sladd och håller ihop kemin. Det finns sex leptoner i tre par. Tre av dem är elektriskt laddade: elektronen, myonen och tauonen. Tre är oladdade och kallas neutriner, en till varje laddad partner.' },
+      { type: 'p', html: 'De tre laddade leptonerna är i stort sett identiska så när som på massan. Myonen är drygt tvåhundra gånger tyngre än elektronen, tauonen ungefär tretusenfemhundra gånger. Bortsett från det beter de sig likadant i alla kända avseenden, vilket ingen har någon riktigt bra förklaring till. När myonen upptäcktes i den kosmiska strålningen på 1930-talet ska fysikern Isidor Rabi ha undrat vem som hade beställt den. Tyngden har ett pris: bara elektronen är stabil. Myonen lever i genomsnitt drygt två miljondels sekunder och tauonen mindre än en biljondels sekund, sedan faller de sönder till lättare partiklar.' },
+      { type: 'p', html: 'Naturen tycks dessutom bokföra leptonerna. I varje uppmätt reaktion är antalet leptoner minus antalet antileptoner detsamma före och efter, och länge trodde man att bokföringen dessutom hölls separat för varje par. Just den strängare regeln visade sig gå att bryta: neutrinerna byter sort under färden, en effekt som kallas neutrinooscillation och som avslöjade att de har massa. Att elektronen är stabil beror till sist på samma bokföring i kombination med att den är den lättaste laddade leptonen. Det finns helt enkelt ingenting lättare för den att bli.' }
+    ]
+  },
+  {
+    id: 'gluon',
+    term: 'Gluon',
+    former: ['gluon', 'gluonen', 'gluoner', 'gluonerna', 'gluonutbyte', 'gluonutbytet'],
+    kort: 'Partikeln som förmedlar den starka kraften mellan kvarkar. Till skillnad från ljusets fotoner drar gluonerna även i varandra, och det är därför kraften inte försvagas med avståndet.',
+    relaterade: ['stark-vaxelverkan', 'kvark', 'standardmodellen', 'baryon'],
+    body: [
+      { type: 'p', html: 'Varje naturkraft förmedlas av en budbärarpartikel som kastas fram och tillbaka mellan de kroppar som påverkar varandra. Elektromagnetismen har fotonen, den svaga kraften har W- och Z-partiklarna, och den starka kraften har gluonen. Namnet kommer av engelskans <em>glue</em>, lim, vilket beskriver uppgiften väl: gluonerna limmar ihop kvarkarna till protoner och neutroner, och håller sedan ihop protonerna och neutronerna till atomkärnor. Gluonen saknar massa och rör sig med ljusets hastighet, men den lämnar aldrig partikeln den arbetar inuti.' },
+      { type: 'p', html: 'Skälet till att den inte gör det är att gluonen själv bär den laddning den förmedlar. Den starka kraftens laddning kallas färgladdning och finns i tre varianter, och en gluon bär alltid en färg och en antifärg samtidigt. Följden är att gluoner drar i varandra, medan fotoner går rakt igenom varandra utan att märka något. Ett elektriskt fält breder därför ut sig i rymden och tunnas ut, medan gluonfältet i stället dras ihop till en smal sträng mellan kvarkarna. Strängen tunnas inte ut med avståndet, och det är exakt därför den starka kraften inte avtar och ingen kvark kommer loss.' },
+      { type: 'p', html: 'Det mesta av din egen vikt sitter faktiskt i gluoner. Lägger man ihop massorna hos protonens tre kvarkar får man bara omkring en procent av protonens massa. Resten är rörelseenergi hos kvarkarna och energi i gluonfältet, som räknas om till massa enligt <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup>. Gluonerna själva såg man första gången 1979 vid en acceleratoranläggning i Hamburg, där kollisionerna ibland gav tre knippen av partiklar i stället för de två som väntades. Det tredje knippet var en gluon som hade slitits loss och klätt sig i nya partiklar.' }
+    ]
+  },
+  {
+    id: 'fermion',
+    term: 'Fermion',
+    former: ['fermion', 'fermionen', 'fermioner', 'fermionerna', 'fermionisk', 'fermioniska', 'pauliprincipen', 'paulis uteslutningsprincip', 'uteslutningsprincipen'],
+    kort: 'En partikel av den familj som aldrig kan dela kvanttillstånd med en likadan partikel. Det är den regeln som ger materien utsträckning och atomerna deras skalstruktur.',
+    relaterade: ['boson', 'spinn', 'kvantmekanik', 'kvark'],
+    body: [
+      { type: 'p', html: 'Alla partiklar hör till en av två familjer, och gränsen dras av spinnet, ett slags inbyggd rotation som bara kan anta bestämda värden. Partiklar med halvtaligt spinn kallas fermioner efter Enrico Fermi. Dit hör allt som materia är byggd av: elektroner, kvarkar, protoner, neutroner och neutriner. Partiklar med heltaligt spinn kallas i stället bosoner, och dit hör kraftbärarna som fotonen. Uppdelningen låter formell, men den ger de två familjerna helt olika beteenden.' },
+      { type: 'p', html: 'Fermionernas kännetecken är att två likadana aldrig kan befinna sig i exakt samma tillstånd samtidigt. Regeln kallas Paulis uteslutningsprincip, och den är orsaken till att världen ser ut som den gör. Elektronerna i en atom kan inte alla lägga sig innerst där energin är lägst, utan tvingas fylla på utåt skal för skal. Det är den påtvingade fördelningen som ger grundämnena olika kemiska egenskaper och som gör det periodiska systemet begripligt. Samma spärr gör också att materia tar plats: din hand går inte genom bordet därför att elektronerna i de två ytorna vägrar dela tillstånd.' },
+      { type: 'p', html: 'Spärren kan bära upp hela himlakroppar. I en vit dvärg och i en neutronstjärna har fusionen upphört, och det som hindrar gravitationen från att pressa ihop stjärnan är att fermionerna helt enkelt inte kan trängas närmare varandra. Sammansatta objekt räknas efter antalet byggstenar: med ett udda totalt antal protoner, neutroner och elektroner uppträder atomen som en fermion, med ett jämnt som en boson. Helium-3 och helium-4 hamnar därför i var sin familj och beter sig helt olika vid låga temperaturer. Och kopplas två fermioner ihop parvis, som elektronerna i en supraledare, uppträder paret utåt som en boson.' }
+    ]
+  },
+  {
+    id: 'positron',
+    term: 'Positron',
+    former: ['positron', 'positronen', 'positroner', 'positronerna', 'antielektron', 'antielektronen'],
+    kort: 'Elektronens antipartikel: samma massa, lika stor laddning, men positiv. Den var den första antipartikel som hittades, och i dag används den varje dag på sjukhus.',
+    relaterade: ['antimateria', 'annihilation', 'betasonderfall', 'gammastralning'],
+    body: [
+      { type: 'p', html: 'År 1928 skrev Paul Dirac ner en ekvation som förenade kvantmekaniken med relativitetsteorin, och fick på köpet fram lösningar som beskrev en elektron med positiv laddning. Han valde att ta dem på allvar i stället för att stryka dem. Fyra år senare fotograferade Carl Anderson i den kosmiska strålningen ett spår som böjde av åt fel håll i ett magnetfält, men som i övrigt såg ut precis som en elektrons. Partikeln fick namnet positron. Den har exakt samma massa som elektronen och exakt lika stor laddning, fast med motsatt tecken, och är alltså elektronens antipartikel.' },
+      { type: 'p', html: 'Positroner bildas på två vanliga sätt. Vissa instabila atomkärnor gör sig av med en överflödig proton genom att omvandla den till en neutron och skicka ut en positron tillsammans med en neutrino. Den andra vägen är parbildning: en energirik gammafoton som passerar nära en atomkärna kan förvandlas till ett elektron–positronpar, förutsatt att den bär minst den energi som de två massorna motsvarar. I materia blir positronen aldrig gammal. Den bromsas in på nolltid och möter en elektron, varvid båda förintas och blir gammastrålning.' },
+      { type: 'p', html: 'Just den korta livslängden gör partikeln användbar. I en PET-kamera får patienten ett spårämne som sänder ut positroner, ofta socker märkt med fluor-18. Varje positron hinner bara någon millimeter innan den förintas, och de två fotonerna som då skickas ut far åt precis motsatta håll. En ring av detektorer runt patienten fångar upp båda, och eftersom de kom åt rakt motsatt håll vet man att förintelsen skedde någonstans på linjen mellan träffpunkterna. Miljontals sådana linjer räknas ihop till en bild av var i kroppen spårämnet samlats.' }
+    ]
+  },
+  {
+    id: 'annihilation',
+    term: 'Annihilation',
+    former: ['annihilation', 'annihilationen', 'annihilationer', 'annihilera', 'annihilerar', 'annihilerade'],
+    kort: 'Det som händer när en partikel möter sin antipartikel: båda försvinner och hela deras massa blir energi. Det är den mest fullständiga energiomvandling naturen känner till.',
+    relaterade: ['antimateria', 'positron', 'gammastralning', 'kvark'],
+    body: [
+      { type: 'p', html: 'Möter en elektron en positron finns efteråt ingen av dem kvar. Massan försvinner inte ur räkningen utan omvandlas till energi enligt <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup>, och energin far i väg som strålning. Det som gör processen anmärkningsvärd är att den tar allt. I en kärnreaktor omvandlas ungefär en tusendel av bränslets massa till energi, i solens fusion knappt en procent, och när ved brinner en försvinnande liten bråkdel. Vid en annihilation är utbytet hundra procent.' },
+      { type: 'p', html: 'Vad som kommer ut beror på vad som gick in. Ett elektron–positronpar i vila blir nästan alltid två gammafotoner som skickas åt exakt motsatta håll, var och en med en energi som motsvarar en elektronmassa. Riktningarna är inte en tillfällighet utan följer av att rörelsemängden måste bevaras: gick paret in med noll rörelsemängd måste fotonerna gå ut åt var sitt håll. Tyngre par ger i stället en skur av nya partiklar, och det är just den mekanismen som utnyttjas i acceleratorer där elektroner och positroner får kollidera. All energi finns då tillgänglig för att bygga något nytt.' },
+      { type: 'p', html: 'Trots det perfekta utbytet är antimateria ingen energikälla. Det finns inga färdiga förråd att hämta ur, och att tillverka antimateria i en accelerator kostar långt mer energi än man någonsin får tillbaka. Den mängd som mänskligheten framställt väger tillsammans mindre än ett miljondels gram. Däremot ställer annihilationen en av kosmologins svåraste frågor. I det tidiga universum borde materia och antimateria ha bildats i lika delar och sedan utplånat varandra fullständigt, så att bara strålning återstod. Att det finns stjärnor och planeter betyder att naturen måste ha gynnat materien en aning.' }
+    ]
+  },
+  {
+    id: 'halveringstid',
+    term: 'Halveringstid',
+    former: ['halveringstid', 'halveringstiden', 'halveringstider', 'halveringstiderna'],
+    kort: 'Den tid det tar för hälften av kärnorna i ett radioaktivt ämne att sönderfalla. Den är densamma hur mycket eller lite man har kvar, och går inte att påverka.',
+    relaterade: ['radioaktivt-sonderfall', 'isotop', 'alfastralning', 'betasonderfall'],
+    body: [
+      { type: 'p', html: 'När en enskild atomkärna sönderfaller går inte att förutsäga. Den kan omvandlas i nästa sekund eller ligga stilla i miljarder år, och ingenting i kärnan avslöjar vilket. Men samlar man ihop tillräckligt många kärnor blir beteendet exakt. Efter en halveringstid återstår hälften, efter två halveringstider en fjärdedel, efter tre en åttondel. Efter tio halveringstider är mindre än en tusendel kvar. Kurvan planar ut men når aldrig riktigt noll, vilket är skälet till att man brukar räkna med att ett ämne är ofarligt först efter omkring tio halveringstider.' },
+      { type: 'p', html: 'Det märkliga är att kärnor inte åldras. En kärna som legat orörd sedan jorden bildades har exakt samma chans att sönderfalla under nästa sekund som en kärna som skapades nyss. Där skiljer sig radioaktivitet från nästan allt annat vi har erfarenhet av: människor, bilar och glödlampor slits, medan en atomkärna saknar minne. Halveringstiden går heller inte att ändra. Värme, tryck, kemiska reaktioner och magnetfält lämnar den i stort sett opåverkad, eftersom processen sker i kärnan medan all vardagskemi utspelar sig bland elektronerna långt utanför.' },
+      { type: 'p', html: 'Spännvidden mellan olika ämnen är svindlande. Vissa konstgjorda kärnor lever bråkdelar av en miljondels sekund, medan uran-238 har halveringstiden 4,5&nbsp;miljarder år, ungefär jordens ålder. Just därför finns det fortfarande uran i berggrunden. Regelbundenheten gör sönderfallet till en klocka: kol-14 med sina 5&nbsp;730&nbsp;år låter arkeologer åldersbestämma organiskt material, och uran i bergarter används för att datera själva jorden. Inom sjukvården väljer man tvärtom medvetet kortlivade ämnen, som jod-131 med sina åtta dagar, så att stråldosen klingar av snabbt när undersökningen är gjord.' }
+    ]
+  },
+  {
+    id: 'alfastralning',
+    term: 'Alfastrålning',
+    former: ['alfastrålning', 'alfastrålningen', 'alfasönderfall', 'alfasönderfallet', 'alfapartikel', 'alfapartikeln', 'alfapartiklar', 'alfapartiklarna', 'alfastrålare', 'alfastrålaren'],
+    kort: 'Strålning av heliumkärnor som kastas ut ur tunga atomkärnor. Den är den mest joniserande strålningssorten men stoppas av ett pappersark.',
+    relaterade: ['radioaktivt-sonderfall', 'halveringstid', 'tunneleffekt', 'isotop'],
+    body: [
+      { type: 'p', html: 'En alfapartikel är två protoner och två neutroner som sitter ihop, alltså en heliumkärna. Kombinationen är ovanligt hårt bunden, och därför kan en tung atomkärna vinna energi på att kasta ut hela paketet på en gång. Kärnan tappar då två steg i det periodiska systemet och fyra i masstal: uran-238 blir torium-234. Nästan bara riktigt tunga kärnor sönderfaller på det sättet, eftersom det krävs att de många protonerna stöter bort varandra tillräckligt kraftigt för att paketet ska löna sig.' },
+      { type: 'p', html: 'Egentligen borde alfapartikeln inte komma ut alls. Den är fången bakom en energibarriär som den enligt klassisk fysik saknar energi att ta sig över, ungefär som en boll som inte orkar upp över kanten på en skål. Att den ändå kommer ut beror på kvantmekanikens tunneleffekt: partikeln har en liten chans att helt enkelt dyka upp på andra sidan. Chansen per försök är minimal men försöken är många, och eftersom sannolikheten beror mycket känsligt på barriärens höjd blir halveringstiderna vitt skilda. Några alfastrålare lever mikrosekunder, andra miljarder år.' },
+      { type: 'p', html: 'Alfapartikeln är tung och dubbelt laddad, och därför river den loss elektroner ur allt den passerar. Energin tar slut redan efter några centimeter i luft, och ett pappersark eller det yttersta hudlagret räcker för att stoppa den. Utanför kroppen är alfastrålning alltså tämligen ofarlig. Kommer källan in i kroppen blir bilden den motsatta: hela energin lämnas då i en liten mängd levande vävnad. Det är därför radon i inomhusluft räknas som den största enskilda strålkällan i svenska hem, medan samma ämne på utsidan av huden inte hade betytt något.' }
+    ]
+  },
+  {
+    id: 'betasonderfall',
+    term: 'Betasönderfall',
+    former: ['betasönderfall', 'betasönderfallet', 'betasönderfallen', 'betastrålning', 'betastrålningen', 'betapartikel', 'betapartikeln', 'betapartiklar', 'betastrålare', 'betaomvandling', 'betaomvandlingen'],
+    kort: 'Sönderfallet där en neutron blir en proton eller tvärtom, och kärnan skickar ut en elektron eller en positron tillsammans med en neutrino. Grundämnet ändras, men antalet kärnpartiklar är detsamma.',
+    relaterade: ['svag-vaxelverkan', 'radioaktivt-sonderfall', 'neutrino', 'positron'],
+    body: [
+      { type: 'p', html: 'Har en atomkärna för många neutroner i förhållande till protoner kan den rätta till obalansen genom att göra om en neutron till en proton. Ut ur kärnan skickas då en elektron och en antineutrino. Kärnan flyttar ett steg uppåt i det periodiska systemet, men antalet kärnpartiklar är oförändrat, så kol-14 blir kväve-14. Med för många protoner går det åt andra hållet: en proton blir en neutron, och ut kommer en positron och en neutrino. De utkastade elektronerna kallades betastrålning långt innan någon visste att de var elektroner.' },
+      { type: 'p', html: 'Betasönderfallet gav upphov till en av fysikhistoriens största gåtor. Vid alfasönderfall får partikeln alltid samma energi, som väntat när något delar sig i två delar. Vid betasönderfall varierade elektronens energi i stället slumpmässigt upp till ett tak, och energi tycktes helt enkelt försvinna. Niels Bohr var beredd att offra energiprincipen. Wolfgang Pauli föreslog 1930 den mindre drastiska lösningen: att det följde med en tredje partikel som var oladdad, nästan masslös och därför osynlig för alla detektorer. Neutrinon påvisades experimentellt först ett kvartssekel senare.' },
+      { type: 'p', html: 'Sönderfallet drivs av den svaga växelverkan, den enda kraft som kan byta sort på en kvark. Eftersom den kraften verkar så sällan går processen långsamt: en fri neutron lever i genomsnitt en kvart innan den blir en proton, medan reaktioner som styrs av den starka kraften är över på ofattbart mycket kortare tid. Trögheten är avgörande för oss. Det första steget i solens fusionskedja är just ett betasönderfall, och det är därför solen brinner i miljarder år i stället för att explodera. Betapartiklar är dessutom lättare att skärma av än gammastrålning men går längre än alfapartiklar: några millimeter aluminium räcker.' }
+    ]
+  },
+  {
+    id: 'qubit',
+    term: 'Qubit',
+    former: ['qubit', 'qubiten', 'qubitar', 'qubitarna', 'kvantbit', 'kvantbiten', 'kvantbitar', 'kvantbitarna', 'logisk qubit', 'logiska qubitar', 'fysisk qubit', 'fysiska qubitar'],
+    kort: 'Kvantdatorns minnescell. Till skillnad från en vanlig bit, som är antingen noll eller ett, kan en qubit befinna sig i en blandning av båda, men bara fram till att den läses av.',
+    relaterade: ['kvantdator', 'dekoherens', 'kvantsammanflatning', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'En vanlig dator lagrar allt som bitar, strömbrytare som står i ett av två lägen. En qubit är i stället ett kvantsystem med två tillstånd, och kvantmekaniken tillåter det att befinna sig i en superposition av båda samtidigt. Det betyder inte att qubiten i hemlighet är noll eller ett och att vi bara saknar upplysningen. Blandningen är verklig och går att mäta på indirekta sätt. Men i samma ögonblick som man läser av den faller den ihop till ett vanligt svar, noll eller ett, och blandningen är borta för gott.' },
+      { type: 'p', html: 'Styrkan visar sig först när flera qubitar kopplas ihop. Två qubitar kan sammanflätas så att de bildar ett enda gemensamt tillstånd i stället för två separata, och ett system med ett visst antal qubitar beskrivs av två upphöjt till det antalet. Redan trehundra qubitar ger fler kombinationer än det finns atomer i det synliga universum. Det är ändå ingen mirakelmaskin. Eftersom avläsningen bara ger ett enda svar består konsten i att skriva algoritmer där de felaktiga svaren släcker ut varandra genom interferens medan det rätta förstärks, och sådana algoritmer känner man bara till för en handfull problemtyper.' },
+      { type: 'p', html: 'En qubit kan byggas på många sätt. Vanligast i dag är små supraledande kretsar som kyls till nära absoluta nollpunkten, men det går också att använda enskilda joner som hålls svävande i en fälla, ljusets fotoner, eller spinnet hos en enda atom i kisel. Gemensamt för dem alla är skörheten: minsta störning från omgivningen suddar ut superpositionen. Därför skiljer man på fysiska qubitar och logiska. En logisk qubit är en pålitlig räkneenhet som byggs av hundratals eller tusentals fysiska qubitar som ständigt kontrollerar varandra.' }
+    ]
+  },
+  {
+    id: 'dekoherens',
+    term: 'Dekoherens',
+    former: ['dekoherens', 'dekoherensen', 'dekoherera', 'dekohererar', 'dekohererat', 'dekoherenstid', 'dekoherenstiden'],
+    kort: 'Att ett kvanttillstånd läcker information till sin omgivning så att superpositionen suddas ut. Det är den främsta förklaringen till varför kvantfysikens märkligheter inte syns i vardagen.',
+    relaterade: ['kvantmekanik', 'qubit', 'kvantdator', 'kvantsammanflatning'],
+    body: [
+      { type: 'p', html: 'En superposition håller bara så länge omgivningen inte vet vilket av alternativen som gäller. I dubbelspaltförsöket ger en elektron ett randmönster så länge ingen kan avgöra vilken spalt den tog. Går det på något sätt att få reda på vägen försvinner ränderna, och det spelar ingen roll om någon faktiskt tittar efter. Det räcker att upplysningen finns någonstans i världen. Dekoherens är namnet på precis det: att information om systemets tillstånd sipprar ut, en luftmolekyl som studsar emot, en värmefoton som sänds ut, en liten skakning i underlaget.' },
+      { type: 'p', html: 'Hastigheten beror våldsamt på hur stort systemet är. En ensam atom i vakuum kan hålla sitt tillstånd i sekunder. Ett dammkorn i vanlig luft träffas av så många molekyler varje sekund att superpositionen är utsuddad långt innan något mätinstrument hinner reagera, och för en katt är tiden så kort att den saknar praktisk mening. Det är därför vi aldrig ser vardagsföremål på två ställen samtidigt. Kvantmekaniken slutar inte gälla för stora ting, men effekterna göms undan så snabbt att världen ser klassisk ut.' },
+      { type: 'p', html: 'För den som bygger kvantdatorer eller känsliga mätinstrument är dekoherensen huvudmotståndaren. Den sätter en tidsgräns för hur många räkneoperationer som hinner utföras innan tillståndet är förstört, och den är skälet till att maskinerna kyls till nära absoluta nollpunkten, ställs i vakuum och skärmas av från magnetfält och vibrationer. Eftersom isolering aldrig blir fullständig kompletteras den med felkorrigering, där många fysiska enheter kontrollerar varandra. Värt att lägga märke till är att ingen medveten observatör behövs. Omgivningen räcker gott.' }
+    ]
+  },
+  {
+    id: 'deuterium',
+    term: 'Deuterium',
+    former: ['deuterium', 'deuteriumet', 'deuteron', 'deuteronen', 'deuteroner', 'deuteronerna', 'tungt väte', 'tunga vätet', 'tungt vatten', 'tunga vattnet'],
+    kort: 'Tungt väte: en väteatom vars kärna innehåller en neutron vid sidan av protonen. Det finns naturligt i allt vatten, men bara i ungefär en väteatom av sextusen.',
+    relaterade: ['isotop', 'tritium', 'karnfusion', 'radioaktivt-sonderfall'],
+    body: [
+      { type: 'p', html: 'Vanligt väte har den enklaste tänkbara kärnan: en ensam proton. Deuterium är samma grundämne men med en neutron bredvid protonen, vilket gör atomen ungefär dubbelt så tung. Kärnan i sig kallas deuteron. Kemiskt beter sig deuterium nästan precis som vanligt väte, eftersom kemin styrs av elektronerna och elektronantalet är detsamma, men den fördubblade massan märks i reaktionshastigheter och i hur molekylerna svänger. Isotopen upptäcktes 1931 av Harold Urey, som fick Nobelpriset i kemi bara tre år senare. Till skillnad från sin tyngre släkting tritium är deuterium fullständigt stabilt.' },
+      { type: 'p', html: 'Ersätter man båda väteatomerna i en vattenmolekyl med deuterium får man tungt vatten. Det ser ut som vanligt vatten men är omkring en tiondel tyngre, fryser vid knappt fyra grader och kokar drygt en grad över hundra. I kärnkraftverk används det som moderator, alltså som ett ämne som bromsar neutronerna utan att svälja dem, vilket gör det möjligt att driva en reaktor på naturligt uran. I små mängder är tungt vatten ofarligt att dricka, men skulle en stor del av kroppens vatten bytas ut skulle cellernas kemi gå för långsamt.' },
+      { type: 'p', html: 'Deuterium är också fusionsforskningens viktigaste bränsle. Reaktionen mellan en deuteron och en tritiumkärna är den lättaste att få igång, och deuterium finns i praktiken i obegränsad mängd i havsvatten. Utöver det är isotopen ett kosmologiskt mätinstrument. Allt deuterium i universum bildades under de första minuterna efter big bang, och i stjärnornas inre förbrukas det men bildas aldrig. Hur mycket som finns kvar i orörda gasmoln säger därför hur tät den vanliga materien var i det tidiga universum, och den siffran stämmer väl med vad helt andra mätningar av bakgrundsstrålningen ger.' }
+    ]
+  },
+  {
+    id: 'tritium',
+    term: 'Tritium',
+    former: ['tritium', 'tritiumet', 'triton', 'tritonen', 'tritiumkärna', 'tritiumkärnan', 'tritiumkärnor'],
+    kort: 'Den tyngsta väteisotopen, med två neutroner i kärnan. Den är radioaktiv med en halveringstid på drygt tolv år och används i fusionsforskning och i självlysande skyltar.',
+    relaterade: ['deuterium', 'isotop', 'karnfusion', 'betasonderfall'],
+    body: [
+      { type: 'p', html: 'Tritium är väte med två neutroner i kärnan vid sidan av protonen, alltså ungefär tre gånger så tungt som vanligt väte. Till skillnad från sina båda lättare släktingar är det radioaktivt. Genom betasönderfall blir tritium till helium-3, med en halveringstid på drygt tolv år. Elektronerna som skickas ut är ovanligt energifattiga och stoppas av ett pappersark eller av det yttersta hudlagret, så tritium utgör ingen fara utifrån. Kommer ämnet in i kroppen är bedömningen en annan, och eftersom tritium beter sig kemiskt som väte blandar det sig lätt med kroppens vatten.' },
+      { type: 'p', html: 'Naturligt finns nästan inget tritium. Små mängder bildas hela tiden högt uppe i atmosfären när kosmisk strålning träffar luftens kväve och syre, men eftersom halveringstiden är kort hinner ämnet aldrig samlas. Det som används framställs i stället i kärnreaktorer, oftast genom att låta neutroner träffa litium. Tillverkningen är svår och dyr, och världens samlade förråd väger bara några tiotal kilogram, vilket gör tritium till ett av de mest kostsamma ämnen som hanteras i industriell skala.' },
+      { type: 'p', html: 'Den viktigaste användningen är fusion. Reaktionen mellan deuterium och tritium kräver lägst temperatur av alla tänkbara fusionsreaktioner och är därför den som stora försöksanläggningar satsar på. Att bränslet är svårt att få tag på är en av de verkliga svårigheterna, och tanken är att framtida reaktorer ska tillverka sitt eget tritium ur litium i väggarna. Ämnet syns också i vardagen: i självlysande nödskyltar och urtavlor sitter tritiumgas i små glasrör med lysämne på insidan, som lyser i årtionden utan batteri. Inom hydrologin används det för att åldersbestämma ungt grundvatten.' }
+    ]
+  },
+  {
+    id: 'bandgap',
+    term: 'Bandgap',
+    former: ['bandgap', 'bandgapet', 'bandgapen', 'energigap', 'energigapet', 'valensband', 'valensbandet', 'ledningsband', 'ledningsbandet'],
+    kort: 'Det energisprång en elektron i ett fast ämne måste ta för att komma loss ur sin bindning och kunna leda ström. Gapets bredd avgör om materialet är metall, halvledare eller isolator.',
+    relaterade: ['halvledare', 'dopning', 'kvantmekanik', 'foton'],
+    body: [
+      { type: 'p', html: 'I en ensam atom kan elektronerna bara ha vissa bestämda energier. Sätter man ihop ofattbart många atomer till ett fast ämne smetas de skarpa energinivåerna ut till breda band. Det lägre bandet, valensbandet, rymmer elektronerna som sitter fast i bindningarna mellan atomerna. Det övre, ledningsbandet, rymmer dem som kan vandra fritt genom materialet och alltså bära ström. Mellan de två finns ett förbjudet område där ingen elektron kan befinna sig, och det är bandgapet.' },
+      { type: 'p', html: 'Gapets bredd avgör materialets karaktär. I en metall finns inget gap alls utan banden överlappar, och därför leder metaller ström vid alla temperaturer. I en isolator som diamant är gapet så brett att praktiskt taget ingen elektron någonsin tar sig över. Kisel ligger mittemellan, med ett gap på drygt en elektronvolt. Vid rumstemperatur bär värmerörelsen bara någon hundradels elektronvolt i genomsnitt, men enstaka elektroner får mycket mer än genomsnittet och lyckas hoppa. Just därför leder en halvledare bättre ju varmare den blir, medan en metall gör tvärtom.' },
+      { type: 'p', html: 'Bandgapet bestämmer också färgen. En foton kan bara lyftas upp en elektron om den bär mer energi än gapet, vilket gör kisel ogenomskinligt för synligt ljus men genomskinligt för infrarött. Åt andra hållet gäller att en elektron som faller tillbaka ner sänder ut en foton med ungefär gapets energi, och det är så en lysdiod arbetar. Röda lysdioder var lätta att göra, medan blått krävde ett material med betydligt bredare gap. Lösningen med galliumnitrid gav Nobelpriset i fysik 2014. I en solcell handlar det i stället om att välja ett gap som varken slösar bort de energirika fotonerna eller missar de svaga.' }
+    ]
+  },
+  {
+    id: 'dopning',
+    term: 'Dopning',
+    former: ['dopning', 'dopningen', 'dopa', 'dopar', 'dopad', 'dopat', 'dopade', 'dopämne', 'dopämnet', 'dopämnen', 'n-dopad', 'n-dopat', 'p-dopad', 'p-dopat', 'n-typ', 'p-typ'],
+    kort: 'Att med avsikt blanda in en liten mängd främmande atomer i ett halvledarmaterial för att styra hur det leder ström. En atom på en miljon kan räcka.',
+    relaterade: ['halvledare', 'bandgap', 'pn-overgang', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Rent kisel är en dålig ledare. Varje kiselatom har fyra elektroner ytterst och delar dem med sina fyra grannar, så alla elektroner sitter uppbundna i bindningar och nästan ingen är fri att vandra. Byter man ut en enstaka kiselatom mot en fosforatom, som har fem elektroner ytterst, blir en elektron över. Den sitter löst och kan röra sig genom materialet, som därmed har fått rörliga negativa laddningar och kallas n-dopat. Använder man i stället bor, med tre elektroner ytterst, fattas det en elektron i en bindning. Tomrummet kallas hål, och när grannelektroner hoppar in i det förflyttar sig hålet som om det vore en positiv laddning. Materialet kallas då p-dopat.' },
+      { type: 'p', html: 'Det anmärkningsvärda är hur litet som behövs. En främmande atom på en miljon kiselatomer kan ändra ledningsförmågan tusenfalt. Just därför måste utgångsmaterialet vara extremt rent, renare än nästan allt annat som tillverkas industriellt, för annars skulle oavsiktliga föroreningar dränka den avsiktliga inblandningen. Dopningen görs antingen genom att låta ämnet diffundera in i het kisel, eller genom jonimplantation, där dopatomerna joniseras och skjuts in i ytan med en liten accelerator. Med masker och etsning styrs var i skivan varje sort ska hamna.' },
+      { type: 'p', html: 'Hela elektronikindustrin vilar på det här greppet. Först när man kan lägga n-dopade och p-dopade områden intill varandra med kontroll på mikrometern går det att bygga en pn-övergång, och därmed dioder, transistorer, lysdioder och solceller. Ett modernt processorchip innehåller tiotals miljarder sådana områden på en yta mindre än en tumnagel. Samma tanke används i andra material för andra ändamål: att dopa ett värmeledande material kan höja dess termoelektriska verkningsgrad, och att dopa en kristall med enstaka främmande joner är vad som gör den till ett lasermaterial.' }
+    ]
+  },
+  {
+    id: 'pn-overgang',
+    term: 'PN-övergång',
+    former: ['pn-övergång', 'pn-övergången', 'pn-övergångar', 'pn-övergångarna', 'utarmningszon', 'utarmningszonen'],
+    kort: 'Skarven mellan ett n-dopat och ett p-dopat område i en halvledare. Den släpper fram ström åt bara ett håll och är grunden i dioder, transistorer, lysdioder och solceller.',
+    relaterade: ['halvledare', 'dopning', 'bandgap', 'termoelektrisk-effekt'],
+    body: [
+      { type: 'p', html: 'Låt ett n-dopat område, med elektroner i överskott, gränsa till ett p-dopat område, med hål i överskott. Vid skarven vandrar genast en del elektroner över och fyller igen hålen på andra sidan. Kvar i gränszonen blir de fastsittande atomerna, laddade eftersom de förlorat eller vunnit en elektron, och de bygger upp ett elektriskt fält över skarven. Fältet motverkar fortsatt vandring, och till slut ställer det in sig i jämvikt. Zonen är då tömd på rörliga laddningar och det står en inbyggd spänning över den, i kisel några tiondels volt.' },
+      { type: 'p', html: 'Kopplar man en yttre spänning åt det håll som motverkar det inbyggda fältet krymper den tomma zonen, och vid några tiondels volt börjar strömmen flyta obehindrat. Kopplar man åt andra hållet vidgas zonen i stället och strömmen stryps nästan helt. Komponenten leder alltså åt ett håll men inte åt det andra, och det är precis vad en diod är. Egenskapen används för att göra om växelspänning till likspänning, för att skydda kretsar mot felvänd inkoppling och som byggsten i transistorn, där två övergångar sitter rygg mot rygg och den ena styr strömmen genom den andra.' },
+      { type: 'p', html: 'Samma skarv fungerar också åt båda hållen mellan ström och ljus. Skickar man ström genom övergången faller elektroner ner i hålen och gör sig av med skillnaden i energi som ljus, vilket är en lysdiod. Låter man i stället ljus falla in slår varje foton loss ett elektron–hålpar, och det inbyggda fältet i gränszonen drar isär de två åt var sitt håll innan de hinner återförenas. Då flyter en ström ut i en yttre krets, och komponenten är en solcell. Det är alltså samma enkla skarv som lyser upp en skärm och som förser ett hustak med elektricitet.' }
+    ]
+  },
+  {
+    id: 'diod',
+    term: 'Diod',
+    former: ['diod', 'dioden', 'dioder', 'dioderna', 'likriktare', 'likriktaren', 'likriktardiod', 'lysdiod', 'lysdioden', 'lysdioder', 'lysdioderna', 'fotodiod', 'fotodioden', 'fotodioder', 'zenerdiod', 'zenerdioden', 'laserdiod', 'laserdioden', 'laserdioder', 'varaktordiod', 'varaktordioden', 'varaktordioder'],
+    kort: 'En komponent som släpper fram ström åt bara ett håll. Den bygger på skarven mellan två olika dopade halvledarområden, och finns i varianter som lyser, som mäter ljus och som håller en spänning konstant.',
+    relaterade: ['pn-overgang', 'halvledare', 'bandgap', 'dopning'],
+    body: [
+      { type: 'p', html: 'En diod är elektronikens backventil. Kopplas den åt ett håll leder den ström nästan obehindrat, kopplas den åt andra hållet spärrar den. I kisel krävs ungefär sju tiondels volt innan strömmen släpps fram, och den spänningen ligger sedan i stort sett fast hur mycket strömmen än ökar. Den enkla egenskapen är förvånansvärt användbar. Fyra dioder i en ring gör om växelspänning till likspänning i varje nätadapter, en enda diod skyddar en krets mot ett felvänt batteri, och en diod tvärs över en relälindning fångar upp den spänningsspik som annars uppstår när strömmen bryts.' },
+      { type: 'p', html: 'Det som gör susen sitter inne i komponenten, i skarven mellan ett n-dopat och ett p-dopat halvledarområde. En yttre spänning åt det ena hållet krymper det tomma bältet vid skarven så att laddningarna kan passera, medan en spänning åt det andra hållet vidgar bältet och stryper strömmen. Drivs spärrspänningen tillräckligt högt bryter strömmen ändå igenom. Det låter som ett haveri, men i en zenerdiod är genombrottet själva poängen: spänningen över den håller sig då mycket stabil, vilket används som referens i mätkretsar och nätaggregat.' },
+      { type: 'p', html: 'Familjen är stor, eftersom samma skarv också kopplar ihop ström med ljus. I en lysdiod faller elektronerna ner i tomma platser och gör sig av med energiskillnaden som ljus, och färgen bestäms av materialets bandgap. En fotodiod arbetar tvärtom och gör om infallande ljus till ström, vilket används i allt från fjärrkontrollmottagare till solceller. En laserdiod är en lysdiod med speglar i ändarna som tvingar ljuset i takt, och sitter i varje streckkodsläsare och i fiberoptikens sändare. I en varaktordiod utnyttjas i stället att det tomma bältet vid skarven blir bredare eller smalare med spänningen, så att komponenten fungerar som en kondensator vars värde går att ställa in elektriskt. De första dioderna var för övrigt inte halvledare alls utan vakuumrör, där elektroner kokades loss från en glödtråd och bara kunde flyga åt ett håll.' }
+    ]
+  },
+  {
+    id: 'pulsar',
+    term: 'Pulsar',
+    former: ['pulsar', 'pulsaren', 'pulsarer', 'pulsarerna', 'millisekundpulsar', 'millisekundpulsarer', 'pulsartidtagning'],
+    kort: 'En roterande neutronstjärna vars strålknippe sveper förbi jorden som ljuset från en fyr. Pulserna kommer så regelbundet att de kan mäta sig med atomklockor.',
+    relaterade: ['neutronstjarna', 'magnetar', 'supernova', 'relativitetsteori'],
+    body: [
+      { type: 'p', html: 'Sommaren 1967 upptäckte doktoranden Jocelyn Bell Burnell en radiosignal som återkom med en regelbundenhet ingen astronomisk källa förväntades ha: en puls var 1,34&nbsp;sekund. Signalen var så exakt att den först skämtsamt fick beteckningen LGM-1, efter engelskans <em>little green men</em>. Förklaringen visade sig vara långt mer intressant än utomjordingar. Källan var en neutronstjärna, den hoppressade resten av en exploderad stjärna, som roterar mycket snabbt och sänder ut ett smalt knippe strålning.' },
+      { type: 'p', html: 'Mekanismen liknar en fyr. Neutronstjärnan har ett enormt magnetfält vars axel oftast lutar i förhållande till rotationsaxeln, och strålningen skickas ut i en smal kon från trakten kring magnetpolerna. Varje gång konen råkar svepa över jorden registrerar vi en puls. Vi ser alltså bara de pulsarer vars strålknippe råkar peka åt vårt håll. Perioderna varierar från flera sekunder ner till någon millisekund, och de allra snabbaste snurrar över sjuhundra varv i sekunden, vilket motsvarar en yta som rör sig med en betydande del av ljusets hastighet.' },
+      { type: 'p', html: 'Regelbundenheten gör pulsarerna till kosmiska klockor. De saktar visserligen in långsamt när rotationsenergin strålas bort, men avmattningen är så jämn att pulstiderna kan förutsägas många år framåt. Just den precisionen gav det första övertygande beviset för gravitationsvågor: i ett system med två neutronstjärnor krympte omloppsbanan år för år exakt så mycket som Einsteins teori förutsade om energi strålades bort som vågor i rumtiden, vilket belönades med Nobelpriset 1993. I dag används ett nät av millisekundpulsarer som en detektor i galaktisk skala, för att söka efter mycket långsamma gravitationsvågor.' }
+    ]
+  },
+  {
+    id: 'handelsehorisont',
+    term: 'Händelsehorisont',
+    former: ['händelsehorisont', 'händelsehorisonten', 'händelsehorisonter', 'schwarzschildradien', 'schwarzschildradie'],
+    kort: 'Gränsen runt ett svart hål där det skulle krävas ljusets hastighet för att komma loss. Innanför den leder alla vägar inåt, och ingenting som passerar kan ta sig ut igen.',
+    relaterade: ['svart-hal', 'relativitetsteori', 'neutronstjarna', 'kvasar'],
+    body: [
+      { type: 'p', html: 'Ju mer massa som pressas ihop på en liten yta, desto högre fart krävs för att slita sig loss från gravitationen. Räknar man ut vid vilken storlek den farten skulle nå ljusets hastighet får man det avstånd som kallas Schwarzschildradien, och den sfär som ligger på det avståndet är händelsehorisonten. Där finns ingen yta och inget material, bara en gräns i rummet. Radien växer i takt med massan, ungefär tre kilometer för varje solmassa. Solen skulle behöva klämmas ihop till en kula med tre kilometers radie för att bli ett svart hål, jorden till en kula på knappt en centimeter.' },
+      { type: 'p', html: 'Det märkliga är att den som passerar horisonten inte märker något särskilt i just det ögonblicket, åtminstone inte vid ett riktigt tungt hål. För en betraktare på avstånd ser det däremot ut som om föremålet aldrig kommer fram: tiden går allt långsammare nära horisonten, ljuset blir alltmer rödförskjutet och till slut för svagt för att uppfattas. De två beskrivningarna motsäger inte varandra utan är två olika perspektiv på samma förlopp, precis som relativitetsteorin tillåter.' },
+      { type: 'p', html: 'Horisonten har egenskaper som gör den till mer än en gräns. Dess yta kan bara växa, aldrig krympa, vilket gör att den beter sig som entropi i värmeläran, och därifrån följer tanken att ett svart hål har en temperatur och avger en ytterst svag strålning. Horisonten är också det som gör svarta hål fotograferbara. Ljuset böjs så kraftigt i närheten att den mörka skuggan på bilden är ungefär två och en halv gånger så bred som horisonten själv, och det var en sådan ring som avbildades för första gången i galaxen M87.' }
+    ]
+  },
+  {
+    id: 'straldos',
+    term: 'Stråldos',
+    former: ['stråldos', 'stråldosen', 'stråldoser', 'stråldoserna', 'absorberad dos', 'absorberade dosen', 'ekvivalent dos', 'ekvivalenta dosen'],
+    kort: 'Ett mått på hur mycket energi som joniserande strålning lämnar kvar i ett material eller i en kropp. Det är dosen, inte strålkällans styrka i sig, som avgör skadan.',
+    relaterade: ['radioaktivt-sonderfall', 'alfastralning', 'elektronmikroskop', 'gammastralning'],
+    body: [
+      { type: 'p', html: 'Den grundläggande storheten är absorberad dos: hur många joule strålningen lämnar kvar per kilogram av det bestrålade materialet. Enheten heter gray. Det förbryllande är hur liten energin är i förhållande till skadan. En dos över hela kroppen på fem gray är livshotande, men samma energi räcker bara till att höja kroppstemperaturen ungefär en tusendels grad. Skadan beror alltså inte på uppvärmning utan på att strålningen slår sönder enskilda molekyler, framför allt arvsmassan, en i taget.' },
+      { type: 'p', html: 'Eftersom olika strålslag skadar olika mycket vid samma energi räknas dosen om till ekvivalent dos, med enheten sievert. Elektroner och gammastrålning räknas rakt av, medan alfapartiklar väger tjugo gånger tyngre, eftersom de lämnar all sin energi längs en mycket kort sträcka och därför river sönder ett litet område fullständigt. En genomsnittlig svensk får några millisievert per år, och den största delen kommer från radon i inomhusluften. En vanlig lungröntgen ligger långt under det, och en flygresa över Atlanten ger ungefär lika mycket som några dagars normal bakgrundsstrålning.' },
+      { type: 'p', html: 'Dosen sätter också gränsen för vad man kan avbilda. I ett elektronmikroskop är det just elektronerna som ger bilden som samtidigt bryter sönder provet, så ett biologiskt prov tål bara ett visst antal innan det är förstört. Därför fotograferar man ofta med så få elektroner att varje enskild bild nästan drunknar i brus, och lägger sedan ihop tusentals bilder av likadana molekyler till en skarp bild. Samma avvägning finns i sjukvårdens röntgen: mer strålning ger tydligare bild, och konsten är att stanna vid den lägsta dos som ändå ger svar på frågan.' }
+    ]
+  },
+  {
+    id: 'skottbrus',
+    term: 'Skottbrus',
+    former: ['skottbrus', 'skottbruset', 'fotonbrus', 'fotonbruset', 'räknestatistik', 'poissonbrus', 'poissonbruset'],
+    kort: 'Det oundvikliga skvalpet i varje mätning som räknar partiklar en och en. Räknar man i genomsnitt ett visst antal varierar utfallet med ungefär roten ur det antalet.',
+    relaterade: ['standardkvantgransen', 'foton', 'elementarladdning', 'kvant-halleffekten'],
+    body: [
+      { type: 'p', html: 'Ställ en hink i regnet och räkna dropparna under en minut. Faller det i genomsnitt hundra droppar blir det sällan exakt hundra, utan utfallet varierar med ungefär tio åt endera hållet, alltså roten ur hundra. Dropparna kommer oberoende av varandra och vid slumpmässiga tidpunkter, och den sortens räkning har alltid den spridningen. Samma sak gäller varje mätning som bygger på att räkna partiklar: fotoner i en kamera, elektroner i en ledning, sönderfall i en geigermätare. Fysiker kallar skvalpet skottbrus.' },
+      { type: 'p', html: 'Namnet myntades av Walter Schottky 1918, som hörde bruset i ett radiorör som ett svagt fräsande, likt hagel som hälls ut på en plåt. Det avgörande är hur bruset växer. Räknar man hundra partiklar är osäkerheten tio procent, räknar man tiotusen är den en procent. Det relativa bruset sjunker alltså bara som roten ur antalet, vilket betyder att en dubbelt så noggrann mätning kostar fyra gånger så många partiklar och därmed fyra gånger så lång tid. Kornigheten i ett foto taget i svag belysning är i huvudsak just detta, inte ett fel i kameran.' },
+      { type: 'p', html: 'Men bruset är inte bara en plåga, utan också ett mätinstrument. Eftersom spridningen hänger ihop med hur stora paketen är kan man vända på resonemanget och läsa av paketstorleken ur bruset. Mäter man skvalpet i en ström går det på så sätt att bestämma laddningen hos de partiklar som bär den. Just det knepet användes i mitten av 1990-talet för att visa att laddningsbärarna i ett tvådimensionellt elektronsystem i starkt magnetfält bar en tredjedels elementarladdning, precis som teorin för den fraktionella kvant-Halleffekten förutsade.' }
+    ]
+  },
 ];

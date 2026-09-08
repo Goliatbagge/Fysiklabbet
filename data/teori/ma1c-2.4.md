@@ -15,7 +15,7 @@ ekvationer och att förkorta rationella uttryck.
 
 ::: formel "Faktorisera"
 Hitta en eller flera **gemensamma faktorer** för alla termer i uttrycket.
-"Bryt ut" den gemensamma faktorn och färdigställ uttrycket genom att "tänka
+"Bryt ut" den gemensamma faktorn och färdigställ uttrycket genom att "räkna
 baklänges".
 :::
 
@@ -36,7 +36,7 @@ Då kan vi bryta ut den *minsta* potensen av $x$. Alltså kan vi bryta ut
 $x$.
 
 Eftersom vi kan bryta ut både 9 och $x$, så bryter vi ut $9x$. Sedan sätter
-vi en parentes efteråt och tänker "distributiva lagen baklänges" för att
+vi en parentes efteråt och räknar "distributiva lagen baklänges" för att
 uttrycket ska bli detsamma som det ursprungliga:
 
 $$
@@ -119,7 +119,7 @@ $$
 ::: sampunkt "Så gör du"
 1. Hitta den **största gemensamma faktorn** för **alla** termer.
 2. Bryt ut den framför en parentes.
-3. Fyll i parentesen genom att tänka baklänges: vad ska varje term
+3. Fyll i parentesen genom att räkna baklänges: vad ska varje term
    multipliceras med för att bli den ursprungliga?
 :::
 

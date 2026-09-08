@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 07 Sep 2026 01:24:44 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 01:27:23 GMT</lastBuildDate>
+    <item>
+      <title>Summan ska bli exakt 1 — nu har standardmodellens hårdaste räknekontroll prövats med en ny sorts partikel</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-08-summan-ska-bli-exakt-ett</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-08-summan-ska-bli-exakt-ett</guid>
+      <pubDate>Tue, 08 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Partikelfysik</category>
+      <description>Ett forskarlag vid Pekings elektron–positronkollider har mätt hur benägen en särkvark är att förvandlas till en uppkvark, genom att plocka fram 1 854 sällsynta sönderfall ur tio miljarder kollisioner. Knepet var att partiklarna föddes parvis och sammanflätade, så att varje enskilt sönderfall bar mer information än förr.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-08-summan-ska-bli-exakt-ett.jpg" length="136077" type="image/jpeg"/>
+    </item>
     <item>
       <title>Två atomer som spalter: Youngs klassiska försök krympt tio miljoner gånger</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer</link>
@@ -177,15 +186,6 @@
       <category>Optik</category>
       <description>I dimma och i vävnad studsar nästan allt ljus fram och tillbaka innan det når fram, och bilden dränks i gröt. Ett skikt metalloxid tunnare än en tusendels millimeter fungerar nu som en slutare som hinner öppna och stänga igen innan det bortspridda ljuset ens har kommit fram.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-20-ljusslutaren.jpg" length="588436" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Tomrummet är inte tomt — kring en död stjärna beter sig rymden som en kristall</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-19-tomrummets-dubbelbrytning</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-19-tomrummets-dubbelbrytning</guid>
-      <pubDate>Wed, 19 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Astrofysik</category>
-      <description>Kvantfysiken har i nittio år påstått att ett tillräckligt starkt magnetfält gör själva vakuumet till ett optiskt material som delar upp ljuset. Ingen har kunnat bygga ett sådant fält på jorden. Nu har tre teleskop tillsammans mätt något kring en magnetar som är svårt att förklara på något annat sätt.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-19-tomrummets-dubbelbrytning.jpg" length="193241" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

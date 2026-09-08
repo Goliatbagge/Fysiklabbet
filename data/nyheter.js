@@ -103,6 +103,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-08-summan-ska-bli-exakt-ett",
+    date: "2026-09-08",
+    title: "Summan ska bli exakt 1 — nu har standardmodellens hårdaste räknekontroll prövats med en ny sorts partikel",
+    deck: "Ett forskarlag vid Pekings elektron–positronkollider har mätt hur benägen en särkvark är att förvandlas till en uppkvark, genom att plocka fram 1 854 sällsynta sönderfall ur tio miljarder kollisioner. Knepet var att partiklarna föddes parvis och sammanflätade, så att varje enskilt sönderfall bar mer information än förr.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-08-summan-ska-bli-exakt-ett.jpg",
+    imageAlt: "En stor blå böjmagnet i en acceleratortunnel, med ljusa spolar och ett metallblankt strålrör som löper in i magneten. Kablar och mätlådor sitter på ställningen framför.",
+    imageCredit: "Foto: Shizhao / Wikimedia Commons (CC BY-SA 3.0), beskuren. Bilden visar acceleratorhallen vid Pekings elektron–positronkollider, inte detektorn som användes i studien.",
+    tags: ["partikelfysik", "standardmodellen", "kvarkar", "svag växelverkan", "betasönderfall", "kvantsammanflätning", "hyperon", "ckm-matrisen", "partikelaccelerator", "neutrino"],
+    sources: [
+      { name: "Phys.org: Entangled particles revive a 35-year-old test of the Standard Model", url: "https://phys.org/news/2026-09-entangled-particles-revive-year-standard.html" },
+      { name: "Nature (fri fulltext via Europe PMC): Exploring baryon semileptonic decays through polarization and entanglement", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13538038/" }
+    ],
+    research: { citation: "BESIII-samarbetet, ”Exploring baryon semileptonic decays through polarization and entanglement”, Nature 657, 92–97 (2026)", url: "https://doi.org/10.1038/s41586-026-10818-8" },
+    body: [
+      { type: 'p', html: 'Ett betasönderfall är i grunden ett identitetsbyte hos en kvark. När en neutron i en atomkärna blir en proton är det en nedkvark som förvandlas till en uppkvark, och kärnan skickar samtidigt i väg en elektron och en antineutrino. Hur benägna sådana förvandlingar är håller standardmodellen reda på i ett rutmönster med tre rader och tre kolonner, uppkallat efter Nicola Cabibbo, Makoto Kobayashi och Toshihide Maskawa. Varje ruta i CKM-matrisen är ett tal, och talet säger hur lätt en viss kvarksort byter till en annan.' },
+      { type: 'p', html: 'Rutorna får inte innehålla vilka tal som helst. Är standardmodellen fullständig ska kvadratsumman i varje rad bli exakt 1, alltså $|V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2 = 1$. Tanken bakom villkoret är enkel: en uppkvark som förvandlas måste bli något, och listan över vad den kan bli ska täcka alla möjligheter. Blir summan något annat än 1 fattas en väg i listan, och då finns det fysik som modellen inte känner till.' },
+      { type: 'p', html: 'Den mest omtvistade rutan är $|V_{us}|$, som styr förvandlingen mellan en särkvark och en uppkvark. Mätningar på sönderfallande kaoner och tauleptoner ger tal som ligger snäppet under vad summan kräver. Skillnaden är liten, men den har hållit i sig i åratal, och därför är varje oberoende sätt att komma åt samma tal värdefullt.' },
+
+      { type: 'h2', text: 'Partikeln som bär på en särkvark' },
+      { type: 'p', html: 'Lambdapartikeln är en tyngre släkting till neutronen. Den är byggd av en upp-, en ned- och en särkvark, väger ungefär 1,2 gånger så mycket som en proton och lever i genomsnitt $2{,}617 \\cdot 10^{-10}\\ \\mathrm{s}$ innan den faller sönder. I omkring åtta fall av tiotusen blir slutprodukterna en proton, en elektron och en antineutrino. Då är det särkvarken som har blivit en uppkvark, alltså precis den förvandling som $|V_{us}|$ beskriver.' },
+      { type: 'p', html: 'Ändå har hyperonerna nästan aldrig fått vara med när talet ska bestämmas. Sönderfallet är sällsynt, neutrinon lämnar inget spår i någon detektor, och utan tillräcklig kunskap om riktningarna i sönderfallet går de storheter mätningen behöver inte att skilja åt. Den noggrannaste mätningen gjordes för mer än trettio år sedan vid Fermilab, med en stråle av neutrala hyperoner och ungefär 37&nbsp;000 registrerade sönderfall.' },
+
+      { type: 'h2', text: 'Partnern som visar hur partikeln var vänd' },
+      { type: 'p', html: 'BESIII-samarbetet i Peking har nu gjort om mätningen på ett annat sätt. I lagringsringen BEPCII möts elektroner och positroner med precis så mycket energi att partikeln $\\mathrm{J}/\\psi$ bildas, och laget har samlat på sig 10,087&nbsp;miljarder sådana händelser. Knappt två gånger på tusen sönderfaller $\\mathrm{J}/\\psi$ till en lambdapartikel och en antilambda, alltså i runda tal nitton miljoner par. De två föds i samma ögonblick ur ett och samma tillstånd, och deras spinn är därför sammanflätade.' },
+      { type: 'p', html: 'Där sitter knepet. Antilambdan faller sönder till en antiproton och en pion, två spår som detektorn ser tydligt, och riktningen på det sönderfallet hänger ihop med åt vilket håll antilambdans spinn pekade. Eftersom paret är sammanflätat följer därmed också hur lambdan var vänd. Och hur lambdans egna sönderfallsprodukter fördelar sig beror i sin tur på vinkeln mellan dess spinn och den utsända protonen. Sammanlagt beskrivs förloppet av sju storheter: sex vinklar och hur mycket rörelsemängd och energi som förs över till elektronen och antineutrinon.' },
+      { type: 'p', html: 'Varje enskild händelse bär alltså mer information än om partikeln hade kommit ensam och oriktad. Ur de tio miljarderna kollisioner blev det till slut 1&nbsp;854 användbara sönderfall, alltså en tjugondel av materialet i Fermilabmätningen. Ändå landade den viktigaste storheten, den axialvektoriella kopplingen, på $0{,}729$ med en osäkerhet på omkring $0{,}048$. Det är samma värde som förr och bara ungefär två och en halv gånger så trubbigt, trots tjugo gånger färre sönderfall.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-08-summan-ska-bli-exakt-ett-2.jpg', alt: 'Gröna magneter med tjocka kopparlindningar och orange kylslangar står tätt intill varandra längs ett strålrör i en acceleratortunnel.', caption: 'Magneterna längs ringen håller de laddade partiklarna i bana och fokuserar dem, så att elektroner och positroner möts i samma punkt varv efter varv.', credit: 'Foto: Shizhao / Wikimedia Commons (CC BY-SA 3.0), beskuren. Bilden visar acceleratorhallen vid Pekings elektron–positronkollider.' },
+
+      { type: 'h2', text: 'Ett tal som fortfarande skaver' },
+      { type: 'p', html: 'Lambdapartikeln är dock ingen lika ren mätsond som kaonen. Kvarkarna inuti sitter inte stilla, och vägen från mätvärdet till $|V_{us}|$ går genom beräkningar av hur den starka kraften påverkar sönderfallet. Sådana beräkningar görs numera från grunden på superdatorer, i det som kallas gitter-QCD. Med dem i handen ger mätningen $|V_{us}| = 0{,}2339 \\pm 0{,}0041$.' },
+      { type: 'p', html: 'Det talet är förenligt med kravet på att raden ska summera till 1, som fordrar $|V_{us}| = 0{,}22799 \\pm 0{,}00137$. Skillnaden svarar mot 1,4 standardavvikelser, alltså inom det slumpen lätt åstadkommer. Samtidigt ligger det högre än det som kaonsönderfallen ger och två standardavvikelser över det tal man traditionellt fått ur lambdasönderfall. Spänningen är därmed inte utagerad. Den har fått en ny och oberoende deltagare, och det är i sig ett steg framåt: när flera helt olika mätvägar ger samma svar är det svaret som gäller, och när de inte gör det finns det något att förstå.' },
+      { type: 'p', html: 'Osäkerheten på $0{,}0041$ är fortfarande drygt fyra gånger större än kaonmätningarnas, så lambdapartikeln avgör ingenting ännu. Men det mesta av osäkerheten kommer nu från antalet insamlade sönderfall, inte från metoden, och den sortens problem löser sig med mer mätdata. Laget vill använda samma grepp på andra baryonsönderfall, och kommande anläggningar ska producera mångdubbelt fler par att arbeta med.' },
+      { type: 'p', html: 'Kvar står en fin poäng om sammanflätning. Den brukar beskrivas som något ömtåligt och exotiskt, ett fenomen för laboratorier med lasrar och kylskåp nära absoluta nollpunkten. Här uppträder den i stället som ett vardagligt verktyg i en partikeldetektor, och gör att två partiklar tillsammans säger mer om naturlagarna än vad summan av två ensamma partiklar hade gjort.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Namnet hyperon används om partiklar som är tyngre än protonen och innehåller minst en särkvark. Lambdapartikeln var den första som upptäcktes, i kosmisk strålning på 1940-talet.',
+        'En lambdapartikel som bildas i den här kollisionen rör sig nära ljusets fart, men hinner ändå i genomsnitt bara knappt en decimeter innan den faller sönder.',
+        'Neutrinon i sönderfallet fångas aldrig. Att den finns går att sluta sig till indirekt: alla andra partiklar i förloppet är elektriskt laddade och mäts upp, och det som fattas i energi och rörelsemängd är neutrinons.',
+        'Kobayashi och Maskawa fick Nobelpriset i fysik 2008 för arbetet bakom matrisen. Cabibbo, som lade grunden med den första versionen av idén, delade inte priset och dog två år senare.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-07-dubbelspalten-krympt-till-tva-atomer",
     date: "2026-09-07",
     title: "Två atomer som spalter: Youngs klassiska försök krympt tio miljoner gånger",

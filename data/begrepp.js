@@ -1016,7 +1016,7 @@ window.BEGREPP = [
   {
     id: 'standardmodellen',
     term: 'Standardmodellen',
-    former: ['standardmodellen', 'standardmodell', 'kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'lepton', 'leptonen', 'leptoner', 'leptonerna', 'gluon', 'gluonen', 'gluoner', 'gluonerna', 'fermion', 'fermioner', 'fermionerna', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna', 'nedkvark', 'nedkvarkar', 'uppkvark', 'uppkvarkar', 'pentakvark', 'pentakvarkar'],
+    former: ['standardmodellen', 'standardmodell', 'kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'lepton', 'leptonen', 'leptoner', 'leptonerna', 'gluon', 'gluonen', 'gluoner', 'gluonerna', 'fermion', 'fermioner', 'fermionerna', 'elementarpartikel', 'elementarpartiklar', 'elementarpartiklarna', 'nedkvark', 'nedkvarkar', 'uppkvark', 'uppkvarkar', 'pentakvark', 'pentakvarkar', 'särkvark', 'särkvarken', 'särkvarkar', 'särkvarkarna', 'charmkvark', 'charmkvarken', 'toppkvark', 'toppkvarken', 'taulepton', 'tauleptonen', 'tauleptoner', 'tauleptonerna'],
     kort: 'Partikelfysikens grundkarta: en lista över materiens minsta byggstenar och de partiklar som förmedlar krafterna mellan dem. Den beskriver tre av naturens fyra krafter — gravitationen står utanför.',
     relaterade: ['higgsbosonen', 'boson', 'neutrino', 'partikelaccelerator'],
     body: [
@@ -2146,6 +2146,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Våglängden säger hur långt det är mellan två vågtoppar. Vågtalet vänder på frågan och säger i stället hur många våglängder som ryms på en viss sträcka. Går vågen runt något slutet, som en cirkel eller en breddgrad på en planet, är vågtalet helt enkelt antalet vågtoppar man passerar på ett varv. Ett vågtal på tio betyder tio toppar och tio dalar.' },
       { type: 'p', html: 'Det speciella med en sluten bana är att vågen måste passa ihop med sig själv. Efter ett helt varv är man tillbaka där man började, och där kan vågen inte gärna vara både på toppen och i dalen samtidigt. Alltså kan bara ett helt antal våglängder rymmas, och vågtalet måste vara ett heltal. Alla andra vågor slår ut sig själva. Samma villkor gäller en gitarrsträng, som är fastspänd i båda ändar och därför bara kan svänga i ett bestämt urval av toner.' },
       { type: 'p', html: 'Villkoret dyker upp överallt där en våg är instängd. Det avgör vilka toner en orgelpipa ger, vilka färger som förstärks i en tunn oljehinna på vatten, och vilka energier en elektron kan ha i en atom, eftersom även elektronen beter sig som en våg. På en planet med kraftiga vindar avgör det hur många bukter en slingrande vind kan lägga sig i runt en pol, och därmed om mönstret ser ut som en sexhörning eller en tiohörning.' }
+    ]
+  },
+  {
+    id: 'hyperon',
+    term: 'Hyperon',
+    former: ['hyperon', 'hyperonen', 'hyperoner', 'hyperonerna', 'lambdapartikel', 'lambdapartikeln', 'lambdapartiklar', 'lambdapartiklarna', 'antilambda', 'antilambdan', 'hyperonstråle', 'hyperonstrålen'],
+    kort: 'En tung släkting till protonen och neutronen som innehåller minst en särkvark. Hyperoner bildas i kollisioner mellan partiklar och faller sönder inom en bråkdel av en miljondels sekund.',
+    relaterade: ['baryon', 'standardmodellen', 'svag-vaxelverkan', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'Protonen och neutronen består vardera av tre kvarkar av de två lättaste sorterna, upp och ned. Byter man ut en av dem mot den tyngre särkvarken får man en ny partikel, som är byggd på samma sätt men väger mer. Sådana partiklar kallas hyperoner. Den lättaste heter lambda och innehåller en uppkvark, en nedkvark och en särkvark. Den väger ungefär 1,2 gånger så mycket som en proton.' },
+      { type: 'p', html: 'Ingen hyperon är stabil. Särkvarken förvandlas förr eller senare till en lättare kvark, och partikeln faller sönder till en proton eller neutron plus något mer. Lambdapartikeln lever i genomsnitt drygt två tiondels miljarddels sekund, vilket låter kort men i partikelsammanhang är gott om tid. En hyperon som skickas i väg nära ljusets hastighet hinner därför flera centimeter genom en detektor innan den försvinner, och det räcker för att man ska kunna se var den bildades och var den föll sönder.' },
+      { type: 'p', html: 'Hyperoner finns inte i vanlig materia på jorden, eftersom de kräver mycket energi för att bildas och genast försvinner igen. Däremot kan de mycket väl finnas inuti neutronstjärnor, där trycket är så högt att det kan löna sig energimässigt att göra om en del neutroner till hyperoner. Hur mycket det i så fall mjukar upp stjärnan är en öppen fråga, och den hänger ihop med hur tung en neutronstjärna kan bli innan den kollapsar till ett svart hål.' }
+    ]
+  },
+  {
+    id: 'svag-vaxelverkan',
+    term: 'Svag växelverkan',
+    former: ['svag växelverkan', 'svaga växelverkan', 'svag kärnkraft', 'svaga kärnkraften', 'semileptoniskt sönderfall', 'semileptoniska sönderfall'],
+    kort: 'Den enda naturkraft som kan ändra en kvark från en sort till en annan. Den ligger bakom betasönderfall och därmed bakom en stor del av radioaktiviteten omkring oss.',
+    relaterade: ['standardmodellen', 'neutrino', 'ckm-matrisen', 'baryon'],
+    body: [
+      { type: 'p', html: 'Av naturens fyra grundläggande krafter är den svaga den mest udda. Tyngdkraften drar ihop, den elektriska kraften drar och stöter bort, den starka kraften håller ihop atomkärnan. Den svaga växelverkan gör något helt annat: den byter identitet på partiklar. En nedkvark kan bli en uppkvark, en särkvark kan bli en uppkvark, och en elektron kan bli en neutrino. Ingen annan känd kraft klarar det.' },
+      { type: 'p', html: 'Det tydligaste exemplet är betasönderfall. En neutron i en atomkärna innehåller två nedkvarkar och en uppkvark. Förvandlas en av nedkvarkarna till en uppkvark blir neutronen en proton, och samtidigt skickas en elektron och en antineutrino i väg. Kärnan har då bytt grundämne utan att antalet byggstenar har ändrats. Det är den processen som gör att kol-14 långsamt blir kväve, och som ligger bakom en stor del av den radioaktivitet som mäts i naturen.' },
+      { type: 'p', html: 'Kraften kallas svag därför att den verkar så sällan. Budbärarpartiklarna som förmedlar den, W och Z, är omkring nittio gånger tyngre än en proton, och en så tung budbärare når bara oerhört korta sträckor. Därför tar betasönderfall tid: en fri neutron lever i genomsnitt en kvart, medan processer som styrs av den starka kraften är över på mindre än en miljarddels miljarddels sekund. Att kraften är trög är tur för oss, för det är den som sätter takten i solens fusionsreaktioner och gör att solen brinner i miljarder år i stället för att explodera.' }
+    ]
+  },
+  {
+    id: 'ckm-matrisen',
+    term: 'CKM-matrisen',
+    former: ['ckm-matrisen', 'ckm-matris', 'cabibbovinkeln', 'cabibbovinkel', 'kvarkblandning', 'kvarkblandningen', 'unitaritet', 'unitariteten'],
+    kort: 'En tabell med nio tal som säger hur lätt varje kvarksort förvandlas till varje annan. Talen måste uppfylla ett strängt räknevillkor, och att pröva det villkoret är ett av de skarpaste testen av partikelfysikens standardmodell.',
+    relaterade: ['standardmodellen', 'svag-vaxelverkan', 'hyperon', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Kvarkar finns i sex sorter, och den svaga växelverkan kan förvandla dem till varandra. Men alla förvandlingar är inte lika vanliga. En nedkvark blir nästan alltid en uppkvark, betydligt mer sällan en charmkvark, och nästan aldrig en toppkvark. Sannolikheterna samlas i en tabell med tre rader och tre kolonner, en ruta för varje kombination. Den kallas CKM-matrisen efter Nicola Cabibbo, Makoto Kobayashi och Toshihide Maskawa.' },
+      { type: 'p', html: 'Det som gör tabellen intressant är att den inte får se ut hur som helst. En kvark som förvandlas måste bli något, och om listan över tänkbara utfall är fullständig ska sannolikheterna i varje rad summera till hundra procent. Villkoret kallas unitaritet. Går summan inte ihop finns det en väg som saknas i listan, alltså en partikel eller en kraft som ingen känner till. Därför mäts varje ruta i tabellen om och om igen, med olika metoder och i olika laboratorier, och summorna kontrolleras.' },
+      { type: 'p', html: 'Tabellen bär också på en av fysikens större gåtor. Ett av talen i den kan inte vara ett vanligt reellt tal utan måste innehålla en fasfaktor, och det är just den som gör att materia och antimateria beter sig en aning olika. Utan den skillnaden hade det tidiga universum lika gärna kunnat sluta med lika delar av båda, som sedan hade utplånat varandra. Effekten som matrisen ger räcker dock inte alls till för att förklara hur mycket materia som faktiskt finns, så någonting mer måste ha bidragit.' }
     ]
   }
 ];

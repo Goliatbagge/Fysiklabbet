@@ -25,6 +25,23 @@ Format per post:
   https://phys.org/news/2026-09-significant-efficiency-gains.html
   (tillagd 2026-09-05)
 
+- **Fononer som snurrar åt ett håll, och en strömbrytare för dem** — i vissa kristaller kan
+  atomernas vibrationer bära ett eget rotationssinne (kirala fononer). Nu rapporteras att
+  tillståndet går att slå om med ett elektriskt fält och att det sedan står kvar. Ingång:
+  svängningar, rotationsriktning och hur värme och ljud bärs av gittervibrationer. Kontrollera
+  materialet, temperaturen och om effekten är uppmätt eller beräknad. OBS: fononer togs upp i
+  dubbelspaltnyheten 2026-09-07, så låt det gå tid. Källa (Phys.org 2026-09-07):
+  https://phys.org/news/2026-09-reversible-electric-persistent-chiral-phonon.html
+  (tillagd 2026-09-08)
+
+- **Tre kvantfaser i ett krombaserat material pekar mot spinn-triplett-supraledning** — en ovanlig
+  sorts supraledning där de parade elektronerna har parallella spinn i stället för motsatta.
+  Ingång: supraledning, spinn och vad ett fasdiagram är. Kontrollera vad som är uppmätt och vad
+  som är tolkning. OBS: supraledning behandlades 2026-09-05, låt det gå ordentligt med tid.
+  Källa (Phys.org 2026-09-07):
+  https://phys.org/news/2026-09-quantum-phases-chromium-based-material.html
+  (tillagd 2026-09-08)
+
 - **Svävande magnet söker ultratung mörk materia** — ett korn av permanentmagnet som svävar
   över en supraledare nära absoluta nollpunkten används som stötdetektor: rör den sig en
   hundradels atomdiameter har något knuffat till den. Laget vid Rice University täckte ett

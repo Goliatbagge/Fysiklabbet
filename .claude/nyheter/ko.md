@@ -25,6 +25,24 @@ Format per post:
   https://phys.org/news/2026-09-significant-efficiency-gains.html
   (tillagd 2026-09-05)
 
+- **Supraflytande helium-3 som bärare av kvantbitar** — två arbeten samma vecka föreslår
+  helium som grund för kvantdatorer: snabbare tunnling i helium-3 respektive en
+  ”supraflytande kvantbit” från University of Surrey. Ingång: supraflytande tillstånd,
+  tunneleffekt och absoluta nollpunkten. OBS: kvantfysik/kvantdatorer har varit tätt
+  förekommande — låt det gå ordentligt med tid, och kontrollera om det bara är
+  teoretiska förslag eller om något faktiskt byggts. Källor (Phys.org 2026-09-08):
+  https://phys.org/news/2026-09-helium-quantum-concept-faster-tunneling.html ,
+  https://phys.org/news/2026-09-superfluid-qubit-scale-quantum.html
+  (tillagd 2026-09-09)
+
+- **Magnetfält formade solsystemet** — nya resultat pekar på att magnetism spelade en
+  huvudroll när stoftet kring den unga solen drogs ihop till planeter. Ingång:
+  magnetfält, gravitation och hur en ackretionsskiva blir till planeter. Kontrollera
+  vad som är uppmätt i meteoritmaterial och vad som kommer ur simuleringar. Källa
+  (Physics World 2026-09):
+  https://physicsworld.com/a/magnetism-likely-played-a-key-role-in-early-solar-system-formation/
+  (tillagd 2026-09-09)
+
 - **Fononer som snurrar åt ett håll, och en strömbrytare för dem** — i vissa kristaller kan
   atomernas vibrationer bära ett eget rotationssinne (kirala fononer). Nu rapporteras att
   tillståndet går att slå om med ett elektriskt fält och att det sedan står kvar. Ingång:

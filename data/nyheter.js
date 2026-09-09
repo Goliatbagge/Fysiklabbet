@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-09-fotonen-som-inte-borde-ha-natt-fram",
+    date: "2026-09-09",
+    title: "Fotonen som aldrig borde ha nått fram — 300 TeV från en gammablixt två miljarder ljusår bort",
+    deck: "Den 9 oktober 2022 lyste den ljusstarkaste gammablixt som någonsin registrerats upp himlen. Drygt en timme senare noterade en detektor i Kaukasus en luftskur som svarar mot en enda foton på 300 teraelektronvolt från samma håll. Enligt gängse fysik skulle den fotonen ha slagits sönder av universums egen bakgrundsstrålning långt innan den kom hit, och nu har två italienska forskare räknat på vad som skulle krävas för att den ändå ska ha klarat resan.",
+    category: "Astrofysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-09-fotonen-som-inte-borde-ha-natt-fram.jpg",
+    imageAlt: "Ett tjugotal koncentriska ringar i lila, blått och grönt mot svart bakgrund, med en liten vit ljuspunkt i mitten. Svarta streck korsar bilden där detektorns delar möts.",
+    imageCredit: "Bild: NASA:s Scientific Visualization Studio / XMM-Newton (public domain). Röntgenringarna är gammablixtens strålning spridd mot stoftmoln i Vintergatan, inte något som hör till blixten själv.",
+    tags: ["astrofysik", "gammablixt", "foton", "gammastrålning", "parbildning", "kosmisk bakgrundsstrålning", "relativitetsteori", "lorentzinvarians", "axion", "elektronvolt", "kosmisk strålning"],
+    sources: [
+      { name: "Phys.org: A photon that challenges Einstein: According to current physics, it should never have reached Earth", url: "https://phys.org/news/2026-09-photon-einstein-current-physics-earth.html" },
+      { name: "Physical Review Letters 137, artikel 111002 (2026): Lorentz-Violating Scenarios for the Highest-Energy Photons from GRB 221009A", url: "https://doi.org/10.1103/zjh2-mc47" },
+      { name: "arXiv (fri fulltext av samma arbete, version 3)", url: "https://arxiv.org/abs/2504.01830" }
+    ],
+    research: { citation: "Giorgio Galanti och Marco Roncadelli, ”Lorentz-Violating Scenarios for the Highest-Energy Photons from GRB 221009A”, Physical Review Letters 137, artikel 111002 (2026)", url: "https://doi.org/10.1103/zjh2-mc47" },
+    body: [
+      { type: 'p', html: 'Den 9 oktober 2022 sköljde en våg av gammastrålning in över jorden från stjärnbilden Pilen. Den kom från en gammablixt som fick beteckningen GRB&nbsp;221009A, och den var så bländande att flera rymdteleskop mättades och en stund inte kunde mäta hur mycket de egentligen tog emot. Astronomerna döpte den till BOAT, efter engelskans <em>brightest of all time</em>. Källan ligger vid rödförskjutningen $z = 0{,}151$, alltså omkring 2,4&nbsp;miljarder ljusår bort.' },
+      { type: 'p', html: 'Blixten är ihågkommen av ännu ett skäl. Drygt en timme efter det första larmet registrerade Carpet-detektorn vid Baksanobservatoriet i norra Kaukasus en luftskur som ser ut att ha startats av en enda foton, från samma håll på himlen. Skuren kom 4&nbsp;536&nbsp;sekunder efter att Fermi-teleskopet slagit larm, och när hela den utbyggda detektorn räknats in landade fotonens energi på 300&nbsp;TeV, med en osäkerhet på uppemot fyrtio teraelektronvolt åt vardera hållet.' },
+      { type: 'p', html: 'En teraelektronvolt är $10^{12}$ elektronvolt, så 300&nbsp;TeV svarar mot $3 \\cdot 10^{14}\\ \\mathrm{eV}$. Det är över hundra biljoner gånger så mycket energi som en foton av synligt ljus bär, och drygt fyrtio gånger så mycket som en enskild proton har i strålen i världens största partikelaccelerator. All den energin i en enda ljuspartikel.' },
+
+      { type: 'h2', text: 'Rymden är inte tom för en energirik foton' },
+      { type: 'p', html: 'Och det är just att den kom fram som är problemet. Rymden mellan galaxerna är genomkorsad av den kosmiska mikrovågsbakgrunden, det svaga ljus som blev över från universums heta ungdom. Överallt finns omkring 400 sådana fotoner per kubikcentimeter, var och en med en energi kring en tusendels elektronvolt. För oss är det ett omätligt svagt sken. För en foton på 300&nbsp;TeV är det en vägg.' },
+      { type: 'p', html: 'När två fotoner möts kan de nämligen förvandlas till materia: en elektron och en positron, $\\gamma\\gamma \\rightarrow \\mathrm{e}^- \\mathrm{e}^+$. Villkoret är att de tillsammans bär minst den energi som de två massorna motsvarar, $2 m_\\mathrm{e} c^2 = 1{,}022\\ \\mathrm{MeV}$. Möts de rakt framifrån betyder det att produkten av deras energier måste överstiga $(m_\\mathrm{e} c^2)^2$. Sätter man in en bakgrundsfoton på en tusendels elektronvolt räcker det alltså att gammafotonen bär ungefär 260&nbsp;TeV för att paret ska kunna bildas.' },
+      { type: 'p', html: 'Ovanför den gränsen är universum inte genomskinligt utan grumligt. En foton på 300&nbsp;TeV hinner i genomsnitt inte i närheten av 2,4&nbsp;miljarder ljusår innan den fastnar i en sådan krock, och därmed upphör att vara en foton. Galanti och Roncadelli räknar ut hur många sådana fotoner Carpet borde ha sett om fysiken fungerar som vi tror, och får talet 10<sup>−96</sup>. Deras egen bild av saken är att skjuta en pil genom en tät skog som sträcker sig två miljarder ljusår, och räkna med att inte träffa ett enda träd.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-09-fotonen-som-inte-borde-ha-natt-fram-2.jpg', alt: 'Tre svartvita stjärnfält bredvid varandra, daterade 10, 20 och 27 oktober 2022. En blå ring markerar samma punkt i alla tre, och ljuspunkten inuti ringen blir svagare bild för bild tills den är borta.', caption: 'Efterglödet från GRB 221009A i synligt ljus, fotograferat vid tre tillfällen under oktober 2022. Ljuspunkten i den markerade ringen tonar bort på ett par veckor.', credit: 'Foto: ESO / Malesani med flera, The Stargate collaboration (CC BY 4.0).' },
+
+      { type: 'h2', text: 'Två utvägar, och ingen av dem räcker ensam' },
+      { type: 'p', html: 'Den första utvägen har diskuterats i tjugo år. Om det finns en lätt, nästan osynlig partikelsort som kallas axionliknande partiklar, kan en foton i ett magnetfält växla över till att vara en sådan partikel och senare växla tillbaka. Under tiden som axionliknande partikel är den blind för bakgrundsljuset och passerar rakt igenom. Med partikelmassor kring $10^{-11}$ till $10^{-7}$ elektronvolt fungerar knepet hjälpligt för de fotoner på knappt 18&nbsp;TeV som det kinesiska LHAASO-observatoriet såg från samma blixt.' },
+      { type: 'p', html: 'För Carpets foton gör det inte det. Med samma parametrar hamnar det förväntade antalet händelser under $10^{-4}$, alltså ungefär hundra gånger för lite. Axionerna räcker inte hela vägen.' },
+      { type: 'p', html: 'Den andra utvägen är obehagligare, för den rör vid relativitetsteorins grund. Lorentzinvariansen säger att naturlagarna ser likadana ut oavsett hur snabbt man rör sig, och ur den följer det exakta sambandet mellan en fotons energi och dess rörelsemängd. Flera försök att förena gravitation och kvantfysik antyder att sambandet kan vara aningen fel vid tillräckligt extrema energier. Blir det fel åt rätt håll höjs tröskeln för parbildning, och då slocknar krockarna med bakgrundsljuset. Rymden blir genomskinlig igen, men bara för de allra energirikaste fotonerna.' },
+      { type: 'p', html: 'Forskarna sätter siffror på hur kraftigt brottet i så fall måste vara. Skalan där det slår in behöver ligga under omkring $10^{21}$ GeV om avvikelsen växer proportionellt mot energin, och under $2 \\cdot 10^{13}$ GeV om den växer med energin i kvadrat. Den första siffran är ungefär hundra gånger den energi där gravitationen väntas bli en kvantkraft, den andra ofantligt mycket lägre.' },
+      { type: 'p', html: 'Ett brott mot Lorentzinvariansen har också en sidoeffekt som går att pröva: fotonens hastighet blir svagt beroende av dess energi. Den allra energirikaste fotonen skulle då komma försenad, och det är precis vad som hände. Carpets skur kom mer än en timme efter LHAASO:s fotoner. En oberoende analys av samma händelse kommer fram till att just den kvadratiska varianten förklarar både att fotonen kom fram och hur sent den kom, med en skala som ligger väl inom den gräns Galanti och Roncadelli räknar ut.' },
+
+      { type: 'h2', text: 'En enda skur räcker inte' },
+      { type: 'p', html: 'Här hör det till saken att hela byggnaden vilar på en observation. Carpet ser himlen grovt, med en upplösning på ett par grader, och nära gammablixtens riktning finns två sedan tidigare kända strålningskällor i vår egen galax. Sannolikheten att skuren råkar sammanfalla med blixten av en slump anges till ungefär en på hundra, och risken att den startades av en vanlig atomkärna i stället för en foton till ungefär tre på tiotusen. Varken LHAASO eller det mexikanska HAWC kunde bekräfta händelsen: den ena hade riktningen i utkanten av sitt synfält, den andra hade den under horisonten.' },
+      { type: 'p', html: 'Bevisen som krävs växer med hur märkvärdigt påståendet är, och att relativitetsteorin skulle spricka vid extrema energier hör till de mest märkvärdiga påståenden som går att göra. Det som gör arbetet intressant är i stället att det är prövbart. Modellen förutsäger både att fotoner över några hundra TeV ska kunna nå oss från avlägsna källor och att de ska komma i en bestämd ordning efter de mindre energirika. Nästa riktigt ljusstarka gammablixt blir därför ett experiment, och kommande anläggningar för att fånga sådana skurar är redan under uppbyggnad.' },
+      { type: 'p', html: 'Sannolikast är fortfarande att skuren har en jordnära förklaring, och att fysiken förblir som den är. Men det är värt att notera vad frågan egentligen handlar om. En enda ljuspartikel, som ingen såg färdas och som förintades i samma ögonblick som den mättes, har fått ett par forskare att räkna på om Einsteins mest grundläggande antagande håller. Det är ungefär så finmaskigt fysiken arbetar.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'GRB 221009A låg så nära och lyste så starkt att den störde jordens jonosfär mätbart, trots att strålningen hade färdats i 2,4 miljarder år innan den kom hit.',
+        'Blixtar av den här styrkan väntas träffa oss ungefär en gång på tiotusen år, vilket gjorde händelsen till en av de mest observerade i modern astronomi.',
+        'LHAASO registrerade över 5 000 fotoner med mer än 500 GeV från blixten under de första 2 000 sekunderna, varav åtta låg över 10 TeV. Den högsta energin var knappt 18 TeV, alltså bara en sjuttondel av Carpets omtvistade skur.',
+        'De ringar av röntgenstrålning som teleskopen såg runt blixten kommer inte från blixten själv. De uppstår när strålningen sprids mot stoftmoln i Vintergatan på vägen, och ringarnas storlek går att räkna om till hur långt bort molnen ligger.'
+      ] }
+    ],
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 4.1 Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Fysik nivå 1 · 9.2 Massdefekt och bindningsenergi", href: "katalog.html?id=fy1-9.2" },
+        { label: "Fysik nivå 1 · 8.1 Relativitetsteori", href: "katalog.html?id=fy1-8.1" }
+      ],
+      fragor: [
+        "Tröskeln för att två fotoner ska kunna bli ett elektron–positronpar bestäms av elektronens vilomassa. Räkna ut vilken energi en gammafoton behöver för att kunna paras ihop med en bakgrundsfoton på en tusendels elektronvolt, och jämför med de 300 TeV artikeln talar om.",
+        "Ljusets hastighet i vakuum antas vara densamma för alla våglängder. Vilka observationer i vardagen och i astronomin skulle se annorlunda ut om den i stället berodde svagt på fotonens energi?",
+        "Sannolikheten att skuren av en slump kommer från blixtens riktning anges till ungefär en på hundra. Varför räcker inte det för att kalla saken bevisad, och vad skulle krävas i stället?"
+      ]
+    }
+  },
+  {
     id: "2026-09-08-summan-ska-bli-exakt-ett",
     date: "2026-09-08",
     title: "Summan ska bli exakt 1 — nu har standardmodellens hårdaste räknekontroll prövats med en ny sorts partikel",

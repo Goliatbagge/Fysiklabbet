@@ -927,7 +927,7 @@ window.BEGREPP = [
   {
     id: 'foton',
     term: 'Foton',
-    former: ['foton', 'fotonen', 'fotoner', 'fotonerna', 'ljuspartikel', 'ljuspartikeln', 'ljuspartiklar', 'röntgenfoton', 'röntgenfotonen', 'röntgenfotoner', 'röntgenfotonerna'],
+    former: ['foton', 'fotonen', 'fotoner', 'fotonerna', 'ljuspartikel', 'ljuspartikeln', 'ljuspartiklar', 'röntgenfoton', 'röntgenfotonen', 'röntgenfotoner', 'röntgenfotonerna', 'bakgrundsfoton', 'bakgrundsfotonen', 'bakgrundsfotoner'],
     kort: 'Ljusets minsta odelbara energipaket — en partikel utan massa som alltid rör sig med ljusets hastighet. Energin bestäms av ljusets frekvens, alltså av färgen.',
     relaterade: ['vaglangd', 'laser', 'exciterat-tillstand', 'comptonspridning', 'materievag'],
     body: [
@@ -2695,6 +2695,54 @@ window.BEGREPP = [
       { type: 'p', html: 'År 1923 lät Arthur Compton röntgenstrålning falla mot en bit grafit och mätte noggrant vad som studsade tillbaka. Resultatet var förbryllande. En del av den spridda strålningen hade längre våglängd än den infallande, och skillnaden berodde bara på vilken vinkel man mätte i, inte på materialet och inte heller på den ursprungliga våglängden. En våg som studsar mot något ska behålla sin frekvens, så vågbeskrivningen gav helt fel svar.' },
       { type: 'p', html: 'Compton löste det genom att räkna som om det vore en biljardstöt mellan två partiklar: en foton träffar en elektron, bägge far i väg åt var sitt håll, och både energi och rörelsemängd bevaras. Fotonen lämnar då över en del av sin energi, och eftersom energin hänger ihop med våglängden blir den utgående vågen längre. Förskjutningen beror bara på vinkeln, och som mest, vid en rak studs bakåt, blir den ungefär fem biljondels millimeter. Räkningen stämde exakt, och den blev det avgörande beviset för att ljus bär rörelsemängd i portioner. Compton fick Nobelpriset 1927.' },
       { type: 'p', html: 'Processen är långtifrån bara ett historiskt experiment. Vid de fotonenergier som används inom sjukvården är comptonspridning det vanligaste sättet för gammastrålning att lämna ifrån sig energi i vävnad, vilket avgör hur röntgenrum måste skärmas av och varför strålning sprids i sidled i stället för att bara stanna i den tänkta strålgången. Den ger också ett suddigt bakgrundsbrus i gammakameror som måste räknas bort. Vänder man på förloppet, så att en mycket snabb elektron träffar en långsam foton, sparkas fotonen i stället upp till gammaenergier, och det kallas invers comptonspridning.' }
+    ]
+  },
+  {
+    id: 'parbildning',
+    term: 'Parbildning',
+    former: ['parbildning', 'parbildningen', 'pargenerering', 'elektron–positronpar', 'elektron–positronparet', 'elektron-positronpar', 'elektron-positronparet'],
+    kort: 'När energi blir materia: en tillräckligt energirik foton försvinner och lämnar efter sig en elektron och en positron. Det är den mest direkta illustrationen av att massa och energi är samma sak.',
+    relaterade: ['positron', 'antimateria', 'annihilation', 'gammastralning', 'foton'],
+    body: [
+      { type: 'p', html: 'En foton har ingen massa, men den har energi. Om energin är tillräckligt stor kan fotonen upphöra att finnas och i stället lämna efter sig två partiklar med massa: en elektron och dess antipartikel positronen. Priset är bestämt på förhand. En elektron motsvarar energin 0,511&nbsp;megaelektronvolt, så ett helt par kostar 1,022&nbsp;megaelektronvolt, och en foton med mindre energi än så kan aldrig göra affären. Över den gränsen går det, och överskottet blir fart hos de två nya partiklarna.' },
+      { type: 'p', html: 'Det räcker däremot inte med energin. En ensam foton i tomma rymden kan inte förvandla sig, för då skulle rörelsemängden inte gå ihop: fotonens rörelsemängd är alltid större än vad de två nya partiklarna kan bära upp tillsammans. Något tredje måste ta emot en del av knuffen. I materia är det oftast en atomkärna som fotonen passerar nära, och det är därför parbildning är det dominerande sättet för mycket energirik gammastrålning att stoppas i bly och betong. Ute i rymden kan i stället en annan foton ta rollen, och då räcker det att de två fotonernas energier tillsammans är stora nog.' },
+      { type: 'p', html: 'Just den andra varianten gör universum ogenomskinligt för de allra energirikaste ljuspartiklarna. Rymden är full av svagt bakgrundsljus, och en foton med tillräckligt hög energi hittar förr eller senare en motpart att bilda ett par med. Ju energirikare fotonen är, desto kortare sträcka hinner den, och över några hundra teraelektronvolt är avstånden så korta att inget ljus från andra galaxer rimligen borde nå hit. Nere i sjukvården används samma fysik åt andra hållet: i en PET-kamera är det positroner som möter elektroner och blir gammastrålning igen.' }
+    ]
+  },
+  {
+    id: 'kosmisk-mikrovagsbakgrund',
+    term: 'Kosmisk mikrovågsbakgrund',
+    former: ['kosmisk mikrovågsbakgrund', 'kosmiska mikrovågsbakgrunden', 'mikrovågsbakgrund', 'mikrovågsbakgrunden', 'kosmisk bakgrundsstrålning', 'kosmiska bakgrundsstrålningen', 'bakgrundsstrålningen från big bang'],
+    kort: 'Det svaga ljus som fyller hela rymden och är över från universums heta ungdom. Det är den äldsta strålning som går att se, utsänd när universum var knappt 400 000 år gammalt.',
+    relaterade: ['rodforskjutning', 'kelvin-helmholtz-instabilitet', 'foton', 'mork-materia', 'kosmologiska-konstanten'],
+    body: [
+      { type: 'p', html: 'De första hundratusentals åren efter big bang var universum så hett att atomer inte kunde hålla ihop. Elektronerna flög fritt, och ljus kom ingen vart utan studsade hela tiden mot dem, ungefär som ljuset i en tät dimma. När temperaturen till slut hade fallit under några tusen grader fångades elektronerna in av kärnorna, dimman lättade på en gång, och ljuset kunde börja färdas fritt. Det ljuset är fortfarande på väg, och det kommer in mot oss från alla håll samtidigt.' },
+      { type: 'p', html: 'Sedan dess har rymden växt omkring tusen gånger, och våglängderna har sträckts ut lika mycket. Det som en gång var glödande vitt ljus är i dag mikrovågor som svarar mot temperaturen 2,7&nbsp;grader över absoluta nollpunkten. Strålningen upptäcktes av en slump 1964 av två radioingenjörer som försökte bli av med ett brus i sin antenn och först misstänkte duvspillning. Bruset gick inte att bli av med, för det kom från himlen i alla riktningar.' },
+      { type: 'p', html: 'I dag är bakgrunden kosmologins viktigaste mätinstrument. Temperaturen är nästan exakt densamma överallt, men i femte decimalen finns ett mönster av småfläckar, och storleken på fläckarna säger hur mycket vanlig materia, mörk materia och mörk energi universum innehåller. Rent räknemässigt är strålningen också anmärkningsvärt tät på ljuspartiklar: det går omkring 400 fotoner på varje kubikcentimeter rymd, vilket är ungefär en miljard gånger fler än det finns atomer.' }
+    ]
+  },
+  {
+    id: 'axionliknande-partikel',
+    term: 'Axionliknande partikel',
+    former: ['axionliknande partikel', 'axionliknande partiklar', 'axionliknande partikeln', 'axionliknande partiklarna', 'axion', 'axionen', 'axioner', 'axionerna'],
+    kort: 'En hypotetisk, extremt lätt partikel som kan byta identitet med en foton när den passerar ett magnetfält. Ingen har ännu hittat en, men de dyker upp i förklaringar av både mörk materia och av ljus som verkar ha kommit för långt.',
+    relaterade: ['mork-materia', 'foton', 'wimp', 'stark-vaxelverkan'],
+    body: [
+      { type: 'p', html: 'Axionen föreslogs på 1970-talet för att lösa ett irriterande problem i teorin för den starka kraften, som utan vidare skulle tillåta en viss obalans mellan materia och antimateria som mätningar visar inte finns. Lösningen var att införa ett nytt fält vars naturliga jämviktsläge är just noll obalans, och ett sådant fält bär alltid med sig en partikel. Den fick namnet axion efter ett tvättmedel, eftersom den städade upp problemet. Senare visade det sig att många teorier ger liknande, mycket lätta partiklar av samma slag, och de kallas gemensamt axionliknande.' },
+      { type: 'p', html: 'Det som gör dem intressanta att leta efter är att de kan kopplas till ljus. I ett magnetfält kan en foton och en axionliknande partikel byta plats med varandra, ungefär som två pendlar som är förbundna med en fjäder och långsamt lämnar över svängningen till varandra. Under tiden som partikeln inte är en foton växelverkar den knappt alls med något, och den kan då ta sig genom både tjocka väggar och långa sträckor av rymd som ljus normalt inte klarar. Sådana byten är också vad experimenten letar efter: starka magneter i laboratorier, och avvikelser i ljuset från avlägsna himlakroppar.' },
+      { type: 'p', html: 'Massan är okänd men måste vara ytterst liten, någonstans i trakten av en miljarddels miljarddels elektronvolt eller ännu mindre. Om partiklarna finns och bildades i tillräcklig mängd strax efter big bang skulle de kunna utgöra hela den mörka materien, vilket gör dem till en av de två stora kandidaterna. Ännu har inget experiment sett en, men sökområdet krymper stadigt.' }
+    ]
+  },
+  {
+    id: 'lorentzinvarians',
+    term: 'Lorentzinvarians',
+    former: ['lorentzinvarians', 'lorentzinvariansen', 'lorentzinvariant', 'lorentzinvarianta', 'lorentzbrott', 'lorentzbrottet', 'brott mot lorentzinvariansen'],
+    kort: 'Kravet att naturlagarna ser exakt likadana ut oavsett hur snabbt man rör sig, och att ljusets hastighet i vakuum är densamma för alla. Det är antagandet som hela relativitetsteorin vilar på.',
+    relaterade: ['relativitetsteori', 'tidsdilatation', 'langdkontraktion', 'rumtid', 'foton'],
+    body: [
+      { type: 'p', html: 'Einstein byggde relativitetsteorin på två påståenden. Det första är att fysikens lagar måste vara desamma för alla som rör sig med konstant fart, oavsett hur fort. Det andra är att ljusets hastighet i vakuum är en och samma för alla dessa observatörer. Tillsammans kallas kravet lorentzinvarians, efter Hendrik Lorentz, vars omräkningsformler mellan olika observatörer visade sig vara precis vad kraven ger. Ur dem följer allt det som gör relativitetsteorin märklig: att klockor går olika fort, att sträckor krymper och att massa och energi är samma sak.' },
+      { type: 'p', html: 'En följd som sällan nämns är att en fotons energi och rörelsemängd hänger ihop på ett exakt bestämt sätt, och att alla fotoner därför färdas lika fort oavsett våglängd. Rött och blått ljus från samma stjärna anländer i samma ögonblick, hur långt de än har färdats. Det är just den delen som gör antagandet så väl prövbart: gammablixtar miljarder ljusår bort skickar ut ljus i ett väldigt brett energiområde på en gång, och en aldrig så liten hastighetsskillnad skulle byggas upp till en mätbar tidsskillnad på den sträckan.' },
+      { type: 'p', html: 'Flera försök att förena gravitation med kvantfysik antyder ändå att invariansen kan vara en ytterst god approximation snarare än en exakt sanning, och att den bryter samman vid energier långt bortom vad som går att skapa på jorden. Ett sådant brott skulle märkas som att de mest energirika fotonerna färdas aningen fortare eller långsammare än de energifattiga, och som att gränserna för vissa reaktioner mellan partiklar flyttar sig. Hittills har varje mätning varit förenlig med att invariansen håller exakt, och gränserna är bland de hårdaste inom fysiken.' }
     ]
   },
 ];

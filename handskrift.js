@@ -65,6 +65,18 @@
  *   stegindex, så scenen MÅSTE ha SAMMA ANTAL klicksteg i båda lägena,
  *   med stegen i samma ordning (väggsteget svarar mot båda led-raden).
  *
+ *   REGEL (DIVISION I BÅDA LED SKRIVS MED BLÅPENNAN, användarkrav
+ *   2026-09-09): i läget "Båda led" ska ALLT som görs i båda led synas i
+ *   blått — inte bara de termer som adderas och subtraheras. När ett led
+ *   divideras skrivs därför BRÅKSTRECKET och NÄMNAREN blå i båda led
+ *   ("4x=28" följs av 4x/4 = 28/4 med båda fyrorna i nämnarna blå),
+ *   medan täljarna är grafit: de stod redan där. mkEkvOp gör detta
+ *   automatiskt för "/d"-operationer; skriver du steget för hand är det
+ *   sjätte argumentet till T.fracH() (dcol) som färgar streck + nämnare.
+ *   Bråk som INTE är en operation på båda led (gemensam nämnare,
+ *   förkortning, en formel som råkar innehålla ett bråk) är förstås
+ *   fortsatt helt grafit.
+ *
  *   controller = { play, pause, restart, setSpeed, jumpToEnd, spela,
  *                  steg, nasta, forra, boundaries }
  *
@@ -2680,22 +2692,25 @@
       return Math.max(adv(numS), adv(denS)) + 0.3 * F;
     }
     /* bråk med rakt divisionsstreck; skrivordning täljare → streck →
-     * nämnare, precis som för hand. col färgar hela bråket. */
-    function fracH(numS, denS, x0, yb, col) {
+     * nämnare, precis som för hand. col färgar hela bråket; dcol färgar
+     * BARA streck + nämnare (division i båda led — se REGEL "DIVISION I
+     * BÅDA LED SKRIVS MED BLÅPENNAN" i filhuvudet). */
+    function fracH(numS, denS, x0, yb, col, dcol) {
       var ybar = yb - 0.34 * F;
+      var bc = dcol || col || null;
       var nw = adv(numS), dw = adv(denS);
       var w = Math.max(nw, dw) + 0.3 * F;
       str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, col);
       pause(130);
       acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
-                  color: col || null });
+                  color: bc });
       pause(130);
       /* NÄMNARE MED EXPONENT (ma1c-1.7/1.8): en upphöjd siffra i nämnaren
        * hamnar 0,5·F över nämnarens baslinje och skär då bråkstrecket.
        * Nämnaren sänks därför en aning när den innehåller ett upphöjt
        * tecken (påverkar inte vanliga nämnare). */
       var dsink = denS.indexOf('^') >= 0 ? 0.20 * F : 0;
-      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, col);
+      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, bc);
       return x0 + w + 1.5;
     }
     /* BRÅK SOM EXPONENT (ma1c-1.8): en rationell exponent skrivs med rakt
@@ -5464,12 +5479,14 @@
       m = ekv.match(REL);
       if (!m) throw new Error('mkEkvOp: inget relationstecken i "' + ekv + '"');
       if (opS.charAt(0) === '/') {
-        /* division: båda led som bråk med divisorn i nämnaren */
+        /* division: båda led som bråk med divisorn i nämnaren. Det man
+         * GÖR är att dividera, så streck + nämnare skrivs med blåpennan
+         * i båda led — täljarna är det som redan stod där. */
         var d = opS.slice(1);
         y += (opt.dy == null ? 3.0 : opt.dy) * F;
-        xx = T.fracH(m[1], d, x0, y);
+        xx = T.fracH(m[1], d, x0, y, null, BLUE);
         xx = T.str(m[2], xx, y);
-        T.fracH(m[3], d, xx, y);
+        T.fracH(m[3], d, xx, y, null, BLUE);
         T.stepEnd();
         return y + (opt.dyRes == null ? 2.9 : opt.dyRes) * F;
       }
@@ -6748,9 +6765,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('4x', '4', padL + 30, y);
+      xx = T.fracH('4x', '4', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('28', '4', xx, y);
+      T.fracH('28', '4', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -6847,9 +6864,9 @@
       T.stepEnd();
     } else {
       y += 3.0 * F;
-      xx = T.fracH('7x', '7', padL + 30, y);
+      xx = T.fracH('7x', '7', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('24', '7', xx, y);
+      T.fracH('24', '7', xx, y, null, BLUE);
       T.stepEnd();
     }
 
@@ -6952,9 +6969,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('28', '7', padL + 30, y);
+      xx = T.fracH('28', '7', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('7x', '7', xx, y);
+      T.fracH('7x', '7', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -7036,9 +7053,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('74', '37', padL + 30, y);
+      xx = T.fracH('74', '37', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('37x', '37', xx, y);
+      T.fracH('37x', '37', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -7165,9 +7182,9 @@
       T.stepEnd();
     } else {
       y += 3.0 * F;
-      xx = T.fracH('130', '15', padL + 30, y);
+      xx = T.fracH('130', '15', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('15x', '15', xx, y);
+      T.fracH('15x', '15', xx, y, null, BLUE);
       T.stepEnd();
     }
 
@@ -7271,9 +7288,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('6x', '6', padL + 30, y);
+      xx = T.fracH('6x', '6', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('72', '6', xx, y);
+      T.fracH('72', '6', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -7757,9 +7774,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('5x', '5', padL + 30, y);
+      xx = T.fracH('5x', '5', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('4 300', '5', xx, y);
+      T.fracH('4 300', '5', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -8410,9 +8427,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('3x', '3', padL + 30, y);
+      xx = T.fracH('3x', '3', padL + 30, y, null, BLUE);
       xx = T.str('<', xx, y);
-      T.fracH('27', '3', xx, y);
+      T.fracH('27', '3', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -8471,9 +8488,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('-7x', '-7', padL + 30, y);
+      xx = T.fracH('-7x', '-7', padL + 30, y, null, BLUE);
       xx = T.str('≥', xx, y, BLUE);
-      T.fracH('63', '-7', xx, y);
+      T.fracH('63', '-7', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -8872,9 +8889,9 @@
       y += 2.1 * F;
     } else {
       y += 3.0 * F;
-      xx = T.fracH('9 000', '2,5', padL + 30, y);
+      xx = T.fracH('9 000', '2,5', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      T.fracH('2,5m', '2,5', xx, y);
+      T.fracH('2,5m', '2,5', xx, y, null, BLUE);
       T.stepEnd();
       y += 2.9 * F;
     }
@@ -11250,11 +11267,11 @@
       T.stepEnd();
     } else {
       y += 3.4 * F;
-      xx = T.fracH('3y', '3', padL + 30, y);
+      xx = T.fracH('3y', '3', padL + 30, y, null, BLUE);
       xx = T.str('=', xx, y);
-      xx = T.fracH('−2x', '3', xx, y);
+      xx = T.fracH('−2x', '3', xx, y, null, BLUE);
       xx = T.str('+', xx, y);
-      T.fracH('6', '3', xx, y);
+      T.fracH('6', '3', xx, y, null, BLUE);
       T.stepEnd();
     }
 

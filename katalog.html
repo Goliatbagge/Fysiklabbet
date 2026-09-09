@@ -1421,6 +1421,41 @@
                         continue;
                     }
                 }
+                // EN NAMNGIVEN REGEL I TAGET (påpekat 2026-09-09): en
+                // formelruta som räknar upp FLERA regler under var sin
+                // fetstilsrubrik ("Addition — …", "Subtraktion — …",
+                // ma1c-2.5) ska inte tändas i klump — eleven ska hinna läsa
+                // en regel innan nästa dyker upp. Rubriken och dess formel
+                // tänds SAMTIDIGT (samma princip som text + figur), och allt
+                // annat i rutan följer med den rubrik det står under.
+                // Rutor med EN formel och en där-lista rörs inte: de har
+                // redan byggts om till en .formel-layout med ett enda barn,
+                // och en ruta med bara en rubrik faller igenom till det
+                // vanliga ett-steg-per-ruta.
+                if (el.classList.contains('lab-block-formel')) {
+                    const subs = Array.from(el.children)
+                        .filter(c => !c.classList.contains('lab-block-title'));
+                    const arFormel = (c) => !!c.querySelector('.katex-display');
+                    const arRubrik = (c) => c.tagName === 'P' && !arFormel(c) &&
+                        c.firstElementChild && c.firstElementChild.tagName === 'STRONG' &&
+                        c.firstChild === c.firstElementChild;
+                    const regler = subs.filter((c, i) => arRubrik(c) &&
+                        subs[i + 1] && arFormel(subs[i + 1])).length;
+                    if (regler > 1) {
+                        el.classList.add('pres-block');
+                        blocks.push(el);
+                        for (const c of subs) {
+                            c.classList.add('pres-sub');
+                            const prev = steps[steps.length - 1];
+                            if (!arRubrik(c) && prev && prev.block === el) {
+                                (prev.twins || (prev.twins = [])).push(c);
+                                continue;
+                            }
+                            steps.push({ el: c, block: el });
+                        }
+                        continue;
+                    }
+                }
                 el.classList.add('pres-item');
                 // GENERELL REGEL: hänvisar stycket till figuren ("figuren
                 // nedan", "se bilden", "diagrammet visar") hör figuren till

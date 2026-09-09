@@ -31,7 +31,7 @@ från båda led:
 $$
 x + 36 = 53
 \qquad
-x + 36 - 36 = 53 - 36
+x + 36 \mathbin{\mathbf{-}} \mathbf{36} = 53 \mathbin{\mathbf{-}} \mathbf{36}
 \qquad
 x = 17
 $$
@@ -42,7 +42,7 @@ den till båda led:
 $$
 x - 24 = 72
 \qquad
-x - 24 + 24 = 72 + 24
+x - 24 \mathbin{\mathbf{+}} \mathbf{24} = 72 \mathbin{\mathbf{+}} \mathbf{24}
 \qquad
 x = 96
 $$
@@ -53,7 +53,7 @@ $$
 $$
 7x = 84
 \qquad
-\frac{7x}{7} = \frac{84}{7}
+\frac{7x}{\mathbf{7}} = \frac{84}{\mathbf{7}}
 \qquad
 x = 12
 $$
@@ -64,7 +64,7 @@ vi den med båda led:
 $$
 \frac{x}{13} = 6
 \qquad
-\frac{x}{13} \cdot 13 = 6 \cdot 13
+\frac{x}{13} \mathbin{\boldsymbol{\cdot}} \mathbf{13} = 6 \mathbin{\boldsymbol{\cdot}} \mathbf{13}
 \qquad
 x = 78
 $$

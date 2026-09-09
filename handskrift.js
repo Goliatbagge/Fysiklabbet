@@ -6706,11 +6706,11 @@
       padL + 30 + T.adv('7x=24')) + 0.9 * F;
 
     /* ---- a) 4x+7=35 ---- */
-    /* Första raden läggs under y=210: inställningsrutan är HÖGRE i
-     * ekvval-scener (tankarna + gruppen "Ekvationer") och täcker på
-     * mobil allt med y < ~210 långt in mot arkets mitt (se OBS i
-     * mobilzon-regeln i filhuvudet). */
-    y = 210;
+    /* Raderna i a) är smala (x < 420 även med väggen), så de går fria
+     * från inställningsrutans mobilzon och lösningen kan börja högst
+     * upp på arket som i andra scener — y=210 lämnade en omotiverat
+     * stor tom yta överst (påpekat 2026-09-09). */
+    y = 92;
     T.str('a) 4x+7=35', padL, y);
     T.stepEnd();
 

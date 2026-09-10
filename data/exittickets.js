@@ -10671,6 +10671,22 @@ window.EXITTICKETS = {
       'Det hade krävt en SANN likhet (som $0 = 0$) efter att variablerna försvunnit.',
     ],
   },
+  {
+    question: 'Ekvationen $(1 + 4x)(3x - 2) = x(12x - 6)$ utvecklas till $3x - 2 + 12x^2 - 8x = 12x^2 - 6x$. Vad händer med $12x^2$?',
+    choices: [
+      'Termen finns i båda led och försvinner när $12x^2$ subtraheras från båda led',
+      'Termen måste flyttas till högerledet och ger en andragradsekvation',
+      'Ekvationen saknar lösning eftersom $x^2$ förekommer',
+      'Man dividerar båda led med $12x^2$',
+    ],
+    correct: 0,
+    why: [
+      'Kvar blir $-5x - 2 = -6x$, en vanlig förstagradsekvation med lösningen $x = 2$.',
+      'Termen står redan i båda led med samma koefficient, så den tar ut sig själv i stället för att flyttas.',
+      'Att $x^2$ dyker upp betyder ingenting i sig. Det avgörande är att termen finns lika i båda led.',
+      'Division med en variabelterm är riskabel (den kan vara 0) och behövs inte här.',
+    ],
+  },
 ],
 
 'ma1c-2.7': [

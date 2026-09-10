@@ -20124,33 +20124,29 @@ $$ 7 - x^2 - 2x + 8 = 15 - x^2 - 2x $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Lös ekvationen $(2x + 1)(3x - 4) = 6x(x - 2)$. Svara i decimalform med två decimaler.`,
-            answer: { value: 0.57, unit: '', tol: 0.02 },
-            solution: `**Insikten:** utveckla båda led — $x^2$-termerna tar ut varandra och kvar blir en vanlig förstagradsekvation.
+            question: `Utveckla och förenkla $(2x - 1)(x + 3) - (x - 2)(2x + 5)$. Vilket värde har det förenklade uttrycket för $x = 10$?`,
+            answer: { value: 47, unit: '' },
+            solution: `**Insikten:** utveckla varje produkt för sig, och behåll en parentes runt den andra produkten tills alla tecken är bytta.
 
-Utveckla vänsterledet:
+Utveckla den första produkten:
 
-$$ (2x + 1)(3x - 4) = 6x^2 - 8x + 3x - 4 = 6x^2 - 5x - 4 $$
+$$ (2x - 1)(x + 3) = 2x^2 + 6x - x - 3 = 2x^2 + 5x - 3 $$
 
-Utveckla högerledet:
+Utveckla den andra produkten:
 
-$$ 6x(x - 2) = 6x^2 - 12x $$
+$$ (x - 2)(2x + 5) = 2x^2 + 5x - 4x - 10 = 2x^2 + x - 10 $$
 
-Ekvationen blir
+Sätt ihop, byt tecken på hela den andra produkten och förenkla:
 
-$$ 6x^2 - 5x - 4 = 6x^2 - 12x $$
+$$ 2x^2 + 5x - 3 - (2x^2 + x - 10) = 2x^2 + 5x - 3 - 2x^2 - x + 10 = 4x + 7 $$
 
-Subtrahera $6x^2$ från båda led:
+Kontroll med $x = 10$ i det ursprungliga uttrycket: $(20 - 1)(10 + 3) - (10 - 2)(20 + 5) = 19 \\cdot 13 - 8 \\cdot 25 = 247 - 200 = 47$.
 
-$$ -5x - 4 = -12x $$
+Det förenklade uttrycket ger $4 \\cdot 10 + 7 = 47$. Stämmer.
 
-Addera $12x$ till båda led och därefter 4:
+**Svar:** $4x + 7$, som för $x = 10$ har värdet 47
 
-$$ 7x - 4 = 0 \\qquad 7x = 4 \\qquad x = \\frac{4}{7} \\approx 0{,}57 $$
-
-**Svar:** $x = \\dfrac{4}{7} \\approx 0{,}57$
-
-**Generell slutsats:** när båda led innehåller samma $x^2$-term försvinner den — ekvationen är i själva verket linjär. Utveckla alltid fullständigt innan du drar slutsatser om ekvationens typ.`,
+**Generell slutsats:** när två utvecklade produkter subtraheras kan $x^2$-termerna ta ut varandra, så att ett uttryck som ser ut att vara av andra graden i själva verket är linjärt. Kontrollera alltid genom att sätta in ett enkelt värde i både det ursprungliga och det förenklade uttrycket.`,
         },
     ],
 
@@ -20491,6 +20487,36 @@ vilket är falskt — ingen lösning finns.
 **Svar:** $a = 6$
 
 **Generell slutsats:** ekvationen $kx = m$ saknar lösning när $k = 0$ men $m \\neq 0$. Det är exakt det som händer när båda led har samma variabelterm men olika konstantterm.`,
+        },
+        {
+            level: 3,
+            question: `Lös ekvationen $(2x + 1)(3x - 4) = 6x(x - 2)$. Svara i decimalform med två decimaler.`,
+            answer: { value: 0.57, unit: '', tol: 0.02 },
+            solution: `**Insikten:** utveckla båda led — $x^2$-termerna tar ut varandra och kvar blir en vanlig förstagradsekvation.
+
+Utveckla vänsterledet:
+
+$$ (2x + 1)(3x - 4) = 6x^2 - 8x + 3x - 4 = 6x^2 - 5x - 4 $$
+
+Utveckla högerledet:
+
+$$ 6x(x - 2) = 6x^2 - 12x $$
+
+Ekvationen blir
+
+$$ 6x^2 - 5x - 4 = 6x^2 - 12x $$
+
+Subtrahera $6x^2$ från båda led:
+
+$$ -5x - 4 = -12x $$
+
+Addera $12x$ till båda led och därefter 4:
+
+$$ 7x - 4 = 0 \\qquad 7x = 4 \\qquad x = \\frac{4}{7} \\approx 0{,}57 $$
+
+**Svar:** $x = \\dfrac{4}{7} \\approx 0{,}57$
+
+**Generell slutsats:** när båda led innehåller samma $x^2$-term försvinner den — ekvationen är i själva verket linjär. Utveckla alltid fullständigt innan du drar slutsatser om ekvationens typ.`,
         },
     ],
 

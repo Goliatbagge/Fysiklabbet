@@ -134,42 +134,6 @@ termerna med störst exponent först, men inget måste).
 :::
 :::
 
-::: exempel "Exempel 3 — Ekvation med parentesmultiplikation"
-**Lös ekvationen $(1 + 4x)(3x - 2) = x(12x - 6)$.**
-
-::: handskrift
-typ: parentesekv
-:::
-
-::: textlosning
-Utvecklar parenteserna:
-
-$$
-3x - 2 + 12x^2 - 8x = 12x^2 - 6x
-$$
-
-Subtraherar $12x^2$ från båda led och förenklar:
-
-$$
--5x - 2 = -6x
-$$
-
-Adderar $6x$ till båda led och förenklar:
-
-$$
-x - 2 = 0
-$$
-
-Adderar 2 till båda led och förenklar:
-
-$$
-x = 2
-$$
-
-**Svar:** $x = 2$
-:::
-:::
-
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Distributiva lagen"

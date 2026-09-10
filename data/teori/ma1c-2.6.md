@@ -127,6 +127,47 @@ Detta är falskt eftersom $-12 \neq 63$. Alltså saknar ekvationen lösningar.
 :::
 :::
 
+Ibland måste båda led utvecklas innan variablerna kan samlas. Då kan
+ekvationen först se ut att innehålla $x^2$, men finns samma $x^2$-term i
+båda led tar den ut sig själv när den subtraheras bort, och kvar blir en
+vanlig förstagradsekvation.
+
+::: exempel "Exempel 2 — Ekvation med parentesmultiplikation"
+**Lös ekvationen $(1 + 4x)(3x - 2) = x(12x - 6)$.**
+
+::: handskrift
+typ: parentesekv
+:::
+
+::: textlosning
+Utvecklar parenteserna:
+
+$$
+3x - 2 + 12x^2 - 8x = 12x^2 - 6x
+$$
+
+Subtraherar $12x^2$ från båda led och förenklar:
+
+$$
+-5x - 2 = -6x
+$$
+
+Adderar $6x$ till båda led och förenklar:
+
+$$
+x - 2 = 0
+$$
+
+Adderar 2 till båda led och förenklar:
+
+$$
+x = 2
+$$
+
+**Svar:** $x = 2$
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Variabler i båda led"
@@ -136,7 +177,8 @@ Detta är falskt eftersom $-12 \neq 63$. Alltså saknar ekvationen lösningar.
 :::
 
 ::: sampunkt "Arbetsgång"
-1. Utveckla eventuella parenteser.
+1. Utveckla eventuella parenteser. Samma $x^2$-term i båda led tar ut
+   sig själv.
 2. Förenkla varje led för sig.
 3. Samla variabeltermerna i ena ledet.
 4. Samla konstanttermerna i det andra.

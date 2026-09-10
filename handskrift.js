@@ -17731,8 +17731,6 @@
     function bubble(x, y, w, lines) {
       return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
     }
-    var FIGB_Y = 366;
-    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
     function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
     function tanke(b) {
       acts.push({ kind: 'show', obj: b });
@@ -17797,50 +17795,13 @@
     }
     function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
 
-    /* --- figurens geometri --- */
-    var cx = 215, cy = 168, R = 104;
-    var sqT = { x: 215, y: 64 };              /* vikten i övre läget */
-    var sqB = { x: 215, y: 272 };             /* vikten i nedre läget */
-
-    /* ---- steg 1: rita det vi vet — cirkelbanan, snöret, vikterna ---- */
-    var b1 = figurBubble(262, [
-      [['Ritar cirkelbanan med vikten i']],
-      [['översta och nedersta läget.']],
-      [['Snöret är banans radie, 80 cm.']]
-    ]);
-    tanke(b1);
-    /* streckad cirkelbana */
-    (function () {
-      var pts = [];
-      for (var i = 0; i <= 72; i++) {
-        var t = (i / 72) * Math.PI * 2 - Math.PI / 2;
-        pts.push([cx + Math.cos(t) * (R + rnd(-1, 1)),
-                  cy + Math.sin(t) * (R + rnd(-1, 1))]);
-      }
-      for (var k = 0; k + 2 < pts.length; k += 4) {
-        acts.push({ kind: 'stroke', pts: pts.slice(k, k + 3) });
-      }
-    })();
-    pause(140);
-    acts.push({ kind: 'stroke', pts: dotPts(cx, cy) });   /* centrum */
-    pause(140);
-    line([cx, cy], [sqT.x, sqT.y + 9]);       /* snöret upp/ned */
-    line([cx, cy], [sqB.x, sqB.y - 9]);
-    pause(140);
-    rect(sqT.x - 9, sqT.y - 9, sqT.x + 9, sqT.y + 9);
-    rect(sqB.x - 9, sqB.y - 9, sqB.x + 9, sqB.y + 9);
-    pause(140);
-    placeString('övre läget', 240, 60, s * 0.55, F * 0.55, acts);
-    placeString('nedre läget', 240, 290, s * 0.55, F * 0.55, acts);
-    pause(140);
-    /* radien som streckad vågrät linje, etiketten UTANFÖR cirkeln till
-     * höger (fri yta — inne i cirkeln krockar den med kraftpilarna och
-     * nära randen med cirkelstrecken) */
-    dash([cx + 8, cy], [cx + R, cy]);
-    placeString('r=80 cm', cx + R + 12, cy + 6, s * 0.55, F * 0.55, acts, BLUE);
-    stepEnd();
-
-    var y = 430;
+    /* INGEN avritning av uppgiftsfiguren (användarönskemål 2026-09-10):
+     * a) och b) får varsin kraftfigur intill sina rader, så en inledande
+     * kopia av banfiguren tillför ingenting. Första raden ligger så långt
+     * ned att a):s kraftfigur uppe till höger hamnar UNDER inställnings-
+     * rutans mobilzon (inget bläck med x > 310 ovanför y = 150 — figurens
+     * överkant ligger vid y + 15 − 30). */
+    var y = 176;
     var adv = 1.7 * F;
     var bw = 292;
 
@@ -17927,7 +17888,7 @@
     lbl('F_G', kfx + 26, kyA + 32);
     stepEnd();
 
-    var bF1 = bubble(120, bubbleTop(370), bw, [
+    var bF1 = bubble(120, kyA + 30, bw, [
       [['Centripetalkraften är den']],
       [['resulterande kraften in mot']],
       [['mitten: ', 0], ['F', 1], [' = ', 0], ['m', 1], [' · ', 0],

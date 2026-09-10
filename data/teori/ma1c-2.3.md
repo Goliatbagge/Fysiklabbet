@@ -75,6 +75,30 @@ $$
 :::
 :::
 
+::: härledning "OBS — Distributiva lagen gäller bara plus och minus"
+Distributiva lagen handlar om en faktor framför en parentes vars termer
+**adderas eller subtraheras**. Står det i stället en **multiplikation**
+inuti parentesen finns det inga termer att fördela faktorn på. Då är hela
+parentesen en enda produkt, och faktorn framför multipliceras in **en
+gång**:
+
+$$
+2(3x) = 2 \cdot 3 \cdot x = 6x
+$$
+
+Ett vanligt fel är att multiplicera faktorn med varje faktor inuti
+parentesen, som om de vore termer:
+
+$$
+2(3x) \neq 2 \cdot 3 \cdot 2x = 12x
+$$
+
+Kontrollera med ett tal: för $x = 1$ är $2(3 \cdot 1) = 6$, inte 12.
+
+Fråga dig alltså alltid: står det plus eller minus inuti parentesen? Bara
+då ska faktorn in i **varje** term.
+:::
+
 När två parentespar multipliceras med varandra ska den **första termen** i
 den **första parentesen** multipliceras med **alla termer i den andra
 parentesen**. Därefter ska den **andra termen** i den **första parentesen**
@@ -140,6 +164,7 @@ termerna med störst exponent först, men inget måste).
 - $a(b + c) = ab + ac$
 - Faktorn framför parentesen multipliceras med **varje** term inuti.
 - Att skriva om ett uttryck utan parenteser kallas att **utveckla** det.
+- Gäller bara plus och minus i parentesen: $2(3x) = 6x$, inte $12x$.
 :::
 
 ::: sampunkt "Glöm ingen term"

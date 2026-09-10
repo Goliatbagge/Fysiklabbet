@@ -409,7 +409,12 @@ Så här bygger du scenen:
    efter sin båge; vid två parenteser ritas bågarna från den andra termen
    UNDERIFRÅN, `under: true` i `mkMultIn`, med målraden 3,1·F ned; och
    innan likadana termer slås ihop ringas de in i raden ovanför,
-   `mkSamla`). **Läs filhuvudet innan
+   `mkSamla`). **Bryts en faktor ut skrivs den öppnande parentesen
+   först, `=9x(`, sedan termerna en i taget, och den stängande
+   parentesen FÖRST med sista termen, `-2)`, aldrig i förväg med en
+   tom lucka** (så gör man för hand, man vet inte hur lång parentesen
+   blir; användarkrav 2026-09-10, REGEL "PARENTESEN STÄNGS SIST" i
+   filhuvudet). **Läs filhuvudet innan
    du skriver en ny scen** — kopiera rytmen från en närliggande scen
    (`layoutParallax`, `layoutVinkeldiameter`, `layoutSchwarzschild`).
    **Kraftekvation i en cirkelrörelse?** Rita kraftsituationen intill

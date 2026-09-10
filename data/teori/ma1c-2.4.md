@@ -35,12 +35,14 @@ Därefter tittar vi på variablerna. Alla termer innehåller variabeln $x$.
 Då kan vi bryta ut den *minsta* potensen av $x$. Alltså kan vi bryta ut
 $x$.
 
-Eftersom vi kan bryta ut både 9 och $x$, så bryter vi ut $9x$. Sedan sätter
-vi en parentes efteråt och räknar "distributiva lagen baklänges" för att
-uttrycket ska bli detsamma som det ursprungliga:
+Eftersom vi kan bryta ut både 9 och $x$, så bryter vi ut $9x$. Sedan
+öppnar vi en parentes efteråt och räknar "distributiva lagen baklänges"
+för att uttrycket ska bli detsamma som det ursprungliga. Parentesen
+stänger vi först när alla termer är skrivna, eftersom vi inte vet i
+förväg hur lång den blir:
 
 $$
-9x(\phantom{3x - 2})
+9x(\phantom{3x - 2}
 $$
 
 Vi tänker "$9x$ gånger något ska bli $27x^2$". Det måste vara $3x$. Då
@@ -215,35 +217,37 @@ delbar med 3 tecknar vi summan med en variabel, förenklar den och
 faktoriserar. Kan vi bryta ut faktorn 3 är saken klar.
 
 ::: exempel "Exempel 3 — Visa att en summa är delbar med ett tal"
-**a) Visa att summan av tre på varandra följande heltal alltid är delbar med 3.<br>b) Visa att summan av två på varandra följande udda tal alltid är delbar med 4.**
+**a) Visa att summan av fyra på varandra följande heltal alltid är ett jämnt tal.<br>b) Visa att summan av två på varandra följande udda tal alltid är delbar med 4.**
 
 ::: handskrift
 typ: delbarhet
 :::
 
 ::: textlosning
-**a)** Vi kallar det minsta av talen $n$. De två följande talen är då
-$n + 1$ och $n + 2$. Vi tecknar summan, tar bort parenteserna (plus
-framför en parentes ändrar inga tecken) och slår ihop likadana termer:
+**a)** Vi kallar det minsta av talen $n$. De tre följande talen är då
+$n + 1$, $n + 2$ och $n + 3$. Vi tecknar summan, tar bort parenteserna
+(plus framför en parentes ändrar inga tecken) och slår ihop likadana
+termer:
 
 $$
-n + (n + 1) + (n + 2) = n + n + 1 + n + 2 = 3n + 3
+n + (n + 1) + (n + 2) + (n + 3) = 4n + 6
 $$
 
-Både $3n$ och 3 har faktorn 3, som vi bryter ut:
+Ett jämnt tal är ett tal som kan skrivas som 2 gånger ett heltal. Både
+$4n$ och 6 har faktorn 2, som vi bryter ut:
 
 $$
-3n + 3 = 3(n + 1)
+4n + 6 = 2(2n + 3)
 $$
 
-Eftersom $n$ är ett heltal är även $n + 1$ ett heltal. Summan är alltså 3
-gånger ett heltal, och därmed delbar med 3, vilket tal $n$ än är.
+Eftersom $n$ är ett heltal är även $2n + 3$ ett heltal. Summan är alltså
+2 gånger ett heltal, och därmed ett jämnt tal, vilket tal $n$ än är.
 
-Tecknar vi i stället talen $n - 1$, $n$ och $n + 1$ blir summan
-$3n$ direkt, vilket säger samma sak.
+Faktoriseringen visar dessutom att summan aldrig är delbar med 4:
+$2n + 3$ är ett udda tal, så någon mer faktor 2 finns inte att bryta ut.
 
-**Svar:** Summan kan skrivas $3(n + 1)$ och är därför alltid delbar
-med 3.
+**Svar:** Summan kan skrivas $2(2n + 3)$ och är därför alltid ett jämnt
+tal.
 
 **b)** Ett udda tal tecknas $2k + 1$. Nästa udda tal ligger två steg
 längre fram, alltså $2k + 1 + 2 = 2k + 3$. Vi tecknar summan och förenklar:
@@ -308,6 +312,7 @@ med 4.
 ::: sampunkt "Visa delbarhet"
 - Teckna, förenkla och faktorisera. Syns faktorn är summan delbar med
   den.
-- $n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1)$: alltid delbar med 3.
+- $n + (n + 1) + (n + 2) + (n + 3) = 4n + 6 = 2(2n + 3)$: alltid ett
+  jämnt tal.
 :::
 :::

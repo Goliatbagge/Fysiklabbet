@@ -155,6 +155,19 @@
  * uttrycket visas EFTER pausen, aldrig före: då avslöjar den svaret.
  * Referens: layoutTecknaalder (ma1c-2.1 ex 1).
  *
+ * ⚠️ REGEL (PARENTESEN STÄNGS SIST NÄR EN FAKTOR BRYTS UT, användarkrav
+ * 2026-09-10): när ett uttryck faktoriseras skriver pennan den utbrutna
+ * faktorn och en ÖPPNANDE parentes — "=9x(" — och fyller sedan på
+ * parentesen term för term. Den STÄNGANDE parentesen skrivs FÖRST efter
+ * den sista termen, i samma klicksteg som den ("-2)"), aldrig i förväg
+ * med en tom lucka emellan. Så gör man för hand på riktigt: man vet inte
+ * i förväg hur lång parentesen blir. Att rita ")" först och sedan fylla
+ * luckan ser ut som om man redan visste svaret. Gäller ALLA scener där
+ * något bryts ut (tal, variabel eller ett helt parentesuttryck), i alla
+ * kurser. Skriv alltså '=9x(' → stepEnd → '3x' → stepEnd → '-2)' med
+ * T.str direkt efter varandra, utan någon lucke-helper.
+ * Referensimpl: layoutFaktoriseraut, layoutFaktoriseraparentes.
+ *
  * REGEL (INSÄTTNING): varje gång något SÄTTS IN i något annat — ett
  * värde i en funktion/formel, ett uttryck i en ekvation, mätvärden i ett
  * samband — ska handen göra en hjälpande gest FÖRE den nya raden skrivs:
@@ -6395,22 +6408,13 @@
   /* ---------------- scen: faktorisera (ma1c-2.4 ex 1) -----------------
    * a)–e). Arbetsgången är alltid densamma: (1) största gemensamma tal,
    * (2) minsta potensen av varje variabel, (3) skriv den utbrutna
-   * faktorn med en TOM parentes efter och fyll på den term för term
-   * ("distributiva lagen baklänges"). Den tomma parentesen ritas på
-   * riktigt — det är så man gör för hand, och den visar att man tänker
-   * en term i taget. */
+   * faktorn med en ÖPPNANDE parentes efter och fyll på term för term
+   * ("distributiva lagen baklänges"); den stängande parentesen skrivs
+   * först med sista termen (se REGEL: PARENTESEN STÄNGS SIST). Så gör
+   * man för hand, och det visar att man tänker en term i taget. */
   function layoutFaktoriseraut(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
-
-    /* skriv "=<faktor>(" … ")" med en lucka som rymmer `innehall`, och
-     * returnera x där luckan börjar */
-    function tomParentes(faktor, innehall, x0, yb) {
-      var x = T.str('=' + faktor + '(', x0, yb);
-      var lucka = T.adv(innehall) + 0.16 * F;
-      T.str(')', x + lucka, yb);
-      return { x: x, slut: x + lucka + T.adv(')') };
-    }
 
     /* ---- a) 27x²-18x ---- */
     y = 74;
@@ -6430,7 +6434,7 @@
       [['brytas ut. Alltså 9x.']]
     ]);
     y += 2.3 * F;
-    var pa = tomParentes('9x', '3x-2', padL + 30, y);
+    var xa = T.str('=9x(', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6439,7 +6443,7 @@
       [['3x, för 9·3=27 och x·x']],
       [['blir x i kvadrat.']]
     ]);
-    var xa = T.str('3x', pa.x, y);
+    xa = T.str('3x', xa, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6447,9 +6451,10 @@
       [['kommer ett minustecken.']],
       [['Och 9x']],
       [['gånger vad blir 18x? Jo']],
-      [['2.']]
+      [['2. Sedan är parentesen']],
+      [['klar och kan stängas.']]
     ]);
-    T.str('-2', xa, y);
+    T.str('-2)', xa, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -6470,7 +6475,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    var pb = tomParentes('5x^3', '1+4x^2', padL + 30, y);
+    var xb = T.str('=5x^3(', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6480,7 +6485,7 @@
       [['ettan, utan den']],
       [['försvinner en hel term!']]
     ]);
-    var xb = T.str('1', pb.x, y);
+    xb = T.str('1', xb, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6489,7 +6494,7 @@
       [['kvadrat, för 5·4=20 och']],
       [['exponenterna 3+2 blir 5.']]
     ]);
-    T.str('+4x^2', xb, y);
+    T.str('+4x^2)', xb, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -6575,20 +6580,12 @@
    * a) 5(9x-6): faktorn 5 är redan utbruten, men "så långt som möjligt"
    * betyder att man tittar in i parentesen också — 9 och 6 har 3
    * gemensamt. b) 3(x+2)-x(x+2): samma parentes i båda termerna, så HELA
-   * parentesen bryts ut som en gemensam faktor, med samma tomma parentes
-   * efter som i exempel 1 (fylls på term för term). */
+   * parentesen bryts ut som en gemensam faktor: öppnande parentes efter,
+   * fylls på term för term och stängs först med sista termen, som i
+   * exempel 1 (se REGEL: PARENTESEN STÄNGS SIST). */
   function layoutFaktoriseraparentes(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
-
-    /* skriv "=<faktor>(" … ")" med en lucka som rymmer `innehall`, och
-     * returnera x där luckan börjar (samma helper som i exempel 1) */
-    function tomParentes(faktor, innehall, x0, yb) {
-      var x = T.str('=' + faktor + '(', x0, yb);
-      var lucka = T.adv(innehall) + 0.16 * F;
-      T.str(')', x + lucka, yb);
-      return { x: x, slut: x + lucka + T.adv(')') };
-    }
 
     /* ---- a) 5(9x-6) ---- */
     y = 92;
@@ -6629,7 +6626,7 @@
       [['i exempel 1.']]
     ]);
     y += 2.3 * F;
-    var pb = tomParentes('(x+2)', '3-x', padL + 30, y);
+    var xb = T.str('=(x+2)(', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -6637,16 +6634,17 @@
       [['första termen 3(x+2)?']],
       [['Jo 3.']]
     ]);
-    var xb = T.str('3', pb.x, y);
+    xb = T.str('3', xb, y);
     T.stepEnd();
 
     tanke(y, [
       [['Efter första termen']],
       [['kommer ett minustecken.']],
       [['(x+2) gånger vad blir']],
-      [['x(x+2)? Jo x.']]
+      [['x(x+2)? Jo x. Sedan']],
+      [['stänger jag parentesen.']]
     ]);
-    T.str('-x', xb, y);
+    T.str('-x)', xb, y);
     T.stepEnd();
 
     y += 2.0 * F;
@@ -6658,32 +6656,33 @@
   }
 
   /* ---------------- scen: visa delbarhet (ma1c-2.4 ex 3) --------------
-   * a) tre på varandra följande heltal n, n+1, n+2: summan 3n+3=3(n+1).
-   * b) två på varandra följande udda tal 2k+1 och 2k+3: summan
-   * 4k+4=4(k+1). Talen TECKNAS först (rubrik, tankepaus, uttryck — se
-   * REGEL TANKEPAUS EFTER RUBRIK), sedan summeras de: likadana termer
-   * ringas in innan de slås ihop (mkSamla), den gemensamma faktorn bryts
-   * ut och slutsatsen skrivs på svarsraden. */
+   * a) fyra på varandra följande heltal n, n+1, n+2, n+3: summan
+   * 4n+6=2(2n+3), alltså jämn. b) två på varandra följande udda tal 2k+1
+   * och 2k+3: summan 4k+4=4(k+1). Talen TECKNAS först (rubrik,
+   * tankepaus, uttryck — se REGEL TANKEPAUS EFTER RUBRIK), sedan
+   * summeras de: likadana termer ringas in innan de slås ihop (mkSamla),
+   * den gemensamma faktorn bryts ut (öppnande parentes först, stängs med
+   * sista termen) och slutsatsen skrivs på svarsraden. */
   function layoutDelbarhet(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, yS;
     var tanke = mkTanke(T), samla = mkSamla(T);
     var TANKPAUS = 900;
 
-    /* ---- a) tre på varandra följande heltal ---- */
+    /* ---- a) fyra på varandra följande heltal ---- */
     /* rubriken är kort och håller sig väl utanför inställningsrutans
      * mobilzon (x > 420, y < 150); talen skrivs på raden under */
     y = 92;
-    T.str('a) Tre följande heltal:', padL, y);
+    T.str('a) Fyra följande tal:', padL, y);
     T.stepEnd();
     T.pause(TANKPAUS);
     tanke(y, [
       [['Det minsta talet kallar']],
-      [['jag n. Nästa heltal är']],
-      [['ett steg större, n+1, och']],
-      [['det tredje n+2.']]
+      [['jag n. De följande är ett']],
+      [['steg större i taget: n+1,']],
+      [['n+2 och n+3.']]
     ]);
     y += 2.1 * F;
-    T.str('n, n+1, n+2', padL + 30, y);
+    T.str('n, n+1, n+2, n+3', padL + 30, y);
     T.stepEnd();
 
     /* summan skrivs i segment så att n-termerna och konstanterna kan
@@ -6702,6 +6701,10 @@
     var n3 = xx; xx = T.str('n', xx, y);   var n3b = xx;
     xx = T.str('+', xx, y);
     var e2 = xx; xx = T.str('2', xx, y);   var e2b = xx;
+    xx = T.str(')+(', xx, y);
+    var n4 = xx; xx = T.str('n', xx, y);   var n4b = xx;
+    xx = T.str('+', xx, y);
+    var e3 = xx; xx = T.str('3', xx, y);   var e3b = xx;
     T.str(')', xx, y);
     T.stepEnd();
 
@@ -6709,35 +6712,47 @@
       [['Plus framför parenteserna']],
       [['ändrar inga tecken, så de']],
       [['kan tas bort. Sedan slår']],
-      [['jag ihop: n+n+n=3n och']],
-      [['1+2=3.']]
+      [['jag ihop: n+n+n+n=4n och']],
+      [['1+2+3=6.']]
     ]);
     y += 2.3 * F;
     xx = T.str('=', padL + 30, y);
     samla(xx, y, [
-      { ringar: [[n1, n1b, yS], [n2, n2b, yS], [n3, n3b, yS]], skriv: '3n' },
-      { ringar: [[e1, e1b, yS], [e2, e2b, yS]], skriv: '+3' }
+      { ringar: [[n1, n1b, yS], [n2, n2b, yS], [n3, n3b, yS], [n4, n4b, yS]],
+        skriv: '4n' },
+      { ringar: [[e1, e1b, yS], [e2, e2b, yS], [e3, e3b, yS]], skriv: '+6' }
     ]);
     T.stepEnd();
 
+    /* faktorn bryts ut: öppnande parentes först, stängs med sista termen
+     * (se REGEL: PARENTESEN STÄNGS SIST) */
     tanke(y, [
-      [['3n och 3 har 3 som']],
-      [['gemensam faktor. Den']],
-      [['bryter jag ut.']]
+      [['Ett jämnt tal är 2 gånger']],
+      [['ett heltal. 4n och 6 har']],
+      [['2 som gemensam faktor,']],
+      [['så jag bryter ut 2.']]
     ]);
     y += 2.1 * F;
-    T.str('=3(n+1)', padL + 30, y);
+    xx = T.str('=2(', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
-      [['n är ett heltal, så n+1']],
+      [['2 gånger vad blir 4n? Jo']],
+      [['2n. Och 2 gånger vad blir']],
+      [['6? Jo 3. Sedan stänger']],
+      [['jag parentesen.']]
+    ]);
+    T.str('2n+3)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['n är ett heltal, så 2n+3']],
       [['är också ett heltal.']],
-      [['Summan är 3 gånger ett']],
-      [['heltal, alltså delbar']],
-      [['med 3.']]
+      [['Summan är 2 gånger ett']],
+      [['heltal, alltså jämn.']]
     ]);
     y += 2.0 * F;
-    xe = T.str('Svar: 3(n+1) är delbart med 3', padL, y);
+    xe = T.str('Svar: 2(2n+3) är ett jämnt tal', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -6802,7 +6817,16 @@
       [['bryter jag ut.']]
     ]);
     y += 2.1 * F;
-    T.str('=4(k+1)', padL + 30, y);
+    xx = T.str('=4(', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['4 gånger vad blir 4k? Jo']],
+      [['k. Och 4 gånger vad blir']],
+      [['4? Jo 1. Sedan stänger']],
+      [['jag parentesen.']]
+    ]);
+    T.str('k+1)', xx, y);
     T.stepEnd();
 
     tanke(y, [

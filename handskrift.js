@@ -17820,33 +17820,46 @@
     var adv = 1.7 * F;
     var bw = 292;
 
-    /* ---- a) riktningarna i övre läget ---- */
-    /* KRAFTFIGUR (se REGEL): centripetalkraften först, streckad, sedan de
-     * verkliga krafterna. Skalenligt med 10,5 px/N: F_C = 9,0 N → 95 px,
-     * F_S = 7,0 N → 74 px, F_G = 1,96 N → 21 px, och 74 + 21 = 95. */
-    var bA = figurBubble(262, [
-      [['a) Mitten är rakt under vikten,']],
-      [['så centripetalkraften pekar']],
-      [['nedåt. Ritar den först, streckad.']]
-    ]);
-    tanke(bA);
-    dashArrow([205, 64], [205, 159], BLUE);   /* F_C, 9,0 N */
-    placeString('F_C', 171, 122, s * 0.55, F * 0.55, acts, BLUE);
-    stepEnd();
-
-    var bA2 = figurBubble(262, [
-      [['Spännkraften och tyngdkraften']],
-      [['pekar BÅDA nedåt här. Tillsammans']],
-      [['ska de bli resultanten.']]
-    ]);
-    tanke(bA2);
-    arrow([215, 76], [215, 150], BLUE);       /* F_S längs snöret, 7,0 N */
-    placeString('F_S', 233, 140, s * 0.55, F * 0.55, acts, BLUE);
-    pause(180);
-    acts.push({ kind: 'stroke', pts: dotPts(225, 64), color: BLUE });
-    arrow([225, 64], [225, 85], BLUE);        /* F_G från tyngdpunkten, 1,96 N */
-    placeString('F_G', 233, 98, s * 0.55, F * 0.55, acts, BLUE);
-    stepEnd();
+    /* ---- KRAFTFIGURER I HÖGERMARGINALEN (kfx) ----
+     * EN FIGUR PER DELUPPGIFT (användarönskemål 2026-09-10): a) och b)
+     * ritades förut i den stora figuren, med samma pilar för båda
+     * lägena. Då blev b):s centripetalkraft (49 N) KORTARE än a):s
+     * (9,0 N), eftersom pilarna inte kunde vara skalenliga mellan
+     * lägena utan att bli 500 px långa. Nu får varje deluppgift en egen
+     * liten figur intill sina räknerader (samma mönster som layoutGungan,
+     * se REGEL KRAFTFIGUR VID VARJE KRAFTEKVATION), och skalan gäller
+     * INOM figuren: a) 10,5 px/N, b) kvalitativt som teorifiguren, där
+     * tyngdkraften är förstorad för att alls synas. Mellan figurerna är
+     * b):s pilar de längre, som de ska. Den stora figuren visar bara
+     * banan, snöret och vikterna.
+     * Figuren ritas till höger om formel-, klammer- och insättningsraden
+     * (bläck till x ≈ 470) — INTE i höjd med kraftekvationen, vars rad
+     * "F_S+F_G=F_C⟺F_S=F_C−F_G" når till x ≈ 655 och skulle krocka. */
+    var kfx = 590;
+    /* en bit av cirkelbanan genom vikten: sign +1 i övre läget (banan
+     * kröker nedåt mot mitten), −1 i nedre (kröker uppåt) */
+    function banbit(cy0, sign) {
+      var pts = [], i, dx;
+      for (i = 0; i <= 16; i++) {
+        dx = -44 + i * (88 / 16);
+        pts.push([kfx + dx, cy0 + sign * 12 * (dx / 44) * (dx / 44)]);
+      }
+      /* banstrecken hoppar över blocket, annars syns de genom det */
+      for (i = 0; i + 1 < pts.length; i += 2) {
+        if (Math.min(Math.abs(pts[i][0] - kfx),
+                     Math.abs(pts[i + 1][0] - kfx)) >= 21) {
+          line(pts[i], pts[i + 1]);
+        }
+      }
+      /* vikten som ett block brett nog att bära alla tre pilfötterna
+       * (som gungsitsen i layoutGungan) — ingen kraft ska se ut att
+       * angripa vid sidan av kroppen */
+      rect(kfx - 22, cy0 - 8, kfx + 22, cy0 + 8);
+    }
+    function lblW(str) { return stringAdvance(str, s * 0.55, F * 0.55); }
+    function lbl(str, x, yb) {
+      placeString(str, x, yb, s * 0.55, F * 0.55, acts, BLUE);
+    }
 
     var bF1 = bubble(120, bubbleTop(370), bw, [
       [['Centripetalkraften är den']],
@@ -17886,6 +17899,40 @@
     xx = placeString('F_C=', padL, y, s, F, acts);
     var xe1 = fracH('0,200·6,0^2', '0,80', xx, y);
     placeString('=9,0 N', xe1 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* ---- a) kraftfiguren i övre läget, intill raderna ovan ----
+     * Skalenligt med 10,5 px/N: F_C = 9,0 N → 95 px, F_S = 7,0 N → 74 px,
+     * F_G = 1,96 N → 21 px, och 74 + 21 = 95. Bubblorna står vid
+     * skrivraden, inte vid figuren: i "Med tankar" visas bubblan innan
+     * pennan flyttar sig, och vyn står här. */
+    var kyA = y - 110;
+    var bA = bubble(120, bubbleTop(y + 1.1 * F), bw, [
+      [['Mitten är rakt under vikten,']],
+      [['så centripetalkraften pekar']],
+      [['nedåt. Ritar den först, streckad.']]
+    ]);
+    tanke(bA);
+    lbl('övre läget', kfx - lblW('övre läget') / 2, kyA - 18);
+    pause(140);
+    banbit(kyA, 1);
+    pause(160);
+    dashArrow([kfx - 15, kyA], [kfx - 15, kyA + 95], BLUE);   /* F_C, 9,0 N */
+    lbl('F_C', kfx - 28 - lblW('F_C'), kyA + 58);
+    stepEnd();
+
+    var bA2 = bubble(120, bubbleTop(y + 1.1 * F), bw, [
+      [['Spännkraften och tyngdkraften']],
+      [['pekar BÅDA nedåt här. Tillsammans']],
+      [['ska de bli resultanten.']]
+    ]);
+    tanke(bA2);
+    arrow([kfx, kyA + 8], [kfx, kyA + 82], BLUE);            /* F_S, 7,0 N */
+    lbl('F_S', kfx - lblW('F_S') / 2 + 8, kyA + 106);
+    pause(180);
+    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyA), color: BLUE });
+    arrow([kfx + 15, kyA], [kfx + 15, kyA + 21], BLUE);      /* F_G, 1,96 N */
+    lbl('F_G', kfx + 26, kyA + 32);
     stepEnd();
 
     /* ---- kraftekvationen i övre läget ---- */
@@ -17944,50 +17991,20 @@
     underline(xeA, y);
     stepEnd();
 
-    /* ---- b) riktningarna i nedre läget ----
-     * UNDANTAG från REGELN "rubrik + formel i SAMMA steg" (uttryckligt
-     * önskemål 2026-08-31): rubriken "b)" skrivs för sig, och krafterna
-     * ritas i figuren FÖRST i nästa klicksteg. Vid a) står vyn kvar vid
-     * figuren och pilarna kan ritas direkt, men här har skriften gått
-     * långt ned på arket — utan rubriken som förvarning dyker pilarna upp
-     * långt uppe i bild utan att eleven vet att b) har börjat. */
+    /* ---- b) nedre läget ----
+     * Rubrik + formel i SAMMA steg (se REGEL INLEDANDE MOTIVERING).
+     * Kraftfiguren ritas först vid kraftekvationen, i marginalen intill
+     * raderna här — inte i den stora figuren. */
     y += adv + 1.2 * F;
+    var bB0 = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Nu det nedre läget. Samma']],
+      [['formel för centripetalkraften,']],
+      [['men farten är en annan.']]
+    ]);
+    tanke(bB0);
     placeString('b) Centripetalkraft i nedre läget', padL, y,
                 s * 0.62, F * 0.62, acts);
-    stepEnd();
-
-    /* Bubblan står vid skrivraden, INTE uppe vid figuren: i "Med tankar"
-     * visas den innan pennan flyttar sig, och vyn står kvar här. En
-     * bubbla uppe vid figuren hade visats utanför bild. */
-    /* KRAFTFIGUR (se REGEL): centripetalkraften först. Här är
-     * tyngdkraften bara 4 % av spännkraften, så pilarna kan inte vara
-     * skalenliga — F_G behåller a):s 21 px och F_S − F_G = F_C hålls i
-     * pixlar (70 − 21 = 49), samma grepp som teorifiguren. */
-    var bB = bubble(120, bubbleTop(y), bw, [
-      [['Mitten är rakt ovanför vikten,']],
-      [['så centripetalkraften pekar']],
-      [['uppåt. Ritar den först, streckad.']]
-    ]);
-    tanke(bB);
-    dashArrow([205, 272], [205, 223], BLUE);  /* F_C, 49 N */
-    placeString('F_C', 171, 252, s * 0.55, F * 0.55, acts, BLUE);
-    stepEnd();
-
-    var bB2 = bubble(120, bubbleTop(y), bw, [
-      [['Spännkraften drar uppåt och']],
-      [['tyngdkraften nedåt. Eftersom']],
-      [['resultanten pekar uppåt måste']],
-      [['spännkraften vara störst.']]
-    ]);
-    tanke(bB2);
-    arrow([215, 260], [215, 190], BLUE);      /* F_S uppåt längs snöret */
-    placeString('F_S', 233, 205, s * 0.55, F * 0.55, acts, BLUE);
-    pause(180);
-    acts.push({ kind: 'stroke', pts: dotPts(225, 272), color: BLUE });
-    arrow([225, 272], [225, 293], BLUE);      /* F_G från tyngdpunkten */
-    placeString('F_G', 212, 311, s * 0.55, F * 0.55, acts, BLUE); /* under pilen, fritt från "nedre läget" */
-    stepEnd();
-
+    pause(300);
     y += 2.0 * F;
     xx = placeString('F_C=', padL, y, s, F, acts);
     fracH('m·v^2', 'r', xx, y);
@@ -18013,6 +18030,42 @@
     xx = placeString('F_C=', padL, y, s, F, acts);
     var xe3 = fracH('0,200·14^2', '0,80', xx, y);
     placeString('=49 N', xe3 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    /* ---- b) kraftfiguren i nedre läget, intill raderna ovan ----
+     * Här är tyngdkraften bara 4 % av spännkraften, så pilarna kan inte
+     * vara skalenliga — F_G behålls synlig (22 px) och F_S − F_G = F_C
+     * hålls i pixlar (130 − 22 = 108), samma grepp som teorifiguren.
+     * Båda de långa pilarna är LÄNGRE än a):s, som de ska vara. */
+    var kyB = y + 16;
+    var bB = bubble(120, bubbleTop(y + 1.1 * F), bw, [
+      [['Mitten är rakt ovanför vikten,']],
+      [['så centripetalkraften pekar']],
+      [['uppåt. Ritar den först, streckad.']]
+    ]);
+    tanke(bB);
+    banbit(kyB, -1);
+    pause(140);
+    lbl('nedre läget', kfx - lblW('nedre läget') / 2, kyB + 54);
+    pause(160);
+    dashArrow([kfx - 15, kyB], [kfx - 15, kyB - 108], BLUE);  /* F_C, 49 N */
+    lbl('F_C', kfx - 28 - lblW('F_C'), kyB - 58);
+    stepEnd();
+
+    var bB2 = bubble(120, bubbleTop(y + 1.1 * F), bw, [
+      [['Spännkraften drar uppåt och']],
+      [['tyngdkraften nedåt. Eftersom']],
+      [['resultanten pekar uppåt måste']],
+      [['spännkraften vara störst. (Tyngd-']],
+      [['kraften ritas förstorad för att synas.)']]
+    ]);
+    tanke(bB2);
+    arrow([kfx, kyB - 8], [kfx, kyB - 138], BLUE);           /* F_S, 51 N */
+    lbl('F_S', kfx - lblW('F_S') / 2, kyB - 148);
+    pause(180);
+    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyB), color: BLUE });
+    arrow([kfx + 15, kyB], [kfx + 15, kyB + 22], BLUE);      /* F_G */
+    lbl('F_G', kfx + 26, kyB + 33);
     stepEnd();
 
     y += adv + 1.2 * F;

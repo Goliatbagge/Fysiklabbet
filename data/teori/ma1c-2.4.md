@@ -124,6 +124,18 @@ Parentesen $(x + 2)$ skrivs först. I den nya parentesen hamnar det som
 blir kvar av varje term när $(x + 2)$ tagits bort: $3$ från den första
 termen och $-x$ från den andra.
 
+Det går också att bryta ut mer ur ett uttryck där en faktor **redan är
+utbruten**. I $2(3x - 9)$ står 2 framför parentesen, men inuti
+parentesen är både $3x$ och 9 delbara med 3. Då bryter vi ut 3 ur
+parentesen också och multiplicerar ihop de två faktorerna framför:
+
+$$
+2(3x - 9) = 2 \cdot 3(x - 3) = 6(x - 3)
+$$
+
+Först när det som står kvar i parentesen saknar gemensam faktor är
+uttrycket faktoriserat så långt som möjligt.
+
 ::: formel "Bryt ut en parentes"
 Återkommer samma parentesuttryck i alla termer är parentesen en gemensam
 faktor som kan brytas ut:
@@ -282,8 +294,8 @@ med 4.
 ::: sampunkt "Bryt ut en hel parentes"
 - Återkommer samma parentes i alla termer är den en gemensam faktor:
   $3(x + 2) - x(x + 2) = (x + 2)(3 - x)$.
-- **Så långt som möjligt**: titta in i parentesen också.
-  $5(9x - 6) = 15(3x - 2)$.
+- **Så långt som möjligt**: titta in i parentesen också, även om en
+  faktor redan är utbruten: $2(3x - 9) = 2 \cdot 3(x - 3) = 6(x - 3)$.
 :::
 
 ::: sampunkt "Teckna tal med en variabel"

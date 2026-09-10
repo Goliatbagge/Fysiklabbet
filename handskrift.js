@@ -17885,19 +17885,22 @@
       placeString(str, x, yb, s * 0.55, F * 0.55, acts, BLUE);
     }
 
-    /* ---- a) kraftfiguren i övre läget — FÖRE rubriken ----
-     * Figuren ritas först, innan rubriken "a) Centripetalkraft i övre
-     * läget" (användarönskemål 2026-09-10): eleven ska se kraftsituationen
-     * innan räkningen börjar. Den ligger ändå i marginalen intill de
-     * rader som sedan skrivs (formel, klammer, insättning) — läget räknas
-     * från rubrikens baslinje: insättningsraden hamnar 293 px under
-     * rubriken, och figuren 110 px ovanför den. Bubblorna står bredvid
-     * figuren, i ytan där raderna ännu inte skrivits.
+    /* ---- a) — FÖRST bokstaven, SEDAN kraftfiguren, SEDAN rubriken ----
+     * Ordningen är ett användarönskemål (2026-09-10): "a)" skrivs som
+     * eget steg, sedan ritas kraftfiguren till höger på arket, rakt till
+     * höger om raden där formeln F_C = m·v²/r sedan skrivs, och först
+     * därefter resten av rubriken och formeln. Figurens överkant ligger
+     * i nivå med rubrikraden, så att formeln hamnar mitt för pilarna.
+     * Bubblorna står bredvid figuren, i ytan där raderna ännu inte
+     * skrivits.
      * Skalenligt med 10,5 px/N: F_C = 9,0 N → 95 px, F_S = 7,0 N → 74 px,
      * F_G = 1,96 N → 21 px, och 74 + 21 = 95. */
-    var kyA = y + 183;
-    var bA = bubble(120, kyA - 30, bw, [
-      [['a) Mitten är rakt under vikten,']],
+    var xA = placeString('a) ', padL, y, s * 0.62, F * 0.62, acts);
+    stepEnd();
+
+    var kyA = y + 15;
+    var bA = bubble(120, kyA + 30, bw, [
+      [['Mitten är rakt under vikten,']],
       [['så centripetalkraften pekar']],
       [['nedåt. Ritar den först, streckad.']]
     ]);
@@ -17910,7 +17913,7 @@
     lbl('F_C', kfx - 28 - lblW('F_C'), kyA + 58);
     stepEnd();
 
-    var bA2 = bubble(120, kyA - 30, bw, [
+    var bA2 = bubble(120, kyA + 30, bw, [
       [['Spännkraften och tyngdkraften']],
       [['pekar BÅDA nedåt här. Tillsammans']],
       [['ska de bli resultanten.']]
@@ -17932,7 +17935,7 @@
     ]);
     tanke(bF1);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
-    placeString('a) Centripetalkraft i övre läget', padL, y,
+    placeString('Centripetalkraft i övre läget', xA, y,
                 s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
@@ -18021,19 +18024,22 @@
     stepEnd();
 
     /* ---- b) nedre läget ----
-     * Kraftfiguren först (i marginalen intill raderna som följer), sedan
-     * rubrik + formel i SAMMA steg (se REGEL INLEDANDE MOTIVERING). */
+     * Bokstaven först, sedan kraftfiguren till höger, sedan resten av
+     * rubriken + formel i SAMMA steg (se REGEL INLEDANDE MOTIVERING). */
     y += adv + 1.2 * F;
-    /* ---- b) kraftfiguren i nedre läget — FÖRE rubriken ----
-     * Samma ordning som i a): figuren först, sedan rubriken. Läget räknas
-     * från rubrikens baslinje (insättningsraden 293 px under, figuren
-     * 16 px under den). Här är tyngdkraften bara 4 % av spännkraften, så
+    /* ---- b) — FÖRST bokstaven, SEDAN kraftfiguren, SEDAN rubriken ----
+     * Samma ordning som i a). Figurens överkant (F_S-etiketten) ligger i
+     * nivå med rubrikraden; figuren är hög, så formeln hamnar mitt för
+     * de långa pilarna. Här är tyngdkraften bara 4 % av spännkraften, så
      * pilarna kan inte vara skalenliga — F_G behålls synlig (22 px) och
      * F_S − F_G = F_C hålls i pixlar (130 − 22 = 108), samma grepp som
      * teorifiguren. Båda de långa pilarna är LÄNGRE än a):s, som de ska. */
-    var kyB = y + 309;
-    var bB = bubble(120, kyB - 150, bw, [
-      [['b) Mitten är rakt ovanför vikten,']],
+    var xB = placeString('b) ', padL, y, s * 0.62, F * 0.62, acts);
+    stepEnd();
+
+    var kyB = y + 145;
+    var bB = bubble(120, kyB - 120, bw, [
+      [['Mitten är rakt ovanför vikten,']],
       [['så centripetalkraften pekar']],
       [['uppåt. Ritar den först, streckad.']]
     ]);
@@ -18046,7 +18052,7 @@
     lbl('F_C', kfx - 28 - lblW('F_C'), kyB - 58);
     stepEnd();
 
-    var bB2 = bubble(120, kyB - 150, bw, [
+    var bB2 = bubble(120, kyB - 120, bw, [
       [['Spännkraften drar uppåt och']],
       [['tyngdkraften nedåt. Eftersom']],
       [['resultanten pekar uppåt måste']],
@@ -18068,7 +18074,7 @@
       [['farten är en annan.']]
     ]);
     tanke(bB0);
-    placeString('b) Centripetalkraft i nedre läget', padL, y,
+    placeString('Centripetalkraft i nedre läget', xB, y,
                 s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;

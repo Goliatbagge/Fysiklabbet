@@ -6392,134 +6392,6 @@
     return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: ekvation med parenteser (ma1c-2.3 ex 3) -----
-   * (1+4x)(3x-2)=x(12x-6). Andragradstermen 12x² finns i BÅDA led och
-   * försvinner när den subtraheras bort — kvar blir en förstagrads-
-   * ekvation. */
-  function layoutParentesekv(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
-    var tanke = mkTanke(T);
-    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
-     * Ledläget skriver inga operationsrader (bara tankarna), så väggen
-     * ritas i SAMMA klicksteg som resultatraden — stegantalet är då
-     * automatiskt lika i båda lägena. */
-    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = Math.max(padL + T.adv('12x^2-5x-2=12x^2-6x'),
-                      padL + 30 + T.adv('-5x-2=-6x'),
-                      padL + 30 + T.adv('x-2=0')) + 0.9 * F;
-
-    /* Första raden läggs under y=210: inställningsrutan är HÖGRE i
-     * ekvval-scener (tankarna + gruppen "Ekvationer") och zonen når
-     * y < 210 (se OBS i mobilzon-regeln i filhuvudet). Raden är bred
-     * nog att nå in i zonen i sidled — och multiplicera in-bågarna
-     * ovanför den kräver extra höjd (y=278). */
-    y = 278;
-    var pxx = T.str('(', padL, y);
-    var p1 = pxx;  pxx = T.str('1', pxx, y);    var p1b = pxx;
-    pxx = T.str('+', pxx, y);
-    var p2 = pxx;  pxx = T.str('4x', pxx, y);   var p2b = pxx;
-    pxx = T.str(')(', pxx, y);
-    var p3 = pxx;  pxx = T.str('3x', pxx, y);   var p3b = pxx;
-    var p4 = pxx;  pxx = T.str('-2', pxx, y);   var p4b = pxx;
-    pxx = T.str(')=', pxx, y);
-    var p5 = pxx;  pxx = T.str('x', pxx, y);    var p5b = pxx;
-    pxx = T.str('(', pxx, y);
-    var p6 = pxx;  pxx = T.str('12x', pxx, y);  var p6b = pxx;
-    var p7 = pxx;  pxx = T.str('-6', pxx, y);   var p7b = pxx;
-    T.str(')', pxx, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Jag utvecklar båda leden']],
-      [['var för sig, precis som']],
-      [['vanligt.']]
-    ]);
-    /* en båge per produkt, produkttermen direkt efter varje båge (se
-     * REGEL: MULTIPLICERA IN I PARENTES) — först vänsterledet, sedan
-     * högerledet */
-    var multIn = mkMultIn(T), samla = mkSamla(T);
-    var yArcP = y - 0.95 * F;
-    /* bågarna från 1:an ovanför raden, från 4x UNDERIFRÅN (se REGEL:
-     * BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN) → målraden 3,1·F ned */
-    y += 3.1 * F;
-    var yProd = y;
-    var dv = [
-      { fran: [p1, p1b], till: [p3, p3b], skriv: '3x', hojd: 26 },
-      { fran: [p1, p1b], till: [p4, p4b], skriv: '-2', hojd: 48, dx: 3 },
-      { fran: [p2, p2b], till: [p3, p3b], skriv: '+12x^2', hojd: 20,
-        under: true },
-      { fran: [p2, p2b], till: [p4, p4b], skriv: '-8x', hojd: 36, dx: 3,
-        under: true }
-    ];
-    pxx = multIn(padL, y, yArcP, dv);
-    pxx = T.str('=', pxx, y);
-    multIn(pxx, y, yArcP, [
-      { fran: [p5, p5b], till: [p6, p6b], skriv: '12x^2', hojd: 24 },
-      { fran: [p5, p5b], till: [p7, p7b], skriv: '-6x', hojd: 36, dx: 4 }
-    ]);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Först förenklar jag']],
-      [['vänsterledet:']],
-      [['3x-8x=-5x.']]
-    ]);
-    /* 3x och -8x ringas in i produktraden innan -5x skrivs (se REGEL:
-     * SAMLA LIKADANA TERMER — RINGA IN FÖRST) */
-    y += 2.3 * F;
-    var xv1 = padL;
-    var gv = [
-      { skriv: '12x^2' },
-      { ringar: [[dv[0].x0, dv[0].x1, yProd], [dv[3].x0, dv[3].x1, yProd]],
-        skriv: '-5x' },
-      { skriv: '-2=' }
-    ];
-    var xrest = samla(xv1, y, gv);
-    T.str('12x^2-6x', xrest, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Termen med x i kvadrat']],
-      [['står i båda led.']],
-      [['Subtraherar jag bort den']],
-      [['försvinner']],
-      [['andragradstermen helt.']]
-    ]);
-    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
-     * SKRIVS ALLTID UT) — ingen inringning: ringar är för hopslagning.
-     * Båda led-raden är arkets bredaste rad: den börjar vid padL och
-     * skrivs automatiskt en aning mindre för att rymmas på EN rad (se
-     * REGEL: EN EKVATION SKRIVS PÅ EN RAD). */
-    y = ekvOp(y, '-12x^2', xw, '12x^2-5x-2=12x^2-6x', { x0: padL });
-    T.str('-5x-2=-6x', padL + 30, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Nu samlar jag x-termerna']],
-      [['och adderar 6x till båda']],
-      [['led.']]
-    ]);
-    y = ekvOp(y, '+6x', xw, '-5x-2=-6x');
-    T.str('x-2=0', padL + 30, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Sist adderar jag 2 till']],
-      [['båda led.']]
-    ]);
-    y = ekvOp(y, '+2', xw, 'x-2=0');
-    T.str('x=2', padL + 30, y);
-    T.stepEnd();
-
-    y += 2.0 * F;
-    xe = T.str('Svar: x=2', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-
-    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
-             ekvval: 1 };
-  }
-
   /* ---------------- scen: faktorisera (ma1c-2.4 ex 1) -----------------
    * a)–e). Arbetsgången är alltid densamma: (1) största gemensamma tal,
    * (2) minsta potensen av varje variabel, (3) skriv den utbrutna
@@ -7374,6 +7246,134 @@
 
     y += 2.0 * F;
     xe = T.str('Svar: Saknar lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: ekvation med parenteser (ma1c-2.6 ex 2) -----
+   * (1+4x)(3x-2)=x(12x-6). Andragradstermen 12x² finns i BÅDA led och
+   * försvinner när den subtraheras bort — kvar blir en förstagrads-
+   * ekvation. */
+  function layoutParentesekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet).
+     * Ledläget skriver inga operationsrader (bara tankarna), så väggen
+     * ritas i SAMMA klicksteg som resultatraden — stegantalet är då
+     * automatiskt lika i båda lägena. */
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xw = Math.max(padL + T.adv('12x^2-5x-2=12x^2-6x'),
+                      padL + 30 + T.adv('-5x-2=-6x'),
+                      padL + 30 + T.adv('x-2=0')) + 0.9 * F;
+
+    /* Första raden läggs under y=210: inställningsrutan är HÖGRE i
+     * ekvval-scener (tankarna + gruppen "Ekvationer") och zonen når
+     * y < 210 (se OBS i mobilzon-regeln i filhuvudet). Raden är bred
+     * nog att nå in i zonen i sidled — och multiplicera in-bågarna
+     * ovanför den kräver extra höjd (y=278). */
+    y = 278;
+    var pxx = T.str('(', padL, y);
+    var p1 = pxx;  pxx = T.str('1', pxx, y);    var p1b = pxx;
+    pxx = T.str('+', pxx, y);
+    var p2 = pxx;  pxx = T.str('4x', pxx, y);   var p2b = pxx;
+    pxx = T.str(')(', pxx, y);
+    var p3 = pxx;  pxx = T.str('3x', pxx, y);   var p3b = pxx;
+    var p4 = pxx;  pxx = T.str('-2', pxx, y);   var p4b = pxx;
+    pxx = T.str(')=', pxx, y);
+    var p5 = pxx;  pxx = T.str('x', pxx, y);    var p5b = pxx;
+    pxx = T.str('(', pxx, y);
+    var p6 = pxx;  pxx = T.str('12x', pxx, y);  var p6b = pxx;
+    var p7 = pxx;  pxx = T.str('-6', pxx, y);   var p7b = pxx;
+    T.str(')', pxx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag utvecklar båda leden']],
+      [['var för sig, precis som']],
+      [['vanligt.']]
+    ]);
+    /* en båge per produkt, produkttermen direkt efter varje båge (se
+     * REGEL: MULTIPLICERA IN I PARENTES) — först vänsterledet, sedan
+     * högerledet */
+    var multIn = mkMultIn(T), samla = mkSamla(T);
+    var yArcP = y - 0.95 * F;
+    /* bågarna från 1:an ovanför raden, från 4x UNDERIFRÅN (se REGEL:
+     * BÅGARNA FRÅN ANDRA TERMEN RITAS UNDERIFRÅN) → målraden 3,1·F ned */
+    y += 3.1 * F;
+    var yProd = y;
+    var dv = [
+      { fran: [p1, p1b], till: [p3, p3b], skriv: '3x', hojd: 26 },
+      { fran: [p1, p1b], till: [p4, p4b], skriv: '-2', hojd: 48, dx: 3 },
+      { fran: [p2, p2b], till: [p3, p3b], skriv: '+12x^2', hojd: 20,
+        under: true },
+      { fran: [p2, p2b], till: [p4, p4b], skriv: '-8x', hojd: 36, dx: 3,
+        under: true }
+    ];
+    pxx = multIn(padL, y, yArcP, dv);
+    pxx = T.str('=', pxx, y);
+    multIn(pxx, y, yArcP, [
+      { fran: [p5, p5b], till: [p6, p6b], skriv: '12x^2', hojd: 24 },
+      { fran: [p5, p5b], till: [p7, p7b], skriv: '-6x', hojd: 36, dx: 4 }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först förenklar jag']],
+      [['vänsterledet:']],
+      [['3x-8x=-5x.']]
+    ]);
+    /* 3x och -8x ringas in i produktraden innan -5x skrivs (se REGEL:
+     * SAMLA LIKADANA TERMER — RINGA IN FÖRST) */
+    y += 2.3 * F;
+    var xv1 = padL;
+    var gv = [
+      { skriv: '12x^2' },
+      { ringar: [[dv[0].x0, dv[0].x1, yProd], [dv[3].x0, dv[3].x1, yProd]],
+        skriv: '-5x' },
+      { skriv: '-2=' }
+    ];
+    var xrest = samla(xv1, y, gv);
+    T.str('12x^2-6x', xrest, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Termen med x i kvadrat']],
+      [['står i båda led.']],
+      [['Subtraherar jag bort den']],
+      [['försvinner']],
+      [['andragradstermen helt.']]
+    ]);
+    /* operationen skrivs ut i båda lägena (se REGEL: EKVATIONSOPERATIONEN
+     * SKRIVS ALLTID UT) — ingen inringning: ringar är för hopslagning.
+     * Båda led-raden är arkets bredaste rad: den börjar vid padL och
+     * skrivs automatiskt en aning mindre för att rymmas på EN rad (se
+     * REGEL: EN EKVATION SKRIVS PÅ EN RAD). */
+    y = ekvOp(y, '-12x^2', xw, '12x^2-5x-2=12x^2-6x', { x0: padL });
+    T.str('-5x-2=-6x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu samlar jag x-termerna']],
+      [['och adderar 6x till båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '+6x', xw, '-5x-2=-6x');
+    T.str('x-2=0', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sist adderar jag 2 till']],
+      [['båda led.']]
+    ]);
+    y = ekvOp(y, '+2', xw, 'x-2=0');
+    T.str('x=2', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: x=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -17861,6 +17861,45 @@
       placeString(str, x, yb, s * 0.55, F * 0.55, acts, BLUE);
     }
 
+    /* ---- a) kraftfiguren i övre läget — FÖRE rubriken ----
+     * Figuren ritas först, innan rubriken "a) Centripetalkraft i övre
+     * läget" (användarönskemål 2026-09-10): eleven ska se kraftsituationen
+     * innan räkningen börjar. Den ligger ändå i marginalen intill de
+     * rader som sedan skrivs (formel, klammer, insättning) — läget räknas
+     * från rubrikens baslinje: insättningsraden hamnar 293 px under
+     * rubriken, och figuren 110 px ovanför den. Bubblorna står bredvid
+     * figuren, i ytan där raderna ännu inte skrivits.
+     * Skalenligt med 10,5 px/N: F_C = 9,0 N → 95 px, F_S = 7,0 N → 74 px,
+     * F_G = 1,96 N → 21 px, och 74 + 21 = 95. */
+    var kyA = y + 183;
+    var bA = bubble(120, kyA - 30, bw, [
+      [['a) Mitten är rakt under vikten,']],
+      [['så centripetalkraften pekar']],
+      [['nedåt. Ritar den först, streckad.']]
+    ]);
+    tanke(bA);
+    lbl('övre läget', kfx - lblW('övre läget') / 2, kyA - 18);
+    pause(140);
+    banbit(kyA, 1);
+    pause(160);
+    dashArrow([kfx - 15, kyA], [kfx - 15, kyA + 95], BLUE);   /* F_C, 9,0 N */
+    lbl('F_C', kfx - 28 - lblW('F_C'), kyA + 58);
+    stepEnd();
+
+    var bA2 = bubble(120, kyA - 30, bw, [
+      [['Spännkraften och tyngdkraften']],
+      [['pekar BÅDA nedåt här. Tillsammans']],
+      [['ska de bli resultanten.']]
+    ]);
+    tanke(bA2);
+    arrow([kfx, kyA + 8], [kfx, kyA + 82], BLUE);            /* F_S, 7,0 N */
+    lbl('F_S', kfx - lblW('F_S') / 2 + 8, kyA + 106);
+    pause(180);
+    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyA), color: BLUE });
+    arrow([kfx + 15, kyA], [kfx + 15, kyA + 21], BLUE);      /* F_G, 1,96 N */
+    lbl('F_G', kfx + 26, kyA + 32);
+    stepEnd();
+
     var bF1 = bubble(120, bubbleTop(370), bw, [
       [['Centripetalkraften är den']],
       [['resulterande kraften in mot']],
@@ -17899,40 +17938,6 @@
     xx = placeString('F_C=', padL, y, s, F, acts);
     var xe1 = fracH('0,200·6,0^2', '0,80', xx, y);
     placeString('=9,0 N', xe1 + 0.15 * F, y, s, F, acts);
-    stepEnd();
-
-    /* ---- a) kraftfiguren i övre läget, intill raderna ovan ----
-     * Skalenligt med 10,5 px/N: F_C = 9,0 N → 95 px, F_S = 7,0 N → 74 px,
-     * F_G = 1,96 N → 21 px, och 74 + 21 = 95. Bubblorna står vid
-     * skrivraden, inte vid figuren: i "Med tankar" visas bubblan innan
-     * pennan flyttar sig, och vyn står här. */
-    var kyA = y - 110;
-    var bA = bubble(120, bubbleTop(y + 1.1 * F), bw, [
-      [['Mitten är rakt under vikten,']],
-      [['så centripetalkraften pekar']],
-      [['nedåt. Ritar den först, streckad.']]
-    ]);
-    tanke(bA);
-    lbl('övre läget', kfx - lblW('övre läget') / 2, kyA - 18);
-    pause(140);
-    banbit(kyA, 1);
-    pause(160);
-    dashArrow([kfx - 15, kyA], [kfx - 15, kyA + 95], BLUE);   /* F_C, 9,0 N */
-    lbl('F_C', kfx - 28 - lblW('F_C'), kyA + 58);
-    stepEnd();
-
-    var bA2 = bubble(120, bubbleTop(y + 1.1 * F), bw, [
-      [['Spännkraften och tyngdkraften']],
-      [['pekar BÅDA nedåt här. Tillsammans']],
-      [['ska de bli resultanten.']]
-    ]);
-    tanke(bA2);
-    arrow([kfx, kyA + 8], [kfx, kyA + 82], BLUE);            /* F_S, 7,0 N */
-    lbl('F_S', kfx - lblW('F_S') / 2 + 8, kyA + 106);
-    pause(180);
-    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyA), color: BLUE });
-    arrow([kfx + 15, kyA], [kfx + 15, kyA + 21], BLUE);      /* F_G, 1,96 N */
-    lbl('F_G', kfx + 26, kyA + 32);
     stepEnd();
 
     /* ---- kraftekvationen i övre läget ---- */
@@ -17992,14 +17997,51 @@
     stepEnd();
 
     /* ---- b) nedre läget ----
-     * Rubrik + formel i SAMMA steg (se REGEL INLEDANDE MOTIVERING).
-     * Kraftfiguren ritas först vid kraftekvationen, i marginalen intill
-     * raderna här — inte i den stora figuren. */
+     * Kraftfiguren först (i marginalen intill raderna som följer), sedan
+     * rubrik + formel i SAMMA steg (se REGEL INLEDANDE MOTIVERING). */
     y += adv + 1.2 * F;
+    /* ---- b) kraftfiguren i nedre läget — FÖRE rubriken ----
+     * Samma ordning som i a): figuren först, sedan rubriken. Läget räknas
+     * från rubrikens baslinje (insättningsraden 293 px under, figuren
+     * 16 px under den). Här är tyngdkraften bara 4 % av spännkraften, så
+     * pilarna kan inte vara skalenliga — F_G behålls synlig (22 px) och
+     * F_S − F_G = F_C hålls i pixlar (130 − 22 = 108), samma grepp som
+     * teorifiguren. Båda de långa pilarna är LÄNGRE än a):s, som de ska. */
+    var kyB = y + 309;
+    var bB = bubble(120, kyB - 150, bw, [
+      [['b) Mitten är rakt ovanför vikten,']],
+      [['så centripetalkraften pekar']],
+      [['uppåt. Ritar den först, streckad.']]
+    ]);
+    tanke(bB);
+    banbit(kyB, -1);
+    pause(140);
+    lbl('nedre läget', kfx - lblW('nedre läget') / 2, kyB + 54);
+    pause(160);
+    dashArrow([kfx - 15, kyB], [kfx - 15, kyB - 108], BLUE);  /* F_C, 49 N */
+    lbl('F_C', kfx - 28 - lblW('F_C'), kyB - 58);
+    stepEnd();
+
+    var bB2 = bubble(120, kyB - 150, bw, [
+      [['Spännkraften drar uppåt och']],
+      [['tyngdkraften nedåt. Eftersom']],
+      [['resultanten pekar uppåt måste']],
+      [['spännkraften vara störst. (Tyngd-']],
+      [['kraften ritas förstorad för att synas.)']]
+    ]);
+    tanke(bB2);
+    arrow([kfx, kyB - 8], [kfx, kyB - 138], BLUE);           /* F_S, 51 N */
+    lbl('F_S', kfx - lblW('F_S') / 2, kyB - 148);
+    pause(180);
+    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyB), color: BLUE });
+    arrow([kfx + 15, kyB], [kfx + 15, kyB + 22], BLUE);      /* F_G */
+    lbl('F_G', kfx + 26, kyB + 33);
+    stepEnd();
+
     var bB0 = bubble(120, bubbleTop(y - adv), bw, [
-      [['b) Nu det nedre läget. Samma']],
-      [['formel för centripetalkraften,']],
-      [['men farten är en annan.']]
+      [['Centripetalkraften i nedre läget:']],
+      [['samma formel som i a), men']],
+      [['farten är en annan.']]
     ]);
     tanke(bB0);
     placeString('b) Centripetalkraft i nedre läget', padL, y,
@@ -18030,42 +18072,6 @@
     xx = placeString('F_C=', padL, y, s, F, acts);
     var xe3 = fracH('0,200·14^2', '0,80', xx, y);
     placeString('=49 N', xe3 + 0.15 * F, y, s, F, acts);
-    stepEnd();
-
-    /* ---- b) kraftfiguren i nedre läget, intill raderna ovan ----
-     * Här är tyngdkraften bara 4 % av spännkraften, så pilarna kan inte
-     * vara skalenliga — F_G behålls synlig (22 px) och F_S − F_G = F_C
-     * hålls i pixlar (130 − 22 = 108), samma grepp som teorifiguren.
-     * Båda de långa pilarna är LÄNGRE än a):s, som de ska vara. */
-    var kyB = y + 16;
-    var bB = bubble(120, bubbleTop(y + 1.1 * F), bw, [
-      [['Mitten är rakt ovanför vikten,']],
-      [['så centripetalkraften pekar']],
-      [['uppåt. Ritar den först, streckad.']]
-    ]);
-    tanke(bB);
-    banbit(kyB, -1);
-    pause(140);
-    lbl('nedre läget', kfx - lblW('nedre läget') / 2, kyB + 54);
-    pause(160);
-    dashArrow([kfx - 15, kyB], [kfx - 15, kyB - 108], BLUE);  /* F_C, 49 N */
-    lbl('F_C', kfx - 28 - lblW('F_C'), kyB - 58);
-    stepEnd();
-
-    var bB2 = bubble(120, bubbleTop(y + 1.1 * F), bw, [
-      [['Spännkraften drar uppåt och']],
-      [['tyngdkraften nedåt. Eftersom']],
-      [['resultanten pekar uppåt måste']],
-      [['spännkraften vara störst. (Tyngd-']],
-      [['kraften ritas förstorad för att synas.)']]
-    ]);
-    tanke(bB2);
-    arrow([kfx, kyB - 8], [kfx, kyB - 138], BLUE);           /* F_S, 51 N */
-    lbl('F_S', kfx - lblW('F_S') / 2, kyB - 148);
-    pause(180);
-    acts.push({ kind: 'stroke', pts: dotPts(kfx + 15, kyB), color: BLUE });
-    arrow([kfx + 15, kyB], [kfx + 15, kyB + 22], BLUE);      /* F_G */
-    lbl('F_G', kfx + 26, kyB + 33);
     stepEnd();
 
     y += adv + 1.2 * F;
@@ -37885,12 +37891,12 @@
                    omkrets: layoutOmkrets,
                    multiplicerain: layoutMultiplicerain,
                    utveckla: layoutUtveckla,
-                   parentesekv: layoutParentesekv,
                    faktoriseraut: layoutFaktoriseraut,
                    faktoriseraparentes: layoutFaktoriseraparentes,
                    delbarhet: layoutDelbarhet,
                    ekvgrund: layoutEkvgrund,
                    variabelbada: layoutVariabelbada,
+                   parentesekv: layoutParentesekv,
                    enbrakterm: layoutEnbrakterm,
                    korsvis: layoutKorsvis,
                    trebrak: layoutTrebrak,

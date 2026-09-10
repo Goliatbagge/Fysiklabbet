@@ -108,6 +108,152 @@ $$
 :::
 :::
 
+## Bryta ut ett helt parentesuttryck
+
+Den gemensamma faktorn behöver inte vara ett tal eller en variabel. Om
+samma parentesuttryck återkommer i flera termer är hela parentesen en
+gemensam faktor, och då kan den brytas ut precis som om den vore en enda
+faktor. I uttrycket $3(x + 2) - x(x + 2)$ innehåller båda termerna
+faktorn $(x + 2)$:
+
+$$
+3(x + 2) - x(x + 2) = (x + 2)(3 - x)
+$$
+
+Parentesen $(x + 2)$ skrivs först. I den nya parentesen hamnar det som
+blir kvar av varje term när $(x + 2)$ tagits bort: $3$ från den första
+termen och $-x$ från den andra.
+
+::: formel "Bryt ut en parentes"
+Återkommer samma parentesuttryck i alla termer är parentesen en gemensam
+faktor som kan brytas ut:
+
+$$
+a(x + 2) + b(x + 2) = (x + 2)(a + b)
+$$
+
+Kontrollera alltid att uttrycket är faktoriserat **så långt som möjligt**.
+Det som står kvar inuti parentesen får inte ha någon gemensam faktor
+kvar: $5(9x - 6)$ är inte färdigt, eftersom 9 och 6 båda är delbara
+med 3.
+:::
+
+::: exempel "Exempel 2 — Bryt ut en parentes"
+**Faktorisera så långt som möjligt<br>a)&nbsp;$5(9x - 6)$&emsp;&emsp;b)&nbsp;$3(x + 2) - x(x + 2)$**
+
+::: handskrift
+typ: faktoriseraparentes
+:::
+
+::: textlosning
+**a)** Faktorn 5 är redan utbruten, men uttrycket är inte faktoriserat så
+långt som möjligt. Inuti parentesen är både 9 och 6 delbara med 3, så 3
+kan brytas ut ur parentesen också:
+
+$$
+5(9x - 6) = 5 \cdot 3(3x - 2) = 15(3x - 2)
+$$
+
+Nu har $3x$ och 2 ingen gemensam faktor kvar, och uttrycket är
+färdigfaktoriserat.
+
+**Svar:** $15(3x - 2)$
+
+**b)** Parentesen $(x + 2)$ finns i båda termerna. Då är hela parentesen
+en gemensam faktor som kan brytas ut, på samma sätt som $9x$ bröts ut i
+exempel 1. Vi skriver $(x + 2)$ först, sätter en tom parentes efter och
+fyller på den term för term. $(x + 2)$ gånger något ska bli $3(x + 2)$,
+alltså 3. Och $(x + 2)$ gånger något ska bli $-x(x + 2)$, alltså $-x$:
+
+$$
+3(x + 2) - x(x + 2) = (x + 2)(3 - x)
+$$
+
+Kontroll: multiplicerar vi in $(x + 2)$ i den andra parentesen får vi
+tillbaka $3(x + 2) - x(x + 2)$.
+
+**Svar:** $(x + 2)(3 - x)$
+:::
+:::
+
+## Teckna jämna tal, udda tal och tal som följer på varandra
+
+Faktorisering används också för att **visa** att något gäller för alla
+tal av en viss sort, till exempel att en summa alltid är delbar med 3.
+Då går det inte att pröva med några tal och nöja sig med det. Talen måste
+i stället tecknas med en variabel, så att uttrycket gäller för vilket tal
+som helst.
+
+::: formel "Teckna tal med en variabel"
+Låt $k$ och $n$ vara heltal.
+
+- **Jämna tal** tecknas $2k$. Talen 0, 2, 4, 6, … är alla 2 gånger ett
+  heltal.
+- **Udda tal** tecknas $2k + 1$. Ett udda tal ligger ett steg efter ett
+  jämnt tal: 1, 3, 5, 7, …
+- **Tal delbara med 3** tecknas $3n$. På samma sätt är $53n$ alltid
+  delbart med 53.
+- **Tre på varandra följande heltal** tecknas $n$, $n + 1$ och $n + 2$,
+  eller lika gärna $n - 1$, $n$ och $n + 1$.
+:::
+
+Här syns kopplingen till faktoriseringen: ett tal är delbart med 3 om det
+kan skrivas som 3 gånger ett heltal. Ska vi visa att en summa alltid är
+delbar med 3 tecknar vi summan med en variabel, förenklar den och
+faktoriserar. Kan vi bryta ut faktorn 3 är saken klar.
+
+::: exempel "Exempel 3 — Visa att en summa är delbar med ett tal"
+**a) Visa att summan av tre på varandra följande heltal alltid är delbar med 3.<br>b) Visa att summan av två på varandra följande udda tal alltid är delbar med 4.**
+
+::: handskrift
+typ: delbarhet
+:::
+
+::: textlosning
+**a)** Vi kallar det minsta av talen $n$. De två följande talen är då
+$n + 1$ och $n + 2$. Vi tecknar summan, tar bort parenteserna (plus
+framför en parentes ändrar inga tecken) och slår ihop likadana termer:
+
+$$
+n + (n + 1) + (n + 2) = n + n + 1 + n + 2 = 3n + 3
+$$
+
+Både $3n$ och 3 har faktorn 3, som vi bryter ut:
+
+$$
+3n + 3 = 3(n + 1)
+$$
+
+Eftersom $n$ är ett heltal är även $n + 1$ ett heltal. Summan är alltså 3
+gånger ett heltal, och därmed delbar med 3, vilket tal $n$ än är.
+
+Tecknar vi i stället talen $n - 1$, $n$ och $n + 1$ blir summan
+$3n$ direkt, vilket säger samma sak.
+
+**Svar:** Summan kan skrivas $3(n + 1)$ och är därför alltid delbar
+med 3.
+
+**b)** Ett udda tal tecknas $2k + 1$. Nästa udda tal ligger två steg
+längre fram, alltså $2k + 1 + 2 = 2k + 3$. Vi tecknar summan och förenklar:
+
+$$
+(2k + 1) + (2k + 3) = 4k + 4
+$$
+
+Både $4k$ och 4 har faktorn 4, som vi bryter ut:
+
+$$
+4k + 4 = 4(k + 1)
+$$
+
+$k + 1$ är ett heltal, så summan är 4 gånger ett heltal och därmed delbar
+med 4.
+
+**Svar:** Summan kan skrivas $4(k + 1)$ och är därför alltid delbar
+med 4.
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Faktorisera"
@@ -121,6 +267,8 @@ $$
 2. Bryt ut den framför en parentes.
 3. Fyll i parentesen genom att räkna baklänges: vad ska varje term
    multipliceras med för att bli den ursprungliga?
+4. Kontrollera genom att multiplicera in igen. Glöm inte ettan när hela
+   termen bryts ut.
 :::
 
 ::: sampunkt "Bryt ut både tal och variabler"
@@ -131,9 +279,23 @@ $$
   $21x^2 - 14 = 7(3x^2 - 2)$.
 :::
 
-::: sampunkt "Kontrollera"
-- Multiplicera in igen. Du ska få tillbaka det ursprungliga uttrycket.
-- Glöm inte ettan: bryter du ut hela termen blir det som står kvar 1, inte
-  ingenting.
+::: sampunkt "Bryt ut en hel parentes"
+- Återkommer samma parentes i alla termer är den en gemensam faktor:
+  $3(x + 2) - x(x + 2) = (x + 2)(3 - x)$.
+- **Så långt som möjligt**: titta in i parentesen också.
+  $5(9x - 6) = 15(3x - 2)$.
+:::
+
+::: sampunkt "Teckna tal med en variabel"
+- Jämna tal: $2k$. Udda tal: $2k + 1$.
+- Tal delbara med 3: $3n$.
+- Tre på varandra följande heltal: $n$, $n + 1$, $n + 2$ (eller $n - 1$,
+  $n$, $n + 1$).
+:::
+
+::: sampunkt "Visa delbarhet"
+- Teckna, förenkla och faktorisera. Syns faktorn är summan delbar med
+  den.
+- $n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1)$: alltid delbar med 3.
 :::
 :::

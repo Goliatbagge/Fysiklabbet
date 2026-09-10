@@ -20211,21 +20211,23 @@ $2(6x - 4)$ är en korrekt faktorisering men inte "så långt som möjligt" — 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Faktorisera $8x^3 - 12x^2 + 20x$ så långt som möjligt.`,
+            question: `Faktorisera $4(x - 1) + x(x - 1)$ så långt som möjligt.`,
             choices: [
-                `$4x(2x^2 - 3x + 5)$`,
-                `$2x(4x^2 - 6x + 10)$`,
-                `$4(2x^3 - 3x^2 + 5x)$`,
-                `$4x(2x^2 - 3x - 5)$`,
+                `$4x(x - 1)$`,
+                `$(x - 1)(4 - x)$`,
+                `$(x - 1)(4 + x)$`,
+                `$(x - 1)^2(4 + x)$`,
             ],
-            correct: 0,
-            solution: `Koefficienterna 8, 12 och 20 har största gemensamma delaren 4. Alla termer innehåller $x$, och den minsta potensen är $x$. Bryt ut $4x$:
+            correct: 2,
+            solution: `Parentesen $(x - 1)$ finns i båda termerna, så hela parentesen är en gemensam faktor. Bryt ut den och fyll på den nya parentesen med det som blir kvar av varje term: 4 från den första och $x$ från den andra:
 
-$$ 8x^3 - 12x^2 + 20x = 4x(2x^2 - 3x + 5) $$
+$$ 4(x - 1) + x(x - 1) = (x - 1)(4 + x) $$
 
-$2x(4x^2 - 6x + 10)$ stämmer vid multiplikation men är inte färdigfaktoriserat — 2 kan brytas ut ur parentesen.
+Kontroll: $(x - 1) \\cdot 4 + (x - 1) \\cdot x = 4(x - 1) + x(x - 1)$, alltså det ursprungliga uttrycket.
 
-**Svar:** $4x(2x^2 - 3x + 5)$`,
+$4x(x - 1)$ är fel: termerna adderas, de multipliceras inte. $(x - 1)(4 - x)$ har fel tecken framför $x$.
+
+**Svar:** $(x - 1)(4 + x)$`,
         },
         {
             level: 2,
@@ -20246,17 +20248,25 @@ $$ 10a^2b + 15ab^2 = 5ab(2a + 3b) $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Beräkna $47 \\cdot 83 + 47 \\cdot 17$ utan räknare genom att faktorisera. Vilket är värdet?`,
-            answer: { value: 4700, unit: '' },
-            solution: `**Insikten:** faktorisering är inte bara för algebra — gemensamma faktorer i en summa kan brytas ut även med rena tal, och rätt utnyttjat gör det en jobbig beräkning trivial.
+            question: `Summan av fem på varandra följande heltal är alltid delbar med ett visst tal. Teckna talen med en variabel, förenkla summan och faktorisera den. Vilket är det största tal som summan alltid är delbar med?`,
+            answer: { value: 5, unit: '' },
+            solution: `**Insikten:** att visa något för alla tal av en viss sort går inte genom att pröva några exempel. Talen måste tecknas med en variabel, och svaret läses av i faktoriseringen.
 
-Båda termerna innehåller faktorn 47. Bryt ut den:
+Kalla det minsta talet $n$. De fem talen är då $n$, $n + 1$, $n + 2$, $n + 3$ och $n + 4$. Teckna summan och slå ihop likadana termer:
 
-$$ 47 \\cdot 83 + 47 \\cdot 17 = 47 \\cdot (83 + 17) = 47 \\cdot 100 = 4\\ 700 $$
+$$ n + (n + 1) + (n + 2) + (n + 3) + (n + 4) = 5n + 10 $$
 
-**Svar:** 4 700
+Bryt ut den gemensamma faktorn 5:
 
-**Generell slutsats:** distributiva lagen baklänges förvandlar "två svåra multiplikationer plus addition" till "en lätt addition gånger ett tal". Håll utkik efter gemensamma faktorer innan du börjar räkna på.`,
+$$ 5n + 10 = 5(n + 2) $$
+
+$n + 2$ är ett heltal, så summan är 5 gånger ett heltal och därmed alltid delbar med 5.
+
+Delbar med 10 är den däremot inte alltid: för $n = 1$ blir summan $1 + 2 + 3 + 4 + 5 = 15$. Det syns också i faktoriseringen, eftersom $n + 2$ kan vara udda.
+
+**Svar:** 5
+
+**Generell slutsats:** summan av fem på varandra följande heltal är $5(n + 2)$, alltså 5 gånger det mittersta talet. Tecknar man talen symmetriskt, $n - 2$ till $n + 2$, blir summan $5n$ direkt.`,
         },
     ],
 

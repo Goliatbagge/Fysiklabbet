@@ -10489,6 +10489,38 @@ window.EXITTICKETS = {
       'Derivering hör till senare nivåer — och multiplikation är både enklare och tillräcklig.',
     ],
   },
+  {
+    question: 'Faktorisera $x(x + 5) + 2(x + 5)$.',
+    choices: [
+      '$2x(x + 5)$',
+      '$(x + 5)(2x)$',
+      '$x^2 + 7x + 10$',
+      '$(x + 5)(x + 2)$',
+    ],
+    correct: 3,
+    why: [
+      'Termerna adderas, de multipliceras inte. Kontroll: $2x(x + 5) = 2x^2 + 10x$, vilket inte är det ursprungliga uttrycket.',
+      'Det som blir kvar av termerna när $(x + 5)$ brutits ut är $x$ och 2, och de ska adderas i den nya parentesen, inte multipliceras.',
+      'Det är uttrycket utvecklat, alltså skrivet utan parenteser. Faktorisering går åt andra hållet: uttrycket ska skrivas som en multiplikation.',
+      'Parentesen $(x + 5)$ finns i båda termerna och är en gemensam faktor. Kvar blir $x$ från den första termen och 2 från den andra: $(x + 5)(x + 2)$.',
+    ],
+  },
+  {
+    question: 'Låt $k$ vara ett heltal. Vilket uttryck beskriver alltid ett udda tal?',
+    choices: [
+      '$2k$',
+      '$k + 1$',
+      '$2k + 1$',
+      '$k^2$',
+    ],
+    correct: 2,
+    why: [
+      '$2k$ är 2 gånger ett heltal, alltså alltid ett jämnt tal.',
+      '$k + 1$ är udda när $k$ är jämnt men jämnt när $k$ är udda, så uttrycket beskriver inte alltid ett udda tal.',
+      '$2k$ är alltid jämnt, och ett steg efter ett jämnt tal kommer ett udda. Därför är $2k + 1$ alltid udda.',
+      '$k^2$ är udda när $k$ är udda och jämnt när $k$ är jämnt, till exempel $2^2 = 4$.',
+    ],
+  },
 ],
 
 'ma1c-2.5': [

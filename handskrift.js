@@ -6699,6 +6699,253 @@
     return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: bryt ut en parentes (ma1c-2.4 ex 2) ---------
+   * a) 5(9x-6): faktorn 5 är redan utbruten, men "så långt som möjligt"
+   * betyder att man tittar in i parentesen också — 9 och 6 har 3
+   * gemensamt. b) 3(x+2)-x(x+2): samma parentes i båda termerna, så HELA
+   * parentesen bryts ut som en gemensam faktor, med samma tomma parentes
+   * efter som i exempel 1 (fylls på term för term). */
+  function layoutFaktoriseraparentes(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    /* skriv "=<faktor>(" … ")" med en lucka som rymmer `innehall`, och
+     * returnera x där luckan börjar (samma helper som i exempel 1) */
+    function tomParentes(faktor, innehall, x0, yb) {
+      var x = T.str('=' + faktor + '(', x0, yb);
+      var lucka = T.adv(innehall) + 0.16 * F;
+      T.str(')', x + lucka, yb);
+      return { x: x, slut: x + lucka + T.adv(')') };
+    }
+
+    /* ---- a) 5(9x-6) ---- */
+    y = 92;
+    T.str('a) 5(9x-6)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['5 är redan utbrutet, men']],
+      [['är parentesen klar? Nej:']],
+      [['9 och 6 är båda delbara']],
+      [['med 3, så 3 kan brytas']],
+      [['ut ur parentesen också.']]
+    ]);
+    y += 2.3 * F;
+    T.str('=5·3(3x-2)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    T.str('=15(3x-2)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: 15(3x-2)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 3(x+2)-x(x+2) ---- */
+    y += 3.4 * F;
+    T.str('b) 3(x+2)-x(x+2)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parentesen (x+2) står i']],
+      [['båda termerna. Då är']],
+      [['hela parentesen en']],
+      [['gemensam faktor som kan']],
+      [['brytas ut, precis som 9x']],
+      [['i exempel 1.']]
+    ]);
+    y += 2.3 * F;
+    var pb = tomParentes('(x+2)', '3-x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['(x+2) gånger vad blir']],
+      [['första termen 3(x+2)?']],
+      [['Jo 3.']]
+    ]);
+    var xb = T.str('3', pb.x, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Efter första termen']],
+      [['kommer ett minustecken.']],
+      [['(x+2) gånger vad blir']],
+      [['x(x+2)? Jo x.']]
+    ]);
+    T.str('-x', xb, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: (x+2)(3-x)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: visa delbarhet (ma1c-2.4 ex 3) --------------
+   * a) tre på varandra följande heltal n, n+1, n+2: summan 3n+3=3(n+1).
+   * b) två på varandra följande udda tal 2k+1 och 2k+3: summan
+   * 4k+4=4(k+1). Talen TECKNAS först (rubrik, tankepaus, uttryck — se
+   * REGEL TANKEPAUS EFTER RUBRIK), sedan summeras de: likadana termer
+   * ringas in innan de slås ihop (mkSamla), den gemensamma faktorn bryts
+   * ut och slutsatsen skrivs på svarsraden. */
+  function layoutDelbarhet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, yS;
+    var tanke = mkTanke(T), samla = mkSamla(T);
+    var TANKPAUS = 900;
+
+    /* ---- a) tre på varandra följande heltal ---- */
+    /* rubriken är kort och håller sig väl utanför inställningsrutans
+     * mobilzon (x > 420, y < 150); talen skrivs på raden under */
+    y = 92;
+    T.str('a) Tre följande heltal:', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    tanke(y, [
+      [['Det minsta talet kallar']],
+      [['jag n. Nästa heltal är']],
+      [['ett steg större, n+1, och']],
+      [['det tredje n+2.']]
+    ]);
+    y += 2.1 * F;
+    T.str('n, n+1, n+2', padL + 30, y);
+    T.stepEnd();
+
+    /* summan skrivs i segment så att n-termerna och konstanterna kan
+     * ringas in nedanför (se REGEL: SAMLA LIKADANA TERMER) */
+    y += 2.3 * F;
+    yS = y;
+    xx = T.str('Summan: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    var n1 = xx; xx = T.str('n', xx, y);   var n1b = xx;
+    xx = T.str('+(', xx, y);
+    var n2 = xx; xx = T.str('n', xx, y);   var n2b = xx;
+    xx = T.str('+', xx, y);
+    var e1 = xx; xx = T.str('1', xx, y);   var e1b = xx;
+    xx = T.str(')+(', xx, y);
+    var n3 = xx; xx = T.str('n', xx, y);   var n3b = xx;
+    xx = T.str('+', xx, y);
+    var e2 = xx; xx = T.str('2', xx, y);   var e2b = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Plus framför parenteserna']],
+      [['ändrar inga tecken, så de']],
+      [['kan tas bort. Sedan slår']],
+      [['jag ihop: n+n+n=3n och']],
+      [['1+2=3.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('=', padL + 30, y);
+    samla(xx, y, [
+      { ringar: [[n1, n1b, yS], [n2, n2b, yS], [n3, n3b, yS]], skriv: '3n' },
+      { ringar: [[e1, e1b, yS], [e2, e2b, yS]], skriv: '+3' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3n och 3 har 3 som']],
+      [['gemensam faktor. Den']],
+      [['bryter jag ut.']]
+    ]);
+    y += 2.1 * F;
+    T.str('=3(n+1)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['n är ett heltal, så n+1']],
+      [['är också ett heltal.']],
+      [['Summan är 3 gånger ett']],
+      [['heltal, alltså delbar']],
+      [['med 3.']]
+    ]);
+    y += 2.0 * F;
+    xe = T.str('Svar: 3(n+1) är delbart med 3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) två på varandra följande udda tal ---- */
+    y += 3.4 * F;
+    xx = T.str('b) Udda tal: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    tanke(y, [
+      [['Ett jämnt tal är 2 gånger']],
+      [['ett heltal, 2k. Ett udda']],
+      [['tal ligger ett steg efter']],
+      [['ett jämnt: 2k+1.']]
+    ]);
+    T.str('2k+1', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xx = T.str('Nästa udda tal: ', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    tanke(y, [
+      [['Från ett udda tal till']],
+      [['nästa är det två steg.']],
+      [['2k+1+2=2k+3.']]
+    ]);
+    T.str('2k+3', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    yS = y;
+    xx = T.str('Summan: (', padL, y);
+    T.stepEnd();
+    T.pause(TANKPAUS);
+    var k1 = xx; xx = T.str('2k', xx, y);  var k1b = xx;
+    xx = T.str('+', xx, y);
+    var c1 = xx; xx = T.str('1', xx, y);   var c1b = xx;
+    xx = T.str(')+(', xx, y);
+    var k2 = xx; xx = T.str('2k', xx, y);  var k2b = xx;
+    xx = T.str('+', xx, y);
+    var c2 = xx; xx = T.str('3', xx, y);   var c2b = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parenteserna kan tas']],
+      [['bort. Sedan slår jag']],
+      [['ihop: 2k+2k=4k och']],
+      [['1+3=4.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('=', padL + 30, y);
+    samla(xx, y, [
+      { ringar: [[k1, k1b, yS], [k2, k2b, yS]], skriv: '4k' },
+      { ringar: [[c1, c1b, yS], [c2, c2b, yS]], skriv: '+4' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['4k och 4 har 4 som']],
+      [['gemensam faktor. Den']],
+      [['bryter jag ut.']]
+    ]);
+    y += 2.1 * F;
+    T.str('=4(k+1)', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k+1 är ett heltal, så']],
+      [['summan är 4 gånger ett']],
+      [['heltal: delbar med 4.']]
+    ]);
+    y += 2.0 * F;
+    xe = T.str('Svar: 4(k+1) är delbart med 4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: ekvationslösningens grunder (ma1c-2.5 ex 1) --
    * a) 4x+7=35 med KONTROLL, b) 7x/6-15=-11. Grundprincipen är att det
    * man gör i ena ledet måste göras i det andra också — därför skrivs
@@ -37587,6 +37834,8 @@
                    utveckla: layoutUtveckla,
                    parentesekv: layoutParentesekv,
                    faktoriseraut: layoutFaktoriseraut,
+                   faktoriseraparentes: layoutFaktoriseraparentes,
+                   delbarhet: layoutDelbarhet,
                    ekvgrund: layoutEkvgrund,
                    variabelbada: layoutVariabelbada,
                    enbrakterm: layoutEnbrakterm,

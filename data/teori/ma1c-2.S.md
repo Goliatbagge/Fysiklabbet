@@ -35,7 +35,8 @@ hur många lösningar en ekvation eller olikhet har.
 - **distributiva lagen**: regeln $a(b+c) = ab + ac$ som ligger bakom all
   multiplikation med en parentes.
 - **faktorisera uttryck**: skriva ett uttryck som en multiplikation genom
-  att bryta ut en gemensam faktor.
+  att bryta ut en gemensam faktor. Faktorn kan vara ett tal, en variabel
+  eller ett helt parentesuttryck som återkommer i alla termer.
 - **ekvation**: likhet mellan två uttryck som innehåller en variabel; att
   lösa den innebär att lösa ut variabeln.
 - **olikhet**: jämförelse mellan två uttryck med ett olikhetstecken
@@ -107,7 +108,13 @@ eller division med ett negativt tal.
 - Vid multiplikation av två parenteser ska varje term i den första
   parentesen multipliceras med varje term i den andra.
 - Vid faktorisering bryter man ut den största gemensamma talfaktorn och
-  den minsta potensen av varje variabel som finns i alla termer.
+  den minsta potensen av varje variabel som finns i alla termer. Står
+  samma parentes i alla termer bryts hela parentesen ut:
+  $3(x + 2) - x(x + 2) = (x + 2)(3 - x)$.
+- Jämna tal tecknas $2k$, udda tal $2k + 1$ och tre på varandra följande
+  heltal $n$, $n + 1$ och $n + 2$. Att visa att en summa alltid är delbar
+  med 3 görs genom att teckna summan, förenkla och faktorisera så att
+  faktorn 3 syns: $n + (n + 1) + (n + 2) = 3(n + 1)$.
 - Har ekvationen variabler i båda led: samla variabeltermerna på den sida
   som har minst koefficient, så blir fortsatt räkning enklare.
 - Leder ekvationslösningen till en falsk likhet (till exempel $-12 = 63$) saknar
@@ -160,7 +167,9 @@ lösningen är alla tal mellan −3 och 3, markerat på en tallinje:
 - Kan du utveckla ett parentesuttryck med distributiva lagen, även när två
   parenteser multipliceras med varandra?
 - Kan du faktorisera ett uttryck genom att bryta ut en gemensam faktor
-  (tal och variabel)?
+  (tal, variabel eller ett helt parentesuttryck)?
+- Kan du teckna jämna tal, udda tal och tal som följer på varandra med en
+  variabel, och visa att en summa alltid är delbar med ett visst tal?
 - Kan du lösa en linjär ekvation steg för steg, utan att pröva dig fram?
 - Vet du hur man löser en ekvation med variabler i båda led, och känner du
   igen när en ekvation saknar lösning?

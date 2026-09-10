@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 09 Sep 2026 01:33:03 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 01:26:36 GMT</lastBuildDate>
+    <item>
+      <title>Materialet går sönder långt innan det brister — och den tysta fasen är tre fjärdedelar av förloppet</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-10-sprickan-som-smyger</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-10-sprickan-som-smyger</guid>
+      <pubDate>Thu, 10 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Mekanik</category>
+      <description>Ett glas som spricker ser ut att gå sönder på ett ögonblick. Men i försök vid Hebreiska universitetet i Jerusalem har fysiker nu följt ett brott ända från början, och funnit att sprickan föds som en pytteliten fläck som kryper fram i snigelfart. Först när fläcken blivit lika stor som materialets tjocklek slår förloppet om och rusar i väg mot ljudhastigheten.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-10-sprickan-som-smyger.jpg" length="139506" type="image/jpeg"/>
+    </item>
     <item>
       <title>Fotonen som aldrig borde ha nått fram — 300 TeV från en gammablixt två miljarder ljusår bort</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-09-fotonen-som-inte-borde-ha-natt-fram</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>I tjugo år har det krävts bly för att koka fram kvark-gluonplasma, materien som fyllde universum de första miljondelarna av en sekund. Nu har LHC lyckats med kärnor som bara rymmer 16 respektive 20 kärnpartiklar — och strömmen av partiklar som rann ut visade att neonkärnan inte är rund inuti utan avlång, som en bowlingkägla.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-22-lilla-smallen.jpg" length="394102" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Ögat kan inte se värmestrålning — nu finns ett par glasögon som målar den i rött och cyan</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-21-infrarod-farg</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-21-infrarod-farg</guid>
-      <pubDate>Fri, 21 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Fotonik</category>
-      <description>Mörkerseende har alltid varit grönt eller gråtonat, eftersom en infraröd bild inte bär någon färg ögat kan läsa. Ett skikt kvantprickar ovanpå en organisk lysdiod ger nu varje infraröd våglängd sin egen kulör — i ett par genomskinliga glasögon som väger 23 gram.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-21-infrarod-farg.jpg" length="584175" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

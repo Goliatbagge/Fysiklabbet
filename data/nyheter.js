@@ -103,6 +103,66 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-10-sprickan-som-smyger",
+    date: "2026-09-10",
+    title: "Materialet går sönder långt innan det brister — och den tysta fasen är tre fjärdedelar av förloppet",
+    deck: "Ett glas som spricker ser ut att gå sönder på ett ögonblick. Men i försök vid Hebreiska universitetet i Jerusalem har fysiker nu följt ett brott ända från början, och funnit att sprickan föds som en pytteliten fläck som kryper fram i snigelfart. Först när fläcken blivit lika stor som materialets tjocklek slår förloppet om och rusar i väg mot ljudhastigheten.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-10-sprickan-som-smyger.jpg",
+    imageAlt: "Närbild av nosen på ett svart raketplan. Den lilla fönsterrutan i förarkabinen är genomkorsad av ett finmaskigt nät av sprickor som strålar ut från en punkt i rutans vänstra del. Bakom planet syns en ljus torrsjö och några personer.",
+    imageCredit: "Foto: NASA Armstrong Flight Research Center (public domain). Bilden visar den spruckna yttre rutan i raketplanet X-15 efter flygningen den 9 november 1961, inte den försöksuppställning artikeln handlar om.",
+    tags: ["mekanik", "brottmekanik", "materialfysik", "energi", "hållfasthet", "spröda material", "spricka", "jordbävning", "friktion", "höghastighetsfilm", "elasticitet"],
+    sources: [
+      { name: "Phys.org: Tiny 2D cracks creep through materials before triggering sudden fracture, experiments reveal", url: "https://phys.org/news/2026-09-tiny-2d-materials-triggering-sudden.html" },
+      { name: "Physical Review Letters 137, artikel 106102 (2026): Nucleation, Creep, and Dynamic Tensile Fracture Are Described by Extended LEFM", url: "https://doi.org/10.1103/jxfm-6xhn" },
+      { name: "Xinhua: Israeli, Chinese, French scientists reveal hidden process behind cracks, earthquakes", url: "https://english.news.cn/20260907/7fc0b811b59742dd9142e2013a49029a/c.html" }
+    ],
+    research: { citation: "Yuval Paz, Meng Wang, Mokhtar Adda-Bedia och Jay Fineberg, ”Nucleation, Creep, and Dynamic Tensile Fracture Are Described by Extended LEFM”, Physical Review Letters 137, artikel 106102 (2026)", url: "https://doi.org/10.1103/jxfm-6xhn" },
+    body: [
+      { type: 'p', html: 'Ta en glasskiva och böj den försiktigt. Länge händer ingenting alls. Sedan ligger den i två delar, och steget däremellan gick för fort för att uppfatta. Just det steget har varit brottmekanikens blinda fläck: det avgörande sker på en tidsskala och en längdskala som normalt ligger under vad någon hinner mäta.' },
+      { type: 'p', html: 'I <em>Physical Review Letters</em> redovisar Yuval Paz och Jay Fineberg vid Hebreiska universitetet i Jerusalem, tillsammans med Meng Wang vid Beijing Institute of Technology och Mokhtar Adda-Bedia vid CNRS i Lyon, mätningar av hela förloppet — från den allra första skadan till det slutliga brottet. Slutsatsen är att materialet redan hade gått sönder, långsamt och i tysthet, långt innan det brast.' },
+
+      { type: 'h2', text: 'Ett hundraårigt villkor som inte säger hur det börjar' },
+      { type: 'p', html: 'Grunden lades 1921 av Alan Arnold Griffith, som insåg att ett brott är en fråga om bokföring av energi. När en spricka växer ett steg gör den två saker samtidigt. Den frigör den elastiska energi som var lagrad i materialet runt omkring, ungefär som när en spänd fjäder får slappna av. Och den kostar energi, eftersom två nya ytor måste skapas där det förut satt ihop. Sprickan växer av sig själv först när det som frigörs är minst lika mycket som det som kostar.' },
+      { type: 'p', html: 'Ur den bokföringen faller en kritisk längd, Griffithlängden, som brukar skrivas $L_\\mathrm{G} \\propto \\dfrac{\\Gamma E}{\\sigma^2}$, där $\\Gamma$ är brottenergin per ytenhet, $E$ elasticitetsmodulen och $\\sigma$ dragspänningen. En spricka kortare än så ska vara stabil och stå still. En spricka längre än så ska skena i väg.' },
+      { type: 'p', html: 'Villkoret säger alltså vad som händer med en spricka som redan finns. Det säger ingenting om var den första sprickan kommer ifrån. Och i de nya försöken uppstod sprickorna vid omkring 0,1&nbsp;millimeter, medan Griffithlängden i samma material låg kring en hel millimeter — tio gånger större. Enligt läroboken borde ingenting ha hänt. Ändå hände det, och det som hände var inte ett brott utan en krypning.' },
+
+      { type: 'h2', text: 'Ultrarapid i gelé' },
+      { type: 'p', html: 'Att förloppet över huvud taget gick att följa beror på ett knep som forskargruppen har byggt sin verksamhet kring. I stället för glas eller plexiglas använder de spröda geler av polyakrylamid. De går sönder på samma sätt som vanliga spröda material, men de är oerhört mycket mjukare, och det ändrar tempot fullständigt.' },
+      { type: 'p', html: 'En spricka kan nämligen aldrig gå fortare än ytvågen i materialet, Rayleighvågen. I glas motsvarar det flera kilometer i sekunden, alltså snabbare än en gevärskula. I den här sortens geler är samma gräns nere på några meter i sekunden. Hela förloppet spelas därmed upp hundratals gånger långsammare, och en snabbkamera hinner se varje skede.' },
+      { type: 'p', html: 'Det forskarna såg var att skadan börjar som en platt fläck inne i materialet: en tvådimensionell yta som breder ut sig i det plan där skivan senare ska dela sig. Fläcken kryper fram med hastigheter från mikrometer till millimeter i sekunden. Det är långsamt även med vardagsmått — i den nedre änden hinner sprickfronten inte ens ett hårstrås bredd på en sekund. Och den fasen upptar minst tre fjärdedelar av hela brottförloppet, mätt i tid. Själva brottet på slutet tar mikrosekunder till millisekunder.' },
+
+      { type: 'h2', text: 'Ögonblicket då geometrin byter form' },
+      { type: 'p', html: 'Omslaget kommer inte av att materialet plötsligt blir svagare. Det kommer av geometrin. Så länge fläcken är mindre än skivans tjocklek är den en ö av skada omgiven av helt material åt alla håll, och materialet ovanför och nedanför bär fortfarande sin del av lasten. Överskottet av energi vid varje litet steg framåt är därför magert, och sprickan kommer bara långsamt vidare.' },
+      { type: 'p', html: 'När fläcken vuxit sig lika stor som tjockleken finns det ingenting kvar att hålla emot med. Skadan går rakt igenom skivan, och sprickan slutar vara en yta och blir en linje — en front som skär tvärs igenom materialet. Från det ögonblicket gäller den klassiska endimensionella beskrivningen, varje nytt steg frigör mer energi än det kostar, och sprickan accelererar mot sin övre gräns.' },
+      { type: 'p', html: 'Det är därför författarna kallar sin beskrivning en utvidgad version av den klassiska teorin. Samma energibokföring som hos Griffith, men med skivans tjocklek inskriven i den. Uppkomsten, krypningen och den explosiva avslutningen faller då ut ur en och samma beskrivning, i stället för att den första och viktigaste delen lämnas åt sitt öde.' },
+
+      { type: 'h2', text: 'Kanske samma början för ett jordskalv' },
+      { type: 'p', html: 'Intresset sträcker sig långt bortom spruckna glasrutor. Samma forskargrupp har tidigare visat att de fronter som breder ut sig längs en förkastning när ett jordskalv startar lyder under samma ekvationer som sprickor gör. Forskarna framhåller att en likadan långsam inledning därför kan föregå det ögonblick då två bergytor börjar glida mot varandra. Något jordskalv har inte mätts i det här arbetet, men om beskrivningen håller är det ett steg mot att förstå vad som sker under den tystnad som råder innan marken skakar.' },
+      { type: 'p', html: 'Där ligger också den lockande tanken. Är merparten av förloppet långsamt, och startar det dessutom under den gräns där man hittills har letat, då finns det i princip ett tidsfönster att upptäcka det i. Haken syns i samma mening: fläcken är en tiondels millimeter stor och ligger inuti materialet. Det ska mycket till innan ett spruckit fönsterglas varnar i förväg. Men det är en annan sorts problem än att inte veta vad man letar efter.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Griffithlängden är omvänt proportionell mot spänningen i kvadrat. Fördubblar man dragningen räcker det alltså med en fyra gånger mindre defekt för att sätta i gång ett brott.',
+        'Griffith kom på sin teori för att förklara en gåta: tunna glasfibrer visade sig vara långt starkare än tjocka stavar av exakt samma glas. Förklaringen är att hållfastheten sitter i defekterna, inte i materialet — och i en tunn fiber finns det helt enkelt färre och mindre repor att starta ett brott ifrån.',
+        'Sprickans övre hastighetsgräns är farten hos materialets ytvåg. I fönsterglas ligger den kring 3&nbsp;000&nbsp;m/s, i en mjuk gel kring några meter i sekunden. Det är hela skälet till att fysiker som vill studera brott arbetar med gelé i stället för glas.',
+        'Den 9 november 1961 flög Robert White raketplanet X-15 i mach 6,04, som förste människa förbi sex gånger ljudhastigheten. På vägen ner, medan farten bromsades genom mach 2,7, sprack den yttre rutan i förarkabinens högra fönster av större värmespänningar än någon hade räknat med. Han landade med hjälp av den vänstra.'
+      ] }
+    ],
+    larare: {
+      moment: [
+        { label: "Fysik nivå 1 · 5.2 Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Fysik nivå 1 · 4.1 Energi — intro och arbete", href: "katalog.html?id=fy1-4.1" },
+        { label: "Fysik nivå 1 · 3.6 Friktion", href: "katalog.html?id=fy1-3.6" }
+      ],
+      fragor: [
+        "Griffiths villkor jämför den energi som frigörs när en spricka växer med den energi det kostar att skapa två nya ytor. Varför blir det just en kritisk längd ur den jämförelsen, och inte en kritisk kraft?",
+        "Forskarna arbetar med mjuk gel i stället för glas, trots att ingen bygger fönster av gel. Vilka slutsatser kan man dra om glas ur ett försök med gel, och vilka kan man inte dra?",
+        "Krypfasen upptar minst tre fjärdedelar av tiden men bara en liten del av sträckan. Vad säger det om varför brott ändå upplevs som att de sker helt utan förvarning?"
+      ]
+    }
+  },
+  {
     id: "2026-09-09-fotonen-som-inte-borde-ha-natt-fram",
     date: "2026-09-09",
     title: "Fotonen som aldrig borde ha nått fram — 300 TeV från en gammablixt två miljarder ljusår bort",

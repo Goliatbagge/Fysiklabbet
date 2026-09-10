@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'brottmekanik',
+    term: 'Brottmekanik',
+    former: ['brottmekanik', 'brottmekaniken', 'brottmekanisk', 'brottmekaniska', 'brottenergi', 'brottenergin', 'brottseghet', 'brottsegheten'],
+    kort: 'Läran om hur sprickor uppstår och breder ut sig i ett material. Den räknar inte på hur stark en kropp är i genomsnitt, utan på vad som händer vid spetsen av en enda spricka.',
+    relaterade: ['griffithlangden', 'rayleighvag'],
+    body: [
+      { type: 'p', html: 'Om man räknar ut hur starkt ett material borde vara utifrån hur hårt atomerna sitter ihop, får man ett tal som ligger tiotals eller hundratals gånger över vad en verklig bit av samma material tål. Skillnaden sitter i defekterna. En repa, en luftbubbla eller en osynlig ojämnhet i ytan koncentrerar dragningen till en enda liten punkt, och det är där brottet börjar. Brottmekaniken är den gren av fysiken som räknar på just detta: inte på materialet i stort, utan på vad som händer vid spetsen av en spricka.' },
+      { type: 'p', html: 'Kärnan är ett energiresonemang. När en spricka växer ett litet steg frigörs den elastiska energi som var lagrad i materialet omkring den, ungefär som när en spänd fjäder får slappna av. Samtidigt kostar steget energi, för det ska skapas två nya ytor där materialet förut satt ihop. Den kostnaden per ytenhet kallas brottenergi och är en materialegenskap: hos glas är den låg, hos gummi och seg metall är den hög. Sprickan går vidare av sig själv först när det som frigörs minst täcker det som kostar.' },
+      { type: 'p', html: 'Materialen brukar delas in efter vad som händer i den lilla zonen framför sprickspetsen. I ett sprött material, som glas eller en keramik, ger materialet vika nästan omedelbart och sprickan far i väg. I ett segt material, som de flesta metaller, deformeras området framför spetsen först plastiskt och slukar då stora mängder energi, vilket bromsar eller stoppar sprickan. Det är därför en stålbalk böjer sig innan den brister medan en glasruta bara går av — och därför brottmekaniken behövs för allt från flygplansvingar till kylskåpsdörrar av glas.' }
+    ]
+  },
+  {
+    id: 'griffithlangden',
+    term: 'Griffithlängden',
+    former: ['griffithlängden', 'griffithlängd', 'griffithlängder', 'griffiths kriterium', 'griffiths villkor'],
+    kort: 'Den kritiska spricklängd där ett brott slår om från stabilt till självgående. Är sprickan kortare står den still, är den längre skenar den i väg genom materialet.',
+    relaterade: ['brottmekanik', 'rayleighvag'],
+    body: [
+      { type: 'p', html: 'Alan Arnold Griffith undersökte i början av 1920-talet varför glas är så mycket svagare i verkligheten än på papperet. Han fann att tunna glasfibrer tål betydligt mer dragning än tjocka stavar av exakt samma glas, och drog slutsatsen att hållfastheten sitter i defekterna snarare än i materialet. I en tunn fiber finns helt enkelt färre och mindre repor att starta ett brott ifrån.' },
+      { type: 'p', html: 'Ur det resonemanget faller en kritisk längd. Ju längre en spricka är, desto mer lagrad energi frigör varje nytt steg framåt — men kostnaden för att skapa ny yta är densamma hela vägen. Vid en viss längd hinner vinsten i kapp kostnaden, och därefter driver sprickan sig själv. Den längden kallas Griffithlängden. Den blir kortare ju hårdare materialet dras i, och längre ju mer energi det kostar att spräcka materialet.' },
+      { type: 'p', html: 'Sambandet förklarar en rad vardagliga saker. En liten repa i kanten av en glasruta gör den mycket lättare att knäcka, eftersom repan redan är en färdig start. Ett hål borrat i änden av en spricka i en plåt kan stoppa den, eftersom hålet sprider ut dragningen i stället för att samla den i en spets. Och glas som ska tåla mycket härdas, vilket lägger materialets yta i tryck så att repor i den hålls ihop i stället för att dras isär.' }
+    ]
+  },
+  {
+    id: 'rayleighvag',
+    term: 'Rayleighvåg',
+    former: ['rayleighvåg', 'rayleighvågen', 'rayleighvågor', 'rayleighvågorna', 'rayleighhastigheten', 'ytvåg', 'ytvågen', 'ytvågor', 'ytvågorna'],
+    kort: 'En våg som färdas längs ytan på ett fast material och dör bort på djupet. Den sätter den övre hastighetsgränsen för hur fort en spricka kan gå, och den är den mest förödande vågtypen vid ett jordskalv.',
+    relaterade: ['brottmekanik', 'griffithlangden', 'chockvag'],
+    body: [
+      { type: 'p', html: 'Slå på ytan av ett fast föremål och en del av störningen färdas rakt igenom kroppen, medan en del kryper längs ytan. Den senare är en ytvåg, och den vanligaste sorten beskrevs 1885 av lord Rayleigh. I den rör sig materialpartiklarna i små ellipser, alltså både upp och ner och fram och tillbaka, och rörelsen klingar av snabbt nedåt: en bit under ytan märks nästan ingenting. Rayleighvågen är något långsammare än den tvärgående vågen inne i materialet, ungefär nittio procent av dess hastighet.' },
+      { type: 'p', html: 'Att vågen håller sig vid ytan gör den farlig. När ett jordskalv har inträffat är det de snabba vågorna genom berget som kommer först, men det är ytvågorna som anländer sist och gör mest skada, eftersom deras energi hålls kvar i det tunna skikt där husen står. Samma vågtyp används med omvänt syfte inom materialprovning, där en ytvåg skickas längs en svets eller en axel för att leta efter sprickor utan att något behöver tas isär.' },
+      { type: 'p', html: 'Rayleighvågen sätter också en fartgräns i brottmekaniken. En spricka som far genom ett sprött material drivs framåt av att spänningen omfördelas framför spetsen, och den omfördelningen kan i sin tur inte gå fortare än materialets egna vågor. Därför kan en spricka i teorin aldrig överskrida ytvågens hastighet, och i praktiken stannar den ofta betydligt under. I glas ligger gränsen på flera kilometer i sekunden, medan den i en mjuk gel bara är några meter i sekunden — vilket är hela skälet till att brottförsök gärna görs i gel, där förloppet går att filma.' }
+    ]
+  },
+  {
     id: 'dubbelspaltforsoket',
     term: 'Dubbelspaltförsöket',
     former: ['dubbelspaltförsöket', 'dubbelspaltförsök', 'dubbelspaltförsöken', 'dubbelspalt', 'dubbelspalten', 'dubbelspalter', 'dubbelspaltinterferens'],

@@ -1802,6 +1802,20 @@ Format per post:
   till det svalnat. Källa: phys.org (sök "twisted laser plasma OAM 2026").
   (tillagd 2026-07-02)
 
+## Fynd som inte användes (2026-09-10) — kan tas upp senare
+
+- **Skiktad design ger en ny väg till topologiska magneter** — forskare vid Tohoku-universitetet bygger materialet lager för lager och får fram magnetiska tillstånd som är svåra att störa. Ingång: magnetism, spinn och vad det betyder att en egenskap är topologiskt skyddad. Kontrollera vad som är uppmätt och vad som är beräknat, och leta upp originalstudien. OBS: magnetism togs upp 2026-08-31, så låt det gå tid. Källa (Phys.org 2026-09-09):
+  https://phys.org/news/2026-09-layer-based-route-topological-magnets.html
+  (tillagd 2026-09-10)
+
+- **Magnetfält i tre riktningar vrider på materialets spinnmönster** — genom att lägga fältet i olika riktningar går det att ställa in hur spinnen ordnar sig i materialet FNPP, med spinntronik som mål. Ingång: magnetfält, spinn och hur ett material kan minnas en inställning. Källa (Phys.org 2026-09-09):
+  https://phys.org/news/2026-09-3d-magnetic-field-reveals-tune.html
+  (tillagd 2026-09-10)
+
+- **Kvantmaterial som ska göra jakten på mörk materia känsligare** — nya materialtyper föreslås som detektorer för mycket lätt mörk materia, där en enda liten energiöverföring ska kunna märkas. Ingång: energikvanta, detektorer och varför känslighet kostar kyla. OBS: mörk materia togs upp 2026-08-29 och ligger redan på två ställen i kön — välj bara ETT av dem, och låt det gå gott om tid. Källa (Phys.org 2026-09-09):
+  https://phys.org/news/2026-09-unconventional-quantum-materials-boost-dark.html
+  (tillagd 2026-09-10)
+
 ## Reservuppslag vid nyhetstorka (tidlösa)
 
 - **Varför lyser norrsken i olika färger?** — knyter till energinivåer/spektrallinjer

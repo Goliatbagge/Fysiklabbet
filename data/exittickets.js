@@ -10605,6 +10605,22 @@ window.EXITTICKETS = {
     ],
   },
   {
+    question: 'Vilken av ekvationerna är en förstagradsekvation, och vad kallas dess lösning?',
+    choices: [
+      '$x^2 - 5x + 4 = 0$, och lösningen kallas exponent',
+      '$x^2 - 5x + 4 = 0$, och lösningen kallas rot',
+      '$3x + 2 = 23$, och lösningen kallas term',
+      '$3x + 2 = 23$, och lösningen kallas rot',
+    ],
+    correct: 3,
+    why: [
+      'Där är den högsta variabelexponenten 2, så det är en andragradsekvation. Exponenten är dessutom ett tal i potensen, inte en lösning.',
+      'Rot är rätt ord för en lösning, men $x^2 - 5x + 4 = 0$ har högsta variabelexponenten 2 och är en andragradsekvation.',
+      'Ekvationen är rätt: $x$ betyder $x^1$, så högsta exponenten är 1. Men en term är en del av ett uttryck, inte en lösning.',
+      'I $3x + 2 = 23$ är den högsta variabelexponenten 1, och lösningen till en ekvation kallas rot. Här är roten $x = 7$.',
+    ],
+  },
+  {
     question: 'När Maja löser ekvationen $6x + 5 = 6x - 1$ försvinner $x$ helt, och kvar står $5 = -1$. Vad betyder det?',
     choices: [
       'Ekvationen saknar lösning, eftersom likheten är falsk vilket värde $x$ än har',

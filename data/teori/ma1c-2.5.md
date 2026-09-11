@@ -15,6 +15,19 @@ $x$, och ett likhetstecken, =. Vid ekvationslösning ska vi bestämma värdet
 på variabeln. Det gör vi genom att **lösa ut** variabeln, till exempel $x$, så att
 den står ensam på ena sidan av likhetstecknet.
 
+::: formel "Rot, förstagradsekvation och andragradsekvation"
+En **rot** är en lösning till en ekvation. Orden betyder samma sak: roten
+till ekvationen $3x + 2 = 23$ är $x = 7$.
+
+Ekvationer sorteras efter den **högsta exponent** som variabeln har:
+
+- **Förstagradsekvation**: den högsta variabelexponenten är 1, till exempel
+  $3x + 2 = 23$. Att $x$ betyder $x^1$ ser man inte, eftersom exponenten 1
+  aldrig skrivs ut. Det är sådana ekvationer det här avsnittet handlar om.
+- **Andragradsekvation**: den högsta variabelexponenten är 2, till exempel
+  $x^2 - 5x + 4 = 0$. Hur de löses kommer i ett senare avsnitt.
+:::
+
 För att lösa ut $x$ används några grunder som beror på vilket räknesätt vi
 har. Grundprincipen är att det vi gör på ena sidan av likhetstecknet måste
 vi också göra på andra sidan av likhetstecknet, annars kommer ekvationen
@@ -147,6 +160,18 @@ $$
 :::
 :::
 
+::: härledning "OBS — Avrunda eller inte?"
+I **ren matematik**, när uppgiften bara är en ekvation som ska lösas,
+avrundar vi **aldrig**. Svaret lämnas exakt, som $x = \dfrac{24}{7}$ i
+exempel 1 b). Ett avrundat tal är inte längre en lösning till ekvationen:
+sätter vi in $x = 3{,}4$ stämmer likheten inte exakt.
+
+I en **tillämpning**, när ekvationen beskriver en verklig situation (ett
+pris, en sträcka, ett antal personer), avrundar vi nästan **alltid**.
+Svaret ska vara ett tal som går att använda, till exempel 3,43 kr eller
+24 personer, och hur många decimaler som är rimligt avgör situationen.
+:::
+
 Nästan alla ekvationer i det här avsnittet har exakt en lösning. Men en
 förstagradsekvation kan också **sakna lösning** eller ha **oändligt många
 lösningar**. Det händer när variabeltermerna tar ut varandra: står till
@@ -240,7 +265,11 @@ lösning.
 ::: sampunkt "Vad en ekvation är"
 - Två uttryck som ska vara **lika**. Innehåller alltid en variabel och ett
   likhetstecken.
-- Att lösa den betyder att få variabeln **ensam** på ena sidan.
+- Att lösa den betyder att få variabeln **ensam** på ena sidan. Lösningen
+  kallas också **rot**.
+- **Förstagradsekvation**: högsta variabelexponenten är 1, som
+  $3x + 2 = 23$. **Andragradsekvation**: högsta exponenten är 2, som
+  $x^2 - 5x + 4 = 0$.
 - Försvinner variabeln under lösningen: en **falsk** likhet ($3 = -4$)
   betyder att lösning saknas, en **sann** likhet ($3 = 3$) att alla tal
   är lösningar.
@@ -262,7 +291,8 @@ lösning.
 - Sätt in ditt svar i den **ursprungliga** ekvationen och kontrollera.
 - **Prövning, alltså att testa sig fram, är inte tillåtet** som
   lösningsmetod.
-- Avrunda inte svaret. Lämna det gärna som ett bråk:
-  $x = \dfrac{24}{7}$.
+- I ren matematik avrundas svaret **aldrig**, lämna det som ett bråk:
+  $x = \dfrac{24}{7}$. I en tillämpning på verkligheten avrundas det
+  nästan alltid.
 :::
 :::

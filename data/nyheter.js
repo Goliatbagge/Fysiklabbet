@@ -103,6 +103,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-11-linjen-som-aldrig-blir-skarp",
+    date: "2026-09-11",
+    title: "Ingen spektrallinje är knivskarp — och bredden mäter hur länge ett hål i atomens innersta skal hinner finnas",
+    deck: "Ett fält av omkring 250 supraledande termometrar, kylda till en bråkdel av en grad över absoluta nollpunkten, har mätt röntgenljuset från uran, neptunium och plutonium noggrannare än någon gjort förut. Det som sätter gränsen är inte längre instrumentet utan atomerna själva.",
+    category: "Atomfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-11-linjen-som-aldrig-blir-skarp.jpg",
+    imageAlt: "En guldpläterad fyrkantig hållare på ett aluminiumfundament. Innanför ramen ligger blå kretskort och rader av små grå kvadrater i prydliga rutnät, sammanbundna av tunna guldtrådar och glänsande lödkulor.",
+    imageCredit: "Foto: NIST (public domain). Bilden visar det fält med omkring 250 transition-edge-sensorer som användes i studien.",
+    tags: ["atomfysik", "röntgenstrålning", "spektrallinjer", "obestämdhetsrelationen", "supraledning", "mätteknik", "detektorer", "uran", "plutonium", "elektronskal", "gammastrålning"],
+    sources: [
+      { name: "NIST: NIST-developed quantum sensors improve nuclear monitoring", url: "https://www.nist.gov/news-events/news/2026/09/nist-developed-quantum-sensors-improve-nuclear-monitoring" },
+      { name: "Phys.org: Ultra-cold quantum sensors cut X-ray uncertainty, improving nuclear material assessments", url: "https://phys.org/news/2026-09-ultra-cold-quantum-sensors-ray.html" },
+      { name: "Physical Review Letters 137, artikel 113001 (2026)", url: "https://doi.org/10.1103/tcbz-kqk1" }
+    ],
+    research: { citation: "A. Wessels med flera, ”Measured and Theoretical Kα X-Ray Emission Linewidths of U, Np, and Pu”, Physical Review Letters 137, artikel 113001 (2026)", url: "https://doi.org/10.1103/tcbz-kqk1" },
+    body: [
+      { type: 'p', html: 'I en spektrumtavla ritas varje linje som ett tunt streck: här sitter natriums gula linje, där vätets röda. Verkligheten är suddigare. Ingen spektrallinje är oändligt smal, och hos de allra tyngsta grundämnena är den inte ens i närheten av smal. Nu har ett forskarlag mätt bredden hos tre av de bredaste linjer som finns — röntgenlinjerna från uran, neptunium och plutonium — noggrannare än någon gjort förut.' },
+      { type: 'p', html: 'Mätningen publicerades den 10 september i <em>Physical Review Letters</em>. Bakom den står nitton forskare, med Abigail Wessels vid det amerikanska institutet för standarder och mätteknik, NIST, i Boulder som förste författare, tillsammans med kollegor från University of Colorado Boulder, Los Alamos National Laboratory, Houghton University och Laboratoire Kastler Brossel vid Sorbonne i Paris.' },
+
+      { type: 'h2', text: 'Hålet som bara hinner finnas i några attosekunder' },
+      { type: 'p', html: 'Atomens elektroner ligger i skal, och innerst sitter K-skalet, hårdast bundet av alla. Slås en elektron bort därifrån uppstår en lucka på den mest eftertraktade platsen i hela atomen. Den fylls nästan genast av en elektron från skalet utanför, och mellanskillnaden i energi lämnar atomen som en foton. Hos aktiniderna, alltså uran, neptunium, plutonium och deras grannar i periodiska systemet, bär den fotonen omkring $100\\ \\mathrm{keV}$, ungefär femtiotusen gånger mer energi än en foton synligt ljus. Linjen kallas Kα.' },
+      { type: 'p', html: 'Men fotonen kommer inte ut med exakt samma energi varje gång, och det beror inte på slarv i mätningen. Ett tillstånd som bara finns under en kort tid kan inte ha en skarpt bestämd energi. Heisenbergs obestämdhetsrelation i sin tidsform, $\\Delta E \\cdot \\Delta t \\approx \\hbar$, binder ihop de två storheterna: ju kortare livstid, desto bredare linje.' },
+      { type: 'p', html: 'För de tunga grundämnena ligger linjebredden i storleksordningen hundra elektronvolt. Vänder man på sambandet och sätter in $\\hbar \\approx 6{,}58 \\cdot 10^{-16}\\ \\mathrm{eV}\\cdot\\mathrm{s}$ hamnar livstiden kring $7 \\cdot 10^{-18}\\ \\mathrm{s}$, alltså några attosekunder. Så länge, och inte längre, står luckan i K-skalet öppen. Linjens bredd är med andra ord en klocka: den mäter hur bråttom atomen har.' },
+
+      { type: 'h2', text: 'En termometer som känner en enda foton' },
+      { type: 'p', html: 'Ska en så bred linje mätas ordentligt måste detektorn vara betydligt skarpare än bredden själv, och där har halvledardetektorerna länge kommit till korta. En nedkyld germaniumdetektor, standardverktyget i gammaspektroskopi, skiljer i det här energiområdet på energier som ligger omkring $500\\ \\mathrm{eV}$ isär. Linjen man vill studera är alltså bara några gånger bredare än mätosäkerheten.' },
+      { type: 'p', html: 'Lösningen är att mäta värme i stället för laddning. En transition-edge-sensor är en tunn supraledande film som hålls precis i omslaget mellan supraledande och vanlig metall, en bråkdel av en grad över absoluta nollpunkten. Där är balansen så skör att en minimal temperaturhöjning ger ett kraftigt utslag i filmens resistans. Absorberas en enda foton värms sensorn en aning, resistansen hoppar, och hoppets storlek är ett direkt mått på fotonens energi. Ett sådant instrument klarar omkring $10\\ \\mathrm{eV}$ vid $100\\ \\mathrm{keV}$, ungefär femtio gånger skarpare än germaniumdetektorn. Eftersom varje sensor är liten och hinner fånga få fotoner arbetar de många i taget: i det aktuella instrumentet omkring 250 stycken sida vid sida.' },
+
+      { type: 'h2', text: 'Varför någon bryr sig om hur bred en linje är' },
+      { type: 'p', html: 'Att ta reda på vad ett prov innehåller av uran och plutonium, utan att skära i det, går ut på att räkna fotoner i energiområdet mellan $90\\ \\mathrm{keV}$ och $100\\ \\mathrm{keV}$. Där ligger gammalinjer från kärnorna och röntgenlinjer från elektronskalen om vartannat. Uranets anrikningsgrad bestäms till exempel ur ett par gammalinjer vid $92{,}38\\ \\mathrm{keV}$ och $92{,}80\\ \\mathrm{keV}$, som kommer från torium-234 och därmed berättar om uran-238, jämförda med en röntgenlinje vid $93{,}35\\ \\mathrm{keV}$ som hör till uran-235. Alla tre ryms inom en dryg halv keV.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-11-linjen-som-aldrig-blir-skarp-2.jpg', alt: 'En grov, matt metallring med skrovlig yta står på en repig metallskiva. Ringen är ungefär lika hög som den är bred i godset och har ett runt hål i mitten.', caption: 'En ring av elektroraffinerat plutonium, omkring 11&nbsp;cm i diameter och 5,3&nbsp;kg tung. Vad ett sådant stycke innehåller går att avgöra utifrån de fotoner det sänder ut, utan att materialet behöver delas.', credit: 'Foto: Los Alamos National Laboratory (fri användning med angiven upphovsman). Bilden visar inte studiens prov.' },
+      { type: 'p', html: 'Ju skarpare detektorn blir, desto mer av det som förut såg ut som en slät bakgrund visar sig vara enskilda linjer ovanpå varandra. För att räkna en gammatopp rätt måste röntgenlinjerna under den dras bort, och för att dra bort dem måste man veta hur breda de är och vilken form de har. Just den kunskapen har varit den svaga länken. Enligt NIST krympte osäkerheten i de nya mätningarna till mellan en tredjedel och en åttondel av vad tidigare mätningar gav.' },
+      { type: 'quote', html: 'Våra mätningar stöder den internationella kärnämneskontrollen genom att göra det möjligt att bokföra materialet i kärntekniska anläggningar noggrannare.', cite: 'Jonathan Dean, fysiker vid NIST och University of Colorado Boulder' },
+      { type: 'p', html: 'Nyttan stannar inte där. Går sammansättningen att bestämma snabbare behöver materialet inte ligga och vänta lika länge mellan stegen i en anläggning. Och för atomfysiken är linjebredderna intressanta i sig. De går att räkna ut teoretiskt, men bara med en modell som tar hänsyn till att elektronerna innerst i de tyngsta atomerna rör sig så fort att relativitetsteorin måste räknas in. En mätning som är upp till åtta gånger säkrare än förut är ett motsvarande hårdare prov för de beräkningarna.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Linjebredden är ett mått på tid. Ur $\\Delta E \\cdot \\Delta t \\approx \\hbar$ följer att en linje som är hundra elektronvolt bred hör till ett tillstånd som lever några miljarddels miljarddels sekunder. En linje som är en miljondel så bred hör till ett tillstånd som lever en miljon gånger längre.',
+        'Transition-edge-sensorn är i grunden en termometer. Hela mätningen vilar på att en supraledares resistans ändras oerhört brant just i omslaget mellan supraledande och normalt tillstånd — håller man filmen mitt i det omslaget räcker värmen från en enda foton för att ge ett tydligt utslag.',
+        'Neptunium finns bara i försvinnande små mängder naturligt. Det som mäts i laboratorier är tillverkat, och bildas i kärnreaktorer i två steg: en kärna av uran-238 fångar in en neutron och blir uran-239, som sedan betasönderfaller till neptunium-239.',
+        'Kα-linjen fick sitt namn av Charles Barkla i början av 1900-talet, långt innan någon visste att den kom från en lucka i det innersta elektronskalet. K stod ursprungligen bara för den mest genomträngande av de strålningssorter han kunde skilja ut.'
+      ] },
+      { type: 'p', html: 'Kvar står en tanke värd att dröja vid. Under lång tid var det mätarna som var den svaga länken, och atomens linjer kunde behandlas som oändligt tunna streck. Nu är det tvärtom: instrumenten är skarpare än naturen, och det suddiga i bilden kommer från atomen själv.' }
+    ],
+    larare: {
+      moment: [
+        { label: "Fysik nivå 2 · 4.7 Spektrallinjer", href: "katalog.html?id=fy2-4.7" },
+        { label: "Fysik nivå 2 · 4.8 Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" },
+        { label: "Fysik nivå 1 · 9.3 Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" }
+      ],
+      fragor: [
+        "Linjebredden sägs vara ett mått på hur länge ett tillstånd finns till. Varför är det en egenskap hos naturen och inte hos mätinstrumentet, och hur skulle man kunna avgöra vilket av de två man faktiskt ser?",
+        "Gammalinjerna kommer från atomkärnan och röntgenlinjerna från elektronskalen, men de hamnar i samma energiområde. Vad säger det om hur mycket energi som är inblandad i de två helt olika processerna?",
+        "Forskarna mäter en storhet som ingen är intresserad av i sig, för att kunna dra bort den från något annat de vill mäta. Var i fysiken finns fler exempel på att bakgrunden måste kartläggas innan signalen går att läsa?"
+      ]
+    }
+  },
+  {
     id: "2026-09-10-sprickan-som-smyger",
     date: "2026-09-10",
     title: "Materialet går sönder långt innan det brister — och den tysta fasen är tre fjärdedelar av förloppet",

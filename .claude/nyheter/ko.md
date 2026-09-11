@@ -1816,6 +1816,21 @@ Format per post:
   https://phys.org/news/2026-09-unconventional-quantum-materials-boost-dark.html
   (tillagd 2026-09-10)
 
+## Fynd som inte användes (2026-09-11) — kan tas upp senare
+
+- **Kvantfasen hos ett fritt fall uppmätt för första gången** — ett lag lett från Ben-Gurion-universitetet, med Ulm, Oxford och Roger Penrose, delade en atoms vågfunktion i två delar, lät den ena hållas kvar och den andra falla fritt, och mätte fasskillnaden som byggts upp. Beskrivs som den första direkta mätningen av den kvantfas ett fritt fallande föremål får. Ingång: fritt fall, våg-partikeldualitet och interferens. Ron Folman, Or Dobkowski med flera, Science Advances 12 (36), 2026-09-02, DOI 10.1126/sciadv.aec8045. ⚠️ OBS: ligger nära 2026-09-03 (rubidiumisotoperna som föll sida vid sida i omloppsbana) — samma familj av försök, samma grundämne, samma ekvivalensprincip. Låt det gå MINST några veckor, och skriv då med tydlig vinkel på fasen och interferensen, inte på ekvivalensprincipen. Källa (ScienceDaily 2026-09-08):
+  https://www.sciencedaily.com/releases/2026/09/260907201552.htm
+  (tillagd 2026-09-11)
+
+- **Halleffekten fungerar även när magnetfältet ligger i materialets plan** — sedan Edwin Hall 1879 har läroboken sagt att fältet måste stå vinkelrätt mot skivan för att ge en Hallspänning. Ett lag vid Carnegie Mellon visar att en Hallrespons uppstår också med fältet i planet, vilket skulle låta en enda tunn komponent mäta magnetfält i flera riktningar. Ingång: den magnetiska kraften på laddningar i rörelse, alltså rakt in i $F = qvB$ — ovanligt lättkopplat. Nature Materials, Carnegie Mellons LIQUID-grupp. Kontrollera i vilket material effekten uppmätts och vad symmetrin kräver. Källor (Carnegie Mellon 2026-08-19, ScienceDaily 2026-09-01):
+  https://www.cmu.edu/news/stories/archives/2026/august/cmu-physicists-take-hall-effect-in-a-new-direction ,
+  https://www.sciencedaily.com/releases/2026/09/260901010659.htm
+  (tillagd 2026-09-11)
+
+- **Ett ekonomiskt Q-värde för fusionskraftverk** — forskare föreslår ett mått som väger ett fusionskraftverks nytta mot vad det kostar att driva, vid sidan av det rena energiutbytet Q. Ingång: verkningsgrad, energibalans och skillnaden mellan att en process går runt fysikaliskt och att den går runt ekonomiskt. Mer resonemang än upptäckt, så passar en lugn nyhetsdag. Källa (Physics World 2026-09):
+  https://physicsworld.com/a/researchers-propose-economic-q-metric-for-judging-fusion-power-plant-viability/
+  (tillagd 2026-09-11)
+
 ## Reservuppslag vid nyhetstorka (tidlösa)
 
 - **Varför lyser norrsken i olika färger?** — knyter till energinivåer/spektrallinjer

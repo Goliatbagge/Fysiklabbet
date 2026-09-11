@@ -56,6 +56,43 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'naturlig-linjebredd',
+    term: 'Naturlig linjebredd',
+    former: ['naturlig linjebredd', 'naturliga linjebredden', 'linjebredd', 'linjebredden', 'linjebredder', 'linjebredderna'],
+    kort: 'Att en spektrallinje aldrig är oändligt smal, utan har en bredd som bestäms av hur länge atomens tillstånd hinner finnas till. Kort livstid ger bred linje.',
+    relaterade: ['spektroskopi', 'obestamdhetsrelationen', 'exciterat-tillstand', 'foton'],
+    body: [
+      { type: 'p', html: 'I en spektrumbild ser varje linje ut som ett tunt streck, som om atomen sände ut ljus med exakt en enda energi. Så är det inte. Mäter man tillräckligt noga visar sig varje linje ha en bredd: fotonerna kommer ut med energier som ligger samlade kring ett mittvärde, men inte alla på precis samma tal. Den bredden går inte att mäta bort med bättre instrument, för den sitter i atomen och inte i mätaren. Därför kallas den den naturliga linjebredden.' },
+      { type: 'p', html: 'Orsaken är att det tillstånd fotonen kommer ifrån inte lever för evigt. En atom som blivit av med en elektron eller fått en elektron lyft till en högre nivå faller tillbaka efter en viss tid, och ju kortare den tiden är, desto sämre bestämd är tillståndets energi. Sambandet är Heisenbergs obestämdhetsrelation i sin tidsform: produkten av energiosäkerheten och livstiden kan inte bli mindre än ungefär den reducerade Plancks konstant. Ett långlivat tillstånd ger alltså en knivskarp linje, ett kortlivat en bred.' },
+      { type: 'p', html: 'Skillnaderna är enorma. En elektron som faller ner mellan två yttre nivåer i en natriumatom dröjer några miljarddels sekunder, och natriumlinjen blir därför smal som ett hårstrå. En lucka i det innersta elektronskalet hos ett tungt grundämne fylls i stället igen på några miljarddels miljarddels sekunder, och då blir linjen bred nog att synas som en tydlig kulle i ett spektrum. Eftersom bredden och livstiden hänger ihop så direkt är en uppmätt linjebredd i praktiken ett stoppur för processer som är alldeles för snabba för att klockas på något annat sätt.' },
+      { type: 'p', html: 'Utöver den naturliga bredden finns bredning som beror på omgivningen: atomerna rör sig och ger dopplerskift åt olika håll, de krockar med varandra, och elektriska och magnetiska fält skjuver isär nivåerna. Sådan bredning går att minska genom att kyla gasen eller göra provet tunnare. Den naturliga bredden blir kvar hur mycket man än städar.' }
+    ]
+  },
+  {
+    id: 'karakteristisk-rontgenstralning',
+    term: 'Karakteristisk röntgenstrålning',
+    former: ['karakteristisk röntgenstrålning', 'karakteristiska röntgenstrålningen', 'röntgenlinje', 'röntgenlinjen', 'röntgenlinjer', 'röntgenlinjerna', 'röntgenfluorescens', 'röntgenfluorescensen'],
+    kort: 'Det röntgenljus en atom sänder ut när en lucka i ett inre elektronskal fylls igen. Våglängderna är olika för varje grundämne och fungerar som ett fingeravtryck.',
+    relaterade: ['foton', 'spektroskopi', 'naturlig-linjebredd', 'elektronvolt', 'orbital'],
+    body: [
+      { type: 'p', html: 'Atomens elektroner ligger i skal, och de innersta är hårdast bundna. Slår man loss en av dem, till exempel med en snabb elektron eller en energirik foton, uppstår en lucka på en plats där naturen ogärna lämnar tomrum. En elektron från ett skal längre ut faller nästan omedelbart ner och fyller igen den, och eftersom den då hamnar i ett lägre energitillstånd måste mellanskillnaden lämna atomen. Oftast gör den det som en enda foton.' },
+      { type: 'p', html: 'Den fotonen har en energi som är helt bestämd av vilket grundämne det är, eftersom skalens energier beror på hur många protoner kärnan har. Därför kallas strålningen karakteristisk: den är karakteristisk för ämnet. Linjerna namnges efter vilket skal luckan satt i och hur långt bort elektronen kom ifrån. Faller elektronen från skalet närmast utanför det innersta heter linjen Kα, kommer den ett skal längre ut heter den Kβ.' },
+      { type: 'p', html: 'Energin växer kraftigt med grundämnets storlek. Hos aluminium ligger Kα-linjen kring 1,5&nbsp;keV, hos järn kring 6,4&nbsp;keV och hos uran över 98&nbsp;keV. Det gör metoden användbar: belyser man ett okänt föremål med röntgen och mäter vilka linjer som kommer tillbaka går det att räkna upp vilka grundämnen som finns i det, och ungefär hur mycket. Tekniken heter röntgenfluorescens och används för att analysera konstverk utan att skrapa på dem, sortera metallskrot, leta mineral i fält och kontrollera vad ett prov av kärnbränsle innehåller.' }
+    ]
+  },
+  {
+    id: 'mikrokalorimeter',
+    term: 'Mikrokalorimeter',
+    former: ['mikrokalorimeter', 'mikrokalorimetern', 'mikrokalorimetrar', 'mikrokalorimetrarna', 'transition-edge-sensor', 'transition-edge-sensorn', 'transition-edge-sensorer', 'transition-edge-sensorerna'],
+    kort: 'En strålningsdetektor som i grunden är en mycket liten, mycket kall termometer: den mäter hur mycket varmare en metallbit blir när en enda foton absorberas i den.',
+    relaterade: ['supraledare', 'absoluta-nollpunkten', 'foton', 'gammastralning', 'squid'],
+    body: [
+      { type: 'p', html: 'De flesta strålningsdetektorer räknar laddning. En foton slår loss elektroner i en halvledarkristall, och ur den laddningspuls som uppstår räknas fotonens energi fram. Metoden är beprövad men trubbig, eftersom antalet frigjorda laddningar varierar slumpmässigt från gång till gång. En mikrokalorimeter gör i stället något mycket enklare i princip: den mäter värme. Fotonen fastnar i en liten absorbator, absorbatorn blir en aning varmare, och temperaturhöjningen är direkt proportionell mot fotonens energi.' },
+      { type: 'p', html: 'För att det ska fungera måste två saker gälla. Absorbatorn måste vara mycket liten, annars blir uppvärmningen försvinnande liten, och den måste vara mycket kall, annars dränks signalen i den värmerörelse som redan finns. Därför körs sådana detektorer en bråkdel av en grad över absoluta nollpunkten, i kylmaskiner som fyller ett halvt rum. Den vanligaste varianten kallas transition-edge-sensor och använder en tunn supraledande film som hålls precis i omslaget mellan supraledande och vanligt metalliskt tillstånd. Där ändras resistansen så brant med temperaturen att den lilla uppvärmningen från en enda foton ger ett kraftigt och lättläst utslag.' },
+      { type: 'p', html: 'Priset är att varje sensor är liten och därför fångar få fotoner, så i praktiken kopplas hundratals ihop till ett fält som arbetar parallellt. Vinsten är skärpan: en mikrokalorimeter kan skilja på energier som ligger tiotals gånger närmare varandra än vad en kyld halvledardetektor klarar. Det gör dem oumbärliga där spektrumet är trångt, till exempel när röntgenljus från olika grundämnen ligger ovanpå gammalinjer från atomkärnor, och de används också i rymdteleskop för röntgenastronomi och i jakten på mycket sällsynta sönderfall.' }
+    ]
+  },
+  {
     id: 'brottmekanik',
     term: 'Brottmekanik',
     former: ['brottmekanik', 'brottmekaniken', 'brottmekanisk', 'brottmekaniska', 'brottenergi', 'brottenergin', 'brottseghet', 'brottsegheten'],
@@ -987,7 +1024,7 @@ window.BEGREPP = [
   {
     id: 'spektroskopi',
     term: 'Spektroskopi',
-    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'spektrum', 'spektrumet', 'spektret', 'spektra', 'spektrometer', 'spektrometern', 'laserspektroskopi', 'fotoelektronspektroskopi'],
+    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'spektrum', 'spektrumet', 'spektret', 'spektra', 'spektrometer', 'spektrometern', 'laserspektroskopi', 'fotoelektronspektroskopi', 'gammaspektroskopi', 'gammaspektroskopin'],
     kort: 'Konsten att dela upp ljus efter våglängd och läsa av mönstret av ljusa och mörka linjer. Eftersom varje grundämne har sitt eget linjemönster går det att bestämma vad något består av utan att röra vid det.',
     relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand', 'diffraktionsgitter'],
     body: [

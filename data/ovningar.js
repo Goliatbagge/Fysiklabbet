@@ -20341,6 +20341,30 @@ $$ x = 8 $$
 
 **Svar:** $x = 8$`,
         },
+        {
+            level: 2,
+            question: `Lös ekvationen $7x + 2 = 4x + 3x - 5$.`,
+            choices: [
+                `Ekvationen saknar lösning`,
+                `$x = 0$`,
+                `$x = -1$`,
+                `Ekvationen har oändligt många lösningar`,
+            ],
+            correct: 0,
+            solution: `Förenkla först högerledet, där $4x + 3x = 7x$:
+
+$$ 7x + 2 = 7x - 5 $$
+
+Samma variabelterm står i båda led. Subtrahera $7x$ från båda led:
+
+$$ 7x + 2 - 7x = 7x - 5 - 7x $$
+
+$$ 2 = -5 $$
+
+Variabeln försvann, och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.
+
+**Svar:** Ekvationen saknar lösning`,
+        },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,

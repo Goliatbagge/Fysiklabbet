@@ -147,12 +147,103 @@ $$
 :::
 :::
 
+Nästan alla ekvationer i det här avsnittet har exakt en lösning. Men en
+förstagradsekvation kan också **sakna lösning** eller ha **oändligt många
+lösningar**. Det händer när variabeltermerna tar ut varandra: står till
+exempel $8x$ i båda led och vi subtraherar $8x$ från båda led, så
+försvinner $x$ helt, och kvar står bara en likhet mellan två tal. Det som
+avgör är om den likheten är sann eller falsk.
+
+::: formel "Hur många lösningar har en förstagradsekvation?"
+Förenkla båda led och lös ekvationen som vanligt. En av tre saker händer:
+
+- **Variabeln blir kvar**, till exempel $x = 7$. Ekvationen har **exakt en
+  lösning**. Det är det vanliga fallet.
+- **Variabeln försvinner och kvar står en falsk likhet**, till exempel
+  $3 = -4$. Inget värde på $x$ kan göra påståendet sant. Ekvationen
+  **saknar lösning**.
+- **Variabeln försvinner och kvar står en sann likhet**, till exempel
+  $3 = 3$. Påståendet är sant vilket värde $x$ än har. Ekvationen har
+  **oändligt många lösningar**: varje tal är en lösning.
+:::
+
+Att variabeln försvinner är alltså inget räknefel, utan ett tecken på att
+ekvationen är av det här slaget. Man känner igen de två fallen redan
+innan man börjar lösa: när båda led är förenklade står **samma
+variabelterm i båda led**. Är konstanterna olika, som i $4x + 3 = 4x - 4$,
+saknar ekvationen lösning. Är leden helt identiska, som i
+$4x + 3 = 4x + 3$, är båda led samma uttryck skrivet på två sätt, och då
+är alla tal lösningar.
+
+::: exempel "Exempel 2 — Ekvationer utan lösning och med oändligt många lösningar"
+**Lös<br>a)&nbsp;$8x + 3 = 5x + 3x - 4$&emsp;&emsp;b)&nbsp;$4(x - 1) + 7 = 4x + 3$**
+
+::: handskrift
+typ: losningsantal
+:::
+
+::: textlosning
+**a)** Vi förenklar först högerledet, där $5x + 3x = 8x$:
+
+$$
+8x + 3 = 8x - 4
+$$
+
+Nu står $8x$ i båda led. Vi subtraherar $8x$ från båda led:
+
+$$
+8x + 3 - 8x = 8x - 4 - 8x
+$$
+
+$$
+3 = -4
+$$
+
+Variabeln försvann, och kvar står en likhet som är falsk: 3 är inte lika
+med $-4$. Det finns alltså inget värde på $x$ som gör att ekvationen
+stämmer.
+
+**Svar:** Ekvationen saknar lösning.
+
+**b)** Vi multiplicerar först in 4 i parentesen:
+
+$$
+4x - 4 + 7 = 4x + 3
+$$
+
+Sedan slår vi ihop konstanterna i vänsterledet, $-4 + 7 = 3$:
+
+$$
+4x + 3 = 4x + 3
+$$
+
+Båda led är nu exakt samma uttryck. Vi subtraherar $4x$ från båda led:
+
+$$
+4x + 3 - 4x = 4x + 3 - 4x
+$$
+
+$$
+3 = 3
+$$
+
+Variabeln försvann, och kvar står en likhet som är sann. Ekvationen
+stämmer alltså vilket värde $x$ än har.
+
+**Svar:** Ekvationen har oändligt många lösningar. Varje tal $x$ är en
+lösning.
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Vad en ekvation är"
 - Två uttryck som ska vara **lika**. Innehåller alltid en variabel och ett
   likhetstecken.
 - Att lösa den betyder att få variabeln **ensam** på ena sidan.
+- Försvinner variabeln under lösningen: en **falsk** likhet ($3 = -4$)
+  betyder att lösning saknas, en **sann** likhet ($3 = 3$) att alla tal
+  är lösningar.
 :::
 
 ::: sampunkt "Grundprincipen"

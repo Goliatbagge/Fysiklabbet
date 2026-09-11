@@ -117,8 +117,10 @@ eller division med ett negativt tal.
   faktorn 3 syns: $n + (n + 1) + (n + 2) = 3(n + 1)$.
 - Har ekvationen variabler i båda led: samla variabeltermerna på den sida
   som har minst koefficient, så blir fortsatt räkning enklare.
-- Leder ekvationslösningen till en falsk likhet (till exempel $-12 = 63$) saknar
-  ekvationen lösning.
+- Försvinner variabeln under lösningen avgör likheten som blir kvar: en
+  falsk likhet (till exempel $-12 = 63$) betyder att ekvationen saknar
+  lösning, en sann likhet (till exempel $3 = 3$) att den har oändligt
+  många lösningar, alla tal.
 - I ekvationer med variabeln i nämnaren måste man först ange vilka värden
   som gör nämnaren noll (och alltså inte är tillåtna); har ekvationen en
   bråkterm i vardera ledet löser man med korsvis multiplikation, och med

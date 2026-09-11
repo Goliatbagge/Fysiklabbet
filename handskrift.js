@@ -7034,6 +7034,147 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: ekvationer utan lösning / med oändligt många
+   * lösningar (ma1c-2.5 ex 2) ------------------------------------------
+   * a) 8x+3=5x+3x-4: variabeltermerna tar ut varandra och kvar står den
+   * falska likheten 3=-4, så ekvationen saknar lösning. b) 4(x-1)+7=4x+3:
+   * leden blir identiska och kvar står 3=3, sant för alla x, så
+   * ekvationen har oändligt många lösningar. Poängen är att variabelns
+   * försvinnande inte är ett räknefel utan ekvationens sätt att visa
+   * vilket av de två fallen den tillhör. */
+  function layoutLosningsantal(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) —
+     * mkEkvOp ger samma antal klicksteg i båda. */
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var samla = mkSamla(T), multIn = mkMultIn(T);
+    var xwA = Math.max(padL + T.adv('a) 8x+3=5x+3x-4'),
+                       padL + 30 + T.adv('8x+3=8x-4')) + 0.9 * F;
+    var xwB = Math.max(padL + T.adv('b) 4(x-1)+7=4x+3'),
+                       padL + 30 + T.adv('4x-4+7=4x+3'),
+                       padL + 30 + T.adv('4x+3=4x+3')) + 0.9 * F;
+
+    /* ---- a) 8x+3=5x+3x-4 ---- */
+    /* Första raden läggs under y=210: inställningsrutan är HÖGRE i
+     * ekvval-scener (tankarna + gruppen "Ekvationer") och zonen når
+     * y < 210 (se OBS i mobilzon-regeln i filhuvudet). Raden når med
+     * väggen in i zonen i sidled. */
+    y = 242;
+    var ySa = y;
+    xx = T.str('a) 8x+3=', padL, y);
+    var a1 = xx; xx = T.str('5x', xx, y);   var a1b = xx;
+    var a2 = xx; xx = T.str('+3x', xx, y);  var a2b = xx;
+    T.str('-4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först förenklar jag']],
+      [['högerledet:']],
+      [['5x+3x=8x.']]
+    ]);
+    /* 5x och 3x ringas in innan 8x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST); plustecknet före 3x lämnas utanför ringen */
+    y += 2.3 * F;
+    xx = T.str('8x+3=', padL + 30, y);
+    samla(xx, y, [
+      { ringar: [[a1, a1b, ySa], [a2 + T.adv('+'), a2b, ySa]], skriv: '8x' },
+      { skriv: '-4' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['8x står i båda led. Jag']],
+      [['subtraherar 8x från båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '-8x', xwA, '8x+3=8x-4');
+    T.str('3=-4', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Variabeln försvann helt!']],
+      [['Men 3 är inte lika med']],
+      [['-4. Likheten är falsk']],
+      [['vilket värde x än har.']]
+    ]);
+    y += 2.3 * F;
+    T.str('3≠-4', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    xe = T.str('Svar: Saknar lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) 4(x-1)+7=4x+3 ---- */
+    tanke(y, [
+      [['Här finns en parentes.']],
+      [['Jag multiplicerar in 4']],
+      [['först.']]
+    ]);
+    y += 3.4 * F;
+    xx = T.str('b) ', padL, y);
+    var q1 = xx; xx = T.str('4', xx, y);    var q1b = xx;
+    xx = T.str('(', xx, y);
+    var q2 = xx; xx = T.str('x', xx, y);    var q2b = xx;
+    var q3 = xx; xx = T.str('-1', xx, y);   var q3b = xx;
+    xx = T.str(')+7=4x+3', xx, y);
+    T.stepEnd();
+
+    /* båge från 4:an till varje term, produkten direkt efter varje båge
+     * (se REGEL: MULTIPLICERA IN I PARENTES) */
+    var yArcB = y - 0.95 * F;
+    y += 2.3 * F;
+    var yB = y;
+    var db = [
+      { fran: [q1, q1b], till: [q2, q2b], skriv: '4x', hojd: 24 },
+      { fran: [q1, q1b], till: [q3, q3b], skriv: '-4', hojd: 40, dx: 4 }
+    ];
+    xx = multIn(padL + 30, y, yArcB, db);
+    var x7 = xx; xx = T.str('+7', xx, y);   var x7b = xx;
+    T.str('=4x+3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Konstanterna i']],
+      [['vänsterledet slås ihop:']],
+      [['-4+7=3.']]
+    ]);
+    /* -4 (med sitt minustecken) och 7 ringas in innan +3 skrivs */
+    y += 2.3 * F;
+    xx = T.str('4x', padL + 30, y);
+    samla(xx, y, [
+      { ringar: [[db[1].x0, db[1].x1, yB], [x7 + T.adv('+'), x7b, yB]],
+        skriv: '+3' },
+      { skriv: '=4x+3' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda led är nu samma']],
+      [['uttryck. Jag subtraherar']],
+      [['4x från båda led och ser']],
+      [['vad som blir kvar.']]
+    ]);
+    y = ekvOp(y, '-4x', xwB, '4x+3=4x+3');
+    T.str('3=3', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3=3 är sant vilket värde']],
+      [['x än har. Alla tal är']],
+      [['lösningar till ekvationen.']]
+    ]);
+    y += 2.0 * F;
+    xe = T.str('Svar: Oändligt många lösningar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: variabler i båda led (ma1c-2.6 ex 1) --------
    * a), b) och c). Metoden är alltid: förenkla båda led först, ta sedan
    * bort variabeltermen från det led som har MINST koefficient, och lös
@@ -37886,6 +38027,7 @@
                    faktoriseraparentes: layoutFaktoriseraparentes,
                    delbarhet: layoutDelbarhet,
                    ekvgrund: layoutEkvgrund,
+                   losningsantal: layoutLosningsantal,
                    variabelbada: layoutVariabelbada,
                    parentesekv: layoutParentesekv,
                    enbrakterm: layoutEnbrakterm,

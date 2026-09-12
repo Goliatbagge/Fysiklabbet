@@ -12,6 +12,23 @@ Format:
 ```
 
 ## 2026-09-13 — "En foton som inte borde ha nått fram"
+- **UPPLAGD i EmailOctopus 2026-09-12** (lokal session) som kampanjen
+  "Nyhetsbrev nr 5 - 2026-09-13": avsändare Fysiklabbet
+  <kontakt@fysiklabbet.se>, ämnesrad och preheader ur utkastet, mallen
+  "Code your own", All subscribers (22 kontakter). HTML:en hämtades i
+  webbläsaren direkt från
+  https://fysiklabbet.se/.claude/nyhetsbrev/utkast/2026-09-13.html (GitHub
+  Pages serverar .claude/ och skickar Access-Control-Allow-Origin: *), med
+  den inledande HTML-kommentaren bortsträckt och {{PreviewText}}-diven
+  inlagd efter <body> — enklare än base64-vägen i kommandofilen, och den
+  garanterar att versionen på main är den som laddas upp (här fanns en
+  nyare commit än den lokala arbetskopian). Förhandsvisningen verifierad:
+  5 bilder laddade, inga trasiga, sidfotstaggarna på plats.
+  Fliken lämnad på Content-stegets "Preview & test" med knappen
+  "Send as test" framme. ÅTERSTÅR för användaren: testskick och
+  schemaläggning till söndag 06.00 svensk tid (Delivery står på "Send
+  immediately" och måste bytas till "Send at a specific time"; tidszonen
+  default:ar till London!).
 - Status: UTKAST skrivet 2026-09-12 (lördag, körd som schemalagd routine, deadline
   08.00 svensk tid). Tänkt utskick söndag 2026-09-13 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-07 till 2026-09-12; sajtuppdateringar sedan

@@ -23,10 +23,12 @@ Format:
   i headless Chrome, så INGEN skärmdump av sajten kunde tas. `NYTT PÅ
   FYSIKLABBET` är därför rent textlänkat denna vecka; minimikravet "minst
   en bild visar något på sajten" är INTE uppfyllt.
-  ⚠️ ANVÄNDAREN BÖR ANTINGEN ta en egen skärmdump av "Prova själv"-rutan i
-  https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer
-  (den nya funktionen som nämns i brevet) och lägga in den, eller acceptera
-  ett textlänks-brev för den sektionen denna vecka. De tre nyhetsbilderna
+  ✅ LÖST lokalt 2026-09-12 (commit 71cf950): skärmdumpen av "Prova
+  själv"-rutan i artikeln om dubbelspalten togs mot dev-servern med
+  puppeteer (element `#prova-sjalv` plus 30 px luft runt om, skalad till
+  1200 px), sparades som `nyheter/brev/2026-09-13-prova-sjalv.jpg` och
+  lades in under stycket om den nya rutan. Minimikravet "minst en bild
+  visar något på sajten" är därmed uppfyllt. De tre nyhetsbilderna
   (hjälte + två miniatyrer) är däremot på plats, beskurna lokalt med Pillow
   ur de redan publicerade nyhetsbilderna.
 - Nyheter: 2026-09-09-fotonen-som-inte-borde-ha-natt-fram (hjälte, bedömd
@@ -54,7 +56,8 @@ Format:
   nyheter/bilder/2026-09-09-fotonen-som-inte-borde-ha-natt-fram.jpg, 1000 px,
   135 kB), -dubbelspalt-thumb.jpg och -vitt-thumb.jpg (kvadratiska
   beskärningar av respektive nyhetsbild, 500 px). Beskurna med Pillow.
-  Ingen sajtskärmdump, se ⚠️ ovan.
+  Sajtskärmdumpen 2026-09-13-prova-sjalv.jpg (1200 px, 56 kB) tillkom
+  lokalt, se ✅ ovan.
 - Veckans tips: RSS-flödet (feed.xml), aldrig tipsat förut, krok: brevet
   själv nämner att det bara går ut en gång i veckan medan sajten publicerar
   dagligen. Daterat 2026-09-13 i tips.md.
@@ -70,11 +73,11 @@ Format:
   omdirigerade till lokala repo-sökvägar i en kopia under .shots/
   (utkastfilen behåller de absoluta fysiklabbet.se-adresserna). Skickad
   till användaren med SendUserFile.
-- ÅTERSTÅR för användaren: (1) lösa skärmdumpsfrågan ovan, (2) granska
-  utkastet, (3) lägga upp i EmailOctopus och schemalägga till söndag
+- ÅTERSTÅR för användaren: (1) granska utkastet, (2) lägga upp i
+  EmailOctopus och schemalägga till söndag
   06.00 svensk tid (tidszonen default:ar till London, 06.00 där blir
   07.00 svensk tid — `/brev-till-octopus` måste köras lokalt, molnsessionen
-  saknar Chrome-åtkomst till EmailOctopus), (4) kontrollera att bilderna i
+  saknar Chrome-åtkomst till EmailOctopus), (3) kontrollera att bilderna i
   nyheter/brev/ syns live på fysiklabbet.se innan utskick.
 
 ## 2026-09-06 — "En strömbrytare för supraledningen i grafen"

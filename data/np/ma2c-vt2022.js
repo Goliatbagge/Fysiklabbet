@@ -607,11 +607,16 @@ window.NP_PROV['ma2c-vt2022'] = {
                 },
                 {
                     rubrik: 'Använd vinkelsumman i den stora triangeln ABC',
-                    varfor: 'I triangeln $ABC$ är vinklarna $2\\alpha$, $2\\beta$ och $v$. Summan ' +
-                        '$2\\alpha + 2\\beta = 2(\\alpha + \\beta)$ är dubbelt så stor som den vi just ' +
-                        'räknade ut.',
-                    text: '$$v + 2\\alpha + 2\\beta = 180\\degree \\quad \\Longleftrightarrow \\quad ' +
-                        'v = 180\\degree - 2 \\cdot 55\\degree = 70\\degree$$',
+                    varfor: 'I triangeln $ABC$ är vinklarna $2\\alpha$, $2\\beta$ och $v$. Vi känner ' +
+                        'inte $\\alpha$ och $\\beta$ var för sig, bara summan. Men både $2\\alpha$ och ' +
+                        '$2\\beta$ har faktorn 2, så tvåan kan brytas ut: innanför parentesen står då ' +
+                        'summan $\\alpha + \\beta$, och den är $55\\degree$. Sedan är det en vanlig ' +
+                        'ekvation: subtrahera $110\\degree$ från båda led.',
+                    text: '$$\\begin{aligned} v + 2\\alpha + 2\\beta &= 180\\degree \\\\ ' +
+                        'v + 2(\\alpha + \\beta) &= 180\\degree \\\\ ' +
+                        'v + 2 \\cdot 55\\degree &= 180\\degree \\\\ ' +
+                        'v + 110\\degree &= 180\\degree \\\\ ' +
+                        'v &= 180\\degree - 110\\degree = 70\\degree \\end{aligned}$$',
                     figur: 'u11-s3',
                 },
             ],

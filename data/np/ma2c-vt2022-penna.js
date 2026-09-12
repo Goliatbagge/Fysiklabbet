@@ -24,6 +24,7 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkMultIn = V.mkMultIn,
+      mkEkvOp = V.mkEkvOp,
       mkArc = V.mkArc, mkAxes = V.mkAxes, substRings = V.substRings,
       fadeRings = V.fadeRings, humanize = V.humanize, expFrac = V.expFrac,
       bigParen = V.bigParen, vinkelBage = V.vinkelBage, ratVinkel = V.ratVinkel,
@@ -1289,8 +1290,12 @@
   reg(11, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
-    var vagg = !!cfg.vagg;
-    var xw = padL + T.adv('α+β+125°=180°') + 0.9 * F;
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var y55, x55a, x55b, xp0, xp1, ringar;
+    /* EN vägg för båda ekvationsoperationerna: den läggs till höger om
+     * den bredaste av de två raderna, så att strecken hamnar i lodrät linje. */
+    var xw = Math.max(padL + T.adv('α+β+125°=180°'),
+                      padL + 30 + T.adv('v+110°=180°')) + 0.9 * F;
     var D2R = Math.PI / 180;
     var A = [70, 240], B = [380, 240], aA = 74 * D2R, aB = 36 * D2R;
     /* C: skärningen mellan strålen från A (vinkel aA) och från B (aB) */
@@ -1376,7 +1381,8 @@
       T.stepEnd();
       y += 2.2 * F;
     }
-    T.str('α+β=55°', padL + 30, y);
+    y55 = y; x55a = padL + 30;
+    x55b = T.str('α+β=55°', x55a, y);
     T.stepEnd();
 
     /* ---- den stora triangeln ABC ---- */
@@ -1389,12 +1395,55 @@
     T.str('v+2α+2β=180°', padL, y);
     T.stepEnd();
 
+    /* UTBRYTNING: 2α+2β är dubbla summan α+β, och den summan är känd.
+     * Parentesen stängs först med sin sista term (se REGEL: PARENTESEN
+     * STÄNGS SIST i handskrift.js filhuvud). */
     tanke(y, [
-      [['2α+2β=2(α+β), och α+β vet jag']],
-      [['är 55°. Jag löser ut v.']]
+      [['Jag känner inte α och β var']],
+      [['för sig, bara summan α+β. Men']],
+      [['både 2α och 2β har faktorn 2,']],
+      [['så jag bryter ut tvåan.']]
     ]);
     y += 2.6 * F;
-    T.str('v=180°-2·55°=180°-110°=70°', padL + 30, y);
+    xx = T.str('v+2(', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvar innanför parentesen blir']],
+      [['α+β, och då kan parentesen']],
+      [['stängas.']]
+    ]);
+    xp0 = xx;
+    xx = T.str('α+β', xx, y);
+    xp1 = xx;
+    T.str(')=180°', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in 55° på']],
+      [['α+β:s plats i parentesen.']]
+    ]);
+    ringar = substRings(acts, [[x55a, x55b, y55, F], [xp0, xp1, y, F]]);
+    y += 2.6 * F;
+    T.str('v+2·55°=180°', padL + 30, y);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Multiplikationen först:']],
+      [['2·55°=110°.']]
+    ]);
+    y += 2.4 * F;
+    T.str('v+110°=180°', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är det en vanlig ekvation.']],
+      [['Jag subtraherar 110° från']],
+      [['båda led.']]
+    ]);
+    y = ekvOp(y, '-110°', xw, 'v+110°=180°');
+    T.str('v=70°', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [

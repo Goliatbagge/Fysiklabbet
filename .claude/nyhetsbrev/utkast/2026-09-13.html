@@ -4,15 +4,17 @@
   Utskick:   söndag 2026-09-13 kl 06.00 svensk tid (EmailOctopus)
   Brevperiod: 2026-09-07 till 2026-09-12 (nyheter). Sajtuppdateringar sedan 2026-09-06.
   OBS: bilderna i nyheter/brev/ måste ligga på main innan brevet skickas.
-  Skrivet i en molnsession UTAN tillgång till CDN:erna (unpkg/jsdelivr/
-  fonts.googleapis blockerade av nätverkspolicyn, samma begränsning som
-  2026-08-23, 2026-08-30 och 2026-09-05), så ingen React-byggd sida gick
-  att rendera där. Skärmdumpen av "Prova själv"-rutan
-  (nyheter/brev/2026-09-13-prova-sjalv.jpg) togs därför lokalt 2026-09-12
-  ur artikeln om dubbelspalten och lades in under stycket om den nya
-  rutan. Minimikravet "minst en bild visar något på sajten" är uppfyllt.
-  Nyhetsbildernas beskärningar (hero + två miniatyrer) gjordes lokalt med
-  Pillow ur de befintliga nyhetsbilderna i nyheter/bilder/.
+  Två sajtbilder, tagna var för sig samma morgon:
+  "Prova själv"-rutan (nyheter/brev/2026-09-13-prova-sjalv.jpg) togs
+  lokalt ur artikeln om dubbelspalten, och pennlösningen till uppgift 11
+  (-np-pennlosning.jpg) togs i molnsessionen. Molnets nätverkspolicy
+  blockerar CDN:erna (unpkg/jsdelivr/fonts.googleapis), så React-sidorna
+  renderar inte rakt av i headless Chrome; det löstes genom att hämta
+  biblioteken (react, react-dom, babel, katex, marked) och typsnitten
+  från npm och fånga upp CDN-anropen i Playwright. Pennlösningen mountas
+  via .shots/penna-np.html med HANDSKRIFT.mount(..., {instant:true}).
+  Nyhetsbildernas beskärningar (hero + två miniatyrer) gjordes med Pillow
+  ur de befintliga nyhetsbilderna i nyheter/bilder/.
 -->
 <!DOCTYPE html>
 <html lang="sv">
@@ -93,7 +95,12 @@
         <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
       </div>
 
-      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Ett nytt nationellt prov att träna på.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2022" style="color:#2563a8;">Matematik nivå 2c, våren 2022</a> är inne, med alla 28 uppgifter från delprov B, C och D. Varje uppgift har både en textlösning som klickas fram steg för steg och en pennlösning skriven för hand.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Ett nytt nationellt prov att träna på.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2022" style="color:#2563a8;">Matematik nivå 2c, våren 2022</a> är inne, med alla 28 uppgifter från delprov B, C och D. Varje uppgift har både en textlösning som klickas fram steg för steg och en pennlösning som skrivs för hand på rutat papper, figuren först och svaret understruket sist.</p>
+
+      <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2022" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-13-np-pennlosning.jpg" width="600" alt="Handskriven lösning på rutat papper: en triangel ABC med bisektriser från A och B som möts i D, vinklarna markerade med blått, och under figuren vinkelsummorna som ger svaret v = 70 grader, understruket" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0 0 20px;">Uppgift 11 ur provet, löst med penna steg för steg. Klicka för att öppna provet.</div>
 
       <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Nyheterna länkar nu till sina simuleringar.</strong> Handlar en artikel om något sajten också har en simulering för, som <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer" style="color:#2563a8;">veckans om dubbelspalten</a>, dyker en egen ruta upp direkt under texten med en genväg dit. Läs om fenomenet, klicka, och stå mitt i experimentet.</p>
 

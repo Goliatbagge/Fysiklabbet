@@ -1831,6 +1831,18 @@ Format per post:
   https://physicsworld.com/a/researchers-propose-economic-q-metric-for-judging-fusion-power-plant-viability/
   (tillagd 2026-09-11)
 
+- **Atomer som leds genom en ljusbana i stället för av en fiberkärna** — ett lag har fått kalla atomer att följa en ljusledd bana genom en ihålig optisk fiber, med sikte på tröghetsnavigering som fungerar där satellitnavigering är störd eller saknas. Ingång: materievågor, acceleration och hur ett tröghetssystem håller reda på var man är utan att titta ut. Kontrollera vad som är byggt och vad som är en plan. OBS: kvantsensorer togs upp 2026-09-11, låt det gå tid. Källa (Phys.org 2026-09-10):
+  https://phys.org/news/2026-09-tightly-atoms-enable-power-quantum.html
+  (tillagd 2026-09-12)
+
+- **Osynliga tillverkningsfel i optiska komponenter görs synliga** — en mätmetod som avslöjar små defekter i linser och speglar, sådana som ändrar ljusets väg utan att synas för ögat. Ingång: brytning och vågfront, och varför en optisk yta måste vara formad på bråkdelar av en våglängd när. Leta upp originalstudien och kontrollera vilken sorts fel metoden hittar. OBS: optik användes 2026-09-12, låt det gå tid. Källa (Phys.org 2026-09-10):
+  https://phys.org/news/2026-09-hidden-optical-imperfections.html
+  (tillagd 2026-09-12)
+
+- **En inbyggd oskärpa i tiden själv** — arbeten om att tiden skulle ha en grundläggande obestämdhet, inte bara våra klockor. Ingång: tidmätning, atomur och obestämdhetsrelationen. OBS: rubriken lovar mycket, kontrollera noga vad som är uppmätt och vad som är räknat, och läs originalet innan uppslaget används. Källa (ScienceDaily 2026-09-11):
+  https://www.sciencedaily.com/releases/2026/09/260910225251.htm
+  (tillagd 2026-09-12)
+
 ## Reservuppslag vid nyhetstorka (tidlösa)
 
 - **Varför lyser norrsken i olika färger?** — knyter till energinivåer/spektrallinjer

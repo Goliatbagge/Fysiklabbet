@@ -56,6 +56,36 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'brytningsindex',
+    term: 'Brytningsindex',
+    former: ['brytningsindex', 'brytningsindexet'],
+    kort: 'Ett tal som talar om hur mycket långsammare ljuset går i ett material än i tomrum, och därmed hur kraftigt ljuset böjs av när det går in i materialet.',
+    relaterade: ['optisk-fiber'],
+    body: [
+      { type: 'p', html: 'Stick ner en sked i ett glas vatten och titta från sidan. Skeden ser bruten ut vid vattenytan. Det beror inte på skeden utan på ljuset: när en stråle går snett från luft in i vatten byter den riktning. Hur kraftigt den böjs bestäms av ett enda tal för varje material, brytningsindex.' },
+      { type: 'p', html: 'Talet är helt enkelt ljusets hastighet i tomrum delad med ljusets hastighet i materialet. I vakuum är det alltså exakt 1, i luft 1,0003, i vatten 1,33 och i vanligt glas omkring 1,5. Diamant har höga 2,42, och det är just därför en diamant gnistrar så: ljuset bryts kraftigt och blir dessutom lätt fångat inuti stenen.' },
+      { type: 'p', html: 'Brytningsindex avgör också hur mycket av ljuset som kastas tillbaka i stället för att gå igenom. Ju större skillnaden är mellan de två materialen vid en gränsyta, desto mer reflekteras. Skillnaden mellan luft och glas är liten, och därför ser en fönsterruta genomskinlig ut. Men staplar man tillräckligt många gränsytor på varandra, som i ett skum eller i snö, hinner ljuset kastas tillbaka om och om igen tills materialet ser vitt ut.' },
+      { type: 'fact', title: 'Några värden', items: [
+        'Vakuum: exakt 1',
+        'Luft: 1,0003',
+        'Vatten: 1,33',
+        'Fönsterglas: omkring 1,5',
+        'Diamant: 2,42'
+      ] }
+    ]
+  },
+  {
+    id: 'fotolitografi',
+    term: 'Fotolitografi',
+    former: ['fotolitografi', 'fotolitografin', 'litografi', 'litografin'],
+    kort: 'En tillverkningsmetod där ett mönster ritas med ljus i ett ljuskänsligt skikt, i stället för att fräsas eller tryckas fram mekaniskt. Den ligger bakom nästan alla datorchip.',
+    body: [
+      { type: 'p', html: 'Ett modernt datorchip rymmer tiotals miljarder komponenter på en yta mindre än en frimärksbild. Ingen maskin i världen kan fräsa fram något så litet med ett verktyg. I stället ritas mönstret med ljus.' },
+      { type: 'p', html: 'Metoden kallas fotolitografi och påminner om gammaldags fotografi. Ytan täcks med ett ljuskänsligt skikt, en fotoresist. Genom en mask lyser man sedan ett skarpt mönster på skiktet, och ljuset ändrar de träffade områdenas kemiska egenskaper. När ytan därefter sköljs i ett framkallningsmedel löses antingen de belysta eller de obelysta delarna bort, och mönstret står kvar som en mall för nästa steg.' },
+      { type: 'p', html: 'Hur små detaljer som går att rita sätts av ljusets våglängd: ett mönster kan aldrig bli mycket finare än den våg som ritar det. Därför har industrin flyttat sig från synligt ljus till ultraviolett och vidare till extremt ultraviolett strålning med en våglängd på bara 13,5&nbsp;nm. Samma grundidé används numera långt utanför elektroniken, bland annat för att ge ytor mönstrade optiska egenskaper.' }
+    ]
+  },
+  {
     id: 'naturlig-linjebredd',
     term: 'Naturlig linjebredd',
     former: ['naturlig linjebredd', 'naturliga linjebredden', 'linjebredd', 'linjebredden', 'linjebredder', 'linjebredderna'],

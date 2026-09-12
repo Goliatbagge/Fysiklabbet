@@ -103,6 +103,72 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-12-vitt-utan-pigment",
+    date: "2026-09-12",
+    title: "Skum i stället för pigment: nu går det att trycka bländvitt utan ett enda korn färgämne",
+    deck: "Snö och is består av precis samma sak, men bara den ena är vit. Skillnaden sitter i antalet gränsytor som ljuset måste passera. Ett forskarlag vid Kyoto universitet har nu lärt sig att skumma upp en plastfilm inifrån med hjälp av ljus, och därmed trycka vitt helt utan pigment.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-12-vitt-utan-pigment.jpg",
+    imageAlt: "Närbild av en bländvit skalbagge i profil mot mörk bakgrund. Ryggskölden är täckt av tätt liggande vita fjäll, benen är vita och håriga, och antennerna sticker ut i varmt brunt.",
+    imageCredit: "Foto: Andy Parnell (CC BY-SA 4.0), via Wikimedia Commons. Skalbaggar av släktet Cyphochilus är ett av naturens renaste exempel på vithet helt utan vitt färgämne.",
+    tags: ["optik", "ljusspridning", "brytningsindex", "material", "nanostrukturer", "biomimetik", "polymerer", "vattenavvisande", "ytkemi", "titandioxid", "diffraktion"],
+    sources: [
+      { name: "Kyoto universitet (iCeMS): White is more than a color", url: "https://www.icems.kyoto-u.ac.jp/en/news/11675/" },
+      { name: "Phys.org: White is more than a color: How nature inspired a new sustainable way to make white, water-repellent materials", url: "https://phys.org/news/2026-09-white-nature-sustainable-repellent-materials.html" },
+      { name: "Nature (2026): Foaming photopolymers as a high-resolution biomimetic printing platform", url: "https://www.nature.com/articles/s41586-026-10968-9" }
+    ],
+    research: { citation: "Detao Qin med flera, ”Foaming photopolymers as a high-resolution biomimetic printing platform”, Nature (2026)", url: "https://doi.org/10.1038/s41586-026-10968-9" },
+    body: [
+      { type: 'p', html: 'Lägg en klar isbit i handen och håll upp den mot fönstret. Ljuset går rakt igenom. Krossa sedan samma isbit till pulver, och högen blir bländvit. Ingenting har hänt med kemin: det är vatten i båda fallen. Det enda som ändrats är hur många gränsytor ljuset stöter på under vägen.' },
+      { type: 'p', html: 'Det är precis den insikten ett internationellt forskarlag har byggt en tillverkningsmetod på. Arbetet publicerades den 10 september i <em>Nature</em> och leds av Easan Sivaniah vid Kyoto universitets institut för cell- och materialvetenskap, iCeMS, tillsammans med kollegor vid Tokyo Metropolitan University och Donghua University i Shanghai. Resultatet är en plastfilm som kan tryckas snövit utan en droppe färgämne, och dessutom göras vattenavvisande utan fluorkemikalier.' },
+
+      { type: 'h2', text: 'Därför ser något vitt ut' },
+      { type: 'p', html: 'Vit är ingen egenskap hos ett ämne, utan hos en struktur. Varje gång ljus passerar från ett material till ett annat med olika <em>brytningsindex</em> byter strålen riktning, och en del av den kastas tillbaka. En enda sådan gränsyta märks knappt. Men i ett material fullt av slumpvis vridna gränsytor sker det om och om igen, tusentals gånger, och strålen kommer till slut ut igen åt ett godtyckligt håll.' },
+      { type: 'p', html: 'Vitt uppstår när det sker lika effektivt för allt synligt ljus. Blått, grönt och rött studsar då ut i samma proportioner som de kom in, ögat får tillbaka hela blandningen och tolkar den som vitt. Spridningen är som mest verksam när håligheterna är ungefär lika stora som ljusets våglängd, alltså några hundra nanometer. Samma fysik gör molnen vita fast vattendroppar är genomskinliga, och skummet på ett glas öl vitt fast vätskan är gul.' },
+      { type: 'p', html: 'Naturen har drivit knepet mycket längre än industrin. Skalbaggar av släktet Cyphochilus bär fjäll som består av ett tätt, oordnat nät av kitin med brytningsindex $n = 1{,}56$, och de kastar tillbaka mer än 70&nbsp;% av ljuset trots att skiktet bara är 5–15&nbsp;µm tjockt. Det är ungefär en tiondel av ett hårstrås tjocklek, och klart tunnare än de vita skikt industrin normalt behöver lägga på för att nå samma vithet.' },
+
+      { type: 'h2', text: 'Ljus som får plasten att skumma inifrån' },
+      { type: 'p', html: 'Metoden kallar forskarna deep foam photolithography, ungefär djupskumslitografi. Först lyses en tunn polymerfilm med ultraviolett ljus av den långvågiga sorten, UV-A, som tränger igenom hela filmens tjocklek. Ljuset klipper av en del av de långa molekylkedjorna och binder samtidigt ihop andra till ett nät. Därefter doppas filmen i ett svagt lösningsmedel, som sväller materialet och löser ut just de avklippta bitarna. Kvar blir ett öppet nät av porer, och filmen kan svälla upp till tjugo gånger sin ursprungliga tjocklek.' },
+      { type: 'p', html: 'Eftersom det är ljuset som styr var skummet bildas går mönstret att rita med samma precision som i vanlig fotolitografi. Upplösningen ligger kring 20&nbsp;000 punkter per tum, vilket motsvarar ungefär 1,3&nbsp;µm per punkt. Så tätt liggande detaljer är bara ett par våglängder isär, och då börjar strukturen även bryta upp ljuset i färger på samma sätt som spåren på en cd-skiva. Vitt, gråskala och regnbågsskimmer, utan att någon färg tillförs.' },
+
+      { type: 'h2', text: 'Samma yta stöter bort vatten' },
+      { type: 'p', html: 'Den porösa strukturen som ger vitheten lämnar samtidigt ytan sträv, och det får en andra konsekvens. En vattendroppe som landar på en tillräckligt ojämn yta orkar inte tränga ner i alla gropar, utan vilar på topparna med instängd luft under sig. Kontaktytan mellan vatten och fast material blir då försvinnande liten, droppen drar ihop sig till en kula och rullar av vid minsta lutning. Fenomenet är döpt efter lotusblad, där det upptäcktes.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-12-vitt-utan-pigment-2.jpg', alt: 'Närbild av ett grönt lotusblad med runda vattendroppar av olika storlek som vilar ovanpå ytan utan att flyta ut.', caption: 'Vattendropparna på ett lotusblad vilar på mikroskopiska upphöjningar med luft emellan, och behåller därför sin kulform. Den skummade plastfilmen får en yta med samma slags strävhet.', credit: 'Foto: Aathavan jaffna (CC BY-SA 3.0), via Wikimedia Commons' },
+      { type: 'p', html: 'Forskarna visar också att porerna går att pressa ihop igen på valda ställen, så att filmen får partier som leder vätska och partier som stöter bort den. På så vis kan droppar i storleksordningen biljondels liter styras längs osynliga kanaler, utan några väggar alls.' },
+
+      { type: 'h2', text: 'Varför det är mer än en kuriositet' },
+      { type: 'p', html: 'Nästan allt vitt i en matvarubutik, från förpackningar till tabletter och färg, får sin vithet från titandioxid. Ämnet är utmärkt på sitt jobb, eftersom dess brytningsindex ligger kring 2,6 mot omgivningens 1,5 och varje korn därför sprider ljus kraftigt. Men EU förbjöd 2022 titandioxid som livsmedelstillsats sedan hälsoriskerna inte kunde uteslutas. Vattenavvisande ytor bygger på sitt håll ofta på fluorkemikalier, PFAS, som bryts ner ytterst långsamt i naturen.' },
+      { type: 'p', html: 'Att lösa båda problemen med en och samma struktur, av vanlig plast och luft, är därför lockande. Det ska sägas att metoden hittills visats i laboratorium på polymerfilmer och textilfibrer, inte i produktion, och att hållbarheten hos ett så poröst material över tid återstår att pröva. Men principen är på plats: en stor del av det vita vi omger oss med behöver inget färgämne alls, bara rätt sorts tomrum.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Ett vitt papper är vitt av samma skäl som snö: cellulosafibrer och luft om vartannat ger tusentals gränsytor att studsa mot.',
+        'Skalbaggens fjäll är bara några tusendels millimeter tjocka, och räknas till de effektivaste vita strukturer som är kända i naturen.',
+        'Skum är vitare än vätskan det bildas av. Ölskummet är vitt fast ölen är gul, och havets bränning vit fast vattnet är grönblått.',
+        'Vitt ljus som sprids lika åt alla håll kallas diffus reflexion. En spegel gör tvärtom: den kastar tillbaka ljuset åt ett enda håll, och därför ser du en bild i den i stället för en vit yta.'
+      ] },
+
+      { type: 'p', html: 'Den som vill se effekten själv behöver varken laboratorium eller skalbagge. Ta ett glas vatten och rör ner en skvätt diskmedel: klar vätska, klart glas. Vispa sedan upp det till skum, och glaset blir vitt. Ingenting nytt har tillsatts, bara några miljoner nya gränsytor.' }
+    ],
+    simulering: {
+      href: "fysik2-brytning-app.html",
+      name: "Brytningslagen",
+      text: "Ändra brytningsindex och infallsvinkel och se hur strålen bryts och hur mycket som kastas tillbaka i gränsytan. Det är samma gränsyta som upprepas tusentals gånger i ett vitt skum."
+    },
+    larare: {
+      moment: [
+        { label: "Ljusets brytning", href: "katalog.html?id=fy2-4.4" },
+        { label: "Ljus, diffraktion och interferens", href: "katalog.html?id=fy2-4.2" },
+        { label: "Materialfysik och nanostrukturer" }
+      ],
+      fragor: [
+        "Snö och is har samma kemiska sammansättning. Varför är bara den ena vit, och vad säger det om skillnaden mellan färg och struktur?",
+        "Varför sprider ett material ljus starkare ju större skillnaden i brytningsindex är mellan dess delar?",
+        "Vithet kräver att allt synligt ljus sprids ungefär lika mycket. Vad skulle hända med färgen om bara det korta, blå ljuset spreds effektivt?"
+      ]
+    }
+  },
+  {
     id: "2026-09-11-linjen-som-aldrig-blir-skarp",
     date: "2026-09-11",
     title: "Ingen spektrallinje är knivskarp — och bredden mäter hur länge ett hål i atomens innersta skal hinner finnas",

@@ -21,7 +21,7 @@ för någon månad sedan är en perfekt tipskandidat nu).
 | Begreppsordlistan | begrepp.html | Svåra ord i nyheterna är klickbara; hela ordlistan A–Ö med enkla förklaringar | Alltid | 2026-08-02 |
 | Sökrutan | index.html | Sök över genomgångar, simuleringar, enhetskollar och begrepp — normaliserar å/ä/ö ("rorelsemangd" ger träff). Prov och minisimuleringar ingår INTE i indexet | Alltid | 2026-08-16 |
 | "För läraren"-rutorna | nyheter.html | Diskussionsfrågor och momentkoppling på nyhetsartiklarna — färdig lektionsstart | Terminsstart, måndagar | 2026-08-02 |
-| RSS-flödet | feed.xml | Prenumerera på nyheterna i valfri RSS-läsare | När nyhetsflödet nämns | – |
+| RSS-flödet | feed.xml | Prenumerera på nyheterna i valfri RSS-läsare | När nyhetsflödet nämns | 2026-09-13 |
 | Delningslänkar | katalog.html | Varje avsnitt, prov och simulering har egen adress med delningskort — länka en elev rakt in i rätt genomgång | Alltid; lärare som planerar | 2026-08-02 |
 | Fullskärmsläge i simuleringarna | simuleringar.html | Alla simuleringar körs i fullskärm — gjort för projektor och mobil | Alltid; bra på projektor | 2026-09-06 |
 | Poddspelare på vissa nyheter | nyheter.html | Utvalda artiklar har en ljudöversikt att lyssna på (kolla att aktuella artiklar faktiskt har en innan du tipsar!) | Pendling, lov | – |

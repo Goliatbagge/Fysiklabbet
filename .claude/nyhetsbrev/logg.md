@@ -11,6 +11,72 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-09-13 — "En foton som inte borde ha nått fram"
+- Status: UTKAST skrivet 2026-09-12 (lördag, körd som schemalagd routine, deadline
+  08.00 svensk tid). Tänkt utskick söndag 2026-09-13 kl 06.00 svensk tid.
+  Brevperiod (nyheter) 2026-09-07 till 2026-09-12; sajtuppdateringar sedan
+  förra brevets datum 2026-09-06 (git log --since="2026-09-06" main, 44 commits).
+- ⚠️ Skrivet i en molnsession UTAN tillgång till CDN:erna (unpkg/jsdelivr/
+  fonts.googleapis blockerade av nätverkspolicyn, samma begränsning som
+  2026-08-23, 2026-08-30 och 2026-09-05 — fjärde gången i rad). Ingen
+  React-sida (nyheter.html, katalog.html, simuleringarna) gick att rendera
+  i headless Chrome, så INGEN skärmdump av sajten kunde tas. `NYTT PÅ
+  FYSIKLABBET` är därför rent textlänkat denna vecka; minimikravet "minst
+  en bild visar något på sajten" är INTE uppfyllt.
+  ⚠️ ANVÄNDAREN BÖR ANTINGEN ta en egen skärmdump av "Prova själv"-rutan i
+  https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer
+  (den nya funktionen som nämns i brevet) och lägga in den, eller acceptera
+  ett textlänks-brev för den sektionen denna vecka. De tre nyhetsbilderna
+  (hjälte + två miniatyrer) är däremot på plats, beskurna lokalt med Pillow
+  ur de redan publicerade nyhetsbilderna.
+- Nyheter: 2026-09-09-fotonen-som-inte-borde-ha-natt-fram (hjälte, bedömd
+  mest häpnadsväckande: en enda foton på 300 TeV som enligt gängse fysik
+  borde ha slagits sönder av kosmisk bakgrundsstrålning långt innan den
+  nådde jorden), 2026-09-12-vitt-utan-pigment (dagens artikel, publicerad
+  03:15 samma morgon, obligatorisk enligt uppdraget, och dessutom en stark
+  miniatyrkandidat: skalbaggsinspirerad struktur ger bländvitt utan
+  pigment) + 2026-09-07-dubbelspalten-krympt-till-tva-atomer (miniatyr;
+  detta var förra brevets [BREVTEASER], infriat inom fönstret måndag till
+  lördag, nämnt utan att peka tillbaka på att det var teasat). Läs även:
+  2026-09-08-summan-ska-bli-exakt-ett (BESIII:s test av standardmodellens
+  unitaritet med en hyperon), 2026-09-10-sprickan-som-smyger (sprickors
+  tysta krypfas), 2026-09-11-linjen-som-aldrig-blir-skarp (spektrallinjers
+  naturliga bredd). Samtliga sex artiklar i brevperioden listade, ingen
+  utelämnad.
+- Nytt på sajten: Nationellt prov Ma 2c VT2022 (alla 28 uppgifter,
+  text- och pennlösningar), "Prova själv"-rutan som länkar en nyhetsartikel
+  till dess simulering (ny funktion, illustrerad av dubbelspaltnyheten).
+  Lätt vecka: bortvalt (redigeringar av befintligt innehåll, inte nytt en
+  besökare efterfrågar) var pennlösningsomskrivningar i flera ma1c- och
+  fy2-avsnitt, ordlisteuppslagens interna omstrukturering, den dolda kursen
+  Matematik specialisering och utkastet till Stupet-scenen (olänkad sida).
+- Bilder: nyheter/brev/2026-09-13-foton-hero.jpg (nedskalad ur
+  nyheter/bilder/2026-09-09-fotonen-som-inte-borde-ha-natt-fram.jpg, 1000 px,
+  135 kB), -dubbelspalt-thumb.jpg och -vitt-thumb.jpg (kvadratiska
+  beskärningar av respektive nyhetsbild, 500 px). Beskurna med Pillow.
+  Ingen sajtskärmdump, se ⚠️ ovan.
+- Veckans tips: RSS-flödet (feed.xml), aldrig tipsat förut, krok: brevet
+  själv nämner att det bara går ut en gång i veckan medan sajten publicerar
+  dagligen. Daterat 2026-09-13 i tips.md.
+- Teaser: nyhetskö-uppslaget om Lunds förgrenade nanotrådar som slipper
+  fånga sitt eget ljus i lysdioden (totalreflektion/bandgap-ingång),
+  avslutat med "Vi läser på." Uppslaget låg redan överst i ko.md, märkt
+  [BREVTEASER] sedan 2026-09-05 — ingen flytt behövdes. Kontrollerat att
+  det inte redan publicerats (sökt på "lysdiod", "nanotråd", "Borgström"
+  i data/nyheter.js och publicerat.md, inga träffar).
+- Förhandsvisning: hela brevet renderat till JPEG (600 px bredd, tom yta
+  bortbeskuren) via headless Chromium (playwright-core, installerat i
+  sessionen) mot dev-servern, med bildernas URL:er tillfälligt
+  omdirigerade till lokala repo-sökvägar i en kopia under .shots/
+  (utkastfilen behåller de absoluta fysiklabbet.se-adresserna). Skickad
+  till användaren med SendUserFile.
+- ÅTERSTÅR för användaren: (1) lösa skärmdumpsfrågan ovan, (2) granska
+  utkastet, (3) lägga upp i EmailOctopus och schemalägga till söndag
+  06.00 svensk tid (tidszonen default:ar till London, 06.00 där blir
+  07.00 svensk tid — `/brev-till-octopus` måste köras lokalt, molnsessionen
+  saknar Chrome-åtkomst till EmailOctopus), (4) kontrollera att bilderna i
+  nyheter/brev/ syns live på fysiklabbet.se innan utskick.
+
 ## 2026-09-06 — "En strömbrytare för supraledningen i grafen"
 - Status: **UPPLAGD i EmailOctopus 2026-09-05** som kampanjen "Nyhetsbrev nr 4 -
   2026-09-06" (avsändare Fysiklabbet <kontakt@fysiklabbet.se>, ämnesrad och

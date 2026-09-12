@@ -1,0 +1,137 @@
+<!--
+  ÄMNESRAD:  En foton som inte borde ha nått fram
+  PREHEADER: Plus: snövit utan ett korn färgämne, och Youngs försök krympt till två atomer.
+  Utskick:   söndag 2026-09-13 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-09-07 till 2026-09-12 (nyheter). Sajtuppdateringar sedan 2026-09-06.
+  OBS: bilderna i nyheter/brev/ måste ligga på main innan brevet skickas.
+  ⚠️ Skrivet i en molnsession UTAN tillgång till CDN:erna (unpkg/jsdelivr/
+  fonts.googleapis blockerade av nätverkspolicyn, samma begränsning som
+  2026-08-23, 2026-08-30 och 2026-09-05). Ingen sida som bygger på React
+  (nyheter.html, katalog.html, simuleringarna) gick att rendera i headless
+  Chrome, så INGEN skärmdump av sajten kunde tas denna vecka heller —
+  minimikravet "minst en bild visar något på sajten" är INTE uppfyllt.
+  "Nytt på Fysiklabbet" är därför rent textlänkat denna vecka. Vill
+  användaren ha en bild: en skärmdump av "Prova själv"-rutan i artikeln
+  https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer
+  (ny funktion, se stycket) skulle passa bäst, annars går brevet fint utan.
+  Nyhetsbildernas beskärningar (hero + två miniatyrer) gjordes lokalt med
+  Pillow ur de befintliga nyhetsbilderna i nyheter/bilder/.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 37</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <!-- ── Sidhuvud ─────────────────────────────────────────── -->
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 5 &middot; vecka 37 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <!-- ── Anslag ───────────────────────────────────────────── -->
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">God morgon! Den här veckan handlar mycket om sådant som inte borde kunna hända, och som ändå gjorde det. En foton borde ha slagits sönder långt innan den nådde fram, en skalbagge lyckas vara snövit utan ett enda korn färgämne, och två atomer fick spela huvudrollen i Thomas Youngs 200 år gamla dubbelspaltförsök.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Här kommer veckans fynd, och det senaste som hänt på sajten.</p>
+
+      <!-- ── VECKANS FYSIK ──────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+
+      <!-- Hjältebild + huvudnyhet -->
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-09-fotonen-som-inte-borde-ha-natt-fram" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-13-foton-hero.jpg" width="532" alt="Ett tjugotal koncentriska ringar i lila, blått och grönt mot svart bakgrund, med en liten vit ljuspunkt i mitten" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 18px;">Bild: NASA:s Scientific Visualization Studio / XMM-Newton (allmän egendom)</div>
+
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-09-fotonen-som-inte-borde-ha-natt-fram" style="color:#0f1620; text-decoration:none;">Fotonen som aldrig borde ha nått fram</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Den 9 oktober 2022 briserade den starkaste gammablixt som någonsin registrerats. Drygt en timme senare fångade en detektor i Kaukasus en enda foton på 300&nbsp;teraelektronvolt från exakt samma håll på himlen, en energi miljarder gånger högre än synligt ljus. Enligt gängse fysik skulle den fotonen ha krockat med universums egen bakgrundsstrålning och slagits sönder långt innan den nådde jorden. Två italienska fysiker har nu räknat ut vad som skulle krävas för att den ändå skulle klara resan, och svaret pekar mot något som inte ryms i standardmodellen.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-09-fotonen-som-inte-borde-ha-natt-fram" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+
+      <!-- Miniatyrrad: två nyheter till -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-13-vitt-thumb.jpg" width="250" alt="Närbild av en bländvit skalbagge i profil, med tätt liggande vita fjäll och bruna antenner" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Andy Parnell / Wikimedia Commons (CC&nbsp;BY-SA&nbsp;4.0)</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment" style="color:#0f1620; text-decoration:none;"><strong>Snövit utan ett enda korn färgämne.</strong></a> En skalbagge av släktet Cyphochilus är kritvit tack vare hur ljuset studsar mellan tusentals gränsytor i dess fjäll. Forskare i Kyoto har nu lärt sig samma trick och trycker en plastfilm lika bländvit, helt utan pigment.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-13-dubbelspalt-thumb.jpg" width="250" alt="En forskare vid två bildskärmar i ett blåbelyst laboratorium, med ett mönster av röda, gröna och blå fläckar på den ena skärmen" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Oak Ridge National Laboratory (CC&nbsp;BY&nbsp;2.0)</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer" style="color:#0f1620; text-decoration:none;"><strong>Två atomer som spalter.</strong></a> Ett lag i Tokyo lät två grannatomer i en kiselkristall, bara 136&nbsp;pikometer isär, spela rollen som spalterna i Youngs klassiska försök. Ränderna elektronerna ritade avslöjar hur i takt atomerna vibrerar.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- LÄS ÄVEN: veckans nyheter som inte lyfts ovan -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-08-summan-ska-bli-exakt-ett" style="color:#2563a8; text-decoration:underline;">Standardmodellens räknekontroll prövad med en ny partikel</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-10-sprickan-som-smyger" style="color:#2563a8; text-decoration:underline;">Sprickan som kryper länge innan brottet</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-11-linjen-som-aldrig-blir-skarp" style="color:#2563a8; text-decoration:underline;">Ingen spektrallinje är riktigt knivskarp</a>
+      </p>
+
+
+      <!-- ── NYTT PÅ FYSIKLABBET ────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Ett nytt nationellt prov att träna på.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2022" style="color:#2563a8;">Matematik nivå 2c, våren 2022</a> är inne, med alla 28 uppgifter från delprov B, C och D. Varje uppgift har både en textlösning som klickas fram steg för steg och en pennlösning skriven för hand.</p>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Nyheterna länkar nu till sina simuleringar.</strong> Handlar en artikel om något sajten också har en simulering för, som <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-07-dubbelspalten-krympt-till-tva-atomer" style="color:#2563a8;">veckans om dubbelspalten</a>, dyker en egen ruta upp direkt under texten med en genväg dit. Läs om fenomenet, klicka, och stå mitt i experimentet.</p>
+
+      <!-- ── VECKANS TIPS ───────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Veckans tips</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 8px;">Du har väl inte glömt att det här brevet bara är en gång i veckan, medan sajten publicerar en ny fysiknyhet varje dygn? Vill du ha dem löpande finns hela flödet som <a href="https://fysiklabbet.se/feed.xml" style="color:#2563a8;">RSS</a>, färdigt att prenumerera på i valfri läsare.</p>
+
+      <!-- ── NÄSTA VECKA ────────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Och ur nyhetskön väntar en lysdiod som inte fångar sitt eget ljus: normalt stannar det mesta av ljuset kvar inne i materialet, men ett lag i Lund odlar i stället nanotrådar så tunna att ljuset aldrig blir fångat. Vi läser på.</p>
+
+      <!-- ── Avslut ─────────────────────────────────────────── -->
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Tack för att du läste ända hit. Vi hörs om en vecka.</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

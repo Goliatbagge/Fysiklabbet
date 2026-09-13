@@ -36,6 +36,11 @@ exemplet nedan.
 **På en släktmiddag är åldrarna 1, 3, 4, 8, 15, 27, 30, 33, 36, 41,
 42, 44, 46, 72 och 72 år. Använd ett digitalt verktyg för att<br>a) bestämma minsta värdet, nedre kvartil, median, övre kvartil och största värdet<br>b) avgöra hur gammal man ska vara för att tillhöra de 10 % äldsta<br>c) rita ett lådagram över åldrarna**
 
+::: handskrift
+typ: casladagram
+:::
+
+::: textlosning
 **a)** Vi startar Geogebra, klickar på knappen "Växla till kalkylblad"
 i den översta menyraden och skriver in värdena i den vänstra kolumnen.
 Vi markerar värdena, klickar på menyn "blå staplar" och väljer
@@ -73,12 +78,18 @@ därefter till standardläget och justera vid behov axlarna med verktyget
 *Flytta ritområdet*. Där kan du även justera utseendet (färg,
 linjetjocklek med mera).
 :::
+:::
 
 ::: exempel "Exempel 2 — Frekvenstabell i Geogebra"
 **Antalet syskon som varje elev hade på en skola med 177 elever
 undersöktes. Bestäm medelvärdet för antalet syskon utifrån nedanstående
 frekvenstabell.**
 
+::: handskrift
+typ: casfrekvens
+:::
+
+::: textlosning
 | Antal syskon | Frekvens |
 | --- | --- |
 | 0 | 17 |
@@ -99,6 +110,7 @@ Markera alla värden i båda kolumner, klicka på "blå staplar" och välj
 av medelvärdet i tabellen: Medel ≈ 1,7966.
 
 **Svar:** Medelvärdet är ca 1,8 syskon.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

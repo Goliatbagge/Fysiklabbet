@@ -30,6 +30,11 @@ Antalet av ett visst värde kallas **frekvens**. Om till exempel antalet
 **Åldern på personerna i ett klassrum är 16, 17, 61, 16, 16, 18 och 17
 år. Bestäm<br>a) medelvärdet&emsp;&emsp;b) medianen&emsp;&emsp;c) typvärdet**
 
+::: handskrift
+typ: lagesmatt
+:::
+
+::: textlosning
 **a)**
 
 $$
@@ -52,11 +57,17 @@ förekommande åldern.
 
 **Svar:** 16 år
 :::
+:::
 
 ::: exempel "Exempel 2 — Vilket lägesmått är lämpligast?"
 **Vilket lägesmått är lämpligast att använda i exemplet ovan:
 medelvärde eller median?**
 
+::: handskrift
+typ: lampligtlagesmatt
+:::
+
+::: textlosning
 Det beror på sammanhanget, men eftersom vi har ett utstickande värde
 (61-åringen) som drar upp medelvärdet till 23 år, så blir inte
 medelvärdet särskilt representativt för personerna i rummet (det finns
@@ -64,6 +75,7 @@ ju inte en enda 20-åring där). Alltså kan medianen vara att föredra i
 detta fall.
 
 **Svar:** Medianen
+:::
 :::
 
 ## Klasser och histogram
@@ -79,6 +91,11 @@ en klass har värdet i mitten av intervallet, vilket kallas
 **Åldern hos personerna i ett rum åskådliggörs i en tabell med
 intervall och i ett histogram. Beräkna medelåldern.**
 
+::: handskrift
+typ: klassmitt
+:::
+
+::: textlosning
 | Ålder (år) | Frekvens |
 | --- | --- |
 | $20 \leq x < 30$ | 2 |
@@ -110,6 +127,7 @@ $$
 $$
 
 **Svar:** 50,5 år
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

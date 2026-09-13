@@ -53,6 +53,11 @@ bredare.
 **Anta att längden hos vuxna män är normalfördelad med medellängden
 181 cm och standardavvikelsen 8 cm.**
 
+::: handskrift
+typ: normalfordelning
+:::
+
+::: textlosning
 Vi ritar en normalfördelningskurva och fyller i värdena. Rakt
 under toppen skriver vi in medelvärdet 181. I nästa steg åt höger
 skriver vi in "medelvärdet + en standardavvikelse", alltså
@@ -86,11 +91,17 @@ standardavvikelser" och över detta ligger 2,3 %.
 
 **Svar:** 2,3 %
 :::
+:::
 
 ::: exempel "Exempel 2 — Längden hos vuxna kvinnor (Geogebra)"
 **Vuxna kvinnor har medellängden 165,5 cm med standardavvikelsen
 6,15 cm. Hur<br>a) stor andel av kvinnorna är mellan 160 och 170 cm?<br>b) lång ska en kvinna vara för att vara längre än 99 % av alla kvinnor?**
 
+::: handskrift
+typ: normalgeogebra
+:::
+
+::: textlosning
 **a)** Vi löser uppgiften med Geogebra.
 
 1. Klicka på knappen "Växla till sannolikhetskalkylator" i menyraden
@@ -124,6 +135,7 @@ Lämplig redovisning: "$\mu = 165{,}5$ och $\sigma = 6{,}15$ i GG med
 andelen 0,99 som undre gräns ger 180 cm."
 
 **Svar:** 180 cm
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

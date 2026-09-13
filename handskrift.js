@@ -55087,6 +55087,589 @@
     return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
   }
 
+  /* ---------------- scen: tre lägesmått (ma2c-6.1 ex 1) ------------
+   * Medelvärde, median och typvärde beräknade på samma material. */
+  function layoutLagesmatt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('16, 17, 61, 16, 16, 18, 17', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Medelvärdet är summan delad']],
+      [['med antalet värden. Här är']],
+      [['antalet 7.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('m=', padL, y);
+    xx = T.fracH('16+17+61+16+16+18+17', '7', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('161', '7', xx, y);
+    xe = T.str('=23 år', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Medianen är värdet i mitten']],
+      [['när talen står i']],
+      [['storleksordning.']]
+    ], 1.4);
+    y += 5.6 * F;
+    T.str('16, 16, 16, 17, 17, 18, 61', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('median=17 år', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Typvärdet är det värde som']],
+      [['förekommer flest gånger. Här']],
+      [['är det tre 16-åringar.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('typvärde=16 år', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vilket lägesmått? (ma2c-6.1 ex 2) ------- */
+  function layoutLampligtlagesmatt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('medelvärde 23 år,', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('median 17 år', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['61-åringen är ett utstickande']],
+      [['värde. Ett enda sådant drar']],
+      [['medelvärdet uppåt rejält.']]
+    ]);
+    y += 4.8 * F;
+    T.str('ingen är 20 år i rummet', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Medianen påverkas knappt av']],
+      [['ett extremvärde: den räknar']],
+      [['ordning, inte storlek.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: medianen', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: medelvärde ur klasser (6.1 ex 3) --------
+   * Klassmitten får representera alla värden i intervallet. */
+  function layoutKlassmitt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
+
+    y = 186;
+    T.str('Åldrar i klasser om tio år', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vi vet inte de exakta']],
+      [['åldrarna, bara intervallen. Då']],
+      [['får klassmitten representera']],
+      [['alla i klassen.']]
+    ]);
+    y += 3.0 * F;
+    y = tabell(padL, y, 130, 66, [
+      { lbl: 'klassmitt', celler: ['25', '35', '45', '55', '65', '75', '95'] },
+      { lbl: 'frekvens', celler: ['2', '4', '4', '5', '3', '1', '1'] }
+    ]);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('summan=2·25+4·35+4·45', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('+5·55+3·65+75+95=1 010', padL + 60, y, null, 0.88);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('m=', padL, y);
+    xx = T.fracH('1 010', '20', xx, y);
+    xe = T.str('=50,5 år', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: den största klassen']],
+      [['är 50 till 60 år, och']],
+      [['medelvärdet hamnar strax']],
+      [['ovanför 50.']]
+    ], 1.4);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 6.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lådagram (ma2c-6.2 ex 1) ----------------
+   * Varje del av lådagrammet rymmer 25 % av värdena. */
+  function layoutLadagram(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Släkt: 1 ... 72 år', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Medianen delar materialet i']],
+      [['två halvor. Kvartilerna är']],
+      [['medianerna i varje halva.']]
+    ]);
+    y += 4.6 * F;
+    T.str('median=33', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('Q_1=8', padL + 220, y, null, 0.8);
+    T.pause(240);
+    T.str('Q_3=44', padL + 350, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('variationsbredd=72-1=71', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('kvartilavstånd=44-8=36', padL, y, null, 0.88);
+    T.stepEnd();
+
+    /* ---- lådagrammet ---- */
+    y += 3.6 * F;
+    var x0 = padL + 20, sk = 5.6, yb = y + 2.2 * F;
+    function X(v) { return x0 + v * sk; }
+    T.line([X(0), yb], [X(78), yb]);
+    T.pause(200);
+    T.line([X(1), yb - 22], [X(1), yb - 2]);
+    T.line([X(72), yb - 22], [X(72), yb - 2]);
+    T.line([X(1), yb - 12], [X(8), yb - 12]);
+    T.line([X(44), yb - 12], [X(72), yb - 12]);
+    T.pause(200);
+    T.line([X(8), yb - 38], [X(8), yb + 14]);
+    T.line([X(33), yb - 38], [X(33), yb + 14]);
+    T.line([X(44), yb - 38], [X(44), yb + 14]);
+    T.line([X(8), yb - 38], [X(44), yb - 38]);
+    T.line([X(8), yb + 14], [X(44), yb + 14]);
+    T.pause(200);
+    T.str('1', X(1) - 6, yb + 1.5 * F, null, 0.5);
+    T.str('8', X(8) - 6, yb + 1.5 * F, null, 0.5);
+    T.str('33', X(33) - 10, yb + 1.5 * F, null, 0.5);
+    T.str('44', X(44) - 10, yb + 1.5 * F, null, 0.5);
+    T.str('72', X(72) - 10, yb + 1.5 * F, null, 0.5);
+    T.stepEnd();
+
+    tanke(yb + 1.8 * F, [
+      [['Varje del av lådagrammet']],
+      [['rymmer 25 % av värdena. Över']],
+      [['8 år ligger tre delar.']]
+    ], 0);
+    y = yb + 4.6 * F;
+    xe = T.str('c) 3·25 %=75 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['De 10 % äldsta ligger över den']],
+      [['90:e percentilen, som']],
+      [['verktyget räknar ut.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('d) p_9_0=72 år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lådagram i Geogebra (ma2c-6.3 ex 1) ----- */
+  function layoutCasladagram(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('15 åldrar i kalkylbladet', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Envariabelanalys ger alla fem']],
+      [['måtten på en gång, utan att']],
+      [['jag behöver sortera för hand.']]
+    ]);
+    y += 4.8 * F;
+    T.str('a) min=1, Q_1=8, median=33,', padL, y, null, 0.82);
+    T.pause(240);
+    y += 2.6 * F;
+    xe = T.str('Q_3=44, max=72', padL + 40, y, null, 0.82);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Percentilen svarar på frågan']],
+      [['"vilket värde har 90 % lägre']],
+      [['än?".']]
+    ]);
+    y += 4.6 * F;
+    T.str('b) Percentil(l1, 90 %)', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('72 år', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lådagrammet ritas ur samma']],
+      [['analysfönster: byt Histogram']],
+      [['mot Boxplot i rullistan.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: frekvenstabell i Geogebra (6.3 ex 2) ---- */
+  function layoutCasfrekvens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('177 elever, antal syskon 0-6', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att skriva in 177 värden ett']],
+      [['och ett vore hopplöst. I']],
+      [['stället skrivs frekvenserna i']],
+      [['en andra kolumn.']]
+    ]);
+    y += 4.8 * F;
+    T.str('kolumn 1: antal syskon', padL, y, null, 0.8);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('kolumn 2: frekvens', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Envariabelanalys på BÅDA']],
+      [['kolumnerna väger då in varje']],
+      [['värde så många gånger det']],
+      [['förekommer.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('Medel≈1,7966', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: cirka 1,8 syskon', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: standardavvikelse (ma2c-6.4 ex 1) ------- */
+  function layoutStandardavvikelse(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('2, 4, 12, 24, 43', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Standardavvikelsen mäter']],
+      [['spridningen: hur långt']],
+      [['värdena i genomsnitt ligger']],
+      [['från medelvärdet.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Envariabelanalys ⟹ σ', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('σ=15,126...', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈15,1', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uppgiften säger inget om']],
+      [['stickprov, så det är hela']],
+      [['materialet: σ, inte s.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: normalfördelning (ma2c-6.5 ex 1) --------
+   * Tumregeln: 34,1 % i varje steg närmast medelvärdet, och 2,3 %
+   * bortom två standardavvikelser. */
+  function layoutNormalfordelning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 230, oy: 300, ux: 6.6, uy: 260 });
+
+    /* normalfördelningskurva kring 181 med sigma 8 */
+    G.axlar(-26, 26, -0.02, 0.06, 'cm', '');
+    G.kurva(function (v) {
+      return 0.0499 * Math.exp(-(v * v) / (2 * 64));
+    }, -25, 25);
+    T.pause(200);
+    T.str('181', G.X(0) - 14, G.oy + 1.0 * F, null, 0.5);
+    T.str('173', G.X(-8) - 14, G.oy + 1.0 * F, BLUE, 0.5);
+    T.str('189', G.X(8) - 14, G.oy + 1.0 * F, BLUE, 0.5);
+    T.str('165', G.X(-16) - 14, G.oy + 1.0 * F, null, 0.5);
+    T.str('197', G.X(16) - 14, G.oy + 1.0 * F, null, 0.5);
+    T.pause(200);
+    G.lodrat(-8, 0, 0.0367);
+    G.lodrat(8, 0, 0.0367);
+    T.stepEnd();
+
+    tanke(G.oy + 1.8 * F, [
+      [['Mellan medelvärdet och en']],
+      [['standardavvikelse åt ena']],
+      [['hållet ligger 34,1 %.']]
+    ], 0);
+    y = G.oy + 4.6 * F;
+    xx = T.str('a) 34,1 %+34,1 %', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=68,2 %', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['197 cm är två']],
+      [['standardavvikelser över']],
+      [['medelvärdet. Bortom det ligger']],
+      [['bara 2,3 %.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('b) 2,3 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: normalfördelning i Geogebra (6.5 ex 2) -- */
+  function layoutNormalgeogebra(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('µ=165,5 cm, σ=6,15 cm', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Gränserna 160 och 170 är inte']],
+      [['hela standardavvikelser, så']],
+      [['tumregeln räcker inte. Då']],
+      [['används kalkylatorn.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('a) P(160≤X≤170)=0,582...', padL, y, null, 0.84);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈58 %', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är andelen känd och']],
+      [['längden söks. Intervallet är']],
+      [['öppet åt vänster: 99 % ska']],
+      [['vara KORTARE.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) P(X≤179,807...)=0,99', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈180 cm', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: regression, glassen (ma2c-6.6 ex 1) -----
+   * Regressionslinjen ger en modell som går att räkna vidare med. */
+  function layoutRegressionglass(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 60, oy: 420, ux: 13, uy: 0.022 });
+
+    G.axlar(-1, 32, -300, 11500, 'x', 'y');
+    T.str('°C', G.X(31) - 6, G.oy + 1.7 * F, null, 0.5);
+    T.pause(180);
+    var d = [[22.1, 8000], [18.5, 7500], [26.7, 9500], [24.3, 9000],
+             [20.6, 8300], [27.9, 10200], [23.4, 8900]], i;
+    for (i = 0; i < d.length; i++) G.punkt(d[i][0], d[i][1], BLUE);
+    T.stepEnd();
+
+    G.kurva(function (v) { return 270 * v + 2500; }, 17, 31, BLUE);
+    T.str('y=270x+2 500', G.X(17), G.Y(10600), BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 1.8 * F, [
+      [['Punkterna ligger nära en rät']],
+      [['linje. Regressionslinjen är']],
+      [['den linje som passar dem']],
+      [['bäst.']]
+    ], 0);
+    y = G.oy + 4.8 * F;
+    xe = T.str('b) y=270x+2 500', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Korrelationskoefficienten mäter']],
+      [['hur väl punkterna följer']],
+      [['linjen. Nära 1 betyder mycket']],
+      [['bra.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('c) r≈0,97', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('d) y=270·30+2 500', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=10 600 kr', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: linjär eller exponentiell? (6.7 ex 1) ---
+   * r²-värdet avgör vilken modell som passar bäst. */
+  function layoutRegressionbefolkning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Världens befolkning 1920-2020', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma punkter kan beskrivas']],
+      [['med olika modeller. Jag provar']],
+      [['först en rät linje.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('a) y=0,061x-120', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('b) y=C·1,0153^x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vilken passar bäst? r^2-värdet']],
+      [['säger det: ju närmare 1, desto']],
+      [['bättre anpassning.']]
+    ]);
+    y += 4.8 * F;
+    T.str('linjär: r^2=0,954', padL, y, null, 0.88);
+    T.pause(280);
+    y += 2.6 * F;
+    T.str('exponentiell: r^2=0,9933', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det syns också i diagrammet:']],
+      [['punkterna böjer uppåt, precis']],
+      [['som en exponentialkurva.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('c) den exponentiella', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förenkla logaritmuttryck (5.2 ex 3) -----
+   * Grundsambandet 10^lg a = a plockar bort både potensen och
+   * logaritmen i ett svep. */
+  function layoutForenklalogaritm(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('10^l^g^9-', padL, y);
+    T.fracH('3·10^l^g^3', 'lg 10', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Grundsambandet: 10 upphöjt']],
+      [['till lg av ett tal ÄR talet.']],
+      [['Potensen och logaritmen tar ut']],
+      [['varandra.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('10^l^g^9=9', padL, y);
+    T.pause(280);
+    T.str('10^l^g^3=3', padL + 220, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och lg 10 frågar vad 10 ska']],
+      [['upphöjas till för att bli 10.']],
+      [['Svaret är förstås 1.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('lg 10=1', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=9-', padL + 20, y);
+    xx = T.fracH('3·3', '1', xx, y);
+    T.str('=9-9', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('Svar: 0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -55668,7 +56251,19 @@
                    sparkontot: layoutSparkontot,
                    generelllogaritm: layoutGenerelllogaritm,
                    logannanbas: layoutLogannanbas,
-                   skrivpotens: layoutSkrivpotens };
+                   skrivpotens: layoutSkrivpotens,
+                   lagesmatt: layoutLagesmatt,
+                   lampligtlagesmatt: layoutLampligtlagesmatt,
+                   klassmitt: layoutKlassmitt,
+                   ladagram: layoutLadagram,
+                   casladagram: layoutCasladagram,
+                   casfrekvens: layoutCasfrekvens,
+                   standardavvikelse: layoutStandardavvikelse,
+                   normalfordelning: layoutNormalfordelning,
+                   normalgeogebra: layoutNormalgeogebra,
+                   regressionglass: layoutRegressionglass,
+                   regressionbefolkning: layoutRegressionbefolkning,
+                   forenklalogaritm: layoutForenklalogaritm };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

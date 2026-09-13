@@ -43,6 +43,11 @@ vägbredd/antal olyckor kan ha svag negativ korrelation och
 **Medeltemperaturen och ett företags försäljning av glass under en
 vecka visas nedan.**
 
+::: handskrift
+typ: regressionglass
+:::
+
+::: textlosning
 | Medeltemperatur (°C) | Glassförsäljning (kr) |
 | --- | --- |
 | 22,1 | 8 000 |
@@ -98,6 +103,7 @@ y = 270 \cdot 30 + 2\,500 = 10\,600
 $$
 
 **Svar:** 10 600 kr
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

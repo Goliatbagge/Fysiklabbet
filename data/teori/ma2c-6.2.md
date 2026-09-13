@@ -70,6 +70,11 @@ större. Percentiler beräknas i Geogebra (se exemplet nedan).
 **Adriana arrangerar två olika typer av middagar: en släktmiddag och en
 kompismiddag. Åldrarna på deltagarna i respektive middag är:**
 
+::: handskrift
+typ: ladagram
+:::
+
+::: textlosning
 **Släktmiddag:** 1, 3, 4, 8, 15, 27, 30, 33, 36, 41, 42, 44, 46, 72, 72
 
 **Kompismiddag:** 28, 30, 31, 31, 32, 32, 33, 33, 34, 34, 34, 34, 35,
@@ -135,6 +140,7 @@ l1). Skriv sedan `Percentil(l1, 90%)` i inmatningsfältet. Geogebra
 svarar 72.
 
 **Svar:** 72 år
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

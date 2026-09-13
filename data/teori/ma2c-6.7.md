@@ -48,6 +48,11 @@ $r^2$-värdet i tabellen.
 **Världens befolkning vid några olika årtal redovisas i tabellen
 nedan.**
 
+::: handskrift
+typ: regressionbefolkning
+:::
+
+::: textlosning
 | År | Befolkning (miljarder) |
 | --- | --- |
 | 1920 | 1,912 |
@@ -98,6 +103,7 @@ Eftersom $r^2$-värdet ligger närmast 1 för exponentialfunktionen är
 denna bäst.
 
 **Svar:** Exponentiella modellen är bäst.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

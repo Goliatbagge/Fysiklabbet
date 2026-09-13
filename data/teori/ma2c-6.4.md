@@ -91,6 +91,11 @@ $$
 ::: exempel "Exempel 1 — Standardavvikelse i Geogebra"
 **Beräkna standardavvikelsen för mätvärdena 2, 4, 12, 24 och 43.**
 
+::: handskrift
+typ: standardavvikelse
+:::
+
+::: textlosning
 Vi startar Geogebra, klickar på knappen "Växla till kalkylblad" i den
 översta menyraden och skriver in värdena i den vänstra kolumnen. Vi
 markerar därefter alla värden, klickar på menyn "blå staplar" och
@@ -106,6 +111,7 @@ avrundar: $\sigma = 15{,}126\ldots \approx 15{,}1$.
 
 (Om det hade varit ett stickprov hade vi avläst standardavvikelsen vid
 $s$ och svarat 16,9.)
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

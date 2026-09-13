@@ -133,6 +133,11 @@ $$
 ::: exempel "Exempel 3 — Beräkna utan räknare"
 **Beräkna utan räknare $10^{\lg 9} - \dfrac{3 \cdot 10^{\lg 3}}{\lg 10}$.**
 
+::: handskrift
+typ: forenklalogaritm
+:::
+
+::: textlosning
 Vi förenklar de olika logaritmerna:
 
 $$
@@ -154,6 +159,7 @@ $$
 $$
 
 **Svar:** 0
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

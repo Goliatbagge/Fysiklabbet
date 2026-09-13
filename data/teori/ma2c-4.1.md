@@ -69,16 +69,27 @@ exemplen nedan.
 <svg viewBox="20 0 178 112" width="282" height="177" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två parallella linjer skärs av en transversal. Vinkeln x är markerad vid den övre skärningen och vinkeln 72 grader vid den undre — de är alternatvinklar."><line x1="28" y1="30" x2="160" y2="30" stroke="#1f2530" stroke-width="1.6"/><line x1="28" y1="80" x2="160" y2="80" stroke="#1f2530" stroke-width="1.6"/><line x1="62" y1="5" x2="94" y2="105" stroke="#1f2530" stroke-width="1.6"/><text x="192" y="34" font-size="12" text-anchor="end" fill="#1f2530">L₁</text><text x="192" y="84" font-size="12" text-anchor="end" fill="#1f2530">L₂</text><path d="M 82,30 A 12 12 0 0 1 73.7,41.4" fill="none" stroke="#2563c9" stroke-width="1.4"/><text x="88" y="48" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text><path d="M 74,80 A 12 12 0 0 1 82.3,68.6" fill="none" stroke="#2563c9" stroke-width="1.4"/><text x="64" y="72" font-size="12" text-anchor="end" fill="#1f2530">72°</text></svg>
 :::
 
+::: handskrift
+typ: alternatvinklar
+:::
+
+::: textlosning
 $$
 x = 72° \quad \text{(alternatvinklar)}
 $$
 
 **Svar:** 72°
 :::
+:::
 
 ::: exempel "Exempel 2 — Hjälpvinkel"
 **Beräkna vinkeln $v_1$ om linjerna L₁ och L₂ är parallella.**
 
+::: handskrift
+typ: hjalpvinkel
+:::
+
+::: textlosning
 Denna uppgift kan lösas på flera sätt. Vi lägger in en hjälpvinkel
 $v_2$ enligt figuren nedan.
 
@@ -105,6 +116,7 @@ v_1 = 180° - 115° = 65°
 $$
 
 **Svar:** 65°
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

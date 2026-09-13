@@ -112,6 +112,11 @@ $$
 <svg viewBox="14 14 176 112" width="257" height="164" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En rätvinklig triangel med den lodräta kateten 9 centimeter, hypotenusan 15 centimeter och den vågräta kateten x."><polygon points="34,22 34,102 158,102" fill="none" stroke="#1f2530" stroke-width="1.8"/><rect x="34" y="91" width="11" height="11" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="26" y="66" font-size="13" text-anchor="end" fill="#1f2530">9</text><text x="102" y="52" font-size="13" text-anchor="start" fill="#1f2530">15</text><text x="96" y="118" font-size="13" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="184" y="30" font-size="12" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: pythagorassida
+:::
+
+::: textlosning
 Sidan 15 cm är hypotenusa eftersom den är mitt emot den räta vinkeln.
 Pythagoras sats ger
 
@@ -138,11 +143,17 @@ $x = 12$ cm.
 
 **Svar:** 12 cm
 :::
+:::
 
 ::: exempel "Exempel 2 — Är triangeln rätvinklig?"
 **Sidorna i en triangel är 8 cm, 15 cm och 20 cm. Är triangeln
 rätvinklig?**
 
+::: handskrift
+typ: ratvinklig
+:::
+
+::: textlosning
 Om triangeln är rätvinklig ska summan av kvadraterna hos de korta
 sidorna vara lika med kvadraten hos den längsta sidan.
 
@@ -158,6 +169,7 @@ $289 \neq 400$, alltså gäller inte $a^2 + b^2 = c^2$ och då är
 triangeln **inte** rätvinklig.
 
 **Svar:** Nej
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -112,6 +112,11 @@ v.s.b.
 <svg viewBox="8 6 172 161" width="272" height="255" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En cirkel med två kordor som skär varandra. Den ena kordans delar är x och 10 millimeter, den andra kordans delar är 18 och 20 millimeter."><circle cx="85" cy="85" r="72" fill="none" stroke="#1f2530" stroke-width="1.6"/><line x1="104.9" y1="15.8" x2="76.7" y2="156.5" stroke="#1f2530" stroke-width="1.4"/><line x1="19.5" y1="115" x2="150.5" y2="115" stroke="#1f2530" stroke-width="1.4"/><circle cx="104.9" cy="15.8" r="2.4" fill="#1f2530"/><circle cx="76.7" cy="156.5" r="2.4" fill="#1f2530"/><circle cx="19.5" cy="115" r="2.4" fill="#1f2530"/><circle cx="150.5" cy="115" r="2.4" fill="#1f2530"/><circle cx="85" cy="115" r="2.4" fill="#1f2530"/><text x="101" y="64" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="74" y="140" font-size="12" text-anchor="end" fill="#1f2530">10</text><text x="52" y="110" font-size="12" text-anchor="middle" fill="#1f2530">18</text><text x="117" y="110" font-size="12" text-anchor="middle" fill="#1f2530">20</text><text x="176" y="16" font-size="11" text-anchor="end" fill="#1f2530">(mm)</text></svg>
 :::
 
+::: handskrift
+typ: kordasatsen
+:::
+
+::: textlosning
 Kordasatsen ger
 
 $$
@@ -130,6 +135,7 @@ $$
 
 **Svar:** 36 mm
 :::
+:::
 
 ::: exempel "Exempel 2 — Inskriven fyrhörning"
 **Bestäm vinkeln $x$.**
@@ -138,6 +144,11 @@ $$
 <svg viewBox="8 8 140 140" width="222" height="222" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En cirkel med medelpunkten M och en inskriven fyrhörning. Vinkeln 115 grader är markerad i det övre hörnet och vinkeln x i det motstående nedre hörnet."><circle cx="80" cy="80" r="62" fill="none" stroke="#1f2530" stroke-width="1.6"/><polygon points="63.9,20.1 18.9,90.8 58.8,138.3 138.3,58.8" fill="none" stroke="#1f2530" stroke-width="1.4"/><circle cx="80" cy="80" r="2" fill="#1f2530"/><text x="87" y="86" font-size="11" text-anchor="start" fill="#1f2530">M</text><path d="M 56.9,31.1 A 13 13 0 0 0 75.4,26.1" fill="none" stroke="#1f2530" stroke-width="1"/><text x="66" y="48" font-size="11" text-anchor="middle" fill="#1f2530">115°</text><path d="M 50.4,128.3 A 13 13 0 0 1 68,129.1" fill="none" stroke="#1f2530" stroke-width="1"/><text x="56" y="118" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text></svg>
 :::
 
+::: handskrift
+typ: inskrivenfyrhorning
+:::
+
+::: textlosning
 Motstående vinklar i en inskriven fyrhörning är tillsammans 180°:
 
 $$
@@ -149,6 +160,7 @@ x = 180° - 115° = 65°
 $$
 
 **Svar:** $x = 65°$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

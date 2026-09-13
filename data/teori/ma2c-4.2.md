@@ -39,6 +39,11 @@ Vinkelsumman i en
 ::: exempel "Exempel 1 — Vinkelsumman i en femhörning"
 **Vad är vinkelsumman i en femhörning?**
 
+::: handskrift
+typ: femhorning
+:::
+
+::: textlosning
 Vi ritar en godtycklig (valfri) femhörning. Därefter utgår vi från ett
 hörn och ritar sträckor till samtliga övriga hörn. Till sist markerar
 vi samtliga vinklar.
@@ -56,6 +61,7 @@ $$
 $$
 
 **Svar:** 540°
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

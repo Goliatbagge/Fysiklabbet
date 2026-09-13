@@ -33,6 +33,11 @@ leda till A.
 ::: exempel "Exempel 1 — Taxen och hunden"
 **Betrakta meningen "Om det är en tax, så är det en hund".<br>a) Skriv meningen med logiska symboler.<br>b) Är meningen en implikation eller en ekvivalens?**
 
+::: handskrift
+typ: taxenhunden
+:::
+
+::: textlosning
 **a)** Påståendena som kopplas ihop är "det är en tax" och "det är en
 hund".
 
@@ -51,10 +56,16 @@ ekvivalens.
 
 **Svar:** Det är en implikation.
 :::
+:::
 
 ::: exempel "Exempel 2 — Vilket logiskt tecken?"
 **Avgör vilket logiskt tecken som ska vara mellan påståendena:**
 
+::: handskrift
+typ: logisktecken
+:::
+
+::: textlosning
 *Alla vinklar i triangeln är 60°* ____ *Triangeln är liksidig*
 
 Vi undersöker om implikationerna är sanna åt varje håll.
@@ -75,10 +86,16 @@ Implikationen gäller alltså åt båda håll och vi har då en ekvivalens.
 
 **Svar:** ⟺
 :::
+:::
 
 ::: exempel "Exempel 3 — Stämmer implikationerna?"
 **Avgör om följande implikationer stämmer.<br>a) $2x + 5 = 11 \implies x = 3$<br>b) man äter godis ⟹ man får hål i tänderna<br>c) $x^2 = 25 \implies x = 5$<br>d) $x^3 = 27 \implies x = 3$**
 
+::: handskrift
+typ: stammerimplikation
+:::
+
+::: textlosning
 **a)** Vi löser ekvationen för att undersöka om lösningen entydigt är
 $x = 3$:
 
@@ -114,6 +131,7 @@ $$
 (inga andra lösningar finns).
 
 **Svar:** Implikationen gäller.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

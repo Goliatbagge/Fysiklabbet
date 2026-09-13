@@ -54,6 +54,11 @@ $x = a + c$." Bevisa att yttervinkelsatsen gäller.**
 <svg viewBox="18 12 194 108" width="307" height="171" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel med vinklarna a i toppen, c nere till vänster och b nere till höger. Basen är förlängd åt höger så att yttervinkeln x bildas vid det högra hörnet."><polygon points="30,100 150,100 90,20" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="150" y1="100" x2="205" y2="100" stroke="#1f2530" stroke-width="1.8"/><path d="M 81.6,31.2 A 14 14 0 0 0 98.4,31.2" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="90" y="48" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">a</tspan></text><path d="M 46,100 A 16 16 0 0 0 39.6,87.2" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="54" y="96" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">c</tspan></text><path d="M 134,100 A 16 16 0 0 1 140.4,87.2" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="126" y="96" font-size="12" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">b</tspan></text><path d="M 168,100 A 18 18 0 0 0 139.2,85.6" fill="none" stroke="#1f2530" stroke-width="1.1"/><text x="164" y="78" font-size="12" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text></svg>
 :::
 
+::: handskrift
+typ: yttervinkelsatsen
+:::
+
+::: textlosning
 Vi skriver upp de geometriska samband som vi ser och går sedan vidare.
 
 $$
@@ -84,10 +89,16 @@ $$
 
 v.s.b.
 :::
+:::
 
 ::: exempel "Exempel 2 — Kvadraten av ett jämnt tal"
 **Visa att kvadraten av ett jämnt tal alltid är delbar med 4.**
 
+::: handskrift
+typ: jamntkvadrat
+:::
+
+::: textlosning
 Vi kallar talet $x$. Eftersom talet är jämnt kan det skrivas $x = 2k$
 där $k$ är ett heltal. Vi tecknar och undersöker kvadraten av detta
 tal:
@@ -106,11 +117,17 @@ där $k^2$ alltid är ett heltal. (Ordbok: "ty" = "därför att".)
 
 v.s.v.
 :::
+:::
 
 ::: exempel "Exempel 3 — Tre på varandra följande heltal"
 **Visa att om $a$, $b$ och $c$ är tre på varandra följande heltal så
 gäller att deras summa är delbar med 3.**
 
+::: handskrift
+typ: treheltal
+:::
+
+::: textlosning
 Eftersom det är på varandra följande heltal kan vi kalla talen $a$, $b$
 och $c$ för $n$, $(n + 1)$ och $(n + 2)$. Detta ger
 
@@ -127,6 +144,7 @@ $$
 är ett heltal.
 
 v.s.v.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

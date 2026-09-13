@@ -53141,6 +53141,1282 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: alternatvinklar (ma2c-4.1 ex 1) -----------
+   * Två parallella linjer och en transversal: alternatvinklarna är
+   * lika stora. */
+  function layoutAlternatvinklar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var yA = 200, yB = 300, x0 = padL + 40, x1 = padL + 360;
+    T.line([x0, yA], [x1, yA]);
+    T.line([x0, yB], [x1, yB]);
+    T.pause(180);
+    T.str('L_1', x1 + 10, yA + 0.2 * F, null, 0.6);
+    T.str('L_2', x1 + 10, yB + 0.2 * F, null, 0.6);
+    T.pause(200);
+    /* transversalen */
+    T.line([padL + 100, yB + 70], [padL + 260, yA - 70]);
+    T.pause(200);
+    T.str('x', padL + 196, yA - 12, BLUE, 0.62);
+    T.str('72°', padL + 128, yB + 24, BLUE, 0.55);
+    T.stepEnd();
+
+    tanke(yB + 80, [
+      [['Vinklarna ligger på var sin']],
+      [['sida om transversalen och']],
+      [['mellan de parallella']],
+      [['linjerna: alternatvinklar.']]
+    ], 0);
+    y = yB + 4.6 * F;
+    xe = T.str('x=72°', padL, y);
+    T.pause(260);
+    T.str('(alternatvinklar)', xe + 0.8 * F, y, null, 0.62);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hjälpvinkel (ma2c-4.1 ex 2) --------------
+   * En hjälpvinkel binder ihop de kända sambanden. */
+  function layoutHjalpvinkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    var yA = 230, yB = 330, x0 = padL + 40, x1 = padL + 360;
+    T.line([x0, yA], [x1, yA]);
+    T.line([x0, yB], [x1, yB]);
+    T.pause(180);
+    T.str('L_1', x1 + 10, yA + 0.2 * F, null, 0.6);
+    T.str('L_2', x1 + 10, yB + 0.2 * F, null, 0.6);
+    T.pause(200);
+    T.line([padL + 100, yB + 70], [padL + 260, yA - 70]);
+    T.pause(200);
+    T.str('v_1', padL + 120, yA - 12, BLUE, 0.6);
+    T.str('v_2', padL + 196, yA - 12, BLUE, 0.6);
+    T.str('115°', padL + 128, yB + 24, BLUE, 0.55);
+    T.stepEnd();
+
+    tanke(yB + 80, [
+      [['Hjälpvinkeln v_2 ligger']],
+      [['likbelägen med 115°: samma']],
+      [['sida om transversalen och']],
+      [['samma sida om linjen.']]
+    ], 0);
+    y = yB + 4.8 * F;
+    xx = T.str('v_2=115°', padL, y);
+    T.pause(260);
+    T.str('(likbelägna)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['v_1 och v_2 ligger bredvid']],
+      [['varandra på samma linje, så de']],
+      [['är sidovinklar och blir']],
+      [['tillsammans 180°.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('v_1+115°=180°', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-115°', xx + 0.6 * F, 'v_1+115°=180°');
+    xe = T.str('v_1=65°', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: vinkelsumman i en femhörning (4.2 ex 1) ---
+   * Diagonalerna från ett hörn delar femhörningen i trianglar, och
+   * varje triangel bidrar med 180°. */
+  function layoutFemhorning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* femhörning kring en medelpunkt */
+    var cx = padL + 200, cy = 280, r = 105, p = [], i, a;
+    for (i = 0; i < 5; i++) {
+      a = -Math.PI / 2 + i * 2 * Math.PI / 5;
+      p.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+    for (i = 0; i < 5; i++) T.line(p[i], p[(i + 1) % 5]);
+    T.pause(220);
+    /* diagonaler från hörn 0 */
+    T.line(p[0], p[2]);
+    T.line(p[0], p[3]);
+    T.stepEnd();
+
+    tanke(cy + r + 0.6 * F, [
+      [['Diagonalerna från ETT hörn']],
+      [['delar femhörningen i']],
+      [['trianglar. Här blir det tre.']]
+    ], 0);
+    y = cy + r + 3.6 * F;
+    xx = T.str('3 trianglar', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje triangel bidrar med 180°,']],
+      [['och tillsammans täcker de']],
+      [['femhörningens alla vinklar.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('3·180°=540°', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 540°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: taxen och hunden (ma2c-4.3 ex 1) ---------
+   * Implikationen gäller åt ett håll. Ett motexempel räcker för att
+   * fälla omvändningen. */
+  function layoutTaxenhunden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Om det är en tax, så är', padL, y, null, 0.86);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('det en hund', padL, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Pilen pekar från villkoret']],
+      [['till slutsatsen: är det en tax']],
+      [['så FÖLJER att det är en hund.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('a) tax ⟹ hund', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Gäller det åt andra hållet']],
+      [['också? Nej: en pudel är en']],
+      [['hund men ingen tax.']]
+    ]);
+    y += 4.6 * F;
+    T.str('hund ⟹ tax är falskt', padL, y, null, 0.86);
+    T.pause(260);
+    y += 2.6 * F;
+    T.str('(motexempel: pudel)', padL + 40, y, null, 0.7);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('b) en implikation', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vilket logiskt tecken? (4.3 ex 2) -------- */
+  function layoutLogisktecken(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('alla vinklar 60°', padL, y, null, 0.86);
+    T.pause(240);
+    T.str('liksidig triangel', padL + 280, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag prövar ett håll i taget.']],
+      [['Först: följer liksidighet av']],
+      [['att alla vinklar är 60°?']]
+    ]);
+    y += 4.8 * F;
+    T.str('60° ⟹ liksidig: sant', padL, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och åt andra hållet: har en']],
+      [['liksidig triangel alltid tre']],
+      [['60°-vinklar? Ja.']]
+    ]);
+    y += 4.6 * F;
+    T.str('liksidig ⟹ 60°: sant', padL, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda hållen stämmer, och då']],
+      [['är det en ekvivalens.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('Svar: ⟺', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: stämmer implikationerna? (4.3 ex 3) ------
+   * En implikation gäller bara om slutsatsen är den ENDA möjliga. */
+  function layoutStammerimplikation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) 2x+5=11 ⟹ x=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag löser ekvationen och ser']],
+      [['om x=3 är den enda lösningen.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('2x+5=11 ⟺ 2x=6 ⟺ x=3', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('gäller', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) räcker ett motexempel för']],
+      [['att fälla implikationen.']]
+    ]);
+    y += 4.4 * F;
+    T.str('b) godis ⟹ hål i tänderna', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('gäller inte', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) finns TVÅ lösningar, så']],
+      [['x=5 följer inte entydigt.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('c) x^2=25 ⟺ x=±5', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('gäller inte (x=-5)', padL + 40, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men en tredjerot har bara EN']],
+      [['lösning: udda exponent ger']],
+      [['bara ett svar.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('d) x^3=27 ⟺ x=3', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('gäller', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: yttervinkelsatsen (ma2c-4.4 ex 1) --------
+   * Två kända samband som båda är 180° kan sättas lika med varandra. */
+  function layoutYttervinkelsatsen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    var A = [padL + 190, 170], B = [padL + 300, 300], C = [padL + 70, 300];
+    T.line(A, B); T.line(B, C); T.line(C, A);
+    T.pause(180);
+    T.line(B, [padL + 400, 300]);
+    T.pause(180);
+    T.str('a', A[0] - 6, A[1] + 1.1 * F, null, 0.62);
+    T.str('c', C[0] + 18, C[1] - 10, null, 0.62);
+    T.str('b', B[0] - 34, B[1] - 10, null, 0.62);
+    T.str('x', B[0] + 20, B[1] - 10, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(320, [
+      [['Jag skriver upp de samband jag']],
+      [['ser i figuren. Två av dem är']],
+      [['lika med 180°.']]
+    ], 0);
+    y = 380;
+    xx = T.str('a+b+c=180°', padL, y);
+    T.pause(260);
+    T.str('(vinkelsumma)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('b+x=180°', padL, y);
+    T.pause(260);
+    T.str('(sidovinklar)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda vänsterleden är lika med']],
+      [['180°, alltså är de lika med']],
+      [['varandra.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a+b+c=b+x', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-b', xx + 0.6 * F, 'a+b+c=b+x');
+    xe = T.str('a+c=x', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('v.s.b.', padL, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: kvadraten av ett jämnt tal (4.4 ex 2) ----
+   * Ett jämnt tal skrivs 2k, och då syns fyran av sig själv. */
+  function layoutJamntkvadrat(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Visa: jämnt tal i kvadrat', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('är delbart med 4', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett bevis måste gälla ALLA']],
+      [['jämna tal, inte några']],
+      [['exempel. Därför skriver jag']],
+      [['talet allmänt som 2k.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=2k', padL, y);
+    T.pause(260);
+    T.str('(k är ett heltal)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x^2=(2k)^2=4k^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Fyran står nu som en egen']],
+      [['faktor, och k^2 är alltid ett']],
+      [['heltal. Alltså går det jämnt']],
+      [['ut.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.fracH('4k^2', '4', padL, y);
+    T.str('=k^2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('v.s.v.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tre på varandra följande tal (4.4 ex 3) -- */
+  function layoutTreheltal(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Visa: summan av tre på', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('varandra följande heltal är', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('delbar med 3', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre på varandra följande tal']],
+      [['skiljer sig med 1 åt gången,']],
+      [['så jag kallar dem n, n+1 och']],
+      [['n+2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('n+(n+1)+(n+2)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=3n+3', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bryter jag ut 3 syns det']],
+      [['direkt: summan är tre gånger']],
+      [['ett heltal.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=3(n+1)', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('v.s.v.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: Pythagoras sats (ma2c-4.5 ex 1) ---------- */
+  function layoutPythagorassida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    var A = [padL + 120, 300], B = [padL + 120, 180], C = [padL + 320, 300];
+    T.line(A, B); T.line(B, C); T.line(C, A);
+    ratVinkel(T, A, [1, 0], [0, -1]);
+    T.pause(180);
+    T.str('9 cm', A[0] - T.adv('9 cm', 0.62) - 12,
+          (A[1] + B[1]) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('15 cm', (B[0] + C[0]) / 2 - 4, (B[1] + C[1]) / 2 - 16, BLUE, 0.62);
+    T.str('x', (A[0] + C[0]) / 2 - 6, C[1] + 0.95 * F, BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(340, [
+      [['15 cm ligger mitt emot den']],
+      [['räta vinkeln och är alltså']],
+      [['hypotenusan. Den står ensam i']],
+      [['Pythagoras sats.']]
+    ], 0);
+    y = 400;
+    xx = T.str('x^2+9^2=15^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2+81=225', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-81', xx + 0.6 * F, 'x^2+81=225');
+    xx = T.str('x^2=144', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=±', padL + 20, y);
+    xx = T.rot('144', xx, y);
+    T.str('=±12', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En sträcka kan inte vara']],
+      [['negativ, så -12 förkastas.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('Svar: 12 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: är triangeln rätvinklig? (4.5 ex 2) ------
+   * Pythagoras sats baklänges: stämmer den inte är triangeln inte
+   * rätvinklig. */
+  function layoutRatvinklig(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Sidor: 8 cm, 15 cm, 20 cm', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Om triangeln är rätvinklig ska']],
+      [['kateternas kvadrater']],
+      [['tillsammans bli hypotenusans.']],
+      [['Den längsta sidan är 20.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('8^2+15^2=64+225=289', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('20^2=400', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['289 är inte 400, så sambandet']],
+      [['stämmer inte.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('289≠400', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: nej, inte rätvinklig', padL, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: avstånd och mittpunkt (ma2c-4.6 ex 1) ----
+   * Avståndsformeln är Pythagoras sats i koordinatsystemet. */
+  function layoutAvstandmitt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 130, oy: 250, ux: 26, uy: 26 });
+
+    G.axlar(-4.4, 8.4, -6.4, 2.4, 'x', 'y');
+    G.punkt(-3, -5, BLUE);
+    G.punkt(7, -1, BLUE);
+    T.line([G.X(-3), G.Y(-5)], [G.X(7), G.Y(-1)], BLUE);
+    T.str('(-3, -5)', G.X(-3) - 20, G.Y(-5) + 1.0 * F, BLUE, 0.5);
+    T.str('(7, -1)', G.X(7) - 30, G.Y(-1) - 0.4 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 6.4 * 26, [
+      [['Avståndsformeln är Pythagoras']],
+      [['sats: skillnaden i x-led och']],
+      [['skillnaden i y-led är']],
+      [['kateterna.']]
+    ], 0);
+    y = G.oy + 6.4 * 26 + 3.4 * F;
+    xx = T.str('d=', padL, y);
+    xx = T.rot('(7-(-3))^2+(-1-(-5))^2', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.rot('100+16', xx, y);
+    xx = T.str('=', xx, y);
+    T.rot('116', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('a) d≈10,8 l.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Mittpunkten är medelvärdet av']],
+      [['koordinaterna, en riktning i']],
+      [['taget.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('(', padL, y);
+    xx = T.fracH('-3+7', '2', xx, y);
+    xx = T.str(', ', xx, y);
+    xx = T.fracH('-5+(-1)', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('b) (2, -3)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: likformiga parallellogram (4.7 ex 1) ----- */
+  function layoutLikformigaparallell(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Liten: 8 och 6, vinklar 50°', padL, y, null, 0.84);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('och 130°. Stor: 12 och 9', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Likformighet kräver TVÅ saker:']],
+      [['att vinklarna är lika stora']],
+      [['och att sidförhållandena är']],
+      [['lika.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Vinklar: 50° och 130° i båda', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Motstående vinklar i en']],
+      [['parallellogram är lika, så alla']],
+      [['fyra är kända i båda.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.fracH('8', '12', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2', '3', xx, y);
+    T.pause(280);
+    xx = T.fracH('6', '9', xx + 1.4 * F, y);
+    xx = T.str('=', xx, y);
+    T.fracH('2', '3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma förhållande, 2/3, i båda']],
+      [['riktningarna. Då är figurerna']],
+      [['likformiga.']]
+    ], 1.4);
+    y += 5.4 * F;
+    xe = T.str('Svar: ja', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm sidan i likformiga figurer (4.7 ex 2)
+   * Två vägar: ekvation med korsvis multiplikation, eller skalfaktor. */
+  function layoutLikformigsida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Motsvarande sidor: x och 5,', padL, y, null, 0.84);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('24 och 8', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I likformiga figurer är']],
+      [['förhållandet mellan']],
+      [['motsvarande sidor detsamma.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Med ekvation', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.fracH('x', '5', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('24', '8', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('8x=24·5=120', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=15 cm', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak går att tänka med']],
+      [['skalfaktor: hur många gånger']],
+      [['större den ena figuren är.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Med skalfaktor', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('s=', padL, y);
+    xx = T.fracH('24', '8', xx, y);
+    T.str('=3', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('x=5·3=15 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: jämför vinklarna (ma2c-4.8 ex 1) --------- */
+  function layoutLikformigavinklar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('ABC: A=128°, C=12°', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('DEF: E=40°, F=12°', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två vinklar räcker: den tredje']],
+      [['ger vinkelsumman. Då kan jag']],
+      [['jämföra alla tre.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('B=180°-128°-12°=40°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('D=180°-12°-40°=128°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['A=D, B=E och C=F. Alla']],
+      [['motsvarande vinklar är lika']],
+      [['stora.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: ja, likformiga', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: jämför sidförhållandena (4.8 ex 2) ------- */
+  function layoutLikformigasidor(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('ABC: 2,7  3,6  4,5', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('DEF: 4,5  6,0  7,5', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag jämför MOTSVARANDE sidor,']],
+      [['alltså den kortaste med den']],
+      [['kortaste och så vidare.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.fracH('2,7', '4,5', padL, y);
+    T.str('=0,6', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.fracH('3,6', '6,0', padL, y);
+    T.str('=0,6', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.fracH('4,5', '7,5', padL, y);
+    T.str('=0,6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma kvot för alla tre par,']],
+      [['alltså samma skalfaktor hela']],
+      [['vägen.']]
+    ], 1.4);
+    y += 5.4 * F;
+    xe = T.str('Svar: ja, likformiga', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: flaggstången och skuggan (4.8 ex 3) ------
+   * Solstrålarna ger samma vinkel, så trianglarna är likformiga. */
+  function layoutFlaggstangskugga(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* stor triangel: flaggstången; liten: Alva */
+    var B = [padL + 40, 300], C = [padL + 250, 300], A = [padL + 40, 160];
+    T.line(B, C); T.line(C, A); T.line(A, B);
+    ratVinkel(T, B, [1, 0], [0, -1]);
+    T.pause(180);
+    T.str('x', B[0] - 0.8 * F, (A[1] + B[1]) / 2, BLUE, 0.62);
+    T.str('6,75 m', (B[0] + C[0]) / 2 - 30, C[1] + 0.95 * F, BLUE, 0.6);
+    T.pause(220);
+    var E = [padL + 330, 300], Fp = [padL + 400, 300], D = [padL + 330, 254];
+    T.line(E, Fp); T.line(Fp, D); T.line(D, E);
+    ratVinkel(T, E, [1, 0], [0, -1], 10);
+    T.str('1,60', E[0] - 1.9 * F, (D[1] + E[1]) / 2 + 0.2 * F, BLUE, 0.55);
+    T.str('1,20', (E[0] + Fp[0]) / 2 - 22, Fp[1] + 0.95 * F, BLUE, 0.55);
+    T.stepEnd();
+
+    tanke(340, [
+      [['Solens strålar träffar båda']],
+      [['under samma vinkel, och båda']],
+      [['trianglarna har en rät vinkel.']],
+      [['Alltså är de likformiga.']]
+    ], 0);
+    y = 410;
+    xx = T.fracH('x', '1,60', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('6,75', '1,20', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('6,75·1,60', '1,20', xx, y);
+    T.str('=9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: flaggstångens skugga']],
+      [['är drygt fem gånger så lång']],
+      [['som Alvas, och stången blir']],
+      [['drygt fem gånger så hög.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xe = T.str('Svar: 9 meter', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: parallelltransversal (ma2c-4.9 ex 1) -----
+   * Två satser ger samma svar; transversalsatsen är den kortare vägen. */
+  function layoutParalleltransversal(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    /* triangel med transversal */
+    var A = [padL + 180, 160], B = [padL + 60, 320], C = [padL + 340, 320];
+    var D = [padL + 140, 213], E = [padL + 233, 213];
+    T.line(A, B); T.line(B, C); T.line(C, A);
+    T.pause(180);
+    T.line(D, E);
+    T.pause(180);
+    T.str('4', (A[0] + D[0]) / 2 - 20, (A[1] + D[1]) / 2, BLUE, 0.6);
+    T.str('8', (D[0] + B[0]) / 2 - 22, (D[1] + B[1]) / 2, BLUE, 0.6);
+    T.str('x', (A[0] + E[0]) / 2 + 12, (A[1] + E[1]) / 2, BLUE, 0.6);
+    T.str('10', (E[0] + C[0]) / 2 + 12, (E[1] + C[1]) / 2, BLUE, 0.6);
+    T.stepEnd();
+
+    tanke(340, [
+      [['Transversalen är parallell med']],
+      [['basen, så delarna på de två']],
+      [['sidorna har samma förhållande.']]
+    ], 0);
+    y = 400;
+    T.str('Transversalsatsen', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.fracH('x', '10', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4', '8', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('4', '8', xx, y);
+    xe = T.str('·10=5', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Topptriangelsatsen ger samma']],
+      [['svar, men där jämförs HELA']],
+      [['sidorna med de övre delarna.']]
+    ], 1.4);
+    y += 5.6 * F;
+    T.str('Topptriangelsatsen', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.fracH('4', '12', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('x', 'x+10', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('4(x+10)=12x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('4x+40=12x', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-4x', xx + 0.6 * F, '4x+40=12x');
+    xx = T.str('40=8x ⟹ x=5', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 5 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: bisektrissatsen (ma2c-4.9 ex 2) ---------- */
+  function layoutBisektrissatsen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var A = [padL + 60, 300], B = [padL + 230, 160], C = [padL + 330, 300];
+    var D = [padL + 227, 300];
+    T.line(A, B); T.line(B, C); T.line(C, A);
+    T.pause(180);
+    T.line(A, B);
+    T.line(A, D);
+    T.pause(180);
+    T.str('3', (A[0] + D[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
+    T.str('5', (D[0] + C[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
+    T.str('9', (A[0] + B[0]) / 2 - 24, (A[1] + B[1]) / 2, BLUE, 0.6);
+    T.str('x', (B[0] + C[0]) / 2 + 12, (B[1] + C[1]) / 2, BLUE, 0.6);
+    T.stepEnd();
+
+    tanke(320, [
+      [['Bisektrisen delar motstående']],
+      [['sida i samma förhållande som']],
+      [['de två sidorna den utgår']],
+      [['mellan.']]
+    ], 0);
+    y = 400;
+    xx = T.fracH('5', '3', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('x', '9', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('5', '3', xx, y);
+    xx = T.str('·9=', xx, y);
+    xe = T.fracH('45', '3', xx, y);
+    xe = T.str('=15', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('Svar: 15 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kongruens enligt SVS (ma2c-4.10 ex 1) ---- */
+  function layoutKongruenssvs(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Två sidor och mellanliggande', padL, y, null, 0.84);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('vinkel överensstämmer', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kongruenta figurer är exakt']],
+      [['lika stora, inte bara']],
+      [['likformiga. Då är motsvarande']],
+      [['sidor lika långa.']]
+    ]);
+    y += 4.8 * F;
+    T.str('SVS ⟹ kongruenta', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tvärstrecken visar vilka sidor']],
+      [['som motsvarar varandra. Ett']],
+      [['streck hör ihop med ett streck.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('x=24 cm', padL, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('y=32 cm', padL + 220, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kongruens enligt SSS (ma2c-4.10 ex 2) ---- */
+  function layoutKongruenssss(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('ABC: C=102°, B=48°', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla tre sidor överensstämmer,']],
+      [['så trianglarna är kongruenta']],
+      [['enligt SSS. Då är också']],
+      [['vinklarna lika.']]
+    ]);
+    y += 4.8 * F;
+    T.str('SSS ⟹ kongruenta', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vinkeln hör ihop med sidan']],
+      [['MITT EMOT. Tvärstrecken talar']],
+      [['om vilken vinkel som är vilken.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('∠E=∠B=48°', padL, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('∠F=∠C=102°', padL + 250, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('∠D=180°-48°-102°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=30°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: randvinkelsatsen (ma2c-4.11 ex 1) -------- */
+  function layoutRandvinkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) medelpunktsvinkel 120°', padL, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Randvinkelsatsen: randvinkeln']],
+      [['är hälften av']],
+      [['medelpunktsvinkeln på samma']],
+      [['båge.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('120°', '2', xx, y);
+    xe = T.str('=60°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) står två RANDvinklar på']],
+      [['samma båge. Då är de lika']],
+      [['stora.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.str('b) randvinklar på samma båge', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=32°', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: likbent triangel av radier (4.11 ex 2) --- */
+  function layoutLikbentradier(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* cirkel med diameter, korda och radie */
+    var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
+    for (i = 0; i <= 44; i++) {
+      a = -Math.PI * 2 * (i / 44);
+      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+    acts.push({ kind: 'stroke', pts: pts });
+    T.pause(200);
+    var top = [cx, cy - r], bot = [cx, cy + r];
+    var P = [cx + Math.cos(-0.6) * r, cy + Math.sin(-0.6) * r];
+    /* streckad diameter */
+    for (i = 0; i < 9; i += 2) {
+      acts.push({ kind: 'stroke', pts: humanize(
+        [[cx, cy - r + (2 * r) * (i / 9)], [cx, cy - r + (2 * r) * ((i + 1) / 9)]]) });
+    }
+    T.pause(180);
+    T.line(top, P);
+    T.line([cx, cy], P);
+    T.pause(200);
+    T.str('x', cx + 16, cy - r + 0.9 * F, BLUE, 0.6);
+    T.str('23°', P[0] - 62, P[1] + 0.75 * F, BLUE, 0.55);
+    T.str('y', cx + 22, cy + 0.2 * F, BLUE, 0.6);
+    T.stepEnd();
+
+    tanke(cy + r + 0.6 * F, [
+      [['Två av triangelns sidor är']],
+      [['radier och alltså lika långa.']],
+      [['I en likbent triangel är']],
+      [['basvinklarna lika stora.']]
+    ], 0);
+    y = cy + r + 4.0 * F;
+    xx = T.str('x=23°', padL, y);
+    T.pause(260);
+    T.str('(basvinklar)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x är en randvinkel och y är']],
+      [['medelpunktsvinkeln på samma']],
+      [['båge, så y är dubbelt så stor.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('y=2·23°=46°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tangent mot radie (ma2c-4.11 ex 3) ------- */
+  function layoutTangentcirkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var cx = padL + 150, cy = 260, r = 80, i, a, pts = [];
+    for (i = 0; i <= 44; i++) {
+      a = -Math.PI * 2 * (i / 44);
+      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+    acts.push({ kind: 'stroke', pts: pts });
+    T.pause(200);
+    /* tangeringspunkt B vid vinkeln -50° från P, A på förlängningen */
+    var aB = -0.87;
+    var B = [cx + Math.cos(aB) * r, cy + Math.sin(aB) * r];
+    var A = [cx + 290, cy - 12];
+    T.line([cx, cy], B);
+    T.line([cx, cy], A);
+    T.line(B, A);
+    ratVinkel(T, B, [Math.cos(aB + Math.PI), Math.sin(aB + Math.PI)],
+              [(A[0] - B[0]) / 200, (A[1] - B[1]) / 200], 14);
+    T.pause(200);
+    T.str('P', cx - 22, cy + 0.2 * F, null, 0.6);
+    T.str('B', B[0] - 4, B[1] - 0.4 * F, null, 0.6);
+    T.str('A', A[0] + 10, A[1] + 0.2 * F, null, 0.6);
+    T.str('50°', cx + 24, cy - 10, BLUE, 0.55);
+    T.str('v', A[0] - 76, A[1] + 0.25 * F, BLUE, 0.6);
+    T.stepEnd();
+
+    tanke(cy + r + 0.6 * F, [
+      [['En tangent är alltid vinkelrät']],
+      [['mot radien i']],
+      [['tangeringspunkten.']]
+    ], 0);
+    y = cy + r + 3.6 * F;
+    xx = T.str('∠ABP=90°', padL, y);
+    T.pause(260);
+    T.str('(tangent mot radie)', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Då är ABP en vanlig triangel']],
+      [['där två vinklar är kända.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('v=180°-90°-50°', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=40°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kordasatsen (ma2c-4.12 ex 1) ------------- */
+  function layoutKordasatsen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
+    for (i = 0; i <= 44; i++) {
+      a = -Math.PI * 2 * (i / 44);
+      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+    acts.push({ kind: 'stroke', pts: pts });
+    T.pause(200);
+    /* två kordor som skär varandra */
+    var P1 = [cx + Math.cos(2.5) * r, cy + Math.sin(2.5) * r];
+    var P2 = [cx + Math.cos(-0.5) * r, cy + Math.sin(-0.5) * r];
+    var P3 = [cx + Math.cos(1.2) * r, cy + Math.sin(1.2) * r];
+    var P4 = [cx + Math.cos(-1.9) * r, cy + Math.sin(-1.9) * r];
+    T.line(P1, P2);
+    T.line(P3, P4);
+    T.pause(200);
+    T.str('x', (P1[0] + cx) / 2 - 10, (P1[1] + cy) / 2, BLUE, 0.6);
+    T.str('10', (P2[0] + cx) / 2, (P2[1] + cy) / 2 + 0.9 * F, BLUE, 0.6);
+    T.str('18', (P3[0] + cx) / 2 + 8, (P3[1] + cy) / 2, BLUE, 0.6);
+    T.str('20', (P4[0] + cx) / 2 - 26, (P4[1] + cy) / 2, BLUE, 0.6);
+    T.stepEnd();
+
+    tanke(cy + r + 0.6 * F, [
+      [['Kordasatsen: produkten av']],
+      [['delarna är lika stor för båda']],
+      [['kordorna.']]
+    ], 0);
+    y = cy + r + 3.6 * F;
+    xx = T.str('10x=18·20', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('10x=360', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/10', xx + 0.6 * F, '10x=360',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=36 mm', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: inskriven fyrhörning (ma2c-4.12 ex 2) ---- */
+  function layoutInskrivenfyrhorning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
+    for (i = 0; i <= 44; i++) {
+      a = -Math.PI * 2 * (i / 44);
+      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+    }
+    acts.push({ kind: 'stroke', pts: pts });
+    T.pause(200);
+    var vink = [-1.9, -0.4, 1.0, 2.6], p = [];
+    for (i = 0; i < 4; i++) {
+      p.push([cx + Math.cos(vink[i]) * r, cy + Math.sin(vink[i]) * r]);
+    }
+    for (i = 0; i < 4; i++) T.line(p[i], p[(i + 1) % 4]);
+    T.pause(200);
+    T.str('115°', p[0][0] - 20, p[0][1] + 1.0 * F, BLUE, 0.55);
+    T.str('x', p[2][0] + 4, p[2][1] - 0.5 * F, BLUE, 0.6);
+    T.str('M', cx - 8, cy + 0.2 * F, null, 0.55);
+    T.stepEnd();
+
+    tanke(cy + r + 0.6 * F, [
+      [['I en fyrhörning inskriven i en']],
+      [['cirkel är motstående vinklar']],
+      [['tillsammans 180°.']]
+    ], 0);
+    y = cy + r + 3.6 * F;
+    xx = T.str('x+115°=180°', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-115°', xx + 0.6 * F, 'x+115°=180°');
+    xe = T.str('x=65°', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -53683,7 +54959,33 @@
                    grafiskaekvationer: layoutGrafiskaekvationer,
                    grafiskaolikheter: layoutGrafiskaolikheter,
                    nyarsraket: layoutNyarsraket,
-                   hagenvidmuren: layoutHagenvidmuren };
+                   hagenvidmuren: layoutHagenvidmuren,
+                   alternatvinklar: layoutAlternatvinklar,
+                   hjalpvinkel: layoutHjalpvinkel,
+                   femhorning: layoutFemhorning,
+                   taxenhunden: layoutTaxenhunden,
+                   logisktecken: layoutLogisktecken,
+                   stammerimplikation: layoutStammerimplikation,
+                   yttervinkelsatsen: layoutYttervinkelsatsen,
+                   jamntkvadrat: layoutJamntkvadrat,
+                   treheltal: layoutTreheltal,
+                   pythagorassida: layoutPythagorassida,
+                   ratvinklig: layoutRatvinklig,
+                   avstandmitt: layoutAvstandmitt,
+                   likformigaparallell: layoutLikformigaparallell,
+                   likformigsida: layoutLikformigsida,
+                   likformigavinklar: layoutLikformigavinklar,
+                   likformigasidor: layoutLikformigasidor,
+                   flaggstangskugga: layoutFlaggstangskugga,
+                   paralleltransversal: layoutParalleltransversal,
+                   bisektrissatsen: layoutBisektrissatsen,
+                   kongruenssvs: layoutKongruenssvs,
+                   kongruenssss: layoutKongruenssss,
+                   randvinkel: layoutRandvinkel,
+                   likbentradier: layoutLikbentradier,
+                   tangentcirkel: layoutTangentcirkel,
+                   kordasatsen: layoutKordasatsen,
+                   inskrivenfyrhorning: layoutInskrivenfyrhorning };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

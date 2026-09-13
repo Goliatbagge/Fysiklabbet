@@ -175,6 +175,11 @@ v.s.b.
 <svg viewBox="10 -2 214 156" width="339" height="247" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel med en parallelltransversal genom D och E. Övre delen av vänstra sidan är 4, nedre delen 8, övre delen av högra sidan är x och nedre delen 10 centimeter."><polygon points="95,16 25,135 190,135" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="18" y1="55.7" x2="200" y2="55.7" stroke="#1f2530" stroke-width="1.4"/><text x="95" y="10" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="19" y="148" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="196" y="148" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="66" y="51" font-size="12" text-anchor="end" fill="#1f2530">D</text><text x="130" y="51" font-size="12" text-anchor="start" fill="#1f2530">E</text><text x="78" y="38" font-size="11" text-anchor="end" fill="#1f2530">4</text><text x="42" y="100" font-size="11" text-anchor="end" fill="#1f2530">8</text><text x="117" y="38" font-size="11" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="166" y="100" font-size="11" text-anchor="start" fill="#1f2530">10</text><text x="222" y="14" font-size="11" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: paralleltransversal
+:::
+
+::: textlosning
 Eftersom vi inte räknar på trianglarnas baser kan vi använda både
 transversalsatsen och topptriangelsatsen. Välj en metod. (Tumregeln är
 att använda transversalsatsen när det är möjligt.)
@@ -215,6 +220,7 @@ $$
 
 **Svar:** 5 cm
 :::
+:::
 
 ::: exempel "Exempel 2 — Bisektris"
 **Bestäm sidan $x$.**
@@ -223,6 +229,11 @@ $$
 <svg viewBox="8 0 240 142" width="415" height="245" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel där en bisektris från det vänstra hörnet delar motstående sida i delarna 3 och 5. Sidan mot 3-delen är 9 och basen är x centimeter."><polygon points="15,120 119.8,68 210,120" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="15" y1="120" x2="153.6" y2="87.5" stroke="#1f2530" stroke-width="1.4"/><path d="M 49,120 A 34 34 0 0 0 48.1,112.2" fill="none" stroke="#1f2530" stroke-width="1"/><path d="M 48.1,112.2 A 34 34 0 0 0 45.5,104.9" fill="none" stroke="#1f2530" stroke-width="1"/><text x="62" y="86" font-size="11" text-anchor="middle" fill="#1f2530">9</text><text x="143" y="70" font-size="11" text-anchor="middle" fill="#1f2530">3</text><text x="188" y="96" font-size="11" text-anchor="middle" fill="#1f2530">5</text><text x="112" y="134" font-size="11" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="244" y="14" font-size="11" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: bisektrissatsen
+:::
+
+::: textlosning
 Bisektrissatsen ger
 
 $$
@@ -236,6 +247,7 @@ x = \frac{5}{3} \cdot 9 = \frac{45}{3} = 15
 $$
 
 **Svar:** 15 cm
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

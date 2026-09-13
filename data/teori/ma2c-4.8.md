@@ -43,6 +43,11 @@ samma, på grund av vinkelsumman i trianglar).
 <svg viewBox="36 16 548 82" width="664" height="99" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="Två långsmala, likformiga trianglar: triangeln A B C med vinklarna 128 grader vid A och 12 grader vid C, och den större triangeln D E F med vinklarna 40 grader vid E och 12 grader vid F."><polygon points="80.7,37.9 50.4,69.3 215,52" fill="none" stroke="#1f2530" stroke-width="1.6"/><text x="79" y="30" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="46" y="82" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="222" y="56" font-size="12" text-anchor="start" fill="#1f2530">C</text><path d="M 90.6,38.9 A 10 10 0 0 1 73.8,45.1" fill="none" stroke="#1f2530" stroke-width="1"/><text x="100" y="55" font-size="10" text-anchor="middle" fill="#1f2530">128°</text><path d="M 66.3,67.6 A 16 16 0 0 0 61.5,57.8" fill="none" stroke="#1f2530" stroke-width="1"/><text x="77.4" y="59.5" font-size="10" text-anchor="middle" fill="#1f2530">40°</text><path d="M 179.2,55.8 A 36 36 0 0 1 179.2,48.2" fill="none" stroke="#1f2530" stroke-width="1"/><text x="157" y="55.5" font-size="10" text-anchor="middle" fill="#1f2530">12°</text><polygon points="398.9,41.1 362.6,78.8 560,58" fill="none" stroke="#1f2530" stroke-width="1.6"/><text x="397" y="34" font-size="12" text-anchor="middle" fill="#1f2530">D</text><text x="356" y="91" font-size="12" text-anchor="middle" fill="#1f2530">E</text><text x="567" y="62" font-size="12" text-anchor="start" fill="#1f2530">F</text><path d="M 408.8,42.1 A 10 10 0 0 1 392,48.3" fill="none" stroke="#1f2530" stroke-width="1"/><text x="430" y="61.5" font-size="10" text-anchor="middle" fill="#1f2530">128°</text><path d="M 378.5,77.1 A 16 16 0 0 0 373.7,67.3" fill="none" stroke="#1f2530" stroke-width="1"/><text x="389.6" y="69" font-size="10" text-anchor="middle" fill="#1f2530">40°</text><path d="M 524.2,61.8 A 36 36 0 0 1 524.2,54.2" fill="none" stroke="#1f2530" stroke-width="1"/><text x="502" y="61.5" font-size="10" text-anchor="middle" fill="#1f2530">12°</text></svg>
 :::
 
+::: handskrift
+typ: likformigavinklar
+:::
+
+::: textlosning
 Vi undersöker motsvarande vinklar.
 
 I $\triangle ABC$: $A = 128°$ och $C = 12°$ är givna, så
@@ -63,6 +68,7 @@ $\triangle ABC \sim \triangle DEF$.
 
 **Svar:** Ja
 :::
+:::
 
 ::: exempel "Exempel 2 — Jämför sidförhållandena"
 **Är trianglarna likformiga?**
@@ -71,6 +77,11 @@ $\triangle ABC \sim \triangle DEF$.
 <svg viewBox="4 0 260 130" width="449" height="225" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="Två rätvinkliga trianglar: A B C med sidorna 2,7, 3,6 och 4,5 centimeter, och den spegelvända D E F med sidorna 4,5, 6,0 och 7,5 centimeter."><polygon points="20,110 74,110 74,38" fill="none" stroke="#1f2530" stroke-width="1.6"/><text x="16" y="124" font-size="11" text-anchor="middle" fill="#1f2530">A</text><text x="78" y="124" font-size="11" text-anchor="middle" fill="#1f2530">B</text><text x="78" y="34" font-size="11" text-anchor="middle" fill="#1f2530">C</text><text x="47" y="124" font-size="10" text-anchor="middle" fill="#1f2530">2,7</text><text x="82" y="78" font-size="10" text-anchor="start" fill="#1f2530">3,6</text><text x="38" y="70" font-size="10" text-anchor="end" fill="#1f2530">4,5</text><polygon points="128,110 218,110 128,14" fill="none" stroke="#1f2530" stroke-width="1.6"/><text x="124" y="124" font-size="11" text-anchor="middle" fill="#1f2530">D</text><text x="223" y="124" font-size="11" text-anchor="middle" fill="#1f2530">E</text><text x="124" y="10" font-size="11" text-anchor="middle" fill="#1f2530">F</text><text x="173" y="124" font-size="10" text-anchor="middle" fill="#1f2530">4,5</text><text x="122" y="66" font-size="10" text-anchor="end" fill="#1f2530">6,0</text><text x="182" y="60" font-size="10" text-anchor="start" fill="#1f2530">7,5</text><text x="258" y="24" font-size="11" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: likformigasidor
+:::
+
+::: textlosning
 Vi undersöker sidförhållandena.
 
 $$
@@ -89,6 +100,7 @@ Sidförhållandena är lika (0,6), alltså är trianglarna likformiga.
 
 **Svar:** Ja
 :::
+:::
 
 ::: exempel "Exempel 3 — Flaggstången"
 **Alva ska bestämma höjden hos en flaggstång en solig sommardag. Hon är
@@ -96,6 +108,11 @@ Sidförhållandena är lika (0,6), alltså är trianglarna likformiga.
 längden på flaggstångens skugga till 6,75 meter. Hur hög är
 flaggstången?**
 
+::: handskrift
+typ: flaggstangskugga
+:::
+
+::: textlosning
 Eftersom flaggstången och Alva träffas under samma vinkel av solens
 strålar måste vinkeln som bildas mot höjden vara lika i båda trianglar.
 Båda trianglar har dessutom en rät vinkel. Vi ritar en skiss över
@@ -119,6 +136,7 @@ x = \frac{6{,}75}{1{,}20} \cdot 1{,}60 = 9{,}00
 $$
 
 **Svar:** 9,00 meter
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

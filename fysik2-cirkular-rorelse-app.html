@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cirkulär rörelse — Fysiklabbet</title>
-    <meta name="description" content="En bil i cirkelbana ovanifrån och en bil i loop. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie — och hitta gränsfarten där bilen precis klarar loopen (normalkraften 0 i toppen).">
+    <meta name="description" content="En bil i cirkelbana ovanifrån, en bilbana med en vid och en snäv kurva, en bil i loop och en bil över krön och genom dal. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie. Se att kraften bara behövs i kurvorna, hitta gränsfarten där bilen klarar loopen eller lättar från krönet, och sänk friktionen tills bilen fortsätter rakt fram.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-cirkular-rorelse-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Cirkulär rörelse — Fysik nivå 2">
-    <meta property="og:description" content="En bil i cirkelbana ovanifrån och en bil i loop. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie — och hitta gränsfarten där bilen precis klarar loopen (normalkraften 0 i toppen).">
+    <meta property="og:description" content="En bil i cirkelbana ovanifrån, en bilbana med en vid och en snäv kurva, en bil i loop och en bil över krön och genom dal. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie. Se att kraften bara behövs i kurvorna, hitta gränsfarten där bilen klarar loopen eller lättar från krönet, och sänk friktionen tills bilen fortsätter rakt fram.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-cirkular-rorelse-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cirkulär rörelse — Fysik nivå 2">
-    <meta name="twitter:description" content="En bil i cirkelbana ovanifrån och en bil i loop. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie — och hitta gränsfarten där bilen precis klarar loopen (normalkraften 0 i toppen).">
+    <meta name="twitter:description" content="En bil i cirkelbana ovanifrån, en bilbana med en vid och en snäv kurva, en bil i loop och en bil över krön och genom dal. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie. Se att kraften bara behövs i kurvorna, hitta gränsfarten där bilen klarar loopen eller lättar från krönet, och sänk friktionen tills bilen fortsätter rakt fram.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -222,14 +222,15 @@
             background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
             border-color: var(--lab-ink, #0f1620);
         }
-        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
-                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        /* Fyra situationer i ett 2×2-rutnät; 1 px mellanrum på linjefärgad
+           botten ger skiljelinjerna. */
+        .mode-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
         .mode-seg button {
-            flex: 1; padding: 9px 10px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            padding: 9px 10px; font-weight: 600; cursor: pointer; font-size: 13.5px;
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
-            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
-        .mode-seg button:last-child { border-right: none; }
         .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
         .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
 
@@ -320,6 +321,14 @@
         const VMIN = 2, VMAX = 15;          // banhastighet (m/s)
         const RMIN = 5, RMAX = 25;          // banradie (m)
         const MMIN = 500, MMAX = 2000;      // massa (kg)
+
+        // ── Bilbana (ovanifrån): glidarintervall ──
+        const BR1MIN = 10, BR1MAX = 20;     // vida kurvans radie (m)
+        const BR2MIN = 4, BR2MAX = 10;      // snäva kurvans radie (m)
+        const MUMIN = 0.1, MUMAX = 1.0;     // friktionstal däck–väg
+
+        // ── Krön och dal (från sidan): glidarintervall ──
+        const KRMIN = 8, KRMAX = 16;        // krönets och dalens radie (m)
 
         // ── Loop: fasta parametrar ──
         const RL = 8.0;                     // loopens radie (m)
@@ -900,6 +909,599 @@
             );
         };
 
+        // ════════════════════════════════════════════════════════
+        //  SCEN 3 — bilbana med två kurvor, sedd ovanifrån
+        //  (förslag från en besökare 2026-09-13: rak väg → kurva → rak väg,
+        //  så att man ser att centripetalkraften bara behövs i kurvan)
+        // ════════════════════════════════════════════════════════
+        const PXB = 6;                                   // px per meter
+        // Kurvornas centrum i VÄRLDSKOORDINATER (y uppåt, origo nere till
+        // vänster). Banan lutar något så att den vida kurvan hamnar nere till
+        // höger, under inställningsrutan, och den snäva uppe till vänster.
+        const BC1 = { x: 455, y: 185 };                  // vida kurvan
+        const BC2 = { x: 150, y: 325 };                  // snäva kurvan
+        const W2S = (p) => ({ x: p.x, y: VBH - p.y });   // värld → SVG
+        const rot2 = (p, a) => ({ x: p.x * Math.cos(a) - p.y * Math.sin(a),
+                                  y: p.x * Math.sin(a) + p.y * Math.cos(a) });
+
+        // Banan: två cirkelbågar (r1 > r2) förbundna med sina yttre tangenter —
+        // en sluten bana som körs moturs: raka, snäva kurvan, raka, vida kurvan.
+        // Eftersom radierna är olika lutar rakorna något och bågarna är inte
+        // exakt halvcirklar (180° ± 2φ), men de är cirkelbågar med konstant
+        // radie, vilket är det som räknas för fysiken.
+        const buildBana = (r1m, r2m) => {
+            const r1 = r1m * PXB, r2 = r2m * PXB;
+            const dx = BC2.x - BC1.x, dy = BC2.y - BC1.y;
+            const d = Math.hypot(dx, dy), psi = Math.atan2(dy, dx);
+            const phi = Math.asin((r1 - r2) / d);
+            const nU = rot2({ x: Math.sin(phi), y: Math.cos(phi) }, psi);
+            const nL = rot2({ x: Math.sin(phi), y: -Math.cos(phi) }, psi);
+            const T1L = { x: BC1.x + r1 * nL.x, y: BC1.y + r1 * nL.y };
+            const T2U = { x: BC2.x + r2 * nU.x, y: BC2.y + r2 * nU.y };
+            const Ls = d * Math.cos(phi);
+            const e1 = rot2({ x: Math.cos(phi), y: Math.sin(phi) }, psi);
+            const e2 = rot2({ x: -Math.cos(phi), y: Math.sin(phi) }, psi);
+            const segs = [
+                { type: 'line', len: Ls, P: T1L, e: e1 },
+                { type: 'arc', len: r2 * (Math.PI - 2 * phi), C: BC2, r: r2, rm: r2m,
+                  a0: psi + phi - Math.PI / 2, name: 'snäva', idx: 2 },
+                { type: 'line', len: Ls, P: T2U, e: e2 },
+                { type: 'arc', len: r1 * (Math.PI + 2 * phi), C: BC1, r: r1, rm: r1m,
+                  a0: psi + Math.PI / 2 - phi, name: 'vida', idx: 1 },
+            ];
+            let acc = 0;
+            segs.forEach((sg) => { sg.s0 = acc; acc += sg.len; });
+            const Ltot = acc;
+            // läge (värld, px), rörelseriktning e och kurvinfo vid båglängden s
+            const at = (s) => {
+                s = ((s % Ltot) + Ltot) % Ltot;
+                const sg = segs.find((g) => s < g.s0 + g.len) || segs[segs.length - 1];
+                const u = s - sg.s0;
+                if (sg.type === 'line')
+                    return { x: sg.P.x + sg.e.x * u, y: sg.P.y + sg.e.y * u, e: sg.e, inward: null, seg: sg };
+                const ang = sg.a0 + u / sg.r;
+                const c = Math.cos(ang), sn = Math.sin(ang);
+                return { x: sg.C.x + sg.r * c, y: sg.C.y + sg.r * sn,
+                         e: { x: -sn, y: c }, inward: { x: -c, y: -sn }, seg: sg };
+            };
+            // vägbanan som punktlistor (mitt + två kanter) i SVG-koordinater
+            const mid = [], inner = [], outer = [];
+            for (let s = 0; s <= Ltot + 1; s += 3) {
+                const q = at(Math.min(s, Ltot));
+                const n = { x: -q.e.y, y: q.e.x };           // vänsternormal (in mot banans mitt)
+                const p = W2S(q), pi = W2S({ x: q.x + 20 * n.x, y: q.y + 20 * n.y });
+                const po = W2S({ x: q.x - 20 * n.x, y: q.y - 20 * n.y });
+                mid.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`);
+                inner.push(`${pi.x.toFixed(1)},${pi.y.toFixed(1)}`);
+                outer.push(`${po.x.toFixed(1)},${po.y.toFixed(1)}`);
+            }
+            const start = at(0), sn0 = { x: -start.e.y, y: start.e.x };
+            const startLine = [W2S({ x: start.x + 20 * sn0.x, y: start.y + 20 * sn0.y }),
+                               W2S({ x: start.x - 20 * sn0.x, y: start.y - 20 * sn0.y })];
+            return { segs, Ltot, at, r1, r2, mid: mid.join(' '), inner: inner.join(' '), outer: outer.join(' '), startLine };
+        };
+
+        const kFB = 0.006;                                // px per N (kraftpilar, bilbanan)
+        const lenFB = (F) => (F <= 1 ? 0 : Math.max(14, softLen(F * kFB, 230)));
+
+        const BanaScene = ({ bs, geom, v, m, mu, show, forceView, kompakt }) => {
+            const onTrack = bs.st === 'track';
+            const q = onTrack ? geom.at(bs.s) : null;
+            const P = W2S(onTrack ? q : { x: bs.x, y: bs.y });
+            const ew = onTrack ? q.e : bs.hd;
+            const t = { x: ew.x, y: -ew.y };                          // rörelseriktning (SVG)
+            const onArc = onTrack && q.seg.type === 'arc';
+            const inward = onArc ? { x: q.inward.x, y: -q.inward.y } : null;
+            const rNow = onArc ? q.seg.rm : Infinity;
+            const aC = onArc ? v * v / rNow : 0;
+            const FC = m * aC;
+            const Fmax = mu * m * G;
+            const sp = onTrack ? v : bs.sp / PXB;
+
+            const rotDeg = -Math.atan2(ew.y, ew.x) / DEG;
+
+            // krafter: F_f inåt i kurvan (statisk friktion), bakåt vid sladd
+            // (glidfriktion, bromsar bilen)
+            const LF = onArc ? lenFB(FC) : (!onTrack && sp > 0.05 ? lenFB(Fmax) : 0);
+            const fDir = onArc ? inward : { x: -t.x, y: -t.y };
+            const fTip = { x: P.x + fDir.x * LF, y: P.y + fDir.y * LF };
+            const fl = tipLabel(fTip, onArc ? t : fDir, 14);
+            const LA = onArc ? Math.max(13, softLen(aC * 8, 170)) : 0;
+            const aOff = 34;
+            const aStart = { x: P.x - t.x * aOff, y: P.y - t.y * aOff };
+            const aTip = onArc ? { x: aStart.x + inward.x * LA, y: aStart.y + inward.y * LA } : aStart;
+            const al = onArc ? tipLabel({ x: aTip.x - t.x * 10, y: aTip.y - t.y * 10 }, inward, 14) : null;
+            const LV = Math.max(0, Math.min(sp * 7, 150));
+            const vStart = { x: P.x + t.x * 26, y: P.y + t.y * 26 };
+            const vTip = { x: vStart.x + t.x * LV, y: vStart.y + t.y * LV };
+            let vl = tipLabel(vTip, t);
+            if (vl.x < 70 || vl.x > VBW - 70 || vl.y < 30 || vl.y > VBH - 30) {
+                // nära kanten: etiketten läggs vinkelrätt ut vid pilens mitt i stället
+                const mid = { x: (vStart.x + vTip.x) / 2, y: (vStart.y + vTip.y) / 2 };
+                vl = { x: mid.x - t.y * 22, y: mid.y + t.x * 22 + 5, anchor: -t.y > 0.3 ? 'start' : (-t.y < -0.3 ? 'end' : 'middle') };
+            }
+            const Cs = onArc ? W2S(q.seg.C) : null;
+            const rl = onArc ? tipLabel({ x: Cs.x + (P.x - Cs.x) * 0.5, y: Cs.y + (P.y - Cs.y) * 0.5 }, t, 10) : null;
+
+            const showF = show.forces && forceView === 'verkliga';
+            const showFc = show.forces && forceView === 'centripetal';
+            const showFr = show.forces && forceView === 'resultant';
+
+            let stateText, stateCol;
+            if (!onTrack) {
+                stateText = 'För lite grepp: bilen fortsätter rakt fram';
+                stateCol = COL.tyngd;
+            } else if (onArc) {
+                stateText = `${q.seg.name === 'vida' ? 'Vida' : 'Snäva'} kurvan: friktionen ger centripetalkraften`;
+                stateCol = COL.frik;
+            } else {
+                stateText = 'Rak väg: ingen kraft i sidled behövs';
+                stateCol = 'rgba(15,22,32,0.7)';
+            }
+            const rSub = (sg) => (sg.idx === 1 ? '1' : '2');
+
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wallG3" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="carG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#5b9bd1" />
+                            <stop offset="100%" stopColor="#3f7cb4" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wallG3)" />
+
+                    {/* vägbanan */}
+                    <polygon points={geom.mid} fill="none" stroke="#8f959e" strokeWidth="40" strokeLinejoin="round" />
+                    <polygon points={geom.outer} fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="1.6" strokeLinejoin="round" />
+                    <polygon points={geom.inner} fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="1.6" strokeLinejoin="round" />
+                    <polygon points={geom.mid} fill="none" stroke="#ece5d2" strokeWidth="2.4"
+                             strokeDasharray="16 14" opacity="0.85" strokeLinejoin="round" />
+                    {/* startlinje */}
+                    <line x1={geom.startLine[0].x} y1={geom.startLine[0].y} x2={geom.startLine[1].x} y2={geom.startLine[1].y}
+                          stroke="#f3eee4" strokeWidth="5" strokeDasharray="5 5" />
+
+                    {/* kurvornas centrum */}
+                    {geom.segs.filter((sg) => sg.type === 'arc').map((sg) => {
+                        const c = W2S(sg.C);
+                        return <circle key={sg.idx} cx={c.x} cy={c.y} r="3.4" fill={COL.ink} />;
+                    })}
+
+                    {/* radie — bara i kurvan */}
+                    {show.radius && onArc && (
+                        <g>
+                            <line x1={Cs.x} y1={Cs.y} x2={P.x} y2={P.y} stroke={COL.ink}
+                                  strokeWidth="1.7" strokeDasharray="6 5" opacity="0.75" />
+                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="17" fontWeight="700" fill={COL.ink}>
+                                <tspan fontStyle="italic">r</tspan><tspan dy="4" fontSize="13">{rSub(q.seg)}</tspan>
+                                <tspan dy="-4"> = {fmt(rNow, 1)} m</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* riktningslinje från sladdpunkten: utan kraft fortsätter bilen rakt fram */}
+                    {bs.skid && (
+                        <line x1={bs.skid.x} y1={bs.skid.y} x2={bs.skid.x + bs.skid.dx * 500} y2={bs.skid.y + bs.skid.dy * 500}
+                              stroke="rgba(15,22,32,0.35)" strokeWidth="1.6" strokeDasharray="7 6" />
+                    )}
+                    {/* sladdspår + punkten där greppet släppte */}
+                    {bs.trace.length > 1 && (
+                        <polyline points={bs.trace.map((p) => `${p.x},${p.y}`).join(' ')} fill="none"
+                                  stroke="rgba(15,22,32,0.45)" strokeWidth="6" strokeLinecap="round" strokeDasharray="3 8" />
+                    )}
+                    {bs.skid && (
+                        <g>
+                            <circle cx={bs.skid.x} cy={bs.skid.y} r="7" fill="none"
+                                    stroke={COL.tyngd} strokeWidth="2" strokeDasharray="3 3" />
+                            <text x={bs.skid.x + bs.skid.lx} y={bs.skid.y + bs.skid.ly} textAnchor={bs.skid.anchor}
+                                  fontSize="15" fontWeight="700" fill={COL.tyngd}>Greppet släppte här</text>
+                        </g>
+                    )}
+
+                    <text x={kompakt ? 410 : 290} y={kompakt ? 524 : 40} textAnchor="middle"
+                          fontSize={kompakt ? 17 : 19} fontWeight="700" fill={stateCol}>
+                        {stateText}
+                    </text>
+
+                    {/* bilen */}
+                    <g transform={`translate(${P.x} ${P.y}) rotate(${rotDeg})`}>
+                        <CarTop />
+                    </g>
+
+                    {/* friktionskraften — i kurvan in mot centrum, vid sladd bakåt */}
+                    {showF && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.frik}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">f</tspan>
+                                <tspan dy="-4"> = {fmtNum(onArc ? FC : Fmax)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showFc && onArc && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} edge />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.fc}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">C</tspan>
+                                <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showFr && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.res} />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.res}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">R</tspan>
+                                <tspan dy="-4"> = {fmtNum(onArc ? FC : Fmax)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {/* på rakan: ingen kraft — säg det vid bilen */}
+                    {show.forces && onTrack && !onArc && (
+                        <text x={P.x - t.y * 46} y={P.y + t.x * 46} dominantBaseline="middle"
+                              textAnchor={-t.y > 0.3 ? 'start' : (-t.y < -0.3 ? 'end' : 'middle')}
+                              fontSize="15" fontWeight="700" fill={forceView === 'centripetal' ? COL.fc : (forceView === 'resultant' ? COL.res : COL.frik)}>
+                            <tspan fontStyle="italic">F</tspan>
+                            <tspan dy="4" fontSize="11">{forceView === 'centripetal' ? 'C' : (forceView === 'resultant' ? 'R' : 'f')}</tspan>
+                            <tspan dy="-4"> = 0</tspan>
+                        </text>
+                    )}
+
+                    {/* centripetalacceleration */}
+                    {show.accel && onArc && LA > 0 && (
+                        <g>
+                            <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
+                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="16" fontWeight="700" fill={COL.acc}>
+                                <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="12">C</tspan>
+                                <tspan dy="-4"> = {fmt(aC, 1)} m/s²</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hastighet */}
+                    {show.vel && LV > 2 && (
+                        <g>
+                            <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6.5} head={18} />
+                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="17" fontWeight="700" fill={COL.fart}>
+                                <tspan fontStyle="italic">v</tspan> = {fmt(sp, 1)} m/s
+                            </text>
+                        </g>
+                    )}
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCEN 4 — krön och dal, sedd från sidan
+        //  Vägen är en våg av cirkelbågar och raka backar: två krön (centrum
+        //  under vägen) med en dal (centrum ovanför) emellan. Bilen håller
+        //  konstant fart, så på backarna verkar också en drivande eller
+        //  bromsande friktionskraft längs vägen.
+        // ════════════════════════════════════════════════════════
+        const PXK = 9;                                   // px per meter
+        const BETA = 35 * DEG;                           // backarnas lutning
+        const KY0 = 110;                                 // plana vägens höjd (värld, y uppåt)
+
+        const buildKron = (rkm, rdm) => {
+            const rk = rkm * PXK, rd = rdm * PXK;
+            const sb = Math.sin(BETA), cb = Math.cos(BETA);
+            const arcsW = 4 * sb * (rk + rd);
+            let L = (VBW - 100 - arcsW) / (4 * cb);      // backarnas längd
+            L = Math.max(36, Math.min(110, L));
+            const waveW = arcsW + 4 * L * cb;
+            const x0 = (VBW - waveW) / 2;
+            const segs = [];
+            let P = { x: -30, y: KY0 }, psi = 0;
+            const line = (len, flat) => {
+                segs.push({ type: 'line', len, P: { ...P }, psi, flat: !!flat });
+                P = { x: P.x + len * Math.cos(psi), y: P.y + len * Math.sin(psi) };
+            };
+            // dA > 0: dal (svänger uppåt, centrum ovanför vägen); dA < 0: krön
+            const arc = (r, rm, dA, kind) => {
+                const sgn = dA > 0 ? 1 : -1;
+                const C = { x: P.x - sgn * r * Math.sin(psi), y: P.y + sgn * r * Math.cos(psi) };
+                const a0 = Math.atan2(P.y - C.y, P.x - C.x);
+                segs.push({ type: 'arc', len: r * Math.abs(dA), C, r, rm, a0, dA, psi0: psi, kind });
+                psi += dA;
+                P = { x: C.x + r * Math.cos(a0 + dA), y: C.y + r * Math.sin(a0 + dA) };
+            };
+            line(x0 + 30, true);
+            arc(rd, rdm, BETA, 'dal');
+            line(L);
+            arc(rk, rkm, -2 * BETA, 'krön');
+            line(L);
+            arc(rd, rdm, 2 * BETA, 'dal');
+            line(L);
+            arc(rk, rkm, -2 * BETA, 'krön');
+            line(L);
+            arc(rd, rdm, BETA, 'dal');
+            line(VBW + 30 - P.x, true);
+            let acc = 0;
+            segs.forEach((sg) => { sg.s0 = acc; acc += sg.len; });
+            const Ltot = acc;
+            const at = (s) => {
+                s = Math.max(0, Math.min(Ltot, s));
+                const sg = segs.find((g) => s < g.s0 + g.len) || segs[segs.length - 1];
+                const u = s - sg.s0;
+                if (sg.type === 'line')
+                    return { x: sg.P.x + Math.cos(sg.psi) * u, y: sg.P.y + Math.sin(sg.psi) * u,
+                             psi: sg.psi, inward: null, seg: sg };
+                const sgn = sg.dA > 0 ? 1 : -1;
+                const ang = sg.a0 + sgn * u / sg.r;
+                return { x: sg.C.x + sg.r * Math.cos(ang), y: sg.C.y + sg.r * Math.sin(ang),
+                         psi: sg.psi0 + sgn * u / sg.r, inward: { x: -Math.cos(ang), y: -Math.sin(ang) }, seg: sg };
+            };
+            // vägprofil (SVG) + höjdfunktion för landningen efter ett hopp
+            const prof = [];
+            const pts = [];
+            for (let s = 0; s <= Ltot + 1; s += 2) {
+                const q = at(Math.min(s, Ltot));
+                prof.push([q.x, q.y]);
+                const p = W2S(q);
+                pts.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`);
+            }
+            const roadY = (x) => {
+                if (x <= prof[0][0]) return prof[0][1];
+                let lo = 0, hi = prof.length - 1;
+                while (hi - lo > 1) { const mi = (lo + hi) >> 1; if (prof[mi][0] <= x) lo = mi; else hi = mi; }
+                const [xa, ya] = prof[lo], [xb, yb] = prof[hi];
+                return xb === xa ? ya : ya + (yb - ya) * (x - xa) / (xb - xa);
+            };
+            const first = W2S(at(0)), last = W2S(at(Ltot));
+            const ground = `M ${first.x},${first.y} ` + pts.map((p) => 'L ' + p).join(' ') +
+                           ` L ${last.x},${VBH + 5} L ${first.x},${VBH + 5} Z`;
+            return { segs, Ltot, at, roadY, road: pts.join(' '), ground, rk, rd };
+        };
+
+        const kFK = 0.0065;                              // px per N (kraftpilar, krön och dal)
+        const lenFK = (F) => (F <= 1 ? 0 : Math.max(12, softLen(F * kFK, 215)));
+
+        // ur läget på vägen: normalkraft, friktion längs vägen, centripetalkraft
+        const kronForces = (q, v, m) => {
+            const c = Math.cos(q.psi), sn = Math.sin(q.psi);
+            const sg = q.seg;
+            const k = sg.type === 'arc' ? (sg.kind === 'dal' ? 1 : -1) : 0;
+            const aC = k !== 0 ? v * v / sg.rm : 0;
+            const N = m * (G * c + k * aC);
+            const Ff = m * G * sn;                        // + = framåt (uppför), − = bakåt (nedför)
+            return { N, Ff, FC: m * aC, aC, c, sn, k };
+        };
+
+        const KronScene = ({ ks, geom, v, m, show, forceView, kompakt }) => {
+            const onTrack = ks.st === 'track';
+            const q = onTrack ? geom.at(ks.s) : null;
+            const pos = W2S(onTrack ? q : { x: ks.x, y: ks.y });
+            const psi = onTrack ? q.psi : ks.rot;
+            const h = { x: Math.cos(psi), y: -Math.sin(psi) };           // rörelseriktning (SVG)
+            const n = { x: -Math.sin(psi), y: -Math.cos(psi) };          // vägens normal, uppåt (SVG)
+            const F = onTrack ? kronForces(q, v, m) : { N: 0, Ff: 0, FC: 0, aC: 0, k: 0 };
+            const onArc = onTrack && q.seg.type === 'arc';
+            const FG = m * G;
+            const vmag = onTrack ? v : Math.hypot(ks.vx, ks.vy) / PXK;
+            const inward = onArc ? { x: q.inward.x, y: -q.inward.y } : null;
+
+            const cm = { x: pos.x + n.x * 11, y: pos.y + n.y * 11 };      // tyngdpunkt (karossen är skalad 0,75)
+            const LG = lenFK(FG), LN = lenFK(F.N), LFf = lenFK(Math.abs(F.Ff)), LFC = lenFK(F.FC);
+            const gTip = { x: cm.x, y: cm.y + LG };
+            const gl = { x: gTip.x + 12, y: gTip.y + 16, anchor: 'start' };
+            const nTip = { x: pos.x + n.x * LN, y: pos.y + n.y * LN };
+            const nl = tipLabel(nTip, { x: -h.x, y: -h.y }, 14);
+            const fSgn = F.Ff >= 0 ? 1 : -1;
+            const fDir = { x: h.x * fSgn, y: h.y * fSgn };
+            const fTip = { x: pos.x + fDir.x * LFf, y: pos.y + fDir.y * LFf };
+            // etiketten strax under vägbanan, bortom bilens stötfångare — fri
+            // från tyngdkraftens pil, som går rakt ned genom kontaktpunkten
+            const fOff = Math.max(LFf, 28) + 8;
+            const fl = { x: pos.x + fDir.x * fOff - n.x * 17, y: pos.y + fDir.y * fOff - n.y * 17 + 5,
+                         anchor: fDir.x > 0 ? 'start' : 'end' };
+            const fcTip = onArc ? { x: cm.x + inward.x * LFC, y: cm.y + inward.y * LFC } : cm;
+            // radiella pilar (F_C, a_C) pekar ned i marken på krönet och upp i
+            // luften i dalen — etiketterna läggs BORTOM spetsen i pilens riktning,
+            // förskjutna åt var sin sida om den kolinjära radien
+            const fcl = onArc ? { x: fcTip.x + inward.x * 18 + h.x * 8, y: fcTip.y + inward.y * 18 + 5, anchor: 'start' } : null;
+            const LA = onArc ? Math.max(0, Math.min(F.aC * 2.4, 150)) : 0;
+            const aOff = 36;
+            const aStart = { x: pos.x - h.x * aOff + n.x * 6, y: pos.y - h.y * aOff + n.y * 6 };
+            const aTip = onArc ? { x: aStart.x + inward.x * LA, y: aStart.y + inward.y * LA } : aStart;
+            const al = onArc ? { x: aTip.x + inward.x * 26 - h.x * 8, y: aTip.y + inward.y * 26 + 5, anchor: 'end' } : null;
+            const vel = onTrack ? h : (() => { const L = Math.hypot(ks.vx, ks.vy) || 1; return { x: ks.vx / L, y: -ks.vy / L }; })();
+            const LV = Math.max(0, Math.min(vmag * 6, 140));
+            const vStart = { x: cm.x + vel.x * 24 + n.x * 12, y: cm.y + vel.y * 24 + n.y * 12 };
+            const vTip = { x: vStart.x + vel.x * LV, y: vStart.y + vel.y * LV };
+            const vl = tipLabel(vTip, vel);
+            const Cs = onArc ? W2S(q.seg.C) : null;
+            // radie-etiketten intill centrum (i marken på krönet, i luften i dalen)
+            const rl = onArc ? { x: Cs.x - 11, y: Cs.y + 5, anchor: 'end' } : null;
+
+            // resulterande kraft = F_N + F_f + F_G (vektorsumma, SVG-koordinater)
+            const frVec = onTrack
+                ? { x: F.N * n.x + F.Ff * h.x, y: F.N * n.y + F.Ff * h.y + FG }
+                : { x: 0, y: FG };
+            const frMag = Math.hypot(frVec.x, frVec.y);
+            const frU = frMag > 1 ? { x: frVec.x / frMag, y: frVec.y / frMag } : { x: 0, y: 1 };
+            const frLen = lenFK(frMag);
+            const frTip = { x: cm.x + frU.x * frLen, y: cm.y + frU.y * frLen };
+            const frl = tipLabel(frTip, frU);
+
+            const showF = show.forces && forceView === 'verkliga';
+            const showFc = show.forces && forceView === 'centripetal';
+            const showFr = show.forces && forceView === 'resultant';
+
+            let stateText, stateCol;
+            if (!onTrack) {
+                stateText = 'Normalkraften blev 0. Bilen lättar från vägen!';
+                stateCol = COL.tyngd;
+            } else if (onArc && q.seg.kind === 'krön') {
+                stateText = 'Krön: normalkraften minskar';
+                stateCol = COL.norm;
+            } else if (onArc) {
+                stateText = 'Dal: normalkraften ökar';
+                stateCol = COL.norm;
+            } else if (q.seg.flat) {
+                stateText = 'Plan väg: normalkraften bär bara tyngden';
+                stateCol = 'rgba(15,22,32,0.7)';
+            } else {
+                stateText = 'Backe: friktionen håller farten konstant';
+                stateCol = 'rgba(15,22,32,0.7)';
+            }
+
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wallG4" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="carSG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#5b9bd1" />
+                            <stop offset="100%" stopColor="#3f7cb4" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wallG4)" />
+
+                    {/* marken under vägen + vägbanan */}
+                    <path d={geom.ground} fill="#e3d9c3" />
+                    <polyline points={geom.road} fill="none" stroke="#8f959e" strokeWidth="9" strokeLinejoin="round" />
+                    <polyline points={geom.road} fill="none" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeLinejoin="round" />
+
+                    {/* kurvornas centrum */}
+                    {geom.segs.filter((sg) => sg.type === 'arc').map((sg, i) => {
+                        const c = W2S(sg.C);
+                        return <circle key={i} cx={c.x} cy={c.y} r="3" fill={COL.ink} opacity="0.7" />;
+                    })}
+
+                    {/* radie — bara i krön och dal */}
+                    {show.radius && onArc && (
+                        <g>
+                            <line x1={Cs.x} y1={Cs.y} x2={pos.x} y2={pos.y} stroke={COL.ink}
+                                  strokeWidth="1.7" strokeDasharray="6 5" opacity="0.75" />
+                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="17" fontWeight="700" fill={COL.ink}>
+                                <tspan fontStyle="italic">r</tspan><tspan dy="4" fontSize="13">{q.seg.kind === 'krön' ? 'k' : 'd'}</tspan>
+                                <tspan dy="-4"> = {fmt(q.seg.rm, 1)} m</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hoppets bana + punkten där bilen lättade */}
+                    {ks.trace.length > 1 && (
+                        <polyline points={ks.trace.map((p) => `${p.x},${p.y}`).join(' ')} fill="none"
+                                  stroke="rgba(15,22,32,0.4)" strokeWidth="2" strokeDasharray="4 5" />
+                    )}
+                    {ks.detach && (
+                        <g>
+                            <circle cx={ks.detach.x} cy={ks.detach.y} r="7" fill="none"
+                                    stroke={COL.tyngd} strokeWidth="2" strokeDasharray="3 3" />
+                            <text x={ks.detach.x - 12} y={ks.detach.y + 28} textAnchor="end"
+                                  fontSize="15" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="11">N</tspan>
+                                <tspan dy="-4"> = 0 här</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    <text x={kompakt ? 410 : 290} y={kompakt ? 524 : 38} textAnchor="middle"
+                          fontSize={kompakt ? 17 : 19} fontWeight="700" fill={stateCol}>
+                        {stateText}
+                    </text>
+
+                    {/* bilen (mindre än i loopen — radierna är större i förhållande) */}
+                    <g transform={`translate(${pos.x} ${pos.y}) rotate(${-psi / DEG}) scale(0.75)`}>
+                        <CarSide />
+                    </g>
+
+                    {/* verkliga krafter: tyngdkraft, normalkraft, friktion längs vägen */}
+                    {(showF || (showFc && !onTrack)) && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
+                            <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
+                                <tspan dy="-4"> = {fmtNum(FG)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showF && onTrack && LN > 0.5 && (
+                        <g>
+                            <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} edge />
+                            <text x={nl.x} y={nl.y} textAnchor={nl.anchor} fontSize="16" fontWeight="700" fill={COL.norm}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">N</tspan>
+                                <tspan dy="-4"> = {fmtNum(F.N)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showF && onTrack && Math.abs(F.Ff) > 1 && (
+                        <g>
+                            <Arrow x1={pos.x} y1={pos.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="16" fontWeight="700" fill={COL.frik}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">f</tspan>
+                                <tspan dy="-4"> = {fmtNum(Math.abs(F.Ff))} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* centripetalkraften (resultanten i krön och dal) */}
+                    {showFc && onArc && LFC > 0.5 && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} edge />
+                            <text x={fcl.x} y={fcl.y} textAnchor={fcl.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">C</tspan>
+                                <tspan dy="-4"> = {fmtNum(F.FC)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showFc && onTrack && !onArc && (
+                        <text x={cm.x - h.x * 46} y={cm.y - h.y * 46 - 8} textAnchor="middle"
+                              fontSize="15" fontWeight="700" fill={COL.fc}>
+                            <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="11">C</tspan><tspan dy="-4"> = 0</tspan>
+                        </text>
+                    )}
+
+                    {/* resulterande kraften */}
+                    {showFr && frLen > 0.5 && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={frTip.x} y2={frTip.y} color={COL.res} />
+                            <text x={frl.x} y={frl.y} textAnchor={frl.anchor} fontSize="16" fontWeight="700" fill={COL.res}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">R</tspan>
+                                <tspan dy="-4"> = {fmtNum(frMag)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showFr && onTrack && frMag <= 1 && (
+                        <text x={cm.x - h.x * 46} y={cm.y - h.y * 46 - 8} textAnchor="middle"
+                              fontSize="15" fontWeight="700" fill={COL.res}>
+                            <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="11">R</tspan><tspan dy="-4"> = 0</tspan>
+                        </text>
+                    )}
+
+                    {/* centripetalacceleration */}
+                    {show.accel && onArc && LA > 0.5 && (
+                        <g>
+                            <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
+                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="15" fontWeight="700" fill={COL.acc}>
+                                <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="11">C</tspan>
+                                <tspan dy="-4"> = {fmt(F.aC, 1)} m/s²</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hastighet */}
+                    {show.vel && LV > 2 && (
+                        <g>
+                            <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6.5} head={18} />
+                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="16" fontWeight="700" fill={COL.fart}>
+                                <tspan fontStyle="italic">v</tspan> = {fmt(vmag, 1)} m/s
+                            </text>
+                        </g>
+                    )}
+                </svg>
+            );
+        };
+
         // ── Formelkort med ord-etiketter ──
         const Vbl = ({ label, children }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
@@ -945,8 +1547,10 @@
         const App = () => {
             // Länkbara lägen: ?situation=loop, ?visa=krafter,hastighet,acc,radie,
             // ?kraftvy=centripetal — praktiskt för läraren som vill länka en vy.
-            const [mode, setMode] = useState(() =>
-                new URLSearchParams(location.search).get('situation') === 'loop' ? 'loop' : 'cirkel');
+            const [mode, setMode] = useState(() => {
+                const s = new URLSearchParams(location.search).get('situation');
+                return ['loop', 'bana', 'kron'].includes(s) ? s : 'cirkel';
+            });
             const [running, setRunning] = useState(true);
             const [show, setShow] = useState(() => {
                 const visa = (new URLSearchParams(location.search).get('visa') || '').split(',').filter(Boolean);
@@ -974,6 +1578,33 @@
             const loopRef = useRef(null);
             const [, setTick] = useState(0);
 
+            // bilbana (ovanifrån): två kurvor + friktionstal
+            const [r1, setR1] = useState(16);     // vida kurvans radie (m)
+            const [r2, setR2] = useState(8);      // snäva kurvans radie (m)
+            const [mu, setMu] = useState(0.9);    // friktionstal däck–väg
+            const banaGeom = React.useMemo(() => buildBana(r1, r2), [r1, r2]);
+            const banaRef = useRef(null);
+            const resetBana = () => {
+                banaRef.current = { st: 'track', s: 0, x: 0, y: 0, hd: { x: 1, y: 0 }, sp: 0,
+                                    trace: [], skid: null, failT: 0 };
+            };
+            if (!banaRef.current) resetBana();
+
+            // krön och dal (från sidan)
+            const [rk, setRk] = useState(12);     // krönets radie (m)
+            const [rd, setRd] = useState(12);     // dalens radie (m)
+            const kronGeom = React.useMemo(() => buildKron(rk, rd), [rk, rd]);
+            const kronRef = useRef(null);
+            const resetKron = () => {
+                kronRef.current = { st: 'track', s: 0, x: 0, y: 0, vx: 0, vy: 0, rot: 0,
+                                    trace: [], detach: null, failT: 0 };
+            };
+            if (!kronRef.current) resetKron();
+            // parametrarna läses ur en ref i animationsloopen, så att ett
+            // glidardrag inte startar om loopen
+            const parRef = useRef({});
+            parRef.current = { v, m, mu, banaGeom, kronGeom };
+
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
             const sceneWrapRef = useRef(null);
@@ -991,6 +1622,8 @@
             if (!loopRef.current) resetLoop();
 
             useEffect(() => { resetLoop(); setTick(t => t + 1); }, [v0, mode]);
+            useEffect(() => { resetBana(); setTick(t => t + 1); }, [r1, r2, mode]);
+            useEffect(() => { resetKron(); setTick(t => t + 1); }, [rk, rd, mode]);
 
             // animationsloop
             useEffect(() => {
@@ -1003,6 +1636,70 @@
 
                     if (mode === 'cirkel') {
                         setPhase(p => p + (v / r) * dt);
+                    } else if (mode === 'bana') {
+                        const bs = banaRef.current;
+                        const { v: vb, mu: mub, banaGeom: bg } = parRef.current;
+                        if (bs.st === 'track') {
+                            bs.s = (bs.s + vb * PXB * dt) % bg.Ltot;
+                            const q = bg.at(bs.s);
+                            // räcker greppet? statisk friktion kan som mest ge μ·m·g
+                            if (q.seg.type === 'arc' && vb * vb / q.seg.rm > mub * G) {
+                                bs.st = 'skid';
+                                bs.x = q.x; bs.y = q.y; bs.hd = q.e; bs.sp = vb * PXB;
+                                const p = W2S(q);
+                                const inw = { x: q.inward.x, y: -q.inward.y };    // in mot kurvans centrum (SVG)
+                                bs.skid = { x: p.x, y: p.y, dx: q.e.x, dy: -q.e.y, lx: inw.x * 34, ly: inw.y * 34 + 5,
+                                            anchor: inw.x > 0.3 ? 'start' : (inw.x < -0.3 ? 'end' : 'middle') };
+                                bs.trace = [p];
+                            }
+                        } else if (bs.st === 'skid') {
+                            // glidfriktionen bromsar bilen längs den raka sladdlinjen
+                            bs.sp = Math.max(0, bs.sp - mub * G * PXB * dt);
+                            bs.x += bs.hd.x * bs.sp * dt;
+                            bs.y += bs.hd.y * bs.sp * dt;
+                            const p = W2S(bs);
+                            const lp = bs.trace[bs.trace.length - 1];
+                            if (Math.hypot(p.x - lp.x, p.y - lp.y) > 6) bs.trace.push(p);
+                            if (bs.sp <= 0.01 || bs.x < -40 || bs.x > VBW + 40 || bs.y < -40 || bs.y > VBH + 40)
+                                bs.st = 'failed';
+                        } else {
+                            bs.failT += dt;
+                            if (bs.failT > 2.4) resetBana();
+                        }
+                        setTick(t => t + 1);
+                    } else if (mode === 'kron') {
+                        const ks = kronRef.current;
+                        const { v: vk, m: mk, kronGeom: kg } = parRef.current;
+                        if (ks.st === 'track') {
+                            ks.s += vk * PXK * dt;
+                            if (ks.s >= kg.Ltot) ks.s -= kg.Ltot;           // bilen kommer in igen från vänster
+                            const q = kg.at(ks.s);
+                            // lättar bilen? På ett krön är F_N = m·g·cos α − m·v²/r; blir den
+                            // 0 finns inget som håller bilen kvar på vägen.
+                            if (q.seg.type === 'arc' && q.seg.kind === 'krön' && kronForces(q, vk, mk).N <= 0) {
+                                ks.st = 'ballistic';
+                                ks.x = q.x; ks.y = q.y;
+                                ks.vx = vk * PXK * Math.cos(q.psi); ks.vy = vk * PXK * Math.sin(q.psi);
+                                ks.rot = q.psi; ks.bT = 0;
+                                const p = W2S(q);
+                                ks.detach = { x: p.x, y: p.y };
+                                ks.trace = [p];
+                            }
+                        } else if (ks.st === 'ballistic') {
+                            ks.vy -= G * PXK * dt;
+                            ks.x += ks.vx * dt;
+                            ks.y += ks.vy * dt;
+                            ks.rot = Math.atan2(ks.vy, ks.vx);
+                            ks.bT += dt;
+                            const p = W2S(ks);
+                            const lp = ks.trace[ks.trace.length - 1];
+                            if (Math.hypot(p.x - lp.x, p.y - lp.y) > 7) ks.trace.push(p);
+                            if ((ks.bT > 0.1 && ks.y <= kg.roadY(ks.x)) || ks.x > VBW + 40) ks.st = 'failed';
+                        } else {
+                            ks.failT += dt;
+                            if (ks.failT > 2.4) resetKron();
+                        }
+                        setTick(t => t + 1);
                     } else {
                         const ls = loopRef.current;
                         if (ls.st === 'track') {
@@ -1083,6 +1780,8 @@
             const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
             const reset = () => {
                 if (mode === 'cirkel') setPhase(Math.PI / 2);
+                else if (mode === 'bana') { resetBana(); setTick(t => t + 1); }
+                else if (mode === 'kron') { resetKron(); setTick(t => t + 1); }
                 else { resetLoop(); setTick(t => t + 1); }
                 setRunning(true);
                 lastRef.current = null;
@@ -1091,6 +1790,19 @@
 
             // aktuella loopvärden (för avläsning)
             const ls = loopRef.current;
+            // bilbanan: krävd centripetalkraft i varje kurva mot största friktionskraft
+            const bs = banaRef.current;
+            const bq = bs.st === 'track' ? banaGeom.at(bs.s) : null;
+            const FC1 = m * v * v / r1, FC2 = m * v * v / r2, Fmax = mu * m * G;
+            const bNow = bq && bq.seg.type === 'arc' ? m * v * v / bq.seg.rm : 0;
+            // krön och dal
+            const ks = kronRef.current;
+            const kq = ks.st === 'track' ? kronGeom.at(ks.s) : null;
+            const kF = kq ? kronForces(kq, v, m) : { N: 0, Ff: 0, FC: 0, aC: 0 };
+            const nTopK = m * (G - v * v / rk);            // F_N på krönets topp (< 0 = lättar)
+            const nBotD = m * (G + v * v / rd);            // F_N i dalens botten
+            const vKron = Math.sqrt(G * rk);               // gränsfart på krönets topp
+            const vKant = Math.sqrt(G * rk * Math.cos(BETA)); // farten där bilen lättar i krönets början
             const lv2 = Math.max(0, v0 * v0 - 2 * G * RL * (1 - Math.cos(ls.th)));
             const lN = ls.st === 'track' ? Math.max(0, ML * (lv2 / RL + G * Math.cos(ls.th))) : 0;
             const lvNow = ls.st === 'track' ? Math.sqrt(lv2) : Math.hypot(ls.vx, ls.vy) / PXM;
@@ -1112,7 +1824,8 @@
                     const msg = e.data;
                     if (!msg || !msg.fysikCirkular) return;
                     const mi = miniRef.current;
-                    if (msg.fysikCirkular === 'situation') mi.setModeReset(msg.value === 'loop' ? 'loop' : 'cirkel');
+                    if (msg.fysikCirkular === 'situation')
+                        mi.setModeReset(['loop', 'bana', 'kron'].includes(msg.value) ? msg.value : 'cirkel');
                     else if (msg.fysikCirkular === 'paus') mi.setRunning(false);
                     else if (msg.fysikCirkular === 'kor') mi.setRunning(true);
                     else if (msg.fysikCirkular === 'reset') mi.reset();
@@ -1165,11 +1878,12 @@
                         <React.Fragment>
                             <label className="st-sub">
                                 <input type="radio" name="fview" checked={forceView === 'verkliga'} onChange={() => setForceView('verkliga')} />
-                                {mode === 'cirkel'
+                                {(mode === 'cirkel' || mode === 'bana')
                                     ? <span className="st-swatch" style={{ background: COL.frik }}></span>
                                     : <span style={{ display: 'inline-flex', gap: 2, flexShrink: 0 }}>
                                           <span className="st-swatch" style={{ background: COL.tyngd }}></span>
                                           <span className="st-swatch" style={{ background: COL.norm }}></span>
+                                          {mode === 'kron' && <span className="st-swatch" style={{ background: COL.frik }}></span>}
                                       </span>}
                                 <span>Verkliga krafter</span>
                             </label>
@@ -1196,7 +1910,9 @@
                         <span>Radie <em>r</em></span></label>
                     <div className="st-title mt">Situation</div>
                     <label><input type="radio" name="mode" checked={mode === 'cirkel'} onChange={() => setModeReset('cirkel')} /><span>Cirkelbana (ovanifrån)</span></label>
+                    <label><input type="radio" name="mode" checked={mode === 'bana'} onChange={() => setModeReset('bana')} /><span>Bilbana med kurvor (ovanifrån)</span></label>
                     <label><input type="radio" name="mode" checked={mode === 'loop'} onChange={() => setModeReset('loop')} /><span>Loop (från sidan)</span></label>
+                    <label><input type="radio" name="mode" checked={mode === 'kron'} onChange={() => setModeReset('kron')} /><span>Krön och dal (från sidan)</span></label>
                     {/* Glidare och styrknappar visas här BARA i fullskärm — i
                         normalläget finns de i sidopanelen (aldrig dubblerade). */}
                     {isFullscreen && (
@@ -1217,6 +1933,39 @@
                                         <StSlider label="Banradie (<em>r</em>)" value={r} min={RMIN} max={RMAX} step={0.5}
                                                   onChange={setR}
                                                   valueNode={<NumInput value={r} min={1} max={null} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR} />} />
+                                    </React.Fragment>
+                                ) : mode === 'bana' ? (
+                                    <React.Fragment>
+                                        <StSlider label="Banhastighet (<em>v</em>)" value={v} min={VMIN} max={VMAX} step={0.1}
+                                                  onChange={setV}
+                                                  valueNode={<NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />} />
+                                        <StSlider label="Massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={50}
+                                                  onChange={setM}
+                                                  valueNode={<NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />} />
+                                        <StSlider label="Vida kurvans radie (<em>r</em>₁)" value={r1} min={BR1MIN} max={BR1MAX} step={0.5}
+                                                  onChange={setR1}
+                                                  valueNode={<NumInput value={r1} min={BR1MIN} max={BR1MAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR1} />} />
+                                        <StSlider label="Snäva kurvans radie (<em>r</em>₂)" value={r2} min={BR2MIN} max={BR2MAX} step={0.5}
+                                                  onChange={setR2}
+                                                  valueNode={<NumInput value={r2} min={BR2MIN} max={BR2MAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR2} />} />
+                                        <StSlider label="Friktionstal (<em>μ</em>)" value={mu} min={MUMIN} max={MUMAX} step={0.05}
+                                                  onChange={setMu}
+                                                  valueNode={<NumInput value={mu} min={MUMIN} max={MUMAX} fmtFn={(x) => fmt(x, 2)} unit="" onCommit={setMu} />} />
+                                    </React.Fragment>
+                                ) : mode === 'kron' ? (
+                                    <React.Fragment>
+                                        <StSlider label="Fart (<em>v</em>)" value={v} min={VMIN} max={VMAX} step={0.1}
+                                                  onChange={setV}
+                                                  valueNode={<NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />} />
+                                        <StSlider label="Massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={50}
+                                                  onChange={setM}
+                                                  valueNode={<NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />} />
+                                        <StSlider label="Krönets radie (<em>r</em><sub>k</sub>)" value={rk} min={KRMIN} max={KRMAX} step={0.5}
+                                                  onChange={setRk}
+                                                  valueNode={<NumInput value={rk} min={KRMIN} max={KRMAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setRk} />} />
+                                        <StSlider label="Dalens radie (<em>r</em><sub>d</sub>)" value={rd} min={KRMIN} max={KRMAX} step={0.5}
+                                                  onChange={setRd}
+                                                  valueNode={<NumInput value={rd} min={KRMIN} max={KRMAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setRd} />} />
                                     </React.Fragment>
                                 ) : (
                                     <StSlider label="Fart längst ned (<em>v</em>₀)" value={v0} min={V0MIN} max={V0MAX} step={0.1}
@@ -1255,10 +2004,11 @@
                             En kropp i cirkelbana påverkas av en resulterande kraft som ständigt pekar in mot
                             cirkelns medelpunkt — <strong>centripetalkraften</strong> <em>F</em><sub>C</sub>. Den är
                             ingen egen kraft, utan utgörs av de verkliga krafter som råkar verka: för bilen på den
-                            cirkulära vägen är det <strong>friktionskraften</strong> från vägbanan, och i loopen
-                            är det <strong>normalkraften</strong> och <strong>tyngdkraften</strong> tillsammans.
-                            Växla mellan att visa de verkliga krafterna och resultanten, och undersök gränsfarten
-                            där bilen precis klarar loopen.
+                            cirkulära vägen och på bilbanan med kurvor är det <strong>friktionskraften</strong> från
+                            vägbanan, och i loopen, på krönet och i dalen är det <strong>normalkraften</strong> och{' '}
+                            <strong>tyngdkraften</strong> tillsammans. Växla mellan att visa de verkliga krafterna och
+                            resultanten, se att kraften bara behövs i kurvorna och blir större ju snävare kurvan är,
+                            och undersök gränsfarten där bilen precis klarar loopen eller lättar från krönet.
                         </p>
 
                         <FormulaCard />
@@ -1270,12 +2020,22 @@
                                     {mode === 'cirkel'
                                         ? <CircleScene phase={phase} v={v} m={m} r={r} show={show} forceView={forceView}
                                                        kompakt={window.__MINI && !isFullscreen} />
+                                        : mode === 'bana'
+                                        ? <BanaScene bs={bs} geom={banaGeom} v={v} m={m} mu={mu} show={show} forceView={forceView}
+                                                     kompakt={window.__MINI && !isFullscreen} />
+                                        : mode === 'kron'
+                                        ? <KronScene ks={ks} geom={kronGeom} v={v} m={m} show={show} forceView={forceView}
+                                                     kompakt={window.__MINI && !isFullscreen} />
                                         : <LoopScene ls={ls} v0={v0} show={show} forceView={forceView}
                                                      kompakt={window.__MINI && !isFullscreen} />}
 
                                     <div className="scene-hint">
                                         {mode === 'cirkel'
                                             ? 'Bilen håller konstant fart. Krafterna sedda ovanifrån.'
+                                            : mode === 'bana'
+                                            ? 'Bilen håller konstant fart. Friktionen kan som mest ge μ · m · g.'
+                                            : mode === 'kron'
+                                            ? 'Bilen håller konstant fart, så friktionen längs vägen driver i uppförsbacke och bromsar i nedförsbacke.'
                                             : 'Friktion och luftmotstånd försummas — farten följer energiprincipen.'}
                                     </div>
                                     {sceneToggles()}
@@ -1304,8 +2064,14 @@
                                         <button className={mode === 'cirkel' ? 'active' : ''} onClick={() => setModeReset('cirkel')}>
                                             Cirkelbana<span className="sub">bil ovanifrån</span>
                                         </button>
+                                        <button className={mode === 'bana' ? 'active' : ''} onClick={() => setModeReset('bana')}>
+                                            Bilbana med kurvor<span className="sub">bil ovanifrån</span>
+                                        </button>
                                         <button className={mode === 'loop' ? 'active' : ''} onClick={() => setModeReset('loop')}>
                                             Loop<span className="sub">bil från sidan</span>
+                                        </button>
+                                        <button className={mode === 'kron' ? 'active' : ''} onClick={() => setModeReset('kron')}>
+                                            Krön och dal<span className="sub">bil från sidan</span>
                                         </button>
                                     </div>
                                 </div>
@@ -1330,6 +2096,48 @@
                                             <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
                                                 <em>v</em> och <em>ω</em> är kopplade: <em>v</em> = <em>ω</em>&thinsp;·&thinsp;<em>r</em>.
                                                 Ändras radien behåller bilen sin fart, så <em>ω</em> ändras.
+                                            </p>
+                                        </React.Fragment>
+                                    ) : mode === 'bana' ? (
+                                        <React.Fragment>
+                                            <Slider label="Banhastighet <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV}>
+                                                <NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />
+                                            </Slider>
+                                            <Slider label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={50} onChange={setM}>
+                                                <NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />
+                                            </Slider>
+                                            <Slider label="Vida kurvan <em>r</em>₁" value={r1} min={BR1MIN} max={BR1MAX} step={0.5} onChange={setR1}>
+                                                <NumInput value={r1} min={BR1MIN} max={BR1MAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR1} />
+                                            </Slider>
+                                            <Slider label="Snäva kurvan <em>r</em>₂" value={r2} min={BR2MIN} max={BR2MAX} step={0.5} onChange={setR2}>
+                                                <NumInput value={r2} min={BR2MIN} max={BR2MAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR2} />
+                                            </Slider>
+                                            <Slider label="Friktionstal <em>μ</em>" value={mu} min={MUMIN} max={MUMAX} step={0.05} onChange={setMu}>
+                                                <NumInput value={mu} min={MUMIN} max={MUMAX} fmtFn={(x) => fmt(x, 2)} unit="" onCommit={setMu} />
+                                            </Slider>
+                                            <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                Friktionen mellan däck och väg kan som mest ge <em>F</em><sub>f</sub> = <em>μ</em>&thinsp;·&thinsp;<em>m</em>&thinsp;·&thinsp;<em>g</em>.
+                                                Kräver en kurva mer än så fortsätter bilen rakt fram. Torr asfalt har
+                                                <em> μ</em> ≈ 0,8, våt väg ≈ 0,5 och is ≈ 0,1.
+                                            </p>
+                                        </React.Fragment>
+                                    ) : mode === 'kron' ? (
+                                        <React.Fragment>
+                                            <Slider label="Fart <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV}>
+                                                <NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />
+                                            </Slider>
+                                            <Slider label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={50} onChange={setM}>
+                                                <NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />
+                                            </Slider>
+                                            <Slider label="Krönets radie <em>r</em><sub>k</sub>" value={rk} min={KRMIN} max={KRMAX} step={0.5} onChange={setRk}>
+                                                <NumInput value={rk} min={KRMIN} max={KRMAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setRk} />
+                                            </Slider>
+                                            <Slider label="Dalens radie <em>r</em><sub>d</sub>" value={rd} min={KRMIN} max={KRMAX} step={0.5} onChange={setRd}>
+                                                <NumInput value={rd} min={KRMIN} max={KRMAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setRd} />
+                                            </Slider>
+                                            <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                Backarna lutar {fmt(BETA / DEG, 0)}°. Gränsfarten på krönets topp är
+                                                √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s.
                                             </p>
                                         </React.Fragment>
                                     ) : (
@@ -1379,6 +2187,60 @@
                                                 <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>banradie <em>r</em></div>
                                             </div>
                                         </div>
+                                    ) : mode === 'bana' ? (
+                                        <div className="grid grid-cols-2 gap-2 text-center">
+                                            <div>
+                                                <div style={{ color: FC1 > Fmax ? COL.tyngd : COL.frik, fontWeight: 700, fontSize: 16 }}>{fmtNum(FC1)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>C</sub> som krävs i vida kurvan</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: FC2 > Fmax ? COL.tyngd : COL.frik, fontWeight: 700, fontSize: 16 }}>{fmtNum(FC2)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>C</sub> som krävs i snäva kurvan</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmtNum(Fmax)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>största friktionskraft <em>μ</em>&thinsp;·&thinsp;<em>m</em>&thinsp;·&thinsp;<em>g</em></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: COL.acc, fontWeight: 700, fontSize: 16 }}>{fmt(bNow / m, 1)} m/s²</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>centripetalacc. just nu <em>a</em><sub>C</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(v * v / (mu * G), 1)} m</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>minsta radie greppet klarar <em>v</em>²/(<em>μ</em>&thinsp;·&thinsp;<em>g</em>)</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(Math.sqrt(mu * G * r2), 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>högsta fart i snäva kurvan √(<em>μ</em>&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;<em>r</em>₂)</div>
+                                            </div>
+                                        </div>
+                                    ) : mode === 'kron' ? (
+                                        <div className="grid grid-cols-2 gap-2 text-center">
+                                            <div>
+                                                <div style={{ color: COL.norm, fontWeight: 700, fontSize: 16 }}>{ks.st === 'track' ? fmtNum(kF.N) + ' N' : '0 N'}</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>normalkraft just nu <em>F</em><sub>N</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: COL.tyngd, fontWeight: 700, fontSize: 16 }}>{fmtNum(m * G)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>tyngdkraft <em>F</em><sub>G</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: nTopK > 0 ? COL.norm : COL.tyngd, fontWeight: 700, fontSize: 16 }}>{nTopK > 0 ? fmtNum(nTopK) + ' N' : 'lättar'}</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>N</sub> på krönets topp</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: COL.norm, fontWeight: 700, fontSize: 16 }}>{fmtNum(nBotD)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>N</sub> i dalens botten</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-accent)', fontWeight: 700, fontSize: 16 }}>{fmt(vKron, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>gränsfart på krönets topp √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>)</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(vKant, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>farten där bilen lättar i krönets början</div>
+                                            </div>
+                                        </div>
                                     ) : (
                                         <div className="grid grid-cols-2 gap-2 text-center">
                                             <div>
@@ -1412,6 +2274,32 @@
                                             pil igen, nu i rollen som resultant: <em>F</em><sub>C</sub> = <em>F</em><sub>f</sub>.
                                         </p>
                                     </div>
+                                ) : mode === 'bana' ? (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-1">Bara i kurvorna behövs en kraft</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            På rakorna behövs ingen kraft i sidled: bilen fortsätter rakt fram av sig själv
+                                            (Newtons första lag). I kurvorna måste <span style={{ color: COL.frik, fontWeight: 600 }}>friktionskraften</span> böja
+                                            banan, <em>F</em><sub>f</sub> = <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em>, och ju snävare kurvan är,
+                                            desto större kraft krävs vid samma fart. Räcker inte greppet, <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em> &gt; <em>μ</em>&thinsp;·&thinsp;<em>m</em>&thinsp;·&thinsp;<em>g</em>,
+                                            fortsätter bilen tangentiellt ut ur kurvan. Massan spelar ingen roll: den förkortas bort.
+                                        </p>
+                                    </div>
+                                ) : mode === 'kron' ? (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-1">Lättare på krönet, tyngre i dalen</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            På krönets topp pekar centrum nedåt, så <span style={{ color: COL.tyngd, fontWeight: 600 }}><em>F</em><sub>G</sub></span> −{' '}
+                                            <span style={{ color: COL.norm, fontWeight: 600 }}><em>F</em><sub>N</sub></span> = <em>F</em><sub>C</sub> och
+                                            <em> F</em><sub>N</sub> = <em>m</em>&thinsp;·&thinsp;<em>g</em> − <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em><sub>k</sub>.
+                                            Vid √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s blir normalkraften 0 och bilen lättar.
+                                            I dalens botten pekar centrum uppåt: <em>F</em><sub>N</sub> − <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub>, så
+                                            <em> F</em><sub>N</sub> = <em>m</em>&thinsp;·&thinsp;<em>g</em> + <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em><sub>d</sub>.
+                                            Där krönet börjar lutar vägen {fmt(BETA / DEG, 0)}°, och bara komposanten
+                                            <em> m</em>&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;cos&nbsp;α pekar mot centrum. Därför lättar bilen redan
+                                            där vid {fmt(vKant, 1)}&nbsp;m/s.
+                                        </p>
+                                    </div>
                                 ) : (
                                     <div className="glass-card rounded-xl p-3">
                                         <div className="flbl mb-1">Gränsfarten i toppen</div>
@@ -1429,7 +2317,7 @@
                         </main>
 
                         {/* Pedagogiska sektioner */}
-                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Ingen egen kraft</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
@@ -1455,6 +2343,15 @@
                                     gränsfarten; under den släpper bilen från banan.
                                 </p>
                             </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Krön, dal och kurvor på vägen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Över ett krön är <em>F</em><sub>N</sub> = <em>m</em>·<em>g</em> − <em>m</em>·<em>v</em>²/<em>r</em>, så bilen känns
+                                    lättare och lättar helt vid √(<em>g</em>·<em>r</em>). I en dal är
+                                    <em> F</em><sub>N</sub> = <em>m</em>·<em>g</em> + <em>m</em>·<em>v</em>²/<em>r</em>. På bilbanan behövs ingen kraft
+                                    alls på rakorna, och i kurvorna växer friktionskraften när radien minskar.
+                                </p>
+                            </div>
                         </div>
 
                         <details className="glass-card rounded-xl p-4 mt-4">
@@ -1475,6 +2372,9 @@
                                 <li><strong>”Om något slungas ut ur en cirkelbana åker det rakt ut från centrum.”</strong> Nej — det
                                     fortsätter <em>tangentiellt</em>, i den riktning hastigheten hade i släppögonblicket. Precis som
                                     bilen som släpper i loopen: den fortsätter i sin tangentriktning och faller sedan som en projektil.</li>
+                                <li><strong>”En tung bil klarar kurvan sämre än en lätt.”</strong> Nej. Kraften som krävs,
+                                    <em> m</em>·<em>v</em>²/<em>r</em>, och den största friktionskraften, <em>μ</em>·<em>m</em>·<em>g</em>,
+                                    växer båda med massan, som förkortas bort. Farten och radien avgör, inte massan.</li>
                             </ul>
                         </details>
                     </div>

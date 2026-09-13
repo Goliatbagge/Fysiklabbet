@@ -76,8 +76,8 @@ window.SIM_NAMES = {
 
   // ── Fysik nivå 2 ──────────────────────────────────────────
   'fysik2-cirkular-rorelse-app.html': [
-    { name: 'Cirkulär rörelse', desc: 'En bil i cirkelbana ovanifrån och en bil i loop. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie — och hitta gränsfarten där bilen precis klarar loopen.',
-      kw: ['rörelse','krafter','cirkulär','cirkelbana','centripetal','centripetalkraft','centripetalacceleration','vinkelhastighet','omega','banhastighet','banfart','radie','loop','looping','normalkraft','tyngdkraft','friktion','gränsfart','bil','kurva','mekanik'] },
+    { name: 'Cirkulär rörelse', desc: 'En bil i cirkelbana ovanifrån, en bilbana med en vid och en snäv kurva, en bil i loop och en bil över krön och genom dal. Visa verkliga krafter eller centripetalkraften (resultanten), hastighet, centripetalacceleration och radie, hitta gränsfarten där bilen klarar loopen eller lättar från krönet, och sänk friktionen tills bilen fortsätter rakt fram.',
+      kw: ['rörelse','krafter','cirkulär','cirkelbana','centripetal','centripetalkraft','centripetalacceleration','vinkelhastighet','omega','banhastighet','banfart','radie','loop','looping','normalkraft','tyngdkraft','friktion','friktionstal','gränsfart','bil','kurva','bilbana','krön','dal','svacka','sladd','grepp','mekanik'] },
     { name: 'Tomtebloss i skruvdragare', href: 'fysik2-tomtebloss-app.html', desc: 'Tänd ett tomtebloss fäst i en skruvdragare, i mörker — gnistorna lämnar cirkelbanan tangentiellt, precis som Newtons första lag säger. Med varvtalsglidare, ultrarapid och ljud.',
       kw: ['rörelse','cirkulär','cirkelbana','tomtebloss','gnistor','skruvdragare','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
     { name: 'Tvättsvamp i centrifug', href: 'fysik2-tomtebloss-app.html?sim=centrifug', desc: 'En blöt tvättsvamp i en roterande centrifugkorg sedd rakt uppifrån — vattendropparna lämnar banan tangentiellt enligt Newtons första lag.',

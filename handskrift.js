@@ -52551,6 +52551,596 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: avläs en parabel (ma2c-3.1 ex 1) ---------- */
+  function layoutParabelavlas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 330, ux: 40, uy: 26 });
+
+    y = 150;
+    T.str('g(x)=-x^2-2x+3', padL, y);
+    T.stepEnd();
+
+    G.axlar(-4.4, 2.4, -2.4, 5.4, 'x', 'y');
+    G.kurva(function (v) { return -v * v - 2 * v + 3; }, -3.5, 1.5);
+    T.stepEnd();
+
+    G.punkt(-1, 4, BLUE);
+    T.str('(-1, 4)', G.X(-1) + 12, G.Y(4) - 0.3 * F, BLUE, 0.5);
+    T.pause(220);
+    G.punkt(-3, 0, BLUE);
+    G.punkt(1, 0, BLUE);
+    T.str('-3', G.X(-3) - 12, G.oy + 1.05 * F, BLUE, 0.5);
+    T.str('1', G.X(1) + 6, G.oy + 1.05 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 2.4 * 26 + 1.6 * F, [
+      [['Kurvan har en topp, så det']],
+      [['största värdet är toppens']],
+      [['y-koordinat.']]
+    ], 0);
+    y = G.oy + 2.4 * 26 + 3.2 * F;
+    xe = T.str('a) största värdet: 4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('b) nollställen: x=-3, x=1', padL, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('c) extrempunkt: (-1, 4)', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Symmetrilinjen är den lodräta']],
+      [['linje som delar parabeln i två']],
+      [['lika halvor. Den går alltid']],
+      [['genom extrempunkten.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('d) x_s=-1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: allt algebraiskt (ma2c-3.2 ex 1) ----------
+   * Nollställena ger symmetrilinjen, symmetrilinjen ger extrempunkten
+   * och tecknet framför x²-termen ger karaktären. */
+  function layoutAlgebraisktparabel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=3x^2-12x+9', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nollställena är där']],
+      [['funktionsvärdet är noll, så']],
+      [['jag sätter uttrycket lika med']],
+      [['noll.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('3x^2-12x+9=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-12x+9=0',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x^2-4x+3=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=2±', padL, y);
+    xx = T.rot('2^2-3', xx, y);
+    xx = T.str('=2±1', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('a) x=1 och x=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parabeln är symmetrisk, så']],
+      [['symmetrilinjen ligger mitt']],
+      [['emellan nollställena.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) x_s=', padL, y);
+    xx = T.fracH('1+3', '2', xx, y);
+    xe = T.str('=2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Extrempunkten ligger på']],
+      [['symmetrilinjen. Dess y-värde']],
+      [['får jag ur funktionen.']]
+    ], 1.4);
+    y += 5.4 * F;
+    xx = T.str('f(2)=12-24+9=-3', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('c) (2, -3)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet framför x^2 är positivt,']],
+      [['så parabeln är en glad mun med']],
+      [['en dal.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('d) minimipunkt', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('e) minsta värdet: -3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: symmetrilinje utan nollställen (3.2 ex 2) --
+   * Även när roten saknas står symmetrilinjen kvar framför rottecknet. */
+  function layoutSymmetriutan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=x^2+6x+10', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag börjar som vanligt med']],
+      [['nollställena.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('x=-3±', padL, y);
+    xx = T.rot('3^2-10', xx, y);
+    xx = T.str('=-3±', xx, y);
+    T.rot('-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Negativt under rottecknet:']],
+      [['inga nollställen. Hela grafen']],
+      [['ligger ovanför x-axeln.']]
+    ]);
+    y += 4.8 * F;
+    T.str('saknar nollställen', padL + 20, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men symmetrilinjen finns ändå:']],
+      [['det är talet FRAMFÖR']],
+      [['rottecknet, oavsett vad som']],
+      [['står under det.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x_s=-3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorform och k (ma2c-3.3 ex 1) ---------- */
+  function layoutFaktorformk(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 190, oy: 260, ux: 44, uy: 13 });
+
+    G.axlar(-2.4, 4.4, -9.4, 4.4, 'x', 'y');
+    G.kurva(function (v) { return 2 * (v + 1) * (v - 3); }, -1.9, 3.9);
+    G.punkt(-1, 0, BLUE);
+    G.punkt(3, 0, BLUE);
+    G.punkt(1, -8, BLUE);
+    T.str('(1, -8)', G.X(1) + 12, G.Y(-8) + 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 9.4 * 13, [
+      [['Nollställena ger faktorerna.']],
+      [['Med x=-1 som rot blir faktorn']],
+      [['(x+1), alltså roten med']],
+      [['ombytt tecken.']]
+    ], 0);
+    y = G.oy + 9.4 * 13 + 3.2 * F;
+    xx = T.str('f(x)=k(x+1)(x-3)', padL, y);
+    T.pause(260);
+    T.str('(1)', xx + 1.0 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k bestämmer hur brant']],
+      [['parabeln är. Den får jag ur']],
+      [['punkten som grafen går genom.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('-8=k(1+1)(1-3)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('-8=-4k ⟹ k=2', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('f(x)=2(x+1)(x-3)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=2(x^2-2x-3)', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=2x^2-4x-6', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tre punkter (ma2c-3.3 ex 2) ---------------
+   * Utan nollställen får man i stället sätta in tre punkter och lösa
+   * ett ekvationssystem. */
+  function layoutTrepunkter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('(-2, 1), (-1, 2) och (0, 5)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Utan nollställen går faktor-']],
+      [['formen inte att använda. Jag']],
+      [['sätter i stället in punkterna']],
+      [['i den utvecklade formen.']]
+    ]);
+    y += 5.0 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 5.4 * F);
+    xx = T.str('4a-2b+c=1', xx, y);
+    T.str('(1)', xx + 1.0 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('a-b+c=2', xx - T.adv('4a-2b+c=1'), y + 2.4 * F);
+    T.str('(2)', xx + 1.0 * F, y + 2.4 * F, null, 0.62);
+    T.pause(240);
+    T.str('c=5', xx - T.adv('a-b+c=2'), y + 4.8 * F);
+    T.stepEnd();
+
+    tanke(y + 4.8 * F, [
+      [['Punkten (0, 5) ger c direkt:']],
+      [['där är både a- och b-termen']],
+      [['noll.']]
+    ]);
+    y += 8.4 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('4a-2b+5=1', xx, y);
+    T.str('(3)', xx + 1.0 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('a-b+5=2', xx - T.adv('4a-2b+5=1'), y + 2.4 * F);
+    T.str('(4)', xx + 1.0 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    y += 6.0 * F;
+    xx = T.str('a=b-3', padL, y);
+    T.pause(260);
+    T.str('(5)', xx + 1.0 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('4(b-3)-2b+5=1', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('4b-12-2b+5=1', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2b-7=1 ⟹ b=4', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('a=4-3=1', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: f(x)=x^2+4x+5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: fontänen i Seoul (ma2c-3.3 ex 3) ---------
+   * Skissen läggs med start i origo, så nollställena blir 0 och 2,3. */
+  function layoutFontanen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 90, oy: 320, ux: 110, uy: 38 });
+
+    y = 150;
+    T.str('längd 2,3 m, höjd 3,1 m', padL, y, null, 0.88);
+    T.stepEnd();
+
+    G.axlar(-0.4, 2.8, -0.4, 3.8, 'x', 'y');
+    G.kurva(function (v) { return -2.343 * v * (v - 2.3); }, 0, 2.3);
+    G.punkt(0, 0, BLUE);
+    G.punkt(2.3, 0, BLUE);
+    G.punkt(1.15, 3.1, BLUE);
+    T.str('2,3', G.X(2.3) - 16, G.oy + 1.05 * F, BLUE, 0.5);
+    T.str('(1,15; 3,1)', G.X(1.15) + 12, G.Y(3.1) - 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 1.6 * F, [
+      [['Jag lägger skissen med start i']],
+      [['origo. Då blir nollställena 0']],
+      [['och 2,3, och toppen mitt']],
+      [['emellan.']]
+    ], 0);
+    y = G.oy + 4.6 * F;
+    xx = T.str('f(x)=kx(x-2,3)', padL, y);
+    T.pause(260);
+    T.str('(1)', xx + 1.0 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('3,1=k·1,15(1,15-2,3)', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('3,1=-1,3225k', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('k=-2,343...', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: f(x)=-2,34x(x-2,3)', padL, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös ekvationer grafiskt (ma2c-3.4 ex 1) ---
+   * Skärningspunkternas x-koordinater är lösningarna. */
+  function layoutGrafiskaekvationer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 150, oy: 330, ux: 44, uy: 26 });
+
+    y = 150;
+    T.str('a) x^2-4x+5=2', padL, y);
+    T.stepEnd();
+
+    G.axlar(-0.6, 4.6, -0.6, 5.4, 'x', 'y');
+    G.kurva(function (v) { return v * v - 4 * v + 5; }, 0.2, 3.8);
+    T.pause(200);
+    G.vagrat(2, -0.4, 4.4);
+    T.str('y=2', G.X(4.0), G.Y(2) - 0.4 * F, BLUE, 0.5);
+    T.pause(200);
+    G.punkt(1, 2, BLUE);
+    G.punkt(3, 2, BLUE);
+    T.stepEnd();
+
+    tanke(G.oy + 1.6 * F, [
+      [['Vänsterledet och högerledet']],
+      [['ritas som var sin funktion.']],
+      [['Där de skär varandra är de']],
+      [['lika stora.']]
+    ], 0);
+    y = G.oy + 4.6 * F;
+    xe = T.str('x_1=1 och x_2=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är ekvationen redan lika']],
+      [['med noll. Då räcker det med']],
+      [['kurvans nollställen.']]
+    ]);
+    y += 4.6 * F;
+    T.str('b) x^2-2x-15=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x_1=5 och x_2=-3', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös olikheter grafiskt (ma2c-3.4 ex 2) ----
+   * Skärningarna ger gränserna; sedan avgör olikhetstecknet vilken del
+   * av kurvan som gäller. */
+  function layoutGrafiskaolikheter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 290, oy: 320, ux: 42, uy: 24 });
+
+    y = 150;
+    T.str('x^2+6x+6 mot 1', padL, y, null, 0.9);
+    T.stepEnd();
+
+    G.axlar(-6.6, 1.4, -4.4, 4.4, 'x', 'y');
+    G.kurva(function (v) { return v * v + 6 * v + 6; }, -6.4, 0.4);
+    T.pause(200);
+    G.vagrat(1, -6.4, 1.2);
+    T.str('y=1', G.X(0.6), G.Y(1) - 0.4 * F, BLUE, 0.5);
+    T.pause(200);
+    G.punkt(-5, 1, BLUE);
+    G.punkt(-1, 1, BLUE);
+    T.str('-5', G.X(-5) - 14, G.oy + 1.05 * F, BLUE, 0.5);
+    T.str('-1', G.X(-1) + 6, G.oy + 1.05 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 4.4 * 24 + 0.6 * F, [
+      [['Skärningarna ger gränserna:']],
+      [['x=-5 och x=-1. Sedan avgör']],
+      [['olikhetstecknet vilken del som']],
+      [['gäller.']]
+    ], 0);
+    y = G.oy + 4.8 * F;
+    T.str('a) mindre än: parabeln UNDER', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('-5<x<-1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Större än betyder i stället']],
+      [['att parabeln ligger ÖVER']],
+      [['linjen, alltså utanför']],
+      [['gränserna.']]
+    ]);
+    y += 4.8 * F;
+    T.str('b) större än: parabeln ÖVER', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('x<-5 och x>-1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: nyårsraketen (ma2c-3.5 ex 1) --------------
+   * Tre frågor, tre olika ställen på kurvan: nollstället, toppen och
+   * skärningen med en vågrät linje. */
+  function layoutNyarsraket(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 70, oy: 330, ux: 52, uy: 2.4 });
+
+    y = 150;
+    T.str('h(t)=40t-4,9t^2', padL, y);
+    T.stepEnd();
+
+    G.axlar(-0.4, 9.4, -6, 96, 't', 'h');
+    G.kurva(function (v) { return 40 * v - 4.9 * v * v; }, 0, 8.2);
+    T.pause(200);
+    G.vagrat(50, 0, 9);
+    T.str('50 m', G.X(8.6), G.Y(50) - 0.4 * F, BLUE, 0.5);
+    T.pause(200);
+    G.punkt(8.16, 0, BLUE);
+    G.punkt(4.08, 81.6, BLUE);
+    G.punkt(1.5, 50, BLUE);
+    G.punkt(6.6, 50, BLUE);
+    T.stepEnd();
+
+    tanke(G.oy + 1.6 * F, [
+      [['Raketen landar när höjden är']],
+      [['noll igen, alltså i kurvans']],
+      [['högra nollställe.']]
+    ], 0);
+    y = G.oy + 4.6 * F;
+    xe = T.str('a) t≈8,2 s', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Högsta höjden är toppens']],
+      [['y-koordinat, inte dess']],
+      [['x-koordinat.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('b) h≈81,6 m', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Höjden 50 m nås två gånger:']],
+      [['en gång på väg upp och en']],
+      [['gång på väg ner.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('c) t≈1,5 s och t≈6,6 s', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hagen vid muren (ma2c-3.5 ex 2) ----------
+   * Arean som funktion av sidan blir en parabel, och maximipunkten ger
+   * måtten. */
+  function layoutHagenvidmuren(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* figuren: mur och hage */
+    var x0 = padL + 60, x1 = padL + 300, yT = 175, yB = 285, i;
+    T.line([x0 - 26, yT], [x1 + 26, yT]);
+    for (i = 0; i <= 12; i++) {
+      T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
+    }
+    T.pause(160);
+    T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
+    T.pause(200);
+    T.line([x0, yT], [x0, yB]);
+    T.line([x0, yB], [x1, yB]);
+    T.line([x1, yB], [x1, yT]);
+    T.pause(200);
+    T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('52-2x', (x0 + x1) / 2 - T.adv('52-2x', 0.62) / 2, yB + 0.95 * F,
+          BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(yB + 1.0 * F, [
+      [['52 meter stängsel räcker till']],
+      [['tre sidor. Två är x, så den']],
+      [['tredje blir 52-2x.']]
+    ], 0);
+    y = yB + 3.6 * F;
+    xx = T.str('A(x)=x(52-2x)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Arean som funktion av x är en']],
+      [['parabel med negativ x^2-term,']],
+      [['alltså en topp.']]
+    ]);
+    y += 4.6 * F;
+    T.str('Verktygets extrempunkt:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    xx = T.str('(13, 338)', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-koordinaten är sidan och']],
+      [['y-koordinaten den största']],
+      [['arean.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('52-2·13=26', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 26 m gånger 13 m', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -53083,7 +53673,17 @@
                    differensprodukt: layoutDifferensprodukt,
                    rektangelomkrets: layoutRektangelomkrets,
                    rotekvationer: layoutRotekvationer,
-                   variabelsubst: layoutVariabelsubst };
+                   variabelsubst: layoutVariabelsubst,
+                   parabelavlas: layoutParabelavlas,
+                   algebraisktparabel: layoutAlgebraisktparabel,
+                   symmetriutan: layoutSymmetriutan,
+                   faktorformk: layoutFaktorformk,
+                   trepunkter: layoutTrepunkter,
+                   fontanen: layoutFontanen,
+                   grafiskaekvationer: layoutGrafiskaekvationer,
+                   grafiskaolikheter: layoutGrafiskaolikheter,
+                   nyarsraket: layoutNyarsraket,
+                   hagenvidmuren: layoutHagenvidmuren };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

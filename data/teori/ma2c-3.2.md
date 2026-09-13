@@ -29,6 +29,11 @@ Algebraiskt bestäms en andragradsfunktions
 ::: exempel "Exempel 1 — Bestäm allt algebraiskt"
 **Vi har funktionen $f(x) = 3x^2 - 12x + 9$. Ange funktionens<br>a) nollställen&emsp;&emsp;b) symmetrilinje&emsp;&emsp;c) extrempunkt&emsp;&emsp;d) extrempunkts karaktär&emsp;&emsp;e) största eller minsta värde**
 
+::: handskrift
+typ: algebraisktparabel
+:::
+
+::: textlosning
 **a)** Vi bestämmer nollställena genom att sätta funktionsuttrycket
 lika med 0 och lösa ekvationen:
 
@@ -93,10 +98,16 @@ alltså −3.
 
 **Svar:** −3
 :::
+:::
 
 ::: exempel "Exempel 2 — Symmetrilinje utan nollställen"
 **Bestäm symmetrilinjen till $f(x) = x^2 + 6x + 10$.**
 
+::: handskrift
+typ: symmetriutan
+:::
+
+::: textlosning
 Vi börjar med att ta reda på funktionens nollställen genom att sätta
 funktionsuttrycket lika med 0 och lösa ekvationen:
 
@@ -117,6 +128,7 @@ rottecknet" i *pq*-formeln. I detta fall är det −3. Alltså är
 symmetrilinjens ekvation $x_s = -3$.
 
 **Svar:** $x_s = -3$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -84,6 +84,11 @@ Om andragradstermen (till exempel $x^2$ eller $t^2$) i en andragradsfunktion
 **Rita grafen till funktionen $g(x) = -x^2 - 2x + 3$ och bestäm
 nedanstående.**
 
+::: handskrift
+typ: parabelavlas
+:::
+
+::: textlosning
 När vi ritar grafer i Geogebra ersätts funktionen med $y$, så i detta
 fall ersätts $g(x)$ med $y$. Vi skriver in $y = -x^2 - 2x + 3$ i
 inmatningsfältet i Geogebra och får nedanstående graf.
@@ -117,6 +122,7 @@ extrempunkten ligger vid $x = -1$, måste alltså symmetrilinjen också gå
 vid $x = -1$. Så symmetrilinjens ekvation är $x_s = -1$.
 
 **Svar:** $x_s = -1$
+:::
 :::
 
 ## Undersök parabeln själv

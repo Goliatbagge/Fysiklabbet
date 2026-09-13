@@ -58,6 +58,11 @@ som varsin funktion — grafen nedan visar uppritningen.
 
 **a)&nbsp;$x^2 - 4x + 5 = 2$&emsp;&emsp;b)&nbsp;$x^2 - 2x - 15 = 0$**
 
+::: handskrift
+typ: grafiskaekvationer
+:::
+
+::: textlosning
 **a)** VAD: Vi ritar upp funktionerna $y = x^2 - 4x + 5$ och $y = 2$ i
 Geogebra (se figuren ovan) och tar fram skärningarnas koordinater.
 
@@ -77,6 +82,7 @@ $x_2 = -3$.
 
 **Svar:** $x_1 = 5$ och $x_2 = -3$
 :::
+:::
 
 ::: exempel "Exempel 2 — Lös olikheterna grafiskt"
 **Lös olikheterna nedan.** Vi ritar upp $f(x) = x^2 + 6x + 6$ och
@@ -89,6 +95,11 @@ grafen.
 
 **a)&nbsp;$x^2 + 6x + 6 < 1$&emsp;&emsp;b)&nbsp;$x^2 + 6x + 6 > 1$**
 
+::: handskrift
+typ: grafiskaolikheter
+:::
+
+::: textlosning
 **a)** HUR: Skärningarnas $x$-koordinater ger intervallets gränser, det vill säga
 $x = -5$ och $x = -1$. Eftersom $x^2 + 6x + 6 < 1$ gäller att
 $f(x) < g(x)$, det vill säga $f(x)$ ska vara **mindre** än $g(x)$. Detta gäller
@@ -108,6 +119,7 @@ vänster om $x = -5$ och till höger om $x = -1$. Detta ger intervallen
 $x < -5$ och $x > -1$.
 
 **Svar:** $x < -5$ och $x > -1$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

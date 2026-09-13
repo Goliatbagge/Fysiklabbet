@@ -44597,6 +44597,1754 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: räkna med imaginära tal (ma4-4.1 ex 1) -----
+   * i behandlas som vilken bokstav som helst — ända tills i² dyker upp,
+   * och då byts det mot -1. */
+  function layoutImaginara(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['i räknar jag med som vilken']],
+      [['bokstav som helst. Det enda']],
+      [['särskilda är att i^2 är -1.']]
+    ], 0);
+    xx = T.str('a) 12i-5i+3i=(12-5+3)i', padL, y, null, 0.9);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=10i', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) blir i·i lika med i^2,']],
+      [['och där byter jag mot -1.']],
+      [['Svaret blir alltså reellt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) (-6i)·(4i)=-24i^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=-24·(-1)=24', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) förkortas i bort i']],
+      [['bråket, precis som en vanlig']],
+      [['faktor.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('10i', '2i', xx, y);
+    xx = T.str('+3i=', xx, y);
+    xe = T.str('5+3i', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvation med rotutdragning (4.1 ex 2) ------
+   * Roten ur ett negativt tal går att skriva med i, eftersom i² är -1. */
+  function layoutRotimaginar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('x^2+i^2+65=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['i^2 är -1, så den termen är i']],
+      [['själva verket bara ett tal.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('x^2-1+65=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2+64=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-64', xx + 0.6 * F, 'x^2+64=0');
+    xx = T.str('x^2=-64', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur ett negativt tal']],
+      [['fanns inte förut. Men -1 ÄR']],
+      [['i^2, så jag kan skriva om']],
+      [['uttrycket under rottecknet.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=±', padL, y);
+    xx = T.rot('64·(-1)', xx, y);
+    xx = T.str('=±', xx, y);
+    T.rot('64·i^2', xx, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xe = T.str('=±8i', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=±8i', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: kvadrerad parentes (ma4-4.1 ex 3) ---------- */
+  function layoutKvadreradparentes(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('(x+9)^2=-49', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parentesen står i kvadrat, så']],
+      [['jag drar roten ur båda led.']],
+      [['Roten ur -49 blir 7i.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x+9=±', padL, y);
+    xx = T.rot('-49', xx, y);
+    T.str('=±7i', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-9', xx + 1.2 * F, 'x+9=±7i');
+    xx = T.str('x=-9±7i', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två rötter, och de skiljer sig']],
+      [['bara i tecknet framför']],
+      [['i-delen. De är varandras']],
+      [['komplexkonjugat.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x_1=-9-7i och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('x_2=-9+7i', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: räkna med komplexa tal (ma4-4.2 ex 1) ------ */
+  function layoutKomplexarakna(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T), samla = mkSamla(T);
+    var yRad, r0, r1, i0, i1;
+
+    y = 186;
+    tanke(150, [
+      [['Realdelarna för sig och']],
+      [['imaginärdelarna för sig,']],
+      [['precis som med x-termer och']],
+      [['konstanter.']]
+    ], 0);
+    xx = T.str('a) (7+2i)+(5-6i)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=7+2i+5-6i', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=12-4i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet framför']],
+      [['parentesen byter tecken på']],
+      [['båda termerna inuti.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) (7-i)-(10-3i)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=7-i', padL + 40, y);
+    xx = T.str('-10+3i', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=-3+2i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) multipliceras parenteserna']],
+      [['ihop term för term, fyra']],
+      [['produkter.']]
+    ]);
+    y += 4.6 * F;
+    yRad = y;
+    xx = T.str('c) (', padL, y);
+    var a0 = xx;
+    xx = T.str('3i', xx, y);
+    var a1 = xx;
+    xx = T.str('+', xx, y);
+    var b0 = xx;
+    xx = T.str('8', xx, y);
+    var b1 = xx;
+    xx = T.str(')(', xx, y);
+    var c0 = xx;
+    xx = T.str('2i', xx, y);
+    var c1 = xx;
+    var d0 = xx;
+    xx = T.str('-5', xx, y);
+    var d1 = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = multIn(xx, y, yRad - 0.95 * F, [
+      { fran: [a0, a1], till: [c0, c1], skriv: '6i^2', hojd: 26 },
+      { fran: [a0, a1], till: [d0, d1], skriv: '-15i', hojd: 40 },
+      { fran: [b0, b1], till: [c0, c1], skriv: '+16i', hojd: 20,
+        under: true },
+      { fran: [b0, b1], till: [d0, d1], skriv: '-40', hojd: 36,
+        under: true, dx: 3 }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['i^2 är -1, så 6i^2 blir -6.']]
+    ]);
+    y += 4.2 * F;
+    yRad = y;
+    xx = T.str('=', padL + 20, y);
+    var e0 = xx;
+    xx = T.str('-6', xx, y);
+    var e1 = xx;
+    var f0 = xx;
+    xx = T.str('-15i', xx, y);
+    var f1 = xx;
+    var g0 = xx;
+    xx = T.str('+16i', xx, y);
+    var g1 = xx;
+    var h0 = xx;
+    xx = T.str('-40', xx, y);
+    var h1 = xx;
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = samla(padL + 20, y, [
+      { ringar: [[e0, e1, yRad], [h0, h1, yRad]], skriv: '=-46' },
+      { ringar: [[f0, f1, yRad], [g0, g1, yRad]], skriv: '+i' }
+    ]);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: division med konjugatet (ma4-4.2 ex 2) -----
+   * Konjugatet i nämnaren gör nämnaren reell — konjugatregeln ger
+   * a²+b² utan någon i-term. */
+  function layoutKomplexdivision(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) ', padL, y);
+    T.fracH('5+3i', '4-2i', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett i i nämnaren vill man bli']],
+      [['av med. Förlänger jag med']],
+      [['nämnarens konjugat blir']],
+      [['nämnaren reell.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('(5+3i)(4+2i)', '(4-2i)(4+2i)', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('20+10i+12i+6i^2', '16-4i^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Både täljare och nämnare har']],
+      [['ett i^2 som blir -1. I']],
+      [['nämnaren betyder det att']],
+      [['minus blir plus.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('20+22i-6', '16+4', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('14+22i', '20', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('14', '20', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('22', '20', xx, y);
+    xe = T.str('i=0,7+1,1i', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.6 * F;
+    xx = T.str('b) ', padL, y);
+    T.fracH('9-4i', 'i', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här står bara i i nämnaren.']],
+      [['Då räcker det att förlänga']],
+      [['med i.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('i(9-4i)', 'i·i', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('9i-4i^2', 'i^2', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('9i+4', '-1', xx, y);
+    xe = T.str('=-4-9i', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: identifikation (ma4-4.2 ex 3) --------------
+   * Realdelar för sig och imaginärdelar för sig — två ekvationer ur en. */
+  function layoutIdentifikation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('2Re z-z=5-3i', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet z är okänt, så jag']],
+      [['skriver det i sin allmänna']],
+      [['form. Då är realdelen a och']],
+      [['imaginärdelen b.']]
+    ]);
+    y += 4.8 * F;
+    T.str('z=a+bi', padL, y);
+    T.pause(280);
+    T.str('Re z=a', padL + 200, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('2a-(a+bi)=5-3i', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2a-a-bi=5-3i', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('a-bi=5-3i', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står realdelen mot']],
+      [['realdelen och imaginärdelen']],
+      [['mot imaginärdelen. De måste']],
+      [['stämma var för sig.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('a=5', padL + 20, y);
+    T.pause(300);
+    T.str('-b=-3 ⟹ b=3', padL + 160, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: z=5+3i', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: komplexa rötter med pq (ma4-4.3 ex 1) ------
+   * En negativ diskriminant betyder inte längre "saknar lösning" —
+   * roten ur ett negativt tal skrivs med i. */
+  function layoutKomplexarotter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) z^2-4z+13=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq-formeln med p=-4 och q=13.']],
+      [['Halva p är -2, så det blir']],
+      [['plus 2 utanför rottecknet.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('z=2±', padL, y);
+    T.rot('2^2-13', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=2±', padL + 40, y);
+    T.rot('-9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Diskriminanten blev negativ.']],
+      [['Förut sa vi "saknar lösning",']],
+      [['men nu ger den två komplexa']],
+      [['rötter.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('=2±3i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    T.str('b) z^2-4iz-5=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq-formeln fungerar även när']],
+      [['koefficienterna själva är']],
+      [['komplexa. Här är p=-4i.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('z=2i±', padL, y);
+    T.rot('(2i)^2+5', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=2i±', padL + 40, y);
+    T.rot('4i^2+5', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=2i±', padL + 40, y);
+    T.rot('-4+5', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('=2i±1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: okänd koefficient ur en rot (4.3 ex 2) -----
+   * Roten sätts in i ekvationen, vilket ger en ekvation i a. */
+  function layoutOkandkoefficient(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^2-6x+a=0,', padL, y);
+    T.str(' x_1=3-4i', padL + 250, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En rot satisfierar ekvationen.']],
+      [['Sätter jag in den blir a det']],
+      [['enda okända kvar.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('(3-4i)^2-6(3-4i)+a=0', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvadreringsregeln på']],
+      [['parentesen, och sedan']],
+      [['multipliceras -6 in i den']],
+      [['andra.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('9-24i+16i^2-18+24i+a=0', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['16i^2 är -16. Och de två']],
+      [['i-termerna tar ut varandra.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('9-24i-16-18+24i+a=0', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('-25+a=0 ⟹ a=25', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Med a bestämt löser jag']],
+      [['ekvationen som vanligt och får']],
+      [['den andra roten.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x^2-6x+25=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x=3±', padL, y);
+    T.rot('3^2-25', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=3±', padL + 40, y);
+    T.rot('-16', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=3±4i', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rötterna är varandras']],
+      [['komplexkonjugat, precis som']],
+      [['de alltid blir när']],
+      [['koefficienterna är reella.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: a=25 och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('x_2=3+4i', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: villkor för icke-reella rötter (4.3 ex 3) --
+   * Diskriminanten avgör: negativ under rottecknet ger komplexa rötter. */
+  function layoutIckereella(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('x^2+ax+9=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det är diskriminanten, talet']],
+      [['under rottecknet, som avgör']],
+      [['om rötterna blir reella']],
+      [['eller inte.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Diskriminanten', padL, y - 1.5 * F, null, 0.62);
+    T.pause(200);
+    xx = T.parenFrac('a', '2', '2', padL, y);
+    T.str('-9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två icke-reella rötter får vi']],
+      [['precis när diskriminanten är']],
+      [['mindre än noll.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.parenFrac('a', '2', '2', padL, y);
+    xx = T.str('-9<0', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.fracH('a^2', '4', padL, y);
+    xx = T.str('-9<0', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+9', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('a^2', '4', padL + 20, yb);
+      x = T.str('-9', x, yb);
+      x = T.str('+9', x, yb, BLUE);
+      x = T.str('<0', x, yb);
+      T.str('+9', x, yb, BLUE);
+    }, { dy: 3.2, dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.fracH('a^2', '4', padL + 20, y);
+    T.str('<9', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '·4', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('a^2', '4', padL + 20, yb);
+      x = T.str('·4', x, yb, BLUE);
+      x = T.str('<9', x, yb);
+      T.str('·4', x, yb, BLUE);
+    }, { dy: 3.2, dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('a^2<36', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['a^2 mindre än 36 betyder att']],
+      [['a ligger mellan -6 och 6:']],
+      [['både 6 och -6 ger 36 i']],
+      [['kvadrat.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: -6<a<6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: redan faktoriserat polynom (4.4 ex 1) ------ */
+  function layoutFaktoriseratpolynom(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x(x+4)(x-10)=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Polynomet är redan']],
+      [['faktoriserat. En produkt är']],
+      [['noll så snart någon faktor']],
+      [['är noll.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('x_1=0', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x+4=0 ⟹ ', padL + 20, y);
+    xe = T.str('x_2=-4', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x-10=0 ⟹ ', padL + 20, y);
+    xe = T.str('x_3=10', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre faktorer, tre rötter. Ett']],
+      [['tredjegradspolynom kan inte ha']],
+      [['fler än så.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: grafisk lösning (ma4-4.4 ex 2) -------------
+   * Rötterna är grafens nollställen. Kurvan ritas ur sin funktion. */
+  function layoutGrafiskarotter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 250, ux: 64, uy: 26 });
+
+    G.axlar(-2, 2.8, -2.6, 2.6, 'x', 'y');
+    T.stepEnd();
+
+    G.kurva(function (v) { return v * v * v - v * v - 2 * v; }, -1.55, 2.35);
+    T.str('p(x)=x^3-x^2-2x', G.X(-1.9) - 10, G.Y(2.2), null, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 2.6 * 26, [
+      [['Rötterna är där grafen skär']],
+      [['x-axeln, alltså där']],
+      [['funktionsvärdet är noll.']]
+    ], 0.8);
+    G.punkt(-1, 0, BLUE);
+    G.punkt(0, 0, BLUE);
+    G.punkt(2, 0, BLUE);
+    T.str('-1', G.X(-1) - 14, G.oy + 1.05 * F, BLUE, 0.5);
+    T.str('2', G.X(2) - 4, G.oy + 1.05 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 2.6 * 26 + 3.6 * F;
+    xe = T.str('x_1=-1, x_2=0, x_3=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: sätter jag in x=2']],
+      [['får jag 8-4-4=0. Det stämmer.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bryt ut x (ma4-4.4 ex 3) ------------------- */
+  function layoutBrytutxrot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^3-7x^2+10x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla termer innehåller x, så']],
+      [['den kan brytas ut. Då blir']],
+      [['resten en andragradsekvation.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=x(', padL + 20, y);
+    T.stepEnd();
+
+    xx = T.str('x^2-7x', xx, y);
+    T.stepEnd();
+
+    xx = T.str('+10)', xx, y);
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('x_1=0', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andragradsfaktorn löses med']],
+      [['pq-formeln. p=-7 och q=10,']],
+      [['så halva p är 3,5.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=3,5±', padL, y);
+    T.rot('3,5^2-10', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=3,5±', padL + 40, y);
+    T.rot('2,25', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=3,5±1,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_2=2', padL + 40, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_3=5', padL + 250, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: polynomdivision (ma4-4.4 ex 4) -------------
+   * En känd rot ger en faktor. Divisionen ställs upp som en trappa:
+   * multiplicera upp, dra bort, ta ned nästa term. */
+  function layoutPolynomdivision(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, x0;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^3+4x^2-7x-10=0,', padL, y);
+    T.str(' x=2', padL + 380, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Är x=2 en rot så är (x-2) en']],
+      [['faktor. Det säger faktorsatsen.']],
+      [['Den andra faktorn får jag med']],
+      [['polynomdivision.']]
+    ]);
+
+    /* ---- divisionstrappan ---- */
+    y += 4.8 * F;
+    x0 = padL + 30;
+    T.str('(x^3+4x^2-7x-10):(x-2)=', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('x^3-2x^2', x0, y);
+    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x^3 delat med x är x^2. Den']],
+      [['termen gånger (x-2) blir']],
+      [['x^3-2x^2, som jag drar bort.']]
+    ], 0.5);
+    y += 2.8 * F;
+    xx = T.str('6x^2-7x-10', x0, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('6x^2-12x', x0, y);
+    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('5x-10', x0, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('5x-10', x0, y);
+    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('0', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Resten blev noll, precis som']],
+      [['den ska när (x-2) verkligen']],
+      [['är en faktor. Kvoten är den']],
+      [['andra faktorn.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('(x-2)(x^2+6x+5)=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu återstår bara']],
+      [['andragradsfaktorn. pq-formeln']],
+      [['med p=6 och q=5.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=-3±', padL, y);
+    T.rot('3^2-5', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=-3±', padL + 40, y);
+    xx = T.rot('4', xx, y);
+    T.str('=-3±2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=-5', padL + 40, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=-1', padL + 250, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: visare i komplexa talplanet ------------
+   * En pil från en punkt till en annan, i blått (en vektor är alltid
+   * en blå anteckning ovanpå den ritade scenen). */
+  function visare(T, p1, p2, col) {
+    col = col === undefined ? BLUE : col;
+    T.line(p1, p2, col);
+    var dx = p2[0] - p1[0], dy = p2[1] - p1[1], L = Math.hypot(dx, dy) || 1;
+    dx /= L; dy /= L;
+    var a = 26 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), len = 12;
+    T.line([p2[0] - (dx * ca - dy * sa) * len,
+            p2[1] - (dx * sa + dy * ca) * len], p2, col);
+    T.line([p2[0] - (dx * ca + dy * sa) * len,
+            p2[1] - (-dx * sa + dy * ca) * len], p2, col);
+    T.pause(200);
+  }
+
+  /* ---------------- scen: punkter i talplanet (ma4-4.5 ex 1) ---------
+   * Realdelen är x-koordinaten och imaginärdelen y-koordinaten, precis
+   * som i ett vanligt koordinatsystem. */
+  function layoutTalplanpunkter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 170, oy: 248, ux: 30, uy: 24 });
+
+    G.axlar(-4.4, 4.4, -5.2, 3.4, 'Re', 'Im');
+    T.stepEnd();
+
+    G.punkt(3, 2, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(3), G.Y(2)]);
+    T.str('z=3+2i', G.X(3) + 10, G.Y(2) - 6, BLUE, 0.5);
+    T.stepEnd();
+
+    G.punkt(-2, -4, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(-2), G.Y(-4)]);
+    T.str('w=-2-4i', G.X(-2) - 34, G.Y(-4) + 1.05 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 5.2 * 24, [
+      [['Realdelen är steget i sidled']],
+      [['och imaginärdelen steget i']],
+      [['höjdled. Sedan är det ett']],
+      [['vanligt koordinatsystem.']]
+    ], 0);
+    y = G.oy + 5.2 * 24 + 3.2 * F;
+    xe = T.str('Re z=3, Im z=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Re w=-2, Im w=-4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('z i första kvadranten,', padL, y, null, 0.8);
+    T.pause(240);
+    y += 2.4 * F;
+    T.str('w i tredje', padL + 40, y, null, 0.8);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: addera komplexa tal (ma4-4.5 ex 2) ---------
+   * Visarna läggs i förlängningen av varandra — samma sak som att
+   * addera realdelar och imaginärdelar var för sig. */
+  function layoutKomplexaddition(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 170, oy: 230, ux: 30, uy: 22 });
+
+    G.axlar(-3.4, 4.4, -3.4, 3.4, 'Re', 'Im');
+    T.stepEnd();
+
+    visare(T, [G.ox, G.oy], [G.X(3), G.Y(2)]);
+    T.str('z', G.X(3) + 8, G.Y(2) - 4, BLUE, 0.55);
+    T.pause(220);
+    visare(T, [G.X(3), G.Y(2)], [G.X(1), G.Y(-2)]);
+    T.str('w', G.X(2) + 10, G.Y(0), BLUE, 0.55);
+    T.pause(220);
+    G.punkt(1, -2, BLUE);
+    T.str('1-2i', G.X(1) + 10, G.Y(-2) + 14, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 3.4 * 22, [
+      [['Lägger jag w:s visare i']],
+      [['förlängningen av z:s hamnar']],
+      [['spetsen i summan.']]
+    ], 0);
+    y = G.oy + 3.4 * 22 + 3.4 * F;
+    xx = T.str('z+w=(3+2i)+(-2-4i)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=(3+(-2))+(2+(-4))i', padL + 40, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=1-2i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: subtrahera komplexa tal (ma4-4.5 ex 3) -----
+   * Att dra bort ett negativt tal ger ett plus — det är hela poängen
+   * med den här uppgiften. */
+  function layoutKomplexsubtraktion(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('z=3+2i', padL, y);
+    T.pause(260);
+    T.str('w=-2-4i', padL + 220, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Realdelarna för sig och']],
+      [['imaginärdelarna för sig, precis']],
+      [['som vid addition.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('z-w=(3+2i)-(-2-4i)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här dras ett negativt tal']],
+      [['bort, och då blir det ett']],
+      [['plus. Det är lätt att slarva']],
+      [['med tecknen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=(3-(-2))+(2-(-4))i', padL + 40, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=5+6i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: polär till rektangulär form (4.6 ex 1) ----- */
+  function layoutPolartillrekt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    T.str('4√2(cos 135°+i sin 135°)', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först multiplicerar jag in']],
+      [['faktorn i parentesen, term']],
+      [['för term.']]
+    ]);
+    y += 4.6 * F;
+    T.str('4√2cos 135°+4√2 i sin 135°', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['135° är en standardvinkel.']],
+      [['Cosinus är negativ där, sinus']],
+      [['positiv, båda 1 genom √2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=4√2·(-', padL + 20, y);
+    xx = T.fracH('1', '√2', xx, y);
+    xx = T.str(')+4√2·', xx, y);
+    xx = T.fracH('1', '√2', xx, y);
+    T.str('i', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=-', padL + 20, y);
+    xx = T.fracH('4√2', '√2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('4√2', '√2', xx, y);
+    T.str('i', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rötterna förkortas bort, och']],
+      [['kvar blir fyror.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('=-4+4i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rektangulär till polär form (4.6 ex 2) -----
+   * Beloppet med Pythagoras, argumentet med tangens. */
+  function layoutRekttillpolar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 120, oy: 210, ux: 26, uy: 20 });
+
+    G.axlar(-1.6, 6.4, -5.4, 2.2, 'Re', 'Im');
+    G.punkt(5, -4, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(5), G.Y(-4)]);
+    T.str('5-4i', G.X(5) + 10, G.Y(-4) + 8, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 5.4 * 20 + 3.0 * F;
+    tanke(G.oy + 5.4 * 20, [
+      [['Talet ligger i fjärde']],
+      [['kvadranten, till höger om']],
+      [['Im-axeln. Då ger räknarens']],
+      [['tan^-^1 rätt vinkel direkt.']]
+    ], 0);
+    xx = T.str('r=', padL, y);
+    xx = T.rot('5^2+(-4)^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.rot('41', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('≈6,4', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('tan v=', padL, y);
+    xx = T.fracH('b', 'a', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('-4', '5', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('v=tan^-^1(-0,8)≈-38,7°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in beloppet och']],
+      [['argumentet i den polära']],
+      [['formen.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('z=', padL, y);
+    xx = T.rot('41', xx, y);
+    T.str('(cos(-38,7°)', xx, y, null, 0.9);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('+i sin(-38,7°))', padL + 100, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: absolutbelopp som cirkel (4.6 ex 3) --------
+   * |z − w| är avståndet mellan z och w, så ett fast avstånd ritar en
+   * cirkel. */
+  function layoutAbsolutcirkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* lika skala i båda led — annars blir cirkeln en ellips */
+    var G = mkTrigGraf(T, F, { ox: padL + 110, oy: 470, ux: 28, uy: 28 });
+
+    y = 130;
+    T.str('|z+(-3-2i)|=2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Formeln för avstånd handlar om']],
+      [['en DIFFERENS. Jag bryter ut']],
+      [['ett minustecken och skiftar']],
+      [['tecken inuti parentesen.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('|z-(3+2i)|=2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['|z-w| är avståndet mellan z']],
+      [['och w. Här ska avståndet till']],
+      [['3+2i alltid vara 2.']]
+    ]);
+
+    G.axlar(-1.4, 6.4, -1.4, 4.6, 'Re', 'Im');
+    G.punkt(3, 2, BLUE);
+    T.str('3+2i', G.X(3) - 26, G.Y(2) + 1.0 * F, BLUE, 0.5);
+    T.pause(220);
+    var pts = [], k, a;
+    for (k = 0; k <= 44; k++) {
+      a = -Math.PI * 2 * (k / 44);
+      pts.push([G.X(3 + Math.cos(a) * 2), G.Y(2 + Math.sin(a) * 2)]);
+    }
+    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
+    T.pause(200);
+    T.str('r=2', G.X(5.4), G.Y(2) + 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 1.4 * 26 + 3.2 * F;
+    xe = T.str('Svar: en cirkel med', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('medelpunkt 3+2i och radie 2', padL + 40, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: litet bråk i valfri skala --------------
+   * Används i exponenter (e upphöjt till iπ/3) där fracH:s fasta storlek
+   * blir för stor. Division skrivs med vågrätt streck även här. */
+  function smallFrac(T, F, numS, denS, x, yb, sc) {
+    var f = F * sc;
+    var nw = T.adv(numS, sc), dw = T.adv(denS, sc);
+    var w = Math.max(nw, dw) + 0.22 * f, ybar = yb - 0.30 * f;
+    T.str(numS, x + (w - nw) / 2, ybar - 0.12 * f, null, sc);
+    T.acts.push({ kind: 'stroke', pts: humanize([[x, ybar], [x + w, ybar]]) });
+    T.str(denS, x + (w - dw) / 2, ybar + 1.02 * f, null, sc);
+    return x + w;
+  }
+
+  /* ---------------- scen: multiplikation och division i polär form ---
+   * (ma4-4.7 ex 1) Beloppen multipliceras, argumenten adderas. */
+  function layoutPolarmultdiv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('z_1=3(cos 120°+i sin 120°)', padL, y, null, 0.88);
+    T.pause(280);
+    y += 2.8 * F;
+    T.str('z_2=6(cos 30°+i sin 30°)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I polär form blir']],
+      [['multiplikation enkelt:']],
+      [['beloppen multipliceras och']],
+      [['argumenten adderas.']]
+    ]);
+    y += 4.8 * F;
+    T.str('a) z_1·z_2=3·6(cos(120°+30°)', padL, y, null, 0.84);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('+i sin(120°+30°))', padL + 120, y, null, 0.84);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=18(cos 150°+i sin 150°)', padL + 40, y, null, 0.88);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vid division är det tvärtom:']],
+      [['beloppen divideras och']],
+      [['argumenten subtraheras.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('z_2', 'z_1', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('6', '3', xx, y);
+    T.str('(cos(30°-120°)', xx, y, null, 0.84);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    T.str('+i sin(30°-120°))', padL + 120, y, null, 0.84);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('=2(cos(-90°)+i sin(-90°))', padL + 40, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['-90° pekar rakt nedåt i']],
+      [['talplanet: cosinus är 0 och']],
+      [['sinus är -1.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('=2(0-i)=-2i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vrid ett tal i talplanet (ma4-4.7 ex 2) ----
+   * Multiplikation med i är en vridning 90° moturs, division med i en
+   * vridning 90° medurs. */
+  function layoutVridtalplan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 250, ux: 26, uy: 26 });
+
+    G.axlar(-4.4, 4.4, -3.4, 4.4, 'Re', 'Im');
+    G.punkt(-3, 2, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(-3), G.Y(2)]);
+    T.str('z=-3+2i', G.X(-3) - 100, G.Y(2) - 8, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 3.4 * 26, [
+      [['Att dividera med i vrider']],
+      [['visaren 90° MEDURS, utan att']],
+      [['ändra dess längd.']]
+    ], 0);
+    G.punkt(2, 3, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(2), G.Y(3)]);
+    T.str('z/i', G.X(2) + 10, G.Y(3) - 4, BLUE, 0.5);
+    T.pause(220);
+    G.punkt(3, -2, BLUE);
+    visare(T, [G.ox, G.oy], [G.X(3), G.Y(-2)]);
+    T.str('z·i^2', G.X(3) + 10, G.Y(-2) + 10, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 3.4 * 26 + 3.6 * F;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('z', 'i', xx, y);
+    T.str('=z·(-i)=(-3+2i)(-i)', xx, y, null, 0.88);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=3i-2i^2=', padL + 40, y);
+    xe = T.str('2+3i', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['i^2 är två vridningar 90°,']],
+      [['alltså ett halvt varv. Och']],
+      [['ett halvt varv är samma sak']],
+      [['som att byta tecken.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) z·i^2=z·(-1)=-(-3+2i)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=3-2i', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: de Moivres formel (ma4-4.8 ex 1) ----------- */
+  function layoutMoivrepotens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('z=2(cos', padL, y);
+    xx = T.fracH('π', '8', xx, y);
+    xx = T.str('+i sin', xx, y);
+    xx = T.fracH('π', '8', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['de Moivres formel: beloppet']],
+      [['upphöjs till n och argumentet']],
+      [['multipliceras med n.']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('n=4, r=2, v=', padL, y);
+    xx = T.fracH('π', '8', padL + 170, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('z^4=2^4(cos 4·', padL, y);
+    xx = T.fracH('π', '8', xx, y);
+    xx = T.str('+i sin 4·', xx, y);
+    xx = T.fracH('π', '8', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=16(cos', padL + 30, y);
+    xx = T.fracH('π', '2', xx, y);
+    xx = T.str('+i sin', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['π/2 pekar rakt uppåt:']],
+      [['cosinus är 0 och sinus är 1.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=16(0+i)=', padL + 30, y);
+    xe = T.str('16i', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hög potens med de Moivre (4.8 ex 2) --------
+   * 27 multiplikationer för hand vore hopplöst — i polär form räcker en
+   * multiplikation av argumentet. */
+  function layoutMoivreform(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('z=cos 10°+i sin 10°', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att multiplicera ihop 27']],
+      [['parenteser vore hopplöst. I']],
+      [['polär form räcker det att']],
+      [['gångra argumentet med 27.']]
+    ]);
+    y += 4.8 * F;
+    T.str('n=27, r=1, v=10°', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('z^2^7=1^2^7(cos 27·10°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('+i sin 27·10°)', padL + 120, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=cos 270°+i sin 270°', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['270° pekar rakt nedåt:']],
+      [['cosinus är 0 och sinus är -1.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=0+i·(-1)=', padL + 40, y);
+    xe = T.str('-i', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: binomisk ekvation z⁴ = −81i (4.9 ex 1) -----
+   * Fjärde graden ger fyra rötter, jämnt fördelade runt en cirkel med
+   * radien 3. */
+  function layoutBinomiskfyra(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('z^4=-81i', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten är 4, så det finns']],
+      [['fyra lösningar. Båda leden']],
+      [['skrivs på polär form.']]
+    ]);
+    y += 4.6 * F;
+    T.str('VL=z^4=r^4(cos 4v+i sin 4v)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('HL=81(cos 270°+i sin 270°)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['-81i pekar rakt nedåt, alltså']],
+      [['270°, och dess belopp är 81.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('r^4=81 ⟹ r=3', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('4v=270°+n·360°', padL, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('v=', padL + 20, y);
+    xx = T.fracH('270°', '4', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('n·360°', '4', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('v=67,5°+n·90°', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['n=0, 1, 2 och 3 ger de fyra']],
+      [['argumenten. Större n upprepar']],
+      [['bara samma visare.']]
+    ]);
+    y += 4.6 * F;
+    T.str('v_0=67,5°', padL, y, null, 0.88);
+    T.pause(260);
+    T.str('v_1=157,5°', padL + 200, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('v_2=247,5°', padL, y, null, 0.88);
+    T.pause(260);
+    T.str('v_3=337,5°', padL + 200, y, null, 0.88);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    T.str('z_1=3(cos 67,5°+i sin 67,5°)', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('z_2=3(cos 157,5°+i sin 157,5°)', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('z_3=3(cos 247,5°+i sin 247,5°)', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('z_4=3(cos 337,5°+i sin 337,5°)', padL, y, null, 0.82);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) räknas sinus och cosinus']],
+      [['ut och multipliceras med 3.']]
+    ]);
+    y += 4.4 * F;
+    T.str('z_1≈1,15+2,77i', padL, y, null, 0.88);
+    T.pause(260);
+    T.str('z_2≈-2,77+1,15i', padL + 240, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('z_3≈-1,15-2,77i', padL, y, null, 0.88);
+    T.pause(260);
+    T.str('z_4≈2,77-1,15i', padL + 240, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla fyra har beloppet 3 och']],
+      [['ligger jämnt fördelade runt']],
+      [['en cirkel, 90° isär.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: binomisk ekvation z³ (ma4-4.9 ex 2) --------
+   * Här måste högerledets argument bestämmas ur kvadranten — räknarens
+   * tan⁻¹ ger fel vinkel i andra kvadranten. */
+  function layoutBinomisktre(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('z^3=-4+4i√3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tredje graden ger tre']],
+      [['lösningar. Först beloppet av']],
+      [['högerledet, med Pythagoras.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('r=', padL, y);
+    xx = T.rot('4^2+(4√3)^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.rot('16+48', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.rot('64', xx, y);
+    T.str('=8', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sedan argumentet. Talet har']],
+      [['negativ realdel och positiv']],
+      [['imaginärdel, alltså andra']],
+      [['kvadranten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('tan v=', padL, y);
+    xx = T.fracH('4√3', '-4', xx, y);
+    T.str('=-√3', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('90°<v<180° ⟹ v=120°', padL + 20, y, null, 0.92);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('r^3(cos 3v+i sin 3v)', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('=8(cos 120°+i sin 120°)', padL + 40, y, null, 0.88);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('r^3=8 ⟹ r=2', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('3v=120°+n·360°', padL, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('v=', padL + 20, y);
+    xx = T.fracH('120°', '3', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('n·360°', '3', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('v=40°+n·120°', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    T.str('z_1=2(cos 40°+i sin 40°)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('z_2=2(cos 160°+i sin 160°)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('z_3=2(cos 280°+i sin 280°)', padL, y, null, 0.88);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: exponentiell form (ma4-4.10 ex 1) ----------
+   * Eulers formel binder ihop den exponentiella och den polära formen. */
+  function layoutEulerform(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) z=4e', padL, y);
+    xx = T.str('i', xx, y - 0.52 * F, null, 0.62);
+    smallFrac(T, F, 'π', '3', xx, y - 0.52 * F, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jämför med z=r·e upphöjt till']],
+      [['iv: beloppet är 4 och']],
+      [['argumentet π/3.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('z=4(cos', padL, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('+i sin', xx, y);
+    xx = T.fracH('π', '3', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=4(', padL + 30, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('+i', xx, y);
+    xx = T.fracH('√3', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xe = T.str('=2+2i√3', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Har exponenten en realdel kan']],
+      [['den brytas ut som en egen']],
+      [['faktor, enligt potenslagarna.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) z=e', padL, y);
+    xx = T.str('4+i', xx, y - 0.52 * F, null, 0.62);
+    smallFrac(T, F, 'π', '2', xx, y - 0.52 * F, 0.62);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xx = T.str('=e', padL + 30, y);
+    xx = T.str('4', xx, y - 0.52 * F, null, 0.62);
+    xx = T.str('·e', xx, y);
+    xx = T.str('i', xx, y - 0.52 * F, null, 0.62);
+    smallFrac(T, F, 'π', '2', xx, y - 0.52 * F, 0.62);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('=e', padL + 30, y);
+    xx = T.str('4', xx, y - 0.52 * F, null, 0.62);
+    xx = T.str('(cos', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    xx = T.str('+i sin', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=e', padL + 30, y);
+    xx = T.str('4', xx, y - 0.52 * F, null, 0.62);
+    xx = T.str('(0+i)=', xx, y);
+    xe = T.str('e', xx, y);
+    xe = T.str('4', xe, y - 0.52 * F, null, 0.62);
+    xe = T.str('i', xe, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvation i exponentiell form (4.10 ex 2) ---
+   * Identifiering av belopp och argument, precis som i de binomiska
+   * ekvationerna. */
+  function layoutEulerekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('e', padL, y);
+    xx = T.str('z', xx, y - 0.52 * F, null, 0.62);
+    T.str('=-3i', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten är komplex, så jag']],
+      [['skriver z=a+bi och delar upp']],
+      [['potensen i två faktorer.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('VL=e', padL, y);
+    xx = T.str('a+bi', xx, y - 0.52 * F, null, 0.62);
+    xx = T.str('=e', xx, y);
+    xx = T.str('a', xx, y - 0.52 * F, null, 0.62);
+    xx = T.str('·e', xx, y);
+    T.str('bi', xx, y - 0.52 * F, null, 0.62);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xx = T.str('=e', padL + 40, y);
+    xx = T.str('a', xx, y - 0.52 * F, null, 0.62);
+    T.str('(cos b+i sin b)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Högerledet pekar rakt nedåt i']],
+      [['talplanet: beloppet är 3 och']],
+      [['argumentet 3π/2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('HL=3(cos', padL, y);
+    xx = T.fracH('3π', '2', xx, y);
+    xx = T.str('+i sin', xx, y);
+    xx = T.fracH('3π', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står belopp mot belopp och']],
+      [['argument mot argument. De']],
+      [['måste stämma var för sig.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('e', padL, y);
+    xx = T.str('a', xx, y - 0.52 * F, null, 0.62);
+    T.str('=3 ⟹ a=ln 3', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('b=', padL, y);
+    T.fracH('3π', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('Svar: z=ln 3+', padL, y);
+    xe = T.fracH('3π', '2', xe, y);
+    xe = T.str('i', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -44998,7 +46746,34 @@
                    rotationrot: layoutRotationrot,
                    rotationkon: layoutRotationkon,
                    rotationyaxel: layoutRotationyaxel,
-                   rotationkvadrat: layoutRotationkvadrat };
+                   rotationkvadrat: layoutRotationkvadrat,
+                   imaginara: layoutImaginara,
+                   rotimaginar: layoutRotimaginar,
+                   kvadreradparentes: layoutKvadreradparentes,
+                   komplexarakna: layoutKomplexarakna,
+                   komplexdivision: layoutKomplexdivision,
+                   identifikation: layoutIdentifikation,
+                   komplexarotter: layoutKomplexarotter,
+                   okandkoefficient: layoutOkandkoefficient,
+                   ickereella: layoutIckereella,
+                   faktoriseratpolynom: layoutFaktoriseratpolynom,
+                   grafiskarotter: layoutGrafiskarotter,
+                   brytutxrot: layoutBrytutxrot,
+                   polynomdivision: layoutPolynomdivision,
+                   talplanpunkter: layoutTalplanpunkter,
+                   komplexaddition: layoutKomplexaddition,
+                   komplexsubtraktion: layoutKomplexsubtraktion,
+                   polartillrekt: layoutPolartillrekt,
+                   rekttillpolar: layoutRekttillpolar,
+                   absolutcirkel: layoutAbsolutcirkel,
+                   polarmultdiv: layoutPolarmultdiv,
+                   vridtalplan: layoutVridtalplan,
+                   moivrepotens: layoutMoivrepotens,
+                   moivreform: layoutMoivreform,
+                   binomiskfyra: layoutBinomiskfyra,
+                   binomisktre: layoutBinomisktre,
+                   eulerform: layoutEulerform,
+                   eulerekvation: layoutEulerekvation };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

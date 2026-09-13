@@ -12,7 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Lysdioden som slipper fånga sitt eget ljus** **[BREVTEASER]** — en vanlig lysdiod släpper bara ut
+- **Lysdioden som slipper fånga sitt eget ljus** **[BREVTEASER — teasad i brevet 2026-09-13, publiceras TIDIGAST måndag 2026-09-14, senast lördag 2026-09-19]** — en vanlig lysdiod släpper bara ut
   omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom
   totalreflektion. Ett lag vid Lunds universitet odlar i stället förgrenade
   nanotrådar, där grenarna är tunnare än ljusets våglängd och ljuset därför inte kan
@@ -303,6 +303,46 @@ Format per post:
   för gymnasiet; hoppa hellre över än att skriva luddigt. Källa (Phys.org
   2026-08-21): https://phys.org/news/2026-08-dark-energy-quantum-gravity-deeply.html
   (tillagd 2026-08-22)
+
+- **Atomer i en hårstråsfin fiber ska kunna navigera när GPS slocknar** — vid Sandia National
+  Laboratories fångas cesiumatomer i ljusfältet runt en optisk nanofiber, 420 nm tjock. Fällan drar
+  5 mW, ungefär två tusendelar av vad en lysdiodlampa gör, och mätstegen 150 nW. Målet är ett
+  tröghetsnavigeringssystem på ett chip, som vet var man är utan satelliter. Ingång: acceleration,
+  tröghet och hur ljus kan hålla fast materia. OBS: hittills nanofiber i labb, inget färdigt chip —
+  skriv inte om det som byggt. AVS Quantum Science (2026), DOI 10.1116/5.0309355, Adrian Orozco med
+  flera. Källa (Phys.org 2026-09-10):
+  https://phys.org/news/2026-09-tightly-atoms-enable-power-quantum.html
+  (tillagd 2026-09-13)
+
+- **Ljudvågor som skyddar en kvantbit** — ett lag vid Harvard driver en spinnkvantbit i diamant med
+  ett mekaniskt fält i stället för ett elektromagnetiskt, och tredubblar därmed den tid tillståndet
+  överlever. Ingång: svängningar, resonans och drivna system. OBS: kvantfysik är tätt förekommande —
+  låt det gå tid. Nature Physics 22, 1493 (2026), DOI 10.1038/s41567-026-03369-2, Eliza Cornell med
+  flera. Källa (ScienceDaily 2026-09-12):
+  https://www.sciencedaily.com/releases/2026/09/260911214245.htm
+  (tillagd 2026-09-13)
+
+- **Hur exakt kan en klocka någonsin gå?** — en grupp i Rom och Budapest har räknat på vad de så
+  kallade kollapsmodellerna, som försöker förklara varför kvantvärldens superpositioner inte syns i
+  vardagen, innebär för tiden själv. Svaret: en principiell osäkerhet finns, men den ligger så många
+  tiopotenser under dagens atomur att ingen tidmätning berörs. Ingång: vad en klocka egentligen mäter
+  och skillnaden mellan mätfel och principiell gräns. OBS: ren teori, inget uppmätt — skriv inte
+  ”fysiker har hittat en glitch i tiden”. Physical Review Research 7 (4), DOI 10.1103/p6tj-lg8l.
+  Källa (ScienceDaily 2026-09-11):
+  https://www.sciencedaily.com/releases/2026/09/260910225251.htm
+  (tillagd 2026-09-13)
+
+- **Gluonerna tar slut på plats inne i atomkärnan** — ALICE vid CERN har mätt J/ψ-produktion i
+  fotonkrockar med blykärnor och ser ett bortfall vid de finaste upplösningarna (0,6, 0,3 och
+  0,2 fm, den sista ungefär en fjärdedels proton), omkring tre standardavvikelser. Tolkningen lutar
+  mot gluonmättnad snarare än den gängse kärnskuggningen. Ingång: atomkärnans innandöme, att det
+  mesta av materiens massa sitter i gluonernas energi, och att kort våglängd ger fin upplösning.
+  OBS: pressmeddelandet är från 2026-08-11 och alltså inte färskt, och sajten hade gluon- respektive
+  ALICE-artiklar 2026-08-17 och 2026-08-22 — låt det gå ordentligt med tid, eller ta det som en
+  ”fysiken bakom”-vinkel. PRL 137 (5), DOI 10.1103/jmwb-75m7, Daniel Tapia Takaki (Kansas) med ALICE.
+  Källa (ScienceDaily 2026-09-12):
+  https://www.sciencedaily.com/releases/2026/09/260911214303.htm
+  (tillagd 2026-09-13)
 
 ## Fynd som inte användes (2026-08-21) — kan tas upp senare
 

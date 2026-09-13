@@ -2479,7 +2479,7 @@ window.BEGREPP = [
   {
     id: 'dopning',
     term: 'Dopning',
-    former: ['dopning', 'dopningen', 'dopa', 'dopar', 'dopad', 'dopat', 'dopade', 'dopämne', 'dopämnet', 'dopämnen', 'n-dopad', 'n-dopat', 'p-dopad', 'p-dopat', 'n-typ', 'p-typ'],
+    former: ['dopning', 'dopningen', 'dopa', 'dopar', 'dopad', 'dopat', 'dopade', 'dopämne', 'dopämnet', 'dopämnen', 'n-dopad', 'n-dopat', 'p-dopad', 'p-dopat', 'n-typ', 'p-typ', 'bordopad', 'bordopade', 'bordopat'],
     kort: 'Att med avsikt blanda in en liten mängd främmande atomer i ett halvledarmaterial för att styra hur det leder ström. En atom på en miljon kan räcka.',
     relaterade: ['halvledare', 'bandgap', 'pn-overgang', 'nanoskala'],
     body: [
@@ -2846,6 +2846,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Einstein byggde relativitetsteorin på två påståenden. Det första är att fysikens lagar måste vara desamma för alla som rör sig med konstant fart, oavsett hur fort. Det andra är att ljusets hastighet i vakuum är en och samma för alla dessa observatörer. Tillsammans kallas kravet lorentzinvarians, efter Hendrik Lorentz, vars omräkningsformler mellan olika observatörer visade sig vara precis vad kraven ger. Ur dem följer allt det som gör relativitetsteorin märklig: att klockor går olika fort, att sträckor krymper och att massa och energi är samma sak.' },
       { type: 'p', html: 'En följd som sällan nämns är att en fotons energi och rörelsemängd hänger ihop på ett exakt bestämt sätt, och att alla fotoner därför färdas lika fort oavsett våglängd. Rött och blått ljus från samma stjärna anländer i samma ögonblick, hur långt de än har färdats. Det är just den delen som gör antagandet så väl prövbart: gammablixtar miljarder ljusår bort skickar ut ljus i ett väldigt brett energiområde på en gång, och en aldrig så liten hastighetsskillnad skulle byggas upp till en mätbar tidsskillnad på den sträckan.' },
       { type: 'p', html: 'Flera försök att förena gravitation med kvantfysik antyder ändå att invariansen kan vara en ytterst god approximation snarare än en exakt sanning, och att den bryter samman vid energier långt bortom vad som går att skapa på jorden. Ett sådant brott skulle märkas som att de mest energirika fotonerna färdas aningen fortare eller långsammare än de energifattiga, och som att gränserna för vissa reaktioner mellan partiklar flyttar sig. Hittills har varje mätning varit förenlig med att invariansen håller exakt, och gränserna är bland de hårdaste inom fysiken.' }
+    ]
+  },
+  {
+    id: 'superjonisk-is',
+    term: 'Superjonisk is',
+    former: ['superjonisk is', 'superjoniska isen', 'superjonisk', 'superjoniska', 'superjoniskt', 'superjonisk vatten', 'superjonledare', 'superjonledaren'],
+    kort: 'Ett tillstånd hos vatten under mycket högt tryck och hög temperatur, där syreatomerna sitter kvar i ett fast kristallgitter medan vätekärnorna rör sig fritt mellan dem. Ämnet är alltså fast och flytande på samma gång, beroende på vilken atomsort man tittar på.',
+    relaterade: ['gitter', 'isjatte', 'superfluid'],
+    body: [
+      { type: 'p', html: 'Vanligtvis delas ämnen in i fast, flytande och gas efter hur atomerna rör sig. I ett fast ämne sitter alla på bestämda platser, i en vätska glider alla omkring. Superjonisk is passar inte in i den indelningen, eftersom de två atomsorterna i vattenmolekylen gör olika saker samtidigt. Syreatomerna står kvar i ett strikt mönster, som i vilken kristall som helst. Vätekärnorna slits däremot loss från sina syreatomer och vandrar mellan gitterplatserna, ungefär som vatten som sipprar genom ett stenröse.' },
+      { type: 'p', html: 'För att det ska hända krävs både hög temperatur, så att vätekärnorna har energi nog att lossna, och ett mycket högt tryck, så att syreatomerna hålls kvar på plats i stället för att också börja glida omkring. Vid vanligt lufttryck går det inte: långt innan vätet lossnar har hela isbiten smält. Tillståndet förutspåddes i beräkningar på 1980-talet och har sedan dess framställts i laboratorium, i millimeterstora kammare där is kläms mellan diamanter och värms med laser.' },
+      { type: 'p', html: 'En vätekärna utan sin elektron är en proton, alltså en laddad partikel, och laddade partiklar i rörelse är en elektrisk ström. Superjonisk is leder därför ström trots att den är fast, men på ett annat sätt än en metall: i metallen är det lätta elektroner som far fram, här är det hela atomkärnor som flyttar sig. Det är den egenskapen som gör tillståndet intressant för dem som försöker förstå varför Uranus och Neptunus har så oregelbundna magnetfält, eftersom ett magnetfält kring en planet kräver något elektriskt ledande i djupet.' }
+    ]
+  },
+  {
+    id: 'diamantstadcell',
+    term: 'Diamantstädcell',
+    former: ['diamantstädcell', 'diamantstädcellen', 'diamantstädceller', 'diamantstädcellerna', 'diamantstäd', 'diamantstädet', 'diamantcell', 'diamantcellen'],
+    kort: 'Ett bordsstort verktyg där ett litet prov kläms mellan spetsarna på två slipade diamanter. Eftersom spetsarna är mikroskopiska räcker en måttlig kraft för att skapa tryck som annars bara finns djupt inne i planeter.',
+    relaterade: ['superjonisk-is', 'isjatte', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'Idén bygger helt på att tryck är kraft delad med area. Trycker du med tummen mot ett bord händer ingenting, men lägg en häftstiftsspets emellan och samma kraft går rakt in i träet, eftersom spetsens area bara är en tusendel så stor. En diamantstädcell driver den tanken till sin ytterlighet: två diamanter slipas så att de får varsin platt spets bara några hundradels millimeter bred, provet placeras mellan dem, och sedan dras en skruv åt. Den kraft som behövs är inte större än vad ett par mjölkpaket väger.' },
+      { type: 'p', html: 'Diamant valdes inte av lyx utan av två skäl. Den är det hårdaste kända materialet och klarar därför att pressas hårt utan att själv ge efter, och den är genomskinlig både för synligt ljus och för röntgenstrålning. Man kan alltså trycka och titta samtidigt. En tunn metallbricka med ett hål i mitten, kallad packning, håller provet på plats och hindrar det från att rinna ut i sidled när trycket stiger.' },
+      { type: 'p', html: 'Provet är ofta bara några tiondels millimeter stort, och vid de allra högsta trycken mindre än så. För att se vad som händer i det lyser man igenom det med en skarp röntgenstråle, vanligtvis från en stor acceleratoranläggning, och läser av mönstret av avböjda strålar. Ur mönstret går det att räkna ut precis hur atomerna är ordnade. Behövs hög temperatur också värms provet med laser genom diamanten. Med tekniken har forskare kunnat återskapa förhållandena i jordens kärna och i de stora planeternas inre, på en yta mindre än ett dammkorn.' }
     ]
   },
 ];

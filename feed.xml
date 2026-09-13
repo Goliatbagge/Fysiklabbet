@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 12 Sep 2026 01:29:14 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 01:28:13 GMT</lastBuildDate>
+    <item>
+      <title>Isen som är glödhet och ändå fast har bytt kristallform — och spåret leder till Neptunus sneda magnetfält</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck</guid>
+      <pubDate>Sun, 13 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Materialfysik</category>
+      <description>Djupt inne i Uranus och Neptunus finns vatten i ett tillstånd som varken är vätska eller vanlig is: syreatomerna sitter kvar i ett gitter medan vätekärnorna rinner fritt mellan dem. Ett franskt forskarlag har nu klämt is mellan två diamanter, hettat den med laser till 2 630 K och sett gittret stapla om sig till ett helt annat mönster än det man räknat med.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-13-het-is-under-tryck.jpg" length="103570" type="image/jpeg"/>
+    </item>
     <item>
       <title>Skum i stället för pigment: nu går det att trycka bländvitt utan ett enda korn färgämne</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>Fysiker i Göttingen har återskapat hela den tredimensionella vågfunktionen för en elektron i en organisk molekyl, med detaljer finare än avståndet mellan molekylens kolatomer. Tidigare krävdes en synkrotronanläggning för saken — nu räcker en laseruppsättning på ett bordsstativ.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-25-vagfunktionen-fotograferad.jpg" length="634723" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Varje elektron som skärper bilden skadar också provet — nu vill fysiker låta en kvantdator läsa av mikroskopet</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-24-kvantmikroskopet</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-24-kvantmikroskopet</guid>
-      <pubDate>Mon, 24 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Ett österrikiskt forskarlag föreslår att bygga in en jonfälla med enstaka kalciumjoner mitt i strålgången i ett elektronmikroskop. Tanken är att varje elektron ska lämna sin information hos en qubit i stället för i en vanlig detektor — och att bilden därmed ska kunna bli skarpare av färre elektroner.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-24-kvantmikroskopet.jpg" length="244687" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

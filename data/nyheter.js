@@ -103,6 +103,74 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-13-het-is-under-tryck",
+    date: "2026-09-13",
+    title: "Isen som är glödhet och ändå fast har bytt kristallform — och spåret leder till Neptunus sneda magnetfält",
+    deck: "Djupt inne i Uranus och Neptunus finns vatten i ett tillstånd som varken är vätska eller vanlig is: syreatomerna sitter kvar i ett gitter medan vätekärnorna rinner fritt mellan dem. Ett franskt forskarlag har nu klämt is mellan två diamanter, hettat den med laser till 2 630 K och sett gittret stapla om sig till ett helt annat mönster än det man räknat med.",
+    category: "Materialfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-13-het-is-under-tryck.jpg",
+    imageAlt: "Neptunus som en nästan helt blå klotrund skiva mot svart rymd. Ljusare vita molnband löper i sidled över klotet och en mörkare oval fläck syns strax ovanför mitten.",
+    imageCredit: "Foto: NASA/JPL (Voyager 2, public domain), via Wikimedia Commons. Under Neptunus blå molntäcke ligger en tjock mantel av het, hoptryckt is av vatten, ammoniak och metan.",
+    tags: ["materialfysik", "högtryck", "fasövergång", "kristallstruktur", "vatten", "superjonisk is", "neptunus", "uranus", "magnetfält", "synkrotron", "röntgendiffraktion", "planetfysik"],
+    sources: [
+      { name: "Phys.org (11 september 2026): Scientists discover a strange new form of ice that could help explain the interiors of Neptune and Uranus", url: "https://phys.org/news/2026-09-scientists-strange-ice-interiors-neptune.html" },
+      { name: "Physics (APS, 9 september 2026): Making Uranian and Neptunian Ice on Earth", url: "https://physics.aps.org/articles/v19/s111" },
+      { name: "Physical Review Letters 137, 114101 (2026)", url: "https://journals.aps.org/prl/abstract/10.1103/sdrk-3m4t" }
+    ],
+    research: { citation: "Alexis Forestier, Gunnar Weck, Sandra Ninet, Gaston Garbarino, Mohamed Mezouar, Frédéric Datchi och Paul Loubeyre, ”Observation of Hexagonal Close-Packed Water Ice at Conditions in Ice Giant Planetary Interiors”, Physical Review Letters 137, 114101 (2026). Fritt tillgänglig förhandsversion: arXiv:2510.24305 (CC BY 4.0)", url: "https://doi.org/10.1103/sdrk-3m4t" },
+    body: [
+      { type: 'p', html: 'Is är vatten som blivit kallt. Den bilden fungerar utmärkt i en frysbox, och den håller inte alls längre in mot mitten av en planet. Där kan vatten vara flera tusen grader varmt och ändå stelt, av det enkla skälet att trycket pressar molekylerna så hårt mot varandra att de inte kommer loss hur mycket de än skakar. Temperatur och tryck drar åt var sitt håll, och vilket av dem som vinner avgör om ämnet är fast eller flytande.' },
+      { type: 'p', html: 'Nu har ett forskarlag lett från franska CEA, tillsammans med Sorbonne och den europeiska synkrotronanläggningen ESRF i Grenoble, tagit vatten hela vägen in i det området och hittat en kristallform av is som ingen sett förut. Arbetet publicerades den 9 september i <em>Physical Review Letters</em>.' },
+
+      { type: 'h2', text: 'Halvt fast, halvt flytande' },
+      { type: 'p', html: 'En vattenmolekyl är en syreatom med två väteatomer på. I vanlig is sitter hela molekylen stilla på sin plats i gittret. Men vid höga tryck och temperaturer förutspåddes redan på 1980-talet något underligare: att syreatomerna skulle stanna kvar på sina gitterplatser medan vätekärnorna slets loss och började vandra fritt mellan dem. Ämnet blir då fast och flytande samtidigt, beroende på vilken sorts atom man tittar på. Det kallas <em>superjonisk is</em>.' },
+      { type: 'p', html: 'En vätekärna utan sin elektron är ingenting annat än en proton, alltså en laddad partikel. Och laddade partiklar som rör sig är en elektrisk ström. Superjonisk is leder därför ström — men inte som en metall, där det är elektroner som far fram, utan genom att hela atomkärnor förflyttar sig. Det är ungefär skillnaden mellan strömmen i en kopparledning och strömmen i saltvattnet i ett batteri.' },
+
+      { type: 'h2', text: 'Två diamanter och en laserstråle' },
+      { type: 'p', html: 'För att nå sådana förhållanden i ett laboratorium används en diamantstädcell: två slipade diamanter som pressas mot varandra med provet emellan. Tricket ligger i att spetsarna är mikroskopiskt små. Trycket är kraften delad med arean, $p = \\dfrac{F}{A}$, så en måttlig kraft på en mycket liten yta ger ett enormt tryck. Isbrickan i det här försöket var vid de högsta trycken bara omkring 12&nbsp;µm i diameter, en sjättedel av ett hårstrås tjocklek. På den ytan svarar 200&nbsp;GPa mot en kraft på drygt 20&nbsp;N, alltså ungefär tyngden av två liter mjölk.' },
+      { type: 'p', html: 'Och 200&nbsp;GPa är mycket: nära två miljoner gånger lufttrycket vid havsytan. Provet värmdes samtidigt med laser, upp till 2&nbsp;630&nbsp;K, vilket är drygt 2&nbsp;350&nbsp;°C. För att isen inte skulle koka bort eller reagera med omgivningen låg den inkapslad mellan två skålformade bitar av bordopad diamant, som fungerade som värmeupptagare, med skikt av aluminiumoxid som isolering mot städen.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-13-het-is-under-tryck-2.jpg', alt: 'Svartvitt foto av en diamantstädcell: en rektangulär metallram med en rund, blank tryckplatta upptill som sitter på en grov gängad skruv med fjäderbrickor.', caption: 'En diamantstädcell av äldre modell. Provet kläms mellan spetsarna på två diamanter inne i ramen, och eftersom spetsytan är mikroskopisk räcker en handfast kraft för att nå tryck som annars bara finns inuti planeter. Bilden visar inte den cell som användes i studien.', credit: 'Foto: National Institute of Standards and Technology (public domain), via Wikimedia Commons' },
+      { type: 'p', html: 'Vad som händer inne i cellen syns inte med ögat. I stället lystes provet igenom med röntgenstrålning från synkrotronen, vid strållinjen ID27. Strålen hade våglängden 0,3738&nbsp;Å och var fokuserad till en fläck på 0,5&nbsp;×&nbsp;0,8&nbsp;µm. När röntgenvågorna passerar ett kristallgitter böjs de av i bestämda riktningar som bestäms av avstånden mellan atomplanen, och ur mönstret av ljusa punkter går det att räkna baklänges till hur atomerna sitter.' },
+
+      { type: 'h2', text: 'Samma täthet, olika stapling' },
+      { type: 'p', html: 'Det är där överraskningen kom. Man hade räknat med att syreatomerna i superjonisk is packar sig på det sätt som kallas ytcentrerat kubiskt. Tänk apelsiner i en låda: lägg ett lager, lägg nästa lager i groparna, och lägg sedan det tredje lagret förskjutet i sidled så att mönstret blir ABCABCABC. Men det finns ett annat sätt som är exakt lika tätt, där det tredje lagret läggs rakt ovanför det första: ABABAB. Den staplingen heter hexagonalt tätpackad.' },
+      { type: 'p', html: 'Båda fyller ut 74&nbsp;% av rymden och båda ger varje atom tolv grannar. Skillnaden ligger bara i ordningsföljden — men den räcker för att gitterets symmetri, och därmed materialets egenskaper, ska bli annorlunda. Över 200&nbsp;GPa och 1&nbsp;800&nbsp;K tog den hexagonala formen över, och vid försökets yttersta punkt, 219&nbsp;GPa och 2&nbsp;630&nbsp;K, var den kubiska formens röntgenreflexer nästan borta.' },
+      { type: 'p', html: 'Att gittret verkligen befann sig i det superjoniska tillståndet gick att läsa ur hur det utvidgade sig när det värmdes. Utvidgningen följde inte den släta kurva ett vanligt fast ämne ger, utan böjde av i en S-form som sedan tidigare är känd som ett kännetecken för övergången. Omvandlingen mellan de två packningarna sker dessutom utan att atomerna behöver byta plats med varandra: hela lager glider på en gång, som när stål härdas. Sådana förlopp kallas martensitiska, och här sträckte sig omvandlingen över ett brett område mellan 130 och 200&nbsp;GPa.' },
+
+      { type: 'h2', text: 'Därför bryr sig planetforskarna' },
+      { type: 'p', html: 'Uranus och Neptunus kallas isjättar, och det mesta av deras massa sitter i en tjock mantel av vatten, ammoniak och metan under högt tryck. Deras magnetfält är samtidigt de märkligaste i solsystemet. Jordens fält ser i grova drag ut som om en stavmagnet låg i mitten, någorlunda i linje med rotationsaxeln. Isjättarnas fält är varken det ena eller det andra: de lutar kraftigt mot rotationsaxeln, ligger inte centrerade i planeten och har en tilltrasslad form.' },
+      { type: 'p', html: 'En magnetfältsgenerator av det slag en planet har kräver att något elektriskt ledande rör sig i djupet. Just därför har superjonisk is figurerat i förklaringarna: ett skikt där protoner vandrar leder ström, men det är styvt och strömmar inte omkring som en vätska, och ett sådant lager kan begränsa fältbildningen till ett tunnare skal närmare ytan. Vilken kristallform det lagret har är inte en detalj i sammanhanget, eftersom den avgör hur lätt protonerna tar sig fram och hur materialet beter sig mekaniskt.' },
+      { type: 'p', html: 'Det ska sägas tydligt att ingen har varit där och tittat. Vad som är uppmätt är hur vatten beter sig i en mikroskopisk kammare mellan två diamanter, och forskarna skriver själva att fler försök behövs för att slå fast var i tryck- och temperaturkartan de två formerna egentligen är stabila. Men kartan över vad vatten kan vara har blivit ett fält rikare, och det är den kartan planetmodellerna vilar på.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Vatten har fler kända fasta former än något annat vanligt ämne. Ett tjugotal isformer har hittills namngetts, numrerade med romerska siffror i upptäcktsordning, och den vanliga isen i frysen är bara en av dem.',
+        'Vanlig is är ovanligt gles. Den flyter på sitt eget smältvatten, vilket nästan inga andra ämnen gör. Vid högt tryck försvinner den egenskapen helt och isen blir tätare än vattnet.',
+        'Diamant används som städ eftersom den är både hårdast av alla material och genomskinlig för röntgenstrålning. Man kan alltså trycka och titta samtidigt.',
+        'Tryck mäts i pascal, och 1&nbsp;Pa är 1&nbsp;N per kvadratmeter. Lufttrycket vid havsytan är omkring 101&nbsp;000&nbsp;Pa, och trycket i det här försöket drygt två miljoner gånger så stort.'
+      ] },
+
+      { type: 'p', html: 'Är det egentligen fortfarande is? Frågan är mest en fråga om ord. Ämnet är vatten, det har ett kristallgitter och det håller formen — men det glöder, och halva dess innehåll rinner omkring inuti det. Naturen har helt enkelt fler tillstånd att erbjuda än de tre man får lära sig att räkna med.' }
+    ],
+    simulering: {
+      href: "fysik1-tryck-pa-app.html",
+      name: "Tryck och tryckkraft",
+      text: "Ändra kraften och arean och se hur trycket följer med. Det är samma samband som gör att två diamantspetsar, små som ett dammkorn, kan nå tryck som annars bara finns inuti en planet."
+    },
+    larare: {
+      moment: [
+        { label: "Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Faser och fasövergångar", href: "katalog.html?id=fy1-6.3" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" }
+      ],
+      fragor: [
+        "Trycket är kraften delad med arean. Varför kan då en ganska liten kraft ge ett av de högsta tryck som någonsin skapats i ett laboratorium, och var i vardagen utnyttjas samma sak?",
+        "Ett ämne kan vara fast trots att det är glödhett, om trycket är tillräckligt stort. Vad säger det om vad smältpunkt egentligen betyder?",
+        "Superjonisk is leder ström genom att atomkärnor rör sig, medan en metall leder genom att elektroner rör sig. Vilka skillnader skulle du vänta dig mellan de två sätten att transportera laddning?"
+      ]
+    }
+  },
+  {
     id: "2026-09-12-vitt-utan-pigment",
     date: "2026-09-12",
     title: "Skum i stället för pigment: nu går det att trycka bländvitt utan ett enda korn färgämne",

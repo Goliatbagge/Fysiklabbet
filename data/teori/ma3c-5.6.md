@@ -76,6 +76,11 @@ för att beräkna arean mellan två kurvor, både exakt och som närmevärde.
 $y = x - 2$ då $0 \leq x \leq 2$, dels<br>
 a) med integraler&emsp;&emsp;b) med digitalt hjälpmedel.**
 
+::: handskrift
+typ: areamellankurvor
+:::
+
+::: textlosning
 **a)** $y = x^2$ är den övre funktionen och $y = x - 2$ är den undre
 funktionen i intervallet. Arean ges då av
 
@@ -100,6 +105,7 @@ $$
 
 **Svar:** $\dfrac{14}{3}\ \text{a.e.} \approx 4{,}67\ \text{a.e.}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Skärningspunkter och sammansatt area"
 **Ett område är markerat mellan kurvorna $y = x$, $y = 6 - x^2$ och
@@ -109,6 +115,11 @@ $x$-koordinat). Bestäm<br>
 a) skärningspunkternas $x$-koordinater i punkterna A och B<br>b) det
 markerade områdets area.**
 
+::: handskrift
+typ: sammansattarea
+:::
+
+::: textlosning
 **a)** Skärningspunkternas $x$-koordinater bestäms genom att sätta
 funktionerna lika med varandra och lösa ekvationen.
 
@@ -164,6 +175,7 @@ A = A_1 + A_2 = 8 + \frac{8}{3} = \frac{24}{3} + \frac{8}{3} = \frac{32}{3}\ \te
 $$
 
 **Svar:** $\dfrac{32}{3}\ \text{a.e.}$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

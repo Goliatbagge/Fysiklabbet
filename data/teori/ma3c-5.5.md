@@ -52,6 +52,11 @@ välj läge efter vilken sorts svar uppgiften efterfrågar.
 **Beräkna $\displaystyle\int_1^5 (x^2 - 4)\, dx$ med ett digitalt
 hjälpmedel. Svara<br>a) med ett närmevärde&emsp;&emsp;b) exakt.**
 
+::: handskrift
+typ: casintegral
+:::
+
+::: textlosning
 **a)** I Geogebras standardläge skriver vi "Integral" och väljer
 *Integral( Funktion, Från x-värde, Till x-värde )* i menyn *Integral*. I
 inmatningsfältet skriver vi sedan "Integral$(x^2 - 4, 1, 5)$" och får
@@ -68,10 +73,16 @@ $$
 
 **Svar:** $\dfrac{76}{3}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestämma en primitiv funktion med digitalt hjälpmedel"
 **Ange en primitiv funktion till $f(x) = x^2 - 4$.**
 
+::: handskrift
+typ: casprimitiv
+:::
+
+::: textlosning
 I Geogebras standardläge skriver vi "Integral" och väljer
 *Integral( Funktion )* i menyn *Integral*. I inmatningsfältet skriver vi
 sedan "Integral$(x^2 - 4)$" och får
@@ -82,6 +93,7 @@ $$
 
 **Svar:** $F(x) = \dfrac{1}{3}x^3 - 4x$ alternativt
 $F(x) = \dfrac{x^3}{3} - 4x$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

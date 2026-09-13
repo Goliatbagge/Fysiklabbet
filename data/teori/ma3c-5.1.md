@@ -40,6 +40,11 @@ Om vi till $f(x) = 2x$ ska ange
 ::: exempel "Exempel 1 — En och samtliga primitiva funktioner"
 **Ange för funktionen $f(x) = 3x^2$<br>a) en primitiv funktion&emsp;&emsp;b) samtliga primitiva funktioner**
 
+::: handskrift
+typ: enprimitiv
+:::
+
+::: textlosning
 **a)** Om vi deriverar $F(x) = x^3$ så får vi $f(x) = 3x^2$ enligt
 deriveringsreglerna. Alltså är $F(x) = x^3$ en primitiv funktion.
 
@@ -49,6 +54,7 @@ deriveringsreglerna. Alltså är $F(x) = x^3$ en primitiv funktion.
 $C$.
 
 **Svar:** $F(x) = x^3 + C$
+:::
 :::
 
 Ibland är det lätt att se vilken den primitiva funktionen är. Ibland är det
@@ -70,6 +76,11 @@ exponentialfunktioner med basen $e$.
 ::: exempel "Exempel 2 — Bestäm en primitiv funktion"
 **Bestäm en primitiv funktion till<br>a)&nbsp;$f(x) = 5$&emsp;&emsp;b)&nbsp;$f(x) = 14x^2 - 3$&emsp;&emsp;c)&nbsp;$f(x) = e^{4x}$**
 
+::: handskrift
+typ: bestamprimitiv
+:::
+
+::: textlosning
 **a)** Vi har en konstant funktion, så vi multiplicerar konstanten med $x$
 och får $F(x) = 5x$. (Eftersom vi bara ska ta fram en primitiv funktion och
 inte samtliga behöver vi inte lägga till konstanten $C$.)
@@ -100,10 +111,16 @@ $$
 
 **Svar:** $F(x) = \dfrac{e^{4x}}{4}$
 :::
+:::
 
 ::: exempel "Exempel 3 — Bestäm samtliga primitiva funktioner"
 **Bestäm samtliga primitiva funktioner till<br>a)&nbsp;$f(x) = 6x$&emsp;&emsp;b)&nbsp;$f(x) = 6e^{3x}$**
 
+::: handskrift
+typ: samtligaprim3c
+:::
+
+::: textlosning
 **a)** Vi har en potensfunktion ($x$ i basen) och ska då öka exponenten med
 1 och dividera med den nya exponenten. Eftersom vi ska ha samtliga
 primitiva funktioner ska vi lägga till konstanten $C$ på slutet. Vi får då
@@ -124,6 +141,7 @@ F(x) = \frac{6e^{3x}}{3} + C = 2e^{3x} + C
 $$
 
 **Svar:** $F(x) = 2e^{3x} + C$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

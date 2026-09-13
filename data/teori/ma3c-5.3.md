@@ -99,6 +99,11 @@ med arean, fast med motsatt (negativt) tecken.
 skuggade området begränsas av grafen, $x$-axeln, linjen $x = 1$ och
 linjen $x = 4$. Beskriv det skuggade områdets area med en integral.**
 
+::: handskrift
+typ: areaintegral
+:::
+
+::: textlosning
 Arean börjar vid $x = 1$ och slutar vid $x = 4$, så den undre
 integrationsgränsen är $1$ och den övre är $4$. Grafens funktion är
 $f(x) = 0{,}5x^2 + 1$, vilket är integranden. Arean ges alltså av
@@ -108,6 +113,7 @@ $$
 $$
 
 **Svar:** $\displaystyle\int_1^4 (0{,}5x^2 + 1)\, dx$
+:::
 :::
 
 ## Beräkna arean utifrån en graf
@@ -119,6 +125,11 @@ $x = 6$ bildar grafen ett skuggat område.<br>
 a) Beräkna den skuggade arean.<br>b) Beräkna
 $\displaystyle\int_2^6 (0{,}5x + 2)\, dx$ utifrån grafen.**
 
+::: handskrift
+typ: areageometriskt
+:::
+
+::: textlosning
 **a)** Vi delar in det skuggade området i en rektangel och en triangel,
 båda med basen $4$ (avståndet mellan $x = 2$ och $x = 6$). Rektangelns
 höjd ges av det lägsta funktionsvärdet, $f(2) = 0{,}5 \cdot 2 + 2 = 3$.
@@ -138,6 +149,7 @@ anges med någon enhet).
 
 **Svar:** $16$
 :::
+:::
 
 ::: exempel "Exempel 3 — En integral med negativt värde"
 **Grafen till $f(x) = 1 - x$ är ritad i ett koordinatsystem. Tillsammans
@@ -145,6 +157,11 @@ med $x$-axeln och linjen $x = 6$ bildar grafen ett skuggat område mellan
 $x = 1$ och $x = 6$. Bestäm<br>
 a) den skuggade arean&emsp;&emsp;b)&nbsp;$\displaystyle\int_1^6 (1 - x)\, dx$.**
 
+::: handskrift
+typ: negativintegral
+:::
+
+::: textlosning
 **a)** Området är en triangel. Grafen skär $x$-axeln vid $x = 1$ (då
 $f(1) = 1 - 1 = 0$), så triangelns bas sträcker sig från $x = 1$ till
 $x = 6$ och är $5$ längdenheter. Höjden ges av beloppet
@@ -163,6 +180,7 @@ integralens värde (inte en area) som efterfrågas.
 
 **Svar:** $-12{,}5$
 :::
+:::
 
 ## Avgöra tecknet på en integral
 
@@ -173,6 +191,11 @@ del $B$ ligger under $x$-axeln. Del $B$ är större än del $A$. Avgör om
 $\displaystyle\int_a^b f(x)\, dx$ är positiv eller negativ. Motivera ditt
 svar.**
 
+::: handskrift
+typ: integraltecken
+:::
+
+::: textlosning
 Arean under $x$-axeln (del $B$) bidrar med ett negativt värde till
 integralen, medan arean ovanför $x$-axeln (del $A$) bidrar med ett
 positivt värde. Eftersom del $B$ är större än del $A$ blir det negativa
@@ -180,6 +203,7 @@ bidraget större än det positiva, så integralens sammanlagda värde blir
 negativt.
 
 **Svar:** Negativ
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

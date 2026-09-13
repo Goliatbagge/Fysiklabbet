@@ -47,6 +47,11 @@ och integrering av en hastighet en sträcka.
 **Bestäm den primitiva funktionen till $f(x) = x^3 + 12x$ som uppfyller
 villkoret $F(1) = 7$.**
 
+::: handskrift
+typ: konstantenc
+:::
+
+::: textlosning
 Vi börjar med att ta fram samtliga primitiva funktioner till $f(x)$. Båda
 termerna är potenstermer ($x$ i basen), så vi tar fram primitiva funktioner
 för dem båda genom att öka exponenten med 1 och sedan dividera med den nya
@@ -88,6 +93,7 @@ $$
 
 **Svar:** $F(x) = \dfrac{x^4}{4} + 6x^2 + 0{,}75$
 :::
+:::
 
 ## Tillämpning: sträcka ur en hastighetsfunktion
 
@@ -96,6 +102,11 @@ $$
 där $t$ är tiden i sekunder från start. Hur lång sträcka rör sig bilen de
 första 10 sekunderna?**
 
+::: handskrift
+typ: strackaurhast
+:::
+
+::: textlosning
 Vi har funktionen för hastigheten $v(t)$ och ska ta reda på sträckan $s(t)$.
 Alltså ska vi **integrera** (ta fram en primitiv funktion) för att få fram
 formeln för sträckan. Detta ger
@@ -133,6 +144,7 @@ $$
 Eftersom hastigheten är angiven i meter/sekund blir sträckan i meter.
 
 **Svar:** $400$ meter
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

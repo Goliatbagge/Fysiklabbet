@@ -53,6 +53,11 @@ $$
 ::: exempel "Exempel 1 — Beräkna integraler med primitiva funktioner"
 **Beräkna integralerna med primitiva funktioner.**
 
+::: handskrift
+typ: berknaintegraler
+:::
+
+::: textlosning
 $$
 \text{a)}\ \int_1^3 2x\, dx \qquad \text{b)}\ \int_1^5 (x^2 - 4)\, dx
 $$
@@ -88,6 +93,7 @@ $$
 $$
 
 **Svar:** $\dfrac{76}{3}$
+:::
 :::
 
 ::: härledning "OBS — glöm inte parentesen"

@@ -51,6 +51,11 @@ $x$-axeln".
 är tiden i sekunder efter start. Hur långt rör sig bilen mellan $t = 5,0$ s
 och $t = 12$ s?**
 
+::: handskrift
+typ: strackaintegral
+:::
+
+::: textlosning
 Vi har en funktion för **hastigheten** och ska ta fram en **sträcka**. Vi får
 då sträckan $s$ genom att integrera (se sambandet ovan). Eftersom vi ska
 bestämma sträckan mellan $t = 5,0$ s och $t = 12$ s ska integralen starta vid
@@ -70,10 +75,16 @@ $$
 
 **Svar:** Bilen rör sig ungefär 240 m mellan $t = 5,0$ s och $t = 12$ s.
 :::
+:::
 
 ::: exempel "Exempel 2 — Tolka en integral"
 **Ett företag omsätter $K(t)$ kr/månad, där $t$ är tiden i månader. Tolka**
 
+::: handskrift
+typ: tolkaintegral
+:::
+
+::: textlosning
 $$
 \int_{0}^{12} K(t)\, dt = 3\,000\,000
 $$
@@ -94,6 +105,7 @@ mellan månad 0 och månad 12, det vill säga under det första året.
 
 **Svar:** Under de 12 första månaderna (det första året) omsätter företaget
 3 000 000 kr.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

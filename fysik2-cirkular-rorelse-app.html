@@ -128,6 +128,24 @@
             .formula-card .fnum { font-size: 16px; }
         }
 
+        /* Gränsfartsmarkering på en glidare: tunt streck med triangel i
+           accentfärg vid den fart där något avgörande händer (bilen lättar
+           från krönet, klarar loopen, tappar greppet i den snäva kurvan).
+           Ligger absolut i en wrapper runt glidaren, så layouten påverkas
+           inte. Positionen räknas på TRACKENS bredd, alltså glidarens bredd
+           minus tummens 16 px, annars glider markeringen ur läge i ändarna. */
+        .sl-wrap { position: relative; display: flex; align-items: center; flex: 1; }
+        .sl-wrap > input[type="range"] { width: 100%; }
+        .scene-toggles .st-slider .sl-wrap { flex: none; width: 100%; }
+        .sl-mark { position: absolute; top: 50%; transform: translate(-50%, -50%);
+                   display: flex; flex-direction: column; align-items: center;
+                   pointer-events: none; }
+        .sl-mark i { display: block; width: 2px; height: 16px; border-radius: 1px;
+                     background: var(--lab-accent, #c8324a); opacity: 0.9; }
+        .sl-mark b { display: block; width: 0; height: 0;
+                     border-left: 4px solid transparent; border-right: 4px solid transparent;
+                     border-top: 5px solid var(--lab-accent, #c8324a); }
+
         .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
                     flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
         .num-in { width: 52px; padding: 2px 6px; border-radius: 6px;
@@ -414,27 +432,72 @@
             return { x, y: y + dy, anchor };
         };
 
-        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+        // Markering på glidaren vid en gränsfart. Ritas inte alls när
+        // gränsen ligger utanför glidarens intervall.
+        const SliderMark = ({ value, min, max }) => {
+            if (!isFinite(value) || value < min || value > max) return null;
+            const p = (value - min) / (max - min);
+            return (
+                <span className="sl-mark" aria-hidden="true"
+                      style={{ left: `calc(8px + (100% - 16px) * ${p})` }}>
+                    <b /><i />
+                </span>
+            );
+        };
+
+        // Skjuter in en etikett som hamnat utanför viewBoxens sidkant. Bredden
+        // uppskattas ur strängens längd (~0,55 · font-size per tecken). Utan den
+        // kapades "F_N = 8 044 N" av vänsterkanten när bilen låg i dalen längst
+        // till vänster.
+        const fitX = (l, text, fontSize = 16) => {
+            const w = String(text).length * fontSize * 0.55;
+            const left = l.anchor === 'end' ? l.x - w : (l.anchor === 'middle' ? l.x - w / 2 : l.x);
+            const right = left + w;
+            let x = l.x;
+            if (left < 6) x += 6 - left;
+            else if (right > VBW - 6) x -= right - (VBW - 6);
+            return { x, y: l.y, anchor: l.anchor };
+        };
+
+        // Väljer det första av flera etikettlägen som ryms i sidled. Ger en
+        // etikett vid kanten en chans att hoppa över till pilens andra sida
+        // i stället för att klämmas in ovanpå pilen.
+        const pickX = (cands, text, fontSize = 16) => {
+            const w = String(text).length * fontSize * 0.55;
+            const fits = (l) => {
+                const left = l.anchor === 'end' ? l.x - w : (l.anchor === 'middle' ? l.x - w / 2 : l.x);
+                return left >= 6 && left + w <= VBW - 6;
+            };
+            return cands.find(fits) || fitX(cands[0], text, fontSize);
+        };
+
+        const Slider = ({ label, value, min, max, step, onChange, mark, children }) => (
             <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs flex-shrink-0" style={{ minWidth: 110, color: 'var(--lab-ink-soft)' }}
                       dangerouslySetInnerHTML={{ __html: label }} />
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))}
-                       className="flex-1 cursor-pointer" />
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))}
+                           className="cursor-pointer" />
+                    {mark != null && <SliderMark value={mark} min={min} max={max} />}
+                </span>
                 {children}
             </div>
         );
 
         // Kompakt reglage-rad för inställningsrutan uppe till höger i
         // fullskärm: etikett + sifferfält på en rad, glidaren under.
-        const StSlider = ({ label, value, min, max, step, onChange, valueNode }) => (
+        const StSlider = ({ label, value, min, max, step, onChange, valueNode, mark }) => (
             <div className="st-slider">
                 <div className="st-slider-top">
                     <span dangerouslySetInnerHTML={{ __html: label }} />
                     {valueNode}
                 </div>
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                    {mark != null && <SliderMark value={mark} min={min} max={max} />}
+                </span>
             </div>
         );
 
@@ -1005,7 +1068,7 @@
             const LF = onArc ? lenFB(FC) : (!onTrack && sp > 0.05 ? lenFB(Fmax) : 0);
             const fDir = onArc ? inward : { x: -t.x, y: -t.y };
             const fTip = { x: P.x + fDir.x * LF, y: P.y + fDir.y * LF };
-            const fl = tipLabel(fTip, onArc ? t : fDir, 14);
+            const fl0 = tipLabel(fTip, onArc ? t : fDir, 14);
             const LA = onArc ? Math.max(13, softLen(aC * 8, 170)) : 0;
             const aOff = 34;
             const aStart = { x: P.x - t.x * aOff, y: P.y - t.y * aOff };
@@ -1021,7 +1084,14 @@
                 vl = { x: mid.x - t.y * 22, y: mid.y + t.x * 22 + 5, anchor: -t.y > 0.3 ? 'start' : (-t.y < -0.3 ? 'end' : 'middle') };
             }
             const Cs = onArc ? W2S(q.seg.C) : null;
-            const rl = onArc ? tipLabel({ x: Cs.x + (P.x - Cs.x) * 0.5, y: Cs.y + (P.y - Cs.y) * 0.5 }, t, 10) : null;
+            const rl0 = onArc ? tipLabel({ x: Cs.x + (P.x - Cs.x) * 0.5, y: Cs.y + (P.y - Cs.y) * 0.5 }, t, 10) : null;
+
+            // etiketterna skjuts in innanför viewBoxens sidkanter
+            const fTxt = `Ff = ${fmtNum(onArc ? FC : Fmax)} N`;
+            const fl = fitX(fl0, fTxt, 17);
+            const rl = rl0 && fitX(rl0, `r1 = ${fmt(rNow, 1)} m`, 17);
+            vl = fitX(vl, `v = ${fmt(sp, 1)} m/s`, 17);
+            const al2 = al && fitX(al, `aC = ${fmt(aC, 1)} m/s2`, 16);
 
             const showF = show.forces && forceView === 'verkliga';
             const showFc = show.forces && forceView === 'centripetal';
@@ -1155,7 +1225,7 @@
                     {show.accel && onArc && LA > 0 && (
                         <g>
                             <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
-                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="16" fontWeight="700" fill={COL.acc}>
+                            <text x={al2.x} y={al2.y} textAnchor={al2.anchor} fontSize="16" fontWeight="700" fill={COL.acc}>
                                 <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="12">C</tspan>
                                 <tspan dy="-4"> = {fmt(aC, 1)} m/s²</tspan>
                             </text>
@@ -1289,7 +1359,7 @@
             const gTip = { x: cm.x, y: cm.y + LG };
             const gl = { x: gTip.x + 12, y: gTip.y + 16, anchor: 'start' };
             const nTip = { x: pos.x + n.x * LN, y: pos.y + n.y * LN };
-            const nl = tipLabel(nTip, { x: -h.x, y: -h.y }, 14);
+            const nlCands = [tipLabel(nTip, { x: -h.x, y: -h.y }, 14), tipLabel(nTip, h, 14)];
             const fSgn = F.Ff >= 0 ? 1 : -1;
             const fDir = { x: h.x * fSgn, y: h.y * fSgn };
             const fTip = { x: pos.x + fDir.x * LFf, y: pos.y + fDir.y * LFf };
@@ -1325,7 +1395,20 @@
             const frU = frMag > 1 ? { x: frVec.x / frMag, y: frVec.y / frMag } : { x: 0, y: 1 };
             const frLen = lenFK(frMag);
             const frTip = { x: cm.x + frU.x * frLen, y: cm.y + frU.y * frLen };
-            const frl = tipLabel(frTip, frU);
+            const frl0 = tipLabel(frTip, frU);
+
+            // alla etiketter skjuts in innanför viewBoxens sidkanter
+            const nl = pickX(nlCands, `FN = ${fmtNum(F.N)} N`);
+            const gl2 = fitX(gl, `FG = ${fmtNum(FG)} N`);
+            const fl2 = fitX(fl, `Ff = ${fmtNum(Math.abs(F.Ff))} N`);
+            const fcl2 = fcl && fitX(fcl, `FC = ${fmtNum(F.FC)} N`);
+            const al2 = al && fitX(al, `aC = ${fmt(F.aC, 1)} m/s2`, 15);
+            const vMid = { x: (vStart.x + vTip.x) / 2, y: (vStart.y + vTip.y) / 2 };
+            const vl2 = pickX([vl, { x: vMid.x - vel.y * 20, y: vMid.y + vel.x * 20 + 5,
+                                     anchor: -vel.y > 0.3 ? 'start' : (-vel.y < -0.3 ? 'end' : 'middle') }],
+                              `v = ${fmt(vmag, 1)} m/s`);
+            const frl = fitX(frl0, `FR = ${fmtNum(frMag)} N`);
+            const rl2 = rl && fitX(rl, `rk = ${fmt(onArc ? q.seg.rm : 0, 1)} m`, 17);
 
             const showF = show.forces && forceView === 'verkliga';
             const showFc = show.forces && forceView === 'centripetal';
@@ -1380,7 +1463,7 @@
                         <g>
                             <line x1={Cs.x} y1={Cs.y} x2={pos.x} y2={pos.y} stroke={COL.ink}
                                   strokeWidth="1.7" strokeDasharray="6 5" opacity="0.75" />
-                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="17" fontWeight="700" fill={COL.ink}>
+                            <text x={rl2.x} y={rl2.y} textAnchor={rl2.anchor} fontSize="17" fontWeight="700" fill={COL.ink}>
                                 <tspan fontStyle="italic">r</tspan><tspan dy="4" fontSize="13">{q.seg.kind === 'krön' ? 'k' : 'd'}</tspan>
                                 <tspan dy="-4"> = {fmt(q.seg.rm, 1)} m</tspan>
                             </text>
@@ -1419,7 +1502,7 @@
                         <g>
                             <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
                             <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
-                            <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
+                            <text x={gl2.x} y={gl2.y} textAnchor={gl2.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
                                 <tspan dy="-4"> = {fmtNum(FG)} N</tspan>
                             </text>
@@ -1437,7 +1520,7 @@
                     {showF && onTrack && Math.abs(F.Ff) > 1 && (
                         <g>
                             <Arrow x1={pos.x} y1={pos.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
-                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="16" fontWeight="700" fill={COL.frik}>
+                            <text x={fl2.x} y={fl2.y} textAnchor={fl2.anchor} fontSize="16" fontWeight="700" fill={COL.frik}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">f</tspan>
                                 <tspan dy="-4"> = {fmtNum(Math.abs(F.Ff))} N</tspan>
                             </text>
@@ -1448,7 +1531,7 @@
                     {showFc && onArc && LFC > 0.5 && (
                         <g>
                             <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} edge />
-                            <text x={fcl.x} y={fcl.y} textAnchor={fcl.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
+                            <text x={fcl2.x} y={fcl2.y} textAnchor={fcl2.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">C</tspan>
                                 <tspan dy="-4"> = {fmtNum(F.FC)} N</tspan>
                             </text>
@@ -1482,7 +1565,7 @@
                     {show.accel && onArc && LA > 0.5 && (
                         <g>
                             <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
-                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="15" fontWeight="700" fill={COL.acc}>
+                            <text x={al2.x} y={al2.y} textAnchor={al2.anchor} fontSize="15" fontWeight="700" fill={COL.acc}>
                                 <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="11">C</tspan>
                                 <tspan dy="-4"> = {fmt(F.aC, 1)} m/s²</tspan>
                             </text>
@@ -1493,7 +1576,7 @@
                     {show.vel && LV > 2 && (
                         <g>
                             <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6.5} head={18} />
-                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="16" fontWeight="700" fill={COL.fart}>
+                            <text x={vl2.x} y={vl2.y} textAnchor={vl2.anchor} fontSize="16" fontWeight="700" fill={COL.fart}>
                                 <tspan fontStyle="italic">v</tspan> = {fmt(vmag, 1)} m/s
                             </text>
                         </g>
@@ -1794,6 +1877,7 @@
             const bs = banaRef.current;
             const bq = bs.st === 'track' ? banaGeom.at(bs.s) : null;
             const FC1 = m * v * v / r1, FC2 = m * v * v / r2, Fmax = mu * m * G;
+            const vGrepp = Math.sqrt(mu * G * r2);         // högsta fart i snäva kurvan
             const bNow = bq && bq.seg.type === 'arc' ? m * v * v / bq.seg.rm : 0;
             // krön och dal
             const ks = kronRef.current;
@@ -1801,8 +1885,11 @@
             const kF = kq ? kronForces(kq, v, m) : { N: 0, Ff: 0, FC: 0, aC: 0 };
             const nTopK = m * (G - v * v / rk);            // F_N på krönets topp (< 0 = lättar)
             const nBotD = m * (G + v * v / rd);            // F_N i dalens botten
-            const vKron = Math.sqrt(G * rk);               // gränsfart på krönets topp
-            const vKant = Math.sqrt(G * rk * Math.cos(BETA)); // farten där bilen lättar i krönets början
+            const vKron = Math.sqrt(G * rk);               // gränsfart i krönets TOPP
+            // Normalkraften m(g·cos α − v²/r) är MINST där cos α är minst,
+            // alltså där krönbågen börjar (α = BETA), inte i toppen. Det är
+            // därför denna fart, inte √(g·r), som är krönets gränsfart.
+            const vKant = Math.sqrt(G * rk * Math.cos(BETA));
             const lv2 = Math.max(0, v0 * v0 - 2 * G * RL * (1 - Math.cos(ls.th)));
             const lN = ls.st === 'track' ? Math.max(0, ML * (lv2 / RL + G * Math.cos(ls.th))) : 0;
             const lvNow = ls.st === 'track' ? Math.sqrt(lv2) : Math.hypot(ls.vx, ls.vy) / PXM;
@@ -1818,7 +1905,7 @@
             miniRef.current = { setModeReset, reset, setRunning, setV, setV0 };
             const miniStatusRef = useRef({});
             miniStatusRef.current = { mode, running, FC, v, v0, vcrit: VCRIT,
-                                      FC2, Fmax, nTop: nTopK, vKron };
+                                      FC2, Fmax, nTop: nTopK, vKron, vKant, vGrepp };
             useEffect(() => {
                 if (!window.__MINI) return;
                 const onMsg = (e) => {
@@ -1938,7 +2025,7 @@
                                 ) : mode === 'bana' ? (
                                     <React.Fragment>
                                         <StSlider label="Banhastighet (<em>v</em>)" value={v} min={VMIN} max={VMAX} step={0.1}
-                                                  onChange={setV}
+                                                  onChange={setV} mark={vGrepp}
                                                   valueNode={<NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />} />
                                         <StSlider label="Massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={50}
                                                   onChange={setM}
@@ -1956,7 +2043,7 @@
                                 ) : mode === 'kron' ? (
                                     <React.Fragment>
                                         <StSlider label="Fart (<em>v</em>)" value={v} min={VMIN} max={VMAX} step={0.1}
-                                                  onChange={setV}
+                                                  onChange={setV} mark={vKant}
                                                   valueNode={<NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />} />
                                         <StSlider label="Massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={50}
                                                   onChange={setM}
@@ -1970,7 +2057,7 @@
                                     </React.Fragment>
                                 ) : (
                                     <StSlider label="Fart längst ned (<em>v</em>₀)" value={v0} min={V0MIN} max={V0MAX} step={0.1}
-                                              onChange={setV0}
+                                              onChange={setV0} mark={VCRIT}
                                               valueNode={<NumInput value={v0} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV0} />} />
                                 )}
                             </div>
@@ -2101,7 +2188,7 @@
                                         </React.Fragment>
                                     ) : mode === 'bana' ? (
                                         <React.Fragment>
-                                            <Slider label="Banhastighet <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV}>
+                                            <Slider label="Banhastighet <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV} mark={vGrepp}>
                                                 <NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />
                                             </Slider>
                                             <Slider label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={50} onChange={setM}>
@@ -2119,12 +2206,13 @@
                                             <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
                                                 Friktionen mellan däck och väg kan som mest ge <em>F</em><sub>f</sub> = <em>μ</em>&thinsp;·&thinsp;<em>m</em>&thinsp;·&thinsp;<em>g</em>.
                                                 Kräver en kurva mer än så fortsätter bilen rakt fram. Torr asfalt har
-                                                <em> μ</em> ≈ 0,8, våt väg ≈ 0,5 och is ≈ 0,1.
+                                                <em> μ</em> ≈ 0,8, våt väg ≈ 0,5 och is ≈ 0,1. Markeringen på fartglidaren
+                                                visar högsta fart i den snäva kurvan.
                                             </p>
                                         </React.Fragment>
                                     ) : mode === 'kron' ? (
                                         <React.Fragment>
-                                            <Slider label="Fart <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV}>
+                                            <Slider label="Fart <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV} mark={vKant}>
                                                 <NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />
                                             </Slider>
                                             <Slider label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={50} onChange={setM}>
@@ -2137,19 +2225,21 @@
                                                 <NumInput value={rd} min={KRMIN} max={KRMAX} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setRd} />
                                             </Slider>
                                             <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
-                                                Backarna lutar {fmt(BETA / DEG, 0)}°. Gränsfarten på krönets topp är
-                                                √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s, men bilen lättar
-                                                redan där krönet börjar, vid ≈ {fmt(vKant, 1)}&nbsp;m/s.
+                                                Backarna lutar {fmt(BETA / DEG, 0)}°, och bilen lättar redan där krönet
+                                                börjar: √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>&thinsp;·&thinsp;cos&nbsp;<em>α</em>) ≈ {fmt(vKant, 1)}&nbsp;m/s.
+                                                Det är den farten markeringen på glidaren visar. I själva toppen går
+                                                gränsen först vid √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s.
                                             </p>
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>
-                                            <Slider label="Fart längst ned <em>v</em>₀" value={v0} min={V0MIN} max={V0MAX} step={0.1} onChange={setV0}>
+                                            <Slider label="Fart längst ned <em>v</em>₀" value={v0} min={V0MIN} max={V0MAX} step={0.1} onChange={setV0} mark={VCRIT}>
                                                 <NumInput value={v0} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV0} />
                                             </Slider>
                                             <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
                                                 Loopens radie är <em>r</em> = {fmt(RL, 1)}&nbsp;m och bilens massa {fmtNum(ML)}&nbsp;kg.
-                                                Gränsfarten längst ned är √(5&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;<em>r</em>) ≈ {fmt(VCRIT, 1)}&nbsp;m/s.
+                                                Gränsfarten längst ned är √(5&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;<em>r</em>) ≈ {fmt(VCRIT, 1)}&nbsp;m/s,
+                                                och markeringen på glidaren visar den.
                                             </p>
                                         </React.Fragment>
                                     )}
@@ -2235,12 +2325,12 @@
                                                 <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>N</sub> i dalens botten</div>
                                             </div>
                                             <div>
-                                                <div style={{ color: 'var(--lab-accent)', fontWeight: 700, fontSize: 16 }}>{fmt(vKron, 1)} m/s</div>
-                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>gränsfart på krönets topp √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>)</div>
+                                                <div style={{ color: 'var(--lab-accent)', fontWeight: 700, fontSize: 16 }}>{fmt(vKant, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>gränsfart, bilen lättar där krönet börjar √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>&thinsp;·&thinsp;cos&nbsp;<em>α</em>)</div>
                                             </div>
                                             <div>
-                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(vKant, 1)} m/s</div>
-                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>farten där bilen lättar i krönets början</div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(vKron, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>gränsfart i krönets topp √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>)</div>
                                             </div>
                                         </div>
                                     ) : (
@@ -2294,12 +2384,13 @@
                                             På krönets topp pekar centrum nedåt, så <span style={{ color: COL.tyngd, fontWeight: 600 }}><em>F</em><sub>G</sub></span> −{' '}
                                             <span style={{ color: COL.norm, fontWeight: 600 }}><em>F</em><sub>N</sub></span> = <em>F</em><sub>C</sub> och
                                             <em> F</em><sub>N</sub> = <em>m</em>&thinsp;·&thinsp;<em>g</em> − <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em><sub>k</sub>.
-                                            Vid √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s blir normalkraften 0 och bilen lättar.
+                                            Där blir normalkraften 0 vid √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s.
+                                            Men vägen lutar {fmt(BETA / DEG, 0)}° där krönet börjar, och då pekar bara komposanten
+                                            <em> m</em>&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;cos&nbsp;<em>α</em> mot centrum. Normalkraften är alltså minst
+                                            just där, och bilen lättar redan vid {fmt(vKant, 1)}&nbsp;m/s. Det är krönets
+                                            gränsfart, och den markeringen sitter på fartglidaren.
                                             I dalens botten pekar centrum uppåt: <em>F</em><sub>N</sub> − <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub>, så
                                             <em> F</em><sub>N</sub> = <em>m</em>&thinsp;·&thinsp;<em>g</em> + <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em><sub>d</sub>.
-                                            Där krönet börjar lutar vägen {fmt(BETA / DEG, 0)}°, och bara komposanten
-                                            <em> m</em>&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;cos&nbsp;α pekar mot centrum. Därför lättar bilen redan
-                                            där vid {fmt(vKant, 1)}&nbsp;m/s.
                                         </p>
                                     </div>
                                 ) : (

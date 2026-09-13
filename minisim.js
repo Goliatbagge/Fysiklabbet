@@ -305,6 +305,17 @@
         '.minisim-info.ms-brod{white-space:normal;flex-basis:100%;margin-left:0;line-height:1.35;}',
         '.minisim-slider-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px;font-style:normal;}',
         '.minisim-slider-lbl{color:#aab1bf;font-size:13.5px;font-family:' + FONT + ';white-space:nowrap;}',
+        /* Gränsfartsmarkering (typ: cirkularrorelse): streck med triangel
+           vid den fart där bilen lättar, klarar loopen eller tappar
+           greppet. Positionen räknas på trackens bredd, alltså glidarens
+           bredd minus tummens 16 px. */
+        '.ms-sl-wrap{position:relative;display:flex;align-items:center;flex:1 1 120px;min-width:50px;}',
+        '.ms-sl-wrap .minisim-slider{flex:1 1 auto;width:100%;}',
+        '.ms-sl-mark{position:absolute;top:50%;transform:translate(-50%,-50%);',
+        '  display:none;flex-direction:column;align-items:center;pointer-events:none;}',
+        '.ms-sl-mark i{display:block;width:2px;height:15px;border-radius:1px;background:#c8324a;opacity:0.9;}',
+        '.ms-sl-mark b{display:block;width:0;height:0;border-left:4px solid transparent;',
+        '  border-right:4px solid transparent;border-top:5px solid #c8324a;}',
         '.minisim-slider-val{color:#dde2ec;font-size:13.5px;font-family:' + FONT + ';',
         '  font-variant-numeric:tabular-nums;white-space:nowrap;min-width:74px;text-align:right;}',
         '.minisim-slider{flex:1 1 120px;min-width:50px;appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;',
@@ -5535,13 +5546,30 @@
         slider.step = '0.1';
         var sliderVal = document.createElement('span');
         sliderVal.className = 'minisim-slider-val';
+        var sliderWrap = document.createElement('span');
+        sliderWrap.className = 'ms-sl-wrap';
+        var sliderMark = document.createElement('span');
+        sliderMark.className = 'ms-sl-mark';
+        sliderMark.setAttribute('aria-hidden', 'true');
+        sliderMark.innerHTML = '<b></b><i></i>';
+        sliderWrap.appendChild(slider);
+        sliderWrap.appendChild(sliderMark);
         sliderRow.appendChild(sliderLbl);
-        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderWrap);
         sliderRow.appendChild(sliderVal);
         card.appendChild(sliderRow);
         node.appendChild(card);
 
         function visaFart(v) { sliderVal.textContent = fmt(v, 1) + ' m/s'; }
+
+        // Markeringen sätts ut där situationens gränsfart ligger, och göms
+        // när gränsen hamnar utanför glidarens intervall.
+        function visaGrans(g) {
+            var min = parseFloat(slider.min), max = parseFloat(slider.max);
+            if (!isFinite(g) || g < min || g > max) { sliderMark.style.display = 'none'; return; }
+            sliderMark.style.display = 'flex';
+            sliderMark.style.left = 'calc(8px + (100% - 16px) * ' + ((g - min) / (max - min)) + ')';
+        }
 
         // Ställer om växlare, glidare och etikett efter situationen —
         // används både vid klick här och när läget byts inne i iframen
@@ -5573,6 +5601,7 @@
         function byt(nytt) {
             if (lage === nytt) return;
             lage = nytt;
+            sliderMark.style.display = 'none';
             running = true;
             korBtn.textContent = 'Pausa';
             visaLage();
@@ -5621,9 +5650,13 @@
                 if (st.FC2 > st.Fmax) info.style.color = '#c8324a';
             } else if (lage === 'loop' && isFinite(st.vcrit)) {
                 info.textContent = 'Gränsfart längst ned: ' + fmt(st.vcrit, 1) + ' m/s';
-            } else if (lage === 'kron' && isFinite(st.vKron)) {
-                info.textContent = 'Gränsfart på krönet: ' + fmt(st.vKron, 1) + ' m/s';
+            } else if (lage === 'kron' && isFinite(st.vKant)) {
+                // bilen lättar där krönbågen börjar, alltså under roten ur (g · r)
+                info.textContent = 'Gränsfart: bilen lättar vid ' + fmt(st.vKant, 1) + ' m/s';
             }
+            visaGrans(lage === 'bana' ? st.vGrepp
+                : lage === 'loop' ? st.vcrit
+                : lage === 'kron' ? st.vKant : NaN);
         });
     }
 

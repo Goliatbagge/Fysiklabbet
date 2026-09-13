@@ -52,6 +52,11 @@ $$
 ::: exempel "Exempel 1 — Lös ett ekvationssystem grafiskt"
 **Lös nedanstående ekvationssystem grafiskt.**
 
+::: handskrift
+typ: systemgrafiskt
+:::
+
+::: textlosning
 $$
 \begin{cases}
 y = 2x - 4 \\
@@ -80,6 +85,7 @@ y = 2
 \end{cases}
 $$
 :::
+:::
 
 ## Antalet lösningar till ett ekvationssystem
 
@@ -102,6 +108,11 @@ som ger det.
 ::: exempel "Exempel 2 — Bestäm k och m"
 **Bestäm $k$ och $m$ så att ekvationssystemet**
 
+::: handskrift
+typ: bestamkm
+:::
+
+::: textlosning
 $$
 \begin{cases}
 y = kx + m \\
@@ -121,6 +132,7 @@ $m$-värdena ska vara olika, så $m$ kan vara vad som helst utom 5, det vill sä
 $m \neq 5$.
 
 **Svar:** $k = 2$ och $m \neq 5$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

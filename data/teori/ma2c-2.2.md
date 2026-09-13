@@ -45,6 +45,11 @@ Om möjligt,
 ::: exempel "Exempel 1 — Faktorisera"
 **Faktorisera<br>a)&nbsp;$18x^2 + 45x^3 - 81x^4$&emsp;&emsp;b)&nbsp;$x^2 - 6x + 9$&emsp;&emsp;c)&nbsp;$50x^2 - 98$**
 
+::: handskrift
+typ: faktorisera2c
+:::
+
+::: textlosning
 **a)** Först undersöker vi om det går att bryta ut "som vanligt". Vi
 tittar först på alla koefficienter, alltså talen framför
 variabeltermerna. 18, 45 och 81 har 9 som största möjliga delare. Då
@@ -123,10 +128,16 @@ $$
 
 **Svar:** $2(5x + 7)(5x - 7)$
 :::
+:::
 
 ::: exempel "Exempel 2 — Förkorta ett rationellt uttryck"
 **Förkorta $\dfrac{x^2 - 9}{5x + 15}$ så långt som möjligt.**
 
+::: handskrift
+typ: forkortakonjugat
+:::
+
+::: textlosning
 Vi faktoriserar täljaren och nämnaren så långt vi kan. Täljaren är
 "kvadrat minus kvadrat" och kan därför faktoriseras med konjugatregeln.
 Nämnaren kan faktoriseras genom att bryta ut 5.
@@ -143,6 +154,7 @@ $$
 $$
 
 **Svar:** $\dfrac{x - 3}{5}$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

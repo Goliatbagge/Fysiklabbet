@@ -27,6 +27,11 @@ gör.)
 ::: exempel "Exempel 1 — Variabeln redan utlöst"
 **Lös ekvationssystemet**
 
+::: handskrift
+typ: substitutionutlost
+:::
+
+::: textlosning
 $$
 \begin{cases}
 y = 2x - 4 \\
@@ -92,10 +97,16 @@ y = 2
 \end{cases}
 $$
 :::
+:::
 
 ::: exempel "Exempel 2 — Lös ut en variabel först"
 **Lös ekvationssystemet**
 
+::: handskrift
+typ: substitutionlosut
+:::
+
+::: textlosning
 $$
 \begin{cases}
 2x - y = 7 \\
@@ -163,6 +174,7 @@ x = 4 \\
 y = 1
 \end{cases}
 $$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

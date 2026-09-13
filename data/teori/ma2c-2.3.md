@@ -30,6 +30,11 @@ Lösningen till en ekvation kallas också för **rot**.
 ::: exempel "Exempel 1 — Lös ekvationerna"
 **Lös ekvationerna<br>a)&nbsp;$x^2 - 12x = 0$&emsp;&emsp;b)&nbsp;$x^2 + 5x = 0$&emsp;&emsp;c)&nbsp;$(x - 7)(x + 3) = 0$&emsp;&emsp;d)&nbsp;$14x^2 = 21x$**
 
+::: handskrift
+typ: nollprodukt2c
+:::
+
+::: textlosning
 **a)** Vi har en ekvation med både $x^2$-termer och $x$-termer. Den är
 lika med 0. Då börjar vi med att faktorisera vänstra ledet. Vi bryter
 ut $x$:
@@ -119,10 +124,16 @@ $$
 
 **Svar:** $x_1 = 0$ och $x_2 = \dfrac{3}{2}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Konstruera en ekvation med givna rötter"
 **Ange en ekvation med rötterna $x_1 = 3$ och $x_2 = -10$.**
 
+::: handskrift
+typ: konstrueraekvation
+:::
+
+::: textlosning
 Vi ska konstruera en ekvation med rötterna (lösningarna) $x = 3$ och
 $x = -10$. Detta kan vi enkelt göra med nollproduktmetoden baklänges!
 Om vi sätter ekvationen lika med 0, så måste faktorerna $(x - 3)$ och
@@ -141,6 +152,7 @@ och $x = -10$ gör att andra faktorn blir 0 och därmed gör att hela
 vänstra ledet blir lika med 0.)
 
 **Svar:** $(x - 3)(x + 10) = 0$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

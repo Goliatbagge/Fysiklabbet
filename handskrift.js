@@ -51030,6 +51030,1527 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- hjälpare: systemklammer -------------------------
+   * Den stora klammern framför ett ekvationssystem, ritad som EN
+   * penndragning: in från toppen, ut i mitten och in mot botten.
+   * Tecknet finns inte i GLYPHS — det är för stort för en glyf. */
+  function systemKlammer(T, F, x, yTop, yBot) {
+    var ym = (yTop + yBot) / 2;
+    T.acts.push({ kind: 'stroke', pts: humanize(
+      [[x + 9, yTop], [x + 3, yTop + 9], [x + 4, ym - 10],
+       [x - 3, ym], [x + 4, ym + 10], [x + 3, yBot - 9],
+       [x + 9, yBot]]) });
+    T.pause(200);
+    return x + 16;
+  }
+
+  /* ---------------- scen: lös systemet grafiskt (ma2c-1.1 ex 1) ------
+   * Skärningspunkten mellan linjerna ÄR lösningen: där stämmer båda
+   * ekvationerna samtidigt. */
+  function layoutSystemgrafiskt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 480, ux: 36, uy: 22 });
+
+    y = 186;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('y=2x-4', xx, y);
+    T.pause(240);
+    T.str('y=-x+5', xx, y + 2.4 * F);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Varje ekvation är en rät']],
+      [['linje. Lösningen är punkten']],
+      [['där båda stämmer samtidigt,']],
+      [['alltså skärningspunkten.']]
+    ]);
+
+    G.axlar(-2.4, 6.4, -5.4, 7.4, 'x', 'y');
+    G.kurva(function (v) { return 2 * v - 4; }, -0.4, 5.6);
+    T.str('y=2x-4', G.X(5.0) - 10, G.Y(7.0), null, 0.5);
+    T.pause(220);
+    G.kurva(function (v) { return -v + 5; }, -2.2, 6.2, BLUE);
+    T.str('y=-x+5', G.X(-2.2) + 4, G.Y(6.6), BLUE, 0.5);
+    T.pause(220);
+    G.punkt(3, 2, BLUE);
+    T.str('(3, 2)', G.X(3) + 12, G.Y(2) + 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 5.4 * 22 + 3.0 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xe = T.str('x=3', xx, y);
+    T.pause(240);
+    T.str('y=2', xx, y + 2.4 * F);
+    T.underline(xx + T.adv('y=2'), y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm k och m (ma2c-1.1 ex 2) ------------
+   * Parallella linjer som aldrig möts: samma lutning, olika skärning. */
+  function layoutBestamkm(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('y=kx+m', xx, y);
+    T.pause(240);
+    T.str('y=2x+5', xx, y + 2.4 * F);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Saknas lösning betyder att']],
+      [['linjerna aldrig möts. Då måste']],
+      [['de vara parallella: samma']],
+      [['lutning.']]
+    ]);
+    y += 6.4 * F;
+    xe = T.str('k=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men de får inte vara SAMMA']],
+      [['linje, för då hade de mötts']],
+      [['överallt. Alltså olika']],
+      [['m-värden.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('m≠5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: substitution, y utlöst (ma2c-1.2 ex 1) ----- */
+  function layoutSubstitutionutlost(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('y=2x-4', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('y=-x+5', xx - T.adv('y=2x-4'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['I (1) står y ensamt. Då kan']],
+      [['jag byta ut y mot 2x-4 i (2),']],
+      [['så blir x det enda okända.']]
+    ]);
+    y += 6.0 * F;
+    xx = T.str('2x-4=-x+5', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+x', xx + 0.6 * F, '2x-4=-x+5');
+    xx = T.str('3x-4=5', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+4', xx + 0.6 * F, '3x-4=5');
+    xx = T.str('3x=9', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x=9',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=3', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x är bara halva svaret. Jag']],
+      [['sätter in det i (1) för att']],
+      [['få y.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y=2·3-4=2', padL, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('x=3', xx, y);
+    T.pause(240);
+    xe = T.str('y=2', xx, y + 2.4 * F);
+    T.underline(xe, y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: lös ut en variabel först (1.2 ex 2) -------- */
+  function layoutSubstitutionlosut(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('2x-y=7', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('x-3y=1', xx - T.adv('2x-y=7'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Ingen variabel står ensam. Jag']],
+      [['löser ut x ur (2), där den']],
+      [['varken har koefficient eller']],
+      [['minustecken.']]
+    ]);
+    y += 6.0 * F;
+    xx = T.str('x=1+3y', padL, y);
+    T.pause(260);
+    T.str('(3)', xx + 1.2 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in uttrycket i']],
+      [['den ANDRA ekvationen, (1).']],
+      [['Sätter jag in i (2) igen får']],
+      [['jag bara 0=0.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('2(1+3y)-y=7', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2+6y-y=7', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2+5y=7', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-2', xx + 0.6 * F, '2+5y=7');
+    xx = T.str('5y=5', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xx + 0.6 * F, '5y=5',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('y=1', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=1+3·1=4', padL, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('x=4', xx, y);
+    T.pause(240);
+    xe = T.str('y=1', xx, y + 2.4 * F);
+    T.underline(xe, y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- hjälpare: additionsuppställning -----------------
+   * Två ekvationer skrivna under varandra med ett plustecken framför
+   * den nedre och ett streck under, precis som när man adderar tal. */
+  function additionsblock(T, F, x0, y, rad1, rad2, summa) {
+    var w;
+    T.str(rad1, x0 + 1.15 * F, y);
+    T.pause(240);
+    T.str('+', x0, y + 2.2 * F);
+    T.str(rad2, x0 + 1.15 * F, y + 2.2 * F);
+    T.pause(240);
+    w = Math.max(T.adv(rad1), T.adv(rad2), T.adv(summa)) + 1.5 * F;
+    T.acts.push({ kind: 'stroke', pts: humanize(
+      [[x0 - 4, y + 3.0 * F], [x0 + w, y + 3.0 * F]]) });
+    T.pause(240);
+    T.str(summa, x0 + 1.15 * F, y + 4.4 * F);
+    return y + 4.4 * F;
+  }
+
+  /* ---------------- scen: additionsmetoden direkt (ma2c-1.3 ex 1) ----
+   * Termerna +5y och -5y tar ut varandra när ekvationerna adderas
+   * ledvis. */
+  function layoutAdditionsmetoden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('-2x+5y=6', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('4x-5y=12', xx - T.adv('-2x+5y=6'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Båda ekvationerna har termen']],
+      [['5y, men med olika tecken.']],
+      [['Adderar jag dem ledvis tar de']],
+      [['ut varandra.']]
+    ]);
+    y += 6.4 * F;
+    y = additionsblock(T, F, padL + 20, y, '-2x+5y=6', '4x-5y=12', '2x=18');
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', padL + 300, '2x=18',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=9', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in x=9 i någon']],
+      [['av de ursprungliga']],
+      [['ekvationerna, till exempel (1).']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('-2·9+5y=6', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('-18+5y=6', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+18', xx + 0.6 * F, '-18+5y=6');
+    xx = T.str('5y=24', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xx + 0.6 * F, '5y=24',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('y=4,8', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('x=9', xx, y);
+    T.pause(240);
+    xe = T.str('y=4,8', xx, y + 2.4 * F);
+    T.underline(xe, y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: multiplicera en ekvation (1.3 ex 2) --------
+   * Termerna stämmer inte direkt, men en multiplikation av den ena
+   * ekvationen gör dem motsatta. */
+  function layoutMultiplicerasystem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('5x+4y=30', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('2x-8y=-12', xx - T.adv('5x+4y=30'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['+4y och -8y tar inte ut']],
+      [['varandra. Men gångrar jag (1)']],
+      [['med 2 blir termen +8y, och då']],
+      [['gör de det.']]
+    ]);
+    y += 6.4 * F;
+    T.str('(1)·2:', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('10x+8y=60', padL + 100, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    y = additionsblock(T, F, padL + 20, y, '10x+8y=60', '2x-8y=-12', '12x=48');
+    T.stepEnd();
+
+    y = ekvOp(y, '/12', padL + 320, '12x=48',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=4', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('5·4+4y=30', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('20+4y=30', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-20', xx + 0.6 * F, '20+4y=30');
+    xx = T.str('4y=10', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/4', xx + 0.6 * F, '4y=10',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('y=2,5', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('x=4', xx, y);
+    T.pause(240);
+    xe = T.str('y=2,5', xx, y + 2.4 * F);
+    T.underline(xe, y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: multiplicera båda (ma2c-1.3 ex 3) ---------
+   * Ingen enskild multiplikation räcker; varje ekvation gångras med den
+   * andras koefficient, den ena med ombytt tecken. */
+  function layoutMultbadasystem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('2x+7y=8', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('5x+9y=3', xx - T.adv('2x+7y=8'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Ingen ekvation går att gångra']],
+      [['ensam till en motsatt term.']],
+      [['Då gångrar jag varje ekvation']],
+      [['med den andras koefficient.']]
+    ]);
+    y += 6.4 * F;
+    T.str('(1)·5:', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('10x+35y=40', padL + 100, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('(2)·(-2):', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('-10x-18y=-6', padL + 130, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    y = additionsblock(T, F, padL + 20, y, '10x+35y=40', '-10x-18y=-6',
+                       '17y=34');
+    T.stepEnd();
+
+    y = ekvOp(y, '/17', padL + 340, '17y=34',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('y=2', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('2x+7·2=8', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2x+14=8', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-14', xx + 0.6 * F, '2x+14=8');
+    xx = T.str('2x=-6', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2x=-6',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=-3', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('x=-3', xx, y);
+    T.pause(240);
+    xe = T.str('y=2', xx, y + 2.4 * F);
+    T.underline(xe, y + 2.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.4 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: kor och höns (ma2c-1.4 ex 1) --------------
+   * Att teckna systemet ur texten är hela uppgiften; sedan är det
+   * vanlig substitution. */
+  function layoutKorochhons(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('k=antal kor', padL, y, null, 0.8);
+    T.pause(260);
+    T.str('h=antal höns', padL + 240, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje djur har ett huvud, så']],
+      [['antalet huvuden är k+h. Kor har']],
+      [['fyra ben och höns två.']]
+    ]);
+    y += 4.8 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('k+h=100', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('4k+2h=352', xx - T.adv('k+h=100'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['I (1) är det lätt att lösa ut']],
+      [['h, så jag använder']],
+      [['substitutionsmetoden.']]
+    ]);
+    y += 6.0 * F;
+    xx = T.str('h=100-k', padL, y);
+    T.pause(260);
+    T.str('(3)', xx + 1.2 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('4k+2(100-k)=352', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('4k+200-2k=352', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2k+200=352', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-200', xx + 0.6 * F, '2k+200=352');
+    xx = T.str('2k=152', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2k=152',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('k=76', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('h=100-76=24', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 76+24=100 huvuden,']],
+      [['och 4·76+2·24=304+48=352 ben.']],
+      [['Det stämmer.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: 76 kor och 24 höns', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: summa och differens (ma2c-1.4 ex 2) ------- */
+  function layoutSummadifferens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('x+y=19', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('x-y=5', xx - T.adv('x+y=19'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Summan står i (1) och']],
+      [['differensen i (2). Termerna +y']],
+      [['och -y tar ut varandra vid']],
+      [['addition.']]
+    ]);
+    y += 6.4 * F;
+    y = additionsblock(T, F, padL + 20, y, 'x+y=19', 'x-y=5', '2x=24');
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', padL + 280, '2x=24',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=12', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('12+y=19 ⟹ y=7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 12+7=19 och']],
+      [['12-7=5. Stämmer.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('Svar: talen är 12 och 7', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: kvadreringsreglerna (ma2c-2.1 ex 1) -------
+   * Mittentermen är den DUBBLA produkten — det är den som glöms bort. */
+  function layoutKvadreringsregler(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Första kvadreringsregeln', padL, y - 1.5 * F, null, 0.62);
+    T.pause(220);
+    T.str('(a+b)^2=a^2+2ab+b^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Med a=x och b=4. Mittentermen']],
+      [['är den DUBBLA produkten:']],
+      [['x gånger 4 är 4x, dubblat 8x.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('a) (x+4)^2=x^2+2·x·4+4^2', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=x^2+8x+16', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andra kvadreringsregeln har']],
+      [['minus i mitten, men den sista']],
+      [['termen är ändå positiv:']],
+      [['minus gånger minus.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) (7-b)^2=', padL, y);
+    xe = T.str('49-14b+b^2', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) är HELA termerna 3y och']],
+      [['4x som ska kvadreras, alltså']],
+      [['även 3:an och 4:an.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('c) (3y-4x)^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=9y^2-24xy+16x^2', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: konjugatregeln (ma2c-2.1 ex 2) ------------
+   * Samma termer, olika tecken: mittentermerna tar ut varandra. */
+  function layoutKonjugatregeln(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Konjugatregeln', padL, y - 1.5 * F, null, 0.62);
+    T.pause(220);
+    T.str('(a+b)(a-b)=a^2-b^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma termer i båda']],
+      [['parenteserna, bara olika']],
+      [['tecken. Då tar mittentermerna']],
+      [['ut varandra.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('a) (x+8)(x-8)=', padL, y);
+    xe = T.str('x^2-64', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Även 3:an och 5:an ska']],
+      [['kvadreras: 3x i kvadrat är']],
+      [['9x^2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) (3x-5y)(3x+5y)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=9x^2-25y^2', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) står termerna i olika']],
+      [['ordning. Men i den första']],
+      [['parentesen är det plus, och då']],
+      [['får de byta plats.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('c) (9+2x)(2x-9)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=(2x+9)(2x-9)', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=4x^2-81', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorisera (ma2c-2.2 ex 1) ---------------
+   * Först bryta ut, sedan pröva kvadrerings- och konjugatregeln
+   * baklänges. */
+  function layoutFaktorisera2c(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) 18x^2+45x^3-81x^4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först: går något att bryta ut?']],
+      [['9 delar alla tre talen, och']],
+      [['den lägsta x-potensen är x^2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=9x^2(', padL + 20, y);
+    T.stepEnd();
+
+    xx = T.str('2+5x', xx, y);
+    T.stepEnd();
+
+    xe = T.str('-9x^2)', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Går parentesen att faktorisera']],
+      [['mer? Nej: första termen 2 är']],
+      [['ingen kvadrat.']]
+    ]);
+
+    /* ---- b) ---- */
+    y += 4.8 * F;
+    T.str('b) x^2-6x+9', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre termer, och både första och']],
+      [['sista är kvadrater. Det luktar']],
+      [['kvadreringsregel baklänges.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x^2-6x+9=(', padL, y);
+    T.pause(300);
+    xx = T.str('x', xx, y);
+    T.pause(260);
+    xx = T.str('-3', xx, y);
+    T.pause(260);
+    xe = T.str(')^2', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll av mittentermen:']],
+      [['2·x·3 är 6x, och tecknet är']],
+      [['minus. Stämmer.']]
+    ]);
+
+    /* ---- c) ---- */
+    y += 4.8 * F;
+    T.str('c) 50x^2-98', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här går 2 att bryta ut först.']],
+      [['Då blir resten kvadrat minus']],
+      [['kvadrat, alltså ett konjugat.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=2(25x^2-49)', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=2(5x+7)', padL + 20, y);
+    T.pause(300);
+    xe = T.str('(5x-7)', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förkorta med faktorisering (2.2 ex 2) ----- */
+  function layoutForkortakonjugat(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('Förkorta: ', padL, y);
+    T.fracH('x^2-9', '5x+15', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bara FAKTORER får förkortas, så']],
+      [['täljare och nämnare måste bli']],
+      [['produkter först.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('(x+3)(x-3)', '5(x+3)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren är kvadrat minus']],
+      [['kvadrat, alltså konjugatregeln']],
+      [['baklänges. I nämnaren bryts 5']],
+      [['ut.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('x-3', '5', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: nollproduktmetoden (ma2c-2.3 ex 1) --------
+   * Saknas konstantterm går x att bryta ut, och då räcker
+   * nollproduktmetoden — ingen pq-formel behövs. */
+  function layoutNollprodukt2c(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('a) x^2-12x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ingen konstantterm, så x finns']],
+      [['i båda termerna och kan brytas']],
+      [['ut. Då blir ledet en produkt.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x(', padL + 20, y);
+    T.stepEnd();
+
+    xx = T.str('x', xx, y);
+    T.stepEnd();
+
+    xx = T.str('-12)', xx, y);
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt är noll bara om']],
+      [['någon faktor är noll. Det ger']],
+      [['två lösningar.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('x_1=0', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x-12=0 ⟹ x_2=12', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    T.str('b) x^2+5x=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x(x+5)=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x_1=0', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=-5', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) är ledet redan en']],
+      [['produkt. Då är det bara att']],
+      [['sätta varje parentes lika med']],
+      [['noll.']]
+    ]);
+    y += 4.8 * F;
+    T.str('c) (x-7)(x+3)=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x_1=7', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=-3', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    tanke(y, [
+      [['I d) står termerna på var sin']],
+      [['sida. Först måste ena ledet']],
+      [['bli noll.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('d) 14x^2=21x', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-21x', xx + 0.6 * F, '14x^2=21x');
+    xx = T.str('14x^2-21x=0', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['7 delar både 14 och 21, och']],
+      [['båda termerna har ett x. Bryt']],
+      [['ut största möjliga faktor: 7x.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('7x(2x-3)=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x_1=0', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xx = T.str('2x-3=0 ⟹ x_2=', padL + 190, y);
+    xe = T.fracH('3', '2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: konstruera en ekvation (ma2c-2.3 ex 2) ----
+   * Nollproduktmetoden baklänges: rötterna med ombytt tecken hamnar i
+   * parenteserna. */
+  function layoutKonstrueraekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Rötter: x_1=3 och x_2=-10', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nollproduktmetoden baklänges:']],
+      [['varje rot ska göra sin parentes']],
+      [['lika med noll. Alltså byter']],
+      [['tecknen plats.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('(x-3)(x+10)=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: x=3 ger första']],
+      [['parentesen 0, och x=-10 ger den']],
+      [['andra 0. Båda stämmer.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: (x-3)(x+10)=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: pq-formeln (ma2c-2.4 ex 1) ----------------
+   * Tre varianter: direkt, efter division med koefficienten, och efter
+   * att ena ledet gjorts till noll. */
+  function layoutPqformeln2c(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('a) x^2+6x-7=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['p är talet framför x och q den']],
+      [['fristående termen. Här p=6 och']],
+      [['q=-7.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=-3±', padL, y);
+    xx = T.rot('3^2+7', xx, y);
+    xx = T.str('=-3±', xx, y);
+    T.rot('16', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=-3±4', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=-7', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=1', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['pq-formeln kräver att x^2 står']],
+      [['ensamt. I b) delar jag därför']],
+      [['hela ekvationen med 3 först.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) 3x^2-15x+18=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-15x+18=0',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x^2-5x+6=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('x=2,5±', padL, y);
+    xx = T.rot('2,5^2-6', xx, y);
+    xx = T.str('=2,5±', xx, y);
+    T.rot('0,25', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=2,5±0,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=2', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=3', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) måste ena ledet bli noll']],
+      [['innan formeln får användas.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) x^2=39-10x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2+10x-39=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=-5±', padL, y);
+    xx = T.rot('5^2+39', xx, y);
+    xx = T.str('=-5±', xx, y);
+    T.rot('64', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=-5±8', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=-13', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=3', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: abc-formeln (ma2c-2.5 ex 1) --------------- */
+  function layoutAbcformeln(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    T.str('2x^2-8x+6=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['abc-formeln behöver ingen']],
+      [['division först: koefficienten']],
+      [['framför x^2 får vara kvar.']]
+    ]);
+    y += 4.8 * F;
+    T.str('a=2, b=-8, c=6', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('x=-', padL, y);
+    xx = T.fracH('b', '2a', xx, y);
+    xx = T.str('±', xx, y);
+    T.fracH('√(b^2-4ac)', '2a', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('8', '4', xx, y);
+    xx = T.str('±', xx, y);
+    T.fracH('√(64-48)', '4', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=2±', padL + 40, y);
+    xx = T.fracH('√16', '4', xx, y);
+    xx = T.str('=2±', xx, y);
+    T.fracH('4', '4', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=2±1', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=1', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=3', padL + 190, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: antalet lösningar (ma2c-2.6 ex 1) ---------
+   * Diskriminanten — talet under rottecknet — avgör hur många
+   * lösningar ekvationen har. */
+  function layoutDiskriminanten(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) x^2+12x-13=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag behöver inte räkna klart.']],
+      [['Det är talet under rottecknet']],
+      [['som avgör antalet lösningar.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=-6±', padL, y);
+    xx = T.rot('6^2+13', xx, y);
+    xx = T.str('=-6±', xx, y);
+    T.rot('49', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('49>0 ⟹ två lösningar', padL + 20, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    T.str('b) x^2+5x+8=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x=-2,5±', padL, y);
+    xx = T.rot('2,5^2-8', xx, y);
+    xx = T.str('=-2,5±', xx, y);
+    T.rot('-1,75', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur ett negativt tal']],
+      [['finns inte bland de reella']],
+      [['talen. Ekvationen saknar']],
+      [['lösningar.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('-1,75<0 ⟹ saknar lösning', padL + 20, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: dubbelrot (ma2c-2.6 ex 2) ----------------
+   * Exakt en lösning betyder att diskriminanten är noll. */
+  function layoutDubbelrot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('x^2-8x+a=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En enda lösning betyder att']],
+      [['plus och minus ger samma svar,']],
+      [['alltså att roten är noll.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=4±', padL, y);
+    T.rot('4^2-a', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('4^2-a=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('16-a=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+a', xx + 0.6 * F, '16-a=0');
+    xe = T.str('a=16', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: differens och produkt (ma2c-2.7 ex 1) -----
+   * Ett ekvationssystem som leder till en andragradsekvation. Den
+   * negativa roten förkastas eftersom talen ska vara positiva. */
+  function layoutDifferensprodukt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    T.str('x=mindre talet', padL, y, null, 0.8);
+    T.pause(260);
+    T.str('y=större talet', padL + 260, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    xx = T.str('y-x=21', xx, y);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    xx = T.str('x·y=1 080', xx - T.adv('y-x=21'), y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Jag löser ut y ur (1) och']],
+      [['sätter in i (2). Då blir det']],
+      [['en ekvation med bara x.']]
+    ]);
+    y += 6.0 * F;
+    xx = T.str('y=21+x', padL, y);
+    T.pause(260);
+    T.str('(3)', xx + 1.2 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x(21+x)=1 080', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2+21x-1 080=0', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=-10,5±', padL, y);
+    xx = T.rot('10,5^2+1 080', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=-10,5±', padL + 40, y);
+    T.rot('1 190,25', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=-10,5±34,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x_1=-45', padL + 20, y);
+    T.pause(300);
+    T.str('x_2=24', padL + 200, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talen skulle vara positiva, så']],
+      [['-45 förkastas. Kvar blir 24.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('y=21+24=45', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 45-24=21 och']],
+      [['24·45=1 080. Stämmer.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('Svar: talen är 24 och 45', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rektangelns omkrets (ma2c-2.7 ex 2) ------- */
+  function layoutRektangelomkrets(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* figuren: rektangeln med sidorna x och x-18 */
+    var x0 = padL + 70, x1 = padL + 330, yT = 180, yB = 290;
+    T.line([x0, yT], [x1, yT]); T.line([x1, yT], [x1, yB]);
+    T.line([x1, yB], [x0, yB]); T.line([x0, yB], [x0, yT]);
+    T.pause(200);
+    T.str('x', (x0 + x1) / 2 - 6, yB + 0.95 * F, BLUE, 0.62);
+    T.str('x-18', x1 + 10, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('A=1 215 cm^2', x0 + 60, (yT + yB) / 2 + 0.2 * F, null, 0.62);
+    T.stepEnd();
+
+    y = 350;
+    xx = T.str('O=x+x+(x-18)+(x-18)', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('O=4x-36', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Omkretsen kräver x, och x får']],
+      [['jag ur arean: bas gånger höjd.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('x(x-18)=1 215', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2-18x-1 215=0', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=9±', padL, y);
+    xx = T.rot('9^2+1 215', xx, y);
+    xx = T.str('=9±', xx, y);
+    T.rot('1 296', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=9±36', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x_1=-27', padL + 20, y);
+    T.pause(300);
+    T.str('x_2=45', padL + 200, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En sträcka kan inte vara']],
+      [['negativ, så -27 förkastas.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('O=4·45-36=144', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 144 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rotekvationer (ma2c-2.8 ex 1) ------------
+   * Kvadrering kan skapa falska rötter, så kontrollen är obligatorisk. */
+  function layoutRotekvationer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) ', padL, y);
+    xx = T.rot('x', xx, y);
+    T.str('=8', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvadrering tar bort rottecknet.']],
+      [['Det man gör i ena ledet måste']],
+      [['göras i det andra.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=64', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('Kontroll: ', padL + 20, y, null, 0.7);
+    xx = T.rot('64', xx, y);
+    xe = T.str('=8, stämmer', xx, y, null, 0.7);
+    T.underline(padL + 20 + T.adv('x=64'), y - 2.8 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.rot('x+2', xx, y);
+    T.str('=17', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x+2=289', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=287', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) står roten mitt i']],
+      [['uttrycket. Först måste den']],
+      [['stå ensam i ena ledet.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('c) x+3', padL, y);
+    xx = T.rot('x', xx, y);
+    T.str('-4=0', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('3', padL + 20, y);
+    xx = T.rot('x', xx, y);
+    T.str('=4-x', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('9x=16-8x+x^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2-17x+16=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=8,5±', padL, y);
+    xx = T.rot('8,5^2-16', xx, y);
+    xx = T.str('=8,5±', xx, y);
+    T.rot('56,25', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=8,5±7,5 ⟹ x=1 eller 16', padL + 20, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvadrering kan skapa FALSKA']],
+      [['rötter. Därför måste båda']],
+      [['prövas i den ursprungliga']],
+      [['ekvationen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=1: 1+3-4=0, stämmer', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x=16: 16+12-4=24, falsk rot', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: variabelsubstitution (ma2c-2.8 ex 2) ------
+   * Med t = √x blir ekvationen en vanlig andragradsekvation. */
+  function layoutVariabelsubst(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('x+3', padL, y);
+    xx = T.rot('x', xx, y);
+    T.str('-4=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sätter jag t lika med roten ur']],
+      [['x blir x själv lika med t^2,']],
+      [['och ekvationen en vanlig']],
+      [['andragradsekvation.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.rot('x', padL, y);
+    T.str('=t ⟹ x=t^2', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('t^2+3t-4=0', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('t=-1,5±', padL, y);
+    xx = T.rot('1,5^2+4', xx, y);
+    xx = T.str('=-1,5±', xx, y);
+    T.rot('6,25', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=-1,5±2,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('t_1=-4', padL + 20, y);
+    T.pause(300);
+    T.str('t_2=1', padL + 200, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men t var roten ur x, och en']],
+      [['kvadratrot kan aldrig bli']],
+      [['negativ. Alltså faller t=-4.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.rot('x', padL, y);
+    T.str('=1 ⟹ x=1', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -51539,7 +53060,30 @@
                    sinussatsenvinkel: layoutSinussatsenvinkel,
                    cosinussatsensida: layoutCosinussatsensida,
                    cosinussatsenvinklar: layoutCosinussatsenvinklar,
-                   flaggstangkulle: layoutFlaggstangkulle };
+                   flaggstangkulle: layoutFlaggstangkulle,
+                   systemgrafiskt: layoutSystemgrafiskt,
+                   bestamkm: layoutBestamkm,
+                   substitutionutlost: layoutSubstitutionutlost,
+                   substitutionlosut: layoutSubstitutionlosut,
+                   additionsmetoden: layoutAdditionsmetoden,
+                   multiplicerasystem: layoutMultiplicerasystem,
+                   multbadasystem: layoutMultbadasystem,
+                   korochhons: layoutKorochhons,
+                   summadifferens: layoutSummadifferens,
+                   kvadreringsregler: layoutKvadreringsregler,
+                   konjugatregeln: layoutKonjugatregeln,
+                   faktorisera2c: layoutFaktorisera2c,
+                   forkortakonjugat: layoutForkortakonjugat,
+                   nollprodukt2c: layoutNollprodukt2c,
+                   konstrueraekvation: layoutKonstrueraekvation,
+                   pqformeln2c: layoutPqformeln2c,
+                   abcformeln: layoutAbcformeln,
+                   diskriminanten: layoutDiskriminanten,
+                   dubbelrot: layoutDubbelrot,
+                   differensprodukt: layoutDifferensprodukt,
+                   rektangelomkrets: layoutRektangelomkrets,
+                   rotekvationer: layoutRotekvationer,
+                   variabelsubst: layoutVariabelsubst };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

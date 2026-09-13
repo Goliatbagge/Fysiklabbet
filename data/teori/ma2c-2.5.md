@@ -68,6 +68,11 @@ v.s.b.
 ::: exempel "Exempel 1 — Lös med *abc*-formeln"
 **Lös ekvationen $2x^2 - 8x + 6 = 0$ med *abc*-formeln.**
 
+::: handskrift
+typ: abcformeln
+:::
+
+::: textlosning
 Vi ställer upp *abc*-formeln:
 
 $$
@@ -100,6 +105,7 @@ x_2 = 2 + 1 = 3
 $$
 
 **Svar:** $x_1 = 1$ och $x_2 = 3$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -74,6 +74,11 @@ framför $x^2$-termen.
 ::: exempel "Exempel 1 — Lös ekvationerna"
 **Lös ekvationerna<br>a)&nbsp;$x^2 + 6x - 7 = 0$&emsp;&emsp;b)&nbsp;$3x^2 - 15x + 18 = 0$&emsp;&emsp;c)&nbsp;$x^2 = 39 - 10x$**
 
+::: handskrift
+typ: pqformeln2c
+:::
+
+::: textlosning
 **a)** Vi identifierar $p$ och $q$: $p = 6$ och $q = -7$.
 
 Insättning av dessa i *pq*-formeln ger
@@ -152,6 +157,7 @@ x_2 = -5 + 8 = 3
 $$
 
 **Svar:** $x_1 = -13$ och $x_2 = 3$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

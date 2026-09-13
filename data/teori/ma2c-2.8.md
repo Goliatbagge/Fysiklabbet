@@ -30,6 +30,11 @@ En ekvation där variabeln, till exempel $x$, är under ett rottecken kallas
 ::: exempel "Exempel 1 — Lös rotekvationerna"
 **Lös<br>a)&nbsp;$\sqrt{x} = 8$&emsp;&emsp;b)&nbsp;$\sqrt{x + 2} = 17$&emsp;&emsp;c)&nbsp;$x + 3\sqrt{x} - 4 = 0$**
 
+::: handskrift
+typ: rotekvationer
+:::
+
+::: textlosning
 **a)** Vi kvadrerar båda led och löser ekvationen:
 
 $$
@@ -121,10 +126,16 @@ Stämmer inte! **Falsk rot!**
 
 **Svar:** $x = 1$
 :::
+:::
 
 ::: exempel "Exempel 2 — Alternativ lösning med variabelsubstitution"
 **Lös $x + 3\sqrt{x} - 4 = 0$ med variabelsubstitution.**
 
+::: handskrift
+typ: variabelsubst
+:::
+
+::: textlosning
 Sätt $\sqrt{x} = t$. Detta ger
 $x = \sqrt{x} \cdot \sqrt{x} = t \cdot t = t^2$ och den nya ekvationen
 
@@ -164,6 +175,7 @@ $$
 lösningen — $x = 16$ visar sig vara en falsk rot.)
 
 **Svar:** $x = 1$
+:::
 :::
 
 ::: kuriosa "Varför uppstår falska rötter?"

@@ -24,6 +24,11 @@ kallas **additionsmetoden**.
 ::: exempel "Exempel 1 — Addera direkt"
 **Lös ekvationssystemet**
 
+::: handskrift
+typ: additionsmetoden
+:::
+
+::: textlosning
 $$
 \begin{cases}
 -2x + 5y = 6 \\
@@ -87,10 +92,16 @@ y = 4{,}8
 \end{cases}
 $$
 :::
+:::
 
 ::: exempel "Exempel 2 — Multiplicera ena ekvationen först"
 **Lös ekvationssystemet**
 
+::: handskrift
+typ: multiplicerasystem
+:::
+
+::: textlosning
 $$
 \begin{cases}
 5x + 4y = 30 \\
@@ -168,10 +179,16 @@ y = 2{,}5
 \end{cases}
 $$
 :::
+:::
 
 ::: exempel "Exempel 3 — Multiplicera båda ekvationerna"
 **Lös ekvationssystemet**
 
+::: handskrift
+typ: multbadasystem
+:::
+
+::: textlosning
 $$
 \begin{cases}
 2x + 7y = 8 \\
@@ -248,6 +265,7 @@ x = -3 \\
 y = 2
 \end{cases}
 $$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

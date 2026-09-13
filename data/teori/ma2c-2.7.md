@@ -26,6 +26,11 @@ talen?**
 
 **1. Vi inför och definierar variabler.**
 
+::: handskrift
+typ: differensprodukt
+:::
+
+::: textlosning
 - $x$ = det mindre talet
 - $y$ = det större talet
 
@@ -90,11 +95,17 @@ Kontroll: $45 - 24 = 21$ och $24 \cdot 45 = 1\,080$. Stämmer!
 
 **Svar:** Talen är 24 och 45.
 :::
+:::
 
 ::: exempel "Exempel 2 — Rektangelns omkrets"
 **En rektangel har arean $1\,215\ \mathrm{cm}^2$. Den ena sidan är 18 cm kortare
 än den andra. Vilken är rektangelns omkrets?**
 
+::: handskrift
+typ: rektangelomkrets
+:::
+
+::: textlosning
 **1. Vi ritar figur och inför variabler.** Sidorna blir $x$ cm
 respektive $(x - 18)$ cm.
 
@@ -150,6 +161,7 @@ O = 4 \cdot 45 - 36 = 180 - 36 = 144\ \mathrm{cm}
 $$
 
 **Svar:** 144 cm
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -49,6 +49,11 @@ v.s.b.
 ::: exempel "Exempel 1 — Utveckla med kvadreringsreglerna"
 **Utveckla<br>a)&nbsp;$(x + 4)^2$&emsp;&emsp;b)&nbsp;$(7 - b)^2$&emsp;&emsp;c)&nbsp;$(3y - 4x)^2$**
 
+::: handskrift
+typ: kvadreringsregler
+:::
+
+::: textlosning
 **a)** Första kvadreringsregeln med $a = x$ och $b = 4$:
 
 $$
@@ -79,10 +84,16 @@ $$
 
 **Svar:** $9y^2 - 24xy + 16x^2$
 :::
+:::
 
 ::: exempel "Exempel 2 — Utveckla med konjugatregeln"
 **Utveckla<br>a)&nbsp;$(x + 8)(x - 8)$&emsp;&emsp;b)&nbsp;$(3x - 5y)(3x + 5y)$&emsp;&emsp;c)&nbsp;$(9 + 2x)(2x - 9)$**
 
+::: handskrift
+typ: konjugatregeln
+:::
+
+::: textlosning
 **a)** Vi ser att innehållet i parenteserna är lika och att det enda som
 skiljer är tecknet mellan termerna (plus i ena och minus i andra).
 Alltså tillämpar vi konjugatregeln.
@@ -118,6 +129,7 @@ $$
 $$
 
 **Svar:** $4x^2 - 81$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

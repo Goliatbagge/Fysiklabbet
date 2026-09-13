@@ -22,6 +22,11 @@ ekvationssystem.
 **En bonde har kor och höns. Totalt har djuren 100 huvuden och 352 ben.
 Hur många kor respektive höns har bonden?**
 
+::: handskrift
+typ: korochhons
+:::
+
+::: textlosning
 Vi börjar med att definiera våra variabler:
 
 - $k$ = antalet kor
@@ -85,10 +90,16 @@ $$
 
 **Svar:** Bonden har 76 kor och 24 höns.
 :::
+:::
 
 ::: exempel "Exempel 2 — Summa och differens"
 **Två tal har summan 19 och differensen 5. Vilka är talen?**
 
+::: handskrift
+typ: summadifferens
+:::
+
+::: textlosning
 Vi kallar det största talet $x$ och det minsta talet $y$. Då gäller
 
 $$
@@ -135,6 +146,7 @@ y = 7
 $$
 
 **Svar:** Talen är 12 och 7.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

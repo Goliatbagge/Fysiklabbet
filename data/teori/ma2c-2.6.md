@@ -60,6 +60,11 @@ Vi sammanfattar undersökningen:
 ::: exempel "Exempel 1 — Ange antalet lösningar"
 **Ange antalet lösningar till<br>a)&nbsp;$x^2 + 12x - 13 = 0$&emsp;&emsp;b)&nbsp;$x^2 + 5x + 8 = 0$**
 
+::: handskrift
+typ: diskriminanten
+:::
+
+::: textlosning
 **a)** *pq*-formeln ger
 
 $$
@@ -81,11 +86,17 @@ Diskriminanten är **negativ**. Alltså **saknar** ekvationen lösningar.
 
 **Svar:** 0
 :::
+:::
 
 ::: exempel "Exempel 2 — Dubbelrot"
 **För vilka värden på $a$ gäller att ekvationen $x^2 - 8x + a = 0$ har
 en enda lösning (en så kallad dubbelrot)?**
 
+::: handskrift
+typ: dubbelrot
+:::
+
+::: textlosning
 För att ekvationen ska ha en enda lösning ska diskriminanten vara lika
 med 0. Vi påbörjar en lösning med *pq*-formeln:
 
@@ -110,6 +121,7 @@ $$
 Vi får alltså en enda lösning när $a = 16$.
 
 **Svar:** $a = 16$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

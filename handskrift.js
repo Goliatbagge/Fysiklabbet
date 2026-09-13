@@ -37995,6 +37995,1910 @@
   /* Scenregistret ligger på modulnivå (inte inne i mount) så att
    * granskningsskripten kan nå det utan webbläsare — se HANDSKRIFT.scen
    * längst ned och .claude/verify-handskrift.js. */
+  /* ---------------- scen: bestäm en sida med sinus (ma4-1.1 ex 1) -----
+   * Rätvinklig triangel med den räta vinkeln nere till vänster, 41° nere
+   * till höger, motstående katet 6,1 cm och hypotenusan a. Samma
+   * orientering som uppgiftens figur (se REGEL FIGURORIENTERING).
+   * Den sökta sidan står i NÄMNAREN, så sista steget är en division med
+   * sinusvärdet — inte en multiplikation (jämför layoutOkandsida b). */
+  function layoutSinussida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
+    var tanke = mkTanke(T);
+
+    var A = [padL + 130, 300], B = [padL + 130, 170], C = [padL + 320, 300];
+    T.line(A, C); T.line(C, B); T.line(B, A);
+    ratVinkel(T, A, [1, 0], [0, -1]);
+    T.pause(150);
+    T.str('6,1 cm', A[0] - T.adv('6,1 cm', 0.62) - 10,
+          (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+    T.str('a', (C[0] + B[0]) / 2 + 6, (C[1] + B[1]) / 2 - 10, null, 0.62);
+    T.pause(140);
+    /* mätetalet läggs i vinkelns kil, utanför bågen och långt nog in
+     * för att kilen ska vara bredare än texten (se Geometrifigurer) */
+    vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
+    T.str('41°', C[0] - 55 - T.adv('41°', 0.55), C[1] - 9, null, 0.55);
+    T.stepEnd();
+
+    tanke(360, [
+      [['Vinkeln 41° har 6,1 cm som']],
+      [['motstående katet, och sidan a']],
+      [['är hypotenusan. Motstående']],
+      [['genom hypotenusan är sinus.']]
+    ], 0);
+    y = 392;
+    r = trigKvot(T, F, { fn: 'sin 41°=', x: padL, y: y,
+      ring: [C[0] - 40, C[1] - 15, 28, 20],
+      num: { txt: '6,1', ord: 'motstående katet',
+             svep: [[A[0] - 6, A[1] - 6], [B[0] - 6, B[1] + 6]] },
+      den: { txt: 'a', ord: 'hypotenusan',
+             svep: [[C[0] - 6, C[1] - 6], [B[0] + 6, B[1] + 6]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den sökta sidan står i']],
+      [['NÄMNAREN. Då är det']],
+      [['sinusvärdet jag ska dela']],
+      [['med, inte gånga med.']]
+    ], 1.05);
+    y += 4.4 * F;
+    xx = T.str('a=', padL, y);
+    xx = T.fracH('6,1', 'sin 41°', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=9,297... cm', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uppgiften vill ha svaret med']],
+      [['en decimal, så jag avrundar']],
+      [['först nu i sista steget.']]
+    ], 1.05);
+    T.str('≈9,3 cm', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: hypotenusan är alltid']],
+      [['triangelns längsta sida, och']],
+      [['9,3 cm är längre än 6,1 cm.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xe = T.str('Svar: 9,3 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm en vinkel med tangens (ma4-1.1 ex 2) --
+   * Båda kateterna är kända (2,3 mm och 1,8 mm) och vinkeln söks, så
+   * kvoten ställs upp med tangens och vinkeln plockas ut med den inversa
+   * funktionen. */
+  function layoutTangensvinkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
+    var tanke = mkTanke(T);
+
+    var A = [padL + 130, 300], B = [padL + 130, 160], C = [padL + 285, 300];
+    T.line(A, C); T.line(C, B); T.line(B, A);
+    ratVinkel(T, A, [1, 0], [0, -1]);
+    T.pause(150);
+    T.str('2,3 mm', A[0] - T.adv('2,3 mm', 0.62) - 10,
+          (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+    T.str('1,8 mm', (A[0] + C[0]) / 2 - T.adv('1,8 mm', 0.62) / 2,
+          C[1] + 0.95 * F, null, 0.62);
+    T.pause(140);
+    vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 32);
+    T.str('v', C[0] - 50 - T.adv('v', 0.62), C[1] - 9, null, 0.62);
+    T.stepEnd();
+
+    tanke(360, [
+      [['Till vinkeln v hör 2,3 mm som']],
+      [['motstående katet och 1,8 mm']],
+      [['som närliggande. Motstående']],
+      [['genom närliggande är tangens.']]
+    ], 0);
+    y = 392;
+    r = trigKvot(T, F, { fn: 'tan v=', x: padL, y: y,
+      ring: [C[0] - 38, C[1] - 15, 26, 20],
+      num: { txt: '2,3', ord: 'motstående katet',
+             svep: [[A[0] - 6, A[1] - 6], [B[0] - 6, B[1] + 6]] },
+      den: { txt: '1,8', ord: 'närliggande katet',
+             svep: [[A[0] + 6, A[1] + 6], [C[0] - 6, C[1] + 6]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    xx = T.str('=1,277...', r.x, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu vet jag tangensvärdet men']],
+      [['inte vinkeln. Den plockas ut']],
+      [['med den inversa funktionen.']]
+    ], 1.05);
+    y += 4.2 * F;
+    xx = T.str('v=tan^-^1(1,277...)', padL, y);
+    T.stepEnd();
+
+    xx = T.str('=51,952...°', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Svaret ska vara i hela grader,']],
+      [['så 51,952... avrundas uppåt.']]
+    ]);
+    y += 2.6 * F;
+    T.str('≈52°', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: kateterna är nästan']],
+      [['lika långa, och då ska vinkeln']],
+      [['ligga nära 45°.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 52°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: enhetscirkeln ---------------------------
+   * Ritar ett litet koordinatsystem med enhetscirkeln, som eleven ritar
+   * det för hand: axlar med pilspets bara åt det positiva hållet (se
+   * REGEL TALLINJER OCH AXLAR), cirkeln i grafit och avlästa värden i
+   * blått. Returnerar X/Y-omvandlare och några ritfunktioner. */
+  function mkCirkel(T, F, o) {
+    var acts = T.acts, ox = o.ox, oy = o.oy, u = o.u == null ? 92 : o.u;
+    function X(v) { return ox + v * u; }
+    function Y(v) { return oy - v * u; }
+    function axlar() {
+      var x1 = ox + 1.45 * u, y1 = oy - 1.45 * u;
+      T.line([ox - 1.35 * u, oy], [x1, oy]);
+      T.line([x1 - 9, oy - 5], [x1 + 1, oy]);
+      T.line([x1 - 9, oy + 5], [x1 + 1, oy]);
+      T.pause(140);
+      T.line([ox, oy + 1.35 * u], [ox, y1]);
+      T.line([ox - 5, y1 + 9], [ox, y1 - 1]);
+      T.line([ox + 5, y1 + 9], [ox, y1 - 1]);
+      T.pause(140);
+      T.str('x', x1 - 4, oy + 0.86 * F, null, 0.6);
+      T.str('y', ox + 10, y1 + 0.30 * F, null, 0.6);
+    }
+    function cirkel() {
+      var pts = [], i, n = 44;
+      for (i = 0; i <= n; i++) {
+        var a = -Math.PI * 2 * (i / n);
+        pts.push([ox + Math.cos(a) * u, oy + Math.sin(a) * u]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.pause(160);
+    }
+    /* radien ut till vinkeln v (grader) + vinkelbågen */
+    function radie(v, r) {
+      var a = -v * Math.PI / 180;
+      T.line([ox, oy], [ox + Math.cos(a) * u, oy + Math.sin(a) * u]);
+      T.pause(140);
+      if (r !== 0) vinkelBage(T, [ox, oy], 0, a, r == null ? 40 : r);
+    }
+    function punkt(x, yv, col) {
+      acts.push({ kind: 'stroke', pts: dotPts(X(x), Y(yv)), color: col || null });
+    }
+    /* streckade hjälplinjer från axlarna in till punkten (blå: avläst) */
+    function hjalp(x, yv) {
+      function dash(p1, p2) {
+        for (var i = 0; i < 7; i += 2) {
+          acts.push({ kind: 'stroke', color: BLUE, pts: humanize(
+            [[p1[0] + (p2[0] - p1[0]) * (i / 7), p1[1] + (p2[1] - p1[1]) * (i / 7)],
+             [p1[0] + (p2[0] - p1[0]) * ((i + 1) / 7),
+              p1[1] + (p2[1] - p1[1]) * ((i + 1) / 7)]]) });
+        }
+      }
+      dash([X(x), oy], [X(x), Y(yv)]);
+      T.pause(150);
+      dash([ox, Y(yv)], [X(x), Y(yv)]);
+      T.pause(150);
+    }
+    function strecklinje(p1, p2) {
+      for (var i = 0; i < 9; i += 2) {
+        acts.push({ kind: 'stroke', color: BLUE, pts: humanize(
+          [[p1[0] + (p2[0] - p1[0]) * (i / 9), p1[1] + (p2[1] - p1[1]) * (i / 9)],
+           [p1[0] + (p2[0] - p1[0]) * ((i + 1) / 9),
+            p1[1] + (p2[1] - p1[1]) * ((i + 1) / 9)]]) });
+      }
+      T.pause(150);
+    }
+    return { X: X, Y: Y, ox: ox, oy: oy, u: u, axlar: axlar, cirkel: cirkel,
+             radie: radie, punkt: punkt, hjalp: hjalp,
+             strecklinje: strecklinje };
+  }
+
+  /* ---------------- scen: läs av i enhetscirkeln (ma4-1.2 ex 1) -------
+   * Punkten (0,51; 0,86) på enhetscirkeln. Poängen är att cosinus och
+   * sinus ÄR punktens koordinater, att tangens är kvoten av dem, och att
+   * ett helt varv respektive en spegling i x-axeln ger samma eller
+   * motsatt sinusvärde. */
+  function layoutEnhetscirkelavlas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 170, oy: 246, u: 88 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    C.radie(59.3, 38);
+    T.str('v', C.ox + 58, C.oy - 14, null, 0.62);
+    T.pause(160);
+    C.punkt(0.51, 0.86);
+    C.hjalp(0.51, 0.86);
+    T.str('(0,51; 0,86)', C.X(0.51) + 12, C.Y(0.86) - 12, BLUE, 0.5);
+    T.stepEnd();
+
+    y = 430;
+    tanke(400, [
+      [['Cosinus för vinkeln ÄR']],
+      [['punktens x-koordinat, och']],
+      [['sinus är y-koordinaten.']]
+    ], 0);
+    xe = T.str('a) cos v=0,51', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('b) sin v=0,86', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tangens är kvoten mellan']],
+      [['sinus och cosinus, alltså']],
+      [['y-koordinaten delad med']],
+      [['x-koordinaten.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('c) tan v=', padL, y);
+    xx = T.fracH('sin v', 'cos v', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('0,86', '0,51', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=1,686...', xx, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈1,69', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vinkeln själv får jag ur']],
+      [['en invers funktion. Jag']],
+      [['utgår från sinusvärdet.']]
+    ], 1.05);
+    y += 4.4 * F;
+    xx = T.str('d) v=sin^-^1(0,86)', padL, y);
+    T.stepEnd();
+
+    xx = T.str('=59,316...°', xx, y);
+    T.stepEnd();
+
+    xe = T.str('≈59,3°', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['419,3° är mer än ett varv.']],
+      [['Ett helt varv tillbaka landar']],
+      [['på samma punkt, så jag drar']],
+      [['bort 360°.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('e) sin 419,3°', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=sin(419,3°-360°)', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('=sin 59,3°=0,86', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['-59,3° är samma vridning fast']],
+      [['medurs. Punkten speglas i']],
+      [['x-axeln, så y-koordinaten']],
+      [['byter tecken.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('f) sin(-59,3°)=-0,86', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: exakt värde för 30° (ma4-1.2 ex 2) ----------
+   * Standardvinkeln 30° har ett exakt värde ur tabellen. Kontrollen görs
+   * mot enhetscirkeln: punkten ligger långt ut i x-led men bara en bit
+   * upp, eftersom sinus är 1/2. */
+  function layoutExaktcos(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 160, oy: 250, u: 84 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    C.radie(30, 40);
+    T.str('30°', C.ox + 46, C.oy - 8, null, 0.55);
+    T.pause(160);
+    C.punkt(0.866, 0.5);
+    C.hjalp(0.866, 0.5);
+    T.stepEnd();
+
+    tanke(y = 400, [
+      [['30° är en standardvinkel.']],
+      [['Tabellens cosinusrad ger']],
+      [['ett exakt värde, inte ett']],
+      [['avrundat decimaltal.']]
+    ], 0);
+    y = 432;
+    xx = T.str('cos 30°=', padL, y);
+    xe = T.fracH('√3', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Som decimaltal blir det lite']],
+      [['under 0,9. Punkten ligger']],
+      [['alltså nästan längst ut i']],
+      [['x-led, precis som i cirkeln.']]
+    ], 1.05);
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('√3', '2', xx, y);
+    xx = T.str('=0,866...', xx, y);
+    T.stepEnd();
+
+    T.str('≈0,87', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Stämmer: sin 30° är 1/2, så']],
+      [['punkten ligger bara halvvägs']],
+      [['upp men långt åt höger.']]
+    ], 1.05);
+    y += 4.2 * F;
+    xe = T.str('Svar: cos 30°=', padL, y);
+    xe = T.fracH('√3', '2', xe, y);
+    xe = T.str('≈0,87', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös cos x = 0,8 (ma4-1.3 ex 1) --------------
+   * Enhetscirkeln visar varför en cosinusekvation ger TVÅ lösningar per
+   * varv: den lodräta linjen x = 0,8 skär cirkeln i två punkter som
+   * ligger symmetriskt kring x-axeln. Därav ± framför räknarens svar. */
+  function layoutCosekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 160, oy: 250, u: 84 });
+
+    y = 120;
+    T.str('cos x=0,8', padL, y);
+    T.stepEnd();
+
+    C.axlar();
+    C.cirkel();
+    T.pause(160);
+    C.radie(36.87, 36);
+    C.radie(-36.87, 30);
+    /* den lodräta linjen x=0,8 skär cirkeln i de två lösningarna */
+    C.strecklinje([C.X(0.8), C.Y(0.72)], [C.X(0.8), C.Y(-0.72)]);
+    C.punkt(0.8, 0.6);
+    C.punkt(0.8, -0.6);
+    T.str('0,8', C.X(0.8) + 8, C.oy + 1.15 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(C.oy + 1.35 * C.u, [
+      [['Cosinus är x-koordinaten.']],
+      [['Två punkter på cirkeln har']],
+      [['x-koordinaten 0,8, en över']],
+      [['och en under x-axeln.']]
+    ], 0);
+    y = C.oy + 1.35 * C.u + 2.6 * F;
+    xx = T.str('cos^-^1(0,8)=36,869...°', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räknaren ger bara den övre.']],
+      [['Den undre är lika stor men']],
+      [['negativ, därför ±. Sedan']],
+      [['upprepas allt varje varv.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=±36,869...°+n·360°', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('≈±36,9°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: x≈±36,9°+n·360°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös sin 4x = −0,3 (ma4-1.3 ex 2) ------------
+   * Sinusekvation med 4x som argument: två lösningsfamiljer (räknarens
+   * vinkel och 180° minus den), och först därefter divideras allt med 4 —
+   * vilket också pressar ihop periodtermen från 360° till 90°. */
+  function layoutSinekvationfyra(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 120;
+    T.str('sin 4x=-0,3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sinus är y-koordinaten, och']],
+      [['två punkter per varv har']],
+      [['y=-0,3. Räknaren ger den ena,']],
+      [['180° minus den ger den andra.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('sin^-^1(-0,3)=-17,457...°', padL, y);
+    T.stepEnd();
+
+    /* ---- första lösningen ---- */
+    y += 3.0 * F;
+    T.str('Första lösningen', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.0 * F;
+    xx = T.str('4x=-17,457...°+n·360°', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Argumentet är 4x, så jag']],
+      [['dividerar båda led med 4.']],
+      [['Då delas även perioden 360°']],
+      [['med 4.']]
+    ]);
+    y = ekvOp(y, '/4', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('4x', '4', padL + 30, yb, null, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('-17,457...°', '4', x, yb, null, BLUE);
+      x = T.str('+', x, yb);
+      T.fracH('n·360°', '4', x, yb, null, BLUE);
+    }, { dy: 3.2, dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=-4,364...°+n·90°', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈-4,4°+n·90°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- andra lösningen ---- */
+    y += 3.4 * F;
+    T.str('Andra lösningen', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.0 * F;
+    xx = T.str('4x=180°-(-17,457...°)+n·360°', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=197,457...°+n·360°', padL + 60, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma division med 4 här.']]
+    ]);
+    y = ekvOp(y, '/4', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('4x', '4', padL + 30, yb, null, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('197,457...°', '4', x, yb, null, BLUE);
+      x = T.str('+', x, yb);
+      T.fracH('n·360°', '4', x, yb, null, BLUE);
+    }, { dy: 3.2, dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=49,364...°+n·90°', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈49,4°+n·90°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: lösningar i ett intervall (ma4-1.4 ex 1) ----
+   * sin(3x+30°)=√3/2 i 180°≤x<450°. Först ALLA lösningar (två fall),
+   * sedan prövas heltalen n ett i taget mot intervallet. */
+  function layoutTrigintervall(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 120;
+    xx = T.str('sin(3x+30°)=', padL, y);
+    T.fracH('√3', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['√3/2 är sinusvärdet för 60°.']],
+      [['Sinus ger två fall per varv:']],
+      [['60° och 180°-60°.']]
+    ], 1.05);
+
+    /* ---- fall 1 ---- */
+    y += 4.4 * F;
+    T.str('Fall 1', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.0 * F;
+    xx = T.str('3x+30°=60°+n·360°', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-30°', xx + 0.6 * F, '3x+30°=60°+n·360°');
+    xx = T.str('3x=30°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x=30°+n·360°',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=10°+n·120°', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- fall 2 ---- */
+    y += 3.2 * F;
+    T.str('Fall 2', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.0 * F;
+    xx = T.str('3x+30°=180°-60°+n·360°', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('3x+30°=120°+n·360°', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-30°', xx + 0.6 * F, '3x+30°=120°+n·360°');
+    xx = T.str('3x=90°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x=90°+n·360°',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=30°+n·120°', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- pröva n mot intervallet ---- */
+    tanke(y, [
+      [['Nu prövar jag heltalen n i']],
+      [['båda familjerna och behåller']],
+      [['dem som hamnar mellan 180°']],
+      [['och 450°.']]
+    ]);
+    y += 4.6 * F;
+    T.str('Fall 1: x=10°+n·120°', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.9 * F;
+    T.str('n=2: x=250°', padL + 40, y, null, 0.62);
+    T.pause(180);
+    y += 1.7 * F;
+    T.str('n=3: x=370°', padL + 40, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('Fall 2: x=30°+n·120°', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.9 * F;
+    T.str('n=2: x=270°', padL + 40, y, null, 0.62);
+    T.pause(180);
+    y += 1.7 * F;
+    T.str('n=3: x=390°', padL + 40, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Mindre n ger vinklar under']],
+      [['180° och större n ger över']],
+      [['450°, så fler lösningar finns']],
+      [['inte i intervallet.']]
+    ], 0.1);
+    y += 4.6 * F;
+    xe = T.str('Svar: 250°, 270°, 370° och 390°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: nollproduktmetoden (ma4-1.4 ex 2) -----------
+   * sin 2x · cos 3x = 0. Produkten är noll så snart en faktor är noll,
+   * alltså löses de två trigonometriska ekvationerna var för sig. */
+  function layoutNollprodukttrig(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 120;
+    T.str('sin 2x·cos 3x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt är noll bara om']],
+      [['någon faktor är noll. Jag']],
+      [['löser faktorerna var för sig.']]
+    ]);
+
+    /* ---- faktor 1 ---- */
+    y += 4.4 * F;
+    xx = T.str('sin 2x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sinus är noll i två punkter']],
+      [['per varv: vid 0° och vid']],
+      [['180°.']]
+    ]);
+    y += 4.2 * F;
+    xx = T.str('2x=0°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2x=0°+n·360°',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=n·180°', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2x=180°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2x=180°+n·360°',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=90°+n·180°', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Familjerna ger 0°, 90°, 180°,']],
+      [['270°, ... alltså varannan']],
+      [['rät vinkel. Det skrivs']],
+      [['kortare som n·90°.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('x=n·90°', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- faktor 2 ---- */
+    y += 3.4 * F;
+    xx = T.str('cos 3x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Cosinus är noll vid ±90°,']],
+      [['alltså rakt upp och rakt ned']],
+      [['i enhetscirkeln.']]
+    ]);
+    y += 4.2 * F;
+    xx = T.str('3x=±90°+n·360°', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x=±90°+n·360°',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=±30°+n·120°', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=n·90° och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('x=±30°+n·120°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: eliminera en term (ma4-1.4 ex 3) ------------
+   * 4cos x − 5sin x = 0. Genom att dividera båda led med cos x blir
+   * kvoten sin x/cos x = tan x, och ekvationen får bara en okänd
+   * funktion kvar. */
+  function layoutTangenselim(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    /* scenen har ekvationsväljare, så inställningsrutans mobilzon når
+     * ned till y=210 — första raden läggs under den */
+    y = 246;
+    xx = T.str('4cos x-5sin x=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två olika funktioner i samma']],
+      [['ekvation går inte att lösa']],
+      [['direkt. Först samlar jag dem']],
+      [['i var sitt led.']]
+    ]);
+    y = ekvOp(y, '+5sin x', xx + 0.6 * F, '4cos x-5sin x=0');
+    xx = T.str('4cos x=5sin x', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Delar jag båda led med']],
+      [['cos x får jag kvoten']],
+      [['sin x genom cos x i']],
+      [['högerledet.']]
+    ]);
+    y = ekvOp(y, '/cos x', xx + 0.6 * F, '4cos x=5sin x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('4=5·', padL + 30, y);
+    xx = T.fracH('sin x', 'cos x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och den kvoten ÄR tangens']],
+      [['för vinkeln.']]
+    ], 1.05);
+    y += 4.2 * F;
+    xx = T.str('4=5tan x', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xx + 0.6 * F, '4=5tan x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('tan x=', padL + 30, y);
+    xx = T.fracH('4', '5', xx, y);
+    xx = T.str('=0,8', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tangens upprepar sig redan']],
+      [['efter ett halvt varv, så']],
+      [['perioden är 180° och inte']],
+      [['360°.']]
+    ], 1.05);
+    y += 4.6 * F;
+    xx = T.str('x=tan^-^1(0,8)+n·180°', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=38,659...°+n·180°', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('≈38,7°+n·180°', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: 38,7°+n·180°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: omvandla till radianer (ma4-1.5 ex 1) -------
+   * 1° = π/180 rad. Gradtalet multipliceras in i täljaren och bråket
+   * förkortas sedan i två drag (se REGEL FÖRKORTNING OCH FÖRLÄNGNING). */
+  function layoutRadianomv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 170;
+    tanke(140, [
+      [['Ett helt varv är 360° och']],
+      [['också 2π rad, så 1° är']],
+      [['π/180 rad. Det är den']],
+      [['omvandlingsfaktorn.']]
+    ], 0);
+    xx = T.str('a) 30°=30·', padL, y);
+    xx = T.fracH('π', '180', xx, y);
+    T.str(' rad', xx, y);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('30·π', '180', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['30 går jämnt upp i 180, så']],
+      [['jag förkortar med 30 i både']],
+      [['täljare och nämnare.']]
+    ], 1.05);
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracOp('30·π', '180', '/30', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xe = T.str('=', padL + 30, y);
+    xe = T.fracH('π', '6', xe, y);
+    xe = T.str(' rad', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.4 * F;
+    xx = T.str('b) 90°=90·', padL, y);
+    xx = T.fracH('π', '180', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('90·π', '180', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracOp('90·π', '180', '/90', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xe = T.str('=', padL + 30, y);
+    xe = T.fracH('π', '2', xe, y);
+    xe = T.str(' rad', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: π rad är 180°, och']],
+      [['90° är hälften av det. Då']],
+      [['ska svaret vara halva π,']],
+      [['precis som det blev.']]
+    ], 1.4);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: omvandla till grader (ma4-1.5 ex 2) ---------
+   * Åt andra hållet: π rad = 180°, så π byts helt enkelt mot 180°. I c)
+   * saknas π i vinkeln, och då används 1 rad = 180°/π. */
+  function layoutGradomv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(140, [
+      [['π rad är 180°. Då kan jag']],
+      [['byta ut π mot 180° rakt av']],
+      [['i bråket.']]
+    ], 0);
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('π', '4', xx, y);
+    xx = T.str(' rad=', xx, y);
+    xx = T.fracH('180°', '4', xx, y);
+    xe = T.str('=45°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.6 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('2π', '5', xx, y);
+    xx = T.str(' rad=', xx, y);
+    xx = T.fracH('2·180°', '5', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('360°', '5', xx, y);
+    xe = T.str('=72°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['Här finns inget π att byta']],
+      [['ut. Men 1 rad är 180°/π, och']],
+      [['det gångrar jag med.']]
+    ], 1.4);
+    y += 4.8 * F;
+    xx = T.str('c) 0,72 rad=0,72·', padL, y);
+    xx = T.fracH('180°', 'π', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('=41,252...°', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈41°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sin x = 0,7 i radianer (ma4-1.5 ex 3) -------
+   * Samma två lösningsfamiljer som i grader, men speglingen sker i π i
+   * stället för i 180° och perioden är 2π. */
+  function layoutSinradianer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 120;
+    T.str('sin x=0,7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först ställer jag om räknaren']],
+      [['till radianer. Annars svarar']],
+      [['den i grader.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('sin^-^1(0,7)=0,775...', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det är den ena lösningen.']],
+      [['Ett helt varv är 2π, så den']],
+      [['upprepas med n·2π.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('x=0,775...+n·2π', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈0,78+n·2π', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den andra lösningen speglas']],
+      [['i π, som är motsvarigheten']],
+      [['till 180°.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('x=π-0,775...+n·2π', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=2,366...+n·2π', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈2,37+n·2π', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x≈0,78+n·2π', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x≈2,37+n·2π', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: exakt lösning i radianer (ma4-1.5 ex 4) -----
+   * tan x = −√3. Formelbladets standardvinkel 2π/3 (=120°) ger tangens
+   * −√3, och tangens har perioden π. */
+  function layoutExakttan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 120;
+    T.str('tan x=-√3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Svaret ska vara exakt, så']],
+      [['jag letar i formelbladet']],
+      [['efter den vinkel som ger']],
+      [['tangensvärdet -√3.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('tan ', padL, y);
+    xx = T.fracH('2π', '3', xx, y);
+    xx = T.str('=-√3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2π/3 rad är 120°, alltså en']],
+      [['vinkel i andra kvadranten']],
+      [['där tangens är negativ.']]
+    ], 1.05);
+    y += 4.6 * F;
+    tanke(y, [
+      [['Tangens upprepar sig efter']],
+      [['ett halvt varv, så perioden']],
+      [['är π och inte 2π.']]
+    ], 1.05);
+    xx = T.str('x=', padL, y);
+    xx = T.fracH('2π', '3', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('2π', '3', xe, y);
+    xe = T.str('+n·π', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: negativa och vridna vinklar (ma4-1.6 ex 1) --
+   * Allt utgår från sin 60° = √3/2. Enhetscirkeln visar var de tre
+   * vinklarna hamnar, och därmed vilka tecken sinusvärdena får. */
+  function layoutVridnavinklar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 150, oy: 250, u: 80 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    /* etiketterna läggs UTANFÖR cirkeln längs respektive radie, så att
+     * de varken hamnar på cirkeln, på en radie eller på varandra */
+    function markera(v, txt, r) {
+      var a = -v * Math.PI / 180, d = C.u + (r == null ? 24 : r);
+      C.radie(v, 0);
+      C.punkt(Math.cos(a), -Math.sin(a));
+      T.str(txt, C.ox + Math.cos(a) * d - T.adv(txt, 0.5) / 2,
+            C.oy + Math.sin(a) * d + 0.2 * F, null, 0.5);
+      T.pause(220);
+    }
+    markera(60, '60°');
+    markera(-60, '-60°');
+    markera(240, '240°', 30);
+    T.stepEnd();
+
+    y = C.oy + 1.4 * C.u + 2.2 * F;
+    tanke(C.oy + 1.35 * C.u, [
+      [['En negativ vinkel speglar']],
+      [['punkten i x-axeln. Då byter']],
+      [['y-koordinaten tecken, alltså']],
+      [['byter sinus tecken.']]
+    ], 0);
+    xx = T.str('a) sin(-60°)=-sin 60°', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('=-', padL + 40, y);
+    xe = T.fracH('√3', '2', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['30° och 60° är tillsammans']],
+      [['90°, alltså komplementvinklar.']],
+      [['Cosinus för den ena är sinus']],
+      [['för den andra.']]
+    ], 1.4);
+    y += 4.8 * F;
+    xx = T.str('b) cos 30°=sin(90°-30°)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=sin 60°=', padL + 40, y);
+    xe = T.fracH('√3', '2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['240° är 60° plus ett halvt']],
+      [['varv. Punkten hamnar mitt']],
+      [['emot, så sinus byter tecken.']]
+    ], 1.4);
+    y += 4.8 * F;
+    xx = T.str('c) sin 240°=sin(60°+180°)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=-sin 60°=-', padL + 40, y);
+    xe = T.fracH('√3', '2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vinkel i radianer (ma4-1.6 ex 2) ------------
+   * cos(5π/4) ur cos(π/4). Radianerna görs först om till grader, och då
+   * syns det att vinklarna ligger ett halvt varv isär. */
+  function layoutCosradian(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 170;
+    tanke(140, [
+      [['Radianer är svårare att se']],
+      [['framför sig än grader, så']],
+      [['jag gör om båda vinklarna']],
+      [['först.']]
+    ], 0);
+    xx = T.str('', padL, y);
+    xx = T.fracH('π', '4', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('180°', '4', xx, y);
+    T.str('=45°', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.fracH('5π', '4', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('5·180°', '4', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('900°', '4', xx, y);
+    T.str('=225°', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['225° är 45° plus 180°, alltså']],
+      [['ett halvt varv bort. Då']],
+      [['hamnar punkten mitt emot och']],
+      [['cosinus byter tecken.']]
+    ], 1.4);
+    y += 4.8 * F;
+    xx = T.str('cos 225°=-cos(225°-180°)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=-cos 45°=-', padL + 40, y);
+    xe = T.fracH('1', '√2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xe = T.str('Svar: -', padL, y);
+    xe = T.fracH('1', '√2', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: visa ett samband (ma4-1.6 ex 3) -------------
+   * sin(450° − v) = cos v. Ett helt varv dras bort ur argumentet, och
+   * kvar blir komplementvinkelsambandet. */
+  function layoutVisasamband(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* första raden är bred; den läggs under inställningsrutans mobilzon */
+    y = 172;
+    T.str('Visa: sin(450°-v)=cos v', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag räknar på vänsterledet']],
+      [['och försöker komma fram till']],
+      [['högerledet.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('VL=sin(450°-v)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['450° är mer än ett varv. Ett']],
+      [['helt varv ändrar ingenting,']],
+      [['så jag drar bort 360°.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('=sin(450°-360°-v)', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=sin(90°-v)', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och sinus för 90° minus en']],
+      [['vinkel är cosinus för själva']],
+      [['vinkeln, komplementvinkel-']],
+      [['sambandet.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=cos v=HL', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: V.S.V.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: cos v ur sin v (ma4-1.7 ex 1) --------------
+   * Trigonometriska ettan ger cos²v, och kvadratroten ger två värden.
+   * Kvadranten avgör vilket tecken som gäller. */
+  function layoutTrigettan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, x1, x2;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = T.str('sin v=', padL, y);
+    x1 = xx;
+    xx = T.str('0,6', xx, y);
+    x2 = xx;
+    T.str(', v i 2:a kvadranten', xx, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    T.str('Trigonometriska ettan', padL, y - 1.5 * F, null, 0.62);
+    T.pause(200);
+    var xs0 = padL, xs1 = T.str('sin^2 v', padL, y);
+    xx = T.str('+cos^2 v=1', xs1, y);
+    T.stepEnd();
+
+    var r = substRings(acts, [[x1, x2, y - 3.2 * F, F], [xs0, xs1, y, F]]);
+    y += 2.8 * F;
+    xx = T.str('0,6^2+cos^2 v=1', padL + 30, y);
+    fadeRings(acts, r);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('0,36+cos^2 v=1', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-0,36', xx + 0.6 * F, '0,36+cos^2 v=1');
+    xx = T.str('cos^2 v=0,64', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu drar jag roten ur båda']],
+      [['led. Två tal i kvadrat ger']],
+      [['0,64, ett positivt och ett']],
+      [['negativt, därför ±.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('cos v=±', padL + 30, y);
+    xx = T.rot('0,64', xx, y);
+    T.str('=±0,8', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Cosinus är x-koordinaten, och']],
+      [['i andra kvadranten ligger']],
+      [['punkten till vänster om']],
+      [['y-axeln. Alltså negativ.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: cos v=-0,8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: visa en identitet (ma4-1.7 ex 2) -----------
+   * 1/cos²x − tan²x = 1. Tangens skrivs som sin/cos så att termerna får
+   * samma nämnare, och trigonometriska ettan städar täljaren. */
+  function layoutTrigidentitet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('Visa: ', padL, y);
+    xx = T.fracH('1', 'cos^2 x', xx, y);
+    T.str('-tan^2 x=1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag räknar på vänsterledet.']],
+      [['Tangens är sin x genom cos x,']],
+      [['så tan^2 x är sin^2 x genom']],
+      [['cos^2 x.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('VL=', padL, y);
+    xx = T.fracH('1', 'cos^2 x', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('sin^2 x', 'cos^2 x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu har båda termerna samma']],
+      [['nämnare, så täljarna kan']],
+      [['subtraheras direkt.']]
+    ], 1.05);
+    y += 4.8 * F;
+    xx = T.str('=', padL + 30, y);
+    T.fracH('1-sin^2 x', 'cos^2 x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Trigonometriska ettan säger']],
+      [['att sin^2 x+cos^2 x=1, alltså']],
+      [['är 1-sin^2 x samma sak som']],
+      [['cos^2 x.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('cos^2 x', 'cos^2 x', xx, y);
+    T.str('=1=HL', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: V.S.V.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förenkla med additionsformlerna (1.8 ex 1) --
+   * sin(x+30°) − sin(x−30°). Termerna med sin x cos 30° tar ut varandra;
+   * de ringas in innan de stryks (se REGEL SAMLA LIKADANA TERMER). */
+  function layoutAdditionsforenkla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), SC = 0.86;
+    var a0, a1, b0, b1;
+
+    y = 186;
+    T.str('sin(x+30°)-sin(x-30°)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Additionsformeln för sinus:']],
+      [['sin(u+v)=sin u cos v+cos u sin v.']],
+      [['Subtraktionsformeln är samma']],
+      [['fast med minus i mitten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=sin x cos 30°+cos x sin 30°', padL, y, null, SC);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('-(sin x cos 30°-cos x sin 30°)', padL + 20, y, null, SC);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet framför']],
+      [['parentesen byter tecken på']],
+      [['båda termerna inuti.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=', padL, y, null, SC);
+    a0 = xx;
+    xx = T.str('sin x cos 30°', xx, y, null, SC);
+    a1 = xx;
+    T.str('+cos x sin 30°', xx, y, null, SC);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    b0 = padL + 20;
+    xx = T.str('-sin x cos 30°', padL + 20, y, BLUE, SC);
+    b1 = xx;
+    T.str('+cos x sin 30°', xx, y, BLUE, SC);
+    T.stepEnd();
+
+    tanke(y, [
+      [['De två termerna med']],
+      [['sin x cos 30° är lika stora']],
+      [['men har olika tecken, så de']],
+      [['tar ut varandra.']]
+    ]);
+    y += 4.8 * F;
+    T.ring(a0, a1, y - 7.4 * F);
+    T.pause(280);
+    T.ring(b0, b1, y - 4.8 * F);
+    T.pause(320);
+    xx = T.str('=2cos x sin 30°', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och sin 30° är precis 1/2.']]
+    ]);
+    y += 4.2 * F;
+    xx = T.str('=2cos x·', padL + 30, y);
+    xx = T.fracH('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('=cos x', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('Svar: cos x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sin 75° exakt (ma4-1.8 ex 2) ---------------
+   * 75° saknar tabellvärde men är 45°+30°. Efter additionsformeln
+   * förlängs svaret med √2 så att nämnaren blir rotfri. */
+  function layoutSinexakt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), SC = 0.86;
+
+    y = 186;
+    tanke(140, [
+      [['75° finns inte i tabellen.']],
+      [['Men 45° och 30° gör det, och']],
+      [['tillsammans blir de 75°.']]
+    ], 0);
+    T.str('sin 75°=sin(45°+30°)', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('=sin 45°cos 30°+cos 45°sin 30°', padL, y, null, SC);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in tabellens']],
+      [['exakta värden i stället för']],
+      [['decimaltal.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('1', '√2', xx, y);
+    xx = T.mul(xx, y);
+    xx = T.fracH('√3', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '√2', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('√3', '2√2', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('1', '2√2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma nämnare, så täljarna']],
+      [['adderas.']]
+    ], 1.05);
+    y += 4.6 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('√3+1', '2√2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett rottecken i nämnaren']],
+      [['brukar man vilja bli av med.']],
+      [['Jag förlänger med √2.']]
+    ], 1.4);
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracOp('(√3+1)', '2√2', '·√2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('√6+√2', '4', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: identitet med dubbla vinkeln (1.8 ex 3) -----
+   * sin 2x/(1+cos 2x) = tan x. Poängen är VALET av form för cos 2x:
+   * bara 2cos²x−1 får ettorna att ta ut varandra. */
+  function layoutDubbelidentitet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 180;
+    xx = T.str('Visa: ', padL, y);
+    xx = T.fracH('sin 2x', '1+cos 2x', xx, y);
+    T.str('=tan x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag räknar på vänsterledet']],
+      [['och skriver om sin 2x som']],
+      [['2 sin x cos x.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('VL=', padL, y);
+    T.fracH('2sin x cos x', '1+cos 2x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['cos 2x kan skrivas på tre']],
+      [['sätt. Väljer jag 2cos^2 x-1']],
+      [['tar ettorna i nämnaren ut']],
+      [['varandra.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('2sin x cos x', '1+2cos^2 x-1', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('2sin x cos x', '2cos^2 x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Både 2 och cos x finns i']],
+      [['täljare och nämnare, så de']],
+      [['förkortas bort.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('sin x', 'cos x', xx, y);
+    T.str('=tan x=HL', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: V.S.V.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: dubbla vinkeln i radianer (ma4-1.9 ex 1) ----
+   * sin x cos x = √3/4. Vänsterledet är halva sin 2x, så båda led
+   * multipliceras med 2 innan formeln får användas. */
+  function layoutDubbelekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = T.str('sin x cos x=', padL, y);
+    xx = T.fracH('√3', '4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vänsterledet liknar formeln']],
+      [['sin 2x=2 sin x cos x, men']],
+      [['tvåan saknas. Jag gångrar']],
+      [['båda led med 2.']]
+    ], 1.05);
+    y = ekvOp(y, '·2', xx + 0.6 * F, function (yb) {
+      var x = T.str('sin x cos x', padL + 20, yb);
+      x = T.str('·2', x, yb, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('√3', '4', x, yb);
+      T.str('·2', x, yb, BLUE);
+    }, { dy: 3.4, dyRes: 3.2, dyVagg: 3.2, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('2sin x cos x=', padL + 20, y);
+    T.fracH('√3', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('sin 2x=', padL + 20, y);
+    T.fracH('√3', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['√3/2 är sinusvärdet för π/3.']],
+      [['Sinus ger två fall: π/3 och']],
+      [['π minus π/3.']]
+    ], 1.05);
+
+    /* ---- fall 1 ---- */
+    y += 4.8 * F;
+    T.str('Fall 1', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('2x=', padL, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('+n·2π', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('2x', '2', padL + 20, yb, null, BLUE);
+      x = T.str('=', x, yb);
+      x = T.bigFrac(['π', '3'], '2', x, yb, { denCol: BLUE });
+      x = T.str('+', x, yb);
+      T.fracH('n·2π', '2', x, yb, null, BLUE);
+    }, { dy: 4.6, dyRes: 4.4, dyVagg: 3.2, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('π', '6', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    /* ---- fall 2 ---- */
+    y += 4.4 * F;
+    T.str('Fall 2', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('2x=π-', padL, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('+n·2π', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('2x=', padL + 20, y);
+    xx = T.fracH('2π', '3', xx, y);
+    xx = T.str('+n·2π', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, function (yb) {
+      var x = T.fracH('2x', '2', padL + 20, yb, null, BLUE);
+      x = T.str('=', x, yb);
+      x = T.bigFrac(['2π', '3'], '2', x, yb, { denCol: BLUE });
+      x = T.str('+', x, yb);
+      T.fracH('n·2π', '2', x, yb, null, BLUE);
+    }, { dy: 4.6, dyRes: 4.4, dyVagg: 3.2, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('π', '3', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('π', '6', xe, y);
+    xe = T.str('+n·π', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xe = T.str('x=', padL + 60, y);
+    xe = T.fracH('π', '3', xe, y);
+    xe = T.str('+n·π', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: nollproduktmetoden (ma4-1.9 ex 2) -----------
+   * cos 2x − 4cos x + 1 = 0. Formen 2cos²x − 1 väljs för att allt ska
+   * handla om cos x; sedan bryts cos x ut och nollproduktmetoden tar vid. */
+  function layoutNollproduktcos(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg), samla = mkSamla(T);
+    var e0, e1, t0, t1, yRad;
+
+    y = 246;
+    T.str('cos 2x-4cos x+1=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['cos 2x kan skrivas på tre']],
+      [['sätt. Andra termen har cos x,']],
+      [['så jag väljer den form som']],
+      [['också ger cos x: 2cos^2 x-1.']]
+    ]);
+    y += 4.8 * F;
+    yRad = y;
+    xx = T.str('2cos^2 x', padL, y);
+    e0 = xx;
+    xx = T.str('-1', xx, y);
+    e1 = xx;
+    xx = T.str('-4cos x', xx, y);
+    t0 = xx;
+    xx = T.str('+1', xx, y);
+    t1 = xx;
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus ett plus ett blir noll,']],
+      [['så de två termerna tar ut']],
+      [['varandra.']]
+    ]);
+    y += 4.6 * F;
+    xx = samla(padL + 20, y, [
+      { skriv: '2cos^2 x' },
+      { ringar: [[e0, e1, yRad], [t0, t1, yRad]], skriv: '-4cos x' },
+      { skriv: '=0' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda termerna innehåller']],
+      [['cos x. Bryter jag ut den kan']],
+      [['jag använda nollprodukt-']],
+      [['metoden.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('cos x(', padL + 20, y);
+    T.stepEnd();
+
+    xx = T.str('2cos x', xx, y);
+    T.stepEnd();
+
+    xx = T.str('-4)', xx, y);
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt är noll bara om']],
+      [['någon faktor är noll.']]
+    ]);
+
+    /* ---- fall 1 ---- */
+    y += 4.4 * F;
+    T.str('Fall 1', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('cos x=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=±90°+n·360°', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- fall 2 ---- */
+    y += 3.4 * F;
+    T.str('Fall 2', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('2cos x-4=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+4', xx + 0.6 * F, '2cos x-4=0');
+    xx = T.str('2cos x=4', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2cos x=4',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('cos x=2', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men cosinus är en koordinat']],
+      [['på enhetscirkeln och ligger']],
+      [['alltid mellan -1 och 1.']],
+      [['Fall 2 saknar lösningar.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x=±90°+n·360°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: substitution och pq-formeln (1.9 ex 3) ------
+   * 2sin x − cos²x − 2 = 0. Trigonometriska ettan gör allt till sin x,
+   * substitutionen t = sin x ger en vanlig andragradsekvation. */
+  function layoutSubstitutionpq(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var samla = mkSamla(T);
+    var a0, a1, b0, b1, yRad;
+
+    y = 186;
+    T.str('2sin x-cos^2 x-2=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Första termen har sin x, så']],
+      [['jag byter ut cos^2 x mot']],
+      [['1-sin^2 x med trigonometriska']],
+      [['ettan.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('2sin x-(1-sin^2 x)-2=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet framför']],
+      [['parentesen byter tecken på']],
+      [['båda termerna inuti.']]
+    ]);
+    y += 4.6 * F;
+    yRad = y;
+    xx = T.str('2sin x', padL, y);
+    a0 = xx;
+    xx = T.str('-1', xx, y, BLUE);
+    a1 = xx;
+    xx = T.str('+sin^2 x', xx, y, BLUE);
+    b0 = xx;
+    xx = T.str('-2', xx, y);
+    b1 = xx;
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = samla(padL + 20, y, [
+      { skriv: 'sin^2 x+2sin x' },
+      { ringar: [[a0, a1, yRad], [b0, b1, yRad]], skriv: '-3' },
+      { skriv: '=0' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda termerna med x innehåller']],
+      [['sin x. Sätter jag t=sin x får']],
+      [['jag en vanlig andragrads-']],
+      [['ekvation.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('t^2+2t-3=0', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq-formeln med p=2 och q=-3.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('t=-1±', padL + 20, y);
+    xx = T.rot('1^2+3', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=-1±2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('t_1=-1-2=-3', padL + 20, y);
+    T.pause(300);
+    T.str('t_2=-1+2=1', xx + 1.2 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu växlar jag tillbaka:']],
+      [['t var ju sin x.']]
+    ]);
+
+    /* ---- fall 1 ---- */
+    y += 4.4 * F;
+    T.str('Fall 1', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('sin x=-3', padL, y);
+    T.pause(260);
+    T.str('saknar lösningar', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sinus är en koordinat på']],
+      [['enhetscirkeln och ligger']],
+      [['alltid mellan -1 och 1.']]
+    ]);
+
+    /* ---- fall 2 ---- */
+    y += 4.4 * F;
+    T.str('Fall 2', padL, y, null, 0.62);
+    T.pause(200);
+    y += 2.2 * F;
+    xx = T.str('sin x=1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['sin x=1 är toppen av']],
+      [['enhetscirkeln, alltså 90°.']],
+      [['Där finns bara en punkt per']],
+      [['varv.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('x=90°+n·360°', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=90°+n·360°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -38303,7 +40207,31 @@
                    sonderfallsformler: layoutSonderfallsformler,
                    betaenergi: layoutBetaenergi,
                    gungan: layoutGungan,
-                   hubble: layoutHubble };
+                   hubble: layoutHubble,
+                   sinussida: layoutSinussida,
+                   tangensvinkel: layoutTangensvinkel,
+                   enhetscirkelavlas: layoutEnhetscirkelavlas,
+                   exaktcos: layoutExaktcos,
+                   cosekvation: layoutCosekvation,
+                   sinekvationfyra: layoutSinekvationfyra,
+                   trigintervall: layoutTrigintervall,
+                   nollprodukttrig: layoutNollprodukttrig,
+                   tangenselim: layoutTangenselim,
+                   radianomv: layoutRadianomv,
+                   gradomv: layoutGradomv,
+                   sinradianer: layoutSinradianer,
+                   exakttan: layoutExakttan,
+                   vridnavinklar: layoutVridnavinklar,
+                   cosradian: layoutCosradian,
+                   visasamband: layoutVisasamband,
+                   trigettan: layoutTrigettan,
+                   trigidentitet: layoutTrigidentitet,
+                   additionsforenkla: layoutAdditionsforenkla,
+                   sinexakt: layoutSinexakt,
+                   dubbelidentitet: layoutDubbelidentitet,
+                   dubbelekvation: layoutDubbelekvation,
+                   nollproduktcos: layoutNollproduktcos,
+                   substitutionpq: layoutSubstitutionpq };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

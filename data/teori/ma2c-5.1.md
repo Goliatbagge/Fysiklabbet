@@ -18,6 +18,11 @@ algebraiska metoder — antingen med potenslagar eller med rotuttryck.
 ::: exempel "Exempel 1 — Lös potensekvationen"
 **Lös potensekvationen $x^7 = 860$.**
 
+::: handskrift
+typ: potensekvation2c
+:::
+
+::: textlosning
 **Metod 1: Med potenslagar.** Vi upphöjer båda led till $\dfrac{1}{7}$:
 
 $$
@@ -35,6 +40,7 @@ $$
 **OBS!** Om exponenten är **jämn** får ekvationen två lösningar — en
 positiv och en negativ. Då ska $\pm$ placeras framför
 rottecknet/lösningen.
+:::
 :::
 
 En potensfunktion i generell form skrivs $y = C \cdot x^a$.
@@ -70,6 +76,11 @@ där
 ::: exempel "Exempel 2 — Aktier"
 **Du köper aktier för 12 000 kr.**
 
+::: handskrift
+typ: aktierna
+:::
+
+::: textlosning
 I b-uppgiften kommer vi att lösa en exponentialekvation grafiskt —
 grafen nedan visar uppritningen med skärningspunkten A.
 
@@ -130,6 +141,7 @@ $x$-koordinat — se grafen ovan.
 Vi ser att skärningens $x$-koordinat är $x \approx 8{,}8$.
 
 **Svar:** Efter ca 9 år.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

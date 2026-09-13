@@ -54417,6 +54417,676 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: potensekvation (ma2c-5.1 ex 1) ----------
+   * Två skrivsätt för samma sak: upphöja till 1/7 eller dra sjunde
+   * roten. */
+  function layoutPotensekvation2c(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^7=860', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här står det okända i BASEN,']],
+      [['inte i exponenten. Då är det']],
+      [['en potensekvation.']]
+    ]);
+    y += 4.6 * F;
+    T.str('Med potenslagar', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('x=860', padL, y);
+    T.fracSup('1', '7', xx, y);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xe = T.str('≈2,63', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att upphöja till 1/7 är samma']],
+      [['sak som att dra sjunde roten.']],
+      [['Välj det du tycker är']],
+      [['tydligast.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Med rotuttryck', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('x=', padL, y);
+    xx = T.rot('860', xx, y, 7);
+    xe = T.str('≈2,63', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Obs: är exponenten JÄMN finns']],
+      [['två lösningar, en positiv och']],
+      [['en negativ. Sjuan är udda, så']],
+      [['här finns bara en.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: aktierna (ma2c-5.1 ex 2) ----------------
+   * a) är en potensekvation (basen okänd), b) en exponentialekvation
+   * (exponenten okänd) som löses grafiskt. */
+  function layoutAktierna(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('C=12 000 kr, y=27 000 kr', padL, y, null, 0.88);
+    T.pause(240);
+    y += 2.6 * F;
+    T.str('efter x=5 år', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Procentuell förändring betyder']],
+      [['formeln y=C·a^x, där a är']],
+      [['förändringsfaktorn.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('27 000=12 000·a^5', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.fracH('27 000', '12 000', padL, y);
+    T.str('=a^5', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('2,25=a^5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det okända står i basen, så']],
+      [['det är en potensekvation. Jag']],
+      [['drar femte roten.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a=', padL, y);
+    xx = T.rot('2,25', xx, y, 5);
+    T.str('=1,176...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Förändringsfaktorn 1,176']],
+      [['betyder en ökning med 17,6 %:']],
+      [['det som ligger över 1.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('a) 17,6 % per år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är det TIDEN som söks,']],
+      [['alltså exponenten. Det är en']],
+      [['exponentialekvation, och den']],
+      [['löser jag grafiskt.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('50 000=12 000·1,176^x', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('skärning vid x≈8,8', padL + 20, y, null, 0.88);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('b) efter cirka 9 år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: logaritmer utan räknare (ma2c-5.2 ex 1) --
+   * Logaritmen svarar på frågan "vad ska tian upphöjas till?". */
+  function layoutLogutanraknare(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['lg av ett tal svarar på frågan:']],
+      [['vad ska 10 upphöjas till för']],
+      [['att bli det talet?']]
+    ], 0);
+    xx = T.str('a) lg 10 000: 10^4=10 000', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('lg 10 000=4', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('b) lg 10^-^5: exponenten är -5', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('lg 10^-^5=-5', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) hjälper det att skriva']],
+      [['roten som en potens: √10 är 10']],
+      [['upphöjt till en halv.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.rot('10', xx, y);
+    xx = T.str('=10', xx, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('lg ', padL + 40, y);
+    xx = T.rot('10', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('1', '2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv som potens med basen 10 (5.2 ex 2) - */
+  function layoutPotensbastio(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Definitionen säger att 10']],
+      [['upphöjt till lg av ett tal ÄR']],
+      [['talet självt. Det är precis']],
+      [['vad logaritmen betyder.']]
+    ], 0);
+    xx = T.str('a) 4=10^l^g^4', padL, y);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('b) 75=10^l^g^7^5', padL, y);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det ser ut som ett trick, men']],
+      [['det är själva poängen: varje']],
+      [['positivt tal går att skriva']],
+      [['som en tiopotens.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: exponentialekvationer (ma2c-5.3 ex 1) ----
+   * Båda leden skrivs med basen 10, och då kan exponenterna sättas
+   * lika. */
+  function layoutExpekvationer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('a) 10^x=53', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Högerledet skrivs som en']],
+      [['tiopotens. Då står samma bas i']],
+      [['båda led, och exponenterna']],
+      [['måste vara lika.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('10^x=10^l^g^5^3', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=lg 53≈1,72', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) är basen 2. Då skriver']],
+      [['jag om BÅDA leden till basen']],
+      [['10 och använder potenslagarna.']]
+    ]);
+    y += 4.8 * F;
+    T.str('b) (10^l^g^2)^x=10^l^g^3^7', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('10^x^·^l^g^2=10^l^g^3^7', padL + 20, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x·lg 2=lg 37', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/lg 2', xx + 0.6 * F, 'x·lg 2=lg 37',
+              { dyRes: 3.2, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('lg 37', 'lg 2', xx, y);
+    xe = T.str('≈5,21', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) måste potensen först stå']],
+      [['ensam. Jag adderar 4 och']],
+      [['dividerar med 5.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.str('c) 5·3^2^x-4=31', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('5·3^2^x=35', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('3^2^x=7', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('10^2^x^·^l^g^3=10^l^g^7', padL + 20, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2x·lg 3=lg 7', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('lg 7', '2·lg 3', xx, y);
+    xe = T.str('≈0,89', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: logaritmekvationer (ma2c-5.3 ex 2) ------- */
+  function layoutLogekvationer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('a) lg x=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ekvationen skrivs om till']],
+      [['potensform: 10 upphöjt till']],
+      [['högerledet blir det som']],
+      [['logaritmen tas av.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('10^3=x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=1 000', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    T.str('b) lg 5x=2,7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak här: hela 5x är det']],
+      [['som logaritmen tas av.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('10^2^,^7=5x', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xx + 0.6 * F, '10^2^,^7=5x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('10^2^,^7', '5', xx, y);
+    xe = T.str('≈100,24', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: logaritmlagarna (ma2c-5.4 ex 1) ---------
+   * Summan av två logaritmer är logaritmen av produkten. */
+  function layoutLogaritmlagar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) lg 25+lg 4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Första logaritmlagen: en SUMMA']],
+      [['av logaritmer är logaritmen av']],
+      [['PRODUKTEN. Och 25·4 är 100.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=lg(25·4)=lg 100', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=2', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andra logaritmlagen: en']],
+      [['SKILLNAD blir logaritmen av']],
+      [['KVOTEN.']]
+    ]);
+    y += 4.8 * F;
+    T.str('b) lg 3 000-lg 3', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=lg', padL + 20, y);
+    xx = T.fracH('3 000', '3', xx, y);
+    T.str('=lg 1 000', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=3', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tredje logaritmlagen (ma2c-5.4 ex 2) ----
+   * En exponent inuti en logaritm får flyttas ned som en faktor. */
+  function layoutTredjelogaritmlagen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('a) 5^x=136', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag logaritmerar båda led.']],
+      [['Tredje logaritmlagen låter mig']],
+      [['flytta ned exponenten som en']],
+      [['faktor.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('lg 5^x=lg 136', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x·lg 5=lg 136', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/lg 5', xx + 0.6 * F, 'x·lg 5=lg 136',
+              { dyRes: 3.2, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('lg 136', 'lg 5', xx, y);
+    xe = T.str('≈3,05', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) står potenser i båda led.']],
+      [['Jag samlar dem på ena sidan,']],
+      [['så blir det en enda potens.']]
+    ], 1.4);
+    y += 5.6 * F;
+    T.str('b) 4·5^x=3·2^x', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.fracH('5^x', '2^x', padL + 20, y);
+    xx = T.str('=', xx, y);
+    T.fracH('3', '4', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.parenFrac('5', '2', 'x', padL + 20, y);
+    xx = T.str('=', xx, y);
+    T.fracH('3', '4', xx, y);
+    T.stepEnd();
+
+    /* 5/2 och 3/4 skrivs som decimaltal här: ett bråk direkt efter lg
+     * läses annars lätt som (lg 3)/4 i stället för lg(3/4) */
+    y += 5.4 * F;
+    xx = T.str('x·lg 2,5=lg 0,75', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('lg 0,75', 'lg 2,5', xx, y);
+    xe = T.str('≈-0,31', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 3.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: flera logaritmtermer (ma2c-5.4 ex 3) ----
+   * När båda led är EN logaritm kan logaritmen strykas. */
+  function layoutFleralogtermer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('2lg 5+lg 4=lg 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tvåan framför logaritmen är en']],
+      [['nedflyttad exponent. Jag']],
+      [['flyttar upp den igen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('lg 5^2+lg 4=lg 2x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('lg 25+lg 4=lg 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu slår jag ihop vänsterledet']],
+      [['till en enda logaritm med']],
+      [['första logaritmlagen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('lg 100=lg 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En logaritm i vardera ledet']],
+      [['och samma bas: då måste talen']],
+      [['inuti vara lika.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('100=2x', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '100=2x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=50', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: sparkontot (ma2c-5.5 ex 1) --------------
+   * Svaret måste tolkas: räntan betalas ut vid årets slut, så tiden
+   * avrundas UPPÅT till hela år. */
+  function layoutSparkontot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('C=10 000, y=12 000, a=1,023', padL, y, null, 0.86);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Något som växer procentuellt']],
+      [['beskrivs av y=C·a^x. Här söks']],
+      [['tiden x.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('12 000=10 000·1,023^x', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y = ekvOp(y, '/10 000', xx + 0.6 * F, '12 000=10 000·1,023^x',
+              { dyRes: 3.2, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('1,2=1,023^x', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x står i exponenten, så jag']],
+      [['logaritmerar båda led och']],
+      [['flyttar ned den.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('lg 1,2=x·lg 1,023', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('lg 1,2', 'lg 1,023', xx, y);
+    T.str('=8,02...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räntan betalas ut vid varje']],
+      [['årsskifte, inte löpande. Efter']],
+      [['8 år har beloppet inte hunnit']],
+      [['över 12 000 kr.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xe = T.str('Svar: efter 9 år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: generell logaritm (ma2c-5.6 ex 1) ------- */
+  function layoutGenerelllogaritm(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('3^x=25', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmen behöver inte ha']],
+      [['basen 10. 3-logaritmen svarar']],
+      [['på frågan: vad ska 3 upphöjas']],
+      [['till för att bli 25?']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('x=log_3 25', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det ÄR svaret, exakt uttryckt.']],
+      [['Vill man ha ett decimaltal']],
+      [['räknar man ut det på räknaren.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: logaritmer i annan bas (5.6 ex 2) ------- */
+  function layoutLogannanbas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['log_2 16 betyder: vad ska 2']],
+      [['upphöjas till för att bli 16?']]
+    ], 0);
+    xx = T.str('a) 2^4=16 ⟹ ', padL, y);
+    xe = T.str('log_2 16=4', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xx = T.str('b) 3^2=9 ⟹ ', padL, y);
+    xe = T.str('log_3 9=2', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma tänkande som för lg, men']],
+      [['med en annan bas. Det är basen']],
+      [['som står som index.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv som en potens (ma2c-5.6 ex 3) ----- */
+  function layoutSkrivpotens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Skriv 24 med basen 3', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Per definition är log_3 24']],
+      [['precis det tal som 3 ska']],
+      [['upphöjas till för att bli 24.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('24=3^l^o^g^3^2^4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uttrycket ser krångligt ut men']],
+      [['är bara 24 skrivet på ett']],
+      [['annat sätt.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -54985,7 +55655,20 @@
                    likbentradier: layoutLikbentradier,
                    tangentcirkel: layoutTangentcirkel,
                    kordasatsen: layoutKordasatsen,
-                   inskrivenfyrhorning: layoutInskrivenfyrhorning };
+                   inskrivenfyrhorning: layoutInskrivenfyrhorning,
+                   potensekvation2c: layoutPotensekvation2c,
+                   aktierna: layoutAktierna,
+                   logutanraknare: layoutLogutanraknare,
+                   potensbastio: layoutPotensbastio,
+                   expekvationer: layoutExpekvationer,
+                   logekvationer: layoutLogekvationer,
+                   logaritmlagar: layoutLogaritmlagar,
+                   tredjelogaritmlagen: layoutTredjelogaritmlagen,
+                   fleralogtermer: layoutFleralogtermer,
+                   sparkontot: layoutSparkontot,
+                   generelllogaritm: layoutGenerelllogaritm,
+                   logannanbas: layoutLogannanbas,
+                   skrivpotens: layoutSkrivpotens };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

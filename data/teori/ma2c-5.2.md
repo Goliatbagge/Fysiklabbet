@@ -82,6 +82,11 @@ $10^{-6} = \dfrac{1}{1\,000\,000} = 0{,}000\,001$ och så vidare.
 ::: exempel "Exempel 1 — Bestäm utan räknare"
 **Bestäm utan räknare<br>a)&nbsp;$\lg 10\,000$&emsp;&emsp;b)&nbsp;$\lg 10^{-5}$&emsp;&emsp;c)&nbsp;$\lg \sqrt{10}$**
 
+::: handskrift
+typ: logutanraknare
+:::
+
+::: textlosning
 **a)** Vi tänker "Vad ska vi upphöja 10 till för att det ska bli
 10 000? Jo, 4."
 
@@ -100,10 +105,16 @@ $\dfrac{1}{2}$ för att svaret ska bli $\sqrt{10}$.
 
 **Svar:** $\dfrac{1}{2}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Skriv som en potens med basen 10"
 **Skriv som en potens med basen 10.<br>a) 4&emsp;&emsp;b) 75**
 
+::: handskrift
+typ: potensbastio
+:::
+
+::: textlosning
 **a)** Den exponent vi ska upphöja 10 till för att det ska bli 4 kan
 skrivas lg 4. Så
 
@@ -116,6 +127,7 @@ $$
 **b)** På motsvarande sätt som i a-uppgiften gäller $75 = 10^{\lg 75}$.
 
 **Svar:** $10^{\lg 75}$
+:::
 :::
 
 ::: exempel "Exempel 3 — Beräkna utan räknare"

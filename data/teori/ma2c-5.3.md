@@ -44,6 +44,11 @@ för."
 ::: exempel "Exempel 1 — Lös ekvationerna"
 **Lös ekvationerna nedan. Svara exakt och med två decimaler.<br>a)&nbsp;$10^x = 53$&emsp;&emsp;b)&nbsp;$2^x = 37$&emsp;&emsp;c)&nbsp;$5 \cdot 3^{2x} - 4 = 31$**
 
+::: handskrift
+typ: expekvationer
+:::
+
+::: textlosning
 **a)** Vi skriver om HL till basen 10 och sätter sedan exponenterna
 lika:
 
@@ -119,10 +124,16 @@ $$
 
 **Svar:** $x = \dfrac{\lg 7}{2 \cdot \lg 3} \approx 0{,}89$
 :::
+:::
 
 ::: exempel "Exempel 2 — Lös logaritmekvationerna"
 **Lös<br>a)&nbsp;$\lg x = 3$&emsp;&emsp;b)&nbsp;$\lg 5x = 2{,}7$**
 
+::: handskrift
+typ: logekvationer
+:::
+
+::: textlosning
 **a)** Vi skriver om ekvationen till potensform. "10 upphöjt till det
 som står i högra ledet, ska bli det vi har logaritmen för."
 
@@ -152,6 +163,7 @@ x = \frac{10^{2{,}7}}{5} \approx 100{,}24
 $$
 
 **Svar:** $x \approx 100{,}24$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

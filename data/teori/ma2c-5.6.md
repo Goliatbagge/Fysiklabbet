@@ -33,6 +33,11 @@ vanlig används det förkortade skrivsättet "lg".)
 ::: exempel "Exempel 1 — Lös med generell logaritm"
 **Lös $3^x = 25$.**
 
+::: handskrift
+typ: generelllogaritm
+:::
+
+::: textlosning
 Enligt definitionen av generella logaritmer är lösningen "3-logaritmen
 för 25":
 
@@ -42,10 +47,16 @@ $$
 
 **Svar:** $x = \log_3 25$
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm utan räknare"
 **Bestäm utan räknare<br>a)&nbsp;$\log_2 16$&emsp;&emsp;b)&nbsp;$\log_3 9$**
 
+::: handskrift
+typ: logannanbas
+:::
+
+::: textlosning
 **a)** $\log_2 16$ kan tolkas "vad 2 ska upphöjas till för att bli
 16". Då $2^4 = 16$ gäller $\log_2 16 = 4$.
 
@@ -56,10 +67,16 @@ Då $3^2 = 9$ gäller $\log_3 9 = 2$.
 
 **Svar:** 2
 :::
+:::
 
 ::: exempel "Exempel 3 — Skriv som en potens"
 **Skriv 24 som en potens med basen 3.**
 
+::: handskrift
+typ: skrivpotens
+:::
+
+::: textlosning
 Talet som 3 ska upphöjas till för att bli 24 är (per definition)
 $\log_3 24$. Alltså gäller
 
@@ -68,6 +85,7 @@ $$
 $$
 
 **Svar:** $3^{\log_3 24}$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

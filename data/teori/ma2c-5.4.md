@@ -134,6 +134,11 @@ vanligt.
 ::: exempel "Exempel 1 — Beräkna utan räknare"
 **Beräkna utan räknare<br>a)&nbsp;$\lg 25 + \lg 4$&emsp;&emsp;b)&nbsp;$\lg 3\,000 - \lg 3$**
 
+::: handskrift
+typ: logaritmlagar
+:::
+
+::: textlosning
 **a)** Vi utnyttjar första logaritmlagen och får
 
 $$
@@ -150,10 +155,16 @@ $$
 
 **Svar:** 3
 :::
+:::
 
 ::: exempel "Exempel 2 — Lös med tredje logaritmlagen"
 **Lös ekvationerna med tredje logaritmlagen.<br>a)&nbsp;$5^x = 136$&emsp;&emsp;b)&nbsp;$4 \cdot 5^x = 3 \cdot 2^x$**
 
+::: handskrift
+typ: tredjelogaritmlagen
+:::
+
+::: textlosning
 **a)** Vi logaritmerar båda led:
 
 $$
@@ -200,10 +211,16 @@ $$
 
 **Svar:** $x = \dfrac{\lg \left(\frac{3}{4}\right)}{\lg \left(\frac{5}{2}\right)} \approx -0{,}31$
 :::
+:::
 
 ::: exempel "Exempel 3 — Flera logaritmtermer"
 **Lös ekvationen $2 \lg 5 + \lg 4 = \lg 2x$.**
 
+::: handskrift
+typ: fleralogtermer
+:::
+
+::: textlosning
 Vi börjar med att skriva om den första termen i VL med tredje
 logaritmlagen:
 
@@ -238,6 +255,7 @@ x = 50
 $$
 
 **Svar:** $x = 50$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -39,6 +39,11 @@ Kom ihåg 2:
 **Du sätter in 10 000 kr på ett konto med årsräntan 2,3 %. Hur lång tid
 tar det tills du har över 12 000 kr på kontot?**
 
+::: handskrift
+typ: sparkontot
+:::
+
+::: textlosning
 Vi har något som växer procentuellt/exponentiellt, så vi ställer upp
 formeln
 
@@ -83,6 +88,7 @@ Eftersom räntan betalas ut i slutet av varje år kommer inte beloppet
 att växa över 12 000 kr förrän efter 9 år.
 
 **Svar:** Efter 9 år.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -37895,23 +37895,34 @@
         'font-size:12px;cursor:pointer;font-family:inherit}' +
       '.hk-upg-btn:hover{background:#efe8d8}' +
       /* höger padding lämnar plats åt de fixerade knapparna (helskärm +
-       * ev. inställningsruta) uppe till höger */
+       * ev. inställningsruta) uppe till höger.
+       * ⚠️ Panelen SKROLLAR ALDRIG i sig själv (max-height + overflow-y:
+       * auto gav en inre rullningslist med figuren avhuggen — samma fel
+       * som i np.html:s frågekort, påpekat 2026-09-13). Figuren läggs
+       * bredvid texten och krymps efter skärmhöjden; ryms panelen ändå
+       * inte under UPG_TAK släpper fitFS() nålen med .hk-los, så att den
+       * rullar med arket. Se "Fastnålade uppgiftsrutor" i CLAUDE.md. */
       '.hk-upg-inner{padding:2px 210px 12px 20px;font-size:16.5px;' +
-        'line-height:1.55;color:' + LABINK + ';max-height:42vh;overflow-y:auto}' +
+        'line-height:1.55;color:' + LABINK + '}' +
       '.hk-uppgift.hk-smal .hk-upg-inner{padding-right:64px}' +
       '.hk-upg-inner p{margin:6px 0}' +
-      /* figuren läggs till höger om frågetexten så panelen hålls låg */
-      '.hk-upg-inner .lab-block-figur{float:right;max-width:40%;' +
-        'margin:0 0 4px 18px}' +
+      /* figuren läggs till höger om frågetexten så panelen hålls låg —
+       * teorins .lab-block-figur såväl som provens .np-figur */
+      '.hk-upg-inner .lab-block-figur,.hk-upg-inner .np-figur{float:right;' +
+        'max-width:40%;margin:0 0 4px 18px}' +
       '.hk-upg-inner::after{content:"";display:block;clear:both}' +
       '.hk-upg-inner svg{max-height:17vh;width:auto;max-width:100%}' +
       '.hk-uppgift.hk-hopfalld .hk-upg-inner{display:none}' +
+      /* släppt nål: panelen står först i flödet och rullar bort med arket */
+      '.hk-wrap:fullscreen .hk-uppgift.hk-los,' +
+      '.hk-wrap:-webkit-full-screen .hk-uppgift.hk-los{position:static}' +
+      '.hk-wrap:fullscreen .hk-uppgift.hk-los::before,' +
+      '.hk-wrap:-webkit-full-screen .hk-uppgift.hk-los::before{display:none}' +
       /* MOBIL: panelen får inte äta halva skärmen — figuren göms (scenen
-       * ritar ändå sin egen figur på arket) och texten skrollar i en
-       * begränsad ruta */
+       * ritar ändå sin egen figur på arket) */
       '@media (max-width:600px){.hk-upg-inner{padding-right:90px;' +
-        'font-size:14.5px;max-height:24vh}' +
-        '.hk-upg-inner .lab-block-figur{display:none}}';
+        'font-size:14.5px}' +
+        '.hk-upg-inner .lab-block-figur,.hk-upg-inner .np-figur{display:none}}';
     document.head.appendChild(st);
   }
 
@@ -39070,6 +39081,9 @@
       wrap.insertBefore(upgPanel, wrap.firstChild);
     })();
 
+    /* takhöjd för den fastnålade uppgiftspanelen, andel av skärmhöjden:
+     * högre än så nålas den inte fast (se CSS-kommentaren vid .hk-upg-inner) */
+    function UPG_TAK() { return window.innerWidth <= 600 ? 0.30 : 0.42; }
     function fitFS() {
       var fs = document.fullscreenElement === wrap;
       fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
@@ -39084,10 +39098,23 @@
         svg.style.width = '';
         svg.style.height = '';
       }
+      if (upgPanel) {
+        /* mät panelen ONÅLAD — sticky ändrar inte höjden, men klassen
+         * ska spegla den aktuella storleken, inte förra mätningen */
+        upgPanel.classList.remove('hk-los');
+        if (fs && upgPanel.getBoundingClientRect().height >
+            window.innerHeight * UPG_TAK()) {
+          upgPanel.classList.add('hk-los');
+        }
+      }
       placeNav();
       followPen(true);
     }
-    document.addEventListener('fullscreenchange', fitFS);
+    document.addEventListener('fullscreenchange', function () {
+      fitFS();
+      /* teckensnitt och KaTeX kan ändra panelens höjd strax efter */
+      setTimeout(fitFS, 450);
+    });
     window.addEventListener('resize', fitFS);
 
     /* håll pennan i sikte i helskärm — med DÖDZON så att vyn ligger

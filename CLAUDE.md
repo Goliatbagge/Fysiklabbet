@@ -78,6 +78,16 @@ node .claude/verify-brak.js
 # dev-servern på port 8000 + playwright-core i %TEMP%\pptr-test.
 node .claude/verify-formelklipp.js [avsnitts-id …]
 
+# Verifiera att de FASTNÅLADE UPPGIFTSRUTORNA aldrig skrollar i sig själva
+# (KÖR FÖRE COMMIT vid ändringar i np.html:s frågekort, handskrift.js
+# uppgiftspanel eller figurernas CSS!) — stegvyn, presentationsläget och
+# pennlösningens helskärm, för varje provuppgift med figur, på 1290×730
+# (MOBIL=1 lägger till 390×844). Fel på inre skroll och på en ruta som är
+# nålad fast trots att den är högre än sin takhöjd. Argument: ma2c-vt2022:11
+# eller np:ma2c-vt2022. Se "Fastnålade uppgiftsrutor" nedan. Kräver
+# dev-servern på port 8000 + playwright-core i %TEMP%\pptr-test.
+node .claude/verify-uppgiftsruta.js [uppgift …]
+
 # Verifiera BALANSEN i kopplingsscheman (KÖR FÖRE COMMIT vid ändringar i
 # kopplingsscheman!) — komponenterna ska ha lika stora mellanrum på sin
 # ledarsträcka, batteriet sitta centrerat och parallellgrenarna ligga på
@@ -927,6 +937,45 @@ sista steget, att den ryms i höjd- och sidled ovanför kontrollisten, att den
 inte krympts under 12 px — **och att den fyller minst 80 % av den tillgängliga
 höjden**. Underkänt fyllnadsvärde betyder oftast att korten är för få eller för
 ojämna, inte att koden är trasig.
+
+## ⚠️ Fastnålade uppgiftsrutor skrollar ALDRIG i sig själva
+
+Tre ställen nålar fast uppgiftstexten i överkanten medan lösningen rullar
+under den: frågekortet i provens stegvy (`.np-fraga-fast` i `np.html`),
+frågekortet i provens presentationsläge (`.np-pres-fraga-fast`) och
+uppgiftspanelen i pennlösningens helskärm (`.hk-uppgift` i
+`handskrift.js`, som klonar frågestammen ur `.lab-block-exempel`). Alla tre
+hade `max-height` + `overflow-y: auto`, så att en uppgift med figur fick en
+inre rullningslist med figuren avhuggen i underkant (uppgift 11 i Ma 2c
+VT2022, påpekat 2026-09-13). Det ser inte trasigt ut i koden, bara på
+skärmen, och det är fult.
+
+Regeln, som gäller ALLA fastnålade rutor, även nya:
+
+1. **Ingen inre skroll.** Sätt aldrig `overflow-y: auto`/`scroll` (eller
+   `max-height` som förutsätter det) på en fastnålad uppgiftsruta.
+2. **Rutan görs kompakt i stället:** figuren läggs BREDVID texten och
+   krymps i höjd efter skärmen (`max-height` i `vh` på svg:n, `width:
+   auto`), så att rutan håller sig under sin takhöjd. I `np.html` sköts
+   det med ett rutnät (`grid-template-areas: "label label" "text fig"`),
+   eftersom en float bara lägger sig bredvid text som kommer EFTER den i
+   DOM:en. I `handskrift.js` floatas figuren, och därför renderar
+   `PennaVy` i `np.html` figuren FÖRE frågetexten i klonkällan
+   `.np-penna-fraga`.
+3. **Ryms rutan ändå inte (lång frågestam): släpp nålen.** JS mäter rutan
+   (`nalMatare()` i `np.html`, `fitFS()` i `handskrift.js`) mot takhöjden
+   (`NP_FAST_TAK` 38 %, `NP_PRES_TAK` 34 %, `UPG_TAK()` 42 %/30 % av
+   fönstret) och sätter `.np-fraga-los`/`.hk-los`, som gör rutan
+   `position: static`. Den rullar då med sidan som ett vanligt kort. Mät
+   om vid `resize` och när teckensnitten laddats.
+4. **Skrollcentreringen räknar bara med en nålad ruta.** `stickyH`/`sh`
+   i `np.html` och `ph` i `followPen()` ska vara 0 när nålen är släppt.
+
+`node .claude/verify-uppgiftsruta.js` mäter alla tre rutorna för varje
+provuppgift med figur, på 1290×730 (MOBIL=1 lägger till 390×844), och ger
+fel på en ruta som skrollar i sig själv eller är nålad fast trots att den
+är högre än sin takhöjd. Kör den vid ändringar i frågekorten,
+uppgiftspanelen eller figurernas CSS.
 
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 

@@ -203,15 +203,52 @@
         .np-fraga .np-kortlabel { color: var(--lab-ink-muted); }
         /* Uppgiftstexten "fastnålad" högst upp medan lösningsstegen rullar
            under den, så att man alltid kan blicka tillbaka på uppgiften.
-           Blir den hög skrollar kortet internt. */
+           ⚠️ Kortet SKROLLAR ALDRIG i sig självt. Den gamla lösningen
+           (max-height + overflow-y: auto) gav en inre rullningslist med
+           figuren avhuggen i underkant (uppgift 11 i Ma 2c VT2022, påpekat
+           2026-09-13). I stället läggs figuren bredvid texten och krymps
+           efter skärmhöjden så att kortet håller sig under NP_FAST_TAK
+           (38 % av höjden). Ryms det ändå inte (lång frågestam) släpper
+           UppgiftView nålen med .np-fraga-los: kortet rullar då med sidan
+           som ett vanligt kort. Se "Fastnålade uppgiftsrutor" i CLAUDE.md
+           och node .claude/verify-uppgiftsruta.js. */
         .np-fraga-fast {
             position: sticky;
             top: 0;
             z-index: 40;
-            max-height: 38vh;
-            overflow-y: auto;
-            overscroll-behavior: contain;
             box-shadow: 0 12px 20px -14px rgba(15, 22, 32, 0.35);
+        }
+        .np-fraga-fast.np-fraga-los { position: static; box-shadow: none; }
+        /* Rutnät, inte float: en float lägger sig bara bredvid text som
+           KOMMER EFTER den i DOM:en, och figuren renderas efter frågan.
+           Figurkolumnen får högst 42 % av bredden; svg:n krymps i höjd
+           efter skärmen (så att kortet ryms) och i bredd efter kolumnen. */
+        .np-fraga-fast,
+        .np-pres .np-pres-fraga-fast .np-fraga {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) fit-content(42%);
+            grid-template-areas: "label label" "text fig";
+            column-gap: 22px;
+            align-items: start;
+        }
+        .np-fraga-fast > .np-kortlabel,
+        .np-pres .np-pres-fraga-fast .np-fraga > .np-kortlabel { grid-area: label; }
+        .np-fraga-fast > .np-md,
+        .np-pres .np-pres-fraga-fast .np-fraga > .np-md { grid-area: text; }
+        .np-fraga-fast > .np-figur,
+        .np-pres .np-pres-fraga-fast .np-fraga > .np-figur { grid-area: fig; margin: 0; }
+        .np-fraga-fast .np-figur svg { max-height: 26vh; width: auto; height: auto; }
+        @media (max-width: 600px) {
+            /* smal skärm: figuren under texten (bredvid blir texten en
+               remsa) — ryms inte kortet släpps nålen som vanligt */
+            .np-fraga-fast,
+            .np-pres .np-pres-fraga-fast .np-fraga {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-areas: "label" "text" "fig";
+            }
+            .np-fraga-fast > .np-figur,
+            .np-pres .np-pres-fraga-fast .np-fraga > .np-figur { margin-top: 10px; }
+            .np-fraga-fast .np-figur svg { max-height: 22vh; }
         }
         .np-kortlabel {
             font-family: var(--lab-font-mono);
@@ -608,11 +645,19 @@
         .lab-pres-body > .pres-item.np-pres-fraga-fast.is-on:not(.is-current) {
             opacity: 1;
         }
+        /* Samma regel som för .np-fraga-fast: kortet skrollar aldrig i sig
+           självt — figuren bredvid texten, krympt efter skärmhöjden, och
+           ryms kortet inte under NP_PRES_TAK släpper NpPresentation nålen
+           (.np-fraga-los). */
         .np-pres .np-pres-fraga-fast .np-fraga {
-            max-height: 34vh;
-            overflow-y: auto;
-            overscroll-behavior: contain;
             box-shadow: 0 14px 24px -14px rgba(15, 22, 32, 0.4);
+        }
+        .np-pres .pres-item.np-pres-fraga-fast.np-fraga-los { position: static; }
+        .np-pres .np-pres-fraga-fast.np-fraga-los .np-fraga { box-shadow: none; }
+        /* (rutnätet text | figur delas med .np-fraga-fast, se ovan) */
+        .np-pres .np-pres-fraga-fast .np-figur svg { max-height: 22vh; width: auto; height: auto; }
+        @media (max-width: 600px) {
+            .np-pres .np-pres-fraga-fast .np-figur svg { max-height: 20vh; }
         }
 
         /* Presentationsläget: korten ärver np-stilarna; brödtexten är
@@ -1053,6 +1098,36 @@
         // --- Uppgiftsvy: fråga + lösning steg för steg ---
         // ?los=1 fäller ut hela lösningen direkt (används för skärmdumpstester)
         const LOS_DIREKT = new URLSearchParams(window.location.search).has('los');
+        // Takhöjd (andel av fönsterhöjden) för de fastnålade uppgiftskorten.
+        // Ett kort som är högre nålas INTE fast utan rullar med sidan — det
+        // får aldrig skrolla i sig självt (se CSS-kommentaren vid
+        // .np-fraga-fast). Samma tal används av verify-uppgiftsruta.js.
+        const NP_FAST_TAK = 0.38;   // stegvyn (.np-fraga-fast)
+        const NP_PRES_TAK = 0.34;   // presentationsläget (.np-pres-fraga-fast)
+        // Mät ett kort och tala om ifall nålen ska släppas. Mäts igen när
+        // teckensnitten laddats (KaTeX byter typsnitt efter första ritningen)
+        // och vid varje fönsterändring.
+        function nalMatare(getEl, tak, setLos) {
+            const mat = () => {
+                const el = getEl();
+                if (!el) return;
+                const bas = el.closest('.lab-pres') || null;
+                const vh = bas ? bas.clientHeight : window.innerHeight;
+                setLos(el.getBoundingClientRect().height > vh * tak);
+            };
+            mat();
+            const t = setTimeout(mat, 500);
+            let levande = true;
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => { if (levande) mat(); });
+            }
+            window.addEventListener('resize', mat);
+            return () => {
+                levande = false;
+                clearTimeout(t);
+                window.removeEventListener('resize', mat);
+            };
+        }
         // ?pres=N öppnar presentationsläget direkt på steg N (skärmdumpstester)
         const PRES_START = (() => {
             const v = new URLSearchParams(window.location.search).get('pres');
@@ -1075,6 +1150,10 @@
             const total = antalSteg + (harDelsvar ? 1 : 2); // uppgiften + stegen (+ ev. svaret)
             const [step, setStep] = useState(() => Math.min(startStep || 0, total));
             const [chrome, setChrome] = useState(true);
+            // Nålen på uppgiftskortet släpps när kortet inte ryms (NP_PRES_TAK)
+            const [fragaLos, setFragaLos] = useState(false);
+            useEffect(() => nalMatare(() => stageRefs.current[1], NP_PRES_TAK, setFragaLos),
+                [uppgift.nr]);
             const totalRef = useRef(total);
             totalRef.current = total;
 
@@ -1136,8 +1215,9 @@
                     const oh = overlay.clientHeight;
                     // Fastnålad uppgiftstext upptar toppen — centrera det
                     // aktuella steget i ytan UNDER den.
-                    const sh = (step >= 2 && stageRefs.current[1])
-                        ? Math.min(stageRefs.current[1].getBoundingClientRect().height, oh * 0.36) + 14
+                    // (ett släppt kort rullar med och upptar ingen fast yta)
+                    const sh = (step >= 2 && stageRefs.current[1] && !fragaLos)
+                        ? Math.min(stageRefs.current[1].getBoundingClientRect().height, oh * NP_PRES_TAK) + 14
                         : 0;
                     const fri = oh - sh;
                     const top = (r.height > fri * 0.62)
@@ -1170,7 +1250,7 @@
                 };
                 rafId = requestAnimationFrame(tick);
                 return () => cancelAnimationFrame(rafId);
-            }, [step]);
+            }, [step, fragaLos]);   /* släppt nål ändrar den fria ytan */
 
             // Kontrollisten göms efter en stunds musinaktivitet
             const pokeChrome = () => {
@@ -1218,7 +1298,7 @@
                             </div>
                         </div>
                         <div className="lab-article-body lab-pres-body np-pres-body">
-                            <div className={cls(1) + ' np-pres-fraga-fast'}
+                            <div className={cls(1) + ' np-pres-fraga-fast' + (fragaLos ? ' np-fraga-los' : '')}
                                 ref={el => { stageRefs.current[1] = el; }}>
                                 <div className="np-fraga">
                                     <span className="np-kortlabel">Uppgift</span>
@@ -1314,9 +1394,12 @@
             }, [typ]);
             return (
                 <div className="np-penna-ex lab-block-exempel">
+                    {/* figuren FÖRST: handskrift.js floatar den till höger i
+                        helskärmens uppgiftspanel, och en float lägger sig
+                        bara bredvid text som kommer EFTER den */}
                     <div className="np-penna-fraga">
-                        <MdBlock source={uppgift.fraga} />
                         <Figur provId={prov.id} figurKey={uppgift.figur} />
+                        <MdBlock source={uppgift.fraga} />
                     </div>
                     <div className="np-penna lab-handskrift" ref={host} />
                 </div>
@@ -1333,6 +1416,10 @@
             const svarEl = useRef(null);
             const fragaEl = useRef(null);
             const prevVisade = useRef(LOS_DIREKT ? 999 : 0);
+            // Nålen på uppgiftskortet släpps när kortet inte ryms (NP_FAST_TAK)
+            const [fragaLos, setFragaLos] = useState(false);
+            useEffect(() => nalMatare(() => fragaEl.current, NP_FAST_TAK, setFragaLos),
+                [uppgift.nr]);
             useEffect(() => {
                 setVisadeSteg(LOS_DIREKT ? 999 : 0);
                 prevVisade.current = LOS_DIREKT ? 999 : 0;
@@ -1359,8 +1446,9 @@
                     const vh = window.innerHeight;
                     // Fastnålad uppgiftstext upptar toppen av rutan —
                     // centrera steget i ytan UNDER den.
-                    const stickyH = fragaEl.current
-                        ? Math.min(fragaEl.current.getBoundingClientRect().height, vh * 0.38) + 10
+                    // (ett släppt kort rullar med och upptar ingen fast yta)
+                    const stickyH = (fragaEl.current && !fragaLos)
+                        ? Math.min(fragaEl.current.getBoundingClientRect().height, vh * NP_FAST_TAK) + 10
                         : 0;
                     const fri = vh - stickyH;
                     const top = (r.height > fri * 0.62)
@@ -1402,7 +1490,7 @@
                         </div>
                     )}
 
-                    <div className="np-fraga np-fraga-fast" ref={fragaEl}>
+                    <div className={'np-fraga np-fraga-fast' + (fragaLos ? ' np-fraga-los' : '')} ref={fragaEl}>
                         <span className="np-kortlabel">Uppgift</span>
                         <MdBlock source={uppgift.fraga} />
                         <Figur provId={prov.id} figurKey={uppgift.figur} />

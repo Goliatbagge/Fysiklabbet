@@ -50362,6 +50362,674 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: värden ur enhetscirkeln (ma3c-6.3 ex 1) ----
+   * Kvartsvarven ger exakta värden direkt ur koordinaterna. */
+  function layoutEnhetscirkelvarden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 170, oy: 250, u: 84 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    C.radie(90, 30);
+    C.punkt(0, 1);
+    T.str('(0, 1)', C.X(0) + 12, C.Y(1) - 0.3 * F, BLUE, 0.5);
+    T.pause(240);
+    C.radie(180, 24);
+    C.punkt(-1, 0);
+    T.str('(-1, 0)', C.X(-1) - 74, C.Y(0) - 0.5 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(C.oy + 1.35 * C.u, [
+      [['Ett kvarts varv moturs landar']],
+      [['högst upp på cirkeln. Sinus är']],
+      [['y-koordinaten.']]
+    ], 0);
+    y = C.oy + 1.35 * C.u + 3.0 * F;
+    xe = T.str('a) sin 90°=1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett halvt varv landar längst']],
+      [['till vänster. Cosinus är']],
+      [['x-koordinaten.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('b) cos 180°=-1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: närmevärden ur cirkeln (6.3 ex 2) ---------- */
+  function layoutEnhetscirkelnarme(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 170, oy: 250, u: 84 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    C.radie(45, 28);
+    C.punkt(0.707, 0.707);
+    C.hjalp(0.707, 0.707);
+    T.str('45°', C.ox + 40, C.oy - 12, null, 0.5);
+    T.stepEnd();
+
+    tanke(C.oy + 1.35 * C.u, [
+      [['Sinus är y-koordinaten. Avläst']],
+      [['mot y-axeln ligger punkten']],
+      [['ungefär 0,7 upp.']]
+    ], 0);
+    y = C.oy + 1.35 * C.u + 3.0 * F;
+    xe = T.str('a) sin 45°≈0,7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['220° ligger i tredje']],
+      [['kvadranten, en bit under den']],
+      [['negativa x-axeln. Cosinus är']],
+      [['x-koordinaten där.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('b) cos 220°≈-0,8', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvationer i enhetscirkeln (6.3 ex 3) ------
+   * En vågrät linje för sinus, en lodrät för cosinus. Ligger linjen
+   * utanför cirkeln saknas lösning. */
+  function layoutEnhetscirkelekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var C = mkCirkel(T, F, { ox: padL + 170, oy: 250, u: 84 });
+
+    C.axlar();
+    C.cirkel();
+    T.stepEnd();
+
+    /* vågrät linje y = 0,4 */
+    C.strecklinje([C.X(-1.25), C.Y(0.4)], [C.X(1.25), C.Y(0.4)]);
+    C.punkt(0.917, 0.4, BLUE);
+    C.punkt(-0.917, 0.4, BLUE);
+    T.str('0,4', C.ox - 52, C.Y(0.4) - 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(C.oy + 1.35 * C.u, [
+      [['Sinus är y-koordinaten, så jag']],
+      [['drar en vågrät linje vid 0,4.']],
+      [['Den skär cirkeln på två']],
+      [['ställen.']]
+    ], 0);
+    y = C.oy + 1.35 * C.u + 3.2 * F;
+    xe = T.str('a) v≈20° och v≈160°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) skulle linjen ligga vid']],
+      [['x=1,5. Men cirkelns radie är']],
+      [['bara 1, så linjen når aldrig']],
+      [['fram.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('b) lösning saknas', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: trigonometrisk ekvation med räknare (6.3 ex 4)
+   * Först löses funktionen ut, sedan ger den inversa funktionen den ena
+   * vinkeln och symmetrin den andra. */
+  function layoutRaknarekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('4cos v+3,28=6,58', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först måste cos v stå ensamt.']],
+      [['Jag behandlar cos v som en']],
+      [['enda okänd storhet.']]
+    ]);
+    y = ekvOp(y, '-3,28', padL + 420, '4cos v+3,28=6,58');
+    xx = T.str('4cos v=3,3', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/4', xx + 0.6 * F, '4cos v=3,3',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('cos v=0,825', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räknaren ger den ena vinkeln,']],
+      [['den i första kvadranten.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('v_1=cos^-^1(0,825)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=34,411...°≈34,4°', padL + 40, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Cosinus är lika stort för en']],
+      [['vinkel och för 360° minus den:']],
+      [['punkterna speglas i x-axeln.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('v_2=360°-34,411...°', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=325,588...°≈325,6°', padL + 40, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: tangensekvation (ma3c-6.4 ex 1) -----------
+   * Tangens har perioden 180°, så den andra lösningen ligger ett halvt
+   * varv bort. */
+  function layoutTangensekvation3c(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('tan v=2,  0°≤v≤360°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räknarens tan^-^1 ger den']],
+      [['första lösningen.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('v_1=tan^-^1(2)=63,434...°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈63,4°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tangens upprepar sig varje']],
+      [['halvt varv, inte varje helt.']],
+      [['Nästa lösning ligger 180° bort.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('v_2=63,4°+180°', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=243,4°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: triangel med hörnmärkning --------------
+   * Ritar en triangel ur tre punkter och sätter hörnbeteckningarna
+   * utanför figuren, längs bisektrisen ut från hörnet. */
+  function ritaTriangel(T, F, A, B, C, namn) {
+    T.line(A, B); T.line(B, C); T.line(C, A);
+    T.pause(180);
+    if (!namn) return;
+    [[A, B, C, namn[0]], [B, C, A, namn[1]], [C, A, B, namn[2]]]
+      .forEach(function (d) {
+        var p = d[0], q = d[1], r = d[2];
+        var ux = (q[0] - p[0]), uy = (q[1] - p[1]);
+        var vx = (r[0] - p[0]), vy = (r[1] - p[1]);
+        var lu = Math.hypot(ux, uy) || 1, lv = Math.hypot(vx, vy) || 1;
+        var bx = ux / lu + vx / lv, by = uy / lu + vy / lv;
+        var lb = Math.hypot(bx, by) || 1;
+        T.str(d[3], p[0] - bx / lb * 26 - T.adv(d[3], 0.6) / 2,
+              p[1] - by / lb * 26 + 0.2 * F, null, 0.6);
+        T.pause(160);
+      });
+  }
+
+  /* ---------------- scen: areasatsen (ma3c-6.5 ex 1) ----------------
+   * Arean räknas ur två sidor och vinkeln MELLAN dem. */
+  function layoutAreasatsen(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var A = [padL + 90, 320], B = [padL + 330, 300], C = [padL + 150, 180];
+    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+    T.str('8 cm', (A[0] + B[0]) / 2 - 30, 345, BLUE, 0.6);
+    T.str('11 cm', (A[0] + C[0]) / 2 - 76, (A[1] + C[1]) / 2, BLUE, 0.6);
+    T.pause(200);
+    vinkelBage(T, A, Math.atan2(B[1] - A[1], B[0] - A[0]),
+               Math.atan2(C[1] - A[1], C[0] - A[0]), 34);
+    T.str('80°', A[0] + 22, A[1] - 26, null, 0.55);
+    T.stepEnd();
+
+    tanke(380, [
+      [['Areasatsen kräver två sidor']],
+      [['och vinkeln MELLAN dem. Sidan']],
+      [['mitt emot behövs inte.']]
+    ], 0);
+    y = 440;
+    T.str('Areasatsen', padL, y - 1.5 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('T=', padL, y);
+    xx = T.fracH('bc sin A', '2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('11·8 sin 80°', '2', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=43,331... cm^2', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två värdesiffror i sidorna,']],
+      [['men vinkeln är exakt given.']],
+      [['Jag svarar med tre siffror.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: T≈43,3 cm^2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: mellanliggande vinkel (ma3c-6.5 ex 2) ------
+   * Här ger BÅDA sinuslösningarna giltiga trianglar. */
+  function layoutAreasatsvinkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('T=10 cm^2, a=4,0 cm, b=12,0 cm', padL, y, null, 0.82);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Areasatsen igen, men nu är']],
+      [['arean känd och vinkeln söks.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('10=', padL, y);
+    T.fracH('4,0·12,0·sin C', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag löser ut sin C: gångra']],
+      [['båda led med 2 och dela med']],
+      [['48.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('sin C=', padL, y);
+    xx = T.fracH('2·10', '4,0·12,0', xx, y);
+    T.str('=0,416...', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('C_1=sin^-^1(0,416...)≈25°', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sinus är lika stort för en']],
+      [['vinkel och för 180° minus den,']],
+      [['så det finns en trubbig']],
+      [['lösning också.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('C_2=180°-25°=155°', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här duger båda: arean och två']],
+      [['sidor bestämmer inte triangeln']],
+      [['entydigt.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: C≈25° eller C≈155°', padL, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sinussatsen, sida (ma3c-6.6 ex 1) ---------- */
+  function layoutSinussatsensida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var B = [padL + 80, 320], C = [padL + 360, 320], A = [padL + 250, 180];
+    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+    T.str('24 cm', (A[0] + C[0]) / 2 + 14, (A[1] + C[1]) / 2, BLUE, 0.6);
+    T.pause(200);
+    vinkelBage(T, B, Math.atan2(C[1] - B[1], C[0] - B[0]),
+               Math.atan2(A[1] - B[1], A[0] - B[0]), 34);
+    T.str('30°', B[0] + 40, B[1] - 10, null, 0.55);
+    T.pause(200);
+    vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
+               Math.atan2(B[1] - C[1], B[0] - C[0]), 30);
+    T.str('70°', C[0] - 74, C[1] - 14, null, 0.55);
+    T.stepEnd();
+
+    tanke(360, [
+      [['Sinussatsen parar ihop varje']],
+      [['sida med sin motstående']],
+      [['vinkel. Sidan a hör till']],
+      [['vinkeln A, som saknas.']]
+    ], 0);
+    y = 410;
+    xx = T.str('A=180°-30°-70°=80°', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.fracH('a', 'sin 80°', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('24', 'sin 30°', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['a står i täljaren, så jag']],
+      [['gångrar båda led med sin 80°.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('a=', padL, y);
+    xx = T.fracH('24 sin 80°', 'sin 30°', xx, y);
+    T.str('=47,270...', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xe = T.str('Svar: a≈47,3 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sinussatsen, vinkel (ma3c-6.6 ex 2) -------
+   * Två lösningar dyker upp, men vinkelsumman utesluter den trubbiga. */
+  function layoutSinussatsenvinkel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a=7 cm, b=10 cm, B=40°', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Söks en VINKEL sätter jag']],
+      [['sinusvärdena i täljarna, så']],
+      [['blir uträkningen enklare.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.fracH('sin A', '7', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('sin 40°', '10', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('sin A=', padL, y);
+    xx = T.fracH('7 sin 40°', '10', xx, y);
+    T.str('=0,449...', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('A_1≈26,7°', padL + 20, y);
+    T.pause(280);
+    T.str('A_2=180°-26,7°=153,3°', padL + 200, y, null, 0.82);
+    T.stepEnd();
+
+    tanke(y, [
+      [['153,3° plus de 40° vi redan']],
+      [['har blir mer än 180°. Den']],
+      [['lösningen är alltså omöjlig.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: A≈26,7°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: cosinussatsen, sida (ma3c-6.7 ex 1) ------- */
+  function layoutCosinussatsensida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var C = [padL + 110, 310], A = [padL + 330, 320], B = [padL + 250, 175];
+    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+    T.str('19 cm', (A[0] + B[0]) / 2 + 12, (A[1] + B[1]) / 2, BLUE, 0.6);
+    T.str('17 cm', (B[0] + C[0]) / 2 - 90, (B[1] + C[1]) / 2 - 6, BLUE, 0.6);
+    T.pause(200);
+    vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
+               Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
+    T.str('34°', C[0] + 26, C[1] - 24, null, 0.55);
+    T.stepEnd();
+
+    tanke(360, [
+      [['Två sidor och vinkeln mellan']],
+      [['dem: då är det cosinussatsen']],
+      [['som gäller, inte sinussatsen.']]
+    ], 0);
+    y = 400;
+    T.str('Cosinussatsen', padL, y - 1.5 * F, null, 0.62);
+    T.pause(200);
+    T.str('c^2=a^2+b^2-2ab cos C', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('c^2=19^2+17^2-2·19·17cos 34°', padL, y, null, 0.84);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('c=', padL, y);
+    T.rot('19^2+17^2-2·19·17cos 34°', xx, y, null);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=10,697...', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: vinkeln är liten, så']],
+      [['den motstående sidan ska vara']],
+      [['kortare än de andra två.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: c≈10,7 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: cosinussatsen, alla vinklar (6.7 ex 2) -----
+   * Tre kända sidor. Cosinussatsen ger den första vinkeln, och tecknet
+   * på cosinusvärdet avslöjar om vinkeln är trubbig. */
+  function layoutCosinussatsenvinklar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a=5 m, b=7 m, c=3,5 m', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla tre sidor kända: då är']],
+      [['det cosinussatsen som gäller.']],
+      [['Jag börjar med vinkeln A.']]
+    ]);
+    y += 4.8 * F;
+    T.str('a^2=b^2+c^2-2bc cos A', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('5^2=7^2+3,5^2-2·7·3,5cos A', padL, y, null, 0.84);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag flyttar över cosinustermen']],
+      [['och löser ut cos A.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('cos A=', padL, y);
+    T.fracH('7^2+3,5^2-5^2', '2·7·3,5', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('A=42,285...°≈42,3°', padL + 20, y);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak för vinkeln B, med']],
+      [['den form av satsen som har']],
+      [['cos B i sig.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('cos B=', padL, y);
+    T.fracH('5^2+3,5^2-7^2', '2·5·3,5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren blir negativ, så']],
+      [['cos B är negativt. Då är']],
+      [['vinkeln trubbig.']]
+    ], 1.9);
+    y += 5.6 * F;
+    xx = T.str('B=109,615...°≈109,6°', padL + 20, y);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den sista vinkeln får jag']],
+      [['enklast ur vinkelsumman.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('C=180°-42,3°-109,6°', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=28,1°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kullens höjd (ma3c-6.8 ex 1) --------------
+   * Två trianglar i samma figur: sinussatsen ger avståndet, och sedan
+   * ger sinus i den rätvinkliga triangeln höjden. */
+  function layoutFlaggstangkulle(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    var B = [padL + 60, 330], Cp = [padL + 360, 330];
+    var D = [padL + 360, 230], A = [padL + 360, 170];
+    T.line(B, Cp); T.line(Cp, A); T.line(B, A); T.line(B, D);
+    ratVinkel(T, Cp, [-1, 0], [0, -1]);
+    T.pause(180);
+    T.str('B', B[0] - 26, B[1] + 0.2 * F, null, 0.6);
+    T.str('C', Cp[0] + 12, Cp[1] + 0.2 * F, null, 0.6);
+    T.str('D', D[0] + 12, D[1] + 0.2 * F, null, 0.6);
+    T.str('A', A[0] + 12, A[1] + 0.2 * F, null, 0.6);
+    T.pause(200);
+    T.str('11 m', A[0] + 14, (A[1] + D[1]) / 2 + 0.2 * F, BLUE, 0.55);
+    /* båda höjdvinklarna mäts från marken, så bågarna ritas med olika
+     * radie från B och etiketten läggs strax utanför sin egen båge */
+    var aD = Math.atan2(D[1] - B[1], D[0] - B[0]);
+    var aA = Math.atan2(A[1] - B[1], A[0] - B[0]);
+    vinkelBage(T, B, 0, aD, 62);
+    T.str('25°', B[0] + Math.cos(aD / 2) * 74,
+          B[1] + Math.sin(aD / 2) * 74 + 0.2 * F, null, 0.5);
+    T.pause(200);
+    vinkelBage(T, B, 0, aA, 112);
+    T.str('32°', B[0] + Math.cos(aA / 2) * 126,
+          B[1] + Math.sin(aA / 2) * 126 + 0.2 * F, null, 0.5);
+    T.stepEnd();
+
+    tanke(360, [
+      [['Den enda kända sidan är']],
+      [['flaggstången AD. Den ligger i']],
+      [['triangeln ABD, så jag börjar']],
+      [['med dess vinklar.']]
+    ], 0);
+    y = 420;
+    xx = T.str('∠ABD=32°-25°=7°', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('∠BAD=180°-90°-32°=58°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En sida och två vinklar i']],
+      [['triangeln ABD: sinussatsen ger']],
+      [['sträckan BD.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.fracH('BD', 'sin 58°', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('11', 'sin 7°', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('BD=', padL, y);
+    xx = T.fracH('11 sin 58°', 'sin 7°', xx, y);
+    T.str('=76,545...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är BD hypotenusan i den']],
+      [['rätvinkliga triangeln BCD, och']],
+      [['kullens höjd är motstående']],
+      [['katet till 25°.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('sin 25°=', padL, y);
+    T.fracH('CD', '76,545...', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('CD=76,545...·sin 25°', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=32,349...', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: kullen är ungefär tre']],
+      [['gånger så hög som den 11 m']],
+      [['långa flaggstången.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: kullen är ungefär 32 m', padL, y, null, 0.88);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -50859,7 +51527,19 @@
                    areamellankurvor: layoutAreamellankurvor,
                    sammansattarea: layoutSammansattarea,
                    strackaintegral: layoutStrackaintegral,
-                   tolkaintegral: layoutTolkaintegral };
+                   tolkaintegral: layoutTolkaintegral,
+                   enhetscirkelvarden: layoutEnhetscirkelvarden,
+                   enhetscirkelnarme: layoutEnhetscirkelnarme,
+                   enhetscirkelekv: layoutEnhetscirkelekv,
+                   raknarekvation: layoutRaknarekvation,
+                   tangensekvation3c: layoutTangensekvation3c,
+                   areasatsen: layoutAreasatsen,
+                   areasatsvinkel: layoutAreasatsvinkel,
+                   sinussatsensida: layoutSinussatsensida,
+                   sinussatsenvinkel: layoutSinussatsenvinkel,
+                   cosinussatsensida: layoutCosinussatsensida,
+                   cosinussatsenvinklar: layoutCosinussatsenvinklar,
+                   flaggstangkulle: layoutFlaggstangkulle };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

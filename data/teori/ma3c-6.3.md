@@ -75,6 +75,11 @@ Kontrollera gärna mot exemplen ovan.
 ::: exempel "Exempel 1 — Sinus och cosinus för vinklar på enhetscirkeln"
 **Använd enhetscirkeln för att bestämma<br>a)&nbsp;$\sin 90^\circ$&emsp;&emsp;b)&nbsp;$\cos 180^\circ$.**
 
+::: handskrift
+typ: enhetscirkelvarden
+:::
+
+::: textlosning
 **a)** Vi utgår från den positiva $x$-axeln och roterar $90^\circ$ moturs.
 Då hamnar vi högst upp på enhetscirkeln, i punkten $(0, 1)$. Sinus
 motsvarar $y$-koordinaten, så
@@ -95,10 +100,16 @@ $$
 
 **Svar:** $-1$
 :::
+:::
 
 ::: exempel "Exempel 2 — Närmevärden med enhetscirkeln"
 **Använd enhetscirkeln för att bestämma ett närmevärde till<br>a)&nbsp;$\sin 45^\circ$&emsp;&emsp;b)&nbsp;$\cos 220^\circ$.**
 
+::: handskrift
+typ: enhetscirkelnarme
+:::
+
+::: textlosning
 **a)** Vi sätter en punkt på enhetscirkelns rand vid $45^\circ$. $\sin
 45^\circ$ motsvarar $y$-koordinaten här, och avläst mot $y$-axeln ger det
 ungefär 0,7.
@@ -111,11 +122,17 @@ ungefär $-0,8$.
 
 **Svar:** $-0,8$
 :::
+:::
 
 ::: exempel "Exempel 3 — Lös trigonometriska ekvationer med enhetscirkeln"
 **Använd enhetscirkeln för att lösa ekvationerna nedan i intervallet
 $0^\circ \leq v \leq 360^\circ$.<br>a)&nbsp;$\sin v = 0{,}4$&emsp;&emsp;b)&nbsp;$\cos v = 1{,}5$**
 
+::: handskrift
+typ: enhetscirkelekv
+:::
+
+::: textlosning
 **a)** Eftersom sinus motsvarar $y$-koordinaten drar vi en vågrät linje vid
 $y = 0{,}4$. Linjen skär enhetscirkeln vid ungefär $20^\circ$ och
 $160^\circ$.
@@ -128,11 +145,17 @@ vid $x = 1{,}5$. Linjen hamnar helt utanför enhetscirkeln (radien är ju bara
 
 **Svar:** Lösning saknas.
 :::
+:::
 
 ::: exempel "Exempel 4 — Lös en trigonometrisk ekvation med räknare"
 **Lös ekvationen $4\cos v + 3{,}28 = 6{,}58$ med räknare. Ange lösningarna i
 intervallet $0^\circ \leq v \leq 360^\circ$.**
 
+::: handskrift
+typ: raknarekvation
+:::
+
+::: textlosning
 Vi löser först ut den trigonometriska funktionen $\cos v$.
 
 $$
@@ -165,6 +188,7 @@ v_2 = 360^\circ - 34{,}411\ldots^\circ = 325{,}588\ldots^\circ \approx 325{,}6^\
 $$
 
 **Svar:** $v_1 = 34{,}4^\circ$ och $v_2 = 325{,}6^\circ$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

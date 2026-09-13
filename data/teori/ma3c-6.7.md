@@ -91,6 +91,11 @@ Cosinussatsen går att använda för trianglar med
 <svg viewBox="-28.05 -41.72 219.93 148.49" width="298" height="202" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC där sidan a, mitt emot A, är 19 centimeter, sidan b, mitt emot B, är 17 centimeter och vinkel C mellan dem är 34 grader. Sidan c, mitt emot C, ska bestämmas."><polygon points="43.18,0 0,83.66 167.2,83.66" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 141.2,83.66 A 26 26 0 0 1 145.65,69.12" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="127.04" y="75.38" font-size="12" text-anchor="middle" fill="#1f2530">34°</text><text x="38.71" y="-17.44" font-size="14" text-anchor="middle" fill="#1f2530">A</text><text x="-15.37" y="93.02" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="179.2" y="87.66" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="7.37" y="34.49" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">c</tspan></text><text x="113.02" y="30.22" font-size="13" text-anchor="start" fill="#1f2530">17</text><text x="83.6" y="99.66" font-size="13" text-anchor="middle" fill="#1f2530">19</text><text x="185.88" y="-27.72" font-size="12" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: cosinussatsensida
+:::
+
+::: textlosning
 Två sidor och mellanliggande vinkel är kända, så vi kan använda
 cosinussatsen. Cosinussatsen $c^2 = a^2 + b^2 - 2ab\cos C$ ger
 
@@ -100,6 +105,7 @@ $$
 
 **Svar:** $c \approx 10{,}7$ cm
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm alla vinklar med cosinussatsen"
 **Beräkna vinklarna i triangeln nedan.**
@@ -108,6 +114,11 @@ $$
 <svg viewBox="-55.23 -36.4 195.38 132.05" width="265" height="179" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC där sidan a (BC) är 5 meter, sidan b (AC) är 7 meter och sidan c (AB) är 3,5 meter. Alla tre vinklar ska bestämmas."><polygon points="-25.85,0 0,72.53 110,72.53" fill="none" stroke="#1f2530" stroke-width="1.8"/><text x="-36.3" y="-12.12" font-size="14" text-anchor="middle" fill="#1f2530">A</text><text x="-10.37" y="87.24" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="127.46" y="76.9" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="-27.05" y="41.3" font-size="13" text-anchor="end" fill="#1f2530">3,5</text><text x="48.67" y="23.92" font-size="13" text-anchor="start" fill="#1f2530">7</text><text x="55" y="88.53" font-size="13" text-anchor="middle" fill="#1f2530">5</text><text x="134.15" y="-22.4" font-size="12" text-anchor="end" fill="#1f2530">(m)</text></svg>
 :::
 
+::: handskrift
+typ: cosinussatsenvinklar
+:::
+
+::: textlosning
 Alla tre sidor är kända, så vi kan använda cosinussatsen. Vi börjar med att
 bestämma vinkeln $A$ och använder då den form av cosinussatsen som
 innehåller $\cos A$.
@@ -176,6 +187,7 @@ $$
 
 **Svar:** $A \approx 42{,}3^\circ$ och $B \approx 109{,}6^\circ$ och
 $C \approx 28{,}1^\circ$
+:::
 :::
 
 Observera att sinussatsens första lösning ovan gav en felaktig vinkel (den

@@ -69,6 +69,11 @@ och den mellanliggande vinkeln är kända.
 <svg viewBox="10 8 190 210" width="258" height="285" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En triangel ABC där vinkeln A är 80 grader, sidan AC är 11 centimeter och sidan AB är 8 centimeter."><polygon points="60,190 172,190 86.74,38.34" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 82,190 A 22 22 0 0 0 63.82,168.33" fill="none" stroke="#1f2530" stroke-width="1.3"/><text x="88.34" y="166.22" font-size="13" text-anchor="middle" fill="#1f2530">80°</text><text x="116" y="208" font-size="13" text-anchor="middle" fill="#1f2530">8 cm</text><text x="59.58" y="111.74" font-size="13" text-anchor="end" fill="#1f2530">11 cm</text><text x="50" y="206" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">A</tspan></text><text x="182" y="206" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">B</tspan></text><text x="86.74" y="26.34" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">C</tspan></text></svg>
 :::
 
+::: handskrift
+typ: areasatsen
+:::
+
+::: textlosning
 Den enda kända vinkeln är $A = 80^\circ$. Den är mellanliggande vinkel till
 sidorna $11$ cm och $8$ cm (sidan mitt emot $A$ behövs inte). Insättning i
 areasatsen ger
@@ -79,11 +84,17 @@ $$
 
 **Svar:** $T \approx 43{,}3\ \text{cm}^2$
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm en mellanliggande vinkel"
 **En triangel har arean $10$ cm². En sida är $4{,}0$ cm och en annan är
 $12{,}0$ cm. Bestäm den mellanliggande vinkeln till dessa sidor.**
 
+::: handskrift
+typ: areasatsvinkel
+:::
+
+::: textlosning
 Vi ställer upp areasatsen $T = \dfrac{ab\sin C}{2}$ med $T = 10$ cm²,
 $a = 4{,}0$ cm och $b = 12{,}0$ cm, och löser sedan ut $\sin C$.
 
@@ -108,6 +119,7 @@ villkor: arean och två sidor bestämmer inte triangeln entydigt.
 
 ::: figur
 <svg viewBox="-2 -4 320 94" width="486" height="143" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två trianglar med sidorna 4,0 och 12,0 centimeter. I den vänstra är den mellanliggande vinkeln 25 grader, i den högra 155 grader — båda ger samma area."><polygon points="6,62 46,62 114.76,11.29" fill="none" stroke="#1f2530" stroke-width="1.6"/><path d="M 26,62 A 20 20 0 0 0 24.13,53.55" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="54.82" y="51.18" font-size="12.5" text-anchor="middle" fill="#1f2530">25°</text><text x="26" y="80" font-size="12" text-anchor="middle" fill="#1f2530">4,0 cm</text><text x="51.93" y="18.51" font-size="12" text-anchor="end" fill="#1f2530">12,0 cm</text><polygon points="186,62 306,62 149.75,45.10" fill="none" stroke="#1f2530" stroke-width="1.6"/><path d="M 206,62 A 20 20 0 0 0 167.87,53.55" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="196.82" y="13.18" font-size="12.5" text-anchor="middle" fill="#1f2530">155°</text><text x="246" y="80" font-size="12" text-anchor="middle" fill="#1f2530">12,0 cm</text><text x="167.87" y="31.55" font-size="12" text-anchor="middle" fill="#1f2530">4,0 cm</text></svg>
+:::
 :::
 :::
 

@@ -62,6 +62,11 @@ Sinussatsen går att använda för trianglar med
 <svg viewBox="-26 -40 334 198" width="453" height="269" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC där vinkel B är 30 grader, vinkel C är 70 grader och sidan AC, mitt emot vinkel B, är 24 centimeter. Sidan BC, mitt emot vinkel A, ska bestämmas."><polygon points="234.37,0 0,135.32 283.62,135.32" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 17.32,125.32 A 20 20 0 0 1 20,135.32" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="33.81" y="130.26" font-size="12" text-anchor="middle" fill="#1f2530">30°</text><path d="M 276.78,116.52 A 20 20 0 0 0 263.62,135.32" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="254.95" y="119.24" font-size="12" text-anchor="middle" fill="#1f2530">70°</text><text x="239.5" y="-12.1" font-size="14" text-anchor="start" fill="#1f2530">A</text><text x="-14.49" y="143.2" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="295.91" y="151.92" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="272.15" y="66.87" font-size="12" text-anchor="middle" fill="#1f2530">24</text><text x="305.62" y="-24" font-size="11" text-anchor="end" fill="#1f2530">(cm)</text></svg>
 :::
 
+::: handskrift
+typ: sinussatsensida
+:::
+
+::: textlosning
 Två vinklar och en sida är kända, så vi kan använda sinussatsen. Vi måste
 bara först bestämma vinkeln $A$.
 
@@ -77,6 +82,7 @@ $$
 
 **Svar:** $a \approx 47{,}3$ cm
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm en vinkel med sinussatsen"
 **En triangel $ABC$ har sidorna $a = 7$ cm och $b = 10$ cm. Vinkeln $B$,
@@ -87,6 +93,11 @@ $a$.**
 <svg viewBox="-24 -22 220 196" width="299" height="266" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel ABC där sidan BC (a) är 7 centimeter, sidan AC (b) är 10 centimeter och vinkel B är 40 grader. Vinkel A, mitt emot sidan a, ska bestämmas."><polygon points="175.18,0 0,147 112,147" fill="none" stroke="#1f2530" stroke-width="1.8"/><path d="M 15.32,134.14 A 20 20 0 0 1 20,147" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="32.89" y="139.03" font-size="12" text-anchor="middle" fill="#1f2530">40°</text><text x="184.13" y="-10.04" font-size="14" text-anchor="start" fill="#1f2530">A</text><text x="-14.1" y="160.13" font-size="14" text-anchor="end" fill="#1f2530">B</text><text x="120.25" y="167.52" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="56" y="169" font-size="12" text-anchor="middle" fill="#1f2530">7</text><text x="156.45" y="87.03" font-size="12" text-anchor="start" fill="#1f2530">10</text></svg>
 :::
 
+::: handskrift
+typ: sinussatsenvinkel
+:::
+
+::: textlosning
 Vi bestämmer vinkeln $A$ med sinussatsen.
 
 $$
@@ -105,6 +116,7 @@ Vinkeln $A_2$ är orimlig eftersom den ger en vinkelsumma över $180^\circ$
 (den ena vinkeln är redan $40^\circ$).
 
 **Svar:** $A \approx 26{,}7^\circ$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

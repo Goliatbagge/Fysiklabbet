@@ -65,6 +65,11 @@ höjdvinkeln till kullens topp är $25^\circ$. Hur hög är kullen?**
 <svg viewBox="10 -2 282 176" width="383" height="239" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En flaggstång på toppen av en kulle. Från en punkt B på marken är höjdvinkeln till flaggstångens topp A 32 grader och höjdvinkeln till kullens topp D 25 grader. Flaggstången AD är 11 meter. Kullens höjd ska bestämmas."><path d="M 20,150 Q 113.65,96.62 228.12,52.95 Q 242.82,106.33 270.12,150 Z" fill="#4a7d3a" fill-opacity="0.16" stroke="#4a7d3a" stroke-opacity="0.55" stroke-width="1.3"/><line x1="20" y1="150" x2="270.12" y2="150" stroke="#1f2530" stroke-width="1.8" stroke-linecap="butt"/><line x1="228.12" y1="52.95" x2="228.12" y2="150" stroke="#1f2530" stroke-width="1.3" stroke-dasharray="4 3" stroke-linecap="butt"/><line x1="20" y1="150" x2="228.12" y2="52.95" stroke="#1f2530" stroke-width="1.3" stroke-dasharray="4 3" stroke-linecap="butt"/><line x1="20" y1="150" x2="228.12" y2="19.95" stroke="#1f2530" stroke-width="1.3" stroke-dasharray="4 3" stroke-linecap="butt"/><line x1="228.12" y1="52.95" x2="228.12" y2="19.95" stroke="#1f2530" stroke-width="2.4" stroke-linecap="butt"/><polygon points="228.12,19.95 244.12,24.95 228.12,29.95" fill="#c8324a"/><polyline points="216.12,150 216.12,138 228.12,138" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 30,150 A 10 10 0 0 0 29.06,145.77" fill="none" stroke="#1f2530" stroke-width="1.2"/><path d="M 60,150 A 40 40 0 0 0 53.92,128.8" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="51.41" y="143.89" font-size="12" text-anchor="middle" fill="#1f2530">25°</text><text x="79.6" y="132.91" font-size="12" text-anchor="middle" fill="#1f2530">32°</text><text x="238.12" y="40.45" font-size="13" text-anchor="start" fill="#1f2530">11</text><text x="20" y="168" font-size="14" text-anchor="middle" fill="#1f2530">B</text><text x="235.12" y="165" font-size="14" text-anchor="start" fill="#1f2530">C</text><text x="220.12" y="56.95" font-size="14" text-anchor="end" fill="#1f2530">D</text><text x="220.12" y="17.95" font-size="14" text-anchor="end" fill="#1f2530">A</text><text x="286" y="12" font-size="11" text-anchor="end" fill="#1f2530">(m)</text></svg>
 :::
 
+::: handskrift
+typ: flaggstangkulle
+:::
+
+::: textlosning
 Låt $A$ vara flaggstångens topp, $D$ kullens topp (flaggstångens fot) och
 $C$ foten av lodlinjen från $A$ och $D$ ner till marken, rakt under $B$
 sett i höjdled. Vinkeln vid $C$ är rät.
@@ -96,6 +101,7 @@ $$
 $$
 
 **Svar:** $CD \approx 32$ m
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

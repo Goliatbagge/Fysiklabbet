@@ -74,6 +74,11 @@ tangensfunktionen $180^\circ$.
 ::: exempel "Exempel 1 — Lös en tangensekvation"
 **Lös ekvationen $\tan v = 2$ i intervallet $0^\circ \leq v \leq 360^\circ$.**
 
+::: handskrift
+typ: tangensekvation3c
+:::
+
+::: textlosning
 $$
 v_1 = \tan^{-1}(2) = 63{,}434\ldots^\circ \approx 63{,}4^\circ
 $$
@@ -86,6 +91,7 @@ v_2 \approx 63{,}4^\circ + 180^\circ = 243{,}4^\circ
 $$
 
 **Svar:** $v_1 \approx 63{,}4^\circ$ och $v_2 \approx 243{,}4^\circ$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

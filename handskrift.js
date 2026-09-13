@@ -884,6 +884,9 @@
      * från minustecknet '-' som är en räkneoperator. */
     '–': { w: 56, strokes: [[[14, 66], [46, 66]]] },
     /* högerpil för kvantsprång och övergångar: "3→1" */
+    /* versalt X — stokastisk variabel i sannolikhetsläran, P(X>210) */
+    'X': { w: 84, strokes: [[[20, 12], [34, 32], [64, 80], [74, 100]],
+                            [[74, 12], [60, 32], [30, 82], [22, 100]]] },
     '→': { w: 92, strokes: [[[16, 66], [76, 66]], [[58, 50], [78, 66], [58, 82]]] },
     /* oändlighetstecknet — gränsvärden då x växer obegränsat (ma4 kap 2) */
     '∞': { w: 104, strokes: [[[50, 66], [34, 52], [19, 57], [16, 70], [28, 82],
@@ -43090,6 +43093,1510 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- hjälpare: integraltecken och klammer --------------
+   * Integraltecknet med sina gränser, och den höga klammern [ … ]ᵃ_b som
+   * rymmer ett bråk. Gränserna skrivs som små strängar, så att även
+   * flerteckensgränser (π/4) fungerar. */
+  function mkIntegral(T, F) {
+    /* en gräns kan vara ett bråk (π/2). Division skrivs alltid med
+     * vågrätt streck, även i en liten gräns — aldrig med snedstreck. */
+    function grans(txt, x, yb, sc) {
+      var i = txt.indexOf('/');
+      if (i < 0) return T.str(txt, x, yb, null, sc);
+      var num = txt.slice(0, i), den = txt.slice(i + 1), f = F * sc;
+      var nw = T.adv(num, sc), dw = T.adv(den, sc);
+      var w = Math.max(nw, dw) + 0.22 * f, ybar = yb - 0.30 * f;
+      T.str(num, x + (w - nw) / 2, ybar - 0.12 * f, null, sc);
+      T.acts.push({ kind: 'stroke',
+                    pts: humanize([[x, ybar], [x + w, ybar]]) });
+      T.str(den, x + (w - dw) / 2, ybar + 1.02 * f, null, sc);
+      return x + w;
+    }
+    return {
+      /* ∫ med undre och övre gräns */
+      tecken: function (x, yb, sub, sup) {
+        var xt = T.str('∫', x, yb);
+        var x1 = xt, x2 = xt;
+        if (sup != null) x1 = grans(sup, x + 0.34 * F, yb - 1.02 * F, 0.55);
+        if (sub != null) x2 = grans(sub, x + 0.16 * F, yb + 0.54 * F, 0.55);
+        return Math.max(xt, x1, x2) + 0.14 * F;
+      },
+      /* vänsterklammer */
+      oppna: function (x, yb) {
+        var t = yb - 1.42 * F, b = yb + 0.72 * F, bw = 0.34 * F;
+        T.acts.push({ kind: 'stroke', pts: humanize(
+          [[x + bw, t], [x + 2, t + 2], [x + 3, b - 2], [x + bw + 1, b]]) });
+        return x + bw + 0.16 * F;
+      },
+      /* högerklammer med gränserna skrivna efter */
+      stang: function (x, yb, sub, sup) {
+        var t = yb - 1.42 * F, b = yb + 0.72 * F, bw = 0.34 * F;
+        T.acts.push({ kind: 'stroke', pts: humanize(
+          [[x, t], [x + bw - 2, t + 2], [x + bw - 3, b - 2], [x + 1, b]]) });
+        x += bw + 0.10 * F;
+        T.pause(80);
+        var x1 = x, x2 = x;
+        if (sup != null) x1 = grans(sup, x, t + 0.55 * F, 0.55);
+        if (sub != null) x2 = grans(sub, x, b + 0.24 * F, 0.55);
+        return Math.max(x1, x2) + 0.10 * F;
+      }
+    };
+  }
+
+  /* ---------------- scen: ange en primitiv funktion (ma4-3.1 ex 1) ---- */
+  function layoutPrimitivfunktion(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 200;
+    xx = T.str('a) f(x)=5x^4+', padL, y);
+    T.fracH('1', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Primitiv funktion är derivata']],
+      [['baklänges: höj exponenten med']],
+      [['1 och dela med den nya']],
+      [['exponenten.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('F(x)=', padL, y);
+    xx = T.fracH('5x^5', '5', xx, y);
+    T.str('+ln x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och 1/x är det enda undantaget']],
+      [['från potensregeln: dess']],
+      [['primitiva funktion är ln x.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('=x^5+ln x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.4 * F;
+    xx = T.str('b) f(x)=', padL, y);
+    xx = expo('e', '3x', xx, y);
+    T.str('-5cos x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['e-termen divideras med']],
+      [['exponentens derivata, alltså']],
+      [['med 3. Och cos x kommer från']],
+      [['sin x.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('F(x)=', padL, y);
+    xe = T.fracH('e^3^x', '3', xx, y);
+    xe = T.str('-5sin x', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: samtliga primitiva (ma4-3.1 ex 2) ----------
+   * "Samtliga" betyder att konstanten C ska med. I b) förenklas
+   * uttrycket först, så att variabeln bara står på ett ställe. */
+  function layoutSamtligaprimitiva(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) f(x)=', padL, y);
+    xx = T.fracH('7', 'x', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('8', 'x-5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda termerna är av typen']],
+      [['1/x, så båda ger logaritmer.']],
+      [['Och samtliga primitiva']],
+      [['funktioner kräver ett +C.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('F(x)=7ln x+8ln(x-5)+C', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.4 * F;
+    xx = T.str('b) f(x)=', padL, y);
+    xx = T.fracH('x', 'x^2+5x', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('x^3+5x', 'x^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Variabeln står i både täljare']],
+      [['och nämnare. Jag förenklar']],
+      [['varje term först, annars går']],
+      [['den inte att integrera.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.fracH('x', 'x(x+5)', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', 'x+5', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.fracH('x^3+5x', 'x^2', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('x^3', 'x^2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('5x', 'x^2', xx, y);
+    xx = T.str('=x+', xx, y);
+    T.fracH('5', 'x', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('f(x)=', padL, y);
+    xx = T.fracH('1', 'x+5', xx, y);
+    xx = T.str('-x-', xx, y);
+    T.fracH('5', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står variabeln bara på ett']],
+      [['ställe i varje term, och jag']],
+      [['kan integrera termvis.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('F(x)=ln(x+5)-', padL, y);
+    xx = T.fracH('x^2', '2', xx, y);
+    xe = T.str('-5ln x+C', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: från hastighet till sträcka (3.1 ex 3) -----
+   * Höjden är en primitiv funktion till hastigheten. Startvillkoret
+   * bestämmer konstanten C. */
+  function layoutRaketenhojd(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('v(t)=3+0,9t^2', padL, y);
+    T.pause(260);
+    T.str('h(0)=1,5 m', padL + 290, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hastigheten är höjdens']],
+      [['derivata. Alltså är höjden en']],
+      [['primitiv funktion till']],
+      [['hastigheten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('h(t)=3t+', padL, y);
+    xx = T.fracH('0,9t^3', '3', xx, y);
+    xx = T.str('+C', xx, y);
+    T.pause(260);
+    T.str('(1)', xx + 0.9 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('h(t)=3t+0,3t^3+C', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['C bestäms av att raketen']],
+      [['startar 1,5 m över marken,']],
+      [['alltså vid tiden noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('3·0+0,3·0^3+C=1,5', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('C=1,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('h(t)=3t+0,3t^3+1,5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är formeln komplett, och']],
+      [['jag kan sätta in tiden 4 s.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('h(4)=3·4+0,3·4^3+1,5', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=12+19,2+1,5=32,7', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: raketen ökar farten']],
+      [['hela tiden, så den mesta']],
+      [['höjden vinns i slutet av de']],
+      [['fyra sekunderna.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: höjden är 32,7 m', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: beräkna två integraler (ma4-3.2 ex 1) ------
+   * a) uttrycket delas upp innan det integreras, b) en primitiv funktion
+   * till cos 2x divideras med den inre derivatan 2. */
+  function layoutIntegralvarden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 210;
+    xx = T.str('a) ', padL, y);
+    xx = I.tecken(xx, y, '1', '4');
+    xx = T.fracH('3x^2+5', 'x', xx, y);
+    T.str(' dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bråket går att dela upp i två']],
+      [['enklare termer. Då slipper jag']],
+      [['variabeln i nämnaren.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.tecken(xx, y, '1', '4');
+    xx = T.str('(3x+', xx, y);
+    xx = T.fracH('5', 'x', xx, y);
+    T.str(')dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu tar jag en primitiv']],
+      [['funktion till varje term och']],
+      [['skriver den inom klammer med']],
+      [['gränserna.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('3x^2', '2', xx, y);
+    xx = T.str('+5ln x', xx, y);
+    I.stang(xx, y, '1', '4');
+    T.stepEnd();
+
+    tanke(y, [
+      [['Övre gränsen in först, sedan']],
+      [['minus värdet för den undre.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('3·4^2', '2', xx, y);
+    xx = T.str('+5ln 4-(', xx, y);
+    xx = T.fracH('3·1^2', '2', xx, y);
+    T.str('+5ln 1)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['ln 1 är noll, eftersom e']],
+      [['upphöjt till noll är 1.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=24+5ln 4-', padL + 20, y);
+    xx = T.fracH('3', '2', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 40, y);
+    xe = T.fracH('45', '2', xx, y);
+    xe = T.str('+5ln 4', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.2 * F;
+    xx = T.str('b) ', padL, y);
+    xx = I.tecken(xx, y, '0', 'π/4');
+    T.str('cos 2x dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En primitiv funktion till']],
+      [['cos 2x är sin 2x delat med']],
+      [['den inre derivatan 2.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('sin 2x', '2', xx, y);
+    I.stang(xx, y, '0', 'π/4');
+    T.stepEnd();
+
+    y += 6.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = storBrak(T, F, function (x0, yn) {
+      var x = T.str('sin', x0, yn);
+      return T.fracH('π', '2', x + 0.12 * F, yn);
+    }, '2', xx, y);
+    xx = T.str('-', xx + 0.3 * F, y);
+    T.fracH('sin 0', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['sin π/2 är 1 (toppen av']],
+      [['enhetscirkeln) och sin 0 är 0.']]
+    ], 1.8);
+    y += 6.4 * F;
+    xx = T.str('=', padL + 40, y);
+    xe = T.fracH('1', '2', xx, y);
+    xe = T.str('-0=', xe, y);
+    xe = T.fracH('1', '2', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: area av ett skuggat område (3.2 ex 2) ------
+   * Under x-axeln blir integralen negativ, så den delen får byta tecken
+   * när AREAN ska beräknas. */
+  function layoutAreaskuggad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+    var G = mkTrigGraf(T, F, { ox: padL + 150, oy: 240, ux: 52, uy: 11 });
+
+    G.axlar(-2, 2.6, -4, 4, 'x', 'y');
+    G.kurva(function (v) { return v * v * v - 4 * v; }, -2.2, 2.4);
+    T.stepEnd();
+
+    y = G.oy + 4 * 11 + 3.4 * F;
+    tanke(G.oy + 4 * 11, [
+      [['Mellan -1 och 0 ligger kurvan']],
+      [['över x-axeln, mellan 0 och 2']],
+      [['under. Den undre delen ger en']],
+      [['negativ integral.']]
+    ], 0);
+    xx = T.str('A=', padL, y);
+    xx = I.tecken(xx, y, '-1', '0');
+    xx = T.str('(x^3-4x)dx', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('-', padL + 40, y);
+    xx = I.tecken(xx, y, '0', '2');
+    T.str('(x^3-4x)dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma primitiva funktion i']],
+      [['båda integralerna, bara olika']],
+      [['gränser.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('x^4', '4', xx, y);
+    xx = T.str('-2x^2', xx, y);
+    xx = I.stang(xx, y, '-1', '0');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('-', padL + 40, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('x^4', '4', xx, y);
+    xx = T.str('-2x^2', xx, y);
+    I.stang(xx, y, '0', '2');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=0-(', padL + 20, y);
+    xx = T.fracH('1', '4', xx, y);
+    xx = T.str('-2)-(-4-0)', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('7', '4', xx, y);
+    T.str('+4', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 40, y);
+    xe = T.fracH('23', '4', xx, y);
+    xe = T.str(' a.e.', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: foga ihop två intervall (ma4-3.3 ex 1) ----- */
+  function layoutFogaintegraler(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 210;
+    xx = I.tecken(padL, y, '0', 'π/2');
+    xx = T.str('sin 2x dx+', xx, y);
+    xx = I.tecken(xx, y, 'π/2', 'π');
+    T.str('sin 2x dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma funktion, och gränserna']],
+      [['hänger ihop: 0 till π/2 och']],
+      [['π/2 till π. Då kan de skrivas']],
+      [['som en enda integral.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.tecken(xx, y, '0', 'π');
+    T.str('sin 2x dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En primitiv funktion till']],
+      [['sin 2x är -cos 2x delat med']],
+      [['den inre derivatan 2.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('cos 2x', '2', xx, y);
+    I.stang(xx, y, '0', 'π');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=-', padL + 20, y);
+    xx = T.fracH('cos 2π', '2', xx, y);
+    xx = T.str('-(-', xx, y);
+    xx = T.fracH('cos 0', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=-', padL + 40, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xe = T.fracH('1', '2', xx, y);
+    xe = T.str('=0', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Noll betyder att lika mycket']],
+      [['area ligger över som under']],
+      [['x-axeln i intervallet.']]
+    ], 1.4);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bryt ut en konstant faktor (3.3 ex 2) ------ */
+  function layoutBrytutkonstant(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 210;
+    xx = I.tecken(padL, y, '0', 'π/2');
+    T.str('5sin 2x dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Femman innehåller ingen']],
+      [['variabel, så den kan flyttas']],
+      [['utanför integraltecknet.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=5·', padL + 20, y);
+    xx = I.tecken(xx, y, '0', 'π/2');
+    T.str('sin 2x dx', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=5', padL + 20, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('cos 2x', '2', xx, y);
+    I.stang(xx, y, '0', 'π/2');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=5(-', padL + 20, y);
+    xx = T.fracH('cos π', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('cos 0', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['cos π är -1, så första termen']],
+      [['blir plus en halv. Och cos 0']],
+      [['är 1.']]
+    ], 1.8);
+    y += 6.2 * F;
+    xx = T.str('=5(', padL + 20, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '2', xx, y);
+    xe = T.str(')=5·1=5', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: dela en integral (ma4-3.3 ex 3) ------------
+   * Summan (eller skillnaden) av termer kan integreras var för sig, och
+   * då blir varje delintegral enkel. */
+  function layoutDelaintegral(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 210;
+    xx = I.tecken(padL, y, '1', '2');
+    xx = T.str('(4x^3+', xx, y);
+    xx = T.fracH('5', 'x', xx, y);
+    T.str(')dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En summa kan integreras term']],
+      [['för term. Två enkla integraler']],
+      [['är lättare än en krånglig.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.tecken(xx, y, '1', '2');
+    xx = T.str('4x^3dx+', xx, y);
+    xx = I.tecken(xx, y, '1', '2');
+    xx = T.fracH('5', 'x', xx, y);
+    T.str(' dx', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = I.tecken(padL, y, '1', '2');
+    xx = T.str('4x^3dx=', xx, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('x^4', xx, y);
+    xx = I.stang(xx, y, '1', '2');
+    T.str('=16-1=15', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = I.tecken(padL, y, '1', '2');
+    xx = T.fracH('5', 'x', xx, y);
+    xx = T.str(' dx=', xx, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('5ln x', xx, y);
+    xx = I.stang(xx, y, '1', '2');
+    T.stepEnd();
+
+    tanke(y, [
+      [['ln 1 är noll, så den undre']],
+      [['gränsen försvinner.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=5ln 2-0=5ln 2', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: 15+5ln 2 och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('15-5ln 2', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: area mellan kurvor (ma4-3.4 ex 1) ----------
+   * Skärningspunkterna ger integrationsgränserna, och integranden är
+   * övre funktionen minus den undre. */
+  function layoutAreamellan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('y=x+1', padL, y);
+    T.pause(260);
+    T.str('y=x^2-5', padL + 230, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Gränserna är där kurvorna']],
+      [['möts. Jag sätter uttrycken']],
+      [['lika med varandra.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x^2-5=x+1', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2-x-6=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq-formeln med p=-1 och q=-6.']],
+      [['Halva p är 0,5.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=0,5±', padL, y);
+    T.rot('0,5^2+6', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=0,5±', padL + 40, y);
+    T.rot('6,25', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('=0,5±2,5', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x_1=-2', padL + 40, y);
+    T.pause(280);
+    T.str('x_2=3', padL + 250, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Mellan gränserna ligger']],
+      [['linjen överst, så den ska']],
+      [['stå först i integranden.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('A=', padL, y);
+    xx = I.tecken(xx, y, '-2', '3');
+    T.str('((x+1)-(x^2-5))dx', xx, y, null, 0.88);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = I.tecken(xx, y, '-2', '3');
+    T.str('(-x^2+x+6)dx', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('x^3', '3', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('x^2', '2', xx, y);
+    xx = T.str('+6x', xx, y);
+    I.stang(xx, y, '-2', '3');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('27', '2', xx, y);
+    xx = T.str('-(-', xx, y);
+    xx = T.fracH('22', '3', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('81', '6', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('44', '6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('125', '6', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xe = T.str('Svar: A=', padL, y);
+    xe = T.fracH('125', '6', xe, y);
+    xe = T.str(' a.e.≈20,8 a.e.', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tre linjer (ma4-3.4 ex 2) ------------------
+   * Området byter överfunktion vid x=2, så arean blir summan av två
+   * integraler. */
+  function layoutAreatrelinjer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 200;
+    xx = T.str('y=2x, y=', padL, y);
+    xx = T.fracH('x', '2', xx, y);
+    T.str(', y=6-x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Linjerna möts vid x=0, x=2']],
+      [['och x=4. Vid x=2 byter']],
+      [['området överfunktion, så']],
+      [['arean delas i två.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('A=', padL, y);
+    xx = I.tecken(xx, y, '0', '2');
+    xx = T.str('(2x-', xx, y);
+    xx = T.fracH('x', '2', xx, y);
+    T.str(')dx', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('+', padL + 30, y);
+    xx = I.tecken(xx, y, '2', '4');
+    xx = T.str('(6-x-', xx, y);
+    xx = T.fracH('x', '2', xx, y);
+    T.str(')dx', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag förenklar integranderna']],
+      [['först. Då blir de primitiva']],
+      [['funktionerna enklare.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('A=', padL, y);
+    xx = I.tecken(xx, y, '0', '2');
+    xx = T.fracH('3x', '2', xx, y);
+    xx = T.str(' dx+', xx, y);
+    xx = I.tecken(xx, y, '2', '4');
+    xx = T.str('(6-', xx, y);
+    xx = T.fracH('3x', '2', xx, y);
+    T.str(')dx', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = I.tecken(padL, y, '0', '2');
+    xx = T.fracH('3x', '2', xx, y);
+    xx = T.str(' dx=', xx, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('3x^2', '4', xx, y);
+    xx = I.stang(xx, y, '0', '2');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('12', '4', xx, y);
+    T.str('-0=3', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = I.tecken(padL, y, '2', '4');
+    xx = T.str('(6-', xx, y);
+    xx = T.fracH('3x', '2', xx, y);
+    xx = T.str(')dx=', xx, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('6x-', xx, y);
+    xx = T.fracH('3x^2', '4', xx, y);
+    I.stang(xx, y, '2', '4');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=(24-12)-(12-3)=3', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['De två delarna är lika stora,']],
+      [['och tillsammans ger de hela']],
+      [['arean.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: A=3+3=6 a.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vilken storhet står arean för? (3.5 ex 1) -- */
+  function layoutIntegralenhet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y-axeln: liter/minut', padL, y, null, 0.8);
+    T.pause(260);
+    y += 2.6 * F;
+    T.str('x-axeln: minut', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Arean är höjd gånger bredd,']],
+      [['så enheten blir produkten av']],
+      [['axlarnas enheter.']]
+    ]);
+    y += 5.0 * F;
+    xx = T.fracH('liter', 'minut', padL, y);
+    xx = T.mul(xx, y);
+    xx = T.str('minut=liter', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minuterna tar ut varandra,']],
+      [['precis som när man förkortar']],
+      [['ett bråk. Kvar blir liter.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('Svar: volym i liter', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: energi ur effekt (ma4-3.5 ex 2) ------------ */
+  function layoutEnergiureffekt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('P(t)=3,31t^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Energi är effekt gånger tid.']],
+      [['Men effekten varierar, så']],
+      [['produkten blir en integral.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('E=', padL, y);
+    xx = I.tecken(xx, y, '0', '5');
+    T.str('3,31t^2dt', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('3,31t^3', '3', xx, y);
+    I.stang(xx, y, '0', '5');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('3,31·5^3', '3', xx, y);
+    T.str('-0', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=137,916...', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Effekten är given med tre']],
+      [['värdesiffror, så svaret']],
+      [['avrundas till lika många.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: E≈140 J', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sträcka ur hastighet (ma4-3.5 ex 3) --------
+   * Två integreringar i följd: acceleration → hastighet → läge, med var
+   * sitt startvillkor som bestämmer konstanten. */
+  function layoutStrackaurfart(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('a(t)=2,5', padL, y);
+    T.pause(240);
+    T.str('v(0)=15', padL + 180, y, null, 0.8);
+    T.pause(240);
+    T.str('s(0)=400', padL + 340, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Accelerationen är hastighetens']],
+      [['derivata, så hastigheten är']],
+      [['en primitiv funktion till']],
+      [['accelerationen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('a) v(t)=2,5t+C', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('2,5·0+C=15 ⟹ C=15', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('v(t)=2,5t+15', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak en gång till:']],
+      [['läget är en primitiv funktion']],
+      [['till hastigheten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('s(t)=', padL, y);
+    xx = T.fracH('2,5t^2', '2', xx, y);
+    T.str('+15t+D', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('s(0)=400 ⟹ D=400', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('s(t)=', padL, y);
+    xe = T.fracH('2,5t^2', '2', xx, y);
+    xe = T.str('+15t+400', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) söks sträckan UNDER de']],
+      [['sex sekunderna, inte läget.']],
+      [['Startsträckan 400 m ska']],
+      [['alltså dras bort.']]
+    ], 1.4);
+    y += 5.4 * F;
+    xx = T.str('b) s(6)=', padL, y);
+    xx = T.fracH('2,5·6^2', '2', xx, y);
+    T.str('+15·6+400', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=45+90+400=535', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('535-400=135 m', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma svar får jag direkt som']],
+      [['integralen av hastigheten']],
+      [['mellan 0 och 6.']]
+    ]);
+    y += 4.8 * F;
+    xx = I.tecken(padL, y, '0', '6');
+    T.str('(2,5t+15)dt=135 m', xx, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 1.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm konstanten k (ma4-3.6 ex 1) ---------
+   * En täthetsfunktion har alltid arean 1 under kurvan. Villkoret blir
+   * en ekvation i k. */
+  function layoutTathetskonstant(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=k·x^2,', padL, y);
+    T.str(' 0≤x≤3', padL + 250, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En täthetsfunktion har alltid']],
+      [['arean 1 under kurvan. Det är']],
+      [['villkoret som bestämmer k.']]
+    ]);
+    y += 4.8 * F;
+    xx = I.tecken(padL, y, '0', '3');
+    T.str('k·x^2dx=1', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = I.oppna(padL, y);
+    xx = T.fracH('k·x^3', '3', xx, y);
+    xx = I.stang(xx, y, '0', '3');
+    T.str('=1', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.fracH('k·3^3', '3', padL, y);
+    T.str('-0=1', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('9k=1', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/9', xx + 0.6 * F, '9k=1',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('k=', padL + 20, y);
+    T.fracH('1', '9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k sätts tillbaka i funktionen,']],
+      [['annars är uppgiften inte löst.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f(x)=', padL, y);
+    xx = T.fracH('1', '9', xx, y);
+    xx = T.str('·x^2=', xx, y);
+    xe = T.fracH('x^2', '9', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: livslängd (ma4-3.6 ex 2) -------------------
+   * Sannolikheten är arean under täthetsfunktionen över intervallet. */
+  function layoutLivslangd(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F), expo = mkExpo(T, F);
+
+    y = 186;
+    xx = T.str('f(t)=0,0005·', padL, y);
+    expo('e', '-0,0005t', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['"Inom 1000 timmar" betyder']],
+      [['att tiden ligger mellan 0 och']],
+      [['1000. Sannolikheten är arean']],
+      [['där.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('P=', padL, y);
+    xx = I.tecken(xx, y, '0', '1000');
+    xx = T.str('0,0005·', xx, y);
+    xx = expo('e', '-0,0005t', xx, y);
+    T.str(' dt', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['e-termen divideras med']],
+      [['exponentens derivata. Den är']],
+      [['-0,0005, precis faktorn']],
+      [['framför, så de tar ut varandra.']]
+    ]);
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('-', xx, y);
+    xx = expo('e', '-0,0005t', xx, y);
+    xx = I.stang(xx + 1.2 * F, y, '0', '1000');
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=-', padL + 20, y);
+    xx = expo('e', '-0,5', xx, y);
+    xx = T.str('+', xx + 1.0 * F, y);
+    expo('e', '0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['e upphöjt till noll är 1,']],
+      [['precis som varje tal upphöjt']],
+      [['till noll.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=1-', padL + 20, y);
+    xx = expo('e', '-0,5', xx, y);
+    T.str('=0,393...', xx + 1.0 * F, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: P≈0,39=39 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: chipspåsar (ma4-3.6 ex 3) ------------------
+   * Normalfördelningen saknar enkel primitiv funktion, så arean tas ur
+   * ett digitalt verktyg. */
+  function layoutChipspasar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('µ=200 g', padL, y);
+    T.pause(260);
+    T.str('σ=5 g', padL + 220, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Normalfördelningens funktion']],
+      [['har ingen enkel primitiv']],
+      [['funktion, så arean får hämtas']],
+      [['ur ett digitalt verktyg.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Sannolikhetskalkylatorn:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    xx = T.str('a) P(195≤X≤210)=0,818...', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈0,82=82 %', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är intervallet öppet']],
+      [['uppåt: allt över 210 gram,']],
+      [['alltså svansen längst till']],
+      [['höger under kurvan.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) P(X>210)=0,0227...', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈0,023=2,3 %', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: 210 gram ligger två']],
+      [['standardavvikelser över']],
+      [['medelvärdet, och så tunga']],
+      [['påsar är ovanliga.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rotationsvolym (ma4-3.7 ex 1) --------------
+   * Nollställena ger gränserna, och integranden är y i kvadrat. */
+  function layoutRotationsvolym(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('y=3x-x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Området begränsas av x-axeln,']],
+      [['så gränserna är kurvans']],
+      [['nollställen.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('3x-x^2=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x(3-x)=0 ⟹ x=0, x=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Volymformeln har y i KVADRAT.']],
+      [['Varje tvärsnitt är en cirkel']],
+      [['med radien y, och dess area']],
+      [['är πy^2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, '0', '3');
+    T.str('(3x-x^2)^2dx', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.tecken(xx, y, '0', '3');
+    T.str('(9x^2-6x^3+x^4)dx', xx, y, null, 0.88);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.str('3x^3-', xx, y);
+    xx = T.fracH('3x^4', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('x^5', '5', xx, y);
+    I.stang(xx, y, '0', '3');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=π(81-', padL + 30, y);
+    xx = T.fracH('243', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('243', '5', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=π·', padL + 30, y);
+    xx = T.fracH('810-1 215+486', '10', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=π·', padL + 30, y);
+    xx = T.fracH('81', '10', xx, y);
+    T.str('=8,1π', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('Svar: 8,1π≈25,4 v.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rotation av rotkurvan (ma4-3.7 ex 2) -------
+   * Kvadraten på en kvadratrot är radikanden själv, så integralen blir
+   * så enkel den kan bli. */
+  function layoutRotationrot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    xx = T.str('y=', padL, y);
+    xx = T.rot('x', xx, y);
+    T.str(',  0≤x≤4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Volymformeln vill ha y i']],
+      [['kvadrat. Och kvadraten på en']],
+      [['kvadratrot är talet under']],
+      [['rottecknet.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, '0', '4');
+    xx = T.str('(', xx, y);
+    xx = T.rot('x', xx, y);
+    T.str(')^2dx', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.tecken(xx, y, '0', '4');
+    T.str('x dx', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('x^2', '2', xx, y);
+    I.stang(xx, y, '0', '4');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=π·', padL + 30, y);
+    xx = T.fracH('16', '2', xx, y);
+    T.str('=8π', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('Svar: 8π≈25,1 v.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: konen (ma4-3.7 ex 3) -----------------------
+   * Rotationskroppen är en kon, så svaret går att kontrollera mot den
+   * kända volymformeln. */
+  function layoutRotationkon(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('y=x,  0≤x≤3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Linjen y=x som roterar kring']],
+      [['x-axeln sveper ut en kon med']],
+      [['både radien och höjden 3.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, '0', '3');
+    T.str('x^2dx', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('x^3', '3', xx, y);
+    I.stang(xx, y, '0', '3');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=π·', padL + 30, y);
+    xx = T.fracH('27', '3', xx, y);
+    T.str('=9π', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här går svaret att kontrollera']],
+      [['mot den kända konvolymen.']]
+    ], 1.4);
+    y += 5.4 * F;
+    xx = T.str('V=', padL, y);
+    xx = T.fracH('πr^2h', '3', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('π·3^2·3', '3', xx, y);
+    T.str('=9π', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xe = T.str('Svar: 9π≈28,3 v.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rotation kring y-axeln (ma4-3.8 ex 1) ------
+   * Nu integreras längs y-axeln, så x måste lösas ut och gränserna
+   * anges i y-led. */
+  function layoutRotationyaxel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    xx = T.str('y=', padL, y);
+    xx = T.rot('x-1', xx, y);
+    T.str(',  0≤y≤2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu roterar området kring']],
+      [['y-axeln. Då är det x som ska']],
+      [['kvadreras, och gränserna']],
+      [['anges i y-led.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, 'a', 'b');
+    T.str('x^2dy', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Så jag löser ut x ur']],
+      [['funktionen: kvadrera båda led']],
+      [['för att bli av med roten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y^2=x-1 ⟺ x=y^2+1', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, '0', '2');
+    T.str('(y^2+1)^2dy', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.tecken(xx, y, '0', '2');
+    T.str('(y^4+2y^2+1)dy', xx, y, null, 0.88);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('y^5', '5', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('2y^3', '3', xx, y);
+    xx = T.str('+y', xx, y);
+    I.stang(xx, y, '0', '2');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=π(', padL + 30, y);
+    xx = T.fracH('32', '5', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('16', '3', xx, y);
+    T.str('+2)', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=π·', padL + 30, y);
+    xx = T.fracH('96+80+30', '15', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('206π', '15', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xe = T.str('Svar: V=', padL, y);
+    xe = T.fracH('206π', '15', xe, y);
+    xe = T.str(' v.e.≈43,1 v.e.', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kurvan y = x² kring y-axeln (3.8 ex 2) ----- */
+  function layoutRotationkvadrat(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), I = mkIntegral(T, F);
+
+    y = 186;
+    T.str('y=x^2,  0≤y≤4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Formeln kräver x uttryckt i']],
+      [['y. Området ligger i första']],
+      [['kvadranten, så jag tar den']],
+      [['positiva roten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=', padL, y);
+    T.rot('y', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('x^2=(', padL, y);
+    xx = T.rot('y', xx, y);
+    T.str(')^2=y', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('V=π', padL, y);
+    xx = I.tecken(xx, y, '0', '4');
+    T.str('y dy', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=π', padL + 30, y);
+    xx = I.oppna(xx, y);
+    xx = T.fracH('y^2', '2', xx, y);
+    I.stang(xx, y, '0', '4');
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=π(', padL + 30, y);
+    xx = T.fracH('16', '2', xx, y);
+    T.str('-0)=8π', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xe = T.str('Svar: V=8π≈25,1 v.e.', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -43470,7 +44977,28 @@
                    lasasymptoter: layoutLasasymptoter,
                    snedasymptot: layoutSnedasymptot,
                    skissrationell: layoutSkissrationell,
-                   samtligaasymptoter: layoutSamtligaasymptoter };
+                   samtligaasymptoter: layoutSamtligaasymptoter,
+                   primitivfunktion: layoutPrimitivfunktion,
+                   samtligaprimitiva: layoutSamtligaprimitiva,
+                   raketenhojd: layoutRaketenhojd,
+                   integralvarden: layoutIntegralvarden,
+                   areaskuggad: layoutAreaskuggad,
+                   fogaintegraler: layoutFogaintegraler,
+                   brytutkonstant: layoutBrytutkonstant,
+                   delaintegral: layoutDelaintegral,
+                   areamellan: layoutAreamellan,
+                   areatrelinjer: layoutAreatrelinjer,
+                   integralenhet: layoutIntegralenhet,
+                   energiureffekt: layoutEnergiureffekt,
+                   strackaurfart: layoutStrackaurfart,
+                   tathetskonstant: layoutTathetskonstant,
+                   livslangd: layoutLivslangd,
+                   chipspasar: layoutChipspasar,
+                   rotationsvolym: layoutRotationsvolym,
+                   rotationrot: layoutRotationrot,
+                   rotationkon: layoutRotationkon,
+                   rotationyaxel: layoutRotationyaxel,
+                   rotationkvadrat: layoutRotationkvadrat };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

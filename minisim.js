@@ -76,12 +76,17 @@
  * (?embed=1&mini=1 — mini-läget visar bara scenen), samma mönster som
  * gaffelbalans3d/dubbelkon. Växlaren uppe till höger på scenen byter
  * situation mellan Cirkelbana (bilen sedd rakt uppifrån — friktionskraften
- * utgör centripetalkraften) och Loop (bilen från sidan — normalkraften och
- * tyngdkraften utgör tillsammans centripetalkraften). Kortets verktyg
- * (Pausa/Fortsätt, Börja om och fartglidaren, som byter roll med
- * situationen) styr sidan med postMessage; sidan rapporterar tillbaka sitt
- * läge, och info-raden visar aktuell centripetalkraft (cirkelbanan)
- * respektive gränsfarten längst ned (loopen). FULLSKÄRM startas med
+ * utgör centripetalkraften), Bilbana (sluten bana ovanifrån med en vid och
+ * en snäv kurva — kraft bara i kurvorna, sladd när greppet inte räcker),
+ * Loop (bilen från sidan — normalkraften och tyngdkraften utgör
+ * tillsammans centripetalkraften) och Krön och dal (från sidan —
+ * normalkraften minskar på krönet, ökar i dalen, bilen lättar över
+ * gränsfarten). Kortets verktyg (Pausa/Fortsätt, Börja om och
+ * fartglidaren, som byter roll med situationen) styr sidan med
+ * postMessage; sidan rapporterar tillbaka sitt läge, och info-raden visar
+ * aktuell centripetalkraft (cirkelbanan), kraften som krävs i den snäva
+ * kurvan mot största friktionskraft (bilbanan), gränsfarten längst ned
+ * (loopen) respektive gränsfarten på krönet. FULLSKÄRM startas med
  * scenens egen .fs-btn inne i iframen och ger exakt originalsimuleringens
  * fullskärmsläge med alla verktyg.
  *
@@ -401,6 +406,16 @@
         '.ms-sitvaxel button + button{border-left:1px solid #c9bfa9;}',
         '.ms-sitvaxel button.ms-aktiv{background:#0f1620;color:#f3eee4;cursor:default;}',
         '.ms-sitvaxel button:focus-visible{outline:2px solid #7aa2e0;outline-offset:2px;}',
+        /* Smal skärm: fyra knappar ryms inte i scenens hörn (de täckte
+           halva bilden på 390 px). Växlaren blir då en egen rad under
+           scenen, med knapparna jämnt fördelade i bredd. */
+        '@media (max-width:600px){',
+        '  .ms-sitvaxel{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));',
+        '    margin-top:6px;box-shadow:none;}',
+        '  .ms-sitvaxel button{padding:8px 4px;font-size:12px;}',
+        '  .ms-sitvaxel button:nth-child(n+3){border-top:1px solid #c9bfa9;}',
+        '  .ms-sitvaxel button:nth-child(3){border-left:none;}',
+        '}',
         /* typ: kastvektorer — hjälpfiguren i fy2-1.8 med tre lager som
            kryssrutorna tänder och släcker. Kortet är bredare (ms-bred) så
            att figuren får sin fulla bredd (593 px) och etiketterna sin
@@ -5406,11 +5421,12 @@
     // fysik2-cirkular-rorelse-app.html inbäddad som minisimulering via en
     // iframe (?embed=1&mini=1) — samma mönster som gaffelbalans3d/dubbelkon.
     // Växlaren uppe till höger på scenen byter situation mellan Cirkelbana
-    // (bilen sedd rakt uppifrån) och Loop (bilen från sidan). Kortets
-    // verktyg (Pausa/Fortsätt, Börja om, fartglidaren) styr sidan med
-    // postMessage, och sidan rapporterar tillbaka sitt läge: i cirkelbanan
-    // visar info-raden aktuell centripetalkraft, i loopen gränsfarten
-    // längst ned. FULLSKÄRM startas med scenens egen .fs-btn INNE i
+    // och Bilbana (ovanifrån) samt Loop och Krön och dal (från sidan).
+    // Kortets verktyg (Pausa/Fortsätt, Börja om, fartglidaren) styr sidan
+    // med postMessage, och sidan rapporterar tillbaka sitt läge till
+    // info-raden: centripetalkraften (cirkelbanan), kraften som krävs i den
+    // snäva kurvan mot greppets max (bilbanan), gränsfarten längst ned
+    // (loopen) och gränsfarten på krönet. FULLSKÄRM startas med scenens egen .fs-btn INNE i
     // iframen och ger då exakt originalsimuleringens fullskärmsläge.
     function buildCirkularrorelse(node, cfg) {
         var card = document.createElement('div');
@@ -5435,7 +5451,8 @@
         iframe.title =
             'Simulering: en bil kör med konstant fart i en cirkelbana, sedd ' +
             'rakt uppifrån — kraftpilen pekar hela tiden in mot centrum. ' +
-            'Växlaren uppe till höger byter till en loop sedd från sidan. ' +
+            'Växlaren uppe till höger byter till en bilbana med två kurvor, ' +
+            'en loop sedd från sidan eller en väg över krön och genom dal. ' +
             'Fullskärmsknappen uppe till vänster i scenen öppnar ' +
             'simuleringen i fullskärm med alla verktyg.';
         scene.appendChild(iframe);
@@ -5454,20 +5471,25 @@
         }
 
         // ── Situationsväxlaren uppe till höger på scenen ──────────────────
-        var lage = 'cirkel';            // 'cirkel' | 'loop'
-        var sistaV = 8, sistaV0 = 21;   // senast valda fart per situation
+        var lage = 'cirkel';            // 'cirkel' | 'bana' | 'loop' | 'kron'
+        var LAGEN = ['cirkel', 'bana', 'loop', 'kron'];
+        // farten v delas av cirkelbanan, bilbanan och krön/dal; loopen har
+        // sin egen fart längst ned
+        var sistaV = 8, sistaV0 = 21;
         var running = true;
 
         var vaxel = document.createElement('div');
         vaxel.className = 'ms-sitvaxel';
-        var cirkelBtn = document.createElement('button');
-        cirkelBtn.type = 'button';
-        cirkelBtn.textContent = 'Cirkelbana';
-        var loopBtn = document.createElement('button');
-        loopBtn.type = 'button';
-        loopBtn.textContent = 'Loop';
-        vaxel.appendChild(cirkelBtn);
-        vaxel.appendChild(loopBtn);
+        var knappar = {};
+        [['cirkel', 'Cirkelbana'], ['bana', 'Bilbana'], ['loop', 'Loop'], ['kron', 'Krön och dal']]
+            .forEach(function (k) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.textContent = k[1];
+                b.addEventListener('click', function () { byt(k[0]); });
+                knappar[k[0]] = b;
+                vaxel.appendChild(b);
+            });
         scene.appendChild(vaxel);
         card.appendChild(scene);
 
@@ -5525,15 +5547,17 @@
         // används både vid klick här och när läget byts inne i iframen
         // (fullskärmens radioknappar).
         function visaLage() {
-            cirkelBtn.classList.toggle('ms-aktiv', lage === 'cirkel');
-            loopBtn.classList.toggle('ms-aktiv', lage === 'loop');
-            if (lage === 'cirkel') {
-                sliderLbl.textContent = 'Banhastighet';
+            LAGEN.forEach(function (k) { knappar[k].classList.toggle('ms-aktiv', lage === k); });
+            if (lage !== 'loop') {
+                sliderLbl.textContent = lage === 'kron' ? 'Fart' : 'Banhastighet';
                 slider.min = '2'; slider.max = '15';
                 slider.value = String(sistaV);
                 slider.setAttribute('aria-label',
-                    'Banhastighet i meter per sekund — större fart kräver ' +
-                    'större centripetalkraft');
+                    lage === 'cirkel'
+                        ? 'Banhastighet i meter per sekund — större fart kräver större centripetalkraft'
+                        : lage === 'bana'
+                        ? 'Banhastighet i meter per sekund — räcker inte greppet i kurvan fortsätter bilen rakt fram'
+                        : 'Fart i meter per sekund — över gränsfarten lättar bilen från krönet');
                 visaFart(sistaV);
             } else {
                 sliderLbl.textContent = 'Fart längst ned';
@@ -5554,13 +5578,10 @@
             visaLage();
             sanda('situation', nytt);
         }
-        cirkelBtn.addEventListener('click', function () { byt('cirkel'); });
-        loopBtn.addEventListener('click', function () { byt('loop'); });
-
         slider.addEventListener('input', function () {
             var v = parseFloat(slider.value);
             visaFart(v);
-            if (lage === 'cirkel') { sistaV = v; sanda('fart', v); }
+            if (lage !== 'loop') { sistaV = v; sanda('fart', v); }
             else { sistaV0 = v; sanda('fart0', v); }
         });
 
@@ -5571,7 +5592,7 @@
             if (e.source !== iframe.contentWindow) return;
             var st = e.data && e.data.fysikCirkularStatus;
             if (!st) return;
-            if ((st.mode === 'cirkel' || st.mode === 'loop') && st.mode !== lage) {
+            if (LAGEN.indexOf(st.mode) >= 0 && st.mode !== lage) {
                 lage = st.mode;
                 visaLage();
             }
@@ -5582,16 +5603,26 @@
             // synka glidaren om farten ändrats inne i iframen (fullskärm) —
             // men aldrig medan användaren själv drar i den
             if (document.activeElement !== slider) {
-                if (lage === 'cirkel' && isFinite(st.v) && Math.abs(st.v - sistaV) > 0.049) {
+                if (lage !== 'loop' && isFinite(st.v) && Math.abs(st.v - sistaV) > 0.049) {
                     sistaV = st.v; slider.value = String(st.v); visaFart(st.v);
                 } else if (lage === 'loop' && isFinite(st.v0) && Math.abs(st.v0 - sistaV0) > 0.049) {
                     sistaV0 = st.v0; slider.value = String(st.v0); visaFart(st.v0);
                 }
             }
+            info.style.color = '';
+            // bilbanans info är en hel mening — egen rad som får radbrytas
+            info.classList.toggle('ms-brod', lage === 'bana');
             if (lage === 'cirkel' && isFinite(st.FC)) {
                 info.innerHTML = '<em>F</em><sub>C</sub> = ' + fmtT(st.FC) + ' N';
+            } else if (lage === 'bana' && isFinite(st.FC2) && isFinite(st.Fmax)) {
+                // kraften den snäva kurvan kräver mot vad greppet kan ge
+                info.textContent = 'Snäva kurvan: ' + fmtT(st.FC2) + ' N krävs, greppet ger ' +
+                    fmtT(st.Fmax) + ' N';
+                if (st.FC2 > st.Fmax) info.style.color = '#c8324a';
             } else if (lage === 'loop' && isFinite(st.vcrit)) {
                 info.textContent = 'Gränsfart längst ned: ' + fmt(st.vcrit, 1) + ' m/s';
+            } else if (lage === 'kron' && isFinite(st.vKron)) {
+                info.textContent = 'Gränsfart på krönet: ' + fmt(st.vKron, 1) + ' m/s';
             }
         });
     }

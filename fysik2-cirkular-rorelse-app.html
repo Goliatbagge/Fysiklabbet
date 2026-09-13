@@ -1817,7 +1817,8 @@
             const miniRef = useRef({});
             miniRef.current = { setModeReset, reset, setRunning, setV, setV0 };
             const miniStatusRef = useRef({});
-            miniStatusRef.current = { mode, running, FC, v, v0, vcrit: VCRIT };
+            miniStatusRef.current = { mode, running, FC, v, v0, vcrit: VCRIT,
+                                      FC2, Fmax, nTop: nTopK, vKron };
             useEffect(() => {
                 if (!window.__MINI) return;
                 const onMsg = (e) => {

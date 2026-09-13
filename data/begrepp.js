@@ -173,9 +173,9 @@ window.BEGREPP = [
   {
     id: 'pikometer',
     term: 'Pikometer',
-    former: ['pikometer', 'pikometern', 'pikometrar', 'pikometrarna', 'ångström', 'ångströmmen'],
+    former: ['pikometer', 'pikometern', 'pikometrar', 'pikometrarna'],
     kort: 'En biljondels meter, den längdenhet som passar avstånden inne i en atom och mellan atomerna i en kristall. Tusen pikometer går på en nanometer.',
-    relaterade: ['nanoskala', 'gitter', 'elektronmikroskop'],
+    relaterade: ['nanoskala', 'gitter', 'elektronmikroskop', 'angstrom'],
     body: [
       { type: 'p', html: 'En pikometer är 10<sup>−12</sup>&nbsp;m, alltså en tusendels nanometer och en biljondels meter. Enheten används där nanometern blir för grov: avståndet mellan två atomer i ett fast material ligger på ett par hundra pikometer, en väteatom är omkring 100&nbsp;pikometer i diameter och en kemisk bindning mellan två kolatomer 154&nbsp;pikometer lång.' },
       { type: 'p', html: 'För att få en känsla för storleken kan man skala upp. Vore en pikometer lika lång som en millimeter, då vore en meter lika lång som avståndet från jorden till solen och tillbaka igen, flera gånger om. En annan väg är att räkna åt andra hållet: det får plats ungefär lika många pikometer på en meter som det finns sekunder på trettiotusen år.' },
@@ -554,7 +554,7 @@ window.BEGREPP = [
     term: 'Exciterat tillstånd',
     former: ['exciterat tillstånd', 'exciterade tillstånd', 'exciterade tillståndet', 'exciterade tillstånden', 'exciterad', 'exciterat', 'exciterade', 'exciteras', 'excitation', 'excitationen', 'excitationer', 'deexciteras', 'deexcitation'],
     kort: 'Ett tillstånd där en atom, atomkärna eller molekyl bär på mer energi än sitt lägsta möjliga tillstånd — som en uppdragen fjäder som väntar på att få släppa ut sin energi.',
-    relaterade: ['spinn'],
+    relaterade: ['spinn', 'spektrum'],
     body: [
       { type: 'p', html: 'Elektronerna i en atom kan inte ha vilken energi som helst — de är hänvisade till bestämda energinivåer, ungefär som pinnarna i en stege. Det lägsta steget kallas grundtillståndet, och där ligger atomen om den får vara i fred. Träffas atomen av exakt rätt energiportion — till exempel en ljuspartikel, en foton — kan en elektron lyftas till ett högre steg. Då säger man att atomen är <em>exciterad</em>, eller befinner sig i ett exciterat tillstånd.' },
       { type: 'p', html: 'Ett exciterat tillstånd är nästan alltid kortlivat. Efter en bråkdels sekund faller elektronen tillbaka ner (atomen <em>deexciteras</em>) och energiskillnaden skickas ut som en foton med exakt den våglängd som motsvarar hoppet. Det är därför varje grundämne lyser med sina egna karakteristiska färger — det är så neonskyltar får sitt röda sken, norrskenet sina färger och astronomer kan avgöra vad avlägsna stjärnor består av. Även atomkärnor kan exciteras; när de faller tillbaka skickar de ut gammastrålning.' },
@@ -1044,7 +1044,7 @@ window.BEGREPP = [
     term: 'Våglängd',
     former: ['våglängd', 'våglängden', 'våglängder', 'våglängderna'],
     kort: 'Avståndet mellan två närliggande vågtoppar. För ljus avgör våglängden färgen, och tillsammans med ljushastigheten bestämmer den frekvensen.',
-    relaterade: ['foton', 'spektroskopi', 'interferens'],
+    relaterade: ['foton', 'spektroskopi', 'interferens', 'spektrum'],
     body: [
       { type: 'p', html: 'Titta på havsvågor som rullar in mot en strand: avståndet från en vågtopp till nästa är vågens våglängd. Samma mått används för alla vågrörelser — ljud, radiovågor, ljus — och betecknas med den grekiska bokstaven <em>λ</em> (lambda). Våglängden hänger ihop med frekvensen, alltså hur många vågtoppar som passerar en punkt varje sekund, genom sambandet <em>c</em> = <em>λ</em> · <em>f</em>. För ljus i vakuum är <em>c</em> ljushastigheten, ungefär 3,00 · 10<sup>8</sup>&nbsp;m/s, och den är densamma för allt ljus. Lång våglängd betyder därför låg frekvens, kort våglängd hög.' },
       { type: 'p', html: 'Hela det elektromagnetiska spektrumet är i grunden samma sorts vågor — bara med olika våglängd. Radiovågor mäts i meter eller kilometer, mikrovågor i centimeter (en mikrovågsugn arbetar kring 12&nbsp;cm), infrarött i mikrometer. Det synliga ljuset upptar en förvånansvärt smal remsa, från omkring 400&nbsp;nm (violett) till omkring 700&nbsp;nm (rött), där en nanometer är 10<sup>−9</sup>&nbsp;m. Ännu kortare är ultraviolett, röntgen och gammastrålning. Eftersom varje fotons energi växer med frekvensen är det just den korta våglängden som gör strålning energirik.' },
@@ -1054,9 +1054,9 @@ window.BEGREPP = [
   {
     id: 'spektroskopi',
     term: 'Spektroskopi',
-    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'spektrum', 'spektrumet', 'spektret', 'spektra', 'spektrometer', 'spektrometern', 'laserspektroskopi', 'fotoelektronspektroskopi', 'gammaspektroskopi', 'gammaspektroskopin'],
+    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'laserspektroskopi', 'fotoelektronspektroskopi', 'gammaspektroskopi', 'gammaspektroskopin'],
     kort: 'Konsten att dela upp ljus efter våglängd och läsa av mönstret av ljusa och mörka linjer. Eftersom varje grundämne har sitt eget linjemönster går det att bestämma vad något består av utan att röra vid det.',
-    relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand', 'diffraktionsgitter'],
+    relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand', 'diffraktionsgitter', 'spektrum', 'spektrometer'],
     body: [
       { type: 'p', html: 'Låter man solljus passera ett prisma eller ett optiskt gitter delas det upp i regnbågens färger efter våglängd. Tittar man riktigt noga på det uppdelade solljuset visar det sig att regnbågen är genomkorsad av smala mörka streck. Joseph von Fraunhofer kartlade hundratals av dem kring 1814 utan att veta vad de var. Förklaringen kom senare: atomerna i solens svalare ytterlager plockar bort exakt de våglängder som svarar mot hopp mellan deras egna energinivåer. Varje grundämne har sin egen uppsättning nivåer — och därmed sitt eget streckkodsliknande fingeravtryck.' },
       { type: 'p', html: 'Att läsa av det mönstret kallas spektroskopi. En het, tunn gas ger ljusa linjer på precis samma våglängder som ett svalare skikt ger mörka. Natrium lyser till exempel i ett gult par vid 589&nbsp;nm — samma gula ton som i gatlyktor och i en flamma man strör salt i. Metoden är så pålitlig att grundämnet helium upptäcktes i solens spektrum 1868, nästan trettio år innan någon hittade det på jorden. Namnet kommer av grekiskans <em>helios</em>, sol.' },
@@ -1268,7 +1268,7 @@ window.BEGREPP = [
     term: 'Nanoskala',
     former: ['nanoskala', 'nanoskalan', 'nanometer', 'nanometern', 'nanoteknik', 'nanotekniken', 'nanostruktur', 'nanostrukturer', 'nanopartikel', 'nanopartiklar', 'nanopartiklarna'],
     kort: 'Storleksordningen några miljarddels meter, där enstaka atomer och molekyler är byggstenarna. Väl kända material får ofta helt nya egenskaper när de krymps ner hit.',
-    relaterade: ['halvledare', 'metamaterial', 'fotonisk-kristall'],
+    relaterade: ['halvledare', 'metamaterial', 'fotonisk-kristall', 'angstrom'],
     body: [
       { type: 'p', html: 'En nanometer är en miljarddels meter: 1&nbsp;nm = 10<sup>−9</sup>&nbsp;m. Tumregeln är att ungefär tio atomer på rad blir en nanometer. Ett människohårstrå är omkring 80&nbsp;000&nbsp;nm tjockt — en nanometer förhåller sig alltså till hårstrået ungefär som hårstrået till en fotbollsplan. DNA-spiralen är ett par nanometer bred och ett virus några tiotals till ett par hundra. Med nanoskalan menas vanligen storlekar från ungefär 1 till 100&nbsp;nm.' },
       { type: 'p', html: 'Att material beter sig annorlunda här beror på två saker. Dels blir ytan viktig: i en guldtacka sitter så gott som alla atomer skyddade inne i materialet, medan en partikel på några nanometer har en stor del av sina atomer i ytan, med lösa bindningar som gärna reagerar. Dels tar kvanteffekterna över — en elektron instängd i ett så litet utrymme kan bara ha vissa bestämda energier, och vilka beror på utrymmets storlek. Därför är guld gult och trögreaktivt i vanlig storlek men rubinrött och en effektiv katalysator som nanopartiklar. Samma princip ger kvantprickar: halvledarkorn som lyser i en färg som bestäms av kornets storlek, större korn rött och mindre blått.' },
@@ -2769,7 +2769,7 @@ window.BEGREPP = [
     term: 'Diffraktionsgitter',
     former: ['diffraktionsgitter', 'diffraktionsgittret', 'diffraktionsgittren', 'gitterspektrometer', 'gitterspektrometern', 'reflexionsgitter', 'transmissionsgitter', 'gitterekvationen'],
     kort: 'En yta med tusentals mycket täta parallella spår som delar upp ljus i dess våglängder. Det är gittret som gör en spektrometer till ett precisionsinstrument.',
-    relaterade: ['diffraktion', 'interferens', 'spektroskopi', 'vaglangd'],
+    relaterade: ['diffraktion', 'interferens', 'spektroskopi', 'vaglangd', 'spektrometer'],
     body: [
       { type: 'p', html: 'Ett diffraktionsgitter är i grunden mycket många spalter bredvid varandra, med ett avstånd i samma storleksordning som ljusets våglängd. Ljus som passerar varje spalt breder ut sig, och vågorna från alla spalterna möts sedan och lägger sig ovanpå varandra. I de riktningar där vägskillnaden mellan grannspalter råkar vara ett helt antal våglängder förstärker vågorna varandra, i alla andra riktningar släcker de ut varandra. Eftersom villkoret innehåller våglängden hamnar olika färger i olika riktningar, och det vita ljuset delas upp.' },
       { type: 'p', html: 'Sambandet skrivs som spaltavståndet gånger sinus för utfallsvinkeln α lika med ett helt tal gånger våglängden. Poängen med att ha många spår i stället för bara två är skärpan: ju fler vågor som ska samverka, desto smalare blir riktningen där de gör det, och desto bättre går det att skilja två närliggande våglängder åt. Ett bra gitter har tusentals spår per millimeter, och därför kan en gitterspektrometer separera våglängder som skiljer sig med en försvinnande liten bråkdel. Gittret kan antingen släppa igenom ljuset eller vara en blank yta med spår som speglar det.' },
@@ -2870,6 +2870,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Idén bygger helt på att tryck är kraft delad med area. Trycker du med tummen mot ett bord händer ingenting, men lägg en häftstiftsspets emellan och samma kraft går rakt in i träet, eftersom spetsens area bara är en tusendel så stor. En diamantstädcell driver den tanken till sin ytterlighet: två diamanter slipas så att de får varsin platt spets bara några hundradels millimeter bred, provet placeras mellan dem, och sedan dras en skruv åt. Den kraft som behövs är inte större än vad ett par mjölkpaket väger.' },
       { type: 'p', html: 'Diamant valdes inte av lyx utan av två skäl. Den är det hårdaste kända materialet och klarar därför att pressas hårt utan att själv ge efter, och den är genomskinlig både för synligt ljus och för röntgenstrålning. Man kan alltså trycka och titta samtidigt. En tunn metallbricka med ett hål i mitten, kallad packning, håller provet på plats och hindrar det från att rinna ut i sidled när trycket stiger.' },
       { type: 'p', html: 'Provet är ofta bara några tiondels millimeter stort, och vid de allra högsta trycken mindre än så. För att se vad som händer i det lyser man igenom det med en skarp röntgenstråle, vanligtvis från en stor acceleratoranläggning, och läser av mönstret av avböjda strålar. Ur mönstret går det att räkna ut precis hur atomerna är ordnade. Behövs hög temperatur också värms provet med laser genom diamanten. Med tekniken har forskare kunnat återskapa förhållandena i jordens kärna och i de stora planeternas inre, på en yta mindre än ett dammkorn.' }
+    ]
+  },
+  {
+    id: 'angstrom',
+    term: 'Ångström',
+    former: ['ångström', 'ångströmmen', 'ångströmmar', 'ångströmmarna', 'ångströmenhet', 'ångströmenheten'],
+    kort: 'En tiondels nanometer, alltså precis den längd en atom är stor. Enheten hör inte till SI-systemet men lever kvar i kemin och kristallografin just för att måttet passar så bra.',
+    relaterade: ['pikometer', 'nanoskala', 'vaglangd', 'gitter'],
+    body: [
+      { type: 'p', html: 'En ångström är 10<sup>−10</sup>&nbsp;m, alltså en tiondels nanometer eller hundra pikometer. Enheten betecknas Å och är döpt efter Anders Jonas Ångström, fysiker i Uppsala, som 1868 gav ut en noggrann karta över solens spektrum där han angav våglängderna i just tiomiljarddels meter. Beteckningen är den enda enhetssymbol i allmänt bruk som innehåller en svensk bokstav, vilket har ställt till med en del bekymmer i äldre datorsystem.' },
+      { type: 'p', html: 'Att enheten överlevt beror på att den råkar ha precis rätt storlek. En väteatom är ungefär en ångström i diameter, bindningen mellan två kolatomer är 1,54&nbsp;ångström lång och avståndet mellan atomplanen i ett vanligt kristallgitter ligger på några få ångström. Ett varv i DNA-spiralen är 34&nbsp;ångström. I stället för klumpiga tiopotenser kan en kemist alltså säga att en bindning är ungefär ett och ett halvt någonting, och det är hela poängen med en enhet.' },
+      { type: 'p', html: 'Ett lyckligt sammanträffande är att röntgenstrålningen som används för att bestämma kristallers uppbyggnad också har en våglängd kring en ångström. Det är därför metoden fungerar: våglängden måste vara i samma storleksordning som avstånden man vill mäta. Inom strukturbiologin anges kvaliteten på en bestämd molekylstruktur än i dag i ångström, där ett lägre tal betyder skarpare bild. Enheten räknas ändå inte som en SI-enhet, och den som skriver nytt bör välja nanometer eller pikometer i stället.' }
+    ]
+  },
+  {
+    id: 'spektrum',
+    term: 'Spektrum',
+    former: ['spektrum', 'spektrumet', 'spektret', 'spektra', 'spektrumen', 'emissionsspektrum', 'emissionsspektrumet', 'absorptionsspektrum', 'absorptionsspektrumet', 'linjespektrum', 'kontinuerligt spektrum', 'spektrallinje', 'spektrallinjen', 'spektrallinjer', 'spektrallinjerna'],
+    kort: 'Ljuset uppdelat efter våglängd, som en regnbåge med ljusa eller mörka linjer i. Mönstret av linjer är grundämnets fingeravtryck och avslöjar vad källan består av.',
+    relaterade: ['spektroskopi', 'spektrometer', 'vaglangd', 'exciterat-tillstand'],
+    body: [
+      { type: 'p', html: 'Låter man ljus passera ett prisma eller ett diffraktionsgitter viker olika våglängder av olika mycket, och ljuset breder ut sig i en färgskala. Den utbredda bilden är ett spektrum. Det finns tre grundtyper. Ett glödande fast föremål eller en tät gas ger ett kontinuerligt spektrum, en obruten övergång från rött till violett. En tunn, het gas ger i stället ett emissionsspektrum: mörkt överallt utom vid några få skarpa ljusa linjer. Och ligger en svalare gas framför något som lyser kontinuerligt får man ett absorptionsspektrum, där samma linjer syns som mörka streck i regnbågen.' },
+      { type: 'p', html: 'Att linjerna hamnar just där de hamnar följer av att en atoms elektroner bara kan ha vissa bestämda energier. Hoppar en elektron mellan två av dessa nivåer motsvarar skillnaden en foton med en bestämd energi och därmed en bestämd våglängd. Eftersom varje grundämne har sin egen uppsättning nivåer får det sin egen uppsättning linjer, lika kännetecknande som ett fingeravtryck. Natrium lyser till exempel i ett gult par vid 589&nbsp;nm, samma ton som en gammaldags gatlykta. Är gasen het sänder den ut i de linjerna, är den sval slukar den i exakt samma linjer, och våglängderna är desamma i båda fallen.' },
+      { type: 'p', html: 'Ur ett spektrum går det att läsa av betydligt mer än vilka ämnen som finns. Var det kontinuerliga ljuset är som starkast berättar hur varm källan är. Hur breda linjerna är säger något om täthet och tryck, eftersom täta krockar smetar ut nivåerna. Är hela linjemönstret förskjutet åt rött eller blått rör sig källan från eller mot oss, och förskjutningen ger farten. Sitter källan dessutom i ett magnetfält kan en enda linje delas upp i flera. Ordet används också i vidare mening om hela det elektromagnetiska registret, från radiovågor till gammastrålning.' }
+    ]
+  },
+  {
+    id: 'spektrometer',
+    term: 'Spektrometer',
+    former: ['spektrometer', 'spektrometern', 'spektrometrar', 'spektrometrarna', 'spektrograf', 'spektrografen', 'spektrografer', 'spektrograferna', 'spektroskop', 'spektroskopet'],
+    kort: 'Instrumentet som delar upp ljus efter våglängd och mäter hur mycket det finns av varje. Det är med en spektrometer man tar upp ett spektrum.',
+    relaterade: ['spektrum', 'spektroskopi', 'diffraktionsgitter', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'En spektrometer är byggd av några få delar som alla gör sitt. Först en smal spalt, så att varje våglängd avbildas som en skarp linje i stället för en suddig fläck. Sedan en lins eller spegel som gör strålarna parallella, och därefter själva uppdelaren: ett prisma eller, numera nästan alltid, ett diffraktionsgitter. Till sist en optik som samlar ihop ljuset igen och en detektor som mäter det. Förr var detektorn ögat eller en fotografisk plåt, i dag är den en rad av ljuskänsliga bildpunkter.' },
+      { type: 'p', html: 'Namnen skvallrar om den historien. Ett spektroskop var något man tittade i, en spektrograf gjorde en varaktig upptagning på plåt, och en spektrometer mätte upp våglängderna med tal. I dag används orden om vartannat, och spektrometer har blivit det vanligaste. Kvaliteten avgörs av tre saker: vilket våglängdsområde instrumentet täcker, hur ljusstarkt det är, och framför allt upplösningen, alltså hur nära varandra två våglängder får ligga och ändå gå att skilja åt. Ett tätare gitter och en smalare spalt ger bättre upplösning men släpper igenom mindre ljus, så där finns alltid en avvägning.' },
+      { type: 'p', html: 'Just den avvägningen styr hur instrumenten ser ut i praktiken. En spektrograf på ett stort teleskop som ska mäta en svag och avlägsen galax måste prioritera ljusstyrka, medan en som letar efter exoplaneter genom att mäta stjärnors minimala hastighetsändringar i stället drivs till extrem upplösning. Spektrometrar sitter också på rymdsonder kring Mars, i kemilaboratorier, i handhållna apparater som sorterar metallskrot eller kontrollerar ädelstenar, och som små kretskortsmonterade enheter i jordbruks- och livsmedelsutrustning. Med ett gitter etsat på ett chipp och en bildsensor bredvid får hela instrumentet plats i en tändsticksask.' }
     ]
   },
 ];

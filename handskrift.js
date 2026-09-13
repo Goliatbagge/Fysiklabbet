@@ -39899,6 +39899,999 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- hjälpare: trigonometrisk graf --------------------
+   * Ett litet koordinatsystem med en tätt samplad kurva (se CLAUDE.md:
+   * kurvor ritas UR SIN FUNKTION, aldrig som en grov polylinje).
+   * Axlarna får pilspets bara åt det positiva hållet. */
+  function mkTrigGraf(T, F, o) {
+    var acts = T.acts, ox = o.ox, oy = o.oy, ux = o.ux, uy = o.uy;
+    function X(v) { return ox + v * ux; }
+    function Y(v) { return oy - v * uy; }
+    function axlar(xmin, xmax, ymin, ymax, xlab, ylab) {
+      var x1 = X(xmax) + 14, y1 = Y(ymax) - 14;
+      T.line([X(xmin), oy], [x1, oy]);
+      T.line([x1 - 9, oy - 5], [x1 + 1, oy]);
+      T.line([x1 - 9, oy + 5], [x1 + 1, oy]);
+      T.pause(140);
+      T.line([ox, Y(ymin)], [ox, y1]);
+      T.line([ox - 5, y1 + 9], [ox, y1 - 1]);
+      T.line([ox + 5, y1 + 9], [ox, y1 - 1]);
+      T.pause(140);
+      T.str(xlab || 'x', x1 - 4, oy + 0.86 * F, null, 0.6);
+      T.str(ylab || 'y', ox + 10, y1 + 0.30 * F, null, 0.6);
+    }
+    /* kurvan samplas i 160 punkter ur funktionen */
+    function kurva(f, a, b, col) {
+      var pts = [], i, n = 160, v;
+      for (i = 0; i <= n; i++) {
+        v = a + (b - a) * (i / n);
+        pts.push([X(v), Y(f(v))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: col || null });
+      T.pause(180);
+    }
+    function vagrat(v, a, b, col) {
+      var x1 = X(a), x2 = X(b), i;
+      for (i = 0; i < 17; i += 2) {
+        acts.push({ kind: 'stroke', color: col || BLUE, pts: humanize(
+          [[x1 + (x2 - x1) * (i / 17), Y(v)],
+           [x1 + (x2 - x1) * ((i + 1) / 17), Y(v)]]) });
+      }
+      T.pause(160);
+    }
+    function lodrat(v, a, b, col) {
+      var y1 = Y(a), y2 = Y(b), i;
+      for (i = 0; i < 9; i += 2) {
+        acts.push({ kind: 'stroke', color: col || BLUE, pts: humanize(
+          [[X(v), y1 + (y2 - y1) * (i / 9)],
+           [X(v), y1 + (y2 - y1) * ((i + 1) / 9)]]) });
+      }
+      T.pause(160);
+    }
+    function punkt(x, y, col) {
+      acts.push({ kind: 'stroke', pts: dotPts(X(x), Y(y)), color: col || null });
+      T.pause(120);
+    }
+    return { X: X, Y: Y, ox: ox, oy: oy, axlar: axlar, kurva: kurva,
+             vagrat: vagrat, lodrat: lodrat, punkt: punkt };
+  }
+
+  /* ---------------- scen: lös sin x = 0,4 grafiskt (ma4-1.10 ex 1) ----
+   * Sinuskurvan och den vågräta linjen y=0,4 skär varandra två gånger
+   * per varv, och skärningarna upprepas med perioden 360°. */
+  function layoutGrafisksin(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 32, oy: 268, ux: 0.74, uy: 62 });
+    function sinD(d) { return Math.sin(d * Math.PI / 180); }
+
+    G.axlar(-30, 585, -1.35, 1.35, 'x', 'y');
+    T.stepEnd();
+
+    G.kurva(sinD, -30, 545);
+    T.str('y=sin x', G.X(90) - 20, G.Y(1) - 0.55 * F, null, 0.5);
+    T.stepEnd();
+
+    G.vagrat(0.4, -30, 545);
+    /* etiketten läggs där kurvan ligger långt nedanför linjen */
+    T.str('y=0,4', G.X(215), G.Y(0.4) - 0.42 * F, BLUE, 0.5);
+    T.pause(200);
+    G.punkt(23.6, 0.4, BLUE);
+    G.punkt(156.4, 0.4, BLUE);
+    G.punkt(383.6, 0.4, BLUE);
+    G.punkt(516.4, 0.4, BLUE);
+    T.stepEnd();
+
+    tanke(G.oy + 1.35 * 62, [
+      [['Skärningspunkterna är']],
+      [['ekvationens lösningar. Jag']],
+      [['läser av deras x-värden.']]
+    ], 0);
+    y = G.oy + 1.35 * 62 + 3.0 * F;
+    xx = T.str('x_1≈23,6°', padL, y);
+    T.pause(300);
+    T.str('x_2≈156,4°', xx + 1.4 * F, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('x_3≈383,6°', padL, y);
+    T.pause(300);
+    T.str('x_4≈516,4°', xx + 1.4 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x_3 är x_1 plus ett helt varv']],
+      [['och x_4 är x_2 plus ett varv.']],
+      [['Kurvan upprepar sig, så det']],
+      [['räcker med de två första.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x≈23,6°+n·360°', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x≈156,4°+n·360°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lös cos x = x grafiskt (ma4-1.10 ex 2) ------
+   * Linjen y = x växer obegränsat och hinner bara korsa cosinuskurvan
+   * en enda gång — därför ingen periodterm i svaret. */
+  function layoutGrafiskcosx(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 170, oy: 262, ux: 78, uy: 56 });
+
+    G.axlar(-1.9, 3.4, -1.5, 1.6, 'x', 'y');
+    T.stepEnd();
+
+    G.kurva(Math.cos, -1.9, 3.4);
+    T.str('y=cos x', G.X(2.2) - 10, G.Y(-1) + 0.9 * F, null, 0.5);
+    T.pause(200);
+    G.kurva(function (v) { return v; }, -1.45, 1.5, BLUE);
+    T.str('y=x', G.X(1.5) + 6, G.Y(1.5) + 0.2 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    G.punkt(0.74, 0.74, BLUE);
+    G.lodrat(0.74, 0, 0.74);
+    T.str('0,74', G.X(0.74) - 6, G.oy + 1.05 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 1.6 * 56, [
+      [['Kurvorna skär varandra i']],
+      [['EN enda punkt. Jag läser av']],
+      [['dess x-koordinat.']]
+    ], 0);
+    y = G.oy + 1.6 * 56 + 3.2 * F;
+    xx = T.str('x≈0,74', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Svaret är i radianer, så']],
+      [['ingen enhet skrivs ut. Och']],
+      [['linjen y=x växer hela tiden,']],
+      [['så fler lösningar finns inte.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x≈0,74', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: amplitud och period (ma4-1.11 ex 1) --------- */
+  function layoutAmplitudperiod(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=5 sin 8x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet framför sinus är']],
+      [['amplituden, alltså hur långt']],
+      [['kurvan når över och under']],
+      [['mittlinjen.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('amplitud=5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Talet framför x säger hur']],
+      [['många varv kurvan hinner med']],
+      [['på 360°. Perioden blir 360°']],
+      [['delat med det talet.']]
+    ]);
+    y += 5.0 * F;
+    xx = T.str('period=', padL, y);
+    xx = T.fracH('360°', '8', xx, y);
+    xe = T.str('=45°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xe = T.str('Svar: amplitud 5,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('period 45°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: negativ koefficient (ma4-1.11 ex 2) ---------
+   * Minustecknet speglar kurvan i x-axeln, men amplituden är ett
+   * avstånd och kan aldrig vara negativ. */
+  function layoutNegamplitud(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=-25 sin 5x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minustecknet vänder kurvan']],
+      [['upp och ned. Men amplituden']],
+      [['är ett avstånd och kan aldrig']],
+      [['vara negativ.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('amplitud=|-25|=25', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('period=', padL, y);
+    xx = T.fracH('360°', '5', xx, y);
+    xe = T.str('=72°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xe = T.str('Svar: amplitud 25,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('period 72°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: division i argumentet (ma4-1.11 ex 3) -------
+   * x/2 skrivs om som 0,5x, annars är det lätt att tro att perioden
+   * blir 360°/2. */
+  function layoutDivargument(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('y=', padL, y);
+    xx = T.fracH('3', '5', xx, y);
+    xx = T.str('cos(', xx, y);
+    xx = T.fracH('x', '2', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I argumentet står en']],
+      [['division. Jag skriver om den']],
+      [['som en multiplikation, annars']],
+      [['hittar jag inte koefficienten.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.fracH('x', '2', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('1', '2', xx, y);
+    T.str('x=0,5x', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('amplitud=', padL, y);
+    xx = T.fracH('3', '5', xx, y);
+    xe = T.str('=0,6', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('period=', padL, y);
+    xx = T.fracH('360°', '0,5', xx, y);
+    xe = T.str('=720°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: koefficienten är']],
+      [['mindre än 1, så kurvan hinner']],
+      [['inte ens ett varv på 360°.']],
+      [['Perioden blir längre.']]
+    ], 1.4);
+    y += 5.0 * F;
+    xe = T.str('Svar: amplitud 0,6,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('period 720°', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: beskriv förskjutningen (ma4-1.12 ex 1) ------
+   * Tecknet i argumentet pekar ÅT ANDRA HÅLLET än man först tror: ett
+   * plus förskjuter kurvan åt vänster. */
+  function layoutForskjutning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=sin(x+45°)-12', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I argumentet står +45°.']],
+      [['Kurvan når samma värde 45°']],
+      [['TIDIGARE än vanligt, alltså']],
+      [['är den flyttad åt vänster.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('C=45°>0 ⟹ 45° åt', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('vänster', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Termen utanför sinus flyttar']],
+      [['hela kurvan i y-led, och -12']],
+      [['betyder nedåt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('D=-12 ⟹ 12 enheter', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('nedåt', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 45° åt vänster och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('12 enheter nedåt', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skriv funktionens ekvation (1.12 ex 2) ------
+   * Baklänges: förskjutning åt höger kräver ett negativt C. */
+  function layoutSkrivforskjuten(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('30° åt höger,', padL, y, null, 0.8);
+    T.pause(200);
+    y += 2.2 * F;
+    T.str('2 enheter uppåt', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Förskjutningen i y-led är den']],
+      [['enkla: den står utanför']],
+      [['sinus och har samma tecken.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('D=2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Åt höger betyder att kurvan']],
+      [['når varje värde SENARE, så C']],
+      [['måste vara negativt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('C=-30°', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('y=sin(x+(-30°))+2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=sin(x-30°)+2', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: y=sin(x-30°)+2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: var är tangens odefinierad? (1.13 ex 1) -----
+   * tan är sin/cos, så funktionen saknar värde precis där cosinus är
+   * noll. Operationerna på båda led skrivs ut i blått (scenen har inget
+   * väggläge: väggens operation skulle behöva innehålla ett bråk). */
+  function layoutTanodefinierad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Odefinierad när nämnaren är 0', padL, y - 1.5 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('tan v=', padL, y);
+    T.fracH('sin v', 'cos v', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här är vinkeln hela']],
+      [['uttrycket 2x+π/3. Jag söker']],
+      [['de x där cosinus för det']],
+      [['uttrycket blir noll.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('cos(2x+', padL, y);
+    xx = T.fracH('π', '3', xx, y);
+    T.str(')=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Cosinus är noll vid ±π/2,']],
+      [['alltså rakt upp och rakt ned']],
+      [['i enhetscirkeln.']]
+    ], 1.05);
+    y += 4.8 * F;
+    xx = T.str('2x+', padL, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('=±', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    T.str('+n·2π', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('2x+', padL + 20, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('-', xx, y, BLUE);
+    xx = T.fracH('π', '3', xx, y, BLUE);
+    xx = T.str('=±', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    xx = T.str('+n·2π', xx, y);
+    xx = T.str('-', xx, y, BLUE);
+    T.fracH('π', '3', xx, y, BLUE);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('2x=-', padL + 20, y);
+    xx = T.fracH('π', '3', xx, y);
+    xx = T.str('±', xx, y);
+    xx = T.fracH('π', '2', xx, y);
+    T.str('+n·2π', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu delar jag båda led med 2.']],
+      [['Varje term delas för sig.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.fracH('2x', '2', padL + 20, y, null, BLUE);
+    xx = T.str('=', xx, y);
+    xx = T.bigFrac(['-π', '3'], '2', xx, y, { denCol: BLUE });
+    xx = T.str('±', xx, y);
+    xx = T.bigFrac(['π', '2'], '2', xx, y, { denCol: BLUE });
+    xx = T.str('+', xx, y);
+    T.fracH('n·2π', '2', xx, y, null, BLUE);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('x=-', padL + 20, y);
+    xx = T.fracH('π', '6', xx, y);
+    xx = T.str('±', xx, y);
+    xx = T.fracH('π', '4', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Plus och minus ger två']],
+      [['lösningsfamiljer. Med gemensam']],
+      [['nämnare 12 blir de lättare']],
+      [['att slå ihop.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('x_1=-', padL, y);
+    xx = T.fracH('2π', '12', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('3π', '12', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=-', padL + 40, y);
+    xe = T.fracH('5π', '12', xe, y);
+    xe = T.str('+n·π', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('x_2=-', padL, y);
+    xx = T.fracH('2π', '12', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('3π', '12', xx, y);
+    T.str('+n·π', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=', padL + 40, y);
+    xe = T.fracH('π', '12', xe, y);
+    xe = T.str('+n·π', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tangens period (ma4-1.13 ex 2) -------------
+   * Perioden för tan x är 180°, och den divideras med koefficienten
+   * framför x. Faktorn framför tan ändrar ingenting. */
+  function layoutTanperiod(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Tangens upprepar sig varje']],
+      [['halvt varv, så grundperioden']],
+      [['är 180° och inte 360°.']]
+    ], 0);
+    xx = T.str('a) tan 5x: B=5', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('period=', padL + 20, y);
+    xx = T.fracH('180°', '5', xx, y);
+    xe = T.str('=36°', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Trean framför tangens är']],
+      [['bara en faktor. Den sträcker']],
+      [['kurvan i höjdled, inte i']],
+      [['sidled, så perioden rörs ej.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.str('b) 3tan', padL, y);
+    xx = T.fracH('x', '4', xx, y);
+    xx = T.str(': B=', xx, y);
+    T.fracH('1', '4', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('period=', padL + 20, y);
+    xx = T.bigFrac('180°', ['1', '4'], xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xe = T.str('=4·180°=720°', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förskjuten tangenskurva (1.13 ex 3) -------- */
+  function layoutTanforskjutning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('y=tan(x-', padL, y);
+    xx = T.fracH('4π', '3', xx, y);
+    T.str(')-3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Förskjutningarna fungerar']],
+      [['likadant som för sinus och']],
+      [['cosinus. Termen i argumentet']],
+      [['är negativ, alltså åt höger.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('argumentet: -', padL, y);
+    xx = T.fracH('4π', '3', xx, y);
+    xe = T.str(' åt höger', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och -3 står utanför tangens,']],
+      [['så hela kurvan flyttas 3 steg']],
+      [['nedåt.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xe = T.str('-3: 3 enheter nedåt', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('4π', '3', xe, y);
+    xe = T.str(' rad åt höger', xe, y);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xe = T.str('och 3 enheter nedåt', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: amplitud för a sin x + b cos x (1.14 ex 1) --
+   * Summan av en sinus och en cosinus med samma period ÄR en enda
+   * förskjuten sinuskurva, med amplituden √(a²+b²). */
+  function layoutAmplitudsum(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=4 sin x+3 cos x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En sinus plus en cosinus med']],
+      [['samma period blir EN enda']],
+      [['förskjuten sinuskurva,']],
+      [['y=c sin(x+v).']]
+    ]);
+    y += 4.8 * F;
+    T.str('a=4 och b=3', padL, y, null, 0.62);
+    T.pause(240);
+    y += 2.4 * F;
+    xx = T.str('c=', padL, y);
+    xx = T.rot('a^2+b^2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.rot('4^2+3^2', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.rot('16+9', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.rot('25', xx, y);
+    T.str('=5', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('y=5 sin(x+v)', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Amplituden är avståndet från']],
+      [['mittlinjen upp till toppen,']],
+      [['alltså beloppet av femman.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('a) amplitud=|5|=5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kurvan är inte förskjuten i']],
+      [['y-led, så den når precis en']],
+      [['amplitud över och under']],
+      [['x-axeln.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('b) största värdet=5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('c) minsta värdet=-5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm a ur amplituden (ma4-1.14 ex 2) ------
+   * Amplituden √(a²+12²) ska bli 13. Kvadrering tar bort rottecknet. */
+  function layoutBestamamplitud(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('y=a sin x+12 cos x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Faktorn framför den']],
+      [['sammanslagna sinusen är']],
+      [['amplituden, och den ska']],
+      [['vara 13.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y=', padL, y);
+    xx = T.rot('a^2+12^2', xx, y);
+    T.str('·sin(x+v)', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.rot('a^2+12^2', padL + 20, y);
+    T.str('=13', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För att komma åt a måste']],
+      [['rottecknet bort. Jag']],
+      [['kvadrerar båda led.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a^2+12^2=13^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('a^2+144=169', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-144', xx + 0.6 * F, 'a^2+144=169');
+    xx = T.str('a^2=25', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur 25 kan vara både 5']],
+      [['och -5, eftersom båda i']],
+      [['kvadrat blir 25.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a=±', padL + 20, y);
+    xx = T.rot('25', xx, y);
+    T.str('=±5', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: a=±5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: tillbaka till a sin x + b cos x (1.14 ex 3) -
+   * De två sambanden c=√(a²+b²) och tan v = b/a används baklänges, och
+   * bildar ett ekvationssystem. */
+  function layoutTillsincos(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('f(x)=4 sin(x+', padL, y);
+    xx = T.fracH('π', '6', xx, y);
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jämför med c sin(x+v):']],
+      [['c är 4 och v är π/6. Nu']],
+      [['använder jag de två']],
+      [['sambanden baklänges.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('4=', padL, y);
+    xx = T.rot('a^2+b^2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('16=a^2+b^2', padL + 20, y);
+    T.pause(260);
+    T.str('(1)', xx + 1.4 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('tan', padL, y);
+    xx = T.fracH('π', '6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('b', 'a', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.fracH('1', '√3', padL + 20, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('b', 'a', xx, y);
+    T.pause(260);
+    T.str('(2)', xx + 1.2 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ur (2) kan jag lösa ut a och']],
+      [['sätta in i (1). Då blir det']],
+      [['bara ett obekant kvar.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('a=b√3', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('16=(b√3)^2+b^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('16=3b^2+b^2=4b^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('b^2=4', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uppgiften säger att b är']],
+      [['positivt, så den negativa']],
+      [['roten faller bort.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b=', padL + 20, y);
+    xx = T.rot('4', xx, y);
+    T.str('=2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('a=2√3', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: f(x)=2√3 sin x', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('+2 cos x', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: fjäderns amplitud och periodtid (1.15 ex 1) -
+   * Harmonisk svängning y = A sin Bt: A är amplituden och 2π/B är
+   * periodtiden. */
+  function layoutFjaderamplitud(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=4,5 sin 10,5t', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jämför med y=A sin Bt:']],
+      [['A är 4,5 och B är 10,5.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('a) A=|4,5|=4,5 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Periodtiden är tiden för en']],
+      [['hel svängning. Ett varv är']],
+      [['2π, så tiden blir 2π delat']],
+      [['med B.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) T=', padL, y);
+    xx = T.fracH('2π', 'B', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2π', '10,5', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=0,598... s', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈0,60 s', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: vikten hinner knappt']],
+      [['två svängningar per sekund,']],
+      [['vilket stämmer med en ganska']],
+      [['styv fjäder.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: sinusmodell för lämlarna (1.15 ex 2) -------
+   * De fyra konstanterna bestäms en i taget ur populationens största
+   * och minsta värde, periodtiden och startläget. */
+  function layoutLammelmodell(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('N(t)=A sin(Bt+C)+D', padL, y);
+    T.pause(260);
+    T.str('(1)', xx + 1.2 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Amplituden är halva avståndet']],
+      [['mellan toppen och botten,']],
+      [['alltså hur långt det svänger']],
+      [['åt vardera hållet.']]
+    ]);
+    y += 5.0 * F;
+    xx = T.str('A=', padL, y);
+    T.fracH('10 000-2 000', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('8 000', '2', xx, y);
+    T.str('=4 000', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['B får jag ur periodtiden:']],
+      [['cykeln tar 4 år.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('4=', padL, y);
+    xx = T.fracH('2π', 'B', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('B=', padL + 20, y);
+    xx = T.fracH('2π', '4', xx, y);
+    xx = T.str('=1,570...', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('≈1,57', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vid t=0 ligger populationen']],
+      [['på medelnivån och är på väg']],
+      [['upp, precis som sinus gör']],
+      [['från början. Ingen förskjutning.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('C=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['D är jämviktsläget, mitt']],
+      [['emellan toppen och botten.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('D=', padL, y);
+    xx = T.fracH('10 000+2 000', '2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('12 000', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=6 000', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: N(t)=4 000 sin 1,57t', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('+6 000', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -40231,7 +41224,22 @@
                    dubbelidentitet: layoutDubbelidentitet,
                    dubbelekvation: layoutDubbelekvation,
                    nollproduktcos: layoutNollproduktcos,
-                   substitutionpq: layoutSubstitutionpq };
+                   substitutionpq: layoutSubstitutionpq,
+                   grafisksin: layoutGrafisksin,
+                   grafiskcosx: layoutGrafiskcosx,
+                   amplitudperiod: layoutAmplitudperiod,
+                   negamplitud: layoutNegamplitud,
+                   divargument: layoutDivargument,
+                   forskjutning: layoutForskjutning,
+                   skrivforskjuten: layoutSkrivforskjuten,
+                   tanodefinierad: layoutTanodefinierad,
+                   tanperiod: layoutTanperiod,
+                   tanforskjutning: layoutTanforskjutning,
+                   amplitudsum: layoutAmplitudsum,
+                   bestamamplitud: layoutBestamamplitud,
+                   tillsincos: layoutTillsincos,
+                   fjaderamplitud: layoutFjaderamplitud,
+                   lammelmodell: layoutLammelmodell };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

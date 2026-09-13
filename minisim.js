@@ -316,6 +316,10 @@
         '.ms-sl-mark i{display:block;width:2px;height:15px;border-radius:1px;background:#c8324a;opacity:0.9;}',
         '.ms-sl-mark b{display:block;width:0;height:0;border-left:4px solid transparent;',
         '  border-right:4px solid transparent;border-top:5px solid #c8324a;}',
+        '.ms-sl-mark .ms-sl-cap{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);',
+        '  margin-bottom:2px;white-space:nowrap;font-size:9px;font-weight:600;letter-spacing:0.05em;',
+        '  text-transform:uppercase;line-height:1;color:#c8324a;font-family:' + FONT + ';}',
+        '.minisim-slider-row.ms-sl-marked{margin-top:22px;}',
         '.minisim-slider-val{color:#dde2ec;font-size:13.5px;font-family:' + FONT + ';',
         '  font-variant-numeric:tabular-nums;white-space:nowrap;min-width:74px;text-align:right;}',
         '.minisim-slider{flex:1 1 120px;min-width:50px;appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;',
@@ -5550,8 +5554,7 @@
         sliderWrap.className = 'ms-sl-wrap';
         var sliderMark = document.createElement('span');
         sliderMark.className = 'ms-sl-mark';
-        sliderMark.setAttribute('aria-hidden', 'true');
-        sliderMark.innerHTML = '<b></b><i></i>';
+        sliderMark.innerHTML = '<span class="ms-sl-cap">Gränsfart</span><b></b><i></i>';
         sliderWrap.appendChild(slider);
         sliderWrap.appendChild(sliderMark);
         sliderRow.appendChild(sliderLbl);
@@ -5566,9 +5569,20 @@
         // när gränsen hamnar utanför glidarens intervall.
         function visaGrans(g) {
             var min = parseFloat(slider.min), max = parseFloat(slider.max);
-            if (!isFinite(g) || g < min || g > max) { sliderMark.style.display = 'none'; return; }
+            if (!isFinite(g) || g < min || g > max) {
+                sliderMark.style.display = 'none';
+                sliderRow.classList.remove('ms-sl-marked');
+                return;
+            }
+            var p = (g - min) / (max - min);
             sliderMark.style.display = 'flex';
-            sliderMark.style.left = 'calc(8px + (100% - 16px) * ' + ((g - min) / (max - min)) + ')';
+            sliderMark.style.left = 'calc(8px + (100% - 16px) * ' + p + ')';
+            sliderRow.classList.add('ms-sl-marked');
+            // nära ändarna flödar ordet inåt i stället för att centreras
+            var cap = sliderMark.firstChild;
+            cap.style.left = p > 0.8 ? 'auto' : (p < 0.2 ? '0' : '50%');
+            cap.style.right = p > 0.8 ? '0' : 'auto';
+            cap.style.transform = (p < 0.2 || p > 0.8) ? 'none' : 'translateX(-50%)';
         }
 
         // Ställer om växlare, glidare och etikett efter situationen —
@@ -5602,6 +5616,7 @@
             if (lage === nytt) return;
             lage = nytt;
             sliderMark.style.display = 'none';
+            sliderRow.classList.remove('ms-sl-marked');
             running = true;
             korBtn.textContent = 'Pausa';
             visaLage();

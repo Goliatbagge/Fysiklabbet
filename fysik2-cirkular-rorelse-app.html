@@ -145,6 +145,19 @@
         .sl-mark b { display: block; width: 0; height: 0;
                      border-left: 4px solid transparent; border-right: 4px solid transparent;
                      border-top: 5px solid var(--lab-accent, #c8324a); }
+        /* Ordet står ovanför strecket och ligger utanför flödet, så det
+           påverkar inte glidarens läge. Raden får i stället extra
+           toppmarginal, annars hamnar ordet ovanpå raden ovanför. */
+        .sl-mark .sl-cap { position: absolute; bottom: 100%; left: 50%;
+                           transform: translateX(-50%); margin-bottom: 2px;
+                           white-space: nowrap; font-size: 9px; font-weight: 600;
+                           letter-spacing: 0.05em; text-transform: uppercase;
+                           line-height: 1; color: var(--lab-accent, #c8324a); }
+        .sl-row-mark { margin-top: 15px; }
+        /* I inställningsrutan är glidarens spår tunt och raden tät, så
+           markeringen är kortare där och raden får plats för ordet. */
+        .scene-toggles .st-slider.st-slider-mark .sl-wrap { margin-top: 18px; }
+        .scene-toggles .sl-mark i { height: 12px; }
 
         .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
                     flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
@@ -437,9 +450,13 @@
         const SliderMark = ({ value, min, max }) => {
             if (!isFinite(value) || value < min || value > max) return null;
             const p = (value - min) / (max - min);
+            // nära glidarens ändar flödar ordet inåt i stället för att
+            // centreras, så att det inte spiller ut över etiketten bredvid
+            const capStyle = p < 0.2 ? { left: 0, transform: 'none' }
+                : (p > 0.8 ? { left: 'auto', right: 0, transform: 'none' } : null);
             return (
-                <span className="sl-mark" aria-hidden="true"
-                      style={{ left: `calc(8px + (100% - 16px) * ${p})` }}>
+                <span className="sl-mark" style={{ left: `calc(8px + (100% - 16px) * ${p})` }}>
+                    <span className="sl-cap" style={capStyle}>Gränsfart</span>
                     <b /><i />
                 </span>
             );
@@ -472,7 +489,7 @@
         };
 
         const Slider = ({ label, value, min, max, step, onChange, mark, children }) => (
-            <div className="flex items-center gap-2 mb-2">
+            <div className={"flex items-center gap-2 mb-2" + (mark != null ? " sl-row-mark" : "")}>
                 <span className="text-xs flex-shrink-0" style={{ minWidth: 110, color: 'var(--lab-ink-soft)' }}
                       dangerouslySetInnerHTML={{ __html: label }} />
                 <span className="sl-wrap">
@@ -488,7 +505,7 @@
         // Kompakt reglage-rad för inställningsrutan uppe till höger i
         // fullskärm: etikett + sifferfält på en rad, glidaren under.
         const StSlider = ({ label, value, min, max, step, onChange, valueNode, mark }) => (
-            <div className="st-slider">
+            <div className={"st-slider" + (mark != null ? " st-slider-mark" : "")}>
                 <div className="st-slider-top">
                     <span dangerouslySetInnerHTML={{ __html: label }} />
                     {valueNode}

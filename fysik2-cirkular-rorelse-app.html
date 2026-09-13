@@ -395,31 +395,37 @@
             ink:   '#0f1620',
         };
 
-        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. edge=true
-        // ger en tunn mörk kantlinje där pilen ligger mot en figurdel. ──
-        const Arrow = ({ x1, y1, x2, y2, color, width = 7, head = 20, opacity = 1, edge = false }) => {
+        // ── SVG-pil: EN sammanhängande polygon, skaft och spets i ett ──
+        // Pilen ritades tidigare som en linje med en triangel ovanpå, båda
+        // med egen kontur. Triangelns kontur syntes då som en söm tvärs över
+        // pilen, och pilen såg ihopsatt ut i stället för hel (påpekat
+        // 2026-09-13). Nu är den en enda form utan kontur: mot den ljusa
+        // papperscenen räcker pilens egen färg, och en kontur runt bara en
+        // av delarna vore fel ändå.
+        const Arrow = ({ x1, y1, x2, y2, color, width = 7, head = 20, opacity = 1 }) => {
             const ang = Math.atan2(y2 - y1, x2 - x1);
             const len = Math.hypot(x2 - x1, y2 - y1);
             if (len < 0.5) return null;
-            const hw = 0.42;
+            const hw = 0.42;                                  // spetsens halva öppningsvinkel
             const hd = Math.max(11, Math.min(head, len * 0.9));
-            const bx = x2 - hd * 0.82 * Math.cos(ang);
-            const by = y2 - hd * 0.82 * Math.sin(ang);
-            const pL = [x2 - hd * Math.cos(ang - hw), y2 - hd * Math.sin(ang - hw)];
-            const pR = [x2 - hd * Math.cos(ang + hw), y2 - hd * Math.sin(ang + hw)];
-            const edgeCol = 'rgba(15,22,32,0.55)';
-            return (
-                <g opacity={opacity}>
-                    {edge && (
-                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={edgeCol}
-                              strokeWidth={width + 3.5} strokeLinecap="butt" />
-                    )}
-                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
-                          strokeLinecap="butt" />
-                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
-                             stroke={edge ? edgeCol : 'rgba(15,22,32,0.18)'} strokeWidth={edge ? 2 : 1} strokeLinejoin="round" />
-                </g>
-            );
+            const ux = Math.cos(ang), uy = Math.sin(ang);     // längs pilen
+            const nx = -uy, ny = ux;                          // vinkelrätt mot pilen
+            const hh = hd * Math.sin(hw);                     // spetsens halva bredd
+            const bd = hd * Math.cos(hw);                     // spetsens bas, från spetsen räknat
+            const bx = x2 - bd * ux, by = y2 - bd * uy;
+            // skaftet får aldrig bli bredare än spetsen (korta pilar)
+            const w = Math.min(width, hh * 1.25) / 2;
+            const P = (px, py) => `${px.toFixed(2)},${py.toFixed(2)}`;
+            const pts = [
+                P(x1 + nx * w, y1 + ny * w),
+                P(bx + nx * w, by + ny * w),
+                P(bx + nx * hh, by + ny * hh),
+                P(x2, y2),
+                P(bx - nx * hh, by - ny * hh),
+                P(bx - nx * w, by - ny * w),
+                P(x1 - nx * w, y1 - ny * w),
+            ].join(' ');
+            return <polygon points={pts} fill={color} opacity={opacity} />;
         };
 
         // Mjuk pilkompression (cirkelscenen): linjär skala upp till knäet
@@ -676,7 +682,7 @@
                         ytan däck–väg, som ovanifrån ligger under bilen */}
                     {showF && LF > 0 && (
                         <g>
-                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} />
                             <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.frik}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">f</tspan>
                                 <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
@@ -687,7 +693,7 @@
                     {/* centripetalkraften */}
                     {showFc && LF > 0 && (
                         <g>
-                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} edge />
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} />
                             <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.fc}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">C</tspan>
                                 <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
@@ -912,7 +918,7 @@
                     {showF && (
                         <g>
                             {/* F_G — från tyngdpunkten, alltid rakt ned, med CM-prick */}
-                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} />
                             <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
                             <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
@@ -921,7 +927,7 @@
                             {/* F_N — från kontaktytan däck–väg, in mot centrum */}
                             {onTrack && LN > 0.5 && (
                                 <g>
-                                    <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} edge />
+                                    <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} />
                                     <text x={nl.x} y={nl.y} textAnchor={nl.anchor} fontSize="16" fontWeight="700" fill={COL.norm}>
                                         <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">N</tspan>
                                         <tspan dy="-4"> = {fmtNum(N)} N</tspan>
@@ -934,7 +940,7 @@
                     {/* centripetalkraften (resultanten) */}
                     {showFc && onTrack && LFC > 0.5 && (
                         <g>
-                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} edge />
+                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} />
                             <text x={fcl.x} y={fcl.y} textAnchor={fcl.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">C</tspan>
                                 <tspan dy="-4"> = {fmtNum(FCnow)} N</tspan>
@@ -943,7 +949,7 @@
                     )}
                     {showFc && !onTrack && (
                         <g>
-                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} />
                             <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
                             <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
@@ -1202,7 +1208,7 @@
                     {/* friktionskraften — i kurvan in mot centrum, vid sladd bakåt */}
                     {showF && LF > 0 && (
                         <g>
-                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} />
                             <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.frik}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">f</tspan>
                                 <tspan dy="-4"> = {fmtNum(onArc ? FC : Fmax)} N</tspan>
@@ -1211,7 +1217,7 @@
                     )}
                     {showFc && onArc && LF > 0 && (
                         <g>
-                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} edge />
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} />
                             <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.fc}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">C</tspan>
                                 <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
@@ -1517,7 +1523,7 @@
                     {/* verkliga krafter: tyngdkraft, normalkraft, friktion längs vägen */}
                     {(showF || (showFc && !onTrack)) && (
                         <g>
-                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} />
                             <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
                             <text x={gl2.x} y={gl2.y} textAnchor={gl2.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
@@ -1527,7 +1533,7 @@
                     )}
                     {showF && onTrack && LN > 0.5 && (
                         <g>
-                            <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} edge />
+                            <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} />
                             <text x={nl.x} y={nl.y} textAnchor={nl.anchor} fontSize="16" fontWeight="700" fill={COL.norm}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">N</tspan>
                                 <tspan dy="-4"> = {fmtNum(F.N)} N</tspan>
@@ -1536,7 +1542,7 @@
                     )}
                     {showF && onTrack && Math.abs(F.Ff) > 1 && (
                         <g>
-                            <Arrow x1={pos.x} y1={pos.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <Arrow x1={pos.x} y1={pos.y} x2={fTip.x} y2={fTip.y} color={COL.frik} />
                             <text x={fl2.x} y={fl2.y} textAnchor={fl2.anchor} fontSize="16" fontWeight="700" fill={COL.frik}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">f</tspan>
                                 <tspan dy="-4"> = {fmtNum(Math.abs(F.Ff))} N</tspan>
@@ -1547,7 +1553,7 @@
                     {/* centripetalkraften (resultanten i krön och dal) */}
                     {showFc && onArc && LFC > 0.5 && (
                         <g>
-                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} edge />
+                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} />
                             <text x={fcl2.x} y={fcl2.y} textAnchor={fcl2.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">C</tspan>
                                 <tspan dy="-4"> = {fmtNum(F.FC)} N</tspan>

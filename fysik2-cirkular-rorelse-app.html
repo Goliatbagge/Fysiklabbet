@@ -1336,10 +1336,10 @@
                 stateText = 'Normalkraften blev 0. Bilen lättar från vägen!';
                 stateCol = COL.tyngd;
             } else if (onArc && q.seg.kind === 'krön') {
-                stateText = 'Krön: normalkraften minskar';
+                stateText = 'Krön: mindre normalkraft än på plan väg';
                 stateCol = COL.norm;
             } else if (onArc) {
-                stateText = 'Dal: normalkraften ökar';
+                stateText = 'Dal: större normalkraft än på plan väg';
                 stateCol = COL.norm;
             } else if (q.seg.flat) {
                 stateText = 'Plan väg: normalkraften bär bara tyngden';
@@ -2034,7 +2034,7 @@
                                         {mode === 'cirkel'
                                             ? 'Bilen håller konstant fart. Krafterna sedda ovanifrån.'
                                             : mode === 'bana'
-                                            ? 'Bilen håller konstant fart. Friktionen kan som mest ge μ · m · g.'
+                                            ? 'Bilen håller konstant fart, och luft- och rullmotstånd försummas: friktionen behövs bara i sidled, i kurvorna. Den kan som mest ge μ · m · g.'
                                             : mode === 'kron'
                                             ? 'Bilen håller konstant fart, så friktionen längs vägen driver i uppförsbacke och bromsar i nedförsbacke.'
                                             : 'Friktion och luftmotstånd försummas — farten följer energiprincipen.'}
@@ -2138,7 +2138,8 @@
                                             </Slider>
                                             <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
                                                 Backarna lutar {fmt(BETA / DEG, 0)}°. Gränsfarten på krönets topp är
-                                                √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s.
+                                                √(<em>g</em>&thinsp;·&thinsp;<em>r</em><sub>k</sub>) ≈ {fmt(vKron, 1)}&nbsp;m/s, men bilen lättar
+                                                redan där krönet börjar, vid ≈ {fmt(vKant, 1)}&nbsp;m/s.
                                             </p>
                                         </React.Fragment>
                                     ) : (

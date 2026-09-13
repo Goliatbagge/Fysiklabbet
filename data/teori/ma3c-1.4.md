@@ -57,6 +57,11 @@ vidare till metod 2. Fungerar inte metod 2, gå vidare till metod 3.
 ::: exempel "Exempel 1 — Sätta in värdet direkt"
 **Bestäm $\displaystyle\lim_{x \to 2} (x + 5)$.**
 
+::: handskrift
+typ: granssattain
+:::
+
+::: textlosning
 Uttrycket $x + 5$ är definierat för alla $x$, så metod 1 fungerar: vi sätter
 in $x = 2$ direkt (samtidigt som limes-beteckningen tas bort) och beräknar.
 
@@ -66,11 +71,17 @@ $$
 
 **Svar:** $7$
 :::
+:::
 
 ::: exempel "Exempel 2 — Förkorta uttrycket"
 **Bestäm $\displaystyle\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$ a) med tabeller
 b) genom att förkorta uttrycket.**
 
+::: handskrift
+typ: gransforkorta
+:::
+
+::: textlosning
 Metod 1 fungerar inte: sätter vi in $x = 1$ får vi $\dfrac{0}{0}$, och
 uttrycket är inte definierat där.
 
@@ -106,10 +117,16 @@ $$
 
 **Svar:** $2$
 :::
+:::
 
 ::: exempel "Exempel 3 — Gränsvärde saknas"
 **Bestäm $\displaystyle\lim_{x \to 3} \frac{x + 1}{x - 3}$.**
 
+::: handskrift
+typ: granssaknas
+:::
+
+::: textlosning
 Metod 1 fungerar inte eftersom nämnaren blir 0 vid $x = 3$. Vi kan inte
 heller förkorta uttrycket enligt metod 2 — varken täljaren eller nämnaren
 går att faktorisera. Då återstår metod 3: två tabeller där $x$ närmar sig 3
@@ -126,6 +143,7 @@ $+\infty$. Eftersom vi får **olika** gränsvärden underifrån och ovanifrån
 saknas gränsvärde.
 
 **Svar:** Gränsvärde saknas.
+:::
 :::
 
 ## Gränsvärde då variabeln går mot en oändlighet
@@ -157,15 +175,26 @@ Ett uttryck med en oändlighet
 ::: exempel "Exempel 4 — Oändlighet i nämnaren"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{5}{x}$.**
 
+::: handskrift
+typ: gransoandlig
+:::
+
+::: textlosning
 Vi har ett gränsvärde med en oändlighet enbart i nämnaren. Gränsvärdet blir
 då 0.
 
 **Svar:** $0$
 :::
+:::
 
 ::: exempel "Exempel 5 — Oändlighet i både täljare och nämnare"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$.**
 
+::: handskrift
+typ: gransbadaoandliga
+:::
+
+::: textlosning
 Vi har ett gränsvärde med oändligheter i både täljaren och nämnaren. Vi
 stryker konstanttermerna, förkortar och beräknar.
 
@@ -174,6 +203,7 @@ $$
 $$
 
 **Svar:** $3$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

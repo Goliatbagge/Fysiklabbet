@@ -66,6 +66,11 @@ att dividera både täljare och nämnare med en gemensam faktor.
 ::: exempel "Exempel 1 — Förläng ett bråk"
 **Förläng $\dfrac{3}{4}$ med 5.**
 
+::: handskrift
+typ: forlangfem
+:::
+
+::: textlosning
 Vi multiplicerar både täljare och nämnare med 5.
 
 $$
@@ -74,10 +79,16 @@ $$
 
 **Svar:** $\dfrac{15}{20}$
 :::
+:::
 
 ::: exempel "Exempel 2 — Förkorta ett bråk"
 **Förkorta $\dfrac{14}{21}$.**
 
+::: handskrift
+typ: forkortafjorton
+:::
+
+::: textlosning
 Vi ska försöka hitta gemensamma delare till 14 och 21. Vid mindre tal kan vi
 ganska lätt hitta en gemensam delare (i detta fall 7). Alternativt kan vi
 primtalsfaktorisera täljare och nämnare och därefter förkorta med gemensamma
@@ -98,11 +109,17 @@ $$
 
 **Svar:** $\dfrac{2}{3}$
 :::
+:::
 
 ::: exempel "Exempel 3 — Förläng ett rationellt uttryck"
 **Förläng $\dfrac{x + 3}{8}$ med $(x - 2)$. Svara i faktoriserad form och i
 utvecklad form.**
 
+::: handskrift
+typ: forlangrationellt
+:::
+
+::: textlosning
 Vi multiplicerar täljare och nämnare med $(x - 2)$.
 
 $$
@@ -112,10 +129,16 @@ $$
 **Svar:** $\dfrac{(x + 3)(x - 2)}{8(x - 2)}$ (faktoriserad form) eller
 $\dfrac{x^2 + x - 6}{8x - 16}$ (utvecklad form)
 :::
+:::
 
 ::: exempel "Exempel 4 — Förkorta rationella uttryck"
 **Förkorta**
 
+::: handskrift
+typ: forkortarationella
+:::
+
+::: textlosning
 $$
 \text{a)}\ \frac{35x^3}{30x^5} \qquad
 \text{b)}\ \frac{5x^2 - 5x}{3x - 3} \qquad
@@ -166,6 +189,7 @@ $$
 $$
 
 **Svar:** $x - 7$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

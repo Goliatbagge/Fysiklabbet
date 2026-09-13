@@ -30,6 +30,11 @@ det gör det lättare att se vilka faktorer som senare kan förkortas bort.
 ::: exempel "Exempel 1 — Multiplikation av rationella uttryck"
 **Förenkla<br>a)&nbsp;$\dfrac{3}{8-x}\cdot\dfrac{x^2+5}{6}$&emsp;&emsp;b)&nbsp;$\dfrac{3x+6}{x-2}\cdot\dfrac{x^2-4}{3}$**
 
+::: handskrift
+typ: multrationella
+:::
+
+::: textlosning
 **a)** Vi multiplicerar täljare med täljare och nämnare med nämnare:
 
 $$
@@ -62,6 +67,7 @@ $$
 
 **Svar:** $(x+2)^2 = x^2+4x+4$
 :::
+:::
 
 ## Division av rationella uttryck
 
@@ -79,6 +85,11 @@ $$
 ::: exempel "Exempel 2 — Division av rationella uttryck"
 **Förenkla $\dfrac{3x}{x+7} \Big/ \dfrac{5x}{x-2}$.**
 
+::: handskrift
+typ: divrationella
+:::
+
+::: textlosning
 Vi byter ut divisionstecknet mot multiplikation och inverterar uttrycket i
 nämnaren:
 
@@ -94,6 +105,7 @@ $$
 
 **Svar:** $\dfrac{3(x-2)}{5(x+7)} = \dfrac{3x-6}{5x+35}$
 :::
+:::
 
 ## Ekvationer med rationella uttryck
 
@@ -105,6 +117,11 @@ värden på $x$ som gör någon nämnare i ekvationen lika med noll.
 ::: exempel "Exempel 3 — Lös en ekvation med rationella uttryck"
 **Lös ekvationen $\dfrac{x-2}{x-3} = \dfrac{x+7}{x}$.**
 
+::: handskrift
+typ: rationellkorsvis
+:::
+
+::: textlosning
 Eftersom ingen nämnare får vara noll måste $x \neq 3$ och $x \neq 0$.
 
 **Alternativ 1: Multiplicera med MGN**
@@ -150,6 +167,7 @@ $$
 Lösningen $x = \dfrac{7}{2}$ är varken 3 eller 0, så den är giltig.
 
 **Svar:** $x = \dfrac{7}{2}$
+:::
 :::
 
 ::: tips "Sammanfattning"

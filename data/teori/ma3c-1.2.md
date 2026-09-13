@@ -36,6 +36,11 @@ med den andra termens nämnare.
 ::: exempel "Exempel 1 — Förenkla"
 **Förenkla**
 
+::: handskrift
+typ: forenklarationella
+:::
+
+::: textlosning
 $$
 \text{a)}\ \frac{5x^2}{x - 2} + \frac{7}{x - 2} \qquad
 \text{b)}\ \frac{8x}{x + 3} - \frac{5x - 9}{x}
@@ -82,6 +87,7 @@ reella rötter. $(x^2 - 2x + 9)$ kan alltså inte faktoriseras mer.
 
 **Svar:** $\dfrac{3(x^2 - 2x + 9)}{x(x + 3)}$
 :::
+:::
 
 ## Lös ekvationer med rationella uttryck
 
@@ -93,6 +99,11 @@ eller metod 2 från rutan ovan.
 ::: exempel "Exempel 2 — Lös ekvationerna"
 **Lös ekvationerna**
 
+::: handskrift
+typ: rationellaekvationer
+:::
+
+::: textlosning
 $$
 \text{a)}\ \frac{x}{2} - \frac{x}{8} = 24 \qquad
 \text{b)}\ \frac{1}{3} + \frac{2}{x - 3} = 1 \qquad
@@ -172,6 +183,7 @@ Nollproduktmetoden ger $x_1 = 0$ och $x_2 = 1$. Eftersom $x \neq 1$
 förkastar vi lösningen $x_2 = 1$.
 
 **Svar:** $x = 0$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

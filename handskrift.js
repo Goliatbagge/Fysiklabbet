@@ -46345,6 +46345,1105 @@
     return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
   }
 
+  /* ---------------- scen: förläng ett bråk (ma3c-1.1 ex 1) -----------
+   * Förlängningen skrivs i två drag (se REGEL FÖRKORTNING OCH
+   * FÖRLÄNGNING): först bråket som det står, sedan operationen i båda
+   * leden av bråkstrecket. */
+  function layoutForlangfem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('Förläng med 5:', padL, y - 1.5 * F, null, 0.62);
+    xx = T.fracH('3', '4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att förlänga betyder att']],
+      [['gångra BÅDE täljare och']],
+      [['nämnare med samma tal.']],
+      [['Bråkets värde ändras inte.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracOp('3', '4', '·5', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('15', '20', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 15 delat med 20 är']],
+      [['0,75, och 3 delat med 4 är']],
+      [['också 0,75. Samma tal, nya']],
+      [['siffror.']]
+    ], 1.4);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förkorta ett bråk (ma3c-1.1 ex 2) ----------
+   * Två vägar: dela med den största gemensamma delaren, eller
+   * primtalsfaktorisera och stryka gemensamma faktorer. */
+  function layoutForkortafjorton(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, x1, x2;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    T.str('Förkorta:', padL, y - 1.5 * F, null, 0.62);
+    T.fracH('14', '21', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Både 14 och 21 är delbara']],
+      [['med 7. Då kan jag dela båda']],
+      [['med 7.']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('Alternativ 1', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracOp('14', '21', '/7', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('2', '3', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ser man inte delaren direkt']],
+      [['går det att dela upp talen i']],
+      [['primtalsfaktorer i stället.']]
+    ], 1.4);
+    y += 5.6 * F;
+    T.str('Alternativ 2', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.fracH('2·7', '3·7', padL + 20, y);
+    T.stepEnd();
+
+    /* stryk sjuorna i täljare och nämnare */
+    x1 = padL + 20 + T.adv('2·7') - T.adv('7') + 0.10 * F;
+    x2 = x1 + T.adv('7');
+    T.strike(x1, x2, y - 0.48 * F);
+    T.pause(240);
+    T.strike(x1, x2, y + 0.70 * F);
+    T.pause(260);
+    xx = T.str('=', padL + 160, y);
+    xe = T.fracH('2', '3', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.2 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förläng ett rationellt uttryck (1.1 ex 3) --
+   * Samma sak som med tal, men faktorn är ett uttryck. Svaret kan ges
+   * både faktoriserat och utvecklat. */
+  function layoutForlangrationellt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    T.str('Förläng med (x-2):', padL, y - 1.5 * F, null, 0.62);
+    T.fracH('x+3', '8', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma regel som för tal:']],
+      [['täljare och nämnare gångras']],
+      [['med samma faktor.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracOp('x+3', '8', '·(x-2)', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('(x+3)(x-2)', '8(x-2)', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det är den faktoriserade']],
+      [['formen. Multiplicerar jag ihop']],
+      [['parenteserna får jag den']],
+      [['utvecklade.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('x^2+x-6', '8x-16', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förkorta rationella uttryck (1.1 ex 4) -----
+   * Bara FAKTORER får förkortas, aldrig enstaka termer — därför
+   * faktoriseras täljare och nämnare först. */
+  function layoutForkortarationella(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) ', padL, y);
+    T.fracH('35x^3', '30x^5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bara en term i täljaren och']],
+      [['en i nämnaren. Jag skriver ut']],
+      [['alla faktorer, så syns det']],
+      [['vad som går att förkorta.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('7·5·x·x·x', '5·3·2·x·x·x·x·x', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('7', '3·2·x·x', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('7', '6x^2', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) finns flera termer. Då']],
+      [['måste jag först göra om dem']],
+      [['till en produkt, alltså']],
+      [['faktorisera.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('5x^2-5x', '3x-3', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('5x(x-1)', '3(x-1)', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('5x', '3', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['I c) går täljaren inte att']],
+      [['bryta ut något ur. Men dess']],
+      [['nollställen ger faktorerna.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.str('c) x^2-8x+7=0', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=4±', padL + 20, y);
+    xx = T.rot('4^2-7', xx, y);
+    xx = T.str('=4±', xx, y);
+    T.rot('9', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=4±3 ⟹ x_1=1, x_2=7', padL + 40, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nollställena 1 och 7 ger']],
+      [['faktorerna (x-1) och (x-7).']]
+    ]);
+    y += 4.6 * F;
+    xx = T.fracH('x^2-8x+7', 'x-1', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('(x-1)(x-7)', 'x-1', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xe = T.str('=x-7', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förenkla rationella uttryck (ma3c-1.2 ex 1) -
+   * Samma nämnare i a); i b) görs termerna liknämniga genom att varje
+   * term förlängs med den andras nämnare. */
+  function layoutForenklarationella(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('5x^2', 'x-2', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('7', 'x-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnarna är redan lika. Då']],
+      [['adderas täljarna och nämnaren']],
+      [['står kvar.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xe = T.fracH('5x^2+7', 'x-2', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 5.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('8x', 'x+3', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('5x-9', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Olika nämnare. Jag förlänger']],
+      [['varje term med den andras']],
+      [['nämnare, så blir de lika.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('8x·x', '(x+3)·x', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('(5x-9)(x+3)', 'x(x+3)', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('8x^2-(5x-9)(x+3)', 'x(x+3)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står allt på ett gemensamt']],
+      [['bråkstreck. Parentesen i']],
+      [['täljaren utvecklas, och']],
+      [['minustecknet vänder tecknen.']]
+    ], 1.4);
+    y += 5.8 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('8x^2-5x^2-15x+9x+27', 'x(x+3)', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('3x^2-6x+27', 'x(x+3)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljarens termer har faktorn 3']],
+      [['gemensam. Jag bryter ut den']],
+      [['och kollar om resten går att']],
+      [['faktorisera.']]
+    ], 1.4);
+    y += 5.8 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('3(x^2-2x+9)', 'x(x+3)', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('x=1±', padL, y);
+    xx = T.rot('1^2-9', xx, y);
+    xx = T.str('=1±', xx, y);
+    T.rot('-8', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Negativt under rottecknet:']],
+      [['inga reella nollställen. Då']],
+      [['går täljaren inte att']],
+      [['faktorisera mer.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('3(x^2-2x+9)', 'x(x+3)', xe, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: rationella ekvationer (ma3c-1.2 ex 2) ------
+   * Multiplikation med MGN röjer undan nämnarna. Står x i en nämnare
+   * måste lösningarna prövas mot definitionsmängden till sist. */
+  function layoutRationellaekvationer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('x', '2', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('x', '8', xx, y);
+    T.str('=24', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ingen nämnare innehåller x, så']],
+      [['ekvationen är definierad för']],
+      [['alla x. Minsta gemensamma']],
+      [['nämnare är 8.']]
+    ], 1.05);
+    y += 5.4 * F;
+    if (vagg) {
+      xx = T.fracH('x', '2', padL + 20, y);
+      xx = T.str('-', xx, y);
+      xx = T.fracH('x', '8', xx, y);
+      xx = T.str('=24', xx, y);
+      T.vaggOp('·8', xx + 0.6 * F, y, { h0: 1.25, h1: 1.15 });
+      T.stepEnd();
+    } else {
+      xx = T.fracSeg([['x'], ['·8', BLUE]], [['2']], padL + 20, y);
+      xx = T.str('-', xx, y);
+      xx = T.fracSeg([['x'], ['·8', BLUE]], [['8']], xx, y);
+      xx = T.str('=24', xx, y);
+      T.str('·8', xx, y, BLUE);
+      T.stepEnd();
+    }
+
+    y += 5.0 * F;
+    xx = T.str('4x-x=192', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('3x=192', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x=192',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=64', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('1', '3', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('2', 'x-3', xx, y);
+    T.str('=1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står x i en nämnare. För']],
+      [['x=3 blir den noll, och då är']],
+      [['ekvationen odefinierad.']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('x≠3', padL + 20, y);
+    T.pause(280);
+    T.str('MGN=3(x-3)', padL + 160, y, null, 0.8);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('(x-3)+2·3=3(x-3)', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x-3+6=3x-9', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x+3=3x-9', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-x', xx + 0.6 * F, 'x+3=3x-9');
+    xx = T.str('3=2x-9', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+9', xx + 0.6 * F, '3=2x-9');
+    xx = T.str('12=2x', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '12=2x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=6', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 3.6 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('x', 'x-1', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('2x', 'x^2-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först nämnarnas nollställen.']],
+      [['x^2-1 är en konjugat och']],
+      [['faktoriseras som (x+1)(x-1).']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('x≠1 och x≠-1', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('MGN=(x+1)(x-1)', padL + 20, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x(x+1)=2x', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2+x=2x', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-2x', xx + 0.6 * F, 'x^2+x=2x');
+    xx = T.str('x^2-x=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x(x-1)=0', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nollproduktmetoden ger x=0 och']],
+      [['x=1. Men x=1 var förbjudet,']],
+      [['så den lösningen förkastas.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: x=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: multiplicera rationella uttryck (1.3 ex 1) -
+   * Täljare gånger täljare, nämnare gånger nämnare — och förkorta
+   * först när allt står som en produkt. */
+  function layoutMultrationella(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) ', padL, y);
+    xx = T.fracH('3', '8-x', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('x^2+5', '6', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vid multiplikation gångras']],
+      [['täljarna med varandra och']],
+      [['nämnarna med varandra.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('3(x^2+5)', '6(8-x)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Trean i täljaren och sexan i']],
+      [['nämnaren har faktorn 3']],
+      [['gemensam.']]
+    ], 1.4);
+    y += 5.6 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('x^2+5', '2(8-x)', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('x^2+5', '16-2x', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['I b) faktoriserar jag först']],
+      [['allt: 3x+6 är 3(x+2), och']],
+      [['x^2-4 är en konjugat.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('3(x+2)', 'x-2', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('(x+2)(x-2)', '3', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('3(x+2)(x+2)(x-2)', '3(x-2)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står allt som en produkt,']],
+      [['och då får jag förkorta:']],
+      [['trean och (x-2) finns i båda.']]
+    ], 1.4);
+    y += 5.8 * F;
+    xx = T.str('=(x+2)(x+2)=(x+2)^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=x^2+4x+4', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: dividera rationella uttryck (1.3 ex 2) -----
+   * Division med ett bråk är multiplikation med det inverterade. Första
+   * raden skrivs av som uppgiften står, med snedstreck. */
+  function layoutDivrationella(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.fracH('3x', 'x+7', padL, y);
+    xx = T.slashDiv(xx, y);
+    T.fracH('5x', 'x-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Att dividera med ett bråk är']],
+      [['samma sak som att gångra med']],
+      [['det inverterade bråket.']]
+    ], 1.05);
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('3x', 'x+7', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('x-2', '5x', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    T.fracH('3x(x-2)', '5x(x+7)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x är en faktor i både täljare']],
+      [['och nämnare, så den förkortas']],
+      [['bort.']]
+    ], 1.4);
+    y += 5.8 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('3(x-2)', '5(x+7)', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('3x-6', '5x+35', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvation med korsvis multiplikation (1.3 ex 3)
+   * Två vägar till samma andragradsekvation; korsvis multiplikation är
+   * den kortaste när ekvationen redan har formen a/b = c/d. */
+  function layoutRationellkorsvis(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = T.fracH('x-2', 'x-3', padL, y);
+    xx = T.str('=', xx, y);
+    T.fracH('x+7', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnarna får inte bli noll, så']],
+      [['x får varken vara 3 eller 0.']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('x≠3 och x≠0', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ekvationen har formen a/b=c/d.']],
+      [['Då går det att multiplicera']],
+      [['korsvis: täljaren i det ena']],
+      [['ledet mot nämnaren i det andra.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Korsvis multiplikation', padL, y - 1.6 * F, null, 0.62);
+    T.pause(200);
+    xx = T.str('x(x-2)=(x-3)(x+7)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2-2x=x^2+4x-21', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-x^2', xx + 0.6 * F, 'x^2-2x=x^2+4x-21');
+    xx = T.str('-2x=4x-21', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-4x', xx + 0.6 * F, '-2x=4x-21');
+    xx = T.str('-6x=-21', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/(-6)', xx + 0.6 * F, '-6x=-21',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('21', '6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('7', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['7/2 är varken 3 eller 0, så']],
+      [['lösningen är giltig.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('Svar: x=', padL, y);
+    xe = T.fracH('7', '2', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: sätt in värdet direkt (ma3c-1.4 ex 1) ------ */
+  function layoutGranssattain(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 186;
+    xx = lim(padL, y, 'x→2');
+    T.str('(x+5)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uttrycket x+5 är definierat']],
+      [['för alla x, även för x=2. Då']],
+      [['räcker det att sätta in']],
+      [['värdet.']]
+    ], 0.7);
+    y += 4.8 * F;
+    xx = lim(padL, y, 'x→2');
+    xx = T.str('(x+5)=2+5=', xx, y);
+    xe = T.str('7', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Limes-beteckningen försvinner']],
+      [['i samma steg som värdet sätts']],
+      [['in. Den hör till gränsvärdet,']],
+      [['inte till svaret.']]
+    ], 0.7);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.2 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förkorta uttrycket (ma3c-1.4 ex 2) ---------
+   * Insättning ger 0/0. Tabellerna visar vad uttrycket närmar sig, och
+   * förkortningen visar varför. */
+  function layoutGransforkorta(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F), tabell = mkTeckentabell(T, F);
+
+    y = 200;
+    xx = lim(padL, y, 'x→1');
+    T.fracH('x^2-1', 'x-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sätter jag in x=1 får jag noll']],
+      [['delat med noll, och det säger']],
+      [['ingenting. Uttrycket är inte']],
+      [['definierat där.']]
+    ], 1.05);
+
+    /* a) tabellerna */
+    y += 5.2 * F;
+    T.str('a) underifrån', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.0 * F;
+    y = tabell(padL, y, 90, 96, [
+      { lbl: 'x', celler: ['0,9', '0,99', '0,999'] },
+      { lbl: 'värde', celler: ['1,9', '1,99', '1,999'] }
+    ]);
+    T.stepEnd();
+
+    y += 1.6 * F;
+    T.str('ovanifrån', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.0 * F;
+    y = tabell(padL, y, 90, 96, [
+      { lbl: 'x', celler: ['1,1', '1,01', '1,001'] },
+      { lbl: 'värde', celler: ['2,1', '2,01', '2,001'] }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda hållen närmar sig 2, så']],
+      [['gränsvärdet är 2.']]
+    ], 0.6);
+    y += 4.0 * F;
+    xx = lim(padL, y, 'x→1');
+    xx = T.fracH('x^2-1', 'x-1', xx, y);
+    xe = T.str('=2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* b) förkortning */
+    tanke(y, [
+      [['I b) ser jag varför: täljaren']],
+      [['är en konjugat och innehåller']],
+      [['samma faktor som nämnaren.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = lim(xx, y, 'x→1');
+    xx = T.fracH('(x+1)(x-1)', 'x-1', xx, y);
+    xx = T.str('=', xx, y);
+    xx = lim(xx, y, 'x→1');
+    T.str('(x+1)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är uttrycket definierat vid']],
+      [['x=1, så värdet kan sättas in.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=1+1=', padL + 40, y);
+    xe = T.str('2', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: gränsvärde saknas (ma3c-1.4 ex 3) ----------
+   * Olika värden underifrån och ovanifrån betyder att gränsvärdet
+   * saknas. */
+  function layoutGranssaknas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F), tabell = mkTeckentabell(T, F);
+
+    y = 200;
+    xx = lim(padL, y, 'x→3');
+    T.fracH('x+1', 'x-3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren blir noll vid x=3,']],
+      [['och varken täljare eller']],
+      [['nämnare går att faktorisera.']],
+      [['Då återstår tabeller.']]
+    ], 1.05);
+    y += 5.2 * F;
+    T.str('underifrån', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.0 * F;
+    y = tabell(padL, y, 90, 100, [
+      { lbl: 'x', celler: ['2,9', '2,99', '2,999'] },
+      { lbl: 'värde', celler: ['-39', '-399', '-3 999'] }
+    ]);
+    T.stepEnd();
+
+    y += 1.6 * F;
+    T.str('ovanifrån', padL, y, null, 0.62);
+    T.pause(200);
+    y += 1.0 * F;
+    y = tabell(padL, y, 90, 100, [
+      { lbl: 'x', celler: ['3,1', '3,01', '3,001'] },
+      { lbl: 'värde', celler: ['41', '401', '4 001'] }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Underifrån rusar värdet mot']],
+      [['minus oändligheten, ovanifrån']],
+      [['mot plus. Olika håll ger']],
+      [['olika svar.']]
+    ], 0.6);
+    y += 4.2 * F;
+    xe = T.str('Svar: gränsvärde saknas', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: oändlighet i nämnaren (ma3c-1.4 ex 4) ------ */
+  function layoutGransoandlig(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = lim(padL, y, 'x→∞');
+    T.fracH('5', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren står stilla medan']],
+      [['nämnaren växer obegränsat.']],
+      [['Fem delat med något jättestort']],
+      [['blir försvinnande litet.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = lim(padL, y, 'x→∞');
+    xx = T.fracH('5', 'x', xx, y);
+    xe = T.str('=0', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: oändlighet i båda leden (ma3c-1.4 ex 5) ----
+   * När både täljare och nämnare växer är det de högsta termerna som
+   * bestämmer kvoten. */
+  function layoutGransbadaoandliga(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = lim(padL, y, 'x→∞');
+    T.fracH('3x+2', 'x-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['När x blir jättestort betyder']],
+      [['tvåan och ettan nästan']],
+      [['ingenting. Det är x-termerna']],
+      [['som styr.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = lim(padL, y, 'x→∞');
+    xx = T.fracH('3x+2', 'x-1', xx, y);
+    xx = T.str('=', xx, y);
+    xx = lim(xx, y, 'x→∞');
+    T.fracH('3x', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x förkortas bort och kvar blir']],
+      [['bara trean, oavsett hur stort']],
+      [['x är.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.str('3=', xx, y);
+    xe = T.str('3', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: utveckla med CAS (ma3c-1.5 ex 1) -----------
+   * Pennan skriver ned kommandot och svaret, precis som man antecknar
+   * vad verktyget gjorde. */
+  function layoutCasutveckla(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('(x+3)(x-1)(x+5)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre parenteser för hand blir']],
+      [['lätt fel. Kommandot Utveckla']],
+      [['multiplicerar ihop dem åt mig.']]
+    ]);
+    y += 4.6 * F;
+    T.str('Utveckla((x+3)(x-1)(x+5))', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('→ x^3+7x^2+7x-15', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: konstanttermen ska']],
+      [['vara 3·(-1)·5, alltså -15.']],
+      [['Det stämmer.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorisera med CAS (ma3c-1.5 ex 2) -------- */
+  function layoutCasfaktorisera(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^3+7x^2+7x-15', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Faktorisera går åt andra']],
+      [['hållet: från utvecklad form']],
+      [['tillbaka till parenteser.']]
+    ]);
+    y += 4.6 * F;
+    T.str('Faktorisera(x^3+7x^2+7x-15)', padL, y, null, 0.82);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('=(x-1)(x+3)(x+5)', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parenteserna avslöjar direkt']],
+      [['nollställena: 1, -3 och -5.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tredjegradsekvation med CAS (1.5 ex 3) -----
+   * NLös ger decimaltal, Lös ger exakta värden. */
+  function layoutCastredjegrad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('x^3-x^2-3x+3=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['NLös ger numeriska lösningar,']],
+      [['alltså decimaltal.']]
+    ]);
+    y += 4.4 * F;
+    T.str('a) NLös(x^3-x^2-3x+3=0)', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('≈ x=-1,73205, x=1,', padL + 40, y, null, 0.86);
+    T.pause(240);
+    y += 2.4 * F;
+    T.str('x=1,73205', padL + 80, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x_1≈-1,73, x_2=1, x_3≈1,73', padL + 20, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lös utan N ger i stället de']],
+      [['exakta värdena, med']],
+      [['rottecken kvar.']]
+    ]);
+    y += 4.6 * F;
+    T.str('b) Lös(x^3-x^2-3x+3=0)', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('= x=-', padL + 40, y);
+    xx = T.rot('3', xx, y);
+    xx = T.str(', x=1, x=', xx, y);
+    xe = T.rot('3', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['1,73205 är förstås √3.']],
+      [['Exakta svar är alltid bättre']],
+      [['när de går att få.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: funktionsvärde med CAS (ma3c-1.5 ex 4) ----- */
+  function layoutCasfunktion(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=x^3-4x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Definierar jag funktionen en']],
+      [['gång kan jag sedan fråga efter']],
+      [['vilket värde som helst.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a) f(7)=', padL, y);
+    xe = T.str('147', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är det tvärtom: värdet är']],
+      [['känt och x söks. Då är det en']],
+      [['ekvation.']]
+    ]);
+    y += 4.6 * F;
+    T.str('b) Lös(f=7)', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('= x=4,36705', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x≈4,37', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: gränsvärde med CAS (ma3c-1.5 ex 5) --------- */
+  function layoutCasgransvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = lim(padL, y, 'x→∞');
+    T.fracH('3x+2', 'x-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kommandot Gränsvärde tar två']],
+      [['saker: uttrycket och det värde']],
+      [['variabeln går mot.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('Gränsvärde(', padL, y);
+    xx = T.fracH('3x+2', 'x-1', xx, y);
+    T.str(', ∞)', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('→ 3', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma svar som för hand:']],
+      [['det är x-termerna som styr när']],
+      [['x blir stort.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -46773,7 +47872,26 @@
                    binomiskfyra: layoutBinomiskfyra,
                    binomisktre: layoutBinomisktre,
                    eulerform: layoutEulerform,
-                   eulerekvation: layoutEulerekvation };
+                   eulerekvation: layoutEulerekvation,
+                   forlangfem: layoutForlangfem,
+                   forkortafjorton: layoutForkortafjorton,
+                   forlangrationellt: layoutForlangrationellt,
+                   forkortarationella: layoutForkortarationella,
+                   forenklarationella: layoutForenklarationella,
+                   rationellaekvationer: layoutRationellaekvationer,
+                   multrationella: layoutMultrationella,
+                   divrationella: layoutDivrationella,
+                   rationellkorsvis: layoutRationellkorsvis,
+                   granssattain: layoutGranssattain,
+                   gransforkorta: layoutGransforkorta,
+                   granssaknas: layoutGranssaknas,
+                   gransoandlig: layoutGransoandlig,
+                   gransbadaoandliga: layoutGransbadaoandliga,
+                   casutveckla: layoutCasutveckla,
+                   casfaktorisera: layoutCasfaktorisera,
+                   castredjegrad: layoutCastredjegrad,
+                   casfunktion: layoutCasfunktion,
+                   casgransvarde: layoutCasgransvarde };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

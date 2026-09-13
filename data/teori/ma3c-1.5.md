@@ -31,6 +31,11 @@ faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.
 ::: exempel "Exempel 1 — Förenkla ett uttryck"
 **Förenkla $(x + 3)(x - 1)(x + 5)$ med symbolhanterande hjälpmedel.**
 
+::: handskrift
+typ: casutveckla
+:::
+
+::: textlosning
 Kommandot *Utveckla* är nära besläktat med *Förenkla* i tabellen ovan — det
 multiplicerar ut parenteserna och skriver om uttrycket i utvecklad
 (expanderad) form. I Geogebras inmatningsfält skriver vi "utv" och väljer
@@ -46,10 +51,16 @@ $$
 
 **Svar:** $x^3 + 7x^2 + 7x - 15$
 :::
+:::
 
 ::: exempel "Exempel 2 — Faktorisera ett uttryck"
 **Faktorisera $x^3 + 7x^2 + 7x - 15$ med symbolhanterande hjälpmedel.**
 
+::: handskrift
+typ: casfaktorisera
+:::
+
+::: textlosning
 I Geogebras inmatningsfält skriver vi "fakt" och väljer
 *Faktorisera( Polynom )* i menyn *Faktorisera*. Vi definierar en funktion med
 uttrycket i kommandot och slår Enter.
@@ -63,11 +74,17 @@ $$
 
 **Svar:** $(x - 1)(x + 3)(x + 5)$
 :::
+:::
 
 ::: exempel "Exempel 3 — Lös en tredjegradsekvation"
 **Lös ekvationen $x^3 - x^2 - 3x + 3 = 0$ med symbolhanterande hjälpmedel.
 Svara<br>a) med två decimaler&emsp;&emsp;b) exakt.**
 
+::: handskrift
+typ: castredjegrad
+:::
+
+::: textlosning
 **a)** I Geogebras inmatningsfält skriver vi "nlös" och väljer
 *NLös( Ekvation )* i menyn *NLös*. Vi skriver in ekvationen och slår Enter.
 
@@ -91,6 +108,7 @@ $$
 
 **Svar:** $x_1 = -\sqrt{3}$, $x_2 = 1$ och $x_3 = \sqrt{3}$
 :::
+:::
 
 Observera att man i Geogebra enkelt kan växla mellan exakt och ungefärlig
 form med knapparna "$=$" och "$\approx$" utan att skriva om hela
@@ -100,6 +118,11 @@ kommandot.
 **Funktionen $f(x) = x^3 - 4x^2$ är given. Med symbolhanterande hjälpmedel,
 bestäm<br>a) $f(7)$&emsp;&emsp;b) lösningen till $f(x) = 7$.**
 
+::: handskrift
+typ: casfunktion
+:::
+
+::: textlosning
 **a)** Vi definierar funktionen genom att skriva $f(x) = x^3 - 4x^2$ i
 Geogebras inmatningsfält. Därefter skriver vi $f(7)$ på raden under och får
 vårt värde.
@@ -127,11 +150,17 @@ $$
 
 **Svar:** $x \approx 4{,}37$
 :::
+:::
 
 ::: exempel "Exempel 5 — Gränsvärde"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$ med
 symbolhanterande hjälpmedel.**
 
+::: handskrift
+typ: casgransvarde
+:::
+
+::: textlosning
 I Geogebras inmatningsfält skriver vi "grän" och väljer
 *Gränsvärde( Funktion, Värde )* i menyn *Gränsvärde*. Vi skriver in
 uttrycket och det värde som variabeln går mot, och slår Enter.
@@ -147,6 +176,7 @@ Oändlighetstecknet $\infty$ hittar du bland tangentbordets specialtecken,
 eller genom att skriva "infinity".
 
 **Svar:** $3$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

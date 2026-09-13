@@ -885,6 +885,10 @@
     '–': { w: 56, strokes: [[[14, 66], [46, 66]]] },
     /* högerpil för kvantsprång och övergångar: "3→1" */
     '→': { w: 92, strokes: [[[16, 66], [76, 66]], [[58, 50], [78, 66], [58, 82]]] },
+    /* oändlighetstecknet — gränsvärden då x växer obegränsat (ma4 kap 2) */
+    '∞': { w: 104, strokes: [[[50, 66], [34, 52], [19, 57], [16, 70], [28, 82],
+                             [44, 77], [50, 66], [58, 54], [73, 49], [86, 59],
+                             [86, 74], [72, 84], [57, 77], [50, 66]]] },
     /* versalt Y: gaffel ned till mitten och sedan en rak stapel —
      * granskad sida vid sida med 'V' och gemena 'y' */
     'Y': { w: 76, strokes: [[[18, 12], [44, 56], [70, 11]], [[44, 56], [40, 100]]] },
@@ -40892,6 +40896,2200 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- hjälpare: gränsvärdessymbolen ---------------------
+   * "lim" med h→0 skrivet litet under, som man skriver det för hand. */
+  function mkLim(T, F) {
+    return function (x, yb, under) {
+      var xx = T.str('lim', x, yb);
+      T.str(under == null ? 'h→0' : under,
+            x - 0.10 * F, yb + 0.62 * F, null, 0.46);
+      return xx + 0.16 * F;
+    };
+  }
+
+  /* ---------------- hjälpare: exponent som egen liten rad -------------
+   * För exponenter som själva innehåller potenser (e^(x³−5)) räcker
+   * inte placeStrings ^ — exponenten skrivs då som en egen liten sträng
+   * en bit ovanför baslinjen. */
+  function mkExpo(T, F) {
+    return function (bas, exp, x, yb) {
+      var xx = bas ? T.str(bas, x, yb) : x;
+      return T.str(exp, xx, yb - 0.52 * F, null, 0.62);
+    };
+  }
+
+  /* ---------------- scen: derivatans definition (ma4-2.1 ex 1) --------
+   * f(x)=x². Poängen är att h förkortas bort först när täljaren har
+   * faktoriserats — innan dess går h→0 inte att sätta in. */
+  function layoutDerivatadef(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = T.str('f′(x)=', padL, y);
+    xx = lim(xx, y);
+    T.fracH('f(x+h)-f(x)', 'h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Definitionen är lutningen']],
+      [['för en sekant som blir allt']],
+      [['kortare. Först skriver jag']],
+      [['in funktionen.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('(x+h)^2-x^2', 'h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvadreringsregeln på']],
+      [['parentesen: (x+h)^2 blir']],
+      [['x^2+2xh+h^2.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('x^2+2xh+h^2-x^2', 'h', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('2xh+h^2', 'h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sätter jag in h=0 nu blir']],
+      [['nämnaren noll. Men båda']],
+      [['termerna i täljaren har ett']],
+      [['h, så jag bryter ut det.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('h(2x+h)', 'h', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.str('(2x+h)', xx, y);
+    T.stepEnd();
+
+    /* raden ovanför har lim med h→0 skrivet under baslinjen, så bubblan
+     * behöver extra luft för att inte lägga sig över det */
+    tanke(y, [
+      [['Nu går det: när h går mot']],
+      [['noll blir h-termen borta och']],
+      [['bara 2x står kvar.']]
+    ], 1.0);
+    y += 4.6 * F;
+    xx = T.str('=2x', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: f′(x)=2x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans värde (ma4-2.1 ex 2) -------------
+   * Roten skrivs om som en potens innan potensregeln får användas, och
+   * först i sista steget sätts x=4 in. */
+  function layoutDerivatavarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var v0, v1;
+
+    y = 186;
+    xx = T.str('f(x)=x^3-4', padL, y);
+    xx = T.rot('x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Potensregeln fungerar bara']],
+      [['på potenser, så roten skrivs']],
+      [['om: √x är x upphöjt till en']],
+      [['halv.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f(x)=x^3-4x', padL, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 3.8 * F;
+    xx = T.str('f′(x)=3x^2-4·', padL, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('x^-', xx, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=3x^2-2x^-', padL + 40, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En negativ exponent betyder']],
+      [['att potensen står i nämnaren.']],
+      [['Så blir uttrycket lättare att']],
+      [['räkna med.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('=3x^2-', padL + 40, y);
+    T.fracH('2', '√x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in x=4 i']],
+      [['derivatan, inte i funktionen.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('f′(4)=3·4^2-', padL, y);
+    T.fracH('2', '√4', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=48-', padL + 40, y);
+    xx = T.fracH('2', '2', xx, y);
+    T.str('=48-1=47', xx, y);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xe = T.str('Svar: f′(4)=47', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: andraderivatan (ma4-2.1 ex 3) --------------- */
+  function layoutAndraderivatan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=e^3^x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Regeln för e upphöjt till kx:']],
+      [['derivatan är samma funktion']],
+      [['gånger talet k. Här är k=3.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.fracH('dy', 'dx', padL, y);
+    xx = T.str('=3e^3^x', xx, y);
+    T.underline(xx, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andraderivatan är derivatan']],
+      [['en gång till. Trean som redan']],
+      [['står där följer med.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.fracH('d^2y', 'dx^2', padL, y);
+    xx = T.str('=3·3e^3^x', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('=9e^3^x', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tangentens ekvation (ma4-2.2 ex 1) ----------
+   * k är derivatan i punkten, m fås ur att tangenten rör kurvan just
+   * där — alltså samma y-värde som kurvan i x=3. */
+  function layoutTangentekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('Tangent: y=kx+m', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    T.str('y=x^2+4x-7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tangentens lutning är']],
+      [['derivatans värde i punkten,']],
+      [['alltså k=y′(3).']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y′=2x+4', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('k=y′(3)=2·3+4=10', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('y=10x+m', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För att få m behöver jag en']],
+      [['punkt på tangenten. Den rör']],
+      [['kurvan där x=3, så y-värdet']],
+      [['hämtas ur kurvan.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y=3^2+4·3-7', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=9+12-7=14', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('Punkten (3, 14)', padL, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('14=10·3+m', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('14=30+m', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-30', xx + 0.6 * F, '14=30+m');
+    xx = T.str('m=-16', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: y=10x-16', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: tolka ett derivatavärde (ma4-2.2 ex 2) ------
+   * Derivatan är en förändringshastighet, och enheten säger vad den
+   * betyder: liter per minut. */
+  function layoutTolkaderivata(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('V′(3)=8', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatan mäter hur snabbt']],
+      [['något ändras. Enheten får']],
+      [['jag ur funktionens enhet']],
+      [['delad med tidens.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('V i liter, t i minuter', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('⟹ V′ i liter/minut', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Trean är tidpunkten och']],
+      [['åttan är takten just då.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('Svar: Vid t=3 min ökar', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('vattenmängden med', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('8 liter/minut', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kedjeregeln på en potens (ma4-2.3 ex 1) -----
+   * Yttre derivatan gånger inre derivatan. Kontrollen utvecklar
+   * parentesen och deriverar term för term — samma svar. */
+  function layoutKedjepotens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=(x^2-5)^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Yttre funktionen är något']],
+      [['upphöjt till 2, inre är']],
+      [['x^2-5. Kedjeregeln: yttre']],
+      [['derivatan gånger inre.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y′=2(x^2-5)·2x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=4x(x^2-5)', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=4x^3-20x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här går det att kontrollera:']],
+      [['jag utvecklar parentesen']],
+      [['först och deriverar sedan']],
+      [['term för term.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Kontroll', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    xx = T.str('y=(x^2-5)^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=(x^2)^2-2x^2·5+5^2', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=x^4-10x^2+25', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('y′=4x^3-20x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma svar båda vägarna.']]
+    ]);
+    y += 4.2 * F;
+    xe = T.str('Svar: y′=4x^3-20x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kedjeregeln på e-funktion (ma4-2.3 ex 2) ----
+   * Den yttre derivatan av e^z är e^z själv, så bara den inre derivatan
+   * kommer till. */
+  function layoutKedjeexp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 186;
+    xx = T.str('y=', padL, y);
+    expo('e', 'x^3-5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Yttre funktionen är e']],
+      [['upphöjt till något, inre är']],
+      [['exponenten x^3-5.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('inre derivatan: 3x^2', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['e-funktionen är sin egen']],
+      [['derivata, så den står kvar']],
+      [['oförändrad.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y′=', padL, y);
+    xx = expo('e', 'x^3-5', xx, y);
+    T.str('·3x^2', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: y′=3x^2', padL, y);
+    xe = expo('e', 'x^3-5', xe, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kedjeregeln på en rot (ma4-2.3 ex 3) --------
+   * Roten skrivs som en potens med exponenten 1/2; den negativa
+   * exponenten flyttas sedan ned i nämnaren. */
+  function layoutKedjerot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('y=', padL, y);
+    T.rot('x^2+3x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kedjeregeln behöver en']],
+      [['potens, så jag skriver om']],
+      [['roten som upphöjt till en']],
+      [['halv.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y=(x^2+3x)^', padL, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Yttre derivatan: exponenten']],
+      [['ned framför och minska den']],
+      [['med 1. Inre derivatan är']],
+      [['2x+3.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y′=', padL, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('(x^2+3x)^-', xx, y);
+    xx = T.fracSup('1', '2', xx, y);
+    T.str('·(2x+3)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den negativa exponenten']],
+      [['betyder att roten hör hemma']],
+      [['i nämnaren.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xe = T.fracH('2x+3', '2√(x^2+3x)', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('Svar: y′=', padL, y);
+    xe = T.fracH('2x+3', '2√(x^2+3x)', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: oljefläck som växer (ma4-2.4 ex 1) ----------
+   * Kedjeregeln mellan tre storheter: arean beror på radien, radien på
+   * tiden. dA/dt = dA/dr · dr/dt. */
+  function layoutOljeflack(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('Söks: ', padL, y, null, 0.8);
+    T.fracH('dA', 'dt', xx, y);
+    T.pause(280);
+    y += 3.2 * F;
+    xx = T.str('Givet: ', padL, y, null, 0.8);
+    xx = T.fracH('dr', 'dt', xx, y);
+    T.str('=0,5 m/s, r=10 m', xx, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Arean beror på radien och']],
+      [['radien på tiden. Kedjeregeln']],
+      [['binder ihop de två.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.fracH('dA', 'dt', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('dA', 'dr', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('dr', 'dt', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('A(r)=πr^2', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.fracH('dA', 'dr', padL, y);
+    xx = T.str('=2πr=2π·10=20π', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in båda']],
+      [['faktorerna i kedjeregeln.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.fracH('dA', 'dt', padL, y);
+    xx = T.str('=20π·0,5=10π', xx, y);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.str('=31,415... m^2/s', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('≈31 m^2/s', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: fläcken är redan']],
+      [['stor, och då lägger en liten']],
+      [['radieökning till en bred']],
+      [['ring med mycket area.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: arean ökar med', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('ungefär 31 m^2/s', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ballong som fylls (ma4-2.4 ex 2) ------------
+   * Samma kedjeregel, men nu söks den inre hastigheten dr/dt, så
+   * sambandet måste lösas ut först. */
+  function layoutBallongradie(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('Söks: ', padL, y, null, 0.8);
+    T.fracH('dr', 'dt', xx, y);
+    T.pause(280);
+    y += 3.2 * F;
+    xx = T.str('Givet: ', padL, y, null, 0.8);
+    xx = T.fracH('dV', 'dt', xx, y);
+    T.str('=6 dm^3/min, r=2 dm', xx, y, null, 0.8);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xx = T.fracH('dV', 'dt', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('dV', 'dr', xx, y);
+    xx = T.mul(xx, y);
+    T.fracH('dr', 'dt', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det jag söker står som en']],
+      [['faktor, så jag dividerar']],
+      [['bort den andra.']]
+    ], 1.05);
+    y += 5.6 * F;
+    xx = T.fracH('dr', 'dt', padL, y);
+    xx = T.str('=', xx, y);
+    T.bigFrac(['dV', 'dt'], ['dV', 'dr'], xx, y);
+    T.stepEnd();
+
+    y += 5.6 * F;
+    xx = T.str('V(r)=', padL, y);
+    T.fracH('4πr^3', '3', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.fracH('dV', 'dr', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('3·4πr^2', '3', xx, y);
+    T.str('=4πr^2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('=4π·2^2=16π', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in de två']],
+      [['hastigheterna i kvoten.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.fracH('dr', 'dt', padL, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('6', '16π', xx, y);
+    T.str('=0,119...', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('≈0,12 dm/min', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('=1,2 cm/min', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: ballongen är redan']],
+      [['ganska stor, så 6 liter i']],
+      [['minuten räcker bara till']],
+      [['någon centimeter.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: radien ökar med', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('ungefär 1,2 cm/min', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivera trigonometriska (ma4-2.5 ex 1) -----
+   * Fyra deluppgifter: grundregeln, kedjeregeln med heltal, med bråk
+   * och med en potens av sinus. */
+  function layoutDerivatatrig(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Derivatan av cos x är -sin x.']],
+      [['Minustecknet är det man']],
+      [['oftast glömmer.']]
+    ], 0);
+    xx = T.str('a) f′(x)=7·(-sin x)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=-7sin x', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) finns en inre funktion,']],
+      [['5x. Dess derivata är 5, och']],
+      [['den multipliceras på.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) f′(x)=3cos 5x·5', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=15cos 5x', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) är den inre funktionen']],
+      [['x/3, alltså inre derivatan']],
+      [['1/3. Två minustecken blir']],
+      [['plus.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('c) f′(x)=-5·(-sin', padL, y);
+    xx = T.fracH('x', '3', xx, y);
+    xx = T.str(')·', xx, y);
+    T.fracH('1', '3', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=', padL + 60, y);
+    xe = T.fracH('5', '3', xe, y);
+    xe = T.str('sin', xe, y);
+    xe = T.fracH('x', '3', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I d) betyder sin^3 x att hela']],
+      [['sinus upphöjs till 3. Inre']],
+      [['funktionen är sin x, med']],
+      [['derivatan cos x.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.str('d) f(x)=(sin x)^3', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('f′(x)=3sin^2 x·cos x', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: lutning i en punkt (ma4-2.5 ex 2) ---------- */
+  function layoutTrigtangent(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=3sin 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lutningen är derivatans']],
+      [['värde i punkten. Inre']],
+      [['derivatan är 2.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y′=3cos 2x·2=6cos 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sätter jag in x=π/6 blir']],
+      [['argumentet 2x lika med π/3,']],
+      [['och cos π/3 är precis 1/2.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y′(', padL, y);
+    xx = T.fracH('π', '6', xx, y);
+    xx = T.str(')=6cos', xx, y);
+    T.fracH('π', '3', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('=6·', padL + 40, y);
+    xx = T.fracH('1', '2', xx, y);
+    xe = T.str('=3', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 4.4 * F;
+    xe = T.str('Svar: lutningen är 3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: D-notation (ma4-2.6 ex 1) ------------------ */
+  function layoutDnotation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['D och d/dx betyder samma sak:']],
+      [['derivera det som står efter.']]
+    ], 0);
+    xx = T.str('a) D(e^3^x)=e^3^x·3', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=3e^3^x', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatan av ln x är 1/x.']],
+      [['Femman är bara en faktor och']],
+      [['följer med.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('b) ', padL, y);
+    xx = T.fracH('d', 'dx', xx, y);
+    xx = T.str('(5ln x)=5·', xx, y);
+    T.fracH('1', 'x', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=', padL + 60, y);
+    xe = T.fracH('5', 'x', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) är den inre funktionen']],
+      [['t^4, med derivatan 4t^3.']],
+      [['Sedan förkortas potenserna.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('d', 'dt', xx, y);
+    xx = T.str('(ln t^4)=', xx, y);
+    xx = T.fracH('1', 't^4', xx, y);
+    T.str('·4t^3', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 60, y);
+    xx = T.fracH('4t^3', 't^4', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('4', 't', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kedjeregeln i flera steg (ma4-2.6 ex 2) -----
+   * I a) har den inre funktionen i sin tur en inre funktion — tre led i
+   * kedjan. */
+  function layoutKedjeflera(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 186;
+    T.str('a) y=ln(3x-4)^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Yttre är ln, inre är']],
+      [['(3x-4)^2. Men den inre har i']],
+      [['sin tur en inre funktion,']],
+      [['3x-4 med derivatan 3.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y′=', padL, y);
+    xx = T.fracH('1', '(3x-4)^2', xx, y);
+    T.str('·2(3x-4)·3', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('6(3x-4)', '(3x-4)^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En faktor (3x-4) finns i både']],
+      [['täljare och nämnare och']],
+      [['förkortas bort.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xe = T.fracH('6', '3x-4', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är inre funktionen']],
+      [['sin x, med derivatan cos x.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xx = T.str('b) y=', padL, y);
+    expo('e', 'sin x', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('y′=', padL, y);
+    xx = expo('e', 'sin x', xx, y);
+    T.str('·cos x', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('=cos x·', padL + 40, y);
+    xe = expo('e', 'sin x', xe, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: bråk med sammansatt täljare -------------
+   * När täljaren själv innehåller ett bråk går fracH inte att använda.
+   * numFn skriver täljaren på sin egen baslinje och returnerar slut-x;
+   * strecket och den centrerade nämnaren ritas därefter. */
+  function storBrak(T, F, numFn, denS, x0, yb) {
+    var yn = yb - 1.55 * F, yd = yb + 1.62 * F;
+    var xe = numFn(x0, yn);
+    var w = xe - x0;
+    T.pause(140);
+    T.acts.push({ kind: 'stroke',
+                  pts: humanize([[x0 - 7, yb], [x0 + w + 7, yb]]) });
+    T.pause(140);
+    T.str(denS, x0 + (w - T.adv(denS)) / 2, yd);
+    return x0 + w + 9;
+  }
+
+  /* ---------------- scen: produktregeln (ma4-2.7 ex 1) --------------- */
+  function layoutProduktregeln(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('y=x^2·sin 2x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt av två funktioner.']],
+      [['Jag skriver upp båda och']],
+      [['deras derivator först.']]
+    ]);
+    y += 4.6 * F;
+    T.str('f=x^2', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('f′=2x', padL + 190, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('g=sin 2x', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('g′=2cos 2x', padL + 190, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Produktregeln: derivera den']],
+      [['ena och behåll den andra,']],
+      [['sedan tvärtom, och addera.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y′=2x·sin 2x+x^2·2cos 2x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=2x sin 2x+2x^2cos 2x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kvotregeln (ma4-2.7 ex 2) ------------------ */
+  function layoutKvotregeln(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('y=', padL, y);
+    T.fracH('sin x', '3x^2-5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljaren är f och nämnaren']],
+      [['är g. Jag skriver upp båda']],
+      [['med sina derivator.']]
+    ], 1.05);
+    y += 5.0 * F;
+    T.str('f=sin x', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('f′=cos x', padL + 190, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('g=3x^2-5', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('g′=6x', padL + 190, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvotregeln: täljarens']],
+      [['derivata gånger nämnaren,']],
+      [['MINUS täljaren gånger']],
+      [['nämnarens derivata.']]
+    ]);
+    y += 5.2 * F;
+    xx = T.str('y′=', padL, y);
+    T.fracH('cos x(3x^2-5)-sin x·6x', '(3x^2-5)^2', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xe = T.str('=', padL + 40, y);
+    xe = T.fracH('(3x^2-5)cos x-6x sin x', '(3x^2-5)^2', xe, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kvotregeln med e och ln (ma4-2.7 ex 3) ------
+   * Täljaren innehåller själv ett bråk. Genom att bryta ut e^2x och
+   * förkorta blir uttrycket hanterligt. */
+  function layoutKvotexpln(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('y=', padL, y);
+    T.fracH('ln x', 'e^2^x', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    T.str('f=ln x', padL, y, null, 0.8);
+    T.pause(240);
+    xx = T.str('f′=', padL + 190, y, null, 0.8);
+    T.fracH('1', 'x', xx, y, null);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('g=e^2^x', padL, y, null, 0.8);
+    T.pause(240);
+    T.str('g′=2e^2^x', padL + 190, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvotregeln som vanligt, fast']],
+      [['täljaren innehåller ett bråk']],
+      [['den här gången.']]
+    ]);
+    y += 6.2 * F;
+    xx = T.str('y′=', padL, y);
+    storBrak(T, F, function (x0, yn) {
+      var x = T.fracH('1', 'x', x0, yn);
+      return T.str('·e^2^x-ln x·2e^2^x', x, yn);
+    }, '(e^2^x)^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren blir e^4^x, och i']],
+      [['täljaren finns e^2^x i båda']],
+      [['termerna. Bryter jag ut den']],
+      [['kan den förkortas bort.']]
+    ], 1.8);
+    y += 7.0 * F;
+    xx = T.str('=', padL + 30, y);
+    storBrak(T, F, function (x0, yn) {
+      var x = T.str('e^2^x(', x0, yn);
+      x = T.fracH('1', 'x', x, yn);
+      return T.str('-2ln x)', x, yn);
+    }, 'e^4^x', xx, y);
+    T.stepEnd();
+
+    y += 7.0 * F;
+    xx = T.str('=', padL + 30, y);
+    storBrak(T, F, function (x0, yn) {
+      var x = T.fracH('1', 'x', x0, yn);
+      return T.str('-2ln x', x, yn);
+    }, 'e^2^x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Till sist förlänger jag med']],
+      [['x, så att det inre bråket']],
+      [['försvinner.']]
+    ], 1.8);
+    y += 6.4 * F;
+    xx = T.str('=', padL + 30, y);
+    xe = T.fracH('1-2x ln x', 'x e^2^x', xx, y);
+    T.underline(xe, y + 1.3 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: förändring vid en tidpunkt (ma4-2.8 ex 1) ---
+   * Funktionen går att derivera för hand, men uppgiften handlar om att
+   * använda ett digitalt verktyg och TOLKA värdet som kommer ut. */
+  function layoutDammnivader(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 186;
+    xx = T.str('N(t)=25', padL, y);
+    xx = T.rot('t', xx, y);
+    xx = T.mul(xx, y);
+    xx = expo('e', '-0,2t', xx, y);
+    T.str('+10', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hur nivån ändras är samma sak']],
+      [['som derivatan. Jag söker']],
+      [['alltså N′(4).']]
+    ]);
+    y += 4.6 * F;
+    T.str('Söks: N′(4)', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('I verktyget:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.0 * F;
+    xx = T.str('f(x)=25', padL + 20, y);
+    xx = T.rot('x', xx, y);
+    xx = T.mul(xx, y);
+    xx = expo('e', '-0,2x', xx, y);
+    T.str('+10', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xx = T.str('f′(4)≈-1,7', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['N mäts i meter och t i']],
+      [['månader, så derivatan mäts']],
+      [['i meter per månad. Minus']],
+      [['betyder att nivån sjunker.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: nivån minskar med', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('1,7 meter per månad', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: när är förändringen noll? (ma4-2.8 ex 2) --- */
+  function layoutDammnoll(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Att nivån inte ändras alls']],
+      [['betyder att förändrings-']],
+      [['hastigheten är noll.']]
+    ], 0);
+    T.str('N′(t)=0', padL, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('Grafiskt', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.0 * F;
+    T.str('nollställe för f′(x)', padL + 20, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('Numeriskt', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.0 * F;
+    T.str('NLös(f′(x)=0) ger x=2,5', padL + 20, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda vägarna ger samma svar.']],
+      [['Här vänder nivån: derivatan']],
+      [['går från positiv till']],
+      [['negativ, alltså en topp.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: efter 2,5 månader', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: funktion utan handregel (ma4-2.8 ex 3) ----- */
+  function layoutUtanhandregel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 186;
+    xx = T.str('f(x)=', padL, y);
+    expo('x', 'sin x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här står x både i basen och']],
+      [['i exponenten. Ingen av']],
+      [['deriveringsreglerna passar på']],
+      [['en sådan funktion.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Digitalt verktyg:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.0 * F;
+    xx = T.str('f′(1)≈0,84', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: f′(1)≈0,84', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: Vanjas hästhage med derivata (ma4-2.9 ex 1) -
+   * Samma hage som i nivå 1c, men nu löses maximeringen med derivatan
+   * i stället för med symmetrilinjen. Figurens mått skrivs i blått. */
+  function layoutHagederivata(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    /* ---- figuren: mur upptill, hage under ---- */
+    var x0 = padL + 60, x1 = padL + 300, yT = 200, yB = 320, i;
+    T.line([x0 - 26, yT], [x1 + 26, yT]);
+    for (i = 0; i <= 12; i++) {
+      T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
+    }
+    T.pause(160);
+    T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
+    T.pause(200);
+    T.line([x0, yT], [x0, yB]);
+    T.line([x0, yB], [x1, yB]);
+    T.line([x1, yB], [x1, yT]);
+    T.pause(200);
+    T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+    T.str('60-2x', (x0 + x1) / 2 - T.adv('60-2x', 0.62) / 2, yB + 0.95 * F,
+          BLUE, 0.62);
+    T.stepEnd();
+
+    tanke(yB + 1.0 * F, [
+      [['Stängslet räcker till 60 m.']],
+      [['Två sidor är x, så den']],
+      [['tredje blir 60-2x.']]
+    ], 0);
+    y = yB + 3.6 * F;
+    xx = T.str('A(x)=x(60-2x)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=60x-2x^2', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Arean är störst där kurvans']],
+      [['lutning är noll, alltså där']],
+      [['derivatan är noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('A′(x)=60-4x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('60-4x=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+4x', xx + 0.6 * F, '60-4x=0');
+    xx = T.str('60=4x', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/4', xx + 0.6 * F, '60=4x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=15', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x=15 säger var arean är']],
+      [['störst, inte hur stor den']],
+      [['blir. Det får jag ur A(x).']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('A(15)=60·15-2·15^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=900-450=450', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Är det verkligen ett maximum?']],
+      [['Andraderivatan svarar: är den']],
+      [['negativ buktar kurvan nedåt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('A′′(x)=-4', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('A′′(15)=-4<0 ⟹ max', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: största arean är', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('450 m^2', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: klassificera extrempunkter (ma4-2.9 ex 2) --- */
+  function layoutExtrempunkter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=x^3-12x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Extrempunkterna ligger där']],
+      [['tangenten är vågrät, alltså']],
+      [['där derivatan är noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(x)=3x^2-12', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('3x^2-12=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+12', xx + 0.6 * F, '3x^2-12=0');
+    xx = T.str('3x^2=12', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2=12',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x^2=4', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x=±2', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-värdena räcker inte: en']],
+      [['punkt behöver också sitt']],
+      [['y-värde, ur den ursprungliga']],
+      [['funktionen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f(2)=2^3-12·2=-16', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f(-2)=(-2)^3+24=16', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andraderivatan avgör']],
+      [['karaktären: positiv betyder']],
+      [['att kurvan buktar uppåt,']],
+      [['alltså ett minimum.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f′′(x)=6x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′′(2)=12>0 ⟹ min', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f′′(-2)=-12<0 ⟹ max', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: max (-2, 16) och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('min (2, -16)', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: största och minsta värdet (ma4-2.9 ex 3) ----
+   * I ett slutet intervall kan yttervärdena lika gärna ligga i
+   * ändpunkterna som i en extrempunkt — alla tre måste jämföras. */
+  function layoutIntervallvarden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('f(x)=x^3-12x,', padL, y);
+    T.str(' 0≤x≤3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I ett slutet intervall kan']],
+      [['yttervärdena ligga i']],
+      [['ändpunkterna lika gärna som']],
+      [['i en extrempunkt.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Extrempunkter: x=±2', padL, y, null, 0.8);
+    T.pause(240);
+    y += 2.4 * F;
+    T.str('bara x=2 ligger i intervallet', padL + 20, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag räknar ut värdet i båda']],
+      [['ändpunkterna och i']],
+      [['extrempunkten, och jämför.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f(0)=0', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f(2)=2^3-12·2=-16', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f(3)=27-36=-9', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: största värdet 0', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('(x=0), minsta värdet -16', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('(x=2)', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- hjälpare: teckentabell ----------------------------
+   * En liten tabell med tre rader (x, f′(x), f(x)) som ritas med linjal
+   * och fylls i cell för cell. En cell kan vara en sträng eller
+   * { pil: 'upp' } / { pil: 'ned' } för växande respektive avtagande. */
+  function mkTeckentabell(T, F) {
+    return function (x0, yTop, lblW, colW, rader) {
+      var n = rader[0].celler.length, rowH = 1.7 * F, i, j;
+      var bredd = lblW + n * colW, yBot = yTop + rader.length * rowH;
+      for (i = 0; i <= rader.length; i++) {
+        T.line([x0, yTop + i * rowH], [x0 + bredd, yTop + i * rowH]);
+      }
+      T.pause(160);
+      for (j = 0; j <= n; j++) {
+        T.line([x0 + lblW + j * colW, yTop], [x0 + lblW + j * colW, yBot]);
+      }
+      T.pause(220);
+      rader.forEach(function (rad, r) {
+        var yb = yTop + r * rowH + 1.15 * F;
+        T.str(rad.lbl, x0 + (lblW - T.adv(rad.lbl, 0.62)) / 2, yb, null, 0.62);
+        rad.celler.forEach(function (c, k) {
+          var cx = x0 + lblW + k * colW;
+          if (c == null || c === '') return;
+          if (typeof c === 'object') {
+            /* pil upp eller ned, ritad som ett litet streck med spets */
+            var a = c.pil === 'upp' ? 1 : -1;
+            var px = cx + colW / 2 - 11, py = yb - 0.5 * F + a * 11;
+            T.line([px, py], [px + 22, py - a * 22]);
+            T.line([px + 22, py - a * 22], [px + 14, py - a * 20]);
+            T.line([px + 22, py - a * 22], [px + 20, py - a * 13]);
+          } else {
+            T.str(c, cx + (colW - T.adv(c, 0.62)) / 2, yb, null, 0.62);
+          }
+          T.pause(120);
+        });
+        T.pause(180);
+      });
+      return yBot;
+    };
+  }
+
+  /* ---------------- scen: maximal koncentration (ma4-2.10 ex 1) -------
+   * Funktionen är för svår att derivera för hand; poängen är att läsa av
+   * maximipunkten i ett digitalt verktyg och tolka koordinaterna. */
+  function layoutMaxkoncentration(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), expo = mkExpo(T, F);
+
+    y = 186;
+    xx = T.str('K(t)=5t^1^,^4', padL, y);
+    xx = T.mul(xx, y);
+    xx = expo('e', '-0,25t', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('+1,5cos(0,8t)+3', padL + 60, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den här funktionen går inte']],
+      [['att derivera med reglerna vi']],
+      [['har. Jag ritar den i stället']],
+      [['och läser av toppen.']]
+    ]);
+    y += 4.8 * F;
+    T.str('Verktygets extrempunkt:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    xx = T.str('A=(7,09; 17,41)', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-koordinaten är tidpunkten']],
+      [['och y-koordinaten är själva']],
+      [['koncentrationen. Det är den']],
+      [['som efterfrågas.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: högsta', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('koncentrationen är cirka', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('17,4 mg/liter', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: snabbaste ökningstakten (ma4-2.10 ex 2) -----
+   * Största ÖKNINGEN är derivatans maximum, alltså en maximipunkt på
+   * derivatans graf — inte på funktionens. */
+  function layoutSnabbastokning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('Söks: största ökningstakten', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ökningstakten ÄR derivatan.']],
+      [['Störst ökning betyder alltså']],
+      [['att derivatan har sitt']],
+      [['största värde.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('maximipunkt för K′(t)', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('Verktyget ritar K′ och ger:', padL, y, null, 0.62);
+    T.pause(220);
+    y += 2.2 * F;
+    xx = T.str('A=(0,62; 3,83)', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Punkten ligger på DERIVATANS']],
+      [['graf, så y-värdet är en']],
+      [['hastighet: mg per liter och']],
+      [['timme.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: snabbast efter', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('cirka 0,62 h, med takten', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('3,8 mg/liter per timme', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skissa med teckentabell (ma4-2.11 ex 1) -----
+   * Derivatan faktoriseras så att nollproduktmetoden går att använda,
+   * och teckentabellen visar var kurvan växer och avtar. */
+  function layoutTeckentabell(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
+
+    y = 186;
+    T.str('f(x)=(x-1)^2e^x,', padL, y);
+    T.str(' -2≤x≤2', padL + 300, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt, så produktregeln.']],
+      [['Första faktorn deriveras med']],
+      [['kedjeregeln, e^x är sin egen']],
+      [['derivata.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f′(x)=2(x-1)·e^x+(x-1)^2e^x', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=(2x-2)e^x+(x^2-2x+1)e^x', padL + 30, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda termerna har e^x. Bryter']],
+      [['jag ut den kan jag använda']],
+      [['nollproduktmetoden.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('=e^x(2x-2+x^2-2x+1)', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=e^x(x^2-1)', padL + 30, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('Fall 1', padL, y, null, 0.62);
+    T.pause(200);
+    xx = T.str('e^x=0', padL + 110, y);
+    T.pause(240);
+    T.str('saknar lösning', xx + 0.8 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    T.str('Fall 2', padL, y, null, 0.62);
+    T.pause(200);
+    xx = T.str('x^2-1=0 ⟹ x=±1', padL + 110, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu provar jag derivatans']],
+      [['tecken i varje delintervall,']],
+      [['ett värde i taget.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(-2)=e^-^2·3≈0,406>0', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f′(0)=1·(-1)=-1<0', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f′(2)=e^2·3≈22,167>0', padL, y, null, 0.88);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    y = tabell(padL, y, 110, 88, [
+      { lbl: 'x', celler: ['', '-1', '', '1', ''] },
+      { lbl: 'f′(x)', celler: ['+', '0', '-', '0', '+'] },
+      { lbl: 'f(x)', celler: [{ pil: 'upp' }, '', { pil: 'ned' }, '',
+                              { pil: 'upp' }] }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatan går från plus till']],
+      [['minus vid x=-1: en']],
+      [['maximipunkt. Tvärtom vid x=1:']],
+      [['en minimipunkt.']]
+    ], 0.6);
+    y += 4.0 * F;
+    xx = T.str('f(-1)=4·e^-^1≈1,47', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f(1)=0', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f(-2)=9·e^-^2≈1,22', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f(2)=e^2≈7,39', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: max (-1; 1,47),', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('min (1; 0), ändpunkter', padL + 60, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('(-2; 1,22) och (2; 7,39)', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vertikal och horisontell asymptot (2.12 ex 1)
+   * a) nämnaren noll ger den lodräta asymptoten, b) gränsvärdet då x
+   * växer obegränsat ger den vågräta. */
+  function layoutAsymptotvh(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    xx = T.str('a) f(x)=', padL, y);
+    T.fracH('5', '8-2x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett bråk saknar värde där']],
+      [['nämnaren är noll. Där gör']],
+      [['kurvan ett språng, och där']],
+      [['ligger den lodräta asymptoten.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('8-2x=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+2x', xx + 0.6 * F, '8-2x=0');
+    xx = T.str('8=2x', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xx + 0.6 * F, '8=2x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('x=4', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    xx = T.str('b) f(x)=', padL, y);
+    xx = T.fracH('5', 'x+3', xx, y);
+    T.str('+3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['När x blir mycket stort blir']],
+      [['bråket försvinnande litet.']],
+      [['Kvar blir bara trean.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.str('(', xx, y);
+    xx = T.fracH('5', 'x+3', xx, y);
+    T.str('+3)', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=0+3=3', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak åt andra hållet:']],
+      [['bråket går mot noll även när']],
+      [['x blir mycket negativt.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: a) x=4', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('b) y=3', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: båda asymptoterna (ma4-2.12 ex 2) ----------
+   * När både täljare och nämnare växer som x tar de ut varandra, och
+   * kvoten går mot 1. */
+  function layoutBadaasymptoter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = T.str('f(x)=', padL, y);
+    T.fracH('x+1', 'x-3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först den lodräta: var är']],
+      [['nämnaren noll?']]
+    ], 1.05);
+    y += 5.0 * F;
+    xx = T.str('x-3=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('x=3', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För stora x betyder ettan och']],
+      [['trean nästan ingenting. Både']],
+      [['täljare och nämnare växer']],
+      [['ungefär som x.']]
+    ]);
+    y += 5.2 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.fracH('x+1', 'x-3', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('x', 'x', xx, y);
+    xe = T.str('=1', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xe = T.str('Svar: x=3 och y=1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: asymptot åt bara ett håll (2.12 ex 3) ------
+   * 2^(−x) går mot noll åt höger men växer obegränsat åt vänster. */
+  function layoutAsymptotenkelsida(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 186;
+    T.str('f(x)=2^-^x+7', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En negativ exponent betyder']],
+      [['att potensen står i nämnaren.']],
+      [['Då syns det bättre vad som']],
+      [['händer när x växer.']]
+    ]);
+    y += 5.0 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.str('(', xx, y);
+    xx = T.fracH('1', '2^x', xx, y);
+    T.str('+7)', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('=0+7=7', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Åt vänster blir exponenten -x']],
+      [['i stället positiv, och då']],
+      [['växer potensen obegränsat.']],
+      [['Där finns ingen asymptot.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→-∞');
+    xx = T.str('(2^-^x+7)=∞', xx, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xe = T.str('Svar: y=7 (åt höger)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: läs av asymptoterna (ma4-2.13 ex 1) --------
+   * Grafen ritas med den lodräta asymptoten x=2 och den sneda y=-x+1,
+   * båda streckade, precis som i uppgiftens figur. */
+  function layoutLasasymptoter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 180, oy: 268, ux: 34, uy: 20 });
+
+    G.axlar(-4, 7, -6, 6, 'x', 'y');
+    T.stepEnd();
+
+    /* kurvan y = -x+1 + 1/(x-2), tätt samplad på var sin sida om
+     * asymptoten */
+    function fk(v) { return -v + 1 + 1 / (v - 2); }
+    G.kurva(fk, -4, 1.75);
+    G.kurva(fk, 2.3, 7);
+    T.stepEnd();
+
+    G.lodrat(2, -6, 6);
+    T.str('x=2', G.X(2) + 8, G.Y(-5), BLUE, 0.5);
+    T.pause(200);
+    G.kurva(function (v) { return -v + 1; }, -4, 6.5, BLUE);
+    T.str('y=-x+1', G.X(-4) + 4, G.Y(5.4), BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 6 * 20, [
+      [['Kurvan gör ett språng vid']],
+      [['x=2. Där finns en lodrät']],
+      [['asymptot.']]
+    ], 0);
+    y = G.oy + 6 * 20 + 3.0 * F;
+    xe = T.str('lodrät asymptot: x=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För stora x lägger sig kurvan']],
+      [['längs en rät linje. Jag läser']],
+      [['av dess lutning och']],
+      [['skärning med y-axeln.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('k=-1 och m=1', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('sned asymptot: y=-x+1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=2 och y=-x+1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm den sneda asymptoten (2.13 ex 2) ----
+   * Uttrycket skrivs på formen kx + m + restterm; resttermen går mot
+   * noll och det som blir kvar ÄR asymptoten. */
+  function layoutSnedasymptot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) y=2x+1+', padL, y);
+    T.fracH('4', 'x-3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uttrycket har redan formen']],
+      [['kx+m plus en restterm.']],
+      [['Resttermen går mot noll när']],
+      [['x växer.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('y=2x+1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    xx = T.str('b) y=', padL, y);
+    T.fracH('2x^2-4x+3', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här måste jag först dela upp']],
+      [['bråket, en term i taget, för']],
+      [['att se vad som är kx+m.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('2x^2', 'x', xx, y);
+    xx = T.str('-', xx, y);
+    xx = T.fracH('4x', 'x', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracH('3', 'x', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xx = T.str('=2x-4+', padL + 20, y);
+    T.fracH('3', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Resttermen 3/x går mot noll,']],
+      [['så kvar blir den räta linjen.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xe = T.str('y=2x-4', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: skissa en rationell funktion (2.14 ex 1) ----
+   * Asymptoter först, sedan extrempunkter och teckentabell — i den
+   * ordningen växer skissen fram av sig själv. */
+  function layoutSkissrationell(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F), tabell = mkTeckentabell(T, F);
+
+    y = 200;
+    xx = T.str('f(x)=', padL, y);
+    T.fracH('x^2+1', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bråket går inte att förkorta,']],
+      [['så nämnaren noll ger den']],
+      [['lodräta asymptoten.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xe = T.str('lodrät: x=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Åt höger växer täljaren mycket']],
+      [['snabbare än nämnaren, så']],
+      [['kvoten växer obegränsat.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.str('(x+', xx, y);
+    xx = T.fracH('1', 'x', xx, y);
+    T.str(')=∞', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('vågrät asymptot saknas', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men delar jag upp bråket syns']],
+      [['det att kurvan lägger sig']],
+      [['längs linjen y=x.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f(x)=', padL, y);
+    xx = T.fracH('x^2', 'x', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', 'x', xx, y);
+    xx = T.str('=x+', xx, y);
+    T.fracH('1', 'x', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('sned: y=x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu extrempunkterna. Kvot-']],
+      [['regeln ger derivatan.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('2x·x-(x^2+1)·1', 'x^2', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('x^2-1', 'x^2', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.fracH('x^2-1', 'x^2', padL, y);
+    xx = T.str('=0 ⟹ x^2=1 ⟹ x=±1', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('f(-1)=', padL, y);
+    xx = T.fracH('1+1', '-1', xx, y);
+    T.str('=-2', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('f(1)=', padL, y);
+    xx = T.fracH('2', '1', xx, y);
+    T.str('=2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag provar derivatans tecken']],
+      [['i fyra punkter: två utanför']],
+      [['och två innanför, en på var']],
+      [['sida om x=0.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(-2)=', padL, y);
+    xx = T.fracH('3', '4', xx, y);
+    T.str('>0', xx, y);
+    T.pause(280);
+    xx = T.str('f′(-0,5)<0', padL + 250, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('f′(0,5)<0', padL, y);
+    T.pause(280);
+    T.str('f′(2)>0', padL + 250, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    y = tabell(padL, y, 100, 80, [
+      { lbl: 'x', celler: ['', '-1', '', '0', '', '1', ''] },
+      { lbl: 'f′(x)', celler: ['+', '0', '-', '', '-', '0', '+'] },
+      { lbl: 'f(x)', celler: [{ pil: 'upp' }, '-2', { pil: 'ned' }, '',
+                              { pil: 'ned' }, '2', { pil: 'upp' }] }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vid x=0 är funktionen inte']],
+      [['definierad, så där finns']],
+      [['ingen punkt: kurvan delar sig']],
+      [['i två grenar.']]
+    ], 0.6);
+    y += 4.2 * F;
+    xe = T.str('Svar: x=0 och y=x,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('max (-1, -2), min (1, 2)', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: samtliga asymptoter (ma4-2.14 ex 2) -------- */
+  function layoutSamtligaasymptoter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = T.str('g(x)=', padL, y);
+    T.fracH('2x^2+1', 'x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bråket går inte att förkorta,']],
+      [['så nämnaren noll ger den']],
+      [['lodräta asymptoten.']]
+    ], 1.05);
+    y += 5.0 * F;
+    xe = T.str('lodrät: x=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('y=', padL, y);
+    xx = lim(xx, y, 'x→∞');
+    xx = T.str('(2x+', xx, y);
+    xx = T.fracH('1', 'x', xx, y);
+    T.str(')=∞', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('vågrät asymptot saknas', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Uppdelningen visar vilken']],
+      [['linje kurvan närmar sig:']],
+      [['resttermen 1/x går mot noll.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('g(x)=', padL, y);
+    xx = T.fracH('2x^2', 'x', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', 'x', xx, y);
+    xx = T.str('=2x+', xx, y);
+    T.fracH('1', 'x', xx, y);
+    T.stepEnd();
+
+    y += 4.8 * F;
+    xe = T.str('sned: y=2x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('Svar: x=0 och y=2x,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('ingen vågrät asymptot', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -41239,7 +43437,40 @@
                    bestamamplitud: layoutBestamamplitud,
                    tillsincos: layoutTillsincos,
                    fjaderamplitud: layoutFjaderamplitud,
-                   lammelmodell: layoutLammelmodell };
+                   lammelmodell: layoutLammelmodell,
+                   derivatadef: layoutDerivatadef,
+                   derivatavarde: layoutDerivatavarde,
+                   andraderivatan: layoutAndraderivatan,
+                   tangentekv: layoutTangentekv,
+                   tolkaderivata: layoutTolkaderivata,
+                   kedjepotens: layoutKedjepotens,
+                   kedjeexp: layoutKedjeexp,
+                   kedjerot: layoutKedjerot,
+                   oljeflack: layoutOljeflack,
+                   ballongradie: layoutBallongradie,
+                   derivatatrig: layoutDerivatatrig,
+                   trigtangent: layoutTrigtangent,
+                   dnotation: layoutDnotation,
+                   kedjeflera: layoutKedjeflera,
+                   produktregeln: layoutProduktregeln,
+                   kvotregeln: layoutKvotregeln,
+                   kvotexpln: layoutKvotexpln,
+                   dammnivader: layoutDammnivader,
+                   dammnoll: layoutDammnoll,
+                   utanhandregel: layoutUtanhandregel,
+                   hagederivata: layoutHagederivata,
+                   extrempunkter: layoutExtrempunkter,
+                   intervallvarden: layoutIntervallvarden,
+                   maxkoncentration: layoutMaxkoncentration,
+                   snabbastokning: layoutSnabbastokning,
+                   teckentabell: layoutTeckentabell,
+                   asymptotvh: layoutAsymptotvh,
+                   badaasymptoter: layoutBadaasymptoter,
+                   asymptotenkelsida: layoutAsymptotenkelsida,
+                   lasasymptoter: layoutLasasymptoter,
+                   snedasymptot: layoutSnedasymptot,
+                   skissrationell: layoutSkissrationell,
+                   samtligaasymptoter: layoutSamtligaasymptoter };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

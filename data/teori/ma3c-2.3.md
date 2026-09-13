@@ -60,6 +60,11 @@ $$
 **Funktionen $f(x) = x^2$ är given. Bestäm<br>
 a)&nbsp;$f'(5)$&emsp;&emsp;b) tangentens lutning då $x = 5$.**
 
+::: handskrift
+typ: derivatafem
+:::
+
+::: textlosning
 **a)** Vi ställer upp derivatans definition, sätter därefter $a = 5$ och
 förenklar.
 
@@ -90,6 +95,7 @@ $$
 Svaret är alltså detsamma som i a).
 
 **Svar:** Tangentens lutning då $x = 5$ är $10$.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

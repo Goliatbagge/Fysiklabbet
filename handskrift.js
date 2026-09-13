@@ -47444,6 +47444,453 @@
     return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
   }
 
+  /* ---------------- scen: sekantens lutning (ma3c-2.1 ex 1) ----------
+   * Sekanten mellan två punkter på kurvan ger den GENOMSNITTLIGA
+   * förändringen — här hur mycket granen vuxit per år. */
+  function layoutSekantlutning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 60, oy: 300, ux: 52, uy: 60 });
+
+    G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
+    T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
+    T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
+    T.stepEnd();
+
+    G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
+    T.stepEnd();
+
+    G.punkt(0, 0, BLUE);
+    G.punkt(2, 1.4, BLUE);
+    T.line([G.X(0), G.Y(0)], [G.X(2.9), G.Y(2.03)], BLUE);
+    T.str('(2; 1,4)', G.X(2) + 10, G.Y(1.4) + 0.9 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 2.2 * F, [
+      [['Sekanten går genom två punkter']],
+      [['på kurvan. Dess lutning är']],
+      [['samma k som för en rät linje.']]
+    ], 0);
+    y = G.oy + 0.5 * 60 + 3.6 * F;
+    xx = T.str('a) k=', padL, y);
+    xx = T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('1,4-0', '2-0', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('1,4', '2', xx, y);
+    xe = T.str('=0,7', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['y mäts i dm och x i år, så']],
+      [['lutningen mäts i dm per år.']],
+      [['Det är en medelhastighet över']],
+      [['de två åren.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xe = T.str('b) granen har vuxit', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('0,7 dm/år i genomsnitt', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ändringskvoten (ma3c-2.1 ex 2) -------------
+   * Ändringskvot och sekantlutning är samma sak; f(x) är y-värdet. */
+  function layoutAndringskvot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=x^2,  x=3 till x=5', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ändringskvoten ÄR sekantens']],
+      [['lutning. Funktionsvärdet f(x)']],
+      [['är punktens y-koordinat.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('f(x_2)-f(x_1)', 'x_2-x_1', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('f(5)-f(3)', '5-3', xx, y);
+    T.stepEnd();
+
+    y += 5.4 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = T.fracH('5^2-3^2', '5-3', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('25-9', '2', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('16', '2', xx, y);
+    xe = T.str('=8', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kurvan y=x^2 blir brantare ju']],
+      [['längre åt höger man kommer, så']],
+      [['en lutning på 8 mellan 3 och 5']],
+      [['är rimlig.']]
+    ], 1.9);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 6.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tangentens lutning (ma3c-2.2 ex 1) ---------
+   * Tangenten rör kurvan i EN punkt och ger hastigheten just där, till
+   * skillnad från sekantens medelvärde. */
+  function layoutTangentlutning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 60, oy: 300, ux: 52, uy: 60 });
+
+    G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
+    T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
+    T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
+    T.stepEnd();
+
+    G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
+    T.stepEnd();
+
+    /* tangenten i (2; 1,4): lutning 0,35 */
+    T.line([G.X(0), G.Y(0.7)], [G.X(4.2), G.Y(2.17)], BLUE);
+    G.punkt(0, 0.7, BLUE);
+    G.punkt(2, 1.4, BLUE);
+    T.str('(0; 0,7)', G.X(0) + 8, G.Y(0.7) + 1.0 * F, BLUE, 0.5);
+    T.str('(2; 1,4)', G.X(2) + 8, G.Y(1.4) + 1.0 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 2.2 * F, [
+      [['Tangenten rör kurvan i EN']],
+      [['punkt. Dess lutning är']],
+      [['hastigheten just där, inte']],
+      [['ett medelvärde.']]
+    ], 0);
+    y = G.oy + 0.5 * 60 + 3.8 * F;
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('1,4-0,7', '2-0', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('0,7', '2', xx, y);
+    xe = T.str('=0,35', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Efter två år växer granen']],
+      [['alltså långsammare än den']],
+      [['gjort i genomsnitt dessförinnan.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xe = T.str('Svar: 0,35 dm per år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans definition (ma3c-2.3 ex 1) ------
+   * Samma gränsvärde som i nivå 2, men med ett konkret a=5. */
+  function layoutDerivatafem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), lim = mkLim(T, F);
+
+    y = 200;
+    xx = T.str('f′(a)=', padL, y);
+    xx = lim(xx, y);
+    T.fracH('f(a+h)-f(a)', 'h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Definitionen är sekantens']],
+      [['lutning när avståndet h']],
+      [['krymper mot noll. Här är a=5.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(5)=', padL, y);
+    xx = lim(xx, y);
+    T.fracH('(5+h)^2-5^2', 'h', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('25+10h+h^2-25', 'h', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('10h+h^2', 'h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['h=0 går inte att sätta in:']],
+      [['nämnaren blir noll. Men båda']],
+      [['termerna i täljaren har ett h']],
+      [['att bryta ut.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.fracH('h(10+h)', 'h', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=', padL + 20, y);
+    xx = lim(xx, y);
+    T.str('(10+h)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu finns ingen nämnare kvar,']],
+      [['så h=0 går bra att sätta in.']]
+    ], 1.0);
+    y += 4.6 * F;
+    xx = T.str('=10+0=', padL + 40, y);
+    xe = T.str('10', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['b) Tangentens lutning i en']],
+      [['punkt ÄR derivatan där, så']],
+      [['svaret är detsamma: 10.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tolka derivatan (ma3c-2.4 ex 1) ------------
+   * Enheten avslöjar vad derivatan betyder: funktionens enhet per
+   * variabelns. */
+  function layoutTolkaderivatabil(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('s(t) km efter t timmar', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['s(2) är ett funktionsvärde,']],
+      [['alltså en sträcka vid en']],
+      [['bestämd tidpunkt.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('a) efter 2 h har bilen', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('färdats 120 km', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatans enhet är']],
+      [['funktionens enhet per']],
+      [['variabelns: km per timme.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.fracH('km', 'h', padL + 20, y);
+    T.str('=km/h', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xe = T.str('b) efter 2 h kör bilen', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('med hastigheten 90 km/h', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivata med CAS (ma3c-2.4 ex 2) ---------- */
+  function layoutCasderivata(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=0,3x^2-5', padL, y);
+    T.pause(260);
+    T.str('x=tid efter 6.00', padL + 260, y, null, 0.7);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Funktionen definieras en gång.']],
+      [['Sedan räcker det att skriva']],
+      [['f′(5) på raden under.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a) f′(5)=', padL, y);
+    xe = T.str('3', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Enheten: grader per timme,']],
+      [['eftersom f mäts i °C och x i']],
+      [['timmar.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.fracH('°C', 'h', padL + 20, y);
+    T.str('=°C/h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x räknas från klockan 6, så']],
+      [['x=5 är klockan 11.']]
+    ], 1.4);
+    y += 5.2 * F;
+    xe = T.str('b) klockan 11.00 ökar', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('temperaturen med 3 °C/h', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: beräkna absolutbelopp (ma3c-2.5 ex 1) ------ */
+  function layoutAbsolutbelopp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('|x^3+5| för x=-2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först räknar jag ut vad som']],
+      [['står inuti tecknen, sedan tar']],
+      [['jag beloppet.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('|(-2)^3+5|=|-8+5|', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=|-3|=', padL + 40, y);
+    xe = T.str('3', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Absolutbeloppet är avståndet']],
+      [['till noll, och ett avstånd är']],
+      [['aldrig negativt.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
+  }
+
+  /* ---------------- scen: ekvation med absolutbelopp (2.5 ex 2) ------ */
+  function layoutAbsolutekvation(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('|x-7|=10', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Avståndet från x till 7 ska']],
+      [['vara 10. Det kan det vara åt']],
+      [['två håll, så uttrycket inuti']],
+      [['kan vara 10 eller -10.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x-7=10', padL + 20, y);
+    T.pause(300);
+    T.str('eller', padL + 200, y, null, 0.7);
+    T.pause(200);
+    T.str('x-7=-10', padL + 290, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x_1=17', padL + 20, y);
+    T.underline(xe, y);
+    T.pause(300);
+    xe = T.str('x_2=-3', padL + 290, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kortare skrivsätt: x-7=±10']],
+      [['ger båda lösningarna på en']],
+      [['gång.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x-7=±10 ⟹ x=7±10', padL, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 1.4 * F, padL: padL };
+  }
+
+  /* ---------------- scen: deriverbarhet ur en graf (2.5 ex 3) --------
+   * I ett hörn finns ingen entydig tangent, och i ett hopp finns ingen
+   * sammanhängande kurva att lägga den mot. */
+  function layoutDeriverbarhet(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 230, oy: 250, ux: 32, uy: 26 });
+
+    G.axlar(-6.4, 4.4, -3.4, 3.4, 'x', 'y');
+    T.stepEnd();
+
+    /* hörn vid x=-4, hopp vid x=0 */
+    G.kurva(function (v) { return -v - 2; }, -6.2, -4);
+    G.kurva(function (v) { return 0.5 * v + 4; }, -4, -0.06);
+    G.kurva(function (v) { return 0.4 * v + 1; }, 0.06, 4.2);
+    T.stepEnd();
+
+    G.punkt(-4, 2, BLUE);
+    T.str('hörn', G.X(-4) - 46, G.Y(2) - 0.6 * F, BLUE, 0.5);
+    T.pause(240);
+    G.punkt(0, 4, BLUE);
+    G.punkt(0, 1, BLUE);
+    T.str('hopp', G.X(0) + 12, G.Y(2.6), BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 3.4 * 26, [
+      [['I ett hörn finns ingen entydig']],
+      [['tangent: lutningen är olika']],
+      [['från vänster och från höger.']]
+    ], 0);
+    y = G.oy + 3.4 * 26 + 3.6 * F;
+    xx = T.str('x=-4: hörn', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och i ett hopp finns ingen']],
+      [['sammanhängande kurva att lägga']],
+      [['tangenten mot.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('x=0: hopp', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: x=-4 och x=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -47891,7 +48338,16 @@
                    casfaktorisera: layoutCasfaktorisera,
                    castredjegrad: layoutCastredjegrad,
                    casfunktion: layoutCasfunktion,
-                   casgransvarde: layoutCasgransvarde };
+                   casgransvarde: layoutCasgransvarde,
+                   sekantlutning: layoutSekantlutning,
+                   andringskvot: layoutAndringskvot,
+                   tangentlutning: layoutTangentlutning,
+                   derivatafem: layoutDerivatafem,
+                   tolkaderivatabil: layoutTolkaderivatabil,
+                   casderivata: layoutCasderivata,
+                   absolutbelopp: layoutAbsolutbelopp,
+                   absolutekvation: layoutAbsolutekvation,
+                   deriverbarhet: layoutDeriverbarhet };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

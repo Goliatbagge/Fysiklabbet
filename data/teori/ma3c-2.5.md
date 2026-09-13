@@ -93,6 +93,11 @@ entydigt värde, och $f(x) = |x|$ är alltså inte deriverbar i $x = 0$.
 ::: exempel "Exempel 1 — Beräkna absolutbelopp"
 **Beräkna $|x^3 + 5|$ för $x = -2$.**
 
+::: handskrift
+typ: absolutbelopp
+:::
+
+::: textlosning
 Vi sätter $x = -2$ i uttrycket $|x^3 + 5|$ och beräknar.
 
 $$
@@ -101,10 +106,16 @@ $$
 
 **Svar:** 3
 :::
+:::
 
 ::: exempel "Exempel 2 — Lös en ekvation med absolutbelopp"
 **Lös ekvationen $|x - 7| = 10$.**
 
+::: handskrift
+typ: absolutekvation
+:::
+
+::: textlosning
 Om $|x - 7| = 10$ gäller antingen $x - 7 = 10$ eller $x - 7 = -10$, som vi
 kan lösa separat.
 
@@ -123,6 +134,7 @@ $$
 
 **Svar:** $x_1 = 17$ och $x_2 = -3$
 :::
+:::
 
 ::: exempel "Exempel 3 — Avläs deriverbarhet ur en graf"
 **Figuren visar grafen till en funktion. För vilka värden på $x$ är
@@ -134,10 +146,16 @@ funktionen inte deriverbar?**
 Peka eller tryck på hörnet vid $x = -4$ eller hoppet vid $x = 0$.
 :::
 
+::: handskrift
+typ: deriverbarhet
+:::
+
+::: textlosning
 Grafen har ett hörn då $x = -4$ och är diskontinuerlig (den har ett hopp)
 då $x = 0$. I dessa punkter är funktionen alltså inte deriverbar.
 
 **Svar:** $x = -4$ och $x = 0$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

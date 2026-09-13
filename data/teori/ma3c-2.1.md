@@ -45,6 +45,11 @@ nedan.<br>a) Beräkna sekantens lutning mellan $x = 0$ och $x = 2$.
 Peka eller tryck på sekanten så visas de avlästa punkternas koordinater.
 :::
 
+::: handskrift
+typ: sekantlutning
+:::
+
+::: textlosning
 **a)** Vi drar en sekant mellan punkterna på grafen där $x = 0$ och
 $x = 2$ och läser av deras koordinater: $(0, 0)$ och $(2; 1,4)$. Vi sätter
 in koordinaterna i formeln för riktningskoefficienten $k$.
@@ -62,10 +67,16 @@ på $x$-axeln är år, så enheten på $k$-värdet blir dm per år.
 **Svar:** Granen har i genomsnitt vuxit med $0{,}7\ \text{dm/år}$ de två
 första åren.
 :::
+:::
 
 ::: exempel "Exempel 2 — Ändringskvoten för en andragradsfunktion"
 **Beräkna ändringskvoten mellan $x = 3$ och $x = 5$ för $f(x) = x^2$.**
 
+::: handskrift
+typ: andringskvot
+:::
+
+::: textlosning
 Ändringskvoten är detsamma som sekantens lutning. Vi ställer upp formeln
 för riktningskoefficienten och sätter in värden. Kom ihåg att
 funktionsvärdet $f(x)$ står för en $y$-koordinat.
@@ -75,6 +86,7 @@ k = \frac{f(x_2) - f(x_1)}{x_2 - x_1} = \frac{f(5) - f(3)}{5 - 3} = \frac{5^2 - 
 $$
 
 **Svar:** $k = 8$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

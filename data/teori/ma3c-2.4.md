@@ -23,6 +23,11 @@ variabeln".
 **En bil färdas $s(t)$ km på $t$ timmar. Tolka<br>
 a)&nbsp;$s(2) = 120$&emsp;&emsp;b)&nbsp;$s'(2) = 90$**
 
+::: handskrift
+typ: tolkaderivatabil
+:::
+
+::: textlosning
 **a)** $s$ står för sträckan i kilometer (120 km). $t$ står för tiden i
 timmar (2 timmar).
 
@@ -36,6 +41,7 @@ $s'$ står för momentanhastigheten (90 km/h). $t$ står för tidpunkten (2
 timmar).
 
 **Svar:** Efter 2 timmar färdas bilen med hastigheten 90 km/h.
+:::
 :::
 
 ## Beräkna derivata med Geogebra
@@ -56,6 +62,11 @@ $x$ är tiden i timmar efter 6.00.<br>
 a) Beräkna $f'(5)$ med symbolhanterande hjälpmedel.<br>b) Tolka
 svaret i a) med ord.**
 
+::: handskrift
+typ: casderivata
+:::
+
+::: textlosning
 **a)** I Geogebras inmatningsfält skriver vi
 
 $$
@@ -75,6 +86,7 @@ Vi tolkar alltså $f'(5) = 3$ som "efter 5 timmar ökar temperaturen med 3
 som att "klockan 11.00 ökar temperaturen med 3 °C/h".
 
 **Svar:** Efter 5 timmar (klockan 11.00) ökar temperaturen med 3 °C/h.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -48,6 +48,11 @@ vilken hastighet växer granplantan efter 2 år?**
 Peka eller tryck på tangenten så visas de avlästa punkternas koordinater.
 :::
 
+::: handskrift
+typ: tangentlutning
+:::
+
+::: textlosning
 Vi ska ta reda på en förändringshastighet vid en tidpunkt. Vi slår en
 tangent i punkten på kurvan där $x = 2$ och beräknar dess lutning.
 
@@ -59,6 +64,7 @@ k = \frac{y_2 - y_1}{x_2 - x_1} = \frac{1{,}4 - 0{,}7}{2 - 0} = \frac{0{,}7}{2} 
 $$
 
 **Svar:** Efter 2 år växer granplantan med $0{,}35$ dm per år.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -48,6 +48,11 @@ nödvändigt.
 Bestäm funktionens största och minsta värde i intervallet och skissa sedan
 grafen utan digitala hjälpmedel.**
 
+::: handskrift
+typ: storstaminsta
+:::
+
+::: textlosning
 Vi börjar med att bestämma $y$-koordinaterna i intervallets
 ändpunkter.
 
@@ -144,6 +149,7 @@ Kurvan är växande fram till maximipunkten, avtagande mellan max- och
 minimipunkten, och därefter växande igen fram till högra ändpunkten.*
 
 **Svar:** Se grafen ovan.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

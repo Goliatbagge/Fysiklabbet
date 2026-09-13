@@ -48771,6 +48771,751 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: växande och avtagande (ma3c-4.1 ex 1) ------
+   * Uppförsbacke betyder växande, nedförsbacke avtagande — läst från
+   * vänster till höger. */
+  function layoutVaxandeavtagande(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 150, oy: 240, ux: 44, uy: 34 });
+
+    G.axlar(-2.4, 4.4, -2.4, 3.2, 'x', 'y');
+    G.kurva(function (v) { return -0.5 * (v + 1) * (v - 3); }, -2.2, 4.2);
+    T.str('f(x)', G.X(3.6), G.Y(-1.4), null, 0.5);
+    T.pause(200);
+    G.punkt(1, 2, BLUE);
+    T.str('(1, 2)', G.X(1) + 10, G.Y(2) - 0.4 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    tanke(G.oy + 2.4 * 34 + 0.4 * F, [
+      [['Läs kurvan från vänster till']],
+      [['höger. Uppförsbacke betyder']],
+      [['växande, nedförsbacke']],
+      [['avtagande.']]
+    ], 1.2);
+    y = G.oy + 2.4 * 34 + 3.4 * F;
+    xe = T.str('a) växande för x<1,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('avtagande för x>1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) har kurvan två vändningar,']],
+      [['så den byter riktning två']],
+      [['gånger.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('b) växande för -1<x<1,', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('avtagande för x<-1 och x>1', padL + 20, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans tecken ur grafen (4.1 ex 2) -----
+   * Derivatans tecken läses direkt ur kurvans lutning. */
+  function layoutDerivatatecken(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 240, ux: 54, uy: 44 });
+
+    G.axlar(-2.4, 2.6, -2.2, 2.2, 'x', 'y');
+    G.kurva(function (v) { return (-v * v * v + 3 * v) / 2; }, -2.1, 2.1);
+    T.str('g(x)', G.X(2.0), G.Y(-1.6), null, 0.5);
+    T.pause(200);
+    G.punkt(-1, -1, BLUE);
+    G.punkt(1, 1, BLUE);
+    T.stepEnd();
+
+    tanke(G.oy + 2.2 * 44, [
+      [['Vid x=2 lutar kurvan nedåt,']],
+      [['alltså är derivatan negativ']],
+      [['där.']]
+    ], 0);
+    y = G.oy + 2.2 * 44 + 3.4 * F;
+    xe = T.str('a) g′(2) är negativ', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Positiv derivata betyder']],
+      [['växande funktion, alltså']],
+      [['uppförsbacken mellan']],
+      [['vändpunkterna.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('b) g′(x)>0 för -1<x<1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatan är noll där']],
+      [['tangenten är vågrät, alltså i']],
+      [['topparna och dalarna.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('c) g′(x)=0 för x=-1 och x=1', padL, y, null, 0.88);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: läs f ur grafen till f′ (4.1 ex 3) ---------
+   * Kurvan i figuren är DERIVATAN. Där den ligger över x-axeln växer
+   * själva funktionen. */
+  function layoutDerivatansgraf(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
+    var G = mkTrigGraf(T, F, { ox: padL + 120, oy: 230, ux: 38, uy: 26 });
+
+    G.axlar(-2.4, 6.4, -2.6, 3.6, 'x', 'y');
+    G.kurva(function (v) { return -(v + 1) * (v - 5) / 3; }, -2.2, 6.2);
+    T.str('f′(x)', G.X(5.6), G.Y(-1.6), null, 0.5);
+    T.pause(200);
+    G.punkt(-1, 0, BLUE);
+    G.punkt(5, 0, BLUE);
+    T.stepEnd();
+
+    tanke(G.oy + 2.6 * 26, [
+      [['Observera: kurvan i figuren är']],
+      [['DERIVATAN, inte funktionen.']],
+      [['Där den ligger över x-axeln']],
+      [['växer funktionen.']]
+    ], 0);
+    y = G.oy + 2.6 * 26 + 2.6 * F;
+    y = tabell(padL, y, 130, 120, [
+      { lbl: 'x', celler: ['x<-1', '-1<x<5', 'x>5'] },
+      { lbl: 'f′(x)', celler: ['-', '+', '-'] },
+      { lbl: 'f(x)', celler: [{ pil: 'ned' }, { pil: 'upp' },
+                              { pil: 'ned' }] }
+    ]);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xe = T.str('a) växande för -1<x<5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lutningen noll betyder att']],
+      [['derivatan är noll, alltså där']],
+      [['kurvan skär x-axeln.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('b) x=-1 och x=5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: extrempunkter och karaktär (4.2 ex 1) ------
+   * Tre steg: derivatans nollställen, y-koordinaterna och till sist
+   * teckentabellen som avgör karaktären. */
+  function layoutExtrempunkterkarak(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=x^3-6x^2+9x+3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 1: extrempunkterna ligger']],
+      [['där tangenten är vågrät, alltså']],
+      [['där derivatan är noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(x)=3x^2-12x+9', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('3x^2-12x+9=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-12x+9=0',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x^2-4x+3=0', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('x=2±', padL + 20, y);
+    xx = T.rot('2^2-3', xx, y);
+    xx = T.str('=2±', xx, y);
+    T.rot('1', xx, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('=2±1 ⟹ x=1 och x=3', padL + 40, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 2: y-koordinaterna hämtas']],
+      [['ur den ursprungliga']],
+      [['funktionen, inte ur derivatan.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f(1)=1-6+9+3=7', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f(3)=27-54+27+3=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 3: karaktären. Jag provar']],
+      [['derivatans tecken på var sida']],
+      [['om nollställena.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(0)=9>0', padL, y);
+    T.pause(260);
+    T.str('f′(2)=-3<0', padL + 210, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('f′(10)=189>0', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    y = tabell(padL, y, 100, 90, [
+      { lbl: 'x', celler: ['', '1', '', '3', ''] },
+      { lbl: 'f′(x)', celler: ['+', '0', '-', '0', '+'] },
+      { lbl: 'f(x)', celler: [{ pil: 'upp' }, '7', { pil: 'ned' }, '3',
+                              { pil: 'upp' }] }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Plus till minus betyder topp,']],
+      [['minus till plus betyder dal.']]
+    ], 0.6);
+    y += 4.2 * F;
+    xe = T.str('Svar: max (1, 7) och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('min (3, 3)', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: extrempunkt, andragrad (ma3c-4.2 ex 2) -----
+   * För en andragradsfunktion avgör tecknet framför x²-termen
+   * karaktären, så teckentabellen behövs inte. */
+  function layoutExtrempunktandragrad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=3x^2-6x+2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Extrempunkten ligger där']],
+      [['derivatan är noll.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f′(x)=6x-6', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('6x-6=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+6', xx + 0.6 * F, '6x-6=0');
+    xx = T.str('6x=6', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/6', xx + 0.6 * F, '6x=6',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=1', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('f(1)=3-6+2=-1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Här behövs ingen teckentabell:']],
+      [['koefficienten framför x^2 är']],
+      [['positiv, så parabeln är glad']],
+      [['och punkten är ett minimum.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: (1, -1) är en lokal', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('minimipunkt', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: största och minsta värdet (4.3 ex 1) -------
+   * I ett slutet intervall jämförs ändpunkterna med extrempunkterna,
+   * och till sist skissas kurvan ur teckentabellen. */
+  function layoutStorstaminsta(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
+
+    y = 186;
+    T.str('f(x)=x^3-3x,', padL, y);
+    T.str(' -2≤x≤3', padL + 270, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först ändpunkterna: de kan']],
+      [['mycket väl vara det största']],
+      [['eller minsta värdet.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f(-2)=-8+6=-2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f(3)=27-9=18', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sedan extrempunkterna, där']],
+      [['derivatan är noll.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f′(x)=3x^2-3=0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('x^2=1 ⟹ x=±1', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f(-1)=-1+3=2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f(1)=1-3=-2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu jämför jag alla fyra']],
+      [['y-värdena: -2, 18, 2 och -2.']]
+    ]);
+    y += 4.4 * F;
+    xe = T.str('störst: 18 (x=3)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('minst: -2 (x=-2 och x=1)', padL, y, null, 0.92);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['För skissen behöver jag också']],
+      [['karaktären. Teckentabellen ger']],
+      [['den.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(-2)=9>0', padL, y);
+    T.pause(260);
+    T.str('f′(0)=-3<0', padL + 220, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('f′(2)=9>0', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    y = tabell(padL, y, 100, 90, [
+      { lbl: 'x', celler: ['', '-1', '', '1', ''] },
+      { lbl: 'f′(x)', celler: ['+', '0', '-', '0', '+'] },
+      { lbl: 'f(x)', celler: [{ pil: 'upp' }, '2', { pil: 'ned' }, '-2',
+                              { pil: 'upp' }] }
+    ]);
+    T.stepEnd();
+
+    /* ---- skissen ---- */
+    var G = mkTrigGraf(T, F, { ox: padL + 130, oy: y + 7.4 * F,
+                               ux: 46, uy: 8 });
+    G.axlar(-2.6, 3.6, -6, 19, 'x', 'y');
+    G.kurva(function (v) { return v * v * v - 3 * v; }, -2, 3);
+    G.punkt(-1, 2, BLUE);
+    G.punkt(1, -2, BLUE);
+    G.punkt(-2, -2, BLUE);
+    G.punkt(3, 18, BLUE);
+    T.stepEnd();
+
+    y = G.oy + 6 * 8 + 3.0 * F;
+    xe = T.str('Svar: största 18, minsta -2', padL, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: inflexionspunkt (ma3c-4.4 ex 1) -----------
+   * Andraderivatan noll ger inflexionspunkten; positiv andraderivata
+   * betyder konvex kurva. */
+  function layoutInflexionspunkt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('f(x)=x^3-6x^2+7x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I inflexionspunkten byter']],
+      [['kurvan böjningsriktning, och']],
+      [['där är andraderivatan noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(x)=3x^2-12x+7', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′′(x)=6x-12', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('6x-12=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+12', xx + 0.6 * F, '6x-12=0');
+    xx = T.str('6x=12', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/6', xx + 0.6 * F, '6x=12',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=2', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['y-koordinaten hämtas ur den']],
+      [['ursprungliga funktionen.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f(2)=8-24+14=-2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('a) (2, -2)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Konvex betyder att kurvan']],
+      [['böjer uppåt, som en glad mun.']],
+      [['Då är andraderivatan positiv.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('6x-12>0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+12', xx + 0.6 * F, '6x-12>0');
+    xx = T.str('6x>12', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/6', xx + 0.6 * F, '6x>12',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xe = T.str('b) x>2', padL + 20, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: inflexionspunkt ur grafen (4.4 ex 2) ------
+   * Två sätt att hitta den utan att räkna: symmetrin mellan två
+   * extrempunkter, eller derivatans egen extrempunkt. */
+  function layoutInflexionurgraf(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) extrempunkter vid x=-1 och x=1', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En tredjegradskurva är']],
+      [['symmetrisk kring sin']],
+      [['inflexionspunkt. Den ligger']],
+      [['mitt emellan extrempunkterna.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('x=', padL + 20, y);
+    xx = T.fracH('-1+1', '2', xx, y);
+    xe = T.str('=0', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är det DERIVATANS graf']],
+      [['som visas. Andraderivatan är']],
+      [['derivatans lutning, och den är']],
+      [['noll i derivatans extrempunkt.']]
+    ], 1.4);
+    y += 5.6 * F;
+    T.str('b) f′ har extrempunkt vid x=1', padL, y, null, 0.8);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('x=1', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: andraderivatametoden (ma3c-4.5 ex 1) ------
+   * Andraderivatans TECKEN i extrempunkten avgör karaktären, utan
+   * teckentabell. */
+  function layoutAndraderivatametoden(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('f(x)=', padL, y);
+    xx = T.fracH('x^3', '3', xx, y);
+    T.str('-9x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 1: derivatans nollställen']],
+      [['ger extrempunkternas']],
+      [['x-koordinater.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('3x^2', '3', xx, y);
+    T.str('-9=x^2-9', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('x^2-9=0 ⟹ x=±3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 2: y-koordinaterna ur den']],
+      [['ursprungliga funktionen.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f(-3)=', padL, y);
+    xx = T.fracH('-27', '3', xx, y);
+    T.str('+27=18', xx, y);
+    T.stepEnd();
+
+    y += 4.6 * F;
+    xx = T.str('f(3)=', padL, y);
+    xx = T.fracH('27', '3', xx, y);
+    T.str('-27=-18', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Steg 3: karaktären. I stället']],
+      [['för teckentabell räcker det']],
+      [['att sätta in x-värdena i']],
+      [['ANDRAderivatan.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′′(x)=2x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′′(-3)=-6<0 ⟹ max', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('f′′(3)=6>0 ⟹ min', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Negativ andraderivata betyder']],
+      [['att kurvan böjer nedåt, och då']],
+      [['är punkten en topp.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: max (-3, 18) och', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('min (3, -18)', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: maximal intäkt (ma3c-4.6 ex 1) -------------
+   * Optimering i ett verkligt sammanhang: derivatan noll ger priset,
+   * och den faktoriserade formen förklarar modellen. */
+  function layoutMaximalintakt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('I(x)=300x-2x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den största intäkten ligger i']],
+      [['kurvans topp, alltså där']],
+      [['derivatan är noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('I′(x)=300-4x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('300-4x=0', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+4x', xx + 0.6 * F, '300-4x=0');
+    xx = T.str('300=4x', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/4', xx + 0.6 * F, '300=4x',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('x=75', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x=75 säger vilket biljettpris']],
+      [['som är bäst, inte hur stor']],
+      [['intäkten blir. Den får jag ur']],
+      [['funktionen.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('I(75)=300·75-2·75^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=22 500-11 250=11 250', padL + 40, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Är det säkert ett maximum?']],
+      [['Andraderivatan är negativ, så']],
+      [['kurvan böjer nedåt: ja.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('I′′(x)=-4<0 ⟹ max', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('a) 75 kr ger 11 250 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) faktoriserar jag formeln.']],
+      [['Intäkt är pris gånger antal']],
+      [['sålda biljetter, så faktorerna']],
+      [['måste betyda just det.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('I(x)=x(300-2x)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('b) 300 biljetter vid gratis', padL, y, null, 0.9);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('inträde, 2 färre per krona', padL + 40, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: optimera en cylinder (ma3c-4.7 ex 1) -------
+   * Volymen beror av två variabler; villkoret gör om den till en enda,
+   * och då går toppen att läsa av i grafen. */
+  function layoutCylindervolym(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('h+2r=50', padL, y);
+    T.pause(260);
+    T.str('V=πr^2h', padL + 220, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Volymen beror av två']],
+      [['variabler. För att kunna']],
+      [['optimera måste den uttryckas']],
+      [['i en enda.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('h=50-2r', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Villkoret ger h uttryckt i r,']],
+      [['och det sätter jag in i']],
+      [['volymformeln.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('V=πr^2(50-2r)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('V(r)=50πr^2-2πr^3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är det en vanlig']],
+      [['tredjegradsfunktion. Dess topp']],
+      [['läser jag av med verktyget']],
+      [['Extrempunkt.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('B=(16,66667; 14 544,41)', padL, y, null, 0.88);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-koordinaten är radien och']],
+      [['y-koordinaten den maximala']],
+      [['volymen i kubikcentimeter.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: r≈16,7 cm', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: med radien 16,7 blir']],
+      [['diametern 33,3 och höjden 16,7,']],
+      [['alltså en ganska bred burk.']]
+    ]);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 4.8 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -49241,7 +49986,18 @@
                    bestamkonstant: layoutBestamkonstant,
                    caskaniner: layoutCaskaniner,
                    minstalutning: layoutMinstalutning,
-                   kattungemodell: layoutKattungemodell };
+                   kattungemodell: layoutKattungemodell,
+                   vaxandeavtagande: layoutVaxandeavtagande,
+                   derivatatecken: layoutDerivatatecken,
+                   derivatansgraf: layoutDerivatansgraf,
+                   extrempunkterkarak: layoutExtrempunkterkarak,
+                   extrempunktandragrad: layoutExtrempunktandragrad,
+                   storstaminsta: layoutStorstaminsta,
+                   inflexionspunkt: layoutInflexionspunkt,
+                   inflexionurgraf: layoutInflexionurgraf,
+                   andraderivatametoden: layoutAndraderivatametoden,
+                   maximalintakt: layoutMaximalintakt,
+                   cylindervolym: layoutCylindervolym };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

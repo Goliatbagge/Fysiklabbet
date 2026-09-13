@@ -34,6 +34,11 @@ formeln $I(x) = 300x - 2x^2$.<br>a) Vilket biljettpris ger maximal intäkt
 och vad blir då intäkten?<br>b) Förklara varför formeln ser ut
 som den gör.**
 
+::: handskrift
+typ: maximalintakt
+:::
+
+::: textlosning
 **a)** Vi börjar med att ta reda på vilket biljettpris $x$ som ger
 maximal intäkt. Vi deriverar den ursprungliga funktionen, sätter
 derivatan lika med 0 och löser ekvationen för att få det biljettpris som
@@ -100,6 +105,7 @@ biljettpriset ökar säljs 2 biljetter färre.
 biljetter. Vid gratis inträde säljs 300 biljetter, och för varje krona
 biljettpriset ökar säljs 2 biljetter färre.
 :::
+:::
 
 ::: exempel "Exempel 2 — Maximal area"
 **Vanja har köpt 60 meter stängsel för att göra en rektangulär hästhage
@@ -111,6 +117,11 @@ den maximala area hagen kan få?**
 <svg viewBox="16 4 252 162" width="368" height="237" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En rektangulär hage mot en mur: murens band överst, hagen under med de två lika sidorna x och den tredje sidan 60 minus 2x."><rect x="24" y="10" width="212" height="16" fill="rgba(31,37,48,0.12)" stroke="#1f2530" stroke-width="1" stroke-dasharray="5 4"/><text x="130" y="22" font-size="12" text-anchor="middle" fill="#1f2530">Mur</text><rect x="44" y="26" width="172" height="100" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="32" y1="30" x2="32" y2="122" stroke="#1f2530" stroke-width="1.2"/><polygon points="32,26 28.8,33 35.2,33" fill="#1f2530"/><polygon points="32,126 28.8,119 35.2,119" fill="#1f2530"/><text x="24" y="80" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><line x1="228" y1="30" x2="228" y2="122" stroke="#1f2530" stroke-width="1.2"/><polygon points="228,26 224.8,33 231.2,33" fill="#1f2530"/><polygon points="228,126 224.8,119 231.2,119" fill="#1f2530"/><text x="236" y="80" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan></text><line x1="48" y1="140" x2="212" y2="140" stroke="#1f2530" stroke-width="1.2"/><polygon points="44,140 51,136.8 51,143.2" fill="#1f2530"/><polygon points="216,140 209,136.8 209,143.2" fill="#1f2530"/><text x="130" y="160" font-size="13" text-anchor="middle" fill="#1f2530">60 − 2<tspan font-style="italic">x</tspan></text><text x="266" y="16" font-size="12" text-anchor="end" fill="#1f2530">(m)</text></svg>
 :::
 
+::: handskrift
+typ: hagederivata
+:::
+
+::: textlosning
 **a)** Vi låter sidorna mot muren vara $x$ meter. Stängslet på den
 tredje sidan kommer då att vara $(60 - 2x)$ meter, eftersom Vanja hade
 60 meter stängsel och $2x$ har gått åt till de övriga två sidorna. Se
@@ -169,6 +180,7 @@ Eftersom $A''(15) = -4 < 0$ (negativ) är extrempunkten en
 Den maximala arean är alltså $450\ \mathrm{m}^2$ när $x = 15$ meter.
 
 **Svar:** Den maximala arean är $450\ \mathrm{m}^2$.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -63,6 +63,11 @@ alternativ till teckentabellen så länge $f''(a) \neq 0$.
 **Bestäm lokala maximi-, minimi- och terrasspunkter till
 $f(x) = \dfrac{x^3}{3} - 9x$.**
 
+::: handskrift
+typ: andraderivatametoden
+:::
+
+::: textlosning
 **1. Derivera funktionen, sätt $f'(x) = 0$ och lös ekvationen** för att få
 extrempunkternas $x$-koordinater.
 
@@ -121,6 +126,7 @@ Så $(3, -18)$ är en minimipunkt.
 
 **Svar:** $(-3, 18)$ är en lokal maximipunkt och $(3, -18)$ är en lokal
 minimipunkt.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

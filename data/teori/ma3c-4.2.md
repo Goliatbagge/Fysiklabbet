@@ -71,6 +71,11 @@ maximipunkt.
 ::: exempel "Exempel 1 — Bestäm lokala extrempunkter och deras karaktär"
 **Bestäm de lokala extrempunkterna och deras karaktär till funktionen**
 
+::: handskrift
+typ: extrempunkterkarak
+:::
+
+::: textlosning
 $$
 f(x) = x^3 - 6x^2 + 9x + 3
 $$
@@ -143,10 +148,16 @@ visar att $(3, 3)$ är en lokal minimipunkt.
 **Svar:** $(1, 7)$ är en lokal maximipunkt och $(3, 3)$ är en lokal
 minimipunkt.
 :::
+:::
 
 ::: exempel "Exempel 2 — Extrempunkt till en andragradsfunktion"
 **Bestäm extrempunkten och dess karaktär till funktionen**
 
+::: handskrift
+typ: extrempunktandragrad
+:::
+
+::: textlosning
 $$
 f(x) = 3x^2 - 6x + 2
 $$
@@ -177,6 +188,7 @@ Koefficienten framför $x^2$ är 3, som är positiv, vilket ger en "glad"
 kurva och därmed en minimipunkt.
 
 **Svar:** $(1, -1)$ är en lokal minimipunkt.
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

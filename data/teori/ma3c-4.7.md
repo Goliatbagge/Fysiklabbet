@@ -33,6 +33,11 @@ får ett avläst, avrundat värde — inte ett exakt uttryck.
 50 cm. Vilken radie ska cylindern ha för att den ska få så stor volym som
 möjligt?**
 
+::: handskrift
+typ: cylindervolym
+:::
+
+::: textlosning
 Eftersom volymen ska optimeras ställer vi upp formeln för volymen hos en
 cylinder.
 
@@ -92,6 +97,7 @@ negativ. Radien $r \approx 16{,}7$ cm ligger inom detta intervall, så
 svaret är rimligt.
 
 **Svar:** $r \approx 16{,}7$ cm
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

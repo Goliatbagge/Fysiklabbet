@@ -92,6 +92,11 @@ I en punkt där
 a) Bestäm inflexionspunktens koordinater.<br>b) I vilket
 intervall är funktionen konvex?**
 
+::: handskrift
+typ: inflexionspunkt
+:::
+
+::: textlosning
 **a)** I inflexionspunkten är andraderivatan lika med noll. Vi tar fram
 andraderivatan genom att derivera funktionen två gånger, sätter den lika
 med noll och löser sedan ekvationen för att få fram inflexionspunktens
@@ -142,6 +147,7 @@ $$
 
 **Svar:** $x > 2$
 :::
+:::
 
 ::: exempel "Exempel 2 — Inflexionspunkt från grafen till $f(x)$ eller $f'(x)$"
 **Ange $x$-koordinaten för inflexionspunkten till funktionen $f(x)$.<br>
@@ -149,6 +155,11 @@ a) Grafen till $y = f(x)$ har extrempunkter där $x = -1$ och
 $x = 1$.<br>b) Grafen till $y = f'(x)$ har en extrempunkt
 (minimum) där $x = 1$.**
 
+::: handskrift
+typ: inflexionurgraf
+:::
+
+::: textlosning
 **a)** Inflexionspunkten för funktionen $f(x)$ ges av när grafen till
 $f(x)$ växlar mellan att vara konvex och konkav (i "mungipan"). På grund
 av symmetrin ligger den alltid mitt emellan två extrempunkter.
@@ -166,6 +177,7 @@ egen extrempunkt.
 Grafen till $f'(x)$ har en extrempunkt (minimum) där $x = 1$.
 
 **Svar:** $x = 1$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

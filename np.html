@@ -231,8 +231,41 @@
             column-gap: 22px;
             align-items: start;
         }
-        .np-fraga-fast > .np-kortlabel,
-        .np-pres .np-pres-fraga-fast .np-fraga > .np-kortlabel { grid-area: label; }
+        .np-fraga-fast > .np-fraga-huvud,
+        .np-pres .np-pres-fraga-fast .np-fraga > .np-fraga-huvud { grid-area: label; }
+        /* Huvudraden: etiketten + knappen Dölj/Visa. Hopfällt kort visar
+           bara huvudraden och står kvar nålat som en smal remsa. */
+        .np-fraga-huvud { margin-bottom: 10px; }
+        .np-fraga-huvud .np-kortlabel { margin-bottom: 0; }
+        /* Knappen ligger i kortets övre högra hörn, utanför flödet, så att
+           huvudraden inte blir högre än etiketten — annars växer kortet
+           ~14 px och tippar över takhöjden på en 730 px-skärm. */
+        .np-fraga-fast,
+        .np-pres .np-pres-fraga-fast .np-fraga { position: relative; }
+        .np-fraga-fast { position: sticky; }
+        /* body.laborans button (styles-laborans.css) och presentationens
+           uppskalning vinner annars över klassen — därav body.laborans här */
+        body.laborans .np-fraga-knapp,
+        body.laborans .np-pres .np-fraga-knapp {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            border: 1.5px solid var(--lab-line-strong);
+            background: var(--lab-bg-panel);
+            color: var(--lab-ink);
+            border-radius: 7px;
+            padding: 2px 10px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        body.laborans .np-fraga-knapp:hover { background: var(--lab-bg); }
+        .np-fraga-dold > .np-md,
+        .np-fraga-dold > .np-figur { display: none; }
+        .np-fraga-dold .np-fraga-huvud { margin-bottom: 0; }
+        .np-fraga-dold { padding-top: 12px; padding-bottom: 12px; }
         .np-fraga-fast > .np-md,
         .np-pres .np-pres-fraga-fast .np-fraga > .np-md { grid-area: text; }
         .np-fraga-fast > .np-figur,
@@ -477,6 +510,15 @@
         .np-md .katex-display { margin: 12px 0 max(2px, calc(14px - var(--katex-luft-botten)));
             overflow-x: auto; overflow-y: hidden;
             padding: 2px 0 var(--katex-luft-botten); }
+        /* En displayformel bryts ALDRIG mitt itu av webbläsaren.
+           styles-laborans.css sätter white-space: normal på .katex-display
+           .katex, och på en telefon radbröts då "∠DAB = α, ∠CAB = 2α …" med
+           ett ensamt "2α" i vänsterkanten (uppgift 11 i Ma 2c VT2022,
+           påpekat 2026-09-13). Här hålls raden ihop, och fitNpDisplays()
+           bryter i stället formeln vid naturliga skiljetecken (\qquad,
+           ⟺) och skalar ned den som sista utväg — samma tanke som
+           fitMathDisplays() i katalog.html. */
+        .np-md .katex-display .katex { white-space: nowrap; }
         .np-md ul, .np-md ol { margin: 0 0 10px; padding-left: 22px; }
         .np-md li { margin-bottom: 4px; line-height: 1.55; }
 
@@ -829,6 +871,185 @@
             );
         }
 
+        // ── Breda displayformler på smal skärm ─────────────────────────
+        // Efter KaTeX kontrolleras varje .katex-display: spiller den över
+        // sin ruta bryts original-LaTeX:n (ur KaTeX:s <annotation>) vid
+        // naturliga skiljetecken på toppnivå — \qquad mellan deluppgifter
+        // eller ⟺/⟹ mellan led — och renderas om som en aligned-miljö med
+        // en rad per del. Räcker inte det (eller finns inga skiljetecken)
+        // skalas formeln ned så att den ryms; rutans höjd sätts då på
+        // INNEHÅLLETS höjd så att nämnare inte kapas (se "Block-formler
+        // får aldrig klippas av sin egen ruta" i CLAUDE.md). Att bryta vid
+        // "=" som katalog.html gör passar inte provens formler: de har
+        // ofta par ("∠DAB = α, ∠CAB = 2α") där ett brutet likhetstecken
+        // ger obegripliga rader.
+        // Två nivåer: först bara \qquad och pilar (deluppgifter, led);
+        // räcker inte det bryts även vid \quad (par som "∠DAB = α, ∠CAB").
+        const NP_PILAR = '\\\\(?:Longleftrightarrow|Leftrightarrow|Longrightarrow|Rightarrow|iff|implies)\\b';
+        const NP_SKILJE_1 = new RegExp('\\\\qquad(?:\\s*\\\\(?:qquad|quad))*|' + NP_PILAR, 'g');
+        const NP_SKILJE_2 = new RegExp('\\\\(?:qquad|quad)(?:\\s*\\\\(?:qquad|quad))*|' + NP_PILAR, 'g');
+        function npBrytpunkter(latex, niva) {
+            const NP_SKILJE = niva === 2 ? NP_SKILJE_2 : NP_SKILJE_1;
+            // bara på toppnivå: inte inuti {…}, \left…\right eller en miljö
+            const ut = [];
+            let depth = 0, fence = 0, env = 0, i = 0;
+            while (i < latex.length) {
+                const ch = latex[i];
+                if (ch === '\\') {
+                    const m = /^[a-zA-Z]+/.exec(latex.slice(i + 1));
+                    if (m) {
+                        const namn = m[0];
+                        if (namn === 'left') fence++;
+                        else if (namn === 'right') fence = Math.max(0, fence - 1);
+                        else if (namn === 'begin') env++;
+                        else if (namn === 'end') env = Math.max(0, env - 1);
+                        else if (depth === 0 && fence === 0 && env === 0) {
+                            NP_SKILJE.lastIndex = i;
+                            const sm = NP_SKILJE.exec(latex);
+                            if (sm && sm.index === i) {
+                                const pil = !/^\\q?quad/.test(sm[0]);
+                                // pilen följer med till NÄSTA rad; \qquad tas bort
+                                ut.push({ fran: i, till: i + sm[0].length, behall: pil });
+                                i += sm[0].length;
+                                continue;
+                            }
+                        }
+                        i += namn.length + 1;
+                    } else {
+                        i += 2;
+                    }
+                    continue;
+                }
+                if (ch === '{') depth++;
+                else if (ch === '}') depth--;
+                i++;
+            }
+            return ut;
+        }
+        function npBrytRader(latex, niva) {
+            const bp = npBrytpunkter(latex, niva);
+            if (!bp.length) return null;
+            const rader = [];
+            let prev = 0;
+            for (const b of bp) {
+                const seg = latex.slice(prev, b.fran).trim();
+                if (seg) rader.push(seg);
+                prev = b.behall ? b.fran : b.till;   /* pilen inleder nästa rad */
+            }
+            rader.push(latex.slice(prev).trim());
+            const rena = rader.map(r => r.replace(/^(\\(?:q?quad)\s*)+|(\s*\\(?:q?quad))+$/g, '').trim())
+                .filter(r => r.length);
+            if (rena.length < 2) return null;
+            return '\\begin{aligned}' + rena.map(r => '&' + r).join(' \\\\ ') + '\\end{aligned}';
+        }
+        // Steg 3: en ren kedja "a = b = c" (utan kommatecken på toppnivå)
+        // bryts vid likhetstecknen, med "=" först på varje ny rad — som
+        // fitMathDisplays i katalog.html. Par med kommatecken lämnas, där
+        // blir brutna likhetstecken obegripliga.
+        function npBrytLikhet(latex) {
+            const pos = [];
+            let depth = 0, fence = 0, env = 0, komma = false, i = 0;
+            while (i < latex.length) {
+                const ch = latex[i];
+                if (ch === '\\') {
+                    const m = /^[a-zA-Z]+/.exec(latex.slice(i + 1));
+                    if (m) {
+                        if (m[0] === 'left') fence++;
+                        else if (m[0] === 'right') fence = Math.max(0, fence - 1);
+                        else if (m[0] === 'begin') env++;
+                        else if (m[0] === 'end') env = Math.max(0, env - 1);
+                        i += m[0].length + 1;
+                    } else i += 2;
+                    continue;
+                }
+                if (ch === '{') depth++;
+                else if (ch === '}') depth--;
+                else if (depth === 0 && fence === 0 && env === 0) {
+                    if (ch === '=') pos.push(i);
+                    else if (ch === ',') komma = true;
+                }
+                i++;
+            }
+            if (komma || pos.length < 2) return null;
+            const segs = [];
+            let prev = 0;
+            for (const q of pos) { segs.push(latex.slice(prev, q).trim()); prev = q + 1; }
+            segs.push(latex.slice(prev).trim());
+            const rader = [segs[0] + ' &= ' + segs[1]];
+            for (let k = 2; k < segs.length; k++) rader.push('&= ' + segs[k]);
+            return '\\begin{aligned}' + rader.join(' \\\\ ') + '\\end{aligned}';
+        }
+        // Mindre än så här skalas ingen formel — då är texten oläslig på en
+        // telefon. Formeln behåller i stället full storlek och rullar i
+        // sidled i sin egen ruta (.katex-display har overflow-x: auto).
+        const NP_MINSTA_SKALA = 0.7;
+        function npDispSpiller(disp) {
+            const avail = disp.clientWidth;
+            if (!avail) return false;
+            const inner = disp.querySelector('.katex');
+            const natural = inner
+                ? Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth)
+                : disp.scrollWidth;
+            return natural > avail + 0.5;
+        }
+        function npSkalaNed(disp) {
+            const inner = disp.querySelector('.katex');
+            if (!inner) return;
+            const avail = disp.clientWidth;
+            const natural = Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth);
+            if (!avail || natural <= avail + 0.5) return;
+            const scale = avail / natural;
+            if (scale < NP_MINSTA_SKALA) return;        /* hellre sidoskroll */
+            inner.style.transformOrigin = 'left top';
+            inner.style.transform = 'scale(' + scale + ')';
+            inner.style.display = 'inline-block';
+            // höjden på innehållets höjd (scrollHeight tar med KaTeX
+            // överhäng under baslinjen), + rutans egen padding
+            const cs = getComputedStyle(disp);
+            const padY = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+            const ram = cs.boxSizing === 'border-box' ? padY : 0;
+            const ink = Math.max(inner.offsetHeight, inner.scrollHeight) + 1;
+            disp.style.height = Math.ceil(ink * scale + ram) + 'px';
+            disp.style.textAlign = 'left';
+        }
+        function fitNpDisplays(root) {
+            if (!root || !window.katex) return;
+            root.querySelectorAll('.katex-display').forEach(disp0 => {
+                let disp = disp0;
+                // återställ en tidigare anpassning (bruten formel byts
+                // tillbaka mot originalet så att en bredare skärm får den hel)
+                if (disp.dataset.npOrig) {
+                    const ny = document.createElement('div');
+                    ny.innerHTML = window.katex.renderToString(disp.dataset.npOrig,
+                        { displayMode: true, throwOnError: false });
+                    const orig = ny.firstElementChild;
+                    disp.replaceWith(orig);
+                    disp = orig;
+                }
+                disp.style.height = '';
+                disp.style.textAlign = '';
+                const k = disp.querySelector('.katex');
+                if (k) { k.style.transform = ''; k.style.transformOrigin = ''; k.style.display = ''; }
+                if (!npDispSpiller(disp)) return;
+                const ann = disp.querySelector('annotation[encoding="application/x-tex"]');
+                const latex = ann ? ann.textContent : '';
+                for (const niva of [1, 2, 3]) {
+                    const bruten = !latex ? null
+                        : niva === 3 ? npBrytLikhet(latex) : npBrytRader(latex, niva);
+                    if (!bruten) continue;
+                    const ny = document.createElement('div');
+                    ny.innerHTML = window.katex.renderToString(bruten,
+                        { displayMode: true, throwOnError: false });
+                    const el = ny.firstElementChild;
+                    el.dataset.npOrig = latex;
+                    disp.replaceWith(el);
+                    disp = el;
+                    if (!npDispSpiller(disp)) break;
+                }
+                if (npDispSpiller(disp)) npSkalaNed(disp);
+            });
+        }
+
         function MdBlock({ source, className }) {
             const ref = useRef(null);
             const html = useMemo(() => {
@@ -845,6 +1066,16 @@
                     ],
                     throwOnError: false,
                 });
+                const el = ref.current;
+                fitNpDisplays(el);
+                // typsnitten kan ändra bredden strax efter första ritningen
+                let levande = true;
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(() => { if (levande) fitNpDisplays(el); });
+                }
+                const omRit = () => fitNpDisplays(el);
+                window.addEventListener('resize', omRit);
+                return () => { levande = false; window.removeEventListener('resize', omRit); };
             }, [html]);
             if (!html) return null;
             return <div className={'np-md' + (className ? ' ' + className : '')} ref={ref}
@@ -1104,6 +1335,28 @@
         // .np-fraga-fast). Samma tal används av verify-uppgiftsruta.js.
         const NP_FAST_TAK = 0.38;   // stegvyn (.np-fraga-fast)
         const NP_PRES_TAK = 0.34;   // presentationsläget (.np-pres-fraga-fast)
+        // Det fastnålade uppgiftskortet kan fällas ihop (knappen "Dölj") när
+        // det är i vägen för lösningen (önskemål 2026-09-13). Valet minns
+        // mellan uppgifter och besök, som lösningsvyn.
+        const DOLD_KEY = 'npFragaDold';
+        function lasDold() {
+            try { return localStorage.getItem(DOLD_KEY) === '1'; } catch (e) { return false; }
+        }
+        function skrivDold(v) {
+            try { localStorage.setItem(DOLD_KEY, v ? '1' : '0'); } catch (e) {}
+        }
+        function FragaHuvud({ dold, onToggle }) {
+            return (
+                <div className="np-fraga-huvud">
+                    <span className="np-kortlabel">Uppgift</span>
+                    <button type="button" className="np-fraga-knapp"
+                        onClick={e => { e.stopPropagation(); onToggle(); }}
+                        title={dold ? 'Visa uppgiftstexten igen' : 'Fäll ihop uppgiftstexten så att lösningen får plats'}>
+                        {dold ? 'Visa' : 'Dölj'}
+                    </button>
+                </div>
+            );
+        }
         // Mät ett kort och tala om ifall nålen ska släppas. Mäts igen när
         // teckensnitten laddats (KaTeX byter typsnitt efter första ritningen)
         // och vid varje fönsterändring.
@@ -1152,8 +1405,10 @@
             const [chrome, setChrome] = useState(true);
             // Nålen på uppgiftskortet släpps när kortet inte ryms (NP_PRES_TAK)
             const [fragaLos, setFragaLos] = useState(false);
+            const [fragaDold, setFragaDold] = useState(lasDold);
+            const vaxlaDold = () => { const v = !fragaDold; setFragaDold(v); skrivDold(v); };
             useEffect(() => nalMatare(() => stageRefs.current[1], NP_PRES_TAK, setFragaLos),
-                [uppgift.nr]);
+                [uppgift.nr, fragaDold]);
             const totalRef = useRef(total);
             totalRef.current = total;
 
@@ -1300,8 +1555,8 @@
                         <div className="lab-article-body lab-pres-body np-pres-body">
                             <div className={cls(1) + ' np-pres-fraga-fast' + (fragaLos ? ' np-fraga-los' : '')}
                                 ref={el => { stageRefs.current[1] = el; }}>
-                                <div className="np-fraga">
-                                    <span className="np-kortlabel">Uppgift</span>
+                                <div className={'np-fraga' + (fragaDold ? ' np-fraga-dold' : '')}>
+                                    <FragaHuvud dold={fragaDold} onToggle={vaxlaDold} />
                                     <MdBlock source={uppgift.fraga} />
                                     <Figur provId={prov.id} figurKey={uppgift.figur} />
                                 </div>
@@ -1418,8 +1673,10 @@
             const prevVisade = useRef(LOS_DIREKT ? 999 : 0);
             // Nålen på uppgiftskortet släpps när kortet inte ryms (NP_FAST_TAK)
             const [fragaLos, setFragaLos] = useState(false);
+            const [fragaDold, setFragaDold] = useState(lasDold);
+            const vaxlaDold = () => { const v = !fragaDold; setFragaDold(v); skrivDold(v); };
             useEffect(() => nalMatare(() => fragaEl.current, NP_FAST_TAK, setFragaLos),
-                [uppgift.nr]);
+                [uppgift.nr, fragaDold]);
             useEffect(() => {
                 setVisadeSteg(LOS_DIREKT ? 999 : 0);
                 prevVisade.current = LOS_DIREKT ? 999 : 0;
@@ -1490,8 +1747,9 @@
                         </div>
                     )}
 
-                    <div className={'np-fraga np-fraga-fast' + (fragaLos ? ' np-fraga-los' : '')} ref={fragaEl}>
-                        <span className="np-kortlabel">Uppgift</span>
+                    <div className={'np-fraga np-fraga-fast' + (fragaLos ? ' np-fraga-los' : '')
+                        + (fragaDold ? ' np-fraga-dold' : '')} ref={fragaEl}>
+                        <FragaHuvud dold={fragaDold} onToggle={vaxlaDold} />
                         <MdBlock source={uppgift.fraga} />
                         <Figur provId={prov.id} figurKey={uppgift.figur} />
                     </div>

@@ -970,6 +970,28 @@ Regeln, som gäller ALLA fastnålade rutor, även nya:
    om vid `resize` och när teckensnitten laddats.
 4. **Skrollcentreringen räknar bara med en nålad ruta.** `stickyH`/`sh`
    i `np.html` och `ph` i `followPen()` ska vara 0 när nålen är släppt.
+5. **Rutan går att fälla ihop.** Knappen Dölj/Visa (`FragaHuvud` i
+   `np.html`, `.hk-upg-btn` i `handskrift.js`) fäller ihop uppgiftstexten
+   till en smal remsa när den är i vägen för lösningen (önskemål
+   2026-09-13); valet minns i `localStorage` (`npFragaDold`) mellan
+   uppgifter och besök. Knappen ligger absolut i rutans övre högra hörn,
+   UTANFÖR flödet: i en huvudrad gjorde den kortet 14 px högre och
+   tippade det över takhöjden på en 730 px-skärm.
+
+**Breda displayformler i proven bryts, de radbryts aldrig mitt itu.**
+`styles-laborans.css` sätter `white-space: normal` i `.katex-display`, och
+på en telefon delade webbläsaren då `∠DAB = α, ∠CAB = 2α …` mitt i formeln
+med ett ensamt `2α` i vänsterkanten (påpekat 2026-09-13). `np.html` håller
+därför raden ihop (`.np-md .katex-display .katex { white-space: nowrap }`)
+och låter `fitNpDisplays()` anpassa formler som inte ryms, i tre steg:
+först bryts de vid `\qquad` och pilar (⟺, ⟹) på toppnivå, sedan även vid
+`\quad`, sedan bryts rena kedjor `a = b = c` vid likhetstecknen (bara om
+formeln saknar kommatecken på toppnivå, annars blir raderna obegripliga).
+Räcker inte det skalas formeln ned, men aldrig under `NP_MINSTA_SKALA`
+(70 %): då behåller den full storlek och rullar i sidled i sin egen ruta.
+Höjden sätts på innehållets höjd så att nämnare inte kapas (se "Block-
+formler får aldrig klippas av sin egen ruta"). Körs efter KaTeX i
+`MdBlock`, när teckensnitten laddats och vid `resize`.
 
 `node .claude/verify-uppgiftsruta.js` mäter alla tre rutorna för varje
 provuppgift med figur, på 1290×730 (MOBIL=1 lägger till 390×844), och ger

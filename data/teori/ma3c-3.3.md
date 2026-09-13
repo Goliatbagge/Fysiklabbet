@@ -112,6 +112,11 @@ derivera termvis.
 ::: exempel "Exempel 1 — Derivera potensuttryck"
 **Derivera**
 
+::: handskrift
+typ: derivpotenser
+:::
+
+::: textlosning
 $$
 \text{a)}\ f(x) = \frac{3}{x} \qquad
 \text{b)}\ f(x) = \frac{1}{5x} \qquad
@@ -218,6 +223,7 @@ f'(x) = -\frac{1}{2} \cdot 8x^{-3/2} = -4x^{-3/2} = -\frac{4}{x^{3/2}} = -\frac{
 $$
 
 **Svar:** $f'(x) = -4x^{-3/2}$ eller $f'(x) = -\dfrac{4}{x\sqrt{x}}$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

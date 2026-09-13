@@ -42,6 +42,11 @@ $N(t) = 30 \cdot 1{,}84^t$ där $t$ är tiden räknat i veckor.<br>a)
 Beräkna tillväxthastigheten efter 4 veckor.<br>b) Efter hur lång
 tid är tillväxthastigheten 100 kaniner/vecka?**
 
+::: handskrift
+typ: caskaniner
+:::
+
+::: textlosning
 **a)** Tillväxthastigheten efter 4 veckor motsvaras av $N'(4)$. Vi
 definierar funktionen genom att skriva in $N(t) = 30 \cdot 1{,}84^t$ i
 Geogebras inmatningsfält. Därefter skriver vi $N'(4)$ på raden under och
@@ -67,11 +72,17 @@ vilket avrundas till $t \approx 2{,}8$.
 
 **Svar:** Efter cirka 2,8 veckor.
 :::
+:::
 
 ::: exempel "Exempel 2 — Minsta lutning hos en funktion"
 **För vilket värde på $x$ har funktionen $f(x) = x^3 - 3x^2 - 4x$ sin
 minsta lutning?**
 
+::: handskrift
+typ: minstalutning
+:::
+
+::: textlosning
 Kom ihåg att en grafs lutning är detsamma som derivatan till
 funktionen. Vi ska alltså bestämma när derivatan $f'(x)$ är som minst.
 
@@ -92,6 +103,7 @@ funktionen $f(x)$ har sin minsta lutning.
 
 **Svar:** $x = 1$
 :::
+:::
 
 ## Ställa upp exponentialmodeller med basen e
 
@@ -100,6 +112,11 @@ funktionen $f(x)$ har sin minsta lutning.
 den första månaden. Ställ upp en exponentialfunktion med basen $e$ för
 kattungens vikt $V$ i gram som funktion av tiden $t$ dagar.**
 
+::: handskrift
+typ: kattungemodell
+:::
+
+::: textlosning
 Vi har ett exponentiellt samband, som vi kan skriva på formen
 $y = C \cdot a^x$, där $C$ är startvärdet (100 gram) och $a$ är
 förändringsfaktorn (1,05, eftersom vikten ökar med 5 % per dag). Detta
@@ -151,6 +168,7 @@ V(t) = 100 \cdot e^{0{,}04879t}
 $$
 
 **Svar:** $V(t) = 100 \cdot e^{0{,}04879t}$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

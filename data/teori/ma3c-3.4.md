@@ -142,6 +142,11 @@ där konstanten $e \approx 2{,}72$.
 ::: exempel "Exempel 1 — Derivera exponentialfunktioner"
 **Derivera<br>a)&nbsp;$f(x) = e^x$&emsp;&emsp;b)&nbsp;$f(x) = 3e^x$&emsp;&emsp;c)&nbsp;$f(x) = e - e^x$**
 
+::: handskrift
+typ: derivexp
+:::
+
+::: textlosning
 **a)** Funktionen är sin egen derivata, så
 
 $$
@@ -166,10 +171,16 @@ $$
 
 **Svar:** a) $f'(x) = e^x$&emsp;&emsp;b) $f'(x) = 3e^x$&emsp;&emsp;c) $f'(x) = -e^x$
 :::
+:::
 
 ::: exempel "Exempel 2 — Bestäm derivatans värde"
 **Funktionen är $f(x) = \dfrac{5x^3}{3} + 3e^x$. Bestäm<br>a)&nbsp;$f'(0)$&emsp;&emsp;b)&nbsp;$f'(2)$**
 
+::: handskrift
+typ: derivexpvarde
+:::
+
+::: textlosning
 Avrunda och svara med en decimal.
 
 **a)** Vi deriverar $f(x) = \dfrac{5x^3}{3} + 3e^x$ termvis. Den
@@ -202,6 +213,7 @@ f'(2) = 42{,}167\ldots \approx 42{,}2
 $$
 
 **Svar:** $f'(2) \approx 42{,}2$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

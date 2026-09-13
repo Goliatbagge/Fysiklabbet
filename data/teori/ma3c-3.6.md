@@ -22,6 +22,11 @@ till en kurva i en given punkt.
 $N(t) = 42\,000 \cdot 0{,}98^t$, där $t$ är tiden i år från 1 januari 2020.
 Beräkna tillväxthastigheten den 1 januari 2025.**
 
+::: handskrift
+typ: tillvaxtfolk
+:::
+
+::: textlosning
 Tillväxthastigheten av folkmängden vid en tidpunkt motsvaras av derivatan av
 folkmängden. Tiden från 1 januari 2020 till 1 januari 2025 är 5 år, det vill säga
 $t = 5$. Det är alltså $N'(5)$ som söks. Vi deriverar först och sätter sedan
@@ -45,6 +50,7 @@ invånare/år.
 
 **Svar:** Den 1 januari 2025 minskar folkmängden med cirka 770 invånare/år.
 :::
+:::
 
 ## Bestämma en konstant med hjälp av derivata
 
@@ -60,6 +66,11 @@ konstant.<br>
 a) Efter 20 minuter är maten 70 °C. Bestäm konstanten $k$.<br>b)
 Bestäm och tolka $y'(15)$.**
 
+::: handskrift
+typ: bestamkonstant
+:::
+
+::: textlosning
 **a)** Att maten efter 20 minuter är 70 °C betyder att när $x = 20$ är
 $y = 70$. Insättning av $x = 20$ och $y = 70$ i funktionen
 $y = e^{kx} - 19$ ger
@@ -145,6 +156,7 @@ för derivatan är "enheten för $y$" per "enheten för $x$", alltså
 **Svar:** Efter 15 minuter ökar temperaturen på maträtten med 6,5
 °C/minut.
 :::
+:::
 
 ## Tangentens ekvation
 
@@ -179,6 +191,11 @@ $y = x^2 + 4x - 7$.**
 <svg viewBox="4 -4 214 266" width="313" height="389" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="Grafen till y lika med x i kvadrat plus 4x minus 7 med tangenten i punkten 3 komma 14. Tangentens ekvation är y lika med 10x minus 16."><line x1="14" y1="180" x2="186" y2="180" stroke="#1f2530" stroke-width="1.6"/><polygon points="194,180 184,175.5 184,184.5" fill="#1f2530"/><line x1="100" y1="254" x2="100" y2="12" stroke="#1f2530" stroke-width="1.6"/><polygon points="100,4 95.5,14 104.5,14" fill="#1f2530"/><text x="192" y="198" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="109" y="14" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><path d="M 28,222 Q 100,318 172,30" fill="none" stroke="#2563c9" stroke-width="2"/><line x1="114.4" y1="228" x2="172" y2="36" stroke="#4a7d3a" stroke-width="2"/><line x1="154" y1="180" x2="154" y2="96" stroke="#1f2530" stroke-width="1.4"/><line x1="100" y1="96" x2="154" y2="96" stroke="#1f2530" stroke-width="1.4"/><circle cx="154" cy="96" r="3.5" fill="#c8324a"/><text x="163" y="99" font-size="12" text-anchor="start" fill="#c8324a">(3, 14)</text><text x="208" y="16" font-size="12" text-anchor="end" fill="#4a7d3a"><tspan font-style="italic">y</tspan> = 10<tspan font-style="italic">x</tspan> − 16</text></svg>
 :::
 
+::: handskrift
+typ: tangentekv
+:::
+
+::: textlosning
 En tangent är en rät linje och kan beskrivas med räta linjens ekvation
 $y = kx + m$. Vi ska bestämma $k$ och $m$.
 
@@ -242,6 +259,7 @@ y = 10x - 16
 $$
 
 **Svar:** $y = 10x - 16$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

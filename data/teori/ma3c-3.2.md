@@ -49,6 +49,11 @@ Så $f(x) = x^2 + 4x - 7$ har derivatan $f'(x) = 2x + 4$.
 ::: exempel "Exempel 1 — Derivera term för term"
 **Derivera<br>a)&nbsp;$f(x) = 3x^7 - 5x^2 + 8$&emsp;&emsp;b)&nbsp;$f(x) = \dfrac{4x^3}{3} - \dfrac{x}{5}$&emsp;&emsp;c)&nbsp;$f(x) = (2x - 3)^2$**
 
+::: handskrift
+typ: derivtermvis
+:::
+
+::: textlosning
 **a)** Vi deriverar term för term och får
 
 $$
@@ -81,10 +86,16 @@ $$
 
 **Svar:** $f'(x) = 8x - 12$
 :::
+:::
 
 ::: exempel "Exempel 2 — Derivatans värde i en punkt"
 **Låt $f(x) = 3x^2 - x$. Bestäm $f'(-2)$.**
 
+::: handskrift
+typ: derivvardeneg
+:::
+
+::: textlosning
 Vi börjar med att derivera funktionen.
 
 $$
@@ -98,6 +109,7 @@ f'(-2) = 6 \cdot (-2) - 1 = -12 - 1 = -13
 $$
 
 **Svar:** $-13$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

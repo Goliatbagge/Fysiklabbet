@@ -64,6 +64,11 @@ $f'(x) = 4e^{4x}$ och att $f(x) = e^{5x}$ har derivatan $f'(x) = 5e^{5x}$.
 **Derivera<br>
 a)&nbsp;$f(x) = 3e^x$&emsp;&emsp;b)&nbsp;$f(x) = e^{4x}$&emsp;&emsp;c)&nbsp;$f(x) = 2e^{5x}$&emsp;&emsp;d)&nbsp;$f(x) = 12e^{x/3}$**
 
+::: handskrift
+typ: derivexpbas
+:::
+
+::: textlosning
 **a)** När vi deriverar en exponentialfunktion med basen $e$ **utan**
 koefficient i exponenten blir derivatan densamma som funktionen.
 
@@ -92,6 +97,7 @@ f'(x) = \frac{12e^{x/3}}{3} = 4e^{x/3}
 $$
 
 **Svar:** $f'(x) = 4e^{x/3}$
+:::
 :::
 
 Nu har vi deriveringsregler för alla exponentialfunktioner med basen $e$.
@@ -197,6 +203,11 @@ fungerar.
 **Derivera<br>
 a)&nbsp;$f(x) = 12^x$&emsp;&emsp;b)&nbsp;$f(x) = 3 \cdot 7^x$&emsp;&emsp;c)&nbsp;$f(x) = 4^{3x}$&emsp;&emsp;d)&nbsp;$f(x) = 5 \cdot 8^{6x}$**
 
+::: handskrift
+typ: derivannanbas
+:::
+
+::: textlosning
 **a)** Vi har en exponentialfunktion, så vi skriver först av funktionen.
 Eftersom vi har en annan bas än $e$ multiplicerar vi med $\ln$ för basen,
 alltså med $\ln 12$.
@@ -223,6 +234,7 @@ f'(x) = 5 \cdot 6 \cdot 8^{6x} \cdot \ln 8 = 30 \cdot 8^{6x} \cdot \ln 8
 $$
 
 **Svar:** $f'(x) = 30 \cdot 8^{6x} \cdot \ln 8$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

@@ -157,6 +157,11 @@ $$
 ::: exempel "Exempel 1 — Derivera med deriveringsreglerna"
 **Derivera<br>a)&nbsp;$f(x) = x^7$&emsp;&emsp;b)&nbsp;$y = 3x^5$&emsp;&emsp;c)&nbsp;$f(x) = 27$&emsp;&emsp;d)&nbsp;$g(x) = 12x$&emsp;&emsp;e)&nbsp;$f(x) = \dfrac{x^4}{5}$<br>f)&nbsp;$f(x) = \dfrac{9\pi^{e}\left(4 + \ln 90\right)^{\sqrt{2}}}{5\ln 2 - \sqrt{e} + 8\pi}$**
 
+::: handskrift
+typ: derivregler
+:::
+
+::: textlosning
 **a)** Vi multiplicerar ned exponenten 7 och minskar den sedan med 1.
 
 $$
@@ -211,10 +216,16 @@ $$
 
 **Svar:** $f'(x) = 0$
 :::
+:::
 
 ::: exempel "Exempel 2 — Derivatans värde i en punkt"
 **Bestäm $f'(3)$ för $f(x) = 4x^2$.**
 
+::: handskrift
+typ: derivvarde
+:::
+
+::: textlosning
 Vi bestämmer först $f'(x)$ med deriveringsreglerna och sätter sedan in
 $x = 3$ i derivatan.
 
@@ -227,6 +238,7 @@ f'(3) = 8 \cdot 3 = 24
 $$
 
 **Svar:** $f'(3) = 24$
+:::
 :::
 
 ::: sammanfattning "Sammanfattning"

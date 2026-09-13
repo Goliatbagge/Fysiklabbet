@@ -47891,6 +47891,886 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: deriveringsreglerna (ma3c-3.1 ex 1) --------
+   * Sex deluppgifter som var för sig visar en regel: potensregeln,
+   * faktorn framför, konstanten, förstagradstermen och bråket. */
+  function layoutDerivregler(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Potensregeln: multiplicera ned']],
+      [['exponenten framför och minska']],
+      [['den sedan med 1.']]
+    ], 0);
+    xx = T.str('a) f(x)=x^7 ⟹ ', padL, y);
+    xe = T.str('f′(x)=7x^6', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En faktor framför följer bara']],
+      [['med: femman gångras med']],
+      [['trean.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) y=3x^5 ⟹ ', padL, y);
+    xe = T.str('y′=15x^4', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En konstant funktion är en']],
+      [['vågrät linje. Lutningen är']],
+      [['noll överallt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) f(x)=27 ⟹ ', padL, y);
+    xe = T.str('f′(x)=0', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['12x är en rät linje med']],
+      [['lutningen 12, och den är']],
+      [['densamma överallt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('d) g(x)=12x ⟹ ', padL, y);
+    xe = T.str('g′(x)=12', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En nämnare utan x är bara en']],
+      [['faktor. Täljaren deriveras och']],
+      [['nämnaren står kvar.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('e) f(x)=', padL, y);
+    xx = T.fracH('x^4', '5', xx, y);
+    xx = T.str(' ⟹ f′(x)=', xx, y);
+    xe = T.fracH('4x^3', '5', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I f) ser uttrycket hemskt ut,']],
+      [['men leta efter variabeln: det']],
+      [['finns inget x någonstans. Allt']],
+      [['är tal, alltså en konstant.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xe = T.str('f) f′(x)=0', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans värde i en punkt (3.1 ex 2) ----- */
+  function layoutDerivvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=4x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först deriverar jag, sedan']],
+      [['sätter jag in värdet. Aldrig']],
+      [['tvärtom: sätter man in först']],
+      [['finns inget x kvar att derivera.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('f′(x)=8x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′(3)=8·3=', padL, y);
+    xe = T.str('24', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivera term för term (ma3c-3.2 ex 1) -----
+   * Varje term deriveras för sig. Ett parentesuttryck måste först
+   * utvecklas. */
+  function layoutDerivtermvis(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('a) f(x)=3x^7-5x^2+8', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje term deriveras för sig,']],
+      [['och konstanten 8 försvinner.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f′(x)=7·3x^6-2·5x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=21x^6-10x', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.6 * F;
+    xx = T.str('b) f(x)=', padL, y);
+    xx = T.fracH('4x^3', '3', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('x', '5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnarna innehåller inget x,']],
+      [['så de står kvar. Bara']],
+      [['täljarna deriveras.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('3·4x^2', '3', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('1', '5', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=4x^2-', padL + 40, y);
+    xe = T.fracH('1', '5', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['En parentes i kvadrat går inte']],
+      [['att derivera direkt. Jag']],
+      [['utvecklar den först, med andra']],
+      [['kvadreringsregeln.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('c) f(x)=(2x-3)^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=4x^2-12x+9', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′(x)=2·4x-12', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=8x-12', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans värde, negativt x (3.2 ex 2) ---- */
+  function layoutDerivvardeneg(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('f(x)=3x^2-x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Termen -x har graden 1, så']],
+      [['den deriveras till -1.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('f′(x)=2·3x-1=6x-1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in -2. Parentes']],
+      [['runt det negativa talet, annars']],
+      [['blir tecknen fel.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(-2)=6·(-2)-1', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=-12-1=', padL + 40, y);
+    xe = T.str('-13', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivera potensuttryck (ma3c-3.3 ex 1) -----
+   * Sex deluppgifter: variabeln i nämnaren, under rottecknet eller på
+   * båda ställena. Allt skrivs om som potenser först. */
+  function layoutDerivpotenser(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('a) f(x)=', padL, y);
+    xx = T.fracH('3', 'x', xx, y);
+    T.str('=3x^-^1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Potensregeln kräver en potens.']],
+      [['x i nämnaren flyttas upp, och']],
+      [['då byter exponenten tecken.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(x)=-3x^-^2=-', padL, y);
+    xe = T.fracH('3', 'x^2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 5.2 * F;
+    xx = T.str('b) f(x)=', padL, y);
+    xx = T.fracH('1', '5x', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('x^-^1', '5', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Femman ska vara kvar i']],
+      [['nämnaren: det är bara x som']],
+      [['flyttas upp.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('-x^-^2', '5', xx, y);
+    xx = T.str('=-', xx, y);
+    xe = T.fracH('1', '5x^2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 5.2 * F;
+    xx = T.str('c) f(x)=', padL, y);
+    xx = T.fracH('4x-7', 'x', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('4x', 'x', xx, y);
+    xx = T.str('-', xx, y);
+    T.fracH('7', 'x', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=4-7x^-^1', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('f′(x)=7x^-^2=', padL, y);
+    xe = T.fracH('7', 'x^2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    tanke(y, [
+      [['Rötter är också potenser:']],
+      [['kvadratroten är upphöjt till']],
+      [['en halv, tredjeroten till en']],
+      [['tredjedel.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('d) f(x)=x', padL, y);
+    xx = T.fracSup('1', '2', xx, y);
+    xx = T.str('+x', xx, y);
+    T.fracSup('1', '3', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('x^-', xx, y);
+    xx = T.fracSup('1', '2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '3', xx, y);
+    xx = T.str('x^-', xx, y);
+    T.fracSup('2', '3', xx, y);
+    T.stepEnd();
+
+    y += 5.2 * F;
+    xx = T.str('=', padL + 40, y);
+    xx = T.fracH('1', '2√x', xx, y);
+    xx = T.str('+', xx, y);
+    xe = T.fracH('1', '3√(x^2)', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- e) ---- */
+    tanke(y, [
+      [['I e) förenklar jag först med']],
+      [['potenslagarna: x gånger x']],
+      [['upphöjt till en halv blir x']],
+      [['upphöjt till tre halva.']]
+    ], 1.9);
+    y += 5.8 * F;
+    xx = T.str('e) f(x)=x·x', padL, y);
+    xx = T.fracSup('1', '2', xx, y);
+    xx = T.str('=x', xx, y);
+    T.fracSup('3', '2', xx, y);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('3', '2', xx, y);
+    xx = T.str('x', xx, y);
+    xx = T.fracSup('1', '2', xx, y);
+    xx = T.str('=', xx, y);
+    xe = T.fracH('3√x', '2', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- f) ---- */
+    y += 5.4 * F;
+    xx = T.str('f) f(x)=', padL, y);
+    xx = T.fracH('8', '√x', xx, y);
+    xx = T.str('=8x^-', xx, y);
+    T.fracSup('1', '2', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('f′(x)=-', padL, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('·8x^-', xx, y);
+    T.fracSup('3', '2', xx, y);
+    T.stepEnd();
+
+    y += 5.0 * F;
+    xx = T.str('=-4x^-', padL + 40, y);
+    xx = T.fracSup('3', '2', xx, y);
+    xx = T.str('=-', xx, y);
+    xe = T.fracH('4', 'x√x', xx, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivera e-funktioner (ma3c-3.4 ex 1) ------ */
+  function layoutDerivexp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['e upphöjt till x är sin egen']],
+      [['derivata. Det är det som gör']],
+      [['talet e så speciellt.']]
+    ], 0);
+    xx = T.str('a) f(x)=e^x ⟹ ', padL, y);
+    xe = T.str('f′(x)=e^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En koefficient framför följer']],
+      [['med oförändrad, precis som']],
+      [['vanligt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) f(x)=3e^x ⟹ ', padL, y);
+    xe = T.str('f′(x)=3e^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Se upp i c): det första e är']],
+      [['ett TAL, inte en funktion. En']],
+      [['konstant deriveras till noll.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) f(x)=e-e^x', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('f′(x)=0-e^x=', padL, y);
+    xe = T.str('-e^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: derivatans värde med e (ma3c-3.4 ex 2) ----- */
+  function layoutDerivexpvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 200;
+    xx = T.str('f(x)=', padL, y);
+    xx = T.fracH('5x^3', '3', xx, y);
+    T.str('+3e^x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Termvis: potenstermen med']],
+      [['potensregeln, e-termen är sin']],
+      [['egen derivata.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('15x^2', '3', xx, y);
+    T.str('+3e^x=5x^2+3e^x', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['e upphöjt till noll är 1,']],
+      [['precis som varje tal upphöjt']],
+      [['till noll.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xx = T.str('a) f′(0)=5·0^2+3e^0', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=0+3·1=', padL + 40, y);
+    xe = T.str('3', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('b) f′(2)=5·2^2+3e^2', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=20+3e^2=42,167...', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈42,2', padL + 60, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: koefficient i exponenten (ma3c-3.5 ex 1) --- */
+  function layoutDerivexpbas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    xx = T.str('a) f(x)=3e^x ⟹ ', padL, y);
+    xe = T.str('f′(x)=3e^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Står det en koefficient i']],
+      [['EXPONENTEN kommer den ned som']],
+      [['en faktor framför.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) f(x)=e^4^x ⟹ ', padL, y);
+    xe = T.str('f′(x)=4e^4^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Finns det koefficienter både']],
+      [['framför och i exponenten']],
+      [['gångras de med varandra.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) f′(x)=5·2e^5^x=', padL, y);
+    xe = T.str('10e^5^x', xx, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En division i exponenten ger']],
+      [['tvärtom: koefficienten framför']],
+      [['divideras med samma tal.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('d) f(x)=12e', padL, y);
+    smallFrac(T, F, 'x', '3', xx, y - 0.52 * F, 0.62);
+    T.stepEnd();
+
+    y += 4.2 * F;
+    xx = T.str('f′(x)=', padL, y);
+    xx = T.fracH('12', '3', xx, y);
+    xx = T.str('e', xx, y);
+    xx = smallFrac(T, F, 'x', '3', xx, y - 0.52 * F, 0.62);
+    xe = T.str('=4e', xx + 0.2 * F, y);
+    xe = smallFrac(T, F, 'x', '3', xe, y - 0.52 * F, 0.62);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: annan bas än e (ma3c-3.5 ex 2) -------------
+   * Varje gång basen inte är e kommer en faktor ln(basen) till. */
+  function layoutDerivannanbas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    tanke(150, [
+      [['Är basen något annat än e']],
+      [['kommer en faktor till:']],
+      [['ln för basen.']]
+    ], 0);
+    xx = T.str('a) f(x)=12^x ⟹ ', padL, y);
+    xe = T.str('f′(x)=12^x·ln 12', xx, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 4.0 * F;
+    xx = T.str('b) f(x)=3·7^x ⟹', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('f′(x)=3·7^x·ln 7', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I c) finns dessutom en']],
+      [['koefficient i exponenten, och']],
+      [['den kommer ned som faktor.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('c) f(x)=4^3^x ⟹', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('f′(x)=3·4^3^x·ln 4', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I d) finns allt på en gång:']],
+      [['faktor framför, koefficient i']],
+      [['exponenten och annan bas.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('d) f′(x)=5·6·8^6^x·ln 8', padL, y, null, 0.9);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('=30·8^6^x·ln 8', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: tillväxthastighet folkmängd (3.6 ex 1) -----
+   * Derivatan av en exponentialfunktion med annan bas: samma funktion
+   * gånger ln(basen). Negativt värde betyder minskning. */
+  function layoutTillvaxtfolk(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('N(t)=42 000·0,98^t', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tillväxthastigheten vid en']],
+      [['tidpunkt ÄR derivatan. Från']],
+      [['2020 till 2025 är det 5 år,']],
+      [['så jag söker N′(5).']]
+    ]);
+    y += 4.8 * F;
+    T.str('N′(t)=42 000·0,98^t·ln 0,98', padL, y, null, 0.84);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('N′(5)=42 000·0,98^5·ln 0,98', padL, y, null, 0.84);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('=-766,989...', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Basen är mindre än 1, så']],
+      [['ln 0,98 är negativt. Därför']],
+      [['blir derivatan negativ: det']],
+      [['är en minskning.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('≈-770 invånare/år', padL + 40, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: folkmängden minskar', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('med cirka 770 invånare/år', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm en konstant (ma3c-3.6 ex 2) ---------
+   * Villkoret ger en exponentialekvation i k, som löses med den
+   * naturliga logaritmen. */
+  function layoutBestamkonstant(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 246;
+    T.str('y=e^k^x-19,  y(20)=70', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Villkoret säger att x=20 hör']],
+      [['ihop med y=70. Sätter jag in']],
+      [['båda blir k det enda okända.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('70=e^2^0^k-19', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+19', xx + 0.6 * F, '70=e^2^0^k-19');
+    xx = T.str('89=e^2^0^k', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k sitter i exponenten. För att']],
+      [['få ned den logaritmerar jag']],
+      [['båda led, med ln eftersom']],
+      [['basen är e.']]
+    ]);
+    y += 4.8 * F;
+    xx = T.str('ln e^2^0^k=ln 89', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('20k·ln e=ln 89', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['ln e är 1, precis som lg 10']],
+      [['är 1. Då står 20k ensamt kvar.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('20k=ln 89', padL + 20, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/20', xx + 0.6 * F, '20k=ln 89',
+              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('k=', padL + 20, y);
+    xx = T.fracH('ln 89', '20', xx, y);
+    T.str('=0,22443...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I en exponent ger en liten']],
+      [['avrundning stora fel, så jag']],
+      [['sparar fyra decimaler.']]
+    ], 1.05);
+    y += 5.2 * F;
+    xe = T.str('a) k≈0,2244', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.4 * F;
+    xx = T.str('b) y=e^0^,^2^2^4^4^x-19', padL, y, null, 0.92);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Konstanten -19 försvinner vid']],
+      [['derivering, och koefficienten']],
+      [['i exponenten kommer ned.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('y′=0,2244e^0^,^2^2^4^4^x', padL, y, null, 0.92);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('y′(15)=6,499...≈6,5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Positiv derivata betyder att']],
+      [['temperaturen stiger. Enheten']],
+      [['är grader per minut.']]
+    ]);
+    y += 4.6 * F;
+    xe = T.str('Svar: temperaturen ökar', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('med 6,5 °C/minut', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: kaninpopulationen med CAS (3.7 ex 1) ------- */
+  function layoutCaskaniner(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('N(t)=30·1,84^t', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tillväxthastigheten efter 4']],
+      [['veckor är N′(4). Verktyget']],
+      [['deriverar åt mig.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('a) N′(4)≈209,67925', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈210 kaniner/vecka', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I b) är hastigheten känd och']],
+      [['tiden söks. Då är det en']],
+      [['ekvation i derivatan.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('b) NLös(N′(t)=100)', padL, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('t≈2,78575', padL + 40, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xe = T.str('≈2,8 veckor', padL + 40, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: minsta lutning (ma3c-3.7 ex 2) -------------
+   * Lutningen ÄR derivatan, så frågan handlar om derivatans egen
+   * minimipunkt. */
+  function layoutMinstalutning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 470, ux: 44, uy: 13 });
+
+    y = 186;
+    T.str('f(x)=x^3-3x^2-4x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Grafens lutning ÄR derivatan.']],
+      [['Minsta lutning betyder alltså']],
+      [['derivatans minsta värde.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('f′(x)=3x^2-6x-4', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Derivatan är själv en']],
+      [['andragradsfunktion. Dess graf']],
+      [['är en parabel som öppnar']],
+      [['uppåt, med en minimipunkt.']]
+    ]);
+
+    G.axlar(-1.4, 4.4, -8, 10, 'x', 'y');
+    G.kurva(function (v) { return 3 * v * v - 6 * v - 4; }, -1.2, 3.2);
+    T.str('f′(x)', G.X(3.2) + 4, G.Y(4), null, 0.5);
+    T.pause(220);
+    G.punkt(1, -7, BLUE);
+    T.str('(1, -7)', G.X(1) + 10, G.Y(-7) + 0.5 * F, BLUE, 0.5);
+    T.stepEnd();
+
+    y = G.oy + 8 * 13 + 3.0 * F;
+    xe = T.str('Svar: x=1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kattungens vikt (ma3c-3.7 ex 3) ------------
+   * Samma samband skrivs om från basen 1,05 till basen e, vilket kräver
+   * att e^k = 1,05 löses ut. */
+  function layoutKattungemodell(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 186;
+    T.str('100 g, +5 % per dag', padL, y, null, 0.9);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Startvärdet är 100 och']],
+      [['förändringsfaktorn 1,05,']],
+      [['eftersom vikten ökar med 5 %.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('V(t)=100·1,05^t', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma samband ska skrivas med']],
+      [['basen e. Formen är då']],
+      [['C gånger e upphöjt till kt.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('V(t)=100·e^k^t', padL, y);
+    T.pause(260);
+    T.str('(1)', xx + 1.0 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jämför de två uttrycken: e']],
+      [['upphöjt till k måste vara']],
+      [['samma sak som 1,05.']]
+    ]);
+    y += 4.6 * F;
+    xx = T.str('e^k=1,05', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('ln e^k=ln 1,05', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
+    xx = T.str('k·ln e=ln 1,05', padL + 20, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['ln e är 1, så k är helt']],
+      [['enkelt ln 1,05.']]
+    ]);
+    y += 4.4 * F;
+    xx = T.str('k=ln 1,05≈0,04879', padL + 20, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: V(t)=100·e^0^,^0^4^8^7^9^t', padL, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -48347,7 +49227,21 @@
                    casderivata: layoutCasderivata,
                    absolutbelopp: layoutAbsolutbelopp,
                    absolutekvation: layoutAbsolutekvation,
-                   deriverbarhet: layoutDeriverbarhet };
+                   deriverbarhet: layoutDeriverbarhet,
+                   derivregler: layoutDerivregler,
+                   derivvarde: layoutDerivvarde,
+                   derivtermvis: layoutDerivtermvis,
+                   derivvardeneg: layoutDerivvardeneg,
+                   derivpotenser: layoutDerivpotenser,
+                   derivexp: layoutDerivexp,
+                   derivexpvarde: layoutDerivexpvarde,
+                   derivexpbas: layoutDerivexpbas,
+                   derivannanbas: layoutDerivannanbas,
+                   tillvaxtfolk: layoutTillvaxtfolk,
+                   bestamkonstant: layoutBestamkonstant,
+                   caskaniner: layoutCaskaniner,
+                   minstalutning: layoutMinstalutning,
+                   kattungemodell: layoutKattungemodell };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

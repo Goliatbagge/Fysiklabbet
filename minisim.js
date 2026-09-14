@@ -19,7 +19,7 @@
  *           Tillgängliga typer: tomtebloss, centrifug, cirkularrorelse,
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
- *           magnetpoler, magnetdelning
+ *           magnetpoler, magnetdelning, koniskpendel
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -89,6 +89,18 @@
  * (loopen) respektive gränsfarten på krönet. FULLSKÄRM startas med
  * scenens egen .fs-btn inne i iframen och ger exakt originalsimuleringens
  * fullskärmsläge med alla verktyg.
+ *
+ * ── typ: koniskpendel ────────────────────────────────────────────────────
+ * Den översta figuren i fy2-1.7 (Konisk pendel) som rörlig figur: samma
+ * uppställning som den tidigare statiska ::: figur-SVG:n (tak, snöre,
+ * lodlinje, cirkelbana, vikt, r, l, α, F_G och F_S), men vikten sveper runt
+ * i den vågräta cirkeln och snöret, radien, vinkelbågen och kraftpilarna
+ * följer med. Rörelsen går i verklig tid ur genomgångens formel
+ * T = 2π√(l·cos α / g) med snörlängden 1,5 m; glidaren för α visar att en
+ * större vinkel ger kortare periodtid, och info-raden visar T. Figuren
+ * startar stillastående ("Sätt i rörelse"/"Pausa", "Börja om", kryssrutan
+ * "Visa krafter"). Ren SVG i laboranstemat med kollegierutnät, inget ljud,
+ * ingen fullskärm.
  *
  * ── typ: kastvektorer ────────────────────────────────────────────────────
  * Hjälpfiguren i fy2-1.8 (Kaströrelse) som interaktiv figur: kastparabeln
@@ -7591,6 +7603,234 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: koniskpendel
+    // ══════════════════════════════════════════════════════════════════════
+    // Den översta figuren i fy2-1.7 (Konisk pendel) som rörlig figur: samma
+    // uppställning som den tidigare statiska ::: figur-SVG:n (tak, snöre,
+    // lodlinje, cirkelbana, vikt, r, l, α, F_G och F_S), men vikten sveper
+    // runt i den vågräta cirkeln och snöret, radien och kraftpilarna följer
+    // med. Rörelsen går i verklig tid ur genomgångens egen formel: med
+    // snörlängden 1,5 m är T = 2π√(l·cos α / g), och glidaren för α
+    // visar hur en större vinkel ger en kortare periodtid. Ren SVG i
+    // laboranstemat (papper med kollegierutnät), inget ljud, ingen
+    // fullskärm. Figuren startar stillastående i samma läge som den
+    // statiska figuren hade; "Sätt i rörelse" startar den.
+    var kpRaknare = 0;
+    function buildKoniskpendel(node, cfg) {
+        var INK = '#1f2530', GREY = '#7c828c', BLA = '#2563c9', RUTA = '#2563c9';
+        var G = 9.82, L_M = 1.5;                 // snörlängd i meter
+        var PX_PER_M = 100;
+        var PX = 234, PY = 34;                   // fästet i taket
+        var L = L_M * PX_PER_M;                  // snörlängd i px
+        var FG = 44;                             // tyngdkraftens pillängd (px)
+        var alfa = 30 * Math.PI / 180;
+        var FI0 = 0.30;                          // startläge: till höger, snett framför
+        var fi = FI0;
+        var visaKrafter = true;
+        var spelar = false;
+        var id = 'ms-kp-rutnat-' + (++kpRaknare);
+
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function pil(x1, y1, x2, y2, color, w, head) {
+            var dx = x2 - x1, dy = y2 - y1, Ln = Math.hypot(dx, dy) || 1, ux = dx / Ln, uy = dy / Ln;
+            var bx = x2 - ux * head, by = y2 - uy * head, hw = head * 0.47;
+            return '<line x1="' + r1(x1) + '" y1="' + r1(y1) + '" x2="' + r1(bx) + '" y2="' + r1(by) +
+                '" stroke="' + color + '" stroke-width="' + w + '" stroke-linecap="butt"/>' +
+                '<polygon points="' + r1(bx - uy * hw) + ',' + r1(by + ux * hw) + ' ' + r1(x2) + ',' + r1(y2) +
+                ' ' + r1(bx + uy * hw) + ',' + r1(by - ux * hw) + '" fill="' + color + '"/>';
+        }
+        function kraftLbl(x, y, anchor, sub) {
+            return '<text x="' + r1(x) + '" y="' + r1(y) + '" text-anchor="' + anchor + '" font-size="16" fill="' + BLA + '">' +
+                '<tspan font-style="italic">F</tspan><tspan font-size="12" dy="3">' + sub + '</tspan></text>';
+        }
+        function varLbl(x, y, anchor, t, size) {
+            return '<text x="' + r1(x) + '" y="' + r1(y) + '" text-anchor="' + anchor + '" font-size="' + (size || 16) +
+                '" fill="' + INK + '"><tspan font-style="italic">' + t + '</tspan></text>';
+        }
+
+        // Fast bakgrund: rutnät, tak med skraffering
+        var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
+            '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
+            '<rect x="0" y="0" width="468" height="272" fill="url(#' + id + ')"/>' +
+            '<line x1="' + (PX - 64) + '" y1="' + PY + '" x2="' + (PX + 64) + '" y2="' + PY + '" stroke="' + INK + '" stroke-width="1.8"/>';
+        for (var hx = PX - 60; hx <= PX + 60; hx += 8) {
+            bas += '<line x1="' + hx + '" y1="' + PY + '" x2="' + (hx - 7) + '" y2="' + (PY - 7) +
+                '" stroke="' + INK + '" stroke-width="1" stroke-linecap="round"/>';
+        }
+
+        function rita() {
+            var r = L * Math.sin(alfa), h = L * Math.cos(alfa);
+            var CX = PX, CY = PY + h, RY = 0.26 * r;
+            var wx = CX + r * Math.cos(fi), wy = CY + RY * Math.sin(fi);
+            var s = '';
+            // lodlinje och cirkelbana
+            s += '<line x1="' + CX + '" y1="' + PY + '" x2="' + CX + '" y2="' + r1(CY) + '" stroke="' + GREY +
+                '" stroke-width="1.2" stroke-dasharray="4 3"/>';
+            s += '<ellipse cx="' + CX + '" cy="' + r1(CY) + '" rx="' + r1(r) + '" ry="' + r1(RY) +
+                '" fill="none" stroke="' + INK + '" stroke-width="1.5" stroke-dasharray="2 3"/>';
+            // radien C → vikten, med etiketten r förskjuten vinkelrätt från linjen
+            s += '<line x1="' + CX + '" y1="' + r1(CY) + '" x2="' + r1(wx) + '" y2="' + r1(wy) + '" stroke="' + GREY +
+                '" stroke-width="1.2" stroke-dasharray="4 3"/>';
+            var rmx = (CX + wx) / 2, rmy = (CY + wy) / 2;
+            var rdx = wx - CX, rdy = wy - CY, rl = Math.hypot(rdx, rdy) || 1;
+            var nx = rdy / rl, ny = -rdx / rl;             // normal, pekar "uppåt" när vikten är till höger
+            if (ny > 0) { nx = -nx; ny = -ny; }
+            if (rl > 26) s += varLbl(rmx + nx * 11, rmy + ny * 11 + 5, 'middle', 'r', 15);
+            // snöret och etiketten l (förskjuten ut från lodlinjen)
+            s += '<line x1="' + PX + '" y1="' + PY + '" x2="' + r1(wx) + '" y2="' + r1(wy) + '" stroke="' + INK + '" stroke-width="1.6"/>';
+            var smx = (PX + wx) / 2, smy = (PY + wy) / 2;
+            var sdx = wx - PX, sdy = wy - PY, sl = Math.hypot(sdx, sdy) || 1;
+            var lnx = sdy / sl, lny = -sdx / sl;           // normal till snöret
+            if ((wx - PX) * lnx < 0) { lnx = -lnx; lny = -lny; }   // ut från lodlinjen
+            if (Math.abs(wx - PX) < 8) { lnx = 1; lny = 0; }
+            var lx = PX + 0.36 * (wx - PX), ly = PY + 0.36 * (wy - PY);
+            s += varLbl(lx + lnx * 13, ly + lny * 13 + 5, 'middle', 'l');
+            // vinkelbågen vid fästet, mellan lodlinjen och snöret
+            var a0 = Math.PI / 2, a1 = Math.atan2(wy - PY, wx - PX);
+            var pts = [];
+            for (var i = 0; i <= 14; i++) {
+                var a = a0 + (a1 - a0) * i / 14;
+                pts.push(r1(PX + 32 * Math.cos(a)) + ',' + r1(PY + 32 * Math.sin(a)));
+            }
+            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.4"/>';
+            var am = (a0 + a1) / 2;
+            s += '<text x="' + r1(PX + 46 * Math.cos(am)) + '" y="' + r1(PY + 46 * Math.sin(am) + 5) +
+                '" text-anchor="middle" font-size="15" fill="' + INK + '">α</text>';
+            // vikten
+            s += '<circle cx="' + r1(wx) + '" cy="' + r1(wy) + '" r="9" fill="#b8bec6" stroke="' + INK + '" stroke-width="1.4"/>';
+            s += '<circle cx="' + r1(wx) + '" cy="' + r1(wy) + '" r="2.6" fill="' + INK + '"/>';
+            // krafterna: F_G rakt ned, F_S längs snöret mot fästet, skalenliga
+            if (visaKrafter) {
+                var FS = FG / Math.cos(alfa);
+                s += pil(wx, wy, wx, wy + FG, BLA, 3.2, 11);
+                var lblx = wx + 6, lbla = 'start';
+                s += kraftLbl(lblx, wy + FG + 6, lbla, 'G');
+                var ux = (PX - wx) / sl, uy = (PY - wy) / sl;
+                var tx = wx + ux * FS, ty = wy + uy * FS;
+                s += pil(wx, wy, tx, ty, BLA, 3.2, 11);
+                // etiketten på snörets utsida, i höjd med pilspetsen
+                var ex = tx - lnx * 12, ey = ty - lny * 12 + 5;
+                s += kraftLbl(ex, ey, lnx >= 0 ? 'end' : 'start', 'S');
+            }
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="80 14 308 250" width="593" height="481" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En konisk pendel: ett snöre fäst i taket gör vinkeln alfa mot lodlinjen, och ' +
+            'pendelvikten sveper runt i en vågrät cirkel med radien r. Tyngdkraften nedåt och ' +
+            'spännkraften längs snöret är inritade och följer med vikten runt.">' +
+            bas + '<g class="ms-kp-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-kp-dyn');
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.className = 'minisim-btn ms-primar';
+        startBtn.textContent = 'Sätt i rörelse';
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        var kraftLblEl = document.createElement('label');
+        kraftLblEl.className = 'minisim-check';
+        var kraftCb = document.createElement('input');
+        kraftCb.type = 'checkbox';
+        kraftCb.checked = true;
+        kraftLblEl.appendChild(kraftCb);
+        kraftLblEl.appendChild(document.createTextNode('Visa krafter'));
+        var info = document.createElement('span');
+        info.className = 'minisim-info';
+        controls.appendChild(startBtn);
+        controls.appendChild(omBtn);
+        controls.appendChild(kraftLblEl);
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.innerHTML = 'Utslagsvinkel <em>α</em>';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '5'; slider.max = '65'; slider.step = '1'; slider.value = '30';
+        slider.setAttribute('aria-label', 'Snörets vinkel mot lodlinjen i grader');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        function periodtid() { return 2 * Math.PI * Math.sqrt(L_M * Math.cos(alfa) / G); }
+        function fmt(v, d) { return v.toFixed(d).replace('.', ','); }
+        function syncInfo() {
+            sliderVal.textContent = slider.value + '°';
+            info.textContent = 'Snörlängd 1,5 m, periodtid T = ' + fmt(periodtid(), 2) + ' s';
+        }
+
+        // ── Animation ─────────────────────────────────────────────────────
+        var raf = null, senast = 0, synlig = true;
+        function steg(nu) {
+            raf = null;
+            if (!spelar || !synlig) return;
+            var dt = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
+            senast = nu;
+            fi += dt * 2 * Math.PI / periodtid();
+            if (fi > Math.PI * 2) fi -= Math.PI * 2;
+            rita();
+            raf = requestAnimationFrame(steg);
+        }
+        function kor() { if (!raf && spelar && synlig) { senast = 0; raf = requestAnimationFrame(steg); } }
+        function setSpelar(v) {
+            spelar = v;
+            startBtn.textContent = spelar ? 'Pausa' : 'Sätt i rörelse';
+            startBtn.classList.toggle('ms-primar', !spelar);
+            if (spelar) kor();
+        }
+        startBtn.addEventListener('click', function () { setSpelar(!spelar); });
+        omBtn.addEventListener('click', function () {
+            setSpelar(false);
+            fi = FI0;
+            slider.value = '30';
+            alfa = Math.PI / 6;
+            syncInfo();
+            rita();
+        });
+        kraftCb.addEventListener('change', function () { visaKrafter = kraftCb.checked; rita(); });
+        slider.addEventListener('input', function () {
+            alfa = parseFloat(slider.value) * Math.PI / 180;
+            syncInfo();
+            rita();
+        });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                synlig = entries[0].isIntersecting;
+                if (synlig) kor();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        syncInfo();
+        rita();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: snettkast
     // ══════════════════════════════════════════════════════════════════════
     // Bollen som kastas ur fy2-1.8: den fristående simuleringen
@@ -8501,6 +8741,7 @@
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
+                  koniskpendel: buildKoniskpendel,
                   snettkast: buildSnettkast,
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,

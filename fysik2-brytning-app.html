@@ -36,69 +36,14 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
-            border-radius: 16px;
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
-
-        /* Custom slider styles */
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            height: 20px;
-            cursor: pointer;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            background: rgba(15, 22, 32, 0.56);
-            border-radius: 4px;
-            height: 6px;
-        }
-        input[type="range"]::-moz-range-track {
-            background: rgba(15, 22, 32, 0.56);
-            border-radius: 4px;
-            height: 6px;
-            border: none;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #38bdf8;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: -7px;
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #38bdf8;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-        }
-        input[type="range"]::-webkit-slider-thumb:hover {
-            background: #7dd3fc;
-            box-shadow: 0 0 10px rgba(200, 50, 74, 0.5);
-        }
-
+        /* Kort, reglage och rubriker stylas centralt av styles-laborans-sim.css
+           (papperstemat). Scenen ritas helt i laboranstemat: pappersbotten
+           med rutnät, glas i kall blå ton och en laser med mörk kärna som
+           håller kontrast mot papperet (omdesign 2026-09-14). */
         .scene-wrap {
             position: relative;
-            border-radius: 16px;
+            border-radius: 4px;
             overflow: hidden;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(200, 50, 74, 0.15);
             width: 100%;
             aspect-ratio: 16 / 9;
             user-select: none;
@@ -300,13 +245,13 @@
                             onClick={() => onSelect(m.n)}
                             className="px-2.5 py-1 text-xs rounded-md transition"
                             style={active ? {
-                                background: 'rgba(200, 50, 74, 0.18)',
-                                border: '1px solid rgba(200, 50, 74, 0.7)',
-                                color: '#c8324a'
+                                background: 'var(--lab-ink, #0f1620)',
+                                border: '1px solid var(--lab-ink, #0f1620)',
+                                color: 'var(--lab-bg, #f3eee4)'
                             } : {
-                                background: 'rgba(30, 41, 59, 0.6)',
-                                border: '1px solid rgba(15, 22, 32, 0.28)',
-                                color: 'var(--lab-ink-soft)'
+                                background: 'var(--lab-bg-panel, #ffffff)',
+                                border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))',
+                                color: 'var(--lab-ink, #0f1620)'
                             }}
                         >
                             {m.name}
@@ -379,7 +324,7 @@
                                         checked={layerMode === 'three'}
                                         onChange={() => setLayerMode('three')}
                                         className="w-4 h-4 cursor-pointer"
-                                        style={{ accentColor: '#38bdf8' }}
+                                        style={{ accentColor: '#c8324a' }}
                                     />
                                     <span className="text-sm text-slate-300">Tre skikt (medium 1 + 2 + 1)</span>
                                 </label>
@@ -391,7 +336,7 @@
                                         checked={layerMode === 'two'}
                                         onChange={() => setLayerMode('two')}
                                         className="w-4 h-4 cursor-pointer"
-                                        style={{ accentColor: '#38bdf8' }}
+                                        style={{ accentColor: '#c8324a' }}
                                     />
                                     <span className="text-sm text-slate-300">Två skikt (medium 1 + 2)</span>
                                 </label>
@@ -405,7 +350,7 @@
                                 checked={showReflected}
                                 onChange={(e) => setShowReflected(e.target.checked)}
                                 className="w-4 h-4 cursor-pointer"
-                                style={{ accentColor: '#38bdf8' }}
+                                style={{ accentColor: '#c8324a' }}
                             />
                             <span className="text-sm text-slate-300">Visa reflekterade strålar</span>
                         </label>
@@ -418,7 +363,7 @@
                                     checked={showAngles}
                                     onChange={(e) => setShowAngles(e.target.checked)}
                                     className="w-4 h-4 cursor-pointer"
-                                    style={{ accentColor: '#38bdf8' }}
+                                    style={{ accentColor: '#c8324a' }}
                                 />
                                 <span className="text-sm text-slate-300">Visa vinklar</span>
                             </label>
@@ -432,7 +377,7 @@
                                             checked={angleDisplay === 'labels'}
                                             onChange={() => setAngleDisplay('labels')}
                                             className="w-4 h-4 cursor-pointer"
-                                            style={{ accentColor: '#38bdf8' }}
+                                            style={{ accentColor: '#c8324a' }}
                                         />
                                         <span className="text-sm text-slate-300">Beteckningar</span>
                                     </label>
@@ -444,7 +389,7 @@
                                             checked={angleDisplay === 'values'}
                                             onChange={() => setAngleDisplay('values')}
                                             className="w-4 h-4 cursor-pointer"
-                                            style={{ accentColor: '#38bdf8' }}
+                                            style={{ accentColor: '#c8324a' }}
                                         />
                                         <span className="text-sm text-slate-300">Värden</span>
                                     </label>
@@ -483,17 +428,17 @@
                         </div>
                     </div>
 
-                    <div className="mt-4 pt-6 space-y-3" style={{ borderTop: '1px solid rgba(200, 50, 74, 0.2)' }}>
+                    <div className="mt-4 pt-6 space-y-3" style={{ borderTop: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))' }}>
                         <div className="flex justify-between items-center p-3 rounded-lg"
-                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(15, 22, 32, 0.21)' }}>
+                             style={{ background: 'var(--lab-bg-panel, #ffffff)', border: '1px solid var(--lab-line, rgba(15,22,32,0.12))' }}>
                             <span className="text-slate-300">Infallsvinkel (<i>i</i><sub>1</sub>):</span>
                             <span className="font-mono text-lg text-cyan-300">{incidentAngle.toFixed(1).replace('.', ',')}°</span>
                         </div>
                         <div className="flex justify-between items-center p-3 rounded-lg"
-                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(15, 22, 32, 0.21)' }}>
+                             style={{ background: 'var(--lab-bg-panel, #ffffff)', border: '1px solid var(--lab-line, rgba(15,22,32,0.12))' }}>
                             <span className="text-slate-300">Brytningsvinkel (<i>b</i><sub>1</sub>):</span>
                             {isTIR ? (
-                                <span className="font-bold text-lg text-red-400">Total intern reflektion</span>
+                                <span className="font-semibold text-sm text-right" style={{ color: 'var(--lab-accent, #c8324a)' }}>Total intern reflektion</span>
                             ) : (
                                 <span className="font-mono text-lg text-cyan-300">{theta2.toFixed(1).replace('.', ',')}°</span>
                             )}
@@ -503,7 +448,7 @@
             );
         };
 
-        const SimulationView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, showAngles, setShowAngles, angleDisplay, setAngleDisplay, laserColor, setLaserColor, layerMode, setLayerMode }) => {
+        const SimulationView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, setShowReflected, showAngles, setShowAngles, angleDisplay, setAngleDisplay, laserColor, setLaserColor, layerMode, setLayerMode }) => {
             const svgRef = useRef(null);
             const sceneWrapRef = useRef(null);
             const [isDragging, setIsDragging] = useState(false);
@@ -511,9 +456,17 @@
             const [togglesOpen, setTogglesOpen] = useState(true);
 
             const isRedLaser = laserColor === 'red';
-            const rayColor = isRedLaser ? '#ff1f3d' : '#39ff14';
-            const apertureCenterColor = isRedLaser ? '#ffd5d5' : '#bbffaa';
-            const glowEdgeColor = isRedLaser ? '#ff1f3d' : '#39ff14';
+            // Laserfärger för den ljusa pappersscenen: en mörk, mättad kärna
+            // som håller kontrast mot papperet, en tunn ljus mittlinje (den
+            // "heta" kärnan) och ett mjukt sken i en ljusare ton runt om.
+            // Neongrönt (#39ff14) mot papper gav en stråle som knappt syntes
+            // (påpekat 2026-09-14).
+            const LASER = isRedLaser
+                ? { core: '#b91c1c', hot: '#fecaca', glow: '#f87171', aperture: '#fecaca' }
+                : { core: '#15803d', hot: '#bbf7d0', glow: '#4ade80', aperture: '#bbf7d0' };
+            const rayColor = LASER.core;
+            const apertureCenterColor = LASER.aperture;
+            const glowEdgeColor = LASER.glow;
 
             useEffect(() => {
                 const handler = () => {
@@ -612,8 +565,28 @@
 
             // Materialberoende opacitet: luft (n=1) → nästan osynlig medium-effekt,
             // glas/diamant → tydlig och briljant. Skalar specular och kropp gemensamt.
-            const glassOpacity = Math.min(1.0, Math.max(0.18, (n2 - 1) * 1.05 + 0.18));
-            const medium1Opacity = Math.min(1.0, Math.max(0.10, (n1 - 1) * 1.05 + 0.10));
+            const glassOpacity = Math.min(1.0, Math.max(0.16, (n2 - 1) * 1.05 + 0.16));
+            const medium1Opacity = Math.min(1.0, Math.max(0, (n1 - 1) * 1.05));
+
+            // Strålens delsträckor: huvudstrålen (heldragen) och de partiellt
+            // reflekterade strålarna (streckade). Ritas i tre lager: sken,
+            // kärna och het mittlinje (se LASER ovan).
+            const beam = [[penTip, p2], [p2, p3]];
+            if (!isTIR && !isTwoLayer) beam.push([p3, p4]);
+            const reflected = [];
+            if (showReflected && !isTIR) {
+                reflected.push([p2, pR]);
+                if (pR2) reflected.push([p3, pR2]);
+            }
+            const segLines = (segs, props) => segs.map(([a, b], k) =>
+                <line key={k} x1={a.x} y1={a.y} x2={b.x} y2={b.y} {...props} />);
+            // Riktningspil mitt på en delsträcka (markören ritar själva spetsen)
+            const midArrow = ([a, b], k, w, op) => {
+                const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+                const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+                return <line key={k} x1={mx} y1={my} x2={mx + dx / len} y2={my + dy / len}
+                             stroke={rayColor} strokeWidth={w} opacity={op} markerEnd="url(#arrow)" />;
+            };
 
             const theta1Deg = Math.abs(incidentAngle);
             const theta2Deg = isTIR ? 0 : Math.abs(theta2Rad * 180 / Math.PI);
@@ -735,72 +708,59 @@
                             >
                                 <path d="M 0 0 L 10 5 L 0 10 z" fill={rayColor} />
                             </marker>
-                            {/* Glaskropp - vertikal djupgradient (ljusare vid kanterna, Fresnel-känsla) */}
-                            <linearGradient id="glassBodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.20)"/>
-                                <stop offset="18%" stopColor="rgba(90, 160, 220, 0.07)"/>
-                                <stop offset="50%" stopColor="rgba(35, 75, 130, 0.05)"/>
-                                <stop offset="82%" stopColor="rgba(90, 160, 220, 0.07)"/>
-                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.18)"/>
+                            {/* Pappersbotten med kollegieblocksrutnät (laboranstemat) */}
+                            <linearGradient id="paperBg" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#f7f2e8"/>
+                                <stop offset="100%" stopColor="#ece3d2"/>
                             </linearGradient>
-                            {/* Diagonal sheen - ljusvariation över glaset */}
-                            <linearGradient id="glassSheen" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(186, 230, 253, 0)"/>
-                                <stop offset="35%" stopColor="rgba(186, 230, 253, 0.06)"/>
-                                <stop offset="55%" stopColor="rgba(255, 255, 255, 0.04)"/>
-                                <stop offset="80%" stopColor="rgba(186, 230, 253, 0.03)"/>
-                                <stop offset="100%" stopColor="rgba(186, 230, 253, 0)"/>
+                            <pattern id="paperGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+                                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(96,130,175,0.20)" strokeWidth="0.8"/>
+                            </pattern>
+                            {/* Glaskropp: kall blå ton, tätast vid ytorna (Fresnel-känsla) */}
+                            <linearGradient id="glassBody" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="rgba(44,112,186,0.52)"/>
+                                <stop offset="12%" stopColor="rgba(84,150,212,0.32)"/>
+                                <stop offset="50%" stopColor="rgba(128,186,232,0.26)"/>
+                                <stop offset="88%" stopColor="rgba(84,150,212,0.32)"/>
+                                <stop offset="100%" stopColor="rgba(44,112,186,0.52)"/>
                             </linearGradient>
-                            {/* Specular highlight vid övre kant - ljust band som tonas ut nedåt */}
-                            <linearGradient id="topEdgeSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.6)"/>
-                                <stop offset="35%" stopColor="rgba(200, 50, 74, 0.10)"/>
-                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
+                            {/* Glasreflex: ett snett ljusstråk (brett mjukt + smalt skarpt band)
+                                som löper genom blocket i cirka 60 graders lutning. Ritas i
+                                användarkoordinater så att stråket blir snett även i det breda
+                                blocket (med objectBoundingBox blev det vågräta dimband). */}
+                            <linearGradient id="glassSheen" gradientUnits="userSpaceOnUse"
+                                            x1="150" y1={BLOCK_Y} x2={150 + effectiveBlockHeight * 1.9} y2={BLOCK_Y + effectiveBlockHeight}>
+                                <stop offset="0%" stopColor="rgba(255,255,255,0)"/>
+                                <stop offset="28%" stopColor="rgba(255,255,255,0)"/>
+                                <stop offset="40%" stopColor="rgba(255,255,255,0.55)"/>
+                                <stop offset="47%" stopColor="rgba(255,255,255,0.06)"/>
+                                <stop offset="52%" stopColor="rgba(255,255,255,0.40)"/>
+                                <stop offset="64%" stopColor="rgba(255,255,255,0)"/>
+                                <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
                             </linearGradient>
-                            {/* Specular highlight vid undre kant - ljust band som tonas ut uppåt */}
-                            <linearGradient id="bottomEdgeSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.55)"/>
-                                <stop offset="35%" stopColor="rgba(200, 50, 74, 0.10)"/>
-                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
+                            {/* Ljus kant precis innanför en polerad yta (tonar bort inåt) */}
+                            <linearGradient id="faceGlowDown" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.80)"/>
+                                <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
                             </linearGradient>
-                            {/* Mikrotextur för polerad glasyta */}
-                            <filter id="glassNoise" x="0%" y="0%" width="100%" height="100%">
-                                <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="2" seed="11" stitchTiles="stitch"/>
-                                <feColorMatrix values="0 0 0 0 0.78
-                                                       0 0 0 0 0.88
-                                                       0 0 0 0 1
-                                                       0 0 0 0.05 0"/>
-                            </filter>
-                            {/* Medium 1 (övre region) - tonas mörkare upptill, ljusare nära gränsytan */}
-                            <linearGradient id="medium1UpperGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.10)"/>
-                                <stop offset="50%" stopColor="rgba(60, 110, 180, 0.04)"/>
-                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.20)"/>
+                            <linearGradient id="faceGlowUp" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.80)"/>
+                                <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
                             </linearGradient>
-                            {/* Medium 1 (nedre region, tre-skiktsläge) - inverterad */}
-                            <linearGradient id="medium1LowerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.20)"/>
-                                <stop offset="50%" stopColor="rgba(60, 110, 180, 0.04)"/>
-                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.10)"/>
+                            {/* Medium 1 när det är vatten eller glas: tonas mot gränsytan */}
+                            <linearGradient id="medium1Upper" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="rgba(128,186,232,0.22)"/>
+                                <stop offset="100%" stopColor="rgba(44,112,186,0.48)"/>
                             </linearGradient>
-                            {/* Medium 1 specular vid gränsytan ovanifrån (fading uppåt från BLOCK_Y) */}
-                            <linearGradient id="medium1BottomSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
-                                <stop offset="40%" stopColor="rgba(200, 50, 74, 0.09)"/>
-                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
+                            <linearGradient id="medium1Lower" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="rgba(44,112,186,0.48)"/>
+                                <stop offset="100%" stopColor="rgba(128,186,232,0.22)"/>
                             </linearGradient>
-                            {/* Medium 1 specular vid undre gränsytan (fading nedåt) */}
-                            <linearGradient id="medium1TopSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
-                                <stop offset="40%" stopColor="rgba(200, 50, 74, 0.09)"/>
-                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
-                            </linearGradient>
-                            {/* Glint vid laserns interaktion med glasytan */}
-                            <radialGradient id="glassSparkle" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stopColor="rgba(255, 255, 255, 1)"/>
-                                <stop offset="18%" stopColor="rgba(255, 255, 255, 0.7)"/>
-                                <stop offset="45%" stopColor="rgba(186, 230, 253, 0.25)"/>
-                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
+                            {/* Ljusfläck där strålen träffar en yta (spritt ljus i laserns färg) */}
+                            <radialGradient id="hitGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stopColor={LASER.hot} stopOpacity="1"/>
+                                <stop offset="30%" stopColor={LASER.glow} stopOpacity="0.75"/>
+                                <stop offset="100%" stopColor={LASER.glow} stopOpacity="0"/>
                             </radialGradient>
                             <linearGradient id="penBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="#64748b"/>
@@ -813,167 +773,88 @@
                                 <stop offset="60%" stopColor={glowEdgeColor} stopOpacity="0.9"/>
                                 <stop offset="100%" stopColor={glowEdgeColor} stopOpacity="0"/>
                             </radialGradient>
-                            <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="4" result="blur1"/>
-                                <feGaussianBlur stdDeviation="8" in="SourceGraphic" result="blur2"/>
-                                <feMerge>
-                                    <feMergeNode in="blur2"/>
-                                    <feMergeNode in="blur1"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
+                            <filter id="laserGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3.4"/>
                             </filter>
                         </defs>
 
-                        {/* Bakgrundsruta - övre medium */}
-                        <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="rgb(10, 15, 30)"/>
-                        {/* Bakgrundsruta - nedre medium (endast i tre-skikts-läget) */}
-                        {!isTwoLayer && <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="rgb(10, 15, 30)"/>}
+                        {/* Pappersbotten med rutnät */}
+                        <rect x="0" y="0" width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT} fill="url(#paperBg)"/>
+                        <rect x="0" y="0" width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT} fill="url(#paperGrid)"/>
 
-                        {/* === MEDIUM 1 - SKIKTAD FÖR AUTENTISK MATERIALKÄNSLA === */}
-                        <g opacity={medium1Opacity}>
-                            {/* Övre region - bas: vertikal djupgradient */}
-                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="url(#medium1UpperGradient)"/>
-                            {/* Mikrotextur */}
-                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y}
-                                  filter="url(#glassNoise)" opacity="0.45"/>
-                            {/* Diagonal sheen */}
-                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="url(#glassSheen)"/>
-                            {/* Specular band vid gränsytan (fading uppåt) */}
-                            <rect x="0" y={BLOCK_Y - 24} width={VIEWBOX_WIDTH} height="24" fill="url(#medium1BottomSpecular)"/>
-
-                            {/* Nedre region - endast tre-skiktsläge */}
+                        {/* === MEDIUM 1: genomskinligt när det är luft, blåtonat när det är
+                            vatten eller glas (opaciteten följer n1) === */}
+                        {medium1Opacity > 0 && <g opacity={medium1Opacity}>
+                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="url(#medium1Upper)"/>
+                            <rect x="0" y={BLOCK_Y - 16} width={VIEWBOX_WIDTH} height="16" fill="url(#faceGlowUp)" opacity="0.7"/>
                             {!isTwoLayer && <>
-                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="url(#medium1LowerGradient)"/>
-                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT}
-                                      filter="url(#glassNoise)" opacity="0.45"/>
-                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="url(#glassSheen)"/>
-                                {/* Specular band vid undre gränsytan (fading nedåt) */}
-                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height="24" fill="url(#medium1TopSpecular)"/>
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="url(#medium1Lower)"/>
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height="16" fill="url(#faceGlowDown)" opacity="0.7"/>
                             </>}
-                        </g>
+                        </g>}
 
-                        {/* === GLASKROPP - SKIKTAD FÖR AUTENTISK GLASKÄNSLA === */}
+                        {/* === GLASBLOCKET: skiktat för glaskänsla på papper: kall blå
+                            kropp som är tätast vid ytorna, diagonal glans, ljus kant
+                            innanför varje polerad yta och en tunn mörkblå ytlinje === */}
                         <g opacity={glassOpacity}>
-                            {/* Bas: vertikal djupgradient (Fresnel-känsla med ljusare kanter) */}
-                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#glassBodyGradient)"/>
-
-                            {/* Mikrotextur - polerad glasyta */}
-                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight}
-                                  filter="url(#glassNoise)" opacity="0.55"/>
-
-                            {/* Diagonal sheen - fångat ljus över glaset */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#glassBody)"/>
                             <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#glassSheen)"/>
-
-                            {/* Specular band vid övre kant */}
-                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height="24" fill="url(#topEdgeSpecular)"/>
-
-                            {/* Specular band vid undre kant (endast tre-skiktsläge) */}
-                            {!isTwoLayer && <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT - 24} width={VIEWBOX_WIDTH} height="24" fill="url(#bottomEdgeSpecular)"/>}
-
-                            {/* Övre kant - ljus specular-linje (polerad yta) */}
-                            <line x1="0" y1={BLOCK_Y} x2={VIEWBOX_WIDTH} y2={BLOCK_Y} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
-                            <line x1="0" y1={BLOCK_Y + 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + 1.4} stroke="rgba(200, 50, 74, 0.5)" strokeWidth="0.7"/>
-
-                            {/* Undre kant - ljus specular-linje (polerad yta) */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height="22" fill="url(#faceGlowDown)"/>
+                            {!isTwoLayer && <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT - 22} width={VIEWBOX_WIDTH} height="22" fill="url(#faceGlowUp)"/>}
+                            {/* Övre yta: mörkblå kantlinje med en vit speglingslinje strax under */}
+                            <line x1="0" y1={BLOCK_Y} x2={VIEWBOX_WIDTH} y2={BLOCK_Y} stroke="rgba(28,61,107,0.65)" strokeWidth="1.8"/>
+                            <line x1="0" y1={BLOCK_Y + 2.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + 2.4} stroke="rgba(255,255,255,0.85)" strokeWidth="1"/>
+                            {/* Undre yta (tre skikt) */}
                             {!isTwoLayer && <>
-                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
-                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT - 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT - 1.4} stroke="rgba(200, 50, 74, 0.5)" strokeWidth="0.7"/>
+                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT} stroke="rgba(28,61,107,0.65)" strokeWidth="1.8"/>
+                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT - 2.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT - 2.4} stroke="rgba(255,255,255,0.85)" strokeWidth="1"/>
                             </>}
                         </g>
 
                         {/* Medium-texter */}
-                        <text className="medium1-label" x="20" y="85" fill="#7dd3fc" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
+                        <text className="medium1-label" x="20" y="85" fill="#3f4a5c" fontSize="22" fontWeight="500" fontFamily="Poppins, sans-serif">
                             {getMediumLabel(n1, 'Medium 1')} (<tspan fontStyle="italic">n</tspan>
                             <tspan fontSize="16" dy="4">1</tspan>
                             <tspan dy="-4"> = {n1.toFixed(2).replace('.', ',')}</tspan>)
                         </text>
-                        <text x="20" y={BLOCK_Y + 40} fill="#5a6170" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
+                        <text x="20" y={BLOCK_Y + 40} fill="#1c3d6b" fontSize="22" fontWeight="500" fontFamily="Poppins, sans-serif">
                             {getMediumLabel(n2, 'Medium 2')} (<tspan fontStyle="italic">n</tspan>
                             <tspan fontSize="16" dy="4">2</tspan>
                             <tspan dy="-4"> = {n2.toFixed(2).replace('.', ',')}</tspan>)
                         </text>
 
                         {/* Normallinjer (streckade) */}
-                        {showAngles && <line x1={p2.x} y1="0" x2={p2.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
-                        {showAngles && !isTIR && !isTwoLayer && <line x1={p3.x} y1={BLOCK_Y} x2={p3.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
+                        {showAngles && <line x1={p2.x} y1="0" x2={p2.x} y2={VIEWBOX_HEIGHT} stroke="rgba(15,22,32,0.5)" strokeWidth="1.8" strokeDasharray="6,5" />}
+                        {showAngles && !isTIR && !isTwoLayer && <line x1={p3.x} y1={BLOCK_Y} x2={p3.x} y2={VIEWBOX_HEIGHT} stroke="rgba(15,22,32,0.5)" strokeWidth="1.8" strokeDasharray="6,5" />}
 
-                        {/* Ljusstrålar - grön laser med glow */}
-                        <g filter="url(#laserGlow)">
-                            <g stroke={rayColor} strokeWidth="3" strokeLinecap="round">
-                                <line x1={penTip.x} y1={penTip.y} x2={p2.x} y2={p2.y} />
-                                <line x1={p2.x} y1={p2.y} x2={p3.x} y2={p3.y} />
-                                {!isTIR && !isTwoLayer && <line x1={p3.x} y1={p3.y} x2={p4.x} y2={p4.y} />}
-                            </g>
-
-                            {/* Reflekterade strålar (streckade, partiell reflektion) */}
-                            {showReflected && !isTIR && (
-                                <g stroke={rayColor} strokeWidth="2.5" strokeLinecap="round" strokeDasharray="8,5" opacity="0.4">
-                                    <line x1={p2.x} y1={p2.y} x2={pR.x} y2={pR.y} />
-                                    {pR2 && <line x1={p3.x} y1={p3.y} x2={pR2.x} y2={pR2.y} />}
-                                </g>
-                            )}
+                        {/* Ljusstrålar i tre lager: mjukt sken, mörk kärna, het mittlinje */}
+                        <g filter="url(#laserGlow)" fill="none" strokeLinecap="round" stroke={LASER.glow}>
+                            {segLines(beam, { strokeWidth: 10, opacity: 0.55 })}
+                            {segLines(reflected, { strokeWidth: 6, opacity: 0.28 })}
+                        </g>
+                        <g fill="none" strokeLinecap="round">
+                            {segLines(beam, { stroke: LASER.core, strokeWidth: 3.6 })}
+                            {segLines(beam, { stroke: LASER.hot, strokeWidth: 1.2, opacity: 0.9 })}
+                        </g>
+                        {/* Partiellt reflekterade strålar (streckade) */}
+                        <g fill="none" strokeLinecap="round" strokeDasharray="8,5" opacity="0.6">
+                            {segLines(reflected, { stroke: LASER.core, strokeWidth: 2.6 })}
                         </g>
 
-                        {/* Glints/sparkles där lasern träffar och lämnar glasytan */}
-                        <g style={{ pointerEvents: 'none' }} opacity={glassOpacity}>
-                            {/* Övre yta - alltid en träffpunkt (även vid TIR) */}
-                            <circle cx={p2.x} cy={p2.y} r={20} fill="url(#glassSparkle)"/>
-                            <circle cx={p2.x} cy={p2.y} r={4.5} fill="rgba(255, 255, 255, 0.9)"/>
-
-                            {/* Undre yta - endast i tre-skiktsläge utan TIR */}
+                        {/* Ljusfläckar där strålen träffar och lämnar en yta */}
+                        <g style={{ pointerEvents: 'none' }}>
+                            <circle cx={p2.x} cy={p2.y} r={18} fill="url(#hitGlow)" opacity="0.85"/>
+                            <circle cx={p2.x} cy={p2.y} r={3.6} fill={LASER.hot}/>
                             {!isTIR && !isTwoLayer && <>
-                                <circle cx={p3.x} cy={p3.y} r={20} fill="url(#glassSparkle)"/>
-                                <circle cx={p3.x} cy={p3.y} r={4.5} fill="rgba(255, 255, 255, 0.9)"/>
+                                <circle cx={p3.x} cy={p3.y} r={18} fill="url(#hitGlow)" opacity="0.85"/>
+                                <circle cx={p3.x} cy={p3.y} r={3.6} fill={LASER.hot}/>
                             </>}
                         </g>
 
-                        {/* Pilar på strålar */}
+                        {/* Riktningspilar mitt på varje delsträcka */}
                         <g>
-                            {(() => {
-                                const mid1x = (penTip.x + p2.x) / 2;
-                                const mid1y = (penTip.y + p2.y) / 2;
-                                const dx1 = p2.x - penTip.x;
-                                const dy1 = p2.y - penTip.y;
-                                const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
-                                const arrowLen = 1;
-                                return <line x1={mid1x} y1={mid1y} x2={mid1x + (dx1 / len1) * arrowLen} y2={mid1y + (dy1 / len1) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
-                            })()}
-                            {(() => {
-                                const mid2x = (p2.x + p3.x) / 2;
-                                const mid2y = (p2.y + p3.y) / 2;
-                                const dx2 = p3.x - p2.x;
-                                const dy2 = p3.y - p2.y;
-                                const len2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-                                const arrowLen = 1;
-                                return <line x1={mid2x} y1={mid2y} x2={mid2x + (dx2 / len2) * arrowLen} y2={mid2y + (dy2 / len2) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
-                            })()}
-                            {!isTIR && !isTwoLayer && (() => {
-                                const mid3x = (p3.x + p4.x) / 2;
-                                const mid3y = (p3.y + p4.y) / 2;
-                                const dx3 = p4.x - p3.x;
-                                const dy3 = p4.y - p3.y;
-                                const len3 = Math.sqrt(dx3 * dx3 + dy3 * dy3);
-                                const arrowLen = 1;
-                                return <line x1={mid3x} y1={mid3y} x2={mid3x + (dx3 / len3) * arrowLen} y2={mid3y + (dy3 / len3) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
-                            })()}
-                            {showReflected && !isTIR && (() => {
-                                const midRx = (p2.x + pR.x) / 2;
-                                const midRy = (p2.y + pR.y) / 2;
-                                const dxR = pR.x - p2.x;
-                                const dyR = pR.y - p2.y;
-                                const lenR = Math.sqrt(dxR * dxR + dyR * dyR);
-                                const arrowLen = 1;
-                                return <line x1={midRx} y1={midRy} x2={midRx + (dxR / lenR) * arrowLen} y2={midRy + (dyR / lenR) * arrowLen} stroke={rayColor} strokeWidth="2.5" opacity="0.4" markerEnd="url(#arrow)" />;
-                            })()}
-                            {showReflected && !isTIR && pR2 && (() => {
-                                const midR2x = (p3.x + pR2.x) / 2;
-                                const midR2y = (p3.y + pR2.y) / 2;
-                                const dxR2 = pR2.x - p3.x;
-                                const dyR2 = pR2.y - p3.y;
-                                const lenR2 = Math.sqrt(dxR2 * dxR2 + dyR2 * dyR2);
-                                const arrowLen = 1;
-                                return <line x1={midR2x} y1={midR2y} x2={midR2x + (dxR2 / lenR2) * arrowLen} y2={midR2y + (dyR2 / lenR2) * arrowLen} stroke={rayColor} strokeWidth="2.5" opacity="0.4" markerEnd="url(#arrow)" />;
-                            })()}
+                            {beam.map((seg, k) => midArrow(seg, k, 3, 1))}
+                            {reflected.map((seg, k) => midArrow(seg, 'r' + k, 2.5, 0.6))}
                         </g>
 
                         {/* Laserpenna - sitter vid penTip och pekar mot p2 */}
@@ -991,10 +872,10 @@
                                         <circle cx={0} cy={0} r={9} fill="url(#penTipGlow)"/>
                                         {/* Pennans huvudkropp */}
                                         <rect x={-L} y={-H/2} width={bodyLen} height={H}
-                                              fill="url(#penBodyGrad)" stroke="#f3eee4" strokeWidth="0.8" rx="3" ry="3"/>
+                                              fill="url(#penBodyGrad)" stroke="rgba(15,22,32,0.7)" strokeWidth="0.8" rx="3" ry="3"/>
                                         {/* Främre kapsel (där lasern kommer ut) */}
                                         <rect x={-capLen} y={-H/2 - 1.2} width={capLen} height={H + 2.4}
-                                              fill="#f3eee4" stroke="#f3eee4" strokeWidth="0.8" rx="1.6" ry="1.6"/>
+                                              fill="#d7dde6" stroke="rgba(15,22,32,0.7)" strokeWidth="0.8" rx="1.6" ry="1.6"/>
                                         {/* Aperturen (källan) */}
                                         <circle cx={-1.5} cy={0} r={2.4} fill={apertureCenterColor}/>
                                         <circle cx={-1.5} cy={0} r={1.4} fill="#ffffff"/>
@@ -1014,9 +895,9 @@
                                                onMouseDown={(e) => e.stopPropagation()}
                                                onTouchStart={(e) => e.stopPropagation()}>
                                                 {/* Träffyta */}
-                                                <circle cx={cx} cy={cy} r={6} fill="#f3eee4"/>
+                                                <circle cx={cx} cy={cy} r={6} fill="#cfd6df"/>
                                                 {/* Bas/kant */}
-                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#f3eee4"/>
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#cfd6df"/>
                                                 {/* Knappens framsida */}
                                                 <circle cx={cx} cy={cy} r={r} fill={active ? '#22c55e' : '#14532d'}/>
                                                 {/* Glow när aktiv */}
@@ -1042,9 +923,9 @@
                                                onMouseDown={(e) => e.stopPropagation()}
                                                onTouchStart={(e) => e.stopPropagation()}>
                                                 {/* Träffyta */}
-                                                <circle cx={cx} cy={cy} r={6} fill="#f3eee4"/>
+                                                <circle cx={cx} cy={cy} r={6} fill="#cfd6df"/>
                                                 {/* Bas/kant */}
-                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#f3eee4"/>
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#cfd6df"/>
                                                 {/* Knappens framsida */}
                                                 <circle cx={cx} cy={cy} r={r} fill={active ? '#ef4444' : '#450a0a'}/>
                                                 {/* Glow när aktiv */}
@@ -1063,12 +944,12 @@
                         })()}
 
                         {/* TIR-etikett */}
-                        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#ef4444" fontSize="18" fontWeight="bold" fontFamily="Poppins, sans-serif">Total intern reflektion</text>}
+                        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#c8324a" fontSize="18" fontWeight="bold" fontFamily="Poppins, sans-serif">Total intern reflektion</text>}
 
                         {/* Vinkelbågar - övre gränsyta */}
                         {showAngles && <g>
-                            <path d={getArcPath(p2.x, p2.y, 40, 0, theta1Rad)} stroke="#0ea5e9" strokeWidth="2" fill="none"/>
-                            <text x={p2.x + 55 * Math.sin(theta1Rad/2)} y={p2.y - 55 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                            <path d={getArcPath(p2.x, p2.y, 40, 0, theta1Rad)} stroke="#1c3d6b" strokeWidth="2" fill="none"/>
+                            <text x={p2.x + 55 * Math.sin(theta1Rad/2)} y={p2.y - 55 * Math.cos(theta1Rad/2)} fill="#1c3d6b" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                 {showAngleValues
                                     ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
                                     : <><tspan>i</tspan><tspan fontSize="12" dy="4">1</tspan></>
@@ -1077,8 +958,8 @@
 
                             {isTIR ? (
                                 <g>
-                                    <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#ec4899" strokeWidth="2" fill="none"/>
-                                    <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#ec4899" fontSize="18" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                    <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#1c3d6b" strokeWidth="2" fill="none"/>
+                                    <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#1c3d6b" fontSize="18" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                         {showAngleValues
                                             ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
                                             : <><tspan>r</tspan><tspan fontSize="13" dy="4">1</tspan></>
@@ -1087,8 +968,8 @@
                                 </g>
                             ) : (
                                 <g>
-                                    <path d={getDownwardArcPath(p2.x, p2.y, 40, 0, theta2Rad)} stroke="#8b5cf6" strokeWidth="2" fill="none" />
-                                    <text x={p2.x + 60 * Math.sin(theta2Rad/2)} y={p2.y + 60 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                    <path d={getDownwardArcPath(p2.x, p2.y, 40, 0, theta2Rad)} stroke="#6d28d9" strokeWidth="2" fill="none" />
+                                    <text x={p2.x + 60 * Math.sin(theta2Rad/2)} y={p2.y + 60 * Math.cos(theta2Rad/2)} fill="#6d28d9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                         {showAngleValues
                                             ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta2Deg)}°</tspan>
                                             : <><tspan>b</tspan><tspan fontSize="12" dy="4">1</tspan></>
@@ -1101,16 +982,16 @@
                         {/* Vinkelbågar - nedre gränsyta */}
                         {showAngles && !isTIR && !isTwoLayer && (
                             <g>
-                                <path d={getArcPath(p3.x, p3.y, 40, 0, -theta2Rad)} stroke="#8b5cf6" strokeWidth="2" fill="none"/>
-                                <text x={p3.x - 55 * Math.sin(theta2Rad/2)} y={p3.y - 55 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                <path d={getArcPath(p3.x, p3.y, 40, 0, -theta2Rad)} stroke="#6d28d9" strokeWidth="2" fill="none"/>
+                                <text x={p3.x - 55 * Math.sin(theta2Rad/2)} y={p3.y - 55 * Math.cos(theta2Rad/2)} fill="#6d28d9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                     {showAngleValues
                                         ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta2Deg)}°</tspan>
                                         : <><tspan>i</tspan><tspan fontSize="12" dy="4">2</tspan></>
                                     }
                                 </text>
 
-                                <path d={getDownwardArcPath(p3.x, p3.y, 40, 0, -theta1Rad)} stroke="#0ea5e9" strokeWidth="2" fill="none" />
-                                <text x={p3.x - 60 * Math.sin(theta1Rad/2)} y={p3.y + 60 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                <path d={getDownwardArcPath(p3.x, p3.y, 40, 0, -theta1Rad)} stroke="#1c3d6b" strokeWidth="2" fill="none" />
+                                <text x={p3.x - 60 * Math.sin(theta1Rad/2)} y={p3.y + 60 * Math.cos(theta1Rad/2)} fill="#1c3d6b" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                     {showAngleValues
                                         ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
                                         : <><tspan>b</tspan><tspan fontSize="12" dy="4">2</tspan></>
@@ -1123,8 +1004,8 @@
                         {showAngles && showReflected && !isTIR && (
                             <g>
                                 {/* Reflektion vid övre gränsytan (spegelvänd kring normalen från i₁) */}
-                                <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#0ea5e9" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>
-                                <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif" opacity="0.85">
+                                <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#1c3d6b" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>
+                                <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#1c3d6b" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif" opacity="0.85">
                                     {showAngleValues
                                         ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
                                         : <><tspan>r</tspan><tspan fontSize="12" dy="4">1</tspan></>
@@ -1134,8 +1015,8 @@
                                 {/* Reflektion vid undre gränsytan (endast tre-skiktsläge) */}
                                 {!isTwoLayer && pR2 && (
                                     <g>
-                                        <path d={getArcPath(p3.x, p3.y, 60, 0, theta2Rad)} stroke="#8b5cf6" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>
-                                        <text x={p3.x + 75 * Math.sin(theta2Rad/2)} y={p3.y - 75 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif" opacity="0.85">
+                                        <path d={getArcPath(p3.x, p3.y, 60, 0, theta2Rad)} stroke="#6d28d9" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>
+                                        <text x={p3.x + 75 * Math.sin(theta2Rad/2)} y={p3.y - 75 * Math.cos(theta2Rad/2)} fill="#6d28d9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif" opacity="0.85">
                                             {showAngleValues
                                                 ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta2Deg)}°</tspan>
                                                 : <><tspan>r</tspan><tspan fontSize="12" dy="4">2</tspan></>
@@ -1152,16 +1033,16 @@
                         {showAngles && !isTIR && !isTwoLayer && !(isFullscreen && togglesOpen) && (
                             <g>
                                 <rect x={VIEWBOX_WIDTH - 170} y="15" width="155" height="70"
-                                      fill="#f3eee4"
-                                      stroke="rgba(200, 50, 74, 0.4)"
-                                      strokeWidth="1.5"
-                                      rx="8"/>
-                                <text x={VIEWBOX_WIDTH - 92.5} y="38" fill="#5a6170" fontSize="16" fontWeight="bold" textAnchor="middle" fontFamily="Poppins, sans-serif">Vinkelsamband:</text>
-                                <text x={VIEWBOX_WIDTH - 92.5} y="58" fill="#0ea5e9" fontSize="15" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                      fill="rgba(255,255,255,0.92)"
+                                      stroke="rgba(15,22,32,0.28)"
+                                      strokeWidth="1.2"
+                                      rx="6"/>
+                                <text x={VIEWBOX_WIDTH - 92.5} y="38" fill="#3f4a5c" fontSize="16" fontWeight="bold" textAnchor="middle" fontFamily="Poppins, sans-serif">Vinkelsamband:</text>
+                                <text x={VIEWBOX_WIDTH - 92.5} y="58" fill="#1c3d6b" fontSize="15" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                     <tspan fontStyle="italic">i</tspan><tspan fontSize="11" dy="3">1</tspan><tspan dy="-3"> = </tspan>
                                     <tspan fontStyle="italic">b</tspan><tspan fontSize="11" dy="3">2</tspan>
                                 </text>
-                                <text x={VIEWBOX_WIDTH - 92.5} y="76" fill="#8b5cf6" fontSize="15" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                <text x={VIEWBOX_WIDTH - 92.5} y="76" fill="#6d28d9" fontSize="15" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                     <tspan fontStyle="italic">b</tspan><tspan fontSize="11" dy="3">1</tspan><tspan dy="-3"> = </tspan>
                                     <tspan fontStyle="italic">i</tspan><tspan fontSize="11" dy="3">2</tspan>
                                 </text>
@@ -1256,9 +1137,16 @@
                         <div className="st-title" style={{ marginTop: 4 }}>Visa</div>
                         <label>
                             <input type="checkbox"
+                                checked={showReflected}
+                                onChange={(e) => setShowReflected(e.target.checked)}
+                                style={{ accentColor: '#c8324a', width: 14, height: 14 }}/>
+                            Reflekterade strålar
+                        </label>
+                        <label>
+                            <input type="checkbox"
                                 checked={showAngles}
                                 onChange={(e) => setShowAngles(e.target.checked)}
-                                style={{ accentColor: '#38bdf8', width: 14, height: 14 }}/>
+                                style={{ accentColor: '#c8324a', width: 14, height: 14 }}/>
                             Visa vinklar
                         </label>
                         {showAngles && (
@@ -1267,14 +1155,14 @@
                                     <input type="radio" name="fs-angle-display" value="labels"
                                         checked={angleDisplay === 'labels'}
                                         onChange={() => setAngleDisplay('labels')}
-                                        style={{ accentColor: '#38bdf8' }}/>
+                                        style={{ accentColor: '#c8324a' }}/>
                                     Beteckningar
                                 </label>
                                 <label>
                                     <input type="radio" name="fs-angle-display" value="values"
                                         checked={angleDisplay === 'values'}
                                         onChange={() => setAngleDisplay('values')}
-                                        style={{ accentColor: '#38bdf8' }}/>
+                                        style={{ accentColor: '#c8324a' }}/>
                                     Värden
                                 </label>
                             </div>
@@ -1285,14 +1173,14 @@
                                 <input type="radio" name="fs-layer-mode" value="three"
                                     checked={layerMode === 'three'}
                                     onChange={() => setLayerMode('three')}
-                                    style={{ accentColor: '#38bdf8' }}/>
+                                    style={{ accentColor: '#c8324a' }}/>
                                 Tre (1+2+1)
                             </label>
                             <label>
                                 <input type="radio" name="fs-layer-mode" value="two"
                                     checked={layerMode === 'two'}
                                     onChange={() => setLayerMode('two')}
-                                    style={{ accentColor: '#38bdf8' }}/>
+                                    style={{ accentColor: '#c8324a' }}/>
                                 Två (1+2)
                             </label>
                         </div>
@@ -1352,7 +1240,7 @@
                     </div>
 
                     <main className="flex-grow flex flex-col lg:flex-row px-4 sm:px-6 pb-6 gap-6 max-w-7xl mx-auto w-full">
-                        <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-[400px] lg:min-h-0 order-1 lg:order-1">
+                        <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-0 order-1 lg:order-1">
                             <SimulationView
                                 n1={n1}
                                 setN1={setN1}
@@ -1361,6 +1249,7 @@
                                 incidentAngle={incidentAngle}
                                 setIncidentAngle={setIncidentAngle}
                                 showReflected={showReflected}
+                                setShowReflected={setShowReflected}
                                 showAngles={showAngles}
                                 setShowAngles={setShowAngles}
                                 angleDisplay={angleDisplay}

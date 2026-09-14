@@ -2908,4 +2908,40 @@ window.BEGREPP = [
       { type: 'p', html: 'Just den avvägningen styr hur instrumenten ser ut i praktiken. En spektrograf på ett stort teleskop som ska mäta en svag och avlägsen galax måste prioritera ljusstyrka, medan en som letar efter exoplaneter genom att mäta stjärnors minimala hastighetsändringar i stället drivs till extrem upplösning. Spektrometrar sitter också på rymdsonder kring Mars, i kemilaboratorier, i handhållna apparater som sorterar metallskrot eller kontrollerar ädelstenar, och som små kretskortsmonterade enheter i jordbruks- och livsmedelsutrustning. Med ett gitter etsat på ett chipp och en bildsensor bredvid får hela instrumentet plats i en tändsticksask.' }
     ]
   },
+  {
+    id: 'totalreflektion',
+    term: 'Totalreflektion',
+    former: ['totalreflektion', 'totalreflektionen', 'totalreflexion', 'totalreflexionen', 'gränsvinkel', 'gränsvinkeln', 'gränsvinklar', 'kritisk vinkel', 'kritiska vinkeln'],
+    kort: 'Att ljus som ska lämna ett tätt material för ett tunnare kastas helt tillbaka, om det träffar ytan för snett. Gränsen mellan att komma ut och att studsa kallas gränsvinkeln.',
+    relaterade: ['brytningsindex', 'optisk-fiber', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'Stå i en simbassäng och titta snett uppåt mot vattenytan underifrån. Rakt ovanför dig ser du himlen, men om du lutar blicken tillräckligt mycket åt sidan slutar ytan plötsligt att vara ett fönster och blir en spegel som visar bassängens botten. Något ljus uppifrån når dig inte längre alls. Det är totalreflektion, och den inträffar varje gång ljus försöker ta sig från ett optiskt tätare material ut i ett tunnare.' },
+      { type: 'p', html: 'Förklaringen ligger i brytningen. När ljus går från tätt till tunt böjs strålen bort från ytans normal, alltså den tänkta linje som står vinkelrätt mot ytan. Ju snedare strålen kommer inifrån, desto mer böjs den, och vid en viss infallsvinkel har den böjts så mycket att den skulle gå längs med ytan i stället för ut genom den. Vid alla vinklar bortom den kan ingen stråle passera, och allt ljus kastas tillbaka in i materialet. Den vinkeln är gränsvinkeln, och den beror bara på hur mycket de två materialens brytningsindex skiljer sig åt. För vatten mot luft ligger den kring 49°, för vanligt glas kring 42°, och för en halvledare med brytningsindex omkring 3 bara kring 19°.' },
+      { type: 'p', html: 'Fenomenet är ömsom en tillgång och ömsom ett bekymmer. I en optisk fiber är det hela poängen: ljuset studsar mot kärnans vägg om och om igen och kan därför färdas mil utan att läcka ut. Kikarprismor och cykelreflexer använder samma sak i stället för speglar, eftersom en totalreflekterande yta kastar tillbaka praktiskt taget allt medan en spegel alltid slukar något. För den som vill få ut ljus ur ett material är det däremot en fälla, och det är just därför ytan på en lysdiod måste ruggas upp eller mönstras: bara det ljus som råkar träffa ytan tillräckligt rakt kommer någonsin ut.' }
+    ]
+  },
+  {
+    id: 'indirekt-bandgap',
+    term: 'Indirekt bandgap',
+    former: ['direkt bandgap', 'direkta bandgap', 'direkt bandgapet', 'direkta bandgapet', 'indirekt bandgap', 'indirekta bandgap', 'indirekt bandgapet', 'indirekta bandgapet'],
+    kort: 'Två sorters halvledare. I den ena kan en elektron falla ner och sända ut ljus på egen hand, i den andra måste gittret svänga med samtidigt, och då lyser materialet nästan inte alls.',
+    relaterade: ['bandgap', 'halvledare', 'fonon', 'foton'],
+    body: [
+      { type: 'p', html: 'En elektron i ett fast ämne har inte bara en energi, utan också en rörelsemängd. Ritar man upp de tillåtna tillstånden med energin på ena axeln och rörelsemängden på den andra får banden en kuperad form, med dalar och kullar. Det som avgör om materialet kan lysa är var i den bilden den lägsta punkten i det övre bandet ligger i förhållande till den högsta punkten i det undre.' },
+      { type: 'p', html: 'Hamnar de rakt ovanför varandra kallas bandgapet direkt. Då kan en elektron falla rakt ner i en ledig plats och lämna ifrån sig hela energiskillnaden som ljus, eftersom både energin och rörelsemängden går ihop av sig själva. Ligger de i stället förskjutna i sidled är bandgapet indirekt. Fotonen som ska bära bort energin bär nämligen nästan ingen rörelsemängd alls, så något annat måste ta hand om skillnaden. Det blir en svängning i atomgittret, en fonon. Nu måste alltså tre saker mötas på samma ställe i samma ögonblick i stället för två, och sannolikheten faller dramatiskt. Materialet kan fortfarande lysa, men så svagt och långsamt att elektronen nästan alltid hinner göra sig av med energin på något annat sätt först, oftast som ren värme.' },
+      { type: 'p', html: 'Skillnaden styr hela materialvalet i elektroniken. Kisel har indirekt bandgap och är därför lysande att räkna med men hopplöst att lysa med, vilket är skälet till att det ännu inte finns någon riktigt bra laser gjord av kisel. Lysdioder och laserdioder byggs i stället av ämnen med direkt bandgap, som galliumarsenid och galliumnitrid. Vissa material kan dessutom skifta mellan de två karaktärerna beroende på blandningsförhållandet, och då går egenskapen att välja när materialet tillverkas. Åt andra hållet har indirekta material en fördel i solceller: eftersom de absorberar ljus svagare hinner de laddningar som bildas leva längre innan de återförenas.' }
+    ]
+  },
+  {
+    id: 'nanotrad',
+    term: 'Nanotråd',
+    former: ['nanotråd', 'nanotråden', 'nanotrådar', 'nanotrådarna', 'nanoträd', 'nanoträdet', 'nanoträden'],
+    kort: 'En kristall som växer som en upprättstående pinne, ungefär hundra nanometer tjock och några mikrometer hög. Den är så smal att både ljus och materialspänningar beter sig annorlunda än i ett vanligt block.',
+    relaterade: ['nanoskala', 'halvledare', 'gitter', 'bandgap'],
+    body: [
+      { type: 'p', html: 'En nanotråd odlas, den skärs inte ut. Det vanligaste receptet börjar med en droppe guld, bara någon tiondels mikrometer stor, som läggs på en kristallyta. Provet värms i en gas som innehåller de grundämnen tråden ska bestå av. Gasen löser sig i gulddroppen, och när droppen blivit mättad börjar materialet fälla ut sig underifrån, i takt med underlagets kristallmönster. Droppen lyfts då sakta uppåt medan en rak pinne växer fram under den, och genom att byta gasblandning under resan går det att bygga in skikt med olika sammansättning på bestämda höjder.' },
+      { type: 'p', html: 'Smalheten är hela poängen. Lägger man två material med olika stora atomavstånd på varandra i en vanlig platta uppstår spänningar som till slut spricker upp i defekter, men i en tråd kan gittret ge efter utåt längs sidorna i stället. Därför går det att kombinera ämnen i en nanotråd som annars inte alls fungerar ihop. Dessutom är tråden tunnare än ljusets våglängd, och då uppträder den inte som en bit material utan snarare som en liten antenn: den kan fånga in ljus från ett område bredare än sig själv, och släppa ut ljus utan att det fastnar inne i materialet.' },
+      { type: 'p', html: 'Just de två egenskaperna gör nanotrådar intressanta som solceller, lysdioder, lasrar och ljusdetektorer. En glespackad skog av trådar kan fånga nästan lika mycket solljus som en hel skiva, fast den använder någon procent så mycket halvledarmaterial. Baksidan är att en tråd nästan bara består av yta, och på en yta sitter det alltid defekter som fångar upp laddningar och gör om deras energi till värme i stället för ljus. Att täcka trådarna med ett skyddande ytskikt, så kallad passivering, är därför ett av de svåraste stegen på vägen från laboratorium till produkt.' }
+    ]
+  },
 ];

@@ -12,18 +12,14 @@ Format per post:
 
 ## Kö
 
-- **Lysdioden som slipper fånga sitt eget ljus** **[BREVTEASER — teasad i brevet 2026-09-13, publiceras TIDIGAST måndag 2026-09-14, senast lördag 2026-09-19]** — en vanlig lysdiod släpper bara ut
-  omkring 4 % av ljuset den bildar, resten fastnar inne i materialet genom
-  totalreflektion. Ett lag vid Lunds universitet odlar i stället förgrenade
-  nanotrådar, där grenarna är tunnare än ljusets våglängd och ljuset därför inte kan
-  fångas. Kärnan har indirekt bandgap och lyser inte alls, utan matar bara in
-  laddningsbärare i grenarna. Ingång: totalreflektion, gränsvinkel, brytningsindex,
-  bandgap och våglängd — ovanligt lätt att koppla till optiken. Nano Research (2026),
-  DOI 10.26599/nr.2026.94908799, Magnus Borgström och Yue Zhao. OBS: tekniken är
-  ännu experimentell och slår inte kommersiella lysdioder — skriv inte om den som
-  färdig. Källa (Phys.org 2026-09-05):
-  https://phys.org/news/2026-09-significant-efficiency-gains.html
-  (tillagd 2026-09-05)
+- **Vatten som aldrig blir is — glasövergången fångad i nanotunna skikt** **[BREVTEASER]** — genom att
+  stänga in vatten mellan lipidmembran hindras det från att kristallisera, och då syns
+  övergången från vätska till glas i ett mycket bredare temperaturområde än väntat,
+  ungefär −35 °C till −20 °C. Ingång: fasövergångar, smältpunkt, underkylning och vad
+  ett glas egentligen är. Nature Communications, DOI 10.1038/s41467-026-72955-y, ANSTO
+  och Monash University. Källa (Phys.org 2026-09-03):
+  https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html
+  (tillagd 2026-09-04)
 
 - **Supraflytande helium-3 som bärare av kvantbitar** — två arbeten samma vecka föreslår
   helium som grund för kvantdatorer: snabbare tunnling i helium-3 respektive en
@@ -103,15 +99,6 @@ Format per post:
   originalstudien och kontrollera vad som faktiskt uppmätts — rubriken lovar mycket.
   Källa (Phys.org 2026-09-03):
   https://phys.org/news/2026-09-scientists-einstein-gravity-quantum-world.html
-  (tillagd 2026-09-04)
-
-- **Vatten som aldrig blir is — glasövergången fångad i nanotunna skikt** — genom att
-  stänga in vatten mellan lipidmembran hindras det från att kristallisera, och då syns
-  övergången från vätska till glas i ett mycket bredare temperaturområde än väntat,
-  ungefär −35 °C till −20 °C. Ingång: fasövergångar, smältpunkt, underkylning och vad
-  ett glas egentligen är. Nature Communications, DOI 10.1038/s41467-026-72955-y, ANSTO
-  och Monash University. Källa (Phys.org 2026-09-03):
-  https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html
   (tillagd 2026-09-04)
 
 - **BESIII sätter världens skarpaste gräns för lambdahyperonens elektriska dipolmoment**

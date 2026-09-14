@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 13 Sep 2026 15:21:17 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 14 Sep 2026 01:34:37 GMT</lastBuildDate>
+    <item>
+      <title>Nästan allt ljus fastnar inne i lysdioden — nu har fysiker i Lund odlat nanoträd som är tunnare än ljusets våglängd</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus</guid>
+      <pubDate>Mon, 14 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Halvledarfysik</category>
+      <description>En lysdiod bildar långt mer ljus än den släpper ifrån sig. Det mesta studsar tillbaka i materialets egen yta och blir värme. Ett forskarlag vid Lunds universitet har nu odlat grenverk av halvledartrådar så tunna att ljuset inte kan fångas, och byggt stammen av ett material som inte kan lysa själv.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus.jpg" length="247528" type="image/jpeg"/>
+    </item>
     <item>
       <title>Isen som är glödhet och ändå fast har bytt kristallform — och spåret leder till Neptunus sneda magnetfält</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>Niobdiselenid leder ström utan motstånd först när det kylts till några grader över absoluta nollpunkten. Genom att lägga provet inuti en liten metallring, som formar om vakuumets egna fluktuationer, har ett forskarlag flyttat gränsen uppåt med drygt fem procent — utan att tillföra någon energi alls.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-26-vakuumet-som-hjalper-till.jpg" length="173168" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Elektronmolnet i kemiboken är uträknat, inte sett — nu har ett forskarlag fotograferat ett i tre dimensioner</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-25-vagfunktionen-fotograferad</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-25-vagfunktionen-fotograferad</guid>
-      <pubDate>Tue, 25 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Fysiker i Göttingen har återskapat hela den tredimensionella vågfunktionen för en elektron i en organisk molekyl, med detaljer finare än avståndet mellan molekylens kolatomer. Tidigare krävdes en synkrotronanläggning för saken — nu räcker en laseruppsättning på ett bordsstativ.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-25-vagfunktionen-fotograferad.jpg" length="634723" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

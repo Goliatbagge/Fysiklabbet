@@ -103,6 +103,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus",
+    date: "2026-09-14",
+    title: "Nästan allt ljus fastnar inne i lysdioden — nu har fysiker i Lund odlat nanoträd som är tunnare än ljusets våglängd",
+    deck: "En lysdiod bildar långt mer ljus än den släpper ifrån sig. Det mesta studsar tillbaka i materialets egen yta och blir värme. Ett forskarlag vid Lunds universitet har nu odlat grenverk av halvledartrådar så tunna att ljuset inte kan fångas, och byggt stammen av ett material som inte kan lysa själv.",
+    category: "Halvledarfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus.jpg",
+    imageAlt: "Svartvit elektronmikroskopbild av fyra upprättstående halvledartrådar sedda snett uppifrån. Från varje stam sticker det ut tiotals tunna, raka grenar åt alla håll, som barr på en gran. En vit måttstock nere till vänster är märkt 500 nm, och en infälld ruta uppe till höger visar samma trådar rakt ovanifrån som fyrkantiga stjärnor.",
+    imageCredit: "Elektronmikroskopbild: Yue Zhao med flera, Nano Research 2026 (CC BY 4.0). Måttstocken är 500 nanometer. Den infällda rutan visar samma nanoträd rakt uppifrån.",
+    tags: ["halvledare", "lysdiod", "optik", "totalreflektion", "brytningsindex", "bandgap", "nanostrukturer", "nanotrådar", "elektroluminescens", "energieffektivitet", "fotonik"],
+    sources: [
+      { name: "Lunds universitet: A new type of LED light could bring significant efficiency gains (2026-09-04)", url: "https://www.lunduniversity.lu.se/article/new-type-led-light-could-bring-significant-efficiency-gains" },
+      { name: "Phys.org: A new type of LED light could bring significant efficiency gains (2026-09-05)", url: "https://phys.org/news/2026-09-significant-efficiency-gains.html" },
+      { name: "Compound Semiconductor: Branched nanowire LED could bring big efficiency gains", url: "https://compoundsemiconductor.net/article/125308/Branched_nanowire_LED_could_bring_big_efficiency_gains" }
+    ],
+    research: { citation: "Yue Zhao, Kristi Adham, Haonan Chen och Magnus T. Borgström, ”Diffusion-driven light emission in branched GaInP nanowire LEDs enabled by indirect–direct bandgap engineering”, Nano Research 19, 94908799 (2026)", url: "https://doi.org/10.26599/NR.2026.94908799" },
+    body: [
+      { type: 'p', html: 'En lysdiod är en av de effektivaste ljuskällor människan har byggt. Den gör om ström till ljus nästan utan omvägar, och har på tjugo år trängt undan både glödlampan och lysröret. Men det finns ett steg i kedjan som fortfarande är förvånansvärt dåligt, och det är det allra sista: att få ut ljuset ur materialet det bildades i.' },
+      { type: 'p', html: 'Ett forskarlag vid Lunds universitet angriper nu det steget från ett oväntat håll. I stället för att polera, rugga eller linsa ytan har de odlat själva ljuskällan som ett mikroskopiskt grenverk, där varje gren är smalare än den ljusvåg den ska sända ut. Arbetet är publicerat i tidskriften <em>Nano&nbsp;Research</em> och gjordes inom NanoLund av Yue Zhao, Kristi Adham, Haonan Chen och Magnus T. Borgström.' },
+
+      { type: 'h2', text: 'Ljusfällan sitter i ytan' },
+      { type: 'p', html: 'Problemet heter totalreflektion, och det uppstår när ljus ska ta sig från ett tätt material ut i luften. Halvledaren har ett högt brytningsindex, kring $n = 3{,}3$, medan luften ligger på ungefär 1. En ljusstråle inifrån kan då bara passera ytan om den träffar den tillräckligt rakt. Lutar den mer än en viss gränsvinkel kastas hela strålen tillbaka in i materialet igen, som mot en spegel.' },
+      { type: 'p', html: 'Gränsvinkeln ges av $\\sin v_\\mathrm{g} = \\dfrac{1}{n}$, och med $n = 3{,}3$ blir den ungefär 18° (egen räkning). Ljuset som bildas inne i en lysdiod går åt alla håll, och bara den lilla del som råkar peka inom en så smal kon kommer ut. Räknar man efter hur stor andel av alla riktningar som ryms där landar man på ett par procent per yta, också det en egen räkning, och det stämmer i storleksordning med de omkring 4&nbsp;% som forskarna anger att en obehandlad diod släpper ifrån sig. Resten studsar fram och tillbaka tills det absorberas och blir värme.' },
+      { type: 'p', html: 'Industrin löser detta genom att bearbeta ytan efteråt: rugga upp den, etsa mönster i den eller gjuta en lins över den, så att fler strålar råkar träffa någon yta tillräckligt rakt. Det fungerar, men varje sådant moment kostar pengar i tillverkningen.' },
+
+      { type: 'h2', text: 'Ett grenverk i stället för en plan yta' },
+      { type: 'p', html: 'Lundagruppens utgångspunkt är att fällan aldrig gillras om ljuset bildas i något som är mindre än ljusvågen själv. En våg kan inte reflekteras mot en gränsyta som är smalare än den är.' },
+      { type: 'quote', html: 'Om strukturerna görs tillräckligt tunna, tunnare än ljusets våglängd, kan ljuset inte fångas inne i materialet på samma sätt.', cite: 'Magnus Borgström, professor i fasta tillståndets fysik vid Lunds universitet (översatt från engelska)' },
+      { type: 'p', html: 'Strukturerna de bygger ser ut som små granar och kallas därför nanoträd. Först odlas en skog av upprättstående trådar av galliumindiumfosfid ur ett hexagonalt mönster av guldprickar på en underlagsskiva, med en mikrometer mellan trådarna. Sedan doppas skogen i en guldlösning, så att nya, mycket mindre guldpartiklar fastnar längs trådarnas sidor, och i nästa odlingsomgång växer det ut en gren ur varje sådan partikel.' },
+      { type: 'p', html: 'Det är i grenarna ljuset ska bildas, och de är bara någon tiondels mikrometer tjocka. En sådan skog använder dessutom försvinnande lite halvledarmaterial. Som allmänt räkneexempel nämner forskarna trådar med 130&nbsp;nm diameter i ett hexagonalt mönster med en mikrometer mellan trådarna: de täcker bara 1,53&nbsp;% av underlagets yta. Stammarna i den här studien odlades ur något grövre hål, 200&nbsp;nm i diameter, och i en färdig diod på 100&nbsp;µm × 100&nbsp;µm sitter omkring 11&nbsp;000 nanoträd parallellkopplade under ett genomskinligt lock av indiumtennoxid.' },
+
+      { type: 'h2', text: 'Stammen får inte lysa' },
+      { type: 'p', html: 'Här kommer artikelns egentliga poäng. Strömmen matas in genom stammen, men om stammen också lyser är halva vinsten borta: det ljuset bildas ju inne i en tjock struktur och fastnar precis som förut. Lösningen är att välja ett material till stammen som helt enkelt inte kan lysa.' },
+      { type: 'p', html: 'Galliumindiumfosfid finns nämligen i två varianter beroende på hur mycket gallium man blandar i. Under ungefär 68&nbsp;% gallium har materialet ett direkt bandgap: en elektron kan falla ner i en tom plats och lämna ifrån sig hela energiskillnaden som en foton, direkt. Över den gränsen blir bandgapet indirekt, och då räcker det inte med elektronen och fotonen. Rörelsemängden går inte ihop, och gittret måste bidra med en svängning, en fonon, samtidigt. Att tre saker ska mötas på en gång är mycket osannolikare, så ljusutsändningen bromsas kraftigt.' },
+      { type: 'p', html: 'Forskarna odlade därför stammar med 83,7&nbsp;% gallium, vilket ger ett indirekt bandgap på 2,24&nbsp;eV, och grenar med lägre galliumhalt och direkt bandgap som lyser vid ungefär 810&nbsp;nm, strax bortom det ögat uppfattar som rött. Laddningsbärarna som matas in i stammen lever då länge utan att hinna lysa, och vandrar i stället ut i grenarna där energitrappan går nedåt. Som jämförelse tillverkades också dioder med en stam som hade direkt bandgap, 52&nbsp;% gallium och ett gap på 1,92&nbsp;eV.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus-2.jpg', alt: 'Två diagram sida vid sida med våglängd i nanometer på den vågräta axeln och ljusstyrka på den lodräta. Det vänstra har två ungefär lika höga toppar, en vid 650 och en vid 820 nanometer. Det högra har en enda dominerande topp vid 830 nanometer och bara låga knölar kring 550 och 650 nanometer.', caption: 'Ljuset från dioderna, uppmätt vid olika pålagd spänning. Till vänster en diod vars stam har direkt bandgap: både stammen (kring 650&nbsp;nm) och grenarna (kring 810&nbsp;nm) lyser. Till höger en diod med indirekt stam, där nästan allt ljus kommer från grenarna.', credit: 'Diagram: Yue Zhao med flera, Nano Research 2026 (CC BY 4.0)' },
+      { type: 'p', html: 'Skillnaden syns direkt i mätningarna. Dioden med direkt stam sänder ut två ungefär lika starka färger, en från stammen vid 645&nbsp;nm och en från grenarna vid 810&nbsp;nm. Dioden med indirekt stam ger i stället en enda topp, från grenarna, ända tills spänningen passerar omkring 12&nbsp;V. Först då börjar stammen lysa svagt.' },
+      { type: 'quote', html: 'Våra resultat visar att ljuset bildas exakt där vi vill att det ska bildas, vilket är avgörande för att tekniken ska fungera.', cite: 'Yue Zhao, doktorand vid Lunds universitet (översatt från engelska)' },
+
+      { type: 'h2', text: 'Kylan avgjorde vilken förklaring som stämde' },
+      { type: 'p', html: 'En invändning låg nära till hands: kanske lyser stammen ändå, och grenarna absorberar bara stammens ljus och sänder ut det igen på sin egen våglängd. Skulle det vara förklaringen måste stammens topp synas i spektrumet, och det gör den inte. Ljuset kommer alltså av att laddningsbärarna faktiskt vandrar ut i grenarna innan de återförenas.' },
+      { type: 'p', html: 'Ett andra prov gjordes genom att kyla dioderna ända ner till 10&nbsp;K och mäta om från kylan upp till rumstemperatur. Då uppträder de två sorternas ljus rakt motsatt. Grenarnas topp blir svagare ju varmare det blir, eftersom defekter på trådarnas fria ytor vaknar till liv med värmen och fångar laddningsbärare som annars hade blivit ljus. Stammens toppar gör tvärtom och blir starkare, för de behöver ju fononer, och fononerna blir fler ju varmare gittret är. Att de två kurvorna lutar åt olika håll är ett tydligt kvitto på att det verkligen är ett direkt och ett indirekt bandgap som arbetar bredvid varandra.' },
+
+      { type: 'h2', text: 'Ett steg, inte en produkt' },
+      { type: 'p', html: 'Det ska sägas rakt ut: de här dioderna är ännu inte i närheten av en lysdiod i en lampa. De behöver hög spänning, de läcker ström vid låga spänningar, och kontakterna mot de tunna trådarna är svåra att göra bra. Den största förlusten är de defekter som sitter på nanotrådarnas fria ytor, och just ytan är det gott om när materialet är format som barr.' },
+      { type: 'p', html: 'Men en sak som ofta plågar vanliga lysdioder uteblev. Planära dioder tappar i verkningsgrad när man skruvar upp strömmen, ett välkänt fenomen på engelska kallat efficiency droop. Nanoträden visade i stället stigande relativ verkningsgrad med ökande strömtäthet inom det område som mättes. Nästa steg för gruppen är att passivera ytorna och förbättra kontakterna.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Totalreflektion är samma fenomen som gör en optisk fiber möjlig. Där är fällan önskad: ljuset studsar tusentals gånger utan att slippa ut, och kan därför bära information mil efter mil.',
+        'Kisel, som hela elektronikindustrin vilar på, har indirekt bandgap. Det är därför kisel är utmärkt att räkna med men uselt på att lysa, och varför lysdioder och laserdioder görs av andra ämnen.',
+        'Grenarna i studien lyser vid 810&nbsp;nm. Ögat ser ingenting där, men en mobilkamera gör det, vilket är samma skäl som att fjärrkontrollens lampa syns svagt lysande genom telefonens kamera.',
+        'Blå lysdioder gav Nobelpriset i fysik 2014, just för att det var svårt att hitta ett material med tillräckligt brett bandgap. Utan dem hade det inte funnits något vitt lysdiodsljus alls.'
+      ] },
+
+      { type: 'p', html: 'Att bara några procent av ljuset kommer ut ur en modern ljuskälla är en sådan förlust som lätt glöms bort, eftersom den är inbyggd i fysiken och inte ser ut som ett fel. Att lösa den med geometri, genom att göra ljuskällan mindre än ljuset, är i alla fall en annan väg än att slipa ytan efteråt.' }
+    ],
+    simulering: {
+      href: "fysik2-brytning-app.html",
+      name: "Brytningslagen",
+      text: "Dra upp infallsvinkeln när strålen går från ett tätt material mot ett tunnare och se hur den bryts allt kraftigare tills den vid gränsvinkeln inte kommer ut alls. Det är precis den fällan ljuset hamnar i inne i en lysdiod."
+    },
+    larare: {
+      moment: [
+        { label: "Ljusets brytning", href: "katalog.html?id=fy2-4.4" },
+        { label: "Halvledare och dioder" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Gränsvinkeln beror bara på de två materialens brytningsindex. Varför blir fällan värre ju högre brytningsindex ljuskällan har, och vad skulle hända om lysdioden göts in i plast i stället för att gränsa mot luft?",
+        "I ett material med indirekt bandgap måste en fonon medverka för att en elektron ska kunna sända ut ljus. Varför gör det kravet att processen blir så mycket osannolikare?",
+        "Forskarna tolkar att grenarnas ljus blir svagare vid högre temperatur som ett tecken på defekter i ytan. Vilken annan mätning skulle kunna pröva den tolkningen?"
+      ]
+    }
+  },
+  {
     id: "2026-09-13-het-is-under-tryck",
     date: "2026-09-13",
     title: "Isen som är glödhet och ändå fast har bytt kristallform — och spåret leder till Neptunus sneda magnetfält",

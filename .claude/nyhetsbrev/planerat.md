@@ -35,3 +35,19 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   Lanserat 2026-08-28. **[AVKLARAT 2026-08-30]** Nämnd under "Nytt på
   Fysiklabbet" i brevet 2026-08-30 ("Text i valfri storlek på projektorn"),
   länkad till `https://fysiklabbet.se/katalog.html?id=fy2-1.2`.
+
+- **Brytningslagen i nytt utseende: SKA NÄMNAS i brevet 2026-09-20** under
+  "Nytt på Fysiklabbet" (uttryckligt önskemål från användaren 2026-09-14,
+  ingen teaser utan en riktig punkt med skärmdump av scenen). Simuleringen
+  `https://fysiklabbet.se/fysik2-brytning-app.html` har ritats om i sajtens
+  laboranstema: scenen ligger på rutat papper, glasblocket har en kall blå
+  ton som är tätast vid de polerade ytorna, en sned glasreflex och en tunn
+  speglingslinje under varje yta, och tonen blir djupare ju högre
+  brytningsindex man väljer, från luft till diamant. Laserstrålen har en
+  mörk, mättad kärna med ljus mittlinje och mjukt sken, så att både grön och
+  röd stråle syns tydligt (förut försvann den neongröna strålen mot den ljusa
+  bakgrunden). Reflekterade strålar går nu att slå på även i fullskärm.
+  Vinkla det som något att visa på projektorn: dra i laserpennan, byt
+  material, hitta gränsvinkeln för totalreflektion med glas mot luft.
+  Pushat till main 2026-09-14 (commit 8f9cddf); raden finns även i UPDATES i
+  index.html. Bocka av här när den nämnts.

@@ -143,7 +143,8 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    ger falsk "för stor högermarginal").
 16. ~~mekanik fy2-1.x (moment/cirkelrörelse/pendlar)~~ — **KLART (2026-07-01).**
    fy2-1.1..1.4 klara sedan tidigare; fy2-1.5–1.8 klara nu (konisk pendel,
-   kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1
+   kaströrelse/kastparabel, fatala gungan, flygande kossan; kossan flyttades
+   2026-09-14 från eget avsnitt 1.9 till ett exempel i 1.7). **KAPITEL 1
    KOMPLETT.** (Avsnitten omnumrerade 2026-08-29: fördjupningen fy2-1.3
    Stabilitet sköts in, gamla 1.3–1.7 heter nu 1.4–1.8.)
 17. ~~fy2-3.x magnetism~~ — **KLART (2026-07-02). KAPITEL 3 ELEKTROMAGNETISM

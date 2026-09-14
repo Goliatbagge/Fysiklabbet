@@ -13749,17 +13749,25 @@ $$ T = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot \\cos 25^\\circ}{9{,}82}} = 2{,}3\\ \\mat
         },
         {
             level: 1,
-            question: `På ett nöjesfält finns en slänggunga där stolarna hänger i $6{,}0\\ \\mathrm{m}$ långa kedjor. När den snurrar bildar kedjorna vinkeln $35^\\circ$ mot vertikalen. Hur lång tid tar ett varv? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+            question: `I en laboration hängs en leksakskossa i ett snöre och sätts i rörelse som en konisk pendel. Gruppen mäter tiden för $10$ varv till $21\\ \\mathrm{s}$ och cirkelbanans höjd under takfästet till $1{,}1\\ \\mathrm{m}$. Vilket värde på *g* ger mätningen?
 
-${makeConicalPendulum({ angle: 35, lLabel: 'l = 6,0 m' })}`,
-            answer: { value: 4.4, unit: 's' },
-            solution: `Slänggungan är en konisk pendel:
+${makeConicalPendulum({ angle: 27, hLabel: 'h = 1,1 m', angleLabel: null })}`,
+            answer: { value: 9.8, unit: 'm/s²' },
+            solution: `Snörets lodräta del $l\\cos\\alpha$ är banans höjd *h* under fästet, så periodformeln blir $T = 2\\pi\\sqrt{h/g}$. Löser vi ut *g* får vi
 
-$$ T = 2\\pi\\sqrt{\\frac{l \\cdot \\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{6{,}0 \\cdot \\cos 35^\\circ}{9{,}82}} = 4{,}4\\ \\mathrm{s} $$
+$$ g = \\frac{4\\pi^2 \\cdot h}{T^2} $$
 
-**Svar:** Ett varv tar ungefär $4{,}4\\ \\mathrm{s}$.
+Först periodtiden (tiden för ett varv):
 
-**Generell slutsats:** Ju större vinkel (snabbare rotation), desto mindre $\\cos\\alpha$ och desto kortare periodtid — slänggungan snurrar fortare ju mer kedjorna sticker ut.`,
+$$ T = \\frac{21}{10} = 2{,}1\\ \\mathrm{s} $$
+
+Insättning:
+
+$$ g = \\frac{4\\pi^2 \\cdot 1{,}1}{2{,}1^2} = 9{,}8\\ \\mathrm{m/s^2} $$
+
+**Svar:** Mätningen ger $g \\approx 9{,}8\\ \\mathrm{m/s^2}$, mycket nära tabellvärdet $9{,}82\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Bara höjden *h* och periodtiden *T* behövs. Pendelns massa och banans radie förkortas bort. Att ta tiden för tio varv och dela med tio minskar mätfelet i tidtagningen.`,
         },
         {
             level: 1,
@@ -13963,116 +13971,6 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
 **Svar:** Bollen är ungefär $4{,}5\\ \\mathrm{m}$ över marken vid muren och går alltså **över** den (med drygt $2\\ \\mathrm{m}$ till godo).
 
 **Generell slutsats:** Tricket är att den vågräta rörelsen ger *tiden* att nå muren, och att den tiden sedan sätts in i höjdformeln. När man frågar efter höjden vid en bestämd punkt (mur, nät, ribba) duger inga färdiga vidd-/höjdformler — man måste följa de två rörelserna separat.`,
-        },
-    ],
-
-    'fy2-1.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
-        {
-            level: 1,
-            question: `Med en konisk pendel kan man bestämma tyngdaccelerationen. Pendeln sveper i en cirkel $0{,}90\\ \\mathrm{m}$ under takfästet med periodtiden $1{,}9\\ \\mathrm{s}$. Vilket värde på *g* ger detta?
-
-${makeConicalPendulum({ angle: 28, hLabel: 'h = 0,90 m', angleLabel: null })}`,
-            answer: { value: 9.8, unit: 'm/s²' },
-            solution: `Den koniska pendelns g-bestämning bygger på sambandet
-
-$$ g = \\frac{4\\pi^2 \\cdot h}{T^2} $$
-
-där *h* är cirkelbanans höjd under upphängningspunkten. Insättning:
-
-$$ g = \\frac{4\\pi^2 \\cdot 0{,}90}{1{,}9^2} = 9{,}8\\ \\mathrm{m/s^2} $$
-
-**Svar:** $g \\approx 9{,}8\\ \\mathrm{m/s^2}$.
-
-**Generell slutsats:** Det fina med metoden är att bara höjden *h* och periodtiden *T* behövs — pendelns massa och banans radie behöver inte mätas.`,
-        },
-        {
-            level: 1,
-            question: `Hur långt under takfästet sveper en konisk pendel om periodtiden är $2{,}0\\ \\mathrm{s}$? Använd $g = 9{,}82\\ \\mathrm{m/s^2}$.
-
-${makeConicalPendulum({ angle: 30, hLabel: 'h', angleLabel: null })}`,
-            answer: { value: 0.99, unit: 'm' },
-            solution: `Vi löser ut höjden *h* ur g-sambandet:
-
-$$ g = \\frac{4\\pi^2 h}{T^2} \\quad\\Leftrightarrow\\quad h = \\frac{g \\cdot T^2}{4\\pi^2} = \\frac{9{,}82 \\cdot 2{,}0^2}{4\\pi^2} = 0{,}99\\ \\mathrm{m} $$
-
-**Svar:** Cirkelbanan ligger ungefär $0{,}99\\ \\mathrm{m}$ under takfästet.
-
-**Generell slutsats:** Höjden *h* är den lodräta delen av tråden ($h = l\\cos\\alpha$), inte trådlängden — det är den som bestämmer periodtiden.`,
-        },
-        {
-            level: 1,
-            question: `En konisk pendel sveper $1{,}2\\ \\mathrm{m}$ under takfästet. Beräkna periodtiden. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeConicalPendulum({ angle: 32, hLabel: 'h = 1,2 m', angleLabel: null })}`,
-            answer: { value: 2.2, unit: 's' },
-            solution: `Eftersom höjden $h = l\\cos\\alpha$ kan periodformeln skrivas $T = 2\\pi\\sqrt{h/g}$:
-
-$$ T = 2\\pi\\sqrt{\\frac{h}{g}} = 2\\pi\\sqrt{\\frac{1{,}2}{9{,}82}} = 2{,}2\\ \\mathrm{s} $$
-
-**Svar:** Periodtiden är ungefär $2{,}2\\ \\mathrm{s}$.
-
-**Generell slutsats:** Detta är samma samband som $g = 4\\pi^2 h/T^2$, bara löst för *T* i stället för *g*.`,
-        },
-
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
-        {
-            level: 2,
-            question: `I en laboration mäter en grupp tiden för $10$ varv med en konisk pendel till $21\\ \\mathrm{s}$, och cirkelbanans höjd under fästet till $1{,}1\\ \\mathrm{m}$. Vilket värde på *g* får de?
-
-${makeConicalPendulum({ angle: 27, hLabel: 'h = 1,1 m', angleLabel: null })}`,
-            answer: { value: 9.8, unit: 'm/s²' },
-            solution: `Först bestämmer vi periodtiden (tiden för ett varv):
-
-$$ T = \\frac{21}{10} = 2{,}1\\ \\mathrm{s} $$
-
-Sedan g-sambandet:
-
-$$ g = \\frac{4\\pi^2 \\cdot h}{T^2} = \\frac{4\\pi^2 \\cdot 1{,}1}{2{,}1^2} = 9{,}8\\ \\mathrm{m/s^2} $$
-
-**Svar:** De får $g \\approx 9{,}8\\ \\mathrm{m/s^2}$ — mycket nära det sanna värdet $9{,}82\\ \\mathrm{m/s^2}$.
-
-**Generell slutsats:** Att mäta tiden för $10$ varv och dela med $10$ minskar slumpmässiga mätfel i tidtagningen — ett standardgrepp i laborationer.`,
-        },
-        {
-            level: 2,
-            question: `En konisk pendel har trådlängden $1{,}8\\ \\mathrm{m}$ och tråden bildar $40^\\circ$ mot vertikalen. Beräkna periodtiden via banans höjd. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeConicalPendulum({ angle: 40, lLabel: 'l = 1,8 m', hLabel: 'h' })}`,
-            answer: { value: 2.4, unit: 's' },
-            solution: `Cirkelbanans höjd under fästet är trådens lodräta del:
-
-$$ h = l\\cos\\alpha = 1{,}8 \\cdot \\cos 40^\\circ = 1{,}38\\ \\mathrm{m} $$
-
-Periodtiden blir
-
-$$ T = 2\\pi\\sqrt{\\frac{h}{g}} = 2\\pi\\sqrt{\\frac{1{,}38}{9{,}82}} = 2{,}4\\ \\mathrm{s} $$
-
-**Svar:** Periodtiden är ungefär $2{,}4\\ \\mathrm{s}$.
-
-**Generell slutsats:** Här kopplas geometrin ($h = l\\cos\\alpha$) ihop med periodformeln. Det ger samma svar som $T = 2\\pi\\sqrt{l\\cos\\alpha / g}$ direkt.`,
-        },
-
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
-        {
-            level: 3,
-            question: `En konisk pendel har massan $0{,}25\\ \\mathrm{kg}$ och trådlängden $2{,}0\\ \\mathrm{m}$. När den snurrar mäts spännkraften i tråden till $2{,}8\\ \\mathrm{N}$. Bestäm pendelns periodtid. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
-
-${makeConicalPendulum({ angle: 32, lLabel: 'l = 2,0 m', angleLabel: null, forces: true })}`,
-            answer: { value: 2.7, unit: 's' },
-            solution: `Spännkraften ger oss vinkeln — och vinkeln ger oss periodtiden. Vi måste alltså först dela upp spännkraften i komposanter.
-
-**Steg 1 — vinkeln ur den lodräta jämvikten.** Spännkraftens lodräta komposant bär tyngden:
-$$ F_S \\cos\\alpha = mg \\quad\\Leftrightarrow\\quad \\cos\\alpha = \\frac{mg}{F_S} = \\frac{0{,}25 \\cdot 9{,}82}{2{,}8} = 0{,}877 $$
-
-(Det ger $\\alpha = 28{,}8^\\circ$, men vi behöver bara $\\cos\\alpha$ vidare.)
-
-**Steg 2 — periodtiden.** Banans höjd är $h = l\\cos\\alpha$, så
-$$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{2{,}0 \\cdot 0{,}877}{9{,}82}} = 2{,}7\\ \\mathrm{s} $$
-
-**Svar:** Periodtiden är ungefär $2{,}7\\ \\mathrm{s}$.
-
-**Generell slutsats:** Insikten är att den uppmätta spännkraften, via den lodräta jämvikten $F_S\\cos\\alpha = mg$, *bestämmer vinkeln* — och först därefter kan periodtiden beräknas. Att kontrollera spännkraften mot tyngdkraften ($F_S > mg$ alltid, eftersom den även måste kröka banan) är en bra rimlighetskontroll.`,
         },
     ],
 

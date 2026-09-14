@@ -17847,6 +17847,212 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: den flygande kossan (fy2-1.7 Ex 2) ----------
+   * En leksakskossa i ett snöre flyger runt i en vågrät cirkel 1,20 m
+   * under takfästet; tio varv tar 22,0 s. Sökt: tyngdaccelerationen g.
+   * Poängen: snörets lodräta del l·cos α ÄR höjden h, så periodformeln
+   * blir T = 2π√(h/g) och g löses ut. Varken massan eller banradien
+   * behövs. Periodtiden räknas ut som DELUTRÄKNING inne i klammern
+   * (22,0 s / 10), och avrundningen sker först i sista ledet: tre
+   * värdesiffror i båda mätvärdena ger tre i svaret (9,79 m/s²). */
+  function layoutFlygandekossan(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+
+    /* --- figurens geometri: tak, snöre 30° mot lodlinjen, cirkelbana --- */
+    var fx = 222, fy = 64;                    /* snörets fäste i taket */
+    var KL = 184;                             /* snörets längd i px */
+    var kx = fx + KL * Math.sin(Math.PI / 6); /* kossan (314, 223) */
+    var ky = fy + KL * Math.cos(Math.PI / 6);
+    var erx = kx - fx, ery = 20;              /* cirkelbanans ellips */
+
+    /* ---- steg 1: rita det vi vet: tak, snöre, kossa, bana ---- */
+    T.tanke(T.figurBubble(262, [
+      [['Ritar taket, snöret, kossan och']],
+      [['den vågräta cirkeln som hon']],
+      [['flyger runt i.']]
+    ]));
+    T.line([fx - 102, fy], [fx + 108, fy]);   /* taket */
+    T.hatch([fx - 102, fy], [fx + 108, fy], 13, null, 9);
+    T.pause(140);
+    T.dash([fx, fy], [fx, ky + 2]);           /* lodlinjen */
+    T.pause(140);
+    T.line([fx, fy], [kx, ky - 12]);          /* snöret ned till ryggen */
+    T.pause(140);
+    /* cirkelbanan: streckad ellips (perspektiv uppifrån-snett) */
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 72; i++) {
+        var t = (i / 72) * Math.PI * 2;
+        pts.push([fx + Math.cos(t) * (erx + rnd(-1, 1)),
+                  ky + Math.sin(t) * (ery + rnd(-0.8, 0.8))]);
+      }
+      for (var k = 0; k + 2 < pts.length; k += 4) {
+        acts.push({ kind: 'stroke', pts: pts.slice(k, k + 3) });
+      }
+    })();
+    T.pause(140);
+    /* kossan: kropp (avlång ring), huvud, öron, ben och svans, i grafit */
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 15; i++) {
+        var a = -1.0 + (i / 15) * Math.PI * 2.12;
+        pts.push([kx + Math.cos(a) * (17 + rnd(-0.7, 0.7)),
+                  ky + Math.sin(a) * (10 + rnd(-0.7, 0.7))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });          /* kroppen */
+      T.pause(90);
+      T.circle(kx + 21, ky - 9, 6);                     /* huvudet */
+      T.line([kx + 18, ky - 14], [kx + 15, ky - 20]);   /* öra */
+      T.line([kx + 24, ky - 14], [kx + 27, ky - 20]);   /* öra */
+      T.pause(90);
+      T.line([kx - 9, ky + 9], [kx - 10, ky + 20]);     /* ben */
+      T.line([kx - 3, ky + 10], [kx - 3, ky + 21]);
+      T.line([kx + 5, ky + 10], [kx + 5, ky + 21]);
+      T.line([kx + 11, ky + 9], [kx + 12, ky + 20]);
+      T.pause(90);
+      T.line([kx - 17, ky - 2], [kx - 24, ky + 8]);     /* svans */
+      T.dot(kx - 4, ky - 4);                            /* fläck */
+      T.dot(kx + 7, ky + 2);
+    })();
+    T.stepEnd();
+
+    /* ---- steg 2: annoteringar i blått: höjden och tiden för tio varv ---- */
+    T.tanke(T.figurBubble(276, [
+      [['Skriver in det jag vet: banan']],
+      [['ligger ', 0], ['h', 1], [' = 1,20 m under fästet,', 0]],
+      [['och tio varv tog 22,0 s. Det jag']],
+      [['söker är ', 0], ['g', 1], ['.', 0]]
+    ]));
+    /* måttpil för h: parallell med lodlinjen, förskjuten åt vänster */
+    T.dblArrow([fx - 34, fy + 4], [fx - 34, ky - 2], BLUE);
+    T.lbl('h=1,20 m', fx - 34 - 8 - T.lblW('h=1,20 m'), (fy + ky) / 2 + 6,
+          BLUE);
+    T.pause(160);
+    /* rotationspil längs banans framkant + tiden för tio varv */
+    (function () {
+      var pts = [];
+      for (var i = 0; i <= 8; i++) {
+        var t = Math.PI * (0.78 - (i / 8) * 0.42);   /* front, vänster→höger */
+        pts.push([fx + Math.cos(t) * (erx + 12),
+                  ky + Math.sin(t) * (ery + 8)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: BLUE });
+      var tip = pts[pts.length - 1], pre = pts[pts.length - 2];
+      T.arrowHead(tip[0], tip[1], pre[0], pre[1], 9, BLUE);
+    })();
+    T.lbl('10 varv: 22,0 s', fx - 52, ky + 58, BLUE);
+    T.stepEnd();
+
+    /* ---- beräkningen ---- */
+    var y = 356;
+
+    T.tanke(T.bubble(120, T.bubbleTop(288), bw, [
+      [['Formeln för konisk pendel']],
+      [['innehåller ', 0], ['g', 1], ['. Jag börjar med den', 0]],
+      [['och löser sedan ut ', 0], ['g', 1], ['.', 0]]
+    ]));
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    T.str('Konisk pendel', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;                            /* formeln har rot + bråk */
+    var xx = T.str('T=2π', padL, y);
+    var fw = Math.max(T.adv('l·cos α'), T.adv('g')) + 0.3 * F;
+    var xs = rootSign(acts, xx, y, fw, F,
+                      { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    T.fracH('l·cos α', 'g', xs, y);
+    T.stepEnd();
+
+    /* h i stället för l·cos α */
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Snörets lodräta del, ', 0], ['l', 1], [' · cos α,', 0]],
+      [['är precis höjden ', 0], ['h', 1], [' under fästet.', 0]],
+      [['Jag byter ut den.']]
+    ]));
+    xx = T.str('T=2π', padL, y);
+    var fw2 = Math.max(T.adv('h'), T.adv('g')) + 0.3 * F;
+    var xs2 = rootSign(acts, xx, y, fw2, F,
+                       { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    T.fracH('h', 'g', xs2, y);
+    T.stepEnd();
+
+    /* kvadrera båda led */
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Kvadrerar båda led så att']],
+      [['rottecknet försvinner.']]
+    ]));
+    xx = T.str('T^2=4π^2·', padL, y);
+    T.fracH('h', 'g', xx, y);
+    T.stepEnd();
+
+    /* lös ut g */
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Multiplicerar båda led med ', 0], ['g', 1]],
+      [['och dividerar med ', 0], ['T', 1], ['². Då står', 0]],
+      [['g', 1], [' ensamt i vänsterledet.', 0]]
+    ]));
+    xx = T.str('g·T^2=4π^2·h', padL, y);
+    xx = T.str('⟺g=', xx + 0.15 * F, y);
+    T.fracH('4π^2·h', 'T^2', xx, y);
+    T.stepEnd();
+
+    /* ---- mätvärdesklammern (se REGEL) ---- */
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Tio varv tog 22,0 s, så ett varv']],
+      [['tar en tiondel. Det är period-']],
+      [['tiden ', 0], ['T', 1], ['. Höjden är given.', 0]]
+    ]));
+    var klam = valueBracket(acts, [
+      ['T=', { frac: ['22,0 s', '10'] }, '=2,20 s'],
+      'h=1,20 m'
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    /* insättning */
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    xx = T.str('g=', padL, y);
+    var xe = T.fracH('4π^2·1,20', '2,20^2', xx, y);
+    var xIns = T.str('=9,788... m/s^2', xe, y);
+    T.stepEnd();
+
+    /* AVRUNDNING (se REGEL): fortsättning på samma rad om möjligt.
+     * Gränsen PAPER_W−34 håller bläcket ute ur högerpilens zon. */
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.35 * F), bw, [
+      [['Först NU avrundar jag. Både']],
+      [['1,20 m och 22,0 s har tre']],
+      [['värdesiffror: svaret får tre.']]
+    ]));
+    var avrS = '≈9,79 m/s^2';
+    if (xIns + T.adv(avrS) < PAPER_W - 34) {
+      T.str(avrS, xIns, y);
+    } else {
+      y += adv + 1.2 * F;                     /* raden ovanför har bråk */
+      T.str(avrS, padL, y);
+    }
+    T.stepEnd();
+
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    y += adv + 1.5 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tabellvärdet är 9,82 m/s². Vi']],
+      [['hamnade inom en halv procent']],
+      [['från det. Kossan flög rätt!']]
+    ]));
+    T.underline(T.str('Svar: g≈9,79 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: vertikal cirkel "vikt i snöre" (fy2-1.5 Ex 1)
    * En 200-gramsvikt i ett 80 cm långt snöre snurras i en vertikal
    * cirkel. a) F_C och F_S i övre läget (6,0 m/s), b) samma i nedre
@@ -55821,6 +56027,7 @@
                    karusell: layoutKarusell, lpskiva: layoutLpskiva,
                    vertikalcirkel: layoutVertikalcirkel,
                    slanggunga: layoutSlanggunga,
+                   flygandekossan: layoutFlygandekossan,
                    kastboll: layoutKastboll, kasthojd: layoutKasthojd,
                    fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
                    dampning: layoutDampning, harmonisk: layoutHarmonisk,

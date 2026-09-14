@@ -5692,6 +5692,22 @@ window.EXITTICKETS = {
       'Vinkeln finns kvar efter divisionen, som $\\dfrac{\\sin \\alpha}{\\cos \\alpha}$ i vänsterledet.',
     ],
   },
+  {
+    question: 'Med en konisk pendel kan man bestämma tyngdaccelerationen $g$, som i exemplet med den flygande kossan. Vilka storheter behöver man mäta?',
+    choices: [
+      'Massan $m$ och banradien $r$',
+      'Farten $v$ och spännkraften $F_\\mathrm{S}$',
+      'Banans höjd $h$ under fästet och periodtiden $T$',
+      'Vinkeln α och massan $m$',
+    ],
+    correct: 2,
+    why: [
+      'Massan och radien förkortas bort ur formeln och behöver inte mätas.',
+      'Varken farten eller spännkraften mäts. De förekommer bara i mellanstegen av härledningen.',
+      'Eftersom $h = l \\cos \\alpha$ blir $g = \\dfrac{4\\pi^{2} h}{T^{2}}$, så det räcker att mäta höjden under fästet och tiden för ett varv.',
+      'Massan förkortas bort, och vinkeln behöver inte mätas eftersom höjden $h$ ersätter $l \\cos \\alpha$.',
+    ],
+  },
 ],
 
 'fy2-1.8': [
@@ -5789,89 +5805,6 @@ window.EXITTICKETS = {
       'När start och slut sker i samma horisontalplan blir sluthastigheten lika stor som starthastigheten, enligt symmetrin i kastparabeln.',
       'Kastet startar och slutar redan i samma nivå (det är förutsättningen i frågan) — det finns ingen ytterligare höjdskillnad som farten beror på.',
       'Tyngdkraften ändrar bara $v_\\mathrm{y}$, inte $v_\\mathrm{x}$ — den symmetriska banan gör att farten vid nedslag blir exakt densamma som vid utkastet, inte större.',
-    ],
-  },
-],
-
-'fy2-1.9': [
-  {
-    question: 'Vad är syftet med räkneexemplet "Den flygande kossan"?',
-    choices: [
-      'Att mäta ljusets hastighet',
-      'Att bestämma massan hos ett föremål',
-      'Att mäta luftmotståndets storlek',
-      'Att bestämma jordens tyngdacceleration $g$ med hjälp av en konisk pendel',
-    ],
-    correct: 3,
-    why: [
-      'Ljusets hastighet mäts inte i detta exempel — det handlar om mekanik, inte optik.',
-      'Massan hos kossan/pendelvikten är faktiskt irrelevant — den förkortas bort ur den slutliga formeln.',
-      'Luftmotstånd nämns inte alls i detta exempel.',
-      'Syftet är att bestämma jordens tyngdacceleration $g$ genom att mäta höjden $h$ och periodtiden $T$ hos en konisk pendel.',
-    ],
-  },
-  {
-    question: 'Vilken slutformel härleds för att bestämma $g$ med den koniska pendeln (kossan)?',
-    choices: [
-      '$g = \\dfrac{4\\pi^2 \\cdot h}{T^2}$',
-      '$g = \\dfrac{4\\pi^2 \\cdot h}{T}$',
-      '$g = \\dfrac{2\\pi \\cdot h}{T^2}$',
-      '$g = \\dfrac{4\\pi^2 \\cdot T^2}{h}$',
-    ],
-    correct: 0,
-    why: [
-      'Detta är den korrekt härledda formeln: $g = \\dfrac{4\\pi^2 \\cdot h}{T^2}$.',
-      'Nämnaren ska vara $T^2$, inte bara $T$.',
-      'Faktorn framför $\\pi$ ska vara $4\\pi^2$, inte $2\\pi$.',
-      'Detta har $h$ och $T^2$ ombytta jämfört med den korrekta formeln.',
-    ],
-  },
-  {
-    question: 'Vilka storheter behöver man mäta för att bestämma $g$ enligt denna metod?',
-    choices: [
-      'Massan $m$ och radien $r$',
-      'Höjden $h$ och periodtiden $T$',
-      'Farten $v$ och kraften $F_\\mathrm{S}$',
-      'Vinkeln α och massan $m$',
-    ],
-    correct: 1,
-    why: [
-      'Massan $m$ och radien $r$ förkortas bort ur den slutliga formeln — de behöver inte mätas.',
-      'Enligt den härledda formeln $g = 4\\pi^2 h / T^2$ räcker det att mäta höjden $h$ under upphängningspunkten och periodtiden $T$ för ett varv.',
-      'Varken farten eller spännkraften mäts direkt i denna metod — de förekommer bara i mellansteg av härledningen.',
-      'Massan förkortas bort, och vinkeln α behöver inte mätas separat eftersom $h$ och $r$ (via de likformiga trianglarna) ersätter den i uträkningen.',
-    ],
-  },
-  {
-    question: 'Varför försvinner massan $m$ och radien $r$ ur den slutliga formeln för $g$?',
-    choices: [
-      'Eftersom de alltid är noll för en konisk pendel',
-      'Eftersom de inte mäts i en laboration',
-      'Eftersom de finns med på båda sidor av ekvationen och därför förkortas bort vid härledningen',
-      'Eftersom de ingår i definitionen av tyngdaccelerationen $g$',
-    ],
-    correct: 2,
-    why: [
-      'Massan och radien är förstås inte noll — kossan har både massa och rör sig i en cirkel med en viss radie.',
-      'Att de inte behöver mätas är en konsekvens av härledningen, inte orsaken till att de försvinner.',
-      'Både $m$ och $r$ förekommer i uttrycken för $F_\\mathrm{C}$ på båda sidor av likheten och kan därför divideras bort, vilket lämnar bara $h$, $T$ och $g$ kvar.',
-      'Tyngdaccelerationen $g$ definieras oberoende av ett visst föremåls massa eller bana — den beror bara på jordens gravitation.',
-    ],
-  },
-  {
-    question: 'Om periodtiden $T$ fördubblas (och höjden $h$ hålls konstant), vad händer med det beräknade värdet på $g$ enligt formeln $g = \\dfrac{4\\pi^2 \\cdot h}{T^2}$?',
-    choices: [
-      'g fördubblas',
-      'g förblir oförändrat',
-      'g halveras',
-      'g blir en fjärdedel så stort',
-    ],
-    correct: 3,
-    why: [
-      'g minskar när $T$ ökar (de är omvänt proportionella via $T^2$) — det fördubblas inte.',
-      '$g$ beror på $T^2$ i nämnaren, så en ändring av $T$ definitivt påverkar det beräknade värdet.',
-      'Eftersom $T$ finns i kvadrat i nämnaren halveras inte $g$ vid en fördubbling av $T$ — effekten blir större än så.',
-      'Eftersom $T$ står i nämnaren upphöjt till 2, ger en fördubbling av $T$ att nämnaren fyrdubblas ($2^2 = 4$), så $g$ blir en fjärdedel så stort.',
     ],
   },
 ],

@@ -1,17 +1,17 @@
 ---
 id: ma1c-2.6
-title: Mer om ekvationer
+title: Variabler i båda led
 course: Matematik nivå 1c
 chapter: Algebra och ekvationer
 chapterNumber: 2
 section: '2.6'
 ---
 
-# Mer om ekvationer
+# Variabler i båda led
 
 Om vi har variabler på båda sidor om likhetstecknet, så samla dem på ena
 sidan och lös sedan ekvationen som vanligt. Enklast brukar det bli genom
-att ta bort variabeltermen från den sida där som har *minst* koefficient.
+att ta bort variabeltermen från den sida som har *minst* koefficient.
 Om en ekvation leder till en motsägelse, till exempel $1 = 2$, så betyder det att
 ekvationen **saknar lösning**.
 

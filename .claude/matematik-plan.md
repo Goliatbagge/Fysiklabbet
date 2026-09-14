@@ -158,7 +158,7 @@ eq.
 | ma1c-2.3 | 2.03 | Multiplicera med parenteser | ☑ | ☑ | ☑ | ☑ |
 | ma1c-2.4 | 2.04 | Faktorisera uttryck | ☑ | ☑ | ☑ | ☑ |
 | ma1c-2.5 | 2.05 | Ekvationslösningens grunder | ☑ | ☑ | ☑ | ☑ |
-| ma1c-2.6 | 2.06 | Mer om ekvationer | ☑ | ☑ | ☑ | ☑ |
+| ma1c-2.6 | 2.06 | Variabler i båda led | ☑ | ☑ | ☑ | ☑ |
 | ma1c-2.7 | 2.07 | Ekvationer med nämnare | ☑ | ☑ | ☑ | ☑ |
 | ma1c-2.8 | 2.08 | Problemlösning med ekvationer | ☑ | ☑ | ☑ | ☑ |
 | ma1c-2.9 | 2.09 | Enkla andra- och tredjegradsekvationer | ☑ | ☑ | ☑ | ☑ |

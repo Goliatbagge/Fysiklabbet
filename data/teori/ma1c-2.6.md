@@ -177,8 +177,7 @@ $$
 :::
 
 ::: sampunkt "Arbetsgång"
-1. Utveckla eventuella parenteser. Samma $x^2$-term i båda led tar ut
-   sig själv.
+1. Utveckla eventuella parenteser.
 2. Förenkla varje led för sig.
 3. Samla variabeltermerna i ena ledet.
 4. Samla konstanttermerna i det andra.

@@ -5820,7 +5820,7 @@ window.EXITTICKETS = {
       'Att den släppta kulan bara rör sig nedåt gör inte att den faller fortare. I *y*-led har båda kulorna samma acceleration $g$ och samma utgångshastighet, noll.',
       'Den högre farten ligger helt i *x*-led och påverkar inte rörelsen i *y*-led. Den skjutna kulan kommer längre bort, men inte fortare ned.',
       'Bordets höjd avgör hur lång falltiden blir, men den blir lika lång för båda kulorna oavsett höjd.',
-      'Rörelsen i *y*-led är densamma för båda: ett fritt fall från vila med falltiden $t = \\sqrt{\\frac{2h}{g}}$. Utgångshastigheten i *x*-led ändrar inte falltiden.',
+      'Rörelsen i *y*-led är densamma för båda: ett fritt fall från vila, och falltiden beror bara på höjden. Utgångshastigheten i *x*-led ändrar inte falltiden.',
     ],
   },
 ],

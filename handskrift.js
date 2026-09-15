@@ -19327,7 +19327,8 @@
 
   /* ---------------- scen: kulan som rullar av bordet (fy2-1.8 Ex 3) ----
    * Horisontellt kast: en kula lämnar ett 0,80 m högt bord med 2,5 m/s.
-   * a) falltiden ur t = √(2h/g) — samma som för en kula som släpps,
+   * a) falltiden ur y = −g·t²/2 med y = −0,80 m (tiden löses ut med
+   * ekvivalenspil) — samma som för en kula som släpps,
    * b) kastvidden x = v_0·t med tiden från a) (hämtas "sedan tidigare",
    * bubblan förklarar, inga ringar — se REGEL MÄTVÄRDESKLAMMER), c) farten
    * i nedslaget via Pythagoras, där v_y = −g·t räknas ut som deluträkning
@@ -19490,28 +19491,41 @@
     tanke(bA);
     placeString('a) Falltid', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
-    y += 2.6 * F;
-    var xt = placeString('t=', padL, y, s, F, acts);
-    rootFrac(xt, y, '2·h', 'g');
+    y += 2.0 * F;
+    var xt = placeString('y=−', padL, y, s, F, acts);
+    fracH('g·t^2', '2', xt + 0.2 * F, y);   /* luft efter minustecknet */
+    stepEnd();
+
+    /* tiden löses ut — omskrivning med ekvivalenspil (se REGEL) */
+    y += adv + 1.6 * F;
+    var bLA = bubble(140, bubbleTop(y - adv), bw, [
+      [['Löser ut tiden. Origo lägger']],
+      [['jag vid bordskanten, så golvet']],
+      [['ligger på ', 0], ['y', 1], [' = −0,80 m.']]
+    ]);
+    tanke(bLA);
+    xt = placeString('⟺ t=', padL, y, s, F, acts);
+    rootFrac(xt, y, '−2·y', 'g');
     stepEnd();
 
     y += adv + 1.4 * F;
     var bKA = bubble(140, bubbleTop(y - adv), bw, [
-      [['Höjden och tyngdaccelerationen']],
-      [['samlar jag i klammern.']]
+      [['Läget vid golvet och tyngd-']],
+      [['accelerationen i klammern.']]
     ]);
     tanke(bKA);
-    var klamA = valueBracket(acts, ['h=0,80 m', 'g≈9,82 m/s^2'], padL, y, s, F);
+    var klamA = valueBracket(acts, ['y=−0,80 m', 'g≈9,82 m/s^2'], padL, y, s, F);
     stepEnd();
     y = klamA.yEnd;
 
     y += adv + 1.9 * F;
     var bIA = bubble(140, bubbleTop(y - adv), bw, [
-      [['In med värdena ur klammern.']]
+      [['In med värdena ur klammern.']],
+      [['Minus gånger minus blir plus.']]
     ]);
     tanke(bIA);
     xt = placeString('t=', padL, y, s, F, acts);
-    rootFrac(xt, y, '2·0,80', '9,82');
+    rootFrac(xt, y, '−2·(−0,80)', '9,82');
     stepEnd();
 
     y += adv + 0.8 * F;

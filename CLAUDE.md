@@ -790,6 +790,15 @@ raderna får aldrig läsas upp). Marginal-CSS i `styles-laborans.css`
 (`.lab-minisim`), övrig CSS injiceras av widgeten själv. Efter att du lagt
 in ett block: kör `node data/teori/build.js` som vanligt.
 
+### ⛔ Ordet "minisimulering" är internt — på sidan heter det "simulering"
+
+**Besökaren ska aldrig se ordet minisimulering** (uttryckligt önskemål
+2026-09-15). Det är vårt interna namn på motorn och blocktypen; i teoritext
+("I simuleringen nedan kan du …"), i `UPDATES` i `index.html`, i
+nyhetsartiklar, nyhetsbrev och sociala medier heter det bara **simulering**.
+Kodkommentarer, filhuvuden, CLAUDE.md och verifierare får förstås fortsätta
+säga minisimulering.
+
 ### ⚠️ En ny minisimulering ska ALLTID nämnas i "Senaste uppdateringar"
 
 **Varje ny minisimulering får en egen rad i `UPDATES` i `index.html`** —

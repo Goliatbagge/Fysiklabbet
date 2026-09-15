@@ -5807,6 +5807,22 @@ window.EXITTICKETS = {
       'Tyngdkraften ändrar bara $v_\\mathrm{y}$, inte $v_\\mathrm{x}$ — den symmetriska banan gör att farten vid nedslag blir exakt densamma som vid utkastet, inte större.',
     ],
   },
+  {
+    question: 'Två likadana kulor lämnar kanten av ett bord i samma ögonblick. Den ena skjuts ut vågrätt med farten 3 m/s, den andra släpps rakt ned. Bortse från luftmotstånd. Vilken kula träffar golvet först?',
+    choices: [
+      'Den som släpps, eftersom den bara rör sig nedåt',
+      'Den som skjuts ut, eftersom den har högre fart',
+      'Det beror på bordets höjd',
+      'De träffar golvet samtidigt',
+    ],
+    correct: 3,
+    why: [
+      'Att den släppta kulan bara rör sig nedåt gör inte att den faller fortare. I *y*-led har båda kulorna samma acceleration $g$ och samma utgångshastighet, noll.',
+      'Den högre farten ligger helt i *x*-led och påverkar inte rörelsen i *y*-led. Den skjutna kulan kommer längre bort, men inte fortare ned.',
+      'Bordets höjd avgör hur lång falltiden blir, men den blir lika lång för båda kulorna oavsett höjd.',
+      'Rörelsen i *y*-led är densamma för båda: ett fritt fall från vila med falltiden $t = \\sqrt{\\frac{2h}{g}}$. Utgångshastigheten i *x*-led ändrar inte falltiden.',
+    ],
+  },
 ],
 
 // ── 13-fy2-ch2a.js ────────────────────────────────────────────

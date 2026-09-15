@@ -19325,6 +19325,346 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: kulan som rullar av bordet (fy2-1.8 Ex 3) ----
+   * Horisontellt kast: en kula lämnar ett 0,80 m högt bord med 2,5 m/s.
+   * a) falltiden ur t = √(2h/g) — samma som för en kula som släpps,
+   * b) kastvidden x = v_0·t med tiden från a) (hämtas "sedan tidigare",
+   * bubblan förklarar, inga ringar — se REGEL MÄTVÄRDESKLAMMER), c) farten
+   * i nedslaget via Pythagoras, där v_y = −g·t räknas ut som deluträkning
+   * direkt i klammern (kastboll-mönstret). Figuren: bord, kula på kanten,
+   * vågrät v_0-pil från kulans kant, kastbanan samplad ur en parabel,
+   * höjden h som måttlinje till höger om banan (fri yta) och kastvidden x
+   * som måttlinje under golvet. Bordshöjd 100 px och kastvidd 150 px är
+   * ungefär skalenliga (0,80 m mot 1,0 m). */
+  function layoutBordkula(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1]);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 340;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 10, color);
+    }
+    function dimArrowH(x1, x2, yy) {
+      line([x1 + 10, yy], [x2 - 10, yy], BLUE);
+      arrowHead(x1, yy, x1 + 16, yy, 9, BLUE);
+      arrowHead(x2, yy, x2 - 16, yy, 9, BLUE);
+    }
+    function dimArrowV(xx, y1, y2) {
+      line([xx, y1 + 8], [xx, y2 - 8], BLUE);
+      arrowHead(xx, y1, xx, y1 + 13, 8, BLUE);
+      arrowHead(xx, y2, xx, y2 - 13, 8, BLUE);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function fracW(numS, denS) {
+      return Math.max(stringAdvance(numS, s, F), stringAdvance(denS, s, F)) + 0.3 * F;
+    }
+    /* rot över ett bråk: rottecknet först, sedan bråket på returnerad x */
+    function rootFrac(x0, yb, numS, denS) {
+      var cw = fracW(numS, denS);
+      var xs = rootSign(acts, x0, yb, cw, F, { yTop: yb - 1.82 * F, yBot: yb + 0.9 * F });
+      return fracH(numS, denS, xs, yb);
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri --- */
+    var TOP = 158, FLOOR = 258;
+    var tx0 = 120, tx1 = 230;                 /* bordsskivan */
+    var bx = 224, by = 152;                   /* kulan på kanten */
+    var landX = 374, landY = 252;
+    var aPar = (landY - by) / ((landX - bx) * (landX - bx));
+    function parY(x) { return by + aPar * (x - bx) * (x - bx); }
+
+    /* ---- steg 1: bord, golv, kula och kastbana ---- */
+    var b1 = figurBubble(262, [
+      [['Ritar bordet, golvet och kulan']],
+      [['på bordskanten. Kastbanan']],
+      [['böjer av ned mot golvet.']]
+    ]);
+    tanke(b1);
+    line([36, FLOOR], [648, FLOOR]);          /* golvet */
+    for (var hx = 52; hx <= 640; hx += 46) {
+      line([hx, FLOOR], [hx - 9, FLOOR + 9]);
+    }
+    pause(140);
+    line([tx0, TOP], [tx1, TOP]);             /* bordsskivan */
+    line([tx0, TOP + 4], [tx1, TOP + 4]);
+    line([tx0 + 12, TOP + 4], [tx0 + 12, FLOOR]);   /* ben */
+    line([tx1 - 12, TOP + 4], [tx1 - 12, FLOOR]);
+    pause(140);
+    acts.push({ kind: 'stroke', pts: dotPts(bx, by) });   /* kulan */
+    pause(140);
+    (function () {                            /* kastbanan */
+      var pts = [];
+      for (var px = bx; px <= landX; px += 8) pts.push([px, parY(px)]);
+      pts.push([landX, landY]);
+      acts.push({ kind: 'stroke', pts: pts });
+    })();
+    stepEnd();
+
+    /* ---- steg 2: annoteringar ---- */
+    var b2 = figurBubble(266, [
+      [['Skriver in utgångsfarten och']],
+      [['bordets höjd. Kastvidden ', 0], ['x', 1]],
+      [['är den sökta sträckan längs']],
+      [['golvet.']]
+    ]);
+    tanke(b2);
+    /* utgångshastigheten: vågrät pil från kulans kant (vektor → blått) */
+    arrow([bx + 6, by], [bx + 68, by], BLUE);
+    placeString('v_0=2,5 m/s', 150, 134, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    /* höjden: måttlinje i fri yta till höger om banan */
+    dash([300, TOP], [436, TOP]);
+    dimArrowV(440, TOP, FLOOR);
+    placeString('h=0,80 m', 450, 214, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    /* kastvidden: sökt storhet → bara beteckningen (se REGEL) */
+    dash([bx, FLOOR + 6], [bx, FLOOR + 30]);
+    dash([landX, FLOOR + 6], [landX, FLOOR + 30]);
+    dimArrowH(bx, landX, FLOOR + 34);
+    placeString('x', 292, FLOOR + 62, s * 0.62, F * 0.62, acts, BLUE);
+    stepEnd();
+
+    var y = 400;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    /* ================= a) falltiden ================= */
+    var bA = bubble(120, bubbleTop(334), bw, [
+      [['a) Kulan lämnar bordet vågrätt.']],
+      [['I y-led faller den precis som']],
+      [['om den släppts rakt ned.']]
+    ]);
+    tanke(bA);
+    placeString('a) Falltid', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.6 * F;
+    var xt = placeString('t=', padL, y, s, F, acts);
+    rootFrac(xt, y, '2·h', 'g');
+    stepEnd();
+
+    y += adv + 1.4 * F;
+    var bKA = bubble(140, bubbleTop(y - adv), bw, [
+      [['Höjden och tyngdaccelerationen']],
+      [['samlar jag i klammern.']]
+    ]);
+    tanke(bKA);
+    var klamA = valueBracket(acts, ['h=0,80 m', 'g≈9,82 m/s^2'], padL, y, s, F);
+    stepEnd();
+    y = klamA.yEnd;
+
+    y += adv + 1.9 * F;
+    var bIA = bubble(140, bubbleTop(y - adv), bw, [
+      [['In med värdena ur klammern.']]
+    ]);
+    tanke(bIA);
+    xt = placeString('t=', padL, y, s, F, acts);
+    rootFrac(xt, y, '2·0,80', '9,82');
+    stepEnd();
+
+    y += adv + 0.8 * F;
+    var xInsA = placeString('=0,4036... s', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvrA = bubble(140, bubbleTop(y), bw, [
+      [['Först nu avrundar jag. Höjden']],
+      [['0,80 m har två värdesiffror:']],
+      [['0,40 s.']]
+    ]);
+    tanke(bAvrA);
+    placeString('≈0,40 s', xInsA, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRA = bubble(120, bubbleTop(y - adv), bw, [
+      [['Mindre än en halv sekund.']],
+      [['Rimligt, ett fall från ett bord']],
+      [['går fort. Och farten 2,5 m/s']],
+      [['spelar ingen roll för tiden!']]
+    ]);
+    tanke(bRA);
+    var xeA = placeString('Svar: 0,40 s', padL, y, s, F, acts);
+    underline(xeA, y);
+    stepEnd();
+
+    /* ================= b) kastvidden ================= */
+    y += adv + 1.1 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) I x-led är farten konstant.']],
+      [['Kulan hinner sträckan ', 0], ['v', 1], ['₀ · ', 0], ['t', 1]],
+      [['under falltiden.']]
+    ]);
+    tanke(bB);
+    placeString('b) Kastvidd', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.55 * F;
+    placeString('x=v_0·t', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 1.1 * F;
+    var bKB = bubble(140, bubbleTop(y - adv), bw, [
+      [['Farten står i uppgiften och']],
+      [['tiden räknade jag ut i a).']],
+      [['Klammern samlar värdena.']]
+    ]);
+    tanke(bKB);
+    var klamB = valueBracket(acts, ['v_0=2,5 m/s', 't=0,4036... s'], padL, y, s, F);
+    stepEnd();
+    y = klamB.yEnd;
+
+    y += adv + 1.0 * F;
+    var bIB = bubble(140, bubbleTop(y - adv), bw, [
+      [['In med värdena ur klammern.']]
+    ]);
+    tanke(bIB);
+    placeString('x=2,5·0,4036...', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var xInsB = placeString('=1,0091... m', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvrB = bubble(140, bubbleTop(y), bw, [
+      [['Två värdesiffror: 1,0 m.']]
+    ]);
+    tanke(bAvrB);
+    placeString('≈1,0 m', xInsB, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRB = bubble(120, bubbleTop(y - adv), bw, [
+      [['Ungefär en meter ut från']],
+      [['bordet. Rimligt för en kula']],
+      [['som rullar av i gångfart.']]
+    ]);
+    tanke(bRB);
+    var xeB = placeString('Svar: 1,0 m', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    /* ================= c) farten i nedslaget ================= */
+    y += adv + 1.1 * F;
+    var bC = bubble(120, bubbleTop(y - adv), bw, [
+      [['c) Farten är resultanten av']],
+      [['hastigheterna i x-led och']],
+      [['y-led. Pythagoras sats!']]
+    ]);
+    tanke(bC);
+    placeString('c) Fart i nedslaget', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.9 * F;
+    var xv = placeString('v=', padL, y, s, F, acts);
+    var cwC = stringAdvance('v_x^2+v_y^2', s, F);
+    var xsC = rootSign(acts, xv, y, cwC, F, { yTop: y - 1.32 * F });
+    placeString('v_x^2+v_y^2', xsC, y, s, F, acts);
+    stepEnd();
+
+    /* v_x oförändrad, v_y som deluträkning DIREKT i klammern */
+    y += adv + 1.1 * F;
+    var bKC = bubble(140, bubbleTop(y - adv), bw, [
+      [['Farten i x-led är oförändrad.']],
+      [['Farten i y-led räknar jag ut']],
+      [['direkt i klammern, med tiden']],
+      [['från a).']]
+    ]);
+    tanke(bKC);
+    var klamC = valueBracket(acts,
+      ['v_x=v_0=2,5 m/s',
+       'v_y=−g·t=−9,82 m/s^2·0,4036... s',
+       '=−3,9638... m/s'], padL, y, s, F);
+    stepEnd();
+    y = klamC.yEnd;
+
+    y += adv + 0.8 * F;
+    var bIC = bubble(140, bubbleTop(y - adv), bw, [
+      [['Minustecknet visar att rörelsen']],
+      [['är riktad nedåt. I kvadraten']],
+      [['försvinner tecknet.']]
+    ]);
+    tanke(bIC);
+    xv = placeString('v=', padL, y, s, F, acts);
+    var cwC2 = stringAdvance('2,5^2+3,9638...^2', s, F);
+    var xsC2 = rootSign(acts, xv, y, cwC2, F, { yTop: y - 1.32 * F });
+    placeString('2,5^2+3,9638...^2', xsC2, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var xInsC = placeString('=4,6863... m/s', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvrC = bubble(140, bubbleTop(y), bw, [
+      [['Två värdesiffror: 4,7 m/s.']]
+    ]);
+    tanke(bAvrC);
+    placeString('≈4,7 m/s', xInsC, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRC = bubble(120, bubbleTop(y - adv), bw, [
+      [['Mer än de 2,5 m/s kulan hade']],
+      [['från början, eftersom farten']],
+      [['nedåt har tillkommit. Rimligt!']]
+    ]);
+    tanke(bRC);
+    var xeC = placeString('Svar: 4,7 m/s', padL, y, s, F, acts);
+    underline(xeC, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: vikt i fjäder "Hookes lag" (fy2-2.1 Ex 1)
    * En vikt på 250 g förlänger en fjäder 8,0 cm; vikten dras sedan ned
    * 5,0 cm och släpps. a) fjäderkonstanten ur Hookes lag (kraften är
@@ -56029,6 +56369,7 @@
                    slanggunga: layoutSlanggunga,
                    flygandekossan: layoutFlygandekossan,
                    kastboll: layoutKastboll, kasthojd: layoutKasthojd,
+                   bordkula: layoutBordkula,
                    fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
                    dampning: layoutDampning, harmonisk: layoutHarmonisk,
                    periodfjader: layoutPeriodfjader,

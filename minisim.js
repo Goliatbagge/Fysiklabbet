@@ -19,7 +19,8 @@
  *           Tillgängliga typer: tomtebloss, centrifug, cirkularrorelse,
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
- *           magnetpoler, magnetdelning, koniskpendel
+ *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
+ *           snettkast, skjutochslapp, kanonvagn
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -125,6 +126,33 @@
  * Utgångsläget är genomgångens Exempel 1 (15 m/s, 50°). FULLSKÄRM startas
  * med scenens egen .fs-btn inne i iframen och ger exakt originalets
  * fullskärmsläge med alla verktyg.
+ *
+ * ── typ: skjutochslapp ───────────────────────────────────────────────────
+ * Demonstrationen "Skjut och släpp samtidigt" ur fy2-1.8 (Kaströrelse,
+ * specialfallet horisontellt kast): två likadana kulor vid kanten av ett
+ * 0,80 m högt bord (samma höjd som Exempel 3). Skjut och släpp: en
+ * fjäderbelastad utskjutare knuffar den ena kulan ut vågrätt i samma
+ * ögonblick som släppklon öppnas kring den andra. Båda faller enligt
+ * y = −g·t²/2 och träffar golvet samtidigt, efter √(2h/g) = 0,40 s; bara den
+ * skjutna rör sig i x-led. "Visa spår" ritar blixtbilder med lika
+ * tidsavstånd (0,05 s) och binder ihop paren med streckade vågräta linjer:
+ * samma höjd i varje ögonblick. "Visa hastighet" ritar v_x (konstant) och
+ * v_y (växer lika för båda). Glidaren sätter utgångshastigheten, Ultrarapid
+ * saktar ned fyra gånger, och ett ENDA ljud hörs vid nedslaget. Ljust kort i
+ * laboranstemat, canvas, fullskärm.
+ *
+ * ── typ: kanonvagn ───────────────────────────────────────────────────────
+ * Den klassiska kanonvagnen ur fy2-1.8 (Kaströrelse): en vagn rullar med
+ * konstant fart på en rak bana och skjuter, när den passerar
+ * avfyringsmärket, en boll rakt upp ur en fjäderkanon. Bollen följer en
+ * kastparabel men behåller vagnens hastighet i x-led, eftersom ingen kraft
+ * verkar i sidled, och landar därför i tratten på vagnen som hunnit rulla
+ * vidare. En streckad lodrät linje binder bollen till tratten under hela
+ * flygningen. Glidare för vagnens fart (0–2 m/s; 0 ger ett rakt kast upp
+ * och ned) och kanonens utgångsfart (2–4 m/s), "Visa spår" (bollens bana
+ * som prickar med lika tidsavstånd), "Visa hastighet" (v_x och v_y på
+ * bollen, v på vagnen: v_x är alltid lika lång som vagnens v), Ultrarapid,
+ * syntetiserat skott- och träffljud, fullskärm. Ljust kort i laboranstemat.
  *
  * ── typ: eulersdisk ──────────────────────────────────────────────────────
  * Demonstrationen ur fy1-4.4 (Energiprincipen): en blankpolerad metalldisk
@@ -8738,11 +8766,925 @@
     function buildMagnetpoler(node, cfg) { buildMagneter(node, cfg, 'poler'); }
     function buildMagnetdelning(node, cfg) { buildMagneter(node, cfg, 'delning'); }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  Gemensam kortbyggare för de två kastdemonstrationerna i fy2-1.8
+    // ══════════════════════════════════════════════════════════════════════
+    // Ljust kort (laboranstemat) med canvas, fullskärmsknapp och ljudknapp —
+    // samma DOM som centrifugen, men samlad i en helper så att de två
+    // demonstrationerna nedan slipper upprepa den.
+    function kastKort(node, cfg, W, H, ariaLabel) {
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var ICON_SND_ON =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var ICON_SND_OFF =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label', ariaLabel);
+        scene.appendChild(canvas);
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.className = 'minisim-sndbtn';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        sndBtn.title = 'Ljud av';
+        sndBtn.innerHTML = ICON_SND_ON;
+        scene.appendChild(sndBtn);
+        card.appendChild(scene);
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        function drawBackground() {
+            ctx.globalCompositeOperation = 'source-over';
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+            for (var y = 26; y < H; y += 26) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+            ctx.stroke();
+        }
+
+        // Ljud: korta syntetiserade smällar (inga ljudfiler). Skapas lazy.
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var actx = null;
+        var soundOn = true;
+        function ensureAudio() {
+            if (actx || !AC) return;
+            actx = new AC();
+        }
+        function resumeAudio() {
+            ensureAudio();
+            if (actx && actx.state === 'suspended') actx.resume();
+        }
+        // en kort, dov smäll (kula mot golv, boll i tratt) — brusskur genom
+        // bandpass med snabb avklingning
+        function small(freq, gain, dur) {
+            if (!soundOn || !actx || actx.state !== 'running') return;
+            var sr = actx.sampleRate;
+            var len = Math.floor(sr * dur);
+            var buf = actx.createBuffer(1, len, sr);
+            var d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) {
+                d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
+            }
+            var src = actx.createBufferSource();
+            src.buffer = buf;
+            var bp = actx.createBiquadFilter();
+            bp.type = 'bandpass';
+            bp.frequency.value = freq;
+            bp.Q.value = 1.4;
+            var g = actx.createGain();
+            g.gain.value = gain;
+            src.connect(bp); bp.connect(g); g.connect(actx.destination);
+            src.start();
+        }
+        sndBtn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
+            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            if (soundOn) resumeAudio();
+        });
+
+        // Fullskärm
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        var onFs = null;
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) {
+                (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            if (onFs) onFs();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+
+        // Standardverktyg
+        function knapp(txt, primar) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn' + (primar ? ' ms-primar' : '');
+            b.textContent = txt;
+            controls.appendChild(b);
+            return b;
+        }
+        function kryss(txt, checked) {
+            var lbl = document.createElement('label');
+            lbl.className = 'minisim-check';
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = !!checked;
+            lbl.appendChild(cb);
+            lbl.appendChild(document.createTextNode(txt));
+            controls.appendChild(lbl);
+            return cb;
+        }
+        function glidare(lblTxt, min, max, step, start, visa, aria) {
+            var row = document.createElement('div');
+            row.className = 'minisim-slider-row';
+            var lbl = document.createElement('span');
+            lbl.className = 'minisim-slider-lbl';
+            lbl.textContent = lblTxt;
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(step);
+            sl.value = String(start);
+            sl.setAttribute('aria-label', aria);
+            var val = document.createElement('span');
+            val.className = 'minisim-slider-val';
+            val.textContent = visa(start);
+            sl.addEventListener('input', function () { val.textContent = visa(parseFloat(sl.value)); });
+            var par = document.createElement('span');
+            par.style.cssText = 'display:flex;flex:1 1 170px;align-items:center;gap:10px;min-width:0;';
+            par.appendChild(sl); par.appendChild(val);
+            row.appendChild(lbl); row.appendChild(par);
+            card.appendChild(row);
+            return sl;
+        }
+        function infoRad() {
+            var info = document.createElement('span');
+            info.className = 'minisim-info';
+            controls.appendChild(info);
+            return info;
+        }
+
+        // Pil med spets i änden (vektorpil) — skaftet slutar vid huvudets bas.
+        function pil(x1, y1, x2, y2, color, lw) {
+            var dx = x2 - x1, dy = y2 - y1;
+            var L = Math.hypot(dx, dy);
+            if (L < 4) return;
+            var ux = dx / L, uy = dy / L;
+            var hl = Math.min(11, L * 0.6), hw = 4.5;
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = lw || 3;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2 - ux * hl, y2 - uy * hl);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - ux * hl - uy * hw, y2 - uy * hl + ux * hw);
+            ctx.lineTo(x2 - ux * hl + uy * hw, y2 - uy * hl - ux * hw);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        return {
+            card: card, canvas: canvas, ctx: ctx, controls: controls,
+            resizeCanvas: resizeCanvas, drawBackground: drawBackground,
+            knapp: knapp, kryss: kryss, glidare: glidare, infoRad: infoRad,
+            pil: pil, small: small, resumeAudio: resumeAudio,
+            setOnFs: function (f) { onFs = f; }
+        };
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: skjutochslapp
+    // ══════════════════════════════════════════════════════════════════════
+    // Demonstrationen "Skjut och släpp samtidigt" ur fy2-1.8 (Kaströrelse,
+    // specialfallet horisontellt kast): två likadana kulor vid kanten av ett
+    // 0,80 m högt bord. En fjäderbelastad utskjutare knuffar den ena ut
+    // vågrätt i samma ögonblick som släppklon öppnas kring den andra. Båda
+    // följer y = −g·t²/2 i y-led — bara den skjutna rör sig i x-led — så de
+    // träffar golvet samtidigt (efter √(2h/g) = 0,40 s, som Exempel 3).
+    // Blixtbilderna ("Visa spår") fryser båda kulorna med lika tidsavstånd
+    // och binder ihop paren med streckade vågräta linjer: samma höjd i varje
+    // ögonblick. "Visa hastighet" ritar v_x (konstant) och v_y (växer lika
+    // för båda). Ett enda ljud hörs vid nedslaget.
+    function buildSkjutochslapp(node, cfg) {
+        var W = 560, H = 430;
+        var G = 9.82;
+        var PX_M = 300;                       // px per meter
+        var H_BORD = 0.80;                    // bordets höjd (m), som Exempel 3
+        var FLOOR_Y = 392;
+        var TOP_Y = FLOOR_Y - H_BORD * PX_M;  // 152
+        var EDGE_X = 132;                     // bordskantens x
+        var R = 9;                            // kulradie (px)
+        var STROBE = 0.05;                    // s mellan blixtbilder
+        var V_SCALE = 22;                     // px per m/s för hastighetspilar
+        var INK = '#1f2530', GREY = '#7c828c', RED = '#c0392b', BLUE = '#2563c9';
+        var T_LAND = Math.sqrt(2 * H_BORD / G);
+
+        var K = kastKort(node, cfg, W, H,
+            'Två kulor vid kanten av ett bord på rutat papper. En utskjutare ' +
+            'knuffar den ena kulan vågrätt medan den andra släpps rakt ned i ' +
+            'samma ögonblick. Kulorna faller lika fort och träffar golvet ' +
+            'samtidigt; blixtbilder visar att de hela tiden är på samma höjd.');
+        var ctx = K.ctx;
+        var startBtn = K.knapp('Skjut och släpp', true);
+        var omBtn = K.knapp('Börja om', false);
+        var slowCb = K.kryss('Ultrarapid', false);
+        var trailCb = K.kryss('Visa spår', true);
+        var velCb = K.kryss('Visa hastighet', false);
+        var info = K.infoRad();
+        var v0Sl = K.glidare('Utgångshastighet', 0.5, 3, 0.1, 2.5,
+            function (v) { return fmt(v, 1) + ' m/s'; },
+            'Den skjutna kulans utgångshastighet i meter per sekund');
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var xA0 = EDGE_X - R, y0 = TOP_Y - R;   // skjuten kula, på bordet
+        var xB0 = EDGE_X + R + 12;              // släppt kula, i klon utanför kanten
+        var started = false, paused = false, landed = false;
+        var t = 0;                              // simulerad tid sedan starten
+        var v0 = 2.5;
+        var strobes = [];                       // { xA, y, xB } vid k·STROBE
+        var nextStrobe = STROBE;
+        var running = false, visible = true, lastTs = 0, rafId = 0;
+
+        function timeScale() { return slowCb.checked ? 0.25 : 1; }
+        function posA(tt) { return { x: xA0 + v0 * tt * PX_M, y: y0 + 0.5 * G * tt * tt * PX_M }; }
+        function posB(tt) { return { x: xB0, y: y0 + 0.5 * G * tt * tt * PX_M }; }
+
+        function reset() {
+            started = false; paused = false; landed = false;
+            t = 0; strobes = []; nextStrobe = STROBE;
+            syncUi(); render(); updateInfo();
+        }
+
+        function step(dt) {
+            if (!started || landed) return;
+            t += dt;
+            while (nextStrobe <= Math.min(t, T_LAND) + 1e-9) {
+                var a = posA(nextStrobe), b = posB(nextStrobe);
+                strobes.push({ xA: a.x, y: a.y, xB: b.x, t: nextStrobe });
+                nextStrobe += STROBE;
+            }
+            if (t >= T_LAND) {
+                t = T_LAND;
+                landed = true;
+                K.small(900, 0.9, 0.09);      // EN smäll — båda landar samtidigt
+                syncUi();
+            }
+        }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function kula(x, y, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, R, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.lineWidth = 1.4;
+            ctx.strokeStyle = INK;
+            ctx.stroke();
+            // liten glansfläck
+            ctx.beginPath();
+            ctx.arc(x - R * 0.35, y - R * 0.35, R * 0.28, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.55)';
+            ctx.fill();
+        }
+
+        function render() {
+            K.drawBackground();
+            ctx.font = '13px ' + FONT;
+            ctx.textBaseline = 'alphabetic';
+            var pushOut = started && t < 0.08 ? 1 : 0;   // utskjutarens slag
+            var a = started ? posA(t) : { x: xA0, y: y0 };
+            var b = started ? posB(t) : { x: xB0, y: y0 };
+
+            // golvet med skraffering och en skala i meter från bordskanten
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(14, FLOOR_Y + 0.5); ctx.lineTo(W - 14, FLOOR_Y + 0.5);
+            ctx.stroke();
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var hx = 22; hx < W - 14; hx += 12) {
+                ctx.moveTo(hx, FLOOR_Y + 1); ctx.lineTo(hx - 7, FLOOR_Y + 8);
+            }
+            ctx.stroke();
+            ctx.fillStyle = GREY;
+            ctx.textAlign = 'center';
+            for (var m = 0; m <= 1.25; m += 0.25) {
+                var sx = EDGE_X + m * PX_M;
+                if (sx > W - 20) break;
+                ctx.beginPath();
+                ctx.moveTo(sx + 0.5, FLOOR_Y + 10); ctx.lineTo(sx + 0.5, FLOOR_Y + (m % 0.5 === 0 ? 18 : 14));
+                ctx.strokeStyle = GREY;
+                ctx.stroke();
+                if (m % 0.5 === 0) ctx.fillText(fmt(m, 1) + ' m', sx, FLOOR_Y + 32);
+            }
+
+            // bordet: skiva + två ben
+            ctx.fillStyle = '#d9c39a';
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.rect(24, TOP_Y - 6, EDGE_X - 24, 6);
+            ctx.fill(); ctx.stroke();
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(38, TOP_Y); ctx.lineTo(38, FLOOR_Y);
+            ctx.moveTo(EDGE_X - 12, TOP_Y); ctx.lineTo(EDGE_X - 12, FLOOR_Y);
+            ctx.stroke();
+            // höjdmått h = 0,80 m mellan benen
+            ctx.strokeStyle = GREY;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(79.5, TOP_Y + 10); ctx.lineTo(79.5, FLOOR_Y - 10);
+            ctx.stroke();
+            ctx.fillStyle = GREY;
+            ctx.beginPath(); ctx.moveTo(79.5, TOP_Y + 1); ctx.lineTo(76, TOP_Y + 10); ctx.lineTo(83, TOP_Y + 10); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(79.5, FLOOR_Y - 1); ctx.lineTo(76, FLOOR_Y - 10); ctx.lineTo(83, FLOOR_Y - 10); ctx.fill();
+            ctx.fillStyle = INK;
+            ctx.textAlign = 'center';
+            ctx.font = 'italic 13px ' + FONT;
+            ctx.fillText('h', 79.5, (TOP_Y + FLOOR_Y) / 2 - 4);
+            ctx.font = '13px ' + FONT;
+            ctx.fillText('0,80 m', 79.5, (TOP_Y + FLOOR_Y) / 2 + 14);
+
+            // utskjutaren: låda med fjäder och tryckplatta
+            var bx0 = 42, bx1 = xA0 - R - 6, by0 = TOP_Y - 6 - 30, by1 = TOP_Y - 6;
+            ctx.fillStyle = '#b8bec6';
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.rect(bx0, by0, bx1 - bx0, by1 - by0);
+            ctx.fill(); ctx.stroke();
+            var plateX = pushOut ? xA0 - R - 1 : bx1 - 8;
+            var sy = (by0 + by1) / 2;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(bx0 + 6, sy);
+            var nseg = 9;
+            for (var i = 1; i <= nseg; i++) {
+                var zx = bx0 + 6 + (plateX - 3 - bx0 - 6) * i / nseg;
+                ctx.lineTo(zx, sy + (i % 2 ? -7 : 7));
+            }
+            ctx.lineTo(plateX - 3, sy);
+            ctx.stroke();
+            ctx.fillStyle = INK;
+            ctx.fillRect(plateX - 3, by0 + 4, 4, by1 - by0 - 8);
+            // släppklon: arm över kanten + två klor
+            var armY = by0;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(bx1, armY + 6); ctx.lineTo(xB0, armY + 6);
+            ctx.stroke();
+            var open = started ? 1 : 0;
+            ctx.lineWidth = 2;
+            [-1, 1].forEach(function (sgn) {
+                var kx = xB0 + sgn * (R + 3);
+                var ang = open ? sgn * 0.6 : 0;
+                ctx.beginPath();
+                ctx.moveTo(kx, armY + 6);
+                ctx.lineTo(kx + Math.sin(ang) * 22, armY + 6 + Math.cos(ang) * 22);
+                ctx.stroke();
+            });
+
+            // blixtbilder ("Visa spår"): par av lägen med lika tidsavstånd,
+            // bundna med en streckad vågrät linje — samma höjd
+            if (trailCb.checked && strobes.length) {
+                ctx.setLineDash([4, 4]);
+                ctx.lineWidth = 1;
+                strobes.forEach(function (s) {
+                    ctx.strokeStyle = 'rgba(31,37,48,0.45)';
+                    ctx.beginPath();
+                    ctx.moveTo(Math.min(s.xA, s.xB), s.y + 0.5);
+                    ctx.lineTo(Math.max(s.xA, s.xB), s.y + 0.5);
+                    ctx.stroke();
+                });
+                ctx.setLineDash([]);
+                strobes.forEach(function (s) {
+                    ctx.beginPath(); ctx.arc(s.xA, s.y, R * 0.8, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(192,57,43,0.22)'; ctx.fill();
+                    ctx.strokeStyle = 'rgba(192,57,43,0.7)'; ctx.lineWidth = 1; ctx.stroke();
+                    ctx.beginPath(); ctx.arc(s.xB, s.y, R * 0.8, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(37,99,201,0.22)'; ctx.fill();
+                    ctx.strokeStyle = 'rgba(37,99,201,0.7)'; ctx.stroke();
+                });
+            }
+
+            // kulorna
+            kula(a.x, a.y, RED);
+            kula(b.x, b.y, BLUE);
+
+            // hastighetspilar från kulans KANT (hastighet, inte kraft)
+            if (velCb.checked && started && !landed) {
+                var vy = G * t;
+                K.pil(a.x + R, a.y, a.x + R + v0 * V_SCALE, a.y, RED, 3);
+                K.pil(a.x, a.y + R, a.x, a.y + R + vy * V_SCALE, RED, 3);
+                K.pil(b.x, b.y + R, b.x, b.y + R + vy * V_SCALE, BLUE, 3);
+                ctx.fillStyle = RED;
+                ctx.textAlign = 'left';
+                ctx.font = 'italic 13px ' + FONT;
+                ctx.fillText('v', a.x + R + v0 * V_SCALE + 6, a.y + 4);
+                ctx.font = '10px ' + FONT;
+                ctx.fillText('x', a.x + R + v0 * V_SCALE + 14, a.y + 8);
+                if (vy * V_SCALE > 14) {
+                    ctx.font = 'italic 13px ' + FONT;
+                    ctx.fillText('v', a.x + 6, a.y + R + vy * V_SCALE + 2);
+                    ctx.font = '10px ' + FONT;
+                    ctx.fillText('y', a.x + 14, a.y + R + vy * V_SCALE + 6);
+                    ctx.fillStyle = BLUE;
+                    ctx.font = 'italic 13px ' + FONT;
+                    ctx.fillText('v', b.x + 6, b.y + R + vy * V_SCALE + 2);
+                    ctx.font = '10px ' + FONT;
+                    ctx.fillText('y', b.x + 14, b.y + R + vy * V_SCALE + 6);
+                }
+            }
+
+            // förklaring uppe till höger + tid
+            ctx.font = '13px ' + FONT;
+            ctx.textAlign = 'right';
+            // förklaringen ligger till vänster om ljudknappen (uppe till höger)
+            ctx.fillStyle = RED;
+            ctx.fillText('skjuts vågrätt', W - 64, 24);
+            ctx.fillStyle = BLUE;
+            ctx.fillText('släpps', W - 64, 42);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = INK;
+            ctx.font = '15px ' + FONT;
+            ctx.fillText('t = ' + fmt(t, 2) + ' s', W / 2, 30);
+
+            // nedslaget: var landade den skjutna kulan?
+            if (landed) {
+                ctx.font = '13px ' + FONT;
+                ctx.fillStyle = RED;
+                ctx.textAlign = 'center';
+                ctx.fillText('x = ' + fmt(v0 * T_LAND, 2) + ' m', a.x, FLOOR_Y - R * 2 - 6);
+            }
+        }
+
+        function updateInfo() {
+            if (landed) {
+                info.textContent = 'Båda träffade golvet efter ' + fmt(T_LAND, 2) +
+                    ' s. Den skjutna kulan hann ' + fmt(v0 * T_LAND, 2) + ' m ut.';
+                info.classList.add('ms-brod');
+            } else {
+                info.classList.remove('ms-brod');
+                info.textContent = started ? 'Falltid: ' + fmt(t, 2) + ' s' : '';
+            }
+        }
+
+        // ── Loop ──────────────────────────────────────────────────────────
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return started && (!landed || t < 0.1);
+        }
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+        function syncUi() {
+            startBtn.textContent = !started ? 'Skjut och släpp'
+                                 : landed ? 'Skjut och släpp'
+                                 : paused ? 'Fortsätt' : 'Pausa';
+            v0Sl.disabled = started && !landed;
+        }
+
+        startBtn.addEventListener('click', function () {
+            K.resumeAudio();
+            if (!started || landed) {
+                reset();
+                v0 = parseFloat(v0Sl.value);
+                started = true;
+                K.small(2200, 0.35, 0.05);    // fjäderns smäll
+            } else {
+                paused = !paused;
+            }
+            syncUi();
+            render();
+            kick();
+        });
+        omBtn.addEventListener('click', reset);
+        slowCb.addEventListener('change', kick);
+        trailCb.addEventListener('change', render);
+        velCb.addEventListener('change', render);
+        v0Sl.addEventListener('input', function () {
+            if (!started || landed) { v0 = parseFloat(v0Sl.value); if (landed) reset(); }
+        });
+        K.setOnFs(function () { render(); kick(); });
+        window.addEventListener('resize', function () { K.resizeCanvas(); if (!running) render(); });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(K.card);
+        }
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: kanonvagn
+    // ══════════════════════════════════════════════════════════════════════
+    // Den klassiska "kanonvagnen" ur fy2-1.8 (Kaströrelse): en vagn rullar
+    // med konstant fart på en rak bana och avfyrar, när den passerar
+    // avfyringsmärket, en boll RAKT UPP ur en fjäderkanon. Sedd från salen
+    // följer bollen en kastparabel, men eftersom ingen kraft verkar i x-led
+    // behåller den vagnens hastighet i x-led hela tiden — och landar i
+    // tratten på vagnen, som under tiden rullat vidare. Bollen och tratten
+    // har alltid samma x (streckad lodrät linje under flygningen).
+    // "Visa spår" ritar bollens bana som prickar med lika tidsavstånd,
+    // "Visa hastighet" ritar v_x och v_y på bollen och v på vagnen: v_x är
+    // lika lång i varje ögonblick och lika med vagnens fart.
+    function buildKanonvagn(node, cfg) {
+        var W = 560, H = 430;
+        var G = 9.82;
+        var PX_M = 200;                       // px per meter
+        var RAIL_Y = 352;                     // banans överkant
+        var TRIG_X = 118;                     // avfyringsmärket
+        var CART_W = 64, CART_H = 24, WHEEL_R = 7;
+        var TUBE_W = 14, TUBE_H = 30;
+        var R = 7;                            // bollradie
+        var V_SCALE = 22;                     // px per m/s
+        var TRAIL_DT = 0.04;
+        var INK = '#1f2530', GREY = '#7c828c', RED = '#c0392b', BLUE = '#2563c9';
+
+        var K = kastKort(node, cfg, W, H,
+            'En vagn med en fjäderkanon rullar med konstant fart längs en bana ' +
+            'på rutat papper. När vagnen passerar avfyringsmärket skjuts en ' +
+            'boll rakt upp. Bollen följer en kastparabel men behåller vagnens ' +
+            'hastighet i sidled och landar i tratten på vagnen.');
+        var ctx = K.ctx;
+        var startBtn = K.knapp('Starta vagnen', true);
+        var omBtn = K.knapp('Börja om', false);
+        var slowCb = K.kryss('Ultrarapid', false);
+        var trailCb = K.kryss('Visa spår', true);
+        var velCb = K.kryss('Visa hastighet', false);
+        var info = K.infoRad();
+        var vSl = K.glidare('Vagnens fart', 0, 2, 0.1, 1.0,
+            function (v) { return fmt(v, 1) + ' m/s'; },
+            'Vagnens fart i meter per sekund');
+        var uSl = K.glidare('Kanonens utgångsfart', 2, 4, 0.1, 3.0,
+            function (v) { return fmt(v, 1) + ' m/s'; },
+            'Bollens utgångsfart rakt uppåt i meter per sekund');
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var X_START = 40;                     // vagnens mitt vid start
+        var X_STOP = W - 52;                  // stannar här
+        var cartX = X_START;
+        var v = 1.0, u = 3.0;
+        var started = false, paused = false, done = false;
+        var fired = false, caught = false;
+        var tFly = 0;                         // tid sedan avfyringen
+        var fireX = 0;                        // vagnens x vid avfyringen
+        var trail = [], nextTrail = 0;
+        var running = false, visible = true, lastTs = 0, rafId = 0;
+        var mouthY = RAIL_Y - WHEEL_R * 2 - CART_H - TUBE_H;   // trattens mynning
+
+        function timeScale() { return slowCb.checked ? 0.25 : 1; }
+        function tFlight() { return 2 * u / G; }
+        function ballPos(tt) {
+            return { x: fireX + v * tt * PX_M,
+                     y: mouthY - R - (u * tt - 0.5 * G * tt * tt) * PX_M };
+        }
+
+        function reset() {
+            started = false; paused = false; done = false;
+            fired = false; caught = false; tFly = 0;
+            cartX = X_START; trail = []; nextTrail = 0;
+            syncUi(); render(); updateInfo();
+        }
+
+        function step(dt) {
+            if (!started || done) return;
+            cartX += v * dt * PX_M;
+            if (!fired && cartX >= TRIG_X) {
+                // avfyra exakt när märket passeras (ingen bildrutefördröjning)
+                var over = (cartX - TRIG_X) / (v * PX_M || 1);
+                fired = true;
+                fireX = TRIG_X;
+                tFly = v > 0 ? over : 0;
+                K.small(1600, 0.45, 0.07);
+            } else if (fired && !caught) {
+                tFly += dt;
+            }
+            if (fired && !caught) {
+                while (nextTrail <= Math.min(tFly, tFlight()) + 1e-9) {
+                    var p = ballPos(nextTrail);
+                    trail.push(p);
+                    nextTrail += TRAIL_DT;
+                }
+                if (tFly >= tFlight()) {
+                    caught = true;
+                    tFly = tFlight();
+                    cartX = fireX + v * tFly * PX_M;     // synka exakt
+                    K.small(500, 0.7, 0.1);
+                    syncUi();
+                }
+            }
+            if (cartX >= X_STOP || (caught && v === 0)) {
+                cartX = Math.min(cartX, X_STOP);
+                done = true;
+                syncUi();
+            }
+        }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function render() {
+            K.drawBackground();
+            ctx.font = '13px ' + FONT;
+            ctx.textBaseline = 'alphabetic';
+
+            // banan
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(14, RAIL_Y + 0.5); ctx.lineTo(W - 14, RAIL_Y + 0.5);
+            ctx.stroke();
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var hx = 22; hx < W - 14; hx += 12) {
+                ctx.moveTo(hx, RAIL_Y + 2); ctx.lineTo(hx - 7, RAIL_Y + 9);
+            }
+            ctx.stroke();
+            // avfyringsmärket
+            ctx.strokeStyle = GREY;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(TRIG_X + 0.5, RAIL_Y + 12); ctx.lineTo(TRIG_X + 0.5, RAIL_Y + 30);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = GREY;
+            ctx.textAlign = 'center';
+            ctx.fillText('avfyring', TRIG_X, RAIL_Y + 44);
+
+            var cy = RAIL_Y - WHEEL_R;             // hjulens centrum
+            var bodyTop = RAIL_Y - WHEEL_R * 2 - CART_H;
+            var ball = fired ? (caught ? null : ballPos(tFly)) : null;
+
+            // bollens spår
+            if (trailCb.checked && trail.length) {
+                trail.forEach(function (p) {
+                    ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(192,57,43,0.45)'; ctx.fill();
+                });
+            }
+
+            // vagnen: kaross, hjul, kanonrör med tratt
+            ctx.fillStyle = '#d9c39a';
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.rect(cartX - CART_W / 2, bodyTop, CART_W, CART_H);
+            ctx.fill(); ctx.stroke();
+            [-1, 1].forEach(function (sgn) {
+                var wx = cartX + sgn * (CART_W / 2 - 12);
+                ctx.beginPath(); ctx.arc(wx, cy, WHEEL_R, 0, Math.PI * 2);
+                ctx.fillStyle = '#b8bec6'; ctx.fill(); ctx.stroke();
+                // eker som roterar med rullningen (v·t / r)
+                var ang = (cartX - X_START) / WHEEL_R;
+                ctx.beginPath();
+                ctx.moveTo(wx - Math.cos(ang) * WHEEL_R, cy - Math.sin(ang) * WHEEL_R);
+                ctx.lineTo(wx + Math.cos(ang) * WHEEL_R, cy + Math.sin(ang) * WHEEL_R);
+                ctx.stroke();
+            });
+            // kanonröret
+            ctx.fillStyle = '#b8bec6';
+            ctx.beginPath();
+            ctx.rect(cartX - TUBE_W / 2, mouthY + 8, TUBE_W, TUBE_H - 8);
+            ctx.fill(); ctx.stroke();
+            // tratten (öppen uppåt)
+            ctx.fillStyle = '#b8bec6';
+            ctx.beginPath();
+            ctx.moveTo(cartX - TUBE_W / 2, mouthY + 8);
+            ctx.lineTo(cartX - TUBE_W, mouthY - 2);
+            ctx.lineTo(cartX + TUBE_W, mouthY - 2);
+            ctx.lineTo(cartX + TUBE_W / 2, mouthY + 8);
+            ctx.closePath();
+            ctx.fill(); ctx.stroke();
+            // bollen i röret före skottet / i tratten efter
+            if (!fired || caught) {
+                ctx.beginPath();
+                ctx.arc(cartX, mouthY + (caught ? 2 : 12), R, 0, Math.PI * 2);
+                ctx.fillStyle = RED; ctx.fill();
+                ctx.strokeStyle = INK; ctx.lineWidth = 1.4; ctx.stroke();
+            }
+
+            // bollen i luften + streckad lodrät linje ned till tratten
+            if (ball) {
+                ctx.strokeStyle = 'rgba(31,37,48,0.5)';
+                ctx.setLineDash([4, 4]);
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(ball.x + 0.5, ball.y + R + 2); ctx.lineTo(ball.x + 0.5, mouthY - 4);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.beginPath(); ctx.arc(ball.x, ball.y, R, 0, Math.PI * 2);
+                ctx.fillStyle = RED; ctx.fill();
+                ctx.strokeStyle = INK; ctx.lineWidth = 1.4; ctx.stroke();
+                if (velCb.checked) {
+                    var vy = u - G * tFly;           // positiv uppåt
+                    if (v > 0) {
+                        K.pil(ball.x + R, ball.y, ball.x + R + v * V_SCALE, ball.y, RED, 3);
+                        ctx.fillStyle = RED; ctx.textAlign = 'left';
+                        ctx.font = 'italic 13px ' + FONT;
+                        ctx.fillText('v', ball.x + R + v * V_SCALE + 6, ball.y + 4);
+                        ctx.font = '10px ' + FONT;
+                        ctx.fillText('x', ball.x + R + v * V_SCALE + 14, ball.y + 8);
+                    }
+                    if (Math.abs(vy) * V_SCALE > 6) {
+                        var y1 = vy > 0 ? ball.y - R : ball.y + R;
+                        var y2 = y1 - vy * V_SCALE;
+                        K.pil(ball.x, y1, ball.x, y2, RED, 3);
+                        ctx.fillStyle = RED; ctx.textAlign = 'left';
+                        ctx.font = 'italic 13px ' + FONT;
+                        ctx.fillText('v', ball.x + 6, y2 + (vy > 0 ? -2 : 4));
+                        ctx.font = '10px ' + FONT;
+                        ctx.fillText('y', ball.x + 14, y2 + (vy > 0 ? 2 : 8));
+                    }
+                }
+            }
+            // vagnens hastighet
+            if (velCb.checked && started && v > 0 && !done) {
+                var fx = cartX + CART_W / 2;
+                var fy = bodyTop + CART_H / 2;
+                K.pil(fx, fy, fx + v * V_SCALE, fy, RED, 3);
+                ctx.fillStyle = RED; ctx.textAlign = 'left';
+                ctx.font = 'italic 13px ' + FONT;
+                ctx.fillText('v', fx + v * V_SCALE + 6, fy + 4);
+            }
+
+            // tid
+            ctx.textAlign = 'center';
+            ctx.fillStyle = INK;
+            ctx.font = '15px ' + FONT;
+            if (fired) ctx.fillText('t = ' + fmt(Math.min(tFly, tFlight()), 2) + ' s efter skottet', W / 2, 30);
+        }
+
+        function updateInfo() {
+            if (caught) {
+                var s = v * tFlight();
+                info.textContent = 'Träff i tratten! På ' + fmt(tFlight(), 2) +
+                    ' s rullade vagnen ' + fmt(s, 2) + ' m, och bollen rörde sig lika långt i x-led.';
+                info.classList.add('ms-brod');
+            } else {
+                info.classList.remove('ms-brod');
+                info.textContent = started ? 'Vagnen: ' + fmt(v, 1) + ' m/s' : '';
+            }
+        }
+
+        // ── Loop ──────────────────────────────────────────────────────────
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            dt = Math.min(dt, 0.045) * timeScale();
+            if (!paused) step(dt);
+            render();
+            updateInfo();
+            if (shouldRun()) {
+                running = true;
+                rafId = requestAnimationFrame(frame);
+            } else {
+                running = false;
+                lastTs = 0;
+            }
+        }
+        function shouldRun() {
+            if (!visible || document.hidden || paused) return false;
+            return started && !done;
+        }
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+        function syncUi() {
+            startBtn.textContent = !started || done ? 'Starta vagnen'
+                                 : paused ? 'Fortsätt' : 'Pausa';
+            vSl.disabled = started && !done;
+            uSl.disabled = started && !done;
+        }
+
+        startBtn.addEventListener('click', function () {
+            K.resumeAudio();
+            if (!started || done) {
+                reset();
+                v = parseFloat(vSl.value);
+                u = parseFloat(uSl.value);
+                started = true;
+                if (v === 0) {
+                    // vagnen står vid märket: skjut direkt
+                    cartX = TRIG_X;
+                }
+            } else {
+                paused = !paused;
+            }
+            syncUi();
+            render();
+            kick();
+        });
+        omBtn.addEventListener('click', reset);
+        slowCb.addEventListener('change', kick);
+        trailCb.addEventListener('change', render);
+        velCb.addEventListener('change', render);
+        vSl.addEventListener('input', function () { if (!started || done) { v = parseFloat(vSl.value); if (done) reset(); } });
+        uSl.addEventListener('input', function () { if (!started || done) { u = parseFloat(uSl.value); if (done) reset(); } });
+        K.setOnFs(function () { render(); kick(); });
+        window.addEventListener('resize', function () { K.resizeCanvas(); if (!running) render(); });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(K.card);
+        }
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+
+        syncUi();
+        render();
+        updateInfo();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
                   koniskpendel: buildKoniskpendel,
                   snettkast: buildSnettkast,
+                  skjutochslapp: buildSkjutochslapp,
+                  kanonvagn: buildKanonvagn,
                   eulersdisk: buildEulersdisk,
                   fjaderpendel: buildFjaderpendel, skiftnyckel: buildSkiftnyckel,
                   valtning: buildValtning, gaffelbalans: buildGaffelbalans,

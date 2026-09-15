@@ -1876,3 +1876,26 @@ Format per post:
   (Fysik 2). Bra att ta en lugn nyhetsdag.
 - **Hur väger man en exoplanet?** — gravitation och Keplers lagar (Fysik 1/2).
 - **Vad är egentligen ljudvallen?** — vågor och machtal, konkret och visuellt.
+
+- **Magnuseffekten, fast med ljus** — den kraft som får en skruvad boll att svänga har nu visats
+  ha en optisk motsvarighet: en hårt fokuserad laserstråle växelverkar starkast med en atom som
+  ligger en bit vid sidan av strålens mitt, inte mitt i den. Ingång: Magnuseffekten i mekaniken,
+  rörelsemängd och ljusets rörelsemängd. OBS: optik/fotonik behandlades 2026-09-12 och 2026-09-14
+  — låt det gå några dagar. Kontrollera vad som är uppmätt och vad som är beräknat. Källa
+  (ScienceDaily 2026-09-13):
+  https://www.sciencedaily.com/releases/2026/09/260912220025.htm
+  (tillagd 2026-09-15)
+
+- **Kvantsammanflätning bland de tyngsta partiklarna i LHC** — sammanflätning har bekräftats mellan
+  tunga, kortlivade partiklar som skapas i kollisionerna. Ingång: sammanflätning, partikelsönderfall
+  och hur man mäter något som lever i bråkdelar av en nanosekund. OBS: partikelfysik togs upp
+  2026-09-08 och sammanflätning 2026-09-02 — låt det gå ordentligt med tid. Källa (Phys.org
+  2026-09-14): https://phys.org/news/2026-09-physicists-uncover-spooky-quantum-effect.html
+  (tillagd 2026-09-15)
+
+- **Frielektronlasern som får plats på ett bord** — snabbare elektroner ska ge korta, intensiva
+  ljusblixtar från en anläggning som i dag fyller ett halvt kvarter. Ingång: acceleration av
+  laddade partiklar, synkrotronljus och varför korta pulser behövs för att se atomer röra sig.
+  Kontrollera vad som byggts och vad som är simulerat. Källa (Phys.org 2026-09-14):
+  https://phys.org/news/2026-09-speedy-electrons-brilliant-laser-paves.html
+  (tillagd 2026-09-15)

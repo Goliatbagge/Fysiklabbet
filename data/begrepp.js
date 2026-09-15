@@ -502,6 +502,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'bethe-strang',
+    term: 'Bethe-sträng',
+    former: ['bethe-sträng', 'bethe-strängen', 'bethe-strängar', 'bethe-strängarna', 'bethesträng', 'bethesträngar', 'bethe-ansatsen', 'bethe-ansats'],
+    kort: 'Ett kluster av partiklar som hålls ihop enbart av sin inbördes dragningskraft, och som bara kan finnas i ett system där rörelsen är begränsad till en enda riktning.',
+    relaterade: ['bose-einstein-kondensat', 'absoluta-nollpunkten', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'De flesta saker som sitter ihop gör det med hjälp av en bindning: atomerna i en vattenmolekyl delar elektroner, järnatomerna i en spik hålls samman av ett metallgitter. En Bethe-sträng har ingenting sådant. Det är helt enkelt några partiklar som dras mot varandra och som därför rör sig som ett enda objekt, ungefär som några magnetkulor som klibbar ihop till en kedja när man lägger dem på rad.' },
+      { type: 'p', html: 'Det märkliga är att kedjan bara kan finnas i en dimension, alltså i ett system där partiklarna bara kan röra sig fram och tillbaka längs en linje. På en linje kan två partiklar inte gå förbi varandra utan att mötas, och då får dragningskraften något att hålla fast i. Öppnar man de andra två riktningarna kan partiklarna smita åt sidan, och kedjan löses upp. Den energi som höll ihop den går då över i rörelse, så partiklarna far i väg fortare än förut.' },
+      { type: 'p', html: 'Namnet kommer från Hans Bethe, som 1931 räknade ut alla tillstånd i en lång rad av kvantmagneter. Bland lösningarna fanns just sådana här sammanbundna grupper, och när man ritar upp dem i ett diagram hamnar de på rad som pärlor på ett snöre. Det är därför de kallas strängar, vilket inte har någonting med strängteori att göra. Räknemetoden Bethe uppfann, Bethe-ansatsen, används än i dag i allt från magnetism till kalla gaser.' }
+    ]
+  },
+  {
+    id: 'bindningsenergi',
+    term: 'Bindningsenergi',
+    former: ['bindningsenergi', 'bindningsenergin', 'bindningsenergier', 'bindningsenergierna'],
+    kort: 'Den energi som krävs för att plocka isär något som sitter ihop, till exempel en molekyl, en atomkärna eller ett kluster av atomer.',
+    relaterade: ['bethe-strang', 'karnfusion', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Allt som hänger ihop gör det för att det kostar energi att dra isär delarna. Precis hur mycket energi det kostar kallas bindningsenergin. Den går att tänka på som en grop: delarna ligger på botten, och för att lyfta upp dem över kanten och skilja dem åt måste man tillföra minst lika mycket energi som gropen är djup.' },
+      { type: 'p', html: 'Gropen fungerar också åt andra hållet. När delar som förut var fria faller ner i gropen och binds ihop frigörs samma mängd energi, och den måste ta vägen någonstans: som ljus, som värme eller som ren rörelse hos det som blir kvar. Det är därför det lyser om en atomkärna som bildas och därför atomer far i väg snabbare när ett kluster brister.' },
+      { type: 'p', html: 'Storleken varierar oerhört mycket. En kemisk bindning i en molekyl ligger på några elektronvolt, medan bindningsenergin per byggsten i en atomkärna är miljontals gånger större. I andra änden finns kluster i ultrakalla gaser som hålls ihop av tiotusendels miljarddels grader värd av energi, och som därför bara överlever nära den absoluta nollpunkten.' }
+    ]
+  },
+  {
     id: 'boson',
     term: 'Boson',
     former: ['boson', 'bosonen', 'bosoner', 'bosonerna'],

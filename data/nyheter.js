@@ -103,6 +103,71 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-15-kedjan-som-bara-finns-i-en-dimension",
+    date: "2026-09-15",
+    title: "Sex atomer hänger ihop utan en enda kemisk bindning — och kedjan klarar krocken, så länge den bara får röra sig åt ett håll",
+    deck: "Hans Bethe räknade fram dem 1931, men ingen hade lyckats fylla en gas med dem. Nu har fysiker i Innsbruck byggt Bethe-strängar av cesiumatomer nära absoluta nollpunkten, låtit dem kollidera utan att de gick sönder, och sett dem falla isär i samma stund som atomerna släpptes fria i tre dimensioner.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-15-kedjan-som-bara-finns-i-en-dimension.jpg",
+    imageAlt: "Ett litet lysande orangegult moln av atomer svävar inne i en genomskinlig glaskyvett, omgiven av kopparfärgade spolar och rosa laserljus.",
+    imageCredit: "Foto: Tomasz Kawalec (CC BY-SA 4.0), via Wikimedia Commons. Bilden visar en annan grupps kylapparat, inte den cesiumuppställning som användes i studien.",
+    tags: ["kvantfysik", "atomfysik", "bethe-strängar", "ultrakalla atomer", "bindningsenergi", "absoluta nollpunkten", "cesium", "optiskt gitter", "bose-einstein-kondensat", "laserkylning", "endimensionella system"],
+    sources: [
+      { name: "Universität Innsbruck — Bethe strings observed in ultracold atoms", url: "https://www.uibk.ac.at/en/newsroom/2026/bethe-strings-observed-in-ultracold-atoms/" },
+      { name: "Phys.org — Ultracold cesium atoms reveal Bethe strings predicted nearly a century ago", url: "https://phys.org/news/2026-09-ultracold-cesium-atoms-reveal-bethe.html" },
+    ],
+    research: { citation: "Milena Horvath, Alvise Bastianello, Sudipta Dhar, Rebekka Koch, Yanliang Guo, Jean-Sébastien Caux, Manuele Landini och Hanns-Christoph Nägerl, ”Probing Bethe strings in an attractive one-dimensional Bose gas”, Nature Communications (2026)", url: "https://doi.org/10.1038/s41467-026-76018-0" },
+    body: [
+      { type: 'p', html: 'Det som håller ihop en molekyl är kemiska bindningar: elektroner som delas mellan atomerna. Fysiker vid universitetet i Innsbruck har nu byggt något annat. Deras kedjor av cesiumatomer hålls ihop av ingenting annat än atomernas egen dragningskraft mot varandra, och de existerar bara så länge atomerna är instängda i en enda rörelseriktning. Öppnar man de två andra riktningarna faller kedjan isär på ett ögonblick.' },
+      { type: 'p', html: 'Objekten kallas Bethe-strängar, och det tog nästan hundra år att komma från räkningen till laboratoriet.' },
+
+      { type: 'h2', text: 'En biprodukt av en räkning från 1931' },
+      { type: 'p', html: 'År 1931 gjorde den tyske fysikern Hans Bethe något ovanligt: han löste ett kvantmekaniskt mångpartikelproblem <em>exakt</em>. Modellen var en lång rad av små magneter som bara påverkar sina närmaste grannar, och metoden han uppfann för att klara den kallas i dag Bethe-ansatsen. (Bethe fick senare Nobelpriset i fysik 1967, men för något helt annat: hur stjärnorna gör sin energi.)' },
+      { type: 'p', html: 'Bland lösningarna fanns tillstånd där flera störningar i kedjan låser fast vid varandra och sedan rör sig som ett enda objekt. Det är dessa som kallas strängar. De uppstår inte ur någon bindning i kemisk mening, utan direkt ur växelverkan mellan partiklarna, och de förutsägs bara i system med en dimension.' },
+      { type: 'p', html: 'Enstaka små strängar har skymtats tidigare, i magnetiska kristaller och i supraledande kvantbitar. Det som ingen klarat är att fylla ett helt system med strängar av blandade storlekar, inklusive riktigt långa.' },
+
+      { type: 'h2', text: 'Ett moln som delas i fyra tusen rör' },
+      { type: 'p', html: 'Innsbruckgruppen, som samarbetat med teoretiker vid universitetet i Amsterdam och Tekniska universitetet i München, började med ett moln cesiumatomer nedkylt till några miljarddelar av en grad över absoluta nollpunkten. I mätningarna låg temperaturen mellan ungefär 3 och 35&nbsp;nanokelvin.' },
+      { type: 'p', html: 'Två korsande laserstrålar bildar ett stående vågmönster som delar molnet i omkring fyra tusen nålsmala rör. Inuti ett sådant rör kan atomerna i praktiken bara röra sig fram och tillbaka längs en linje. Antalet atomer per rör låg på ungefär 7 till 30.' },
+      { type: 'p', html: 'Sedan vred forskarna på själva växelverkan. Med ett magnetfält går det att ställa in hur cesiumatomer påverkar varandra, och fältet svepte långsamt från frånstötande, förbi noll, till attraherande. I stället för att klumpa ihop sig till en enda hög band atomerna upp sig i kluster av olika längd, och de största rymde sex partiklar eller fler.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-15-kedjan-som-bara-finns-i-en-dimension-2.jpg', alt: 'Till vänster fem röda cigarrformade moln som står lodrätt mellan laserstrålar. Till höger tre vågräta rader med små blå, gula och lila kulor: i de två översta raderna sitter de gula två och två och de lila tre och tre, i den understa raden ligger alla kulor var för sig. Längst till höger ett diagram med magnetfält på den vågräta axeln och energi i hertz på den lodräta, där kurvorna sjunker allt brantare nedåt.', caption: 'Till vänster de nålsmala rören där atomerna bara kan röra sig i en riktning. I mitten försöket: efter en utvidgning inuti röret (de två översta raderna) sitter atomerna fortfarande ihop två och två respektive tre och tre, men efter att de släppts fria i tre dimensioner (understa raden) är alla kedjor upplösta. Diagrammet till höger visar hur bindningsenergin växer när växelverkan görs mer attraherande.', credit: 'Figur: Milena Horvath med flera, ur förhandsversionen på arXiv (CC BY 4.0). Beskuren.' },
+
+      { type: 'h2', text: 'Beviset ligger i skillnaden mellan två uppbrott' },
+      { type: 'p', html: 'Hur avgör man att partiklarna verkligen sitter ihop? Forskarna löste det med två sorters utvidgning.' },
+      { type: 'p', html: 'Först släpptes atomerna lösa men fick stanna kvar i sina rör. De flög isär längs linjen och krockade med varandra på vägen, utan att kedjorna gick sönder.' },
+      { type: 'quote', html: 'Ett av de enklaste försöken var att låta strängarna vidga sig. Det är ett anmärkningsvärt drag hos dem: de kan kollidera utan att falla isär.', cite: 'Milena Horvath, en av huvudförfattarna (översatt från engelska)' },
+      { type: 'p', html: 'Därefter togs instängningen bort helt, så att atomerna kunde röra sig i alla tre riktningar. Nu bröts kedjorna upp, och den energi som hållit ihop dem gick över i rörelse: atomerna flög i väg snabbare än förut. Skillnaden mellan de två uppbrottens energi är alltså ett direkt mått på kedjornas bindningsenergi, alltså på hur hårt de satt ihop. I den frånstötande gasen, där inga kedjor bildas, ger de två mätningarna i stort sett samma energi.' },
+      { type: 'p', html: 'Måtten är minimala. En kedja av fyra atomer höll ihop med en energi som svarar mot frekvensen 190&nbsp;Hz, det vill säga $E = h \\cdot f \\approx 1{,}3 \\cdot 10^{-31}\\ \\mathrm{J}$. Den genomsnittliga rörelseenergin hos en luftmolekyl i ett vanligt rum, $E_k = \\dfrac{3}{2} k_\\mathrm{B} T$, är knappt femtio miljarder gånger så stor. Sådana bindningar överlever bara i en apparat där kylan mäts i miljarddelar av en grad.' },
+
+      { type: 'h2', text: 'Varför den tredje dimensionen dödar kedjan' },
+      { type: 'p', html: 'Att strängarna kräver en dimension är inte en praktisk detalj utan själva poängen. På en linje kan två atomer inte gå förbi varandra utan att mötas, och den attraherande kraften får något att hålla fast i. Så snart sidledsrörelsen öppnas finns inte längre några sådana lösningar, och klustren upphör att vara stabila.' },
+      { type: 'p', html: 'Mätningarna stämde kvantitativt med beräkningar ur den teori som beskriver hur sådana här nästan exakt lösbara system flödar och utvecklas i tiden. Ett annat mått, som speglar hur ofta atomer befinner sig tätt intill varandra, blev nästan sex gånger så stort när gasen gick från frånstötande till attraherande, precis som man väntar sig av en gas full av bundna kluster.' },
+      { type: 'p', html: 'Med kedjorna framme i ett så kontrollerbart system går det nu att undersöka hur de bildas, hur de rör sig och varför sådana här system har så svårt att komma i termisk jämvikt.' },
+      { type: 'quote', html: 'Bethe-strängarna förutsades för nästan hundra år sedan som en del av en vacker matematisk beskrivning av kvantmekaniska mångpartikelsystem. Nu kan vi skapa dem i laboratoriet, styra dem och låta dem kollidera med varandra.', cite: 'Sudipta Dhar, en av huvudförfattarna (översatt från engelska)' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Bethes räkning från 1931 gällde en rad av kvantmagneter, inte en gas. Att samma lösningar dyker upp i ett moln av atomer visar hur allmän matematiken bakom är.',
+        'Vid 10&nbsp;nanokelvin är gasen omkring 270&nbsp;miljoner gånger kallare än den kosmiska bakgrundsstrålningens 2,7&nbsp;K. Kallare platser än den här sortens apparater finns veterligen ingenstans i universum.',
+        'Ungefär 20&nbsp;% av atomerna gick förlorade under det långsamma svepet till starkast attraktion. Kedjorna är alltså inte bara svagt bundna, de är också kortlivade.',
+        'Namnet ”sträng” har ingenting med strängteori att göra. Det syftar på hur lösningarna ligger uppradade som pärlor på ett snöre när man ritar upp dem i ett diagram.',
+      ] },
+    ],
+    larare: {
+      moment: [
+        { label: 'Bindningsenergi och energiomvandling' },
+        { label: 'Temperatur och absoluta nollpunkten' },
+        { label: 'Kvantfysikens mångpartikelsystem' },
+      ],
+      fragor: [
+        'Forskarna mäter inte bindningsenergin direkt, utan skillnaden mellan två uppbrott. Varför är en skillnad mellan två mätningar ofta pålitligare än ett enskilt värde?',
+        'En förutsägelse från 1931 kunde inte prövas förrän nu. Vad säger det om förhållandet mellan teori och experiment i fysiken?',
+        'Kedjorna finns bara när atomerna är instängda i en riktning. Vad menar en fysiker egentligen med att ett system ”har en dimension”, när rören i försöket ändå är byggda i vanliga tre?',
+      ],
+    },
+  },
+  {
     id: "2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus",
     date: "2026-09-14",
     title: "Nästan allt ljus fastnar inne i lysdioden — nu har fysiker i Lund odlat nanoträd som är tunnare än ljusets våglängd",

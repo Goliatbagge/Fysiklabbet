@@ -1,6 +1,6 @@
 # Svarsutkast: Facebook-kommentar om myoniumartikeln (2026-09-16)
 
-**Kanal:** Facebook, kommentar på dagens nyhetsinlägg
+**Kanal:** Facebook, kommentar på dagens nyhetsinlägg (inlägget sade självt "en antipartikel" utan namn och "andra generationens materia")
 **Motpart:** matte- och fysiklärare (namn ej angivet i sessionen)
 **Artikel:** `2026-09-16-atomen-som-skjuts-ur-heliumet`
 
@@ -38,4 +38,4 @@ En sista petitess som du också är inne på: antimyonen är en antipartikel, s�
 
 Tack för en skarp läsning! Ja, kärnan är en antimyon, en positivt laddad myon, med en vanlig elektron i bana. Det är alltså inte antiväte (antiproton plus positron, lika tungt som väte) utan myonium, som väger ungefär en niondel av väte eftersom antimyonen bara är 207 elektronmassor.
 
-Andra generationen är precis som du säger charm, strange, myonen och myonneutrinon, och elektronen hör till första generationen. Men den står för bara 0,5 procent av atomens massa, antimyonen för 99,5, och hur elektroner faller är redan känt. Så den kan räknas bort. Forskarna själva skriver "andra generationens (anti)leptoner", och där hade jag förenklat: antimyonen är en antipartikel. Det har jag nu förtydligat i ingressen.
+Andra generationen är precis som du säger charm, strange, myonen och myonneutrinon, och elektronen hör till första generationen. Men den står för bara 0,5 procent av atomens massa, antimyonen för 99,5, och hur elektroner faller är redan känt. Så den kan räknas bort. Forskarna själva skriver "andra generationens (anti)leptoner", och där hade jag förenklat både här i inlägget och i artikeln: antimyonen är en antipartikel. Artikeln har jag nu förtydligat på båda punkterna.

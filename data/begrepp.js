@@ -1702,7 +1702,7 @@ window.BEGREPP = [
   {
     id: 'myon',
     term: 'Myon',
-    former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår'],
+    former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår', 'antimyon', 'antimyonen', 'antimyoner', 'antimyonerna', 'myonstråle', 'myonstrålar', 'myonstrålen'],
     kort: 'En tyngre släkting till elektronen, ungefär 207 gånger så tung. Den lever bara ett par miljondels sekunder, men regnar ständigt ner över oss från kosmisk strålning — omkring en per sekund genom en utsträckt handflata.',
     relaterade: ['neutrino', 'standardmodellen', 'invers-betasonderfall', 'lepton'],
     body: [
@@ -2966,6 +2966,30 @@ window.BEGREPP = [
       { type: 'p', html: 'En nanotråd odlas, den skärs inte ut. Det vanligaste receptet börjar med en droppe guld, bara någon tiondels mikrometer stor, som läggs på en kristallyta. Provet värms i en gas som innehåller de grundämnen tråden ska bestå av. Gasen löser sig i gulddroppen, och när droppen blivit mättad börjar materialet fälla ut sig underifrån, i takt med underlagets kristallmönster. Droppen lyfts då sakta uppåt medan en rak pinne växer fram under den, och genom att byta gasblandning under resan går det att bygga in skikt med olika sammansättning på bestämda höjder.' },
       { type: 'p', html: 'Smalheten är hela poängen. Lägger man två material med olika stora atomavstånd på varandra i en vanlig platta uppstår spänningar som till slut spricker upp i defekter, men i en tråd kan gittret ge efter utåt längs sidorna i stället. Därför går det att kombinera ämnen i en nanotråd som annars inte alls fungerar ihop. Dessutom är tråden tunnare än ljusets våglängd, och då uppträder den inte som en bit material utan snarare som en liten antenn: den kan fånga in ljus från ett område bredare än sig själv, och släppa ut ljus utan att det fastnar inne i materialet.' },
       { type: 'p', html: 'Just de två egenskaperna gör nanotrådar intressanta som solceller, lysdioder, lasrar och ljusdetektorer. En glespackad skog av trådar kan fånga nästan lika mycket solljus som en hel skiva, fast den använder någon procent så mycket halvledarmaterial. Baksidan är att en tråd nästan bara består av yta, och på en yta sitter det alltid defekter som fångar upp laddningar och gör om deras energi till värme i stället för ljus. Att täcka trådarna med ett skyddande ytskikt, så kallad passivering, är därför ett av de svåraste stegen på vägen från laboratorium till produkt.' }
+    ]
+  },
+  {
+    id: 'myonium',
+    term: 'Myonium',
+    former: ['myonium', 'myoniumet', 'myoniumatom', 'myoniumatomen', 'myoniumatomer', 'myoniumatomerna', 'myoniumstråle', 'myoniumstrålen'],
+    kort: 'En atom vars kärna inte är någon atomkärna alls, utan en enda antipartikel: en antimyon med en vanlig elektron kring sig. Den är nästan lika stor som en väteatom, väger ungefär en niondel så mycket och finns kvar bara ett par miljondels sekunder.',
+    relaterade: ['myon', 'antimateria', 'lepton', 'standardmodellen', 'positron'],
+    body: [
+      { type: 'p', html: 'En vanlig väteatom består av en proton med en elektron omkring sig. Byter man ut protonen mot en <em>antimyon</em> — antipartikeln till myonen, positivt laddad precis som protonen men knappt en niondel så tung — får man myonium. Elektronen märker knappt av bytet: den bryr sig om laddningen, och den är densamma. Därför blir myonium nästan exakt lika stort som en väteatom, har ungefär samma energinivåer och sänder ut ljus i nästan samma färger. Skillnaden syns i vågen: hela atomen väger bara omkring en niondel så mycket som väte, eftersom mitten är så lätt.' },
+      { type: 'p', html: 'Namnet är lite missvisande. Myonium är ingen förening och inget grundämne, utan en så kallad exotisk atom: en tillfällig sammansättning som fysiker tillverkar i en accelerator. Recept: gör antimyoner genom att låta en kraftig protonstråle träffa ett mål, bromsa ner dem i ett material, och låt var och en fånga upp en ledig elektron. Hela atomen är oladdad utåt, och just det gör den användbar — elektriska fält, som annars knuffar runt laddade partiklar hur som helst, biter inte på den.' },
+      { type: 'p', html: 'Bråttom är det. Antimyonen sönderfaller efter i genomsnitt 2,2&nbsp;µs, och då är atomen borta. Ändå hinner man mycket: eftersom myonium är byggt av två punktformiga partiklar utan inre struktur går dess energinivåer att räkna ut med extrem noggrannhet ur kvantelektrodynamiken, och varje mätning som avviker från uträkningen skulle peka på någonting nytt i fysiken. Atomen används därför som ett av de skarpaste testen av teorin — och som ett sätt att komma åt myonens massa, som annars är svår att bestämma.' }
+    ]
+  },
+  {
+    id: 'kemisk-potential',
+    term: 'Kemisk potential',
+    former: ['kemisk potential', 'kemiska potentialen', 'kemisk potentialen', 'kemiska potentialer'],
+    kort: 'Ett mått på hur mycket ett systems energi ändras när en enda partikel läggs till eller tas bort. Partiklar söker sig dit potentialen är lägst, ungefär som vatten rinner nedför.',
+    relaterade: ['superfluid', 'absoluta-nollpunkten'],
+    body: [
+      { type: 'p', html: 'Tänk på en vattenyta. Vatten rinner från högt till lågt, och rörelsen upphör först när ytan är plan överallt. Den kemiska potentialen spelar samma roll för partiklar: den talar om hur mycket energi ett system vinner eller förlorar på att ta emot ytterligare en partikel. Är potentialen lägre på ett ställe än på ett annat flyttar partiklarna dit, och jämvikt råder först när den är lika stor överallt. Det är därför socker löser sig i te, varför gas strömmar från högt till lågt tryck och varför vatten avdunstar ur en öppen glasburk men inte ur en tillsluten.' },
+      { type: 'p', html: 'Storheten mäts i energi per partikel, oftast i elektronvolt när det gäller enskilda atomer. Att den kan vara både positiv och negativ är hela poängen. En partikel med negativ kemisk potential i ett material tjänar energi på att vara kvar där och stannar. En partikel med positiv kemisk potential gör tvärtom: systemet skulle må bättre utan den, och den knuffas ut. Den som vill få partiklar att lämna ett material av sig självt behöver alltså bara se till att den kemiska potentialen är positiv — då sköter naturen resten.' },
+      { type: 'p', html: 'Begreppet dyker upp överallt där något flyttar sig utan att någon skjuter på: i batteriernas elektroder, i halvledarnas gränsskikt, i cellmembran, i stjärnors inre och i kylskåpet. I fysiken används det också som en sorts ratt att vrida på i teorin: genom att bestämma den kemiska potentialen bestämmer man indirekt hur många partiklar ett system innehåller, vilket ofta är enklare att räkna med än att hålla antalet fast.' }
     ]
   },
 ];

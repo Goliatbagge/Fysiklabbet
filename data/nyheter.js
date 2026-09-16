@@ -103,6 +103,83 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-16-atomen-som-skjuts-ur-heliumet",
+    date: "2026-09-16",
+    title: "Atomen med antimateria i kärnan skjuts nu rakt upp ur flytande helium — i 2 180 meter i sekunden",
+    deck: "Myonium finns kvar i ett par miljondels sekunder och har hittills sprutat åt alla håll. Nu har fysiker i Schweiz fått atomerna att lämna ett två millimeter tunt skikt superfluid helium med nästan samma fart och samma riktning. Om ett par år ska strålen användas till något ingen gjort förut: att se efter om tyngdkraften drar lika hårt i andra generationens materia.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-16-atomen-som-skjuts-ur-heliumet.jpg",
+    imageAlt: "En stor experimenthall sedd från en gångbro. Orange och röda apparatskåp, blå och grå instrument och gula räcken står tätt på båda sidor om en öppen mittgång, och taket bärs av blå stålbalkar med ventilationstrummor.",
+    imageCredit: "Foto: Schölla Schwarz (CC BY 3.0), via Wikimedia Commons. Bilden visar en av experimenthallarna vid Paul Scherrer-institutet, inte det strålrör där försöket gjordes.",
+    tags: ["partikelfysik", "myon", "myonium", "antimateria", "gravitation", "fritt fall", "ekvivalensprincipen", "superfluid", "lågtemperaturfysik", "partikelacceleration", "interferometri"],
+    sources: [
+      { name: "ETH Zürich: Novel particle beam could challenge Einstein’s theory of gravity (15 september 2026)", url: "https://ethz.ch/en/news-and-events/eth-news/news/2026/09/novel-particle-beam-could-challenge-einsteins-theory-of-gravity/" },
+      { name: "Phys.org: Novel particle beam could challenge Einstein’s theory of gravity", url: "https://phys.org/news/2026-09-particle-einstein-theory-gravity.html" },
+      { name: "Paul Scherrer-institutet: Muon beams at PSI (bakgrund om myonkällan)", url: "https://www.psi.ch/en/smus/introduction" }
+    ],
+    research: {
+      citation: "Jesse Zhang, Aldo Antognini, Marek Bartkowiak, Damian Goeldi, Klaus Kirch, Andreas Knecht, David Taqqu, Robert Waddy, Frederik Wauters, Paul Wegmann och Anna Soter, ”Generation of a high-intensity, superthermal muonium beam for gravity and laser spectroscopy experiments”, Nature Physics, 14 september 2026. Fritt tillgänglig förhandsversion: arXiv:2512.19923",
+      url: "https://doi.org/10.1038/s41567-026-03433-x"
+    },
+    simulering: {
+      href: "fysik1-tyngdfaktor-jorden.html?sim=vacuum",
+      name: "Fritt fall i vakuum",
+      text: "Vänd de två glasrören och se hur myntet först slår rosenbladet med hästlängder. Pumpa sedan ut luften och vänd igen: utan luftmotstånd faller de sida vid sida, hur olika de än är. Det är precis den likheten som nu ska prövas på en atom med en antipartikel i mitten."
+    },
+    larare: {
+      moment: [
+        { label: "Acceleration och fritt fall", href: "katalog.html?id=fy1-2.4" },
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Partiklar och antipartiklar" }
+      ],
+      fragor: [
+        "Forskarna säger att atomerna är ”kalla” trots att de lämnar heliumet i 2 180 meter i sekunden. Vad är det egentligen som är kallt, och varför duger inte farten som mått?",
+        "Att mäta hur ett föremål faller låter enkelt. Varför blir det ändå svårare ju kortare tid föremålet finns kvar, och varför hjälper det att mäta på många atomer i stället för på en?",
+        "Om myonium skulle visa sig falla en aning annorlunda än vanlig materia — vilka andra förklaringar än en ny naturkraft måste uteslutas först?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Byt ut kärnan i en väteatom mot en enda antipartikel, låt en vanlig elektron kretsa kvar, och resultatet är en fullt fungerande atom. Den heter myonium, den har energinivåer, den tar upp och sänder ut ljus, och den är nästan exakt lika stor som väteatomen den efterliknar. Två saker skiljer: den väger bara omkring en niondel så mycket, och den finns kvar i ett par miljondels sekunder.' },
+      { type: 'p', html: 'I <em>Nature Physics</em> rapporterar ett lag från ETH Zürich och Paul Scherrer-institutet i Villigen att de lyckats göra en ordentlig stråle av dessa atomer — inte ett moln som sprutar åt alla håll, utan en samlad ström där atomerna färdas med nästan samma fart, nästan parallellt. Det låter som en teknisk detalj. Det är förutsättningen för ett försök som ingen hittills kunnat göra.' },
+
+      { type: 'h2', text: 'Elektronens tunga syskon' },
+      { type: 'p', html: 'Allt vi består av är byggt av protoner, neutroner och elektroner. Men naturen nöjde sig inte där. Till den här första generationen av materia finns två tyngre uppsättningar, och den mest kända medlemmen i den andra är myonen: en partikel med exakt samma laddning som elektronen och i stort sett samma uppträdande, fast omkring 207 gånger tyngre.' },
+      { type: 'p', html: 'Varför de extra generationerna finns vet ingen. ”Vi fysiker förstår ännu inte varför dessa ytterligare generationer över huvud taget finns”, säger Anna Soter, professor i fysik och den som leder arbetet. ”Och varför är de tre till antalet?”' },
+      { type: 'p', html: 'Tyngden har ett pris. Myonen är instabil och sönderfaller efter i genomsnitt 2,2&nbsp;µs. Den som vill hinna göra något med den har alltså ont om tid — och det som ska göras här är att se en atom falla.' },
+      { type: 'p', html: 'Att det måste vara en <em>neutral</em> atom är inte en nyck. Tyngdkraften är den svagaste av naturens krafter, och på en laddad partikel skulle varje kringflygande elektriskt fält ge knuffar som helt dränker den. ”Det exotiska myoniumet lämpar sig mycket väl för detta eftersom det är en neutral atom”, säger Soter. ”För att få något att falla behöver man trots allt något som är oladdat.”' },
+
+      { type: 'h2', text: 'En kanon av kemisk potential' },
+      { type: 'p', html: 'Myonerna kommer från Paul Scherrer-institutets protonaccelerator, som ger världens intensivaste kontinuerliga myonstrålar. Vid strålröret πE1 skickas positivt laddade antimyoner in mot ett bara två millimeter tjockt skikt superfluid helium, nedkylt till omkring 0,2&nbsp;K — två tiondels grad över den absoluta nollpunkten. Antimyonerna bromsas i vätskan och stannar ungefär 35&nbsp;µm under ytan. Där fångar var och en upp en elektron, och myoniumatomen är född.' },
+      { type: 'p', html: 'Sedan händer det ovanliga. En myoniumatom trivs helt enkelt inte inne i superfluid helium: den har vad fysiker kallar en positiv kemisk potential där, vilket betyder att systemet får lägre energi om atomen lämnar vätskan. Heliumet knuffar alltså ut den. När atomen når ytan omvandlas energiskillnaden, omkring 2,8&nbsp;meV, till rörelseenergi — och atomen skjuter rakt upp ur vätskan.' },
+      { type: 'p', html: '”Så vi använder den kemiska potentialen som en atomkanon”, säger Jesse Zhang, studiens förstaförfattare.' },
+      { type: 'p', html: 'Att det fungerar beror på superfluiditeten. En vanlig vätska skulle stoppa atomen i ett gytter av krockar långt innan den nådde ytan, och med 2,2&nbsp;µs på kontot finns ingen tid att förlora. I den friktionsfria kvantvätskan glider myoniumet i stället ostört uppåt.' },
+      { type: 'p', html: 'Utfarten är förvånansvärt exakt. Atomerna lämnar ytan med hastigheten $v \\approx 2\\,180\\ \\mathrm{m/s}$ och en spridning på mindre än $150\\ \\mathrm{m/s}$, alltså ungefär sju procent. Kontrollräkningen stämmer: sätter man in 2,8&nbsp;meV och myoniumets massa i $E_k = \\dfrac{m v^2}{2}$ faller farten ut på omkring 2&nbsp;180&nbsp;m/s. Av de antimyoner som stannar i heliumet kommer 8,2&nbsp;% ut igen som myonium, och strålens öppningsvinkel är bara ett tiotal tusendels radianer, ungefär sju tiondels grad.' },
+      { type: 'p', html: 'Det är i den snäva spridningen ordet ”kall” ligger, inte i farten. En atom i jämvikt med helium vid 0,2&nbsp;K skulle typiskt röra sig omkring 170&nbsp;m/s åt ett slumpmässigt håll. Strålen är alltså ungefär tretton gånger snabbare än så — men alla atomer är snabba på samma sätt, och det är skillnaden mellan ett moln och en stråle. Strålen kallas därför supertermisk: mycket varmare än omgivningen om man ser till farten, mycket kallare om man ser till spridningen.' },
+
+      { type: 'fact', title: 'Strålen i siffror', items: [
+        'Fart ut ur vätskan: omkring 2&nbsp;180&nbsp;m/s, med en spridning under 150&nbsp;m/s.',
+        'Energin som knuffar ut atomen: cirka 2,8&nbsp;meV, det vill säga 2,8 tusendels elektronvolt.',
+        'Heliumskiktet: 2&nbsp;mm tjockt, isotopiskt renat, omkring 0,2&nbsp;K.',
+        'Antimyonerna stannar ungefär 35&nbsp;µm under ytan; 8,2&nbsp;% av dem kommer ut som myonium.',
+        'Myonens medellivslängd: 2,2&nbsp;µs. På den tiden hinner en atom i strålen knappt 5&nbsp;mm.'
+      ]},
+
+      { type: 'h2', text: 'Det som faktiskt ska mätas' },
+      { type: 'p', html: 'I ett gravitationsfält faller alla kroppar lika fort, oavsett vad de är gjorda av. Galilei och Newton anade det, och hos Einstein blev det till en grundbult: tung massa och trög massa är samma sak. Principen har prövats om och om igen med stigande noggrannhet — men alltid på vanlig materia, eller på antimateria av första generationen. Så sent som 2023 såg man antiväte falla nedåt, inte uppåt.' },
+      { type: 'p', html: 'Andra generationen har aldrig vägts på det viset. Det är hålet laget vill fylla, och myonium är den enda kandidat som duger: en oladdad atom som bärs upp av en andragenerationspartikel, helt utan inblandning av den starka kraften.' },
+      { type: 'p', html: 'Själva mätningen är inte gjord. Nästa steg är en interferometer, ett instrument som utnyttjar att atomerna också är vågor: strålen delas, delarna får gå var sin väg och läggs sedan ihop igen till ett randmönster. Tyngdkraften förskjuter mönstret en aning, och ur förskjutningen går atomens fall att räkna fram.' },
+      { type: 'p', html: 'Att gå den omvägen är inte fint krångel utan nödvändighet. Under en medellivslängd, 2,2&nbsp;µs, faller en atom bara $s = \\dfrac{g t^2}{2} \\approx 2{,}4 \\cdot 10^{-11}\\ \\mathrm{m}$ — någon fjärdedels atomdiameter. Att se det med blotta mätlinjalen är uteslutet; en interferometer däremot mäter i bråkdelar av en våglängd. Laget siktar på att bestämma myoniumets tyngdacceleration på omkring en procent när, efter ungefär hundra dygns mätning. Metoden ska provas med strålen i år, och själva gravitationsförsöket väntas om två eller tre år.' },
+      { type: 'p', html: 'Strålen öppnar samtidigt en andra dörr. Med så många atomer på samma bana går myoniumets energinivåer att mäta med laser betydligt skarpare än hittills, vilket i sin tur ger myonens massa och några av naturkonstanterna med bättre precision.' },
+
+      { type: 'h2', text: 'Och om svaret blir nej?' },
+      { type: 'p', html: 'Ingen räknar med en avvikelse. Men om myonium skulle falla det minsta annorlunda än vanlig materia vore det en av de större nyheterna på länge.' },
+      { type: 'quote', html: 'Det vore verkligen förvånande, och skulle utöver andra teorier kunna peka mot att det finns en femte kraft.', cite: 'Anna Soter, ETH Zürich' },
+      { type: 'p', html: 'Fysiken räknar i dag med fyra grundläggande växelverkningar: gravitationen, elektromagnetismen samt den starka och den svaga kraften. En femte har föreslagits gång på gång och aldrig kunnat beläggas. Soter är noga med att det inte är den hon jagar: ”Jag är helt förutsättningslös. Jag vill bara mäta, för första gången, om likheten mellan tung och trög massa också gäller andra generationens partiklar — enbart det är ett ganska inspirerande arbete.”' },
+      { type: 'p', html: 'Det är värt att notera vad som faktiskt står i den nya studien. Ingen har ännu sett en myoniumatom falla. Det som gjorts är att bygga strålen — och att göra ett omöjligt försök möjligt är i fysiken ofta det svåraste steget.' }
+    ]
+  },
+  {
     id: "2026-09-15-kedjan-som-bara-finns-i-en-dimension",
     date: "2026-09-15",
     title: "Sex atomer hänger ihop utan en enda kemisk bindning — och kedjan klarar krocken, så länge den bara får röra sig åt ett håll",

@@ -132,7 +132,7 @@ Sträckan är densamma dit och hem, och det är den som efterfrågas. Vi
 låter $x$ vara avståndet till badplatsen i kilometer. *Skriv ner detta!*
 
 $$
-x = \text{avståndet till badplatsen i km}
+x = \text{avståndet i km}
 $$
 
 Vi vet hastigheterna, och vi vill ha tiderna. Hastighet är sträcka delad
@@ -140,14 +140,18 @@ med tid, och löser vi ut tiden ur det sambandet får vi att tid är sträcka
 delad med hastighet:
 
 $$
-\text{hastighet} = \frac{\text{sträcka}}{\text{tid}} \quad\Longleftrightarrow\quad \text{tid} = \frac{\text{sträcka}}{\text{hastighet}}
+\begin{array}{ccc} \text{hastighet} = \dfrac{\text{sträcka}}{\text{tid}} & \Longleftrightarrow & \text{tid} = \dfrac{\text{sträcka}}{\text{hastighet}} \end{array}
 $$
 
 Dit cyklar Amir sträckan $x$ km med hastigheten 18 km/h, så tiden dit är
 $x$ delat med 18. Hem går han samma sträcka $x$ km med hastigheten 6 km/h:
 
 $$
-\text{tid dit} = \frac{x}{18}\ \text{h} \qquad\qquad \text{tid hem} = \frac{x}{6}\ \text{h}
+\text{tid dit} = \frac{x}{18}\ \text{h}
+$$
+
+$$
+\text{tid hem} = \frac{x}{6}\ \text{h}
 $$
 
 Hela turen tar 1 timme och 20 minuter. Farterna är angivna i km/h, så

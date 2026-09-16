@@ -4065,6 +4065,27 @@ body.laborans u .lab-term {
     cursor: pointer;
 }
 
+/* Kryssrutan "Pennlösning i helskärm" i kontrollisten (PresentationMode) */
+.lab-pres-pennfs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--lab-ink-soft);
+    white-space: nowrap;
+    user-select: none;
+}
+.lab-pres-pennfs:hover { color: var(--lab-ink); }
+.lab-pres-pennfs input {
+    accent-color: var(--lab-ink);
+    cursor: pointer;
+    margin: 0;
+}
+
 .lab-pres-exit {
     border: 1px solid var(--lab-line-strong);
     background: transparent;
@@ -4096,6 +4117,9 @@ body.laborans u .lab-term {
     .lab-pres-launch { margin-left: 0; }
     /* Trång list på mobil: kortare glidare i stället för att trängas bort */
     .lab-pres-textsize input[type="range"] { width: 64px; }
+    /* Helskärm för pennarket är ett klassrumsverktyg — på en telefon
+       finns varken plats för etiketten eller ett behov av valet. */
+    .lab-pres-pennfs { display: none; }
 }
 
 /* Under presentation: göm feedback-lampan (ligger annars över kontrollisten) */

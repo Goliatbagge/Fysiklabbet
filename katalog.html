@@ -1588,6 +1588,22 @@
                 try { localStorage.setItem('fl-pres-textskala', String(textScale)); }
                 catch (e) { /* privat läge m.m. — inställningen gäller ändå nu */ }
             }, [textScale]);
+            // Pennlösning i helskärm: när presentationen når ett
+            // ::: handskrift-steg fullskärmas arket AUTOMATISKT (widgetens
+            // eget helskärmsläge — stort ark, uppgiftspanelen fastnålad
+            // överst, pennföljning), och när man går vidare lämnas det
+            // lika automatiskt. Utan detta måste läraren klicka in i och
+            // ut ur helskärmen vid varje exempel, vilket bryter flödet
+            // (uttryckligt önskemål 2026-09-16). Kryssrutan i kontroll-
+            // listen stänger av det; valet sparas per dator.
+            const [pennFs, setPennFs] = useState(() => {
+                try { return localStorage.getItem('fl-pres-pennfs') !== '0'; }
+                catch (e) { return true; }
+            });
+            useEffect(() => {
+                try { localStorage.setItem('fl-pres-pennfs', pennFs ? '1' : '0'); }
+                catch (e) { /* privat läge och liknande: inställningen gäller ändå nu */ }
+            }, [pennFs]);
             // Avsnittets visualisering (om någon) kan öppnas som ett eget
             // lager ovanpå presentationen — stort och utan störningsmoment.
             const vis = VIS_INDEX[id];
@@ -1629,6 +1645,17 @@
                 if (wrapEl && wrapEl.style.display === 'none') return null;
                 return ctl;
             };
+            // Arket (.hk-wrap) för steg s om det är ett synligt pennsteg,
+            // annars null. Slås upp på nytt varje gång — en växlad
+            // ekvationsredovisning eller tankeväxel bygger om arket.
+            const hkWrapFor = (s = stepRef.current) => {
+                if (!curHkCtl(s)) return null;
+                return stepsRef.current[s - 1].el.querySelector('.hk-wrap');
+            };
+            const fsHkWrap = () => {
+                const el = document.fullscreenElement;
+                return el && el.classList && el.classList.contains('hk-wrap') ? el : null;
+            };
             // Håll pennan i sikte medan ett widget-steg skrivs — overlayen
             // är skrollytan här (widgetens egen pennföljning gäller bara
             // dess eget helskärmsläge). Rullar bara NEDÅT när pennan
@@ -1651,7 +1678,12 @@
             useEffect(() => () => cancelAnimationFrame(hkRaf.current), []);
             const next = () => {
                 const ctl = curHkCtl();
-                if (ctl && !ctl.klar()) { ctl.nasta(); followHk(ctl); return; }
+                if (ctl && !ctl.klar()) {
+                    ctl.nasta();
+                    // I arkets helskärm sköter widgeten pennföljningen själv.
+                    if (!fsHkWrap()) followHk(ctl);
+                    return;
+                }
                 cancelAnimationFrame(hkRaf.current);
                 setStep(s => Math.min(s + 1, totalRef.current));
             };
@@ -1743,6 +1775,40 @@
                 window.addEventListener('resize', fit);
                 return () => window.removeEventListener('resize', fit);
             }, [html]);
+
+            // Pennlösning i helskärm (se pennFs ovan): arket för det
+            // aktuella pennsteget fullskärmas, och ett ark som inte längre
+            // är aktuellt (eller som inte ska vara i helskärm) släpps.
+            // Presentationen ligger redan i fullskärm på dokumentroten;
+            // arket läggs ovanpå i fullskärmsstacken, och exitFullscreen
+            // tar då bara bort arket — dokumentroten ligger kvar, så
+            // presentationens egen fullscreenchange-vakt stänger inte.
+            // Begäran görs i effekten efter steg-klicket/tangenttrycket,
+            // vars användargest lever kvar i flera sekunder (samma
+            // förutsättning som widgetens egen ombyggnad i helskärm).
+            useEffect(() => {
+                if (!ready) return;
+                const cur = hkWrapFor(step);
+                const fs = fsHkWrap();
+                // Klassrumsverktyg: på en smal skärm (där kryssrutan är
+                // gömd) sköter man arkets helskärm för hand som förut.
+                // Och bara när presentationen själv fick sin helskärm:
+                // annars vore arket ensamt i stacken, och utträdet skulle
+                // tömma den helt — vilket vakten ovan tolkar som "avsluta".
+                const presFs = !!document.fullscreenElement;
+                const vill = pennFs && presFs && window.innerWidth > 720 ? cur : null;
+                if (fs === vill) return;
+                const begar = () => {
+                    if (!vill || !vill.isConnected || !vill.requestFullscreen) return;
+                    try {
+                        const p = vill.requestFullscreen();
+                        if (p && p.catch) p.catch(() => {});
+                    } catch (e) { /* nekad — presentationen fortsätter i normalläge */ }
+                };
+                if (fs && document.exitFullscreen) {
+                    document.exitFullscreen().then(begar, begar);
+                } else begar();
+            }, [step, ready, pennFs]);
 
             // Applicera aktuellt steg: visa/dim-klasser + mjuk autoscroll.
             useEffect(() => {
@@ -1871,6 +1937,28 @@
                         clearTimeout(t);
                     };
                 }
+                // Ett pennark som just lämnar helskärmen (synk-effekten
+                // ovan) ligger kvar i topplagret tills utträdet är klart —
+                // mäts overlayen då saknar den arket i flödet och steget
+                // hamnar fel. Vänta in fullscreenchange (med reservtimer).
+                const lamnar = fsHkWrap();
+                if (lamnar && lamnar !== hkWrapFor(step)) {
+                    let done = false;
+                    const finish = () => {
+                        if (done) return;
+                        done = true;
+                        document.removeEventListener('fullscreenchange', finish);
+                        clearTimeout(t);
+                        requestAnimationFrame(place);
+                    };
+                    document.addEventListener('fullscreenchange', finish);
+                    const t = setTimeout(finish, 800);
+                    return () => {
+                        done = true;
+                        document.removeEventListener('fullscreenchange', finish);
+                        clearTimeout(t);
+                    };
+                }
                 const raf = requestAnimationFrame(place);
                 return () => cancelAnimationFrame(raf);
             // textScale: en ändrad textstorlek flyttar radbrytningar och
@@ -1892,7 +1980,18 @@
                 // stanna kvar och utforska. (Släpp efter drag ger ett click.)
                 // Gäller även härlednings-dropdownens summary-rad: klicket
                 // ska fälla ut/ihop härledningen, inte gå till nästa steg.
-                if (e.target.closest('input, label, summary, .lab-graf, .lab-handskrift, .lab-minisim, .lab-video, .lab-vis-host')) return;
+                if (e.target.closest('input, label, summary, .lab-graf, .lab-handskrift, .lab-minisim, .lab-video, .lab-vis-host')) {
+                    // Pennarket i helskärm: klick på papperet stegar
+                    // lösningen (widgetens egen hanterare). Är lösningen
+                    // FÄRDIGSKRIVEN går klicket i stället vidare i
+                    // presentationen — annars finns inget klickbart kvar
+                    // på duken och läraren måste leta efter tangentbordet.
+                    const ctl = curHkCtl();
+                    const fsWrap = fsHkWrap();
+                    if (ctl && ctl.klar() && fsWrap && e.target.closest('.hk-paper') &&
+                        fsWrap === hkWrapFor()) next();
+                    return;
+                }
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
                 next();
@@ -1944,6 +2043,12 @@
                                     onChange={(e) => setTextScale(parseFloat(e.target.value))} />
                                 <span className="ts-max" aria-hidden="true">A</span>
                             </div>
+                            <label className="lab-pres-pennfs"
+                                title="Visa varje pennlösning i helskärm och lämna den automatiskt när du går vidare">
+                                <input type="checkbox" checked={pennFs}
+                                    onChange={(e) => setPennFs(e.target.checked)} />
+                                Pennlösning i helskärm
+                            </label>
                             {vis && (
                                 <button type="button" className="lab-pres-exit lab-pres-visbtn"
                                     onClick={() => setShowVis(true)}

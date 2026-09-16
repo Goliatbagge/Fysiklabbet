@@ -92,6 +92,26 @@ $x$ var Arielles belopp, och 860 kr av 4 000 kr är rimligt.
 :::
 :::
 
+::: formel "Sträcka, hastighet och tid"
+Många problem handlar om något som rör sig. Då hänger tre storheter ihop,
+och samma samband kan skrivas på tre sätt beroende på vad som söks:
+
+$$
+\begin{array}{ccccc} v = \dfrac{s}{t} & \Longleftrightarrow & s = v \cdot t & \Longleftrightarrow & t = \dfrac{s}{v} \end{array}
+$$
+
+där
+
+- $v$ = hastighet, till exempel i km/h eller m/s
+- $s$ = sträcka, i km eller m
+- $t$ = tid, i h eller s
+
+Hastighet är sträcka per tidsenhet. Vet du två av storheterna får du den
+tredje. Enheterna måste passa ihop: är hastigheten i km/h ska sträckan vara
+i km och tiden i timmar, så 20 minuter skrivs som $\dfrac{20}{60}$ h och inte
+som 20.
+:::
+
 ::: exempel "Exempel 2 — Fram och tillbaka med olika fart"
 **Amir cyklar hemifrån till badplatsen med medelfarten 18 km/h och går
 sedan hem samma väg med medelfarten 6 km/h. Hela turen tar 1 timme och
@@ -115,8 +135,16 @@ $$
 x = \text{avståndet till badplatsen i km}
 $$
 
-Tiden för en sträcka är sträckan delad med farten. Dit cyklar Amir $x$ km
-med farten 18 km/h, och hem går han $x$ km med farten 6 km/h:
+Vi vet hastigheterna, och vi vill ha tiderna. Hastighet är sträcka delad
+med tid, och löser vi ut tiden ur det sambandet får vi att tid är sträcka
+delad med hastighet:
+
+$$
+\text{hastighet} = \frac{\text{sträcka}}{\text{tid}} \quad\Longleftrightarrow\quad \text{tid} = \frac{\text{sträcka}}{\text{hastighet}}
+$$
+
+Dit cyklar Amir sträckan $x$ km med hastigheten 18 km/h, så tiden dit är
+$x$ delat med 18. Hem går han samma sträcka $x$ km med hastigheten 6 km/h:
 
 $$
 \text{tid dit} = \frac{x}{18}\ \text{h} \qquad\qquad \text{tid hem} = \frac{x}{6}\ \text{h}
@@ -212,6 +240,7 @@ svårare uppgifterna:
 ::: sampunkt "Uttryck de andra storheterna"
 - "dubbelt så mycket som $x$" blir $2x$.
 - "300 kr mindre än $2x$" blir $2x - 300$.
+- Rörelse: tid är sträcka delad med hastighet, $t = \dfrac{s}{v}$.
 - Summan av delarna sätts lika med helheten.
 :::
 

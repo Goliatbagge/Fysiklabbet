@@ -8249,12 +8249,28 @@
     T.str('x=avståndet i km', padL, y);
     T.stepEnd();
 
+    /* sambandet skrivs ut innan det används: hastighet är sträcka
+     * delat med tid, alltså är tid sträcka delat med hastighet */
     tanke(y, [
-      [['Tid är sträcka delat med']],
-      [['fart. Dit: x km med']],
-      [['18 km/h.']]
+      [['Jag vet hastigheterna och']],
+      [['vill ha tiderna. Hastighet']],
+      [['är sträcka delat med tid,']],
+      [['så tid är sträcka delat']],
+      [['med hastighet.']]
     ]);
     y += 2.9 * F;
+    xx = T.str('v=', padL, y);
+    xx = T.fracH('s', 't', xx, y);
+    xx = T.str(' ⟺ t=', xx, y);
+    T.fracH('s', 'v', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dit: sträckan x km med']],
+      [['hastigheten 18 km/h, så']],
+      [['tiden är x delat med 18.']]
+    ], 1.05);
+    y += 3.2 * F;
     xx = T.str('Tid dit=', padL, y);
     xx = T.fracH('x', '18', xx, y);
     T.str(' h', xx, y);

@@ -21032,6 +21032,222 @@ $$ 2x = 24 \\qquad x = 12 $$
 
 **Generell slutsats:** i åldersproblem åldras alla lika mycket — addera tidsförskjutningen till varje persons uttryck innan villkoret ställs upp.`,
         },
+        {
+            level: 3,
+            question: `Tre syskon ärver tillsammans 210 000 kr. Arvet fördelas så att förhållandet mellan det äldsta och det mellersta syskonets andel är $5:4$, och förhållandet mellan det mellersta och det yngsta syskonets andel är $3:2$. Hur mycket får vart och ett av syskonen?`,
+            answer: { value: 90000, unit: 'kr' },
+            solution: `**1. Översätt.** Båda förhållandena innehåller det mellersta syskonets andel, så vi låter $x$ vara den, i kronor. Det äldsta syskonet får $\\dfrac{5}{4}$ av det mellersta, alltså $\\dfrac{5x}{4}$, och det yngsta får $\\dfrac{2}{3}$ av det mellersta, alltså $\\dfrac{2x}{3}$. Summan är 210 000 kr:
+
+$$ \\frac{5x}{4} + x + \\frac{2x}{3} = 210\\,000 $$
+
+**2. Lös ekvationen.** Nämnarna är 4 och 3, så MGN = 12. Vi multiplicerar varje term med 12:
+
+$$ \\frac{12 \\cdot 5x}{4} + 12x + \\frac{12 \\cdot 2x}{3} = 12 \\cdot 210\\,000 $$
+
+$$ 15x + 12x + 8x = 2\\,520\\,000 $$
+
+$$ 35x = 2\\,520\\,000 $$
+
+Dividerar med 35 i båda led:
+
+$$ x = 72\\,000 $$
+
+**3. Tolka och svara.** Det mellersta syskonet får 72 000 kr, det äldsta $\\dfrac{5 \\cdot 72\\,000}{4} = 90\\,000$ kr och det yngsta $\\dfrac{2 \\cdot 72\\,000}{3} = 48\\,000$ kr. Kontroll: $90\\,000 + 72\\,000 + 48\\,000 = 210\\,000$ kr, $90\\,000 : 72\\,000 = 5 : 4$ och $72\\,000 : 48\\,000 = 3 : 2$.
+
+Insikten är att välja $x$ som den andel som **båda** förhållandena nämner. Väljer man det äldsta syskonet får man två led av bråk i uttrycket för det yngsta. Ett annat sätt är att skriva om förhållandena med samma tal för det mellersta syskonet: $5:4 = 15:12$ och $3:2 = 12:8$, så andelarna förhåller sig som $15:12:8$ och kan skrivas $15k$, $12k$ och $8k$. Då ger $35k = 210\\,000$ att $k = 6\\,000$.
+
+**Svar:** Det äldsta syskonet får 90 000 kr, det mellersta 72 000 kr och det yngsta 48 000 kr.
+
+**Generell slutsats:** i en kedja av förhållanden väljs beteckningen för den storhet som förekommer i båda leden, eller så skrivs kedjan om till ett enda förhållande $a:b:c$ och delarna kallas $ak$, $bk$ och $ck$.`,
+        },
+        {
+            level: 3,
+            question: `Emma startar en löprunda och håller hastigheten 10 km/h. Tolv minuter senare startar Hanna från samma plats och springer samma väg med hastigheten 12 km/h.<br>a) Hur lång tid efter sin egen start hinner Hanna ikapp Emma?<br>b) Hur långt från startplatsen sker det?<br>c) Rundan är 10 km lång. Hinner Hanna ikapp Emma innan rundan är slut? Motivera med ditt svar i b).`,
+            answer: { value: 1, unit: 'h' },
+            solution: `**1. Översätt.** Den avgörande insikten är att Emma och Hanna har sprungit **lika långt** i det ögonblick Hanna hinner ikapp. Sträckan är hastigheten gånger tiden, så vi behöver båda tiderna.
+
+Låt $t$ vara Hannas löptid i timmar när hon hinner ikapp. Emma startade 12 minuter tidigare, det vill säga $\\dfrac{12}{60} = 0{,}2$ timmar tidigare, så Emma har då sprungit i $(t + 0{,}2)$ timmar. Sträckorna är lika:
+
+$$ 10(t + 0{,}2) = 12t $$
+
+**2. Lös ekvationen.** Vi utvecklar parentesen:
+
+$$ 10t + 2 = 12t $$
+
+Subtraherar $10t$ från båda led:
+
+$$ 2 = 2t $$
+
+Dividerar med 2 i båda led:
+
+$$ t = 1 $$
+
+**3. Tolka och svara.**
+
+**a)** Hanna hinner ikapp Emma en timme efter sin egen start. Rimlighet: Emma har ett försprång på $10 \\cdot 0{,}2 = 2$ km, och Hanna knappar in $12 - 10 = 2$ km per timme, så det tar precis en timme.
+
+**b)** Hanna har då sprungit $12 \\cdot 1 = 12$ km från startplatsen. Kontroll: Emma har sprungit i 1,2 timmar och $10 \\cdot 1{,}2 = 12$ km, lika långt.
+
+**c)** Nej. Hanna hinner ikapp efter 12 km, men rundan är bara 10 km. När Emma går i mål efter 10 km har Hanna sprungit i $1 - 0{,}2 = 0{,}8$ timmar och kommit $12 \\cdot 0{,}8 = 9{,}6$ km. Hon är fortfarande 400 m bakom.
+
+**Svar:** a) Efter 1 timme. b) 12 km från starten. c) Nej, ikappspringningen skulle ske efter 12 km, men rundan är bara 10 km lång.
+
+**Generell slutsats:** i ett upphinnandeproblem ställs ekvationen upp ur villkoret att sträckorna är lika, och den som startade först har den längre tiden. Kontrollera alltid att svaret ligger inom problemets ramar, här rundans längd.`,
+        },
+        {
+            level: 3,
+            question: `En tehandlare har två sorters te, ett som kostar 120 kr/kg och ett som kostar 200 kr/kg. Handlaren vill blanda dem till 10 kg te som ska säljas för 150 kr/kg, utan att tjäna eller förlora något på blandningen jämfört med att sälja sorterna var för sig.<br>a) Hur många kilogram av varje sort ska blandas?<br>b) Handlaren funderar på att i stället blanda till en sort för 100 kr/kg. Vad säger ekvationen om det? Tolka resultatet.`,
+            answer: { value: 6.25, unit: 'kg', tol: 0.01 },
+            solution: `**1. Översätt.** Låt $x$ vara mängden av det billiga teet i kilogram. Blandningen ska väga 10 kg, så mängden dyrt te är $(10 - x)$ kg. Priset för det te som går åt ska vara lika stort som priset för blandningen: 10 kg för 150 kr/kg kostar $10 \\cdot 150 = 1\\,500$ kr.
+
+$$ 120x + 200(10 - x) = 1\\,500 $$
+
+**2. Lös ekvationen.** Vi utvecklar parentesen. Tänk på tecknen: $200 \\cdot (-x) = -200x$.
+
+$$ 120x + 2\\,000 - 200x = 1\\,500 $$
+
+$$ 2\\,000 - 80x = 1\\,500 $$
+
+Subtraherar 2 000 från båda led:
+
+$$ -80x = -500 $$
+
+Dividerar med (−80) i båda led:
+
+$$ x = \\frac{-500}{-80} = 6{,}25 $$
+
+**3. Tolka och svara.**
+
+**a)** Det behövs 6,25 kg av det billiga teet och $10 - 6{,}25 = 3{,}75$ kg av det dyra. Kontroll: $120 \\cdot 6{,}25 + 200 \\cdot 3{,}75 = 750 + 750 = 1\\,500$ kr, alltså 150 kr/kg. Rimlighet: 150 kr/kg ligger närmare 120 än 200, så det ska vara mer av det billiga teet.
+
+**b)** Samma uppställning med $10 \\cdot 100 = 1\\,000$ kr:
+
+$$ 120x + 200(10 - x) = 1\\,000 $$
+
+$$ 2\\,000 - 80x = 1\\,000 $$
+
+$$ -80x = -1\\,000 $$
+
+$$ x = 12{,}5 $$
+
+Ekvationen ger $x = 12{,}5$ kg billigt te, men blandningen ska väga 10 kg, så mängden dyrt te blir $10 - 12{,}5 = -2{,}5$ kg. En negativ mängd går inte att blanda i. Tolkningen är att det inte går: en blandning kan aldrig bli billigare än den billigaste ingrediensen, och det billiga teet kostar 120 kr/kg.
+
+**Svar:** a) 6,25 kg av teet för 120 kr/kg och 3,75 kg av teet för 200 kr/kg. b) Ekvationen ger en negativ mängd av det dyra teet. Det går inte, eftersom blandningen inte kan bli billigare än 120 kr/kg.
+
+**Generell slutsats:** i ett blandningsproblem ställs ekvationen upp på det totala värdet (pris gånger mängd), och de två mängderna uttrycks med samma obekanta eftersom summan är känd. Ett svar utanför det möjliga intervallet betyder att blandningen inte går att göra.`,
+        },
+        {
+            level: 3,
+            question: `En kvadrat har sidan $x$ cm. Om den ena sidan förlängs med 4 cm och den andra förkortas med 2 cm får man en rektangel vars area är 12 cm² större än kvadratens area.<br>a) Bestäm $x$.<br>b) Visa att om den ena sidan förlängs med $a$ cm och den andra förkortas med $a$ cm, så blir arean alltid mindre än kvadratens, oavsett vilket $x$ kvadraten har.`,
+            answer: { value: 10, unit: 'cm' },
+            solution: `**a)** Kvadratens area är $x \\cdot x = x^2$. Rektangeln får sidorna $(x + 4)$ cm och $(x - 2)$ cm, så dess area är $(x + 4)(x - 2)$. Den ska vara 12 cm² större än kvadratens:
+
+$$ (x + 4)(x - 2) = x^2 + 12 $$
+
+Vi utvecklar parenteserna i VL, varje term i den första parentesen gånger varje term i den andra:
+
+$$ x^2 - 2x + 4x - 8 = x^2 + 12 $$
+
+$$ x^2 + 2x - 8 = x^2 + 12 $$
+
+Insikten: termen $x^2$ finns i båda led. Subtraherar vi $x^2$ från båda led försvinner den, och kvar blir en vanlig förstagradsekvation:
+
+$$ 2x - 8 = 12 $$
+
+Adderar 8 till båda led:
+
+$$ 2x = 20 $$
+
+$$ x = 10 $$
+
+Kontroll: kvadraten har arean $10^2 = 100$ cm². Rektangeln får sidorna 14 cm och 8 cm och arean $14 \\cdot 8 = 112$ cm², vilket är 12 cm² mer.
+
+**b)** Rektangeln får sidorna $(x + a)$ och $(x - a)$, och arean
+
+$$ (x + a)(x - a) = x^2 - ax + ax - a^2 = x^2 - a^2 $$
+
+Kvadratens area är $x^2$. Rektangelns area är alltså $a^2$ mindre, och $a^2$ är positivt så snart $a \\neq 0$. Skillnaden beror inte på $x$ alls: hur stor kvadraten än är, minskar arean med $a^2$ cm². Kontroll med a): $a = 4$ ger att arean minskar med 16 cm², och med $x = 10$ blir $14 \\cdot 6 = 84 = 100 - 16$.
+
+**Svar:** a) $x = 10$ cm. b) Rektangelns area är $(x + a)(x - a) = x^2 - a^2$, alltså alltid $a^2$ cm² mindre än kvadratens area $x^2$.
+
+**Generell slutsats:** en ekvation som ser ut att vara av andra graden kan bli av första graden när $x^2$-termerna tar ut varandra. Utveckla parenteserna först och förenkla, innan du bestämmer vilken sorts ekvation det är. Sambandet $(x + a)(x - a) = x^2 - a^2$ kallas konjugatregeln.`,
+        },
+        {
+            level: 3,
+            question: `Ett tvåsiffrigt tal har siffersumman 11. Om siffrorna byter plats blir det nya talet 27 större än det ursprungliga. Vilket är det ursprungliga talet?`,
+            answer: { value: 47, unit: '' },
+            solution: `**1. Översätt.** Den avgörande insikten är hur ett tvåsiffrigt tal byggs upp av sina siffror. Om tiotalssiffran är $t$ och entalssiffran är $e$ har talet värdet $10t + e$. Till exempel är $47 = 10 \\cdot 4 + 7$. Byter siffrorna plats blir talet $10e + t$.
+
+Siffersumman är 11, så $t + e = 11$, vilket ger $e = 11 - t$. Låt alltså $x$ vara tiotalssiffran. Då är entalssiffran $11 - x$:
+
+$$ \\text{ursprungligt tal: } 10x + (11 - x) \\qquad \\text{omkastat tal: } 10(11 - x) + x $$
+
+Det omkastade talet är 27 större:
+
+$$ 10(11 - x) + x = 10x + (11 - x) + 27 $$
+
+**2. Lös ekvationen.** Vi förenklar båda led:
+
+$$ 110 - 10x + x = 10x + 11 - x + 27 $$
+
+$$ 110 - 9x = 9x + 38 $$
+
+Adderar $9x$ till båda led:
+
+$$ 110 = 18x + 38 $$
+
+Subtraherar 38 från båda led:
+
+$$ 72 = 18x $$
+
+Dividerar med 18 i båda led:
+
+$$ x = 4 $$
+
+**3. Tolka och svara.** Tiotalssiffran är 4 och entalssiffran $11 - 4 = 7$, så talet är 47. Kontroll: siffersumman är $4 + 7 = 11$, och $74 - 47 = 27$.
+
+**Svar:** Talet är 47.
+
+**Generell slutsats:** ett tal och dess siffror är olika saker. En siffra är ett tecken, och talets värde är $10t + e$ för två siffror (och $100h + 10t + e$ för tre). Alla uppgifter om omkastade siffror löses genom att skriva talet på det sättet. Lägg också märke till att skillnaden $9(e - t)$ alltid är delbar med 9.`,
+        },
+        {
+            level: 3,
+            question: `En idrottsförening ska hyra en buss till en cup. Bussen kostar 4 800 kr, och dessutom kostar mat 60 kr per person. Kostnaden delas lika mellan alla som åker med.<br>a) Teckna ett uttryck för kostnaden per person när $n$ personer åker med.<br>b) Hur många personer måste åka med för att kostnaden per person ska bli högst 200 kr?<br>c) Föreningen vill sätta priset till 60 kr per person. Visa med ett resonemang om uttrycket att det inte går, oavsett hur många som åker med.`,
+            answer: { value: 35, unit: 'personer' },
+            solution: `**a)** Den totala kostnaden är den fasta busskostnaden plus maten för alla: $4\\,800 + 60n$ kr. Delad på $n$ personer blir kostnaden per person
+
+$$ \\frac{4\\,800 + 60n}{n} = \\frac{4\\,800}{n} + 60 $$
+
+Uttrycket läses så här: varje person betalar sina egna 60 kr för mat plus sin andel av bussen. Ju fler som åker, desto mindre blir bussandelen $\\dfrac{4\\,800}{n}$.
+
+**b)** Kostnaden per person ska vara högst 200 kr. Vi tar reda på när den är exakt 200 kr:
+
+$$ \\frac{4\\,800}{n} + 60 = 200 $$
+
+Subtraherar 60 från båda led:
+
+$$ \\frac{4\\,800}{n} = 140 $$
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 4\\,800 = 140n $$
+
+$$ n = \\frac{4\\,800}{140} \\approx 34{,}3 $$
+
+Antalet personer är ett heltal. Med 34 personer blir kostnaden $\\dfrac{4\\,800}{34} + 60 \\approx 201{,}2$ kr, alltså mer än 200 kr. Med 35 personer blir den $\\dfrac{4\\,800}{35} + 60 \\approx 197{,}1$ kr. Eftersom bussandelen minskar när fler åker med, räcker det att minst 35 personer åker.
+
+**c)** Priset 60 kr per person skulle kräva
+
+$$ \\frac{4\\,800}{n} + 60 = 60 $$
+
+$$ \\frac{4\\,800}{n} = 0 $$
+
+Täljaren är lika med produkten av kvoten och nämnaren: $4\\,800 = 0 \\cdot n = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Tolkning: 60 kr täcker precis maten, och då finns ingenting kvar till bussen. Bussandelen $\\dfrac{4\\,800}{n}$ blir mindre ju fler som åker, men den blir aldrig 0, så kostnaden per person är alltid större än 60 kr.
+
+**Svar:** a) $\\dfrac{4\\,800 + 60n}{n}$ kr, det vill säga $\\dfrac{4\\,800}{n} + 60$ kr. b) Minst 35 personer. c) Det skulle kräva $\\dfrac{4\\,800}{n} = 0$, som saknar lösning; kostnaden per person är alltid större än 60 kr.
+
+**Generell slutsats:** en kostnad per person med en fast del blir $\\dfrac{\\text{fast kostnad}}{n} + \\text{rörlig kostnad}$. Den närmar sig den rörliga kostnaden när $n$ växer men når den aldrig.`,
+        },
     ],
 
     'ma1c-2.9': [

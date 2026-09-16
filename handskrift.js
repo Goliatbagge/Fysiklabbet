@@ -38657,7 +38657,9 @@
       '.hk-upg-inner .lab-block-figur,.hk-upg-inner .np-figur{float:right;' +
         'max-width:40%;margin:0 0 4px 18px}' +
       '.hk-upg-inner::after{content:"";display:block;clear:both}' +
-      '.hk-upg-inner svg{max-height:17vh;width:auto;max-width:100%}' +
+      /* figuren får en fast höjd i förhållande till skärmen (växer på en
+       * stor duk, precis som texten); viewBox håller proportionerna */
+      '.hk-upg-inner svg{height:22vh;max-height:22vh;width:auto;max-width:100%}' +
       '.hk-uppgift.hk-hopfalld .hk-upg-inner{display:none}' +
       /* släppt nål: panelen står först i flödet och rullar bort med arket */
       '.hk-wrap:fullscreen .hk-uppgift.hk-los,' +
@@ -57804,9 +57806,26 @@
         /* mät panelen ONÅLAD — sticky ändrar inte höjden, men klassen
          * ska spegla den aktuella storleken, inte förra mätningen */
         upgPanel.classList.remove('hk-los');
-        if (fs && upgPanel.getBoundingClientRect().height >
-            window.innerHeight * UPG_TAK()) {
-          upgPanel.classList.add('hk-los');
+        var inner = upgPanel.querySelector('.hk-upg-inner');
+        if (fs) {
+          /* Uppgiftstexten VÄXER MED SKÄRMEN: på en stor duk är 16,5 px
+           * onödigt litet när halva panelen står tom (påpekat 2026-09-16,
+           * skiftnyckeln i fy2-1.1 på en 1885 px bred skärm). Utgå från
+           * bredden (1,45 % av den, 16,5–30 px) och krymp sedan stegvis
+           * om panelen annars skulle bli högre än takhöjden — nålen
+           * släpps först när minsta storleken inte heller ryms. */
+          var tak = window.innerHeight * UPG_TAK();
+          var fz = Math.max(16.5, Math.min(30, window.innerWidth * 0.0145));
+          inner.style.fontSize = fz + 'px';
+          while (fz > 16.5 && upgPanel.getBoundingClientRect().height > tak) {
+            fz = Math.max(16.5, fz - 1);
+            inner.style.fontSize = fz + 'px';
+          }
+          if (upgPanel.getBoundingClientRect().height > tak) {
+            upgPanel.classList.add('hk-los');
+          }
+        } else if (inner) {
+          inner.style.fontSize = '';
         }
       }
       placeNav();

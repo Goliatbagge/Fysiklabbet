@@ -32,4 +32,10 @@ Ja, kärnan är en antimyon, alltså en positivt laddad myon, och runt den krets
 
 Andra generationen är mycket riktigt charm, strange, myonen och myonneutrinon. Och du har rätt i att myonium släpar med sig en elektron ur första generationen, så det är ingen ren andragenerationsatom. Forskarna själva skriver försiktigt att de prövar tyngdkraften på "andra generationens (anti)leptoner". Men elektronen står för bara 0,5 procent av atomens massa, antimyonen för 99,5 procent, och hur elektroner faller är redan känt från alla försök med vanlig materia. Så ja, den kan räknas bort. Skulle myonium falla annorlunda är det antimyonen som avviker.
 
-En sista petitess som du också är inne på: antimyonen är en antipartikel, så strikt taget prövas tyngdkraften på andra generationens antimateria, inte materia. Det ska jag rätta i ingressen. Tack för att du läser så noga.
+En sista petitess som du också är inne på: antimyonen är en antipartikel, så strikt taget prövas tyngdkraften på andra generationens antimateria, inte materia. Det ska jag förtydliga i ingressen. Tack för att du läser så noga.
+
+## Kortare version (Facebook-kommentar)
+
+Tack för en skarp läsning! Ja, kärnan är en antimyon, en positivt laddad myon, med en vanlig elektron i bana. Det är alltså inte antiväte (antiproton plus positron, lika tungt som väte) utan myonium, som väger ungefär en niondel av väte eftersom antimyonen bara är 207 elektronmassor.
+
+Andra generationen är precis som du säger charm, strange, myonen och myonneutrinon, och elektronen hör till första generationen. Men den står för bara 0,5 procent av atomens massa, antimyonen för 99,5, och hur elektroner faller är redan känt. Så den kan räknas bort. Forskarna själva skriver "andra generationens (anti)leptoner", och där hade jag förenklat: antimyonen är en antipartikel. Det har jag nu förtydligat i ingressen.

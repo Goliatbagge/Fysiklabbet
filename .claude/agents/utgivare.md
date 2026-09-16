@@ -97,6 +97,14 @@ verkligen handlar om det fenomen simuleringen visar.
 - Skumma efter övriga falska vänner: *decay* → sönderfall, *momentum* →
   rörelsemängd, *beam* → stråle, *lattice* → gitter, *shell* → skal,
   *spin* → spinn. Osäker på en term? Kontrollera svensk fysiklitteratur.
+- **Obestämda partiklar:** sök i `deck` och brödtext efter ”en
+  antipartikel”, ”en partikel”, ”en exotisk atom” och liknande. Varje
+  träff ska namnge partikeln i samma mening, annars RÄTTA FÖRST (en
+  onämnd ”antipartikel i kärnan” lästes som antiproton 2026-09-16).
+- **Källans förbehåll:** skriver abstractet ”(anti)matter”, ”(anti)lepton”
+  eller liknande, får artikeln inte skriva bara ”materia”. Kontrollera
+  ordet mot abstractet; en antipartikel ska omtalas som antimateria eller
+  neutralt som ”partikel”.
 
 ### 7. Bild och licens
 

@@ -59,7 +59,10 @@ dagar gammal.
   förhandsvisningen i rutnätet men behåller hela bilden i inlägget).
 - Bildtext: 2–4 korta meningar, egen formulering, samma ton och regler
   som Facebook (inga emojis, ingen clickbait, decimalkomma, INTE
-  "på gymnasienivå" — artiklarna är för alla).
+  "på gymnasienivå" — artiklarna är för alla). Det gäller även regeln
+  att namnge partikeln och behålla källans förbehåll (”en antipartikel,
+  en antimyon”; ”en partikel ur andra generationen”, inte ”andra
+  generationens materia”), se fb-daglig.md steg 2.
 - **Länkar är inte klickbara i bildtexter** — skriv aldrig en URL i
   texten. Avsluta i stället med en varierad hänvisning i stil med
   "Hela artikeln finns på Fysiklabbet — länk i bion."

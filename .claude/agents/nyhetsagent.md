@@ -218,6 +218,18 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
   *beam* → stråle (inte ”balk”), *lattice* → gitter, *shell* → skal,
   *quenching* → släckning. Är du osäker på en term: kontrollera hur den skrivs i
   svensk fysiklitteratur innan du publicerar.
+- **Namnge partikeln, och behåll källans förbehåll.** Skriv aldrig ”en
+  antipartikel”, ”en partikel”, ”en exotisk atom” eller ”en tung kusin”
+  utan att i SAMMA mening säga vilken: ”en antipartikel, en antimyon”.
+  En obestämd partikel fyller läsaren i själv, och gissar fel (”en
+  antipartikel i kärnan” lästes som antiproton, alltså antiväte, och då
+  stämde inte massan; påpekat av en fysiklärare 2026-09-16). Gäller
+  särskilt `deck` och första stycket, som läses utan resten av artikeln.
+  Och när abstractet skriver med parentes eller förbehåll, ”(anti)matter”,
+  ”(anti)leptons”, ”up to”, ”expected to”, är förbehållet fysik, inte
+  ordbrus: en antimyon är antimateria, så ”andra generationens materia”
+  var fel ord. Förenkla genom att skriva om (”en partikel ur andra
+  generationen”), aldrig genom att stryka förbehållet.
 - **Räkneorden är den farligaste falska vännen — kontrollera VARJE stort tal.**
   Engelskans *billion* = svenskans **miljard** (10<sup>9</sup>), *trillion* =
   **biljon** (10<sup>12</sup>), *quadrillion* = **biljard** (10<sup>15</sup>).

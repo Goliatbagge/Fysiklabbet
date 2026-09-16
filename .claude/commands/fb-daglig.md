@@ -66,6 +66,12 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
   Fysiklabbet — variera formuleringen dag för dag. **Skriv INTE att
   artiklarna är "på gymnasienivå"** eller riktade till elever: vem som
   helst som är intresserad kan läsa dem (uttryckligt önskemål 2026-08-16).
+- **Inlägget läses utan artikeln: namnge partikeln och behåll
+  förbehållen.** Skriv aldrig ”en antipartikel” eller ”en partikel” utan
+  att säga vilken (”en antipartikel, en antimyon”), och gör inte
+  antimateria till ”materia” när du kortar ned: skriv ”en partikel ur
+  andra generationen”, inte ”andra generationens materia”. En fysiklärare
+  invände mot båda sakerna i myoniuminlägget 2026-09-16.
 - **Inga emojis, inga hashtags.** Svensk typografi: decimalkomma,
   gemener i rubriker, tankstreck sparsamt.
 - **Ingen länk i inläggstexten.** Länken till artikeln läggs i stället

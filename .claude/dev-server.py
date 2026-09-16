@@ -27,7 +27,7 @@ BIND = sys.argv[2] if len(sys.argv) > 2 else '127.0.0.1'
 # sökvägens första led, skiftlägesokänsligt.
 LOKALA_MAPPAR = {
     'genomgångar', 'uppgifter', 'kursprovsuppgifter', 'np',
-    'docs-vault', '.git', 'tillfälligt',
+    'docs-vault', '.git', 'tillfälligt', 'kurslitteratur',
 }
 
 

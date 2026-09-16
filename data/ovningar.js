@@ -20526,39 +20526,393 @@ $$ x = \\frac{7}{5} = 1{,}4 $$
 **Svar:** $x = 1{,}4$`,
         },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // Sju uppgifter av "riktig" läroboksmodell (inga flerval), skrivna
+        // 2026-09-16 med Origo 1c nivå 3 och A-poängsuppgifterna i NP Ma 1c
+        // som förebild: parametrar, struktur som måste genomskådas, modell-
+        // antaganden, "visa att" och fällan att räkna medelvärde av farter.
         {
             level: 3,
-            question: `Lös ekvationen $\\dfrac{3x - 12}{x - 4} = 5$. Vad gäller?`,
-            choices: [
-                `Ekvationen saknar lösning`,
-                `$x = 4$`,
-                `$x = 8$`,
-                `Alla $x$ utom 4 är lösningar`,
-            ],
-            correct: 0,
-            solution: `**Insikten:** kontrollera alltid lösningen mot de förbjudna värdena — ibland är den "lösning" man får exakt det värde som inte är tillåtet.
+            question: `Ekvationen $\\dfrac{3x - 12}{x - 4} = k$ innehåller ett tal $k$.<br>a) Lös ekvationen när $k = 5$.<br>b) Bestäm $k$ så att ekvationen får oändligt många lösningar, och ange vilka $x$ som då är lösningar.<br>c) Finns det något värde på $k$ som ger ekvationen exakt en lösning? Motivera ditt svar.`,
+            answer: { value: 3, unit: '' },
+            solution: `Vi har $(x - 4)$ i nämnaren, så $x \\neq 4$. Det gäller för alla värden på $k$.
 
-Nämnaren ger $x \\neq 4$.
-
-Täljaren är lika med produkten av kvoten och nämnaren:
+**a)** Med $k = 5$ har ekvationen en bråkterm i VL och ingen i HL. Täljaren är lika med produkten av kvoten och nämnaren:
 
 $$ 3x - 12 = 5(x - 4) $$
 
 $$ 3x - 12 = 5x - 20 $$
 
-Subtrahera $3x$ från båda led:
+Subtraherar $3x$ från båda led:
 
 $$ -12 = 2x - 20 $$
 
-Addera 20:
+Adderar 20 till båda led:
 
-$$ 8 = 2x \\qquad x = 4 $$
+$$ 8 = 2x $$
 
-Men $x \\neq 4$! Det enda kandidatvärdet är förbjudet — ekvationen saknar lösning.
+$$ x = 4 $$
 
-**Svar:** Ekvationen saknar lösning.
+Men $x \\neq 4$, så det värdet är förbjudet. Ekvationen saknar lösning.
 
-**Generell slutsats:** villkoret "$x \\neq$ …" skrivs ned FÖRST och kontrolleras SIST. Ett svar som bryter mot villkoret är inget svar — precis som i genomgångens exempel med $\\dfrac{5x-35}{x-7} = 4$.`,
+**b)** Insikten är att täljaren kan faktoriseras: $3x - 12 = 3(x - 4)$. För alla tillåtna $x$ kan bråket därför förkortas med $(x - 4)$:
+
+$$ \\frac{3x - 12}{x - 4} = \\frac{3(x - 4)}{x - 4} = 3 $$
+
+VL har alltså värdet 3 för varje tillåtet $x$, oavsett vilket. Väljer vi $k = 3$ blir ekvationen sann för alla tillåtna $x$. Vi kontrollerar genom att lösa den:
+
+$$ 3x - 12 = 3(x - 4) $$
+
+$$ 3x - 12 = 3x - 12 $$
+
+Subtraherar $3x$ från båda led och adderar 12:
+
+$$ 0 = 0 $$
+
+Likheten är sann hur $x$ än väljs. Lösningarna är alla tal utom det förbjudna värdet, det vill säga alla $x \\neq 4$.
+
+**c)** Nej. Vi löser ekvationen med ett allmänt $k$. Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 3x - 12 = k(x - 4) $$
+
+$$ 3x - 12 = kx - 4k $$
+
+Vi samlar $x$-termerna i VL och talen i HL:
+
+$$ 3x - kx = 12 - 4k $$
+
+$$ x(3 - k) = 4(3 - k) $$
+
+Är $k = 3$ står det $0 = 0$, och alla $x \\neq 4$ är lösningar (som i b). Är $k \\neq 3$ kan vi dividera båda led med $(3 - k)$ och får $x = 4$, som är förbjudet. Ekvationen har alltså antingen oändligt många lösningar eller ingen alls, aldrig exakt en. Det stämmer med att VL alltid är 3: antingen är $k$ lika med 3, eller så är det inte det.
+
+**Svar:** a) Saknar lösning. b) $k = 3$, och då är alla $x \\neq 4$ lösningar. c) Nej. Eftersom VL är lika med 3 för varje tillåtet $x$ har ekvationen antingen oändligt många lösningar ($k = 3$) eller ingen alls ($k \\neq 3$).
+
+**Generell slutsats:** när täljaren är en multipel av nämnaren är bråket ett fast tal för alla tillåtna $x$. Skriv alltid ned det förbjudna värdet först, och kontrollera svaret mot det sist.`,
+        },
+        {
+            level: 3,
+            question: `Sara cyklar uppför en lång backe med medelfarten 12 km/h och sedan nedför samma backe igen. Medelfarten för hela turen är den totala sträckan delad med den totala tiden.<br>a) Vilken medelfart måste hon hålla nedför för att medelfarten för hela turen ska bli 20 km/h?<br>b) Sara påstår att om hon cyklar nedför i 36 km/h blir medelfarten för hela turen 24 km/h, eftersom medelvärdet av 12 och 36 är 24. Stämmer det? Motivera med en beräkning.<br>c) Visa att medelfarten 24 km/h för hela turen är omöjlig att nå, hur fort hon än cyklar nedför.`,
+            answer: { value: 60, unit: 'km/h' },
+            solution: `**1. Översätt.** Backens längd är inte given, så vi kallar den $s$ km. Farten nedför kallar vi $v$ km/h. Tiden för en sträcka är sträckan delad med farten:
+
+$$ \\text{tid uppför} = \\frac{s}{12} \\qquad \\text{tid nedför} = \\frac{s}{v} $$
+
+Hela turen är $2s$ km lång, så medelfarten för hela turen är
+
+$$ \\frac{2s}{\\dfrac{s}{12} + \\dfrac{s}{v}} $$
+
+Vi har $v$ i en nämnare, så $v \\neq 0$.
+
+**a)** Medelfarten ska vara 20 km/h:
+
+$$ \\frac{2s}{\\dfrac{s}{12} + \\dfrac{s}{v}} = 20 $$
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2s = 20\\left(\\frac{s}{12} + \\frac{s}{v}\\right) $$
+
+$$ 2s = \\frac{20s}{12} + \\frac{20s}{v} $$
+
+Här kommer insikten: $s$ finns i varje term, så vi dividerar båda led med $s$ (backens längd är inte 0). Backens längd spelar alltså ingen roll för svaret.
+
+$$ 2 = \\frac{20}{12} + \\frac{20}{v} $$
+
+Nämnarna är 12 och $v$, så MGN är $12v$. Vi multiplicerar varje term med $12v$:
+
+$$ 12v \\cdot 2 = \\frac{12v \\cdot 20}{12} + \\frac{12v \\cdot 20}{v} $$
+
+$$ 24v = 20v + 240 $$
+
+Subtraherar $20v$ från båda led:
+
+$$ 4v = 240 $$
+
+$$ v = 60 $$
+
+**b)** Nej. Med $v = 36$ blir tiden för hela turen
+
+$$ \\frac{s}{12} + \\frac{s}{36} = \\frac{3s}{36} + \\frac{s}{36} = \\frac{4s}{36} = \\frac{s}{9} $$
+
+och medelfarten
+
+$$ \\frac{2s}{\\dfrac{s}{9}} = 2s \\cdot \\frac{9}{s} = 18 $$
+
+Medelfarten blir 18 km/h, inte 24 km/h. Det beror på att Sara tillbringar mycket längre tid i den långsamma backen uppför än i den snabba nedför. Medelvärdet av två farter ger rätt medelfart bara om de hålls lika lång **tid**, inte lika lång sträcka.
+
+**c)** Vi ställer upp ekvationen på samma sätt som i a), med 24 i HL:
+
+$$ 2s = 24\\left(\\frac{s}{12} + \\frac{s}{v}\\right) $$
+
+Dividerar båda led med $s$:
+
+$$ 2 = \\frac{24}{12} + \\frac{24}{v} $$
+
+$$ 2 = 2 + \\frac{24}{v} $$
+
+Subtraherar 2 från båda led:
+
+$$ 0 = \\frac{24}{v} $$
+
+Täljaren är lika med produkten av kvoten och nämnaren: $24 = 0 \\cdot v = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Uppför tar backen $\\dfrac{s}{12}$ timmar, och redan det är hela den tid som en medelfart på 24 km/h tillåter för $2s$ km. Nedförsbacken måste ta tid, hur liten den än är, så medelfarten hamnar alltid under 24 km/h.
+
+**Svar:** a) 60 km/h. b) Nej, medelfarten blir 18 km/h. c) Ekvationen ger $0 = \\dfrac{24}{v}$, som saknar lösning: enbart uppförsbacken tar hela den tid som medelfarten 24 km/h tillåter.
+
+**Generell slutsats:** medelfart är total sträcka delad med total tid, aldrig medelvärdet av farterna. Och en storhet som stryks ur ekvationen (här $s$) påverkar inte svaret.`,
+        },
+        {
+            level: 3,
+            question: `En kanna innehåller 2 dl koncentrerad saft och 10 dl vatten.<br>a) Hur mycket saft ska tillsättas för att saften ska utgöra 25 % av blandningen?<br>b) Hur mycket vatten skulle man i stället behöva hälla bort för att saften ska utgöra 25 % av blandningen?<br>c) Kan man genom att bara tillsätta saft få en blandning som består av 100 % saft? Ställ upp och lös en ekvation, och tolka resultatet.`,
+            answer: { value: 1.33, unit: 'dl', tol: 0.03 },
+            solution: `Andelen saft i blandningen är mängden saft delad med hela blandningens volym. Från början är andelen $\\dfrac{2}{12} \\approx 0{,}17$, alltså cirka 17 %.
+
+**a)** Låt $x$ vara mängden saft som tillsätts, i dl. Då finns $(2 + x)$ dl saft i en blandning på $(12 + x)$ dl. Andelen ska vara 25 %, det vill säga 0,25:
+
+$$ \\frac{2 + x}{12 + x} = 0{,}25 $$
+
+Nämnaren ger $x \\neq -12$, men en tillsatt mängd är aldrig negativ, så det värdet är inte aktuellt.
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2 + x = 0{,}25(12 + x) $$
+
+$$ 2 + x = 3 + 0{,}25x $$
+
+Subtraherar $0{,}25x$ och 2 från båda led:
+
+$$ 0{,}75x = 1 $$
+
+$$ x = \\frac{1}{0{,}75} = \\frac{4}{3} \\approx 1{,}33 $$
+
+Kontroll: $\\dfrac{2 + 4/3}{12 + 4/3} = \\dfrac{10/3}{40/3} = \\dfrac{10}{40} = 0{,}25$.
+
+**b)** Låt $y$ vara mängden vatten som hälls bort, i dl. Saften är fortfarande 2 dl, men blandningen krymper till $(12 - y)$ dl:
+
+$$ \\frac{2}{12 - y} = 0{,}25 $$
+
+Nämnaren ger $y \\neq 12$.
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2 = 0{,}25(12 - y) $$
+
+$$ 2 = 3 - 0{,}25y $$
+
+Adderar $0{,}25y$ till båda led och subtraherar 2:
+
+$$ 0{,}25y = 1 $$
+
+$$ y = 4 $$
+
+Kontroll: $\\dfrac{2}{12 - 4} = \\dfrac{2}{8} = 0{,}25$. Lägg märke till att det behövs 4 dl vatten bort men bara 1,33 dl saft till, för att nå samma andel.
+
+**c)** Andelen ska bli 100 %, det vill säga 1:
+
+$$ \\frac{2 + x}{12 + x} = 1 $$
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2 + x = 12 + x $$
+
+Subtraherar $x$ från båda led:
+
+$$ 2 = 12 $$
+
+Det är en motsägelse, så ekvationen saknar lösning. Tolkning: hur mycket saft man än tillsätter finns de 10 dl vattnet kvar i kannan, så blandningen består aldrig av enbart saft. Andelen kan komma hur nära 100 % som helst (100 dl tillsatt saft ger $\\dfrac{102}{112} \\approx 91$ %) men når aldrig dit.
+
+**Svar:** a) $\\dfrac{4}{3}$ dl $\\approx 1{,}3$ dl saft. b) 4 dl vatten. c) Nej. Ekvationen leder till $2 = 12$ och saknar lösning, eftersom vattnet alltid finns kvar i blandningen.
+
+**Generell slutsats:** en andel är delen delad med det hela, och det hela ändras när något tillsätts eller tas bort. Skriv därför alltid om nämnaren innan du ställer upp ekvationen.`,
+        },
+        {
+            level: 3,
+            question: `Kvoten mellan två positiva tal är $\\dfrac{3}{5}$. Om man adderar 8 till vart och ett av talen blir kvoten mellan de nya talen i stället $\\dfrac{5}{7}$. Bestäm de två talen.`,
+            answer: { value: 12, unit: '' },
+            solution: `**1. Översätt.** Att kvoten mellan talen är $\\dfrac{3}{5}$ betyder att talen förhåller sig som 3 till 5. Ett smart val av beteckning är därför att kalla talen $3k$ och $5k$, där $k$ är ett positivt tal. Då är kvoten automatiskt $\\dfrac{3k}{5k} = \\dfrac{3}{5}$, och bara en obekant återstår.
+
+När 8 adderas till vart och ett av talen blir de $3k + 8$ och $5k + 8$, och kvoten ska vara $\\dfrac{5}{7}$:
+
+$$ \\frac{3k + 8}{5k + 8} = \\frac{5}{7} $$
+
+Nämnaren ger $5k + 8 \\neq 0$, vilket är uppfyllt eftersom $k$ är positivt.
+
+**2. Lös ekvationen.** En bråkterm i vardera ledet, så vi multiplicerar korsvis:
+
+$$ 7(3k + 8) = 5(5k + 8) $$
+
+$$ 21k + 56 = 25k + 40 $$
+
+Subtraherar $21k$ från båda led:
+
+$$ 56 = 4k + 40 $$
+
+Subtraherar 40 från båda led:
+
+$$ 16 = 4k $$
+
+$$ k = 4 $$
+
+**3. Tolka och svara.** Talen är $3k = 12$ och $5k = 20$. Kontroll: $\\dfrac{12}{20} = \\dfrac{3}{5}$ och $\\dfrac{12 + 8}{20 + 8} = \\dfrac{20}{28} = \\dfrac{5}{7}$.
+
+Alternativt kan man kalla talen $x$ och $y$ och ställa upp två ekvationer, $\\dfrac{x}{y} = \\dfrac{3}{5}$ och $\\dfrac{x + 8}{y + 8} = \\dfrac{5}{7}$. Korsvis multiplikation i den första ger $y = \\dfrac{5x}{3}$, som sätts in i den andra. Det ger samma svar men mer räkning.
+
+**Svar:** Talen är 12 och 20.
+
+**Generell slutsats:** ett förhållande $a : b$ beskrivs med en enda obekant genom att talen skrivs $ak$ och $bk$. Det förvandlar ett ekvationssystem till en ekvation med en bråkterm i varje led.`,
+        },
+        {
+            level: 3,
+            question: `Två pumpar används för att tömma en bassäng. Pump A klarar tömningen ensam på 6 timmar. När båda pumparna arbetar samtidigt tar tömningen 4 timmar.<br>a) Hur lång tid skulle pump B behöva för att tömma bassängen ensam?<br>b) Antag i stället att pump A ensam behöver $a$ timmar och pump B ensam $b$ timmar. Visa att tömningen med båda pumparna tar $T = \\dfrac{ab}{a + b}$ timmar.<br>c) Förklara med hjälp av formeln i b) varför $T$ alltid är kortare än både $a$ och $b$.`,
+            answer: { value: 12, unit: 'h' },
+            solution: `**a)** Tiderna kan inte adderas eller subtraheras rakt av: pump B tar inte $6 - 4 = 2$ timmar. Det som går att addera är hur stor **del** av bassängen varje pump tömmer per timme.
+
+Pump A tömmer hela bassängen på 6 timmar, alltså $\\dfrac{1}{6}$ av bassängen per timme. Låt pump B behöva $x$ timmar ensam, så att den tömmer $\\dfrac{1}{x}$ av bassängen per timme. Tillsammans töms $\\dfrac{1}{4}$ av bassängen per timme:
+
+$$ \\frac{1}{6} + \\frac{1}{x} = \\frac{1}{4} $$
+
+Vi har $x$ i nämnaren, så $x \\neq 0$.
+
+Tre bråktermer, så vi multiplicerar båda led med MGN. Nämnarna är 6, $x$ och 4, och MGN ska vara delbart med 6 och 4 och med $x$, så MGN är $12x$. Vi multiplicerar varje täljare med $12x$:
+
+$$ \\frac{12x \\cdot 1}{6} + \\frac{12x \\cdot 1}{x} = \\frac{12x \\cdot 1}{4} $$
+
+$$ 2x + 12 = 3x $$
+
+Subtraherar $2x$ från båda led:
+
+$$ 12 = x $$
+
+Rimlighet: pump B är långsammare än pump A, och tillsammans går det fortare än med någon av dem ensam. Kontroll: $\\dfrac{1}{6} + \\dfrac{1}{12} = \\dfrac{2}{12} + \\dfrac{1}{12} = \\dfrac{3}{12} = \\dfrac{1}{4}$.
+
+**b)** Samma resonemang med bokstäver. Pump A tömmer $\\dfrac{1}{a}$ av bassängen per timme, pump B $\\dfrac{1}{b}$, och tillsammans töms $\\dfrac{1}{T}$ per timme:
+
+$$ \\frac{1}{a} + \\frac{1}{b} = \\frac{1}{T} $$
+
+Nämnarna är $a$, $b$ och $T$, så MGN är $abT$. Vi multiplicerar varje täljare med $abT$:
+
+$$ \\frac{abT \\cdot 1}{a} + \\frac{abT \\cdot 1}{b} = \\frac{abT \\cdot 1}{T} $$
+
+$$ bT + aT = ab $$
+
+Vi bryter ut $T$ i VL:
+
+$$ T(a + b) = ab $$
+
+Dividerar båda led med $(a + b)$, som inte är 0 eftersom $a$ och $b$ är positiva:
+
+$$ T = \\frac{ab}{a + b} $$
+
+Kontroll mot a): $T = \\dfrac{6 \\cdot 12}{6 + 12} = \\dfrac{72}{18} = 4$ timmar.
+
+**c)** Skriv formeln som en produkt:
+
+$$ T = \\frac{ab}{a + b} = a \\cdot \\frac{b}{a + b} $$
+
+Eftersom $a$ är positivt är nämnaren $a + b$ större än täljaren $b$, så bråket $\\dfrac{b}{a + b}$ är mindre än 1. Då är $T$ mindre än $a$. På samma sätt är $T = b \\cdot \\dfrac{a}{a + b}$ mindre än $b$. Två pumpar tillsammans är alltså alltid snabbare än den snabbaste av dem ensam, vilket är rimligt: den andra pumpen bidrar alltid med något.
+
+**Svar:** a) 12 timmar. b) Ekvationen $\\dfrac{1}{a} + \\dfrac{1}{b} = \\dfrac{1}{T}$ ger $T = \\dfrac{ab}{a + b}$ efter multiplikation med MGN $= abT$. c) $T = a \\cdot \\dfrac{b}{a + b}$ där bråket är mindre än 1, så $T < a$, och på samma sätt $T < b$.
+
+**Generell slutsats:** när flera arbetar samtidigt adderas arbetstakterna (andel per timme), inte tiderna. Det ger alltid en ekvation med obekanta i nämnarna.`,
+        },
+        {
+            level: 3,
+            question: `Tidsskillnaden $t$ minuter mellan att köra en sträcka på $s$ km med medelhastigheten $h_1$ km/h och med den högre medelhastigheten $h_2$ km/h ges av formeln $$t = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s \\cdot 60$$<br>a) Visa hur formeln följer ur sambandet tid = sträcka delat med hastighet.<br>b) Elin pendlar 30 km med medelhastigheten 60 km/h. Vilken medelhastighet skulle hon behöva hålla för att komma fram 6 minuter tidigare?<br>c) Elin påstår att hon kan spara 30 minuter om hon bara kör tillräckligt fort. Undersök påståendet med hjälp av ekvationen.`,
+            answer: { value: 75, unit: 'km/h' },
+            solution: `**a)** Tiden för en sträcka är sträckan delad med hastigheten. Med hastigheten $h_1$ tar resan $\\dfrac{s}{h_1}$ timmar och med $h_2$ tar den $\\dfrac{s}{h_2}$ timmar. Tidsskillnaden i timmar är
+
+$$ \\frac{s}{h_1} - \\frac{s}{h_2} = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s $$
+
+där vi brutit ut $s$. En timme är 60 minuter, så tidsskillnaden i minuter fås genom att multiplicera med 60. Det är precis formeln.
+
+**b)** Vi sätter in $t = 6$, $h_1 = 60$ och $s = 30$ och löser ut $h_2$. Vi har $h_2$ i nämnaren, så $h_2 \\neq 0$.
+
+$$ 6 = \\left(\\frac{1}{60} - \\frac{1}{h_2}\\right) \\cdot 30 \\cdot 60 $$
+
+$$ 6 = \\left(\\frac{1}{60} - \\frac{1}{h_2}\\right) \\cdot 1\\,800 $$
+
+Vi multiplicerar in $1\\,800$ i parentesen:
+
+$$ 6 = \\frac{1\\,800}{60} - \\frac{1\\,800}{h_2} $$
+
+$$ 6 = 30 - \\frac{1\\,800}{h_2} $$
+
+Adderar $\\dfrac{1\\,800}{h_2}$ till båda led och subtraherar 6:
+
+$$ \\frac{1\\,800}{h_2} = 24 $$
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 1\\,800 = 24 h_2 $$
+
+$$ h_2 = \\frac{1\\,800}{24} = 75 $$
+
+Kontroll: i 60 km/h tar 30 km $\\dfrac{30}{60}$ h $= 30$ minuter, och i 75 km/h tar det $\\dfrac{30}{75}$ h $= 0{,}4$ h $= 24$ minuter. Skillnaden är 6 minuter.
+
+**c)** Samma ekvation med $t = 30$:
+
+$$ 30 = 30 - \\frac{1\\,800}{h_2} $$
+
+Subtraherar 30 från båda led:
+
+$$ 0 = -\\frac{1\\,800}{h_2} $$
+
+Täljaren är lika med produkten av kvoten och nämnaren: $-1\\,800 = 0 \\cdot h_2 = 0$, vilket är en motsägelse. Ekvationen saknar lösning.
+
+Tolkning: resan tar 30 minuter i 60 km/h. Att spara 30 minuter skulle betyda att resan tar 0 minuter, och det kräver oändligt hög hastighet. Elin kan spara nästan 30 minuter med en mycket hög hastighet (i 600 km/h tar resan 3 minuter, så 27 minuter sparas), men aldrig hela 30. Formeln visar samma sak: termen $\\dfrac{1\\,800}{h_2}$ är alltid större än 0, så $t$ är alltid mindre än 30.
+
+**Svar:** a) $\\dfrac{s}{h_1} - \\dfrac{s}{h_2}$ timmar, som skrivs om med utbrutet $s$ och multipliceras med 60. b) 75 km/h. c) Nej. Ekvationen $30 = 30 - \\dfrac{1\\,800}{h_2}$ saknar lösning; tidsvinsten kan komma nära 30 minuter men aldrig nå dit, eftersom resan alltid tar tid.
+
+**Generell slutsats:** en term av formen $\\dfrac{\\text{tal}}{x}$ kan aldrig bli 0. En ekvation som kräver det saknar lösning, och tolkningen är oftast ett gränsvärde som går att närma sig men inte nå.`,
+        },
+        {
+            level: 3,
+            question: `Betrakta uttrycket $\\dfrac{2x}{x + 3}$.<br>a) Kan uttrycket anta värdet 2? Ställ upp en ekvation och motivera ditt svar.<br>b) För vilket $x$ antar uttrycket värdet 1,9?<br>c) Elias påstår att uttrycket aldrig kan bli större än 2, eftersom täljaren $2x$ alltid är mindre än $2(x + 3)$. Visa att Elias har fel genom att bestämma ett $x$ som ger uttrycket värdet 3, och förklara var hans resonemang brister.`,
+            answer: { value: 57, unit: '' },
+            solution: `Vi har $(x + 3)$ i nämnaren, så $x \\neq -3$ i alla tre deluppgifterna.
+
+**a)** Vi undersöker om ekvationen $\\dfrac{2x}{x + 3} = 2$ har någon lösning. Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2x = 2(x + 3) $$
+
+$$ 2x = 2x + 6 $$
+
+Subtraherar $2x$ från båda led:
+
+$$ 0 = 6 $$
+
+Det är en motsägelse, så ekvationen saknar lösning. Uttrycket kan aldrig anta värdet 2. Skälet är att täljaren skulle behöva vara exakt dubbla nämnaren, $2x = 2x + 6$, och inget tal är 6 mindre än sig självt.
+
+**b)** Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2x = 1{,}9(x + 3) $$
+
+$$ 2x = 1{,}9x + 5{,}7 $$
+
+Subtraherar $1{,}9x$ från båda led:
+
+$$ 0{,}1x = 5{,}7 $$
+
+$$ x = 57 $$
+
+Kontroll: $\\dfrac{2 \\cdot 57}{57 + 3} = \\dfrac{114}{60} = 1{,}9$. Uttrycket kommer alltså nära 2 för stora $x$ (och ännu närmare för ännu större $x$) utan att någonsin nå dit, precis som i a).
+
+**c)** Vi löser ekvationen $\\dfrac{2x}{x + 3} = 3$. Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 2x = 3(x + 3) $$
+
+$$ 2x = 3x + 9 $$
+
+Subtraherar $3x$ från båda led:
+
+$$ -x = 9 $$
+
+$$ x = -9 $$
+
+Värdet är tillåtet ($x \\neq -3$). Kontroll: $\\dfrac{2 \\cdot (-9)}{-9 + 3} = \\dfrac{-18}{-6} = 3$. Uttrycket kan alltså bli större än 2.
+
+Elias har rätt i att $2x < 2(x + 3)$ för alla $x$. Men slutsatsen "då är bråket mindre än 2" håller bara om nämnaren $x + 3$ är **positiv**. För $x < -3$ är nämnaren negativ, och när man dividerar båda sidor av en olikhet med ett negativt tal vänds olikhetstecknet. Där är uttrycket i stället större än 2: täljare och nämnare är båda negativa, och täljaren är den till beloppet större.
+
+**Svar:** a) Nej. Ekvationen leder till $0 = 6$ och saknar lösning. b) $x = 57$. c) $x = -9$ ger värdet 3. Elias glömmer att nämnaren är negativ för $x < -3$, och då gäller inte hans slutsats.
+
+**Generell slutsats:** ett bråk med variabel i nämnaren byter beteende där nämnaren byter tecken. Undersök alltid båda sidor om det förbjudna värdet innan du drar slutsatser om "aldrig" eller "alltid".`,
         },
     ],
 

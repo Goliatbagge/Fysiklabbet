@@ -92,6 +92,105 @@ $x$ var Arielles belopp, och 860 kr av 4 000 kr är rimligt.
 :::
 :::
 
+::: exempel "Exempel 2 — Fram och tillbaka med olika fart"
+**Amir cyklar hemifrån till badplatsen med medelfarten 18 km/h och går
+sedan hem samma väg med medelfarten 6 km/h. Hela turen tar 1 timme och
+20 minuter. Hur långt är det till badplatsen?**
+
+::: handskrift
+typ: framochtillbaka
+:::
+
+::: textlosning
+Det här problemet är svårare än det första, eftersom det som efterfrågas
+(avståndet) inte står direkt i ekvationen. Ekvationen handlar om **tid**.
+Nyckeln är att uttrycka båda tiderna med hjälp av avståndet.
+
+**1. Översätt**
+
+Sträckan är densamma dit och hem, och det är den som efterfrågas. Vi
+låter $x$ vara avståndet till badplatsen i kilometer. *Skriv ner detta!*
+
+$$
+x = \text{avståndet till badplatsen i km}
+$$
+
+Tiden för en sträcka är sträckan delad med farten. Dit cyklar Amir $x$ km
+med farten 18 km/h, och hem går han $x$ km med farten 6 km/h:
+
+$$
+\text{tid dit} = \frac{x}{18}\ \text{h} \qquad\qquad \text{tid hem} = \frac{x}{6}\ \text{h}
+$$
+
+Hela turen tar 1 timme och 20 minuter. Farterna är angivna i km/h, så
+tiden måste räknas i **timmar**. 20 minuter är $\dfrac{20}{60} = \dfrac{1}{3}$
+timme, så hela turen tar $1 + \dfrac{1}{3} = \dfrac{4}{3}$ timme. (En vanlig
+fälla är att skriva 1,2 timmar. Det är fel: en timme har 60 minuter, inte
+100.)
+
+Tiden dit plus tiden hem är hela turen. Det ger ekvationen
+
+$$
+\frac{x}{18} + \frac{x}{6} = \frac{4}{3}
+$$
+
+**2. Lös ekvationen**
+
+Ekvationen har tre bråktermer, precis som i avsnittet *Ekvationer med
+nämnare*. Nämnarna är 18, 6 och 3, och det minsta tal som alla tre går
+jämnt upp i är 18, så MGN = 18. Vi multiplicerar varje täljare med 18:
+
+$$
+\frac{18x}{18} + \frac{18x}{6} = \frac{18 \cdot 4}{3}
+$$
+
+$$
+x + 3x = 24
+$$
+
+$$
+4x = 24
+$$
+
+Dividerar med 4 i båda led:
+
+$$
+\frac{4x}{4} = \frac{24}{4}
+$$
+
+$$
+x = 6
+$$
+
+**3. Tolka och svara**
+
+$x$ var avståndet i kilometer, så det är 6 km till badplatsen. Rimlighet:
+6 km i 18 km/h tar $\dfrac{6}{18}$ h $= \dfrac{1}{3}$ h, alltså 20 minuter, och
+6 km i 6 km/h tar en hel timme. Tillsammans blir det 1 timme och
+20 minuter, precis som i uppgiften.
+
+**Svar:** 6 km
+:::
+:::
+
+::: härledning "Så tänker du vid svårare problem"
+Det här exemplet visar tre saker som är bra att ta med sig till de
+svårare uppgifterna:
+
+- **Låt $x$ vara det som allt annat kan uttryckas utifrån.** Här beror
+  båda tiderna på avståndet, så avståndet får heta $x$. Ibland är det
+  inte samma sak som det som efterfrågas: söks medelfarten för en tur
+  fram och tillbaka får sträckan ändå heta $x$, och den försvinner ur
+  räkningen på slutet.
+- **Använd ett samband för att översätta.** Tid $=$ sträcka delad med
+  fart gör att ord som "cyklar 18 km/h" blir ett uttryck, $\dfrac{x}{18}$.
+  Samma sak med "dubbelt så gammal" ($2x$), "5 år yngre" ($x - 5$) eller
+  "tre gånger så tung" ($3x$).
+- **Kontrollera enheterna innan du ställer upp ekvationen.** Alla termer
+  i ekvationen måste ha samma enhet. Minuter räknas om till timmar som
+  bråk, $20\ \text{min} = \dfrac{20}{60}\ \text{h} = \dfrac{1}{3}\ \text{h}$.
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Metoden i tre steg"

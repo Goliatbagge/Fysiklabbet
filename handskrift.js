@@ -8219,6 +8219,169 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: fram och tillbaka (ma1c-2.8 ex 2) ------------
+   * Avancerat problem: samma sträcka åt båda håll med olika fart och en
+   * given total tid. Poängerna är (1) att x får vara den storhet som
+   * BÅDA tiderna beror av, (2) tid = sträcka delat med fart, (3) att
+   * 1 h 20 min är 4/3 h och inte 1,2 h, (4) MGN som i 2.7 och (5)
+   * rimlighetskontroll med tiderna. Stödjer båda ekvationslägena;
+   * MGN-multiplikationen följer samma undantag som layoutTrebrak. */
+  function layoutFramochtillbaka(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var mgnCol = vagg ? null : BLUE;
+    var xw = Math.max(
+      padL + T.fracW('x', '18') + T.adv('+') + T.fracW('x', '6') +
+        T.adv('=') + T.fracW('4', '3') + 6,
+      padL + 30 + T.adv('x+3x=24'),
+      padL + 30 + T.adv('4x=24')) + 0.9 * F;
+
+    /* ---- 1. Översätt ---- */
+    tanke(20, [
+      [['Sträckan är densamma dit']],
+      [['och hem, och det är den']],
+      [['som efterfrågas. Den får']],
+      [['heta x. Skriv ner det!']]
+    ], 0);
+    y = 118;
+    T.str('1. Översätt', padL, y - 1.6 * F, null, 0.62);
+    T.str('x=avståndet i km', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tid är sträcka delat med']],
+      [['fart. Dit: x km med']],
+      [['18 km/h.']]
+    ]);
+    y += 2.9 * F;
+    xx = T.str('Tid dit=', padL, y);
+    xx = T.fracH('x', '18', xx, y);
+    T.str(' h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hem: samma x km, men']],
+      [['bara 6 km/h.']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.str('Tid hem=', padL, y);
+    xx = T.fracH('x', '6', xx, y);
+    T.str(' h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hela turen tar 1 h 20 min.']],
+      [['Farterna är i km/h, så']],
+      [['tiden ska vara i timmar.']],
+      [['20 min är 20/60 h, alltså']],
+      [['1/3 h. Inte 1,2 h!']]
+    ], 1.05);
+    y += 3.2 * F;
+    xx = T.str('1 h 20 min=1+', padL, y);
+    xx = T.fracH('20', '60', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('4', '3', xx, y);
+    T.str(' h', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tiden dit plus tiden hem']],
+      [['är hela turen. Det ger']],
+      [['ekvationen.']]
+    ], 1.05);
+    y += 3.2 * F;
+    var yEkv = y;
+    xx = T.fracH('x', '18', padL, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('x', '6', xx, y);
+    xx = T.str('=', xx, y);
+    T.fracH('4', '3', xx, y);
+    T.stepEnd();
+
+    /* ---- 2. Lös ekvationen ---- */
+    tanke(y, [
+      [['Tre bråktermer, precis som']],
+      [['i 2.7. Nämnarna är 18, 6']],
+      [['och 3. Det minsta tal som']],
+      [['alla går jämnt upp i är 18.']]
+    ], 1.05);
+    y += 4.4 * F;
+    T.str('2. Lös ekvationen', padL, y - 1.6 * F, null, 0.62);
+    T.str('MGN=18', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag multiplicerar båda led']],
+      [['med 18, snabbast genom att']],
+      [['multiplicera varje']],
+      [['TÄLJARE med 18.']]
+    ]);
+    if (vagg) T.vaggOp('·18', xw, yEkv, { h0: 1.25, h1: 1.15 });   /* MGN-undantaget */
+    y += 3.2 * F;
+    xx = T.fracSeg([['18', mgnCol], ['x']], [['18']], padL + 30, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracSeg([['18', mgnCol], ['x']], [['6']], xx, y);
+    xx = T.str('=', xx, y);
+    T.fracSeg([['18·', mgnCol], ['4']], [['3']], xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje bråk går jämnt ut:']],
+      [['18/18=1, 18/6=3 och']],
+      [['18/3=6, så högerledet']],
+      [['blir 6·4=24.']]
+    ], 1.05);
+    y += 3.2 * F;
+    var yS = y;
+    var s1 = padL + 30; xx = T.str('x', s1, y);       var s1b = xx;
+    xx = T.str('+', xx, y);
+    var s2 = xx; xx = T.str('3x', xx, y);             var s2b = xx;
+    T.str('=24', xx, y);
+    T.stepEnd();
+
+    /* x och 3x ringas in innan 4x skrivs (se REGEL: SAMLA LIKADANA
+     * TERMER — RINGA IN FÖRST) */
+    tanke(y, [
+      [['x och 3x är likadana']],
+      [['termer och slås ihop:']],
+      [['x+3x=4x.']]
+    ]);
+    var samla = mkSamla(T);
+    y += 2.3 * F;
+    samla(padL + 30, y, [
+      { ringar: [[s1, s1b, yS], [s2, s2b, yS]], skriv: '4x' },
+      { skriv: '=24' }
+    ]);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 4 i båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '/4', xw, '4x=24');
+    T.str('x=6', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- 3. Tolka och svara ---- */
+    tanke(y, [
+      [['x var avståndet i km, så']],
+      [['det är 6 km. Rimligt? Dit:']],
+      [['6 km i 18 km/h tar 1/3 h,']],
+      [['alltså 20 min. Hem: 6 km']],
+      [['i 6 km/h tar 1 h. Ihop']],
+      [['1 h 20 min. Stämmer!']]
+    ]);
+    y += 3.6 * F;
+    T.str('3. Tolka och svara', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('Svar: 6 km', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: enkla andra-/tredjegradsekvationer ----------
    * (ma1c-2.9 ex 1) a)–f). Genomgående poäng: JÄMN exponent ger två
    * lösningar (± framför roten), UDDA exponent ger en. Rötterna ritas
@@ -56282,6 +56445,7 @@
                    variabelnamnare: layoutVariabelnamnare,
                    ejtillaten: layoutEjtillaten,
                    delabelopp: layoutDelabelopp,
+                   framochtillbaka: layoutFramochtillbaka,
                    enklagrad: layoutEnklagrad,
                    kvadratkub: layoutKvadratkub,
                    potensekvlos: layoutPotensekvlos,

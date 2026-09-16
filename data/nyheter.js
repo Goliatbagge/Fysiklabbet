@@ -106,7 +106,7 @@ const NYHETER_ALL = [
     id: "2026-09-16-atomen-som-skjuts-ur-heliumet",
     date: "2026-09-16",
     title: "Atomen med antimateria i kärnan skjuts nu rakt upp ur flytande helium — i 2 180 meter i sekunden",
-    deck: "Myonium finns kvar i ett par miljondels sekunder och har hittills sprutat åt alla håll. Nu har fysiker i Schweiz fått atomerna att lämna ett två millimeter tunt skikt superfluid helium med nästan samma fart och samma riktning. Om ett par år ska strålen användas till något ingen gjort förut: att se efter om tyngdkraften drar lika hårt i andra generationens materia.",
+    deck: "Myonium finns kvar i ett par miljondels sekunder och har hittills sprutat åt alla håll. Nu har fysiker i Schweiz fått atomerna att lämna ett två millimeter tunt skikt superfluid helium med nästan samma fart och samma riktning. Om ett par år ska strålen användas till något ingen gjort förut: att se efter om tyngdkraften drar lika hårt i en partikel ur andra generationen.",
     category: "Partikelfysik",
     readingTime: "6 min",
     image: "nyheter/bilder/2026-09-16-atomen-som-skjuts-ur-heliumet.jpg",
@@ -140,7 +140,7 @@ const NYHETER_ALL = [
       ]
     },
     body: [
-      { type: 'p', html: 'Byt ut kärnan i en väteatom mot en enda antipartikel, låt en vanlig elektron kretsa kvar, och resultatet är en fullt fungerande atom. Den heter myonium, den har energinivåer, den tar upp och sänder ut ljus, och den är nästan exakt lika stor som väteatomen den efterliknar. Två saker skiljer: den väger bara omkring en niondel så mycket, och den finns kvar i ett par miljondels sekunder.' },
+      { type: 'p', html: 'Byt ut kärnan i en väteatom mot en enda antipartikel, en antimyon, låt en vanlig elektron kretsa kvar, och resultatet är en fullt fungerande atom. Den heter myonium, den har energinivåer, den tar upp och sänder ut ljus, och den är nästan exakt lika stor som väteatomen den efterliknar. Två saker skiljer: den väger bara omkring en niondel så mycket, och den finns kvar i ett par miljondels sekunder.' },
       { type: 'p', html: 'I <em>Nature Physics</em> rapporterar ett lag från ETH Zürich och Paul Scherrer-institutet i Villigen att de lyckats göra en ordentlig stråle av dessa atomer — inte ett moln som sprutar åt alla håll, utan en samlad ström där atomerna färdas med nästan samma fart, nästan parallellt. Det låter som en teknisk detalj. Det är förutsättningen för ett försök som ingen hittills kunnat göra.' },
 
       { type: 'h2', text: 'Elektronens tunga syskon' },

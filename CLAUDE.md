@@ -272,6 +272,7 @@ som råkar stå öppet:
 | `.claude/dev-server.py` | Själva servern (no-store, lyssnar bara på 127.0.0.1). |
 | `.claude/server/dev-server-vakt.ps1` | Vakten: startar servern **om den inte redan svarar**. Även `-Status`, `-Stoppa`, `-Starta_om`. |
 | `.claude/server/installera-server-task.ps1` | Registrerar uppgiften. Kör en gång per maskin (`-Avinstallera` tar bort den). |
+| `.claude/server/kor-dolt.vbs` | Startare som alla schemalagda uppgifter går via: `powershell.exe -WindowStyle Hidden` blinkar ändå till med ett svart konsolfönster vid varje körning, `wscript` gör det inte. |
 | `.claude/server/oppna-brandvagg.ps1` | Öppnar port 8000 för hemmanätverket. Kräver administratör, körs en gång. |
 | `.claude/server/logg/vakt.log` | Starter och fel. Serverns egen utskrift: `server-ut.log` / `server-fel.log`. |
 
@@ -474,7 +475,6 @@ Så här bygger du scenen:
    `verify-handskrift.js` granskar båda lägena automatiskt, och
    ekvval-scener har en HÖGRE inställningsruta: inget bläck med x > 420
    får ligga ovanför y = 210 (i stället för 150).
-
    **Varje operation på båda led skrivs ALLTID ut i det valda läget**
    via `y = ekvOp(y, op, xw, ekvation)` (`mkEkvOp(T, vagg)`): i "Båda
    led" en egen rad med operationen i blått efter vardera ledet, i
@@ -486,6 +486,7 @@ Så här bygger du scenen:
    "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" och "EN EKVATION SKRIVS PÅ EN RAD" i
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
+
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
 **En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara
@@ -2852,7 +2853,7 @@ visas utifrån adressen:
 
 | Sida | Hash (som förr) | `?id=` (sitemap/sökmotorer) |
 |---|---|---|
-| `katalog.html` | `#fy1-3.2`, `#fy1-3.2:ovningar` | `?id=fy1-3.2` |
+| `katalog.html` | `#fy1-3.2`, `#fy1-3.2:ovningar` | `?id=fy1-3.2`, `?id=fy1-3.2:ovningar` |
 | `np.html` | `#fy2-vt2016`, `#fy2-vt2016:7` | `?id=fy2-vt2016` |
 | `fysik-repetition.html` | `#fy1-3` | `?id=fy1-3` |
 
@@ -2921,9 +2922,18 @@ behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
 - **`?id=` läses BARA när hashen är tom.** Hashen vinner alltid, så
   befintliga länkar, bokmärken och sökrutans träffar beter sig oförändrat.
   Rör inte den ordningen.
-- **Sidorna skriver aldrig om adressfältet** — varken hash eller query.
-  Navigering sker i React-state. Inför ingen `replaceState`-normalisering
-  utan att tänka igenom hur den samverkar med `hashchange`.
+- **`katalog.html` skriver avsnittets `?id=`-adress i adressfältet när man
+  navigerar** (`pushState`, infört 2026-09-17). Tidigare stod adressen kvar
+  på det man landade på (`?id=fy2`) hur långt man än klickade, så elever och
+  lärare som kopierade adressfältet skickade kursens startsida i stället för
+  genomgången. Reglerna, som står som kommentar i adress-effekten i `App`:
+  adressen skrivs BARA när fältet betyder något annat än det som visas
+  (landningsadressen lämnas orörd, även `#`-formen och `&block=`), vyn tas
+  med (`?id=fy1-3.2:ovningar`), och `popstate` läses tillbaka med
+  `parseInitialState` precis som `hashchange`. `?id=fy1-3` (kapitel utan
+  avsnitt) betyder sedan samma dag KAPITELÖVERSIKTEN, samma vy som ett
+  klick på kapitelfliken, inte första avsnittet. `np.html` och
+  `fysik-repetition.html` skriver fortfarande aldrig om adressfältet.
 - **I `fysik-repetition.html` gäller `?id=` bara första inläsningen.**
   `read()` körs även vid `hashchange`; faller den tillbaka på `?id=` när
   användaren går tillbaka till listan dras hen in i paketet igen.

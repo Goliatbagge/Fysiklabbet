@@ -11,9 +11,10 @@
  *
  * Den här filen låter varje sida peka ut sin egen adress i stället, samma
  * adress som står i sitemap.xml. Taggen sätts om varje gång användaren
- * navigerar i React-state (sidorna skriver aldrig om adressfältet, se
- * "Adresser till teoriavsnitt" i CLAUDE.md), så den speglar alltid det
- * avsnitt som faktiskt visas.
+ * navigerar i React-state, så den speglar alltid det avsnitt som faktiskt
+ * visas. (katalog.html skriver sedan 2026-09-17 även adressfältet vid
+ * navigering; np.html och fysik-repetition.html gör det inte — se
+ * "Adresser till teoriavsnitt" i CLAUDE.md.)
  *
  * Anropas ur samma useEffect som redan sätter document.title.
  *

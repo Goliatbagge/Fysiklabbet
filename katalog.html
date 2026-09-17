@@ -3182,7 +3182,7 @@
         // Parsea URL-parametrar och hash för djuplänkar:
         //   katalog.html?course=Fysik+1
         //   katalog.html#fy1            → Fysik, kursintro
-        //   katalog.html#fy2-3          → Fysik nivå 2, kapitel 3 (första avsnittet)
+        //   katalog.html#fy2-3          → Fysik nivå 2, kapitel 3 (kapitelöversikten)
         //   katalog.html#fy1-2.3        → Fysik, kapitel 2, avsnitt 2.3
         //   katalog.html#ma1c-1.1       → Matematik nivå 1c, kapitel 1, avsnitt 1.1
         // Kurskod → [ämne, kurs] för hash-djuplänkar.
@@ -3245,7 +3245,15 @@
                                 if (sec) out.section = sec.num;
                                 else out.section = chapters[chKey].sections[0]?.num || null;
                             } else {
-                                out.section = chapters[chKey].sections[0]?.num || null;
+                                // Kapitel utan avsnitt (?id=fy1-3) är kapitel-
+                                // översikten — samma vy som ett klick på
+                                // kapitelfliken ger (pickChapter sätter
+                                // section: null). Så blir adressfältet och
+                                // bakåtknappen konsekventa: adressen som
+                                // skrivs för översikten läses tillbaka som
+                                // just översikten. (Tidigare öppnades första
+                                // avsnittet här.)
+                                out.section = null;
                             }
                         }
                     }
@@ -3262,7 +3270,13 @@
             useEffect(() => {
                 const onHashChange = () => setState(parseInitialState());
                 window.addEventListener('hashchange', onHashChange);
-                return () => window.removeEventListener('hashchange', onHashChange);
+                // Bakåt/framåt mellan de adresser som pushState skrivit
+                // (se adress-effekten nedan): läs tillbaka vyn ur adressen.
+                window.addEventListener('popstate', onHashChange);
+                return () => {
+                    window.removeEventListener('hashchange', onHashChange);
+                    window.removeEventListener('popstate', onHashChange);
+                };
             }, []);
 
             useEffect(() => {
@@ -3363,15 +3377,54 @@
                 // katalog.html hamnade den under "Alternativ sida med korrekt
                 // kanonisk tagg" och kunde aldrig indexeras, trots att Ämne-
                 // menyn och välkomstmejlet länkar dit (upptäckt 2026-08-21).
+                const kurskod = Object.keys(HASH_COURSES)
+                    .find(k => HASH_COURSES[k][1] === state.course);
                 if (window.sattKanonisk) {
-                    const kurskod = Object.keys(HASH_COURSES)
-                        .find(k => HASH_COURSES[k][1] === state.course);
                     window.sattKanonisk(
                         !kurskod ? 'katalog.html'
                             : avs ? `katalog.html?id=${kurskod}-${avs.num}`
                             : `katalog.html?id=${kurskod}`
                     );
                 }
+
+                // ADRESSFÄLTET FÖLJER MED när man navigerar (infört
+                // 2026-09-17). Tidigare stod adressen kvar på det man
+                // landade på (katalog.html?id=fy2) hur långt man än
+                // klickade sig in, så den som kopierade adressfältet för
+                // att skicka en genomgång till en elev skickade i själva
+                // verket kursens startsida. Nu skrivs avsnittets ?id=-adress
+                // (samma form som sitemapen och listornas länkar) in med
+                // pushState, så att adressfältet alltid går att kopiera och
+                // bakåtknappen går tillbaka ett avsnitt i taget.
+                //
+                //   - Vyn (:ovningar, :exitticket …) tas med, så en kopierad
+                //     adress öppnar samma flik. Kanoniska taggen ovan pekar
+                //     däremot alltid på avsnittet (flikarna är inte egna
+                //     sidor för Google).
+                //   - Skrivs bara när adressen i fältet betyder något ANNAT
+                //     än det som visas. Adressen man landade på lämnas
+                //     alltså orörd (även #-formen och &block=-ankaret), och
+                //     bakåt/framåt (popstate → parseInitialState → samma
+                //     state) skapar inga nya poster. Utan den kontrollen
+                //     hade varje bakåtsteg lagt en ny post överst i
+                //     historiken och ätit upp framåt-posterna.
+                //   - pushState utlöser varken hashchange eller popstate, så
+                //     lyssnarna ovan kör inte på egna skrivningar.
+                try {
+                    const vy = state.view && state.view !== 'teori' ? ':' + state.view : '';
+                    const adress = !kurskod ? 'katalog.html'
+                        : avs ? `katalog.html?id=${kurskod}-${avs.num}${vy}`
+                        : kap ? `katalog.html?id=${kurskod}-${kap.number}`
+                        : `katalog.html?id=${kurskod}`;
+                    const iFaltet = parseInitialState();
+                    const sammaVy = iFaltet.course === state.course
+                        && iFaltet.chapter === state.chapter
+                        && iFaltet.section === state.section
+                        && (iFaltet.view || 'teori') === (state.view || 'teori');
+                    if (!sammaVy && window.history && window.history.pushState) {
+                        window.history.pushState(null, '', adress);
+                    }
+                } catch (e) { /* adressfältet är en bekvämlighet, aldrig ett krav */ }
             }, [state.subject, state.course, state.chapter, state.section, state.view]);
 
             return (

@@ -2305,6 +2305,18 @@ button.lab-card-disabled { pointer-events: none; }
     color: var(--lab-ink-muted);
 }
 
+/* Enhetskoll: inbjudan till kapitlets avslutande quiz. Solid papperskort
+   (INTE lab-block-bilds streckade platshållarstil/kursiv text) med en
+   riktig primärknapp, så det känns som en inbjudan snarare än en olöst
+   platshållare (se fysik-enhetskoll.html). */
+.lab-block-enhetskoll {
+    background: var(--lab-bg-panel);
+    border-color: var(--lab-line-strong);
+}
+.lab-block-enhetskoll .lab-block-title {
+    color: var(--lab-ink);
+}
+
 /* Figur — riktig konstruerad SVG-figur (ersätter platshållartexten).
    Ingen streckad ram: figuren står direkt på pappret med ink-färg
    (currentColor) så den ärver temat. */

@@ -3062,13 +3062,14 @@
                                                 {view === 'teori' && !isEnhetskoll && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
                                                 {/* Enhetskollavsnitt: ingen teoritext — en startruta till quizet. */}
                                                 {isEnhetskoll && (
-                                                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                                                    <div className="lab-block lab-block-enhetskoll" style={{ marginTop: 8 }}>
+                                                        <p className="lab-block-title">Enhetskoll</p>
                                                         <p style={{ margin: '0 0 14px' }}>
                                                             Kapitlet avslutas med en enhetskoll — ett snabbt quiz på just
                                                             de storheter, enheter och beteckningar som kapitlet använder.
                                                             Svarar du fel får du öva igen tills allt sitter.
                                                         </p>
-                                                        <a className="lab-btn" href={activeSection.href}>
+                                                        <a className="lab-btn lab-btn-primary" href={activeSection.href}>
                                                             Starta enhetskollen →
                                                         </a>
                                                     </div>

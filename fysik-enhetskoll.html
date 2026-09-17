@@ -33,32 +33,44 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        /* Enhetskollens egna färgtoner (papperstemat): definierade en gång
+           här så att både CSS-klasserna nedan och JSX-inline-stilarna i
+           komponenterna kan hänvisa till samma AA-säkra värden. Tonerna är
+           mörkare än sajtens "rätt"-referens (#16803a) respektive
+           --lab-accent (#c8324a) rakt av, eftersom liten text på ljust
+           papper annars hamnar strax under 4,5:1 i kontrast. */
+        :root {
+            --ek-good: #146b32;
+            --ek-good-bg: rgba(20, 107, 50, 0.10);
+            --ek-good-border: rgba(20, 107, 50, 0.4);
+            --ek-bad: #b22a3f;
+            --ek-bad-bg: rgba(178, 42, 63, 0.10);
+            --ek-bad-border: rgba(178, 42, 63, 0.4);
+            --ek-info: #8a4a18;
         }
         .option-btn {
-            background: var(--lab-bg);
+            background: var(--lab-bg-panel);
             border: 1px solid var(--lab-line-strong);
             color: var(--lab-ink);
-            transition: all 0.15s ease;
+            transition: border-color 0.15s ease, background 0.15s ease;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
         }
         .option-btn:hover:not(.answered) {
             background: var(--lab-bg-panel);
             border-color: var(--lab-ink);
-            box-shadow: none;
-            transform: none;
+        }
+        .option-btn:focus-visible {
+            outline: 2px solid var(--lab-accent);
+            outline-offset: 2px;
         }
         .option-btn.correct {
-            border-color: #22c55e;
-            background: rgba(34, 197, 94, 0.15);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+            border-color: var(--ek-good);
+            background: var(--ek-good-bg);
         }
         .option-btn.wrong {
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.15);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+            border-color: var(--ek-bad);
+            background: var(--ek-bad-bg);
         }
         .mode-tab {
             transition: all 0.15s ease;
@@ -80,54 +92,95 @@
             border-color: var(--lab-ink);
             color: var(--lab-ink);
         }
+        .mode-tab:focus-visible {
+            outline: 2px solid var(--lab-accent);
+            outline-offset: 2px;
+        }
+        /* Väntande = tunn ring (inte ifylld), så den aldrig läses som "fel"
+           innan eleven ens svarat. Aktuell = bläck, rätt = grön, fel = accent. */
         .progress-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
-        .progress-dot.pending { background: rgba(200, 50, 74, 0.2); border: 1px solid rgba(200, 50, 74, 0.3); }
-        .progress-dot.current { background: #38bdf8; box-shadow: 0 0 10px rgba(200, 50, 74, 0.5); }
-        .progress-dot.correct { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
-        .progress-dot.wrong { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        .progress-dot.pending { background: transparent; border: 1.5px solid var(--lab-line-strong); }
+        .progress-dot.current { background: var(--lab-ink); border: 1.5px solid var(--lab-ink); }
+        .progress-dot.correct { background: var(--ek-good); border: 1.5px solid var(--ek-good); }
+        .progress-dot.wrong { background: var(--ek-bad); border: 1.5px solid var(--ek-bad); }
         @keyframes confetti-fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
         @keyframes celebrate-pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
         @keyframes bonus-pop {
-            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
-            50% { transform: scale(1.03) translateY(0); }
+            0% { opacity: 0; transform: scale(0.96) translateY(8px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
+        /* Overlayerna (bonus/fel) är papperskort med en dämpad, mörk
+           bakgrundsdis bakom sig: inga neonfärgade glows eller mörkblå
+           1990-tals-gradienter kvar från det gamla temat. */
         .bonus-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
+            background: rgba(15, 22, 32, 0.55);
+            backdrop-filter: blur(3px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 900;
-            animation: bonus-pop 0.4s ease-out;
+            padding: 20px;
+            animation: bonus-pop 0.22s ease-out;
         }
-        .bonus-banner {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 2px solid rgba(245, 158, 11, 0.6);
-            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
-            max-width: 420px;
-            width: 90%;
-        }
+        .bonus-banner,
         .wrong-banner {
-            background: linear-gradient(135deg, #1a1a2e, #1e1028);
-            border: 2px solid rgba(239, 68, 68, 0.6);
-            box-shadow: 0 0 40px rgba(239, 68, 68, 0.25), 0 0 80px rgba(239, 68, 68, 0.1);
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong);
+            border-top: 4px solid var(--lab-line-strong);
+            box-shadow: 0 20px 50px rgba(15, 22, 32, 0.3);
             max-width: 420px;
-            width: 90%;
+            width: 100%;
         }
+        .bonus-banner { border-top-color: var(--ek-info); }
+        .wrong-banner { border-top-color: var(--ek-bad); }
+        .ek-overlay-eyebrow {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .ek-overlay-body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--lab-ink-soft);
+            line-height: 1.6;
+        }
+        .ek-overlay-answer {
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .ek-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 26px;
+            border-radius: 12px;
+            border: 1px solid var(--lab-ink);
+            background: var(--lab-ink);
+            color: var(--lab-bg-panel, #fff);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .ek-btn-primary:hover { background: #1c2635; border-color: #1c2635; }
+        .ek-btn-primary:focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 2px; }
         @keyframes slide-in {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -137,6 +190,9 @@
         }
         .celebrate {
             animation: celebrate-pulse 2s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .slide-in, .celebrate, .bonus-overlay { animation: none; }
         }
         /* Kapitelväljaren (visas när ingen kapitel-hash finns i adressen). */
         .ek-kurs-rubrik {
@@ -152,7 +208,7 @@
             display: flex;
             align-items: baseline;
             gap: 10px;
-            background: var(--lab-bg, #f3eee4);
+            background: var(--lab-bg-panel, #fff);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 10px;
             padding: 10px 16px;
@@ -160,19 +216,40 @@
             text-decoration: none;
             color: var(--lab-ink, #0f1620);
             font-family: 'Poppins', sans-serif;
-            transition: border-color 0.15s ease;
+            transition: border-color 0.15s ease, background 0.15s ease;
         }
-        .ek-kap-lank:hover { border-color: var(--lab-accent, #c8324a); }
+        .ek-kap-lank:hover {
+            border-color: var(--lab-accent, #c8324a);
+            background: var(--lab-bg, #f3eee4);
+        }
+        .ek-kap-lank:focus-visible {
+            outline: 2px solid var(--lab-accent, #c8324a);
+            outline-offset: 2px;
+        }
         .ek-kap-num {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 4px;
+            min-width: 4.6em;
+        }
+        .ek-kap-num-lbl {
             font-family: var(--lab-font-mono, monospace);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--lab-ink-muted, #5b6472);
-            min-width: 2.4em;
+        }
+        .ek-kap-num-n {
+            font-family: var(--lab-font-display, Georgia, serif);
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--lab-accent, #c8324a);
         }
         /* Fullskärmsläge: hela quiz-kortet är den interaktiva ytan.
-           Sajtens paper-tema gör .dark-container transparent (!important),
-           så i fullskärm måste kortet uttryckligen få pappersbakgrund
-           (annars svart fullscreen-backdrop) och bli skrollbart. */
+           scene-wrap[data-theme="ljusPapper"] ger redan pappersbakgrund
+           (se styles-laborans-sim.css), men fullscreen-elementets egen
+           bakgrund (svart som standard i webbläsaren) måste ändå skrivas
+           över uttryckligen, och kortet ska bli skrollbart. */
         body.lab-sim .ek-scene:fullscreen {
             background: var(--lab-bg, #f3eee4) !important;
             overflow-y: auto;
@@ -255,10 +332,8 @@
     </div>
 
     <main class="container" style="padding-top: 100px; padding-bottom: 3rem;">
-        <nav style="margin-bottom: 1rem; font-size: 0.9rem;">
-            <a href="index.html" style="color: var(--lab-ink-muted); text-decoration: none;">Hem</a>
-            <span style="color: #475569; margin: 0 0.5rem;">/</span>
-            <span style="color: #38bdf8;">Enhetskoll</span>
+        <nav class="breadcrumb">
+            <a href="index.html">Hem</a> / Enhetskoll
         </nav>
         <div id="root"></div>
     </main>
@@ -824,7 +899,7 @@
                     {
                         symbol: 'I',
                         correct: 'Impuls',
-                        options: ['Impuls', 'Ström', 'Intensitet', 'Arbete'],
+                        options: ['Impuls', 'Effekt', 'Rörelsemängd', 'Arbete'],
                         hint: 'I det här kapitlet står I för impuls, I = F · t. (I elläran betecknar I i stället ström.)'
                     },
                     {
@@ -1114,7 +1189,7 @@
                     {
                         symbol: 'c',
                         correct: 'Specifik värmekapacitet',
-                        options: ['Specifik värmekapacitet', 'Värmeenergi', 'Temperatur', 'Ljusets fart'],
+                        options: ['Specifik värmekapacitet', 'Värmeenergi', 'Temperatur', 'Effekt'],
                         hint: 'I värmeläran står c för specifik värmekapacitet — i E = c · m · ΔT.'
                     },
                     {
@@ -1286,7 +1361,7 @@
                     {
                         symbol: 'I',
                         correct: 'Ström',
-                        options: ['Ström', 'Laddning', 'Intensitet', 'Induktans'],
+                        options: ['Ström', 'Laddning', 'Resistans', 'Induktans'],
                         hint: 'I står för ström (intensité du courant på franska). Laddning betecknas Q.'
                     },
                     {
@@ -1298,7 +1373,7 @@
                     {
                         symbol: 'U',
                         correct: 'Spänning',
-                        options: ['Spänning', 'Inre energi', 'Hastighet', 'Arbete'],
+                        options: ['Spänning', 'Potential', 'Hastighet', 'Arbete'],
                         hint: 'U står för spänning. Inre energi betecknas ibland U i termodynamik, men i ellära är det spänning.'
                     },
                     {
@@ -1352,7 +1427,7 @@
                     {
                         symbol: 'k',
                         correct: 'Coulombs konstant',
-                        options: ['Coulombs konstant', 'Fjäderkonstant', 'Laddning', 'Resistans'],
+                        options: ['Coulombs konstant', 'Elementarladdning', 'Laddning', 'Resistans'],
                         hint: 'I elläran är k Coulombs konstant, 8,99 · 10^9 Nm²/C². (I mekaniken betecknar k fjäderkonstanten.)'
                     },
                     {
@@ -1567,7 +1642,7 @@
                     {
                         symbol: 'N',
                         correct: 'Antal atomkärnor',
-                        options: ['Antal atomkärnor', 'Kraft', 'Varvtal', 'Aktivitet'],
+                        options: ['Antal atomkärnor', 'Kraft', 'Halveringstid', 'Aktivitet'],
                         hint: 'I sönderfallslagen N = N₀ · 0,5^(t/T½) är N antalet kärnor som ännu inte sönderfallit.'
                     },
                     {
@@ -1721,7 +1796,7 @@
                     {
                         symbol: 'M',
                         correct: 'Kraftmoment',
-                        options: ['Kraftmoment', 'Massa', 'Meter', 'Kraft'],
+                        options: ['Kraftmoment', 'Period', 'Meter', 'Kraft'],
                         hint: 'Stort M står för kraftmoment, M = F · l. Massa betecknas m (liten).'
                     },
                     {
@@ -1733,7 +1808,7 @@
                     {
                         symbol: 'T',
                         correct: 'Period',
-                        options: ['Period', 'Temperatur', 'Frekvens', 'Vinkelhastighet'],
+                        options: ['Period', 'Varvtal', 'Frekvens', 'Vinkelhastighet'],
                         hint: 'I rörelseläran står T för perioden — tiden för ett varv. T = 1/f.'
                     },
                     {
@@ -1946,13 +2021,13 @@
                     {
                         symbol: 'I',
                         correct: 'Ljudintensitet',
-                        options: ['Ljudintensitet', 'Ström', 'Impuls', 'Ljudnivå'],
+                        options: ['Ljudintensitet', 'Effekt', 'Utbredningshastighet', 'Ljudnivå'],
                         hint: 'I det här kapitlet står I för ljudintensitet, effekt per kvadratmeter. (I elläran betecknar I ström.)'
                     },
                     {
                         symbol: 'L',
                         correct: 'Ljudnivå',
-                        options: ['Ljudnivå', 'Längd', 'Ljudintensitet', 'Luminositet'],
+                        options: ['Ljudnivå', 'Längd', 'Ljudintensitet', 'Våglängd'],
                         hint: 'L står för ljudnivån i decibel, L = 10 · lg(I/I₀).'
                     },
                     {
@@ -1976,7 +2051,7 @@
                     {
                         symbol: 'T',
                         correct: 'Period',
-                        options: ['Period', 'Temperatur', 'Kraft', 'Frekvens'],
+                        options: ['Period', 'Våglängd', 'Kraft', 'Frekvens'],
                         hint: 'T är periodtiden — tiden för en hel svängning. T = 1/f.'
                     },
                     {
@@ -2114,7 +2189,7 @@
                     {
                         symbol: 'e',
                         correct: 'Inducerad spänning',
-                        options: ['Inducerad spänning', 'Elementarladdning', 'Energi', 'Elektrisk fältstyrka'],
+                        options: ['Inducerad spänning', 'Ström', 'Energi', 'Elektrisk fältstyrka'],
                         hint: 'I induktionsläran står e för den inducerade spänningen (ems), e = l · v · B.'
                     },
                     {
@@ -2132,13 +2207,13 @@
                     {
                         symbol: 'I',
                         correct: 'Ström',
-                        options: ['Ström', 'Impuls', 'Intensitet', 'Induktans'],
+                        options: ['Ström', 'Laddning', 'Spänning', 'Induktans'],
                         hint: 'I står för strömmen — i F = B · I · l och B = μ₀ · n · I/l.'
                     },
                     {
                         symbol: 'l',
                         correct: 'Ledarens längd',
-                        options: ['Ledarens längd', 'Ström', 'Flödestäthet', 'Hävarm'],
+                        options: ['Ledarens längd', 'Ström', 'Flödestäthet', 'Magnetiskt flöde'],
                         hint: 'Litet l är ledarens längd i magnetfältet — i F = B · I · l och e = l · v · B.'
                     },
                     {
@@ -2250,7 +2325,7 @@
                     {
                         symbol: 'h',
                         correct: 'Plancks konstant',
-                        options: ['Plancks konstant', 'Höjd', 'Frekvens', 'Fotonens energi'],
+                        options: ['Plancks konstant', 'Brytningsindex', 'Frekvens', 'Fotonens energi'],
                         hint: 'h står för Plancks konstant, h ≈ 6,63 · 10^-34 Js — kvantfysikens grundkonstant.'
                     },
                     {
@@ -2262,13 +2337,13 @@
                     {
                         symbol: 'f',
                         correct: 'Frekvens',
-                        options: ['Frekvens', 'Kraft', 'Fotonens energi', 'Brännvidd'],
+                        options: ['Frekvens', 'Kraft', 'Fotonens energi', 'Våglängd'],
                         hint: 'Litet f står för frekvens — i fotonenergin E = h · f.'
                     },
                     {
                         symbol: 'n',
                         correct: 'Brytningsindex',
-                        options: ['Brytningsindex', 'Substansmängd', 'Antal fotoner', 'Frekvens'],
+                        options: ['Brytningsindex', 'Infallsvinkel', 'Brytningsvinkel', 'Frekvens'],
                         hint: 'I optiken står n för brytningsindex — hur mycket långsammare ljuset går i mediet än i vakuum.'
                     },
                     {
@@ -2280,7 +2355,7 @@
                     {
                         symbol: 'p',
                         correct: 'Rörelsemängd',
-                        options: ['Rörelsemängd', 'Effekt', 'Tryck', 'Plancks konstant'],
+                        options: ['Rörelsemängd', 'Effekt', 'Frekvens', 'Plancks konstant'],
                         hint: 'I de Broglies formel λ = h/p är p rörelsemängden m · v.'
                     },
                     {
@@ -2441,7 +2516,9 @@
 
         function Confetti() {
             const pieces = useMemo(() => {
-                const colors = ['#38bdf8', '#22c55e', '#f59e0b', '#ec4899', '#a78bfa', '#f97316'];
+                // Laborans-temats palett: bläck, accentröd, ockra, dämpad
+                // grön, djupblå — inga neonfärger från det gamla mörka temat.
+                const colors = ['#0f1620', '#c8324a', '#a85a1a', '#146b32', '#1c3d6b'];
                 return Array.from({ length: 60 }, (_, i) => ({
                     id: i,
                     color: colors[i % colors.length],
@@ -2514,7 +2591,7 @@
                         className: `option-btn rounded-xl px-6 py-4 text-lg font-semibold text-center ${answered ? 'answered' : ''} ${answered && opt === correctAnswer ? 'correct' : ''} ${answered && opt === selectedAnswer && opt !== correctAnswer ? 'wrong' : ''}`,
                         onClick: () => !answered && onAnswer(opt),
                         disabled: answered,
-                        style: { color: answered && opt === correctAnswer ? '#16803a' : answered && opt === selectedAnswer && opt !== correctAnswer ? '#c8324a' : '#0f1620' }
+                        style: { color: answered && opt === correctAnswer ? 'var(--ek-good)' : answered && opt === selectedAnswer && opt !== correctAnswer ? 'var(--ek-bad)' : 'var(--lab-ink)' }
                     }, opt)
                 )),
                 answered && React.createElement('div', {
@@ -2522,8 +2599,11 @@
                     style: { animation: 'slide-in 0.3s ease-out' }
                 },
                     React.createElement('p', {
-                        className: `text-sm ${selectedAnswer === correctAnswer ? 'text-green-400' : 'text-amber-400'}`,
-                        style: { fontFamily: "'Poppins', sans-serif" }
+                        className: 'text-sm',
+                        style: {
+                            fontFamily: "'Poppins', sans-serif",
+                            color: selectedAnswer === correctAnswer ? 'var(--ek-good)' : 'var(--ek-info)'
+                        }
                     }, question.hint)
                 )
             );
@@ -2536,30 +2616,29 @@
                     React.createElement(Confetti),
                     React.createElement('div', { className: 'celebrate mb-6' },
                         React.createElement('h2', {
-                            className: 'text-3xl font-bold text-green-400 mb-4',
-                            style: { fontFamily: "'Poppins', sans-serif", textShadow: '0 0 20px rgba(34, 197, 94, 0.5)' }
+                            className: 'mb-4',
+                            style: {
+                                fontFamily: "var(--lab-font-display)",
+                                fontStyle: 'italic',
+                                fontWeight: 400,
+                                fontSize: '2.4rem',
+                                color: 'var(--ek-good)'
+                            }
                         }, 'Alla rätt!'),
                         React.createElement('p', {
-                            className: 'text-xl text-sky-300 mb-2',
-                            style: { fontFamily: "'Poppins', sans-serif" }
+                            className: 'text-xl mb-2',
+                            style: { fontFamily: "'Poppins', sans-serif", color: 'var(--lab-ink-soft)' }
                         }, msg)
                     ),
                     React.createElement('p', {
-                        className: 'text-slate-400 mb-8'
+                        className: 'mb-8',
+                        style: { color: 'var(--lab-ink-muted)' }
                     }, round === 1
                         ? `Du klarade alla ${totalQuestions} frågor på första försöket!`
                         : `Du klarade alla ${totalQuestions} frågor på ${round} rundor.`
                     ),
                     React.createElement('button', {
-                        className: 'px-8 py-3 rounded-xl font-semibold text-white',
-                        style: {
-                            background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
-                            boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)',
-                            fontFamily: "'Poppins', sans-serif",
-                            cursor: 'pointer',
-                            border: 'none',
-                            fontSize: '1rem'
-                        },
+                        className: 'ek-btn-primary',
                         onClick: onContinue
                     }, 'Spela igen')
                 );
@@ -2572,11 +2651,11 @@
                 }, `Runda ${round} klar!`),
                 React.createElement('div', { className: 'flex justify-center gap-8 mb-6' },
                     React.createElement('div', null,
-                        React.createElement('div', { className: 'text-3xl font-bold text-green-400' }, correctCount),
+                        React.createElement('div', { className: 'text-3xl font-bold', style: { color: 'var(--ek-good)' } }, correctCount),
                         React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Rätt')
                     ),
                     React.createElement('div', null,
-                        React.createElement('div', { className: 'text-3xl font-bold text-red-400' }, wrongQuestions.length),
+                        React.createElement('div', { className: 'text-3xl font-bold', style: { color: 'var(--ek-bad)' } }, wrongQuestions.length),
                         React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Fel')
                     )
                 ),
@@ -2588,7 +2667,7 @@
                         React.createElement('span', {
                             key: i,
                             className: 'px-3 py-1 rounded-full text-sm font-medium',
-                            style: { background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#fca5a5' }
+                            style: { background: 'var(--ek-bad-bg)', border: '1px solid var(--ek-bad-border)', color: 'var(--ek-bad)' }
                         }, q.quantity || q.symbol)
                     )
                 ),
@@ -2596,15 +2675,7 @@
                     className: 'text-sky-400 mb-6 text-sm'
                 }, `Runda ${round + 1} innehåller bara de frågor du svarade fel på.`),
                 React.createElement('button', {
-                    className: 'px-8 py-3 rounded-xl font-semibold text-white',
-                    style: {
-                        background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
-                        boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)',
-                        fontFamily: "'Poppins', sans-serif",
-                        cursor: 'pointer',
-                        border: 'none',
-                        fontSize: '1rem'
-                    },
+                    className: 'ek-btn-primary',
                     onClick: onContinue
                 }, `Starta runda ${round + 1}`)
             );
@@ -2620,30 +2691,20 @@
                     onClick: (e) => e.stopPropagation()
                 },
                     React.createElement('p', {
-                        className: 'text-red-400 font-bold text-lg mb-2',
-                        style: { fontFamily: "'Poppins', sans-serif" }
+                        className: 'ek-overlay-eyebrow mb-3',
+                        style: { color: 'var(--ek-bad)' }
                     }, `Du valde ${wrongUnit}`),
                     React.createElement('p', {
-                        className: 'text-slate-300 text-base mb-5',
-                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.6' }
+                        className: 'ek-overlay-body text-base mb-5'
                     }, wrongExplanation),
                     React.createElement('div', {
-                        className: 'rounded-xl px-5 py-3 mb-6',
-                        style: { background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)' }
+                        className: 'ek-overlay-answer mb-6',
+                        style: { background: 'var(--ek-good-bg)', border: '1px solid var(--ek-good-border)', color: 'var(--ek-good)' }
                     },
-                        React.createElement('p', {
-                            className: 'text-green-400 font-bold text-base',
-                            style: { fontFamily: "'Poppins', sans-serif" }
-                        }, correctText)
+                        React.createElement('p', { className: 'text-base' }, correctText)
                     ),
                     React.createElement('button', {
-                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
-                        style: {
-                            background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontFamily: "'Poppins', sans-serif"
-                        },
+                        className: 'ek-btn-primary',
                         onClick: onDismiss
                     }, 'Jag förstår!')
                 )
@@ -2660,17 +2721,15 @@
                     onClick: (e) => e.stopPropagation()
                 },
                     React.createElement('p', {
-                        className: 'text-amber-300 font-bold text-xl mb-6',
-                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.5' }
+                        className: 'ek-overlay-eyebrow mb-3',
+                        style: { color: 'var(--ek-info)' }
+                    }, 'Visste du?'),
+                    React.createElement('p', {
+                        className: 'ek-overlay-body text-lg mb-6',
+                        style: { color: 'var(--lab-ink)' }
                     }, text),
                     React.createElement('button', {
-                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
-                        style: {
-                            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontFamily: "'Poppins', sans-serif"
-                        },
+                        className: 'ek-btn-primary',
                         onClick: onDismiss
                     }, 'Uppfattat!')
                 )
@@ -2854,7 +2913,10 @@
                                 className: 'ek-kap-lank',
                                 href: `#${kurs.hash}-${n}`
                             },
-                                React.createElement('span', { className: 'ek-kap-num' }, `Kap ${n}`),
+                                React.createElement('span', { className: 'ek-kap-num' },
+                                    React.createElement('span', { className: 'ek-kap-num-lbl' }, 'Kap'),
+                                    React.createElement('span', { className: 'ek-kap-num-n' }, n)
+                                ),
                                 React.createElement('span', null, ch.kapitel)
                             );
                         })
@@ -2919,9 +2981,10 @@
             const hasSymbols = chapter.symbols && chapter.symbols.length > 0;
 
             return React.createElement('div', {
-                className: 'scene-wrap ek-scene dark-container min-h-0 rounded-2xl p-6 md:p-10',
+                className: 'scene-wrap ek-scene min-h-0 rounded-2xl p-6 md:p-10',
+                'data-theme': 'ljusPapper',
                 ref: sceneWrapRef,
-                style: { fontFamily: "'Poppins', sans-serif", userSelect: 'none' }
+                style: { fontFamily: "'Poppins', sans-serif", userSelect: 'none', color: 'var(--lab-ink)' }
             },
                 React.createElement('button', {
                     className: 'fs-btn',

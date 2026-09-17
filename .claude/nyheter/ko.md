@@ -21,6 +21,22 @@ Format per post:
   https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html
   (tillagd 2026-09-04)
 
+- **92 antiprotoner färdades på lastbil — och överlevde en månad i fällan** — BASE-samarbetet vid CERN
+  rapporterar världens första transport av antimateria på väg: en flyttbar magnetisk fälla kördes med lastbil
+  i mars 2026 och höll kvar antiprotonerna i över en månad. Ingång: antimateria, Penningfällor, magnetisk
+  inneslutning och vakuum. OBS: partikelfysik publicerades 2026-09-16 och 2026-09-08 — låt det gå tid.
+  Källa (Phys.org 2026-09-16):
+  https://phys.org/news/2026-09-mobile-antiprotons-road-month-world.html
+  (tillagd 2026-09-17)
+
+- **Rydbergatomen som håller sig upprätt i elva millisekunder** — ett lag i Stuttgart sätter tre rekord för
+  cirkulära Rydbergatomer, där elektronen kretsar i en nästan klassisk cirkelbana långt ut från kärnan.
+  Ingång: energinivåer, kvanttal, exciterade tillstånd och varför ett tillstånd har en livslängd alls.
+  OBS: atom- och kvantfysik är väl representerat — kontrollera avståndet till närmaste kvantnyhet.
+  Källa (Phys.org 2026-09-16):
+  https://phys.org/news/2026-09-circular-rydberg-atoms-staying-stable.html
+  (tillagd 2026-09-17)
+
 - **Asteroidstoftet lade ett lock över jorden** — Purdue-forskarna Brandon och Alexandria Johnson
   räknar på vad det förångade berget från Chicxulub-nedslaget gjorde med atmosfären: ett stoftskikt
   så ogenomträngligt att strålningen strålades tillbaka ner mot marken, med hetta som dödade på en

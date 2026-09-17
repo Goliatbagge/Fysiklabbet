@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"masscentrum","term":"Masscentrum","kort":"Den punkt där ett föremåls eller ett systems massa kan tänkas samlad. Punkten rör sig som om alla yttre krafter angrep just där, oavsett hur delarna inuti rör sig.","former":["masscentrum","masscentrumet","masscentrumsatsen","tyngdpunktsrörelse"]},
+  {"id":"rorelsemangd","term":"Rörelsemängd","kort":"Massan gånger hastigheten. Storheten beskriver hur svårt något är att stoppa, och i ett system som inget yttre påverkar kan den bara flyttas mellan delarna, aldrig försvinna.","former":["rörelsemängd","rörelsemängden","rörelsemängder"]},
+  {"id":"impuls","term":"Impuls","kort":"En krafts verkan under en viss tid, alltså kraften multiplicerad med hur länge den verkar. Impulsen är exakt lika stor som den förändring av rörelsemängden den ger upphov till.","former":["impuls","impulsen","impulser","kraftimpuls","kraftimpulsen"]},
   {"id":"brytningsindex","term":"Brytningsindex","kort":"Ett tal som talar om hur mycket långsammare ljuset går i ett material än i tomrum, och därmed hur kraftigt ljuset böjs av när det går in i materialet.","former":["brytningsindex","brytningsindexet"]},
   {"id":"fotolitografi","term":"Fotolitografi","kort":"En tillverkningsmetod där ett mönster ritas med ljus i ett ljuskänsligt skikt, i stället för att fräsas eller tryckas fram mekaniskt. Den ligger bakom nästan alla datorchip.","former":["fotolitografi","fotolitografin","litografi","litografin"]},
   {"id":"naturlig-linjebredd","term":"Naturlig linjebredd","kort":"Att en spektrallinje aldrig är oändligt smal, utan har en bredd som bestäms av hur länge atomens tillstånd hinner finnas till. Kort livstid ger bred linje.","former":["naturlig linjebredd","naturliga linjebredden","linjebredd","linjebredden","linjebredder","linjebredderna"]},

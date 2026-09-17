@@ -103,6 +103,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-17-starten-som-redan-rullar",
+    date: "2026-09-17",
+    title: "Cykeln rullar redan när klockan börjar gå — och ändå är det ingen tjuvstart",
+    deck: "Ett tempolopp på cykelbana börjar från stillastående, med bakhjulet fastlåst i en startgrind. Ändå passerade en av åkarna i en ny studie startlinjen i 0,4 meter i sekunden. Fyra franska forskare har filmat elitåkare och byggt en modell av de första tiondelarna. Drivkraften visar sig sitta i kroppen, inte i pedalerna.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-09-17-starten-som-redan-rullar.jpg",
+    imageAlt: "En tävlingscyklist står hopkrupen över styret på en banbana av ljust trä. Bakhjulet hålls fast i en röd metallgrind full av kablar och instrument, och en funktionär i ljusblå skjorta står lutad över grinden bakom cykeln.",
+    imageCredit: "Foto: Nicola (CC BY-SA 3.0), via Wikimedia Commons. Bilden visar en start i 500 meter tempolopp vid världscupen i Glasgow 2012, inte de åkare som studerades. Beskuren.",
+    tags: ["mekanik", "rörelsemängd", "impuls", "masscentrum", "newtons lagar", "acceleration", "kraft", "idrottsfysik", "biomekanik", "modellering"],
+    sources: [
+      { name: "Phys.org: How some cyclists paradoxically start ’from rest’ with a non-zero velocity (16 september 2026)", url: "https://phys.org/news/2026-09-cyclists-paradoxically-rest-velocity.html" },
+      { name: "Royal Society Open Science: Solving the standing-start paradox in track cycling (öppen tillgång)", url: "https://royalsocietypublishing.org/doi/10.1098/rsos.252273" },
+      { name: "Swiss Timing: Cycling track (teknisk beskrivning av startgrinden)", url: "https://www.swisstiming.com/sports/cycling-track/" }
+    ],
+    research: {
+      citation: "Simon Giraud, Iris Sachet, Emmanuel Brunet och Christophe Clanet, ”Solving the standing-start paradox in track cycling”, Royal Society Open Science, volym 13, nummer 9, publicerad 9 september 2026 (CC BY 4.0)",
+      url: "https://doi.org/10.1098/rsos.252273"
+    },
+    simulering: {
+      href: "fysik1-newtons-tredje-app.html",
+      name: "Brandsläckaren i rymden",
+      text: "Styr en astronaut genom rymden med en brandsläckare och se hur farten framåt kommer av att något annat trycks bakåt. Det är samma bokföring som i startgrinden: inuti ett system kan rörelsemängd flyttas från en del till en annan, så länge något trycker åt andra hållet."
+    },
+    larare: {
+      moment: [
+        { label: "Newtons tredje lag", href: "katalog.html?id=fy1-3.3" },
+        { label: "Rörelsemängd och impuls", href: "katalog.html?id=fy1-4.7" },
+        { label: "Newtons andra lag", href: "katalog.html?id=fy1-3.2" }
+      ],
+      fragor: [
+        "Åkaren och cykeln är tillsammans ett system. Vilka krafter är inre, vilka är yttre, och vad är det egentligen som gör att systemet som helhet kan börja röra sig framåt?",
+        "Varför är det inbromsningen av kroppen, och inte utfallet framåt, som skjuter cykeln i väg? Resonera utifrån att kraften gånger den tid den verkar är lika med ändringen av rörelsemängden.",
+        "Modellen säger att utväxling och massa nästan inte spelar någon roll under de första tiondelarna, men desto mer senare i loppet. Vad är det som ändras när pedaltrampet tar över?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett tempolopp på cykelbana. Åkaren sitter fastspänd i utgångsläget med bakhjulet inklämt i en startgrind, kroppen hopkrupen över styret, hallen tyst. Signalen går, grinden släpper — och hos vissa åkare har cykeln redan fart när den passerar linjen där klockan börjar gå. Ingen domare ingriper, för ingen regel är bruten.' },
+      { type: 'p', html: 'Att en start ”från stillastående” kan ha en hastighet skild från noll har varit en obekväm gåta i sporten. I <em>Royal Society Open Science</em> lägger Simon Giraud och Christophe Clanet vid laboratoriet LadHyX på École Polytechnique, tillsammans med Iris Sachet och Emmanuel Brunet vid franska cykelförbundet, fram en förklaring. Den handlar mindre om ben än om tidsangivelser i hundradelar.' },
+
+      { type: 'h2', text: 'Centimetrarna framför framhjulet' },
+      { type: 'p', html: 'Startgrinden ställs på plats av funktionärer, och cykelramar är olika långa. Följden är att framhjulet oftast står en liten bit bakom själva startlinjen. Hos den åkare som kom snabbast i väg var gapet 6&nbsp;cm, och i de centimetrarna hinner cykeln få fart innan linjen passeras. Regeln säger att ingen får korsa startlinjen före signalen. Den säger ingenting om att cykeln ska stå still när den gör det.' },
+      { type: 'p', html: 'Resultatet blev att åkaren passerade startlinjen i 0,4&nbsp;m/s. Ingen tjuvstart, bara en start som redan var i gång.' },
+
+      { type: 'h2', text: 'Kroppen driver de första tiondelarna' },
+      { type: 'p', html: 'Forskarna filmade tre elitåkare som är specialiserade startförare i det franska lagsprintlaget med höghastighetskamera, mätte upp hur startgrinden själv uppför sig, räknade fram kroppens masscentrum ur kroppsmått och registrerade samtidigt vridmomentet i vevpartiet. Det lät dem skilja tre samtidiga bidrag från varandra: grindens bromsning, pedaltrampet och den tröghetskraft som kroppens egen rörelse lägger på cykeln.' },
+      { type: 'p', html: 'Det tredje bidraget visade sig vara det avgörande. Åkaren gör en snabb rörelse med hela kroppen, först bakåt och sedan framåt, och masscentrum når en topphastighet på omkring 2,0&nbsp;m/s. Men det är inte utfallet framåt som driver cykeln.' },
+      { type: 'quote', html: 'I samtliga fall följs masscentrums högsta hastighet framåt av en snabb inbromsning i förhållande till cykeln. Det är den inbromsningen som, rätt lagd i tiden mot att grinden öppnar, ger den största positiva tröghetskraften på cykeln.', cite: 'Ur studien i Royal Society Open Science' },
+      { type: 'p', html: 'Bakom ligger Newtons tredje lag. Åkare och cykel är ett system, och när åkaren kastar sig framåt trycker kroppen lika hårt bakåt på maskinen. Grinden håller emot. När kroppen sedan bromsas upp mot styre och pedaler vänder krafterna riktning, och rörelsemängd flyttas från kroppen över till cykeln. Bokföringen är $F \\cdot \\Delta t = \\Delta p$: kraftens impuls, alltså kraften gånger den tid den verkar, är precis den rörelsemängd som byter ägare. En kort inbromsning av en tung överkropp ger därför en stor kraft framåt i ramen.' },
+      { type: 'p', html: 'Först efter ungefär 0,2&nbsp;s tar trampet över som huvudsaklig drivkraft. Loppets allra första skede avgörs alltså innan cyklandet börjar på riktigt.' },
+
+      { type: 'fact', title: 'Starten i siffror', items: [
+        'Gapet mellan framhjulet och startlinjen hos den åkare som kom snabbast i väg: 6&nbsp;cm.',
+        'Farten när startlinjen passerades: 0,4&nbsp;m/s.',
+        'Kroppens masscentrum nådde en topphastighet på omkring 2,0&nbsp;m/s framåt.',
+        'Kroppsrörelsen dominerar de första cirka 0,2&nbsp;s. Därefter är pedaltrampet den viktigaste drivkraften.',
+        'Enligt modellen hade samma åkare kunnat passera startlinjen i 1,3&nbsp;m/s med en perfekt lagd rörelse.'
+      ]},
+
+      { type: 'h2', text: 'Tiondelarna går inte att köpa i utväxlingen' },
+      { type: 'p', html: 'Poängen med modellen är att den återger de uppmätta hastighetskurvorna utan att någon starthastighet matats in på förhand. Farten vid linjen kommer ut ur mekaniken i stället för att antas, och det är först då den går att fråga ut. Optimeringen pekar på två saker: när kroppsrörelsen inleds i förhållande till att grinden öppnar, och hur explosiv den är. Utväxling och massa har bara en marginell verkan under det här korta skedet.' },
+      { type: 'quote', html: 'Masscentrums högsta hastighet räcker därför inte i sig. Den storhet som styr förloppet är masscentrums acceleration i förhållande till cykeln, tillsammans med när den infaller.', cite: 'Ur studien i Royal Society Open Science' },
+      { type: 'p', html: 'Avståndet mellan det som mättes och det modellen tillåter är stort. Den åkare som passerade startlinjen i 0,4&nbsp;m/s hade enligt beräkningarna kunnat nå 1,3&nbsp;m/s med en perfekt lagd rörelse. Forskarna föreslår därför träning som riktas mot tajmingen på millisekundnivå, med videoåterkoppling som ställer kroppsrörelsen mot exakt det ögonblick då grinden släpper taget.' },
+
+      { type: 'h2', text: 'Vad studien inte visar' },
+      { type: 'p', html: 'Underlaget är litet: tre åkare ur ett enda landslag. Att mönstret håller hos sprinters i andra länder, med andra ramar och andra grindar, är obelagt, och modellen säger ingenting om hur loppet fortsätter efter det första varvet.' },
+      { type: 'p', html: 'Men frågan som ställdes var inte hur snabb en cyklist kan bli. Den var hur en start från stillastående kan ha fart. Svaret kräver varken ett hål i regelboken eller ett hål i mekaniken. Det är en kropp som kastas framåt och bromsas mot en maskin, i rätt ögonblick.' }
+    ]
+  },
+  {
     id: "2026-09-16-atomen-som-skjuts-ur-heliumet",
     date: "2026-09-16",
     title: "Atomen med antimateria i kärnan skjuts nu rakt upp ur flytande helium — i 2 180 meter i sekunden",

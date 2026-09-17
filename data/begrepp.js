@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'masscentrum',
+    term: 'Masscentrum',
+    former: ['masscentrum', 'masscentrumet', 'masscentrumsatsen', 'tyngdpunktsrörelse'],
+    kort: 'Den punkt där ett föremåls eller ett systems massa kan tänkas samlad. Punkten rör sig som om alla yttre krafter angrep just där, oavsett hur delarna inuti rör sig.',
+    relaterade: ['rorelsemangd', 'impuls'],
+    body: [
+      { type: 'p', html: 'Kasta en skiftnyckel över ett rum och den snurrar och slår runt på ett rörigt sätt. Men en enda punkt i nyckeln följer en prydlig kastbana, precis som en boll skulle ha gjort. Den punkten är masscentrum. Den ligger där massan balanserar åt alla håll: hos en jämntjock stav mitt på, hos en hammare långt ut mot huvudet, och hos en böjd kropp kan den till och med hamna i luften utanför själva kroppen.' },
+      { type: 'p', html: 'Det användbara är en regel som brukar kallas masscentrumsatsen: masscentrum accelererar bara av krafter utifrån. Krafter som delarna i ett system utövar på varandra, inre krafter, tar alltid ut varandra parvis och kan därför inte flytta punkten. En simmare som skjuter ifrån bassängkanten kommer i väg, för kanten trycker tillbaka utifrån. Samma simmare kan vifta hur mycket som helst med armarna mitt i ett hopp utan att ändra kroppens bana det minsta.' },
+      { type: 'p', html: 'Att inre krafter inte kan flytta masscentrum betyder däremot inte att de är verkningslösa. De kan flytta om rörelsen mellan delarna: en del kan skjutas framåt om en annan skjuts bakåt lika mycket. Därför kan en människa som kastar sig framåt i ett redskap få redskapet att röra sig, och därför kan en katt som faller vrida sig rätt i luften utan att någonsin ändra den bana masscentrum följer.' }
+    ]
+  },
+  {
+    id: 'rorelsemangd',
+    term: 'Rörelsemängd',
+    former: ['rörelsemängd', 'rörelsemängden', 'rörelsemängder'],
+    kort: 'Massan gånger hastigheten. Storheten beskriver hur svårt något är att stoppa, och i ett system som inget yttre påverkar kan den bara flyttas mellan delarna, aldrig försvinna.',
+    relaterade: ['impuls', 'masscentrum', 'rorelsemangdsmoment'],
+    body: [
+      { type: 'p', html: 'En rullande kundvagn och en rullande lastbil kan ha samma fart och ändå vara olika svåra att stoppa. Skillnaden ligger i rörelsemängden, som är massan multiplicerad med hastigheten. Den har en riktning, precis som hastigheten: en kropp som rör sig åt vänster har en rörelsemängd som pekar åt vänster, och två lika stora rörelsemängder åt motsatta håll summerar till noll.' },
+      { type: 'p', html: 'Det som gör storheten så användbar är att den är bevarad. I ett system som ingen yttre kraft verkar på är summan av delarnas rörelsemängd densamma före och efter vad som än händer inuti. Två biljardbollar kan krocka hur trassligt som helst, men lägger man ihop bollarnas rörelsemängder efteråt får man exakt samma sak som före krocken. Det gäller också när delarna deformeras eller fastnar i varandra, till skillnad från rörelseenergin, som ofta delvis blir värme.' },
+      { type: 'p', html: 'Bevarandet är det som gör raketer och rekyler begripliga. Gasen som kastas bakåt bär en rörelsemängd bakåt, och för att summan ska hålla sig oförändrad måste raketen få lika mycket framåt. Samma bokföring förklarar varför ett gevär stöter mot axeln, varför en person som hoppar ur en båt skjuter båten åt andra hållet, och hur fysiker kan räkna ut vad som hände i en partikelkollision de aldrig såg, enbart utifrån vad som kom ut ur den.' }
+    ]
+  },
+  {
+    id: 'impuls',
+    term: 'Impuls',
+    former: ['impuls', 'impulsen', 'impulser', 'kraftimpuls', 'kraftimpulsen'],
+    kort: 'En krafts verkan under en viss tid, alltså kraften multiplicerad med hur länge den verkar. Impulsen är exakt lika stor som den förändring av rörelsemängden den ger upphov till.',
+    relaterade: ['rorelsemangd', 'masscentrum'],
+    body: [
+      { type: 'p', html: 'Att en kraft ändrar ett föremåls rörelse säger inte hela historien, för det spelar roll hur länge kraften får hålla på. En liten kraft under lång tid kan ge samma resultat som en stor kraft under kort tid. Produkten av de två, kraften gånger tiden, kallas impuls, och den är precis så stor som den förändring av rörelsemängden som blir följden.' },
+      { type: 'p', html: 'Det är den regeln som gör krockkuddar, hjälmar och mjuka landningsmattor begripliga. En kropp som ska stoppas från en viss fart har en bestämd rörelsemängd som måste bort, och den mängden går inte att pruta på. Det enda som går att ändra är tiden. Töjs inbromsningen ut från hundradelar till tiondelar av en sekund blir kraften bara en tiondel så stor, och det är skillnaden mellan ett blåmärke och ett brott. Av samma skäl böjer en gymnast på knäna i landningen och en fotbollsspelare drar tillbaka foten när bollen tas emot.' },
+      { type: 'p', html: 'Resonemanget fungerar också baklänges. Vill någon ge något en stor rörelsemängd på kort tid krävs en stor kraft, och det är precis vad som händer när en tung kropp bromsas hastigt mot ett redskap: all den rörelsemängd som försvinner ur kroppen måste lämnas över, och ju snabbare inbromsningen sker, desto hårdare blir knuffen.' }
+    ]
+  },
+  {
     id: 'brytningsindex',
     term: 'Brytningsindex',
     former: ['brytningsindex', 'brytningsindexet'],

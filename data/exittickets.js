@@ -5123,6 +5123,22 @@ window.EXITTICKETS = {
 
 'fy2-1.2': [
   {
+    question: 'En bräda ligger stilla på två bockar. Varför får vridningspunkten väljas fritt när momentlagen ställs upp?',
+    choices: [
+      'Hävarmarna är lika långa oavsett var vridningspunkten läggs',
+      'Kraftmomenten blir alltid noll för en bräda som ligger stilla',
+      'Brädan roterar inte kring någon punkt alls, så kraftmomenten tar ut varandra kring varje punkt',
+      'Tyngdkraften försvinner ur räkningen oavsett var vridningspunkten läggs',
+    ],
+    correct: 2,
+    why: [
+      'Hävarmarna ändras när vridningspunkten flyttas. Det som räddar balansen är kraftjämvikten: varje hävarm ändras lika mycket, och eftersom krafterna uppåt tillsammans är lika stora som kraften nedåt läggs lika mycket kraftmoment till på båda sidor.',
+      'Varje enskilt kraftmoment kan vara stort. Det är summan moturs som är lika stor som summan medurs, inte varje moment för sig som är noll.',
+      'En bräda i vila roterar varken kring stöden, kring tyngdpunkten eller kring någon annan punkt. Momentjämvikten gäller därför kring varje punkt, och vi väljer den som ger minst räknande.',
+      'Tyngdkraften försvinner bara om vridningspunkten läggs i tyngdpunkten. Kring alla andra punkter har den en hävarm och ger ett kraftmoment.',
+    ],
+  },
+  {
     question: 'Hur stort kraftmoment ger en kraft vars riktningslinje går genom vridningspunkten?',
     choices: [
       'Noll — hävarmen är 0',

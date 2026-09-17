@@ -1860,7 +1860,13 @@ button.lab-card-disabled { pointer-events: none; }
    därför varje markdown-tabell i .lab-tabell, som scrollar i sig själv i
    stället för att klippas — samma lösning som .katex-display redan
    använder för breda displayformler. Sidan får aldrig vågrät scroll. */
+/* position: relative är inte kosmetik: KaTeX lägger en dold .katex-mathml
+   med position: absolute i varje formelcell, och en absolut positionerad
+   ättling klipps bara av en scroll-ruta som själv är positionerad. Utan
+   detta rymde spannen ut ur rutan och gav hela sidan vågrät skroll på en
+   telefon (76 px i fy2-1.2, 2026-09-17). */
 .lab-tabell {
+    position: relative;
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;

@@ -2101,6 +2101,7 @@ button.lab-card-disabled { pointer-events: none; }
    markering av rutan man landade i, så att det syns var på sidan man
    hamnade. Tonar bort av sig själv — ingen bestående färgändring. */
 .lab-block.block-mal,
+details.lab-forklaring.block-mal,
 .lab-video.block-mal {
     animation: block-mal-puls 2.6s ease-out 1;
 }
@@ -2215,6 +2216,20 @@ button.lab-card-disabled { pointer-events: none; }
 }
 .formel-harledning-body { padding: 2px 22px 16px; }
 .formel-harledning-body > :last-child { margin-bottom: 0; }
+
+/* Fristående ::: förklaring — samma dropdown som härledningen i formel-
+   rutan, men som en egen ruta i flödet: persika med kant, som en hopfälld
+   lab-block. Summary-raden är rutans enda synliga innehåll när den är
+   stängd, därför lite högre än remsan i formelrutan. */
+details.lab-forklaring {
+    margin: 22px 0;
+    background: #f7e4cf;
+    border: 1px solid #d8b48a;
+    border-radius: 4px;
+}
+details.lab-forklaring > summary { padding: 13px 22px; }
+details.lab-forklaring[open] > summary { border-bottom: 1px solid #e6cdb0; }
+details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
 
 /* Kuriosa — persika (samma som demo) */
 .lab-block-kuriosa {

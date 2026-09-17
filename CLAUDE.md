@@ -375,6 +375,15 @@ härledningsruta direkt före/efter en formelruta.
   — sådana ska INTE stoppas in i närmaste formelruta.
 - Layoutkoden i `katalog.html` (`buildFormelLayouts`) flyttar alla
   `details.formel-harledning` sist i rutan — rör inte den ordningen.
+- **Fristående dropdown utan formelruta: `::: förklaring "Förklaring —
+  …"`** (infört 2026-09-17, referens: `fy2-1.2`). Samma `<details>`-
+  dropdown som härledningen, men som egen persikafärgad ruta i flödet
+  (`details.lab-forklaring`). Använd den för ett längre resonemang som
+  fördjupar ett påstående utan att alla behöver läsa det (varför
+  vridningspunkten får väljas fritt). Rubriken är dropdownens etikett;
+  får ankare (`data-block`) som andra rutor, och en `&block=`-länk som
+  pekar på den fäller ut den. I presentationsläget är den ett steg och
+  visas hopfälld, precis som härledningen i formelrutan.
 
 ## ⚠️ KRITISK: En exempellösning i teorin ska ALLTID ha en pennlösning
 

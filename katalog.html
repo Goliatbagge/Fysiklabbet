@@ -430,12 +430,30 @@
                     // Nästlad ::: härledning INUTI ::: formel → hopfällbar
                     // dropdown (<details>) längst ned i formelrutan i stället
                     // för en egen fristående ruta.
-                    if ((ty === 'härledning' || ty === 'harledning') && parent === 'formel') {
+                    // Fristående ::: förklaring → samma dropdown, men som egen
+                    // ruta i flödet (utanför en formelruta). För ett längre
+                    // resonemang som inte alla behöver läsa — t.ex. varför
+                    // vridningspunkten får väljas fritt i fy2-1.2.
+                    const arForklaring = (ty === 'förklaring' || ty === 'forklaring');
+                    if (((ty === 'härledning' || ty === 'harledning') && parent === 'formel') || arForklaring) {
                         stack.push({ type: ty, close: '</div></details>' });
                         const label = title
                             ? escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>')
-                            : 'Härledning';
-                        out.push('<details class="formel-harledning">');
+                            : (arForklaring ? 'Förklaring' : 'Härledning');
+                        let attr = '';
+                        if (arForklaring) {
+                            // Ankare som för rutorna nedan, så att ?block= kan
+                            // peka rakt på dropdownen (den fälls då ut).
+                            rakn[ty] = (rakn[ty] || 0) + 1;
+                            attr = ' data-blocknr="forklaring-' + rakn[ty] + '"';
+                            if (title) {
+                                const slug = blockSlug(title);
+                                attr += ' data-block="' + slug + '"';
+                                const kort = slug.replace(/^forklaring-/, '');
+                                if (kort && kort !== slug) attr += ' data-blockkort="' + kort + '"';
+                            }
+                        }
+                        out.push('<details class="formel-harledning' + (arForklaring ? ' lab-forklaring' : '') + '"' + attr + '>');
                         out.push('<summary>' + label + '<span class="fh-chevron"></span></summary>');
                         out.push('<div class="formel-harledning-body">');
                         out.push('');
@@ -1192,6 +1210,9 @@
                     || root.querySelector('[data-blockkort="' + sok + '"]')
                     || root.querySelector('[data-blocknr="' + sok + '"]');
             if (!el) return;
+            // Är målet en hopfällbar förklaring: fäll ut den, annars landar
+            // besökaren på en stängd rad och undrar var texten tog vägen.
+            if (el.tagName === 'DETAILS') el.open = true;
 
             let avbrutet = false;
             const avbryt = () => { avbrutet = true; stang(); };

@@ -251,7 +251,7 @@ svårare uppgifterna:
 ::: sampunkt "Sista steget glöms lätt"
 - Löser du ut $x$ men frågan gällde någon annan, räkna ut den storheten
   också.
-- Svara med **enhet** och kontrollera rimligheten: negativa belopp eller
-  åldrar är en signal om att något gått fel.
+- Svara med **enhet** och kontrollera att svaret är rimligt. Blir ett
+  belopp eller en ålder negativ har något gått fel i räkningen.
 :::
 :::

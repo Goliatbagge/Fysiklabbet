@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"matproblemet","term":"Mätproblemet","kort":"Frågan om varför en mätning bara ger ett enda svar, trots att kvantmekanikens ekvation beskriver alla möjligheter samtidigt. Ingen är överens om var övergången sker, eller vad som orsakar den.","former":["mätproblemet","mätproblem","mätproblemen"]},
+  {"id":"kollapsmodell","term":"Kollapsmodell","kort":"En teori som ändrar i kvantmekaniken genom att lägga till en liten slumpmässig störning, så att superpositioner faller ihop av sig själva. Ju tyngre föremålet är, desto snabbare går det.","former":["kollapsmodell","kollapsmodellen","kollapsmodeller","kollapsmodellerna","spontan kollaps","spontan kollapsmodell","spontana kollapsmodeller","kollapsteori","kollapsteorier"]},
+  {"id":"bromsstralning","term":"Bromsstrålning","kort":"Strålningen som bildas när en snabb laddad partikel bromsas eller böjs av, oftast av en atomkärna. Det är den som ger röntgenrörets breda strålning.","former":["bromsstrålning","bromsstrålningen","bremsstrahlung"]},
   {"id":"masscentrum","term":"Masscentrum","kort":"Den punkt där ett föremåls eller ett systems massa kan tänkas samlad. Punkten rör sig som om alla yttre krafter angrep just där, oavsett hur delarna inuti rör sig.","former":["masscentrum","masscentrumet","masscentrumsatsen","tyngdpunktsrörelse"]},
   {"id":"rorelsemangd","term":"Rörelsemängd","kort":"Massan gånger hastigheten. Storheten beskriver hur svårt något är att stoppa, och i ett system som inget yttre påverkar kan den bara flyttas mellan delarna, aldrig försvinna.","former":["rörelsemängd","rörelsemängden","rörelsemängder"]},
   {"id":"impuls","term":"Impuls","kort":"En krafts verkan under en viss tid, alltså kraften multiplicerad med hur länge den verkar. Impulsen är exakt lika stor som den förändring av rörelsemängden den ger upphov till.","former":["impuls","impulsen","impulser","kraftimpuls","kraftimpulsen"]},

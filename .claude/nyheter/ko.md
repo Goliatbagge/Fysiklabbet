@@ -2049,3 +2049,24 @@ Format per post:
   Kontrollera vad som byggts och vad som är simulerat. Källa (Phys.org 2026-09-14):
   https://phys.org/news/2026-09-speedy-electrons-brilliant-laser-paves.html
   (tillagd 2026-09-15)
+
+- **Kemisterna kullkastar ett fyrtio år gammalt antagande om en viktig grupp av supraledare** — ny
+  strukturbestämning ändrar bilden av vad som händer i materialet. Ingång: supraledning, kristallstruktur och
+  hur ett antagande kan leva vidare i decennier. OBS: materialfysik publicerades 2026-09-13 och 2026-09-05.
+  Källa (Phys.org 2026-09-18):
+  https://phys.org/news/2026-09-chemists-overturn-year-assumption-key.html
+  (tillagd 2026-09-18)
+
+- **Defekter låser fast elektronerna i en Wignerkristall** — närbilder visar hur oregelbundenheter i materialet
+  håller kvar det gitter av elektroner som Eugene Wigner förutsade 1934. Ingång: coulombkraft, kristallgitter
+  och vad som händer när elektroner blir så glesa att de stöter bort varandra till fasta platser.
+  Källa (Phys.org 2026-09-18):
+  https://phys.org/news/2026-09-images-defects-electrons-stable-wigner.html
+  (tillagd 2026-09-18)
+
+- **Mikrovågor görs om till ljus med hjälp av tvådimensionella magneter** — en bro mellan supraledande
+  kvantprocessorer och optiska fibrer. Ingång: frekvens, våglängd och varför information i optisk fiber inte
+  kan skickas som mikrovågor. OBS: kvantfysik publicerades 2026-09-18 och 2026-09-15 — låt det gå tid.
+  Källa (Phys.org 2026-09-18):
+  https://phys.org/news/2026-09-bridge-quantum-networks-physicists-microwaves.html
+  (tillagd 2026-09-18)

@@ -103,6 +103,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-18-tystnaden-under-berget",
+    date: "2026-09-18",
+    title: "Om rumtiden darrar ska vanlig materia lysa av sig själv — 1 400 meter under ett italienskt berg lyste ingenting",
+    deck: "Varför sitter aldrig ett dammkorn på två ställen samtidigt? Ett förslag från 1960-talet lägger skulden på gravitationen: rumtiden skulle darra, och darrningarna sudda ut stora föremåls kvanttillstånd. Samma darrningar skulle rycka i laddade partiklar, och en laddning som rycks till sänder ut strålning. Ett italienskt lag har letat efter just den strålningen i en germaniumkristall under berget Gran Sasso. Den fanns inte, och därmed faller modellen.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-18-tystnaden-under-berget.jpg",
+    imageAlt: "En hög tunnelhall inrymd i berg, med grönmålat golv, en grön ståltrappa i flera avsatser, en silverfärgad kvävetank på en gul vagn och rader av blå instrumentskåp längs väggarna.",
+    imageCredit: "Foto: Florian Ritter (CC BY-SA 3.0), via Wikimedia Commons. Hall A i Gran Sasso-laboratoriet, där de lågbakgrundsmätningar som studien bygger på görs. Bilden visar en annan uppställning i samma hall, inte den germaniumdetektor som användes. Beskuren.",
+    tags: ["kvantfysik", "dekoherens", "superposition", "gravitation", "kvantgravitation", "mätproblemet", "kollapsmodeller", "gammastrålning", "germaniumdetektor", "gran sasso"],
+    sources: [
+      { name: "Phys.org: What kills Schrödinger’s cat? Underground experiment rules out gravity model for quantum decoherence (17 september 2026)", url: "https://phys.org/news/2026-09-schrdinger-cat-underground-gravity-quantum.html" },
+      { name: "New Journal of Physics: Experimental exclusion of a generalized Károlyházy gravity-induced decoherence model (öppen tillgång)", url: "https://iopscience.iop.org/article/10.1088/1367-2630/ae774c" },
+      { name: "INFN Laboratori Nazionali del Gran Sasso (laboratoriets egen beskrivning av anläggningen)", url: "https://www.lngs.infn.it/en" }
+    ],
+    research: {
+      citation: "Nicola Bortolotti, Kristian Piscicchia, Alessio Porcelli, Matthias Laubenstein, Simone Manti, Antonino Marcianò, Federico Nola och Catalina Curceanu, ”Experimental exclusion of a generalized Károlyházy gravity-induced decoherence model”, New Journal of Physics, volym 28, artikel 064511, publicerad 19 juni 2026 (CC BY 4.0)",
+      url: "https://doi.org/10.1088/1367-2630/ae774c"
+    },
+    simulering: {
+      href: "fysik2-dubbelspalt.html",
+      name: "Dubbelspaltexperimentet",
+      text: "Skjut elektroner en och en mot två spalter och se randmönstret växa fram. Sätt sedan en detektor vid spalterna, så att vägen går att få reda på, och se ränderna försvinna. Det är samma sak som mätningen under berget handlar om: vad som krävs för att en superposition ska upphöra."
+    },
+    larare: {
+      moment: [
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Våg-partikeldualitet och de Broglies hypotes", href: "katalog.html?id=fy2-4.6" },
+        { label: "Ljus, diffraktion och interferens", href: "katalog.html?id=fy2-4.2" }
+      ],
+      fragor: [
+        "Hela mätningen vilar på att en laddning som accelereras sänder ut elektromagnetisk strålning. Ge två vardagliga exempel på samma sak, och förklara varför en laddning som rör sig med konstant hastighet inte strålar.",
+        "Forskarna hittade ingenting, och kallar ändå resultatet betydelsefullt. Hur kan en utebliven signal säga något om naturen, och vad krävs för att den ska göra det?",
+        "Modellens övre gräns kommer från kravet att ett föremål som ögat kan urskilja ska hållas på plats. Varför måste en sådan modell ge olika starka effekter för ett dammkorn och för en enskild elektron, om den ska kunna stämma med båda?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett dammkorn på bordet ligger på ett bestämt ställe. En elektron gör inte det: innan någon mäter den är den en blandning av alla sina möjligheter, en superposition. Var gränsen mellan de två sätten att vara går är en av fysikens äldsta obesvarade frågor, mätproblemet, och Erwin Schrödinger gjorde den ökänd 1935 med en katt som var både död och levande.' },
+      { type: 'p', html: 'Ett av svaren som lagts fram lägger skulden på gravitationen. Tanken går tillbaka på den ungerske fysikern Frigyes Károlyházy, som på 1960-talet noterade att en längd inte kan mätas hur noga som helst när kvantmekanik och gravitation gäller samtidigt. Rumtiden skulle därför vara aningen suddig i sig själv, och suddigheten verka som ett ständigt brus på all materia. Ju tyngre föremålet är, desto snabbare skulle bruset sudda ut dess superpositioner. En elektron skulle klara sig, en katt inte på långa vägar.' },
+      { type: 'p', html: 'I <em>New Journal of Physics</em> rapporterar nu VIP-samarbetet en mätning som stänger dörren för en modern version av den idén. Bakom arbetet står Nicola Bortolotti, Kristian Piscicchia och Catalina Curceanu med kollegor vid Sapienza-universitetet i Rom, forskningscentret Centro Ricerche Enrico Fermi och italienska institutet för kärnfysik, INFN.' },
+
+      { type: 'h2', text: 'Ett brus som inte kan hålla tyst' },
+      { type: 'p', html: 'Att en sådan modell alls går att pröva beror på ett samband ur den vanliga elektromagnetismen: en laddning som accelereras sänder ut elektromagnetisk strålning. Det är så en radioantenn arbetar, och så röntgenstrålning bildas när elektroner bromsas upp i en metallplatta.' },
+      { type: 'p', html: 'Darrar rumtiden får varje proton och elektron i ett föremål små slumpmässiga accelerationer, och då måste materien sända ut strålning helt av sig själv, utan att någon har lyst på den eller värmt den. Vanlig kvantmekanik förutsäger ingen sådan strålning alls. Där finns alltså en skiljelinje som går att mäta — men bara om allt annat som lyser i samma energiområde först tas bort, och till det duger mest berg.' },
+
+      { type: 'h2', text: '1 400 meter sten som lock' },
+      { type: 'p', html: 'Mätningen gjordes vid INFN:s Gran Sasso-laboratorium i Abruzzerna, som ligger inne i berget intill motorvägstunneln. Ovanför detektorerna vilar 1&nbsp;400&nbsp;m sten, och det räcker för att minska flödet av kosmiska myoner med omkring sex tiopotenser, alltså till ungefär en miljondel av vad det är vid markytan.' },
+      { type: 'p', html: 'Själva instrumentet är en cylindrisk kristall av höggradigt ren germanium, 8,0&nbsp;cm i diameter och 8,0&nbsp;cm hög, med en aktiv volym på 375&nbsp;cm<sup>3</sup>. Runt kristallen ligger ett skal av elektrolytisk koppar och utanför det ett av rent bly. Alltsammans sitter i en 1&nbsp;mm tjock stålkåpa som hela tiden spolas med kväve, så att luftens radon inte tar sig in och lyser i mätningen. Data samlades in under ungefär 62&nbsp;dygn mellan augusti 2014 och augusti 2015, vilket ger en exponering på 124&nbsp;kg·dygn.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-18-tystnaden-under-berget-2.jpg', alt: 'Genomskuren tredimensionell ritning av en kub med flera lager innanför varandra. Innerst en grön cylinderformad kristall på en gul stolpe, runt den röda och orange skal, därefter ett grått och ytterst ett svart lager. Åtta numrerade cirklar pekar ut de olika delarna.', caption: 'Detektorn i genomskärning. Innerst germaniumkristallen (1) med sin elektriska kontakt (2) och isolator (3), därefter kopparkåpan (4, 5, 6), den inre kopparskärmen (7) och ytterst blyskärmen (8). Skärmarna är till för att hålla ute den strålning som ändå tar sig ner i berget.', credit: 'Figur: Nicola Bortolotti med flera, New Journal of Physics 2026 (CC BY 4.0)' },
+
+      { type: 'p', html: 'Analysen gjordes i ett smalt energifönster, 1,3 till 1,6&nbsp;MeV. Valet är inte godtyckligt. Där kunde bakgrunden från de radioaktiva ämnen som finns kvar i apparatens egna material räknas fram i förväg med simuleringar, och simuleringen förklarade mer än 97&nbsp;% av det uppmätta spektrumet. Vid lägre energier stämde beskrivningen sämre, bland annat därför att bromsstrålningen i den tunga blyskärmen är svår att modellera.' },
+      { type: 'p', html: 'Någon signal utöver den beräknade bakgrunden fanns inte.' },
+      { type: 'quote', html: 'Frånvaron av en signal är i sig ett stort vetenskapligt resultat.', cite: 'Catalina Curceanu, forskningsledare vid INFN:s laboratorium i Frascati och talesperson för VIP-samarbetet (översatt från engelska)' },
+
+      { type: 'h2', text: 'Två gränser som inte går ihop' },
+      { type: 'p', html: 'Den generaliserade modellen har en enda fri parameter: korrelationslängden, alltså hur långt isär två punkter i rummet kan ligga och ändå darra i takt med varandra. Ju längre den är, desto lugnare blir bruset och desto svagare strålningen. Att ingenting syntes ger därför en undre gräns, och den blev $R_\\mathrm{K} \\gt 4{,}64\\ \\mathrm{m}$ med 95&nbsp;% säkerhet. Den tidigare bästa gränsen låg på 0,11&nbsp;m.' },
+      { type: 'p', html: 'Samtidigt finns ett tak, och det kommer ur kravet att modellen ska göra det den är till för. Ju längre korrelationslängden är, desto sämre klarar bruset av att tvinga stora föremål till en bestämd plats. Kräver man att en grafenskiva som är en enda atom tjock och 10&nbsp;µm i diameter, ungefär det minsta ögat kan urskilja, ska hållas på plats inom 0,01&nbsp;s, ungefär ögats tidsupplösning, landar man på $R_\\mathrm{K} \\lt 1{,}98\\ \\mathrm{m}$.' },
+      { type: 'p', html: 'Något värde som klarar båda kraven finns alltså inte. Mätningen begär mer än 4,64&nbsp;m, teorin mindre än 1,98&nbsp;m, och därmed är den generaliserade Károlyházy-modellen utesluten. Samma slutsats träffar en nära besläktad variant av kollapsmodellen CSL, den där bruset är korrelerat i tiden.' },
+
+      { type: 'fact', title: 'Mätningen i siffror', items: [
+        'Bergtäcke över laboratoriet: 1&nbsp;400&nbsp;m, vilket dämpar flödet av kosmiska myoner med omkring sex tiopotenser.',
+        'Detektor: germaniumkristall, 8,0&nbsp;cm i diameter och 8,0&nbsp;cm hög, aktiv volym 375&nbsp;cm<sup>3</sup>, omgiven av koppar och bly.',
+        'Mättid: cirka 62&nbsp;dygn under 2014 och 2015, exponering 124&nbsp;kg·dygn.',
+        'Analyserat energiområde: 1,3 till 1,6&nbsp;MeV, där simuleringen förklarar mer än 97&nbsp;% av det uppmätta spektrumet.',
+        'Ny undre gräns för korrelationslängden: 4,64&nbsp;m, mot 0,11&nbsp;m tidigare. Teorins övre gräns: 1,98&nbsp;m.'
+      ]},
+
+      { type: 'h2', text: 'Vad som inte är avgjort' },
+      { type: 'p', html: 'Resultatet fäller en bestämd modell, inte hela tanken att gravitationen har med saken att göra. Andra förslag står kvar, bland dem den modell som brukar kallas Diósi–Penrose och den ursprungliga CSL-modellen med brus utan minne. Deras utrymme har krympt under de senaste årens mätningar, men det är inte borta.' },
+      { type: 'p', html: 'Två förbehåll hör också till. Mätdata är ett decennium gamla, så det nya är analysen: strålningen från vart och ett av apparatens material har räknats igenom var för sig, och spektrumet tolkats med bayesiansk statistik. Och taket på 1,98&nbsp;m är hämtat ur ett tankeexperiment om mänsklig syn och anges utan felmarginal. Författarna kallar det själva försiktigt räknat, och påpekar att gränsen skulle bli hårdare om man i stället krävde att det minsta ett vanligt mikroskop visar ska hållas på plats.' },
+      { type: 'p', html: 'Schrödingers katt är alltså fortfarande obegravd. Men en av de föreslagna dödsorsakerna har fått ett alibi, hämtat ur 62 dygns tystnad i en germaniumkristall under ett berg.' }
+    ]
+  },
+  {
     id: "2026-09-17-starten-som-redan-rullar",
     date: "2026-09-17",
     title: "Cykeln rullar redan när klockan börjar gå — och ändå är det ingen tjuvstart",

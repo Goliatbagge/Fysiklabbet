@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'matproblemet',
+    term: 'Mätproblemet',
+    former: ['mätproblemet', 'mätproblem', 'mätproblemen'],
+    kort: 'Frågan om varför en mätning bara ger ett enda svar, trots att kvantmekanikens ekvation beskriver alla möjligheter samtidigt. Ingen är överens om var övergången sker, eller vad som orsakar den.',
+    relaterade: ['superposition', 'dekoherens', 'vagfunktion', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Kvantmekaniken har två helt olika regler för hur ett system får ändra sig. Så länge ingen tittar utvecklas vågfunktionen mjukt och förutsägbart enligt Schrödingerekvationen, och alla möjligheter finns kvar sida vid sida. Men i samma ögonblick som något mäts händer det andra: ett av alternativen blir verklighet och de övriga försvinner, slumpmässigt och ögonblickligen. Mätproblemet är frågan om vad den andra regeln egentligen beskriver. Ekvationen säger nämligen ingenting om när en mätning ska anses ha ägt rum.' },
+      { type: 'p', html: 'Det är inte ett filosofiskt påhitt utan ett verkligt hål i teorin. Ett mätinstrument består av atomer, och atomer lyder kvantmekanik. Räknar man igenom instrumentet som det fysikaliska system det är får man ett instrument i superposition, med visaren på flera värden på en gång. Något i steget från det lilla till det stora måste alltså skilja sig, men Schrödingerekvationen innehåller ingen sådan gräns. Erwin Schrödinger själv gjorde poängen med sin katt: om kvantmekaniken gäller rakt upp och ner borde en katt i en låda kunna vara både död och levande.' },
+      { type: 'p', html: 'Förslagen till lösning är flera, och de går åt olika håll. Dekoherens förklarar varför superpositionen inte syns: upplysningen om tillståndet läcker ut i omgivningen så snabbt för stora föremål att inga kvanteffekter går att mäta. Andra menar att teorin måste ändras, och lägger till en liten slumpmässig störning som faktiskt fäller avgörandet, ibland med gravitationen som orsak. Sådana tillägg går att pröva i laboratorium, och flera av dem har redan uteslutits. En tredje linje menar att inget alternativ försvinner alls. Någon uppgörelse är inte i sikte.' }
+    ]
+  },
+  {
+    id: 'kollapsmodell',
+    term: 'Kollapsmodell',
+    former: ['kollapsmodell', 'kollapsmodellen', 'kollapsmodeller', 'kollapsmodellerna', 'spontan kollaps', 'spontan kollapsmodell', 'spontana kollapsmodeller', 'kollapsteori', 'kollapsteorier'],
+    kort: 'En teori som ändrar i kvantmekaniken genom att lägga till en liten slumpmässig störning, så att superpositioner faller ihop av sig själva. Ju tyngre föremålet är, desto snabbare går det.',
+    relaterade: ['matproblemet', 'superposition', 'dekoherens', 'vagfunktion'],
+    body: [
+      { type: 'p', html: 'De flesta försöken att bli av med mätproblemet tolkar om kvantmekaniken. Kollapsmodellerna gör något djärvare: de ändrar den. Till Schrödingerekvationen läggs en term som skakar systemet slumpmässigt, hela tiden och överallt, och den skakningen driver varje vågfunktion mot ett bestämt läge i rummet. Mätningen får därmed ingen särställning. Det som händer när en visare slår ut är samma sak som hela tiden pågår, bara mycket snabbare.' },
+      { type: 'p', html: 'Nyckeln är att effekten växer med massan. En ensam atom påverkas så sällan att den lugnt kan gå genom två spalter samtidigt, medan ett dammkorn innehåller så många partiklar att superpositionen är utsuddad på långt under en miljondels sekund. En katt har aldrig en chans. På så sätt behåller modellerna kvantmekanikens alla lyckade förutsägelser för små system och ger samtidigt en vanlig, klassisk värld i stor skala.' },
+      { type: 'p', html: 'Det fina är att tillägget inte kan göras spårlöst. Störningen rycker i laddade partiklar, och en laddning som accelereras sänder ut elektromagnetisk strålning, så materia borde stråla mycket svagt utan att någon tillför energi. Sådan strålning söks i djupt nedgrävda detektorer, där bakgrunden är låg nog att räkna enstaka fotoner, och varje gång ingenting hittas krymper området där modellerna får finnas. Några varianter är redan uteslutna helt. De mest kända förslagen kallas GRW, CSL och Diósi–Penrose, där det sista pekar ut gravitationen som orsak.' }
+    ]
+  },
+  {
+    id: 'bromsstralning',
+    term: 'Bromsstrålning',
+    former: ['bromsstrålning', 'bromsstrålningen', 'bremsstrahlung'],
+    kort: 'Strålningen som bildas när en snabb laddad partikel bromsas eller böjs av, oftast av en atomkärna. Det är den som ger röntgenrörets breda strålning.',
+    relaterade: ['karakteristisk-rontgenstralning', 'gammastralning', 'foton', 'elementarladdning'],
+    body: [
+      { type: 'p', html: 'En laddning som rör sig med konstant hastighet strålar inte. Ändrar den däremot fart eller riktning sänder den ut elektromagnetisk strålning, och energin till strålningen tas ur partikelns egen rörelseenergi. Det tyska namnet bromsstrålning säger precis vad som sker: partikeln bromsas, och det den tappar kommer ut som ljus. På svenska används ordet i samma form.' },
+      { type: 'p', html: 'Vanligast uppstår den när elektroner med hög fart träffar ett material. Elektronen passerar nära en atomkärna, dras ur kurs av kärnans laddning och kastar i väg en foton. Hur kraftigt den böjs av är slumpens sak, så fotonerna får alla möjliga energier upp till ett tak: det taket nås när en elektron lämnar ifrån sig hela sin rörelseenergi i en enda smäll. Därför blir bromsstrålningen ett brett, sammanhängande spektrum, till skillnad från de skarpa linjer som uppstår när elektroner byter plats inne i atomen.' },
+      { type: 'p', html: 'Tunga kärnor böjer av kraftigare, och därför görs anoden i ett röntgenrör av volfram. Av samma skäl görs strålskydd mot snabba elektroner hellre av plast eller aluminium än av bly: i ett tungt ämne blir bromsstrålningen så kraftig att skyddet i sig blir en strålkälla. I känsliga mätningar djupt under jord är den ett återkommande bekymmer, eftersom ett tjockt blyhölje som ska stänga ute strålning samtidigt bildar egen bromsstrålning inifrån.' }
+    ]
+  },
+  {
     id: 'masscentrum',
     term: 'Masscentrum',
     former: ['masscentrum', 'masscentrumet', 'masscentrumsatsen', 'tyngdpunktsrörelse'],
